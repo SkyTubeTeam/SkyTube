@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+				android:orientation="vertical"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:background="@color/cellBackground">
+
+	<!-- TODO:  change add layout_height to dimen.xml (+portrait):  without the 300dp
+	            the scrolling upwards would stutter... -->
+	<RelativeLayout
+		android:orientation="vertical"
+		android:layout_width="match_parent"
+		android:layout_height="300dp">
+
+		<free.rm.skytube.gui.businessobjects.InternetImageView
+			android:id="@+id/thumbnail_image_view"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_alignParentTop="true"
+			android:scaleType="fitXY"
+			android:adjustViewBounds="true"/>
+
+		<TextView
+			android:id="@+id/title_text_view"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:padding="10dp"
+			android:minLines="1"
+			android:maxLines="2"
+			android:textColor="#FFF"
+			android:textStyle="bold"
+			android:background="#000"
+			android:text="Title"/>
+
+		<RelativeLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:padding="8dp"
+			android:layout_above="@+id/channel_text_view" >
+			<TextView
+				android:id="@+id/thumbs_up_text_view"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:padding="2dp"
+				android:singleLine="true"
+				android:textColor="#FFF"
+				android:background="#ba000000"
+				android:drawableLeft="@drawable/ic_thumb_up_white_18dp"
+				android:drawablePadding="5dp"
+				android:text="97%"/>
+			<TextView
+				android:id="@+id/video_duration_text_view"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_alignParentRight="true"
+				android:padding="2dp"
+				android:singleLine="true"
+				android:textColor="#FFF"
+				android:background="#ba000000"
+				android:text="19:17"/>
+		</RelativeLayout>
+
+		<TextView
+			android:id="@id/channel_text_view"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:padding="10dp"
+			android:singleLine="true"
+			android:textColor="#FFF"
+			android:background="#000"
+			android:text="Channel"
+			android:layout_alignParentBottom="true"/>
+
+	</RelativeLayout>
+
+	<!--<TextView
+		android:id="@+id/title2_text_view"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:paddingLeft="10dp"
+		android:paddingRight="10dp"
+		android:paddingBottom="10dp"
+		android:paddingTop="0dp"
+		android:layout_marginTop="-10dp"
+		android:minLines="1"
+		android:maxLines="2"
+		android:textColor="#FFF"
+		android:background="#000"
+		android:text="Testttt"/> -->
+
+</LinearLayout>
