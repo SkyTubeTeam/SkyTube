@@ -18,48 +18,32 @@
 
 package free.rm.skytube.businessobjects;
 
-import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
-import android.widget.Toast;
 
-import com.google.api.services.youtube.YouTube;
 import com.google.api.services.youtube.model.Video;
 
-import java.io.IOException;
 import java.util.List;
 
-import free.rm.skytube.R;
 import free.rm.skytube.gui.businessobjects.GridAdapter;
 
 /**
- *
+ * An asynchronous task that will retrieve YouTube videos and displays them in the supplied Adapter.
  */
-public class FeaturedVideosTask extends AsyncTask<Void, Void, List<Video>> {
+public class GetYouTubeVideosTask extends AsyncTask<Void, Void, List<Video>> {
 
-	private FeaturedVideos	featuredVideos;
-	private Context			context;
-	private GridAdapter		gridAdapter;
+	/** Object used to retrieve the desired YouTube videos. */
+	private GetYouTubeVideos	getYouTubeVideos;
 
-	private static final String TAG = FeaturedVideosTask.class.getSimpleName();
+	/** The Adapter where the retrieved videos will be displayed. */
+	private GridAdapter			gridAdapter;
+
+	/** Class tag. */
+	private static final String TAG = GetYouTubeVideosTask.class.getSimpleName();
 
 
-	public FeaturedVideosTask(Context context, GridAdapter gridAdapter) {
-		this.featuredVideos = new FeaturedVideos();
-		this.context = context;
+	public GetYouTubeVideosTask(GetYouTubeVideos getYouTubeVideos, GridAdapter gridAdapter) {
+		this.getYouTubeVideos = getYouTubeVideos;
 		this.gridAdapter = gridAdapter;
-	}
-
-
-	@Override
-	protected void onPreExecute() {
-		try {
-			featuredVideos.init(context);
-		} catch (IOException e) {
-			Log.e(TAG, "Could not init featured videos...", e);
-			Toast.makeText(context, context.getString(R.string.could_not_get_videos), Toast.LENGTH_LONG).show();
-			cancel(true);
-		}
 	}
 
 
@@ -68,7 +52,7 @@ public class FeaturedVideosTask extends AsyncTask<Void, Void, List<Video>> {
 		List<Video> videos = null;
 
 		if (!isCancelled()) {
-			videos = featuredVideos.getNextVideos();
+			videos = getYouTubeVideos.getNextVideos();
 		}
 
 		return videos;
@@ -79,4 +63,5 @@ public class FeaturedVideosTask extends AsyncTask<Void, Void, List<Video>> {
 	protected void onPostExecute(List<Video> videosList) {
 		gridAdapter.appendList(videosList);
 	}
+
 }

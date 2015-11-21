@@ -36,6 +36,7 @@ import java.util.List;
  */
 public abstract class BaseAdapterEx<T> extends BaseAdapter {
 
+	private Context context;
 	private LayoutInflater inflater;
 	private List<T> list;
 
@@ -44,8 +45,13 @@ public abstract class BaseAdapterEx<T> extends BaseAdapter {
 	}
 
 	public BaseAdapterEx(Context context, List<T> list) {
+		this.context  = context;
 		this.inflater = LayoutInflater.from(context);
 		this.list     = list;
+	}
+
+	protected Context getContext() {
+		return context;
 	}
 
 	/**
@@ -56,8 +62,10 @@ public abstract class BaseAdapterEx<T> extends BaseAdapter {
 	}
 
 	public void appendList(List<T> l) {
-		this.list.addAll(l);
-		this.notifyDataSetChanged();
+		if (l != null) {
+			this.list.addAll(l);
+			this.notifyDataSetChanged();
+		}
 	}
 
 	@Override

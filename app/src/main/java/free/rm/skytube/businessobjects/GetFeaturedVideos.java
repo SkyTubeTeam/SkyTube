@@ -34,15 +34,16 @@ import java.util.List;
 import free.rm.skytube.R;
 
 /**
- *
+ * Get today's featured YouTube videos.
  */
-public class FeaturedVideos {
+public class GetFeaturedVideos implements GetYouTubeVideos {
 
-	private YouTube.Videos.List featuredVideosList = null;
+	protected YouTube.Videos.List videosList = null;
 	private String nextPageToken = null;
+	private boolean noMoreVideoPages = false;
 
-	private static String	TAG = "FeaturedVideos";
-	private static Long		MAX_RESULTS = 50L;
+	private static final String	TAG = GetFeaturedVideos.class.getSimpleName();
+	private static final Long	MAX_RESULTS = 50L;
 
 
 	public void init(Context context) throws IOException {
@@ -50,30 +51,50 @@ public class FeaturedVideos {
 		JsonFactory		jsonFactory = com.google.api.client.extensions.android.json.AndroidJsonFactory.getDefaultInstance();
 		YouTube			youtube = new YouTube.Builder(httpTransport, jsonFactory, null /*timeout here?*/).build();
 
-		featuredVideosList = youtube.videos().list("id, snippet, statistics, contentDetails");
-		featuredVideosList.setFields("items(id, snippet/publishedAt, snippet/title, snippet/channelTitle, "
-									+"snippet/thumbnails/high, contentDetails/duration, statistics)");
-		featuredVideosList.setKey(context.getString(R.string.API_KEY));
-		featuredVideosList.setChart("mostPopular");
-		featuredVideosList.setMaxResults(MAX_RESULTS);
+		videosList = youtube.videos().list("snippet, statistics, contentDetails");
+		videosList.setFields("items(id, snippet/publishedAt, snippet/title, snippet/channelTitle," +
+				"snippet/thumbnails/high, contentDetails/duration, statistics)," +
+				"nextPageToken");
+		videosList.setKey(context.getString(R.string.API_KEY));
+		videosList.setChart("mostPopular");
+		videosList.setMaxResults(MAX_RESULTS);
 		nextPageToken = null;
 	}
 
 
+	@Override
 	public List<Video> getNextVideos() {
 		List<Video> searchResultList = null;
 
-		try {
-			/// TODO featuredVideosList.setPage
-			VideoListResponse searchResponse = featuredVideosList.execute();
-			/// TODO nextPageToken = searchResponse.getNextPageToken();
+		if (!noMoreVideoPages()) {
+			try {
+				// set the page token/id to retrieve
+				videosList.setPageToken(nextPageToken);
 
-			searchResultList = searchResponse.getItems();
-		} catch (IOException e) {
-			Log.e(TAG, "Error has occurred while getting Featured Videos.", e);
+				// communicate with YouTube
+				VideoListResponse response = videosList.execute();
+
+				// get videos
+				searchResultList = response.getItems();
+
+				// set the next page token
+				nextPageToken = response.getNextPageToken();
+
+				// if nextPageToken is null, it means that there are no more videos
+				if (nextPageToken == null)
+					noMoreVideoPages = true;
+			} catch (IOException e) {
+				Log.e(TAG, "Error has occurred while getting Featured Videos.", e);
+			}
 		}
 
 		return searchResultList;
+	}
+
+
+	@Override
+	public boolean noMoreVideoPages() {
+		return noMoreVideoPages;
 	}
 
 }

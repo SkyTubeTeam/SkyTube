@@ -22,13 +22,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * A static class that converts ISO 8601 Durations into a human readable strings.
+ * A class that converts ISO 8601 Durations into a human readable strings.
  *
  * <p>This implementation is not intended to be 100% compliant with the ISO specification, nor is it
  * intended to fool-proof.  It assumes that YouTube will supply correct format; however it should
  * decently handle incorrect formats.
  */
-public class Iso8601Duration {
+public class VideoDuration {
 
 	/**
 	 * Converts the supplies ISO 8601 duration into a human readable string.  If the supplied
@@ -108,7 +108,7 @@ public class Iso8601Duration {
 	/**
 	 * Extracts hours, minutes and seconds from the given iso8601Duration string.
 	 *
-	 * @param iso8601Duration
+	 * @param iso8601Duration ISO duration string.
 	 * @param which	A character which specifies which information are we going to extract,
 	 *              i.e. 'H' for hours, 'M' for minutes and 'S' for seconds.
 	 * @return Extracted information as string or null.
@@ -126,5 +126,4 @@ public class Iso8601Duration {
 
 		return res;
 	}
-
 }

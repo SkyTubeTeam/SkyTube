@@ -23,25 +23,29 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.api.services.youtube.model.Thumbnail;
 import com.google.api.services.youtube.model.Video;
 
+import java.io.IOException;
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.math.MathContext;
 import java.math.RoundingMode;
 
 import free.rm.skytube.R;
-import free.rm.skytube.businessobjects.FeaturedVideosTask;
-import free.rm.skytube.businessobjects.Iso8601Duration;
+import free.rm.skytube.businessobjects.GetFeaturedVideos;
+import free.rm.skytube.businessobjects.GetMostPopularVideos;
+import free.rm.skytube.businessobjects.GetYouTubeVideos;
+import free.rm.skytube.businessobjects.GetYouTubeVideosTask;
+import free.rm.skytube.businessobjects.VideoDuration;
 
 /**
  *
  */
 public class GridAdapter extends BaseAdapterEx<Video> {
 
-	private FeaturedVideosTask featuredVideosTask;
+	private GetYouTubeVideos getYouTubeVideos = new GetMostPopularVideos(); //GetFeaturedVideos();
 	private BitmapCache		bitmapCache;
 
 	private static final String TAG = GridAdapter.class.getSimpleName();
@@ -50,8 +54,14 @@ public class GridAdapter extends BaseAdapterEx<Video> {
 	public GridAdapter(Context context) {
 		super(context);
 		bitmapCache = new BitmapCache(context);
-		featuredVideosTask = new FeaturedVideosTask(context, this);
-		featuredVideosTask.execute();
+
+		try {
+			getYouTubeVideos.init(context);
+			new GetYouTubeVideosTask(getYouTubeVideos, this).execute();
+		} catch (IOException e) {
+			Log.e(TAG, "Could not init featured videos...", e);
+			Toast.makeText(context, context.getString(R.string.could_not_get_videos), Toast.LENGTH_LONG).show();
+		}
 	}
 
 
@@ -70,63 +80,80 @@ public class GridAdapter extends BaseAdapterEx<Video> {
 		}
 
 		if (viewHolder != null) {
-			Video video = get(position);
+			viewHolder.updateViewsData(get(position));
+		}
 
-			viewHolder.titleTextView.setText(video.getSnippet().getTitle());
-			viewHolder.channelTextView.setText(video.getSnippet().getChannelTitle());
-			viewHolder.thumbsUpPercentageTextView.setText(getThumbsUpPercentage(video));
-			if (video.getContentDetails() != null)
-				viewHolder.videoDurationTextView.setText(Iso8601Duration.toHumanReadableString(video.getContentDetails().getDuration()));
-
-			Thumbnail thumbnail = video.getSnippet().getThumbnails().getHigh();
-			if (thumbnail != null)
-				viewHolder.thumbnailImageView.setImageAsync(bitmapCache, thumbnail.getUrl());
-
+		// if it reached the bottom of the list, then try to get the next page of videos
+		if (position == getCount() - 1) {
+			Log.w(TAG, "BOTTOM REACHED!!!");
+			new GetYouTubeVideosTask(getYouTubeVideos, this).execute();
 		}
 
 		return row;
 	}
 
 
-	/**
-	 * Returns the percentage of people that thumbs-upped the given video.
-	 *
-	 * @param video
-	 * @return Percentage as a string.  Format:  "<percentage>%"
-	 */
-	private String getThumbsUpPercentage(Video video) {
-		String percentage;
 
-		try {
-			BigDecimal likedCount = new BigDecimal(video.getStatistics().getLikeCount()),
-					dislikedCount = new BigDecimal(video.getStatistics().getDislikeCount()),
-					totalVoteCount = likedCount.add(dislikedCount),    // liked and disliked counts
-					likedPercentage = (likedCount.divide(totalVoteCount, MathContext.DECIMAL128)).multiply(new BigDecimal(100));
 
-			// round the liked percentage to 0 decimal places and convert it to string
-			percentage = likedPercentage.setScale(0, RoundingMode.HALF_UP).toString();
-		} catch (Exception e) {
-			percentage = "??";
-		}
-
-		return percentage + "%";
-	}
-
+	////////////////////////////////////////////////////////////////////////////////////////////////
 
 	protected class ViewHolder {
-		TextView	titleTextView,
-					channelTextView,
-					thumbsUpPercentageTextView,
-					videoDurationTextView;
-		InternetImageView thumbnailImageView;
+		private TextView	titleTextView,
+							channelTextView,
+							thumbsUpPercentageTextView,
+							videoDurationTextView;
+		private InternetImageView thumbnailImageView;
 
-		ViewHolder(View row) {
+		protected ViewHolder(View row) {
 			titleTextView				= (TextView) row.findViewById(R.id.title_text_view);
 			channelTextView				= (TextView) row.findViewById(R.id.channel_text_view);
 			thumbsUpPercentageTextView	= (TextView) row.findViewById(R.id.thumbs_up_text_view);
 			videoDurationTextView		= (TextView) row.findViewById(R.id.video_duration_text_view);
 			thumbnailImageView	= (InternetImageView) row.findViewById(R.id.thumbnail_image_view);
 		}
+
+		/**
+		 * This method will update the {@link View}s of this object reflecting the supplied video.
+		 *
+		 * @param video Video instance.
+		 */
+		protected void updateViewsData(Video video) {
+			titleTextView.setText(video.getSnippet().getTitle());
+			channelTextView.setText(video.getSnippet().getChannelTitle());
+			thumbsUpPercentageTextView.setText(getThumbsUpPercentage(video));
+			if (video.getContentDetails() != null)
+				videoDurationTextView.setText(VideoDuration.toHumanReadableString(video.getContentDetails().getDuration()));
+
+			Thumbnail thumbnail = video.getSnippet().getThumbnails().getHigh();
+			if (thumbnail != null)
+				thumbnailImageView.setImageAsync(bitmapCache, thumbnail.getUrl());
+		}
+
+
+		/**
+		 * Returns the percentage of people that thumbs-upped the given video.
+		 *
+		 * @param video {@link Video} instance
+		 * @return Percentage as a string.  Format:  "<percentage>%"
+		 */
+		private String getThumbsUpPercentage(Video video) {
+			String percentage;
+
+			try {
+				BigDecimal likedCount = new BigDecimal(video.getStatistics().getLikeCount()),
+						dislikedCount = new BigDecimal(video.getStatistics().getDislikeCount()),
+						totalVoteCount = likedCount.add(dislikedCount),    // liked and disliked counts
+						likedPercentage = (likedCount.divide(totalVoteCount, MathContext.DECIMAL128)).multiply(new BigDecimal(100));
+
+				// round the liked percentage to 0 decimal places and convert it to string
+				percentage = likedPercentage.setScale(0, RoundingMode.HALF_UP).toString();
+			} catch (Exception e) {
+				percentage = "??";
+			}
+
+			return percentage + "%";
+		}
+
 	}
 
 }
