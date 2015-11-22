@@ -61,7 +61,10 @@ public class BitmapCache {
 	 * @param bitmap Bitmap instance.
 	 */
 	public void add(String bitmapID, Bitmap bitmap) {
-		cache.put(bitmapID, bitmap);
+		// TODO:  if bitmap is null, then add a default thumbnail image...
+
+		if (bitmapID != null  &&  bitmap != null)
+			cache.put(bitmapID, bitmap);
 	}
 
 
