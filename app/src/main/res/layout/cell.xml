@@ -22,14 +22,10 @@
 
 		<TextView
 			android:id="@+id/title_text_view"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
+			style="@style/GridTextView"
 			android:padding="10dp"
 			android:minLines="1"
 			android:maxLines="2"
-			android:textColor="#FFF"
-			android:textStyle="bold"
-			android:background="#000"
 			android:text="Title"/>
 
 		<RelativeLayout
@@ -39,53 +35,59 @@
 			android:layout_above="@+id/channel_text_view" >
 			<TextView
 				android:id="@+id/thumbs_up_text_view"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:padding="2dp"
-				android:singleLine="true"
-				android:textColor="#FFF"
-				android:background="#ba000000"
+				style="@style/GridMicroDetailsTextView"
 				android:drawableLeft="@drawable/ic_thumb_up_white_18dp"
 				android:drawablePadding="5dp"
 				android:text="97%"/>
 			<TextView
 				android:id="@+id/video_duration_text_view"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
+				style="@style/GridMicroDetailsTextView"
 				android:layout_alignParentRight="true"
-				android:padding="2dp"
-				android:singleLine="true"
-				android:textColor="#FFF"
-				android:background="#ba000000"
 				android:text="19:17"/>
 		</RelativeLayout>
 
 		<TextView
 			android:id="@id/channel_text_view"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
+			style="@style/GridDetailsTextView"
 			android:padding="10dp"
-			android:singleLine="true"
-			android:textColor="#FFF"
-			android:background="#000"
-			android:text="Channel"
-			android:layout_alignParentBottom="true"/>
-
+			android:layout_alignParentBottom="true"
+			android:text="Channel"/>
 	</RelativeLayout>
 
-	<!--<TextView
-		android:id="@+id/title2_text_view"
+
+	<RelativeLayout
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:paddingLeft="10dp"
 		android:paddingRight="10dp"
 		android:paddingBottom="10dp"
-		android:paddingTop="0dp"
 		android:layout_marginTop="-10dp"
-		android:minLines="1"
-		android:maxLines="2"
-		android:textColor="#FFF"
-		android:background="#000"
-		android:text="Testttt"/> -->
+		android:background="#000">
+
+		<TextView
+			android:id="@+id/views_text_view"
+			android:layout_width="wrap_content"
+			style="@style/GridDetailsTextView"
+			android:text="199 Views"/>
+
+		<TextView
+			android:id="@+id/separator_text_view"
+			android:layout_width="wrap_content"
+			android:layout_toRightOf="@id/views_text_view"
+			android:paddingLeft="10dp"
+			android:paddingRight="10dp"
+			style="@style/GridDetailsTextView"
+			android:text="|"/>
+
+		<TextView
+			android:id="@+id/publish_date_text_view"
+			android:layout_width="wrap_content"
+			android:layout_toRightOf="@id/separator_text_view"
+			style="@style/GridDetailsTextView"
+			android:text="x days ago"/>
+
+	</RelativeLayout>
+
+
 
 </LinearLayout>
