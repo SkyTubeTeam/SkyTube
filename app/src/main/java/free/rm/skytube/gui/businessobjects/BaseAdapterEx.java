@@ -61,12 +61,27 @@ public abstract class BaseAdapterEx<T> extends BaseAdapter {
 		return inflater;
 	}
 
+
+	/**
+	 * Append the given items to the Adapter's list.
+	 *
+	 * @param l The items to append.
+	 */
 	public void appendList(List<T> l) {
 		if (l != null) {
 			this.list.addAll(l);
 			this.notifyDataSetChanged();
 		}
 	}
+
+
+	/**
+	 * Clear all items that are in the list.
+	 */
+	public void clearList() {
+		this.list.clear();
+	}
+
 
 	@Override
 	public int getCount() {

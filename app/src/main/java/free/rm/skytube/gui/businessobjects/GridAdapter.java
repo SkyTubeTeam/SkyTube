@@ -34,18 +34,19 @@ import java.math.MathContext;
 import java.math.RoundingMode;
 
 import free.rm.skytube.R;
-import free.rm.skytube.businessobjects.GetFeaturedVideos;
-import free.rm.skytube.businessobjects.GetMostPopularVideos;
 import free.rm.skytube.businessobjects.GetYouTubeVideos;
 import free.rm.skytube.businessobjects.GetYouTubeVideosTask;
+import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.businessobjects.VideoDuration;
 
 /**
- *
+ * An adapter that will display videos in a {@link android.widget.GridView}.
  */
 public class GridAdapter extends BaseAdapterEx<Video> {
 
-	private GetYouTubeVideos getYouTubeVideos = new GetMostPopularVideos(); //GetFeaturedVideos();
+	/** Class used to get YouTube videos from the web. */
+	private GetYouTubeVideos getYouTubeVideos;
+	/** Cache used to temporary store bitmap instances. */
 	private BitmapCache		bitmapCache;
 
 	private static final String TAG = GridAdapter.class.getSimpleName();
@@ -53,14 +54,36 @@ public class GridAdapter extends BaseAdapterEx<Video> {
 
 	public GridAdapter(Context context) {
 		super(context);
+		getYouTubeVideos = null;
 		bitmapCache = new BitmapCache(context);
+	}
 
+
+	/**
+	 * Set the video category.  Upon set, the adapter will download the videos of the specified
+	 * category asynchronously.
+	 *
+	 * @param videoCategory	The video category you want to change to.
+	 * @param context		{@link Context} instance.
+	 */
+	public void setVideoCategory(VideoCategory videoCategory, Context context) {
 		try {
-			getYouTubeVideos.init(context);
+			Log.i(TAG, videoCategory.toString());
+
+			// clear all previous items in this adapter
+			this.clearList();
+
+			// create a new instance of GetYouTubeVideos
+			this.getYouTubeVideos = videoCategory.createGetYouTubeVideos();
+			this.getYouTubeVideos.init(context);
+
+			// get the videos from the web asynchronously
 			new GetYouTubeVideosTask(getYouTubeVideos, this).execute();
 		} catch (IOException e) {
-			Log.e(TAG, "Could not init featured videos...", e);
-			Toast.makeText(context, context.getString(R.string.could_not_get_videos), Toast.LENGTH_LONG).show();
+			Log.e(TAG, "Could not init " + videoCategory, e);
+			Toast.makeText(context,
+					String.format(context.getString(R.string.could_not_get_videos), videoCategory.toString()),
+					Toast.LENGTH_LONG).show();
 		}
 	}
 
