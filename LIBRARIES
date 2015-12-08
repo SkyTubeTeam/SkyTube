@@ -6,3 +6,4 @@ NAME						|	LICENSE				|	URL
 google-http-client-android	|	Apache License 2.0	|	https://github.com/google/google-http-java-client
 google-api-services-youtube	|	Apache License 2.0	|	https://developers.google.com/api-client-library/java/apis/youtube/v3
 prettytime					|	Apache License 2.0	|	https://github.com/ocpsoft/prettytime
+YouTubeAndroidPlayerApi		|	Apache License 2.0	|	https://github.com/youtube/yt-android-player

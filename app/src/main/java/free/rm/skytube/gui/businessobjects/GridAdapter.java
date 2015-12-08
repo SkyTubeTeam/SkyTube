@@ -18,13 +18,16 @@
 
 package free.rm.skytube.gui.businessobjects;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.youtube.player.YouTubeStandalonePlayer;
 import com.google.api.client.util.DateTime;
 import com.google.api.services.youtube.model.Thumbnail;
 import com.google.api.services.youtube.model.Video;
@@ -110,6 +113,7 @@ public class GridAdapter extends BaseAdapterEx<Video> {
 
 		if (viewHolder != null) {
 			viewHolder.updateViewsData(get(position));
+			viewHolder.updateVideoId(get(position).getId());
 		}
 
 		// if it reached the bottom of the list, then try to get the next page of videos
@@ -117,6 +121,22 @@ public class GridAdapter extends BaseAdapterEx<Video> {
 			Log.w(TAG, "BOTTOM REACHED!!!");
 			new GetYouTubeVideosTask(getYouTubeVideos, this).execute();
 		}
+
+		row.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View rowView) {
+				ViewHolder viewHolder = (ViewHolder) rowView.getTag();
+
+				if (viewHolder != null) {
+					/*Intent i = new Intent(getContext(), PlayYouTubeVideoActivity.class);
+					i.putExtra(PlayYouTubeVideoActivity.VIDEO_ID, viewHolder.getVideoId());
+					getContext().startActivity(i);*/
+
+					Intent intent = YouTubeStandalonePlayer.createVideoIntent((Activity)getContext(), getContext().getString(R.string.API_KEY), viewHolder.getVideoId());
+					getContext().startActivity(intent);
+				}
+			}
+		});
 
 		return row;
 	}
@@ -134,6 +154,8 @@ public class GridAdapter extends BaseAdapterEx<Video> {
 							viewsTextView,
 							publishDateTextView;
 		private InternetImageView thumbnailImageView;
+		/** YouTube video ID */
+		private String videoId;
 
 		protected ViewHolder(View row) {
 			titleTextView				= (TextView) row.findViewById(R.id.title_text_view);
@@ -143,6 +165,15 @@ public class GridAdapter extends BaseAdapterEx<Video> {
 			viewsTextView				= (TextView) row.findViewById(R.id.views_text_view);
 			publishDateTextView			= (TextView) row.findViewById(R.id.publish_date_text_view);
 			thumbnailImageView	= (InternetImageView) row.findViewById(R.id.thumbnail_image_view);
+		}
+
+
+		protected void updateVideoId(String videoId) {
+			this.videoId = videoId;
+		}
+
+		protected String getVideoId() {
+			return videoId;
 		}
 
 

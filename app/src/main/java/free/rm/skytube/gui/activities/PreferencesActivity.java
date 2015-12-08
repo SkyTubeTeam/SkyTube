@@ -19,40 +19,42 @@
 package free.rm.skytube.gui.activities;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import free.rm.skytube.R;
+import free.rm.skytube.gui.fragments.PreferencesFragment;
 
-public class MainActivity extends Activity {
-	
+/**
+ * The preferences activity allows the user to change the settings of this app.  This activity
+ * loads {@link PreferencesFragment}.
+ */
+public class PreferencesActivity extends Activity {
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
-	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.main_activity_menu, menu);
-		return true;
+		// display the PreferencesFragment as the main content
+		getFragmentManager().beginTransaction()
+				.replace(android.R.id.content, new PreferencesFragment())
+				.commit();
+
+		// display the back button in the action bar (left-hand side)
+		getActionBar().setDisplayHomeAsUpEnabled(true);
 	}
 
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-			case R.id.menu_preferences:
-				Intent i = new Intent(this, PreferencesActivity.class);
-				startActivity(i);
-				break;
+			// when the user clicks the back/home button...
+			case android.R.id.home:
+				// close this activity
+				finish();
+				return true;
 		}
 
-		return true;
+		return super.onOptionsItemSelected(item);
 	}
 
 }

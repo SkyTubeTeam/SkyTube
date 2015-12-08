@@ -36,7 +36,7 @@
 			<TextView
 				android:id="@+id/thumbs_up_text_view"
 				style="@style/GridMicroDetailsTextView"
-				android:drawableLeft="@drawable/ic_thumb_up_white_18dp"
+				android:drawableLeft="@drawable/ic_thumb_up_white"
 				android:drawablePadding="5dp"
 				android:text="97%"/>
 			<TextView
