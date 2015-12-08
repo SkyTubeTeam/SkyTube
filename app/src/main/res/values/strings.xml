@@ -13,10 +13,5 @@
 		<item>Featured</item>
 		<item>Most Popular</item>
 	</string-array>
-
-	<string name="preferences">Preferences</string>
-	<string name="pref_video_player">Video Player</string>
-	<string name="pref_title_use_offical_player">Use official YouTube player</string>
-	<string name="pref_summary_use_offical_player">Not recommended.</string>
 	
 </resources>

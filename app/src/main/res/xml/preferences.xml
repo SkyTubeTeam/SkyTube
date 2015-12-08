@@ -1,14 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
+	<!--
+		Video Player Category
+	 -->
 	<PreferenceCategory
-		android:title="@string/pref_video_player"
+		android:title="@string/pref_video_player_category"
 		android:key="pref_key_storage_settings">
 		<CheckBoxPreference
 			android:key="pref_use_official_youtube_player"
 			android:title="@string/pref_title_use_offical_player"
 			android:summary="@string/pref_summary_use_offical_player"
 			android:defaultValue="false" />
+	</PreferenceCategory>
+
+	<!--
+		About Category
+	 -->
+	<PreferenceCategory
+		android:title="@string/pref_about_category">
+		<PreferenceScreen
+			android:key="pref_website"
+			android:title="@string/pref_title_website"
+			android:summary="@string/pref_summary_website" />
+		<PreferenceScreen
+			android:key="pref_version"
+			android:title="@string/pref_title_version"/>
 	</PreferenceCategory>
 
 </PreferenceScreen>

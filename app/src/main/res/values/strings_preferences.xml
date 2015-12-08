@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="preferences">Preferences</string>
+
+	<string name="pref_video_player_category">Video Player</string>
+	<string name="pref_title_use_offical_player">Use official YouTube player</string>
+	<string name="pref_summary_use_offical_player">Not recommended</string>
+
+	<string name="pref_about_category">About</string>
+	<string name="pref_title_website">Website</string>
+	<string name="pref_summary_website">https://github.com/ram-on/SkyTube</string>
+	<string name="pref_title_version">Version</string>
+</resources>

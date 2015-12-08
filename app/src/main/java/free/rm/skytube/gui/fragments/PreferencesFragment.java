@@ -18,8 +18,14 @@
 
 package free.rm.skytube.gui.fragments;
 
+import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.preference.Preference;
 import android.preference.PreferenceFragment;
+import android.util.Log;
 
 import free.rm.skytube.R;
 
@@ -29,12 +35,50 @@ import free.rm.skytube.R;
  */
 public class PreferencesFragment extends PreferenceFragment {
 
+	private static final String TAG = PreferencesFragment.class.getSimpleName();
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		// load the preferences from an XML resource
 		addPreferencesFromResource(R.xml.preferences);
+
+		// set up the on click listener of the website preference
+		Preference websitePref = findPreference("pref_website");
+		websitePref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+			@Override
+			public boolean onPreferenceClick(Preference preference) {
+				// view the app's website in a web browser
+				Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.pref_summary_website)));
+				startActivity(browserIntent);
+				return true;
+			}
+		});
+
+		// set the app's version number
+		Preference versionPref = findPreference("pref_version");
+		versionPref.setSummary(getAppVersion());
+	}
+
+
+	/**
+	 * Returns the version number of this app.
+	 *
+	 * @return App's version number if everything is ok;  "??" otherwise.
+	 */
+	private String getAppVersion() {
+		String version;
+
+		try {
+			PackageInfo pInfo = getActivity().getPackageManager().getPackageInfo(getActivity().getPackageName(), 0);
+			version = pInfo.versionName;
+		} catch (PackageManager.NameNotFoundException e) {
+			Log.i(TAG, "Unable to get the app's version number", e);
+			version = "??";
+		}
+
+		return version;
 	}
 
 }
