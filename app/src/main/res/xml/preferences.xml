@@ -20,6 +20,10 @@
 	<PreferenceCategory
 		android:title="@string/pref_about_category">
 		<PreferenceScreen
+			android:key="pref_license"
+			android:title="@string/pref_title_license"
+			android:summary="GNU General Public License version 3" />
+		<PreferenceScreen
 			android:key="pref_website"
 			android:title="@string/pref_title_website"
 			android:summary="@string/pref_summary_website" />

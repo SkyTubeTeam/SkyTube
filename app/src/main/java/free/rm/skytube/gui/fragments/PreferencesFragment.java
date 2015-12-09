@@ -18,6 +18,7 @@
 
 package free.rm.skytube.gui.fragments;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -44,7 +45,17 @@ public class PreferencesFragment extends PreferenceFragment {
 		// load the preferences from an XML resource
 		addPreferencesFromResource(R.xml.preferences);
 
-		// set up the on click listener of the website preference
+		// if the user clicks on the license, then open the display the actual license
+		Preference licensePref = findPreference("pref_license");
+		licensePref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+			@Override
+			public boolean onPreferenceClick(Preference preference) {
+				displayAppLicense();
+				return true;
+			}
+		});
+
+		// if the user clicks on the website link, then open it using an external browser
 		Preference websitePref = findPreference("pref_website");
 		websitePref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 			@Override
@@ -60,6 +71,21 @@ public class PreferencesFragment extends PreferenceFragment {
 		Preference versionPref = findPreference("pref_version");
 		versionPref.setSummary(getAppVersion());
 	}
+
+
+
+	/**
+	 * Displays the app's license in an AlertDialog.
+	 */
+	private void displayAppLicense() {
+		new AlertDialog.Builder(getActivity())
+				.setMessage(R.string.app_license)
+				.setIcon(android.R.drawable.ic_dialog_info)
+				.setNeutralButton(R.string.i_agree, null)
+				.setCancelable(false)	// do not allow the user to click outside the dialog or press the back button
+				.show();
+	}
+
 
 
 	/**
