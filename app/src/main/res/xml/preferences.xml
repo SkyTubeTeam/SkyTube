@@ -8,7 +8,7 @@
 		android:title="@string/pref_video_player_category"
 		android:key="pref_key_storage_settings">
 		<CheckBoxPreference
-			android:key="pref_use_official_youtube_player"
+			android:key="@string/pref_key_use_offical_player"
 			android:title="@string/pref_title_use_offical_player"
 			android:summary="@string/pref_summary_use_offical_player"
 			android:defaultValue="false" />
@@ -20,15 +20,15 @@
 	<PreferenceCategory
 		android:title="@string/pref_about_category">
 		<PreferenceScreen
-			android:key="pref_license"
+			android:key="@string/pref_key_license"
 			android:title="@string/pref_title_license"
-			android:summary="GNU General Public License version 3" />
+			android:summary="@string/pref_summary_license" />
 		<PreferenceScreen
-			android:key="pref_website"
+			android:key="@string/pref_key_website"
 			android:title="@string/pref_title_website"
 			android:summary="@string/pref_summary_website" />
 		<PreferenceScreen
-			android:key="pref_version"
+			android:key="@string/pref_key_version"
 			android:title="@string/pref_title_version"/>
 	</PreferenceCategory>
 

@@ -45,7 +45,7 @@ public class PreferencesFragment extends PreferenceFragment {
 		addPreferencesFromResource(R.xml.preferences);
 
 		// if the user clicks on the license, then open the display the actual license
-		Preference licensePref = findPreference("pref_license");
+		Preference licensePref = findPreference(getString(R.string.pref_key_license));
 		licensePref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 			@Override
 			public boolean onPreferenceClick(Preference preference) {
@@ -55,7 +55,7 @@ public class PreferencesFragment extends PreferenceFragment {
 		});
 
 		// if the user clicks on the website link, then open it using an external browser
-		Preference websitePref = findPreference("pref_website");
+		Preference websitePref = findPreference(getString(R.string.pref_key_website));
 		websitePref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 			@Override
 			public boolean onPreferenceClick(Preference preference) {
@@ -67,7 +67,7 @@ public class PreferencesFragment extends PreferenceFragment {
 		});
 
 		// set the app's version number
-		Preference versionPref = findPreference("pref_version");
+		Preference versionPref = findPreference(getString(R.string.pref_key_version));
 		versionPref.setSummary(getAppVersion());
 	}
 
