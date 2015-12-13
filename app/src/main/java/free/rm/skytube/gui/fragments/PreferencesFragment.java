@@ -79,7 +79,6 @@ public class PreferencesFragment extends PreferenceFragment {
 	private void displayAppLicense() {
 		new AlertDialog.Builder(getActivity())
 				.setMessage(R.string.app_license)
-				.setIcon(android.R.drawable.ic_dialog_info)
 				.setNeutralButton(R.string.i_agree, null)
 				.setCancelable(false)	// do not allow the user to click outside the dialog or press the back button
 				.show();

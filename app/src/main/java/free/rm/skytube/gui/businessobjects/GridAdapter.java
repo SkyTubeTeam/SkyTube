@@ -18,8 +18,11 @@
 package free.rm.skytube.gui.businessobjects;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,6 +49,7 @@ import free.rm.skytube.businessobjects.GetYouTubeVideos;
 import free.rm.skytube.businessobjects.GetYouTubeVideosTask;
 import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.businessobjects.VideoDuration;
+import free.rm.skytube.gui.activities.YouTubePlayerActivity;
 
 /**
  * An adapter that will display videos in a {@link android.widget.GridView}.
@@ -121,23 +125,67 @@ public class GridAdapter extends BaseAdapterEx<Video> {
 			new GetYouTubeVideosTask(getYouTubeVideos, this).execute();
 		}
 
+		// if the user clicks the row, then play the video
 		row.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View rowView) {
 				ViewHolder viewHolder = (ViewHolder) rowView.getTag();
 
 				if (viewHolder != null) {
-					/*Intent i = new Intent(getContext(), PlayYouTubeVideoActivity.class);
-					i.putExtra(PlayYouTubeVideoActivity.VIDEO_ID, viewHolder.getVideoId());
-					getContext().startActivity(i);*/
-
-					Intent intent = YouTubeStandalonePlayer.createVideoIntent((Activity)getContext(), getContext().getString(R.string.API_KEY), viewHolder.getVideoId());
-					getContext().startActivity(intent);
+					// if the user has selected to play the videos using the official YouTube player
+					// (in the preferences/settings) ...
+					if (useOfficialYouTubePlayer()) {
+						launchOfficialYouTubePlayer(viewHolder.getVideoId());
+					} else {
+						// else we use the standalone player
+						Intent i = new Intent(getContext(), YouTubePlayerActivity.class);
+						i.putExtra(YouTubePlayerActivity.VIDEO_ID, viewHolder.getVideoId());
+						getContext().startActivity(i);
+					}
 				}
 			}
 		});
 
 		return row;
+	}
+
+
+	/**
+	 * Read the user's preferences and determine if the user wants to use the official YouTube video
+	 * player or not.
+	 *
+	 * @return True if the user wants to use the official player; false otherwise.
+	 */
+	private boolean useOfficialYouTubePlayer() {
+		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getContext());
+		return sharedPref.getBoolean(getContext().getString(R.string.pref_key_use_offical_player), false);
+	}
+
+
+	/**
+	 * Launches the official YouTube player so that the user can view the selected video.
+	 *
+	 * @param videoId Video ID to be viewed.
+	 */
+	private void launchOfficialYouTubePlayer(String videoId) {
+		try {
+			// try to start the YouTube standalone player
+			Intent intent = YouTubeStandalonePlayer.createVideoIntent((Activity) getContext(), getContext().getString(R.string.API_KEY), videoId);
+			getContext().startActivity(intent);
+		} catch (Exception e) {
+			String errorMsg = getContext().getString(R.string.launch_offical_player_error);
+
+			// log the error
+			Log.e(TAG, errorMsg, e);
+
+			// display the error in an AlertDialog
+			new AlertDialog.Builder(getContext())
+					.setTitle(R.string.error)
+					.setMessage(errorMsg)
+					.setIcon(android.R.drawable.ic_dialog_alert)
+					.setNeutralButton(android.R.string.ok, null)
+					.show();
+		}
 	}
 
 

@@ -1,4 +1,4 @@
-The following is a list of third party libraries/assets used in this project:
+The following is a list of third-party assets that are used in this project:
 
 ------------------------------------------------------------------------------
 NAME						|	LICENSE								|	URL
@@ -8,3 +8,4 @@ google-api-services-youtube	|	Apache License 2.0					|	https://developers.google
 prettytime					|	Apache License 2.0					|	https://github.com/ocpsoft/prettytime
 YouTubeAndroidPlayerApi		|	Apache License 2.0					|	https://github.com/youtube/yt-android-player
 Twitter Emoji (icon)		|	CC Attribution 4.0 International	|	https://github.com/twitter/twemoji
+NewPipe (streams handler)	|	GPLv3+								|	https://github.com/theScrabi/NewPipe

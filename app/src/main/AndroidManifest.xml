@@ -17,7 +17,7 @@
 				<category android:name="android.intent.category.LAUNCHER"/>
 			</intent-filter>
 		</activity>
-		<activity android:name=".gui.activities.PlayYouTubeVideoActivity">
+		<activity android:name=".gui.activities.YouTubePlayerActivity">
 		</activity>
 		<activity android:name=".gui.activities.PreferencesActivity">
 		</activity>

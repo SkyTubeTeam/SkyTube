@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "free.rm.skytube"
-        minSdkVersion 19
+        minSdkVersion 16
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -29,4 +29,8 @@ dependencies {
     compile 'com.google.http-client:google-http-client-android:1.20.0'
     compile 'com.google.apis:google-api-services-youtube:v3-rev151-1.20.0'
     compile 'com.android.support:support-v4:23.1.1'
+
+    // for the stream/video downloader
+    compile 'org.jsoup:jsoup:1.8.3'
+    compile 'org.mozilla:rhino:1.7.7'
 }
