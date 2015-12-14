@@ -34,6 +34,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import free.rm.skytube.R;
+import free.rm.skytube.gui.app.SkyTubeApp;
 
 /**
  * Get today's most popular YouTube videos.
@@ -43,23 +44,20 @@ public class GetMostPopularVideos extends GetYouTubeVideos {
 	private YouTube.Search.List videosList = null;
 	private String nextPageToken = null;
 	private boolean noMoreVideoPages = false;
-	private Context context;
 
 	private static final String	TAG = GetMostPopularVideos.class.getSimpleName();
 	private static final Long	MAX_RESULTS = 45L;
 
 
 	@Override
-	public void init(Context context) throws IOException {
-		this.context = context;
-
+	public void init() throws IOException {
 		HttpTransport httpTransport = AndroidHttp.newCompatibleTransport();
 		JsonFactory jsonFactory = com.google.api.client.extensions.android.json.AndroidJsonFactory.getDefaultInstance();
 		YouTube youtube = new YouTube.Builder(httpTransport, jsonFactory, null /*timeout here?*/).build();
 
 		videosList = youtube.search().list("id");
 		videosList.setFields("items(id/videoId), nextPageToken");
-		videosList.setKey(context.getString(R.string.API_KEY));
+		videosList.setKey(SkyTubeApp.getStr(R.string.API_KEY));
 		videosList.setType("video");
 		videosList.setMaxResults(MAX_RESULTS);
 		videosList.setPublishedAfter(getTodaysDate());
@@ -134,7 +132,7 @@ public class GetMostPopularVideos extends GetYouTubeVideos {
 
 		// get video details by supplying the videos IDs
 		GetVideosDetailsByIDs getVideo = new GetVideosDetailsByIDs();
-		getVideo.init(context, videoIds.toString());
+		getVideo.init(videoIds.toString());
 
 		return getVideo.getNextVideos();
 	}

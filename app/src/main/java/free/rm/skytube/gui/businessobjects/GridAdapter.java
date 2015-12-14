@@ -76,7 +76,7 @@ public class GridAdapter extends BaseAdapterEx<YouTubeVideo> {
 
 			// create a new instance of GetYouTubeVideos
 			this.getYouTubeVideos = videoCategory.createGetYouTubeVideos();
-			this.getYouTubeVideos.init(context);
+			this.getYouTubeVideos.init();
 
 			// get the videos from the web asynchronously
 			new GetYouTubeVideosTask(getYouTubeVideos, this).execute();

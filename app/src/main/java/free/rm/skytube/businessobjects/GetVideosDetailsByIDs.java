@@ -26,8 +26,14 @@ import java.io.IOException;
  */
 public class GetVideosDetailsByIDs extends GetFeaturedVideos {
 
-	public void init(Context context, String videoIds) throws IOException {
-		super.init(context);
+	/**
+	 * Initialise object.
+	 *
+	 * @param videoIds		Comma separated videos IDs.
+	 * @throws IOException
+	 */
+	public void init(String videoIds) throws IOException {
+		super.init();
 		super.videosList.setId(videoIds);
 		super.videosList.setChart(null);
 	}

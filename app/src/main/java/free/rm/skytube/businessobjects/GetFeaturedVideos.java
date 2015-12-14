@@ -31,6 +31,7 @@ import java.io.IOException;
 import java.util.List;
 
 import free.rm.skytube.R;
+import free.rm.skytube.gui.app.SkyTubeApp;
 
 /**
  * Get today's featured YouTube videos.
@@ -45,7 +46,8 @@ public class GetFeaturedVideos extends GetYouTubeVideos {
 	private static final Long	MAX_RESULTS = 50L;
 
 
-	public void init(Context context) throws IOException {
+	@Override
+	public void init() throws IOException {
 		HttpTransport	httpTransport = AndroidHttp.newCompatibleTransport();
 		JsonFactory		jsonFactory = com.google.api.client.extensions.android.json.AndroidJsonFactory.getDefaultInstance();
 		YouTube			youtube = new YouTube.Builder(httpTransport, jsonFactory, null /*timeout here?*/).build();
@@ -54,7 +56,7 @@ public class GetFeaturedVideos extends GetYouTubeVideos {
 		videosList.setFields("items(id, snippet/publishedAt, snippet/title, snippet/channelTitle," +
 				"snippet/thumbnails/high, contentDetails/duration, statistics)," +
 				"nextPageToken");
-		videosList.setKey(context.getString(R.string.API_KEY));
+		videosList.setKey(SkyTubeApp.getStr(R.string.API_KEY));
 		videosList.setChart("mostPopular");
 		videosList.setMaxResults(MAX_RESULTS);
 		nextPageToken = null;

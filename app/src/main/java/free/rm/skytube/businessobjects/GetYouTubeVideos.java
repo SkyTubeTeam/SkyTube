@@ -35,10 +35,9 @@ public abstract class GetYouTubeVideos {
 	/**
 	 * Initialise this object.
 	 *
-	 * @param context {@link Context}
 	 * @throws IOException
 	 */
-	public abstract void init(Context context) throws IOException;
+	public abstract void init() throws IOException;
 
 
 	/**
