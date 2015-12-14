@@ -67,7 +67,7 @@ public abstract class BaseAdapterEx<T> extends BaseAdapter {
 	 * @param l The items to append.
 	 */
 	public void appendList(List<T> l) {
-		if (l != null) {
+		if (l != null  &&  l.size() > 0) {
 			this.list.addAll(l);
 			this.notifyDataSetChanged();
 		}

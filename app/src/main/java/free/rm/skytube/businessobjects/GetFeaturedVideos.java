@@ -35,7 +35,7 @@ import free.rm.skytube.R;
 /**
  * Get today's featured YouTube videos.
  */
-public class GetFeaturedVideos implements GetYouTubeVideos {
+public class GetFeaturedVideos extends GetYouTubeVideos {
 
 	protected YouTube.Videos.List videosList = null;
 	private String nextPageToken = null;
@@ -62,7 +62,7 @@ public class GetFeaturedVideos implements GetYouTubeVideos {
 
 
 	@Override
-	public List<Video> getNextVideos() {
+	public List<YouTubeVideo> getNextVideos() {
 		List<Video> searchResultList = null;
 
 		if (!noMoreVideoPages()) {
@@ -87,7 +87,7 @@ public class GetFeaturedVideos implements GetYouTubeVideos {
 			}
 		}
 
-		return searchResultList;
+		return toYouTubeVideoList(searchResultList);
 	}
 
 

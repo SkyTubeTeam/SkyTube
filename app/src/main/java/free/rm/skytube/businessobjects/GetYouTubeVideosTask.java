@@ -28,7 +28,7 @@ import free.rm.skytube.gui.businessobjects.GridAdapter;
 /**
  * An asynchronous task that will retrieve YouTube videos and displays them in the supplied Adapter.
  */
-public class GetYouTubeVideosTask extends AsyncTask<Void, Void, List<Video>> {
+public class GetYouTubeVideosTask extends AsyncTask<Void, Void, List<YouTubeVideo>> {
 
 	/** Object used to retrieve the desired YouTube videos. */
 	private GetYouTubeVideos	getYouTubeVideos;
@@ -47,8 +47,8 @@ public class GetYouTubeVideosTask extends AsyncTask<Void, Void, List<Video>> {
 
 
 	@Override
-	protected List<Video> doInBackground(Void... params) {
-		List<Video> videos = null;
+	protected List<YouTubeVideo> doInBackground(Void... params) {
+		List<YouTubeVideo> videos = null;
 
 		if (!isCancelled()) {
 			videos = getYouTubeVideos.getNextVideos();
@@ -59,7 +59,7 @@ public class GetYouTubeVideosTask extends AsyncTask<Void, Void, List<Video>> {
 
 
 	@Override
-	protected void onPostExecute(List<Video> videosList) {
+	protected void onPostExecute(List<YouTubeVideo> videosList) {
 		gridAdapter.appendList(videosList);
 	}
 

@@ -38,7 +38,7 @@ import free.rm.skytube.R;
 /**
  * Get today's most popular YouTube videos.
  */
-public class GetMostPopularVideos implements GetYouTubeVideos {
+public class GetMostPopularVideos extends GetYouTubeVideos {
 
 	private YouTube.Search.List videosList = null;
 	private String nextPageToken = null;
@@ -80,8 +80,8 @@ public class GetMostPopularVideos implements GetYouTubeVideos {
 
 
 	@Override
-	public List<Video> getNextVideos() {
-		List<Video> videosList = null;
+	public List<YouTubeVideo> getNextVideos() {
+		List<YouTubeVideo> videosList = null;
 
 		if (!noMoreVideoPages()) {
 			try {
@@ -120,10 +120,10 @@ public class GetMostPopularVideos implements GetYouTubeVideos {
 	 * given video list.</p>
 	 *
 	 * @param searchResultList Search results
-	 * @return List of {@link Video}s.
+	 * @return List of {@link YouTubeVideo}s.
 	 * @throws IOException
 	 */
-	private List<Video> getVideosList(List<SearchResult> searchResultList) throws IOException {
+	private List<YouTubeVideo> getVideosList(List<SearchResult> searchResultList) throws IOException {
 		StringBuilder videoIds = new StringBuilder();
 
 		// append the video IDs into a strings (CSV)

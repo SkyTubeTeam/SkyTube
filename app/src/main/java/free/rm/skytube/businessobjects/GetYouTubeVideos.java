@@ -22,6 +22,7 @@ import android.content.Context;
 import com.google.api.services.youtube.model.Video;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,7 +30,7 @@ import java.util.List;
  *
  * <p>Do not run this directly, but rather use {@link GetYouTubeVideosTask}.</p>
  */
-public interface GetYouTubeVideos {
+public abstract class GetYouTubeVideos {
 
 	/**
 	 * Initialise this object.
@@ -37,20 +38,39 @@ public interface GetYouTubeVideos {
 	 * @param context {@link Context}
 	 * @throws IOException
 	 */
-	void init(Context context) throws IOException;
+	public abstract void init(Context context) throws IOException;
 
 
 	/**
 	 * Gets the next page of videos.
 	 *
-	 * @return List of {@link Video}s
+	 * @return List of {@link YouTubeVideo}s.
 	 */
-	List<Video> getNextVideos();
+	public abstract List<YouTubeVideo> getNextVideos();
 
 
 	/**
 	 * @return True if YouTube states that there will be no more video pages; false otherwise.
 	 */
-	boolean noMoreVideoPages();
+	public abstract boolean noMoreVideoPages();
+
+
+	/**
+	 * Converts {@link List} of {@link Video} to {@link List} of {@link YouTubeVideo}.
+	 *
+	 * @param videoList {@link List} of {@link Video}.
+	 * @return {@link List} of {@link YouTubeVideo}.
+	 */
+	protected List<YouTubeVideo> toYouTubeVideoList(List<Video> videoList) {
+		List<YouTubeVideo> youTubeVideoList = new ArrayList<>();
+
+		if (videoList != null) {
+			for (Video video : videoList) {
+				youTubeVideoList.add(new YouTubeVideo(video));
+			}
+		}
+
+		return youTubeVideoList;
+	}
 
 }

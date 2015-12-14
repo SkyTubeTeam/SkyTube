@@ -30,31 +30,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.youtube.player.YouTubeStandalonePlayer;
-import com.google.api.client.util.DateTime;
-import com.google.api.services.youtube.model.Thumbnail;
-import com.google.api.services.youtube.model.Video;
-import com.google.api.services.youtube.model.VideoStatistics;
-
-import org.ocpsoft.prettytime.PrettyTime;
 
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.math.MathContext;
-import java.math.RoundingMode;
-import java.util.Date;
 
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.GetYouTubeVideos;
 import free.rm.skytube.businessobjects.GetYouTubeVideosTask;
 import free.rm.skytube.businessobjects.VideoCategory;
-import free.rm.skytube.businessobjects.VideoDuration;
+import free.rm.skytube.businessobjects.YouTubeVideo;
 import free.rm.skytube.gui.activities.YouTubePlayerActivity;
 
 /**
  * An adapter that will display videos in a {@link android.widget.GridView}.
  */
-public class GridAdapter extends BaseAdapterEx<Video> {
+public class GridAdapter extends BaseAdapterEx<YouTubeVideo> {
 
 	/** Class used to get YouTube videos from the web. */
 	private GetYouTubeVideos getYouTubeVideos;
@@ -229,65 +218,20 @@ public class GridAdapter extends BaseAdapterEx<Video> {
 		 *
 		 * @param video Video instance.
 		 */
-		protected void updateViewsData(Video video) {
-			if (video.getSnippet() != null) {
-				titleTextView.setText(video.getSnippet().getTitle());
-				channelTextView.setText(video.getSnippet().getChannelTitle());
-				publishDateTextView.setText(getPublishDate(video.getSnippet().getPublishedAt()));
+		protected void updateViewsData(YouTubeVideo video) {
+			titleTextView.setText(video.getTitle());
+			channelTextView.setText(video.getChannelName());
+			publishDateTextView.setText(video.getPublishDate());
+			videoDurationTextView.setText(video.getDuration());
+			viewsTextView.setText(video.getViewsCount());
+			thumbnailImageView.setImageAsync(bitmapCache, video.getThumbnailUrl());
+
+			if (video.getThumbsUpPercentage() != null) {
+				thumbsUpPercentageTextView.setVisibility(View.VISIBLE);
+				thumbsUpPercentageTextView.setText(video.getThumbsUpPercentage());
+			} else {
+				thumbsUpPercentageTextView.setVisibility(View.INVISIBLE);
 			}
-
-			if (video.getContentDetails() != null)
-				videoDurationTextView.setText(VideoDuration.toHumanReadableString(video.getContentDetails().getDuration()));
-
-			if (video.getStatistics() != null) {
-				thumbsUpPercentageTextView.setText(getThumbsUpPercentage(video.getStatistics()));
-
-				BigInteger views = video.getStatistics().getViewCount();
-				viewsTextView.setText(String.format(getContext().getString(R.string.views), views));
-			}
-
-			Thumbnail thumbnail = video.getSnippet().getThumbnails().getHigh();
-			if (thumbnail != null)
-				thumbnailImageView.setImageAsync(bitmapCache, thumbnail.getUrl());
-		}
-
-
-		/**
-		 * Converts the given video's publish date into a pretty string.
-		 *
-		 * @param publishDateTime {@link DateTime} of when the video was published.
-		 *
-		 * @return String representing the publish time (e.g. "7 hours ago").
-		 */
-		private String getPublishDate(DateTime publishDateTime) {
-			Long unixEpoch   = publishDateTime.getValue();
-			Date publishDate = new Date(unixEpoch);
-			return new PrettyTime().format(publishDate);
-		}
-
-
-		/**
-		 * Returns the percentage of people that thumbs-upped the given video.
-		 *
-		 * @param videoStatistics {@link VideoStatistics} instance
-		 * @return Percentage as a string.  Format:  "<percentage>%"
-		 */
-		private String getThumbsUpPercentage(VideoStatistics videoStatistics) {
-			String percentage;
-
-			try {
-				BigDecimal likedCount = new BigDecimal(videoStatistics.getLikeCount()),
-						dislikedCount = new BigDecimal(videoStatistics.getDislikeCount()),
-						totalVoteCount = likedCount.add(dislikedCount),    // liked and disliked counts
-						likedPercentage = (likedCount.divide(totalVoteCount, MathContext.DECIMAL128)).multiply(new BigDecimal(100));
-
-				// round the liked percentage to 0 decimal places and convert it to string
-				percentage = likedPercentage.setScale(0, RoundingMode.HALF_UP).toString();
-			} catch (Exception e) {
-				percentage = "??";
-			}
-
-			return percentage + "%";
 		}
 
 	}

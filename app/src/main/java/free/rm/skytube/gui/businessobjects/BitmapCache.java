@@ -59,7 +59,7 @@ public class BitmapCache {
 	 * @param bitmapID The bitmap ID (e.g. URL).
 	 * @param bitmap Bitmap instance.
 	 */
-	public void add(String bitmapID, Bitmap bitmap) {
+	public synchronized void add(String bitmapID, Bitmap bitmap) {
 		// TODO:  if bitmap is null, then add a default thumbnail image...
 
 		if (bitmapID != null  &&  bitmap != null)
@@ -73,7 +73,7 @@ public class BitmapCache {
 	 * @param bitmapID Bitmap ID
 	 * @return Bitmap instance if found; null otherwise.
 	 */
-	public Bitmap get(String bitmapID) {
+	public synchronized Bitmap get(String bitmapID) {
 		return cache.get(bitmapID);
 	}
 
