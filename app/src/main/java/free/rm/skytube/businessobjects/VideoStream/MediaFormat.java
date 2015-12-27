@@ -30,17 +30,17 @@ package free.rm.skytube.businessobjects.VideoStream;
 import android.util.Log;
 
 /**
- * This class represents the media formats of a YouTube video/stream.
+ * This class represents the media formats of a YouTube video/stream (e.g. MPEG-4).
  */
 public enum MediaFormat {
 
-	//           name		suffix	mime type
-	MPEG_4      ("MPEG-4",	"mp4",	"video/mp4"),
-	v3GPP       ("3GPP",	"3gp",	"video/3gpp"),
-	WEBM        ("WebM",	"webm",	"video/webm"),
-	M4A         ("m4a",		"m4a",	"audio/mp4"),
-	WEBMA       ("WebM",	"webm",	"audio/webm"),
-	UNKNOWN		("???",		"???",	"???");
+	//       name		suffix	mime type
+	MPEG_4	("MPEG-4",	"mp4",	"video/mp4"),
+	V3GPP	("3GPP",	"3gp",	"video/3gpp"),
+	WEBM	("WebM",	"webm",	"video/webm"),
+	M4A		("m4a",		"m4a",	"audio/mp4"),
+	WEBMA	("WebM",	"webm",	"audio/webm"),
+	UNKNOWN	("???",		"???",	"???");
 
 	public final String name;
 	public final String suffix;
@@ -67,10 +67,10 @@ public enum MediaFormat {
 	 */
 	static MediaFormat itagToMediaFormat(int itag) {
 		switch(itag) {
-			case 17: return v3GPP;
+			case 17: return V3GPP;
 			case 18: return MPEG_4;
 			case 22: return MPEG_4;
-			case 36: return v3GPP;
+			case 36: return V3GPP;
 			case 37: return MPEG_4;
 			case 38: return MPEG_4;
 			case 43: return WEBM;

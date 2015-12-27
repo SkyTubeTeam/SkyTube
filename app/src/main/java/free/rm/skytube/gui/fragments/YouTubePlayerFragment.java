@@ -11,11 +11,10 @@ import android.widget.MediaController;
 import android.widget.Toast;
 import android.widget.VideoView;
 
-import java.util.List;
-
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.VideoStream.StreamMetaData;
 import free.rm.skytube.businessobjects.VideoStream.ParseStreamMetaData;
+import free.rm.skytube.businessobjects.VideoStream.StreamMetaDataList;
 import free.rm.skytube.gui.activities.YouTubePlayerActivity;
 
 /**
@@ -60,7 +59,7 @@ public class YouTubePlayerFragment extends FragmentEx {
 	 * Given a video ID, it will asynchronously get a list of streams (supplied by YouTube) and then
 	 * it asks the videoView to start playing a stream.
 	 */
-	private class GetStreamTask extends AsyncTask<Void, Exception, List<StreamMetaData>> {
+	private class GetStreamTask extends AsyncTask<Void, Exception, StreamMetaDataList> {
 
 		/** Video ID */
 		private String videoId;
@@ -72,9 +71,9 @@ public class YouTubePlayerFragment extends FragmentEx {
 
 
 		@Override
-		protected List<StreamMetaData> doInBackground(Void... param) {
-			ParseStreamMetaData  ex = new ParseStreamMetaData(videoId);
-			List<StreamMetaData> streamMetaDataList = null;
+		protected StreamMetaDataList doInBackground(Void... param) {
+			ParseStreamMetaData	ex = new ParseStreamMetaData(videoId);
+			StreamMetaDataList 	streamMetaDataList = null;
 
 			try {
 				streamMetaDataList = ex.getStreamMetaDataList();
@@ -97,7 +96,7 @@ public class YouTubePlayerFragment extends FragmentEx {
 
 
 		@Override
-		protected void onPostExecute(List<StreamMetaData> streamMetaDataList) {
+		protected void onPostExecute(StreamMetaDataList streamMetaDataList) {
 			if (streamMetaDataList == null  ||  streamMetaDataList.size() <= 0) {
 				String error = String.format(getActivity().getString(R.string.error_video_streams_empty), videoId);
 
@@ -106,13 +105,12 @@ public class YouTubePlayerFragment extends FragmentEx {
 						Toast.LENGTH_LONG).show();
 
 			} else {
-				for (StreamMetaData md : streamMetaDataList) {
-					Log.i(TAG, md.toString());
-				}
+				Log.i(TAG, streamMetaDataList.toString());
 
 				// TODO get stream based on user preferences!
-				Log.i(TAG, "Playing: " + streamMetaDataList.get(1).toString());
-				videoView.setVideoURI(streamMetaDataList.get(1).getUri());
+				StreamMetaData desiredStream = streamMetaDataList.getDesiredStream();
+				Log.i(TAG, ">> PLAYING: " + desiredStream);
+				videoView.setVideoURI(desiredStream.getUri());
 			}
 		}
 	}

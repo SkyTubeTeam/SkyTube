@@ -18,6 +18,8 @@
 package free.rm.skytube.gui.app;
 
 import android.app.Application;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
 /**
  * SkyTube application.
@@ -43,6 +45,16 @@ public class SkyTubeApp extends Application {
 	 */
 	public static String getStr(int stringResId) {
 		return skyTubeApp.getString(stringResId);
+	}
+
+
+	/**
+	 * Returns the App's {@link SharedPreferences}.
+	 *
+	 * @return {@link SharedPreferences}
+	 */
+	public static SharedPreferences getPreferenceManager() {
+		return PreferenceManager.getDefaultSharedPreferences(skyTubeApp);
 	}
 
 }

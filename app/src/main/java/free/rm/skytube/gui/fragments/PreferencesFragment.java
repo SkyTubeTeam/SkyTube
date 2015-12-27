@@ -23,11 +23,13 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.util.Log;
 
 import free.rm.skytube.R;
+import free.rm.skytube.businessobjects.VideoStream.VideoResolution;
 
 /**
  * A fragment that allows the user to change the settings of this app.  This fragment is called by
@@ -43,6 +45,10 @@ public class PreferencesFragment extends PreferenceFragment {
 
 		// load the preferences from an XML resource
 		addPreferencesFromResource(R.xml.preferences);
+
+		ListPreference resolutionPref = (ListPreference) findPreference(getString(R.string.pref_key_preferred_res));
+		resolutionPref.setEntries(VideoResolution.getAllVideoResolutionsNames());
+		resolutionPref.setEntryValues(VideoResolution.getAllVideoResolutionsIds());
 
 		// if the user clicks on the license, then open the display the actual license
 		Preference licensePref = findPreference(getString(R.string.pref_key_license));

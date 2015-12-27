@@ -7,6 +7,10 @@
 	<PreferenceCategory
 		android:title="@string/pref_video_player_category"
 		android:key="pref_key_storage_settings">
+		<ListPreference
+			android:key="@string/pref_key_preferred_res"
+			android:title="@string/pref_title_preferred_res"
+			android:summary="@string/pref_summary_preferred_res"/>
 		<CheckBoxPreference
 			android:key="@string/pref_key_use_offical_player"
 			android:title="@string/pref_title_use_offical_player"

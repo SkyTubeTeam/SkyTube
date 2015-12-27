@@ -19,7 +19,6 @@ package free.rm.skytube.businessobjects.VideoStream;
 
 
 import android.net.Uri;
-import android.util.Log;
 
 /**
  * Represents the meta-data of a YouTube video stream.
@@ -27,9 +26,11 @@ import android.util.Log;
  public class StreamMetaData {
 
 	/** URL of the stream */
-	public Uri uri;
-	public String resolution;
-	public MediaFormat format;
+	private Uri uri;
+	/** Video resolution (e.g. 1080p) */
+	private VideoResolution resolution;
+	/** Video format (e.g. MPEG-4) */
+	private MediaFormat format;
 
 	private static final String TAG = StreamMetaData.class.getSimpleName();
 
@@ -54,42 +55,11 @@ import android.util.Log;
 	}
 
 
+	/**
+	 * Converts the given itag into {@link VideoResolution}.
+	 */
 	private void setResolution(int itag) {
-		switch(itag) {
-			case 17:
-				this.resolution = "144p";
-				break;
-			case 18:
-				this.resolution = "360p";
-				break;
-			case 22:
-				this.resolution = "720p";
-				break;
-			case 36:
-				this.resolution = "240p";
-				break;
-			case 37:
-				this.resolution = "1080p";
-				break;
-			case 38:
-				this.resolution = "1080p";
-				break;
-			case 43:
-				this.resolution = "360p";
-				break;
-			case 44:
-				this.resolution = "480p";
-				break;
-			case 45:
-				this.resolution = "720p";
-				break;
-			case 46:
-				this.resolution = "1080p";
-				break;
-			default:
-				Log.e(TAG, "itag " + itag + " not known or not supported.");
-				this.resolution = "???";
-		}
+		this.resolution = VideoResolution.itagToVideoResolution(itag);
 	}
 
 
@@ -97,7 +67,7 @@ import android.util.Log;
 		return uri;
 	}
 
-	public String getResolution() {
+	public VideoResolution getResolution() {
 		return resolution;
 	}
 

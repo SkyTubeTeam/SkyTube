@@ -105,10 +105,10 @@ public class ParseStreamMetaData {
 	 *
 	 * @return List of {@link StreamMetaData}.
 	 */
-	public List<StreamMetaData> getStreamMetaDataList() throws Exception {
-		ArrayList<StreamMetaData> streamMetaDataList = new ArrayList<>();
-		String			encodedUrlMap = playerArgs.getString("url_encoded_fmt_stream_map");
-		StreamMetaData streamMetaData;
+	public StreamMetaDataList getStreamMetaDataList() throws Exception {
+		StreamMetaDataList	streamMetaDataList = new StreamMetaDataList();
+		String				encodedUrlMap = playerArgs.getString("url_encoded_fmt_stream_map");
+		StreamMetaData		streamMetaData;
 
 		for (String url_data_str : encodedUrlMap.split(",")) {
 			Map<String, String> tags = new HashMap<>();
