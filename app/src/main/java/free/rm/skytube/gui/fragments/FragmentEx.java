@@ -17,6 +17,7 @@
 
 package free.rm.skytube.gui.fragments;
 
+import android.app.ActionBar;
 import android.app.Fragment;
 import android.os.Bundle;
 
@@ -30,6 +31,14 @@ public class FragmentEx extends Fragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		setRetainInstance(true);
+	}
+
+
+	/**
+	 * @return Instance of {@link ActionBar}.
+	 */
+	protected ActionBar getActionBar() {
+		return getActivity().getActionBar();
 	}
 
 }

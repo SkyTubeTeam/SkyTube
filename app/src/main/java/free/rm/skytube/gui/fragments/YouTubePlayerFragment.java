@@ -3,6 +3,7 @@ package free.rm.skytube.gui.fragments;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,8 +13,8 @@ import android.widget.Toast;
 import android.widget.VideoView;
 
 import free.rm.skytube.R;
-import free.rm.skytube.businessobjects.VideoStream.StreamMetaData;
 import free.rm.skytube.businessobjects.VideoStream.ParseStreamMetaData;
+import free.rm.skytube.businessobjects.VideoStream.StreamMetaData;
 import free.rm.skytube.businessobjects.VideoStream.StreamMetaDataList;
 import free.rm.skytube.gui.activities.YouTubePlayerActivity;
 
@@ -25,7 +26,9 @@ public class YouTubePlayerFragment extends FragmentEx {
 	private String			videoId = null;
 	private VideoView		videoView = null;
 	private MediaController	mediaController = null;
+	private View			voidView = null;
 
+	private static final int UI_VISIBILITY_TIMEOUT = 7000;
 	private static final String TAG = YouTubePlayerFragment.class.getSimpleName();
 
 
@@ -41,6 +44,7 @@ public class YouTubePlayerFragment extends FragmentEx {
 			// play the video once its loaded
 			videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
 				public void onPrepared(MediaPlayer mediaPlayer) {
+					showUi();
 					videoView.start();
 				}
 			});
@@ -48,11 +52,69 @@ public class YouTubePlayerFragment extends FragmentEx {
 			mediaController = new MediaController(getActivity());
 			videoView.setMediaController(mediaController);
 
+			voidView = view.findViewById(R.id.void_view);
+			voidView.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					showOrHideUi();
+				}
+			});
+
+			hideUi();
+
 			new GetStreamTask(videoId).execute();
 		}
 
 		return view;
 	}
+
+
+	private boolean isUiVisible() {
+		return mediaController.isShowing();
+	}
+
+
+	private void showOrHideUi() {
+		if (isUiVisible())
+			hideUi();
+		else
+			showUi();
+	}
+
+
+
+	private void showUi() {
+		if (!isUiVisible()) {
+			getActionBar().show();
+			getActionBar().setTitle("Xaxaxaxa");
+			mediaController.show(0);
+
+			// hide UI after a certain timeout (defined in UI_VISIBILITY_TIMEOUT)
+			final Handler handler = new Handler();
+			handler.postDelayed(new Runnable() {
+				@Override
+				public void run() {
+					hideUi();
+				}
+			}, UI_VISIBILITY_TIMEOUT);
+		}
+	}
+
+
+
+	private void hideUi() {
+		if (isUiVisible()) {
+			getActionBar().hide();
+			mediaController.hide();
+		}
+
+//		View decorView = getActivity().getWindow().getDecorView();
+//
+//		decorView.setSystemUiVisibility(
+//				View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+//						| View.SYSTEM_UI_FLAG_FULLSCREEN);
+	}
+
 
 
 	/**

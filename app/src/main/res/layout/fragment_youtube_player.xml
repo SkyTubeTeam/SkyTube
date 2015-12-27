@@ -11,4 +11,10 @@
 			   android:layout_gravity="center"
 			   android:focusable="false"/>
 
+	<View android:id="@+id/void_view"
+			   android:layout_width="match_parent"
+			   android:layout_height="match_parent"
+			   android:layout_gravity="center"
+			   android:focusable="false"/>
+
 </FrameLayout>
