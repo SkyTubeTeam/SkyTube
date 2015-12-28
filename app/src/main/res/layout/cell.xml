@@ -5,20 +5,19 @@
 				android:layout_height="match_parent"
 				android:background="@color/cellBackground">
 
-	<!-- TODO:  change add layout_height to dimen.xml (+portrait):  without the 300dp
-	            the scrolling upwards would stutter... -->
 	<RelativeLayout
 		android:orientation="vertical"
 		android:layout_width="match_parent"
-		android:layout_height="300dp">
+		android:layout_height="wrap_content" >
 
-		<free.rm.skytube.gui.businessobjects.InternetImageView
+		<free.rm.skytube.gui.businessobjects.YouTubeGridThumbnail
 			android:id="@+id/thumbnail_image_view"
 			android:layout_width="match_parent"
-			android:layout_height="match_parent"
+			android:layout_height="wrap_content"
 			android:layout_alignParentTop="true"
 			android:scaleType="fitXY"
-			android:adjustViewBounds="true"/>
+			android:adjustViewBounds="true"
+			android:src="@drawable/thumbnail_default"/>
 
 		<TextView
 			android:id="@+id/title_text_view"
@@ -50,7 +49,7 @@
 			android:id="@id/channel_text_view"
 			style="@style/GridDetailsTextView"
 			android:padding="10dp"
-			android:layout_alignParentBottom="true"
+			android:layout_alignBottom="@id/thumbnail_image_view"
 			android:text="Channel"/>
 	</RelativeLayout>
 

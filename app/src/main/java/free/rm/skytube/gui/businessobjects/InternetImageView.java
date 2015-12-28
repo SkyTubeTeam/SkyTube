@@ -47,7 +47,7 @@ import java.net.URL;
  * <p>You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>
  */
-public class InternetImageView extends ImageView {
+public abstract class InternetImageView extends ImageView {
 
 	@TargetApi(Build.VERSION_CODES.LOLLIPOP)
 	public InternetImageView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
@@ -66,9 +66,24 @@ public class InternetImageView extends ImageView {
 		super(context);
 	}
 
+	/**
+	 * Set a remote image as the content of this {@link InternetImageView}.
+	 *
+	 * @param bitmapCache	Cache were bitmaps will be cached/stored.
+	 * @param url			URL of the remote image.
+	 */
 	public void setImageAsync(BitmapCache bitmapCache, String url) {
 		new DownloadImageTask(bitmapCache).execute(url);
 	}
+
+
+	/**
+	 * Returns the default image to be used (before the specified image in {@link #setImageAsync(BitmapCache, String)}
+	 * is loaded).
+	 *
+	 * @return	The image resource (e.g. R.drawable.my_image).
+	 */
+	protected abstract int getDefaultImageResource();
 
 
 	////////////////////////////
@@ -84,7 +99,7 @@ public class InternetImageView extends ImageView {
 
 		@Override
 		protected void onPreExecute() {
-			InternetImageView.this.setImageBitmap(null);
+			InternetImageView.this.setImageResource(getDefaultImageResource());
 		}
 
 		@Override
@@ -102,7 +117,8 @@ public class InternetImageView extends ImageView {
 				bitmap = downloadBitmap(url);
 
 				// adds the downloaded image to the cache
-				bitmapCache.add(url, bitmap);
+				if (bitmap != null)
+					bitmapCache.add(url, bitmap);
 			}
 
 			return bitmap;
@@ -136,6 +152,7 @@ public class InternetImageView extends ImageView {
 				}
 			} catch (Exception e) {
 				urlConnection.disconnect();
+				bitmap = null;
 				Log.e(TAG, "Error has occurred while downloading image from " + url, e);
 			} finally {
 				if (urlConnection != null) {
@@ -149,7 +166,8 @@ public class InternetImageView extends ImageView {
 
 		@Override
 		protected void onPostExecute(Bitmap bitmap) {
-			InternetImageView.this.setImageBitmap(bitmap);
+			if (bitmap != null)
+				InternetImageView.this.setImageBitmap(bitmap);
 		}
 	}
 
