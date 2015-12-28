@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
+		<!-- Fix for Android with API21+:  the ActionBar's navigation menu text colour should be
+			  white, however it is displayed as black (Android's bug probably) and hence it is
+			  incorrect on Android API21+.  Fix:  use the light theme for the navigation menu
+			  instead. -->
+		<item name="android:actionDropDownStyle">@android:style/Widget.Holo.Light.Spinner</item>
+	</style>
+
+</resources>

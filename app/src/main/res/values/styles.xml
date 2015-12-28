@@ -1,8 +1,7 @@
 <resources>
 	
-	<!-- Base application theme. -->
+	<!-- SkyTube theme -->
 	<style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
-		<!-- customize your theme here -->
 	</style>
 
 	<!-- *************************************************************************************** -->
