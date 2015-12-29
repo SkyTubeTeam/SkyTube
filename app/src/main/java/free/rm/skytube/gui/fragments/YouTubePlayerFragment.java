@@ -17,6 +17,7 @@ import free.rm.skytube.businessobjects.VideoStream.ParseStreamMetaData;
 import free.rm.skytube.businessobjects.VideoStream.StreamMetaData;
 import free.rm.skytube.businessobjects.VideoStream.StreamMetaDataList;
 import free.rm.skytube.gui.activities.YouTubePlayerActivity;
+import free.rm.skytube.gui.businessobjects.MediaControllerEx;
 
 /**
  * A fragment that holds a standalone YouTube player.
@@ -44,23 +45,23 @@ public class YouTubePlayerFragment extends FragmentEx {
 			// play the video once its loaded
 			videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
 				public void onPrepared(MediaPlayer mediaPlayer) {
-					showUi();
+					showHud();
 					videoView.start();
 				}
 			});
 
-			mediaController = new MediaController(getActivity());
-			videoView.setMediaController(mediaController);
+			// setup the media controller (will control the video playing/pausing)
+			mediaController = new MediaControllerEx(getActivity(), videoView);
 
 			voidView = view.findViewById(R.id.void_view);
 			voidView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					showOrHideUi();
+					showOrHideHud();
 				}
 			});
 
-			hideUi();
+			hideHud();
 
 			new GetStreamTask(videoId).execute();
 		}
@@ -69,22 +70,33 @@ public class YouTubePlayerFragment extends FragmentEx {
 	}
 
 
-	private boolean isUiVisible() {
-		return mediaController.isShowing();
+
+	/**
+	 * @return True if the HUD is visible (provided that this Fragment is also visible).
+	 */
+	private boolean isHudVisible() {
+		return isVisible()  &&  (mediaController.isShowing()  ||  getActionBar().isShowing());
 	}
 
 
-	private void showOrHideUi() {
-		if (isUiVisible())
-			hideUi();
+
+	/**
+	 * Hide or display the HUD depending if the HUD is currently visible or not.
+	 */
+	private void showOrHideHud() {
+		if (isHudVisible())
+			hideHud();
 		else
-			showUi();
+			showHud();
 	}
 
 
 
-	private void showUi() {
-		if (!isUiVisible()) {
+	/**
+	 * Show the HUD (head-up display), i.e. the Action Bar and Media Controller.
+	 */
+	private void showHud() {
+		if (!isHudVisible()) {
 			getActionBar().show();
 			getActionBar().setTitle("Xaxaxaxa");
 			mediaController.show(0);
@@ -94,7 +106,7 @@ public class YouTubePlayerFragment extends FragmentEx {
 			handler.postDelayed(new Runnable() {
 				@Override
 				public void run() {
-					hideUi();
+					hideHud();
 				}
 			}, UI_VISIBILITY_TIMEOUT);
 		}
@@ -102,17 +114,14 @@ public class YouTubePlayerFragment extends FragmentEx {
 
 
 
-	private void hideUi() {
-		if (isUiVisible()) {
+	/**
+	 * Hide the HUD.
+	 */
+	private void hideHud() {
+		if (isHudVisible()) {
 			getActionBar().hide();
 			mediaController.hide();
 		}
-
-//		View decorView = getActivity().getWindow().getDecorView();
-//
-//		decorView.setSystemUiVisibility(
-//				View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-//						| View.SYSTEM_UI_FLAG_FULLSCREEN);
 	}
 
 

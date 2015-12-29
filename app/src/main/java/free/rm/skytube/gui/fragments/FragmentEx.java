@@ -18,6 +18,7 @@
 package free.rm.skytube.gui.fragments;
 
 import android.app.ActionBar;
+import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
 
@@ -38,7 +39,11 @@ public class FragmentEx extends Fragment {
 	 * @return Instance of {@link ActionBar}.
 	 */
 	protected ActionBar getActionBar() {
-		return getActivity().getActionBar();
+		// The Fragment might not always get completely destroyed after Activity.finish(), hence
+		// this code might get called after the hosting activity is destroyed.  Therefore we need
+		// to handle getActivity() properly.  Refer to:  http://stackoverflow.com/a/21886594/3132935
+		Activity activity = getActivity();
+		return (activity != null ? activity.getActionBar() : null);
 	}
 
 }
