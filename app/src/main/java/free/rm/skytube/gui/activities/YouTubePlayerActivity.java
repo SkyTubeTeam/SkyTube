@@ -11,7 +11,7 @@ import free.rm.skytube.R;
  */
 public class YouTubePlayerActivity extends Activity {
 
-	public static final String VIDEO_ID = "video_id";
+	public static final String YOUTUBE_VIDEO_OBJ = "YouTubePlayerActivity.yt_video_obj";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

@@ -17,12 +17,15 @@
 
 package free.rm.skytube.businessobjects;
 
+import android.util.Log;
+
 import com.google.api.client.util.DateTime;
 import com.google.api.services.youtube.model.Thumbnail;
 import com.google.api.services.youtube.model.Video;
 
 import org.ocpsoft.prettytime.PrettyTime;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.MathContext;
@@ -30,12 +33,14 @@ import java.math.RoundingMode;
 import java.util.Date;
 
 import free.rm.skytube.R;
+import free.rm.skytube.businessobjects.VideoStream.ParseStreamMetaData;
+import free.rm.skytube.businessobjects.VideoStream.StreamMetaDataList;
 import free.rm.skytube.gui.app.SkyTubeApp;
 
 /**
  * Represents a YouTube video.
  */
-public class YouTubeVideo {
+public class YouTubeVideo implements Serializable {
 
 	/** YouTube video ID. */
 	private String	id;
@@ -54,6 +59,8 @@ public class YouTubeVideo {
 	private String	publishDate;
 	/** Thumbnail URL string. */
 	private String	thumbnailUrl;
+
+	private static final String TAG = YouTubeVideo.class.getSimpleName();
 
 
 	public YouTubeVideo(Video video) {
@@ -80,6 +87,29 @@ public class YouTubeVideo {
 											video.getStatistics().getViewCount());
 		}
 	}
+
+
+
+	/**
+	 * Returns a list of video/stream meta-data that is supported by this app (with respect to this
+	 * video).
+	 *
+	 * @return A list of {@link StreamMetaDataList}.
+	 */
+	public StreamMetaDataList  getVideoStreamList() {
+		ParseStreamMetaData ex = new ParseStreamMetaData(id);
+		StreamMetaDataList streamMetaDataList;
+
+		try {
+			streamMetaDataList = ex.getStreamMetaDataList();
+		} catch (Exception e) {
+			Log.e(TAG, "An error has occurred while getting video metadata/streams for video with id=" + id, e);
+			streamMetaDataList = null;
+		}
+
+		return streamMetaDataList;
+	}
+
 
 
 	/**

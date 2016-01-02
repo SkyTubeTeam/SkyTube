@@ -105,7 +105,7 @@ public class GridAdapter extends BaseAdapterEx<YouTubeVideo> {
 
 		if (viewHolder != null) {
 			viewHolder.updateViewsData(get(position));
-			viewHolder.updateVideoId(get(position).getId());
+			viewHolder.updateYouTubeVideo(get(position));
 		}
 
 		// if it reached the bottom of the list, then try to get the next page of videos
@@ -124,11 +124,11 @@ public class GridAdapter extends BaseAdapterEx<YouTubeVideo> {
 					// if the user has selected to play the videos using the official YouTube player
 					// (in the preferences/settings) ...
 					if (useOfficialYouTubePlayer()) {
-						launchOfficialYouTubePlayer(viewHolder.getVideoId());
+						launchOfficialYouTubePlayer(viewHolder.getYouTubeVideo().getId());
 					} else {
 						// else we use the standalone player
 						Intent i = new Intent(getContext(), YouTubePlayerActivity.class);
-						i.putExtra(YouTubePlayerActivity.VIDEO_ID, viewHolder.getVideoId());
+						i.putExtra(YouTubePlayerActivity.YOUTUBE_VIDEO_OBJ, viewHolder.getYouTubeVideo());
 						getContext().startActivity(i);
 					}
 				}
@@ -191,7 +191,7 @@ public class GridAdapter extends BaseAdapterEx<YouTubeVideo> {
 							publishDateTextView;
 		private InternetImageView thumbnailImageView;
 		/** YouTube video ID */
-		private String videoId;
+		private YouTubeVideo youTubeVideo;
 
 		protected ViewHolder(View row) {
 			titleTextView				= (TextView) row.findViewById(R.id.title_text_view);
@@ -204,12 +204,12 @@ public class GridAdapter extends BaseAdapterEx<YouTubeVideo> {
 		}
 
 
-		protected void updateVideoId(String videoId) {
-			this.videoId = videoId;
+		protected void updateYouTubeVideo(YouTubeVideo youTubeVideo) {
+			this.youTubeVideo = youTubeVideo;
 		}
 
-		protected String getVideoId() {
-			return videoId;
+		protected YouTubeVideo getYouTubeVideo() {
+			return youTubeVideo;
 		}
 
 

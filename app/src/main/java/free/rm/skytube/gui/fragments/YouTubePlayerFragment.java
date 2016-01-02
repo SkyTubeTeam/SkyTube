@@ -16,18 +16,20 @@ import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.VideoStream.ParseStreamMetaData;
 import free.rm.skytube.businessobjects.VideoStream.StreamMetaData;
 import free.rm.skytube.businessobjects.VideoStream.StreamMetaDataList;
+import free.rm.skytube.businessobjects.YouTubeVideo;
 import free.rm.skytube.gui.activities.YouTubePlayerActivity;
 import free.rm.skytube.gui.businessobjects.MediaControllerEx;
 
 /**
  * A fragment that holds a standalone YouTube player.
  */
-public class YouTubePlayerFragment extends FragmentEx {
+public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnPreparedListener {
 
-	private String			videoId = null;
-	private VideoView		videoView = null;
-	private MediaController	mediaController = null;
-	private View			voidView = null;
+	private YouTubeVideo		youTubeVideo = null;
+	private VideoView			videoView = null;
+	private MediaControllerEx	mediaController = null;
+	private View				voidView = null;
+	private Handler				timerHandler = null;
 
 	private static final int UI_VISIBILITY_TIMEOUT = 7000;
 	private static final String TAG = YouTubePlayerFragment.class.getSimpleName();
@@ -38,17 +40,12 @@ public class YouTubePlayerFragment extends FragmentEx {
 		// inflate the layout for this fragment
 		View view = inflater.inflate(R.layout.fragment_youtube_player, container, false);
 
-		if (videoId == null) {
-			videoId = getActivity().getIntent().getExtras().getString(YouTubePlayerActivity.VIDEO_ID);
+		if (youTubeVideo == null) {
+			youTubeVideo = (YouTubeVideo) getActivity().getIntent().getExtras().getSerializable(YouTubePlayerActivity.YOUTUBE_VIDEO_OBJ);
 
 			videoView = (VideoView) view.findViewById(R.id.video_view);
 			// play the video once its loaded
-			videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-				public void onPrepared(MediaPlayer mediaPlayer) {
-					showHud();
-					videoView.start();
-				}
-			});
+			videoView.setOnPreparedListener(this);
 
 			// setup the media controller (will control the video playing/pausing)
 			mediaController = new MediaControllerEx(getActivity(), videoView);
@@ -61,12 +58,20 @@ public class YouTubePlayerFragment extends FragmentEx {
 				}
 			});
 
-			hideHud();
+			// hide action bar
+			getActionBar().hide();
 
-			new GetStreamTask(videoId).execute();
+			new GetStreamTask(youTubeVideo).execute();
 		}
 
 		return view;
+	}
+
+
+	@Override
+	public void onPrepared(MediaPlayer mediaPlayer) {
+		videoView.start();
+		showHud();
 	}
 
 
@@ -98,15 +103,16 @@ public class YouTubePlayerFragment extends FragmentEx {
 	private void showHud() {
 		if (!isHudVisible()) {
 			getActionBar().show();
-			getActionBar().setTitle("Xaxaxaxa");
+			getActionBar().setTitle(youTubeVideo.getTitle());
 			mediaController.show(0);
 
 			// hide UI after a certain timeout (defined in UI_VISIBILITY_TIMEOUT)
-			final Handler handler = new Handler();
-			handler.postDelayed(new Runnable() {
+			timerHandler = new Handler();
+			timerHandler.postDelayed(new Runnable() {
 				@Override
 				public void run() {
 					hideHud();
+					timerHandler = null;
 				}
 			}, UI_VISIBILITY_TIMEOUT);
 		}
@@ -121,65 +127,60 @@ public class YouTubePlayerFragment extends FragmentEx {
 		if (isHudVisible()) {
 			getActionBar().hide();
 			mediaController.hide();
+
+			// If there is a timerHandler running, then cancel it (stop if from running).  This way,
+			// if the HUD was hidden on the 5th second, and the user reopens the HUD, this code will
+			// prevent the HUD to re-disappear 2 seconds after it was displayed (assuming that
+			// UI_VISIBILITY_TIMEOUT = 7 seconds).
+			if (timerHandler != null) {
+				timerHandler.removeCallbacksAndMessages(null);
+				timerHandler = null;
+			}
 		}
 	}
 
 
 
 	/**
-	 * Given a video ID, it will asynchronously get a list of streams (supplied by YouTube) and then
-	 * it asks the videoView to start playing a stream.
+	 * Given a YouTubeVideo, it will asynchronously get a list of streams (supplied by YouTube) and
+	 * then it asks the videoView to start playing a stream.
 	 */
 	private class GetStreamTask extends AsyncTask<Void, Exception, StreamMetaDataList> {
 
-		/** Video ID */
-		private String videoId;
+		/** YouTube Video */
+		private YouTubeVideo youTubeVideo;
 
 
-		public GetStreamTask(String videoId) {
-			this.videoId = videoId;
+		public GetStreamTask(YouTubeVideo youTubeVideo) {
+			this.youTubeVideo = youTubeVideo;
 		}
 
 
 		@Override
 		protected StreamMetaDataList doInBackground(Void... param) {
-			ParseStreamMetaData	ex = new ParseStreamMetaData(videoId);
-			StreamMetaDataList 	streamMetaDataList = null;
-
-			try {
-				streamMetaDataList = ex.getStreamMetaDataList();
-			} catch (Exception e) {
-				// inform the user that an exception has been caught
-				publishProgress(e);
-				Log.e(TAG, "An error has occurred while getting video metadata/streams for video with id=" + videoId, e);
-			}
-
-			return streamMetaDataList;
-		}
-
-
-		@Override
-		protected void onProgressUpdate(Exception... exception) {
-			Toast.makeText(YouTubePlayerFragment.this.getActivity(),
-					String.format(getActivity().getString(R.string.error_get_video_streams), videoId),
-					Toast.LENGTH_LONG).show();
+			return youTubeVideo.getVideoStreamList();
 		}
 
 
 		@Override
 		protected void onPostExecute(StreamMetaDataList streamMetaDataList) {
-			if (streamMetaDataList == null  ||  streamMetaDataList.size() <= 0) {
-				String error = String.format(getActivity().getString(R.string.error_video_streams_empty), videoId);
-
+			if (streamMetaDataList == null) {
+				// if the stream list is null, then it means an error has occurred
 				Toast.makeText(YouTubePlayerFragment.this.getActivity(),
-						error,
+						String.format(getActivity().getString(R.string.error_get_video_streams), youTubeVideo.getId()),
 						Toast.LENGTH_LONG).show();
-
+			} else if (streamMetaDataList.size() <= 0) {
+				// if steam list if empty, then it means something went wrong...
+				Toast.makeText(YouTubePlayerFragment.this.getActivity(),
+						String.format(getActivity().getString(R.string.error_video_streams_empty), youTubeVideo.getId()),
+						Toast.LENGTH_LONG).show();
 			} else {
 				Log.i(TAG, streamMetaDataList.toString());
 
-				// TODO get stream based on user preferences!
+				// get the desired stream based on user preferences
 				StreamMetaData desiredStream = streamMetaDataList.getDesiredStream();
+
+				// play the video
 				Log.i(TAG, ">> PLAYING: " + desiredStream);
 				videoView.setVideoURI(desiredStream.getUri());
 			}
