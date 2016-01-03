@@ -1,4 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<color name="gridViewBackground">#222222</color>
+	<color name="skytube_theme_colour">#ff6600</color>
+
+	<color name="grid_view_background">#222222</color>
+
+	<!--
+		Video Player Colours
+	-->
+
+	<!-- Actionbar background colour ~~ which is the same as com.android.internal.R.layout.media_controller
+				(used to be #BB000000) -->
+	<color name="video_player_hud">#CC000000</color>
+	<color name="video_player_drawer_background">@color/video_player_hud</color>
+	<color name="video_player_drawer_text">#b3b3b3</color>
+
+	<color name="video_desc_subscribe_text">#FFF</color>
+	<color name="video_desc_subscribe_background">@color/skytube_theme_colour</color>
+	<color name="video_desc_like_bar">@color/skytube_theme_colour</color>
 </resources>

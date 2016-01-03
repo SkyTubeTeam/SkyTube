@@ -1,5 +1,6 @@
 package free.rm.skytube.gui.fragments;
 
+import android.graphics.PorterDuff;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -8,17 +9,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.MediaController;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
 import free.rm.skytube.R;
-import free.rm.skytube.businessobjects.VideoStream.ParseStreamMetaData;
 import free.rm.skytube.businessobjects.VideoStream.StreamMetaData;
 import free.rm.skytube.businessobjects.VideoStream.StreamMetaDataList;
 import free.rm.skytube.businessobjects.YouTubeVideo;
 import free.rm.skytube.gui.activities.YouTubePlayerActivity;
 import free.rm.skytube.gui.businessobjects.MediaControllerEx;
+import hollowsoft.slidingdrawer.SlidingDrawer;
 
 /**
  * A fragment that holds a standalone YouTube player.
@@ -29,6 +31,10 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 	private VideoView			videoView = null;
 	private MediaControllerEx	mediaController = null;
 	private View				voidView = null;
+
+	private SlidingDrawer		videoDescriptionDrawer = null;
+	private SlidingDrawer		commentsDrawer = null;
+
 	private Handler				timerHandler = null;
 
 	private static final int UI_VISIBILITY_TIMEOUT = 7000;
@@ -57,6 +63,23 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 					showOrHideHud();
 				}
 			});
+
+			videoDescriptionDrawer = (SlidingDrawer) view.findViewById(R.id.des_drawer);
+			((TextView) view.findViewById(R.id.video_desc_title)).setText(youTubeVideo.getTitle());
+			((TextView) view.findViewById(R.id.video_desc_channel)).setText(youTubeVideo.getChannelName());
+			((TextView) view.findViewById(R.id.video_desc_views)).setText(youTubeVideo.getViewsCount());
+
+			if (youTubeVideo.isThumbsUpPercentageSet()) {
+				((TextView) view.findViewById(R.id.video_desc_likes)).setText(youTubeVideo.getLikeCount());
+				((TextView) view.findViewById(R.id.video_desc_dislikes)).setText(youTubeVideo.getDislikeCount());
+				((TextView) view.findViewById(R.id.video_desc_publish_date)).setText(youTubeVideo.getPublishDate());
+
+				ProgressBar likesBar = (ProgressBar) view.findViewById(R.id.video_desc_likes_bar);
+				likesBar.setProgress(youTubeVideo.getThumbsUpPercentage());
+				likesBar.getProgressDrawable().setColorFilter(getResources().getColor(R.color.video_desc_like_bar), PorterDuff.Mode.SRC_IN);
+			}
+
+			commentsDrawer = (SlidingDrawer) view.findViewById(R.id.comments_drawer);
 
 			// hide action bar
 			getActionBar().hide();
@@ -106,6 +129,11 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 			getActionBar().setTitle(youTubeVideo.getTitle());
 			mediaController.show(0);
 
+			videoDescriptionDrawer.close();
+			videoDescriptionDrawer.setVisibility(View.INVISIBLE);
+			commentsDrawer.close();
+			commentsDrawer.setVisibility(View.INVISIBLE);
+
 			// hide UI after a certain timeout (defined in UI_VISIBILITY_TIMEOUT)
 			timerHandler = new Handler();
 			timerHandler.postDelayed(new Runnable() {
@@ -127,6 +155,9 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 		if (isHudVisible()) {
 			getActionBar().hide();
 			mediaController.hide();
+
+			videoDescriptionDrawer.setVisibility(View.VISIBLE);
+			commentsDrawer.setVisibility(View.VISIBLE);
 
 			// If there is a timerHandler running, then cancel it (stop if from running).  This way,
 			// if the HUD was hidden on the 5th second, and the user reopens the HUD, this code will

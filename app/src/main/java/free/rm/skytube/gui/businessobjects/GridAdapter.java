@@ -226,9 +226,9 @@ public class GridAdapter extends BaseAdapterEx<YouTubeVideo> {
 			viewsTextView.setText(video.getViewsCount());
 			thumbnailImageView.setImageAsync(bitmapCache, video.getThumbnailUrl());
 
-			if (video.getThumbsUpPercentage() != null) {
+			if (video.getThumbsUpPercentageStr() != null) {
 				thumbsUpPercentageTextView.setVisibility(View.VISIBLE);
-				thumbsUpPercentageTextView.setText(video.getThumbsUpPercentage());
+				thumbsUpPercentageTextView.setText(video.getThumbsUpPercentageStr());
 			} else {
 				thumbsUpPercentageTextView.setVisibility(View.INVISIBLE);
 			}

@@ -48,8 +48,13 @@ public class YouTubeVideo implements Serializable {
 	private String	title;
 	/** Channel name. */
 	private String	channelName;
+	/** The total number of 'likes'. */
+	private String	likeCount;
+	/** The total number of 'dislikes'. */
+	private String	dislikeCount;
 	/** The percentage of people that thumbs-up this video (format:  "<percentage>%"). */
-	private String	thumbsUpPercentage;
+	private String	thumbsUpPercentageStr;
+	private int		thumbsUpPercentage;
 	/** Video duration string (e.g. "5:15"). */
 	private String	duration;
 	/** Total views count.  This can be <b>null</b> if the video does not allow the user to
@@ -81,10 +86,19 @@ public class YouTubeVideo implements Serializable {
 		}
 
 		if (video.getStatistics() != null) {
-			setThumbsUpPercentage(video.getStatistics().getLikeCount(), video.getStatistics().getDislikeCount());
+			BigInteger	likeCount = video.getStatistics().getLikeCount(),
+						dislikeCount = video.getStatistics().getDislikeCount();
+
+			setThumbsUpPercentage(likeCount, dislikeCount);
 
 			this.viewsCount = String.format(SkyTubeApp.getStr(R.string.views),
 											video.getStatistics().getViewCount());
+
+			if (likeCount != null)
+				this.likeCount = String.format("%,d", video.getStatistics().getLikeCount());
+
+			if (dislikeCount != null)
+				this.dislikeCount = String.format("%,d", video.getStatistics().getDislikeCount());
 		}
 	}
 
@@ -113,14 +127,15 @@ public class YouTubeVideo implements Serializable {
 
 
 	/**
-	 * Sets the {@link #thumbsUpPercentage}, i.e. the percentage of people that thumbs-up this video
+	 * Sets the {@link #thumbsUpPercentageStr}, i.e. the percentage of people that thumbs-up this video
 	 * (format:  "<percentage>%").
 	 *
 	 * @param likedCountInt		Total number of "likes".
 	 * @param dislikedCountInt	Total number of "dislikes".
 	 */
 	private void setThumbsUpPercentage(BigInteger likedCountInt, BigInteger dislikedCountInt) {
-		String percentage = null;
+		String	fullPercentageStr = null;
+		int		percentageInt = -1;
 
 		// some videos do not allow users to like/dislike them:  hence likedCountInt / dislikedCountInt
 		// might be null in those cases
@@ -134,11 +149,14 @@ public class YouTubeVideo implements Serializable {
 				likedPercentage = (likedCount.divide(totalVoteCount, MathContext.DECIMAL128)).multiply(new BigDecimal(100));
 
 				// round the liked percentage to 0 decimal places and convert it to string
-				percentage = likedPercentage.setScale(0, RoundingMode.HALF_UP).toString() + "%";
+				String percentageStr = likedPercentage.setScale(0, RoundingMode.HALF_UP).toString();
+				fullPercentageStr = percentageStr + "%";
+				percentageInt = Integer.parseInt(percentageStr);
 			}
 		}
 
-		this.thumbsUpPercentage = percentage;
+		this.thumbsUpPercentageStr = fullPercentageStr;
+		this.thumbsUpPercentage = percentageInt;
 	}
 
 
@@ -179,11 +197,42 @@ public class YouTubeVideo implements Serializable {
 	}
 
 	/**
-	 * @return The thumbs up percentage.  Can return <b>null</b> if the video does not allow the
-	 * user to like/dislike it.
+	 * @return True if the video allows the users to like/dislike it.
 	 */
-	public String getThumbsUpPercentage() {
+	public boolean isThumbsUpPercentageSet() {
+		return (thumbsUpPercentageStr != null);
+	}
+
+	/**
+	 * @return The thumbs up percentage (as an integer).  Can return <b>-1</b> if the video does not
+	 * allow the users to like/dislike it.  Refer to {@link #isThumbsUpPercentageSet}.
+	 */
+	public int getThumbsUpPercentage() {
 		return thumbsUpPercentage;
+	}
+
+	/**
+	 * @return The thumbs up percentage (format:  "«percentage»%").  Can return <b>null</b> if the
+	 * video does not allow the users to like/dislike it.  Refer to {@link #isThumbsUpPercentageSet}.
+	 */
+	public String getThumbsUpPercentageStr() {
+		return thumbsUpPercentageStr;
+	}
+
+	/**
+	 * @return The total number of 'likes'.  Can return <b>null</b> if the video does not allow the
+	 * users to like/dislike it.  Refer to {@link #isThumbsUpPercentageSet}.
+	 */
+	public String getLikeCount() {
+		return likeCount;
+	}
+
+	/**
+	 * @return The total number of 'dislikes'.  Can return <b>null</b> if the video does not allow the
+	 * users to like/dislike it.  Refer to {@link #isThumbsUpPercentageSet}.
+	 */
+	public String getDislikeCount() {
+		return dislikeCount;
 	}
 
 	public String getDuration() {

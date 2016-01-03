@@ -33,4 +33,6 @@ dependencies {
     // for the stream/video downloader
     compile 'org.jsoup:jsoup:1.8.3'
     compile 'org.mozilla:rhino:1.7.7'
+
+    compile 'com.github.moraisigor:slidingdrawer:1.5.5'
 }

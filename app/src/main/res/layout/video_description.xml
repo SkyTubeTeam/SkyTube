@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			  android:layout_width="match_parent"
+			  android:layout_height="match_parent"
+			  android:orientation="vertical"
+			  android:padding="16dp"
+			  android:background="@color/video_player_drawer_background">
+
+	<TextView
+		android:id="@+id/video_desc_title"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:paddingBottom="10dp"
+		android:textColor="@color/video_player_drawer_text"
+		android:textAppearance="@android:style/TextAppearance.Large"
+		android:text="Title Goes Here!"/>
+
+
+	<LinearLayout
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		android:gravity="top">
+
+		<!--
+			CHANNEL NAME & SUB BUTTON
+		-->
+		<RelativeLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content">
+
+			<TextView
+				android:id="@+id/video_desc_channel"
+				style="@style/VideoDescTextView"
+				android:text="Channel Name"/>
+
+			<TextView
+				android:layout_below="@id/video_desc_channel"
+				style="@style/VideoDescTextView"
+				android:padding="3dp"
+				android:background="@color/video_desc_subscribe_background"
+				android:textColor="@color/video_desc_subscribe_text"
+				android:text="@string/subscribe"/>
+
+		</RelativeLayout>
+
+		<!--
+			UPVOTES / DOWNVOTES
+		-->
+		<RelativeLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:paddingLeft="30dp">
+
+			<TextView
+				android:id="@+id/video_desc_views"
+				style="@style/VideoDescTextView"
+				android:text="17,000,000 views"/>
+
+			<ProgressBar
+				android:id="@+id/video_desc_likes_bar"
+				android:layout_width="150dp"
+				android:layout_height="wrap_content"
+				android:layout_below="@id/video_desc_views"
+				style="?android:attr/progressBarStyleHorizontal"/>
+
+			<TextView
+				android:id="@+id/video_desc_likes"
+				android:layout_below="@id/video_desc_likes_bar"
+				android:drawableLeft="@drawable/ic_thumb_up_white"
+				style="@style/VideoDescTextView"
+				android:text="1,000,000"/>
+
+			<TextView
+				android:id="@+id/video_desc_dislikes"
+				android:layout_below="@id/video_desc_likes_bar"
+				android:layout_toRightOf="@+id/video_desc_likes"
+				android:paddingLeft="15dp"
+				android:drawableLeft="@drawable/ic_thumb_up_white"
+				style="@style/VideoDescTextView"
+				android:text="1,000"/>
+		</RelativeLayout>
+
+	</LinearLayout>
+
+
+	<TextView
+		android:id="@+id/video_desc_publish_date"
+		android:paddingTop="10dp"
+		style="@style/VideoDescTextView"
+		android:text="7 days ago"/>
+
+
+	<TextView
+		android:id="@+id/video_desc_description"
+		android:paddingTop="10dp"
+		style="@style/VideoDescTextView"
+		android:text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."/>
+
+</LinearLayout>

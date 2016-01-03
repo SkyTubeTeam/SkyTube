@@ -37,14 +37,21 @@
 	</style>
 
 	<style name="VideoPlayerActionBarTheme" parent="android:Widget.Holo.Light.ActionBar.Solid.Inverse" >
-		<!-- Actionbar background colour ~~ which is the same as com.android.internal.R.layout.media_controller
-				(used to be #BB000000) -->
-		<item name="android:background">#CC000000</item>
+		<!-- Actionbar background colour -->
+		<item name="android:background">@color/video_player_hud</item>
 
 		<!-- hide app's icon/logo -->
 		<item name="android:icon">@android:color/transparent</item>
 
 		<item name="android:displayOptions">showHome|homeAsUp|showTitle</item>
+	</style>
+
+	<style name="VideoDescTextView" parent="AppTheme">
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:textColor">@color/video_player_drawer_text</item>
+		<item name="android:textSize">12.9sp</item>
+		<item name="android:textAppearance">@android:style/TextAppearance.Small</item>
 	</style>
 
 </resources>
