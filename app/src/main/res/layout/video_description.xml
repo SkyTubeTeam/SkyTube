@@ -68,6 +68,7 @@
 				android:id="@+id/video_desc_likes"
 				android:layout_below="@id/video_desc_likes_bar"
 				android:drawableLeft="@drawable/ic_thumb_up_white"
+				android:drawablePadding="5dp"
 				style="@style/VideoDescTextView"
 				android:text="1,000,000"/>
 
@@ -76,7 +77,8 @@
 				android:layout_below="@id/video_desc_likes_bar"
 				android:layout_toRightOf="@+id/video_desc_likes"
 				android:paddingLeft="15dp"
-				android:drawableLeft="@drawable/ic_thumb_up_white"
+				android:drawableLeft="@drawable/ic_thumb_down_white"
+				android:drawablePadding="5dp"
 				style="@style/VideoDescTextView"
 				android:text="1,000"/>
 		</RelativeLayout>
