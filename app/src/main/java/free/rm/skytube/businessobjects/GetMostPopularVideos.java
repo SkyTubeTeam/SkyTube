@@ -17,130 +17,46 @@
 
 package free.rm.skytube.businessobjects;
 
-import android.content.Context;
 import android.util.Log;
 
-import com.google.api.client.extensions.android.http.AndroidHttp;
-import com.google.api.client.http.HttpTransport;
-import com.google.api.client.json.JsonFactory;
 import com.google.api.client.util.DateTime;
-import com.google.api.services.youtube.YouTube;
-import com.google.api.services.youtube.model.SearchListResponse;
-import com.google.api.services.youtube.model.SearchResult;
-import com.google.api.services.youtube.model.Video;
 
 import java.io.IOException;
 import java.util.Calendar;
-import java.util.List;
-
-import free.rm.skytube.R;
-import free.rm.skytube.gui.app.SkyTubeApp;
 
 /**
  * Get today's most popular YouTube videos.
  */
-public class GetMostPopularVideos extends GetYouTubeVideos {
-
-	private YouTube.Search.List videosList = null;
-	private String nextPageToken = null;
-	private boolean noMoreVideoPages = false;
+public class GetMostPopularVideos extends GetYouTubeVideoBySearch {
 
 	private static final String	TAG = GetMostPopularVideos.class.getSimpleName();
-	private static final Long	MAX_RESULTS = 45L;
-
 
 	@Override
 	public void init() throws IOException {
-		HttpTransport httpTransport = AndroidHttp.newCompatibleTransport();
-		JsonFactory jsonFactory = com.google.api.client.extensions.android.json.AndroidJsonFactory.getDefaultInstance();
-		YouTube youtube = new YouTube.Builder(httpTransport, jsonFactory, null /*timeout here?*/).build();
-
-		videosList = youtube.search().list("id");
-		videosList.setFields("items(id/videoId), nextPageToken");
-		videosList.setKey(SkyTubeApp.getStr(R.string.API_KEY));
-		videosList.setType("video");
-		videosList.setMaxResults(MAX_RESULTS);
-		videosList.setPublishedAfter(getTodaysDate());
+		super.init();
+		videosList.setPublishedAfter(getOneDayBefore());
 		videosList.setOrder("viewCount");
-		nextPageToken = null;
 	}
 
 
 	/**
-	 * Returns today's date whose time is 00:00 (midnight).
+	 * Returns a date that is 24 hours in the past.
 	 *
-	 * @return Today's date
+	 * @return 24 hours ago ({@link DateTime})
 	 */
-	private DateTime getTodaysDate() {
-		String dateRFC3339 = String.format("%d-%02d-%02dT00:00:00Z", Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH)+1, Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
+	private DateTime getOneDayBefore() {
+		Calendar calendar = Calendar.getInstance();
+		calendar.add(Calendar.DAY_OF_MONTH, -1);
+
+		String dateRFC3339 = String.format("%d-%02d-%02dT%02d:%02d:%02dZ",
+												calendar.get(Calendar.YEAR),
+												calendar.get(Calendar.MONTH)+1,
+												calendar.get(Calendar.DAY_OF_MONTH),
+												calendar.get(Calendar.HOUR_OF_DAY),
+												calendar.get(Calendar.MINUTE),
+												calendar.get(Calendar.SECOND));
+		Log.d(TAG, "24 Hours before: " + dateRFC3339);
 		return new DateTime(dateRFC3339);
-	}
-
-
-	@Override
-	public List<YouTubeVideo> getNextVideos() {
-		List<YouTubeVideo> videosList = null;
-
-		if (!noMoreVideoPages()) {
-			try {
-				// set the page token/id to retrieve
-				this.videosList.setPageToken(nextPageToken);
-
-				// communicate with YouTube
-				SearchListResponse searchResponse = this.videosList.execute();
-
-				// get videos
-				List<SearchResult> searchResultList = searchResponse.getItems();
-				if (searchResultList != null) {
-					videosList = getVideosList(searchResultList);
-				}
-
-				// set the next page token
-				nextPageToken = searchResponse.getNextPageToken();
-
-				// if nextPageToken is null, it means that there are no more videos
-				if (nextPageToken == null)
-					noMoreVideoPages = true;
-			} catch (IOException ex) {
-				Log.e(TAG, ex.getLocalizedMessage());
-			}
-		}
-
-		return videosList;
-	}
-
-
-	/**
-	 * YouTube's search functionality (i.e. {@link SearchResult} does not return enough information
-	 * about the YouTube videos.
-	 *
-	 * <p>Hence, we need to submit the video IDs to YouTube to retrieve more information about the
-	 * given video list.</p>
-	 *
-	 * @param searchResultList Search results
-	 * @return List of {@link YouTubeVideo}s.
-	 * @throws IOException
-	 */
-	private List<YouTubeVideo> getVideosList(List<SearchResult> searchResultList) throws IOException {
-		StringBuilder videoIds = new StringBuilder();
-
-		// append the video IDs into a strings (CSV)
-		for (SearchResult res : searchResultList) {
-			videoIds.append(res.getId().getVideoId());
-			videoIds.append(',');
-		}
-
-		// get video details by supplying the videos IDs
-		GetVideosDetailsByIDs getVideo = new GetVideosDetailsByIDs();
-		getVideo.init(videoIds.toString());
-
-		return getVideo.getNextVideos();
-	}
-
-
-	@Override
-	public boolean noMoreVideoPages() {
-		return noMoreVideoPages;
 	}
 
 }

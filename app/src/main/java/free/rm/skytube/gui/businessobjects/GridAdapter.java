@@ -34,6 +34,7 @@ import com.google.android.youtube.player.YouTubeStandalonePlayer;
 import java.io.IOException;
 
 import free.rm.skytube.R;
+import free.rm.skytube.businessobjects.GetYouTubeVideoBySearch;
 import free.rm.skytube.businessobjects.GetYouTubeVideos;
 import free.rm.skytube.businessobjects.GetYouTubeVideosTask;
 import free.rm.skytube.businessobjects.VideoCategory;
@@ -64,10 +65,22 @@ public class GridAdapter extends BaseAdapterEx<YouTubeVideo> {
 	 * Set the video category.  Upon set, the adapter will download the videos of the specified
 	 * category asynchronously.
 	 *
-	 * @param videoCategory	The video category you want to change to.
-	 * @param context		{@link Context} instance.
+	 * @see #setVideoCategory(VideoCategory, String)
 	 */
-	public void setVideoCategory(VideoCategory videoCategory, Context context) {
+	public void setVideoCategory(VideoCategory videoCategory) {
+		setVideoCategory(videoCategory, null);
+	}
+
+
+	/**
+	 * Set the video category.  Upon set, the adapter will download the videos of the specified
+	 * category asynchronously.
+	 *
+	 * @param videoCategory	The video category you want to change to.
+	 * @param searchQuery	The search query.  Should only be set if videoCategory is equal to
+	 *                      SEARCH_QUERY.
+	 */
+	public void setVideoCategory(VideoCategory videoCategory, String searchQuery) {
 		try {
 			Log.i(TAG, videoCategory.toString());
 
@@ -78,12 +91,17 @@ public class GridAdapter extends BaseAdapterEx<YouTubeVideo> {
 			this.getYouTubeVideos = videoCategory.createGetYouTubeVideos();
 			this.getYouTubeVideos.init();
 
+			// set the query
+			if (searchQuery != null  &&  videoCategory == VideoCategory.SEARCH_QUERY) {
+				((GetYouTubeVideoBySearch) getYouTubeVideos).setQueryString(searchQuery);
+			}
+
 			// get the videos from the web asynchronously
 			new GetYouTubeVideosTask(getYouTubeVideos, this).execute();
 		} catch (IOException e) {
 			Log.e(TAG, "Could not init " + videoCategory, e);
-			Toast.makeText(context,
-					String.format(context.getString(R.string.could_not_get_videos), videoCategory.toString()),
+			Toast.makeText(getContext(),
+					String.format(getContext().getString(R.string.could_not_get_videos), videoCategory.toString()),
 					Toast.LENGTH_LONG).show();
 		}
 	}

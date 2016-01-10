@@ -27,10 +27,12 @@ public enum VideoCategory {
 	FEATURED (0),
 
 	/** Most popular videos */
-	MOST_POPULAR (1);
+	MOST_POPULAR (1),
+
+	SEARCH_QUERY (2);
 
 	// *****************
-	// DON'T FORGET to update getVideoCategory() and toGetYouTubeVideos methods...
+	// DON'T FORGET to update getVideoCategory() and createGetYouTubeVideos() methods...
 	// *****************
 
 	private final int id;
@@ -51,7 +53,7 @@ public enum VideoCategory {
 	 * @return A new instance of {@link VideoCategory}.
 	 */
 	public static VideoCategory getVideoCategory(int id) {
-		if (id < FEATURED.id  ||  id > MOST_POPULAR.id) {
+		if (id < FEATURED.id  ||  id > SEARCH_QUERY.id) {
 			Log.e(TAG, "ILLEGAL ID VALUE=" + id);
 			Log.e(TAG, "Do NOT forget to update VideoCategories enum.");
 			id = FEATURED.id;
@@ -72,6 +74,8 @@ public enum VideoCategory {
 			return new GetFeaturedVideos();
 		else if (id == MOST_POPULAR.id)
 			return new GetMostPopularVideos();
+		else if (id == SEARCH_QUERY.id)
+			return new GetYouTubeVideoBySearch();
 
 		return null;
 	}
