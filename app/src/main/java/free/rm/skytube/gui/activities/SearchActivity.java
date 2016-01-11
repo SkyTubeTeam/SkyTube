@@ -17,9 +17,7 @@
 
 package free.rm.skytube.gui.activities;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.view.MenuItem;
 
 import free.rm.skytube.R;
 

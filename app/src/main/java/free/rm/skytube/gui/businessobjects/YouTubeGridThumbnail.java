@@ -47,4 +47,5 @@ public class YouTubeGridThumbnail extends InternetImageView {
 	protected int getDefaultImageResource() {
 		return R.drawable.thumbnail_default;
 	}
+
 }

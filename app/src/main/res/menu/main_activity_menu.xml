@@ -7,7 +7,6 @@
 		  android:actionViewClass="android.widget.SearchView" />
 
 	<item android:id="@+id/menu_preferences"
-		  android:icon="@drawable/ic_menu_settings"
 		  android:title="@string/preferences"
 		  android:showAsAction="never"/>
 </menu>
