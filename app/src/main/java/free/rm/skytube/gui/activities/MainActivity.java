@@ -18,12 +18,8 @@
 package free.rm.skytube.gui.activities;
 
 import android.app.Activity;
-import android.app.SearchManager;
-import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -31,6 +27,9 @@ import android.widget.SearchView;
 
 import free.rm.skytube.R;
 
+/**
+ * Main activity (launcher).  This activity holds {@link free.rm.skytube.gui.fragments.VideosGridFragment}.
+ */
 public class MainActivity extends Activity {
 	
 	@Override
@@ -45,9 +44,9 @@ public class MainActivity extends Activity {
 		inflater.inflate(R.menu.main_activity_menu, menu);
 
 		// associate searchable configuration with the SearchView
-		SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
 		final SearchView searchView = (SearchView) menu.findItem(R.id.menu_search).getActionView();
-		searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+		searchView.setLayoutParams(new SearchView.LayoutParams(SearchView.LayoutParams.MATCH_PARENT, SearchView.LayoutParams.WRAP_CONTENT));
+		searchView.setQueryHint(getString(R.string.search_videos));
 		searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 			@Override
 			public boolean onQueryTextChange(String newText) {
@@ -56,10 +55,18 @@ public class MainActivity extends Activity {
 
 			@Override
 			public boolean onQueryTextSubmit(String query) {
+				// collapse the action-bar's search view
 				searchView.setQuery("", false);
 				searchView.setIconified(true);
 				menu.findItem(R.id.menu_search).collapseActionView();
-				return false;
+
+				// run the search activity
+				Intent i = new Intent(MainActivity.this, SearchActivity.class);
+				i.setAction(Intent.ACTION_SEARCH);
+				i.putExtra(Intent.ACTION_SEARCH, query);
+				startActivity(i);
+
+				return true;
 			}
 		});
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 	<item android:id="@+id/menu_search"
-		  android:title="@string/search"
+		  android:title="@string/search_videos"
 		  android:icon="@drawable/ic_search"
 		  android:showAsAction="collapseActionView|ifRoom"
 		  android:actionViewClass="android.widget.SearchView" />
@@ -9,5 +9,5 @@
 	<item android:id="@+id/menu_preferences"
 		  android:icon="@drawable/ic_menu_settings"
 		  android:title="@string/preferences"
-		  android:showAsAction="ifRoom"/>
+		  android:showAsAction="never"/>
 </menu>

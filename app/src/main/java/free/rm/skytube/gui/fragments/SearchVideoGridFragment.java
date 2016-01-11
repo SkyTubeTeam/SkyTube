@@ -31,7 +31,7 @@ import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.gui.businessobjects.GridAdapter;
 
 /**
- *
+ * Fragment that will hold a list of videos corresponding to the user's query.
  */
 public class SearchVideoGridFragment extends FragmentEx {
 
@@ -66,7 +66,7 @@ public class SearchVideoGridFragment extends FragmentEx {
 		Intent	intent = getActivity().getIntent();
 
 		if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-			searchQuery = intent.getStringExtra(SearchManager.QUERY);
+			searchQuery = intent.getStringExtra(Intent.ACTION_SEARCH);
 			Log.d("SEARCH", "Query=" + searchQuery);
 		}
 
