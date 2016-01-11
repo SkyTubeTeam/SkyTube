@@ -43,7 +43,7 @@ public class MainActivity extends Activity {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.main_activity_menu, menu);
 
-		// associate searchable configuration with the SearchView
+		// setup the SearchView (actionbar)
 		final SearchView searchView = (SearchView) menu.findItem(R.id.menu_search).getActionView();
 		searchView.setLayoutParams(new SearchView.LayoutParams(SearchView.LayoutParams.MATCH_PARENT, SearchView.LayoutParams.WRAP_CONTENT));
 		searchView.setQueryHint(getString(R.string.search_videos));

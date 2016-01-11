@@ -9,7 +9,7 @@ import free.rm.skytube.R;
  * An {@link Activity} that contains an instance of
  * {@link free.rm.skytube.gui.fragments.YouTubePlayerFragment}.
  */
-public class YouTubePlayerActivity extends Activity {
+public class YouTubePlayerActivity extends BackActivity {
 
 	public static final String YOUTUBE_VIDEO_OBJ = "YouTubePlayerActivity.yt_video_obj";
 

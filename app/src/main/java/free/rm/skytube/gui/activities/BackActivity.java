@@ -21,18 +21,30 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import free.rm.skytube.R;
-
 /**
- * Activity that will display videos that meet the search criteria supplied by the user.
- * This activity holds {@link free.rm.skytube.gui.fragments.VideosGridFragment}.
+ * {@link Activity} that enables the action bar's back button by default.
  */
-public class SearchActivity extends BackActivity {
+public class BackActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_search);
+
+		// enable back button (action bar)
+		getActionBar().setDisplayHomeAsUpEnabled(true);
+	}
+
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+			// close this activity when the user clicks on the back button (action bar)
+			case android.R.id.home:
+				finish();
+				return true;
+			default:
+				return super.onOptionsItemSelected(item);
+		}
 	}
 
 }
