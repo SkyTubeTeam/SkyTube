@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<declare-styleable name="InternetImageView">
+		<!-- The default image to be used (before the specified image in setImageAsync() is loaded) -->
+		<attr name="defaultImage" format="reference" />
+	</declare-styleable>
+</resources>

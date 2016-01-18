@@ -15,23 +15,26 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package free.rm.skytube.gui.activities;
+package free.rm.skytube.gui.fragments;
+
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import free.rm.skytube.R;
-import free.rm.skytube.gui.businessobjects.BackActivity;
+import free.rm.skytube.gui.businessobjects.FragmentEx;
 
 /**
- * Activity that will display videos that meet the search criteria supplied by the user.
- * This activity holds {@link free.rm.skytube.gui.fragments.VideosGridFragment}.
+ * A Fragment that displayes information about a channel.
  */
-public class SearchActivity extends BackActivity {
+public class ChannelBrowserFragment extends FragmentEx {
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_search);
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		// Inflate the layout for this fragment
+		return inflater.inflate(R.layout.fragment_channel_browser, container, false);
 	}
 
 }

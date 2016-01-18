@@ -32,6 +32,7 @@ import com.google.android.youtube.player.YouTubeStandalonePlayer;
 
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.YouTubeVideo;
+import free.rm.skytube.gui.activities.ChannelBrowserActivity;
 import free.rm.skytube.gui.activities.YouTubePlayerActivity;
 
 /**
@@ -166,7 +167,9 @@ public class GridViewHolder {
 		View.OnClickListener channelListener = new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Log.d(TAG, "CHANNEL CLICK");
+				Intent i = new Intent(context, ChannelBrowserActivity.class);
+				i.putExtra(ChannelBrowserActivity.CHANNEL_ID, youTubeVideo.getChannelId());
+				context.startActivity(i);
 			}
 		};
 

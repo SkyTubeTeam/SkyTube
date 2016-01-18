@@ -19,6 +19,7 @@ import free.rm.skytube.businessobjects.VideoStream.StreamMetaData;
 import free.rm.skytube.businessobjects.VideoStream.StreamMetaDataList;
 import free.rm.skytube.businessobjects.YouTubeVideo;
 import free.rm.skytube.gui.activities.YouTubePlayerActivity;
+import free.rm.skytube.gui.businessobjects.FragmentEx;
 import free.rm.skytube.gui.businessobjects.MediaControllerEx;
 import hollowsoft.slidingdrawer.SlidingDrawer;
 

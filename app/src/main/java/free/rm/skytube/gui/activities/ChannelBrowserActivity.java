@@ -17,34 +17,19 @@
 
 package free.rm.skytube.gui.activities;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.view.MenuItem;
 
-/**
- * {@link Activity} that enables the action bar's back button by default.
- */
-public class BackActivity extends Activity {
+import free.rm.skytube.R;
+import free.rm.skytube.gui.businessobjects.BackActivity;
+
+public class ChannelBrowserActivity extends BackActivity {
+
+	public static final String CHANNEL_ID = "ChannelBrowserActivity.ChannelID";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
-		// enable back button (action bar)
-		getActionBar().setDisplayHomeAsUpEnabled(true);
-	}
-
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-			// close this activity when the user clicks on the back button (action bar)
-			case android.R.id.home:
-				finish();
-				return true;
-			default:
-				return super.onOptionsItemSelected(item);
-		}
+		setContentView(R.layout.activity_channel_browser);
 	}
 
 }

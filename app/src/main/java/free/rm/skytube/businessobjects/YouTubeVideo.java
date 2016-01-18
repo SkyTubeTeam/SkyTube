@@ -46,6 +46,8 @@ public class YouTubeVideo implements Serializable {
 	private String	id;
 	/** Video title. */
 	private String	title;
+	/** Channel ID. */
+	private String channelId;
 	/** Channel name. */
 	private String	channelName;
 	/** The total number of 'likes'. */
@@ -73,6 +75,7 @@ public class YouTubeVideo implements Serializable {
 
 		if (video.getSnippet() != null) {
 			this.title       = video.getSnippet().getTitle();
+			this.channelId   = video.getSnippet().getChannelId();
 			this.channelName = video.getSnippet().getChannelTitle();
 			setPublishDate(video.getSnippet().getPublishedAt());
 
@@ -190,6 +193,10 @@ public class YouTubeVideo implements Serializable {
 
 	public String getTitle() {
 		return title;
+	}
+
+	public String getChannelId() {
+		return channelId;
 	}
 
 	public String getChannelName() {

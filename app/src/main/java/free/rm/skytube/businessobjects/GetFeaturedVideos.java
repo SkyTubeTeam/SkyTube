@@ -17,7 +17,6 @@
 
 package free.rm.skytube.businessobjects;
 
-import android.content.Context;
 import android.util.Log;
 
 import com.google.api.client.extensions.android.http.AndroidHttp;
@@ -53,7 +52,7 @@ public class GetFeaturedVideos extends GetYouTubeVideos {
 		YouTube			youtube = new YouTube.Builder(httpTransport, jsonFactory, null /*timeout here?*/).build();
 
 		videosList = youtube.videos().list("snippet, statistics, contentDetails");
-		videosList.setFields("items(id, snippet/publishedAt, snippet/title, snippet/channelTitle," +
+		videosList.setFields("items(id, snippet/publishedAt, snippet/title, snippet/channelId, snippet/channelTitle," +
 				"snippet/thumbnails/high, contentDetails/duration, statistics)," +
 				"nextPageToken");
 		videosList.setKey(SkyTubeApp.getStr(R.string.API_KEY));

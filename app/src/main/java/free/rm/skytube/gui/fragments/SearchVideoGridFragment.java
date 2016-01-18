@@ -17,7 +17,6 @@
 
 package free.rm.skytube.gui.fragments;
 
-import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,6 +27,7 @@ import android.widget.GridView;
 
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.VideoCategory;
+import free.rm.skytube.gui.businessobjects.FragmentEx;
 import free.rm.skytube.gui.businessobjects.GridAdapter;
 
 /**

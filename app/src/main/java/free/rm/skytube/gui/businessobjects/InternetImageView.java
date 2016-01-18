@@ -19,6 +19,7 @@ package free.rm.skytube.gui.businessobjects;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -31,40 +32,37 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import free.rm.skytube.R;
+
 /**
- * SkyTube
- * <br>Copyright (C) 2015  Ramon Mifsud</br>
- *
- * <p>This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation (version 3 of the License).
- *
- * <p>This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.</p>
- *
- * <p>You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>
+ * An {@link ImageView} can load images/pictures located on the internet asynchronously.
  */
-public abstract class InternetImageView extends ImageView {
+public class InternetImageView extends ImageView {
 
-	@TargetApi(Build.VERSION_CODES.LOLLIPOP)
-	public InternetImageView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-		super(context, attrs, defStyleAttr, defStyleRes);
-	}
+	/**
+	 * The default image to be used (before the specified image in
+	 * {@link #setImageAsync(BitmapCache, String)} is loaded)
+	 */
+	protected final int defaultImageRes;
 
-	public InternetImageView(Context context, AttributeSet attrs, int defStyleAttr) {
-		super(context, attrs, defStyleAttr);
-	}
 
 	public InternetImageView(Context context, AttributeSet attrs) {
 		super(context, attrs);
+
+		TypedArray a = context.getTheme().obtainStyledAttributes(
+							attrs,
+							R.styleable.InternetImageView,
+							0, 0);
+
+		try {
+			// get the value of "custom:defaultImage" (this holds the drawable resource that will be
+			// used before the proper image is downloaded and loaded)
+			defaultImageRes = a.getResourceId(R.styleable.InternetImageView_defaultImage, 0);
+		} finally {
+			a.recycle();
+		}
 	}
 
-	public InternetImageView(Context context) {
-		super(context);
-	}
 
 	/**
 	 * Set a remote image as the content of this {@link InternetImageView}.
@@ -75,15 +73,6 @@ public abstract class InternetImageView extends ImageView {
 	public void setImageAsync(BitmapCache bitmapCache, String url) {
 		new DownloadImageTask(bitmapCache).execute(url);
 	}
-
-
-	/**
-	 * Returns the default image to be used (before the specified image in {@link #setImageAsync(BitmapCache, String)}
-	 * is loaded).
-	 *
-	 * @return	The image resource (e.g. R.drawable.my_image).
-	 */
-	protected abstract int getDefaultImageResource();
 
 
 	////////////////////////////
@@ -99,7 +88,7 @@ public abstract class InternetImageView extends ImageView {
 
 		@Override
 		protected void onPreExecute() {
-			InternetImageView.this.setImageResource(getDefaultImageResource());
+			InternetImageView.this.setImageResource(defaultImageRes);
 		}
 
 		@Override

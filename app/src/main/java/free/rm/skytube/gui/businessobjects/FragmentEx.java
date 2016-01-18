@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package free.rm.skytube.gui.fragments;
+package free.rm.skytube.gui.businessobjects;
 
 import android.app.ActionBar;
 import android.app.Activity;
