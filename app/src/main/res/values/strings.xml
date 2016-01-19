@@ -9,6 +9,8 @@
 		official YouTube player.  Make sure that the official Google\'s YouTube app is installed on
 		your device.</string>
 
+	<string name="total_subscribers">%,d subscribers</string>
+
 	<!--
 		Holds different videos categories.
 

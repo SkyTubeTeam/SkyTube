@@ -83,8 +83,8 @@ public class GridAdapter extends BaseAdapterEx<YouTubeVideo> {
 			this.getYouTubeVideos.init();
 
 			// set the query
-			if (searchQuery != null  &&  videoCategory == VideoCategory.SEARCH_QUERY) {
-				((GetYouTubeVideoBySearch) getYouTubeVideos).setQueryString(searchQuery);
+			if (searchQuery != null) {
+				getYouTubeVideos.setQuery(searchQuery);
 			}
 
 			// get the videos from the web asynchronously

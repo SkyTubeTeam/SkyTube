@@ -33,7 +33,7 @@ import free.rm.skytube.R;
 import free.rm.skytube.gui.app.SkyTubeApp;
 
 /**
- * Get videos corresponding to the user's query (refer to {@link #setQueryString(String)}).
+ * Get videos corresponding to the user's query (refer to {@link #setQuery(String)}).
  */
 public class GetYouTubeVideoBySearch extends GetYouTubeVideos {
 
@@ -60,7 +60,13 @@ public class GetYouTubeVideoBySearch extends GetYouTubeVideos {
 	}
 
 
-	public void setQueryString(String query) {
+	/**
+	 * Set the user's query.
+	 *
+	 * @param query User's query.
+	 */
+	@Override
+	public void setQuery(String query) {
 		if (videosList != null)
 			videosList.setQ(query);
 	}

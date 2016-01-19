@@ -45,7 +45,7 @@ public class YouTubeChannel {
 
 	private String id;
 	private String title;
-	private String descrption;
+	private String description;
 	private String thumbnailHdUrl;
 	private String thumbnailNormalUrl;
 	private String bannerUrl;
@@ -103,7 +103,7 @@ public class YouTubeChannel {
 		ChannelSnippet snippet = channel.getSnippet();
 		if (snippet != null) {
 			this.title = snippet.getTitle();
-			this.descrption = snippet.getDescription();
+			this.description = snippet.getDescription();
 
 			ThumbnailDetails thumbnail = snippet.getThumbnails();
 			if (thumbnail != null) {
@@ -117,17 +117,23 @@ public class YouTubeChannel {
 			this.bannerUrl = branding.getImage().getBannerTabletHdImageUrl();
 
 		ChannelStatistics statistics = channel.getStatistics();
-		if (statistics != null)
-			this.totalSubscribers = statistics.getSubscriberCount().toString();
+		if (statistics != null) {
+			this.totalSubscribers = String.format(SkyTubeApp.getStr(R.string.total_subscribers),
+																	statistics.getSubscriberCount());
+		}
 	}
 
+
+	public String getId() {
+		return id;
+	}
 
 	public String getTitle() {
 		return title;
 	}
 
-	public String getDescrption() {
-		return descrption;
+	public String getDescription() {
+		return description;
 	}
 
 	public String getThumbnailHdUrl() {

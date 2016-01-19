@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:tools="http://schemas.android.com/tools"
 	xmlns:custom="http://schemas.android.com/apk/res-auto"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
+	android:orientation="vertical"
 	tools:context="free.rm.skytube.gui.activities.ChannelBrowserActivity">
 
 	<RelativeLayout
 		android:layout_width="match_parent"
-		android:layout_height="200dp">
+		android:layout_height="90dp">
 
 		<!-- BANNER IMAGE -->
 		<free.rm.skytube.gui.businessobjects.InternetImageView
+			android:id="@+id/channel_banner_image_view"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
 			android:layout_alignParentTop="true"
@@ -21,15 +23,39 @@
 			android:src="@drawable/banner_default"
 			custom:defaultImage="@drawable/banner_default"/>
 
+		<!-- CHANNEL THUMBNAIL -->
 		<free.rm.skytube.gui.businessobjects.InternetImageView
+			android:id="@+id/channel_thumbnail_image_view"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_alignParentTop="true"
+			android:layout_centerVertical="true"
+			android:padding="16dp"
 			android:scaleType="fitXY"
 			android:adjustViewBounds="true"
 			android:src="@drawable/channel_thumbnail_default"
 			custom:defaultImage="@drawable/channel_thumbnail_default"/>
 
+		<LinearLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_toRightOf="@+id/channel_thumbnail_image_view"
+			android:layout_centerVertical="true"
+			android:padding="16dp"
+			android:orientation="vertical"
+			android:background="#66000000">
+			<TextView
+				android:id="@+id/channel_subs_text_view"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="10,000,000 subscribers"
+				style="@style/ChannelDetailsTextView"/>
+		</LinearLayout>
+
 	</RelativeLayout>
 
-</RelativeLayout>
+	<include
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		layout="@layout/fragment_videos_grid" />
+
+</LinearLayout>

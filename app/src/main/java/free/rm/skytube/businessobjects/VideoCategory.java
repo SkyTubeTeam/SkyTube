@@ -19,6 +19,8 @@ package free.rm.skytube.businessobjects;
 
 import android.util.Log;
 
+import free.rm.skytube.businessobjects.VideoStream.GetChannelVideos;
+
 /**
  * Represents a video category/group.
  */
@@ -29,7 +31,12 @@ public enum VideoCategory {
 	/** Most popular videos */
 	MOST_POPULAR (1),
 
-	SEARCH_QUERY (2);
+	/** Videos related to a search query */
+	SEARCH_QUERY (2),
+
+	/** Videos that are owned by a channel */
+	CHANNEL_VIDEOS (3);
+
 
 	// *****************
 	// DON'T FORGET to update getVideoCategory() and createGetYouTubeVideos() methods...
@@ -53,7 +60,7 @@ public enum VideoCategory {
 	 * @return A new instance of {@link VideoCategory}.
 	 */
 	public static VideoCategory getVideoCategory(int id) {
-		if (id < FEATURED.id  ||  id > SEARCH_QUERY.id) {
+		if (id < FEATURED.id  ||  id > CHANNEL_VIDEOS.id) {
 			Log.e(TAG, "ILLEGAL ID VALUE=" + id);
 			Log.e(TAG, "Do NOT forget to update VideoCategories enum.");
 			id = FEATURED.id;
@@ -76,6 +83,8 @@ public enum VideoCategory {
 			return new GetMostPopularVideos();
 		else if (id == SEARCH_QUERY.id)
 			return new GetYouTubeVideoBySearch();
+		else if (id == CHANNEL_VIDEOS.id)
+			return new GetChannelVideos();
 
 		return null;
 	}

@@ -41,6 +41,13 @@ public abstract class GetYouTubeVideos {
 
 
 	/**
+	 * Sets user's query. [optional]
+	 */
+	public void setQuery(String query) {
+	}
+
+
+	/**
 	 * Gets the next page of videos.
 	 *
 	 * @return List of {@link YouTubeVideo}s.

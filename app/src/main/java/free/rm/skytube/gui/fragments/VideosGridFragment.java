@@ -36,14 +36,16 @@ public class VideosGridFragment extends SearchVideoGridFragment implements Actio
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 
-		ActionBar actionBar = getActivity().getActionBar();
-		SpinnerAdapter spinnerAdapter =
-				ArrayAdapter.createFromResource(actionBar.getThemedContext(), R.array.video_categories,
-												android.R.layout.simple_spinner_dropdown_item);
+		ActionBar actionBar = getActionBar();
+		if (actionBar != null) {
+			SpinnerAdapter spinnerAdapter =
+					ArrayAdapter.createFromResource(actionBar.getThemedContext(), R.array.video_categories,
+							android.R.layout.simple_spinner_dropdown_item);
 
-		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-		actionBar.setDisplayShowTitleEnabled(false);
-		actionBar.setListNavigationCallbacks(spinnerAdapter, this);
+			actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+			actionBar.setDisplayShowTitleEnabled(false);
+			actionBar.setListNavigationCallbacks(spinnerAdapter, this);
+		}
 	}
 
 

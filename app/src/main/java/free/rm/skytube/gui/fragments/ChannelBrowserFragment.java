@@ -18,23 +18,121 @@
 package free.rm.skytube.gui.fragments;
 
 
+import android.app.ActionBar;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
+
+import java.io.IOException;
 
 import free.rm.skytube.R;
+import free.rm.skytube.businessobjects.VideoCategory;
+import free.rm.skytube.businessobjects.YouTubeChannel;
+import free.rm.skytube.businessobjects.YouTubeVideo;
+import free.rm.skytube.gui.activities.ChannelBrowserActivity;
+import free.rm.skytube.gui.businessobjects.BitmapCache;
 import free.rm.skytube.gui.businessobjects.FragmentEx;
+import free.rm.skytube.gui.businessobjects.GridAdapter;
+import free.rm.skytube.gui.businessobjects.InternetImageView;
 
 /**
  * A Fragment that displayes information about a channel.
  */
 public class ChannelBrowserFragment extends FragmentEx {
 
+	private YouTubeChannel	channel = null;
+	private GridView		gridView;
+	private GridAdapter		gridAdapter;
+
+	private InternetImageView	channelThumbnailImage = null;
+	private InternetImageView	channelBannerImage = null;
+	private TextView			channelSubscribersTextView = null;
+	private BitmapCache			bitmapCache = null;
+	private GetChannelInfoTask	task = null;
+
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		// Inflate the layout for this fragment
-		return inflater.inflate(R.layout.fragment_channel_browser, container, false);
+		final String channelId = getActivity().getIntent().getStringExtra(ChannelBrowserActivity.CHANNEL_ID);
+
+		// inflate the layout for this fragment
+		View fragment = inflater.inflate(R.layout.fragment_channel_browser, container, false);
+
+		channelBannerImage = (InternetImageView) fragment.findViewById(R.id.channel_banner_image_view);
+		channelThumbnailImage = (InternetImageView) fragment.findViewById(R.id.channel_thumbnail_image_view);
+		channelSubscribersTextView = (TextView) fragment.findViewById(R.id.channel_subs_text_view);
+
+		if (channel == null) {
+			bitmapCache = new BitmapCache(getActivity());
+
+			if (task == null) {
+				task = new GetChannelInfoTask();
+				task.execute(channelId);
+			}
+		} else {
+			initViews();
+		}
+
+		gridView = (GridView) fragment.findViewById(R.id.grid_view);
+
+		if (gridAdapter == null) {
+			gridAdapter = new GridAdapter(getActivity());
+			gridAdapter.setVideoCategory(VideoCategory.CHANNEL_VIDEOS, channelId);
+		}
+
+		this.gridView.setAdapter(this.gridAdapter);
+
+		return fragment;
+	}
+
+
+	private void initViews() {
+		if (channel != null) {
+			channelThumbnailImage.setImageAsync(bitmapCache, channel.getThumbnailNormalUrl());
+			channelBannerImage.setImageAsync(bitmapCache, channel.getBannerUrl());
+			channelSubscribersTextView.setText(channel.getTotalSubscribers());
+
+			ActionBar actionBar = getActionBar();
+			if (actionBar != null) {
+				actionBar.setTitle(channel.getTitle());
+			}
+		}
+	}
+
+
+	////////////////////////////////////////////////////////////////////////////////////////////////
+
+	private class GetChannelInfoTask extends AsyncTask<String, Void, YouTubeChannel> {
+
+		private final String TAG = GetChannelInfoTask.class.getSimpleName();
+
+		@Override
+		protected YouTubeChannel doInBackground(String... channelId) {
+			YouTubeChannel chn = new YouTubeChannel();
+
+			try {
+				chn.init(channelId[0]);
+			} catch (IOException e) {
+				Log.e(TAG, "Unable to get channel info.  ChannelID=" + channelId[0], e);
+				chn = null;
+			}
+
+			return chn;
+		}
+
+		@Override
+		protected void onPostExecute(YouTubeChannel youTubeChannel) {
+			ChannelBrowserFragment.this.channel = youTubeChannel;
+			initViews();
+		}
+
 	}
 
 }

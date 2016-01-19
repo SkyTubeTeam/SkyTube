@@ -48,11 +48,11 @@ public class SearchVideoGridFragment extends FragmentEx {
 
 		if (gridAdapter == null) {
 			this.gridAdapter = new GridAdapter(getActivity());
-		}
 
-		String searchQuery = getSearchQuery();
-		if (searchQuery != null) {
-			this.gridAdapter.setVideoCategory(VideoCategory.SEARCH_QUERY, searchQuery);
+			String searchQuery = getSearchQuery();
+			if (searchQuery != null) {
+				this.gridAdapter.setVideoCategory(VideoCategory.SEARCH_QUERY, searchQuery);
+			}
 		}
 
 		this.gridView.setAdapter(this.gridAdapter);

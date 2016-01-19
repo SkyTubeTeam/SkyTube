@@ -17,13 +17,11 @@
 
 package free.rm.skytube.gui.businessobjects;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.ImageView;
@@ -65,7 +63,21 @@ public class InternetImageView extends ImageView {
 
 
 	/**
-	 * Set a remote image as the content of this {@link InternetImageView}.
+	 * Set a remote image as the content of this {@link InternetImageView}.  The remote image will
+	 * <b>NOT</b> be stored in bitmapCache.
+	 *
+	 * @param url	URL of the remote image.
+	 *
+	 * @see #setImageAsync(BitmapCache, String)
+	 */
+	public void setImageAsync(String url) {
+		new DownloadImageTask(null).execute(url);
+	}
+
+
+	/**
+	 * Set a remote image as the content of this {@link InternetImageView}.  The remote image will
+	 * be stored in bitmapCache.
 	 *
 	 * @param bitmapCache	Cache were bitmaps will be cached/stored.
 	 * @param url			URL of the remote image.
@@ -96,17 +108,17 @@ public class InternetImageView extends ImageView {
 			String url = param[0];
 
 			// try to get the bitmap from the cache
-			Bitmap bitmap = bitmapCache.get(url);
+			Bitmap bitmap = (bitmapCache != null) ? bitmapCache.get(url) : null;
 
 			// if the bitmap was located in cache...
 			if (bitmap != null) {
 				Log.i(TAG, "Cache hit:  " + url);
-			} else {
+			} else if (url != null) {
 				// bitmap was not located in cache:  therefore download it
 				bitmap = downloadBitmap(url);
 
 				// adds the downloaded image to the cache
-				if (bitmap != null)
+				if (bitmapCache != null  &&  bitmap != null)
 					bitmapCache.add(url, bitmap);
 			}
 

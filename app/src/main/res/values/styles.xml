@@ -5,6 +5,9 @@
 	</style>
 
 	<!-- *************************************************************************************** -->
+	<!--
+		Video Grid
+	-->
 
 	<style name="GridTextView" parent="AppTheme">
 		<item name="android:layout_width">match_parent</item>
@@ -29,6 +32,9 @@
 	</style>
 
 	<!-- *************************************************************************************** -->
+	<!--
+	 	Video Player
+	-->
 
 	<style name="VideoPlayerActivityTheme" parent="AppTheme">
 		<item name="android:windowFullscreen">true</item>
@@ -53,5 +59,17 @@
 		<item name="android:textSize">12.9sp</item>
 		<item name="android:textAppearance">@android:style/TextAppearance.Small</item>
 	</style>
+
+	<!-- *************************************************************************************** -->
+	<!--
+	 	Channel Browser
+	-->
+
+	<style name="ChannelDetailsTextView" parent="AppTheme">
+		<item name="android:textColor">#F5F5F5FF</item>
+		<item name="android:singleLine">true</item>
+		<item name="android:textAppearance">@android:style/TextAppearance.Small</item>
+	</style>
+
 
 </resources>
