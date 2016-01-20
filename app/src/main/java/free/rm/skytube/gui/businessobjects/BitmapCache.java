@@ -70,11 +70,11 @@ public class BitmapCache {
 	/**
 	 * Searches for the bitmap stored in this cache whose ID is equal to bitmapID.
 	 *
-	 * @param bitmapID Bitmap ID
+	 * @param bitmapId Bitmap ID
 	 * @return Bitmap instance if found; null otherwise.
 	 */
-	public synchronized Bitmap get(String bitmapID) {
-		return cache.get(bitmapID);
+	public synchronized Bitmap get(String bitmapId) {
+		return bitmapId != null ? cache.get(bitmapId) : null;
 	}
 
 }

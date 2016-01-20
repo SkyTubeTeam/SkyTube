@@ -17,6 +17,7 @@
 
 package free.rm.skytube.gui.fragments;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -51,7 +52,14 @@ public class SearchVideoGridFragment extends FragmentEx {
 
 			String searchQuery = getSearchQuery();
 			if (searchQuery != null) {
+				// set the video category (if the user wants to search)... otherwise it will be set-
+				// up by the VideoGridFragment
 				this.gridAdapter.setVideoCategory(VideoCategory.SEARCH_QUERY, searchQuery);
+
+				// set the action bar's title
+				ActionBar actionBar = getActionBar();
+				if (actionBar != null)
+					actionBar.setTitle(searchQuery);
 			}
 		}
 
