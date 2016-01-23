@@ -39,8 +39,6 @@ public class GridAdapter extends BaseAdapterEx<YouTubeVideo> {
 
 	/** Class used to get YouTube videos from the web. */
 	private GetYouTubeVideos getYouTubeVideos;
-	/** Cache used to temporary store bitmap instances. */
-	private BitmapCache		bitmapCache;
 
 	private static final String TAG = GridAdapter.class.getSimpleName();
 
@@ -48,7 +46,6 @@ public class GridAdapter extends BaseAdapterEx<YouTubeVideo> {
 	public GridAdapter(Context context) {
 		super(context);
 		getYouTubeVideos = null;
-		bitmapCache = new BitmapCache(context);
 	}
 
 
@@ -113,7 +110,7 @@ public class GridAdapter extends BaseAdapterEx<YouTubeVideo> {
 		}
 
 		if (viewHolder != null) {
-			viewHolder.updateInfo(get(position), getContext(), bitmapCache);
+			viewHolder.updateInfo(get(position), getContext());
 		}
 
 		// if it reached the bottom of the list, then try to get the next page of videos

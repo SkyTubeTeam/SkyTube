@@ -17,39 +17,64 @@
 
 package free.rm.skytube.gui.businessobjects;
 
-import android.app.ActivityManager;
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.LruCache;
 
+/**
+ * A cache that holds {@link Bitmap} instances.
+ */
 public class BitmapCache {
 
 	/** Actual cache. */
 	private LruCache<String, Bitmap> cache;
 
+	private static volatile BitmapCache bitmapCache = null;
 
-	public BitmapCache(Context context) {
-		cache = new LruCache<String, Bitmap>(calculateMaxCacheSize(context)) {
+
+	public synchronized static BitmapCache get() {
+		if (bitmapCache == null) {
+			bitmapCache = new BitmapCache();
+		}
+
+		return bitmapCache;
+	}
+
+
+	private BitmapCache() {
+		cache = new LruCache<String, Bitmap>(getMaxCacheSize()/*5000*/) {
 			@Override
 			protected int sizeOf(String key, Bitmap value) {
-				return value.getByteCount();
+				return (value.getByteCount() / 1024);
+			}
+
+			@Override
+			protected void entryRemoved(boolean evicted, String key, Bitmap oldValue, Bitmap newValue) {
+				super.entryRemoved(evicted, key, oldValue, newValue);
+				System.out.println("Removing: " + key);
+			}
+
+			@Override
+			protected Bitmap create(String key) {
+				System.out.println("Adding:  " + key);
+				return super.create(key);
 			}
 		};
 	}
 
 
 	/**
-	 * Calculated the maximum size (in bytes) this cache is allowed to grow to.
+	 * Calculates/Gets the maximum size (in bytes) this cache is allowed to grow to.
 	 *
-	 * @param context	Context instance.
 	 * @return Maximum cache size in bytes.
 	 */
-	private int calculateMaxCacheSize(Context context) {
+	private int getMaxCacheSize() {
 		// get the approximate memory (in bytes) this app is assigned to
-		final int maxMem = ((ActivityManager)context.getSystemService(Context.ACTIVITY_SERVICE)).getMemoryClass();
+		final int maxMem = (int) Runtime.getRuntime().maxMemory();
 
 		// use 1/8th of the available memory for this memory cache
-		return (maxMem * 1024 * 1024) / 8;
+		int maxCacheMem = (maxMem / 1024) / 8;
+		System.out.println("maxCacheMem:  " + maxCacheMem + "KiB");
+		return maxCacheMem;
 	}
 
 
@@ -60,8 +85,6 @@ public class BitmapCache {
 	 * @param bitmap Bitmap instance.
 	 */
 	public synchronized void add(String bitmapID, Bitmap bitmap) {
-		// TODO:  if bitmap is null, then add a default thumbnail image...
-
 		if (bitmapID != null  &&  bitmap != null)
 			cache.put(bitmapID, bitmap);
 	}

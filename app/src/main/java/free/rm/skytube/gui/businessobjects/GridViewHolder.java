@@ -71,10 +71,10 @@ public class GridViewHolder {
 	 *
 	 * @param youTubeVideo	{@link YouTubeVideo} instance.
 	 */
-	protected void updateInfo(YouTubeVideo youTubeVideo, Context context, BitmapCache bitmapCache) {
+	protected void updateInfo(YouTubeVideo youTubeVideo, Context context) {
 		this.youTubeVideo = youTubeVideo;
 		this.context = context;
-		updateViewsData(this.youTubeVideo, bitmapCache);
+		updateViewsData(this.youTubeVideo);
 	}
 
 
@@ -83,13 +83,13 @@ public class GridViewHolder {
 	 *
 	 * @param video {@link YouTubeVideo} instance.
 	 */
-	private void updateViewsData(YouTubeVideo video, BitmapCache bitmapCache) {
+	private void updateViewsData(YouTubeVideo video) {
 		titleTextView.setText(video.getTitle());
 		channelTextView.setText(video.getChannelName());
 		publishDateTextView.setText(video.getPublishDate());
 		videoDurationTextView.setText(video.getDuration());
 		viewsTextView.setText(video.getViewsCount());
-		thumbnailImageView.setImageAsync(bitmapCache, video.getThumbnailUrl());
+		thumbnailImageView.setImageAsync(video.getThumbnailUrl());
 
 		if (video.getThumbsUpPercentageStr() != null) {
 			thumbsUpPercentageTextView.setVisibility(View.VISIBLE);

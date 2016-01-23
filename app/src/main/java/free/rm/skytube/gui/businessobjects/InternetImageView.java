@@ -39,7 +39,7 @@ public class InternetImageView extends ImageView {
 
 	/**
 	 * The default image to be used (before the specified image in
-	 * {@link #setImageAsync(BitmapCache, String)} is loaded)
+	 * {@link #setImageAsync(String)} is loaded)
 	 */
 	protected final int defaultImageRes;
 
@@ -64,26 +64,12 @@ public class InternetImageView extends ImageView {
 
 	/**
 	 * Set a remote image as the content of this {@link InternetImageView}.  The remote image will
-	 * <b>NOT</b> be stored in bitmapCache.
-	 *
-	 * @param url	URL of the remote image.
-	 *
-	 * @see #setImageAsync(BitmapCache, String)
-	 */
-	public void setImageAsync(String url) {
-		new DownloadImageTask(null).execute(url);
-	}
-
-
-	/**
-	 * Set a remote image as the content of this {@link InternetImageView}.  The remote image will
 	 * be stored in bitmapCache.
 	 *
-	 * @param bitmapCache	Cache were bitmaps will be cached/stored.
-	 * @param url			URL of the remote image.
+	 * @param url	URL of the remote image.
 	 */
-	public void setImageAsync(BitmapCache bitmapCache, String url) {
-		new DownloadImageTask(bitmapCache).execute(url);
+	public void setImageAsync(String url) {
+		new DownloadImageTask().execute(url);
 	}
 
 
@@ -91,12 +77,7 @@ public class InternetImageView extends ImageView {
 
 	protected class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
 
-		private BitmapCache bitmapCache;
 		private static final String TAG = "DownloadImageTask";
-
-		public DownloadImageTask(BitmapCache bitmapCache) {
-			this.bitmapCache = bitmapCache;
-		}
 
 		@Override
 		protected void onPreExecute() {
@@ -105,6 +86,7 @@ public class InternetImageView extends ImageView {
 
 		@Override
 		protected Bitmap doInBackground(String... param) {
+			BitmapCache bitmapCache = BitmapCache.get();
 			String url = param[0];
 
 			// try to get the bitmap from the cache

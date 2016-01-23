@@ -28,22 +28,18 @@ import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.io.IOException;
 
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.businessobjects.YouTubeChannel;
-import free.rm.skytube.businessobjects.YouTubeVideo;
 import free.rm.skytube.gui.activities.ChannelBrowserActivity;
-import free.rm.skytube.gui.businessobjects.BitmapCache;
 import free.rm.skytube.gui.businessobjects.FragmentEx;
 import free.rm.skytube.gui.businessobjects.GridAdapter;
 import free.rm.skytube.gui.businessobjects.InternetImageView;
 
 /**
- * A Fragment that displayes information about a channel.
+ * A Fragment that displays information about a channel.
  */
 public class ChannelBrowserFragment extends FragmentEx {
 
@@ -54,7 +50,6 @@ public class ChannelBrowserFragment extends FragmentEx {
 	private InternetImageView	channelThumbnailImage = null;
 	private InternetImageView	channelBannerImage = null;
 	private TextView			channelSubscribersTextView = null;
-	private BitmapCache			bitmapCache = null;
 	private GetChannelInfoTask	task = null;
 
 
@@ -70,8 +65,6 @@ public class ChannelBrowserFragment extends FragmentEx {
 		channelSubscribersTextView = (TextView) fragment.findViewById(R.id.channel_subs_text_view);
 
 		if (channel == null) {
-			bitmapCache = new BitmapCache(getActivity());
-
 			if (task == null) {
 				task = new GetChannelInfoTask();
 				task.execute(channelId);
@@ -95,8 +88,8 @@ public class ChannelBrowserFragment extends FragmentEx {
 
 	private void initViews() {
 		if (channel != null) {
-			channelThumbnailImage.setImageAsync(bitmapCache, channel.getThumbnailNormalUrl());
-			channelBannerImage.setImageAsync(bitmapCache, channel.getBannerUrl());
+			channelThumbnailImage.setImageAsync(channel.getThumbnailNormalUrl());
+			channelBannerImage.setImageAsync(channel.getBannerUrl());
 			channelSubscribersTextView.setText(channel.getTotalSubscribers());
 
 			ActionBar actionBar = getActionBar();
