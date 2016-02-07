@@ -79,9 +79,11 @@ public class YouTubeVideo implements Serializable {
 			this.channelName = video.getSnippet().getChannelTitle();
 			setPublishDate(video.getSnippet().getPublishedAt());
 
-			Thumbnail thumbnail = video.getSnippet().getThumbnails().getHigh();
-			if (thumbnail != null)
-				this.thumbnailUrl = thumbnail.getUrl();
+			if (video.getSnippet().getThumbnails() != null) {
+				Thumbnail thumbnail = video.getSnippet().getThumbnails().getHigh();
+				if (thumbnail != null)
+					this.thumbnailUrl = thumbnail.getUrl();
+			}
 		}
 
 		if (video.getContentDetails() != null) {
@@ -180,10 +182,13 @@ public class YouTubeVideo implements Serializable {
 	 * @param publishDateTime {@link DateTime} of when the video was published.
 	 */
 	private void setPublishDate(DateTime publishDateTime) {
-		Long unixEpoch   = publishDateTime.getValue();
-		Date publishDate = new Date(unixEpoch);
-
-		this.publishDate = new PrettyTime().format(publishDate);
+		if (publishDateTime != null) {
+			Long unixEpoch = publishDateTime.getValue();
+			Date publishDate = new Date(unixEpoch);
+			this.publishDate = new PrettyTime().format(publishDate);
+		} else {
+			this.publishDate = "???";
+		}
 	}
 
 

@@ -2,6 +2,21 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
 	<!--
+		Skytube
+	 -->
+	<PreferenceCategory
+		android:title="@string/pref_skytube_category"
+		android:key="pref_key_skytube">
+		<ListPreference
+			android:key="@string/pref_key_preferred_region"
+			android:title="@string/pref_title_preferred_regions"
+			android:summary="@string/pref_summary_preferred_regions"
+			android:entries="@array/country_names"
+			android:entryValues="@array/country_codes"
+			android:defaultValue=""/>
+	</PreferenceCategory>
+
+	<!--
 		Video Player Category
 	 -->
 	<PreferenceCategory

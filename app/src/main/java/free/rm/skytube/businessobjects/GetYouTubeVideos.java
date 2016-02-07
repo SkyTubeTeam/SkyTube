@@ -17,13 +17,14 @@
 
 package free.rm.skytube.businessobjects;
 
-import android.content.Context;
-
 import com.google.api.services.youtube.model.Video;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import free.rm.skytube.R;
+import free.rm.skytube.gui.app.SkyTubeApp;
 
 /**
  * Returns a list of YouTube videos.
@@ -59,6 +60,13 @@ public abstract class GetYouTubeVideos {
 	 * @return True if YouTube states that there will be no more video pages; false otherwise.
 	 */
 	public abstract boolean noMoreVideoPages();
+
+
+	protected String getPreferredRegion() {
+		String region = SkyTubeApp.getPreferenceManager()
+							.getString(SkyTubeApp.getStr(R.string.pref_key_preferred_region), "").trim();
+		return (region.isEmpty() ? null : region);
+	}
 
 
 	/**

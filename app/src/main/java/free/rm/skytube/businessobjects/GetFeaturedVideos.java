@@ -57,6 +57,7 @@ public class GetFeaturedVideos extends GetYouTubeVideos {
 				"nextPageToken");
 		videosList.setKey(SkyTubeApp.getStr(R.string.API_KEY));
 		videosList.setChart("mostPopular");
+		videosList.setRegionCode(getPreferredRegion());
 		videosList.setMaxResults(MAX_RESULTS);
 		nextPageToken = null;
 	}
