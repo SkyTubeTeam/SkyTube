@@ -12,6 +12,25 @@
 			   android:layout_gravity="center"
 			   android:focusable="false"/>
 
+	<!-- Progress bar that will be displayed before a video is loaded -->
+	<LinearLayout
+		android:id="@+id/loadingVideoView"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:layout_gravity="center">
+		<ProgressBar
+			android:layout_gravity="center_horizontal"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"/>
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/loading_video"
+			android:textColor="#b3b3b3"/>
+	</LinearLayout>
+
+	<!-- A view that will display/hides the HUD -->
 	<View android:id="@+id/void_view"
 			   android:layout_width="match_parent"
 			   android:layout_height="match_parent"

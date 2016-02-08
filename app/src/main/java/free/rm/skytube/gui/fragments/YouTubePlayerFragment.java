@@ -32,6 +32,7 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 	private VideoView			videoView = null;
 	private MediaControllerEx	mediaController = null;
 	private View				voidView = null;
+	private View				loadingVideoView = null;
 
 	private SlidingDrawer		videoDescriptionDrawer = null;
 	private SlidingDrawer		commentsDrawer = null;
@@ -49,6 +50,8 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 
 		if (youTubeVideo == null) {
 			youTubeVideo = (YouTubeVideo) getActivity().getIntent().getExtras().getSerializable(YouTubePlayerActivity.YOUTUBE_VIDEO_OBJ);
+
+			loadingVideoView = view.findViewById(R.id.loadingVideoView);
 
 			videoView = (VideoView) view.findViewById(R.id.video_view);
 			// play the video once its loaded
@@ -94,6 +97,7 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 
 	@Override
 	public void onPrepared(MediaPlayer mediaPlayer) {
+		loadingVideoView.setVisibility(View.GONE);
 		videoView.start();
 		showHud();
 	}

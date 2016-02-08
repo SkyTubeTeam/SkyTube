@@ -3,5 +3,6 @@
 	<string name="error_get_video_streams">An error has occurred while getting video streams for video %s</string>
 	<string name="error_video_streams_empty">The video %s has no streams!</string>
 
+	<string name="loading_video">Loading video…</string>
 	<string name="subscribe">Subscribe</string>
 </resources>
