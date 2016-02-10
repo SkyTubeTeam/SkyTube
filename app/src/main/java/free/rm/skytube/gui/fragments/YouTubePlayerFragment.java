@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
@@ -47,6 +50,9 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		// inflate the layout for this fragment
 		View view = inflater.inflate(R.layout.fragment_youtube_player, container, false);
+
+		// indicate that this fragment has a action bar menu
+		setHasOptionsMenu(true);
 
 		if (youTubeVideo == null) {
 			youTubeVideo = (YouTubeVideo) getActivity().getIntent().getExtras().getSerializable(YouTubePlayerActivity.YOUTUBE_VIDEO_OBJ);
@@ -176,6 +182,22 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 	}
 
 
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		inflater.inflate(R.menu.menu_youtube_player, menu);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+			case R.id.menu_reload_video:
+				new GetStreamTask(youTubeVideo, true).execute();
+				return true;
+			default:
+				return super.onOptionsItemSelected(item);
+		}
+	}
+
 
 	/**
 	 * Given a YouTubeVideo, it will asynchronously get a list of streams (supplied by YouTube) and
@@ -184,11 +206,34 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 	private class GetStreamTask extends AsyncTask<Void, Exception, StreamMetaDataList> {
 
 		/** YouTube Video */
-		private YouTubeVideo youTubeVideo;
+		private YouTubeVideo	youTubeVideo;
+		/** The current video position (i.e. time).  Set to -1 if we are not interested in reloading
+		 *  the video. */
+		private	int				currentVideoPosition = -1;
 
 
 		public GetStreamTask(YouTubeVideo youTubeVideo) {
+			this(youTubeVideo, false);
+		}
+
+		/**
+		 * Returns a stream for the given video.  If reloadVideo is set to true, then it will stop
+		 * the current video, get a NEW stream and then resume playing.
+		 *
+		 * @param youTubeVideo	YouTube video
+		 * @param reloadVideo	Set to true to reload a video
+		 */
+		public GetStreamTask(YouTubeVideo youTubeVideo, boolean reloadVideo) {
 			this.youTubeVideo = youTubeVideo;
+
+			if (reloadVideo) {
+				boolean isVideoPlaying = videoView.isPlaying();
+
+				videoView.pause();
+				this.currentVideoPosition = isVideoPlaying ? videoView.getCurrentPosition() : 0;
+				videoView.stopPlayback();
+				loadingVideoView.setVisibility(View.VISIBLE);
+			}
 		}
 
 
@@ -219,6 +264,11 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 				// play the video
 				Log.i(TAG, ">> PLAYING: " + desiredStream);
 				videoView.setVideoURI(desiredStream.getUri());
+
+				// if we are reloading a video... then seek the correct position
+				if (currentVideoPosition >= 0) {
+					videoView.seekTo(currentVideoPosition);
+				}
 			}
 		}
 	}
