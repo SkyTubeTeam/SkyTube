@@ -5,8 +5,8 @@
 		Skytube
 	 -->
 	<PreferenceCategory
-		android:title="@string/pref_skytube_category"
-		android:key="pref_key_skytube">
+		android:title="@string/pref_languages_category"
+		android:key="pref_key_languages">
 		<ListPreference
 			android:key="@string/pref_key_preferred_region"
 			android:title="@string/pref_title_preferred_regions"
@@ -14,6 +14,14 @@
 			android:entries="@array/country_names"
 			android:entryValues="@array/country_codes"
 			android:defaultValue=""/>
+
+		<MultiSelectListPreference
+			android:key="@string/pref_key_preferred_languages"
+			android:title="@string/pref_title_preferred_languages"
+			android:summary="@string/pref_summary_preferred_languages"
+			android:entries="@array/languages_names"
+			android:entryValues="@array/languages_codes"
+			android:defaultValue="@array/default_language"/>
 	</PreferenceCategory>
 
 	<!--

@@ -30,7 +30,10 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.MathContext;
 import java.math.RoundingMode;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.VideoStream.ParseStreamMetaData;
@@ -66,6 +69,10 @@ public class YouTubeVideo implements Serializable {
 	private String	publishDate;
 	/** Thumbnail URL string. */
 	private String	thumbnailUrl;
+	/** The language of this video.  (This tends to be ISO 639-1).  */
+	private String	language;
+
+	private static final Set<String> defaultPrefLanguages = new HashSet<>(Arrays.asList(SkyTubeApp.getStr(R.string.lang_en)));
 
 	private static final String TAG = YouTubeVideo.class.getSimpleName();
 
@@ -84,6 +91,9 @@ public class YouTubeVideo implements Serializable {
 				if (thumbnail != null)
 					this.thumbnailUrl = thumbnail.getUrl();
 			}
+
+			this.language = video.getSnippet().getDefaultAudioLanguage() != null ? video.getSnippet().getDefaultAudioLanguage()
+					: (video.getSnippet().getDefaultLanguage() != null ? video.getSnippet().getDefaultLanguage() : null);
 		}
 
 		if (video.getContentDetails() != null) {
@@ -261,6 +271,47 @@ public class YouTubeVideo implements Serializable {
 
 	public String getThumbnailUrl() {
 		return thumbnailUrl;
+	}
+
+	public String getLanguage() {
+		return language;
+	}
+
+
+	/**
+	 * Return true if this video does not meet the preferred language criteria;  false otherwise.
+	 * Many YouTube videos do not set the language, hence this method will not be accurate.
+	 *
+	 * @return  True to filter out the video; false otherwise.
+	 */
+	public boolean filterVideoByLanguage() {
+		Set<String> preferredLanguages = getPreferredLanguages();
+
+		// if the video's language is not defined (i.e. null)
+		//    OR if there is no linguistic content to the video (zxx)
+		//    OR if the language is undefined (und)
+		// then we are NOT going to filter this video
+		if (getLanguage() == null  ||  getLanguage().equalsIgnoreCase("zxx")  ||  getLanguage().equalsIgnoreCase("und"))
+			return false;
+
+		// if there are no preferred languages, then it means we must not filter this video
+		if (preferredLanguages.isEmpty())
+			return false;
+
+		// if this video's language is equal to the user's preferred one... then do NOT filter it out
+		for (String prefLanguage : preferredLanguages) {
+			if (getLanguage().matches(prefLanguage))
+				return false;
+		}
+
+		// this video is undesirable, hence we are going to filter it
+		Log.i("FILTERING Video", getTitle() + "[" + getLanguage() + "]");
+		return true;
+	}
+
+
+	private Set<String> getPreferredLanguages() {
+		return SkyTubeApp.getPreferenceManager().getStringSet(SkyTubeApp.getStr(R.string.pref_key_preferred_languages), defaultPrefLanguages);
 	}
 
 }

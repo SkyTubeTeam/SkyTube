@@ -62,13 +62,6 @@ public abstract class GetYouTubeVideos {
 	public abstract boolean noMoreVideoPages();
 
 
-	protected String getPreferredRegion() {
-		String region = SkyTubeApp.getPreferenceManager()
-							.getString(SkyTubeApp.getStr(R.string.pref_key_preferred_region), "").trim();
-		return (region.isEmpty() ? null : region);
-	}
-
-
 	/**
 	 * Converts {@link List} of {@link Video} to {@link List} of {@link YouTubeVideo}.
 	 *
@@ -79,12 +72,23 @@ public abstract class GetYouTubeVideos {
 		List<YouTubeVideo> youTubeVideoList = new ArrayList<>();
 
 		if (videoList != null) {
+			YouTubeVideo youTubeVideo;
+
 			for (Video video : videoList) {
-				youTubeVideoList.add(new YouTubeVideo(video));
+				youTubeVideo = new YouTubeVideo(video);
+				if (!youTubeVideo.filterVideoByLanguage())
+					youTubeVideoList.add(youTubeVideo);
 			}
 		}
 
 		return youTubeVideoList;
+	}
+
+
+	protected String getPreferredRegion() {
+		String region = SkyTubeApp.getPreferenceManager()
+				.getString(SkyTubeApp.getStr(R.string.pref_key_preferred_region), "").trim();
+		return (region.isEmpty() ? null : region);
 	}
 
 }
