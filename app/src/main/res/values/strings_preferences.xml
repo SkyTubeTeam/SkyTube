@@ -58,15 +58,15 @@
 	<string name="lang_en">en(?:-.*)?</string>	<!-- Regex that will match "en", "en-GB", ...etc -->
 
 	<string-array name="languages_codes">
-		<item>zh</item>
+		<item>zh(?:-.*)?</item>
 		<item>@string/lang_en</item>
-		<item>fr</item>
-		<item>de</item>
-		<item>it</item>
-		<item>ja</item>
-		<item>pt</item>
-		<item>ru</item>
-		<item>es</item>
+		<item>fr(?:-.*)?</item>
+		<item>de(?:-.*)?</item>
+		<item>it(?:-.*)?</item>
+		<item>ja(?:-.*)?</item>
+		<item>pt(?:-.*)?</item>
+		<item>ru(?:-.*)?</item>
+		<item>es(?:-.*)?</item>		<!-- e.g. "es-419" -->
 	</string-array>
 
 	<string-array name="default_language">
