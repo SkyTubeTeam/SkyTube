@@ -4,4 +4,8 @@
 		  android:title="@string/reload_video"
 		  android:icon="@drawable/ic_menu_reload_video"
 		  android:showAsAction="ifRoom"/>
+
+	<item android:id="@+id/menu_open_video_in_browser"
+		  android:title="@string/open_in_browser"
+		  android:showAsAction="never"/>
 </menu>

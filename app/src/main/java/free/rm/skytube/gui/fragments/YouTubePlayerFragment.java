@@ -1,7 +1,9 @@
 package free.rm.skytube.gui.fragments;
 
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -192,6 +194,11 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 		switch (item.getItemId()) {
 			case R.id.menu_reload_video:
 				new GetStreamTask(youTubeVideo, true).execute();
+				return true;
+			case R.id.menu_open_video_in_browser:
+				Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v="+youTubeVideo.getId()));
+				startActivity(browserIntent);
+				videoView.pause();
 				return true;
 			default:
 				return super.onOptionsItemSelected(item);
