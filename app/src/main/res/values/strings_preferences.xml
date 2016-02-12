@@ -5,11 +5,11 @@
 	<string name="pref_languages_category">Languages &amp; Regions</string>
 	<string name="pref_title_preferred_regions">Preferred Region</string>
 	<string name="pref_key_preferred_region">pref_key_preferred_region</string>
-	<string name="pref_summary_preferred_regions">Select preferred region.  This is used to filter out videos in the Featured videos category.</string>
+	<string name="pref_summary_preferred_regions">Select a preferred region.  This is used to filter out videos in the Featured videos category.</string>
 
-	<string name="pref_title_preferred_languages">Preferred Languages(s)</string>
+	<string name="pref_title_preferred_languages">Preferred Language(s)</string>
 	<string name="pref_key_preferred_languages">pref_key_preferred_languages</string>
-	<string name="pref_summary_preferred_languages">EXPERIMENTAL:  Select preferred languages(s).  This is used to filter out videos in the Most Popular video category and for video searches.</string>
+	<string name="pref_summary_preferred_languages">EXPERIMENTAL:  Select one or more preferred languages.  This is used to filter out videos in the Most Popular video category and for video searches.</string>
 
 	<string name="pref_video_player_category">Video Player</string>
 	<string name="pref_title_preferred_res">Preferred Resolution</string>
@@ -74,508 +74,186 @@
 	</string-array>
 
 	<string-array name="country_names">
-		<item>INTERNATIONAL</item>
-		<item>AFGHANISTAN</item>
-		<item>ÅLAND ISLANDS</item>
-		<item>ALBANIA</item>
-		<item>ALGERIA</item>
-		<item>AMERICAN SAMOA</item>
-		<item>ANDORRA</item>
-		<item>ANGOLA</item>
-		<item>ANGUILLA</item>
-		<item>ANTARCTICA</item>
-		<item>ANTIGUA AND BARBUDA</item>
-		<item>ARGENTINA</item>
-		<item>ARMENIA</item>
-		<item>ARUBA</item>
-		<item>AUSTRALIA</item>
-		<item>AUSTRIA</item>
-		<item>AZERBAIJAN</item>
-		<item>BAHAMAS</item>
-		<item>BAHRAIN</item>
-		<item>BANGLADESH</item>
-		<item>BARBADOS</item>
-		<item>BELARUS</item>
-		<item>BELGIUM</item>
-		<item>BELIZE</item>
-		<item>BENIN</item>
-		<item>BERMUDA</item>
-		<item>BHUTAN</item>
-		<item>BOLIVIA, PLURINATIONAL STATE OF</item>
-		<item>BONAIRE, SINT EUSTATIUS AND SABA</item>
-		<item>BOSNIA AND HERZEGOVINA</item>
-		<item>BOTSWANA</item>
-		<item>BOUVET ISLAND</item>
-		<item>BRAZIL</item>
-		<item>BRITISH INDIAN OCEAN TERRITORY</item>
-		<item>BRUNEI DARUSSALAM</item>
-		<item>BULGARIA</item>
-		<item>BURKINA FASO</item>
-		<item>BURUNDI</item>
-		<item>CAMBODIA</item>
-		<item>CAMEROON</item>
-		<item>CANADA</item>
-		<item>CAPE VERDE</item>
-		<item>CAYMAN ISLANDS</item>
-		<item>CENTRAL AFRICAN REPUBLIC</item>
-		<item>CHAD</item>
-		<item>CHILE</item>
-		<item>CHINA</item>
-		<item>CHRISTMAS ISLAND</item>
-		<item>COCOS (KEELING) ISLANDS</item>
-		<item>COLOMBIA</item>
-		<item>COMOROS</item>
-		<item>CONGO</item>
-		<item>CONGO, THE DEMOCRATIC REPUBLIC OF THE</item>
-		<item>COOK ISLANDS</item>
-		<item>COSTA RICA</item>
-		<item>CÔTE D\'IVOIRE</item>
-		<item>CROATIA</item>
-		<item>CUBA</item>
-		<item>CURAÇAO</item>
-		<item>CYPRUS</item>
-		<item>CZECH REPUBLIC</item>
-		<item>DENMARK</item>
-		<item>DJIBOUTI</item>
-		<item>DOMINICA</item>
-		<item>DOMINICAN REPUBLIC</item>
-		<item>ECUADOR</item>
-		<item>EGYPT</item>
-		<item>EL SALVADOR</item>
-		<item>EQUATORIAL GUINEA</item>
-		<item>ERITREA</item>
-		<item>ESTONIA</item>
-		<item>ETHIOPIA</item>
-		<item>FALKLAND ISLANDS (MALVINAS)</item>
-		<item>FAROE ISLANDS</item>
-		<item>FIJI</item>
-		<item>FINLAND</item>
-		<item>FRANCE</item>
-		<item>FRENCH GUIANA</item>
-		<item>FRENCH POLYNESIA</item>
-		<item>FRENCH SOUTHERN TERRITORIES</item>
-		<item>GABON</item>
-		<item>GAMBIA</item>
-		<item>GEORGIA</item>
-		<item>GERMANY</item>
-		<item>GHANA</item>
-		<item>GIBRALTAR</item>
-		<item>GREECE</item>
-		<item>GREENLAND</item>
-		<item>GRENADA</item>
-		<item>GUADELOUPE</item>
-		<item>GUAM</item>
-		<item>GUATEMALA</item>
-		<item>GUERNSEY</item>
-		<item>GUINEA</item>
-		<item>GUINEA-BISSAU</item>
-		<item>GUYANA</item>
-		<item>HAITI</item>
-		<item>HEARD ISLAND AND MCDONALD ISLANDS</item>
-		<item>HOLY SEE (VATICAN CITY STATE)</item>
-		<item>HONDURAS</item>
-		<item>HONG KONG</item>
-		<item>HUNGARY</item>
-		<item>ICELAND</item>
-		<item>INDIA</item>
-		<item>INDONESIA</item>
-		<item>IRAN, ISLAMIC REPUBLIC OF</item>
-		<item>IRAQ</item>
-		<item>IRELAND</item>
-		<item>ISLE OF MAN</item>
-		<item>ISRAEL</item>
-		<item>ITALY</item>
-		<item>JAMAICA</item>
-		<item>JAPAN</item>
-		<item>JERSEY</item>
-		<item>JORDAN</item>
-		<item>KAZAKHSTAN</item>
-		<item>KENYA</item>
-		<item>KIRIBATI</item>
-		<item>KOREA, DEMOCRATIC PEOPLE\'S REPUBLIC OF</item>
-		<item>KOREA, REPUBLIC OF</item>
-		<item>KUWAIT</item>
-		<item>KYRGYZSTAN</item>
-		<item>LAO PEOPLE\'S DEMOCRATIC REPUBLIC</item>
-		<item>LATVIA</item>
-		<item>LEBANON</item>
-		<item>LESOTHO</item>
-		<item>LIBERIA</item>
-		<item>LIBYA</item>
-		<item>LIECHTENSTEIN</item>
-		<item>LITHUANIA</item>
-		<item>LUXEMBOURG</item>
-		<item>MACAO</item>
-		<item>MACEDONIA, THE FORMER YUGOSLAV REPUBLIC OF</item>
-		<item>MADAGASCAR</item>
-		<item>MALAWI</item>
-		<item>MALAYSIA</item>
-		<item>MALDIVES</item>
-		<item>MALI</item>
-		<item>MALTA</item>
-		<item>MARSHALL ISLANDS</item>
-		<item>MARTINIQUE</item>
-		<item>MAURITANIA</item>
-		<item>MAURITIUS</item>
-		<item>MAYOTTE</item>
-		<item>MEXICO</item>
-		<item>MICRONESIA, FEDERATED STATES OF</item>
-		<item>MOLDOVA, REPUBLIC OF</item>
-		<item>MONACO</item>
-		<item>MONGOLIA</item>
-		<item>MONTENEGRO</item>
-		<item>MONTSERRAT</item>
-		<item>MOROCCO</item>
-		<item>MOZAMBIQUE</item>
-		<item>MYANMAR</item>
-		<item>NAMIBIA</item>
-		<item>NAURU</item>
-		<item>NEPAL</item>
-		<item>NETHERLANDS</item>
-		<item>NEW CALEDONIA</item>
-		<item>NEW ZEALAND</item>
-		<item>NICARAGUA</item>
-		<item>NIGER</item>
-		<item>NIGERIA</item>
-		<item>NIUE</item>
-		<item>NORFOLK ISLAND</item>
-		<item>NORTHERN MARIANA ISLANDS</item>
-		<item>NORWAY</item>
-		<item>OMAN</item>
-		<item>PAKISTAN</item>
-		<item>PALAU</item>
-		<item>PALESTINE, STATE OF</item>
-		<item>PANAMA</item>
-		<item>PAPUA NEW GUINEA</item>
-		<item>PARAGUAY</item>
-		<item>PERU</item>
-		<item>PHILIPPINES</item>
-		<item>PITCAIRN</item>
-		<item>POLAND</item>
-		<item>PORTUGAL</item>
-		<item>PUERTO RICO</item>
-		<item>QATAR</item>
-		<item>RÉUNION</item>
-		<item>ROMANIA</item>
-		<item>RUSSIAN FEDERATION</item>
-		<item>RWANDA</item>
-		<item>SAINT BARTHÉLEMY</item>
-		<item>SAINT HELENA, ASCENSION AND TRISTAN DA CUNHA</item>
-		<item>SAINT KITTS AND NEVIS</item>
-		<item>SAINT LUCIA</item>
-		<item>SAINT MARTIN (FRENCH PART)</item>
-		<item>SAINT PIERRE AND MIQUELON</item>
-		<item>SAINT VINCENT AND THE GRENADINES</item>
-		<item>SAMOA</item>
-		<item>SAN MARINO</item>
-		<item>SAO TOME AND PRINCIPE</item>
-		<item>SAUDI ARABIA</item>
-		<item>SENEGAL</item>
-		<item>SERBIA</item>
-		<item>SEYCHELLES</item>
-		<item>SIERRA LEONE</item>
-		<item>SINGAPORE</item>
-		<item>SINT MAARTEN (DUTCH PART)</item>
-		<item>SLOVAKIA</item>
-		<item>SLOVENIA</item>
-		<item>SOLOMON ISLANDS</item>
-		<item>SOMALIA</item>
-		<item>SOUTH AFRICA</item>
-		<item>SOUTH GEORGIA AND THE SOUTH SANDWICH ISLANDS</item>
-		<item>SOUTH SUDAN</item>
-		<item>SPAIN</item>
-		<item>SRI LANKA</item>
-		<item>SUDAN</item>
-		<item>SURINAME</item>
-		<item>SVALBARD AND JAN MAYEN</item>
-		<item>SWAZILAND</item>
-		<item>SWEDEN</item>
-		<item>SWITZERLAND</item>
-		<item>SYRIAN ARAB REPUBLIC</item>
-		<item>TAIWAN, PROVINCE OF CHINA</item>
-		<item>TAJIKISTAN</item>
-		<item>TANZANIA, UNITED REPUBLIC OF</item>
-		<item>THAILAND</item>
-		<item>TIMOR-LESTE</item>
-		<item>TOGO</item>
-		<item>TOKELAU</item>
-		<item>TONGA</item>
-		<item>TRINIDAD AND TOBAGO</item>
-		<item>TUNISIA</item>
-		<item>TURKEY</item>
-		<item>TURKMENISTAN</item>
-		<item>TURKS AND CAICOS ISLANDS</item>
-		<item>TUVALU</item>
-		<item>UGANDA</item>
-		<item>UKRAINE</item>
-		<item>UNITED ARAB EMIRATES</item>
-		<item>UNITED KINGDOM</item>
-		<item>UNITED STATES</item>
-		<item>UNITED STATES MINOR OUTLYING ISLANDS</item>
-		<item>URUGUAY</item>
-		<item>UZBEKISTAN</item>
-		<item>VANUATU</item>
-		<item>VENEZUELA, BOLIVARIAN REPUBLIC OF</item>
-		<item>VIET NAM</item>
-		<item>VIRGIN ISLANDS, BRITISH</item>
-		<item>VIRGIN ISLANDS, U.S.</item>
-		<item>WALLIS AND FUTUNA</item>
-		<item>WESTERN SAHARA</item>
-		<item>YEMEN</item>
-		<item>ZAMBIA</item>
-		<item>ZIMBABWE</item>
+		<item>Worldwide (All)</item>
+		<item>Algeria</item>
+		<item>Argentina</item>
+		<item>Australia</item>
+		<item>Austria</item>
+		<item>Azerbaijan</item>
+		<item>Bahrain</item>
+		<item>Belarus</item>
+		<item>Belgium</item>
+		<item>Bosnia and Herzegovina</item>
+		<item>Brazil</item>
+		<item>Bulgaria</item>
+		<item>Canada</item>
+		<item>Chile</item>
+		<item>Colombia</item>
+		<item>Croatia</item>
+		<item>Czech Republic</item>
+		<item>Denmark</item>
+		<item>Egypt</item>
+		<item>Estonia</item>
+		<item>Finland</item>
+		<item>France</item>
+		<item>Georgia</item>
+		<item>Germany</item>
+		<item>Ghana</item>
+		<item>Greece</item>
+		<item>Hong Kong</item>
+		<item>Hungary</item>
+		<item>Iceland</item>
+		<item>India</item>
+		<item>Indonesia</item>
+		<item>Iraq</item>
+		<item>Ireland</item>
+		<item>Israel</item>
+		<item>Italy</item>
+		<item>Japan</item>
+		<item>Jordan</item>
+		<item>Kazakhstan</item>
+		<item>Kenya</item>
+		<item>Kuwait</item>
+		<item>Latvia</item>
+		<item>Lebanon</item>
+		<item>Libya</item>
+		<item>Lithuania</item>
+		<item>Luxembourg</item>
+		<item>Macedonia</item>
+		<item>Malaysia</item>
+		<item>Mexico</item>
+		<item>Montenegro</item>
+		<item>Morocco</item>
+		<item>Nepal</item>
+		<item>Netherlands</item>
+		<item>New Zealand</item>
+		<item>Nigeria</item>
+		<item>Norway</item>
+		<item>Oman</item>
+		<item>Pakistan</item>
+		<item>Peru</item>
+		<item>Philippines</item>
+		<item>Poland</item>
+		<item>Portugal</item>
+		<item>Puerto Rico</item>
+		<item>Qatar</item>
+		<item>Romania</item>
+		<item>Russia</item>
+		<item>Saudi Arabia</item>
+		<item>Senegal</item>
+		<item>Serbia</item>
+		<item>Singapore</item>
+		<item>Slovakia</item>
+		<item>Slovenia</item>
+		<item>South Africa</item>
+		<item>South Korea</item>
+		<item>Spain</item>
+		<item>Sri Lanka</item>
+		<item>Sweden</item>
+		<item>Switzerland</item>
+		<item>Taiwan</item>
+		<item>Tanzania</item>
+		<item>Thailand</item>
+		<item>Tunisia</item>
+		<item>Turkey</item>
+		<item>Uganda</item>
+		<item>Ukraine</item>
+		<item>United Arab Emirates</item>
+		<item>United Kingdom</item>
+		<item>Vietnam</item>
+		<item>Yemen</item>
+		<item>Zimbabwe</item>
 	</string-array>
 
 	<string-array name="country_codes">
 		<item></item>
-		<item>AF</item>
-		<item>AX</item>
-		<item>AL</item>
 		<item>DZ</item>
-		<item>AS</item>
-		<item>AD</item>
-		<item>AO</item>
-		<item>AI</item>
-		<item>AQ</item>
-		<item>AG</item>
 		<item>AR</item>
-		<item>AM</item>
-		<item>AW</item>
 		<item>AU</item>
 		<item>AT</item>
 		<item>AZ</item>
-		<item>BS</item>
 		<item>BH</item>
-		<item>BD</item>
-		<item>BB</item>
 		<item>BY</item>
 		<item>BE</item>
-		<item>BZ</item>
-		<item>BJ</item>
-		<item>BM</item>
-		<item>BT</item>
-		<item>BO</item>
-		<item>BQ</item>
 		<item>BA</item>
-		<item>BW</item>
-		<item>BV</item>
 		<item>BR</item>
-		<item>IO</item>
-		<item>BN</item>
 		<item>BG</item>
-		<item>BF</item>
-		<item>BI</item>
-		<item>KH</item>
-		<item>CM</item>
 		<item>CA</item>
-		<item>CV</item>
-		<item>KY</item>
-		<item>CF</item>
-		<item>TD</item>
 		<item>CL</item>
-		<item>CN</item>
-		<item>CX</item>
-		<item>CC</item>
 		<item>CO</item>
-		<item>KM</item>
-		<item>CG</item>
-		<item>CD</item>
-		<item>CK</item>
-		<item>CR</item>
-		<item>CI</item>
 		<item>HR</item>
-		<item>CU</item>
-		<item>CW</item>
-		<item>CY</item>
 		<item>CZ</item>
 		<item>DK</item>
-		<item>DJ</item>
-		<item>DM</item>
-		<item>DO</item>
-		<item>EC</item>
 		<item>EG</item>
-		<item>SV</item>
-		<item>GQ</item>
-		<item>ER</item>
 		<item>EE</item>
-		<item>ET</item>
-		<item>FK</item>
-		<item>FO</item>
-		<item>FJ</item>
 		<item>FI</item>
 		<item>FR</item>
-		<item>GF</item>
-		<item>PF</item>
-		<item>TF</item>
-		<item>GA</item>
-		<item>GM</item>
 		<item>GE</item>
 		<item>DE</item>
 		<item>GH</item>
-		<item>GI</item>
 		<item>GR</item>
-		<item>GL</item>
-		<item>GD</item>
-		<item>GP</item>
-		<item>GU</item>
-		<item>GT</item>
-		<item>GG</item>
-		<item>GN</item>
-		<item>GW</item>
-		<item>GY</item>
-		<item>HT</item>
-		<item>HM</item>
-		<item>VA</item>
-		<item>HN</item>
 		<item>HK</item>
 		<item>HU</item>
 		<item>IS</item>
 		<item>IN</item>
 		<item>ID</item>
-		<item>IR</item>
 		<item>IQ</item>
 		<item>IE</item>
-		<item>IM</item>
 		<item>IL</item>
 		<item>IT</item>
-		<item>JM</item>
 		<item>JP</item>
-		<item>JE</item>
 		<item>JO</item>
 		<item>KZ</item>
 		<item>KE</item>
-		<item>KI</item>
-		<item>KP</item>
-		<item>KR</item>
 		<item>KW</item>
-		<item>KG</item>
-		<item>LA</item>
 		<item>LV</item>
 		<item>LB</item>
-		<item>LS</item>
-		<item>LR</item>
 		<item>LY</item>
-		<item>LI</item>
 		<item>LT</item>
 		<item>LU</item>
-		<item>MO</item>
 		<item>MK</item>
-		<item>MG</item>
-		<item>MW</item>
 		<item>MY</item>
-		<item>MV</item>
-		<item>ML</item>
-		<item>MT</item>
-		<item>MH</item>
-		<item>MQ</item>
-		<item>MR</item>
-		<item>MU</item>
-		<item>YT</item>
 		<item>MX</item>
-		<item>FM</item>
-		<item>MD</item>
-		<item>MC</item>
-		<item>MN</item>
 		<item>ME</item>
-		<item>MS</item>
 		<item>MA</item>
-		<item>MZ</item>
-		<item>MM</item>
-		<item>NA</item>
-		<item>NR</item>
 		<item>NP</item>
 		<item>NL</item>
-		<item>NC</item>
 		<item>NZ</item>
-		<item>NI</item>
-		<item>NE</item>
 		<item>NG</item>
-		<item>NU</item>
-		<item>NF</item>
-		<item>MP</item>
 		<item>NO</item>
 		<item>OM</item>
 		<item>PK</item>
-		<item>PW</item>
-		<item>PS</item>
-		<item>PA</item>
-		<item>PG</item>
-		<item>PY</item>
 		<item>PE</item>
 		<item>PH</item>
-		<item>PN</item>
 		<item>PL</item>
 		<item>PT</item>
 		<item>PR</item>
 		<item>QA</item>
-		<item>RE</item>
 		<item>RO</item>
 		<item>RU</item>
-		<item>RW</item>
-		<item>BL</item>
-		<item>SH</item>
-		<item>KN</item>
-		<item>LC</item>
-		<item>MF</item>
-		<item>PM</item>
-		<item>VC</item>
-		<item>WS</item>
-		<item>SM</item>
-		<item>ST</item>
 		<item>SA</item>
 		<item>SN</item>
 		<item>RS</item>
-		<item>SC</item>
-		<item>SL</item>
 		<item>SG</item>
-		<item>SX</item>
 		<item>SK</item>
 		<item>SI</item>
-		<item>SB</item>
-		<item>SO</item>
 		<item>ZA</item>
-		<item>GS</item>
-		<item>SS</item>
+		<item>KR</item>
 		<item>ES</item>
 		<item>LK</item>
-		<item>SD</item>
-		<item>SR</item>
-		<item>SJ</item>
-		<item>SZ</item>
 		<item>SE</item>
 		<item>CH</item>
-		<item>SY</item>
 		<item>TW</item>
-		<item>TJ</item>
 		<item>TZ</item>
 		<item>TH</item>
-		<item>TL</item>
-		<item>TG</item>
-		<item>TK</item>
-		<item>TO</item>
-		<item>TT</item>
 		<item>TN</item>
 		<item>TR</item>
-		<item>TM</item>
-		<item>TC</item>
-		<item>TV</item>
 		<item>UG</item>
 		<item>UA</item>
 		<item>AE</item>
 		<item>GB</item>
-		<item>US</item>
-		<item>UM</item>
-		<item>UY</item>
-		<item>UZ</item>
-		<item>VU</item>
-		<item>VE</item>
 		<item>VN</item>
-		<item>VG</item>
-		<item>VI</item>
-		<item>WF</item>
-		<item>EH</item>
 		<item>YE</item>
-		<item>ZM</item>
 		<item>ZW</item>
 	</string-array>
 
