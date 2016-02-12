@@ -71,6 +71,8 @@ public class YouTubeVideo implements Serializable {
 	private String	thumbnailUrl;
 	/** The language of this video.  (This tends to be ISO 639-1).  */
 	private String	language;
+	/** The description of the video (set by the YouTuber/Owner). */
+	private String	description;
 
 	private static final Set<String> defaultPrefLanguages = new HashSet<>(Arrays.asList(SkyTubeApp.getStr(R.string.lang_en)));
 
@@ -94,6 +96,8 @@ public class YouTubeVideo implements Serializable {
 
 			this.language = video.getSnippet().getDefaultAudioLanguage() != null ? video.getSnippet().getDefaultAudioLanguage()
 					: (video.getSnippet().getDefaultLanguage() != null ? video.getSnippet().getDefaultLanguage() : null);
+
+			this.description = video.getSnippet().getDescription();
 		}
 
 		if (video.getContentDetails() != null) {
@@ -277,6 +281,9 @@ public class YouTubeVideo implements Serializable {
 		return language;
 	}
 
+	public String getDescription() {
+		return description;
+	}
 
 	/**
 	 * Return true if this video does not meet the preferred language criteria;  false otherwise.

@@ -19,11 +19,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
+import java.io.IOException;
+import java.util.List;
+
 import free.rm.skytube.R;
+import free.rm.skytube.businessobjects.GetVideoDescription;
 import free.rm.skytube.businessobjects.VideoStream.StreamMetaData;
 import free.rm.skytube.businessobjects.VideoStream.StreamMetaDataList;
 import free.rm.skytube.businessobjects.YouTubeVideo;
 import free.rm.skytube.gui.activities.YouTubePlayerActivity;
+import free.rm.skytube.gui.app.SkyTubeApp;
 import free.rm.skytube.gui.businessobjects.FragmentEx;
 import free.rm.skytube.gui.businessobjects.MediaControllerEx;
 import hollowsoft.slidingdrawer.SlidingDrawer;
@@ -36,6 +41,7 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 	private YouTubeVideo		youTubeVideo = null;
 	private VideoView			videoView = null;
 	private MediaControllerEx	mediaController = null;
+	private TextView			videoDescriptionTextView = null;
 	private View				voidView = null;
 	private View				loadingVideoView = null;
 
@@ -44,7 +50,7 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 
 	private Handler				timerHandler = null;
 
-	private static final int UI_VISIBILITY_TIMEOUT = 7000;
+	private static final int HUD_VISIBILITY_TIMEOUT = 7000;
 	private static final String TAG = YouTubePlayerFragment.class.getSimpleName();
 
 
@@ -91,12 +97,15 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 				likesBar.getProgressDrawable().setColorFilter(getResources().getColor(R.color.video_desc_like_bar), PorterDuff.Mode.SRC_IN);
 			}
 
+			videoDescriptionTextView = (TextView) view.findViewById(R.id.video_desc_description);
+
 			commentsDrawer = (SlidingDrawer) view.findViewById(R.id.comments_drawer);
 
 			// hide action bar
 			getActionBar().hide();
 
-			new GetStreamTask(youTubeVideo).execute();
+			// load the video
+			loadVideo();
 		}
 
 		return view;
@@ -155,7 +164,7 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 					hideHud();
 					timerHandler = null;
 				}
-			}, UI_VISIBILITY_TIMEOUT);
+			}, HUD_VISIBILITY_TIMEOUT);
 		}
 	}
 
@@ -193,7 +202,7 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 			case R.id.menu_reload_video:
-				new GetStreamTask(youTubeVideo, true).execute();
+				loadVideo();
 				return true;
 			case R.id.menu_open_video_in_browser:
 				Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v="+youTubeVideo.getId()));
@@ -203,6 +212,17 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 			default:
 				return super.onOptionsItemSelected(item);
 		}
+	}
+
+
+	/**
+	 * Loads the video specified in {@link #youTubeVideo}.
+	 */
+	private void loadVideo() {
+		// get the video's steam
+		new GetStreamTask(youTubeVideo, true).execute();
+		// get the video description
+		new GetVideoDescriptionTask().execute();
 	}
 
 
@@ -278,6 +298,38 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 				}
 			}
 		}
+	}
+
+
+	/**
+	 * Get the video's description and set the appropriate text view.
+	 */
+	private class GetVideoDescriptionTask extends AsyncTask<Void, Void, String> {
+
+		@Override
+		protected String doInBackground(Void... params) {
+			GetVideoDescription getVideoDescription = new GetVideoDescription();
+			String description = SkyTubeApp.getStr(R.string.error_get_video_desc);
+
+			try {
+				getVideoDescription.init(youTubeVideo.getId());
+				List<YouTubeVideo> list = getVideoDescription.getNextVideos();
+
+				if (list.size() > 0) {
+					description = list.get(0).getDescription();
+				}
+			} catch (IOException e) {
+				Log.e(TAG, description + " - id=" + youTubeVideo.getId(), e);
+			}
+
+			return description;
+		}
+
+		@Override
+		protected void onPostExecute(String description) {
+			videoDescriptionTextView.setText(description);
+		}
+
 	}
 
 }
