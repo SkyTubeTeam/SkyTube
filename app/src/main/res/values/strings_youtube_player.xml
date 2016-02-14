@@ -8,4 +8,7 @@
 	<string name="reload_video">Reload video</string>
 	<string name="open_in_browser">Open in browser</string>
 	<string name="subscribe">Subscribe</string>
+
+	<string name="view_replies">View replies</string>
+	<string name="hide_replies">Hide replies</string>
 </resources>

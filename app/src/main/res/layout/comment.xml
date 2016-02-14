@@ -46,7 +46,6 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:orientation="horizontal">
-
 			<TextView
 				android:id="@+id/comment_date_text_view"
 				style="@style/CommentInfoTextView"
@@ -65,8 +64,13 @@
 				android:drawablePadding="5dp"
 				android:gravity="center_vertical"
 				android:text="21"/>
-
 		</LinearLayout>
+
+		<TextView
+			android:id="@+id/view_all_replies_text_view"
+			style="@style/CommentInfoTextView"
+			android:textColor="#2994E6"
+			android:text="@string/view_replies"/>
 
 	</LinearLayout>
 

@@ -370,7 +370,7 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 
 		@Override
 		protected void onPostExecute(List<YouTubeCommentThread> commentThreadsList) {
-			commentsAdapter = new CommentsAdapter(commentThreadsList, getActivity());
+			commentsAdapter = new CommentsAdapter(commentThreadsList, commentsExpandableListView);
 			commentsExpandableListView.setAdapter(commentsAdapter);
 		}
 	}

@@ -23,6 +23,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ExpandableListView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -33,19 +34,27 @@ import free.rm.skytube.businessobjects.YouTubeCommentThread;
 import free.rm.skytube.gui.app.SkyTubeApp;
 
 /**
- *
+ * An adapter that will display comments in an {@link ExpandableListView}.
  */
 public class CommentsAdapter extends BaseExpandableListAdapter {
 
 	private List<YouTubeCommentThread>	commentThreadsList;
+	private ExpandableListView			expandableListView;
 	private LayoutInflater				layoutInflater;
 
 	private static final String TAG = CommentsAdapter.class.getSimpleName();
 
 
-	public CommentsAdapter(List<YouTubeCommentThread> commentThreadsList, Context context) {
+	public CommentsAdapter(List<YouTubeCommentThread> commentThreadsList, ExpandableListView expandableListView) {
 		this.commentThreadsList = commentThreadsList;
-		this.layoutInflater = LayoutInflater.from(context);
+		this.expandableListView = expandableListView;
+		this.expandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+			@Override
+			public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
+				return true;
+			}
+		});
+		this.layoutInflater = LayoutInflater.from(expandableListView.getContext());
 	}
 
 	@Override
@@ -120,7 +129,7 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
 			else
 				comment = (YouTubeComment)getChild(groupPosition, childPosition);
 
-			viewHolder.updateInfo(comment, getParentView);
+			viewHolder.updateInfo(comment, getParentView, groupPosition);
 		}
 
 		// if it reached the bottom of the list, then try to get the next page of videos
@@ -135,12 +144,13 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
 
 	////////////
 
-	private static class CommentViewHolder {
+	private class CommentViewHolder {
 		private View		paddingView;
 		private TextView	authorTextView,
 							commentTextView,
 							dateTextView,
-							upvotesTextView;
+							upvotesTextView,
+							viewRepliesTextView;
 		private InternetImageView	thumbnailImageView;
 
 		protected CommentViewHolder(View commentView) {
@@ -149,11 +159,12 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
 			commentTextView	= (TextView) commentView.findViewById(R.id.comment_text_view);
 			dateTextView	= (TextView) commentView.findViewById(R.id.comment_date_text_view);
 			upvotesTextView	= (TextView) commentView.findViewById(R.id.comment_upvotes_text_view);
-			thumbnailImageView = (InternetImageView) commentView.findViewById(R.id.comment_thumbnail_image_view);
+			viewRepliesTextView	= (TextView) commentView.findViewById(R.id.view_all_replies_text_view);
+			thumbnailImageView	= (InternetImageView) commentView.findViewById(R.id.comment_thumbnail_image_view);
 		}
 
 
-		protected void updateInfo(YouTubeComment comment, boolean isTopLevelComment) {
+		protected void updateInfo(YouTubeComment comment, boolean isTopLevelComment, final int groupPosition) {
 			paddingView.setVisibility(isTopLevelComment ? View.GONE : View.VISIBLE);
 			authorTextView.setText(comment.getAuthor());
 			commentTextView.setText(comment.getComment());
@@ -163,6 +174,28 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
 			// change the width dimensions depending on whether the comment is a top level or a child
 			ViewGroup.LayoutParams lp = thumbnailImageView.getLayoutParams();
 			lp.width = (int) SkyTubeApp.getDimension(isTopLevelComment  ?  R.dimen.top_level_comment_thumbnail_width  :  R.dimen.child_comment_thumbnail_width);
+
+			if (isTopLevelComment  &&  getChildrenCount(groupPosition) > 0) {
+				viewRepliesTextView.setVisibility(View.VISIBLE);
+
+				// on click, hide/show the comment replies
+				viewRepliesTextView.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View viewReplies) {
+						TextView wr = (TextView) viewReplies;
+
+						if (expandableListView.isGroupExpanded(groupPosition)) {
+							wr.setText(R.string.view_replies);
+							expandableListView.collapseGroup(groupPosition);
+						} else {
+							wr.setText(R.string.hide_replies);
+							expandableListView.expandGroup(groupPosition);
+						}
+					}
+				});
+			} else {
+				viewRepliesTextView.setVisibility(View.GONE);
+			}
 		}
 	}
 
