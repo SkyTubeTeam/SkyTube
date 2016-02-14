@@ -24,11 +24,9 @@ import java.io.IOException;
 import java.util.List;
 
 import free.rm.skytube.R;
-import free.rm.skytube.businessobjects.GetCommentThreads;
 import free.rm.skytube.businessobjects.GetVideoDescription;
 import free.rm.skytube.businessobjects.VideoStream.StreamMetaData;
 import free.rm.skytube.businessobjects.VideoStream.StreamMetaDataList;
-import free.rm.skytube.businessobjects.YouTubeCommentThread;
 import free.rm.skytube.businessobjects.YouTubeVideo;
 import free.rm.skytube.gui.activities.YouTubePlayerActivity;
 import free.rm.skytube.gui.app.SkyTubeApp;
@@ -52,7 +50,8 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 
 	private SlidingDrawer		videoDescriptionDrawer = null;
 	private SlidingDrawer		commentsDrawer = null;
-	private GetCommentThreads	getCommentThreads = null;
+	private View				commentsProgressBar = null,
+								noVideoCommentsView = null;
 	private CommentsAdapter		commentsAdapter = null;
 	private ExpandableListView	commentsExpandableListView = null;
 
@@ -107,15 +106,18 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 
 			videoDescriptionTextView = (TextView) view.findViewById(R.id.video_desc_description);
 
+			commentsExpandableListView = (ExpandableListView) view.findViewById(R.id.commentsExpandableListView);
+			commentsProgressBar = view.findViewById(R.id.comments_progress_bar);
+			noVideoCommentsView = view.findViewById(R.id.no_video_comments_text_view);
 			commentsDrawer = (SlidingDrawer) view.findViewById(R.id.comments_drawer);
 			commentsDrawer.setOnDrawerOpenListener(new OnDrawerOpenListener() {
 				@Override
 				public void onDrawerOpened() {
-					Toast.makeText(YouTubePlayerFragment.this.getActivity(), "Drawer opened", Toast.LENGTH_SHORT).show();
-					new GetCommentsTask().execute();
+					if (commentsAdapter == null) {
+						commentsAdapter = new CommentsAdapter(youTubeVideo.getId(), commentsExpandableListView, commentsProgressBar, noVideoCommentsView);
+					}
 				}
 			});
-			commentsExpandableListView = (ExpandableListView) view.findViewById(R.id.commentsExpandableListView);
 
 			// hide action bar
 			getActionBar().hide();
@@ -351,28 +353,6 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 			videoDescriptionTextView.setText(description);
 		}
 
-	}
-
-	////////////////////////////////////////////////////////////////////////////////////////////////
-
-	private class GetCommentsTask extends AsyncTask<Void, Void, List<YouTubeCommentThread>> {
-
-		protected GetCommentsTask() {
-			if (YouTubePlayerFragment.this.getCommentThreads == null) {
-				getCommentThreads = new GetCommentThreads();
-			}
-		}
-
-		@Override
-		protected  List<YouTubeCommentThread> doInBackground(Void... params) {
-			return getCommentThreads.get(youTubeVideo.getId());
-		}
-
-		@Override
-		protected void onPostExecute(List<YouTubeCommentThread> commentThreadsList) {
-			commentsAdapter = new CommentsAdapter(commentThreadsList, commentsExpandableListView);
-			commentsExpandableListView.setAdapter(commentsAdapter);
-		}
 	}
 
 }

@@ -9,6 +9,7 @@
 	<string name="open_in_browser">Open in browser</string>
 	<string name="subscribe">Subscribe</string>
 
+	<string name="no_video_comments">This video has no comments or comments are disabled.</string>
 	<string name="view_replies">View replies</string>
 	<string name="hide_replies">Hide replies</string>
 </resources>

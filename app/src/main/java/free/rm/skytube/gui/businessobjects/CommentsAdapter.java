@@ -17,7 +17,7 @@
 
 package free.rm.skytube.gui.businessobjects;
 
-import android.content.Context;
+import android.os.AsyncTask;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,9 +26,11 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import free.rm.skytube.R;
+import free.rm.skytube.businessobjects.GetCommentThreads;
 import free.rm.skytube.businessobjects.YouTubeComment;
 import free.rm.skytube.businessobjects.YouTubeCommentThread;
 import free.rm.skytube.gui.app.SkyTubeApp;
@@ -38,23 +40,30 @@ import free.rm.skytube.gui.app.SkyTubeApp;
  */
 public class CommentsAdapter extends BaseExpandableListAdapter {
 
-	private List<YouTubeCommentThread>	commentThreadsList;
+	private List<YouTubeCommentThread>	commentThreadsList = new ArrayList<>();
+	private GetCommentsTask				getCommentsTask = null;
 	private ExpandableListView			expandableListView;
+	private View						commentsProgressBar;
+	private View						noVideoCommentsView;
 	private LayoutInflater				layoutInflater;
 
 	private static final String TAG = CommentsAdapter.class.getSimpleName();
 
 
-	public CommentsAdapter(List<YouTubeCommentThread> commentThreadsList, ExpandableListView expandableListView) {
-		this.commentThreadsList = commentThreadsList;
+	public CommentsAdapter(String videoId, ExpandableListView expandableListView, View commentsProgressBar, View noVideoCommentsView) {
 		this.expandableListView = expandableListView;
+		this.expandableListView.setAdapter(this);
 		this.expandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
 			@Override
 			public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
 				return true;
 			}
 		});
+		this.commentsProgressBar = commentsProgressBar;
+		this.noVideoCommentsView = noVideoCommentsView;
 		this.layoutInflater = LayoutInflater.from(expandableListView.getContext());
+		this.getCommentsTask = new GetCommentsTask(videoId);
+		this.getCommentsTask.execute();
 	}
 
 	@Override
@@ -197,6 +206,44 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
 				viewRepliesTextView.setVisibility(View.GONE);
 			}
 		}
+	}
+
+
+	////////////////////////////////////////////////////////////////////////////////////////////////
+
+	private class GetCommentsTask extends AsyncTask<Void, Void, List<YouTubeCommentThread>> {
+
+		private GetCommentThreads	getCommentThreads = null;
+		private String				videoId;
+
+		protected GetCommentsTask(String videoId) {
+			this.getCommentThreads = new GetCommentThreads();
+			this.videoId = videoId;
+		}
+
+		@Override
+		protected void onPreExecute() {
+			commentsProgressBar.setVisibility(View.VISIBLE);
+			noVideoCommentsView.setVisibility(View.GONE);
+		}
+
+		@Override
+		protected  List<YouTubeCommentThread> doInBackground(Void... params) {
+			return getCommentThreads.get(videoId);
+		}
+
+		@Override
+		protected void onPostExecute(List<YouTubeCommentThread> commentThreadsList) {
+			if (commentThreadsList.size() > 0) {
+				CommentsAdapter.this.commentThreadsList.addAll(commentThreadsList);
+				CommentsAdapter.this.notifyDataSetChanged();
+			} else {
+				noVideoCommentsView.setVisibility(View.VISIBLE);
+			}
+
+			commentsProgressBar.setVisibility(View.GONE);
+		}
+
 	}
 
 }
