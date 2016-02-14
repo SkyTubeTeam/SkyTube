@@ -38,34 +38,69 @@ import free.rm.skytube.gui.app.SkyTubeApp;
  */
 public class GetCommentThreads {
 
-	private static final Long	MAX_RESULTS = 50L;
+	private String	videoId;
+	private String	nextPageToken = null;
+	private boolean	noMoreCommentPages = false;
+	private YouTube.CommentThreads.List commentsList = null;
+
+	private static final Long	MAX_RESULTS = 10L;
 	private static final String	TAG = GetCommentThreads.class.getSimpleName();
 
-	public List<YouTubeCommentThread> get(String videoId) {
-		List<YouTubeCommentThread> commentThreadList = new ArrayList<>();
+
+	public void init(String videoId) throws IOException {
+		this.videoId = videoId;
+
 		HttpTransport httpTransport = AndroidHttp.newCompatibleTransport();
 		JsonFactory jsonFactory = com.google.api.client.extensions.android.json.AndroidJsonFactory.getDefaultInstance();
-
 		YouTube youtube = new YouTube.Builder(httpTransport, jsonFactory, null /*timeout here?*/).build();
 
-		try {
-			CommentThreadListResponse commentsResponse = youtube.commentThreads()
-					.list("snippet, replies")
-					.setKey(SkyTubeApp.getStr(R.string.API_KEY))
-					.setVideoId(videoId)
-					.setTextFormat("plainText")
-					.setMaxResults(MAX_RESULTS)
-					.setOrder("relevance")
-					.execute();
-			List<CommentThread> videoComments = commentsResponse.getItems();
+		commentsList = youtube.commentThreads()
+				.list("snippet, replies")
+				.setFields("items(snippet, replies), nextPageToken")
+				.setKey(SkyTubeApp.getStr(R.string.API_KEY))
+				.setVideoId(videoId)
+				.setTextFormat("plainText")
+				.setMaxResults(MAX_RESULTS)
+				.setOrder("relevance");
+	}
 
-			if (!videoComments.isEmpty()) {
-				for (CommentThread thread : videoComments) {
-					commentThreadList.add( new YouTubeCommentThread(thread) );
+
+	/**
+	 * Will return the next page of comment threads.  If there are no more pages, then it will
+	 * return null.
+	 *
+	 * @return	A list/page of {@link YouTubeCommentThread}.
+	 */
+	public List<YouTubeCommentThread> get() {
+		List<YouTubeCommentThread> commentThreadList = new ArrayList<>();
+
+		if (noMoreCommentPages  ||  commentsList == null) {
+			commentThreadList = null;
+		} else {
+			try {
+				// set the page token/id to retrieve
+				commentsList.setPageToken(nextPageToken);
+
+				// communicate with YouTube and get the comments
+				CommentThreadListResponse response = commentsList.execute();
+				List<CommentThread> videoComments = response.getItems();
+
+				// convert the comments from CommentThread to YouTubeCommentThread
+				if (!videoComments.isEmpty()) {
+					for (CommentThread thread : videoComments) {
+						commentThreadList.add(new YouTubeCommentThread(thread));
+					}
 				}
+
+				// set the next page token
+				nextPageToken = response.getNextPageToken();
+
+				// if nextPageToken is null, it means that there are no more comments
+				if (nextPageToken == null)
+					noMoreCommentPages = true;
+			} catch (IOException ex) {
+				Log.e(TAG, "An error has occurred while retrieving comments for video with id=" + videoId, ex);
 			}
-		} catch(IOException ex) {
-			Log.e(TAG, "An error has occurred while retrieving comments for video with id="+videoId, ex);
 		}
 
 		return commentThreadList;

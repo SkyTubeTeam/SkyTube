@@ -25,6 +25,7 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,8 +41,10 @@ import free.rm.skytube.gui.app.SkyTubeApp;
  */
 public class CommentsAdapter extends BaseExpandableListAdapter {
 
+	private String						videoId;
 	private List<YouTubeCommentThread>	commentThreadsList = new ArrayList<>();
 	private GetCommentsTask				getCommentsTask = null;
+	private GetCommentThreads			getCommentThreads = null;
 	private ExpandableListView			expandableListView;
 	private View						commentsProgressBar;
 	private View						noVideoCommentsView;
@@ -51,6 +54,7 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
 
 
 	public CommentsAdapter(String videoId, ExpandableListView expandableListView, View commentsProgressBar, View noVideoCommentsView) {
+		this.videoId = videoId;
 		this.expandableListView = expandableListView;
 		this.expandableListView.setAdapter(this);
 		this.expandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
@@ -143,8 +147,11 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
 
 		// if it reached the bottom of the list, then try to get the next page of videos
 		if (getParentView  &&  groupPosition == getGroupCount() - 1) {
-			Log.w(TAG, "BOTTOM REACHED!!!");
-			//new GetYouTubeVideosTask(getYouTubeVideos, this).execute();
+			if (this.getCommentsTask == null) {
+				Log.w(TAG, "Getting next page of comments...");
+				this.getCommentsTask = new GetCommentsTask(this.videoId);
+				this.getCommentsTask.execute();
+			}
 		}
 
 		return row;
@@ -213,12 +220,15 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
 
 	private class GetCommentsTask extends AsyncTask<Void, Void, List<YouTubeCommentThread>> {
 
-		private GetCommentThreads	getCommentThreads = null;
-		private String				videoId;
-
 		protected GetCommentsTask(String videoId) {
-			this.getCommentThreads = new GetCommentThreads();
-			this.videoId = videoId;
+			if (getCommentThreads == null) {
+				getCommentThreads = new GetCommentThreads();
+				try {
+					getCommentThreads.init(videoId);
+				} catch (Throwable tr) {
+					Toast.makeText(expandableListView.getContext(), R.string.error_get_comments, Toast.LENGTH_LONG).show();
+				}
+			}
 		}
 
 		@Override
@@ -229,19 +239,22 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
 
 		@Override
 		protected  List<YouTubeCommentThread> doInBackground(Void... params) {
-			return getCommentThreads.get(videoId);
+			return getCommentThreads.get();
 		}
 
 		@Override
 		protected void onPostExecute(List<YouTubeCommentThread> commentThreadsList) {
-			if (commentThreadsList.size() > 0) {
-				CommentsAdapter.this.commentThreadsList.addAll(commentThreadsList);
-				CommentsAdapter.this.notifyDataSetChanged();
-			} else {
-				noVideoCommentsView.setVisibility(View.VISIBLE);
+			if (commentThreadsList != null) {
+				if (commentThreadsList.size() > 0) {
+					CommentsAdapter.this.commentThreadsList.addAll(commentThreadsList);
+					CommentsAdapter.this.notifyDataSetChanged();
+				} else {
+					noVideoCommentsView.setVisibility(View.VISIBLE);
+				}
 			}
 
 			commentsProgressBar.setVisibility(View.GONE);
+			getCommentsTask = null;
 		}
 
 	}
