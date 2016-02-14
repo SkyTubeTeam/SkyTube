@@ -34,17 +34,34 @@ import free.rm.skytube.businessobjects.YouTubeVideo;
 /**
  * An adapter that will display videos in a {@link android.widget.GridView}.
  */
-public class GridAdapter extends BaseAdapterEx<YouTubeVideo> {
+public class VideoGridAdapter extends BaseAdapterEx<YouTubeVideo> {
 
 	/** Class used to get YouTube videos from the web. */
-	private GetYouTubeVideos getYouTubeVideos;
+	private GetYouTubeVideos	getYouTubeVideos;
+	private boolean				showChannelInfo = true;
 
-	private static final String TAG = GridAdapter.class.getSimpleName();
+	private static final String TAG = VideoGridAdapter.class.getSimpleName();
 
 
-	public GridAdapter(Context context) {
+	/**
+	 * @see #VideoGridAdapter(Context, boolean)
+	 */
+	public VideoGridAdapter(Context context) {
+		this(context, true);
+	}
+
+
+	/**
+	 * Constructor.
+	 *
+	 * @param context			Context
+	 * @param showChannelInfo	True to display channel information (e.g. channel name) and allows
+	 *                          user to open and browse the channel; false to hide such information.
+	 */
+	public VideoGridAdapter(Context context, boolean showChannelInfo) {
 		super(context);
-		getYouTubeVideos = null;
+		this.getYouTubeVideos = null;
+		this.showChannelInfo = showChannelInfo;
 	}
 
 
@@ -109,7 +126,7 @@ public class GridAdapter extends BaseAdapterEx<YouTubeVideo> {
 		}
 
 		if (viewHolder != null) {
-			viewHolder.updateInfo(get(position), getContext());
+			viewHolder.updateInfo(get(position), getContext(), showChannelInfo);
 		}
 
 		// if it reached the bottom of the list, then try to get the next page of videos

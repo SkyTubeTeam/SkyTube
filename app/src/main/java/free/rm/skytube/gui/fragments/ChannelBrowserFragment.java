@@ -35,7 +35,7 @@ import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.businessobjects.YouTubeChannel;
 import free.rm.skytube.gui.activities.ChannelBrowserActivity;
 import free.rm.skytube.gui.businessobjects.FragmentEx;
-import free.rm.skytube.gui.businessobjects.GridAdapter;
+import free.rm.skytube.gui.businessobjects.VideoGridAdapter;
 import free.rm.skytube.gui.businessobjects.InternetImageView;
 
 /**
@@ -45,7 +45,7 @@ public class ChannelBrowserFragment extends FragmentEx {
 
 	private YouTubeChannel	channel = null;
 	private GridView		gridView;
-	private GridAdapter		gridAdapter;
+	private VideoGridAdapter videoGridAdapter;
 
 	private InternetImageView	channelThumbnailImage = null;
 	private InternetImageView	channelBannerImage = null;
@@ -75,12 +75,12 @@ public class ChannelBrowserFragment extends FragmentEx {
 
 		gridView = (GridView) fragment.findViewById(R.id.grid_view);
 
-		if (gridAdapter == null) {
-			gridAdapter = new GridAdapter(getActivity());
-			gridAdapter.setVideoCategory(VideoCategory.CHANNEL_VIDEOS, channelId);
+		if (videoGridAdapter == null) {
+			videoGridAdapter = new VideoGridAdapter(getActivity(), false /*hide channel name*/);
+			videoGridAdapter.setVideoCategory(VideoCategory.CHANNEL_VIDEOS, channelId);
 		}
 
-		this.gridView.setAdapter(this.gridAdapter);
+		this.gridView.setAdapter(this.videoGridAdapter);
 
 		return fragment;
 	}

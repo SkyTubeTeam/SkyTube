@@ -55,7 +55,7 @@ public class VideosGridFragment extends SearchVideoGridFragment implements Actio
 		gridView.setSelection(0);
 
 		// set/change the video category
-		gridAdapter.setVideoCategory(VideoCategory.getVideoCategory(itemPosition));
+		videoGridAdapter.setVideoCategory(VideoCategory.getVideoCategory(itemPosition));
 
 		return true;	// true means event was handled
 	}

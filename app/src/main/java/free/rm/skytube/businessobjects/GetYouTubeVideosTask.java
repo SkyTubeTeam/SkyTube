@@ -19,11 +19,9 @@ package free.rm.skytube.businessobjects;
 
 import android.os.AsyncTask;
 
-import com.google.api.services.youtube.model.Video;
-
 import java.util.List;
 
-import free.rm.skytube.gui.businessobjects.GridAdapter;
+import free.rm.skytube.gui.businessobjects.VideoGridAdapter;
 
 /**
  * An asynchronous task that will retrieve YouTube videos and displays them in the supplied Adapter.
@@ -34,15 +32,15 @@ public class GetYouTubeVideosTask extends AsyncTask<Void, Void, List<YouTubeVide
 	private GetYouTubeVideos	getYouTubeVideos;
 
 	/** The Adapter where the retrieved videos will be displayed. */
-	private GridAdapter			gridAdapter;
+	private VideoGridAdapter videoGridAdapter;
 
 	/** Class tag. */
 	private static final String TAG = GetYouTubeVideosTask.class.getSimpleName();
 
 
-	public GetYouTubeVideosTask(GetYouTubeVideos getYouTubeVideos, GridAdapter gridAdapter) {
+	public GetYouTubeVideosTask(GetYouTubeVideos getYouTubeVideos, VideoGridAdapter videoGridAdapter) {
 		this.getYouTubeVideos = getYouTubeVideos;
-		this.gridAdapter = gridAdapter;
+		this.videoGridAdapter = videoGridAdapter;
 	}
 
 
@@ -60,7 +58,7 @@ public class GetYouTubeVideosTask extends AsyncTask<Void, Void, List<YouTubeVide
 
 	@Override
 	protected void onPostExecute(List<YouTubeVideo> videosList) {
-		gridAdapter.appendList(videosList);
+		videoGridAdapter.appendList(videosList);
 	}
 
 }

@@ -29,7 +29,7 @@ import android.widget.GridView;
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.gui.businessobjects.FragmentEx;
-import free.rm.skytube.gui.businessobjects.GridAdapter;
+import free.rm.skytube.gui.businessobjects.VideoGridAdapter;
 
 /**
  * Fragment that will hold a list of videos corresponding to the user's query.
@@ -37,7 +37,7 @@ import free.rm.skytube.gui.businessobjects.GridAdapter;
 public class SearchVideoGridFragment extends FragmentEx {
 
 	protected GridView		gridView;
-	protected GridAdapter	gridAdapter;
+	protected VideoGridAdapter videoGridAdapter;
 
 
 	@Override
@@ -47,14 +47,14 @@ public class SearchVideoGridFragment extends FragmentEx {
 
 		this.gridView = (GridView) view.findViewById(R.id.grid_view);
 
-		if (gridAdapter == null) {
-			this.gridAdapter = new GridAdapter(getActivity());
+		if (videoGridAdapter == null) {
+			this.videoGridAdapter = new VideoGridAdapter(getActivity());
 
 			String searchQuery = getSearchQuery();
 			if (searchQuery != null) {
 				// set the video category (if the user wants to search)... otherwise it will be set-
 				// up by the VideoGridFragment
-				this.gridAdapter.setVideoCategory(VideoCategory.SEARCH_QUERY, searchQuery);
+				this.videoGridAdapter.setVideoCategory(VideoCategory.SEARCH_QUERY, searchQuery);
 
 				// set the action bar's title
 				ActionBar actionBar = getActionBar();
@@ -63,7 +63,7 @@ public class SearchVideoGridFragment extends FragmentEx {
 			}
 		}
 
-		this.gridView.setAdapter(this.gridAdapter);
+		this.gridView.setAdapter(this.videoGridAdapter);
 
 		return view;
 	}

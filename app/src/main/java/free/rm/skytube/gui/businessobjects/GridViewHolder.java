@@ -67,25 +67,30 @@ public class GridViewHolder {
 
 	/**
 	 * Updates the contents of this ViewHold such that the data of these views is equal to the
-	 * given youTubeVide.
+	 * given youTubeVideo.
 	 *
-	 * @param youTubeVideo	{@link YouTubeVideo} instance.
+	 * @param youTubeVideo		{@link YouTubeVideo} instance.
+	 * @param showChannelInfo   True to display channel information (e.g. channel name) and allows
+	 *                          user to open and browse the channel; false to hide such information.
 	 */
-	protected void updateInfo(YouTubeVideo youTubeVideo, Context context) {
+	protected void updateInfo(YouTubeVideo youTubeVideo, Context context, boolean showChannelInfo) {
 		this.youTubeVideo = youTubeVideo;
 		this.context = context;
-		updateViewsData(this.youTubeVideo);
+		updateViewsData(this.youTubeVideo, showChannelInfo);
 	}
 
 
 	/**
 	 * This method will update the {@link View}s of this object reflecting the supplied video.
 	 *
-	 * @param video {@link YouTubeVideo} instance.
+	 * @param video				{@link YouTubeVideo} instance.
+	 * @param showChannelInfo   True to display channel information (e.g. channel name); false to
+	 *                          hide such information.
 	 */
-	private void updateViewsData(YouTubeVideo video) {
+	private void updateViewsData(YouTubeVideo video, boolean showChannelInfo) {
 		titleTextView.setText(video.getTitle());
 		channelTextView.setText(video.getChannelName());
+		channelTextView.setVisibility(showChannelInfo ? View.VISIBLE : View.INVISIBLE);
 		publishDateTextView.setText(video.getPublishDate());
 		videoDurationTextView.setText(video.getDuration());
 		viewsTextView.setText(video.getViewsCount());
@@ -99,7 +104,7 @@ public class GridViewHolder {
 		}
 
 		setupThumbnailOnClickListener();
-		setupChannelOnClickListener();
+		setupChannelOnClickListener(showChannelInfo);
 	}
 
 
@@ -163,15 +168,19 @@ public class GridViewHolder {
 	}
 
 
-	private void setupChannelOnClickListener() {
-		View.OnClickListener channelListener = new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Intent i = new Intent(context, ChannelBrowserActivity.class);
-				i.putExtra(ChannelBrowserActivity.CHANNEL_ID, youTubeVideo.getChannelId());
-				context.startActivity(i);
-			}
-		};
+	private void setupChannelOnClickListener(boolean openChannelOnClick) {
+		View.OnClickListener channelListener = null;
+
+		if (openChannelOnClick) {
+			channelListener = new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					Intent i = new Intent(context, ChannelBrowserActivity.class);
+					i.putExtra(ChannelBrowserActivity.CHANNEL_ID, youTubeVideo.getChannelId());
+					context.startActivity(i);
+				}
+			};
+		}
 
 		channelTextView.setOnClickListener(channelListener);
 		bottomLayout.setOnClickListener(channelListener);
