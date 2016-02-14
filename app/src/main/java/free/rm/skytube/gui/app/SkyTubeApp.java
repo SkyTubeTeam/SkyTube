@@ -57,4 +57,15 @@ public class SkyTubeApp extends Application {
 		return PreferenceManager.getDefaultSharedPreferences(skyTubeApp);
 	}
 
+
+	/**
+	 * Returns the dimension value that is specified in R.dimens.*.  This value is NOT converted into
+	 * pixels, but rather it is kept as it was originally written (e.g. dp).
+	 *
+	 * @return The dimension value.
+	 */
+	public static float getDimension(int dimensionId) {
+		return skyTubeApp.getResources().getDimension(dimensionId);
+	}
+
 }

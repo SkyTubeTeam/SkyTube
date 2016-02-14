@@ -168,8 +168,8 @@ public class ParseStreamMetaData {
 			String helperPattern = "(var " + helperObjectName.replace("$", "\\$") + "=\\{.+?\\}\\};)";
 			helperObject = matchGroup1(helperPattern, playerCode);
 
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (Throwable tr) {
+			Log.e(TAG, "loadDecryptionCode error", tr);
 		}
 
 		callerFunc = callerFunc.replace("%%", decryptionFuncName);

@@ -68,7 +68,7 @@
 	-->
 	<hollowsoft.slidingdrawer.SlidingDrawer
 		android:id="@+id/comments_drawer"
-		android:layout_width="300dp"
+		android:layout_width="350dp"
 		android:layout_height="match_parent"
 		android:orientation="horizontal"
 		android:layout_gravity="right"
@@ -92,14 +92,19 @@
 			android:id="@+id/comments_content"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:padding="16dp"
 			android:background="@color/video_player_drawer_background"
 			android:orientation="vertical">
-			<TextView
+			<ProgressBar
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:textColor="@color/video_player_drawer_text"
-				android:text="TODO — Comments"/>
+				android:layout_gravity="center_horizontal"
+				android:padding="5dp"/>
+
+			<ExpandableListView xmlns:android="http://schemas.android.com/apk/res/android"
+								android:id="@+id/commentsExpandableListView"
+								android:layout_width="match_parent"
+								android:layout_height="match_parent">
+			</ExpandableListView>
 		</LinearLayout>
 	</hollowsoft.slidingdrawer.SlidingDrawer>
 

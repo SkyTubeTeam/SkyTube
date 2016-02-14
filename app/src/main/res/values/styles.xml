@@ -52,13 +52,26 @@
 		<item name="android:displayOptions">showHome|homeAsUp|showTitle</item>
 	</style>
 
+	<!-- Video Description -->
 	<style name="VideoDescTextView" parent="AppTheme">
 		<item name="android:layout_width">wrap_content</item>
 		<item name="android:layout_height">wrap_content</item>
 		<item name="android:textColor">@color/video_player_drawer_text</item>
-		<item name="android:textSize">12.9sp</item>
 		<item name="android:textAppearance">@android:style/TextAppearance.Small</item>
 	</style>
+
+	<!-- Comments -->
+	<style name="CommentTextView" parent="AppTheme">
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:textColor">@color/comment_text</item>
+		<item name="android:textAppearance">@android:style/TextAppearance.Small</item>
+	</style>
+	
+	<style name="CommentInfoTextView" parent="CommentTextView">
+		<item name="android:textSize">12sp</item>
+	</style>
+
 
 	<!-- *************************************************************************************** -->
 	<!--

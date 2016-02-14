@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			  xmlns:custom="http://schemas.android.com/apk/res-auto"
+			  android:orientation="horizontal"
+			  android:layout_width="match_parent"
+			  android:layout_height="match_parent"
+			  android:padding="10dp"
+			  android:background="@color/comment_background">
+
+	<!-- PADDING USED FOR CHILDREN-COMMENTS -->
+	<View
+		android:id="@+id/comment_padding_view"
+		android:layout_width="@dimen/top_level_comment_thumbnail_width"
+		android:layout_height="wrap_content" />
+
+	<!-- CHANNEL THUMBNAIL -->
+	<free.rm.skytube.gui.businessobjects.InternetImageView
+		android:id="@+id/comment_thumbnail_image_view"
+		android:layout_width="@dimen/top_level_comment_thumbnail_width"
+		android:layout_height="wrap_content"
+		android:layout_centerVertical="true"
+		android:paddingRight="10dp"
+		android:scaleType="fitXY"
+		android:adjustViewBounds="true"
+		android:src="@drawable/channel_thumbnail_default"
+		custom:defaultImage="@drawable/channel_thumbnail_default"/>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical">
+
+		<TextView
+			android:id="@+id/author_text_view"
+			style="@style/CommentInfoTextView"
+			android:singleLine="true"
+			android:text="Author"/>
+
+		<TextView
+			android:id="@+id/comment_text_view"
+			style="@style/CommentTextView"
+			android:autoLink="web"
+			android:text="Comment goes here..."/>
+
+		<LinearLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal">
+
+			<TextView
+				android:id="@+id/comment_date_text_view"
+				style="@style/CommentInfoTextView"
+				android:text="17 days ago"/>
+
+			<TextView
+				style="@style/CommentInfoTextView"
+				android:paddingLeft="10dp"
+				android:paddingRight="10dp"
+				android:text="|"/>
+
+			<TextView
+				android:id="@+id/comment_upvotes_text_view"
+				style="@style/CommentInfoTextView"
+				android:drawableLeft="@drawable/ic_thumb_up_white"
+				android:drawablePadding="5dp"
+				android:gravity="center_vertical"
+				android:text="21"/>
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+</LinearLayout>

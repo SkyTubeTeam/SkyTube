@@ -26,7 +26,6 @@ import android.widget.Toast;
 import java.io.IOException;
 
 import free.rm.skytube.R;
-import free.rm.skytube.businessobjects.GetYouTubeVideoBySearch;
 import free.rm.skytube.businessobjects.GetYouTubeVideos;
 import free.rm.skytube.businessobjects.GetYouTubeVideosTask;
 import free.rm.skytube.businessobjects.VideoCategory;
@@ -101,7 +100,7 @@ public class GridAdapter extends BaseAdapterEx<YouTubeVideo> {
 		GridViewHolder viewHolder;
 
 		if (convertView == null) {
-			row = getLayoutInflater().inflate(R.layout.cell, parent, false);
+			row = getLayoutInflater().inflate(R.layout.video_cell, parent, false);
 			viewHolder = new GridViewHolder(row);
 			row.setTag(viewHolder);
 		} else {

@@ -17,4 +17,9 @@
 	<color name="video_desc_subscribe_text">#FFF</color>
 	<color name="video_desc_subscribe_background">@color/skytube_theme_colour</color>
 	<color name="video_desc_like_bar">@color/skytube_theme_colour</color>
+
+	<!-- Comments -->
+	<color name="comment_background">#222222</color>
+	<color name="comment_text">#b3b3b3</color>
+
 </resources>

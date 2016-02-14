@@ -23,15 +23,12 @@ import com.google.api.client.util.DateTime;
 import com.google.api.services.youtube.model.Thumbnail;
 import com.google.api.services.youtube.model.Video;
 
-import org.ocpsoft.prettytime.PrettyTime;
-
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.MathContext;
 import java.math.RoundingMode;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -196,13 +193,9 @@ public class YouTubeVideo implements Serializable {
 	 * @param publishDateTime {@link DateTime} of when the video was published.
 	 */
 	private void setPublishDate(DateTime publishDateTime) {
-		if (publishDateTime != null) {
-			Long unixEpoch = publishDateTime.getValue();
-			Date publishDate = new Date(unixEpoch);
-			this.publishDate = new PrettyTime().format(publishDate);
-		} else {
-			this.publishDate = "???";
-		}
+		this.publishDate = (publishDateTime != null)
+								? new PrettyTimeEx().format(publishDateTime)
+								: "???";
 	}
 
 

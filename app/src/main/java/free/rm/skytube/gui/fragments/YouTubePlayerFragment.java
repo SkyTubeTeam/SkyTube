@@ -14,6 +14,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ExpandableListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,14 +24,18 @@ import java.io.IOException;
 import java.util.List;
 
 import free.rm.skytube.R;
+import free.rm.skytube.businessobjects.GetCommentThreads;
 import free.rm.skytube.businessobjects.GetVideoDescription;
 import free.rm.skytube.businessobjects.VideoStream.StreamMetaData;
 import free.rm.skytube.businessobjects.VideoStream.StreamMetaDataList;
+import free.rm.skytube.businessobjects.YouTubeCommentThread;
 import free.rm.skytube.businessobjects.YouTubeVideo;
 import free.rm.skytube.gui.activities.YouTubePlayerActivity;
 import free.rm.skytube.gui.app.SkyTubeApp;
+import free.rm.skytube.gui.businessobjects.CommentsAdapter;
 import free.rm.skytube.gui.businessobjects.FragmentEx;
 import free.rm.skytube.gui.businessobjects.MediaControllerEx;
+import hollowsoft.slidingdrawer.OnDrawerOpenListener;
 import hollowsoft.slidingdrawer.SlidingDrawer;
 
 /**
@@ -47,6 +52,9 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 
 	private SlidingDrawer		videoDescriptionDrawer = null;
 	private SlidingDrawer		commentsDrawer = null;
+	private GetCommentThreads	getCommentThreads = null;
+	private CommentsAdapter		commentsAdapter = null;
+	private ExpandableListView	commentsExpandableListView = null;
 
 	private Handler				timerHandler = null;
 
@@ -100,6 +108,14 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 			videoDescriptionTextView = (TextView) view.findViewById(R.id.video_desc_description);
 
 			commentsDrawer = (SlidingDrawer) view.findViewById(R.id.comments_drawer);
+			commentsDrawer.setOnDrawerOpenListener(new OnDrawerOpenListener() {
+				@Override
+				public void onDrawerOpened() {
+					Toast.makeText(YouTubePlayerFragment.this.getActivity(), "Drawer opened", Toast.LENGTH_SHORT).show();
+					new GetCommentsTask().execute();
+				}
+			});
+			commentsExpandableListView = (ExpandableListView) view.findViewById(R.id.commentsExpandableListView);
 
 			// hide action bar
 			getActionBar().hide();
@@ -226,6 +242,9 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 	}
 
 
+	////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 	/**
 	 * Given a YouTubeVideo, it will asynchronously get a list of streams (supplied by YouTube) and
 	 * then it asks the videoView to start playing a stream.
@@ -300,6 +319,8 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 		}
 	}
 
+	////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 	/**
 	 * Get the video's description and set the appropriate text view.
@@ -330,6 +351,28 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 			videoDescriptionTextView.setText(description);
 		}
 
+	}
+
+	////////////////////////////////////////////////////////////////////////////////////////////////
+
+	private class GetCommentsTask extends AsyncTask<Void, Void, List<YouTubeCommentThread>> {
+
+		protected GetCommentsTask() {
+			if (YouTubePlayerFragment.this.getCommentThreads == null) {
+				getCommentThreads = new GetCommentThreads();
+			}
+		}
+
+		@Override
+		protected  List<YouTubeCommentThread> doInBackground(Void... params) {
+			return getCommentThreads.get(youTubeVideo.getId());
+		}
+
+		@Override
+		protected void onPostExecute(List<YouTubeCommentThread> commentThreadsList) {
+			commentsAdapter = new CommentsAdapter(commentThreadsList, getActivity());
+			commentsExpandableListView.setAdapter(commentsAdapter);
+		}
 	}
 
 }
