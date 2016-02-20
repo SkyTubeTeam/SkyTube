@@ -161,7 +161,8 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
 	////////////
 
 	private class CommentViewHolder {
-		private View		paddingView;
+		private View		commentView,
+							paddingView;
 		private TextView	authorTextView,
 							commentTextView,
 							dateTextView,
@@ -170,6 +171,7 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
 		private InternetImageView	thumbnailImageView;
 
 		protected CommentViewHolder(View commentView) {
+			this.commentView = commentView;
 			paddingView		= commentView.findViewById(R.id.comment_padding_view);
 			authorTextView	= (TextView) commentView.findViewById(R.id.author_text_view);
 			commentTextView	= (TextView) commentView.findViewById(R.id.comment_text_view);
@@ -195,16 +197,14 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
 				viewRepliesTextView.setVisibility(View.VISIBLE);
 
 				// on click, hide/show the comment replies
-				viewRepliesTextView.setOnClickListener(new View.OnClickListener() {
+				commentView.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View viewReplies) {
-						TextView wr = (TextView) viewReplies;
-
 						if (expandableListView.isGroupExpanded(groupPosition)) {
-							wr.setText(R.string.view_replies);
+							viewRepliesTextView.setText(R.string.view_replies);
 							expandableListView.collapseGroup(groupPosition);
 						} else {
-							wr.setText(R.string.hide_replies);
+							viewRepliesTextView.setText(R.string.hide_replies);
 							expandableListView.expandGroup(groupPosition);
 						}
 					}

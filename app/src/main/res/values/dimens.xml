@@ -2,6 +2,6 @@
 	<dimen name="top_level_comment_thumbnail_width">60dp</dimen>
 	<dimen name="child_comment_thumbnail_width">42dp</dimen>
 
-	<dimen name="description_drawer_height">300dp</dimen>
+	<dimen name="description_drawer_height">280dp</dimen>
 	<dimen name="comments_drawer_width">300dp</dimen>
 </resources>
