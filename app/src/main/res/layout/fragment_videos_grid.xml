@@ -2,7 +2,7 @@
 		  android:id="@+id/grid_view"
 		  android:layout_width="fill_parent"
 		  android:layout_height="fill_parent"
-		  android:numColumns="3"
+		  android:numColumns="@integer/video_grid_num_columns"
 		  android:clipChildren="true"
 		  android:verticalSpacing="5dp"
 		  android:horizontalSpacing="5dp"

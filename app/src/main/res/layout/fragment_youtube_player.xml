@@ -34,7 +34,7 @@
 	<hollowsoft.slidingdrawer.SlidingDrawer
 		android:id="@+id/des_drawer"
 		android:layout_width="match_parent"
-		android:layout_height="350dp"
+		android:layout_height="@dimen/description_drawer_height"
 		android:layout_gravity="bottom"
 		android:orientation="vertical"
 		drawer:handle="@+id/des_handle"
@@ -68,7 +68,7 @@
 	-->
 	<hollowsoft.slidingdrawer.SlidingDrawer
 		android:id="@+id/comments_drawer"
-		android:layout_width="350dp"
+		android:layout_width="@dimen/comments_drawer_width"
 		android:layout_height="match_parent"
 		android:orientation="horizontal"
 		android:layout_gravity="right"
