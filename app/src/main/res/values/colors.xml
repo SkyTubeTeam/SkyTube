@@ -19,7 +19,7 @@
 	<color name="video_desc_like_bar">@color/skytube_theme_colour</color>
 
 	<!-- Comments -->
-	<color name="comment_background">#222222</color>
+	<color name="comment_background">@color/video_player_hud</color>
 	<color name="comment_text">#b3b3b3</color>
 
 </resources>

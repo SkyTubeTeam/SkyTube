@@ -43,7 +43,7 @@ public class GetCommentThreads {
 	private boolean	noMoreCommentPages = false;
 	private YouTube.CommentThreads.List commentsList = null;
 
-	private static final Long	MAX_RESULTS = 10L;
+	private static final Long	MAX_RESULTS = 20L;
 	private static final String	TAG = GetCommentThreads.class.getSimpleName();
 
 
