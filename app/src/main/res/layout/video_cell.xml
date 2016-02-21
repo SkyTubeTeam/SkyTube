@@ -53,7 +53,8 @@
 			android:padding="10dp"
 			android:layout_alignBottom="@id/thumbnail_image_view"
 			android:text="Channel"
-			android:background="?android:attr/selectableItemBackground"/> <!-- on click, background effect -->
+			android:background="#000"
+			android:foreground="?android:attr/selectableItemBackground"/> <!-- on click, background effect -->
 	</RelativeLayout>
 
 
