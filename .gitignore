@@ -2,9 +2,6 @@
 # SkyTube:  Ignore these files/dirs
 #
 
-# Ignore the API Key file
-/app/src/main/res/values/strings_api_key.xml
-
 # Built application files
 *.apk
 *.ap_
@@ -18,6 +15,9 @@
 # Generated files
 bin/
 gen/
+
+# F-Droid files
+fdroid/
 
 # Gradle files
 .gradle/

@@ -19,15 +19,14 @@ package free.rm.skytube.gui.fragments;
 
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
+import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
-import android.util.Log;
 
+import free.rm.skytube.BuildConfig;
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.VideoStream.VideoResolution;
 
@@ -72,9 +71,16 @@ public class PreferencesFragment extends PreferenceFragment {
 			}
 		});
 
+		// remove the 'use official player' checkbox if we are running an OSS version
+		if (BuildConfig.FLAVOR.equals("oss")) {
+			PreferenceCategory videoPlayerCategory = (PreferenceCategory) findPreference(getString(R.string.pref_key_video_player_category));
+			Preference useOfficialPlayer = findPreference(getString(R.string.pref_key_use_offical_player));
+			videoPlayerCategory.removePreference(useOfficialPlayer);
+		}
+
 		// set the app's version number
 		Preference versionPref = findPreference(getString(R.string.pref_key_version));
-		versionPref.setSummary(getAppVersion());
+		versionPref.setSummary(BuildConfig.VERSION_NAME);
 	}
 
 
@@ -88,27 +94,6 @@ public class PreferencesFragment extends PreferenceFragment {
 				.setNeutralButton(R.string.i_agree, null)
 				.setCancelable(false)	// do not allow the user to click outside the dialog or press the back button
 				.show();
-	}
-
-
-
-	/**
-	 * Returns the version number of this app.
-	 *
-	 * @return App's version number if everything is ok;  "??" otherwise.
-	 */
-	private String getAppVersion() {
-		String version;
-
-		try {
-			PackageInfo pInfo = getActivity().getPackageManager().getPackageInfo(getActivity().getPackageName(), 0);
-			version = pInfo.versionName;
-		} catch (PackageManager.NameNotFoundException e) {
-			Log.i(TAG, "Unable to get the app's version number", e);
-			version = "??";
-		}
-
-		return version;
 	}
 
 }

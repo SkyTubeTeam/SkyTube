@@ -12,6 +12,7 @@
 	<string name="pref_summary_preferred_languages">EXPERIMENTAL:  Select one or more preferred languages.  This is used to filter out videos in the Most Popular video category and for video searches.</string>
 
 	<string name="pref_video_player_category">Video Player</string>
+	<string name="pref_key_video_player_category">video_player_category</string>
 	<string name="pref_title_preferred_res">Preferred Resolution</string>
 	<string name="pref_key_preferred_res">pref_preferred_resolution</string>
 	<string name="pref_summary_preferred_res">Select your preferred resolution</string>

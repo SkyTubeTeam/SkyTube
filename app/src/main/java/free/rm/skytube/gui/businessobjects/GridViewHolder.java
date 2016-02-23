@@ -30,6 +30,7 @@ import android.widget.TextView;
 
 import com.google.android.youtube.player.YouTubeStandalonePlayer;
 
+import free.rm.skytube.BuildConfig;
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.YouTubeVideo;
 import free.rm.skytube.gui.activities.ChannelBrowserActivity;
@@ -115,7 +116,7 @@ public class GridViewHolder {
 				if (youTubeVideo != null) {
 					// if the user has selected to play the videos using the official YouTube player
 					// (in the preferences/settings) ...
-					if (useOfficialYouTubePlayer()) {
+					if (BuildConfig.FLAVOR.equals("nonFree")  &&  useOfficialYouTubePlayer()) {
 						launchOfficialYouTubePlayer(youTubeVideo.getId());
 					} else {
 						// else we use the standalone player

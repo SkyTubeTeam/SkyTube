@@ -29,7 +29,7 @@
 	 -->
 	<PreferenceCategory
 		android:title="@string/pref_video_player_category"
-		android:key="pref_key_storage_settings">
+		android:key="@string/pref_key_video_player_category">
 		<ListPreference
 			android:key="@string/pref_key_preferred_res"
 			android:title="@string/pref_title_preferred_res"
