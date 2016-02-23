@@ -33,11 +33,15 @@ android {
     }
 }
 
+configurations {
+    nonFreeCompile
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
 
-    compile files('libs/YouTubeAndroidPlayerApi.jar')
+    nonFreeCompile files('libs/YouTubeAndroidPlayerApi.jar')
 
     compile group: 'org.ocpsoft.prettytime', name: 'prettytime', version: '3.2.7.Final'
     compile 'com.google.http-client:google-http-client-android:1.20.0'
