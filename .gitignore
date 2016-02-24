@@ -18,6 +18,7 @@ gen/
 
 # F-Droid files
 fdroid/
+app/libs/
 
 # Gradle files
 .gradle/
