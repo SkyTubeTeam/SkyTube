@@ -28,8 +28,6 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.google.android.youtube.player.YouTubeStandalonePlayer;
-
 import free.rm.skytube.BuildConfig;
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.YouTubeVideo;
@@ -114,59 +112,12 @@ public class GridViewHolder {
 			@Override
 			public void onClick(View thumbnailView) {
 				if (youTubeVideo != null) {
-					// if the user has selected to play the videos using the official YouTube player
-					// (in the preferences/settings) ...
-					if (BuildConfig.FLAVOR.equals("nonFree")  &&  useOfficialYouTubePlayer()) {
-						launchOfficialYouTubePlayer(youTubeVideo.getId());
-					} else {
-						// else we use the standalone player
-						Intent i = new Intent(context, YouTubePlayerActivity.class);
-						i.putExtra(YouTubePlayerActivity.YOUTUBE_VIDEO_OBJ, youTubeVideo);
-						context.startActivity(i);
-					}
+					YouTubePlayer.launch(youTubeVideo, context);
 				}
 			}
 		});
 	}
 
-
-	/**
-	 * Read the user's preferences and determine if the user wants to use the official YouTube video
-	 * player or not.
-	 *
-	 * @return True if the user wants to use the official player; false otherwise.
-	 */
-	private boolean useOfficialYouTubePlayer() {
-		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
-		return sharedPref.getBoolean(context.getString(R.string.pref_key_use_offical_player), false);
-	}
-
-
-	/**
-	 * Launches the official YouTube player so that the user can view the selected video.
-	 *
-	 * @param videoId Video ID to be viewed.
-	 */
-	private void launchOfficialYouTubePlayer(String videoId) {
-		try {
-			// try to start the YouTube standalone player
-			Intent intent = YouTubeStandalonePlayer.createVideoIntent((Activity) context, context.getString(R.string.API_KEY), videoId);
-			context.startActivity(intent);
-		} catch (Exception e) {
-			String errorMsg = context.getString(R.string.launch_offical_player_error);
-
-			// log the error
-			Log.e(TAG, errorMsg, e);
-
-			// display the error in an AlertDialog
-			new AlertDialog.Builder(context)
-					.setTitle(R.string.error)
-					.setMessage(errorMsg)
-					.setIcon(android.R.drawable.ic_dialog_alert)
-					.setNeutralButton(android.R.string.ok, null)
-					.show();
-		}
-	}
 
 
 	private void setupChannelOnClickListener(boolean openChannelOnClick) {
