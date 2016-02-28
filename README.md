@@ -14,7 +14,7 @@ More features will be added in the near future.
 
 ## Download
 
-[![Aptoide](https://i.imgur.com/bbgC4YC.png)](http://rmstore.store.aptoide.com/app/market/free.rm.skytube.oss/1/17955485/SkyTube)
+[![Aptoide](https://i.imgur.com/T5A0EXV.png)](http://rmstore.store.aptoide.com/app/market/free.rm.skytube.oss/1/17955485/SkyTube)
 [![F-Droid](https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Get_it_on_F-Droid.svg/200px-Get_it_on_F-Droid.svg.png)](https://f-droid.org/repository/browse/?fdid=free.rm.skytube.oss)
 [![Dowload-APK](screenshots/download_apk.png)](https://mega.nz/#!9k8STRwK!mBt1huQP-Mjpp55ptskpbDIWJlmMyI1gQ6h0LEH-QTE)
 
