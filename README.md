@@ -12,7 +12,18 @@ This app allows you to:
 
 More features will be added in the near future.
 
+## Download
+
 [![F-Droid](https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Get_it_on_F-Droid.svg/200px-Get_it_on_F-Droid.svg.png)](https://f-droid.org/repository/browse/?fdid=free.rm.skytube.oss)
+
+[![Aptoide](https://i.imgur.com/bbgC4YC.png)](http://rmstore.store.aptoide.com/app/market/free.rm.skytube.oss/1/17955485/SkyTube)
+
+[![Dowload-APK](screenshots/download_apk.png)](https://mega.nz/#!9k8STRwK!mBt1huQP-Mjpp55ptskpbDIWJlmMyI1gQ6h0LEH-QTE)
+
+```
+MD5:    32755ae514524f274a148cc188a5bae4
+SHA256: f238dcc612c10ad7d96828f5f394c8d05caa04b3118544063252e82b7d219c36
+```
 
 ## Why SkyTube?
 * Innovative design
@@ -23,7 +34,6 @@ More features will be added in the near future.
 * My code does not spy on your behaviour!
 
 ## Screenshots
-
 ### Tablet
 [<img src="screenshots/featured.png" width=960>](screenshots/featured.png)
 [<img src="screenshots/player2.png" width=960>](screenshots/player2.png)
