@@ -29,6 +29,7 @@ More features will be added in the near future.
 [<img src="screenshots/player2.png" width=960>](screenshots/player2.png)
 [<img src="screenshots/player+desc.png" width=960>](screenshots/player+desc.png)
 [<img src="screenshots/player+comments.png" width=960>](screenshots/player+comments.png)
+[<img src="screenshots/channel_browser.png" width=960>](screenshots/channel_browser.png)
 
 ### Mobile Phone
 [<img src="screenshots/mobile_most_pop.png" width=250>](screenshots/mobile_most_pop.png)
