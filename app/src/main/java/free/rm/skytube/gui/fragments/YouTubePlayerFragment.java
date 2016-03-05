@@ -22,9 +22,12 @@ import android.widget.VideoView;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.GetVideoDescription;
+import free.rm.skytube.businessobjects.GetVideosDetailsByIDs;
 import free.rm.skytube.businessobjects.VideoStream.StreamMetaData;
 import free.rm.skytube.businessobjects.VideoStream.StreamMetaDataList;
 import free.rm.skytube.businessobjects.YouTubeVideo;
@@ -44,7 +47,14 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 	private YouTubeVideo		youTubeVideo = null;
 	private VideoView			videoView = null;
 	private MediaControllerEx	mediaController = null;
+	private TextView			videoDescTitleTextView = null;
+	private TextView			videoDescChannelTextView = null;
+	private TextView			videoDescViewsTextView = null;
+	private TextView			videoDescLikesTextView = null;
+	private TextView			videoDescDislikesTextView = null;
+	private TextView			videoDescPublishDateTextView = null;
 	private TextView			videoDescriptionTextView = null;
+	private ProgressBar			videoDescLikesBar = null;
 	private View				voidView = null;
 	private View				loadingVideoView = null;
 
@@ -70,8 +80,6 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 		setHasOptionsMenu(true);
 
 		if (youTubeVideo == null) {
-			youTubeVideo = (YouTubeVideo) getActivity().getIntent().getExtras().getSerializable(YouTubePlayerActivity.YOUTUBE_VIDEO_OBJ);
-
 			loadingVideoView = view.findViewById(R.id.loadingVideoView);
 
 			videoView = (VideoView) view.findViewById(R.id.video_view);
@@ -90,21 +98,14 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 			});
 
 			videoDescriptionDrawer = (SlidingDrawer) view.findViewById(R.id.des_drawer);
-			((TextView) view.findViewById(R.id.video_desc_title)).setText(youTubeVideo.getTitle());
-			((TextView) view.findViewById(R.id.video_desc_channel)).setText(youTubeVideo.getChannelName());
-			((TextView) view.findViewById(R.id.video_desc_views)).setText(youTubeVideo.getViewsCount());
-
-			if (youTubeVideo.isThumbsUpPercentageSet()) {
-				((TextView) view.findViewById(R.id.video_desc_likes)).setText(youTubeVideo.getLikeCount());
-				((TextView) view.findViewById(R.id.video_desc_dislikes)).setText(youTubeVideo.getDislikeCount());
-				((TextView) view.findViewById(R.id.video_desc_publish_date)).setText(youTubeVideo.getPublishDate());
-
-				ProgressBar likesBar = (ProgressBar) view.findViewById(R.id.video_desc_likes_bar);
-				likesBar.setProgress(youTubeVideo.getThumbsUpPercentage());
-				likesBar.getProgressDrawable().setColorFilter(getResources().getColor(R.color.video_desc_like_bar), PorterDuff.Mode.SRC_IN);
-			}
-
+			videoDescTitleTextView = (TextView) view.findViewById(R.id.video_desc_title);
+			videoDescChannelTextView = (TextView) view.findViewById(R.id.video_desc_channel);
+			videoDescViewsTextView = (TextView) view.findViewById(R.id.video_desc_views);
+			videoDescLikesTextView = (TextView) view.findViewById(R.id.video_desc_likes);
+			videoDescDislikesTextView = (TextView) view.findViewById(R.id.video_desc_dislikes);
+			videoDescPublishDateTextView = (TextView) view.findViewById(R.id.video_desc_publish_date);
 			videoDescriptionTextView = (TextView) view.findViewById(R.id.video_desc_description);
+			videoDescLikesBar = (ProgressBar) view.findViewById(R.id.video_desc_likes_bar);
 
 			commentsExpandableListView = (ExpandableListView) view.findViewById(R.id.commentsExpandableListView);
 			commentsProgressBar = view.findViewById(R.id.comments_progress_bar);
@@ -122,12 +123,45 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 			// hide action bar
 			getActionBar().hide();
 
-			// load the video
-			loadVideo();
+			// get which video we need to play...
+			Bundle bundle = getActivity().getIntent().getExtras();
+			if (bundle != null  &&  bundle.getSerializable(YouTubePlayerActivity.YOUTUBE_VIDEO_OBJ) != null) {
+				// ... either the video details are passed through the previous activity
+				youTubeVideo = (YouTubeVideo) bundle.getSerializable(YouTubePlayerActivity.YOUTUBE_VIDEO_OBJ);
+				setUpHUDAndPlayVideo();
+			} else {
+				// ... or the video URL is passed to SkyTube via another Android app
+				GetVideoDetailsTask getVideoDetailsTask = new GetVideoDetailsTask();
+				getVideoDetailsTask.execute();
+			}
 		}
 
 		return view;
 	}
+
+
+	/**
+	 * Will setup the HUD's details according to the contents of {@link #youTubeVideo}.  Then it
+	 * will try to load and play the video.
+	 */
+	private void setUpHUDAndPlayVideo() {
+		videoDescTitleTextView.setText(youTubeVideo.getTitle());
+		videoDescChannelTextView.setText(youTubeVideo.getChannelName());
+		videoDescViewsTextView.setText(youTubeVideo.getViewsCount());
+
+		if (youTubeVideo.isThumbsUpPercentageSet()) {
+			videoDescLikesTextView.setText(youTubeVideo.getLikeCount());
+			videoDescDislikesTextView.setText(youTubeVideo.getDislikeCount());
+			videoDescPublishDateTextView.setText(youTubeVideo.getPublishDate());
+
+			videoDescLikesBar.setProgress(youTubeVideo.getThumbsUpPercentage());
+			videoDescLikesBar.getProgressDrawable().setColorFilter(getResources().getColor(R.color.video_desc_like_bar), PorterDuff.Mode.SRC_IN);
+		}
+
+		// load the video
+		loadVideo();
+	}
+
 
 
 	@Override
@@ -222,7 +256,7 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 			case R.id.menu_reload_video:
 				loadVideo();
 				return true;
-			case R.id.menu_open_video_in_browser:
+			case R.id.menu_open_video_with:
 				Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v="+youTubeVideo.getId()));
 				startActivity(browserIntent);
 				videoView.pause();
@@ -351,6 +385,101 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 		@Override
 		protected void onPostExecute(String description) {
 			videoDescriptionTextView.setText(description);
+		}
+
+	}
+
+
+	////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+	/**
+	 * This task will, from the given video URL, get the details of the video (e.g. video name,
+	 * likes ...etc).
+	 */
+	private class GetVideoDetailsTask extends AsyncTask<Void, Void, YouTubeVideo> {
+
+		private String videoUrl = null;
+
+
+		@Override
+		protected void onPreExecute() {
+			videoUrl = getUrlFromIntent(getActivity().getIntent());
+		}
+
+
+		/**
+		 * Returns an instance of {@link YouTubeVideo} from the given {@link #videoUrl}.
+		 *
+		 * @return {@link YouTubeVideo}; null if an error has occurred.
+		 */
+		@Override
+		protected YouTubeVideo doInBackground(Void... params) {
+			String videoId = getYouTubeIdFromUrl(videoUrl);
+			YouTubeVideo youTubeVideo = null;
+
+			if (videoId != null) {
+				try {
+					GetVideosDetailsByIDs getVideo = new GetVideosDetailsByIDs();
+					getVideo.init(videoId);
+					List<YouTubeVideo> youTubeVideos = getVideo.getNextVideos();
+
+					if (youTubeVideos.size() > 0)
+						youTubeVideo = youTubeVideos.get(0);
+				} catch (IOException ex) {
+					Log.e(TAG, "Unable to get video details, where id="+videoId, ex);
+				}
+			}
+
+			return youTubeVideo;
+		}
+
+
+		@Override
+		protected void onPostExecute(YouTubeVideo youTubeVideo) {
+			if (youTubeVideo == null) {
+				String err = String.format(getString(R.string.error_invalid_url), videoUrl);
+				Toast.makeText(getActivity(), err, Toast.LENGTH_LONG).show();
+				Log.e(TAG, err);
+				getActivity().finish();
+			} else {
+				YouTubePlayerFragment.this.youTubeVideo = youTubeVideo;
+				setUpHUDAndPlayVideo();	// setup the HUD and play the video
+			}
+		}
+
+
+		/**
+		 * The video URL is passed to SkyTube via another Android app (i.e. via an intent).
+		 *
+		 * @return The URL of the YouTube video the user wants to play.
+		 */
+		private String getUrlFromIntent(final Intent intent) {
+			String url = null;
+
+			if (Intent.ACTION_VIEW.equals(intent.getAction()) && intent.getData() != null) {
+				url = intent.getData().toString();
+			}
+
+			return url;
+		}
+
+
+		/**
+		 * Extracts the video ID from the given video URL.
+		 *
+		 * @param url	YouTube video URL.
+		 * @return ID if everything went as planned; null otherwise.
+		 */
+		private String getYouTubeIdFromUrl(String url) {
+			if (url == null)
+				return null;
+
+			final String pattern = "(?<=v=|/videos/|embed/|youtu\\.be/|/v/|/e/)[^#&\\?]*";
+			Pattern compiledPattern = Pattern.compile(pattern);
+			Matcher matcher = compiledPattern.matcher(url);
+
+			return matcher.find() ? matcher.group() /*video id*/ : null;
 		}
 
 	}
