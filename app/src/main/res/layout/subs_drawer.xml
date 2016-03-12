@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			  android:orientation="vertical"
+			  android:layout_width="match_parent"
+			  android:layout_height="match_parent"
+			  android:padding="10dp"
+			  android:background="@color/subs_drawer_background">
+
+	<TextView
+		android:paddingBottom="10dp"
+		android:textAppearance="@android:style/TextAppearance.Medium"
+		android:textStyle="bold"
+		android:text="@string/subscriptions"
+		style="@style/SubsTextView"/>
+
+	<ListView
+		android:id="@+id/subs_drawer"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:choiceMode="singleChoice"
+		android:divider="@android:color/transparent"
+		android:dividerHeight="0dp"/>
+
+</LinearLayout>

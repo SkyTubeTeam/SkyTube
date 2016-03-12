@@ -31,6 +31,21 @@
 		<item name="android:textSize">12.9sp</item>
 	</style>
 
+
+	<!-- *************************************************************************************** -->
+	<!--
+		Subs Drawer
+	-->
+
+	<style name="SubsTextView" parent="AppTheme">
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:textColor">@color/subs_text</item>
+		<item name="android:textAppearance">@android:style/TextAppearance.Small</item>
+	</style>
+
+
+
 	<!-- *************************************************************************************** -->
 	<!--
 	 	Video Player

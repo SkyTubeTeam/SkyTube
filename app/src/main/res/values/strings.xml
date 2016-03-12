@@ -7,6 +7,7 @@
 		official YouTube player.  Make sure that the official Google\'s YouTube app is installed on
 		your device.</string>
 
+	<string name="subscriptions">Subscriptions:</string>
 	<string name="total_subscribers">%,d subscribers</string>
 
 	<!--

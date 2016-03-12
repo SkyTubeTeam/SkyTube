@@ -1,9 +1,21 @@
-<GridView xmlns:android="http://schemas.android.com/apk/res/android"
-		  android:id="@+id/grid_view"
-		  android:layout_width="fill_parent"
-		  android:layout_height="fill_parent"
-		  android:numColumns="@integer/video_grid_num_columns"
-		  android:clipChildren="true"
-		  android:verticalSpacing="5dp"
-		  android:horizontalSpacing="5dp"
-		  android:background="@color/grid_view_background" />
+<android.support.v4.widget.DrawerLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/drawer_layout"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+
+	<GridView android:id="@+id/grid_view"
+			  android:layout_width="fill_parent"
+			  android:layout_height="fill_parent"
+			  android:numColumns="@integer/video_grid_num_columns"
+			  android:clipChildren="true"
+			  android:verticalSpacing="5dp"
+			  android:horizontalSpacing="5dp"
+			  android:background="@color/grid_view_background" />
+
+	<include
+		android:layout_width="240dp"
+		android:layout_height="match_parent"
+		layout="@layout/subs_drawer"/>
+
+</android.support.v4.widget.DrawerLayout>
