@@ -1,0 +1,70 @@
+/*
+ * SkyTube
+ * Copyright (C) 2016  Ramon Mifsud
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation (version 3 of the License).
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+package free.rm.skytube.businessobjects.db;
+
+import android.os.AsyncTask;
+import android.util.Log;
+import android.widget.Toast;
+
+import java.util.List;
+
+import free.rm.skytube.R;
+import free.rm.skytube.businessobjects.YouTubeChannel;
+import free.rm.skytube.gui.app.SkyTubeApp;
+import free.rm.skytube.gui.businessobjects.SubsAdapter;
+
+/**
+ * Gets a list of channels that the user is subscribed to and then passes the channels list to
+ * the given {@link SubsAdapter}.
+ */
+public class GetSubscribedChannelsTask extends AsyncTask<Void, Void, List<YouTubeChannel>> {
+
+	private SubsAdapter adapter;
+
+	private static final String TAG = GetSubscribedChannelsTask.class.getSimpleName();
+
+
+	public GetSubscribedChannelsTask(SubsAdapter adapter) {
+		this.adapter = adapter;
+	}
+
+
+	@Override
+	protected List<YouTubeChannel> doInBackground(Void... params) {
+		List<YouTubeChannel> subbedChannelsList = null;
+
+		try {
+			subbedChannelsList = SkyTubeApp.getSubscriptionsDb().getSubscribedChannels();
+		} catch (Throwable tr) {
+			Log.e(TAG, "An error has occurred while getting subbed channels", tr);
+		}
+
+		return subbedChannelsList;
+	}
+
+
+	@Override
+	protected void onPostExecute(List<YouTubeChannel> subbedChannelsList) {
+		if (subbedChannelsList == null) {
+			Toast.makeText(adapter.getContext(), R.string.error_get_subbed_channels, Toast.LENGTH_LONG).show();
+		} else {
+			adapter.appendList(subbedChannelsList);
+		}
+	}
+
+}

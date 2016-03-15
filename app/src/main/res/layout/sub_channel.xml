@@ -23,6 +23,7 @@
 
 	<!-- CHANNEL NAME -->
 	<TextView
+		android:id="@+id/sub_channel_name_text_view"
 		android:paddingLeft="10dp"
 		android:paddingRight="10dp"
 		android:text="Channel Name"

@@ -19,18 +19,42 @@ package free.rm.skytube.gui.fragments;
 
 import android.app.ActionBar;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
+import android.widget.ListView;
 import android.widget.SpinnerAdapter;
 
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.VideoCategory;
+import free.rm.skytube.gui.businessobjects.SubsAdapter;
 
 /**
  * A fragment that will hold a {@link GridView} full of YouTube videos.
  */
 @SuppressWarnings("deprecation")
 public class VideosGridFragment extends SearchVideoGridFragment implements ActionBar.OnNavigationListener {
+
+	private ListView	subsListView = null;
+	private SubsAdapter	subsAdapter = null;
+
+
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		View view = super.onCreateView(inflater, container, savedInstanceState);
+
+		this.subsListView = (ListView) view.findViewById(R.id.subs_drawer);
+
+		if (subsAdapter == null) {
+			this.subsAdapter = new SubsAdapter(getActivity());
+		}
+
+		this.subsListView.setAdapter(this.subsAdapter);
+		return view;
+	}
+
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {

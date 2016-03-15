@@ -21,6 +21,8 @@ import android.app.Application;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import free.rm.skytube.businessobjects.db.SubscriptionsDb;
+
 /**
  * SkyTube application.
  */
@@ -28,6 +30,7 @@ public class SkyTubeApp extends Application {
 
 	/** SkyTube Application instance. */
 	private static SkyTubeApp skyTubeApp = null;
+	private static volatile SubscriptionsDb subscriptionsDb = null;
 
 
 	@Override
@@ -66,6 +69,15 @@ public class SkyTubeApp extends Application {
 	 */
 	public static float getDimension(int dimensionId) {
 		return skyTubeApp.getResources().getDimension(dimensionId);
+	}
+
+
+	public static synchronized SubscriptionsDb getSubscriptionsDb() {
+		if (subscriptionsDb == null) {
+			subscriptionsDb = new SubscriptionsDb(skyTubeApp.getBaseContext());
+		}
+
+		return subscriptionsDb;
 	}
 
 }

@@ -8,7 +8,10 @@
 		Subs Drawer Colours
 	-->
 	<color name="subs_drawer_background">@color/video_player_hud</color>
-	<color name="subs_text">#b3b3b3</color>
+	<color name="subs_text">#FFF</color>
+
+	<drawable name="subscribe_button">@color/skytube_theme_colour</drawable>
+	<drawable name="subscribe_button_pressed">#ff8e44</drawable>
 
 	<!--
 		Video Player Colours
@@ -19,8 +22,6 @@
 	<color name="video_player_drawer_background">@color/video_player_hud</color>
 	<color name="video_player_drawer_text">#b3b3b3</color>
 
-	<color name="video_desc_subscribe_text">#FFF</color>
-	<color name="video_desc_subscribe_background">@color/skytube_theme_colour</color>
 	<color name="video_desc_like_bar">@color/skytube_theme_colour</color>
 
 	<!-- Comments -->

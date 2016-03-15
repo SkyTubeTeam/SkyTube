@@ -36,13 +36,10 @@
 					style="@style/VideoDescTextView"
 					android:text="Channel Name"/>
 
-				<TextView
-					android:layout_below="@id/video_desc_channel"
-					style="@style/VideoDescTextView"
-					android:padding="3dp"
-					android:background="@color/video_desc_subscribe_background"
-					android:textColor="@color/video_desc_subscribe_text"
-					android:text="@string/subscribe"/>
+				<free.rm.skytube.gui.businessobjects.SubscribeButton
+					android:id="@+id/video_desc_subscribe_button"
+					style="@style/SubscribeButton"
+					android:layout_below="@id/video_desc_channel"/>
 
 			</RelativeLayout>
 

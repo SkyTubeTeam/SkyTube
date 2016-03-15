@@ -31,11 +31,14 @@ import free.rm.skytube.businessobjects.GetVideosDetailsByIDs;
 import free.rm.skytube.businessobjects.VideoStream.StreamMetaData;
 import free.rm.skytube.businessobjects.VideoStream.StreamMetaDataList;
 import free.rm.skytube.businessobjects.YouTubeVideo;
+import free.rm.skytube.businessobjects.db.CheckIfUserSubbedToChannelTask;
+import free.rm.skytube.businessobjects.db.SubscribeToChannelTask;
 import free.rm.skytube.gui.activities.YouTubePlayerActivity;
 import free.rm.skytube.gui.app.SkyTubeApp;
 import free.rm.skytube.gui.businessobjects.CommentsAdapter;
 import free.rm.skytube.gui.businessobjects.FragmentEx;
 import free.rm.skytube.gui.businessobjects.MediaControllerEx;
+import free.rm.skytube.gui.businessobjects.SubscribeButton;
 import hollowsoft.slidingdrawer.OnDrawerOpenListener;
 import hollowsoft.slidingdrawer.SlidingDrawer;
 
@@ -49,6 +52,7 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 	private MediaControllerEx	mediaController = null;
 	private TextView			videoDescTitleTextView = null;
 	private TextView			videoDescChannelTextView = null;
+	private SubscribeButton		videoDescSubscribeButton = null;
 	private TextView			videoDescViewsTextView = null;
 	private TextView			videoDescLikesTextView = null;
 	private TextView			videoDescDislikesTextView = null;
@@ -106,6 +110,13 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 			videoDescPublishDateTextView = (TextView) view.findViewById(R.id.video_desc_publish_date);
 			videoDescriptionTextView = (TextView) view.findViewById(R.id.video_desc_description);
 			videoDescLikesBar = (ProgressBar) view.findViewById(R.id.video_desc_likes_bar);
+			videoDescSubscribeButton = (SubscribeButton) view.findViewById(R.id.video_desc_subscribe_button);
+			videoDescSubscribeButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					new SubscribeToChannelTask(videoDescSubscribeButton, youTubeVideo.getChannelId()).execute();
+				}
+			});
 
 			commentsExpandableListView = (ExpandableListView) view.findViewById(R.id.commentsExpandableListView);
 			commentsProgressBar = view.findViewById(R.id.comments_progress_bar);
@@ -134,6 +145,8 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 				GetVideoDetailsTask getVideoDetailsTask = new GetVideoDetailsTask();
 				getVideoDetailsTask.execute();
 			}
+
+			new CheckIfUserSubbedToChannelTask(videoDescSubscribeButton, youTubeVideo.getChannelId()).execute();
 		}
 
 		return view;

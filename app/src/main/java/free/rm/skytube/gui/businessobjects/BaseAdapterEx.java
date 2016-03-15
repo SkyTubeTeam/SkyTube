@@ -49,7 +49,7 @@ public abstract class BaseAdapterEx<T> extends BaseAdapter {
 		this.list     = list;
 	}
 
-	protected Context getContext() {
+	public Context getContext() {
 		return context;
 	}
 

@@ -9,7 +9,6 @@
 	<string name="reload_video">Reload video</string>
 	<string name="open_in_browser">Open in browser</string>
 	<string name="open_with">Open with…</string>
-	<string name="subscribe">Subscribe</string>
 
 	<string name="error_get_comments">An error has occurred while getting comments.</string>
 	<string name="no_video_comments">This video has no comments or comments are disabled.</string>

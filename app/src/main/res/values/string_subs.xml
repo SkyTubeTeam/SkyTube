@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="subscriptions">Subscriptions:</string>
+	<string name="subscribe">Subscribe</string>
+	<string name="unsubscribe">Unsubscribe</string>
+	<string name="total_subscribers">%,d subscribers</string>
+
+	<string name="subscribed">Subscribed</string>
+	<string name="unsubscribed">Unsubscribed</string>
+
+	<string name="error_get_subbed_channels">An error has occurred while getting subscribed channels.</string>
+	<string name="error_check_if_user_has_subbed">Unable to check if user has subscribed to channel (id=%s)</string>
+	<string name="error_unable_to_subscribe">Unable to (un)subscribed to channel (id=%s)</string>
+</resources>

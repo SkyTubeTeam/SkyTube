@@ -2,6 +2,7 @@
 	
 	<!-- SkyTube theme -->
 	<style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
+		<item name="@attr/subscribeButtonStyle">@style/SubscribeButton</item>
 	</style>
 
 	<!-- *************************************************************************************** -->
@@ -42,6 +43,18 @@
 		<item name="android:layout_height">wrap_content</item>
 		<item name="android:textColor">@color/subs_text</item>
 		<item name="android:textAppearance">@android:style/TextAppearance.Small</item>
+	</style>
+
+	<style name="SubscribeButton" parent="AppTheme">
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:textColor">@color/subs_text</item>
+		<item name="android:textAppearance">@android:style/TextAppearance.Small</item>
+		<item name="android:minHeight">0dp</item>
+		<item name="android:minWidth">0dp</item>
+		<item name="android:padding">3dp</item>
+		<item name="android:background">@drawable/subscribe_button_background</item>
+		<item name="android:text">@string/subscribe</item>
 	</style>
 
 
