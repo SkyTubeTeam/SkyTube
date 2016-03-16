@@ -18,6 +18,7 @@
 package free.rm.skytube.gui.businessobjects;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -31,9 +32,60 @@ import free.rm.skytube.businessobjects.db.GetSubscribedChannelsTask;
  */
 public class SubsAdapter extends BaseAdapterEx<YouTubeChannel> {
 
-	public SubsAdapter(Context context) {
+	private static SubsAdapter subsAdapter = null;
+	private static final String TAG = SubsAdapter.class.getSimpleName();
+
+	private SubsAdapter(Context context) {
 		super(context);
 		new GetSubscribedChannelsTask(this).execute();
+	}
+
+
+	public static SubsAdapter get(Context context) {
+		if (subsAdapter == null) {
+			subsAdapter = new SubsAdapter(context);
+		}
+
+		return subsAdapter;
+	}
+
+
+	/**
+	 * Append channel to this adapter.
+	 *
+	 * @param channel Channel to append.
+	 */
+	public void appendChannel(YouTubeChannel channel) {
+		append(channel);
+	}
+
+
+	/**
+	 * Remove channel from this adapter.
+	 *
+	 * @param channel Channel to remove.
+	 */
+	public void removeChannel(YouTubeChannel channel) {
+		removeChannel(channel.getId());
+	}
+
+
+	/**
+	 * Remove channel from this adapter.
+	 *
+	 * @param channelId Channel to remove.
+	 */
+	public void removeChannel(String channelId) {
+		int size = getCount();
+
+		for (int i = 0;  i < size;  i++) {
+			if (get(i).getId().equalsIgnoreCase(channelId)) {
+				remove(i);
+				return;
+			}
+		}
+
+		Log.e(TAG, "Channel not removed from adapter:  id="+channelId);
 	}
 
 

@@ -33,8 +33,11 @@ import java.io.IOException;
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.businessobjects.YouTubeChannel;
+import free.rm.skytube.businessobjects.db.CheckIfUserSubbedToChannelTask;
+import free.rm.skytube.businessobjects.db.SubscribeToChannelTask;
 import free.rm.skytube.gui.activities.ChannelBrowserActivity;
 import free.rm.skytube.gui.businessobjects.FragmentEx;
+import free.rm.skytube.gui.businessobjects.SubscribeButton;
 import free.rm.skytube.gui.businessobjects.VideoGridAdapter;
 import free.rm.skytube.gui.businessobjects.InternetImageView;
 
@@ -50,6 +53,7 @@ public class ChannelBrowserFragment extends FragmentEx {
 	private InternetImageView	channelThumbnailImage = null;
 	private InternetImageView	channelBannerImage = null;
 	private TextView			channelSubscribersTextView = null;
+	private SubscribeButton		channelSubscribeButton = null;
 	private GetChannelInfoTask	task = null;
 
 
@@ -63,12 +67,24 @@ public class ChannelBrowserFragment extends FragmentEx {
 		channelBannerImage = (InternetImageView) fragment.findViewById(R.id.channel_banner_image_view);
 		channelThumbnailImage = (InternetImageView) fragment.findViewById(R.id.channel_thumbnail_image_view);
 		channelSubscribersTextView = (TextView) fragment.findViewById(R.id.channel_subs_text_view);
+		channelSubscribeButton = (SubscribeButton) fragment.findViewById(R.id.channel_subscribe_button);
+		channelSubscribeButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// subscribe / unsubscribe to this video's channel
+				new SubscribeToChannelTask(channelSubscribeButton, channel).execute();
+			}
+		});
 
 		if (channel == null) {
 			if (task == null) {
 				task = new GetChannelInfoTask();
 				task.execute(channelId);
 			}
+
+			// check if the user has subscribed to this channel... if he has, then change the state
+			// of the subscribe button
+			new CheckIfUserSubbedToChannelTask(channelSubscribeButton, channelId).execute();
 		} else {
 			initViews();
 		}

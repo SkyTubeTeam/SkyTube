@@ -75,9 +75,34 @@ public abstract class BaseAdapterEx<T> extends BaseAdapter {
 
 
 	/**
+	 * Append the given item to the Adapter's list.
+	 *
+	 * @param item The item to append.
+	 */
+	protected void append(T item) {
+		if (item != null) {
+			this.list.add(item);
+			this.notifyDataSetChanged();
+		}
+	}
+
+
+	/**
+	 * Remove an item from the Adapter's list.
+	 *
+	 * @param itemPosition	Item's position/index to remove.
+	 */
+	protected void remove(int itemPosition) {
+		if (itemPosition >= 0  &&  itemPosition < getCount()) {
+			list.remove(itemPosition);
+		}
+	}
+
+
+	/**
 	 * Clear all items that are in the list.
 	 */
-	public void clearList() {
+	protected void clearList() {
 		this.list.clear();
 	}
 

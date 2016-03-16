@@ -48,7 +48,7 @@ public class VideosGridFragment extends SearchVideoGridFragment implements Actio
 		this.subsListView = (ListView) view.findViewById(R.id.subs_drawer);
 
 		if (subsAdapter == null) {
-			this.subsAdapter = new SubsAdapter(getActivity());
+			this.subsAdapter = SubsAdapter.get(getActivity());
 		}
 
 		this.subsListView.setAdapter(this.subsAdapter);

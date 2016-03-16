@@ -30,6 +30,7 @@ import free.rm.skytube.businessobjects.GetVideoDescription;
 import free.rm.skytube.businessobjects.GetVideosDetailsByIDs;
 import free.rm.skytube.businessobjects.VideoStream.StreamMetaData;
 import free.rm.skytube.businessobjects.VideoStream.StreamMetaDataList;
+import free.rm.skytube.businessobjects.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTubeVideo;
 import free.rm.skytube.businessobjects.db.CheckIfUserSubbedToChannelTask;
 import free.rm.skytube.businessobjects.db.SubscribeToChannelTask;
@@ -48,6 +49,8 @@ import hollowsoft.slidingdrawer.SlidingDrawer;
 public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnPreparedListener {
 
 	private YouTubeVideo		youTubeVideo = null;
+	private YouTubeChannel		youTubeChannel = null;
+
 	private VideoView			videoView = null;
 	private MediaControllerEx	mediaController = null;
 	private TextView			videoDescTitleTextView = null;
@@ -114,7 +117,8 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 			videoDescSubscribeButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					new SubscribeToChannelTask(videoDescSubscribeButton, youTubeVideo.getChannelId()).execute();
+					// subscribe / unsubscribe to this video's channel
+					new SubscribeToChannelTask(videoDescSubscribeButton, youTubeChannel).execute();
 				}
 			});
 
@@ -140,16 +144,26 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 				// ... either the video details are passed through the previous activity
 				youTubeVideo = (YouTubeVideo) bundle.getSerializable(YouTubePlayerActivity.YOUTUBE_VIDEO_OBJ);
 				setUpHUDAndPlayVideo();
+
+				getVideoInfoTasks();
 			} else {
 				// ... or the video URL is passed to SkyTube via another Android app
 				GetVideoDetailsTask getVideoDetailsTask = new GetVideoDetailsTask();
 				getVideoDetailsTask.execute();
 			}
-
-			new CheckIfUserSubbedToChannelTask(videoDescSubscribeButton, youTubeVideo.getChannelId()).execute();
 		}
 
 		return view;
+	}
+
+
+	private void getVideoInfoTasks() {
+		// get Channel info (e.g. avatar...etc) task
+		new GetYouTubeChannelInfoTask().execute(youTubeVideo.getChannelId());
+
+		// check if the user has subscribed to a channel... if he has, then change the state of
+		// the subscribe button
+		new CheckIfUserSubbedToChannelTask(videoDescSubscribeButton, youTubeVideo.getChannelId()).execute();
 	}
 
 
@@ -458,6 +472,8 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 			} else {
 				YouTubePlayerFragment.this.youTubeVideo = youTubeVideo;
 				setUpHUDAndPlayVideo();	// setup the HUD and play the video
+
+				getVideoInfoTasks();
 			}
 		}
 
@@ -493,6 +509,35 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 			Matcher matcher = compiledPattern.matcher(url);
 
 			return matcher.find() ? matcher.group() /*video id*/ : null;
+		}
+
+	}
+
+
+	////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+	private class GetYouTubeChannelInfoTask extends AsyncTask<String, Void, YouTubeChannel> {
+
+		private final String TAG = GetYouTubeChannelInfoTask.class.getSimpleName();
+
+		@Override
+		protected YouTubeChannel doInBackground(String... channelId) {
+			YouTubeChannel chn = new YouTubeChannel();
+
+			try {
+				chn.init(channelId[0]);
+			} catch (IOException e) {
+				Log.e(TAG, "Unable to get channel info.  ChannelID=" + channelId[0], e);
+				chn = null;
+			}
+
+			return chn;
+		}
+
+		@Override
+		protected void onPostExecute(YouTubeChannel youTubeChannel) {
+			YouTubePlayerFragment.this.youTubeChannel = youTubeChannel;
 		}
 
 	}
