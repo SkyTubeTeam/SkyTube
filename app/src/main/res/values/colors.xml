@@ -1,17 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<color name="skytube_theme_colour">#ff6600</color>
+	<color name="colorPrimary">#263238</color>
+	<color name="colorPrimaryDark">#21272B</color>
+	<color name="colorAccent">#26A69A</color>
 
-	<color name="grid_view_background">#222222</color>
+	<color name="skytube_theme_colour">#ff6600</color>
 
 	<!--
 		Subs Drawer Colours
 	-->
-	<color name="subs_drawer_background">@color/video_player_hud</color>
+	<color name="subs_drawer_background">#CC21272B</color>
 	<color name="subs_text">#FFF</color>
 
 	<drawable name="subscribe_button">@color/skytube_theme_colour</drawable>
 	<drawable name="subscribe_button_pressed">#ff8e44</drawable>
+
+
+	<!--
+		Video (Grid) Cells
+	-->
+	<color name="video_cell_background">#111517</color>
+	<color name="video_cell_text_main">#FFF</color>
+	<color name="video_cell_text_details">#808080</color>
+	<color name="grid_view_background">@color/colorPrimaryDark</color>
 
 	<!--
 		Video Player Colours

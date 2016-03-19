@@ -53,7 +53,7 @@
 			android:padding="10dp"
 			android:layout_alignBottom="@id/thumbnail_image_view"
 			android:text="Channel"
-			android:background="#000"
+			android:background="@color/video_cell_background"
 			android:foreground="?android:attr/selectableItemBackground"/> <!-- on click, background effect -->
 	</RelativeLayout>
 
@@ -66,7 +66,7 @@
 		android:paddingRight="10dp"
 		android:paddingBottom="10dp"
 		android:layout_marginTop="-10dp"
-		android:background="#000">
+		android:background="@color/video_cell_background">
 
 		<TextView
 			android:id="@+id/views_text_view"

@@ -17,20 +17,21 @@
 
 package free.rm.skytube.gui.activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.SearchView;
 
 import free.rm.skytube.R;
 
 /**
  * Main activity (launcher).  This activity holds {@link free.rm.skytube.gui.fragments.VideosGridFragment}.
  */
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +45,8 @@ public class MainActivity extends Activity {
 		inflater.inflate(R.menu.main_activity_menu, menu);
 
 		// setup the SearchView (actionbar)
-		final SearchView searchView = (SearchView) menu.findItem(R.id.menu_search).getActionView();
-		searchView.setLayoutParams(new SearchView.LayoutParams(SearchView.LayoutParams.MATCH_PARENT, SearchView.LayoutParams.WRAP_CONTENT));
+		final MenuItem searchItem = menu.findItem(R.id.menu_search);
+		final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
 		searchView.setQueryHint(getString(R.string.search_videos));
 		searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 			@Override

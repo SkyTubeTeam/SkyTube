@@ -19,15 +19,17 @@ package free.rm.skytube.gui.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
+import free.rm.skytube.R;
 import free.rm.skytube.gui.fragments.PreferencesFragment;
 
 /**
  * The preferences activity allows the user to change the settings of this app.  This activity
  * loads {@link PreferencesFragment}.
  */
-public class PreferencesActivity extends Activity {
+public class PreferencesActivity extends AppCompatActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +41,8 @@ public class PreferencesActivity extends Activity {
 				.commit();
 
 		// display the back button in the action bar (left-hand side)
-		getActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setTitle(R.string.preferences);
 	}
 
 

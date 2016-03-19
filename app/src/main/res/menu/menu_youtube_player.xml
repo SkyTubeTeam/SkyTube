@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+	  xmlns:app="http://schemas.android.com/apk/res-auto">
+
 	<item android:id="@+id/menu_reload_video"
 		  android:title="@string/reload_video"
 		  android:icon="@drawable/ic_menu_reload_video"
-		  android:showAsAction="ifRoom"/>
+		  app:showAsAction="ifRoom"/>
 
 	<item android:id="@+id/menu_open_video_with"
 		  android:title="@string/open_with"
-		  android:showAsAction="never"/>
+		  app:showAsAction="never"/>
+
 </menu>

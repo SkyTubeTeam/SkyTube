@@ -17,10 +17,10 @@
 
 package free.rm.skytube.gui.businessobjects;
 
-import android.app.ActionBar;
-import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 
 /**
  * An extension of {@link Fragment} in which a fragment instance is retained across Activity
@@ -42,8 +42,8 @@ public class FragmentEx extends Fragment {
 		// The Fragment might not always get completely destroyed after Activity.finish(), hence
 		// this code might get called after the hosting activity is destroyed.  Therefore we need
 		// to handle getActivity() properly.  Refer to:  http://stackoverflow.com/a/21886594/3132935
-		Activity activity = getActivity();
-		return (activity != null ? activity.getActionBar() : null);
+		AppCompatActivity activity = (AppCompatActivity) getActivity();
+		return (activity != null ? activity.getSupportActionBar() : null);
 	}
 
 }

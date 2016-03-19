@@ -1,8 +1,12 @@
 <resources>
 	
 	<!-- SkyTube theme -->
-	<style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
-		<item name="@attr/subscribeButtonStyle">@style/SubscribeButton</item>
+	<style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+		<item name="colorPrimary">@color/colorPrimary</item>
+		<item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+		<item name="colorAccent">@color/colorAccent</item>
+
+		<item name="actionBarPopupTheme">@style/ThemeOverlay.AppCompat</item>
 	</style>
 
 	<!-- *************************************************************************************** -->
@@ -13,23 +17,23 @@
 	<style name="GridTextView" parent="AppTheme">
 		<item name="android:layout_width">match_parent</item>
 		<item name="android:layout_height">wrap_content</item>
-		<item name="android:textSize">14sp</item>
-		<item name="android:textColor">#FFF</item>
-		<item name="android:background">#000</item>
+		<item name="android:textAppearance">@style/TextAppearance.AppCompat.Small</item>
+		<item name="android:textColor">@color/video_cell_text_main</item>
+		<item name="android:background">@color/video_cell_background</item>
 	</style>
 
 	<style name="GridMicroDetailsTextView" parent="GridTextView">
 		<item name="android:layout_width">wrap_content</item>
 		<item name="android:padding">2dp</item>
-		<item name="android:background">#BA000000</item>
+		<item name="android:background">#BA111517</item>
 		<item name="android:singleLine">true</item>
-		<item name="android:textSize">12.9sp</item>
+		<item name="android:textAppearance">@style/TextAppearance.AppCompat.Small</item>
 	</style>
 
 	<style name="GridDetailsTextView" parent="GridTextView">
-		<item name="android:textColor">#808080</item>
+		<item name="android:textColor">@color/video_cell_text_details</item>
 		<item name="android:singleLine">true</item>
-		<item name="android:textSize">12.9sp</item>
+		<item name="android:textAppearance">@style/TextAppearance.AppCompat.Small</item>
 	</style>
 
 
@@ -66,18 +70,13 @@
 
 	<style name="VideoPlayerActivityTheme" parent="AppTheme">
 		<item name="android:windowFullscreen">true</item>
-		<item name="android:windowActionBarOverlay">true</item>
-		<item name="android:actionBarStyle">@style/VideoPlayerActionBarTheme</item>
+		<item name="windowActionBarOverlay">true</item>
+		<item name="actionBarStyle">@style/VideoPlayerActionBarTheme</item>
 	</style>
 
-	<style name="VideoPlayerActionBarTheme" parent="android:Widget.Holo.Light.ActionBar.Solid.Inverse" >
-		<!-- Actionbar background colour -->
-		<item name="android:background">@color/video_player_hud</item>
-
-		<!-- hide app's icon/logo -->
-		<item name="android:icon">@android:color/transparent</item>
-
-		<item name="android:displayOptions">showHome|homeAsUp|showTitle</item>
+	<style name="VideoPlayerActionBarTheme" parent="AppTheme" >
+		<item name="background">@color/video_player_hud</item>	<!-- Actionbar background colour -->
+		<item name="displayOptions">showHome|homeAsUp|showTitle</item>
 	</style>
 
 	<!-- Video Description -->
