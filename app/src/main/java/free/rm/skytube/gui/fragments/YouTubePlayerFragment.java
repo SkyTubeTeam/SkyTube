@@ -83,7 +83,7 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 		// inflate the layout for this fragment
 		View view = inflater.inflate(R.layout.fragment_youtube_player, container, false);
 
-		// indicate that this fragment has a action bar menu
+		// indicate that this fragment has an action bar menu
 		setHasOptionsMenu(true);
 
 		if (youTubeVideo == null) {

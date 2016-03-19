@@ -1,11 +1,13 @@
 <android.support.v4.widget.DrawerLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/subs_drawer_layout"
 	android:layout_width="match_parent"
-	android:layout_height="match_parent">
+	android:layout_height="match_parent"
+	android:fitsSystemWindows="true">
 
 	<GridView android:id="@+id/grid_view"
-			  android:layout_width="fill_parent"
-			  android:layout_height="fill_parent"
+			  android:layout_width="match_parent"
+			  android:layout_height="match_parent"
 			  android:numColumns="@integer/video_grid_num_columns"
 			  android:clipChildren="true"
 			  android:verticalSpacing="5dp"

@@ -19,7 +19,10 @@ package free.rm.skytube.gui.fragments;
 
 import android.app.ActionBar;
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -39,11 +42,28 @@ public class VideosGridFragment extends SearchVideoGridFragment implements Actio
 
 	private ListView	subsListView = null;
 	private SubsAdapter	subsAdapter = null;
+	private ActionBarDrawerToggle subsDrawerToggle;
 
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = super.onCreateView(inflater, container, savedInstanceState);
+
+		// indicate that this fragment has an action bar menu
+		setHasOptionsMenu(true);
+
+		DrawerLayout subsDrawerLayout = (DrawerLayout) view.findViewById(R.id.subs_drawer_layout);
+		subsDrawerToggle = new ActionBarDrawerToggle(
+				getActivity(),
+				subsDrawerLayout,
+				R.string.app_name,
+				R.string.app_name
+		);
+
+		subsDrawerToggle.setDrawerIndicatorEnabled(true);
+		getActionBar().setIcon(0);
+		getActionBar().setDisplayHomeAsUpEnabled(true);
+		getActionBar().setHomeButtonEnabled(true);
 
 		this.subsListView = (ListView) view.findViewById(R.id.subs_drawer);
 
@@ -70,6 +90,8 @@ public class VideosGridFragment extends SearchVideoGridFragment implements Actio
 			actionBar.setDisplayShowTitleEnabled(false);
 			actionBar.setListNavigationCallbacks(spinnerAdapter, this);
 		}
+
+		subsDrawerToggle.syncState();
 	}
 
 
@@ -84,4 +106,16 @@ public class VideosGridFragment extends SearchVideoGridFragment implements Actio
 		return true;	// true means event was handled
 	}
 
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Pass the event to ActionBarDrawerToggle, if it returns true, then it has handled the app
+		// icon touch event
+		if (subsDrawerToggle.onOptionsItemSelected(item)) {
+			return true;
+		}
+
+		// Handle your other action bar items...
+		return super.onOptionsItemSelected(item);
+	}
 }
