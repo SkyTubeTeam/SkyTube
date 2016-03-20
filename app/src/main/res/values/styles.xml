@@ -58,14 +58,14 @@
 		<item name="android:layout_width">wrap_content</item>
 		<item name="android:layout_height">wrap_content</item>
 		<item name="android:textColor">@color/subs_text</item>
-		<item name="android:textAppearance">@android:style/TextAppearance.Small</item>
+		<item name="android:textAppearance">@style/TextAppearance.AppCompat.Small</item>
 	</style>
 
 	<style name="SubscribeButton" parent="AppTheme">
 		<item name="android:layout_width">wrap_content</item>
 		<item name="android:layout_height">wrap_content</item>
 		<item name="android:textColor">@color/subs_text</item>
-		<item name="android:textAppearance">@android:style/TextAppearance.Small</item>
+		<item name="android:textAppearance">@style/TextAppearance.AppCompat.Small</item>
 		<item name="android:minHeight">0dp</item>
 		<item name="android:minWidth">0dp</item>
 		<item name="android:padding">3dp</item>
@@ -96,7 +96,7 @@
 		<item name="android:layout_width">wrap_content</item>
 		<item name="android:layout_height">wrap_content</item>
 		<item name="android:textColor">@color/video_player_drawer_text</item>
-		<item name="android:textAppearance">@android:style/TextAppearance.Small</item>
+		<item name="android:textAppearance">@style/TextAppearance.AppCompat.Small</item>
 	</style>
 
 	<!-- Comments -->
@@ -104,7 +104,7 @@
 		<item name="android:layout_width">wrap_content</item>
 		<item name="android:layout_height">wrap_content</item>
 		<item name="android:textColor">@color/comment_text</item>
-		<item name="android:textAppearance">@android:style/TextAppearance.Small</item>
+		<item name="android:textAppearance">@style/TextAppearance.AppCompat.Small</item>
 	</style>
 	
 	<style name="CommentInfoTextView" parent="CommentTextView">
@@ -120,7 +120,7 @@
 	<style name="ChannelDetailsTextView" parent="AppTheme">
 		<item name="android:textColor">#F5F5F5FF</item>
 		<item name="android:singleLine">true</item>
-		<item name="android:textAppearance">@android:style/TextAppearance.Small</item>
+		<item name="android:textAppearance">@style/TextAppearance.AppCompat.Small</item>
 	</style>
 
 

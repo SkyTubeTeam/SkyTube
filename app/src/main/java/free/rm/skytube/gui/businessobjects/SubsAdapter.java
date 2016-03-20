@@ -18,6 +18,7 @@
 package free.rm.skytube.gui.businessobjects;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,9 +27,10 @@ import android.widget.TextView;
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.YouTubeChannel;
 import free.rm.skytube.businessobjects.db.GetSubscribedChannelsTask;
+import free.rm.skytube.gui.activities.ChannelBrowserActivity;
 
 /**
- *
+ * Channel subscriptions adapter.
  */
 public class SubsAdapter extends BaseAdapterEx<YouTubeChannel> {
 
@@ -117,15 +119,27 @@ public class SubsAdapter extends BaseAdapterEx<YouTubeChannel> {
 
 		private InternetImageView	thumbnailImageView;
 		private TextView			channelNameTextView;
+		private YouTubeChannel		channel = null;
 
 		public SubChannelViewHolder(View rowView) {
 			thumbnailImageView  = (InternetImageView) rowView.findViewById(R.id.sub_channel_thumbnail_image_view);
 			channelNameTextView = (TextView) rowView.findViewById(R.id.sub_channel_name_text_view);
+			channel = null;
+
+			rowView.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					Intent i = new Intent(getContext(), ChannelBrowserActivity.class);
+					i.putExtra(ChannelBrowserActivity.CHANNEL_OBJ, channel);
+					getContext().startActivity(i);
+				}
+			});
 		}
 
 		public void updateInfo(YouTubeChannel channel) {
 			thumbnailImageView.setImageAsync(channel.getThumbnailNormalUrl());
 			channelNameTextView.setText(channel.getTitle());
+			this.channel = channel;
 		}
 
 	}

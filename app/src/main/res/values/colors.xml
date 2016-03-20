@@ -10,6 +10,8 @@
 		Subs Drawer Colours
 	-->
 	<color name="subs_drawer_background">#CC21272B</color>
+	<drawable name="sub_channel_pressed">@color/colorAccent</drawable>
+	<drawable name="sub_channel">@android:color/transparent</drawable>
 	<color name="subs_text">#FFF</color>
 
 	<drawable name="subscribe_button">@color/skytube_theme_colour</drawable>

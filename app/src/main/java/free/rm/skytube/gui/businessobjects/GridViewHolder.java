@@ -88,8 +88,7 @@ public class GridViewHolder {
 	 */
 	private void updateViewsData(YouTubeVideo video, boolean showChannelInfo) {
 		titleTextView.setText(video.getTitle());
-		channelTextView.setText(video.getChannelName());
-		channelTextView.setVisibility(showChannelInfo ? View.VISIBLE : View.INVISIBLE);
+		channelTextView.setText(showChannelInfo ? video.getChannelName() : "");
 		publishDateTextView.setText(video.getPublishDate());
 		videoDurationTextView.setText(video.getDuration());
 		viewsTextView.setText(video.getViewsCount());

@@ -24,7 +24,8 @@ import free.rm.skytube.gui.businessobjects.BackActivity;
 
 public class ChannelBrowserActivity extends BackActivity {
 
-	public static final String CHANNEL_ID = "ChannelBrowserActivity.ChannelID";
+	public static final String CHANNEL_OBJ = "ChannelBrowserActivity.ChannelObj";
+	public static final String CHANNEL_ID  = "ChannelBrowserActivity.ChannelID";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

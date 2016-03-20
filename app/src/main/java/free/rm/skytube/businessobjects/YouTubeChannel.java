@@ -31,6 +31,7 @@ import com.google.api.services.youtube.model.ChannelStatistics;
 import com.google.api.services.youtube.model.ThumbnailDetails;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.List;
 
 import free.rm.skytube.R;
@@ -41,7 +42,7 @@ import free.rm.skytube.gui.app.SkyTubeApp;
  *
  * <p>This class has the ability to query channel info by using the given channel ID.</p>
  */
-public class YouTubeChannel {
+public class YouTubeChannel implements Serializable {
 
 	private String id;
 	private String title;

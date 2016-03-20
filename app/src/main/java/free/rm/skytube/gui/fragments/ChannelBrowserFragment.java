@@ -35,6 +35,7 @@ import free.rm.skytube.businessobjects.YouTubeChannel;
 import free.rm.skytube.businessobjects.db.CheckIfUserSubbedToChannelTask;
 import free.rm.skytube.businessobjects.db.SubscribeToChannelTask;
 import free.rm.skytube.gui.activities.ChannelBrowserActivity;
+import free.rm.skytube.gui.activities.YouTubePlayerActivity;
 import free.rm.skytube.gui.businessobjects.FragmentEx;
 import free.rm.skytube.gui.businessobjects.SubscribeButton;
 import free.rm.skytube.gui.businessobjects.VideoGridAdapter;
@@ -58,7 +59,19 @@ public class ChannelBrowserFragment extends FragmentEx {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		final String channelId = getActivity().getIntent().getStringExtra(ChannelBrowserActivity.CHANNEL_ID);
+		final String channelId;
+		Bundle bundle = getActivity().getIntent().getExtras();
+
+		// we need to create a YouTubeChannel object:  this can be done by either:
+		//   (1) the object is passed to this Fragment
+		//   (2) passing the channel ID... a task is then created to create a YouTubeChannel
+		//       instance using the given channel ID
+		if (bundle != null  &&  bundle.getSerializable(ChannelBrowserActivity.CHANNEL_OBJ) != null) {
+			this.channel = (YouTubeChannel) bundle.getSerializable(ChannelBrowserActivity.CHANNEL_OBJ);
+			channelId = channel.getId();
+		} else {
+			channelId = getActivity().getIntent().getStringExtra(ChannelBrowserActivity.CHANNEL_ID);
+		}
 
 		// inflate the layout for this fragment
 		View fragment = inflater.inflate(R.layout.fragment_channel_browser, container, false);
@@ -80,13 +93,13 @@ public class ChannelBrowserFragment extends FragmentEx {
 				task = new GetChannelInfoTask();
 				task.execute(channelId);
 			}
-
-			// check if the user has subscribed to this channel... if he has, then change the state
-			// of the subscribe button
-			new CheckIfUserSubbedToChannelTask(channelSubscribeButton, channelId).execute();
 		} else {
 			initViews();
 		}
+
+		// check if the user has subscribed to this channel... if he has, then change the state
+		// of the subscribe button
+		new CheckIfUserSubbedToChannelTask(channelSubscribeButton, channelId).execute();
 
 		gridView = (GridView) fragment.findViewById(R.id.grid_view);
 
