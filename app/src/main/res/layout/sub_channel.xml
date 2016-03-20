@@ -7,8 +7,7 @@
 			  android:layout_width="match_parent"
 			  android:layout_height="match_parent"
 			  android:gravity="center_vertical"
-			  android:orientation="horizontal"
-			  android:background="@color/subs_drawer_background">
+			  android:orientation="horizontal">
 
 	<!-- CHANNEL THUMBNAIL -->
 	<free.rm.skytube.gui.businessobjects.InternetImageView
@@ -24,9 +23,11 @@
 	<!-- CHANNEL NAME -->
 	<TextView
 		android:id="@+id/sub_channel_name_text_view"
+		android:layout_width="0dp"
+		android:layout_weight="1"
 		android:paddingLeft="10dp"
 		android:paddingRight="10dp"
-		android:text="Channel Name"
+		android:text="This is a very long Channel Name to show that we need to use the weight"
 		style="@style/SubsTextView"/>
 
 	<!-- NEW VIDEOS UPLOADED SINCE LAST VISIT ? -->
