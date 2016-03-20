@@ -136,7 +136,7 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 			});
 
 			// hide action bar
-			getActionBar().hide();
+			getSupportActionBar().hide();
 
 			// get which video we need to play...
 			Bundle bundle = getActivity().getIntent().getExtras();
@@ -204,7 +204,7 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 	 * @return True if the HUD is visible (provided that this Fragment is also visible).
 	 */
 	private boolean isHudVisible() {
-		return isVisible()  &&  (mediaController.isShowing()  ||  getActionBar().isShowing());
+		return isVisible()  &&  (mediaController.isShowing()  ||  getSupportActionBar().isShowing());
 	}
 
 
@@ -226,8 +226,8 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 	 */
 	private void showHud() {
 		if (!isHudVisible()) {
-			getActionBar().show();
-			getActionBar().setTitle(youTubeVideo.getTitle());
+			getSupportActionBar().show();
+			getSupportActionBar().setTitle(youTubeVideo.getTitle());
 			mediaController.show(0);
 
 			videoDescriptionDrawer.close();
@@ -254,7 +254,7 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 	 */
 	private void hideHud() {
 		if (isHudVisible()) {
-			getActionBar().hide();
+			getSupportActionBar().hide();
 			mediaController.hide();
 
 			videoDescriptionDrawer.setVisibility(View.VISIBLE);

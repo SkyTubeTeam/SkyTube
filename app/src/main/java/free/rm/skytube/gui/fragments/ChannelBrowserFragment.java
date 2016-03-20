@@ -107,7 +107,7 @@ public class ChannelBrowserFragment extends FragmentEx {
 			channelBannerImage.setImageAsync(channel.getBannerUrl());
 			channelSubscribersTextView.setText(channel.getTotalSubscribers());
 
-			ActionBar actionBar = getActionBar();
+			ActionBar actionBar = getSupportActionBar();
 			if (actionBar != null) {
 				actionBar.setTitle(channel.getTitle());
 			}

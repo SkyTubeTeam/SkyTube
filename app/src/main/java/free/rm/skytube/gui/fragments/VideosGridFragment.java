@@ -21,6 +21,8 @@ import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -32,22 +34,38 @@ import android.widget.SpinnerAdapter;
 
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.VideoCategory;
+import free.rm.skytube.gui.businessobjects.FragmentEx;
 import free.rm.skytube.gui.businessobjects.SubsAdapter;
+import free.rm.skytube.gui.businessobjects.VideoGridAdapter;
 
 /**
  * A fragment that will hold a {@link GridView} full of YouTube videos.
  */
 @SuppressWarnings("deprecation")
-public class VideosGridFragment extends SearchVideoGridFragment implements ActionBar.OnNavigationListener {
+public class VideosGridFragment extends FragmentEx implements ActionBar.OnNavigationListener {
 
-	private ListView	subsListView = null;
-	private SubsAdapter	subsAdapter = null;
-	private ActionBarDrawerToggle subsDrawerToggle;
+	protected GridView				gridView;
+	protected VideoGridAdapter		videoGridAdapter;
+	private ListView				subsListView = null;
+	private SubsAdapter				subsAdapter = null;
+	private ActionBarDrawerToggle	subsDrawerToggle;
 
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = super.onCreateView(inflater, container, savedInstanceState);
+		// inflate the layout for this fragment
+		View view = inflater.inflate(R.layout.fragment_videos_grid, container, false);
+
+		// setup the video grid view
+		this.gridView = (GridView) view.findViewById(R.id.grid_view);
+		if (this.videoGridAdapter == null) {
+			this.videoGridAdapter = new VideoGridAdapter(getActivity());
+		}
+		this.gridView.setAdapter(this.videoGridAdapter);
+
+		// setup the toolbar / actionbar
+		Toolbar toolbar = (Toolbar) view.findViewById(R.id.activity_main_toolbar);
+		setSupportActionBar(toolbar);
 
 		// indicate that this fragment has an action bar menu
 		setHasOptionsMenu(true);
@@ -59,10 +77,12 @@ public class VideosGridFragment extends SearchVideoGridFragment implements Actio
 				R.string.app_name,
 				R.string.app_name
 		);
-
 		subsDrawerToggle.setDrawerIndicatorEnabled(true);
-		getActionBar().setDisplayHomeAsUpEnabled(true);
-		getActionBar().setHomeButtonEnabled(true);
+		ActionBar actionBar = getSupportActionBar();
+		if (actionBar != null) {
+			actionBar.setDisplayHomeAsUpEnabled(true);
+			actionBar.setHomeButtonEnabled(true);
+		}
 
 		this.subsListView = (ListView) view.findViewById(R.id.subs_drawer);
 
@@ -79,7 +99,7 @@ public class VideosGridFragment extends SearchVideoGridFragment implements Actio
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 
-		ActionBar actionBar = getActionBar();
+		ActionBar actionBar = getSupportActionBar();
 		if (actionBar != null) {
 			SpinnerAdapter spinnerAdapter =
 					ArrayAdapter.createFromResource(actionBar.getThemedContext(), R.array.video_categories,

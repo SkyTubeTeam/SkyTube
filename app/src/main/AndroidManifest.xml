@@ -11,10 +11,11 @@
 		android:label="@string/app_name"
 		android:supportsRtl="true"
 		android:theme="@style/AppTheme">
-		<activity android:name=".gui.activities.MainActivity">
+		<activity
+			android:name=".gui.activities.MainActivity"
+			android:theme="@style/NoActionBarActivityTheme">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN"/>
-
 				<category android:name="android.intent.category.LAUNCHER"/>
 			</intent-filter>
 		</activity>
@@ -22,7 +23,6 @@
 			android:name=".gui.activities.YouTubePlayerActivity"
 			android:configChanges="orientation|keyboardHidden|screenSize"
 			android:theme="@style/VideoPlayerActivityTheme">
-
 			<intent-filter>
 				<action android:name="android.intent.action.VIEW" />
 
@@ -37,7 +37,6 @@
 				<data android:host="www.youtube.com" />
 				<data android:host="youtu.be" />
 			</intent-filter>
-
 		</activity>
 		<activity android:name=".gui.activities.PreferencesActivity"/>
 		<activity android:name=".gui.activities.SearchActivity"/>

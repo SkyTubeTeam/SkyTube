@@ -66,6 +66,6 @@
 	<include
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		layout="@layout/fragment_videos_grid" />
+		layout="@layout/videos_gridview" />
 
 </LinearLayout>

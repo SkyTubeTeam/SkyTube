@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridView xmlns:android="http://schemas.android.com/apk/res/android"
+		  android:id="@+id/grid_view"
+		  android:layout_width="match_parent"
+		  android:layout_height="match_parent"
+		  android:numColumns="@integer/video_grid_num_columns"
+		  android:clipChildren="true"
+		  android:verticalSpacing="5dp"
+		  android:horizontalSpacing="5dp"
+		  android:background="@color/grid_view_background" />

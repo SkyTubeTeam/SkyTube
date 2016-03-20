@@ -9,6 +9,18 @@
 		<item name="actionBarPopupTheme">@style/ThemeOverlay.AppCompat</item>
 	</style>
 
+
+	<!-- *************************************************************************************** -->
+	<!--
+		Main Activity
+	-->
+
+	<style name="NoActionBarActivityTheme" parent="AppTheme">
+		<item name="windowActionBar">false</item>
+		<item name="windowNoTitle">true</item>
+	</style>
+
+
 	<!-- *************************************************************************************** -->
 	<!--
 		Video Grid

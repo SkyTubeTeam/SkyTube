@@ -36,14 +36,14 @@ import free.rm.skytube.gui.businessobjects.VideoGridAdapter;
  */
 public class SearchVideoGridFragment extends FragmentEx {
 
-	protected GridView		gridView;
-	protected VideoGridAdapter videoGridAdapter;
+	protected GridView			gridView;
+	protected VideoGridAdapter	videoGridAdapter;
 
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		// inflate the layout for this fragment
-		View view = inflater.inflate(R.layout.fragment_videos_grid, container, false);
+		View view = inflater.inflate(R.layout.videos_gridview, container, false);
 
 		this.gridView = (GridView) view.findViewById(R.id.grid_view);
 
@@ -57,7 +57,7 @@ public class SearchVideoGridFragment extends FragmentEx {
 				this.videoGridAdapter.setVideoCategory(VideoCategory.SEARCH_QUERY, searchQuery);
 
 				// set the action bar's title
-				ActionBar actionBar = getActionBar();
+				ActionBar actionBar = getSupportActionBar();
 				if (actionBar != null)
 					actionBar.setTitle(searchQuery);
 			}
