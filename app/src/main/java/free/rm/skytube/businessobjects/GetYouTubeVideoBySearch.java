@@ -19,9 +19,6 @@ package free.rm.skytube.businessobjects;
 
 import android.util.Log;
 
-import com.google.api.client.extensions.android.http.AndroidHttp;
-import com.google.api.client.http.HttpTransport;
-import com.google.api.client.json.JsonFactory;
 import com.google.api.services.youtube.YouTube;
 import com.google.api.services.youtube.model.SearchListResponse;
 import com.google.api.services.youtube.model.SearchResult;
@@ -47,11 +44,7 @@ public class GetYouTubeVideoBySearch extends GetYouTubeVideos {
 
 	@Override
 	public void init() throws IOException {
-		HttpTransport httpTransport = AndroidHttp.newCompatibleTransport();
-		JsonFactory jsonFactory = com.google.api.client.extensions.android.json.AndroidJsonFactory.getDefaultInstance();
-		YouTube youtube = new YouTube.Builder(httpTransport, jsonFactory, null /*timeout here?*/).build();
-
-		videosList = youtube.search().list("id");
+		videosList = YouTubeAPI.create().search().list("id");
 		videosList.setFields("items(id/videoId), nextPageToken");
 		videosList.setKey(SkyTubeApp.getStr(R.string.API_KEY));
 		videosList.setType("video");

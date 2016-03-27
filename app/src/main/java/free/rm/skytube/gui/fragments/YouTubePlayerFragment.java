@@ -182,7 +182,7 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 			videoDescPublishDateTextView.setText(youTubeVideo.getPublishDate());
 
 			videoDescLikesBar.setProgress(youTubeVideo.getThumbsUpPercentage());
-			videoDescLikesBar.getProgressDrawable().setColorFilter(getResources().getColor(R.color.video_desc_like_bar), PorterDuff.Mode.SRC_IN);
+			//videoDescLikesBar.getProgressDrawable().setColorFilter(getResources().getColor(R.color.video_desc_like_bar), PorterDuff.Mode.SRC_IN);
 		}
 
 		// load the video

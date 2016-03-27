@@ -57,6 +57,7 @@ public class SubscriptionsDb extends SQLiteOpenHelper {
 	public boolean subscribe(String channelId) {
 		ContentValues values = new ContentValues();
 		values.put(SubscriptionsTable.COL_CHANNEL_ID, channelId);
+		values.put(SubscriptionsTable.COL_LAST_VISIT_TIME, System.currentTimeMillis());
 
 		return getWritableDatabase().insert(SubscriptionsTable.TABLE_NAME, null, values) != -1;
 	}
@@ -83,7 +84,7 @@ public class SubscriptionsDb extends SQLiteOpenHelper {
 			do {
 				channelId = cursor.getString(colChannelIdNum);
 				channel = new YouTubeChannel();
-				channel.init(channelId);
+				channel.init(channelId, true /* = user is subscribed to this channel*/);
 				subsChannels.add(channel);
 			} while (cursor.moveToNext());
 		}
@@ -101,6 +102,54 @@ public class SubscriptionsDb extends SQLiteOpenHelper {
 		}
 
 		return false;
+	}
+
+
+	/**
+	 * Updates the given channel's last visit time.
+	 *
+	 * @param channelId	Channel ID
+	 *
+	 * @return	last visit time, if the update was successful;  -1 otherwise.
+	 */
+	public long updateLastVisitTime(String channelId) {
+		SQLiteDatabase	db = getWritableDatabase();
+		long			currentTime = System.currentTimeMillis();
+
+		ContentValues values = new ContentValues();
+		values.put(SubscriptionsTable.COL_LAST_VISIT_TIME, currentTime);
+
+		int count = db.update(
+				SubscriptionsTable.TABLE_NAME,
+				values,
+				SubscriptionsTable.COL_CHANNEL_ID + " = ?",
+				new String[]{channelId});
+
+		return (count > 0 ? currentTime : -1);
+	}
+
+
+	/**
+	 * Returns the last time the user has visited this channel.
+	 *
+	 * @param channelId
+	 *
+	 * @return	last visit time, if the update was successful;  -1 otherwise.
+	 * @throws IOException
+	 */
+	public long getLastVisitTime(String channelId) {
+		Cursor cursor = getReadableDatabase().query(
+							SubscriptionsTable.TABLE_NAME,
+							new String[]{SubscriptionsTable.COL_LAST_VISIT_TIME},
+							SubscriptionsTable.COL_CHANNEL_ID + " = ?",
+							new String[]{channelId}, null, null, null);
+
+		if (cursor.moveToNext()) {
+			int colLastVisitTIme = cursor.getColumnIndexOrThrow(SubscriptionsTable.COL_LAST_VISIT_TIME);
+			return cursor.getLong(colLastVisitTIme);
+		}
+
+		return -1;
 	}
 
 }

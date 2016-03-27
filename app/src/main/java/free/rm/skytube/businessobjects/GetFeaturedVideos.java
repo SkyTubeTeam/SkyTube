@@ -47,11 +47,7 @@ public class GetFeaturedVideos extends GetYouTubeVideos {
 
 	@Override
 	public void init() throws IOException {
-		HttpTransport	httpTransport = AndroidHttp.newCompatibleTransport();
-		JsonFactory		jsonFactory = com.google.api.client.extensions.android.json.AndroidJsonFactory.getDefaultInstance();
-		YouTube			youtube = new YouTube.Builder(httpTransport, jsonFactory, null /*timeout here?*/).build();
-
-		videosList = youtube.videos().list("snippet, statistics, contentDetails");
+		videosList = YouTubeAPI.create().videos().list("snippet, statistics, contentDetails");
 		videosList.setFields("items(id, snippet/defaultAudioLanguage, snippet/defaultLanguage, snippet/publishedAt, snippet/title, snippet/channelId, snippet/channelTitle," +
 				"snippet/thumbnails/high, contentDetails/duration, statistics)," +
 				"nextPageToken");

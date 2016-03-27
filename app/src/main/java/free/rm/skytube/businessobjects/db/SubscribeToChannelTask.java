@@ -37,7 +37,7 @@ public class SubscribeToChannelTask extends AsyncTask<Void, Void, Boolean> {
 	private SubscribeButton subscribeButton;
 	private YouTubeChannel	channel;
 
-	private static String TAG = CheckIfUserSubbedToChannelTask.class.getSimpleName();
+	private static String TAG = SubscribeToChannelTask.class.getSimpleName();
 
 
 	/**

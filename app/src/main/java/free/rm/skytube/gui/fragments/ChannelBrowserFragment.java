@@ -32,14 +32,12 @@ import java.io.IOException;
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.businessobjects.YouTubeChannel;
-import free.rm.skytube.businessobjects.db.CheckIfUserSubbedToChannelTask;
 import free.rm.skytube.businessobjects.db.SubscribeToChannelTask;
 import free.rm.skytube.gui.activities.ChannelBrowserActivity;
-import free.rm.skytube.gui.activities.YouTubePlayerActivity;
 import free.rm.skytube.gui.businessobjects.FragmentEx;
+import free.rm.skytube.gui.businessobjects.InternetImageView;
 import free.rm.skytube.gui.businessobjects.SubscribeButton;
 import free.rm.skytube.gui.businessobjects.VideoGridAdapter;
-import free.rm.skytube.gui.businessobjects.InternetImageView;
 
 /**
  * A Fragment that displays information about a channel.
@@ -55,6 +53,8 @@ public class ChannelBrowserFragment extends FragmentEx {
 	private TextView			channelSubscribersTextView = null;
 	private SubscribeButton		channelSubscribeButton = null;
 	private GetChannelInfoTask	task = null;
+
+	private static final String TAG = ChannelBrowserActivity.class.getSimpleName();
 
 
 	@Override
@@ -95,11 +95,8 @@ public class ChannelBrowserFragment extends FragmentEx {
 			}
 		} else {
 			initViews();
+			channel.updateLastVisitTime();
 		}
-
-		// check if the user has subscribed to this channel... if he has, then change the state
-		// of the subscribe button
-		new CheckIfUserSubbedToChannelTask(channelSubscribeButton, channelId).execute();
 
 		gridView = (GridView) fragment.findViewById(R.id.grid_view);
 
@@ -114,6 +111,9 @@ public class ChannelBrowserFragment extends FragmentEx {
 	}
 
 
+	/**
+	 * Initialise views that are related to {@link #channel}.
+	 */
 	private void initViews() {
 		if (channel != null) {
 			channelThumbnailImage.setImageAsync(channel.getThumbnailNormalUrl());
@@ -123,6 +123,14 @@ public class ChannelBrowserFragment extends FragmentEx {
 			ActionBar actionBar = getSupportActionBar();
 			if (actionBar != null) {
 				actionBar.setTitle(channel.getTitle());
+			}
+
+			// if the user has subscribed to this channel, then change the state of the
+			// subscribe button
+			if (channel.isUserSubscribed()) {
+				channelSubscribeButton.setUnsubscribeState();
+			} else {
+				channelSubscribeButton.setSubscribeState();
 			}
 		}
 	}
@@ -139,7 +147,11 @@ public class ChannelBrowserFragment extends FragmentEx {
 			YouTubeChannel chn = new YouTubeChannel();
 
 			try {
+				// initialise the channel
 				chn.init(channelId[0]);
+
+				// the user is visiting the channel, so we need to update the last visit time
+				chn.updateLastVisitTime();
 			} catch (IOException e) {
 				Log.e(TAG, "Unable to get channel info.  ChannelID=" + channelId[0], e);
 				chn = null;

@@ -49,12 +49,7 @@ public class GetCommentThreads {
 
 	public void init(String videoId) throws IOException {
 		this.videoId = videoId;
-
-		HttpTransport httpTransport = AndroidHttp.newCompatibleTransport();
-		JsonFactory jsonFactory = com.google.api.client.extensions.android.json.AndroidJsonFactory.getDefaultInstance();
-		YouTube youtube = new YouTube.Builder(httpTransport, jsonFactory, null /*timeout here?*/).build();
-
-		commentsList = youtube.commentThreads()
+		this.commentsList = YouTubeAPI.create().commentThreads()
 				.list("snippet, replies")
 				.setFields("items(snippet, replies), nextPageToken")
 				.setKey(SkyTubeApp.getStr(R.string.API_KEY))

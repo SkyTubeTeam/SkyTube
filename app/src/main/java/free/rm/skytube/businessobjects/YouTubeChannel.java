@@ -19,9 +19,6 @@ package free.rm.skytube.businessobjects;
 
 import android.util.Log;
 
-import com.google.api.client.extensions.android.http.AndroidHttp;
-import com.google.api.client.http.HttpTransport;
-import com.google.api.client.json.JsonFactory;
 import com.google.api.services.youtube.YouTube;
 import com.google.api.services.youtube.model.Channel;
 import com.google.api.services.youtube.model.ChannelBrandingSettings;
@@ -51,15 +48,33 @@ public class YouTubeChannel implements Serializable {
 	private String thumbnailNormalUrl;
 	private String bannerUrl;
 	private String totalSubscribers;
+	private boolean isUserSubscribed;
+	private long	lastVisitTime;
 
 	private static final String	TAG = YouTubeChannel.class.getSimpleName();
 
 
+	/**
+	 * Initialise this object.  This should not be called from the main thread.
+	 *
+	 * @param channelId	Channel ID
+	 */
 	public void init(String channelId) throws IOException {
-		HttpTransport httpTransport = AndroidHttp.newCompatibleTransport();
-		JsonFactory jsonFactory = com.google.api.client.extensions.android.json.AndroidJsonFactory.getDefaultInstance();
-		YouTube			youtube = new YouTube.Builder(httpTransport, jsonFactory, null /*timeout here?*/).build();
+		init(channelId, false);
+	}
 
+
+	/**
+	 * Initialise this object.  This should not be called from the main thread.
+	 *
+	 * @param channelId			Channel ID
+	 * @param isUserSubscribed	if set to true, then it means the user is subscribed to this channel;
+	 *                          otherwise it means that we currently do not know if the user is
+	 *                          subbed or not (hence we need to check).
+	 * @throws IOException
+	 */
+	public void init(String channelId, boolean isUserSubscribed) throws IOException {
+		YouTube youtube = YouTubeAPI.create();
 		YouTube.Channels.List channelInfo = youtube.channels().list("snippet, statistics, brandingSettings");
 		channelInfo.setFields("items(id, snippet/title, snippet/description, snippet/thumbnails/high, snippet/thumbnails/default," +
 				"statistics/subscriberCount, brandingSettings/image/bannerTabletHdImageUrl)," +
@@ -70,10 +85,20 @@ public class YouTubeChannel implements Serializable {
 		// get this channel's info from the remote YouTube server
 		if (getChannelInfo(channelInfo)) {
 			this.id = channelId;
+
+			// get any channel info that is stored in the database
+			getChannelInfoFromDB(isUserSubscribed);
 		}
 	}
 
 
+	/**
+	 * Get this channel's info from the remote YouTube server.
+	 *
+	 * @param channelInfo
+	 *
+	 * @return True if successful; false otherwise.
+	 */
 	private boolean getChannelInfo(YouTube.Channels.List channelInfo) {
 		List<Channel>	channelList = null;
 		boolean			successful = false;
@@ -125,6 +150,31 @@ public class YouTubeChannel implements Serializable {
 	}
 
 
+	/**
+	 * Get any channel info that is stored in the database (locally).
+	 *
+	 * @param isUserSubscribed	if set to true, then it means the user is subscribed to this channel;
+	 *                          otherwise it means that we currently do not know if the user is
+	 *                          subbed or not (hence we need to check).
+	 */
+	private void getChannelInfoFromDB(boolean isUserSubscribed) {
+		// check if the user is subscribed to this channel or not
+		if (!isUserSubscribed) {
+			try {
+				this.isUserSubscribed = SkyTubeApp.getSubscriptionsDb().isUserSubscribedToChannel(id);
+			} catch (Throwable tr) {
+				Log.e(TAG, "Unable to check if user has subscribed to channel id=" + id, tr);
+				this.isUserSubscribed = false;
+			}
+		} else {
+			this.isUserSubscribed = true;
+		}
+
+		// get the last time the user has visited this channel
+		this.lastVisitTime = SkyTubeApp.getSubscriptionsDb().getLastVisitTime(id);
+	}
+
+
 	public String getId() {
 		return id;
 	}
@@ -151,6 +201,22 @@ public class YouTubeChannel implements Serializable {
 
 	public String getTotalSubscribers() {
 		return totalSubscribers;
+	}
+
+	public boolean isUserSubscribed() {
+		return isUserSubscribed;
+	}
+
+	public void updateLastVisitTime() {
+		lastVisitTime = SkyTubeApp.getSubscriptionsDb().updateLastVisitTime(id);
+
+		if (lastVisitTime < 0) {
+			Log.e(TAG, "Unable to update channel's last visit time.  ChannelID=" + id);
+		}
+	}
+
+	public long getLastVisitTime() {
+		return lastVisitTime;
 	}
 
 }
