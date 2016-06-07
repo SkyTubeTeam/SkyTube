@@ -36,6 +36,7 @@ import free.rm.skytube.businessobjects.db.SubscribeToChannelTask;
 import free.rm.skytube.gui.activities.ChannelBrowserActivity;
 import free.rm.skytube.gui.businessobjects.FragmentEx;
 import free.rm.skytube.gui.businessobjects.InternetImageView;
+import free.rm.skytube.gui.businessobjects.SubsAdapter;
 import free.rm.skytube.gui.businessobjects.SubscribeButton;
 import free.rm.skytube.gui.businessobjects.VideoGridAdapter;
 
@@ -95,7 +96,6 @@ public class ChannelBrowserFragment extends FragmentEx {
 			}
 		} else {
 			initViews();
-			channel.updateLastVisitTime();
 		}
 
 		gridView = (GridView) fragment.findViewById(R.id.grid_view);
@@ -132,6 +132,16 @@ public class ChannelBrowserFragment extends FragmentEx {
 			} else {
 				channelSubscribeButton.setSubscribeState();
 			}
+
+			// the user is visiting the channel, so we need to update the last visit time
+			channel.updateLastVisitTime();
+
+			if (channel.newVideosSinceLastVisit()) {
+				// since we are visiting the channel, then we need to disable the new videos notification
+				channel.noNewVideosSinceLastVisit();
+				// we now need to notify the SubsAdapter to remove the new videos notification (near the channel name)
+				SubsAdapter.get(getActivity()).notifyDataSetChanged();
+			}
 		}
 	}
 
@@ -149,9 +159,6 @@ public class ChannelBrowserFragment extends FragmentEx {
 			try {
 				// initialise the channel
 				chn.init(channelId[0]);
-
-				// the user is visiting the channel, so we need to update the last visit time
-				chn.updateLastVisitTime();
 			} catch (IOException e) {
 				Log.e(TAG, "Unable to get channel info.  ChannelID=" + channelId[0], e);
 				chn = null;

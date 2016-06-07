@@ -50,6 +50,7 @@ public class YouTubeChannel implements Serializable {
 	private String totalSubscribers;
 	private boolean isUserSubscribed;
 	private long	lastVisitTime;
+	private boolean	newVideosSinceLastVisit = false;
 
 	private static final String	TAG = YouTubeChannel.class.getSimpleName();
 
@@ -88,6 +89,15 @@ public class YouTubeChannel implements Serializable {
 
 			// get any channel info that is stored in the database
 			getChannelInfoFromDB(isUserSubscribed);
+
+			// if the user has subbed to this channel, then check if videos have been publish since
+			// the last visit to this channel
+			if (this.isUserSubscribed) {
+				// TODO : Optimise!
+				CheckChannelActivity checkActivity = new CheckChannelActivity();
+				checkActivity.init();
+				newVideosSinceLastVisit = checkActivity.checkIfVideosBeenPublishedSinceLastVisit(this);
+			}
 		}
 	}
 
@@ -217,6 +227,14 @@ public class YouTubeChannel implements Serializable {
 
 	public long getLastVisitTime() {
 		return lastVisitTime;
+	}
+
+	public boolean newVideosSinceLastVisit() {
+		return newVideosSinceLastVisit;
+	}
+
+	public void noNewVideosSinceLastVisit() {
+		this.newVideosSinceLastVisit = false;
 	}
 
 }

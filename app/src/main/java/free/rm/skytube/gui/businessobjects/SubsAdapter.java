@@ -119,11 +119,13 @@ public class SubsAdapter extends BaseAdapterEx<YouTubeChannel> {
 
 		private InternetImageView	thumbnailImageView;
 		private TextView			channelNameTextView;
+		private View				newVideosNotificationView;
 		private YouTubeChannel		channel = null;
 
 		public SubChannelViewHolder(View rowView) {
 			thumbnailImageView  = (InternetImageView) rowView.findViewById(R.id.sub_channel_thumbnail_image_view);
 			channelNameTextView = (TextView) rowView.findViewById(R.id.sub_channel_name_text_view);
+			newVideosNotificationView = rowView.findViewById(R.id.sub_channel_new_videos_notification);
 			channel = null;
 
 			rowView.setOnClickListener(new View.OnClickListener() {
@@ -139,6 +141,7 @@ public class SubsAdapter extends BaseAdapterEx<YouTubeChannel> {
 		public void updateInfo(YouTubeChannel channel) {
 			thumbnailImageView.setImageAsync(channel.getThumbnailNormalUrl());
 			channelNameTextView.setText(channel.getTitle());
+			newVideosNotificationView.setVisibility(channel.newVideosSinceLastVisit() ? View.VISIBLE : View.INVISIBLE);
 			this.channel = channel;
 		}
 
