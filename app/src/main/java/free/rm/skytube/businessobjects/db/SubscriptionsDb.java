@@ -88,20 +88,29 @@ public class SubscriptionsDb extends SQLiteOpenHelper {
 				subsChannels.add(channel);
 			} while (cursor.moveToNext());
 		}
+		cursor.close();
 
 		return subsChannels;
 	}
 
 
+	/**
+	 * Checks if the user is subscribed to the given channel.
+	 *
+	 * @param channelId	Channel ID
+	 * @return True if the user is subscribed; false otherwise.
+	 * @throws IOException
+	 */
 	public boolean isUserSubscribedToChannel(String channelId) throws IOException {
-		List<YouTubeChannel> subbedChannels = getSubscribedChannels();
+		Cursor cursor = getReadableDatabase().query(
+				SubscriptionsTable.TABLE_NAME,
+				new String[]{SubscriptionsTable.COL_ID},
+				SubscriptionsTable.COL_CHANNEL_ID + " = ?",
+				new String[]{channelId}, null, null, null);
+		boolean	isUserSubbed = cursor.moveToNext();
 
-		for (YouTubeChannel subbedChannel : subbedChannels) {
-			if (subbedChannel.getId().equalsIgnoreCase(channelId))
-				return true;
-		}
-
-		return false;
+		cursor.close();
+		return isUserSubbed;
 	}
 
 
@@ -138,18 +147,20 @@ public class SubscriptionsDb extends SQLiteOpenHelper {
 	 * @throws IOException
 	 */
 	public long getLastVisitTime(String channelId) {
-		Cursor cursor = getReadableDatabase().query(
+		Cursor	cursor = getReadableDatabase().query(
 							SubscriptionsTable.TABLE_NAME,
 							new String[]{SubscriptionsTable.COL_LAST_VISIT_TIME},
 							SubscriptionsTable.COL_CHANNEL_ID + " = ?",
 							new String[]{channelId}, null, null, null);
+		long	lastVisitTime = -1;
 
 		if (cursor.moveToNext()) {
 			int colLastVisitTIme = cursor.getColumnIndexOrThrow(SubscriptionsTable.COL_LAST_VISIT_TIME);
-			return cursor.getLong(colLastVisitTIme);
+			lastVisitTime = cursor.getLong(colLastVisitTIme);
 		}
 
-		return -1;
+		cursor.close();
+		return lastVisitTime;
 	}
 
 }
