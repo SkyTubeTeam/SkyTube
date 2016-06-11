@@ -139,9 +139,10 @@ public class ChannelBrowserFragment extends FragmentEx {
 
 				if (channel.newVideosSinceLastVisit()) {
 					// since we are visiting the channel, then we need to disable the new videos notification
-					channel.noNewVideosSinceLastVisit();
-					// we now need to notify the SubsAdapter to remove the new videos notification (near the channel name)
-					SubsAdapter.get(getActivity()).notifyDataSetChanged();
+					channel.setNewVideosSinceLastVisit(false);
+					// since this.channel and SubsAdapter's channel are different instances, then we
+					// need to modify both of them [different because of bundle.getSerializable(channel)]
+					SubsAdapter.get(getActivity()).changeChannelNewVideosStatus(channel.getId(), false);
 				}
 			}
 		}

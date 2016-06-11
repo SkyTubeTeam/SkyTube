@@ -92,8 +92,9 @@ public class YouTubeChannel implements Serializable {
 
 			// if the user has subbed to this channel, then check if videos have been publish since
 			// the last visit to this channel
-			if (this.isUserSubscribed) {
+			if (isUserSubscribed) {
 				// TODO : Optimise!
+				Log.d(TAG, "Moo: " + title);
 				CheckChannelActivity checkActivity = new CheckChannelActivity();
 				checkActivity.init();
 				newVideosSinceLastVisit = checkActivity.checkIfVideosBeenPublishedSinceLastVisit(this);
@@ -233,8 +234,8 @@ public class YouTubeChannel implements Serializable {
 		return newVideosSinceLastVisit;
 	}
 
-	public void noNewVideosSinceLastVisit() {
-		this.newVideosSinceLastVisit = false;
+	public void setNewVideosSinceLastVisit(boolean newVideos) {
+		this.newVideosSinceLastVisit = newVideos;
 	}
 
 }

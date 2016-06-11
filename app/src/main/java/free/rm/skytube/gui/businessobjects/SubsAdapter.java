@@ -22,7 +22,10 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.Iterator;
 
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.YouTubeChannel;
@@ -34,6 +37,7 @@ import free.rm.skytube.gui.activities.ChannelBrowserActivity;
  */
 public class SubsAdapter extends BaseAdapterEx<YouTubeChannel> {
 
+	private ViewGroup listView = null;
 	private static SubsAdapter subsAdapter = null;
 	private static final String TAG = SubsAdapter.class.getSimpleName();
 
@@ -91,6 +95,49 @@ public class SubsAdapter extends BaseAdapterEx<YouTubeChannel> {
 	}
 
 
+
+	/**
+	 * Changes the channel's 'new videos' status.  The channel's view is then refreshed.
+	 *
+	 * @param channelId	Channel ID.
+	 * @param newVideos	'New videos' status (true = new videos have been added since user's last
+	 *                  visit;  false = no new videos)
+	 * @return	True if the operations have been successful; false otherwise.
+	 */
+	public boolean changeChannelNewVideosStatus(String channelId, boolean newVideos) {
+		YouTubeChannel channel;
+		int position = 0;
+
+		for (Iterator<YouTubeChannel> i = getIterator();  i.hasNext(); position++) {
+			channel = i.next();
+
+			if (channel.getId().equals(channelId)) {
+				// change the 'new videos' status
+				channel.setNewVideosSinceLastVisit(newVideos);
+				// we now need to notify the SubsAdapter to remove the new videos notification (near the channel name)
+				updateView(position);
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+
+
+	/**
+	 * Update the contents of a view (i.e. refreshes the given view).
+	 *
+	 * @param viewPosition The position of the view that we want to update.
+	 */
+	private void updateView(int viewPosition) {
+		int visiblePosition = ((ListView) this.listView).getFirstVisiblePosition();
+		View view = listView.getChildAt(viewPosition - visiblePosition);
+		getView(viewPosition, view, listView);
+	}
+
+
+
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		View rowView;
@@ -109,6 +156,7 @@ public class SubsAdapter extends BaseAdapterEx<YouTubeChannel> {
 			viewHolder.updateInfo(get(position));
 		}
 
+		this.listView = parent;
 		return rowView;
 	}
 

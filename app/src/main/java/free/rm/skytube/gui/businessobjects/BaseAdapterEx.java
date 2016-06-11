@@ -23,6 +23,7 @@ import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -104,6 +105,11 @@ public abstract class BaseAdapterEx<T> extends BaseAdapter {
 	 */
 	protected void clearList() {
 		this.list.clear();
+	}
+
+
+	public Iterator<T> getIterator() {
+		return this.list.iterator();
 	}
 
 
