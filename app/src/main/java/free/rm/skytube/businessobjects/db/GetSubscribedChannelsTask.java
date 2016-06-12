@@ -24,6 +24,7 @@ import android.widget.Toast;
 import java.util.List;
 
 import free.rm.skytube.R;
+import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.YouTubeChannel;
 import free.rm.skytube.gui.app.SkyTubeApp;
 import free.rm.skytube.gui.businessobjects.SubsAdapter;
@@ -32,7 +33,7 @@ import free.rm.skytube.gui.businessobjects.SubsAdapter;
  * Gets a list of channels that the user is subscribed to and then passes the channels list to
  * the given {@link SubsAdapter}.
  */
-public class GetSubscribedChannelsTask extends AsyncTask<Void, Void, List<YouTubeChannel>> {
+public class GetSubscribedChannelsTask extends AsyncTaskParallel<Void, Void, List<YouTubeChannel>> {
 
 	private SubsAdapter adapter;
 

@@ -26,7 +26,7 @@ import free.rm.skytube.gui.businessobjects.VideoGridAdapter;
 /**
  * An asynchronous task that will retrieve YouTube videos and displays them in the supplied Adapter.
  */
-public class GetYouTubeVideosTask extends AsyncTask<Void, Void, List<YouTubeVideo>> {
+public class GetYouTubeVideosTask extends AsyncTaskParallel<Void, Void, List<YouTubeVideo>> {
 
 	/** Object used to retrieve the desired YouTube videos. */
 	private GetYouTubeVideos	getYouTubeVideos;

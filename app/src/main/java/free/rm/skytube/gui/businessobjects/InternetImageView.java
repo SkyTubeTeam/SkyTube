@@ -31,6 +31,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import free.rm.skytube.R;
+import free.rm.skytube.businessobjects.AsyncTaskParallel;
 
 /**
  * An {@link ImageView} can load images/pictures located on the internet asynchronously.
@@ -69,13 +70,13 @@ public class InternetImageView extends ImageView {
 	 * @param url	URL of the remote image.
 	 */
 	public void setImageAsync(String url) {
-		new DownloadImageTask().execute(url);
+		new DownloadImageTask().executeInParallel(url);
 	}
 
 
 	////////////////////////////
 
-	protected class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+	protected class DownloadImageTask extends AsyncTaskParallel<String, Void, Bitmap> {
 
 		private static final String TAG = "DownloadImageTask";
 

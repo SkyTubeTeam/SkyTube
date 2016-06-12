@@ -39,6 +39,8 @@ public class VideoGridAdapter extends BaseAdapterEx<YouTubeVideo> {
 	/** Class used to get YouTube videos from the web. */
 	private GetYouTubeVideos	getYouTubeVideos;
 	private boolean				showChannelInfo = true;
+	/** Current video category */
+	private VideoCategory		currentVideoCategory = null;
 
 	private static final String TAG = VideoGridAdapter.class.getSimpleName();
 
@@ -85,6 +87,10 @@ public class VideoGridAdapter extends BaseAdapterEx<YouTubeVideo> {
 	 *                      SEARCH_QUERY.
 	 */
 	public void setVideoCategory(VideoCategory videoCategory, String searchQuery) {
+		// do not change the video category if its the same!
+		if (videoCategory == currentVideoCategory)
+			return;
+
 		try {
 			Log.i(TAG, videoCategory.toString());
 
@@ -100,13 +106,17 @@ public class VideoGridAdapter extends BaseAdapterEx<YouTubeVideo> {
 				getYouTubeVideos.setQuery(searchQuery);
 			}
 
+			// set current video category
+			this.currentVideoCategory = videoCategory;
+
 			// get the videos from the web asynchronously
-			new GetYouTubeVideosTask(getYouTubeVideos, this).execute();
+			new GetYouTubeVideosTask(getYouTubeVideos, this).executeInParallel();
 		} catch (IOException e) {
 			Log.e(TAG, "Could not init " + videoCategory, e);
 			Toast.makeText(getContext(),
 					String.format(getContext().getString(R.string.could_not_get_videos), videoCategory.toString()),
 					Toast.LENGTH_LONG).show();
+			this.currentVideoCategory = null;
 		}
 	}
 
@@ -132,7 +142,7 @@ public class VideoGridAdapter extends BaseAdapterEx<YouTubeVideo> {
 		// if it reached the bottom of the list, then try to get the next page of videos
 		if (position == getCount() - 1) {
 			Log.w(TAG, "BOTTOM REACHED!!!");
-			new GetYouTubeVideosTask(getYouTubeVideos, this).execute();
+			new GetYouTubeVideosTask(getYouTubeVideos, this).executeInParallel();
 		}
 
 		return row;
