@@ -43,6 +43,8 @@ public class InternetImageView extends ImageView {
 	 * {@link #setImageAsync(String)} is loaded)
 	 */
 	protected final int defaultImageRes;
+	/** URL of the loaded image ("" is no image has been loaded) */
+	private String imageUrl = "";
 
 
 	public InternetImageView(Context context, AttributeSet attrs) {
@@ -70,6 +72,10 @@ public class InternetImageView extends ImageView {
 	 * @param url	URL of the remote image.
 	 */
 	public void setImageAsync(String url) {
+		// if image is already loaded, then do nothing
+		if (url.equals(this.imageUrl))
+			return;
+
 		new DownloadImageTask().executeInParallel(url);
 	}
 
@@ -104,6 +110,9 @@ public class InternetImageView extends ImageView {
 				if (bitmapCache != null  &&  bitmap != null)
 					bitmapCache.add(url, bitmap);
 			}
+
+			// set imageUrl = url (if no error has occurred)
+			InternetImageView.this.imageUrl = (bitmap != null) ? url : "";
 
 			return bitmap;
 		}

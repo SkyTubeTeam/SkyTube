@@ -188,6 +188,7 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
 			commentTextView.setText(comment.getComment());
 			dateTextView.setText(comment.getDatePublished());
 			upvotesTextView.setText(comment.getLikeCount());
+			thumbnailImageView.setImageAsync(comment.getThumbnailUrl());
 
 			// change the width dimensions depending on whether the comment is a top level or a child
 			ViewGroup.LayoutParams lp = thumbnailImageView.getLayoutParams();

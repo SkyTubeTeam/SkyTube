@@ -26,6 +26,7 @@ public class YouTubeComment {
 	private String comment;
 	private String datePublished;
 	private String likeCount;
+	private String thumbnailUrl;
 
 	public YouTubeComment(com.google.api.services.youtube.model.Comment comment) {
 		if (comment.getSnippet() != null) {
@@ -33,6 +34,7 @@ public class YouTubeComment {
 			this.comment = comment.getSnippet().getTextDisplay();
 			this.datePublished = new PrettyTimeEx().format(comment.getSnippet().getPublishedAt());
 			this.likeCount = comment.getSnippet().getLikeCount().toString();
+			this.thumbnailUrl = comment.getSnippet().getAuthorProfileImageUrl();
 		}
 	}
 
@@ -50,6 +52,10 @@ public class YouTubeComment {
 
 	public String getLikeCount() {
 		return likeCount;
+	}
+
+	public String getThumbnailUrl() {
+		return thumbnailUrl;
 	}
 
 }
