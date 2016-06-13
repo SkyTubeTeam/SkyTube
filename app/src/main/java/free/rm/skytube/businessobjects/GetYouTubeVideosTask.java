@@ -17,10 +17,9 @@
 
 package free.rm.skytube.businessobjects;
 
-import android.os.AsyncTask;
-
 import java.util.List;
 
+import free.rm.skytube.gui.businessobjects.LoadingProgressBar;
 import free.rm.skytube.gui.businessobjects.VideoGridAdapter;
 
 /**
@@ -32,7 +31,7 @@ public class GetYouTubeVideosTask extends AsyncTaskParallel<Void, Void, List<You
 	private GetYouTubeVideos	getYouTubeVideos;
 
 	/** The Adapter where the retrieved videos will be displayed. */
-	private VideoGridAdapter videoGridAdapter;
+	private VideoGridAdapter	videoGridAdapter;
 
 	/** Class tag. */
 	private static final String TAG = GetYouTubeVideosTask.class.getSimpleName();
@@ -43,6 +42,11 @@ public class GetYouTubeVideosTask extends AsyncTaskParallel<Void, Void, List<You
 		this.videoGridAdapter = videoGridAdapter;
 	}
 
+
+	@Override
+	protected void onPreExecute() {
+		LoadingProgressBar.get().show();
+	}
 
 	@Override
 	protected List<YouTubeVideo> doInBackground(Void... params) {
@@ -59,6 +63,13 @@ public class GetYouTubeVideosTask extends AsyncTaskParallel<Void, Void, List<You
 	@Override
 	protected void onPostExecute(List<YouTubeVideo> videosList) {
 		videoGridAdapter.appendList(videosList);
+		LoadingProgressBar.get().hide();
+	}
+
+
+	@Override
+	protected void onCancelled() {
+		LoadingProgressBar.get().hide();
 	}
 
 }

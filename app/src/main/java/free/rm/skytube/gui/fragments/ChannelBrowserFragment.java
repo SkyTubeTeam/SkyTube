@@ -36,6 +36,7 @@ import free.rm.skytube.businessobjects.db.SubscribeToChannelTask;
 import free.rm.skytube.gui.activities.ChannelBrowserActivity;
 import free.rm.skytube.gui.businessobjects.FragmentEx;
 import free.rm.skytube.gui.businessobjects.InternetImageView;
+import free.rm.skytube.gui.businessobjects.LoadingProgressBar;
 import free.rm.skytube.gui.businessobjects.SubsAdapter;
 import free.rm.skytube.gui.businessobjects.SubscribeButton;
 import free.rm.skytube.gui.businessobjects.VideoGridAdapter;
@@ -99,6 +100,9 @@ public class ChannelBrowserFragment extends FragmentEx {
 		}
 
 		gridView = (GridView) fragment.findViewById(R.id.grid_view);
+
+		// set up the loading progress bar
+		LoadingProgressBar.get().setProgressBar(fragment.findViewById(R.id.loading_progress_bar));
 
 		if (videoGridAdapter == null) {
 			videoGridAdapter = new VideoGridAdapter(getActivity(), false /*hide channel name*/);

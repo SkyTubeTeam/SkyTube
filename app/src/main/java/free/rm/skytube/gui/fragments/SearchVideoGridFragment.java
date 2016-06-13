@@ -29,6 +29,7 @@ import android.widget.GridView;
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.gui.businessobjects.FragmentEx;
+import free.rm.skytube.gui.businessobjects.LoadingProgressBar;
 import free.rm.skytube.gui.businessobjects.VideoGridAdapter;
 
 /**
@@ -46,6 +47,9 @@ public class SearchVideoGridFragment extends FragmentEx {
 		View view = inflater.inflate(R.layout.videos_gridview, container, false);
 
 		this.gridView = (GridView) view.findViewById(R.id.grid_view);
+
+		// set up the loading progress bar
+		LoadingProgressBar.get().setProgressBar(view.findViewById(R.id.loading_progress_bar));
 
 		if (videoGridAdapter == null) {
 			this.videoGridAdapter = new VideoGridAdapter(getActivity());

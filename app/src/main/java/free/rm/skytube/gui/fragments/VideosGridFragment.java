@@ -35,6 +35,7 @@ import android.widget.SpinnerAdapter;
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.gui.businessobjects.FragmentEx;
+import free.rm.skytube.gui.businessobjects.LoadingProgressBar;
 import free.rm.skytube.gui.businessobjects.SubsAdapter;
 import free.rm.skytube.gui.businessobjects.VideoGridAdapter;
 
@@ -55,6 +56,9 @@ public class VideosGridFragment extends FragmentEx implements ActionBar.OnNaviga
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		// inflate the layout for this fragment
 		View view = inflater.inflate(R.layout.fragment_videos_grid, container, false);
+
+		// set up the loading progress bar
+		LoadingProgressBar.get().setProgressBar(view.findViewById(R.id.loading_progress_bar));
 
 		// setup the video grid view
 		this.gridView = (GridView) view.findViewById(R.id.grid_view);

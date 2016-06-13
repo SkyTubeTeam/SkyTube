@@ -38,6 +38,8 @@ public class VideoGridAdapter extends BaseAdapterEx<YouTubeVideo> {
 
 	/** Class used to get YouTube videos from the web. */
 	private GetYouTubeVideos	getYouTubeVideos;
+	/** Set to true to display channel information (e.g. channel name) and allows user to open and
+	 *  browse the channel;  false to hide such information. */
 	private boolean				showChannelInfo = true;
 	/** Current video category */
 	private VideoCategory		currentVideoCategory = null;
@@ -56,7 +58,7 @@ public class VideoGridAdapter extends BaseAdapterEx<YouTubeVideo> {
 	/**
 	 * Constructor.
 	 *
-	 * @param context			Context
+	 * @param context			Context.
 	 * @param showChannelInfo	True to display channel information (e.g. channel name) and allows
 	 *                          user to open and browse the channel; false to hide such information.
 	 */

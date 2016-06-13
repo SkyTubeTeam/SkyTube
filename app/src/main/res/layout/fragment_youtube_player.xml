@@ -15,11 +15,9 @@
 	<!-- Progress bar that will be displayed before a video is loaded -->
 	<ProgressBar
 		android:id="@+id/loadingVideoView"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
 		android:layout_gravity="center"
 		android:padding="17dp"
-		android:background="@drawable/loading_rectangle"/>
+		style="@style/LoadingProgressBar"/>
 
 	<!-- A view that will display/hides the HUD -->
 	<View android:id="@+id/void_view"
@@ -116,11 +114,8 @@
 
 			<ProgressBar
 				android:id="@+id/comments_progress_bar"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
 				android:layout_centerInParent="true"
-				android:padding="5dp"
-				android:background="@drawable/loading_rectangle"/>
+				style="@style/LoadingProgressBar"/>
 		</RelativeLayout>
 	</hollowsoft.slidingdrawer.SlidingDrawer>
 
