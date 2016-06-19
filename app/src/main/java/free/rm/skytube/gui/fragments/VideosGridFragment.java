@@ -91,7 +91,7 @@ public class VideosGridFragment extends FragmentEx implements ActionBar.OnNaviga
 		this.subsListView = (ListView) view.findViewById(R.id.subs_drawer);
 
 		if (subsAdapter == null) {
-			this.subsAdapter = SubsAdapter.get(getActivity());
+			this.subsAdapter = SubsAdapter.get(getActivity(), view.findViewById(R.id.subs_drawer_progress_bar));
 		}
 
 		this.subsListView.setAdapter(this.subsAdapter);

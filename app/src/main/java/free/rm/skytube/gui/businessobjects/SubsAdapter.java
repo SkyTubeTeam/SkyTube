@@ -41,15 +41,20 @@ public class SubsAdapter extends BaseAdapterEx<YouTubeChannel> {
 	private static SubsAdapter subsAdapter = null;
 	private static final String TAG = SubsAdapter.class.getSimpleName();
 
-	private SubsAdapter(Context context) {
+	private SubsAdapter(Context context, View progressBar) {
 		super(context);
-		new GetSubscribedChannelsTask(this).executeInParallel();
+		new GetSubscribedChannelsTask(this, progressBar).executeInParallel();
 	}
 
 
 	public static SubsAdapter get(Context context) {
+		return get(context, null);
+	}
+
+
+	public static SubsAdapter get(Context context, View progressBar) {
 		if (subsAdapter == null) {
-			subsAdapter = new SubsAdapter(context);
+			subsAdapter = new SubsAdapter(context, progressBar);
 		}
 
 		return subsAdapter;

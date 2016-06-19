@@ -19,6 +19,7 @@ package free.rm.skytube.businessobjects.db;
 
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import java.util.List;
@@ -36,12 +37,21 @@ import free.rm.skytube.gui.businessobjects.SubsAdapter;
 public class GetSubscribedChannelsTask extends AsyncTaskParallel<Void, Void, List<YouTubeChannel>> {
 
 	private SubsAdapter adapter;
+	private View progressBar;
 
 	private static final String TAG = GetSubscribedChannelsTask.class.getSimpleName();
 
 
-	public GetSubscribedChannelsTask(SubsAdapter adapter) {
+	public GetSubscribedChannelsTask(SubsAdapter adapter, View progressBar) {
 		this.adapter = adapter;
+		this.progressBar = progressBar;
+	}
+
+
+	@Override
+	protected void onPreExecute() {
+		if (progressBar != null)
+			progressBar.setVisibility(View.VISIBLE);
 	}
 
 
@@ -61,6 +71,9 @@ public class GetSubscribedChannelsTask extends AsyncTaskParallel<Void, Void, Lis
 
 	@Override
 	protected void onPostExecute(List<YouTubeChannel> subbedChannelsList) {
+		if (progressBar != null)
+			progressBar.setVisibility(View.INVISIBLE);
+
 		if (subbedChannelsList == null) {
 			Toast.makeText(adapter.getContext(), R.string.error_get_subbed_channels, Toast.LENGTH_LONG).show();
 		} else {
