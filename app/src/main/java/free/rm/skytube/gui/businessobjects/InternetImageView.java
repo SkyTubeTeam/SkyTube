@@ -73,7 +73,7 @@ public class InternetImageView extends ImageView {
 	 */
 	public void setImageAsync(String url) {
 		// if image is already loaded, then do nothing
-		if (url.equals(this.imageUrl))
+		if (url == null  ||  url.equals(this.imageUrl))
 			return;
 
 		new DownloadImageTask().executeInParallel(url);
