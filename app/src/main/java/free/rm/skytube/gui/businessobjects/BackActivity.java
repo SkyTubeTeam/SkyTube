@@ -19,6 +19,7 @@ package free.rm.skytube.gui.businessobjects;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
@@ -32,7 +33,9 @@ public class BackActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 
 		// enable back button (action bar)
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		ActionBar actionBar = getSupportActionBar();
+		if (actionBar != null)
+			actionBar.setDisplayHomeAsUpEnabled(true);
 	}
 
 

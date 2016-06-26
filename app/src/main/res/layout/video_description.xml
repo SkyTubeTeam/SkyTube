@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+			xmlns:custom="http://schemas.android.com/apk/res-auto"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
 			android:background="@color/video_player_drawer_background">
@@ -25,21 +26,43 @@
 			android:gravity="top">
 
 			<!--
-				CHANNEL NAME & SUB BUTTON
+				CHANNEL THUMBNAIL, NAME & SUB BUTTON
 			-->
 			<RelativeLayout
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content">
 
-				<TextView
-					android:id="@+id/video_desc_channel"
-					style="@style/VideoDescTextView"
-					android:text="Channel Name"/>
+				<!-- CHANNEL THUMBNAIL -->
+				<free.rm.skytube.gui.businessobjects.InternetImageView
+					android:id="@+id/video_desc_channel_thumbnail_image_view"
+					android:layout_width="@dimen/top_level_comment_thumbnail_width"
+					android:layout_height="wrap_content"
+					android:layout_centerVertical="true"
+					android:paddingRight="10dp"
+					android:scaleType="fitXY"
+					android:adjustViewBounds="true"
+					android:src="@drawable/channel_thumbnail_default"
+					custom:defaultImage="@drawable/channel_thumbnail_default"/>
 
-				<free.rm.skytube.gui.businessobjects.SubscribeButton
-					android:id="@+id/video_desc_subscribe_button"
-					style="@style/SubscribeButton"
-					android:layout_below="@id/video_desc_channel"/>
+				<LinearLayout
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:orientation="vertical"
+					android:layout_centerVertical="true"
+					android:layout_toRightOf="@+id/video_desc_channel_thumbnail_image_view">
+
+					<!-- CHANNEL NAME -->
+					<TextView
+						android:id="@+id/video_desc_channel"
+						style="@style/VideoDescTextView"
+						android:text="Channel Name"/>
+
+					<!-- SUB BUTTON -->
+					<free.rm.skytube.gui.businessobjects.SubscribeButton
+						android:id="@+id/video_desc_subscribe_button"
+						style="@style/SubscribeButton"
+						android:layout_below="@id/video_desc_channel"/>
+				</LinearLayout>
 
 			</RelativeLayout>
 

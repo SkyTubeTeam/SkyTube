@@ -20,6 +20,8 @@ package free.rm.skytube.gui.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,7 +39,7 @@ import free.rm.skytube.gui.businessobjects.VideoGridAdapter;
  */
 public class SearchVideoGridFragment extends FragmentEx {
 
-	protected GridView			gridView;
+	protected RecyclerView		gridView;
 	protected VideoGridAdapter	videoGridAdapter;
 
 
@@ -46,7 +48,7 @@ public class SearchVideoGridFragment extends FragmentEx {
 		// inflate the layout for this fragment
 		View view = inflater.inflate(R.layout.videos_gridview, container, false);
 
-		this.gridView = (GridView) view.findViewById(R.id.grid_view);
+		this.gridView = (RecyclerView) view.findViewById(R.id.grid_view);
 
 		// set up the loading progress bar
 		LoadingProgressBar.get().setProgressBar(view.findViewById(R.id.loading_progress_bar));
@@ -67,6 +69,8 @@ public class SearchVideoGridFragment extends FragmentEx {
 			}
 		}
 
+		this.gridView.setHasFixedSize(false);
+		this.gridView.setLayoutManager(new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.video_grid_num_columns)));
 		this.gridView.setAdapter(this.videoGridAdapter);
 
 		return view;

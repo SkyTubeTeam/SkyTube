@@ -20,11 +20,13 @@ package free.rm.skytube.gui.fragments;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridView;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -47,7 +49,7 @@ import free.rm.skytube.gui.businessobjects.VideoGridAdapter;
 public class ChannelBrowserFragment extends FragmentEx {
 
 	private YouTubeChannel	channel = null;
-	private GridView		gridView;
+	private RecyclerView	gridView;
 	private VideoGridAdapter videoGridAdapter;
 
 	private InternetImageView	channelThumbnailImage = null;
@@ -78,6 +80,11 @@ public class ChannelBrowserFragment extends FragmentEx {
 		// inflate the layout for this fragment
 		View fragment = inflater.inflate(R.layout.fragment_channel_browser, container, false);
 
+		// setup the toolbar/actionbar
+		Toolbar toolbar = (Toolbar) fragment.findViewById(R.id.toolbar);
+		setSupportActionBar(toolbar);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 		channelBannerImage = (InternetImageView) fragment.findViewById(R.id.channel_banner_image_view);
 		channelThumbnailImage = (InternetImageView) fragment.findViewById(R.id.channel_thumbnail_image_view);
 		channelSubscribersTextView = (TextView) fragment.findViewById(R.id.channel_subs_text_view);
@@ -99,7 +106,7 @@ public class ChannelBrowserFragment extends FragmentEx {
 			initViews();
 		}
 
-		gridView = (GridView) fragment.findViewById(R.id.grid_view);
+		gridView = (RecyclerView) fragment.findViewById(R.id.grid_view);
 
 		// set up the loading progress bar
 		LoadingProgressBar.get().setProgressBar(fragment.findViewById(R.id.loading_progress_bar));
@@ -109,6 +116,8 @@ public class ChannelBrowserFragment extends FragmentEx {
 			videoGridAdapter.setVideoCategory(VideoCategory.CHANNEL_VIDEOS, channelId);
 		}
 
+		this.gridView.setHasFixedSize(false);
+		this.gridView.setLayoutManager(new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.video_grid_num_columns)));
 		this.gridView.setAdapter(this.videoGridAdapter);
 
 		return fragment;

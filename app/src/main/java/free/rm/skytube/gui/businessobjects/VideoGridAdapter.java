@@ -19,6 +19,7 @@ package free.rm.skytube.gui.businessobjects;
 
 import android.content.Context;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -34,7 +35,7 @@ import free.rm.skytube.businessobjects.YouTubeVideo;
 /**
  * An adapter that will display videos in a {@link android.widget.GridView}.
  */
-public class VideoGridAdapter extends BaseAdapterEx<YouTubeVideo> {
+public class VideoGridAdapter extends RecyclerViewAdapterEx<YouTubeVideo, GridViewHolder> {
 
 	/** Class used to get YouTube videos from the web. */
 	private GetYouTubeVideos	getYouTubeVideos;
@@ -123,31 +124,26 @@ public class VideoGridAdapter extends BaseAdapterEx<YouTubeVideo> {
 	}
 
 
+
 	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
-		View row;
-		GridViewHolder viewHolder;
+	public GridViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+		View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.video_cell, parent, false);
+		return new GridViewHolder(v);
+	}
 
-		if (convertView == null) {
-			row = getLayoutInflater().inflate(R.layout.video_cell, parent, false);
-			viewHolder = new GridViewHolder(row);
-			row.setTag(viewHolder);
-		} else {
-			row = convertView;
-			viewHolder = (GridViewHolder) row.getTag();
-		}
 
+
+	@Override
+	public void onBindViewHolder(GridViewHolder viewHolder, int position) {
 		if (viewHolder != null) {
 			viewHolder.updateInfo(get(position), getContext(), showChannelInfo);
 		}
 
 		// if it reached the bottom of the list, then try to get the next page of videos
-		if (position == getCount() - 1) {
+		if (position >= getItemCount() - 1) {
 			Log.w(TAG, "BOTTOM REACHED!!!");
 			new GetYouTubeVideosTask(getYouTubeVideos, this).executeInParallel();
 		}
-
-		return row;
 	}
 
 }

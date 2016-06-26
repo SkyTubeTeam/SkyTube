@@ -1,71 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<android.support.design.widget.CoordinatorLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:tools="http://schemas.android.com/tools"
-	xmlns:custom="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	android:orientation="vertical"
-	tools:context="free.rm.skytube.gui.activities.ChannelBrowserActivity">
+	xmlns:custom="http://schemas.android.com/tools"
+	android:fitsSystemWindows="true">
 
-	<RelativeLayout
+	<android.support.design.widget.AppBarLayout
 		android:layout_width="match_parent"
-		android:layout_height="90dp">
+		android:layout_height="wrap_content">
 
-		<!-- BANNER IMAGE -->
-		<free.rm.skytube.gui.businessobjects.InternetImageView
-			android:id="@+id/channel_banner_image_view"
+		<FrameLayout
 			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			android:layout_alignParentTop="true"
-			android:scaleType="centerCrop"
-			android:adjustViewBounds="true"
-			android:src="@drawable/banner_default"
-			custom:defaultImage="@drawable/banner_default"/>
-
-		<!-- CHANNEL THUMBNAIL -->
-		<free.rm.skytube.gui.businessobjects.InternetImageView
-			android:id="@+id/channel_thumbnail_image_view"
-			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_centerVertical="true"
-			android:padding="16dp"
-			android:scaleType="fitXY"
-			android:adjustViewBounds="true"
-			android:src="@drawable/channel_thumbnail_default"
-			custom:defaultImage="@drawable/channel_thumbnail_default"/>
+			app:layout_scrollFlags="scroll|enterAlways">
 
-		<!-- CHANNEL INFO -->
-		<LinearLayout
-			android:id="@+id/channel_info_layout"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_toRightOf="@+id/channel_thumbnail_image_view"
-			android:layout_centerVertical="true"
-			android:padding="10dp"
-			android:orientation="vertical"
-			android:background="#66000000">
-			<!-- SUBSCRIBERS -->
-			<TextView
-				android:id="@+id/channel_subs_text_view"
-				android:layout_width="wrap_content"
+			<!-- BANNER IMAGE -->
+			<free.rm.skytube.gui.businessobjects.InternetImageView
+				android:id="@+id/channel_banner_image_view"
+				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:text="Loading ..."
-				style="@style/ChannelDetailsTextView"/>
-		</LinearLayout>
+				android:layout_alignParentTop="true"
+				android:tint="#14000000"
+				android:scaleType="fitXY"
+				android:adjustViewBounds="true"
+				android:src="@drawable/banner_default"
+				custom:defaultImage="@drawable/banner_default"/>
 
-		<free.rm.skytube.gui.businessobjects.SubscribeButton
-			android:id="@+id/channel_subscribe_button"
-			style="@style/SubscribeButton"
-			android:layout_margin="16dp"
-			android:layout_centerVertical="true"
-			android:layout_alignParentRight="true"/>
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical">
 
-	</RelativeLayout>
+				<!-- TOOLBAR / ACTIONBAR -->
+				<android.support.v7.widget.Toolbar
+					android:id="@+id/toolbar"
+					android:layout_width="match_parent"
+					android:layout_height="?attr/actionBarSize"
+					android:theme="@style/ThemeOverlay.AppCompat.Dark"/>
 
+				<RelativeLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content">
+
+					<!-- CHANNEL THUMBNAIL -->
+					<free.rm.skytube.gui.businessobjects.InternetImageView
+						android:id="@+id/channel_thumbnail_image_view"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_centerVertical="true"
+						android:padding="16dp"
+						android:scaleType="fitXY"
+						android:adjustViewBounds="true"
+						android:src="@drawable/channel_thumbnail_default"
+						custom:defaultImage="@drawable/channel_thumbnail_default"/>
+
+					<!-- CHANNEL INFO -->
+					<LinearLayout
+						android:id="@+id/channel_info_layout"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_toRightOf="@+id/channel_thumbnail_image_view"
+						android:layout_centerVertical="true"
+						android:padding="10dp"
+						android:orientation="vertical"
+						android:background="#66000000">
+						<!-- SUBSCRIBERS -->
+						<TextView
+							android:id="@+id/channel_subs_text_view"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:text="Loading ..."
+							style="@style/ChannelDetailsTextView"/>
+					</LinearLayout>
+
+					<free.rm.skytube.gui.businessobjects.SubscribeButton
+						android:id="@+id/channel_subscribe_button"
+						style="@style/SubscribeButton"
+						android:layout_margin="16dp"
+						android:layout_centerVertical="true"
+						android:layout_alignParentRight="true"/>
+
+				</RelativeLayout>
+			</LinearLayout>
+		</FrameLayout>
+	</android.support.design.widget.AppBarLayout>
+
+	<!-- VIDEOS GRID/LIST HERE -->
 	<include
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
+		app:layout_behavior="@string/appbar_scrolling_view_behavior"
 		layout="@layout/videos_gridview" />
 
-</LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

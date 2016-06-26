@@ -17,27 +17,21 @@
 
 package free.rm.skytube.gui.businessobjects;
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-import android.util.Log;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import free.rm.skytube.BuildConfig;
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.YouTubeVideo;
 import free.rm.skytube.gui.activities.ChannelBrowserActivity;
-import free.rm.skytube.gui.activities.YouTubePlayerActivity;
 
 /**
- *
+ * A ViewHolder for the videos grid view.
  */
-public class GridViewHolder {
+public class GridViewHolder extends RecyclerView.ViewHolder {
 	private TextView titleTextView,
 			channelTextView,
 			thumbsUpPercentageTextView,
@@ -50,17 +44,17 @@ public class GridViewHolder {
 	private YouTubeVideo youTubeVideo = null;
 	private Context context = null;
 
-	private static final String TAG = GridViewHolder.class.getSimpleName();
 
-	protected GridViewHolder(View row) {
-		titleTextView				= (TextView) row.findViewById(R.id.title_text_view);
-		channelTextView				= (TextView) row.findViewById(R.id.channel_text_view);
-		thumbsUpPercentageTextView	= (TextView) row.findViewById(R.id.thumbs_up_text_view);
-		videoDurationTextView		= (TextView) row.findViewById(R.id.video_duration_text_view);
-		viewsTextView				= (TextView) row.findViewById(R.id.views_text_view);
-		publishDateTextView			= (TextView) row.findViewById(R.id.publish_date_text_view);
-		thumbnailImageView	= (InternetImageView) row.findViewById(R.id.thumbnail_image_view);
-		bottomLayout		= (RelativeLayout) row.findViewById(R.id.cell_bottom_layout);
+	public GridViewHolder(View view) {
+		super(view);
+		titleTextView				= (TextView) view.findViewById(R.id.title_text_view);
+		channelTextView				= (TextView) view.findViewById(R.id.channel_text_view);
+		thumbsUpPercentageTextView	= (TextView) view.findViewById(R.id.thumbs_up_text_view);
+		videoDurationTextView		= (TextView) view.findViewById(R.id.video_duration_text_view);
+		viewsTextView				= (TextView) view.findViewById(R.id.views_text_view);
+		publishDateTextView			= (TextView) view.findViewById(R.id.publish_date_text_view);
+		thumbnailImageView	= (InternetImageView) view.findViewById(R.id.thumbnail_image_view);
+		bottomLayout		= (RelativeLayout) view.findViewById(R.id.cell_bottom_layout);
 	}
 
 

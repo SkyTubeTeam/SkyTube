@@ -19,10 +19,11 @@ package free.rm.skytube.gui.businessobjects;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.Iterator;
@@ -35,11 +36,11 @@ import free.rm.skytube.gui.activities.ChannelBrowserActivity;
 /**
  * Channel subscriptions adapter.
  */
-public class SubsAdapter extends BaseAdapterEx<YouTubeChannel> {
+public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapter.SubChannelViewHolder> {
 
-	private ViewGroup listView = null;
 	private static SubsAdapter subsAdapter = null;
 	private static final String TAG = SubsAdapter.class.getSimpleName();
+
 
 	private SubsAdapter(Context context, View progressBar) {
 		super(context);
@@ -87,7 +88,7 @@ public class SubsAdapter extends BaseAdapterEx<YouTubeChannel> {
 	 * @param channelId Channel to remove.
 	 */
 	public void removeChannel(String channelId) {
-		int size = getCount();
+		int size = getItemCount();
 
 		for (int i = 0;  i < size;  i++) {
 			if (get(i).getId().equalsIgnoreCase(channelId)) {
@@ -136,39 +137,26 @@ public class SubsAdapter extends BaseAdapterEx<YouTubeChannel> {
 	 * @param viewPosition The position of the view that we want to update.
 	 */
 	private void updateView(int viewPosition) {
-		int visiblePosition = ((ListView) this.listView).getFirstVisiblePosition();
-		View view = listView.getChildAt(viewPosition - visiblePosition);
-		getView(viewPosition, view, listView);
+		notifyItemChanged(viewPosition);
 	}
 
 
+	@Override
+	public SubChannelViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+		View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.sub_channel, parent, false);
+		return new SubChannelViewHolder(v);
+	}
+
 
 	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
-		View rowView;
-		SubChannelViewHolder viewHolder;
-
-		if (convertView == null) {
-			rowView = getLayoutInflater().inflate(R.layout.sub_channel, parent, false);
-			viewHolder = new SubChannelViewHolder(rowView);
-			rowView.setTag(viewHolder);
-		} else {
-			rowView = convertView;
-			viewHolder = (SubChannelViewHolder) rowView.getTag();
-		}
-
-		if (viewHolder != null) {
-			viewHolder.updateInfo(get(position));
-		}
-
-		this.listView = parent;
-		return rowView;
+	public void onBindViewHolder(SubChannelViewHolder viewHolder, int position) {
+		viewHolder.updateInfo(get(position));
 	}
 
 
 	/////////////////////
 
-	private class SubChannelViewHolder {
+	protected class SubChannelViewHolder extends RecyclerView.ViewHolder {
 
 		private InternetImageView	thumbnailImageView;
 		private TextView			channelNameTextView;
@@ -176,6 +164,7 @@ public class SubsAdapter extends BaseAdapterEx<YouTubeChannel> {
 		private YouTubeChannel		channel = null;
 
 		public SubChannelViewHolder(View rowView) {
+			super(rowView);
 			thumbnailImageView  = (InternetImageView) rowView.findViewById(R.id.sub_channel_thumbnail_image_view);
 			channelNameTextView = (TextView) rowView.findViewById(R.id.sub_channel_name_text_view);
 			newVideosNotificationView = rowView.findViewById(R.id.sub_channel_new_videos_notification);

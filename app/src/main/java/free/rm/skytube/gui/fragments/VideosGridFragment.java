@@ -21,8 +21,10 @@ import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -45,9 +47,9 @@ import free.rm.skytube.gui.businessobjects.VideoGridAdapter;
 @SuppressWarnings("deprecation")
 public class VideosGridFragment extends FragmentEx implements ActionBar.OnNavigationListener {
 
-	protected GridView				gridView;
+	protected RecyclerView			gridView;
 	protected VideoGridAdapter		videoGridAdapter;
-	private ListView				subsListView = null;
+	private RecyclerView			subsListView = null;
 	private SubsAdapter				subsAdapter = null;
 	private ActionBarDrawerToggle	subsDrawerToggle;
 
@@ -61,10 +63,11 @@ public class VideosGridFragment extends FragmentEx implements ActionBar.OnNaviga
 		LoadingProgressBar.get().setProgressBar(view.findViewById(R.id.loading_progress_bar));
 
 		// setup the video grid view
-		this.gridView = (GridView) view.findViewById(R.id.grid_view);
+		this.gridView = (RecyclerView) view.findViewById(R.id.grid_view);
 		if (this.videoGridAdapter == null) {
 			this.videoGridAdapter = new VideoGridAdapter(getActivity());
 		}
+		this.gridView.setLayoutManager(new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.video_grid_num_columns)));
 		this.gridView.setAdapter(this.videoGridAdapter);
 
 		// setup the toolbar / actionbar
@@ -88,12 +91,13 @@ public class VideosGridFragment extends FragmentEx implements ActionBar.OnNaviga
 			actionBar.setHomeButtonEnabled(true);
 		}
 
-		this.subsListView = (ListView) view.findViewById(R.id.subs_drawer);
+		this.subsListView = (RecyclerView) view.findViewById(R.id.subs_drawer);
 
 		if (subsAdapter == null) {
 			this.subsAdapter = SubsAdapter.get(getActivity(), view.findViewById(R.id.subs_drawer_progress_bar));
 		}
 
+		this.subsListView.setLayoutManager(new LinearLayoutManager(getActivity()));
 		this.subsListView.setAdapter(this.subsAdapter);
 		return view;
 	}
@@ -121,7 +125,7 @@ public class VideosGridFragment extends FragmentEx implements ActionBar.OnNaviga
 	@Override
 	public boolean onNavigationItemSelected(int itemPosition, long itemId) {
 		// scroll to the top
-		gridView.setSelection(0);
+		gridView.smoothScrollToPosition(0);
 
 		// set/change the video category
 		videoGridAdapter.setVideoCategory(VideoCategory.getVideoCategory(itemPosition));

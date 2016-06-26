@@ -18,33 +18,27 @@
 package free.rm.skytube.gui.businessobjects;
 
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 /**
- * An extended class of {@link BaseAdapter} that accepts a context and a list of items.
- *
- * <p>Similar to {@link ArrayAdapter}, however this class is simpler to setup and does
- * not perform stuff behind your back (e.g. ArrayAdapter tends to fill in the first TextView for
- * you when getView() is called -- this might not be always convenient and might be seen as a waste
- * of processing power.</p>
+ * An extended class of {@link RecyclerView.Adapter} that accepts a context and a list of items.
  */
-public abstract class BaseAdapterEx<T> extends BaseAdapter {
+public abstract class RecyclerViewAdapterEx<T, HolderType extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<HolderType> {
 
 	private Context context;
 	private LayoutInflater inflater;
 	private List<T> list;
 
-	public BaseAdapterEx(Context context) {
+	public RecyclerViewAdapterEx(Context context) {
 		this(context, new ArrayList<T>());
 	}
 
-	public BaseAdapterEx(Context context, List<T> list) {
+	public RecyclerViewAdapterEx(Context context, List<T> list) {
 		this.context  = context;
 		this.inflater = LayoutInflater.from(context);
 		this.list     = list;
@@ -94,7 +88,7 @@ public abstract class BaseAdapterEx<T> extends BaseAdapter {
 	 * @param itemPosition	Item's position/index to remove.
 	 */
 	protected void remove(int itemPosition) {
-		if (itemPosition >= 0  &&  itemPosition < getCount()) {
+		if (itemPosition >= 0  &&  itemPosition < getItemCount()) {
 			list.remove(itemPosition);
 		}
 	}
@@ -104,7 +98,10 @@ public abstract class BaseAdapterEx<T> extends BaseAdapter {
 	 * Clear all items that are in the list.
 	 */
 	protected void clearList() {
+		int listSize = getItemCount();
+
 		this.list.clear();
+		notifyItemRangeRemoved(0, listSize);
 	}
 
 
@@ -114,22 +111,12 @@ public abstract class BaseAdapterEx<T> extends BaseAdapter {
 
 
 	@Override
-	public int getCount() {
+	public int getItemCount() {
 		return list.size();
-	}
-
-	@Override
-	public Object getItem(int position) {
-		return list.get(position);
 	}
 
 	protected T get(int position) {
 		return list.get(position);
-	}
-
-	@Override
-	public long getItemId(int position) {
-		return position;
 	}
 
 }

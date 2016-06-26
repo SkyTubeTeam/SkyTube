@@ -26,6 +26,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import free.rm.skytube.R;
+import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.GetVideoDescription;
 import free.rm.skytube.businessobjects.GetVideosDetailsByIDs;
 import free.rm.skytube.businessobjects.VideoStream.StreamMetaData;
@@ -34,10 +35,12 @@ import free.rm.skytube.businessobjects.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTubeVideo;
 import free.rm.skytube.businessobjects.db.CheckIfUserSubbedToChannelTask;
 import free.rm.skytube.businessobjects.db.SubscribeToChannelTask;
+import free.rm.skytube.gui.activities.ChannelBrowserActivity;
 import free.rm.skytube.gui.activities.YouTubePlayerActivity;
 import free.rm.skytube.gui.app.SkyTubeApp;
 import free.rm.skytube.gui.businessobjects.CommentsAdapter;
 import free.rm.skytube.gui.businessobjects.FragmentEx;
+import free.rm.skytube.gui.businessobjects.InternetImageView;
 import free.rm.skytube.gui.businessobjects.MediaControllerEx;
 import free.rm.skytube.gui.businessobjects.SubscribeButton;
 import hollowsoft.slidingdrawer.OnDrawerOpenListener;
@@ -54,6 +57,7 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 	private VideoView			videoView = null;
 	private MediaControllerEx	mediaController = null;
 	private TextView			videoDescTitleTextView = null;
+	private InternetImageView	videoDescChannelThumbnailImageView = null;
 	private TextView			videoDescChannelTextView = null;
 	private SubscribeButton		videoDescSubscribeButton = null;
 	private TextView			videoDescViewsTextView = null;
@@ -106,6 +110,17 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 
 			videoDescriptionDrawer = (SlidingDrawer) view.findViewById(R.id.des_drawer);
 			videoDescTitleTextView = (TextView) view.findViewById(R.id.video_desc_title);
+			videoDescChannelThumbnailImageView = (InternetImageView) view.findViewById(R.id.video_desc_channel_thumbnail_image_view);
+			videoDescChannelThumbnailImageView.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					if (youTubeChannel != null) {
+						Intent i = new Intent(getActivity(), ChannelBrowserActivity.class);
+						i.putExtra(ChannelBrowserActivity.CHANNEL_OBJ, youTubeChannel);
+						startActivity(i);
+					}
+				}
+			});
 			videoDescChannelTextView = (TextView) view.findViewById(R.id.video_desc_channel);
 			videoDescViewsTextView = (TextView) view.findViewById(R.id.video_desc_views);
 			videoDescLikesTextView = (TextView) view.findViewById(R.id.video_desc_likes);
@@ -149,7 +164,7 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 			} else {
 				// ... or the video URL is passed to SkyTube via another Android app
 				GetVideoDetailsTask getVideoDetailsTask = new GetVideoDetailsTask();
-				getVideoDetailsTask.execute();
+				getVideoDetailsTask.executeInParallel();
 			}
 		}
 
@@ -159,7 +174,7 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 
 	private void getVideoInfoTasks() {
 		// get Channel info (e.g. avatar...etc) task
-		new GetYouTubeChannelInfoTask().execute(youTubeVideo.getChannelId());
+		new GetYouTubeChannelInfoTask().executeInParallel(youTubeVideo.getChannelId());
 
 		// check if the user has subscribed to a channel... if he has, then change the state of
 		// the subscribe button
@@ -299,9 +314,9 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 	 */
 	private void loadVideo() {
 		// get the video's steam
-		new GetStreamTask(youTubeVideo, true).execute();
+		new GetStreamTask(youTubeVideo, true).executeInParallel();
 		// get the video description
-		new GetVideoDescriptionTask().execute();
+		new GetVideoDescriptionTask().executeInParallel();
 	}
 
 
@@ -312,7 +327,7 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 	 * Given a YouTubeVideo, it will asynchronously get a list of streams (supplied by YouTube) and
 	 * then it asks the videoView to start playing a stream.
 	 */
-	private class GetStreamTask extends AsyncTask<Void, Exception, StreamMetaDataList> {
+	private class GetStreamTask extends AsyncTaskParallel<Void, Exception, StreamMetaDataList> {
 
 		/** YouTube Video */
 		private YouTubeVideo	youTubeVideo;
@@ -388,7 +403,7 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 	/**
 	 * Get the video's description and set the appropriate text view.
 	 */
-	private class GetVideoDescriptionTask extends AsyncTask<Void, Void, String> {
+	private class GetVideoDescriptionTask extends AsyncTaskParallel<Void, Void, String> {
 
 		@Override
 		protected String doInBackground(Void... params) {
@@ -424,7 +439,7 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 	 * This task will, from the given video URL, get the details of the video (e.g. video name,
 	 * likes ...etc).
 	 */
-	private class GetVideoDetailsTask extends AsyncTask<Void, Void, YouTubeVideo> {
+	private class GetVideoDetailsTask extends AsyncTaskParallel<Void, Void, YouTubeVideo> {
 
 		private String videoUrl = null;
 
@@ -517,7 +532,7 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 	////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-	private class GetYouTubeChannelInfoTask extends AsyncTask<String, Void, YouTubeChannel> {
+	private class GetYouTubeChannelInfoTask extends AsyncTaskParallel<String, Void, YouTubeChannel> {
 
 		private final String TAG = GetYouTubeChannelInfoTask.class.getSimpleName();
 
@@ -538,6 +553,10 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 		@Override
 		protected void onPostExecute(YouTubeChannel youTubeChannel) {
 			YouTubePlayerFragment.this.youTubeChannel = youTubeChannel;
+
+			if (youTubeChannel != null) {
+				videoDescChannelThumbnailImageView.setImageAsync(youTubeChannel.getThumbnailNormalUrl());
+			}
 		}
 
 	}
