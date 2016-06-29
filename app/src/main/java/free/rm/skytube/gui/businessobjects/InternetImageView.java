@@ -144,7 +144,8 @@ public class InternetImageView extends ImageView {
 					}
 				}
 			} catch (Exception e) {
-				urlConnection.disconnect();
+				if (urlConnection != null)
+					urlConnection.disconnect();
 				bitmap = null;
 				Log.e(TAG, "Error has occurred while downloading image from " + url, e);
 			} finally {

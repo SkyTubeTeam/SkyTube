@@ -44,7 +44,6 @@ public class YouTubeChannel implements Serializable {
 	private String id;
 	private String title;
 	private String description;
-	private String thumbnailHdUrl;
 	private String thumbnailNormalUrl;
 	private String bannerUrl;
 	private String totalSubscribers;
@@ -77,7 +76,7 @@ public class YouTubeChannel implements Serializable {
 	public void init(String channelId, boolean isUserSubscribed) throws IOException {
 		YouTube youtube = YouTubeAPI.create();
 		YouTube.Channels.List channelInfo = youtube.channels().list("snippet, statistics, brandingSettings");
-		channelInfo.setFields("items(id, snippet/title, snippet/description, snippet/thumbnails/high, snippet/thumbnails/default," +
+		channelInfo.setFields("items(id, snippet/title, snippet/description, snippet/thumbnails/default," +
 				"statistics/subscriberCount, brandingSettings/image/bannerTabletHdImageUrl)," +
 				"nextPageToken");
 		channelInfo.setKey(SkyTubeApp.getStr(R.string.API_KEY));
@@ -144,8 +143,14 @@ public class YouTubeChannel implements Serializable {
 
 			ThumbnailDetails thumbnail = snippet.getThumbnails();
 			if (thumbnail != null) {
-				this.thumbnailHdUrl = snippet.getThumbnails().getHigh().getUrl();
 				this.thumbnailNormalUrl = snippet.getThumbnails().getDefault().getUrl();
+
+				// YouTube Bug:  channels with no thumbnail/avatar will return a link to the default
+				// thumbnail that does NOT start with "http" or "https", but rather it starts with
+				// "//s.ytimg.com/...".  So in this case, we just add "https:" in front.
+				String thumbnailUrlLowerCase = this.thumbnailNormalUrl.toLowerCase();
+				if ( !(thumbnailUrlLowerCase.startsWith("http://")  ||  thumbnailUrlLowerCase.startsWith("https://")) )
+					this.thumbnailNormalUrl = "https:" + this.thumbnailNormalUrl;
 			}
 		}
 
@@ -196,10 +201,6 @@ public class YouTubeChannel implements Serializable {
 
 	public String getDescription() {
 		return description;
-	}
-
-	public String getThumbnailHdUrl() {
-		return thumbnailHdUrl;
 	}
 
 	public String getThumbnailNormalUrl() {
