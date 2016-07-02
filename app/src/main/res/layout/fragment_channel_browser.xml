@@ -47,7 +47,7 @@
 					<!-- CHANNEL THUMBNAIL -->
 					<free.rm.skytube.gui.businessobjects.InternetImageView
 						android:id="@+id/channel_thumbnail_image_view"
-						android:layout_width="88dp"
+						android:layout_width="97dp"
 						android:layout_height="wrap_content"
 						android:layout_centerVertical="true"
 						android:padding="16dp"
