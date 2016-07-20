@@ -1,0 +1,286 @@
+@import "styles.less";
+
+// Theme Coloring
+@img_getapp : "../img/backgrounds/get-app-background.jpg";
+@base:        #66cdcc; 
+@baseDark:    #336799;
+
+@lightGrey:   #999999;
+@darkGrey:    #666666;
+@white:       #ffffff;
+@font-stack:  'Lato', Arial;
+
+
+header{
+
+    .bk-gradient(-45deg, @base, @baseDark);
+
+    .navbar-default {
+        ul.navbar-nav {
+            li {
+                a {
+                    color: @white;
+                    background: none;
+                    &.getApp {
+                        color: lighten(@baseDark, 7%);
+                        .bk-gradient(180deg, @white, darken(@white, 12%));
+                        &:hover {
+                            color: @white;
+                            background: @base;
+                        }
+                    }
+                    &:hover {
+                        color:@white;
+                        .transitionAll;
+                    }
+                }
+            }
+        }
+        &.scrolled{
+            border:  0px;
+			background: rgba(33, 67, 99, .3);
+        	ul.navbar-nav{
+        		li{
+        			a{
+        				&:hover{
+                            color:@white;
+        					&:after{
+        						background: @baseDark;
+        					}
+        				}
+        			}
+        		}
+        	}
+        	.navbar-brand{
+        		background: @baseDark;
+        	}
+        }
+    }
+
+}
+
+
+section{
+	.section-heading{
+		h1{
+
+		}
+		.divider{
+			&:after{
+				background: @base;
+			}
+		}
+	}
+}
+
+section#about {
+    .about-item {
+        i.fa {
+            border: 2px solid @base;
+            color: @base;
+        }
+        &:hover {
+            i.fa {
+                color: @white;
+                background: @base;
+            }
+            h3 {
+                color: @base;
+            }
+        }
+    }
+}
+section#features {
+    background: #f6f6f6;
+    header {
+        h1 {
+            &:after {
+                background: @base;
+            }
+        }
+    }
+    .media {
+        i.fa {
+            border: 2px solid @base;
+            color: @base;
+        }
+        &:hover {
+            i.fa {
+                color: @white;
+                background: @base;
+            }
+            h3 {
+                color: @base;
+            }
+        }
+        &.active {
+            i.fa {
+                color: @white;
+                background: @base;
+            }
+            .media-heading{
+            	color: @base;
+            }
+        }
+    }
+}
+/* Get app Section */
+ section#getApp {
+    background: url(@img_getapp);
+    header {
+        color: @white;
+        h1 {
+            &:after {
+                background: @white;
+            }
+        }
+    }
+	.download-item {
+		color: @white;
+		//padding: 2px;
+		
+		h3 {
+			color: @white;
+		}
+        i.fa {
+			border-radius: 100%;
+            border: 2px solid @base;
+            color: @white;
+        }
+        &:hover {
+            i.fa {
+                color: @white;
+                background: @base;
+            }
+            h3 {
+                color: @white;
+            }
+        }
+    }
+}
+/* footer section */
+ footer {
+    .bk-gradient(-45deg, @base, @baseDark);
+    .social {
+        a {
+            border: 2px solid @white;
+            i {
+                color: @white;
+            }
+            &:hover {
+                background: @white;
+                i {
+                    color: @base;
+                }
+            }
+        }
+    }
+    .rights {
+        color: @white;
+        a {
+            color: @white;
+            font-weight: 300;
+            text-decoration: none;
+        }
+    }
+}
+
+.navbar-toggle {
+    background-color: #CCC;
+    border: 1px solid rgba(0, 0, 0, 0);
+}
+.btn {
+	&.btn-primary{
+		color:@base;
+        border-color:@base;
+		&:hover{
+			color:@white;
+			background: @base;
+            border-color:@base;
+		}
+        &.inverse{
+            color:@white;
+            border-color:@white;
+            &:hover{
+                color:@white;
+                background: @base;
+                border-color:@base;
+            }
+        }
+	}
+    &.btn-default {
+        .bk-gradient(180deg, @white, darken(@white, 20%));
+        color:@baseDark;
+        &:hover{
+        	color:@white;
+			background: @base;
+			border-color:@base;
+        }
+    }
+}
+
+form{
+    .form-control{
+        &:focus{
+            border-color:@base;
+            color:@lightGrey;
+        }
+    }
+}
+
+
+
+
+
+@media screen and (max-width: 640px) {
+    header{
+        .navbar-default{
+            .navbar-toggle{
+                &:hover,&:focus{
+                    background: none;
+                }
+            }
+            ul.navbar-nav{
+                li{
+                    a{
+                        color:@white;
+                        border-bottom:1px solid lighten(@baseDark, 3%);
+                        &.getApp{
+                            color:@white;
+                        }
+                        &:after{
+                            display: none;
+                        }
+                        &:hover{
+                            color:@base;
+                        }
+                    }
+                }
+            }
+            .navbar-collapse{
+                background: @baseDark;
+                
+            }
+            &.scrolled{
+                background: @baseDark;
+                .navbar-toggle{
+                    
+                }
+                ul.navbar-nav{
+                    li{
+                        a{
+                            color:@white;
+                            &:hover{
+                                color:@base;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.pre-loader{
+    background: @baseDark;
+}

@@ -1,0 +1,81 @@
+
+.rounded-corners (@radius: 2px) {
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+  -ms-border-radius: @radius;
+  -o-border-radius: @radius;
+  border-radius: @radius;
+}
+
+.backgroundCover(){
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.transitionAll (@transition: all .25s ease-in-out) {
+  -webkit-transition: @transition;
+  -moz-transition: @transition;
+  -ms-transition: @transition;
+  -o-transition: @transition;
+  transition: @transition;
+}
+
+.box-shadow-me (@boxShadow : 0px 1px 3px rgba(0,0,0,.3)) {
+  -webkit-box-shadow: @boxShadow;
+  -moz-box-shadow: @boxShadow;
+  box-shadow: @boxShadow;
+}
+
+.background-opacity(@color, @opacity) {
+    @rgba-color: rgba(red(@color), green(@color), blue(@color), @opacity);
+
+    background-color: @rgba-color;
+
+    // Hack for IE8:
+    background: none\9; // Only IE8
+    filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d')", argb(@rgba-color),argb(@rgba-color))); // IE9 and down
+    // Problem: Filter gets applied twice in IE9.
+    // Solution:
+    &:not([dummy]) {
+      filter: progid:DXImageTransform.Microsoft.gradient(enabled='false'); // Only IE9
+    }
+}
+
+
+.bk-gradient(@deg: 0deg, @firstColor, @secColor ) {
+    background: @firstColor;
+    /* Old browsers */
+    background: -moz-linear-gradient(@deg, @firstColor 0%, @secColor 100%);
+    /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, @firstColor), color-stop(100%, @secColor));
+    /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(@deg, @firstColor 0%, @secColor 100%);
+    /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(@deg, @firstColor 0%, @secColor 100%);
+    /* Opera 11.10+ */
+    background: -ms-linear-gradient(@deg, @firstColor 0%, @secColor 100%);
+    /* IE10+ */
+    background: linear-gradient(@deg, @firstColor 0%, @secColor 100%);
+    /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr= @firstColor , endColorstr= @secColor , GradientType=1);
+    /* IE6-9 fallback on horizontal gradient */
+}
+
+.video-container { 
+  position: relative; 
+  padding-bottom: 56.25%; 
+  padding-top: 30px; 
+  height: 0; 
+  overflow: hidden; 
+} 
+.video-container iframe,
+.video-container object,
+.video-container embed {
+  position: absolute; 
+  top: 0; 
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
