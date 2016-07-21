@@ -129,12 +129,6 @@ header .navbar-default .navbar-brand img {
 .scrollpoint.active {
   opacity: 1 \0;
 }
-.hanging-phone {
-  position: absolute;
-  right: 0;
-  z-index: 0;
-  bottom: -70px;
-}
 .section-heading {
   margin: 60px 0 80px;
   text-align: center;
@@ -170,6 +164,20 @@ header .navbar-default .navbar-brand img {
 }
 .section-heading.inverse .divider:after {
   background: #ffffff;
+}
+section#intro {
+  position: relative;
+  height: 100vh;
+}
+section#intro #carousel-slider .carousel-control {
+  background-image: none;
+}
+section#intro #carousel-slider .carousel-control .carousel-control-center {
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  z-index: 5;
+  margin-left: -25px;
 }
 section#about {
   position: relative;
@@ -328,26 +336,6 @@ section::after {
   content: '';
   pointer-events: none;
   overflow: hidden;
-}
-.carousel-fade .carousel-inner .item {
-  opacity: 0;
-  transition-property: opacity;
-}
-.carousel-fade .carousel-inner .active {
-  opacity: 1;
-}
-.carousel-fade .carousel-inner .active.left,
-.carousel-fade .carousel-inner .active.right {
-  left: 0;
-  opacity: 0;
-  z-index: 1;
-}
-.carousel-fade .carousel-inner .next.left,
-.carousel-fade .carousel-inner .prev.right {
-  opacity: 1;
-}
-.carousel-fade .carousel-control {
-  z-index: 2;
 }
 .tp-caption {
   font-family: 'Lato', Arial !important;
@@ -626,6 +614,17 @@ header .navbar-default.scrolled .navbar-brand {
 }
 section .section-heading .divider:after {
   background: #66cdcc;
+}
+section#intro {
+  background: url("../img/backgrounds/intro-background.jpg") no-repeat;
+  background-size: cover;
+}
+section#intro h1 {
+  color: #ffffff;
+}
+section#intro h3 {
+  color: #ffffff;
+  font-weight: lighter;
 }
 section#about .about-item i.fa {
   border: 2px solid #66cdcc;

@@ -1,7 +1,8 @@
 @import "styles.less";
 
 // Theme Coloring
-@img_getapp : "../img/backgrounds/get-app-background.jpg";
+@bkg_getapp : "../img/backgrounds/get-app-background.jpg";
+@bkg_intro	: "../img/backgrounds/intro-background.jpg";
 @base:        #66cdcc; 
 @baseDark:    #336799;
 
@@ -73,6 +74,17 @@ section{
 	}
 }
 
+section#intro {
+	background: url(@bkg_intro) no-repeat;
+	background-size: cover;
+	h1 {
+		color: @white;
+	}
+	h3 {
+		color: @white;
+		font-weight: lighter;
+	}
+}
 section#about {
     .about-item {
         i.fa {
@@ -126,7 +138,7 @@ section#features {
 }
 /* Get app Section */
  section#getApp {
-    background: url(@img_getapp);
+    background: url(@bkg_getapp);
     header {
         color: @white;
         h1 {

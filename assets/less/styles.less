@@ -80,12 +80,6 @@ header {
         opacity: 1 \0;
     }
 }
-.hanging-phone {
-    position: absolute;
-    right: 0;
-    z-index: 0;
-    bottom: -70px;
-}
 
 .section-heading {
     margin: 60px 0 80px;
@@ -123,6 +117,23 @@ header {
     }
 }
 
+section#intro {
+    position: relative;
+	height:   100vh;
+	
+	#carousel-slider{
+		.carousel-control{
+			background-image:none;
+			.carousel-control-center {
+				display: inline-block;
+				position: absolute;
+				top: 50%;
+				z-index: 5;
+				margin-left: -25px;
+			}
+		}
+	}
+}
 section#about {
     position: relative;
     .about-item {
@@ -254,28 +265,31 @@ section {
     overflow: hidden;
 }
 
-.carousel-fade {
-    .carousel-inner {
-        .item {
-            opacity: 0;
-            transition-property: opacity;
-        }
-        .active {
-            opacity: 1;
-        }
-        .active.left, .active.right {
-            left: 0;
-            opacity: 0;
-            z-index: 1;
-        }
-        .next.left, .prev.right {
-            opacity: 1;
-        }
-    }
-    .carousel-control {
-        z-index: 2;
-    }
-}
+//.carousel-fade {
+//    .carousel-inner {
+//        .item {
+//            opacity: 0;
+//            transition-property: opacity;
+//        }
+//        .active {
+//            opacity: 1;
+//        }
+//        .active.left, .active.right {
+//            left: 0;
+//            opacity: 0;
+//            z-index: 1;
+//        }
+//        .next.left, .prev.right {
+//            opacity: 1;
+//        }
+//    }
+//    .carousel-control {
+//		background: none;
+//		background-image:none;
+//		//padding-top: 45%;
+//        //z-index: 2;
+//    }
+//}
 
 .tp-caption {
     font-family: @font-stack !important;
