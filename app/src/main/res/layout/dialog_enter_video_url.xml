@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			  android:orientation="horizontal"
+			  android:layout_width="match_parent"
+			  android:layout_height="match_parent"
+			  android:gravity="center_vertical"
+			  android:paddingLeft="?dialogPreferredPadding"
+			  android:paddingRight="?dialogPreferredPadding">
+
+	<EditText
+		android:id="@+id/dialog_url_edittext"
+		android:layout_width="0dp"
+		android:layout_weight="1"
+		android:layout_height="wrap_content"
+		android:hint="https://www.youtube.com/watch?v=xxxxxx"
+		android:singleLine="true"/>
+
+	<ImageButton
+		android:id="@+id/dialog_url_clear_button"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:background="@android:drawable/ic_menu_close_clear_cancel"/>
+
+</LinearLayout>

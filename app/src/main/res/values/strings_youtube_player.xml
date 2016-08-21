@@ -14,4 +14,9 @@
 	<string name="no_video_comments">This video has no comments or comments are disabled.</string>
 	<string name="view_replies">View replies</string>
 	<string name="hide_replies">Hide replies</string>
+
+	<string name="enter_video_url">Enter Video URL</string>
+	<string name="play">Play</string>
+	<string name="cancel">Cancel</string>
+	<string name="clear">Clear</string>
 </resources>
