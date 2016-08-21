@@ -17,29 +17,46 @@
 
 package free.rm.skytube.gui.fragments;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
-import android.widget.ListView;
 import android.widget.SpinnerAdapter;
+import android.widget.Toast;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.URL;
 
 import free.rm.skytube.R;
+import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.gui.businessobjects.FragmentEx;
 import free.rm.skytube.gui.businessobjects.LoadingProgressBar;
 import free.rm.skytube.gui.businessobjects.SubsAdapter;
+import free.rm.skytube.gui.businessobjects.UpdatesChecker;
 import free.rm.skytube.gui.businessobjects.VideoGridAdapter;
+import free.rm.skytube.gui.businessobjects.WebStream;
 
 /**
  * A fragment that will hold a {@link GridView} full of YouTube videos.
@@ -52,6 +69,19 @@ public class VideosGridFragment extends FragmentEx implements ActionBar.OnNaviga
 	private RecyclerView			subsListView = null;
 	private SubsAdapter				subsAdapter = null;
 	private ActionBarDrawerToggle	subsDrawerToggle;
+
+	/** Set to true of the UpdatesCheckerTask has run; false otherwise. */
+	private static boolean updatesCheckerTaskRan = false;
+
+
+	@Override
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
+
+		// check for updates (one time only)
+		if (!updatesCheckerTaskRan)
+			new UpdatesCheckerTask().executeInParallel();
+	}
 
 
 	@Override
@@ -145,4 +175,163 @@ public class VideosGridFragment extends FragmentEx implements ActionBar.OnNaviga
 		// Handle your other action bar items...
 		return super.onOptionsItemSelected(item);
 	}
+
+
+	////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+	private class UpdatesCheckerTask extends AsyncTaskParallel<Void, Void, UpdatesChecker> {
+
+		@Override
+		protected UpdatesChecker doInBackground(Void... params) {
+			UpdatesChecker updatesChecker = new UpdatesChecker();
+			updatesChecker.checkForUpdates();
+			return updatesChecker;
+		}
+
+		@Override
+		protected void onPostExecute(final UpdatesChecker updatesChecker) {
+			updatesCheckerTaskRan = true;
+
+			if (updatesChecker != null  &&  updatesChecker.getLatestApkUrl() != null) {
+				new AlertDialog.Builder(getActivity())
+						.setTitle(R.string.update_available)
+						.setMessage( String.format(getResources().getString(R.string.update_dialog_msg), updatesChecker.getLatestApkVersion()) )
+						.setPositiveButton(R.string.update, new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								new UpgradeAppTask(updatesChecker.getLatestApkUrl()).executeInParallel();
+							}
+						})
+						.setNegativeButton(R.string.later, null)
+						.show();
+			}
+		}
+
+	}
+
+
+	/**
+	 * This task will download the remote APK file and it will install it for the user (provided that
+	 * the user accepts such installation).
+	 */
+	private class UpgradeAppTask extends AsyncTaskParallel<Void, Integer, Pair<File, Throwable>> {
+
+		private URL				apkUrl;
+		private ProgressDialog	downloadDialog;
+
+		private final String TAG = UpgradeAppTask.class.getSimpleName();
+
+
+		public UpgradeAppTask(URL apkUrl) {
+			this.apkUrl = apkUrl;
+		}
+
+
+		@Override
+		protected void onPreExecute() {
+			// setup the download dialog and display it
+			downloadDialog = new ProgressDialog(getActivity());
+			downloadDialog.setMessage(getString(R.string.downloading));
+			downloadDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+			downloadDialog.setProgress(0);
+			downloadDialog.setMax(100);
+			downloadDialog.setCancelable(false);
+			downloadDialog.setProgressNumberFormat(null);
+			downloadDialog.show();
+		}
+
+		@Override
+		protected Pair<File, Throwable> doInBackground(Void... params) {
+			File		apkFile;
+			Throwable	exception = null;
+
+			// try to download the remote APK file
+			try {
+				apkFile = downloadApk();
+			} catch (Throwable e) {
+				apkFile = null;
+				exception = e;
+			}
+
+			return new Pair<>(apkFile, exception);
+		}
+
+
+		/**
+		 * Download the remote APK file and return an instance of {@link File}.
+		 *
+		 * @return	A {@link File} instance of the downloaded APK.
+		 * @throws IOException
+		 */
+		private File downloadApk() throws IOException {
+			WebStream		webStream = new WebStream(this.apkUrl);
+			File			apkFile = File.createTempFile("skytube-upgrade", ".apk", getActivity().getCacheDir());
+			OutputStream	out;
+
+			// set the APK file to readable to every user so that this file can be read by Android's
+			// package manager program
+			apkFile.setReadable(true /*set file to readable*/, false /*set readable to every user on the system*/);
+			out = new FileOutputStream(apkFile);
+
+			// download the file by transferring bytes from in to out
+			byte[]	buf = new byte[1024];
+			int		totalBytesRead = 0;
+			for (int bytesRead; (bytesRead = webStream.getStream().read(buf)) > 0; ) {
+				out.write(buf, 0, bytesRead);
+
+				// update the progressbar of the downloadDialog
+				totalBytesRead += bytesRead;
+				publishProgress(totalBytesRead, webStream.getStreamSize());
+			}
+
+			// close the streams
+			webStream.getStream().close();
+			out.close();
+
+			return apkFile;
+		}
+
+
+		@Override
+		protected void onProgressUpdate(Integer... values) {
+			float	totalBytesRead = values[0];
+			float	fileSize = values[1];
+			float	percentageDownloaded = (totalBytesRead / fileSize) * 100f;
+
+			downloadDialog.setProgress((int)percentageDownloaded);
+		}
+
+
+		@Override
+		protected void onPostExecute(Pair<File, Throwable> out) {
+			File		apkFile   = out.first;
+			Throwable	exception = out.second;
+
+			// hide the download dialog
+			downloadDialog.dismiss();
+
+			if (exception != null) {
+				Log.e(TAG, "Unable to upgrade app", exception);
+				Toast.makeText(getActivity(), R.string.update_failure, Toast.LENGTH_LONG).show();
+			} else {
+				displayUpgradeAppDialog(apkFile);
+			}
+		}
+
+
+		/**
+		 * Ask the user whether he wants to install the latest SkyTube's APK file.
+		 *
+		 * @param apkFile	APK file to install.
+		 */
+		private void displayUpgradeAppDialog(File apkFile) {
+			Intent intent = new Intent(Intent.ACTION_VIEW);
+			intent.setDataAndType(Uri.fromFile(apkFile), "application/vnd.android.package-archive");
+			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);	// asks the user to open the newly updated app
+			startActivity(intent);
+		}
+
+	}
+
 }
