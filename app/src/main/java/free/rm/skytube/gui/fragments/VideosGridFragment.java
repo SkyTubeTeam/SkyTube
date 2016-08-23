@@ -69,6 +69,7 @@ public class VideosGridFragment extends FragmentEx implements ActionBar.OnNaviga
 	private RecyclerView			subsListView = null;
 	private SubsAdapter				subsAdapter = null;
 	private ActionBarDrawerToggle	subsDrawerToggle;
+	private View					progressBar = null;
 
 	/** Set to true of the UpdatesCheckerTask has run; false otherwise. */
 	private static boolean updatesCheckerTaskRan = false;
@@ -90,7 +91,7 @@ public class VideosGridFragment extends FragmentEx implements ActionBar.OnNaviga
 		View view = inflater.inflate(R.layout.fragment_videos_grid, container, false);
 
 		// set up the loading progress bar
-		LoadingProgressBar.get().setProgressBar(view.findViewById(R.id.loading_progress_bar));
+		this.progressBar = view.findViewById(R.id.loading_progress_bar);
 
 		// setup the video grid view
 		this.gridView = (RecyclerView) view.findViewById(R.id.grid_view);
@@ -156,6 +157,8 @@ public class VideosGridFragment extends FragmentEx implements ActionBar.OnNaviga
 	public boolean onNavigationItemSelected(int itemPosition, long itemId) {
 		// scroll to the top
 		gridView.smoothScrollToPosition(0);
+
+		LoadingProgressBar.get().setProgressBar(progressBar);
 
 		// set/change the video category
 		videoGridAdapter.setVideoCategory(VideoCategory.getVideoCategory(itemPosition));
