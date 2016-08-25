@@ -1,5 +1,5 @@
 # SkyTube
-An open-source YouTube player for Android.
+An open-source YouTube player for the Android operating system.
 
 This app allows you to:
 * explore Featured and Most Popular videos,
@@ -7,21 +7,28 @@ This app allows you to:
 * play YouTube videos,
 * view video comments,
 * search videos, music and channels
-* channel subscription [New!]
+* channel subscription **[New!]**
 
 ... all at the tip of your fingers.
 
 More features will be added in the near future.
 
+## Website
+
+https://ram-on.github.io/SkyTube
+
 ## Download
 
 [![Dowload-APK](screenshots/download_apk.png)](https://github.com/ram-on/SkyTube/releases/download/v1.0/skytube-ver-1.0-oss.apk)
+
 [![F-Droid](https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Get_it_on_F-Droid.svg/200px-Get_it_on_F-Droid.svg.png)](https://f-droid.org/repository/browse/?fdid=free.rm.skytube.oss)
+
 [![Aptoide](https://i.imgur.com/T5A0EXV.png)](http://rmstore.store.aptoide.com/app/market/free.rm.skytube.oss/1/17955485/SkyTube)
 
 ```
-MD5:    32755ae514524f274a148cc188a5bae4
-SHA256: f238dcc612c10ad7d96828f5f394c8d05caa04b3118544063252e82b7d219c36
+Version: 1.0
+MD5:     32755ae514524f274a148cc188a5bae4
+SHA256:  f238dcc612c10ad7d96828f5f394c8d05caa04b3118544063252e82b7d219c36
 ```
 
 ## Why SkyTube?
@@ -59,5 +66,8 @@ but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
-You should have received a copy of the GNU General Public License
+You should have received a [copy of the GNU General Public License](https://raw.githubusercontent.com/ram-on/SkyTube/master/LICENSE)
 along with this program.  If not, see http://www.gnu.org/licenses/
+
+This project is not affiliated with YouTube™ or any of its partners and/or products.
+YouTube™ is a registered trademark of Google Inc.
