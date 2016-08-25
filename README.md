@@ -7,6 +7,7 @@ This app allows you to:
 * play YouTube videos,
 * view video comments,
 * search videos, music and channels
+* channel subscription [New!]
 
 ... all at the tip of your fingers.
 
@@ -14,9 +15,9 @@ More features will be added in the near future.
 
 ## Download
 
-[![Aptoide](https://i.imgur.com/T5A0EXV.png)](http://rmstore.store.aptoide.com/app/market/free.rm.skytube.oss/1/17955485/SkyTube)
+[![Dowload-APK](screenshots/download_apk.png)](https://github.com/ram-on/SkyTube/releases/download/v1.0/skytube-ver-1.0-oss.apk)
 [![F-Droid](https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Get_it_on_F-Droid.svg/200px-Get_it_on_F-Droid.svg.png)](https://f-droid.org/repository/browse/?fdid=free.rm.skytube.oss)
-[![Dowload-APK](screenshots/download_apk.png)](https://mega.nz/#!9k8STRwK!mBt1huQP-Mjpp55ptskpbDIWJlmMyI1gQ6h0LEH-QTE)
+[![Aptoide](https://i.imgur.com/T5A0EXV.png)](http://rmstore.store.aptoide.com/app/market/free.rm.skytube.oss/1/17955485/SkyTube)
 
 ```
 MD5:    32755ae514524f274a148cc188a5bae4
@@ -24,6 +25,7 @@ SHA256: f238dcc612c10ad7d96828f5f394c8d05caa04b3118544063252e82b7d219c36
 ```
 
 ## Why SkyTube?
+* Open Source
 * Innovative design
 * No intrusive ads
 * Only requires 1 Android-permission (Internet)
@@ -33,13 +35,14 @@ SHA256: f238dcc612c10ad7d96828f5f394c8d05caa04b3118544063252e82b7d219c36
 
 ## Screenshots
 ### Tablet
-[<img src="screenshots/featured.png" width=960>](screenshots/featured.png)
-[<img src="screenshots/player2.png" width=960>](screenshots/player2.png)
-[<img src="screenshots/player+desc.png" width=960>](screenshots/player+desc.png)
-[<img src="screenshots/player+comments.png" width=960>](screenshots/player+comments.png)
-[<img src="screenshots/channel_browser.png" width=960>](screenshots/channel_browser.png)
+[<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/trending.png" width=960>](Trending videos)
+[<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/subs.png" width=960>](Channel Subscription)
+[<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/play.png" width=960>](Video Player)
+[<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/comments.png" width=960>](Video Comments)
+[<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/channel.png" width=960>](Channel Browser)
+[<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/search.png" width=960>](Search Videos)
 
-### Mobile Phone
+### Mobile Phone (Old Screenshots)
 [<img src="screenshots/mobile_most_pop.png" width=250>](screenshots/mobile_most_pop.png)
 [<img src="screenshots/mobile_settings.png" width=250>](screenshots/mobile_settings.png)
 [<img src="screenshots/mobile_land.png" width=505>](screenshots/mobile_land2.png)
