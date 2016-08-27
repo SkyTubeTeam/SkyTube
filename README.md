@@ -19,16 +19,16 @@ https://ram-on.github.io/SkyTube
 
 ## Download
 
-[![Dowload-APK](screenshots/download_apk.png)](https://github.com/ram-on/SkyTube/releases/download/v1.0/skytube-ver-1.0-oss.apk)
+[![Dowload-APK](screenshots/download_apk.png)](https://github.com/ram-on/SkyTube/releases/download/v2.0/SkyTube-v2.0.apk)
 
 [![F-Droid](https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Get_it_on_F-Droid.svg/200px-Get_it_on_F-Droid.svg.png)](https://f-droid.org/repository/browse/?fdid=free.rm.skytube.oss)
 
 [![Aptoide](https://i.imgur.com/T5A0EXV.png)](http://rmstore.store.aptoide.com/app/market/free.rm.skytube.oss/1/17955485/SkyTube)
 
 ```
-Version: 1.0
-MD5:     32755ae514524f274a148cc188a5bae4
-SHA256:  f238dcc612c10ad7d96828f5f394c8d05caa04b3118544063252e82b7d219c36
+Version: 2.0
+MD5:     44464075e827aec2454cdfc1d38b4d62
+SHA256:  7268ec07357210c5fb3b3ee8bb8794fd3c873fb4d8469dae33c8f854e3629c40
 ```
 
 ## Why SkyTube?
