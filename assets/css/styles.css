@@ -205,6 +205,14 @@ section#about .about-item i.fa {
 section#about .description {
   text-align: justify;
 }
+section#features .centered-vertically {
+  display: flex;
+  align-items: center;
+}
+section#features .blury {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
 section#features .media i.fa {
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
@@ -223,9 +231,6 @@ section#features .media i.fa {
 section#features .media .media-heading {
   padding-top: 10px;
   font-weight: 300;
-}
-section#features .media .media-body {
-  color: #999999;
 }
 section#features .media.feature {
   margin-top: 25px;
@@ -291,11 +296,8 @@ section#support .media .media-heading a {
 }
 /* footer section */
 footer {
-  padding: 80px 0;
+  padding: 0px;
   text-align: center;
-}
-footer a > img {
-  width: 100px;
 }
 footer .license {
   margin: auto;
@@ -305,24 +307,13 @@ footer .license {
 }
 footer .btn-license {
   margin-top: 15px;
+  font-size: xx-small;
 }
 footer .rights {
-  margin-top: 0px;
-}
-footer .rights a {
-  text-decoration: underline;
-  -webkit-transition: all 0.25s ease-in-out;
-  -moz-transition: all 0.25s ease-in-out;
-  -ms-transition: all 0.25s ease-in-out;
-  -o-transition: all 0.25s ease-in-out;
-  transition: all 0.25s ease-in-out;
-  font-weight: bold;
-}
-footer .rights a:hover {
-  text-decoration: none;
+  margin-top: 25px;
 }
 footer .rights p {
-  font-size: 8px;
+  font-size: xx-small;
   line-height: 0em;
 }
 section {
@@ -593,11 +584,9 @@ header .navbar-default ul.navbar-nav li a.getApp:hover {
 }
 header .navbar-default ul.navbar-nav li a:hover {
   color: #ffffff;
-  -webkit-transition: all 0.25s ease-in-out;
-  -moz-transition: all 0.25s ease-in-out;
-  -ms-transition: all 0.25s ease-in-out;
-  -o-transition: all 0.25s ease-in-out;
-  transition: all 0.25s ease-in-out;
+}
+header .navbar-default ul.navbar-nav li a:hover:after {
+  background: #66cdcc;
 }
 header .navbar-default.scrolled {
   border: 0px;
@@ -607,7 +596,7 @@ header .navbar-default.scrolled ul.navbar-nav li a:hover {
   color: #ffffff;
 }
 header .navbar-default.scrolled ul.navbar-nav li a:hover:after {
-  background: #336799;
+  background: #66cdcc;
 }
 header .navbar-default.scrolled .navbar-brand {
   background: #336799;
@@ -626,6 +615,24 @@ section#intro h3 {
   color: #ffffff;
   font-weight: lighter;
 }
+section#about {
+  background: #efefef;
+  /* Old browsers */
+  background: -moz-linear-gradient(45deg, #efefef 0%, #f5f5f5 100%);
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, #efefef), color-stop(100%, #f5f5f5));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(45deg, #efefef 0%, #f5f5f5 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(45deg, #efefef 0%, #f5f5f5 100%);
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(45deg, #efefef 0%, #f5f5f5 100%);
+  /* IE10+ */
+  background: linear-gradient(45deg, #efefef 0%, #f5f5f5 100%);
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#efefef, endColorstr=#f5f5f5, GradientType=1);
+  /* IE6-9 fallback on horizontal gradient */
+}
 section#about .about-item i.fa {
   border: 2px solid #66cdcc;
   color: #66cdcc;
@@ -638,30 +645,64 @@ section#about .about-item:hover h3 {
   color: #66cdcc;
 }
 section#features {
-  background: #f6f6f6;
+  background: url("../img/backgrounds/features.jpg") no-repeat;
+  background-size: cover;
 }
-section#features header h1:after {
-  background: #66cdcc;
+section#features .section-heading h1,
+section#features .section-heading p {
+  color: #ffffff;
+}
+section#features .blury {
+  overflow: auto;
+  position: relative;
+}
+section#features .blury:before {
+  content: "";
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  display: block;
+  background: rgba(0, 0, 0, 0.3);
+  width: 100%;
+  height: 100%;
+  -webkit-filter: blur(10px);
+  -moz-filter: blur(10px);
+  -o-filter: blur(10px);
+  -ms-filter: blur(10px);
+  filter: blur(10px);
+}
+section#features .media {
+  z-index: 0;
 }
 section#features .media i.fa {
   border: 2px solid #66cdcc;
   color: #66cdcc;
 }
-section#features .media:hover i.fa {
+section#features .media .media-body {
+  color: #ffffff;
+}
+section#features .media .media-body h3 {
+  color: #ffffff;
+}
+section#features .media .media-body:hover {
+  color: #66cdcc;
+}
+section#features .media .media-body:hover i.fa {
   color: #ffffff;
   background: #66cdcc;
 }
-section#features .media:hover h3 {
+section#features .media .media-body:hover h3 {
   color: #66cdcc;
 }
-section#features .media.active i.fa {
+section#features .media .media-body.active i.fa {
   color: #ffffff;
   background: #66cdcc;
 }
-section#features .media.active .media-heading {
+section#features .media .media-body.active .media-heading {
   color: #66cdcc;
 }
-/* Get app Section */
+/* Get App / Download section */
 section#getApp {
   background: url("../img/backgrounds/get-app-background.jpg");
 }
@@ -689,44 +730,24 @@ section#getApp .download-item:hover i.fa {
 section#getApp .download-item:hover h3 {
   color: #ffffff;
 }
-/* footer section */
+/* Footer section */
 footer {
-  background: #66cdcc;
+  background: #efefef;
   /* Old browsers */
-  background: -moz-linear-gradient(-45deg, #66cdcc 0%, #336799 100%);
+  background: -moz-linear-gradient(45deg, #efefef 0%, #f5f5f5 100%);
   /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, #66cdcc), color-stop(100%, #336799));
+  background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, #efefef), color-stop(100%, #f5f5f5));
   /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(-45deg, #66cdcc 0%, #336799 100%);
+  background: -webkit-linear-gradient(45deg, #efefef 0%, #f5f5f5 100%);
   /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(-45deg, #66cdcc 0%, #336799 100%);
+  background: -o-linear-gradient(45deg, #efefef 0%, #f5f5f5 100%);
   /* Opera 11.10+ */
-  background: -ms-linear-gradient(-45deg, #66cdcc 0%, #336799 100%);
+  background: -ms-linear-gradient(45deg, #efefef 0%, #f5f5f5 100%);
   /* IE10+ */
-  background: linear-gradient(-45deg, #66cdcc 0%, #336799 100%);
+  background: linear-gradient(45deg, #efefef 0%, #f5f5f5 100%);
   /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#66cdcc, endColorstr=#336799, GradientType=1);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#efefef, endColorstr=#f5f5f5, GradientType=1);
   /* IE6-9 fallback on horizontal gradient */
-}
-footer .social a {
-  border: 2px solid #ffffff;
-}
-footer .social a i {
-  color: #ffffff;
-}
-footer .social a:hover {
-  background: #ffffff;
-}
-footer .social a:hover i {
-  color: #66cdcc;
-}
-footer .rights {
-  color: #ffffff;
-}
-footer .rights a {
-  color: #ffffff;
-  font-weight: 300;
-  text-decoration: none;
 }
 .navbar-toggle {
   background-color: #CCC;

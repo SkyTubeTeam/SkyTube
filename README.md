@@ -12,3 +12,7 @@ All demos and examples, whether in a code project’s repository or displayed on
 
 CC0 is even more permissive than the MIT license, allowing you to use the code in any manner you want, without any copyright headers, notices, or other attribution.
 
+## Credits
+
+Stocks Reservoir Stars by Matthew Savage (https://www.flickr.com/photos/msavagephotography)
+

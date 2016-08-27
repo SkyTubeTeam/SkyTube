@@ -153,6 +153,15 @@ section#about {
 	}
 }
 section#features {
+	// all elements in #row are going to be centered vertically
+	.centered-vertically {
+		display: flex;
+		align-items: center;
+	}
+	.blury {
+		margin-top: 20px;
+		margin-bottom: 20px;
+	}
     .media {
         i.fa {
             .rounded-corners(50%);
@@ -164,9 +173,6 @@ section#features {
         .media-heading {
             padding-top: 10px;
             font-weight: 300;
-        }
-        .media-body {
-            color:@lightGrey;
         }
         &.feature {
             margin-top: 25px;
@@ -201,7 +207,7 @@ section#features {
     }
 }
 /* support section */
- section#support {
+section#support {
     padding: 0 0 150px 0;
     .media {
         margin-bottom: 10px;
@@ -222,12 +228,10 @@ section#features {
     }
 }
 /* footer section */
- footer {
-    padding: 80px 0;
+footer {
+    padding: 0px;
     text-align: center;
-    a>img {
-        width: 100px;
-    }
+	
 	.license {
 		margin: auto;
 		width: 70%;
@@ -236,19 +240,12 @@ section#features {
 	}
 	.btn-license {
 		margin-top: 15px;
+		font-size: xx-small;
 	}
     .rights {
-        margin-top: 0px;
-        a {
-            text-decoration: underline;
-            .transitionAll;
-            font-weight: bold;
-            &:hover {
-                text-decoration: none;
-            }
-        }
+		margin-top: 25px;
 		p {
-			font-size: 8px;
+			font-size: xx-small;
 			line-height: 0em;
 		}
     }
@@ -264,32 +261,6 @@ section {
     pointer-events: none;
     overflow: hidden;
 }
-
-//.carousel-fade {
-//    .carousel-inner {
-//        .item {
-//            opacity: 0;
-//            transition-property: opacity;
-//        }
-//        .active {
-//            opacity: 1;
-//        }
-//        .active.left, .active.right {
-//            left: 0;
-//            opacity: 0;
-//            z-index: 1;
-//        }
-//        .next.left, .prev.right {
-//            opacity: 1;
-//        }
-//    }
-//    .carousel-control {
-//		background: none;
-//		background-image:none;
-//		//padding-top: 45%;
-//        //z-index: 2;
-//    }
-//}
 
 .tp-caption {
     font-family: @font-stack !important;
