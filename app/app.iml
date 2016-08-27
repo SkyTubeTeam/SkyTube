@@ -42,12 +42,6 @@
       <sourceFolder url="file://$MODULE_DIR$/src/ossDebug/jni" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/ossDebug/rs" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/ossDebug/shaders" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/r/androidTest/oss/debug" isTestSource="true" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/aidl/androidTest/oss/debug" isTestSource="true" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/buildConfig/androidTest/oss/debug" isTestSource="true" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/rs/androidTest/oss/debug" isTestSource="true" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/rs/androidTest/oss/debug" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/resValues/androidTest/oss/debug" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/testOssDebug/res" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/testOssDebug/resources" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/testOssDebug/assets" type="java-test-resource" />
@@ -56,6 +50,12 @@
       <sourceFolder url="file://$MODULE_DIR$/src/testOssDebug/jni" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/testOssDebug/rs" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/testOssDebug/shaders" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/r/androidTest/oss/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/aidl/androidTest/oss/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/buildConfig/androidTest/oss/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/rs/androidTest/oss/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/rs/androidTest/oss/debug" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/resValues/androidTest/oss/debug" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/oss/res" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/oss/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/oss/assets" type="java-resource" />
@@ -142,7 +142,6 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/jniLibs" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/manifests" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/pre-dexed" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/reload-dex" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/res" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/restart-dex" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/rs" />
