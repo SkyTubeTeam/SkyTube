@@ -26,9 +26,9 @@ https://ram-on.github.io/SkyTube
 [![Aptoide](https://i.imgur.com/T5A0EXV.png)](http://rmstore.store.aptoide.com/app/market/free.rm.skytube.oss/1/17955485/SkyTube)
 
 ```
-Version: 2.0
-MD5:     44464075e827aec2454cdfc1d38b4d62
-SHA256:  7268ec07357210c5fb3b3ee8bb8794fd3c873fb4d8469dae33c8f854e3629c40
+File:    SkyTube-v2.0.apk
+MD5:     7671852bc773f1c27004d9ee138e5331
+SHA256:  1e755afd15198a94af7b5b49c02fc8cb125746b9291455e70a9d9db411b53a44
 ```
 
 ## Why SkyTube?
