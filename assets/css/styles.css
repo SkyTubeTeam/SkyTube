@@ -299,6 +299,13 @@ footer {
   padding: 0px;
   text-align: center;
 }
+footer .contribute {
+  margin: auto;
+  width: 70%;
+  font-size: medium;
+  font-weight: bold;
+  text-align: justify;
+}
 footer .license {
   margin: auto;
   width: 70%;
