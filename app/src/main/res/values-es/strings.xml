@@ -1,0 +1,20 @@
+<resources>
+	<string name="could_not_get_videos">No se encontraron videos de %s.</string>
+	<string name="views">visto %,d veces</string>
+	<string name="error">Error</string>
+	<string name="search_videos">Buscar videos</string>
+	<string name="launch_offical_player_error">Ocurrió un eror al tratar de abrir el reporductor 
+		oficial de YouTube. Asegúrate que la aplicación oficial de YouTube hecha por Google
+		esté instalada en tu dispositivo.</string>
+
+	<!--
+		Holds different videos categories.
+
+		Order is important.  Refer to VideoCategory enum.
+	 -->
+	<string-array name="video_categories">
+		<item>Destacados</item>
+		<item>Más populares</item>
+	</string-array>
+
+</resources>
