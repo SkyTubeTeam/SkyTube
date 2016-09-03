@@ -7,6 +7,9 @@
 @base:        #66cdcc; 
 @baseDark:    #336799;
 
+@navbarmobile: fade(#263238, 90%);
+@navbardefault:fade(#263238, 90%);
+
 @lightGrey:   #999999;
 @darkGrey:    #666666;
 @white:       #ffffff;
@@ -21,6 +24,9 @@
 header{
     .bk-gradient(-45deg, @base, @baseDark);
 
+	/*
+		Navbar for large devices / PCs only.
+	 */
     .navbar-default {
         ul.navbar-nav {
             li {
@@ -46,7 +52,7 @@ header{
         }
         &.scrolled{
             border:  0px;
-			background: rgba(33, 67, 99, .3);
+			background: @navbardefault;
         	ul.navbar-nav{
         		li{
         			a{
@@ -66,6 +72,68 @@ header{
     }
 
 }
+
+.navbar-toggle {
+    background-color: #F00;
+    border: 1px solid rgba(0, 0, 0, 0);
+}
+
+
+/*
+	Navbar / Action bar for mobile devices only.
+ */
+@media screen and (max-width: 640px) {
+    header{
+        .navbar-default{
+            .navbar-toggle{
+                &:hover,&:focus{
+                    background: none;
+                }
+            }
+            ul.navbar-nav{
+                li{
+                    a{
+                        color:@white;
+                        border-bottom:1px solid lighten(@white, 3%);
+                        &.getApp{
+                            color:@white;
+                        }
+                        &:after{
+                            display: none;
+                        }
+                        &:hover{
+                            color:@base;
+                        }
+                    }
+                }
+            }
+            .navbar-collapse{
+                background: @navbarmobile;
+                
+            }
+            &.scrolled{
+                background: @navbarmobile;
+                .navbar-toggle{
+                }
+				.navbar-collapse{
+					background: none;
+
+				}
+                ul.navbar-nav{
+                    li{
+                        a{
+                            color:@white;
+                            &:hover{
+                                color:@base;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
 
 
 section{
@@ -215,10 +283,6 @@ footer {
     .bk-gradient(@bkgAngel, @bkgColor1, @bkgColor2);
 }
 
-.navbar-toggle {
-    background-color: #CCC;
-    border: 1px solid rgba(0, 0, 0, 0);
-}
 .btn {
 	&.btn-primary{
 		color:@base;
@@ -254,59 +318,6 @@ form{
         &:focus{
             border-color:@base;
             color:@lightGrey;
-        }
-    }
-}
-
-
-
-
-
-@media screen and (max-width: 640px) {
-    header{
-        .navbar-default{
-            .navbar-toggle{
-                &:hover,&:focus{
-                    background: none;
-                }
-            }
-            ul.navbar-nav{
-                li{
-                    a{
-                        color:@white;
-                        border-bottom:1px solid lighten(@baseDark, 3%);
-                        &.getApp{
-                            color:@white;
-                        }
-                        &:after{
-                            display: none;
-                        }
-                        &:hover{
-                            color:@base;
-                        }
-                    }
-                }
-            }
-            .navbar-collapse{
-                background: @baseDark;
-                
-            }
-            &.scrolled{
-                background: @baseDark;
-                .navbar-toggle{
-                    
-                }
-                ul.navbar-nav{
-                    li{
-                        a{
-                            color:@white;
-                            &:hover{
-                                color:@base;
-                            }
-                        }
-                    }
-                }
-            }
         }
     }
 }

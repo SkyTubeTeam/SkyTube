@@ -41,6 +41,11 @@ h6,
 .h6 {
   color: #666666;
 }
+header {
+  /*
+		Navbar for large devices / PCs only.
+	 */
+}
 header .navbar-default {
   background: none;
   border: none;
@@ -122,6 +127,88 @@ header .navbar-default .navbar-brand {
 header .navbar-default .navbar-brand img {
   width: auto;
   max-height: 32px;
+}
+/*
+	Navbar / Action bar for mobile devices only.
+ */
+@media screen and (max-width: 640px) {
+  .logo {
+    width: 100px;
+    height: auto;
+  }
+  .slick-next {
+    right: 0;
+  }
+  .slick-prev {
+    left: 0;
+  }
+  .contact-details {
+    margin-top: 20px;
+  }
+  header {
+    /* Navigation bar */
+  }
+  header .navbar-default {
+    padding: 20px;
+    /* Navigation bar's menu button */
+  }
+  header .navbar-default .navbar-toggle {
+    margin-top: 0px;
+    margin-right: 0px;
+    background: none;
+    border: 2px solid #ffffff;
+    color: #ffffff;
+    -webkit-border-radius: 5em;
+    -moz-border-radius: 5em;
+    -ms-border-radius: 5em;
+    -o-border-radius: 5em;
+    border-radius: 5em;
+  }
+  header .navbar-default .navbar-toggle:hover,
+  header .navbar-default .navbar-toggle:focus {
+    background: none;
+  }
+  header .navbar-default ul.navbar-nav {
+    padding-top: 0;
+    margin: 0;
+  }
+  header .navbar-default ul.navbar-nav li a {
+    padding: 10px;
+    text-align: center;
+  }
+  header .navbar-default ul.navbar-nav li a.getApp {
+    background: none !important;
+    -webkit-border-radius: 0em;
+    -moz-border-radius: 0em;
+    -ms-border-radius: 0em;
+    -o-border-radius: 0em;
+    border-radius: 0em;
+  }
+  header .navbar-default .navbar-collapse {
+    border-color: transparent;
+  }
+  header .navbar-default.scrolled {
+    padding: 0px;
+  }
+  header .navbar-default.scrolled .navbar-collapse {
+    border-color: transparent;
+  }
+  header .navbar-default.scrolled ul.navbar-nav {
+    padding-top: 0;
+    margin: 0;
+  }
+  header .navbar-default.scrolled .navbar-toggle {
+    margin-top: 11px;
+    margin-right: 20px;
+    background: none;
+    border: 0px solid #ffffff;
+    color: #ffffff;
+    -webkit-border-radius: 5em;
+    -moz-border-radius: 5em;
+    -ms-border-radius: 5em;
+    -o-border-radius: 5em;
+    border-radius: 5em;
+  }
 }
 .scrollpoint {
   opacity: 0;
@@ -413,78 +500,6 @@ form textarea.form-control {
   height: auto;
   line-height: normal;
 }
-@media screen and (max-width: 640px) {
-  .logo {
-    width: 100px;
-    height: auto;
-  }
-  .slick-next {
-    right: 0;
-  }
-  .slick-prev {
-    left: 0;
-  }
-  .contact-details {
-    margin-top: 20px;
-  }
-  header .navbar-default {
-    padding: 20px;
-  }
-  header .navbar-default .navbar-toggle {
-    margin-top: 0px;
-    margin-right: 0px;
-    background: none;
-    border: 2px solid #ffffff;
-    color: #ffffff;
-    -webkit-border-radius: 5em;
-    -moz-border-radius: 5em;
-    -ms-border-radius: 5em;
-    -o-border-radius: 5em;
-    border-radius: 5em;
-  }
-  header .navbar-default .navbar-toggle:hover,
-  header .navbar-default .navbar-toggle:focus {
-    background: none;
-  }
-  header .navbar-default ul.navbar-nav {
-    padding-top: 0;
-    margin: 0;
-  }
-  header .navbar-default ul.navbar-nav li a {
-    padding: 10px;
-    text-align: center;
-  }
-  header .navbar-default ul.navbar-nav li a.getApp {
-    background: none !important;
-    -webkit-border-radius: 0em;
-    -moz-border-radius: 0em;
-    -ms-border-radius: 0em;
-    -o-border-radius: 0em;
-    border-radius: 0em;
-  }
-  header .navbar-default .navbar-collapse {
-    border-color: transparent;
-  }
-  header .navbar-default.scrolled .navbar-collapse {
-    border-color: transparent;
-  }
-  header .navbar-default.scrolled ul.navbar-nav {
-    padding-top: 0;
-    margin: 0;
-  }
-  header .navbar-default.scrolled .navbar-toggle {
-    margin-top: 11px;
-    margin-right: 20px;
-    background: none;
-    border: 2px solid #ffffff;
-    color: #ffffff;
-    -webkit-border-radius: 5em;
-    -moz-border-radius: 5em;
-    -ms-border-radius: 5em;
-    -o-border-radius: 5em;
-    border-radius: 5em;
-  }
-}
 .pre-loader {
   position: fixed;
   width: 100%;
@@ -561,6 +576,9 @@ header {
   /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#66cdcc, endColorstr=#336799, GradientType=1);
   /* IE6-9 fallback on horizontal gradient */
+  /*
+		Navbar for large devices / PCs only.
+	 */
 }
 header .navbar-default ul.navbar-nav li a {
   color: #ffffff;
@@ -597,7 +615,7 @@ header .navbar-default ul.navbar-nav li a:hover:after {
 }
 header .navbar-default.scrolled {
   border: 0px;
-  background: rgba(33, 67, 99, 0.3);
+  background: rgba(38, 50, 56, 0.9);
 }
 header .navbar-default.scrolled ul.navbar-nav li a:hover {
   color: #ffffff;
@@ -607,6 +625,47 @@ header .navbar-default.scrolled ul.navbar-nav li a:hover:after {
 }
 header .navbar-default.scrolled .navbar-brand {
   background: #336799;
+}
+.navbar-toggle {
+  background-color: #F00;
+  border: 1px solid rgba(0, 0, 0, 0);
+}
+/*
+	Navbar / Action bar for mobile devices only.
+ */
+@media screen and (max-width: 640px) {
+  header .navbar-default .navbar-toggle:hover,
+  header .navbar-default .navbar-toggle:focus {
+    background: none;
+  }
+  header .navbar-default ul.navbar-nav li a {
+    color: #ffffff;
+    border-bottom: 1px solid #ffffff;
+  }
+  header .navbar-default ul.navbar-nav li a.getApp {
+    color: #ffffff;
+  }
+  header .navbar-default ul.navbar-nav li a:after {
+    display: none;
+  }
+  header .navbar-default ul.navbar-nav li a:hover {
+    color: #66cdcc;
+  }
+  header .navbar-default .navbar-collapse {
+    background: rgba(38, 50, 56, 0.9);
+  }
+  header .navbar-default.scrolled {
+    background: rgba(38, 50, 56, 0.9);
+  }
+  header .navbar-default.scrolled .navbar-collapse {
+    background: none;
+  }
+  header .navbar-default.scrolled ul.navbar-nav li a {
+    color: #ffffff;
+  }
+  header .navbar-default.scrolled ul.navbar-nav li a:hover {
+    color: #66cdcc;
+  }
 }
 section .section-heading .divider:after {
   background: #66cdcc;
@@ -756,10 +815,6 @@ footer {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#efefef, endColorstr=#f5f5f5, GradientType=1);
   /* IE6-9 fallback on horizontal gradient */
 }
-.navbar-toggle {
-  background-color: #CCC;
-  border: 1px solid rgba(0, 0, 0, 0);
-}
 .btn.btn-primary {
   color: #66cdcc;
   border-color: #66cdcc;
@@ -805,37 +860,6 @@ footer {
 form .form-control:focus {
   border-color: #66cdcc;
   color: #999999;
-}
-@media screen and (max-width: 640px) {
-  header .navbar-default .navbar-toggle:hover,
-  header .navbar-default .navbar-toggle:focus {
-    background: none;
-  }
-  header .navbar-default ul.navbar-nav li a {
-    color: #ffffff;
-    border-bottom: 1px solid #376fa4;
-  }
-  header .navbar-default ul.navbar-nav li a.getApp {
-    color: #ffffff;
-  }
-  header .navbar-default ul.navbar-nav li a:after {
-    display: none;
-  }
-  header .navbar-default ul.navbar-nav li a:hover {
-    color: #66cdcc;
-  }
-  header .navbar-default .navbar-collapse {
-    background: #336799;
-  }
-  header .navbar-default.scrolled {
-    background: #336799;
-  }
-  header .navbar-default.scrolled ul.navbar-nav li a {
-    color: #ffffff;
-  }
-  header .navbar-default.scrolled ul.navbar-nav li a:hover {
-    color: #66cdcc;
-  }
 }
 .pre-loader {
   background: #336799;
