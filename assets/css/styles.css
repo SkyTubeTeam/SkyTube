@@ -615,7 +615,7 @@ header .navbar-default ul.navbar-nav li a:hover:after {
 }
 header .navbar-default.scrolled {
   border: 0px;
-  background: rgba(38, 50, 56, 0.9);
+  background: #263238;
 }
 header .navbar-default.scrolled ul.navbar-nav li a:hover {
   color: #ffffff;
