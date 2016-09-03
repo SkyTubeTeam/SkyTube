@@ -615,7 +615,7 @@ header .navbar-default ul.navbar-nav li a:hover:after {
 }
 header .navbar-default.scrolled {
   border: 0px;
-  background: #263238;
+  background: rgba(38, 50, 56, 0.9);
 }
 header .navbar-default.scrolled ul.navbar-nav li a:hover {
   color: #ffffff;
@@ -652,10 +652,10 @@ header .navbar-default.scrolled .navbar-brand {
     color: #66cdcc;
   }
   header .navbar-default .navbar-collapse {
-    background: rgba(38, 50, 56, 0.9);
+    background: #263238;
   }
   header .navbar-default.scrolled {
-    background: rgba(38, 50, 56, 0.9);
+    background: #263238;
   }
   header .navbar-default.scrolled .navbar-collapse {
     background: none;
