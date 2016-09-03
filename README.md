@@ -7,7 +7,7 @@ This app allows you to:
 * play YouTube videos,
 * view video comments,
 * search videos, music and channels
-* channel subscription **[New!]**
+* channel subscription & non-intrusive notifications **[New!]**
 
 ... all at the tip of your fingers.
 
@@ -15,20 +15,18 @@ More features will be added in the near future.
 
 ## Website
 
-https://ram-on.github.io/SkyTube
+[skytube-app.com](http://skytube-app.com/)
 
 ## Download
 
 [![Dowload-APK](screenshots/download_apk.png)](https://github.com/ram-on/SkyTube/releases/download/v2.0/SkyTube-v2.0.apk)
-
 [![F-Droid](https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Get_it_on_F-Droid.svg/200px-Get_it_on_F-Droid.svg.png)](https://f-droid.org/repository/browse/?fdid=free.rm.skytube.oss)
-
-[![Aptoide](https://i.imgur.com/T5A0EXV.png)](http://rmstore.store.aptoide.com/app/market/free.rm.skytube.oss/2/20603898/SkyTube)
+[![Aptoide](http://i.imgur.com/jHy6Tsp.png)](http://rmstore.store.aptoide.com/app/market/free.rm.skytube.oss/2/20603898/SkyTube)
 
 ```
-File:    SkyTube-v2.0.apk
-MD5:     7671852bc773f1c27004d9ee138e5331
-SHA256:  1e755afd15198a94af7b5b49c02fc8cb125746b9291455e70a9d9db411b53a44
+APK File:  SkyTube-v2.0.apk
+MD5:       7671852bc773f1c27004d9ee138e5331
+SHA256:    1e755afd15198a94af7b5b49c02fc8cb125746b9291455e70a9d9db411b53a44
 ```
 
 ## Why SkyTube?
@@ -70,4 +68,4 @@ You should have received a [copy of the GNU General Public License](https://raw.
 along with this program.  If not, see http://www.gnu.org/licenses/
 
 This project is not affiliated with YouTube™ or any of its partners and/or products.
-YouTube™ is a registered trademark of Google Inc.
+YouTube™ and Android™ are registered trademarks of Google Inc.
