@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+    compileSdkVersion 24
+    buildToolsVersion "23.0.3"
 
     defaultConfig {
         applicationId "free.rm.skytube"
         minSdkVersion 16
-        targetSdkVersion 23
+        targetSdkVersion 24
         versionCode 2
     }
     buildTypes {
@@ -49,6 +49,6 @@ dependencies {
     compile 'org.mozilla:rhino:1.7.7'
     compile 'com.github.moraisigor:slidingdrawer:1.5.5'
 
-    compile 'com.android.support:appcompat-v7:23.+'
-    compile 'com.android.support:design:23.+'
+    compile 'com.android.support:appcompat-v7:24.2.0'
+    compile 'com.android.support:design:24.2.0'
 }
