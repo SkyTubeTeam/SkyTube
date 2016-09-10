@@ -33,7 +33,7 @@
 				android:layout_height="wrap_content">
 
 				<!-- CHANNEL THUMBNAIL -->
-				<free.rm.skytube.gui.businessobjects.InternetImageView
+				<ImageView
 					android:id="@+id/video_desc_channel_thumbnail_image_view"
 					android:layout_width="@dimen/top_level_comment_thumbnail_width"
 					android:layout_height="wrap_content"
@@ -41,8 +41,7 @@
 					android:paddingRight="10dp"
 					android:scaleType="fitXY"
 					android:adjustViewBounds="true"
-					android:src="@drawable/channel_thumbnail_default"
-					custom:defaultImage="@drawable/channel_thumbnail_default"/>
+					android:src="@drawable/channel_thumbnail_default" />
 
 				<LinearLayout
 					android:layout_width="wrap_content"

@@ -21,8 +21,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.YouTubeVideo;
@@ -38,7 +41,7 @@ public class GridViewHolder extends RecyclerView.ViewHolder {
 			videoDurationTextView,
 			viewsTextView,
 			publishDateTextView;
-	private InternetImageView	thumbnailImageView;
+	private ImageView thumbnailImageView;
 	private RelativeLayout bottomLayout;
 	/** YouTube video */
 	private YouTubeVideo youTubeVideo = null;
@@ -53,7 +56,7 @@ public class GridViewHolder extends RecyclerView.ViewHolder {
 		videoDurationTextView		= (TextView) view.findViewById(R.id.video_duration_text_view);
 		viewsTextView				= (TextView) view.findViewById(R.id.views_text_view);
 		publishDateTextView			= (TextView) view.findViewById(R.id.publish_date_text_view);
-		thumbnailImageView	= (InternetImageView) view.findViewById(R.id.thumbnail_image_view);
+		thumbnailImageView	= (ImageView) view.findViewById(R.id.thumbnail_image_view);
 		bottomLayout		= (RelativeLayout) view.findViewById(R.id.cell_bottom_layout);
 	}
 
@@ -86,7 +89,10 @@ public class GridViewHolder extends RecyclerView.ViewHolder {
 		publishDateTextView.setText(video.getPublishDate());
 		videoDurationTextView.setText(video.getDuration());
 		viewsTextView.setText(video.getViewsCount());
-		thumbnailImageView.setImageAsync(video.getThumbnailUrl());
+		Picasso.with(context)
+				.load(video.getThumbnailUrl())
+				.placeholder(R.drawable.thumbnail_default)
+				.into(thumbnailImageView);
 
 		if (video.getThumbsUpPercentageStr() != null) {
 			thumbsUpPercentageTextView.setVisibility(View.VISIBLE);

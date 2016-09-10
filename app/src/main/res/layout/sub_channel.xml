@@ -15,15 +15,13 @@
 			  android:background="@drawable/sub_channel_background">
 
 	<!-- CHANNEL THUMBNAIL -->
-	<free.rm.skytube.gui.businessobjects.InternetImageView
+	<ImageView
 		android:id="@+id/sub_channel_thumbnail_image_view"
 		android:layout_width="40dp"
 		android:layout_height="wrap_content"
-		android:layout_centerVertical="true"
 		android:scaleType="fitXY"
 		android:adjustViewBounds="true"
-		android:src="@drawable/channel_thumbnail_default"
-		custom:defaultImage="@drawable/channel_thumbnail_default"/>
+		android:src="@drawable/channel_thumbnail_default" />
 
 	<!-- CHANNEL NAME -->
 	<TextView

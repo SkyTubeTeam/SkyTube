@@ -11,7 +11,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content">
 
-		<free.rm.skytube.gui.businessobjects.InternetImageView
+		<ImageView
 			android:id="@+id/thumbnail_image_view"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
@@ -19,7 +19,6 @@
 			android:scaleType="fitXY"
 			android:adjustViewBounds="true"
 			android:src="@drawable/thumbnail_default"
-			custom:defaultImage="@drawable/thumbnail_default"
 			android:foreground="?android:attr/selectableItemBackground"/> <!-- on click, background effect -->
 
 		<TextView
