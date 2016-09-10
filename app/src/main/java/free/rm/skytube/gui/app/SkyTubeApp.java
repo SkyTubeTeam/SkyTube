@@ -18,6 +18,7 @@
 package free.rm.skytube.gui.app;
 
 import android.app.Application;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
@@ -72,12 +73,8 @@ public class SkyTubeApp extends Application {
 	}
 
 
-	public static synchronized SubscriptionsDb getSubscriptionsDb() {
-		if (subscriptionsDb == null) {
-			subscriptionsDb = new SubscriptionsDb(skyTubeApp.getBaseContext());
-		}
-
-		return subscriptionsDb;
+	public static Context getContext() {
+		return skyTubeApp.getBaseContext();
 	}
 
 }

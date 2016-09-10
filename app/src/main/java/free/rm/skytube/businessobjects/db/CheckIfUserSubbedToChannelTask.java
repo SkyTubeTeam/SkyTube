@@ -52,7 +52,7 @@ public class CheckIfUserSubbedToChannelTask extends AsyncTask<Void, Void, Boolea
 		Boolean isUserSubbed;
 
 		try {
-			isUserSubbed = SkyTubeApp.getSubscriptionsDb().isUserSubscribedToChannel(channelId);
+			isUserSubbed = SubscriptionsDb.getSubscriptionsDb().isUserSubscribedToChannel(channelId);
 		} catch (Throwable tr) {
 			Log.e(TAG, "Unable to check if user has subscribed to channel id=" + channelId, tr);
 			isUserSubbed = null;

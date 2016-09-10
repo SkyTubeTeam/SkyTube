@@ -60,7 +60,7 @@ public class GetSubscribedChannelsTask extends AsyncTaskParallel<Void, Void, Lis
 		List<YouTubeChannel> subbedChannelsList = null;
 
 		try {
-			subbedChannelsList = SkyTubeApp.getSubscriptionsDb().getSubscribedChannels();
+			subbedChannelsList = SubscriptionsDb.getSubscriptionsDb().getSubscribedChannels();
 		} catch (Throwable tr) {
 			Log.e(TAG, "An error has occurred while getting subbed channels", tr);
 		}

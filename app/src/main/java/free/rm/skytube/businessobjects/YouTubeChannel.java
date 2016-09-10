@@ -32,6 +32,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import free.rm.skytube.R;
+import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 import free.rm.skytube.gui.app.SkyTubeApp;
 
 /**
@@ -177,7 +178,7 @@ public class YouTubeChannel implements Serializable {
 		// check if the user is subscribed to this channel or not
 		if (!isUserSubscribed) {
 			try {
-				this.isUserSubscribed = SkyTubeApp.getSubscriptionsDb().isUserSubscribedToChannel(id);
+				this.isUserSubscribed = SubscriptionsDb.getSubscriptionsDb().isUserSubscribedToChannel(id);
 			} catch (Throwable tr) {
 				Log.e(TAG, "Unable to check if user has subscribed to channel id=" + id, tr);
 				this.isUserSubscribed = false;
@@ -187,7 +188,7 @@ public class YouTubeChannel implements Serializable {
 		}
 
 		// get the last time the user has visited this channel
-		this.lastVisitTime = SkyTubeApp.getSubscriptionsDb().getLastVisitTime(id);
+		this.lastVisitTime = SubscriptionsDb.getSubscriptionsDb().getLastVisitTime(id);
 	}
 
 
@@ -220,7 +221,7 @@ public class YouTubeChannel implements Serializable {
 	}
 
 	public void updateLastVisitTime() {
-		lastVisitTime = SkyTubeApp.getSubscriptionsDb().updateLastVisitTime(id);
+		lastVisitTime = SubscriptionsDb.getSubscriptionsDb().updateLastVisitTime(id);
 
 		if (lastVisitTime < 0) {
 			Log.e(TAG, "Unable to update channel's last visit time.  ChannelID=" + id);

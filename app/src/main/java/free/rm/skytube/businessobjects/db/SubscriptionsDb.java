@@ -28,18 +28,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 import free.rm.skytube.businessobjects.YouTubeChannel;
+import free.rm.skytube.gui.app.SkyTubeApp;
 
 /**
  * A database (DB) that stores user subscriptions (with respect to YouTube channels).
  */
 public class SubscriptionsDb extends SQLiteOpenHelper {
 
+	private static volatile SubscriptionsDb subscriptionsDb = null;
+
 	private static final int DATABASE_VERSION = 1;
 	private static final String DATABASE_NAME = "subs.db";
 
 
-	public SubscriptionsDb(Context context) {
+	private SubscriptionsDb(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
+	}
+
+
+	public static synchronized SubscriptionsDb getSubscriptionsDb() {
+		if (subscriptionsDb == null) {
+			subscriptionsDb = new SubscriptionsDb(SkyTubeApp.getContext());
+		}
+
+		return subscriptionsDb;
 	}
 
 
