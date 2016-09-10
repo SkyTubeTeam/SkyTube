@@ -1,10 +1,8 @@
 package free.rm.skytube.gui.fragments;
 
 import android.content.Intent;
-import android.graphics.PorterDuff;
 import android.media.MediaPlayer;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -15,10 +13,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
+
+import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 import java.util.List;
@@ -40,7 +41,6 @@ import free.rm.skytube.gui.activities.YouTubePlayerActivity;
 import free.rm.skytube.gui.app.SkyTubeApp;
 import free.rm.skytube.gui.businessobjects.CommentsAdapter;
 import free.rm.skytube.gui.businessobjects.FragmentEx;
-import free.rm.skytube.gui.businessobjects.InternetImageView;
 import free.rm.skytube.gui.businessobjects.MediaControllerEx;
 import free.rm.skytube.gui.businessobjects.SubscribeButton;
 import hollowsoft.slidingdrawer.OnDrawerOpenListener;
@@ -57,7 +57,7 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 	private VideoView			videoView = null;
 	private MediaControllerEx	mediaController = null;
 	private TextView			videoDescTitleTextView = null;
-	private InternetImageView	videoDescChannelThumbnailImageView = null;
+	private ImageView			videoDescChannelThumbnailImageView = null;
 	private TextView			videoDescChannelTextView = null;
 	private SubscribeButton		videoDescSubscribeButton = null;
 	private TextView			videoDescViewsTextView = null;
@@ -110,7 +110,7 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 
 			videoDescriptionDrawer = (SlidingDrawer) view.findViewById(R.id.des_drawer);
 			videoDescTitleTextView = (TextView) view.findViewById(R.id.video_desc_title);
-			videoDescChannelThumbnailImageView = (InternetImageView) view.findViewById(R.id.video_desc_channel_thumbnail_image_view);
+			videoDescChannelThumbnailImageView = (ImageView) view.findViewById(R.id.video_desc_channel_thumbnail_image_view);
 			videoDescChannelThumbnailImageView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -145,7 +145,7 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 				@Override
 				public void onDrawerOpened() {
 					if (commentsAdapter == null) {
-						commentsAdapter = new CommentsAdapter(youTubeVideo.getId(), commentsExpandableListView, commentsProgressBar, noVideoCommentsView);
+						commentsAdapter = new CommentsAdapter(getActivity(), youTubeVideo.getId(), commentsExpandableListView, commentsProgressBar, noVideoCommentsView);
 					}
 				}
 			});
@@ -555,7 +555,10 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 			YouTubePlayerFragment.this.youTubeChannel = youTubeChannel;
 
 			if (youTubeChannel != null) {
-				videoDescChannelThumbnailImageView.setImageAsync(youTubeChannel.getThumbnailNormalUrl());
+				Picasso.with(getContext())
+						.load(youTubeChannel.getThumbnailNormalUrl())
+						.placeholder(R.drawable.channel_thumbnail_default)
+						.into(videoDescChannelThumbnailImageView);
 			}
 		}
 

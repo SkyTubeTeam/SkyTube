@@ -24,7 +24,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.Iterator;
 
@@ -158,14 +161,14 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 
 	protected class SubChannelViewHolder extends RecyclerView.ViewHolder {
 
-		private InternetImageView	thumbnailImageView;
+		private ImageView			thumbnailImageView;
 		private TextView			channelNameTextView;
 		private View				newVideosNotificationView;
 		private YouTubeChannel		channel = null;
 
 		public SubChannelViewHolder(View rowView) {
 			super(rowView);
-			thumbnailImageView  = (InternetImageView) rowView.findViewById(R.id.sub_channel_thumbnail_image_view);
+			thumbnailImageView  = (ImageView) rowView.findViewById(R.id.sub_channel_thumbnail_image_view);
 			channelNameTextView = (TextView) rowView.findViewById(R.id.sub_channel_name_text_view);
 			newVideosNotificationView = rowView.findViewById(R.id.sub_channel_new_videos_notification);
 			channel = null;
@@ -181,7 +184,11 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 		}
 
 		public void updateInfo(YouTubeChannel channel) {
-			thumbnailImageView.setImageAsync(channel.getThumbnailNormalUrl());
+			Picasso.with(getContext())
+					.load(channel.getThumbnailNormalUrl())
+					.placeholder(R.drawable.channel_thumbnail_default)
+					.into(thumbnailImageView);
+
 			channelNameTextView.setText(channel.getTitle());
 			newVideosNotificationView.setVisibility(channel.newVideosSinceLastVisit() ? View.VISIBLE : View.INVISIBLE);
 			this.channel = channel;
