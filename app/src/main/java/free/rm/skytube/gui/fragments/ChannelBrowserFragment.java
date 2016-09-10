@@ -27,7 +27,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 
@@ -37,7 +40,6 @@ import free.rm.skytube.businessobjects.YouTubeChannel;
 import free.rm.skytube.businessobjects.db.SubscribeToChannelTask;
 import free.rm.skytube.gui.activities.ChannelBrowserActivity;
 import free.rm.skytube.gui.businessobjects.FragmentEx;
-import free.rm.skytube.gui.businessobjects.InternetImageView;
 import free.rm.skytube.gui.businessobjects.LoadingProgressBar;
 import free.rm.skytube.gui.businessobjects.SubsAdapter;
 import free.rm.skytube.gui.businessobjects.SubscribeButton;
@@ -52,8 +54,8 @@ public class ChannelBrowserFragment extends FragmentEx {
 	private RecyclerView	gridView;
 	private VideoGridAdapter videoGridAdapter;
 
-	private InternetImageView	channelThumbnailImage = null;
-	private InternetImageView	channelBannerImage = null;
+	private ImageView 			channelThumbnailImage = null;
+	private ImageView			channelBannerImage = null;
 	private TextView			channelSubscribersTextView = null;
 	private SubscribeButton		channelSubscribeButton = null;
 	private GetChannelInfoTask	task = null;
@@ -85,8 +87,8 @@ public class ChannelBrowserFragment extends FragmentEx {
 		setSupportActionBar(toolbar);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-		channelBannerImage = (InternetImageView) fragment.findViewById(R.id.channel_banner_image_view);
-		channelThumbnailImage = (InternetImageView) fragment.findViewById(R.id.channel_thumbnail_image_view);
+		channelBannerImage = (ImageView) fragment.findViewById(R.id.channel_banner_image_view);
+		channelThumbnailImage = (ImageView) fragment.findViewById(R.id.channel_thumbnail_image_view);
 		channelSubscribersTextView = (TextView) fragment.findViewById(R.id.channel_subs_text_view);
 		channelSubscribeButton = (SubscribeButton) fragment.findViewById(R.id.channel_subscribe_button);
 		channelSubscribeButton.setOnClickListener(new View.OnClickListener() {
@@ -129,8 +131,16 @@ public class ChannelBrowserFragment extends FragmentEx {
 	 */
 	private void initViews() {
 		if (channel != null) {
-			channelThumbnailImage.setImageAsync(channel.getThumbnailNormalUrl());
-			channelBannerImage.setImageAsync(channel.getBannerUrl());
+			Picasso.with(getActivity())
+					.load(channel.getThumbnailNormalUrl())
+					.placeholder(R.drawable.channel_thumbnail_default)
+					.into(channelThumbnailImage);
+
+			Picasso.with(getActivity())
+					.load(channel.getTotalSubscribers())
+					.placeholder(R.drawable.banner_default)
+					.into(channelBannerImage);
+
 			channelSubscribersTextView.setText(channel.getTotalSubscribers());
 
 			ActionBar actionBar = getSupportActionBar();

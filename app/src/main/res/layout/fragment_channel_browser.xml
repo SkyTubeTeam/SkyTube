@@ -17,7 +17,7 @@
 			app:layout_scrollFlags="scroll|enterAlways">
 
 			<!-- BANNER IMAGE -->
-			<free.rm.skytube.gui.businessobjects.InternetImageView
+			<ImageView
 				android:id="@+id/channel_banner_image_view"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
@@ -45,7 +45,7 @@
 					android:layout_height="wrap_content">
 
 					<!-- CHANNEL THUMBNAIL -->
-					<free.rm.skytube.gui.businessobjects.InternetImageView
+					<ImageView
 						android:id="@+id/channel_thumbnail_image_view"
 						android:layout_width="97dp"
 						android:layout_height="wrap_content"
@@ -53,8 +53,7 @@
 						android:padding="16dp"
 						android:scaleType="fitXY"
 						android:adjustViewBounds="true"
-						android:src="@drawable/channel_thumbnail_default"
-						custom:defaultImage="@drawable/channel_thumbnail_default"/>
+						android:src="@drawable/channel_thumbnail_default" />
 
 					<!-- CHANNEL INFO -->
 					<LinearLayout

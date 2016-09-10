@@ -17,6 +17,8 @@
 
 package free.rm.skytube.gui.businessobjects;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,8 +26,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,11 +54,13 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
 	private View						commentsProgressBar;
 	private View						noVideoCommentsView;
 	private LayoutInflater				layoutInflater;
+	private Context 					context;
 
 	private static final String TAG = CommentsAdapter.class.getSimpleName();
 
 
-	public CommentsAdapter(String videoId, ExpandableListView expandableListView, View commentsProgressBar, View noVideoCommentsView) {
+	public CommentsAdapter(Context context, String videoId, ExpandableListView expandableListView, View commentsProgressBar, View noVideoCommentsView) {
+		this.context = context;
 		this.videoId = videoId;
 		this.expandableListView = expandableListView;
 		this.expandableListView.setAdapter(this);
@@ -168,7 +175,7 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
 							dateTextView,
 							upvotesTextView,
 							viewRepliesTextView;
-		private InternetImageView	thumbnailImageView;
+		private ImageView	thumbnailImageView;
 
 		protected CommentViewHolder(View commentView) {
 			this.commentView = commentView;
@@ -178,7 +185,7 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
 			dateTextView	= (TextView) commentView.findViewById(R.id.comment_date_text_view);
 			upvotesTextView	= (TextView) commentView.findViewById(R.id.comment_upvotes_text_view);
 			viewRepliesTextView	= (TextView) commentView.findViewById(R.id.view_all_replies_text_view);
-			thumbnailImageView	= (InternetImageView) commentView.findViewById(R.id.comment_thumbnail_image_view);
+			thumbnailImageView	= (ImageView) commentView.findViewById(R.id.comment_thumbnail_image_view);
 		}
 
 
@@ -188,7 +195,10 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
 			commentTextView.setText(comment.getComment());
 			dateTextView.setText(comment.getDatePublished());
 			upvotesTextView.setText(comment.getLikeCount());
-			thumbnailImageView.setImageAsync(comment.getThumbnailUrl());
+			Picasso.with(context)
+					.load(comment.getThumbnailUrl())
+					.placeholder(R.drawable.channel_thumbnail_default)
+					.into(thumbnailImageView);
 
 			// change the width dimensions depending on whether the comment is a top level or a child
 			ViewGroup.LayoutParams lp = thumbnailImageView.getLayoutParams();
