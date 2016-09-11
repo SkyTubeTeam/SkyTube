@@ -137,7 +137,7 @@ public class ChannelBrowserFragment extends FragmentEx {
 					.into(channelThumbnailImage);
 
 			Picasso.with(getActivity())
-					.load(channel.getTotalSubscribers())
+					.load(channel.getBannerUrl())
 					.placeholder(R.drawable.banner_default)
 					.into(channelBannerImage);
 
