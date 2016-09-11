@@ -555,7 +555,7 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 			YouTubePlayerFragment.this.youTubeChannel = youTubeChannel;
 
 			if (youTubeChannel != null) {
-				Picasso.with(getContext())
+				Picasso.with(getActivity())
 						.load(youTubeChannel.getThumbnailNormalUrl())
 						.placeholder(R.drawable.channel_thumbnail_default)
 						.into(videoDescChannelThumbnailImageView);
