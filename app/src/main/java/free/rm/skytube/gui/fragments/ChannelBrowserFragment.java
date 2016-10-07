@@ -38,7 +38,6 @@ import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.businessobjects.YouTubeChannel;
 import free.rm.skytube.businessobjects.db.SubscribeToChannelTask;
-import free.rm.skytube.gui.activities.ChannelBrowserActivity;
 import free.rm.skytube.gui.businessobjects.FragmentEx;
 import free.rm.skytube.gui.businessobjects.LoadingProgressBar;
 import free.rm.skytube.gui.businessobjects.SubsAdapter;
@@ -50,6 +49,8 @@ import free.rm.skytube.gui.businessobjects.VideoGridAdapter;
  */
 public class ChannelBrowserFragment extends FragmentEx {
 
+	public static final String CHANNEL_OBJ = "ChannelBrowserFragment.ChannelObj";
+	public static final String CHANNEL_ID = "ChannelBrowserFragment.ChannelID";
 	private YouTubeChannel	channel = null;
 	private RecyclerView	gridView;
 	private VideoGridAdapter videoGridAdapter;
@@ -60,9 +61,6 @@ public class ChannelBrowserFragment extends FragmentEx {
 	private SubscribeButton		channelSubscribeButton = null;
 	private GetChannelInfoTask	task = null;
 
-	private static final String TAG = ChannelBrowserActivity.class.getSimpleName();
-
-
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		final String channelId;
@@ -72,11 +70,11 @@ public class ChannelBrowserFragment extends FragmentEx {
 		//   (1) the object is passed to this Fragment
 		//   (2) passing the channel ID... a task is then created to create a YouTubeChannel
 		//       instance using the given channel ID
-		if (bundle != null  &&  bundle.getSerializable(ChannelBrowserActivity.CHANNEL_OBJ) != null) {
-			this.channel = (YouTubeChannel) bundle.getSerializable(ChannelBrowserActivity.CHANNEL_OBJ);
+		if (bundle != null && bundle.getSerializable(CHANNEL_OBJ) != null) {
+			this.channel = (YouTubeChannel) bundle.getSerializable(CHANNEL_OBJ);
 			channelId = channel.getId();
 		} else {
-			channelId = getActivity().getIntent().getStringExtra(ChannelBrowserActivity.CHANNEL_ID);
+			channelId = getArguments().getString(CHANNEL_ID);
 		}
 
 		// inflate the layout for this fragment

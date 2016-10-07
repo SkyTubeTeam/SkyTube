@@ -29,6 +29,7 @@ import java.io.IOException;
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.GetYouTubeVideos;
 import free.rm.skytube.businessobjects.GetYouTubeVideosTask;
+import free.rm.skytube.businessobjects.MainActivityListener;
 import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.businessobjects.YouTubeVideo;
 
@@ -47,6 +48,7 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<YouTubeVideo, GridVi
 
 	private static final String TAG = VideoGridAdapter.class.getSimpleName();
 
+	private MainActivityListener listener;
 
 	/**
 	 * @see #VideoGridAdapter(Context, boolean)
@@ -67,6 +69,9 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<YouTubeVideo, GridVi
 		super(context);
 		this.getYouTubeVideos = null;
 		this.showChannelInfo = showChannelInfo;
+		if(context instanceof MainActivityListener) {
+			listener = (MainActivityListener) context;
+		}
 	}
 
 
@@ -128,7 +133,7 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<YouTubeVideo, GridVi
 	@Override
 	public GridViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 		View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.video_cell, parent, false);
-		return new GridViewHolder(v);
+		return new GridViewHolder(v, listener);
 	}
 
 

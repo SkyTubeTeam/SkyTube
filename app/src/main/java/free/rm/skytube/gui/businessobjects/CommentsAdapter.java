@@ -17,7 +17,6 @@
 
 package free.rm.skytube.gui.businessobjects;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;

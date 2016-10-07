@@ -17,7 +17,6 @@
 
 package free.rm.skytube.businessobjects.db;
 
-import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -27,7 +26,6 @@ import java.util.List;
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.YouTubeChannel;
-import free.rm.skytube.gui.app.SkyTubeApp;
 import free.rm.skytube.gui.businessobjects.SubsAdapter;
 
 /**

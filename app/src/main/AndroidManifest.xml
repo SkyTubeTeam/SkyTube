@@ -40,9 +40,6 @@
 			</intent-filter>
 		</activity>
 		<activity android:name=".gui.activities.PreferencesActivity"/>
-		<activity android:name=".gui.activities.SearchActivity"/>
-		<activity android:name=".gui.activities.ChannelBrowserActivity"
-			android:theme="@style/ChannelBrowserActivityTheme"/>
 	</application>
 
 </manifest>

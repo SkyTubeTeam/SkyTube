@@ -17,8 +17,6 @@
 
 package free.rm.skytube.businessobjects;
 
-import android.content.Context;
-
 import java.io.IOException;
 
 /**
