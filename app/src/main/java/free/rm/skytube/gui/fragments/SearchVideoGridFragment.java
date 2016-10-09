@@ -27,6 +27,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import free.rm.skytube.R;
+import free.rm.skytube.businessobjects.MainActivityListener;
 import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.gui.businessobjects.FragmentEx;
 import free.rm.skytube.gui.businessobjects.LoadingProgressBar;
@@ -58,7 +59,8 @@ public class SearchVideoGridFragment extends FragmentEx {
 		LoadingProgressBar.get().setProgressBar(view.findViewById(R.id.loading_progress_bar));
 
 		if (videoGridAdapter == null) {
-			this.videoGridAdapter = new VideoGridAdapter(getActivity());
+			videoGridAdapter = new VideoGridAdapter(getActivity());
+			videoGridAdapter.setListener((MainActivityListener)getActivity());
 
 			String searchQuery = getArguments().getString(QUERY);
 			if (searchQuery != null) {

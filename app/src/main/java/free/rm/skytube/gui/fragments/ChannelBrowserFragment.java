@@ -35,6 +35,7 @@ import com.squareup.picasso.Picasso;
 import java.io.IOException;
 
 import free.rm.skytube.R;
+import free.rm.skytube.businessobjects.MainActivityListener;
 import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.businessobjects.YouTubeChannel;
 import free.rm.skytube.businessobjects.db.SubscribeToChannelTask;
@@ -115,6 +116,7 @@ public class ChannelBrowserFragment extends FragmentEx {
 			videoGridAdapter = new VideoGridAdapter(getActivity(), false /*hide channel name*/);
 			videoGridAdapter.setVideoCategory(VideoCategory.CHANNEL_VIDEOS, channelId);
 		}
+		videoGridAdapter.setListener((MainActivityListener)getActivity());
 
 		this.gridView.setHasFixedSize(false);
 		this.gridView.setLayoutManager(new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.video_grid_num_columns)));
