@@ -220,6 +220,10 @@ public class YouTubeChannel implements Serializable {
 		return isUserSubscribed;
 	}
 
+	public void setUserSubscribed(boolean userSubscribed) {
+		isUserSubscribed = userSubscribed;
+	}
+
 	public void updateLastVisitTime() {
 		lastVisitTime = SubscriptionsDb.getSubscriptionsDb().updateLastVisitTime(id);
 

@@ -48,6 +48,7 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<YouTubeVideo, GridVi
 
 	private static final String TAG = VideoGridAdapter.class.getSimpleName();
 
+	// This allows the grid items to pass messages back to MainActivity
 	private MainActivityListener listener;
 
 	/**
@@ -57,6 +58,9 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<YouTubeVideo, GridVi
 		this(context, true);
 	}
 
+	public void setListener(MainActivityListener listener) {
+		this.listener = listener;
+	}
 
 	/**
 	 * Constructor.
@@ -69,9 +73,6 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<YouTubeVideo, GridVi
 		super(context);
 		this.getYouTubeVideos = null;
 		this.showChannelInfo = showChannelInfo;
-		if(context instanceof MainActivityListener) {
-			listener = (MainActivityListener) context;
-		}
 	}
 
 
@@ -141,7 +142,7 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<YouTubeVideo, GridVi
 	@Override
 	public void onBindViewHolder(GridViewHolder viewHolder, int position) {
 		if (viewHolder != null) {
-			viewHolder.updateInfo(get(position), getContext(), showChannelInfo);
+			viewHolder.updateInfo(get(position), getContext(), listener, showChannelInfo);
 		}
 
 		// if it reached the bottom of the list, then try to get the next page of videos

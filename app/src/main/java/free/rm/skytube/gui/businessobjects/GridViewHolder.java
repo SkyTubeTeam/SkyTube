@@ -71,9 +71,10 @@ public class GridViewHolder extends RecyclerView.ViewHolder {
 	 * @param showChannelInfo   True to display channel information (e.g. channel name) and allows
 	 *                          user to open and browse the channel; false to hide such information.
 	 */
-	protected void updateInfo(YouTubeVideo youTubeVideo, Context context, boolean showChannelInfo) {
+	protected void updateInfo(YouTubeVideo youTubeVideo, Context context, MainActivityListener listener, boolean showChannelInfo) {
 		this.youTubeVideo = youTubeVideo;
 		this.context = context;
+		this.listener = listener;
 		updateViewsData(this.youTubeVideo, showChannelInfo);
 	}
 

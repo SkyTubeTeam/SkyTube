@@ -50,10 +50,10 @@ import java.net.URL;
 
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
+import free.rm.skytube.businessobjects.MainActivityListener;
 import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.gui.businessobjects.FragmentEx;
 import free.rm.skytube.gui.businessobjects.LoadingProgressBar;
-import free.rm.skytube.gui.businessobjects.Logger;
 import free.rm.skytube.gui.businessobjects.SubsAdapter;
 import free.rm.skytube.gui.businessobjects.UpdatesChecker;
 import free.rm.skytube.gui.businessobjects.VideoGridAdapter;
@@ -100,6 +100,7 @@ public class VideosGridFragment extends FragmentEx implements ActionBar.OnNaviga
 		if (this.videoGridAdapter == null) {
 			this.videoGridAdapter = new VideoGridAdapter(getActivity());
 		}
+		videoGridAdapter.setListener((MainActivityListener)getActivity());
 		this.gridView.setLayoutManager(new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.video_grid_num_columns)));
 		this.gridView.setAdapter(this.videoGridAdapter);
 
@@ -128,6 +129,7 @@ public class VideosGridFragment extends FragmentEx implements ActionBar.OnNaviga
 		if (subsAdapter == null) {
 			this.subsAdapter = SubsAdapter.get(getActivity(), view.findViewById(R.id.subs_drawer_progress_bar));
 		}
+		subsAdapter.setListener((MainActivityListener)getActivity());
 
 		this.subsListView.setLayoutManager(new LinearLayoutManager(getActivity()));
 		this.subsListView.setAdapter(this.subsAdapter);

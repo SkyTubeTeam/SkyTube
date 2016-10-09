@@ -41,17 +41,20 @@ import butterknife.ButterKnife;
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.MainActivityListener;
 import free.rm.skytube.businessobjects.YouTubeChannel;
-import free.rm.skytube.businessobjects.YouTubeVideo;
 import free.rm.skytube.gui.fragments.ChannelBrowserFragment;
 import free.rm.skytube.gui.fragments.SearchVideoGridFragment;
 import free.rm.skytube.gui.fragments.VideosGridFragment;
-import free.rm.skytube.gui.fragments.YouTubePlayerFragment;
 
 /**
  * Main activity (launcher).  This activity holds {@link free.rm.skytube.gui.fragments.VideosGridFragment}.
  */
 public class MainActivity extends AppCompatActivity implements MainActivityListener {
 	public static final String ACTION_VIEW_CHANNEL = "MainActivity.ViewChannel";
+	public static final String FEATURED_FRAGMENT = "MainActivity.FeaturedFragment";
+	public static final String CHANNEL_BROWSER_FRAGMENT = "MainActivity.ChannelBrowserFragment";
+	public static final String SEARCH_FRAGMENT = "MainActivity.SearchFragment";
+
+
 
 	@Bind(R.id.fragment_container)
 	FrameLayout fragmentContainer;
@@ -59,8 +62,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 	VideosGridFragment featuredFragment;
 	ChannelBrowserFragment channelBrowserFragment;
 	SearchVideoGridFragment searchVideoGridFragment;
-	YouTubePlayerFragment youTubePlayerFragment;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -69,20 +71,33 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 
 		if(fragmentContainer != null) {
 			if(savedInstanceState != null) {
-				return;
+				featuredFragment = (VideosGridFragment)getSupportFragmentManager().getFragment(savedInstanceState, FEATURED_FRAGMENT);
+				channelBrowserFragment = (ChannelBrowserFragment) getSupportFragmentManager().getFragment(savedInstanceState, CHANNEL_BROWSER_FRAGMENT);
+				searchVideoGridFragment = (SearchVideoGridFragment) getSupportFragmentManager().getFragment(savedInstanceState, SEARCH_FRAGMENT);
 			}
-
 			String action = getIntent().getAction();
 			if(action != null && action.equals(ACTION_VIEW_CHANNEL)) {
 				YouTubeChannel channel = (YouTubeChannel) getIntent().getSerializableExtra(ChannelBrowserFragment.CHANNEL_OBJ);
 				onChannelClick(channel);
 			} else {
-				featuredFragment = new VideosGridFragment();
-				featuredFragment.setArguments(getIntent().getExtras());
-
-				getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, featuredFragment).commit();
+				if(featuredFragment == null) {
+					featuredFragment = new VideosGridFragment();
+					featuredFragment.setArguments(getIntent().getExtras());
+					getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, featuredFragment).commit();
+				}
 			}
 		}
+	}
+
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		if(featuredFragment != null)
+			getSupportFragmentManager().putFragment(outState, FEATURED_FRAGMENT, featuredFragment);
+		if(channelBrowserFragment != null && channelBrowserFragment.isVisible())
+			getSupportFragmentManager().putFragment(outState, CHANNEL_BROWSER_FRAGMENT, channelBrowserFragment);
+		if(searchVideoGridFragment != null && searchVideoGridFragment.isVisible())
+			getSupportFragmentManager().putFragment(outState, SEARCH_FRAGMENT, searchVideoGridFragment);
+		super.onSaveInstanceState(outState);
 	}
 
 	@Override

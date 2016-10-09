@@ -46,7 +46,6 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 
 	private SubsAdapter(Context context, View progressBar) {
 		super(context);
-		listener = (MainActivityListener)context;
 		new GetSubscribedChannelsTask(this, progressBar).executeInParallel();
 	}
 
@@ -64,6 +63,9 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 		return subsAdapter;
 	}
 
+	public void setListener(MainActivityListener listener) {
+		this.listener = listener;
+	}
 
 	/**
 	 * Append channel to this adapter.

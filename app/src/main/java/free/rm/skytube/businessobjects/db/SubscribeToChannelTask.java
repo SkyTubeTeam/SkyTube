@@ -71,6 +71,8 @@ public class SubscribeToChannelTask extends AsyncTask<Void, Void, Boolean> {
 			if (subscribeToChannel) {
 				// change the state of the button
 				subscribeButton.setUnsubscribeState();
+				// Also change the subscription state of the channel
+				channel.setUserSubscribed(true);
 
 				// append the channel to the SubsAdapter (i.e. the channels subscriptions list/drawer)
 				adapter.appendChannel(channel);
@@ -79,7 +81,9 @@ public class SubscribeToChannelTask extends AsyncTask<Void, Void, Boolean> {
 			} else {
 				// change the state of the button
 				subscribeButton.setSubscribeState();
-
+				// Also change the subscription state of the channel
+				channel.setUserSubscribed(false);
+				
 				// remove the channel from the SubsAdapter (i.e. the channels subscriptions list/drawer)
 				adapter.removeChannel(channel);
 
