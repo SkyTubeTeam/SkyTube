@@ -55,6 +55,8 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 	private YouTubeChannel		youTubeChannel = null;
 
 	private VideoView			videoView = null;
+	private boolean				videoPlaying = false;
+	private int						videoCurrentPosition = 0;
 	private MediaControllerEx	mediaController = null;
 	private TextView			videoDescTitleTextView = null;
 	private ImageView			videoDescChannelThumbnailImageView = null;
@@ -79,6 +81,7 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 	private Handler				timerHandler = null;
 
 	private static final int HUD_VISIBILITY_TIMEOUT = 7000;
+	private static final String VIDEO_CURRENT_POSITION = "YouTubePlayerFragment.VideoCurrentPosition";
 	private static final String TAG = YouTubePlayerFragment.class.getSimpleName();
 
 
@@ -172,6 +175,12 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 	}
 
 
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putInt(VIDEO_CURRENT_POSITION, videoCurrentPosition);
+	}
+
 	private void getVideoInfoTasks() {
 		// get Channel info (e.g. avatar...etc) task
 		new GetYouTubeChannelInfoTask().executeInParallel(youTubeVideo.getChannelId());
@@ -209,11 +218,38 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 	@Override
 	public void onPrepared(MediaPlayer mediaPlayer) {
 		loadingVideoView.setVisibility(View.GONE);
+		videoView.seekTo(videoCurrentPosition);
 		videoView.start();
 		showHud();
+
+		// Set a thread to run every second until the video stops playing to keep track of the current position of the video.
+		// This will be stopped when the Activity pauses, and the position will be saved to be re-used later if the
+		// video resumes (when viewing the channel browser from the video and returning to the video)
+		final int duration = videoView.getDuration();
+		videoPlaying = true;
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				do {
+					if(!videoPlaying)
+						break;
+					videoCurrentPosition = videoView.getCurrentPosition();
+					try {
+						Thread.sleep(1000);
+					} catch(InterruptedException e) {
+						e.printStackTrace();
+					}
+
+				} while (videoCurrentPosition<duration);
+			}
+		}).start();
 	}
 
-
+	@Override
+	public void onPause() {
+		super.onPause();
+		videoPlaying = false;
+	}
 
 	/**
 	 * @return True if the HUD is visible (provided that this Fragment is also visible).
