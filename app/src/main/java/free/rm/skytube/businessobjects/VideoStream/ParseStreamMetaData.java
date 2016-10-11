@@ -158,9 +158,8 @@ public class ParseStreamMetaData {
 
 		try {
 			decryptionFuncName = matchGroup1("\\.sig\\|\\|([a-zA-Z0-9$]+)\\(", playerCode);
-
-			String functionPattern = "(var "+  decryptionFuncName.replace("$", "\\$") +"=function\\([a-zA-Z0-9_]*\\)\\{.+?\\})";
-			decryptionFunc = matchGroup1(functionPattern, playerCode);
+			String functionPattern = "("+  decryptionFuncName.replace("$", "\\$") +"=function\\([a-zA-Z0-9_]*\\)\\{.+?\\})";
+			decryptionFunc = "var " + matchGroup1(functionPattern, playerCode);
 			decryptionFunc += ";";
 
 			helperObjectName = matchGroup1(";([A-Za-z0-9_\\$]{2})\\...\\(", decryptionFunc);
