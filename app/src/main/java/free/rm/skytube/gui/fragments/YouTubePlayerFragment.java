@@ -36,8 +36,7 @@ import free.rm.skytube.businessobjects.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTubeVideo;
 import free.rm.skytube.businessobjects.db.CheckIfUserSubbedToChannelTask;
 import free.rm.skytube.businessobjects.db.SubscribeToChannelTask;
-import free.rm.skytube.gui.activities.ChannelBrowserActivity;
-import free.rm.skytube.gui.activities.YouTubePlayerActivity;
+import free.rm.skytube.gui.activities.MainActivity;
 import free.rm.skytube.gui.app.SkyTubeApp;
 import free.rm.skytube.gui.businessobjects.CommentsAdapter;
 import free.rm.skytube.gui.businessobjects.FragmentEx;
@@ -50,6 +49,9 @@ import hollowsoft.slidingdrawer.SlidingDrawer;
  * A fragment that holds a standalone YouTube player.
  */
 public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnPreparedListener {
+
+	public static final String YOUTUBE_VIDEO_OBJ = "YouTubePlayerActivity.yt_video_obj";
+	public static final String YOUTUBE_VIDEO_URL = "YouTubePlayerActivity.yt_video_url";
 
 	private YouTubeVideo		youTubeVideo = null;
 	private YouTubeChannel		youTubeChannel = null;
@@ -115,8 +117,9 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 				@Override
 				public void onClick(View v) {
 					if (youTubeChannel != null) {
-						Intent i = new Intent(getActivity(), ChannelBrowserActivity.class);
-						i.putExtra(ChannelBrowserActivity.CHANNEL_OBJ, youTubeChannel);
+						Intent i = new Intent(getActivity(), MainActivity.class);
+						i.setAction(MainActivity.ACTION_VIEW_CHANNEL);
+						i.putExtra(ChannelBrowserFragment.CHANNEL_OBJ, youTubeChannel);
 						startActivity(i);
 					}
 				}
@@ -155,9 +158,9 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 
 			// get which video we need to play...
 			Bundle bundle = getActivity().getIntent().getExtras();
-			if (bundle != null  &&  bundle.getSerializable(YouTubePlayerActivity.YOUTUBE_VIDEO_OBJ) != null) {
+			if (bundle != null  &&  bundle.getSerializable(YOUTUBE_VIDEO_OBJ) != null) {
 				// ... either the video details are passed through the previous activity
-				youTubeVideo = (YouTubeVideo) bundle.getSerializable(YouTubePlayerActivity.YOUTUBE_VIDEO_OBJ);
+				youTubeVideo = (YouTubeVideo) bundle.getSerializable(YOUTUBE_VIDEO_OBJ);
 				setUpHUDAndPlayVideo();
 
 				getVideoInfoTasks();

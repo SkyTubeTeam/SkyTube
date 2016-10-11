@@ -18,7 +18,6 @@
 package free.rm.skytube.gui.businessobjects;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -32,9 +31,9 @@ import com.squareup.picasso.Picasso;
 import java.util.Iterator;
 
 import free.rm.skytube.R;
+import free.rm.skytube.businessobjects.MainActivityListener;
 import free.rm.skytube.businessobjects.YouTubeChannel;
 import free.rm.skytube.businessobjects.db.GetSubscribedChannelsTask;
-import free.rm.skytube.gui.activities.ChannelBrowserActivity;
 
 /**
  * Channel subscriptions adapter.
@@ -43,7 +42,7 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 
 	private static SubsAdapter subsAdapter = null;
 	private static final String TAG = SubsAdapter.class.getSimpleName();
-
+	private MainActivityListener listener;
 
 	private SubsAdapter(Context context, View progressBar) {
 		super(context);
@@ -64,6 +63,9 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 		return subsAdapter;
 	}
 
+	public void setListener(MainActivityListener listener) {
+		this.listener = listener;
+	}
 
 	/**
 	 * Append channel to this adapter.
@@ -176,9 +178,8 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 			rowView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					Intent i = new Intent(getContext(), ChannelBrowserActivity.class);
-					i.putExtra(ChannelBrowserActivity.CHANNEL_OBJ, channel);
-					getContext().startActivity(i);
+					if(listener instanceof MainActivityListener)
+						listener.onChannelClick(channel);
 				}
 			});
 		}

@@ -23,6 +23,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -32,18 +34,70 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import free.rm.skytube.R;
+import free.rm.skytube.businessobjects.MainActivityListener;
+import free.rm.skytube.businessobjects.YouTubeChannel;
+import free.rm.skytube.gui.fragments.ChannelBrowserFragment;
+import free.rm.skytube.gui.fragments.SearchVideoGridFragment;
+import free.rm.skytube.gui.fragments.VideosGridFragment;
 
 /**
  * Main activity (launcher).  This activity holds {@link free.rm.skytube.gui.fragments.VideosGridFragment}.
  */
-public class MainActivity extends AppCompatActivity {
-	
+public class MainActivity extends AppCompatActivity implements MainActivityListener {
+	public static final String ACTION_VIEW_CHANNEL = "MainActivity.ViewChannel";
+	public static final String FEATURED_FRAGMENT = "MainActivity.FeaturedFragment";
+	public static final String CHANNEL_BROWSER_FRAGMENT = "MainActivity.ChannelBrowserFragment";
+	public static final String SEARCH_FRAGMENT = "MainActivity.SearchFragment";
+
+
+
+	@Bind(R.id.fragment_container)
+	FrameLayout fragmentContainer;
+
+	VideosGridFragment featuredFragment;
+	ChannelBrowserFragment channelBrowserFragment;
+	SearchVideoGridFragment searchVideoGridFragment;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		ButterKnife.bind(this);
+
+		if(fragmentContainer != null) {
+			if(savedInstanceState != null) {
+				featuredFragment = (VideosGridFragment)getSupportFragmentManager().getFragment(savedInstanceState, FEATURED_FRAGMENT);
+				channelBrowserFragment = (ChannelBrowserFragment) getSupportFragmentManager().getFragment(savedInstanceState, CHANNEL_BROWSER_FRAGMENT);
+				searchVideoGridFragment = (SearchVideoGridFragment) getSupportFragmentManager().getFragment(savedInstanceState, SEARCH_FRAGMENT);
+			}
+			String action = getIntent().getAction();
+			if(action != null && action.equals(ACTION_VIEW_CHANNEL)) {
+				YouTubeChannel channel = (YouTubeChannel) getIntent().getSerializableExtra(ChannelBrowserFragment.CHANNEL_OBJ);
+				onChannelClick(channel);
+			} else {
+				if(featuredFragment == null) {
+					featuredFragment = new VideosGridFragment();
+					featuredFragment.setArguments(getIntent().getExtras());
+					getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, featuredFragment).commit();
+				}
+			}
+		}
+	}
+
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		if(featuredFragment != null)
+			getSupportFragmentManager().putFragment(outState, FEATURED_FRAGMENT, featuredFragment);
+		if(channelBrowserFragment != null && channelBrowserFragment.isVisible())
+			getSupportFragmentManager().putFragment(outState, CHANNEL_BROWSER_FRAGMENT, channelBrowserFragment);
+		if(searchVideoGridFragment != null && searchVideoGridFragment.isVisible())
+			getSupportFragmentManager().putFragment(outState, SEARCH_FRAGMENT, searchVideoGridFragment);
+		super.onSaveInstanceState(outState);
 	}
 
 	@Override
@@ -68,11 +122,11 @@ public class MainActivity extends AppCompatActivity {
 				searchView.setIconified(true);
 				menu.findItem(R.id.menu_search).collapseActionView();
 
-				// run the search activity
-				Intent i = new Intent(MainActivity.this, SearchActivity.class);
-				i.setAction(Intent.ACTION_SEARCH);
-				i.putExtra(Intent.ACTION_SEARCH, query);
-				startActivity(i);
+				searchVideoGridFragment = new SearchVideoGridFragment();
+				Bundle bundle = new Bundle();
+				bundle.putString(SearchVideoGridFragment.QUERY, query);
+				searchVideoGridFragment.setArguments(bundle);
+				switchToFragment(searchVideoGridFragment);
 
 				return true;
 			}
@@ -91,6 +145,12 @@ public class MainActivity extends AppCompatActivity {
 				return true;
 			case R.id.menu_enter_video_url:
 				displayEnterVideoUrlDialog();
+				return true;
+			case android.R.id.home:
+				if(featuredFragment == null || !featuredFragment.isVisible()) {
+					onBackPressed();
+					return true;
+				}
 		}
 
 		return super.onOptionsItemSelected(item);
@@ -152,4 +212,36 @@ public class MainActivity extends AppCompatActivity {
 		return item;
 	}
 
+	@Override
+	public void onBackPressed() {
+		// If coming here from the video player (channel was pressed), exit when the back button is pressed
+		if(getIntent().getAction() != null && getIntent().getAction().equals(ACTION_VIEW_CHANNEL))
+			finish();
+		else
+			super.onBackPressed();
+	}
+
+	private void switchToFragment(Fragment fragment) {
+		FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+		transaction.replace(R.id.fragment_container, fragment);
+		transaction.addToBackStack(null);
+		transaction.commit();
+	}
+
+	@Override
+	public void onChannelClick(YouTubeChannel channel) {
+		onChannelClick(channel.getId());
+	}
+
+	@Override
+	public void onChannelClick(String channelId) {
+		channelBrowserFragment = new ChannelBrowserFragment();
+
+		Bundle args = new Bundle();
+		args.putString(ChannelBrowserFragment.CHANNEL_ID, channelId);
+		channelBrowserFragment.setArguments(args);
+
+		switchToFragment(channelBrowserFragment);
+	}
 }

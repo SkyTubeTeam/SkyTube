@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- TOOLBAR / ACTIONBAR -->
+    <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+                                       android:id="@+id/toolbar"
+                                       android:layout_width="match_parent"
+                                       android:layout_height="wrap_content"
+                                       android:minHeight="?attr/actionBarSize"
+                                       android:background="@color/colorPrimary"
+                                       android:theme="@style/ThemeOverlay.AppCompat.Dark"/>
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        layout="@layout/videos_gridview"/>
+</LinearLayout>

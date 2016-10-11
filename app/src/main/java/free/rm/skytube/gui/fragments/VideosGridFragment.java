@@ -50,6 +50,7 @@ import java.net.URL;
 
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
+import free.rm.skytube.businessobjects.MainActivityListener;
 import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.gui.businessobjects.FragmentEx;
 import free.rm.skytube.gui.businessobjects.LoadingProgressBar;
@@ -70,6 +71,7 @@ public class VideosGridFragment extends FragmentEx implements ActionBar.OnNaviga
 	private SubsAdapter				subsAdapter = null;
 	private ActionBarDrawerToggle	subsDrawerToggle;
 	private View					progressBar = null;
+	private int					 spinnerSelectedValue = 0;
 
 	/** Set to true of the UpdatesCheckerTask has run; false otherwise. */
 	private static boolean updatesCheckerTaskRan = false;
@@ -98,6 +100,7 @@ public class VideosGridFragment extends FragmentEx implements ActionBar.OnNaviga
 		if (this.videoGridAdapter == null) {
 			this.videoGridAdapter = new VideoGridAdapter(getActivity());
 		}
+		videoGridAdapter.setListener((MainActivityListener)getActivity());
 		this.gridView.setLayoutManager(new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.video_grid_num_columns)));
 		this.gridView.setAdapter(this.videoGridAdapter);
 
@@ -123,10 +126,10 @@ public class VideosGridFragment extends FragmentEx implements ActionBar.OnNaviga
 		}
 
 		this.subsListView = (RecyclerView) view.findViewById(R.id.subs_drawer);
-
 		if (subsAdapter == null) {
 			this.subsAdapter = SubsAdapter.get(getActivity(), view.findViewById(R.id.subs_drawer_progress_bar));
 		}
+		subsAdapter.setListener((MainActivityListener)getActivity());
 
 		this.subsListView.setLayoutManager(new LinearLayoutManager(getActivity()));
 		this.subsListView.setAdapter(this.subsAdapter);
@@ -147,6 +150,8 @@ public class VideosGridFragment extends FragmentEx implements ActionBar.OnNaviga
 			actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
 			actionBar.setDisplayShowTitleEnabled(false);
 			actionBar.setListNavigationCallbacks(spinnerAdapter, this);
+
+			actionBar.setSelectedNavigationItem(spinnerSelectedValue);
 		}
 
 		subsDrawerToggle.syncState();
@@ -155,6 +160,7 @@ public class VideosGridFragment extends FragmentEx implements ActionBar.OnNaviga
 
 	@Override
 	public boolean onNavigationItemSelected(int itemPosition, long itemId) {
+		spinnerSelectedValue = itemPosition;
 		// scroll to the top
 		gridView.smoothScrollToPosition(0);
 
@@ -196,7 +202,7 @@ public class VideosGridFragment extends FragmentEx implements ActionBar.OnNaviga
 		protected void onPostExecute(final UpdatesChecker updatesChecker) {
 			updatesCheckerTaskRan = true;
 
-			if (updatesChecker != null  &&  updatesChecker.getLatestApkUrl() != null) {
+			if (updatesChecker != null && updatesChecker.getLatestApkUrl() != null) {
 				new AlertDialog.Builder(getActivity())
 						.setTitle(R.string.update_available)
 						.setMessage( String.format(getResources().getString(R.string.update_dialog_msg), updatesChecker.getLatestApkVersion()) )

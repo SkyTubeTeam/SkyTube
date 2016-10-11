@@ -18,7 +18,6 @@
 package free.rm.skytube.gui.businessobjects;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -28,8 +27,8 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import free.rm.skytube.R;
+import free.rm.skytube.businessobjects.MainActivityListener;
 import free.rm.skytube.businessobjects.YouTubeVideo;
-import free.rm.skytube.gui.activities.ChannelBrowserActivity;
 
 /**
  * A ViewHolder for the videos grid view.
@@ -46,9 +45,10 @@ public class GridViewHolder extends RecyclerView.ViewHolder {
 	/** YouTube video */
 	private YouTubeVideo youTubeVideo = null;
 	private Context context = null;
+	private MainActivityListener listener;
 
 
-	public GridViewHolder(View view) {
+	public GridViewHolder(View view, MainActivityListener listener) {
 		super(view);
 		titleTextView				= (TextView) view.findViewById(R.id.title_text_view);
 		channelTextView				= (TextView) view.findViewById(R.id.channel_text_view);
@@ -58,6 +58,8 @@ public class GridViewHolder extends RecyclerView.ViewHolder {
 		publishDateTextView			= (TextView) view.findViewById(R.id.publish_date_text_view);
 		thumbnailImageView	= (ImageView) view.findViewById(R.id.thumbnail_image_view);
 		bottomLayout		= (RelativeLayout) view.findViewById(R.id.cell_bottom_layout);
+
+		this.listener = listener;
 	}
 
 
@@ -69,9 +71,10 @@ public class GridViewHolder extends RecyclerView.ViewHolder {
 	 * @param showChannelInfo   True to display channel information (e.g. channel name) and allows
 	 *                          user to open and browse the channel; false to hide such information.
 	 */
-	protected void updateInfo(YouTubeVideo youTubeVideo, Context context, boolean showChannelInfo) {
+	protected void updateInfo(YouTubeVideo youTubeVideo, Context context, MainActivityListener listener, boolean showChannelInfo) {
 		this.youTubeVideo = youTubeVideo;
 		this.context = context;
+		this.listener = listener;
 		updateViewsData(this.youTubeVideo, showChannelInfo);
 	}
 
@@ -111,7 +114,7 @@ public class GridViewHolder extends RecyclerView.ViewHolder {
 			@Override
 			public void onClick(View thumbnailView) {
 				if (youTubeVideo != null) {
-					YouTubePlayer.launch(youTubeVideo, context);
+					YouTubePlayer.launch(youTubeVideo, (Context)listener);
 				}
 			}
 		});
@@ -126,9 +129,8 @@ public class GridViewHolder extends RecyclerView.ViewHolder {
 			channelListener = new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					Intent i = new Intent(context, ChannelBrowserActivity.class);
-					i.putExtra(ChannelBrowserActivity.CHANNEL_ID, youTubeVideo.getChannelId());
-					context.startActivity(i);
+					if(listener != null)
+						listener.onChannelClick(youTubeVideo.getChannelId());
 				}
 			};
 		}

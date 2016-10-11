@@ -17,18 +17,17 @@
 
 package free.rm.skytube.gui.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridView;
 
 import free.rm.skytube.R;
+import free.rm.skytube.businessobjects.MainActivityListener;
 import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.gui.businessobjects.FragmentEx;
 import free.rm.skytube.gui.businessobjects.LoadingProgressBar;
@@ -39,6 +38,7 @@ import free.rm.skytube.gui.businessobjects.VideoGridAdapter;
  */
 public class SearchVideoGridFragment extends FragmentEx {
 
+	public static final String QUERY = "SearchVideoGridFragment.Query";
 	protected RecyclerView		gridView;
 	protected VideoGridAdapter	videoGridAdapter;
 
@@ -46,7 +46,12 @@ public class SearchVideoGridFragment extends FragmentEx {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		// inflate the layout for this fragment
-		View view = inflater.inflate(R.layout.videos_gridview, container, false);
+		View view = inflater.inflate(R.layout.videos_searchview, container, false);
+
+		// setup the toolbar/actionbar
+		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+		setSupportActionBar(toolbar);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 		this.gridView = (RecyclerView) view.findViewById(R.id.grid_view);
 
@@ -54,9 +59,10 @@ public class SearchVideoGridFragment extends FragmentEx {
 		LoadingProgressBar.get().setProgressBar(view.findViewById(R.id.loading_progress_bar));
 
 		if (videoGridAdapter == null) {
-			this.videoGridAdapter = new VideoGridAdapter(getActivity());
+			videoGridAdapter = new VideoGridAdapter(getActivity());
+			videoGridAdapter.setListener((MainActivityListener)getActivity());
 
-			String searchQuery = getSearchQuery();
+			String searchQuery = getArguments().getString(QUERY);
 			if (searchQuery != null) {
 				// set the video category (if the user wants to search)... otherwise it will be set-
 				// up by the VideoGridFragment
@@ -75,18 +81,4 @@ public class SearchVideoGridFragment extends FragmentEx {
 
 		return view;
 	}
-
-
-	private String getSearchQuery() {
-		String	searchQuery = null;
-		Intent	intent = getActivity().getIntent();
-
-		if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-			searchQuery = intent.getStringExtra(Intent.ACTION_SEARCH);
-			Log.d("SEARCH", "Query=" + searchQuery);
-		}
-
-		return searchQuery;
-	}
-
 }
