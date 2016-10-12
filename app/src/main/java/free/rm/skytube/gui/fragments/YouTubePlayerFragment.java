@@ -55,7 +55,6 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 	private YouTubeChannel		youTubeChannel = null;
 
 	private VideoView			videoView = null;
-	private boolean				videoPlaying = false;
 	private int						videoCurrentPosition = 0;
 	private MediaControllerEx	mediaController = null;
 	private TextView			videoDescTitleTextView = null;
@@ -92,6 +91,9 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 
 		// indicate that this fragment has an action bar menu
 		setHasOptionsMenu(true);
+
+		if(savedInstanceState != null)
+			videoCurrentPosition = savedInstanceState.getInt(VIDEO_CURRENT_POSITION, 0);
 
 		if (youTubeVideo == null) {
 			loadingVideoView = view.findViewById(R.id.loadingVideoView);
@@ -221,34 +223,13 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 		videoView.seekTo(videoCurrentPosition);
 		videoView.start();
 		showHud();
-
-		// Set a thread to run every second until the video stops playing to keep track of the current position of the video.
-		// This will be stopped when the Activity pauses, and the position will be saved to be re-used later if the
-		// video resumes (when viewing the channel browser from the video and returning to the video)
-		final int duration = videoView.getDuration();
-		videoPlaying = true;
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				do {
-					if(!videoPlaying)
-						break;
-					videoCurrentPosition = videoView.getCurrentPosition();
-					try {
-						Thread.sleep(1000);
-					} catch(InterruptedException e) {
-						e.printStackTrace();
-					}
-
-				} while (videoCurrentPosition<duration);
-			}
-		}).start();
 	}
 
 	@Override
 	public void onPause() {
+		if(videoView != null && videoView.isPlaying())
+			videoCurrentPosition = videoView.getCurrentPosition();
 		super.onPause();
-		videoPlaying = false;
 	}
 
 	/**
