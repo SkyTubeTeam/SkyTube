@@ -17,6 +17,8 @@
 
 package free.rm.skytube.businessobjects;
 
+import android.view.View;
+
 import java.util.List;
 
 import free.rm.skytube.gui.businessobjects.LoadingProgressBar;
@@ -36,16 +38,23 @@ public class GetYouTubeVideosTask extends AsyncTaskParallel<Void, Void, List<You
 	/** Class tag. */
 	private static final String TAG = GetYouTubeVideosTask.class.getSimpleName();
 
+	/** Optional non-static progressBar. If this isn't set, a static one will be used */
+	private View progressBar = null;
 
-	public GetYouTubeVideosTask(GetYouTubeVideos getYouTubeVideos, VideoGridAdapter videoGridAdapter) {
+
+	public GetYouTubeVideosTask(GetYouTubeVideos getYouTubeVideos, VideoGridAdapter videoGridAdapter, View progressBar) {
 		this.getYouTubeVideos = getYouTubeVideos;
 		this.videoGridAdapter = videoGridAdapter;
+		this.progressBar = progressBar;
 	}
 
 
 	@Override
 	protected void onPreExecute() {
-		LoadingProgressBar.get().show();
+		if(progressBar != null)
+			progressBar.setVisibility(View.VISIBLE);
+		else
+			LoadingProgressBar.get().show();
 	}
 
 	@Override
@@ -63,7 +72,10 @@ public class GetYouTubeVideosTask extends AsyncTaskParallel<Void, Void, List<You
 	@Override
 	protected void onPostExecute(List<YouTubeVideo> videosList) {
 		videoGridAdapter.appendList(videosList);
-		LoadingProgressBar.get().hide();
+		if(progressBar != null)
+			progressBar.setVisibility(View.GONE);
+		else
+			LoadingProgressBar.get().hide();
 	}
 
 

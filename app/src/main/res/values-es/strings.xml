@@ -7,14 +7,7 @@
 		oficial de YouTube. Asegúrate que la aplicación oficial de YouTube hecha por Google
 		esté instalada en tu dispositivo.</string>
 
-	<!--
-		Holds different videos categories.
-
-		Order is important.  Refer to VideoCategory enum.
-	 -->
-	<string-array name="video_categories">
-		<item>Destacados</item>
-		<item>Más populares</item>
-	</string-array>
+	<string name="featured">Destacados</string>
+	<string name="popular">Más populares</string>
 
 </resources>

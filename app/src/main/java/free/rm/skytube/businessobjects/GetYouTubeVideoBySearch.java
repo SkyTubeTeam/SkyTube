@@ -26,6 +26,7 @@ import com.google.api.services.youtube.model.SearchResult;
 import java.io.IOException;
 import java.util.List;
 
+import free.rm.skytube.BuildConfig;
 import free.rm.skytube.R;
 import free.rm.skytube.gui.app.SkyTubeApp;
 
@@ -46,7 +47,7 @@ public class GetYouTubeVideoBySearch extends GetYouTubeVideos {
 	public void init() throws IOException {
 		videosList = YouTubeAPI.create().search().list("id");
 		videosList.setFields("items(id/videoId), nextPageToken");
-		videosList.setKey(SkyTubeApp.getStr(R.string.API_KEY));
+		videosList.setKey(BuildConfig.YOUTUBE_API_KEY);
 		videosList.setType("video");
 		//videosList.setRegionCode(getPreferredRegion());	// there is a bug in V3 API, so this does not work:  https://code.google.com/p/gdata-issues/issues/detail?id=6383 and https://code.google.com/p/gdata-issues/issues/detail?id=6913
 		videosList.setSafeSearch("none");

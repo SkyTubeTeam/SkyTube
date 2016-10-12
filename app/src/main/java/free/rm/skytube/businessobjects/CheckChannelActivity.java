@@ -27,6 +27,7 @@ import com.google.api.services.youtube.model.ActivityListResponse;
 import java.io.IOException;
 import java.util.List;
 
+import free.rm.skytube.BuildConfig;
 import free.rm.skytube.R;
 import free.rm.skytube.gui.app.SkyTubeApp;
 
@@ -45,7 +46,7 @@ public class CheckChannelActivity {
 		this.activitiesList = YouTubeAPI.create().activities()
 				.list("snippet")
 				.setFields("items(snippet/publishedAt)")
-				.setKey(SkyTubeApp.getStr(R.string.API_KEY))
+				.setKey(BuildConfig.YOUTUBE_API_KEY)
 				.setMaxResults(MAX_RESULTS);
 	}
 

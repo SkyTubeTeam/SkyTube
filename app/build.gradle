@@ -9,6 +9,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 24
         versionCode 2
+        buildConfigField "String", "YOUTUBE_API_KEY", "\"" + YOUTUBE_API_KEY + "\"";
     }
     buildTypes {
         release {

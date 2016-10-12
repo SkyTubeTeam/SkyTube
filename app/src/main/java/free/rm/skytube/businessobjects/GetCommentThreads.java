@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import free.rm.skytube.BuildConfig;
 import free.rm.skytube.R;
 import free.rm.skytube.gui.app.SkyTubeApp;
 
@@ -49,7 +50,7 @@ public class GetCommentThreads {
 		this.commentsList = YouTubeAPI.create().commentThreads()
 				.list("snippet, replies")
 				.setFields("items(snippet, replies), nextPageToken")
-				.setKey(SkyTubeApp.getStr(R.string.API_KEY))
+				.setKey(BuildConfig.YOUTUBE_API_KEY)
 				.setVideoId(videoId)
 				.setTextFormat("plainText")
 				.setMaxResults(MAX_RESULTS)
