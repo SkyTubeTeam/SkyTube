@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "free.rm.skytube"
-        minSdkVersion 16
+        minSdkVersion 14
         targetSdkVersion 24
         versionCode 2
     }
@@ -23,11 +23,11 @@ android {
             versionName "2.0"   // the digits of the *fractional part* shall not be larger than "9"
             resValue "string", "app_name", "SkyTube"
         }
-        // 99% Open-source edition:  uses the YouTube Player API [i.e. proprietary module]
+        // 99% Open-source edition:  uses the YouTube Player Jar [i.e. proprietary module - optional usage]
         nonFree {
-            applicationId "free.rm.skytube.hd"
+            applicationId "free.rm.skytube.extra"
             versionName "2.0"
-            resValue "string", "app_name", "SkyTube HD"
+            resValue "string", "app_name", "SkyTube Extra"
         }
     }
 }
@@ -49,8 +49,8 @@ dependencies {
     compile 'org.mozilla:rhino:1.7.7'
     compile 'com.github.moraisigor:slidingdrawer:1.5.5'
     compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.jakewharton:butterknife:7.0.1'
 
     compile 'com.android.support:appcompat-v7:24.2.0'
     compile 'com.android.support:design:24.2.0'
-    compile 'com.jakewharton:butterknife:7.0.1'
 }

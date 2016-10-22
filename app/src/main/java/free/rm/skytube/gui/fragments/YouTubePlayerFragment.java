@@ -1,10 +1,12 @@
 package free.rm.skytube.gui.fragments;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -372,16 +374,14 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 
 		@Override
 		protected void onPostExecute(StreamMetaDataList streamMetaDataList) {
-			if (streamMetaDataList == null) {
+			String errorMessage = null;
+
+			if (streamMetaDataList.getErrorMessage() != null) {
 				// if the stream list is null, then it means an error has occurred
-				Toast.makeText(YouTubePlayerFragment.this.getActivity(),
-						String.format(getActivity().getString(R.string.error_get_video_streams), youTubeVideo.getId()),
-						Toast.LENGTH_LONG).show();
+				errorMessage = streamMetaDataList.getErrorMessage();
 			} else if (streamMetaDataList.size() <= 0) {
 				// if steam list if empty, then it means something went wrong...
-				Toast.makeText(YouTubePlayerFragment.this.getActivity(),
-						String.format(getActivity().getString(R.string.error_video_streams_empty), youTubeVideo.getId()),
-						Toast.LENGTH_LONG).show();
+				errorMessage = String.format(getActivity().getString(R.string.error_video_streams_empty), youTubeVideo.getId());
 			} else {
 				Log.i(TAG, streamMetaDataList.toString());
 
@@ -396,6 +396,20 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 				if (currentVideoPosition >= 0) {
 					videoView.seekTo(currentVideoPosition);
 				}
+			}
+
+			if (errorMessage != null) {
+				new AlertDialog.Builder(getContext())
+					.setMessage(errorMessage)
+					.setTitle(R.string.error_video_play)
+					.setCancelable(false)
+					.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							getActivity().finish();
+						}
+					})
+					.show();
 			}
 		}
 	}
