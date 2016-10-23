@@ -4,6 +4,7 @@ v2.1 - 23 Oct 2016:
 	* Orientation changes no longer causes the app to loss the current scroll position wrt Most Pop and Featured videos
 	* Issue #21:  Android 4.0 is now supported
 	* Fixed issue #7:  i.e. when a user tries to view some videos the following error used to popup:  "An error has occurred while getting video streams for xxxxxxxx"
+	* Playback errors are now more human friendly
 	* Fixed issue #26:  Saves the current video position when the app is minimized or when a user clicks on the video's channel.
 
 v2.0 - 27 Aug 2016:
