@@ -59,6 +59,7 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 	private YouTubeChannel		youTubeChannel = null;
 
 	private VideoView			videoView = null;
+	private int					videoCurrentPosition = 0;
 	private MediaControllerEx	mediaController = null;
 	private TextView			videoDescTitleTextView = null;
 	private ImageView			videoDescChannelThumbnailImageView = null;
@@ -83,6 +84,7 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 	private Handler				timerHandler = null;
 
 	private static final int HUD_VISIBILITY_TIMEOUT = 7000;
+	private static final String VIDEO_CURRENT_POSITION = "YouTubePlayerFragment.VideoCurrentPosition";
 	private static final String TAG = YouTubePlayerFragment.class.getSimpleName();
 
 
@@ -93,6 +95,9 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 
 		// indicate that this fragment has an action bar menu
 		setHasOptionsMenu(true);
+
+		if (savedInstanceState != null)
+			videoCurrentPosition = savedInstanceState.getInt(VIDEO_CURRENT_POSITION, 0);
 
 		if (youTubeVideo == null) {
 			loadingVideoView = view.findViewById(R.id.loadingVideoView);
@@ -177,6 +182,14 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 	}
 
 
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putInt(VIDEO_CURRENT_POSITION, videoCurrentPosition);
+	}
+
+
+
 	private void getVideoInfoTasks() {
 		// get Channel info (e.g. avatar...etc) task
 		new GetYouTubeChannelInfoTask().executeInParallel(youTubeVideo.getChannelId());
@@ -214,8 +227,20 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 	@Override
 	public void onPrepared(MediaPlayer mediaPlayer) {
 		loadingVideoView.setVisibility(View.GONE);
+		videoView.seekTo(videoCurrentPosition);
 		videoView.start();
 		showHud();
+	}
+
+
+
+	@Override
+	public void onPause() {
+		if (videoView != null && videoView.isPlaying()) {
+			videoCurrentPosition = videoView.getCurrentPosition();
+		}
+
+		super.onPause();
 	}
 
 
