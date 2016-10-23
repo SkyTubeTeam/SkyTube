@@ -48,26 +48,32 @@ public class UpdatesChecker {
 	public boolean checkForUpdates() {
 		boolean updatesAvailable = false;
 
-		try {
-			WebStream		webStream = new WebStream(UPDATES_URL);
-			BufferedReader	bufferedReader = new BufferedReader(new InputStreamReader(webStream.getStream()));
-			JSONObject		json = getJSON(bufferedReader);
-			float			remoteVersionNumber  = getLatestVersionNumber(json);
-			float			currentVersionNumber = getCurrentVerNumber();
+		if (BuildConfig.FLAVOR.equalsIgnoreCase("oss")) {
+			// OSS version update checker is the responsibility of FDROID
+			Log.d(TAG, "OSS version - will not be checking for updates.");
+		}
+		else {
+			try {
+				WebStream webStream = new WebStream(UPDATES_URL);
+				BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(webStream.getStream()));
+				JSONObject json = getJSON(bufferedReader);
+				float remoteVersionNumber = getLatestVersionNumber(json);
+				float currentVersionNumber = getCurrentVerNumber();
 
-			Log.d(TAG, "CURRENT_VER: " + currentVersionNumber);
-			Log.d(TAG, "REMOTE_VER: " + remoteVersionNumber);
+				Log.d(TAG, "CURRENT_VER: " + currentVersionNumber);
+				Log.d(TAG, "REMOTE_VER: " + remoteVersionNumber);
 
-			if (currentVersionNumber < remoteVersionNumber) {
-				this.latestApkUrl = getLatestApkUrl(json);
-				this.latestApkVersion = remoteVersionNumber;
-				updatesAvailable = true;
-				Log.d(TAG, "Update available.  APK_URL: " + latestApkUrl);
-			} else {
-				Log.d(TAG, "Same version - not updating.");
+				if (currentVersionNumber < remoteVersionNumber) {
+					this.latestApkUrl = getLatestApkUrl(json);
+					this.latestApkVersion = remoteVersionNumber;
+					updatesAvailable = true;
+					Log.d(TAG, "Update available.  APK_URL: " + latestApkUrl);
+				} else {
+					Log.d(TAG, "Same version - not updating.");
+				}
+			} catch (Throwable e) {
+				Log.e(TAG, "An error has occurred while checking for updates", e);
 			}
-		} catch (Throwable e) {
-			Log.e(TAG, "An error has occurred while checking for updates", e);
 		}
 
 		return updatesAvailable;
