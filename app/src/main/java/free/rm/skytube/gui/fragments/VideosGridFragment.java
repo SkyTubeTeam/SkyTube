@@ -161,8 +161,6 @@ public class VideosGridFragment extends FragmentEx implements ActionBar.OnNaviga
 	@Override
 	public boolean onNavigationItemSelected(int itemPosition, long itemId) {
 		spinnerSelectedValue = itemPosition;
-		// scroll to the top
-		gridView.smoothScrollToPosition(0);
 
 		LoadingProgressBar.get().setProgressBar(progressBar);
 
