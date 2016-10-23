@@ -69,7 +69,7 @@ public class UpdatesChecker {
 					updatesAvailable = true;
 					Log.d(TAG, "Update available.  APK_URL: " + latestApkUrl);
 				} else {
-					Log.d(TAG, "Same version - not updating.");
+					Log.d(TAG, "Not updating.");
 				}
 			} catch (Throwable e) {
 				Log.e(TAG, "An error has occurred while checking for updates", e);
