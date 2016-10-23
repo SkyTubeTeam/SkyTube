@@ -128,11 +128,19 @@ public class UpdatesChecker {
 		return new URL(apkUrl);
 	}
 
+
 	/**
 	 * @return The current app's version number.
 	 */
 	private float getCurrentVerNumber() {
-		return Float.parseFloat(BuildConfig.VERSION_NAME);
+		String currentAppVersionStr = BuildConfig.VERSION_NAME;
+
+		if (BuildConfig.FLAVOR.equalsIgnoreCase("extra")) {
+			String[] ver = BuildConfig.VERSION_NAME.split("\\s+");
+			currentAppVersionStr = ver[0];
+		}
+
+		return Float.parseFloat(currentAppVersionStr);
 	}
 
 }
