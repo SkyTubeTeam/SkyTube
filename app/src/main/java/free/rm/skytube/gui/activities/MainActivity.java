@@ -212,6 +212,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 		return item;
 	}
 
+
 	@Override
 	public void onBackPressed() {
 		// If coming here from the video player (channel was pressed), exit when the back button is pressed
@@ -221,6 +222,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 			super.onBackPressed();
 	}
 
+
 	private void switchToFragment(Fragment fragment) {
 		FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
@@ -229,19 +231,30 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 		transaction.commit();
 	}
 
+
+
 	@Override
 	public void onChannelClick(YouTubeChannel channel) {
-		onChannelClick(channel.getId());
+		Bundle args = new Bundle();
+		args.putSerializable(ChannelBrowserFragment.CHANNEL_OBJ, channel);
+		switchToChannelBrowserFragment(args);
 	}
+
+
 
 	@Override
 	public void onChannelClick(String channelId) {
-		channelBrowserFragment = new ChannelBrowserFragment();
-
 		Bundle args = new Bundle();
 		args.putString(ChannelBrowserFragment.CHANNEL_ID, channelId);
-		channelBrowserFragment.setArguments(args);
+		switchToChannelBrowserFragment(args);
+	}
 
+
+
+	private void switchToChannelBrowserFragment(Bundle args) {
+		channelBrowserFragment = new ChannelBrowserFragment();
+		channelBrowserFragment.setArguments(args);
 		switchToFragment(channelBrowserFragment);
 	}
+
 }
