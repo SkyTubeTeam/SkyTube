@@ -31,6 +31,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
+import free.rm.skytube.BuildConfig;
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 import free.rm.skytube.gui.app.SkyTubeApp;
@@ -80,7 +81,7 @@ public class YouTubeChannel implements Serializable {
 		channelInfo.setFields("items(id, snippet/title, snippet/description, snippet/thumbnails/default," +
 				"statistics/subscriberCount, brandingSettings/image/bannerTabletHdImageUrl)," +
 				"nextPageToken");
-		channelInfo.setKey(SkyTubeApp.getStr(R.string.API_KEY));
+		channelInfo.setKey(BuildConfig.YOUTUBE_API_KEY);
 		channelInfo.setId(channelId);
 
 		// get this channel's info from the remote YouTube server

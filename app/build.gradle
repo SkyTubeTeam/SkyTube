@@ -9,6 +9,7 @@ android {
         minSdkVersion 14
         targetSdkVersion 25
         versionCode 3
+        buildConfigField 'String', 'YOUTUBE_API_KEY', '"AIzaSyDAOcAgAAd098p_FLIePaQNKPTpcyhUGBA"';
     }
     buildTypes {
         release {

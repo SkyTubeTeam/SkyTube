@@ -26,8 +26,7 @@ import com.google.api.services.youtube.model.VideoListResponse;
 import java.io.IOException;
 import java.util.List;
 
-import free.rm.skytube.R;
-import free.rm.skytube.gui.app.SkyTubeApp;
+import free.rm.skytube.BuildConfig;
 
 /**
  * Get today's featured YouTube videos.
@@ -48,7 +47,7 @@ public class GetFeaturedVideos extends GetYouTubeVideos {
 		videosList.setFields("items(id, snippet/defaultAudioLanguage, snippet/defaultLanguage, snippet/publishedAt, snippet/title, snippet/channelId, snippet/channelTitle," +
 				"snippet/thumbnails/high, contentDetails/duration, statistics)," +
 				"nextPageToken");
-		videosList.setKey(SkyTubeApp.getStr(R.string.API_KEY));
+		videosList.setKey(BuildConfig.YOUTUBE_API_KEY);
 		videosList.setChart("mostPopular");
 		videosList.setRegionCode(getPreferredRegion());
 		videosList.setMaxResults(MAX_RESULTS);
