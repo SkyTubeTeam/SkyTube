@@ -28,8 +28,6 @@ import java.io.IOException;
 import java.util.List;
 
 import free.rm.skytube.BuildConfig;
-import free.rm.skytube.R;
-import free.rm.skytube.gui.app.SkyTubeApp;
 
 /**
  * Check if there has been an activity (e.g. a new video has been published) on the given channel.

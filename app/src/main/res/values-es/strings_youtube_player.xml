@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="error_get_video_streams">Ocurrió un error al obtener la transmisión para el video %s</string>
+	<string name="error_stream_err_unavailable">Error message is unavailable.</string>
+	<string name="error_stream_decryption_fail">Could not load decryption code for the Youtube service.</string>
+	<string name="error_stream_parse_error">Parsing error.</string>
+
+	<string name="error_video_play">Play Video Error</string>
 	<string name="error_video_streams_empty">¡El video %s no tiene transmisiones!</string>
 	<string name="error_get_video_desc">Ocurrió un error al obtener la descripción del video.</string>
 	<string name="error_invalid_url">URL de video inválida:  %s</string>

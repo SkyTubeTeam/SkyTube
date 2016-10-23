@@ -29,7 +29,20 @@ import free.rm.skytube.gui.app.SkyTubeApp;
  */
 public class StreamMetaDataList extends ArrayList<StreamMetaData> {
 
+	private String errorMessage = null;
+
 	private static final String TAG = StreamMetaDataList.class.getSimpleName();
+
+
+	public StreamMetaDataList() {
+	}
+
+
+	public StreamMetaDataList(String errorMessage) {
+		this.errorMessage = errorMessage;
+	}
+
+
 
 	/**
 	 * Returns the stream desired by the user (if possible).  The desired stream is defined in the
@@ -95,4 +108,10 @@ public class StreamMetaDataList extends ArrayList<StreamMetaData> {
 
 		return out.toString();
 	}
+
+
+	public String getErrorMessage() {
+		return errorMessage;
+	}
+
 }

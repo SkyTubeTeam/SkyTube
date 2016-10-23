@@ -126,15 +126,17 @@ public class YouTubeVideo implements Serializable {
 	 *
 	 * @return A list of {@link StreamMetaDataList}.
 	 */
-	public StreamMetaDataList  getVideoStreamList() {
-		ParseStreamMetaData ex = new ParseStreamMetaData(id);
+	public StreamMetaDataList getVideoStreamList() {
 		StreamMetaDataList streamMetaDataList;
 
 		try {
-			streamMetaDataList = ex.getStreamMetaDataList();
+			ParseStreamMetaData ex = new ParseStreamMetaData();
+			String errorMsg = ex.init(id);
+
+			streamMetaDataList = (errorMsg == null) ? ex.getStreamMetaDataList() : new StreamMetaDataList(errorMsg);
 		} catch (Exception e) {
 			Log.e(TAG, "An error has occurred while getting video metadata/streams for video with id=" + id, e);
-			streamMetaDataList = null;
+			streamMetaDataList = new StreamMetaDataList(SkyTubeApp.getStr(R.string.error_stream_parse_error));
 		}
 
 		return streamMetaDataList;

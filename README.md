@@ -21,7 +21,6 @@ More features will be added in the near future.
 
 [![Dowload-APK](screenshots/download_apk.png)](https://github.com/ram-on/SkyTube/releases/download/v2.0/SkyTube-v2.0.apk)
 [![F-Droid](https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Get_it_on_F-Droid.svg/200px-Get_it_on_F-Droid.svg.png)](https://f-droid.org/repository/browse/?fdid=free.rm.skytube.oss)
-[![Aptoide](http://i.imgur.com/jHy6Tsp.png)](http://rmstore.store.aptoide.com/app/market/free.rm.skytube.oss/2/20603898/SkyTube)
 
 ```
 APK File:  SkyTube-v2.0.apk

@@ -63,9 +63,11 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 		return subsAdapter;
 	}
 
+
 	public void setListener(MainActivityListener listener) {
 		this.listener = listener;
 	}
+
 
 	/**
 	 * Append channel to this adapter.
@@ -178,7 +180,7 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 			rowView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					if(listener instanceof MainActivityListener)
+					if (listener instanceof MainActivityListener)
 						listener.onChannelClick(channel);
 				}
 			});

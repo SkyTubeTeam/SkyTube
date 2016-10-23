@@ -50,11 +50,9 @@ import free.rm.skytube.gui.businessobjects.VideoGridAdapter;
  */
 public class ChannelBrowserFragment extends FragmentEx {
 
-	public static final String CHANNEL_OBJ = "ChannelBrowserFragment.ChannelObj";
-	public static final String CHANNEL_ID = "ChannelBrowserFragment.ChannelID";
-	private YouTubeChannel	channel = null;
-	private RecyclerView	gridView;
-	private VideoGridAdapter videoGridAdapter;
+	private YouTubeChannel		channel = null;
+	private RecyclerView		gridView;
+	private VideoGridAdapter	videoGridAdapter;
 
 	private ImageView 			channelThumbnailImage = null;
 	private ImageView			channelBannerImage = null;
@@ -62,17 +60,20 @@ public class ChannelBrowserFragment extends FragmentEx {
 	private SubscribeButton		channelSubscribeButton = null;
 	private GetChannelInfoTask	task = null;
 
+	public static final String CHANNEL_OBJ = "ChannelBrowserFragment.ChannelObj";
+	public static final String CHANNEL_ID  = "ChannelBrowserFragment.ChannelID";
+
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		final String channelId;
-		Bundle bundle = getActivity().getIntent().getExtras();
 
 		// we need to create a YouTubeChannel object:  this can be done by either:
-		//   (1) the object is passed to this Fragment
+		//   (1) the YouTubeChannel object is passed to this Fragment
 		//   (2) passing the channel ID... a task is then created to create a YouTubeChannel
 		//       instance using the given channel ID
-		if (bundle != null && bundle.getSerializable(CHANNEL_OBJ) != null) {
-			this.channel = (YouTubeChannel) bundle.getSerializable(CHANNEL_OBJ);
+		if (getArguments().getSerializable(CHANNEL_OBJ) != null) {
+			this.channel = (YouTubeChannel) getArguments().getSerializable(CHANNEL_OBJ);
 			channelId = channel.getId();
 		} else {
 			channelId = getArguments().getString(CHANNEL_ID);

@@ -29,6 +29,8 @@ package free.rm.skytube.businessobjects.VideoStream;
 import android.util.Log;
 
 import org.json.JSONObject;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.jsoup.parser.Parser;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
@@ -40,16 +42,18 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import free.rm.skytube.R;
+import free.rm.skytube.gui.app.SkyTubeApp;
+
 
 /**
  * Parses stream/video meta-data and returns
  */
 public class ParseStreamMetaData {
 
-	public String pageUrl;
-	private String pageContents;
-	private JSONObject jsonObj;
-	private JSONObject playerArgs;
+	public	String pageUrl;
+	private	JSONObject jsonObj;
+	private	JSONObject playerArgs;
 
 	private static final String TAG = ParseStreamMetaData.class.getSimpleName();
 	private static final String DECRYPTION_FUNC_NAME="decrypt";
@@ -59,22 +63,31 @@ public class ParseStreamMetaData {
 
 
 	/**
-	 * Initialise the object.
+	 * Initialise the {@link ParseStreamMetaData} object.
 	 *
 	 * @param videoId	The ID of the video we are going to get its streams.
+	 *
+	 * @return Error message.
 	 */
-	public ParseStreamMetaData(String videoId) {
+	public String init(String videoId) throws Exception {
+		String pageContents = null;
+
 		setPageUrl(videoId);
 
-		//attempt to load the youtube js player JSON arguments
+		// attempt to load the youtube js player JSON arguments
 		try {
 			pageContents = HttpDownloader.download(pageUrl);
 			String jsonString = matchGroup1("ytplayer.config\\s*=\\s*(\\{.*?\\});", pageContents);
 			jsonObj = new JSONObject(jsonString);
 			playerArgs = jsonObj.getJSONObject("args");
 		} catch (Exception e) {
+			String errReason = getJplayerJsonErrorMessage(pageContents);
+
 			// if this fails, the video is most likely not available
-			Log.d(TAG, "Could not load JSON data for Youtube video \""+pageUrl+"\". This most likely means the video is unavailable");
+			Log.e(TAG, "Could not load JSON data for Youtube video \""+pageUrl+"\". This most likely means the video is unavailable", e);
+			Log.e(TAG, "ERROR REASON: " + errReason);
+
+			return errReason;
 		}
 
 		// load and parse description code, if it isn't already initialised
@@ -91,11 +104,33 @@ public class ParseStreamMetaData {
 				}
 				decryptionCode = loadDecryptionCode(playerUrl);
 			} catch (Exception e){
-				Log.d(TAG, "Could not load decryption code for the Youtube service.");
-				e.printStackTrace();
+				Log.e(TAG, "Could not load decryption code for the Youtube service.", e);
+				return SkyTubeApp.getStr(R.string.error_stream_decryption_fail);
 			}
 		}
+
+		// no error - initialisation completed successfully
+		return null;
 	}
+
+
+
+	private String getJplayerJsonErrorMessage(String pageContent) {
+		StringBuilder errorMessage = new StringBuilder();
+
+		try {
+			Document document = Jsoup.parse(pageContent, pageUrl);
+			errorMessage.append(document.select("h1[id=\"unavailable-message\"]").first().text());
+			errorMessage.append(": ");
+			errorMessage.append(document.select("[id=\"unavailable-submessage\"]").first().text());
+		} catch (Throwable tr) {
+			Log.e(TAG, "Error has occurred while retrieving video availability status", tr);
+			errorMessage = new StringBuilder(SkyTubeApp.getStr(R.string.error_stream_err_unavailable));
+		}
+
+		return errorMessage.toString();
+	}
+
 
 
 	/**
