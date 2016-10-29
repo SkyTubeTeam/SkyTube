@@ -34,8 +34,6 @@ import free.rm.skytube.BuildConfig;
 public class GetYouTubeVideoBySearch extends GetYouTubeVideos {
 
 	protected YouTube.Search.List videosList = null;
-	private String nextPageToken = null;
-	private boolean noMoreVideoPages = false;
 
 	private static final String	TAG = GetYouTubeVideoBySearch.class.getSimpleName();
 	protected static final Long	MAX_RESULTS = 45L;

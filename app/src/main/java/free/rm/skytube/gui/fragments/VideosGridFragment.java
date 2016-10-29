@@ -28,18 +28,16 @@ import android.widget.GridView;
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.MainActivityListener;
 import free.rm.skytube.businessobjects.VideoCategory;
-import free.rm.skytube.gui.businessobjects.FragmentEx;
 import free.rm.skytube.gui.businessobjects.VideoGridAdapter;
 
 /**
  * A fragment that will hold a {@link GridView} full of YouTube videos.
  */
 @SuppressWarnings("deprecation")
-public class VideosGridFragment extends FragmentEx {
+public class VideosGridFragment extends BaseVideosGridFragment {
 	public static final String VIDEO_CATEGORY = "VideosGridFragment.VideoCategory";
 
 	protected RecyclerView			gridView;
-	protected VideoGridAdapter		videoGridAdapter;
 	private View					progressBar = null;
 
 	@Override

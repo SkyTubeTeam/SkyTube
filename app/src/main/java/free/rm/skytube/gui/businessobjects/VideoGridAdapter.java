@@ -139,7 +139,14 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<YouTubeVideo, GridVi
 		return new GridViewHolder(v, listener);
 	}
 
-
+	/**
+	 * Refresh the video grid, by running the task to get the videos again.
+	 *
+	 * @param onFinished Runnable to run when the task completes.
+	 */
+	public void refresh(Runnable onFinished) {
+		new GetYouTubeVideosTask(getYouTubeVideos, this, onFinished).executeInParallel();
+	}
 
 	@Override
 	public void onBindViewHolder(GridViewHolder viewHolder, int position) {

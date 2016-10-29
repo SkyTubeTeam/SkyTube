@@ -41,6 +41,12 @@ public class GetYouTubeVideosTask extends AsyncTaskParallel<Void, Void, List<You
 	/** Optional non-static progressBar. If this isn't set, a static one will be used */
 	private View progressBar = null;
 
+	/** Whether or not to skip showing the progress bar. This is needed when doing swipe to refresh, since that functionality shows its own progress bar. */
+	private boolean skipProgressBar = false;
+
+	/** Runnable to be run when this task completes */
+	private Runnable onFinished;
+
 
 	public GetYouTubeVideosTask(GetYouTubeVideos getYouTubeVideos, VideoGridAdapter videoGridAdapter, View progressBar) {
 		this.getYouTubeVideos = getYouTubeVideos;
@@ -48,13 +54,32 @@ public class GetYouTubeVideosTask extends AsyncTaskParallel<Void, Void, List<You
 		this.progressBar = progressBar;
 	}
 
+	/**
+	 * Constructor to get youtube videos as part of a swipe to refresh. Since this functionality has its own progress bar, we'll
+	 * skip showing our own.
+	 *
+	 * @param getYouTubeVideos The object that does the actual fetching of videos.
+	 * @param videoGridAdapter The grid adapter the videos will be added to.
+	 * @param onFinished
+	 */
+	public GetYouTubeVideosTask(GetYouTubeVideos getYouTubeVideos, VideoGridAdapter videoGridAdapter, Runnable onFinished) {
+		this.getYouTubeVideos = getYouTubeVideos;
+		this.videoGridAdapter = videoGridAdapter;
+		skipProgressBar = true;
+		this.onFinished = onFinished;
+		this.getYouTubeVideos.reset();
+		this.videoGridAdapter.clearList();
+	}
+
 
 	@Override
 	protected void onPreExecute() {
-		if(progressBar != null)
-			progressBar.setVisibility(View.VISIBLE);
-		else
-			LoadingProgressBar.get().show();
+		if(!skipProgressBar) {
+			if (progressBar != null)
+				progressBar.setVisibility(View.VISIBLE);
+			else
+				LoadingProgressBar.get().show();
+		}
 	}
 
 	@Override
@@ -76,6 +101,8 @@ public class GetYouTubeVideosTask extends AsyncTaskParallel<Void, Void, List<You
 			progressBar.setVisibility(View.GONE);
 		else
 			LoadingProgressBar.get().hide();
+		if(onFinished != null)
+			onFinished.run();
 	}
 
 
