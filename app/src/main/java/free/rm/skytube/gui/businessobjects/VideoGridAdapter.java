@@ -31,7 +31,9 @@ import free.rm.skytube.businessobjects.GetYouTubeVideos;
 import free.rm.skytube.businessobjects.GetYouTubeVideosTask;
 import free.rm.skytube.businessobjects.MainActivityListener;
 import free.rm.skytube.businessobjects.VideoCategory;
+import free.rm.skytube.businessobjects.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTubeVideo;
+import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 
 /**
  * An adapter that will display videos in a {@link android.widget.GridView}.
@@ -49,7 +51,10 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<YouTubeVideo, GridVi
 	private static final String TAG = VideoGridAdapter.class.getSimpleName();
 
 	// This allows the grid items to pass messages back to MainActivity
-	private MainActivityListener listener;
+	protected MainActivityListener listener;
+
+	// If this is set, new videos being displayed will be saved to the database, if subscribed
+	private YouTubeChannel youTubeChannel;
 
 	private View					progressBar = null;
 
@@ -157,11 +162,21 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<YouTubeVideo, GridVi
 		// if it reached the bottom of the list, then try to get the next page of videos
 		if (position >= getItemCount() - 1) {
 			Log.w(TAG, "BOTTOM REACHED!!!");
-			new GetYouTubeVideosTask(getYouTubeVideos, this, progressBar).executeInParallel();
+			if(getYouTubeVideos != null)
+				new GetYouTubeVideosTask(getYouTubeVideos, this, progressBar).executeInParallel();
 		}
+
 	}
 
 	public void setProgressBar(View progressBar) {
 		this.progressBar = progressBar;
+	}
+
+	public void setYouTubeChannel(YouTubeChannel youTubeChannel) {
+		this.youTubeChannel = youTubeChannel;
+	}
+
+	public YouTubeChannel getYouTubeChannel() {
+		return youTubeChannel;
 	}
 }

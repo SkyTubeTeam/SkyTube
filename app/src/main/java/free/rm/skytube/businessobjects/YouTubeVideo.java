@@ -28,8 +28,10 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.MathContext;
 import java.math.RoundingMode;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Set;
 
 import free.rm.skytube.R;
@@ -64,6 +66,8 @@ public class YouTubeVideo implements Serializable {
 	private String	viewsCount;
 	/** The date/time of when this video was published (e.g. "7 hours ago"). */
 	private String	publishDate;
+	/** The date/time of when this video was published, in ISO 8601 format */
+	private DateTime publishDateAsDate;
 	/** Thumbnail URL string. */
 	private String	thumbnailUrl;
 	/** The language of this video.  (This tends to be ISO 639-1).  */
@@ -84,6 +88,7 @@ public class YouTubeVideo implements Serializable {
 			this.channelId   = video.getSnippet().getChannelId();
 			this.channelName = video.getSnippet().getChannelTitle();
 			setPublishDate(video.getSnippet().getPublishedAt());
+			publishDateAsDate = video.getSnippet().getPublishedAt();
 
 			if (video.getSnippet().getThumbnails() != null) {
 				Thumbnail thumbnail = video.getSnippet().getThumbnails().getHigh();
@@ -200,6 +205,9 @@ public class YouTubeVideo implements Serializable {
 								: "???";
 	}
 
+	public DateTime getPublishDateAsDate() {
+		return publishDateAsDate;
+	}
 
 	public String getId() {
 		return id;

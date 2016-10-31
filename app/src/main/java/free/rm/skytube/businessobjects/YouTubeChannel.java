@@ -29,6 +29,7 @@ import com.google.api.services.youtube.model.ThumbnailDetails;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import free.rm.skytube.BuildConfig;
@@ -52,6 +53,7 @@ public class YouTubeChannel implements Serializable {
 	private boolean isUserSubscribed;
 	private long	lastVisitTime;
 	private boolean	newVideosSinceLastVisit = false;
+	private List<YouTubeVideo> youTubeVideos = new ArrayList<>();
 
 	private static final String	TAG = YouTubeChannel.class.getSimpleName();
 
@@ -62,7 +64,7 @@ public class YouTubeChannel implements Serializable {
 	 * @param channelId	Channel ID
 	 */
 	public void init(String channelId) throws IOException {
-		init(channelId, false);
+		init(channelId, false, true);
 	}
 
 
@@ -75,7 +77,7 @@ public class YouTubeChannel implements Serializable {
 	 *                          subbed or not (hence we need to check).
 	 * @throws IOException
 	 */
-	public void init(String channelId, boolean isUserSubscribed) throws IOException {
+	public void init(String channelId, boolean isUserSubscribed, boolean shouldCheckActivity) throws IOException {
 		YouTube youtube = YouTubeAPI.create();
 		YouTube.Channels.List channelInfo = youtube.channels().list("snippet, statistics, brandingSettings");
 		channelInfo.setFields("items(id, snippet/title, snippet/description, snippet/thumbnails/default," +
@@ -93,7 +95,7 @@ public class YouTubeChannel implements Serializable {
 
 			// if the user has subbed to this channel, then check if videos have been publish since
 			// the last visit to this channel
-			if (isUserSubscribed) {
+			if (isUserSubscribed && shouldCheckActivity) {
 				// TODO : Optimise!
 				Log.d(TAG, "Moo: " + title);
 				CheckChannelActivity checkActivity = new CheckChannelActivity();
@@ -245,4 +247,13 @@ public class YouTubeChannel implements Serializable {
 		this.newVideosSinceLastVisit = newVideos;
 	}
 
+	public void addYouTubeVideo(YouTubeVideo video) {
+		if(!youTubeVideos.contains(video)) {
+			youTubeVideos.add(video);
+		}
+	}
+
+	public List<YouTubeVideo> getYouTubeVideos() {
+		return youTubeVideos;
+	}
 }

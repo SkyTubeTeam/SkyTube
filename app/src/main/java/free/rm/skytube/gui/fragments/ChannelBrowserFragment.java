@@ -27,20 +27,24 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
+import java.util.Iterator;
 
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.MainActivityListener;
 import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.businessobjects.YouTubeChannel;
+import free.rm.skytube.businessobjects.YouTubeVideo;
 import free.rm.skytube.businessobjects.db.SubscribeToChannelTask;
 import free.rm.skytube.gui.businessobjects.FragmentEx;
 import free.rm.skytube.gui.businessobjects.LoadingProgressBar;
+import free.rm.skytube.gui.businessobjects.Logger;
 import free.rm.skytube.gui.businessobjects.SubsAdapter;
 import free.rm.skytube.gui.businessobjects.SubscribeButton;
 import free.rm.skytube.gui.businessobjects.VideoGridAdapter;
@@ -94,6 +98,13 @@ public class ChannelBrowserFragment extends FragmentEx {
 		channelSubscribeButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				// If we're subscribing to the channel, save the list of videos we have into the channel (to be stored in the database)
+				if(!channel.isUserSubscribed()) {
+					Iterator<YouTubeVideo> iterator = videoGridAdapter.getIterator();
+					while (iterator.hasNext()) {
+						channel.addYouTubeVideo(iterator.next());
+					}
+				}
 				// subscribe / unsubscribe to this video's channel
 				new SubscribeToChannelTask(channelSubscribeButton, channel).execute();
 			}
@@ -118,6 +129,8 @@ public class ChannelBrowserFragment extends FragmentEx {
 			videoGridAdapter.setVideoCategory(VideoCategory.CHANNEL_VIDEOS, channelId);
 		}
 		videoGridAdapter.setListener((MainActivityListener)getActivity());
+		if(channel != null)
+			videoGridAdapter.setYouTubeChannel(channel);
 
 		this.gridView.setHasFixedSize(false);
 		this.gridView.setLayoutManager(new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.video_grid_num_columns)));
@@ -197,6 +210,7 @@ public class ChannelBrowserFragment extends FragmentEx {
 		@Override
 		protected void onPostExecute(YouTubeChannel youTubeChannel) {
 			ChannelBrowserFragment.this.channel = youTubeChannel;
+			ChannelBrowserFragment.this.videoGridAdapter.setYouTubeChannel(youTubeChannel);
 			initViews();
 		}
 

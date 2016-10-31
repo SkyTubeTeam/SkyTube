@@ -19,6 +19,7 @@ package free.rm.skytube.businessobjects.VideoStream;
 
 import android.util.Log;
 
+import com.google.api.client.util.DateTime;
 import com.google.api.services.youtube.YouTube;
 import com.google.api.services.youtube.model.Activity;
 import com.google.api.services.youtube.model.ActivityListResponse;
@@ -38,11 +39,11 @@ import free.rm.skytube.businessobjects.YouTubeVideo;
 public class GetChannelVideos extends GetYouTubeVideos {
 
 	protected YouTube.Activities.List activitiesList;
-	private String nextPageToken = null;
-	private boolean noMoreVideoPages = false;
 
 	private static final String	TAG = GetChannelVideos.class.getSimpleName();
 	protected static final Long	MAX_RESULTS = 45L;
+
+	private String channelId;
 
 	@Override
 	public void init() throws IOException {
@@ -51,6 +52,11 @@ public class GetChannelVideos extends GetYouTubeVideos {
 		activitiesList.setKey(BuildConfig.YOUTUBE_API_KEY);
 		activitiesList.setMaxResults(MAX_RESULTS);
 		nextPageToken = null;
+	}
+
+	public void setPublishedAfter(DateTime dateTime) {
+		if(activitiesList != null)
+			activitiesList.setPublishedAfter(dateTime);
 	}
 
 	@Override
@@ -63,7 +69,7 @@ public class GetChannelVideos extends GetYouTubeVideos {
 
 				ActivityListResponse response = activitiesList.execute();
 				List<Activity> activityList = response.getItems();
-				if(activityList != null) {
+				if(activityList != null && activityList.size() > 0) {
 					videosList = getVideosList(activityList);
 				}
 
@@ -110,8 +116,10 @@ public class GetChannelVideos extends GetYouTubeVideos {
 
 	@Override
 	public void setQuery(String query) {
-		if(activitiesList != null)
+		if(activitiesList != null) {
+			channelId = query;
 			activitiesList.setChannelId(query);
+		}
 	}
 
 	@Override
