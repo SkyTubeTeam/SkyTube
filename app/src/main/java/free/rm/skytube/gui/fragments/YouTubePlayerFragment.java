@@ -212,7 +212,7 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 		if (youTubeVideo.isThumbsUpPercentageSet()) {
 			videoDescLikesTextView.setText(youTubeVideo.getLikeCount());
 			videoDescDislikesTextView.setText(youTubeVideo.getDislikeCount());
-			videoDescPublishDateTextView.setText(youTubeVideo.getPublishDate());
+			videoDescPublishDateTextView.setText(youTubeVideo.getPublishDatePretty());
 
 			videoDescLikesBar.setProgress(youTubeVideo.getThumbsUpPercentage());
 			//videoDescLikesBar.getProgressDrawable().setColorFilter(getResources().getColor(R.color.video_desc_like_bar), PorterDuff.Mode.SRC_IN);

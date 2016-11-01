@@ -227,7 +227,7 @@ public class SubscriptionsDb extends SQLiteOpenHelper {
 				values.put(SubscriptionsVideosTable.COL_CHANNEL_ID, channel.getId());
 				values.put(SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID, video.getId());
 				values.put(SubscriptionsVideosTable.COL_YOUTUBE_VIDEO, gson.toJson(video).getBytes());
-				values.put(SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_DATE, fmt.parseDateTime(video.getPublishDateAsDate().toStringRfc3339()).toString());
+				values.put(SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_DATE, fmt.parseDateTime(video.getPublishDate().toStringRfc3339()).toString());
 
 				getWritableDatabase().insert(SubscriptionsVideosTable.TABLE_NAME, null, values);
 			}

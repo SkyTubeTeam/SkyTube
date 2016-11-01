@@ -64,10 +64,8 @@ public class YouTubeVideo implements Serializable {
 	/** Total views count.  This can be <b>null</b> if the video does not allow the user to
 	 * like/dislike it. */
 	private String	viewsCount;
-	/** The date/time of when this video was published (e.g. "7 hours ago"). */
-	private String	publishDate;
-	/** The date/time of when this video was published, in ISO 8601 format */
-	private DateTime publishDateAsDate;
+	/** The date/time of when this video was published. */
+	private DateTime	publishDate;
 	/** Thumbnail URL string. */
 	private String	thumbnailUrl;
 	/** The language of this video.  (This tends to be ISO 639-1).  */
@@ -87,8 +85,7 @@ public class YouTubeVideo implements Serializable {
 			this.title       = video.getSnippet().getTitle();
 			this.channelId   = video.getSnippet().getChannelId();
 			this.channelName = video.getSnippet().getChannelTitle();
-			setPublishDate(video.getSnippet().getPublishedAt());
-			publishDateAsDate = video.getSnippet().getPublishedAt();
+			publishDate = video.getSnippet().getPublishedAt();
 
 			if (video.getSnippet().getThumbnails() != null) {
 				Thumbnail thumbnail = video.getSnippet().getThumbnails().getHigh();
@@ -194,19 +191,12 @@ public class YouTubeVideo implements Serializable {
 
 
 	/**
-	 * Sets the {@link #publishDate} by converting the given video's publish date into a pretty
-	 * string.
-	 *
-	 * @param publishDateTime {@link DateTime} of when the video was published.
+	 * Gets the {@link #publishDate} as a pretty string.
 	 */
-	private void setPublishDate(DateTime publishDateTime) {
-		this.publishDate = (publishDateTime != null)
-								? new PrettyTimeEx().format(publishDateTime)
+	public String getPublishDatePretty() {
+		return (publishDate != null)
+								? new PrettyTimeEx().format(publishDate)
 								: "???";
-	}
-
-	public DateTime getPublishDateAsDate() {
-		return publishDateAsDate;
 	}
 
 	public String getId() {
@@ -272,7 +262,7 @@ public class YouTubeVideo implements Serializable {
 		return viewsCount;
 	}
 
-	public String getPublishDate() {
+	public DateTime getPublishDate() {
 		return publishDate;
 	}
 
