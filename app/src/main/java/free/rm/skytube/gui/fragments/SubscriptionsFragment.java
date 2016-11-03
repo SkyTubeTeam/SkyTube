@@ -20,6 +20,7 @@ package free.rm.skytube.gui.fragments;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,15 +31,18 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.GetSubscriptionVideosTask;
+import free.rm.skytube.businessobjects.YouTubeChannel;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
+import free.rm.skytube.gui.businessobjects.SubsAdapter;
 import free.rm.skytube.gui.businessobjects.SubscriptionsFragmentListener;
 
 public class SubscriptionsFragment extends VideosGridFragment implements SubscriptionsFragmentListener {
 	private int numVideosFetched = 0;
 	private int numChannelsFetched = 0;
 	private int numChannelsSubscribed = 0;
+	private boolean refreshInProgress = false;
 	private MaterialDialog progressDialog;
-	private boolean checkedForVideos = false;
+	private boolean shouldRefresh = false;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -47,14 +51,26 @@ public class SubscriptionsFragment extends VideosGridFragment implements Subscri
 		videoGridAdapter.clearList();
 		populateList();
 
+		// Launch a refresh of subscribed videos when this Fragment is created, but don't show the progress dialog. It will be shown when the tab is shown.
+		if(shouldRefresh)
+			doRefresh(false);
+		shouldRefresh = false;
+
 		return view;
 	}
 
+	@Override
+	public void onCreate(@Nullable Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		shouldRefresh = true;
+	}
+
 	private void populateList() {
-		// {@link SubscriptionsDb.getSubscriptionsDb().getSubscriptionVideos()} should not be called in the UI thread here.
+		// {@link SubscriptionsDb.getSubscriptionsDb().getSubscriptionVideos()} should not be called in the UI thread here, so as to slow down the UI.
 		new AsyncTaskParallel<Void, Void, Void>() {
 			@Override
 			protected Void doInBackground(Void... voids) {
+				// Modifying any views needs to be done in the UI thread.
 				new Handler(Looper.getMainLooper()).post(new Runnable() {
 					@Override
 					public void run() {
@@ -66,12 +82,18 @@ public class SubscriptionsFragment extends VideosGridFragment implements Subscri
 		}.executeInParallel();
 	}
 
-	@Override
-	public void onRefresh() {
+	private void doRefresh(boolean showDialog) {
 		numVideosFetched = 0;
 		numChannelsFetched = 0;
 		numChannelsSubscribed = SubscriptionsDb.getSubscriptionsDb().numSubscribedChannels();
 		new GetSubscriptionVideosTask(this).executeInParallel();
+		refreshInProgress = true;
+		if(showDialog) {
+			showRefreshDialog();
+		}
+	}
+
+	private void showRefreshDialog() {
 		progressDialog = new MaterialDialog.Builder(getActivity())
 						.title(R.string.fetching_subscription_videos)
 						.content(String.format(getContext().getString(R.string.fetched_videos_from_channels), numVideosFetched, numChannelsFetched, numChannelsSubscribed))
@@ -80,53 +102,55 @@ public class SubscriptionsFragment extends VideosGridFragment implements Subscri
 						.titleColorRes(android.R.color.white)
 						.contentColorRes(android.R.color.white)
 						.build();
-
 		progressDialog.show();
 	}
 
 	@Override
-	public void onChannelVideosFetched(int videosFetched) {
+	public void onRefresh() {
+		doRefresh(true);
+	}
+
+	@Override
+	public void onChannelVideosFetched(YouTubeChannel channel, int videosFetched) {
+		// If any new videos have been fetched for a channel, update the Subscription list in the left navbar for that channe
+		if(videosFetched > 0)
+			SubsAdapter.get(getActivity()).changeChannelNewVideosStatus(channel.getId(), true);
+
 		numVideosFetched += videosFetched;
 		numChannelsFetched++;
-		progressDialog.setContent(String.format(getContext().getString(R.string.fetched_videos_from_channels), numVideosFetched, numChannelsFetched, numChannelsSubscribed));
+		if(progressDialog != null)
+			progressDialog.setContent(String.format(getContext().getString(R.string.fetched_videos_from_channels), numVideosFetched, numChannelsFetched, numChannelsSubscribed));
 		if(numChannelsFetched == numChannelsSubscribed) {
 			new Handler().postDelayed(new Runnable() {
 				@Override
 				public void run() {
+					refreshInProgress = false;
 					// Remove the progress bar(s)
 					swipeRefreshLayout.setRefreshing(false);
-					progressDialog.dismiss();
+					boolean fragmentIsVisible = progressDialog != null;
+					if(progressDialog != null)
+						progressDialog.dismiss();
 					if(numVideosFetched > 0) {
 						videoGridAdapter.clearList();
 						videoGridAdapter.appendList(SubscriptionsDb.getSubscriptionsDb().getSubscriptionVideos());
 					} else {
-						Toast.makeText(getContext(),
-										String.format(getContext().getString(R.string.no_new_videos_found)),
-										Toast.LENGTH_LONG).show();
+						// Only show the toast that no videos were found if the progress diaog is sh
+						if(fragmentIsVisible) {
+							Toast.makeText(getContext(),
+											String.format(getContext().getString(R.string.no_new_videos_found)),
+											Toast.LENGTH_LONG).show();
+						}
 					}
 				}
 			}, 500);
 		}
 	}
 
+	/**
+	 * When the Subscriptions tab is selected, if a refresh is in progress, show the dialog.
+	 */
 	public void onSelected() {
-		if(!checkedForVideos) {
-			new AsyncTaskParallel<Void, Void, Void>() {
-				@Override
-				protected Void doInBackground(Void... voids) {
-					if(SubscriptionsDb.getSubscriptionsDb().getNumSubscriptionVideos() == 0 && SubscriptionsDb.getSubscriptionsDb().numSubscribedChannels() > 0) {
-						// User is subscribed to at least one channel, but there are no subscription videos saved in the database. Fetch them now. Need to do this on the UI thread.
-						new Handler(Looper.getMainLooper()).post(new Runnable() {
-							@Override
-							public void run() {
-								onRefresh();
-							}
-						});
-					}
-					checkedForVideos = true;
-					return null;
-				}
-			}.executeInParallel();
-		}
+		if(refreshInProgress)
+			showRefreshDialog();
 	}
 }

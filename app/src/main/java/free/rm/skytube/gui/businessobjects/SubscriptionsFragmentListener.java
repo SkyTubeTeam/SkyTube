@@ -17,6 +17,8 @@
 
 package free.rm.skytube.gui.businessobjects;
 
+import free.rm.skytube.businessobjects.YouTubeChannel;
+
 public interface SubscriptionsFragmentListener {
-	void onChannelVideosFetched(int videosFetched);
+	void onChannelVideosFetched(YouTubeChannel channel, int videosFetched);
 }

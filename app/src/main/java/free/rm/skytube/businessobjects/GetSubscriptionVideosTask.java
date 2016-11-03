@@ -133,7 +133,7 @@ public class GetSubscriptionVideosTask extends AsyncTaskParallel<Void, Void, Voi
 				editor.commit();
 			}
 			if(listener != null)
-				listener.onChannelVideosFetched(youTubeVideos != null ? youTubeVideos.size() : 0);
+				listener.onChannelVideosFetched(channel, youTubeVideos != null ? youTubeVideos.size() : 0);
 		}
 
 	}

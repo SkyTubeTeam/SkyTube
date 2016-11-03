@@ -33,7 +33,6 @@ import free.rm.skytube.businessobjects.MainActivityListener;
 import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.businessobjects.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTubeVideo;
-import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 
 /**
  * An adapter that will display videos in a {@link android.widget.GridView}.

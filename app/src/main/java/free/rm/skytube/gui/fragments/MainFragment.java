@@ -21,7 +21,6 @@ import android.view.ViewGroup;
 
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.MainActivityListener;
-import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 import free.rm.skytube.gui.businessobjects.FragmentEx;
 import free.rm.skytube.gui.businessobjects.SubsAdapter;
 
@@ -107,8 +106,11 @@ public class MainFragment extends FragmentEx {
 			@Override
 			public void onPageSelected(int position) {
 				if(position == 2) {
-					// Subscriptions tab has been selected
-					subscriptionsFragment.onSelected();
+					// Subscriptions tab has been selected. We need to check if it's null, though, because in some cases when the Activity is re-created, the subscriptionsFragment
+					// may not be instantiated yet. But that's ok, since all that happens here is that the progress dialog shows up if we're in the middle of a subscriptions refresh.
+					// This won't be the case if the Activity is being re-created.
+					if(subscriptionsFragment != null)
+						subscriptionsFragment.onSelected();
 				}
 			}
 
