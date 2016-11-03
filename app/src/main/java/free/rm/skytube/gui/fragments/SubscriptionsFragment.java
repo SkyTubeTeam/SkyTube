@@ -28,6 +28,7 @@ import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 
+import butterknife.Bind;
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.GetSubscriptionVideosTask;
@@ -44,25 +45,39 @@ public class SubscriptionsFragment extends VideosGridFragment implements Subscri
 	private MaterialDialog progressDialog;
 	private boolean shouldRefresh = false;
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = super.onCreateView(inflater, container, savedInstanceState);
-
-		videoGridAdapter.clearList();
-		populateList();
-
-		// Launch a refresh of subscribed videos when this Fragment is created, but don't show the progress dialog. It will be shown when the tab is shown.
-		if(shouldRefresh)
-			doRefresh(false);
-		shouldRefresh = false;
-
-		return view;
-	}
+	@Bind(R.id.noSubscriptionsText)
+	View noSubscriptionsText;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		shouldRefresh = true;
+		setLayoutResource(R.layout.videos_gridview_subscriptions);
+	}
+
+	@Override
+	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+		videoGridAdapter.clearList();
+
+		numChannelsSubscribed = SubscriptionsDb.getSubscriptionsDb().numSubscribedChannels();
+		if(numChannelsSubscribed == 0) {
+			swipeRefreshLayout.setVisibility(View.GONE);
+			noSubscriptionsText.setVisibility(View.VISIBLE);
+		} else {
+			if(swipeRefreshLayout.getVisibility() != View.VISIBLE) {
+				swipeRefreshLayout.setVisibility(View.VISIBLE);
+				noSubscriptionsText.setVisibility(View.GONE);
+			}
+
+
+			populateList();
+
+			// Launch a refresh of subscribed videos when this Fragment is created, but don't show the progress dialog. It will be shown when the tab is shown.
+			if (shouldRefresh)
+				doRefresh(false);
+			shouldRefresh = false;
+		}
 	}
 
 	private void populateList() {
@@ -86,10 +101,12 @@ public class SubscriptionsFragment extends VideosGridFragment implements Subscri
 		numVideosFetched = 0;
 		numChannelsFetched = 0;
 		numChannelsSubscribed = SubscriptionsDb.getSubscriptionsDb().numSubscribedChannels();
-		new GetSubscriptionVideosTask(this).executeInParallel();
-		refreshInProgress = true;
-		if(showDialog) {
-			showRefreshDialog();
+		if(numChannelsSubscribed > 0) {
+			new GetSubscriptionVideosTask(this).executeInParallel();
+			refreshInProgress = true;
+			if (showDialog) {
+				showRefreshDialog();
+			}
 		}
 	}
 

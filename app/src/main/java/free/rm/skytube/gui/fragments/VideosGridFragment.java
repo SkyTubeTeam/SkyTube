@@ -40,10 +40,17 @@ public class VideosGridFragment extends BaseVideosGridFragment {
 	protected RecyclerView			gridView;
 	private View					progressBar = null;
 
+	private int layoutResource = 0;
+
+	// In case a subclass of VideosGridFragment wants to use an alternate layout resource (e.g. Subscriptions)
+	protected void setLayoutResource(int layoutResource) {
+		this.layoutResource = layoutResource;
+	}
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		// inflate the layout for this fragment
-		View view = inflater.inflate(R.layout.videos_gridview, container, false);
+		View view = inflater.inflate(layoutResource != 0 && getResources().getIdentifier(String.valueOf(layoutResource), "layout", getActivity().getPackageName()) != 0 ? layoutResource : R.layout.videos_gridview, container, false);
 
 		// set up the loading progress bar
 		progressBar = view.findViewById(R.id.loading_progress_bar);
