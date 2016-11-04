@@ -1,7 +1,10 @@
 package free.rm.skytube.gui.fragments;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.Preference;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -22,6 +25,7 @@ import android.view.ViewGroup;
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.MainActivityListener;
 import free.rm.skytube.gui.businessobjects.FragmentEx;
+import free.rm.skytube.gui.businessobjects.Logger;
 import free.rm.skytube.gui.businessobjects.SubsAdapter;
 
 
@@ -76,6 +80,9 @@ public class MainFragment extends FragmentEx {
 		viewPager.setOffscreenPageLimit(3);
 		videosPagerAdapter = new VideosPagerAdapter(getActivity(), getChildFragmentManager());
 		viewPager.setAdapter(videosPagerAdapter);
+
+		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
+		viewPager.setCurrentItem(Integer.parseInt(sp.getString(getString(R.string.pref_key_default_tab), "0")));
 
 		TabLayout tabLayout = (TabLayout)view.findViewById(R.id.tab_layout);
 		tabLayout.setupWithViewPager(viewPager);
