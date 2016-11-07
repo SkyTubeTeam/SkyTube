@@ -38,6 +38,7 @@ import java.util.List;
 import free.rm.skytube.businessobjects.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTubeVideo;
 import free.rm.skytube.gui.app.SkyTubeApp;
+import free.rm.skytube.gui.businessobjects.Logger;
 
 /**
  * A database (DB) that stores user subscriptions (with respect to YouTube channels).
@@ -244,6 +245,11 @@ public class SubscriptionsDb extends SQLiteOpenHelper {
 				getWritableDatabase().insert(SubscriptionsVideosTable.TABLE_NAME, null, values);
 			}
 		}
+	}
+
+	public boolean trimSubscriptionVideos() {
+		int result = getWritableDatabase().delete(SubscriptionsVideosTable.TABLE_NAME, String.format("%s < DATETIME('now', '-1 month')", SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_DATE), null);
+		return result > 0;
 	}
 
 	public int getNumSubscriptionVideos() {

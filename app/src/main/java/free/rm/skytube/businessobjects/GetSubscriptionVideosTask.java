@@ -24,6 +24,7 @@ import com.google.api.client.util.DateTime;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -88,6 +89,8 @@ public class GetSubscriptionVideosTask extends AsyncTaskParallel<Void, Void, Voi
 					DateTime subscriptionsLastUpdated = new DateTime(l);
 					if (subscriptionsLastUpdated != null)
 						getChannelVideos.setPublishedAfter(subscriptionsLastUpdated);
+					else // For the first fetch, default to only videos published in the last month.
+						getChannelVideos.setPublishedAfter(getOneMonthAgo());
 				}
 
 				getChannelVideos.setQuery(channel.getId());
@@ -120,6 +123,7 @@ public class GetSubscriptionVideosTask extends AsyncTaskParallel<Void, Void, Voi
 		@Override
 		protected void onPostExecute(List<YouTubeVideo> youTubeVideos) {
 			numTasksFinished++;
+			boolean videosDeleted = false;
 			if(numTasksFinished < numTasksLeft) {
 				if(tasks.size() > 0) {
 					// More channels to fetch videos from
@@ -127,15 +131,22 @@ public class GetSubscriptionVideosTask extends AsyncTaskParallel<Void, Void, Voi
 					tasks.remove(0);
 				}
 			} else {
+				videosDeleted = SubscriptionsDb.getSubscriptionsDb().trimSubscriptionVideos();
 				// All channels have finished querying. Update the last time this refresh was done.
 				SharedPreferences.Editor editor = SkyTubeApp.getPreferenceManager().edit();
 				editor.putLong(SkyTubeApp.KEY_SUBSCRIPTIONS_LAST_UPDATED, new DateTime(new Date()).getValue());
 				editor.commit();
 			}
 			if(listener != null)
-				listener.onChannelVideosFetched(channel, youTubeVideos != null ? youTubeVideos.size() : 0);
+				listener.onChannelVideosFetched(channel, youTubeVideos != null ? youTubeVideos.size() : 0, videosDeleted);
 		}
 
 	}
 
+	private DateTime getOneMonthAgo() {
+		Calendar calendar = Calendar.getInstance();
+		calendar.add(Calendar.MONTH, -1);
+		Date date = calendar.getTime();
+		return new DateTime(date);
+	}
 }

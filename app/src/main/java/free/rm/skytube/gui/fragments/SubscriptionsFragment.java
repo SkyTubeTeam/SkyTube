@@ -21,9 +21,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -128,8 +126,8 @@ public class SubscriptionsFragment extends VideosGridFragment implements Subscri
 	}
 
 	@Override
-	public void onChannelVideosFetched(YouTubeChannel channel, int videosFetched) {
-		// If any new videos have been fetched for a channel, update the Subscription list in the left navbar for that channe
+	public void onChannelVideosFetched(YouTubeChannel channel, int videosFetched, final boolean videosDeleted) {
+		// If any new videos have been fetched for a channel, update the Subscription list in the left navbar for that channel
 		if(videosFetched > 0)
 			SubsAdapter.get(getActivity()).changeChannelNewVideosStatus(channel.getId(), true);
 
@@ -147,7 +145,7 @@ public class SubscriptionsFragment extends VideosGridFragment implements Subscri
 					boolean fragmentIsVisible = progressDialog != null;
 					if(progressDialog != null)
 						progressDialog.dismiss();
-					if(numVideosFetched > 0) {
+					if(numVideosFetched > 0 || videosDeleted) {
 						videoGridAdapter.clearList();
 						videoGridAdapter.appendList(SubscriptionsDb.getSubscriptionsDb().getSubscriptionVideos());
 					} else {
