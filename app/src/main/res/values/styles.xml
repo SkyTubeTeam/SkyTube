@@ -7,6 +7,16 @@
 		<item name="colorAccent">@color/colorAccent</item>
 
 		<item name="actionBarPopupTheme">@style/ThemeOverlay.AppCompat</item>
+
+		<item name="android:popupMenuStyle">@style/PopupMenu</item>
+		<item name="popupMenuStyle">@style/PopupMenu</item>
+
+		<item name="textAppearanceLargePopupMenu">@style/VideoOptionsTextAppearanceLarge</item>
+		<item name="android:textAppearanceLargePopupMenu">@style/VideoOptionsTextAppearanceLarge</item>
+
+		<item name="textAppearanceSmallPopupMenu">@style/VideoOptionsTextAppearanceSmall</item>
+		<item name="android:textAppearanceSmallPopupMenu">@style/VideoOptionsTextAppearanceSmall</item>
+
 	</style>
 
 
@@ -46,6 +56,18 @@
 		<item name="android:textColor">@color/video_cell_text_details</item>
 		<item name="android:singleLine">true</item>
 		<item name="android:textAppearance">@style/TextAppearance.AppCompat.Small</item>
+	</style>
+
+	<style name="PopupMenu" parent="@android:style/Widget.PopupMenu">
+		<item name="android:popupBackground">@color/video_cell_background</item>
+	</style>
+
+	<style name="VideoOptionsTextAppearanceLarge" parent="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Large">
+		<item name="android:textColor">@color/video_cell_text_main</item>
+	</style>
+
+	<style name="VideoOptionsTextAppearanceSmall" parent="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Small">
+		<item name="android:textColor">@color/video_cell_text_main</item>
 	</style>
 
 
