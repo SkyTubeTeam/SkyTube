@@ -51,6 +51,8 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<YouTubeVideo, GridVi
 	// This allows the grid items to pass messages back to MainActivity
 	private MainActivityListener listener;
 
+	private View					progressBar = null;
+
 	/**
 	 * @see #VideoGridAdapter(Context, boolean)
 	 */
@@ -119,7 +121,7 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<YouTubeVideo, GridVi
 			this.currentVideoCategory = videoCategory;
 
 			// get the videos from the web asynchronously
-			new GetYouTubeVideosTask(getYouTubeVideos, this).executeInParallel();
+			new GetYouTubeVideosTask(getYouTubeVideos, this, progressBar).executeInParallel();
 		} catch (IOException e) {
 			Log.e(TAG, "Could not init " + videoCategory, e);
 			Toast.makeText(getContext(),
@@ -148,8 +150,11 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<YouTubeVideo, GridVi
 		// if it reached the bottom of the list, then try to get the next page of videos
 		if (position >= getItemCount() - 1) {
 			Log.w(TAG, "BOTTOM REACHED!!!");
-			new GetYouTubeVideosTask(getYouTubeVideos, this).executeInParallel();
+			new GetYouTubeVideosTask(getYouTubeVideos, this, progressBar).executeInParallel();
 		}
 	}
 
+	public void setProgressBar(View progressBar) {
+		this.progressBar = progressBar;
+	}
 }

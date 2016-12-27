@@ -8,14 +8,6 @@
 		official YouTube player.  Make sure that the official Google\'s YouTube app is installed on
 		your device.</string>
 
-	<!--
-		Holds different videos categories.
-
-		Order is important.  Refer to VideoCategory enum.
-	 -->
-	<string-array name="video_categories">
-		<item>Featured</item>
-		<item>Most Popular</item>
-	</string-array>
-
+	<string name="featured">Featured</string>
+	<string name="popular">Most Popular</string>
 </resources>
