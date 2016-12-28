@@ -1,0 +1,62 @@
+<android.support.v4.widget.DrawerLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/subs_drawer_layout"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+
+	<FrameLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="vertical">
+
+		<LinearLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:orientation="vertical">
+			<include
+				android:id="@+id/activity_main_toolbar"
+				layout="@layout/activity_main_toolbar"/>
+
+			<android.support.design.widget.TabLayout
+				android:id="@+id/tab_layout"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_below="@+id/toolbar"
+				android:background="?attr/colorPrimary"
+				android:elevation="6dp"
+				android:minHeight="?attr/actionBarSize"
+				android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+			<FrameLayout
+				android:layout_width="match_parent"
+				android:layout_height="match_parent">
+
+				<android.support.v4.view.ViewPager
+					xmlns:android="http://schemas.android.com/apk/res/android"
+					android:id="@+id/pager"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent" />
+
+				<ProgressBar
+					android:id="@+id/loading_progress_bar"
+					android:layout_centerInParent="true"
+					android:padding="3dp"
+					android:layout_gravity="center_horizontal"
+					android:layout_marginTop="@dimen/video_grid_progress_bar_top_margin"
+					android:visibility="gone"
+					style="@style/LoadingProgressBar"/>
+			</FrameLayout>
+
+		</LinearLayout>
+
+
+	</FrameLayout>
+
+
+	<include
+		android:layout_width="240dp"
+		android:layout_height="match_parent"
+		android:layout_gravity="start"
+		layout="@layout/subs_drawer"/>
+
+</android.support.v4.widget.DrawerLayout>
