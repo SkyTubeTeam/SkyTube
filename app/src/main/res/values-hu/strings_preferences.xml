@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="preferences">Beállítások</string>
+
+	<string name="pref_languages_category">Nyelvek és régiók</string>
+	<string name="pref_title_preferred_regions">Preferált régiók</string>
+	<string name="pref_key_preferred_region">pref_key_preferred_region</string>
+	<string name="pref_summary_preferred_regions">Válassz preferált régiót. Ez szűri a \"Kiemelt\" kategóriában mutatott videókat.</string>
+
+	<string name="pref_title_preferred_languages">Preferált nyelv(ek)</string>
+	<string name="pref_key_preferred_languages">pref_key_preferred_languages</string>
+	<string name="pref_summary_preferred_languages">KÍSÉRLETI ÜZEM: Válassz egy vagy több preferált nyelvet. Ez szűri a \"Legnépszerűbb\" kategóriában és a keresések közt mutatott videókat.</string>
+
+	<string name="pref_video_player_category">Videólejátszó</string>
+	<string name="pref_key_video_player_category">video_player_category</string>
+	<string name="pref_title_preferred_res">Preferált felbontás</string>
+	<string name="pref_key_preferred_res">pref_preferred_resolution</string>
+	<string name="pref_summary_preferred_res">Válaszd ki a preferált videófelbontást</string>
+	<string name="pref_title_use_offical_player">Hivatalos YouTube lejátszó használata</string>
+	<string name="pref_key_use_offical_player">pref_use_official_youtube_player</string>
+	<string name="pref_summary_use_offical_player">Nem javasolt</string>
+
+	<string name="pref_about_category">Információ</string>
+	<string name="pref_title_website">Weboldal</string>
+	<string name="pref_key_website">pref_website</string>
+	<string name="pref_summary_website">http://www.skytube-app.com</string>
+	<string name="pref_title_version">Verzió</string>
+	<string name="pref_key_version">pref_version</string>
+	<string name="pref_title_license">Licensz</string>
+	<string name="pref_key_license">pref_license</string>
+	<string name="pref_summary_license">GNU General Public License version 3</string>
+	<string name="app_license">Copyright &#169; 2015-2016  Ramon Mifsud\n
+
+				\nThis program is free software: you can redistribute it and/or modify
+				it under the terms of the GNU General Public License as published by
+				the Free Software Foundation (version 3 of the License).\n
+
+				\nThis program is distributed in the hope that it will be useful,
+				but WITHOUT ANY WARRANTY; without even the implied warranty of
+				MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+				GNU General Public License for more details.\n
+
+				\nYou should have received a copy of the GNU General Public License
+				along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;</string>
+	<string name="i_agree">I Agree</string>
+
+	<string-array name="languages_names">
+		<item>Kínai</item>
+		<item>Angol</item>
+		<item>Francia</item>
+		<item>Német</item>
+		<item>Olasz</item>
+		<item>Japán</item>
+		<item>Portugál</item>
+		<item>Orosz</item>
+		<item>Spanyol</item>
+	</string-array>
+
+	<string name="lang_en">en(?:-.*)?</string>	<!-- Regex that will match "en", "en-GB", ...etc -->
+
+	<string-array name="languages_codes">
+		<item>zh(?:-.*)?</item>
+		<item>@string/lang_en</item>
+		<item>fr(?:-.*)?</item>
+		<item>de(?:-.*)?</item>
+		<item>it(?:-.*)?</item>
+		<item>ja(?:-.*)?</item>
+		<item>pt(?:-.*)?</item>
+		<item>ru(?:-.*)?</item>
+		<item>es(?:-.*)?</item>		<!-- e.g. "es-419" -->
+	</string-array>
+
+	<string-array name="default_language">
+		<item>@string/lang_en</item>
+	</string-array>
+
+	<string-array name="country_names">
+		<item>Világszerte (Összes)</item>
+		<item>Algéria</item>
+		<item>Argentína</item>
+		<item>Ausztrália</item>
+		<item>Ausztria</item>
+		<item>Azerbajdzsán</item>
+		<item>Bahrein</item>
+		<item>Fehéroroszország</item>
+		<item>Belgium</item>
+		<item>Bosznia és Hercegovina</item>
+		<item>Brazília</item>
+		<item>Bulgária</item>
+		<item>Kanada</item>
+		<item>Chile</item>
+		<item>Kolumbia</item>
+		<item>Horvátország</item>
+		<item>Csehország</item>
+		<item>Dánia</item>
+		<item>Egyiptom</item>
+		<item>Észtország</item>
+		<item>Finnország</item>
+		<item>Franciaország</item>
+		<item>Grúzia</item>
+		<item>Németország</item>
+		<item>Ghána</item>
+		<item>Görögország</item>
+		<item>Hong Kong</item>
+		<item>Magyarország</item>
+		<item>Izland</item>
+		<item>India</item>
+		<item>Indonézia</item>
+		<item>Irak</item>
+		<item>Írország</item>
+		<item>Izrael</item>
+		<item>Olaszország</item>
+		<item>Japán</item>
+		<item>Jordánia</item>
+		<item>Kazahsztán</item>
+		<item>Kenya</item>
+		<item>Kuwait</item>
+		<item>Lettország</item>
+		<item>Libanon</item>
+		<item>Líbia</item>
+		<item>Litvánia</item>
+		<item>Luxembourg</item>
+		<item>Makedónia</item>
+		<item>Malájzia</item>
+		<item>Mexikó</item>
+		<item>Montenegró</item>
+		<item>Marokkó</item>
+		<item>Nepál</item>
+		<item>Hollandia</item>
+		<item>Új-Zéland</item>
+		<item>Nigéria</item>
+		<item>Norvégia</item>
+		<item>Omán</item>
+		<item>Pakisztán</item>
+		<item>Peru</item>
+		<item>Fülöp-szigetek</item>
+		<item>Lengyelország</item>
+		<item>Portugália</item>
+		<item>Puerto Rico</item>
+		<item>Katar</item>
+		<item>Románia</item>
+		<item>Oroszország</item>
+		<item>Szaudi-Arábia</item>
+		<item>Szenegál</item>
+		<item>Szerbia</item>
+		<item>Szingapúr</item>
+		<item>Szlovákia</item>
+		<item>Szlovénia</item>
+		<item>Dél-Afrika</item>
+		<item>Dél-Korea</item>
+		<item>Spanyolország</item>
+		<item>Sri Lanka</item>
+		<item>Svédország</item>
+		<item>Svájc</item>
+		<item>Tajvan</item>
+		<item>Tanzánia</item>
+		<item>Thaiföld</item>
+		<item>Tunézia</item>
+		<item>Törökország</item>
+		<item>Uganda</item>
+		<item>Ukrajna</item>
+		<item>Egyesült Arab Emirátusok</item>
+		<item>Egyesült Királyság</item>
+		<item>Vietnám</item>
+		<item>Yemen</item>
+		<item>Zimbabwe</item>
+	</string-array>
+
+	<string-array name="country_codes">
+		<item></item>
+		<item>DZ</item>
+		<item>AR</item>
+		<item>AU</item>
+		<item>AT</item>
+		<item>AZ</item>
+		<item>BH</item>
+		<item>BY</item>
+		<item>BE</item>
+		<item>BA</item>
+		<item>BR</item>
+		<item>BG</item>
+		<item>CA</item>
+		<item>CL</item>
+		<item>CO</item>
+		<item>HR</item>
+		<item>CZ</item>
+		<item>DK</item>
+		<item>EG</item>
+		<item>EE</item>
+		<item>FI</item>
+		<item>FR</item>
+		<item>GE</item>
+		<item>DE</item>
+		<item>GH</item>
+		<item>GR</item>
+		<item>HK</item>
+		<item>HU</item>
+		<item>IS</item>
+		<item>IN</item>
+		<item>ID</item>
+		<item>IQ</item>
+		<item>IE</item>
+		<item>IL</item>
+		<item>IT</item>
+		<item>JP</item>
+		<item>JO</item>
+		<item>KZ</item>
+		<item>KE</item>
+		<item>KW</item>
+		<item>LV</item>
+		<item>LB</item>
+		<item>LY</item>
+		<item>LT</item>
+		<item>LU</item>
+		<item>MK</item>
+		<item>MY</item>
+		<item>MX</item>
+		<item>ME</item>
+		<item>MA</item>
+		<item>NP</item>
+		<item>NL</item>
+		<item>NZ</item>
+		<item>NG</item>
+		<item>NO</item>
+		<item>OM</item>
+		<item>PK</item>
+		<item>PE</item>
+		<item>PH</item>
+		<item>PL</item>
+		<item>PT</item>
+		<item>PR</item>
+		<item>QA</item>
+		<item>RO</item>
+		<item>RU</item>
+		<item>SA</item>
+		<item>SN</item>
+		<item>RS</item>
+		<item>SG</item>
+		<item>SK</item>
+		<item>SI</item>
+		<item>ZA</item>
+		<item>KR</item>
+		<item>ES</item>
+		<item>LK</item>
+		<item>SE</item>
+		<item>CH</item>
+		<item>TW</item>
+		<item>TZ</item>
+		<item>TH</item>
+		<item>TN</item>
+		<item>TR</item>
+		<item>UG</item>
+		<item>UA</item>
+		<item>AE</item>
+		<item>GB</item>
+		<item>VN</item>
+		<item>YE</item>
+		<item>ZW</item>
+	</string-array>
+
+</resources>

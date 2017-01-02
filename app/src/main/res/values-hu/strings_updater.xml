@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="update_available">Frissítés elérhető</string>
+	<string name="update_dialog_msg">Egy új SkyTube frissítés érhető el. Az alkalmazás a %f verzióra lesz frissítve.</string>
+	<string name="update">Frissítés</string>
+	<string name="later">Később</string>
+	<string name="update_failure">Nem sikerült frissíteni az alkalmazást.</string>
+	<string name="downloading">Letöltés…</string>
+</resources>

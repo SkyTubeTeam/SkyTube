@@ -1,0 +1,19 @@
+<resources>
+	<string name="could_not_get_videos">Could not get %s videos.</string>
+	<string name="views">%,d megtekintés</string>
+	<string name="error">Hiba</string>
+	<string name="ok">Ok</string>
+	<string name="search_videos">Videók keresése</string>
+	<string name="launch_offical_player_error">Hiba történt a hivatalos Youtube lejátszó 
+    betöltése közben. Telepítsd a hivatalos Youtube alkalmazást a Google-tól.</string>
+
+	<!--
+		Holds different videos categories.
+		Order is important.  Refer to VideoCategory enum.
+	 -->
+	<string-array name="video_categories">
+		<item>Kiemelt</item>
+		<item>Legnépszerűbb</item>
+	</string-array>
+
+</resources>

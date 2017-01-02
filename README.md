@@ -15,17 +15,17 @@ More features will be added in the near future.
 
 ## Website
 
-[skytube-app.com](http://skytube-app.com/)
+[www.skytube-app.com](http://www.skytube-app.com)
 
 ## Download
 
-[![Dowload-APK](screenshots/download_apk.png)](https://github.com/ram-on/SkyTube/releases/download/v2.0/SkyTube-v2.0.apk)
+[![Dowload-APK](screenshots/download_apk.png)](https://github.com/ram-on/SkyTube/releases/download/v2.1/SkyTube-Extra-2.1.apk)
 [![F-Droid](https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Get_it_on_F-Droid.svg/200px-Get_it_on_F-Droid.svg.png)](https://f-droid.org/repository/browse/?fdid=free.rm.skytube.oss)
 
 ```
-APK File:  SkyTube-v2.0.apk
-MD5:       7671852bc773f1c27004d9ee138e5331
-SHA256:    1e755afd15198a94af7b5b49c02fc8cb125746b9291455e70a9d9db411b53a44
+APK File:  SkyTube-Extra-2.1.apk
+SHA1:      2b89e7e806f557ba493c3e456eafb1d4f05b2ca9
+SHA256:    22a1bffd07919858a3494a3d31dce4472ed5cd9df25434cbacff45161e0c36db
 ```
 
 ## Why SkyTube?
@@ -64,7 +64,7 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a [copy of the GNU General Public License](https://raw.githubusercontent.com/ram-on/SkyTube/master/LICENSE)
-along with this program.  If not, see http://www.gnu.org/licenses/
+along with this program.  If not, see http://www.gnu.org/licenses/.
 
 This project is not affiliated with YouTube™ or any of its partners and/or products.
 YouTube™ and Android™ are registered trademarks of Google Inc.

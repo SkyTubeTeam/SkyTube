@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="subscriptions">Feliratkozások</string>
+	<string name="subscribe">Feliratkozás</string>
+	<string name="unsubscribe">Leiratkozás</string>
+	<string name="total_subscribers">%,d feliratkozó</string>
+
+	<string name="subscribed">Feliratkozva</string>
+	<string name="unsubscribed">Leiratkozva</string>
+
+	<string name="error_get_subbed_channels">Hiba történt a feliratkozások begyűjtésénél.</string>
+	<string name="error_check_if_user_has_subbed">Nem sikerült ellenőrizni, hogy feliratkozott-e a csatornára (id=%s)</string>
+	<string name="error_unable_to_subscribe">Nem sikerült fel/leiratkozni a csatornára (id=%s)</string>
+</resources>
