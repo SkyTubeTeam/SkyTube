@@ -81,6 +81,7 @@ public class GetChannelVideos extends GetYouTubeVideos {
 		return videosList;
 	}
 
+
 	/**
 	 * YouTube's activity functionality (i.e. {@link Activity} does not return enough information
 	 * about the YouTube videos.
@@ -108,14 +109,22 @@ public class GetChannelVideos extends GetYouTubeVideos {
 		return getVideo.getNextVideos();
 	}
 
+
+	/**
+	 * Set the channel id.
+	 *
+	 * @param channelId	Channel ID.
+	 */
 	@Override
-	public void setQuery(String query) {
+	public void setQuery(String channelId) {
 		if(activitiesList != null)
-			activitiesList.setChannelId(query);
+			activitiesList.setChannelId(channelId);
 	}
+
 
 	@Override
 	public boolean noMoreVideoPages() {
 		return noMoreVideoPages;
 	}
+
 }
