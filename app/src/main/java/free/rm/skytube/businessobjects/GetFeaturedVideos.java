@@ -34,8 +34,6 @@ import free.rm.skytube.BuildConfig;
 public class GetFeaturedVideos extends GetYouTubeVideos {
 
 	protected YouTube.Videos.List videosList = null;
-	private String nextPageToken = null;
-	private boolean noMoreVideoPages = false;
 
 	private static final String	TAG = GetFeaturedVideos.class.getSimpleName();
 	private static final Long	MAX_RESULTS = 50L;
@@ -53,7 +51,6 @@ public class GetFeaturedVideos extends GetYouTubeVideos {
 		videosList.setMaxResults(MAX_RESULTS);
 		nextPageToken = null;
 	}
-
 
 	@Override
 	public List<YouTubeVideo> getNextVideos() {

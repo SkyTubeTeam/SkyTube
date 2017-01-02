@@ -97,7 +97,7 @@ public abstract class RecyclerViewAdapterEx<T, HolderType extends RecyclerView.V
 	/**
 	 * Clear all items that are in the list.
 	 */
-	protected void clearList() {
+	public void clearList() {
 		int listSize = getItemCount();
 
 		this.list.clear();
