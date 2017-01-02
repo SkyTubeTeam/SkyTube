@@ -29,19 +29,16 @@ import android.view.ViewGroup;
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.MainActivityListener;
 import free.rm.skytube.businessobjects.VideoCategory;
-import free.rm.skytube.gui.businessobjects.FragmentEx;
 import free.rm.skytube.gui.businessobjects.LoadingProgressBar;
 import free.rm.skytube.gui.businessobjects.VideoGridAdapter;
 
 /**
  * Fragment that will hold a list of videos corresponding to the user's query.
  */
-public class SearchVideoGridFragment extends FragmentEx {
+public class SearchVideoGridFragment extends BaseVideosGridFragment {
 
 	public static final String QUERY = "SearchVideoGridFragment.Query";
 	protected RecyclerView		gridView;
-	protected VideoGridAdapter	videoGridAdapter;
-
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

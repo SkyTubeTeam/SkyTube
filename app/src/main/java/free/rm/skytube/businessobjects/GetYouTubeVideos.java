@@ -32,6 +32,8 @@ import free.rm.skytube.gui.app.SkyTubeApp;
  * <p>Do not run this directly, but rather use {@link GetYouTubeVideosTask}.</p>
  */
 public abstract class GetYouTubeVideos {
+	protected String nextPageToken = null;
+	protected boolean noMoreVideoPages = false;
 
 	/**
 	 * Initialise this object.
@@ -91,4 +93,11 @@ public abstract class GetYouTubeVideos {
 		return (region.isEmpty() ? null : region);
 	}
 
+	/**
+	 * Reset the fetching of videos. This will be called when a swipe to refresh is done.
+	 */
+	public void reset() {
+		nextPageToken = null;
+		noMoreVideoPages = false;
+	}
 }

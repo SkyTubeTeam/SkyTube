@@ -3,16 +3,19 @@
 			 android:layout_width="match_parent"
 			 android:layout_height="match_parent">
 
-
-	<android.support.v7.widget.RecyclerView
-		android:id="@+id/grid_view"
+	<android.support.v4.widget.SwipeRefreshLayout
+		android:id="@+id/swipeRefreshLayout"
 		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:scrollbars="vertical"
-		android:clipChildren="true"
-		android:numColumns="@integer/video_grid_num_columns"
-		android:background="@color/grid_view_background"/>
-
+		android:layout_height="match_parent">
+		<android.support.v7.widget.RecyclerView
+			android:id="@+id/grid_view"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:scrollbars="vertical"
+			android:clipChildren="true"
+			android:numColumns="@integer/video_grid_num_columns"
+			android:background="@color/grid_view_background"/>
+	</android.support.v4.widget.SwipeRefreshLayout>
 	<ProgressBar
 		android:id="@+id/loading_progress_bar"
 		android:layout_centerInParent="true"
