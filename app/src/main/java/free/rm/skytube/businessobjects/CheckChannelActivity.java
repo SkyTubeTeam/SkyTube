@@ -43,7 +43,7 @@ public class CheckChannelActivity {
 	public void init() throws IOException {
 		this.activitiesList = YouTubeAPI.create().activities()
 				.list("snippet")
-				.setFields("items(snippet/publishedAt)")
+				.setFields("items(snippet/type)")
 				.setKey(BuildConfig.YOUTUBE_API_KEY)
 				.setMaxResults(MAX_RESULTS);
 	}
@@ -59,8 +59,6 @@ public class CheckChannelActivity {
 		if (channel.getLastVisitTime() < 0)
 			return false;
 
-		boolean videosPublished = false;
-
 		this.activitiesList.setChannelId(channel.getId());
 		this.activitiesList.setPublishedAfter(new DateTime(channel.getLastVisitTime()));
 
@@ -69,12 +67,16 @@ public class CheckChannelActivity {
 			ActivityListResponse response = activitiesList.execute();
 			List<Activity> activitiesList = response.getItems();
 
-			videosPublished = (!activitiesList.isEmpty());
+			for (Activity activity : activitiesList) {
+				// search for activity that is of type "upload" (ignore the rest such as "like" or "comment" ...etc)
+				if (activity.getSnippet().getType().equalsIgnoreCase("upload"))
+					return true;
+			}
 		} catch (IOException ex) {
 			Log.e(TAG, "An error has occurred while retrieving activities", ex);
 		}
 
-		return videosPublished;
+		return false;
 	}
 
 }
