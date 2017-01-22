@@ -48,11 +48,10 @@ import free.rm.skytube.gui.businessobjects.VideoGridAdapter;
 /**
  * A Fragment that displays information about a channel.
  */
-public class ChannelBrowserFragment extends FragmentEx {
+public class ChannelBrowserFragment extends BaseVideosGridFragment {
 
 	private YouTubeChannel		channel = null;
 	private RecyclerView		gridView;
-	private VideoGridAdapter	videoGridAdapter;
 
 	private ImageView 			channelThumbnailImage = null;
 	private ImageView			channelBannerImage = null;
