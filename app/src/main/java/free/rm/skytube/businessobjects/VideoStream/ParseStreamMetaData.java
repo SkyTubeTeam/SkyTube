@@ -99,6 +99,10 @@ public class ParseStreamMetaData {
 				JSONObject ytAssets = jsonObj.getJSONObject("assets");
 				String playerUrl = ytAssets.getString("js");
 
+
+				if(!playerUrl.contains("youtube.com")) {
+					playerUrl = "https://youtube.com" + playerUrl;
+				}
 				if (playerUrl.startsWith("//")) {
 					playerUrl = "https:" + playerUrl;
 				}
