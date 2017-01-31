@@ -1,3 +1,9 @@
+v2.2 - 31 Jan 2017:
+	* Emergency fix: "could not load decryption code" error for all YouTube videos.  This was due to sudden change in YouTube website/service.
+	* Featured & Most Popular videos are now placed in tabs.
+	* Featured & Most Popular & channel videos can be swiped down in order to refresh.
+	* Added Hungarian translation.
+
 v2.1 - 23 Oct 2016:
 	* Added Spanish translation
 	* Now using Picasso library for remote image loading (before such process was done manually by the app)

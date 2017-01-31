@@ -7,13 +7,7 @@
 	<string name="launch_offical_player_error">Hiba történt a hivatalos Youtube lejátszó 
     betöltése közben. Telepítsd a hivatalos Youtube alkalmazást a Google-tól.</string>
 
-	<!--
-		Holds different videos categories.
-		Order is important.  Refer to VideoCategory enum.
-	 -->
-	<string-array name="video_categories">
-		<item>Kiemelt</item>
-		<item>Legnépszerűbb</item>
-	</string-array>
+	<string name="featured">Kiemelt</string>
+	<string name="popular">Legnépszerűbb</string>
 
 </resources>
