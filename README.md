@@ -19,13 +19,13 @@ More features will be added in the near future.
 
 ## Download
 
-[![Dowload-APK](screenshots/download_apk.png)](https://github.com/ram-on/SkyTube/releases/download/v2.1/SkyTube-Extra-2.1.apk)
+[![Dowload-APK](screenshots/download_apk.png)](https://github.com/ram-on/SkyTube/releases/download/v2.2/SkyTube-Extra-2.2.apk)
 [![F-Droid](https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Get_it_on_F-Droid.svg/200px-Get_it_on_F-Droid.svg.png)](https://f-droid.org/repository/browse/?fdid=free.rm.skytube.oss)
 
 ```
-APK File:  SkyTube-Extra-2.1.apk
-SHA1:      2b89e7e806f557ba493c3e456eafb1d4f05b2ca9
-SHA256:    22a1bffd07919858a3494a3d31dce4472ed5cd9df25434cbacff45161e0c36db
+APK File:  SkyTube-Extra-2.2.apk
+SHA1:      543bd7b68169beea64b8b189a88852594528372e
+SHA256:    7e82e0c865b73f54dd6ba08d9340f88b67e7cf6f67805a6999d9570581d92867
 ```
 
 ## Why SkyTube?
