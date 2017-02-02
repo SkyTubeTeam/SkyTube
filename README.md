@@ -19,14 +19,41 @@ More features will be added in the near future.
 
 ## Download
 
-[![Dowload-APK](screenshots/download_apk.png)](https://github.com/ram-on/SkyTube/releases/download/v2.2/SkyTube-Extra-2.2.apk)
-[![F-Droid](https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Get_it_on_F-Droid.svg/200px-Get_it_on_F-Droid.svg.png)](https://f-droid.org/repository/browse/?fdid=free.rm.skytube.oss)
+<table>
+<tr>
+    <td align="center">
+        <a href="https://github.com/ram-on/SkyTube/releases/download/v2.2/SkyTube-Extra-2.2.apk">
+            <img src="screenshots/download_apk.png" alt="Download APK">
+        </a>
+        
+        <p><b>( Recommended )</b></p>
+    <td>
+        <p><b>Download SkyTube Extra</b></p>
+        
+        <p>Open source app that uses the following third-party closed source library:
+           <ul>
+               <li>YouTubeAndroidPlayerApi.jar (optional usage)</li>   
+           </ul> 
+        
+        <p>Updates are published immediately ‒ you will be notified whenever there is an update.</p>
+        
+        <p><pre>APK File:  SkyTube-Extra-2.2.apk
+SHA1:      543bd7b68169beea64b8b189a88852594528372e</pre>
+    </td>
+</tr>
+<tr>
+    <td align="center">
+        <a href="https://f-droid.org/repository/browse/?fdid=free.rm.skytube.oss">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Get_it_on_F-Droid.svg/200px-Get_it_on_F-Droid.svg.png" alt="F-Droid">
+        </a>
+    <td>
+        <p>Download SkyTube</p>
+        
+        <p>Pure open-source version.  Updates normally take up to 3 days to be available to users.</p>
+    </td>
+</tr>
+</table>
 
-```
-APK File:  SkyTube-Extra-2.2.apk
-SHA1:      543bd7b68169beea64b8b189a88852594528372e
-SHA256:    7e82e0c865b73f54dd6ba08d9340f88b67e7cf6f67805a6999d9570581d92867
-```
 
 ## Why SkyTube?
 * Open Source
