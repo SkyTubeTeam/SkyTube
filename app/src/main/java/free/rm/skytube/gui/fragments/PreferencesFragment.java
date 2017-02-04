@@ -19,12 +19,16 @@ package free.rm.skytube.gui.fragments;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
+
+import java.util.prefs.PreferenceChangeEvent;
+import java.util.prefs.PreferenceChangeListener;
 
 import free.rm.skytube.BuildConfig;
 import free.rm.skytube.R;
@@ -34,7 +38,7 @@ import free.rm.skytube.businessobjects.VideoStream.VideoResolution;
  * A fragment that allows the user to change the settings of this app.  This fragment is called by
  * {@link free.rm.skytube.gui.activities.PreferencesActivity}
  */
-public class PreferencesFragment extends PreferenceFragment {
+public class PreferencesFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
 
 	private static final String TAG = PreferencesFragment.class.getSimpleName();
 
@@ -81,9 +85,34 @@ public class PreferencesFragment extends PreferenceFragment {
 		// set the app's version number
 		Preference versionPref = findPreference(getString(R.string.pref_key_version));
 		versionPref.setSummary(BuildConfig.VERSION_NAME);
+
+		// Default tab
+		ListPreference defaultTabPref = (ListPreference)findPreference(getString(R.string.pref_key_default_tab));
+		if(defaultTabPref.getValue() == null)
+			defaultTabPref.setValueIndex(0);
+		defaultTabPref.setSummary(String.format(getString(R.string.pref_summary_default_tab), defaultTabPref.getEntry()));
 	}
 
+	@Override
+	public void onResume() {
+		super.onResume();
+		getPreferenceManager().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
+	}
 
+	@Override
+	public void onPause() {
+		super.onPause();
+		getPreferenceManager().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
+	}
+
+	@Override
+	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+		// If the user changed the Default Tab Preference, update the summary to show the new default tab
+		if(key != null && key.equals(getString(R.string.pref_key_default_tab))) {
+			ListPreference defaultTabPref = (ListPreference)findPreference(key);
+			defaultTabPref.setSummary(String.format(getString(R.string.pref_summary_default_tab), defaultTabPref.getEntry()));
+		}
+	}
 
 	/**
 	 * Displays the app's license in an AlertDialog.
