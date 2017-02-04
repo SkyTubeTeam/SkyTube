@@ -42,6 +42,18 @@
 	</PreferenceCategory>
 
 	<!--
+		Other Category
+	-->
+	<PreferenceCategory
+		android:title="@string/pref_other_category">
+		<ListPreference
+			android:key="@string/pref_key_default_tab"
+			android:title="@string/pref_title_default_tab"
+			android:entries="@array/default_tab"
+			android:entryValues="@array/default_tab_values"
+			/>
+	</PreferenceCategory>
+	<!--
 		About Category
 	 -->
 	<PreferenceCategory

@@ -10,6 +10,7 @@ android {
         targetSdkVersion 25
         versionCode 4
         buildConfigField 'String', 'YOUTUBE_API_KEY', '"AIzaSyDAOcAgAAd098p_FLIePaQNKPTpcyhUGBA"';
+        vectorDrawables.useSupportLibrary true
     }
     buildTypes {
         release {
@@ -54,4 +55,7 @@ dependencies {
 
     compile 'com.android.support:appcompat-v7:25.0.0'
     compile 'com.android.support:design:25.0.0'
+    compile 'com.google.code.gson:gson:2.2.4'
+    compile group: 'joda-time', name: 'joda-time', version: '2.3'
+    compile 'com.afollestad.material-dialogs:core:0.9.0.2'
 }

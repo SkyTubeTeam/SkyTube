@@ -17,15 +17,23 @@
 
 package free.rm.skytube.gui.businessobjects;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.Intent;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.MainActivityListener;
 import free.rm.skytube.businessobjects.YouTubeVideo;
@@ -34,31 +42,31 @@ import free.rm.skytube.businessobjects.YouTubeVideo;
  * A ViewHolder for the videos grid view.
  */
 public class GridViewHolder extends RecyclerView.ViewHolder {
-	private TextView titleTextView,
-			channelTextView,
-			thumbsUpPercentageTextView,
-			videoDurationTextView,
-			viewsTextView,
-			publishDateTextView;
-	private ImageView thumbnailImageView;
-	private RelativeLayout bottomLayout;
 	/** YouTube video */
 	private YouTubeVideo youTubeVideo = null;
 	private Context context = null;
 	private MainActivityListener listener;
 
+	@Bind(R.id.channel_layout)
+	View channelLayout;
+	@Bind(R.id.title_text_view)
+	TextView titleTextView;
+	@Bind(R.id.channel_text_view)
+	TextView channelTextView;
+	@Bind(R.id.thumbs_up_text_view)
+	TextView thumbsUpPercentageTextView;
+	@Bind(R.id.video_duration_text_view)
+	TextView videoDurationTextView;
+	@Bind(R.id.publish_date_text_view)
+	TextView publishDateTextView;
+	@Bind(R.id.thumbnail_image_view)
+	ImageView thumbnailImageView;
+	@Bind(R.id.views_text_view)
+	TextView viewsTextView;
 
 	public GridViewHolder(View view, MainActivityListener listener) {
 		super(view);
-		titleTextView				= (TextView) view.findViewById(R.id.title_text_view);
-		channelTextView				= (TextView) view.findViewById(R.id.channel_text_view);
-		thumbsUpPercentageTextView	= (TextView) view.findViewById(R.id.thumbs_up_text_view);
-		videoDurationTextView		= (TextView) view.findViewById(R.id.video_duration_text_view);
-		viewsTextView				= (TextView) view.findViewById(R.id.views_text_view);
-		publishDateTextView			= (TextView) view.findViewById(R.id.publish_date_text_view);
-		thumbnailImageView	= (ImageView) view.findViewById(R.id.thumbnail_image_view);
-		bottomLayout		= (RelativeLayout) view.findViewById(R.id.cell_bottom_layout);
-
+		ButterKnife.bind(this, view);
 		this.listener = listener;
 	}
 
@@ -89,7 +97,7 @@ public class GridViewHolder extends RecyclerView.ViewHolder {
 	private void updateViewsData(YouTubeVideo video, boolean showChannelInfo) {
 		titleTextView.setText(video.getTitle());
 		channelTextView.setText(showChannelInfo ? video.getChannelName() : "");
-		publishDateTextView.setText(video.getPublishDate());
+		publishDateTextView.setText(video.getPublishDatePretty());
 		videoDurationTextView.setText(video.getDuration());
 		viewsTextView.setText(video.getViewsCount());
 		Picasso.with(context)
@@ -134,9 +142,33 @@ public class GridViewHolder extends RecyclerView.ViewHolder {
 				}
 			};
 		}
-
-		channelTextView.setOnClickListener(channelListener);
-		bottomLayout.setOnClickListener(channelListener);
+		channelLayout.setOnClickListener(channelListener);
 	}
 
+	@OnClick(R.id.options_button)
+	public void onOptionsButtonClick(final View view) {
+		PopupMenu popupMenu = new PopupMenu(view.getContext(), view);
+		popupMenu.getMenuInflater().inflate(R.menu.video_options_menu, popupMenu.getMenu());
+		popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+			@Override
+			public boolean onMenuItemClick(MenuItem item) {
+				switch(item.getItemId()) {
+					case R.id.share:
+						Intent intent = new Intent(android.content.Intent.ACTION_SEND);
+						intent.setType("text/plain");
+						intent.putExtra(android.content.Intent.EXTRA_TEXT, youTubeVideo.getVideoUrl());
+						view.getContext().startActivity(Intent.createChooser(intent, view.getContext().getString(R.string.share_via)));
+						return true;
+					case R.id.copyurl:
+						ClipboardManager clipboard = (ClipboardManager)view.getContext().getSystemService(Context.CLIPBOARD_SERVICE);
+						ClipData clip = ClipData.newPlainText("Video URL", youTubeVideo.getVideoUrl());
+						clipboard.setPrimaryClip(clip);
+						Toast.makeText(view.getContext(), R.string.url_copied_to_clipboard, Toast.LENGTH_SHORT).show();
+						return true;
+				}
+				return false;
+			}
+		});
+		popupMenu.show();
+	}
 }

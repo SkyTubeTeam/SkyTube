@@ -21,6 +21,7 @@ import android.view.View;
 
 import java.util.List;
 
+import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 import free.rm.skytube.gui.businessobjects.LoadingProgressBar;
 import free.rm.skytube.gui.businessobjects.VideoGridAdapter;
 
@@ -97,6 +98,13 @@ public class GetYouTubeVideosTask extends AsyncTaskParallel<Void, Void, List<You
 	@Override
 	protected void onPostExecute(List<YouTubeVideo> videosList) {
 		videoGridAdapter.appendList(videosList);
+
+		if(videoGridAdapter.getYouTubeChannel() != null && videoGridAdapter.getYouTubeChannel().isUserSubscribed()) {
+			for(YouTubeVideo video : videosList)
+				videoGridAdapter.getYouTubeChannel().addYouTubeVideo(video);
+			SubscriptionsDb.getSubscriptionsDb().saveChannelVideos(videoGridAdapter.getYouTubeChannel());
+		}
+
 		if(progressBar != null)
 			progressBar.setVisibility(View.GONE);
 		else
