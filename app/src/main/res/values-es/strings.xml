@@ -14,7 +14,7 @@
 	<string name="no_subscriptions_text">You aren\'t subscribed to any Channels.\n\nOnce you are, all videos uploaded to your subscribed Channels within the last month will appear here.</string>
 
 	<string name="featured">Destacados</string>
-	<string name="popular">Más populares</string>
+	<string name="popular">Más Populares</string>
 
 	<string name="share_via">Share via</string>
 	<string name="url_copied_to_clipboard">URL copied to clipboard.</string>

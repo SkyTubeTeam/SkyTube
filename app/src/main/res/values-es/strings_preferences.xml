@@ -263,8 +263,8 @@
 	<string name="pref_title_default_tab">Defaut Tab</string>
 	<string name="pref_summary_default_tab">Default tab to show when SkyTube launches: %s</string>
 	<string-array name="default_tab">
-		<item>Featured</item>
-		<item>Most Popular</item>
+		<item>Destacados</item>
+		<item>Más Populares</item>
 		<item>Subscriptions</item>
 	</string-array>
 	<string-array name="default_tab_values">

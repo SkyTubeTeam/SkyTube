@@ -7,7 +7,17 @@
 	<string name="launch_offical_player_error">Hiba történt a hivatalos Youtube lejátszó 
     betöltése közben. Telepítsd a hivatalos Youtube alkalmazást a Google-tól.</string>
 
+	<string name="fetching_subscription_videos">Fetching videos from subscribed channels</string>
+	<string name="fetched_videos_from_channels">Fetched %1$d videos from %2$d/%3$d channels.</string>
+	<string name="no_new_videos_found">No new videos found.</string>
+	<string name="no_subscriptions_text">You aren\'t subscribed to any Channels.\n\nOnce you are, all videos uploaded to your subscribed Channels within the last month will appear here.</string>
+
 	<string name="featured">Kiemelt</string>
 	<string name="popular">Legnépszerűbb</string>
+
+	<string name="share_via">Share via</string>
+	<string name="url_copied_to_clipboard">URL copied to clipboard.</string>
+	<string name="share">Share</string>
+	<string name="copy_to_clipboard">Copy to Clipboard</string>
 
 </resources>
