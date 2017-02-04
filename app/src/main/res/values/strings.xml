@@ -15,4 +15,9 @@
 
 	<string name="featured">Featured</string>
 	<string name="popular">Most Popular</string>
+
+	<string name="share_via">Share via</string>
+	<string name="url_copied_to_clipboard">URL copied to clipboard.</string>
+	<string name="share">Share</string>
+	<string name="copy_to_clipboard">Copy to Clipboard</string>
 </resources>

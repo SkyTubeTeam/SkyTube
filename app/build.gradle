@@ -10,6 +10,7 @@ android {
         targetSdkVersion 25
         versionCode 4
         buildConfigField 'String', 'YOUTUBE_API_KEY', '"AIzaSyDAOcAgAAd098p_FLIePaQNKPTpcyhUGBA"';
+        vectorDrawables.useSupportLibrary true
     }
     buildTypes {
         release {
