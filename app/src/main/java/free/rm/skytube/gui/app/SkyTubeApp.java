@@ -33,6 +33,7 @@ public class SkyTubeApp extends Application {
 	private static SkyTubeApp skyTubeApp = null;
 	private static volatile SubscriptionsDb subscriptionsDb = null;
 
+	public static final String KEY_SUBSCRIPTIONS_LAST_UPDATED = "SkyTubeApp.KEY_SUBSCRIPTIONS_LAST_UPDATED";
 
 	@Override
 	public void onCreate() {

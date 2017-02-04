@@ -31,6 +31,7 @@ public class MainFragment extends FragmentEx {
 	private ActionBarDrawerToggle	subsDrawerToggle;
 	private VideosGridFragment featuredVideosFragment;
 	private VideosGridFragment mostPopularVideosFragment;
+	private SubscriptionsFragment subscriptionsFragment;
 
 	private VideosPagerAdapter videosPagerAdapter;
 	private ViewPager viewPager;
@@ -72,6 +73,7 @@ public class MainFragment extends FragmentEx {
 
 
 		viewPager = (ViewPager)view.findViewById(R.id.pager);
+		viewPager.setOffscreenPageLimit(3);
 		videosPagerAdapter = new VideosPagerAdapter(getActivity(), getChildFragmentManager());
 		viewPager.setAdapter(videosPagerAdapter);
 
@@ -95,7 +97,28 @@ public class MainFragment extends FragmentEx {
 			}
 		});
 
+		viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+			@Override
+			public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
+			}
+
+			@Override
+			public void onPageSelected(int position) {
+				if(position == 2) {
+					// Subscriptions tab has been selected. We need to check if it's null, though, because in some cases when the Activity is re-created, the subscriptionsFragment
+					// may not be instantiated yet. But that's ok, since all that happens here is that the progress dialog shows up if we're in the middle of a subscriptions refresh.
+					// This won't be the case if the Activity is being re-created.
+					if(subscriptionsFragment != null)
+						subscriptionsFragment.onSelected();
+				}
+			}
+
+			@Override
+			public void onPageScrollStateChanged(int state) {
+
+			}
+		});
 
 		return view;
 	}
@@ -131,7 +154,7 @@ public class MainFragment extends FragmentEx {
 
 		@Override
 		public int getCount() {
-			return 2;
+			return 3;
 		}
 
 		@Override
@@ -149,6 +172,9 @@ public class MainFragment extends FragmentEx {
 					args1.putInt(VideosGridFragment.VIDEO_CATEGORY, 1);
 					mostPopularVideosFragment.setArguments(args1);
 					return mostPopularVideosFragment;
+				case 2:
+					subscriptionsFragment = new SubscriptionsFragment();
+					return subscriptionsFragment;
 			}
 			return null;
 		}
@@ -160,6 +186,8 @@ public class MainFragment extends FragmentEx {
 					return getString(R.string.featured);
 				case 1:
 					return getString(R.string.popular);
+				case 2:
+					return getString(R.string.subscriptions);
 				default:
 					return null;
 			}

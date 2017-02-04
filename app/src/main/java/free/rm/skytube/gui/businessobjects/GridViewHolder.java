@@ -89,7 +89,7 @@ public class GridViewHolder extends RecyclerView.ViewHolder {
 	private void updateViewsData(YouTubeVideo video, boolean showChannelInfo) {
 		titleTextView.setText(video.getTitle());
 		channelTextView.setText(showChannelInfo ? video.getChannelName() : "");
-		publishDateTextView.setText(video.getPublishDate());
+		publishDateTextView.setText(video.getPublishDatePretty());
 		videoDurationTextView.setText(video.getDuration());
 		viewsTextView.setText(video.getViewsCount());
 		Picasso.with(context)

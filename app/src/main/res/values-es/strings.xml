@@ -8,6 +8,11 @@
 		oficial de YouTube. Asegúrate que la aplicación oficial de YouTube hecha por Google
 		esté instalada en tu dispositivo.</string>
 
+	<string name="fetching_subscription_videos">Fetching videos from subscribed channels</string>
+	<string name="fetched_videos_from_channels">Fetched %1$d videos from %2$d/%3$d channels.</string>
+	<string name="no_new_videos_found">No new videos found.</string>
+	<string name="no_subscriptions_text">You aren\'t subscribed to any Channels.\n\nOnce you are, all videos uploaded to your subscribed Channels within the last month will appear here.</string>
+
 	<string name="featured">Destacados</string>
 	<string name="popular">Más populares</string>
 
