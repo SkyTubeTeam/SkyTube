@@ -99,9 +99,13 @@ public class GetYouTubeVideosTask extends AsyncTaskParallel<Void, Void, List<You
 	protected void onPostExecute(List<YouTubeVideo> videosList) {
 		videoGridAdapter.appendList(videosList);
 
-		if(videoGridAdapter.getYouTubeChannel() != null && videoGridAdapter.getYouTubeChannel().isUserSubscribed()) {
-			for(YouTubeVideo video : videosList)
+		if (videosList != null  &&
+				videoGridAdapter.getYouTubeChannel() != null &&
+				videoGridAdapter.getYouTubeChannel().isUserSubscribed()) {
+			for (YouTubeVideo video : videosList) {
 				videoGridAdapter.getYouTubeChannel().addYouTubeVideo(video);
+			}
+
 			SubscriptionsDb.getSubscriptionsDb().saveChannelVideos(videoGridAdapter.getYouTubeChannel());
 		}
 
