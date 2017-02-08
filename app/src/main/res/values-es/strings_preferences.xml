@@ -26,7 +26,7 @@
 	<string name="pref_summary_website">https://ram-on.github.io/SkyTube</string>
 	<string name="pref_title_version">Versión</string>
 	<string name="pref_key_version">pref_version</string>
-	<string name="pref_title_license">Licensia</string>
+	<string name="pref_title_license">Licencia</string>
 	<string name="pref_key_license">pref_license</string>
 	<string name="pref_summary_license">GNU General Public License version 3</string>
 	<string name="app_license">Copyright &#169; 2015-2016  Ramon Mifsud\n
@@ -45,15 +45,15 @@
 	<string name="i_agree">I Agree</string>
 
 	<string-array name="languages_names">
-		<item>Chinese</item>
-		<item>English</item>
-		<item>French</item>
-		<item>German</item>
-		<item>Italian</item>
-		<item>Japanese</item>
-		<item>Portuguese</item>
-		<item>Russian</item>
-		<item>Spanish</item>
+		<item>Chino</item>
+		<item>Inglés</item>
+		<item>Francés</item>
+		<item>Alemán</item>
+		<item>Italiano</item>
+		<item>Japonés</item>
+		<item>Portugués</item>
+		<item>Ruso</item>
+		<item>Español</item>
 	</string-array>
 
 	<string name="lang_en">en(?:-.*)?</string>	<!-- Regex that will match "en", "en-GB", ...etc -->
@@ -75,7 +75,7 @@
 	</string-array>
 
 	<string-array name="country_names">
-		<item>Worldwide (All)</item>
+		<item>Mundial (Todos)</item>
 		<item>Algeria</item>
 		<item>Argentina</item>
 		<item>Australia</item>
@@ -258,14 +258,14 @@
 		<item>ZW</item>
 	</string-array>
 
-	<string name="pref_other_category">Other</string>
+	<string name="pref_other_category">Otros</string>
 	<string name="pref_key_default_tab">pref_default_tab</string>
-	<string name="pref_title_default_tab">Defaut Tab</string>
-	<string name="pref_summary_default_tab">Default tab to show when SkyTube launches: %s</string>
+	<string name="pref_title_default_tab">Pestaña por defecto</string>
+	<string name="pref_summary_default_tab">Pestaña por defecto cuando abres SkyTube: %s</string>
 	<string-array name="default_tab">
 		<item>Destacados</item>
 		<item>Más Populares</item>
-		<item>Subscriptions</item>
+		<item>Subscripciones</item>
 	</string-array>
 	<string-array name="default_tab_values">
 		<item>0</item>
