@@ -4,20 +4,20 @@
 	<string name="error">Error</string>
 	<string name="ok">Aceptar</string>
 	<string name="search_videos">Buscar videos</string>
-	<string name="launch_offical_player_error">Ocurrió un eror al tratar de abrir el reporductor 
+	<string name="launch_offical_player_error">Ocurrió un eror al tratar de abrir el reproductor 
 		oficial de YouTube. Asegúrate que la aplicación oficial de YouTube hecha por Google
 		esté instalada en tu dispositivo.</string>
 
-	<string name="fetching_subscription_videos">Fetching videos from subscribed channels</string>
+	<string name="fetching_subscription_videos">Comprobando videos de los canales suscritos</string>
 	<string name="fetched_videos_from_channels">Fetched %1$d videos from %2$d/%3$d channels.</string>
-	<string name="no_new_videos_found">No new videos found.</string>
-	<string name="no_subscriptions_text">You aren\'t subscribed to any Channels.\n\nOnce you are, all videos uploaded to your subscribed Channels within the last month will appear here.</string>
+	<string name="no_new_videos_found">No se encontraron videos nuevos.</string>
+	<string name="no_subscriptions_text">No estás suscrito a ningún canal, cuando lo estés todos los videos del último mes de dichos canales aparecerán aquí.</string>
 
 	<string name="featured">Destacados</string>
 	<string name="popular">Más Populares</string>
 
-	<string name="share_via">Share via</string>
-	<string name="url_copied_to_clipboard">URL copied to clipboard.</string>
-	<string name="share">Share</string>
-	<string name="copy_to_clipboard">Copy to Clipboard</string>
+	<string name="share_via">Compartir con</string>
+	<string name="url_copied_to_clipboard">URL copiada al portapapeles.</string>
+	<string name="share">Compartir</string>
+	<string name="copy_to_clipboard">Copiar el portapapeles</string>
 </resources>
