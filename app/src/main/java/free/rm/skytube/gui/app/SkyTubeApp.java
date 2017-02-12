@@ -22,6 +22,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import java.util.Arrays;
+import java.util.List;
+
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 
 /**
@@ -45,11 +48,33 @@ public class SkyTubeApp extends Application {
 	/**
 	 * Returns a localised string.
 	 *
-	 * @param stringResId	String resource id (e.g. R.string.my_string)
-	 * @return	Localised string, from the strings XML file.
+	 * @param  stringResId	String resource ID (e.g. R.string.my_string)
+	 * @return Localised string, from the strings XML file.
 	 */
 	public static String getStr(int stringResId) {
 		return skyTubeApp.getString(stringResId);
+	}
+
+
+	/**
+	 * Given a string array resource ID, it returns an array of strings.
+	 *
+	 * @param stringArrayResId String array resource ID (e.g. R.string.my_array_string)
+	 * @return Array of String.
+	 */
+	public static String[] getStringArray(int stringArrayResId) {
+		return skyTubeApp.getResources().getStringArray(stringArrayResId);
+	}
+
+
+	/**
+	 * Given a string array resource ID, it returns an list of strings.
+	 *
+	 * @param stringArrayResId String array resource ID (e.g. R.string.my_array_string)
+	 * @return List of String.
+	 */
+	public static List<String> getStringArrayAsList(int stringArrayResId) {
+		return Arrays.asList(getStringArray(stringArrayResId));
 	}
 
 

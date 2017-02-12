@@ -21,7 +21,7 @@
 			android:summary="@string/pref_summary_preferred_languages"
 			android:entries="@array/languages_names"
 			android:entryValues="@array/languages_codes"
-			android:defaultValue="@array/default_language"/>
+			android:defaultValue="@array/languages_codes"/>	<!-- no language shall be filtered out by DEFAULT -->
 	</PreferenceCategory>
 
 	<!--

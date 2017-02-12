@@ -56,22 +56,27 @@
 		<item>Spanish</item>
 	</string-array>
 
+	<string name="lang_zh">zh(?:-.*)?</string>
 	<string name="lang_en">en(?:-.*)?</string>	<!-- Regex that will match "en", "en-GB", ...etc -->
+	<string name="lang_fr">fr(?:-.*)?</string>
+	<string name="lang_de">de(?:-.*)?</string>
+	<string name="lang_it">it(?:-.*)?</string>
+	<string name="lang_ja">ja(?:-.*)?</string>
+	<string name="lang_pt">pt(?:-.*)?</string>
+	<string name="lang_ru">ru(?:-.*)?</string>
+	<string name="lang_es">es(?:-.*)?</string>	<!-- e.g. "es-419" -->
+
 
 	<string-array name="languages_codes">
-		<item>zh(?:-.*)?</item>
+		<item>@string/lang_zh</item>
 		<item>@string/lang_en</item>
-		<item>fr(?:-.*)?</item>
-		<item>de(?:-.*)?</item>
-		<item>it(?:-.*)?</item>
-		<item>ja(?:-.*)?</item>
-		<item>pt(?:-.*)?</item>
-		<item>ru(?:-.*)?</item>
-		<item>es(?:-.*)?</item>		<!-- e.g. "es-419" -->
-	</string-array>
-
-	<string-array name="default_language">
-		<item>@string/lang_en</item>
+		<item>@string/lang_fr</item>
+		<item>@string/lang_de</item>
+		<item>@string/lang_it</item>
+		<item>@string/lang_ja</item>
+		<item>@string/lang_pt</item>
+		<item>@string/lang_ru</item>
+		<item>@string/lang_es</item>
 	</string-array>
 
 	<string-array name="country_names">

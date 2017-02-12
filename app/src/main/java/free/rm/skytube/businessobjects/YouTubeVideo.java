@@ -71,7 +71,8 @@ public class YouTubeVideo implements Serializable {
 	/** The description of the video (set by the YouTuber/Owner). */
 	private String	description;
 
-	private static final Set<String> defaultPrefLanguages = new HashSet<>(Arrays.asList(SkyTubeApp.getStr(R.string.lang_en)));
+	/** Default preferred language(s) -- by default, no language shall be filtered out. */
+	private static final Set<String> defaultPrefLanguages = new HashSet<>(SkyTubeApp.getStringArrayAsList(R.array.languages_codes));
 
 	private static final String TAG = YouTubeVideo.class.getSimpleName();
 
