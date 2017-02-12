@@ -37,6 +37,7 @@ import butterknife.OnClick;
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.MainActivityListener;
 import free.rm.skytube.businessobjects.YouTubeVideo;
+import free.rm.skytube.businessobjects.db.SavedVideosDb;
 
 /**
  * A ViewHolder for the videos grid view.
@@ -149,6 +150,10 @@ public class GridViewHolder extends RecyclerView.ViewHolder {
 	public void onOptionsButtonClick(final View view) {
 		PopupMenu popupMenu = new PopupMenu(view.getContext(), view);
 		popupMenu.getMenuInflater().inflate(R.menu.video_options_menu, popupMenu.getMenu());
+		if(SavedVideosDb.getSavedVideosDb().hasVideo(youTubeVideo)) {
+			popupMenu.getMenu().findItem(R.id.add_to_saved_videos).setVisible(false);
+			popupMenu.getMenu().findItem(R.id.remove_from_saved_videos).setVisible(true);
+		}
 		popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
@@ -164,6 +169,12 @@ public class GridViewHolder extends RecyclerView.ViewHolder {
 						ClipData clip = ClipData.newPlainText("Video URL", youTubeVideo.getVideoUrl());
 						clipboard.setPrimaryClip(clip);
 						Toast.makeText(view.getContext(), R.string.url_copied_to_clipboard, Toast.LENGTH_SHORT).show();
+						return true;
+					case R.id.add_to_saved_videos:
+						SavedVideosDb.getSavedVideosDb().add(youTubeVideo);
+						return true;
+					case R.id.remove_from_saved_videos:
+						SavedVideosDb.getSavedVideosDb().remove(youTubeVideo);
 						return true;
 				}
 				return false;

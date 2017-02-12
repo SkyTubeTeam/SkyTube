@@ -2,4 +2,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 	<item android:id="@+id/share" android:title="@string/share"></item>
 	<item android:id="@+id/copyurl" android:title="@string/copy_to_clipboard"></item>
+	<item android:id="@+id/add_to_saved_videos" android:title="@string/add_to_saved_videos"></item>
+	<item android:id="@+id/remove_from_saved_videos" android:title="@string/remove_from_saved_videos" android:visible="false"></item>
 </menu>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			 android:layout_width="match_parent"
+			 android:layout_height="match_parent">
+
+	<android.support.v4.widget.SwipeRefreshLayout
+		android:id="@+id/swipeRefreshLayout"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
+		<android.support.v7.widget.RecyclerView
+			android:id="@+id/grid_view"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:scrollbars="vertical"
+			android:clipChildren="true"
+			android:numColumns="@integer/video_grid_num_columns"
+			android:background="@color/grid_view_background"/>
+	</android.support.v4.widget.SwipeRefreshLayout>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="vertical"
+		android:id="@+id/noSavedVideosText"
+		android:visibility="gone"
+		android:background="@color/grid_view_background"
+		>
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_horizontal"
+			android:text="@string/no_saved_videos_text"
+			android:textColor="@android:color/white"
+			android:layout_marginTop="80dp"
+			android:layout_marginLeft="20dp"
+			android:layout_marginRight="20dp"
+			android:textSize="20sp"
+			/>
+	</LinearLayout>
+
+</FrameLayout>

@@ -27,9 +27,6 @@ import android.preference.Preference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
 
-import java.util.prefs.PreferenceChangeEvent;
-import java.util.prefs.PreferenceChangeListener;
-
 import free.rm.skytube.BuildConfig;
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.VideoStream.VideoResolution;
