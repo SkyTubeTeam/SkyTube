@@ -28,7 +28,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.MathContext;
 import java.math.RoundingMode;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -72,7 +71,7 @@ public class YouTubeVideo implements Serializable {
 	private String	description;
 
 	/** Default preferred language(s) -- by default, no language shall be filtered out. */
-	private static final Set<String> defaultPrefLanguages = new HashSet<>(SkyTubeApp.getStringArrayAsList(R.array.languages_codes));
+	private static final Set<String> defaultPrefLanguages = new HashSet<>(SkyTubeApp.getStringArrayAsList(R.array.languages_iso639_codes));
 
 	private static final String TAG = YouTubeVideo.class.getSimpleName();
 
@@ -298,7 +297,7 @@ public class YouTubeVideo implements Serializable {
 			return false;
 
 		// if there are no preferred languages, then it means we must not filter this video
-		if (preferredLanguages.isEmpty())
+		if (preferredLanguages == null  ||  preferredLanguages.isEmpty())
 			return false;
 
 		// if this video's language is equal to the user's preferred one... then do NOT filter it out
@@ -313,6 +312,9 @@ public class YouTubeVideo implements Serializable {
 	}
 
 
+	/**
+	 * @return Set of user's preferred ISO 639 language codes (regex).
+	 */
 	private Set<String> getPreferredLanguages() {
 		return SkyTubeApp.getPreferenceManager().getStringSet(SkyTubeApp.getStr(R.string.pref_key_preferred_languages), defaultPrefLanguages);
 	}

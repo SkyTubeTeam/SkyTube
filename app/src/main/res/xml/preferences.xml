@@ -20,8 +20,8 @@
 			android:title="@string/pref_title_preferred_languages"
 			android:summary="@string/pref_summary_preferred_languages"
 			android:entries="@array/languages_names"
-			android:entryValues="@array/languages_codes"
-			android:defaultValue="@array/languages_codes"/>	<!-- no language shall be filtered out by DEFAULT -->
+			android:entryValues="@array/languages_iso639_codes"
+			android:defaultValue="@array/languages_iso639_codes"/>	<!-- no language shall be filtered out by DEFAULT -->
 	</PreferenceCategory>
 
 	<!--

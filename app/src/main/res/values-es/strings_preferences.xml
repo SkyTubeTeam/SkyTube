@@ -44,43 +44,167 @@
 				along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;</string>
 	<string name="i_agree">I Agree</string>
 
+
 	<string-array name="languages_names">
-		<item>中文</item>		<!-- Chinese -->
-		<item>English</item>
-		<item>Français</item>	<!-- French -->
-		<item>Deutsch</item>	<!-- German -->
-		<item>Italiano</item>	<!-- Italian -->
-		<item>日本語</item>		<!-- Japanese -->
-		<item>Português</item>	<!-- Portuguese -->
-		<item>Русский</item>	<!-- Russian -->
-		<item>Español</item>	<!-- Spanish -->
+		<item>Afrikaans</item>
+		<item>Azərbaycan</item>
+		<item>Bahasa Indonesia</item>
+		<item>Bahasa Malaysia</item>
+		<item>Català</item>
+		<item>Čeština</item>
+		<item>Dansk</item>
+		<item>Deutsch</item>
+		<item>Eesti</item>
+		<item>English (UK)</item>
+		<item>Español (España)</item>
+		<item>Español (Latinoamérica)</item>
+		<item>Euskara</item>
+		<item>Filipino</item>
+		<item>Français</item>
+		<item>Français (Canada)</item>
+		<item>Galego</item>
+		<item>Hrvatski</item>
+		<item>IsiZulu</item>
+		<item>Íslenska</item>
+		<item>Italiano</item>
+		<item>Kiswahili</item>
+		<item>Latviešu valoda</item>
+		<item>Lietuvių</item>
+		<item>Magyar</item>
+		<item>Nederlands</item>
+		<item>Norsk</item>
+		<item>O‘zbek</item>
+		<item>Polski</item>
+		<item>Português</item>
+		<item>Português (Brasil)</item>
+		<item>Română</item>
+		<item>Shqip</item>
+		<item>Slovenčina</item>
+		<item>Slovenščina</item>
+		<item>Suomi</item>
+		<item>Svenska</item>
+		<item>Tiếng Việt</item>
+		<item>Türkçe</item>
+		<item>Български</item>
+		<item>Кыргызча</item>
+		<item>Қазақ Тілі</item>
+		<item>Македонски</item>
+		<item>Монгол</item>
+		<item>Русский</item>
+		<item>Српски</item>
+		<item>Українська</item>
+		<item>Ελληνικά</item>
+		<item>Հայերեն</item>
+		<item>עברית</item>
+		<item>اردو</item>
+		<item>العربية</item>
+		<item>فارسی</item>
+		<item>नेपाली</item>
+		<item>मराठी</item>
+		<item>हिन्दी</item>
+		<item>বাংলা</item>
+		<item>ਪੰਜਾਬੀ</item>
+		<item>ગુજરાતી</item>
+		<item>தமிழ்</item>
+		<item>తెలుగు</item>
+		<item>ಕನ್ನಡ</item>
+		<item>മലയാളം</item>
+		<item>සිංහල</item>
+		<item>ภาษาไทย</item>
+		<item>ລາວ</item>
+		<item>ဗမာ</item>
+		<item>ქართული</item>
+		<item>አማርኛ</item>
+		<item>ខ្មែរ</item>
+		<item>中文 (简体)</item>
+		<item>中文 (繁體)</item>
+		<item>中文 (香港)</item>
+		<item>日本語</item>
+		<item>한국어</item>
 	</string-array>
 
-	<string name="lang_zh">zh(?:-.*)?</string>
-	<string name="lang_en">en(?:-.*)?</string>	<!-- Regex that will match "en", "en-GB", ...etc -->
-	<string name="lang_fr">fr(?:-.*)?</string>
-	<string name="lang_de">de(?:-.*)?</string>
-	<string name="lang_it">it(?:-.*)?</string>
-	<string name="lang_ja">ja(?:-.*)?</string>
-	<string name="lang_pt">pt(?:-.*)?</string>
-	<string name="lang_ru">ru(?:-.*)?</string>
-	<string name="lang_es">es(?:-.*)?</string>	<!-- e.g. "es-419" -->
-
-
-	<string-array name="languages_codes">
-		<item>@string/lang_zh</item>
-		<item>@string/lang_en</item>
-		<item>@string/lang_fr</item>
-		<item>@string/lang_de</item>
-		<item>@string/lang_it</item>
-		<item>@string/lang_ja</item>
-		<item>@string/lang_pt</item>
-		<item>@string/lang_ru</item>
-		<item>@string/lang_es</item>
+	<string-array name="languages_iso639_codes">
+		<item>af</item>
+		<item>az</item>
+		<item>id</item>
+		<item>ms</item>
+		<item>ca</item>
+		<item>cs</item>
+		<item>da</item>
+		<item>de</item>
+		<item>et</item>
+		<item>en-GB</item>
+		<item>es</item>
+		<item>es-419</item>
+		<item>eu</item>
+		<item>fil</item>
+		<item>fr</item>
+		<item>fr-CA</item>
+		<item>gl</item>
+		<item>hr</item>
+		<item>zu</item>
+		<item>is</item>
+		<item>it</item>
+		<item>sw</item>
+		<item>lv</item>
+		<item>lt</item>
+		<item>hu</item>
+		<item>nl</item>
+		<item>no</item>
+		<item>uz</item>
+		<item>pl</item>
+		<item>pt-PT</item>
+		<item>pt</item>
+		<item>ro</item>
+		<item>sq</item>
+		<item>sk</item>
+		<item>sl</item>
+		<item>fi</item>
+		<item>sv</item>
+		<item>vi</item>
+		<item>tr</item>
+		<item>bg</item>
+		<item>ky</item>
+		<item>kk</item>
+		<item>mk</item>
+		<item>mn</item>
+		<item>ru</item>
+		<item>sr</item>
+		<item>uk</item>
+		<item>el</item>
+		<item>hy</item>
+		<item>iw</item>
+		<item>ur</item>
+		<item>ar</item>
+		<item>fa</item>
+		<item>ne</item>
+		<item>mr</item>
+		<item>hi</item>
+		<item>bn</item>
+		<item>pa</item>
+		<item>gu</item>
+		<item>ta</item>
+		<item>te</item>
+		<item>kn</item>
+		<item>ml</item>
+		<item>si</item>
+		<item>th</item>
+		<item>lo</item>
+		<item>my</item>
+		<item>ka</item>
+		<item>am</item>
+		<item>km</item>
+		<item>zh-CN</item>
+		<item>zh-TW</item>
+		<item>zh-HK</item>
+		<item>ja</item>
+		<item>ko</item>
 	</string-array>
 
+
+	<!-- NB for Translators:  Country names shall all be written in English -->
 	<string-array name="country_names">
-		<item>Worldwide (All)</item>
+		<item>Mundial (Todos)</item>
 		<item>Algeria</item>
 		<item>Argentina</item>
 		<item>Australia</item>
