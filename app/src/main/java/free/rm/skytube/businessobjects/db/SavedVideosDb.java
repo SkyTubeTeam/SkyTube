@@ -34,6 +34,7 @@ import free.rm.skytube.gui.app.SkyTubeApp;
 
 public class SavedVideosDb extends SQLiteOpenHelper {
 	private static volatile SavedVideosDb savedVideosDb = null;
+	private static boolean hasUpdated = false;
 
 	private static final int DATABASE_VERSION = 2;
 	private static final String DATABASE_NAME = "savedvideos.db";
@@ -65,6 +66,13 @@ public class SavedVideosDb extends SQLiteOpenHelper {
 
 	}
 
+	/**
+	 * Add the specified video to the list of Saved Videos. The video will appear at the
+	 * top of the list (when displayed in the grid, videos will be ordered by the Order
+	 * field, descending.
+	 *
+	 * @param video Video to add
+	 */
 	public void add(YouTubeVideo video) {
 		Gson gson = new Gson();
 		ContentValues values = new ContentValues();
@@ -77,6 +85,12 @@ public class SavedVideosDb extends SQLiteOpenHelper {
 		onUpdated();
 	}
 
+	/**
+	 * Remove the specified video from the list of Saved Videos.
+	 *
+	 * @param video Video to remove
+	 * @return
+	 */
 	public boolean remove(YouTubeVideo video) {
 		getWritableDatabase().delete(SavedVideosTable.TABLE_NAME,
 						SavedVideosTable.COL_YOUTUBE_VIDEO_ID + " = ?",
@@ -87,7 +101,7 @@ public class SavedVideosDb extends SQLiteOpenHelper {
 						new String[]{video.getId()});
 
 		if(rowsDeleted >= 0) {
-			// Since we've removed a video, we will need to update the order column for all the videos
+			// Since we've removed a video, we will need to update the order column for all the videos.
 			int order = 1;
 			Cursor	cursor = getReadableDatabase().query(
 							SavedVideosTable.TABLE_NAME,
@@ -110,6 +124,13 @@ public class SavedVideosDb extends SQLiteOpenHelper {
 		return (rowsDeleted >= 0);
 	}
 
+	/**
+	 * When a Video in the Saved Videos tab is drag & dropped to a new position, this will be
+	 * called with the new updated list of videos. Since the videos are displayed in descending order,
+	 * the first video in the list will have the highest number.
+	 *
+	 * @param videos List of Videos to update their order.
+	 */
 	public void updateOrder(List<YouTubeVideo> videos) {
 		int order = videos.size();
 		for(YouTubeVideo video : videos) {
@@ -119,6 +140,12 @@ public class SavedVideosDb extends SQLiteOpenHelper {
 		}
 	}
 
+	/**
+	 * Check if the specified Video has been added to Saved Videos.
+	 *
+	 * @param video Video to check
+	 * @return True if it has been added, false if not.
+	 */
 	public boolean hasVideo(YouTubeVideo video) {
 		Cursor cursor = getReadableDatabase().query(
 						SavedVideosTable.TABLE_NAME,
@@ -129,6 +156,11 @@ public class SavedVideosDb extends SQLiteOpenHelper {
 		return hasVideo;
 	}
 
+	/**
+	 * Get the number of videos that have been saved.
+	 *
+	 * @return int, the number of videos
+	 */
 	public int getNumVideos() {
 		String query = String.format("SELECT COUNT(*) FROM %s", SavedVideosTable.TABLE_NAME);
 		Cursor cursor = SavedVideosDb.getSavedVideosDb().getReadableDatabase().rawQuery(query, null);
@@ -139,6 +171,11 @@ public class SavedVideosDb extends SQLiteOpenHelper {
 		return 0;
 	}
 
+	/**
+	 * Get the list of Videos that have been saved.
+	 *
+	 * @return List of Videos
+	 */
 	public List<YouTubeVideo> getSavedVideos() {
 		Cursor	cursor = getReadableDatabase().query(
 						SavedVideosTable.TABLE_NAME,
@@ -150,21 +187,35 @@ public class SavedVideosDb extends SQLiteOpenHelper {
 			do {
 				byte[] blob = cursor.getBlob(cursor.getColumnIndex(SavedVideosTable.COL_YOUTUBE_VIDEO));
 				YouTubeVideo video = new Gson().fromJson(new String(blob), new TypeToken<YouTubeVideo>(){}.getType());
-				int order = cursor.getInt(cursor.getColumnIndex(SavedVideosTable.COL_ORDER));
 				videos.add(video);
 			} while(cursor.moveToNext());
 		}
 		return videos;
 	}
 
+	/**
+	 * Add a Listener that will be notified when a Video is added or removed from Saved Videos. This will
+	 * allow the Video Grid to be redrawn in order to remove the video from display.
+	 *
+	 * @param listener The Listener (which implements SavedVideosDbListener) to add.
+	 */
 	public void addListener(SavedVideosDbListener listener) {
 		if(!listeners.contains(listener))
 			listeners.add(listener);
 	}
 
 	private void onUpdated() {
+		hasUpdated = true;
 		for(SavedVideosDbListener listener : listeners) {
 			listener.onUpdated();
 		}
+	}
+
+	public static boolean isHasUpdated() {
+		return hasUpdated;
+	}
+
+	public static void setHasUpdated(boolean hasUpdated) {
+		SavedVideosDb.hasUpdated = hasUpdated;
 	}
 }

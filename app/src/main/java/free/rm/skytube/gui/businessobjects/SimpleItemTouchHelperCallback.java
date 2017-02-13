@@ -20,6 +20,9 @@ package free.rm.skytube.gui.businessobjects;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 
+/**
+ * Callback class that sets up drag & drop reordering of a RecyclerView (in our case, SavedVideoGridAdapter)
+ */
 public class SimpleItemTouchHelperCallback extends ItemTouchHelper.Callback {
 	private final ItemTouchHelperAdapter adapter;
 

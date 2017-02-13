@@ -68,6 +68,11 @@ public abstract class RecyclerViewAdapterEx<T, HolderType extends RecyclerView.V
 		}
 	}
 
+	public void updateList(List<T> l) {
+		list = l;
+		notifyDataSetChanged();
+	}
+
 
 	/**
 	 * Append the given item to the Adapter's list.

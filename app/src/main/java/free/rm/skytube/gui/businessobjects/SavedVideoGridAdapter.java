@@ -23,6 +23,9 @@ import java.util.Collections;
 
 import free.rm.skytube.businessobjects.db.SavedVideosDb;
 
+/**
+ * Subclass of VideoGridAdapter that supports drag & drop reordering of the items in the grid.
+ */
 public class SavedVideoGridAdapter extends VideoGridAdapter implements ItemTouchHelperAdapter {
 	public SavedVideoGridAdapter(Context context) {
 		super(context);

@@ -150,6 +150,7 @@ public class GridViewHolder extends RecyclerView.ViewHolder {
 	public void onOptionsButtonClick(final View view) {
 		PopupMenu popupMenu = new PopupMenu(view.getContext(), view);
 		popupMenu.getMenuInflater().inflate(R.menu.video_options_menu, popupMenu.getMenu());
+		// If this video has been saved to watch later, hide the add option and show the remove option.
 		if(SavedVideosDb.getSavedVideosDb().hasVideo(youTubeVideo)) {
 			popupMenu.getMenu().findItem(R.id.add_to_saved_videos).setVisible(false);
 			popupMenu.getMenu().findItem(R.id.remove_from_saved_videos).setVisible(true);

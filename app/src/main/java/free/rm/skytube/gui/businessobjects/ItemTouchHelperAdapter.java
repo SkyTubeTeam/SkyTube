@@ -17,6 +17,9 @@
 
 package free.rm.skytube.gui.businessobjects;
 
+/**
+ * Interface to allow a VideoGridAdapter to be notified when an item is moved in the grid.
+ */
 public interface ItemTouchHelperAdapter {
 	boolean onItemMove(int fromPosition, int toPosition);
 }

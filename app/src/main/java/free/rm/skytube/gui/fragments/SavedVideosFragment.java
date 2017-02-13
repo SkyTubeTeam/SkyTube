@@ -18,8 +18,6 @@
 package free.rm.skytube.gui.fragments;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
@@ -28,12 +26,14 @@ import android.view.ViewGroup;
 
 import butterknife.Bind;
 import free.rm.skytube.R;
-import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.MainActivityListener;
 import free.rm.skytube.businessobjects.db.SavedVideosDb;
 import free.rm.skytube.gui.businessobjects.SavedVideoGridAdapter;
 import free.rm.skytube.gui.businessobjects.SimpleItemTouchHelperCallback;
 
+/**
+ * Fragment that displays Saved Videos
+ */
 public class SavedVideosFragment extends VideosGridFragment implements SavedVideosDb.SavedVideosDbListener {
 	@Bind(R.id.noSavedVideosText)
 	View noSavedVideosText;
@@ -53,6 +53,8 @@ public class SavedVideosFragment extends VideosGridFragment implements SavedVide
 			savedVideoGridAdapter = new SavedVideoGridAdapter(getActivity());
 		gridView.setAdapter(savedVideoGridAdapter);
 
+		savedVideoGridAdapter.clearList();
+
 		savedVideoGridAdapter.setListener((MainActivityListener)getActivity());
 
 		ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(savedVideoGridAdapter);
@@ -70,6 +72,8 @@ public class SavedVideosFragment extends VideosGridFragment implements SavedVide
 
 	private void populateList() {
 		int numVideosSaved = SavedVideosDb.getSavedVideosDb().getNumVideos();
+		// If no videos have been saved, show the text notifying the user, otherwise
+		// show the swipe refresh layout that contains the actual video grid.
 		if (numVideosSaved == 0) {
 			swipeRefreshLayout.setVisibility(View.GONE);
 			noSavedVideosText.setVisibility(View.VISIBLE);
@@ -77,24 +81,18 @@ public class SavedVideosFragment extends VideosGridFragment implements SavedVide
 			swipeRefreshLayout.setVisibility(View.VISIBLE);
 			noSavedVideosText.setVisibility(View.GONE);
 
-			savedVideoGridAdapter.clearList();
-			new AsyncTaskParallel<Void, Void, Void>() {
-				@Override
-				protected Void doInBackground(Void... voids) {
-					new Handler(Looper.getMainLooper()).post(new Runnable() {
-						@Override
-						public void run() {
-							savedVideoGridAdapter.appendList(SavedVideosDb.getSavedVideosDb().getSavedVideos());
-						}
-					});
-					return null;
-				}
-			}.executeInParallel();
+			savedVideoGridAdapter.updateList(SavedVideosDb.getSavedVideosDb().getSavedVideos());
 		}
 	}
 
+	/**
+	 * When
+	 */
 	public void onSelected() {
-		populateList();
+		if(SavedVideosDb.getSavedVideosDb().isHasUpdated()) {
+			populateList();
+			SavedVideosDb.getSavedVideosDb().setHasUpdated(false);
+		}
 	}
 
 	@Override

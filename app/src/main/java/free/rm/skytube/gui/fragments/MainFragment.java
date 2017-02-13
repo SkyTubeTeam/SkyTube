@@ -27,7 +27,6 @@ import free.rm.skytube.businessobjects.db.SavedVideosDb;
 import free.rm.skytube.gui.businessobjects.FragmentEx;
 import free.rm.skytube.gui.businessobjects.SubsAdapter;
 
-
 public class MainFragment extends FragmentEx {
 	private RecyclerView			subsListView = null;
 	private SubsAdapter				subsAdapter = null;
