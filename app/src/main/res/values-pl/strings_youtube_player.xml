@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="error_stream_err_unavailable">Treść błędu nie jest dostępna.</string>
+	<string name="error_stream_decryption_fail">Nie można załadować kodu deszyfrowania do serwisu YouTube.</string>
+	<string name="error_stream_parse_error">Błąd analizowania.</string>
+
+	<string name="error_video_play">Błąd odtwarzania</string>
+	<string name="error_video_streams_empty">Wideo %s nie ma strumieni</string>
+	<string name="error_get_video_desc">Wystąpił błąd podczas otrzymywania opisu wideo.</string>
+	<string name="error_invalid_url">Niepoprawny adres URL wideo:  %s</string>
+
+	<string name="loading_video">Ładowanie filmu…</string>
+	<string name="reload_video">Przeładuj film</string>
+	<string name="open_in_browser">Otwórz w przeglądarce</string>
+	<string name="open_with">Otwórz z…</string>
+
+	<string name="error_get_comments">Wystąpił bład podczas otrzymywania komentarzy.</string>
+	<string name="no_video_comments">Ten film nie ma komentarzy lub są one wyłączone.</string>
+	<string name="view_replies">Pokaż odpowiedzi</string>
+	<string name="hide_replies">Ukryj odpowiedzi</string>
+
+	<string name="enter_video_url">Wprowadź adres URL filmu</string>
+	<string name="play">Odtwarzaj</string>
+	<string name="cancel">Annuluj</string>
+	<string name="clear">Wyczyść</string>
+</resources>

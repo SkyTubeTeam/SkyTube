@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="subscriptions">Subskrypcje</string>
+	<string name="subscribe">Subskrybuj</string>
+	<string name="unsubscribe">Wypisz</string>
+	<string name="total_subscribers">%,d subskrybentów</string>
+
+	<string name="subscribed">Subskrybowane</string>
+	<string name="unsubscribed">Wypisany</string>
+
+	<string name="error_get_subbed_channels">Wystąpił błąd podczas pobierania subskrybowanych kanałów.</string>
+	<string name="error_check_if_user_has_subbed">Nie można sprawdzić czy użytkownik zasubskrybował kanał (id=%s)</string>
+	<string name="error_unable_to_subscribe">Nie można zasubskrybować kanału (id=%s)</string>
+</resources>
