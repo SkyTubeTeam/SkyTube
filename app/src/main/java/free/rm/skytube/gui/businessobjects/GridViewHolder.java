@@ -37,6 +37,7 @@ import butterknife.OnClick;
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.MainActivityListener;
 import free.rm.skytube.businessobjects.YouTubeVideo;
+import free.rm.skytube.businessobjects.db.BookmarksDb;
 
 /**
  * A ViewHolder for the videos grid view.
@@ -149,6 +150,13 @@ public class GridViewHolder extends RecyclerView.ViewHolder {
 	public void onOptionsButtonClick(final View view) {
 		PopupMenu popupMenu = new PopupMenu(view.getContext(), view);
 		popupMenu.getMenuInflater().inflate(R.menu.video_options_menu, popupMenu.getMenu());
+
+		// If this video has been saved to watch later, hide the add option and show the remove option.
+		if(BookmarksDb.getBookmarksDb().isBookmarked(youTubeVideo)) {
+			popupMenu.getMenu().findItem(R.id.bookmark_video).setVisible(false);
+			popupMenu.getMenu().findItem(R.id.unbookmark_video).setVisible(true);
+		}
+
 		popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
@@ -159,11 +167,24 @@ public class GridViewHolder extends RecyclerView.ViewHolder {
 						intent.putExtra(android.content.Intent.EXTRA_TEXT, youTubeVideo.getVideoUrl());
 						view.getContext().startActivity(Intent.createChooser(intent, view.getContext().getString(R.string.share_via)));
 						return true;
+
 					case R.id.copyurl:
 						ClipboardManager clipboard = (ClipboardManager)view.getContext().getSystemService(Context.CLIPBOARD_SERVICE);
 						ClipData clip = ClipData.newPlainText("Video URL", youTubeVideo.getVideoUrl());
 						clipboard.setPrimaryClip(clip);
 						Toast.makeText(view.getContext(), R.string.url_copied_to_clipboard, Toast.LENGTH_SHORT).show();
+						return true;
+
+					case R.id.bookmark_video:
+						Toast.makeText(context,
+								BookmarksDb.getBookmarksDb().add(youTubeVideo)  ?  R.string.video_bookmarked  :  R.string.video_bookmarked_error,
+								Toast.LENGTH_LONG).show();
+						return true;
+
+					case R.id.unbookmark_video:
+						Toast.makeText(context,
+								BookmarksDb.getBookmarksDb().remove(youTubeVideo)  ?  R.string.video_unbookmarked  :  R.string.video_unbookmarked_error,
+								Toast.LENGTH_LONG).show();
 						return true;
 				}
 				return false;

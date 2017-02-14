@@ -35,6 +35,9 @@ import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 import free.rm.skytube.gui.businessobjects.SubsAdapter;
 import free.rm.skytube.gui.businessobjects.SubscriptionsFragmentListener;
 
+/**
+ * Fragment that displays videos from all channels the user is subscribed to
+ */
 public class SubscriptionsFragment extends VideosGridFragment implements SubscriptionsFragmentListener {
 	private int numVideosFetched = 0;
 	private int numChannelsFetched = 0;

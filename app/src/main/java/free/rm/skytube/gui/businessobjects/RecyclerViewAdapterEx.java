@@ -32,7 +32,7 @@ public abstract class RecyclerViewAdapterEx<T, HolderType extends RecyclerView.V
 
 	private Context context;
 	private LayoutInflater inflater;
-	private List<T> list;
+	protected List<T> list;
 
 	public RecyclerViewAdapterEx(Context context) {
 		this(context, new ArrayList<T>());
@@ -66,6 +66,11 @@ public abstract class RecyclerViewAdapterEx<T, HolderType extends RecyclerView.V
 			this.list.addAll(l);
 			this.notifyDataSetChanged();
 		}
+	}
+
+	public void updateList(List<T> l) {
+		list = l;
+		notifyDataSetChanged();
 	}
 
 
