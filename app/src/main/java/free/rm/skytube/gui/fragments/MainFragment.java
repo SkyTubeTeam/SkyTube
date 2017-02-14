@@ -3,7 +3,6 @@ package free.rm.skytube.gui.fragments;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.Preference;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -24,10 +23,9 @@ import android.view.ViewGroup;
 
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.MainActivityListener;
+import free.rm.skytube.businessobjects.db.SavedVideosDb;
 import free.rm.skytube.gui.businessobjects.FragmentEx;
-import free.rm.skytube.gui.businessobjects.Logger;
 import free.rm.skytube.gui.businessobjects.SubsAdapter;
-
 
 public class MainFragment extends FragmentEx {
 	private RecyclerView			subsListView = null;
@@ -36,6 +34,7 @@ public class MainFragment extends FragmentEx {
 	private VideosGridFragment featuredVideosFragment;
 	private VideosGridFragment mostPopularVideosFragment;
 	private SubscriptionsFragment subscriptionsFragment;
+	private SavedVideosFragment savedVideosFragment;
 
 	private VideosPagerAdapter videosPagerAdapter;
 	private ViewPager viewPager;
@@ -118,6 +117,9 @@ public class MainFragment extends FragmentEx {
 					// This won't be the case if the Activity is being re-created.
 					if(subscriptionsFragment != null)
 						subscriptionsFragment.onSelected();
+				} else if(position == 3) {
+					if(savedVideosFragment != null)
+						savedVideosFragment.onSelected();
 				}
 			}
 
@@ -161,7 +163,7 @@ public class MainFragment extends FragmentEx {
 
 		@Override
 		public int getCount() {
-			return 3;
+			return 4;
 		}
 
 		@Override
@@ -182,6 +184,10 @@ public class MainFragment extends FragmentEx {
 				case 2:
 					subscriptionsFragment = new SubscriptionsFragment();
 					return subscriptionsFragment;
+				case 3:
+					savedVideosFragment = new SavedVideosFragment();
+					SavedVideosDb.getSavedVideosDb().addListener(savedVideosFragment);
+					return savedVideosFragment;
 			}
 			return null;
 		}
@@ -195,6 +201,8 @@ public class MainFragment extends FragmentEx {
 					return getString(R.string.popular);
 				case 2:
 					return getString(R.string.subscriptions);
+				case 3:
+					return getString(R.string.saved);
 				default:
 					return null;
 			}

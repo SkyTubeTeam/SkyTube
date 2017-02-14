@@ -397,10 +397,12 @@
 		<item>Featured</item>
 		<item>Most Popular</item>
 		<item>Subscriptions</item>
+		<item>Saved</item>
 	</string-array>
 	<string-array name="default_tab_values">
 		<item>0</item>
 		<item>1</item>
 		<item>2</item>
+		<item>3</item>
 	</string-array>
 </resources>
