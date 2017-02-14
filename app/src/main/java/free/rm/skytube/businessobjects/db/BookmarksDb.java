@@ -32,12 +32,15 @@ import java.util.List;
 import free.rm.skytube.businessobjects.YouTubeVideo;
 import free.rm.skytube.gui.app.SkyTubeApp;
 
-public class SavedVideosDb extends SQLiteOpenHelper {
-	private static volatile SavedVideosDb savedVideosDb = null;
+/**
+ * A database (DB) that stores user's bookmarked videos.
+ */
+public class BookmarksDb extends SQLiteOpenHelper {
+	private static volatile BookmarksDb bookmarksDb = null;
 	private static boolean hasUpdated = false;
 
-	private static final int DATABASE_VERSION = 2;
-	private static final String DATABASE_NAME = "savedvideos.db";
+	private static final int DATABASE_VERSION = 1;
+	private static final String DATABASE_NAME = "bookmarks.db";
 
 	private List<SavedVideosDbListener> listeners = new ArrayList<>();
 
@@ -45,84 +48,103 @@ public class SavedVideosDb extends SQLiteOpenHelper {
 		void onUpdated();
 	}
 
-	private SavedVideosDb(Context context) {
+
+	private BookmarksDb(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 	}
 
-	public static synchronized SavedVideosDb getSavedVideosDb() {
-		if (savedVideosDb == null) {
-			savedVideosDb = new SavedVideosDb(SkyTubeApp.getContext());
+
+	public static synchronized BookmarksDb getBookmarksDb() {
+		if (bookmarksDb == null) {
+			bookmarksDb = new BookmarksDb(SkyTubeApp.getContext());
 		}
 
-		return savedVideosDb;
+		return bookmarksDb;
 	}
+
+
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		db.execSQL(SavedVideosTable.getCreateStatement());
+		db.execSQL(BookmarksTable.getCreateStatement());
 	}
+
 
 	@Override
 	public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
 
 	}
 
+
 	/**
-	 * Add the specified video to the list of Saved Videos. The video will appear at the
+	 * Add the specified video to the list of bookmarked videos. The video will appear at the
 	 * top of the list (when displayed in the grid, videos will be ordered by the Order
 	 * field, descending.
 	 *
 	 * @param video Video to add
+	 *
+	 * @return True if the video was successfully saved/bookmarked to the DB.
 	 */
-	public void add(YouTubeVideo video) {
+	public boolean add(YouTubeVideo video) {
 		Gson gson = new Gson();
 		ContentValues values = new ContentValues();
-		values.put(SavedVideosTable.COL_YOUTUBE_VIDEO_ID, video.getId());
-		values.put(SavedVideosTable.COL_YOUTUBE_VIDEO, gson.toJson(video).getBytes());
+		values.put(BookmarksTable.COL_YOUTUBE_VIDEO_ID, video.getId());
+		values.put(BookmarksTable.COL_YOUTUBE_VIDEO, gson.toJson(video).getBytes());
+
 		int order = getNumVideos();
 		order++;
-		values.put(SavedVideosTable.COL_ORDER, order);
-		getWritableDatabase().insert(SavedVideosTable.TABLE_NAME, null, values);
+		values.put(BookmarksTable.COL_ORDER, order);
+
+		boolean addSuccessful = getWritableDatabase().insert(BookmarksTable.TABLE_NAME, null, values) != -1;
 		onUpdated();
+
+		return addSuccessful;
 	}
 
+
 	/**
-	 * Remove the specified video from the list of Saved Videos.
+	 * Remove the specified video from the list of bookmarked videos.
 	 *
-	 * @param video Video to remove
-	 * @return
+	 * @param video Video to remove.
+	 *
+	 * @return True if the video has been unbookmarked; false otherwise.
 	 */
 	public boolean remove(YouTubeVideo video) {
-		getWritableDatabase().delete(SavedVideosTable.TABLE_NAME,
-						SavedVideosTable.COL_YOUTUBE_VIDEO_ID + " = ?",
+		getWritableDatabase().delete(BookmarksTable.TABLE_NAME,
+						BookmarksTable.COL_YOUTUBE_VIDEO_ID + " = ?",
 						new String[]{video.getId()});
 
-		int rowsDeleted = getWritableDatabase().delete(SavedVideosTable.TABLE_NAME,
-						SavedVideosTable.COL_YOUTUBE_VIDEO_ID + " = ?",
+		int rowsDeleted = getWritableDatabase().delete(BookmarksTable.TABLE_NAME,
+						BookmarksTable.COL_YOUTUBE_VIDEO_ID + " = ?",
 						new String[]{video.getId()});
+		boolean successful = false;
 
 		if(rowsDeleted >= 0) {
 			// Since we've removed a video, we will need to update the order column for all the videos.
 			int order = 1;
 			Cursor	cursor = getReadableDatabase().query(
-							SavedVideosTable.TABLE_NAME,
-							new String[]{SavedVideosTable.COL_YOUTUBE_VIDEO, SavedVideosTable.COL_ORDER},
+							BookmarksTable.TABLE_NAME,
+							new String[]{BookmarksTable.COL_YOUTUBE_VIDEO, BookmarksTable.COL_ORDER},
 							null,
-							null, null, null, SavedVideosTable.COL_ORDER + " ASC");
+							null, null, null, BookmarksTable.COL_ORDER + " ASC");
 			if(cursor.moveToNext()) {
 				do {
-					byte[] blob = cursor.getBlob(cursor.getColumnIndex(SavedVideosTable.COL_YOUTUBE_VIDEO));
+					byte[] blob = cursor.getBlob(cursor.getColumnIndex(BookmarksTable.COL_YOUTUBE_VIDEO));
 					YouTubeVideo uvideo = new Gson().fromJson(new String(blob), new TypeToken<YouTubeVideo>(){}.getType());
 					ContentValues contentValues = new ContentValues();
-					contentValues.put(SavedVideosTable.COL_ORDER, order++);
+					contentValues.put(BookmarksTable.COL_ORDER, order++);
 
-					getWritableDatabase().update(SavedVideosTable.TABLE_NAME, contentValues, SavedVideosTable.COL_YOUTUBE_VIDEO_ID + " = ?",
+					getWritableDatabase().update(BookmarksTable.TABLE_NAME, contentValues, BookmarksTable.COL_YOUTUBE_VIDEO_ID + " = ?",
 									new String[]{uvideo.getId()});
 				} while(cursor.moveToNext());
 			}
+
 			onUpdated();
+			successful = true;
 		}
-		return (rowsDeleted >= 0);
+
+		return successful;
 	}
+
 
 	/**
 	 * When a Video in the Saved Videos tab is drag & dropped to a new position, this will be
@@ -133,28 +155,32 @@ public class SavedVideosDb extends SQLiteOpenHelper {
 	 */
 	public void updateOrder(List<YouTubeVideo> videos) {
 		int order = videos.size();
+
 		for(YouTubeVideo video : videos) {
 			ContentValues cv = new ContentValues();
-			cv.put(SavedVideosTable.COL_ORDER, order--);
-			getWritableDatabase().update(SavedVideosTable.TABLE_NAME, cv, SavedVideosTable.COL_YOUTUBE_VIDEO_ID + " = ?", new String[]{video.getId()});
+			cv.put(BookmarksTable.COL_ORDER, order--);
+			getWritableDatabase().update(BookmarksTable.TABLE_NAME, cv, BookmarksTable.COL_YOUTUBE_VIDEO_ID + " = ?", new String[]{video.getId()});
 		}
 	}
 
+
 	/**
-	 * Check if the specified Video has been added to Saved Videos.
+	 * Check if the specified Video has been bookmarked.
 	 *
 	 * @param video Video to check
-	 * @return True if it has been added, false if not.
+	 *
+	 * @return True if it has been bookmarked, false if not.
 	 */
-	public boolean hasVideo(YouTubeVideo video) {
+	public boolean isBookmarked(YouTubeVideo video) {
 		Cursor cursor = getReadableDatabase().query(
-						SavedVideosTable.TABLE_NAME,
-						new String[]{SavedVideosTable.COL_YOUTUBE_VIDEO_ID},
-						SavedVideosTable.COL_YOUTUBE_VIDEO_ID + " = ?",
+						BookmarksTable.TABLE_NAME,
+						new String[]{BookmarksTable.COL_YOUTUBE_VIDEO_ID},
+						BookmarksTable.COL_YOUTUBE_VIDEO_ID + " = ?",
 						new String[]{video.getId()}, null, null, null);
 		boolean	hasVideo = cursor.moveToNext();
 		return hasVideo;
 	}
+
 
 	/**
 	 * Get the number of videos that have been saved.
@@ -162,14 +188,15 @@ public class SavedVideosDb extends SQLiteOpenHelper {
 	 * @return int, the number of videos
 	 */
 	public int getNumVideos() {
-		String query = String.format("SELECT COUNT(*) FROM %s", SavedVideosTable.TABLE_NAME);
-		Cursor cursor = SavedVideosDb.getSavedVideosDb().getReadableDatabase().rawQuery(query, null);
+		String query = String.format("SELECT COUNT(*) FROM %s", BookmarksTable.TABLE_NAME);
+		Cursor cursor = BookmarksDb.getBookmarksDb().getReadableDatabase().rawQuery(query, null);
 
 		if(cursor.moveToFirst()) {
 			return cursor.getInt(0);
 		}
 		return 0;
 	}
+
 
 	/**
 	 * Get the list of Videos that have been saved.
@@ -178,20 +205,21 @@ public class SavedVideosDb extends SQLiteOpenHelper {
 	 */
 	public List<YouTubeVideo> getSavedVideos() {
 		Cursor	cursor = getReadableDatabase().query(
-						SavedVideosTable.TABLE_NAME,
-						new String[]{SavedVideosTable.COL_YOUTUBE_VIDEO, SavedVideosTable.COL_ORDER},
+						BookmarksTable.TABLE_NAME,
+						new String[]{BookmarksTable.COL_YOUTUBE_VIDEO, BookmarksTable.COL_ORDER},
 						null,
-						null, null, null, SavedVideosTable.COL_ORDER + " DESC");
+						null, null, null, BookmarksTable.COL_ORDER + " DESC");
 		List<YouTubeVideo> videos = new ArrayList<>();
 		if(cursor.moveToNext()) {
 			do {
-				byte[] blob = cursor.getBlob(cursor.getColumnIndex(SavedVideosTable.COL_YOUTUBE_VIDEO));
+				byte[] blob = cursor.getBlob(cursor.getColumnIndex(BookmarksTable.COL_YOUTUBE_VIDEO));
 				YouTubeVideo video = new Gson().fromJson(new String(blob), new TypeToken<YouTubeVideo>(){}.getType());
 				videos.add(video);
 			} while(cursor.moveToNext());
 		}
 		return videos;
 	}
+
 
 	/**
 	 * Add a Listener that will be notified when a Video is added or removed from Saved Videos. This will
@@ -216,6 +244,6 @@ public class SavedVideosDb extends SQLiteOpenHelper {
 	}
 
 	public static void setHasUpdated(boolean hasUpdated) {
-		SavedVideosDb.hasUpdated = hasUpdated;
+		BookmarksDb.hasUpdated = hasUpdated;
 	}
 }

@@ -23,7 +23,7 @@ import android.view.ViewGroup;
 
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.MainActivityListener;
-import free.rm.skytube.businessobjects.db.SavedVideosDb;
+import free.rm.skytube.businessobjects.db.BookmarksDb;
 import free.rm.skytube.gui.businessobjects.FragmentEx;
 import free.rm.skytube.gui.businessobjects.SubsAdapter;
 
@@ -34,7 +34,7 @@ public class MainFragment extends FragmentEx {
 	private VideosGridFragment featuredVideosFragment;
 	private VideosGridFragment mostPopularVideosFragment;
 	private SubscriptionsFragment subscriptionsFragment;
-	private SavedVideosFragment savedVideosFragment;
+	private BookmarksFragment savedVideosFragment;
 
 	private VideosPagerAdapter videosPagerAdapter;
 	private ViewPager viewPager;
@@ -185,8 +185,8 @@ public class MainFragment extends FragmentEx {
 					subscriptionsFragment = new SubscriptionsFragment();
 					return subscriptionsFragment;
 				case 3:
-					savedVideosFragment = new SavedVideosFragment();
-					SavedVideosDb.getSavedVideosDb().addListener(savedVideosFragment);
+					savedVideosFragment = new BookmarksFragment();
+					BookmarksDb.getBookmarksDb().addListener(savedVideosFragment);
 					return savedVideosFragment;
 			}
 			return null;
@@ -202,7 +202,7 @@ public class MainFragment extends FragmentEx {
 				case 2:
 					return getString(R.string.subscriptions);
 				case 3:
-					return getString(R.string.saved);
+					return getString(R.string.bookmarks);
 				default:
 					return null;
 			}

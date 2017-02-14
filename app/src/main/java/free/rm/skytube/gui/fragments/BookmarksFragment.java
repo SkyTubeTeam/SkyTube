@@ -27,23 +27,23 @@ import android.view.ViewGroup;
 import butterknife.Bind;
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.MainActivityListener;
-import free.rm.skytube.businessobjects.db.SavedVideosDb;
+import free.rm.skytube.businessobjects.db.BookmarksDb;
 import free.rm.skytube.gui.businessobjects.SavedVideoGridAdapter;
 import free.rm.skytube.gui.businessobjects.SimpleItemTouchHelperCallback;
 
 /**
- * Fragment that displays Saved Videos
+ * Fragment that displays bookmarked videos.
  */
-public class SavedVideosFragment extends VideosGridFragment implements SavedVideosDb.SavedVideosDbListener {
+public class BookmarksFragment extends VideosGridFragment implements BookmarksDb.SavedVideosDbListener {
 	@Bind(R.id.noSavedVideosText)
-	View noSavedVideosText;
+	View noBookmarkedVideosText;
 
 	private SavedVideoGridAdapter savedVideoGridAdapter;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setLayoutResource(R.layout.videos_gridview_savedvideos);
+		setLayoutResource(R.layout.videos_gridview_bookmarks);
 	}
 
 	@Override
@@ -71,17 +71,17 @@ public class SavedVideosFragment extends VideosGridFragment implements SavedVide
 	}
 
 	private void populateList() {
-		int numVideosSaved = SavedVideosDb.getSavedVideosDb().getNumVideos();
+		int numVideosSaved = BookmarksDb.getBookmarksDb().getNumVideos();
 		// If no videos have been saved, show the text notifying the user, otherwise
 		// show the swipe refresh layout that contains the actual video grid.
 		if (numVideosSaved == 0) {
 			swipeRefreshLayout.setVisibility(View.GONE);
-			noSavedVideosText.setVisibility(View.VISIBLE);
+			noBookmarkedVideosText.setVisibility(View.VISIBLE);
 		} else {
 			swipeRefreshLayout.setVisibility(View.VISIBLE);
-			noSavedVideosText.setVisibility(View.GONE);
+			noBookmarkedVideosText.setVisibility(View.GONE);
 
-			savedVideoGridAdapter.updateList(SavedVideosDb.getSavedVideosDb().getSavedVideos());
+			savedVideoGridAdapter.updateList(BookmarksDb.getBookmarksDb().getSavedVideos());
 		}
 	}
 
@@ -89,9 +89,9 @@ public class SavedVideosFragment extends VideosGridFragment implements SavedVide
 	 * When
 	 */
 	public void onSelected() {
-		if(SavedVideosDb.getSavedVideosDb().isHasUpdated()) {
+		if(BookmarksDb.getBookmarksDb().isHasUpdated()) {
 			populateList();
-			SavedVideosDb.getSavedVideosDb().setHasUpdated(false);
+			BookmarksDb.getBookmarksDb().setHasUpdated(false);
 		}
 	}
 
@@ -99,4 +99,5 @@ public class SavedVideosFragment extends VideosGridFragment implements SavedVide
 	public void onUpdated() {
 		populateList();
 	}
+
 }

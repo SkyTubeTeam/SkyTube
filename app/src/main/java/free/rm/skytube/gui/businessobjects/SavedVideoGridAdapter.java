@@ -21,7 +21,7 @@ import android.content.Context;
 
 import java.util.Collections;
 
-import free.rm.skytube.businessobjects.db.SavedVideosDb;
+import free.rm.skytube.businessobjects.db.BookmarksDb;
 
 /**
  * Subclass of VideoGridAdapter that supports drag & drop reordering of the items in the grid.
@@ -45,7 +45,7 @@ public class SavedVideoGridAdapter extends VideoGridAdapter implements ItemTouch
 		notifyItemMoved(fromPosition, toPosition);
 
 		// Update the database since the order has changed
-		SavedVideosDb.getSavedVideosDb().updateOrder(list);
+		BookmarksDb.getBookmarksDb().updateOrder(list);
 
 		return true;
 	}

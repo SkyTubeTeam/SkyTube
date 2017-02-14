@@ -20,8 +20,8 @@ package free.rm.skytube.businessobjects.db;
 /**
  * Saved Videos Table
  */
-public class SavedVideosTable {
-	public static final String TABLE_NAME = "SavedVideos";
+public class BookmarksTable {
+	public static final String TABLE_NAME = "Bookmarks";
 	public static final String COL_YOUTUBE_VIDEO_ID = "YouTube_Video_Id";
 	public static final String COL_YOUTUBE_VIDEO = "YouTube_Video";
 	public static final String COL_ORDER = "Order_Index";

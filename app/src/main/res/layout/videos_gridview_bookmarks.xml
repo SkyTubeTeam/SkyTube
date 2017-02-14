@@ -29,7 +29,7 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_gravity="center_horizontal"
-			android:text="@string/no_saved_videos_text"
+			android:text="@string/no_bookmarked_videos_text"
 			android:textColor="@android:color/white"
 			android:layout_marginTop="80dp"
 			android:layout_marginLeft="20dp"

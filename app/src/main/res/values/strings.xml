@@ -20,8 +20,4 @@
 	<string name="url_copied_to_clipboard">URL copied to clipboard.</string>
 	<string name="share">Share</string>
 	<string name="copy_to_clipboard">Copy to Clipboard</string>
-	<string name="add_to_saved_videos">Add to Saved Videos</string>
-	<string name="remove_from_saved_videos">Remove from Saved Videos</string>
-	<string name="saved">Saved</string>
-	<string name="no_saved_videos_text">You haven\'t saved any videos yet.\n\nOnce you do, they will show up here.</string>
 </resources>
