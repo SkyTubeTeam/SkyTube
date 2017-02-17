@@ -27,16 +27,16 @@ import free.rm.skytube.businessobjects.VideoStream.GetChannelVideos;
 public enum VideoCategory {
 	/** Featured videos */
 	FEATURED (0),
-
 	/** Most popular videos */
 	MOST_POPULAR (1),
-
 	/** Videos related to a search query */
 	SEARCH_QUERY (2),
-
 	/** Videos that are owned by a channel */
-	CHANNEL_VIDEOS (3);
-
+	CHANNEL_VIDEOS (3),
+	/** Videos pertaining to the user's subscriptions feed */
+	SUBSCRIPTIONS_FEED_VIDEOS (4),
+	/** Videos bookmarked by the user */
+	BOOKMARKS_VIDEOS (5);
 
 	// *****************
 	// DON'T FORGET to update getVideoCategory() and createGetYouTubeVideos() methods...
@@ -44,6 +44,7 @@ public enum VideoCategory {
 
 	private final int id;
 	private static final String TAG = VideoCategory.class.getSimpleName();
+
 
 
 	VideoCategory(int id) {
@@ -85,8 +86,13 @@ public enum VideoCategory {
 			return new GetYouTubeVideoBySearch();
 		else if (id == CHANNEL_VIDEOS.id)
 			return new GetChannelVideos();
+		else if (id == SUBSCRIPTIONS_FEED_VIDEOS.id)
+			return new GetSubscriptionsVideos();
+		else if (id == BOOKMARKS_VIDEOS.id)
+			return new GetBookmarksVideos();
 
-		return null;
+		// this will notify the developer is he forgot to amend this method when a new type is added
+		throw new UnsupportedOperationException();
 	}
 
 }

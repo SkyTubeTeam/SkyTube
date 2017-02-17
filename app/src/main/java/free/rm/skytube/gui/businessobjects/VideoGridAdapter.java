@@ -146,6 +146,14 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<YouTubeVideo, GridVi
 
 	/**
 	 * Refresh the video grid, by running the task to get the videos again.
+	 */
+	public void refresh() {
+		refresh(null);
+	}
+
+
+	/**
+	 * Refresh the video grid, by running the task to get the videos again.
 	 *
 	 * @param onFinished Runnable to run when the task completes.
 	 */

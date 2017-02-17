@@ -1,6 +1,5 @@
 package free.rm.skytube.gui.fragments;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -21,6 +20,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.MainActivityListener;
 import free.rm.skytube.businessobjects.db.BookmarksDb;
@@ -28,16 +30,20 @@ import free.rm.skytube.gui.businessobjects.FragmentEx;
 import free.rm.skytube.gui.businessobjects.SubsAdapter;
 
 public class MainFragment extends FragmentEx {
-	private RecyclerView			subsListView = null;
-	private SubsAdapter				subsAdapter = null;
-	private ActionBarDrawerToggle	subsDrawerToggle;
-	private VideosGridFragment featuredVideosFragment;
-	private VideosGridFragment mostPopularVideosFragment;
-	private SubscriptionsFragment subscriptionsFragment;
-	private BookmarksFragment savedVideosFragment;
+	private RecyclerView				subsListView = null;
+	private SubsAdapter					subsAdapter  = null;
+	private ActionBarDrawerToggle		subsDrawerToggle;
 
-	private VideosPagerAdapter videosPagerAdapter;
-	private ViewPager viewPager;
+	// fragments
+	private List<VideosGridFragment>	videoGridFragmentsList = new ArrayList<>();
+	private FeaturedVideosFragment		featuredVideosFragment;
+	private MostPopularVideosFragment	mostPopularVideosFragment;
+	private SubscriptionsFragment		subscriptionsFragment;
+	private BookmarksFragment			bookmarksFragment;
+
+	private VideosPagerAdapter			videosPagerAdapter = null;
+	private ViewPager					viewPager;
+
 
 	@Nullable
 	@Override
@@ -74,10 +80,11 @@ public class MainFragment extends FragmentEx {
 		subsListView.setLayoutManager(new LinearLayoutManager(getActivity()));
 		subsListView.setAdapter(subsAdapter);
 
-
-		viewPager = (ViewPager)view.findViewById(R.id.pager);
+		viewPager = (ViewPager) view.findViewById(R.id.pager);
 		viewPager.setOffscreenPageLimit(3);
-		videosPagerAdapter = new VideosPagerAdapter(getActivity(), getChildFragmentManager());
+
+		if (videosPagerAdapter == null)
+			videosPagerAdapter = new VideosPagerAdapter(getChildFragmentManager());
 		viewPager.setAdapter(videosPagerAdapter);
 
 		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
@@ -94,43 +101,31 @@ public class MainFragment extends FragmentEx {
 
 			@Override
 			public void onTabUnselected(TabLayout.Tab tab) {
-
 			}
 
 			@Override
 			public void onTabReselected(TabLayout.Tab tab) {
-
 			}
 		});
 
 		viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 			@Override
 			public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
 			}
 
 			@Override
 			public void onPageSelected(int position) {
-				if(position == 2) {
-					// Subscriptions tab has been selected. We need to check if it's null, though, because in some cases when the Activity is re-created, the subscriptionsFragment
-					// may not be instantiated yet. But that's ok, since all that happens here is that the progress dialog shows up if we're in the middle of a subscriptions refresh.
-					// This won't be the case if the Activity is being re-created.
-					if(subscriptionsFragment != null)
-						subscriptionsFragment.onSelected();
-				} else if(position == 3) {
-					if(savedVideosFragment != null)
-						savedVideosFragment.onSelected();
-				}
+				videoGridFragmentsList.get(position).onFragmentSelected();
 			}
 
 			@Override
 			public void onPageScrollStateChanged(int state) {
-
 			}
 		});
 
 		return view;
 	}
+
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
@@ -138,6 +133,7 @@ public class MainFragment extends FragmentEx {
 
 		subsDrawerToggle.syncState();
 	}
+
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -153,59 +149,40 @@ public class MainFragment extends FragmentEx {
 
 
 
-	public class VideosPagerAdapter extends FragmentPagerAdapter {
-		Context context = null;
+	private class VideosPagerAdapter extends FragmentPagerAdapter {
 
-		public VideosPagerAdapter(Context context, FragmentManager fm) {
+		public VideosPagerAdapter(FragmentManager fm) {
 			super(fm);
-			this.context = context;
+
+			// initialise fragments
+			featuredVideosFragment    = new FeaturedVideosFragment();
+			mostPopularVideosFragment = new MostPopularVideosFragment();
+			subscriptionsFragment     = new SubscriptionsFragment();
+			bookmarksFragment         = new BookmarksFragment();
+			BookmarksDb.getBookmarksDb().addListener(bookmarksFragment);
+
+			// add fragments to list
+			videoGridFragmentsList.add(featuredVideosFragment);
+			videoGridFragmentsList.add(mostPopularVideosFragment);
+			videoGridFragmentsList.add(subscriptionsFragment);
+			videoGridFragmentsList.add(bookmarksFragment);
 		}
 
 		@Override
 		public int getCount() {
-			return 4;
+			return videoGridFragmentsList.size();
 		}
 
 		@Override
 		public Fragment getItem(int position) {
-			switch (position) {
-				case 0:
-					featuredVideosFragment = new VideosGridFragment();
-					Bundle args = new Bundle();
-					args.putInt(VideosGridFragment.VIDEO_CATEGORY, 0);
-					featuredVideosFragment.setArguments(args);
-					return featuredVideosFragment;
-				case 1:
-					mostPopularVideosFragment = new VideosGridFragment();
-					Bundle args1 = new Bundle();
-					args1.putInt(VideosGridFragment.VIDEO_CATEGORY, 1);
-					mostPopularVideosFragment.setArguments(args1);
-					return mostPopularVideosFragment;
-				case 2:
-					subscriptionsFragment = new SubscriptionsFragment();
-					return subscriptionsFragment;
-				case 3:
-					savedVideosFragment = new BookmarksFragment();
-					BookmarksDb.getBookmarksDb().addListener(savedVideosFragment);
-					return savedVideosFragment;
-			}
-			return null;
+			return videoGridFragmentsList.get(position);
 		}
 
 		@Override
 		public CharSequence getPageTitle(int position) {
-			switch(position) {
-				case 0:
-					return getString(R.string.featured);
-				case 1:
-					return getString(R.string.popular);
-				case 2:
-					return getString(R.string.subscriptions);
-				case 3:
-					return getString(R.string.bookmarks);
-				default:
-					return null;
-			}
+			return videoGridFragmentsList.get(position).getFragmentName();
 		}
+
 	}
+
 }

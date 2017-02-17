@@ -42,11 +42,7 @@ public class BookmarksDb extends SQLiteOpenHelper {
 	private static final int DATABASE_VERSION = 1;
 	private static final String DATABASE_NAME = "bookmarks.db";
 
-	private List<SavedVideosDbListener> listeners = new ArrayList<>();
-
-	public interface SavedVideosDbListener {
-		void onUpdated();
-	}
+	private List<BookmarksDbListener> listeners = new ArrayList<>();
 
 
 	private BookmarksDb(Context context) {
@@ -199,11 +195,11 @@ public class BookmarksDb extends SQLiteOpenHelper {
 
 
 	/**
-	 * Get the list of Videos that have been saved.
+	 * Get the list of Videos that have been bookmarked.
 	 *
 	 * @return List of Videos
 	 */
-	public List<YouTubeVideo> getSavedVideos() {
+	public List<YouTubeVideo> getBookmarkedVideos() {
 		Cursor	cursor = getReadableDatabase().query(
 						BookmarksTable.TABLE_NAME,
 						new String[]{BookmarksTable.COL_YOUTUBE_VIDEO, BookmarksTable.COL_ORDER},
@@ -227,15 +223,15 @@ public class BookmarksDb extends SQLiteOpenHelper {
 	 *
 	 * @param listener The Listener (which implements SavedVideosDbListener) to add.
 	 */
-	public void addListener(SavedVideosDbListener listener) {
+	public void addListener(BookmarksDbListener listener) {
 		if(!listeners.contains(listener))
 			listeners.add(listener);
 	}
 
 	private void onUpdated() {
 		hasUpdated = true;
-		for(SavedVideosDbListener listener : listeners) {
-			listener.onUpdated();
+		for(BookmarksDbListener listener : listeners) {
+			listener.onBookmarksDbUpdated();
 		}
 	}
 
@@ -246,4 +242,18 @@ public class BookmarksDb extends SQLiteOpenHelper {
 	public static void setHasUpdated(boolean hasUpdated) {
 		BookmarksDb.hasUpdated = hasUpdated;
 	}
+
+
+
+	////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+	public interface BookmarksDbListener {
+		/**
+		 * Will be called once the bookmarks DB is updated (by either a bookmark insertion or
+		 * deletion).
+		 */
+		void onBookmarksDbUpdated();
+	}
+
 }

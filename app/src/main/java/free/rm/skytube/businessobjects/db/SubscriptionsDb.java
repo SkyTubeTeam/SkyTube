@@ -127,14 +127,20 @@ public class SubscriptionsDb extends SQLiteOpenHelper {
 		return subsChannels;
 	}
 
-	public int numSubscribedChannels() {
-		String query = String.format("SELECT COUNT(*) FROM %s", SubscriptionsTable.TABLE_NAME);
-		Cursor cursor = SubscriptionsDb.getSubscriptionsDb().getReadableDatabase().rawQuery(query, null);
 
-		if(cursor.moveToFirst()) {
-			return cursor.getInt(0);
-		}
-		return 0;
+	/**
+	 * @return The total number of subscribed channels.
+	 */
+	public int getTotalSubscribedChannels() {
+		String	query = String.format("SELECT COUNT(*) FROM %s", SubscriptionsTable.TABLE_NAME);
+		Cursor	cursor = SubscriptionsDb.getSubscriptionsDb().getReadableDatabase().rawQuery(query, null);
+		int		totalSubbedChannels = 0;
+
+		if (cursor.moveToFirst())
+			totalSubbedChannels = cursor.getInt(0);
+
+		cursor.close();
+		return totalSubbedChannels;
 	}
 
 

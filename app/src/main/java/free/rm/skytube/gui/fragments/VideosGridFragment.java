@@ -33,19 +33,12 @@ import free.rm.skytube.gui.businessobjects.VideoGridAdapter;
 /**
  * A fragment that will hold a {@link GridView} full of YouTube videos.
  */
-@SuppressWarnings("deprecation")
-public class VideosGridFragment extends BaseVideosGridFragment {
-	public static final String VIDEO_CATEGORY = "VideosGridFragment.VideoCategory";
+public abstract class VideosGridFragment extends BaseVideosGridFragment {
 
-	protected RecyclerView			gridView;
-	private View					progressBar = null;
+	protected RecyclerView	gridView;
+	private View			progressBar = null;
+	private int 			layoutResource = 0;
 
-	private int layoutResource = 0;
-
-	// In case a subclass of VideosGridFragment wants to use an alternate layout resource (e.g. Subscriptions)
-	protected void setLayoutResource(int layoutResource) {
-		this.layoutResource = layoutResource;
-	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -61,12 +54,42 @@ public class VideosGridFragment extends BaseVideosGridFragment {
 			videoGridAdapter = new VideoGridAdapter(getActivity());
 		}
 		videoGridAdapter.setProgressBar(progressBar);
-		if(getArguments() != null)
-			videoGridAdapter.setVideoCategory(VideoCategory.getVideoCategory(getArguments().getInt(VIDEO_CATEGORY, 0)));
+
+		if (getVideoCategory() != null)
+			videoGridAdapter.setVideoCategory(getVideoCategory());
+
 		videoGridAdapter.setListener((MainActivityListener)getActivity());
+
 		gridView.setLayoutManager(new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.video_grid_num_columns)));
 		gridView.setAdapter(videoGridAdapter);
 
 		return view;
 	}
+
+
+	/**
+	 * In case a subclass of VideosGridFragment wants to use an alternate layout resource (e.g. Subscriptions).
+ 	 */
+	protected void setLayoutResource(int layoutResource) {
+		this.layoutResource = layoutResource;
+	}
+
+
+	/**
+	 * @return Returns the category of videos being displayed by this fragment.
+	 */
+	protected abstract VideoCategory getVideoCategory();
+
+
+	/**
+	 * @return The fragment/tab name.
+	 */
+	protected abstract String getFragmentName();
+
+
+	/**
+	 * Will be called when the user selects this fragment/tab.
+	 */
+	protected abstract void onFragmentSelected();
+
 }

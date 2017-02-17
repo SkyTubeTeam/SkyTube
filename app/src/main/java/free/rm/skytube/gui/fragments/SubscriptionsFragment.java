@@ -19,7 +19,6 @@ package free.rm.skytube.gui.fragments;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Toast;
@@ -28,17 +27,19 @@ import com.afollestad.materialdialogs.MaterialDialog;
 
 import butterknife.Bind;
 import free.rm.skytube.R;
-import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.GetSubscriptionVideosTask;
+import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.businessobjects.YouTubeChannel;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
+import free.rm.skytube.gui.app.SkyTubeApp;
 import free.rm.skytube.gui.businessobjects.SubsAdapter;
 import free.rm.skytube.gui.businessobjects.SubscriptionsFragmentListener;
 
 /**
- * Fragment that displays videos from all channels the user is subscribed to
+ * Fragment that displays videos from all channels the user is subscribed to.
  */
 public class SubscriptionsFragment extends VideosGridFragment implements SubscriptionsFragmentListener {
+
 	private int numVideosFetched = 0;
 	private int numChannelsFetched = 0;
 	private int numChannelsSubscribed = 0;
@@ -61,7 +62,7 @@ public class SubscriptionsFragment extends VideosGridFragment implements Subscri
 		super.onViewCreated(view, savedInstanceState);
 		videoGridAdapter.clearList();
 
-		numChannelsSubscribed = SubscriptionsDb.getSubscriptionsDb().numSubscribedChannels();
+		numChannelsSubscribed = SubscriptionsDb.getSubscriptionsDb().getTotalSubscribedChannels();
 		if(numChannelsSubscribed == 0) {
 			swipeRefreshLayout.setVisibility(View.GONE);
 			noSubscriptionsText.setVisibility(View.VISIBLE);
@@ -71,8 +72,7 @@ public class SubscriptionsFragment extends VideosGridFragment implements Subscri
 				noSubscriptionsText.setVisibility(View.GONE);
 			}
 
-
-			populateList();
+			videoGridAdapter.setVideoCategory(VideoCategory.SUBSCRIPTIONS_FEED_VIDEOS);
 
 			// Launch a refresh of subscribed videos when this Fragment is created, but don't show the progress dialog. It will be shown when the tab is shown.
 			if (shouldRefresh)
@@ -81,27 +81,11 @@ public class SubscriptionsFragment extends VideosGridFragment implements Subscri
 		}
 	}
 
-	private void populateList() {
-		// {@link SubscriptionsDb.getSubscriptionsDb().getSubscriptionVideos()} should not be called in the UI thread here, so as to slow down the UI.
-		new AsyncTaskParallel<Void, Void, Void>() {
-			@Override
-			protected Void doInBackground(Void... voids) {
-				// Modifying any views needs to be done in the UI thread.
-				new Handler(Looper.getMainLooper()).post(new Runnable() {
-					@Override
-					public void run() {
-						videoGridAdapter.appendList(SubscriptionsDb.getSubscriptionsDb().getSubscriptionVideos());
-					}
-				});
-				return null;
-			}
-		}.executeInParallel();
-	}
 
 	private void doRefresh(boolean showDialog) {
 		numVideosFetched = 0;
 		numChannelsFetched = 0;
-		numChannelsSubscribed = SubscriptionsDb.getSubscriptionsDb().numSubscribedChannels();
+		numChannelsSubscribed = SubscriptionsDb.getSubscriptionsDb().getTotalSubscribedChannels();
 		if(numChannelsSubscribed > 0) {
 			new GetSubscriptionVideosTask(this).executeInParallel();
 			refreshInProgress = true;
@@ -110,6 +94,7 @@ public class SubscriptionsFragment extends VideosGridFragment implements Subscri
 			}
 		}
 	}
+
 
 	private void showRefreshDialog() {
 		progressDialog = new MaterialDialog.Builder(getActivity())
@@ -123,10 +108,12 @@ public class SubscriptionsFragment extends VideosGridFragment implements Subscri
 		progressDialog.show();
 	}
 
+
 	@Override
 	public void onRefresh() {
 		doRefresh(true);
 	}
+
 
 	@Override
 	public void onChannelVideosFetched(YouTubeChannel channel, int videosFetched, final boolean videosDeleted) {
@@ -164,11 +151,24 @@ public class SubscriptionsFragment extends VideosGridFragment implements Subscri
 		}
 	}
 
-	/**
-	 * When the Subscriptions tab is selected, if a refresh is in progress, show the dialog.
-	 */
-	public void onSelected() {
-		if(refreshInProgress)
+
+	@Override
+	protected void onFragmentSelected() {
+		// when the Subscriptions tab is selected, if a refresh is in progress, show the dialog.
+		if (refreshInProgress)
 			showRefreshDialog();
 	}
+
+
+	@Override
+	protected VideoCategory getVideoCategory() {
+		return VideoCategory.SUBSCRIPTIONS_FEED_VIDEOS;
+	}
+
+
+	@Override
+	protected String getFragmentName() {
+		return SkyTubeApp.getStr(R.string.subscriptions);
+	}
+
 }

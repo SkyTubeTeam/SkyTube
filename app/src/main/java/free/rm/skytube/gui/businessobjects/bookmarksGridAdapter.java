@@ -26,8 +26,9 @@ import free.rm.skytube.businessobjects.db.BookmarksDb;
 /**
  * Subclass of VideoGridAdapter that supports drag & drop reordering of the items in the grid.
  */
-public class SavedVideoGridAdapter extends VideoGridAdapter implements ItemTouchHelperAdapter {
-	public SavedVideoGridAdapter(Context context) {
+public class bookmarksGridAdapter extends VideoGridAdapter implements ItemTouchHelperAdapter {
+
+	public bookmarksGridAdapter(Context context) {
 		super(context);
 	}
 
