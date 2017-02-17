@@ -60,10 +60,10 @@ public class SubscriptionsFragment extends VideosGridFragment implements Subscri
 	@Override
 	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-		videoGridAdapter.clearList();
 
 		numChannelsSubscribed = SubscriptionsDb.getSubscriptionsDb().getTotalSubscribedChannels();
-		if(numChannelsSubscribed == 0) {
+
+		if (numChannelsSubscribed <= 0) {
 			swipeRefreshLayout.setVisibility(View.GONE);
 			noSubscriptionsText.setVisibility(View.VISIBLE);
 		} else {

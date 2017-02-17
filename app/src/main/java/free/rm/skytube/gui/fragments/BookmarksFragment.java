@@ -57,7 +57,6 @@ public class BookmarksFragment extends VideosGridFragment implements BookmarksDb
 		if (bookmarksGridAdapter == null)
 			bookmarksGridAdapter = new bookmarksGridAdapter(getActivity());
 
-		bookmarksGridAdapter.clearList();
 		bookmarksGridAdapter.setListener((MainActivityListener)getActivity());
 		gridView.setAdapter(bookmarksGridAdapter);
 
