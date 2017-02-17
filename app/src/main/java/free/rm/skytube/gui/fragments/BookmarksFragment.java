@@ -77,7 +77,7 @@ public class BookmarksFragment extends VideosGridFragment implements BookmarksDb
 
 
 	private void populateList() {
-		int numVideosSaved = BookmarksDb.getBookmarksDb().getNumVideos();
+		int numVideosSaved = BookmarksDb.getBookmarksDb().getTotalBookmarks();
 
 		// If no videos have been saved, show the text notifying the user, otherwise
 		// show the swipe refresh layout that contains the actual video grid.

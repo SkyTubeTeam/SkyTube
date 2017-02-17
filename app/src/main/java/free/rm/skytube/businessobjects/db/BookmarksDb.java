@@ -86,7 +86,7 @@ public class BookmarksDb extends SQLiteOpenHelper {
 		values.put(BookmarksTable.COL_YOUTUBE_VIDEO_ID, video.getId());
 		values.put(BookmarksTable.COL_YOUTUBE_VIDEO, gson.toJson(video).getBytes());
 
-		int order = getNumVideos();
+		int order = getTotalBookmarks();
 		order++;
 		values.put(BookmarksTable.COL_ORDER, order);
 
@@ -134,6 +134,8 @@ public class BookmarksDb extends SQLiteOpenHelper {
 				} while(cursor.moveToNext());
 			}
 
+			cursor.close();
+
 			onUpdated();
 			successful = true;
 		}
@@ -143,7 +145,7 @@ public class BookmarksDb extends SQLiteOpenHelper {
 
 
 	/**
-	 * When a Video in the Saved Videos tab is drag & dropped to a new position, this will be
+	 * When a Video in the Bookmarks tab is drag & dropped to a new position, this will be
 	 * called with the new updated list of videos. Since the videos are displayed in descending order,
 	 * the first video in the list will have the highest number.
 	 *
@@ -174,23 +176,26 @@ public class BookmarksDb extends SQLiteOpenHelper {
 						BookmarksTable.COL_YOUTUBE_VIDEO_ID + " = ?",
 						new String[]{video.getId()}, null, null, null);
 		boolean	hasVideo = cursor.moveToNext();
+
+		cursor.close();
 		return hasVideo;
 	}
 
 
 	/**
-	 * Get the number of videos that have been saved.
-	 *
-	 * @return int, the number of videos
+	 * @return The total number of bookmarked videos.
 	 */
-	public int getNumVideos() {
-		String query = String.format("SELECT COUNT(*) FROM %s", BookmarksTable.TABLE_NAME);
-		Cursor cursor = BookmarksDb.getBookmarksDb().getReadableDatabase().rawQuery(query, null);
+	public int getTotalBookmarks() {
+		String	query = String.format("SELECT COUNT(*) FROM %s", BookmarksTable.TABLE_NAME);
+		Cursor	cursor = BookmarksDb.getBookmarksDb().getReadableDatabase().rawQuery(query, null);
+		int		totalBookmarks = 0;
 
-		if(cursor.moveToFirst()) {
-			return cursor.getInt(0);
+		if (cursor.moveToFirst()) {
+			totalBookmarks = cursor.getInt(0);
 		}
-		return 0;
+
+		cursor.close();
+		return totalBookmarks;
 	}
 
 
@@ -206,6 +211,7 @@ public class BookmarksDb extends SQLiteOpenHelper {
 						null,
 						null, null, null, BookmarksTable.COL_ORDER + " DESC");
 		List<YouTubeVideo> videos = new ArrayList<>();
+
 		if(cursor.moveToNext()) {
 			do {
 				byte[] blob = cursor.getBlob(cursor.getColumnIndex(BookmarksTable.COL_YOUTUBE_VIDEO));
@@ -213,6 +219,8 @@ public class BookmarksDb extends SQLiteOpenHelper {
 				videos.add(video);
 			} while(cursor.moveToNext());
 		}
+		cursor.close();
+
 		return videos;
 	}
 
@@ -228,11 +236,15 @@ public class BookmarksDb extends SQLiteOpenHelper {
 			listeners.add(listener);
 	}
 
+
+	/**
+	 * Called when the Bookmarks DB is updated by either a bookmark insertion or deletion.
+	 */
 	private void onUpdated() {
 		hasUpdated = true;
-		for(BookmarksDbListener listener : listeners) {
+
+		for (BookmarksDbListener listener : listeners)
 			listener.onBookmarksDbUpdated();
-		}
 	}
 
 	public static boolean isHasUpdated() {
