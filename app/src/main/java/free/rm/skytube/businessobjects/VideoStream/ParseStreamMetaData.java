@@ -13,13 +13,12 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-
-/*
+ *
+ *
  * Parts of the code below were written by Christian Schabesberger.
  *
  * Copyright (C) Christian Schabesberger 2015 <chris.schabesberger@mailbox.org>
- * Code written by Schabesberger are Licensed under GPL version 3 of the License, or (at your
+ * Code written by Schabesberger is licensed under GPL version 3 of the License, or (at your
  * option) any later version.
  */
 
@@ -39,8 +38,6 @@ import org.mozilla.javascript.ScriptableObject;
 import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import free.rm.skytube.R;
 import free.rm.skytube.gui.app.SkyTubeApp;
@@ -77,7 +74,7 @@ public class ParseStreamMetaData {
 		// attempt to load the youtube js player JSON arguments
 		try {
 			pageContents = HttpDownloader.download(pageUrl);
-			String jsonString = matchGroup1("ytplayer.config\\s*=\\s*(\\{.*?\\});", pageContents);
+			String jsonString = StreamMetaDataParser.matchGroup1("ytplayer.config\\s*=\\s*(\\{.*?\\});", pageContents);
 			jsonObj = new JSONObject(jsonString);
 			playerArgs = jsonObj.getJSONObject("args");
 		} catch (Exception e) {
@@ -187,31 +184,38 @@ public class ParseStreamMetaData {
 
 
 	private String loadDecryptionCode(String playerUrl) throws Exception {
-		String playerCode = HttpDownloader.download(playerUrl);
-		String decryptionFuncName = "";
-		String decryptionFunc = "";
+		String decryptionFuncName;
+		String decryptionFunc;
 		String helperObjectName;
-		String helperObject = "";
+		String helperObject;
 		String callerFunc = "function " + DECRYPTION_FUNC_NAME + "(a){return %%(a);}";
-		String decryptionCode;
+		String decryptionCode = "";
 
 		try {
-			decryptionFuncName = matchGroup1("\\.sig\\|\\|([a-zA-Z0-9$]+)\\(", playerCode);
-			String functionPattern = "("+  decryptionFuncName.replace("$", "\\$") +"=function\\([a-zA-Z0-9_]*\\)\\{.+?\\})";
-			decryptionFunc = "var " + matchGroup1(functionPattern, playerCode);
-			decryptionFunc += ";";
+			String playerCode = HttpDownloader.download(playerUrl);
 
-			helperObjectName = matchGroup1(";([A-Za-z0-9_\\$]{2})\\...\\(", decryptionFunc);
+			decryptionFuncName =
+					StreamMetaDataParser.matchGroup("([\"\\'])signature\\1\\s*,\\s*([a-zA-Z0-9$]+)\\(", playerCode, 2);
 
-			String helperPattern = "(var " + helperObjectName.replace("$", "\\$") + "=\\{.+?\\}\\};)";
-			helperObject = matchGroup1(helperPattern, playerCode);
+			String functionPattern = "("
+					+ decryptionFuncName.replace("$", "\\$")
+					+ "=function\\([a-zA-Z0-9_]+\\)\\{.+?\\})";
+			decryptionFunc = "var " + StreamMetaDataParser.matchGroup1(functionPattern, playerCode) + ";";
+
+			helperObjectName = StreamMetaDataParser
+					.matchGroup1(";([A-Za-z0-9_\\$]{2})\\...\\(", decryptionFunc);
+
+			String helperPattern = "(var "
+					+ helperObjectName.replace("$", "\\$") + "=\\{.+?\\}\\};)";
+			helperObject = StreamMetaDataParser.matchGroup1(helperPattern, playerCode);
+
+
+			callerFunc = callerFunc.replace("%%", decryptionFuncName);
+			decryptionCode = helperObject + decryptionFunc + callerFunc;
 
 		} catch (Throwable tr) {
 			Log.e(TAG, "loadDecryptionCode error", tr);
 		}
-
-		callerFunc = callerFunc.replace("%%", decryptionFuncName);
-		decryptionCode = helperObject + decryptionFunc + callerFunc;
 
 		return decryptionCode;
 	}
@@ -228,24 +232,10 @@ public class ParseStreamMetaData {
 			result = decryptionFunc.call(context, scope, scope, new Object[]{encryptedSig});
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			Context.exit();
 		}
-		Context.exit();
 		return result.toString();
 	}
 
-
-
-	private String matchGroup1(String pattern, String input) {
-		Pattern pat = Pattern.compile(pattern);
-		Matcher mat = pat.matcher(input);
-		boolean foundMatch = mat.find();
-		if (foundMatch) {
-			return mat.group(1);
-		}
-		else {
-			Log.w(TAG, "failed to find pattern \""+pattern+"\" inside of \""+input+"\"");
-			new Exception("failed to find pattern \""+pattern+"\"").printStackTrace();
-			return "";
-		}
-	}
 }
