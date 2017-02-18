@@ -57,6 +57,17 @@ public abstract class RecyclerViewAdapterEx<T, HolderType extends RecyclerView.V
 
 
 	/**
+	 * Clears the list and copy list l to the Adapter's list.
+	 *
+	 * @param l List to set
+	 */
+	public void setList(List<T> l) {
+		clearList();
+		appendList(l);
+	}
+
+
+	/**
 	 * Append the given items to the Adapter's list.
 	 *
 	 * @param l The items to append.

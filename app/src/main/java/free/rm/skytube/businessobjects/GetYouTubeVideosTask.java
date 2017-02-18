@@ -48,6 +48,8 @@ public class GetYouTubeVideosTask extends AsyncTaskParallel<Void, Void, List<You
 	/** Runnable to be run when this task completes */
 	private Runnable onFinished;
 
+	private YouTubeChannel channel;
+
 
 	public GetYouTubeVideosTask(GetYouTubeVideos getYouTubeVideos, VideoGridAdapter videoGridAdapter, View progressBar) {
 		this.getYouTubeVideos = getYouTubeVideos;
@@ -75,6 +77,9 @@ public class GetYouTubeVideosTask extends AsyncTaskParallel<Void, Void, List<You
 
 	@Override
 	protected void onPreExecute() {
+		// if this task is being called by ChannelBrowserFragment, then get the channel the user is browsing
+		channel = videoGridAdapter.getYouTubeChannel();
+
 		if(!skipProgressBar) {
 			if (progressBar != null)
 				progressBar.setVisibility(View.VISIBLE);
@@ -85,29 +90,28 @@ public class GetYouTubeVideosTask extends AsyncTaskParallel<Void, Void, List<You
 
 	@Override
 	protected List<YouTubeVideo> doInBackground(Void... params) {
-		List<YouTubeVideo> videos = null;
+		List<YouTubeVideo> videosList = null;
 
 		if (!isCancelled()) {
-			videos = getYouTubeVideos.getNextVideos();
+			// get videos from YouTube
+			videosList = getYouTubeVideos.getNextVideos();
+
+			if (videosList != null  &&  channel != null  &&  channel.isUserSubscribed()) {
+				for (YouTubeVideo video : videosList) {
+					channel.addYouTubeVideo(video);
+				}
+
+				SubscriptionsDb.getSubscriptionsDb().saveChannelVideos(channel);
+			}
 		}
 
-		return videos;
+		return videosList;
 	}
 
 
 	@Override
 	protected void onPostExecute(List<YouTubeVideo> videosList) {
 		videoGridAdapter.appendList(videosList);
-
-		if (videosList != null  &&
-				videoGridAdapter.getYouTubeChannel() != null &&
-				videoGridAdapter.getYouTubeChannel().isUserSubscribed()) {
-			for (YouTubeVideo video : videosList) {
-				videoGridAdapter.getYouTubeChannel().addYouTubeVideo(video);
-			}
-
-			SubscriptionsDb.getSubscriptionsDb().saveChannelVideos(videoGridAdapter.getYouTubeChannel());
-		}
 
 		if(progressBar != null)
 			progressBar.setVisibility(View.GONE);

@@ -47,15 +47,17 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<YouTubeVideo, GridVi
 	/** Current video category */
 	private VideoCategory		currentVideoCategory = null;
 
-	private static final String TAG = VideoGridAdapter.class.getSimpleName();
-
 	// This allows the grid items to pass messages back to MainActivity
-	protected MainActivityListener listener;
+	protected MainActivityListener	listener;
 
-	// If this is set, new videos being displayed will be saved to the database, if subscribed
-	private YouTubeChannel youTubeChannel;
+	/** If this is set, new videos being displayed will be saved to the database, if subscribed.
+	 *  RM:  This is only set and used by ChannelBrowserFragment */
+	private YouTubeChannel			youTubeChannel;
 
 	private View					progressBar = null;
+
+	private static final String TAG = VideoGridAdapter.class.getSimpleName();
+
 
 	/**
 	 * @see #VideoGridAdapter(Context, boolean)

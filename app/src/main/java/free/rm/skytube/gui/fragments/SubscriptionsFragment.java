@@ -20,16 +20,21 @@ package free.rm.skytube.gui.fragments;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 
+import java.util.List;
+
 import butterknife.Bind;
 import free.rm.skytube.R;
+import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.GetSubscriptionVideosTask;
 import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.businessobjects.YouTubeChannel;
+import free.rm.skytube.businessobjects.YouTubeVideo;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 import free.rm.skytube.gui.app.SkyTubeApp;
 import free.rm.skytube.gui.businessobjects.SubsAdapter;
@@ -61,38 +66,12 @@ public class SubscriptionsFragment extends VideosGridFragment implements Subscri
 	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 
-		numChannelsSubscribed = SubscriptionsDb.getSubscriptionsDb().getTotalSubscribedChannels();
-
-		if (numChannelsSubscribed <= 0) {
-			swipeRefreshLayout.setVisibility(View.GONE);
-			noSubscriptionsText.setVisibility(View.VISIBLE);
-		} else {
-			if(swipeRefreshLayout.getVisibility() != View.VISIBLE) {
-				swipeRefreshLayout.setVisibility(View.VISIBLE);
-				noSubscriptionsText.setVisibility(View.GONE);
-			}
-
-			videoGridAdapter.setVideoCategory(VideoCategory.SUBSCRIPTIONS_FEED_VIDEOS);
-
-			// Launch a refresh of subscribed videos when this Fragment is created, but don't show the progress dialog. It will be shown when the tab is shown.
-			if (shouldRefresh)
-				doRefresh(false);
-			shouldRefresh = false;
-		}
+		new GetTotalNumberOfChannelsTask().executeInParallel();
 	}
 
 
 	private void doRefresh(boolean showDialog) {
-		numVideosFetched = 0;
-		numChannelsFetched = 0;
-		numChannelsSubscribed = SubscriptionsDb.getSubscriptionsDb().getTotalSubscribedChannels();
-		if(numChannelsSubscribed > 0) {
-			new GetSubscriptionVideosTask(this).executeInParallel();
-			refreshInProgress = true;
-			if (showDialog) {
-				showRefreshDialog();
-			}
-		}
+		new RefreshTask(showDialog).executeInParallel();
 	}
 
 
@@ -117,6 +96,8 @@ public class SubscriptionsFragment extends VideosGridFragment implements Subscri
 
 	@Override
 	public void onChannelVideosFetched(YouTubeChannel channel, int videosFetched, final boolean videosDeleted) {
+		Log.d("SUB FRAGMENT", "onChannelVideosFetched");
+
 		// If any new videos have been fetched for a channel, update the Subscription list in the left navbar for that channel
 		if(videosFetched > 0)
 			SubsAdapter.get(getActivity()).changeChannelNewVideosStatus(channel.getId(), true);
@@ -136,10 +117,9 @@ public class SubscriptionsFragment extends VideosGridFragment implements Subscri
 					if(progressDialog != null)
 						progressDialog.dismiss();
 					if(numVideosFetched > 0 || videosDeleted) {
-						videoGridAdapter.clearList();
-						videoGridAdapter.appendList(SubscriptionsDb.getSubscriptionsDb().getSubscriptionVideos());
+						new SetVideosListTask().executeInParallel();
 					} else {
-						// Only show the toast that no videos were found if the progress diaog is sh
+						// Only show the toast that no videos were found if the progress dialog is sh
 						if(fragmentIsVisible) {
 							Toast.makeText(getContext(),
 											String.format(getContext().getString(R.string.no_new_videos_found)),
@@ -169,6 +149,99 @@ public class SubscriptionsFragment extends VideosGridFragment implements Subscri
 	@Override
 	protected String getFragmentName() {
 		return SkyTubeApp.getStr(R.string.subscriptions);
+	}
+
+
+
+	////////////////////////////////////////////////////////////////////////////////////////////////
+
+	/**
+	 * A task that fetched the total number of subscribed channels from the DB and updated the
+	 * SubscriptionsFragment UI accordingly.
+	 */
+	private class GetTotalNumberOfChannelsTask extends AsyncTaskParallel<Void, Void, Integer> {
+
+		@Override
+		protected Integer doInBackground(Void... params) {
+			return SubscriptionsDb.getSubscriptionsDb().getTotalSubscribedChannels();
+		}
+
+
+		@Override
+		protected void onPostExecute(Integer totalNumberOfChannels) {
+			numChannelsSubscribed = totalNumberOfChannels;
+
+			if (numChannelsSubscribed <= 0) {
+				swipeRefreshLayout.setVisibility(View.GONE);
+				noSubscriptionsText.setVisibility(View.VISIBLE);
+			} else {
+				if(swipeRefreshLayout.getVisibility() != View.VISIBLE) {
+					swipeRefreshLayout.setVisibility(View.VISIBLE);
+					noSubscriptionsText.setVisibility(View.GONE);
+				}
+
+				videoGridAdapter.setVideoCategory(VideoCategory.SUBSCRIPTIONS_FEED_VIDEOS);
+
+				// Launch a refresh of subscribed videos when this Fragment is created, but don't
+				// show the progress dialog. It will be shown when the tab is shown.
+				if (shouldRefresh)
+					doRefresh(false);
+				shouldRefresh = false;
+			}
+		}
+	}
+
+
+	/**
+	 * A task that refreshes the videos of the {@link SubscriptionsFragment}.
+	 */
+	private class RefreshTask extends AsyncTaskParallel<Void, Void, Integer> {
+
+		private boolean showDialog;
+
+
+		public RefreshTask(boolean showDialog) {
+			this.showDialog = showDialog;
+		}
+
+
+		@Override
+		protected Integer doInBackground(Void... params) {
+			return SubscriptionsDb.getSubscriptionsDb().getTotalSubscribedChannels();
+		}
+
+
+		@Override
+		protected void onPostExecute(Integer totalNumberOfChannels) {
+			numVideosFetched      = 0;
+			numChannelsFetched    = 0;
+			numChannelsSubscribed = totalNumberOfChannels;
+
+			if (numChannelsSubscribed > 0) {
+				new GetSubscriptionVideosTask(SubscriptionsFragment.this).executeInParallel();
+				refreshInProgress = true;
+
+				if (showDialog)
+					showRefreshDialog();
+			}
+		}
+
+	}
+
+
+
+	private class SetVideosListTask extends AsyncTaskParallel<Void, Void, List<YouTubeVideo>> {
+
+		@Override
+		protected List<YouTubeVideo> doInBackground(Void... params) {
+			return SubscriptionsDb.getSubscriptionsDb().getSubscriptionVideos();
+		}
+
+		@Override
+		protected void onPostExecute(List<YouTubeVideo> youTubeVideos) {
+			videoGridAdapter.setList(youTubeVideos);
+		}
+
 	}
 
 }

@@ -70,9 +70,13 @@ public class GetSubscriptionVideosTask extends AsyncTaskParallel<Void, Void, Voi
 		return null;
 	}
 
-	class GetChannelVideosTask extends AsyncTaskParallel<Void, Void, List<YouTubeVideo>> {
+
+
+	private class GetChannelVideosTask extends AsyncTaskParallel<Void, Void, List<YouTubeVideo>> {
+
 		private GetChannelVideos getChannelVideos = new GetChannelVideos();
 		private YouTubeChannel channel;
+
 
 		public GetChannelVideosTask(YouTubeChannel channel) {
 			try {
@@ -103,6 +107,7 @@ public class GetSubscriptionVideosTask extends AsyncTaskParallel<Void, Void, Voi
 			}
 		}
 
+
 		@Override
 		protected List<YouTubeVideo> doInBackground(Void... voids) {
 			List<YouTubeVideo> videos = null;
@@ -119,6 +124,7 @@ public class GetSubscriptionVideosTask extends AsyncTaskParallel<Void, Void, Voi
 			}
 			return videos;
 		}
+
 
 		@Override
 		protected void onPostExecute(List<YouTubeVideo> youTubeVideos) {
@@ -141,12 +147,14 @@ public class GetSubscriptionVideosTask extends AsyncTaskParallel<Void, Void, Voi
 				listener.onChannelVideosFetched(channel, youTubeVideos != null ? youTubeVideos.size() : 0, videosDeleted);
 		}
 
+
+		private DateTime getOneMonthAgo() {
+			Calendar calendar = Calendar.getInstance();
+			calendar.add(Calendar.MONTH, -1);
+			Date date = calendar.getTime();
+			return new DateTime(date);
+		}
+
 	}
 
-	private DateTime getOneMonthAgo() {
-		Calendar calendar = Calendar.getInstance();
-		calendar.add(Calendar.MONTH, -1);
-		Date date = calendar.getTime();
-		return new DateTime(date);
-	}
 }
