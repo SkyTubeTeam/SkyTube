@@ -26,6 +26,7 @@ import android.view.ViewGroup;
 
 import butterknife.Bind;
 import free.rm.skytube.R;
+import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.MainActivityListener;
 import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.businessobjects.db.BookmarksDb;
@@ -77,19 +78,7 @@ public class BookmarksFragment extends VideosGridFragment implements BookmarksDb
 
 
 	private void populateList() {
-		int numVideosSaved = BookmarksDb.getBookmarksDb().getTotalBookmarks();
-
-		// If no videos have been saved, show the text notifying the user, otherwise
-		// show the swipe refresh layout that contains the actual video grid.
-		if (numVideosSaved <= 0) {
-			swipeRefreshLayout.setVisibility(View.GONE);
-			noBookmarkedVideosText.setVisibility(View.VISIBLE);
-		} else {
-			swipeRefreshLayout.setVisibility(View.VISIBLE);
-			noBookmarkedVideosText.setVisibility(View.GONE);
-
-			bookmarksGridAdapter.setVideoCategory(VideoCategory.BOOKMARKS_VIDEOS);
-		}
+		new PopulateBookmarksTask().executeInParallel();
 	}
 
 
@@ -116,6 +105,42 @@ public class BookmarksFragment extends VideosGridFragment implements BookmarksDb
 	@Override
 	protected String getFragmentName() {
 		return SkyTubeApp.getStr(R.string.bookmarks);
+	}
+
+
+
+	////////////////////////////////////////////////////////////////////////////////////////////////
+
+	/**
+	 * A task that:
+	 *   1. gets the current total number of bookmarks
+	 *   2. updated the UI accordingly (wrt step 1)
+	 *   3. get the bookmarked videos asynchronously.
+	 */
+	private class PopulateBookmarksTask extends AsyncTaskParallel<Void, Void, Integer> {
+
+		@Override
+		protected Integer doInBackground(Void... params) {
+			return BookmarksDb.getBookmarksDb().getTotalBookmarks();
+		}
+
+
+		@Override
+		protected void onPostExecute(Integer numVideosSaved) {
+			// If no videos have been saved, show the text notifying the user, otherwise
+			// show the swipe refresh layout that contains the actual video grid.
+			if (numVideosSaved <= 0) {
+				swipeRefreshLayout.setVisibility(View.GONE);
+				noBookmarkedVideosText.setVisibility(View.VISIBLE);
+			} else {
+				swipeRefreshLayout.setVisibility(View.VISIBLE);
+				noBookmarkedVideosText.setVisibility(View.GONE);
+
+				// set video category and get the bookmarked videos asynchronously
+				bookmarksGridAdapter.setVideoCategory(VideoCategory.BOOKMARKS_VIDEOS);
+			}
+		}
+
 	}
 
 }
