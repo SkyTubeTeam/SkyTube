@@ -135,7 +135,7 @@
 		<item>de</item>
 		<item>et</item>
 		<item>en-GB</item>
-		<item>en</item>
+		<item>"en(?:-US)?"</item>	<!-- "en" or "en-US" -->
 		<item>es</item>
 		<item>es-419</item>
 		<item>eu</item>
