@@ -34,12 +34,12 @@ public class MainFragment extends FragmentEx {
 	private SubsAdapter					subsAdapter  = null;
 	private ActionBarDrawerToggle		subsDrawerToggle;
 
-	// fragments
+	/** List of fragments that will be displayed as tabs. */
 	private List<VideosGridFragment>	videoGridFragmentsList = new ArrayList<>();
-	private FeaturedVideosFragment		featuredVideosFragment;
-	private MostPopularVideosFragment	mostPopularVideosFragment;
-	private SubscriptionsFragment		subscriptionsFragment;
-	private BookmarksFragment			bookmarksFragment;
+	private FeaturedVideosFragment		featuredVideosFragment = null;
+	private MostPopularVideosFragment	mostPopularVideosFragment = null;
+	private SubscriptionsFragment		subscriptionsFragment = null;
+	private BookmarksFragment			bookmarksFragment = null;
 
 	private VideosPagerAdapter			videosPagerAdapter = null;
 	private ViewPager					viewPager;
@@ -80,11 +80,9 @@ public class MainFragment extends FragmentEx {
 		subsListView.setLayoutManager(new LinearLayoutManager(getActivity()));
 		subsListView.setAdapter(subsAdapter);
 
+		videosPagerAdapter = new VideosPagerAdapter(getChildFragmentManager());
 		viewPager = (ViewPager) view.findViewById(R.id.pager);
 		viewPager.setOffscreenPageLimit(3);
-
-		if (videosPagerAdapter == null)
-			videosPagerAdapter = new VideosPagerAdapter(getChildFragmentManager());
 		viewPager.setAdapter(videosPagerAdapter);
 
 		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
@@ -155,13 +153,22 @@ public class MainFragment extends FragmentEx {
 			super(fm);
 
 			// initialise fragments
-			featuredVideosFragment    = new FeaturedVideosFragment();
-			mostPopularVideosFragment = new MostPopularVideosFragment();
-			subscriptionsFragment     = new SubscriptionsFragment();
-			bookmarksFragment         = new BookmarksFragment();
-			BookmarksDb.getBookmarksDb().addListener(bookmarksFragment);
+			if (featuredVideosFragment == null)
+				featuredVideosFragment = new FeaturedVideosFragment();
+
+			if (mostPopularVideosFragment == null)
+				mostPopularVideosFragment = new MostPopularVideosFragment();
+
+			if (subscriptionsFragment == null)
+				subscriptionsFragment = new SubscriptionsFragment();
+
+			if (bookmarksFragment == null) {
+				bookmarksFragment = new BookmarksFragment();
+				BookmarksDb.getBookmarksDb().addListener(bookmarksFragment);
+			}
 
 			// add fragments to list
+			videoGridFragmentsList.clear();
 			videoGridFragmentsList.add(featuredVideosFragment);
 			videoGridFragmentsList.add(mostPopularVideosFragment);
 			videoGridFragmentsList.add(subscriptionsFragment);
