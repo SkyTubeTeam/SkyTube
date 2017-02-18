@@ -18,6 +18,7 @@
 package free.rm.skytube.gui.fragments;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -41,9 +42,16 @@ public abstract class VideosGridFragment extends BaseVideosGridFragment {
 
 
 	@Override
+	public void onCreate(@Nullable Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setLayoutResource(R.layout.videos_gridview);
+	}
+
+
+	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		// inflate the layout for this fragment
-		View view = inflater.inflate(layoutResource != 0 && getResources().getIdentifier(String.valueOf(layoutResource), "layout", getActivity().getPackageName()) != 0 ? layoutResource : R.layout.videos_gridview, container, false);
+		View view = inflater.inflate(layoutResource, container, false);
 
 		// set up the loading progress bar
 		progressBar = view.findViewById(R.id.loading_progress_bar);
