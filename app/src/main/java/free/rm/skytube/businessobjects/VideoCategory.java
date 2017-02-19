@@ -19,8 +19,6 @@ package free.rm.skytube.businessobjects;
 
 import android.util.Log;
 
-import free.rm.skytube.businessobjects.VideoStream.GetChannelVideos;
-
 /**
  * Represents a video category/group.
  */

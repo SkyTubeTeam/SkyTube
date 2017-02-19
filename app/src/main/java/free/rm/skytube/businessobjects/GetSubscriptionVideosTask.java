@@ -29,7 +29,6 @@ import java.util.Date;
 import java.util.List;
 
 import free.rm.skytube.R;
-import free.rm.skytube.businessobjects.VideoStream.GetChannelVideos;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 import free.rm.skytube.gui.app.SkyTubeApp;
 import free.rm.skytube.gui.businessobjects.SubscriptionsFragmentListener;
