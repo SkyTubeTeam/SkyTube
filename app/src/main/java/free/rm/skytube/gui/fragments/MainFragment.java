@@ -159,8 +159,8 @@ public class MainFragment extends FragmentEx {
 			if (mostPopularVideosFragment == null)
 				mostPopularVideosFragment = new MostPopularVideosFragment();
 
-			if (subscriptionsFragment == null)
-				subscriptionsFragment = new SubscriptionsFragment();
+			///if (subscriptionsFragment == null)
+			///	subscriptionsFragment = new SubscriptionsFragment();
 
 			if (bookmarksFragment == null) {
 				bookmarksFragment = new BookmarksFragment();
@@ -171,7 +171,7 @@ public class MainFragment extends FragmentEx {
 			videoGridFragmentsList.clear();
 			videoGridFragmentsList.add(featuredVideosFragment);
 			videoGridFragmentsList.add(mostPopularVideosFragment);
-			videoGridFragmentsList.add(subscriptionsFragment);
+			///videoGridFragmentsList.add(subscriptionsFragment);
 			videoGridFragmentsList.add(bookmarksFragment);
 		}
 
