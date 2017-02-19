@@ -272,7 +272,7 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 	private void showHud() {
 		if (!isHudVisible()) {
 			getSupportActionBar().show();
-			getSupportActionBar().setTitle(youTubeVideo.getTitle());
+			getSupportActionBar().setTitle(youTubeVideo != null ? youTubeVideo.getTitle() : "");
 			mediaController.show(0);
 
 			videoDescriptionDrawer.close();
