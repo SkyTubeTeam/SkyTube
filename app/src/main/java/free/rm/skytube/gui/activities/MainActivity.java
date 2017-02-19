@@ -107,6 +107,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 		}
 	}
 
+
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 		if(mainFragment != null)
@@ -118,6 +119,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 		super.onSaveInstanceState(outState);
 	}
 
+
 	@Override
 	public boolean onCreateOptionsMenu(final Menu menu) {
 		MenuInflater inflater = getMenuInflater();
@@ -126,6 +128,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 		// setup the SearchView (actionbar)
 		final MenuItem searchItem = menu.findItem(R.id.menu_search);
 		final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+
 		searchView.setQueryHint(getString(R.string.search_videos));
 		searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 			@Override
@@ -135,11 +138,10 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 
 			@Override
 			public boolean onQueryTextSubmit(String query) {
-				// collapse the action-bar's search view
-				searchView.setQuery("", false);
-				searchView.setIconified(true);
-				menu.findItem(R.id.menu_search).collapseActionView();
+				// hide the keyboard
+				searchView.clearFocus();
 
+				// open SearchVideoGridFragment and display the results
 				searchVideoGridFragment = new SearchVideoGridFragment();
 				Bundle bundle = new Bundle();
 				bundle.putString(SearchVideoGridFragment.QUERY, query);

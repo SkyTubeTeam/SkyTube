@@ -18,11 +18,16 @@
 package free.rm.skytube.gui.fragments;
 
 import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -81,7 +86,37 @@ public class SearchVideoGridFragment extends BaseVideosGridFragment {
 		this.gridView.setLayoutManager(new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.video_grid_num_columns)));
 		this.gridView.setAdapter(this.videoGridAdapter);
 
+		// the app will call onCreateOptionsMenu() for when the user wants to search
+		setHasOptionsMenu(true);
+
 		return view;
+	}
+
+
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		final MenuItem   searchItem = menu.findItem(R.id.menu_search);
+		final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+
+		// will be called when the user clicks on the actionbar's search icon
+		MenuItemCompat.setOnActionExpandListener(searchItem, new MenuItemCompat.OnActionExpandListener() {
+			@Override
+			public boolean onMenuItemActionExpand(MenuItem item) {
+				// if the user has previously search, then copy the query into the search view
+				if (searchQuery != null  &&  !searchQuery.isEmpty()) {
+					searchView.onActionViewExpanded();
+					searchView.setQuery(searchQuery, false);
+				}
+
+				// now expand the search view
+				return true;
+			}
+
+			@Override
+			public boolean onMenuItemActionCollapse(MenuItem item) {
+				return true;
+			}
+		});
 	}
 
 }
