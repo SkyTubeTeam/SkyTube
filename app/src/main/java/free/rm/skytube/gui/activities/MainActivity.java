@@ -294,7 +294,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 			if (updatesChecker != null && updatesChecker.getLatestApkUrl() != null) {
 				new AlertDialog.Builder(MainActivity.this)
 								.setTitle(R.string.update_available)
-								.setMessage( String.format(getResources().getString(R.string.update_dialog_msg), updatesChecker.getLatestApkVersion()) )
+								.setMessage( String.format(getResources().getString(R.string.update_dialog_msg), Float.toString(updatesChecker.getLatestApkVersion())) )
 								.setPositiveButton(R.string.update, new DialogInterface.OnClickListener() {
 									@Override
 									public void onClick(DialogInterface dialog, int which) {
