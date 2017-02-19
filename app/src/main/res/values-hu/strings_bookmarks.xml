@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="bookmarks">Bookmarks</string>
+
+	<string name="bookmark_video">Bookmark Video</string>
+	<string name="video_bookmarked">Video bookmarked</string>
+	<string name="video_bookmarked_error">Could not bookmark the video.</string>
+
+	<string name="unbookmark">Unbookmark Video</string>
+	<string name="video_unbookmarked">Video unbookmarked</string>
+	<string name="video_unbookmarked_error">Could not unbookmark the video.</string>
+
+	<string name="no_bookmarked_videos_text">You haven\'t bookmarked any videos yet.\n\nOnce you do, they will show up here.</string>
+</resources>
