@@ -2,7 +2,7 @@ v2.3 - 19 Feb 2017:
 	* Added video bookmarks feature.
 	* Added Polish translation.
 	* Added default tab preference.
-	* Numerious bug fixes.
+	* Numerous bug fixes.
 
 v2.2 - 31 Jan 2017:
 	* Emergency fix: "could not load decryption code" error for all YouTube videos.  This was due to sudden change in YouTube website/service.
