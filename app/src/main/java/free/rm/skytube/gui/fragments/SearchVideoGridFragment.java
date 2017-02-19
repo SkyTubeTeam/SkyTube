@@ -37,8 +37,12 @@ import free.rm.skytube.gui.businessobjects.VideoGridAdapter;
  */
 public class SearchVideoGridFragment extends BaseVideosGridFragment {
 
+	private RecyclerView	gridView;
+	/** User's search query string. */
+	private String			searchQuery = "";
+
 	public static final String QUERY = "SearchVideoGridFragment.Query";
-	protected RecyclerView		gridView;
+
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -59,18 +63,19 @@ public class SearchVideoGridFragment extends BaseVideosGridFragment {
 			videoGridAdapter = new VideoGridAdapter(getActivity());
 			videoGridAdapter.setListener((MainActivityListener)getActivity());
 
-			String searchQuery = getArguments().getString(QUERY);
+			// set the search query string
+			searchQuery = getArguments().getString(QUERY);
 			if (searchQuery != null) {
 				// set the video category (if the user wants to search)... otherwise it will be set-
 				// up by the VideoGridFragment
 				this.videoGridAdapter.setVideoCategory(VideoCategory.SEARCH_QUERY, searchQuery);
-
-				// set the action bar's title
-				ActionBar actionBar = getSupportActionBar();
-				if (actionBar != null)
-					actionBar.setTitle(searchQuery);
 			}
 		}
+
+		// set the action bar's title
+		ActionBar actionBar = getSupportActionBar();
+		if (actionBar != null)
+			actionBar.setTitle(searchQuery);
 
 		this.gridView.setHasFixedSize(false);
 		this.gridView.setLayoutManager(new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.video_grid_num_columns)));
@@ -78,4 +83,5 @@ public class SearchVideoGridFragment extends BaseVideosGridFragment {
 
 		return view;
 	}
+
 }
