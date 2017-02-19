@@ -67,12 +67,10 @@ public class GetYouTubeVideosTask extends AsyncTaskParallel<Void, Void, List<You
 	 */
 	public GetYouTubeVideosTask(GetYouTubeVideos getYouTubeVideos, VideoGridAdapter videoGridAdapter, Runnable onFinished) {
 		this.getYouTubeVideos = getYouTubeVideos;
-		if (this.getYouTubeVideos != null)
-			this.getYouTubeVideos.reset();
-
 		this.videoGridAdapter = videoGridAdapter;
-		skipProgressBar = true;
+		this.skipProgressBar = true;
 		this.onFinished = onFinished;
+		this.getYouTubeVideos.reset();
 		this.videoGridAdapter.clearList();
 	}
 

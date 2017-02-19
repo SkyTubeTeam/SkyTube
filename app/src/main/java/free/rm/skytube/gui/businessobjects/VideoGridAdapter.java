@@ -160,7 +160,8 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<YouTubeVideo, GridVi
 	 * @param onFinished Runnable to run when the task completes.
 	 */
 	public void refresh(Runnable onFinished) {
-		new GetYouTubeVideosTask(getYouTubeVideos, this, onFinished).executeInParallel();
+		if (getYouTubeVideos != null)
+			new GetYouTubeVideosTask(getYouTubeVideos, this, onFinished).executeInParallel();
 	}
 
 
