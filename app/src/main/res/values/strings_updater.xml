@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="update_available">Update Available</string>
-	<string name="update_dialog_msg">A new SkyTube update is available.  The app will be updated to version %f.</string>
+	<string name="update_dialog_msg">A new SkyTube update is available.  The app will be updated to version %s.</string>
 	<string name="update">Update</string>
 	<string name="later">Later</string>
 	<string name="update_failure">Unable to upgrade the app.</string>
