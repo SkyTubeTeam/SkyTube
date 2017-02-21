@@ -1,0 +1,27 @@
+<resources>
+	<string name="could_not_get_videos">Fehler beim Abrufen der Videos von %s.</string>
+	<string name="views">%,d Aufrufe</string>
+	<string name="error">Fehler</string>
+	<string name="ok">OK</string>
+	<string name="search_videos">Videos suchen</string>
+	<string name="launch_offical_player_error">
+		Beim Starten des offiziellen YouTube Players ist ein Fehler aufgetreten. Stelle
+		sicher, dass die offizielle Google YouTube App auf deinem Gerät installiert ist.
+	</string>
+
+	<string name="fetching_subscription_videos">Rufe Videos von abonnierten Kanälen ab</string>
+	<string name="fetched_videos_from_channels">%1$d Videos von %2$d/%3$d Kanälen abgerufen.</string>
+	<string name="no_new_videos_found">Keine neuen Videos gefunden.</string>
+	<string name="no_subscriptions_text">
+		Du hast keine Kanäle abonniert.\n\nSobald du welche abonniert hast, sind hier
+		alle Videos der abonnierten Kanäle innerhalb des letzten Monats zu finden.
+	</string>
+
+	<string name="featured">Empfohlen</string>
+	<string name="popular">Beliebt</string>
+
+	<string name="share_via">Teilen mit</string>
+	<string name="url_copied_to_clipboard">URL in die Zwischenablage kopiert.</string>
+	<string name="share">Teilen</string>
+	<string name="copy_to_clipboard">In die Zwischenablage kopieren</string>
+</resources>
