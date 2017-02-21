@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="error_stream_err_unavailable">Fehlermeldung ist nicht verfügbar.</string>
+	<string name="error_stream_decryption_fail">Entschlüsselungscode für den Youtube-Dienst konnte nicht geladen werden.</string>
+	<string name="error_stream_parse_error">Fehler beim Parsen.</string>
+
+	<string name="error_video_play">Fehler beim Video abspielen</string>
+	<string name="error_video_streams_empty">Das Video %s hat keine Streams!</string>
+	<string name="error_get_video_desc">Beim Abrufen der Videobeschreibung ist ein Fehler aufgetreten.</string>
+	<string name="error_invalid_url">Ungültige Video URL: %s</string>
+
+	<string name="loading_video">Lade Video…</string>
+	<string name="reload_video">Video neu laden</string>
+	<string name="open_in_browser">Im Browser öffnen</string>
+	<string name="open_with">Öffnen mit…</string>
+
+	<string name="error_get_comments">Beim Abrufen der Kommentare ist ein Fehler aufgetreten.</string>
+	<string name="no_video_comments">Dieses Video hat keine Kommentare oder die Kommentare wurden deaktiviert.</string>
+	<string name="view_replies">Antworten anzeigen</string>
+	<string name="hide_replies">Antworten verstecken</string>
+
+	<string name="enter_video_url">Video URL eingeben</string>
+	<string name="play">Abspielen</string>
+	<string name="cancel">Abbrechen</string>
+	<string name="clear">Leeren</string>
+</resources>

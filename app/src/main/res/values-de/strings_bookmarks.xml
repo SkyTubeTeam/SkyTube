@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="bookmarks">Merkliste</string>
+
+	<string name="bookmark_video">Video merken</string>
+	<string name="video_bookmarked">Video gemerkt</string>
+	<string name="video_bookmarked_error">Fehler beim Merken des Videos.</string>
+
+	<string name="unbookmark">Video vergessen</string>
+	<string name="video_unbookmarked">Video vergessen</string>
+	<string name="video_unbookmarked_error">Fehler beim Vergessen des Videos.</string>
+
+	<string name="no_bookmarked_videos_text">Du hast dir bis jetzt keine Videos gemerkt.\n\nSobald du dir welche gemerkt hast, sind sie hier zu finden.</string>
+</resources>
