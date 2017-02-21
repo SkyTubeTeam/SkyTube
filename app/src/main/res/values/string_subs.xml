@@ -9,6 +9,6 @@
 	<string name="unsubscribed">Unsubscribed</string>
 
 	<string name="error_get_subbed_channels">An error has occurred while getting subscribed channels.</string>
-	<string name="error_check_if_user_has_subbed">Unable to check if user has subscribed to channel (id=%s)</string>
-	<string name="error_unable_to_subscribe">Unable to (un)subscribed to channel (id=%s)</string>
+	<string name="error_check_if_user_has_subbed">Unable to check if user has subscribed the channel (id=%s)</string>
+	<string name="error_unable_to_subscribe">Unable to (un)subscribe the channel (id=%s)</string>
 </resources>

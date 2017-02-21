@@ -5,11 +5,11 @@
 	<string name="pref_languages_category">Languages &amp; Regions</string>
 	<string name="pref_title_preferred_regions">Preferred Region</string>
 	<string name="pref_key_preferred_region">pref_key_preferred_region</string>
-	<string name="pref_summary_preferred_regions">Select a preferred region.  This is used to filter out videos in the Featured videos category.</string>
+	<string name="pref_summary_preferred_regions">Select a preferred region. This is used to filter out videos in the \"Featured\" videos category.</string>
 
 	<string name="pref_title_preferred_languages">Preferred Language(s)</string>
 	<string name="pref_key_preferred_languages">pref_key_preferred_languages</string>
-	<string name="pref_summary_preferred_languages">EXPERIMENTAL:  Select one or more preferred languages.  This is used to filter out videos in the Most Popular video category and for video searches.</string>
+	<string name="pref_summary_preferred_languages">EXPERIMENTAL: Select one or more preferred languages. This is used to filter out videos in the \"Most Popular\" video category and for video searches.</string>
 
 	<string name="pref_video_player_category">Video Player</string>
 	<string name="pref_key_video_player_category">video_player_category</string>
@@ -29,19 +29,21 @@
 	<string name="pref_title_license">License</string>
 	<string name="pref_key_license">pref_license</string>
 	<string name="pref_summary_license">GNU General Public License version 3</string>
-	<string name="app_license">Copyright &#169; 2015-2016  Ramon Mifsud\n
+	<string name="app_license">
+		Copyright &#169; 2015-2016  Ramon Mifsud\n
 
-				\nThis program is free software: you can redistribute it and/or modify
-				it under the terms of the GNU General Public License as published by
-				the Free Software Foundation (version 3 of the License).\n
+		\nThis program is free software: you can redistribute it and/or modify
+		it under the terms of the GNU General Public License as published by
+		the Free Software Foundation (version 3 of the License).\n
 
-				\nThis program is distributed in the hope that it will be useful,
-				but WITHOUT ANY WARRANTY; without even the implied warranty of
-				MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-				GNU General Public License for more details.\n
+		\nThis program is distributed in the hope that it will be useful,
+		but WITHOUT ANY WARRANTY; without even the implied warranty of
+		MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+		GNU General Public License for more details.\n
 
-				\nYou should have received a copy of the GNU General Public License
-				along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;</string>
+		\nYou should have received a copy of the GNU General Public License
+		along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;
+	</string>
 	<string name="i_agree">I Agree</string>
 
 
@@ -391,13 +393,13 @@
 
 	<string name="pref_other_category">Other</string>
 	<string name="pref_key_default_tab">pref_default_tab</string>
-	<string name="pref_title_default_tab">Defaut Tab</string>
+	<string name="pref_title_default_tab">Default Tab</string>
 	<string name="pref_summary_default_tab">Default tab to show when SkyTube launches: %s</string>
 	<string-array name="default_tab">
 		<item>Featured</item>
 		<item>Most Popular</item>
 		<item>Subscriptions</item>
-		<item>Saved</item>
+		<item>Bookmarks</item>
 	</string-array>
 	<string-array name="default_tab_values">
 		<item>0</item>
