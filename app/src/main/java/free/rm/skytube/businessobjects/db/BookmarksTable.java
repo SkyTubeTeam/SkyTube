@@ -18,7 +18,7 @@
 package free.rm.skytube.businessobjects.db;
 
 /**
- * Saved Videos Table
+ * Bookmarked Videos Table
  */
 public class BookmarksTable {
 	public static final String TABLE_NAME = "Bookmarks";

@@ -21,7 +21,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
 		android:orientation="vertical"
-		android:id="@+id/noSavedVideosText"
+		android:id="@+id/noBookmarkedVideosText"
 		android:visibility="gone"
 		android:background="@color/grid_view_background"
 		>

@@ -38,7 +38,7 @@ import free.rm.skytube.gui.businessobjects.bookmarksGridAdapter;
  * Fragment that displays bookmarked videos.
  */
 public class BookmarksFragment extends VideosGridFragment implements BookmarksDb.BookmarksDbListener {
-	@Bind(R.id.noSavedVideosText)
+	@Bind(R.id.noBookmarkedVideosText)
 	View noBookmarkedVideosText;
 
 	private bookmarksGridAdapter bookmarksGridAdapter;
@@ -126,10 +126,10 @@ public class BookmarksFragment extends VideosGridFragment implements BookmarksDb
 
 
 		@Override
-		protected void onPostExecute(Integer numVideosSaved) {
-			// If no videos have been saved, show the text notifying the user, otherwise
+		protected void onPostExecute(Integer numVideosBookmarked) {
+			// If no videos have been bookmarked, show the text notifying the user, otherwise
 			// show the swipe refresh layout that contains the actual video grid.
-			if (numVideosSaved <= 0) {
+			if (numVideosBookmarked <= 0) {
 				swipeRefreshLayout.setVisibility(View.GONE);
 				noBookmarkedVideosText.setVisibility(View.VISIBLE);
 			} else {
