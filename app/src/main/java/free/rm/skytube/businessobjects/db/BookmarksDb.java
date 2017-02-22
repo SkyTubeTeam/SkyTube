@@ -226,10 +226,10 @@ public class BookmarksDb extends SQLiteOpenHelper {
 
 
 	/**
-	 * Add a Listener that will be notified when a Video is added or removed from Saved Videos. This will
+	 * Add a Listener that will be notified when a Video is added or removed from Bookmarked Videos. This will
 	 * allow the Video Grid to be redrawn in order to remove the video from display.
 	 *
-	 * @param listener The Listener (which implements SavedVideosDbListener) to add.
+	 * @param listener The Listener (which implements BookmarksDbListener) to add.
 	 */
 	public void addListener(BookmarksDbListener listener) {
 		if(!listeners.contains(listener))
