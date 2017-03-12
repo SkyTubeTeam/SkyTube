@@ -25,6 +25,8 @@ import android.preference.PreferenceManager;
 import java.util.Arrays;
 import java.util.List;
 
+import free.rm.skytube.BuildConfig;
+import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 
 /**
@@ -101,6 +103,12 @@ public class SkyTubeApp extends Application {
 
 	public static Context getContext() {
 		return skyTubeApp.getBaseContext();
+	}
+
+	// If the user has entered their own YouTube Data API key, return it, otherwise return the default
+	public static String getYouTubeAPIKey() {
+		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getContext());
+		return sp.getString(getContext().getString(R.string.pref_youtube_api_key), null) != null ? sp.getString(getContext().getString(R.string.pref_youtube_api_key), null) : BuildConfig.YOUTUBE_API_KEY;
 	}
 
 }
