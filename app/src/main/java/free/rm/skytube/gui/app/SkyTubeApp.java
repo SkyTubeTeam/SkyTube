@@ -21,6 +21,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.support.multidex.MultiDexApplication;
 
 import java.util.Arrays;
 import java.util.List;
@@ -30,7 +31,7 @@ import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 /**
  * SkyTube application.
  */
-public class SkyTubeApp extends Application {
+public class SkyTubeApp extends MultiDexApplication {
 
 	/** SkyTube Application instance. */
 	private static SkyTubeApp skyTubeApp = null;

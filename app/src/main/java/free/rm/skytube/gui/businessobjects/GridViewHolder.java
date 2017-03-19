@@ -29,7 +29,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -101,7 +101,7 @@ public class GridViewHolder extends RecyclerView.ViewHolder {
 		publishDateTextView.setText(video.getPublishDatePretty());
 		videoDurationTextView.setText(video.getDuration());
 		viewsTextView.setText(video.getViewsCount());
-		Picasso.with(context)
+		Glide.with(context)
 				.load(video.getThumbnailUrl())
 				.placeholder(R.drawable.thumbnail_default)
 				.into(thumbnailImageView);

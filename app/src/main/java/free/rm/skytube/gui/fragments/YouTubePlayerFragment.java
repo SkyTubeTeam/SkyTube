@@ -21,7 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 
 import java.io.IOException;
 import java.util.List;
@@ -597,7 +597,7 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 			YouTubePlayerFragment.this.youTubeChannel = youTubeChannel;
 
 			if (youTubeChannel != null) {
-				Picasso.with(getActivity())
+				Glide.with(getActivity())
 						.load(youTubeChannel.getThumbnailNormalUrl())
 						.placeholder(R.drawable.channel_thumbnail_default)
 						.into(videoDescChannelThumbnailImageView);

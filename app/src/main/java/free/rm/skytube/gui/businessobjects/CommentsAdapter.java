@@ -29,7 +29,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -194,7 +194,7 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
 			commentTextView.setText(comment.getComment());
 			dateTextView.setText(comment.getDatePublished());
 			upvotesTextView.setText(comment.getLikeCount());
-			Picasso.with(context)
+			Glide.with(context)
 					.load(comment.getThumbnailUrl())
 					.placeholder(R.drawable.channel_thumbnail_default)
 					.into(thumbnailImageView);

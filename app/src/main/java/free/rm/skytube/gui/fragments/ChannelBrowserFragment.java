@@ -30,7 +30,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 
 import java.io.IOException;
 import java.util.Iterator;
@@ -141,12 +141,12 @@ public class ChannelBrowserFragment extends BaseVideosGridFragment {
 	 */
 	private void initViews() {
 		if (channel != null) {
-			Picasso.with(getActivity())
+			Glide.with(getActivity())
 					.load(channel.getThumbnailNormalUrl())
 					.placeholder(R.drawable.channel_thumbnail_default)
 					.into(channelThumbnailImage);
 
-			Picasso.with(getActivity())
+			Glide.with(getActivity())
 					.load(channel.getBannerUrl())
 					.placeholder(R.drawable.banner_default)
 					.into(channelBannerImage);

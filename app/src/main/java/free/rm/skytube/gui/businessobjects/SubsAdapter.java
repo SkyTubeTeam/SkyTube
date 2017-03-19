@@ -26,7 +26,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 
 import java.util.Iterator;
 
@@ -187,7 +187,7 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 		}
 
 		public void updateInfo(YouTubeChannel channel) {
-			Picasso.with(getContext())
+			Glide.with(getContext())
 					.load(channel.getThumbnailNormalUrl())
 					.placeholder(R.drawable.channel_thumbnail_default)
 					.into(thumbnailImageView);
