@@ -6,8 +6,9 @@ This app allows you to:
 * browse YouTube channels,
 * play YouTube videos,
 * view video comments,
-* search videos, music and channels
-* channel subscription & non-intrusive notifications **[New!]**
+* search videos, music and channels,
+* channel subscription & non-intrusive notifications,
+* bookmark vidoes **[New!]**
 
 ... all at the tip of your fingers.
 
@@ -22,13 +23,13 @@ More features will be added in the near future.
 <table>
 <tr>
     <td align="center">
-        <a href="https://github.com/ram-on/SkyTube/releases/download/v2.2/SkyTube-Extra-2.2.apk">
+        <a href="https://github.com/ram-on/SkyTube/releases/download/v2.3/SkyTube-Extra-2.3.apk">
             <img src="screenshots/download_apk.png" alt="Download APK">
         </a>
         
         <p><b>( Recommended )</b></p>
     <td>
-        <p><b>Download SkyTube Extra</b></p>
+        <p><b>Download SkyTube Extra - Version 2.3</b></p>
         
         <p>Open source app that uses the following third-party closed source library:
            <ul>
@@ -37,8 +38,8 @@ More features will be added in the near future.
         
         <p>Updates are published immediately ‒ you will be notified whenever there is an update.</p>
         
-        <p><pre>APK File:  SkyTube-Extra-2.2.apk
-SHA1:      543bd7b68169beea64b8b189a88852594528372e</pre>
+        <p><pre>APK File:  SkyTube-Extra-2.3.apk
+SHA1:      46260f344f83315005e9203457eeb4106210e6cc</pre>
     </td>
 </tr>
 <tr>

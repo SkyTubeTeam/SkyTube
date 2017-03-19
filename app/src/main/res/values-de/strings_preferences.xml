@@ -1,32 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="preferences">Preferences</string>
+	<string name="preferences">Einstellungen</string>
 
-	<string name="pref_languages_category">Languages &amp; Regions</string>
-	<string name="pref_title_preferred_regions">Preferred Region</string>
+	<string name="pref_languages_category">Sprachen &amp; Regionen</string>
+	<string name="pref_title_preferred_regions">Bevorzugte Region</string>
 	<string name="pref_key_preferred_region">pref_key_preferred_region</string>
-	<string name="pref_summary_preferred_regions">Select a preferred region. This is used to filter out videos in the \"Featured\" videos category.</string>
+	<string name="pref_summary_preferred_regions">
+		Wähle eine bevorzugte Region. Dies wird zum Filtern von Videos in der
+		Kategorie \"Empfohlen\" verwendet.
+	</string>
 
-	<string name="pref_title_preferred_languages">Preferred Language(s)</string>
+	<string name="pref_title_preferred_languages">Bevorzugte Sprache(n)</string>
 	<string name="pref_key_preferred_languages">pref_key_preferred_languages</string>
-	<string name="pref_summary_preferred_languages">EXPERIMENTAL: Select one or more preferred languages. This is used to filter out videos in the \"Most Popular\" video category and for video searches.</string>
+	<string name="pref_summary_preferred_languages">
+		EXPERIMENTELL: Wähle eine oder mehrere bevorzugte Sprachen. Dies wird zum
+		Filtern von Videos in der Kategorie \"Beliebt\" und für Videosuchen verwendet.
+	</string>
 
 	<string name="pref_video_player_category">Video Player</string>
 	<string name="pref_key_video_player_category">video_player_category</string>
-	<string name="pref_title_preferred_res">Preferred Resolution</string>
+	<string name="pref_title_preferred_res">Bevorzugte Auflösung</string>
 	<string name="pref_key_preferred_res">pref_preferred_resolution</string>
-	<string name="pref_summary_preferred_res">Select your preferred resolution</string>
-	<string name="pref_title_use_offical_player">Use official YouTube player</string>
+	<string name="pref_summary_preferred_res">Wähle deine bevorzugte Auflösung</string>
+	<string name="pref_title_use_offical_player">Offiziellen YouTube Player verwenden</string>
 	<string name="pref_key_use_offical_player">pref_use_official_youtube_player</string>
-	<string name="pref_summary_use_offical_player">Not recommended</string>
+	<string name="pref_summary_use_offical_player">Nicht empfohlen</string>
 
-	<string name="pref_about_category">About</string>
-	<string name="pref_title_website">Website</string>
+	<string name="pref_about_category">Über</string>
+	<string name="pref_title_website">Webseite</string>
 	<string name="pref_key_website">pref_website</string>
 	<string name="pref_summary_website">http://www.skytube-app.com</string>
 	<string name="pref_title_version">Version</string>
 	<string name="pref_key_version">pref_version</string>
-	<string name="pref_title_license">License</string>
+	<string name="pref_title_license">Lizenz</string>
 	<string name="pref_key_license">pref_license</string>
 	<string name="pref_summary_license">GNU General Public License version 3</string>
 	<string name="app_license">
@@ -44,8 +50,7 @@
 		\nYou should have received a copy of the GNU General Public License
 		along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;
 	</string>
-	<string name="i_agree">I Agree</string>
-
+	<string name="i_agree">Zustimmen</string>
 
 	<string-array name="languages_names">
 		<item>Afrikaans</item>
@@ -205,8 +210,7 @@
 		<item>ko</item>
 	</string-array>
 
-
-	<!-- NB for Translators:  Country names shall all be written in English -->
+	<!-- NB for Translators: Country names shall all be written in English -->
 	<string-array name="country_names">
 		<item>Worldwide (All)</item>
 		<item>Algeria</item>
@@ -391,15 +395,15 @@
 		<item>ZW</item>
 	</string-array>
 
-	<string name="pref_other_category">Other</string>
+	<string name="pref_other_category">Andere</string>
 	<string name="pref_key_default_tab">pref_default_tab</string>
-	<string name="pref_title_default_tab">Default Tab</string>
-	<string name="pref_summary_default_tab">Default tab to show when SkyTube launches: %s</string>
+	<string name="pref_title_default_tab">Standard Tab</string>
+	<string name="pref_summary_default_tab">Standard Tab welcher beim SkyTube-Start angezeigt wird: %s</string>
 	<string-array name="default_tab">
-		<item>Featured</item>
-		<item>Most Popular</item>
-		<item>Subscriptions</item>
-		<item>Bookmarks</item>
+		<item>Empfohlen</item>
+		<item>Beliebt</item>
+		<item>Abos</item>
+		<item>Merkliste</item>
 	</string-array>
 	<string-array name="default_tab_values">
 		<item>0</item>
