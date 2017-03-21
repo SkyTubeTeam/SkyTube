@@ -52,6 +52,11 @@
 			android:entries="@array/default_tab"
 			android:entryValues="@array/default_tab_values"
 			/>
+		<EditTextPreference
+			android:key="@string/pref_youtube_api_key"
+			android:title="@string/pref_title_youtube_api_key"
+			android:summary="@string/pref_summary_youtube_api_key"
+			android:dialogTitle="@string/pref_title_youtube_api_key" />
 	</PreferenceCategory>
 	<!--
 		About Category

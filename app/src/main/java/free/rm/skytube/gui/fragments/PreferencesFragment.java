@@ -21,15 +21,24 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
+import android.widget.Toast;
+
+import com.google.api.services.youtube.YouTube;
+
+import java.io.IOException;
 
 import free.rm.skytube.BuildConfig;
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.VideoStream.VideoResolution;
+import free.rm.skytube.businessobjects.YouTubeAPI;
+import free.rm.skytube.gui.app.SkyTubeApp;
 
 /**
  * A fragment that allows the user to change the settings of this app.  This fragment is called by
@@ -104,10 +113,46 @@ public class PreferencesFragment extends PreferenceFragment implements SharedPre
 
 	@Override
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-		// If the user changed the Default Tab Preference, update the summary to show the new default tab
-		if(key != null && key.equals(getString(R.string.pref_key_default_tab))) {
-			ListPreference defaultTabPref = (ListPreference)findPreference(key);
-			defaultTabPref.setSummary(String.format(getString(R.string.pref_summary_default_tab), defaultTabPref.getEntry()));
+		if(key != null) {
+			if (key.equals(getString(R.string.pref_key_default_tab))) {
+				// If the user changed the Default Tab Preference, update the summary to show the new default tab
+				ListPreference defaultTabPref = (ListPreference) findPreference(key);
+				defaultTabPref.setSummary(String.format(getString(R.string.pref_summary_default_tab), defaultTabPref.getEntry()));
+			} else if (key.equals(getString(R.string.pref_youtube_api_key))) {
+				// Validate the entered API Key when saved (and not empty), with a simple call to get the most popular video
+				final EditTextPreference youtubeAPIKeyPref = (EditTextPreference) findPreference(getString(R.string.pref_youtube_api_key));
+				if(!youtubeAPIKeyPref.getText().isEmpty()) {
+					new AsyncTask<Void, Void, Boolean>() {
+						@Override
+						protected Boolean doInBackground(Void... voids) {
+							try {
+								YouTube.Videos.List videosList = YouTubeAPI.create().videos().list("snippet");
+								videosList.setFields("items(id)");
+								videosList.setKey(youtubeAPIKeyPref.getText());
+								videosList.setChart("mostPopular");
+								String regionCode = SkyTubeApp.getPreferenceManager().getString(SkyTubeApp.getStr(R.string.pref_key_preferred_region), "").trim();
+								videosList.setRegionCode(regionCode.isEmpty() ? null : regionCode);
+								videosList.setMaxResults(1l);
+								videosList.execute();
+							} catch (IOException e) {
+								return true;
+							}
+							return false;
+						}
+
+
+						@Override
+						protected void onPostExecute(Boolean error) {
+							super.onPostExecute(error);
+							// If the validation failed, reset the preference to null
+							if (error)
+								youtubeAPIKeyPref.setText(null);
+							// Show a message depending on if the validation passed or failed
+							Toast.makeText(getActivity(), getString(error ? R.string.pref_youtube_api_key_error : R.string.pref_youtube_api_key_saved), Toast.LENGTH_LONG).show();
+						}
+					}.execute();
+				}
+			}
 		}
 	}
 
