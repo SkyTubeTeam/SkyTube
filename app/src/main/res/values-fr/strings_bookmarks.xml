@@ -3,7 +3,7 @@
 <resources>
 	<string name="bookmarks">Favoris</string>
 
-	<string name="bookmark_video">Ajouter la vid&eacute;os aux favoris</string>
+	<string name="bookmark_video">Ajouter la vid&eacute;o aux favoris</string>
 	<string name="video_bookmarked">Vid&eacute;o ajout&eacute;e aux favoris</string>
 	<string name="video_bookmarked_error">Impossible d\'ajouter la vid&eacute;o aux favoris.</string>
 
