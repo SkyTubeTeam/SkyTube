@@ -1,0 +1,10 @@
+
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="update_available">Nouvelle version disponible</string>
+	<string name="update_dialog_msg">Une Mise &agrave; jour est disponible . L'application va &ecirc;tre mis &agrave; jour &agrave; la version %s.</string>
+	<string name="update">Mise &agrave; jour</string>
+	<string name="later">Plus tard</string>
+	<string name="update_failure">Erreur lors de la mise &agrave; jour.</string>
+	<string name="downloading">T&eacute;l&eacute;chargement…</string>
+</resources>
