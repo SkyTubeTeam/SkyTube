@@ -1,0 +1,15 @@
+
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="bookmarks">Favoris</string>
+
+	<string name="bookmark_video">Ajouter la vid&eacute;os aux favoris</string>
+	<string name="video_bookmarked">Vid&eacute;o ajout&eacute;e aux favoris</string>
+	<string name="video_bookmarked_error">Impossible d\'ajouter la vid&eacute;o aux favoris.</string>
+
+	<string name="unbookmark">Enlever la vid&eacute;o des favoris</string>
+	<string name="video_unbookmarked">Vid&eacute;o enlev&eacute;e des favoris</string>
+	<string name="video_unbookmarked_error">Impossible d'enlever la vid&eacute;o des favoris.</string>
+
+	<string name="no_bookmarked_videos_text">Vous n'avez pas ajout&eacute; de vid&eacute;o aux favoris. Elles s\'afficheront ici.</string>
+</resources>
