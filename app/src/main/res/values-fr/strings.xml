@@ -1,0 +1,21 @@
+<resources>
+	<string name="could_not_get_videos">Impossible de charger les vid&eacute;os de %s.</string>
+	<string name="views">Vu %,d fois</string>
+	<string name="error">Erreur</string>
+	<string name="ok">Ok</string>
+	<string name="search_videos">Rechercher</string>
+	<string name="launch_offical_player_error">Une erreur s\'est produit lors de l\'ouverture de youtube. Assurez-vous de bien avoir install&eacute; l\'application officielle.</string>
+
+	<string name="fetching_subscription_videos">Chargement des vid&eacute;os des chaines abonn&eacute;es</string>
+	<string name="fetched_videos_from_channels">%1$d vid&eacute;os de %2$d/%3$d chaines.</string>
+	<string name="no_new_videos_found">Pas de nouvelles vid&eacute;os.</string>
+	<string name="no_subscriptions_text">Vous &ecirc; abonn&eacute; &agrave; aucune chaine, D&egrave;s que vous le serez, Les vid&eacute;os de moins d'un mois appara&icirc;tront ici.</string>
+
+	<string name="featured">Mises en avant</string>
+	<string name="popular">Les plus populaires</string>
+
+	<string name="share_via">Partager avec</string>
+	<string name="url_copied_to_clipboard">URL copi&eacute; dans le presse-papier.</string>
+	<string name="share">Partager</string>
+	<string name="copy_to_clipboard">copi&eacute;r dans le presse-papier</string>
+</resources>
