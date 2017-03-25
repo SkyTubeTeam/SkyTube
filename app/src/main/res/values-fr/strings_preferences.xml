@@ -396,10 +396,10 @@
 	<string name="pref_title_default_tab">Onglet par défaut</string>
 	<string name="pref_summary_default_tab">Onglet par défaut lors de l\'ouverture de skytube: %s</string>
 	<string-array name="default_tab">
-		<item>Mises en avant</item>
-		<item>Les plus populaires</item>
-		<item>Abonnement</item>
-		<item>Favoris</item>
+		<item>@string/featured</item>
+		<item>@string/most_popular</item>
+		<item>@string/subscriptions</item>
+		<item>@string/bookmarks</item>
 	</string-array>
 	<string-array name="default_tab_values">
 		<item>0</item>

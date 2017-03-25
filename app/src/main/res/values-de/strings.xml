@@ -18,7 +18,7 @@
 	</string>
 
 	<string name="featured">Empfohlen</string>
-	<string name="popular">Beliebt</string>
+	<string name="most_popular">Beliebt</string>
 
 	<string name="share_via">Teilen mit</string>
 	<string name="url_copied_to_clipboard">URL in die Zwischenablage kopiert.</string>

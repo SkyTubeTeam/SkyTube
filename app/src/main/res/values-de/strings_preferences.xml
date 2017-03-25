@@ -400,10 +400,10 @@
 	<string name="pref_title_default_tab">Standard Tab</string>
 	<string name="pref_summary_default_tab">Standard Tab welcher beim SkyTube-Start angezeigt wird: %s</string>
 	<string-array name="default_tab">
-		<item>Empfohlen</item>
-		<item>Beliebt</item>
-		<item>Abos</item>
-		<item>Merkliste</item>
+		<item>@string/featured</item>
+		<item>@string/most_popular</item>
+		<item>@string/subscriptions</item>
+		<item>@string/bookmarks</item>
 	</string-array>
 	<string-array name="default_tab_values">
 		<item>0</item>

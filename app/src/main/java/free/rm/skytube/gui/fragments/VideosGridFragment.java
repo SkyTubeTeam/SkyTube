@@ -90,7 +90,7 @@ public abstract class VideosGridFragment extends BaseVideosGridFragment {
 
 
 	/**
-	 * @return The fragment/tab name.
+	 * @return The fragment/tab name/title.
 	 */
 	protected abstract String getFragmentName();
 

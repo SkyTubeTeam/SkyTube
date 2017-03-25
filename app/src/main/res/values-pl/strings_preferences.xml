@@ -394,13 +394,15 @@
 	<string name="pref_title_default_tab">Domyślna karta</string>
 	<string name="pref_summary_default_tab">Domyślna karta do pokazywania kiedy SkyTube się uruchamia: %s</string>
 	<string-array name="default_tab">
-		<item>Polecane</item>
-		<item>Najbardziej popularne</item>
-		<item>Subskrypcje</item>
+		<item>@string/featured</item>
+		<item>@string/most_popular</item>
+		<item>@string/subscriptions</item>
+		<item>@string/bookmarks</item>
 	</string-array>
 	<string-array name="default_tab_values">
 		<item>0</item>
 		<item>1</item>
 		<item>2</item>
+		<item>3</item>
 	</string-array>
 </resources>

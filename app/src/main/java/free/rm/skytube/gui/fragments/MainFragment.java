@@ -167,7 +167,7 @@ public class MainFragment extends FragmentEx {
 				BookmarksDb.getBookmarksDb().addListener(bookmarksFragment);
 			}
 
-			// add fragments to list
+			// add fragments to list:  do NOT forget to ***UPDATE*** @string/default_tab and @string/default_tab_values
 			videoGridFragmentsList.clear();
 			videoGridFragmentsList.add(featuredVideosFragment);
 			videoGridFragmentsList.add(mostPopularVideosFragment);

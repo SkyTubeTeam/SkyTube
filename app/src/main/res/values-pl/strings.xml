@@ -12,7 +12,7 @@
 	<string name="no_subscriptions_text">Nie subskrybujesz żadnych kanałów.\n\nKiedy będziesz, wszystkie filmy dodane do subskrybowanych kanałów w ciągu ostatniego miesiąca pojawią się tutaj.</string>
 
 	<string name="featured">Polecane</string>
-	<string name="popular">Najbardziej popularne</string>
+	<string name="most_popular">Najbardziej popularne</string>
 
 	<string name="share_via">Udostępnij przez</string>
 	<string name="url_copied_to_clipboard">Adres URL skopiowany do schowka.</string>

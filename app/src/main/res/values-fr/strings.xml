@@ -12,7 +12,7 @@
 	<string name="no_subscriptions_text">Vous êtes abonné à aucune chaine, Dès que vous le serez, Les vidéos de moins d\'un mois apparaîtront ici.</string>
 
 	<string name="featured">Mises en avant</string>
-	<string name="popular">Les plus populaires</string>
+	<string name="most_popular">Les plus populaires</string>
 
 	<string name="share_via">Partager avec</string>
 	<string name="url_copied_to_clipboard">URL copié dans le presse-papier.</string>

@@ -33,7 +33,7 @@ public class MostPopularVideosFragment extends VideosGridFragment {
 
 	@Override
 	protected String getFragmentName() {
-		return SkyTubeApp.getStr(R.string.popular);
+		return SkyTubeApp.getStr(R.string.most_popular);
 	}
 
 	@Override

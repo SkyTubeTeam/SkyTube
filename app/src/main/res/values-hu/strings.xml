@@ -13,7 +13,7 @@
 	<string name="no_subscriptions_text">You aren\'t subscribed to any Channels.\n\nOnce you are, all videos uploaded to your subscribed Channels within the last month will appear here.</string>
 
 	<string name="featured">Kiemelt</string>
-	<string name="popular">Legnépszerűbb</string>
+	<string name="most_popular">Legnépszerűbb</string>
 
 	<string name="share_via">Share via</string>
 	<string name="url_copied_to_clipboard">URL copied to clipboard.</string>

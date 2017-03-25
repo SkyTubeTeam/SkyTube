@@ -14,7 +14,7 @@
 	<string name="no_subscriptions_text">No estás suscrito a ningún canal, cuando lo estés todos los videos del último mes de dichos canales aparecerán aquí.</string>
 
 	<string name="featured">Destacados</string>
-	<string name="popular">Más Populares</string>
+	<string name="most_popular">Más Populares</string>
 
 	<string name="share_via">Compartir con</string>
 	<string name="url_copied_to_clipboard">URL copiada al portapapeles.</string>
