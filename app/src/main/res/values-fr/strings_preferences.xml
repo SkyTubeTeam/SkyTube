@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="preferences">Pr&eacute;f&eacute;rences</string>
+	<string name="preferences">Préférences</string>
 
-	<string name="pref_languages_category">Langues et R&eacute;gions</string>
-	<string name="pref_title_preferred_regions">R&eacute;gion pr&eacute;f&eacute;r&eacute;e</string>
+	<string name="pref_languages_category">Langues et Régions</string>
+	<string name="pref_title_preferred_regions">Région préférée</string>
 	<string name="pref_key_preferred_region">pref_key_preferred_region</string>
-	<string name="pref_summary_preferred_regions">S&eacute;lectionnez une r&eacute;gion. Cela permettra de filter les vid&eacute;os mises en avant.</string>
+	<string name="pref_summary_preferred_regions">Sélectionnez une région. Cela permettra de filter les vidéos mises en avant.</string>
 
-	<string name="pref_title_preferred_languages">Langue(s) pr&eacute;f&eacute;r&eacute;e(s)</string>
+	<string name="pref_title_preferred_languages">Langue(s) préférée(s)</string>
 	<string name="pref_key_preferred_languages">pref_key_preferred_languages</string>
-	<string name="pref_summary_preferred_languages">EXPERIMENTAL: S&eacute;lectionnez une ou plusieurs langue(s). Cela permettra de filter les vid&eacute;os populaires ainsi que vos recherches.</string>
+	<string name="pref_summary_preferred_languages">EXPERIMENTAL: Sélectionnez une ou plusieurs langue(s). Cela permettra de filter les vidéos populaires ainsi que vos recherches.</string>
 
-	<string name="pref_video_player_category">Lecteur vid&eacute;o</string>
+	<string name="pref_video_player_category">Lecteur vidéo</string>
 	<string name="pref_key_video_player_category">video_player_category</string>
-	<string name="pref_title_preferred_res">Résolution pr&eacute;f&eacute;r&eacute;e</string>
+	<string name="pref_title_preferred_res">Résolution préférée</string>
 	<string name="pref_key_preferred_res">pref_preferred_resolution</string>
-	<string name="pref_summary_preferred_res">S&eacute;lectionnez une résolution</string>
+	<string name="pref_summary_preferred_res">Sélectionnez une résolution</string>
 	<string name="pref_title_use_offical_player">Utiliser le lecteur youtube officiel</string>
 	<string name="pref_key_use_offical_player">pref_use_official_youtube_player</string>
-	<string name="pref_summary_use_offical_player">Non recommand&eacute;</string>
+	<string name="pref_summary_use_offical_player">Non recommandé</string>
 
-	<string name="pref_about_category">&Agrave; propos</string>
+	<string name="pref_about_category">À propos</string>
 	<string name="pref_title_website">Site internet</string>
 	<string name="pref_key_website">pref_website</string>
 	<string name="pref_summary_website">http://www.skytube-app.com</string>
@@ -393,8 +393,8 @@
 
 	<string name="pref_other_category">Autre</string>
 	<string name="pref_key_default_tab">pref_default_tab</string>
-	<string name="pref_title_default_tab">Onglet par d&eacute;faut</string>
-	<string name="pref_summary_default_tab">Onglet par d&eacute;faut lors de l'ouverture de skytube: %s</string>
+	<string name="pref_title_default_tab">Onglet par défaut</string>
+	<string name="pref_summary_default_tab">Onglet par défaut lors de l\'ouverture de skytube: %s</string>
 	<string-array name="default_tab">
 		<item>Mises en avant</item>
 		<item>Les plus populaires</item>

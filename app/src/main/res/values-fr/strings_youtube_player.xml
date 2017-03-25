@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="error_stream_err_unavailable">Impossible d\'afficher le message d\'erreur.</string>
-	<string name="error_stream_decryption_fail">Impossible de lire le code de d&eacute;cryptage du service youtube.</string>
+	<string name="error_stream_decryption_fail">Impossible de lire le code de décryptage du service youtube.</string>
 	<string name="error_stream_parse_error">Erreur d\'analyse.</string>
 
-	<string name="error_video_play">Erreur de lecture vid&eacute;o</string>
-	<string name="error_video_streams_empty">La vid&eacute;o %s n\'a pas de source</string>
-	<string name="error_get_video_desc">Erreur lors de la r&eacute;cup&eacute;ration de la description de la vid&eacute;o.</string>
-	<string name="error_invalid_url">URL de la vid&eacute;o invalide: %s</string>
+	<string name="error_video_play">Erreur de lecture vidéo</string>
+	<string name="error_video_streams_empty">La vidéo %s n\'a pas de source</string>
+	<string name="error_get_video_desc">Erreur lors de la récupération de la description de la vidéo.</string>
+	<string name="error_invalid_url">URL de la vidéo invalide: %s</string>
 
-	<string name="loading_video">Chargement de la vid&eacute;o…</string>
-	<string name="reload_video">Recharger la vid&eacute;o</string>
+	<string name="loading_video">Chargement de la vidéo…</string>
+	<string name="reload_video">Recharger la vidéo</string>
 	<string name="open_in_browser">Ouvrir dans un navigateur</string>
 	<string name="open_with">Ouvrir avec…</string>
 
-	<string name="error_get_comments">Erreur lors de la r&eacute;ception des commentaires.</string>
-	<string name="no_video_comments">Cette vid&eacute;o ne poss&eacute;de pas de commentaire.</string>
-	<string name="view_replies">Voir les r&eacute;ponses</string>
-	<string name="hide_replies">Cacher les r&eacute;ponses</string>
+	<string name="error_get_comments">Erreur lors de la réception des commentaires.</string>
+	<string name="no_video_comments">Cette vidéo ne posséde pas de commentaire.</string>
+	<string name="view_replies">Voir les réponses</string>
+	<string name="hide_replies">Cacher les réponses</string>
 
-	<string name="enter_video_url">Coller l'URL de la vid&eacute;o</string>
+	<string name="enter_video_url">Coller l\'URL de la vidéo</string>
 	<string name="play">Démarrer</string>
 	<string name="cancel">Annuler</string>
 	<string name="clear">Effacer</string>
