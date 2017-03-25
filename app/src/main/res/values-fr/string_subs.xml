@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="subscriptions">Abonnements</string>
+	<string name="subscribe">S\'abonner</string>
+	<string name="unsubscribe">Se d&eacute;sabonner</string>
+	<string name="total_subscribers">Nombre d\'abonnements</string>
+
+	<string name="subscribed">Abonn&eacute;</string>
+	<string name="unsubscribed">D&eacute;sabonn&eacute;</string>
+
+	<string name="error_get_subbed_channels">Erreur lors de l'abonnement &agrave; la chaine</string>
+	<string name="error_check_if_user_has_subbed">Impossible de v&eacute;rifier si l\'utilisateur est abonn&eacute; &agrave; cette chaine (id=%s)</string>
+	<string name="error_unable_to_subscribe">Impossible de vous d&eacute;sabonner de cette chaine (id=%s)</string>
+</resources>
