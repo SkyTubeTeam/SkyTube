@@ -38,7 +38,7 @@ public class MainFragment extends FragmentEx {
 	private List<VideosGridFragment>	videoGridFragmentsList = new ArrayList<>();
 	private FeaturedVideosFragment		featuredVideosFragment = null;
 	private MostPopularVideosFragment	mostPopularVideosFragment = null;
-	private SubscriptionsFragment		subscriptionsFragment = null;
+	private SubscriptionsVideosFragment subscriptionsVideosFragment = null;
 	private BookmarksFragment			bookmarksFragment = null;
 
 	private VideosPagerAdapter			videosPagerAdapter = null;
@@ -159,8 +159,8 @@ public class MainFragment extends FragmentEx {
 			if (mostPopularVideosFragment == null)
 				mostPopularVideosFragment = new MostPopularVideosFragment();
 
-			///if (subscriptionsFragment == null)
-			///	subscriptionsFragment = new SubscriptionsFragment();
+			if (subscriptionsVideosFragment == null)
+				subscriptionsVideosFragment = new SubscriptionsVideosFragment();
 
 			if (bookmarksFragment == null) {
 				bookmarksFragment = new BookmarksFragment();
@@ -171,7 +171,7 @@ public class MainFragment extends FragmentEx {
 			videoGridFragmentsList.clear();
 			videoGridFragmentsList.add(featuredVideosFragment);
 			videoGridFragmentsList.add(mostPopularVideosFragment);
-			///videoGridFragmentsList.add(subscriptionsFragment);
+			videoGridFragmentsList.add(subscriptionsVideosFragment);
 			videoGridFragmentsList.add(bookmarksFragment);
 		}
 

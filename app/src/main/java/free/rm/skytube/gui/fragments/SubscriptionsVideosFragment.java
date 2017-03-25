@@ -43,7 +43,7 @@ import free.rm.skytube.gui.businessobjects.SubscriptionsFragmentListener;
 /**
  * Fragment that displays videos from all channels the user is subscribed to.
  */
-public class SubscriptionsFragment extends VideosGridFragment implements SubscriptionsFragmentListener {
+public class SubscriptionsVideosFragment extends VideosGridFragment implements SubscriptionsFragmentListener {
 
 	private int numVideosFetched = 0;
 	private int numChannelsFetched = 0;
@@ -157,7 +157,7 @@ public class SubscriptionsFragment extends VideosGridFragment implements Subscri
 
 	/**
 	 * A task that fetched the total number of subscribed channels from the DB and updated the
-	 * SubscriptionsFragment UI accordingly.
+	 * SubscriptionsVideosFragment UI accordingly.
 	 */
 	private class GetTotalNumberOfChannelsTask extends AsyncTaskParallel<Void, Void, Integer> {
 
@@ -193,7 +193,7 @@ public class SubscriptionsFragment extends VideosGridFragment implements Subscri
 
 
 	/**
-	 * A task that refreshes the videos of the {@link SubscriptionsFragment}.
+	 * A task that refreshes the videos of the {@link SubscriptionsVideosFragment}.
 	 */
 	private class RefreshTask extends AsyncTaskParallel<Void, Void, Integer> {
 
@@ -218,7 +218,7 @@ public class SubscriptionsFragment extends VideosGridFragment implements Subscri
 			numChannelsSubscribed = totalNumberOfChannels;
 
 			if (numChannelsSubscribed > 0) {
-				new GetSubscriptionVideosTask(SubscriptionsFragment.this).executeInParallel();
+				new GetSubscriptionVideosTask(SubscriptionsVideosFragment.this).executeInParallel();
 				refreshInProgress = true;
 
 				if (showDialog)

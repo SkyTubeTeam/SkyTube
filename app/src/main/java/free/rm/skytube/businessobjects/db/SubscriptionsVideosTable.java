@@ -17,6 +17,9 @@
 
 package free.rm.skytube.businessobjects.db;
 
+/**
+ * A table that caches metadata about videos published by subbed channels.
+ */
 public class SubscriptionsVideosTable {
 	public static final String TABLE_NAME = "SubsVideos";
 	public static final String COL_CHANNEL_ID = "Channel_Id";

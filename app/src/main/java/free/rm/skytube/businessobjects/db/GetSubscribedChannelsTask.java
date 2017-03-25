@@ -29,8 +29,8 @@ import free.rm.skytube.businessobjects.YouTubeChannel;
 import free.rm.skytube.gui.businessobjects.SubsAdapter;
 
 /**
- * Gets a list of channels that the user is subscribed to and then passes the channels list to
- * the given {@link SubsAdapter}.
+ * Gets a list of channels (from the DB) that the user is subscribed to and then passes the channels
+ * list to the given {@link SubsAdapter}.
  */
 public class GetSubscribedChannelsTask extends AsyncTaskParallel<Void, Void, List<YouTubeChannel>> {
 

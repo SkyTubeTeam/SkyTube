@@ -130,7 +130,8 @@ public class SubscriptionsDb extends SQLiteOpenHelper {
 	/**
 	 * Returns A list of channels that the user subscribed to.
 	 *
-	 * @param shouldCheckForNewVideos
+	 * @param shouldCheckForNewVideos  If true it will check if the channel has new videos since last channel visit.
+	 *
 	 * @return A list of channels that the user subscribed to.
 	 * @throws IOException
 	 */
@@ -253,10 +254,13 @@ public class SubscriptionsDb extends SQLiteOpenHelper {
 
 
 	/**
-	 * Check if the given channel has new videos.
+	 * Check if the given channel has new videos (by looking into the {@link SubscriptionsVideosTable}
+	 * [i.e. video cache table]).
 	 *
 	 * @param channel Channel to check.
-	 * @return
+	 *
+	 * @return True if the user hasn't visited the channel and new videos have been uploaded in the
+	 * meantime; false otherwise.
 	 */
 	public boolean channelHasNewVideos(YouTubeChannel channel) {
 		DateTimeFormatter fmt = ISODateTimeFormat.dateTime();

@@ -36,7 +36,8 @@ import free.rm.skytube.businessobjects.YouTubeChannel;
 import free.rm.skytube.businessobjects.db.GetSubscribedChannelsTask;
 
 /**
- * Channel subscriptions adapter.
+ * Channel subscriptions adapter: Contains a list of channels (that the user subscribed to) together
+ * with a notification whether the channel has new videos since last visit to the channel or not.
  */
 public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapter.SubChannelViewHolder> {
 
@@ -46,6 +47,8 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 
 	private SubsAdapter(Context context, View progressBar) {
 		super(context);
+
+		// populate this adapter with user's subscribed channels
 		new GetSubscribedChannelsTask(this, progressBar).executeInParallel();
 	}
 
