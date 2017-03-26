@@ -9,6 +9,8 @@
 	<string name="error_get_video_desc">Wystąpił błąd podczas otrzymywania opisu wideo.</string>
 	<string name="error_invalid_url">Niepoprawny adres URL wideo:  %s</string>
 
+	<string name="warning_live_video">Cannot play live streams for now.  Play live stream externally?</string>
+
 	<string name="loading_video">Ładowanie filmu…</string>
 	<string name="reload_video">Przeładuj film</string>
 	<string name="open_in_browser">Otwórz w przeglądarce</string>

@@ -10,6 +10,8 @@
 	<string name="error_get_video_desc">A videóleírás lekérése közben hiba lépett fel.</string>
 	<string name="error_invalid_url">Érvénytelen videó URL:  %s</string>
 
+	<string name="warning_live_video">Cannot play live streams for now.  Play live stream externally?</string>
+
 	<string name="loading_video">Videó betöltése…</string>
 	<string name="reload_video">Videó újratöltése</string>
 	<string name="open_in_browser">Megnyitás böngészőben</string>

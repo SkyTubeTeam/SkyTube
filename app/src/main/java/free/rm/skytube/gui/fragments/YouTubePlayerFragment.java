@@ -329,8 +329,7 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 				loadVideo();
 				return true;
 			case R.id.menu_open_video_with:
-				Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v="+youTubeVideo.getId()));
-				startActivity(browserIntent);
+				playVideoExternally();
 				videoView.pause();
 				return true;
 			default:
@@ -340,13 +339,44 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 
 
 	/**
+	 * Play the video using an external app
+	 */
+	private void playVideoExternally() {
+		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(youTubeVideo.getVideoUrl()));
+		startActivity(browserIntent);
+	}
+
+
+	/**
 	 * Loads the video specified in {@link #youTubeVideo}.
 	 */
 	private void loadVideo() {
-		// get the video's steam
-		new GetStreamTask(youTubeVideo, true).executeInParallel();
-		// get the video description
-		new GetVideoDescriptionTask().executeInParallel();
+		// if the video is NOT live
+		if (!youTubeVideo.isLiveStream()) {
+			// get the video's steam
+			new GetStreamTask(youTubeVideo, true).executeInParallel();
+			// get the video description
+			new GetVideoDescriptionTask().executeInParallel();
+		} else {
+			// video is live:  ask the user if he wants to play the video using an other app
+			new AlertDialog.Builder(getContext())
+					.setMessage(R.string.warning_live_video)
+					.setTitle(R.string.error_video_play)
+					.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							closeActivity();
+						}
+					})
+					.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							playVideoExternally();
+							closeActivity();
+						}
+					})
+					.show();
+		}
 	}
 
 
@@ -431,7 +461,7 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 					.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
-							getActivity().finish();
+							closeActivity();
 						}
 					})
 					.show();
@@ -525,7 +555,7 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 				String err = String.format(getString(R.string.error_invalid_url), videoUrl);
 				Toast.makeText(getActivity(), err, Toast.LENGTH_LONG).show();
 				Log.e(TAG, err);
-				getActivity().finish();
+				closeActivity();
 			} else {
 				YouTubePlayerFragment.this.youTubeVideo = youTubeVideo;
 				setUpHUDAndPlayVideo();	// setup the HUD and play the video

@@ -9,6 +9,8 @@
 	<string name="error_get_video_desc">Ocurrió un error al obtener la descripción del video.</string>
 	<string name="error_invalid_url">URL de video inválida:  %s</string>
 
+	<string name="warning_live_video">Cannot play live streams for now.  Play live stream externally?</string>
+
 	<string name="loading_video">Cargando video…</string>
 	<string name="reload_video">Recargar video</string>
 	<string name="open_in_browser">Abrir en el navegador</string>

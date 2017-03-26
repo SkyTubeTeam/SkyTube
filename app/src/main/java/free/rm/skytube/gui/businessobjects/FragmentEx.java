@@ -42,6 +42,18 @@ public class FragmentEx extends Fragment {
 
 
 	/**
+	 * Close the parent activity.
+	 */
+	protected void closeActivity() {
+		AppCompatActivity activity = getAppCompatActivity();
+
+		if (activity != null) {
+			activity.finish();
+		}
+	}
+
+
+	/**
 	 * @return Instance of {@link ActionBar}.
 	 */
 	protected ActionBar getSupportActionBar() {
