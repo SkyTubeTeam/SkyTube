@@ -15,46 +15,21 @@ This app allows you to:
 More features will be added in the near future.
 
 ## Website
-
-[www.skytube-app.com](http://www.skytube-app.com)
+For screenshots and more information, please visit [www.skytube-app.com](http://www.skytube-app.com).
 
 ## Download
+### Download SkyTube Extra
+[![Download SkyTube Extra APK](screenshots/download_apk.png)](https://github.com/ram-on/SkyTube/releases/download/v2.3/SkyTube-Extra-2.3.apk)
 
-<table>
-<tr>
-    <td align="center">
-        <a href="https://github.com/ram-on/SkyTube/releases/download/v2.3/SkyTube-Extra-2.3.apk">
-            <img src="screenshots/download_apk.png" alt="Download APK">
-        </a>
-        
-        <p><b>( Recommended )</b></p>
-    <td>
-        <p><b>Download SkyTube Extra - Version 2.3</b></p>
-        
-        <p>Open source app that uses the following third-party closed source library:
-           <ul>
-               <li>YouTubeAndroidPlayerApi.jar (optional usage)</li>   
-           </ul> 
-        
-        <p>Updates are published immediately ‒ you will be notified whenever there is an update.</p>
-        
-        <p><pre>APK File:  SkyTube-Extra-2.3.apk
-SHA1:      46260f344f83315005e9203457eeb4106210e6cc</pre>
-    </td>
-</tr>
-<tr>
-    <td align="center">
-        <a href="https://f-droid.org/repository/browse/?fdid=free.rm.skytube.oss">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Get_it_on_F-Droid.svg/200px-Get_it_on_F-Droid.svg.png" alt="F-Droid">
-        </a>
-    <td>
-        <p>Download SkyTube</p>
-        
-        <p>Pure open-source version.  Updates normally take up to 3 days to be available to users.</p>
-    </td>
-</tr>
-</table>
+Open source app with contains extra features.  These extra features uses third-party closed source library:
+* YouTubeAndroidPlayerApi.jar (optional usage)
 
+Updates are published immediately: the app will you whenever there is an update.
+
+### Download SkyTube (Vanilla)
+[![Download SkyTube (Vanilla) APK](https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Get_it_on_F-Droid.svg/200px-Get_it_on_F-Droid.svg.png)](https://f-droid.org/repository/browse/?fdid=free.rm.skytube.oss)
+
+Pure open-source version.  Updates normally take up to 3 days to be available to users.
 
 ## Why SkyTube?
 * Open Source
@@ -67,12 +42,12 @@ SHA1:      46260f344f83315005e9203457eeb4106210e6cc</pre>
 
 ## Screenshots
 ### Tablet
-[<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/trending.png" width=960>](Trending videos)
-[<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/subs.png" width=960>](Channel Subscription)
-[<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/play.png" width=960>](Video Player)
-[<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/comments.png" width=960>](Video Comments)
-[<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/channel.png" width=960>](Channel Browser)
-[<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/search.png" width=960>](Search Videos)
+[<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/trending.png" width=960>](https://ram-on.github.io/SkyTube/assets/img/screenshots/trending.png)
+[<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/subs.png" width=960>](https://ram-on.github.io/SkyTube/assets/img/screenshots/subs.png)
+[<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/play.png" width=960>](https://ram-on.github.io/SkyTube/assets/img/screenshots/play.png)
+[<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/comments.png" width=960>](https://ram-on.github.io/SkyTube/assets/img/screenshots/comments.png)
+[<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/channel.png" width=960>](https://ram-on.github.io/SkyTube/assets/img/screenshots/channel.png)
+[<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/search.png" width=960>](https://ram-on.github.io/SkyTube/assets/img/screenshots/search.png)
 
 ### Mobile Phone (Old Screenshots)
 [<img src="screenshots/mobile_most_pop.png" width=250>](screenshots/mobile_most_pop.png)
