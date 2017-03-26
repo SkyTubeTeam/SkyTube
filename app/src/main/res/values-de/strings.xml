@@ -8,6 +8,7 @@
 		Beim Starten des offiziellen YouTube Players ist ein Fehler aufgetreten. Stelle
 		sicher, dass die offizielle Google YouTube App auf deinem Gerät installiert ist.
 	</string>
+	<string name="LIVE">LIVE</string>
 
 	<string name="fetching_subscription_videos">Rufe Videos von abonnierten Kanälen ab</string>
 	<string name="fetched_videos_from_channels">%1$d Videos von %2$d/%3$d Kanälen abgerufen.</string>

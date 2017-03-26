@@ -6,6 +6,7 @@
 	<string name="search_videos">Videók keresése</string>
 	<string name="launch_offical_player_error">Hiba történt a hivatalos Youtube lejátszó 
     betöltése közben. Telepítsd a hivatalos Youtube alkalmazást a Google-tól.</string>
+	<string name="LIVE">LIVE</string>
 
 	<string name="fetching_subscription_videos">Fetching videos from subscribed channels</string>
 	<string name="fetched_videos_from_channels">Fetched %1$d videos from %2$d/%3$d channels.</string>

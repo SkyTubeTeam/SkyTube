@@ -5,6 +5,7 @@
 	<string name="ok">Ok</string>
 	<string name="search_videos">Szukaj filmów</string>
 	<string name="launch_offical_player_error">Wystąpił błąd podczas uruchamiania oficjalnego odtwarzacza YouTube.  Upewnij się, że jest on zainstalowany.</string>
+	<string name="LIVE">LIVE</string>
 
 	<string name="fetching_subscription_videos">Pobieranie filmów z subskrybowanych kanałów</string>
 	<string name="fetched_videos_from_channels">Pobrano %1$d filmów z %2$d/%3$d kanałów.</string>

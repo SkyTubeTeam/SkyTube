@@ -28,6 +28,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.MathContext;
 import java.math.RoundingMode;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -69,6 +70,8 @@ public class YouTubeVideo implements Serializable {
 	private String	language;
 	/** The description of the video (set by the YouTuber/Owner). */
 	private String	description;
+	/** Set to true if the video is a current live stream. */
+	private boolean isLiveStream;
 
 	/** Default preferred language(s) -- by default, no language shall be filtered out. */
 	private static final Set<String> defaultPrefLanguages = new HashSet<>(SkyTubeApp.getStringArrayAsList(R.array.languages_iso639_codes));
@@ -99,6 +102,7 @@ public class YouTubeVideo implements Serializable {
 
 		if (video.getContentDetails() != null) {
 			setDuration(video.getContentDetails().getDuration());
+			setIsLiveStream();
 		}
 
 		if (video.getStatistics() != null) {
@@ -185,6 +189,24 @@ public class YouTubeVideo implements Serializable {
 	 */
 	private void setDuration(String duration) {
 		this.duration = VideoDuration.toHumanReadableString(duration);
+	}
+
+
+	/**
+	 * Using {@link #duration} it detects if the video/stream is live or not.
+	 *
+	 * <p>If it is live, then it will change {@link #duration} to "LIVE" and modify {@link #publishDate}
+	 * to current time (which will appear as "moments ago" when using {@link PrettyTimeEx}).</p>
+	 */
+	private void setIsLiveStream() {
+		// is live stream?
+		if (duration.equals("0:00")) {
+			isLiveStream = true;
+			duration = SkyTubeApp.getStr(R.string.LIVE);
+			publishDate = new DateTime(new Date());    // set publishDate to current (as there is a bug in YouTube API in which live videos's date is incorrect)
+		} else {
+			isLiveStream = false;
+		}
 	}
 
 
@@ -278,6 +300,10 @@ public class YouTubeVideo implements Serializable {
 
 	public String getDescription() {
 		return description;
+	}
+
+	public boolean isLiveStream() {
+		return isLiveStream;
 	}
 
 	/**
