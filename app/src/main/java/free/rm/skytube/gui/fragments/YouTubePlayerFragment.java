@@ -24,6 +24,8 @@ import android.widget.VideoView;
 import com.bumptech.glide.Glide;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -518,7 +520,16 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 
 		@Override
 		protected void onPreExecute() {
-			videoUrl = getUrlFromIntent(getActivity().getIntent());
+			String url = getUrlFromIntent(getActivity().getIntent());
+
+			try {
+				// YouTube sends subscriptions updates email in which its videos' URL are encoded...
+				// Hence we need to decode them first...
+				videoUrl = URLDecoder.decode(url, "UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				Log.e(TAG, "UnsupportedEncodingException on " + videoUrl + " encoding = UTF-8", e);
+				videoUrl = url;
+			}
 		}
 
 
@@ -552,9 +563,14 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 		@Override
 		protected void onPostExecute(YouTubeVideo youTubeVideo) {
 			if (youTubeVideo == null) {
+				// invalid URL error (i.e. we are unable to decode the URL)
 				String err = String.format(getString(R.string.error_invalid_url), videoUrl);
 				Toast.makeText(getActivity(), err, Toast.LENGTH_LONG).show();
+
+				// log error
 				Log.e(TAG, err);
+
+				// close the video player activity
 				closeActivity();
 			} else {
 				YouTubePlayerFragment.this.youTubeVideo = youTubeVideo;
@@ -591,7 +607,8 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 			if (url == null)
 				return null;
 
-			final String pattern = "(?<=v=|/videos/|embed/|youtu\\.be/|/v/|/e/)[^#&\\?]*";
+			// TODO:  support playlists (i.e. video_ids=... <-- URL submitted via email by YouTube)
+			final String pattern = "(?<=v=|/videos/|embed/|youtu\\.be/|/v/|/e/|video_ids=)[^#&?%]*";
 			Pattern compiledPattern = Pattern.compile(pattern);
 			Matcher matcher = compiledPattern.matcher(url);
 
