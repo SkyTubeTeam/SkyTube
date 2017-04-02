@@ -120,15 +120,17 @@ public class PreferencesFragment extends PreferenceFragment implements SharedPre
 				defaultTabPref.setSummary(String.format(getString(R.string.pref_summary_default_tab), defaultTabPref.getEntry()));
 			} else if (key.equals(getString(R.string.pref_youtube_api_key))) {
 				// Validate the entered API Key when saved (and not empty), with a simple call to get the most popular video
-				final EditTextPreference youtubeAPIKeyPref = (EditTextPreference) findPreference(getString(R.string.pref_youtube_api_key));
-				if(!youtubeAPIKeyPref.getText().isEmpty()) {
+				final EditTextPreference    youtubeAPIKeyPref = (EditTextPreference) findPreference(getString(R.string.pref_youtube_api_key));
+				final String                youtubeAPIKey     = youtubeAPIKeyPref.getText();
+
+				if (youtubeAPIKey != null  &&  !youtubeAPIKey.isEmpty()) {
 					new AsyncTask<Void, Void, Boolean>() {
 						@Override
 						protected Boolean doInBackground(Void... voids) {
 							try {
 								YouTube.Videos.List videosList = YouTubeAPI.create().videos().list("snippet");
 								videosList.setFields("items(id)");
-								videosList.setKey(youtubeAPIKeyPref.getText());
+								videosList.setKey(youtubeAPIKey);
 								videosList.setChart("mostPopular");
 								String regionCode = SkyTubeApp.getPreferenceManager().getString(SkyTubeApp.getStr(R.string.pref_key_preferred_region), "").trim();
 								videosList.setRegionCode(regionCode.isEmpty() ? null : regionCode);
