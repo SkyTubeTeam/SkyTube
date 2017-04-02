@@ -21,26 +21,19 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
-import android.util.Log;
 import android.widget.Toast;
-
-import com.google.api.services.youtube.YouTube;
-
-import java.io.IOException;
 
 import free.rm.skytube.BuildConfig;
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
+import free.rm.skytube.businessobjects.ValidateYouTubeAPIKey;
 import free.rm.skytube.businessobjects.VideoStream.VideoResolution;
-import free.rm.skytube.businessobjects.YouTubeAPI;
-import free.rm.skytube.gui.app.SkyTubeApp;
 
 /**
  * A fragment that allows the user to change the settings of this app.  This fragment is called by
@@ -121,8 +114,6 @@ public class PreferencesFragment extends PreferenceFragment implements SharedPre
 				ListPreference defaultTabPref = (ListPreference) findPreference(key);
 				defaultTabPref.setSummary(String.format(getString(R.string.pref_summary_default_tab), defaultTabPref.getEntry()));
 			} else if (key.equals(getString(R.string.pref_youtube_api_key))) {
-				Log.d(TAG, "CHECKING API KEY...");
-
 				// Validate the entered API Key when saved (and not empty), with a simple call to get the most popular video
 				EditTextPreference    youtubeAPIKeyPref = (EditTextPreference) findPreference(getString(R.string.pref_youtube_api_key));
 				String                youtubeAPIKey     = youtubeAPIKeyPref.getText();
@@ -131,7 +122,7 @@ public class PreferencesFragment extends PreferenceFragment implements SharedPre
 					youtubeAPIKey = youtubeAPIKey.trim();
 
 					if (!youtubeAPIKey.isEmpty()) {
-						new ValidateYouTubeApiKeyTask(youtubeAPIKey).executeInParallel();
+						new ValidateYouTubeAPIKeyTask(youtubeAPIKey).executeInParallel();
 					}
 					else {
 						// inform the user that we are going to use the default YouTube API key
@@ -157,43 +148,35 @@ public class PreferencesFragment extends PreferenceFragment implements SharedPre
 	////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-	private class ValidateYouTubeApiKeyTask extends AsyncTaskParallel<Void, Void, Boolean> {
+	/**
+	 * A task that validates the given YouTube API key.
+	 */
+	private class ValidateYouTubeAPIKeyTask extends AsyncTaskParallel<Void, Void, Boolean> {
 
 		private String youtubeAPIKey;
 
 
-		public ValidateYouTubeApiKeyTask(String youtubeAPIKey) {
+		public ValidateYouTubeAPIKeyTask(String youtubeAPIKey) {
 			this.youtubeAPIKey = youtubeAPIKey;
 		}
 
 
 		@Override
 		protected Boolean doInBackground(Void... voids) {
-			try {
-				YouTube.Videos.List videosList = YouTubeAPI.create().videos().list("snippet");
-				videosList.setFields("items(id)");
-				videosList.setKey(youtubeAPIKey);
-				videosList.setChart("mostPopular");
-				String regionCode = SkyTubeApp.getPreferenceManager().getString(SkyTubeApp.getStr(R.string.pref_key_preferred_region), "").trim();
-				videosList.setRegionCode(regionCode.isEmpty() ? null : regionCode);
-				videosList.setMaxResults(1l);
-				videosList.execute();
-			} catch (IOException e) {
-				return true;
-			}
-			return false;
+			ValidateYouTubeAPIKey validateKey = new ValidateYouTubeAPIKey(youtubeAPIKey);
+			return validateKey.isKeyValid();
 		}
 
 
 		@Override
-		protected void onPostExecute(Boolean error) {
+		protected void onPostExecute(Boolean isKeyValid) {
 			// If the validation failed, reset the preference to null
-			if (error) {
+			if (!isKeyValid) {
 				((EditTextPreference) findPreference(getString(R.string.pref_youtube_api_key))).setText(null);
 			}
 
 			// Show a message depending on if the validation passed or failed
-			Toast.makeText(getActivity(), getString(error ? R.string.pref_youtube_api_key_error : R.string.pref_youtube_api_key_saved), Toast.LENGTH_LONG).show();
+			Toast.makeText(getActivity(), getString(isKeyValid ? R.string.pref_youtube_api_key_saved : R.string.pref_youtube_api_key_error), Toast.LENGTH_LONG).show();
 		}
 
 	}
