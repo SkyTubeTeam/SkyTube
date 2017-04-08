@@ -25,8 +25,8 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
-import free.rm.skytube.BuildConfig;
 import free.rm.skytube.R;
+import free.rm.skytube.businessobjects.YouTubeAPIKey;
 import free.rm.skytube.businessobjects.YouTubeVideo;
 import free.rm.skytube.gui.activities.YouTubePlayerActivity;
 
@@ -73,7 +73,7 @@ public class YouTubePlayer {
 	private static void launchOfficialYouTubePlayer(String videoId, Context context) {
 		try {
 			// try to start the YouTube standalone player
-			Intent intent = com.google.android.youtube.player.YouTubeStandalonePlayer.createVideoIntent((Activity) context, BuildConfig.YOUTUBE_API_KEY, videoId);
+			Intent intent = com.google.android.youtube.player.YouTubeStandalonePlayer.createVideoIntent((Activity) context, YouTubeAPIKey.get().getYouTubeAPIKey(), videoId);
 			context.startActivity(intent);
 		} catch (Exception e) {
 			String errorMsg = context.getString(R.string.launch_offical_player_error);
