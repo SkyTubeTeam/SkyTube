@@ -48,7 +48,7 @@ public class GetCommentThreads {
 		this.commentsList = YouTubeAPI.create().commentThreads()
 				.list("snippet, replies")
 				.setFields("items(snippet, replies), nextPageToken")
-				.setKey(SkyTubeApp.getYouTubeAPIKey())
+				.setKey(YouTubeAPIKey.get().getYouTubeAPIKey())
 				.setVideoId(videoId)
 				.setTextFormat("plainText")
 				.setMaxResults(MAX_RESULTS)

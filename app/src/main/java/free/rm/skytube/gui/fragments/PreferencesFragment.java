@@ -18,6 +18,7 @@
 package free.rm.skytube.gui.fragments;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -34,6 +35,7 @@ import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.ValidateYouTubeAPIKey;
 import free.rm.skytube.businessobjects.VideoStream.VideoResolution;
+import free.rm.skytube.gui.app.SkyTubeApp;
 
 /**
  * A fragment that allows the user to change the settings of this app.  This fragment is called by
@@ -122,16 +124,39 @@ public class PreferencesFragment extends PreferenceFragment implements SharedPre
 					youtubeAPIKey = youtubeAPIKey.trim();
 
 					if (!youtubeAPIKey.isEmpty()) {
+						// validate the user's API key
 						new ValidateYouTubeAPIKeyTask(youtubeAPIKey).executeInParallel();
 					}
 					else {
-						// inform the user that we are going to use the default YouTube API key
-						Toast.makeText(getActivity(), getString(R.string.pref_youtube_default_key_to_be_used), Toast.LENGTH_LONG).show();
+						// inform the user that we are going to use the default YouTube API key and
+						// that we need to restart the app
+						displayRestartDialog(R.string.pref_youtube_api_key_default);
 					}
 				}
 			}
 		}
 	}
+
+
+	/**
+	 * Display a dialog with message <code>messageID</code> and force the user to restart the app by
+	 * tapping on the restart button.
+	 *
+	 * @param messageID Message resource ID.
+	 */
+	private void displayRestartDialog(int messageID) {
+		new AlertDialog.Builder(getActivity())
+				.setMessage(messageID)
+				.setPositiveButton(R.string.restart, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						SkyTubeApp.restartApp();
+					}
+				})
+				.setCancelable(false)
+				.show();
+	}
+
 
 	/**
 	 * Displays the app's license in an AlertDialog.
@@ -170,13 +195,19 @@ public class PreferencesFragment extends PreferenceFragment implements SharedPre
 
 		@Override
 		protected void onPostExecute(Boolean isKeyValid) {
-			// If the validation failed, reset the preference to null
 			if (!isKeyValid) {
+				// if the validation failed, reset the preference to null
 				((EditTextPreference) findPreference(getString(R.string.pref_youtube_api_key))).setText(null);
+			} else {
+				// if the key is valid, then inform the user that the custom API key is valid and
+				// that he needs to restart the app in order to use it
+				displayRestartDialog(R.string.pref_youtube_api_key_custom);
 			}
 
-			// Show a message depending on if the validation passed or failed
-			Toast.makeText(getActivity(), getString(isKeyValid ? R.string.pref_youtube_api_key_saved : R.string.pref_youtube_api_key_error), Toast.LENGTH_LONG).show();
+			// display a toast to show that the key is not valid
+			if (!isKeyValid) {
+				Toast.makeText(getActivity(), getString(R.string.pref_youtube_api_key_error), Toast.LENGTH_LONG).show();
+			}
 		}
 
 	}

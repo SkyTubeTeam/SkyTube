@@ -44,7 +44,7 @@ public class GetFeaturedVideos extends GetYouTubeVideos {
 		videosList.setFields("items(id, snippet/defaultAudioLanguage, snippet/defaultLanguage, snippet/publishedAt, snippet/title, snippet/channelId, snippet/channelTitle," +
 				"snippet/thumbnails/high, contentDetails/duration, statistics)," +
 				"nextPageToken");
-		videosList.setKey(SkyTubeApp.getYouTubeAPIKey());
+		videosList.setKey(YouTubeAPIKey.get().getYouTubeAPIKey());
 		videosList.setChart("mostPopular");
 		videosList.setRegionCode(getPreferredRegion());
 		videosList.setMaxResults(getMaxResults());

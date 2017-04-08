@@ -17,8 +17,8 @@
 
 package free.rm.skytube.gui.app;
 
-import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.multidex.MultiDexApplication;
@@ -26,8 +26,6 @@ import android.support.multidex.MultiDexApplication;
 import java.util.Arrays;
 import java.util.List;
 
-import free.rm.skytube.BuildConfig;
-import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 
 /**
@@ -37,7 +35,6 @@ public class SkyTubeApp extends MultiDexApplication {
 
 	/** SkyTube Application instance. */
 	private static SkyTubeApp skyTubeApp = null;
-	private static volatile SubscriptionsDb subscriptionsDb = null;
 
 	public static final String KEY_SUBSCRIPTIONS_LAST_UPDATED = "SkyTubeApp.KEY_SUBSCRIPTIONS_LAST_UPDATED";
 
@@ -102,14 +99,22 @@ public class SkyTubeApp extends MultiDexApplication {
 	}
 
 
+	/**
+	 * @return {@link Context}.
+	 */
 	public static Context getContext() {
 		return skyTubeApp.getBaseContext();
 	}
 
-	// If the user has entered their own YouTube Data API key, return it, otherwise return the default
-	public static String getYouTubeAPIKey() {
-		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getContext());
-		return sp.getString(getContext().getString(R.string.pref_youtube_api_key), null) != null ? sp.getString(getContext().getString(R.string.pref_youtube_api_key), null) : BuildConfig.YOUTUBE_API_KEY;
+
+	/**
+	 * Restart the app.
+	 */
+	public static void restartApp() {
+		Intent i = getContext().getPackageManager().getLaunchIntentForPackage(getContext().getPackageName());
+		i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		Runtime.getRuntime().exit(0);
+		getContext().startActivity(i);
 	}
 
 }

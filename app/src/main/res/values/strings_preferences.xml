@@ -411,6 +411,8 @@
 	<string name="pref_title_youtube_api_key">Enter YouTube API Key</string>
 	<string name="pref_summary_youtube_api_key">Enter your own YouTube Data API Key. Leave blank to use the default.</string>
 	<string name="pref_youtube_api_key_error">An error occurred attempting to validate the API Key you entered.</string>
-	<string name="pref_youtube_api_key_saved">YouTube API Key saved.</string>
-	<string name="pref_youtube_default_key_to_be_used">Switching to default YouTube API key.</string>
+	<string name="pref_youtube_api_key_custom">Key is valid.  Restart app to use the new YouTube API key.</string>
+	<string name="pref_youtube_api_key_default">Restart app to switch back to default YouTube API key.</string>
+
+	<string name="restart">Restart</string>
 </resources>
