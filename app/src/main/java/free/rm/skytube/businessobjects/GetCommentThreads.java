@@ -27,7 +27,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import free.rm.skytube.BuildConfig;
+import free.rm.skytube.gui.app.SkyTubeApp;
 
 /**
  * Queries the YouTube service and gets the comments of a video.
@@ -48,7 +48,7 @@ public class GetCommentThreads {
 		this.commentsList = YouTubeAPI.create().commentThreads()
 				.list("snippet, replies")
 				.setFields("items(snippet, replies), nextPageToken")
-				.setKey(BuildConfig.YOUTUBE_API_KEY)
+				.setKey(YouTubeAPIKey.get().getYouTubeAPIKey())
 				.setVideoId(videoId)
 				.setTextFormat("plainText")
 				.setMaxResults(MAX_RESULTS)

@@ -26,7 +26,7 @@ import com.google.api.services.youtube.model.VideoListResponse;
 import java.io.IOException;
 import java.util.List;
 
-import free.rm.skytube.BuildConfig;
+import free.rm.skytube.gui.app.SkyTubeApp;
 
 /**
  * Get today's featured YouTube videos.
@@ -36,7 +36,6 @@ public class GetFeaturedVideos extends GetYouTubeVideos {
 	protected YouTube.Videos.List videosList = null;
 
 	private static final String	TAG = GetFeaturedVideos.class.getSimpleName();
-	private static final Long	MAX_RESULTS = 50L;
 
 
 	@Override
@@ -45,10 +44,10 @@ public class GetFeaturedVideos extends GetYouTubeVideos {
 		videosList.setFields("items(id, snippet/defaultAudioLanguage, snippet/defaultLanguage, snippet/publishedAt, snippet/title, snippet/channelId, snippet/channelTitle," +
 				"snippet/thumbnails/high, contentDetails/duration, statistics)," +
 				"nextPageToken");
-		videosList.setKey(BuildConfig.YOUTUBE_API_KEY);
+		videosList.setKey(YouTubeAPIKey.get().getYouTubeAPIKey());
 		videosList.setChart("mostPopular");
 		videosList.setRegionCode(getPreferredRegion());
-		videosList.setMaxResults(MAX_RESULTS);
+		videosList.setMaxResults(getMaxResults());
 		nextPageToken = null;
 	}
 
@@ -85,6 +84,14 @@ public class GetFeaturedVideos extends GetYouTubeVideos {
 	@Override
 	public boolean noMoreVideoPages() {
 		return noMoreVideoPages;
+	}
+
+
+	/**
+	 * @return The maximum number of items that should be retrieved per YouTube query.
+	 */
+	protected Long getMaxResults() {
+		return 50L;
 	}
 
 }

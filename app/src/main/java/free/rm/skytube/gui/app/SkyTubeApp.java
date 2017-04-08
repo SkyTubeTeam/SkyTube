@@ -17,8 +17,8 @@
 
 package free.rm.skytube.gui.app;
 
-import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.multidex.MultiDexApplication;
@@ -35,7 +35,6 @@ public class SkyTubeApp extends MultiDexApplication {
 
 	/** SkyTube Application instance. */
 	private static SkyTubeApp skyTubeApp = null;
-	private static volatile SubscriptionsDb subscriptionsDb = null;
 
 	public static final String KEY_SUBSCRIPTIONS_LAST_UPDATED = "SkyTubeApp.KEY_SUBSCRIPTIONS_LAST_UPDATED";
 
@@ -100,8 +99,22 @@ public class SkyTubeApp extends MultiDexApplication {
 	}
 
 
+	/**
+	 * @return {@link Context}.
+	 */
 	public static Context getContext() {
 		return skyTubeApp.getBaseContext();
+	}
+
+
+	/**
+	 * Restart the app.
+	 */
+	public static void restartApp() {
+		Intent i = getContext().getPackageManager().getLaunchIntentForPackage(getContext().getPackageName());
+		i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		Runtime.getRuntime().exit(0);
+		getContext().startActivity(i);
 	}
 
 }

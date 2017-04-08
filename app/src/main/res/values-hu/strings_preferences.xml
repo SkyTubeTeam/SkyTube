@@ -406,4 +406,11 @@
 		<item>3</item>
 	</string-array>
 
+	<string name="pref_youtube_api_key">pref_youtube_api_key</string>
+	<string name="pref_title_youtube_api_key">YouTube API Key</string>
+	<string name="pref_summary_youtube_api_key">Enter your own YouTube Data API Key.  Leave blank to use the default one.</string>
+	<string name="pref_youtube_api_key_error">An error occurred attempting to validate the API Key you entered.</string>
+	<string name="pref_youtube_api_key_custom">Key is valid.  Restart app to use the new YouTube API key.</string>
+	<string name="pref_youtube_api_key_default">Restart app to switch back to default YouTube API key.</string>
+	<string name="restart">Restart</string>
 </resources>
