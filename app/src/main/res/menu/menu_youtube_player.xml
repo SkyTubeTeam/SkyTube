@@ -11,4 +11,20 @@
 		  android:title="@string/open_with"
 		  app:showAsAction="never"/>
 
+	<item android:id="@+id/share"
+	      android:title="@string/share"
+	      app:showAsAction="never"/>
+
+	<item android:id="@+id/copyurl"
+	      android:title="@string/copy_to_clipboard"
+	      app:showAsAction="never"/>
+
+	<item android:id="@+id/bookmark_video"
+	      android:title="@string/bookmark_video"
+	      app:showAsAction="never"/>
+
+	<item android:id="@+id/unbookmark_video"
+	      android:title="@string/unbookmark"
+	      app:showAsAction="never"/>
+
 </menu>

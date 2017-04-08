@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-	<item android:id="@+id/share" android:title="@string/share"></item>
-	<item android:id="@+id/copyurl" android:title="@string/copy_to_clipboard"></item>
-	<item android:id="@+id/bookmark_video" android:title="@string/bookmark_video"></item>
-	<item android:id="@+id/unbookmark_video" android:title="@string/unbookmark" android:visible="false"></item>
-</menu>

@@ -1,5 +1,8 @@
 package free.rm.skytube.gui.fragments;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.MediaPlayer;
@@ -38,6 +41,7 @@ import free.rm.skytube.businessobjects.VideoStream.StreamMetaData;
 import free.rm.skytube.businessobjects.VideoStream.StreamMetaDataList;
 import free.rm.skytube.businessobjects.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTubeVideo;
+import free.rm.skytube.businessobjects.db.BookmarksDb;
 import free.rm.skytube.businessobjects.db.CheckIfUserSubbedToChannelTask;
 import free.rm.skytube.businessobjects.db.SubscribeToChannelTask;
 import free.rm.skytube.gui.activities.MainActivity;
@@ -82,6 +86,8 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 								noVideoCommentsView = null;
 	private CommentsAdapter		commentsAdapter = null;
 	private ExpandableListView	commentsExpandableListView = null;
+
+	private Menu                menu = null;
 
 	private Handler				timerHandler = null;
 
@@ -322,7 +328,13 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		inflater.inflate(R.menu.menu_youtube_player, menu);
+
+		this.menu = menu;
+
+		// if this video has been bookmarked then hide the bookmark option and show the unbookmark option
+		new IsVideoBookmarkedTask().executeInParallel();
 	}
+
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -330,10 +342,50 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 			case R.id.menu_reload_video:
 				loadVideo();
 				return true;
+
 			case R.id.menu_open_video_with:
 				playVideoExternally();
 				videoView.pause();
 				return true;
+
+			case R.id.share:
+				Intent intent = new Intent(android.content.Intent.ACTION_SEND);
+				intent.setType("text/plain");
+				intent.putExtra(android.content.Intent.EXTRA_TEXT, youTubeVideo.getVideoUrl());
+				startActivity(Intent.createChooser(intent, getString(R.string.share_via)));
+				return true;
+
+			case R.id.copyurl:
+				ClipboardManager clipboard = (ClipboardManager) getContext().getSystemService(Context.CLIPBOARD_SERVICE);
+				ClipData clip = ClipData.newPlainText("Video URL", youTubeVideo.getVideoUrl());
+				clipboard.setPrimaryClip(clip);
+				Toast.makeText(getContext(), R.string.url_copied_to_clipboard, Toast.LENGTH_SHORT).show();
+				return true;
+
+			case R.id.bookmark_video:
+				boolean successBookmark = BookmarksDb.getBookmarksDb().add(youTubeVideo);
+				Toast.makeText(getContext(),
+						successBookmark  ?  R.string.video_bookmarked  :  R.string.video_bookmarked_error,
+						Toast.LENGTH_LONG).show();
+
+				if (successBookmark) {
+					menu.findItem(R.id.bookmark_video).setVisible(false);
+					menu.findItem(R.id.unbookmark_video).setVisible(true);
+				}
+				return true;
+
+			case R.id.unbookmark_video:
+				boolean successUnbookmark = BookmarksDb.getBookmarksDb().remove(youTubeVideo);
+				Toast.makeText(getContext(),
+						successUnbookmark  ?  R.string.video_unbookmarked  :  R.string.video_unbookmarked_error,
+						Toast.LENGTH_LONG).show();
+
+				if (successUnbookmark) {
+					menu.findItem(R.id.bookmark_video).setVisible(true);
+					menu.findItem(R.id.unbookmark_video).setVisible(false);
+				}
+				return true;
+
 			default:
 				return super.onOptionsItemSelected(item);
 		}
@@ -652,5 +704,34 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 		}
 
 	}
+
+
+
+	////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+	/**
+	 * A task that checks if this video is bookmarked or not.  If it is bookmarked, then it will hide
+	 * the menu option to bookmark the video; otherwise it will hide the option to unbookmark the
+	 * video.
+	 */
+	private class IsVideoBookmarkedTask extends AsyncTaskParallel<Void, Void, Boolean> {
+
+		@Override
+		protected Boolean doInBackground(Void... params) {
+			return BookmarksDb.getBookmarksDb().isBookmarked(youTubeVideo);
+		}
+
+		@Override
+		protected void onPostExecute(Boolean videoIsBookmarked) {
+			// if this video has been bookmarked, hide the bookmark option and show the unbookmark option.
+			menu.findItem(R.id.bookmark_video).setVisible(!videoIsBookmarked);
+			menu.findItem(R.id.unbookmark_video).setVisible(videoIsBookmarked);
+		}
+
+	}
+
+
+	////////////////////////////////////////////////////////////////////////////////////////////////
 
 }

@@ -109,14 +109,14 @@
 
 				</LinearLayout>
 
-				<ImageButton
+				<!-- <ImageButton
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					app:srcCompat="@drawable/button_options"
 					android:id="@+id/options_button"
 					android:background="@android:color/transparent"
 					android:layout_gravity="center_vertical"
-					android:padding="5dp"/>
+					android:padding="5dp"/> -->
 
 			</LinearLayout>
 		</LinearLayout>
