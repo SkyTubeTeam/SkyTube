@@ -9,7 +9,11 @@ android {
         minSdkVersion 14
         targetSdkVersion 25
         versionCode 5
-        buildConfigField 'String', 'YOUTUBE_API_KEY', '"AIzaSyDAOcAgAAd098p_FLIePaQNKPTpcyhUGBA"';
+        buildConfigField 'String[]', 'YOUTUBE_API_KEYS',
+                '{' +
+                        '"AIzaSyDAOcAgAAd098p_FLIePaQNKPTpcyhUGBA",' +
+                        '"AIzaSyBKBkG_-OUjncLyQCB32ZrWBiT-mD0kssI"'  +
+                '}';
         vectorDrawables.useSupportLibrary true
         multiDexEnabled true    // this is as we have over 65536 lines of code...
     }
