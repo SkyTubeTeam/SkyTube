@@ -90,7 +90,8 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 
 	private Handler				timerHandler = null;
 
-	private static final int HUD_VISIBILITY_TIMEOUT = 7000;
+	/** Timeout (in milliseconds) before the HUD (i.e. media controller + action/title bar) is hidden */
+	private static final int HUD_VISIBILITY_TIMEOUT = 5000;
 	private static final String VIDEO_CURRENT_POSITION = "YouTubePlayerFragment.VideoCurrentPosition";
 	private static final String TAG = YouTubePlayerFragment.class.getSimpleName();
 
@@ -288,7 +289,7 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 			commentsDrawer.close();
 			commentsDrawer.setVisibility(View.INVISIBLE);
 
-			// hide UI after a certain timeout (defined in UI_VISIBILITY_TIMEOUT)
+			// hide UI after a certain timeout (defined in HUD_VISIBILITY_TIMEOUT)
 			timerHandler = new Handler();
 			timerHandler.postDelayed(new Runnable() {
 				@Override
@@ -308,7 +309,7 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 	private void hideHud() {
 		if (isHudVisible()) {
 			getSupportActionBar().hide();
-			mediaController.hide();
+			mediaController.hideController();
 
 			videoDescriptionDrawer.setVisibility(View.VISIBLE);
 			commentsDrawer.setVisibility(View.VISIBLE);
@@ -316,7 +317,7 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 			// If there is a timerHandler running, then cancel it (stop if from running).  This way,
 			// if the HUD was hidden on the 5th second, and the user reopens the HUD, this code will
 			// prevent the HUD to re-disappear 2 seconds after it was displayed (assuming that
-			// UI_VISIBILITY_TIMEOUT = 7 seconds).
+			// HUD_VISIBILITY_TIMEOUT = 5 seconds).
 			if (timerHandler != null) {
 				timerHandler.removeCallbacksAndMessages(null);
 				timerHandler = null;

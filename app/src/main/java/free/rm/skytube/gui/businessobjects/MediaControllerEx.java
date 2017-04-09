@@ -46,6 +46,27 @@ public class MediaControllerEx extends MediaController {
 	}
 
 
+	/**
+	 * Ignore hide() call.  This is as there is a bug in Android 5.0+ in which hide() is internally
+	 * called by {@link MediaController} even if show(0) is explicitly called (i.e. Android was not
+	 * honoring show(0)).
+	 *
+	 * <p>Call {@link #hideController()} is you want to hide the controller instead of {@link #hide()}.
+	 */
+	@Override
+	public void hide() {
+		super.show(0);
+	}
+
+
+	/**
+	 * Hides the controller from screen.
+	 */
+	public void hideController() {
+		super.hide();
+	}
+
+
 	@Override
 	public boolean dispatchKeyEvent(KeyEvent event) {
 		// if the user has pressed the BACK button (of the Navigation Bar), then ...
