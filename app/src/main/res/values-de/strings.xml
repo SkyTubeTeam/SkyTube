@@ -20,9 +20,4 @@
 
 	<string name="featured">Empfohlen</string>
 	<string name="most_popular">Beliebt</string>
-
-	<string name="share_via">Teilen mit</string>
-	<string name="url_copied_to_clipboard">URL in die Zwischenablage kopiert.</string>
-	<string name="share">Teilen</string>
-	<string name="copy_to_clipboard">In die Zwischenablage kopieren</string>
 </resources>

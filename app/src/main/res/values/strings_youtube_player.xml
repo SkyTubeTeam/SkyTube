@@ -15,6 +15,10 @@
 	<string name="reload_video">Reload video</string>
 	<string name="open_in_browser">Open in browser</string>
 	<string name="open_with">Open with…</string>
+	<string name="share">Share</string>
+	<string name="share_via">Share via</string>
+	<string name="copy_url">Copy URL</string>
+	<string name="url_copied_to_clipboard">URL copied to clipboard.</string>
 
 	<string name="error_get_comments">An error has occurred while getting comments.</string>
 	<string name="no_video_comments">This video has no comments or comments are disabled.</string>

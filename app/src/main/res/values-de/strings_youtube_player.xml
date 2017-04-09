@@ -15,6 +15,10 @@
 	<string name="reload_video">Video neu laden</string>
 	<string name="open_in_browser">Im Browser öffnen</string>
 	<string name="open_with">Öffnen mit…</string>
+	<string name="share">Teilen</string>
+	<string name="share_via">Teilen mit</string>
+	<string name="copy_url">URL kopieren</string>
+	<string name="url_copied_to_clipboard">URL in die Zwischenablage kopiert.</string>
 
 	<string name="error_get_comments">Beim Abrufen der Kommentare ist ein Fehler aufgetreten.</string>
 	<string name="no_video_comments">Dieses Video hat keine Kommentare oder die Kommentare wurden deaktiviert.</string>

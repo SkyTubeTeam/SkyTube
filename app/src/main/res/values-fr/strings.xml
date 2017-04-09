@@ -14,9 +14,4 @@
 
 	<string name="featured">Mises en avant</string>
 	<string name="most_popular">Les plus populaires</string>
-
-	<string name="share_via">Partager avec</string>
-	<string name="url_copied_to_clipboard">URL copié dans le presse-papier.</string>
-	<string name="share">Partager</string>
-	<string name="copy_to_clipboard">copiér dans le presse-papier</string>
 </resources>

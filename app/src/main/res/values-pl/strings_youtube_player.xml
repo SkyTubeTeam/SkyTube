@@ -15,6 +15,10 @@
 	<string name="reload_video">Przeładuj film</string>
 	<string name="open_in_browser">Otwórz w przeglądarce</string>
 	<string name="open_with">Otwórz z…</string>
+	<string name="share">Udostępnij</string>
+	<string name="share_via">Udostępnij przez</string>
+	<string name="copy_url">Skopiuj URL</string>
+	<string name="url_copied_to_clipboard">Adres URL skopiowany do schowka.</string>
 
 	<string name="error_get_comments">Wystąpił bład podczas otrzymywania komentarzy.</string>
 	<string name="no_video_comments">Ten film nie ma komentarzy lub są one wyłączone.</string>

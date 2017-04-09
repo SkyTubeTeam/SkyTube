@@ -14,9 +14,4 @@
 
 	<string name="featured">Polecane</string>
 	<string name="most_popular">Najbardziej popularne</string>
-
-	<string name="share_via">Udostępnij przez</string>
-	<string name="url_copied_to_clipboard">Adres URL skopiowany do schowka.</string>
-	<string name="share">Udostępnij</string>
-	<string name="copy_to_clipboard">Skopiuj do schowka</string>
 </resources>

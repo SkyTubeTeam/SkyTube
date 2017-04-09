@@ -12,15 +12,15 @@
 		  app:showAsAction="never"/>
 
 	<item android:id="@+id/share"
-	      android:title="@string/share"
+	      android:title="@string/share_via"
 	      app:showAsAction="never"/>
 
 	<item android:id="@+id/copyurl"
-	      android:title="@string/copy_to_clipboard"
+	      android:title="@string/copy_url"
 	      app:showAsAction="never"/>
 
 	<item android:id="@+id/bookmark_video"
-	      android:title="@string/bookmark_video"
+	      android:title="@string/bookmark"
 	      app:showAsAction="never"/>
 
 	<item android:id="@+id/unbookmark_video"

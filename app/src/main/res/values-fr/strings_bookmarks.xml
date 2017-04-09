@@ -1,11 +1,11 @@
 <resources>
 	<string name="bookmarks">Favoris</string>
 
-	<string name="bookmark_video">Ajouter la vidéo aux favoris</string>
+	<string name="bookmark">Bookmark</string>
 	<string name="video_bookmarked">Vidéo ajoutée aux favoris</string>
 	<string name="video_bookmarked_error">Impossible d\'ajouter la vidéo aux favoris.</string>
 
-	<string name="unbookmark">Enlever la vidéo des favoris</string>
+	<string name="unbookmark">Unbookmark</string>
 	<string name="video_unbookmarked">Vidéo enlevée des favoris</string>
 	<string name="video_unbookmarked_error">Impossible d\'enlever la vidéo des favoris.</string>
 

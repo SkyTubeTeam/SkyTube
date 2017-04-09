@@ -2,11 +2,11 @@
 <resources>
 	<string name="bookmarks">Bookmarks</string>
 
-	<string name="bookmark_video">Bookmark Video</string>
+	<string name="bookmark">Bookmark</string>
 	<string name="video_bookmarked">Video bookmarked</string>
 	<string name="video_bookmarked_error">Could not bookmark the video.</string>
 
-	<string name="unbookmark">Unbookmark Video</string>
+	<string name="unbookmark">Unbookmark</string>
 	<string name="video_unbookmarked">Video unbookmarked</string>
 	<string name="video_unbookmarked_error">Could not unbookmark the video.</string>
 
