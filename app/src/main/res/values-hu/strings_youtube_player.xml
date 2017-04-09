@@ -12,7 +12,7 @@
 	<string name="warning_live_video">Cannot play live streams for now.  Play live stream externally?</string>
 
 	<string name="loading_video">Videó betöltése…</string>
-	<string name="reload_video">Videó újratöltése</string>
+	<string name="get_new_video_steam">New Stream</string>
 	<string name="open_in_browser">Megnyitás böngészőben</string>
 	<string name="open_with">Megnyitás ezzel:</string>
 	<string name="share">Share</string>

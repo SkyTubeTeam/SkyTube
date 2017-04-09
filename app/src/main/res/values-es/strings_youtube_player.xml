@@ -12,7 +12,7 @@
 	<string name="warning_live_video">Cannot play live streams for now.  Play live stream externally?</string>
 
 	<string name="loading_video">Cargando video…</string>
-	<string name="reload_video">Recargar video</string>
+	<string name="get_new_video_steam">New Stream</string>
 	<string name="open_in_browser">Abrir en el navegador</string>
 	<string name="open_with">Abrir con…</string>
 	<string name="share">Compartir</string>

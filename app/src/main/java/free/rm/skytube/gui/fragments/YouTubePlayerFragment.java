@@ -64,8 +64,10 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 	private YouTubeChannel		youTubeChannel = null;
 
 	private VideoView			videoView = null;
+	/** The current video position (i.e. play time). */
 	private int					videoCurrentPosition = 0;
 	private MediaControllerEx	mediaController = null;
+
 	private TextView			videoDescTitleTextView = null;
 	private ImageView			videoDescChannelThumbnailImageView = null;
 	private TextView			videoDescChannelTextView = null;
@@ -345,7 +347,8 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 			case R.id.menu_reload_video:
-				loadVideo();
+				// get a new video steam (as the current one might be performing poorly)
+				new GetStreamTask(youTubeVideo, true).executeInParallel();
 				return true;
 
 			case R.id.menu_open_video_with:
@@ -413,7 +416,7 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 		// if the video is NOT live
 		if (!youTubeVideo.isLiveStream()) {
 			// get the video's steam
-			new GetStreamTask(youTubeVideo, true).executeInParallel();
+			new GetStreamTask(youTubeVideo).executeInParallel();
 			// get the video description
 			new GetVideoDescriptionTask().executeInParallel();
 		} else {
@@ -450,30 +453,34 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 
 		/** YouTube Video */
 		private YouTubeVideo	youTubeVideo;
-		/** The current video position (i.e. time).  Set to -1 if we are not interested in reloading
-		 *  the video. */
-		private	int				currentVideoPosition = -1;
 
 
+		/**
+		 * Returns a stream for the given video.
+		 *
+		 * @param youTubeVideo  YouTube video.
+		 */
 		public GetStreamTask(YouTubeVideo youTubeVideo) {
 			this(youTubeVideo, false);
 		}
 
+
 		/**
-		 * Returns a stream for the given video.  If reloadVideo is set to true, then it will stop
+		 * Returns a stream for the given video.  If getNewStream is set to true, then it will stop
 		 * the current video, get a NEW stream and then resume playing.
 		 *
-		 * @param youTubeVideo	YouTube video
-		 * @param reloadVideo	Set to true to reload a video
+		 * @param youTubeVideo	YouTube video.
+		 * @param getNewStream	Set to true to stop the current video from playing and get a new
+		 *                      video stream.
 		 */
-		public GetStreamTask(YouTubeVideo youTubeVideo, boolean reloadVideo) {
+		public GetStreamTask(YouTubeVideo youTubeVideo, boolean getNewStream) {
 			this.youTubeVideo = youTubeVideo;
 
-			if (reloadVideo) {
+			if (getNewStream) {
 				boolean isVideoPlaying = videoView.isPlaying();
 
 				videoView.pause();
-				this.currentVideoPosition = isVideoPlaying ? videoView.getCurrentPosition() : 0;
+				videoCurrentPosition = isVideoPlaying ? videoView.getCurrentPosition() : 0;
 				videoView.stopPlayback();
 				loadingVideoView.setVisibility(View.VISIBLE);
 			}
@@ -505,11 +512,6 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 				// play the video
 				Log.i(TAG, ">> PLAYING: " + desiredStream);
 				videoView.setVideoURI(desiredStream.getUri());
-
-				// if we are reloading a video... then seek the correct position
-				if (currentVideoPosition >= 0) {
-					videoView.seekTo(currentVideoPosition);
-				}
 			}
 
 			if (errorMessage != null) {
