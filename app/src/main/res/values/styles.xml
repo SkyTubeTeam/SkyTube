@@ -148,6 +148,34 @@
 
 	<!-- *************************************************************************************** -->
 	<!--
+	 	Subscriptions Feed Tab
+	-->
+
+	<style name="NoSubscriptionsFeedMsgTextView" parent="AppTheme">
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:gravity">center</item>
+		<item name="android:layout_marginTop">80dp</item>
+		<item name="android:layout_marginLeft">20dp</item>
+		<item name="android:layout_marginRight">20dp</item>
+		<item name="android:textColor">@color/feed_message_text</item>
+		<item name="android:textAppearance">@style/TextAppearance.AppCompat.Medium</item>
+	</style>
+
+
+	<!-- *************************************************************************************** -->
+	<!--
+	 	Bookmarks Tab
+	-->
+
+	<style name="NoBookmarksMsgTextView" parent="NoSubscriptionsFeedMsgTextView">
+	</style>
+
+
+
+
+	<!-- *************************************************************************************** -->
+	<!--
 	 	Others
 	-->
 

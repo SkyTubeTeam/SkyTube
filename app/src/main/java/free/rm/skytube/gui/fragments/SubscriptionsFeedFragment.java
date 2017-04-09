@@ -59,7 +59,7 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Sub
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		shouldRefresh = true;
-		setLayoutResource(R.layout.videos_gridview_subscriptions);
+		setLayoutResource(R.layout.videos_gridview_feed);
 	}
 
 	@Override

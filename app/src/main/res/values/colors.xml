@@ -41,4 +41,10 @@
 	<color name="comment_background">@color/video_player_hud</color>
 	<color name="comment_text">#b3b3b3</color>
 
+
+	<!--
+		Subscriptions Feed
+	-->
+	<color name="feed_message_text">#FFF</color>
+
 </resources>
