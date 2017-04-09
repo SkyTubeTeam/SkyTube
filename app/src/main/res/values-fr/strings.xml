@@ -7,11 +7,6 @@
 	<string name="launch_offical_player_error">Une erreur s\'est produite lors de l\'ouverture de youtube. Assurez-vous de bien avoir installé l\'application officielle.</string>
 	<string name="LIVE">LIVE</string>
 
-	<string name="fetching_subscription_videos">Chargement des vidéos de vos abonnements</string>
-	<string name="fetched_videos_from_channels">%1$d vidéos de %2$d/%3$d chaines.</string>
-	<string name="no_new_videos_found">Pas de nouvelles vidéos.</string>
-	<string name="no_subscriptions_text">Vous êtes abonné à aucune chaine, Dès que vous le serez, Les vidéos de moins d\'un mois apparaîtront ici.</string>
-
 	<string name="featured">Mises en avant</string>
 	<string name="most_popular">Les plus populaires</string>
 </resources>
