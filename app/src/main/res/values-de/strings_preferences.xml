@@ -402,7 +402,7 @@
 	<string-array name="default_tab">
 		<item>@string/featured</item>
 		<item>@string/most_popular</item>
-		<item>@string/subscriptions</item>
+		<item>@string/feed</item>
 		<item>@string/bookmarks</item>
 	</string-array>
 	<string-array name="default_tab_values">

@@ -41,9 +41,9 @@ import free.rm.skytube.gui.businessobjects.SubsAdapter;
 import free.rm.skytube.gui.businessobjects.SubscriptionsFragmentListener;
 
 /**
- * Fragment that displays videos from all channels the user is subscribed to.
+ * Fragment that displays subscriptions videos feed from all channels the user is subscribed to.
  */
-public class SubscriptionsVideosFragment extends VideosGridFragment implements SubscriptionsFragmentListener {
+public class SubscriptionsFeedFragment extends VideosGridFragment implements SubscriptionsFragmentListener {
 
 	private int numVideosFetched = 0;
 	private int numChannelsFetched = 0;
@@ -148,7 +148,7 @@ public class SubscriptionsVideosFragment extends VideosGridFragment implements S
 
 	@Override
 	protected String getFragmentName() {
-		return SkyTubeApp.getStr(R.string.subscriptions);
+		return SkyTubeApp.getStr(R.string.feed);
 	}
 
 
@@ -157,7 +157,7 @@ public class SubscriptionsVideosFragment extends VideosGridFragment implements S
 
 	/**
 	 * A task that fetched the total number of subscribed channels from the DB and updated the
-	 * SubscriptionsVideosFragment UI accordingly.
+	 * SubscriptionsFeedFragment UI accordingly.
 	 */
 	private class GetTotalNumberOfChannelsTask extends AsyncTaskParallel<Void, Void, Integer> {
 
@@ -193,7 +193,7 @@ public class SubscriptionsVideosFragment extends VideosGridFragment implements S
 
 
 	/**
-	 * A task that refreshes the videos of the {@link SubscriptionsVideosFragment}.
+	 * A task that refreshes the videos of the {@link SubscriptionsFeedFragment}.
 	 */
 	private class RefreshTask extends AsyncTaskParallel<Void, Void, Integer> {
 
@@ -218,7 +218,7 @@ public class SubscriptionsVideosFragment extends VideosGridFragment implements S
 			numChannelsSubscribed = totalNumberOfChannels;
 
 			if (numChannelsSubscribed > 0) {
-				new GetSubscriptionVideosTask(SubscriptionsVideosFragment.this).executeInParallel();
+				new GetSubscriptionVideosTask(SubscriptionsFeedFragment.this).executeInParallel();
 				refreshInProgress = true;
 
 				if (showDialog)

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="feed">Feed</string>
 	<string name="subscriptions">Subskrypcje</string>
 	<string name="subscribe">Subskrybuj</string>
 	<string name="unsubscribe">Wypisz</string>
