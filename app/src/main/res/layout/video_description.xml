@@ -101,6 +101,13 @@
 					android:drawablePadding="5dp"
 					style="@style/VideoDescTextView"
 					android:text="1,000"/>
+
+				<TextView
+					android:id="@+id/video_desc_ratings_disabled"
+					android:layout_below="@id/video_desc_likes_bar"
+					style="@style/VideoDescTextView"
+					android:text="@string/ratings_disabled"
+					android:visibility="gone"/>
 			</RelativeLayout>
 
 		</LinearLayout>

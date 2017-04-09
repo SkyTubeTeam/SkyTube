@@ -73,11 +73,12 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 	private TextView			videoDescChannelTextView = null;
 	private SubscribeButton		videoDescSubscribeButton = null;
 	private TextView			videoDescViewsTextView = null;
+	private ProgressBar			videoDescLikesBar = null;
 	private TextView			videoDescLikesTextView = null;
 	private TextView			videoDescDislikesTextView = null;
+	private View                videoDescRatingsDisabledTextView = null;
 	private TextView			videoDescPublishDateTextView = null;
 	private TextView			videoDescriptionTextView = null;
-	private ProgressBar			videoDescLikesBar = null;
 	private View				voidView = null;
 	private View				loadingVideoView = null;
 
@@ -145,6 +146,7 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 			videoDescViewsTextView = (TextView) view.findViewById(R.id.video_desc_views);
 			videoDescLikesTextView = (TextView) view.findViewById(R.id.video_desc_likes);
 			videoDescDislikesTextView = (TextView) view.findViewById(R.id.video_desc_dislikes);
+			videoDescRatingsDisabledTextView = view.findViewById(R.id.video_desc_ratings_disabled);
 			videoDescPublishDateTextView = (TextView) view.findViewById(R.id.video_desc_publish_date);
 			videoDescriptionTextView = (TextView) view.findViewById(R.id.video_desc_description);
 			videoDescLikesBar = (ProgressBar) view.findViewById(R.id.video_desc_likes_bar);
@@ -219,14 +221,17 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 		videoDescTitleTextView.setText(youTubeVideo.getTitle());
 		videoDescChannelTextView.setText(youTubeVideo.getChannelName());
 		videoDescViewsTextView.setText(youTubeVideo.getViewsCount());
+		videoDescPublishDateTextView.setText(youTubeVideo.getPublishDatePretty());
 
 		if (youTubeVideo.isThumbsUpPercentageSet()) {
 			videoDescLikesTextView.setText(youTubeVideo.getLikeCount());
 			videoDescDislikesTextView.setText(youTubeVideo.getDislikeCount());
-			videoDescPublishDateTextView.setText(youTubeVideo.getPublishDatePretty());
-
 			videoDescLikesBar.setProgress(youTubeVideo.getThumbsUpPercentage());
-			//videoDescLikesBar.getProgressDrawable().setColorFilter(getResources().getColor(R.color.video_desc_like_bar), PorterDuff.Mode.SRC_IN);
+		} else {
+			videoDescLikesTextView.setVisibility(View.GONE);
+			videoDescDislikesTextView.setVisibility(View.GONE);
+			videoDescLikesBar.setVisibility(View.GONE);
+			videoDescRatingsDisabledTextView.setVisibility(View.VISIBLE);
 		}
 
 		// load the video
