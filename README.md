@@ -20,7 +20,7 @@ For screenshots and more information, please visit [www.skytube-app.com](http://
 
 ## Download
 ### Download SkyTube Extra
-[![Download SkyTube Extra APK](screenshots/download_apk.png)](https://github.com/ram-on/SkyTube/releases/download/v2.3/SkyTube-Extra-2.3.apk)
+[![Download SkyTube Extra APK](screenshots/download_apk.png)](https://github.com/ram-on/SkyTube/releases/download/v2.4/SkyTube-Extra-2.4.apk)
 
 Open source app with contains extra features.  These extra features uses third-party closed source library:
 * YouTubeAndroidPlayerApi.jar (optional usage)
