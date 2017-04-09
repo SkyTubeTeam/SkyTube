@@ -30,7 +30,8 @@ import android.widget.VideoView;
  */
 public class MediaControllerEx extends MediaController {
 
-	private VideoView videoView;
+	private VideoView   videoView;
+	private boolean     hideController = false;
 
 
 	/**
@@ -51,11 +52,14 @@ public class MediaControllerEx extends MediaController {
 	 * called by {@link MediaController} even if show(0) is explicitly called (i.e. Android was not
 	 * honoring show(0)).
 	 *
+	 * <p>{@link #hide()} will be ignored until we call {@link #hideController()} </p>
+	 *
 	 * <p>Call {@link #hideController()} is you want to hide the controller instead of {@link #hide()}.
 	 */
 	@Override
 	public void hide() {
-		super.show(0);
+		if (!hideController)
+			super.show(0);
 	}
 
 
@@ -64,6 +68,7 @@ public class MediaControllerEx extends MediaController {
 	 */
 	public void hideController() {
 		super.hide();
+		hideController = true;
 	}
 
 
