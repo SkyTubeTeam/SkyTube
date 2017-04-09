@@ -22,6 +22,7 @@ import android.content.Intent;
 
 import free.rm.skytube.businessobjects.YouTubeVideo;
 import free.rm.skytube.gui.activities.YouTubePlayerActivity;
+import free.rm.skytube.gui.fragments.YouTubePlayerFragment;
 
 /**
  * Launches YouTube player.
@@ -37,7 +38,7 @@ public class YouTubePlayer {
 	 */
 	public static void launch(YouTubeVideo youTubeVideo, Context context) {
 		Intent i = new Intent(context, YouTubePlayerActivity.class);
-		i.putExtra(YouTubePlayerActivity.YOUTUBE_VIDEO_OBJ, youTubeVideo);
+		i.putExtra(YouTubePlayerFragment.YOUTUBE_VIDEO_OBJ, youTubeVideo);
 		context.startActivity(i);
 	}
 

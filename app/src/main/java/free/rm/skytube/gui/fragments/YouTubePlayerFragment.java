@@ -58,8 +58,7 @@ import hollowsoft.slidingdrawer.SlidingDrawer;
  */
 public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnPreparedListener {
 
-	public static final String YOUTUBE_VIDEO_OBJ = "YouTubePlayerActivity.yt_video_obj";
-	public static final String YOUTUBE_VIDEO_URL = "YouTubePlayerActivity.yt_video_url";
+	public static final String YOUTUBE_VIDEO_OBJ = "YouTubePlayerFragment.yt_video_obj";
 
 	private YouTubeVideo		youTubeVideo = null;
 	private YouTubeChannel		youTubeChannel = null;
@@ -181,8 +180,7 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 				getVideoInfoTasks();
 			} else {
 				// ... or the video URL is passed to SkyTube via another Android app
-				GetVideoDetailsTask getVideoDetailsTask = new GetVideoDetailsTask();
-				getVideoDetailsTask.executeInParallel();
+				new GetVideoDetailsTask().executeInParallel();
 			}
 		}
 
@@ -197,7 +195,9 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 	}
 
 
-
+	/**
+	 * Will asynchronously retrieve additional video information such as channgel avatar ...etc
+	 */
 	private void getVideoInfoTasks() {
 		// get Channel info (e.g. avatar...etc) task
 		new GetYouTubeChannelInfoTask().executeInParallel(youTubeVideo.getChannelId());
@@ -331,8 +331,12 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 
 		this.menu = menu;
 
-		// if this video has been bookmarked then hide the bookmark option and show the unbookmark option
-		new IsVideoBookmarkedTask().executeInParallel();
+		// Will now check if the video is bookmarked or not (and then update the menu accordingly).
+		//
+		// youTubeVideo might be null if we have only passed the video URL to this fragment (i.e.
+		// the app is still trying to construct youTubeVideo in the background).
+		if (youTubeVideo != null)
+			new IsVideoBookmarkedTask().executeInParallel();
 	}
 
 
@@ -626,9 +630,15 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 				closeActivity();
 			} else {
 				YouTubePlayerFragment.this.youTubeVideo = youTubeVideo;
-				setUpHUDAndPlayVideo();	// setup the HUD and play the video
+
+				// setup the HUD and play the video
+				setUpHUDAndPlayVideo();
 
 				getVideoInfoTasks();
+
+				// will now check if the video is bookmarked or not (and then update the menu
+				// accordingly)
+				new IsVideoBookmarkedTask().executeInParallel();
 			}
 		}
 

@@ -31,8 +31,6 @@ import free.rm.skytube.R;
  */
 public class YouTubePlayerActivity extends AppCompatActivity {
 
-	public static final String YOUTUBE_VIDEO_OBJ = "YouTubePlayerActivity.yt_video_obj";
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -55,4 +53,5 @@ public class YouTubePlayerActivity extends AppCompatActivity {
 				return super.onOptionsItemSelected(item);
 		}
 	}
+
 }
