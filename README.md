@@ -8,7 +8,8 @@ This app allows you to:
 * view video comments,
 * search videos, music and channels,
 * channel subscription & non-intrusive notifications,
-* bookmark vidoes **[New!]**
+* bookmark videos **[New!]**
+* subscriptions feed **[New!]**
 
 ... all at the tip of your fingers.
 
@@ -35,6 +36,7 @@ Pure open-source version.  Updates normally take up to 3 days to be available to
 * Open Source
 * Innovative design
 * No intrusive ads
+* Multilingual
 * Only requires 1 Android-permission (Internet)
 * Not dependent on the GAPPS/Google Apps (i.e. YouTube official app)
 * No need for Google/YouTube account to operate

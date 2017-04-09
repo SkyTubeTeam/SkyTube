@@ -29,7 +29,7 @@
 	<string name="pref_title_license">Licencia</string>
 	<string name="pref_key_license">pref_license</string>
 	<string name="pref_summary_license">GNU General Public License version 3</string>
-	<string name="app_license">Copyright &#169; 2015-2016  Ramon Mifsud\n
+	<string name="app_license">Copyright &#169; 2015-2017  Ramon Mifsud\n
 
 				\nThis program is free software: you can redistribute it and/or modify
 				it under the terms of the GNU General Public License as published by

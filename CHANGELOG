@@ -1,34 +1,53 @@
+v2.4 - 9 Apr 2017:
+    * Added subscriptions feed tab.
+    * Added the option for users to use their own YouTube API key.
+    * App is able to detect live streams (and offers user to play such videos externally).
+    * Added French translations.
+    * Added German translations.
+    * Reduced the app stuttering issue when scrolling down videos together with other optimizations.
+    * Fixed bug #91:  App could not open video notification links sent by YouTube via email.
+    * Fixed bug #32:  Video player's title bar was not hiding on Android 5.0+.
+    * Numerous other bug fixes.
+    * App now correctly handles videos with disable ratings.
+    * Moved the Video "Share", "Copy to clipboard" and "bookmark video" options/functionality from
+      video cell to the actual video fragment.
+
 v2.3 - 19 Feb 2017:
-	* Added video bookmarks feature.
-	* Added Polish translation.
-	* Added default tab preference.
-	* Numerous bug fixes.
+    * Added video bookmarks feature.
+    * Added Polish translation.
+    * Added default tab preference.
+    * Numerous bug fixes.
 
 v2.2 - 31 Jan 2017:
-	* Emergency fix: "could not load decryption code" error for all YouTube videos.  This was due to sudden change in YouTube website/service.
-	* Featured & Most Popular videos are now placed in tabs.
-	* Featured & Most Popular & channel videos can be swiped down in order to refresh.
-	* Added Hungarian translation.
+    * Emergency fix: "could not load decryption code" error for all YouTube videos.  This was due
+      to sudden change in YouTube website/service.
+    * Featured & Most Popular videos are now placed in tabs.
+    * Featured & Most Popular & channel videos can be swiped down in order to refresh.
+    * Added Hungarian translation.
 
 v2.1 - 23 Oct 2016:
-	* Added Spanish translation
-	* Now using Picasso library for remote image loading (before such process was done manually by the app)
-	* Orientation changes no longer causes the app to loss the current scroll position wrt Most Pop and Featured videos
-	* Issue #21:  Android 4.0 is now supported
-	* Fixed issue #7:  i.e. when a user tries to view some videos the following error used to popup:  "An error has occurred while getting video streams for xxxxxxxx"
-	* Playback errors are now more human friendly
-	* Fixed issue #26:  Saves the current video position when the app is minimized or when a user clicks on the video's channel.
+    * Added Spanish translation.
+    * Now using Picasso library for remote image loading (before such process was done manually by
+      the app).
+    * Orientation changes no longer causes the app to loss the current scroll position wrt Most Pop
+      and Featured videos.
+    * Issue #21:  Android 4.0 is now supported.
+    * Fixed issue #7:  i.e. when a user tries to view some videos the following error used to
+      popup:  "An error has occurred while getting video streams for xxxxxxxx".
+    * Playback errors are now more human friendly.
+    * Fixed issue #26:  Saves the current video position when the app is minimized or when a user
+      clicks on the video's channel.
 
 v2.0 - 27 Aug 2016:
-	* Users can now subscribe to a channel
-	* App update checker
-	* Faster loading time and smoother scrolling
-	* New material theme
-	* Major cosmetic improvements to the Channel fragment
-	* Videos: Add open-with to the video's context menu
-	* External programs can open YouTube videos using SkyTube
-	* Paste/Enter video URL in SkyTube
-	* Comments: show the author's thumbnail.
+    * Users can now subscribe to a channel.
+    * App update checker.
+    * Faster loading time and smoother scrolling.
+    * New material theme.
+    * Major cosmetic improvements to the Channel fragment.
+    * Videos: Add open-with to the video's context menu.
+    * External programs can open YouTube videos using SkyTube.
+    * Paste/Enter video URL in SkyTube.
+    * Comments: show the author's thumbnail.
 
 v1.0 - 24 Feb 2016:
-	* Initial release.
+    * Initial release.
