@@ -127,7 +127,7 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 		for (Iterator<YouTubeChannel> i = getIterator();  i.hasNext(); position++) {
 			channel = i.next();
 
-			if (channel.getId().equals(channelId)) {
+			if (channel.getId() != null  &&  channel.getId().equals(channelId)) {
 				// change the 'new videos' status
 				channel.setNewVideosSinceLastVisit(newVideos);
 				// we now need to notify the SubsAdapter to remove the new videos notification (near the channel name)

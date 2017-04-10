@@ -123,7 +123,7 @@ public class YouTubeChannel implements Serializable {
 		}
 
 
-		if (channelList.size() <= 0)
+		if (channelList == null  ||  channelList.size() <= 0)
 			Log.e(TAG, "channelList is empty");
 		else {
 			parse(channelList.get(0));
