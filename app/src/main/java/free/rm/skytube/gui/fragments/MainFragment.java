@@ -74,6 +74,8 @@ public class MainFragment extends FragmentEx {
 		subsListView = (RecyclerView) view.findViewById(R.id.subs_drawer);
 		if (subsAdapter == null) {
 			subsAdapter = SubsAdapter.get(getActivity(), view.findViewById(R.id.subs_drawer_progress_bar));
+		} else {
+			subsAdapter.setContext(getActivity());
 		}
 		subsAdapter.setListener((MainActivityListener)getActivity());
 

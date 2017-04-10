@@ -54,9 +54,13 @@ public class BookmarksFragment extends VideosGridFragment implements BookmarksDb
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = super.onCreateView(inflater, container, savedInstanceState);
+		videoGridAdapter = null;
 
-		if (bookmarksGridAdapter == null)
+		if (bookmarksGridAdapter == null) {
 			bookmarksGridAdapter = new bookmarksGridAdapter(getActivity());
+		} else {
+			bookmarksGridAdapter.setContext(getActivity());
+		}
 
 		bookmarksGridAdapter.setListener((MainActivityListener)getActivity());
 		gridView.setAdapter(bookmarksGridAdapter);

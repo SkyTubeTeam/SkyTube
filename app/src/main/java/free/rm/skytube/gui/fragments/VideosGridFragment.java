@@ -26,6 +26,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
 
+import com.bumptech.glide.Glide;
+
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.MainActivityListener;
 import free.rm.skytube.businessobjects.VideoCategory;
@@ -60,6 +62,8 @@ public abstract class VideosGridFragment extends BaseVideosGridFragment {
 		gridView = (RecyclerView) view.findViewById(R.id.grid_view);
 		if (videoGridAdapter == null) {
 			videoGridAdapter = new VideoGridAdapter(getActivity());
+		} else {
+			videoGridAdapter.setContext(getActivity());
 		}
 		videoGridAdapter.setProgressBar(progressBar);
 
@@ -74,6 +78,12 @@ public abstract class VideosGridFragment extends BaseVideosGridFragment {
 		return view;
 	}
 
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		Glide.get(getActivity()).clearMemory();
+	}
 
 	/**
 	 * In case a subclass of VideosGridFragment wants to use an alternate layout resource (e.g. Subscriptions).

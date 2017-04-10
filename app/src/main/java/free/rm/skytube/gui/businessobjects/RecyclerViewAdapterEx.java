@@ -48,6 +48,10 @@ public abstract class RecyclerViewAdapterEx<T, HolderType extends RecyclerView.V
 		return context;
 	}
 
+	public void setContext(Context context) {
+		this.context = context;
+	}
+
 	/**
 	 * @return An instance of {@link LayoutInflater}.
 	 */
