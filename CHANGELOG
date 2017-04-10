@@ -1,4 +1,4 @@
-v2.4 - 9 Apr 2017:
+v2.4 - 10 Apr 2017:
     * Added subscriptions feed tab.
     * Added the option for users to use their own YouTube API key.
     * App is able to detect live streams (and offers user to play such videos externally).
