@@ -123,6 +123,8 @@ public class ChannelBrowserFragment extends BaseVideosGridFragment {
 		if (videoGridAdapter == null) {
 			videoGridAdapter = new VideoGridAdapter(getActivity(), false /*hide channel name*/);
 			videoGridAdapter.setVideoCategory(VideoCategory.CHANNEL_VIDEOS, channelId);
+		} else {
+			videoGridAdapter.setContext(getActivity());
 		}
 		videoGridAdapter.setListener((MainActivityListener)getActivity());
 		if(channel != null)

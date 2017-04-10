@@ -75,6 +75,8 @@ public class SearchVideoGridFragment extends BaseVideosGridFragment {
 				// up by the VideoGridFragment
 				this.videoGridAdapter.setVideoCategory(VideoCategory.SEARCH_QUERY, searchQuery);
 			}
+		} else {
+			videoGridAdapter.setContext(getActivity());
 		}
 
 		// set the action bar's title
