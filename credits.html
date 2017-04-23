@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en" class="no-js">
+
+<head>
+    <meta charset="UTF-8">
+    <title>SkyTube:  An open-source YouTube app</title>
+	<meta name="description" content="SkyTube is an ad-free, open-source YouTube app for the Android platform.  Features: browse popular/trending videos, subscribe to YouTube channels, play videos and more.">
+	<meta name="keywords" content="SkyTube, app, YouTube, Android, open-source">
+	<meta name="author" content="Ramon M">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	
+    <link rel="shortcut icon" href="favicon.ico">
+    
+    <!-- Bootstrap 3.3.2 -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    
+    <link rel="stylesheet" href="assets/css/animate.css">
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/slick.css">
+    <link rel="stylesheet" href="assets/js/rs-plugin/css/settings.css">
+
+    <link rel="stylesheet" href="assets/css/styles.css">
+
+
+<!--    <script type="text/javascript" src="assets/js/modernizr.custom.32033.js"></script>-->
+    
+    <style>
+        ul {
+            padding-left: 19px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Credits</h1>
+        
+        <br />
+        <p>Special thanks goes to the following contributors:</p>
+        
+        
+        <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+            CONTRIBUTORS TABLE.
+        -->
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Contributor</th>
+                    <th>Contributions</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                <tr>
+                    <td><a href="https://github.com/atomjack">Chris Bellew</a></td>
+                    <td>
+                        <ul>
+                            <li>Swipe-to-refresh</li>
+                            <li>Subscriptions feed</li>
+                            <li>Bookmarks feature</li>
+                            <li>Customizable API key</li>
+                            <li>Numerous bug fixing</li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><a href="https://github.com/RemyL">RemyL</a></td>
+                    <td>
+                        <ul>
+                            <li>French translations</li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><a href="https://github.com/anoymouserver">anoymouserver</a></td>
+                    <td>
+                        <ul>
+                            <li>German translations</li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><a href="https://github.com/dawidd6">dawidd6</a></td>
+                    <td>
+                        <ul>
+                            <li>Polish translations</li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><a href="https://github.com/Eskuero">Eskuero</a></td>
+                    <td>
+                        <ul>
+                            <li>Spanish translations and typo fixes</li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><a href="https://github.com/lna91">András Lengyel-Nagy</a></td>
+                    <td>
+                        <ul>
+                            <li>Hungarian translations</li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><a href="https://github.com/drivfe">drivfe</a></td>
+                    <td>
+                        <ul>
+                            <li>Introduced Picasso library to SkyTube</li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><a href="https://github.com/">Andrés Hernández</a></td>
+                    <td>
+                        <ul>
+                            <li>Initial Spanish translations</li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+            
+        </table>
+        
+        
+        
+        <br />        
+        <p>The SkyTube project makes use of the following third-party libraries:</p>
+        
+        <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+            LIBRARIES TABLE.
+        -->
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Library</th>
+                    <th>License</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                <tr>
+                    <td><a href="https://github.com/google/google-http-java-client">google-http-client-android</a></td>
+                    <td>Apache License 2.0</td>
+                </tr>
+                <tr>
+                    <td><a href="https://developers.google.com/api-client-library/java/apis/youtube/v3">google-api-services-youtube</a></td>
+                    <td>Apache License 2.0</td>
+                </tr>
+                <tr>
+                    <td><a href="https://github.com/ocpsoft/prettytime">prettytime</a></td>
+                    <td>Apache License 2.0</td>
+                </tr>
+                <tr>
+                    <td><a href="https://github.com/youtube/yt-android-player">YouTubeAndroidPlayerApi</a></td>
+                    <td>Apache License 2.0</td>
+                </tr>
+                <tr>
+                    <td><a href="https://github.com/twitter/twemoji">Twitter Emoji (icon)</a></td>
+                    <td>CC Attribution 4.0 International</td>
+                </tr>
+                <tr>
+                    <td><a href="https://design.google.com/icons/index.html">Various Android icons</a></td>
+                    <td>CC Attribution 4.0 International</td>
+                </tr>
+                <tr>
+                    <td><a href="https://github.com/theScrabi/NewPipe">NewPipe (streams handler)</a></td>
+                    <td>GPLv3+</td>
+                </tr>
+                <tr>
+                    <td><a href="https://jsoup.org">jsoup (streams handler)</a></td>
+                    <td>MIT License</td>
+                </tr>
+                <tr>
+                    <td><a href="https://developer.mozilla.org/en/Rhino">Rhino (streams handler)</a></td>
+                    <td>Mozilla Public License 2.0</td>
+                </tr>
+                <tr>
+                    <td><a href="https://github.com/MoraisIgor/SlidingDrawer">SlidingDrawer</a></td>
+                    <td>Apache License 2.0</td>
+                </tr>
+                <tr>
+                    <td><a href="https://github.com/bumptech/glide">Glide</a></td>
+                    <td>BSD, part MIT and Apache 2.0</td>
+                </tr>
+                <tr>
+                    <td><a href="https://github.com/JakeWharton/butterknife">ButterKnife</a></td>
+                    <td>Apache License 2.0</td>
+                </tr>
+                <tr>
+                    <td><a href="https://github.com/google/gson">gson</a></td>
+                    <td>Apache License 2.0</td>
+                </tr>
+                <tr>
+                    <td><a href="https://github.com/JodaOrg/joda-time">joda-time</a></td>
+                    <td>Apache License 2.0</td>
+                </tr>
+                <tr>
+                    <td><a href="https://github.com/afollestad/material-dialogs">material-dialogs</a></td>
+                    <td>MIT License</td>
+                </tr>
+                <!--<tr>
+                    <td><a href=""></a></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><a href=""></a></td>
+                    <td></td>
+                </tr>-->
+            </tbody>
+            
+        </table>
+    </div>
+</body>
+</html>
