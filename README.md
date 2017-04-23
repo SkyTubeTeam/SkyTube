@@ -56,6 +56,9 @@ Pure open-source version.  Updates normally take up to 3 days to be available to
 [<img src="screenshots/mobile_settings.png" width=250>](screenshots/mobile_settings.png)
 [<img src="screenshots/mobile_land.png" width=505>](screenshots/mobile_land2.png)
 
+## Credits
+This project was possible with the support and contribution of [numerous volunteers and third-party projects](http://skytube-app.com/credits.html).
+
 ## License
 [![GNU GPLv3 Image](https://www.gnu.org/graphics/gplv3-127x51.png)](http://www.gnu.org/licenses/gpl-3.0.en.html)  
 
