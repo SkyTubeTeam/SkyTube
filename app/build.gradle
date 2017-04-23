@@ -14,6 +14,9 @@ android {
                         '"AIzaSyDAOcAgAAd098p_FLIePaQNKPTpcyhUGBA",' +
                         '"AIzaSyBKBkG_-OUjncLyQCB32ZrWBiT-mD0kssI"'  +
                 '}';
+        buildConfigField 'String', 'SKYTUBE_WEBSITE',         '"http://skytube-app.com"'
+        buildConfigField 'String', 'SKYTUBE_WEBSITE_CREDITS', '"http://skytube-app.com/credits.html"'
+        buildConfigField 'String', 'SKYTUBE_UPDATES_URL',     '"https://api.github.com/repos/ram-on/SkyTube/releases/latest"'
         vectorDrawables.useSupportLibrary true
         multiDexEnabled true    // this is as we have over 65536 lines of code...
     }

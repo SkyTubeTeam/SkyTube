@@ -19,8 +19,10 @@ package free.rm.skytube.gui.businessobjects;
 
 import android.util.Log;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -53,6 +55,43 @@ public class WebStream {
 	public WebStream(String remoteFileUrl) throws Exception {
 		this(new URL(remoteFileUrl));
 	}
+
+
+	/**
+	 * Downloads the remote Text File.
+	 *
+	 * @return The downloaded text file as a String.
+	 * @throws IOException
+	 */
+	public String downloadRemoteTextFile() throws IOException {
+		BufferedReader  bufferedReader = new BufferedReader(new InputStreamReader(stream));
+		StringBuilder	htmlBuilder = new StringBuilder();
+		String			line;
+
+		while ((line = bufferedReader.readLine()) != null) {
+			htmlBuilder.append(line);
+			htmlBuilder.append('\n');
+		}
+
+		return htmlBuilder.toString();
+	}
+
+
+	/**
+	 * Closes the {@link WebStream}.
+	 */
+	public void close() {
+		if (stream == null)
+			return;
+
+		try {
+			stream.close();
+			stream = null;
+		} catch (IOException e) {
+			Log.e(TAG, "An error has occurred while closing the stream.", e);
+		}
+	}
+
 
 	public InputStream getStream() {
 		return stream;

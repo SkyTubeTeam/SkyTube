@@ -58,22 +58,27 @@
 			android:summary="@string/pref_summary_youtube_api_key"
 			android:dialogTitle="@string/pref_title_youtube_api_key" />
 	</PreferenceCategory>
+
 	<!--
 		About Category
 	 -->
 	<PreferenceCategory
 		android:title="@string/pref_about_category">
 		<PreferenceScreen
-			android:key="@string/pref_key_license"
-			android:title="@string/pref_title_license"
-			android:summary="@string/pref_summary_license" />
+			android:key="@string/pref_key_version"
+			android:title="@string/pref_title_version"/>
 		<PreferenceScreen
 			android:key="@string/pref_key_website"
 			android:title="@string/pref_title_website"
-			android:summary="@string/pref_summary_website" />
+			android:summary="Skytube Website goes here..." />
 		<PreferenceScreen
-			android:key="@string/pref_key_version"
-			android:title="@string/pref_title_version"/>
+			android:key="@string/pref_key_credits"
+			android:title="@string/pref_title_credits"
+			android:summary="@string/pref_summary_credits" />
+		<PreferenceScreen
+			android:key="@string/pref_key_license"
+			android:title="@string/pref_title_license"
+			android:summary="@string/pref_summary_license" />
 	</PreferenceCategory>
 
 </PreferenceScreen>

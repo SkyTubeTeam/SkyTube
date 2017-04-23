@@ -35,7 +35,6 @@ public class UpdatesChecker {
 	private URL		latestApkUrl = null;
 	private float	latestApkVersion = 0;
 
-	private static String UPDATES_URL = "https://api.github.com/repos/ram-on/SkyTube/releases/latest";
 	private static String TAG = UpdatesChecker.class.getSimpleName();
 
 
@@ -54,9 +53,11 @@ public class UpdatesChecker {
 		}
 		else {
 			try {
-				WebStream webStream = new WebStream(UPDATES_URL);
-				BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(webStream.getStream()));
-				JSONObject json = getJSON(bufferedReader);
+				WebStream   webStream = new WebStream(BuildConfig.SKYTUBE_UPDATES_URL);
+				String      updatesJSONStr = webStream.downloadRemoteTextFile();
+				webStream.close();
+
+				JSONObject  json = new JSONObject(updatesJSONStr);
 				float remoteVersionNumber = getLatestVersionNumber(json);
 				float currentVersionNumber = getCurrentVerNumber();
 
@@ -86,26 +87,6 @@ public class UpdatesChecker {
 
 	public float getLatestApkVersion() {
 		return latestApkVersion;
-	}
-
-
-	/**
-	 * Extracts the data from bufferedReader and uses that data to create a {@link JSONObject}.
-	 *
-	 * @param bufferedReader	HTTP Connection
-	 * @return {@link JSONObject}
-	 * @throws Exception
-	 */
-	private JSONObject getJSON(BufferedReader bufferedReader) throws Exception {
-		StringBuilder	builder = new StringBuilder();
-		String			line;
-
-		while ((line = bufferedReader.readLine()) != null) {
-			builder.append(line);
-			builder.append("\n");
-		}
-
-		return new JSONObject(builder.toString());
 	}
 
 

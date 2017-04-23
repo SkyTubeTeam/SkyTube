@@ -28,6 +28,8 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Toast;
 
 import free.rm.skytube.BuildConfig;
@@ -68,11 +70,12 @@ public class PreferencesFragment extends PreferenceFragment implements SharedPre
 
 		// if the user clicks on the website link, then open it using an external browser
 		Preference websitePref = findPreference(getString(R.string.pref_key_website));
+		websitePref.setSummary(BuildConfig.SKYTUBE_WEBSITE);
 		websitePref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 			@Override
 			public boolean onPreferenceClick(Preference preference) {
 				// view the app's website in a web browser
-				Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.pref_summary_website)));
+				Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(BuildConfig.SKYTUBE_WEBSITE));
 				startActivity(browserIntent);
 				return true;
 			}
@@ -89,10 +92,21 @@ public class PreferencesFragment extends PreferenceFragment implements SharedPre
 		Preference versionPref = findPreference(getString(R.string.pref_key_version));
 		versionPref.setSummary(BuildConfig.VERSION_NAME);
 
+		// credits
+		Preference creditsPref = findPreference(getString(R.string.pref_key_credits));
+		creditsPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+			@Override
+			public boolean onPreferenceClick(Preference preference) {
+				displayCredits();
+				return true;
+			}
+		});
+
 		// Default tab
 		ListPreference defaultTabPref = (ListPreference)findPreference(getString(R.string.pref_key_default_tab));
-		if(defaultTabPref.getValue() == null)
+		if (defaultTabPref.getValue() == null) {
 			defaultTabPref.setValueIndex(0);
+		}
 		defaultTabPref.setSummary(String.format(getString(R.string.pref_summary_default_tab), defaultTabPref.getEntry()));
 	}
 
@@ -167,6 +181,23 @@ public class PreferencesFragment extends PreferenceFragment implements SharedPre
 				.setNeutralButton(R.string.i_agree, null)
 				.setCancelable(false)	// do not allow the user to click outside the dialog or press the back button
 				.show();
+	}
+
+
+	/**
+	 * Displays the credits (i.e. contributors).
+	 */
+	private void displayCredits() {
+		AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+
+		WebView webView = new WebView(getActivity());
+		webView.setWebViewClient(new WebViewClient());
+		webView.getSettings().setJavaScriptEnabled(false);
+		webView.loadUrl(BuildConfig.SKYTUBE_WEBSITE_CREDITS);
+
+		alert.setView(webView);
+		alert.setPositiveButton(R.string.ok, null);
+		alert.show();
 	}
 
 

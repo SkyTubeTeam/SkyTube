@@ -23,7 +23,9 @@
 	<string name="pref_about_category">Információ</string>
 	<string name="pref_title_website">Weboldal</string>
 	<string name="pref_key_website">pref_website</string>
-	<string name="pref_summary_website">http://www.skytube-app.com</string>
+	<string name="pref_title_credits">Credits</string>
+	<string name="pref_key_credits">pref_credits</string>
+	<string name="pref_summary_credits">People and projects that made this app possible.</string>
 	<string name="pref_title_version">Verzió</string>
 	<string name="pref_key_version">pref_version</string>
 	<string name="pref_title_license">Licensz</string>
