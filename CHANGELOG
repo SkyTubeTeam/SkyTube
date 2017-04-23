@@ -1,3 +1,8 @@
+v2.41 - 23 Apr 2017:
+	* This version was released mainly because of F-Fdroid's version 2.4(0) did not include the
+	  following fix (d3a0bab): App used to crash when the MainFragment is rotated.
+	* Added a list of contributors which can be accessed via the Preferences.
+
 v2.4 - 10 Apr 2017:
     * Added subscriptions feed tab.
     * Added the option for users to use their own YouTube API key.
