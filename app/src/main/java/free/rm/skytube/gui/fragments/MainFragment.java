@@ -27,6 +27,7 @@ import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.MainActivityListener;
 import free.rm.skytube.businessobjects.db.BookmarksDb;
 import free.rm.skytube.gui.businessobjects.FragmentEx;
+import free.rm.skytube.gui.businessobjects.Logger;
 import free.rm.skytube.gui.businessobjects.SubsAdapter;
 
 public class MainFragment extends FragmentEx {
@@ -89,6 +90,9 @@ public class MainFragment extends FragmentEx {
 
 		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
 		viewPager.setCurrentItem(Integer.parseInt(sp.getString(getString(R.string.pref_key_default_tab), "0")));
+		if(videoGridFragmentsList.get(Integer.parseInt(sp.getString(getString(R.string.pref_key_default_tab), "0"))) instanceof SubscriptionsFeedFragment) {
+			subscriptionsFeedFragment.setFragmentSelected();
+		}
 
 		TabLayout tabLayout = (TabLayout)view.findViewById(R.id.tab_layout);
 		tabLayout.setupWithViewPager(viewPager);
@@ -97,10 +101,14 @@ public class MainFragment extends FragmentEx {
 			@Override
 			public void onTabSelected(TabLayout.Tab tab) {
 				viewPager.setCurrentItem(tab.getPosition());
+				if(videoGridFragmentsList.get(tab.getPosition()) instanceof SubscriptionsFeedFragment)
+					subscriptionsFeedFragment.setFragmentSelected();
 			}
 
 			@Override
 			public void onTabUnselected(TabLayout.Tab tab) {
+				if(videoGridFragmentsList.get(tab.getPosition()) instanceof SubscriptionsFeedFragment)
+					subscriptionsFeedFragment.setFragmentUnselected();
 			}
 
 			@Override
