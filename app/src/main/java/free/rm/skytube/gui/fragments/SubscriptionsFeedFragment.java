@@ -37,6 +37,7 @@ import free.rm.skytube.businessobjects.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTubeVideo;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 import free.rm.skytube.gui.app.SkyTubeApp;
+import free.rm.skytube.gui.businessobjects.Logger;
 import free.rm.skytube.gui.businessobjects.SubsAdapter;
 import free.rm.skytube.gui.businessobjects.SubscriptionsFragmentListener;
 
@@ -51,6 +52,7 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Sub
 	private boolean refreshInProgress = false;
 	private MaterialDialog progressDialog;
 	private boolean shouldRefresh = false;
+	private boolean fragmentSelected = false;
 
 	@Bind(R.id.noSubscriptionsText)
 	View noSubscriptionsText;
@@ -76,14 +78,15 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Sub
 
 
 	private void showRefreshDialog() {
-		progressDialog = new MaterialDialog.Builder(getActivity())
-						.title(R.string.fetching_subscription_videos)
-						.content(String.format(getContext().getString(R.string.fetched_videos_from_channels), numVideosFetched, numChannelsFetched, numChannelsSubscribed))
-						.progress(true, 0)
-						.backgroundColorRes(R.color.colorPrimary)
-						.titleColorRes(android.R.color.white)
-						.contentColorRes(android.R.color.white)
-						.build();
+		if(progressDialog == null)
+			progressDialog = new MaterialDialog.Builder(getActivity())
+							.title(R.string.fetching_subscription_videos)
+							.content(String.format(getContext().getString(R.string.fetched_videos_from_channels), numVideosFetched, numChannelsFetched, numChannelsSubscribed))
+							.progress(true, 0)
+							.backgroundColorRes(R.color.colorPrimary)
+							.titleColorRes(android.R.color.white)
+							.contentColorRes(android.R.color.white)
+							.build();
 		progressDialog.show();
 	}
 
@@ -183,9 +186,9 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Sub
 				videoGridAdapter.setVideoCategory(VideoCategory.SUBSCRIPTIONS_FEED_VIDEOS);
 
 				// Launch a refresh of subscribed videos when this Fragment is created, but don't
-				// show the progress dialog. It will be shown when the tab is shown.
+				// show the progress dialog if this fragment is not currently showing.
 				if (shouldRefresh)
-					doRefresh(false);
+					doRefresh(fragmentSelected);
 				shouldRefresh = false;
 			}
 		}
@@ -244,4 +247,13 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Sub
 
 	}
 
+	public void setFragmentSelected() {
+		if(refreshInProgress)
+			showRefreshDialog();
+		fragmentSelected = true;
+	}
+
+	public void setFragmentUnselected() {
+		fragmentSelected = false;
+	}
 }
