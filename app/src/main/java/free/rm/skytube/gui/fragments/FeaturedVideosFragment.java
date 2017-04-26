@@ -37,8 +37,4 @@ public class FeaturedVideosFragment extends VideosGridFragment {
 		return SkyTubeApp.getStr(R.string.featured);
 	}
 
-	@Override
-	protected void onFragmentSelected() {
-	}
-
 }

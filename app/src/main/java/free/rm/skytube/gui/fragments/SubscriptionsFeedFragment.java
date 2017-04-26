@@ -133,7 +133,9 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Sub
 
 
 	@Override
-	protected void onFragmentSelected() {
+	public void onFragmentSelected() {
+		super.onFragmentSelected();
+
 		// when the Subscriptions tab is selected, if a refresh is in progress, show the dialog.
 		if (refreshInProgress)
 			showRefreshDialog();
@@ -183,9 +185,9 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Sub
 				videoGridAdapter.setVideoCategory(VideoCategory.SUBSCRIPTIONS_FEED_VIDEOS);
 
 				// Launch a refresh of subscribed videos when this Fragment is created, but don't
-				// show the progress dialog. It will be shown when the tab is shown.
+				// show the progress dialog if this fragment is not currently showing.
 				if (shouldRefresh)
-					doRefresh(false);
+					doRefresh(isFragmentSelected());
 				shouldRefresh = false;
 			}
 		}

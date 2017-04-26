@@ -87,7 +87,9 @@ public class BookmarksFragment extends VideosGridFragment implements BookmarksDb
 
 
 	@Override
-	protected void onFragmentSelected() {
+	public void onFragmentSelected() {
+		super.onFragmentSelected();
+
 		if (BookmarksDb.getBookmarksDb().isHasUpdated()) {
 			populateList();
 			BookmarksDb.getBookmarksDb().setHasUpdated(false);
