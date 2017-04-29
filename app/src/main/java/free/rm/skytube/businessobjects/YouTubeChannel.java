@@ -102,14 +102,14 @@ public class YouTubeChannel implements Serializable {
 
 
 	/**
-	 * Get this channel's info from the remote YouTube server.
+	 * Get this channel's info from the remote YouTube server and then set the instance variables
 	 *
 	 * @param channelInfo
 	 *
 	 * @return True if successful; false otherwise.
 	 */
 	private boolean getChannelInfo(YouTube.Channels.List channelInfo) {
-		List<Channel>	channelList = null;
+		List<Channel>	channelList;
 		boolean			successful = false;
 
 		try {
@@ -118,22 +118,25 @@ public class YouTubeChannel implements Serializable {
 
 			// get channel
 			channelList = response.getItems();
-		} catch (IOException e) {
-			Log.e(TAG, "Error has occurred while getting Featured Videos.", e);
-		}
 
-
-		if (channelList == null  ||  channelList.size() <= 0)
-			Log.e(TAG, "channelList is empty");
-		else {
+			// set the instance variables
 			parse(channelList.get(0));
+
+			// operation was successful
 			successful = true;
+		} catch (Throwable tr) {
+			Log.e(TAG, "Error has occurred while getting Featured Videos.", tr);
 		}
 
 		return successful;
 	}
 
 
+	/**
+	 * Parses a {@link Channel} and then sets the instance variables accordingly.
+	 *
+	 * @param channel
+	 */
 	private void parse(Channel channel) {
 		ChannelSnippet snippet = channel.getSnippet();
 		if (snippet != null) {
