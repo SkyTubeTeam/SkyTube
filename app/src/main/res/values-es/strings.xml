@@ -1,9 +1,9 @@
 <resources>
-	<string name="could_not_get_videos">No se encontraron videos de %s.</string>
+	<string name="could_not_get_videos">No se encontraron vídeos de %s.</string>
 	<string name="views">visto %,d veces</string>
 	<string name="error">Error</string>
 	<string name="ok">Aceptar</string>
-	<string name="search_videos">Buscar videos</string>
+	<string name="search_videos">Buscar vídeos</string>
 	<string name="launch_offical_player_error">Ocurrió un eror al tratar de abrir el reproductor 
 		oficial de YouTube. Asegúrate que la aplicación oficial de YouTube hecha por Google
 		esté instalada en tu dispositivo.</string>
