@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="bookmarks">Bookmarks</string>
+	<string name="bookmarks">Marcadores</string>
 
-	<string name="bookmark">Bookmark</string>
-	<string name="video_bookmarked">Video bookmarked</string>
-	<string name="video_bookmarked_error">Could not bookmark the video.</string>
+	<string name="bookmark">Marcar</string>
+	<string name="video_bookmarked">Vídeo marcado</string>
+	<string name="video_bookmarked_error">Este vídeo no se puede marcar.</string>
 
-	<string name="unbookmark">Unbookmark</string>
-	<string name="video_unbookmarked">Video unbookmarked</string>
-	<string name="video_unbookmarked_error">Could not unbookmark the video.</string>
+	<string name="unbookmark">Desmarcar</string>
+	<string name="video_unbookmarked">Vídeo desmarcado</string>
+	<string name="video_unbookmarked_error">Este vídeo no se puede desmarcar.</string>
 
-	<string name="no_bookmarked_videos_text">You haven\'t bookmarked any videos yet.\n\nOnce you do, they will show up here.</string>
+	<string name="no_bookmarked_videos_text">No tienes ningún vídeo marcado todavía.\n\nCuando lo tengas, aparecerán aquí.</string>
 </resources>
