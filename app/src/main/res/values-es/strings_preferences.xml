@@ -5,13 +5,13 @@
 	<string name="pref_languages_category">Idiomas y regiones</string>
 	<string name="pref_title_preferred_regions">Región preferida</string>
 	<string name="pref_key_preferred_region">pref_key_preferred_region</string>
-	<string name="pref_summary_preferred_regions">Selecciona una región preferida.  Esto se utiliza para filtrar videos en la categoría de Destacados.</string>
+	<string name="pref_summary_preferred_regions">Selecciona una región preferida.  Esto se utiliza para filtrar vídeos en la categoría de Destacados.</string>
 
-	<string name="pref_title_preferred_languages">Idioma(s) preferidos</string>
+	<string name="pref_title_preferred_languages">Idiomas preferidos</string>
 	<string name="pref_key_preferred_languages">pref_key_preferred_languages</string>
-	<string name="pref_summary_preferred_languages">EXPERIMENTAL:  Selecciona uno o más idiomas.  Esto es utilizado para filtrar videos en la categoría de Más populares y para la búsqueda de vídeos.</string>
+	<string name="pref_summary_preferred_languages">EXPERIMENTAL:  Selecciona uno o más idiomas.  Esto es utilizado para filtrar vídeos en la categoría de Más Populares y para la búsqueda de vídeos.</string>
 
-	<string name="pref_video_player_category">Reproductor de videos</string>
+	<string name="pref_video_player_category">Reproductor de vídeos</string>
 	<string name="pref_key_video_player_category">video_player_category</string>
 	<string name="pref_title_preferred_res">Resolución preferida</string>
 	<string name="pref_key_preferred_res">pref_preferred_resolution</string>
@@ -23,9 +23,9 @@
 	<string name="pref_about_category">Acerca de</string>
 	<string name="pref_title_website">Sitio web</string>
 	<string name="pref_key_website">pref_website</string>
-	<string name="pref_title_credits">Credits</string>
+	<string name="pref_title_credits">Créditos</string>
 	<string name="pref_key_credits">pref_credits</string>
-	<string name="pref_summary_credits">People and projects that made this app possible.</string>
+	<string name="pref_summary_credits">Personas y proyectos que hacen posible esta aplicación.</string>
 	<string name="pref_title_version">Versión</string>
 	<string name="pref_key_version">pref_version</string>
 	<string name="pref_title_license">Licencia</string>
@@ -44,7 +44,7 @@
 
 				\nYou should have received a copy of the GNU General Public License
 				along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;</string>
-	<string name="i_agree">I Agree</string>
+	<string name="i_agree">Acepto/string>
 
 
 	<string-array name="languages_names">
@@ -410,9 +410,9 @@
 
 	<string name="pref_youtube_api_key">pref_youtube_api_key</string>
 	<string name="pref_title_youtube_api_key">YouTube API Key</string>
-	<string name="pref_summary_youtube_api_key">Enter your own YouTube Data API Key.  Leave blank to use the default one.</string>
-	<string name="pref_youtube_api_key_error">An error occurred attempting to validate the API Key you entered.</string>
-	<string name="pref_youtube_api_key_custom">Key is valid.  Restart app to use the new YouTube API key.</string>
-	<string name="pref_youtube_api_key_default">Restart app to switch back to default YouTube API key.</string>
-	<string name="restart">Restart</string>
+	<string name="pref_summary_youtube_api_key">Introduzca su propia YouTube Data API Key. Deje vacío para usar una por defecto.</string>
+	<string name="pref_youtube_api_key_error">Ocurrió un error al intentar validar la YouTube API Key que ha introducido.</string>
+	<string name="pref_youtube_api_key_custom">La clave es valida. Reinicie la aplicación para usar la nueva YouTube API Key.</string>
+	<string name="pref_youtube_api_key_default">Reinicie la aplicación para volver a usar la YouTube API Key por defecto.</string>
+	<string name="restart">Reiniciar</string>
 </resources>
