@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="update_available">Atualização Disponível</string>
+	<string name="update_dialog_msg">Está disponível uma nova atualização do SkyTube. A aplicação será atualizada para a versão %s.</string>
+	<string name="update">Atualizar</string>
+	<string name="later">Mais tarde</string>
+	<string name="update_failure">Não foi possível atualizar a aplicação.</string>
+	<string name="downloading">A transferir…</string>
+</resources>
