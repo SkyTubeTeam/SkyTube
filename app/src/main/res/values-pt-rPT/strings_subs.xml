@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="subscriptions">Subscrições</string>
+	<string name="subscribe">Subscrito</string>
+	<string name="unsubscribe">Anular Subscrição</string>
+	<string name="total_subscribers">%,d subscritos</string>
+
+	<string name="subscribed">Subscrito</string>
+	<string name="unsubscribed">Subscrição Anulada</string>
+
+	<string name="error_get_subbed_channels">Ocorreu um erro ao obter canais subscritos.</string>
+	<string name="error_check_if_user_has_subbed">Não foi possível verificar se o utilizador subscreveu o canal (id=%s)</string>
+	<string name="error_unable_to_subscribe">Não é possível anular\/subscrever o canal (id=%s)</string>
+</resources>
