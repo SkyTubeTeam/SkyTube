@@ -62,7 +62,6 @@ import free.rm.skytube.gui.fragments.SearchVideoGridFragment;
  * Main activity (launcher).  This activity holds {@link free.rm.skytube.gui.fragments.VideosGridFragment}.
  */
 public class MainActivity extends AppCompatActivity implements MainActivityListener {
-	public static final String ACTION_VIEW_CHANNEL = "MainActivity.ViewChannel";
 	public static final String MAIN_FRAGMENT = "MainActivity.MainFragment";
 	public static final String CHANNEL_BROWSER_FRAGMENT = "MainActivity.ChannelBrowserFragment";
 	public static final String SEARCH_FRAGMENT = "MainActivity.SearchFragment";
@@ -94,15 +93,10 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 				channelBrowserFragment = (ChannelBrowserFragment) getSupportFragmentManager().getFragment(savedInstanceState, CHANNEL_BROWSER_FRAGMENT);
 				searchVideoGridFragment = (SearchVideoGridFragment) getSupportFragmentManager().getFragment(savedInstanceState, SEARCH_FRAGMENT);
 			}
-			String action = getIntent().getAction();
-			if(action != null && action.equals(ACTION_VIEW_CHANNEL)) {
-				YouTubeChannel channel = (YouTubeChannel) getIntent().getSerializableExtra(ChannelBrowserFragment.CHANNEL_OBJ);
-				onChannelClick(channel);
-			} else {
-				if(mainFragment == null) {
-					mainFragment = new MainFragment();
-					getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, mainFragment).commit();
-				}
+
+			if(mainFragment == null) {
+				mainFragment = new MainFragment();
+				getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, mainFragment).commit();
 			}
 		}
 	}
@@ -235,19 +229,14 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 
 	@Override
 	public void onBackPressed() {
-		// If coming here from the video player (channel was pressed), exit when the back button is pressed
-		if(getIntent().getAction() != null && getIntent().getAction().equals(ACTION_VIEW_CHANNEL))
-			finish();
-		else {
-			// On Android, when the user presses back button, the Activity is destroyed and will be
-			// recreated when the user relaunches the app.
-			// We do not want that behaviour, instead then the back button is pressed, the app will
-			// be **minimized**.
-			Intent startMain = new Intent(Intent.ACTION_MAIN);
-			startMain.addCategory(Intent.CATEGORY_HOME);
-			startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			startActivity(startMain);
-		}
+		// On Android, when the user presses back button, the Activity is destroyed and will be
+		// recreated when the user relaunches the app.
+		// We do not want that behaviour, instead then the back button is pressed, the app will
+		// be **minimized**.
+		Intent startMain = new Intent(Intent.ACTION_MAIN);
+		startMain.addCategory(Intent.CATEGORY_HOME);
+		startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		startActivity(startMain);
 	}
 
 
@@ -263,26 +252,18 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 
 	@Override
 	public void onChannelClick(YouTubeChannel channel) {
-		Bundle args = new Bundle();
-		args.putSerializable(ChannelBrowserFragment.CHANNEL_OBJ, channel);
-		switchToChannelBrowserFragment(args);
+		Intent i = new Intent(MainActivity.this, ChannelBrowserActivity.class);
+		i.putExtra(ChannelBrowserFragment.CHANNEL_OBJ, channel);
+		startActivity(i);
 	}
 
 
 
 	@Override
 	public void onChannelClick(String channelId) {
-		Bundle args = new Bundle();
-		args.putString(ChannelBrowserFragment.CHANNEL_ID, channelId);
-		switchToChannelBrowserFragment(args);
-	}
-
-
-
-	private void switchToChannelBrowserFragment(Bundle args) {
-		channelBrowserFragment = new ChannelBrowserFragment();
-		channelBrowserFragment.setArguments(args);
-		switchToFragment(channelBrowserFragment);
+		Intent i = new Intent(MainActivity.this, ChannelBrowserActivity.class);
+		i.putExtra(ChannelBrowserFragment.CHANNEL_ID, channelId);
+		startActivity(i);
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////

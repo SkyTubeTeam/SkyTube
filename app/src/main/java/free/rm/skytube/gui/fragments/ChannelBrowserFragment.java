@@ -67,16 +67,17 @@ public class ChannelBrowserFragment extends BaseVideosGridFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		final String channelId;
+		final Bundle bundle = getActivity().getIntent().getExtras();
 
 		// we need to create a YouTubeChannel object:  this can be done by either:
 		//   (1) the YouTubeChannel object is passed to this Fragment
 		//   (2) passing the channel ID... a task is then created to create a YouTubeChannel
 		//       instance using the given channel ID
-		if (getArguments().getSerializable(CHANNEL_OBJ) != null) {
-			this.channel = (YouTubeChannel) getArguments().getSerializable(CHANNEL_OBJ);
+		if (bundle != null  &&  bundle.getSerializable(CHANNEL_OBJ) != null) {
+			this.channel = (YouTubeChannel) bundle.getSerializable(CHANNEL_OBJ);
 			channelId = channel.getId();
 		} else {
-			channelId = getArguments().getString(CHANNEL_ID);
+			channelId = bundle.getString(CHANNEL_ID);
 		}
 
 		// inflate the layout for this fragment
@@ -126,7 +127,7 @@ public class ChannelBrowserFragment extends BaseVideosGridFragment {
 		} else {
 			videoGridAdapter.setContext(getActivity());
 		}
-		videoGridAdapter.setListener((MainActivityListener)getActivity());
+
 		if(channel != null)
 			videoGridAdapter.setYouTubeChannel(channel);
 

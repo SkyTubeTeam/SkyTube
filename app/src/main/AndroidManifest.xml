@@ -22,6 +22,9 @@
 			</intent-filter>
 		</activity>
 		<activity
+			android:name=".gui.activities.ChannelBrowserActivity"
+			android:theme="@style/NoActionBarActivityTheme" />
+		<activity
 			android:name=".gui.activities.YouTubePlayerActivity"
 			android:configChanges="orientation|keyboardHidden|screenSize"
 			android:theme="@style/VideoPlayerActivityTheme">

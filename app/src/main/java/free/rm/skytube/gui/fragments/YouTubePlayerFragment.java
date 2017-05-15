@@ -44,7 +44,7 @@ import free.rm.skytube.businessobjects.YouTubeVideo;
 import free.rm.skytube.businessobjects.db.BookmarksDb;
 import free.rm.skytube.businessobjects.db.CheckIfUserSubbedToChannelTask;
 import free.rm.skytube.businessobjects.db.SubscribeToChannelTask;
-import free.rm.skytube.gui.activities.MainActivity;
+import free.rm.skytube.gui.activities.ChannelBrowserActivity;
 import free.rm.skytube.gui.app.SkyTubeApp;
 import free.rm.skytube.gui.businessobjects.CommentsAdapter;
 import free.rm.skytube.gui.businessobjects.FragmentEx;
@@ -135,8 +135,7 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 				@Override
 				public void onClick(View v) {
 					if (youTubeChannel != null) {
-						Intent i = new Intent(getActivity(), MainActivity.class);
-						i.setAction(MainActivity.ACTION_VIEW_CHANNEL);
+						Intent i = new Intent(getActivity(), ChannelBrowserActivity.class);
 						i.putExtra(ChannelBrowserFragment.CHANNEL_OBJ, youTubeChannel);
 						startActivity(i);
 					}

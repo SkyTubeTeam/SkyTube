@@ -1,6 +1,6 @@
 /*
  * SkyTube
- * Copyright (C) 2016  Ramon Mifsud
+ * Copyright (C) 2017  Ramon Mifsud
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,23 +19,20 @@ package free.rm.skytube.gui.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
 
 import free.rm.skytube.R;
 import free.rm.skytube.gui.businessobjects.BackButtonActivity;
 
 /**
  * An {@link Activity} that contains an instance of
- * {@link free.rm.skytube.gui.fragments.YouTubePlayerFragment}.
+ * {@link free.rm.skytube.gui.fragments.ChannelBrowserFragment}.
  */
-public class YouTubePlayerActivity extends BackButtonActivity {
+public class ChannelBrowserActivity extends BackButtonActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_video_player);
+		setContentView(R.layout.activity_channel_browser);
 	}
 
 }
