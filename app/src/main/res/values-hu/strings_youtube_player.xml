@@ -6,6 +6,7 @@
 
 	<string name="error_video_play">Videólejátszási Hiba</string>
 	<string name="error_video_streams_empty">The video %s has no streams!</string>
+	<string name="error_video_streams">An error has occurred while retrieving video\'s streams.</string>
 	<string name="error_get_video_desc">A videóleírás lekérése közben hiba lépett fel.</string>
 	<string name="error_invalid_url">Érvénytelen videó URL:  %s</string>
 

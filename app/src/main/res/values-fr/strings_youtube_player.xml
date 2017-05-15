@@ -6,6 +6,7 @@
 
 	<string name="error_video_play">Erreur de lecture vidéo</string>
 	<string name="error_video_streams_empty">La vidéo %s n\'a pas de source</string>
+	<string name="error_video_streams">An error has occurred while retrieving video\'s streams.</string>
 	<string name="error_get_video_desc">Erreur lors de la récupération de la description de la vidéo.</string>
 	<string name="error_invalid_url">URL de la vidéo invalide: %s</string>
 
