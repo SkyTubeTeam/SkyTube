@@ -114,7 +114,7 @@ public class GridViewHolder extends RecyclerView.ViewHolder {
 			@Override
 			public void onClick(View thumbnailView) {
 				if (youTubeVideo != null) {
-					YouTubePlayer.launch(youTubeVideo, (Context)listener);
+					YouTubePlayer.launch(youTubeVideo, context);
 				}
 			}
 		});

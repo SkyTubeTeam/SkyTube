@@ -12,7 +12,8 @@ android {
         buildConfigField 'String[]', 'YOUTUBE_API_KEYS',
                 '{' +
                         '"AIzaSyDAOcAgAAd098p_FLIePaQNKPTpcyhUGBA",' +
-                        '"AIzaSyBKBkG_-OUjncLyQCB32ZrWBiT-mD0kssI"'  +
+                        '"AIzaSyBKBkG_-OUjncLyQCB32ZrWBiT-mD0kssI",' +
+                        '"AIzaSyAD5aqzdx2vebgX5IgsRTcbZ2u8UnLEGYg"'  +
                 '}';
         buildConfigField 'String', 'SKYTUBE_WEBSITE',         '"http://skytube-app.com"'
         buildConfigField 'String', 'SKYTUBE_WEBSITE_CREDITS', '"http://skytube-app.com/credits.html"'
