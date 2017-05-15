@@ -20,6 +20,8 @@ package free.rm.skytube.businessobjects.VideoStream;
 
 import android.net.Uri;
 
+import org.schabi.newpipe.extractor.stream_info.VideoStream;
+
 /**
  * Represents the meta-data of a YouTube video stream.
  */
@@ -35,10 +37,17 @@ import android.net.Uri;
 	private static final String TAG = StreamMetaData.class.getSimpleName();
 
 
-	public StreamMetaData(String url, int itag) {
-		setUri(url);
-		setMediaFormat(itag);
-		setResolution(itag);
+//	public StreamMetaData(String url, int itag) {
+//		setUri(url);
+//		setMediaFormat(itag);
+//		setResolution(itag);
+//	}
+
+
+	public StreamMetaData(VideoStream videoStream) {
+		setUri(videoStream.url);
+		setMediaFormat(videoStream.format);
+		this.resolution = VideoResolution.resolutionToVideoResolution(videoStream.resolution);
 	}
 
 
@@ -55,12 +64,12 @@ import android.net.Uri;
 	}
 
 
-	/**
-	 * Converts the given itag into {@link VideoResolution}.
-	 */
-	private void setResolution(int itag) {
-		this.resolution = VideoResolution.itagToVideoResolution(itag);
-	}
+//	/**
+//	 * Converts the given itag into {@link VideoResolution}.
+//	 */
+//	private void setResolution(int itag) {
+//		this.resolution = VideoResolution.itagToVideoResolution(itag);
+//	}
 
 
 	public Uri getUri() {
