@@ -31,6 +31,8 @@ import java.math.RoundingMode;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.VideoStream.ParseStreamMetaData;
@@ -336,6 +338,25 @@ public class YouTubeVideo implements Serializable {
 	 */
 	private Set<String> getPreferredLanguages() {
 		return SkyTubeApp.getPreferenceManager().getStringSet(SkyTubeApp.getStr(R.string.pref_key_preferred_languages), defaultPrefLanguages);
+	}
+
+
+	/**
+	 * Extracts the video ID from the given video URL.
+	 *
+	 * @param url	YouTube video URL.
+	 * @return ID if everything went as planned; null otherwise.
+	 */
+	public static String getYouTubeIdFromUrl(String url) {
+		if (url == null)
+			return null;
+
+		// TODO:  support playlists (i.e. video_ids=... <-- URL submitted via email by YouTube)
+		final String pattern = "(?<=v=|/videos/|embed/|youtu\\.be/|/v/|/e/|video_ids=)[^#&?%]*";
+		Pattern compiledPattern = Pattern.compile(pattern);
+		Matcher matcher = compiledPattern.matcher(url);
+
+		return matcher.find() ? matcher.group() /*video id*/ : null;
 	}
 
 }

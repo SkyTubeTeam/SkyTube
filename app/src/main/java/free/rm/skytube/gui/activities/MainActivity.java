@@ -54,6 +54,7 @@ import free.rm.skytube.businessobjects.MainActivityListener;
 import free.rm.skytube.businessobjects.YouTubeChannel;
 import free.rm.skytube.gui.businessobjects.UpdatesChecker;
 import free.rm.skytube.gui.businessobjects.WebStream;
+import free.rm.skytube.gui.businessobjects.YouTubePlayer;
 import free.rm.skytube.gui.fragments.ChannelBrowserFragment;
 import free.rm.skytube.gui.fragments.MainFragment;
 import free.rm.skytube.gui.fragments.SearchVideoGridFragment;
@@ -185,10 +186,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 					final String videoUrl = ((EditText)((AlertDialog) dialog).findViewById(R.id.dialog_url_edittext)).getText().toString();
 
 					// play the video
-					Intent i = new Intent(MainActivity.this, YouTubePlayerActivity.class);
-					i.setAction(Intent.ACTION_VIEW);
-					i.setData(Uri.parse(videoUrl));
-					startActivity(i);
+					YouTubePlayer.launch(videoUrl, MainActivity.this);
 				}
 			})
 			.setNegativeButton(R.string.cancel, null)
@@ -252,7 +250,8 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 
 	@Override
 	public void onChannelClick(YouTubeChannel channel) {
-		Intent i = new Intent(MainActivity.this, ChannelBrowserActivity.class);
+		Intent i = new Intent(MainActivity.this, FragmentHolderActivity.class);
+		i.putExtra(FragmentHolderActivity.FRAGMENT_HOLDER_CHANNEL_BROWSER, true);
 		i.putExtra(ChannelBrowserFragment.CHANNEL_OBJ, channel);
 		startActivity(i);
 	}
@@ -261,7 +260,8 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 
 	@Override
 	public void onChannelClick(String channelId) {
-		Intent i = new Intent(MainActivity.this, ChannelBrowserActivity.class);
+		Intent i = new Intent(MainActivity.this, FragmentHolderActivity.class);
+		i.putExtra(FragmentHolderActivity.FRAGMENT_HOLDER_CHANNEL_BROWSER, true);
 		i.putExtra(ChannelBrowserFragment.CHANNEL_ID, channelId);
 		startActivity(i);
 	}

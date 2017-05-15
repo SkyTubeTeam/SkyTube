@@ -30,8 +30,6 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
@@ -44,7 +42,7 @@ import free.rm.skytube.businessobjects.YouTubeVideo;
 import free.rm.skytube.businessobjects.db.BookmarksDb;
 import free.rm.skytube.businessobjects.db.CheckIfUserSubbedToChannelTask;
 import free.rm.skytube.businessobjects.db.SubscribeToChannelTask;
-import free.rm.skytube.gui.activities.ChannelBrowserActivity;
+import free.rm.skytube.gui.activities.FragmentHolderActivity;
 import free.rm.skytube.gui.app.SkyTubeApp;
 import free.rm.skytube.gui.businessobjects.CommentsAdapter;
 import free.rm.skytube.gui.businessobjects.FragmentEx;
@@ -135,7 +133,8 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 				@Override
 				public void onClick(View v) {
 					if (youTubeChannel != null) {
-						Intent i = new Intent(getActivity(), ChannelBrowserActivity.class);
+						Intent i = new Intent(getActivity(), FragmentHolderActivity.class);
+						i.putExtra(FragmentHolderActivity.FRAGMENT_HOLDER_CHANNEL_BROWSER, true);
 						i.putExtra(ChannelBrowserFragment.CHANNEL_OBJ, youTubeChannel);
 						startActivity(i);
 					}
@@ -603,7 +602,7 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 		 */
 		@Override
 		protected YouTubeVideo doInBackground(Void... params) {
-			String videoId = getYouTubeIdFromUrl(videoUrl);
+			String videoId = YouTubeVideo.getYouTubeIdFromUrl(videoUrl);
 			YouTubeVideo youTubeVideo = null;
 
 			if (videoId != null) {
@@ -663,25 +662,6 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 			}
 
 			return url;
-		}
-
-
-		/**
-		 * Extracts the video ID from the given video URL.
-		 *
-		 * @param url	YouTube video URL.
-		 * @return ID if everything went as planned; null otherwise.
-		 */
-		private String getYouTubeIdFromUrl(String url) {
-			if (url == null)
-				return null;
-
-			// TODO:  support playlists (i.e. video_ids=... <-- URL submitted via email by YouTube)
-			final String pattern = "(?<=v=|/videos/|embed/|youtu\\.be/|/v/|/e/|video_ids=)[^#&?%]*";
-			Pattern compiledPattern = Pattern.compile(pattern);
-			Matcher matcher = compiledPattern.matcher(url);
-
-			return matcher.find() ? matcher.group() /*video id*/ : null;
 		}
 
 	}

@@ -27,12 +27,33 @@ import free.rm.skytube.gui.businessobjects.BackButtonActivity;
  * An {@link Activity} that contains an instance of
  * {@link free.rm.skytube.gui.fragments.ChannelBrowserFragment}.
  */
-public class ChannelBrowserActivity extends BackButtonActivity {
+public class FragmentHolderActivity extends BackButtonActivity {
+
+	public static final String FRAGMENT_HOLDER_CHANNEL_BROWSER = "FragmentHolderActivity.ChannelBrowser";
+
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_channel_browser);
+
+		final Bundle bundle = getIntent().getExtras();
+		int fragmentResId = 0;
+
+		if (bundle != null) {
+			if (bundle.getBoolean(FRAGMENT_HOLDER_CHANNEL_BROWSER)) {
+				fragmentResId = R.layout.activity_channel_browser;
+			}
+//			} else if (bundle.getBoolean(FRAGMENT_HOLDER_YOUTUBE_PLAYER)) {
+//				fragmentResId = R.layout.activity_video_player;
+//			}
+		}
+
+		if (fragmentResId == 0) {
+			throw new IllegalStateException("fragmentResId == 0 which means that intent.putExtra(FRAGMENT_HOLDER_...) was not called.");
+		}
+
+		setContentView(fragmentResId);
 	}
 
 }

@@ -22,7 +22,7 @@
 			</intent-filter>
 		</activity>
 		<activity
-			android:name=".gui.activities.ChannelBrowserActivity"
+			android:name=".gui.activities.FragmentHolderActivity"
 			android:theme="@style/NoActionBarActivityTheme" />
 		<activity
 			android:name=".gui.activities.YouTubePlayerActivity"
