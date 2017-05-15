@@ -38,8 +38,8 @@ public class StreamMetaDataList extends ArrayList<StreamMetaData> {
 	}
 
 
-	public StreamMetaDataList(String errorMessage) {
-		this.errorMessage = errorMessage;
+	public StreamMetaDataList(int errorMessageId) {
+		this.errorMessage = SkyTubeApp.getStr(errorMessageId);
 	}
 
 

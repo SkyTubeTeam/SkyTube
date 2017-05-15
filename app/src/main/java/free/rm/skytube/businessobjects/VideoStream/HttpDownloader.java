@@ -25,54 +25,80 @@
 
 package free.rm.skytube.businessobjects.VideoStream;
 
+import org.schabi.newpipe.extractor.Downloader;
+import org.schabi.newpipe.extractor.exceptions.ReCaptchaException;
+
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.UnknownHostException;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.net.ssl.HttpsURLConnection;
 
 
 /**
  * Downloads HTTP content.
  */
-public class HttpDownloader {
+public class HttpDownloader implements Downloader {
 
 	/** Mimic the Mozilla user agent */
 	private static final String USER_AGENT = "Mozilla/5.0";
 
 
-	/**
-	 * Download (via HTTP) the text file located at the supplied URL, and return its contents.
-	 * Primarily intended for downloading web pages.
-	 *
-	 * @param siteUrl	The URL of the text file to download.
-	 *
-	 * @return	The contents of the specified text file.
-	 */
-	public static String download(String siteUrl) throws Exception {
-		URL					url = new URL(siteUrl);
-		HttpURLConnection	con = (HttpURLConnection) url.openConnection();
-		StringBuffer		response = new StringBuffer();
-		BufferedReader		in = null;
+	@Override
+	public String download(String siteUrl, String language) throws IOException, ReCaptchaException {
+		Map<String, String> requestProperties = new HashMap<>();
+		requestProperties.put("Accept-Language", language);
+		return download(siteUrl, requestProperties);
+	}
+
+	@Override
+	public String download(String siteUrl, Map<String, String> customProperties) throws IOException, ReCaptchaException {
+		URL url = new URL(siteUrl);
+		HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
+		BufferedReader in = null;
+		StringBuilder response = new StringBuilder();
 
 		try {
 			con.setRequestMethod("GET");
 			con.setRequestProperty("User-Agent", USER_AGENT);
 
-			in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+			in = new BufferedReader(
+					new InputStreamReader(con.getInputStream()));
 			String inputLine;
 
 			while((inputLine = in.readLine()) != null) {
 				response.append(inputLine);
 			}
+		} catch(UnknownHostException uhe) {//thrown when there's no internet connection
+			throw new IOException("unknown host or no network", uhe);
+		} catch(Exception e) {
+            /*
+             * HTTP 429 == Too Many Request
+             * Receive from Youtube.com = ReCaptcha challenge request
+             * See : https://github.com/rg3/youtube-dl/issues/5138
+             */
+			if (con.getResponseCode() == 429) {
+				throw new ReCaptchaException("reCaptcha Challenge requested");
+			}
+			throw new IOException(e);
 		} finally {
-			if (in != null)
+			if(in != null) {
 				in.close();
-
-			if (con != null)
-				con.disconnect();
+			}
 		}
 
 		return response.toString();
+	}
+
+	@Override
+	public String download(String siteUrl) throws IOException, ReCaptchaException {
+		Map<String, String> requestProperties = new HashMap<>();
+		return download(siteUrl, requestProperties);
 	}
 
 }
