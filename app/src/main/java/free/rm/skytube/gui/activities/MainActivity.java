@@ -238,8 +238,16 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 		// If coming here from the video player (channel was pressed), exit when the back button is pressed
 		if(getIntent().getAction() != null && getIntent().getAction().equals(ACTION_VIEW_CHANNEL))
 			finish();
-		else
-			super.onBackPressed();
+		else {
+			// On Android, when the user presses back button, the Activity is destroyed and will be
+			// recreated when the user relaunches the app.
+			// We do not want that behaviour, instead then the back button is pressed, the app will
+			// be **minimized**.
+			Intent startMain = new Intent(Intent.ACTION_MAIN);
+			startMain.addCategory(Intent.CATEGORY_HOME);
+			startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			startActivity(startMain);
+		}
 	}
 
 
