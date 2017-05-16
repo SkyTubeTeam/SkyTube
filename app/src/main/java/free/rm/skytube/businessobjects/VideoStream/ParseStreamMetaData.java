@@ -27,10 +27,6 @@ package free.rm.skytube.businessobjects.VideoStream;
 
 import android.util.Log;
 
-import org.json.JSONObject;
-import org.mozilla.javascript.Context;
-import org.mozilla.javascript.Function;
-import org.mozilla.javascript.ScriptableObject;
 import org.schabi.newpipe.extractor.NewPipe;
 import org.schabi.newpipe.extractor.StreamingService;
 import org.schabi.newpipe.extractor.stream_info.StreamExtractor;
