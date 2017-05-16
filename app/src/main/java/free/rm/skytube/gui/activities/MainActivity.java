@@ -63,19 +63,17 @@ import free.rm.skytube.gui.fragments.SearchVideoGridFragment;
  * Main activity (launcher).  This activity holds {@link free.rm.skytube.gui.fragments.VideosGridFragment}.
  */
 public class MainActivity extends AppCompatActivity implements MainActivityListener {
-	public static final String MAIN_FRAGMENT = "MainActivity.MainFragment";
-	public static final String CHANNEL_BROWSER_FRAGMENT = "MainActivity.ChannelBrowserFragment";
-	public static final String SEARCH_FRAGMENT = "MainActivity.SearchFragment";
+	@Bind(R.id.fragment_container)
+	private FrameLayout fragmentContainer;
+	private MainFragment mainFragment;
+	private SearchVideoGridFragment searchVideoGridFragment;
 
 	/** Set to true of the UpdatesCheckerTask has run; false otherwise. */
 	private static boolean updatesCheckerTaskRan = false;
 
-	@Bind(R.id.fragment_container)
-	FrameLayout fragmentContainer;
+	private static final String MAIN_FRAGMENT   = "MainActivity.MainFragment";
+	private static final String SEARCH_FRAGMENT = "MainActivity.SearchFragment";
 
-	MainFragment mainFragment;
-	ChannelBrowserFragment channelBrowserFragment;
-	SearchVideoGridFragment searchVideoGridFragment;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -91,7 +89,6 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 		if(fragmentContainer != null) {
 			if(savedInstanceState != null) {
 				mainFragment = (MainFragment)getSupportFragmentManager().getFragment(savedInstanceState, MAIN_FRAGMENT);
-				channelBrowserFragment = (ChannelBrowserFragment) getSupportFragmentManager().getFragment(savedInstanceState, CHANNEL_BROWSER_FRAGMENT);
 				searchVideoGridFragment = (SearchVideoGridFragment) getSupportFragmentManager().getFragment(savedInstanceState, SEARCH_FRAGMENT);
 			}
 
@@ -107,8 +104,6 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 	protected void onSaveInstanceState(Bundle outState) {
 		if(mainFragment != null)
 			getSupportFragmentManager().putFragment(outState, MAIN_FRAGMENT, mainFragment);
-		if(channelBrowserFragment != null && channelBrowserFragment.isVisible())
-			getSupportFragmentManager().putFragment(outState, CHANNEL_BROWSER_FRAGMENT, channelBrowserFragment);
 		if(searchVideoGridFragment != null && searchVideoGridFragment.isVisible())
 			getSupportFragmentManager().putFragment(outState, SEARCH_FRAGMENT, searchVideoGridFragment);
 		super.onSaveInstanceState(outState);
@@ -273,6 +268,10 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 	////////////////////////////////////////////////////////////////////////////////////////////////
 
 
+	/**
+	 * A task that will check if any SkyTube updates have been published.  If there are, then the
+	 * user will be notified.
+	 */
 	private class UpdatesCheckerTask extends AsyncTaskParallel<Void, Void, UpdatesChecker> {
 
 		@Override
