@@ -31,7 +31,8 @@ import free.rm.skytube.gui.app.SkyTubeApp;
 public class YouTubeAPIKey {
 
 	/** User's YouTube API key which is inputted via the
-	 * {@link free.rm.skytube.gui.fragments.PreferencesFragment}. **/
+	 * {@link free.rm.skytube.gui.fragments.PreferencesFragment}.  Will be null if the user did not
+	 * input a key. **/
 	private String userAPIKey;
 	private Random random = new Random();
 
@@ -39,9 +40,11 @@ public class YouTubeAPIKey {
 	private static final String TAG = YouTubeAPIKey.class.getSimpleName();
 
 
-
+	/**
+	 * Constructor.  Will retrieve user's YouTube API key if set.
+	 */
 	private YouTubeAPIKey() {
-		userAPIKey = SkyTubeApp.getUserApiKey();
+		userAPIKey = getUserApiKey();
 	}
 
 
@@ -78,15 +81,29 @@ public class YouTubeAPIKey {
 	}
 
 
-	////////////////////////////////////////
-
-
 	/**
 	 * @return True if the user has set his own YouTube API key (via the
 	 * {@link free.rm.skytube.gui.fragments.PreferencesFragment}); false otherwise.
 	 */
-	private boolean isUserApiKeySet() {
+	public boolean isUserApiKeySet() {
 		return (userAPIKey != null);
+	}
+
+
+	/**
+	 * @return User's YouTube API key (if set).  If the user did not set a key, then it will return null.
+	 */
+	private String getUserApiKey() {
+		String userApiKey = SkyTubeApp.getPreferenceManager().getString(SkyTubeApp.getStr(R.string.pref_youtube_api_key), null);
+
+		if (userApiKey != null) {
+			userApiKey = userApiKey.trim();
+
+			if (userApiKey.isEmpty())
+				userApiKey = null;
+		}
+
+		return userApiKey;
 	}
 
 }

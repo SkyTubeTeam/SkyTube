@@ -40,9 +40,7 @@ public class GetChannelVideos extends GetYouTubeVideos implements GetChannelVide
 
 	@Override
 	public void init() throws IOException {
-		String  userApiKey = SkyTubeApp.getUserApiKey();
-
-		if (userApiKey != null) {
+		if (YouTubeAPIKey.get().isUserApiKeySet()) {
 			getChannelVideos = new GetChannelVideosFull();
 			Log.d(TAG, "Using GetChannelVideosFull...");
 		} else {

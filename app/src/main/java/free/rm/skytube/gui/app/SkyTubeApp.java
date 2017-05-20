@@ -117,21 +117,4 @@ public class SkyTubeApp extends MultiDexApplication {
 		getContext().startActivity(i);
 	}
 
-
-	/**
-	 * @return User's YouTube API key (if set).  If the user did not set a key, then it will return null.
-	 */
-	public static String getUserApiKey() {
-		String userApiKey = getPreferenceManager().getString(SkyTubeApp.getStr(R.string.pref_youtube_api_key), null);
-
-		if (userApiKey != null) {
-			userApiKey = userApiKey.trim();
-
-			if (userApiKey.isEmpty())
-				userApiKey = null;
-		}
-
-		return userApiKey;
-	}
-
 }
