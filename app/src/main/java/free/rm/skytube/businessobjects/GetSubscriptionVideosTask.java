@@ -35,12 +35,16 @@ import free.rm.skytube.gui.businessobjects.SubscriptionsFragmentListener;
 
 import static free.rm.skytube.gui.app.SkyTubeApp.getContext;
 
+/**
+ * A task that returns the videos of channel the user has subscribed too.  Used to detect if new
+ * videos have been published since last time the user used the app.
+ */
 public class GetSubscriptionVideosTask extends AsyncTaskParallel<Void, Void, Void> {
 	private List<GetChannelVideosTask> tasks = new ArrayList<>();
 	private SubscriptionsFragmentListener listener;
 	private int numTasksLeft = 0;
 	private int numTasksFinished = 0;
-	boolean foundVideos = false;
+
 
 	public GetSubscriptionVideosTask(SubscriptionsFragmentListener listener) {
 		this.listener = listener;
@@ -116,7 +120,6 @@ public class GetSubscriptionVideosTask extends AsyncTaskParallel<Void, Void, Voi
 			}
 
 			if(videos != null) {
-				foundVideos = true;
 				for (YouTubeVideo video : videos)
 					channel.addYouTubeVideo(video);
 				SubscriptionsDb.getSubscriptionsDb().saveChannelVideos(channel);

@@ -1,6 +1,6 @@
 /*
  * SkyTube
- * Copyright (C) 2016  Ramon Mifsud
+ * Copyright (C) 2017  Ramon Mifsud
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,14 +15,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package free.rm.skytube.gui.businessobjects;
+package free.rm.skytube.businessobjects;
 
-import free.rm.skytube.businessobjects.YouTubeChannel;
+import com.google.api.client.util.DateTime;
 
 /**
- * A listener that will be notified when a new YouTube video is published to a channel that the user
- * is subscribed to.
+ * Interface to be used by {@link GetChannelVideosFull} and {@link GetChannelVideosLite}.
  */
-public interface SubscriptionsFragmentListener {
-	void onChannelVideosFetched(YouTubeChannel channel, int videosFetched, boolean videosDeleted);
+public interface GetChannelVideosInterface {
+
+	/**
+	 * Used to retrieve channel videos published after the specified date.
+	 */
+	void setPublishedAfter(DateTime date);
+
 }

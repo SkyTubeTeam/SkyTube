@@ -26,7 +26,7 @@ import android.support.multidex.MultiDexApplication;
 import java.util.Arrays;
 import java.util.List;
 
-import free.rm.skytube.businessobjects.db.SubscriptionsDb;
+import free.rm.skytube.R;
 
 /**
  * SkyTube application.
@@ -115,6 +115,23 @@ public class SkyTubeApp extends MultiDexApplication {
 		i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		Runtime.getRuntime().exit(0);
 		getContext().startActivity(i);
+	}
+
+
+	/**
+	 * @return User's YouTube API key (if set).  If the user did not set a key, then it will return null.
+	 */
+	public static String getUserApiKey() {
+		String userApiKey = getPreferenceManager().getString(SkyTubeApp.getStr(R.string.pref_youtube_api_key), null);
+
+		if (userApiKey != null) {
+			userApiKey = userApiKey.trim();
+
+			if (userApiKey.isEmpty())
+				userApiKey = null;
+		}
+
+		return userApiKey;
 	}
 
 }

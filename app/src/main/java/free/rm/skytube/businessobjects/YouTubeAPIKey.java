@@ -41,7 +41,7 @@ public class YouTubeAPIKey {
 
 
 	private YouTubeAPIKey() {
-		userAPIKey = getUserApiKey();
+		userAPIKey = SkyTubeApp.getUserApiKey();
 	}
 
 
@@ -86,20 +86,7 @@ public class YouTubeAPIKey {
 	 * {@link free.rm.skytube.gui.fragments.PreferencesFragment}); false otherwise.
 	 */
 	private boolean isUserApiKeySet() {
-		return (userAPIKey != null && !userAPIKey.isEmpty());
-	}
-
-
-	/**
-	 * @return User's YouTube API key (if set).
-	 */
-	private String getUserApiKey() {
-		String userApiKey = SkyTubeApp.getPreferenceManager().getString(SkyTubeApp.getStr(R.string.pref_youtube_api_key), null);
-
-		if (userApiKey != null)
-			userApiKey = userApiKey.trim();
-
-		return userApiKey;
+		return (userAPIKey != null);
 	}
 
 }
