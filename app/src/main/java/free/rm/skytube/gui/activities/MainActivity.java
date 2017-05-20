@@ -64,7 +64,8 @@ import free.rm.skytube.gui.fragments.SearchVideoGridFragment;
  */
 public class MainActivity extends AppCompatActivity implements MainActivityListener {
 	@Bind(R.id.fragment_container)
-	private FrameLayout fragmentContainer;
+	protected FrameLayout fragmentContainer;
+
 	private MainFragment mainFragment;
 	private SearchVideoGridFragment searchVideoGridFragment;
 
