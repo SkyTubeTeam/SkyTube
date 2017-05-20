@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="subscriptions">Sottoscrizioni</string>
+	<string name="subscribe">Sottoscrivi</string>
+	<string name="unsubscribe">Annulla l\'iscrizione</string>
+	<string name="total_subscribers">%,d iscritti</string>
+
+	<string name="subscribed">Sottoscritto</string>
+	<string name="unsubscribed">Non sottoscritto</string>
+
+	<string name="error_get_subbed_channels">Si è verificato un errore durante l\'acquisizione dei canali sottoscritti.</string>
+	<string name="error_check_if_user_has_subbed">Impossibile verificare se l\'utente ha sottoscritto il canale (id=%s)</string>
+	<string name="error_unable_to_subscribe">Impossibile annullare l\'iscrizione al canale (id=%s)</string>
+</resources>
