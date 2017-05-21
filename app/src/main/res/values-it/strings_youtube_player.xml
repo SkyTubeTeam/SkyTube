@@ -6,6 +6,7 @@
 
 	<string name="error_video_play">Errore durante la riproduzione</string>
 	<string name="error_video_streams_empty">Il video %s non ha uno stream valido!</string>
+	<string name="error_video_streams">An error has occurred while retrieving video\'s streams.</string>
 	<string name="error_get_video_desc">Si è verificato un errore durante il recupero della descrizione del video.</string>
 	<string name="error_invalid_url">URL video non valido: %s</string>
 
