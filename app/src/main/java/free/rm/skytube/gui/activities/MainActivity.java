@@ -20,12 +20,14 @@ package free.rm.skytube.gui.activities;
 import android.app.ProgressDialog;
 import android.content.ClipDescription;
 import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.FileProvider;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -304,6 +306,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 	}
 
 
+
 	/**
 	 * This task will download the remote APK file and it will install it for the user (provided that
 	 * the user accepts such installation).
@@ -358,9 +361,9 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 		 * @throws IOException
 		 */
 		private File downloadApk() throws IOException {
-			WebStream webStream = new WebStream(this.apkUrl);
+			WebStream       webStream = new WebStream(this.apkUrl);
 			File			apkFile = File.createTempFile("skytube-upgrade", ".apk", getCacheDir());
-			OutputStream out;
+			OutputStream    out;
 
 			// set the APK file to readable to every user so that this file can be read by Android's
 			// package manager program
@@ -419,9 +422,12 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 		 * @param apkFile	APK file to install.
 		 */
 		private void displayUpgradeAppDialog(File apkFile) {
-			Intent intent = new Intent(Intent.ACTION_VIEW);
-			intent.setDataAndType(Uri.fromFile(apkFile), "application/vnd.android.package-archive");
-			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);	// asks the user to open the newly updated app
+			Context context = getBaseContext();
+			Uri     apkFileURI = FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", apkFile);  // we now need URI due to security changes in Android 7.0+
+			Intent  intent = new Intent(Intent.ACTION_VIEW);
+
+			intent.setDataAndType(apkFileURI, "application/vnd.android.package-archive");
+			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK /* asks the user to open the newly updated app */ | Intent.FLAG_GRANT_READ_URI_PERMISSION /* to avoid a crash due to security changes in Android 7.0+ */);
 			startActivity(intent);
 		}
 

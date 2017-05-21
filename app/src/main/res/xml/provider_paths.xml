@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+	Create in order for the app to be able to update its self.  The below shows that we are going
+	to use app's internal cache (which is used to download the apk).
+
+	This was create due to the security changes in Android 7.0+
+-->
+<paths>
+	<cache-path name="cache_files" path="." />
+</paths>
