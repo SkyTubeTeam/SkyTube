@@ -453,7 +453,9 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 		 */
 		private void displayUpgradeAppDialog(File apkFile) {
 			Context context = getBaseContext();
-			Uri     apkFileURI = FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", apkFile);  // we now need URI due to security changes in Android 7.0+
+			Uri     apkFileURI = (android.os.Build.VERSION.SDK_INT >= 24)
+						? FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", apkFile)  // we now need to call FileProvider.getUriForFile() due to security changes in Android 7.0+
+						: Uri.fromFile(apkFile);
 			Intent  intent = new Intent(Intent.ACTION_VIEW);
 
 			intent.setDataAndType(apkFileURI, "application/vnd.android.package-archive");
