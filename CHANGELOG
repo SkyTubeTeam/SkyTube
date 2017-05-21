@@ -1,3 +1,15 @@
+v2.50 - 21 May 2017:
+	* App is now using NewPipeExtractor library to retrieve video streams' URLs.  In turn, this
+	  fixed #7.
+	* Fixed app auto-updater bug for Android 7.0+
+	* Added Italian translations.
+	* Added Portuguese translations.
+	* Updated Spanish translations.
+	* Fixed bug #94 and #111:  App crashed when the user presses the back button while on the Main
+	  Activity.
+	* Fixed a bug which caused the app to crash when the YouTube's API quota is reached.
+	* Other minor bug fixes.
+
 v2.41 - 23 Apr 2017:
 	* This version was released mainly because of F-Fdroid's version 2.4(0) did not include the
 	  following fix (d3a0bab): App used to crash when the MainFragment is rotated.
