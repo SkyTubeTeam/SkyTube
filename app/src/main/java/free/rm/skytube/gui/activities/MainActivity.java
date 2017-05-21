@@ -44,6 +44,7 @@ import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URL;
@@ -316,6 +317,8 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 		private URL apkUrl;
 		private ProgressDialog downloadDialog;
 
+		/** The directory where the apks are downloaded to. */
+		private final File apkDir = getCacheDir();
 		private final String TAG = UpgradeAppTask.class.getSimpleName();
 
 
@@ -342,6 +345,9 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 			File		apkFile;
 			Throwable	exception = null;
 
+			// delete old apk files
+			deleteOldApkFiles();
+
 			// try to download the remote APK file
 			try {
 				apkFile = downloadApk();
@@ -355,6 +361,30 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 
 
 		/**
+		 * Delete old (previously-downloaded) APK files.
+		 */
+		private void deleteOldApkFiles() {
+			// get all previously downloaded APK files
+			File[] apkFiles = apkDir.listFiles(new FilenameFilter() {
+				public boolean accept(File dir, String filename) {
+					return filename.endsWith(".apk");
+				}
+			} );
+
+			// delete the previously downloaded APK files
+			if (apkFiles != null) {
+				for (File apkFile : apkFiles) {
+					if (apkFile.delete()) {
+						Log.i(TAG, "Deleted " + apkFile.getAbsolutePath());
+					} else {
+						Log.e(TAG, "Cannot delete " + apkFile.getAbsolutePath());
+					}
+				}
+			}
+		}
+
+
+		/**
 		 * Download the remote APK file and return an instance of {@link File}.
 		 *
 		 * @return	A {@link File} instance of the downloaded APK.
@@ -362,7 +392,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 		 */
 		private File downloadApk() throws IOException {
 			WebStream       webStream = new WebStream(this.apkUrl);
-			File			apkFile = File.createTempFile("skytube-upgrade", ".apk", getCacheDir());
+			File			apkFile = File.createTempFile("skytube-upgrade", ".apk", apkDir);
 			OutputStream    out;
 
 			// set the APK file to readable to every user so that this file can be read by Android's
@@ -427,7 +457,8 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 			Intent  intent = new Intent(Intent.ACTION_VIEW);
 
 			intent.setDataAndType(apkFileURI, "application/vnd.android.package-archive");
-			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK /* asks the user to open the newly updated app */ | Intent.FLAG_GRANT_READ_URI_PERMISSION /* to avoid a crash due to security changes in Android 7.0+ */);
+			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK /* asks the user to open the newly updated app */
+							| Intent.FLAG_GRANT_READ_URI_PERMISSION /* to avoid a crash due to security changes in Android 7.0+ */);
 			startActivity(intent);
 		}
 
