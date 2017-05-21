@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="bookmarks">Segnalibri</string>
+
+	<string name="bookmark">Segnalibro</string>
+	<string name="video_bookmarked">Video aggiunto ai segnalibri</string>
+	<string name="video_bookmarked_error">Impossibile aggiungere segnalibro.</string>
+
+	<string name="unbookmark">Elimina segnalibro</string>
+	<string name="video_unbookmarked">Video eliminato dai segnalibri</string>
+	<string name="video_unbookmarked_error">Impossibile eliminare il segnalibro.</string>
+
+	<string name="no_bookmarked_videos_text">Non hai ancora nessun segnalibro.\n\nPuoi aggiungerne di nuovi e verranno visualizzati qui.</string>
+</resources>
