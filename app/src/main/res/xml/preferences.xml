@@ -39,6 +39,12 @@
 			android:title="@string/pref_title_use_offical_player"
 			android:summary="@string/pref_summary_use_offical_player"
 			android:defaultValue="false" />
+		<ListPreference
+			android:key="@string/pref_key_screen_orientation"
+			android:title="@string/pref_title_screen_orientation"
+			android:summary="@string/pref_summary_screen_orientation"
+			android:entries="@array/screen_orientations"
+			android:entryValues="@array/screen_orientations_values" />
 	</PreferenceCategory>
 
 	<!--
