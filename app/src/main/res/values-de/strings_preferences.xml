@@ -414,6 +414,26 @@
 		<item>3</item>
 	</string-array>
 
+	<string name="pref_key_screen_orientation">pref_key_screen_orientation</string>
+	<string name="pref_title_screen_orientation">Bildschirmausrichtung</string>
+	<string name="pref_summary_screen_orientation">Drehung des Videos</string>
+	<string name="pref_screen_landscape">Landscape</string>
+	<string name="pref_screen_portrait">Portrait</string>
+	<string name="pref_screen_auto">Automatisch</string>
+	<string name="pref_screen_sensor">Gerätsensor</string>
+	<string-array name="screen_orientations">
+		<item>@string/pref_screen_auto</item>
+		<item>@string/pref_screen_landscape</item>
+		<item>@string/pref_screen_portrait</item>
+		<item>@string/pref_screen_sensor</item>
+	</string-array>
+	<string-array name="screen_orientations_values">
+		<item>auto</item>
+		<item>landscape</item>
+		<item>portrait</item>
+		<item>sensor</item>
+	</string-array>
+
 	<string name="pref_youtube_api_key">pref_youtube_api_key</string>
 	<string name="pref_title_youtube_api_key">YouTube API Key</string>
 	<string name="pref_summary_youtube_api_key">Enter your own YouTube Data API Key.  Leave blank to use the default one.</string>
