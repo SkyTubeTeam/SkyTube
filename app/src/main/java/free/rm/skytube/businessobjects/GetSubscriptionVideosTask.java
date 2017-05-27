@@ -30,10 +30,10 @@ import java.util.List;
 
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
-import free.rm.skytube.gui.app.SkyTubeApp;
+import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.gui.businessobjects.SubscriptionsFragmentListener;
 
-import static free.rm.skytube.gui.app.SkyTubeApp.getContext;
+import static free.rm.skytube.app.SkyTubeApp.getContext;
 
 /**
  * A task that returns the videos of channel the user has subscribed too.  Used to detect if new

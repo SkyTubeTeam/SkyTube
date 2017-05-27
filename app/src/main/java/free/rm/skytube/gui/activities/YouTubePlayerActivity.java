@@ -20,12 +20,9 @@ package free.rm.skytube.gui.activities;
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
 
 import free.rm.skytube.R;
-import free.rm.skytube.gui.app.SkyTubeApp;
+import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.gui.businessobjects.BackButtonActivity;
 
 /**

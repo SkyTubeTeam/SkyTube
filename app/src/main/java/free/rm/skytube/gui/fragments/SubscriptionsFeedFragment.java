@@ -36,7 +36,7 @@ import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.businessobjects.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTubeVideo;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
-import free.rm.skytube.gui.app.SkyTubeApp;
+import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.gui.businessobjects.SubsAdapter;
 import free.rm.skytube.gui.businessobjects.SubscriptionsFragmentListener;
 

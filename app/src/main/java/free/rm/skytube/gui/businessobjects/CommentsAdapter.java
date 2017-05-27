@@ -38,7 +38,7 @@ import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.GetCommentThreads;
 import free.rm.skytube.businessobjects.YouTubeComment;
 import free.rm.skytube.businessobjects.YouTubeCommentThread;
-import free.rm.skytube.gui.app.SkyTubeApp;
+import free.rm.skytube.app.SkyTubeApp;
 
 /**
  * An adapter that will display comments in an {@link ExpandableListView}.

@@ -43,7 +43,7 @@ import free.rm.skytube.businessobjects.db.BookmarksDb;
 import free.rm.skytube.businessobjects.db.CheckIfUserSubbedToChannelTask;
 import free.rm.skytube.businessobjects.db.SubscribeToChannelTask;
 import free.rm.skytube.gui.activities.FragmentHolderActivity;
-import free.rm.skytube.gui.app.SkyTubeApp;
+import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.gui.businessobjects.CommentsAdapter;
 import free.rm.skytube.gui.businessobjects.FragmentEx;
 import free.rm.skytube.gui.businessobjects.MediaControllerEx;

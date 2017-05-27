@@ -22,7 +22,7 @@ import android.util.Log;
 import java.util.ArrayList;
 
 import free.rm.skytube.R;
-import free.rm.skytube.gui.app.SkyTubeApp;
+import free.rm.skytube.app.SkyTubeApp;
 
 /**
  * A list of {@link StreamMetaData}.

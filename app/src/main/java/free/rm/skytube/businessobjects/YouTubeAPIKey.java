@@ -23,7 +23,7 @@ import java.util.Random;
 
 import free.rm.skytube.BuildConfig;
 import free.rm.skytube.R;
-import free.rm.skytube.gui.app.SkyTubeApp;
+import free.rm.skytube.app.SkyTubeApp;
 
 /**
  * Represents a YouTube API key.

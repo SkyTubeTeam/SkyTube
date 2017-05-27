@@ -37,7 +37,7 @@ import java.util.regex.Pattern;
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.VideoStream.ParseStreamMetaData;
 import free.rm.skytube.businessobjects.VideoStream.StreamMetaDataList;
-import free.rm.skytube.gui.app.SkyTubeApp;
+import free.rm.skytube.app.SkyTubeApp;
 
 /**
  * Represents a YouTube video.
