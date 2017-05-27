@@ -43,6 +43,11 @@ public class StreamMetaDataList extends ArrayList<StreamMetaData> {
 	}
 
 
+	public StreamMetaDataList(String errorMessage) {
+		this.errorMessage = errorMessage;
+	}
+
+
 
 	/**
 	 * Returns the stream desired by the user (if possible).  The desired stream is defined in the
