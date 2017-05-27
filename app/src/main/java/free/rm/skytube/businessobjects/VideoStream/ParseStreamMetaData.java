@@ -69,7 +69,7 @@ public class ParseStreamMetaData {
 
 		try {
 			StreamingService youtube = NewPipe.getService("Youtube");
-			StreamExtractor extractor = youtube.getExtractorInstance(youtubeVideoUrl);
+			StreamExtractor  extractor = youtube.getExtractorInstance(youtubeVideoUrl);
 
 			// actual extraction
 			StreamInfo streamInfo = StreamInfo.getVideoInfo(extractor);
@@ -84,8 +84,10 @@ public class ParseStreamMetaData {
 			for(VideoStream stream : streamInfo.video_streams) {
 				list.add( new StreamMetaData(stream) );
 			}
+		} catch (StreamExtractor.ContentNotAvailableException exception) {
+			list = new StreamMetaDataList(exception.getMessage());
 		} catch (Throwable tr) {
-			Log.e(TAG, "An error has occurred while getting streams metadata.  URL="+this.youtubeVideoUrl, tr);
+			Log.e(TAG, "An error has occurred while getting streams metadata.  URL=" + this.youtubeVideoUrl, tr);
 			list = new StreamMetaDataList(R.string.error_video_streams);
 		}
 
