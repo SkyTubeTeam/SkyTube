@@ -26,8 +26,6 @@ import com.google.api.services.youtube.model.VideoListResponse;
 import java.io.IOException;
 import java.util.List;
 
-import free.rm.skytube.gui.app.SkyTubeApp;
-
 /**
  * Get today's featured YouTube videos.
  */

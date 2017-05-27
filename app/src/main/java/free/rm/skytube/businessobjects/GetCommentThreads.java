@@ -27,8 +27,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import free.rm.skytube.gui.app.SkyTubeApp;
-
 /**
  * Queries the YouTube service and gets the comments of a video.
  */

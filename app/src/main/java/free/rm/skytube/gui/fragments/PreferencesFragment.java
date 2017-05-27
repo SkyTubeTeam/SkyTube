@@ -37,7 +37,7 @@ import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.ValidateYouTubeAPIKey;
 import free.rm.skytube.businessobjects.VideoStream.VideoResolution;
-import free.rm.skytube.gui.app.SkyTubeApp;
+import free.rm.skytube.app.SkyTubeApp;
 
 /**
  * A fragment that allows the user to change the settings of this app.  This fragment is called by

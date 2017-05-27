@@ -22,7 +22,7 @@ import android.widget.Toast;
 
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.YouTubeChannel;
-import free.rm.skytube.gui.app.SkyTubeApp;
+import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.gui.businessobjects.SubsAdapter;
 import free.rm.skytube.gui.businessobjects.SubscribeButton;
 

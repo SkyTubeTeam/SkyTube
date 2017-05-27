@@ -24,8 +24,6 @@ import com.google.api.client.util.DateTime;
 import java.io.IOException;
 import java.util.List;
 
-import free.rm.skytube.gui.app.SkyTubeApp;
-
 /**
  * Returns the videos of a channel.  The channel is specified by calling {@link #setQuery(String)}.
  *
