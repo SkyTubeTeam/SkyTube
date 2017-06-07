@@ -69,6 +69,7 @@ dependencies {
     compile 'com.afollestad.material-dialogs:core:0.9.0.2'
 
     compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:support-v13:25.3.1'
     compile 'com.android.support:design:25.3.1'
     compile 'com.android.support:multidex:1.0.1'    // this is as we have over 65536 lines of code...
 }

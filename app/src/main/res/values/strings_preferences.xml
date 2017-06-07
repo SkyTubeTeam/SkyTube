@@ -20,6 +20,17 @@
 	<string name="pref_key_use_offical_player">pref_use_official_youtube_player</string>
 	<string name="pref_summary_use_offical_player">Not recommended</string>
 
+	<string name="pref_db_category">Databases</string>
+	<string name="pref_title_export_dbs">Backup Databases</string>
+	<string name="pref_key_export_dbs">pref_key_export_db</string>
+	<string name="pref_summary_export_dbs">Backup your subscriptions and bookmarks databases.</string>
+	<string name="pref_title_import_dbs">Import Backup</string>
+	<string name="pref_key_import_dbs">pref_key_import_db</string>
+	<string name="pref_summary_import_dbs">Import your subscriptions and bookmarks databases backup.</string>
+	<string name="databases_backing_up">Backing up&amp;</string>
+	<string name="databases_export_success">Databases backed up to %s</string>
+	<string name="databases_export_fail">Failed to backup your databases.</string>
+
 	<string name="pref_about_category">About</string>
 	<string name="pref_title_website">Website</string>
 	<string name="pref_key_website">pref_website</string>

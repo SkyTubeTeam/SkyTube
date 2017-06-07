@@ -65,6 +65,18 @@ public class SubscriptionsDb extends SQLiteOpenHelper {
 
 
 	@Override
+	public synchronized void close() {
+		super.close();
+		subscriptionsDb = null;
+	}
+
+
+	public String getDatabasePath() {
+		return SkyTubeApp.getContext().getDatabasePath(DATABASE_NAME).getPath();
+	}
+
+
+	@Override
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL(SubscriptionsTable.getCreateStatement());
 		db.execSQL(SubscriptionsVideosTable.getCreateStatement());

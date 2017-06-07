@@ -29,8 +29,8 @@ import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
 import java.util.List;
 
-import free.rm.skytube.businessobjects.YouTubeVideo;
 import free.rm.skytube.app.SkyTubeApp;
+import free.rm.skytube.businessobjects.YouTubeVideo;
 
 /**
  * A database (DB) that stores user's bookmarked videos.
@@ -56,6 +56,18 @@ public class BookmarksDb extends SQLiteOpenHelper {
 		}
 
 		return bookmarksDb;
+	}
+
+
+	@Override
+	public synchronized void close() {
+		super.close();
+		bookmarksDb = null;
+	}
+
+
+	public String getDatabasePath() {
+		return SkyTubeApp.getContext().getDatabasePath(DATABASE_NAME).getPath();
 	}
 
 

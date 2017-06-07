@@ -48,6 +48,21 @@
 	</PreferenceCategory>
 
 	<!--
+		Database Category
+	 -->
+	<PreferenceCategory
+		android:title="@string/pref_db_category">
+		<PreferenceScreen
+			android:key="@string/pref_key_export_dbs"
+			android:title="@string/pref_title_export_dbs"
+			android:summary="@string/pref_summary_export_dbs"/>
+		<PreferenceScreen
+			android:key="@string/pref_key_import_dbs"
+			android:title="@string/pref_title_import_dbs"
+			android:summary="@string/pref_summary_import_dbs"/>
+	</PreferenceCategory>
+
+	<!--
 		Other Category
 	-->
 	<PreferenceCategory

@@ -17,10 +17,13 @@
 
 package free.rm.skytube.gui.fragments;
 
+import android.Manifest;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
@@ -28,16 +31,21 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
+import android.support.annotation.NonNull;
+import android.support.v13.app.FragmentCompat;
+import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
 
 import free.rm.skytube.BuildConfig;
 import free.rm.skytube.R;
+import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.ValidateYouTubeAPIKey;
 import free.rm.skytube.businessobjects.VideoStream.VideoResolution;
-import free.rm.skytube.app.SkyTubeApp;
+import free.rm.skytube.gui.businessobjects.preferences.BackupDatabases;
 
 /**
  * A fragment that allows the user to change the settings of this app.  This fragment is called by
@@ -46,6 +54,7 @@ import free.rm.skytube.app.SkyTubeApp;
 public class PreferencesFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
 
 	private static final String TAG = PreferencesFragment.class.getSimpleName();
+	private static final int    PERMISSION_WRITE_EXTERNAL = 1950;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -54,22 +63,34 @@ public class PreferencesFragment extends PreferenceFragment implements SharedPre
 		// load the preferences from an XML resource
 		addPreferencesFromResource(R.xml.preferences);
 
-		ListPreference resolutionPref = (ListPreference) findPreference(getString(R.string.pref_key_preferred_res));
+		// preferred resolution
+		ListPreference resolutionPref = (ListPreference) findPreference(R.string.pref_key_preferred_res);
 		resolutionPref.setEntries(VideoResolution.getAllVideoResolutionsNames());
 		resolutionPref.setEntryValues(VideoResolution.getAllVideoResolutionsIds());
 
-		// if the user clicks on the license, then open the display the actual license
-		Preference licensePref = findPreference(getString(R.string.pref_key_license));
-		licensePref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+		// export database
+		Preference exportDbPref = findPreference(R.string.pref_key_export_dbs);
+		exportDbPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 			@Override
 			public boolean onPreferenceClick(Preference preference) {
-				displayAppLicense();
+				askForExternalStoragePermission();
 				return true;
 			}
 		});
 
+		// default tab
+		ListPreference defaultTabPref = (ListPreference)findPreference(R.string.pref_key_default_tab);
+		if (defaultTabPref.getValue() == null) {
+			defaultTabPref.setValueIndex(0);
+		}
+		defaultTabPref.setSummary(String.format(getString(R.string.pref_summary_default_tab), defaultTabPref.getEntry()));
+
+		// set the app's version number
+		Preference versionPref = findPreference(R.string.pref_key_version);
+		versionPref.setSummary(BuildConfig.VERSION_NAME);
+
 		// if the user clicks on the website link, then open it using an external browser
-		Preference websitePref = findPreference(getString(R.string.pref_key_website));
+		Preference websitePref = findPreference(R.string.pref_key_website);
 		websitePref.setSummary(BuildConfig.SKYTUBE_WEBSITE);
 		websitePref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 			@Override
@@ -81,19 +102,8 @@ public class PreferencesFragment extends PreferenceFragment implements SharedPre
 			}
 		});
 
-		// remove the 'use official player' checkbox if we are running an OSS version
-		if (BuildConfig.FLAVOR.equals("oss")) {
-			PreferenceCategory videoPlayerCategory = (PreferenceCategory) findPreference(getString(R.string.pref_key_video_player_category));
-			Preference useOfficialPlayer = findPreference(getString(R.string.pref_key_use_offical_player));
-			videoPlayerCategory.removePreference(useOfficialPlayer);
-		}
-
-		// set the app's version number
-		Preference versionPref = findPreference(getString(R.string.pref_key_version));
-		versionPref.setSummary(BuildConfig.VERSION_NAME);
-
 		// credits
-		Preference creditsPref = findPreference(getString(R.string.pref_key_credits));
+		Preference creditsPref = findPreference(R.string.pref_key_credits);
 		creditsPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 			@Override
 			public boolean onPreferenceClick(Preference preference) {
@@ -102,12 +112,33 @@ public class PreferencesFragment extends PreferenceFragment implements SharedPre
 			}
 		});
 
-		// Default tab
-		ListPreference defaultTabPref = (ListPreference)findPreference(getString(R.string.pref_key_default_tab));
-		if (defaultTabPref.getValue() == null) {
-			defaultTabPref.setValueIndex(0);
+		// if the user clicks on the license, then open the display the actual license
+		Preference licensePref = findPreference(R.string.pref_key_license);
+		licensePref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+			@Override
+			public boolean onPreferenceClick(Preference preference) {
+				displayAppLicense();
+				return true;
+			}
+		});
+
+		// remove the 'use official player' checkbox if we are running an OSS version
+		if (BuildConfig.FLAVOR.equals("oss")) {
+			PreferenceCategory videoPlayerCategory = (PreferenceCategory) findPreference(R.string.pref_key_video_player_category);
+			Preference useOfficialPlayer = findPreference(R.string.pref_key_use_offical_player);
+			videoPlayerCategory.removePreference(useOfficialPlayer);
 		}
-		defaultTabPref.setSummary(String.format(getString(R.string.pref_summary_default_tab), defaultTabPref.getEntry()));
+	}
+
+
+	/**
+	 * Finds a {@link Preference} based on its key.
+	 *
+	 * @param keyStringResId The key of the preference to retrieve.
+	 * @return The {@link Preference} with the key, or null.
+	 */
+	public Preference findPreference(int keyStringResId) {
+		return findPreference(getString(keyStringResId));
 	}
 
 	@Override
@@ -201,6 +232,44 @@ public class PreferencesFragment extends PreferenceFragment implements SharedPre
 	}
 
 
+	/**
+	 * Check if the user has given the app access to the external storage.  If he has, then backup
+	 * the databases.  Else, ask the user to give us permission...
+	 */
+	private void askForExternalStoragePermission() {
+		if (ContextCompat.checkSelfPermission(getActivity(),
+				Manifest.permission.WRITE_EXTERNAL_STORAGE)
+				!= PackageManager.PERMISSION_GRANTED) {
+
+			// Ask the user to allow the app to use the External Storage.  The result of the user's
+			// choice will be passed to onRequestPermissionsResult()
+			FragmentCompat.requestPermissions(this,
+					new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+					PERMISSION_WRITE_EXTERNAL);
+		} else {
+			new BackupDatabasesTask().executeInParallel();
+		}
+	}
+
+	@Override
+	public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+		switch (requestCode) {
+			case PERMISSION_WRITE_EXTERNAL: {
+				// If request is cancelled, the result arrays are empty.
+				if (grantResults.length > 0  &&  grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+					// permission was granted:  now export/backup the database
+					new BackupDatabasesTask().executeInParallel();
+				} else {
+					// permission denied by the user...
+					Toast.makeText(getActivity(), R.string.databases_export_fail, Toast.LENGTH_LONG).show();
+				}
+				break;
+			}
+		}
+
+	}
+
+
 	////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -239,6 +308,63 @@ public class PreferencesFragment extends PreferenceFragment implements SharedPre
 			if (!isKeyValid) {
 				Toast.makeText(getActivity(), getString(R.string.pref_youtube_api_key_error), Toast.LENGTH_LONG).show();
 			}
+		}
+
+	}
+
+
+	/**
+	 * Backsup the subscriptions and bookmarks databases.
+	 */
+	private class BackupDatabasesTask extends AsyncTaskParallel<Void, Void, String> {
+
+		private ProgressDialog exportDbsDialog;
+		private final String TAG = BackupDatabasesTask.class.getSimpleName();
+
+		@Override
+		protected void onPreExecute() {
+			// setup the backup dialog and display it
+			exportDbsDialog = new ProgressDialog(PreferencesFragment.this.getActivity());
+			exportDbsDialog.setMessage(getString(R.string.databases_backing_up));
+			exportDbsDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+			exportDbsDialog.setCancelable(false);
+			exportDbsDialog.show();
+		}
+
+
+		@Override
+		protected String doInBackground(Void... params) {
+			String backupPath = null;
+
+			try {
+				BackupDatabases backupDatabases = new BackupDatabases();
+				backupPath = backupDatabases.backupDbsToSdCard();
+			} catch (Throwable tr) {
+				Log.e(TAG, "An error has occurred while backing up the DBs", tr);
+			}
+
+			return backupPath;
+		}
+
+
+		@Override
+		protected void onPostExecute(String backupPath) {
+			exportDbsDialog.dismiss();
+
+			String backupStatusMsg;
+
+			// generate a message whether the backup was successful or not
+			if (backupPath != null) {
+				backupStatusMsg = String.format(getString(R.string.databases_export_success), backupPath);
+			} else {
+				backupStatusMsg = getString(R.string.databases_export_fail);
+			}
+
+			// display the backup success/failure message to the user
+			new AlertDialog.Builder(getActivity())
+					.setMessage(backupStatusMsg)
+					.setPositiveButton(R.string.ok, null)
+					.show();
 		}
 
 	}
