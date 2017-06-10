@@ -17,10 +17,12 @@
 
 package free.rm.skytube.gui.fragments;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
@@ -28,16 +30,21 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
+import android.support.annotation.NonNull;
+import android.support.v13.app.FragmentCompat;
+import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
 
 import free.rm.skytube.BuildConfig;
 import free.rm.skytube.R;
+import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.ValidateYouTubeAPIKey;
 import free.rm.skytube.businessobjects.VideoStream.VideoResolution;
-import free.rm.skytube.app.SkyTubeApp;
+import free.rm.skytube.gui.businessobjects.preferences.BackupDatabases;
 
 /**
  * A fragment that allows the user to change the settings of this app.  This fragment is called by
@@ -46,6 +53,7 @@ import free.rm.skytube.app.SkyTubeApp;
 public class PreferencesFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
 
 	private static final String TAG = PreferencesFragment.class.getSimpleName();
+	private static final int    EXT_STORAGE_PERM_CODE = 1950;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -57,6 +65,16 @@ public class PreferencesFragment extends PreferenceFragment implements SharedPre
 		ListPreference resolutionPref = (ListPreference) findPreference(getString(R.string.pref_key_preferred_res));
 		resolutionPref.setEntries(VideoResolution.getAllVideoResolutionsNames());
 		resolutionPref.setEntryValues(VideoResolution.getAllVideoResolutionsIds());
+
+		Preference backupDbsPref = findPreference(getString(R.string.pref_key_backup_dbs));
+		backupDbsPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+			@Override
+			public boolean onPreferenceClick(Preference preference) {
+				//
+				checkIfAppHasAccessToExtStorage();
+				return true;
+			}
+		});
 
 		// if the user clicks on the license, then open the display the actual license
 		Preference licensePref = findPreference(getString(R.string.pref_key_license));
@@ -153,6 +171,39 @@ public class PreferencesFragment extends PreferenceFragment implements SharedPre
 
 
 	/**
+	 * Check if the app has access to the external storage.  If not, ask the user whether he wants
+	 * to give us access...
+	 */
+	private void checkIfAppHasAccessToExtStorage() {
+		// if the user has not yet granted us access to the external storage...
+		if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+			// We can request the permission (to the users).  If the user grants us access (or
+			// otherwise), then the method #onRequestPermissionsResult() will be called.
+			FragmentCompat.requestPermissions(this,
+					new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+					EXT_STORAGE_PERM_CODE);
+		} else {
+			// the user has previously granted access to the external storage
+			new BackupDatabasesTask().executeInParallel();
+		}
+	}
+
+
+	@Override
+	public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+		if (requestCode == EXT_STORAGE_PERM_CODE) {
+			if (grantResults.length > 0  &&  grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+				// permission was granted by the user
+				new BackupDatabasesTask().executeInParallel();
+			} else {
+				// permission denied by the user
+				Toast.makeText(getActivity(), R.string.databases_backup_fail, Toast.LENGTH_LONG).show();
+			}
+		}
+	}
+
+
+	/**
 	 * Display a dialog with message <code>messageID</code> and force the user to restart the app by
 	 * tapping on the restart button.
 	 *
@@ -241,6 +292,45 @@ public class PreferencesFragment extends PreferenceFragment implements SharedPre
 			}
 		}
 
+	}
+
+
+	/**
+	 * A task that backups the subscriptions and bookmarks databases.
+	 */
+	private class BackupDatabasesTask extends AsyncTaskParallel<Void, Void, String> {
+
+		@Override
+		protected void onPreExecute() {
+			Toast.makeText(getActivity(), R.string.databases_backing_up, Toast.LENGTH_SHORT).show();
+		}
+
+		@Override
+		protected String doInBackground(Void... params) {
+			String backupPath = null;
+
+			try {
+				BackupDatabases backupDatabases = new BackupDatabases();
+				backupPath = backupDatabases.backupDbsToSdCard();
+			} catch (Throwable tr) {
+				Log.e(TAG, "Unable to backup the databases...", tr);
+			}
+
+			return backupPath;
+		}
+
+
+		@Override
+		protected void onPostExecute(String backupPath) {
+			String message =  (backupPath != null)
+					? String.format(getString(R.string.databases_backup_success), backupPath)
+					: getString(R.string.databases_backup_fail);
+
+			new AlertDialog.Builder(getActivity())
+					.setMessage(message)
+					.setNeutralButton(R.string.ok, null)
+					.show();
+		}
 	}
 
 }

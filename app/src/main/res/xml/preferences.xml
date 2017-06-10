@@ -51,11 +51,11 @@
 		Database Category
 	 -->
 	<PreferenceCategory
-		android:title="@string/pref_db_category">
+		android:title="@string/pref_backup_category">
 		<PreferenceScreen
-			android:key="@string/pref_key_export_dbs"
-			android:title="@string/pref_title_export_dbs"
-			android:summary="@string/pref_summary_export_dbs"/>
+			android:key="@string/pref_key_backup_dbs"
+			android:title="@string/pref_title_backup_dbs"
+			android:summary="@string/pref_summary_backup_dbs"/>
 		<PreferenceScreen
 			android:key="@string/pref_key_import_dbs"
 			android:title="@string/pref_title_import_dbs"

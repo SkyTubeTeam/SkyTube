@@ -60,6 +60,18 @@ public class BookmarksDb extends SQLiteOpenHelper {
 
 
 	@Override
+	public synchronized void close() {
+		super.close();
+		bookmarksDb = null;
+	}
+
+
+	public String getDatabasePath() {
+		return SkyTubeApp.getContext().getDatabasePath(DATABASE_NAME).getPath();
+	}
+
+
+	@Override
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL(BookmarksTable.getCreateStatement());
 	}
