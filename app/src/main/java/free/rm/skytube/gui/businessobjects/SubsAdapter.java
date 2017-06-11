@@ -190,7 +190,7 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 		}
 
 		public void updateInfo(YouTubeChannel channel) {
-			Glide.with(getContext())
+			Glide.with(getContext().getApplicationContext())
 					.load(channel.getThumbnailNormalUrl())
 					.placeholder(R.drawable.channel_thumbnail_default)
 					.into(thumbnailImageView);
