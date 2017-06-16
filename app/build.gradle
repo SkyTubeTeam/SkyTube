@@ -18,6 +18,14 @@ android {
         buildConfigField 'String', 'SKYTUBE_WEBSITE',         '"http://skytube-app.com"'
         buildConfigField 'String', 'SKYTUBE_WEBSITE_CREDITS', '"http://skytube-app.com/credits.html"'
         buildConfigField 'String', 'SKYTUBE_UPDATES_URL',     '"https://api.github.com/repos/ram-on/SkyTube/releases/latest"'
+
+        // Set this in your gradle.properties file, to true or false, e.g.
+        // SKYTUBE_DELAY_AUTO_REFRESH=true
+        // If this is set to true, on debug builds the feed tab will not auto-refresh when the app is launched if it's been less
+        // than an hour since the last refresh (manual or auto). If set to false, it will always auto-refresh.
+        // Release builds will always delay auto refresh
+        buildConfigField 'boolean', 'SKYTUBE_DELAY_AUTO_REFRESH', SKYTUBE_DELAY_AUTO_REFRESH
+
         vectorDrawables.useSupportLibrary true
         multiDexEnabled true    // this is as we have over 65536 lines of code...
     }

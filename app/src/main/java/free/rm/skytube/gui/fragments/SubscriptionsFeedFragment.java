@@ -26,9 +26,12 @@ import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 
+import org.joda.time.DateTime;
+
 import java.util.List;
 
 import butterknife.Bind;
+import free.rm.skytube.BuildConfig;
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.GetSubscriptionVideosTask;
@@ -58,7 +61,16 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Sub
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		shouldRefresh = true;
+
+		// Only do an automatic refresh of subscriptions if it's been more than an hour since the last one was done.
+		// This is only for release builds, unless SKYTUBE_DELAY_AUTO_REFRESH is set to true in your gradle.properties.
+		long l = SkyTubeApp.getPreferenceManager().getLong(SkyTubeApp.KEY_SUBSCRIPTIONS_LAST_UPDATED, -1);
+		DateTime subscriptionsLastUpdated = new DateTime(l);
+		DateTime oneHourAgo = new DateTime().minusHours(1);
+		if(subscriptionsLastUpdated.isBefore(oneHourAgo) || (BuildConfig.DEBUG && !BuildConfig.SKYTUBE_DELAY_AUTO_REFRESH)) {
+			shouldRefresh = true;
+		}
+
 		setLayoutResource(R.layout.videos_gridview_feed);
 	}
 
