@@ -21,7 +21,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -35,7 +34,7 @@ import free.rm.skytube.app.SkyTubeApp;
 /**
  * A database (DB) that stores user's bookmarked videos.
  */
-public class BookmarksDb extends SQLiteOpenHelper {
+public class BookmarksDb extends SQLiteOpenHelperEx {
 	private static volatile BookmarksDb bookmarksDb = null;
 	private static boolean hasUpdated = false;
 
@@ -60,16 +59,9 @@ public class BookmarksDb extends SQLiteOpenHelper {
 
 
 	@Override
-	public synchronized void close() {
-		super.close();
+	protected void clearDatabaseInstance() {
 		bookmarksDb = null;
 	}
-
-
-	public String getDatabasePath() {
-		return SkyTubeApp.getContext().getDatabasePath(DATABASE_NAME).getPath();
-	}
-
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {

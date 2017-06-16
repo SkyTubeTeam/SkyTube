@@ -67,6 +67,7 @@ dependencies {
     compile 'com.google.code.gson:gson:2.7'
     compile group: 'joda-time', name: 'joda-time', version: '2.3'
     compile 'com.afollestad.material-dialogs:core:0.9.0.2'
+    compile 'com.github.angads25:filepicker:1.1.1'
 
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:support-v13:25.3.1'

@@ -21,7 +21,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -42,8 +41,7 @@ import free.rm.skytube.app.SkyTubeApp;
 /**
  * A database (DB) that stores user subscriptions (with respect to YouTube channels).
  */
-public class SubscriptionsDb extends SQLiteOpenHelper {
-
+public class SubscriptionsDb extends SQLiteOpenHelperEx {
 	private static volatile SubscriptionsDb subscriptionsDb = null;
 
 	private static final int DATABASE_VERSION = 2;
@@ -63,18 +61,10 @@ public class SubscriptionsDb extends SQLiteOpenHelper {
 		return subscriptionsDb;
 	}
 
-
 	@Override
-	public synchronized void close() {
-		super.close();
+	protected void clearDatabaseInstance() {
 		subscriptionsDb = null;
 	}
-
-
-	public String getDatabasePath() {
-		return SkyTubeApp.getContext().getDatabasePath(DATABASE_NAME).getPath();
-	}
-
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {

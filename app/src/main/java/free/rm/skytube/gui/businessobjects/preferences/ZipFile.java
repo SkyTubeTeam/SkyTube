@@ -85,9 +85,9 @@ public class ZipFile {
 	/**
 	 * Unzips the given zip file to the specified extraction path.
 	 *
-	 * @param extractionPath    Where the files (inside the zip) will be extracted to.
+	 * @param extractionDirectory   The directory where the files (inside the zip) will be extracted to.
 	 */
-	public void unzip(String extractionPath) throws IOException {
+	public void unzip(File extractionDirectory) throws IOException {
 		FileInputStream fin             = new FileInputStream(zipFilePath);
 		ZipInputStream  zipInputStream  = new ZipInputStream(fin);
 		ZipEntry        zipEntry;
@@ -96,9 +96,9 @@ public class ZipFile {
 			Log.v(TAG, "Unzipping " + zipEntry.getName());
 
 			if (zipEntry.isDirectory()) {
-				throw new IllegalStateException("The zip file should not countain any directories.");
+				throw new IllegalStateException("The zip file should not contain any directories.");
 			} else {
-				FileOutputStream    fout = new FileOutputStream(extractionPath + zipEntry.getName());
+				FileOutputStream    fout = new FileOutputStream(new File(extractionDirectory, zipEntry.getName()));
 				byte[]              buffer = new byte[BUFFER_SIZE];
 				int                 count;
 

@@ -25,6 +25,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -37,6 +38,13 @@ import android.util.Log;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
+
+import com.github.angads25.filepicker.controller.DialogSelectionListener;
+import com.github.angads25.filepicker.model.DialogConfigs;
+import com.github.angads25.filepicker.model.DialogProperties;
+import com.github.angads25.filepicker.view.FilePickerDialog;
+
+import java.io.File;
 
 import free.rm.skytube.BuildConfig;
 import free.rm.skytube.R;
@@ -70,8 +78,16 @@ public class PreferencesFragment extends PreferenceFragment implements SharedPre
 		backupDbsPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 			@Override
 			public boolean onPreferenceClick(Preference preference) {
-				//
 				checkIfAppHasAccessToExtStorage();
+				return true;
+			}
+		});
+
+		Preference importBackupsPref = findPreference(getString(R.string.pref_key_import_dbs));
+		importBackupsPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+			@Override
+			public boolean onPreferenceClick(Preference preference) {
+				displayFilePicker();
 				return true;
 			}
 		});
@@ -191,6 +207,7 @@ public class PreferencesFragment extends PreferenceFragment implements SharedPre
 
 	@Override
 	public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+		// EXT_STORAGE_PERM_CODE is used to backup the databases
 		if (requestCode == EXT_STORAGE_PERM_CODE) {
 			if (grantResults.length > 0  &&  grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 				// permission was granted by the user
@@ -200,6 +217,64 @@ public class PreferencesFragment extends PreferenceFragment implements SharedPre
 				Toast.makeText(getActivity(), R.string.databases_backup_fail, Toast.LENGTH_LONG).show();
 			}
 		}
+		// EXTERNAL_READ_PERMISSION_GRANT is used for the file picker (to import database backups)
+		else if (requestCode == FilePickerDialog.EXTERNAL_READ_PERMISSION_GRANT) {
+			if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+				displayFilePicker();
+			}
+			else {
+				// permission not been granted by user
+				Toast.makeText(getActivity(), R.string.databases_import_fail, Toast.LENGTH_LONG).show();
+			}
+		}
+	}
+
+
+	/**
+	 * Display file picker to be used by the user to select the backup he wants to import.
+	 */
+	private void displayFilePicker() {
+		DialogProperties properties = new DialogProperties();
+
+		properties.selection_mode = DialogConfigs.SINGLE_MODE;
+		properties.selection_type = DialogConfigs.FILE_SELECT;
+		properties.root = Environment.getExternalStorageDirectory();
+		properties.error_dir = new File(DialogConfigs.DEFAULT_DIR);
+		properties.offset = new File(DialogConfigs.DEFAULT_DIR);
+		properties.extensions = new String[]{"skytube"};
+
+		FilePickerDialog dialog = new FilePickerDialog(getActivity(), properties);
+		dialog.setDialogSelectionListener(new DialogSelectionListener() {
+			@Override
+			public void onSelectedFilePaths(String[] files) {
+				if (files == null  ||  files.length <= 0)
+					Toast.makeText(getActivity(), R.string.databases_import_nothing_selected, Toast.LENGTH_LONG).show();
+				else
+					displayImportDbsBackupWarningMsg(files[0]);
+			}
+		});
+		dialog.setTitle(R.string.databases_import_select_backup);
+		dialog.show();
+	}
+
+
+	/**
+	 * Display import database warning:  i.e. all the current data will be replaced by that of the
+	 * import file.
+	 *
+	 * @param backupFilePath    The backup file to import.
+	 */
+	private void displayImportDbsBackupWarningMsg(final String backupFilePath) {
+		new AlertDialog.Builder(getActivity())
+				.setMessage(R.string.databases_import_warning_message)
+				.setPositiveButton(R.string.continue_, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						new ImportDatabasesTask(backupFilePath).executeInParallel();
+					}
+				})
+				.setNegativeButton(R.string.cancel, null)
+				.show();
 	}
 
 
@@ -295,6 +370,7 @@ public class PreferencesFragment extends PreferenceFragment implements SharedPre
 	}
 
 
+
 	/**
 	 * A task that backups the subscriptions and bookmarks databases.
 	 */
@@ -304,6 +380,7 @@ public class PreferencesFragment extends PreferenceFragment implements SharedPre
 		protected void onPreExecute() {
 			Toast.makeText(getActivity(), R.string.databases_backing_up, Toast.LENGTH_SHORT).show();
 		}
+
 
 		@Override
 		protected String doInBackground(Void... params) {
@@ -331,6 +408,59 @@ public class PreferencesFragment extends PreferenceFragment implements SharedPre
 					.setNeutralButton(R.string.ok, null)
 					.show();
 		}
+
+	}
+
+
+
+	/**
+	 * A task that imports the subscriptions and bookmarks databases.
+	 */
+	private class ImportDatabasesTask extends AsyncTaskParallel<Void, Void, Boolean> {
+
+		private String backupFilePath;
+
+		public ImportDatabasesTask(String backupFilePath) {
+			this.backupFilePath = backupFilePath;
+		}
+
+
+		@Override
+		protected void onPreExecute() {
+			Toast.makeText(getActivity(), R.string.databases_importing, Toast.LENGTH_SHORT).show();
+		}
+
+
+		@Override
+		protected Boolean doInBackground(Void... params) {
+			boolean successful = false;
+
+			try {
+				BackupDatabases backupDatabases = new BackupDatabases();
+				backupDatabases.importBackupDb(backupFilePath);
+				successful = true;
+			} catch (Throwable tr) {
+				Log.e(TAG, "Unable to import the databases...", tr);
+			}
+
+			return successful;
+		}
+
+
+		@Override
+		protected void onPostExecute(Boolean successfulImport) {
+			new AlertDialog.Builder(getActivity())
+					.setCancelable(false)
+					.setMessage(successfulImport ? R.string.databases_import_success : R.string.databases_import_fail)
+					.setNeutralButton(R.string.restart, new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							SkyTubeApp.restartApp();
+						}
+					})
+					.show();
+		}
+
 	}
 
 }

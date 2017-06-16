@@ -17,11 +17,14 @@
 
 package free.rm.skytube.app;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.preference.PreferenceManager;
 import android.support.multidex.MultiDexApplication;
+import android.support.v4.content.IntentCompat;
 
 import java.util.Arrays;
 import java.util.List;
@@ -31,7 +34,7 @@ import java.util.List;
  */
 public class SkyTubeApp extends MultiDexApplication {
 
-	/** SkyTube Application instance. */
+	/** SkyTube Application databaseInstance. */
 	private static SkyTubeApp skyTubeApp = null;
 
 	public static final String KEY_SUBSCRIPTIONS_LAST_UPDATED = "SkyTubeApp.KEY_SUBSCRIPTIONS_LAST_UPDATED";
@@ -109,10 +112,13 @@ public class SkyTubeApp extends MultiDexApplication {
 	 * Restart the app.
 	 */
 	public static void restartApp() {
-		Intent i = getContext().getPackageManager().getLaunchIntentForPackage(getContext().getPackageName());
-		i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		Runtime.getRuntime().exit(0);
-		getContext().startActivity(i);
+		Context context = getContext();
+		PackageManager packageManager = context.getPackageManager();
+		Intent intent = packageManager.getLaunchIntentForPackage(context.getPackageName());
+		ComponentName componentName = intent.getComponent();
+		Intent mainIntent = IntentCompat.makeRestartActivityTask(componentName);
+		context.startActivity(mainIntent);
+		System.exit(0);
 	}
 
 }

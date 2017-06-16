@@ -26,11 +26,11 @@ import android.view.ViewGroup;
 
 import butterknife.Bind;
 import free.rm.skytube.R;
+import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.MainActivityListener;
 import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.businessobjects.db.BookmarksDb;
-import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.gui.businessobjects.SimpleItemTouchHelperCallback;
 import free.rm.skytube.gui.businessobjects.bookmarksGridAdapter;
 

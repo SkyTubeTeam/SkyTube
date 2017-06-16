@@ -60,6 +60,23 @@ public class BackupDatabases {
 	}
 
 
+
+	public void importBackupDb(String backupFilePath) throws IOException {
+		SubscriptionsDb subscriptionsDb = SubscriptionsDb.getSubscriptionsDb();
+		BookmarksDb     bookmarksDb = BookmarksDb.getBookmarksDb();
+		File            databasesDirectory = subscriptionsDb.getDatabaseDirectory();
+
+		// close the databases
+		subscriptionsDb.close();
+		bookmarksDb.close();
+
+		// backup the databases inside a zip file
+		ZipFile databasesZip = new ZipFile(new File(backupFilePath));
+		databasesZip.unzip(databasesDirectory);
+	}
+
+
+
 	private String generateFileName() {
 		TimeZone tz = TimeZone.getTimeZone("UTC");
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd-HHmmss");
