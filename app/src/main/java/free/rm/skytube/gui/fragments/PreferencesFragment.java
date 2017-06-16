@@ -61,7 +61,8 @@ import free.rm.skytube.gui.businessobjects.preferences.BackupDatabases;
 public class PreferencesFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
 
 	private static final String TAG = PreferencesFragment.class.getSimpleName();
-	private static final int    EXT_STORAGE_PERM_CODE = 1950;
+	private static final int EXT_STORAGE_PERM_CODE_BACKUP = 1950;
+	private static final int EXT_STORAGE_PERM_CODE_IMPORT = 1951;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -78,7 +79,7 @@ public class PreferencesFragment extends PreferenceFragment implements SharedPre
 		backupDbsPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 			@Override
 			public boolean onPreferenceClick(Preference preference) {
-				checkIfAppHasAccessToExtStorage();
+				backupDatabases();
 				return true;
 			}
 		});
@@ -186,29 +187,42 @@ public class PreferencesFragment extends PreferenceFragment implements SharedPre
 	}
 
 
+
 	/**
 	 * Check if the app has access to the external storage.  If not, ask the user whether he wants
 	 * to give us access...
+	 *
+	 * @param permissionRequestCode The request code (either EXT_STORAGE_PERM_CODE_BACKUP or
+	 *                              EXT_STORAGE_PERM_CODE_IMPORT) which is used by
+	 *                              {@link #onRequestPermissionsResult(int, String[], int[])} to
+	 *                              determine whether we are going to backup (export) or to import.
+	 *
+	 * @return True if the user has given access to write to the external storage in the past;
+	 * false otherwise.
 	 */
-	private void checkIfAppHasAccessToExtStorage() {
+	private boolean hasAccessToExtStorage(int permissionRequestCode) {
+		boolean hasAccessToExtStorage = true;
+
 		// if the user has not yet granted us access to the external storage...
 		if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
 			// We can request the permission (to the users).  If the user grants us access (or
 			// otherwise), then the method #onRequestPermissionsResult() will be called.
 			FragmentCompat.requestPermissions(this,
 					new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-					EXT_STORAGE_PERM_CODE);
-		} else {
-			// the user has previously granted access to the external storage
-			new BackupDatabasesTask().executeInParallel();
+					permissionRequestCode);
+
+			hasAccessToExtStorage = false;
 		}
+
+		return hasAccessToExtStorage;
 	}
+
 
 
 	@Override
 	public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-		// EXT_STORAGE_PERM_CODE is used to backup the databases
-		if (requestCode == EXT_STORAGE_PERM_CODE) {
+		// EXT_STORAGE_PERM_CODE_BACKUP is used to backup the databases
+		if (requestCode == EXT_STORAGE_PERM_CODE_BACKUP) {
 			if (grantResults.length > 0  &&  grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 				// permission was granted by the user
 				new BackupDatabasesTask().executeInParallel();
@@ -217,8 +231,8 @@ public class PreferencesFragment extends PreferenceFragment implements SharedPre
 				Toast.makeText(getActivity(), R.string.databases_backup_fail, Toast.LENGTH_LONG).show();
 			}
 		}
-		// EXTERNAL_READ_PERMISSION_GRANT is used for the file picker (to import database backups)
-		else if (requestCode == FilePickerDialog.EXTERNAL_READ_PERMISSION_GRANT) {
+		// EXT_STORAGE_PERM_CODE_IMPORT is used for the file picker (to import database backups)
+		else if (requestCode == EXT_STORAGE_PERM_CODE_IMPORT) {
 			if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 				displayFilePicker();
 			}
@@ -230,10 +244,27 @@ public class PreferencesFragment extends PreferenceFragment implements SharedPre
 	}
 
 
+
+	/**
+	 * Backup the databases.
+	 */
+	private void backupDatabases() {
+		// if the user has granted us access to the external storage, then perform the backup
+		// operation
+		if (hasAccessToExtStorage(EXT_STORAGE_PERM_CODE_BACKUP)) {
+			new BackupDatabasesTask().executeInParallel();
+		}
+	}
+
+
 	/**
 	 * Display file picker to be used by the user to select the backup he wants to import.
 	 */
 	private void displayFilePicker() {
+		// do not display the file picker until the user gives us access to the external storage
+		if (!hasAccessToExtStorage(EXT_STORAGE_PERM_CODE_IMPORT))
+			return;
+
 		DialogProperties properties = new DialogProperties();
 
 		properties.selection_mode = DialogConfigs.SINGLE_MODE;
