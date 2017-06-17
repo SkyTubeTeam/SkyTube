@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="feed">Feed</string>
+	<string name="feed">Kanał</string>
 
 	<string name="fetching_subscription_videos">Pobieranie filmów z subskrybowanych kanałów</string>
 	<string name="fetched_videos_from_channels">Pobrano %1$d filmów z %2$d/%3$d kanałów.</string>
