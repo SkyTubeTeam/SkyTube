@@ -12,7 +12,6 @@
 	<string name="pref_summary_preferred_languages">KÍSÉRLETI ÜZEM: Válassz egy vagy több preferált nyelvet. Ez szűri a \"Legnépszerűbb\" kategóriában és a keresések közt mutatott videókat.</string>
 
 	<string name="pref_video_player_category">Videólejátszó</string>
-	<string name="pref_key_video_player_category">video_player_category</string>
 	<string name="pref_title_preferred_res">Preferált felbontás</string>
 	<string name="pref_key_preferred_res">pref_preferred_resolution</string>
 	<string name="pref_summary_preferred_res">Válaszd ki a preferált videófelbontást</string>

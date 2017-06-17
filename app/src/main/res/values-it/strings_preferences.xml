@@ -12,7 +12,6 @@
 	<string name="pref_summary_preferred_languages">SPERIMENTALE: Selezionare una o più lingue preferite. Questa configurazione verrà utilizzata per filtrare i video nella categoria \"Più popolari\" e durante le ricerche.</string>
 
 	<string name="pref_video_player_category">Video Player</string>
-	<string name="pref_key_video_player_category">video_player_category</string>
 	<string name="pref_title_preferred_res">Risoluzione preferita</string>
 	<string name="pref_key_preferred_res">pref_preferred_resolution</string>
 	<string name="pref_summary_preferred_res">Seleziona la tua risoluzione preferita</string>

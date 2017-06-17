@@ -12,7 +12,6 @@
 	<string name="pref_summary_preferred_languages">EXPERIMENTAL: Sélectionnez une ou plusieurs langue(s). Cela permettra de filter les vidéos populaires ainsi que vos recherches.</string>
 
 	<string name="pref_video_player_category">Lecteur vidéo</string>
-	<string name="pref_key_video_player_category">video_player_category</string>
 	<string name="pref_title_preferred_res">Résolution préférée</string>
 	<string name="pref_key_preferred_res">pref_preferred_resolution</string>
 	<string name="pref_summary_preferred_res">Sélectionnez une résolution</string>

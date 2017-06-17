@@ -31,7 +31,7 @@ import free.rm.skytube.app.SkyTubeApp;
 public class YouTubeAPIKey {
 
 	/** User's YouTube API key which is inputted via the
-	 * {@link free.rm.skytube.gui.fragments.PreferencesFragment}.  Will be null if the user did not
+	 * {@link free.rm.skytube.gui.fragments.preferences.OthersPreferenceFragment}.  Will be null if the user did not
 	 * input a key. **/
 	private String userAPIKey;
 	private Random random = new Random();
@@ -83,7 +83,7 @@ public class YouTubeAPIKey {
 
 	/**
 	 * @return True if the user has set his own YouTube API key (via the
-	 * {@link free.rm.skytube.gui.fragments.PreferencesFragment}); false otherwise.
+	 * {@link free.rm.skytube.gui.fragments.preferences.OthersPreferenceFragment}); false otherwise.
 	 */
 	public boolean isUserApiKeySet() {
 		return (userAPIKey != null);

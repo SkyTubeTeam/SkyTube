@@ -12,7 +12,6 @@
 	<string name="pref_summary_preferred_languages">EXPERIMENTAL:  Selecciona uno o más idiomas.  Esto es utilizado para filtrar vídeos en la categoría de Más Populares y para la búsqueda de vídeos.</string>
 
 	<string name="pref_video_player_category">Reproductor de vídeos</string>
-	<string name="pref_key_video_player_category">video_player_category</string>
 	<string name="pref_title_preferred_res">Resolución preferida</string>
 	<string name="pref_key_preferred_res">pref_preferred_resolution</string>
 	<string name="pref_summary_preferred_res">Selecciona tu resolución preferida</string>
