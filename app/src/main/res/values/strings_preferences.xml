@@ -45,6 +45,9 @@
 	<string name="pref_summary_credits">People and projects that made this app possible.</string>
 	<string name="pref_title_version">Version</string>
 	<string name="pref_key_version">pref_version</string>
+	<string name="pref_title_updates">Updates</string>
+	<string name="pref_key_updates">pref_updates</string>
+	<string name="pref_summary_updates">Check for updates.</string>
 	<string name="pref_title_license">License</string>
 	<string name="pref_key_license">pref_license</string>
 	<string name="pref_summary_license">GNU General Public License version 3</string>

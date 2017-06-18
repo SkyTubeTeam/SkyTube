@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package free.rm.skytube.gui.fragments.preferences;
+package free.rm.skytube.gui.businessobjects.preferences;
 
 import android.content.res.Configuration;
 import android.os.Bundle;

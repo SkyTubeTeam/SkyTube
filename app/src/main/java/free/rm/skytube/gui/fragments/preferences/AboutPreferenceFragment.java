@@ -28,6 +28,7 @@ import android.webkit.WebViewClient;
 
 import free.rm.skytube.BuildConfig;
 import free.rm.skytube.R;
+import free.rm.skytube.gui.businessobjects.updates.UpdatesCheckerTask;
 
 /**
  * Preference fragment for about (this app) related settings.
@@ -42,6 +43,21 @@ public class AboutPreferenceFragment extends PreferenceFragment {
 		// set the app's version number
 		Preference versionPref = findPreference(getString(R.string.pref_key_version));
 		versionPref.setSummary(BuildConfig.VERSION_NAME);
+
+		// check for updates option
+		Preference updatesPref = findPreference(getString(R.string.pref_key_updates));
+		if (BuildConfig.FLAVOR.equalsIgnoreCase("oss")) {
+			// remove the updates option if the user is running the OSS flavor...
+			getPreferenceScreen().removePreference(updatesPref);
+		} else {
+			updatesPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+				@Override
+				public boolean onPreferenceClick(Preference preference) {
+					new UpdatesCheckerTask(getActivity(), true).executeInParallel();
+					return true;
+				}
+			});
+		}
 
 		// if the user clicks on the website link, then open it using an external browser
 		Preference websitePref = findPreference(getString(R.string.pref_key_website));

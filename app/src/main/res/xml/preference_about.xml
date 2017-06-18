@@ -20,7 +20,12 @@
 
 	<PreferenceScreen
 		android:key="@string/pref_key_version"
-		android:title="@string/pref_title_version"/>
+		android:title="@string/pref_title_version" />
+
+	<PreferenceScreen
+		android:key="@string/pref_key_updates"
+		android:title="@string/pref_title_updates"
+		android:summary="@string/pref_summary_updates" />
 
 	<PreferenceScreen
 		android:key="@string/pref_key_website"
