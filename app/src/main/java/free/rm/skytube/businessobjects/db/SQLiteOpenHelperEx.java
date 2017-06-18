@@ -36,14 +36,14 @@ public abstract class SQLiteOpenHelperEx extends SQLiteOpenHelper {
 	}
 
 
-	/**
-	 * Closes the database and clears any singleton instances.
-	 */
-	@Override
-	public synchronized void close() {
-		super.close();
-		clearDatabaseInstance();
-	}
+//	/**
+//	 * Closes the database and clears any singleton instances.
+//	 */
+//	@Override
+//	public synchronized void close() {
+//		super.close();
+//		clearDatabaseInstance();
+//	}
 
 
 	/**
