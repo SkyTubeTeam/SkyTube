@@ -110,6 +110,7 @@ public abstract class RecyclerViewAdapterEx<T, HolderType extends RecyclerView.V
 	protected void remove(int itemPosition) {
 		if (itemPosition >= 0  &&  itemPosition < getItemCount()) {
 			list.remove(itemPosition);
+			this.notifyDataSetChanged();
 		}
 	}
 
