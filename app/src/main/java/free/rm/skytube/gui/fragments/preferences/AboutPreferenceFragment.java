@@ -19,21 +19,30 @@ package free.rm.skytube.gui.fragments.preferences;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
+import android.util.Log;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+
 import free.rm.skytube.BuildConfig;
 import free.rm.skytube.R;
+import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.gui.businessobjects.updates.UpdatesCheckerTask;
 
 /**
  * Preference fragment for about (this app) related settings.
  */
 public class AboutPreferenceFragment extends PreferenceFragment {
+
+	private static final String TAG = AboutPreferenceFragment.class.getSimpleName();
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -42,7 +51,7 @@ public class AboutPreferenceFragment extends PreferenceFragment {
 
 		// set the app's version number
 		Preference versionPref = findPreference(getString(R.string.pref_key_version));
-		versionPref.setSummary(BuildConfig.VERSION_NAME);
+		versionPref.setSummary(getAppVersion());
 
 		// check for updates option
 		Preference updatesPref = findPreference(getString(R.string.pref_key_updates));
@@ -91,6 +100,45 @@ public class AboutPreferenceFragment extends PreferenceFragment {
 				return true;
 			}
 		});
+	}
+
+
+	/**
+	 * @return The app's version number.
+	 */
+	private String getAppVersion() {
+		StringBuilder ver = new StringBuilder(BuildConfig.VERSION_NAME);
+
+		if (BuildConfig.DEBUG) {
+			ver.append(" (Debug ");
+			ver.append(getAppBuildTimeStamp());
+			ver.append(')');
+		}
+
+		return ver.toString();
+	}
+
+
+
+	/**
+	 * @return App's build timestamp.
+	 */
+	private static String getAppBuildTimeStamp() {
+		String timeStamp = "???";
+
+		try {
+			ApplicationInfo appInfo = SkyTubeApp.getContext().getPackageManager().getApplicationInfo(SkyTubeApp.getContext().getPackageName(), 0);
+			String appFile = appInfo.sourceDir;
+			long time = new File(appFile).lastModified();
+
+			SimpleDateFormat formatter = new SimpleDateFormat("yyMMddHHmm", Locale.US);
+			timeStamp = formatter.format(time);
+		} catch (Throwable tr) {
+			Log.d(TAG, "An error occurred while getting app's build timestamp", tr);
+		}
+
+		return timeStamp;
+
 	}
 
 
