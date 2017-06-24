@@ -1,3 +1,14 @@
+v2.60 - 24 June 2016:
+	* Preference overhaul and improved user-friendliness:  Preferences are now using a two-pane
+	  layout.
+	* Added option for users to backup and import their subscriptions and bookmarks databases.
+	* Added option to change the video player's orientation.
+	* App now is able to detect if a video is blocked by country.
+	* Fixed issue #111:  Fixed a bug which caused to app to crash on certain devices if the back
+	  button is pressed.
+	* Updated Polish translations.
+	* SkyTube Extra:  Added the option for user to check for updates via the About preferences.
+
 v2.50 - 21 May 2017:
 	* App is now using NewPipeExtractor library to retrieve video streams' URLs.  In turn, this
 	  fixed #7.

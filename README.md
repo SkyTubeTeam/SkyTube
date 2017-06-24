@@ -37,7 +37,7 @@ Pure open-source version.  Updates normally take up to 3 days to be available to
 * Innovative design
 * No intrusive ads
 * Multilingual
-* Only requires 1 Android-permission (Internet)
+* Only requires 2 Android-permissions (Internet [mandatory] and access to External Storage [optional])
 * Not dependent on the GAPPS/Google Apps (i.e. YouTube official app)
 * No need for Google/YouTube account to operate
 * My code does not spy on your behaviour!

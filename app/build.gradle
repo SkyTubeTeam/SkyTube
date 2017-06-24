@@ -11,9 +11,9 @@ android {
         versionCode 8
         buildConfigField 'String[]', 'YOUTUBE_API_KEYS',
                 '{' +
-                        '"AIzaSyDAOcAgAAd098p_FLIePaQNKPTpcyhUGBA",' +
-                        '"AIzaSyBKBkG_-OUjncLyQCB32ZrWBiT-mD0kssI",' +
-                        '"AIzaSyAD5aqzdx2vebgX5IgsRTcbZ2u8UnLEGYg"'  +
+                        '"AIzaSyBK7NLymFzs-P8j8jT7kjeWkY0yXdue8_g",' +
+                        '"AIzaSyC23oUYMmy2hlmxSJNvo5UyfvmNmAJ_Lao",' +
+                        '"AIzaSyA-Y12I5tlGUcodUyH-RQHn94F7c60Y4d0"'  +
                 '}';
         buildConfigField 'String', 'SKYTUBE_WEBSITE',         '"http://skytube-app.com"'
         buildConfigField 'String', 'SKYTUBE_WEBSITE_CREDITS', '"http://skytube-app.com/credits.html"'
@@ -31,13 +31,13 @@ android {
         // 100% Open-Source Edition
         oss {
             applicationId "free.rm.skytube.oss"
-            versionName "2.50"          // the digits of the *fractional part* shall not be larger than "9"
+            versionName "2.60"          // the digits of the *fractional part* shall not be larger than "9"
             resValue "string", "app_name", "SkyTube"
         }
         // 99% Open-source edition:  uses the YouTube Player Jar [i.e. proprietary module - optional usage]
         extra {
             applicationId "free.rm.skytube.extra"
-            versionName "2.50 Extra"    // the digits of the *fractional part* shall not be larger than "9"
+            versionName "2.60 Extra"    // the digits of the *fractional part* shall not be larger than "9"
             resValue "string", "app_name", "SkyTube Extra"
         }
     }
