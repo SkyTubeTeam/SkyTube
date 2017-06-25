@@ -43,18 +43,14 @@ Pure open-source version.  Updates normally take up to 3 days to be available to
 * My code does not spy on your behaviour!
 
 ## Screenshots
-### Tablet
-[<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/trending.png" width=960>](https://ram-on.github.io/SkyTube/assets/img/screenshots/trending.png)
-[<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/subs.png" width=960>](https://ram-on.github.io/SkyTube/assets/img/screenshots/subs.png)
-[<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/play.png" width=960>](https://ram-on.github.io/SkyTube/assets/img/screenshots/play.png)
-[<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/comments.png" width=960>](https://ram-on.github.io/SkyTube/assets/img/screenshots/comments.png)
-[<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/channel.png" width=960>](https://ram-on.github.io/SkyTube/assets/img/screenshots/channel.png)
-[<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/search.png" width=960>](https://ram-on.github.io/SkyTube/assets/img/screenshots/search.png)
-
-### Mobile Phone (Old Screenshots)
-[<img src="screenshots/mobile_most_pop.png" width=250>](screenshots/mobile_most_pop.png)
-[<img src="screenshots/mobile_settings.png" width=250>](screenshots/mobile_settings.png)
-[<img src="screenshots/mobile_land.png" width=505>](screenshots/mobile_land2.png)
+### Mobile
+[<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/trending.jpg" width=960>](https://ram-on.github.io/SkyTube/assets/img/screenshots/trending.jpg)
+[<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/subs.jpg" width=960>](https://ram-on.github.io/SkyTube/assets/img/screenshots/subs.jpg)
+[<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/bookmarks.jpg" width=960>](https://ram-on.github.io/SkyTube/assets/img/screenshots/bookmarks.jpg)
+[<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/play.jpg" width=960>](https://ram-on.github.io/SkyTube/assets/img/screenshots/play.jpg)
+[<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/comments.jpg" width=960>](https://ram-on.github.io/SkyTube/assets/img/screenshots/comments.jpg)
+[<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/channel.jpg" width=960>](https://ram-on.github.io/SkyTube/assets/img/screenshots/channel.jpg)
+[<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/search.jpg" width=960>](https://ram-on.github.io/SkyTube/assets/img/screenshots/search.jpg)
 
 ## Credits
 This project was possible with the support and contribution of [numerous volunteers and third-party projects](http://skytube-app.com/credits.html).
