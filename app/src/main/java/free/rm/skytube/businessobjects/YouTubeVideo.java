@@ -17,7 +17,13 @@
 
 package free.rm.skytube.businessobjects;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
+import android.view.Menu;
+import android.widget.Toast;
 
 import com.google.api.client.util.DateTime;
 import com.google.api.services.youtube.model.Thumbnail;
@@ -38,6 +44,7 @@ import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.VideoStream.ParseStreamMetaData;
 import free.rm.skytube.businessobjects.VideoStream.StreamMetaDataList;
 import free.rm.skytube.app.SkyTubeApp;
+import free.rm.skytube.businessobjects.db.BookmarksDb;
 
 /**
  * Represents a YouTube video.
@@ -357,6 +364,44 @@ public class YouTubeVideo implements Serializable {
 		Matcher matcher = compiledPattern.matcher(url);
 
 		return matcher.find() ? matcher.group() /*video id*/ : null;
+	}
+
+	public void bookmarkVideo(Context context, Menu menu) {
+		boolean successBookmark = BookmarksDb.getBookmarksDb().add(this);
+		Toast.makeText(context,
+						successBookmark  ?  R.string.video_bookmarked  :  R.string.video_bookmarked_error,
+						Toast.LENGTH_LONG).show();
+
+		if (successBookmark) {
+			menu.findItem(R.id.bookmark_video).setVisible(false);
+			menu.findItem(R.id.unbookmark_video).setVisible(true);
+		}
+	}
+
+	public void unbookmarkVideo(Context context, Menu menu) {
+		boolean successUnbookmark = BookmarksDb.getBookmarksDb().remove(this);
+		Toast.makeText(context,
+						successUnbookmark  ?  R.string.video_unbookmarked  :  R.string.video_unbookmarked_error,
+						Toast.LENGTH_LONG).show();
+
+		if (successUnbookmark) {
+			menu.findItem(R.id.bookmark_video).setVisible(true);
+			menu.findItem(R.id.unbookmark_video).setVisible(false);
+		}
+	}
+
+	public void shareVideo(Context context) {
+		Intent intent = new Intent(android.content.Intent.ACTION_SEND);
+		intent.setType("text/plain");
+		intent.putExtra(android.content.Intent.EXTRA_TEXT, getVideoUrl());
+		context.startActivity(Intent.createChooser(intent, context.getString(R.string.share_via)));
+	}
+
+	public void copyUrl(Context context) {
+		ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+		ClipData clip = ClipData.newPlainText("Video URL", getVideoUrl());
+		clipboard.setPrimaryClip(clip);
+		Toast.makeText(context, R.string.url_copied_to_clipboard, Toast.LENGTH_SHORT).show();
 	}
 
 }

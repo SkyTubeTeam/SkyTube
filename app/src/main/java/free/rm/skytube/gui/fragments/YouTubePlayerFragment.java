@@ -1,8 +1,5 @@
 package free.rm.skytube.gui.fragments;
 
-import android.content.ClipData;
-import android.content.ClipboardManager;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.MediaPlayer;
@@ -35,11 +32,11 @@ import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.GetVideoDescription;
 import free.rm.skytube.businessobjects.GetVideosDetailsByIDs;
+import free.rm.skytube.gui.businessobjects.IsVideoBookmarkedTask;
 import free.rm.skytube.businessobjects.VideoStream.StreamMetaData;
 import free.rm.skytube.businessobjects.VideoStream.StreamMetaDataList;
 import free.rm.skytube.businessobjects.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTubeVideo;
-import free.rm.skytube.businessobjects.db.BookmarksDb;
 import free.rm.skytube.businessobjects.db.CheckIfUserSubbedToChannelTask;
 import free.rm.skytube.businessobjects.db.SubscribeToChannelTask;
 import free.rm.skytube.gui.activities.FragmentHolderActivity;
@@ -307,7 +304,6 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 	}
 
 
-
 	/**
 	 * Hide the HUD.
 	 */
@@ -342,7 +338,7 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 		// youTubeVideo might be null if we have only passed the video URL to this fragment (i.e.
 		// the app is still trying to construct youTubeVideo in the background).
 		if (youTubeVideo != null)
-			new IsVideoBookmarkedTask().executeInParallel();
+			new IsVideoBookmarkedTask(youTubeVideo, menu).executeInParallel();
 	}
 
 
@@ -360,41 +356,19 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 				return true;
 
 			case R.id.share:
-				Intent intent = new Intent(android.content.Intent.ACTION_SEND);
-				intent.setType("text/plain");
-				intent.putExtra(android.content.Intent.EXTRA_TEXT, youTubeVideo.getVideoUrl());
-				startActivity(Intent.createChooser(intent, getString(R.string.share_via)));
+				youTubeVideo.shareVideo(getContext());
 				return true;
 
 			case R.id.copyurl:
-				ClipboardManager clipboard = (ClipboardManager) getContext().getSystemService(Context.CLIPBOARD_SERVICE);
-				ClipData clip = ClipData.newPlainText("Video URL", youTubeVideo.getVideoUrl());
-				clipboard.setPrimaryClip(clip);
-				Toast.makeText(getContext(), R.string.url_copied_to_clipboard, Toast.LENGTH_SHORT).show();
+				youTubeVideo.copyUrl(getContext());
 				return true;
 
 			case R.id.bookmark_video:
-				boolean successBookmark = BookmarksDb.getBookmarksDb().add(youTubeVideo);
-				Toast.makeText(getContext(),
-						successBookmark  ?  R.string.video_bookmarked  :  R.string.video_bookmarked_error,
-						Toast.LENGTH_LONG).show();
-
-				if (successBookmark) {
-					menu.findItem(R.id.bookmark_video).setVisible(false);
-					menu.findItem(R.id.unbookmark_video).setVisible(true);
-				}
+				youTubeVideo.bookmarkVideo(getContext(), menu);
 				return true;
 
 			case R.id.unbookmark_video:
-				boolean successUnbookmark = BookmarksDb.getBookmarksDb().remove(youTubeVideo);
-				Toast.makeText(getContext(),
-						successUnbookmark  ?  R.string.video_unbookmarked  :  R.string.video_unbookmarked_error,
-						Toast.LENGTH_LONG).show();
-
-				if (successUnbookmark) {
-					menu.findItem(R.id.bookmark_video).setVisible(true);
-					menu.findItem(R.id.unbookmark_video).setVisible(false);
-				}
+				youTubeVideo.unbookmarkVideo(getContext(), menu);
 				return true;
 
 			default:
@@ -644,7 +618,7 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 
 				// will now check if the video is bookmarked or not (and then update the menu
 				// accordingly)
-				new IsVideoBookmarkedTask().executeInParallel();
+				new IsVideoBookmarkedTask(youTubeVideo, menu).executeInParallel();
 			}
 		}
 
@@ -706,29 +680,5 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 
 	////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-	/**
-	 * A task that checks if this video is bookmarked or not.  If it is bookmarked, then it will hide
-	 * the menu option to bookmark the video; otherwise it will hide the option to unbookmark the
-	 * video.
-	 */
-	private class IsVideoBookmarkedTask extends AsyncTaskParallel<Void, Void, Boolean> {
-
-		@Override
-		protected Boolean doInBackground(Void... params) {
-			return BookmarksDb.getBookmarksDb().isBookmarked(youTubeVideo);
-		}
-
-		@Override
-		protected void onPostExecute(Boolean videoIsBookmarked) {
-			// if this video has been bookmarked, hide the bookmark option and show the unbookmark option.
-			menu.findItem(R.id.bookmark_video).setVisible(!videoIsBookmarked);
-			menu.findItem(R.id.unbookmark_video).setVisible(videoIsBookmarked);
-		}
-
-	}
-
-
-	////////////////////////////////////////////////////////////////////////////////////////////////
 
 }
