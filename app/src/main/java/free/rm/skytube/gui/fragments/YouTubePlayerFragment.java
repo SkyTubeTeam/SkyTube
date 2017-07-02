@@ -29,18 +29,20 @@ import java.net.URLDecoder;
 import java.util.List;
 
 import free.rm.skytube.R;
+import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.GetVideoDescription;
 import free.rm.skytube.businessobjects.GetVideosDetailsByIDs;
 import free.rm.skytube.gui.businessobjects.IsVideoBookmarkedTask;
+import free.rm.skytube.businessobjects.GetYouTubeChannelInfoTask;
 import free.rm.skytube.businessobjects.VideoStream.StreamMetaData;
 import free.rm.skytube.businessobjects.VideoStream.StreamMetaDataList;
 import free.rm.skytube.businessobjects.YouTubeChannel;
+import free.rm.skytube.businessobjects.YouTubeChannelInterface;
 import free.rm.skytube.businessobjects.YouTubeVideo;
 import free.rm.skytube.businessobjects.db.CheckIfUserSubbedToChannelTask;
 import free.rm.skytube.businessobjects.db.SubscribeToChannelTask;
-import free.rm.skytube.gui.activities.FragmentHolderActivity;
-import free.rm.skytube.app.SkyTubeApp;
+import free.rm.skytube.gui.activities.MainActivity;
 import free.rm.skytube.gui.businessobjects.CommentsAdapter;
 import free.rm.skytube.gui.businessobjects.FragmentEx;
 import free.rm.skytube.gui.businessobjects.MediaControllerEx;
@@ -130,8 +132,8 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 				@Override
 				public void onClick(View v) {
 					if (youTubeChannel != null) {
-						Intent i = new Intent(getActivity(), FragmentHolderActivity.class);
-						i.putExtra(FragmentHolderActivity.FRAGMENT_HOLDER_CHANNEL_BROWSER, true);
+						Intent i = new Intent(getActivity(), MainActivity.class);
+						i.setAction(MainActivity.ACTION_VIEW_CHANNEL);
 						i.putExtra(ChannelBrowserFragment.CHANNEL_OBJ, youTubeChannel);
 						startActivity(i);
 					}
@@ -200,7 +202,19 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 	 */
 	private void getVideoInfoTasks() {
 		// get Channel info (e.g. avatar...etc) task
-		new GetYouTubeChannelInfoTask().executeInParallel(youTubeVideo.getChannelId());
+		new GetYouTubeChannelInfoTask(new YouTubeChannelInterface() {
+			@Override
+			public void onGetYouTubeChannel(YouTubeChannel youTubeChannel) {
+				YouTubePlayerFragment.this.youTubeChannel = youTubeChannel;
+
+				if (youTubeChannel != null) {
+					Glide.with(getActivity())
+									.load(youTubeChannel.getThumbnailNormalUrl())
+									.placeholder(R.drawable.channel_thumbnail_default)
+									.into(videoDescChannelThumbnailImageView);
+				}
+			}
+		}).executeInParallel(youTubeVideo.getChannelId());
 
 		// check if the user has subscribed to a channel... if he has, then change the state of
 		// the subscribe button
@@ -639,43 +653,6 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 		}
 
 	}
-
-
-	////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-	private class GetYouTubeChannelInfoTask extends AsyncTaskParallel<String, Void, YouTubeChannel> {
-
-		private final String TAG = GetYouTubeChannelInfoTask.class.getSimpleName();
-
-		@Override
-		protected YouTubeChannel doInBackground(String... channelId) {
-			YouTubeChannel chn = new YouTubeChannel();
-
-			try {
-				chn.init(channelId[0]);
-			} catch (IOException e) {
-				Log.e(TAG, "Unable to get channel info.  ChannelID=" + channelId[0], e);
-				chn = null;
-			}
-
-			return chn;
-		}
-
-		@Override
-		protected void onPostExecute(YouTubeChannel youTubeChannel) {
-			YouTubePlayerFragment.this.youTubeChannel = youTubeChannel;
-
-			if (youTubeChannel != null) {
-				Glide.with(getActivity())
-						.load(youTubeChannel.getThumbnailNormalUrl())
-						.placeholder(R.drawable.channel_thumbnail_default)
-						.into(videoDescChannelThumbnailImageView);
-			}
-		}
-
-	}
-
 
 
 	////////////////////////////////////////////////////////////////////////////////////////////////

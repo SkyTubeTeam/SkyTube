@@ -55,13 +55,14 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 
 	private MainFragment mainFragment;
 	private SearchVideoGridFragment searchVideoGridFragment;
+	private ChannelBrowserFragment channelBrowserFragment;
 
 	/** Set to true of the UpdatesCheckerTask has run; false otherwise. */
 	private static boolean updatesCheckerTaskRan = false;
-
+	public static final String ACTION_VIEW_CHANNEL = "MainActivity.ViewChannel";
 	private static final String MAIN_FRAGMENT   = "MainActivity.MainFragment";
 	private static final String SEARCH_FRAGMENT = "MainActivity.SearchFragment";
-
+	public static final String CHANNEL_BROWSER_FRAGMENT = "MainActivity.ChannelBrowserFragment";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -80,11 +81,19 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 			if(savedInstanceState != null) {
 				mainFragment = (MainFragment)getSupportFragmentManager().getFragment(savedInstanceState, MAIN_FRAGMENT);
 				searchVideoGridFragment = (SearchVideoGridFragment) getSupportFragmentManager().getFragment(savedInstanceState, SEARCH_FRAGMENT);
+				channelBrowserFragment = (ChannelBrowserFragment) getSupportFragmentManager().getFragment(savedInstanceState, CHANNEL_BROWSER_FRAGMENT);
 			}
 
-			if(mainFragment == null) {
-				mainFragment = new MainFragment();
-				getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, mainFragment).commit();
+			// If this Activity was called to view a particular channel, display that channel via ChannelBrowserFragment, instead of MainFragment
+			String action = getIntent().getAction();
+			if(action != null && action.equals(ACTION_VIEW_CHANNEL)) {
+				YouTubeChannel channel = (YouTubeChannel) getIntent().getSerializableExtra(ChannelBrowserFragment.CHANNEL_OBJ);
+				onChannelClick(channel);
+			} else {
+				if(mainFragment == null) {
+					mainFragment = new MainFragment();
+					getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, mainFragment).commit();
+				}
 			}
 		}
 	}
@@ -96,6 +105,8 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 			getSupportFragmentManager().putFragment(outState, MAIN_FRAGMENT, mainFragment);
 		if(searchVideoGridFragment != null && searchVideoGridFragment.isVisible())
 			getSupportFragmentManager().putFragment(outState, SEARCH_FRAGMENT, searchVideoGridFragment);
+		if(channelBrowserFragment != null && channelBrowserFragment.isVisible())
+			getSupportFragmentManager().putFragment(outState, CHANNEL_BROWSER_FRAGMENT, channelBrowserFragment);
 		super.onSaveInstanceState(outState);
 	}
 
@@ -239,20 +250,21 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 
 	@Override
 	public void onChannelClick(YouTubeChannel channel) {
-		Intent i = new Intent(MainActivity.this, FragmentHolderActivity.class);
-		i.putExtra(FragmentHolderActivity.FRAGMENT_HOLDER_CHANNEL_BROWSER, true);
-		i.putExtra(ChannelBrowserFragment.CHANNEL_OBJ, channel);
-		startActivity(i);
+		Bundle args = new Bundle();
+		args.putSerializable(ChannelBrowserFragment.CHANNEL_OBJ, channel);
+		switchToChannelBrowserFragment(args);
 	}
-
-
 
 	@Override
 	public void onChannelClick(String channelId) {
-		Intent i = new Intent(MainActivity.this, FragmentHolderActivity.class);
-		i.putExtra(FragmentHolderActivity.FRAGMENT_HOLDER_CHANNEL_BROWSER, true);
-		i.putExtra(ChannelBrowserFragment.CHANNEL_ID, channelId);
-		startActivity(i);
+		Bundle args = new Bundle();
+		args.putString(ChannelBrowserFragment.CHANNEL_ID, channelId);
+		switchToChannelBrowserFragment(args);
 	}
 
+	private void switchToChannelBrowserFragment(Bundle args) {
+		channelBrowserFragment = new ChannelBrowserFragment();
+		channelBrowserFragment.setArguments(args);
+		switchToFragment(channelBrowserFragment);
+	}
 }
