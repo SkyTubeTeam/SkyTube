@@ -34,8 +34,8 @@
 	<string name="databases_import_warning_message">Vos donn&eacute;es seront REMPLACES par la sauvegarde s&eacute;lectionn&eacute;e.\n\nContinuer?</string>
 	<string name="continue_">Continuer</string>
 	<string name="databases_importing">Importation…</string>
-	<string name="databases_import_fail">Impossible d'importer la sauvegarde.</string>
-	<string name="databases_import_success">Sauvegarde import&eacute;e avec succ&egrave;s.  Red&eacute;marez l'application.</string>
+	<string name="databases_import_fail">Impossible d\'importer la sauvegarde.</string>
+	<string name="databases_import_success">Sauvegarde import&eacute;e avec succ&egrave;s.  Red&eacute;marez l\'application.</string>
 
 	<string name="pref_about_category">À propos</string>
 	<string name="pref_title_website">Site internet</string>
@@ -431,7 +431,7 @@
 	</string-array>
 
 	<string name="pref_key_screen_orientation">pref_key_screen_orientation</string>
-	<string name="pref_title_screen_orientation">Orientation de l'&eacute;cran</string>
+	<string name="pref_title_screen_orientation">Orientation de l\'&eacute;cran</string>
 	<string name="pref_summary_screen_orientation">Orientation du lecteur vid&eacute;o</string>
 	<string name="pref_screen_landscape">Paysage</string>
 	<string name="pref_screen_portrait">Portrait</string>
@@ -454,7 +454,7 @@
 	<string name="pref_title_youtube_api_key">cl&eacute; API youtube</string>
 	<string name="pref_summary_youtube_api_key">Entrer votre cl&eacute; API.  Laisse blanc pour utiliser la cl&eacute; API par d&eacute;faut.</string>
 	<string name="pref_youtube_api_key_error">Erreur lors de la validation de votre cl&eacute; API.</string>
-	<string name="pref_youtube_api_key_custom">cl&eacute; valide.  Red&eacute;marrez l'application.</string>
-	<string name="pref_youtube_api_key_default">Re&eacute;marrez l'application pour utiliser la cl&eacute; par d&eacute;faut.</string>
+	<string name="pref_youtube_api_key_custom">cl&eacute; valide.  Red&eacute;marrez l\'application.</string>
+	<string name="pref_youtube_api_key_default">Re&eacute;marrez l\'application pour utiliser la cl&eacute; par d&eacute;faut.</string>
 	<string name="restart">Red&eacute;marrer</string>
 </resources>
