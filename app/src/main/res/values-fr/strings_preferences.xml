@@ -19,35 +19,35 @@
 	<string name="pref_key_use_offical_player">pref_use_official_youtube_player</string>
 	<string name="pref_summary_use_offical_player">Non recommandé</string>
 
-	<string name="pref_backup_category">Backups</string>
-	<string name="pref_title_backup_dbs">Backup Databases</string>
+	<string name="pref_backup_category">Sauvegardes</string>
+	<string name="pref_title_backup_dbs">Sauvegarder</string>
 	<string name="pref_key_backup_dbs">pref_key_backup_db</string>
-	<string name="pref_summary_backup_dbs">Backup your subscriptions and bookmarks databases.</string>
-	<string name="pref_title_import_dbs">Import Backup</string>
+	<string name="pref_summary_backup_dbs">Sauvegardez vos chaines ainsi que vos Favoris.</string>
+	<string name="pref_title_import_dbs">Importer</string>
 	<string name="pref_key_import_dbs">pref_key_import_db</string>
-	<string name="pref_summary_import_dbs">Import your subscriptions and bookmarks databases backup.</string>
-	<string name="databases_backing_up">Backing up…</string>
-	<string name="databases_backup_success">Databases backed up to %s</string>
-	<string name="databases_backup_fail">Failed to backup your databases.</string>
-	<string name="databases_import_select_backup">Select backup file to import</string>
-	<string name="databases_import_nothing_selected">Nothing was selected…</string>
-	<string name="databases_import_warning_message">The subscriptions and bookmarks databases will be REPLACED with the data of the selected backup file.\n\nContinue?</string>
-	<string name="continue_">Continue</string>
-	<string name="databases_importing">Importing…</string>
-	<string name="databases_import_fail">Failed to import your databases.</string>
-	<string name="databases_import_success">Databases imported successfully.  Restart the app to apply changes.</string>
+	<string name="pref_summary_import_dbs">Importez vos chaines ainsi que vos Favoris.</string>
+	<string name="databases_backing_up">Sauvegarde en cours…</string>
+	<string name="databases_backup_success">Donn&eacute;es sauvegard&eacute;es &agrave; %s</string>
+	<string name="databases_backup_fail">Impossible de sauvegarder vos donn&eacute;es.</string>
+	<string name="databases_import_select_backup">S&eacute;lectionnez la sauvegarde &agrave; importer</string>
+	<string name="databases_import_nothing_selected">Aucune sauvegarde s&eacute;lectionn&eacute;e…</string>
+	<string name="databases_import_warning_message">Vos donn&eacute;es seront REMPLACES par la sauvegarde s&eacute;lectionn&eacute;e.\n\nContinuer?</string>
+	<string name="continue_">Continuer</string>
+	<string name="databases_importing">Importation…</string>
+	<string name="databases_import_fail">Impossible d'importer la sauvegarde.</string>
+	<string name="databases_import_success">Sauvegarde import&eacute;e avec succ&egrave;s.  Red&eacute;marez l'application.</string>
 
 	<string name="pref_about_category">À propos</string>
 	<string name="pref_title_website">Site internet</string>
 	<string name="pref_key_website">pref_website</string>
-	<string name="pref_title_credits">Credits</string>
+	<string name="pref_title_credits">Cr&eacute;dits</string>
 	<string name="pref_key_credits">pref_credits</string>
-	<string name="pref_summary_credits">People and projects that made this app possible.</string>
+	<string name="pref_summary_credits">Personnes et projets &agrave; qui ont particip&eacute; &agrave; cr&eacute;er cette application.</string>
 	<string name="pref_title_version">Version</string>
 	<string name="pref_key_version">pref_version</string>
-	<string name="pref_title_updates">Updates</string>
+	<string name="pref_title_updates">Mise &agrave; jour</string>
 	<string name="pref_key_updates">pref_updates</string>
-	<string name="pref_summary_updates">Check for updates.</string>
+	<string name="pref_summary_updates">rechercher des Mises &agrave; jour.</string>
 	<string name="pref_title_license">License</string>
 	<string name="pref_key_license">pref_license</string>
 	<string name="pref_summary_license">GNU General Public License version 3</string>
@@ -431,12 +431,12 @@
 	</string-array>
 
 	<string name="pref_key_screen_orientation">pref_key_screen_orientation</string>
-	<string name="pref_title_screen_orientation">Screen Orientation</string>
-	<string name="pref_summary_screen_orientation">Rotation of the video player</string>
-	<string name="pref_screen_landscape">Landscape</string>
+	<string name="pref_title_screen_orientation">Orientation de l'&eacute;cran</string>
+	<string name="pref_summary_screen_orientation">Orientation du lecteur vid&eacute;o</string>
+	<string name="pref_screen_landscape">Paysage</string>
 	<string name="pref_screen_portrait">Portrait</string>
-	<string name="pref_screen_auto">Automatic</string>
-	<string name="pref_screen_sensor">Device sensor</string>
+	<string name="pref_screen_auto">Automatique</string>
+	<string name="pref_screen_sensor">Capteur t&eacute;l&eacute;phone</string>
 	<string-array name="screen_orientations">
 		<item>@string/pref_screen_auto</item>
 		<item>@string/pref_screen_landscape</item>
@@ -451,10 +451,10 @@
 	</string-array>
 
 	<string name="pref_youtube_api_key">pref_youtube_api_key</string>
-	<string name="pref_title_youtube_api_key">YouTube API Key</string>
-	<string name="pref_summary_youtube_api_key">Enter your own YouTube Data API Key.  Leave blank to use the default one.</string>
-	<string name="pref_youtube_api_key_error">An error occurred attempting to validate the API Key you entered.</string>
-	<string name="pref_youtube_api_key_custom">Key is valid.  Restart app to use the new YouTube API key.</string>
-	<string name="pref_youtube_api_key_default">Restart app to switch back to default YouTube API key.</string>
-	<string name="restart">Restart</string>
+	<string name="pref_title_youtube_api_key">cl&eacute; API youtube</string>
+	<string name="pref_summary_youtube_api_key">Entrer votre cl&eacute; API.  Laisse blanc pour utiliser la cl&eacute; API par d&eacute;faut.</string>
+	<string name="pref_youtube_api_key_error">Erreur lors de la validation de votre cl&eacute; API.</string>
+	<string name="pref_youtube_api_key_custom">cl&eacute; valide.  Red&eacute;marrez l'application.</string>
+	<string name="pref_youtube_api_key_default">Re&eacute;marrez l'application pour utiliser la cl&eacute; par d&eacute;faut.</string>
+	<string name="restart">Red&eacute;marrer</string>
 </resources>
