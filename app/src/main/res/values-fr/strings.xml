@@ -7,6 +7,6 @@
 	<string name="launch_offical_player_error">Une erreur s\'est produite lors de l\'ouverture de youtube. Assurez-vous de bien avoir installé l\'application officielle.</string>
 	<string name="LIVE">LIVE</string>
 
-	<string name="featured">Mises en avant</string>
-	<string name="most_popular">Les plus populaires</string>
+	<string name="featured">Tendance</string>
+	<string name="most_popular">Populaires</string>
 </resources>
