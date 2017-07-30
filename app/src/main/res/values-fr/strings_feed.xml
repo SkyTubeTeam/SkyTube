@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="feed">Feed</string>
+	<string name="feed">Suivies</string>
 
 	<string name="fetching_subscription_videos">Chargement des vidéos de vos abonnements</string>
 	<string name="fetched_videos_from_channels">%1$d vidéos de %2$d/%3$d chaines.</string>
