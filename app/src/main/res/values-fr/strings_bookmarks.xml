@@ -1,7 +1,7 @@
 <resources>
 	<string name="bookmarks">Favoris</string>
 
-	<string name="bookmark">M&eacute;moriser</string>
+	<string name="bookmark">Mémoriser</string>
 	<string name="video_bookmarked">Vidéo ajoutée aux favoris</string>
 	<string name="video_bookmarked_error">Impossible d\'ajouter la vidéo aux favoris.</string>
 

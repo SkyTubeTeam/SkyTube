@@ -6,13 +6,13 @@
 
 	<string name="error_video_play">Erreur de lecture vidéo</string>
 	<string name="error_video_streams_empty">La vidéo %s n\'a pas de source</string>
-	<string name="error_video_streams">Erreur lors du chagement du flux vid&eacute;o.</string>
+	<string name="error_video_streams">Erreur lors du chagement du flux vidéo.</string>
 	<string name="error_get_video_desc">Erreur lors de la récupération de la description de la vidéo.</string>
 	<string name="error_invalid_url">URL de la vidéo invalide: %s</string>
 
-	<string name="warning_live_video">Impossible de lire des vid&eacute;os en live.  Regarder la vid&eacute;o sur une autre application?</string>
+	<string name="warning_live_video">Impossible de lire des vidéos en live.  Regarder la vidéo sur une autre application?</string>
 
-	<string name="ratings_disabled">Notation d&eacute;sactiv&eacute;e</string>
+	<string name="ratings_disabled">Notation désactivée</string>
 
 	<string name="loading_video">Chargement de la vidéo…</string>
 	<string name="get_new_video_steam">Nouveau flux</string>

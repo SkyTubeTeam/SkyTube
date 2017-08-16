@@ -27,27 +27,27 @@
 	<string name="pref_key_import_dbs">pref_key_import_db</string>
 	<string name="pref_summary_import_dbs">Importez vos chaines ainsi que vos Favoris.</string>
 	<string name="databases_backing_up">Sauvegarde en cours…</string>
-	<string name="databases_backup_success">Donn&eacute;es sauvegard&eacute;es &agrave; %s</string>
-	<string name="databases_backup_fail">Impossible de sauvegarder vos donn&eacute;es.</string>
-	<string name="databases_import_select_backup">S&eacute;lectionnez la sauvegarde &agrave; importer</string>
-	<string name="databases_import_nothing_selected">Aucune sauvegarde s&eacute;lectionn&eacute;e…</string>
-	<string name="databases_import_warning_message">Vos donn&eacute;es seront REMPLACES par la sauvegarde s&eacute;lectionn&eacute;e.\n\nContinuer?</string>
+	<string name="databases_backup_success">Données sauvegardées à %s</string>
+	<string name="databases_backup_fail">Impossible de sauvegarder vos données.</string>
+	<string name="databases_import_select_backup">Sélectionnez la sauvegarde à importer</string>
+	<string name="databases_import_nothing_selected">Aucune sauvegarde sélectionnée…</string>
+	<string name="databases_import_warning_message">Vos données seront REMPLACES par la sauvegarde sélectionnée.\n\nContinuer?</string>
 	<string name="continue_">Continuer</string>
 	<string name="databases_importing">Importation…</string>
 	<string name="databases_import_fail">Impossible d\'importer la sauvegarde.</string>
-	<string name="databases_import_success">Sauvegarde import&eacute;e avec succ&egrave;s.  Red&eacute;marez l\'application.</string>
+	<string name="databases_import_success">Sauvegarde importée avec succès.  Redémarez l\'application.</string>
 
 	<string name="pref_about_category">À propos</string>
 	<string name="pref_title_website">Site internet</string>
 	<string name="pref_key_website">pref_website</string>
-	<string name="pref_title_credits">Cr&eacute;dits</string>
+	<string name="pref_title_credits">Crédits</string>
 	<string name="pref_key_credits">pref_credits</string>
-	<string name="pref_summary_credits">Personnes et projets &agrave; qui ont particip&eacute; &agrave; cr&eacute;er cette application.</string>
+	<string name="pref_summary_credits">Personnes et projets à qui ont participé à créer cette application.</string>
 	<string name="pref_title_version">Version</string>
 	<string name="pref_key_version">pref_version</string>
-	<string name="pref_title_updates">Mise &agrave; jour</string>
+	<string name="pref_title_updates">Mise à jour</string>
 	<string name="pref_key_updates">pref_updates</string>
-	<string name="pref_summary_updates">rechercher des Mises &agrave; jour.</string>
+	<string name="pref_summary_updates">rechercher des Mises à jour.</string>
 	<string name="pref_title_license">License</string>
 	<string name="pref_key_license">pref_license</string>
 	<string name="pref_summary_license">GNU General Public License version 3</string>
@@ -431,12 +431,12 @@
 	</string-array>
 
 	<string name="pref_key_screen_orientation">pref_key_screen_orientation</string>
-	<string name="pref_title_screen_orientation">Orientation de l\'&eacute;cran</string>
-	<string name="pref_summary_screen_orientation">Orientation du lecteur vid&eacute;o</string>
+	<string name="pref_title_screen_orientation">Orientation de l\'écran</string>
+	<string name="pref_summary_screen_orientation">Orientation du lecteur vidéo</string>
 	<string name="pref_screen_landscape">Paysage</string>
 	<string name="pref_screen_portrait">Portrait</string>
 	<string name="pref_screen_auto">Automatique</string>
-	<string name="pref_screen_sensor">Capteur t&eacute;l&eacute;phone</string>
+	<string name="pref_screen_sensor">Capteur téléphone</string>
 	<string-array name="screen_orientations">
 		<item>@string/pref_screen_auto</item>
 		<item>@string/pref_screen_landscape</item>
@@ -451,10 +451,10 @@
 	</string-array>
 
 	<string name="pref_youtube_api_key">pref_youtube_api_key</string>
-	<string name="pref_title_youtube_api_key">cl&eacute; API youtube</string>
-	<string name="pref_summary_youtube_api_key">Entrer votre cl&eacute; API.  Laisse blanc pour utiliser la cl&eacute; API par d&eacute;faut.</string>
-	<string name="pref_youtube_api_key_error">Erreur lors de la validation de votre cl&eacute; API.</string>
-	<string name="pref_youtube_api_key_custom">cl&eacute; valide.  Red&eacute;marrez l\'application.</string>
-	<string name="pref_youtube_api_key_default">Re&eacute;marrez l\'application pour utiliser la cl&eacute; par d&eacute;faut.</string>
-	<string name="restart">Red&eacute;marrer</string>
+	<string name="pref_title_youtube_api_key">clé API youtube</string>
+	<string name="pref_summary_youtube_api_key">Entrer votre clé API.  Laisse blanc pour utiliser la clé API par défaut.</string>
+	<string name="pref_youtube_api_key_error">Erreur lors de la validation de votre clé API.</string>
+	<string name="pref_youtube_api_key_custom">clé valide.  Redémarrez l\'application.</string>
+	<string name="pref_youtube_api_key_default">Reémarrez l\'application pour utiliser la clé par défaut.</string>
+	<string name="restart">Redémarrer</string>
 </resources>
