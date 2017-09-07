@@ -64,6 +64,8 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 	private static final String SEARCH_FRAGMENT = "MainActivity.SearchFragment";
 	public static final String CHANNEL_BROWSER_FRAGMENT = "MainActivity.ChannelBrowserFragment";
 
+	private boolean dontAddToBackStack = false;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -87,6 +89,8 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 			// If this Activity was called to view a particular channel, display that channel via ChannelBrowserFragment, instead of MainFragment
 			String action = getIntent().getAction();
 			if(action != null && action.equals(ACTION_VIEW_CHANNEL)) {
+				//
+				dontAddToBackStack = true;
 				YouTubeChannel channel = (YouTubeChannel) getIntent().getSerializableExtra(ChannelBrowserFragment.CHANNEL_OBJ);
 				onChannelClick(channel);
 			} else {
@@ -242,7 +246,10 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 		FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
 		transaction.replace(R.id.fragment_container, fragment);
-		transaction.addToBackStack(null);
+		if(!dontAddToBackStack)
+			transaction.addToBackStack(null);
+		else
+			dontAddToBackStack = false;
 		transaction.commit();
 	}
 
