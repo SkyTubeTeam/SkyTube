@@ -18,6 +18,8 @@
 package free.rm.skytube.gui.businessobjects;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
@@ -153,6 +155,10 @@ public class GridViewHolder extends RecyclerView.ViewHolder {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
 				switch(item.getItemId()) {
+					case R.id.menu_open_video_with:
+						Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(youTubeVideo.getVideoUrl()));
+						context.startActivity(browserIntent);
+						return true;
 					case R.id.share:
 						youTubeVideo.shareVideo(view.getContext());
 						return true;
