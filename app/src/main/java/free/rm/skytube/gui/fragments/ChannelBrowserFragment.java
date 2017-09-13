@@ -67,7 +67,7 @@ public class ChannelBrowserFragment extends BaseVideosGridFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		final String channelId;
-		final Bundle bundle = getActivity().getIntent().getExtras();
+		final Bundle bundle = getArguments();
 
 		// we need to create a YouTubeChannel object:  this can be done by either:
 		//   (1) the YouTubeChannel object is passed to this Fragment
@@ -127,6 +127,7 @@ public class ChannelBrowserFragment extends BaseVideosGridFragment {
 		} else {
 			videoGridAdapter.setContext(getActivity());
 		}
+		videoGridAdapter.setListener((MainActivityListener)getActivity());
 
 		if(channel != null)
 			videoGridAdapter.setYouTubeChannel(channel);

@@ -17,8 +17,6 @@
 
 package free.rm.skytube.businessobjects.VideoStream;
 
-import android.util.Log;
-
 /**
  * Video resolution (e.g. 1080p).
  */

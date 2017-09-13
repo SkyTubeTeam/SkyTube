@@ -18,6 +18,7 @@
 package free.rm.skytube.gui.businessobjects;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -35,10 +36,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import free.rm.skytube.R;
+import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.GetCommentThreads;
+import free.rm.skytube.businessobjects.GetYouTubeChannelInfoTask;
+import free.rm.skytube.businessobjects.YouTubeChannel;
+import free.rm.skytube.businessobjects.YouTubeChannelInterface;
 import free.rm.skytube.businessobjects.YouTubeComment;
 import free.rm.skytube.businessobjects.YouTubeCommentThread;
-import free.rm.skytube.app.SkyTubeApp;
+import free.rm.skytube.gui.activities.MainActivity;
+import free.rm.skytube.gui.fragments.ChannelBrowserFragment;
 
 /**
  * An adapter that will display comments in an {@link ExpandableListView}.
@@ -188,7 +194,7 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
 		}
 
 
-		protected void updateInfo(YouTubeComment comment, boolean isTopLevelComment, final int groupPosition) {
+		protected void updateInfo(final YouTubeComment comment, boolean isTopLevelComment, final int groupPosition) {
 			paddingView.setVisibility(isTopLevelComment ? View.GONE : View.VISIBLE);
 			authorTextView.setText(comment.getAuthor());
 			commentTextView.setText(comment.getComment());
@@ -198,6 +204,23 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
 					.load(comment.getThumbnailUrl())
 					.placeholder(R.drawable.channel_thumbnail_default)
 					.into(thumbnailImageView);
+
+			thumbnailImageView.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					if(comment.getAuthorChannelId() != null) {
+						new GetYouTubeChannelInfoTask(new YouTubeChannelInterface() {
+							@Override
+							public void onGetYouTubeChannel(YouTubeChannel youTubeChannel) {
+								Intent i = new Intent(context, MainActivity.class);
+								i.setAction(MainActivity.ACTION_VIEW_CHANNEL);
+								i.putExtra(ChannelBrowserFragment.CHANNEL_OBJ, youTubeChannel);
+								context.startActivity(i);
+							}
+						}).executeInParallel(comment.getAuthorChannelId());
+					}
+				}
+			});
 
 			// change the width dimensions depending on whether the comment is a top level or a child
 			ViewGroup.LayoutParams lp = thumbnailImageView.getLayoutParams();
