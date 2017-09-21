@@ -17,8 +17,10 @@
 
 package free.rm.skytube.gui.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
@@ -29,21 +31,25 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import java.util.List;
 
 import butterknife.Bind;
+import butterknife.OnClick;
 import free.rm.skytube.R;
+import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.GetSubscriptionVideosTask;
+import free.rm.skytube.businessobjects.MainActivityListener;
 import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.businessobjects.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTubeVideo;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
-import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.gui.businessobjects.SubsAdapter;
+import free.rm.skytube.gui.businessobjects.SubscriptionsBackupsManager;
 import free.rm.skytube.gui.businessobjects.SubscriptionsFragmentListener;
 
 /**
  * Fragment that displays subscriptions videos feed from all channels the user is subscribed to.
  */
 public class SubscriptionsFeedFragment extends VideosGridFragment implements SubscriptionsFragmentListener {
+	private MainActivityListener mainActivityListener;
 
 	private int numVideosFetched = 0;
 	private int numChannelsFetched = 0;
@@ -51,6 +57,7 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Sub
 	private boolean refreshInProgress = false;
 	private MaterialDialog progressDialog;
 	private boolean shouldRefresh = false;
+	private SubscriptionsBackupsManager subscriptionsBackupsManager;
 
 	@Bind(R.id.noSubscriptionsText)
 	View noSubscriptionsText;
@@ -60,6 +67,12 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Sub
 		super.onCreate(savedInstanceState);
 		shouldRefresh = true;
 		setLayoutResource(R.layout.videos_gridview_feed);
+		subscriptionsBackupsManager = new SubscriptionsBackupsManager(getActivity(), SubscriptionsFeedFragment.this, new Runnable() {
+			@Override
+			public void run() {
+				mainActivityListener.onSubscriptionsImported();
+			}
+		});
 	}
 
 	@Override
@@ -69,6 +82,16 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Sub
 		new GetTotalNumberOfChannelsTask().executeInParallel();
 	}
 
+	@Override
+	public void onAttach(Context context) {
+		super.onAttach(context);
+
+		try {
+			mainActivityListener = (MainActivityListener)context;
+		} catch (ClassCastException e) {
+			throw new ClassCastException(context.toString() + " must implement MainActivityListener");
+		}
+	}
 
 	private void doRefresh(boolean showDialog) {
 		new RefreshTask(showDialog).executeInParallel();
@@ -131,6 +154,9 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Sub
 		}
 	}
 
+	@Override
+	public void onAllChannelVideosFetched() {
+	}
 
 	@Override
 	public void onFragmentSelected() {
@@ -193,6 +219,10 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Sub
 		}
 	}
 
+	public void refreshVideoGrid() {
+		new SetVideosListTask().executeInParallel();
+	}
+
 
 	/**
 	 * A task that refreshes the videos of the {@link SubscriptionsFeedFragment}.
@@ -242,8 +272,31 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Sub
 		@Override
 		protected void onPostExecute(List<YouTubeVideo> youTubeVideos) {
 			videoGridAdapter.setList(youTubeVideos);
+			if(youTubeVideos.size() == 0) {
+				swipeRefreshLayout.setVisibility(View.GONE);
+				noSubscriptionsText.setVisibility(View.VISIBLE);
+			} else {
+				if(swipeRefreshLayout.getVisibility() != View.VISIBLE) {
+					swipeRefreshLayout.setVisibility(View.VISIBLE);
+					noSubscriptionsText.setVisibility(View.GONE);
+				}
+			}
 		}
 
 	}
 
+	@OnClick(R.id.importSubscriptionsButton)
+	public void importSubscriptions(View v) {
+		subscriptionsBackupsManager.displayImportSubscriptionsDialog();
+	}
+
+	@OnClick(R.id.importBackupButton)
+	public void importBackup(View v) {
+		subscriptionsBackupsManager.displayFilePicker();
+	}
+
+	@Override
+	public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+		subscriptionsBackupsManager.onRequestPermissionsResult(requestCode, permissions, grantResults);
+	}
 }

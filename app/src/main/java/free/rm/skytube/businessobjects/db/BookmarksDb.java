@@ -28,8 +28,8 @@ import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
 import java.util.List;
 
-import free.rm.skytube.businessobjects.YouTubeVideo;
 import free.rm.skytube.app.SkyTubeApp;
+import free.rm.skytube.businessobjects.YouTubeVideo;
 
 /**
  * A database (DB) that stores user's bookmarked videos.

@@ -21,6 +21,7 @@ import android.content.ClipDescription;
 import android.content.ClipboardManager;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -38,8 +39,10 @@ import android.widget.FrameLayout;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import free.rm.skytube.R;
+import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.MainActivityListener;
 import free.rm.skytube.businessobjects.YouTubeChannel;
+import free.rm.skytube.gui.businessobjects.SubsAdapter;
 import free.rm.skytube.gui.businessobjects.YouTubePlayer;
 import free.rm.skytube.gui.businessobjects.updates.UpdatesCheckerTask;
 import free.rm.skytube.gui.fragments.ChannelBrowserFragment;
@@ -65,6 +68,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 	public static final String CHANNEL_BROWSER_FRAGMENT = "MainActivity.ChannelBrowserFragment";
 
 	private boolean dontAddToBackStack = false;
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -102,6 +106,21 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 		}
 	}
 
+	/**
+	 * When subscriptions are imported from a Google/YouTube account, via the Preferences screen (PreferencesActivity),
+	 * the boolean #SkyTubeApp.KEY_SET_UPDATE_FEED_TAB will get set to true. When we return to this activity afterwards,
+	 * reset the boolean and update the Feed tab so that the videos from the newly subscribed channels are shown.
+	 */
+	@Override
+	protected void onResume() {
+		super.onResume();
+		if(SkyTubeApp.getPreferenceManager().getBoolean(SkyTubeApp.KEY_SET_UPDATE_FEED_TAB, false)) {
+			SharedPreferences.Editor editor = SkyTubeApp.getPreferenceManager().edit();
+			editor.putBoolean(SkyTubeApp.KEY_SET_UPDATE_FEED_TAB, false);
+			editor.commit();
+			onSubscriptionsImported();
+		}
+	}
 
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
@@ -171,6 +190,10 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 		return super.onOptionsItemSelected(item);
 	}
 
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+	}
 
 	/**
 	 * Display the Enter Video URL dialog.
@@ -274,4 +297,11 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 		channelBrowserFragment.setArguments(args);
 		switchToFragment(channelBrowserFragment);
 	}
+
+	@Override
+	public void onSubscriptionsImported() {
+		mainFragment.refreshSubscriptionsFeed();
+		SubsAdapter.get(MainActivity.this).refreshSubsList();
+	}
+
 }

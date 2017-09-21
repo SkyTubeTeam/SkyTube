@@ -202,4 +202,8 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 
 	}
 
+	public void refreshSubsList() {
+		clearList();
+		new GetSubscribedChannelsTask(this, null).executeInParallel();
+	}
 }

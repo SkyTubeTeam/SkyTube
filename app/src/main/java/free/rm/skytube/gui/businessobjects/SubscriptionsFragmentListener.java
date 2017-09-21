@@ -25,4 +25,5 @@ import free.rm.skytube.businessobjects.YouTubeChannel;
  */
 public interface SubscriptionsFragmentListener {
 	void onChannelVideosFetched(YouTubeChannel channel, int videosFetched, boolean videosDeleted);
+	void onAllChannelVideosFetched();
 }

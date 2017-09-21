@@ -20,8 +20,8 @@ package free.rm.skytube.gui.activities;
 import java.util.List;
 
 import free.rm.skytube.R;
-import free.rm.skytube.gui.fragments.preferences.AboutPreferenceFragment;
 import free.rm.skytube.gui.businessobjects.preferences.ActionBarPreferenceActivity;
+import free.rm.skytube.gui.fragments.preferences.AboutPreferenceFragment;
 import free.rm.skytube.gui.fragments.preferences.BackupPreferenceFragment;
 import free.rm.skytube.gui.fragments.preferences.LanguagesPreferenceFragment;
 import free.rm.skytube.gui.fragments.preferences.OthersPreferenceFragment;
