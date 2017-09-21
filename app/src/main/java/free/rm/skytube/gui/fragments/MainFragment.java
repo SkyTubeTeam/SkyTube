@@ -182,4 +182,9 @@ public class MainFragment extends FragmentEx {
 
 	}
 
+	public void refreshSubscriptionsFeed() {
+		if(subscriptionsFeedFragment != null) {
+			subscriptionsFeedFragment.refreshVideoGrid();
+		}
+	}
 }

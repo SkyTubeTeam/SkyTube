@@ -29,8 +29,8 @@ import java.util.Date;
 import java.util.List;
 
 import free.rm.skytube.R;
-import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 import free.rm.skytube.app.SkyTubeApp;
+import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 import free.rm.skytube.gui.businessobjects.SubscriptionsFragmentListener;
 
 import static free.rm.skytube.app.SkyTubeApp.getContext;
@@ -44,16 +44,28 @@ public class GetSubscriptionVideosTask extends AsyncTaskParallel<Void, Void, Voi
 	private SubscriptionsFragmentListener listener;
 	private int numTasksLeft = 0;
 	private int numTasksFinished = 0;
-
+	boolean foundVideos = false;
+	boolean forceRefresh = false;
+	private List<YouTubeChannel> overriddenChannels;
 
 	public GetSubscriptionVideosTask(SubscriptionsFragmentListener listener) {
 		this.listener = listener;
 	}
 
+	public GetSubscriptionVideosTask setForceRefresh(boolean forceRefresh) {
+		this.forceRefresh = forceRefresh;
+		return this;
+	}
+
+	public GetSubscriptionVideosTask setChannelsToRefresh(List<YouTubeChannel> channels) {
+		overriddenChannels = channels;
+		return this;
+	}
+
 	@Override
 	protected Void doInBackground(Void... voids) {
 		try {
-			List<YouTubeChannel> channels = SubscriptionsDb.getSubscriptionsDb().getSubscribedChannels(false);
+			List<YouTubeChannel> channels = overriddenChannels != null ? overriddenChannels : SubscriptionsDb.getSubscriptionsDb().getSubscribedChannels(false);
 			for(YouTubeChannel channel : channels) {
 				tasks.add(new GetChannelVideosTask(channel));
 			}
@@ -94,7 +106,7 @@ public class GetSubscriptionVideosTask extends AsyncTaskParallel<Void, Void, Voi
 				long l = SkyTubeApp.getPreferenceManager().getLong(SkyTubeApp.KEY_SUBSCRIPTIONS_LAST_UPDATED, -1);
 				if(l != -1) {
 					DateTime subscriptionsLastUpdated = new DateTime(l);
-					if (subscriptionsLastUpdated != null)
+					if (subscriptionsLastUpdated != null && !forceRefresh)
 						getChannelVideos.setPublishedAfter(subscriptionsLastUpdated);
 					else // For the first fetch, default to only videos published in the last month.
 						getChannelVideos.setPublishedAfter(getOneMonthAgo());
@@ -144,6 +156,10 @@ public class GetSubscriptionVideosTask extends AsyncTaskParallel<Void, Void, Voi
 				SharedPreferences.Editor editor = SkyTubeApp.getPreferenceManager().edit();
 				editor.putLong(SkyTubeApp.KEY_SUBSCRIPTIONS_LAST_UPDATED, new DateTime(new Date()).getValue());
 				editor.commit();
+				if(listener != null)
+					listener.onChannelVideosFetched(channel, youTubeVideos != null ? youTubeVideos.size() : 0, videosDeleted);
+				if(listener != null)
+					listener.onAllChannelVideosFetched();
 			}
 			if(listener != null)
 				listener.onChannelVideosFetched(channel, youTubeVideos != null ? youTubeVideos.size() : 0, videosDeleted);

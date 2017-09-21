@@ -37,6 +37,11 @@
 	<string name="databases_import_fail">Failed to import your databases.</string>
 	<string name="databases_import_success">Databases imported successfully.  Restart the app to apply changes.</string>
 
+	<string name="pref_key_import_subs">pref_key_import_subs</string>
+	<string name="pref_title_import_subs">Import Subscriptions From YouTube</string>
+	<string name="pref_summary_import_subs">Import your subscriptions from YouTube.</string>
+	<string name="subs_import_select_backup">Select YouTube xml file to import</string>
+
 	<string name="pref_about_category">About</string>
 	<string name="pref_title_website">Website</string>
 	<string name="pref_key_website">pref_website</string>

@@ -36,4 +36,10 @@ public interface MainActivityListener {
 	 */
 	void onChannelClick(YouTubeChannel channel);
 
+	/**
+	 * Called when subscriptions from a YouTube/Google account are imported. MainActivity will use this
+	 * to update the Feed tab with videos from the newly subscribed channels.
+	 */
+	void onSubscriptionsImported();
+
 }

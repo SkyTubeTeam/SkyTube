@@ -17,8 +17,6 @@
 
 package free.rm.skytube.businessobjects;
 
-import android.util.Log;
-
 import java.util.Random;
 
 import free.rm.skytube.BuildConfig;
@@ -76,7 +74,7 @@ public class YouTubeAPIKey {
 			key = BuildConfig.YOUTUBE_API_KEYS[i];
 		}
 
-		Log.d(TAG, "Key = " + key);
+//		Log.d(TAG, "Key = " + key);
 		return key;
 	}
 

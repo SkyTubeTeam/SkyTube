@@ -34,9 +34,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTubeVideo;
-import free.rm.skytube.app.SkyTubeApp;
 
 /**
  * A database (DB) that stores user subscriptions (with respect to YouTube channels).

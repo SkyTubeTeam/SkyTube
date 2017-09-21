@@ -41,9 +41,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import free.rm.skytube.R;
+import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.VideoStream.ParseStreamMetaData;
 import free.rm.skytube.businessobjects.VideoStream.StreamMetaDataList;
-import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.db.BookmarksDb;
 
 /**
