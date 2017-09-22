@@ -150,6 +150,8 @@ public class GetSubscriptionVideosTask extends AsyncTaskParallel<Void, Void, Voi
 					tasks.get(0).executeInParallel();
 					tasks.remove(0);
 				}
+				if(listener != null)
+					listener.onChannelVideosFetched(channel, youTubeVideos != null ? youTubeVideos.size() : 0, videosDeleted);
 			} else {
 				videosDeleted = SubscriptionsDb.getSubscriptionsDb().trimSubscriptionVideos();
 				// All channels have finished querying. Update the last time this refresh was done.
@@ -161,8 +163,6 @@ public class GetSubscriptionVideosTask extends AsyncTaskParallel<Void, Void, Voi
 				if(listener != null)
 					listener.onAllChannelVideosFetched();
 			}
-			if(listener != null)
-				listener.onChannelVideosFetched(channel, youTubeVideos != null ? youTubeVideos.size() : 0, videosDeleted);
 		}
 
 
