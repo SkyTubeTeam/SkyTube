@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="error_stream_err_unavailable">Error desconocido</string>
-	<string name="error_stream_decryption_fail">No se pudo desencriptar el servicio de Youtube.</string>
-	<string name="error_stream_parse_error">Error al interpretar</string>
+	<string name="error_stream_decryption_fail">No se pudo cargar el código de descifrado para el servicio de Youtube.</string>
+	<string name="error_stream_parse_error">Error al analizar</string>
 
 	<string name="error_video_play">Error al reproducir</string>
 	<string name="error_video_streams_empty">¡El vídeo %s no tiene transmisiones!</string>
+	<string name="error_video_streams">Ocurrió un error al obtener las transmisiones del vídeo.</string>
 	<string name="error_get_video_desc">Ocurrió un error al obtener la descripción del vídeo.</string>
 	<string name="error_invalid_url">URL de vídeo inválida:  %s</string>
 
-	<string name="warning_live_video">No se puede reproducir la transmisión en vivo por ahora. ¿Reproducir la transmisión en vivo externamente?</string>
+	<string name="warning_live_video">No se pueden reproducir las transmisiones en vivo por ahora. ¿Reproducir la transmisión en vivo externamente?</string>
 
 	<string name="ratings_disabled">Puntuaciones desactivadas</string>
 
@@ -24,10 +25,10 @@
 
 	<string name="error_get_comments">Ocurrió un error al obtener los comentarios.</string>
 	<string name="no_video_comments">Este vídeo no tiene comentarios o los comentarios están desactivados.</string>
-	<string name="view_replies">Ver respuestas</string>
+	<string name="view_replies">Mostrar respuestas</string>
 	<string name="hide_replies">Ocultar respuestas</string>
 
-	<string name="enter_video_url">Introduce la URL del vídeo</string>
+	<string name="enter_video_url">Introducir la URL del vídeo</string>
 	<string name="play">Reproducir</string>
 	<string name="cancel">Cancelar</string>
 	<string name="clear">Limpiar</string>
