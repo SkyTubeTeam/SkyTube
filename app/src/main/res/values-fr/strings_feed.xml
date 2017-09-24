@@ -6,4 +6,5 @@
 	<string name="fetched_videos_from_channels">%1$d vidéos de %2$d/%3$d chaines.</string>
 	<string name="no_new_videos_found">Pas de nouvelles vidéos.</string>
 	<string name="no_subscriptions_text">Vous êtes abonné à aucune chaine, Dès que vous le serez, Les vidéos de moins d\'un mois apparaîtront ici.</string>
+	<string name="import_subscriptions_from_youtube">Import Subscriptions From YouTube</string>
 </resources>

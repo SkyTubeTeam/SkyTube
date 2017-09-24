@@ -37,6 +37,11 @@
 	<string name="databases_import_fail">Impossible d\'importer la sauvegarde.</string>
 	<string name="databases_import_success">Sauvegarde importée avec succès.  Redémarez l\'application.</string>
 
+	<string name="pref_key_import_subs">pref_key_import_subs</string>
+	<string name="pref_title_import_subs">Import Subscriptions From YouTube</string>
+	<string name="pref_summary_import_subs">Import your subscriptions from YouTube.</string>
+	<string name="subs_import_select_backup">Select YouTube xml file to import</string>
+
 	<string name="pref_about_category">À propos</string>
 	<string name="pref_title_website">Site internet</string>
 	<string name="pref_key_website">pref_website</string>

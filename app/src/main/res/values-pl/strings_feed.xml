@@ -6,4 +6,5 @@
 	<string name="fetched_videos_from_channels">Pobrano %1$d filmów z %2$d/%3$d kanałów.</string>
 	<string name="no_new_videos_found">Nie znaleziono żadnych filmów.</string>
 	<string name="no_subscriptions_text">Nie subskrybujesz żadnych kanałów.\n\nKiedy będziesz, wszystkie filmy dodane do subskrybowanych kanałów w ciągu ostatniego miesiąca pojawią się tutaj.</string>
+	<string name="import_subscriptions_from_youtube">Import Subscriptions From YouTube</string>
 </resources>
