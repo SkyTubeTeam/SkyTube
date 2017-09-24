@@ -18,26 +18,64 @@
 package free.rm.skytube.gui.businessobjects;
 
 import android.content.Context;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatButton;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.RemoteViews;
 
 import free.rm.skytube.R;
+import free.rm.skytube.businessobjects.GetChannelVideosTask;
+import free.rm.skytube.businessobjects.YouTubeChannel;
+import free.rm.skytube.businessobjects.db.SubscribeToChannelTask;
 
 /**
  * The (channel) subscribe button.
  */
 @RemoteViews.RemoteView
-public class SubscribeButton extends AppCompatButton {
+public class SubscribeButton extends AppCompatButton implements View.OnClickListener {
 
 	/** Is user subscribed to a channel? */
 	private boolean isUserSubscribed = false;
 
+	private YouTubeChannel channel;
+	private boolean fetchChannelVideosOnSubscribe = true;
+	private OnClickListener externalClickListener = null;
+
 
 	public SubscribeButton(Context context, AttributeSet attrs) {
 		super(context, attrs);
+		super.setOnClickListener(this);
 	}
 
+	@Override
+	public void onClick(View view) {
+		// Need to handle externalClickListener first, in case this Button is used by the ChannelBrowserFragment,
+		// which will save the channel's videos to the channel object from the video grid. The channels will then be saved
+		// by the SubscribeToChannelTask.
+		if(externalClickListener != null) {
+			externalClickListener.onClick(SubscribeButton.this);
+		}
+		if(fetchChannelVideosOnSubscribe) {
+			new GetChannelVideosTask(channel).executeInParallel();
+		}
+		if(channel != null)
+			new SubscribeToChannelTask(SubscribeButton.this, channel).executeInParallel();
+	}
+
+	@Override
+	public void setOnClickListener(@Nullable OnClickListener l) {
+		externalClickListener = l;
+		super.setOnClickListener(this);
+	}
+
+	public void setChannel(YouTubeChannel channel) {
+		this.channel = channel;
+	}
+
+	public void setFetchChannelVideosOnSubscribe(boolean fetchChannelVideosOnSubscribe) {
+		this.fetchChannelVideosOnSubscribe = fetchChannelVideosOnSubscribe;
+	}
 
 	public boolean isUserSubscribed() {
 		return isUserSubscribed;
