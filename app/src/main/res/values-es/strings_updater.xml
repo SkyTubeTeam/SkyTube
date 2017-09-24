@@ -2,6 +2,8 @@
 <resources>
 	<string name="update_available">Actualización disponible</string>
 	<string name="update_dialog_msg">Una nueva versión de SkyTube está disponible. La aplicación se actualizará a la versión %s.</string>
+	<string name="up_to_date">Actualizado</string>
+	<string name="up_to_date_msg">Tienes la versión más reciente de SkyTube instalada.</string>
 	<string name="update">Actualizar</string>
 	<string name="later">Recordar luego</string>
 	<string name="update_failure">No se pudo actualizar la aplicación.</string>
