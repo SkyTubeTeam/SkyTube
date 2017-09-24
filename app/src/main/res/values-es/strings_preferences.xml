@@ -18,6 +18,29 @@
 	<string name="pref_title_use_offical_player">Usar el reproductor oficial de YouTube</string>
 	<string name="pref_key_use_offical_player">pref_use_official_youtube_player</string>
 	<string name="pref_summary_use_offical_player">No recomendado</string>
+	
+	<string name="pref_backup_category">Respaldos</string>
+	<string name="pref_title_backup_dbs">Base de datos de respaldo</string>
+	<string name="pref_key_backup_dbs">pref_key_backup_db</string>
+	<string name="pref_summary_backup_dbs">Respalde la base de datos de sus suscripciones y marcadores.</string>
+	<string name="pref_title_import_dbs">Importar respaldo</string>
+	<string name="pref_key_import_dbs">pref_key_import_db</string>
+	<string name="pref_summary_import_dbs">Importe la base de datos de los respaldos de sus suscripciones y marcadores.</string>
+	<string name="databases_backing_up">Respaldando…</string>
+	<string name="databases_backup_success">Base de datos respaldada a %s</string>
+	<string name="databases_backup_fail">Error al respaldar su base de datos.</string>
+	<string name="databases_import_select_backup">Seleccione el archivo de respaldo a importar</string>
+	<string name="databases_import_nothing_selected">No ha seleccionado nada…</string>
+	<string name="databases_import_warning_message">La base de datos de las suscripciones y marcadores será REEMPLAZADA con los datos del archivo de respaldo seleccionado.\n\n¿Continuar?</string>
+	<string name="continue_">Continuar</string>
+	<string name="databases_importing">Importando…</string>
+	<string name="databases_import_fail">Error al importar su base de datos.</string>
+	<string name="databases_import_success">Base de datos importada exitosamente. Reinicie la app para aplicar los cambios.</string>
+	
+	<string name="pref_key_import_subs">pref_key_import_subs</string>
+	<string name="pref_title_import_subs">Importar subscripciones desde YouTube</string>
+	<string name="pref_summary_import_subs">Importe sus suscriciones desde YouTube.</string>
+	<string name="subs_import_select_backup">Seleccione el archivo XML de YouTube a importar</string>
 
 	<string name="pref_backup_category">Backups</string>
 	<string name="pref_title_backup_dbs">Backup Databases</string>
@@ -50,25 +73,27 @@
 	<string name="pref_summary_credits">Personas y proyectos que hacen posible esta aplicación.</string>
 	<string name="pref_title_version">Versión</string>
 	<string name="pref_key_version">pref_version</string>
-	<string name="pref_title_updates">Updates</string>
+	<string name="pref_title_updates">Actualizaciones</string>
 	<string name="pref_key_updates">pref_updates</string>
-	<string name="pref_summary_updates">Check for updates.</string>
+	<string name="pref_summary_updates">Buscar actualizaciones.</string>
 	<string name="pref_title_license">Licencia</string>
 	<string name="pref_key_license">pref_license</string>
 	<string name="pref_summary_license">GNU General Public License version 3</string>
-	<string name="app_license">Copyright &#169; 2015-2017  Ramon Mifsud\n
+	<string name="app_license">
+		Copyright &#169; 2015-2017  Ramon Mifsud\n
 
-				\nThis program is free software: you can redistribute it and/or modify
-				it under the terms of the GNU General Public License as published by
-				the Free Software Foundation (version 3 of the License).\n
+		\nThis program is free software: you can redistribute it and/or modify
+		it under the terms of the GNU General Public License as published by
+		the Free Software Foundation (version 3 of the License).\n
 
-				\nThis program is distributed in the hope that it will be useful,
-				but WITHOUT ANY WARRANTY; without even the implied warranty of
-				MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-				GNU General Public License for more details.\n
+		\nThis program is distributed in the hope that it will be useful,
+		but WITHOUT ANY WARRANTY; without even the implied warranty of
+		MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+		GNU General Public License for more details.\n
 
-				\nYou should have received a copy of the GNU General Public License
-				along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;</string>
+		\nYou should have received a copy of the GNU General Public License
+		along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;
+	</string>
 	<string name="i_agree">Acepto</string>
 
 
@@ -233,7 +258,7 @@
 
 	<!-- NB for Translators:  Country names shall all be written in English -->
 	<string-array name="country_names">
-		<item>Mundial (Todos)</item>
+		<item>Worldwide (All)</item>
 		<item>Algeria</item>
 		<item>Argentina</item>
 		<item>Australia</item>
@@ -432,6 +457,27 @@
 		<item>2</item>
 		<item>3</item>
 	</string-array>
+	
+        <string name="pref_key_screen_orientation">pref_key_screen_orientation</string>
+	<string name="pref_title_screen_orientation">Orientación de pantalla</string>
+	<string name="pref_summary_screen_orientation">Rotación del reproductor</string>
+	<string name="pref_screen_landscape">Horizontal</string>
+	<string name="pref_screen_portrait">Vertical</string>
+	<string name="pref_screen_auto">Automático</string>
+	<string name="pref_screen_sensor">Sensor del dispositivo</string>
+	<string-array name="screen_orientations">
+		<item>@string/pref_screen_auto</item>
+		<item>@string/pref_screen_landscape</item>
+		<item>@string/pref_screen_portrait</item>
+		<item>@string/pref_screen_sensor</item>
+	</string-array>
+	<string-array name="screen_orientations_values">
+		<item>auto</item>
+		<item>landscape</item>
+		<item>portrait</item>
+		<item>sensor</item>
+	</string-array>
+
 
 	<string name="pref_key_screen_orientation">pref_key_screen_orientation</string>
 	<string name="pref_title_screen_orientation">Screen Orientation</string>
