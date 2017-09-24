@@ -22,10 +22,10 @@ For screenshots and more information, please visit [www.skytube-app.com](http://
 ### Download SkyTube Extra
 [![Download SkyTube Extra APK](screenshots/download_apk.png)](https://github.com/ram-on/SkyTube/releases/download/v2.50/SkyTube-Extra-2.50.apk)
 
-Open source app with contains extra features.  These extra features uses third-party closed source library:
+Open source app with extra features.  These extra features use third-party closed source libraries:
 * YouTubeAndroidPlayerApi.jar (optional usage)
 
-Updates are published immediately: the app will you whenever there is an update.
+Updates are published immediately: the app will notify you whenever there is an update.
 
 ### Download SkyTube (Vanilla)
 [![Download SkyTube (Vanilla) APK](https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Get_it_on_F-Droid.svg/200px-Get_it_on_F-Droid.svg.png)](https://f-droid.org/repository/browse/?fdid=free.rm.skytube.oss)
