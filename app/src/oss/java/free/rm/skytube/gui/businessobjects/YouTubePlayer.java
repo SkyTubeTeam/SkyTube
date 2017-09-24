@@ -19,6 +19,7 @@ package free.rm.skytube.gui.businessobjects;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 
 import free.rm.skytube.businessobjects.YouTubeVideo;
 import free.rm.skytube.gui.activities.YouTubePlayerActivity;
@@ -39,6 +40,19 @@ public class YouTubePlayer {
 	public static void launch(YouTubeVideo youTubeVideo, Context context) {
 		Intent i = new Intent(context, YouTubePlayerActivity.class);
 		i.putExtra(YouTubePlayerFragment.YOUTUBE_VIDEO_OBJ, youTubeVideo);
+		context.startActivity(i);
+	}
+
+
+	/**
+	 * Launches the custom-made YouTube player so that the user can view the selected video.
+	 *
+	 * @param videoUrl URL of the video to be watched.
+	 */
+	public static void launch(String videoUrl, Context context) {
+		Intent i = new Intent(context, YouTubePlayerActivity.class);
+		i.setAction(Intent.ACTION_VIEW);
+		i.setData(Uri.parse(videoUrl));
 		context.startActivity(i);
 	}
 

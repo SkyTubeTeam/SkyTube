@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ SkyTube
+  ~ Copyright (C) 2017  Ramon Mifsud
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation (version 3 of the License).
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<preference-headers xmlns:android="http://schemas.android.com/apk/res/android">
+
+	<header
+		android:fragment="free.rm.skytube.gui.fragments.preferences.VideoPlayerPreferenceFragment"
+		android:icon="@drawable/ic_pref_video_player"
+		android:title="@string/pref_video_player_category">
+	</header>
+
+	<header
+		android:fragment="free.rm.skytube.gui.fragments.preferences.LanguagesPreferenceFragment"
+		android:icon="@drawable/ic_pref_languages_regions"
+		android:title="@string/pref_languages_category">
+	</header>
+
+	<header
+		android:fragment="free.rm.skytube.gui.fragments.preferences.BackupPreferenceFragment"
+		android:icon="@drawable/ic_pref_backup"
+		android:title="@string/pref_backup_category">
+	</header>
+
+	<header
+		android:fragment="free.rm.skytube.gui.fragments.preferences.OthersPreferenceFragment"
+		android:icon="@drawable/ic_pref_others"
+		android:title="@string/pref_other_category">
+	</header>
+
+	<header
+		android:fragment="free.rm.skytube.gui.fragments.preferences.AboutPreferenceFragment"
+		android:icon="@drawable/ic_pref_about"
+		android:title="@string/pref_about_category">
+	</header>
+
+</preference-headers>

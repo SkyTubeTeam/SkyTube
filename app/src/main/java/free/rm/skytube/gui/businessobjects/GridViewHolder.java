@@ -18,13 +18,21 @@
 package free.rm.skytube.gui.businessobjects;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.MainActivityListener;
 import free.rm.skytube.businessobjects.YouTubeVideo;
@@ -38,27 +46,27 @@ public class GridViewHolder extends RecyclerView.ViewHolder {
 	private Context context = null;
 	private MainActivityListener listener;
 
-	private View channelLayout;
-	private TextView titleTextView;
-	private TextView channelTextView;
-	private TextView thumbsUpPercentageTextView;
-	private TextView videoDurationTextView;
-	private TextView publishDateTextView;
-	private TextView viewsTextView;
-	private ImageView thumbnailImageView;
+	@Bind(R.id.channel_layout)
+	View channelLayout;
+ 	@Bind(R.id.title_text_view)
+	TextView titleTextView;
+ 	@Bind(R.id.channel_text_view)
+ 	TextView channelTextView;
+ 	@Bind(R.id.thumbs_up_text_view)
+ 	TextView thumbsUpPercentageTextView;
+ 	@Bind(R.id.video_duration_text_view)
+ 	TextView videoDurationTextView;
+ 	@Bind(R.id.publish_date_text_view)
+ 	TextView publishDateTextView;
+ 	@Bind(R.id.thumbnail_image_view)
+ 	ImageView thumbnailImageView;
+ 	@Bind(R.id.views_text_view)
+ 	TextView viewsTextView;
 
 
 	public GridViewHolder(View view, MainActivityListener listener) {
 		super(view);
-		channelLayout = view.findViewById(R.id.channel_layout);
-		titleTextView = (TextView) view.findViewById(R.id.title_text_view);
-		channelTextView = (TextView) view.findViewById(R.id.channel_text_view);
-		thumbsUpPercentageTextView = (TextView) view.findViewById(R.id.thumbs_up_text_view);
-		videoDurationTextView = (TextView) view.findViewById(R.id.video_duration_text_view);
-		publishDateTextView = (TextView) view.findViewById(R.id.publish_date_text_view);
-		viewsTextView = (TextView) view.findViewById(R.id.views_text_view);
-		thumbnailImageView = (ImageView) view.findViewById(R.id.thumbnail_image_view);
-
+		ButterKnife.bind(this, view);
 		this.listener = listener;
 	}
 
@@ -114,7 +122,7 @@ public class GridViewHolder extends RecyclerView.ViewHolder {
 			@Override
 			public void onClick(View thumbnailView) {
 				if (youTubeVideo != null) {
-					YouTubePlayer.launch(youTubeVideo, (Context)listener);
+					YouTubePlayer.launch(youTubeVideo, context);
 				}
 			}
 		});
@@ -137,4 +145,36 @@ public class GridViewHolder extends RecyclerView.ViewHolder {
 		channelLayout.setOnClickListener(channelListener);
 	}
 
+	@OnClick(R.id.options_button)
+ 	public void onOptionsButtonClick(final View view) {
+		final PopupMenu popupMenu = new PopupMenu(view.getContext(), view);
+		popupMenu.getMenuInflater().inflate(R.menu.video_options_menu, popupMenu.getMenu());
+		Menu menu = popupMenu.getMenu();
+		new IsVideoBookmarkedTask(youTubeVideo, menu).executeInParallel();
+		popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+			@Override
+			public boolean onMenuItemClick(MenuItem item) {
+				switch(item.getItemId()) {
+					case R.id.menu_open_video_with:
+						Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(youTubeVideo.getVideoUrl()));
+						context.startActivity(browserIntent);
+						return true;
+					case R.id.share:
+						youTubeVideo.shareVideo(view.getContext());
+						return true;
+					case R.id.copyurl:
+						youTubeVideo.copyUrl(context);
+						return true;
+					case R.id.bookmark_video:
+						youTubeVideo.bookmarkVideo(context, popupMenu.getMenu());
+						return true;
+					case R.id.unbookmark_video:
+						youTubeVideo.unbookmarkVideo(context, popupMenu.getMenu());
+						return true;
+				}
+				return false;
+			}
+		});
+		popupMenu.show();
+	}
 }

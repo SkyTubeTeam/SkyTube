@@ -12,7 +12,6 @@
 	<string name="pref_summary_preferred_languages">EXPERIMENTAL: Sélectionnez une ou plusieurs langue(s). Cela permettra de filter les vidéos populaires ainsi que vos recherches.</string>
 
 	<string name="pref_video_player_category">Lecteur vidéo</string>
-	<string name="pref_key_video_player_category">video_player_category</string>
 	<string name="pref_title_preferred_res">Résolution préférée</string>
 	<string name="pref_key_preferred_res">pref_preferred_resolution</string>
 	<string name="pref_summary_preferred_res">Sélectionnez une résolution</string>
@@ -20,14 +19,40 @@
 	<string name="pref_key_use_offical_player">pref_use_official_youtube_player</string>
 	<string name="pref_summary_use_offical_player">Non recommandé</string>
 
+	<string name="pref_backup_category">Sauvegardes</string>
+	<string name="pref_title_backup_dbs">Sauvegarder</string>
+	<string name="pref_key_backup_dbs">pref_key_backup_db</string>
+	<string name="pref_summary_backup_dbs">Sauvegardez vos chaines ainsi que vos Favoris.</string>
+	<string name="pref_title_import_dbs">Importer</string>
+	<string name="pref_key_import_dbs">pref_key_import_db</string>
+	<string name="pref_summary_import_dbs">Importez vos chaines ainsi que vos Favoris.</string>
+	<string name="databases_backing_up">Sauvegarde en cours…</string>
+	<string name="databases_backup_success">Données sauvegardées à %s</string>
+	<string name="databases_backup_fail">Impossible de sauvegarder vos données.</string>
+	<string name="databases_import_select_backup">Sélectionnez la sauvegarde à importer</string>
+	<string name="databases_import_nothing_selected">Aucune sauvegarde sélectionnée…</string>
+	<string name="databases_import_warning_message">Vos données seront REMPLACES par la sauvegarde sélectionnée.\n\nContinuer?</string>
+	<string name="continue_">Continuer</string>
+	<string name="databases_importing">Importation…</string>
+	<string name="databases_import_fail">Impossible d\'importer la sauvegarde.</string>
+	<string name="databases_import_success">Sauvegarde importée avec succès.  Redémarez l\'application.</string>
+
+	<string name="pref_key_import_subs">pref_key_import_subs</string>
+	<string name="pref_title_import_subs">Import Subscriptions From YouTube</string>
+	<string name="pref_summary_import_subs">Import your subscriptions from YouTube.</string>
+	<string name="subs_import_select_backup">Select YouTube xml file to import</string>
+
 	<string name="pref_about_category">À propos</string>
 	<string name="pref_title_website">Site internet</string>
 	<string name="pref_key_website">pref_website</string>
-	<string name="pref_title_credits">Credits</string>
+	<string name="pref_title_credits">Crédits</string>
 	<string name="pref_key_credits">pref_credits</string>
-	<string name="pref_summary_credits">People and projects that made this app possible.</string>
+	<string name="pref_summary_credits">Personnes et projets à qui ont participé à créer cette application.</string>
 	<string name="pref_title_version">Version</string>
 	<string name="pref_key_version">pref_version</string>
+	<string name="pref_title_updates">Mise à jour</string>
+	<string name="pref_key_updates">pref_updates</string>
+	<string name="pref_summary_updates">rechercher des Mises à jour.</string>
 	<string name="pref_title_license">License</string>
 	<string name="pref_key_license">pref_license</string>
 	<string name="pref_summary_license">GNU General Public License version 3</string>
@@ -410,11 +435,31 @@
 		<item>3</item>
 	</string-array>
 
+	<string name="pref_key_screen_orientation">pref_key_screen_orientation</string>
+	<string name="pref_title_screen_orientation">Orientation de l\'écran</string>
+	<string name="pref_summary_screen_orientation">Orientation du lecteur vidéo</string>
+	<string name="pref_screen_landscape">Paysage</string>
+	<string name="pref_screen_portrait">Portrait</string>
+	<string name="pref_screen_auto">Automatique</string>
+	<string name="pref_screen_sensor">Capteur téléphone</string>
+	<string-array name="screen_orientations">
+		<item>@string/pref_screen_auto</item>
+		<item>@string/pref_screen_landscape</item>
+		<item>@string/pref_screen_portrait</item>
+		<item>@string/pref_screen_sensor</item>
+	</string-array>
+	<string-array name="screen_orientations_values">
+		<item>auto</item>
+		<item>landscape</item>
+		<item>portrait</item>
+		<item>sensor</item>
+	</string-array>
+
 	<string name="pref_youtube_api_key">pref_youtube_api_key</string>
-	<string name="pref_title_youtube_api_key">YouTube API Key</string>
-	<string name="pref_summary_youtube_api_key">Enter your own YouTube Data API Key.  Leave blank to use the default one.</string>
-	<string name="pref_youtube_api_key_error">An error occurred attempting to validate the API Key you entered.</string>
-	<string name="pref_youtube_api_key_custom">Key is valid.  Restart app to use the new YouTube API key.</string>
-	<string name="pref_youtube_api_key_default">Restart app to switch back to default YouTube API key.</string>
-	<string name="restart">Restart</string>
+	<string name="pref_title_youtube_api_key">clé API youtube</string>
+	<string name="pref_summary_youtube_api_key">Entrer votre clé API.  Laisse blanc pour utiliser la clé API par défaut.</string>
+	<string name="pref_youtube_api_key_error">Erreur lors de la validation de votre clé API.</string>
+	<string name="pref_youtube_api_key_custom">clé valide.  Redémarrez l\'application.</string>
+	<string name="pref_youtube_api_key_default">Reémarrez l\'application pour utiliser la clé par défaut.</string>
+	<string name="restart">Redémarrer</string>
 </resources>

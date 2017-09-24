@@ -12,13 +12,35 @@
 	<string name="pref_summary_preferred_languages">EXPERIMENTAL: Select one or more preferred languages. This is used to filter out videos in the \"Most Popular\" video category and for video searches.</string>
 
 	<string name="pref_video_player_category">Video Player</string>
-	<string name="pref_key_video_player_category">video_player_category</string>
 	<string name="pref_title_preferred_res">Preferred Resolution</string>
 	<string name="pref_key_preferred_res">pref_preferred_resolution</string>
 	<string name="pref_summary_preferred_res">Select your preferred resolution</string>
 	<string name="pref_title_use_offical_player">Use official YouTube player</string>
 	<string name="pref_key_use_offical_player">pref_use_official_youtube_player</string>
 	<string name="pref_summary_use_offical_player">Not recommended</string>
+
+	<string name="pref_backup_category">Backups</string>
+	<string name="pref_title_backup_dbs">Backup Databases</string>
+	<string name="pref_key_backup_dbs">pref_key_backup_db</string>
+	<string name="pref_summary_backup_dbs">Backup your subscriptions and bookmarks databases.</string>
+	<string name="pref_title_import_dbs">Import Backup</string>
+	<string name="pref_key_import_dbs">pref_key_import_db</string>
+	<string name="pref_summary_import_dbs">Import your subscriptions and bookmarks databases backup.</string>
+	<string name="databases_backing_up">Backing up…</string>
+	<string name="databases_backup_success">Databases backed up to %s</string>
+	<string name="databases_backup_fail">Failed to backup your databases.</string>
+	<string name="databases_import_select_backup">Select backup file to import</string>
+	<string name="databases_import_nothing_selected">Nothing was selected…</string>
+	<string name="databases_import_warning_message">The subscriptions and bookmarks databases will be REPLACED with the data of the selected backup file.\n\nContinue?</string>
+	<string name="continue_">Continue</string>
+	<string name="databases_importing">Importing…</string>
+	<string name="databases_import_fail">Failed to import your databases.</string>
+	<string name="databases_import_success">Databases imported successfully.  Restart the app to apply changes.</string>
+
+	<string name="pref_key_import_subs">pref_key_import_subs</string>
+	<string name="pref_title_import_subs">Import Subscriptions From YouTube</string>
+	<string name="pref_summary_import_subs">Import your subscriptions from YouTube.</string>
+	<string name="subs_import_select_backup">Select YouTube xml file to import</string>
 
 	<string name="pref_about_category">About</string>
 	<string name="pref_title_website">Website</string>
@@ -28,6 +50,9 @@
 	<string name="pref_summary_credits">People and projects that made this app possible.</string>
 	<string name="pref_title_version">Version</string>
 	<string name="pref_key_version">pref_version</string>
+	<string name="pref_title_updates">Updates</string>
+	<string name="pref_key_updates">pref_updates</string>
+	<string name="pref_summary_updates">Check for updates.</string>
 	<string name="pref_title_license">License</string>
 	<string name="pref_key_license">pref_license</string>
 	<string name="pref_summary_license">GNU General Public License version 3</string>
@@ -393,7 +418,7 @@
 		<item>ZW</item>
 	</string-array>
 
-	<string name="pref_other_category">Other</string>
+	<string name="pref_other_category">Others</string>
 	<string name="pref_key_default_tab">pref_default_tab</string>
 	<string name="pref_title_default_tab">Default Tab</string>
 	<string name="pref_summary_default_tab">Default tab to show when SkyTube launches: %s</string>
@@ -408,6 +433,26 @@
 		<item>1</item>
 		<item>2</item>
 		<item>3</item>
+	</string-array>
+
+	<string name="pref_key_screen_orientation">pref_key_screen_orientation</string>
+	<string name="pref_title_screen_orientation">Screen Orientation</string>
+	<string name="pref_summary_screen_orientation">Rotation of the video player</string>
+	<string name="pref_screen_landscape">Landscape</string>
+	<string name="pref_screen_portrait">Portrait</string>
+	<string name="pref_screen_auto">Automatic</string>
+	<string name="pref_screen_sensor">Device sensor</string>
+	<string-array name="screen_orientations">
+		<item>@string/pref_screen_auto</item>
+		<item>@string/pref_screen_landscape</item>
+		<item>@string/pref_screen_portrait</item>
+		<item>@string/pref_screen_sensor</item>
+	</string-array>
+	<string-array name="screen_orientations_values">
+		<item>auto</item>
+		<item>landscape</item>
+		<item>portrait</item>
+		<item>sensor</item>
 	</string-array>
 
 	<string name="pref_youtube_api_key">pref_youtube_api_key</string>

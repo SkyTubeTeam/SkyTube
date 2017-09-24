@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="error_stream_err_unavailable">Mensagem de erro não está disponível.</string>
+	<string name="error_stream_decryption_fail">Não foi possível carregar o código de desencriptação para o serviço do Youtube.</string>
+	<string name="error_stream_parse_error">Parsing error.</string>
+
+	<string name="error_video_play">Mostrar erro do vídeo</string>
+	<string name="error_video_streams_empty">O vídeo %s não tem emissões!</string>
+	<string name="error_video_streams">An error has occurred while retrieving video\'s streams.</string>
+	<string name="error_get_video_desc">Ocorreu um erro ao obter a descrição do vídeo.</string>
+	<string name="error_invalid_url">URL de vídeo invalido: %s</string>
+
+	<string name="warning_live_video">Não é possível reproduzir emissões em direto agora.  Abrir emissão externamente?</string>
+
+	<string name="ratings_disabled">Ratings disabled</string>
+
+	<string name="loading_video">A carregar vídeo…</string>
+	<string name="get_new_video_steam">Nova emissão</string>
+	<string name="open_in_browser">Abrir no navegador</string>
+	<string name="open_with">Abrir com…</string>
+	<string name="share">Partilhar</string>
+	<string name="share_via">Partilhar via</string>
+	<string name="copy_url">Copiar URL</string>
+	<string name="url_copied_to_clipboard">URL copiado para a área de transferência.</string>
+
+	<string name="error_get_comments">Ocorreu um erro ao obter os comentários.</string>
+	<string name="no_video_comments">Este video não tem comentários ou estão desativados.</string>
+	<string name="view_replies">Ver respostas</string>
+	<string name="hide_replies">Ocultar respostas</string>
+
+	<string name="enter_video_url">Escrever URL do vídeo</string>
+	<string name="play">Reproduzir</string>
+	<string name="cancel">Cancelar</string>
+	<string name="clear">Limpar</string>
+</resources>

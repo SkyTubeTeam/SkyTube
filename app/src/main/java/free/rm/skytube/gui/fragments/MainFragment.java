@@ -107,23 +107,6 @@ public class MainFragment extends FragmentEx {
 			}
 		});
 
-		// The below appears to be useless as its job is being done by tabLayout.onTabSelected()...
-		// Will be removed if no bugs crop up.
-//		viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-//			@Override
-//			public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-//			}
-//
-//			@Override
-//			public void onPageSelected(int position) {
-//				//videoGridFragmentsList.get(position).onFragmentSelected();
-//			}
-//
-//			@Override
-//			public void onPageScrollStateChanged(int state) {
-//			}
-//		});
-
 		// select the default tab:  the default tab is defined by the user through the Preferences
 		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
 		viewPager.setCurrentItem(Integer.parseInt(sp.getString(getString(R.string.pref_key_default_tab), "0")));
@@ -199,4 +182,9 @@ public class MainFragment extends FragmentEx {
 
 	}
 
+	public void refreshSubscriptionsFeed() {
+		if(subscriptionsFeedFragment != null) {
+			subscriptionsFeedFragment.refreshVideoGrid();
+		}
+	}
 }

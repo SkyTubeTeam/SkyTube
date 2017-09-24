@@ -2,6 +2,8 @@
 <resources>
 	<string name="update_available">Frissítés elérhető</string>
 	<string name="update_dialog_msg">Egy új SkyTube frissítés érhető el. Az alkalmazás a %s verzióra lesz frissítve.</string>
+	<string name="up_to_date">Up To Date</string>
+	<string name="up_to_date_msg">You have the latest version of SkyTube installed.</string>
 	<string name="update">Frissítés</string>
 	<string name="later">Később</string>
 	<string name="update_failure">Nem sikerült frissíteni az alkalmazást.</string>

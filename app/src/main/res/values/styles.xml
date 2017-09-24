@@ -28,6 +28,13 @@
 	<style name="NoActionBarActivityTheme" parent="AppTheme">
 		<item name="windowActionBar">false</item>
 		<item name="windowNoTitle">true</item>
+		<item name="md_background_color">@color/colorPrimary</item>
+		<item name="md_title_color">@android:color/white</item>
+		<item name="md_content_color">@android:color/white</item>
+		<item name="md_positive_color">@android:color/white</item>
+		<item name="md_neutral_color">@android:color/white</item>
+		<item name="md_negative_color">@android:color/white</item>
+
 	</style>
 
 
@@ -189,5 +196,9 @@
 		<item name="android:background">@drawable/loading_rectangle</item>
 	</style>
 
+	<style name="WhiteBorderCheckBox" parent="AppTheme">
+		<item name="colorControlNormal">@android:color/white</item>
+		<item name="colorControlActivated">@android:color/white</item>
+	</style>
 
 </resources>

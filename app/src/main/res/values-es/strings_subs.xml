@@ -23,4 +23,3 @@
 	<string name="import_subscriptions_parse_error">Se encontró un error al intentar analizar el archivo XML que ha subido: %s.</string>
 	<string name="failed_to_import_subscriptions">Error al importar sus suscripciones de YouTube.</string>
 </resources>
-</resources>

@@ -6,6 +6,7 @@
 
 	<string name="error_video_play">Fehler beim Video abspielen</string>
 	<string name="error_video_streams_empty">Das Video %s hat keine Streams!</string>
+	<string name="error_video_streams">An error has occurred while retrieving video\'s streams.</string>
 	<string name="error_get_video_desc">Beim Abrufen der Videobeschreibung ist ein Fehler aufgetreten.</string>
 	<string name="error_invalid_url">Ungültige Video URL: %s</string>
 

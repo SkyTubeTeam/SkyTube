@@ -17,45 +17,33 @@
 
 package free.rm.skytube.gui.activities;
 
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
+import java.util.List;
 
 import free.rm.skytube.R;
-import free.rm.skytube.gui.fragments.PreferencesFragment;
+import free.rm.skytube.gui.businessobjects.preferences.ActionBarPreferenceActivity;
+import free.rm.skytube.gui.fragments.preferences.AboutPreferenceFragment;
+import free.rm.skytube.gui.fragments.preferences.BackupPreferenceFragment;
+import free.rm.skytube.gui.fragments.preferences.LanguagesPreferenceFragment;
+import free.rm.skytube.gui.fragments.preferences.OthersPreferenceFragment;
+import free.rm.skytube.gui.fragments.preferences.VideoPlayerPreferenceFragment;
 
 /**
- * The preferences activity allows the user to change the settings of this app.  This activity
- * loads {@link PreferencesFragment}.
+ * The preferences activity allows the user to change the settings of this app.
  */
-public class PreferencesActivity extends AppCompatActivity {
+public class PreferencesActivity extends ActionBarPreferenceActivity {
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-
-		// display the PreferencesFragment as the main content
-		getFragmentManager().beginTransaction()
-				.replace(android.R.id.content, new PreferencesFragment())
-				.commit();
-
-		// display the back button in the action bar (left-hand side)
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-		getSupportActionBar().setTitle(R.string.preferences);
+	public void onBuildHeaders(List<Header> target) {
+		loadHeadersFromResource(R.xml.preference_headers, target);
 	}
 
-
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-			// when the user clicks the back/home button...
-			case android.R.id.home:
-				// close this activity
-				finish();
-				return true;
-		}
-
-		return super.onOptionsItemSelected(item);
+	protected boolean isValidFragment(String fragmentName) {
+		return (fragmentName.equals(LanguagesPreferenceFragment.class.getName())
+			|| fragmentName.equals(VideoPlayerPreferenceFragment.class.getName())
+			|| fragmentName.equals(BackupPreferenceFragment.class.getName())
+			|| fragmentName.equals(OthersPreferenceFragment.class.getName())
+			|| fragmentName.equals(AboutPreferenceFragment.class.getName()));
 	}
 
 }

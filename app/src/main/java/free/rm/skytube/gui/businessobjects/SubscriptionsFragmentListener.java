@@ -19,6 +19,11 @@ package free.rm.skytube.gui.businessobjects;
 
 import free.rm.skytube.businessobjects.YouTubeChannel;
 
+/**
+ * A listener that will be notified when a new YouTube video is published to a channel that the user
+ * is subscribed to.
+ */
 public interface SubscriptionsFragmentListener {
 	void onChannelVideosFetched(YouTubeChannel channel, int videosFetched, boolean videosDeleted);
+	void onAllChannelVideosFetched();
 }

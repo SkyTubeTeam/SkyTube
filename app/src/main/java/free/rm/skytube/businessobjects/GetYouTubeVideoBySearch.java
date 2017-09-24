@@ -26,8 +26,6 @@ import com.google.api.services.youtube.model.SearchResult;
 import java.io.IOException;
 import java.util.List;
 
-import free.rm.skytube.gui.app.SkyTubeApp;
-
 /**
  * Get videos corresponding to the user's query (refer to {@link #setQuery(String)}).
  */

@@ -1,3 +1,26 @@
+v2.60 - 25 June 2016:
+	* Preference overhaul and improved user-friendliness:  Preferences are now using a two-pane
+	  layout.
+	* Added option for users to backup and import their subscriptions and bookmarks databases.
+	* Added option to change the video player's orientation.
+	* App now is able to detect if a video is blocked by country.
+	* Fixed issue #111:  Fixed a bug which caused to app to crash on certain devices if the back
+	  button is pressed.
+	* Updated Polish translations.
+	* SkyTube Extra:  Added the option for user to check for updates via the About preferences.
+
+v2.50 - 21 May 2017:
+	* App is now using NewPipeExtractor library to retrieve video streams' URLs.  In turn, this
+	  fixed #7.
+	* Fixed app auto-updater bug for Android 7.0+
+	* Added Italian translations.
+	* Added Portuguese translations.
+	* Updated Spanish translations.
+	* Fixed bug #94 and #111:  App crashed when the user presses the back button while on the Main
+	  Activity.
+	* Fixed a bug which caused the app to crash when the YouTube's API quota is reached.
+	* Other minor bug fixes.
+
 v2.41 - 23 Apr 2017:
 	* This version was released mainly because of F-Fdroid's version 2.4(0) did not include the
 	  following fix (d3a0bab): App used to crash when the MainFragment is rotated.

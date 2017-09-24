@@ -17,6 +17,8 @@
 
 package free.rm.skytube.businessobjects;
 
+import com.google.api.client.util.ArrayMap;
+
 /**
  * A YouTube comment.
  */
@@ -27,10 +29,14 @@ public class YouTubeComment {
 	private String datePublished;
 	private String likeCount;
 	private String thumbnailUrl;
+	private String authorChannelId;
 
 	public YouTubeComment(com.google.api.services.youtube.model.Comment comment) {
 		if (comment.getSnippet() != null) {
 			this.author = comment.getSnippet().getAuthorDisplayName();
+			ArrayMap<String, String> channelIdMap = (ArrayMap<String, String>)comment.getSnippet().getAuthorChannelId();
+			if(channelIdMap != null)
+				this.authorChannelId = channelIdMap.get("value");
 			this.comment = comment.getSnippet().getTextDisplay();
 			this.datePublished = new PrettyTimeEx().format(comment.getSnippet().getPublishedAt());
 			this.likeCount = comment.getSnippet().getLikeCount().toString();
@@ -58,4 +64,5 @@ public class YouTubeComment {
 		return thumbnailUrl;
 	}
 
+	public String getAuthorChannelId() { return authorChannelId; }
 }

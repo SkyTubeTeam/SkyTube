@@ -18,40 +18,40 @@
 package free.rm.skytube.gui.activities;
 
 import android.app.Activity;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
 
 import free.rm.skytube.R;
+import free.rm.skytube.app.SkyTubeApp;
+import free.rm.skytube.gui.businessobjects.BackButtonActivity;
 
 /**
  * An {@link Activity} that contains an instance of
  * {@link free.rm.skytube.gui.fragments.YouTubePlayerFragment}.
  */
-public class YouTubePlayerActivity extends AppCompatActivity {
+public class YouTubePlayerActivity extends BackButtonActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_video_player);
-
-		// enable back button (action bar)
-		ActionBar actionBar = getSupportActionBar();
-		if (actionBar != null)
-			actionBar.setDisplayHomeAsUpEnabled(true);
 	}
 
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-			// close this activity when the user clicks on the back button (action bar)
-			case android.R.id.home:
-				finish();
-				return true;
-			default:
-				return super.onOptionsItemSelected(item);
-		}
+	protected void onStart() {
+		super.onStart();
+		String str = SkyTubeApp.getPreferenceManager().getString(getString(R.string.pref_key_screen_orientation), "auto");
+		int orientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED;
+		if("landscape".equals(str)) orientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE;
+		if("portrait".equals(str)) orientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT;
+		if("sensor".equals(str)) orientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR;
+		setRequestedOrientation(orientation);
+	}
+
+	@Override
+	protected void onStop() {
+		super.onStop();
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
 	}
 
 }

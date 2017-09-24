@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="error_stream_err_unavailable">Messaggio di errore non disponibile.</string>
+	<string name="error_stream_decryption_fail">Impossibile caricare il codice di decrittografia per il servizio Youtube.</string>
+	<string name="error_stream_parse_error">Errore durante l\'analisi.</string>
+
+	<string name="error_video_play">Errore durante la riproduzione</string>
+	<string name="error_video_streams_empty">Il video %s non ha uno stream valido!</string>
+	<string name="error_video_streams">An error has occurred while retrieving video\'s streams.</string>
+	<string name="error_get_video_desc">Si è verificato un errore durante il recupero della descrizione del video.</string>
+	<string name="error_invalid_url">URL video non valido: %s</string>
+
+	<string name="warning_live_video">In questo momento non è possibile riprodurre lo stream in diretta.  Visualizza in diretta streaming esternamente?</string>
+
+	<string name="ratings_disabled">Valutazioni disattivate</string>
+
+	<string name="loading_video">Caricamento video…</string>
+	<string name="get_new_video_steam">Nuovo stream</string>
+	<string name="open_in_browser">Apri nel browser</string>
+	<string name="open_with">Apri con…</string>
+	<string name="share">Condividi</string>
+	<string name="share_via">Condividere tramite</string>
+	<string name="copy_url">Copia URL</string>
+	<string name="url_copied_to_clipboard">L\'URL è stato copiato negli appunti.</string>
+
+	<string name="error_get_comments">Si è verificato un errore durante l\'acquisizione dei commenti.</string>
+	<string name="no_video_comments">Questo video non ha commenti o i commenti sono disabilitati.</string>
+	<string name="view_replies">Visualizza risposte</string>
+	<string name="hide_replies">Nascondi risposte</string>
+
+	<string name="enter_video_url">Inserisci URL del video</string>
+	<string name="play">Play</string>
+	<string name="cancel">Annulla</string>
+	<string name="clear">Cancella</string>
+</resources>

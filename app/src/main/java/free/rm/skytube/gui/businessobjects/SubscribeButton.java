@@ -18,8 +18,8 @@
 package free.rm.skytube.gui.businessobjects;
 
 import android.content.Context;
+import android.support.v7.widget.AppCompatButton;
 import android.util.AttributeSet;
-import android.widget.Button;
 import android.widget.RemoteViews;
 
 import free.rm.skytube.R;
@@ -28,7 +28,7 @@ import free.rm.skytube.R;
  * The (channel) subscribe button.
  */
 @RemoteViews.RemoteView
-public class SubscribeButton extends Button {
+public class SubscribeButton extends AppCompatButton {
 
 	/** Is user subscribed to a channel? */
 	private boolean isUserSubscribed = false;

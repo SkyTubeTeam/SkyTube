@@ -9,4 +9,5 @@
 		Du hast keine kanäle abonniert.\n\nSobald du welche abonniert hast, sind hier
 		alle videos der abonnierten kanäle innerhalb des letzten Monats zu finden.
 	</string>
+	<string name="import_subscriptions_from_youtube">Import Subscriptions From YouTube</string>
 </resources>

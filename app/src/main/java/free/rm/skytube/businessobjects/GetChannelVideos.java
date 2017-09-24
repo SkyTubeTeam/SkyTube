@@ -17,21 +17,47 @@
 
 package free.rm.skytube.businessobjects;
 
+import android.util.Log;
+
 import com.google.api.client.util.DateTime;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Returns the videos of a channel.  The channel is specified by calling {@link #setQuery(String)}.
+ *
+ * <p>This class will detect if the user is using his own YouTube API key or not... if he is, then
+ * we are going to use {@link GetChannelVideosFull}; otherwise we are going to use
+ * {@link GetChannelVideosLite}.</p>
  */
-public class GetChannelVideos extends GetYouTubeVideoBySearch {
+public class GetChannelVideos extends GetYouTubeVideos implements GetChannelVideosInterface {
+
+	private GetYouTubeVideos getChannelVideos;
+	private static final String TAG = GetChannelVideos.class.getSimpleName();
 
 	@Override
 	public void init() throws IOException {
-		super.init();
-		videosList.setOrder("date");
+		if (YouTubeAPIKey.get().isUserApiKeySet()) {
+			getChannelVideos = new GetChannelVideosFull();
+			Log.d(TAG, "Using GetChannelVideosFull...");
+		} else {
+			getChannelVideos = new GetChannelVideosLite();
+			Log.d(TAG, "Using GetChannelVideosLite...");
+		}
+
+		getChannelVideos.init();
 	}
 
+	@Override
+	public List<YouTubeVideo> getNextVideos() {
+		return getChannelVideos.getNextVideos();
+	}
+
+	@Override
+	public boolean noMoreVideoPages() {
+		return getChannelVideos.noMoreVideoPages();
+	}
 
 	/**
 	 * Set the channel id.
@@ -40,14 +66,12 @@ public class GetChannelVideos extends GetYouTubeVideoBySearch {
 	 */
 	@Override
 	public void setQuery(String channelId) {
-		if (videosList != null)
-			videosList.setChannelId(channelId);
+		getChannelVideos.setQuery(channelId);
 	}
 
-
+	@Override
 	public void setPublishedAfter(DateTime dateTime) {
-		if (videosList != null)
-			videosList.setPublishedAfter(dateTime);
+		((GetChannelVideosInterface) getChannelVideos).setPublishedAfter(dateTime);
 	}
 
 }

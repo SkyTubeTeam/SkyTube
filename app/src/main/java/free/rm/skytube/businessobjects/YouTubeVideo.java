@@ -17,7 +17,13 @@
 
 package free.rm.skytube.businessobjects;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
+import android.view.Menu;
+import android.widget.Toast;
 
 import com.google.api.client.util.DateTime;
 import com.google.api.services.youtube.model.Thumbnail;
@@ -31,11 +37,14 @@ import java.math.RoundingMode;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import free.rm.skytube.R;
+import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.VideoStream.ParseStreamMetaData;
 import free.rm.skytube.businessobjects.VideoStream.StreamMetaDataList;
-import free.rm.skytube.gui.app.SkyTubeApp;
+import free.rm.skytube.businessobjects.db.BookmarksDb;
 
 /**
  * Represents a YouTube video.
@@ -133,15 +142,8 @@ public class YouTubeVideo implements Serializable {
 	public StreamMetaDataList getVideoStreamList() {
 		StreamMetaDataList streamMetaDataList;
 
-		try {
-			ParseStreamMetaData ex = new ParseStreamMetaData();
-			String errorMsg = ex.init(id);
-
-			streamMetaDataList = (errorMsg == null) ? ex.getStreamMetaDataList() : new StreamMetaDataList(errorMsg);
-		} catch (Exception e) {
-			Log.e(TAG, "An error has occurred while getting video metadata/streams for video with id=" + id, e);
-			streamMetaDataList = new StreamMetaDataList(SkyTubeApp.getStr(R.string.error_stream_parse_error));
-		}
+		ParseStreamMetaData streamParser = new ParseStreamMetaData(id);
+		streamMetaDataList = streamParser.getStreamMetaDataList();
 
 		return streamMetaDataList;
 	}
@@ -343,6 +345,63 @@ public class YouTubeVideo implements Serializable {
 	 */
 	private Set<String> getPreferredLanguages() {
 		return SkyTubeApp.getPreferenceManager().getStringSet(SkyTubeApp.getStr(R.string.pref_key_preferred_languages), defaultPrefLanguages);
+	}
+
+
+	/**
+	 * Extracts the video ID from the given video URL.
+	 *
+	 * @param url	YouTube video URL.
+	 * @return ID if everything went as planned; null otherwise.
+	 */
+	public static String getYouTubeIdFromUrl(String url) {
+		if (url == null)
+			return null;
+
+		// TODO:  support playlists (i.e. video_ids=... <-- URL submitted via email by YouTube)
+		final String pattern = "(?<=v=|/videos/|embed/|youtu\\.be/|/v/|/e/|video_ids=)[^#&?%]*";
+		Pattern compiledPattern = Pattern.compile(pattern);
+		Matcher matcher = compiledPattern.matcher(url);
+
+		return matcher.find() ? matcher.group() /*video id*/ : null;
+	}
+
+	public void bookmarkVideo(Context context, Menu menu) {
+		boolean successBookmark = BookmarksDb.getBookmarksDb().add(this);
+		Toast.makeText(context,
+						successBookmark  ?  R.string.video_bookmarked  :  R.string.video_bookmarked_error,
+						Toast.LENGTH_LONG).show();
+
+		if (successBookmark) {
+			menu.findItem(R.id.bookmark_video).setVisible(false);
+			menu.findItem(R.id.unbookmark_video).setVisible(true);
+		}
+	}
+
+	public void unbookmarkVideo(Context context, Menu menu) {
+		boolean successUnbookmark = BookmarksDb.getBookmarksDb().remove(this);
+		Toast.makeText(context,
+						successUnbookmark  ?  R.string.video_unbookmarked  :  R.string.video_unbookmarked_error,
+						Toast.LENGTH_LONG).show();
+
+		if (successUnbookmark) {
+			menu.findItem(R.id.bookmark_video).setVisible(true);
+			menu.findItem(R.id.unbookmark_video).setVisible(false);
+		}
+	}
+
+	public void shareVideo(Context context) {
+		Intent intent = new Intent(android.content.Intent.ACTION_SEND);
+		intent.setType("text/plain");
+		intent.putExtra(android.content.Intent.EXTRA_TEXT, getVideoUrl());
+		context.startActivity(Intent.createChooser(intent, context.getString(R.string.share_via)));
+	}
+
+	public void copyUrl(Context context) {
+		ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+		ClipData clip = ClipData.newPlainText("Video URL", getVideoUrl());
+		clipboard.setPrimaryClip(clip);
+		Toast.makeText(context, R.string.url_copied_to_clipboard, Toast.LENGTH_SHORT).show();
 	}
 
 }
