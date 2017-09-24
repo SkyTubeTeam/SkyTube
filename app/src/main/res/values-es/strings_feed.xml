@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="feed">Suscripciones</string>
+	<string name="feed">Feed</string>
 
 	<string name="fetching_subscription_videos">Comprobando vídeos de los canales suscritos</string>
 	<string name="fetched_videos_from_channels">Obtenidos %1$d vídeos desde %2$d/%3$d canales.</string>
 	<string name="no_new_videos_found">No se encontraron vídeos nuevos.</string>
 	<string name="no_subscriptions_text">No estás suscrito a ningún canal, cuando lo estés todos los vídeos del último mes de dichos canales aparecerán aquí.</string>
+	<string name="import_subscriptions_from_youtube">Importar suscripciones desde YouTube</string>
 </resources>
