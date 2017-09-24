@@ -29,9 +29,10 @@ import android.util.Log;
 
 import org.schabi.newpipe.extractor.NewPipe;
 import org.schabi.newpipe.extractor.StreamingService;
-import org.schabi.newpipe.extractor.stream_info.StreamExtractor;
-import org.schabi.newpipe.extractor.stream_info.StreamInfo;
-import org.schabi.newpipe.extractor.stream_info.VideoStream;
+import org.schabi.newpipe.extractor.exceptions.ContentNotAvailableException;
+import org.schabi.newpipe.extractor.stream.StreamExtractor;
+import org.schabi.newpipe.extractor.stream.StreamInfo;
+import org.schabi.newpipe.extractor.stream.VideoStream;
 
 import free.rm.skytube.R;
 
@@ -69,7 +70,7 @@ public class ParseStreamMetaData {
 
 		try {
 			StreamingService youtube = NewPipe.getService("Youtube");
-			StreamExtractor  extractor = youtube.getExtractorInstance(youtubeVideoUrl);
+			StreamExtractor  extractor = youtube.getStreamExtractorInstance(youtubeVideoUrl);
 
 			// actual extraction
 			StreamInfo streamInfo = StreamInfo.getVideoInfo(extractor);
@@ -84,7 +85,7 @@ public class ParseStreamMetaData {
 			for(VideoStream stream : streamInfo.video_streams) {
 				list.add( new StreamMetaData(stream) );
 			}
-		} catch (StreamExtractor.ContentNotAvailableException exception) {
+		} catch (ContentNotAvailableException exception) {
 			list = new StreamMetaDataList(exception.getMessage());
 		} catch (Throwable tr) {
 			Log.e(TAG, "An error has occurred while getting streams metadata.  URL=" + this.youtubeVideoUrl, tr);

@@ -20,7 +20,7 @@ package free.rm.skytube.businessobjects.VideoStream;
 
 import android.net.Uri;
 
-import org.schabi.newpipe.extractor.stream_info.VideoStream;
+import org.schabi.newpipe.extractor.stream.VideoStream;
 
 /**
  * Represents the meta-data of a YouTube video stream.
