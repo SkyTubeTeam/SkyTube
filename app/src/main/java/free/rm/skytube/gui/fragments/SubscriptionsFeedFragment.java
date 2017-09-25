@@ -18,6 +18,7 @@
 package free.rm.skytube.gui.fragments;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -298,5 +299,16 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Sub
 	@Override
 	public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
 		subscriptionsBackupsManager.onRequestPermissionsResult(requestCode, permissions, grantResults);
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		if(SkyTubeApp.getPreferenceManager().getBoolean(SkyTubeApp.KEY_SET_UPDATE_FEED_TAB, false)) {
+			SharedPreferences.Editor editor = SkyTubeApp.getPreferenceManager().edit();
+			editor.putBoolean(SkyTubeApp.KEY_SET_UPDATE_FEED_TAB, false);
+			editor.commit();
+			mainActivityListener.onSubscriptionsImported();
+		}
 	}
 }

@@ -40,7 +40,6 @@ import free.rm.skytube.businessobjects.MainActivityListener;
 import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.businessobjects.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTubeVideo;
-import free.rm.skytube.businessobjects.db.SubscribeToChannelTask;
 import free.rm.skytube.gui.businessobjects.LoadingProgressBar;
 import free.rm.skytube.gui.businessobjects.SubsAdapter;
 import free.rm.skytube.gui.businessobjects.SubscribeButton;
@@ -92,18 +91,19 @@ public class ChannelBrowserFragment extends BaseVideosGridFragment {
 		channelThumbnailImage = (ImageView) fragment.findViewById(R.id.channel_thumbnail_image_view);
 		channelSubscribersTextView = (TextView) fragment.findViewById(R.id.channel_subs_text_view);
 		channelSubscribeButton = (SubscribeButton) fragment.findViewById(R.id.channel_subscribe_button);
+		channelSubscribeButton.setFetchChannelVideosOnSubscribe(false);
+		if(channel != null)
+				channelSubscribeButton.setChannel(channel);
 		channelSubscribeButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// If we're subscribing to the channel, save the list of videos we have into the channel (to be stored in the database)
+				// If we're subscribing to the channel, save the list of videos we have into the channel (to be stored in the database by SubscribeToChannelTask)
 				if(!channel.isUserSubscribed()) {
 					Iterator<YouTubeVideo> iterator = videoGridAdapter.getIterator();
 					while (iterator.hasNext()) {
 						channel.addYouTubeVideo(iterator.next());
 					}
 				}
-				// subscribe / unsubscribe to this video's channel
-				new SubscribeToChannelTask(channelSubscribeButton, channel).execute();
 			}
 		});
 
@@ -211,6 +211,9 @@ public class ChannelBrowserFragment extends BaseVideosGridFragment {
 		protected void onPostExecute(YouTubeChannel youTubeChannel) {
 			ChannelBrowserFragment.this.channel = youTubeChannel;
 			ChannelBrowserFragment.this.videoGridAdapter.setYouTubeChannel(youTubeChannel);
+			// In the event this fragment is passed a channel id and not a channel object, set the channel the subscribe button is for since
+			// there wasn't a channel object to set when the button was created.
+			channelSubscribeButton.setChannel(youTubeChannel);
 			initViews();
 		}
 

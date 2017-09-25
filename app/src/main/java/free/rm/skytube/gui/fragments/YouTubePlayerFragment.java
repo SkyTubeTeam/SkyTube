@@ -40,7 +40,6 @@ import free.rm.skytube.businessobjects.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTubeChannelInterface;
 import free.rm.skytube.businessobjects.YouTubeVideo;
 import free.rm.skytube.businessobjects.db.CheckIfUserSubbedToChannelTask;
-import free.rm.skytube.businessobjects.db.SubscribeToChannelTask;
 import free.rm.skytube.gui.activities.MainActivity;
 import free.rm.skytube.gui.businessobjects.CommentsAdapter;
 import free.rm.skytube.gui.businessobjects.FragmentEx;
@@ -148,13 +147,6 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 			videoDescriptionTextView = (TextView) view.findViewById(R.id.video_desc_description);
 			videoDescLikesBar = (ProgressBar) view.findViewById(R.id.video_desc_likes_bar);
 			videoDescSubscribeButton = (SubscribeButton) view.findViewById(R.id.video_desc_subscribe_button);
-			videoDescSubscribeButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					// subscribe / unsubscribe to this video's channel
-					new SubscribeToChannelTask(videoDescSubscribeButton, youTubeChannel).execute();
-				}
-			});
 
 			commentsExpandableListView = (ExpandableListView) view.findViewById(R.id.commentsExpandableListView);
 			commentsProgressBar = view.findViewById(R.id.comments_progress_bar);
@@ -207,6 +199,7 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 			public void onGetYouTubeChannel(YouTubeChannel youTubeChannel) {
 				YouTubePlayerFragment.this.youTubeChannel = youTubeChannel;
 
+				videoDescSubscribeButton.setChannel(YouTubePlayerFragment.this.youTubeChannel);
 				if (youTubeChannel != null) {
 					Glide.with(getActivity())
 									.load(youTubeChannel.getThumbnailNormalUrl())
