@@ -273,7 +273,6 @@ section#about .about-item {
   text-align: center;
   font-size: 17px;
   line-height: 25px;
-  color: #999999;
 }
 section#about .about-item i.fa {
   -webkit-border-radius: 50%;
@@ -337,20 +336,6 @@ section#getApp {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  padding: 70px 0;
-}
-section#getApp .platforms {
-  margin: 5px auto 5px auto;
-  text-align: center;
-}
-section#getApp .platforms .btn-icon {
-  padding-right: 15px;
-}
-section#getApp .platforms .btn {
-  width: 190px;
-  height: 55px;
-  margin-right: 10px;
-  margin-bottom: 20px;
 }
 /* support section */
 section#support {
@@ -446,7 +431,6 @@ section::after {
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
-  padding: 5px 25px;
 }
 .btn.btn-primary {
   border: 1px solid #ffffff;
@@ -699,6 +683,9 @@ section#about {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#efefef, endColorstr=#f5f5f5, GradientType=1);
   /* IE6-9 fallback on horizontal gradient */
 }
+section#about .about-item {
+  color: #999999;
+}
 section#about .about-item i.fa {
   border: 2px solid #66cdcc;
   color: #66cdcc;
@@ -711,8 +698,12 @@ section#about .about-item:hover h3 {
   color: #66cdcc;
 }
 section#features {
-  background: url("../img/backgrounds/features.jpg") no-repeat;
-  background-size: cover;
+  background: #0f0c29;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #24243e, #302b63, #0f0c29);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 section#features .section-heading h1,
 section#features .section-heading p {
@@ -770,34 +761,6 @@ section#features .media .media-body.active .media-heading {
 }
 /* Get App / Download section */
 section#getApp {
-  background: url("../img/backgrounds/get-app-background.jpg");
-}
-section#getApp header {
-  color: #ffffff;
-}
-section#getApp header h1:after {
-  background: #ffffff;
-}
-section#getApp .download-item {
-  color: #ffffff;
-}
-section#getApp .download-item h3 {
-  color: #ffffff;
-}
-section#getApp .download-item i.fa {
-  border-radius: 100%;
-  border: 2px solid #66cdcc;
-  color: #ffffff;
-}
-section#getApp .download-item:hover i.fa {
-  color: #ffffff;
-  background: #66cdcc;
-}
-section#getApp .download-item:hover h3 {
-  color: #ffffff;
-}
-/* Footer section */
-footer {
   background: #efefef;
   /* Old browsers */
   background: -moz-linear-gradient(45deg, #efefef 0%, #f5f5f5 100%);
@@ -815,9 +778,35 @@ footer {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#efefef, endColorstr=#f5f5f5, GradientType=1);
   /* IE6-9 fallback on horizontal gradient */
 }
+/* Footer section */
+footer {
+  background: #4b6cb7;
+  /* Old browsers */
+  background: -moz-linear-gradient(0, #4b6cb7 0%, #182848 100%);
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, #4b6cb7), color-stop(100%, #182848));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(0, #4b6cb7 0%, #182848 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(0, #4b6cb7 0%, #182848 100%);
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(0, #4b6cb7 0%, #182848 100%);
+  /* IE10+ */
+  background: linear-gradient(0, #4b6cb7 0%, #182848 100%);
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#4b6cb7, endColorstr=#182848, GradientType=1);
+  /* IE6-9 fallback on horizontal gradient */
+}
+footer a:link,
+footer a:visited {
+  color: #82CAFF;
+}
+footer a:hover {
+  color: #efefef;
+}
 .btn.btn-primary {
-  color: #66cdcc;
-  border-color: #66cdcc;
+  color: #999999;
+  border-color: #999999;
 }
 .btn.btn-primary:hover {
   color: #ffffff;
