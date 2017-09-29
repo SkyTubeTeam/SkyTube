@@ -5,7 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import free.rm.skytube.R;
 import free.rm.skytube.gui.businessobjects.FragmentEx;
@@ -18,7 +18,7 @@ public abstract class BaseVideosGridFragment extends FragmentEx implements Swipe
 
 	protected VideoGridAdapter videoGridAdapter;
 
-	@Bind(R.id.swipeRefreshLayout)
+	@BindView(R.id.swipeRefreshLayout)
 	SwipeRefreshLayout swipeRefreshLayout;
 
 	@Override

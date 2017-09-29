@@ -31,7 +31,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.OnClick;
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
@@ -60,7 +60,7 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Sub
 	private boolean shouldRefresh = false;
 	private SubscriptionsBackupsManager subscriptionsBackupsManager;
 
-	@Bind(R.id.noSubscriptionsText)
+	@BindView(R.id.noSubscriptionsText)
 	View noSubscriptionsText;
 
 	@Override

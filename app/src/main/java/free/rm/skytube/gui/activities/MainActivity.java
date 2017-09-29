@@ -36,7 +36,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
@@ -53,7 +53,7 @@ import free.rm.skytube.gui.fragments.SearchVideoGridFragment;
  * Main activity (launcher).  This activity holds {@link free.rm.skytube.gui.fragments.VideosGridFragment}.
  */
 public class MainActivity extends AppCompatActivity implements MainActivityListener {
-	@Bind(R.id.fragment_container)
+	@BindView(R.id.fragment_container)
 	protected FrameLayout fragmentContainer;
 
 	private MainFragment mainFragment;
