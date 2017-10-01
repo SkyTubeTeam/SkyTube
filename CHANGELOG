@@ -1,4 +1,12 @@
-v2.60 - 25 June 2016:
+v2.70 - ## ######## 2017:
+	* Users can now import their YouTube's subscriptions list into SkyTube.
+	* Added Android 8 support.
+	* Updated Spanish translations.
+	* Updated French translations.
+	* App is now using newer third-party libraries.
+	* Bug fixes.
+
+v2.60 - 25 June 2017:
 	* Preference overhaul and improved user-friendliness:  Preferences are now using a two-pane
 	  layout.
 	* Added option for users to backup and import their subscriptions and bookmarks databases.

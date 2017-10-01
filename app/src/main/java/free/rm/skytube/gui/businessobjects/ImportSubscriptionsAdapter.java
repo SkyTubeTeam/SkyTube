@@ -24,7 +24,7 @@ public class ImportSubscriptionsAdapter extends RecyclerView.Adapter<ImportSubsc
 	@Override
 	public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 		View itemLayoutView = LayoutInflater.from(parent.getContext()).inflate(
-						R.layout.subs_import_item, null);
+						R.layout.subs_youtube_import_channel, null);
 		ViewHolder viewHolder = new ViewHolder(itemLayoutView);
 		return viewHolder;
 	}

@@ -13,7 +13,7 @@
 	<string name="error_unable_to_subscribe">No se pudo cancelar la suscripción al canal (id=%s)</string>
 	
 	<string name="import_subscriptions">Importar suscripciones</string>
-	<string name="import_subscriptions_description">Importe sus suscripciones desde YouTube, visite https://www.youtube.com/subscription_manager, y haga clic en el botón "Exportar suscripciones" de la parte inferior. Después, seleccione el archivo XML que ha exportado haciendo clic en "Subir Archivo XML".</string>
+	<string name="import_subscriptions_description">Importe sus suscripciones desde YouTube, visite https://www.youtube.com/subscription_manager, y haga clic en el botón \"Exportar suscripciones\" de la parte inferior. Después, seleccione el archivo XML que ha exportado haciendo clic en \"Subir Archivo XML\".</string>
 	<string name="subscriptions_to_channels_imported">Suscripción a %d canales importado.</string>
 	<string name="upload_xml_file">Subir Archivo XML</string>
 	<string name="select_all">Seleccionar todo</string>

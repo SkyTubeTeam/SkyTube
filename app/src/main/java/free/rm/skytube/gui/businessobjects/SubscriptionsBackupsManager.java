@@ -85,16 +85,26 @@ public class SubscriptionsBackupsManager {
 		}
 	}
 
+
+	/**
+	 * Display file picker to be used by the user to select the BACKUP (database) or
+	 * YOUTUBE SUBS (xml file) to import.
+	 */
 	public void displayFilePicker() {
 		displayFilePicker(true);
 	}
 
+
 	/**
-	 * Display file picker to be used by the user to select the backup to import.
+	 * Display file picker to be used by the user to select the BACKUP (database) or
+	 * YOUTUBE SUBS (xml file) to import.
+	 *
+	 * @param importDb  If set to true, the app will import (previously backed-up) database;
+	 *                  Otherwise, it will import YouTube subs (xml file).
 	 */
-	public void displayFilePicker(final boolean forBackups) {
+	private void displayFilePicker(final boolean importDb) {
 		// do not display the file picker until the user gives us access to the external storage
-		if (!hasAccessToExtStorage(forBackups ? EXT_STORAGE_PERM_CODE_IMPORT : IMPORT_SUBSCRIPTIONS_READ_CODE))
+		if (!hasAccessToExtStorage(importDb ? EXT_STORAGE_PERM_CODE_IMPORT : IMPORT_SUBSCRIPTIONS_READ_CODE))
 			return;
 
 		DialogProperties properties = new DialogProperties();
@@ -104,7 +114,7 @@ public class SubscriptionsBackupsManager {
 		properties.root = Environment.getExternalStorageDirectory();
 		properties.error_dir = new File(DialogConfigs.DEFAULT_DIR);
 		properties.offset = new File(DialogConfigs.DEFAULT_DIR);
-		properties.extensions = forBackups ? new String[]{"skytube"} : new String[]{"xml"};
+		properties.extensions = importDb ? new String[]{"skytube"} : new String[]{"xml"};
 
 		FilePickerDialog dialog = new FilePickerDialog(activity, properties);
 		dialog.setDialogSelectionListener(new DialogSelectionListener() {
@@ -113,7 +123,7 @@ public class SubscriptionsBackupsManager {
 				if (files == null  ||  files.length <= 0)
 					Toast.makeText(activity, R.string.databases_import_nothing_selected, Toast.LENGTH_LONG).show();
 				else {
-					if(forBackups)
+					if(importDb)
 						displayImportDbsBackupWarningMsg(files[0]);
 					else {
 						Uri uri = Uri.fromFile(new File(files[0]));
@@ -122,7 +132,7 @@ public class SubscriptionsBackupsManager {
 				}
 			}
 		});
-		dialog.setTitle(forBackups ? R.string.databases_import_select_backup : R.string.subs_import_select_backup);
+		dialog.setTitle(importDb ? R.string.databases_import_select_backup : R.string.subs_import_select_backup);
 		dialog.show();
 	}
 
@@ -227,7 +237,7 @@ public class SubscriptionsBackupsManager {
 
 	}
 
-	public void parseImportedSubscriptions(Uri uri) {
+	private void parseImportedSubscriptions(Uri uri) {
 		try {
 			final List<ImportSubscriptionsChannel> channels = new ArrayList<>();
 			Pattern channelPattern = Pattern.compile(".*channel_id=([^&]+)");
@@ -268,17 +278,16 @@ public class SubscriptionsBackupsManager {
 			}
 
 			if(channels.size() > 0) {
-
 				final ImportSubscriptionsAdapter adapter = new ImportSubscriptionsAdapter(channels);
 				MaterialDialog dialog = new MaterialDialog.Builder(activity)
 								.title(R.string.import_subscriptions)
-								.titleColor(ContextCompat.getColor(activity, android.R.color.white))
-								.customView(R.layout.subs_import, false)
+								.titleColorRes(R.color.dialog_title)
+								.customView(R.layout.subs_youtube_import_dialog_list, false)
 								.positiveText(R.string.import_subscriptions)
-								.backgroundColor(ContextCompat.getColor(activity, R.color.colorPrimary))
-								.contentColor(ContextCompat.getColor(activity, android.R.color.white))
-								.positiveColor(ContextCompat.getColor(activity, android.R.color.white))
-								.negativeColor(ContextCompat.getColor(activity, android.R.color.white))
+								.backgroundColorRes(R.color.dialog_backgound)
+								.contentColorRes(R.color.dialog_content_text)
+								.positiveColorRes(R.color.dialog_positive_text)
+								.negativeColorRes(R.color.dialog_negative_text)
 								.onPositive(new MaterialDialog.SingleButtonCallback() {
 									@Override
 									public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
@@ -298,8 +307,8 @@ public class SubscriptionsBackupsManager {
 										dialog.dismiss();
 									}
 								})
-
 								.build();
+
 				RecyclerView list = dialog.getCustomView().findViewById(R.id.channel_list);
 				list.setAdapter(adapter);
 				list.setLayoutManager(new LinearLayoutManager(activity));
@@ -333,17 +342,20 @@ public class SubscriptionsBackupsManager {
 
 	}
 
+	/**
+	 * A dialog that asks the user to import subscriptions from a YouTube account.
+	 */
 	public void displayImportSubscriptionsDialog() {
-		SpannableString s = new SpannableString(activity.getText(R.string.import_subscriptions_description));
-		Linkify.addLinks(s, Linkify.WEB_URLS);
+		SpannableString msg = new SpannableString(activity.getText(R.string.import_subscriptions_description));
+		Linkify.addLinks(msg, Linkify.WEB_URLS);
 		new MaterialDialog.Builder(activity)
 						.title(R.string.import_subscriptions)
-						.titleColorRes(android.R.color.white)
-						.backgroundColorRes(R.color.colorPrimary)
-						.content(s)
-						.contentColorRes(android.R.color.white)
-						.positiveText(R.string.upload_xml_file)
-						.positiveColorRes(android.R.color.white)
+						.titleColorRes(R.color.dialog_title)
+						.backgroundColorRes(R.color.dialog_backgound)
+						.content(msg)
+						.contentColorRes(R.color.dialog_content_text)
+						.positiveText(R.string.select_xml_file)
+						.positiveColorRes(R.color.dialog_positive_text)
 						.onPositive(new MaterialDialog.SingleButtonCallback() {
 							@Override
 							public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
@@ -351,7 +363,7 @@ public class SubscriptionsBackupsManager {
 							}
 						})
 						.negativeText(R.string.cancel)
-						.negativeColorRes(android.R.color.white)
+						.negativeColorRes(R.color.dialog_negative_text)
 						.onNegative(new MaterialDialog.SingleButtonCallback() {
 							@Override
 							public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {

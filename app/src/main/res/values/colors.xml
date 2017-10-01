@@ -7,6 +7,16 @@
 	<color name="skytube_theme_colour">#ff6600</color>
 
 	<!--
+		Material Dialog Colors
+	-->
+	<color name="dialog_title">#000</color>
+	<color name="dialog_backgound">#FFF</color>
+	<color name="dialog_content_text">#000</color>
+	<color name="dialog_positive_text">@color/colorAccent</color>
+	<color name="dialog_negative_text">@color/colorAccent</color>
+
+
+	<!--
 		Subs Drawer Colours
 	-->
 	<color name="subs_drawer_background">#CC21272B</color>
