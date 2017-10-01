@@ -237,6 +237,14 @@ public class SubscriptionsBackupsManager {
 
 	}
 
+	/**
+	 * Parse the XML file that the user selected to import subscriptions from. Each channel contained in the XML
+	 * that the user is not already subscribed to will appear in a dialog, to allow the user to select individual channels
+	 * to subscribe to, via a new Dialog. Once the user chooses to import the selected channels via the Import Subscriptions
+	 * button, {@link SubscribeToImportedChannelsTask} will be executed with a list of the selected channels.
+	 *
+	 * @param uri The URI pointing to the XML file containing YouTube Channels to subscribe to.
+	 */
 	private void parseImportedSubscriptions(Uri uri) {
 		try {
 			final List<ImportSubscriptionsChannel> channels = new ArrayList<>();
@@ -382,6 +390,10 @@ public class SubscriptionsBackupsManager {
 		}
 	}
 
+	/**
+	 * AsyncTask to loop through a list of channels to subscribe to. A Dialog will appear notifying the user of the progress
+	 * of fetching videos for each channel.
+	 */
 	private class SubscribeToImportedChannelsTask extends AsyncTask<List<ImportSubscriptionsChannel>, Void, Void> {
 		MaterialDialog dialog;
 		private int numChannelsDone = 0;
@@ -430,10 +442,11 @@ public class SubscriptionsBackupsManager {
 					channelsList.add(channelObj);
 					channelObj.init(channel.channelId);
 					SubscriptionsDb.getSubscriptionsDb().subscribe(channelObj);
+					// Need to set this channelObj to subscribed, so that when videos are retrieved for the channel, they get saved into the database.
+					channelObj.setUserSubscribed(true);
 				} catch(IOException e) {
 					e.printStackTrace();
 				}
-
 			}
 			new GetSubscriptionVideosTask(new SubscriptionsFragmentListener() {
 				@Override
