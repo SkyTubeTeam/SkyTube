@@ -7,7 +7,6 @@
 		<item name="colorAccent">@color/colorAccent</item>
 
 		<item name="actionBarPopupTheme">@style/ThemeOverlay.AppCompat</item>
-
 		<item name="android:popupMenuStyle">@style/PopupMenu</item>
 		<item name="popupMenuStyle">@style/PopupMenu</item>
 
@@ -66,7 +65,7 @@
 	</style>
 
 	<style name="PopupMenu" parent="@android:style/Widget.PopupMenu">
-		<item name="android:popupBackground">@color/video_cell_background</item>
+		<item name="android:popupBackground">@color/popup_menu</item>
 	</style>
 
 	<style name="VideoOptionsTextAppearanceLarge" parent="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Large">
