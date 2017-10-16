@@ -49,6 +49,18 @@ public class GetChannelVideos extends GetYouTubeVideos implements GetChannelVide
 		getChannelVideos.init();
 	}
 
+	/**
+	 * Since this GetYouTubeVideos class uses its own instance of GetYouTubeVideos (getChannelVideos),
+	 * when reset() is called on this instance, it must call reset on getChannelVideos. Otherwise,
+	 * when a refresh is called via the Channel Browser, the next page of videos will be shown, instead
+	 * of the first page.
+	 */
+	@Override
+	public void reset() {
+		super.reset();
+		getChannelVideos.reset();
+	}
+
 	@Override
 	public List<YouTubeVideo> getNextVideos() {
 		return getChannelVideos.getNextVideos();
