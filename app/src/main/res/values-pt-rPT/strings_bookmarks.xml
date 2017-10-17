@@ -1,14 +1,16 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources>
 	<string name="bookmarks">Marcadores</string>
 
 	<string name="bookmark">Adicionar aos marcadores</string>
 	<string name="video_bookmarked">Vídeo adicionado aos marcadores</string>
-	<string name="video_bookmarked_error">Não foi possível adicionar vídeo aos marcadores.</string>
+	<string name="video_bookmarked_error">Não foi possível adicionar o vídeo aos marcadores.</string>
 
-	<string name="unbookmark">Removido dos marcadores</string>
-	<string name="video_unbookmarked">Vídeo dos marcadores</string>
+	<string name="unbookmark">Remover dos marcadores</string>
+	<string name="video_unbookmarked">Vídeo removido dos marcadores</string>
 	<string name="video_unbookmarked_error">Não foi possível remover vídeo dos marcadores.</string>
 
-	<string name="no_bookmarked_videos_text">Ainda não adicionou nenhum vídeo aos marcadores.\n\nAssim que o fizer, eles apareceram aqui.</string>
+	<string name="no_bookmarked_videos_text">Ainda não adicionou qualquer vídeo aos marcadores.
+\n
+\nAssim que o fizer, eles apareceram aqui.</string>
 </resources>
