@@ -2,24 +2,24 @@
 <resources>
 	<string name="subscriptions">Subscrições</string>
 	<string name="subscribe">Subscrito</string>
-	<string name="unsubscribe">Anular Subscrição</string>
-	<string name="total_subscribers">%,d subscritos</string>
+	<string name="unsubscribe">Anular subscrição</string>
+	<string name="total_subscribers">%,d subscritores</string>
 
 	<string name="subscribed">Subscrito</string>
-	<string name="unsubscribed">Subscrição Anulada</string>
+	<string name="unsubscribed">Subscrição anulada</string>
 
-	<string name="error_get_subbed_channels">Ocorreu um erro ao obter canais subscritos.</string>
+	<string name="error_get_subbed_channels">Ocorreu um erro ao tentar obter os canais subscritos.</string>
 	<string name="error_check_if_user_has_subbed">Não foi possível verificar se o utilizador subscreveu o canal (id=%s)</string>
-	<string name="error_unable_to_subscribe">Não é possível anular\/subscrever o canal (id=%s)</string>
+	<string name="error_unable_to_subscribe">Não foi possível anular a subscrição no canal (id=%s)</string>
 
-	<string name="import_subscriptions">Importar Subscrições</string>
-	<string name="import_subscriptions_description">Importar as sua subscrições do Youtube, primeiro visite https://www.youtube.com/subscription_manager, e clique em \"Exportar para leitores de RSS\" no fundo. Depois, selecione ficheiro xml que exportou clicando em \"Selecionar Ficheiro XML\" abaixo.</string>
-	<string name="subscriptions_to_channels_imported">Subscrições de %d canais importado.</string>
-	<string name="select_xml_file">Selecione Ficheiro XML</string>
-	<string name="select_all">Selecionar Todos</string>
-	<string name="select_none">Selecionar Nenhum</string>
-	<string name="no_channels_found">Não foi encontrado nenhum canal de Youtube no ficheiro XML carregado.</string>
-	<string name="no_new_channels_found">Não foi encontrado nenhum canal de Youtube que não esteja já subscrito no ficheiro XML que carregou.</string>
-	<string name="import_subscriptions_parse_error">Ocorreu um erro ao analisar o ficheiro XML que carregou: %s.</string>
-	<string name="failed_to_import_subscriptions">Falha ao importar suas subscrições do YouTube.</string>
+	<string name="import_subscriptions">Importar subscrições</string>
+	<string name="import_subscriptions_description">Importe as suas subscrições do Youtube acedendo a https://www.youtube.com/subscription_manager e clique no botão \"Exportar subscrições\". Depois, selecione ficheiro xml exportado clicando em \"Selecionar ficheiro XML\".</string>
+	<string name="subscriptions_to_channels_imported">Importadas as subscrições de %d canais.</string>
+	<string name="select_xml_file">Selecionar ficheiro XML</string>
+	<string name="select_all">Selecionar tudo</string>
+	<string name="select_none">Selecionar nenhum</string>
+	<string name="no_channels_found">Não foram encontrados canais do Youtube no ficheiro XML carregado.</string>
+	<string name="no_new_channels_found">Não foram encontrados canais do Youtube que não estejam já subscritos.</string>
+	<string name="import_subscriptions_parse_error">Ocorreu um erro ao processar o ficheiro XML carregado: %s.</string>
+	<string name="failed_to_import_subscriptions">Falha ao importar as subscrições do YouTube.</string>
 </resources>
