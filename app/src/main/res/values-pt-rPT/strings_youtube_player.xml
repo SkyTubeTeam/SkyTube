@@ -1,16 +1,16 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
-	<string name="error_stream_err_unavailable">Mensagem de erro não está disponível.</string>
+	<string name="error_stream_err_unavailable">Mensagem de erro não disponível.</string>
 	<string name="error_stream_decryption_fail">Não foi possível carregar o código de desencriptação para o serviço do Youtube.</string>
-	<string name="error_stream_parse_error">Análise de erro.</string>
+	<string name="error_stream_parse_error">Erro ao processar.</string>
 
-	<string name="error_video_play">Mostrar erro do vídeo</string>
+	<string name="error_video_play">Erro ao reproduzir</string>
 	<string name="error_video_streams_empty">O vídeo %s não tem emissões!</string>
-	<string name="error_video_streams">Ocorreu um erro ao restabelecer o fluxo de vídeo.</string>
-	<string name="error_get_video_desc">Ocorreu um erro ao obter a descrição do vídeo.</string>
-	<string name="error_invalid_url">URL de vídeo invalido: %s</string>
+	<string name="error_video_streams">Ocorreu um erro ao tentar obter a emissão do vídeo.</string>
+	<string name="error_get_video_desc">Ocorreu um erro ao tentar obter a descrição do vídeo.</string>
+	<string name="error_invalid_url">URL inválido: %s</string>
 
-	<string name="warning_live_video">Não é possível reproduzir emissões em direto agora.  Abrir emissão externamente?</string>
+	<string name="warning_live_video">Ainda não é possível reproduzir emissões em direto. Abrir emissão externamente?</string>
 
 	<string name="ratings_disabled">Classificações desativadas</string>
 
@@ -23,12 +23,12 @@
 	<string name="copy_url">Copiar URL</string>
 	<string name="url_copied_to_clipboard">URL copiado para a área de transferência.</string>
 
-	<string name="error_get_comments">Ocorreu um erro ao obter os comentários.</string>
-	<string name="no_video_comments">Este video não tem comentários ou estão desativados.</string>
+	<string name="error_get_comments">Ocorreu um erro ao tentar obter os comentários.</string>
+	<string name="no_video_comments">Este vídeo não tem comentários ou estão desativados.</string>
 	<string name="view_replies">Ver respostas</string>
 	<string name="hide_replies">Ocultar respostas</string>
 
-	<string name="enter_video_url">Escrever URL do vídeo</string>
+	<string name="enter_video_url">Digitar URL do vídeo</string>
 	<string name="play">Reproduzir</string>
 	<string name="cancel">Cancelar</string>
 	<string name="clear">Limpar</string>
