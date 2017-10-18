@@ -4,27 +4,27 @@
 
 	<string name="pref_languages_category">Languages &amp; Regions</string>
 	<string name="pref_title_preferred_regions">Preferred Region</string>
-	<string name="pref_key_preferred_region" translatable="false">pref_key_preferred_region</string>
+	<string name="pref_key_preferred_region">pref_key_preferred_region</string>
 	<string name="pref_summary_preferred_regions">Select a preferred region. This is used to filter out videos in the \"Featured\" videos category.</string>
 
 	<string name="pref_title_preferred_languages">Preferred Language(s)</string>
-	<string name="pref_key_preferred_languages" translatable="false">pref_key_preferred_languages</string>
+	<string name="pref_key_preferred_languages">pref_key_preferred_languages</string>
 	<string name="pref_summary_preferred_languages">EXPERIMENTAL: Select one or more preferred languages. This is used to filter out videos in the \"Most Popular\" video category and for video searches.</string>
 
 	<string name="pref_video_player_category">Video Player</string>
 	<string name="pref_title_preferred_res">Preferred Resolution</string>
-	<string name="pref_key_preferred_res" translatable="false">pref_preferred_resolution</string>
+	<string name="pref_key_preferred_res">pref_preferred_resolution</string>
 	<string name="pref_summary_preferred_res">Select your preferred resolution</string>
 	<string name="pref_title_use_offical_player">Use official YouTube player</string>
-	<string name="pref_key_use_offical_player" translatable="false">pref_use_official_youtube_player</string>
+	<string name="pref_key_use_offical_player">pref_use_official_youtube_player</string>
 	<string name="pref_summary_use_offical_player">Not recommended</string>
 
 	<string name="pref_backup_category">Backups</string>
 	<string name="pref_title_backup_dbs">Backup Databases</string>
-	<string name="pref_key_backup_dbs" translatable="false">pref_key_backup_db</string>
+	<string name="pref_key_backup_dbs">pref_key_backup_db</string>
 	<string name="pref_summary_backup_dbs">Backup your subscriptions and bookmarks databases.</string>
 	<string name="pref_title_import_dbs">Import Backup</string>
-	<string name="pref_key_import_dbs" translatable="false">pref_key_import_db</string>
+	<string name="pref_key_import_dbs">pref_key_import_db</string>
 	<string name="pref_summary_import_dbs">Import your subscriptions and bookmarks databases backup.</string>
 	<string name="databases_backing_up">Backing up…</string>
 	<string name="databases_backup_success">Databases backed up to %s</string>
@@ -44,17 +44,17 @@
 
 	<string name="pref_about_category">About</string>
 	<string name="pref_title_website">Website</string>
-	<string name="pref_key_website" translatable="false">pref_website</string>
+	<string name="pref_key_website">pref_website</string>
 	<string name="pref_title_credits">Credits</string>
-	<string name="pref_key_credits" translatable="false">pref_credits</string>
+	<string name="pref_key_credits">pref_credits</string>
 	<string name="pref_summary_credits">People and projects that made this app possible.</string>
 	<string name="pref_title_version">Version</string>
-	<string name="pref_key_version" translatable="false">pref_version</string>
+	<string name="pref_key_version">pref_version</string>
 	<string name="pref_title_updates">Updates</string>
-	<string name="pref_key_updates" translatable="false">pref_updates</string>
+	<string name="pref_key_updates">pref_updates</string>
 	<string name="pref_summary_updates">Check for updates.</string>
 	<string name="pref_title_license">License</string>
-	<string name="pref_key_license" translatable="false">pref_license</string>
+	<string name="pref_key_license">pref_license</string>
 	<string name="pref_summary_license">GNU General Public License version 3</string>
 	<string name="app_license">
 		Copyright &#169; 2015-2017  Ramon Mifsud\n
@@ -419,7 +419,7 @@
 	</string-array>
 
 	<string name="pref_other_category">Others</string>
-	<string name="pref_key_default_tab" translatable="false">pref_default_tab</string>
+	<string name="pref_key_default_tab">pref_default_tab</string>
 	<string name="pref_title_default_tab">Default Tab</string>
 	<string name="pref_summary_default_tab">Default tab to show when SkyTube launches: %s</string>
 	<string-array name="default_tab">
@@ -435,7 +435,7 @@
 		<item>3</item>
 	</string-array>
 
-	<string name="pref_key_screen_orientation" translatable="false">pref_key_screen_orientation</string>
+	<string name="pref_key_screen_orientation">pref_key_screen_orientation</string>
 	<string name="pref_title_screen_orientation">Screen Orientation</string>
 	<string name="pref_summary_screen_orientation">Rotation of the video player</string>
 	<string name="pref_screen_landscape">Landscape</string>
@@ -455,7 +455,7 @@
 		<item>sensor</item>
 	</string-array>
 
-	<string name="pref_youtube_api_key" translatable="false">pref_youtube_api_key</string>
+	<string name="pref_youtube_api_key">pref_youtube_api_key</string>
 	<string name="pref_title_youtube_api_key">YouTube API Key</string>
 	<string name="pref_summary_youtube_api_key">Enter your own YouTube Data API Key.  Leave blank to use the default one.</string>
 	<string name="pref_youtube_api_key_error">An error occurred attempting to validate the API Key you entered.</string>
