@@ -33,7 +33,7 @@
 	<string name="databases_import_success">Databaser ble importer. Endringer vil tre i effekt når programmet startes på nytt.</string>
 
 	<string name="pref_title_import_subs">Importer abonnementer fra YouTube</string>
-	<string name="pref_summary_import_subs">Importer dine abonnementer fra YouTube.</string>
+	<string name="pref_summary_import_subs">Importer dine abonnementer fra din YouTube-konto.</string>
 	<string name="subs_import_select_backup">Velg YouTube-XML-fil å importere</string>
 
 	<string name="pref_about_category">Om</string>
