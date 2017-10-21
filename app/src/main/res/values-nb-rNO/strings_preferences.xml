@@ -53,7 +53,7 @@
 	<string name="pref_key_version">pref_version</string>
 	<string name="pref_title_updates">Oppdateringer</string>
 	<string name="pref_key_updates">pref_updates</string>
-	<string name="pref_summary_updates">Se etter oppdateringer</string>
+	<string name="pref_summary_updates">Se etter oppdateringer.</string>
 	<string name="pref_title_license">Lisens</string>
 	<string name="pref_key_license">pref_license</string>
 	<string name="pref_summary_license">GNU General Public Lisens versjon 3</string>
