@@ -101,7 +101,8 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Sub
 
 	/**
 	 * Instruct the {@link SubscriptionsFeedFragment} to refresh the subscriptions feed.  This might
-	 * occur due to
+	 * occur due to user subscribing/unsubscribing to a channel or a user just imported the subbed
+	 * channels from YouTube (XML file).
 	 */
 	public static void refreshSubscriptionsFeed() {
 		SharedPreferences.Editor editor = SkyTubeApp.getPreferenceManager().edit();
