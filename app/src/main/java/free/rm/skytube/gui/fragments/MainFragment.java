@@ -51,13 +51,13 @@ public class MainFragment extends FragmentEx {
 		View view = inflater.inflate(R.layout.fragment_main, container, false);
 
 		// setup the toolbar / actionbar
-		Toolbar toolbar = (Toolbar) view.findViewById(R.id.activity_main_toolbar);
+		Toolbar toolbar = view.findViewById(R.id.activity_main_toolbar);
 		setSupportActionBar(toolbar);
 
 		// indicate that this fragment has an action bar menu
 		setHasOptionsMenu(true);
 
-		DrawerLayout subsDrawerLayout = (DrawerLayout) view.findViewById(R.id.subs_drawer_layout);
+		DrawerLayout subsDrawerLayout = view.findViewById(R.id.subs_drawer_layout);
 		subsDrawerToggle = new ActionBarDrawerToggle(
 						getActivity(),
 						subsDrawerLayout,
@@ -71,7 +71,7 @@ public class MainFragment extends FragmentEx {
 			actionBar.setHomeButtonEnabled(true);
 		}
 
-		subsListView = (RecyclerView) view.findViewById(R.id.subs_drawer);
+		subsListView = view.findViewById(R.id.subs_drawer);
 		if (subsAdapter == null) {
 			subsAdapter = SubsAdapter.get(getActivity(), view.findViewById(R.id.subs_drawer_progress_bar));
 		} else {
@@ -83,11 +83,11 @@ public class MainFragment extends FragmentEx {
 		subsListView.setAdapter(subsAdapter);
 
 		videosPagerAdapter = new VideosPagerAdapter(getChildFragmentManager());
-		viewPager = (ViewPager) view.findViewById(R.id.pager);
+		viewPager = view.findViewById(R.id.pager);
 		viewPager.setOffscreenPageLimit(3);
 		viewPager.setAdapter(videosPagerAdapter);
 
-		TabLayout tabLayout = (TabLayout)view.findViewById(R.id.tab_layout);
+		TabLayout tabLayout = view.findViewById(R.id.tab_layout);
 		tabLayout.setupWithViewPager(viewPager);
 
 		tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -182,9 +182,4 @@ public class MainFragment extends FragmentEx {
 
 	}
 
-	public void refreshSubscriptionsFeed() {
-		if(subscriptionsFeedFragment != null) {
-			subscriptionsFeedFragment.refreshVideoGrid();
-		}
-	}
 }

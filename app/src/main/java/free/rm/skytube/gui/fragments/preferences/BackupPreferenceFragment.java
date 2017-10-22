@@ -18,14 +18,12 @@
 package free.rm.skytube.gui.fragments.preferences;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.support.annotation.NonNull;
 
 import free.rm.skytube.R;
-import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.gui.businessobjects.SubscriptionsBackupsManager;
 
 /**
@@ -33,24 +31,15 @@ import free.rm.skytube.gui.businessobjects.SubscriptionsBackupsManager;
  */
 public class BackupPreferenceFragment extends PreferenceFragment {
 
-	private static final String TAG = BackupPreferenceFragment.class.getSimpleName();
-
 	private SubscriptionsBackupsManager subscriptionsBackupsManager;
+
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.preference_backup);
 
-		subscriptionsBackupsManager = new SubscriptionsBackupsManager(getActivity(), this, new Runnable() {
-			@Override
-			public void run() {
-				// Need to make sure when we come back to MainActivity, that we refresh the Feed tab so it shows videos from the newly subscribed channels
-				SharedPreferences.Editor editor = SkyTubeApp.getPreferenceManager().edit();
-				editor.putBoolean(SkyTubeApp.KEY_SET_UPDATE_FEED_TAB, true);
-				editor.commit();
-			}
-		});
+		subscriptionsBackupsManager = new SubscriptionsBackupsManager(getActivity(), this);
 
 		// backup/export databases
 		Preference backupDbsPref = findPreference(getString(R.string.pref_key_backup_dbs));
@@ -82,6 +71,7 @@ public class BackupPreferenceFragment extends PreferenceFragment {
 			}
 		});
 	}
+
 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {

@@ -46,6 +46,7 @@ import free.rm.skytube.businessobjects.GetSubscriptionVideosTask;
 import free.rm.skytube.businessobjects.YouTubeChannel;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 import free.rm.skytube.gui.businessobjects.preferences.BackupDatabases;
+import free.rm.skytube.gui.fragments.SubscriptionsFeedFragment;
 
 /**
  * Custom class to handle Backups and Subscriptions imports. This class must be instantiated using either a native Fragment
@@ -56,23 +57,22 @@ public class SubscriptionsBackupsManager {
 	private Activity activity;
 	private android.app.Fragment fragment;
 	private Fragment supportFragment;
-	private Runnable onAllChannelsFetched;
 	private static final int EXT_STORAGE_PERM_CODE_BACKUP = 1950;
 	private static final int EXT_STORAGE_PERM_CODE_IMPORT = 1951;
 	private static final int IMPORT_SUBSCRIPTIONS_READ_CODE = 42;
 	private static final String TAG = SubscriptionsBackupsManager.class.getSimpleName();
 
-	public SubscriptionsBackupsManager(Activity activity, Fragment supportFragment, Runnable onAllChannelsFetched) {
+
+	public SubscriptionsBackupsManager(Activity activity, Fragment supportFragment) {
 		this.activity = activity;
 		this.supportFragment = supportFragment;
-		this.onAllChannelsFetched = onAllChannelsFetched;
 	}
 
-	public SubscriptionsBackupsManager(Activity activity, android.app.Fragment fragment, Runnable onAllChannelsFetched) {
+	public SubscriptionsBackupsManager(Activity activity, android.app.Fragment fragment) {
 		this.activity = activity;
 		this.fragment = fragment;
-		this.onAllChannelsFetched = onAllChannelsFetched;
 	}
+
 
 	/**
 	 * Backup the databases.
@@ -157,7 +157,7 @@ public class SubscriptionsBackupsManager {
 			// otherwise), then the method #onRequestPermissionsResult() will be called.
 			if(fragment != null)
 				FragmentCompat.requestPermissions(fragment, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-								permissionRequestCode);
+							permissionRequestCode);
 			else if(supportFragment != null)
 				supportFragment.requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
 							permissionRequestCode);
@@ -461,8 +461,16 @@ public class SubscriptionsBackupsManager {
 				public void onAllChannelVideosFetched() {
 					dialog.dismiss();
 					Toast.makeText(SkyTubeApp.getContext(), String.format(SkyTubeApp.getStr(R.string.subscriptions_to_channels_imported), numChannelsDone), Toast.LENGTH_SHORT).show();
-					if(onAllChannelsFetched != null)
-						onAllChannelsFetched.run();
+
+					// refresh the Feed tab so it shows videos from the newly subscribed channels
+					SubscriptionsFeedFragment.refreshSubscriptionsFeed();
+
+					// if the user imported the subs channels from the Feed tab/fragment, then we
+					// need to refresh the fragment in order for the fragment to update the feed...
+					activity.recreate();
+
+					// refresh the subs adapter
+					SubsAdapter.get(activity).refreshSubsList();
 				}
 			}).setForceRefresh(true).setChannelsToRefresh(channelsList).executeInParallel();
 
