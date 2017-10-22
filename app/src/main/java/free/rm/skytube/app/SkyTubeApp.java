@@ -38,7 +38,7 @@ public class SkyTubeApp extends MultiDexApplication {
 	private static SkyTubeApp skyTubeApp = null;
 
 	public static final String KEY_SUBSCRIPTIONS_LAST_UPDATED = "SkyTubeApp.KEY_SUBSCRIPTIONS_LAST_UPDATED";
-	public static String KEY_SET_UPDATE_FEED_TAB = "SkyTubeApp.KEY_SET_UPDATE_FEED_TAB";
+
 
 	@Override
 	public void onCreate() {

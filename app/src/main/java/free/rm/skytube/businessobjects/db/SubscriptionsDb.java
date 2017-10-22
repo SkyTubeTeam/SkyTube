@@ -96,10 +96,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 		values.put(SubscriptionsTable.COL_LAST_VISIT_TIME, System.currentTimeMillis());
 
 		saveChannelVideos(channel);
-		// Need to make sure when we come back to MainActivity, that we refresh the Feed tab so it shows videos from the newly subscribed
-		SharedPreferences.Editor editor = SkyTubeApp.getPreferenceManager().edit();
-		editor.putBoolean(SkyTubeApp.KEY_SET_UPDATE_FEED_TAB, true);
-		editor.commit();
+
 		return getWritableDatabase().insert(SubscriptionsTable.TABLE_NAME, null, values) != -1;
 	}
 
@@ -119,11 +116,6 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 		int rowsDeleted = getWritableDatabase().delete(SubscriptionsTable.TABLE_NAME,
 				SubscriptionsTable.COL_CHANNEL_ID + " = ?",
 				new String[]{channel.getId()});
-
-		// Need to make sure when we come back to MainActivity, that we refresh the Feed tab so it hides videos from the newly unsubscribed
-		SharedPreferences.Editor editor = SkyTubeApp.getPreferenceManager().edit();
-		editor.putBoolean(SkyTubeApp.KEY_SET_UPDATE_FEED_TAB, true);
-		editor.commit();
 
 		return (rowsDeleted >= 0);
 	}

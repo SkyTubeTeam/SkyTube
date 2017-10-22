@@ -60,20 +60,18 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Sub
 	private boolean shouldRefresh = false;
 	private SubscriptionsBackupsManager subscriptionsBackupsManager;
 
+	private static final String KEY_SET_UPDATE_FEED_TAB = "SubscriptionsFeedFragment.KEY_SET_UPDATE_FEED_TAB";
+
 	@BindView(R.id.noSubscriptionsText)
 	View noSubscriptionsText;
+
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		shouldRefresh = true;
 		setLayoutResource(R.layout.videos_gridview_feed);
-		subscriptionsBackupsManager = new SubscriptionsBackupsManager(getActivity(), SubscriptionsFeedFragment.this, new Runnable() {
-			@Override
-			public void run() {
-				mainActivityListener.onSubscriptionsImported();
-			}
-		});
+		subscriptionsBackupsManager = new SubscriptionsBackupsManager(getActivity(), SubscriptionsFeedFragment.this);
 	}
 
 	@Override
@@ -81,6 +79,34 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Sub
 		super.onViewCreated(view, savedInstanceState);
 
 		new GetTotalNumberOfChannelsTask().executeInParallel();
+	}
+
+	@Override
+	public void onResume() {
+		Log.d("SubsFeed", "On RESUME...");
+
+		super.onResume();
+		// this will detect whether we have previous instructed the app (via refreshSubscriptionsFeed())
+		// to refresh the subs feed
+		if (SkyTubeApp.getPreferenceManager().getBoolean(KEY_SET_UPDATE_FEED_TAB, false)) {
+			// unset the flag
+			SharedPreferences.Editor editor = SkyTubeApp.getPreferenceManager().edit();
+			editor.putBoolean(KEY_SET_UPDATE_FEED_TAB, false);
+			editor.commit();
+
+			// refresh the subs feed
+			new SetVideosListTask().executeInParallel();
+		}
+	}
+
+	/**
+	 * Instruct the {@link SubscriptionsFeedFragment} to refresh the subscriptions feed.  This might
+	 * occur due to
+	 */
+	public static void refreshSubscriptionsFeed() {
+		SharedPreferences.Editor editor = SkyTubeApp.getPreferenceManager().edit();
+		editor.putBoolean(KEY_SET_UPDATE_FEED_TAB, true);
+		editor.commit();
 	}
 
 	@Override
@@ -181,6 +207,24 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Sub
 	}
 
 
+	@OnClick(R.id.importSubscriptionsButton)
+	public void importSubscriptions(View v) {
+		subscriptionsBackupsManager.displayImportSubscriptionsDialog();
+	}
+
+
+	@OnClick(R.id.importBackupButton)
+	public void importBackup(View v) {
+		subscriptionsBackupsManager.displayFilePicker();
+	}
+
+
+	@Override
+	public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+		subscriptionsBackupsManager.onRequestPermissionsResult(requestCode, permissions, grantResults);
+	}
+
+
 
 	////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -220,9 +264,6 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Sub
 		}
 	}
 
-	public void refreshVideoGrid() {
-		new SetVideosListTask().executeInParallel();
-	}
 
 
 	/**
@@ -286,29 +327,4 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Sub
 
 	}
 
-	@OnClick(R.id.importSubscriptionsButton)
-	public void importSubscriptions(View v) {
-		subscriptionsBackupsManager.displayImportSubscriptionsDialog();
-	}
-
-	@OnClick(R.id.importBackupButton)
-	public void importBackup(View v) {
-		subscriptionsBackupsManager.displayFilePicker();
-	}
-
-	@Override
-	public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-		subscriptionsBackupsManager.onRequestPermissionsResult(requestCode, permissions, grantResults);
-	}
-
-	@Override
-	public void onResume() {
-		super.onResume();
-		if(SkyTubeApp.getPreferenceManager().getBoolean(SkyTubeApp.KEY_SET_UPDATE_FEED_TAB, false)) {
-			SharedPreferences.Editor editor = SkyTubeApp.getPreferenceManager().edit();
-			editor.putBoolean(SkyTubeApp.KEY_SET_UPDATE_FEED_TAB, false);
-			editor.commit();
-			mainActivityListener.onSubscriptionsImported();
-		}
-	}
 }
