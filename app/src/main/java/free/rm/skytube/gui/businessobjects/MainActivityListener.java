@@ -15,7 +15,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package free.rm.skytube.businessobjects;
+package free.rm.skytube.gui.businessobjects;
+
+import free.rm.skytube.businessobjects.YouTubeChannel;
 
 /**
  * This methods will be called when the user clicks on the view whose aim is to open the ChannelBrowser.

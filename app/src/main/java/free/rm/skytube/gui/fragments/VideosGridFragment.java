@@ -29,7 +29,7 @@ import android.widget.GridView;
 import com.bumptech.glide.Glide;
 
 import free.rm.skytube.R;
-import free.rm.skytube.businessobjects.MainActivityListener;
+import free.rm.skytube.gui.businessobjects.MainActivityListener;
 import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.gui.businessobjects.VideoGridAdapter;
 
@@ -62,7 +62,7 @@ public abstract class VideosGridFragment extends BaseVideosGridFragment {
 		progressBar = view.findViewById(R.id.loading_progress_bar);
 
 		// setup the video grid view
-		gridView = (RecyclerView) view.findViewById(R.id.grid_view);
+		gridView = view.findViewById(R.id.grid_view);
 		if (videoGridAdapter == null) {
 			videoGridAdapter = new VideoGridAdapter(getActivity());
 		} else {

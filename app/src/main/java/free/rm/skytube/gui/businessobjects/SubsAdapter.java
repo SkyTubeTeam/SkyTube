@@ -31,7 +31,6 @@ import com.bumptech.glide.Glide;
 import java.util.Iterator;
 
 import free.rm.skytube.R;
-import free.rm.skytube.businessobjects.MainActivityListener;
 import free.rm.skytube.businessobjects.YouTubeChannel;
 import free.rm.skytube.businessobjects.db.GetSubscribedChannelsTask;
 
@@ -175,8 +174,8 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 
 		public SubChannelViewHolder(View rowView) {
 			super(rowView);
-			thumbnailImageView  = (ImageView) rowView.findViewById(R.id.sub_channel_thumbnail_image_view);
-			channelNameTextView = (TextView) rowView.findViewById(R.id.sub_channel_name_text_view);
+			thumbnailImageView  = rowView.findViewById(R.id.sub_channel_thumbnail_image_view);
+			channelNameTextView = rowView.findViewById(R.id.sub_channel_name_text_view);
 			newVideosNotificationView = rowView.findViewById(R.id.sub_channel_new_videos_notification);
 			channel = null;
 
