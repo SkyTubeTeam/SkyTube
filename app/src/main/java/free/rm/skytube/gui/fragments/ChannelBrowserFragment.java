@@ -36,7 +36,7 @@ import java.io.IOException;
 import java.util.Iterator;
 
 import free.rm.skytube.R;
-import free.rm.skytube.businessobjects.MainActivityListener;
+import free.rm.skytube.gui.businessobjects.MainActivityListener;
 import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.businessobjects.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTubeVideo;
@@ -83,14 +83,14 @@ public class ChannelBrowserFragment extends BaseVideosGridFragment {
 		View fragment = inflater.inflate(R.layout.fragment_channel_browser, container, false);
 
 		// setup the toolbar/actionbar
-		Toolbar toolbar = (Toolbar) fragment.findViewById(R.id.toolbar);
+		Toolbar toolbar = fragment.findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-		channelBannerImage = (ImageView) fragment.findViewById(R.id.channel_banner_image_view);
-		channelThumbnailImage = (ImageView) fragment.findViewById(R.id.channel_thumbnail_image_view);
-		channelSubscribersTextView = (TextView) fragment.findViewById(R.id.channel_subs_text_view);
-		channelSubscribeButton = (SubscribeButton) fragment.findViewById(R.id.channel_subscribe_button);
+		channelBannerImage = fragment.findViewById(R.id.channel_banner_image_view);
+		channelThumbnailImage = fragment.findViewById(R.id.channel_thumbnail_image_view);
+		channelSubscribersTextView = fragment.findViewById(R.id.channel_subs_text_view);
+		channelSubscribeButton = fragment.findViewById(R.id.channel_subscribe_button);
 		channelSubscribeButton.setFetchChannelVideosOnSubscribe(false);
 		if(channel != null)
 				channelSubscribeButton.setChannel(channel);
@@ -116,7 +116,7 @@ public class ChannelBrowserFragment extends BaseVideosGridFragment {
 			initViews();
 		}
 
-		gridView = (RecyclerView) fragment.findViewById(R.id.grid_view);
+		gridView = fragment.findViewById(R.id.grid_view);
 
 		// set up the loading progress bar
 		LoadingProgressBar.get().setProgressBar(fragment.findViewById(R.id.loading_progress_bar));
