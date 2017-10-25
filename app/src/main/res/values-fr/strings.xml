@@ -2,9 +2,9 @@
 	<string name="could_not_get_videos">Impossible de charger les vidéos de %s.</string>
 	<string name="views">Vu %,d fois</string>
 	<string name="error">Erreur</string>
-	<string name="ok">Ok</string>
+	<string name="ok">OK</string>
 	<string name="search_videos">Rechercher</string>
-	<string name="launch_offical_player_error">Une erreur s\'est produite lors de l\'ouverture de youtube. Assurez-vous de bien avoir installé l\'application officielle.</string>
+	<string name="launch_offical_player_error">Une erreur s\'est produite lors de l\'ouverture de YouTube. Assurez-vous de bien avoir installé l\'application officielle.</string>
 	<string name="LIVE">LIVE</string>
 
 	<string name="featured">Tendance</string>

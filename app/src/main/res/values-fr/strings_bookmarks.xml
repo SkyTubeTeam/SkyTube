@@ -9,5 +9,5 @@
 	<string name="video_unbookmarked">Vidéo enlevée des favoris</string>
 	<string name="video_unbookmarked_error">Impossible d\'enlever la vidéo des favoris.</string>
 
-	<string name="no_bookmarked_videos_text">Vous n\'avez pas ajouté de vidéo aux favoris. Elles s\'afficheront ici.</string>
+	<string name="no_bookmarked_videos_text">Vous n\'avez pas ajouté de vidéo aux favoris. Une fois ajoutées, elles s\'afficheront ici.</string>
 </resources>
