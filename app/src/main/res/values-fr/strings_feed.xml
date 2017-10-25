@@ -5,6 +5,6 @@
 	<string name="fetching_subscription_videos">Chargement des vidéos de vos abonnements</string>
 	<string name="fetched_videos_from_channels">%1$d vidéos de %2$d/%3$d chaines.</string>
 	<string name="no_new_videos_found">Pas de nouvelles vidéos.</string>
-	<string name="no_subscriptions_text">Vous n'êtes abonné à aucune chaine.\n\nDès que vous le serez, les vidéos de moins d\'un mois apparaîtront ici.</string>
+	<string name="no_subscriptions_text">Vous n\'êtes abonné à aucune chaine.\n\nDès que vous le serez, les vidéos de moins d\'un mois apparaîtront ici.</string>
 	<string name="import_subscriptions_from_youtube">Importer des abonnements depuis YouTube</string>
 </resources>
