@@ -2,7 +2,7 @@
 <resources>
 	<string name="preferences">Préférences</string>
 
-	<string name="pref_languages_category">Langues et Régions</string>
+	<string name="pref_languages_category">Langues et régions</string>
 	<string name="pref_title_preferred_regions">Région préférée</string>
 	<string name="pref_key_preferred_region">pref_key_preferred_region</string>
 	<string name="pref_summary_preferred_regions">Sélectionnez une région. Cela permettra de filter les vidéos mises en avant.</string>
@@ -15,45 +15,45 @@
 	<string name="pref_title_preferred_res">Résolution préférée</string>
 	<string name="pref_key_preferred_res">pref_preferred_resolution</string>
 	<string name="pref_summary_preferred_res">Sélectionnez une résolution</string>
-	<string name="pref_title_use_offical_player">Utiliser le lecteur youtube officiel</string>
+	<string name="pref_title_use_offical_player">Utiliser le lecteur YouTube officiel</string>
 	<string name="pref_key_use_offical_player">pref_use_official_youtube_player</string>
 	<string name="pref_summary_use_offical_player">Non recommandé</string>
 
 	<string name="pref_backup_category">Sauvegardes</string>
 	<string name="pref_title_backup_dbs">Sauvegarder</string>
 	<string name="pref_key_backup_dbs">pref_key_backup_db</string>
-	<string name="pref_summary_backup_dbs">Sauvegardez vos chaines ainsi que vos Favoris.</string>
+	<string name="pref_summary_backup_dbs">Sauvegardez vos chaines ainsi que vos favoris.</string>
 	<string name="pref_title_import_dbs">Importer</string>
 	<string name="pref_key_import_dbs">pref_key_import_db</string>
-	<string name="pref_summary_import_dbs">Importez vos chaines ainsi que vos Favoris.</string>
+	<string name="pref_summary_import_dbs">Importez vos chaines ainsi que vos favoris.</string>
 	<string name="databases_backing_up">Sauvegarde en cours…</string>
 	<string name="databases_backup_success">Données sauvegardées à %s</string>
 	<string name="databases_backup_fail">Impossible de sauvegarder vos données.</string>
 	<string name="databases_import_select_backup">Sélectionnez la sauvegarde à importer</string>
 	<string name="databases_import_nothing_selected">Aucune sauvegarde sélectionnée…</string>
-	<string name="databases_import_warning_message">Vos données seront REMPLACES par la sauvegarde sélectionnée.\n\nContinuer?</string>
+	<string name="databases_import_warning_message">Vos données seront REMPLACÉES par la sauvegarde sélectionnée.\n\nContinuer?</string>
 	<string name="continue_">Continuer</string>
-	<string name="databases_importing">Importation…</string>
+	<string name="databases_importing">Import…</string>
 	<string name="databases_import_fail">Impossible d\'importer la sauvegarde.</string>
 	<string name="databases_import_success">Sauvegarde importée avec succès.  Redémarez l\'application.</string>
 
 	<string name="pref_key_import_subs">pref_key_import_subs</string>
-	<string name="pref_title_import_subs">Import Subscriptions From YouTube</string>
-	<string name="pref_summary_import_subs">Import your subscriptions from YouTube.</string>
-	<string name="subs_import_select_backup">Select YouTube xml file to import</string>
+	<string name="pref_title_import_subs">Importer des abonnements depuis YouTube</string>
+	<string name="pref_summary_import_subs">Importez vos abonnements depuis YouTube.</string>
+	<string name="subs_import_select_backup">Sélectionner le fichier xml YouTube à importer</string>
 
 	<string name="pref_about_category">À propos</string>
 	<string name="pref_title_website">Site internet</string>
 	<string name="pref_key_website">pref_website</string>
 	<string name="pref_title_credits">Crédits</string>
 	<string name="pref_key_credits">pref_credits</string>
-	<string name="pref_summary_credits">Personnes et projets à qui ont participé à créer cette application.</string>
+	<string name="pref_summary_credits">Personnes et projets qui ont participé à créer cette application.</string>
 	<string name="pref_title_version">Version</string>
 	<string name="pref_key_version">pref_version</string>
 	<string name="pref_title_updates">Mise à jour</string>
 	<string name="pref_key_updates">pref_updates</string>
-	<string name="pref_summary_updates">rechercher des Mises à jour.</string>
-	<string name="pref_title_license">License</string>
+	<string name="pref_summary_updates">Rechercher des mises à jour.</string>
+	<string name="pref_title_license">Licence</string>
 	<string name="pref_key_license">pref_license</string>
 	<string name="pref_summary_license">GNU General Public License version 3</string>
 	<string name="app_license">
@@ -421,7 +421,7 @@
 	<string name="pref_other_category">Autre</string>
 	<string name="pref_key_default_tab">pref_default_tab</string>
 	<string name="pref_title_default_tab">Onglet par défaut</string>
-	<string name="pref_summary_default_tab">Onglet par défaut lors de l\'ouverture de skytube: %s</string>
+	<string name="pref_summary_default_tab">Onglet par défaut lors de l\'ouverture de SkyTube : %s</string>
 	<string-array name="default_tab">
 		<item>@string/featured</item>
 		<item>@string/most_popular</item>
@@ -456,10 +456,10 @@
 	</string-array>
 
 	<string name="pref_youtube_api_key">pref_youtube_api_key</string>
-	<string name="pref_title_youtube_api_key">clé API youtube</string>
-	<string name="pref_summary_youtube_api_key">Entrer votre clé API.  Laisse blanc pour utiliser la clé API par défaut.</string>
+	<string name="pref_title_youtube_api_key">clé API YouTube</string>
+	<string name="pref_summary_youtube_api_key">Entrer votre clé API.  Laissez vide pour utiliser la clé API par défaut.</string>
 	<string name="pref_youtube_api_key_error">Erreur lors de la validation de votre clé API.</string>
 	<string name="pref_youtube_api_key_custom">clé valide.  Redémarrez l\'application.</string>
-	<string name="pref_youtube_api_key_default">Reémarrez l\'application pour utiliser la clé par défaut.</string>
+	<string name="pref_youtube_api_key_default">Redémarrez l\'application pour utiliser la clé par défaut.</string>
 	<string name="restart">Redémarrer</string>
 </resources>
