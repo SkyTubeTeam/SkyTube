@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="error_stream_err_unavailable">Impossible d\'afficher le message d\'erreur.</string>
-	<string name="error_stream_decryption_fail">Impossible de lire le code de décryptage du service youtube.</string>
+	<string name="error_stream_decryption_fail">Impossible de lire le code de décryptage du service Youtube.</string>
 	<string name="error_stream_parse_error">Erreur d\'analyse.</string>
 
 	<string name="error_video_play">Erreur de lecture vidéo</string>
 	<string name="error_video_streams_empty">La vidéo %s n\'a pas de source</string>
 	<string name="error_video_streams">Erreur lors du chagement du flux vidéo.</string>
 	<string name="error_get_video_desc">Erreur lors de la récupération de la description de la vidéo.</string>
-	<string name="error_invalid_url">URL de la vidéo invalide: %s</string>
+	<string name="error_invalid_url">URL de la vidéo invalide : %s</string>
 
-	<string name="warning_live_video">Impossible de lire des vidéos en live.  Regarder la vidéo sur une autre application?</string>
+	<string name="warning_live_video">Impossible de lire des vidéos en live.  Regarder la vidéo sur une autre application ?</string>
 
 	<string name="ratings_disabled">Notation désactivée</string>
 
