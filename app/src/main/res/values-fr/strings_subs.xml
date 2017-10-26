@@ -12,14 +12,14 @@
 	<string name="error_check_if_user_has_subbed">Impossible de vérifier si l\'utilisateur est abonné à cette chaine (id=%s)</string>
 	<string name="error_unable_to_subscribe">Impossible de vous désabonner de cette chaine (id=%s)</string>
 
-	<string name="import_subscriptions">Import Subscriptions</string>
-	<string name="import_subscriptions_description">Import your subscriptions from YouTube, by first visiting https://www.youtube.com/subscription_manager, and clicking the \"Export Subscriptions\" button at the bottom. Then, select the xml file you exported by clicking \"Select XML File\" below.</string>
-	<string name="subscriptions_to_channels_imported">Subscription to %d channels imported.</string>
-	<string name="select_xml_file">Select XML File</string>
-	<string name="select_all">Select All</string>
-	<string name="select_none">Select None</string>
-	<string name="no_channels_found">No YouTube channels were found in the XML file you uploaded.</string>
-	<string name="no_new_channels_found">No YouTube channels that you are not already subscribed to were found in the XML file you uploaded.</string>
-	<string name="import_subscriptions_parse_error">An error was encountered attempting to parse the XML file you uploaded: %s.</string>
-	<string name="failed_to_import_subscriptions">Failed to import your YouTube subscriptions.</string>
+	<string name="import_subscriptions">Importer abonnements</string>
+	<string name="import_subscriptions_description">Importez vos abonnements depuis YouTube, en visitant https://www.youtube.com/subscription_manager et en cliquant sur le bouton \"Export Subscriptions\" en bas. Ensuite, sélectionnez le fichier xml que vous voulez exporter en cliquant sur \"Select XML File\" en dessous.</string>
+	<string name="subscriptions_to_channels_imported">Abonnements pour %d chaines importés.</string>
+	<string name="select_xml_file">Sélectionner fichier XML</string>
+	<string name="select_all">Sélectionner tout</string>
+	<string name="select_none">Sélectionner aucun</string>
+	<string name="no_channels_found">Aucune chaine YouTube trouvée dans le fichier XML file que vous avez téléchargé.</string>
+	<string name="no_new_channels_found">Aucune chaine YouTube auquelle vous n'êtes pas déjà abonné n'a été trouvée dans le fichier XML que vous avez téléchargé.</string>
+	<string name="import_subscriptions_parse_error">Une erreur a été rencontré lors de la tentative d'analyse du fichier XML que vous avez téléchargé : %s.</string>
+	<string name="failed_to_import_subscriptions">Échec de l'import de vos abonnements YouTube.</string>
 </resources>
