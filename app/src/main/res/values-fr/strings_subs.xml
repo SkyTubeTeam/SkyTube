@@ -21,5 +21,5 @@
 	<string name="no_channels_found">Aucune chaine YouTube trouvée dans le fichier XML file que vous avez téléchargé.</string>
 	<string name="no_new_channels_found">Aucune chaine YouTube auquelle vous n'êtes pas déjà abonné n'a été trouvée dans le fichier XML que vous avez téléchargé.</string>
 	<string name="import_subscriptions_parse_error">Une erreur a été rencontré lors de la tentative d'analyse du fichier XML que vous avez téléchargé : %s.</string>
-	<string name="failed_to_import_subscriptions">Échec de l'import de vos abonnements YouTube.</string>
+	<string name="failed_to_import_subscriptions">Échec de l\'import de vos abonnements YouTube.</string>
 </resources>
