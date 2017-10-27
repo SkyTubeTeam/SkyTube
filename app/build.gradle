@@ -9,11 +9,12 @@ android {
         minSdkVersion 14
         targetSdkVersion 26
         versionCode 9
+        // Third party devs:  pls be ethical and change the below keys
         buildConfigField 'String[]', 'YOUTUBE_API_KEYS',
                 '{' +
-                        '"AIzaSyBK7NLymFzs-P8j8jT7kjeWkY0yXdue8_g",' +
-                        '"AIzaSyC23oUYMmy2hlmxSJNvo5UyfvmNmAJ_Lao",' +
-                        '"AIzaSyA-Y12I5tlGUcodUyH-RQHn94F7c60Y4d0"'  +
+                        '"AIzaSyBlD0IyrnYDVUklu-lEp5ZPmeUFaKEmz2I",' +
+                        '"AIzaSyCBe6h-D27WgcDkX9Wuyb3Fjef6tFja2Eg",' +
+                        '"AIzaSyC2eifJuPidYxsq7NKvZGdTxngFrhbm0G0"'  +
                 '}';
         buildConfigField 'String', 'SKYTUBE_WEBSITE',         '"http://skytube-app.com"'
         buildConfigField 'String', 'SKYTUBE_WEBSITE_CREDITS', '"http://skytube-app.com/credits.html"'
