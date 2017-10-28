@@ -223,6 +223,12 @@ public class SubscriptionsBackupsManager {
 
 		@Override
 		protected void onPostExecute(Boolean successfulImport) {
+			// We need to force the app to refresh the subscriptions feed when the app is
+			// restarted (irrespective to when the feeds were last refreshed -- which could be
+			// during the last 5 mins).  This is as we are loading new databases...
+			GetSubscriptionVideosTask.updateFeedsLastUpdateTime(null);
+
+			// ask the user to restart the app
 			new AlertDialog.Builder(activity)
 							.setCancelable(false)
 							.setMessage(successfulImport ? R.string.databases_import_success : R.string.databases_import_fail)

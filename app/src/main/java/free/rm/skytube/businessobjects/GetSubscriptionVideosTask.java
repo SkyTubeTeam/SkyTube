@@ -57,6 +57,38 @@ public class GetSubscriptionVideosTask extends AsyncTaskParallel<Void, Void, Voi
 		return this;
 	}
 
+
+	/**
+	 * @return The last time we updated the subscriptions videos feed.  Will return null if the
+	 * last refresh time is set to -1.
+	 */
+	private DateTime getFeedsLastUpdateTime() {
+		long l = SkyTubeApp.getPreferenceManager().getLong(SkyTubeApp.KEY_SUBSCRIPTIONS_LAST_UPDATED, -1);
+		return (l != -1)  ?  new DateTime(l)  :  null;
+	}
+
+
+	/**
+	 * Update the feeds' last update time to the current time.
+	 */
+	private void updateFeedsLastUpdateTime() {
+		updateFeedsLastUpdateTime(new DateTime(new Date()));
+	}
+
+
+	/**
+	 * Update the feed's last update time to dateTime.
+	 *
+	 * @param dateTime  The feed's last update time.  If it is set to null, then -1 will be stored
+	 *                  to indicate that the app needs to force refresh the feeds...
+	 */
+	public static void updateFeedsLastUpdateTime(DateTime dateTime) {
+		SharedPreferences.Editor editor = SkyTubeApp.getPreferenceManager().edit();
+		editor.putLong(SkyTubeApp.KEY_SUBSCRIPTIONS_LAST_UPDATED, dateTime != null  ?  dateTime.getValue()  :  -1);
+		editor.commit();
+	}
+
+
 	@Override
 	protected Void doInBackground(Void... voids) {
 		try {
@@ -68,13 +100,12 @@ public class GetSubscriptionVideosTask extends AsyncTaskParallel<Void, Void, Voi
 			 * videos published after the last published time stored in the database, so we don't need to worry about missing
 			 * any.
 			 */
-			long l = SkyTubeApp.getPreferenceManager().getLong(SkyTubeApp.KEY_SUBSCRIPTIONS_LAST_UPDATED, -1);
-			DateTime publishedAfter = null;
-			if(l != -1) {
-				DateTime subscriptionsLastUpdated = new DateTime(l);
-				if (subscriptionsLastUpdated != null && !forceRefresh)
-					publishedAfter = subscriptionsLastUpdated;
-			}
+
+			// If forceRefresh is set to true, then set publishedAfter to null... this will force
+			// the app to update the feeds.  Otherwise, set the publishedAfter date to the last
+			// time we updated the feeds.
+			DateTime publishedAfter = forceRefresh ? null : getFeedsLastUpdateTime();
+
 			for(final YouTubeChannel channel : channels) {
 				tasks.add(new GetChannelVideosTask(channel)
 					.setPublishedAfter(publishedAfter)
@@ -93,10 +124,10 @@ public class GetSubscriptionVideosTask extends AsyncTaskParallel<Void, Void, Voi
 									listener.onChannelVideosFetched(channel, videos != null ? videos.size() : 0, videosDeleted);
 							} else {
 								videosDeleted = SubscriptionsDb.getSubscriptionsDb().trimSubscriptionVideos();
+
 								// All channels have finished querying. Update the last time this refresh was done.
-								SharedPreferences.Editor editor = SkyTubeApp.getPreferenceManager().edit();
-								editor.putLong(SkyTubeApp.KEY_SUBSCRIPTIONS_LAST_UPDATED, new DateTime(new Date()).getValue());
-								editor.commit();
+								updateFeedsLastUpdateTime();
+
 								if(listener != null)
 									listener.onChannelVideosFetched(channel, videos != null ? videos.size() : 0, videosDeleted);
 								if(listener != null)

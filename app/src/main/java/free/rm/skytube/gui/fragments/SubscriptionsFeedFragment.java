@@ -50,8 +50,6 @@ import free.rm.skytube.gui.businessobjects.SubscriptionsFragmentListener;
  * Fragment that displays subscriptions videos feed from all channels the user is subscribed to.
  */
 public class SubscriptionsFeedFragment extends VideosGridFragment implements SubscriptionsFragmentListener {
-	private MainActivityListener mainActivityListener;
-
 	private int numVideosFetched = 0;
 	private int numChannelsFetched = 0;
 	private int numChannelsSubscribed = 0;
@@ -60,10 +58,10 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Sub
 	private boolean shouldRefresh = false;
 	private SubscriptionsBackupsManager subscriptionsBackupsManager;
 
-	private static final String KEY_SET_UPDATE_FEED_TAB = "SubscriptionsFeedFragment.KEY_SET_UPDATE_FEED_TAB";
-
 	@BindView(R.id.noSubscriptionsText)
 	View noSubscriptionsText;
+
+	private static final String KEY_SET_UPDATE_FEED_TAB = "SubscriptionsFeedFragment.KEY_SET_UPDATE_FEED_TAB";
 
 
 	@Override
@@ -110,16 +108,6 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Sub
 		editor.commit();
 	}
 
-	@Override
-	public void onAttach(Context context) {
-		super.onAttach(context);
-
-		try {
-			mainActivityListener = (MainActivityListener)context;
-		} catch (ClassCastException e) {
-			throw new ClassCastException(context.toString() + " must implement MainActivityListener");
-		}
-	}
 
 	private void doRefresh(boolean showDialog) {
 		new RefreshTask(showDialog).executeInParallel();
@@ -173,7 +161,7 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Sub
 						// Only show the toast that no videos were found if the progress dialog is sh
 						if(fragmentIsVisible) {
 							Toast.makeText(getContext(),
-											String.format(getContext().getString(R.string.no_new_videos_found)),
+											R.string.no_new_videos_found,
 											Toast.LENGTH_LONG).show();
 						}
 					}
@@ -275,7 +263,7 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Sub
 		private boolean showDialog;
 
 
-		public RefreshTask(boolean showDialog) {
+		private RefreshTask(boolean showDialog) {
 			this.showDialog = showDialog;
 		}
 
