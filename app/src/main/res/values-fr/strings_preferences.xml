@@ -39,7 +39,7 @@
 
 	<string name="pref_key_import_subs">pref_key_import_subs</string>
 	<string name="pref_title_import_subs">Importer des abonnements depuis YouTube</string>
-	<string name="pref_summary_import_subs">Importez vos abonnements depuis YouTube.</string>
+	<string name="pref_summary_import_subs">Importez vos abonnements depuis votre compte YouTube.</string>
 	<string name="subs_import_select_backup">Sélectionner le fichier xml YouTube à importer</string>
 
 	<string name="pref_about_category">À propos</string>

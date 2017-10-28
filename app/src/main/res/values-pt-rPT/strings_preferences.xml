@@ -39,7 +39,7 @@
 
 	<string name="pref_key_import_subs">pref_key_import_subs</string>
 	<string name="pref_title_import_subs">Import Subscriptions From YouTube</string>
-	<string name="pref_summary_import_subs">Import your subscriptions from YouTube.</string>
+	<string name="pref_summary_import_subs">Import your subscriptions from your YouTube account.</string>
 	<string name="subs_import_select_backup">Select YouTube xml file to import</string>
 
 	<string name="pref_about_category">Sobre</string>
