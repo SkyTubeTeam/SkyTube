@@ -45,13 +45,13 @@ Pure open-source version.  Updates normally take up to 3 days to be available to
 
 ## Screenshots
 ### Mobile
-[<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/trending.jpg" width=960>](https://ram-on.github.io/SkyTube/assets/img/screenshots/trending.jpg)
-[<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/subs.jpg" width=960>](https://ram-on.github.io/SkyTube/assets/img/screenshots/subs.jpg)
-[<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/bookmarks.jpg" width=960>](https://ram-on.github.io/SkyTube/assets/img/screenshots/bookmarks.jpg)
-[<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/play.jpg" width=960>](https://ram-on.github.io/SkyTube/assets/img/screenshots/play.jpg)
-[<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/comments.jpg" width=960>](https://ram-on.github.io/SkyTube/assets/img/screenshots/comments.jpg)
-[<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/channel.jpg" width=960>](https://ram-on.github.io/SkyTube/assets/img/screenshots/channel.jpg)
-[<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/search.jpg" width=960>](https://ram-on.github.io/SkyTube/assets/img/screenshots/search.jpg)
+![Trending](https://ram-on.github.io/SkyTube/assets/img/screenshots/trending.jpg)
+![Subscriptions](https://ram-on.github.io/SkyTube/assets/img/screenshots/subs.jpg)
+![Bookmarks](https://ram-on.github.io/SkyTube/assets/img/screenshots/bookmarks.jpg)
+![Play video](https://ram-on.github.io/SkyTube/assets/img/screenshots/play.jpg)
+![View comments](https://ram-on.github.io/SkyTube/assets/img/screenshots/comments.jpg)
+![Browse channel](https://ram-on.github.io/SkyTube/assets/img/screenshots/channel.jpg)
+![Search videos](https://ram-on.github.io/SkyTube/assets/img/screenshots/search.jpg)
 
 ## Credits
 This project was possible with the support and contribution of [numerous volunteers and third-party projects](http://skytube-app.com/credits.html).
