@@ -25,7 +25,7 @@ import org.schabi.newpipe.extractor.stream.VideoStream;
 /**
  * Represents the meta-data of a YouTube video stream.
  */
- public class StreamMetaData {
+public class StreamMetaData {
 
 	/** URL of the stream */
 	private Uri uri;
