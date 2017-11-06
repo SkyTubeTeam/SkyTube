@@ -42,67 +42,67 @@ import free.rm.skytube.R;
  */
 public class ParseStreamMetaData {
 
-    private static final String TAG = ParseStreamMetaData.class.getSimpleName();
-    /**
-     * YouTube video URL (e.g. https://www.youtube.com/watch?v=XXXXXXXXX)
-     */
-    private String youtubeVideoUrl;
+	private static final String TAG = ParseStreamMetaData.class.getSimpleName();
+	/**
+	 * YouTube video URL (e.g. https://www.youtube.com/watch?v=XXXXXXXXX)
+	 */
+	private String youtubeVideoUrl;
 
 
-    /**
-     * Initialise the {@link ParseStreamMetaData} object.
-     *
-     * @param videoId The ID of the video we are going to get its streams.
-     */
-    public ParseStreamMetaData(String videoId) {
-        NewPipe.init(new HttpDownloader());
-        setYoutubeVideoUrl(videoId);
-    }
+	/**
+	 * Initialise the {@link ParseStreamMetaData} object.
+	 *
+	 * @param videoId The ID of the video we are going to get its streams.
+	 */
+	public ParseStreamMetaData(String videoId) {
+		NewPipe.init(new HttpDownloader());
+		setYoutubeVideoUrl(videoId);
+	}
 
 
-    /**
-     * Returns a list of video/stream meta-data that is supported by this app.
-     *
-     * @return List of {@link StreamMetaData}.
-     */
-    public StreamMetaDataList getStreamMetaDataList() {
-        StreamMetaDataList list = new StreamMetaDataList();
+	/**
+	 * Returns a list of video/stream meta-data that is supported by this app.
+	 *
+	 * @return List of {@link StreamMetaData}.
+	 */
+	public StreamMetaDataList getStreamMetaDataList() {
+		StreamMetaDataList list = new StreamMetaDataList();
 
-        try {
-            StreamingService youtube = NewPipe.getService("Youtube");
-            StreamExtractor extractor = youtube.getStreamExtractor(youtubeVideoUrl);
+		try {
+			StreamingService youtube = NewPipe.getService("Youtube");
+			StreamExtractor extractor = youtube.getStreamExtractor(youtubeVideoUrl);
 
-            // actual extraction
-            StreamInfo streamInfo = StreamInfo.getInfo(extractor);
+			// actual extraction
+			StreamInfo streamInfo = StreamInfo.getInfo(extractor);
 
-            // if non critical exceptions happened during extraction they will be printed now
-            for (Throwable error : streamInfo.errors) {
-                System.err.println("----------------");
-                error.printStackTrace();
-            }
+			// if non critical exceptions happened during extraction they will be printed now
+			for (Throwable error : streamInfo.errors) {
+				System.err.println("----------------");
+				error.printStackTrace();
+			}
 
-            // now print the stream url and we are done
-            for (VideoStream stream : streamInfo.video_streams) {
-                list.add(new StreamMetaData(stream));
-            }
-        } catch (ContentNotAvailableException exception) {
-            list = new StreamMetaDataList(exception.getMessage());
-        } catch (Throwable tr) {
-            Log.e(TAG, "An error has occurred while getting streams metadata.  URL=" + this.youtubeVideoUrl, tr);
-            list = new StreamMetaDataList(R.string.error_video_streams);
-        }
+			// now print the stream url and we are done
+			for (VideoStream stream : streamInfo.video_streams) {
+				list.add(new StreamMetaData(stream));
+			}
+		} catch (ContentNotAvailableException exception) {
+			list = new StreamMetaDataList(exception.getMessage());
+		} catch (Throwable tr) {
+			Log.e(TAG, "An error has occurred while getting streams metadata.  URL=" + this.youtubeVideoUrl, tr);
+			list = new StreamMetaDataList(R.string.error_video_streams);
+		}
 
-        return list;
-    }
+		return list;
+	}
 
 
-    /**
-     * Given video ID it will set the video's page URL.
-     *
-     * @param videoId The ID of the video.
-     */
-    private void setYoutubeVideoUrl(String videoId) {
-        this.youtubeVideoUrl = "https://www.youtube.com/watch?v=" + videoId;
-    }
+	/**
+	 * Given video ID it will set the video's page URL.
+	 *
+	 * @param videoId The ID of the video.
+	 */
+	private void setYoutubeVideoUrl(String videoId) {
+		this.youtubeVideoUrl = "https://www.youtube.com/watch?v=" + videoId;
+	}
 
 }
