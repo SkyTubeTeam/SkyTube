@@ -1,0 +1,203 @@
+<resources>
+
+	<!-- SkyTube theme -->
+	<style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+		<item name="colorPrimary">@color/colorPrimary</item>
+		<item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+		<item name="colorAccent">@color/colorAccent</item>
+
+		<item name="actionBarPopupTheme">@style/ThemeOverlay.AppCompat</item>
+		<item name="android:popupMenuStyle">@style/PopupMenu</item>
+		<item name="popupMenuStyle">@style/PopupMenu</item>
+
+		<item name="textAppearanceLargePopupMenu">@style/VideoOptionsTextAppearanceLarge</item>
+		<item name="android:textAppearanceLargePopupMenu">@style/VideoOptionsTextAppearanceLarge</item>
+
+		<item name="textAppearanceSmallPopupMenu">@style/VideoOptionsTextAppearanceSmall</item>
+		<item name="android:textAppearanceSmallPopupMenu">@style/VideoOptionsTextAppearanceSmall</item>
+
+	</style>
+
+
+	<!-- *************************************************************************************** -->
+	<!--
+		Main Activity
+	-->
+
+	<style name="NoActionBarActivityTheme" parent="AppTheme">
+		<item name="windowActionBar">false</item>
+		<item name="windowNoTitle">true</item>
+		<item name="md_background_color">@color/colorPrimary</item>
+		<item name="md_title_color">@android:color/white</item>
+		<item name="md_content_color">@android:color/white</item>
+		<item name="md_positive_color">@android:color/white</item>
+		<item name="md_neutral_color">@android:color/white</item>
+		<item name="md_negative_color">@android:color/white</item>
+
+	</style>
+
+
+	<!-- *************************************************************************************** -->
+	<!--
+		Video Grid
+	-->
+
+	<style name="GridTextView" parent="AppTheme">
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:textAppearance">@style/TextAppearance.AppCompat.Small</item>
+		<item name="android:textColor">@color/video_cell_text_main</item>
+		<item name="android:background">@color/video_cell_background</item>
+	</style>
+
+	<style name="GridMicroDetailsTextView" parent="GridTextView">
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:padding">2dp</item>
+		<item name="android:background">#BA111517</item>
+		<item name="android:singleLine">true</item>
+		<item name="android:textAppearance">@style/TextAppearance.AppCompat.Small</item>
+	</style>
+
+	<style name="GridDetailsTextView" parent="GridTextView">
+		<item name="android:textColor">@color/video_cell_text_details</item>
+		<item name="android:singleLine">true</item>
+		<item name="android:textAppearance">@style/TextAppearance.AppCompat.Small</item>
+	</style>
+
+	<style name="PopupMenu" parent="@android:style/Widget.PopupMenu">
+		<item name="android:popupBackground">@color/popup_menu</item>
+	</style>
+
+	<style name="VideoOptionsTextAppearanceLarge" parent="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Large">
+		<item name="android:textColor">@color/video_cell_text_main</item>
+	</style>
+
+	<style name="VideoOptionsTextAppearanceSmall" parent="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Small">
+		<item name="android:textColor">@color/video_cell_text_main</item>
+	</style>
+
+
+	<!-- *************************************************************************************** -->
+	<!--
+		Subs Drawer
+	-->
+
+	<style name="SubsTextView" parent="AppTheme">
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:textColor">@color/subs_text</item>
+		<item name="android:textAppearance">@style/TextAppearance.AppCompat.Small</item>
+	</style>
+
+	<style name="SubscribeButton" parent="AppTheme">
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:textColor">@color/subs_text</item>
+		<item name="android:textAppearance">@style/TextAppearance.AppCompat.Small</item>
+		<item name="android:minHeight">0dp</item>
+		<item name="android:minWidth">0dp</item>
+		<item name="android:padding">3dp</item>
+		<item name="android:background">@drawable/subscribe_button_background</item>
+		<item name="android:text">@string/subscribe</item>
+	</style>
+
+
+
+	<!-- *************************************************************************************** -->
+	<!--
+	 	Video Player
+	-->
+
+	<style name="VideoPlayerActivityTheme" parent="AppTheme">
+		<item name="android:windowFullscreen">true</item>
+		<item name="windowActionBarOverlay">true</item>
+		<item name="actionBarStyle">@style/VideoPlayerActionBarTheme</item>
+	</style>
+
+	<style name="VideoPlayerActionBarTheme" parent="AppTheme" >
+		<item name="background">@color/video_player_hud</item>	<!-- Actionbar background colour -->
+		<item name="displayOptions">showHome|homeAsUp|showTitle</item>
+	</style>
+
+	<!-- Video Description -->
+	<style name="VideoDescTextView" parent="AppTheme">
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:textColor">@color/video_player_drawer_text</item>
+		<item name="android:textAppearance">@style/TextAppearance.AppCompat.Small</item>
+	</style>
+
+	<!-- Comments -->
+	<style name="CommentTextView" parent="AppTheme">
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:textColor">@color/comment_text</item>
+		<item name="android:textAppearance">@style/TextAppearance.AppCompat.Small</item>
+	</style>
+
+	<style name="CommentInfoTextView" parent="CommentTextView">
+		<item name="android:textSize">12sp</item>
+	</style>
+
+	<style name="NoCommentsMsgTextView" parent="CommentTextView">
+	</style>
+
+
+	<!-- *************************************************************************************** -->
+	<!--
+	 	Channel Browser
+	-->
+
+	<style name="ChannelDetailsTextView" parent="AppTheme">
+		<item name="android:textColor">#F5F5F5FF</item>
+		<item name="android:singleLine">true</item>
+		<item name="android:textAppearance">@style/TextAppearance.AppCompat.Small</item>
+	</style>
+
+
+	<!-- *************************************************************************************** -->
+	<!--
+	 	Subscriptions Feed Tab
+	-->
+
+	<style name="NoSubscriptionsFeedMsgTextView" parent="AppTheme">
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:gravity">center</item>
+		<item name="android:layout_marginTop">80dp</item>
+		<item name="android:layout_marginLeft">20dp</item>
+		<item name="android:layout_marginRight">20dp</item>
+		<item name="android:textColor">@color/feed_message_text</item>
+		<item name="android:textAppearance">@style/TextAppearance.AppCompat.Medium</item>
+	</style>
+
+
+	<!-- *************************************************************************************** -->
+	<!--
+	 	Bookmarks Tab
+	-->
+
+	<style name="NoBookmarksMsgTextView" parent="NoSubscriptionsFeedMsgTextView">
+	</style>
+
+
+
+
+	<!-- *************************************************************************************** -->
+	<!--
+	 	Others
+	-->
+
+	<style name="LoadingProgressBar" parent="AppTheme">
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:padding">5dp</item>
+		<item name="android:background">@drawable/loading_rectangle</item>
+	</style>
+
+	<style name="WhiteBorderCheckBox" parent="AppTheme">
+		<item name="colorControlNormal">@android:color/white</item>
+		<item name="colorControlActivated">@android:color/white</item>
+	</style>
+
+</resources>
