@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="error_stream_err_unavailable">Feilmelding utilgjengelig</string>
+<resources><string name="error_stream_err_unavailable">Feilmelding utilgjengelig.</string>
 	<string name="error_stream_decryption_fail">Kunne ikke laste inn dekrypteringskode for YouTube-tjeneste.</string>
-	<string name="error_stream_parse_error">Tolkningsfeil</string>
+	<string name="error_stream_parse_error">Tolkningsfeil.</string>
 
 	<string name="error_video_play">Videoavspillingsfeil</string>
 	<string name="error_video_streams_empty">Videoen %s har ingen strømmer.</string>
