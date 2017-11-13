@@ -111,6 +111,11 @@ public class MainFragment extends FragmentEx {
 		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
 		viewPager.setCurrentItem(Integer.parseInt(sp.getString(getString(R.string.pref_key_default_tab), "0")));
 
+		// Set the current viewpager fragment as selected, as when the Activity is recreated, the Fragment
+		// won't know that it's selected. When the Feeds fragment is the default tab, this will prevent the
+		// refresh dialog from showing when an automatic refresh happens.
+		videoGridFragmentsList.get(viewPager.getCurrentItem()).onFragmentSelected();
+
 		return view;
 	}
 
