@@ -19,9 +19,12 @@ package free.rm.skytube.gui.fragments;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -33,25 +36,25 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import free.rm.skytube.R;
-import free.rm.skytube.gui.businessobjects.MainActivityListener;
-import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.businessobjects.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTubeVideo;
-import free.rm.skytube.gui.businessobjects.LoadingProgressBar;
+import free.rm.skytube.gui.businessobjects.FragmentEx;
 import free.rm.skytube.gui.businessobjects.SubsAdapter;
 import free.rm.skytube.gui.businessobjects.SubscribeButton;
-import free.rm.skytube.gui.businessobjects.VideoGridAdapter;
+import free.rm.skytube.gui.fragments.preferences.BaseGridFragment;
 
 /**
  * A Fragment that displays information about a channel.
  */
-public class ChannelBrowserFragment extends BaseVideosGridFragment {
+public class ChannelBrowserFragment extends FragmentEx {
 
 	private YouTubeChannel		channel = null;
-	private RecyclerView		gridView;
+
 
 	private ImageView 			channelThumbnailImage = null;
 	private ImageView			channelBannerImage = null;
@@ -61,6 +64,16 @@ public class ChannelBrowserFragment extends BaseVideosGridFragment {
 
 	public static final String CHANNEL_OBJ = "ChannelBrowserFragment.ChannelObj";
 	public static final String CHANNEL_ID  = "ChannelBrowserFragment.ChannelID";
+
+	// The fragments that will be displayed
+	private ChannelVideosFragment channelVideosFragment;
+	private ChannelPlaylistsFragment channelPlaylistsFragment;
+
+	/** List of fragments that will be displayed as tabs. */
+	private List<BaseGridFragment> channelBrowserFragmentList = new ArrayList<>();
+
+	private ChannelPagerAdapter channelPagerAdapter;
+	private ViewPager viewPager;
 
 
 	@Override
@@ -81,6 +94,42 @@ public class ChannelBrowserFragment extends BaseVideosGridFragment {
 
 		// inflate the layout for this fragment
 		View fragment = inflater.inflate(R.layout.fragment_channel_browser, container, false);
+		viewPager = (ViewPager) fragment.findViewById(R.id.pager);
+
+		TabLayout tabLayout = (TabLayout)fragment.findViewById(R.id.tab_layout);
+		tabLayout.setupWithViewPager(viewPager);
+
+		tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+			@Override
+			public void onTabSelected(TabLayout.Tab tab) {
+				viewPager.setCurrentItem(tab.getPosition());
+			}
+
+			@Override
+			public void onTabUnselected(TabLayout.Tab tab) {
+			}
+
+			@Override
+			public void onTabReselected(TabLayout.Tab tab) {
+			}
+		});
+
+		viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+			@Override
+			public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+			}
+
+			@Override
+			public void onPageSelected(int position) {
+				BaseGridFragment fragment = channelBrowserFragmentList.get(position);
+				if(fragment instanceof VideosGridFragment)
+					((VideosGridFragment) channelBrowserFragmentList.get(position)).onFragmentSelected();
+			}
+
+			@Override
+			public void onPageScrollStateChanged(int state) {
+			}
+		});
 
 		// setup the toolbar/actionbar
 		Toolbar toolbar = fragment.findViewById(R.id.toolbar);
@@ -99,7 +148,7 @@ public class ChannelBrowserFragment extends BaseVideosGridFragment {
 			public void onClick(View v) {
 				// If we're subscribing to the channel, save the list of videos we have into the channel (to be stored in the database by SubscribeToChannelTask)
 				if(!channel.isUserSubscribed()) {
-					Iterator<YouTubeVideo> iterator = videoGridAdapter.getIterator();
+					Iterator<YouTubeVideo> iterator = channelVideosFragment.getVideoGridAdapter().getIterator();
 					while (iterator.hasNext()) {
 						channel.addYouTubeVideo(iterator.next());
 					}
@@ -115,27 +164,6 @@ public class ChannelBrowserFragment extends BaseVideosGridFragment {
 		} else {
 			initViews();
 		}
-
-		gridView = fragment.findViewById(R.id.grid_view);
-
-		// set up the loading progress bar
-		LoadingProgressBar.get().setProgressBar(fragment.findViewById(R.id.loading_progress_bar));
-
-		if (videoGridAdapter == null) {
-			videoGridAdapter = new VideoGridAdapter(getActivity(), false /*hide channel name*/);
-			videoGridAdapter.setVideoCategory(VideoCategory.CHANNEL_VIDEOS, channelId);
-		} else {
-			videoGridAdapter.setContext(getActivity());
-		}
-		videoGridAdapter.setListener((MainActivityListener)getActivity());
-
-		if(channel != null)
-			videoGridAdapter.setYouTubeChannel(channel);
-
-		this.gridView.setHasFixedSize(false);
-		this.gridView.setLayoutManager(new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.video_grid_num_columns)));
-		this.gridView.setAdapter(this.videoGridAdapter);
-
 		return fragment;
 	}
 
@@ -145,6 +173,11 @@ public class ChannelBrowserFragment extends BaseVideosGridFragment {
 	 */
 	private void initViews() {
 		if (channel != null) {
+			channelPagerAdapter = new ChannelPagerAdapter(getChildFragmentManager());
+			viewPager.setOffscreenPageLimit(2);
+			viewPager.setAdapter(channelPagerAdapter);
+
+
 			Glide.with(getActivity())
 					.load(channel.getThumbnailNormalUrl())
 					.placeholder(R.drawable.channel_thumbnail_default)
@@ -209,14 +242,63 @@ public class ChannelBrowserFragment extends BaseVideosGridFragment {
 
 		@Override
 		protected void onPostExecute(YouTubeChannel youTubeChannel) {
-			ChannelBrowserFragment.this.channel = youTubeChannel;
-			ChannelBrowserFragment.this.videoGridAdapter.setYouTubeChannel(youTubeChannel);
 			// In the event this fragment is passed a channel id and not a channel object, set the channel the subscribe button is for since
 			// there wasn't a channel object to set when the button was created.
-			channelSubscribeButton.setChannel(youTubeChannel);
+			channel = youTubeChannel;
 			initViews();
+			channelSubscribeButton.setChannel(youTubeChannel);
+			channelVideosFragment.setYouTubeChannel(youTubeChannel);
 		}
 
 	}
 
+	private class ChannelPagerAdapter extends FragmentPagerAdapter {
+		public ChannelPagerAdapter(FragmentManager fm) {
+			super(fm);
+
+			// Initialize fragments
+			if(channelVideosFragment == null)
+				channelVideosFragment = new ChannelVideosFragment();
+
+			if(channelPlaylistsFragment == null)
+				channelPlaylistsFragment = new ChannelPlaylistsFragment();
+
+			Bundle bundle = new Bundle();
+			bundle.putSerializable(CHANNEL_OBJ, channel);
+
+			channelVideosFragment.setArguments(bundle);
+			channelPlaylistsFragment.setArguments(bundle);
+
+			channelBrowserFragmentList.clear();
+			channelBrowserFragmentList.add(channelVideosFragment);
+			channelBrowserFragmentList.add(channelPlaylistsFragment);
+
+
+		}
+
+		@Override
+		public Fragment getItem(int position) {
+			return channelBrowserFragmentList.get(position);
+		}
+
+		@Override
+		public int getCount() {
+			return channelBrowserFragmentList.size();
+		}
+
+		@Override
+		public CharSequence getPageTitle(int position) {
+			return channelBrowserFragmentList.get(position).getFragmentName();
+		}
+	}
+
+	/**
+	 * Return the Channel Playlists Fragment. This is needed so that the fragment can have a reference to MainActivity
+	 * @return {@link free.rm.skytube.gui.fragments.ChannelPlaylistsFragment}
+	 */
+	public ChannelPlaylistsFragment getChannelPlaylistsFragment() {
+		if(channelPlaylistsFragment == null)
+			channelPlaylistsFragment = new ChannelPlaylistsFragment();
+		return channelPlaylistsFragment;
+	}
 }
