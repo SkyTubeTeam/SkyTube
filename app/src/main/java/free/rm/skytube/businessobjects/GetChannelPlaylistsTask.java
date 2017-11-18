@@ -18,7 +18,8 @@ public class GetChannelPlaylistsTask extends AsyncTaskParallel<Void, Void, List<
 	private Runnable onFinished;
 
 	public GetChannelPlaylistsTask(GetChannelPlaylists getChannelPlaylists, PlaylistsGridAdapter playlistsGridAdapter) {
-		this(getChannelPlaylists, playlistsGridAdapter, null);
+		this.playlistsGridAdapter = playlistsGridAdapter;
+		this.getChannelPlaylists = getChannelPlaylists;
 	}
 
 	public GetChannelPlaylistsTask(GetChannelPlaylists getChannelPlaylists, PlaylistsGridAdapter playlistsGridAdapter, Runnable onFinished) {
