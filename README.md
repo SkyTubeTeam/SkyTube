@@ -47,7 +47,6 @@ Pure open-source version.  Updates normally take up to 3 days to be available to
 
 ## Screenshots
 ### Mobile
-
 [<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/trending.jpg" width=250>](https://ram-on.github.io/SkyTube/assets/img/screenshots/trending.jpg)
 [<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/subs.jpg" alt="Subscriptions" width="250" />](https://ram-on.github.io/SkyTube/assets/img/screenshots/subs.jpg)
 [<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/bookmarks.jpg" alt="Bookmarks" width="250" />](https://ram-on.github.io/SkyTube/assets/img/screenshots/bookmarks.jpg")
@@ -55,7 +54,8 @@ Pure open-source version.  Updates normally take up to 3 days to be available to
 [<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/play.jpg" alt="Play video" width="250" />](https://ram-on.github.io/SkyTube/assets/img/screenshots/play.jpg")
 [<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/channel.jpg" alt="Browse channel" width="250" />](https://ram-on.github.io/SkyTube/assets/img/screenshots/channel.jpg")
 
-
+### Tablet
+![Browse channel using tablet](https://ram-on.github.io/SkyTube/assets/img/screenshots/channel_tablet.jpg)
 
 ## Credits
 This project was possible with the support and contribution of [numerous volunteers and third-party projects](http://skytube-app.com/credits.html).
