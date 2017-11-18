@@ -1,5 +1,5 @@
 # SkyTube
-An open-source YouTube player for the Android operating system.
+**An open-source YouTube player for the Android operating system.**
 
 This app allows you to:
 * explore Featured and Most Popular videos,
@@ -15,6 +15,8 @@ This app allows you to:
 ... all at the tip of your fingers.
 
 More features will be added in the near future.
+
+<a href="https://hosted.weblate.org/engage/skytube/?utm_source=widget"> <img src="https://hosted.weblate.org/widgets/skytube/-/strings/svg-badge.svg" alt="Translation status"/> </a>
 
 ## Website
 For screenshots and more information, please visit [www.skytube-app.com](http://www.skytube-app.com).
