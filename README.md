@@ -48,11 +48,12 @@ Pure open-source version.  Updates normally take up to 3 days to be available to
 ## Screenshots
 ### Mobile
 
-[<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/trending.jpg" width=180>](https://ram-on.github.io/SkyTube/assets/img/screenshots/trending.jpg)
-[<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/subs.jpg" alt="Subscriptions" width="180" />](https://ram-on.github.io/SkyTube/assets/img/screenshots/subs.jpg)
-[<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/bookmarks.jpg" alt="Bookmarks" width="180" />](https://ram-on.github.io/SkyTube/assets/img/screenshots/bookmarks.jpg")
-[<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/play.jpg" alt="Play video" width="180" />](https://ram-on.github.io/SkyTube/assets/img/screenshots/play.jpg")
-[<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/browse.jpg" alt="Browse channel" width="180" />](https://ram-on.github.io/SkyTube/assets/img/screenshots/browse.jpg")
+[<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/trending.jpg" width=250>](https://ram-on.github.io/SkyTube/assets/img/screenshots/trending.jpg)
+[<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/subs.jpg" alt="Subscriptions" width="250" />](https://ram-on.github.io/SkyTube/assets/img/screenshots/subs.jpg)
+[<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/bookmarks.jpg" alt="Bookmarks" width="250" />](https://ram-on.github.io/SkyTube/assets/img/screenshots/bookmarks.jpg")
+
+[<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/play.jpg" alt="Play video" width="250" />](https://ram-on.github.io/SkyTube/assets/img/screenshots/play.jpg")
+[<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/channel.jpg" alt="Browse channel" width="250" />](https://ram-on.github.io/SkyTube/assets/img/screenshots/channel.jpg")
 
 
 
