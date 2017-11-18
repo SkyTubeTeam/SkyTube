@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="feed">Strøm</string>
+
+	<string name="fetching_subscription_videos">Henter videoer fra kanaler som abonneres på</string>
+	<string name="fetched_videos_from_channels">Hentet %1$d videoer fra %2$d/%3$d kanaler.</string>
+	<string name="no_new_videos_found">Fant ingen nye videoer.</string>
+	<string name="no_subscriptions_text">Du abonnerer ikke på noen kanaler.
+\n
+\nNår du først gjør det, vil alle videoer lastet opp til kanaler du abonnerer på i løpet av den siste måneden komme til syne her.</string>
+	<string name="import_subscriptions_from_youtube">Importer abonnementer fra YouTube</string>
+</resources>

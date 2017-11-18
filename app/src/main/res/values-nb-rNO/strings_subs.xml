@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="subscriptions">Abonnementer</string>
+	<string name="subscribe">Abonner</string>
+	<string name="unsubscribe">Opphev abonnement</string>
+	<string name="total_subscribers">%,d abonnenter</string>
+
+	<string name="subscribed">Abonnert</string>
+	<string name="unsubscribed">Abonnement opphevet</string>
+
+	<string name="error_get_subbed_channels">En feil inntraff under innhenting av abonnerte kanaler.</string>
+	<string name="error_check_if_user_has_subbed">Klarte ikke å sjekke hvorvidt brukeren har abonnement på kanalen (id=%s)</string>
+	<string name="error_unable_to_subscribe">Klarte ikke å oppheve eller abonnere på kanalen (id=%s)</string>
+
+	<string name="import_subscriptions">Importer abonnementer</string>
+	<string name="import_subscriptions_description">Importer dine abonnementer fra YouTube, ved først å besøke https://www.youtube.com/subscription_manager, for så å klikke \"Eksporter abonnementer\"-knappen på bunnen. Velg så XML-fila du eksporterte ved å klikke \"Velg XML-fil\" nedenfor.</string>
+	<string name="subscriptions_to_channels_imported">Abonnement på %d kanal(er) importert.</string>
+	<string name="select_xml_file">Velg XML-fil</string>
+	<string name="select_all">Velg alt</string>
+	<string name="select_none">Ikke velg noe</string>
+	<string name="no_channels_found">Ingen YouTube-kanaler ble funnet i XML-fila du lastet opp.</string>
+	<string name="no_new_channels_found">Ingen YouTube-kanaler du ikke abonnerer på allerede ble funnet i XML-fila du lastet opp.</string>
+	<string name="import_subscriptions_parse_error">En feil inntraff under forsøk på å tolke XML-fila du lastet opp: %s.</string>
+	<string name="failed_to_import_subscriptions">Klarte ikke å importere dine YouTube-abonnementer.</string>
+</resources>

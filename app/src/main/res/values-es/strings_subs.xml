@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources>
 	<string name="subscriptions">Suscripciones</string>
 	<string name="subscribe">Suscribirse</string>
@@ -22,4 +22,5 @@
 	<string name="no_new_channels_found">En el archivo XML que ha subido no se encontraron canales de YouTube a los cuales no estés suscrito actualmente.</string>
 	<string name="import_subscriptions_parse_error">Se encontró un error al intentar analizar el archivo XML que ha subido: %s.</string>
 	<string name="failed_to_import_subscriptions">Error al importar sus suscripciones de YouTube.</string>
-</resources>
+<string name="select_xml_file">Seleccionar archivo XML</string>
+	</resources>

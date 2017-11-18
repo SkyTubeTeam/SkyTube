@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="error_stream_err_unavailable">Feilmelding utilgjengelig.</string>
+	<string name="error_stream_decryption_fail">Kunne ikke laste inn dekrypteringskode for YouTube-tjeneste.</string>
+	<string name="error_stream_parse_error">Tolkningsfeil.</string>
+
+	<string name="error_video_play">Videoavspillingsfeil</string>
+	<string name="error_video_streams_empty">Videoen %s har ingen strømmer.</string>
+	<string name="error_video_streams">En feil inntraff under innhenting av videostrømmer.</string>
+	<string name="error_get_video_desc">En feil inntraff under innhenting av videobeskrivelse.</string>
+	<string name="error_invalid_url">Ugyldig videonettadresse: %s</string>
+
+	<string name="warning_live_video">Kan ikke spille sanntidsstrømmer nå. Spill sanntidsstrøm eksternt?</string>
+
+	<string name="ratings_disabled">Vurderinger avskrudd</string>
+
+	<string name="loading_video">Laster inn video…</string>
+	<string name="get_new_video_steam">Ny strøm</string>
+	<string name="open_in_browser">Åpne i nettleser</string>
+	<string name="open_with">Åpne med…</string>
+	<string name="share">Del</string>
+	<string name="share_via">Del via</string>
+	<string name="copy_url">Kopier nettadresse</string>
+	<string name="url_copied_to_clipboard">Nettadresse kopiert til utklippstavle.</string>
+
+	<string name="error_get_comments">En feil inntraff under innhenting av kommentarer.</string>
+	<string name="no_video_comments">Denne videoen har ingen kommentarer, eller så er de avskrudd.</string>
+	<string name="view_replies">Vis svar</string>
+	<string name="hide_replies">Skjul svar</string>
+
+	<string name="enter_video_url">Skriv inn videonettadresse</string>
+	<string name="play">Spill</string>
+	<string name="cancel">Avbryt</string>
+	<string name="clear">Tøm</string>
+</resources>
