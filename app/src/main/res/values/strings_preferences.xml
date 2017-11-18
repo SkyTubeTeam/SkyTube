@@ -37,7 +37,7 @@
 	<string name="databases_import_fail">Failed to import your databases.</string>
 	<string name="databases_import_success">Databases imported successfully.  Restart the app to apply changes.</string>
 
-	<string name="pref_key_import_subs">pref_key_import_subs</string>
+	<string name="pref_key_import_subs" translatable="false">pref_key_import_subs</string>
 	<string name="pref_title_import_subs">Import Subscriptions From YouTube</string>
 	<string name="pref_summary_import_subs">Import your subscriptions from your YouTube account.</string>
 	<string name="subs_import_select_backup">Select YouTube xml file to import</string>
@@ -74,7 +74,7 @@
 	<string name="i_agree">I Agree</string>
 
 
-	<string-array name="languages_names">
+	<string-array name="languages_names" translatable="false">
 		<item>Afrikaans</item>
 		<item>Azərbaycan</item>
 		<item>Bahasa Indonesia</item>
@@ -153,7 +153,7 @@
 		<item>한국어</item>
 	</string-array>
 
-	<string-array name="languages_iso639_codes">
+	<string-array name="languages_iso639_codes" translatable="false">
 		<item>af</item>
 		<item>az</item>
 		<item>id</item>
@@ -234,7 +234,7 @@
 
 
 	<!-- NB for Translators:  Country names shall all be written in English -->
-	<string-array name="country_names">
+	<string-array name="country_names" translatable="false">
 		<item>Worldwide (All)</item>
 		<item>Algeria</item>
 		<item>Argentina</item>
@@ -326,7 +326,7 @@
 		<item>Zimbabwe</item>
 	</string-array>
 
-	<string-array name="country_codes">
+	<string-array name="country_codes" translatable="false">
 		<item></item>
 		<item>DZ</item>
 		<item>AR</item>
@@ -422,13 +422,13 @@
 	<string name="pref_key_default_tab" translatable="false">pref_default_tab</string>
 	<string name="pref_title_default_tab">Default Tab</string>
 	<string name="pref_summary_default_tab">Default tab to show when SkyTube launches: %s</string>
-	<string-array name="default_tab">
+	<string-array name="default_tab" translatable="false">
 		<item>@string/featured</item>
 		<item>@string/most_popular</item>
 		<item>@string/feed</item>
 		<item>@string/bookmarks</item>
 	</string-array>
-	<string-array name="default_tab_values">
+	<string-array name="default_tab_values" translatable="false">
 		<item>0</item>
 		<item>1</item>
 		<item>2</item>
@@ -442,7 +442,7 @@
 	<string name="pref_screen_portrait">Portrait</string>
 	<string name="pref_screen_auto">Automatic</string>
 	<string name="pref_screen_sensor">Device sensor</string>
-	<string-array name="screen_orientations">
+	<string-array name="screen_orientations" translatable="false">
 		<item>@string/pref_screen_auto</item>
 		<item>@string/pref_screen_landscape</item>
 		<item>@string/pref_screen_portrait</item>

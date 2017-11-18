@@ -3,27 +3,21 @@
 
 	<string name="pref_languages_category">Språk og regioner</string>
 	<string name="pref_title_preferred_regions">Foretrukket region</string>
-	<string name="pref_key_preferred_region">pref_key_preferred_region</string>
 	<string name="pref_summary_preferred_regions">Velg en foretrukket region. Dette brukes til å filtrere ut videoer i \"Framhevet\"-kategorien.</string>
 
 	<string name="pref_title_preferred_languages">Foretrukket/de språk</string>
-	<string name="pref_key_preferred_languages">pref_key_preferred_languages</string>
 	<string name="pref_summary_preferred_languages">Eksperimentelt: Velg ett eller flere språk. Dette brukes til å filtrere ut videoer i \"Mest populært\"-kategorien, og for videosøk.</string>
 
 	<string name="pref_video_player_category">Videoavspiller</string>
 	<string name="pref_title_preferred_res">Foretrukket oppøsning</string>
-	<string name="pref_key_preferred_res">pref_preferred_resolution</string>
 	<string name="pref_summary_preferred_res">Velg din foretrukne oppløsning</string>
 	<string name="pref_title_use_offical_player">Bruk den offisielle YouTube-avspilleren</string>
-	<string name="pref_key_use_offical_player">pref_use_official_youtube_player</string>
 	<string name="pref_summary_use_offical_player">Ikke anbefalt</string>
 
 	<string name="pref_backup_category">Sikkerhetskopier</string>
 	<string name="pref_title_backup_dbs">Sikkerhetskopier databaser</string>
-	<string name="pref_key_backup_dbs">pref_key_backup_db</string>
 	<string name="pref_summary_backup_dbs">Sikkerhetskopier dine abonnementer og bokmerkedatabaser.</string>
 	<string name="pref_title_import_dbs">Importer sikkerhetskopi</string>
-	<string name="pref_key_import_dbs">pref_key_import_db</string>
 	<string name="pref_summary_import_dbs">Importer din sikkerhetskopi av abonnementer og bokmerkedatabaser.</string>
 	<string name="databases_backing_up">Sikkerhetskopierer…</string>
 	<string name="databases_backup_success">Databaser sikkerhetskopiert til %s</string>
@@ -38,24 +32,18 @@
 	<string name="databases_import_fail">Klarte ikke å importere dine databaser.</string>
 	<string name="databases_import_success">Databaser ble importer. Endringer vil tre i effekt når programmet startes på nytt.</string>
 
-	<string name="pref_key_import_subs">pref_key_import_subs</string>
 	<string name="pref_title_import_subs">Importer abonnementer fra YouTube</string>
 	<string name="pref_summary_import_subs">Importer dine abonnementer fra YouTube.</string>
 	<string name="subs_import_select_backup">Velg YouTube-XML-fil å importere</string>
 
 	<string name="pref_about_category">Om</string>
 	<string name="pref_title_website">Nettside</string>
-	<string name="pref_key_website">pref_website</string>
 	<string name="pref_title_credits">Bidragsytere</string>
-	<string name="pref_key_credits">pref_credits</string>
 	<string name="pref_summary_credits">Folk og prosjekter som har gjort dette programmet mulig.</string>
 	<string name="pref_title_version">Versjon</string>
-	<string name="pref_key_version">pref_version</string>
 	<string name="pref_title_updates">Oppdateringer</string>
-	<string name="pref_key_updates">pref_updates</string>
 	<string name="pref_summary_updates">Se etter oppdateringer.</string>
 	<string name="pref_title_license">Lisens</string>
-	<string name="pref_key_license">pref_license</string>
 	<string name="pref_summary_license">GNU General Public Lisens versjon 3</string>
 	<string name="app_license">Kopirett © 2015-2017 Ramon Mifsud
 \n 
@@ -68,17 +56,21 @@
 
 
 	<string name="pref_other_category">Andre</string>
-	<string name="pref_key_default_tab">pref_default_tab</string>
 	<string name="pref_title_default_tab">Forvalgt fane</string>
 	<string name="pref_summary_default_tab">Forvalgt fane å vise når SkyTube startes opp: %s</string>
-	<string name="pref_key_screen_orientation">pref_key_screen_orientation</string>
 	<string name="pref_title_screen_orientation">Skjermretning</string>
 	<string name="pref_summary_screen_orientation">Rotasjon av videoavspiller</string>
 	<string name="pref_screen_landscape">Landskap</string>
 	<string name="pref_screen_portrait">Portrett</string>
 	<string name="pref_screen_auto">Automatisk</string>
 	<string name="pref_screen_sensor">Enhetssensor</string>
-	<string name="pref_youtube_api_key">pref_youtube_api_key</string>
+	<string-array name="screen_orientations_values">
+		<item>auto</item>
+		<item>landscape</item>
+		<item>portrait</item>
+		<item>sensor</item>
+	</string-array>
+
 	<string name="pref_title_youtube_api_key">API-nøkkel for YouTube</string>
 	<string name="pref_summary_youtube_api_key">Skriv inn din egen API-nøkkel for YouTube-data. La stå tom for å bruke forvalg.</string>
 	<string name="pref_youtube_api_key_error">En feil inntraff under bekreftelse av API-nøkkelen du skrev inn.</string>
