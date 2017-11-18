@@ -55,6 +55,8 @@ public class ChannelBrowserFragment extends FragmentEx {
 
 	private YouTubeChannel		channel = null;
 
+	public static final String FRAGMENT_CHANNEL_VIDEOS = "ChannelBrowserFragment.FRAGMENT_CHANNEL_VIDEOS";
+	public static final String FRAGMENT_CHANNEL_PLAYLISTS = "ChannelBrowserFragment.FRAGMENT_CHANNEL_PLAYLISTS";
 
 	private ImageView 			channelThumbnailImage = null;
 	private ImageView			channelBannerImage = null;
@@ -81,6 +83,11 @@ public class ChannelBrowserFragment extends FragmentEx {
 		final String channelId;
 		final Bundle bundle = getArguments();
 
+		if(savedInstanceState != null) {
+			channelVideosFragment = (ChannelVideosFragment)getChildFragmentManager().getFragment(savedInstanceState, FRAGMENT_CHANNEL_VIDEOS);
+			channelPlaylistsFragment = (ChannelPlaylistsFragment)getChildFragmentManager().getFragment(savedInstanceState, FRAGMENT_CHANNEL_PLAYLISTS);
+		}
+
 		// we need to create a YouTubeChannel object:  this can be done by either:
 		//   (1) the YouTubeChannel object is passed to this Fragment
 		//   (2) passing the channel ID... a task is then created to create a YouTubeChannel
@@ -94,9 +101,9 @@ public class ChannelBrowserFragment extends FragmentEx {
 
 		// inflate the layout for this fragment
 		View fragment = inflater.inflate(R.layout.fragment_channel_browser, container, false);
-		viewPager = (ViewPager) fragment.findViewById(R.id.pager);
+		viewPager = fragment.findViewById(R.id.pager);
 
-		TabLayout tabLayout = (TabLayout)fragment.findViewById(R.id.tab_layout);
+		TabLayout tabLayout = fragment.findViewById(R.id.tab_layout);
 		tabLayout.setupWithViewPager(viewPager);
 
 		tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -167,6 +174,15 @@ public class ChannelBrowserFragment extends FragmentEx {
 		return fragment;
 	}
 
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		if(channelVideosFragment != null)
+			getChildFragmentManager().putFragment(outState, FRAGMENT_CHANNEL_VIDEOS, channelVideosFragment);
+		if(channelPlaylistsFragment != null)
+			getChildFragmentManager().putFragment(outState, FRAGMENT_CHANNEL_PLAYLISTS, channelPlaylistsFragment);
+
+	}
 
 	/**
 	 * Initialise views that are related to {@link #channel}.
