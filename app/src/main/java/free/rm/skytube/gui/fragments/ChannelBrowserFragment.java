@@ -31,6 +31,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.io.IOException;
 import java.util.Iterator;
@@ -147,12 +148,12 @@ public class ChannelBrowserFragment extends BaseVideosGridFragment {
 		if (channel != null) {
 			Glide.with(getActivity())
 					.load(channel.getThumbnailNormalUrl())
-					.placeholder(R.drawable.channel_thumbnail_default)
+					.apply(new RequestOptions().placeholder(R.drawable.channel_thumbnail_default))
 					.into(channelThumbnailImage);
 
 			Glide.with(getActivity())
 					.load(channel.getBannerUrl())
-					.placeholder(R.drawable.banner_default)
+					.apply(new RequestOptions().placeholder(R.drawable.banner_default))
 					.into(channelBannerImage);
 
 			channelSubscribersTextView.setText(channel.getTotalSubscribers());

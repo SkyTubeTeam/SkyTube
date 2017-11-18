@@ -27,6 +27,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.Iterator;
 
@@ -191,7 +192,7 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 		public void updateInfo(YouTubeChannel channel) {
 			Glide.with(getContext().getApplicationContext())
 					.load(channel.getThumbnailNormalUrl())
-					.placeholder(R.drawable.channel_thumbnail_default)
+					.apply(new RequestOptions().placeholder(R.drawable.channel_thumbnail_default))
 					.into(thumbnailImageView);
 
 			channelNameTextView.setText(channel.getTitle());

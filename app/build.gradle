@@ -15,7 +15,7 @@ android {
                         '"AIzaSyBlD0IyrnYDVUklu-lEp5ZPmeUFaKEmz2I",' +
                         '"AIzaSyCBe6h-D27WgcDkX9Wuyb3Fjef6tFja2Eg",' +
                         '"AIzaSyC2eifJuPidYxsq7NKvZGdTxngFrhbm0G0"'  +
-                '}';
+                '}'
         buildConfigField 'String', 'SKYTUBE_WEBSITE',         '"http://skytube-app.com"'
         buildConfigField 'String', 'SKYTUBE_WEBSITE_CREDITS', '"http://skytube-app.com/credits.html"'
         buildConfigField 'String', 'SKYTUBE_UPDATES_URL',     '"https://api.github.com/repos/ram-on/SkyTube/releases/latest"'
@@ -49,6 +49,10 @@ android {
 
 configurations {
     nonFreeCompile
+
+    all {
+        exclude module: 'httpclient'
+    }
 }
 
 dependencies {
@@ -58,20 +62,20 @@ dependencies {
     nonFreeCompile files('libs/YouTubeAndroidPlayerApi.jar')
 
     compile group: 'org.ocpsoft.prettytime', name: 'prettytime', version: '4.0.1.Final'
-    compile 'com.google.http-client:google-http-client-android:1.22.0'
-    compile 'com.google.apis:google-api-services-youtube:v3-rev181-1.22.0'
+    compile 'com.google.http-client:google-http-client-android:1.23.0'
+    compile 'com.google.apis:google-api-services-youtube:v3-rev187-1.23.0'
 
     // libextractor
     compile 'org.jsoup:jsoup:1.10.1'
     compile 'org.mozilla:rhino:1.7.7'
 
-    compile 'com.github.moraisigor:slidingdrawer:1.5.5'
-    compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'com.github.moraisigor:slidingdrawer:1.6.7'
+    compile 'com.github.bumptech.glide:glide:4.3.1'
     compile 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-    compile 'com.google.code.gson:gson:2.8.0'
-    compile group: 'joda-time', name: 'joda-time', version: '2.9.4'
-    compile 'com.afollestad.material-dialogs:core:0.9.0.2'
+    compile 'com.google.code.gson:gson:2.8.2'
+    compile group: 'joda-time', name: 'joda-time', version: '2.9.9'
+    compile 'com.afollestad.material-dialogs:core:0.9.4.7'
     compile 'com.github.angads25:filepicker:1.1.1'
 
     compile 'com.android.support:appcompat-v7:26.1.0'
@@ -81,3 +85,4 @@ dependencies {
     compile 'com.android.support:cardview-v7:26.1.0'
     compile 'com.android.support:multidex:1.0.2'    // this is as we have over 65536 lines of code...
 }
+

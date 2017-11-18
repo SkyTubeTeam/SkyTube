@@ -29,6 +29,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -101,7 +102,7 @@ public class GridViewHolder extends RecyclerView.ViewHolder {
 		viewsTextView.setText(video.getViewsCount());
 		Glide.with(context)
 				.load(video.getThumbnailUrl())
-				.placeholder(R.drawable.thumbnail_default)
+				.apply(new RequestOptions().placeholder(R.drawable.thumbnail_default))
 				.into(thumbnailImageView);
 
 		if (video.getThumbsUpPercentageStr() != null) {

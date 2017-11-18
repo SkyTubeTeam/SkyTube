@@ -31,6 +31,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -185,12 +186,12 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
 		protected CommentViewHolder(View commentView) {
 			this.commentView = commentView;
 			paddingView		= commentView.findViewById(R.id.comment_padding_view);
-			authorTextView	= (TextView) commentView.findViewById(R.id.author_text_view);
-			commentTextView	= (TextView) commentView.findViewById(R.id.comment_text_view);
-			dateTextView	= (TextView) commentView.findViewById(R.id.comment_date_text_view);
-			upvotesTextView	= (TextView) commentView.findViewById(R.id.comment_upvotes_text_view);
-			viewRepliesTextView	= (TextView) commentView.findViewById(R.id.view_all_replies_text_view);
-			thumbnailImageView	= (ImageView) commentView.findViewById(R.id.comment_thumbnail_image_view);
+			authorTextView	= commentView.findViewById(R.id.author_text_view);
+			commentTextView	= commentView.findViewById(R.id.comment_text_view);
+			dateTextView	= commentView.findViewById(R.id.comment_date_text_view);
+			upvotesTextView	= commentView.findViewById(R.id.comment_upvotes_text_view);
+			viewRepliesTextView	= commentView.findViewById(R.id.view_all_replies_text_view);
+			thumbnailImageView	= commentView.findViewById(R.id.comment_thumbnail_image_view);
 		}
 
 
@@ -202,7 +203,7 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
 			upvotesTextView.setText(comment.getLikeCount());
 			Glide.with(context)
 					.load(comment.getThumbnailUrl())
-					.placeholder(R.drawable.channel_thumbnail_default)
+					.apply(new RequestOptions().placeholder(R.drawable.channel_thumbnail_default))
 					.into(thumbnailImageView);
 
 			thumbnailImageView.setOnClickListener(new View.OnClickListener() {
