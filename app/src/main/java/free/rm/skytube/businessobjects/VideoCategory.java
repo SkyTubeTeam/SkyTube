@@ -35,8 +35,6 @@ public enum VideoCategory {
 	SUBSCRIPTIONS_FEED_VIDEOS (4),
 	/** Videos bookmarked by the user */
 	BOOKMARKS_VIDEOS (5),
-	/** Playlists belonging to a channel */
-	CHANNEL_PLAYLISTS (6),
 	/** Videos belonging to a playlist */
 	PLAYLIST_VIDEOS (7);
 
