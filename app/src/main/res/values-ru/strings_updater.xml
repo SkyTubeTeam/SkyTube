@@ -1,2 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="update_available">Доступно обновление</string>
+	<string name="update_dialog_msg">Доступно новое обновление для SkyTube. Приложение обновится до версии %s.</string>
+	<string name="up_to_date">Все свежие обновления установлены</string>
+	<string name="up_to_date_msg">Установлена самая свежая версия SkyTube.</string>
+	<string name="update">Обновить</string>
+	<string name="later">Позже</string>
+	<string name="update_failure">Обновить приложение не получается.</string>
+	<string name="downloading">Загрузка…</string>
+</resources>
