@@ -1,2 +1,34 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="error_stream_err_unavailable">Не получается прочесть сообщение об ошибке.</string>
+	<string name="error_stream_decryption_fail">Не получается загрузить код расшифровки для сервиса YouTube.</string>
+	<string name="error_stream_parse_error">Ошибка чтения.</string>
+
+	<string name="error_video_play">Ошибка воспроизведения видео</string>
+	<string name="error_video_streams_empty">Видео %s не транслируют.</string>
+	<string name="error_video_streams">Ошибка во время загрузки трансляции видео.</string>
+	<string name="error_get_video_desc">Ошибка во время загрузки описания видео.</string>
+	<string name="error_invalid_url">Неверная ссылка на видео: %s</string>
+
+	<string name="warning_live_video">Не получается вопроизвести прямой эфир. Попробовать внешними средствами?</string>
+
+	<string name="ratings_disabled">Рейтинг отключен</string>
+
+	<string name="loading_video">Загрузка видео выполняется…</string>
+	<string name="get_new_video_steam">Новая трансляция</string>
+	<string name="open_in_browser">Открыть в веб-браузере</string>
+	<string name="open_with">Открыть с помощью…</string>
+	<string name="share">Поделиться</string>
+	<string name="share_via">Поделиться с помощью</string>
+	<string name="copy_url">Скопировать ссылку</string>
+	<string name="url_copied_to_clipboard">Ссылка скопирована в буфер обмена.</string>
+
+	<string name="error_get_comments">Ошибка во время загрузки комментариев к видео.</string>
+	<string name="no_video_comments">У видео нет комментариев или они отключены.</string>
+	<string name="view_replies">Посмотреть ответы</string>
+	<string name="hide_replies">Скрыть ответы</string>
+
+	<string name="enter_video_url">Ввести адрес видео</string>
+	<string name="play">Воспроизвести</string>
+	<string name="cancel">Отмена</string>
+	<string name="clear">Очистить</string>
+</resources>
