@@ -1,2 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="feed">Что нового</string>
+
+	<string name="fetching_subscription_videos">Загрузка видео из каналов подписки</string>
+	<string name="fetched_videos_from_channels">"Загружено %1$d видео из  %2$d/%3$d каналов."</string>
+	<string name="no_new_videos_found">Новых видео нет.</string>
+	<string name="no_subscriptions_text">Вы не подписаны ни на какие каналы.
+\n
+\nВ этом списке появляются ролики, которые добавили на каналы из вашей подписки в течение месяца.</string>
+	<string name="import_subscriptions_from_youtube">Импортировать подписки из YouTube</string>
+</resources>
