@@ -1,2 +1,73 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="preferences">Настройки</string>
+
+	<string name="pref_languages_category">Язык и страна</string>
+	<string name="pref_title_preferred_regions">Страна</string>
+	<string name="pref_summary_preferred_regions">Выберите страну. Это нужно, чтобы правильно отбирать ролики в категорию \"Избранное\" (они различаются для разных стран).</string>
+
+	<string name="pref_title_preferred_languages">Язык</string>
+	<string name="pref_summary_preferred_languages">Пробная опция: выберите один или несколько языков. Это нужно, чтобы правильно отбирать видео в категорию \"Популярные\" и для поиска роликов.</string>
+
+	<string name="pref_video_player_category">Проигрывание видео</string>
+	<string name="pref_title_preferred_res">Разрешение экрана</string>
+	<string name="pref_summary_preferred_res">Выберите разрешение экрана</string>
+	<string name="pref_title_use_offical_player">Использовать официальный проигрыватель YouTube</string>
+	<string name="pref_summary_use_offical_player">Не рекомендуется</string>
+
+	<string name="pref_backup_category">Резервные копии</string>
+	<string name="pref_title_backup_dbs">Сделать резервную копию базы данных</string>
+	<string name="pref_summary_backup_dbs">Сделать резервную копию базы данных подписок и закладок.</string>
+	<string name="pref_title_import_dbs">Импортировать резервную копию базы данных</string>
+	<string name="pref_summary_import_dbs">Импортировать резервную копию базы данных подписок и закладок.</string>
+	<string name="databases_backing_up">Резервная копия сохраняется…</string>
+	<string name="databases_backup_success">Резервная копия базы данных находится по этому пути: %s</string>
+	<string name="databases_backup_fail">Сделать резервную копию базы данных не получается.</string>
+	<string name="databases_import_select_backup">Выберите резервную копию для импорта</string>
+	<string name="databases_import_nothing_selected">Вы ничего не выбрали…</string>
+	<string name="databases_import_warning_message">Все закладки и подписки будут переписаны данными резервной копии.
+\n
+\nПродолжать?</string>
+	<string name="continue_">Продолжить</string>
+	<string name="databases_importing">Импортируется…</string>
+	<string name="databases_import_fail">Импортировать базу данных не получается.</string>
+	<string name="databases_import_success">Импорт базы данных выполнен. Перезапустите приложение, чтобы изменения вступили в силу.</string>
+
+	<string name="pref_title_import_subs">Импортировать подписки из YouTube</string>
+	<string name="pref_summary_import_subs">Импортировать подписки вашего аккаунта на YouTube.</string>
+	<string name="subs_import_select_backup">Выберите YouTube XML файл для импорта</string>
+
+	<string name="pref_about_category">О приложении</string>
+	<string name="pref_title_website">Веб-страница</string>
+	<string name="pref_title_credits">Участники</string>
+	<string name="pref_summary_credits">Приложения появилось благодаря этим людям и проектам.</string>
+	<string name="pref_title_version">Версия</string>
+	<string name="pref_title_updates">Обновления</string>
+	<string name="pref_summary_updates">Проверить обновления.</string>
+	<string name="pref_title_license">Лицензия</string>
+	<string name="pref_summary_license">Общедоступная лицензия GNU 3-ей версии</string>
+	<string name="app_license">Авторские права принадлежат Рамону Мифсуду © 2015-2017
+\n
+\nЭта программа — свободное программное обеспечение: её можно распространять или изменять в соответствии с общедоступной лицензией GNU, опубликованной Free Software Foundation (3-я версия лицензии).
+\n
+\nЭту программу распространяют в надежде, что она будет полезна, но БЕЗ ВСЯКИХ ГАРАНТИЙ, в том числе без гарантии, что у неё есть коммерческая ценность, или что она годится для определённых целей. Обратитесь к общедоступной лицензии GNU за подробностями.
+\n
+\nВместе с этой программой вы должны были получить копию общедоступной лицензии GNU. Если этого не произошло, пройдите по ссылке &lt;http://www.gnu.org/licenses/&gt;</string>
+	<string name="i_agree">Согласен</string>
+
+
+	<string name="pref_other_category">Другое</string>
+	<string name="pref_title_default_tab">Вкладка по умолчанию</string>
+	<string name="pref_summary_default_tab">Вкладка, которая открыта во время запуска SkyTube: %s</string>
+	<string name="pref_title_screen_orientation">Ориентация экрана</string>
+	<string name="pref_summary_screen_orientation">Поворот при проигрывании видео</string>
+	<string name="pref_screen_landscape">Пейзаж</string>
+	<string name="pref_screen_portrait">Портрет</string>
+	<string name="pref_screen_auto">Определять автоматически</string>
+	<string name="pref_screen_sensor">Определять по датчику устройства</string>
+	<string name="pref_title_youtube_api_key">API ключ YouTube</string>
+	<string name="pref_summary_youtube_api_key">Введите персональный API ключ YouTube. Не заполняйте, если хотите пользоваться ключом по умолчанию.</string>
+	<string name="pref_youtube_api_key_error">Ошибка при проверке введённого API ключа.</string>
+	<string name="pref_youtube_api_key_custom">Ключ прошёл проверку. Чтобы начать им пользоваться, перезапустите приложение.</string>
+	<string name="pref_youtube_api_key_default">Перезапустите приложение, чтобы переключиться на API ключ по умолчанию.</string>
+	<string name="restart">Перезапустить</string>
+</resources>
