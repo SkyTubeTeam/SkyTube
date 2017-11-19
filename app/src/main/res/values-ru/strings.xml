@@ -7,6 +7,6 @@
 	<string name="launch_offical_player_error">Не получается запустить официальное приложение YouTube. Проверьте, что оно установлено на вашем устройстве (Настройки → Приложения).</string>
 	<string name="LIVE">Прямой эфир</string>
 
-	<string name="featured">Избранное</string>
+	<string name="featured">Избранные</string>
 	<string name="most_popular">Популярные</string>
 </resources>
