@@ -1,2 +1,24 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="subscriptions">Подписки</string>
+	<string name="subscribe">Подписаться</string>
+	<string name="unsubscribe">Отменить подписку</string>
+	<string name="total_subscribers">%,d подписчиков</string>
+
+	<string name="subscribed">Подписка оформлена</string>
+	<string name="unsubscribed">Подписка отменена</string>
+
+	<string name="error_get_subbed_channels">Ошибка во время загрузки каналов подписки.</string>
+	<string name="error_check_if_user_has_subbed">Не получается проверить, подписан ли пользователь на этот канал (id=%s)</string>
+	<string name="error_unable_to_subscribe">Не получается оформить или отменить подписку на этот канал (id=%s)</string>
+
+	<string name="import_subscriptions">Импортировать подписки</string>
+	<string name="import_subscriptions_description">Чтобы импортировать ваши подписки из YouTube, надо пойти по ссылке https://www.youtube.com/subscription_manager и выбрать кнопку \"Экспортировать подписки\" в самом низу. На выходе получится XML файл, который потом можно будет указать при выборе файла для импорта (\"Выберите XML файл\").</string>
+	<string name="subscriptions_to_channels_imported">Импортированы подписки на %d каналов.</string>
+	<string name="select_xml_file">Выберите XML файл</string>
+	<string name="select_all">Выбрать все</string>
+	<string name="select_none">Ничего не выбирать</string>
+	<string name="no_channels_found">В загруженном XML файле нет каналов YouTube.</string>
+	<string name="no_new_channels_found">Вы уже подписаны на все каналы YouTube, которые перечислены в загруженном файле.</string>
+	<string name="import_subscriptions_parse_error">Ошибка во время чтения загруженного XML файла: %s.</string>
+	<string name="failed_to_import_subscriptions">Не получается импортировать подписки YouTube.</string>
+</resources>
