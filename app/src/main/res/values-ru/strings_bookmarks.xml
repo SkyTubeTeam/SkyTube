@@ -1,2 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="bookmarks">Закладки</string>
+
+	<string name="bookmark">Добавить закладку</string>
+	<string name="video_bookmarked">Видео отмечено закладкой</string>
+	<string name="video_bookmarked_error">Отметить видео закладкой не получается.</string>
+
+	<string name="unbookmark">Удалить закладку</string>
+	<string name="video_unbookmarked">Видео больше не отмечено закладкой</string>
+	<string name="video_unbookmarked_error">Удалить закладку не получается.</string>
+
+	<string name="no_bookmarked_videos_text">Вы не отметили закладкой ни один ролик.
+\n
+\nОтмеченные видео появляются в этом списке.</string>
+</resources>
