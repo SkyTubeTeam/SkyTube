@@ -1,2 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="feed">التغذية</string>
+
+	<string name="fetching_subscription_videos">جلب مقاطع الفيديو من القنوات المشتركة</string>
+	<string name="fetched_videos_from_channels">تم جلب %1$d من مقاطع الفيديو من %2$d/%3$d من القنوات..</string>
+	<string name="no_new_videos_found">لم يتم العثور على مقاطع فيديو جديدة.</string>
+	<string name="no_subscriptions_text">أنت غير مشترك في أي قنوات.
+\n
+\nبعد أن تظهر، ستظهر جميع مقاطع الفيديو التي تم تحميلها إلى القنوات التي اشتركت فيها خلال الشهر الماضي هنا.</string>
+	<string name="import_subscriptions_from_youtube">استيراد الاشتراكات من YouTube</string>
+</resources>
