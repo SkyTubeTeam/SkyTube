@@ -1,2 +1,74 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="preferences">الخيارات</string>
+
+	<string name="pref_languages_category">اللغات والمناطق</string>
+	<string name="pref_title_preferred_regions">المنطقة المفضلة</string>
+	<string name="pref_summary_preferred_regions">حدد منطقة مفضلة. يتم استخدام ذلك لتصفية مقاطع الفيديو في فئة مقاطع الفيديو \"المميزة\".</string>
+
+	<string name="pref_title_preferred_languages">اللغات المفضلة</string>
+	<string name="pref_summary_preferred_languages">EXPERIMENTAL: حدد لغة مفضلة واحدة أو أكثر. يتم استخدام هذه الميزة لتصفية مقاطع الفيديو في فئة الفيديو \"الأكثر شيوعا\" وعمليات البحث عن الفيديو.</string>
+
+	<string name="pref_video_player_category">مشغل فيديو</string>
+	<string name="pref_title_preferred_res">القرار المفضل</string>
+	<string name="pref_summary_preferred_res">حدد الدقة المفضلة لديك</string>
+	<string name="pref_title_use_offical_player">استخدام مشغل YouTube الرسمي</string>
+	<string name="pref_summary_use_offical_player">غير موصي بها</string>
+
+	<string name="pref_backup_category">النسخ الاحتياطي</string>
+	<string name="pref_title_backup_dbs">قواعد بيانات النسخ الاحتياطي</string>
+	<string name="pref_summary_backup_dbs">الاحتفاظ بنسخة احتياطية من قواعد بيانات الاشتراك وقاعدة بيانات الإشارات المرجعية.</string>
+	<string name="pref_title_import_dbs">استيراد النسخ الاحتياطي</string>
+	<string name="pref_summary_import_dbs">استيراد النسخ الاحتياطي وقاعدة بيانات الإشارات المرجعية الخاصة بك.</string>
+	<string name="databases_backing_up">النسخة الإحتياطية…</string>
+	<string name="databases_backup_success">قواعد البيانات احتياطيا إلى %s</string>
+	<string name="databases_backup_fail">فشل النسخ الاحتياطي لقواعد البيانات الخاصة بك.</string>
+	<string name="databases_import_select_backup">حدد ملف النسخ الاحتياطي للاستيراد</string>
+	<string name="databases_import_nothing_selected">لم يتم تحديد أي شيء …</string>
+	<string name="databases_import_warning_message">سيتم استبدال قواعد بيانات الاشتراكات والقوائم المرجعية مع بيانات ملف النسخ الاحتياطي المحدد.
+\n
+\nاستمرار؟</string>
+	<string name="continue_">استمرار</string>
+	<string name="databases_importing">جارٍ الاستيراد…</string>
+	<string name="databases_import_fail">فشل استيراد قواعد البيانات.</string>
+	<string name="databases_import_success">تم استيراد قواعد البيانات بنجاح. أعد تشغيل التطبيق لتطبيق التغييرات.</string>
+
+	<string name="pref_title_import_subs">استيراد الاشتراكات من YouTube</string>
+	<string name="pref_summary_import_subs">استيراد اشتراكاتك من حسابك في YouTube .</string>
+	<string name="subs_import_select_backup">حدد ملف xml الخاص بـ YouTube للاستيراد</string>
+
+	<string name="pref_about_category">حول</string>
+	<string name="pref_title_website">الموقع</string>
+	<string name="pref_title_credits">تبرع</string>
+	<string name="pref_summary_credits">الناس والمشاريع التي جعلت هذا التطبيق ممكن.</string>
+	<string name="pref_title_version">الاصدار</string>
+	<string name="pref_title_updates">التحديثات</string>
+	<string name="pref_summary_updates">التحقق من التحديثات...</string>
+	<string name="pref_title_license">الرخصة</string>
+	<string name="pref_summary_license">"رخصة GNU  العامة الاصدار 3"</string>
+	<string name="app_license">حقوق الطبع والنشر © 2015-2017 Ramon Mifsud
+\n 
+\nهذا البرنامج هو البرمجيات الحرة: يمكنك أعاده توزيعها و/أو تعديلها ببموجب شروط رخصه جنو العامة كما نشرتها مؤسسه البرمجيات الحرة (الإصدار 3 من الترخيص).
+\n 
+\nيتم توزيع هذا البرنامج على أمل أن يكون مفيدا، ولكن من دون أي ضمان. دون حتى الضمان الضمني للتسويق أو الملاءمة لغرض معين. راجع رخصة جنو العمومية للحصول على مزيد من التفاصيل.
+\n 
+\nيجب ان تكون قد استلمت نسخه من رخصه جنو العامة مع هذا البرنامج. إذا لم يكن كذلك ، راجع
+\n &lt;http://www.gnu.org/licenses/&gt;</string>
+	<string name="i_agree">اوافق</string>
+
+
+	<string name="pref_other_category">اخرى</string>
+	<string name="pref_title_default_tab">التبويب الافتراضي</string>
+	<string name="pref_summary_default_tab">علامة التبويب الافتراضية التي تظهر عند تشغيلSkyTube : %s</string>
+	<string name="pref_title_screen_orientation">اتجاه الشاشة</string>
+	<string name="pref_summary_screen_orientation">دوران مشغل الفيديو</string>
+	<string name="pref_screen_landscape">مناظر</string>
+	<string name="pref_screen_portrait">بورتريه</string>
+	<string name="pref_screen_auto">تلقائي</string>
+	<string name="pref_screen_sensor">جهاز استشعار</string>
+	<string name="pref_title_youtube_api_key">YouTube API مفتاح</string>
+	<string name="pref_summary_youtube_api_key">ادخل مفتاح API الخاص ببيانات YouTube. اتركه فارغه لاستخدام الاعداد الافتراضي .</string>
+	<string name="pref_youtube_api_key_error">حدث خطا اثناء محاولة التحقق من صحة مفتاح API الذي أدخلته.</string>
+	<string name="pref_youtube_api_key_custom">لمفتاح صالح. أعاده تشغيل التطبيق لاستخدام المفتاح الجديد API YouTube.</string>
+	<string name="pref_youtube_api_key_default">أعاده تشغيل التطبيق للتبديل العودة إلى الافتراضي يوتيوب API الرئيسية.</string>
+	<string name="restart">إعادة تشغيل</string>
+</resources>
