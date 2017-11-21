@@ -1,2 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="could_not_get_videos">تعذر الحصول على %s من مقاطع الفيديو.</string>
+	<string name="views">%,d المشاهدات</string>
+	<string name="error">خطأ</string>
+	<string name="ok">حسنا</string>
+	<string name="search_videos">البحث في مقاطع الفيديو</string>
+	<string name="launch_offical_player_error">حدث خطا اثناء محاولة تشغيل مشغل YouTube الرسمي. تاكد من ان التطبيق الرسمي لـ Google في YouTube مثبت علي الجهاز.</string>
+	<string name="LIVE">مباشر</string>
+
+	<string name="featured">الموصى بها</string>
+	<string name="most_popular">الأكثر شعبية</string>
+</resources>
