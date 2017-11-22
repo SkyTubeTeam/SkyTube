@@ -1,2 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="subscriptions">الاشتراكات</string>
+	<string name="subscribe">اشتراك</string>
+	<string name="unsubscribe">إلغاء الاشتراك</string>
+	<string name="total_subscribers">%,d مشترك</string>
+
+	<string name="subscribed">مشترك</string>
+	<string name="unsubscribed">إلغاء الاشتراك</string>
+
+	<string name="error_get_subbed_channels">حدث خطأ أثناء جلب القنوات المشتركة.</string>
+	<string name="error_check_if_user_has_subbed">"غير قادر علي التحقق مما إذا كان المستخدم قد اشترك في القناة  (id=%s)"</string>
+	</resources>
