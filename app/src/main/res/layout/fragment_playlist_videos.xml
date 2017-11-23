@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	xmlns:custom="http://schemas.android.com/tools"
+	android:fitsSystemWindows="true">
+
+	<android.support.design.widget.AppBarLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+
+		<FrameLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			app:layout_scrollFlags="scroll|enterAlways">
+
+			<!-- BANNER IMAGE -->
+			<ImageView
+				android:id="@+id/playlist_banner_image_view"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_alignParentTop="true"
+				android:adjustViewBounds="true"
+				android:scaleType="fitXY"
+				android:src="@drawable/banner_default"
+				android:tint="#14000000"
+				custom:defaultImage="@drawable/banner_default"/>
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical">
+
+				<!-- TOOLBAR / ACTIONBAR -->
+				<android.support.v7.widget.Toolbar
+					android:id="@+id/toolbar"
+					android:layout_width="match_parent"
+					android:layout_height="?attr/actionBarSize"
+					android:theme="@style/ThemeOverlay.AppCompat.Dark"/>
+
+				<TextView
+					android:id="@+id/playlist_title_text_view"
+					android:layout_width="match_parent"
+					android:layout_height="40dp"
+					android:gravity="center_vertical"
+					android:paddingLeft="20dp"
+					android:text="Playlist Title"
+					android:textColor="@android:color/white"/>
+
+			</LinearLayout>
+		</FrameLayout>
+	</android.support.design.widget.AppBarLayout>
+
+
+	<include
+		layout="@layout/videos_gridview"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+</android.support.design.widget.CoordinatorLayout>

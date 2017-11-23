@@ -34,7 +34,9 @@ public enum VideoCategory {
 	/** Videos pertaining to the user's subscriptions feed */
 	SUBSCRIPTIONS_FEED_VIDEOS (4),
 	/** Videos bookmarked by the user */
-	BOOKMARKS_VIDEOS (5);
+	BOOKMARKS_VIDEOS (5),
+	/** Videos belonging to a playlist */
+	PLAYLIST_VIDEOS (7);
 
 	// *****************
 	// DON'T FORGET to update getVideoCategory() and createGetYouTubeVideos() methods...
@@ -88,6 +90,8 @@ public enum VideoCategory {
 			return new GetSubscriptionsVideos();
 		else if (id == BOOKMARKS_VIDEOS.id)
 			return new GetBookmarksVideos();
+		else if (id == PLAYLIST_VIDEOS.id)
+			return new GetPlaylistVideos();
 
 		// this will notify the developer is he forgot to amend this method when a new type is added
 		throw new UnsupportedOperationException();

@@ -11,4 +11,11 @@
 
 	<string name="featured">Featured</string>
 	<string name="most_popular">Most Popular</string>
+
+	<string name="copy_to_clipboard">Copy to Clipboard</string>
+
+	<string name="videos">Videos</string>
+	<string name="num_videos">%d videos</string>
+	<string name="playlists">Playlists</string>
+	<string name="could_not_get_playlists">Could not get %s playlists.</string>
 </resources>

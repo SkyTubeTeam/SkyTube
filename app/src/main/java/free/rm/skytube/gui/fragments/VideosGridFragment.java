@@ -29,8 +29,8 @@ import android.widget.GridView;
 import com.bumptech.glide.Glide;
 
 import free.rm.skytube.R;
-import free.rm.skytube.gui.businessobjects.MainActivityListener;
 import free.rm.skytube.businessobjects.VideoCategory;
+import free.rm.skytube.gui.businessobjects.MainActivityListener;
 import free.rm.skytube.gui.businessobjects.VideoGridAdapter;
 
 /**
@@ -100,12 +100,6 @@ public abstract class VideosGridFragment extends BaseVideosGridFragment {
 	 * @return Returns the category of videos being displayed by this fragment.
 	 */
 	protected abstract VideoCategory getVideoCategory();
-
-
-	/**
-	 * @return The fragment/tab name/title.
-	 */
-	protected abstract String getFragmentName();
 
 
 	/**
