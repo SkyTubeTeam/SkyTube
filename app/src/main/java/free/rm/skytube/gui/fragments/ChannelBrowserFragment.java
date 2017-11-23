@@ -47,7 +47,7 @@ import free.rm.skytube.businessobjects.YouTubeVideo;
 import free.rm.skytube.gui.businessobjects.FragmentEx;
 import free.rm.skytube.gui.businessobjects.SubsAdapter;
 import free.rm.skytube.gui.businessobjects.SubscribeButton;
-import free.rm.skytube.gui.fragments.preferences.BaseGridFragment;
+import free.rm.skytube.gui.businessobjects.BaseGridFragment;
 
 /**
  * A Fragment that displays information about a channel.

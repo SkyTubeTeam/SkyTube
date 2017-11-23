@@ -18,7 +18,7 @@ import free.rm.skytube.businessobjects.YouTubePlaylist;
 import free.rm.skytube.gui.businessobjects.MainActivityListener;
 import free.rm.skytube.gui.businessobjects.PlaylistClickListener;
 import free.rm.skytube.gui.businessobjects.PlaylistsGridAdapter;
-import free.rm.skytube.gui.fragments.preferences.BaseGridFragment;
+import free.rm.skytube.gui.businessobjects.BaseGridFragment;
 
 /**
  * A fragment that displays the Playlists belonging to a Channel

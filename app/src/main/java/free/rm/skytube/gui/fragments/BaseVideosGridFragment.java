@@ -9,7 +9,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import free.rm.skytube.R;
 import free.rm.skytube.gui.businessobjects.VideoGridAdapter;
-import free.rm.skytube.gui.fragments.preferences.BaseGridFragment;
+import free.rm.skytube.gui.businessobjects.BaseGridFragment;
 
 /**
  * A class that supports swipe-to-refresh on {@link VideosGridFragment}.
