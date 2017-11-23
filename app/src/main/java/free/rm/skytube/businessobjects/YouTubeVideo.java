@@ -26,6 +26,7 @@ import android.view.Menu;
 import android.widget.Toast;
 
 import com.google.api.client.util.DateTime;
+import com.google.api.services.youtube.model.PlaylistItem;
 import com.google.api.services.youtube.model.Thumbnail;
 import com.google.api.services.youtube.model.Video;
 
@@ -128,6 +129,30 @@ public class YouTubeVideo implements Serializable {
 
 			if (dislikeCount != null)
 				this.dislikeCount = String.format("%,d", video.getStatistics().getDislikeCount());
+		}
+	}
+
+	/**
+	 * Constructor to create a YouTube video object out of a PlaylistItem object
+	 * @param item YouTube Data API PlaylistItem object
+	 */
+	public YouTubeVideo(PlaylistItem item) {
+		this.id = item.getId();
+
+		if(item.getSnippet() != null) {
+			title = item.getSnippet().getTitle();
+			channelId = item.getSnippet().getChannelId();
+			channelName = item.getSnippet().getChannelTitle();
+			publishDate = item.getSnippet().getPublishedAt();
+
+			if(item.getSnippet().getThumbnails() != null) {
+				Thumbnail thumbnail = item.getSnippet().getThumbnails().getHigh();
+				if(thumbnail != null)
+					thumbnailUrl = thumbnail.getUrl();
+
+			}
+
+			this.description = item.getSnippet().getDescription();
 		}
 	}
 

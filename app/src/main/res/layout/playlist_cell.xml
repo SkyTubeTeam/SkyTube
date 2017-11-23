@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			  android:orientation="vertical"
+			  android:layout_width="match_parent"
+			  android:layout_height="wrap_content"
+			  android:layout_margin="2dp">
+
+	<free.rm.skytube.gui.businessobjects.VideoCellLayout
+		android:id="@+id/playlistViewLayout"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+		<ImageView
+			android:id="@+id/thumbnail_image_view"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:scaleType="fitXY"
+			android:adjustViewBounds="true"
+			android:src="@drawable/thumbnail_default"
+			android:foreground="?android:attr/selectableItemBackground"/>
+
+		<TextView
+			android:id="@+id/title_text_view"
+			style="@style/GridTextView"
+			android:padding="10dp"
+			android:minLines="1"
+			android:maxLines="2"
+			android:text="Title"
+			android:layout_alignParentTop="true"
+			android:layout_alignParentLeft="true"
+			android:layout_alignParentStart="true"/>
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_alignBottom="@+id/thumbnail_image_view"
+			android:layout_alignParentLeft="true"
+			android:layout_alignParentStart="true"
+			android:background="@color/video_cell_background"
+			android:orientation="horizontal"
+			android:padding="10dp">
+
+			<TextView
+				android:id="@+id/playlist_video_count_textview"
+				style="@style/GridDetailsTextView"
+				android:layout_width="wrap_content"
+				android:text="42 videos"/>
+
+			<TextView
+				android:id="@+id/separator_text_view"
+				style="@style/GridDetailsTextView"
+				android:layout_width="wrap_content"
+				android:paddingLeft="10dp"
+				android:paddingRight="10dp"
+				android:text="|"/>
+
+			<TextView
+				android:id="@+id/publish_date_text_view"
+				style="@style/GridDetailsTextView"
+				android:layout_width="wrap_content"
+				android:text="x days ago"/>
+			<!--
+			<LinearLayout
+				android:orientation="horizontal"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:padding="10dp"
+				android:background="@color/video_cell_background">
+
+				<TextView
+					android:id="@+id/playlist_description_textview"
+					style="@style/GridTextView"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:ems="10"
+					android:text="Description"
+					android:foreground="?android:attr/selectableItemBackground"/>
+			</LinearLayout>
+			-->
+		</LinearLayout>
+
+
+	</free.rm.skytube.gui.businessobjects.VideoCellLayout>
+</LinearLayout>

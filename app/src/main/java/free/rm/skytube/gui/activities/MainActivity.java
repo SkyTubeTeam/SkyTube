@@ -38,12 +38,14 @@ import android.widget.FrameLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import free.rm.skytube.R;
-import free.rm.skytube.gui.businessobjects.MainActivityListener;
 import free.rm.skytube.businessobjects.YouTubeChannel;
+import free.rm.skytube.businessobjects.YouTubePlaylist;
+import free.rm.skytube.gui.businessobjects.MainActivityListener;
 import free.rm.skytube.gui.businessobjects.YouTubePlayer;
 import free.rm.skytube.gui.businessobjects.updates.UpdatesCheckerTask;
 import free.rm.skytube.gui.fragments.ChannelBrowserFragment;
 import free.rm.skytube.gui.fragments.MainFragment;
+import free.rm.skytube.gui.fragments.PlaylistVideosFragment;
 import free.rm.skytube.gui.fragments.SearchVideoGridFragment;
 
 /**
@@ -56,6 +58,8 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 	private MainFragment mainFragment;
 	private SearchVideoGridFragment searchVideoGridFragment;
 	private ChannelBrowserFragment channelBrowserFragment;
+	// Fragment that shows Videos from a specific Playlist
+	private PlaylistVideosFragment playlistVideosFragment;
 
 	/** Set to true of the UpdatesCheckerTask has run; false otherwise. */
 	private static boolean updatesCheckerTaskRan = false;
@@ -63,6 +67,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 	private static final String MAIN_FRAGMENT   = "MainActivity.MainFragment";
 	private static final String SEARCH_FRAGMENT = "MainActivity.SearchFragment";
 	public static final String CHANNEL_BROWSER_FRAGMENT = "MainActivity.ChannelBrowserFragment";
+	public static final String PLAYLIST_VIDEOS_FRAGMENT = "MainActivity.PlaylistVideosFragment";
 
 	private boolean dontAddToBackStack = false;
 
@@ -85,6 +90,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 				mainFragment = (MainFragment)getSupportFragmentManager().getFragment(savedInstanceState, MAIN_FRAGMENT);
 				searchVideoGridFragment = (SearchVideoGridFragment) getSupportFragmentManager().getFragment(savedInstanceState, SEARCH_FRAGMENT);
 				channelBrowserFragment = (ChannelBrowserFragment) getSupportFragmentManager().getFragment(savedInstanceState, CHANNEL_BROWSER_FRAGMENT);
+				playlistVideosFragment = (PlaylistVideosFragment) getSupportFragmentManager().getFragment(savedInstanceState, PLAYLIST_VIDEOS_FRAGMENT);
 			}
 
 			// If this Activity was called to view a particular channel, display that channel via ChannelBrowserFragment, instead of MainFragment
@@ -112,6 +118,8 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 			getSupportFragmentManager().putFragment(outState, SEARCH_FRAGMENT, searchVideoGridFragment);
 		if(channelBrowserFragment != null && channelBrowserFragment.isVisible())
 			getSupportFragmentManager().putFragment(outState, CHANNEL_BROWSER_FRAGMENT, channelBrowserFragment);
+		if(playlistVideosFragment != null && playlistVideosFragment.isVisible())
+			getSupportFragmentManager().putFragment(outState, PLAYLIST_VIDEOS_FRAGMENT, playlistVideosFragment);
 		super.onSaveInstanceState(outState);
 	}
 
@@ -276,8 +284,17 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 
 	private void switchToChannelBrowserFragment(Bundle args) {
 		channelBrowserFragment = new ChannelBrowserFragment();
+		channelBrowserFragment.getChannelPlaylistsFragment().setMainActivityListener(this);
 		channelBrowserFragment.setArguments(args);
 		switchToFragment(channelBrowserFragment);
 	}
 
+	@Override
+	public void onPlaylistClick(YouTubePlaylist playlist) {
+		playlistVideosFragment = new PlaylistVideosFragment();
+		Bundle args = new Bundle();
+		args.putSerializable(PlaylistVideosFragment.PLAYLIST_OBJ, playlist);
+		playlistVideosFragment.setArguments(args);
+		switchToFragment(playlistVideosFragment);
+	}
 }

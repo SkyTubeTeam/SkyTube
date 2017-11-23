@@ -22,10 +22,10 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_alignParentTop="true"
-				android:tint="#14000000"
-				android:scaleType="fitXY"
 				android:adjustViewBounds="true"
+				android:scaleType="fitXY"
 				android:src="@drawable/banner_default"
+				android:tint="#14000000"
 				custom:defaultImage="@drawable/banner_default"/>
 
 			<LinearLayout
@@ -50,47 +50,56 @@
 						android:layout_width="97dp"
 						android:layout_height="wrap_content"
 						android:layout_centerVertical="true"
+						android:adjustViewBounds="true"
 						android:padding="16dp"
 						android:scaleType="fitXY"
-						android:adjustViewBounds="true"
-						android:src="@drawable/channel_thumbnail_default" />
+						android:src="@drawable/channel_thumbnail_default"/>
 
 					<!-- CHANNEL INFO -->
 					<LinearLayout
 						android:id="@+id/channel_info_layout"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:layout_toRightOf="@+id/channel_thumbnail_image_view"
 						android:layout_centerVertical="true"
-						android:padding="10dp"
+						android:layout_toRightOf="@+id/channel_thumbnail_image_view"
+						android:background="#66000000"
 						android:orientation="vertical"
-						android:background="#66000000">
+						android:padding="10dp">
 						<!-- SUBSCRIBERS -->
 						<TextView
 							android:id="@+id/channel_subs_text_view"
+							style="@style/ChannelDetailsTextView"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
-							android:text="Loading ..."
-							style="@style/ChannelDetailsTextView"/>
+							android:text="Loading ..."/>
 					</LinearLayout>
 
 					<free.rm.skytube.gui.businessobjects.SubscribeButton
 						android:id="@+id/channel_subscribe_button"
 						style="@style/SubscribeButton"
-						android:layout_margin="16dp"
+						android:layout_alignParentRight="true"
 						android:layout_centerVertical="true"
-						android:layout_alignParentRight="true"/>
+						android:layout_margin="16dp"/>
 
 				</RelativeLayout>
+
+				<android.support.design.widget.TabLayout
+					android:id="@+id/tab_layout"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_below="@+id/toolbar"
+					android:background="?attr/colorPrimary"
+					android:elevation="6dp"
+					android:minHeight="?attr/actionBarSize"
+					android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
 			</LinearLayout>
 		</FrameLayout>
 	</android.support.design.widget.AppBarLayout>
 
-	<!-- VIDEOS GRID/LIST HERE -->
-	<include
+	<android.support.v4.view.ViewPager
+		android:id="@+id/pager"
 		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		app:layout_behavior="@string/appbar_scrolling_view_behavior"
-		layout="@layout/videos_gridview" />
+		android:layout_height="wrap_content"
+		app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
 </android.support.design.widget.CoordinatorLayout>

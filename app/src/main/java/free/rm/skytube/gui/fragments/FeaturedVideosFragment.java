@@ -33,7 +33,7 @@ public class FeaturedVideosFragment extends VideosGridFragment {
 
 
 	@Override
-	protected String getFragmentName() {
+	public String getFragmentName() {
 		return SkyTubeApp.getStr(R.string.featured);
 	}
 

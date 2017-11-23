@@ -31,9 +31,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import free.rm.skytube.R;
-import free.rm.skytube.gui.businessobjects.MainActivityListener;
 import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.gui.businessobjects.LoadingProgressBar;
+import free.rm.skytube.gui.businessobjects.MainActivityListener;
 import free.rm.skytube.gui.businessobjects.VideoGridAdapter;
 
 /**
@@ -120,4 +120,8 @@ public class SearchVideoGridFragment extends BaseVideosGridFragment {
 		});
 	}
 
+	@Override
+	public String getFragmentName() {
+		return null;
+	}
 }

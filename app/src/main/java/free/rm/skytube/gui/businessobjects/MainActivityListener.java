@@ -18,6 +18,7 @@
 package free.rm.skytube.gui.businessobjects;
 
 import free.rm.skytube.businessobjects.YouTubeChannel;
+import free.rm.skytube.businessobjects.YouTubePlaylist;
 
 /**
  * This methods will be called when the user clicks on the view whose aim is to open the ChannelBrowser.
@@ -38,4 +39,8 @@ public interface MainActivityListener {
 	 */
 	void onChannelClick(YouTubeChannel channel);
 
+	/**
+	 * Called when a playlist is clicked on
+	 */
+	void onPlaylistClick(YouTubePlaylist playlist);
 }
