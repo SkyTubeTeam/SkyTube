@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -71,7 +72,7 @@ public class PlaylistVideosFragment extends VideosGridFragment {
 
 		Glide.with(getActivity())
 						.load(youTubePlaylist.getBannerUrl())
-						.placeholder(R.drawable.banner_default)
+						.apply(new RequestOptions().placeholder(R.drawable.banner_default))
 						.into(playlistBannerImageView);
 
 		if (videoGridAdapter == null) {
