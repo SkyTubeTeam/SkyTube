@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -39,7 +40,7 @@ public class PlaylistViewHolder extends RecyclerView.ViewHolder {
 	protected void setPlaylist(final YouTubePlaylist playlist, Context context) {
 		Glide.with(context)
 						.load(playlist.getThumbnailUrl())
-						.placeholder(R.drawable.thumbnail_default)
+						.apply(new RequestOptions().placeholder(R.drawable.thumbnail_default))
 						.into(thumbnailImageView);
 		titleTextView.setText(playlist.getTitle());
 		publishDateTextView.setText(playlist.getPublishDatePretty());
