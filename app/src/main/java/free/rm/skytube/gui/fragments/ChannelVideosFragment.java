@@ -39,8 +39,11 @@ public class ChannelVideosFragment extends VideosGridFragment {
 		if (videoGridAdapter == null) {
 			videoGridAdapter = new VideoGridAdapter(getActivity(), false /*hide channel name*/);
 			videoGridAdapter.setVideoCategory(VideoCategory.CHANNEL_VIDEOS, channel.getId());
+		} else {
+			videoGridAdapter.setContext(getActivity());
 		}
 		videoGridAdapter.setListener((MainActivityListener)getActivity());
+
 		if(channel != null)
 			videoGridAdapter.setYouTubeChannel(channel);
 
