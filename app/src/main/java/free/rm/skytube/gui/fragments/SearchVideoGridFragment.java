@@ -120,8 +120,4 @@ public class SearchVideoGridFragment extends BaseVideosGridFragment {
 		});
 	}
 
-	@Override
-	public String getFragmentName() {
-		return null;
-	}
 }

@@ -47,10 +47,15 @@ import free.rm.skytube.businessobjects.YouTubeVideo;
 import free.rm.skytube.gui.businessobjects.FragmentEx;
 import free.rm.skytube.gui.businessobjects.SubsAdapter;
 import free.rm.skytube.gui.businessobjects.SubscribeButton;
-import free.rm.skytube.gui.businessobjects.BaseGridFragment;
 
 /**
  * A Fragment that displays information about a channel.
+ *
+ * This fragment is made up of two other fragments:
+ * <ul>
+ *     <li>{@link ChannelVideosFragment}</li>
+ *     <li>{@link ChannelPlaylistsFragment}.</li>
+ * </ul>
  */
 public class ChannelBrowserFragment extends FragmentEx {
 
@@ -73,7 +78,7 @@ public class ChannelBrowserFragment extends FragmentEx {
 	private ChannelPlaylistsFragment channelPlaylistsFragment;
 
 	/** List of fragments that will be displayed as tabs. */
-	private List<BaseGridFragment> channelBrowserFragmentList = new ArrayList<>();
+	private List<VideosGridFragment> channelBrowserFragmentList = new ArrayList<>();
 
 	private ChannelPagerAdapter channelPagerAdapter;
 	private ViewPager viewPager;
@@ -129,9 +134,9 @@ public class ChannelBrowserFragment extends FragmentEx {
 
 			@Override
 			public void onPageSelected(int position) {
-				BaseGridFragment fragment = channelBrowserFragmentList.get(position);
+				VideosGridFragment fragment = channelBrowserFragmentList.get(position);
 				if(fragment instanceof VideosGridFragment)
-					((VideosGridFragment) channelBrowserFragmentList.get(position)).onFragmentSelected();
+					channelBrowserFragmentList.get(position).onFragmentSelected();
 			}
 
 			@Override
@@ -289,8 +294,6 @@ public class ChannelBrowserFragment extends FragmentEx {
 			channelBrowserFragmentList.clear();
 			channelBrowserFragmentList.add(channelVideosFragment);
 			channelBrowserFragmentList.add(channelPlaylistsFragment);
-
-
 		}
 
 		@Override

@@ -103,6 +103,12 @@ public abstract class VideosGridFragment extends BaseVideosGridFragment {
 
 
 	/**
+	 * @return The fragment/tab name/title.
+	 */
+	public abstract String getFragmentName();
+
+
+	/**
 	 * Will be called when the user selects this fragment/tab.  This super method should ALWAYS be
 	 * called when inherited.
 	 */

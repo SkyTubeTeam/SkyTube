@@ -20,8 +20,6 @@ import free.rm.skytube.gui.businessobjects.VideoGridAdapter;
  * A fragment that displays the Videos belonging to a Channel
  */
 public class ChannelVideosFragment extends VideosGridFragment {
-	private RecyclerView gridView;
-
 	private YouTubeChannel channel;
 
 	@Nullable

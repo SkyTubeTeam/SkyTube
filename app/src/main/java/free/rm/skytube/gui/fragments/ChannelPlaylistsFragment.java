@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,26 +12,23 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
+import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.businessobjects.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTubePlaylist;
 import free.rm.skytube.gui.businessobjects.MainActivityListener;
 import free.rm.skytube.gui.businessobjects.PlaylistClickListener;
 import free.rm.skytube.gui.businessobjects.PlaylistsGridAdapter;
-import free.rm.skytube.gui.businessobjects.BaseGridFragment;
 
 /**
  * A fragment that displays the Playlists belonging to a Channel
  */
-public class ChannelPlaylistsFragment extends BaseGridFragment implements PlaylistClickListener, SwipeRefreshLayout.OnRefreshListener {
-	private RecyclerView gridView;
-	private PlaylistsGridAdapter playlistsGridAdapter;
+public class ChannelPlaylistsFragment extends VideosGridFragment implements PlaylistClickListener, SwipeRefreshLayout.OnRefreshListener {
+	private PlaylistsGridAdapter    playlistsGridAdapter;
+	private YouTubeChannel          channel;
+	private MainActivityListener    mainActivityListener;
 
 	@BindView(R.id.swipeRefreshLayout)
 	SwipeRefreshLayout swipeRefreshLayout;
-
-	private YouTubeChannel channel;
-
-	private MainActivityListener mainActivityListener;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -91,4 +87,11 @@ public class ChannelPlaylistsFragment extends BaseGridFragment implements Playli
 			}
 		});
 	}
+
+
+	@Override
+	protected VideoCategory getVideoCategory() {
+		return VideoCategory.PLAYLIST_VIDEOS;
+	}
+
 }
