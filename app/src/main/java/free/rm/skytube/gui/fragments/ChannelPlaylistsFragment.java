@@ -30,11 +30,6 @@ public class ChannelPlaylistsFragment extends VideosGridFragment implements Play
 	@BindView(R.id.swipeRefreshLayout)
 	SwipeRefreshLayout swipeRefreshLayout;
 
-	@Override
-	public void onCreate(@Nullable Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-	}
-
 
 	@Nullable
 	@Override
