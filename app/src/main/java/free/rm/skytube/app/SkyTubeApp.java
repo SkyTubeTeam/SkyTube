@@ -29,6 +29,8 @@ import android.support.v4.content.IntentCompat;
 import java.util.Arrays;
 import java.util.List;
 
+import free.rm.skytube.R;
+
 /**
  * SkyTube application.
  */
@@ -120,6 +122,14 @@ public class SkyTubeApp extends MultiDexApplication {
 		Intent mainIntent = IntentCompat.makeRestartActivityTask(componentName);
 		context.startActivity(mainIntent);
 		System.exit(0);
+	}
+
+
+	/**
+	 * @return  True if the device is a tablet; false otherwise.
+	 */
+	public static boolean isTablet() {
+		return getContext().getResources().getBoolean(R.bool.is_tablet);
 	}
 
 }

@@ -1,4 +1,6 @@
 <resources>
+	<bool name="is_tablet">false</bool>
+
 	<dimen name="top_level_comment_thumbnail_width">60dp</dimen>
 	<dimen name="child_comment_thumbnail_width">42dp</dimen>
 
