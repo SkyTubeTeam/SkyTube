@@ -9,4 +9,10 @@
 
 	<string name="featured">Framhevet</string>
 	<string name="most_popular">Mest populært</string>
+<string name="copy_to_clipboard">Kopier til utklippstavle</string>
+
+	<string name="videos">Videoer</string>
+	<string name="num_videos">%d videoer</string>
+	<string name="playlists">Spillelister</string>
+	<string name="could_not_get_playlists">Kunne ikke hente %s spillelister.</string>
 </resources>
