@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import free.rm.skytube.gui.businessobjects.Logger;
+
 /**
  * Returns a list of videos for a specific playlist.
  */
@@ -58,8 +60,7 @@ public class GetPlaylistVideos extends GetYouTubeVideos {
 				if(nextPageToken == null)
 					noMoreVideoPages = true;
 			} catch (IOException e) {
-				e.printStackTrace();
-				// TODO: Toast
+				Logger.e(this, "Error has occurred while getting playlist's videos", e);
 			}
 		}
 

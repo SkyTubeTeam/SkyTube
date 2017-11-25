@@ -3,7 +3,6 @@ package free.rm.skytube.gui.businessobjects;
 import android.util.Log;
 
 public class Logger {
-	private static final String TAG = "SkyTube";
 
 	public static void i(Object obj, String format, Object ... args) {
 		String msg = String.format(format, args);
@@ -20,8 +19,13 @@ public class Logger {
 		Log.w(obj.getClass().getSimpleName(), msg);
 	}
 
+	public static void e(Object obj, String msg, Throwable tr) {
+		Log.e(obj.getClass().getSimpleName(), msg, tr);
+	}
+
 	public static void e(Object obj, String format, Object ... args) {
 		String msg = String.format(format, args);
 		Log.e(obj.getClass().getSimpleName(), msg);
 	}
+
 }
