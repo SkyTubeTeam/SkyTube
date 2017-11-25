@@ -2,31 +2,48 @@
 <android.support.design.widget.CoordinatorLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	xmlns:custom="http://schemas.android.com/tools"
-	android:fitsSystemWindows="true">
+	tools:showIn="@layout/activity_main">
+
+
+	<android.support.v4.widget.NestedScrollView
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:fillViewport="true"
+		app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+		<!-- Scrolling content -->
+
+		<android.support.v4.view.ViewPager
+			android:id="@+id/pager"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent" />
+
+	</android.support.v4.widget.NestedScrollView>
+
+
 
 	<android.support.design.widget.AppBarLayout
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content">
+		android:layout_height="wrap_content"
+		app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
 		<FrameLayout
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			app:layout_scrollFlags="scroll|enterAlways">
+			app:layout_scrollFlags="scroll">
 
 			<!-- BANNER IMAGE -->
 			<ImageView
 				android:id="@+id/channel_banner_image_view"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:layout_alignParentTop="true"
 				android:adjustViewBounds="true"
 				android:scaleType="fitXY"
 				android:src="@drawable/banner_default"
-				android:tint="#14000000"
-				custom:defaultImage="@drawable/banner_default"/>
+				android:tint="#14000000" />
 
 			<LinearLayout
 				android:layout_width="match_parent"
@@ -38,7 +55,7 @@
 					android:id="@+id/toolbar"
 					android:layout_width="match_parent"
 					android:layout_height="?attr/actionBarSize"
-					android:theme="@style/ThemeOverlay.AppCompat.Dark"/>
+					android:theme="@style/ThemeOverlay.AppCompat.Dark" />
 
 				<RelativeLayout
 					android:layout_width="match_parent"
@@ -71,9 +88,10 @@
 							style="@style/ChannelDetailsTextView"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
-							android:text="Loading ..."/>
+							android:text="@string/loading"/>
 					</LinearLayout>
 
+					<!-- SUBSCRIBE BUTTON -->
 					<free.rm.skytube.gui.businessobjects.SubscribeButton
 						android:id="@+id/channel_subscribe_button"
 						style="@style/SubscribeButton"
@@ -83,23 +101,16 @@
 
 				</RelativeLayout>
 
-				<android.support.design.widget.TabLayout
-					android:id="@+id/tab_layout"
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:layout_below="@+id/toolbar"
-					android:background="?attr/colorPrimary"
-					android:elevation="6dp"
-					android:minHeight="?attr/actionBarSize"
-					android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
 			</LinearLayout>
 		</FrameLayout>
-	</android.support.design.widget.AppBarLayout>
 
-	<android.support.v4.view.ViewPager
-		android:id="@+id/pager"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
+		<android.support.design.widget.TabLayout
+			android:id="@+id/tab_layout"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:background="?attr/colorPrimary" />
+
+	</android.support.design.widget.AppBarLayout>
 
 </android.support.design.widget.CoordinatorLayout>

@@ -77,10 +77,12 @@ public class YouTubeChannel implements Serializable {
 	 * @throws IOException
 	 */
 	public void init(String channelId, boolean isUserSubscribed, boolean shouldCheckForNewVideos) throws IOException {
+		String bannerType = SkyTubeApp.isTablet() ? "bannerTabletHdImageUrl" : "bannerMobileHdImageUrl";
+
 		YouTube youtube = YouTubeAPI.create();
 		YouTube.Channels.List channelInfo = youtube.channels().list("snippet, statistics, brandingSettings");
 		channelInfo.setFields("items(id, snippet/title, snippet/description, snippet/thumbnails/default," +
-				"statistics/subscriberCount, brandingSettings/image/bannerTabletHdImageUrl)," +
+				"statistics/subscriberCount, brandingSettings/image/" + bannerType + ")," +
 				"nextPageToken");
 		channelInfo.setKey(YouTubeAPIKey.get().getYouTubeAPIKey());
 		channelInfo.setId(channelId);
@@ -158,7 +160,7 @@ public class YouTubeChannel implements Serializable {
 
 		ChannelBrandingSettings branding = channel.getBrandingSettings();
 		if (branding != null)
-			this.bannerUrl = branding.getImage().getBannerTabletHdImageUrl();
+			this.bannerUrl = SkyTubeApp.isTablet() ? branding.getImage().getBannerTabletHdImageUrl() : branding.getImage().getBannerMobileHdImageUrl();
 
 		ChannelStatistics statistics = channel.getStatistics();
 		if (statistics != null) {

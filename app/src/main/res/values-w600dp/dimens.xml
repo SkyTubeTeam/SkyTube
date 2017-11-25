@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<bool name="is_tablet">true</bool>
+
 	<dimen name="comments_drawer_width">380dp</dimen>
 	<dimen name="video_grid_progress_bar_top_margin">100dp</dimen>
 </resources>
