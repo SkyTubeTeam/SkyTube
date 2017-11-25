@@ -17,8 +17,6 @@
 
 package free.rm.skytube.businessobjects;
 
-import android.util.Log;
-
 /**
  * Represents a video category/group.
  */
@@ -39,41 +37,19 @@ public enum VideoCategory {
 	PLAYLIST_VIDEOS (7);
 
 	// *****************
-	// DON'T FORGET to update getVideoCategory() and createGetYouTubeVideos() methods...
+	// DON'T FORGET to update #createGetYouTubeVideos() methods...
 	// *****************
 
 	private final int id;
-	private static final String TAG = VideoCategory.class.getSimpleName();
-
 
 
 	VideoCategory(int id) {
 		this.id = id;
 	}
 
-
 	/**
-	 * Convert the given id integer number to {@link VideoCategory}.
-	 *
-	 * @param id ID number representing the position of the item in video_categories array (see
-	 *           the respective strings XML file).
-	 *
-	 * @return A new instance of {@link VideoCategory}.
-	 */
-	public static VideoCategory getVideoCategory(int id) {
-		if (id < FEATURED.id  ||  id > CHANNEL_VIDEOS.id) {
-			Log.e(TAG, "ILLEGAL ID VALUE=" + id);
-			Log.e(TAG, "Do NOT forget to update VideoCategories enum.");
-			id = FEATURED.id;
-		}
-
-		return VideoCategory.values()[id];
-	}
-
-
-	/**
-	 * Creates a new instance of {@link GetFeaturedVideos} or {@link GetMostPopularVideos} depending
-	 * on the video category.
+	 * Creates a new instance of {@link GetFeaturedVideos} or {@link GetMostPopularVideos} ...etc
+	 * depending on the video category.
 	 *
 	 * @return New instance of {@link GetYouTubeVideos}.
 	 */

@@ -86,7 +86,7 @@ public class ChannelPlaylistsFragment extends VideosGridFragment implements Play
 
 	@Override
 	protected VideoCategory getVideoCategory() {
-		return VideoCategory.PLAYLIST_VIDEOS;
+		return null;
 	}
 
 }
