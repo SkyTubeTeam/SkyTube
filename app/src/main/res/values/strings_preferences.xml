@@ -455,6 +455,10 @@
 		<item>sensor</item>
 	</string-array>
 
+	<string name="pref_key_disable_immersive_mode" translatable="false">pref_key_disable_immersive_mode</string>
+	<string name="pref_title_disable_immersive_mode">Disable Immersive Mode</string>
+	<string name="pref_summary_disable_immersive_mode">Comments and video description icons shall always be displayed</string>
+
 	<string name="pref_youtube_api_key" translatable="false">pref_youtube_api_key</string>
 	<string name="pref_title_youtube_api_key">YouTube API Key</string>
 	<string name="pref_summary_youtube_api_key">Enter your own YouTube Data API Key.  Leave blank to use the default one.</string>

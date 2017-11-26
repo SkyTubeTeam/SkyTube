@@ -81,7 +81,9 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 	private View				loadingVideoView = null;
 
 	private SlidingDrawer		videoDescriptionDrawer = null;
+	private View                videoDescriptionDrawerIconView = null;
 	private SlidingDrawer		commentsDrawer = null;
+	private View                commentsDrawerIconView = null;
 	private View				commentsProgressBar = null,
 								noVideoCommentsView = null;
 	private CommentsAdapter		commentsAdapter = null;
@@ -89,10 +91,14 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 
 	private Menu                menu = null;
 
-	private Handler				timerHandler = null;
+	private Handler             hideHudTimerHandler = null;
+	private Handler             hideVideoDescAndCommentsIconsTimerHandler = null;
 
-	/** Timeout (in milliseconds) before the HUD (i.e. media controller + action/title bar) is hidden */
+	/** Timeout (in milliseconds) before the HUD (i.e. media controller + action/title bar) is hidden. */
 	private static final int HUD_VISIBILITY_TIMEOUT = 5000;
+	/** Timeout (in milliseconds) before the info and comments icons is hidden (which will occur
+	 * only after the HUD is hidden). */
+	private static final int VIDEO_DESC_AND_COMMENTS_ICONS_VISIBILITY_TIMEOUT = 2000;
 	private static final String VIDEO_CURRENT_POSITION = "YouTubePlayerFragment.VideoCurrentPosition";
 	private static final String TAG = YouTubePlayerFragment.class.getSimpleName();
 
@@ -140,6 +146,7 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 			});
 
 			videoDescriptionDrawer = view.findViewById(R.id.des_drawer);
+			videoDescriptionDrawerIconView = view.findViewById(R.id.video_desc_icon_image_view);
 			videoDescTitleTextView = view.findViewById(R.id.video_desc_title);
 			videoDescChannelThumbnailImageView = view.findViewById(R.id.video_desc_channel_thumbnail_image_view);
 			videoDescChannelThumbnailImageView.setOnClickListener(new View.OnClickListener() {
@@ -175,6 +182,7 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 					}
 				}
 			});
+			commentsDrawerIconView = view.findViewById(R.id.comments_icon_image_view);
 
 			// hide action bar
 			getSupportActionBar().hide();
@@ -309,17 +317,17 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 			mediaController.show(0);
 
 			videoDescriptionDrawer.close();
-			videoDescriptionDrawer.setVisibility(View.INVISIBLE);
+			videoDescriptionDrawerIconView.setVisibility(View.INVISIBLE);
 			commentsDrawer.close();
-			commentsDrawer.setVisibility(View.INVISIBLE);
+			commentsDrawerIconView.setVisibility(View.INVISIBLE);
 
 			// hide UI after a certain timeout (defined in HUD_VISIBILITY_TIMEOUT)
-			timerHandler = new Handler();
-			timerHandler.postDelayed(new Runnable() {
+			hideHudTimerHandler = new Handler();
+			hideHudTimerHandler.postDelayed(new Runnable() {
 				@Override
 				public void run() {
 					hideHud();
-					timerHandler = null;
+					hideHudTimerHandler = null;
 				}
 			}, HUD_VISIBILITY_TIMEOUT);
 		}
@@ -334,16 +342,30 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 			getSupportActionBar().hide();
 			mediaController.hideController();
 
-			videoDescriptionDrawer.setVisibility(View.VISIBLE);
-			commentsDrawer.setVisibility(View.VISIBLE);
+			videoDescriptionDrawerIconView.setVisibility(View.VISIBLE);
+			commentsDrawerIconView.setVisibility(View.VISIBLE);
 
-			// If there is a timerHandler running, then cancel it (stop if from running).  This way,
+			// If there is a hideHudTimerHandler running, then cancel it (stop if from running).  This way,
 			// if the HUD was hidden on the 5th second, and the user reopens the HUD, this code will
 			// prevent the HUD to re-disappear 2 seconds after it was displayed (assuming that
 			// HUD_VISIBILITY_TIMEOUT = 5 seconds).
-			if (timerHandler != null) {
-				timerHandler.removeCallbacksAndMessages(null);
-				timerHandler = null;
+			if (hideHudTimerHandler != null) {
+				hideHudTimerHandler.removeCallbacksAndMessages(null);
+				hideHudTimerHandler = null;
+			}
+
+			// now hide the video description and comments icons after a pre-defined delay... (unless
+			// the user does not want such functionality)
+			if ( ! SkyTubeApp.getPreferenceManager().getBoolean(getString(R.string.pref_key_disable_immersive_mode), false) ) {
+				hideVideoDescAndCommentsIconsTimerHandler = new Handler();
+				hideVideoDescAndCommentsIconsTimerHandler.postDelayed(new Runnable() {
+					@Override
+					public void run() {
+						videoDescriptionDrawerIconView.setVisibility(View.INVISIBLE);
+						commentsDrawerIconView.setVisibility(View.INVISIBLE);
+						hideVideoDescAndCommentsIconsTimerHandler = null;
+					}
+				}, VIDEO_DESC_AND_COMMENTS_ICONS_VISIBILITY_TIMEOUT);
 			}
 		}
 	}

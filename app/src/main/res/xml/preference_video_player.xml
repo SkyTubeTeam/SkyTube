@@ -29,6 +29,12 @@
 		android:summary="@string/pref_summary_use_offical_player"
 		android:defaultValue="false" />
 
+	<CheckBoxPreference
+		android:key="@string/pref_key_disable_immersive_mode"
+		android:title="@string/pref_title_disable_immersive_mode"
+		android:summary="@string/pref_summary_disable_immersive_mode"
+		android:defaultValue="false"/>
+
 	<ListPreference
 		android:key="@string/pref_key_screen_orientation"
 		android:title="@string/pref_title_screen_orientation"
