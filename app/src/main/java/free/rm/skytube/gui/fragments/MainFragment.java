@@ -51,7 +51,7 @@ public class MainFragment extends FragmentEx {
 		View view = inflater.inflate(R.layout.fragment_main, container, false);
 
 		// setup the toolbar / actionbar
-		Toolbar toolbar = view.findViewById(R.id.activity_main_toolbar);
+		Toolbar toolbar = view.findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
 
 		// indicate that this fragment has an action bar menu
