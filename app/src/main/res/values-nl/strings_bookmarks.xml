@@ -1,2 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="bookmarks">Favorieten</string>
+
+	<string name="bookmark">Toevoegen aan favorieten</string>
+	<string name="video_bookmarked">Video toegevoegd aan favorieten</string>
+	<string name="video_bookmarked_error">De video kan niet worden toegevoegd aan de favorieten.</string>
+
+	<string name="unbookmark">Verwijderen uit favorieten</string>
+	<string name="video_unbookmarked">Video verwijderd uit favorieten</string>
+	<string name="video_unbookmarked_error">De video kan niet worden verwijderd uit de favorieten.</string>
+
+	<string name="no_bookmarked_videos_text">U heeft nog geen video\'s toegevoegd aan de favorieten.
+\n
+\nZodra u dat doet, zullen ze hier verschijnen.</string>
+</resources>
