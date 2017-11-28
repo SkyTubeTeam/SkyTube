@@ -1,2 +1,76 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="preferences">Instellingen</string>
+
+	<string name="pref_languages_category">Talen en regio\'s</string>
+	<string name="pref_title_preferred_regions">Voorkeursregio</string>
+	<string name="pref_summary_preferred_regions">Selecteer een voorkeursregio. Dit wordt gebruikt om video\'s te filteren in de \"Uitgelicht\"-categorie.</string>
+
+	<string name="pref_title_preferred_languages">Voorkeursta(a)l(en)</string>
+	<string name="pref_summary_preferred_languages">EXPERIMENTEEL: Selecteer één of meer voorkeurstalen. Dit wordt gebruikt om video\'s te filteren in de \"Meest populair\"-categorie en bij zoekopdrachten.</string>
+
+	<string name="pref_video_player_category">Videospeler</string>
+	<string name="pref_title_preferred_res">Voorkeursresolutie</string>
+	<string name="pref_summary_preferred_res">Selecteer uw voorkeursresolutie</string>
+	<string name="pref_title_use_offical_player">Officiële YouTube-speler gebruiken</string>
+	<string name="pref_summary_use_offical_player">Niet aanbevolen</string>
+
+	<string name="pref_backup_category">Back-ups</string>
+	<string name="pref_title_backup_dbs">Databases back-uppen</string>
+	<string name="pref_summary_backup_dbs">Uw favorieten- en abonnementendatabases back-uppen.</string>
+	<string name="pref_title_import_dbs">Back-up importeren</string>
+	<string name="pref_summary_import_dbs">Importeer uw abonnementen en favorieten uit de back-up.</string>
+	<string name="databases_backing_up">Bezig met back-uppen…</string>
+	<string name="databases_backup_success">De databases zijn geback-up\'d naar %s</string>
+	<string name="databases_backup_fail">Het back-uppen is mislukt.</string>
+	<string name="databases_import_select_backup">Selecteer het te importeren back-upbestand</string>
+	<string name="databases_import_nothing_selected">U heeft niks geselecteerd…</string>
+	<string name="databases_import_warning_message">De abonnementen en favorieten zullen worden vervangen door die uit het geselecteerde back-upbestand.
+\n
+\nWilt u doorgaan?</string>
+	<string name="continue_">Doorgaan</string>
+	<string name="databases_importing">Bezig met importeren…</string>
+	<string name="databases_import_fail">Het importeren is mislukt.</string>
+	<string name="databases_import_success">De databases zijn succesvol geïmporteerd. Herstart de app om de wijzigingen toe te passen.</string>
+
+	<string name="pref_title_import_subs">Abonnementen importeren vanuit YouTube</string>
+	<string name="pref_summary_import_subs">Importeer de abonnementen uit uw YouTube-account.</string>
+	<string name="subs_import_select_backup">Selecteer het te importeren YouTube-xml-bestand</string>
+
+	<string name="pref_about_category">Over</string>
+	<string name="pref_title_website">Website</string>
+	<string name="pref_title_credits">Met dank aan</string>
+	<string name="pref_summary_credits">De mensen en projecten die deze app mede mogelijk hebben gemaakt.</string>
+	<string name="pref_title_version">Versie</string>
+	<string name="pref_title_updates">Updates</string>
+	<string name="pref_summary_updates">Controleren op updates</string>
+	<string name="pref_title_license">Licentie</string>
+	<string name="pref_summary_license">GNU General Public License versie 3</string>
+	<string name="app_license">Copyright © 2015-2017 Ramon Mifsud
+\n 
+\nDeze app is vrije software: u kunt de app heruitgeven en/of bewerken onder de voorwaarden van de GNU General Public License zoals gepubliceerd door de Free Software Foundation (versie 3 van de licentie).
+\n 
+\nDeze app wordt verspreid in de hoop nuttig te zijn, maar ZONDER ENIGE GARANTIE; zonder ook maar de geïmpliceerde VERKOOPBAARHEID of INPASSING IN EEN SPECIFIEK DOEL. Lees de GNU General Public License voor meer informatie.
+\n 
+\nU zou een kopie van de GNU General Public License hebben moeten krijgen bij deze app. Als dat niet het geval is, bekijk dan &lt;http://www.gnu.org/licenses/&gt;</string>
+	<string name="i_agree">Ik ga akkoord</string>
+
+
+	<string name="pref_other_category">Anderen</string>
+	<string name="pref_title_default_tab">Standaard tabblad</string>
+	<string name="pref_summary_default_tab">Standaard tabblad dat moet worden weergegeven zodra SkyTube start: %s</string>
+	<string name="pref_title_screen_orientation">Schermoriëntatie</string>
+	<string name="pref_summary_screen_orientation">Draaien van de videospeler</string>
+	<string name="pref_screen_landscape">Landschap</string>
+	<string name="pref_screen_portrait">Portret</string>
+	<string name="pref_screen_auto">Automatisch</string>
+	<string name="pref_screen_sensor">Apparaatsensor</string>
+	<string name="pref_title_disable_immersive_mode">Theatermodus uitschakelen</string>
+	<string name="pref_summary_disable_immersive_mode">Reacties en video-omschrijvingpictogrammen zullen altijd worden weergegeven</string>
+
+	<string name="pref_title_youtube_api_key">YouTube API-sleutel</string>
+	<string name="pref_summary_youtube_api_key">Voer uw eigen YouTube Gegevens-API-sleutel in. Laat leeg om de standaard sleutel te gebruiken.</string>
+	<string name="pref_youtube_api_key_error">Er is een fout opgetreden tijdens het valideren van de ingevoerde API-sleutel.</string>
+	<string name="pref_youtube_api_key_custom">De sleutel is geldig. Herstart de app om de nieuwe YouTube API-sleutel te gebruiken.</string>
+	<string name="pref_youtube_api_key_default">Herstart de app om terug te schakelen naar de standaard YouTube API-sleutel.</string>
+	<string name="restart">Herstarten</string>
+</resources>
