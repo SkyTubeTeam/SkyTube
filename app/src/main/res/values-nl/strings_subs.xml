@@ -1,2 +1,24 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="subscriptions">Abonnementen</string>
+	<string name="subscribe">Abonneren</string>
+	<string name="unsubscribe">De-abonneren</string>
+	<string name="total_subscribers">%,d geabonneerden</string>
+
+	<string name="subscribed">Geabonneerd</string>
+	<string name="unsubscribed">Ge-deabonneerd</string>
+
+	<string name="error_get_subbed_channels">Er is een fout opgetreden tijdens het ophalen van de geabonneerde kanalen.</string>
+	<string name="error_check_if_user_has_subbed">Het is niet mogelijk om te controleren of de gebruiker is geabonneerd op het kanaal (id=%s)</string>
+	<string name="error_unable_to_subscribe">Het is niet mogelijk om te (de-)abonneren op het kanaal (id=%s)</string>
+
+	<string name="import_subscriptions">Abonnementen importeren</string>
+	<string name="import_subscriptions_description">Ga naar https://www.youtube.com/subscription_manager en klik op \"Abonnementen exporteren\", helemaal onderaan de pagina. Selecteer dan het geëxporteerde XML-bestand door hieronder te drukken op \"Selecteer XML-bestand\".</string>
+	<string name="subscriptions_to_channels_imported">Abonnement op %d kana(a)l(en) geïmporteerd.</string>
+	<string name="select_xml_file">Selecteer XML-bestand</string>
+	<string name="select_all">Alles selecteren</string>
+	<string name="select_none">Niks selecteren</string>
+	<string name="no_channels_found">Er zijn geen YouTube-kanalen gevonden in het door u geüploade XML-bestand.</string>
+	<string name="no_new_channels_found">Er zijn geen YouTube-kanalen gevonden waarop u niet al geabonneerd was in het door u geüploade XML-bestand.</string>
+	<string name="import_subscriptions_parse_error">Er is een fout opgetreden tijdens het verwerken van het door u geüploade XML-bestand: %s.</string>
+	<string name="failed_to_import_subscriptions">Het importeren van uw abonnementen is mislukt.</string>
+</resources>
