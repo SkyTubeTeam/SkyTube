@@ -1,2 +1,19 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="could_not_get_videos">%s video\'s kunnen niet worden verkregen.</string>
+	<string name="views">%,d weergaven</string>
+	<string name="error">Fout</string>
+	<string name="ok">Oké</string>
+	<string name="search_videos">Video\'s zoeken</string>
+	<string name="launch_offical_player_error">Er is een fout opgetreden tijdens het starten van de officiële YouTube-speler. Zorg ervoor dat de officiële YouTube-app (van Google) geïnstalleerd is.</string>
+	<string name="LIVE">LIVE</string>
+
+	<string name="featured">Uitgelicht</string>
+	<string name="most_popular">Meest populair</string>
+
+	<string name="videos">Video\'s</string>
+	<string name="num_videos">%d video\'s</string>
+	<string name="playlists">Afspeellijsten</string>
+	<string name="could_not_get_playlists">%s afspeellijsten kunnen niet worden verkregen.</string>
+
+	<string name="loading">Bezig met laden…</string>
+</resources>
