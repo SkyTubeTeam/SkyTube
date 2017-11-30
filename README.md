@@ -16,7 +16,7 @@ This app allows you to:
 
 More features will be added in the near future.
 
-<a href="https://hosted.weblate.org/engage/skytube/?utm_source=widget"> <img src="https://hosted.weblate.org/widgets/skytube/-/strings/svg-badge.svg" alt="Translation status"/> </a>
+<a href="https://hosted.weblate.org/engage/skytube/?utm_source=widget"> <img src="https://hosted.weblate.org/widgets/skytube/-/svg-badge.svg" alt="Translation status"/> </a>
 
 ## Website
 For screenshots and more information, please visit [www.skytube-app.com](http://www.skytube-app.com).
