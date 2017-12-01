@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 	/** Set to true of the UpdatesCheckerTask has run; false otherwise. */
 	private static boolean updatesCheckerTaskRan = false;
 	public static final String ACTION_VIEW_CHANNEL = "MainActivity.ViewChannel";
+	public static final String ACTION_VIEW_FEED = "MainActivity.ViewFeed";
 	private static final String MAIN_FRAGMENT   = "MainActivity.MainFragment";
 	private static final String SEARCH_FRAGMENT = "MainActivity.SearchFragment";
 	public static final String CHANNEL_BROWSER_FRAGMENT = "MainActivity.ChannelBrowserFragment";
@@ -91,18 +92,25 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 				searchVideoGridFragment = (SearchVideoGridFragment) getSupportFragmentManager().getFragment(savedInstanceState, SEARCH_FRAGMENT);
 				channelBrowserFragment = (ChannelBrowserFragment) getSupportFragmentManager().getFragment(savedInstanceState, CHANNEL_BROWSER_FRAGMENT);
 				playlistVideosFragment = (PlaylistVideosFragment) getSupportFragmentManager().getFragment(savedInstanceState, PLAYLIST_VIDEOS_FRAGMENT);
+
 			}
 
 			// If this Activity was called to view a particular channel, display that channel via ChannelBrowserFragment, instead of MainFragment
 			String action = getIntent().getAction();
 			if(action != null && action.equals(ACTION_VIEW_CHANNEL)) {
-				//
 				dontAddToBackStack = true;
 				YouTubeChannel channel = (YouTubeChannel) getIntent().getSerializableExtra(ChannelBrowserFragment.CHANNEL_OBJ);
 				onChannelClick(channel);
 			} else {
 				if(mainFragment == null) {
 					mainFragment = new MainFragment();
+					// If we're coming here via a click on the Notification that new videos for subscribed channels have been found, make sure to
+					// select the Feed tab.
+					if(action != null && action.equals(ACTION_VIEW_FEED)) {
+						Bundle args = new Bundle();
+						args.putBoolean(MainFragment.SHOULD_SELECTED_FEED_TAB, true);
+						mainFragment.setArguments(args);
+					}
 					getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, mainFragment).commit();
 				}
 			}

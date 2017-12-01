@@ -28,7 +28,7 @@ import java.util.List;
 
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
-import free.rm.skytube.gui.businessobjects.SubscriptionsFragmentListener;
+import free.rm.skytube.gui.businessobjects.GetSubscriptionVideosTaskListener;
 
 /**
  * A task that returns the videos of channel the user has subscribed too.  Used to detect if new
@@ -36,14 +36,14 @@ import free.rm.skytube.gui.businessobjects.SubscriptionsFragmentListener;
  */
 public class GetSubscriptionVideosTask extends AsyncTaskParallel<Void, Void, Void> {
 	private List<GetChannelVideosTask> tasks = new ArrayList<>();
-	private SubscriptionsFragmentListener listener;
+	private GetSubscriptionVideosTaskListener listener;
 	private int numTasksLeft = 0;
 	private int numTasksFinished = 0;
 	boolean foundVideos = false;
 	boolean forceRefresh = false;
 	private List<YouTubeChannel> overriddenChannels;
 
-	public GetSubscriptionVideosTask(SubscriptionsFragmentListener listener) {
+	public GetSubscriptionVideosTask(GetSubscriptionVideosTaskListener listener) {
 		this.listener = listener;
 	}
 
@@ -121,7 +121,7 @@ public class GetSubscriptionVideosTask extends AsyncTaskParallel<Void, Void, Voi
 									tasks.remove(0);
 								}
 								if(listener != null)
-									listener.onChannelVideosFetched(channel, videos != null ? videos.size() : 0, videosDeleted);
+									listener.onChannelVideosFetched(channel, videos != null ? videos : new ArrayList<YouTubeVideo>(), videosDeleted);
 							} else {
 								videosDeleted = SubscriptionsDb.getSubscriptionsDb().trimSubscriptionVideos();
 
@@ -129,7 +129,7 @@ public class GetSubscriptionVideosTask extends AsyncTaskParallel<Void, Void, Voi
 								updateFeedsLastUpdateTime();
 
 								if(listener != null)
-									listener.onChannelVideosFetched(channel, videos != null ? videos.size() : 0, videosDeleted);
+									listener.onChannelVideosFetched(channel, videos != null ? videos : new ArrayList<YouTubeVideo>(), videosDeleted);
 								if(listener != null)
 									listener.onAllChannelVideosFetched();
 							}

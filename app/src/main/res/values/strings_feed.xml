@@ -7,4 +7,6 @@
 	<string name="no_new_videos_found">No new videos found.</string>
 	<string name="no_subscriptions_text">You aren\'t subscribed to any channels.\n\nOnce you are, all videos uploaded to your subscribed channels within the last month will appear here.</string>
 	<string name="import_subscriptions_from_youtube">Import Subscriptions From YouTube</string>
+	<string name="notification_channel_feed_title">Feed Notifications</string>
+	<string name="notification_new_videos_found">%d new videos from subscribed channels found</string>
 </resources>

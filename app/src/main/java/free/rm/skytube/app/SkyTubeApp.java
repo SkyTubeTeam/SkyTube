@@ -17,11 +17,16 @@
 
 package free.rm.skytube.app;
 
+import android.annotation.TargetApi;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.os.Build;
 import android.preference.PreferenceManager;
 import android.support.multidex.MultiDexApplication;
 import android.support.v4.content.IntentCompat;
@@ -40,12 +45,14 @@ public class SkyTubeApp extends MultiDexApplication {
 	private static SkyTubeApp skyTubeApp = null;
 
 	public static final String KEY_SUBSCRIPTIONS_LAST_UPDATED = "SkyTubeApp.KEY_SUBSCRIPTIONS_LAST_UPDATED";
-
+	public static final String NEW_VIDEOS_NOTIFICATION_CHANNEL = "free.rm.skytube.NEW_VIDEOS_NOTIFICATION_CHANNEL";
+	public static final int NEW_VIDEOS_NOTIFICATION_CHANNEL_ID = 1;
 
 	@Override
 	public void onCreate() {
 		super.onCreate();
 		skyTubeApp = this;
+		initChannels(this);
 	}
 
 
@@ -130,6 +137,29 @@ public class SkyTubeApp extends MultiDexApplication {
 	 */
 	public static boolean isTablet() {
 		return getContext().getResources().getBoolean(R.bool.is_tablet);
+	}
+
+	/**
+	 * Initialize Notification Channels (for Android OREO)
+	 * @param context
+	 */
+	@TargetApi(26)
+	private void initChannels(Context context) {
+
+		if(Build.VERSION.SDK_INT < 26) {
+			return;
+		}
+		NotificationManager notificationManager =
+						(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+		String channelId = NEW_VIDEOS_NOTIFICATION_CHANNEL;
+		CharSequence channelName = context.getString(R.string.notification_channel_feed_title);
+		int importance = NotificationManager.IMPORTANCE_LOW;
+		NotificationChannel notificationChannel = new NotificationChannel(channelId, channelName, importance);
+		notificationChannel.enableLights(true);
+		notificationChannel.setLightColor(Color.RED);
+		notificationChannel.enableVibration(false);
+		notificationManager.createNotificationChannel(notificationChannel);
 	}
 
 }

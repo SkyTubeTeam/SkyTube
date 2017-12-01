@@ -42,14 +42,14 @@ import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.businessobjects.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTubeVideo;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
+import free.rm.skytube.gui.businessobjects.GetSubscriptionVideosTaskListener;
 import free.rm.skytube.gui.businessobjects.SubsAdapter;
 import free.rm.skytube.gui.businessobjects.SubscriptionsBackupsManager;
-import free.rm.skytube.gui.businessobjects.SubscriptionsFragmentListener;
 
 /**
  * Fragment that displays subscriptions videos feed from all channels the user is subscribed to.
  */
-public class SubscriptionsFeedFragment extends VideosGridFragment implements SubscriptionsFragmentListener {
+public class SubscriptionsFeedFragment extends VideosGridFragment implements GetSubscriptionVideosTaskListener {
 	private int numVideosFetched = 0;
 	private int numChannelsFetched = 0;
 	private int numChannelsSubscribed = 0;
@@ -142,14 +142,14 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Sub
 
 
 	@Override
-	public void onChannelVideosFetched(YouTubeChannel channel, int videosFetched, final boolean videosDeleted) {
+	public void onChannelVideosFetched(YouTubeChannel channel, List<YouTubeVideo> videosFetched, final boolean videosDeleted) {
 		Log.d("SUB FRAGMENT", "onChannelVideosFetched");
 
 		// If any new videos have been fetched for a channel, update the Subscription list in the left navbar for that channel
-		if(videosFetched > 0)
+		if(videosFetched.size() > 0)
 			SubsAdapter.get(getActivity()).changeChannelNewVideosStatus(channel.getId(), true);
 
-		numVideosFetched += videosFetched;
+		numVideosFetched += videosFetched.size();
 		numChannelsFetched++;
 		if(progressDialog != null)
 			progressDialog.setContent(String.format(getContext().getString(R.string.fetched_videos_from_channels), numVideosFetched, numChannelsFetched, numChannelsSubscribed));

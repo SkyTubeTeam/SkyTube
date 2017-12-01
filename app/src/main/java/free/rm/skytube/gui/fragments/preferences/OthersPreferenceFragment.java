@@ -17,10 +17,15 @@
 
 package free.rm.skytube.gui.fragments.preferences;
 
+import android.app.AlarmManager;
 import android.app.AlertDialog;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.PreferenceFragment;
@@ -29,6 +34,7 @@ import android.widget.Toast;
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
+import free.rm.skytube.businessobjects.FeedUpdaterReceiver;
 import free.rm.skytube.businessobjects.ValidateYouTubeAPIKey;
 
 /**
@@ -47,6 +53,12 @@ public class OthersPreferenceFragment extends PreferenceFragment implements Shar
 			defaultTabPref.setValueIndex(0);
 		}
 		defaultTabPref.setSummary(String.format(getString(R.string.pref_summary_default_tab), defaultTabPref.getEntry()));
+
+		ListPreference feedNotificationPref = (ListPreference) findPreference(getString(R.string.pref_feed_notification_key));
+		if(feedNotificationPref.getValue() == null) {
+			feedNotificationPref.setValueIndex(0);
+		}
+		feedNotificationPref.setSummary(String.format(getString(R.string.pref_summary_feed_notification), feedNotificationPref.getEntry()));
 	}
 
 
@@ -91,6 +103,20 @@ public class OthersPreferenceFragment extends PreferenceFragment implements Shar
 						// that we need to restart the app
 						displayRestartDialog(R.string.pref_youtube_api_key_default);
 					}
+				}
+			} else if (key.equals(getString(R.string.pref_feed_notification_key))) {
+				ListPreference feedNotificationPref = (ListPreference) findPreference(key);
+				feedNotificationPref.setSummary(String.format(getString(R.string.pref_summary_feed_notification), feedNotificationPref.getEntry()));
+
+				int interval = Integer.parseInt(feedNotificationPref.getValue());
+
+				Intent alarm = new Intent(getActivity(), FeedUpdaterReceiver.class);
+				PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, alarm, PendingIntent.FLAG_CANCEL_CURRENT);
+				AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
+
+				// Feed Auto Updater has been cancelled. If the selected interval is greater than 0, set the new alarm to call FeedUpdaterService
+				if(interval > 0) {
+					alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime()+interval, interval, pendingIntent);
 				}
 			}
 		}

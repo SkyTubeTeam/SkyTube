@@ -435,6 +435,23 @@
 		<item>3</item>
 	</string-array>
 
+	<string name="pref_feed_notification_key" translatable="false">pref_feed_notification</string>
+	<string name="pref_title_feed_notification">Feed Auto Notification</string>
+	<string name="pref_summary_feed_notification">How often to check for new videos from Subscribed Channels: %s</string>
+	<string-array name="feed_notification">
+		<item>Off</item>
+		<item>6 Hours</item>
+		<item>12 Hours</item>
+		<item>24 Hours</item>
+	</string-array>
+	<!-- Notification values are in milliseconds -->
+	<string-array name="feed_notification_values" translatable="false">
+		<item>0</item>
+		<item>21600000</item> <!-- 6 hours -->
+		<item>43200000</item> <!-- 12 hours -->
+		<item>86400000</item> <!-- 24 hours -->
+	</string-array>
+
 	<string name="pref_key_screen_orientation" translatable="false">pref_key_screen_orientation</string>
 	<string name="pref_title_screen_orientation">Screen Orientation</string>
 	<string name="pref_summary_screen_orientation">Rotation of the video player</string>

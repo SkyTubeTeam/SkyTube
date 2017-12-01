@@ -44,6 +44,7 @@ import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.GetSubscriptionVideosTask;
 import free.rm.skytube.businessobjects.YouTubeChannel;
+import free.rm.skytube.businessobjects.YouTubeVideo;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 import free.rm.skytube.gui.businessobjects.preferences.BackupDatabases;
 import free.rm.skytube.gui.fragments.SubscriptionsFeedFragment;
@@ -454,11 +455,11 @@ public class SubscriptionsBackupsManager {
 					e.printStackTrace();
 				}
 			}
-			new GetSubscriptionVideosTask(new SubscriptionsFragmentListener() {
+			new GetSubscriptionVideosTask(new GetSubscriptionVideosTaskListener() {
 				@Override
-				public void onChannelVideosFetched(YouTubeChannel channel, int videosFetched, boolean videosDeleted) {
+				public void onChannelVideosFetched(YouTubeChannel channel, List<YouTubeVideo> videosFetched, boolean videosDeleted) {
 					numChannelsDone++;
-					totalVideosFetched += videosFetched;
+					totalVideosFetched += videosFetched.size();
 					dialog.incrementProgress(1);
 					updateDialog();
 				}
