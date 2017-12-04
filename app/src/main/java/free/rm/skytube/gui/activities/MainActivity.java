@@ -38,6 +38,7 @@ import android.widget.FrameLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import free.rm.skytube.R;
+import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTubePlaylist;
 import free.rm.skytube.gui.businessobjects.MainActivityListener;
@@ -82,6 +83,8 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 			new UpdatesCheckerTask(this, false).executeInParallel();
 			updatesCheckerTaskRan = true;
 		}
+
+		SkyTubeApp.setFeedUpdateInterval();
 
 		setContentView(R.layout.activity_main);
 		ButterKnife.bind(this);
