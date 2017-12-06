@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources>
 	<string name="error_stream_err_unavailable">A hibaüzenet nem elérhető.</string>
-	<string name="error_stream_decryption_fail">A Youtube szolgáltatáshoz tartozó dekódoló kód betöltése sikertelen.</string>
+	<string name="error_stream_decryption_fail">A YouTube szolgáltatáshoz tartozó dekódoló kód betöltése sikertelen.</string>
 	<string name="error_stream_parse_error">Olvasási hiba.</string>
 
 	<string name="error_video_play">Videólejátszási Hiba</string>
