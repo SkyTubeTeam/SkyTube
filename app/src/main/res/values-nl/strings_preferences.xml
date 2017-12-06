@@ -65,7 +65,7 @@
 	<string name="pref_screen_auto">Automatisch</string>
 	<string name="pref_screen_sensor">Apparaatsensor</string>
 	<string name="pref_title_disable_immersive_mode">Theatermodus uitschakelen</string>
-	<string name="pref_summary_disable_immersive_mode">Reacties en video-omschrijvingpictogrammen zullen altijd worden weergegeven</string>
+	<string name="pref_summary_disable_immersive_mode">Comments and video description icons and the navigation bar shall always be displayed</string>
 
 	<string name="pref_title_youtube_api_key">YouTube API-sleutel</string>
 	<string name="pref_summary_youtube_api_key">Voer uw eigen YouTube Gegevens-API-sleutel in. Laat leeg om de standaard sleutel te gebruiken.</string>

@@ -44,9 +44,10 @@ import free.rm.skytube.businessobjects.YouTubeVideo;
 import free.rm.skytube.businessobjects.db.CheckIfUserSubbedToChannelTask;
 import free.rm.skytube.gui.activities.MainActivity;
 import free.rm.skytube.gui.businessobjects.CommentsAdapter;
-import free.rm.skytube.gui.businessobjects.FragmentEx;
+import free.rm.skytube.gui.businessobjects.ImmersiveModeFragment;
 import free.rm.skytube.gui.businessobjects.IsVideoBookmarkedTask;
 import free.rm.skytube.gui.businessobjects.MediaControllerEx;
+import free.rm.skytube.gui.businessobjects.OnSwipeTouchListener;
 import free.rm.skytube.gui.businessobjects.SubscribeButton;
 import hollowsoft.slidingdrawer.OnDrawerOpenListener;
 import hollowsoft.slidingdrawer.SlidingDrawer;
@@ -54,7 +55,7 @@ import hollowsoft.slidingdrawer.SlidingDrawer;
 /**
  * A fragment that holds a standalone YouTube player.
  */
-public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnPreparedListener {
+public class YouTubePlayerFragment extends ImmersiveModeFragment implements MediaPlayer.OnPreparedListener {
 
 	public static final String YOUTUBE_VIDEO_OBJ = "YouTubePlayerFragment.yt_video_obj";
 
@@ -96,15 +97,20 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 
 	/** Timeout (in milliseconds) before the HUD (i.e. media controller + action/title bar) is hidden. */
 	private static final int HUD_VISIBILITY_TIMEOUT = 5000;
-	/** Timeout (in milliseconds) before the info and comments icons is hidden (which will occur
-	 * only after the HUD is hidden). */
-	private static final int VIDEO_DESC_AND_COMMENTS_ICONS_VISIBILITY_TIMEOUT = 2000;
+	/** Timeout (in milliseconds) before the navigation bar is hidden (which will occur only after
+	 * the HUD is hidden). */
+	private static final int NAVBAR_VISIBILITY_TIMEOUT = 500;
 	private static final String VIDEO_CURRENT_POSITION = "YouTubePlayerFragment.VideoCurrentPosition";
 	private static final String TAG = YouTubePlayerFragment.class.getSimpleName();
 
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		// if immersive mode is enabled then hide the navigation bar
+		if (userWantsImmersiveMode()) {
+			hideNavigationBar();
+		}
+
 		// inflate the layout for this fragment
 		View view = inflater.inflate(R.layout.fragment_youtube_player, container, false);
 
@@ -136,12 +142,37 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 
 			// setup the media controller (will control the video playing/pausing)
 			mediaController = new MediaControllerEx(getActivity(), videoView);
+			// ensure that the mediaController is always above the NavBar (given that the NavBar can
+			// be in immersive mode)
+			if (userWantsImmersiveMode()) {
+				mediaController.setPadding(0, 0, 0, getNavBarHeightInPixels());
+			}
 
 			voidView = view.findViewById(R.id.void_view);
 			voidView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					showOrHideHud();
+				}
+			});
+			// detect if user's swipes motions
+			voidView.setOnTouchListener(new OnSwipeTouchListener(getActivity()) {
+				@Override
+				public void onSwipeRight() {
+				}
+
+				@Override
+				public void onSwipeLeft() {
+					commentsDrawer.animateOpen();
+				}
+
+				@Override
+				public void onSwipeTop() {
+					videoDescriptionDrawer.animateOpen();
+				}
+
+				@Override
+				public void onSwipeBottom() {
 				}
 			});
 
@@ -299,10 +330,15 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 	 * Hide or display the HUD depending if the HUD is currently visible or not.
 	 */
 	private void showOrHideHud() {
-		if (isHudVisible())
+		if (commentsDrawer.isOpened()) {
+			commentsDrawer.animateClose();
+		} else if (videoDescriptionDrawer.isOpened()) {
+			videoDescriptionDrawer.animateClose();
+		} else if (isHudVisible()) {
 			hideHud();
-		else
+		} else {
 			showHud();
+		}
 	}
 
 
@@ -342,8 +378,24 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 			getSupportActionBar().hide();
 			mediaController.hideController();
 
-			videoDescriptionDrawerIconView.setVisibility(View.VISIBLE);
-			commentsDrawerIconView.setVisibility(View.VISIBLE);
+			// if the user wants the IMMERSIVE mode experience...
+			if (userWantsImmersiveMode()) {
+				// Hide the navigation bar.  Due to Android pre-defined mechanisms, the nav bar can
+				// only be hidden after all animation have been rendered (e.g. mediaController is
+				// fully closed).  As a result, a delay is needed in order to explicitly hide the
+				// nav bar.
+				hideVideoDescAndCommentsIconsTimerHandler = new Handler();
+				hideVideoDescAndCommentsIconsTimerHandler.postDelayed(new Runnable() {
+					@Override
+					public void run() {
+						hideNavigationBar();
+						hideVideoDescAndCommentsIconsTimerHandler = null;
+					}
+				}, NAVBAR_VISIBILITY_TIMEOUT);
+			} else {
+				videoDescriptionDrawerIconView.setVisibility(View.VISIBLE);
+				commentsDrawerIconView.setVisibility(View.VISIBLE);
+			}
 
 			// If there is a hideHudTimerHandler running, then cancel it (stop if from running).  This way,
 			// if the HUD was hidden on the 5th second, and the user reopens the HUD, this code will
@@ -352,20 +404,6 @@ public class YouTubePlayerFragment extends FragmentEx implements MediaPlayer.OnP
 			if (hideHudTimerHandler != null) {
 				hideHudTimerHandler.removeCallbacksAndMessages(null);
 				hideHudTimerHandler = null;
-			}
-
-			// now hide the video description and comments icons after a pre-defined delay... (unless
-			// the user does not want such functionality)
-			if ( ! SkyTubeApp.getPreferenceManager().getBoolean(getString(R.string.pref_key_disable_immersive_mode), false) ) {
-				hideVideoDescAndCommentsIconsTimerHandler = new Handler();
-				hideVideoDescAndCommentsIconsTimerHandler.postDelayed(new Runnable() {
-					@Override
-					public void run() {
-						videoDescriptionDrawerIconView.setVisibility(View.INVISIBLE);
-						commentsDrawerIconView.setVisibility(View.INVISIBLE);
-						hideVideoDescAndCommentsIconsTimerHandler = null;
-					}
-				}, VIDEO_DESC_AND_COMMENTS_ICONS_VISIBILITY_TIMEOUT);
 			}
 		}
 	}
