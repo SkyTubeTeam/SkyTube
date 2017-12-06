@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources>
 	<string name="preferences">Beállítások</string>
 
@@ -15,16 +15,16 @@
 	<string name="pref_title_use_offical_player">Hivatalos YouTube lejátszó használata</string>
 	<string name="pref_summary_use_offical_player">Nem javasolt</string>
 
-	<string name="pref_backup_category">Backups</string>
+	<string name="pref_backup_category">Biztonsági mentések</string>
 	<string name="pref_title_backup_dbs">Backup Databases</string>
-	<string name="pref_summary_backup_dbs">Backup your subscriptions and bookmarks databases.</string>
+	<string name="pref_summary_backup_dbs">Mentse le a feliratkozás és könyvjelző adatbázist.</string>
 	<string name="pref_title_import_dbs">Import Backup</string>
 	<string name="pref_summary_import_dbs">Import your subscriptions and bookmarks databases backup.</string>
-	<string name="databases_backing_up">Backing up…</string>
-	<string name="databases_backup_success">Databases backed up to %s</string>
-	<string name="databases_backup_fail">Failed to backup your databases.</string>
-	<string name="databases_import_select_backup">Select backup file to import</string>
-	<string name="databases_import_nothing_selected">Nothing was selected…</string>
+	<string name="databases_backing_up">Biztonsági mentés készítése…</string>
+	<string name="databases_backup_success">Biztonsági másolat készült %s -ra</string>
+	<string name="databases_backup_fail">Nem sikerült biztonsági másolatot készíteni.</string>
+	<string name="databases_import_select_backup">Válassza ki a biztonsági másolat fájlt importálásra</string>
+	<string name="databases_import_nothing_selected">Nem választott ki semmit…</string>
 	<string name="databases_import_warning_message">The subscriptions and bookmarks databases will be REPLACED with the data of the selected backup file.\n\nContinue?</string>
 	<string name="continue_">Continue</string>
 	<string name="databases_importing">Importing…</string>
@@ -44,7 +44,7 @@
 	<string name="pref_summary_updates">Check for updates.</string>
 	<string name="pref_title_license">Licensz</string>
 	<string name="pref_summary_license">GNU General Public License version 3</string>
-	<string name="app_license">Copyright &#169; 2015-2017  Ramon Mifsud\n
+	<string name="app_license">Copyright © 2015-2017  Ramon Mifsud\n
 
 				\nThis program is free software: you can redistribute it and/or modify
 				it under the terms of the GNU General Public License as published by
@@ -82,4 +82,6 @@
 	<string name="pref_youtube_api_key_custom">Key is valid.  Restart app to use the new YouTube API key.</string>
 	<string name="pref_youtube_api_key_default">Restart app to switch back to default YouTube API key.</string>
 	<string name="restart">Restart</string>
-</resources>
+<string name="pref_summary_disable_immersive_mode">A hozzászólás és videó leírás ikont mindig meg kell jeleníteni</string>
+
+	</resources>
