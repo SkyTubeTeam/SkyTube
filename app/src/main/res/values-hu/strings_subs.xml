@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources>
 	<string name="subscriptions">Feliratkozások</string>
 	<string name="subscribe">Feliratkozás</string>
@@ -8,13 +8,13 @@
 	<string name="subscribed">Feliratkozva</string>
 	<string name="unsubscribed">Leiratkozva</string>
 
-	<string name="error_get_subbed_channels">Hiba történt a feliratkozások begyűjtésénél.</string>
+	<string name="error_get_subbed_channels">Hiba történt a feliratkozott csatornák letöltése közben.</string>
 	<string name="error_check_if_user_has_subbed">Nem sikerült ellenőrizni, hogy feliratkozott-e a csatornára (id=%s)</string>
 	<string name="error_unable_to_subscribe">Nem sikerült fel/leiratkozni a csatornára (id=%s)</string>
 
 	<string name="import_subscriptions">Import Subscriptions</string>
-	<string name="import_subscriptions_description">Import your subscriptions from YouTube, by first visiting https://www.youtube.com/subscription_manager, and clicking the \"Export Subscriptions\" button at the bottom. Then, select the xml file you exported by clicking \"Select XML File\" below.</string>
-	<string name="subscriptions_to_channels_imported">Subscription to %d channels imported.</string>
+	<string name="import_subscriptions_description">"Importálja feliratkozásait a YouTube-ról, a  https://www.youtube.com/subscription_manager felkeresésével, ahol kattintson az \"Export Subscriptions\" gombra, majd válassza az XML file formátumot alatta."</string>
+	<string name="subscriptions_to_channels_imported">%d csatornára való feliratkozás importálásra került.</string>
 	<string name="select_xml_file">Select XML File</string>
 	<string name="select_all">Select All</string>
 	<string name="select_none">Select None</string>
