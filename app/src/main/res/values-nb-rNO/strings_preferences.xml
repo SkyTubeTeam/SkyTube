@@ -77,7 +77,7 @@
 	<string name="pref_youtube_api_key_custom">Nøkkelen er gyldig. Start programmet på nytt for å bruke den nye YouTube-API-nøkkelen.</string>
 	<string name="pref_youtube_api_key_default">Start programmet på nytt og bytt tilbake til YouTube-API-nøkkelen.</string>
 	<string name="restart">Start på nytt</string>
-<string name="pref_title_disable_immersive_mode">Skru av oppslukende modus</string>
-	<string name="pref_summary_disable_immersive_mode">Kommentarer og videobeskrivelses-ikoner vises alltid</string>
+	<string name="pref_title_disable_immersive_mode">Skru av oppslukende modus</string>
+	<string name="pref_summary_disable_immersive_mode">Comments and video description icons and the navigation bar shall always be displayed</string>
 
 	</resources>
