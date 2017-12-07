@@ -1,31 +1,40 @@
 package free.rm.skytube.businessobjects;
 
-import android.util.Log;
-
 import java.io.IOException;
 
+import free.rm.skytube.gui.businessobjects.Logger;
+
+/**
+ * A task that given a channel ID it will try to initialize and return {@link YouTubeChannel}.
+ */
 public class GetYouTubeChannelInfoTask extends AsyncTaskParallel<String, Void, YouTubeChannel> {
 
-	private final String TAG = GetYouTubeChannelInfoTask.class.getSimpleName();
 	private YouTubeChannelInterface youTubeChannelInterface;
+
 
 	public GetYouTubeChannelInfoTask(YouTubeChannelInterface youTubeChannelInterface) {
 		this.youTubeChannelInterface = youTubeChannelInterface;
 	}
 
+
 	@Override
 	protected YouTubeChannel doInBackground(String... channelId) {
-		YouTubeChannel chn = new YouTubeChannel();
+		YouTubeChannel channel = new YouTubeChannel();
 
 		try {
-			chn.init(channelId[0]);
+			// Try to initialise the channel (by retrieving info from the net).  If it fails, then
+			// set the channel to null...
+			if (!channel.init(channelId[0])) {
+				channel = null;
+			}
 		} catch (IOException e) {
-			Log.e(TAG, "Unable to get channel info.  ChannelID=" + channelId[0], e);
-			chn = null;
+			Logger.e(this, "Unable to get channel info.  ChannelID=" + channelId[0], e);
+			channel = null;
 		}
 
-		return chn;
+		return channel;
 	}
+
 
 	@Override
 	protected void onPostExecute(YouTubeChannel youTubeChannel) {

@@ -143,15 +143,20 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 		Cursor cursor = getReadableDatabase().query(SubscriptionsTable.TABLE_NAME, new String[]{SubscriptionsTable.COL_CHANNEL_ID}, null, null, null, null, SubscriptionsTable.COL_ID + " ASC");
 
 		if (cursor.moveToNext()) {
-			int colChannelIdNum = cursor.getColumnIndexOrThrow(SubscriptionsTable.COL_CHANNEL_ID);
-			String channelId = null;
-			YouTubeChannel channel = null;
+			int             colChannelIdNum = cursor.getColumnIndexOrThrow(SubscriptionsTable.COL_CHANNEL_ID);
+			String          channelId;
+			YouTubeChannel  channel;
 
 			do {
 				channelId = cursor.getString(colChannelIdNum);
 				channel = new YouTubeChannel();
-				channel.init(channelId, true /* = user is subscribed to this channel*/, shouldCheckForNewVideos);
-				subsChannels.add(channel);
+
+				// Initialize the channel.  If the initialization is successful, then add the channel
+				// to the subsChannel list...
+				if (channel.init(channelId, true /* = user is subscribed to this channel*/, shouldCheckForNewVideos)) {
+					subsChannels.add(channel);
+				}
+
 			} while (cursor.moveToNext());
 		}
 		cursor.close();

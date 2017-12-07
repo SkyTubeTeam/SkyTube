@@ -17,7 +17,6 @@
 
 package free.rm.skytube.gui.fragments;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -26,7 +25,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,12 +34,12 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import free.rm.skytube.R;
+import free.rm.skytube.businessobjects.GetYouTubeChannelInfoTask;
 import free.rm.skytube.businessobjects.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTubeVideo;
 import free.rm.skytube.gui.businessobjects.FragmentEx;
@@ -243,29 +241,20 @@ public class ChannelBrowserFragment extends FragmentEx {
 
 	////////////////////////////////////////////////////////////////////////////////////////////////
 
-	private class GetChannelInfoTask extends AsyncTask<String, Void, YouTubeChannel> {
+	/**
+	 * A task that given a channel ID it will try to initialize and return {@link YouTubeChannel}.
+	 */
+	private class GetChannelInfoTask extends GetYouTubeChannelInfoTask {
 
-		private final String TAG = GetChannelInfoTask.class.getSimpleName();
-
-		@Override
-		protected YouTubeChannel doInBackground(String... channelId) {
-			YouTubeChannel chn = new YouTubeChannel();
-
-			try {
-				// initialise the channel
-				chn.init(channelId[0]);
-			} catch (IOException e) {
-				Log.e(TAG, "Unable to get channel info.  ChannelID=" + channelId[0], e);
-				chn = null;
-			}
-
-			return chn;
+		GetChannelInfoTask() {
+			super(null);
 		}
 
 		@Override
 		protected void onPostExecute(YouTubeChannel youTubeChannel) {
-			// In the event this fragment is passed a channel id and not a channel object, set the channel the subscribe button is for since
-			// there wasn't a channel object to set when the button was created.
+			// In the event this fragment is passed a channel id and not a channel object, set the
+			// channel the subscribe button is for since there wasn't a channel object to set when
+			// the button was created.
 			channel = youTubeChannel;
 			initViews();
 			channelSubscribeButton.setChannel(youTubeChannel);
@@ -273,6 +262,7 @@ public class ChannelBrowserFragment extends FragmentEx {
 		}
 
 	}
+
 
 	private class ChannelPagerAdapter extends FragmentPagerAdapter {
 		public ChannelPagerAdapter(FragmentManager fm) {

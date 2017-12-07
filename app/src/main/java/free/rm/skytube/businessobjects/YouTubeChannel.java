@@ -58,26 +58,33 @@ public class YouTubeChannel implements Serializable {
 
 
 	/**
-	 * Initialise this object.  This should not be called from the main thread.
+	 * Initialise this object by retrieving the channel information by communicating with YouTube.
+	 * This should not be called from the main thread.
 	 *
 	 * @param channelId	Channel ID
+	 *
+	 * @return True if the initialization was successful; false otherwise.
 	 */
-	public void init(String channelId) throws IOException {
-		init(channelId, false, true);
+	public boolean init(String channelId) throws IOException {
+		return init(channelId, false, true);
 	}
 
 
 	/**
-	 * Initialise this object.  This should not be called from the main thread.
+	 * Initialise this object by retrieving the channel information by communicating with YouTube.
+	 * This should not be called from the main thread.
 	 *
 	 * @param channelId			Channel ID
 	 * @param isUserSubscribed	if set to true, then it means the user is subscribed to this channel;
 	 *                          otherwise it means that we currently do not know if the user is
 	 *                          subbed or not (hence we need to check).
+	 *
+	 * @return True if the initialization was successful; false otherwise.
 	 * @throws IOException
 	 */
-	public void init(String channelId, boolean isUserSubscribed, boolean shouldCheckForNewVideos) throws IOException {
-		String bannerType = SkyTubeApp.isTablet() ? "bannerTabletHdImageUrl" : "bannerMobileHdImageUrl";
+	public boolean init(String channelId, boolean isUserSubscribed, boolean shouldCheckForNewVideos) throws IOException {
+		String  bannerType = SkyTubeApp.isTablet() ? "bannerTabletHdImageUrl" : "bannerMobileHdImageUrl";
+		boolean initSuccessful = false;
 
 		YouTube youtube = YouTubeAPI.create();
 		YouTube.Channels.List channelInfo = youtube.channels().list("snippet, statistics, brandingSettings");
@@ -99,7 +106,11 @@ public class YouTubeChannel implements Serializable {
 			if (this.isUserSubscribed && shouldCheckForNewVideos) {
 				newVideosSinceLastVisit = SubscriptionsDb.getSubscriptionsDb().channelHasNewVideos(this);
 			}
+
+			initSuccessful = true;
 		}
+
+		return initSuccessful;
 	}
 
 
@@ -127,7 +138,7 @@ public class YouTubeChannel implements Serializable {
 			// operation was successful
 			successful = true;
 		} catch (Throwable tr) {
-			Log.e(TAG, "Error has occurred while getting Featured Videos.", tr);
+			Log.e(TAG, "Error has occurred while getting channel info for ChannelID=" + channelInfo.getId(), tr);
 		}
 
 		return successful;
