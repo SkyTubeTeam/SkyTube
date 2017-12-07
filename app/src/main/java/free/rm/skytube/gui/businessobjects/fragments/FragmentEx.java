@@ -1,6 +1,6 @@
 /*
  * SkyTube
- * Copyright (C) 2015  Ramon Mifsud
+ * Copyright (C) 2017  Ramon Mifsud
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package free.rm.skytube.gui.businessobjects;
+package free.rm.skytube.gui.businessobjects.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

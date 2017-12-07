@@ -32,7 +32,7 @@ import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.businessobjects.db.BookmarksDb;
 import free.rm.skytube.gui.businessobjects.MainActivityListener;
 import free.rm.skytube.gui.businessobjects.SimpleItemTouchHelperCallback;
-import free.rm.skytube.gui.businessobjects.bookmarksGridAdapter;
+import free.rm.skytube.gui.businessobjects.BookmarksGridAdapter;
 
 /**
  * Fragment that displays bookmarked videos.
@@ -41,7 +41,7 @@ public class BookmarksFragment extends VideosGridFragment implements BookmarksDb
 	@BindView(R.id.noBookmarkedVideosText)
 	View noBookmarkedVideosText;
 
-	private bookmarksGridAdapter bookmarksGridAdapter;
+	private BookmarksGridAdapter bookmarksGridAdapter;
 
 
 	@Override
@@ -57,7 +57,7 @@ public class BookmarksFragment extends VideosGridFragment implements BookmarksDb
 		videoGridAdapter = null;
 
 		if (bookmarksGridAdapter == null) {
-			bookmarksGridAdapter = new bookmarksGridAdapter(getActivity());
+			bookmarksGridAdapter = new BookmarksGridAdapter(getActivity());
 		} else {
 			bookmarksGridAdapter.setContext(getActivity());
 		}

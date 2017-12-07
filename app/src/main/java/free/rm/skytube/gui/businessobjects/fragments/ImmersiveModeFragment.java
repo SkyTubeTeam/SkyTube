@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package free.rm.skytube.gui.businessobjects;
+package free.rm.skytube.gui.businessobjects.fragments;
 
 import android.content.res.Resources;
 import android.os.Build;
@@ -23,6 +23,7 @@ import android.view.View;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
+import free.rm.skytube.gui.businessobjects.fragments.FragmentEx;
 
 /**
  * A fragment that can enables and disables the immersive mode (i.e. hides the navigation bar and
