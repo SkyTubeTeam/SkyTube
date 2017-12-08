@@ -45,6 +45,7 @@ import free.rm.skytube.businessobjects.YouTubeVideo;
 import free.rm.skytube.gui.businessobjects.fragments.FragmentEx;
 import free.rm.skytube.gui.businessobjects.SubsAdapter;
 import free.rm.skytube.gui.businessobjects.SubscribeButton;
+import free.rm.skytube.gui.businessobjects.fragments.TabFragment;
 
 /**
  * A Fragment that displays information about a channel.
@@ -72,11 +73,12 @@ public class ChannelBrowserFragment extends FragmentEx {
 	public static final String CHANNEL_ID  = "ChannelBrowserFragment.ChannelID";
 
 	// The fragments that will be displayed
-	private ChannelVideosFragment channelVideosFragment;
-	private ChannelPlaylistsFragment channelPlaylistsFragment;
+	private ChannelVideosFragment       channelVideosFragment;
+	private ChannelPlaylistsFragment    channelPlaylistsFragment;
+	private ChannelAboutFragment        channelAboutFragment;
 
 	/** List of fragments that will be displayed as tabs. */
-	private List<VideosGridFragment> channelBrowserFragmentList = new ArrayList<>();
+	private List<TabFragment> channelBrowserFragmentList = new ArrayList<>();
 
 	private ChannelPagerAdapter channelPagerAdapter;
 	private ViewPager viewPager;
@@ -132,9 +134,7 @@ public class ChannelBrowserFragment extends FragmentEx {
 
 			@Override
 			public void onPageSelected(int position) {
-				VideosGridFragment fragment = channelBrowserFragmentList.get(position);
-				if(fragment instanceof VideosGridFragment)
-					channelBrowserFragmentList.get(position).onFragmentSelected();
+				channelBrowserFragmentList.get(position).onFragmentSelected();
 			}
 
 			@Override
@@ -178,15 +178,15 @@ public class ChannelBrowserFragment extends FragmentEx {
 		return fragment;
 	}
 
-	@Override
-	public void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);
-		if(channelVideosFragment != null)
-			getChildFragmentManager().putFragment(outState, FRAGMENT_CHANNEL_VIDEOS, channelVideosFragment);
-		if(channelPlaylistsFragment != null)
-			getChildFragmentManager().putFragment(outState, FRAGMENT_CHANNEL_PLAYLISTS, channelPlaylistsFragment);
-
-	}
+//	@Override
+//	public void onSaveInstanceState(Bundle outState) {
+//		super.onSaveInstanceState(outState);
+//		if(channelVideosFragment != null)
+//			getChildFragmentManager().putFragment(outState, FRAGMENT_CHANNEL_VIDEOS, channelVideosFragment);
+//		if(channelPlaylistsFragment != null)
+//			getChildFragmentManager().putFragment(outState, FRAGMENT_CHANNEL_PLAYLISTS, channelPlaylistsFragment);
+//
+//	}
 
 	/**
 	 * Initialise views that are related to {@link #channel}.
@@ -269,21 +269,26 @@ public class ChannelBrowserFragment extends FragmentEx {
 			super(fm);
 
 			// Initialize fragments
-			if(channelVideosFragment == null)
+			if (channelVideosFragment == null)
 				channelVideosFragment = new ChannelVideosFragment();
 
-			if(channelPlaylistsFragment == null)
+			if (channelPlaylistsFragment == null)
 				channelPlaylistsFragment = new ChannelPlaylistsFragment();
+
+			if (channelAboutFragment == null)
+				channelAboutFragment = new ChannelAboutFragment();
 
 			Bundle bundle = new Bundle();
 			bundle.putSerializable(CHANNEL_OBJ, channel);
 
 			channelVideosFragment.setArguments(bundle);
 			channelPlaylistsFragment.setArguments(bundle);
+			channelAboutFragment.setArguments(bundle);
 
 			channelBrowserFragmentList.clear();
 			channelBrowserFragmentList.add(channelVideosFragment);
 			channelBrowserFragmentList.add(channelPlaylistsFragment);
+			channelBrowserFragmentList.add(channelAboutFragment);
 		}
 
 		@Override

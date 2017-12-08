@@ -86,7 +86,7 @@
 						<!-- SUBSCRIBERS -->
 						<TextView
 							android:id="@+id/channel_subs_text_view"
-							style="@style/ChannelDetailsTextView"
+							style="@style/ChannelSubsTextView"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
 							android:text="@string/loading"/>

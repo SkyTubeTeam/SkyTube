@@ -148,9 +148,14 @@
 	 	Channel Browser
 	-->
 
-	<style name="ChannelDetailsTextView" parent="AppTheme">
-		<item name="android:textColor">#F5F5F5FF</item>
+	<style name="ChannelSubsTextView" parent="AppTheme">
+		<item name="android:textColor">@color/channel_subs</item>
 		<item name="android:singleLine">true</item>
+		<item name="android:textAppearance">@style/TextAppearance.AppCompat.Small</item>
+	</style>
+
+	<style name="ChannelAboutTextView" parent="AppTheme">
+		<item name="android:textColor">@color/channel_about</item>
 		<item name="android:textAppearance">@style/TextAppearance.AppCompat.Small</item>
 	</style>
 
