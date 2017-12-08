@@ -4,7 +4,7 @@
 
 	<string name="fetching_subscription_videos">A obter vídeos dos canais subscritos</string>
 	<string name="fetched_videos_from_channels">A obter %1$d vídeos de %2$d/%3$d canais.</string>
-	<string name="no_new_videos_found">Não foram encontrados novos vídeos.</string>
+	<string name="no_new_videos_found">Não existem novos vídeos.</string>
 	<string name="no_subscriptions_text">Ainda não subscreveu qualquer canal.
 \n
 \nAssim que o fizer, todos os vídeos do último mês carregados para os canais subscritos aparecerão aqui.</string>
