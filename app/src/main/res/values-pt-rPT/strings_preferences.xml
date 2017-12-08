@@ -34,7 +34,7 @@
 	<string name="databases_import_success">Bases de dados importadas com êxito. Reinicie a aplicação para aplicar.</string>
 
 	<string name="pref_title_import_subs">Importar subscrições do YouTube</string>
-	<string name="pref_summary_import_subs">Importar as minhas subscrições do Youtube.</string>
+	<string name="pref_summary_import_subs">Importar as minhas subscrições de uma conta Youtube.</string>
 	<string name="subs_import_select_backup">Selecione o ficheiro xml com os dados a importar</string>
 
 	<string name="pref_about_category">Sobre</string>
@@ -86,4 +86,7 @@
 	<string name="pref_youtube_api_key_custom">A chave é válida. Reinicie a aplicação para usar a nova chave API do YouTube.</string>
 	<string name="pref_youtube_api_key_default">Reinicie a aplicação para retornar à chave padrão da API do YouTube.</string>
 	<string name="restart">Reiniciar</string>
-</resources>
+<string name="pref_title_disable_immersive_mode">Desativar modo imersivo</string>
+	<string name="pref_summary_disable_immersive_mode">Os comentários, a descrição do vídeo e a barra de navegação serão sempre mostrados</string>
+
+	</resources>
