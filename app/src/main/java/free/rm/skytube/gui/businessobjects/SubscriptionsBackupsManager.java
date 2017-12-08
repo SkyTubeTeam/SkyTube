@@ -445,11 +445,14 @@ public class SubscriptionsBackupsManager {
 					continue;
 				try {
 					YouTubeChannel channelObj = new YouTubeChannel();
-					channelsList.add(channelObj);
-					channelObj.init(channel.channelId);
-					SubscriptionsDb.getSubscriptionsDb().subscribe(channelObj);
-					// Need to set this channelObj to subscribed, so that when videos are retrieved for the channel, they get saved into the database.
-					channelObj.setUserSubscribed(true);
+					if (channelObj.init(channel.channelId)) {
+						channelsList.add(channelObj);
+						SubscriptionsDb.getSubscriptionsDb().subscribe(channelObj);
+						// Need to set this channelObj to subscribed, so that when videos are retrieved for the channel, they get saved into the database.
+						channelObj.setUserSubscribed(true);
+					} else {
+						Logger.e(this, "Initialization failed for ChannelId=%s.  Probably the channel doesn't exists anymore.  Channel won't be added to SkyTube.", channel.channelId);
+					}
 				} catch(IOException e) {
 					e.printStackTrace();
 				}
