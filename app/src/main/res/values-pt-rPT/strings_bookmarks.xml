@@ -8,7 +8,7 @@
 
 	<string name="unbookmark">Remover dos marcadores</string>
 	<string name="video_unbookmarked">Vídeo removido dos marcadores</string>
-	<string name="video_unbookmarked_error">Não foi possível remover vídeo dos marcadores.</string>
+	<string name="video_unbookmarked_error">Não foi possível remover o vídeo dos marcadores.</string>
 
 	<string name="no_bookmarked_videos_text">Ainda não adicionou qualquer vídeo aos marcadores.
 \n
