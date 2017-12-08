@@ -3,10 +3,12 @@ v2.80 - XX XXX 201X:
 	* Implemented immersive mode for the video player (i.e. comments and info icons together with the navigation bar are now hidden by default).
 	* Immersive mode:  comments and video description can be viewed if the user swipes to the left and top respectively.
 	* Main and channel toolbar aesthetics enhancements.
+	* Users can now view channel's information/description via the about tab.
 	* Added Russian translations.
 	* Added Norwegian Bokmål translations.
 	* Added Arabic translations.
 	* Added Dutch translations.
+	* Bug fixes and other minor improvements.
 
 v2.70 - 05 Nov 2017:
 	* Users can now import their YouTube's subscriptions list into SkyTube.

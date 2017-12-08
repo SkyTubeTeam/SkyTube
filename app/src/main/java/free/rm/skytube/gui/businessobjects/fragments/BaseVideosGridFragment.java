@@ -31,7 +31,7 @@ import free.rm.skytube.gui.fragments.VideosGridFragment;
 /**
  * A class that supports swipe-to-refresh on {@link VideosGridFragment}.
  */
-public abstract class BaseVideosGridFragment extends FragmentEx implements SwipeRefreshLayout.OnRefreshListener {
+public abstract class BaseVideosGridFragment extends TabFragment implements SwipeRefreshLayout.OnRefreshListener {
 
 	protected VideoGridAdapter videoGridAdapter;
 

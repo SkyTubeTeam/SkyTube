@@ -42,9 +42,6 @@ public abstract class VideosGridFragment extends BaseVideosGridFragment {
 	protected RecyclerView	gridView;
 	private View			progressBar = null;
 	private int 			layoutResource = 0;
-	/** True indicates that this fragment is selected and can be used by the user;  false means that
-	 *  this fragment is hidden and cannot be used. */
-	private boolean         isFragmentSelected = false;
 
 
 	@Override
@@ -109,37 +106,6 @@ public abstract class VideosGridFragment extends BaseVideosGridFragment {
 	 */
 	protected String getSearchString() {
 		return null;
-	}
-
-
-	/**
-	 * @return The fragment/tab name/title.
-	 */
-	public abstract String getFragmentName();
-
-
-	/**
-	 * Will be called when the user selects this fragment/tab.  This super method should ALWAYS be
-	 * called when inherited.
-	 */
-	public void onFragmentSelected() {
-		System.out.println(getFragmentName() + " selected" );
-		isFragmentSelected = true;
-	}
-
-
-	/**
-	 * Will be called when the user selects another fragment and hence this fragment is no longer
-	 * selected.
-	 */
-	public void onFragmentUnselected() {
-		System.out.println(getFragmentName() + " UNselected" );
-		isFragmentSelected = false;
-	}
-
-
-	protected boolean isFragmentSelected() {
-		return isFragmentSelected;
 	}
 
 }
