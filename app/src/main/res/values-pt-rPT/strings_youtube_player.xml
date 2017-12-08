@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
 	<string name="error_stream_err_unavailable">Mensagem de erro não disponível.</string>
-	<string name="error_stream_decryption_fail">Não foi possível carregar o código de desencriptação para o serviço do Youtube.</string>
+	<string name="error_stream_decryption_fail">Não foi possível carregar o código de desencriptação para o serviço YouTube.</string>
 	<string name="error_stream_parse_error">Erro ao processar.</string>
 
 	<string name="error_video_play">Erro ao reproduzir</string>
-	<string name="error_video_streams_empty">O vídeo %s não tem emissões!</string>
+	<string name="error_video_streams_empty">O vídeo %s não tem emissões.</string>
 	<string name="error_video_streams">Ocorreu um erro ao tentar obter a emissão do vídeo.</string>
 	<string name="error_get_video_desc">Ocorreu um erro ao tentar obter a descrição do vídeo.</string>
 	<string name="error_invalid_url">URL inválido: %s</string>
@@ -16,7 +16,7 @@
 
 	<string name="loading_video">A carregar vídeo…</string>
 	<string name="get_new_video_steam">Nova emissão</string>
-	<string name="open_in_browser">Abrir no navegador</string>
+	<string name="open_in_browser">Abrir no navegador web</string>
 	<string name="open_with">Abrir com…</string>
 	<string name="share">Partilhar</string>
 	<string name="share_via">Partilhar via</string>
