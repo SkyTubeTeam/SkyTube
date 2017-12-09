@@ -25,6 +25,8 @@ public class FeedUpdaterService extends Service implements GetSubscriptionVideos
 	private GetSubscriptionVideosTask getSubscriptionVideosTask;
 	private List<YouTubeVideo> newVideosFetched;
 
+	public static final String NEW_SUBSCRIPTION_VIDEOS_FOUND = "FeedUpdaterService.NEW_SUBSCRIPTION_VIDEOS_FOUND";
+
 	@Override
 	public IBinder onBind(Intent intent) {
 		return null;
@@ -67,6 +69,11 @@ public class FeedUpdaterService extends Service implements GetSubscriptionVideos
 
 			NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
 			notificationManager.notify(SkyTubeApp.NEW_VIDEOS_NOTIFICATION_CHANNEL_ID, notification);
+
+			// Send a broadcast that new subscription videos have been found. The feed tab will receive the broadcast and
+			// refresh its video grid to show the new videos.
+			Intent feedTabIntent = new Intent(NEW_SUBSCRIPTION_VIDEOS_FOUND);
+			sendBroadcast(feedTabIntent);
 		}
 	}
 }
