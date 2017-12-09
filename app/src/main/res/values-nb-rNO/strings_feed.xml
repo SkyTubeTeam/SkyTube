@@ -8,4 +8,6 @@
 \n
 \nNår du først gjør det, vil alle videoer lastet opp til kanaler du abonnerer på i løpet av den siste måneden komme til syne her.</string>
 	<string name="import_subscriptions_from_youtube">Importer abonnementer fra YouTube</string>
+<string name="notification_channel_feed_title">Kilde-merknader</string>
+	<string name="notification_new_videos_found">%d nye videoer funnet i abonnerte kanaler</string>
 </resources>
