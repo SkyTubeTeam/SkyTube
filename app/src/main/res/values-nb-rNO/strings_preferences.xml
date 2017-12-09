@@ -80,4 +80,6 @@
 	<string name="pref_title_disable_immersive_mode">Skru av oppslukende modus</string>
 	<string name="pref_summary_disable_immersive_mode">Comments and video description icons and the navigation bar shall always be displayed</string>
 
+	<string name="pref_title_feed_notification">Automatisk kilde-merknad</string>
+	<string name="pref_summary_feed_notification">Hvor ofte det skal sjekkes for nye videoer i abonnerte kanaler: %s</string>
 	</resources>
