@@ -44,6 +44,8 @@ public class MainFragment extends FragmentEx {
 	private VideosPagerAdapter			videosPagerAdapter = null;
 	private ViewPager					viewPager;
 
+	public static final String SHOULD_SELECTED_FEED_TAB = "MainFragment.SHOULD_SELECTED_FEED_TAB";
+
 
 	@Nullable
 	@Override
@@ -109,7 +111,14 @@ public class MainFragment extends FragmentEx {
 
 		// select the default tab:  the default tab is defined by the user through the Preferences
 		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
-		viewPager.setCurrentItem(Integer.parseInt(sp.getString(getString(R.string.pref_key_default_tab), "0")));
+
+		// If the app is being opened via the Notification that new videos from Subscribed channels have been found, select the Subscriptions Feed Fragment
+		Bundle args = getArguments();
+		if(args != null && args.getBoolean(SHOULD_SELECTED_FEED_TAB, false)) {
+			viewPager.setCurrentItem(videoGridFragmentsList.indexOf(subscriptionsFeedFragment));
+		} else {
+			viewPager.setCurrentItem(Integer.parseInt(sp.getString(getString(R.string.pref_key_default_tab), "0")));
+		}
 
 		// Set the current viewpager fragment as selected, as when the Activity is recreated, the Fragment
 		// won't know that it's selected. When the Feeds fragment is the default tab, this will prevent the

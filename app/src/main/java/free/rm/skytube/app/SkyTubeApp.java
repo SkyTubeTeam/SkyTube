@@ -17,11 +17,19 @@
 
 package free.rm.skytube.app;
 
+import android.annotation.TargetApi;
+import android.app.AlarmManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.os.Build;
+import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.support.multidex.MultiDexApplication;
 import android.support.v4.content.IntentCompat;
@@ -30,6 +38,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import free.rm.skytube.R;
+import free.rm.skytube.businessobjects.FeedUpdaterReceiver;
 
 /**
  * SkyTube application.
@@ -40,12 +49,14 @@ public class SkyTubeApp extends MultiDexApplication {
 	private static SkyTubeApp skyTubeApp = null;
 
 	public static final String KEY_SUBSCRIPTIONS_LAST_UPDATED = "SkyTubeApp.KEY_SUBSCRIPTIONS_LAST_UPDATED";
-
+	public static final String NEW_VIDEOS_NOTIFICATION_CHANNEL = "free.rm.skytube.NEW_VIDEOS_NOTIFICATION_CHANNEL";
+	public static final int NEW_VIDEOS_NOTIFICATION_CHANNEL_ID = 1;
 
 	@Override
 	public void onCreate() {
 		super.onCreate();
 		skyTubeApp = this;
+		initChannels(this);
 	}
 
 
@@ -130,6 +141,53 @@ public class SkyTubeApp extends MultiDexApplication {
 	 */
 	public static boolean isTablet() {
 		return getContext().getResources().getBoolean(R.bool.is_tablet);
+	}
+
+	/**
+	 * Initialize Notification Channels (for Android OREO)
+	 * @param context
+	 */
+	@TargetApi(26)
+	private void initChannels(Context context) {
+
+		if(Build.VERSION.SDK_INT < 26) {
+			return;
+		}
+		NotificationManager notificationManager =
+						(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+		String channelId = NEW_VIDEOS_NOTIFICATION_CHANNEL;
+		CharSequence channelName = context.getString(R.string.notification_channel_feed_title);
+		int importance = NotificationManager.IMPORTANCE_LOW;
+		NotificationChannel notificationChannel = new NotificationChannel(channelId, channelName, importance);
+		notificationChannel.enableLights(true);
+		notificationChannel.setLightColor(Color.RED);
+		notificationChannel.enableVibration(false);
+		notificationManager.createNotificationChannel(notificationChannel);
+	}
+
+	/**
+	 * Get the stored interval (in milliseconds) to pass to the below method.
+	 */
+	public static void setFeedUpdateInterval() {
+		int feedUpdaterInterval = Integer.parseInt(SkyTubeApp.getPreferenceManager().getString(SkyTubeApp.getStr(R.string.pref_feed_notification_key), "0"));
+		setFeedUpdateInterval(feedUpdaterInterval);
+	}
+
+	/**
+	 * Setup the Feed Updater Service. First, cancel the Alarm that will trigger the next fetch (if there is one), then set the
+	 * Alarm with the passed interval, if it's greater than 0. 
+	 * @param interval The number of milliseconds between each time new videos for subscribed channels should be fetched.
+	 */
+	public static void setFeedUpdateInterval(int interval) {
+		Intent alarm = new Intent(getContext(), FeedUpdaterReceiver.class);
+		PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), 0, alarm, PendingIntent.FLAG_CANCEL_CURRENT);
+		AlarmManager alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
+
+		// Feed Auto Updater has been cancelled. If the selected interval is greater than 0, set the new alarm to call FeedUpdaterService
+		if(interval > 0) {
+			alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime()+interval, interval, pendingIntent);
+		}
 	}
 
 }
