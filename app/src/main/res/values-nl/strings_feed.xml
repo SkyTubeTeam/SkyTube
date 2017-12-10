@@ -8,4 +8,6 @@
 \n
 \nZodra u geabonneerd bent, worden alle in de afgelopen maand geüploade video\'s van uw geabonneerde kanalen hier weergegeven.</string>
 	<string name="import_subscriptions_from_youtube">Abonnementen importeren vanuit YouTube</string>
+<string name="notification_channel_feed_title">Feed-meldingen</string>
+	<string name="notification_new_videos_found">%d nieuwe video\'s gevonden van geabonneerde kanalen</string>
 </resources>
