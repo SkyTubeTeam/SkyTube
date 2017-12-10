@@ -1,2 +1,81 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="preferences">Tercihler</string>
+
+	<string name="pref_languages_category">Diller ve Bölgeler</string>
+	<string name="pref_title_preferred_regions">Tercih Edilen Bölge</string>
+	<string name="pref_summary_preferred_regions">Tercih edilen bölge seçiniz. Bu \"Önerilen\" videolar kategorisini süzmek için kullanılır.</string>
+
+	<string name="pref_title_preferred_languages">Tercih Edilen Dil(ler)</string>
+	<string name="pref_summary_preferred_languages">DENEYSEL: Bir ya da daha fazla tercih edilen dil seçiniz. Bu \"En Popüler\" video kategorisi ve video aramaları için kullanılır.</string>
+
+	<string name="pref_video_player_category">Video Oynatıcı</string>
+	<string name="pref_title_preferred_res">Tercih Edilen Çözünürlük</string>
+	<string name="pref_summary_preferred_res">Tercih edilen çözünürlüğüzü seçin</string>
+	<string name="pref_title_use_offical_player">Resmî YouTube oynatıcısını kullan</string>
+	<string name="pref_summary_use_offical_player">Tavsiye edilmez</string>
+
+	<string name="pref_backup_category">Yedekler</string>
+	<string name="pref_title_backup_dbs">Yedeklerin Veritabanları</string>
+	<string name="pref_summary_backup_dbs">Aboneliklerinizi ve Sık Kullanılanlar verilerinizi yedekleyin.</string>
+	<string name="pref_title_import_dbs">Yedeği İçe Aktar</string>
+	<string name="pref_summary_import_dbs">Abonelikler ve sık kullanılanlar verileri yedeğini içe aktar.</string>
+	<string name="databases_backing_up">Yedekleniyor…</string>
+	<string name="databases_backup_success">Veriler %s \'a kadar yedeklendi</string>
+	<string name="databases_backup_fail">Verilerinizin yedeklenmesi başarısız oldu.</string>
+	<string name="databases_import_select_backup">İçe aktarmak için yedek dosyası seçiniz</string>
+	<string name="databases_import_nothing_selected">Hiçbir şey seçilmedi…</string>
+	<string name="databases_import_warning_message">Abonelikler ve Sık Kullanılanlar veri tabanları seçilen yedekleme dosyasındaki veri ile değiştirilecek.
+\n
+\nDevam edilsin mi?</string>
+	<string name="continue_">Devam et</string>
+	<string name="databases_importing">İçe aktarılıyor…</string>
+	<string name="databases_import_fail">Verilerinizin içe aktarılması başarısız oldu.</string>
+	<string name="databases_import_success">Veriler başarıyla içe aktarıldı. Değişiklikleri uygulamak için uygulamayı tekrar başlatınız.</string>
+
+	<string name="pref_title_import_subs">Abonelikleri YouTube\'dan içe aktar</string>
+	<string name="pref_summary_import_subs">Abeoneliklerinizi YouTube hesabınızdan içe aktarın.</string>
+	<string name="subs_import_select_backup">İçe aktarmak için YouTube xml dosyası seçiniz</string>
+
+	<string name="pref_about_category">Hakkında</string>
+	<string name="pref_title_website">Web Sitesi</string>
+	<string name="pref_title_credits">Credits</string>
+	<string name="pref_summary_credits">Bu App\'i mümkün kılan kişi ve projeler.</string>
+	<string name="pref_title_version">Versiyon</string>
+	<string name="pref_title_updates">Güncelleştirmeler</string>
+	<string name="pref_summary_updates">Güncelleştirmeleri kontrol et.</string>
+	<string name="pref_title_license">Lisans</string>
+	<string name="pref_summary_license">GNU Genel Kamu Lisansı versiyon 3</string>
+	<string name="app_license">Copyright © 2015-2017 Ramon Mifsud
+\n 
+\nThis program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation (version 3 of the License).
+\nBu program özgür yazılımdır: Free Software Foundation tarafından yayımlanan GNU Genel Kamu Lisansı (versiyon 3) kapsamında Bu programı yeniden dağıtabilir ve/veya değiştirebilirsiniz. 
+\n 
+\nThis program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+\nBu program faydalı olması umuduyla dağıtılmaktadır. Ancak HİÇBİR GARANTİ OLMAKSIZIN; hatta imayla dahi TİCARİ ELVERİŞLİLİK ya da BELİRGİN BİR AMACA UYGUNLUK garantisi olmaksızın dağıtılmaktadır. Daha fazla detay için GNU GENEL Kamu Lisansına bakınız.
+\n 
+\nYou should have received a copy of the GNU General Public License along with this program. If not, see &lt;http://www.gnu.org/licenses/&gt;
+\nBu programla birlikte GNU Genel Kamu Lisansının bir koyasını almış olmalısınız. Eğer öyle değilse lütfen &lt;http://www.gnu.org/licenses/&gt; sayfasına bakınız</string>
+	<string name="i_agree">Kabul</string>
+
+
+	<string name="pref_other_category">Diğerleri</string>
+	<string name="pref_title_default_tab">Varsayılan Sekme</string>
+	<string name="pref_summary_default_tab">SkyTube başlatılırken gösterilecek varsayılan sekme: %s</string>
+	<string name="pref_title_feed_notification">Feed Otomatik Bildirimi</string>
+	<string name="pref_summary_feed_notification">Abone Olunan Kanallardan yeni videolar ne sıklıkta kontrol edilsin: %s</string>
+	<string name="pref_title_screen_orientation">Ekran Yönlendirme</string>
+	<string name="pref_summary_screen_orientation">Video oynatıcının yön belirlemesi</string>
+	<string name="pref_screen_landscape">Yatay</string>
+	<string name="pref_screen_portrait">Dikey</string>
+	<string name="pref_screen_auto">Otomatik</string>
+	<string name="pref_screen_sensor">Aygıt algılayıcısı</string>
+	<string name="pref_title_disable_immersive_mode">Immersive Modu Devre Dışı Bırak</string>
+	<string name="pref_summary_disable_immersive_mode">Yorumlar, video tanım simgeleri ve gezinti çubuğu her zaman gösterilsin</string>
+
+	<string name="pref_title_youtube_api_key">YouTube API Anahtarı</string>
+	<string name="pref_summary_youtube_api_key">Kendi YouTube Data API Anahtarınızı giriniz. Varsayılan olanı kullanmak için boş bırakınız.</string>
+	<string name="pref_youtube_api_key_error">Girdiğiniz API Anahtarı doğrulanırken bir hata oluştu.</string>
+	<string name="pref_youtube_api_key_custom">Anahtar geçerli. Yeni YouTube API Anahtarını kullanmak için APP\'i yeniden başlatın.</string>
+	<string name="pref_youtube_api_key_default">Varsayılan YouTube API anahtarına geri dönmek için APP\'i yeniden başlatın.</string>
+	<string name="restart">Yeniden Başlat</string>
+</resources>
