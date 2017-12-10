@@ -1,2 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="update_available">Güncelleştirme Mevcut</string>
+	<string name="update_dialog_msg">Yeni bir SkyTube Güncelleştirmesi mevcut. App %s versiyonuna güncelleştirilecek.</string>
+	<string name="up_to_date">Güncel</string>
+	<string name="up_to_date_msg">En son versiyon SkyTube kurulumuna sahipsiniz.</string>
+	<string name="update">Güncelle</string>
+	<string name="later">Sonra</string>
+	<string name="update_failure">App güncelleştirilemiyor.</string>
+	<string name="downloading">İndiriliyor…</string>
+</resources>
