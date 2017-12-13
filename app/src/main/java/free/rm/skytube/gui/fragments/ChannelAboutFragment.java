@@ -25,6 +25,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import free.rm.skytube.R;
+import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.YouTubeChannel;
 import free.rm.skytube.gui.businessobjects.fragments.TabFragment;
 
@@ -49,7 +50,7 @@ public class ChannelAboutFragment extends TabFragment {
 
 	@Override
 	public String getFragmentName() {
-		return getString(R.string.about);
+		return SkyTubeApp.getStr(R.string.about);
 	}
 
 }
