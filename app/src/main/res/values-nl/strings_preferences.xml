@@ -6,7 +6,7 @@
 	<string name="pref_summary_preferred_regions">Selecteer een voorkeursregio. Dit wordt gebruikt om video\'s te filteren in de \"Uitgelicht\"-categorie.</string>
 
 	<string name="pref_title_preferred_languages">Voorkeursta(a)l(en)</string>
-	<string name="pref_summary_preferred_languages">EXPERIMENTEEL: Selecteer één of meer voorkeurstalen. Dit wordt gebruikt om video\'s te filteren in de \"Meest populair\"-categorie en bij zoekopdrachten.</string>
+	<string name="pref_summary_preferred_languages">Experimenteel: Selecteer één of meer voorkeurstalen. Dit wordt gebruikt om video\'s te filteren in de \"Meest populair\"-categorie en bij zoekopdrachten.</string>
 
 	<string name="pref_video_player_category">Videospeler</string>
 	<string name="pref_title_preferred_res">Voorkeursresolutie</string>
@@ -30,11 +30,11 @@
 	<string name="continue_">Doorgaan</string>
 	<string name="databases_importing">Bezig met importeren…</string>
 	<string name="databases_import_fail">Het importeren is mislukt.</string>
-	<string name="databases_import_success">De databases zijn succesvol geïmporteerd. Herstart de app om de wijzigingen toe te passen.</string>
+	<string name="databases_import_success">De databases zijn geïmporteerd. Herstart de app om de wijzigingen toe te passen.</string>
 
 	<string name="pref_title_import_subs">Abonnementen importeren vanuit YouTube</string>
 	<string name="pref_summary_import_subs">Importeer de abonnementen uit uw YouTube-account.</string>
-	<string name="subs_import_select_backup">Selecteer het te importeren YouTube-xml-bestand</string>
+	<string name="subs_import_select_backup">Selecteer het te importeren YouTube-XML-bestand</string>
 
 	<string name="pref_about_category">Over</string>
 	<string name="pref_title_website">Website</string>
