@@ -59,6 +59,7 @@ public class ChannelPlaylistsFragment extends VideosGridFragment implements Play
 		return view;
 	}
 
+	@Override
 	public String getFragmentName() {
 		return SkyTubeApp.getStr(R.string.playlists);
 	}
