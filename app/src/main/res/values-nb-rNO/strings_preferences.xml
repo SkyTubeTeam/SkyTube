@@ -24,8 +24,8 @@
 	<string name="databases_backup_fail">Klarte ikke å sikkerhetskopiere dine databaser.</string>
 	<string name="databases_import_select_backup">Velg sikkerhetskopifil å importere</string>
 	<string name="databases_import_nothing_selected">Ingenting ble valgt…</string>
-	<string name="databases_import_warning_message">Abonnementer og bokmerkedatabaser vil bli ERSTATTET med data fra valgt sikkerhetskopifil.
-\n
+	<string name="databases_import_warning_message">Abonnementer og bokmerkedatabaser vil bli erstattet med data fra valgt sikkerhetskopifil. 
+\n 
 \nFortsett?</string>
 	<string name="continue_">Fortsett</string>
 	<string name="databases_importing">Importerer…</string>
@@ -81,5 +81,5 @@
 	<string name="pref_summary_disable_immersive_mode">Comments and video description icons and the navigation bar shall always be displayed</string>
 
 	<string name="pref_title_feed_notification">Automatisk kilde-merknad</string>
-	<string name="pref_summary_feed_notification">Hvor ofte det skal sjekkes for nye videoer i abonnerte kanaler: %s</string>
+	<string name="pref_summary_feed_notification">Hvor ofte det skal sjekkes for nye videoer fra abonnerte kanaler: %s</string>
 	</resources>
