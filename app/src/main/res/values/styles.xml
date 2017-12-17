@@ -47,6 +47,9 @@
 		<item name="android:layout_height">wrap_content</item>
 		<item name="android:textAppearance">@style/TextAppearance.AppCompat.Small</item>
 		<item name="android:textColor">@color/video_cell_text_main</item>
+	</style>
+
+	<style name="GridTitleTextView" parent="GridTextView">
 		<item name="android:background">@color/video_cell_background</item>
 	</style>
 

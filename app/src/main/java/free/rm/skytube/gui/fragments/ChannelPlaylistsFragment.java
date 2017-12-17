@@ -52,7 +52,7 @@ public class ChannelPlaylistsFragment extends VideosGridFragment implements Play
 		playlistsGridAdapter.setYouTubeChannel(channel);
 
 
-		gridView.setHasFixedSize(false);
+		gridView.setHasFixedSize(true);
 		gridView.setLayoutManager(new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.video_grid_num_columns)));
 		gridView.setAdapter(playlistsGridAdapter);
 

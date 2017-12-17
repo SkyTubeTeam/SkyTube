@@ -73,6 +73,7 @@ public abstract class VideosGridFragment extends BaseVideosGridFragment {
 
 		videoGridAdapter.setListener((MainActivityListener)getActivity());
 
+		gridView.setHasFixedSize(true);
 		gridView.setLayoutManager(new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.video_grid_num_columns)));
 		gridView.setAdapter(videoGridAdapter);
 
