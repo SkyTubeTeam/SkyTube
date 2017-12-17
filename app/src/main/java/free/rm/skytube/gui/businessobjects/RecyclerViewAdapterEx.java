@@ -19,7 +19,6 @@ package free.rm.skytube.gui.businessobjects;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -31,7 +30,6 @@ import java.util.List;
 public abstract class RecyclerViewAdapterEx<T, HolderType extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<HolderType> {
 
 	private Context context;
-	private LayoutInflater inflater;
 	protected List<T> list;
 
 	public RecyclerViewAdapterEx(Context context) {
@@ -40,7 +38,6 @@ public abstract class RecyclerViewAdapterEx<T, HolderType extends RecyclerView.V
 
 	public RecyclerViewAdapterEx(Context context, List<T> list) {
 		this.context  = context;
-		this.inflater = LayoutInflater.from(context);
 		this.list     = list;
 	}
 
@@ -50,13 +47,6 @@ public abstract class RecyclerViewAdapterEx<T, HolderType extends RecyclerView.V
 
 	public void setContext(Context context) {
 		this.context = context;
-	}
-
-	/**
-	 * @return An instance of {@link LayoutInflater}.
-	 */
-	protected LayoutInflater getLayoutInflater() {
-		return inflater;
 	}
 
 
@@ -81,11 +71,6 @@ public abstract class RecyclerViewAdapterEx<T, HolderType extends RecyclerView.V
 			this.list.addAll(l);
 			this.notifyDataSetChanged();
 		}
-	}
-
-	public void updateList(List<T> l) {
-		list = l;
-		notifyDataSetChanged();
 	}
 
 

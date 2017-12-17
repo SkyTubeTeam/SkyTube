@@ -73,7 +73,8 @@ public class YouTubeVideo implements Serializable {
 	 * like/dislike it. */
 	private String	viewsCount;
 	/** The date/time of when this video was published. */
-	private DateTime	publishDate;
+	private DateTime publishDate;
+	private String   publishDatePretty;
 	/** Thumbnail URL string. */
 	private String	thumbnailUrl;
 	/** The language of this video.  (This tends to be ISO 639-1).  */
@@ -86,8 +87,6 @@ public class YouTubeVideo implements Serializable {
 	/** Default preferred language(s) -- by default, no language shall be filtered out. */
 	private static final Set<String> defaultPrefLanguages = new HashSet<>(SkyTubeApp.getStringArrayAsList(R.array.languages_iso639_codes));
 
-	private static final String TAG = YouTubeVideo.class.getSimpleName();
-
 
 	public YouTubeVideo(Video video) {
 		this.id = video.getId();
@@ -96,7 +95,7 @@ public class YouTubeVideo implements Serializable {
 			this.title       = video.getSnippet().getTitle();
 			this.channelId   = video.getSnippet().getChannelId();
 			this.channelName = video.getSnippet().getChannelTitle();
-			publishDate = video.getSnippet().getPublishedAt();
+			setPublishDate(video.getSnippet().getPublishedAt());
 
 			if (video.getSnippet().getThumbnails() != null) {
 				Thumbnail thumbnail = video.getSnippet().getThumbnails().getHigh();
@@ -105,7 +104,7 @@ public class YouTubeVideo implements Serializable {
 			}
 
 			this.language = video.getSnippet().getDefaultAudioLanguage() != null ? video.getSnippet().getDefaultAudioLanguage()
-					: (video.getSnippet().getDefaultLanguage() != null ? video.getSnippet().getDefaultLanguage() : null);
+					: (video.getSnippet().getDefaultLanguage());
 
 			this.description = video.getSnippet().getDescription();
 		}
@@ -129,30 +128,6 @@ public class YouTubeVideo implements Serializable {
 
 			if (dislikeCount != null)
 				this.dislikeCount = String.format("%,d", video.getStatistics().getDislikeCount());
-		}
-	}
-
-	/**
-	 * Constructor to create a YouTube video object out of a PlaylistItem object
-	 * @param item YouTube Data API PlaylistItem object
-	 */
-	public YouTubeVideo(PlaylistItem item) {
-		this.id = item.getId();
-
-		if(item.getSnippet() != null) {
-			title = item.getSnippet().getTitle();
-			channelId = item.getSnippet().getChannelId();
-			channelName = item.getSnippet().getChannelTitle();
-			publishDate = item.getSnippet().getPublishedAt();
-
-			if(item.getSnippet().getThumbnails() != null) {
-				Thumbnail thumbnail = item.getSnippet().getThumbnails().getHigh();
-				if(thumbnail != null)
-					thumbnailUrl = thumbnail.getUrl();
-
-			}
-
-			this.description = item.getSnippet().getDescription();
 		}
 	}
 
@@ -230,7 +205,7 @@ public class YouTubeVideo implements Serializable {
 		if (duration.equals("0:00")) {
 			isLiveStream = true;
 			duration = SkyTubeApp.getStr(R.string.LIVE);
-			publishDate = new DateTime(new Date());    // set publishDate to current (as there is a bug in YouTube API in which live videos's date is incorrect)
+			setPublishDate(new DateTime(new Date()));    // set publishDate to current (as there is a bug in YouTube API in which live videos's date is incorrect)
 		} else {
 			isLiveStream = false;
 		}
@@ -238,13 +213,13 @@ public class YouTubeVideo implements Serializable {
 
 
 	/**
-	 * Gets the {@link #publishDate} as a pretty string.
+	 * Sets the publishDate and publishDatePretty.
 	 */
-	public String getPublishDatePretty() {
-		return (publishDate != null)
-								? new PrettyTimeEx().format(publishDate)
-								: "???";
+	private void setPublishDate(DateTime publishDate) {
+		this.publishDate = publishDate;
+		this.publishDatePretty = (publishDate != null)  ?  new PrettyTimeEx().format(publishDate)  :  "???";
 	}
+
 
 	public String getId() {
 		return id;
@@ -311,6 +286,13 @@ public class YouTubeVideo implements Serializable {
 
 	public DateTime getPublishDate() {
 		return publishDate;
+	}
+
+	/**
+	 * Gets the {@link #publishDate} as a pretty string.
+	 */
+	public String getPublishDatePretty() {
+		return publishDatePretty;
 	}
 
 	public String getThumbnailUrl() {

@@ -1,126 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-			  xmlns:app="http://schemas.android.com/apk/res-auto"
-			  android:orientation="vertical"
-			  android:layout_width="match_parent"
-			  android:layout_height="wrap_content"
-			  android:layout_margin="2dp">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_margin="2dp">
 
-	<free.rm.skytube.gui.businessobjects.VideoCellLayout
+	<android.support.constraint.ConstraintLayout
+		android:id="@+id/top_layout"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content">
+
 		<ImageView
 			android:id="@+id/thumbnail_image_view"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:scaleType="fitXY"
 			android:adjustViewBounds="true"
-			android:src="@drawable/thumbnail_default"
-			android:foreground="?android:attr/selectableItemBackground"/>
+			android:foreground="?android:attr/selectableItemBackground"
+			android:src="@drawable/thumbnail_default"/>
 
 		<TextView
 			android:id="@+id/title_text_view"
-			style="@style/GridTextView"
-			android:padding="10dp"
-			android:minLines="1"
-			android:maxLines="2"
-			android:text="Title"
+			style="@style/GridTitleTextView"
+			android:layout_alignParentLeft="true"
+			android:layout_alignParentStart="true"
 			android:layout_alignParentTop="true"
-			android:layout_alignParentLeft="true"
-			android:layout_alignParentStart="true"/>
+			android:padding="8dp"
+			android:maxLines="2"
+			android:minLines="1"
+			android:text="Title"/>
 
-		<LinearLayout
-			android:layout_width="match_parent"
+		<TextView
+			android:id="@+id/thumbs_up_text_view"
+			style="@style/GridMicroDetailsTextView"
+			android:layout_marginBottom="8dp"
+			android:layout_marginStart="8dp"
+			android:layout_marginLeft="8dp"
+			android:drawableLeft="@drawable/ic_thumb_up_white"
+			android:drawablePadding="5dp"
+			android:text="97%"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintStart_toStartOf="parent"/>
+
+		<TextView
+			android:id="@+id/video_duration_text_view"
+			style="@style/GridMicroDetailsTextView"
+			android:layout_marginBottom="8dp"
+			android:layout_marginEnd="8dp"
+			android:layout_marginRight="8dp"
+			android:text="19:17"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"/>
+
+	</android.support.constraint.ConstraintLayout>
+
+
+	<android.support.constraint.ConstraintLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:foreground="?android:attr/selectableItemBackground"
+		android:background="@color/video_cell_background"
+		android:id="@+id/channel_layout">
+
+		<TextView
+			android:id="@+id/channel_text_view"
+			style="@style/GridDetailsTextView"
+			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:orientation="vertical"
-			android:layout_alignBottom="@+id/thumbnail_image_view"
-			android:layout_alignParentLeft="true"
-			android:layout_alignParentStart="true">
+			android:layout_marginStart="8dp"
+			android:layout_marginLeft="8dp"
+			android:text="Channel"
+			app:layout_constraintStart_toStartOf="parent"/>
 
-			<LinearLayout
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:orientation="horizontal"
-				android:padding="8dp">
+		<TextView
+			android:id="@+id/views_text_view"
+			style="@style/GridDetailsTextView"
+			android:layout_width="wrap_content"
+			android:layout_marginBottom="8dp"
+			android:layout_marginStart="8dp"
+			android:layout_marginLeft="8dp"
+			android:text="199 Views"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintStart_toStartOf="parent"/>
 
-				<TextView
-					android:id="@+id/thumbs_up_text_view"
-					style="@style/GridMicroDetailsTextView"
-					android:drawableLeft="@drawable/ic_thumb_up_white"
-					android:drawablePadding="5dp"
-					android:text="97%"/>
+		<TextView
+			android:id="@+id/separator_text_view"
+			style="@style/GridDetailsTextView"
+			android:layout_width="wrap_content"
+			android:layout_marginBottom="8dp"
+			android:layout_marginStart="8dp"
+			android:layout_marginLeft="8dp"
+			android:text="|"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintStart_toEndOf="@+id/views_text_view"/>
 
-				<Space
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_weight="1"/>
+		<TextView
+			android:id="@+id/publish_date_text_view"
+			style="@style/GridDetailsTextView"
+			android:layout_width="wrap_content"
+			android:layout_marginBottom="8dp"
+			android:layout_marginStart="8dp"
+			android:layout_marginLeft="8dp"
+			android:text="x days ago"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintStart_toEndOf="@+id/separator_text_view"/>
 
-				<TextView
-					android:id="@+id/video_duration_text_view"
-					style="@style/GridMicroDetailsTextView"
-					android:layout_alignParentRight="true"
-					android:text="19:17"/>
-			</LinearLayout>
+		<ImageButton
+			android:id="@+id/options_button"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_marginBottom="8dp"
+			android:layout_marginEnd="8dp"
+			android:layout_marginStart="8dp"
+			android:layout_marginTop="8dp"
+			android:background="@android:color/transparent"
+			android:padding="5dp"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintHorizontal_bias="1.0"
+			app:layout_constraintStart_toEndOf="@+id/channel_text_view"
+			app:layout_constraintTop_toTopOf="parent"
+			app:srcCompat="@drawable/button_options"/>
 
-			<LinearLayout
-				android:orientation="horizontal"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:padding="10dp"
-				android:background="@color/video_cell_background">
+	</android.support.constraint.ConstraintLayout>
 
-				<LinearLayout
-					android:orientation="vertical"
-					android:layout_width="0dp"
-					android:layout_height="wrap_content"
-					android:layout_weight="1"
-					android:id="@+id/channel_layout">
-
-					<TextView
-						android:id="@+id/channel_text_view"
-						style="@style/GridDetailsTextView"
-						android:text="Channel"
-						android:foreground="?android:attr/selectableItemBackground"/>
-
-					<LinearLayout
-						android:layout_width="match_parent"
-						android:layout_height="match_parent"
-						android:orientation="horizontal">
-						<TextView
-							android:id="@+id/views_text_view"
-							android:layout_width="wrap_content"
-							style="@style/GridDetailsTextView"
-							android:text="199 Views"/>
-
-						<TextView
-							android:id="@+id/separator_text_view"
-							android:layout_width="wrap_content"
-							android:paddingLeft="10dp"
-							android:paddingRight="10dp"
-							style="@style/GridDetailsTextView"
-							android:text="|"/>
-
-						<TextView
-							android:id="@+id/publish_date_text_view"
-							android:layout_width="wrap_content"
-							style="@style/GridDetailsTextView"
-							android:text="x days ago"/>
-					</LinearLayout>
-
-				</LinearLayout>
-
-				<ImageButton
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					app:srcCompat="@drawable/button_options"
-					android:id="@+id/options_button"
-					android:background="@android:color/transparent"
-					android:layout_gravity="center_vertical"
-					android:padding="5dp"/>
-
-			</LinearLayout>
-		</LinearLayout>
-
-
-	</free.rm.skytube.gui.businessobjects.VideoCellLayout>
 </LinearLayout>

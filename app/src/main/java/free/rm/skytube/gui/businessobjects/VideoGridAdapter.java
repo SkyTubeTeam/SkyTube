@@ -141,7 +141,7 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<YouTubeVideo, GridVi
 	@Override
 	public GridViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 		View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.video_cell, parent, false);
-		return new GridViewHolder(v, listener);
+		return new GridViewHolder(v, listener, showChannelInfo);
 	}
 
 
@@ -167,7 +167,7 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<YouTubeVideo, GridVi
 	@Override
 	public void onBindViewHolder(GridViewHolder viewHolder, int position) {
 		if (viewHolder != null) {
-			viewHolder.updateInfo(get(position), getContext(), listener, showChannelInfo);
+			viewHolder.updateInfo(get(position), getContext(), listener);
 		}
 
 		// if it reached the bottom of the list, then try to get the next page of videos
