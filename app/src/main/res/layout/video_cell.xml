@@ -1,66 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:layout_margin="2dp">
+<android.support.constraint.ConstraintLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:id="@+id/top_layout"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:layout_margin="2dp">
 
-	<android.support.constraint.ConstraintLayout
-		android:id="@+id/top_layout"
+	<ImageView
+		android:id="@+id/thumbnail_image_view"
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content">
+		android:layout_height="wrap_content"
+		android:adjustViewBounds="true"
+		android:src="@drawable/thumbnail_default"/>
 
-		<ImageView
-			android:id="@+id/thumbnail_image_view"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:adjustViewBounds="true"
-			android:foreground="?android:attr/selectableItemBackground"
-			android:src="@drawable/thumbnail_default"/>
+	<TextView
+		android:id="@+id/title_text_view"
+		style="@style/GridTitleTextView"
+		android:layout_alignParentLeft="true"
+		android:layout_alignParentStart="true"
+		android:layout_alignParentTop="true"
+		android:padding="8dp"
+		android:maxLines="2"
+		android:minLines="1"
+		android:text="Title"/>
 
-		<TextView
-			android:id="@+id/title_text_view"
-			style="@style/GridTitleTextView"
-			android:layout_alignParentLeft="true"
-			android:layout_alignParentStart="true"
-			android:layout_alignParentTop="true"
-			android:padding="8dp"
-			android:maxLines="2"
-			android:minLines="1"
-			android:text="Title"/>
+	<TextView
+		android:id="@+id/thumbs_up_text_view"
+		style="@style/GridMicroDetailsTextView"
+		android:layout_marginBottom="8dp"
+		android:layout_marginStart="8dp"
+		android:layout_marginLeft="8dp"
+		android:drawableLeft="@drawable/ic_thumb_up_white"
+		android:drawablePadding="5dp"
+		android:text="97%"
+		app:layout_constraintBottom_toTopOf="@+id/channel_layout"
+		app:layout_constraintStart_toStartOf="parent"/>
 
-		<TextView
-			android:id="@+id/thumbs_up_text_view"
-			style="@style/GridMicroDetailsTextView"
-			android:layout_marginBottom="8dp"
-			android:layout_marginStart="8dp"
-			android:layout_marginLeft="8dp"
-			android:drawableLeft="@drawable/ic_thumb_up_white"
-			android:drawablePadding="5dp"
-			android:text="97%"
-			app:layout_constraintBottom_toBottomOf="parent"
-			app:layout_constraintStart_toStartOf="parent"/>
-
-		<TextView
-			android:id="@+id/video_duration_text_view"
-			style="@style/GridMicroDetailsTextView"
-			android:layout_marginBottom="8dp"
-			android:layout_marginEnd="8dp"
-			android:layout_marginRight="8dp"
-			android:text="19:17"
-			app:layout_constraintBottom_toBottomOf="parent"
-			app:layout_constraintEnd_toEndOf="parent"/>
-
-	</android.support.constraint.ConstraintLayout>
-
+	<TextView
+		android:id="@+id/video_duration_text_view"
+		style="@style/GridMicroDetailsTextView"
+		android:layout_marginEnd="8dp"
+		android:layout_marginRight="8dp"
+		android:text="19:17"
+		app:layout_constraintBaseline_toBaselineOf="@+id/thumbs_up_text_view"
+		app:layout_constraintEnd_toEndOf="parent"/>
 
 	<android.support.constraint.ConstraintLayout
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:foreground="?android:attr/selectableItemBackground"
 		android:background="@color/video_cell_background"
-		android:id="@+id/channel_layout">
+		android:id="@+id/channel_layout"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintStart_toStartOf="parent">
 
 		<TextView
 			android:id="@+id/channel_text_view"
@@ -69,8 +61,10 @@
 			android:layout_height="wrap_content"
 			android:layout_marginStart="8dp"
 			android:layout_marginLeft="8dp"
+			android:layout_marginTop="8dp"
 			android:text="Channel"
-			app:layout_constraintStart_toStartOf="parent"/>
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent"/>
 
 		<TextView
 			android:id="@+id/views_text_view"
@@ -125,4 +119,4 @@
 
 	</android.support.constraint.ConstraintLayout>
 
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>
