@@ -17,6 +17,10 @@
 
 package free.rm.skytube.gui.fragments;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -37,6 +41,7 @@ import butterknife.OnClick;
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
+import free.rm.skytube.businessobjects.FeedUpdaterService;
 import free.rm.skytube.businessobjects.GetSubscriptionVideosTask;
 import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.businessobjects.YouTubeChannel;
@@ -91,6 +96,8 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 	public void onResume() {
 		Log.d("SubsFeed", "On RESUME...");
 
+		getActivity().registerReceiver(feedUpdaterReceiver, new IntentFilter(FeedUpdaterService.NEW_SUBSCRIPTION_VIDEOS_FOUND));
+
 		super.onResume();
 		// this will detect whether we have previous instructed the app (via refreshSubscriptionsFeed())
 		// to refresh the subs feed
@@ -103,6 +110,12 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 			// refresh the subs feed
 			new SetVideosListTask().executeInParallel();
 		}
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		getActivity().unregisterReceiver(feedUpdaterReceiver);
 	}
 
 	/**
@@ -323,5 +336,16 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 		}
 
 	}
+
+	/**
+	 * BroadcastReceiver that will receive a message that new subscription videos have been found by the
+	 * {@link FeedUpdaterService}. The video grid will be updated when this happens.
+	 */
+	private BroadcastReceiver feedUpdaterReceiver = new BroadcastReceiver() {
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			new SetVideosListTask().executeInParallel();
+		}
+	};
 
 }
