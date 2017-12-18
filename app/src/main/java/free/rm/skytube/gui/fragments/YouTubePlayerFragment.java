@@ -27,6 +27,7 @@ import android.widget.VideoView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -36,23 +37,25 @@ import java.util.Locale;
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
-import free.rm.skytube.businessobjects.GetVideoDescription;
+import free.rm.skytube.businessobjects.GetVideoDescriptionTask;
 import free.rm.skytube.businessobjects.GetVideosDetailsByIDs;
 import free.rm.skytube.businessobjects.GetYouTubeChannelInfoTask;
 import free.rm.skytube.businessobjects.VideoStream.StreamMetaData;
-import free.rm.skytube.businessobjects.VideoStream.StreamMetaDataList;
 import free.rm.skytube.businessobjects.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTubeChannelInterface;
 import free.rm.skytube.businessobjects.YouTubeVideo;
 import free.rm.skytube.businessobjects.db.CheckIfUserSubbedToChannelTask;
+import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
+import free.rm.skytube.businessobjects.interfaces.GetDesiredStreamListener;
 import free.rm.skytube.gui.activities.MainActivity;
 import free.rm.skytube.gui.activities.ThumbnailViewerActivity;
 import free.rm.skytube.gui.businessobjects.CommentsAdapter;
-import free.rm.skytube.gui.businessobjects.fragments.ImmersiveModeFragment;
 import free.rm.skytube.gui.businessobjects.IsVideoBookmarkedTask;
+import free.rm.skytube.gui.businessobjects.Logger;
 import free.rm.skytube.gui.businessobjects.MediaControllerEx;
 import free.rm.skytube.gui.businessobjects.OnSwipeTouchListener;
 import free.rm.skytube.gui.businessobjects.SubscribeButton;
+import free.rm.skytube.gui.businessobjects.fragments.ImmersiveModeFragment;
 import hollowsoft.slidingdrawer.OnDrawerOpenListener;
 import hollowsoft.slidingdrawer.SlidingDrawer;
 
@@ -277,10 +280,11 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 
 				videoDescSubscribeButton.setChannel(YouTubePlayerFragment.this.youTubeChannel);
 				if (youTubeChannel != null) {
-					Glide.with(getActivity())
-									.load(youTubeChannel.getThumbnailNormalUrl())
-									.apply(new RequestOptions().placeholder(R.drawable.channel_thumbnail_default))
-									.into(videoDescChannelThumbnailImageView);
+					if(getActivity() != null)
+						Glide.with(getActivity())
+										.load(youTubeChannel.getThumbnailNormalUrl())
+										.apply(new RequestOptions().placeholder(R.drawable.channel_thumbnail_default))
+										.into(videoDescChannelThumbnailImageView);
 				}
 			}
 		}).executeInParallel(youTubeVideo.getChannelId());
@@ -452,6 +456,16 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 		}
 	}
 
+	@Override
+	public void onPrepareOptionsMenu(Menu menu) {
+		// Hide the download video option if mobile downloads are not allowed and the device is connected through mobile, and the video isn't already downloaded
+		boolean allowDownloadsOnMobile = SkyTubeApp.getPreferenceManager().getBoolean(SkyTubeApp.getStr(R.string.pref_key_allow_mobile_downloads), false);
+		if(!youTubeVideo.isDownloaded() && (SkyTubeApp.isConnectedToWiFi() || (SkyTubeApp.isConnectedToMobile() && allowDownloadsOnMobile))) {
+			menu.findItem(R.id.download_video).setVisible(true);
+		} else {
+			menu.findItem(R.id.download_video).setVisible(false);
+		}
+	}
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -472,8 +486,7 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 			case R.id.menu_reload_video:
-				// get a new video steam (as the current one might be performing poorly)
-				new GetStreamTask(youTubeVideo, true).executeInParallel();
+				loadVideo();
 				return true;
 
 			case R.id.menu_open_video_with:
@@ -503,6 +516,10 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 				startActivity(i);
 				return true;
 
+			case R.id.download_video:
+				youTubeVideo.downloadVideo(getContext());
+				return true;
+
 			default:
 				return super.onOptionsItemSelected(item);
 		}
@@ -524,153 +541,78 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 	private void loadVideo() {
 		// if the video is NOT live
 		if (!youTubeVideo.isLiveStream()) {
-			// get the video's steam
-			new GetStreamTask(youTubeVideo).executeInParallel();
+			videoView.pause();
+			videoView.stopPlayback();
+			loadingVideoView.setVisibility(View.VISIBLE);
+			if(youTubeVideo.isDownloaded()) {
+				Uri uri = youTubeVideo.getFileUri();
+				File file = new File(uri.getPath());
+				// If the file for this video has gone missing, remove it from the Database and then play remotely.
+				if(!file.exists()) {
+					DownloadedVideosDb.getVideoDownloadsDb().remove(youTubeVideo);
+					Toast.makeText(getContext(),
+									getContext().getString(R.string.playing_video_file_missing),
+									Toast.LENGTH_LONG).show();
+					loadVideo();
+				} else {
+					Logger.i(YouTubePlayerFragment.this, ">> PLAYING LOCALLY: %s", youTubeVideo);
+					videoView.setVideoURI(uri);
+				}
+			} else {
+				youTubeVideo.getDesiredStream(new GetDesiredStreamListener() {
+					@Override
+					public void onGetDesiredStream(StreamMetaData desiredStream) {
+						// play the video
+						Logger.i(YouTubePlayerFragment.this, ">> PLAYING: %s", desiredStream);
+						videoView.setVideoURI(desiredStream.getUri());
+					}
+
+					@Override
+					public void onGetDesiredStreamError(String errorMessage) {
+						if (errorMessage != null) {
+							new AlertDialog.Builder(getContext())
+											.setMessage(errorMessage)
+											.setTitle(R.string.error_video_play)
+											.setCancelable(false)
+											.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+												@Override
+												public void onClick(DialogInterface dialog, int which) {
+													getActivity().finish();
+												}
+											})
+											.show();
+						}
+					}
+				});
+			}
+
 			// get the video description
-			new GetVideoDescriptionTask().executeInParallel();
+			new GetVideoDescriptionTask(youTubeVideo, new GetVideoDescriptionTask.GetVideoDescriptionTaskListener() {
+				@Override
+				public void onFinished(String description) {
+					videoDescriptionTextView.setText(description);
+				}
+			}).executeInParallel();
 		} else {
 			// video is live:  ask the user if he wants to play the video using an other app
 			new AlertDialog.Builder(getContext())
-					.setMessage(R.string.warning_live_video)
-					.setTitle(R.string.error_video_play)
-					.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							closeActivity();
-						}
-					})
-					.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							playVideoExternally();
-							closeActivity();
-						}
-					})
-					.show();
+							.setMessage(R.string.warning_live_video)
+							.setTitle(R.string.error_video_play)
+							.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									closeActivity();
+								}
+							})
+							.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									playVideoExternally();
+									closeActivity();
+								}
+							})
+							.show();
 		}
-	}
-
-
-	////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-	/**
-	 * Given a YouTubeVideo, it will asynchronously get a list of streams (supplied by YouTube) and
-	 * then it asks the videoView to start playing a stream.
-	 */
-	private class GetStreamTask extends AsyncTaskParallel<Void, Exception, StreamMetaDataList> {
-
-		/** YouTube Video */
-		private YouTubeVideo	youTubeVideo;
-
-
-		/**
-		 * Returns a stream for the given video.
-		 *
-		 * @param youTubeVideo  YouTube video.
-		 */
-		public GetStreamTask(YouTubeVideo youTubeVideo) {
-			this(youTubeVideo, false);
-		}
-
-
-		/**
-		 * Returns a stream for the given video.  If getNewStream is set to true, then it will stop
-		 * the current video, get a NEW stream and then resume playing.
-		 *
-		 * @param youTubeVideo	YouTube video.
-		 * @param getNewStream	Set to true to stop the current video from playing and get a new
-		 *                      video stream.
-		 */
-		public GetStreamTask(YouTubeVideo youTubeVideo, boolean getNewStream) {
-			this.youTubeVideo = youTubeVideo;
-
-			if (getNewStream) {
-				boolean isVideoPlaying = videoView.isPlaying();
-
-				videoView.pause();
-				videoCurrentPosition = isVideoPlaying ? videoView.getCurrentPosition() : 0;
-				videoView.stopPlayback();
-				loadingVideoView.setVisibility(View.VISIBLE);
-			}
-		}
-
-
-		@Override
-		protected StreamMetaDataList doInBackground(Void... param) {
-			return youTubeVideo.getVideoStreamList();
-		}
-
-
-		@Override
-		protected void onPostExecute(StreamMetaDataList streamMetaDataList) {
-			String errorMessage = null;
-
-			if (streamMetaDataList.getErrorMessage() != null) {
-				// if the stream list is null, then it means an error has occurred
-				errorMessage = streamMetaDataList.getErrorMessage();
-			} else if (streamMetaDataList.size() <= 0) {
-				// if steam list if empty, then it means something went wrong...
-				errorMessage = String.format(getActivity().getString(R.string.error_video_streams_empty), youTubeVideo.getId());
-			} else {
-				Log.i(TAG, streamMetaDataList.toString());
-
-				// get the desired stream based on user preferences
-				StreamMetaData desiredStream = streamMetaDataList.getDesiredStream();
-
-				// play the video
-				Log.i(TAG, ">> PLAYING: " + desiredStream);
-				videoView.setVideoURI(desiredStream.getUri());
-			}
-
-			if (errorMessage != null) {
-				new AlertDialog.Builder(getContext())
-					.setMessage(errorMessage)
-					.setTitle(R.string.error_video_play)
-					.setCancelable(false)
-					.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							closeActivity();
-						}
-					})
-					.show();
-			}
-		}
-	}
-
-	////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-	/**
-	 * Get the video's description and set the appropriate text view.
-	 */
-	private class GetVideoDescriptionTask extends AsyncTaskParallel<Void, Void, String> {
-
-		@Override
-		protected String doInBackground(Void... params) {
-			GetVideoDescription getVideoDescription = new GetVideoDescription();
-			String description = SkyTubeApp.getStr(R.string.error_get_video_desc);
-
-			try {
-				getVideoDescription.init(youTubeVideo.getId());
-				List<YouTubeVideo> list = getVideoDescription.getNextVideos();
-
-				if (list.size() > 0) {
-					description = list.get(0).getDescription();
-				}
-			} catch (IOException e) {
-				Log.e(TAG, description + " - id=" + youTubeVideo.getId(), e);
-			}
-
-			return description;
-		}
-
-		@Override
-		protected void onPostExecute(String description) {
-			videoDescriptionTextView.setText(description);
-		}
-
 	}
 
 

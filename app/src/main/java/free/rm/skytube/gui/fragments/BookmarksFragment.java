@@ -30,9 +30,9 @@ import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.businessobjects.db.BookmarksDb;
+import free.rm.skytube.gui.businessobjects.BookmarksGridAdapter;
 import free.rm.skytube.gui.businessobjects.MainActivityListener;
 import free.rm.skytube.gui.businessobjects.SimpleItemTouchHelperCallback;
-import free.rm.skytube.gui.businessobjects.BookmarksGridAdapter;
 
 /**
  * Fragment that displays bookmarked videos.
@@ -100,7 +100,8 @@ public class BookmarksFragment extends VideosGridFragment implements BookmarksDb
 	@Override
 	public void onBookmarksDbUpdated() {
 		populateList();
-		bookmarksGridAdapter.refresh();
+		if(bookmarksGridAdapter != null)
+			bookmarksGridAdapter.refresh();
 	}
 
 	@Override
@@ -112,8 +113,6 @@ public class BookmarksFragment extends VideosGridFragment implements BookmarksDb
 	public String getFragmentName() {
 		return SkyTubeApp.getStr(R.string.bookmarks);
 	}
-
-
 
 	////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -149,4 +148,13 @@ public class BookmarksFragment extends VideosGridFragment implements BookmarksDb
 
 	}
 
+	@Override
+	public void onRefresh() {
+		bookmarksGridAdapter.refresh(new Runnable() {
+			@Override
+			public void run() {
+				swipeRefreshLayout.setRefreshing(false);
+			}
+		});
+	}
 }

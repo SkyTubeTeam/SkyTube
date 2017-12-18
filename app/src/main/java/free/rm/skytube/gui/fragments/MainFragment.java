@@ -25,14 +25,17 @@ import java.util.List;
 
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.db.BookmarksDb;
-import free.rm.skytube.gui.businessobjects.fragments.FragmentEx;
+import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
 import free.rm.skytube.gui.businessobjects.MainActivityListener;
 import free.rm.skytube.gui.businessobjects.SubsAdapter;
+import free.rm.skytube.gui.businessobjects.fragments.FragmentEx;
 
 public class MainFragment extends FragmentEx {
 	private RecyclerView				subsListView = null;
 	private SubsAdapter					subsAdapter  = null;
 	private ActionBarDrawerToggle		subsDrawerToggle;
+
+	public static final String REFRESH_VIDEO_GRID = "MainFragment.RefreshVideoGrid";
 
 	/** List of fragments that will be displayed as tabs. */
 	private List<VideosGridFragment>	videoGridFragmentsList = new ArrayList<>();
@@ -40,6 +43,7 @@ public class MainFragment extends FragmentEx {
 	private MostPopularVideosFragment	mostPopularVideosFragment = null;
 	private SubscriptionsFeedFragment   subscriptionsFeedFragment = null;
 	private BookmarksFragment			bookmarksFragment = null;
+	private DownloadedVideosFragment downloadedVideosFragment = null;
 
 	private VideosPagerAdapter			videosPagerAdapter = null;
 	private ViewPager					viewPager;
@@ -149,8 +153,6 @@ public class MainFragment extends FragmentEx {
 		return super.onOptionsItemSelected(item);
 	}
 
-
-
 	private class VideosPagerAdapter extends FragmentPagerAdapter {
 
 		public VideosPagerAdapter(FragmentManager fm) {
@@ -171,12 +173,18 @@ public class MainFragment extends FragmentEx {
 				BookmarksDb.getBookmarksDb().addListener(bookmarksFragment);
 			}
 
+			if(downloadedVideosFragment == null) {
+				downloadedVideosFragment = new DownloadedVideosFragment();
+				DownloadedVideosDb.getVideoDownloadsDb().setListener(downloadedVideosFragment);
+			}
+
 			// add fragments to list:  do NOT forget to ***UPDATE*** @string/default_tab and @string/default_tab_values
 			videoGridFragmentsList.clear();
 			videoGridFragmentsList.add(featuredVideosFragment);
 			videoGridFragmentsList.add(mostPopularVideosFragment);
 			videoGridFragmentsList.add(subscriptionsFeedFragment);
 			videoGridFragmentsList.add(bookmarksFragment);
+			videoGridFragmentsList.add(downloadedVideosFragment);
 		}
 
 		@Override

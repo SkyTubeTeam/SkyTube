@@ -36,4 +36,10 @@
 		android:entries="@array/feed_notification"
 		android:entryValues="@array/feed_notification_values" />
 
+	<CheckBoxPreference
+		android:defaultValue="false"
+		android:key="@string/pref_key_allow_mobile_downloads"
+		android:title="@string/pref_title_allow_mobile_downloads"
+		android:summary="@string/pref_summary_allow_mobile_downloads"/>
+
 </PreferenceScreen>

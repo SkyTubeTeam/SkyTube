@@ -41,6 +41,7 @@ import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTubePlaylist;
+import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
 import free.rm.skytube.gui.businessobjects.MainActivityListener;
 import free.rm.skytube.gui.businessobjects.YouTubePlayer;
 import free.rm.skytube.gui.businessobjects.updates.UpdatesCheckerTask;
@@ -85,6 +86,8 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 		}
 
 		SkyTubeApp.setFeedUpdateInterval();
+		// Delete any missing downloaded videos
+		new DownloadedVideosDb.RemoveMissingVideosTask().executeInParallel();
 
 		setContentView(R.layout.activity_main);
 		ButterKnife.bind(this);
@@ -100,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 
 			// If this Activity was called to view a particular channel, display that channel via ChannelBrowserFragment, instead of MainFragment
 			String action = getIntent().getAction();
-			if(action != null && action.equals(ACTION_VIEW_CHANNEL)) {
+			if(ACTION_VIEW_CHANNEL.equals(action)) {
 				dontAddToBackStack = true;
 				YouTubeChannel channel = (YouTubeChannel) getIntent().getSerializableExtra(ChannelBrowserFragment.CHANNEL_OBJ);
 				onChannelClick(channel);
