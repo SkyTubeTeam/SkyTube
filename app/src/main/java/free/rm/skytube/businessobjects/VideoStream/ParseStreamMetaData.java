@@ -42,22 +42,22 @@ import free.rm.skytube.R;
  */
 public class ParseStreamMetaData {
 
-	/** YouTube video URL (e.g. https://www.youtube.com/watch?v=XXXXXXXXX) */
-	private	String youtubeVideoUrl;
-
 	private static final String TAG = ParseStreamMetaData.class.getSimpleName();
+	/**
+	 * YouTube video URL (e.g. https://www.youtube.com/watch?v=XXXXXXXXX)
+	 */
+	private String youtubeVideoUrl;
 
 
 	/**
 	 * Initialise the {@link ParseStreamMetaData} object.
 	 *
-	 * @param videoId	The ID of the video we are going to get its streams.
+	 * @param videoId The ID of the video we are going to get its streams.
 	 */
 	public ParseStreamMetaData(String videoId) {
 		NewPipe.init(new HttpDownloader());
 		setYoutubeVideoUrl(videoId);
 	}
-
 
 
 	/**
@@ -70,20 +70,20 @@ public class ParseStreamMetaData {
 
 		try {
 			StreamingService youtube = NewPipe.getService("Youtube");
-			StreamExtractor  extractor = youtube.getStreamExtractorInstance(youtubeVideoUrl);
+			StreamExtractor extractor = youtube.getStreamExtractor(youtubeVideoUrl);
 
 			// actual extraction
-			StreamInfo streamInfo = StreamInfo.getVideoInfo(extractor);
+			StreamInfo streamInfo = StreamInfo.getInfo(extractor);
 
 			// if non critical exceptions happened during extraction they will be printed now
-			for(Throwable error : streamInfo.errors) {
+			for (Throwable error : streamInfo.errors) {
 				System.err.println("----------------");
 				error.printStackTrace();
 			}
 
 			// now print the stream url and we are done
-			for(VideoStream stream : streamInfo.video_streams) {
-				list.add( new StreamMetaData(stream) );
+			for (VideoStream stream : streamInfo.video_streams) {
+				list.add(new StreamMetaData(stream));
 			}
 		} catch (ContentNotAvailableException exception) {
 			list = new StreamMetaDataList(exception.getMessage());
@@ -96,11 +96,10 @@ public class ParseStreamMetaData {
 	}
 
 
-
 	/**
 	 * Given video ID it will set the video's page URL.
 	 *
-	 * @param videoId	The ID of the video.
+	 * @param videoId The ID of the video.
 	 */
 	private void setYoutubeVideoUrl(String videoId) {
 		this.youtubeVideoUrl = "https://www.youtube.com/watch?v=" + videoId;
