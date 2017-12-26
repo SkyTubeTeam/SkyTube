@@ -39,7 +39,6 @@ public class GetSubscriptionVideosTask extends AsyncTaskParallel<Void, Void, Voi
 	private GetSubscriptionVideosTaskListener listener;
 	private int numTasksLeft = 0;
 	private int numTasksFinished = 0;
-	boolean foundVideos = false;
 	boolean forceRefresh = false;
 	private List<YouTubeChannel> overriddenChannels;
 

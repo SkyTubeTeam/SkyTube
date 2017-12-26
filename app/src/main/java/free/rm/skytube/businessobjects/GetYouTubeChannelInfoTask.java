@@ -19,14 +19,10 @@ public class GetYouTubeChannelInfoTask extends AsyncTaskParallel<String, Void, Y
 
 	@Override
 	protected YouTubeChannel doInBackground(String... channelId) {
-		YouTubeChannel channel = new YouTubeChannel();
+		YouTubeChannel channel;
 
 		try {
-			// Try to initialise the channel (by retrieving info from the net).  If it fails, then
-			// set the channel to null...
-			if (!channel.init(channelId[0])) {
-				channel = null;
-			}
+			channel = new GetChannelsDetails().getYouTubeChannels(channelId[0]);
 		} catch (IOException e) {
 			Logger.e(this, "Unable to get channel info.  ChannelID=" + channelId[0], e);
 			channel = null;

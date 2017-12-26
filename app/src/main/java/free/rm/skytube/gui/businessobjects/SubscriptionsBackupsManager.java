@@ -42,6 +42,7 @@ import java.util.regex.Pattern;
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
+import free.rm.skytube.businessobjects.GetChannelsDetails;
 import free.rm.skytube.businessobjects.GetSubscriptionVideosTask;
 import free.rm.skytube.businessobjects.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTubeVideo;
@@ -445,8 +446,8 @@ public class SubscriptionsBackupsManager {
 				if(!channel.isChecked)
 					continue;
 				try {
-					YouTubeChannel channelObj = new YouTubeChannel();
-					if (channelObj.init(channel.channelId)) {
+					YouTubeChannel channelObj = new GetChannelsDetails().getYouTubeChannels(channel.channelId);
+					if (channelObj != null) {
 						channelsList.add(channelObj);
 						SubscriptionsDb.getSubscriptionsDb().subscribe(channelObj);
 						// Need to set this channelObj to subscribed, so that when videos are retrieved for the channel, they get saved into the database.

@@ -35,6 +35,7 @@ import java.util.Date;
 import java.util.List;
 
 import free.rm.skytube.app.SkyTubeApp;
+import free.rm.skytube.businessobjects.GetChannelsDetails;
 import free.rm.skytube.businessobjects.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTubeVideo;
 
@@ -121,6 +122,9 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 
 
 	/**
+	 * Returns a list of channels that the user subscribed to and will check each channel whether
+	 * new videos have been uploaded since last channel visit
+	 *
 	 * @return A list of channels that the user subscribed to.
 	 *
 	 * @throws IOException
@@ -131,36 +135,32 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 
 
 	/**
-	 * Returns A list of channels that the user subscribed to.
+	 * Returns a list of channels that the user subscribed to.
 	 *
-	 * @param shouldCheckForNewVideos  If true it will check if the channel has new videos since last channel visit.
+	 * @param shouldCheckForNewVideos  If true it will check if new videos have been uploaded to the
+	 *                                 subscribed channels since last channel visit.
 	 *
 	 * @return A list of channels that the user subscribed to.
 	 * @throws IOException
 	 */
 	public List<YouTubeChannel> getSubscribedChannels(boolean shouldCheckForNewVideos) throws IOException {
-		ArrayList<YouTubeChannel> subsChannels = new ArrayList<>();
+		List<YouTubeChannel> subsChannels = new ArrayList<>();
 		Cursor cursor = getReadableDatabase().query(SubscriptionsTable.TABLE_NAME, new String[]{SubscriptionsTable.COL_CHANNEL_ID}, null, null, null, null, SubscriptionsTable.COL_ID + " ASC");
 
 		if (cursor.moveToNext()) {
 			int             colChannelIdNum = cursor.getColumnIndexOrThrow(SubscriptionsTable.COL_CHANNEL_ID);
-			String          channelId;
-			YouTubeChannel  channel;
+			List<String>    channelIdsList = new ArrayList<>();
 
 			do {
-				channelId = cursor.getString(colChannelIdNum);
-				channel = new YouTubeChannel();
-
-				// Initialize the channel.  If the initialization is successful, then add the channel
-				// to the subsChannel list...
-				if (channel.init(channelId, true /* = user is subscribed to this channel*/, shouldCheckForNewVideos)) {
-					subsChannels.add(channel);
-				}
-
+				channelIdsList.add(cursor.getString(colChannelIdNum));
 			} while (cursor.moveToNext());
-		}
-		cursor.close();
 
+			// Initialize the channel.  If the initialization is successful, then add the channel
+			// to the subsChannel list...
+			subsChannels = new GetChannelsDetails().getYouTubeChannels(channelIdsList, true /* = user is subscribed to this channel*/, shouldCheckForNewVideos);
+		}
+
+		cursor.close();
 		return subsChannels;
 	}
 

@@ -4,6 +4,8 @@ v2.80 - XX XXX 201X:
 	* Immersive mode:  comments and video description can be viewed if the user swipes to the left and top respectively.
 	* Main and channel toolbar aesthetics enhancements.
 	* Users can now view channel's information/description via the about tab.
+	* Feed is refreshed automatically.
+	* Improved loading time for subscribed channels list
 	* Added Russian translations.
 	* Added Norwegian Bokmål translations.
 	* Added Arabic translations.

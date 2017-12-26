@@ -17,17 +17,12 @@
 
 package free.rm.skytube.businessobjects;
 
-import android.util.Log;
-
-import com.google.api.services.youtube.YouTube;
 import com.google.api.services.youtube.model.Channel;
 import com.google.api.services.youtube.model.ChannelBrandingSettings;
-import com.google.api.services.youtube.model.ChannelListResponse;
 import com.google.api.services.youtube.model.ChannelSnippet;
 import com.google.api.services.youtube.model.ChannelStatistics;
 import com.google.api.services.youtube.model.ThumbnailDetails;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +30,7 @@ import java.util.List;
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
+import free.rm.skytube.gui.businessobjects.Logger;
 
 /**
  * Represents a YouTube Channel.
@@ -54,94 +50,28 @@ public class YouTubeChannel implements Serializable {
 	private boolean	newVideosSinceLastVisit = false;
 	private List<YouTubeVideo> youTubeVideos = new ArrayList<>();
 
-	private static final String	TAG = YouTubeChannel.class.getSimpleName();
-
 
 	/**
-	 * Initialise this object by retrieving the channel information by communicating with YouTube.
-	 * This should not be called from the main thread.
+	 * Initialise this object.
 	 *
-	 * @param channelId	Channel ID
-	 *
-	 * @return True if the initialization was successful; false otherwise.
+	 * @param channel
+	 * @param isUserSubscribed	        if set to true, then it means the user is subscribed to this
+	 *                                  channel;  otherwise it means that we currently do not know
+	 *                                  if the user is subbed or not (hence we need to check).
+	 * @param shouldCheckForNewVideos   if set to true it will check with the database whether new
+	 *                                  videos have been published since last visit.
 	 */
-	public boolean init(String channelId) throws IOException {
-		return init(channelId, false, true);
-	}
+	public void init(Channel channel, boolean isUserSubscribed, boolean shouldCheckForNewVideos) {
+		parse(channel);
 
+		// get any channel info that is stored in the database
+		getChannelInfoFromDB(isUserSubscribed);
 
-	/**
-	 * Initialise this object by retrieving the channel information by communicating with YouTube.
-	 * This should not be called from the main thread.
-	 *
-	 * @param channelId			Channel ID
-	 * @param isUserSubscribed	if set to true, then it means the user is subscribed to this channel;
-	 *                          otherwise it means that we currently do not know if the user is
-	 *                          subbed or not (hence we need to check).
-	 *
-	 * @return True if the initialization was successful; false otherwise.
-	 * @throws IOException
-	 */
-	public boolean init(String channelId, boolean isUserSubscribed, boolean shouldCheckForNewVideos) throws IOException {
-		String  bannerType = SkyTubeApp.isTablet() ? "bannerTabletHdImageUrl" : "bannerMobileHdImageUrl";
-		boolean initSuccessful = false;
-
-		YouTube youtube = YouTubeAPI.create();
-		YouTube.Channels.List channelInfo = youtube.channels().list("snippet, statistics, brandingSettings");
-		channelInfo.setFields("items(id, snippet/title, snippet/description, snippet/thumbnails/default," +
-				"statistics/subscriberCount, brandingSettings/image/" + bannerType + ")," +
-				"nextPageToken");
-		channelInfo.setKey(YouTubeAPIKey.get().getYouTubeAPIKey());
-		channelInfo.setId(channelId);
-
-		// get this channel's info from the remote YouTube server
-		if (getChannelInfo(channelInfo)) {
-			this.id = channelId;
-
-			// get any channel info that is stored in the database
-			getChannelInfoFromDB(isUserSubscribed);
-
-			// if the user has subbed to this channel, then check if videos have been publish since
-			// the last visit to this channel
-			if (this.isUserSubscribed && shouldCheckForNewVideos) {
-				newVideosSinceLastVisit = SubscriptionsDb.getSubscriptionsDb().channelHasNewVideos(this);
-			}
-
-			initSuccessful = true;
+		// if the user has subbed to this channel, then check if videos have been publish since
+		// the last visit to this channel
+		if (this.isUserSubscribed && shouldCheckForNewVideos) {
+			newVideosSinceLastVisit = SubscriptionsDb.getSubscriptionsDb().channelHasNewVideos(this);
 		}
-
-		return initSuccessful;
-	}
-
-
-	/**
-	 * Get this channel's info from the remote YouTube server and then set the instance variables
-	 *
-	 * @param channelInfo
-	 *
-	 * @return True if successful; false otherwise.
-	 */
-	private boolean getChannelInfo(YouTube.Channels.List channelInfo) {
-		List<Channel>	channelList;
-		boolean			successful = false;
-
-		try {
-			// communicate with YouTube
-			ChannelListResponse response = channelInfo.execute();
-
-			// get channel
-			channelList = response.getItems();
-
-			// set the instance variables
-			parse(channelList.get(0));
-
-			// operation was successful
-			successful = true;
-		} catch (Throwable tr) {
-			Log.e(TAG, "Error has occurred while getting channel info for ChannelID=" + channelInfo.getId(), tr);
-		}
-
-		return successful;
 	}
 
 
@@ -151,6 +81,8 @@ public class YouTubeChannel implements Serializable {
 	 * @param channel
 	 */
 	private void parse(Channel channel) {
+		this.id = channel.getId();
+
 		ChannelSnippet snippet = channel.getSnippet();
 		if (snippet != null) {
 			this.title = snippet.getTitle();
@@ -176,7 +108,7 @@ public class YouTubeChannel implements Serializable {
 		ChannelStatistics statistics = channel.getStatistics();
 		if (statistics != null) {
 			this.totalSubscribers = String.format(SkyTubeApp.getStr(R.string.total_subscribers),
-																	statistics.getSubscriberCount());
+					statistics.getSubscriberCount());
 		}
 	}
 
@@ -194,7 +126,7 @@ public class YouTubeChannel implements Serializable {
 			try {
 				this.isUserSubscribed = SubscriptionsDb.getSubscriptionsDb().isUserSubscribedToChannel(id);
 			} catch (Throwable tr) {
-				Log.e(TAG, "Unable to check if user has subscribed to channel id=" + id, tr);
+				Logger.e(this, "Unable to check if user has subscribed to channel id=" + id, tr);
 				this.isUserSubscribed = false;
 			}
 		} else {
@@ -242,7 +174,7 @@ public class YouTubeChannel implements Serializable {
 		lastVisitTime = SubscriptionsDb.getSubscriptionsDb().updateLastVisitTime(id);
 
 		if (lastVisitTime < 0) {
-			Log.e(TAG, "Unable to update channel's last visit time.  ChannelID=" + id);
+			Logger.e(this, "Unable to update channel's last visit time.  ChannelID=" + id);
 		}
 	}
 
