@@ -29,6 +29,8 @@ import java.util.List;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 import free.rm.skytube.gui.businessobjects.GetSubscriptionVideosTaskListener;
+import free.rm.skytube.gui.businessobjects.Logger;
+import free.rm.skytube.gui.businessobjects.SubsAdapter;
 
 /**
  * A task that returns the videos of channel the user has subscribed too.  Used to detect if new
@@ -90,65 +92,91 @@ public class GetSubscriptionVideosTask extends AsyncTaskParallel<Void, Void, Voi
 
 	@Override
 	protected Void doInBackground(Void... voids) {
-		try {
-			List<YouTubeChannel> channels = overriddenChannels != null ? overriddenChannels : SubscriptionsDb.getSubscriptionsDb().getSubscribedChannels(false);
+		List<YouTubeChannel> channels = overriddenChannels != null ? overriddenChannels : getSubsLists();
 
-			/**
-			 * Get the last time all subscriptions were updated, and only fetch videos that were published after this.
-			 * Any new channels that have been subscribed to since the last time this refresh was done will have any
-			 * videos published after the last published time stored in the database, so we don't need to worry about missing
-			 * any.
-			 */
+		/*
+		 * Get the last time all subscriptions were updated, and only fetch videos that were published after this.
+		 * Any new channels that have been subscribed to since the last time this refresh was done will have any
+		 * videos published after the last published time stored in the database, so we don't need to worry about missing
+		 * any.
+		 */
 
-			// If forceRefresh is set to true, then set publishedAfter to null... this will force
-			// the app to update the feeds.  Otherwise, set the publishedAfter date to the last
-			// time we updated the feeds.
-			DateTime publishedAfter = forceRefresh ? null : getFeedsLastUpdateTime();
+		// If forceRefresh is set to true, then set publishedAfter to null... this will force
+		// the app to update the feeds.  Otherwise, set the publishedAfter date to the last
+		// time we updated the feeds.
+		DateTime publishedAfter = forceRefresh ? null : getFeedsLastUpdateTime();
 
-			for(final YouTubeChannel channel : channels) {
-				tasks.add(new GetChannelVideosTask(channel)
-					.setPublishedAfter(publishedAfter)
-					.setGetChannelVideosTaskInterface(new GetChannelVideosTaskInterface() {
-						@Override
-						public void onGetVideos(List<YouTubeVideo> videos) {
-							numTasksFinished++;
-							boolean videosDeleted = false;
-							if(numTasksFinished < numTasksLeft) {
-								if(tasks.size() > 0) {
-									// More channels to fetch videos from
-									tasks.get(0).executeInParallel();
-									tasks.remove(0);
-								}
-								if(listener != null)
-									listener.onChannelVideosFetched(channel, videos != null ? videos : new ArrayList<YouTubeVideo>(), videosDeleted);
-							} else {
-								videosDeleted = SubscriptionsDb.getSubscriptionsDb().trimSubscriptionVideos();
-
-								// All channels have finished querying. Update the last time this refresh was done.
-								updateFeedsLastUpdateTime();
-
-								if(listener != null)
-									listener.onChannelVideosFetched(channel, videos != null ? videos : new ArrayList<YouTubeVideo>(), videosDeleted);
-								if(listener != null)
-									listener.onAllChannelVideosFetched();
+		for(final YouTubeChannel channel : channels) {
+			tasks.add(new GetChannelVideosTask(channel)
+				.setPublishedAfter(publishedAfter)
+				.setGetChannelVideosTaskInterface(new GetChannelVideosTaskInterface() {
+					@Override
+					public void onGetVideos(List<YouTubeVideo> videos) {
+						numTasksFinished++;
+						boolean videosDeleted = false;
+						if(numTasksFinished < numTasksLeft) {
+							if(tasks.size() > 0) {
+								// More channels to fetch videos from
+								tasks.get(0).executeInParallel();
+								tasks.remove(0);
 							}
+							if(listener != null)
+								listener.onChannelVideosFetched(channel, videos != null ? videos : new ArrayList<YouTubeVideo>(), videosDeleted);
+						} else {
+							videosDeleted = SubscriptionsDb.getSubscriptionsDb().trimSubscriptionVideos();
+
+							// All channels have finished querying. Update the last time this refresh was done.
+							updateFeedsLastUpdateTime();
+
+							if(listener != null)
+								listener.onChannelVideosFetched(channel, videos != null ? videos : new ArrayList<YouTubeVideo>(), videosDeleted);
+							if(listener != null)
+								listener.onAllChannelVideosFetched();
 						}
-					})
-				);
-			}
-
-			numTasksLeft = tasks.size();
-
-			int numToStart = tasks.size() >= 4 ? 4 : tasks.size();
-
-			// Start fetching videos for up to 4 channels simultaneously.
-			for(int i=0;i<numToStart;i++) {
-				tasks.get(0).executeInParallel();
-				tasks.remove(0);
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
+					}
+				})
+			);
 		}
+
+		numTasksLeft = tasks.size();
+
+		int numToStart = tasks.size() >= 4 ? 4 : tasks.size();
+
+		// Start fetching videos for up to 4 channels simultaneously.
+		for(int i=0;i<numToStart;i++) {
+			tasks.get(0).executeInParallel();
+			tasks.remove(0);
+		}
+
 		return null;
 	}
+
+
+	/**
+	 * Returns the list of channels that the user is subscribed to.
+	 *
+	 * This task is also performed by {@link SubsAdapter}, so we need to wait for {@link SubsAdapter}
+	 * to finish retrieving the subbed channels and then return the list.
+	 *
+	 * @return List of YouTube channels the user is subscribed to.
+	 */
+	private List<YouTubeChannel> getSubsLists() {
+		SubsAdapter.Bool isSubsListRetrieved = SubsAdapter.get(null).isSubsListRetrieved();
+
+		synchronized (isSubsListRetrieved) {
+			// if the SubsAdapter is still retrieving the channels...
+			if (!isSubsListRetrieved.value) {
+				try {
+					// ...then we have to wait...
+					isSubsListRetrieved.wait();
+				} catch (InterruptedException e) {
+					Logger.e(this, "Something went wrong when waiting for the Subs Lists...", e);
+				}
+			}
+		}
+
+		// the list has now been retrieved; return it pls
+		return SubsAdapter.get(SkyTubeApp.getContext()).getList();
+	}
+
 }

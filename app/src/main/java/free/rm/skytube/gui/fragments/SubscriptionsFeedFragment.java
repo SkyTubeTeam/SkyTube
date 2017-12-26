@@ -167,7 +167,7 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 		numVideosFetched += videosFetched.size();
 		numChannelsFetched++;
 		if(progressDialog != null)
-			progressDialog.setContent(String.format(getContext().getString(R.string.fetched_videos_from_channels), numVideosFetched, numChannelsFetched, numChannelsSubscribed));
+			progressDialog.setContent(String.format(SkyTubeApp.getStr(R.string.fetched_videos_from_channels), numVideosFetched, numChannelsFetched, numChannelsSubscribed));
 		if(numChannelsFetched == numChannelsSubscribed) {
 			new Handler().postDelayed(new Runnable() {
 				@Override

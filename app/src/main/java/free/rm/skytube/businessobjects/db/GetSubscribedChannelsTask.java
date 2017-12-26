@@ -77,6 +77,11 @@ public class GetSubscribedChannelsTask extends AsyncTaskParallel<Void, Void, Lis
 		} else {
 			adapter.appendList(subbedChannelsList);
 		}
+
+		// Notify the SubsAdapter that the subbed channel list has been retrieved and populated.  If
+		// there is an error we still need to notify the adapter that the task has been completed
+		// from this end...
+		adapter.subsListRetrieved();
 	}
 
 }

@@ -43,7 +43,12 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 
 	private static SubsAdapter subsAdapter = null;
 	private static final String TAG = SubsAdapter.class.getSimpleName();
-	private MainActivityListener listener;
+
+	private MainActivityListener    listener;
+	/** Set to true if the users' subscriptions channels list has been fully retrieved and populated
+	 *  by querying the local database and YouTube servers... */
+	private final Bool              isSubsListRetrieved = new Bool(false);
+
 
 	private SubsAdapter(Context context, View progressBar) {
 		super(context);
@@ -164,16 +169,44 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 	}
 
 
+	public void refreshSubsList() {
+		clearList();
+		new GetSubscribedChannelsTask(this, null).executeInParallel();
+	}
+
+
+	/**
+	 * @return True if the subscriptions channel list has been fully retrieved and populated.
+	 */
+	public Bool isSubsListRetrieved() {
+		synchronized (isSubsListRetrieved) {
+			return isSubsListRetrieved;
+		}
+	}
+
+
+	/**
+	 * Method used to notify {@link SubsAdapter} that the subscriptions channels list has been
+	 * fully retrieved and populated.
+	 */
+	public void subsListRetrieved() {
+		synchronized (isSubsListRetrieved) {
+			isSubsListRetrieved.value = true;
+			isSubsListRetrieved.notify();
+		}
+	}
+
+
 	/////////////////////
 
-	protected class SubChannelViewHolder extends RecyclerView.ViewHolder {
+	class SubChannelViewHolder extends RecyclerView.ViewHolder {
 
 		private ImageView			thumbnailImageView;
 		private TextView			channelNameTextView;
 		private View				newVideosNotificationView;
 		private YouTubeChannel		channel = null;
 
-		public SubChannelViewHolder(View rowView) {
+		SubChannelViewHolder(View rowView) {
 			super(rowView);
 			thumbnailImageView  = rowView.findViewById(R.id.sub_channel_thumbnail_image_view);
 			channelNameTextView = rowView.findViewById(R.id.sub_channel_name_text_view);
@@ -189,7 +222,7 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 			});
 		}
 
-		public void updateInfo(YouTubeChannel channel) {
+		void updateInfo(YouTubeChannel channel) {
 			Glide.with(getContext().getApplicationContext())
 					.load(channel.getThumbnailNormalUrl())
 					.apply(new RequestOptions().placeholder(R.drawable.channel_thumbnail_default))
@@ -202,8 +235,18 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 
 	}
 
-	public void refreshSubsList() {
-		clearList();
-		new GetSubscribedChannelsTask(this, null).executeInParallel();
+
+	/**
+	 * Boolean class that is mutable.
+	 *
+	 * Required in order to perform Bool.wait() and Bool.notify().
+	 */
+	public static class Bool {
+		public boolean value = false;
+
+		public Bool(boolean value) {
+			this.value = value;
+		}
 	}
+
 }

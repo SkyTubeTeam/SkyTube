@@ -121,8 +121,17 @@ public abstract class RecyclerViewAdapterEx<T, HolderType extends RecyclerView.V
 		return list.size();
 	}
 
+
 	protected T get(int position) {
 		return list.get(position);
+	}
+
+
+	/**
+	 * @return The list that represents items stored/displayed by this adapter.
+	 */
+	public List<T> getList() {
+		return list;
 	}
 
 }
