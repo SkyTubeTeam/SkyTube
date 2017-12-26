@@ -67,6 +67,8 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 	View noSubscriptionsText;
 
 	private static final String KEY_SET_UPDATE_FEED_TAB = "SubscriptionsFeedFragment.KEY_SET_UPDATE_FEED_TAB";
+	/** Refresh the feed after 3 hours since the last one */
+	private static final int    REFRESH_TIME = 3;
 
 
 	@Override
@@ -76,7 +78,7 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 		// Only do an automatic refresh of subscriptions if it's been more than three hours since the last one was done.
 		long l = SkyTubeApp.getPreferenceManager().getLong(SkyTubeApp.KEY_SUBSCRIPTIONS_LAST_UPDATED, -1);
 		DateTime subscriptionsLastUpdated = new DateTime(l);
-		DateTime threeHoursAgo = new DateTime().minusHours(3);
+		DateTime threeHoursAgo = new DateTime().minusHours(REFRESH_TIME);
 		if(subscriptionsLastUpdated.isBefore(threeHoursAgo)) {
 			shouldRefresh = true;
 		}
