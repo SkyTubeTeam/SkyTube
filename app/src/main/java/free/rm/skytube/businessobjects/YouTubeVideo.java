@@ -99,6 +99,8 @@ public class YouTubeVideo implements Serializable {
 
 	/** A BroadcastReceiver to react to this Video finishing being downloaded. */
 	private transient VideoDownloadReceiver videoDownloadReceiver;
+	/* A number representing the unique download id that the DownloadManager uses when this video is downloaded. */
+	private transient long downloadId;
 
 	/** Default preferred language(s) -- by default, no language shall be filtered out. */
 	private static final Set<String> defaultPrefLanguages = new HashSet<>(SkyTubeApp.getStringArrayAsList(R.array.languages_iso639_codes));
@@ -533,7 +535,7 @@ public class YouTubeVideo implements Serializable {
 									.setDestinationInExternalFilesDir(context, "videos", getId() + ".mp4")
 									.setTitle(getChannelName())
 									.setDescription(getTitle());
-					dm.enqueue(request);
+					downloadId = dm.enqueue(request);
 				}
 
 				@Override
@@ -542,6 +544,7 @@ public class YouTubeVideo implements Serializable {
 					Toast.makeText(getContext(),
 									String.format(getContext().getString(R.string.video_download_stream_error), getTitle()),
 									Toast.LENGTH_LONG).show();
+					context.unregisterReceiver(videoDownloadReceiver);
 				}
 			});
 		}
@@ -558,20 +561,22 @@ public class YouTubeVideo implements Serializable {
 
 			if (DownloadManager.ACTION_DOWNLOAD_COMPLETE.equals(action)) {
 				long referenceId = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
+				// Check the referenceId for this download. Only if it matches the downloadId for *this* video do we want to save it to the database.
+				if(referenceId == downloadId) {
+					DownloadManager.Query query = new DownloadManager.Query();
+					query.setFilterById(referenceId);
+					Cursor c = dm.query(query);
+					if (c.moveToFirst()) {
+						int columnIndex = c.getColumnIndex(DownloadManager.COLUMN_STATUS);
+						if (DownloadManager.STATUS_SUCCESSFUL == c.getInt(columnIndex)) {
+							Uri uri = Uri.parse(c.getString(c.getColumnIndex(DownloadManager.COLUMN_LOCAL_URI)));
+							boolean success = DownloadedVideosDb.getVideoDownloadsDb().add(YouTubeVideo.this, uri.toString());
 
-				DownloadManager.Query query = new DownloadManager.Query();
-				query.setFilterById(referenceId);
-				Cursor c = dm.query(query);
-				if (c.moveToFirst()) {
-					int columnIndex = c.getColumnIndex(DownloadManager.COLUMN_STATUS);
-					if (DownloadManager.STATUS_SUCCESSFUL == c.getInt(columnIndex)) {
-						Uri uri = Uri.parse(c.getString(c.getColumnIndex(DownloadManager.COLUMN_LOCAL_URI)));
-						boolean success = DownloadedVideosDb.getVideoDownloadsDb().add(YouTubeVideo.this, uri.toString());
-
-						Toast.makeText(getContext(),
-										String.format(getContext().getString(success ? R.string.video_downloaded : R.string.video_download_stream_error), getTitle()),
-										Toast.LENGTH_LONG).show();
-						context.unregisterReceiver(videoDownloadReceiver);
+							Toast.makeText(getContext(),
+											String.format(getContext().getString(success ? R.string.video_downloaded : R.string.video_download_stream_error), getTitle()),
+											Toast.LENGTH_LONG).show();
+							context.unregisterReceiver(videoDownloadReceiver);
+						}
 					}
 				}
 			}
