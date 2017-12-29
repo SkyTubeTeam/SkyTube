@@ -11,7 +11,7 @@
 
 	<string name="pref_title_preferred_languages">Bevorzugte Sprache(n)</string>
 	<string name="pref_summary_preferred_languages">
-		EXPERIMENTELL: Wähle eine oder mehrere bevorzugte Sprachen. Dies wird zum
+		Experimentell: Wähle eine oder mehrere bevorzugte Sprachen. Dies wird zum
 		Filtern von Videos in der Kategorie \"Beliebt\" und für Videosuchen verwendet.
 	</string>
 
@@ -21,49 +21,48 @@
 	<string name="pref_title_use_offical_player">Offiziellen YouTube Player verwenden</string>
 	<string name="pref_summary_use_offical_player">Nicht empfohlen</string>
 
-	<string name="pref_backup_category">Backups</string>
-	<string name="pref_title_backup_dbs">Backup Databases</string>
-	<string name="pref_summary_backup_dbs">Backup your subscriptions and bookmarks databases.</string>
-	<string name="pref_title_import_dbs">Import Backup</string>
-	<string name="pref_summary_import_dbs">Import your subscriptions and bookmarks databases backup.</string>
-	<string name="databases_backing_up">Backing up…</string>
-	<string name="databases_backup_success">Databases backed up to %s</string>
-	<string name="databases_backup_fail">Failed to backup your databases.</string>
-	<string name="databases_import_select_backup">Select backup file to import</string>
-	<string name="databases_import_nothing_selected">Nothing was selected…</string>
-	<string name="databases_import_warning_message">The subscriptions and bookmarks databases will be REPLACED with the data of the selected backup file.\n\nContinue?</string>
-	<string name="continue_">Continue</string>
-	<string name="databases_importing">Importing…</string>
-	<string name="databases_import_fail">Failed to import your databases.</string>
-	<string name="databases_import_success">Databases imported successfully.  Restart the app to apply changes.</string>
+	<string name="pref_backup_category">Sicherungen</string>
+	<string name="pref_title_backup_dbs">Datenbanken sichern</string>
+	<string name="pref_summary_backup_dbs">Sichere deine Abo- und Lesezeichen-Datenbanken.</string>
+	<string name="pref_title_import_dbs">Sicherung importieren</string>
+	<string name="pref_summary_import_dbs">Importiere deine Abo- und Lesezeichen-Datenbanken.</string>
+	<string name="databases_backing_up">Sichere…</string>
+	<string name="databases_backup_success">Datenbanken gesichert nach %s</string>
+	<string name="databases_backup_fail">Fehler beim Sichern der Datenbanken.</string>
+	<string name="databases_import_select_backup">Sicherung zum Importieren auswählen</string>
+	<string name="databases_import_nothing_selected">Es wurde nichts ausgewählt…</string>
+	<string name="databases_import_warning_message">Die Abo- und Lesezeichen-Datenbanken werden mit denen aus der ausgewählten Sicherung ERSETZT.\n\Fortfahren?</string>
+	<string name="continue_">Fortfahren</string>
+	<string name="databases_importing">Importiere…</string>
+	<string name="databases_import_fail">Fehler beim Importieren der Datenbanken.</string>
+	<string name="databases_import_success">Die Datenbanken wurden erfolgreich importiert.  Starte die App neu um die Änderungen anzuwenden.</string>
 
-	<string name="pref_title_import_subs">Import Subscriptions From YouTube</string>
-	<string name="pref_summary_import_subs">Import your subscriptions from your YouTube account.</string>
-	<string name="subs_import_select_backup">Select YouTube xml file to import</string>
+	<string name="pref_title_import_subs">Abos von YouTube importieren</string>
+	<string name="pref_summary_import_subs">Importiere deine Abos aus deinem YouTube Account.</string>
+	<string name="subs_import_select_backup">YouTube XML Datei zum Importieren auswählen</string>
 
 	<string name="pref_about_category">Über</string>
 	<string name="pref_title_website">Webseite</string>
 	<string name="pref_title_credits">Credits</string>
-	<string name="pref_summary_credits">People and projects that made this app possible.</string>
+	<string name="pref_summary_credits">Menschen und Projekte die diese App möglich gemacht haben.</string>
 	<string name="pref_title_version">Version</string>
-	<string name="pref_title_updates">Updates</string>
-	<string name="pref_summary_updates">Check for updates.</string>
+	<string name="pref_title_updates">Aktualisierungen</string>
+	<string name="pref_summary_updates">Nach Aktualisierungen suchen.</string>
 	<string name="pref_title_license">Lizenz</string>
-	<string name="pref_summary_license">GNU General Public License version 3</string>
+	<string name="pref_summary_license">GNU General Public License Version 3</string>
 	<string name="app_license">
 		Copyright &#169; 2015-2017  Ramon Mifsud\n
 
-		\nThis program is free software: you can redistribute it and/or modify
-		it under the terms of the GNU General Public License as published by
-		the Free Software Foundation (version 3 of the License).\n
+		\nDieses Programm ist freie Software. Sie können es unter den Bedingungen der GNU General Public License, 
+		wie von der Free Software Foundation veröffentlicht, weitergeben und/oder modifizieren, 
+		entweder gemäß Version 3 der Lizenz oder (nach Ihrer Option) jeder späteren Version.\n
 
-		\nThis program is distributed in the hope that it will be useful,
-		but WITHOUT ANY WARRANTY; without even the implied warranty of
-		MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-		GNU General Public License for more details.\n
+		\nDie Veröffentlichung dieses Programms erfolgt in der Hoffnung, daß es Ihnen von Nutzen sein wird,
+		aber OHNE IRGENDEINE GARANTIE, sogar ohne die implizite Garantie der MARKTREIFE oder der
+		VERWENDBARKEIT FÜR EINEN BESTIMMTEN ZWECK. Details finden Sie in der GNU General Public License.\n
 
-		\nYou should have received a copy of the GNU General Public License
-		along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;
+		\nSie sollten ein Exemplar der GNU General Public License zusammen mit diesem Programm erhalten haben.
+		Falls nicht, siehe &lt;http://www.gnu.org/licenses/&gt;.
 	</string>
 	<string name="i_agree">Zustimmen</string>
 
@@ -73,21 +72,15 @@
 
 	<string name="pref_title_screen_orientation">Bildschirmausrichtung</string>
 	<string name="pref_summary_screen_orientation">Drehung des Videos</string>
-	<string name="pref_screen_landscape">Landscape</string>
-	<string name="pref_screen_portrait">Portrait</string>
+	<string name="pref_screen_landscape">Querformat</string>
+	<string name="pref_screen_portrait">Hochformat</string>
 	<string name="pref_screen_auto">Automatisch</string>
-	<string name="pref_screen_sensor">Gerätsensor</string>
-	<string-array name="screen_orientations_values">
-		<item>auto</item>
-		<item>landscape</item>
-		<item>portrait</item>
-		<item>sensor</item>
-	</string-array>
+	<string name="pref_screen_sensor">Gerätesensor</string>
 
 	<string name="pref_title_youtube_api_key">YouTube API Key</string>
-	<string name="pref_summary_youtube_api_key">Enter your own YouTube Data API Key.  Leave blank to use the default one.</string>
-	<string name="pref_youtube_api_key_error">An error occurred attempting to validate the API Key you entered.</string>
-	<string name="pref_youtube_api_key_custom">Key is valid.  Restart app to use the new YouTube API key.</string>
-	<string name="pref_youtube_api_key_default">Restart app to switch back to default YouTube API key.</string>
-	<string name="restart">Restart</string>
+	<string name="pref_summary_youtube_api_key">Gib deinen eigenen YouTube API Key ein.  Leer lassen um den Standard API Key zu verwenden.</string>
+	<string name="pref_youtube_api_key_error">Beim Versuch, den eingegebenen API Key zu validieren, ist ein Fehler aufgetreten.</string>
+	<string name="pref_youtube_api_key_custom">Der Key is gültig.  Starte die App neu um den neuen YouTube API Key zu verwenden.</string>
+	<string name="pref_youtube_api_key_default">Starte die App neu um zum Standard YouTube API Key zurück zu wechseln.</string>
+	<string name="restart">Neustarten</string>
 </resources>
