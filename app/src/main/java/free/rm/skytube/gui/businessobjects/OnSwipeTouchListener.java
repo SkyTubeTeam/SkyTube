@@ -23,7 +23,7 @@ import android.view.MotionEvent;
 import android.view.View;
 
 /**
- * Detects user's swipe motions.
+ * Detects user's swipe motions and taps.
  */
 public abstract class OnSwipeTouchListener implements View.OnTouchListener {
 
@@ -37,29 +37,69 @@ public abstract class OnSwipeTouchListener implements View.OnTouchListener {
 
 	@Override
 	public boolean onTouch(View v, MotionEvent event) {
-		return gestureDetector.onTouchEvent(event);
+		gestureDetector.onTouchEvent(event);
+		return true;
 	}
 
 
 	/**
 	 * User swiped to the right.
+	 *
+	 * @return True if the event was consumed.
 	 */
-	public abstract void onSwipeRight();
+	public boolean onSwipeRight() {
+		return false;
+	}
+
 
 	/**
 	 * User swiped to the left.
+	 *
+	 * @return True if the event was consumed.
 	 */
-	public abstract void onSwipeLeft();
+	public boolean onSwipeLeft() {
+		return false;
+	}
+
 
 	/**
 	 * User swiped to the top.
+	 *
+	 * @return True if the event was consumed.
 	 */
-	public abstract void onSwipeTop();
+	public boolean onSwipeTop() {
+		return false;
+	}
+
 
 	/**
 	 * User swiped to the bottom.
+	 *
+	 * @return True if the event was consumed.
 	 */
-	public abstract void onSwipeBottom();
+	public boolean onSwipeBottom() {
+		return false;
+	}
+
+
+	/**
+	 * User double tapped.
+	 *
+	 * @return True if the event was consumed.
+	 */
+	public boolean onDoubleTap() {
+		return false;
+	}
+
+
+	/**
+	 * User single tapped.
+	 *
+	 * @return True if the event was consumed.
+	 */
+	public boolean onSingleTap() {
+		return false;
+	}
 
 
 
@@ -70,15 +110,9 @@ public abstract class OnSwipeTouchListener implements View.OnTouchListener {
 		private static final int SWIPE_THRESHOLD = 100;
 		private static final int SWIPE_VELOCITY_THRESHOLD = 100;
 
-		@Override
-		public boolean onDown(MotionEvent e) {
-			return false;   // do not process/handle taps/clicks...
-		}
 
 		@Override
 		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-			boolean eventConsumed = false;  // set to true if the event is consumed
-
 			try {
 				float diffY = e2.getY() - e1.getY();
 				float diffX = e2.getX() - e1.getX();
@@ -86,25 +120,35 @@ public abstract class OnSwipeTouchListener implements View.OnTouchListener {
 				if (Math.abs(diffX) > Math.abs(diffY)) {
 					if (Math.abs(diffX) > SWIPE_THRESHOLD && Math.abs(velocityX) > SWIPE_VELOCITY_THRESHOLD) {
 						if (diffX > 0) {
-							onSwipeRight();
+							return onSwipeRight();
 						} else {
-							onSwipeLeft();
+							return onSwipeLeft();
 						}
-						eventConsumed = true;
 					}
 				} else if (Math.abs(diffY) > SWIPE_THRESHOLD && Math.abs(velocityY) > SWIPE_VELOCITY_THRESHOLD) {
 					if (diffY > 0) {
-						onSwipeBottom();
+						return onSwipeBottom();
 					} else {
-						onSwipeTop();
+						return onSwipeTop();
 					}
-					eventConsumed = true;
 				}
 			} catch (Exception exception) {
 				Logger.e(this, "onFling() exception caught", exception);
 			}
 
-			return eventConsumed;
+			return false;   // event not consumed
+		}
+
+
+		@Override
+		public boolean onDoubleTap(MotionEvent e) {
+			return OnSwipeTouchListener.this.onDoubleTap();
+		}
+
+
+		@Override
+		public boolean onSingleTapConfirmed(MotionEvent e) {
+			return onSingleTap();
 		}
 	}
 

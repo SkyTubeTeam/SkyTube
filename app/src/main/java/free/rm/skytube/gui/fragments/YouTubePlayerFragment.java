@@ -2,18 +2,21 @@ package free.rm.skytube.gui.fragments;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -102,6 +105,7 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 	private static final int NAVBAR_VISIBILITY_TIMEOUT = 500;
 	private static final String VIDEO_CURRENT_POSITION = "YouTubePlayerFragment.VideoCurrentPosition";
 	private static final String TAG = YouTubePlayerFragment.class.getSimpleName();
+	private static final String TUTORIAL_COMPLETED = "YouTubePlayerFragment.TutorialCompleted";
 
 
 	@Override
@@ -121,99 +125,8 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 			videoCurrentPosition = savedInstanceState.getInt(VIDEO_CURRENT_POSITION, 0);
 
 		if (youTubeVideo == null) {
-			loadingVideoView = view.findViewById(R.id.loadingVideoView);
-
-			videoView = view.findViewById(R.id.video_view);
-			// videoView should log any errors
-			videoView.setOnErrorListener(new MediaPlayer.OnErrorListener() {
-				@Override
-				public boolean onError(MediaPlayer mp, int what, int extra) {
-					String msg = String.format(Locale.getDefault(),
-							"Error has occurred while playing video, url='%s', what=%d, extra=%d",
-							youTubeVideo != null ? youTubeVideo.getVideoUrl() : "null",
-							what,
-							extra);
-					Log.e(TAG, msg);
-					return false;
-				}
-			});
-			// play the video once its loaded
-			videoView.setOnPreparedListener(this);
-
-			// setup the media controller (will control the video playing/pausing)
-			mediaController = new MediaControllerEx(getActivity(), videoView);
-			// ensure that the mediaController is always above the NavBar (given that the NavBar can
-			// be in immersive mode)
-			if (userWantsImmersiveMode()) {
-				mediaController.setPadding(0, 0, 0, getNavBarHeightInPixels());
-			}
-
-			voidView = view.findViewById(R.id.void_view);
-			voidView.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					showOrHideHud();
-				}
-			});
-			// detect if user's swipes motions
-			voidView.setOnTouchListener(new OnSwipeTouchListener(getActivity()) {
-				@Override
-				public void onSwipeRight() {
-				}
-
-				@Override
-				public void onSwipeLeft() {
-					commentsDrawer.animateOpen();
-				}
-
-				@Override
-				public void onSwipeTop() {
-					videoDescriptionDrawer.animateOpen();
-				}
-
-				@Override
-				public void onSwipeBottom() {
-				}
-			});
-
-			videoDescriptionDrawer = view.findViewById(R.id.des_drawer);
-			videoDescriptionDrawerIconView = view.findViewById(R.id.video_desc_icon_image_view);
-			videoDescTitleTextView = view.findViewById(R.id.video_desc_title);
-			videoDescChannelThumbnailImageView = view.findViewById(R.id.video_desc_channel_thumbnail_image_view);
-			videoDescChannelThumbnailImageView.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					if (youTubeChannel != null) {
-						Intent i = new Intent(getActivity(), MainActivity.class);
-						i.setAction(MainActivity.ACTION_VIEW_CHANNEL);
-						i.putExtra(ChannelBrowserFragment.CHANNEL_OBJ, youTubeChannel);
-						startActivity(i);
-					}
-				}
-			});
-			videoDescChannelTextView = view.findViewById(R.id.video_desc_channel);
-			videoDescViewsTextView = view.findViewById(R.id.video_desc_views);
-			videoDescLikesTextView = view.findViewById(R.id.video_desc_likes);
-			videoDescDislikesTextView = view.findViewById(R.id.video_desc_dislikes);
-			videoDescRatingsDisabledTextView = view.findViewById(R.id.video_desc_ratings_disabled);
-			videoDescPublishDateTextView = view.findViewById(R.id.video_desc_publish_date);
-			videoDescriptionTextView = view.findViewById(R.id.video_desc_description);
-			videoDescLikesBar = view.findViewById(R.id.video_desc_likes_bar);
-			videoDescSubscribeButton = view.findViewById(R.id.video_desc_subscribe_button);
-
-			commentsExpandableListView = view.findViewById(R.id.commentsExpandableListView);
-			commentsProgressBar = view.findViewById(R.id.comments_progress_bar);
-			noVideoCommentsView = view.findViewById(R.id.no_video_comments_text_view);
-			commentsDrawer = view.findViewById(R.id.comments_drawer);
-			commentsDrawer.setOnDrawerOpenListener(new OnDrawerOpenListener() {
-				@Override
-				public void onDrawerOpened() {
-					if (commentsAdapter == null) {
-						commentsAdapter = new CommentsAdapter(getActivity(), youTubeVideo.getId(), commentsExpandableListView, commentsProgressBar, noVideoCommentsView);
-					}
-				}
-			});
-			commentsDrawerIconView = view.findViewById(R.id.comments_icon_image_view);
+			// initialise the views
+			initViews(view);
 
 			// hide action bar
 			getSupportActionBar().hide();
@@ -230,9 +143,117 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 				// ... or the video URL is passed to SkyTube via another Android app
 				new GetVideoDetailsTask().executeInParallel();
 			}
+
 		}
 
 		return view;
+	}
+
+
+	/**
+	 * Initialise the views.
+	 *
+	 * @param view Fragment view.
+	 */
+	private void initViews(View view) {
+		loadingVideoView = view.findViewById(R.id.loadingVideoView);
+
+		videoView = view.findViewById(R.id.video_view);
+		// videoView should log any errors
+		videoView.setOnErrorListener(new MediaPlayer.OnErrorListener() {
+			@Override
+			public boolean onError(MediaPlayer mp, int what, int extra) {
+				String msg = String.format(Locale.getDefault(),
+						"Error has occurred while playing video, url='%s', what=%d, extra=%d",
+						youTubeVideo != null ? youTubeVideo.getVideoUrl() : "null",
+						what,
+						extra);
+				Log.e(TAG, msg);
+				return false;
+			}
+		});
+		// play the video once its loaded
+		videoView.setOnPreparedListener(this);
+
+		// setup the media controller (will control the video playing/pausing)
+		mediaController = new MediaControllerEx(getActivity(), videoView);
+		// ensure that the mediaController is always above the NavBar (given that the NavBar can
+		// be in immersive mode)
+		if (userWantsImmersiveMode()) {
+			mediaController.setPadding(0, 0, 0, getNavBarHeightInPixels());
+		}
+
+		voidView = view.findViewById(R.id.void_view);
+		// detect if user's swipes motions and taps...
+		voidView.setOnTouchListener(new OnSwipeTouchListener(getActivity()) {
+
+			@Override
+			public boolean onSwipeLeft() {
+				commentsDrawer.animateOpen();
+				return true;
+			}
+
+			@Override
+			public boolean onSwipeTop() {
+				videoDescriptionDrawer.animateOpen();
+				return true;
+			}
+
+			@Override
+			public boolean onDoubleTap() {
+				if (videoView.isPlaying()) {
+					videoView.pause();
+				} else {
+					videoView.start();
+				}
+				return true;
+			}
+
+			@Override
+			public boolean onSingleTap() {
+				showOrHideHud();
+				return true;
+			}
+		});
+
+		videoDescriptionDrawer = view.findViewById(R.id.des_drawer);
+		videoDescriptionDrawerIconView = view.findViewById(R.id.video_desc_icon_image_view);
+		videoDescTitleTextView = view.findViewById(R.id.video_desc_title);
+		videoDescChannelThumbnailImageView = view.findViewById(R.id.video_desc_channel_thumbnail_image_view);
+		videoDescChannelThumbnailImageView.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (youTubeChannel != null) {
+					Intent i = new Intent(getActivity(), MainActivity.class);
+					i.setAction(MainActivity.ACTION_VIEW_CHANNEL);
+					i.putExtra(ChannelBrowserFragment.CHANNEL_OBJ, youTubeChannel);
+					startActivity(i);
+				}
+			}
+		});
+		videoDescChannelTextView = view.findViewById(R.id.video_desc_channel);
+		videoDescViewsTextView = view.findViewById(R.id.video_desc_views);
+		videoDescLikesTextView = view.findViewById(R.id.video_desc_likes);
+		videoDescDislikesTextView = view.findViewById(R.id.video_desc_dislikes);
+		videoDescRatingsDisabledTextView = view.findViewById(R.id.video_desc_ratings_disabled);
+		videoDescPublishDateTextView = view.findViewById(R.id.video_desc_publish_date);
+		videoDescriptionTextView = view.findViewById(R.id.video_desc_description);
+		videoDescLikesBar = view.findViewById(R.id.video_desc_likes_bar);
+		videoDescSubscribeButton = view.findViewById(R.id.video_desc_subscribe_button);
+
+		commentsExpandableListView = view.findViewById(R.id.commentsExpandableListView);
+		commentsProgressBar = view.findViewById(R.id.comments_progress_bar);
+		noVideoCommentsView = view.findViewById(R.id.no_video_comments_text_view);
+		commentsDrawer = view.findViewById(R.id.comments_drawer);
+		commentsDrawer.setOnDrawerOpenListener(new OnDrawerOpenListener() {
+			@Override
+			public void onDrawerOpened() {
+				if (commentsAdapter == null) {
+					commentsAdapter = new CommentsAdapter(getActivity(), youTubeVideo.getId(), commentsExpandableListView, commentsProgressBar, noVideoCommentsView);
+				}
+			}
+		});
+		commentsDrawerIconView = view.findViewById(R.id.comments_icon_image_view);
 	}
 
 
@@ -300,7 +321,29 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 	public void onPrepared(MediaPlayer mediaPlayer) {
 		loadingVideoView.setVisibility(View.GONE);
 		videoView.seekTo(videoCurrentPosition);
-		videoView.start();
+
+		// was the video player tutorial displayed before?
+		if (wasTutorialDisplayedBefore()) {
+			videoView.start();
+		} else {
+			// display the tutorial dialog boxes, then play the video
+			displayTutorialDialog(R.string.tutorial_comments_icon, Gravity.TOP | Gravity.RIGHT, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					displayTutorialDialog(R.string.tutorial_video_info_icon, Gravity.BOTTOM | Gravity.LEFT, new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							displayTutorialDialog(R.string.tutorial_pause_video, Gravity.CENTER, new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									videoView.start();
+								}
+							});
+						}
+					});
+				}
+			});
+		}
 		showHud();
 	}
 
@@ -621,6 +664,50 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 			videoDescriptionTextView.setText(description);
 		}
 
+	}
+
+
+	/**
+	 * Will check whether the video player tutorial was completed before.  If no, it will return
+	 * false and will save the value accordingly.
+	 *
+	 * @return True if the tutorial was completed in the past.
+	 */
+	private boolean wasTutorialDisplayedBefore() {
+		SharedPreferences preferences = SkyTubeApp.getPreferenceManager();
+		boolean wasTutorialDisplayedBefore = preferences.getBoolean(TUTORIAL_COMPLETED, false);
+
+		preferences.edit().putBoolean(TUTORIAL_COMPLETED, true).commit();
+
+		return wasTutorialDisplayedBefore;
+	}
+
+
+	/**
+	 * Display a tutorial dialog.
+	 *
+	 * @param messageResId          Message resource ID.
+	 * @param dialogGravityFlags    Gravity flags, e.g. Gravity.RIGHT.
+	 * @param onClickListener       onClickListener which will be called once the user taps on OK
+	 *                              button.
+	 */
+	private void displayTutorialDialog(int messageResId, int dialogGravityFlags, DialogInterface.OnClickListener onClickListener) {
+		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+		builder.setMessage(messageResId);
+		builder.setPositiveButton(R.string.ok, onClickListener);
+
+		AlertDialog dialog = builder.create();
+		WindowManager.LayoutParams wmlp = dialog.getWindow().getAttributes();
+
+		if (wmlp != null) {
+			if (dialogGravityFlags != Gravity.CENTER) {
+				wmlp.gravity = dialogGravityFlags;
+				wmlp.x = 50;   // x position
+				wmlp.y = 50;   // y position
+			}
+
+			dialog.show();
+		}
 	}
 
 
