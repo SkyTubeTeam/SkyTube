@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="bookmarks">Merkliste</string>
+	<string name="bookmarks">Lesezeichen</string>
 
-	<string name="bookmark">Bookmark</string>
+	<string name="bookmark">Merken</string>
 	<string name="video_bookmarked">Video gemerkt</string>
 	<string name="video_bookmarked_error">Fehler beim Merken des Videos.</string>
 
-	<string name="unbookmark">Unbookmark</string>
+	<string name="unbookmark">Vergessen</string>
 	<string name="video_unbookmarked">Video vergessen</string>
 	<string name="video_unbookmarked_error">Fehler beim Vergessen des Videos.</string>
 
