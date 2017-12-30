@@ -16,11 +16,12 @@ import java.util.List;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.YouTubeVideo;
+import free.rm.skytube.businessobjects.interfaces.OrderableDatabase;
 
 /**
  * A database (DB) that stores user's downloaded videos.
  */
-public class DownloadedVideosDb extends SQLiteOpenHelperEx {
+public class DownloadedVideosDb extends SQLiteOpenHelperEx implements OrderableDatabase {
 	private static volatile DownloadedVideosDb downloadsDb = null;
 	private static boolean hasUpdated = false;
 
@@ -161,6 +162,7 @@ public class DownloadedVideosDb extends SQLiteOpenHelperEx {
 	 *
 	 * @param videos List of Videos to update their order.
 	 */
+	@Override
 	public void updateOrder(List<YouTubeVideo> videos) {
 		int order = videos.size();
 

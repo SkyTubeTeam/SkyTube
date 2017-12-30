@@ -17,8 +17,6 @@
 
 package free.rm.skytube.businessobjects;
 
-import free.rm.skytube.gui.businessobjects.GetDownloadedVideos;
-
 /**
  * Represents a video category/group.
  */

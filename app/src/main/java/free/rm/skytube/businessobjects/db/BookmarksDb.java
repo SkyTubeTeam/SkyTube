@@ -30,11 +30,12 @@ import java.util.List;
 
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.YouTubeVideo;
+import free.rm.skytube.businessobjects.interfaces.OrderableDatabase;
 
 /**
  * A database (DB) that stores user's bookmarked videos.
  */
-public class BookmarksDb extends SQLiteOpenHelperEx {
+public class BookmarksDb extends SQLiteOpenHelperEx implements OrderableDatabase {
 	private static volatile BookmarksDb bookmarksDb = null;
 	private static boolean hasUpdated = false;
 
@@ -155,6 +156,7 @@ public class BookmarksDb extends SQLiteOpenHelperEx {
 	 *
 	 * @param videos List of Videos to update their order.
 	 */
+	@Override
 	public void updateOrder(List<YouTubeVideo> videos) {
 		int order = videos.size();
 

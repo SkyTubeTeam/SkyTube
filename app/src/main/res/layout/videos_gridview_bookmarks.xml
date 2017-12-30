@@ -28,5 +28,13 @@
 			android:text="@string/no_bookmarked_videos_text"
 			style="@style/NoBookmarksMsgTextView"/>
 	</LinearLayout>
+	<ProgressBar
+		android:id="@+id/loading_progress_bar"
+		android:layout_centerInParent="true"
+		android:padding="3dp"
+		android:layout_gravity="center_horizontal"
+		android:layout_marginTop="@dimen/video_grid_progress_bar_top_margin"
+		android:visibility="gone"
+		style="@style/LoadingProgressBar"/>
 
 </FrameLayout>
