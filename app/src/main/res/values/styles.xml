@@ -1,5 +1,5 @@
 <resources>
-	
+
 	<!-- SkyTube theme -->
 	<style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
 		<item name="colorPrimary">@color/colorPrimary</item>
@@ -105,7 +105,6 @@
 	</style>
 
 
-
 	<!-- *************************************************************************************** -->
 	<!--
 	 	Video Player
@@ -117,8 +116,8 @@
 		<item name="actionBarStyle">@style/VideoPlayerActionBarTheme</item>
 	</style>
 
-	<style name="VideoPlayerActionBarTheme" parent="AppTheme" >
-		<item name="background">@color/video_player_hud</item>	<!-- Actionbar background colour -->
+	<style name="VideoPlayerActionBarTheme" parent="AppTheme">
+		<item name="background">@color/video_player_hud</item>    <!-- Actionbar background colour -->
 		<item name="displayOptions">showHome|homeAsUp|showTitle</item>
 	</style>
 
@@ -137,7 +136,7 @@
 		<item name="android:textColor">@color/comment_text</item>
 		<item name="android:textAppearance">@style/TextAppearance.AppCompat.Small</item>
 	</style>
-	
+
 	<style name="CommentInfoTextView" parent="CommentTextView">
 		<item name="android:textSize">12sp</item>
 	</style>
@@ -187,8 +186,6 @@
 
 	<style name="NoBookmarksMsgTextView" parent="NoSubscriptionsFeedMsgTextView">
 	</style>
-
-
 
 
 	<!-- *************************************************************************************** -->

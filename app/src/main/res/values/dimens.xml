@@ -8,4 +8,5 @@
 	<dimen name="comments_drawer_width">300dp</dimen>
 
 	<dimen name="video_grid_progress_bar_top_margin">50dp</dimen>
+	<dimen name="fab_margin">16dp</dimen>
 </resources>

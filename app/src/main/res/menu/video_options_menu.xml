@@ -5,4 +5,5 @@
 	<item android:id="@+id/copyurl" android:title="@string/copy_url"></item>
 	<item android:id="@+id/bookmark_video" android:title="@string/bookmark"></item>
 	<item android:id="@+id/unbookmark_video" android:visible="false" android:title="@string/unbookmark"></item>
+	<item android:id="@+id/view_thumbnail" android:title="@string/view_thumbnail"></item>
 </menu>

@@ -46,6 +46,7 @@ import free.rm.skytube.businessobjects.YouTubeChannelInterface;
 import free.rm.skytube.businessobjects.YouTubeVideo;
 import free.rm.skytube.businessobjects.db.CheckIfUserSubbedToChannelTask;
 import free.rm.skytube.gui.activities.MainActivity;
+import free.rm.skytube.gui.activities.ThumbnailViewerActivity;
 import free.rm.skytube.gui.businessobjects.CommentsAdapter;
 import free.rm.skytube.gui.businessobjects.fragments.ImmersiveModeFragment;
 import free.rm.skytube.gui.businessobjects.IsVideoBookmarkedTask;
@@ -494,6 +495,12 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 
 			case R.id.unbookmark_video:
 				youTubeVideo.unbookmarkVideo(getContext(), menu);
+				return true;
+
+			case R.id.view_thumbnail:
+				Intent i = new Intent(getActivity(), ThumbnailViewerActivity.class);
+				i.putExtra(ThumbnailViewerActivity.YOUTUBE_VIDEO, youTubeVideo);
+				startActivity(i);
 				return true;
 
 			default:

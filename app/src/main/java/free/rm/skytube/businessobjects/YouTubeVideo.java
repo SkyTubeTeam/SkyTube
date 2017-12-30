@@ -75,8 +75,10 @@ public class YouTubeVideo implements Serializable {
 	/** The date/time of when this video was published. */
 	private DateTime publishDate;
 	private String   publishDatePretty;
-	/** Thumbnail URL string. */
+	/** Thumbnail URL. */
 	private String	thumbnailUrl;
+	/** Thumbnail URL (maximum resolution). */
+	private String  thumbnailMaxResUrl;
 	/** The language of this video.  (This tends to be ISO 639-1).  */
 	private String	language;
 	/** The description of the video (set by the YouTuber/Owner). */
@@ -101,6 +103,10 @@ public class YouTubeVideo implements Serializable {
 				Thumbnail thumbnail = video.getSnippet().getThumbnails().getHigh();
 				if (thumbnail != null)
 					this.thumbnailUrl = thumbnail.getUrl();
+
+				thumbnail = video.getSnippet().getThumbnails().getMaxres();
+				if (thumbnail != null)
+					this.thumbnailMaxResUrl = thumbnail.getUrl();
 			}
 
 			this.language = video.getSnippet().getDefaultAudioLanguage() != null ? video.getSnippet().getDefaultAudioLanguage()
@@ -297,6 +303,10 @@ public class YouTubeVideo implements Serializable {
 
 	public String getThumbnailUrl() {
 		return thumbnailUrl;
+	}
+
+	public String getThumbnailMaxResUrl() {
+		return thumbnailMaxResUrl;
 	}
 
 	public String getVideoUrl() {

@@ -33,6 +33,7 @@ import com.bumptech.glide.request.RequestOptions;
 
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.YouTubeVideo;
+import free.rm.skytube.gui.activities.ThumbnailViewerActivity;
 
 /**
  * A ViewHolder for the videos grid view.
@@ -167,6 +168,11 @@ class GridViewHolder extends RecyclerView.ViewHolder {
 						return true;
 					case R.id.unbookmark_video:
 						youTubeVideo.unbookmarkVideo(context, popupMenu.getMenu());
+						return true;
+					case R.id.view_thumbnail:
+						Intent i = new Intent(context, ThumbnailViewerActivity.class);
+						i.putExtra(ThumbnailViewerActivity.YOUTUBE_VIDEO, youTubeVideo);
+						context.startActivity(i);
 						return true;
 				}
 				return false;
