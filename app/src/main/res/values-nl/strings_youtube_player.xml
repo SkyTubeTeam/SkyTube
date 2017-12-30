@@ -34,4 +34,6 @@
 <string name="tutorial_comments_icon">Veeg naar links om de reacties te weergeven.</string>
 	<string name="tutorial_video_info_icon">Veeg omhoog om de video-informatie te weergeven.</string>
 	<string name="tutorial_pause_video">Dubbeltik om een video te pauzeren of af te spelen.</string>
-</resources>
+<string name="view_thumbnail">Voorbeeldminiatuur weergeven</string>
+
+	</resources>
