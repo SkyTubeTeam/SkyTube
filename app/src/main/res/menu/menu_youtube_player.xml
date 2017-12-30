@@ -27,4 +27,8 @@
 	      android:title="@string/unbookmark"
 	      app:showAsAction="never"/>
 
+	<item android:id="@+id/view_thumbnail"
+	      android:title="@string/view_thumbnail"
+	      app:showAsAction="never"/>
+
 </menu>

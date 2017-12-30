@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="#000"
+	tools:context="free.rm.skytube.gui.activities.ThumbnailViewerActivity">
+
+	<ImageView
+		android:id="@+id/thumbnail_image_view"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"/>
+
+	<!-- Progress bar that will be displayed before the thumbnail is loaded -->
+	<ProgressBar
+		android:id="@+id/loadingVideoView"
+		android:layout_gravity="center"
+		android:padding="17dp"
+		style="@style/LoadingProgressBar"/>
+
+	<android.support.design.widget.FloatingActionButton
+		android:id="@+id/fab"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="bottom|end"
+		android:layout_margin="@dimen/fab_margin"
+		app:srcCompat="@drawable/ic_download"/>
+
+</android.support.design.widget.CoordinatorLayout>
