@@ -19,10 +19,7 @@ package free.rm.skytube.gui.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.helper.ItemTouchHelper;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import butterknife.BindView;
 import free.rm.skytube.R;
@@ -30,48 +27,23 @@ import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.businessobjects.db.BookmarksDb;
-import free.rm.skytube.gui.businessobjects.MainActivityListener;
-import free.rm.skytube.gui.businessobjects.SimpleItemTouchHelperCallback;
-import free.rm.skytube.gui.businessobjects.BookmarksGridAdapter;
+import free.rm.skytube.gui.businessobjects.OrderableVideoGridAdapter;
+import free.rm.skytube.gui.businessobjects.fragments.OrderableVideosGridFragment;
 
 /**
  * Fragment that displays bookmarked videos.
  */
-public class BookmarksFragment extends VideosGridFragment implements BookmarksDb.BookmarksDbListener {
+public class BookmarksFragment extends OrderableVideosGridFragment implements BookmarksDb.BookmarksDbListener {
 	@BindView(R.id.noBookmarkedVideosText)
 	View noBookmarkedVideosText;
-
-	private BookmarksGridAdapter bookmarksGridAdapter;
-
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		videoGridAdapter = new OrderableVideoGridAdapter(getActivity(), BookmarksDb.getBookmarksDb());
+//		setDatabase(BookmarksDb.getBookmarksDb());
 		setLayoutResource(R.layout.videos_gridview_bookmarks);
 	}
-
-
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = super.onCreateView(inflater, container, savedInstanceState);
-		videoGridAdapter = null;
-
-		if (bookmarksGridAdapter == null) {
-			bookmarksGridAdapter = new BookmarksGridAdapter(getActivity());
-		} else {
-			bookmarksGridAdapter.setContext(getActivity());
-		}
-
-		bookmarksGridAdapter.setListener((MainActivityListener)getActivity());
-		gridView.setAdapter(bookmarksGridAdapter);
-
-		ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(bookmarksGridAdapter);
-		ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
-		touchHelper.attachToRecyclerView(gridView);
-
-		return view;
-	}
-
 
 	@Override
 	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -100,7 +72,8 @@ public class BookmarksFragment extends VideosGridFragment implements BookmarksDb
 	@Override
 	public void onBookmarksDbUpdated() {
 		populateList();
-		bookmarksGridAdapter.refresh();
+		if(videoGridAdapter != null)
+			videoGridAdapter.refresh();
 	}
 
 	@Override
@@ -112,8 +85,6 @@ public class BookmarksFragment extends VideosGridFragment implements BookmarksDb
 	public String getFragmentName() {
 		return SkyTubeApp.getStr(R.string.bookmarks);
 	}
-
-
 
 	////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -143,10 +114,9 @@ public class BookmarksFragment extends VideosGridFragment implements BookmarksDb
 				noBookmarkedVideosText.setVisibility(View.GONE);
 
 				// set video category and get the bookmarked videos asynchronously
-				bookmarksGridAdapter.setVideoCategory(VideoCategory.BOOKMARKS_VIDEOS);
+				videoGridAdapter.setVideoCategory(VideoCategory.BOOKMARKS_VIDEOS);
 			}
 		}
 
 	}
-
 }

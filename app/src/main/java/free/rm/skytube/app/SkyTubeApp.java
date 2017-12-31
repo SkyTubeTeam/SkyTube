@@ -28,6 +28,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
 import android.os.Build;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
@@ -144,6 +145,26 @@ public class SkyTubeApp extends MultiDexApplication {
 	}
 
 	/**
+	 * @return boolean determining if the device is connected via WiFi
+	 */
+	public static boolean isConnectedToWiFi() {
+		final ConnectivityManager connMgr = (ConnectivityManager)
+						getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+		final android.net.NetworkInfo wifi = connMgr.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+		return wifi.isConnectedOrConnecting();
+	}
+
+	/**
+	 * @return boolean determining if the device is connected via Mobile
+	 */
+	public static boolean isConnectedToMobile() {
+		final ConnectivityManager connMgr = (ConnectivityManager)
+						getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+		final android.net.NetworkInfo mobile = connMgr.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+		return mobile.isConnectedOrConnecting();
+	}
+
+	/*
 	 * Initialize Notification Channels (for Android OREO)
 	 * @param context
 	 */
