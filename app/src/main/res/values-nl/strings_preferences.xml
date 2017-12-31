@@ -75,4 +75,8 @@
 	<string name="restart">Herstarten</string>
 <string name="pref_title_feed_notification">Automatische feed-melding</string>
 	<string name="pref_summary_feed_notification">Hoe vaak er moet worden gezocht naar nieuwe video\'s van geabonneerde kanalen: %s</string>
+	<string name="pref_key_allow_mobile_downloads">pref_allow_mobile_downloads_key</string>
+	<string name="pref_title_allow_mobile_downloads">Downloads toestaan over mobiele netwerverbinding</string>
+	<string name="pref_summary_allow_mobile_downloads">Als u dit aanvinkt, dan kunnen video\'s worden gedownload over mobiele netwerkverbindingen i.p.v. alleen over Wi-Fi.</string>
+
 	</resources>
