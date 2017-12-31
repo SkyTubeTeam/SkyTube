@@ -1,7 +1,9 @@
 v2.80 - XX XXX 201X:
 	* Added channel playlist support.
-	* Implemented immersive mode for the video player (i.e. comments and info icons together with the navigation bar are now hidden by default).
-	* Immersive mode:  comments and video description can be viewed if the user swipes to the left and top respectively.
+	* YouTube Player improvements, including:
+		- Immersive mode:  comments and video description can be viewed if the user swipes to the left and top respectively.
+		- Double tap can stop/play the video.
+	* Added thumbnail viewer for YouTube videos.
 	* Main and channel toolbar aesthetics enhancements.
 	* Users can now view channel's information/description via the about tab.
 	* Feed is refreshed automatically.
