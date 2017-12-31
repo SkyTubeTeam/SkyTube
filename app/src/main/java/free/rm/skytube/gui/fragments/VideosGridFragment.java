@@ -30,9 +30,9 @@ import com.bumptech.glide.Glide;
 
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.VideoCategory;
-import free.rm.skytube.gui.businessobjects.fragments.BaseVideosGridFragment;
 import free.rm.skytube.gui.businessobjects.MainActivityListener;
 import free.rm.skytube.gui.businessobjects.VideoGridAdapter;
+import free.rm.skytube.gui.businessobjects.fragments.BaseVideosGridFragment;
 
 /**
  * A fragment that will hold a {@link GridView} full of YouTube videos.
@@ -109,4 +109,8 @@ public abstract class VideosGridFragment extends BaseVideosGridFragment {
 		return null;
 	}
 
+	/**
+	 * @return The fragment/tab name/title.
+	 */
+	public abstract String getFragmentName();
 }

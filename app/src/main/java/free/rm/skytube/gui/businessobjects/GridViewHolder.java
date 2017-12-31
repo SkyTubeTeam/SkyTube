@@ -32,8 +32,10 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
 import free.rm.skytube.R;
+import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.YouTubeVideo;
 import free.rm.skytube.gui.activities.ThumbnailViewerActivity;
+import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
 
 /**
  * A ViewHolder for the videos grid view.
@@ -43,6 +45,7 @@ class GridViewHolder extends RecyclerView.ViewHolder {
 	private YouTubeVideo            youTubeVideo = null;
 	private Context                 context = null;
 	private MainActivityListener    mainActivityListener;
+	private DownloadedVideosDb.DownloadedVideosListener downloadedVideoListener;
 	private boolean                 showChannelInfo;
 
 	private TextView titleTextView;
@@ -103,6 +106,12 @@ class GridViewHolder extends RecyclerView.ViewHolder {
 		});
 	}
 
+	GridViewHolder(View view, MainActivityListener listener, DownloadedVideosDb.DownloadedVideosListener downloadedVideoListener) {
+		this(view, listener, false);
+		this.downloadedVideoListener = downloadedVideoListener;
+	}
+
+
 
 	/**
 	 * Updates the contents of this ViewHold such that the data of these views is equal to the
@@ -149,6 +158,19 @@ class GridViewHolder extends RecyclerView.ViewHolder {
 		popupMenu.getMenuInflater().inflate(R.menu.video_options_menu, popupMenu.getMenu());
 		Menu menu = popupMenu.getMenu();
 		new IsVideoBookmarkedTask(youTubeVideo, menu).executeInParallel();
+
+
+		if(youTubeVideo.isDownloaded()) {
+			popupMenu.getMenu().findItem(R.id.delete_download).setVisible(true);
+			popupMenu.getMenu().findItem(R.id.download_video).setVisible(false);
+		} else {
+			popupMenu.getMenu().findItem(R.id.delete_download).setVisible(false);
+			boolean allowDownloadsOnMobile = SkyTubeApp.getPreferenceManager().getBoolean(SkyTubeApp.getStr(R.string.pref_key_allow_mobile_downloads), false);
+			if(SkyTubeApp.isConnectedToWiFi() || (SkyTubeApp.isConnectedToMobile() && allowDownloadsOnMobile))
+				popupMenu.getMenu().findItem(R.id.download_video).setVisible(true);
+			else
+				popupMenu.getMenu().findItem(R.id.download_video).setVisible(false);
+		}
 		popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
@@ -173,6 +195,12 @@ class GridViewHolder extends RecyclerView.ViewHolder {
 						Intent i = new Intent(context, ThumbnailViewerActivity.class);
 						i.putExtra(ThumbnailViewerActivity.YOUTUBE_VIDEO, youTubeVideo);
 						context.startActivity(i);
+						return true;
+					case R.id.delete_download:
+						youTubeVideo.removeDownload();
+						return true;
+					case R.id.download_video:
+						youTubeVideo.downloadVideo(context);
 						return true;
 				}
 				return false;

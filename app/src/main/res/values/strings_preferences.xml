@@ -427,12 +427,14 @@
 		<item>@string/most_popular</item>
 		<item>@string/feed</item>
 		<item>@string/bookmarks</item>
+		<item>@string/downloads</item>
 	</string-array>
 	<string-array name="default_tab_values" translatable="false">
 		<item>0</item>
 		<item>1</item>
 		<item>2</item>
 		<item>3</item>
+		<item>4</item>
 	</string-array>
 
 	<string name="pref_feed_notification_key" translatable="false">pref_feed_notification</string>
@@ -482,5 +484,10 @@
 	<string name="pref_youtube_api_key_error">An error occurred attempting to validate the API Key you entered.</string>
 	<string name="pref_youtube_api_key_custom">Key is valid. Restart app to use the new YouTube API key.</string>
 	<string name="pref_youtube_api_key_default">Restart app to switch back to default YouTube API key.</string>
+
+	<string name="pref_key_allow_mobile_downloads">pref_allow_mobile_downloads_key</string>
+	<string name="pref_title_allow_mobile_downloads">Allow downloads on Mobile Networks</string>
+	<string name="pref_summary_allow_mobile_downloads">If checked, videos can be downloaded on Mobile networks. Otherwise, videos can only be downloaded on WiFi.</string>
+
 	<string name="restart">Restart</string>
 </resources>
