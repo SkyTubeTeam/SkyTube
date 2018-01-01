@@ -59,6 +59,8 @@
 	-->
 	<color name="channel_subs">@color/video_cell_text_main</color>
 	<color name="channel_about">@color/video_cell_text_main</color>
+	<color name="channel_subscribers_bkg">#66000000</color>
+
 
 	<!--
 		Subscriptions Feed

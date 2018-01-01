@@ -22,16 +22,19 @@ import free.rm.skytube.businessobjects.YouTubePlaylist;
  * A Fragment that displays the videos of a playlist in a {@link VideosGridFragment}
  */
 public class PlaylistVideosFragment extends VideosGridFragment {
-	private YouTubePlaylist youTubePlaylist;
 
-	public static final String PLAYLIST_OBJ = "PlaylistVideosFragment.PLAYLIST_OBJ";
+	private YouTubePlaylist youTubePlaylist;
 
 	@BindView(R.id.toolbar)
 	Toolbar     toolbar;
 	@BindView(R.id.playlist_banner_image_view)
 	ImageView   playlistBannerImageView;
+	@BindView(R.id.playlist_thumbnail_image_view)
+	ImageView   playlistThumbnailImageView;
 	@BindView(R.id.playlist_title_text_view)
 	TextView    playlistTitleTextView;
+
+	public static final String PLAYLIST_OBJ = "PlaylistVideosFragment.PLAYLIST_OBJ";
 
 
 	@Override
@@ -55,6 +58,12 @@ public class PlaylistVideosFragment extends VideosGridFragment {
 		if (actionBar != null && youTubePlaylist.getChannel() != null) {
 			actionBar.setTitle(youTubePlaylist.getChannel().getTitle());
 		}
+
+		// set the playlist's thumbnail
+		Glide.with(getActivity())
+				.load(youTubePlaylist.getThumbnailUrl())
+				.apply(new RequestOptions().placeholder(R.drawable.channel_thumbnail_default))
+				.into(playlistThumbnailImageView);
 
 		// set the channel's banner
 		Glide.with(getActivity())
