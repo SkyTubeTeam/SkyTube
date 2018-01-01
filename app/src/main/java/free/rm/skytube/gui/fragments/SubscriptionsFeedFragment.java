@@ -83,7 +83,7 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 			shouldRefresh = true;
 		}
 
-		setLayoutResource(R.layout.videos_gridview_feed);
+		setLayoutResource(R.layout.fragment_subs_feed);
 		subscriptionsBackupsManager = new SubscriptionsBackupsManager(getActivity(), SubscriptionsFeedFragment.this);
 	}
 

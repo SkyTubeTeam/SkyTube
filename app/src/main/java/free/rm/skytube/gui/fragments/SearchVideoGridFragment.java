@@ -46,7 +46,7 @@ public class SearchVideoGridFragment extends VideosGridFragment {
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setLayoutResource(R.layout.videos_searchview);
+		setLayoutResource(R.layout.fragment_search);
 
 		// set the user's search query
 		searchQuery = getArguments().getString(QUERY);
