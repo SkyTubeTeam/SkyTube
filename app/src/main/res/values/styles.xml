@@ -151,7 +151,10 @@
 	-->
 
 	<style name="ChannelSubsTextView" parent="AppTheme">
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_height">wrap_content</item>
 		<item name="android:textColor">@color/channel_subs</item>
+		<item name="android:background">@color/channel_subscribers_bkg</item>
 		<item name="android:singleLine">true</item>
 		<item name="android:textAppearance">@style/TextAppearance.AppCompat.Small</item>
 	</style>
@@ -159,6 +162,13 @@
 	<style name="ChannelAboutTextView" parent="AppTheme">
 		<item name="android:textColor">@color/channel_about</item>
 		<item name="android:textAppearance">@style/TextAppearance.AppCompat.Small</item>
+	</style>
+
+	<style name="PlaylistTitleTextView" parent="ChannelSubsTextView">
+		<item name="android:paddingTop">3dp</item>
+		<item name="android:paddingBottom">3dp</item>
+		<item name="android:paddingLeft">3dp</item>
+		<item name="android:paddingRight">7dp</item>
 	</style>
 
 

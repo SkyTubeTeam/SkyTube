@@ -12,17 +12,16 @@ import java.util.List;
  * A POJO class to store a YouTube Playlist.
  */
 public class YouTubePlaylist implements Serializable {
-	private static final String	TAG = YouTubePlaylist.class.getSimpleName();
 
-	private String id;
-	private String title;
-	private String description;
-	private DateTime publishDate;
-	private int videoCount = 0;
-	private String thumbnailUrl;
-	private List<YouTubeVideo> videos = new ArrayList<>();
+	private String              id;
+	private String              title;
+	private String              description;
+	private DateTime            publishDate;
+	private int                 videoCount = 0;
+	private String              thumbnailUrl;
+	private List<YouTubeVideo>  videos = new ArrayList<>();
 
-	// The YouTube Channel object that this playlist belongs to
+	/** The YouTube Channel object that this playlist belongs to. */
 	private YouTubeChannel channel;
 
 	public YouTubePlaylist(Playlist playlist, YouTubeChannel channel) {
@@ -48,10 +47,6 @@ public class YouTubePlaylist implements Serializable {
 
 	public String getThumbnailUrl() {
 		return thumbnailUrl;
-	}
-
-	public void setThumbnailUrl(String thumbnailUrl) {
-		this.thumbnailUrl = thumbnailUrl;
 	}
 
 	public String getId() {
