@@ -21,19 +21,13 @@
 
 		<Button
 			android:id="@+id/importSubscriptionsButton"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_gravity="center_horizontal"
-			android:layout_marginTop="20dp"
-			android:text="@string/import_subscriptions_from_youtube"/>
+			android:text="@string/import_subscriptions_from_youtube"
+			style="@style/ImportSubscriptionsButton"/>
 
 		<Button
 			android:id="@+id/importBackupButton"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_gravity="center_horizontal"
-			android:layout_marginTop="20dp"
-			android:text="@string/pref_title_import_dbs"/>
+			android:text="@string/pref_title_import_dbs"
+			style="@style/ImportSubscriptionsButton"/>
 	</LinearLayout>
 
 </FrameLayout>

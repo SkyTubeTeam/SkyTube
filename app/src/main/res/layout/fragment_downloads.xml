@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
 			 android:layout_width="match_parent"
-			 android:layout_height="match_parent">
+			 android:layout_height="match_parent"
+			 android:background="@color/grid_view_background">
 
 	<include
 		layout="@layout/videos_gridview"
@@ -10,14 +11,26 @@
 
 	<LinearLayout
 		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:orientation="vertical"
-		android:id="@+id/noDownloadedVideosText"
-		android:visibility="gone"
-		android:background="@color/grid_view_background">
+		android:layout_height="wrap_content"
+		android:orientation="vertical">
 		<TextView
+			android:id="@+id/noDownloadedVideosText"
+			android:visibility="gone"
 			android:text="@string/no_downloaded_videos_text"
-			style="@style/NoBookmarksMsgTextView"/>
+			style="@style/NoDownloadsMsgTextView"/>
+
+		<TextView
+			android:id="@+id/downloadsDisabledWarning"
+			android:layout_width="wrap_content"
+			android:layout_gravity="center_horizontal"
+			android:layout_marginTop="20dp"
+			android:padding="10dp"
+			android:text="@string/downloads_disabled_warning"
+			android:drawableStart="@android:drawable/stat_sys_warning"
+			android:drawableLeft="@android:drawable/stat_sys_warning"
+			android:drawablePadding="10dp"
+			android:background="@drawable/downloads_disabled_warning"
+			style="@style/NoDownloadsMsgTextView"/>
 	</LinearLayout>
 
 </FrameLayout>
