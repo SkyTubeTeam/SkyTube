@@ -24,7 +24,6 @@
 			android:text="Channel"
 			android:textColor="@color/dialog_content_text"/>
 
-		<!--android:theme="@style/WhiteBorderCheckBox"-->
 		<CheckBox
 			android:id="@+id/check_box"
 			android:layout_width="wrap_content"

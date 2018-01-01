@@ -26,6 +26,7 @@ import java.util.List;
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.db.BookmarksDb;
 import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
+import free.rm.skytube.gui.businessobjects.Logger;
 import free.rm.skytube.gui.businessobjects.MainActivityListener;
 import free.rm.skytube.gui.businessobjects.SubsAdapter;
 import free.rm.skytube.gui.businessobjects.fragments.FragmentEx;
@@ -34,8 +35,7 @@ public class MainFragment extends FragmentEx {
 	private RecyclerView				subsListView = null;
 	private SubsAdapter					subsAdapter  = null;
 	private ActionBarDrawerToggle		subsDrawerToggle;
-
-	public static final String REFRESH_VIDEO_GRID = "MainFragment.RefreshVideoGrid";
+	private TabLayout                   tabLayout = null;
 
 	/** List of fragments that will be displayed as tabs. */
 	private List<VideosGridFragment>	videoGridFragmentsList = new ArrayList<>();
@@ -43,7 +43,7 @@ public class MainFragment extends FragmentEx {
 	private MostPopularVideosFragment	mostPopularVideosFragment = null;
 	private SubscriptionsFeedFragment   subscriptionsFeedFragment = null;
 	private BookmarksFragment			bookmarksFragment = null;
-	private DownloadedVideosFragment downloadedVideosFragment = null;
+	private DownloadedVideosFragment    downloadedVideosFragment = null;
 
 	private VideosPagerAdapter			videosPagerAdapter = null;
 	private ViewPager					viewPager;
@@ -93,7 +93,7 @@ public class MainFragment extends FragmentEx {
 		viewPager.setOffscreenPageLimit(3);
 		viewPager.setAdapter(videosPagerAdapter);
 
-		TabLayout tabLayout = view.findViewById(R.id.tab_layout);
+		tabLayout = view.findViewById(R.id.tab_layout);
 		tabLayout.setupWithViewPager(viewPager);
 
 		tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -138,6 +138,19 @@ public class MainFragment extends FragmentEx {
 		super.onActivityCreated(savedInstanceState);
 
 		subsDrawerToggle.syncState();
+	}
+
+
+	@Override
+	public void onResume() {
+		super.onResume();
+
+		// when the MainFragment is resumed (e.g. after Preferences is minimized), inform the
+		// current fragment that it is selected.
+		if (videoGridFragmentsList != null  &&  tabLayout != null) {
+			Logger.d(this, "MAINFRAGMENT RESUMED " + tabLayout.getSelectedTabPosition());
+			videoGridFragmentsList.get(tabLayout.getSelectedTabPosition()).onFragmentSelected();
+		}
 	}
 
 
