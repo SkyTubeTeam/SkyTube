@@ -42,7 +42,7 @@ public class BookmarksFragment extends OrderableVideosGridFragment implements Bo
 		super.onCreate(savedInstanceState);
 		videoGridAdapter = new OrderableVideoGridAdapter(getActivity(), BookmarksDb.getBookmarksDb());
 //		setDatabase(BookmarksDb.getBookmarksDb());
-		setLayoutResource(R.layout.videos_gridview_bookmarks);
+		setLayoutResource(R.layout.fragment_bookmarks);
 	}
 
 	@Override

@@ -1,5 +1,6 @@
-v2.80 - XX XXX 201X:
+v2.80 - XX XXX 2018:
 	* Added channel playlist support.
+	* Added the option to download videos.
 	* YouTube Player improvements, including:
 		- Immersive mode:  comments and video description can be viewed if the user swipes to the left and top respectively.
 		- Double tap can stop/play the video.

@@ -21,7 +21,7 @@ public class DownloadedVideosFragment extends OrderableVideosGridFragment implem
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		videoGridAdapter = new OrderableVideoGridAdapter(getActivity(), DownloadedVideosDb.getVideoDownloadsDb());
-		setLayoutResource(R.layout.videos_gridview_downloads);
+		setLayoutResource(R.layout.fragment_downloads);
 	}
 
 	@Override
