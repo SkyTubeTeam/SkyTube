@@ -221,12 +221,17 @@ public class BookmarksDb extends SQLiteOpenHelperEx implements OrderableDatabase
 		if(cursor.moveToNext()) {
 			do {
 				byte[] blob = cursor.getBlob(cursor.getColumnIndex(BookmarksTable.COL_YOUTUBE_VIDEO));
+
+				// convert JSON into YouTubeVideo
 				YouTubeVideo video = new Gson().fromJson(new String(blob), new TypeToken<YouTubeVideo>(){}.getType());
+				// regenerate the video's PublishDatePretty (e.g. 5 hours ago)
+				video.forceRefreshPublishDatePretty();
+				// add the video to the list
 				videos.add(video);
 			} while(cursor.moveToNext());
 		}
-		cursor.close();
 
+		cursor.close();
 		return videos;
 	}
 

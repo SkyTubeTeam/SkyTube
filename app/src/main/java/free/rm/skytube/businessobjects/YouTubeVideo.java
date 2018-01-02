@@ -316,6 +316,14 @@ public class YouTubeVideo implements Serializable {
 		return publishDatePretty;
 	}
 
+	/**
+	 * Given that {@link #publishDatePretty} is being cached once generated, this method will allow
+	 * you to regenerate and reset the {@link #publishDatePretty}.
+	 */
+	public void forceRefreshPublishDatePretty() {
+		setPublishDate(publishDate);
+	}
+
 	public String getThumbnailUrl() {
 		return thumbnailUrl;
 	}
