@@ -145,7 +145,11 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 	 */
 	public List<YouTubeChannel> getSubscribedChannels(boolean shouldCheckForNewVideos) throws IOException {
 		List<YouTubeChannel> subsChannels = new ArrayList<>();
-		Cursor cursor = getReadableDatabase().query(SubscriptionsTable.TABLE_NAME, new String[]{SubscriptionsTable.COL_CHANNEL_ID}, null, null, null, null, SubscriptionsTable.COL_ID + " ASC");
+		Cursor cursor = getReadableDatabase().query(SubscriptionsTable.TABLE_NAME,
+													new String[]{SubscriptionsTable.COL_CHANNEL_ID},
+													null, null,
+													null, null,
+													SubscriptionsTable.COL_ID + " ASC");
 
 		if (cursor.moveToNext()) {
 			int             colChannelIdNum = cursor.getColumnIndexOrThrow(SubscriptionsTable.COL_CHANNEL_ID);

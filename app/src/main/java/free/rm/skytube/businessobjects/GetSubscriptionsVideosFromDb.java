@@ -24,9 +24,9 @@ import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 
 
 /**
- * Get user's subscriptions video feed.
+ * Get user's subscriptions video feed from the user's local database.
  */
-public class GetSubscriptionsVideos extends GetYouTubeVideos {
+public class GetSubscriptionsVideosFromDb extends GetYouTubeVideos {
 
 	@Override
 	public void init() throws IOException {

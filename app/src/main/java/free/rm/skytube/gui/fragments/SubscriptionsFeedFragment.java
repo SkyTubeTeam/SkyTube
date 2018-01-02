@@ -60,14 +60,27 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 	private int numChannelsSubscribed = 0;
 	private boolean refreshInProgress = false;
 	private MaterialDialog progressDialog;
+	/** When set to true, it will retrieve any published video (wrt subbed channels) by querying the
+	 *  remote YouTube servers. */
 	private boolean shouldRefresh = false;
 	private SubscriptionsBackupsManager subscriptionsBackupsManager;
+
+	/**
+	 * BroadcastReceiver that will receive a message that new subscription videos have been found by the
+	 * {@link FeedUpdaterService}. The video grid will be updated when this happens.
+	 */
+	private BroadcastReceiver feedUpdaterReceiver = new BroadcastReceiver() {
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			new RefreshFeedFromCacheTask().executeInParallel();
+		}
+	};
 
 	@BindView(R.id.noSubscriptionsText)
 	View noSubscriptionsText;
 
 	private static final String KEY_SET_UPDATE_FEED_TAB = "SubscriptionsFeedFragment.KEY_SET_UPDATE_FEED_TAB";
-	/** Refresh the feed after 3 hours since the last one */
+	/** Refresh the feed (by querying the YT servers) after 3 hours since the last check. */
 	private static final int    REFRESH_TIME = 3;
 
 
@@ -87,17 +100,17 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 		subscriptionsBackupsManager = new SubscriptionsBackupsManager(getActivity(), SubscriptionsFeedFragment.this);
 	}
 
+
 	@Override
 	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 
-		new GetTotalNumberOfChannelsTask().executeInParallel();
+		new RefreshFeedTask(isFragmentSelected()).executeInParallel();
 	}
+
 
 	@Override
 	public void onResume() {
-		Log.d("SubsFeed", "On RESUME...");
-
 		getActivity().registerReceiver(feedUpdaterReceiver, new IntentFilter(FeedUpdaterService.NEW_SUBSCRIPTION_VIDEOS_FOUND));
 
 		super.onResume();
@@ -110,15 +123,17 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 			editor.commit();
 
 			// refresh the subs feed
-			new SetVideosListTask().executeInParallel();
+			new RefreshFeedFromCacheTask().executeInParallel();
 		}
 	}
+
 
 	@Override
 	public void onPause() {
 		super.onPause();
 		getActivity().unregisterReceiver(feedUpdaterReceiver);
 	}
+
 
 	/**
 	 * Instruct the {@link SubscriptionsFeedFragment} to refresh the subscriptions feed.  This might
@@ -133,7 +148,7 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 
 
 	private void doRefresh(boolean showDialog) {
-		new RefreshTask(showDialog).executeInParallel();
+		new RefreshFeedTask(showDialog).executeInParallel();
 	}
 
 
@@ -152,6 +167,7 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 
 	@Override
 	public void onRefresh() {
+		shouldRefresh = true;
 		doRefresh(true);
 	}
 
@@ -179,7 +195,7 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 					if(progressDialog != null)
 						progressDialog.dismiss();
 					if(numVideosFetched > 0 || videosDeleted) {
-						new SetVideosListTask().executeInParallel();
+						new RefreshFeedFromCacheTask().executeInParallel();
 					} else {
 						// Only show the toast that no videos were found if the progress dialog is sh
 						if(fragmentIsVisible) {
@@ -237,62 +253,47 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 	}
 
 
-
-	////////////////////////////////////////////////////////////////////////////////////////////////
-
 	/**
-	 * A task that fetched the total number of subscribed channels from the DB and updated the
-	 * SubscriptionsFeedFragment UI accordingly.
+	 * Set up the UI depending to the total number of channel the user is subscribed to.
+	 *
+	 * @param totalSubbedChannels   Total number of channel the user is subscribed to.
 	 */
-	private class GetTotalNumberOfChannelsTask extends AsyncTaskParallel<Void, Void, Integer> {
-
-		@Override
-		protected Integer doInBackground(Void... params) {
-			return SubscriptionsDb.getSubscriptionsDb().getTotalSubscribedChannels();
-		}
-
-
-		@Override
-		protected void onPostExecute(Integer totalNumberOfChannels) {
-			numChannelsSubscribed = totalNumberOfChannels;
-
-			if (numChannelsSubscribed <= 0) {
-				swipeRefreshLayout.setVisibility(View.GONE);
-				noSubscriptionsText.setVisibility(View.VISIBLE);
-			} else {
-				if(swipeRefreshLayout.getVisibility() != View.VISIBLE) {
-					swipeRefreshLayout.setVisibility(View.VISIBLE);
-					noSubscriptionsText.setVisibility(View.GONE);
-				}
-
-				videoGridAdapter.setVideoCategory(VideoCategory.SUBSCRIPTIONS_FEED_VIDEOS);
-
-				// Launch a refresh of subscribed videos when this Fragment is created, but don't
-				// show the progress dialog if this fragment is not currently showing.
-				if (shouldRefresh)
-					doRefresh(isFragmentSelected());
-				shouldRefresh = false;
+	private void setupUiAccordingToNumOfSubbedChannels(int totalSubbedChannels) {
+		if (totalSubbedChannels <= 0) {
+			swipeRefreshLayout.setVisibility(View.GONE);
+			noSubscriptionsText.setVisibility(View.VISIBLE);
+		} else {
+			if (swipeRefreshLayout.getVisibility() != View.VISIBLE) {
+				swipeRefreshLayout.setVisibility(View.VISIBLE);
+				noSubscriptionsText.setVisibility(View.GONE);
 			}
 		}
 	}
 
 
 
+	////////////////////////////////////////////////////////////////////////////////////////////////
+
 	/**
-	 * A task that refreshes the videos of the {@link SubscriptionsFeedFragment}.
+	 * A task that will retrieve videos published to the user's subscribed channels.
+	 *
+	 * These videos can either:
+	 * 1.  Cached inside the local database;
+	 * 2.  No in the DB and hence we need to retrieve them from the YouTube servers.
 	 */
-	private class RefreshTask extends AsyncTaskParallel<Void, Void, Integer> {
+	private class RefreshFeedTask extends AsyncTaskParallel<Void, Void, Integer> {
 
 		private boolean showDialog;
 
 
-		private RefreshTask(boolean showDialog) {
+		private RefreshFeedTask(boolean showDialog) {
 			this.showDialog = showDialog;
 		}
 
 
 		@Override
 		protected Integer doInBackground(Void... params) {
+			// get the total number of channels the user is subscribed to
 			return SubscriptionsDb.getSubscriptionsDb().getTotalSubscribedChannels();
 		}
 
@@ -303,20 +304,33 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 			numChannelsFetched    = 0;
 			numChannelsSubscribed = totalNumberOfChannels;
 
-			if (numChannelsSubscribed > 0) {
-				new GetSubscriptionVideosTask(SubscriptionsFeedFragment.this).executeInParallel();
-				refreshInProgress = true;
+			// setup the user interface
+			setupUiAccordingToNumOfSubbedChannels(totalNumberOfChannels);
 
-				if (showDialog)
-					showRefreshDialog();
+			if (numChannelsSubscribed > 0) {
+				// get the previously published videos currently cached in the database
+				videoGridAdapter.setVideoCategory(VideoCategory.SUBSCRIPTIONS_FEED_VIDEOS);
+
+				// get any videos published after the last time the user used the app...
+				if (shouldRefresh) {
+					new GetSubscriptionVideosTask(SubscriptionsFeedFragment.this).executeInParallel();      // refer to #onChannelVideosFetched()
+					refreshInProgress = true;
+					shouldRefresh = false;
+
+					if (showDialog)
+						showRefreshDialog();
+				}
 			}
 		}
 
 	}
 
 
-
-	private class SetVideosListTask extends AsyncTaskParallel<Void, Void, List<YouTubeVideo>> {
+	/**
+	 * A task that refreshes the subscriptions feed by getting published videos currently cached in
+	 * the local database.
+	 */
+	private class RefreshFeedFromCacheTask extends AsyncTaskParallel<Void, Void, List<YouTubeVideo>> {
 
 		@Override
 		protected List<YouTubeVideo> doInBackground(Void... params) {
@@ -326,28 +340,9 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 		@Override
 		protected void onPostExecute(List<YouTubeVideo> youTubeVideos) {
 			videoGridAdapter.setList(youTubeVideos);
-			if(youTubeVideos.size() == 0) {
-				swipeRefreshLayout.setVisibility(View.GONE);
-				noSubscriptionsText.setVisibility(View.VISIBLE);
-			} else {
-				if(swipeRefreshLayout.getVisibility() != View.VISIBLE) {
-					swipeRefreshLayout.setVisibility(View.VISIBLE);
-					noSubscriptionsText.setVisibility(View.GONE);
-				}
-			}
+			setupUiAccordingToNumOfSubbedChannels(youTubeVideos.size());
 		}
 
 	}
-
-	/**
-	 * BroadcastReceiver that will receive a message that new subscription videos have been found by the
-	 * {@link FeedUpdaterService}. The video grid will be updated when this happens.
-	 */
-	private BroadcastReceiver feedUpdaterReceiver = new BroadcastReceiver() {
-		@Override
-		public void onReceive(Context context, Intent intent) {
-			new SetVideosListTask().executeInParallel();
-		}
-	};
 
 }

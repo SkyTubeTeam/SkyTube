@@ -65,7 +65,7 @@ public enum VideoCategory {
 		else if (id == CHANNEL_VIDEOS.id)
 			return new GetChannelVideos();
 		else if (id == SUBSCRIPTIONS_FEED_VIDEOS.id)
-			return new GetSubscriptionsVideos();
+			return new GetSubscriptionsVideosFromDb();
 		else if (id == BOOKMARKS_VIDEOS.id)
 			return new GetBookmarksVideos();
 		else if (id == PLAYLIST_VIDEOS.id)
