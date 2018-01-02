@@ -27,8 +27,6 @@ public class DownloadedVideosFragment extends OrderableVideosGridFragment implem
 		super.onCreate(savedInstanceState);
 		videoGridAdapter = new OrderableVideoGridAdapter(getActivity(), DownloadedVideosDb.getVideoDownloadsDb());
 		setLayoutResource(R.layout.fragment_downloads);
-
-		displayDownloadsDisabledWarning();
 	}
 
 	@Override
@@ -36,6 +34,7 @@ public class DownloadedVideosFragment extends OrderableVideosGridFragment implem
 		super.onViewCreated(view, savedInstanceState);
 		swipeRefreshLayout.setEnabled(false);
 		populateList();
+		displayDownloadsDisabledWarning();
 	}
 
 	@Override
