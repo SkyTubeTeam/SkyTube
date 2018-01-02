@@ -55,7 +55,7 @@ import free.rm.skytube.businessobjects.YouTube.VideoStream.StreamMetaDataList;
 import free.rm.skytube.businessobjects.db.BookmarksDb;
 import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
 import free.rm.skytube.businessobjects.interfaces.GetDesiredStreamListener;
-import free.rm.skytube.gui.businessobjects.Logger;
+import free.rm.skytube.businessobjects.Logger;
 
 import static free.rm.skytube.app.SkyTubeApp.getContext;
 

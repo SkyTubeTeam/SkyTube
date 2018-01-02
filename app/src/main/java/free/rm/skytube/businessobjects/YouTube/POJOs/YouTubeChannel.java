@@ -30,7 +30,7 @@ import java.util.List;
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
-import free.rm.skytube.gui.businessobjects.Logger;
+import free.rm.skytube.businessobjects.Logger;
 
 /**
  * Represents a YouTube Channel.

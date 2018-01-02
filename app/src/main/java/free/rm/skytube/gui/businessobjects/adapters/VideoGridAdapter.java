@@ -1,6 +1,6 @@
 /*
  * SkyTube
- * Copyright (C) 2015  Ramon Mifsud
+ * Copyright (C) 2018  Ramon Mifsud
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package free.rm.skytube.gui.businessobjects;
+package free.rm.skytube.gui.businessobjects.adapters;
 
 import android.content.Context;
 import android.util.Log;
@@ -32,6 +32,7 @@ import free.rm.skytube.businessobjects.YouTube.Tasks.GetYouTubeVideosTask;
 import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
+import free.rm.skytube.gui.businessobjects.MainActivityListener;
 
 /**
  * An adapter that will display videos in a {@link android.widget.GridView}.
@@ -47,7 +48,7 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<YouTubeVideo, GridVi
 	private VideoCategory		currentVideoCategory = null;
 
 	// This allows the grid items to pass messages back to MainActivity
-	protected MainActivityListener	listener;
+	protected MainActivityListener listener;
 
 	/** If this is set, new videos being displayed will be saved to the database, if subscribed.
 	 *  RM:  This is only set and used by ChannelBrowserFragment */

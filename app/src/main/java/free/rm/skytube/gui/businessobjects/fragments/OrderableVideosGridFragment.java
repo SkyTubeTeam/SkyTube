@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import free.rm.skytube.gui.businessobjects.OrderableVideoGridAdapter;
+import free.rm.skytube.gui.businessobjects.adapters.OrderableVideoGridAdapter;
 import free.rm.skytube.gui.businessobjects.SimpleItemTouchHelperCallback;
 import free.rm.skytube.gui.fragments.VideosGridFragment;
 

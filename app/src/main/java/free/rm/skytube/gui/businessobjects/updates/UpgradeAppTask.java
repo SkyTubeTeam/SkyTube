@@ -35,7 +35,6 @@ import java.net.URL;
 
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
-import free.rm.skytube.gui.businessobjects.WebStream;
 
 /**
  * This task will download the remote APK file and it will install it for the user (provided that

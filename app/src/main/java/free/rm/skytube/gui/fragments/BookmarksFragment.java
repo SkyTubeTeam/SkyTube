@@ -27,7 +27,7 @@ import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.businessobjects.db.BookmarksDb;
-import free.rm.skytube.gui.businessobjects.OrderableVideoGridAdapter;
+import free.rm.skytube.gui.businessobjects.adapters.OrderableVideoGridAdapter;
 import free.rm.skytube.gui.businessobjects.fragments.OrderableVideosGridFragment;
 
 /**

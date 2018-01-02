@@ -29,7 +29,7 @@ import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPI;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPIKey;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
-import free.rm.skytube.gui.businessobjects.Logger;
+import free.rm.skytube.businessobjects.Logger;
 
 /**
  * Returns the details/information about YouTube channel(s).

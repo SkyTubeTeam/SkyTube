@@ -28,7 +28,7 @@ import java.util.List;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPI;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPIKey;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
-import free.rm.skytube.gui.businessobjects.Logger;
+import free.rm.skytube.businessobjects.Logger;
 
 /**
  * Returns a list of videos for a specific playlist.

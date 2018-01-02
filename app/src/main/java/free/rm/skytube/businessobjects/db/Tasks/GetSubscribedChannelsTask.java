@@ -27,7 +27,7 @@ import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
-import free.rm.skytube.gui.businessobjects.SubsAdapter;
+import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
 
 /**
  * Gets a list of channels (from the DB) that the user is subscribed to and then passes the channels

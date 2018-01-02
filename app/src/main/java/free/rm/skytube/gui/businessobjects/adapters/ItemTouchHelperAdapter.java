@@ -1,6 +1,6 @@
 /*
  * SkyTube
- * Copyright (C) 2016  Ramon Mifsud
+ * Copyright (C) 2018  Ramon Mifsud
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,18 +15,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package free.rm.skytube.gui.businessobjects;
-
-import java.util.List;
-
-import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
-import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
+package free.rm.skytube.gui.businessobjects.adapters;
 
 /**
- * A listener that will be notified when a new YouTube video is published to a channel that the user
- * is subscribed to.
+ * Interface to allow a VideoGridAdapter to be notified when an item is moved in the grid.
  */
-public interface GetSubscriptionVideosTaskListener {
-	void onChannelVideosFetched(YouTubeChannel channel, List<YouTubeVideo> videosFetched, boolean videosDeleted);
-	void onAllChannelVideosFetched();
+public interface ItemTouchHelperAdapter {
+	boolean onItemMove(int fromPosition, int toPosition);
 }

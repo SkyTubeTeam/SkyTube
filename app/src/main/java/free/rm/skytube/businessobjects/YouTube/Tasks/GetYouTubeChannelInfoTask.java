@@ -23,7 +23,7 @@ import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.YouTube.GetChannelsDetails;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannelInterface;
-import free.rm.skytube.gui.businessobjects.Logger;
+import free.rm.skytube.businessobjects.Logger;
 
 /**
  * A task that given a channel ID it will try to initialize and return {@link YouTubeChannel}.

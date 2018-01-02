@@ -1,6 +1,6 @@
 /*
  * SkyTube
- * Copyright (C) 2016  Ramon Mifsud
+ * Copyright (C) 2018  Ramon Mifsud
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package free.rm.skytube.gui.businessobjects;
+package free.rm.skytube.gui.businessobjects.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -36,6 +36,9 @@ import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.gui.activities.ThumbnailViewerActivity;
 import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
+import free.rm.skytube.businessobjects.db.Tasks.IsVideoBookmarkedTask;
+import free.rm.skytube.gui.businessobjects.MainActivityListener;
+import free.rm.skytube.gui.businessobjects.YouTubePlayer;
 
 /**
  * A ViewHolder for the videos grid view.
@@ -44,7 +47,7 @@ class GridViewHolder extends RecyclerView.ViewHolder {
 	/** YouTube video */
 	private YouTubeVideo            youTubeVideo = null;
 	private Context                 context = null;
-	private MainActivityListener    mainActivityListener;
+	private MainActivityListener mainActivityListener;
 	private DownloadedVideosDb.DownloadedVideosListener downloadedVideoListener;
 	private boolean                 showChannelInfo;
 
@@ -106,11 +109,6 @@ class GridViewHolder extends RecyclerView.ViewHolder {
 		});
 	}
 
-	GridViewHolder(View view, MainActivityListener listener, DownloadedVideosDb.DownloadedVideosListener downloadedVideoListener) {
-		this(view, listener, false);
-		this.downloadedVideoListener = downloadedVideoListener;
-	}
-
 
 
 	/**
@@ -153,7 +151,7 @@ class GridViewHolder extends RecyclerView.ViewHolder {
 
 
 
- 	void onOptionsButtonClick(final View view) {
+ 	private void onOptionsButtonClick(final View view) {
 		final PopupMenu popupMenu = new PopupMenu(view.getContext(), view);
 		popupMenu.getMenuInflater().inflate(R.menu.video_options_menu, popupMenu.getMenu());
 		Menu menu = popupMenu.getMenu();

@@ -27,7 +27,7 @@ import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 import free.rm.skytube.gui.businessobjects.LoadingProgressBar;
-import free.rm.skytube.gui.businessobjects.VideoGridAdapter;
+import free.rm.skytube.gui.businessobjects.adapters.VideoGridAdapter;
 
 /**
  * An asynchronous task that will retrieve YouTube videos and displays them in the supplied Adapter.

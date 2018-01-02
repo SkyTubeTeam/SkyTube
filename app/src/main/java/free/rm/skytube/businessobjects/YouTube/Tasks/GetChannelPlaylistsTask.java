@@ -22,7 +22,7 @@ import java.util.List;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.YouTube.GetChannelPlaylists;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubePlaylist;
-import free.rm.skytube.gui.businessobjects.PlaylistsGridAdapter;
+import free.rm.skytube.gui.businessobjects.adapters.PlaylistsGridAdapter;
 
 /**
  * An asynchronous task that will retrieve YouTube playlists for a specific channel and displays them in the supplied Adapter.

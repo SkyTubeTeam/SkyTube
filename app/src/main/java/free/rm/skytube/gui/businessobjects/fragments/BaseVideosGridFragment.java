@@ -25,7 +25,7 @@ import android.view.View;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import free.rm.skytube.R;
-import free.rm.skytube.gui.businessobjects.VideoGridAdapter;
+import free.rm.skytube.gui.businessobjects.adapters.VideoGridAdapter;
 import free.rm.skytube.gui.fragments.VideosGridFragment;
 
 /**

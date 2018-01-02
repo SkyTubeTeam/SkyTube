@@ -1,6 +1,6 @@
 /*
  * SkyTube
- * Copyright (C) 2016  Ramon Mifsud
+ * Copyright (C) 2018  Ramon Mifsud
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package free.rm.skytube.gui.businessobjects;
+package free.rm.skytube.gui.businessobjects.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -34,6 +34,7 @@ import java.util.Iterator;
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.db.Tasks.GetSubscribedChannelsTask;
+import free.rm.skytube.gui.businessobjects.MainActivityListener;
 
 /**
  * Channel subscriptions adapter: Contains a list of channels (that the user subscribed to) together
@@ -44,7 +45,7 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 	private static SubsAdapter subsAdapter = null;
 	private static final String TAG = SubsAdapter.class.getSimpleName();
 
-	private MainActivityListener    listener;
+	private MainActivityListener listener;
 	/** Set to true if the users' subscriptions channels list has been fully retrieved and populated
 	 *  by querying the local database and YouTube servers... */
 	private final Bool              isSubsListRetrieved = new Bool(false);

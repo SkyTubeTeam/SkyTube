@@ -22,6 +22,8 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 
+import free.rm.skytube.businessobjects.Logger;
+
 /**
  * Detects user's swipe motions and taps.
  */

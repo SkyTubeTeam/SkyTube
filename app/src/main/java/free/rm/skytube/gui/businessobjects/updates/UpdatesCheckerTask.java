@@ -23,7 +23,6 @@ import android.support.v7.app.AlertDialog;
 
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
-import free.rm.skytube.gui.businessobjects.UpdatesChecker;
 
 /**
  * A task that will check if any SkyTube updates have been published.  If there are, then the

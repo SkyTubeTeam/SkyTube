@@ -30,9 +30,8 @@ import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
-import free.rm.skytube.gui.businessobjects.GetSubscriptionVideosTaskListener;
-import free.rm.skytube.gui.businessobjects.Logger;
-import free.rm.skytube.gui.businessobjects.SubsAdapter;
+import free.rm.skytube.businessobjects.Logger;
+import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
 
 /**
  * A task that returns the videos of channel the user has subscribed too.  Used to detect if new
