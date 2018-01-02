@@ -110,7 +110,7 @@ public class MainFragment extends FragmentEx {
 
 		videosPagerAdapter = new VideosPagerAdapter(getChildFragmentManager());
 		viewPager = view.findViewById(R.id.pager);
-		viewPager.setOffscreenPageLimit(3);
+		viewPager.setOffscreenPageLimit(videoGridFragmentsList.size() - 1);
 		viewPager.setAdapter(videosPagerAdapter);
 
 		TabLayout tabLayout = view.findViewById(R.id.tab_layout);
