@@ -21,15 +21,17 @@
 		<LinearLayout
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
+			android:gravity="top"
 			android:orientation="horizontal"
-			android:gravity="top">
+			android:weightSum="2">
 
 			<!--
 				CHANNEL THUMBNAIL, NAME & SUB BUTTON
 			-->
 			<RelativeLayout
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content">
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="2.2">
 
 				<!-- CHANNEL THUMBNAIL -->
 				<ImageView
@@ -37,17 +39,17 @@
 					android:layout_width="@dimen/top_level_comment_thumbnail_width"
 					android:layout_height="wrap_content"
 					android:layout_centerVertical="true"
+					android:adjustViewBounds="true"
 					android:paddingRight="10dp"
 					android:scaleType="fitXY"
-					android:adjustViewBounds="true"
-					android:src="@drawable/channel_thumbnail_default" />
+					android:src="@drawable/channel_thumbnail_default"/>
 
 				<LinearLayout
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:orientation="vertical"
 					android:layout_centerVertical="true"
-					android:layout_toRightOf="@+id/video_desc_channel_thumbnail_image_view">
+					android:layout_toRightOf="@+id/video_desc_channel_thumbnail_image_view"
+					android:orientation="vertical">
 
 					<!-- CHANNEL NAME -->
 					<TextView
@@ -59,7 +61,8 @@
 					<free.rm.skytube.gui.businessobjects.SubscribeButton
 						android:id="@+id/video_desc_subscribe_button"
 						style="@style/SubscribeButton"
-						android:layout_below="@id/video_desc_channel"/>
+						android:layout_below="@id/video_desc_channel"
+						android:text="Unsubscribe"/>
 				</LinearLayout>
 
 			</RelativeLayout>
@@ -70,6 +73,7 @@
 			<RelativeLayout
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
+				android:layout_weight="1"
 				android:paddingLeft="30dp">
 
 				<TextView
@@ -79,33 +83,33 @@
 
 				<ProgressBar
 					android:id="@+id/video_desc_likes_bar"
+					style="?android:attr/progressBarStyleHorizontal"
 					android:layout_width="160dp"
 					android:layout_height="wrap_content"
-					android:layout_below="@id/video_desc_views"
-					style="?android:attr/progressBarStyleHorizontal"/>
+					android:layout_below="@id/video_desc_views"/>
 
 				<TextView
 					android:id="@+id/video_desc_likes"
+					style="@style/VideoDescTextView"
 					android:layout_below="@id/video_desc_likes_bar"
 					android:drawableLeft="@drawable/ic_thumb_up_white"
 					android:drawablePadding="5dp"
-					style="@style/VideoDescTextView"
 					android:text="1,000,000"/>
 
 				<TextView
 					android:id="@+id/video_desc_dislikes"
+					style="@style/VideoDescTextView"
 					android:layout_below="@id/video_desc_likes_bar"
 					android:layout_toRightOf="@+id/video_desc_likes"
-					android:paddingLeft="15dp"
 					android:drawableLeft="@drawable/ic_thumb_down_white"
 					android:drawablePadding="5dp"
-					style="@style/VideoDescTextView"
+					android:paddingLeft="15dp"
 					android:text="1,000"/>
 
 				<TextView
 					android:id="@+id/video_desc_ratings_disabled"
-					android:layout_below="@id/video_desc_likes_bar"
 					style="@style/VideoDescTextView"
+					android:layout_below="@id/video_desc_likes_bar"
 					android:text="@string/ratings_disabled"
 					android:visibility="gone"/>
 			</RelativeLayout>
