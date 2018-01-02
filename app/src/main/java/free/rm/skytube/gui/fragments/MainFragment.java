@@ -45,11 +45,31 @@ public class MainFragment extends FragmentEx {
 	private BookmarksFragment			bookmarksFragment = null;
 	private DownloadedVideosFragment    downloadedVideosFragment = null;
 
+	// Constants for saving the state of this Fragment's child Fragments
+	public static final String FEATURED_VIDEOS_FRAGMENT = "MainFragment.featuredVideosFragment";
+	public static final String MOST_POPULAR_VIDEOS_FRAGMENT = "MainFragment.mostPopularVideosFragment";
+	public static final String SUBSCRIPTIONS_FEED_FRAGMENT = "MainFragment.subscriptionsFeedFragment";
+	public static final String BOOKMARKS_FRAGMENT = "MainFragment.bookmarksFragment";
+	public static final String DOWNLOADED_VIDEOS_FRAGMENT = "MainFragment.downloadedVideosFragment";
+
 	private VideosPagerAdapter			videosPagerAdapter = null;
 	private ViewPager					viewPager;
 
 	public static final String SHOULD_SELECTED_FEED_TAB = "MainFragment.SHOULD_SELECTED_FEED_TAB";
 
+
+	@Override
+	public void onCreate(@Nullable Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
+		if(savedInstanceState != null) {
+			featuredVideosFragment = (FeaturedVideosFragment) getChildFragmentManager().getFragment(savedInstanceState, FEATURED_VIDEOS_FRAGMENT);
+			mostPopularVideosFragment = (MostPopularVideosFragment) getChildFragmentManager().getFragment(savedInstanceState, MOST_POPULAR_VIDEOS_FRAGMENT);
+			subscriptionsFeedFragment = (SubscriptionsFeedFragment)getChildFragmentManager().getFragment(savedInstanceState, SUBSCRIPTIONS_FEED_FRAGMENT);
+			bookmarksFragment = (BookmarksFragment) getChildFragmentManager().getFragment(savedInstanceState, BOOKMARKS_FRAGMENT);
+			downloadedVideosFragment = (DownloadedVideosFragment) getChildFragmentManager().getFragment(savedInstanceState, DOWNLOADED_VIDEOS_FRAGMENT);
+		}
+	}
 
 	@Nullable
 	@Override
@@ -90,7 +110,7 @@ public class MainFragment extends FragmentEx {
 
 		videosPagerAdapter = new VideosPagerAdapter(getChildFragmentManager());
 		viewPager = view.findViewById(R.id.pager);
-		viewPager.setOffscreenPageLimit(3);
+		viewPager.setOffscreenPageLimit(videoGridFragmentsList.size() - 1);
 		viewPager.setAdapter(videosPagerAdapter);
 
 		tabLayout = view.findViewById(R.id.tab_layout);
@@ -217,4 +237,19 @@ public class MainFragment extends FragmentEx {
 
 	}
 
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		if(featuredVideosFragment != null)
+			getChildFragmentManager().putFragment(outState, FEATURED_VIDEOS_FRAGMENT, featuredVideosFragment);
+		if(mostPopularVideosFragment != null)
+			getChildFragmentManager().putFragment(outState, MOST_POPULAR_VIDEOS_FRAGMENT, mostPopularVideosFragment);
+		if(subscriptionsFeedFragment != null)
+			getChildFragmentManager().putFragment(outState, SUBSCRIPTIONS_FEED_FRAGMENT, subscriptionsFeedFragment);
+		if(bookmarksFragment != null)
+			getChildFragmentManager().putFragment(outState, BOOKMARKS_FRAGMENT, bookmarksFragment);
+		if(downloadedVideosFragment != null)
+			getChildFragmentManager().putFragment(outState, DOWNLOADED_VIDEOS_FRAGMENT, downloadedVideosFragment);
+
+		super.onSaveInstanceState(outState);
+	}
 }
