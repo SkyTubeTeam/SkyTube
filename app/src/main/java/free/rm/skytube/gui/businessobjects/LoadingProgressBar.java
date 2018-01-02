@@ -19,8 +19,10 @@ package free.rm.skytube.gui.businessobjects;
 
 import android.view.View;
 
+import free.rm.skytube.businessobjects.YouTube.Tasks.GetYouTubeVideosTask;
+
 /**
- * Loading progress bar that will be displayed by {@link free.rm.skytube.businessobjects.GetYouTubeVideosTask}
+ * Loading progress bar that will be displayed by {@link GetYouTubeVideosTask}
  * when data is being retrieved from YouTube servers.
  */
 public class LoadingProgressBar {

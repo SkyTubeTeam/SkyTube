@@ -16,7 +16,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.VideoCategory;
-import free.rm.skytube.businessobjects.YouTubePlaylist;
+import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubePlaylist;
 
 /**
  * A Fragment that displays the videos of a playlist in a {@link VideosGridFragment}

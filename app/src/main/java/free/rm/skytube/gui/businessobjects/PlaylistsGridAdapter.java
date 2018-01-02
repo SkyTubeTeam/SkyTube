@@ -10,10 +10,10 @@ import android.widget.Toast;
 import java.io.IOException;
 
 import free.rm.skytube.R;
-import free.rm.skytube.businessobjects.GetChannelPlaylists;
-import free.rm.skytube.businessobjects.GetChannelPlaylistsTask;
-import free.rm.skytube.businessobjects.YouTubeChannel;
-import free.rm.skytube.businessobjects.YouTubePlaylist;
+import free.rm.skytube.businessobjects.YouTube.GetChannelPlaylists;
+import free.rm.skytube.businessobjects.YouTube.Tasks.GetChannelPlaylistsTask;
+import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
+import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubePlaylist;
 
 /**
  * An adapter that will display playlists in a {@link android.widget.GridView}.

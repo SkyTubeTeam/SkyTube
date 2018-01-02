@@ -29,7 +29,7 @@ import android.widget.Toast;
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
-import free.rm.skytube.businessobjects.ValidateYouTubeAPIKey;
+import free.rm.skytube.businessobjects.YouTube.ValidateYouTubeAPIKey;
 
 /**
  * Preference fragment for other settings.

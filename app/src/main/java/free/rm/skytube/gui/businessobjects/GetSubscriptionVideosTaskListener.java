@@ -19,8 +19,8 @@ package free.rm.skytube.gui.businessobjects;
 
 import java.util.List;
 
-import free.rm.skytube.businessobjects.YouTubeChannel;
-import free.rm.skytube.businessobjects.YouTubeVideo;
+import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
+import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 
 /**
  * A listener that will be notified when a new YouTube video is published to a channel that the user

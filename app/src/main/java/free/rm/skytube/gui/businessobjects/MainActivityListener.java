@@ -17,8 +17,8 @@
 
 package free.rm.skytube.gui.businessobjects;
 
-import free.rm.skytube.businessobjects.YouTubeChannel;
-import free.rm.skytube.businessobjects.YouTubePlaylist;
+import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
+import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubePlaylist;
 
 /**
  * This methods will be called when the user clicks on the view whose aim is to open the ChannelBrowser.

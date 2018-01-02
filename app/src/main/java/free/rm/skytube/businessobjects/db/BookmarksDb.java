@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import free.rm.skytube.app.SkyTubeApp;
-import free.rm.skytube.businessobjects.YouTubeVideo;
+import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.interfaces.OrderableDatabase;
 
 /**

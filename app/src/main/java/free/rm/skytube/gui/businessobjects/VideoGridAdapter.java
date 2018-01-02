@@ -27,11 +27,11 @@ import android.widget.Toast;
 import java.io.IOException;
 
 import free.rm.skytube.R;
-import free.rm.skytube.businessobjects.GetYouTubeVideos;
-import free.rm.skytube.businessobjects.GetYouTubeVideosTask;
+import free.rm.skytube.businessobjects.YouTube.GetYouTubeVideos;
+import free.rm.skytube.businessobjects.YouTube.Tasks.GetYouTubeVideosTask;
 import free.rm.skytube.businessobjects.VideoCategory;
-import free.rm.skytube.businessobjects.YouTubeChannel;
-import free.rm.skytube.businessobjects.YouTubeVideo;
+import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
+import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 
 /**
  * An adapter that will display videos in a {@link android.widget.GridView}.

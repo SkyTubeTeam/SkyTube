@@ -14,6 +14,9 @@ import java.util.List;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
+import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
+import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
+import free.rm.skytube.businessobjects.YouTube.Tasks.GetSubscriptionVideosTask;
 import free.rm.skytube.gui.activities.MainActivity;
 import free.rm.skytube.gui.businessobjects.GetSubscriptionVideosTaskListener;
 

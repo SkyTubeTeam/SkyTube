@@ -21,7 +21,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 
-import free.rm.skytube.businessobjects.YouTubeVideo;
+import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.gui.activities.YouTubePlayerActivity;
 import free.rm.skytube.gui.fragments.YouTubePlayerFragment;
 

@@ -25,7 +25,7 @@ import android.preference.PreferenceScreen;
 
 import free.rm.skytube.BuildConfig;
 import free.rm.skytube.R;
-import free.rm.skytube.businessobjects.VideoStream.VideoResolution;
+import free.rm.skytube.businessobjects.YouTube.VideoStream.VideoResolution;
 
 /**
  * Preference fragment for video player related settings.

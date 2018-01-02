@@ -33,7 +33,7 @@ import com.bumptech.glide.request.RequestOptions;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
-import free.rm.skytube.businessobjects.YouTubeVideo;
+import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.gui.activities.ThumbnailViewerActivity;
 import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
 

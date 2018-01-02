@@ -26,7 +26,7 @@ import android.widget.TextView;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
-import free.rm.skytube.businessobjects.YouTubeChannel;
+import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.gui.businessobjects.fragments.TabFragment;
 
 /**

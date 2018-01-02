@@ -12,7 +12,7 @@ import com.bumptech.glide.request.RequestOptions;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import free.rm.skytube.R;
-import free.rm.skytube.businessobjects.YouTubePlaylist;
+import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubePlaylist;
 
 /**
  * A ViewHolder for the playlists grid view.

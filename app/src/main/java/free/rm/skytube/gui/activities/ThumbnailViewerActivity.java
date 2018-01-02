@@ -34,7 +34,7 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 
 import free.rm.skytube.R;
-import free.rm.skytube.businessobjects.YouTubeVideo;
+import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 
 /**
  * An activity that allows the user to view the thumbnail of a YouTube video.

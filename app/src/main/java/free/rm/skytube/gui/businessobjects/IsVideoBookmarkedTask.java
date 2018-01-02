@@ -4,7 +4,7 @@ import android.view.Menu;
 
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
-import free.rm.skytube.businessobjects.YouTubeVideo;
+import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.db.BookmarksDb;
 
 /**
