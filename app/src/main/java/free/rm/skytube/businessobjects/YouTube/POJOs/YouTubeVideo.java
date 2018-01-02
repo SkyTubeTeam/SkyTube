@@ -18,14 +18,12 @@
 package free.rm.skytube.businessobjects.YouTube.POJOs;
 
 import android.app.DownloadManager;
-import android.content.BroadcastReceiver;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.database.Cursor;
 import android.net.Uri;
+import android.os.Environment;
 import android.util.Log;
 import android.view.Menu;
 import android.widget.Toast;
@@ -49,15 +47,17 @@ import java.util.regex.Pattern;
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
+import free.rm.skytube.businessobjects.FileDownloader;
+import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.VideoStream.ParseStreamMetaData;
 import free.rm.skytube.businessobjects.YouTube.VideoStream.StreamMetaData;
 import free.rm.skytube.businessobjects.YouTube.VideoStream.StreamMetaDataList;
 import free.rm.skytube.businessobjects.db.BookmarksDb;
 import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
 import free.rm.skytube.businessobjects.interfaces.GetDesiredStreamListener;
-import free.rm.skytube.businessobjects.Logger;
 
 import static free.rm.skytube.app.SkyTubeApp.getContext;
+import static free.rm.skytube.app.SkyTubeApp.getStr;
 
 /**
  * Represents a YouTube video.
@@ -98,13 +98,9 @@ public class YouTubeVideo implements Serializable {
 	/** Set to true if the video is a current live stream. */
 	private boolean isLiveStream;
 
-	/** A BroadcastReceiver to react to this Video finishing being downloaded. */
-	private transient VideoDownloadReceiver videoDownloadReceiver;
-	/* A number representing the unique download id that the DownloadManager uses when this video is downloaded. */
-	private transient long downloadId;
-
 	/** Default preferred language(s) -- by default, no language shall be filtered out. */
 	private static final Set<String> defaultPrefLanguages = new HashSet<>(SkyTubeApp.getStringArrayAsList(R.array.languages_iso639_codes));
+
 
 	public YouTubeVideo(Video video) {
 		this.id = video.getId();
@@ -142,7 +138,7 @@ public class YouTubeVideo implements Serializable {
 
 			setThumbsUpPercentage(likeCount, dislikeCount);
 
-			this.viewsCount = String.format(SkyTubeApp.getStr(R.string.views),
+			this.viewsCount = String.format(getStr(R.string.views),
 											video.getStatistics().getViewCount());
 
 			if (likeCount != null)
@@ -226,7 +222,7 @@ public class YouTubeVideo implements Serializable {
 		// is live stream?
 		if (duration.equals("0:00")) {
 			isLiveStream = true;
-			duration = SkyTubeApp.getStr(R.string.LIVE);
+			duration = getStr(R.string.LIVE);
 			setPublishDate(new DateTime(new Date()));    // set publishDate to current (as there is a bug in YouTube API in which live videos's date is incorrect)
 		} else {
 			isLiveStream = false;
@@ -385,7 +381,7 @@ public class YouTubeVideo implements Serializable {
 	 * @return Set of user's preferred ISO 639 language codes (regex).
 	 */
 	private Set<String> getPreferredLanguages() {
-		return SkyTubeApp.getPreferenceManager().getStringSet(SkyTubeApp.getStr(R.string.pref_key_preferred_languages), defaultPrefLanguages);
+		return SkyTubeApp.getPreferenceManager().getStringSet(getStr(R.string.pref_key_preferred_languages), defaultPrefLanguages);
 	}
 
 
@@ -512,83 +508,67 @@ public class YouTubeVideo implements Serializable {
 	}
 
 	/**
-	 * Downloads this video. Will register an instance of {@link VideoDownloadReceiver} to receive a message from
-	 * the DownloadManager once the download is finished, then save the video and its local file URI to the DownloadedVideosDb.
-	 * @param context
+	 * Downloads this video.
+	 *
+	 * @param context Context
 	 */
 	public void downloadVideo(final Context context) {
-		if(!isDownloaded()) {
-			videoDownloadReceiver = new VideoDownloadReceiver();
-			context.registerReceiver(videoDownloadReceiver, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
-			Toast.makeText(getContext(),
-							String.format(getContext().getString(R.string.starting_video_download), getTitle()),
-							Toast.LENGTH_LONG).show();
-			getDesiredStream(new GetDesiredStreamListener() {
-				@Override
-				public void onGetDesiredStream(StreamMetaData desiredStream) {
-					// First, if there's already a local file for this video for some reason, delete it.
-					File file = new File(Uri.withAppendedPath(Uri.fromFile(context.getExternalFilesDir("videos")), getId() + ".mp4").toString());
-					if (file.exists())
-						file.delete();
+		if(isDownloaded())
+			return;
 
-					DownloadManager dm = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
+		Toast.makeText(getContext(),
+						String.format(getContext().getString(R.string.starting_video_download), getTitle()),
+						Toast.LENGTH_LONG).show();
 
-					boolean allowDownloadsOnMobile = SkyTubeApp.getPreferenceManager().getBoolean(SkyTubeApp.getStr(R.string.pref_key_allow_mobile_downloads), false);
-					int flags = DownloadManager.Request.NETWORK_WIFI;
-					if(allowDownloadsOnMobile)
-						flags = flags | DownloadManager.Request.NETWORK_MOBILE;
+		getDesiredStream(new GetDesiredStreamListener() {
+			@Override
+			public void onGetDesiredStream(StreamMetaData desiredStream) {
+				// First, if there's already a local file for this video for some reason, delete it.
+				File file = new File(Uri.withAppendedPath(Uri.fromFile(context.getExternalFilesDir(Environment.DIRECTORY_MOVIES)), getId() + ".mp4").toString());
+				if (file.exists())
+					file.delete();
 
-					DownloadManager.Request request = new DownloadManager.Request(desiredStream.getUri())
-									.setAllowedNetworkTypes(flags)
-									.setAllowedOverRoaming(false)
-									.setDestinationInExternalFilesDir(context, "videos", getId() + ".mp4")
-									.setTitle(getChannelName())
-									.setDescription(getTitle());
-					downloadId = dm.enqueue(request);
-				}
-
-				@Override
-				public void onGetDesiredStreamError(String errorMessage) {
-					Logger.e(YouTubeVideo.this, "Stream error: %s", errorMessage);
-					Toast.makeText(getContext(),
-									String.format(getContext().getString(R.string.video_download_stream_error), getTitle()),
-									Toast.LENGTH_LONG).show();
-					context.unregisterReceiver(videoDownloadReceiver);
-				}
-			});
-		}
-	}
-
-	/**
-	 * A Broadcast Receiver that will receive a message from the DownloadManager when this video is finished downloading.
-	 */
-	private class VideoDownloadReceiver extends BroadcastReceiver {
-		@Override
-		public void onReceive(Context context, Intent intent) {
-			String action = intent.getAction();
-			DownloadManager dm = (DownloadManager)context.getSystemService(Context.DOWNLOAD_SERVICE);
-
-			if (DownloadManager.ACTION_DOWNLOAD_COMPLETE.equals(action)) {
-				long referenceId = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
-				// Check the referenceId for this download. Only if it matches the downloadId for *this* video do we want to save it to the database.
-				if(referenceId == downloadId) {
-					DownloadManager.Query query = new DownloadManager.Query();
-					query.setFilterById(referenceId);
-					Cursor c = dm.query(query);
-					if (c.moveToFirst()) {
-						int columnIndex = c.getColumnIndex(DownloadManager.COLUMN_STATUS);
-						if (DownloadManager.STATUS_SUCCESSFUL == c.getInt(columnIndex)) {
-							Uri uri = Uri.parse(c.getString(c.getColumnIndex(DownloadManager.COLUMN_LOCAL_URI)));
-							boolean success = DownloadedVideosDb.getVideoDownloadsDb().add(YouTubeVideo.this, uri.toString());
-
-							Toast.makeText(getContext(),
-											String.format(getContext().getString(success ? R.string.video_downloaded : R.string.video_download_stream_error), getTitle()),
-											Toast.LENGTH_LONG).show();
-							context.unregisterReceiver(videoDownloadReceiver);
+				// download the video
+				new FileDownloader() {
+					@Override
+					public void onFileDownloadCompleted(boolean success, Uri localFileUri) {
+						if (success) {
+							success = DownloadedVideosDb.getVideoDownloadsDb().add(YouTubeVideo.this, localFileUri.toString());
 						}
+
+						Toast.makeText(getContext(),
+								String.format(getContext().getString(success ? R.string.video_downloaded : R.string.video_download_stream_error), getTitle()),
+								Toast.LENGTH_LONG).show();
 					}
-				}
+				}.setRemoteFileUri(desiredStream.getUri())
+						.setDirType(Environment.DIRECTORY_MOVIES)
+						.setTitle(getTitle())
+						.setDescription(getStr(R.string.video) + " ― " + getChannelName())
+						.setOutputFileName(getId())
+						.setAllowedOverRoaming(false)
+						.setAllowedNetworkTypesFlags(getAllowedNetworkTypesFlags())
+						.download();
 			}
-		}
+
+
+			private int getAllowedNetworkTypesFlags() {
+				boolean allowDownloadsOnMobile = SkyTubeApp.getPreferenceManager().getBoolean(getStr(R.string.pref_key_allow_mobile_downloads), false);
+				int flags = DownloadManager.Request.NETWORK_WIFI;
+				if(allowDownloadsOnMobile)
+					flags = flags | DownloadManager.Request.NETWORK_MOBILE;
+
+				return flags;
+			}
+
+
+			@Override
+			public void onGetDesiredStreamError(String errorMessage) {
+				Logger.e(YouTubeVideo.this, "Stream error: %s", errorMessage);
+				Toast.makeText(getContext(),
+								String.format(getContext().getString(R.string.video_download_stream_error), getTitle()),
+								Toast.LENGTH_LONG).show();
+			}
+		});
 	}
+
 }

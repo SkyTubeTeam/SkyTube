@@ -47,8 +47,7 @@ class GridViewHolder extends RecyclerView.ViewHolder {
 	/** YouTube video */
 	private YouTubeVideo            youTubeVideo = null;
 	private Context                 context = null;
-	private MainActivityListener mainActivityListener;
-	private DownloadedVideosDb.DownloadedVideosListener downloadedVideoListener;
+	private MainActivityListener    mainActivityListener;
 	private boolean                 showChannelInfo;
 
 	private TextView titleTextView;

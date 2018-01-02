@@ -19,13 +19,15 @@ package free.rm.skytube.gui.activities;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
@@ -34,14 +36,20 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 
 import free.rm.skytube.R;
+import free.rm.skytube.businessobjects.FileDownloader;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
+
+import static free.rm.skytube.app.SkyTubeApp.getContext;
 
 /**
  * An activity that allows the user to view the thumbnail of a YouTube video.
  */
 public class ThumbnailViewerActivity extends AppCompatActivity {
 
+	private YouTubeVideo youTubeVideo;
+
 	public static final String YOUTUBE_VIDEO = "ThumbnailViewerActivity.YouTubeVideo";
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -52,18 +60,40 @@ public class ThumbnailViewerActivity extends AppCompatActivity {
 		fab.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				Snackbar.make(view, "TODO", Snackbar.LENGTH_LONG)
-						.setAction("Action", null).show();
+				// download the thumbnail
+				new FileDownloader() {
+					@Override
+					public void onFileDownloadCompleted(boolean success, Uri localFileUri) {
+						Toast.makeText(getContext(),
+								success  ?  R.string.thumbnail_downloaded  :  R.string.thumbnail_download_error,
+								Toast.LENGTH_LONG)
+								.show();
+					}
+				}.setRemoteFileUri(getThumbnailUri())
+						.setDirType(Environment.DIRECTORY_PICTURES)
+						.setTitle(youTubeVideo.getTitle())
+						.setDescription(getString(R.string.thumbnail) + " ― " + youTubeVideo.getChannelName())
+						.setOutputFileName(youTubeVideo.getTitle())
+						.setAllowedOverRoaming(true)
+						.download();
 			}
 		});
 
-		Intent          intent = getIntent();
-		YouTubeVideo    youTubeVideo = (YouTubeVideo) intent.getExtras().getSerializable(YOUTUBE_VIDEO);
-		ImageView       thumbnailImageView = findViewById(R.id.thumbnail_image_view);
-		final View      loadingVideoView = findViewById(R.id.loadingVideoView);
+		Intent intent = getIntent();
+		youTubeVideo = (YouTubeVideo) intent.getExtras().getSerializable(YOUTUBE_VIDEO);
+
+		ImageView   thumbnailImageView = findViewById(R.id.thumbnail_image_view);
+		final View  loadingVideoView = findViewById(R.id.loadingVideoView);
+
+		thumbnailImageView.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				finish();
+			}
+		});
 
 		Glide.with(this)
-				.load(youTubeVideo.getThumbnailMaxResUrl() != null  ?  youTubeVideo.getThumbnailMaxResUrl()  :  youTubeVideo.getThumbnailUrl())
+				.load(getThumbnailUri())
 				.listener(new RequestListener<Drawable>() {
 					@Override
 					public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
@@ -78,6 +108,12 @@ public class ThumbnailViewerActivity extends AppCompatActivity {
 					}
 				})
 				.into(thumbnailImageView);
+	}
+
+
+	private Uri getThumbnailUri() {
+		String url = youTubeVideo.getThumbnailMaxResUrl() != null  ?  youTubeVideo.getThumbnailMaxResUrl()  :  youTubeVideo.getThumbnailUrl();
+		return Uri.parse(url);
 	}
 
 }
