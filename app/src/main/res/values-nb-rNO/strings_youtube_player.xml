@@ -31,4 +31,7 @@
 	<string name="play">Spill</string>
 	<string name="cancel">Avbryt</string>
 	<string name="clear">Tøm</string>
+<string name="tutorial_comments_icon">Dra til venstre for å vise kommentarer.</string>
+	<string name="tutorial_video_info_icon">Dra til toppen for å vise informasjon om videoen.</string>
+	<string name="tutorial_pause_video">"Dobbeltklikk for å pause eller spille av  en video."</string>
 </resources>
