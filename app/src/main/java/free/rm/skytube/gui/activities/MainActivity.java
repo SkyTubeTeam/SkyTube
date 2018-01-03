@@ -21,10 +21,10 @@ import android.content.ClipDescription;
 import android.content.ClipboardManager;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
@@ -39,9 +39,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
+import free.rm.skytube.businessobjects.SearchHistoryCursorAdapter;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubePlaylist;
 import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
+import free.rm.skytube.businessobjects.db.SearchHistoryDb;
+import free.rm.skytube.businessobjects.db.SearchHistoryTable;
+import free.rm.skytube.businessobjects.interfaces.SearchHistoryClickListener;
 import free.rm.skytube.gui.businessobjects.MainActivityListener;
 import free.rm.skytube.gui.businessobjects.YouTubePlayer;
 import free.rm.skytube.gui.businessobjects.updates.UpdatesCheckerTask;
@@ -74,6 +78,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 
 	private boolean dontAddToBackStack = false;
 
+	private SearchHistoryCursorAdapter searchHistoryCursorAdapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -156,13 +161,40 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 
 		// setup the SearchView (actionbar)
 		final MenuItem searchItem = menu.findItem(R.id.menu_search);
-		final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+		final SearchView searchView = (SearchView) searchItem.getActionView();
 
 		searchView.setQueryHint(getString(R.string.search_videos));
 		searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 			@Override
-			public boolean onQueryTextChange(String newText) {
-				return false;
+			public boolean onQueryTextChange(final String newText) {
+				searchView.setSuggestionsAdapter(null);
+				Cursor cursor = SearchHistoryDb.getSearchHistoryDb().getSuggestions(newText);
+				if(cursor.getCount() != 0) {
+					String[] columns = new String[] {SearchHistoryTable.COL_SEARCH_TEXT };
+					int[] columnTextId = new int[] { android.R.id.text1};
+
+					searchHistoryCursorAdapter = new SearchHistoryCursorAdapter(getBaseContext(),
+									R.layout.search_hint, cursor,
+									columns, columnTextId
+									, 0);
+					searchHistoryCursorAdapter.setOnUpdate(new Runnable() {
+						@Override
+						public void run() {
+							Cursor cursor = SearchHistoryDb.getSearchHistoryDb().getSuggestions(newText);
+							searchHistoryCursorAdapter.swapCursor(cursor);
+						}
+					});
+					searchHistoryCursorAdapter.setSearchHistoryClickListener(new SearchHistoryClickListener() {
+						@Override
+						public void onClick(String query) {
+							displaySearchResults(query);
+						}
+					});
+
+					searchView.setSuggestionsAdapter(searchHistoryCursorAdapter);
+					return true;
+				} else
+					return false;
 			}
 
 			@Override
@@ -170,12 +202,10 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 				// hide the keyboard
 				searchView.clearFocus();
 
-				// open SearchVideoGridFragment and display the results
-				searchVideoGridFragment = new SearchVideoGridFragment();
-				Bundle bundle = new Bundle();
-				bundle.putString(SearchVideoGridFragment.QUERY, query);
-				searchVideoGridFragment.setArguments(bundle);
-				switchToFragment(searchVideoGridFragment);
+				// Save this search string into the Search History Database (for Suggestions)
+				SearchHistoryDb.getSearchHistoryDb().insertSuggestion(query);
+
+				displaySearchResults(query);
 
 				return true;
 			}
@@ -328,4 +358,16 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 		switchToFragment(playlistVideosFragment);
 	}
 
+	/**
+	 * Switch to the Search Video Grid Fragment with the selected query to search for videos.
+	 * @param query
+	 */
+	private void displaySearchResults(String query) {
+		// open SearchVideoGridFragment and display the results
+		searchVideoGridFragment = new SearchVideoGridFragment();
+		Bundle bundle = new Bundle();
+		bundle.putString(SearchVideoGridFragment.QUERY, query);
+		searchVideoGridFragment.setArguments(bundle);
+		switchToFragment(searchVideoGridFragment);
+	}
 }
