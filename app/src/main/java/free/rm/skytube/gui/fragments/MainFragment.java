@@ -8,6 +8,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -36,6 +37,7 @@ public class MainFragment extends FragmentEx {
 	private SubsAdapter					subsAdapter  = null;
 	private ActionBarDrawerToggle		subsDrawerToggle;
 	private TabLayout                   tabLayout = null;
+	private DrawerLayout 							subsDrawerLayout = null;
 
 	/** List of fragments that will be displayed as tabs. */
 	private List<VideosGridFragment>	videoGridFragmentsList = new ArrayList<>();
@@ -83,7 +85,7 @@ public class MainFragment extends FragmentEx {
 		// indicate that this fragment has an action bar menu
 		setHasOptionsMenu(true);
 
-		DrawerLayout subsDrawerLayout = view.findViewById(R.id.subs_drawer_layout);
+		subsDrawerLayout = view.findViewById(R.id.subs_drawer_layout);
 		subsDrawerToggle = new ActionBarDrawerToggle(
 						getActivity(),
 						subsDrawerLayout,
@@ -251,5 +253,20 @@ public class MainFragment extends FragmentEx {
 			getChildFragmentManager().putFragment(outState, DOWNLOADED_VIDEOS_FRAGMENT, downloadedVideosFragment);
 
 		super.onSaveInstanceState(outState);
+	}
+
+	/**
+	 * Returns true if the subscriptions drawer is opened.
+	 */
+	public boolean isDrawerOpen() {
+		return subsDrawerLayout.isDrawerOpen(GravityCompat.START);
+	}
+
+	
+	/**
+	 * Close the subscriptions drawer.
+	 */
+	public void closeDrawer() {
+		subsDrawerLayout.closeDrawer(GravityCompat.START);
 	}
 }
