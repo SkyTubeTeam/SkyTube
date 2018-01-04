@@ -255,10 +255,17 @@ public class MainFragment extends FragmentEx {
 		super.onSaveInstanceState(outState);
 	}
 
+	/**
+	 * Returns true if the subscriptions drawer is opened.
+	 */
 	public boolean isDrawerOpen() {
 		return subsDrawerLayout.isDrawerOpen(GravityCompat.START);
 	}
 
+	
+	/**
+	 * Close the subscriptions drawer.
+	 */
 	public void closeDrawer() {
 		subsDrawerLayout.closeDrawer(GravityCompat.START);
 	}
