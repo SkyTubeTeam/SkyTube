@@ -47,6 +47,10 @@ public class SearchHistoryDb extends SQLiteOpenHelperEx {
 
 	}
 
+	public int deleteAllSuggestions() {
+		return getWritableDatabase().delete(SearchHistoryTable.TABLE_NAME, null, null);
+	}
+
 	public long insertSuggestion(String text) {
 		ContentValues values = new ContentValues();
 		values.put(SearchHistoryTable.COL_SEARCH_TEXT, text);

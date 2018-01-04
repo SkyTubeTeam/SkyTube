@@ -42,4 +42,10 @@
 		android:title="@string/pref_title_allow_mobile_downloads"
 		android:summary="@string/pref_summary_allow_mobile_downloads"/>
 
+	<CheckBoxPreference
+		android:defaultValue="false"
+		android:key="@string/pref_key_disable_search_history"
+		android:title="@string/pref_title_disable_search_history"
+		android:summary="@string/pref_summary_disable_search_history"/>
+
 </PreferenceScreen>

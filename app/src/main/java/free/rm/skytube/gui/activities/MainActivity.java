@@ -168,6 +168,9 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 			@Override
 			public boolean onQueryTextChange(final String newText) {
 				searchView.setSuggestionsAdapter(null);
+				if(SkyTubeApp.getPreferenceManager().getBoolean(SkyTubeApp.getStr(R.string.pref_key_disable_search_history), false))
+					return false;
+
 				Cursor cursor = SearchHistoryDb.getSearchHistoryDb().getSuggestions(newText);
 				if(cursor.getCount() != 0) {
 					String[] columns = new String[] {SearchHistoryTable.COL_SEARCH_TEXT };
@@ -202,8 +205,10 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 				// hide the keyboard
 				searchView.clearFocus();
 
-				// Save this search string into the Search History Database (for Suggestions)
-				SearchHistoryDb.getSearchHistoryDb().insertSuggestion(query);
+				if(!SkyTubeApp.getPreferenceManager().getBoolean(SkyTubeApp.getStr(R.string.pref_key_disable_search_history), false)) {
+					// Save this search string into the Search History Database (for Suggestions)
+					SearchHistoryDb.getSearchHistoryDb().insertSuggestion(query);
+				}
 
 				displaySearchResults(query);
 
