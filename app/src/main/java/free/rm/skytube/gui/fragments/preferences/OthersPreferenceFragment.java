@@ -105,6 +105,7 @@ public class OthersPreferenceFragment extends PreferenceFragment implements Shar
 				// If Search History is disabled, clear the Search History database.
 				if(disableSearchHistoryPreference.isChecked()) {
 					SearchHistoryDb.getSearchHistoryDb().deleteAllSuggestions();
+					Toast.makeText(getActivity(), getString(R.string.pref_disable_search_history_deleted), Toast.LENGTH_LONG).show();
 				}
 			} /*else if (key.equals(getString(R.string.pref_feed_notification_key))) {
 				ListPreference feedNotificationPref = (ListPreference) findPreference(key);
