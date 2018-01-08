@@ -637,6 +637,14 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 	@Override
 	public void onPrepareOptionsMenu(@NonNull Menu menu) {
 		DatabaseTasks.updateDownloadedVideoMenu(youTubeVideo, menu);
+
+		if (youTubeVideo != null && youTubeVideo.getChannelId() != null) {
+			menu.findItem(R.id.subscribe_channel).setVisible(true);
+			menu.findItem(R.id.open_channel).setVisible(true);
+		} else {
+			menu.findItem(R.id.subscribe_channel).setVisible(false);
+			menu.findItem(R.id.open_channel).setVisible(false);
+		}
 	}
 
 	@Override
@@ -705,6 +713,14 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 			case R.id.unblock_channel:
 				compositeDisposable.add(youTubeChannel.unblockChannel().subscribe());
 				return true;
+			case R.id.subscribe_channel:
+				YouTubeChannel.subscribeChannel(getContext(), youTubeVideo.getChannelId());
+				return true;
+
+			case R.id.open_channel:
+				SkyTubeApp.launchChannel(youTubeVideo.getChannelId(), getContext());
+				return true;
+
 			default:
 				return super.onOptionsItemSelected(item);
 		}
