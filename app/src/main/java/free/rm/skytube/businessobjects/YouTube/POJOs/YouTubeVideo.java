@@ -49,12 +49,18 @@ import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.FileDownloader;
 import free.rm.skytube.businessobjects.Logger;
+import free.rm.skytube.businessobjects.YouTube.GetChannelsDetails;
+import free.rm.skytube.businessobjects.YouTube.Tasks.GetYouTubeChannelInfoTask;
 import free.rm.skytube.businessobjects.YouTube.VideoStream.ParseStreamMetaData;
 import free.rm.skytube.businessobjects.YouTube.VideoStream.StreamMetaData;
 import free.rm.skytube.businessobjects.YouTube.VideoStream.StreamMetaDataList;
 import free.rm.skytube.businessobjects.db.BookmarksDb;
 import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
+import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 import free.rm.skytube.businessobjects.interfaces.GetDesiredStreamListener;
+import free.rm.skytube.gui.businessobjects.YouTubePlayer;
+import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
+import free.rm.skytube.gui.fragments.SubscriptionsFeedFragment;
 
 import static free.rm.skytube.app.SkyTubeApp.getContext;
 import static free.rm.skytube.app.SkyTubeApp.getStr;
@@ -424,6 +430,41 @@ public class YouTubeVideo implements Serializable {
 		if (successUnbookmark) {
 			menu.findItem(R.id.bookmark_video).setVisible(true);
 			menu.findItem(R.id.unbookmark_video).setVisible(false);
+		}
+	}
+
+	public void openChannel(final Context context) {
+		if (channelId != null) {
+			new GetYouTubeChannelInfoTask(new YouTubeChannelInterface() {
+				@Override
+				public void onGetYouTubeChannel(YouTubeChannel youTubeChannel) {
+					YouTubePlayer.launchChannel(youTubeChannel, context);
+				}
+			}).executeInParallel(channelId);
+		}
+	}
+
+	public void subscribeChannel(final Context context, final Menu menu) {
+		if (channelId != null) {
+			new GetYouTubeChannelInfoTask(new YouTubeChannelInterface() {
+
+				@Override
+				public void onGetYouTubeChannel(YouTubeChannel youTubeChannel) {
+					if (SubscriptionsDb.getSubscriptionsDb().subscribe(youTubeChannel)) {
+						youTubeChannel.setUserSubscribed(true);
+						SubsAdapter adapter = SubsAdapter.get(context);
+						adapter.appendChannel(youTubeChannel);
+						SubscriptionsFeedFragment.refreshSubscriptionsFeed();
+						Toast.makeText(context, "Channel subscribed", Toast.LENGTH_LONG).show();
+					} else {
+						Toast.makeText(context, "Subscription failed", Toast.LENGTH_LONG).show();
+					}
+
+				}
+			}).executeInParallel(channelId);
+
+		} else {
+			Toast.makeText(context, "Channel is not specified", Toast.LENGTH_LONG).show();
 		}
 	}
 

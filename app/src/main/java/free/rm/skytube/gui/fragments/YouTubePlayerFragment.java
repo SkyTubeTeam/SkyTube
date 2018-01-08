@@ -460,10 +460,16 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 	public void onPrepareOptionsMenu(Menu menu) {
 		// Hide the download video option if mobile downloads are not allowed and the device is connected through mobile, and the video isn't already downloaded
 		boolean allowDownloadsOnMobile = SkyTubeApp.getPreferenceManager().getBoolean(SkyTubeApp.getStr(R.string.pref_key_allow_mobile_downloads), false);
-		if((youTubeVideo != null && !youTubeVideo.isDownloaded()) && (SkyTubeApp.isConnectedToWiFi() || (SkyTubeApp.isConnectedToMobile() && allowDownloadsOnMobile))) {
-			menu.findItem(R.id.download_video).setVisible(true);
-		} else {
-			menu.findItem(R.id.download_video).setVisible(false);
+		if (youTubeVideo != null) {
+			if((youTubeVideo != null && !youTubeVideo.isDownloaded()) && (SkyTubeApp.isConnectedToWiFi() || (SkyTubeApp.isConnectedToMobile() && allowDownloadsOnMobile))) {
+				menu.findItem(R.id.download_video).setVisible(true);
+			} else {
+				menu.findItem(R.id.download_video).setVisible(false);
+			}
+			if (youTubeVideo.getChannelId() != null) {
+				menu.findItem(R.id.subscribe_channel).setVisible(true);
+				menu.findItem(R.id.open_channel).setVisible(true);
+			}
 		}
 	}
 
@@ -477,8 +483,9 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 		//
 		// youTubeVideo might be null if we have only passed the video URL to this fragment (i.e.
 		// the app is still trying to construct youTubeVideo in the background).
-		if (youTubeVideo != null)
+		if (youTubeVideo != null) {
 			new IsVideoBookmarkedTask(youTubeVideo, menu).executeInParallel();
+		}
 	}
 
 
@@ -518,6 +525,14 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 
 			case R.id.download_video:
 				youTubeVideo.downloadVideo(getContext());
+				return true;
+
+			case R.id.subscribe_channel:
+				youTubeVideo.subscribeChannel(getContext(), menu);
+				return true;
+
+			case R.id.open_channel:
+				youTubeVideo.openChannel(getContext());
 				return true;
 
 			default:

@@ -168,6 +168,10 @@ class GridViewHolder extends RecyclerView.ViewHolder {
 			else
 				popupMenu.getMenu().findItem(R.id.download_video).setVisible(false);
 		}
+		if (youTubeVideo.getChannelId() != null) {
+			menu.findItem(R.id.open_channel).setVisible(true);
+			menu.findItem(R.id.subscribe_channel).setVisible(true);
+		}
 		popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
@@ -198,6 +202,12 @@ class GridViewHolder extends RecyclerView.ViewHolder {
 						return true;
 					case R.id.download_video:
 						youTubeVideo.downloadVideo(context);
+						return true;
+					case R.id.subscribe_channel:
+						youTubeVideo.subscribeChannel(context, popupMenu.getMenu());
+						return true;
+					case R.id.open_channel:
+						youTubeVideo.openChannel(context);
 						return true;
 				}
 				return false;

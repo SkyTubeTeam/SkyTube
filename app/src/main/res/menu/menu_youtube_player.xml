@@ -34,4 +34,8 @@
 	<item android:id="@+id/download_video"
 		  android:title="@string/download_video"
 		  app:showAsAction="never"/>
+
+	<item android:id="@+id/open_channel" android:visible="false" android:title="Open channel"></item>
+	<item android:id="@+id/subscribe_channel" android:visible="false" android:title="Subscribe"></item>
+
 </menu>
