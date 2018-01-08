@@ -648,6 +648,23 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
     @Override
     public void onPrepareOptionsMenu(@NonNull Menu menu) {
         DatabaseTasks.updateDownloadedVideoMenu(youTubeVideo, menu);
+        final MenuItem subscribeChannel = menu.findItem(R.id.subscribe_channel);
+        final MenuItem openChannel = menu.findItem(R.id.open_channel);
+        if (youTubeVideo != null && youTubeVideo.getChannelId() != null) {
+            if (subscribeChannel != null) {
+                subscribeChannel.setVisible(true);
+            }
+            if (openChannel != null) {
+                openChannel.setVisible(true);
+            }
+        } else {
+            if (subscribeChannel != null) {
+                subscribeChannel.setVisible(false);
+            }
+            if (openChannel != null) {
+                openChannel.setVisible(false);
+            }
+        }
     }
 
     @Override
