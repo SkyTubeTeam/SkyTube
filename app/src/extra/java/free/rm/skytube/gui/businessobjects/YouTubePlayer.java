@@ -27,8 +27,8 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 
 import free.rm.skytube.R;
-import free.rm.skytube.businessobjects.YouTubeAPIKey;
-import free.rm.skytube.businessobjects.YouTubeVideo;
+import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPIKey;
+import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.gui.activities.YouTubePlayerActivity;
 import free.rm.skytube.gui.fragments.YouTubePlayerFragment;
 
