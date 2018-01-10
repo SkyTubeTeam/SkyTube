@@ -257,11 +257,18 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 
 	private boolean hasVideo(YouTubeVideo video) {
 		String query = String.format("SELECT COUNT(*) FROM %s WHERE %s = ?", SubscriptionsVideosTable.TABLE_NAME, SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID);
-		Cursor cursor = SubscriptionsDb.getSubscriptionsDb().getReadableDatabase().rawQuery(query, new String[]{video.getId()});
-		if(cursor.moveToFirst()) {
-			return cursor.getInt(0) > 0;
+		Cursor cursor = null;
+		try {
+			cursor = SubscriptionsDb.getSubscriptionsDb().getReadableDatabase().rawQuery(query, new String[]{video.getId()});
+			if (cursor.moveToFirst()) {
+				return cursor.getInt(0) > 0;
+			}
+			return false;
+		} finally {
+			if (cursor != null) {
+				cursor.close();
+			}
 		}
-		return false;
 	}
 
 

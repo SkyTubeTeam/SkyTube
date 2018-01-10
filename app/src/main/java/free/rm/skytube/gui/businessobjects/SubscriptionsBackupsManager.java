@@ -355,7 +355,7 @@ public class SubscriptionsBackupsManager {
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
-			Toast.makeText(activity, String.format(activity.getString(R.string.import_subscriptions_parse_error), e.getMessage()), Toast.LENGTH_LONG);
+			Toast.makeText(activity, String.format(activity.getString(R.string.import_subscriptions_parse_error), e.getMessage()), Toast.LENGTH_LONG).show();
 		}
 
 
