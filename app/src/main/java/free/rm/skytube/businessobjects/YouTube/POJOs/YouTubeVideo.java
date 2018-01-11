@@ -52,6 +52,7 @@ import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.VideoStream.ParseStreamMetaData;
 import free.rm.skytube.businessobjects.YouTube.VideoStream.StreamMetaData;
 import free.rm.skytube.businessobjects.YouTube.VideoStream.StreamMetaDataList;
+import free.rm.skytube.businessobjects.db.BlockedChannelsDb;
 import free.rm.skytube.businessobjects.db.BookmarksDb;
 import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
 import free.rm.skytube.businessobjects.interfaces.GetDesiredStreamListener;
@@ -439,6 +440,17 @@ public class YouTubeVideo implements Serializable {
 		ClipData clip = ClipData.newPlainText("Video URL", getVideoUrl());
 		clipboard.setPrimaryClip(clip);
 		Toast.makeText(context, R.string.url_copied_to_clipboard, Toast.LENGTH_SHORT).show();
+	}
+
+	public void blockChannel(Context context) {
+
+		boolean successBlockChannel = BlockedChannelsDb.getBlockedChannelsDb().add(this);
+		Toast.makeText(context,
+				successBlockChannel ? R.string.channel_blocked : R.string.channed_blocked_error,
+				Toast.LENGTH_LONG).show();
+
+		Log.d("", "blockChannel():  WORKED");
+
 	}
 
 	/**

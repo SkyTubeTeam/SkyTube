@@ -13,7 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import free.rm.skytube.app.SkyTubeApp;
-import free.rm.skytube.businessobjects.YouTubeVideo;
+import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
+import free.rm.skytube.businessobjects.interfaces.OrderableDatabase;
 
 /**
  * Created by Okan Kaya on 6.12.2017.
@@ -28,7 +29,7 @@ public class BlockedChannelsDb extends SQLiteOpenHelperEx {
     private static final String DATABASE_NAME = "blockedchannels.db";
     private static volatile BlockedChannelsDb blockedChannelsDb = null;
     private static boolean hasUpdated = false;
-    private List<BlockedChannelsDb.BlockedChannelsDbListener> listeners = new ArrayList<>();
+    private List<BlockedChannelsDbListener> listeners = new ArrayList<>();
 
     public BlockedChannelsDb(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);

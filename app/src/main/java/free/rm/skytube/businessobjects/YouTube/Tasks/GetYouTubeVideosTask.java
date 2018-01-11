@@ -19,20 +19,26 @@ package free.rm.skytube.businessobjects.YouTube.Tasks;
 
 import android.view.View;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.YouTube.GetYouTubeVideos;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
+import free.rm.skytube.businessobjects.db.BlockedChannelsDb;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 import free.rm.skytube.gui.businessobjects.LoadingProgressBar;
 import free.rm.skytube.gui.businessobjects.adapters.VideoGridAdapter;
+
 
 /**
  * An asynchronous task that will retrieve YouTube videos and displays them in the supplied Adapter.
  */
 public class GetYouTubeVideosTask extends AsyncTaskParallel<Void, Void, List<YouTubeVideo>> {
+
+	BlockedChannelsDb blockedChannelsDb = BlockedChannelsDb.getBlockedChannelsDb();
+
 
 	/** Object used to retrieve the desired YouTube videos. */
 	private GetYouTubeVideos getYouTubeVideos;
@@ -115,7 +121,20 @@ public class GetYouTubeVideosTask extends AsyncTaskParallel<Void, Void, List<You
 
 	@Override
 	protected void onPostExecute(List<YouTubeVideo> videosList) {
-		videoGridAdapter.appendList(videosList);
+
+		List<YouTubeVideo> youTubeVideoList = new ArrayList<>();
+
+		List<String> blockedChannelIds = new ArrayList<>();
+		for (String channelIds: blockedChannelsDb.getBlockedChannelsList()) {
+			blockedChannelIds.add(channelIds);
+		}
+
+		for (YouTubeVideo video : videosList) {
+			if (!blockedChannelIds.contains(video.getChannelId())){
+				youTubeVideoList.add(video);
+			}
+		}
+		videoGridAdapter.appendList(youTubeVideoList);
 
 		if(progressBar != null)
 			progressBar.setVisibility(View.GONE);
