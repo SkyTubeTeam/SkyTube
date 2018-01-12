@@ -17,6 +17,7 @@
 
 package free.rm.skytube.businessobjects.YouTube.Tasks;
 
+import android.util.Log;
 import android.view.View;
 
 import java.util.ArrayList;
@@ -122,19 +123,25 @@ public class GetYouTubeVideosTask extends AsyncTaskParallel<Void, Void, List<You
 	@Override
 	protected void onPostExecute(List<YouTubeVideo> videosList) {
 
-		List<YouTubeVideo> youTubeVideoList = new ArrayList<>();
+		try {
 
-		List<String> blockedChannelIds = new ArrayList<>();
-		for (String channelIds: blockedChannelsDb.getBlockedChannelsList()) {
-			blockedChannelIds.add(channelIds);
-		}
+			ArrayList<YouTubeVideo> youTubeVideoList = new ArrayList<>();
 
-		for (YouTubeVideo video : videosList) {
-			if (!blockedChannelIds.contains(video.getChannelId())){
-				youTubeVideoList.add(video);
+			List<String> blockedChannelIds = new ArrayList<>();
+			for (String channelIds: blockedChannelsDb.getBlockedChannelsList()) {
+				blockedChannelIds.add(channelIds);
 			}
+
+			for (YouTubeVideo video : videosList) {
+				if (!blockedChannelIds.contains(video.getChannelId())){
+					youTubeVideoList.add(video);
+				}
+			}
+			videoGridAdapter.appendList(youTubeVideoList);
+		} catch (Exception e){
+			Log.d(TAG, "onPostExecute: " + e.toString());
 		}
-		videoGridAdapter.appendList(youTubeVideoList);
+
 
 		if(progressBar != null)
 			progressBar.setVisibility(View.GONE);

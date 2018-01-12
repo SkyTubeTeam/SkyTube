@@ -7,14 +7,12 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
-import free.rm.skytube.businessobjects.interfaces.OrderableDatabase;
 
 /**
  * Created by Okan Kaya on 6.12.2017.
@@ -41,7 +39,7 @@ public class BlockedChannelsDb extends SQLiteOpenHelperEx {
             blockedChannelsDb = new BlockedChannelsDb(SkyTubeApp.getContext());
         }
 
-    return blockedChannelsDb;
+        return blockedChannelsDb;
     }
 
     @Override
@@ -52,7 +50,7 @@ public class BlockedChannelsDb extends SQLiteOpenHelperEx {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-    sqLiteDatabase.execSQL(BlockedChannelsTable.getCreateStatement());
+        sqLiteDatabase.execSQL(BlockedChannelsTable.getCreateStatement());
     }
 
     @Override
@@ -72,7 +70,7 @@ public class BlockedChannelsDb extends SQLiteOpenHelperEx {
         ContentValues contentValues = new ContentValues();
 
         contentValues.put(BlockedChannelsTable.COL_CHANNEL_ID, video.getChannelId());
-     //   contentValues.put(BlockedChannelsTable.COL_YOUTUBE_CHANNEL_NAME, gson.toJson(video.getChannelName()));
+        //   contentValues.put(BlockedChannelsTable.COL_YOUTUBE_CHANNEL_NAME, gson.toJson(video.getChannelName()));
 
         boolean addSuccesful = getWritableDatabase().insert(BlockedChannelsTable.TABLE_NAME, null, contentValues) != -1;
         onUpdated();
@@ -80,7 +78,6 @@ public class BlockedChannelsDb extends SQLiteOpenHelperEx {
         Log.d("", "BLOCK CHANNEL add: number " + this.getBlockedChannels());
         return addSuccesful;
     }
-
 
 
     /**
@@ -122,36 +119,19 @@ public class BlockedChannelsDb extends SQLiteOpenHelperEx {
         return totalBlockedChannels;
     }
 
-    public List<String> getBlockedChannelsList(){
+    public List<String> getBlockedChannelsList() {
 
         List<String> videos = new ArrayList<>();
 
         String query = "SELECT * FROM " + BlockedChannelsTable.TABLE_NAME;
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
-        Cursor cursor = sqLiteDatabase.rawQuery(query,null);
-/*
-        String query = "SELECT * FROM " + TABLE_IMAGES;
-        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
-        Cursor cursor = sqLiteDatabase.rawQuery(query, null);*/
+        Cursor cursor = sqLiteDatabase.rawQuery(query, null);
 
-     /*   Cursor	cursor = getReadableDatabase().query(
-                BlockedChannelsTable.TABLE_NAME,
-                new String[]{BlockedChannelsTable.COL_CHANNEL_ID},
-                null,
-                null, null, null, null);
-*/
-       // List<YouTubeVideo> videos = new ArrayList<>();
-
-        if(cursor.moveToFirst()) {
+        if (cursor.moveToFirst()) {
             do {
-
                 String channelId = cursor.getString(0);
-
-                 /*byte[] blob = cursor.getBlob(cursor.getColumnIndex(BlockedChannelsTable.COL_ID));
-                YouTubeVideo video = new Gson().fromJson(new String(blob), new TypeToken<YouTubeVideo>(){}.getType());
-                */
-                 videos.add(channelId);
-            } while(cursor.moveToNext());
+                videos.add(channelId);
+            } while (cursor.moveToNext());
         }
         cursor.close();
 
