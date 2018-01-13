@@ -76,6 +76,10 @@
 			android:enabled="true">
 		</receiver>
 
+		<activity
+			android:name=".gui.activities.PermissionsActivity"
+		    android:theme="@style/TransparentActivity">
+		</activity>
 	</application>
 
 </manifest>
