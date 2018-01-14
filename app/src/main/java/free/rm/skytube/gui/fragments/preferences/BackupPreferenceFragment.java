@@ -66,7 +66,7 @@ public class BackupPreferenceFragment extends PreferenceFragment {
 		importSubsPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 			@Override
 			public boolean onPreferenceClick(Preference preference) {
-				subscriptionsBackupsManager.displayImportSubscriptionsDialog();
+				subscriptionsBackupsManager.displayImportSubscriptionsFromYouTubeDialog();
 				return true;
 			}
 		});

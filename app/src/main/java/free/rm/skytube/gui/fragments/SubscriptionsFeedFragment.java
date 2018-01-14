@@ -42,14 +42,14 @@ import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.FeedUpdaterService;
-import free.rm.skytube.businessobjects.YouTube.Tasks.GetSubscriptionVideosTask;
 import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
-import free.rm.skytube.businessobjects.db.SubscriptionsDb;
+import free.rm.skytube.businessobjects.YouTube.Tasks.GetSubscriptionVideosTask;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetSubscriptionVideosTaskListener;
-import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
+import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 import free.rm.skytube.gui.businessobjects.SubscriptionsBackupsManager;
+import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
 
 /**
  * Fragment that displays subscriptions videos feed from all channels the user is subscribed to.
@@ -79,7 +79,8 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 	@BindView(R.id.noSubscriptionsText)
 	View noSubscriptionsText;
 
-	private static final String KEY_SET_UPDATE_FEED_TAB = "SubscriptionsFeedFragment.KEY_SET_UPDATE_FEED_TAB";
+	private static final String FLAG_REFRESH_FEED_FROM_CACHE = "SubscriptionsFeedFragment.FLAG_REFRESH_FEED_FROM_CACHE";
+	private static final String FLAG_REFRESH_FEED_FULL = "SubscriptionsFeedFragment.FLAG_REFRESH_FEED_FULL";
 	/** Refresh the feed (by querying the YT servers) after 3 hours since the last check. */
 	private static final int    REFRESH_TIME = 3;
 
@@ -98,13 +99,8 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 
 		setLayoutResource(R.layout.fragment_subs_feed);
 		subscriptionsBackupsManager = new SubscriptionsBackupsManager(getActivity(), SubscriptionsFeedFragment.this);
-	}
 
-
-	@Override
-	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-		super.onViewCreated(view, savedInstanceState);
-
+		// setup the UI and refresh the feed (if applicable)
 		new RefreshFeedTask(isFragmentSelected()).executeInParallel();
 	}
 
@@ -114,16 +110,20 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 		getActivity().registerReceiver(feedUpdaterReceiver, new IntentFilter(FeedUpdaterService.NEW_SUBSCRIPTION_VIDEOS_FOUND));
 
 		super.onResume();
-		// this will detect whether we have previous instructed the app (via refreshSubscriptionsFeed())
+		// this will detect whether we have previous instructed the app (via refreshSubsFeedFromCache())
 		// to refresh the subs feed
-		if (SkyTubeApp.getPreferenceManager().getBoolean(KEY_SET_UPDATE_FEED_TAB, false)) {
+		if (isFlagSet(FLAG_REFRESH_FEED_FROM_CACHE)) {
 			// unset the flag
-			SharedPreferences.Editor editor = SkyTubeApp.getPreferenceManager().edit();
-			editor.putBoolean(KEY_SET_UPDATE_FEED_TAB, false);
-			editor.commit();
+			unsetFlag(FLAG_REFRESH_FEED_FROM_CACHE);
 
-			// refresh the subs feed
+			// refresh the subs feed by reading from the cache (i.e. local DB)
 			new RefreshFeedFromCacheTask().executeInParallel();
+		} else if (isFlagSet(FLAG_REFRESH_FEED_FULL)) {
+			// unset the flag
+			unsetFlag(FLAG_REFRESH_FEED_FULL);
+
+			// refresh the subs feed by retrieving videos from the YT servers
+			onRefresh();
 		}
 	}
 
@@ -136,19 +136,42 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 
 
 	/**
-	 * Instruct the {@link SubscriptionsFeedFragment} to refresh the subscriptions feed.  This might
-	 * occur due to user subscribing/unsubscribing to a channel or a user just imported the subbed
-	 * channels from YouTube (XML file).
+	 * Instruct the {@link SubscriptionsFeedFragment} to refresh the subscriptions feed.
+	 *
+	 * This might occur due to user subscribing/unsubscribing to a channel.
 	 */
-	public static void refreshSubscriptionsFeed() {
+	public static void refreshSubsFeedFromCache() {
+		setFlag(FLAG_REFRESH_FEED_FROM_CACHE);
+	}
+
+
+	/**
+	 * Instruct the {@link SubscriptionsFeedFragment} to refresh the subscriptions feed by retrieving
+	 * any newly published videos from the YT servers.
+	 *
+	 * This might occur due to user just imported the subbed channels from YouTube (XML file).
+	 */
+	public static void refreshSubsFeedFull() {
+		setFlag(FLAG_REFRESH_FEED_FULL);
+	}
+
+
+	private static void setFlag(String flag) {
 		SharedPreferences.Editor editor = SkyTubeApp.getPreferenceManager().edit();
-		editor.putBoolean(KEY_SET_UPDATE_FEED_TAB, true);
+		editor.putBoolean(flag, true);
 		editor.commit();
 	}
 
 
-	private void doRefresh(boolean showDialog) {
-		new RefreshFeedTask(showDialog).executeInParallel();
+	private void unsetFlag(String flag) {
+		SharedPreferences.Editor editor = SkyTubeApp.getPreferenceManager().edit();
+		editor.putBoolean(flag, false);
+		editor.commit();
+	}
+
+
+	private boolean isFlagSet(String flag) {
+		return SkyTubeApp.getPreferenceManager().getBoolean(flag, false);
 	}
 
 
@@ -168,7 +191,7 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 	@Override
 	public void onRefresh() {
 		shouldRefresh = true;
-		doRefresh(true);
+		new RefreshFeedTask(true).executeInParallel();
 	}
 
 
@@ -237,7 +260,7 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 
 	@OnClick(R.id.importSubscriptionsButton)
 	public void importSubscriptions(View v) {
-		subscriptionsBackupsManager.displayImportSubscriptionsDialog();
+		subscriptionsBackupsManager.displayImportSubscriptionsFromYouTubeDialog();
 	}
 
 
@@ -283,18 +306,32 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 	 */
 	private class RefreshFeedTask extends AsyncTaskParallel<Void, Void, Integer> {
 
-		private boolean showDialog;
+		private MaterialDialog  fetchingChannelInfoDialog;
+		private boolean         showDialogs;
 
 
-		private RefreshFeedTask(boolean showDialog) {
-			this.showDialog = showDialog;
+		private RefreshFeedTask(boolean showFetchingVideosDialog) {
+			this.showDialogs = showFetchingVideosDialog;
+		}
+
+
+		@Override
+		protected void onPreExecute() {
+			// display the "Fetching channels information …" dialog
+			if (showDialogs) {
+				fetchingChannelInfoDialog = new MaterialDialog.Builder(getActivity())
+						.content(R.string.fetching_subbed_channels_info)
+						.progress(true, 0)
+						.build();
+				fetchingChannelInfoDialog.show();
+			}
 		}
 
 
 		@Override
 		protected Integer doInBackground(Void... params) {
-			// get the total number of channels the user is subscribed to
-			return SubscriptionsDb.getSubscriptionsDb().getTotalSubscribedChannels();
+			// get the total number of channels the user is subscribed to (from the subs adapter)
+			return SubsAdapter.get(SubscriptionsFeedFragment.this.getActivity()).getSubsLists().size();
 		}
 
 
@@ -303,6 +340,11 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 			numVideosFetched      = 0;
 			numChannelsFetched    = 0;
 			numChannelsSubscribed = totalNumberOfChannels;
+
+			// hide the "Fetching channels information …" dialog
+			if (showDialogs) {
+				fetchingChannelInfoDialog.dismiss();
+			}
 
 			// setup the user interface
 			setupUiAccordingToNumOfSubbedChannels(totalNumberOfChannels);
@@ -317,7 +359,7 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 					refreshInProgress = true;
 					shouldRefresh = false;
 
-					if (showDialog)
+					if (showDialogs)
 						showRefreshDialog();
 				}
 			}

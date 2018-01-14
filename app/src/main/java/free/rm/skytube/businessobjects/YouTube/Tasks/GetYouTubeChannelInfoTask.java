@@ -43,7 +43,7 @@ public class GetYouTubeChannelInfoTask extends AsyncTaskParallel<String, Void, Y
 		YouTubeChannel channel;
 
 		try {
-			channel = new GetChannelsDetails().getYouTubeChannels(channelId[0]);
+			channel = new GetChannelsDetails().getYouTubeChannel(channelId[0]);
 		} catch (IOException e) {
 			Logger.e(this, "Unable to get channel info.  ChannelID=" + channelId[0], e);
 			channel = null;

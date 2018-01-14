@@ -130,7 +130,7 @@ public abstract class RecyclerViewAdapterEx<T, HolderType extends RecyclerView.V
 	/**
 	 * @return The list that represents items stored/displayed by this adapter.
 	 */
-	public List<T> getList() {
+	protected List<T> getList() {
 		return list;
 	}
 

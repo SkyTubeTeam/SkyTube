@@ -30,7 +30,6 @@ import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
-import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
 
 /**
@@ -93,7 +92,7 @@ public class GetSubscriptionVideosTask extends AsyncTaskParallel<Void, Void, Voi
 
 	@Override
 	protected Void doInBackground(Void... voids) {
-		List<YouTubeChannel> channels = overriddenChannels != null ? overriddenChannels : getSubsLists();
+		List<YouTubeChannel> channels = overriddenChannels != null ? overriddenChannels : SubsAdapter.get(null).getSubsLists();
 
 		/*
 		 * Get the last time all subscriptions were updated, and only fetch videos that were published after this.
@@ -110,7 +109,7 @@ public class GetSubscriptionVideosTask extends AsyncTaskParallel<Void, Void, Voi
 		for(final YouTubeChannel channel : channels) {
 			tasks.add(new GetChannelVideosTask(channel)
 				.setPublishedAfter(publishedAfter)
-				.setGetChannelVideosTaskInterface(new GetChannelVideosTaskInterface() {
+ 				.setGetChannelVideosTaskInterface(new GetChannelVideosTaskInterface() {
 					@Override
 					public void onGetVideos(List<YouTubeVideo> videos) {
 						numTasksFinished++;
@@ -129,10 +128,10 @@ public class GetSubscriptionVideosTask extends AsyncTaskParallel<Void, Void, Voi
 							// All channels have finished querying. Update the last time this refresh was done.
 							updateFeedsLastUpdateTime();
 
-							if(listener != null)
+							if (listener != null) {
 								listener.onChannelVideosFetched(channel, videos != null ? videos : new ArrayList<YouTubeVideo>(), videosDeleted);
-							if(listener != null)
 								listener.onAllChannelVideosFetched();
+							}
 						}
 					}
 				})
@@ -153,31 +152,6 @@ public class GetSubscriptionVideosTask extends AsyncTaskParallel<Void, Void, Voi
 	}
 
 
-	/**
-	 * Returns the list of channels that the user is subscribed to.
-	 *
-	 * This task is also performed by {@link SubsAdapter}, so we need to wait for {@link SubsAdapter}
-	 * to finish retrieving the subbed channels and then return the list.
-	 *
-	 * @return List of YouTube channels the user is subscribed to.
-	 */
-	private List<YouTubeChannel> getSubsLists() {
-		SubsAdapter.Bool isSubsListRetrieved = SubsAdapter.get(null).isSubsListRetrieved();
 
-		synchronized (isSubsListRetrieved) {
-			// if the SubsAdapter is still retrieving the channels...
-			if (!isSubsListRetrieved.value) {
-				try {
-					// ...then we have to wait...
-					isSubsListRetrieved.wait();
-				} catch (InterruptedException e) {
-					Logger.e(this, "Something went wrong when waiting for the Subs Lists...", e);
-				}
-			}
-		}
-
-		// the list has now been retrieved; return it pls
-		return SubsAdapter.get(SkyTubeApp.getContext()).getList();
-	}
 
 }

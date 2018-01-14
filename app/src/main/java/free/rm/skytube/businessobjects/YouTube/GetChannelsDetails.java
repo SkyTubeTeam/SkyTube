@@ -26,10 +26,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import free.rm.skytube.app.SkyTubeApp;
+import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPI;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPIKey;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
-import free.rm.skytube.businessobjects.Logger;
 
 /**
  * Returns the details/information about YouTube channel(s).
@@ -92,7 +92,7 @@ public class GetChannelsDetails {
 	 *
 	 * @return YouTubeChannel
 	 */
-	public YouTubeChannel getYouTubeChannels(final String channelId) throws IOException {
+	public YouTubeChannel getYouTubeChannel(final String channelId) throws IOException {
 		List<String> c = new ArrayList<>();
 		c.add(channelId);
 

@@ -72,7 +72,7 @@ public class SubscribeToChannelTask extends AsyncTaskParallel<Void, Void, Boolea
 
 			// we need to refresh the Feed tab so it shows videos from the newly subscribed (or
 			// unsubscribed) channels
-			SubscriptionsFeedFragment.refreshSubscriptionsFeed();
+			SubscriptionsFeedFragment.refreshSubsFeedFromCache();
 
 			if (subscribeToChannel) {
 				// change the state of the button
