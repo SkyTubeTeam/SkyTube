@@ -82,4 +82,8 @@
 
 	<string name="pref_title_feed_notification">Automatisk kilde-merknad</string>
 	<string name="pref_summary_feed_notification">Hvor ofte det skal sjekkes for nye videoer fra abonnerte kanaler: %s</string>
+	<string name="pref_key_allow_mobile_downloads">pref_allow_mobile_downloads_key</string>
+	<string name="pref_title_allow_mobile_downloads">Tillat nedlastinger på mobilnettverk</string>
+	<string name="pref_summary_allow_mobile_downloads">Hvis valgt, kan videoer lastes ned på mobilnettverk. Ellers kan videoer bare lastes ned på Wi-Fi.</string>
+
 	</resources>

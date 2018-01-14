@@ -7,7 +7,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.v13.app.FragmentCompat;
@@ -33,7 +32,6 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -43,11 +41,7 @@ import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.Logger;
-import free.rm.skytube.businessobjects.YouTube.GetChannelsDetails;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetSubscriptionVideosTask;
-import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
-import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
-import free.rm.skytube.businessobjects.YouTube.Tasks.GetSubscriptionVideosTaskListener;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 import free.rm.skytube.gui.businessobjects.adapters.ImportSubscriptionsAdapter;
 import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
@@ -193,6 +187,8 @@ public class SubscriptionsBackupsManager {
 						.show();
 	}
 
+
+
 	/**
 	 * A task that imports the subscriptions and bookmarks databases.
 	 */
@@ -248,6 +244,7 @@ public class SubscriptionsBackupsManager {
 		}
 
 	}
+
 
 	/**
 	 * Parse the XML file that the user selected to import subscriptions from. Each channel contained in the XML
@@ -317,7 +314,7 @@ public class SubscriptionsBackupsManager {
 												channelsToSubscribeTo.add(channel);
 										}
 										SubscribeToImportedChannelsTask task = new SubscribeToImportedChannelsTask();
-										task.execute(channelsToSubscribeTo);
+										task.executeInParallel(channelsToSubscribeTo);
 									}
 								})
 								.negativeText(R.string.cancel)
@@ -351,21 +348,23 @@ public class SubscriptionsBackupsManager {
 
 				dialog.show();
 			} else {
-				Toast.makeText(activity, foundChannels ? R.string.no_new_channels_found : R.string.no_channels_found, Toast.LENGTH_LONG).show();
+				new AlertDialog.Builder(activity)
+						.setMessage(foundChannels ? R.string.no_new_channels_found : R.string.no_channels_found)
+						.setNeutralButton(R.string.ok, null)
+						.show();
 			}
 		} catch(Exception e) {
-			e.printStackTrace();
+			Logger.e(this, "An error encountered while attempting to parse the XML file uploaded", e);
 			Toast.makeText(activity, String.format(activity.getString(R.string.import_subscriptions_parse_error), e.getMessage()), Toast.LENGTH_LONG).show();
 		}
-
-
-
 	}
+
+
 
 	/**
 	 * A dialog that asks the user to import subscriptions from a YouTube account.
 	 */
-	public void displayImportSubscriptionsDialog() {
+	public void displayImportSubscriptionsFromYouTubeDialog() {
 		SpannableString msg = new SpannableString(activity.getText(R.string.import_subscriptions_description));
 		Linkify.addLinks(msg, Linkify.WEB_URLS);
 		new MaterialDialog.Builder(activity)
@@ -402,101 +401,60 @@ public class SubscriptionsBackupsManager {
 		}
 	}
 
+
+
 	/**
 	 * AsyncTask to loop through a list of channels to subscribe to. A Dialog will appear notifying the user of the progress
 	 * of fetching videos for each channel.
 	 */
-	private class SubscribeToImportedChannelsTask extends AsyncTask<List<ImportSubscriptionsChannel>, Void, Void> {
-		MaterialDialog dialog;
-		private int numChannelsDone = 0;
-		private int totalVideosFetched = 0;
-		private int totalChannels = 0;
+	private class SubscribeToImportedChannelsTask extends AsyncTaskParallel<List<ImportSubscriptionsChannel>, Void, Integer> {
 
-		public SubscribeToImportedChannelsTask() {
-
-		}
+		private MaterialDialog dialog;
 
 		@Override
 		protected void onPreExecute() {
-			super.onPreExecute();
-
+			// display the "Subscribing to channels …" dialog
+			dialog = new MaterialDialog.Builder(activity)
+					.content(R.string.subscribing_to_channels)
+					.progress(true, 0)
+					.build();
+			dialog.show();
 		}
 
-		private void updateDialog() {
-			activity.runOnUiThread(new Runnable() {
-				@Override
-				public void run() {
-					dialog.setContent(String.format(activity.getString(R.string.fetched_videos_from_channels), totalVideosFetched, numChannelsDone, totalChannels));
-				}
-			});
-		}
 
 		@Override
-		protected Void doInBackground(final List<ImportSubscriptionsChannel>... channels) {
-			totalChannels = channels[0].size();
-			activity.runOnUiThread(new Runnable() {
-				@Override
-				public void run() {
-					dialog = new MaterialDialog.Builder(activity)
-									.content(String.format(activity.getString(R.string.fetched_videos_from_channels), 0, 0, totalChannels))
-									.progress(false, totalChannels, false)
-									.build();
-					dialog.show();
-				}
-			});
-
-			List<YouTubeChannel> channelsList = new ArrayList<>();
-			for(ImportSubscriptionsChannel channel : channels[0]) {
-				if(!channel.isChecked)
-					continue;
-				try {
-					YouTubeChannel channelObj = new GetChannelsDetails().getYouTubeChannels(channel.channelId);
-					if (channelObj != null) {
-						channelsList.add(channelObj);
-						SubscriptionsDb.getSubscriptionsDb().subscribe(channelObj);
-						// Need to set this channelObj to subscribed, so that when videos are retrieved for the channel, they get saved into the database.
-						channelObj.setUserSubscribed(true);
-					} else {
-						Logger.e(this, "Initialization failed for ChannelId=%s.  Probably the channel doesn't exists anymore.  Channel won't be added to SkyTube.", channel.channelId);
-					}
-				} catch(IOException e) {
-					e.printStackTrace();
-				}
+		protected Integer doInBackground(final List<ImportSubscriptionsChannel>... channels) {
+			for (ImportSubscriptionsChannel channel : channels[0]) {
+				SubscriptionsDb.getSubscriptionsDb().subscribe(channel.channelId);
 			}
-			new GetSubscriptionVideosTask(new GetSubscriptionVideosTaskListener() {
-				@Override
-				public void onChannelVideosFetched(YouTubeChannel channel, List<YouTubeVideo> videosFetched, boolean videosDeleted) {
-					numChannelsDone++;
-					totalVideosFetched += videosFetched.size();
-					dialog.incrementProgress(1);
-					updateDialog();
-				}
 
-				@Override
-				public void onAllChannelVideosFetched() {
-					dialog.dismiss();
-					Toast.makeText(SkyTubeApp.getContext(), String.format(SkyTubeApp.getStr(R.string.subscriptions_to_channels_imported), numChannelsDone), Toast.LENGTH_SHORT).show();
-
-					// refresh the Feed tab so it shows videos from the newly subscribed channels
-					SubscriptionsFeedFragment.refreshSubscriptionsFeed();
-
-					// if the user imported the subs channels from the Feed tab/fragment, then we
-					// need to refresh the fragment in order for the fragment to update the feed...
-					activity.recreate();
-
-					// refresh the subs adapter
-					SubsAdapter.get(activity).refreshSubsList();
-				}
-			}).setForceRefresh(true).setChannelsToRefresh(channelsList).executeInParallel();
-
-			return null;
+			return channels[0].size();
 		}
+
 
 		@Override
-		protected void onPostExecute(Void aVoid) {
-			super.onPostExecute(aVoid);
+		protected void onPostExecute(Integer totalChannelsSubscribedTo) {
+			// inform the SubsAdapter that it needs to repopulate the subbed channels list
+			SubsAdapter.get(activity).refreshSubsList();
+
+			// hide the dialog
+			dialog.dismiss();
+
+			Toast.makeText(activity,
+							String.format(SkyTubeApp.getStr(R.string.subscriptions_to_channels_imported), totalChannelsSubscribedTo),
+							Toast.LENGTH_SHORT).show();
+
+			// refresh the Feed tab so it shows videos from the newly subscribed channels
+			SubscriptionsFeedFragment.refreshSubsFeedFull();
+
+			// if the user imported the subs channels from the Feed tab/fragment, then we
+			// need to refresh the fragment in order for the fragment to update the feed...
+			activity.recreate();
 		}
+
 	}
+
+
 
 	/**
 	 * A task that backups the subscriptions and bookmarks databases.
@@ -572,4 +530,5 @@ public class SubscriptionsBackupsManager {
 			}
 		}
 	}
+
 }

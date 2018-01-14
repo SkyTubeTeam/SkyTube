@@ -516,10 +516,6 @@ public class YouTubeVideo implements Serializable {
 		if(isDownloaded())
 			return;
 
-		Toast.makeText(getContext(),
-						String.format(getContext().getString(R.string.starting_video_download), getTitle()),
-						Toast.LENGTH_LONG).show();
-
 		getDesiredStream(new GetDesiredStreamListener() {
 			@Override
 			public void onGetDesiredStream(StreamMetaData desiredStream) {
@@ -529,25 +525,16 @@ public class YouTubeVideo implements Serializable {
 					file.delete();
 
 				// download the video
-				new FileDownloader() {
-					@Override
-					public void onFileDownloadCompleted(boolean success, Uri localFileUri) {
-						if (success) {
-							success = DownloadedVideosDb.getVideoDownloadsDb().add(YouTubeVideo.this, localFileUri.toString());
-						}
-
-						Toast.makeText(getContext(),
-								String.format(getContext().getString(success ? R.string.video_downloaded : R.string.video_download_stream_error), getTitle()),
-								Toast.LENGTH_LONG).show();
-					}
-				}.setRemoteFileUri(desiredStream.getUri())
+				new VideoDownloader()
+						.setRemoteFileUrl(desiredStream.getUri().toString())
 						.setDirType(Environment.DIRECTORY_MOVIES)
 						.setTitle(getTitle())
 						.setDescription(getStr(R.string.video) + " ― " + getChannelName())
 						.setOutputFileName(getId())
+						.setOutputFileExtension("mp4")
 						.setAllowedOverRoaming(false)
 						.setAllowedNetworkTypesFlags(getAllowedNetworkTypesFlags())
-						.download();
+						.displayPermissionsActivity(context);
 			}
 
 
@@ -569,6 +556,35 @@ public class YouTubeVideo implements Serializable {
 								Toast.LENGTH_LONG).show();
 			}
 		});
+	}
+
+
+
+	////////////////////////////////////////////////////////////////////////////////////////////////
+
+	/**
+	 * Downloads a YouTube video.
+	 */
+	private class VideoDownloader extends FileDownloader implements Serializable {
+
+		@Override
+		public void onFileDownloadStarted() {
+			Toast.makeText(getContext(),
+					String.format(getContext().getString(R.string.starting_video_download), getTitle()),
+					Toast.LENGTH_LONG).show();
+		}
+
+		@Override
+		public void onFileDownloadCompleted(boolean success, Uri localFileUri) {
+			if (success) {
+				success = DownloadedVideosDb.getVideoDownloadsDb().add(YouTubeVideo.this, localFileUri.toString());
+			}
+
+			Toast.makeText(getContext(),
+					String.format(getContext().getString(success ? R.string.video_downloaded : R.string.video_download_stream_error), getTitle()),
+					Toast.LENGTH_LONG).show();
+		}
+
 	}
 
 }

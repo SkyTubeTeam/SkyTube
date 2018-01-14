@@ -2,11 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="free.rm.skytube">
 
-	<uses-permission android:name="android.permission.INTERNET"/>
-	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-	<uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
-	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
-	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+	<uses-permission android:name="android.permission.INTERNET"/>                   <!-- Mandatory permission -->
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>     <!-- [Optional]  Used for database backups and to download videos/thumbnails -->
+	<uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>   <!-- [Optional]  Only used by SkyTube Extra flavor to update the app -->
+	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>     <!-- [Optional]  If enabled via the preferences, the app will periodically check for new videos published by the subscribed channels -->
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>       <!-- Used when user tried to download a video to check whether the user is using cellular network or WIFI -->
 
 	<application
 		android:name=".app.SkyTubeApp"
@@ -76,6 +76,10 @@
 			android:enabled="true">
 		</receiver>
 
+		<activity
+			android:name=".gui.activities.PermissionsActivity"
+		    android:theme="@style/TransparentActivity">
+		</activity>
 	</application>
 
 </manifest>
