@@ -23,7 +23,7 @@ import android.view.View;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
-import free.rm.skytube.gui.businessobjects.fragments.FragmentEx;
+import free.rm.skytube.businessobjects.Logger;
 
 /**
  * A fragment that can enables and disables the immersive mode (i.e. hides the navigation bar and
@@ -48,30 +48,34 @@ public class ImmersiveModeFragment extends FragmentEx {
 	 * Change the navigation bar's visibility status.
 	 */
 	private void changeNavigationBarVisibility(boolean setBarToVisible) {
-		int newUiOptions = getActivity().getWindow().getDecorView().getSystemUiVisibility();
+		try {
+			int newUiOptions = getActivity().getWindow().getDecorView().getSystemUiVisibility();
 
-		// navigation bar hiding:  backwards compatible to ICS.
-		if (Build.VERSION.SDK_INT >= 14) {
-			newUiOptions = setBarToVisible
-					? newUiOptions & ~View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-					: newUiOptions | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+			// navigation bar hiding:  backwards compatible to ICS.
+			if (Build.VERSION.SDK_INT >= 14) {
+				newUiOptions = setBarToVisible
+						? newUiOptions & ~View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+						: newUiOptions | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+			}
+
+			// status bar hiding:  backwards compatible to Jellybean
+			if (Build.VERSION.SDK_INT >= 16) {
+				newUiOptions = setBarToVisible
+						? newUiOptions & ~View.SYSTEM_UI_FLAG_FULLSCREEN & ~View.SYSTEM_UI_FLAG_LAYOUT_STABLE & ~View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION & ~View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+						: newUiOptions | View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN;
+			}
+
+			// immersive mode:  backward compatible to KitKat
+			if (Build.VERSION.SDK_INT >= 19) {
+				newUiOptions = setBarToVisible
+						? newUiOptions & ~View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+						: newUiOptions | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+			}
+
+			getActivity().getWindow().getDecorView().setSystemUiVisibility(newUiOptions);
+		} catch (Throwable tr) {
+			Logger.e(this, "Exception caught while trying to change the nav bar visibility...", tr);
 		}
-
-		// status bar hiding:  backwards compatible to Jellybean
-		if (Build.VERSION.SDK_INT >= 16) {
-			newUiOptions = setBarToVisible
-					? newUiOptions & ~View.SYSTEM_UI_FLAG_FULLSCREEN & ~View.SYSTEM_UI_FLAG_LAYOUT_STABLE & ~View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION & ~View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-					: newUiOptions |  View.SYSTEM_UI_FLAG_FULLSCREEN |  View.SYSTEM_UI_FLAG_LAYOUT_STABLE |  View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION |  View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN;
-		}
-
-		// immersive mode:  backward compatible to KitKat
-		if (Build.VERSION.SDK_INT >= 19) {
-			newUiOptions = setBarToVisible
-					? newUiOptions & ~View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-					: newUiOptions | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
-		}
-
-		getActivity().getWindow().getDecorView().setSystemUiVisibility(newUiOptions);
 	}
 
 
