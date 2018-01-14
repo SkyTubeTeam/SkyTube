@@ -36,12 +36,22 @@ import static free.rm.skytube.app.SkyTubeApp.getContext;
  * Downloads remote files by using Android's {@link DownloadManager}.
  */
 public abstract class FileDownloader implements Serializable, PermissionsActivity.PermissionsTask {
+
+	/** The remote file URL that is going to be downloaded. */
 	private String  remoteFileUrl = null;
+	/** The directory type:  e.g. Environment.DIRECTORY_MOVIES or Environment.DIRECTORY_PICTURES */
 	private String  dirType = null;
+	/** The title that will be displayed by the Android's download manager. */
 	private String  title = null;
+	/** The description that will be displayed by the Android's download manager. */
 	private String  description = null;
+	/** Output file name (without file extension). */
 	private String  outputFileName = null;
+	private String  outputFileExtension = null;
+	/** If set to true, then the download manager will download the file over cellular network. */
 	private Boolean allowedOverRoaming = null;
+	/** If set, download manager will only download files over the specified networks.
+	 *  This is ignored if allowedOverRoaming is set to true. */
 	private Integer allowedNetworkTypesFlags = null;
 
 	private long    downloadId;
@@ -127,7 +137,8 @@ public abstract class FileDownloader implements Serializable, PermissionsActivit
 	 * Concatenates the outputFileName together with the appropriate file extension.
 	 */
 	private String getCompleteFileName(String outputFileName, Uri remoteFileUri) {
-		return outputFileName + "." + MimeTypeMap.getFileExtensionFromUrl(remoteFileUri.toString());
+		String fileExt = (outputFileExtension != null)  ?  outputFileExtension  :   MimeTypeMap.getFileExtensionFromUrl(remoteFileUri.toString());
+		return outputFileName + "." + fileExt;
 	}
 
 
@@ -193,6 +204,16 @@ public abstract class FileDownloader implements Serializable, PermissionsActivit
 	}
 
 	/**
+	 * Set the output file's extension.
+	 *
+	 * @param outputFileExtension   E.g. "mp4"
+	 */
+	public FileDownloader setOutputFileExtension(String outputFileExtension) {
+		this.outputFileExtension = outputFileExtension;
+		return this;
+	}
+
+	/**
 	 * If set to true the {@link FileDownloader} will download the remote file even if the user is
 	 * using cellular network.
 	 */
@@ -201,12 +222,10 @@ public abstract class FileDownloader implements Serializable, PermissionsActivit
 		return this;
 	}
 
-
 	public FileDownloader setAllowedNetworkTypesFlags(Integer allowedNetworkTypesFlags) {
 		this.allowedNetworkTypesFlags = allowedNetworkTypesFlags;
 		return this;
 	}
-
 
 	private DownloadManager getDownloadManager() {
 		return (DownloadManager) getContext().getSystemService(Context.DOWNLOAD_SERVICE);
