@@ -531,6 +531,7 @@ public class YouTubeVideo implements Serializable {
 						.setTitle(getTitle())
 						.setDescription(getStr(R.string.video) + " ― " + getChannelName())
 						.setOutputFileName(getId())
+						.setOutputFileExtension("mp4")
 						.setAllowedOverRoaming(false)
 						.setAllowedNetworkTypesFlags(getAllowedNetworkTypesFlags())
 						.displayPermissionsActivity(context);
