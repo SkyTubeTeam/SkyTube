@@ -3,5 +3,5 @@
 	<string name="thumbnail">Thumbnail</string>
 	<string name="view_thumbnail">View Thumbnail</string>
 	<string name="thumbnail_downloaded">Thumbnail downloaded.</string>
-	<string name="thumbnail_download_error">Sorry, I was unable to download the thumbnail.</string>
+	<string name="thumbnail_download_error">The thumbnail could not be downloaded.</string>
 </resources>
