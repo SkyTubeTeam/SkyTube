@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="error_stream_err_unavailable">Error message is unavailable.</string>
+	<string name="error_stream_err_unavailable">Error message unavailable.</string>
 	<string name="error_stream_decryption_fail">Could not load decryption code for the YouTube service.</string>
 	<string name="error_stream_parse_error">Parsing error.</string>
 
-	<string name="error_video_play">Play Video Error</string>
+	<string name="error_video_play">Video Playback Error</string>
 	<string name="error_video_streams_empty">The video %s has no streams.</string>
 	<string name="error_video_streams">An error has occurred while retrieving video\'s streams.</string>
 	<string name="error_get_video_desc">An error has occurred while retrieving video\'s description.</string>
 	<string name="error_invalid_url">Invalid video URL: %s</string>
 
-	<string name="warning_live_video">Cannot play live streams for now. Play live stream externally?</string>
+	<string name="warning_live_video">Cannot play live streams for now. Open live stream in other app?</string>
 
 	<string name="ratings_disabled">Ratings disabled</string>
 
