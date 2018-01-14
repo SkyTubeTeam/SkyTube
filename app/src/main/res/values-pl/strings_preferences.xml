@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources>
 	<string name="preferences">Preferencje</string>
 
@@ -7,7 +7,7 @@
 	<string name="pref_summary_preferred_regions">Wybierz preferowany region.  Używane w celu filtrowania filmów w kategorii Polecane.</string>
 
 	<string name="pref_title_preferred_languages">Preferowane języki</string>
-	<string name="pref_summary_preferred_languages">EKSPERYMENTALNE:  Wybierz jeden lub więcej preferowanych języków.  Używane w celu filtrowania filmów w kategorii Najbardziej Polecane oraz w wyszukiwaniu.</string>
+	<string name="pref_summary_preferred_languages">Eksperymentalne: Wybierz jeden lub więcej preferowanych języków. Używane w celu filtrowania filmów w kategorii Najbardziej Polecane oraz w wyszukiwaniu.</string>
 
 	<string name="pref_video_player_category">Odtwarzacz wideo</string>
 	<string name="pref_title_preferred_res">Preferowana rozdzielczość</string>
@@ -15,36 +15,38 @@
 	<string name="pref_title_use_offical_player">Użyj oficjalnego odtwarzacza YouTube</string>
 	<string name="pref_summary_use_offical_player">Niezalecane</string>
 
-	<string name="pref_backup_category">Backups</string>
+	<string name="pref_backup_category">Kopie zapasowe</string>
 	<string name="pref_title_backup_dbs">Backup Databases</string>
-	<string name="pref_summary_backup_dbs">Backup your subscriptions and bookmarks databases.</string>
+	<string name="pref_summary_backup_dbs">Wykonaj kopię zapasową twoich subskrypcji i zakładek.</string>
 	<string name="pref_title_import_dbs">Import Backup</string>
-	<string name="pref_summary_import_dbs">Import your subscriptions and bookmarks databases backup.</string>
-	<string name="databases_backing_up">Backing up…</string>
-	<string name="databases_backup_success">Databases backed up to %s</string>
-	<string name="databases_backup_fail">Failed to backup your databases.</string>
-	<string name="databases_import_select_backup">Select backup file to import</string>
-	<string name="databases_import_nothing_selected">Nothing was selected…</string>
-	<string name="databases_import_warning_message">The subscriptions and bookmarks databases will be REPLACED with the data of the selected backup file.\n\nContinue?</string>
-	<string name="continue_">Continue</string>
-	<string name="databases_importing">Importing…</string>
-	<string name="databases_import_fail">Failed to import your databases.</string>
-	<string name="databases_import_success">Databases imported successfully.  Restart the app to apply changes.</string>
+	<string name="pref_summary_import_dbs">Zaimportuj twoje subskrypcje i zakładki z kopii zapasowej.</string>
+	<string name="databases_backing_up">Tworzenie kopii zapasowej…</string>
+	<string name="databases_backup_success">Utworzono kopię zapasową w %s</string>
+	<string name="databases_backup_fail">Nie udało się utworzyć kopii zapasowej.</string>
+	<string name="databases_import_select_backup">Wybierz plik kopii zapasowej do zaimportowania</string>
+	<string name="databases_import_nothing_selected">Nic nie wybrano…</string>
+	<string name="databases_import_warning_message">Subskrypcje i zakładki będą zastąpione tymi z wybranego pliku kopii zapasowej.
+\n
+\nKontynuować?</string>
+	<string name="continue_">Kontynuuj</string>
+	<string name="databases_importing">Importowanie…</string>
+	<string name="databases_import_fail">Nie udało się zaimportować kopii zapasowej.</string>
+	<string name="databases_import_success">Zaimportowano. Zrestartuj aplikację, aby wprowadzić zmiany.</string>
 
-	<string name="pref_title_import_subs">Import Subscriptions From YouTube</string>
-	<string name="pref_summary_import_subs">Import your subscriptions from your YouTube account.</string>
-	<string name="subs_import_select_backup">Select YouTube xml file to import</string>
+	<string name="pref_title_import_subs">Zaimportuj subskrypcje z YouTube</string>
+	<string name="pref_summary_import_subs">Zaimportuj twoje subskrypcje z konta YouTube.</string>
+	<string name="subs_import_select_backup">Wybierz plik XML YouTube do zaimportowania</string>
 
 	<string name="pref_about_category">O</string>
 	<string name="pref_title_website">Strona</string>
 	<string name="pref_title_credits">Zasługi</string>
 	<string name="pref_summary_credits">Ludzie i projekty bez których ten program by nie powstał.</string>
 	<string name="pref_title_version">Wersja</string>
-	<string name="pref_title_updates">Updates</string>
-	<string name="pref_summary_updates">Check for updates.</string>
+	<string name="pref_title_updates">Aktualizacje</string>
+	<string name="pref_summary_updates">Sprawdź aktualizacje.</string>
 	<string name="pref_title_license">Licencja</string>
 	<string name="pref_summary_license">GNU General Public License version 3</string>
-	<string name="app_license">Copyright &#169; 2015-2017  Ramon Mifsud\n
+	<string name="app_license">Copyright © 2015-2017  Ramon Mifsud\n
 
 				\nThis program is free software: you can redistribute it and/or modify
 				it under the terms of the GNU General Public License as published by
@@ -64,11 +66,11 @@
 	<string name="pref_summary_default_tab">Domyślna karta do pokazywania kiedy SkyTube się uruchamia: %s</string>
 
 	<string name="pref_title_screen_orientation">Screen Orientation</string>
-	<string name="pref_summary_screen_orientation">Rotation of the video player</string>
-	<string name="pref_screen_landscape">Landscape</string>
+	<string name="pref_summary_screen_orientation">Rotacja odtwarzacza wideo</string>
+	<string name="pref_screen_landscape">Poziomo</string>
 	<string name="pref_screen_portrait">Portrait</string>
-	<string name="pref_screen_auto">Automatic</string>
-	<string name="pref_screen_sensor">Device sensor</string>
+	<string name="pref_screen_auto">Automatycznie</string>
+	<string name="pref_screen_sensor">Sensor urządzenia</string>
 	<string-array name="screen_orientations_values">
 		<item>auto</item>
 		<item>landscape</item>
@@ -82,4 +84,13 @@
 	<string name="pref_youtube_api_key_custom">Klucz jest poprawny.  Zrestartuj aplikację, aby użyć nowego klucza API.</string>
 	<string name="pref_youtube_api_key_default">Zrestartuj aplikację, aby powrócić do domyślnego klucza API YouTube.</string>
 	<string name="restart">Restart</string>
-</resources>
+<string name="pref_title_feed_notification">Automatyczne powiadomienie kanału</string>
+	<string name="pref_summary_feed_notification">Jak często sprawdzać aktualizację subskrybowanych kanałów: %s</string>
+	<string name="pref_title_disable_immersive_mode">Wyłącz tryb immersyjny</string>
+	<string name="pref_summary_disable_immersive_mode">Ikony komentarzy i opisu filmu oraz pasek nawigacji powinny być zawsze wyświetlane</string>
+
+	<string name="pref_key_allow_mobile_downloads">pref_allow_mobile_downloads_key</string>
+	<string name="pref_title_allow_mobile_downloads">Zezwól na pobieranie przez sieci komórkowe</string>
+	<string name="pref_summary_allow_mobile_downloads">Wybierz to, aby włączyć pobieranie filmów przez sieci komórkowe. W przeciwnym wypadku, filmy będą mogły być pobierane wyłącznie przez Wi-Fi.</string>
+
+	</resources>
