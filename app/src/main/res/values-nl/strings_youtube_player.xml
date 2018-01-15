@@ -9,7 +9,7 @@
 	<string name="error_get_video_desc">Er is een fout opgetreden tijdens het ophalen van de video-omschrijving.</string>
 	<string name="error_invalid_url">Ongeldige video-URL: %s</string>
 
-	<string name="warning_live_video">Livestreams kunnen momenteel niet worden afgespeeld. Wilt u de livestream extern afspelen?</string>
+	<string name="warning_live_video">Livestreams kunnen momenteel niet worden afgespeeld. Wilt u de livestream openen in een andere app?</string>
 
 	<string name="ratings_disabled">Waarderingen uitgeschakeld</string>
 
