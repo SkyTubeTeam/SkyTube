@@ -9,8 +9,8 @@
 	<string name="unsubscribed">Unsubscribed</string>
 
 	<string name="error_get_subbed_channels">An error has occurred while fetching subscribed channels.</string>
-	<string name="error_check_if_user_has_subbed">Unable to check whether a channel subscription exists (id=%s)</string>
-	<string name="error_unable_to_subscribe">Unable to change subscription to channel (id=%s)</string>
+	<string name="error_check_if_user_has_subbed">Unable to check whether user has subscribed to the channel (id=%s)</string>
+	<string name="error_unable_to_subscribe">Unable to (un)subscribe the channel (id=%s)</string>
 
 	<string name="import_subscriptions">Import Subscriptions</string>
 	<string name="import_subscriptions_description">Import your subscriptions from YouTube, by first visiting https://www.youtube.com/subscription_manager, and clicking the \"Export Subscriptions\" button at the bottom. Then, select the XML file you exported by clicking \"Select XML File\" below.</string>
