@@ -42,14 +42,14 @@
 	<string name="pref_summary_credits">De mensen en projecten die deze app mede mogelijk hebben gemaakt.</string>
 	<string name="pref_title_version">Versie</string>
 	<string name="pref_title_updates">Updates</string>
-	<string name="pref_summary_updates">Controleren op updates</string>
+	<string name="pref_summary_updates">Controleren op nieuwe versies.</string>
 	<string name="pref_title_license">Licentie</string>
 	<string name="pref_summary_license">GNU General Public License versie 3</string>
-	<string name="app_license">Copyright © 2015-2017 Ramon Mifsud
+	<string name="app_license">Copyright © 2015-2018 Ramon Mifsud 
 \n 
-\nDeze app is vrije software: u kunt de app heruitgeven en/of bewerken onder de voorwaarden van de GNU General Public License zoals gepubliceerd door de Free Software Foundation (versie 3 van de licentie).
+\nDeze app is vrije software: u kunt de app heruitgeven en/of bewerken onder de voorwaarden van de GNU General Public License zoals gepubliceerd door de Free Software Foundation (versie 3 van de licentie). 
 \n 
-\nDeze app wordt verspreid in de hoop nuttig te zijn, maar ZONDER ENIGE GARANTIE; zonder ook maar de geïmpliceerde VERKOOPBAARHEID of INPASSING IN EEN SPECIFIEK DOEL. Lees de GNU General Public License voor meer informatie.
+\nDeze app wordt verspreid in de hoop nuttig te zijn, maar ZONDER ENIGE GARANTIE; zonder ook maar de geïmpliceerde VERKOOPBAARHEID of INPASSING IN EEN SPECIFIEK DOEL. Lees de GNU General Public License voor meer informatie. 
 \n 
 \nU zou een kopie van de GNU General Public License hebben moeten krijgen bij deze app. Als dat niet het geval is, bekijk dan &lt;http://www.gnu.org/licenses/&gt;</string>
 	<string name="i_agree">Ik ga akkoord</string>
