@@ -10,7 +10,7 @@
 	<string name="error_get_video_desc">An error has occurred while retrieving video\'s description.</string>
 	<string name="error_invalid_url">Invalid video URL: %s</string>
 
-	<string name="warning_live_video">Cannot play live streams for now. Open live stream in other app?</string>
+	<string name="warning_live_video">Cannot play live streams for now. Open live stream in another app?</string>
 
 	<string name="ratings_disabled">Ratings disabled</string>
 
