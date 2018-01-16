@@ -151,7 +151,7 @@ public class SkyTubeApp extends MultiDexApplication {
 		final ConnectivityManager connMgr = (ConnectivityManager)
 						getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
 		final android.net.NetworkInfo wifi = connMgr.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-		return wifi.isConnectedOrConnecting();
+		return wifi != null && wifi.isConnectedOrConnecting();
 	}
 
 	/**
@@ -161,7 +161,7 @@ public class SkyTubeApp extends MultiDexApplication {
 		final ConnectivityManager connMgr = (ConnectivityManager)
 						getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
 		final android.net.NetworkInfo mobile = connMgr.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
-		return mobile.isConnectedOrConnecting();
+		return mobile != null && mobile.isConnectedOrConnecting();
 	}
 
 	/*
