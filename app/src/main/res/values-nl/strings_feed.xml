@@ -9,7 +9,7 @@
 \nZodra u geabonneerd bent, worden alle in de afgelopen maand geüploade video\'s van uw geabonneerde kanalen hier weergegeven.</string>
 	<string name="import_subscriptions_from_youtube">Abonnementen importeren vanuit YouTube</string>
 <string name="notification_channel_feed_title">Feed-meldingen</string>
-	<string name="notification_new_videos_found">%d nieuwe video\'s gevonden van geabonneerde kanalen</string>
+	<string name="notification_new_videos_found">%d nieuwe video\'s van geabonneerde kanalen</string>
 <string name="subscribing_to_channels">Bezig met abonneren op kanalen…</string>
 	<string name="fetching_subbed_channels_info">Bezig met ophalen van kanaalinformatie…</string>
 	<string name="fetching_subbed_channels_info_error">Er is een fout opgetreden tijdens het ophalen van de kanaalinformatie.</string>
