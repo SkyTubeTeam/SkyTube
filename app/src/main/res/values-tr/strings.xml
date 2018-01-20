@@ -10,6 +10,7 @@
 	<string name="featured">Önerilen</string>
 	<string name="most_popular">En Popüler</string>
 
+	<string name="video">Video</string>
 	<string name="videos">Videolar</string>
 	<string name="num_videos">%d video</string>
 	<string name="playlists">Oynatma Listeleri</string>

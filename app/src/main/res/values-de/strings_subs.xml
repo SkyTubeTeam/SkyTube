@@ -22,4 +22,6 @@
 	<string name="no_new_channels_found">es wurden keine neuen YouTube Kanäle in der ausgewählten XML Datei gefunden.</string>
 	<string name="import_subscriptions_parse_error">Beim Parsen der ausgewählten XML Datei ist ein Fehler aufgetreten: %s.</string>
 	<string name="failed_to_import_subscriptions">Fehler beim Importieren der YouTube Abos.</string>
+
+	<string name="about">About</string>
 </resources>

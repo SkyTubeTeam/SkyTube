@@ -437,7 +437,7 @@
 		<item>4</item>
 	</string-array>
 
-	<string name="pref_feed_notification_key" translatable="false">pref_feed_notification</string>
+	<string name="pref_key_feed_notification" translatable="false">pref_key_feed_notification</string>
 	<string name="pref_title_feed_notification">Feed Auto Notification</string>
 	<string name="pref_summary_feed_notification">How often to check for new videos from subscribed channels: %s</string>
 	<string-array name="feed_notification">
@@ -467,7 +467,7 @@
 		<item>@string/pref_screen_portrait</item>
 		<item>@string/pref_screen_sensor</item>
 	</string-array>
-	<string-array name="screen_orientations_values">
+	<string-array name="screen_orientations_values" translatable="false">
 		<item>auto</item>
 		<item>landscape</item>
 		<item>portrait</item>
@@ -485,7 +485,7 @@
 	<string name="pref_youtube_api_key_custom">Key is valid. Restart app to use the new YouTube API key.</string>
 	<string name="pref_youtube_api_key_default">Restart app to switch back to default YouTube API key.</string>
 
-	<string name="pref_key_allow_mobile_downloads">pref_allow_mobile_downloads_key</string>
+	<string name="pref_key_allow_mobile_downloads" translatable="false">pref_allow_mobile_downloads_key</string>
 	<string name="pref_title_allow_mobile_downloads">Allow downloads on mobile networks</string>
 	<string name="pref_summary_allow_mobile_downloads">Select this to enable downloading videos on mobile networks. Otherwise, videos can only be downloaded on Wi-Fi.</string>
 

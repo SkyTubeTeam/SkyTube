@@ -42,10 +42,10 @@
 	<string name="pref_summary_credits">الناس والمشاريع التي جعلت هذا التطبيق ممكن.</string>
 	<string name="pref_title_version">الاصدار</string>
 	<string name="pref_title_updates">التحديثات</string>
-	<string name="pref_summary_updates">التحقق من التحديثات...</string>
+	<string name="pref_summary_updates">التحقق من التحديثات…</string>
 	<string name="pref_title_license">الرخصة</string>
 	<string name="pref_summary_license">"رخصة GNU  العامة الاصدار 3"</string>
-	<string name="app_license">حقوق الطبع والنشر © 2015-2017 Ramon Mifsud
+	<string name="app_license">حقوق الطبع والنشر © 2015-2018 Ramon Mifsud
 \n 
 \nهذا البرنامج هو البرمجيات الحرة: يمكنك أعاده توزيعها و/أو تعديلها ببموجب شروط رخصه جنو العامة كما نشرتها مؤسسه البرمجيات الحرة (الإصدار 3 من الترخيص).
 \n 
@@ -65,10 +65,26 @@
 	<string name="pref_screen_portrait">بورتريه</string>
 	<string name="pref_screen_auto">تلقائي</string>
 	<string name="pref_screen_sensor">جهاز استشعار</string>
+
 	<string name="pref_title_youtube_api_key">YouTube API مفتاح</string>
 	<string name="pref_summary_youtube_api_key">ادخل مفتاح API الخاص ببيانات YouTube. اتركه فارغه لاستخدام الاعداد الافتراضي .</string>
 	<string name="pref_youtube_api_key_error">حدث خطا اثناء محاولة التحقق من صحة مفتاح API الذي أدخلته.</string>
 	<string name="pref_youtube_api_key_custom">لمفتاح صالح. أعاده تشغيل التطبيق لاستخدام المفتاح الجديد API YouTube.</string>
 	<string name="pref_youtube_api_key_default">أعاده تشغيل التطبيق للتبديل العودة إلى الافتراضي يوتيوب API الرئيسية.</string>
 	<string name="restart">إعادة تشغيل</string>
+
+	<string name="pref_title_disable_immersive_mode">Disable Immersive Mode</string>
+	<string name="pref_summary_disable_immersive_mode">Comments and video description icons and the navigation bar shall always be displayed</string>
+
+	<string name="pref_title_allow_mobile_downloads">Allow downloads on mobile networks</string>
+	<string name="pref_summary_allow_mobile_downloads">Select this to enable downloading videos on mobile networks. Otherwise, videos can only be downloaded on Wi-Fi.</string>
+
+	<string name="pref_title_feed_notification">Feed Auto Notification</string>
+	<string name="pref_summary_feed_notification">How often to check for new videos from subscribed channels: %s</string>
+	<string-array name="feed_notification">
+		<item>Off</item>
+		<item>6 Hours</item>
+		<item>12 Hours</item>
+		<item>24 Hours</item>
+	</string-array>
 </resources>

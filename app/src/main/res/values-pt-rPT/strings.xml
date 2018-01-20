@@ -10,7 +10,9 @@
 
 	<string name="featured">Destaque</string>
 	<string name="most_popular">Mais popular</string>
-<string name="videos">Vídeos</string>
+
+	<string name="video">Vídeo</string>
+	<string name="videos">Vídeos</string>
 	<string name="num_videos">%d vídeos</string>
 	<string name="playlists">Listas de reprodução</string>
 	<string name="could_not_get_playlists">Incapaz de obter as listas de %s.</string>

@@ -10,4 +10,12 @@ Assicurati che l\'applicazione ufficiale di Google (YouTube) sia installata sul 
 
 	<string name="featured">In primo piano</string>
 	<string name="most_popular">Più popolari</string>
+
+	<string name="video">Video</string>
+	<string name="videos">Videos</string>
+	<string name="num_videos">%d videos</string>
+	<string name="playlists">Playlists</string>
+	<string name="could_not_get_playlists">Could not get %s playlists.</string>
+
+	<string name="loading">Loading …</string>
 </resources>

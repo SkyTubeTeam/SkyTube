@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="feed">Nieuwsoverzicht</string>
+<resources>
+	<string name="feed">Nieuwsoverzicht</string>
 
 	<string name="fetching_subscription_videos">Bezig met ophalen van video\'s van geabonneerde kanalen</string>
 	<string name="fetched_videos_from_channels">%1$d video\'s opgehaald uit %2$d/%3$d kanalen.</string>

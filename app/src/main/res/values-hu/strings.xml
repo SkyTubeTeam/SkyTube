@@ -11,7 +11,9 @@
 
 	<string name="featured">Kiemelt</string>
 	<string name="most_popular">Legnépszerűbb</string>
-<string name="videos">Videók</string>
+
+	<string name="video">Videó</string>
+	<string name="videos">Videók</string>
 	<string name="num_videos">%d videó</string>
 	<string name="playlists">Lejátszási listák</string>
 	<string name="could_not_get_playlists">Nem lehet elérni a %s lejátszási listát.</string>

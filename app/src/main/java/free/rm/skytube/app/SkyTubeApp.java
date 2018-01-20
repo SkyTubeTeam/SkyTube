@@ -191,7 +191,7 @@ public class SkyTubeApp extends MultiDexApplication {
 	 * Get the stored interval (in milliseconds) to pass to the below method.
 	 */
 	public static void setFeedUpdateInterval() {
-		int feedUpdaterInterval = Integer.parseInt(SkyTubeApp.getPreferenceManager().getString(SkyTubeApp.getStr(R.string.pref_feed_notification_key), "0"));
+		int feedUpdaterInterval = Integer.parseInt(SkyTubeApp.getPreferenceManager().getString(SkyTubeApp.getStr(R.string.pref_key_feed_notification), "0"));
 		setFeedUpdateInterval(feedUpdaterInterval);
 	}
 

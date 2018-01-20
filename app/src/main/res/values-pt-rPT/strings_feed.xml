@@ -2,6 +2,10 @@
 <resources>
 	<string name="feed">Fonte</string>
 
+	<string name="subscribing_to_channels">Subscribing to channels…</string>
+	<string name="fetching_subbed_channels_info">Fetching channels\' information…</string>
+	<string name="fetching_subbed_channels_info_error">An error has occurred while fetching channels\' information.</string>
+
 	<string name="fetching_subscription_videos">A obter vídeos dos canais subscritos</string>
 	<string name="fetched_videos_from_channels">A obter %1$d vídeos de %2$d/%3$d canais.</string>
 	<string name="no_new_videos_found">Não existem novos vídeos.</string>
@@ -9,4 +13,7 @@
 \n
 \nAssim que o fizer, todos os vídeos do último mês carregados para os canais subscritos aparecerão aqui.</string>
 	<string name="import_subscriptions_from_youtube">Importar subscrições do YouTube</string>
+
+	<string name="notification_channel_feed_title">Feed Notifications</string>
+	<string name="notification_new_videos_found">%d new videos from subscribed channels</string>
 </resources>

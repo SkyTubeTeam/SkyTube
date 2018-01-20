@@ -46,7 +46,7 @@
 	<string name="pref_summary_updates">Sprawdź aktualizacje.</string>
 	<string name="pref_title_license">Licencja</string>
 	<string name="pref_summary_license">GNU General Public License version 3</string>
-	<string name="app_license">Copyright © 2015-2017  Ramon Mifsud\n
+	<string name="app_license">Copyright © 2015-2018  Ramon Mifsud\n
 
 				\nThis program is free software: you can redistribute it and/or modify
 				it under the terms of the GNU General Public License as published by
@@ -71,12 +71,6 @@
 	<string name="pref_screen_portrait">Portrait</string>
 	<string name="pref_screen_auto">Automatycznie</string>
 	<string name="pref_screen_sensor">Sensor urządzenia</string>
-	<string-array name="screen_orientations_values">
-		<item>auto</item>
-		<item>landscape</item>
-		<item>portrait</item>
-		<item>sensor</item>
-	</string-array>
 
 	<string name="pref_title_youtube_api_key">Klucz YouTube API</string>
 	<string name="pref_summary_youtube_api_key">Wprowadź swój własny klucz YouTube Data API.  Pozostał pusty, aby używać domyślnego.</string>
@@ -84,13 +78,18 @@
 	<string name="pref_youtube_api_key_custom">Klucz jest poprawny.  Zrestartuj aplikację, aby użyć nowego klucza API.</string>
 	<string name="pref_youtube_api_key_default">Zrestartuj aplikację, aby powrócić do domyślnego klucza API YouTube.</string>
 	<string name="restart">Restart</string>
-<string name="pref_title_feed_notification">Automatyczne powiadomienie kanału</string>
+	<string name="pref_title_feed_notification">Automatyczne powiadomienie kanału</string>
 	<string name="pref_summary_feed_notification">Jak często sprawdzać aktualizację subskrybowanych kanałów: %s</string>
+		<string-array name="feed_notification">
+		<item>Off</item>
+		<item>6 Hours</item>
+		<item>12 Hours</item>
+		<item>24 Hours</item>
+	</string-array>
 	<string name="pref_title_disable_immersive_mode">Wyłącz tryb immersyjny</string>
 	<string name="pref_summary_disable_immersive_mode">Ikony komentarzy i opisu filmu oraz pasek nawigacji powinny być zawsze wyświetlane</string>
 
-	<string name="pref_key_allow_mobile_downloads">pref_allow_mobile_downloads_key</string>
-	<string name="pref_title_allow_mobile_downloads">Zezwól na pobieranie przez sieci komórkowe</string>
+		<string name="pref_title_allow_mobile_downloads">Zezwól na pobieranie przez sieci komórkowe</string>
 	<string name="pref_summary_allow_mobile_downloads">Wybierz to, aby włączyć pobieranie filmów przez sieci komórkowe. W przeciwnym wypadku, filmy będą mogły być pobierane wyłącznie przez Wi-Fi.</string>
 
-	</resources>
+</resources>

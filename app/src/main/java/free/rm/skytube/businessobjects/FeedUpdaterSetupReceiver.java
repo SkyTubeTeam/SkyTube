@@ -17,7 +17,7 @@ import free.rm.skytube.app.SkyTubeApp;
 public class FeedUpdaterSetupReceiver extends BroadcastReceiver {
 	@Override
 	public void onReceive(Context context, Intent intent) {
-		int feedUpdaterInterval = Integer.parseInt(SkyTubeApp.getPreferenceManager().getString(SkyTubeApp.getStr(R.string.pref_feed_notification_key), "0"));
+		int feedUpdaterInterval = Integer.parseInt(SkyTubeApp.getPreferenceManager().getString(SkyTubeApp.getStr(R.string.pref_key_feed_notification), "0"));
 
 		Intent i = new Intent(context, FeedUpdaterReceiver.class);
 		PendingIntent intentExecuted = PendingIntent.getBroadcast(context, 0, i,
