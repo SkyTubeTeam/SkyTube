@@ -3,14 +3,11 @@ package free.rm.skytube.businessobjects.db;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
-
-import com.google.gson.Gson;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 
@@ -51,6 +48,7 @@ public class BlockedChannelsDb extends SQLiteOpenHelperEx {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL(BlockedChannelsTable.getCreateStatement());
+        Log.d("DB", "onCreate: " + BlockedChannelsTable.getCreateStatement());
     }
 
     @Override
@@ -65,18 +63,20 @@ public class BlockedChannelsDb extends SQLiteOpenHelperEx {
      * @return True if the channel was successfully saved/blocked to the DB.
      */
     public boolean add(YouTubeVideo video) {
-
-        Gson gson = new Gson();
         ContentValues contentValues = new ContentValues();
 
-        contentValues.put(BlockedChannelsTable.COL_CHANNEL_ID, video.getChannelId());
-        //   contentValues.put(BlockedChannelsTable.COL_YOUTUBE_CHANNEL_NAME, gson.toJson(video.getChannelName()));
+        String a = "PRAGMA table_info(BlockedChannels);";
+        Cursor b = blockedChannelsDb.getWritableDatabase().rawQuery(a,null);
+        Log.d("PRAGMA", "add: " + DatabaseUtils.dumpCursorToString(b));
 
-        boolean addSuccesful = getWritableDatabase().insert(BlockedChannelsTable.TABLE_NAME, null, contentValues) != -1;
+        contentValues.put(BlockedChannelsTable.COL_CHANNEL_ID, video.getChannelId());
+        contentValues.put(BlockedChannelsTable.COL_YOUTUBE_CHANNEL_NAME, video.getChannelName());
+      
+        boolean addSuccessful = getWritableDatabase().insert(BlockedChannelsTable.TABLE_NAME, null, contentValues) != -1;
         onUpdated();
 
-        Log.d("", "BLOCK CHANNEL add: number " + this.getBlockedChannels());
-        return addSuccesful;
+        Log.d("", "BLOCK CHANNEL add: number " + this.getNumberOfBlockedChannels());
+        return addSuccessful;
     }
 
 
@@ -106,7 +106,7 @@ public class BlockedChannelsDb extends SQLiteOpenHelperEx {
             listener.onBlockedChannelsDbUpdated();
     }
 
-    public int getBlockedChannels() {
+    public int getNumberOfBlockedChannels() {
         String query = String.format("SELECT COUNT(*) FROM %s", BlockedChannelsTable.TABLE_NAME);
         Cursor cursor = BlockedChannelsDb.getBlockedChannelsDb().getReadableDatabase().rawQuery(query, null);
         int totalBlockedChannels = 0;
@@ -119,12 +119,13 @@ public class BlockedChannelsDb extends SQLiteOpenHelperEx {
         return totalBlockedChannels;
     }
 
-    public List<String> getBlockedChannelsList() {
+
+    public List<String> getBlockedChannelsListId() {
 
         List<String> videos = new ArrayList<>();
 
-        String query = "SELECT * FROM " + BlockedChannelsTable.TABLE_NAME;
-        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        String query = "SELECT Youtube_Channel_Id FROM " + BlockedChannelsTable.TABLE_NAME;
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
         Cursor cursor = sqLiteDatabase.rawQuery(query, null);
 
         if (cursor.moveToFirst()) {
@@ -138,6 +139,30 @@ public class BlockedChannelsDb extends SQLiteOpenHelperEx {
         return videos;
 
     }
+
+
+
+    public List<String> getBlockedChannelsListName() {
+
+        List<String> videos = new ArrayList<>();
+
+        String query = "SELECT Youtube_Channel_Name FROM " + BlockedChannelsTable.TABLE_NAME;
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery(query, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                String channelId = cursor.getString(0);
+                videos.add(channelId);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+
+        return videos;
+
+    }
+
+
 
     public interface BlockedChannelsDbListener {
         /**
