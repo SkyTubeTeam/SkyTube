@@ -49,7 +49,7 @@ public class PlaylistsGridAdapter extends RecyclerViewAdapterEx<YouTubePlaylist,
 
 	@Override
 	public PlaylistViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-		View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.playlist_cell, parent, false);
+		View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.video_cell, parent, false);
 		return new PlaylistViewHolder(v, playlistClickListener);
 	}
 
