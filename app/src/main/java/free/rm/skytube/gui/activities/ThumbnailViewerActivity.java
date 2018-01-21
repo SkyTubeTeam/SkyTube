@@ -132,6 +132,13 @@ public class ThumbnailViewerActivity extends AppCompatActivity {
 					.show();
 		}
 
+		@Override
+		public void onExternalStorageNotAvailable() {
+			Toast.makeText(getContext(),
+					R.string.external_storage_not_available,
+					Toast.LENGTH_LONG).show();
+		}
+
 	}
 
 }

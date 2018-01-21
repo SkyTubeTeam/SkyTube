@@ -24,8 +24,10 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Environment;
 import android.webkit.MimeTypeMap;
 
+import java.io.File;
 import java.io.Serializable;
 
 import free.rm.skytube.gui.activities.PermissionsActivity;
@@ -85,13 +87,28 @@ public abstract class FileDownloader implements Serializable, PermissionsActivit
 		// check if the mandatory variables were set -- if not halt the program.
 		checkIfVariablesWereSet();
 
-		Uri remoteFileUri = Uri.parse(remoteFileUrl);
+		// if the external storage is not available then halt the download operation
+		if (!isExternalStorageAvailable()) {
+			onExternalStorageNotAvailable();
+			return;
+		}
+
+		Uri     remoteFileUri = Uri.parse(remoteFileUrl);
+		String  downloadFileName = getCompleteFileName(outputFileName, remoteFileUri);
+
+		// if there's already a local file for this video for some reason, then do not redownload the
+		// file and halt
+		File file = new File(Environment.getExternalStoragePublicDirectory(dirType), downloadFileName);
+		if (file.exists()) {
+			onFileDownloadCompleted(true, Uri.parse(file.toURI().toString()));
+			return;
+		}
 
 		DownloadManager.Request request = new DownloadManager.Request(remoteFileUri)
 				.setAllowedOverRoaming(allowedOverRoaming)
 				.setTitle(title)
 				.setDescription(description)
-				.setDestinationInExternalPublicDir(dirType, getCompleteFileName(outputFileName, remoteFileUri));
+				.setDestinationInExternalPublicDir(dirType, downloadFileName);
 
 		if (!allowedOverRoaming) {
 			request.setAllowedNetworkTypes(allowedNetworkTypesFlags);
@@ -130,6 +147,17 @@ public abstract class FileDownloader implements Serializable, PermissionsActivit
 				}
 			}
 		};
+	}
+
+
+	/**
+	 * Checks if the external storage is available for read and write.
+	 *
+	 * @return True if the external storage is available.
+	 */
+	private boolean isExternalStorageAvailable() {
+		String state = Environment.getExternalStorageState();
+		return Environment.MEDIA_MOUNTED.equals(state);
 	}
 
 
@@ -232,6 +260,8 @@ public abstract class FileDownloader implements Serializable, PermissionsActivit
 	}
 
 
+	////////////////////////////////////////////////////////////////////////////////////////////////
+
 	/**
 	 * Method called when we just started downloading the file.
 	 */
@@ -246,5 +276,12 @@ public abstract class FileDownloader implements Serializable, PermissionsActivit
 	 * @param localFileUri  If success == true, then this will hold the Uri of the downloaded file.
 	 */
 	public abstract void onFileDownloadCompleted(boolean success, Uri localFileUri);
+
+
+	/**
+	 * Method called if the external storage is not available and cannot be used by the app (e.g.
+	 * user has ejected the SD card).
+	 */
+	public abstract void onExternalStorageNotAvailable();
 
 }

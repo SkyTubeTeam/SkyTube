@@ -519,11 +519,6 @@ public class YouTubeVideo implements Serializable {
 		getDesiredStream(new GetDesiredStreamListener() {
 			@Override
 			public void onGetDesiredStream(StreamMetaData desiredStream) {
-				// First, if there's already a local file for this video for some reason, delete it.
-				File file = new File(Uri.withAppendedPath(Uri.fromFile(context.getExternalFilesDir(Environment.DIRECTORY_MOVIES)), getId() + ".mp4").toString());
-				if (file.exists())
-					file.delete();
-
 				// download the video
 				new VideoDownloader()
 						.setRemoteFileUrl(desiredStream.getUri().toString())
@@ -582,6 +577,13 @@ public class YouTubeVideo implements Serializable {
 
 			Toast.makeText(getContext(),
 					String.format(getContext().getString(success ? R.string.video_downloaded : R.string.video_download_stream_error), getTitle()),
+					Toast.LENGTH_LONG).show();
+		}
+
+		@Override
+		public void onExternalStorageNotAvailable() {
+			Toast.makeText(getContext(),
+					R.string.external_storage_not_available,
 					Toast.LENGTH_LONG).show();
 		}
 
