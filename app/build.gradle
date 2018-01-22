@@ -8,7 +8,7 @@ android {
         applicationId "free.rm.skytube"
         minSdkVersion 14
         targetSdkVersion 26
-        versionCode 10
+        versionCode 11
         // Third party devs:  pls be ethical and change the below keys
         buildConfigField 'String[]', 'YOUTUBE_API_KEYS',
                 '{' +
