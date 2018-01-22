@@ -21,5 +21,6 @@
 	<string name="no_new_channels_found">Er zijn geen YouTube-kanalen gevonden waarop u niet al geabonneerd was in het door u geüploade XML-bestand.</string>
 	<string name="import_subscriptions_parse_error">Er is een fout opgetreden tijdens het verwerken van het door u geüploade XML-bestand: %s.</string>
 	<string name="failed_to_import_subscriptions">Het importeren van uw abonnementen is mislukt.</string>
-<string name="about">Over</string>
+
+	<string name="about">Over</string>
 </resources>

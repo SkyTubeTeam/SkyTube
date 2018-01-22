@@ -21,5 +21,6 @@
 	<string name="no_new_channels_found">Ingen YouTube-kanaler du ikke abonnerer på allerede ble funnet i XML-fila du lastet opp.</string>
 	<string name="import_subscriptions_parse_error">En feil inntraff under forsøk på å tolke XML-fila du lastet opp: %s.</string>
 	<string name="failed_to_import_subscriptions">Klarte ikke å importere dine YouTube-abonnementer.</string>
-<string name="about">Om</string>
+
+	<string name="about">Om</string>
 </resources>

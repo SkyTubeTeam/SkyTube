@@ -30,8 +30,10 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
 import java.util.Iterator;
+import java.util.List;
 
 import free.rm.skytube.R;
+import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.db.Tasks.GetSubscribedChannelsTask;
 import free.rm.skytube.gui.businessobjects.MainActivityListener;
@@ -171,6 +173,9 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 
 
 	public void refreshSubsList() {
+		synchronized (isSubsListRetrieved) {
+			isSubsListRetrieved.value = false;
+		}
 		clearList();
 		new GetSubscribedChannelsTask(this, null).executeInParallel();
 	}
@@ -179,10 +184,38 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 	/**
 	 * @return True if the subscriptions channel list has been fully retrieved and populated.
 	 */
-	public Bool isSubsListRetrieved() {
+	private Bool isSubsListRetrieved() {
 		synchronized (isSubsListRetrieved) {
 			return isSubsListRetrieved;
 		}
+	}
+
+
+	/**
+	 * Returns the list of channels that the user is subscribed to.
+	 *
+	 * <p>If currently the Subs List is being retrieved by the {@link SubsAdapter} then wait until the
+	 * {@link SubsAdapter} retrieves the list.</p>
+	 *
+	 * @return List of YouTube channels the user is subscribed to.
+	 */
+	public List<YouTubeChannel> getSubsLists() {
+		SubsAdapter.Bool isSubsListRetrieved = isSubsListRetrieved();
+
+		synchronized (isSubsListRetrieved) {
+			// if the SubsAdapter is still retrieving the channels...
+			if (!isSubsListRetrieved.value) {
+				try {
+					// ...then we have to wait...
+					isSubsListRetrieved.wait();
+				} catch (InterruptedException e) {
+					Logger.e(this, "Something went wrong when waiting for the Subs Lists...", e);
+				}
+			}
+		}
+
+		// the list has now been retrieved; return it pls
+		return getList();
 	}
 
 
@@ -198,7 +231,7 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 	}
 
 
-	/////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////
 
 	class SubChannelViewHolder extends RecyclerView.ViewHolder {
 

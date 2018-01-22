@@ -45,7 +45,7 @@
 	<string name="pref_summary_updates">Проверить обновления.</string>
 	<string name="pref_title_license">Лицензия</string>
 	<string name="pref_summary_license">Общедоступная лицензия GNU 3-ей версии</string>
-	<string name="app_license">Авторские права принадлежат Рамону Мифсуду © 2015-2017
+	<string name="app_license">Авторские права принадлежат Рамону Мифсуду © 2015-2018
 \n
 \nЭта программа — свободное программное обеспечение: её можно распространять или изменять в соответствии с общедоступной лицензией GNU, опубликованной Free Software Foundation (3-я версия лицензии).
 \n
@@ -53,7 +53,6 @@
 \n
 \nВместе с этой программой вы должны были получить копию общедоступной лицензии GNU. Если этого не произошло, пройдите по ссылке &lt;http://www.gnu.org/licenses/&gt;</string>
 	<string name="i_agree">Согласен</string>
-
 
 	<string name="pref_other_category">Другое</string>
 	<string name="pref_title_default_tab">Вкладка по умолчанию</string>
@@ -64,10 +63,26 @@
 	<string name="pref_screen_portrait">Портрет</string>
 	<string name="pref_screen_auto">Определять автоматически</string>
 	<string name="pref_screen_sensor">Определять по датчику устройства</string>
+
 	<string name="pref_title_youtube_api_key">API ключ YouTube</string>
 	<string name="pref_summary_youtube_api_key">Введите персональный API ключ YouTube. Не заполняйте, если хотите пользоваться ключом по умолчанию.</string>
 	<string name="pref_youtube_api_key_error">Ошибка при проверке введённого API ключа.</string>
 	<string name="pref_youtube_api_key_custom">Ключ прошёл проверку. Чтобы начать им пользоваться, перезапустите приложение.</string>
 	<string name="pref_youtube_api_key_default">Перезапустите приложение, чтобы переключиться на API ключ по умолчанию.</string>
 	<string name="restart">Перезапустить</string>
+
+	<string name="pref_title_disable_immersive_mode">Disable Immersive Mode</string>
+	<string name="pref_summary_disable_immersive_mode">Comments and video description icons and the navigation bar shall always be displayed</string>
+
+	<string name="pref_title_feed_notification">Feed Auto Notification</string>
+	<string name="pref_summary_feed_notification">How often to check for new videos from subscribed channels: %s</string>
+	<string-array name="feed_notification">
+		<item>Off</item>
+		<item>6 Hours</item>
+		<item>12 Hours</item>
+		<item>24 Hours</item>
+	</string-array>
+
+	<string name="pref_title_allow_mobile_downloads">Allow downloads on mobile networks</string>
+	<string name="pref_summary_allow_mobile_downloads">Select this to enable downloading videos on mobile networks. Otherwise, videos can only be downloaded on Wi-Fi.</string>
 </resources>

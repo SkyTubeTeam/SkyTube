@@ -42,14 +42,14 @@
 	<string name="pref_summary_credits">De mensen en projecten die deze app mede mogelijk hebben gemaakt.</string>
 	<string name="pref_title_version">Versie</string>
 	<string name="pref_title_updates">Updates</string>
-	<string name="pref_summary_updates">Controleren op updates</string>
+	<string name="pref_summary_updates">Controleren op nieuwe versies.</string>
 	<string name="pref_title_license">Licentie</string>
 	<string name="pref_summary_license">GNU General Public License versie 3</string>
-	<string name="app_license">Copyright © 2015-2017 Ramon Mifsud
+	<string name="app_license">Copyright © 2015-2018 Ramon Mifsud 
 \n 
-\nDeze app is vrije software: u kunt de app heruitgeven en/of bewerken onder de voorwaarden van de GNU General Public License zoals gepubliceerd door de Free Software Foundation (versie 3 van de licentie).
+\nDeze app is vrije software: u kunt de app heruitgeven en/of bewerken onder de voorwaarden van de GNU General Public License zoals gepubliceerd door de Free Software Foundation (versie 3 van de licentie). 
 \n 
-\nDeze app wordt verspreid in de hoop nuttig te zijn, maar ZONDER ENIGE GARANTIE; zonder ook maar de geïmpliceerde VERKOOPBAARHEID of INPASSING IN EEN SPECIFIEK DOEL. Lees de GNU General Public License voor meer informatie.
+\nDeze app wordt verspreid in de hoop nuttig te zijn, maar ZONDER ENIGE GARANTIE; zonder ook maar de geïmpliceerde VERKOOPBAARHEID of INPASSING IN EEN SPECIFIEK DOEL. Lees de GNU General Public License voor meer informatie. 
 \n 
 \nU zou een kopie van de GNU General Public License hebben moeten krijgen bij deze app. Als dat niet het geval is, bekijk dan &lt;http://www.gnu.org/licenses/&gt;</string>
 	<string name="i_agree">Ik ga akkoord</string>
@@ -64,6 +64,7 @@
 	<string name="pref_screen_portrait">Portret</string>
 	<string name="pref_screen_auto">Automatisch</string>
 	<string name="pref_screen_sensor">Apparaatsensor</string>
+
 	<string name="pref_title_disable_immersive_mode">Theatermodus uitschakelen</string>
 	<string name="pref_summary_disable_immersive_mode">Comments and video description icons and the navigation bar shall always be displayed</string>
 
@@ -73,10 +74,16 @@
 	<string name="pref_youtube_api_key_custom">De sleutel is geldig. Herstart de app om de nieuwe YouTube API-sleutel te gebruiken.</string>
 	<string name="pref_youtube_api_key_default">Herstart de app om terug te schakelen naar de standaard YouTube API-sleutel.</string>
 	<string name="restart">Herstarten</string>
-<string name="pref_title_feed_notification">Automatische feed-melding</string>
+	<string name="pref_title_feed_notification">Automatische feed-melding</string>
 	<string name="pref_summary_feed_notification">Hoe vaak er moet worden gezocht naar nieuwe video\'s van geabonneerde kanalen: %s</string>
-	<string name="pref_key_allow_mobile_downloads">pref_allow_mobile_downloads_key</string>
-	<string name="pref_title_allow_mobile_downloads">Downloads toestaan over mobiele netwerverbinding</string>
-	<string name="pref_summary_allow_mobile_downloads">Als u dit aanvinkt, dan kunnen video\'s worden gedownload over mobiele netwerkverbindingen i.p.v. alleen over Wi-Fi.</string>
+		<string-array name="feed_notification">
+		<item>Off</item>
+		<item>6 Hours</item>
+		<item>12 Hours</item>
+		<item>24 Hours</item>
+	</string-array>
 
-	</resources>
+	<string name="pref_title_allow_mobile_downloads">Downloads toestaan over mobiele netwerkverbinding</string>
+	<string name="pref_summary_allow_mobile_downloads">Selecteer dit om downloaden over mobiele netwerkverbindingen in te schakelen i.p.v. alleen over Wi-Fi.</string>
+
+</resources>

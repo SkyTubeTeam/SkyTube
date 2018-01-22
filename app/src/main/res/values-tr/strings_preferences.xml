@@ -45,7 +45,7 @@
 	<string name="pref_summary_updates">Güncelleştirmeleri kontrol et.</string>
 	<string name="pref_title_license">Lisans</string>
 	<string name="pref_summary_license">GNU Genel Kamu Lisansı versiyon 3</string>
-	<string name="app_license">Copyright © 2015-2017 Ramon Mifsud
+	<string name="app_license">Copyright © 2015-2018 Ramon Mifsud
 \n 
 \nThis program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation (version 3 of the License).
 \nBu program özgür yazılımdır: Free Software Foundation tarafından yayımlanan GNU Genel Kamu Lisansı (versiyon 3) kapsamında Bu programı yeniden dağıtabilir ve/veya değiştirebilirsiniz. 
@@ -63,12 +63,19 @@
 	<string name="pref_summary_default_tab">SkyTube başlatılırken gösterilecek varsayılan sekme: %s</string>
 	<string name="pref_title_feed_notification">Feed Otomatik Bildirimi</string>
 	<string name="pref_summary_feed_notification">Abone Olunan Kanallardan yeni videolar ne sıklıkta kontrol edilsin: %s</string>
+	<string-array name="feed_notification">
+		<item>Off</item>
+		<item>6 Hours</item>
+		<item>12 Hours</item>
+		<item>24 Hours</item>
+	</string-array>
 	<string name="pref_title_screen_orientation">Ekran Yönlendirme</string>
 	<string name="pref_summary_screen_orientation">Video oynatıcının yön belirlemesi</string>
 	<string name="pref_screen_landscape">Yatay</string>
 	<string name="pref_screen_portrait">Dikey</string>
 	<string name="pref_screen_auto">Otomatik</string>
 	<string name="pref_screen_sensor">Aygıt algılayıcısı</string>
+
 	<string name="pref_title_disable_immersive_mode">Immersive Modu Devre Dışı Bırak</string>
 	<string name="pref_summary_disable_immersive_mode">Yorumlar, video tanım simgeleri ve gezinti çubuğu her zaman gösterilsin</string>
 
@@ -78,4 +85,7 @@
 	<string name="pref_youtube_api_key_custom">Anahtar geçerli. Yeni YouTube API Anahtarını kullanmak için APP\'i yeniden başlatın.</string>
 	<string name="pref_youtube_api_key_default">Varsayılan YouTube API anahtarına geri dönmek için APP\'i yeniden başlatın.</string>
 	<string name="restart">Yeniden Başlat</string>
+
+	<string name="pref_title_allow_mobile_downloads">Allow downloads on mobile networks</string>
+	<string name="pref_summary_allow_mobile_downloads">Select this to enable downloading videos on mobile networks. Otherwise, videos can only be downloaded on Wi-Fi.</string>
 </resources>

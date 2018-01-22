@@ -30,11 +30,11 @@
 		android:summary="@string/pref_summary_youtube_api_key"
 		android:dialogTitle="@string/pref_title_youtube_api_key" />
 
-	<ListPreference
-		android:key="@string/pref_feed_notification_key"
-		android:title="@string/pref_title_feed_notification"
-		android:entries="@array/feed_notification"
-		android:entryValues="@array/feed_notification_values" />
+	<!--<ListPreference-->
+		<!--android:key="@string/pref_feed_notification_key"-->
+		<!--android:title="@string/pref_title_feed_notification"-->
+		<!--android:entries="@array/feed_notification"-->
+		<!--android:entryValues="@array/feed_notification_values" />-->
 
 	<CheckBoxPreference
 		android:defaultValue="false"

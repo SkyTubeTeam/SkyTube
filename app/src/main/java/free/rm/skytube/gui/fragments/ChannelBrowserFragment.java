@@ -178,15 +178,14 @@ public class ChannelBrowserFragment extends FragmentEx {
 		return fragment;
 	}
 
-//	@Override
-//	public void onSaveInstanceState(Bundle outState) {
-//		super.onSaveInstanceState(outState);
-//		if(channelVideosFragment != null)
-//			getChildFragmentManager().putFragment(outState, FRAGMENT_CHANNEL_VIDEOS, channelVideosFragment);
-//		if(channelPlaylistsFragment != null)
-//			getChildFragmentManager().putFragment(outState, FRAGMENT_CHANNEL_PLAYLISTS, channelPlaylistsFragment);
-//
-//	}
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		if(channelVideosFragment != null)
+			getChildFragmentManager().putFragment(outState, FRAGMENT_CHANNEL_VIDEOS, channelVideosFragment);
+		if(channelPlaylistsFragment != null)
+			getChildFragmentManager().putFragment(outState, FRAGMENT_CHANNEL_PLAYLISTS, channelPlaylistsFragment);
+	}
 
 	/**
 	 * Initialise views that are related to {@link #channel}.

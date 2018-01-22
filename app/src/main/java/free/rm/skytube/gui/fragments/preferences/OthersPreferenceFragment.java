@@ -48,11 +48,11 @@ public class OthersPreferenceFragment extends PreferenceFragment implements Shar
 		}
 		defaultTabPref.setSummary(String.format(getString(R.string.pref_summary_default_tab), defaultTabPref.getEntry()));
 
-		ListPreference feedNotificationPref = (ListPreference) findPreference(getString(R.string.pref_feed_notification_key));
-		if(feedNotificationPref.getValue() == null) {
-			feedNotificationPref.setValueIndex(0);
-		}
-		feedNotificationPref.setSummary(String.format(getString(R.string.pref_summary_feed_notification), feedNotificationPref.getEntry()));
+//		ListPreference feedNotificationPref = (ListPreference) findPreference(getString(R.string.pref_feed_notification_key));
+//		if(feedNotificationPref.getValue() == null) {
+//			feedNotificationPref.setValueIndex(0);
+//		}
+//		feedNotificationPref.setSummary(String.format(getString(R.string.pref_summary_feed_notification), feedNotificationPref.getEntry()));
 	}
 
 
@@ -98,14 +98,14 @@ public class OthersPreferenceFragment extends PreferenceFragment implements Shar
 						displayRestartDialog(R.string.pref_youtube_api_key_default);
 					}
 				}
-			} else if (key.equals(getString(R.string.pref_feed_notification_key))) {
+			} /*else if (key.equals(getString(R.string.pref_feed_notification_key))) {
 				ListPreference feedNotificationPref = (ListPreference) findPreference(key);
 				feedNotificationPref.setSummary(String.format(getString(R.string.pref_summary_feed_notification), feedNotificationPref.getEntry()));
 
 				int interval = Integer.parseInt(feedNotificationPref.getValue());
 
 				SkyTubeApp.setFeedUpdateInterval(interval);
-			}
+			}*/
 		}
 	}
 

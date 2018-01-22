@@ -24,43 +24,57 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Environment;
 import android.webkit.MimeTypeMap;
+
+import java.io.File;
+import java.io.Serializable;
+
+import free.rm.skytube.gui.activities.PermissionsActivity;
 
 import static free.rm.skytube.app.SkyTubeApp.getContext;
 
 /**
  * Downloads remote files by using Android's {@link DownloadManager}.
  */
-public abstract class FileDownloader {
-	private Uri     remoteFileUri = null;
+public abstract class FileDownloader implements Serializable, PermissionsActivity.PermissionsTask {
+
+	/** The remote file URL that is going to be downloaded. */
+	private String  remoteFileUrl = null;
+	/** The directory type:  e.g. Environment.DIRECTORY_MOVIES or Environment.DIRECTORY_PICTURES */
 	private String  dirType = null;
+	/** The title that will be displayed by the Android's download manager. */
 	private String  title = null;
+	/** The description that will be displayed by the Android's download manager. */
 	private String  description = null;
+	/** Output file name (without file extension). */
 	private String  outputFileName = null;
+	private String  outputFileExtension = null;
+	/** If set to true, then the download manager will download the file over cellular network. */
 	private Boolean allowedOverRoaming = null;
+	/** If set, download manager will only download files over the specified networks.
+	 *  This is ignored if allowedOverRoaming is set to true. */
 	private Integer allowedNetworkTypesFlags = null;
 
-	private DownloadManager downloadManager;
-	private long            downloadId;
-
-	private BroadcastReceiver onComplete = new BroadcastReceiver() {
-		public void onReceive(Context context, Intent intent) {
-			String action = intent.getAction();
-
-			if (DownloadManager.ACTION_DOWNLOAD_COMPLETE.equals(action)) {
-				long referenceId = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
-
-				// check the referenceId for this download
-				if (referenceId == downloadId) {
-					fileDownloadStatus();
-				}
-			}
-		}
-	};
+	private long    downloadId;
+	private transient BroadcastReceiver onComplete;
 
 
-	protected FileDownloader() {
-		downloadManager = (DownloadManager) getContext().getSystemService(Context.DOWNLOAD_SERVICE);
+	/**
+	 * Displays the {@link PermissionsActivity} which will first ask the user to give us permissions
+	 * to write to external storage and once that permission is granted, the {@link FileDownloader}
+	 * will start downloading the file.
+	 */
+	public void displayPermissionsActivity(Context context) {
+		Intent i = new Intent(getContext(), PermissionsActivity.class);
+		i.putExtra(PermissionsActivity.PERMISSIONS_TASK_OBJ, this);
+		context.startActivity(i);
+	}
+
+
+	@Override
+	public void onExternalStoragePermissionsGranted() {
+		download();
 	}
 
 
@@ -70,13 +84,31 @@ public abstract class FileDownloader {
 	 * <p>Android's DownloadManager will be used to download the image on our behalf.</p>
 	 */
 	public void download() {
+		// check if the mandatory variables were set -- if not halt the program.
 		checkIfVariablesWereSet();
+
+		// if the external storage is not available then halt the download operation
+		if (!isExternalStorageAvailable()) {
+			onExternalStorageNotAvailable();
+			return;
+		}
+
+		Uri     remoteFileUri = Uri.parse(remoteFileUrl);
+		String  downloadFileName = getCompleteFileName(outputFileName, remoteFileUri);
+
+		// if there's already a local file for this video for some reason, then do not redownload the
+		// file and halt
+		File file = new File(Environment.getExternalStoragePublicDirectory(dirType), downloadFileName);
+		if (file.exists()) {
+			onFileDownloadCompleted(true, Uri.parse(file.toURI().toString()));
+			return;
+		}
 
 		DownloadManager.Request request = new DownloadManager.Request(remoteFileUri)
 				.setAllowedOverRoaming(allowedOverRoaming)
 				.setTitle(title)
 				.setDescription(description)
-				.setDestinationInExternalFilesDir(getContext(), dirType, getCompleteFileName(outputFileName, remoteFileUri));
+				.setDestinationInExternalPublicDir(dirType, downloadFileName);
 
 		if (!allowedOverRoaming) {
 			request.setAllowedNetworkTypes(allowedNetworkTypesFlags);
@@ -86,7 +118,8 @@ public abstract class FileDownloader {
 		getContext().registerReceiver(onComplete, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
 
 		// start downloading
-		downloadId = downloadManager.enqueue(request);
+		downloadId = getDownloadManager().enqueue(request);
+		onFileDownloadStarted();
 	}
 
 
@@ -94,11 +127,37 @@ public abstract class FileDownloader {
 	 * Will check if the mandatory instance variables have been set.
 	 */
 	private void checkIfVariablesWereSet() {
-		if (remoteFileUri == null  ||  dirType == null  ||  title == null
+		if (remoteFileUrl == null  ||  dirType == null  ||  title == null
 				||  outputFileName == null  ||  allowedOverRoaming == null
 				|| (allowedOverRoaming == false  &&  allowedNetworkTypesFlags == null)) {
-			throw new IllegalStateException("On of the parameters was not set for the FileDownloader");
+			throw new IllegalStateException("One of the parameters was not set for the FileDownloader");
 		}
+
+		onComplete = new BroadcastReceiver() {
+			public void onReceive(Context context, Intent intent) {
+				String action = intent.getAction();
+
+				if (DownloadManager.ACTION_DOWNLOAD_COMPLETE.equals(action)) {
+					long referenceId = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
+
+					// check the referenceId for this download
+					if (referenceId == downloadId) {
+						fileDownloadStatus();
+					}
+				}
+			}
+		};
+	}
+
+
+	/**
+	 * Checks if the external storage is available for read and write.
+	 *
+	 * @return True if the external storage is available.
+	 */
+	private boolean isExternalStorageAvailable() {
+		String state = Environment.getExternalStorageState();
+		return Environment.MEDIA_MOUNTED.equals(state);
 	}
 
 
@@ -106,7 +165,8 @@ public abstract class FileDownloader {
 	 * Concatenates the outputFileName together with the appropriate file extension.
 	 */
 	private String getCompleteFileName(String outputFileName, Uri remoteFileUri) {
-		return outputFileName + "." + MimeTypeMap.getFileExtensionFromUrl(remoteFileUri.toString());
+		String fileExt = (outputFileExtension != null)  ?  outputFileExtension  :   MimeTypeMap.getFileExtensionFromUrl(remoteFileUri.toString());
+		return outputFileName + "." + fileExt;
 	}
 
 
@@ -116,7 +176,7 @@ public abstract class FileDownloader {
 	private void fileDownloadStatus() {
 		boolean downloadSuccessful = false;
 		Uri     downloadedFileUri  = null;
-		Cursor  cursor = downloadManager.query(new DownloadManager.Query().setFilterById(downloadId));
+		Cursor  cursor = getDownloadManager().query(new DownloadManager.Query().setFilterById(downloadId));
 
 		if (cursor != null  &&  cursor.moveToFirst()) {
 			int columnIndex = cursor.getColumnIndex(DownloadManager.COLUMN_STATUS);
@@ -131,12 +191,13 @@ public abstract class FileDownloader {
 
 		getContext().unregisterReceiver(onComplete);
 
+		// file download is now completed
 		onFileDownloadCompleted(downloadSuccessful, downloadedFileUri);
 	}
 
 
-	public FileDownloader setRemoteFileUri(Uri remoteFileUri) {
-		this.remoteFileUri = remoteFileUri;
+	public FileDownloader setRemoteFileUrl(String remoteFileUrl) {
+		this.remoteFileUrl = remoteFileUrl;
 		return this;
 	}
 
@@ -171,6 +232,16 @@ public abstract class FileDownloader {
 	}
 
 	/**
+	 * Set the output file's extension.
+	 *
+	 * @param outputFileExtension   E.g. "mp4"
+	 */
+	public FileDownloader setOutputFileExtension(String outputFileExtension) {
+		this.outputFileExtension = outputFileExtension;
+		return this;
+	}
+
+	/**
 	 * If set to true the {@link FileDownloader} will download the remote file even if the user is
 	 * using cellular network.
 	 */
@@ -179,11 +250,22 @@ public abstract class FileDownloader {
 		return this;
 	}
 
-
 	public FileDownloader setAllowedNetworkTypesFlags(Integer allowedNetworkTypesFlags) {
 		this.allowedNetworkTypesFlags = allowedNetworkTypesFlags;
 		return this;
 	}
+
+	private DownloadManager getDownloadManager() {
+		return (DownloadManager) getContext().getSystemService(Context.DOWNLOAD_SERVICE);
+	}
+
+
+	////////////////////////////////////////////////////////////////////////////////////////////////
+
+	/**
+	 * Method called when we just started downloading the file.
+	 */
+	public abstract void onFileDownloadStarted();
 
 
 	/**
@@ -194,5 +276,12 @@ public abstract class FileDownloader {
 	 * @param localFileUri  If success == true, then this will hold the Uri of the downloaded file.
 	 */
 	public abstract void onFileDownloadCompleted(boolean success, Uri localFileUri);
+
+
+	/**
+	 * Method called if the external storage is not available and cannot be used by the app (e.g.
+	 * user has ejected the SD card).
+	 */
+	public abstract void onExternalStorageNotAvailable();
 
 }

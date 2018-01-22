@@ -151,7 +151,7 @@ public class SkyTubeApp extends MultiDexApplication {
 		final ConnectivityManager connMgr = (ConnectivityManager)
 						getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
 		final android.net.NetworkInfo wifi = connMgr.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-		return wifi.isConnectedOrConnecting();
+		return wifi != null && wifi.isConnectedOrConnecting();
 	}
 
 	/**
@@ -161,7 +161,7 @@ public class SkyTubeApp extends MultiDexApplication {
 		final ConnectivityManager connMgr = (ConnectivityManager)
 						getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
 		final android.net.NetworkInfo mobile = connMgr.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
-		return mobile.isConnectedOrConnecting();
+		return mobile != null && mobile.isConnectedOrConnecting();
 	}
 
 	/*
@@ -191,7 +191,7 @@ public class SkyTubeApp extends MultiDexApplication {
 	 * Get the stored interval (in milliseconds) to pass to the below method.
 	 */
 	public static void setFeedUpdateInterval() {
-		int feedUpdaterInterval = Integer.parseInt(SkyTubeApp.getPreferenceManager().getString(SkyTubeApp.getStr(R.string.pref_feed_notification_key), "0"));
+		int feedUpdaterInterval = Integer.parseInt(SkyTubeApp.getPreferenceManager().getString(SkyTubeApp.getStr(R.string.pref_key_feed_notification), "0"));
 		setFeedUpdateInterval(feedUpdaterInterval);
 	}
 

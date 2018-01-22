@@ -14,5 +14,6 @@
 	<string name="num_videos">%d videoer</string>
 	<string name="playlists">Spillelister</string>
 	<string name="could_not_get_playlists">Kunne ikke hente %s spillelister.</string>
-<string name="loading">Laster…</string>
+	<string name="loading">Laster…</string>
+	<string name="video">Video</string>
 </resources>

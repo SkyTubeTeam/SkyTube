@@ -16,4 +16,5 @@
 	<string name="could_not_get_playlists">%s afspeellijsten kunnen niet worden verkregen.</string>
 
 	<string name="loading">Bezig met laden…</string>
+	<string name="video">Video</string>
 </resources>

@@ -91,11 +91,23 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 	 * @return True if the operation was successful; false otherwise.
 	 */
 	public boolean subscribe(YouTubeChannel channel) {
-		ContentValues values = new ContentValues();
-		values.put(SubscriptionsTable.COL_CHANNEL_ID, channel.getId());
-		values.put(SubscriptionsTable.COL_LAST_VISIT_TIME, System.currentTimeMillis());
-
 		saveChannelVideos(channel);
+
+		return subscribe(channel.getId());
+	}
+
+
+	/**
+	 * Saves the given channel into the subscriptions DB.
+	 *
+	 * @param channelId The channel ID the user wants to subscribe to.
+	 *
+	 * @return True if the operation was successful; false otherwise.
+	 */
+	public boolean subscribe(String channelId) {
+		ContentValues values = new ContentValues();
+		values.put(SubscriptionsTable.COL_CHANNEL_ID, channelId);
+		values.put(SubscriptionsTable.COL_LAST_VISIT_TIME, System.currentTimeMillis());
 
 		return getWritableDatabase().insert(SubscriptionsTable.TABLE_NAME, null, values) != -1;
 	}
@@ -257,11 +269,18 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 
 	private boolean hasVideo(YouTubeVideo video) {
 		String query = String.format("SELECT COUNT(*) FROM %s WHERE %s = ?", SubscriptionsVideosTable.TABLE_NAME, SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID);
-		Cursor cursor = SubscriptionsDb.getSubscriptionsDb().getReadableDatabase().rawQuery(query, new String[]{video.getId()});
-		if(cursor.moveToFirst()) {
-			return cursor.getInt(0) > 0;
+		Cursor cursor = null;
+		try {
+			cursor = SubscriptionsDb.getSubscriptionsDb().getReadableDatabase().rawQuery(query, new String[]{video.getId()});
+			if (cursor.moveToFirst()) {
+				return cursor.getInt(0) > 0;
+			}
+			return false;
+		} finally {
+			if (cursor != null) {
+				cursor.close();
+			}
 		}
-		return false;
 	}
 
 

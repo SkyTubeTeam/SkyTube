@@ -10,4 +10,8 @@
 	<string name="import_subscriptions_from_youtube">Importer abonnementer fra YouTube</string>
 <string name="notification_channel_feed_title">Kilde-merknader</string>
 	<string name="notification_new_videos_found">%d nye videoer funnet i abonnerte kanaler</string>
-</resources>
+<string name="subscribing_to_channels">Abonnerer på kanaler…</string>
+	<string name="fetching_subbed_channels_info">Henter kanalinformasjon…</string>
+	<string name="fetching_subbed_channels_info_error">En feil har inntruffet under innhenting av kanalinformasjon.</string>
+
+	</resources>
