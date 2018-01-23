@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="preferences">Preferences</string>
+
+	<string name="pref_languages_category">Languages &amp; Regions</string>
+	<string name="pref_title_preferred_regions">Preferred Region</string>
+	<string name="pref_summary_preferred_regions">Select a preferred region. This is used to filter out videos in the \"Featured\" videos category.</string>
+
+	<string name="pref_title_preferred_languages">Preferred Language(s)</string>
+	<string name="pref_summary_preferred_languages">Experimental: Select one or more preferred languages. This is used to filter out videos in the \"Most Popular\" video category and for video searches.</string>
+
+	<string name="pref_video_player_category">Video Player</string>
+	<string name="pref_title_preferred_res">Preferred Resolution</string>
+	<string name="pref_summary_preferred_res">Select your preferred resolution</string>
+	<string name="pref_title_use_offical_player">Use official YouTube player</string>
+	<string name="pref_summary_use_offical_player">Not recommended</string>
+
+	<string name="pref_backup_category">Backups</string>
+	<string name="pref_title_backup_dbs">Backup Databases</string>
+	<string name="pref_summary_backup_dbs">Backup your subscriptions and bookmarks databases.</string>
+	<string name="pref_title_import_dbs">Import Backup</string>
+	<string name="pref_summary_import_dbs">Import your subscriptions and bookmarks databases backup.</string>
+	<string name="databases_backing_up">Backing up…</string>
+	<string name="databases_backup_success">Databases backed up to %s</string>
+	<string name="databases_backup_fail">Failed to backup your databases.</string>
+	<string name="databases_import_select_backup">Select backup file to import</string>
+	<string name="databases_import_nothing_selected">Nothing was selected…</string>
+	<string name="databases_import_warning_message">The subscription and bookmark databases will be replaced with the data in the selected backup file.\n\nContinue?</string>
+	<string name="continue_">Continue</string>
+	<string name="databases_importing">Importing…</string>
+	<string name="databases_import_fail">Failed to import your databases.</string>
+	<string name="databases_import_success">Databases imported. Restart the app to apply changes.</string>
+
+	<string name="pref_title_import_subs">Import Subscriptions From YouTube</string>
+	<string name="pref_summary_import_subs">Import your subscriptions from your YouTube account.</string>
+	<string name="subs_import_select_backup">Select YouTube XML file to import</string>
+
+	<string name="pref_about_category">About</string>
+	<string name="pref_title_website">Website</string>
+	<string name="pref_title_credits">Credits</string>
+	<string name="pref_summary_credits">People and projects that made this app possible.</string>
+	<string name="pref_title_version">Version</string>
+	<string name="pref_title_updates">Updates</string>
+	<string name="pref_summary_updates">Check for new versions.</string>
+	<string name="pref_title_license">License</string>
+	<string name="pref_summary_license">GNU General Public License version 3</string>
+	<string name="app_license">
+		Copyright &#169; 2015-2018  Ramon Mifsud\n
+
+		\nThis program is free software: you can redistribute it and/or modify
+		it under the terms of the GNU General Public License as published by
+		the Free Software Foundation (version 3 of the License).\n
+
+		\nThis program is distributed in the hope that it will be useful,
+		but WITHOUT ANY WARRANTY; without even the implied warranty of
+		MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+		GNU General Public License for more details.\n
+
+		\nYou should have received a copy of the GNU General Public License
+		along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;
+	</string>
+	<string name="i_agree">I Agree</string>
+
+	<string name="pref_other_category">Others</string>
+	<string name="pref_title_default_tab">Default Tab</string>
+	<string name="pref_summary_default_tab">Default tab to show when SkyTube launches: %s</string>
+
+	<string name="pref_title_feed_notification">Feed Auto Notification</string>
+	<string name="pref_summary_feed_notification">How often to check for new videos from subscribed channels: %s</string>
+	<string-array name="feed_notification">
+		<item>Off</item>
+		<item>6 Hours</item>
+		<item>12 Hours</item>
+		<item>24 Hours</item>
+	</string-array>
+
+	<string name="pref_title_screen_orientation">Screen Orientation</string>
+	<string name="pref_summary_screen_orientation">Rotation of the video player</string>
+	<string name="pref_screen_landscape">Landscape</string>
+	<string name="pref_screen_portrait">Portrait</string>
+	<string name="pref_screen_auto">Automatic</string>
+	<string name="pref_screen_sensor">Device sensor</string>
+
+	<string name="pref_title_disable_immersive_mode">Disable Immersive Mode</string>
+	<string name="pref_summary_disable_immersive_mode">Comments and video description icons and the navigation bar shall always be displayed</string>
+
+	<string name="pref_title_youtube_api_key">YouTube API Key</string>
+	<string name="pref_summary_youtube_api_key">Enter your own YouTube Data API Key. Leave blank to use the default one.</string>
+	<string name="pref_youtube_api_key_error">An error occurred attempting to validate the API Key you entered.</string>
+	<string name="pref_youtube_api_key_custom">Key is valid. Restart app to use the new YouTube API key.</string>
+	<string name="pref_youtube_api_key_default">Restart app to switch back to default YouTube API key.</string>
+
+	<string name="pref_title_allow_mobile_downloads">Allow downloads on mobile networks</string>
+	<string name="pref_summary_allow_mobile_downloads">Select this to enable downloading videos on mobile networks. Otherwise, videos can only be downloaded on Wi-Fi.</string>
+
+	<string name="restart">Restart</string>
+</resources>

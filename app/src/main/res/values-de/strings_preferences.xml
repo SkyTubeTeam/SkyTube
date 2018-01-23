@@ -51,7 +51,7 @@
 	<string name="pref_title_license">Lizenz</string>
 	<string name="pref_summary_license">GNU General Public License Version 3</string>
 	<string name="app_license">
-		Copyright &#169; 2015-2017  Ramon Mifsud\n
+		Copyright &#169; 2015-2018  Ramon Mifsud\n
 
 		\nDieses Programm ist freie Software. Sie können es unter den Bedingungen der GNU General Public License,
 		wie von der Free Software Foundation veröffentlicht (Version 3 der Lizenz), weitergeben und/oder modifizieren.\n
@@ -82,4 +82,19 @@
 	<string name="pref_youtube_api_key_custom">Der Key is gültig.  Starte die App neu um den neuen YouTube API Key zu verwenden.</string>
 	<string name="pref_youtube_api_key_default">Starte die App neu um zum Standard YouTube API Key zurück zu wechseln.</string>
 	<string name="restart">Neustarten</string>
+
+	<string name="pref_title_feed_notification">Feed Auto Notification</string>
+	<string name="pref_summary_feed_notification">How often to check for new videos from subscribed channels: %s</string>
+	<string-array name="feed_notification">
+		<item>Off</item>
+		<item>6 Hours</item>
+		<item>12 Hours</item>
+		<item>24 Hours</item>
+	</string-array>
+
+	<string name="pref_title_disable_immersive_mode">Disable Immersive Mode</string>
+	<string name="pref_summary_disable_immersive_mode">Comments and video description icons and the navigation bar shall always be displayed</string>
+
+	<string name="pref_title_allow_mobile_downloads">Allow downloads on mobile networks</string>
+	<string name="pref_summary_allow_mobile_downloads">Select this to enable downloading videos on mobile networks. Otherwise, videos can only be downloaded on Wi-Fi.</string>
 </resources>

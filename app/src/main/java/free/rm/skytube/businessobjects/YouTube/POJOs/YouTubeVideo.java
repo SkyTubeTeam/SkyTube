@@ -528,38 +528,20 @@ public class YouTubeVideo implements Serializable {
 		if(isDownloaded())
 			return;
 
-		Toast.makeText(getContext(),
-						String.format(getContext().getString(R.string.starting_video_download), getTitle()),
-						Toast.LENGTH_LONG).show();
-
 		getDesiredStream(new GetDesiredStreamListener() {
 			@Override
 			public void onGetDesiredStream(StreamMetaData desiredStream) {
-				// First, if there's already a local file for this video for some reason, delete it.
-				File file = new File(Uri.withAppendedPath(Uri.fromFile(context.getExternalFilesDir(Environment.DIRECTORY_MOVIES)), getId() + ".mp4").toString());
-				if (file.exists())
-					file.delete();
-
 				// download the video
-				new FileDownloader() {
-					@Override
-					public void onFileDownloadCompleted(boolean success, Uri localFileUri) {
-						if (success) {
-							success = DownloadedVideosDb.getVideoDownloadsDb().add(YouTubeVideo.this, localFileUri.toString());
-						}
-
-						Toast.makeText(getContext(),
-								String.format(getContext().getString(success ? R.string.video_downloaded : R.string.video_download_stream_error), getTitle()),
-								Toast.LENGTH_LONG).show();
-					}
-				}.setRemoteFileUri(desiredStream.getUri())
+				new VideoDownloader()
+						.setRemoteFileUrl(desiredStream.getUri().toString())
 						.setDirType(Environment.DIRECTORY_MOVIES)
 						.setTitle(getTitle())
 						.setDescription(getStr(R.string.video) + " ― " + getChannelName())
 						.setOutputFileName(getId())
+						.setOutputFileExtension("mp4")
 						.setAllowedOverRoaming(false)
 						.setAllowedNetworkTypesFlags(getAllowedNetworkTypesFlags())
-						.download();
+						.displayPermissionsActivity(context);
 			}
 
 
@@ -581,6 +563,42 @@ public class YouTubeVideo implements Serializable {
 								Toast.LENGTH_LONG).show();
 			}
 		});
+	}
+
+
+
+	////////////////////////////////////////////////////////////////////////////////////////////////
+
+	/**
+	 * Downloads a YouTube video.
+	 */
+	private class VideoDownloader extends FileDownloader implements Serializable {
+
+		@Override
+		public void onFileDownloadStarted() {
+			Toast.makeText(getContext(),
+					String.format(getContext().getString(R.string.starting_video_download), getTitle()),
+					Toast.LENGTH_LONG).show();
+		}
+
+		@Override
+		public void onFileDownloadCompleted(boolean success, Uri localFileUri) {
+			if (success) {
+				success = DownloadedVideosDb.getVideoDownloadsDb().add(YouTubeVideo.this, localFileUri.toString());
+			}
+
+			Toast.makeText(getContext(),
+					String.format(getContext().getString(success ? R.string.video_downloaded : R.string.video_download_stream_error), getTitle()),
+					Toast.LENGTH_LONG).show();
+		}
+
+		@Override
+		public void onExternalStorageNotAvailable() {
+			Toast.makeText(getContext(),
+					R.string.external_storage_not_available,
+					Toast.LENGTH_LONG).show();
+		}
+
 	}
 
 }

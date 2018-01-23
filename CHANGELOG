@@ -1,18 +1,23 @@
-v2.80 - XX XXX 2018:
+v2.80 - 22 Jan 2018:
 	* Added channel playlist support.
-	* Added the option to download videos.
+	* Added an option to download videos.
 	* YouTube Player improvements, including:
 		- Immersive mode:  comments and video description can be viewed if the user swipes to the left and top respectively.
 		- Double tap can stop/play the video.
+		- Gesture mode:  swipe to the left to view comments; swipe to the top to view video description.
 	* Added thumbnail viewer for YouTube videos.
+	* Added an option to download videos' thumbnails.
 	* Main and channel toolbar aesthetics enhancements.
 	* Users can now view channel's information/description via the about tab.
 	* Feed is refreshed automatically.
-	* Improved loading time for subscribed channels list
+	* Improved loading time for subscribed channels list.
+	* Reduced subscriptions feeds refreshing time.
 	* Added Russian translations.
 	* Added Norwegian Bokmål translations.
 	* Added Arabic translations.
 	* Added Dutch translations.
+	* Added Turkish translations.
+	* Updated Polish, German, Hungarian and Portuguese translations.
 	* Bug fixes and other minor improvements.
 
 v2.70 - 05 Nov 2017:

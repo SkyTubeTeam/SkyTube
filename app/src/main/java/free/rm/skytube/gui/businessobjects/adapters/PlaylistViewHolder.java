@@ -35,27 +35,42 @@ import free.rm.skytube.gui.businessobjects.PlaylistClickListener;
 /**
  * A ViewHolder for the playlists grid view.
  */
-public class PlaylistViewHolder extends RecyclerView.ViewHolder {
-	@BindView(R.id.playlistViewLayout)
-	View playlistViewLayout;
+class PlaylistViewHolder extends RecyclerView.ViewHolder {
+
 	@BindView(R.id.thumbnail_image_view)
 	ImageView thumbnailImageView;
 	@BindView(R.id.title_text_view)
 	TextView titleTextView;
-	@BindView(R.id.playlist_video_count_textview)
+	@BindView(R.id.views_text_view)
 	TextView videoCountTextView;
 	@BindView(R.id.publish_date_text_view)
 	TextView publishDateTextView;
 
+	@BindView(R.id.thumbs_up_text_view)
+	View thumbsUpView;
+	@BindView(R.id.video_duration_text_view)
+	View videoDurationTextView;
+	@BindView(R.id.channel_text_view)
+	View channelTextView;
+	@BindView(R.id.options_button)
+	View optionsButton;
+
 	private PlaylistClickListener playlistClickListener;
 
-	public PlaylistViewHolder(View view, PlaylistClickListener playlistClickListener) {
+
+	PlaylistViewHolder(View view, PlaylistClickListener playlistClickListener) {
 		super(view);
 		ButterKnife.bind(this, view);
+
+		thumbsUpView.setVisibility(View.GONE);
+		videoDurationTextView.setVisibility(View.GONE);
+		channelTextView.setVisibility(View.GONE);
+		optionsButton.setVisibility(View.GONE);
+
 		this.playlistClickListener = playlistClickListener;
 	}
 
-	protected void setPlaylist(final YouTubePlaylist playlist, Context context) {
+	void setPlaylist(final YouTubePlaylist playlist, Context context) {
 		Glide.with(context)
 						.load(playlist.getThumbnailUrl())
 						.apply(new RequestOptions().placeholder(R.drawable.thumbnail_default))
@@ -63,11 +78,12 @@ public class PlaylistViewHolder extends RecyclerView.ViewHolder {
 		titleTextView.setText(playlist.getTitle());
 		publishDateTextView.setText(playlist.getPublishDatePretty());
 		videoCountTextView.setText(String.format(context.getString(R.string.num_videos), playlist.getVideoCount()));
-		playlistViewLayout.setOnClickListener(new View.OnClickListener() {
+		thumbnailImageView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				playlistClickListener.onClickPlaylist(playlist);
 			}
 		});
 	}
+
 }

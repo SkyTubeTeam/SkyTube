@@ -1,14 +1,14 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="bookmarks">Sık Kullanılanlar</string>
+<resources>
+	<string name="bookmarks">Sık Kullanılanlar</string>
 
 	<string name="bookmark">Sık Kullanılan</string>
+	<string name="video_bookmarked">Video bookmarked</string>
 	<string name="video_bookmarked_error">Video sık kullanılanlara eklenemedi.</string>
 
 	<string name="unbookmark">Sık Kullanılanlardan çıkart</string>
 	<string name="video_unbookmarked">Video Sık Kullanılardan çıkarıldı</string>
 	<string name="video_unbookmarked_error">Video Sık Kullanılanlardan çıkarılamadı.</string>
 
-	<string name="no_bookmarked_videos_text">Henüz Sık Kullanılanlara hiçbir video eklemediniz.
-\n
-\nEklediğiniz zaman burada görünecekler.</string>
+	<string name="no_bookmarked_videos_text">Henüz Sık Kullanılanlara hiçbir video eklemediniz.\n\nEklediğiniz zaman burada görünecekler.</string>
 </resources>

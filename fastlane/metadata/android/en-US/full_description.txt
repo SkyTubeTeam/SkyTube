@@ -1,0 +1,17 @@
+SkyTube is a YouTube player that allows you to:
+* explore Featured and Most Popular videos,
+* browse YouTube channels,
+* play YouTube videos,
+* view video comments,
+* search videos, music and channels,
+* channel subscription & non-intrusive notifications,
+* bookmark videos,
+* subscriptions feed,
+* import subscriptions from YouTube,
+* play channels' playlists [New!],
+* download videos [New!],
+* view and download video thumbnails [New!]
+
+... all at the tip of your fingers.
+
+More features will be added in the near future.

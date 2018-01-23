@@ -70,8 +70,10 @@ public class GetSubscribedChannelsTask extends AsyncTaskParallel<Void, Void, Lis
 
 	@Override
 	protected void onPostExecute(List<YouTubeChannel> subbedChannelsList) {
-		if (progressBar != null)
+		if (progressBar != null) {
 			progressBar.setVisibility(View.INVISIBLE);
+			progressBar = null;
+		}
 
 		if (subbedChannelsList == null) {
 			Toast.makeText(adapter.getContext(), R.string.error_get_subbed_channels, Toast.LENGTH_LONG).show();

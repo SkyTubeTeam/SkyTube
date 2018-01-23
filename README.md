@@ -1,6 +1,8 @@
 # SkyTube
 **An open-source YouTube player for the Android operating system.**
 
+<a href="https://hosted.weblate.org/engage/skytube/?utm_source=widget"> <img src="https://hosted.weblate.org/widgets/skytube/-/svg-badge.svg" alt="Translation status"/> </a>
+
 This app allows you to:
 * explore Featured and Most Popular videos,
 * browse YouTube channels,
@@ -10,13 +12,14 @@ This app allows you to:
 * channel subscription & non-intrusive notifications,
 * bookmark videos,
 * subscriptions feed,
-* import subscriptions from YouTube **[New!]**
+* import subscriptions from YouTube,
+* play channels' playlists **[New!]**,
+* download videos **[New!]**,
+* view and download video thumbnails **[New!]**
 
 ... all at the tip of your fingers.
 
 More features will be added in the near future.
-
-<a href="https://hosted.weblate.org/engage/skytube/?utm_source=widget"> <img src="https://hosted.weblate.org/widgets/skytube/-/svg-badge.svg" alt="Translation status"/> </a>
 
 ## Website
 For screenshots and more information, please visit [www.skytube-app.com](http://www.skytube-app.com).
@@ -36,11 +39,10 @@ Updates are published immediately: the app will notify you whenever there is an 
 Pure open-source version.  Updates normally take up to 3 days to be available to users.
 
 ## Why SkyTube?
-* Open Source
+* Free and Open Source
 * Innovative design
 * No intrusive ads
 * Multilingual
-* Only requires 3 Android-permissions (Internet [mandatory], access to External Storage [optional], install packages (for auto-updater) [optional -- applicable for SkyTube Extra])
 * Not dependent on the GAPPS/Google Apps (i.e. YouTube official app)
 * No need for Google/YouTube account to operate
 * My code does not spy on your behaviour!

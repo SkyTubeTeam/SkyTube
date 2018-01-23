@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="could_not_get_videos">%s のビデオを取得できませんでした。</string>
+	<string name="views">%,d ビュー</string>
+	<string name="error">エラー</string>
+	<string name="ok">OK</string>
+	<string name="search_videos">ビデオを検索</string>
+	<string name="launch_offical_player_error">Google から公式の YouTube プレーヤーを起動しようとしたときにエラーが発生しました。お使いのデバイスにインストールされていることを確認してください。</string>
+	<string name="LIVE">ライブ</string>
+
+	<string name="featured">特集</string>
+	<string name="most_popular">最も人気</string>
+
+	<string name="video">ビデオ</string>
+	<string name="videos">ビデオ</string>
+	<string name="num_videos">%d ビデオ</string>
+	<string name="playlists">プレイリスト</string>
+	<string name="could_not_get_playlists">%s のプレイリストを取得できませんでした。</string>
+
+	<string name="loading">読み込み中 …</string>
+</resources>

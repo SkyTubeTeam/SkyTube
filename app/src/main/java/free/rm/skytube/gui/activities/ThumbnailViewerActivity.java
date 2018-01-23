@@ -35,6 +35,8 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 
+import java.io.Serializable;
+
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.FileDownloader;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
@@ -61,21 +63,14 @@ public class ThumbnailViewerActivity extends AppCompatActivity {
 			@Override
 			public void onClick(View view) {
 				// download the thumbnail
-				new FileDownloader() {
-					@Override
-					public void onFileDownloadCompleted(boolean success, Uri localFileUri) {
-						Toast.makeText(getContext(),
-								success  ?  R.string.thumbnail_downloaded  :  R.string.thumbnail_download_error,
-								Toast.LENGTH_LONG)
-								.show();
-					}
-				}.setRemoteFileUri(getThumbnailUri())
+				new ThumbnailDownloader()
+						.setRemoteFileUrl(getThumbnailUrl())
 						.setDirType(Environment.DIRECTORY_PICTURES)
 						.setTitle(youTubeVideo.getTitle())
 						.setDescription(getString(R.string.thumbnail) + " ― " + youTubeVideo.getChannelName())
 						.setOutputFileName(youTubeVideo.getTitle())
 						.setAllowedOverRoaming(true)
-						.download();
+						.displayPermissionsActivity(ThumbnailViewerActivity.this);
 			}
 		});
 
@@ -93,7 +88,7 @@ public class ThumbnailViewerActivity extends AppCompatActivity {
 		});
 
 		Glide.with(this)
-				.load(getThumbnailUri())
+				.load(getThumbnailUrl())
 				.listener(new RequestListener<Drawable>() {
 					@Override
 					public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
@@ -111,9 +106,39 @@ public class ThumbnailViewerActivity extends AppCompatActivity {
 	}
 
 
-	private Uri getThumbnailUri() {
-		String url = youTubeVideo.getThumbnailMaxResUrl() != null  ?  youTubeVideo.getThumbnailMaxResUrl()  :  youTubeVideo.getThumbnailUrl();
-		return Uri.parse(url);
+	private String getThumbnailUrl() {
+		return youTubeVideo.getThumbnailMaxResUrl() != null  ?  youTubeVideo.getThumbnailMaxResUrl()  :  youTubeVideo.getThumbnailUrl();
+	}
+
+
+
+	////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+	/**
+	 * Downloads a video thumbnail.
+	 */
+	private static class ThumbnailDownloader extends FileDownloader implements Serializable {
+
+		@Override
+		public void onFileDownloadStarted() {
+		}
+
+		@Override
+		public void onFileDownloadCompleted(boolean success, Uri localFileUri) {
+			Toast.makeText(getContext(),
+					success  ?  R.string.thumbnail_downloaded  :  R.string.thumbnail_download_error,
+					Toast.LENGTH_LONG)
+					.show();
+		}
+
+		@Override
+		public void onExternalStorageNotAvailable() {
+			Toast.makeText(getContext(),
+					R.string.external_storage_not_available,
+					Toast.LENGTH_LONG).show();
+		}
+
 	}
 
 }

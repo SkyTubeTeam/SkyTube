@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="bookmarks">ブックマーク</string>
+
+	<string name="bookmark">ブックマーク</string>
+	<string name="video_bookmarked">ビデオをブックマークしました</string>
+	<string name="video_bookmarked_error">ビデオをブックマークできません。</string>
+
+	<string name="unbookmark">ブックマークから削除</string>
+	<string name="video_unbookmarked">ビデオをブックマークから削除しました</string>
+	<string name="video_unbookmarked_error">ビデオをブックマークから削除できません。</string>
+
+	<string name="no_bookmarked_videos_text">まだビデオをブックマークしていません。
+\n
+\nブックマークすると、ここに表示されます。</string>
+</resources>

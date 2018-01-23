@@ -139,6 +139,17 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 
 
 	@Override
+	protected void onResume() {
+		super.onResume();
+
+		// Activity may be destroyed when the devices is rotated, so we need to make sure that the
+		// channel play list is holding a reference to the activity being currently in use...
+		if (channelBrowserFragment != null)
+			channelBrowserFragment.getChannelPlaylistsFragment().setMainActivityListener(this);
+	}
+
+
+	@Override
 	public boolean onCreateOptionsMenu(final Menu menu) {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.main_activity_menu, menu);
@@ -316,4 +327,5 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 		playlistVideosFragment.setArguments(args);
 		switchToFragment(playlistVideosFragment);
 	}
+
 }

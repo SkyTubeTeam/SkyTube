@@ -24,7 +24,7 @@
 	<string name="databases_backup_fail">Klarte ikke å sikkerhetskopiere dine databaser.</string>
 	<string name="databases_import_select_backup">Velg sikkerhetskopifil å importere</string>
 	<string name="databases_import_nothing_selected">Ingenting ble valgt…</string>
-	<string name="databases_import_warning_message">Abonnementer og bokmerkedatabaser vil bli erstattet med data fra valgt sikkerhetskopifil. 
+	<string name="databases_import_warning_message">Abonnement- og bokmerkedatabaser vil bli erstattet med data fra valgt sikkerhetskopifil. 
 \n 
 \nFortsett?</string>
 	<string name="continue_">Fortsett</string>
@@ -42,14 +42,14 @@
 	<string name="pref_summary_credits">Folk og prosjekter som har gjort dette programmet mulig.</string>
 	<string name="pref_title_version">Versjon</string>
 	<string name="pref_title_updates">Oppdateringer</string>
-	<string name="pref_summary_updates">Se etter oppdateringer.</string>
+	<string name="pref_summary_updates">Se etter nye versjoner.</string>
 	<string name="pref_title_license">Lisens</string>
 	<string name="pref_summary_license">GNU General Public Lisens versjon 3</string>
-	<string name="app_license">Kopirett © 2015-2017 Ramon Mifsud
+	<string name="app_license">Kopirett © 2015-2018 Ramon Mifsud 
 \n 
-\nDette programmet er fri programvare: Du kan dele det og/eller endre det i henhold til vilkårene i GNU General Public Lisensen, utgitt av Free Software Foundation (versjon 3).
+\nDette programmet er fri programvare: Du kan dele det og/eller endre det i henhold til vilkårene i GNU General Public Lisensen, utgitt av Free Software Foundation (versjon 3). 
 \n 
-\nDette programmet har kommet deg i hende i håp om at det skal være nyttig, men UTEN NOEN FOR FOR GARANTI; selv under implisitt garanti om SALGBARHET eller FORMÅLSTJENLIGHET FOR NOE SPESIELT FORMÅL. Se GNU General Public Lisensen for flere detaljer.
+\nDette programmet har kommet deg i hende i håp om at det skal være nyttig, men UTEN NOEN FOR FOR GARANTI; selv under implisitt garanti om SALGBARHET eller FORMÅLSTJENLIGHET FOR NOE SPESIELT FORMÅL. Se GNU General Public Lisensen for flere detaljer. 
 \n 
 \nDu skal ha mottatt en kopi av GNU General Public Lisensen sammen me dette programmet. Hvis ikke, se &lt;https://www.gnu.org/licenses/&gt;</string>
 	<string name="i_agree">Jeg samtykker</string>
@@ -64,12 +64,6 @@
 	<string name="pref_screen_portrait">Portrett</string>
 	<string name="pref_screen_auto">Automatisk</string>
 	<string name="pref_screen_sensor">Enhetssensor</string>
-	<string-array name="screen_orientations_values">
-		<item>auto</item>
-		<item>landscape</item>
-		<item>portrait</item>
-		<item>sensor</item>
-	</string-array>
 
 	<string name="pref_title_youtube_api_key">API-nøkkel for YouTube</string>
 	<string name="pref_summary_youtube_api_key">Skriv inn din egen API-nøkkel for YouTube-data. La stå tom for å bruke forvalg.</string>
@@ -82,4 +76,14 @@
 
 	<string name="pref_title_feed_notification">Automatisk kilde-merknad</string>
 	<string name="pref_summary_feed_notification">Hvor ofte det skal sjekkes for nye videoer fra abonnerte kanaler: %s</string>
-	</resources>
+	<string-array name="feed_notification">
+		<item>Off</item>
+		<item>6 Hours</item>
+		<item>12 Hours</item>
+		<item>24 Hours</item>
+	</string-array>
+
+	<string name="pref_title_allow_mobile_downloads">Tillat nedlastinger på mobilnettverk</string>
+	<string name="pref_summary_allow_mobile_downloads">Velg dette for å skru på nedlasting av videoer på mobilnettverk. Ellers kan videoer kun lastes ned på Wi-Fi.</string>
+
+</resources>

@@ -26,10 +26,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import free.rm.skytube.app.SkyTubeApp;
+import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPI;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPIKey;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
-import free.rm.skytube.businessobjects.Logger;
 
 /**
  * Returns the details/information about YouTube channel(s).
@@ -76,7 +76,10 @@ public class GetChannelsDetails {
 			youTubeChannelsList.addAll( getYouTubeChannels(channelInfo, isUserSubscribed, shouldCheckForNewVideos) );
 		}
 
-		return youTubeChannelsList;
+		// There is currently a bug in the YouTube API in the sense that the order of channels is
+		// not maintained.  Hence we currently need to manually sort the channels (to maintain the
+		// order listed in the DB) until YouTube fix their bug.
+		return sortYouTubeChannelsList(channelIdsList, youTubeChannelsList);
 	}
 
 
@@ -89,7 +92,7 @@ public class GetChannelsDetails {
 	 *
 	 * @return YouTubeChannel
 	 */
-	public YouTubeChannel getYouTubeChannels(final String channelId) throws IOException {
+	public YouTubeChannel getYouTubeChannel(final String channelId) throws IOException {
 		List<String> c = new ArrayList<>();
 		c.add(channelId);
 
@@ -186,6 +189,39 @@ public class GetChannelsDetails {
 		}
 
 		return youTubeChannelList;
+	}
+
+
+	/**
+	 * Sort the order of the given youTubeChannelsList such that it is the same as that of channelIdsList.
+	 *
+	 * @param channelIdsList        Original list of channel IDs -- retrieved from the DB (i.e.
+	 *                              correct ordering).
+	 * @param youTubeChannelsList   YouTube channels list as given by the YouTube servers.
+	 *
+	 * @return  Sorted list of YouTube Channels.
+	 */
+	private List<YouTubeChannel> sortYouTubeChannelsList(List<String> channelIdsList, List<YouTubeChannel> youTubeChannelsList) {
+		List<YouTubeChannel> sortedList = new ArrayList<>(youTubeChannelsList.size());
+		boolean channelFound = false;
+
+		for (String channelId : channelIdsList) {
+			for (YouTubeChannel channel : youTubeChannelsList) {
+				if (channel.getId().equals(channelId)) {
+					sortedList.add(channel);
+					channelFound = true;
+					break;
+				}
+			}
+
+			if (!channelFound) {
+				Logger.d(this, "Channel id=%s was not found in the youTubeChannelsList", channelId);
+			}
+
+			channelFound = false;
+		}
+
+		return sortedList;
 	}
 
 }

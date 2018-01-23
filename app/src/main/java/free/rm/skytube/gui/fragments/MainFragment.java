@@ -241,15 +241,15 @@ public class MainFragment extends FragmentEx {
 
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
-		if(featuredVideosFragment != null)
+		if(featuredVideosFragment != null && featuredVideosFragment.isAdded())
 			getChildFragmentManager().putFragment(outState, FEATURED_VIDEOS_FRAGMENT, featuredVideosFragment);
-		if(mostPopularVideosFragment != null)
+		if(mostPopularVideosFragment != null && mostPopularVideosFragment.isAdded())
 			getChildFragmentManager().putFragment(outState, MOST_POPULAR_VIDEOS_FRAGMENT, mostPopularVideosFragment);
-		if(subscriptionsFeedFragment != null)
+		if(subscriptionsFeedFragment != null && subscriptionsFeedFragment.isAdded())
 			getChildFragmentManager().putFragment(outState, SUBSCRIPTIONS_FEED_FRAGMENT, subscriptionsFeedFragment);
-		if(bookmarksFragment != null)
+		if(bookmarksFragment != null && bookmarksFragment.isAdded())
 			getChildFragmentManager().putFragment(outState, BOOKMARKS_FRAGMENT, bookmarksFragment);
-		if(downloadedVideosFragment != null)
+		if(downloadedVideosFragment != null && downloadedVideosFragment.isAdded())
 			getChildFragmentManager().putFragment(outState, DOWNLOADED_VIDEOS_FRAGMENT, downloadedVideosFragment);
 
 		super.onSaveInstanceState(outState);

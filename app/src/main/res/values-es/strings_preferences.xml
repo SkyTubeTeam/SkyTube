@@ -45,7 +45,7 @@
 	<string name="pref_title_license">Licencia</string>
 	<string name="pref_summary_license">GNU General Public License version 3</string>
 	<string name="app_license">
-		Copyright &#169; 2015-2017  Ramon Mifsud\n
+		Copyright &#169; 2015-2018  Ramon Mifsud\n
 
 		\nThis program is free software: you can redistribute it and/or modify
 		it under the terms of the GNU General Public License as published by
@@ -71,12 +71,6 @@
 	<string name="pref_screen_portrait">Vertical</string>
 	<string name="pref_screen_auto">Automático</string>
 	<string name="pref_screen_sensor">Sensor del dispositivo</string>
-	<string-array name="screen_orientations_values">
-		<item>auto</item>
-		<item>landscape</item>
-		<item>portrait</item>
-		<item>sensor</item>
-	</string-array>
 
 	<string name="pref_title_youtube_api_key">YouTube API Key</string>
 	<string name="pref_summary_youtube_api_key">Introduzca su propia YouTube Data API Key. Deje vacío para usar una por defecto.</string>
@@ -84,4 +78,19 @@
 	<string name="pref_youtube_api_key_custom">La clave es valida. Reinicie la aplicación para usar la nueva YouTube API Key.</string>
 	<string name="pref_youtube_api_key_default">Reinicie la aplicación para volver a usar la YouTube API Key por defecto.</string>
 	<string name="restart">Reiniciar</string>
+
+	<string name="pref_title_feed_notification">Feed Auto Notification</string>
+	<string name="pref_summary_feed_notification">How often to check for new videos from subscribed channels: %s</string>
+	<string-array name="feed_notification">
+		<item>Off</item>
+		<item>6 Hours</item>
+		<item>12 Hours</item>
+		<item>24 Hours</item>
+	</string-array>
+
+	<string name="pref_title_disable_immersive_mode">Disable Immersive Mode</string>
+	<string name="pref_summary_disable_immersive_mode">Comments and video description icons and the navigation bar shall always be displayed</string>
+
+	<string name="pref_title_allow_mobile_downloads">Allow downloads on mobile networks</string>
+	<string name="pref_summary_allow_mobile_downloads">Select this to enable downloading videos on mobile networks. Otherwise, videos can only be downloaded on Wi-Fi.</string>
 </resources>

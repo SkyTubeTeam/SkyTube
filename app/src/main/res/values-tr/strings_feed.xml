@@ -1,5 +1,10 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="feed">Akış</string>
+<resources>
+	<string name="feed">Akış</string>
+
+	<string name="subscribing_to_channels">Subscribing to channels…</string>
+	<string name="fetching_subbed_channels_info">Fetching channels\' information…</string>
+	<string name="fetching_subbed_channels_info_error">An error has occurred while fetching channels\' information.</string>
 
 	<string name="fetching_subscription_videos">"Videolar abone olunan kanallardan  çekiliyor"</string>
 	<string name="fetched_videos_from_channels">%1$d video %2$d/%3$d kanaldan çekildi.</string>
@@ -8,6 +13,7 @@
 \n
 \nAbone olduğunuz zaman, son bir ay içinde abone olduğunuz kanallara yüklenen tüm videolar burada görünecektir.</string>
 	<string name="import_subscriptions_from_youtube">YouTube\'dan Abonelikleri içe aktar</string>
+
 	<string name="notification_channel_feed_title">Akış Bildirimleri</string>
 	<string name="notification_new_videos_found">Abone olunan kanallardan %d yeni video bulundu</string>
 </resources>

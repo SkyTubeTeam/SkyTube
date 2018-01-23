@@ -128,17 +128,24 @@ public class DownloadedVideosDb extends SQLiteOpenHelperEx implements OrderableD
 	}
 
 	public Uri getVideoFileUri(YouTubeVideo video) {
-		Cursor cursor = getReadableDatabase().query(
-						DownloadedVideosTable.TABLE_NAME,
-						new String[]{DownloadedVideosTable.COL_FILE_URI},
-						DownloadedVideosTable.COL_YOUTUBE_VIDEO_ID + " = ?",
-						new String[]{video.getId()}, null, null, null);
+		Cursor cursor = null;
+		try {
+			cursor = getReadableDatabase().query(
+					DownloadedVideosTable.TABLE_NAME,
+					new String[]{DownloadedVideosTable.COL_FILE_URI},
+					DownloadedVideosTable.COL_YOUTUBE_VIDEO_ID + " = ?",
+					new String[]{video.getId()}, null, null, null);
 
-		if(cursor.moveToNext()) {
-			String uri = cursor.getString(cursor.getColumnIndex(DownloadedVideosTable.COL_FILE_URI));
-			return Uri.parse(uri);
+			if (cursor.moveToNext()) {
+				String uri = cursor.getString(cursor.getColumnIndex(DownloadedVideosTable.COL_FILE_URI));
+				return Uri.parse(uri);
+			}
+			return null;
+		} finally {
+			if (cursor != null) {
+				cursor.close();
+			}
 		}
-		return null;
 	}
 
 	private void onUpdated() {

@@ -32,4 +32,8 @@
 	<string name="play">Lejátszás</string>
 	<string name="cancel">Mégsem</string>
 	<string name="clear">Törlés</string>
+
+	<string name="tutorial_comments_icon">Swipe to the left to view comments.</string>
+	<string name="tutorial_video_info_icon">Swipe to the top to view information about the video.</string>
+	<string name="tutorial_pause_video">Double tap to pause or play a video.</string>
 </resources>
