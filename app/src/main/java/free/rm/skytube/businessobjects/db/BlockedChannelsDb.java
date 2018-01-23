@@ -83,17 +83,21 @@ public class BlockedChannelsDb extends SQLiteOpenHelperEx {
     /**
      * Remove the specified channel from the list of blocked channels.
      *
-     * @param video channel to remove.
+     * @param channelName channel to remove.
      * @return True if the channel has been unblocked; false otherwise.
      */
-    public boolean remove(YouTubeVideo video) {
+    public boolean remove(String channelName) {
+
+        Log.d("dbREMOVE", "remove: "+ channelName);
         getWritableDatabase().delete(BlockedChannelsTable.TABLE_NAME,
-                BlockedChannelsTable.COL_CHANNEL_ID + " = ?",
-                new String[]{video.getChannelId()});
+                BlockedChannelsTable.COL_YOUTUBE_CHANNEL_NAME + " = ?",
+                new String[]{String.valueOf(channelName)});
+
+
 
         int rowsDeleted = getWritableDatabase().delete(BlockedChannelsTable.TABLE_NAME,
-                BlockedChannelsTable.COL_CHANNEL_ID + " = ?",
-                new String[]{video.getChannelId()});
+                BlockedChannelsTable.COL_YOUTUBE_CHANNEL_NAME + " = ?",
+                new String[]{String.valueOf(channelName)});
 
         return rowsDeleted >= 0;
 
