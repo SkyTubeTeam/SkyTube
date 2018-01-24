@@ -27,12 +27,20 @@ public class BlockedChannelsPreferenceFragment extends PreferenceFragment {
 
         multiSelectListPreference.setEntries(blockedChannelsName);
         multiSelectListPreference.setEntryValues(blockedChannelsName);
+        Log.d("", "onPreferenceClick: " + blockedChannelsDb.getNumberOfBlockedChannels());
+
 
         multiSelectListPreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                Toast.makeText(getActivity(), "Please check the channel you want to unblock, leave the others unchecked", Toast.LENGTH_SHORT).show();
-                Log.d("", "onPreferenceClick: ");
+               if (blockedChannelsDb.getBlockedChannelsListName().isEmpty()){
+                    Toast.makeText(getActivity(), "There is not any blocked channel.", Toast.LENGTH_SHORT).show();
+
+                } else {
+                    Toast.makeText(getActivity(), "Please check the channel you want to unblock, leave the others unchecked", Toast.LENGTH_SHORT).show();
+
+                }
+               Log.d("", "onPreferenceClick: ");
                 return true;
             }
         });

@@ -14,6 +14,7 @@ public class BlockedChannelsTable {
         return "CREATE TABLE " + TABLE_NAME + " (" +
                 COL_CHANNEL_ID + " TEXT PRIMARY KEY NOT NULL, " +
                 COL_YOUTUBE_CHANNEL_NAME + " TEXT, " +
-                COL_ID + " INTEGER " + ")";
+                COL_ID + " INTEGER " +
+                ")";
     }
 }

@@ -26,6 +26,8 @@ public class BlockedChannelsDb extends SQLiteOpenHelperEx {
     private static boolean hasUpdated = false;
     private List<BlockedChannelsDbListener> listeners = new ArrayList<>();
 
+
+
     public BlockedChannelsDb(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
 
@@ -52,7 +54,7 @@ public class BlockedChannelsDb extends SQLiteOpenHelperEx {
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
 
     }
 
@@ -110,6 +112,11 @@ public class BlockedChannelsDb extends SQLiteOpenHelperEx {
             listener.onBlockedChannelsDbUpdated();
     }
 
+
+    /**
+     * Method to get number of blocked channels.
+     * @return number of blocked channels.
+     */
     public int getNumberOfBlockedChannels() {
         String query = String.format("SELECT COUNT(*) FROM %s", BlockedChannelsTable.TABLE_NAME);
         Cursor cursor = BlockedChannelsDb.getBlockedChannelsDb().getReadableDatabase().rawQuery(query, null);
@@ -124,6 +131,10 @@ public class BlockedChannelsDb extends SQLiteOpenHelperEx {
     }
 
 
+    /**
+     * Method for getting blocked channels' IDs as list.
+     * @return list of blocked channel IDs.
+     */
     public List<String> getBlockedChannelsListId() {
 
         List<String> videos = new ArrayList<>();
@@ -146,6 +157,10 @@ public class BlockedChannelsDb extends SQLiteOpenHelperEx {
 
 
 
+    /**
+     * Method for getting blocked channels' names as list.
+     * @return list of blocked channel names.
+     */
     public List<String> getBlockedChannelsListName() {
 
         List<String> videos = new ArrayList<>();
