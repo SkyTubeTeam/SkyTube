@@ -8,7 +8,7 @@ android {
         applicationId "free.rm.skytube"
         minSdkVersion 14
         targetSdkVersion 26
-        versionCode 11
+        versionCode 12
         // Third party devs:  pls be ethical and change the below keys
         buildConfigField 'String[]', 'YOUTUBE_API_KEYS',
                 '{' +
@@ -33,14 +33,14 @@ android {
         // 100% Open-Source Edition
         oss {
             applicationId "free.rm.skytube.oss"
-            versionName "2.80"          // the digits of the *fractional part* shall not be larger than "9"
+            versionName "2.81"          // the digits of the *fractional part* shall not be larger than "9"
             resValue "string", "app_name", "SkyTube"
             dimension "skytube"
         }
         // 99% Open-source edition:  uses the YouTube Player Jar [i.e. proprietary module - optional usage]
         extra {
             applicationId "free.rm.skytube.extra"
-            versionName "2.80 Extra"    // the digits of the *fractional part* shall not be larger than "9"
+            versionName "2.81 Extra"    // the digits of the *fractional part* shall not be larger than "9"
             resValue "string", "app_name", "SkyTube Extra"
             dimension "skytube"
         }
