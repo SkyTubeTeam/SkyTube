@@ -28,9 +28,9 @@ package free.rm.skytube.businessobjects.YouTube.VideoStream;
 import android.util.Log;
 
 import org.schabi.newpipe.extractor.NewPipe;
+import org.schabi.newpipe.extractor.ServiceList;
 import org.schabi.newpipe.extractor.StreamingService;
 import org.schabi.newpipe.extractor.exceptions.ContentNotAvailableException;
-import org.schabi.newpipe.extractor.stream.StreamExtractor;
 import org.schabi.newpipe.extractor.stream.StreamInfo;
 import org.schabi.newpipe.extractor.stream.VideoStream;
 
@@ -69,11 +69,10 @@ public class ParseStreamMetaData {
 		StreamMetaDataList list = new StreamMetaDataList();
 
 		try {
-			StreamingService youtube = NewPipe.getService("Youtube");
-			StreamExtractor  extractor = youtube.getStreamExtractorInstance(youtubeVideoUrl);
+			StreamingService youtubeService = ServiceList.YouTube.getService();
 
 			// actual extraction
-			StreamInfo streamInfo = StreamInfo.getVideoInfo(extractor);
+			StreamInfo streamInfo = StreamInfo.getInfo(youtubeService, youtubeVideoUrl);
 
 			// if non critical exceptions happened during extraction they will be printed now
 			for(Throwable error : streamInfo.errors) {
