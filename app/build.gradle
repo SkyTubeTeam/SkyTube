@@ -65,10 +65,7 @@ dependencies {
     compile 'com.google.http-client:google-http-client-android:1.23.0'
     compile 'com.google.apis:google-api-services-youtube:v3-rev187-1.23.0'
 
-    // libextractor
-    compile 'org.jsoup:jsoup:1.10.1'
-    compile 'org.mozilla:rhino:1.7.7'
-
+    compile 'com.github.TeamNewPipe:NewPipeExtractor:v0.11.5'
     compile 'com.github.moraisigor:slidingdrawer:1.6.7'
     compile 'com.github.bumptech.glide:glide:4.3.1'
     compile 'com.jakewharton:butterknife:8.8.1'
