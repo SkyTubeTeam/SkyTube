@@ -490,4 +490,6 @@
 	<string name="pref_summary_allow_mobile_downloads">Select this to enable downloading videos on mobile networks. Otherwise, videos can only be downloaded on Wi-Fi.</string>
 
 	<string name="restart">Restart</string>
+
+	<string name="pref_key_brightness_level" translatable="false">pref_key_brightness_level</string>
 </resources>

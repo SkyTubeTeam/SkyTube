@@ -1,12 +1,16 @@
 package free.rm.skytube.gui.fragments;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Rect;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.Gravity;
@@ -20,6 +24,7 @@ import android.view.WindowManager;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
@@ -85,7 +90,10 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 	private View                videoDescRatingsDisabledTextView = null;
 	private TextView			videoDescPublishDateTextView = null;
 	private TextView			videoDescriptionTextView = null;
-	private View				voidView = null;
+	private RelativeLayout      voidView = null;
+	private ImageView           indicatorImageView = null;
+	private TextView            indicatorTextView = null;
+	private RelativeLayout      indicatorView = null;
 	private View				loadingVideoView = null;
 
 	private SlidingDrawer		videoDescriptionDrawer = null;
@@ -102,6 +110,10 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 	private Handler             hideHudTimerHandler = null;
 	private Handler             hideVideoDescAndCommentsIconsTimerHandler = null;
 
+	private float               startBrightness = -1.0f;
+	private float               startVolumePercent  = -1.0f;
+	private int                 startVideoTime = -1;
+
 	/** Timeout (in milliseconds) before the HUD (i.e. media controller + action/title bar) is hidden. */
 	private static final int HUD_VISIBILITY_TIMEOUT = 5000;
 	/** Timeout (in milliseconds) before the navigation bar is hidden (which will occur only after
@@ -110,6 +122,9 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 	private static final String VIDEO_CURRENT_POSITION = "YouTubePlayerFragment.VideoCurrentPosition";
 	private static final String TAG = YouTubePlayerFragment.class.getSimpleName();
 	private static final String TUTORIAL_COMPLETED = "YouTubePlayerFragment.TutorialCompleted";
+
+	private static final int MAX_VIDEO_STEP_TIME = 60 * 1000;
+	private static final int MAX_BRIGHTNESS = 100;
 
 
 	@Override
@@ -188,6 +203,9 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 		}
 
 		voidView = view.findViewById(R.id.void_view);
+		indicatorView = view.findViewById(R.id.indicatorView);
+		indicatorImageView = view.findViewById(R.id.indicatorImageView);
+		indicatorTextView = view.findViewById(R.id.indicatorTextView);
 		// detect if user's swipes motions and taps...
 		voidView.setOnTouchListener(new OnSwipeTouchListener(getActivity()) {
 
@@ -217,6 +235,125 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 			public boolean onSingleTap() {
 				showOrHideHud();
 				return true;
+			}
+
+			public void onSeekStart() {
+
+			}
+			public void onGestureDone(boolean notStart) {
+				startBrightness = -1.0f;
+				startVolumePercent = -1.0f;
+				startVideoTime = -1;
+				hideIndicator();
+			}
+
+			@Override
+			public void adjustBrightness(double adjustPercent) {
+				if (adjustPercent < -1.0f) {
+					adjustPercent = -1.0f;
+				} else if (adjustPercent > 1.0f) {
+					adjustPercent = 1.0f;
+				}
+
+				WindowManager.LayoutParams lp = getActivity().getWindow().getAttributes();
+				if (startBrightness < 0) {
+					startBrightness = lp.screenBrightness;
+				}
+				float targetBrightness = (float) (startBrightness + adjustPercent * 1.0f);
+				if (targetBrightness <= 0.0f) {
+					targetBrightness = 0.0f;
+				} else if (targetBrightness >= 1.0f) {
+					targetBrightness = 1.0f;
+				}
+				lp.screenBrightness = targetBrightness;
+				getActivity().getWindow().setAttributes(lp);
+
+				indicatorImageView.setImageResource(R.drawable.ic_brightness);
+				indicatorTextView.setText((int) (targetBrightness * MAX_BRIGHTNESS) + "%");
+
+				showIndicator();
+			}
+
+			@Override
+			public void adjustVolumeLevel(double adjustPercent) {
+				if (adjustPercent < -1.0f) {
+					adjustPercent = -1.0f;
+				} else if (adjustPercent > 1.0f) {
+					adjustPercent = 1.0f;
+				}
+
+				AudioManager audioManager = (AudioManager) getContext()
+						.getSystemService(Context.AUDIO_SERVICE);
+				final int STREAM = AudioManager.STREAM_MUSIC;
+				int maxVolume = audioManager.getStreamMaxVolume(STREAM);
+
+				if (maxVolume == 0) return;
+
+				if (startVolumePercent < 0) {
+					int curVolume = audioManager.getStreamVolume(STREAM);
+					startVolumePercent = curVolume * 1.0f / maxVolume;
+				}
+				double targetPercent = startVolumePercent + adjustPercent;
+				if (targetPercent > 1.0f) {
+					targetPercent = 1.0f;
+				} else if (targetPercent < 0) {
+					targetPercent = 0;
+				}
+
+				int index = (int) (maxVolume * targetPercent);
+				if (index > maxVolume) {
+					index = maxVolume;
+				} else if (index < 0) {
+					index = 0;
+				}
+				audioManager.setStreamVolume(STREAM, index, 0);
+
+				indicatorImageView.setImageResource(R.drawable.ic_volume);
+				indicatorTextView.setText(index * 100 / maxVolume + "%");
+
+				showIndicator();
+			}
+
+			@Override
+			public void adjustVideoPosition(double adjustPercent, boolean forwardDirection) {
+				if (adjustPercent < -1.0f) {
+					adjustPercent = -1.0f;
+				} else if (adjustPercent > 1.0f) {
+					adjustPercent = 1.0f;
+				}
+
+				int totalTime = videoView.getDuration();
+
+				if (startVideoTime < 0) {
+					startVideoTime = videoView.getCurrentPosition();
+				}
+
+				int targetTime = startVideoTime + (int) (MAX_VIDEO_STEP_TIME * adjustPercent);
+				if (targetTime > totalTime) {
+					targetTime = totalTime;
+				}
+				if (targetTime < 0) {
+					targetTime = 0;
+				}
+
+				String targetTimeString = formatDuration(targetTime / 1000);
+
+				if (forwardDirection) {
+					indicatorImageView.setImageResource(R.drawable.ic_forward);
+					indicatorTextView.setText(targetTimeString);
+				} else {
+					indicatorImageView.setImageResource(R.drawable.ic_rewind);
+					indicatorTextView.setText(targetTimeString);
+				}
+
+				showIndicator();
+
+				videoView.seekTo(targetTime);
+			}
+
+			@Override
+			public Rect viewRect() {
+				return new Rect(voidView.getLeft(), voidView.getTop(), voidView.getRight() , voidView.getBottom());
 			}
 		});
 
@@ -360,7 +497,37 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 			videoCurrentPosition = videoView.getCurrentPosition();
 		}
 
+		saveCurrentBrightness();
 		super.onPause();
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+
+		setupUserPrefs();
+	}
+
+	// We can also add volume level or something in the future.
+	private void setupUserPrefs() {
+		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
+		float brightnessLevel = sp.getFloat(getString(R.string.pref_key_brightness_level), 0.5f);
+		setBrightness(brightnessLevel);
+	}
+
+	private void saveCurrentBrightness() {
+		WindowManager.LayoutParams lp = getActivity().getWindow().getAttributes();
+		float brightnessLevel = lp.screenBrightness;
+		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
+		sp.edit().putFloat(getString(R.string.pref_key_brightness_level), brightnessLevel).apply();
+	}
+
+	private void setBrightness(float level) {
+		if(level <= 0.0f && level > 1.0f) return;
+
+		WindowManager.LayoutParams lp = getActivity().getWindow().getAttributes();
+		lp.screenBrightness = level;
+		getActivity().getWindow().setAttributes(lp);
 	}
 
 
@@ -454,6 +621,28 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 				hideHudTimerHandler = null;
 			}
 		}
+	}
+
+	private void showIndicator() {
+		indicatorView.setVisibility(View.VISIBLE);
+	}
+
+	private void hideIndicator() {
+		indicatorView.setVisibility(View.GONE);
+	}
+
+	// Returns a (localized) string for the given duration (in seconds).
+	public static String formatDuration(int duration) {
+		int h = duration / 3600;
+		int m = (duration - h * 3600) / 60;
+		int s = duration - (h * 3600 + m * 60);
+		String durationValue;
+		if (h == 0) {
+			durationValue = String.format(Locale.getDefault(),"%1$02d:%2$02d", m, s);
+		} else {
+			durationValue = String.format(Locale.getDefault(),"%1$d:%2$02d:%3$02d", h, m, s);
+		}
+		return durationValue;
 	}
 
 	@Override
