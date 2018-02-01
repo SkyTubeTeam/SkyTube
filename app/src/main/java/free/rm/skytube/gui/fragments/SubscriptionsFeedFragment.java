@@ -99,14 +99,14 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 
 		setLayoutResource(R.layout.fragment_subs_feed);
 		subscriptionsBackupsManager = new SubscriptionsBackupsManager(getActivity(), SubscriptionsFeedFragment.this);
-
-		// setup the UI and refresh the feed (if applicable)
-		new RefreshFeedTask(isFragmentSelected()).executeInParallel();
 	}
 
 
 	@Override
 	public void onResume() {
+		// setup the UI and refresh the feed (if applicable)
+		new RefreshFeedTask(isFragmentSelected()).executeInParallel();
+
 		getActivity().registerReceiver(feedUpdaterReceiver, new IntentFilter(FeedUpdaterService.NEW_SUBSCRIPTION_VIDEOS_FOUND));
 
 		super.onResume();
