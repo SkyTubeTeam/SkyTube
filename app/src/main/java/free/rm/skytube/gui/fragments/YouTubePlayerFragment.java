@@ -518,7 +518,7 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 	// We can also add volume level or something in the future.
 	private void setupUserPrefs() {
 		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
-		float brightnessLevel = sp.getFloat(getString(R.string.pref_key_brightness_level), 0.5f);
+		float brightnessLevel = sp.getFloat(getString(R.string.pref_key_brightness_level), -1.0f);
 		setBrightness(brightnessLevel);
 	}
 
