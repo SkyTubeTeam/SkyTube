@@ -238,8 +238,13 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 			}
 
 			public void onSeekStart() {
-
+                // You can add any needed code here
 			}
+
+            public void onSeekEnd() {
+			    // You can add any needed code here
+            }
+
 			public void onGestureDone(boolean notStart) {
 				startBrightness = -1.0f;
 				startVolumePercent = -1.0f;
@@ -327,8 +332,10 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 				if (startVideoTime < 0) {
 					startVideoTime = videoView.getCurrentPosition();
 				}
-
-				int targetTime = startVideoTime + (int) (MAX_VIDEO_STEP_TIME * adjustPercent);
+				// adjustPercent: value from -1 to 1.
+                double positiveAdjustPercent = Math.max(adjustPercent,-adjustPercent);
+				// End of line makes seek speed not linear
+				int targetTime = startVideoTime + (int) (MAX_VIDEO_STEP_TIME * adjustPercent * (positiveAdjustPercent / 0.1));
 				if (targetTime > totalTime) {
 					targetTime = totalTime;
 				}

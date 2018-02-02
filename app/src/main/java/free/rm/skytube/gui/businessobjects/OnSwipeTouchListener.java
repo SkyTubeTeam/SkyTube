@@ -107,6 +107,10 @@ public abstract class OnSwipeTouchListener implements View.OnTouchListener {
 	public void onSeekStart() {
 
 	}
+
+    public void onSeekEnd() {
+
+    }
 	public void onGestureDone(boolean notStart) {
 
 	}
@@ -142,7 +146,7 @@ public abstract class OnSwipeTouchListener implements View.OnTouchListener {
 	private final class GestureListener extends GestureDetector.SimpleOnGestureListener {
 
 		private static final int SWIPE_THRESHOLD = 50;
-		private Type type;
+		private Type type = Type.NONE;
 		private MotionEvent startEvent;
 
 		@Override
@@ -201,7 +205,7 @@ public abstract class OnSwipeTouchListener implements View.OnTouchListener {
 				case MotionEvent.ACTION_MOVE:
 					if (type == Type.NONE && startEvent != null) {
 						type = whatTypeIsIt(startEvent, event);
-						// The idea to use it to prevent sound glitches while seeking but it doesn't work. Look at onScroll()
+
 						if (type == Type.SEEK)
 							onSeekStart();
 					}
@@ -211,6 +215,9 @@ public abstract class OnSwipeTouchListener implements View.OnTouchListener {
 						// It happens when user clicks inside the view
 						onGestureDone(true);
 					} else {
+					    if(type == Type.SEEK)
+                            onSeekEnd();
+
 						onGestureDone(false);
 					}
 					type = Type.NONE;
