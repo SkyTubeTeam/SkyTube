@@ -6,9 +6,7 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.util.Log;
 import android.widget.Toast;
-
 import java.util.Collection;
-
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.db.BlockedChannelsDb;
 
@@ -28,7 +26,6 @@ public class BlockedChannelsPreferenceFragment extends PreferenceFragment {
         multiSelectListPreference.setEntries(blockedChannelsName);
         multiSelectListPreference.setEntryValues(blockedChannelsName);
         Log.d("", "onPreferenceClick: " + blockedChannelsDb.getNumberOfBlockedChannels());
-
 
         multiSelectListPreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
@@ -55,8 +52,9 @@ public class BlockedChannelsPreferenceFragment extends PreferenceFragment {
                     Log.d("", "onPreferenceChange: " + "for loop");
                     blockedChannelsDb.remove(channel);
 
-                    Toast.makeText(getActivity(), "Please refresh the main page.", Toast.LENGTH_SHORT).show();
-                }
+                     }
+                Toast.makeText(getActivity(), "Please refresh the main page.", Toast.LENGTH_SHORT).show();
+
                 return true;
             }
         });

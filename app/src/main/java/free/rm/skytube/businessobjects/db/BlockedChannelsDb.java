@@ -12,10 +12,6 @@ import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 
 /**
- * Created by Okan Kaya on 6.12.2017.
- */
-
-/**
  * A database (DB) that stores user's blocked channels.
  */
 
@@ -140,7 +136,7 @@ public class BlockedChannelsDb extends SQLiteOpenHelperEx {
         List<String> videos = new ArrayList<>();
 
         String query = "SELECT Youtube_Channel_Id FROM " + BlockedChannelsTable.TABLE_NAME;
-        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
         Cursor cursor = sqLiteDatabase.rawQuery(query, null);
 
         if (cursor.moveToFirst()) {

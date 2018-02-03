@@ -1,9 +1,5 @@
 package free.rm.skytube.businessobjects.db;
 
-/**
- * Created by pc on 6.12.2017.
- */
-
 public class BlockedChannelsTable {
     public static final String TABLE_NAME = "BlockedChannels";
     public static final String COL_CHANNEL_ID = "Youtube_Channel_Id";

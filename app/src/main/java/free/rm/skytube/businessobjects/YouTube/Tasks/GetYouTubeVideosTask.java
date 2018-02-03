@@ -121,7 +121,6 @@ public class GetYouTubeVideosTask extends AsyncTaskParallel<Void, Void, List<You
                 for (YouTubeVideo video : videosList) {
                     channel.addYouTubeVideo(video);
                 }
-
                 SubscriptionsDb.getSubscriptionsDb().saveChannelVideos(channel);
             }
         }
@@ -131,7 +130,6 @@ public class GetYouTubeVideosTask extends AsyncTaskParallel<Void, Void, List<You
             for (String channelIds : blockedChannelsDb.getBlockedChannelsListId()) {
                 blockedChannelIds.add(channelIds);
             }
-
            /* String channelIds;
             blockedChannelIds = blockedChannelIds.stream().filter(channelIds -> blockedChannelsDb.getBlockedChannelsListId()).collect(Collectors.toList());
 */
