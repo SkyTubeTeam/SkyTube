@@ -12,6 +12,7 @@ import free.rm.skytube.app.SkyTubeApp;
  */
 
 public class SearchHistoryDb extends SQLiteOpenHelperEx {
+
 	private static volatile SearchHistoryDb searchHistoryDb = null;
 
 	private static final int DATABASE_VERSION = 1;
@@ -47,25 +48,50 @@ public class SearchHistoryDb extends SQLiteOpenHelperEx {
 
 	}
 
-	public int deleteAllSuggestions() {
-		return getWritableDatabase().delete(SearchHistoryTable.TABLE_NAME, null, null);
+	/**
+	 * Delete all search history
+	 */
+	public void deleteAllSearchHistory() {
+		getWritableDatabase().delete(SearchHistoryTable.TABLE_NAME, null, null);
 	}
 
-	public long insertSuggestion(String text) {
+	/**
+	 * Save a search text into the DB.
+	 *
+	 * @param text  Text the user just searched for.
+	 */
+	public void insertSearchText(String text) {
 		ContentValues values = new ContentValues();
 		values.put(SearchHistoryTable.COL_SEARCH_TEXT, text);
-		return getWritableDatabase().insert(SearchHistoryTable.TABLE_NAME, null, values);
+		getWritableDatabase().insert(SearchHistoryTable.TABLE_NAME, null, values);
 	}
 
-
-	public Cursor getSuggestions(String text) {
-		return getReadableDatabase().query(SearchHistoryTable.TABLE_NAME, new String[] {SearchHistoryTable.COL_SEARCH_ID, SearchHistoryTable.COL_SEARCH_TEXT},
-						SearchHistoryTable.COL_SEARCH_TEXT+" LIKE '"+ text +"%'", null, null, null, null);
+	/**
+	 * Given a search string, it will return a cursor contain text strings which start as the given
+	 * searchText.
+	 *
+	 * @param searchText    Text the user has typed.
+	 * @return              A cursor containing texts which starts with the contents of searchText.
+	 */
+	public Cursor getSearchCursor(String searchText) {
+		return getReadableDatabase().query(SearchHistoryTable.TABLE_NAME,
+				new String[] {SearchHistoryTable.COL_SEARCH_ID, SearchHistoryTable.COL_SEARCH_TEXT},
+				SearchHistoryTable.COL_SEARCH_TEXT+" LIKE '"+ searchText +"%'",
+				null,
+				null,
+				null,
+				null);
 	}
 
-	public long deleteSuggestion(String text) {
-		return getWritableDatabase().delete(SearchHistoryTable.TABLE_NAME, SearchHistoryTable.COL_SEARCH_TEXT + " = ?",
-						new String[]{text});
+	/**
+	 * Delete a previously searched text.
+	 *
+	 * @param text  A previous searched text.
+	 */
+	public void deleteSearchText(String text) {
+		getWritableDatabase().delete(SearchHistoryTable.TABLE_NAME,
+				SearchHistoryTable.COL_SEARCH_TEXT + " = ?",
+				new String[]{text});
 	}
 
 }

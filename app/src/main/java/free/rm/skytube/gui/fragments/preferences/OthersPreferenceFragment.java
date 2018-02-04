@@ -104,7 +104,7 @@ public class OthersPreferenceFragment extends PreferenceFragment implements Shar
 				CheckBoxPreference disableSearchHistoryPreference = (CheckBoxPreference)findPreference(key);
 				// If Search History is disabled, clear the Search History database.
 				if(disableSearchHistoryPreference.isChecked()) {
-					SearchHistoryDb.getSearchHistoryDb().deleteAllSuggestions();
+					SearchHistoryDb.getSearchHistoryDb().deleteAllSearchHistory();
 					Toast.makeText(getActivity(), getString(R.string.pref_disable_search_history_deleted), Toast.LENGTH_LONG).show();
 				}
 			} /*else if (key.equals(getString(R.string.pref_feed_notification_key))) {

@@ -1,11 +1,26 @@
-package free.rm.skytube.businessobjects;
+/*
+ * SkyTube
+ * Copyright (C) 2018  Ramon Mifsud
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation (version 3 of the License).
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+package free.rm.skytube.gui.businessobjects.adapters;
 
 import android.content.Context;
 import android.database.Cursor;
 import android.support.v4.widget.SimpleCursorAdapter;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -56,7 +71,7 @@ public class SearchHistoryCursorAdapter extends SimpleCursorAdapter {
 		deleteButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				SearchHistoryDb.getSearchHistoryDb().deleteSuggestion(textView.getText().toString());
+				SearchHistoryDb.getSearchHistoryDb().deleteSearchText(textView.getText().toString());
 				if(onUpdate != null)
 					onUpdate.run();
 			}
