@@ -273,7 +273,7 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 	 */
 	private void getVideoInfoTasks() {
 		// get Channel info (e.g. avatar...etc) task
-		new GetYouTubeChannelInfoTask(new YouTubeChannelInterface() {
+		new GetYouTubeChannelInfoTask(getContext(), new YouTubeChannelInterface() {
 			@Override
 			public void onGetYouTubeChannel(YouTubeChannel youTubeChannel) {
 				YouTubePlayerFragment.this.youTubeChannel = youTubeChannel;
