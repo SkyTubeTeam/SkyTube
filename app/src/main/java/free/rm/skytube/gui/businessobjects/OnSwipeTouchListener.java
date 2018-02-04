@@ -56,7 +56,7 @@ public abstract class OnSwipeTouchListener implements View.OnTouchListener {
 
 
 	/**
-	 * User swiped to the left.
+	 * User swiped to the left from the right side of the view with a width == 20%.
 	 *
 	 * @return True if the event was consumed.
 	 */
@@ -66,7 +66,7 @@ public abstract class OnSwipeTouchListener implements View.OnTouchListener {
 
 
 	/**
-	 * User swiped to the top.
+	 * User swiped to the top from the bottom side of the view with a height == 20%.
 	 *
 	 * @return True if the event was consumed.
 	 */
@@ -104,33 +104,40 @@ public abstract class OnSwipeTouchListener implements View.OnTouchListener {
 		return false;
 	}
 
-	public void onSeekStart() {
 
-	}
+	/**
+	 * Called every time any gesture is ended.
+	 */
+	public abstract void onGestureDone();
 
-    public void onSeekEnd() {
 
-    }
-	public void onGestureDone(boolean notStart) {
+	/**
+	 * User swiped from top to bottom or from bottom to top at the left side of the view.
+	 */
+	public abstract void adjustBrightness(double adjustPercent);
 
-	}
 
-	public void adjustBrightness(double adjustPercent) {
+	/**
+	 * User swiped from top to bottom or from bottom to top at the left side of the view.
+	 */
+	public abstract void adjustVolumeLevel(double adjustPercent);
 
-	}
 
-	public void adjustVolumeLevel(double adjustPercent) {
+	/**
+	 * User swiped from left to right or from right to left at any place of the view except 20% from the right.
+	 */
+	public abstract void adjustVideoPosition(double adjustPercent, boolean forwardDirection);
 
-	}
 
-	public void adjustVideoPosition(double adjustPercent, boolean forwardDirection) {
-
-	}
-
+	/**
+	 * In touch listener we don't know the rect of the view. This method should be overrided and should return actual view rect (because rect changes when orientation changes).
+	 *
+	 */
 	public Rect viewRect() {
 		// We need to get actual rect of view from top class
 		return new Rect();
 	}
+
 
 	private enum Type {
 		NONE,
@@ -197,6 +204,7 @@ public abstract class OnSwipeTouchListener implements View.OnTouchListener {
 				gestureDetector.onTouchEvent(event);
 				return;
 			}
+
 			// decide which process is needed.
 			switch (event.getAction()) {
 				case MotionEvent.ACTION_DOWN:
@@ -205,21 +213,10 @@ public abstract class OnSwipeTouchListener implements View.OnTouchListener {
 				case MotionEvent.ACTION_MOVE:
 					if (type == Type.NONE && startEvent != null) {
 						type = whatTypeIsIt(startEvent, event);
-
-						if (type == Type.SEEK)
-							onSeekStart();
 					}
 					break;
 				case MotionEvent.ACTION_UP:
-					if (type == Type.NONE) {
-						// It happens when user clicks inside the view
-						onGestureDone(true);
-					} else {
-					    if(type == Type.SEEK)
-                            onSeekEnd();
-
-						onGestureDone(false);
-					}
+					onGestureDone();
 					type = Type.NONE;
 					startEvent = null;
 					break;
@@ -230,24 +227,43 @@ public abstract class OnSwipeTouchListener implements View.OnTouchListener {
 			gestureDetector.onTouchEvent(event);
 		}
 
+
+		/**
+		 * Here we decide in what place of the screen user should swipe to get a new brightness value.
+		 */
 		private Rect getBrightnessRect() {
 			return new Rect(0, 0, viewRect().right / 2, viewRect().bottom);
 		}
 
+
+		/**
+		 * Here we decide in what place of the screen user should swipe to get a new volume value.
+		 */
 		private Rect getVolumeRect() {
 			return new Rect(viewRect().right / 2, 0, viewRect().right, viewRect().bottom);
 		}
 
+
+		/**
+		 * Here we choose a rect for swipe which then will be used to open the comments view.
+		 */
 		private Rect getCommentsRect() {
 			// 20% from right side will trigger comments view
 			return new Rect((int)(viewRect().right - Math.min(viewRect().bottom, viewRect().right) * 0.2), 0, viewRect().right, viewRect().bottom);
 		}
 
+		/**
+		 * Here we choose a rect for swipe which then will be used to open the description view.
+		 */
 		private Rect getDescriptionRect() {
-			// 30% from bottom side will trigger description view
-			return new Rect(0, (int)(viewRect().bottom - Math.min(viewRect().bottom, viewRect().right) * 0.3), viewRect().right, viewRect().bottom);
+			// 20% from bottom side will trigger description view
+			return new Rect(0, (int)(viewRect().bottom - Math.min(viewRect().bottom, viewRect().right) * 0.2), viewRect().right, viewRect().bottom);
 		}
 
+
+		/**
+		 * Ok, swipe detected. What did user want? Let's find out
+		 */
 		private Type whatTypeIsIt(MotionEvent startEvent, MotionEvent currentEvent) {
 			float startX = startEvent.getX();
 			float startY = startEvent.getY();

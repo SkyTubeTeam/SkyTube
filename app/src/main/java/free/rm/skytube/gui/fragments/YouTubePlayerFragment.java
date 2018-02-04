@@ -237,15 +237,8 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 				return true;
 			}
 
-			public void onSeekStart() {
-                // You can add any needed code here
-			}
-
-            public void onSeekEnd() {
-			    // You can add any needed code here
-            }
-
-			public void onGestureDone(boolean notStart) {
+			@Override
+			public void onGestureDone() {
 				startBrightness = -1.0f;
 				startVolumePercent = -1.0f;
 				startVideoTime = -1;
@@ -254,6 +247,7 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 
 			@Override
 			public void adjustBrightness(double adjustPercent) {
+				// We are setting brightness percent to a value that should be from -1.0 to 1.0. We need to limit it here for these values first
 				if (adjustPercent < -1.0f) {
 					adjustPercent = -1.0f;
 				} else if (adjustPercent > 1.0f) {
@@ -264,6 +258,7 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 				if (startBrightness < 0) {
 					startBrightness = lp.screenBrightness;
 				}
+				// We are getting a final brightness value when summing current brightness and the percent we got from swipe action. Should be >= 0 and <= 1
 				float targetBrightness = (float) (startBrightness + adjustPercent * 1.0f);
 				if (targetBrightness <= 0.0f) {
 					targetBrightness = 0.0f;
@@ -276,11 +271,13 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 				indicatorImageView.setImageResource(R.drawable.ic_brightness);
 				indicatorTextView.setText((int) (targetBrightness * MAX_BRIGHTNESS) + "%");
 
+				// Show indicator. It will be hidden once onGestureDone will be called
 				showIndicator();
 			}
 
 			@Override
 			public void adjustVolumeLevel(double adjustPercent) {
+				// We are setting volume percent to a value that should be from -1.0 to 1.0. We need to limit it here for these values first
 				if (adjustPercent < -1.0f) {
 					adjustPercent = -1.0f;
 				} else if (adjustPercent > 1.0f) {
@@ -290,14 +287,18 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 				AudioManager audioManager = (AudioManager) getContext()
 						.getSystemService(Context.AUDIO_SERVICE);
 				final int STREAM = AudioManager.STREAM_MUSIC;
-				int maxVolume = audioManager.getStreamMaxVolume(STREAM);
 
+				// Max volume will return INDEX of volume not the percent. For example, on my device it is 15
+				int maxVolume = audioManager.getStreamMaxVolume(STREAM);
 				if (maxVolume == 0) return;
 
 				if (startVolumePercent < 0) {
+					// We are getting actual volume index (NOT volume but index). It will be >= 0.
 					int curVolume = audioManager.getStreamVolume(STREAM);
+					// And counting percents of maximum volume we have now
 					startVolumePercent = curVolume * 1.0f / maxVolume;
 				}
+				// Should be >= 0 and <= 1
 				double targetPercent = startVolumePercent + adjustPercent;
 				if (targetPercent > 1.0f) {
 					targetPercent = 1.0f;
@@ -305,6 +306,7 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 					targetPercent = 0;
 				}
 
+				// Calculating index. Test values are 15 * 0.12 = 1 ( because it's int)
 				int index = (int) (maxVolume * targetPercent);
 				if (index > maxVolume) {
 					index = maxVolume;
@@ -316,6 +318,7 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 				indicatorImageView.setImageResource(R.drawable.ic_volume);
 				indicatorTextView.setText(index * 100 / maxVolume + "%");
 
+				// Show indicator. It will be hidden once onGestureDone will be called
 				showIndicator();
 			}
 
@@ -522,6 +525,7 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 		setBrightness(brightnessLevel);
 	}
 
+
 	private void saveCurrentBrightness() {
 		WindowManager.LayoutParams lp = getActivity().getWindow().getAttributes();
 		float brightnessLevel = lp.screenBrightness;
@@ -630,16 +634,19 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 		}
 	}
 
+
 	private void showIndicator() {
 		indicatorView.setVisibility(View.VISIBLE);
 	}
+
 
 	private void hideIndicator() {
 		indicatorView.setVisibility(View.GONE);
 	}
 
+
 	// Returns a (localized) string for the given duration (in seconds).
-	public static String formatDuration(int duration) {
+	private String formatDuration(int duration) {
 		int h = duration / 3600;
 		int m = (duration - h * 3600) / 60;
 		int s = duration - (h * 3600 + m * 60);
