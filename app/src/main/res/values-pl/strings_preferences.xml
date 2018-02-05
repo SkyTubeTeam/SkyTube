@@ -89,7 +89,7 @@
 	<string name="pref_title_disable_immersive_mode">Wyłącz tryb immersyjny</string>
 	<string name="pref_summary_disable_immersive_mode">Ikony komentarzy i opisu filmu oraz pasek nawigacji powinny być zawsze wyświetlane</string>
 
-		<string name="pref_title_allow_mobile_downloads">Zezwól na pobieranie przez sieci komórkowe</string>
+		<string name="pref_title_allow_mobile_downloads">Pozwól na pobieranie przez sieci komórkowe</string>
 	<string name="pref_summary_allow_mobile_downloads">Wybierz to, aby włączyć pobieranie filmów przez sieci komórkowe. W przeciwnym wypadku, filmy będą mogły być pobierane wyłącznie przez Wi-Fi.</string>
 
 <string name="pref_key_disable_search_history">pref_disable_search_history</string>
