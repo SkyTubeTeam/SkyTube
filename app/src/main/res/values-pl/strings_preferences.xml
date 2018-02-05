@@ -94,4 +94,6 @@
 
 <string name="pref_key_disable_search_history">pref_disable_search_history</string>
 	<string name="pref_title_disable_search_history">Wyłącz historię wyszukiwania</string>
+	<string name="pref_summary_disable_search_history">Jeśli zaznaczone, historia wyszukiwania zostanie wyczyszczona i nie będzie używana.</string>
+	<string name="pref_disable_search_history_deleted">Historia wyszukiwania usunięta.</string>
 	</resources>
