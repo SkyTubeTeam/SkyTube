@@ -1,10 +1,11 @@
+<?xml version='1.0' encoding='UTF-8'?>
 <resources>
 	<string name="could_not_get_videos">Nie można pobrać %s filmów.</string>
 	<string name="views">%,d wyświetleń</string>
 	<string name="error">Błąd</string>
-	<string name="ok">Ok</string>
+	<string name="ok">OK</string>
 	<string name="search_videos">Szukaj filmów</string>
-	<string name="launch_offical_player_error">Wystąpił błąd podczas uruchamiania oficjalnego odtwarzacza YouTube.  Upewnij się, że jest on zainstalowany.</string>
+	<string name="launch_offical_player_error">Wystąpił błąd podczas uruchamiania oficjalnego odtwarzacza YouTube od Google. Upewnij się, że jest on zainstalowany na twoim urządzeniu.</string>
 	<string name="LIVE">LIVE</string>
 
 	<string name="featured">Polecane</string>
