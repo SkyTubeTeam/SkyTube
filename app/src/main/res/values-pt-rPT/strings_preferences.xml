@@ -83,8 +83,8 @@
 	<string name="pref_title_disable_immersive_mode">Desativar modo imersivo</string>
 	<string name="pref_summary_disable_immersive_mode">Os comentários, a descrição do vídeo e a barra de navegação serão sempre mostrados</string>
 
-	<string name="pref_title_feed_notification">Feed Auto Notification</string>
-	<string name="pref_summary_feed_notification">How often to check for new videos from subscribed channels: %s</string>
+	<string name="pref_title_feed_notification">Notificação automática de fontes</string>
+	<string name="pref_summary_feed_notification">Periodicidade para procurar novos vídeos nos canais subscritos: %s</string>
 	<string-array name="feed_notification">
 		<item>Off</item>
 		<item>6 Hours</item>
@@ -92,8 +92,8 @@
 		<item>24 Hours</item>
 	</string-array>
 
-	<string name="pref_title_allow_mobile_downloads">Allow downloads on mobile networks</string>
-	<string name="pref_summary_allow_mobile_downloads">Select this to enable downloading videos on mobile networks. Otherwise, videos can only be downloaded on Wi-Fi.</string>
+	<string name="pref_title_allow_mobile_downloads">Permitir descargas em redes móveis</string>
+	<string name="pref_summary_allow_mobile_downloads">Ative esta opção para descarregar vídeos via redes móveis. Caso contrário, apenas poderá descarregar vídeos através de Wi-Fi.</string>
 
 <string name="pref_key_disable_search_history">pref_disable_search_history</string>
 	<string name="pref_title_disable_search_history">Desativar histórico de pesquisas</string>
