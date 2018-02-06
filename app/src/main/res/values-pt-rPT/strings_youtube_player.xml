@@ -4,13 +4,13 @@
 	<string name="error_stream_decryption_fail">Não foi possível carregar o código de desencriptação para o serviço YouTube.</string>
 	<string name="error_stream_parse_error">Erro ao processar.</string>
 
-	<string name="error_video_play">Erro ao reproduzir</string>
+	<string name="error_video_play">Erro de reprodução</string>
 	<string name="error_video_streams_empty">O vídeo %s não tem emissões.</string>
 	<string name="error_video_streams">Ocorreu um erro ao tentar obter a emissão do vídeo.</string>
 	<string name="error_get_video_desc">Ocorreu um erro ao tentar obter a descrição do vídeo.</string>
 	<string name="error_invalid_url">URL inválido: %s</string>
 
-	<string name="warning_live_video">Ainda não é possível reproduzir emissões em direto. Abrir emissão externamente?</string>
+	<string name="warning_live_video">Ainda não é possível reproduzir emissões em direto. Abrir em outra aplicação?</string>
 
 	<string name="ratings_disabled">Classificações desativadas</string>
 
