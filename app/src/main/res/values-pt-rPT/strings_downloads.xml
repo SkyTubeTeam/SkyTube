@@ -1,13 +1,16 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources>
-	<string name="downloads">Downloads</string>
-	<string name="download_video">Download Video</string>
-	<string name="starting_video_download">Downloading \'%s\'…</string>
-	<string name="video_download_stream_error">Could not download \'%s\'.</string>
-	<string name="delete_download">Delete Download</string>
-	<string name="video_downloaded">\'%s\' downloaded.</string>
-	<string name="no_downloaded_videos_text">You haven\'t downloaded any videos yet.\n\nOnce you do, they will show up here.</string>
-	<string name="downloads_disabled_warning">Video downloading is disabled as you are not using Wi-Fi.\nTo enable it, please go to Preferences > Others  and tick \'Allow downloads on Mobile Networks\'</string>
-	<string name="playing_video_file_missing">The download for this video was not found. Playing remotely.</string>
-	<string name="external_storage_not_available">Unable to download the file as the external storage is not available.</string>
+	<string name="downloads">Descargas</string>
+	<string name="download_video">Descarregar vídeo</string>
+	<string name="starting_video_download">A descarregar \'%s\'…</string>
+	<string name="video_download_stream_error">Não foi possível descarregar \'%s\'.</string>
+	<string name="delete_download">Apagar descarga</string>
+	<string name="video_downloaded">\'%s\' foi descarregado.</string>
+	<string name="no_downloaded_videos_text">Ainda não descarregou vídeos.
+\n
+\nAssim que o fizer, serão mostrados aqui.</string>
+	<string name="downloads_disabled_warning">Se não estiver ligado a rede Wi-Fi, não é possível descarregar vídeos.
+\nPara ativar a opção, aceda a Preferências &gt; Outras e assinale \'Permitir descargas em redes móveis\'.</string>
+	<string name="playing_video_file_missing">Não foi possível encontrar o ficheiro descarregado. A reproduzir remotamente...</string>
+	<string name="external_storage_not_available">Não foi possível descarregar o vídeo porque o cartão SD não está disponível.</string>
 </resources>
