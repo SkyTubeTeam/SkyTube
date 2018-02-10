@@ -6,6 +6,8 @@
 	<item android:id="@+id/bookmark_video" android:title="@string/bookmark"></item>
 	<item android:id="@+id/unbookmark_video" android:visible="false" android:title="@string/unbookmark"></item>
 	<item android:id="@+id/view_thumbnail" android:title="@string/view_thumbnail"></item>
+	<item android:id="@+id/open_channel" android:visible="false" android:title="Open channel"></item>
+	<item android:id="@+id/subscribe_channel" android:visible="false" android:title="Subscribe"></item>
 	<item android:id="@+id/download_video" android:title="@string/download_video"></item>
 	<item android:id="@+id/delete_download" android:visible="false" android:title="@string/delete_download"></item>
 </menu>
