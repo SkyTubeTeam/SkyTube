@@ -494,4 +494,6 @@
 	<string name="pref_summary_disable_search_history">If checked, Search History will be cleared and will not be used.</string>
 	<string name="pref_disable_search_history_deleted">Search History deleted.</string>
 	<string name="restart">Restart</string>
+
+	<string name="pref_key_brightness_level" translatable="false">pref_key_brightness_level</string>
 </resources>
