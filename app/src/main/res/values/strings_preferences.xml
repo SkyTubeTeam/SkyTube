@@ -494,5 +494,11 @@
 	<string name="pref_title_allow_mobile_downloads">Allow downloads on mobile networks</string>
 	<string name="pref_summary_allow_mobile_downloads">Select this to enable downloading videos on mobile networks. Otherwise, videos can only be downloaded on Wi-Fi.</string>
 
+	<string name="pref_key_disable_search_history">pref_disable_search_history</string>
+	<string name="pref_title_disable_search_history">Disable Search History</string>
+	<string name="pref_summary_disable_search_history">If checked, Search History will be cleared and will not be used.</string>
+	<string name="pref_disable_search_history_deleted">Search History deleted.</string>
 	<string name="restart">Restart</string>
+
+	<string name="pref_key_brightness_level" translatable="false">pref_key_brightness_level</string>
 </resources>

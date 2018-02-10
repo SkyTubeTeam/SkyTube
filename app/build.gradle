@@ -1,14 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion '26.0.2'
+    compileSdkVersion 27
+    buildToolsVersion '27.0.1'
 
     defaultConfig {
         applicationId "free.rm.skytube"
         minSdkVersion 14
-        targetSdkVersion 26
-        versionCode 11
+        targetSdkVersion 27
+        versionCode 12
         // Third party devs:  pls be ethical and change the below keys
         buildConfigField 'String[]', 'YOUTUBE_API_KEYS',
                 '{' +
@@ -33,14 +33,14 @@ android {
         // 100% Open-Source Edition
         oss {
             applicationId "free.rm.skytube.oss"
-            versionName "2.80"          // the digits of the *fractional part* shall not be larger than "9"
+            versionName "2.81"          // the digits of the *fractional part* shall not be larger than "9"
             resValue "string", "app_name", "SkyTube"
             dimension "skytube"
         }
         // 99% Open-source edition:  uses the YouTube Player Jar [i.e. proprietary module - optional usage]
         extra {
             applicationId "free.rm.skytube.extra"
-            versionName "2.80 Extra"    // the digits of the *fractional part* shall not be larger than "9"
+            versionName "2.81 Extra"    // the digits of the *fractional part* shall not be larger than "9"
             resValue "string", "app_name", "SkyTube Extra"
             dimension "skytube"
         }
@@ -66,10 +66,7 @@ dependencies {
     compile 'com.google.http-client:google-http-client-android:1.23.0'
     compile 'com.google.apis:google-api-services-youtube:v3-rev187-1.23.0'
 
-    // libextractor
-    compile 'org.jsoup:jsoup:1.10.1'
-    compile 'org.mozilla:rhino:1.7.7'
-
+    compile 'com.github.TeamNewPipe:NewPipeExtractor:v0.11.5'
     compile 'com.github.moraisigor:slidingdrawer:1.6.7'
     compile 'com.github.bumptech.glide:glide:4.3.1'
     compile 'com.jakewharton:butterknife:8.8.1'
@@ -79,11 +76,11 @@ dependencies {
     compile 'com.afollestad.material-dialogs:core:0.9.4.7'
     compile 'com.github.angads25:filepicker:1.1.1'
 
-    compile 'com.android.support:appcompat-v7:26.1.0'
-    compile 'com.android.support:support-v13:26.1.0'
-    compile 'com.android.support:design:26.1.0'
-    compile 'com.android.support:recyclerview-v7:26.1.0'
-    compile 'com.android.support:cardview-v7:26.1.0'
+    compile 'com.android.support:appcompat-v7:27.0.2'
+    compile 'com.android.support:support-v13:27.0.2'
+    compile 'com.android.support:design:27.0.2'
+    compile 'com.android.support:recyclerview-v7:27.0.2'
+    compile 'com.android.support:cardview-v7:27.0.2'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:multidex:1.0.2'
     // this is as we have over 65536 lines of code...

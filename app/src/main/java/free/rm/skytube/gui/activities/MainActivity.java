@@ -17,14 +17,15 @@
 
 package free.rm.skytube.gui.activities;
 
-import android.content.ClipDescription;
+import android.content.ClipData;
 import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
@@ -39,9 +40,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
+import free.rm.skytube.gui.businessobjects.adapters.SearchHistoryCursorAdapter;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubePlaylist;
 import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
+import free.rm.skytube.businessobjects.db.SearchHistoryDb;
+import free.rm.skytube.businessobjects.db.SearchHistoryTable;
+import free.rm.skytube.businessobjects.interfaces.SearchHistoryClickListener;
 import free.rm.skytube.gui.businessobjects.MainActivityListener;
 import free.rm.skytube.gui.businessobjects.YouTubePlayer;
 import free.rm.skytube.gui.businessobjects.updates.UpdatesCheckerTask;
@@ -54,17 +59,23 @@ import free.rm.skytube.gui.fragments.SearchVideoGridFragment;
  * Main activity (launcher).  This activity holds {@link free.rm.skytube.gui.fragments.VideosGridFragment}.
  */
 public class MainActivity extends AppCompatActivity implements MainActivityListener {
+
 	@BindView(R.id.fragment_container)
 	protected FrameLayout fragmentContainer;
 
 	private MainFragment mainFragment;
 	private SearchVideoGridFragment searchVideoGridFragment;
 	private ChannelBrowserFragment channelBrowserFragment;
-	// Fragment that shows Videos from a specific Playlist
+	/** Fragment that shows Videos from a specific Playlist */
 	private PlaylistVideosFragment playlistVideosFragment;
+
+	private boolean dontAddToBackStack = false;
+
+	private SearchHistoryCursorAdapter searchHistoryCursorAdapter;
 
 	/** Set to true of the UpdatesCheckerTask has run; false otherwise. */
 	private static boolean updatesCheckerTaskRan = false;
+
 	public static final String ACTION_VIEW_CHANNEL = "MainActivity.ViewChannel";
 	public static final String ACTION_VIEW_FEED = "MainActivity.ViewFeed";
 	private static final String MAIN_FRAGMENT   = "MainActivity.MainFragment";
@@ -72,7 +83,6 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 	public static final String CHANNEL_BROWSER_FRAGMENT = "MainActivity.ChannelBrowserFragment";
 	public static final String PLAYLIST_VIDEOS_FRAGMENT = "MainActivity.PlaylistVideosFragment";
 
-	private boolean dontAddToBackStack = false;
 
 
 	@Override
@@ -156,13 +166,47 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 
 		// setup the SearchView (actionbar)
 		final MenuItem searchItem = menu.findItem(R.id.menu_search);
-		final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+		final SearchView searchView = (SearchView) searchItem.getActionView();
 
 		searchView.setQueryHint(getString(R.string.search_videos));
+		// set the query hints to be equal to the previously searched text
 		searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 			@Override
-			public boolean onQueryTextChange(String newText) {
-				return false;
+			public boolean onQueryTextChange(final String newText) {
+				searchView.setSuggestionsAdapter(null);
+
+				// if the user does not want to have the search string saved, then skip the below...
+				if(SkyTubeApp.getPreferenceManager().getBoolean(getString(R.string.pref_key_disable_search_history), false))
+					return false;
+
+				Cursor cursor = SearchHistoryDb.getSearchHistoryDb().getSearchCursor(newText);
+				if (cursor.getCount() != 0) {
+					String[] columns = new String[]{SearchHistoryTable.COL_SEARCH_TEXT};
+					int[] columnTextId = new int[]{android.R.id.text1};
+
+					searchHistoryCursorAdapter = new SearchHistoryCursorAdapter(getBaseContext(),
+							R.layout.search_hint, cursor,
+							columns, columnTextId
+							, 0);
+					searchHistoryCursorAdapter.setOnUpdate(new Runnable() {
+						@Override
+						public void run() {
+							Cursor cursor = SearchHistoryDb.getSearchHistoryDb().getSearchCursor(newText);
+							searchHistoryCursorAdapter.swapCursor(cursor);
+						}
+					});
+					searchHistoryCursorAdapter.setSearchHistoryClickListener(new SearchHistoryClickListener() {
+						@Override
+						public void onClick(String query) {
+							displaySearchResults(query);
+						}
+					});
+
+					searchView.setSuggestionsAdapter(searchHistoryCursorAdapter);
+					return true;
+				} else {
+					return false;
+				}
 			}
 
 			@Override
@@ -170,12 +214,12 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 				// hide the keyboard
 				searchView.clearFocus();
 
-				// open SearchVideoGridFragment and display the results
-				searchVideoGridFragment = new SearchVideoGridFragment();
-				Bundle bundle = new Bundle();
-				bundle.putString(SearchVideoGridFragment.QUERY, query);
-				searchVideoGridFragment.setArguments(bundle);
-				switchToFragment(searchVideoGridFragment);
+				if(!SkyTubeApp.getPreferenceManager().getBoolean(SkyTubeApp.getStr(R.string.pref_key_disable_search_history), false)) {
+					// Save this search string into the Search History Database (for Suggestions)
+					SearchHistoryDb.getSearchHistoryDb().insertSearchText(query);
+				}
+
+				displaySearchResults(query);
 
 				return true;
 			}
@@ -249,17 +293,18 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 	 * @return	{@link String}
 	 */
 	private String getClipboardItem() {
-		String item = "";
+		String              clipboardText    = "";
+		ClipboardManager    clipboardManager = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
 
-		ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
-		if (clipboard.hasPrimaryClip()) {
-			android.content.ClipDescription description = clipboard.getPrimaryClipDescription();
-			android.content.ClipData data = clipboard.getPrimaryClip();
-			if (data != null && description != null && description.hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN))
-				item = String.valueOf(data.getItemAt(0).getText());
+		// if the clipboard contain data ...
+		if (clipboardManager != null  &&  clipboardManager.hasPrimaryClip()) {
+			ClipData.Item item = clipboardManager.getPrimaryClip().getItemAt(0);
+
+			// gets the clipboard as text.
+			clipboardText = item.getText().toString();
 		}
 
-		return item;
+		return clipboardText;
 	}
 
 
@@ -328,4 +373,16 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 		switchToFragment(playlistVideosFragment);
 	}
 
+	/**
+	 * Switch to the Search Video Grid Fragment with the selected query to search for videos.
+	 * @param query
+	 */
+	private void displaySearchResults(String query) {
+		// open SearchVideoGridFragment and display the results
+		searchVideoGridFragment = new SearchVideoGridFragment();
+		Bundle bundle = new Bundle();
+		bundle.putString(SearchVideoGridFragment.QUERY, query);
+		searchVideoGridFragment.setArguments(bundle);
+		switchToFragment(searchVideoGridFragment);
+	}
 }

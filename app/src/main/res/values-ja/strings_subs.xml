@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources>
-	<string name="subscriptions">Subscriptions</string>
-	<string name="subscribe">Subscribe</string>
-	<string name="unsubscribe">Unsubscribe</string>
-	<string name="total_subscribers">%,d subscribers</string>
+	<string name="subscriptions">サブスクリプション</string>
+	<string name="subscribe">購読</string>
+	<string name="unsubscribe">購読解除</string>
+	<string name="total_subscribers">%,d サブスクライバー</string>
 
 	<string name="subscribed">Subscribed</string>
 	<string name="unsubscribed">Unsubscribed</string>

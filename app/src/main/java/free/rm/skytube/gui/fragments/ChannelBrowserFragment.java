@@ -17,6 +17,7 @@
 
 package free.rm.skytube.gui.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -169,7 +170,7 @@ public class ChannelBrowserFragment extends FragmentEx {
 
 		if (channel == null) {
 			if (task == null) {
-				task = new GetChannelInfoTask();
+				task = new GetChannelInfoTask(getContext());
 				task.execute(channelId);
 			}
 		} else {
@@ -245,12 +246,16 @@ public class ChannelBrowserFragment extends FragmentEx {
 	 */
 	private class GetChannelInfoTask extends GetYouTubeChannelInfoTask {
 
-		GetChannelInfoTask() {
-			super(null);
+		GetChannelInfoTask(Context ctx) {
+			super(ctx,null);
 		}
 
 		@Override
 		protected void onPostExecute(YouTubeChannel youTubeChannel) {
+			if (youTubeChannel == null) {
+				showError();
+				return;
+			}
 			// In the event this fragment is passed a channel id and not a channel object, set the
 			// channel the subscribe button is for since there wasn't a channel object to set when
 			// the button was created.
