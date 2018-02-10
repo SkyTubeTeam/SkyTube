@@ -131,7 +131,7 @@ public class SkyTubeApp extends MultiDexApplication {
 		PackageManager packageManager = context.getPackageManager();
 		Intent intent = packageManager.getLaunchIntentForPackage(context.getPackageName());
 		ComponentName componentName = intent.getComponent();
-		Intent mainIntent = IntentCompat.makeRestartActivityTask(componentName);
+		Intent mainIntent = Intent.makeRestartActivityTask(componentName);
 		context.startActivity(mainIntent);
 		System.exit(0);
 	}

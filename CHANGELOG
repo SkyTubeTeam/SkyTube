@@ -1,5 +1,6 @@
 vX.XX - XX XX 2018:
 	* Added search history:  search history is stored and used as suggestions for future searches.  This feature can be disabled.
+	* Volume and brightness swipe controls.
 
 v2.81 - 28 Jan 2018:
 	* Emergency fix: "This video is unavailable" error occurred for some YouTube videos.
