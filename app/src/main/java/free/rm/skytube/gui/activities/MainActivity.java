@@ -71,8 +71,6 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 
 	private boolean dontAddToBackStack = false;
 
-	private SearchHistoryCursorAdapter searchHistoryCursorAdapter;
-
 	/** Set to true of the UpdatesCheckerTask has run; false otherwise. */
 	private static boolean updatesCheckerTaskRan = false;
 
@@ -169,44 +167,40 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 		final SearchView searchView = (SearchView) searchItem.getActionView();
 
 		searchView.setQueryHint(getString(R.string.search_videos));
+
 		// set the query hints to be equal to the previously searched text
 		searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 			@Override
 			public boolean onQueryTextChange(final String newText) {
-				searchView.setSuggestionsAdapter(null);
-
 				// if the user does not want to have the search string saved, then skip the below...
-				if(SkyTubeApp.getPreferenceManager().getBoolean(getString(R.string.pref_key_disable_search_history), false))
+				if (SkyTubeApp.getPreferenceManager().getBoolean(getString(R.string.pref_key_disable_search_history), false)) {
 					return false;
+				}
 
+				SearchHistoryCursorAdapter searchHistoryCursorAdapter = (SearchHistoryCursorAdapter) searchView.getSuggestionsAdapter();
 				Cursor cursor = SearchHistoryDb.getSearchHistoryDb().getSearchCursor(newText);
-				if (cursor.getCount() != 0) {
-					String[] columns = new String[]{SearchHistoryTable.COL_SEARCH_TEXT};
-					int[] columnTextId = new int[]{android.R.id.text1};
 
+				// if the adapter has not been created, the create it
+				if (searchHistoryCursorAdapter == null) {
 					searchHistoryCursorAdapter = new SearchHistoryCursorAdapter(getBaseContext(),
-							R.layout.search_hint, cursor,
-							columns, columnTextId
-							, 0);
-					searchHistoryCursorAdapter.setOnUpdate(new Runnable() {
-						@Override
-						public void run() {
-							Cursor cursor = SearchHistoryDb.getSearchHistoryDb().getSearchCursor(newText);
-							searchHistoryCursorAdapter.swapCursor(cursor);
-						}
-					});
+							R.layout.search_hint,
+							cursor,
+							new String[]{SearchHistoryTable.COL_SEARCH_TEXT},
+							new int[]{android.R.id.text1},
+							0);
 					searchHistoryCursorAdapter.setSearchHistoryClickListener(new SearchHistoryClickListener() {
 						@Override
 						public void onClick(String query) {
 							displaySearchResults(query);
 						}
 					});
-
 					searchView.setSuggestionsAdapter(searchHistoryCursorAdapter);
-					return true;
 				} else {
-					return false;
+					// else just change the cursor...
+					searchHistoryCursorAdapter.changeCursor(cursor);
 				}
+
+				return true;
 			}
 
 			@Override
