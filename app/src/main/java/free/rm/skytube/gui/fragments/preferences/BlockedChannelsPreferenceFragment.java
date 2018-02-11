@@ -1,15 +1,10 @@
 package free.rm.skytube.gui.fragments.preferences;
 
-import android.app.Dialog;
 import android.os.Bundle;
 import android.preference.MultiSelectListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
-import android.util.Log;
 import android.widget.Toast;
-
-import com.afollestad.materialdialogs.MaterialDialog;
-
 import java.util.Collection;
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.db.BlockedChannelsDb;
@@ -19,7 +14,6 @@ public class BlockedChannelsPreferenceFragment extends PreferenceFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         addPreferencesFromResource(R.xml.preference_blocked_channels);
         MultiSelectListPreference multiSelectListPreference = (MultiSelectListPreference) findPreference(getString(R.string.pref_blocked_channels_list_key));
 
@@ -29,19 +23,15 @@ public class BlockedChannelsPreferenceFragment extends PreferenceFragment {
 
         multiSelectListPreference.setEntries(blockedChannelsName);
         multiSelectListPreference.setEntryValues(blockedChannelsName);
+        multiSelectListPreference.setPositiveButtonText(R.string.unblock_button);
 
-
-
-        Log.d("", "onPreferenceClick: " + blockedChannelsDb.getNumberOfBlockedChannels());
 
         multiSelectListPreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-               if (blockedChannelsDb.getBlockedChannelsListName().isEmpty()){
+                if (blockedChannelsDb.getBlockedChannelsListName().isEmpty()) {
                     Toast.makeText(getActivity(), "There is not any blocked channel.", Toast.LENGTH_SHORT).show();
                 }
-
-               Log.d("", "onPreferenceClick: ");
                 return true;
             }
         });
@@ -49,18 +39,11 @@ public class BlockedChannelsPreferenceFragment extends PreferenceFragment {
         multiSelectListPreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object o) {
-
-              // new MaterialDialog.Builder(getActivity()).positiveText("Unblock").show();
-
                 Collection<String> selectedNames = (Collection<String>) o;
-
                 for (String channel : selectedNames) {
-                    Log.d("", "onPreferenceChange: " + "for loop");
                     blockedChannelsDb.remove(channel);
                 }
-
                 Toast.makeText(getActivity(), "Please refresh the main page.", Toast.LENGTH_SHORT).show();
-
                 return true;
             }
         });

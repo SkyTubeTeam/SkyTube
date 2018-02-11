@@ -34,6 +34,7 @@ import com.bumptech.glide.request.RequestOptions;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
+import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.gui.activities.ThumbnailViewerActivity;
 import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
@@ -202,8 +203,7 @@ class GridViewHolder extends RecyclerView.ViewHolder {
 						return true;
 					case R.id.block_channel:
 						youTubeVideo.blockChannel(context);
-						Log.d("MENU", "onMenuItemClick: CHANNEL BLOCK CLICKED");
-						Log.d("MENU", "onMenuItemClick: " +youTubeVideo.getChannelName() +
+						Logger.e(this,"get blocked channel info" +youTubeVideo.getChannelName() +
 								" -- "+ youTubeVideo.getChannelId() );
 				}
 				return false;

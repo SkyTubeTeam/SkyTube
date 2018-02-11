@@ -723,6 +723,9 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 				youTubeVideo.downloadVideo(getContext());
 				return true;
 
+            case R.id.block_channel:
+                youTubeVideo.blockChannel(getContext());
+
 			default:
 				return super.onOptionsItemSelected(item);
 		}

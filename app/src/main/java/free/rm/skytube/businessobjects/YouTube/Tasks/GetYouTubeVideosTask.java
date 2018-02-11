@@ -17,13 +17,13 @@
 
 package free.rm.skytube.businessobjects.YouTube.Tasks;
 
-import android.util.Log;
 import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
+import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.GetYouTubeVideos;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
@@ -92,7 +92,6 @@ public class GetYouTubeVideosTask extends AsyncTaskParallel<Void, Void, List<You
         this.videoGridAdapter.clearList();
     }
 
-
     @Override
     protected void onPreExecute() {
         // if this task is being called by ChannelBrowserFragment, then get the channel the user is browsing
@@ -123,26 +122,23 @@ public class GetYouTubeVideosTask extends AsyncTaskParallel<Void, Void, List<You
                 }
                 SubscriptionsDb.getSubscriptionsDb().saveChannelVideos(channel);
             }
-        }
 
-        try {
-
-            for (String channelIds : blockedChannelsDb.getBlockedChannelsListId()) {
-                blockedChannelIds.add(channelIds);
-            }
-           /* String channelIds;
-            blockedChannelIds = blockedChannelIds.stream().filter(channelIds -> blockedChannelsDb.getBlockedChannelsListId()).collect(Collectors.toList());
-*/
-            for (YouTubeVideo video : videosList) {
-                if (!blockedChannelIds.contains(video.getChannelId())) {
-                    youTubeVideoList.add(video);
+            try {
+                //get the IDs of blocked channels
+                for (String channelIds : blockedChannelsDb.getBlockedChannelsListId()) {
+                    blockedChannelIds.add(channelIds);
                 }
+                //filtering system to get the videos that are not blocked
+                //videos are checked by their IDs - if their IDs are blocked they are not loaded.
+                for (YouTubeVideo video : videosList) {
+                    if (!blockedChannelIds.contains(video.getChannelId())) {
+                        youTubeVideoList.add(video);
+                    }
+                }
+            } catch (Exception e) {
+                Logger.d(this,"checking blocked channels" + e);
             }
-
-        } catch (Exception e) {
-            Log.d(TAG, "doInBackground: " + e.toString());
         }
-
         return youTubeVideoList;
     }
 

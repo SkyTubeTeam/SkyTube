@@ -427,14 +427,10 @@ public class YouTubeVideo implements Serializable {
 
 
 	public void blockChannel(Context context) {
-
 		boolean successBlockChannel = BlockedChannelsDb.getBlockedChannelsDb().add(this);
 		Toast.makeText(context,
-				successBlockChannel ? R.string.channel_blocked : R.string.channed_blocked_error,
+				successBlockChannel ? R.string.channel_blocked : R.string.channel_blocked_error,
 				Toast.LENGTH_LONG).show();
-
-		Log.d("", "blockChannel():  WORKED");
-
 	}
 
   
