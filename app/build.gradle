@@ -72,7 +72,7 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     compile 'com.google.code.gson:gson:2.8.2'
     compile group: 'joda-time', name: 'joda-time', version: '2.9.9'
-    compile 'com.afollestad.material-dialogs:core:0.9.4.7'
+    compile 'com.afollestad.material-dialogs:core:0.9.5.0'
     compile 'com.github.angads25:filepicker:1.1.1'
 
     compile 'com.android.support:appcompat-v7:27.0.2'
