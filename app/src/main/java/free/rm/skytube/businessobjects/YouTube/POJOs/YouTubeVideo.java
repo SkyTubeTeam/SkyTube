@@ -52,6 +52,7 @@ import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.VideoStream.ParseStreamMetaData;
 import free.rm.skytube.businessobjects.YouTube.VideoStream.StreamMetaData;
 import free.rm.skytube.businessobjects.YouTube.VideoStream.StreamMetaDataList;
+import free.rm.skytube.businessobjects.db.BlockedChannelsDb;
 import free.rm.skytube.businessobjects.db.BookmarksDb;
 import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
 import free.rm.skytube.businessobjects.interfaces.GetDesiredStreamListener;
@@ -425,6 +426,18 @@ public class YouTubeVideo implements Serializable {
 	}
 
 
+	public void blockChannel(Context context) {
+
+		boolean successBlockChannel = BlockedChannelsDb.getBlockedChannelsDb().add(this);
+		Toast.makeText(context,
+				successBlockChannel ? R.string.channel_blocked : R.string.channed_blocked_error,
+				Toast.LENGTH_LONG).show();
+
+		Log.d("", "blockChannel():  WORKED");
+
+	}
+
+  
 	/**
 	 * Get the stream for this Video, based on the user's preference. When done, the stream will be returned
 	 * via the passed GetDesiredStreamListener.

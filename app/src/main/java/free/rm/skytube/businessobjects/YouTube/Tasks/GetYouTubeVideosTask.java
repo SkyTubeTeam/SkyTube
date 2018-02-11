@@ -17,118 +17,152 @@
 
 package free.rm.skytube.businessobjects.YouTube.Tasks;
 
+import android.util.Log;
 import android.view.View;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.YouTube.GetYouTubeVideos;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
+import free.rm.skytube.businessobjects.db.BlockedChannelsDb;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 import free.rm.skytube.gui.businessobjects.LoadingProgressBar;
 import free.rm.skytube.gui.businessobjects.adapters.VideoGridAdapter;
+
 
 /**
  * An asynchronous task that will retrieve YouTube videos and displays them in the supplied Adapter.
  */
 public class GetYouTubeVideosTask extends AsyncTaskParallel<Void, Void, List<YouTubeVideo>> {
 
-	/** Object used to retrieve the desired YouTube videos. */
-	private GetYouTubeVideos getYouTubeVideos;
+    /**
+     * Class tag.
+     */
+    private static final String TAG = GetYouTubeVideosTask.class.getSimpleName();
 
-	/** The Adapter where the retrieved videos will be displayed. */
-	private VideoGridAdapter	videoGridAdapter;
+    /**
+     * Object used to retrieve the desired YouTube videos.
+     */
+    private GetYouTubeVideos getYouTubeVideos;
+    /**
+     * The Adapter where the retrieved videos will be displayed.
+     */
+    private VideoGridAdapter videoGridAdapter;
+    /**
+     * Optional non-static progressBar. If this isn't set, a static one will be used
+     */
+    private View progressBar = null;
 
-	/** Class tag. */
-	private static final String TAG = GetYouTubeVideosTask.class.getSimpleName();
+    /**
+     * Whether or not to skip showing the progress bar. This is needed when doing swipe to refresh, since that functionality shows its own progress bar.
+     */
+    private boolean skipProgressBar = false;
 
-	/** Optional non-static progressBar. If this isn't set, a static one will be used */
-	private View progressBar = null;
+    /**
+     * Runnable to be run when this task completes
+     */
+    private Runnable onFinished;
 
-	/** Whether or not to skip showing the progress bar. This is needed when doing swipe to refresh, since that functionality shows its own progress bar. */
-	private boolean skipProgressBar = false;
-
-	/** Runnable to be run when this task completes */
-	private Runnable onFinished;
-
-	private YouTubeChannel channel;
-
-
-	public GetYouTubeVideosTask(GetYouTubeVideos getYouTubeVideos, VideoGridAdapter videoGridAdapter, View progressBar) {
-		this.getYouTubeVideos = getYouTubeVideos;
-		this.videoGridAdapter = videoGridAdapter;
-		this.progressBar = progressBar;
-	}
-
-	/**
-	 * Constructor to get youtube videos as part of a swipe to refresh. Since this functionality has its own progress bar, we'll
-	 * skip showing our own.
-	 *
-	 * @param getYouTubeVideos The object that does the actual fetching of videos.
-	 * @param videoGridAdapter The grid adapter the videos will be added to.
-	 * @param onFinished
-	 */
-	public GetYouTubeVideosTask(GetYouTubeVideos getYouTubeVideos, VideoGridAdapter videoGridAdapter, Runnable onFinished) {
-		this.getYouTubeVideos = getYouTubeVideos;
-		this.videoGridAdapter = videoGridAdapter;
-		this.skipProgressBar = true;
-		this.onFinished = onFinished;
-		this.getYouTubeVideos.reset();
-		this.videoGridAdapter.clearList();
-	}
+    private YouTubeChannel channel;
 
 
-	@Override
-	protected void onPreExecute() {
-		// if this task is being called by ChannelBrowserFragment, then get the channel the user is browsing
-		channel = videoGridAdapter.getYouTubeChannel();
+    public GetYouTubeVideosTask(GetYouTubeVideos getYouTubeVideos, VideoGridAdapter videoGridAdapter, View progressBar) {
+        this.getYouTubeVideos = getYouTubeVideos;
+        this.videoGridAdapter = videoGridAdapter;
+        this.progressBar = progressBar;
+    }
 
-		if(!skipProgressBar) {
-			if (progressBar != null)
-				progressBar.setVisibility(View.VISIBLE);
-			else
-				LoadingProgressBar.get().show();
-		}
-	}
-
-	@Override
-	protected List<YouTubeVideo> doInBackground(Void... params) {
-		List<YouTubeVideo> videosList = null;
-
-		if (!isCancelled()) {
-			// get videos from YouTube
-			videosList = getYouTubeVideos.getNextVideos();
-
-			if (videosList != null  &&  channel != null  &&  channel.isUserSubscribed()) {
-				for (YouTubeVideo video : videosList) {
-					channel.addYouTubeVideo(video);
-				}
-
-				SubscriptionsDb.getSubscriptionsDb().saveChannelVideos(channel);
-			}
-		}
-
-		return videosList;
-	}
+    /**
+     * Constructor to get youtube videos as part of a swipe to refresh. Since this functionality has its own progress bar, we'll
+     * skip showing our own.
+     *
+     * @param getYouTubeVideos The object that does the actual fetching of videos.
+     * @param videoGridAdapter The grid adapter the videos will be added to.
+     * @param onFinished
+     */
+    public GetYouTubeVideosTask(GetYouTubeVideos getYouTubeVideos, VideoGridAdapter videoGridAdapter, Runnable onFinished) {
+        this.getYouTubeVideos = getYouTubeVideos;
+        this.videoGridAdapter = videoGridAdapter;
+        this.skipProgressBar = true;
+        this.onFinished = onFinished;
+        this.getYouTubeVideos.reset();
+        this.videoGridAdapter.clearList();
+    }
 
 
-	@Override
-	protected void onPostExecute(List<YouTubeVideo> videosList) {
-		videoGridAdapter.appendList(videosList);
+    @Override
+    protected void onPreExecute() {
+        // if this task is being called by ChannelBrowserFragment, then get the channel the user is browsing
+        channel = videoGridAdapter.getYouTubeChannel();
 
-		if(progressBar != null)
-			progressBar.setVisibility(View.GONE);
-		else
-			LoadingProgressBar.get().hide();
-		if(onFinished != null)
-			onFinished.run();
-	}
+        if (!skipProgressBar) {
+            if (progressBar != null)
+                progressBar.setVisibility(View.VISIBLE);
+            else
+                LoadingProgressBar.get().show();
+        }
+    }
+
+    @Override
+    protected List<YouTubeVideo> doInBackground(Void... params) {
+        List<YouTubeVideo> videosList = null;
+        ArrayList<YouTubeVideo> youTubeVideoList = new ArrayList<>();
+        List<String> blockedChannelIds = new ArrayList<>();
+        final BlockedChannelsDb blockedChannelsDb = BlockedChannelsDb.getBlockedChannelsDb();
+
+        if (!isCancelled()) {
+            // get videos from YouTube
+            videosList = getYouTubeVideos.getNextVideos();
+
+            if (videosList != null && channel != null && channel.isUserSubscribed()) {
+                for (YouTubeVideo video : videosList) {
+                    channel.addYouTubeVideo(video);
+                }
+                SubscriptionsDb.getSubscriptionsDb().saveChannelVideos(channel);
+            }
+        }
+
+        try {
+
+            for (String channelIds : blockedChannelsDb.getBlockedChannelsListId()) {
+                blockedChannelIds.add(channelIds);
+            }
+           /* String channelIds;
+            blockedChannelIds = blockedChannelIds.stream().filter(channelIds -> blockedChannelsDb.getBlockedChannelsListId()).collect(Collectors.toList());
+*/
+            for (YouTubeVideo video : videosList) {
+                if (!blockedChannelIds.contains(video.getChannelId())) {
+                    youTubeVideoList.add(video);
+                }
+            }
+
+        } catch (Exception e) {
+            Log.d(TAG, "doInBackground: " + e.toString());
+        }
+
+        return youTubeVideoList;
+    }
 
 
-	@Override
-	protected void onCancelled() {
-		LoadingProgressBar.get().hide();
-	}
+    @Override
+    protected void onPostExecute(List<YouTubeVideo> youTubeVideoList) {
+        videoGridAdapter.appendList(youTubeVideoList);
+
+        if (progressBar != null)
+            progressBar.setVisibility(View.GONE);
+        else
+            LoadingProgressBar.get().hide();
+        if (onFinished != null)
+            onFinished.run();
+    }
+
+
+    @Override
+    protected void onCancelled() {
+        LoadingProgressBar.get().hide();
+    }
 
 }

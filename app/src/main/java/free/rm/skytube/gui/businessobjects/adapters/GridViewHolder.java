@@ -22,6 +22,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -199,6 +200,11 @@ class GridViewHolder extends RecyclerView.ViewHolder {
 					case R.id.download_video:
 						youTubeVideo.downloadVideo(context);
 						return true;
+					case R.id.block_channel:
+						youTubeVideo.blockChannel(context);
+						Log.d("MENU", "onMenuItemClick: CHANNEL BLOCK CLICKED");
+						Log.d("MENU", "onMenuItemClick: " +youTubeVideo.getChannelName() +
+								" -- "+ youTubeVideo.getChannelId() );
 				}
 				return false;
 			}

@@ -14,11 +14,11 @@ android {
                 '{' +
                         '"AIzaSyBlD0IyrnYDVUklu-lEp5ZPmeUFaKEmz2I",' +
                         '"AIzaSyCBe6h-D27WgcDkX9Wuyb3Fjef6tFja2Eg",' +
-                        '"AIzaSyC2eifJuPidYxsq7NKvZGdTxngFrhbm0G0"'  +
-                '}'
-        buildConfigField 'String', 'SKYTUBE_WEBSITE',         '"http://skytube-app.com"'
+                        '"AIzaSyC2eifJuPidYxsq7NKvZGdTxngFrhbm0G0"' +
+                        '}'
+        buildConfigField 'String', 'SKYTUBE_WEBSITE', '"http://skytube-app.com"'
         buildConfigField 'String', 'SKYTUBE_WEBSITE_CREDITS', '"http://skytube-app.com/credits.html"'
-        buildConfigField 'String', 'SKYTUBE_UPDATES_URL',     '"https://api.github.com/repos/ram-on/SkyTube/releases/latest"'
+        buildConfigField 'String', 'SKYTUBE_UPDATES_URL', '"https://api.github.com/repos/ram-on/SkyTube/releases/latest"'
         vectorDrawables.useSupportLibrary true
         multiDexEnabled true    // this is as we have over 65536 lines of code...
     }
@@ -56,6 +56,7 @@ configurations {
 }
 
 dependencies {
+    implementation 'com.android.support:support-v4:26.1.0'
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
 
@@ -81,6 +82,10 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:27.0.2'
     compile 'com.android.support:cardview-v7:27.0.2'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.android.support:multidex:1.0.2'    // this is as we have over 65536 lines of code...
+    compile 'com.android.support:multidex:1.0.2'
+    // this is as we have over 65536 lines of code...
 }
+
+
+
 
