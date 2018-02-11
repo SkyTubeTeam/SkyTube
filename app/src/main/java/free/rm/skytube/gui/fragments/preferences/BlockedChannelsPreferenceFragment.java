@@ -1,11 +1,15 @@
 package free.rm.skytube.gui.fragments.preferences;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.preference.MultiSelectListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.afollestad.materialdialogs.MaterialDialog;
+
 import java.util.Collection;
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.db.BlockedChannelsDb;
@@ -25,6 +29,9 @@ public class BlockedChannelsPreferenceFragment extends PreferenceFragment {
 
         multiSelectListPreference.setEntries(blockedChannelsName);
         multiSelectListPreference.setEntryValues(blockedChannelsName);
+
+
+
         Log.d("", "onPreferenceClick: " + blockedChannelsDb.getNumberOfBlockedChannels());
 
         multiSelectListPreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
@@ -32,11 +39,8 @@ public class BlockedChannelsPreferenceFragment extends PreferenceFragment {
             public boolean onPreferenceClick(Preference preference) {
                if (blockedChannelsDb.getBlockedChannelsListName().isEmpty()){
                     Toast.makeText(getActivity(), "There is not any blocked channel.", Toast.LENGTH_SHORT).show();
-
-                } else {
-                    Toast.makeText(getActivity(), "Please check the channel you want to unblock, leave the others unchecked", Toast.LENGTH_SHORT).show();
-
                 }
+
                Log.d("", "onPreferenceClick: ");
                 return true;
             }
@@ -46,13 +50,15 @@ public class BlockedChannelsPreferenceFragment extends PreferenceFragment {
             @Override
             public boolean onPreferenceChange(Preference preference, Object o) {
 
+              // new MaterialDialog.Builder(getActivity()).positiveText("Unblock").show();
+
                 Collection<String> selectedNames = (Collection<String>) o;
 
                 for (String channel : selectedNames) {
                     Log.d("", "onPreferenceChange: " + "for loop");
                     blockedChannelsDb.remove(channel);
+                }
 
-                     }
                 Toast.makeText(getActivity(), "Please refresh the main page.", Toast.LENGTH_SHORT).show();
 
                 return true;

@@ -25,5 +25,5 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="pref_blocked_channels_list_key">pref_blocked_channels_list_key</string>
     <string name="pref_blocked_channels_list_title">Blocked Channels</string>
-    <string name="pref_blocked_channels_list_summary">List of the channels you have blocked.</string>
+    <string name="pref_blocked_channels_list_summary">Please check the channels you want to unblock and leave the others unchecked.</string>
 </resources>
