@@ -1,22 +1,22 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources>
-	<string name="error_stream_err_unavailable">Fehlermeldung ist nicht verfügbar.</string>
-	<string name="error_stream_decryption_fail">Entschlüsselungscode für den Youtube-Dienst konnte nicht geladen werden.</string>
+	<string name="error_stream_err_unavailable">Fehlermeldung nicht verfügbar.</string>
+	<string name="error_stream_decryption_fail">Entschlüsselungscode für den YouTube-Dienst konnte nicht geladen werden.</string>
 	<string name="error_stream_parse_error">Fehler beim Parsen.</string>
 
-	<string name="error_video_play">Fehler beim Video abspielen</string>
-	<string name="error_video_streams_empty">Das Video %s hat keine Streams!</string>
+	<string name="error_video_play">Fehler beim abspielen des Videos</string>
+	<string name="error_video_streams_empty">Das Video %s hat keine Streams.</string>
 	<string name="error_video_streams">Beim Abrufen der Video-Streams ist ein Fehler aufgetreten.</string>
 	<string name="error_get_video_desc">Beim Abrufen der Videobeschreibung ist ein Fehler aufgetreten.</string>
 	<string name="error_invalid_url">Ungültige Video URL: %s</string>
 
-	<string name="warning_live_video">Livestreams können derzeit nicht abgespielt werden.  Livestream extern abspielen?</string>
+	<string name="warning_live_video">Livestreams können derzeit nicht abgespielt werden. Livestream in einer anderen Anwendung abspielen?</string>
 
 	<string name="ratings_disabled">Bewertungen deaktiviert</string>
 
 	<string name="loading_video">Lade Video…</string>
 	<string name="get_new_video_steam">Neuer Stream</string>
-	<string name="open_in_browser">Im Browser öffnen</string>
+	<string name="open_in_browser">Im Webbrowser öffnen</string>
 	<string name="open_with">Öffnen mit…</string>
 	<string name="share">Teilen</string>
 	<string name="share_via">Teilen mit</string>
@@ -33,7 +33,7 @@
 	<string name="cancel">Abbrechen</string>
 	<string name="clear">Leeren</string>
 
-	<string name="tutorial_comments_icon">Swipe to the left to view comments.</string>
-	<string name="tutorial_video_info_icon">Swipe to the top to view information about the video.</string>
-	<string name="tutorial_pause_video">Double tap to pause or play a video.</string>
+	<string name="tutorial_comments_icon">Wische nach links um Kommentare zu sehen.</string>
+	<string name="tutorial_video_info_icon">Wische nach oben um Informationen über das Video zu sehen.</string>
+	<string name="tutorial_pause_video">Tippen sie doppelt um das Video zu pausieren oder abzuspielen.</string>
 </resources>
