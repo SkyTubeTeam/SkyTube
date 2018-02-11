@@ -153,23 +153,6 @@ public class YouTubeVideo implements Serializable {
 
 
 	/**
-	 * Returns a list of video/stream meta-data that is supported by this app (with respect to this
-	 * video).
-	 *
-	 * @return A list of {@link StreamMetaDataList}.
-	 */
-	public StreamMetaDataList getVideoStreamList() {
-		StreamMetaDataList streamMetaDataList;
-
-		ParseStreamMetaData streamParser = new ParseStreamMetaData(id);
-		streamMetaDataList = streamParser.getStreamMetaDataList();
-
-		return streamMetaDataList;
-	}
-
-
-
-	/**
 	 * Sets the {@link #thumbsUpPercentageStr}, i.e. the percentage of people that thumbs-up this video
 	 * (format:  "<percentage>%").
 	 *
@@ -442,6 +425,7 @@ public class YouTubeVideo implements Serializable {
 		Toast.makeText(context, R.string.url_copied_to_clipboard, Toast.LENGTH_SHORT).show();
 	}
 
+
 	public void blockChannel(Context context) {
 
 		boolean successBlockChannel = BlockedChannelsDb.getBlockedChannelsDb().add(this);
@@ -453,6 +437,7 @@ public class YouTubeVideo implements Serializable {
 
 	}
 
+  
 	/**
 	 * Get the stream for this Video, based on the user's preference. When done, the stream will be returned
 	 * via the passed GetDesiredStreamListener.
@@ -462,34 +447,6 @@ public class YouTubeVideo implements Serializable {
 		new GetStreamTask(listener).executeInParallel();
 	}
 
-	/**
-	 * AsyncTask to retrieve the desired stream for this Video.
-	 */
-	private class GetStreamTask extends AsyncTaskParallel<Void, Exception, StreamMetaDataList> {
-
-		private GetDesiredStreamListener listener;
-
-		public GetStreamTask(GetDesiredStreamListener listener) {
-			this.listener = listener;
-		}
-
-		@Override
-		protected StreamMetaDataList doInBackground(Void... param) {
-			return getVideoStreamList();
-		}
-
-		@Override
-		protected void onPostExecute(StreamMetaDataList streamMetaDataList) {
-			if (streamMetaDataList == null || streamMetaDataList.size() <= 0) {
-				listener.onGetDesiredStreamError(streamMetaDataList.getErrorMessage());
-			} else {
-				// get the desired stream based on user preferences
-				StreamMetaData desiredStream = streamMetaDataList.getDesiredStream();
-
-				listener.onGetDesiredStream(desiredStream);
-			}
-		}
-	}
 
 	/**
 	 * Remove local copy of this video, and delete it from the VideoDownloads DB
@@ -568,6 +525,53 @@ public class YouTubeVideo implements Serializable {
 
 
 	////////////////////////////////////////////////////////////////////////////////////////////////
+
+	/**
+	 * AsyncTask to retrieve the desired stream for this Video.
+	 */
+	private class GetStreamTask extends AsyncTaskParallel<Void, Exception, StreamMetaDataList> {
+
+		private GetDesiredStreamListener listener;
+
+		GetStreamTask(GetDesiredStreamListener listener) {
+			this.listener = listener;
+		}
+
+		@Override
+		protected StreamMetaDataList doInBackground(Void... param) {
+			return getVideoStreamList();
+		}
+
+		/**
+		 * Returns a list of video/stream meta-data that is supported by this app (with respect to this
+		 * video).
+		 *
+		 * @return A list of {@link StreamMetaDataList}.
+		 */
+		private StreamMetaDataList getVideoStreamList() {
+			StreamMetaDataList streamMetaDataList;
+
+			ParseStreamMetaData streamParser = new ParseStreamMetaData(id);
+			streamMetaDataList = streamParser.getStreamMetaDataList();
+
+			return streamMetaDataList;
+		}
+
+		@Override
+		protected void onPostExecute(StreamMetaDataList streamMetaDataList) {
+			if (streamMetaDataList == null || streamMetaDataList.size() <= 0) {
+				listener.onGetDesiredStreamError(streamMetaDataList.getErrorMessage());
+			} else {
+				// get the desired stream based on user preferences
+				StreamMetaData desiredStream = streamMetaDataList.getDesiredStream();
+
+				listener.onGetDesiredStream(desiredStream);
+			}
+		}
+
+	}
+
+
 
 	/**
 	 * Downloads a YouTube video.

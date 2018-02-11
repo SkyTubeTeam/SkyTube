@@ -18,4 +18,5 @@ Assicurati che l\'applicazione ufficiale di Google (YouTube) sia installata sul 
 	<string name="could_not_get_playlists">Could not get %s playlists.</string>
 
 	<string name="loading">Loading …</string>
+    <string name="could_not_get_channel">Could not download channel information!</string>
 </resources>

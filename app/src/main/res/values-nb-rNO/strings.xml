@@ -16,4 +16,5 @@
 	<string name="could_not_get_playlists">Kunne ikke hente %s spillelister.</string>
 	<string name="loading">Laster…</string>
 	<string name="video">Video</string>
+    <string name="could_not_get_channel">Could not download channel information!</string>
 </resources>
