@@ -86,8 +86,7 @@
 	<string name="pref_title_allow_mobile_downloads">Downloads toestaan over mobiele netwerkverbinding</string>
 	<string name="pref_summary_allow_mobile_downloads">Selecteer dit om downloaden over mobiele netwerkverbindingen in te schakelen i.p.v. alleen over Wi-Fi.</string>
 
-<string name="pref_key_disable_search_history">pref_disable_search_history</string>
 	<string name="pref_title_disable_search_history">Zoekgeschiedenis uitschakelen</string>
 	<string name="pref_summary_disable_search_history">Als dit wordt aangevinkt, dan zal de zoekgeschiedenis worden gewist en niet worden gebruikt.</string>
 	<string name="pref_disable_search_history_deleted">Zoekgeschiedenis gewist.</string>
-	</resources>
+</resources>

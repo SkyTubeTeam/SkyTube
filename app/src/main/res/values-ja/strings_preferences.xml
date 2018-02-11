@@ -94,8 +94,8 @@
 	<string name="pref_summary_allow_mobile_downloads">Select this to enable downloading videos on mobile networks. Otherwise, videos can only be downloaded on Wi-Fi.</string>
 
 	<string name="restart">Restart</string>
-<string name="pref_key_disable_search_history">pref_disable_search_history</string>
+
 	<string name="pref_title_disable_search_history">検索履歴を無効にする</string>
 	<string name="pref_summary_disable_search_history">チェックすると、検索履歴が消去されて、使用されなくなります。</string>
 	<string name="pref_disable_search_history_deleted">検索履歴を削除しました。</string>
-	</resources>
+</resources>

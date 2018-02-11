@@ -86,8 +86,7 @@
 	<string name="pref_title_allow_mobile_downloads">Tillat nedlastinger på mobilnettverk</string>
 	<string name="pref_summary_allow_mobile_downloads">Velg dette for å skru på nedlasting av videoer på mobilnettverk. Ellers kan videoer kun lastes ned på Wi-Fi.</string>
 
-<string name="pref_key_disable_search_history">pref_disable_search_history</string>
 	<string name="pref_title_disable_search_history">Skru av søkehistorikk</string>
 	<string name="pref_summary_disable_search_history">Hvis merket, vil søkehistorikken bli tømt og ikke brukt.</string>
 	<string name="pref_disable_search_history_deleted">Søkehistorikk slettet.</string>
-	</resources>
+</resources>

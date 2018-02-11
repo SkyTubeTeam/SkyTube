@@ -95,8 +95,7 @@
 	<string name="pref_title_allow_mobile_downloads">Permitir descargas em redes móveis</string>
 	<string name="pref_summary_allow_mobile_downloads">Ative esta opção para descarregar vídeos via redes móveis. Caso contrário, apenas poderá descarregar vídeos através de Wi-Fi.</string>
 
-<string name="pref_key_disable_search_history">pref_disable_search_history</string>
 	<string name="pref_title_disable_search_history">Desativar histórico de pesquisas</string>
 	<string name="pref_summary_disable_search_history">Se ativa, o histórico de pesquisas não será utilizado.</string>
 	<string name="pref_disable_search_history_deleted">Histórico removido.</string>
-	</resources>
+</resources>
