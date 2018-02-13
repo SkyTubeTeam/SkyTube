@@ -26,17 +26,16 @@ For screenshots and more information, please visit [www.skytube-app.com](http://
 
 ## Download
 ### Download SkyTube Extra
-[![Download SkyTube Extra APK](screenshots/download_apk.png)](https://github.com/ram-on/SkyTube/releases/download/v2.81/SkyTube-Extra-2.81.apk)
 
-Open source app with extra features.  These extra features use third-party closed source libraries:
-* YouTubeAndroidPlayerApi.jar (optional usage)
+| Feature          | SkyTube Extra                      | SkyTube  |
+| ---------------- |------------------------------------| ---------|
+| Description      | Contains extra features that are powered by non-OSS libraries. | Fully open-source and free software. |
+| GPLv3 license                    | ✅                   | ✅       |
+| Official YouTube player support* | ✅                   | ❌       |
+| Updates availability             | Immediate            | Normally up to 5 days |
+| Download APK                     | [![Download SkyTube Extra APK](screenshots/download_apk.png)](https://github.com/ram-on/SkyTube/releases/download/v2.81/SkyTube-Extra-2.81.apk) | [![Download SkyTube (Vanilla) APK](https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Get_it_on_F-Droid.svg/200px-Get_it_on_F-Droid.svg.png)](https://f-droid.org/repository/browse/?fdid=free.rm.skytube.oss)
 
-Updates are published immediately: the app will notify you whenever there is an update.
-
-### Download SkyTube (Vanilla)
-[![Download SkyTube (Vanilla) APK](https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Get_it_on_F-Droid.svg/200px-Get_it_on_F-Droid.svg.png)](https://f-droid.org/repository/browse/?fdid=free.rm.skytube.oss)
-
-Pure open-source version.  Updates normally take up to 3 days to be available to users.
+_* powered by a closed-source, third party library._
 
 ## Why SkyTube?
 * Free and Open Source
