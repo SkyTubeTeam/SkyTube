@@ -25,8 +25,6 @@ More features will be added in the near future.
 For screenshots and more information, please visit [www.skytube-app.com](http://www.skytube-app.com).
 
 ## Download
-### Download SkyTube Extra
-
 | Feature          | SkyTube Extra                      | SkyTube  |
 | ---------------- |------------------------------------| ---------|
 | Description      | Contains extra features that are powered by non-OSS libraries. | Fully open-source and free software. |
