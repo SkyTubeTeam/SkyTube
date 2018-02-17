@@ -110,10 +110,6 @@ public class BookmarksDb extends SQLiteOpenHelperEx implements OrderableDatabase
 	 * @return True if the video has been unbookmarked; false otherwise.
 	 */
 	public boolean remove(YouTubeVideo video) {
-		getWritableDatabase().delete(BookmarksTable.TABLE_NAME,
-						BookmarksTable.COL_YOUTUBE_VIDEO_ID + " = ?",
-						new String[]{video.getId()});
-
 		int rowsDeleted = getWritableDatabase().delete(BookmarksTable.TABLE_NAME,
 						BookmarksTable.COL_YOUTUBE_VIDEO_ID + " = ?",
 						new String[]{video.getId()});
