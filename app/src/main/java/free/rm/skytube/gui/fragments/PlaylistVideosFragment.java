@@ -42,9 +42,6 @@ public class PlaylistVideosFragment extends VideosGridFragment {
 		// sets the play list
 		youTubePlaylist = (YouTubePlaylist)getArguments().getSerializable(PLAYLIST_OBJ);
 
-		// sets the layout resource which is used by onCreateView()
-		setLayoutResource(R.layout.fragment_playlist_videos);
-
 		View view = super.onCreateView(inflater, container, savedInstanceState);
 
 		ButterKnife.bind(this, view);
@@ -74,6 +71,11 @@ public class PlaylistVideosFragment extends VideosGridFragment {
 		return view;
 	}
 
+
+	@Override
+	protected int getLayoutResource() {
+		return R.layout.fragment_playlist_videos;
+	}
 
 	@Override
 	public String getFragmentName() {

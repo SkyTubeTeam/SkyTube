@@ -18,7 +18,6 @@
 package free.rm.skytube.gui.fragments;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -40,24 +39,12 @@ import free.rm.skytube.gui.businessobjects.fragments.BaseVideosGridFragment;
 public abstract class VideosGridFragment extends BaseVideosGridFragment {
 
 	protected RecyclerView	gridView;
-	private View			progressBar = null;
-	private int 			layoutResource = 0;
-
-
-	@Override
-	public void onCreate(@Nullable Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setLayoutResource(R.layout.videos_gridview);
-	}
 
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		// inflate the layout for this fragment
-		View view = inflater.inflate(layoutResource, container, false);
-
-		// set up the loading progress bar
-		progressBar = view.findViewById(R.id.loading_progress_bar);
+		View view = super.onCreateView(inflater, container, savedInstanceState);
 
 		// setup the video grid view
 		gridView = view.findViewById(R.id.grid_view);
@@ -66,7 +53,7 @@ public abstract class VideosGridFragment extends BaseVideosGridFragment {
 		} else {
 			videoGridAdapter.setContext(getActivity());
 		}
-		videoGridAdapter.setProgressBar(progressBar);
+		videoGridAdapter.setSwipeRefreshLayout(swipeRefreshLayout);
 
 		if (getVideoCategory() != null)
 			videoGridAdapter.setVideoCategory(getVideoCategory(), getSearchString());
@@ -87,11 +74,10 @@ public abstract class VideosGridFragment extends BaseVideosGridFragment {
 		Glide.get(getActivity()).clearMemory();
 	}
 
-	/**
-	 * In case a subclass of VideosGridFragment wants to use an alternate layout resource (e.g. Subscriptions).
- 	 */
-	protected void setLayoutResource(int layoutResource) {
-		this.layoutResource = layoutResource;
+
+	@Override
+	protected int getLayoutResource() {
+		return R.layout.videos_gridview;
 	}
 
 
@@ -113,4 +99,5 @@ public abstract class VideosGridFragment extends BaseVideosGridFragment {
 	 * @return The fragment/tab name/title.
 	 */
 	public abstract String getFragmentName();
+
 }

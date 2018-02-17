@@ -232,7 +232,7 @@ public abstract class OnSwipeTouchListener implements View.OnTouchListener {
 		 * Here we decide in what place of the screen user should swipe to get a new brightness value.
 		 */
 		private Rect getBrightnessRect() {
-			return new Rect(0, 0, viewRect().right / 2, viewRect().bottom);
+			return new Rect(viewRect().right / 2, 0, viewRect().right, viewRect().bottom);
 		}
 
 
@@ -240,7 +240,7 @@ public abstract class OnSwipeTouchListener implements View.OnTouchListener {
 		 * Here we decide in what place of the screen user should swipe to get a new volume value.
 		 */
 		private Rect getVolumeRect() {
-			return new Rect(viewRect().right / 2, 0, viewRect().right, viewRect().bottom);
+			return new Rect(0, 0, viewRect().right / 2, viewRect().bottom);
 		}
 
 
