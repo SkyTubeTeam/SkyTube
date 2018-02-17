@@ -41,8 +41,6 @@ public class BookmarksFragment extends OrderableVideosGridFragment implements Bo
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		videoGridAdapter = new OrderableVideoGridAdapter(getActivity(), BookmarksDb.getBookmarksDb());
-//		setDatabase(BookmarksDb.getBookmarksDb());
-		setLayoutResource(R.layout.fragment_bookmarks);
 	}
 
 	@Override
@@ -76,15 +74,24 @@ public class BookmarksFragment extends OrderableVideosGridFragment implements Bo
 			videoGridAdapter.refresh();
 	}
 
+
+	@Override
+	protected int getLayoutResource() {
+		return R.layout.fragment_bookmarks;
+	}
+
+
 	@Override
 	protected VideoCategory getVideoCategory() {
 		return VideoCategory.BOOKMARKS_VIDEOS;
 	}
 
+
 	@Override
 	public String getFragmentName() {
 		return SkyTubeApp.getStr(R.string.bookmarks);
 	}
+
 
 	////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -119,4 +126,5 @@ public class BookmarksFragment extends OrderableVideosGridFragment implements Bo
 		}
 
 	}
+
 }

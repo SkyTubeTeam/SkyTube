@@ -18,9 +18,12 @@
 package free.rm.skytube.gui.businessobjects.fragments;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,26 +36,33 @@ import free.rm.skytube.gui.fragments.VideosGridFragment;
  */
 public abstract class BaseVideosGridFragment extends TabFragment implements SwipeRefreshLayout.OnRefreshListener {
 
-	protected VideoGridAdapter videoGridAdapter;
+	protected VideoGridAdapter  videoGridAdapter;
 
 	@BindView(R.id.swipeRefreshLayout)
 	protected SwipeRefreshLayout swipeRefreshLayout;
 
+
+	@Nullable
 	@Override
-	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-		super.onViewCreated(view, savedInstanceState);
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		View view = inflater.inflate(getLayoutResource(), container, false);
+
 		ButterKnife.bind(this, view);
 		swipeRefreshLayout.setOnRefreshListener(this);
+
+		return view;
 	}
+
 
 	@Override
 	public void onRefresh() {
-		videoGridAdapter.refresh(new Runnable() {
-			@Override
-			public void run() {
-				swipeRefreshLayout.setRefreshing(false);
-			}
-		});
+		videoGridAdapter.refresh(true);
 	}
+
+
+	/**
+	 * Set the layout resource (e.g. Subscriptions resource layout, R.id.grid_view, ...etc).
+	 */
+	protected  abstract int getLayoutResource();
 
 }

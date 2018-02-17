@@ -55,16 +55,34 @@ public class SearchHistoryDb extends SQLiteOpenHelperEx {
 		getWritableDatabase().delete(SearchHistoryTable.TABLE_NAME, null, null);
 	}
 
+
 	/**
 	 * Save a search text into the DB.
 	 *
 	 * @param text  Text the user just searched for.
 	 */
 	public void insertSearchText(String text) {
-		ContentValues values = new ContentValues();
-		values.put(SearchHistoryTable.COL_SEARCH_TEXT, text);
-		getWritableDatabase().insert(SearchHistoryTable.TABLE_NAME, null, values);
+		if (!isSearchTextAlreadyStored(text)) {
+			ContentValues values = new ContentValues();
+			values.put(SearchHistoryTable.COL_SEARCH_TEXT, text);
+			getWritableDatabase().insert(SearchHistoryTable.TABLE_NAME, null, values);
+		}
 	}
+
+
+	/**
+	 * Return true if the given search text has already been stored in the database.
+	 *
+	 * @param text  Search text
+	 * @return True if the given search text has already been stored in the database; false otherwise.
+	 */
+	private boolean isSearchTextAlreadyStored(String text) {
+		Cursor  cursor = getSearchCursor(text, true);
+		boolean	isSearchTextAlreadyStored = cursor.moveToNext();
+		cursor.close();
+		return isSearchTextAlreadyStored;
+	}
+
 
 	/**
 	 * Given a search string, it will return a cursor contain text strings which start as the given
@@ -74,14 +92,34 @@ public class SearchHistoryDb extends SQLiteOpenHelperEx {
 	 * @return              A cursor containing texts which starts with the contents of searchText.
 	 */
 	public Cursor getSearchCursor(String searchText) {
+		return getSearchCursor(searchText, false);
+	}
+
+
+	/**
+	 * Given a search string, it will return a cursor contain text strings which start as the given
+	 * searchText.
+	 *
+	 * @param searchText        Text the user has typed.
+	 * @param exactTextSearch   If set to true, it will only return items whose COL_SEARCH_TEXT's
+	 *                          data is identical to the given searchText.
+	 *
+	 * @return                  A cursor containing texts which starts with the contents of searchText.
+	 */
+	private Cursor getSearchCursor(String searchText, boolean exactTextSearch) {
+		String searchClause = exactTextSearch
+				? String.format(" = '%s'", searchText)
+				: String.format(" LIKE '%s%%'", searchText);
+
 		return getReadableDatabase().query(SearchHistoryTable.TABLE_NAME,
 				new String[] {SearchHistoryTable.COL_SEARCH_ID, SearchHistoryTable.COL_SEARCH_TEXT},
-				SearchHistoryTable.COL_SEARCH_TEXT+" LIKE '"+ searchText +"%'",
+				SearchHistoryTable.COL_SEARCH_TEXT + searchClause,
 				null,
 				null,
 				null,
-				null);
+				SearchHistoryTable.COL_SEARCH_TEXT + " ASC");
 	}
+
 
 	/**
 	 * Delete a previously searched text.
