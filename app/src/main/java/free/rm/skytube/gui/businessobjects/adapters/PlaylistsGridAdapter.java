@@ -28,9 +28,9 @@ import java.io.IOException;
 
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.YouTube.GetChannelPlaylists;
-import free.rm.skytube.businessobjects.YouTube.Tasks.GetChannelPlaylistsTask;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubePlaylist;
+import free.rm.skytube.businessobjects.YouTube.Tasks.GetChannelPlaylistsTask;
 import free.rm.skytube.gui.businessobjects.PlaylistClickListener;
 
 /**

@@ -17,7 +17,7 @@
 
 package free.rm.skytube.businessobjects.YouTube.Tasks;
 
-import android.view.View;
+import android.support.v4.widget.SwipeRefreshLayout;
 
 import java.util.List;
 
@@ -26,7 +26,6 @@ import free.rm.skytube.businessobjects.YouTube.GetYouTubeVideos;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
-import free.rm.skytube.gui.businessobjects.LoadingProgressBar;
 import free.rm.skytube.gui.businessobjects.adapters.VideoGridAdapter;
 
 /**
@@ -40,26 +39,11 @@ public class GetYouTubeVideosTask extends AsyncTaskParallel<Void, Void, List<You
 	/** The Adapter where the retrieved videos will be displayed. */
 	private VideoGridAdapter	videoGridAdapter;
 
-	/** Class tag. */
-	private static final String TAG = GetYouTubeVideosTask.class.getSimpleName();
-
-	/** Optional non-static progressBar. If this isn't set, a static one will be used */
-	private View progressBar = null;
-
-	/** Whether or not to skip showing the progress bar. This is needed when doing swipe to refresh, since that functionality shows its own progress bar. */
-	private boolean skipProgressBar = false;
-
-	/** Runnable to be run when this task completes */
-	private Runnable onFinished;
+	/** SwipeRefreshLayout will be used to display the progress bar */
+	private SwipeRefreshLayout  swipeRefreshLayout;
 
 	private YouTubeChannel channel;
 
-
-	public GetYouTubeVideosTask(GetYouTubeVideos getYouTubeVideos, VideoGridAdapter videoGridAdapter, View progressBar) {
-		this.getYouTubeVideos = getYouTubeVideos;
-		this.videoGridAdapter = videoGridAdapter;
-		this.progressBar = progressBar;
-	}
 
 	/**
 	 * Constructor to get youtube videos as part of a swipe to refresh. Since this functionality has its own progress bar, we'll
@@ -67,15 +51,11 @@ public class GetYouTubeVideosTask extends AsyncTaskParallel<Void, Void, List<You
 	 *
 	 * @param getYouTubeVideos The object that does the actual fetching of videos.
 	 * @param videoGridAdapter The grid adapter the videos will be added to.
-	 * @param onFinished
 	 */
-	public GetYouTubeVideosTask(GetYouTubeVideos getYouTubeVideos, VideoGridAdapter videoGridAdapter, Runnable onFinished) {
+	public GetYouTubeVideosTask(GetYouTubeVideos getYouTubeVideos, VideoGridAdapter videoGridAdapter, SwipeRefreshLayout swipeRefreshLayout) {
 		this.getYouTubeVideos = getYouTubeVideos;
 		this.videoGridAdapter = videoGridAdapter;
-		this.skipProgressBar = true;
-		this.onFinished = onFinished;
-		this.getYouTubeVideos.reset();
-		this.videoGridAdapter.clearList();
+		this.swipeRefreshLayout = swipeRefreshLayout;
 	}
 
 
@@ -84,13 +64,10 @@ public class GetYouTubeVideosTask extends AsyncTaskParallel<Void, Void, List<You
 		// if this task is being called by ChannelBrowserFragment, then get the channel the user is browsing
 		channel = videoGridAdapter.getYouTubeChannel();
 
-		if(!skipProgressBar) {
-			if (progressBar != null)
-				progressBar.setVisibility(View.VISIBLE);
-			else
-				LoadingProgressBar.get().show();
-		}
+		if (swipeRefreshLayout != null)
+			swipeRefreshLayout.setRefreshing(true);
 	}
+
 
 	@Override
 	protected List<YouTubeVideo> doInBackground(Void... params) {
@@ -117,18 +94,15 @@ public class GetYouTubeVideosTask extends AsyncTaskParallel<Void, Void, List<You
 	protected void onPostExecute(List<YouTubeVideo> videosList) {
 		videoGridAdapter.appendList(videosList);
 
-		if(progressBar != null)
-			progressBar.setVisibility(View.GONE);
-		else
-			LoadingProgressBar.get().hide();
-		if(onFinished != null)
-			onFinished.run();
+		if(swipeRefreshLayout != null)
+			swipeRefreshLayout.setRefreshing(false);
 	}
 
 
 	@Override
 	protected void onCancelled() {
-		LoadingProgressBar.get().hide();
+		if(swipeRefreshLayout != null)
+			swipeRefreshLayout.setRefreshing(false);
 	}
 
 }

@@ -18,6 +18,7 @@
 package free.rm.skytube.gui.businessobjects.adapters;
 
 import android.content.Context;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,11 +28,11 @@ import android.widget.Toast;
 import java.io.IOException;
 
 import free.rm.skytube.R;
-import free.rm.skytube.businessobjects.YouTube.GetYouTubeVideos;
-import free.rm.skytube.businessobjects.YouTube.Tasks.GetYouTubeVideosTask;
 import free.rm.skytube.businessobjects.VideoCategory;
+import free.rm.skytube.businessobjects.YouTube.GetYouTubeVideos;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
+import free.rm.skytube.businessobjects.YouTube.Tasks.GetYouTubeVideosTask;
 import free.rm.skytube.gui.businessobjects.MainActivityListener;
 
 /**
@@ -54,7 +55,8 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<YouTubeVideo, GridVi
 	 *  RM:  This is only set and used by ChannelBrowserFragment */
 	private YouTubeChannel			youTubeChannel;
 
-	private View					progressBar = null;
+	/** Holds a progress bar */
+	private SwipeRefreshLayout      swipeRefreshLayout = null;
 
 	private static final String TAG = VideoGridAdapter.class.getSimpleName();
 
@@ -127,7 +129,7 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<YouTubeVideo, GridVi
 			this.currentVideoCategory = videoCategory;
 
 			// get the videos from the web asynchronously
-			new GetYouTubeVideosTask(getYouTubeVideos, this, progressBar).executeInParallel();
+			new GetYouTubeVideosTask(getYouTubeVideos, this, swipeRefreshLayout).executeInParallel();
 		} catch (IOException e) {
 			Log.e(TAG, "Could not init " + videoCategory, e);
 			Toast.makeText(getContext(),
@@ -150,18 +152,25 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<YouTubeVideo, GridVi
 	 * Refresh the video grid, by running the task to get the videos again.
 	 */
 	public void refresh() {
-		refresh(null);
+		refresh(false);
 	}
 
 
 	/**
 	 * Refresh the video grid, by running the task to get the videos again.
 	 *
-	 * @param onFinished Runnable to run when the task completes.
+	 * @param clearVideosList If set to true, it will clear out any previously loaded videos (found
+	 *                        in this adapter).
 	 */
-	public void refresh(Runnable onFinished) {
-		if (getYouTubeVideos != null)
-			new GetYouTubeVideosTask(getYouTubeVideos, this, onFinished).executeInParallel();
+	public void refresh(boolean clearVideosList) {
+		if (getYouTubeVideos != null) {
+			if (clearVideosList) {
+				getYouTubeVideos.reset();
+				clearList();
+			}
+
+			new GetYouTubeVideosTask(getYouTubeVideos, this, swipeRefreshLayout).executeInParallel();
+		}
 	}
 
 
@@ -175,13 +184,14 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<YouTubeVideo, GridVi
 		if (position >= getItemCount() - 1) {
 			Log.w(TAG, "BOTTOM REACHED!!!");
 			if(getYouTubeVideos != null)
-				new GetYouTubeVideosTask(getYouTubeVideos, this, progressBar).executeInParallel();
+				new GetYouTubeVideosTask(getYouTubeVideos, this, swipeRefreshLayout).executeInParallel();
 		}
 
 	}
 
-	public void setProgressBar(View progressBar) {
-		this.progressBar = progressBar;
+
+	public void setSwipeRefreshLayout(SwipeRefreshLayout swipeRefreshLayout) {
+		this.swipeRefreshLayout = swipeRefreshLayout;
 	}
 
 	public void setYouTubeChannel(YouTubeChannel youTubeChannel) {
@@ -191,4 +201,5 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<YouTubeVideo, GridVi
 	public YouTubeChannel getYouTubeChannel() {
 		return youTubeChannel;
 	}
+
 }
