@@ -19,11 +19,6 @@
 	<string name="pref_key_use_offical_player" translatable="false">pref_use_official_youtube_player</string>
 	<string name="pref_summary_use_offical_player">Not recommended</string>
 
-	<string name="pref_blocked_channel_key">pref_blocked_channel_key</string>
-	<string name="pref_blocked_channel_title">Manage Blocked Channels</string>
-	<string name="pref_blocked_channel_summary">You can unblock previously blocked channels.</string>
-	<string name="pref_blocked_channel_category">Blocked Channel</string>
-
 	<string name="pref_backup_category">Backups</string>
 	<string name="pref_title_backup_dbs">Backup Databases</string>
 	<string name="pref_key_backup_dbs" translatable="false">pref_key_backup_db</string>
@@ -501,4 +496,9 @@
 	<string name="restart">Restart</string>
 
 	<string name="pref_key_brightness_level" translatable="false">pref_key_brightness_level</string>
+
+	<string name="pref_blocked_channel_category">Blocked Channels</string>
+	<string name="pref_key_blocked_channels_list" translatable="false">pref_blocked_channels_list_key</string>
+	<string name="pref_title_blocked_channels_list">Blocked Channels</string>
+	<string name="pref_summary_blocked_channels_list">Check the channels you want to unblock and leave the others unchecked.</string>
 </resources>
