@@ -121,10 +121,6 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 	 * @return True if the operation was successful; false otherwise.
 	 */
 	public boolean unsubscribe(YouTubeChannel channel) {
-		getWritableDatabase().delete(SubscriptionsVideosTable.TABLE_NAME,
-						SubscriptionsVideosTable.COL_CHANNEL_ID + " = ?",
-						new String[]{channel.getId()});
-
 		int rowsDeleted = getWritableDatabase().delete(SubscriptionsTable.TABLE_NAME,
 				SubscriptionsTable.COL_CHANNEL_ID + " = ?",
 				new String[]{channel.getId()});

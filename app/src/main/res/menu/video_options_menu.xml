@@ -1,11 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-	<item android:id="@+id/menu_open_video_with" android:title="@string/open_with"></item>
-	<item android:id="@+id/share" android:title="@string/share_via"></item>
-	<item android:id="@+id/copyurl" android:title="@string/copy_url"></item>
-	<item android:id="@+id/bookmark_video" android:title="@string/bookmark"></item>
-	<item android:id="@+id/unbookmark_video" android:visible="false" android:title="@string/unbookmark"></item>
-	<item android:id="@+id/view_thumbnail" android:title="@string/view_thumbnail"></item>
-	<item android:id="@+id/download_video" android:title="@string/download_video"></item>
-	<item android:id="@+id/delete_download" android:visible="false" android:title="@string/delete_download"></item>
+    <item
+        android:id="@+id/menu_open_video_with"
+        android:title="@string/open_with"></item>
+    <item
+        android:id="@+id/share"
+        android:title="@string/share_via"></item>
+    <item
+        android:id="@+id/copyurl"
+        android:title="@string/copy_url"></item>
+    <item
+        android:id="@+id/bookmark_video"
+        android:title="@string/bookmark"></item>
+    <item
+        android:id="@+id/unbookmark_video"
+        android:title="@string/unbookmark"
+        android:visible="false"></item>
+    <item
+        android:id="@+id/view_thumbnail"
+        android:title="@string/view_thumbnail"></item>
+    <item
+        android:id="@+id/download_video"
+        android:title="@string/download_video"></item>
+    <item
+        android:id="@+id/delete_download"
+        android:title="@string/delete_download"
+        android:visible="false"></item>
+    <item
+        android:id="@+id/block_channel"
+        android:title="@string/block_channel"></item>
 </menu>
