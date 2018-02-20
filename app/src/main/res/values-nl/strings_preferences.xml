@@ -93,6 +93,8 @@
 \n</string>
 	<string name="pref_blocked_channel_title">Geblokkeerde kanalen beheren</string>
 	<string name="pref_blocked_channel_summary">U kunt eerder geblokkeerde kanalen deblokkeren.</string>
-	<string name="pref_blocked_channel_category">Geblokkeerd kanaal</string>
+	<string name="pref_blocked_channel_category">Geblokkeerde kanalen</string>
 
-	</resources>
+	<string name="pref_title_blocked_channels_list">Geblokkeerde kanalen</string>
+	<string name="pref_summary_blocked_channels_list">Vink alleen de kanalen aan die u wilt deblokkeren.</string>
+</resources>
