@@ -22,24 +22,42 @@ import android.app.AlarmManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.support.multidex.MultiDexApplication;
-import android.support.v4.content.IntentCompat;
+import android.support.v7.app.AlertDialog;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.klinker.android.link_builder.Link;
+import com.klinker.android.link_builder.LinkBuilder;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.FeedUpdaterReceiver;
+import free.rm.skytube.businessobjects.GetPlaylistTask;
+import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubePlaylist;
+import free.rm.skytube.gui.activities.MainActivity;
+import free.rm.skytube.gui.businessobjects.PlaylistClickListener;
+import free.rm.skytube.gui.businessobjects.YouTubePlayer;
+import free.rm.skytube.gui.businessobjects.YouTubePlaylistListener;
+import free.rm.skytube.gui.fragments.PlaylistVideosFragment;
 
 /**
  * SkyTube application.
@@ -209,6 +227,94 @@ public class SkyTubeApp extends MultiDexApplication {
 		if(interval > 0) {
 			alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime()+interval, interval, pendingIntent);
 		}
+	}
+
+	/**
+	 * Linkify the text inside the passed TextView, but intercept certain kinds of urls, to instead open them
+	 * from within the app itself (i.e. YouTube video urls, playlist urls, etc). Also, capture all long clicks
+	 * to show a menu to open, copy, or share the url.
+	 * @param context The Activity context (this is needed instead of getContext(), in order to display the long click menu.
+	 * @param textView The TextView whose contents will be modified
+	 * @param youTubePlaylistListener	A Listener to handle a clicked link to a YouTube Playlist
+	 */
+	public static void interceptYouTubeLinks(final Context context, TextView textView, final YouTubePlaylistListener youTubePlaylistListener) {
+		Link link = new Link(android.util.Patterns.WEB_URL);
+		final Pattern videoPattern = Pattern.compile("http(?:s?):\\/\\/(?:www\\.)?youtu(?:be\\.com\\/watch\\?v=|\\.be\\/)([\\w\\-\\_]*)(&(amp;)?\u200C\u200B[\\w\\?\u200C\u200B=]*)?");
+		final Pattern playlistPattern = Pattern.compile("^.*(youtu.be\\/|list=)([^#\\&\\?]*).*");
+		link.setOnClickListener(new Link.OnClickListener() {
+			@Override
+			public void onClick(String clickedText) {
+				final Matcher playlistMatcher = playlistPattern.matcher(clickedText);
+				if(videoPattern.matcher(clickedText).matches()) {
+					YouTubePlayer.launch(clickedText, context);
+				} else if(playlistMatcher.find()) {
+					String playlistId = playlistMatcher.group(2);
+					// Retrieve the playlist from the playlist ID that was in the url the user clicked on
+					new GetPlaylistTask(playlistId, new PlaylistClickListener() {
+						@Override
+						public void onClickPlaylist(YouTubePlaylist playlist) {
+							if (youTubePlaylistListener != null) {
+								youTubePlaylistListener.onYouTubePlaylist(playlist);
+							} else {
+								// Pass the clicked playlist to PlaylistVideosFragment.
+								Intent playlistIntent = new Intent(context, MainActivity.class);
+								playlistIntent.setAction(MainActivity.ACTION_VIEW_PLAYLIST);
+								playlistIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+								playlistIntent.putExtra(PlaylistVideosFragment.PLAYLIST_OBJ, playlist);
+								context.startActivity(playlistIntent);
+							}
+						}
+					}).executeInParallel();
+				} else {
+					Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(clickedText));
+					browserIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+					context.startActivity(browserIntent);
+				}
+			}
+		});
+
+		// Handle long click by showing a dialog allowing the user to open the link in a browser, copy the url, or share it.
+		link.setOnLongClickListener(new Link.OnLongClickListener() {
+			@Override
+			public void onLongClick(final String clickedText) {
+				AlertDialog.Builder builder = new AlertDialog.Builder(context)
+								.setTitle(clickedText)
+								.setItems(new CharSequence[]
+										{getStr(R.string.open_in_browser), getStr(R.string.copy_url), getStr(R.string.share_via)},
+										new DialogInterface.OnClickListener() {
+											@Override
+											public void onClick(DialogInterface dialog, int which) {
+												switch (which) {
+													case 0:
+														Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(clickedText));
+														browserIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+														context.startActivity(browserIntent);
+														break;
+													case 1:
+														ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+														ClipData clip = ClipData.newPlainText("URL", clickedText);
+														clipboard.setPrimaryClip(clip);
+														Toast.makeText(context, R.string.url_copied_to_clipboard, Toast.LENGTH_SHORT).show();
+														break;
+													case 2:
+														Intent intent = new Intent(android.content.Intent.ACTION_SEND);
+														intent.setType("text/plain");
+														intent.putExtra(android.content.Intent.EXTRA_TEXT, clickedText);
+														context.startActivity(Intent.createChooser(intent, context.getString(R.string.share_via)));
+														break;
+												}
+											}
+										});
+								builder.create().show();
+			}
+		});
+		LinkBuilder.on(textView)
+			.addLink(link)
+			.build();
+	}
+
+	public static void interceptYouTubeLinks(Context context, TextView textView) {
+		interceptYouTubeLinks(context, textView, null);
 	}
 
 }
