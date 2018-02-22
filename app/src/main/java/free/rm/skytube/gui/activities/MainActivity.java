@@ -117,12 +117,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 				YouTubeChannel channel = (YouTubeChannel) getIntent().getSerializableExtra(ChannelBrowserFragment.CHANNEL_OBJ);
 				onChannelClick(channel);
 			} else if(ACTION_VIEW_PLAYLIST.equals(action)) {
-				// Set up the MainFragment, if needed, and add it to the backstack, so that when the user exits from the playlist whose url they just
-				// clicked on, they return to the Main Screen of the app.
-				if(mainFragment == null) {
-					mainFragment = new MainFragment();
-					getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, mainFragment).commit();
-				}
+				dontAddToBackStack = true;
 				YouTubePlaylist playlist = (YouTubePlaylist)getIntent().getSerializableExtra(PlaylistVideosFragment.PLAYLIST_OBJ);
 				onPlaylistClick(playlist);
 			} else {

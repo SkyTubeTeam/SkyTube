@@ -52,11 +52,15 @@ import java.util.regex.Pattern;
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.FeedUpdaterReceiver;
 import free.rm.skytube.businessobjects.GetPlaylistTask;
+import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
+import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannelInterface;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubePlaylist;
+import free.rm.skytube.businessobjects.YouTube.Tasks.GetYouTubeChannelInfoTask;
 import free.rm.skytube.gui.activities.MainActivity;
 import free.rm.skytube.gui.businessobjects.PlaylistClickListener;
 import free.rm.skytube.gui.businessobjects.YouTubePlayer;
 import free.rm.skytube.gui.businessobjects.YouTubePlaylistListener;
+import free.rm.skytube.gui.fragments.ChannelBrowserFragment;
 import free.rm.skytube.gui.fragments.PlaylistVideosFragment;
 
 /**
@@ -241,10 +245,12 @@ public class SkyTubeApp extends MultiDexApplication {
 		Link link = new Link(android.util.Patterns.WEB_URL);
 		final Pattern videoPattern = Pattern.compile("http(?:s?):\\/\\/(?:www\\.)?youtu(?:be\\.com\\/watch\\?v=|\\.be\\/)([\\w\\-\\_]*)(&(amp;)?\u200C\u200B[\\w\\?\u200C\u200B=]*)?");
 		final Pattern playlistPattern = Pattern.compile("^.*(youtu.be\\/|list=)([^#\\&\\?]*).*");
+		final Pattern channelPattern = Pattern.compile("(?:https|http)\\:\\/\\/(?:[\\w]+\\.)?youtube\\.com\\/(?:c\\/|channel\\/|user\\/)?([a-zA-Z0-9\\-]{1,})");
 		link.setOnClickListener(new Link.OnClickListener() {
 			@Override
 			public void onClick(String clickedText) {
 				final Matcher playlistMatcher = playlistPattern.matcher(clickedText);
+				final Matcher channelMatcher = channelPattern.matcher(clickedText);
 				if(videoPattern.matcher(clickedText).matches()) {
 					YouTubePlayer.launch(clickedText, context);
 				} else if(playlistMatcher.find()) {
@@ -259,12 +265,22 @@ public class SkyTubeApp extends MultiDexApplication {
 								// Pass the clicked playlist to PlaylistVideosFragment.
 								Intent playlistIntent = new Intent(context, MainActivity.class);
 								playlistIntent.setAction(MainActivity.ACTION_VIEW_PLAYLIST);
-								playlistIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
 								playlistIntent.putExtra(PlaylistVideosFragment.PLAYLIST_OBJ, playlist);
 								context.startActivity(playlistIntent);
 							}
 						}
 					}).executeInParallel();
+				} else if(channelMatcher.find()) {
+					String username = channelMatcher.group(1);
+					new GetYouTubeChannelInfoTask(getContext(), new YouTubeChannelInterface() {
+						@Override
+						public void onGetYouTubeChannel(YouTubeChannel youTubeChannel) {
+							Intent channelIntent = new Intent(context, MainActivity.class);
+							channelIntent.setAction(MainActivity.ACTION_VIEW_CHANNEL);
+							channelIntent.putExtra(ChannelBrowserFragment.CHANNEL_OBJ, youTubeChannel);
+							context.startActivity(channelIntent);
+						}
+					}).setUsingUsername().executeInParallel(username);
 				} else {
 					Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(clickedText));
 					browserIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
