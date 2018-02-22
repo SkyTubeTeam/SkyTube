@@ -19,6 +19,7 @@ import android.text.util.Linkify;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
@@ -375,6 +376,15 @@ public class SubscriptionsBackupsManager {
 						.contentColorRes(R.color.dialog_content_text)
 						.positiveText(R.string.select_xml_file)
 						.positiveColorRes(R.color.dialog_positive_text)
+				.checkBoxPrompt("Unsubscribe from all the channels", false, new CompoundButton.OnCheckedChangeListener() {
+					@Override
+					public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+						if (b){
+						boolean ba =	SubscriptionsDb.getSubscriptionsDb().unsubscribeFromAllChannels();
+							Log.d(TAG, "onCheckedChanged: " + ba);
+						}
+					}
+				})
 						.onPositive(new MaterialDialog.SingleButtonCallback() {
 							@Override
 							public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {

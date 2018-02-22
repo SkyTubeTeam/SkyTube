@@ -20,6 +20,7 @@ package free.rm.skytube.gui.activities;
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.util.Log;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
@@ -46,6 +47,7 @@ public class YouTubePlayerActivity extends BackButtonActivity {
 		if("portrait".equals(str)) orientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT;
 		if("sensor".equals(str)) orientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR;
 		setRequestedOrientation(orientation);
+		Log.d("YTPActivity", "onStart:  I AM HERE");
 	}
 
 	@Override

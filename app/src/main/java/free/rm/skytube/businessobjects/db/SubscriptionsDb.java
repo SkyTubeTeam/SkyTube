@@ -21,6 +21,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -35,6 +36,7 @@ import java.util.Date;
 import java.util.List;
 
 import free.rm.skytube.app.SkyTubeApp;
+import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.GetChannelsDetails;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
@@ -126,6 +128,20 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 				new String[]{channel.getId()});
 
 		return (rowsDeleted >= 0);
+	}
+
+	public boolean unsubscribeFromAllChannels(){
+		try {
+			for (YouTubeChannel channel: getSubscribedChannels()) {
+				unsubscribe(channel);
+				Log.d("", "unsubscribeFromAllChannels: " + channel);
+			}
+		} catch (Exception e){
+			Log.d("", "unsubscribeFromAllChannels: " + e.toString());
+		}
+//TODO Fix this
+
+		return false;
 	}
 
 
