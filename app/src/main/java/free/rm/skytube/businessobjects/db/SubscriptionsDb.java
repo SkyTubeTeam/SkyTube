@@ -386,6 +386,7 @@ class unsubscribeFromAllChannelsTask extends AsyncTask<YouTubeChannel, YouTubeCh
             List<YouTubeChannel> channelList = SubscriptionsDb.getSubscriptionsDb().getSubscribedChannels();
             for (final YouTubeChannel youTubeChannel : channelList) {
                 SubscriptionsDb.getSubscriptionsDb().unsubscribe(youTubeChannel);
+
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
