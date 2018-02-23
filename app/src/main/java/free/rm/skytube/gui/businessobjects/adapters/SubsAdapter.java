@@ -61,6 +61,8 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 	}
 
 
+
+
 	public static SubsAdapter get(Context context) {
 		return get(context, null);
 	}
@@ -98,7 +100,6 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 	public void removeChannel(YouTubeChannel channel) {
 		removeChannel(channel.getId());
 	}
-
 
 	/**
 	 * Remove channel from this adapter.
