@@ -372,13 +372,14 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 class unsubscribeFromAllChannelsTask extends AsyncTask<YouTubeChannel, YouTubeChannel, YouTubeChannel> {
 
     Handler handler = new Handler();
+
     private Context context;
+
     SubsAdapter subsAdapter = SubsAdapter.get(context);
 
     unsubscribeFromAllChannelsTask(Context context) {
         this.context = context;
     }
-
     @Override
     protected YouTubeChannel doInBackground(YouTubeChannel... youTubeChannels) {
         try {
