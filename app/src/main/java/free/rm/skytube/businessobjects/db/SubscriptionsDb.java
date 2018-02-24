@@ -23,7 +23,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Handler;
-import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -369,7 +368,10 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 
 }
 
-class unsubscribeFromAllChannelsTask extends AsyncTask<YouTubeChannel, YouTubeChannel, YouTubeChannel> {
+/**
+ * An Asynctask class that unsubscribes user from all the channels at once.
+ */
+class unsubscribeFromAllChannelsTask extends AsyncTask<YouTubeChannel, Void, Void> {
 
     Handler handler = new Handler();
 
@@ -381,7 +383,7 @@ class unsubscribeFromAllChannelsTask extends AsyncTask<YouTubeChannel, YouTubeCh
         this.context = context;
     }
     @Override
-    protected YouTubeChannel doInBackground(YouTubeChannel... youTubeChannels) {
+    protected Void doInBackground(YouTubeChannel... youTubeChannels) {
         try {
             List<YouTubeChannel> channelList = SubscriptionsDb.getSubscriptionsDb().getSubscribedChannels();
             for (final YouTubeChannel youTubeChannel : channelList) {
