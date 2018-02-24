@@ -29,12 +29,18 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
+import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.support.multidex.MultiDexApplication;
 import android.support.v4.content.IntentCompat;
+import android.widget.Toast;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -57,7 +63,28 @@ public class SkyTubeApp extends MultiDexApplication {
 	public void onCreate() {
 		super.onCreate();
 		skyTubeApp = this;
+
+
 		initChannels(this);
+
+		AsyncTask.execute(new Runnable() {
+			@Override
+			public void run() {
+				Looper.prepare();
+				if (!SkyTubeApp.isInternetAvailable()){
+					Handler handler = new Handler();
+					handler.post(new Runnable() {
+						@Override
+						public void run() {
+							Toast.makeText(SkyTubeApp.this, "No internet connection", Toast.LENGTH_LONG).show();
+						}
+					});
+
+				}
+
+				Looper.loop();
+			}
+		});
 	}
 
 
@@ -162,6 +189,20 @@ public class SkyTubeApp extends MultiDexApplication {
 						getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
 		final android.net.NetworkInfo mobile = connMgr.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
 		return mobile != null && mobile.isConnectedOrConnecting();
+	}
+
+	/**
+	 * A method to check availibility of internet connection not network connection!
+	 */
+
+	public static boolean isInternetAvailable(){
+		try {
+			InetAddress ipAdress = InetAddress.getByName("google.com");
+			return  !ipAdress.equals("");
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 	/*
