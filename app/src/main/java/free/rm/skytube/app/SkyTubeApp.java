@@ -64,27 +64,9 @@ public class SkyTubeApp extends MultiDexApplication {
 		super.onCreate();
 		skyTubeApp = this;
 
-
 		initChannels(this);
 
-		AsyncTask.execute(new Runnable() {
-			@Override
-			public void run() {
-				Looper.prepare();
-				if (!SkyTubeApp.isInternetAvailable()){
-					Handler handler = new Handler();
-					handler.post(new Runnable() {
-						@Override
-						public void run() {
-							Toast.makeText(SkyTubeApp.this, "No internet connection", Toast.LENGTH_LONG).show();
-						}
-					});
 
-				}
-
-				Looper.loop();
-			}
-		});
 	}
 
 
