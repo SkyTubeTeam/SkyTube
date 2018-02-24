@@ -35,6 +35,8 @@ import android.preference.PreferenceManager;
 import android.support.multidex.MultiDexApplication;
 import android.support.v4.content.IntentCompat;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -58,6 +60,7 @@ public class SkyTubeApp extends MultiDexApplication {
 		super.onCreate();
 		skyTubeApp = this;
 		initChannels(this);
+
 	}
 
 
