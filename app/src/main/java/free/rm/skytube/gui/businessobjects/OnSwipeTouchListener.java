@@ -133,13 +133,12 @@ public abstract class OnSwipeTouchListener implements View.OnTouchListener {
 	 * In touch listener we don't know the rect of the view. This method should be overrided and should return actual view rect (because rect changes when orientation changes).
 	 *
 	 */
-	public Rect viewRect() {
-		// We need to get actual rect of view from top class
-		return new Rect();
-	}
+	public abstract Rect viewRect();
 
 
-	private enum Type {
+	////////////////////////////////////////////////////////////////////////////////////////////////
+
+	private enum SwipeEventType {
 		NONE,
 		BRIGHTNESS,
 		VOLUME,
@@ -148,12 +147,11 @@ public abstract class OnSwipeTouchListener implements View.OnTouchListener {
 		DESCRIPTION
 	}
 
-	////////////////////////////////////////////////////////////////////////////////////////////////
 
 	private final class GestureListener extends GestureDetector.SimpleOnGestureListener {
 
 		private static final int SWIPE_THRESHOLD = 50;
-		private Type type = Type.NONE;
+		private SwipeEventType swipeEventType = SwipeEventType.NONE;
 		private MotionEvent startEvent;
 
 		@Override
@@ -167,6 +165,7 @@ public abstract class OnSwipeTouchListener implements View.OnTouchListener {
 			return onSingleTap();
 		}
 
+
 		@Override
 		public boolean onScroll(MotionEvent start, MotionEvent end,
 								float distanceX, float distanceY) {
@@ -174,23 +173,23 @@ public abstract class OnSwipeTouchListener implements View.OnTouchListener {
 			double yDistance = end.getY() - start.getY();
 			double xDistance = end.getX() - start.getX();
 
-			if (type == Type.COMMENTS) {
-				onSwipeLeft();
-			} else if (type == Type.DESCRIPTION) {
-				onSwipeTop();
-			}
-			if (type == Type.BRIGHTNESS) {
+			if (swipeEventType == SwipeEventType.COMMENTS) {
+				return onSwipeLeft();
+			} else if (swipeEventType == SwipeEventType.DESCRIPTION) {
+				return onSwipeTop();
+			} else if (swipeEventType == SwipeEventType.BRIGHTNESS) {
 				// use half of BrightnessRect's height to calculate percent.
 				double percent = yDistance / (getBrightnessRect().height() / 2.0f) * -1.0f;
 				adjustBrightness(percent);
-			} else if (type == Type.VOLUME) {
+			} else if (swipeEventType == SwipeEventType.VOLUME) {
 				// use half of volumeRect's height to calculate percent.
 				double percent = yDistance / (getVolumeRect().height() / 2.0f) * -1.0f;
 				adjustVolumeLevel(percent);
-			} else if (type == Type.SEEK) {
+			} else if (swipeEventType == SwipeEventType.SEEK) {
 				double percent = xDistance / viewRect().width();
 				adjustVideoPosition(percent, distanceX < 0);
 			}
+
 			return true;
 		}
 
@@ -200,31 +199,57 @@ public abstract class OnSwipeTouchListener implements View.OnTouchListener {
 		}
 
 		private void onTouchEvent(MotionEvent event) {
-			if (!isEventValid(event)) {
-				gestureDetector.onTouchEvent(event);
-				return;
-			}
-
-			// decide which process is needed.
-			switch (event.getAction()) {
-				case MotionEvent.ACTION_DOWN:
-					startEvent = MotionEvent.obtain(event);
-					break;
-				case MotionEvent.ACTION_MOVE:
-					if (type == Type.NONE && startEvent != null) {
-						type = whatTypeIsIt(startEvent, event);
-					}
-					break;
-				case MotionEvent.ACTION_UP:
-					onGestureDone();
-					type = Type.NONE;
-					startEvent = null;
-					break;
-				default:
-					break;
+			if (isEventValid(event)) {
+				// decide which process is needed.
+				switch (event.getAction()) {
+					case MotionEvent.ACTION_DOWN:
+						startEvent = MotionEvent.obtain(event);
+						break;
+					case MotionEvent.ACTION_MOVE:
+						if (swipeEventType == SwipeEventType.NONE && startEvent != null) {
+							swipeEventType = whatTypeIsIt(startEvent, event);
+						}
+						break;
+					case MotionEvent.ACTION_UP:
+						onGestureDone();
+						swipeEventType = SwipeEventType.NONE;
+						startEvent = null;
+						break;
+					default:
+						break;
+				}
 			}
 
 			gestureDetector.onTouchEvent(event);
+		}
+
+
+		/**
+		 * Ok, swipe detected. What did user want? Let's find out
+		 */
+		private SwipeEventType whatTypeIsIt(MotionEvent startEvent, MotionEvent currentEvent) {
+			float startX = startEvent.getX();
+			float startY = startEvent.getY();
+			float currentX = currentEvent.getX();
+			float currentY = currentEvent.getY();
+			float diffY = startY - currentY;
+			float diffX = startX - currentX;
+
+			if (Math.abs(currentX - startX) >= SWIPE_THRESHOLD && Math.abs(currentX - startX) > Math.abs(currentY - startY)) {
+				if (getCommentsRect().contains((int) startX, (int) startY) && diffX > 0)
+					return SwipeEventType.COMMENTS;
+
+				return SwipeEventType.SEEK;
+			} else if (Math.abs(currentY - startY) >= SWIPE_THRESHOLD) {
+				if (getDescriptionRect().contains((int) startX, (int) startY) && diffY > 0) {
+					return SwipeEventType.DESCRIPTION;
+				} else if (getBrightnessRect().contains((int) startX, (int) startY)) {
+					return SwipeEventType.BRIGHTNESS;
+				} else if (getVolumeRect().contains((int) startX, (int) startY)) {
+					return SwipeEventType.VOLUME;
+				}
+			}
+			return SwipeEventType.NONE;
 		}
 
 
@@ -260,33 +285,6 @@ public abstract class OnSwipeTouchListener implements View.OnTouchListener {
 			return new Rect(0, (int)(viewRect().bottom - Math.min(viewRect().bottom, viewRect().right) * 0.2), viewRect().right, viewRect().bottom);
 		}
 
-
-		/**
-		 * Ok, swipe detected. What did user want? Let's find out
-		 */
-		private Type whatTypeIsIt(MotionEvent startEvent, MotionEvent currentEvent) {
-			float startX = startEvent.getX();
-			float startY = startEvent.getY();
-			float currentX = currentEvent.getX();
-			float currentY = currentEvent.getY();
-			float diffY = startY - currentY;
-			float diffX = startX - currentX;
-			if (Math.abs(currentX - startX) >= SWIPE_THRESHOLD && Math.abs(currentX - startX) > Math.abs(currentY - startY)) {
-				if (getCommentsRect().contains((int) startX, (int) startY) && diffX > 0)
-					return Type.COMMENTS;
-
-				return Type.SEEK;
-			} else if (Math.abs(currentY - startY) >= SWIPE_THRESHOLD) {
-				if (getDescriptionRect().contains((int) startX, (int) startY) && diffY > 0) {
-					return Type.DESCRIPTION;
-				} else if (getBrightnessRect().contains((int) startX, (int) startY)) {
-					return Type.BRIGHTNESS;
-				} else if (getVolumeRect().contains((int) startX, (int) startY)) {
-					return Type.VOLUME;
-				}
-			}
-			return Type.NONE;
-		}
 	}
 
 }
