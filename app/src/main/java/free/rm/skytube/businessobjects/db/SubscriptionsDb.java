@@ -17,6 +17,7 @@
 
 package free.rm.skytube.businessobjects.db;
 
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -40,7 +41,8 @@ import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.YouTube.GetChannelsDetails;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
-import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
+import free.rm.skytube.businessobjects.db.Tasks.UnsubscribeFromAllChannelsTask;
+
 
 /**
  * A database (DB) that stores user subscriptions (with respect to YouTube channels).
@@ -130,7 +132,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
     }
 
     public void unsubscribeFromAllChannels() {
-        new unsubscribeFromAllChannelsTask(context).execute();
+        new UnsubscribeFromAllChannelsTask(context).execute();
     }
 
 
@@ -368,37 +370,4 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 
 }
 
-/**
- * An Asynctask class that unsubscribes user from all the channels at once.
- */
-class unsubscribeFromAllChannelsTask extends AsyncTask<YouTubeChannel, Void, Void> {
 
-    Handler handler = new Handler();
-
-    private Context context;
-
-    SubsAdapter subsAdapter = SubsAdapter.get(context);
-
-    unsubscribeFromAllChannelsTask(Context context) {
-        this.context = context;
-    }
-    @Override
-    protected Void doInBackground(YouTubeChannel... youTubeChannels) {
-        try {
-            List<YouTubeChannel> channelList = SubscriptionsDb.getSubscriptionsDb().getSubscribedChannels();
-            for (final YouTubeChannel youTubeChannel : channelList) {
-                SubscriptionsDb.getSubscriptionsDb().unsubscribe(youTubeChannel);
-
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        subsAdapter.removeChannel(youTubeChannel);
-                    }
-                });
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-}
