@@ -62,6 +62,7 @@ public class SubscriptionsBackupsManager {
     private Activity activity;
     private android.app.Fragment fragment;
     private Fragment supportFragment;
+    private boolean isUnsubsribeAllChecked = false;
 
 
     public SubscriptionsBackupsManager(Activity activity, Fragment supportFragment) {
@@ -304,6 +305,7 @@ public class SubscriptionsBackupsManager {
      * A dialog that asks the user to import subscriptions from a YouTube account.
      */
     public void displayImportSubscriptionsFromYouTubeDialog() {
+
         SpannableString msg = new SpannableString(activity.getText(R.string.import_subscriptions_description));
         Linkify.addLinks(msg, Linkify.WEB_URLS);
         new MaterialDialog.Builder(activity)
@@ -317,14 +319,15 @@ public class SubscriptionsBackupsManager {
                 .checkBoxPrompt("Unsubscribe from all the channels", false, new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                        if (b) {
-                            SubscriptionsDb.getSubscriptionsDb().unsubscribeFromAllChannels();
-                        }
+                       isUnsubsribeAllChecked = true;
                     }
                 })
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        if (isUnsubsribeAllChecked) {
+                            SubscriptionsDb.getSubscriptionsDb().unsubscribeFromAllChannels();
+                        }
                         displayFilePicker(false);
                     }
                 })
