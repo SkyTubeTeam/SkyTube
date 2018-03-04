@@ -2,13 +2,16 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 27
-    buildToolsVersion '27.0.1'
+    buildToolsVersion '27.0.3'
 
     defaultConfig {
         applicationId "free.rm.skytube"
         minSdkVersion 14
         targetSdkVersion 27
+
+        versionName "2.81"    // digits of the *fractional part* shall NOT be > than "9"
         versionCode 12
+
         // Third party devs:  pls be ethical and change the below keys
         buildConfigField 'String[]', 'YOUTUBE_API_KEYS',
                 '{' +
@@ -33,17 +36,26 @@ android {
         // 100% Open-Source Edition
         oss {
             applicationId "free.rm.skytube.oss"
-            versionName "2.81"          // digits of the *fractional part* shall NOT be > than "9"
             resValue "string", "app_name", "SkyTube"
             dimension "skytube"
         }
         // 99% Open-source edition:  uses the YouTube Player Jar [i.e. proprietary module - optional usage]
         extra {
             applicationId "free.rm.skytube.extra"
-            versionName "2.81 Extra"    // digits of the *fractional part* shall NOT be > than "9"
             resValue "string", "app_name", "SkyTube Extra"
             dimension "skytube"
         }
+    }
+    // Generate APK filenames as follows:  <App Name>-<Flavor><Version>
+    android.applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            outputFileName = "${parent.name}-${variant.productFlavors[0].name}-${variant.versionName}.apk"
+        }
+    }
+    // Ignore missing translations
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
     }
 }
 
@@ -68,13 +80,13 @@ dependencies {
     implementation 'com.google.android.exoplayer:exoplayer:2.7.0'
 
     // Android support modules
-    implementation 'com.android.support:appcompat-v7:27.0.2'
-    implementation 'com.android.support:support-v13:27.0.2'
-    implementation 'com.android.support:design:27.0.2'
-    implementation 'com.android.support:recyclerview-v7:27.0.2'
-    implementation 'com.android.support:cardview-v7:27.0.2'
+    implementation 'com.android.support:appcompat-v7:27.1.0'
+    implementation 'com.android.support:support-v13:27.1.0'
+    implementation 'com.android.support:design:27.1.0'
+    implementation 'com.android.support:recyclerview-v7:27.1.0'
+    implementation 'com.android.support:cardview-v7:27.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-    implementation 'com.android.support:multidex:1.0.2' // as we have over 65536 lines of code...
+    implementation 'com.android.support:multidex:1.0.3' // as we have over 65536 lines of code...
 
     // proprietary module
     extraImplementation files('libs/YouTubeAndroidPlayerApi.jar')
