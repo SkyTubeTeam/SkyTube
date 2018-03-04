@@ -128,6 +128,9 @@ public class SubscriptionsBackupsManager {
                     if (importDb)
                         displayImportDbsBackupWarningMsg(files[0]);
                     else {
+                        if (isUnsubsribeAllChecked) {
+                            SubscriptionsDb.getSubscriptionsDb().unsubscribeFromAllChannels();
+                        }
                         Uri uri = Uri.fromFile(new File(files[0]));
                         parseImportedSubscriptions(uri);
                     }
@@ -325,9 +328,6 @@ public class SubscriptionsBackupsManager {
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                        if (isUnsubsribeAllChecked) {
-                            SubscriptionsDb.getSubscriptionsDb().unsubscribeFromAllChannels();
-                        }
                         displayFilePicker(false);
                     }
                 })

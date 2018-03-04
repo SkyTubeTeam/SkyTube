@@ -60,19 +60,14 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 		new GetSubscribedChannelsTask(this, progressBar).executeInParallel();
 	}
 
-
-
-
 	public static SubsAdapter get(Context context) {
 		return get(context, null);
 	}
-
 
 	public static SubsAdapter get(Context context, View progressBar) {
 		if (subsAdapter == null) {
 			subsAdapter = new SubsAdapter(context, progressBar);
 		}
-
 		return subsAdapter;
 	}
 
