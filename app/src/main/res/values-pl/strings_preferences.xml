@@ -12,8 +12,6 @@
 	<string name="pref_video_player_category">Odtwarzacz wideo</string>
 	<string name="pref_title_preferred_res">Preferowana rozdzielczość</string>
 	<string name="pref_summary_preferred_res">Wybierz preferowaną rozdzielczość</string>
-	<string name="pref_title_use_offical_player">Użyj oficjalnego odtwarzacza YouTube</string>
-	<string name="pref_summary_use_offical_player">Niezalecane</string>
 
 	<string name="pref_backup_category">Kopie zapasowe</string>
 	<string name="pref_title_backup_dbs">Backup Databases</string>
@@ -66,11 +64,13 @@
 	<string name="pref_summary_default_tab">Domyślna karta do pokazywania kiedy SkyTube się uruchamia: %s</string>
 
 	<string name="pref_title_screen_orientation">Screen Orientation</string>
-	<string name="pref_summary_screen_orientation">Rotacja odtwarzacza wideo</string>
-	<string name="pref_screen_landscape">Poziomo</string>
-	<string name="pref_screen_portrait">Portrait</string>
-	<string name="pref_screen_auto">Automatycznie</string>
-	<string name="pref_screen_sensor">Sensor urządzenia</string>
+	<string name="pref_summary_screen_orientation">Video player\'s orientation:  %s</string>
+	<string-array name="screen_orientations">
+		<item>Automatycznie</item>
+		<item>Poziomo</item>
+		<item>Portrait</item>
+		<item>Sensor urządzenia</item>
+	</string-array>
 
 	<string name="pref_title_youtube_api_key">Klucz YouTube API</string>
 	<string name="pref_summary_youtube_api_key">Wprowadź swój własny klucz YouTube Data API.  Pozostał pusty, aby używać domyślnego.</string>

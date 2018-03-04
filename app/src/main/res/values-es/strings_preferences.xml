@@ -12,8 +12,6 @@
 	<string name="pref_video_player_category">Reproductor de vídeos</string>
 	<string name="pref_title_preferred_res">Resolución preferida</string>
 	<string name="pref_summary_preferred_res">Selecciona tu resolución preferida</string>
-	<string name="pref_title_use_offical_player">Usar el reproductor oficial de YouTube</string>
-	<string name="pref_summary_use_offical_player">No recomendado</string>
 	
 	<string name="pref_backup_category">Respaldos</string>
 	<string name="pref_title_backup_dbs">Base de datos de respaldo</string>
@@ -66,11 +64,13 @@
 	<string name="pref_summary_default_tab">Pestaña por defecto cuando abres SkyTube: %s</string>
 
 	<string name="pref_title_screen_orientation">Orientación de pantalla</string>
-	<string name="pref_summary_screen_orientation">Rotación del reproductor</string>
-	<string name="pref_screen_landscape">Horizontal</string>
-	<string name="pref_screen_portrait">Vertical</string>
-	<string name="pref_screen_auto">Automático</string>
-	<string name="pref_screen_sensor">Sensor del dispositivo</string>
+	<string name="pref_summary_screen_orientation">Video player\'s orientation:  %s</string>
+	<string-array name="screen_orientations">
+		<item>Automático</item>
+		<item>Horizontal</item>
+		<item>Vertical</item>
+		<item>Sensor del dispositivo</item>
+	</string-array>
 
 	<string name="pref_title_youtube_api_key">YouTube API Key</string>
 	<string name="pref_summary_youtube_api_key">Introduzca su propia YouTube Data API Key. Deje vacío para usar una por defecto.</string>

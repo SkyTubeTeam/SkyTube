@@ -12,8 +12,6 @@
 	<string name="pref_video_player_category">ビデオプレーヤー</string>
 	<string name="pref_title_preferred_res">お好みの解像度</string>
 	<string name="pref_summary_preferred_res">お好みの解像度を選択</string>
-	<string name="pref_title_use_offical_player">YouTube 公式のプレーヤーを使用する</string>
-	<string name="pref_summary_use_offical_player">お勧めしません</string>
 
 	<string name="pref_backup_category">バックアップ</string>
 	<string name="pref_title_backup_dbs">データベースのバックアップ</string>
@@ -69,11 +67,13 @@
 	</string-array>
 
 	<string name="pref_title_screen_orientation">画面の向き</string>
-	<string name="pref_summary_screen_orientation">ビデオプレーヤーの回転</string>
-	<string name="pref_screen_landscape">横向き</string>
-	<string name="pref_screen_portrait">縦向き</string>
-	<string name="pref_screen_auto">自動</string>
-	<string name="pref_screen_sensor">デバイスセンサー</string>
+	<string name="pref_summary_screen_orientation">Video player\'s orientation:  %s</string>
+	<string-array name="screen_orientations">
+		<item>自動</item>
+		<item>横向き</item>
+		<item>縦向き</item>
+		<item>デバイスセンサー</item>
+	</string-array>
 
 	<string name="pref_title_disable_immersive_mode">イマーシブモードを無効にする</string>
 	<string name="pref_summary_disable_immersive_mode">コメントとビデオの説明アイコンおよびナビゲーションバーを常に表示する必要があります</string>
