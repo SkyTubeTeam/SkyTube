@@ -65,11 +65,6 @@ public class SkyTubeApp extends MultiDexApplication {
 		skyTubeApp = this;
 
 		initChannels(this);
-
-<<<<<<< HEAD
-=======
-
->>>>>>> check-internet
 	}
 
 
