@@ -28,7 +28,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
-import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -51,13 +50,12 @@ import com.google.android.exoplayer2.ui.PlayerControlView;
 import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
-import com.google.android.exoplayer2.util.Util;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.List;
+import java.util.Locale;
 
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
@@ -68,12 +66,10 @@ import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannelInterface;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetVideoDescriptionTask;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetYouTubeChannelInfoTask;
-import free.rm.skytube.businessobjects.YouTube.VideoStream.StreamMetaData;
-import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
 import free.rm.skytube.businessobjects.db.Tasks.CheckIfUserSubbedToChannelTask;
 import free.rm.skytube.businessobjects.interfaces.GetDesiredStreamListener;
 import free.rm.skytube.gui.activities.MainActivity;
-import free.rm.skytube.gui.businessobjects.OnSwipeTouchListener;
+import free.rm.skytube.gui.businessobjects.PlayerViewGestureDetector;
 import free.rm.skytube.gui.businessobjects.SubscribeButton;
 import free.rm.skytube.gui.businessobjects.adapters.CommentsAdapter;
 import free.rm.skytube.gui.businessobjects.fragments.ImmersiveModeFragment;
@@ -104,9 +100,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment {
 	private TextView			videoDescPublishDateTextView = null;
 	private TextView			videoDescriptionTextView = null;
 	//private RelativeLayout      voidView = null;
-	//private ImageView           indicatorImageView = null;
-	//private TextView            indicatorTextView = null;
-	//private RelativeLayout      indicatorView = null;
+
 	private View				loadingVideoView = null;
 
 	private SlidingDrawer       videoDescriptionDrawer = null;
@@ -167,10 +161,13 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment {
 	 * @param view Fragment view.
 	 */
 	private void initViews(View view) {
+		final PlayerViewGestureHandler playerViewGestureHandler;
+
 		// setup the player
 		playerView = view.findViewById(R.id.player_view);
-		view.findViewById(R.id.void_view).setOnTouchListener(new Swipey());
-
+		playerViewGestureHandler = new PlayerViewGestureHandler();
+		playerViewGestureHandler.initView(view);
+		playerView.setOnTouchListener(playerViewGestureHandler);
 		playerView.requestFocus();
 
 		DefaultBandwidthMeter bandwidthMeter = new DefaultBandwidthMeter();
@@ -182,19 +179,10 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment {
 		player.setPlayWhenReady(true);
 		playerView.setPlayer(player);
 
-
 		titleTextView = view.findViewById(R.id.title_text_view);
 		titleTextView.setSelected(true);
 
-		// detect if user's swipes motions and taps...
-		//voidView = view.findViewById(R.id.void_view);
-		//voidView.setOnTouchListener(new Swipey());
-
 		loadingVideoView = view.findViewById(R.id.loadingVideoView);
-
-		////////////indicatorView = view.findViewById(R.id.indicatorView);
-		///////////indicatorImageView = view.findViewById(R.id.indicatorImageView);
-		///////////indicatorTextView = view.findViewById(R.id.indicatorTextView);
 
 		videoDescriptionDrawer = view.findViewById(R.id.des_drawer);
 		videoDescriptionDrawerIconView = view.findViewById(R.id.video_desc_icon_image_view);
@@ -471,12 +459,28 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment {
 
 
 
-	private class Swipey extends OnSwipeTouchListener {
+	////////////////////////////////////////////////////////////////////////////////////////////////
 
-		private boolean isControllerVisible = true;
+	/**
+	 * This will handle any gesture swipe event performed by the user on the player view.
+	 */
+	private class PlayerViewGestureHandler extends PlayerViewGestureDetector {
 
-		Swipey() {
-			super(getActivity());
+		private ImageView           indicatorImageView = null;
+		private TextView            indicatorTextView = null;
+		private RelativeLayout      indicatorView = null;
+
+		private boolean             isControllerVisible = true;
+		private float               startBrightness = -1.0f;
+		private float               startVolumePercent = -1.0f;
+		private long                startVideoTime = -1;
+
+		private static final int    MAX_VIDEO_STEP_TIME = 60 * 1000;
+		private static final int    MAX_BRIGHTNESS = 100;
+
+
+		PlayerViewGestureHandler() {
+			super(getContext());
 
 			playerView.setControllerVisibilityListener(new PlayerControlView.VisibilityListener() {
 				@Override
@@ -487,22 +491,28 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment {
 		}
 
 
+		void initView(View view) {
+			indicatorView = view.findViewById(R.id.indicatorView);
+			indicatorImageView = view.findViewById(R.id.indicatorImageView);
+			indicatorTextView = view.findViewById(R.id.indicatorTextView);
+		}
+
+
 		@Override
-		public boolean onSwipeLeft() {
+		public void onCommentsGesture() {
 			commentsDrawer.animateOpen();
-			return true;
 		}
 
 
 		@Override
-		public boolean onSwipeTop() {
+		public void onVideoDescriptionGesture() {
 			videoDescriptionDrawer.animateOpen();
-			return true;
 		}
 
 
 		@Override
-		public boolean onDoubleTap() {
+		public void onDoubleTap() {
+			// if the user is playing a video...
 			if (player.getPlayWhenReady()) {
 				// pause video
 				player.setPlayWhenReady(false);
@@ -512,159 +522,202 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment {
 				player.setPlayWhenReady(true);
 				player.getPlaybackState();
 			}
-			return true;
+
+			playerView.hideController();
 		}
 
 
 		@Override
 		public boolean onSingleTap() {
-			showOrHideHud();
-			return false;
+			return showOrHideHud();
 		}
 
 
 		/**
 		 * Hide or display the HUD depending if the HUD is currently visible or not.
 		 */
-		private void showOrHideHud() {
+		private boolean showOrHideHud() {
 			if (commentsDrawer.isOpened()) {
 				commentsDrawer.animateClose();
-			} else if (videoDescriptionDrawer.isOpened()) {
+				return !isControllerVisible;
+			}
+
+			if (videoDescriptionDrawer.isOpened()) {
 				videoDescriptionDrawer.animateClose();
-			} else if (isControllerVisible) {
+				return !isControllerVisible;
+			}
+
+			if (isControllerVisible) {
 				playerView.hideController();
 			} else {
 				playerView.showController();
 			}
+
+			return false;
 		}
+
 
 		@Override
 		public void onGestureDone() {
-//			startBrightness = -1.0f;
-//			startVolumePercent = -1.0f;
-//			startVideoTime = -1;
-//			hideIndicator();
+			startBrightness = -1.0f;
+			startVolumePercent = -1.0f;
+			startVideoTime = -1;
+			hideIndicator();
 		}
+
 
 		@Override
 		public void adjustBrightness(double adjustPercent) {
-//			// We are setting brightness percent to a value that should be from -1.0 to 1.0. We need to limit it here for these values first
-//			if (adjustPercent < -1.0f) {
-//				adjustPercent = -1.0f;
-//			} else if (adjustPercent > 1.0f) {
-//				adjustPercent = 1.0f;
-//			}
-//
-//			WindowManager.LayoutParams lp = getActivity().getWindow().getAttributes();
-//			if (startBrightness < 0) {
-//				startBrightness = lp.screenBrightness;
-//			}
-//			// We are getting a final brightness value when summing current brightness and the percent we got from swipe action. Should be >= 0 and <= 1
-//			float targetBrightness = (float) (startBrightness + adjustPercent * 1.0f);
-//			if (targetBrightness <= 0.0f) {
-//				targetBrightness = 0.0f;
-//			} else if (targetBrightness >= 1.0f) {
-//				targetBrightness = 1.0f;
-//			}
-//			lp.screenBrightness = targetBrightness;
-//			getActivity().getWindow().setAttributes(lp);
-//
-//			indicatorImageView.setImageResource(R.drawable.ic_brightness);
-//			indicatorTextView.setText((int) (targetBrightness * MAX_BRIGHTNESS) + "%");
-//
-//			// Show indicator. It will be hidden once onGestureDone will be called
-//			showIndicator();
+			// We are setting brightness percent to a value that should be from -1.0 to 1.0. We need to limit it here for these values first
+			if (adjustPercent < -1.0f) {
+				adjustPercent = -1.0f;
+			} else if (adjustPercent > 1.0f) {
+				adjustPercent = 1.0f;
+			}
+
+			WindowManager.LayoutParams lp = getActivity().getWindow().getAttributes();
+			if (startBrightness < 0) {
+				startBrightness = lp.screenBrightness;
+			}
+			// We are getting a final brightness value when summing current brightness and the percent we got from swipe action. Should be >= 0 and <= 1
+			float targetBrightness = (float) (startBrightness + adjustPercent * 1.0f);
+			if (targetBrightness <= 0.0f) {
+				targetBrightness = 0.0f;
+			} else if (targetBrightness >= 1.0f) {
+				targetBrightness = 1.0f;
+			}
+			lp.screenBrightness = targetBrightness;
+			getActivity().getWindow().setAttributes(lp);
+
+			indicatorImageView.setImageResource(R.drawable.ic_brightness);
+			indicatorTextView.setText((int) (targetBrightness * MAX_BRIGHTNESS) + "%");
+
+			// Show indicator. It will be hidden once onGestureDone will be called
+			showIndicator();
 		}
+
 
 		@Override
 		public void adjustVolumeLevel(double adjustPercent) {
-//			// We are setting volume percent to a value that should be from -1.0 to 1.0. We need to limit it here for these values first
-//			if (adjustPercent < -1.0f) {
-//				adjustPercent = -1.0f;
-//			} else if (adjustPercent > 1.0f) {
-//				adjustPercent = 1.0f;
-//			}
-//
-//			AudioManager audioManager = (AudioManager) getContext()
-//					.getSystemService(Context.AUDIO_SERVICE);
-//			final int STREAM = AudioManager.STREAM_MUSIC;
-//
-//			// Max volume will return INDEX of volume not the percent. For example, on my device it is 15
-//			int maxVolume = audioManager.getStreamMaxVolume(STREAM);
-//			if (maxVolume == 0) return;
-//
-//			if (startVolumePercent < 0) {
-//				// We are getting actual volume index (NOT volume but index). It will be >= 0.
-//				int curVolume = audioManager.getStreamVolume(STREAM);
-//				// And counting percents of maximum volume we have now
-//				startVolumePercent = curVolume * 1.0f / maxVolume;
-//			}
-//			// Should be >= 0 and <= 1
-//			double targetPercent = startVolumePercent + adjustPercent;
-//			if (targetPercent > 1.0f) {
-//				targetPercent = 1.0f;
-//			} else if (targetPercent < 0) {
-//				targetPercent = 0;
-//			}
-//
-//			// Calculating index. Test values are 15 * 0.12 = 1 ( because it's int)
-//			int index = (int) (maxVolume * targetPercent);
-//			if (index > maxVolume) {
-//				index = maxVolume;
-//			} else if (index < 0) {
-//				index = 0;
-//			}
-//			audioManager.setStreamVolume(STREAM, index, 0);
-//
-//			indicatorImageView.setImageResource(R.drawable.ic_volume);
-//			indicatorTextView.setText(index * 100 / maxVolume + "%");
-//
-//			// Show indicator. It will be hidden once onGestureDone will be called
-//			showIndicator();
+			// We are setting volume percent to a value that should be from -1.0 to 1.0. We need to limit it here for these values first
+			if (adjustPercent < -1.0f) {
+				adjustPercent = -1.0f;
+			} else if (adjustPercent > 1.0f) {
+				adjustPercent = 1.0f;
+			}
+
+			AudioManager audioManager = (AudioManager) getContext().getSystemService(Context.AUDIO_SERVICE);
+			final int STREAM = AudioManager.STREAM_MUSIC;
+
+			// Max volume will return INDEX of volume not the percent. For example, on my device it is 15
+			int maxVolume = audioManager.getStreamMaxVolume(STREAM);
+			if (maxVolume == 0) return;
+
+			if (startVolumePercent < 0) {
+				// We are getting actual volume index (NOT volume but index). It will be >= 0.
+				int curVolume = audioManager.getStreamVolume(STREAM);
+				// And counting percents of maximum volume we have now
+				startVolumePercent = curVolume * 1.0f / maxVolume;
+			}
+			// Should be >= 0 and <= 1
+			double targetPercent = startVolumePercent + adjustPercent;
+			if (targetPercent > 1.0f) {
+				targetPercent = 1.0f;
+			} else if (targetPercent < 0) {
+				targetPercent = 0;
+			}
+
+			// Calculating index. Test values are 15 * 0.12 = 1 ( because it's int)
+			int index = (int) (maxVolume * targetPercent);
+			if (index > maxVolume) {
+				index = maxVolume;
+			} else if (index < 0) {
+				index = 0;
+			}
+			audioManager.setStreamVolume(STREAM, index, 0);
+
+			indicatorImageView.setImageResource(R.drawable.ic_volume);
+			indicatorTextView.setText(index * 100 / maxVolume + "%");
+
+			// Show indicator. It will be hidden once onGestureDone will be called
+			showIndicator();
 		}
 
 		@Override
 		public void adjustVideoPosition(double adjustPercent, boolean forwardDirection) {
-//			if (adjustPercent < -1.0f) {
-//				adjustPercent = -1.0f;
-//			} else if (adjustPercent > 1.0f) {
-//				adjustPercent = 1.0f;
-//			}
-//
-//			int totalTime = videoView.getDuration();
-//
-//			if (startVideoTime < 0) {
-//				startVideoTime = videoView.getCurrentPosition();
-//			}
-//			// adjustPercent: value from -1 to 1.
-//			double positiveAdjustPercent = Math.max(adjustPercent,-adjustPercent);
-//			// End of line makes seek speed not linear
-//			int targetTime = startVideoTime + (int) (MAX_VIDEO_STEP_TIME * adjustPercent * (positiveAdjustPercent / 0.1));
-//			if (targetTime > totalTime) {
-//				targetTime = totalTime;
-//			}
-//			if (targetTime < 0) {
-//				targetTime = 0;
-//			}
-//
-//			String targetTimeString = formatDuration(targetTime / 1000);
-//
-//			if (forwardDirection) {
-//				indicatorImageView.setImageResource(R.drawable.ic_forward);
-//				indicatorTextView.setText(targetTimeString);
-//			} else {
-//				indicatorImageView.setImageResource(R.drawable.ic_rewind);
-//				indicatorTextView.setText(targetTimeString);
-//			}
-//
-//			showIndicator();
-//
-//			videoView.seekTo(targetTime);
+			long totalTime = player.getDuration();
+
+			if (adjustPercent < -1.0f) {
+				adjustPercent = -1.0f;
+			} else if (adjustPercent > 1.0f) {
+				adjustPercent = 1.0f;
+			}
+
+			if (startVideoTime < 0) {
+				startVideoTime = player.getCurrentPosition();
+			}
+			// adjustPercent: value from -1 to 1.
+			double positiveAdjustPercent = Math.max(adjustPercent, -adjustPercent);
+			// End of line makes seek speed not linear
+			long targetTime = startVideoTime + (long) (MAX_VIDEO_STEP_TIME * adjustPercent * (positiveAdjustPercent / 0.1));
+			if (targetTime > totalTime) {
+				targetTime = totalTime;
+			}
+			if (targetTime < 0) {
+				targetTime = 0;
+			}
+
+			String targetTimeString = formatDuration(targetTime / 1000);
+
+			if (forwardDirection) {
+				indicatorImageView.setImageResource(R.drawable.ic_forward);
+				indicatorTextView.setText(targetTimeString);
+			} else {
+				indicatorImageView.setImageResource(R.drawable.ic_rewind);
+				indicatorTextView.setText(targetTimeString);
+			}
+
+			showIndicator();
+
+			player.seekTo(targetTime);
 		}
 
+
 		@Override
-		public Rect viewRect() {
-			return new Rect(playerView.getLeft(), playerView.getTop(), playerView.getRight() , playerView.getBottom());
+		public Rect getPlayerViewRect() {
+			return new Rect(playerView.getLeft(), playerView.getTop(), playerView.getRight(), playerView.getBottom());
+		}
+
+
+		private void showIndicator() {
+			indicatorView.setVisibility(View.VISIBLE);
+		}
+
+
+		private void hideIndicator() {
+			indicatorView.setVisibility(View.GONE);
+		}
+
+
+		/**
+		 * Returns a (localized) string for the given duration (in seconds).
+		 *
+		 * @param duration
+		 * @return  a (localized) string for the given duration (in seconds).
+		 */
+		private String formatDuration(long duration) {
+			long    h = duration / 3600;
+			long    m = (duration - h * 3600) / 60;
+			long    s = duration - (h * 3600 + m * 60);
+			String  durationValue;
+
+			if (h == 0) {
+				durationValue = String.format(Locale.getDefault(),"%1$02d:%2$02d", m, s);
+			} else {
+				durationValue = String.format(Locale.getDefault(),"%1$d:%2$02d:%3$02d", h, m, s);
+			}
+
+			return durationValue;
 		}
 
 	}

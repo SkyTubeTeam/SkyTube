@@ -25,47 +25,35 @@
 		android:padding="17dp"
 		style="@style/LoadingProgressBar"/>
 
-	<!--<SurfaceView-->
-		<!--android:id="@+id/surface_view"-->
-		<!--android:layout_width="match_parent"-->
-		<!--android:layout_height="match_parent"-->
-		<!--android:focusable="false"/>-->
 
-
-	<!-- A view that will display/hides the HUD -->
+	<!-- Volume / Brightness Indicator -->
 	<RelativeLayout
-		android:id="@+id/void_view"
-		android:layout_width="match_parent"
-		android:layout_height="match_parent"
+		android:id="@+id/indicatorView"
+		android:layout_width="80dp"
+		android:layout_height="90dp"
 		android:layout_gravity="center"
-		android:focusable="false">
+		android:visibility="gone"
+		style="@style/VideoPlayerIndicator">
 
-		<RelativeLayout
-			android:id="@+id/indicatorView"
-			android:layout_width="80dp"
-			android:layout_height="90dp"
-			android:layout_centerInParent="true"
-			style="@style/LoadingProgressBar"
-			android:visibility="gone">
+		<ImageView
+			android:id="@+id/indicatorImageView"
+			android:layout_width="35dp"
+			android:layout_height="35dp"
+			android:layout_marginTop="6dp"
+			android:layout_centerHorizontal="true"
+			tools:background="@drawable/ic_brightness"/>
 
-			<ImageView
-				android:id="@+id/indicatorImageView"
-				android:layout_width="35dp"
-				android:layout_height="35dp"
-				android:layout_marginTop="6dp"
-				android:layout_centerHorizontal="true"
-				tools:background="@drawable/ic_brightness"/>
-			<TextView
-				android:id="@+id/indicatorTextView"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_marginBottom="5dp"
-				android:textColor="@android:color/white"
-				android:textSize="20sp"
-				android:layout_centerHorizontal="true"
-				android:layout_alignParentBottom="true"
-				tools:text="12:38"/>
-		</RelativeLayout>
+		<TextView
+			android:id="@+id/indicatorTextView"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="5dp"
+			android:textColor="@android:color/white"
+			android:textSize="20sp"
+			android:layout_centerHorizontal="true"
+			android:layout_alignParentBottom="true"
+			tools:text="12:38"/>
+
 	</RelativeLayout>
 
 

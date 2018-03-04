@@ -144,6 +144,9 @@
 	<style name="NoCommentsMsgTextView" parent="CommentTextView">
 	</style>
 
+	<!-- Volume / Brightness indicator -->
+	<style name="VideoPlayerIndicator" parent="LoadingProgressBar" />
+
 
 	<!-- *************************************************************************************** -->
 	<!--
