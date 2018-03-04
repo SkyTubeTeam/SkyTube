@@ -48,10 +48,11 @@ import free.rm.skytube.businessobjects.db.Tasks.UnsubscribeFromAllChannelsTask;
  * A database (DB) that stores user subscriptions (with respect to YouTube channels).
  */
 public class SubscriptionsDb extends SQLiteOpenHelperEx {
-    private static final int DATABASE_VERSION = 2;
-    private static final String DATABASE_NAME = "subs.db";
     private static volatile SubscriptionsDb subscriptionsDb = null;
     private Context context;
+    
+    private static final int DATABASE_VERSION = 2;
+    private static final String DATABASE_NAME = "subs.db";
 
 
     private SubscriptionsDb(Context context) {
