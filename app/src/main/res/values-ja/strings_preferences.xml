@@ -95,4 +95,6 @@
 <string name="pref_blocked_channel_category">ブロックされたチャンネル</string>
 	<string name="pref_title_blocked_channels_list">ブロックされたチャンネル</string>
 	<string name="pref_summary_blocked_channels_list">ブロックを解除するチャンネルをチェックして、他はオフのままにしてください。</string>
-</resources>
+<string name="pref_title_choose_player">ビデオプレーヤー</string>
+	<string name="pref_summary_choose_player">使用するビデオプレーヤー: %s</string>
+	</resources>
