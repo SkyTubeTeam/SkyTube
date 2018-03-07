@@ -11,8 +11,6 @@
 	<string name="pref_video_player_category">Проигрывание видео</string>
 	<string name="pref_title_preferred_res">Разрешение экрана</string>
 	<string name="pref_summary_preferred_res">Выберите разрешение экрана</string>
-	<string name="pref_title_use_offical_player">Использовать официальный проигрыватель YouTube</string>
-	<string name="pref_summary_use_offical_player">Не рекомендуется</string>
 
 	<string name="pref_backup_category">Резервные копии</string>
 	<string name="pref_title_backup_dbs">Сделать резервную копию базы данных</string>
@@ -57,12 +55,15 @@
 	<string name="pref_other_category">Другое</string>
 	<string name="pref_title_default_tab">Вкладка по умолчанию</string>
 	<string name="pref_summary_default_tab">Вкладка, которая открыта во время запуска SkyTube: %s</string>
+
 	<string name="pref_title_screen_orientation">Ориентация экрана</string>
-	<string name="pref_summary_screen_orientation">Поворот при проигрывании видео</string>
-	<string name="pref_screen_landscape">Пейзаж</string>
-	<string name="pref_screen_portrait">Портрет</string>
-	<string name="pref_screen_auto">Определять автоматически</string>
-	<string name="pref_screen_sensor">Определять по датчику устройства</string>
+	<string name="pref_summary_screen_orientation">Video player\'s orientation:  %s</string>
+	<string-array name="screen_orientations">
+		<item>Определять автоматически</item>
+		<item>Пейзаж</item>
+		<item>Портрет</item>
+		<item>Определять по датчику устройства</item>
+	</string-array>
 
 	<string name="pref_title_youtube_api_key">API ключ YouTube</string>
 	<string name="pref_summary_youtube_api_key">Введите персональный API ключ YouTube. Не заполняйте, если хотите пользоваться ключом по умолчанию.</string>

@@ -109,6 +109,10 @@ public class AboutPreferenceFragment extends PreferenceFragment {
 	private String getAppVersion() {
 		StringBuilder ver = new StringBuilder(BuildConfig.VERSION_NAME);
 
+		if (BuildConfig.FLAVOR.equalsIgnoreCase("extra")) {
+			ver.append(" Extra");
+		}
+
 		if (BuildConfig.DEBUG) {
 			ver.append(" (Debug ");
 			ver.append(getAppBuildTimeStamp());

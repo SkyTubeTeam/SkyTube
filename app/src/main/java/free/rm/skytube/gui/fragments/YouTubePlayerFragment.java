@@ -770,10 +770,10 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 			} else {
 				youTubeVideo.getDesiredStream(new GetDesiredStreamListener() {
 					@Override
-					public void onGetDesiredStream(StreamMetaData desiredStream) {
+					public void onGetDesiredStream(Uri videoUri) {
 						// play the video
-						Logger.i(YouTubePlayerFragment.this, ">> PLAYING: %s", desiredStream);
-						videoView.setVideoURI(desiredStream.getUri());
+						Logger.i(YouTubePlayerFragment.this, ">> PLAYING: %s", videoUri);
+						videoView.setVideoURI(videoUri);
 					}
 
 					@Override
