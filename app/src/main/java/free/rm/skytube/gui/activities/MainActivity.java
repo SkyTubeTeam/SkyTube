@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 		// Delete any missing downloaded videos
 		new DownloadedVideosDb.RemoveMissingVideosTask().executeInParallel();
 
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.activity_fragment_holder);
 		ButterKnife.bind(this);
 
 		if(fragmentContainer != null) {

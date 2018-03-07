@@ -18,4 +18,5 @@
 	<string name="loading">Bezig met laden…</string>
 	<string name="video">Video</string>
     <string name="could_not_get_channel">Could not download channel information!</string>
-</resources>
+<string name="hello_blank_fragment">Hallo blanco fragment</string>
+    </resources>
