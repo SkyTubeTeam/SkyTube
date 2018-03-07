@@ -66,7 +66,6 @@ public class BookmarksFragment extends OrderableVideosGridFragment implements Bo
 		}
 	}
 
-
 	@Override
 	public void onBookmarksDbUpdated() {
 		populateList();
@@ -74,24 +73,20 @@ public class BookmarksFragment extends OrderableVideosGridFragment implements Bo
 			videoGridAdapter.refresh();
 	}
 
-
 	@Override
 	protected int getLayoutResource() {
 		return R.layout.fragment_bookmarks;
 	}
-
 
 	@Override
 	protected VideoCategory getVideoCategory() {
 		return VideoCategory.BOOKMARKS_VIDEOS;
 	}
 
-
 	@Override
 	public String getFragmentName() {
 		return SkyTubeApp.getStr(R.string.bookmarks);
 	}
-
 
 	////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -108,7 +103,6 @@ public class BookmarksFragment extends OrderableVideosGridFragment implements Bo
 			return BookmarksDb.getBookmarksDb().getTotalBookmarks();
 		}
 
-
 		@Override
 		protected void onPostExecute(Integer numVideosBookmarked) {
 			// If no videos have been bookmarked, show the text notifying the user, otherwise
@@ -124,7 +118,5 @@ public class BookmarksFragment extends OrderableVideosGridFragment implements Bo
 				videoGridAdapter.setVideoCategory(VideoCategory.BOOKMARKS_VIDEOS);
 			}
 		}
-
 	}
-
 }

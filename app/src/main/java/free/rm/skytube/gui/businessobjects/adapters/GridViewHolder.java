@@ -28,6 +28,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -71,6 +72,7 @@ class GridViewHolder extends RecyclerView.ViewHolder {
 	 */
 	GridViewHolder(View view, MainActivityListener listener, boolean showChannelInfo) {
 		super(view);
+
 
 		titleTextView = view.findViewById(R.id.title_text_view);
 		channelTextView = view.findViewById(R.id.channel_text_view);

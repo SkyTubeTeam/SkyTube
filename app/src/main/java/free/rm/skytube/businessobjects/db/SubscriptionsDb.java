@@ -17,6 +17,7 @@
 
 package free.rm.skytube.businessobjects.db;
 
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -38,19 +39,22 @@ import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.YouTube.GetChannelsDetails;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
+import free.rm.skytube.businessobjects.db.Tasks.UnsubscribeFromAllChannelsTask;
+
 
 /**
  * A database (DB) that stores user subscriptions (with respect to YouTube channels).
  */
 public class SubscriptionsDb extends SQLiteOpenHelperEx {
-	private static volatile SubscriptionsDb subscriptionsDb = null;
-
 	private static final int DATABASE_VERSION = 2;
 	private static final String DATABASE_NAME = "subs.db";
+	private static volatile SubscriptionsDb subscriptionsDb = null;
+	private Context context;
 
 
 	private SubscriptionsDb(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
+		this.context = context;
 	}
 
 
@@ -77,7 +81,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		// Version 2 of the database introduces the SubscriptionsVideosTable, which stores videos found in each subscribed channel
-		if(oldVersion == 1 && newVersion == 2) {
+		if (oldVersion == 1 && newVersion == 2) {
 			db.execSQL(SubscriptionsVideosTable.getCreateStatement());
 		}
 	}
@@ -87,7 +91,6 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 	 * Saves the given channel into the subscriptions DB.
 	 *
 	 * @param channel Channel the user wants to subscribe to.
-	 *
 	 * @return True if the operation was successful; false otherwise.
 	 */
 	public boolean subscribe(YouTubeChannel channel) {
@@ -101,7 +104,6 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 	 * Saves the given channel into the subscriptions DB.
 	 *
 	 * @param channelId The channel ID the user wants to subscribe to.
-	 *
 	 * @return True if the operation was successful; false otherwise.
 	 */
 	public boolean subscribe(String channelId) {
@@ -117,7 +119,6 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 	 * Removes the given channel from the subscriptions DB.
 	 *
 	 * @param channel Channel the user wants to unsubscribe to.
-	 *
 	 * @return True if the operation was successful; false otherwise.
 	 */
 	public boolean unsubscribe(YouTubeChannel channel) {
@@ -128,13 +129,16 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 		return (rowsDeleted >= 0);
 	}
 
+	public void unsubscribeFromAllChannels() {
+		new UnsubscribeFromAllChannelsTask(context).execute();
+	}
+
 
 	/**
 	 * Returns a list of channels that the user subscribed to and will check each channel whether
 	 * new videos have been uploaded since last channel visit
 	 *
 	 * @return A list of channels that the user subscribed to.
-	 *
 	 * @throws IOException
 	 */
 	public List<YouTubeChannel> getSubscribedChannels() throws IOException {
@@ -145,23 +149,22 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 	/**
 	 * Returns a list of channels that the user subscribed to.
 	 *
-	 * @param shouldCheckForNewVideos  If true it will check if new videos have been uploaded to the
-	 *                                 subscribed channels since last channel visit.
-	 *
+	 * @param shouldCheckForNewVideos If true it will check if new videos have been uploaded to the
+	 *                                subscribed channels since last channel visit.
 	 * @return A list of channels that the user subscribed to.
 	 * @throws IOException
 	 */
 	public List<YouTubeChannel> getSubscribedChannels(boolean shouldCheckForNewVideos) throws IOException {
 		List<YouTubeChannel> subsChannels = new ArrayList<>();
 		Cursor cursor = getReadableDatabase().query(SubscriptionsTable.TABLE_NAME,
-													new String[]{SubscriptionsTable.COL_CHANNEL_ID},
-													null, null,
-													null, null,
-													SubscriptionsTable.COL_ID + " ASC");
+				new String[]{SubscriptionsTable.COL_CHANNEL_ID},
+				null, null,
+				null, null,
+				SubscriptionsTable.COL_ID + " ASC");
 
 		if (cursor.moveToNext()) {
-			int             colChannelIdNum = cursor.getColumnIndexOrThrow(SubscriptionsTable.COL_CHANNEL_ID);
-			List<String>    channelIdsList = new ArrayList<>();
+			int colChannelIdNum = cursor.getColumnIndexOrThrow(SubscriptionsTable.COL_CHANNEL_ID);
+			List<String> channelIdsList = new ArrayList<>();
 
 			do {
 				channelIdsList.add(cursor.getString(colChannelIdNum));
@@ -181,9 +184,9 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 	 * @return The total number of subscribed channels.
 	 */
 	public int getTotalSubscribedChannels() {
-		String	query  = String.format("SELECT COUNT(*) FROM %s", SubscriptionsTable.TABLE_NAME);
-		Cursor	cursor = SubscriptionsDb.getSubscriptionsDb().getReadableDatabase().rawQuery(query, null);
-		int		totalSubbedChannels = 0;
+		String query = String.format("SELECT COUNT(*) FROM %s", SubscriptionsTable.TABLE_NAME);
+		Cursor cursor = SubscriptionsDb.getSubscriptionsDb().getReadableDatabase().rawQuery(query, null);
+		int totalSubbedChannels = 0;
 
 		if (cursor.moveToFirst())
 			totalSubbedChannels = cursor.getInt(0);
@@ -196,7 +199,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 	/**
 	 * Checks if the user is subscribed to the given channel.
 	 *
-	 * @param channelId	Channel ID
+	 * @param channelId Channel ID
 	 * @return True if the user is subscribed; false otherwise.
 	 * @throws IOException
 	 */
@@ -206,7 +209,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 				new String[]{SubscriptionsTable.COL_ID},
 				SubscriptionsTable.COL_CHANNEL_ID + " = ?",
 				new String[]{channelId}, null, null, null);
-		boolean	isUserSubbed = cursor.moveToNext();
+		boolean isUserSubbed = cursor.moveToNext();
 
 		cursor.close();
 		return isUserSubbed;
@@ -216,13 +219,12 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 	/**
 	 * Updates the given channel's last visit time.
 	 *
-	 * @param channelId	Channel ID
-	 *
-	 * @return	last visit time, if the update was successful;  -1 otherwise.
+	 * @param channelId Channel ID
+	 * @return last visit time, if the update was successful;  -1 otherwise.
 	 */
 	public long updateLastVisitTime(String channelId) {
-		SQLiteDatabase	db = getWritableDatabase();
-		long			currentTime = System.currentTimeMillis();
+		SQLiteDatabase db = getWritableDatabase();
+		long currentTime = System.currentTimeMillis();
 
 		ContentValues values = new ContentValues();
 		values.put(SubscriptionsTable.COL_LAST_VISIT_TIME, currentTime);
@@ -241,17 +243,16 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 	 * Returns the last time the user has visited this channel.
 	 *
 	 * @param channel
-	 *
-	 * @return	last visit time, if the update was successful;  -1 otherwise.
+	 * @return last visit time, if the update was successful;  -1 otherwise.
 	 * @throws IOException
 	 */
 	public long getLastVisitTime(YouTubeChannel channel) {
-		Cursor	cursor = getReadableDatabase().query(
-							SubscriptionsTable.TABLE_NAME,
-							new String[]{SubscriptionsTable.COL_LAST_VISIT_TIME},
-							SubscriptionsTable.COL_CHANNEL_ID + " = ?",
-							new String[]{channel.getId()}, null, null, null);
-		long	lastVisitTime = -1;
+		Cursor cursor = getReadableDatabase().query(
+				SubscriptionsTable.TABLE_NAME,
+				new String[]{SubscriptionsTable.COL_LAST_VISIT_TIME},
+				SubscriptionsTable.COL_CHANNEL_ID + " = ?",
+				new String[]{channel.getId()}, null, null, null);
+		long lastVisitTime = -1;
 
 		if (cursor.moveToNext()) {
 			int colLastVisitTIme = cursor.getColumnIndexOrThrow(SubscriptionsTable.COL_LAST_VISIT_TIME);
@@ -285,7 +286,6 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 	 * [i.e. video cache table]).
 	 *
 	 * @param channel Channel to check.
-	 *
 	 * @return True if the user hasn't visited the channel and new videos have been uploaded in the
 	 * meantime; false otherwise.
 	 */
@@ -293,8 +293,8 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 		DateTimeFormatter fmt = ISODateTimeFormat.dateTime();
 		String query = String.format("SELECT COUNT(*) FROM %s WHERE %s = ? AND %s > ?", SubscriptionsVideosTable.TABLE_NAME, SubscriptionsVideosTable.COL_CHANNEL_ID, SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_DATE);
 		Cursor cursor = SubscriptionsDb.getSubscriptionsDb().getReadableDatabase().rawQuery(
-							query,
-							new String[]{channel.getId(), fmt.parseDateTime(new DateTime(new Date(channel.getLastVisitTime())).toString()).toString()});
+				query,
+				new String[]{channel.getId(), fmt.parseDateTime(new DateTime(new Date(channel.getLastVisitTime())).toString()).toString()});
 		boolean channelHasNewVideos = false;
 
 		if (cursor.moveToFirst())
@@ -306,13 +306,14 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 
 	/**
 	 * Loop through each video saved in the passed {@link YouTubeChannel} and save it into the database, if it's not already been saved
+	 *
 	 * @param channel
 	 */
 	public void saveChannelVideos(YouTubeChannel channel) {
 		Gson gson = new Gson();
 		DateTimeFormatter fmt = ISODateTimeFormat.dateTime();
 		for (YouTubeVideo video : channel.getYouTubeVideos()) {
-			if(!hasVideo(video)) {
+			if (!hasVideo(video)) {
 				ContentValues values = new ContentValues();
 				values.put(SubscriptionsVideosTable.COL_CHANNEL_ID, channel.getId());
 				values.put(SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID, video.getId());
@@ -326,6 +327,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 
 	/**
 	 * Delete any videos stored in the database (for subscribed channels) that are over a month old.
+	 *
 	 * @return
 	 */
 	public boolean trimSubscriptionVideos() {
@@ -335,14 +337,15 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 
 	/**
 	 * Query the database to retrieve all videos for subscribed channels.
+	 *
 	 * @return
 	 */
 	public List<YouTubeVideo> getSubscriptionVideos() {
-		Cursor	cursor = getReadableDatabase().query(
-							SubscriptionsVideosTable.TABLE_NAME,
-							new String[]{SubscriptionsVideosTable.COL_YOUTUBE_VIDEO},
-							null, null, null, null,
-							SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_DATE + " DESC");
+		Cursor cursor = getReadableDatabase().query(
+				SubscriptionsVideosTable.TABLE_NAME,
+				new String[]{SubscriptionsVideosTable.COL_YOUTUBE_VIDEO},
+				null, null, null, null,
+				SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_DATE + " DESC");
 		List<YouTubeVideo> videos = new ArrayList<>();
 
 		if (cursor.moveToNext()) {
@@ -350,12 +353,13 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 				byte[] blob = cursor.getBlob(cursor.getColumnIndex(SubscriptionsVideosTable.COL_YOUTUBE_VIDEO));
 
 				// convert JSON into YouTubeVideo
-				YouTubeVideo video = new Gson().fromJson(new String(blob), new TypeToken<YouTubeVideo>(){}.getType());
+				YouTubeVideo video = new Gson().fromJson(new String(blob), new TypeToken<YouTubeVideo>() {
+				}.getType());
 				// regenerate the video's PublishDatePretty (e.g. 5 hours ago)
 				video.forceRefreshPublishDatePretty();
 				// add the video to the list
 				videos.add(video);
-			} while(cursor.moveToNext());
+			} while (cursor.moveToNext());
 		}
 
 		cursor.close();
@@ -363,3 +367,5 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 	}
 
 }
+
+
