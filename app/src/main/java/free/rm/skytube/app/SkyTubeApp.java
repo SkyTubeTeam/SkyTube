@@ -243,7 +243,7 @@ public class SkyTubeApp extends MultiDexApplication {
 	 */
 	public static void interceptYouTubeLinks(final Context context, TextView textView, final YouTubePlaylistListener youTubePlaylistListener) {
 		Link link = new Link(android.util.Patterns.WEB_URL);
-		final Pattern videoPattern = Pattern.compile("http(?:s?):\\/\\/(?:www\\.)?youtu(?:be\\.com\\/watch\\?v=|\\.be\\/)([\\w\\-\\_]*)(&(amp;)?\u200C\u200B[\\w\\?\u200C\u200B=]*)?");
+		final Pattern videoPattern = Pattern.compile("http(?:s?):\\/\\/(?:www\\.)?youtu(?:be\\.com\\/watch\\?v=|\\.be\\/)([\\w\\-\\_]*)(&(amp;)?[\\w\\?=\\.]*)?");
 		final Pattern playlistPattern = Pattern.compile("^.*(youtu.be\\/|list=)([^#\\&\\?]*).*");
 		final Pattern channelPattern = Pattern.compile("(?:https|http)\\:\\/\\/(?:[\\w]+\\.)?youtube\\.com\\/(?:c\\/|channel\\/|user\\/)?([a-zA-Z0-9\\-]{1,})");
 		link.setOnClickListener(new Link.OnClickListener() {
@@ -253,7 +253,7 @@ public class SkyTubeApp extends MultiDexApplication {
 				final Matcher channelMatcher = channelPattern.matcher(clickedText);
 				if(videoPattern.matcher(clickedText).matches()) {
 					YouTubePlayer.launch(clickedText, context);
-				} else if(playlistMatcher.find()) {
+				} else if(playlistMatcher.matches()) {
 					String playlistId = playlistMatcher.group(2);
 					// Retrieve the playlist from the playlist ID that was in the url the user clicked on
 					new GetPlaylistTask(playlistId, new PlaylistClickListener() {
@@ -270,7 +270,7 @@ public class SkyTubeApp extends MultiDexApplication {
 							}
 						}
 					}).executeInParallel();
-				} else if(channelMatcher.find()) {
+				} else if(channelMatcher.matches()) {
 					String username = channelMatcher.group(1);
 					new GetYouTubeChannelInfoTask(getContext(), new YouTubeChannelInterface() {
 						@Override
