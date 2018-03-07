@@ -20,6 +20,7 @@ package free.rm.skytube.gui.activities;
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
@@ -78,6 +79,7 @@ public class YouTubePlayerActivity extends BackButtonActivity {
 			orientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR;
 
 		setRequestedOrientation(orientation);
+		Log.d("YTPActivity", "onStart:  I AM HERE");
 	}
 
 
