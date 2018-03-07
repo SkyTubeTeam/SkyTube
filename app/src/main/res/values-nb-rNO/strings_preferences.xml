@@ -11,8 +11,6 @@
 	<string name="pref_video_player_category">Videoavspiller</string>
 	<string name="pref_title_preferred_res">Foretrukket oppøsning</string>
 	<string name="pref_summary_preferred_res">Velg din foretrukne oppløsning</string>
-	<string name="pref_title_use_offical_player">Bruk den offisielle YouTube-avspilleren</string>
-	<string name="pref_summary_use_offical_player">Ikke anbefalt</string>
 
 	<string name="pref_backup_category">Sikkerhetskopier</string>
 	<string name="pref_title_backup_dbs">Sikkerhetskopier databaser</string>
@@ -58,12 +56,15 @@
 	<string name="pref_other_category">Andre</string>
 	<string name="pref_title_default_tab">Forvalgt fane</string>
 	<string name="pref_summary_default_tab">Forvalgt fane å vise når SkyTube startes opp: %s</string>
+
 	<string name="pref_title_screen_orientation">Skjermretning</string>
-	<string name="pref_summary_screen_orientation">Rotasjon av videoavspiller</string>
-	<string name="pref_screen_landscape">Landskap</string>
-	<string name="pref_screen_portrait">Portrett</string>
-	<string name="pref_screen_auto">Automatisk</string>
-	<string name="pref_screen_sensor">Enhetssensor</string>
+	<string name="pref_summary_screen_orientation">Video player\'s orientation:  %s</string>
+	<string-array name="screen_orientations">
+		<item>Automatisk</item>
+		<item>Landskap</item>
+		<item>Portrett</item>
+		<item>Enhetssensor</item>
+	</string-array>
 
 	<string name="pref_title_youtube_api_key">API-nøkkel for YouTube</string>
 	<string name="pref_summary_youtube_api_key">Skriv inn din egen API-nøkkel for YouTube-data. La stå tom for å bruke forvalg.</string>
@@ -89,4 +90,7 @@
 	<string name="pref_title_disable_search_history">Skru av søkehistorikk</string>
 	<string name="pref_summary_disable_search_history">Hvis merket, vil søkehistorikken bli tømt og ikke brukt.</string>
 	<string name="pref_disable_search_history_deleted">Søkehistorikk slettet.</string>
+<string name="pref_blocked_channel_category">Blokkerte kanaler</string>
+	<string name="pref_title_blocked_channels_list">Blokkerte kanaler</string>
+	<string name="pref_summary_blocked_channels_list">Velg kanalene du ønsker å avblokkere, og la alt annet stå umerket.</string>
 </resources>

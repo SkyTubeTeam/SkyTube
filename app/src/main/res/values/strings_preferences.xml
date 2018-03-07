@@ -15,14 +15,23 @@
 	<string name="pref_title_preferred_res">Preferred Resolution</string>
 	<string name="pref_key_preferred_res" translatable="false">pref_preferred_resolution</string>
 	<string name="pref_summary_preferred_res">Select your preferred resolution</string>
-	<string name="pref_title_use_offical_player">Use official YouTube player</string>
-	<string name="pref_key_use_offical_player" translatable="false">pref_use_official_youtube_player</string>
-	<string name="pref_summary_use_offical_player">Not recommended</string>
 
-	<string name="pref_blocked_channel_key">pref_blocked_channel_key</string>
-	<string name="pref_blocked_channel_title">Manage Blocked Channels</string>
-	<string name="pref_blocked_channel_summary">You can unblock previously blocked channels.</string>
-	<string name="pref_blocked_channel_category">Blocked Channel</string>
+	<string name="pref_key_choose_player" translatable="false">pref_key_choose_player</string>
+	<string name="pref_title_choose_player">Video Player</string>
+	<string name="pref_summary_choose_player">Video Player to be used:  %s</string>
+	<string-array name="pref_video_players">
+		<item>Default Player</item>
+		<item>Legacy Player (unsupported)</item>
+		<item>Official YouTube Player</item>
+	</string-array>
+	<string name="pref_default_player_value" translatable="false">default</string>
+	<string name="pref_legacy_player_value" translatable="false">legacy_v1</string>
+	<string name="pref_official_player_value" translatable="false">official</string>
+	<string-array name="pref_video_players_values" translatable="false">
+		<item>@string/pref_default_player_value</item>
+		<item>@string/pref_legacy_player_value</item>
+		<item>@string/pref_official_player_value</item>   <!-- this should remain the last item -->
+	</string-array>
 
 	<string name="pref_backup_category">Backups</string>
 	<string name="pref_title_backup_dbs">Backup Databases</string>
@@ -461,22 +470,22 @@
 
 	<string name="pref_key_screen_orientation" translatable="false">pref_key_screen_orientation</string>
 	<string name="pref_title_screen_orientation">Screen Orientation</string>
-	<string name="pref_summary_screen_orientation">Rotation of the video player</string>
-	<string name="pref_screen_landscape">Landscape</string>
-	<string name="pref_screen_portrait">Portrait</string>
-	<string name="pref_screen_auto">Automatic</string>
-	<string name="pref_screen_sensor">Device sensor</string>
-	<string-array name="screen_orientations" translatable="false">
-		<item>@string/pref_screen_auto</item>
-		<item>@string/pref_screen_landscape</item>
-		<item>@string/pref_screen_portrait</item>
-		<item>@string/pref_screen_sensor</item>
+	<string name="pref_summary_screen_orientation">Video player\'s orientation:  %s</string>
+	<string-array name="screen_orientations">
+		<item>Automatic</item>
+		<item>Landscape</item>
+		<item>Portrait</item>
+		<item>Device sensor</item>
 	</string-array>
+	<string name="pref_screen_auto_value" translatable="false">auto</string>
+	<string name="pref_screen_landscape_value" translatable="false">landscape</string>
+	<string name="pref_screen_portrait_value" translatable="false">portrait</string>
+	<string name="pref_screen_sensor_value" translatable="false">sensor</string>
 	<string-array name="screen_orientations_values" translatable="false">
-		<item>auto</item>
-		<item>landscape</item>
-		<item>portrait</item>
-		<item>sensor</item>
+		<item>@string/pref_screen_auto_value</item>
+		<item>@string/pref_screen_landscape_value</item>
+		<item>@string/pref_screen_portrait_value</item>
+		<item>@string/pref_screen_sensor_value</item>
 	</string-array>
 
 	<string name="pref_key_disable_immersive_mode" translatable="false">pref_key_disable_immersive_mode</string>
@@ -501,4 +510,9 @@
 	<string name="restart">Restart</string>
 
 	<string name="pref_key_brightness_level" translatable="false">pref_key_brightness_level</string>
+
+	<string name="pref_blocked_channel_category">Blocked Channels</string>
+	<string name="pref_key_blocked_channels_list" translatable="false">pref_blocked_channels_list_key</string>
+	<string name="pref_title_blocked_channels_list">Blocked Channels</string>
+	<string name="pref_summary_blocked_channels_list">Check the channels you want to unblock and leave the others unchecked.</string>
 </resources>

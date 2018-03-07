@@ -12,8 +12,6 @@
 	<string name="pref_video_player_category">Lecteur vidéo</string>
 	<string name="pref_title_preferred_res">Résolution préférée</string>
 	<string name="pref_summary_preferred_res">Sélectionnez une résolution</string>
-	<string name="pref_title_use_offical_player">Utiliser le lecteur YouTube officiel</string>
-	<string name="pref_summary_use_offical_player">Non recommandé</string>
 
 	<string name="pref_backup_category">Sauvegardes</string>
 	<string name="pref_title_backup_dbs">Sauvegarder</string>
@@ -66,11 +64,13 @@
 	<string name="pref_summary_default_tab">Onglet par défaut lors de l\'ouverture de SkyTube : %s</string>
 
 	<string name="pref_title_screen_orientation">Orientation de l\'écran</string>
-	<string name="pref_summary_screen_orientation">Orientation du lecteur vidéo</string>
-	<string name="pref_screen_landscape">Paysage</string>
-	<string name="pref_screen_portrait">Portrait</string>
-	<string name="pref_screen_auto">Automatique</string>
-	<string name="pref_screen_sensor">Capteur téléphone</string>
+	<string name="pref_summary_screen_orientation">Video player\'s orientation:  %s</string>
+	<string-array name="screen_orientations">
+		<item>Automatique</item>
+		<item>Paysage</item>
+		<item>Portrait</item>
+		<item>Capteur téléphone</item>
+	</string-array>
 
 	<string name="pref_title_youtube_api_key">clé API YouTube</string>
 	<string name="pref_summary_youtube_api_key">Entrer votre clé API.  Laissez vide pour utiliser la clé API par défaut.</string>

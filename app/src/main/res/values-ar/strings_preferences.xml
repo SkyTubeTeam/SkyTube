@@ -11,8 +11,6 @@
 	<string name="pref_video_player_category">مشغل فيديو</string>
 	<string name="pref_title_preferred_res">القرار المفضل</string>
 	<string name="pref_summary_preferred_res">حدد الدقة المفضلة لديك</string>
-	<string name="pref_title_use_offical_player">استخدام مشغل YouTube الرسمي</string>
-	<string name="pref_summary_use_offical_player">غير موصي بها</string>
 
 	<string name="pref_backup_category">النسخ الاحتياطي</string>
 	<string name="pref_title_backup_dbs">قواعد بيانات النسخ الاحتياطي</string>
@@ -60,11 +58,13 @@
 	<string name="pref_title_default_tab">التبويب الافتراضي</string>
 	<string name="pref_summary_default_tab">علامة التبويب الافتراضية التي تظهر عند تشغيلSkyTube : %s</string>
 	<string name="pref_title_screen_orientation">اتجاه الشاشة</string>
-	<string name="pref_summary_screen_orientation">دوران مشغل الفيديو</string>
-	<string name="pref_screen_landscape">مناظر</string>
-	<string name="pref_screen_portrait">بورتريه</string>
-	<string name="pref_screen_auto">تلقائي</string>
-	<string name="pref_screen_sensor">جهاز استشعار</string>
+	<string name="pref_summary_screen_orientation">Video player\'s orientation:  %s</string>
+	<string-array name="screen_orientations">
+		<item>تلقائي</item>
+		<item>مناظر</item>
+		<item>بورتريه</item>
+		<item>جهاز استشعار</item>
+	</string-array>
 
 	<string name="pref_title_youtube_api_key">YouTube API مفتاح</string>
 	<string name="pref_summary_youtube_api_key">ادخل مفتاح API الخاص ببيانات YouTube. اتركه فارغه لاستخدام الاعداد الافتراضي .</string>

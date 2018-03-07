@@ -23,23 +23,20 @@
 		android:title="@string/pref_title_preferred_res"
 		android:summary="@string/pref_summary_preferred_res"/>
 
-	<CheckBoxPreference
-		android:key="@string/pref_key_use_offical_player"
-		android:title="@string/pref_title_use_offical_player"
-		android:summary="@string/pref_summary_use_offical_player"
-		android:defaultValue="false" />
-
-	<CheckBoxPreference
-		android:key="@string/pref_key_disable_immersive_mode"
-		android:title="@string/pref_title_disable_immersive_mode"
-		android:summary="@string/pref_summary_disable_immersive_mode"
-		android:defaultValue="false"/>
+	<ListPreference
+		android:key="@string/pref_key_choose_player"
+		android:title="@string/pref_title_choose_player"
+		android:summary="@string/pref_summary_choose_player"
+		android:entries="@array/pref_video_players"
+		android:entryValues="@array/pref_video_players_values"
+		android:defaultValue="@string/pref_default_player_value"/>
 
 	<ListPreference
 		android:key="@string/pref_key_screen_orientation"
 		android:title="@string/pref_title_screen_orientation"
 		android:summary="@string/pref_summary_screen_orientation"
 		android:entries="@array/screen_orientations"
-		android:entryValues="@array/screen_orientations_values" />
+		android:entryValues="@array/screen_orientations_values"
+		android:defaultValue="@string/pref_screen_auto_value"/>
 
 </PreferenceScreen>

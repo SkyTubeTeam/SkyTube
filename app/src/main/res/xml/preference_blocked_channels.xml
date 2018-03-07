@@ -19,10 +19,8 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <MultiSelectListPreference
-        android:key="@string/pref_blocked_channels_list_key"
-        android:title="@string/pref_blocked_channels_list_title"
-        android:summary="@string/pref_blocked_channels_list_summary"
-
-        />
+        android:key="@string/pref_key_blocked_channels_list"
+        android:title="@string/pref_title_blocked_channels_list"
+        android:summary="@string/pref_summary_blocked_channels_list" />
 
 </PreferenceScreen>

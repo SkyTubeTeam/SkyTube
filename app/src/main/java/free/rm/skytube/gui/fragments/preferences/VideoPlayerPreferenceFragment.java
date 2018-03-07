@@ -19,9 +19,9 @@ package free.rm.skytube.gui.fragments.preferences;
 
 import android.os.Bundle;
 import android.preference.ListPreference;
-import android.preference.Preference;
 import android.preference.PreferenceFragment;
-import android.preference.PreferenceScreen;
+
+import java.util.Arrays;
 
 import free.rm.skytube.BuildConfig;
 import free.rm.skytube.R;
@@ -42,11 +42,14 @@ public class VideoPlayerPreferenceFragment extends PreferenceFragment {
 		resolutionPref.setEntries(VideoResolution.getAllVideoResolutionsNames());
 		resolutionPref.setEntryValues(VideoResolution.getAllVideoResolutionsIds());
 
-		// remove the 'use official player' checkbox if we are running an OSS version
+		// if we are running an OSS version, then remove the last option (i.e. the "official" player
+		// option)
 		if (BuildConfig.FLAVOR.equals("oss")) {
-			PreferenceScreen screen = getPreferenceScreen();
-			Preference useOfficialPlayer = getPreferenceManager().findPreference(getString(R.string.pref_key_use_offical_player));
-			screen.removePreference(useOfficialPlayer);
+			final ListPreference    videoPlayersListPref = (ListPreference) getPreferenceManager().findPreference(getString(R.string.pref_key_choose_player));
+			final CharSequence[]    videoPlayersList = videoPlayersListPref.getEntries();
+			CharSequence[]          modifiedVideoPlayersList = Arrays.copyOf(videoPlayersList, videoPlayersList.length - 1);
+
+			videoPlayersListPref.setEntries(modifiedVideoPlayersList);
 		}
 	}
 
