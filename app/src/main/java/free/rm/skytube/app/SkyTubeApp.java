@@ -174,7 +174,6 @@ public class SkyTubeApp extends MultiDexApplication {
 	/**
 	 * A method to check availibility of internet connection not network connection!
 	 */
-
 	public static boolean isInternetAvailable(){
 		try {
 			InetAddress ipAdress = InetAddress.getByName("google.com");
