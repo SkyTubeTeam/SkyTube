@@ -51,6 +51,7 @@ import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -66,6 +67,8 @@ import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannelInterface;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetVideoDescriptionTask;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetYouTubeChannelInfoTask;
+import free.rm.skytube.businessobjects.YouTube.VideoStream.StreamMetaData;
+import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
 import free.rm.skytube.businessobjects.db.Tasks.CheckIfUserSubbedToChannelTask;
 import free.rm.skytube.businessobjects.interfaces.GetDesiredStreamListener;
 import free.rm.skytube.gui.activities.MainActivity;
@@ -251,39 +254,59 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment {
 		// if the video is NOT live
 		if (!youTubeVideo.isLiveStream()) {
 			loadingVideoView.setVisibility(View.VISIBLE);
-
-			youTubeVideo.getDesiredStream(new GetDesiredStreamListener() {
-				@Override
-				public void onGetDesiredStream(Uri videoUri) {
-					// hide the loading video view (progress bar)
+			if(youTubeVideo.isDownloaded()) {
+				Uri uri = youTubeVideo.getFileUri();
+				File file = new File(uri.getPath());
+				// If the file for this video has gone missing, remove it from the Database and then play remotely.
+				if(!file.exists()) {
+					DownloadedVideosDb.getVideoDownloadsDb().remove(youTubeVideo);
+					Toast.makeText(getContext(),
+									getContext().getString(R.string.playing_video_file_missing),
+									Toast.LENGTH_LONG).show();
+					loadVideo();
+				} else {
 					loadingVideoView.setVisibility(View.GONE);
 
-					// play the video
-					Logger.i(this, ">> PLAYING: %s", videoUri);
-
-					DefaultDataSourceFactory        dataSourceFactory = new DefaultDataSourceFactory(getContext(), "ST. Agent", new DefaultBandwidthMeter());
-					ExtractorMediaSource.Factory    extMediaSourceFactory = new ExtractorMediaSource.Factory(dataSourceFactory);
-					ExtractorMediaSource            mediaSource = extMediaSourceFactory.createMediaSource(videoUri);
+					Logger.i(YouTubePlayerV2Fragment.this, ">> PLAYING LOCALLY: %s", youTubeVideo);
+					DefaultDataSourceFactory dataSourceFactory = new DefaultDataSourceFactory(getContext(), "ST. Agent", new DefaultBandwidthMeter());
+					ExtractorMediaSource.Factory extMediaSourceFactory = new ExtractorMediaSource.Factory(dataSourceFactory);
+					ExtractorMediaSource mediaSource = extMediaSourceFactory.createMediaSource(uri);
 					player.prepare(mediaSource);
 				}
+			} else {
+				youTubeVideo.getDesiredStream(new GetDesiredStreamListener() {
+					@Override
+					public void onGetDesiredStream(StreamMetaData desiredStream) {
+						// hide the loading video view (progress bar)
+						loadingVideoView.setVisibility(View.GONE);
 
-				@Override
-				public void onGetDesiredStreamError(String errorMessage) {
-					if (errorMessage != null) {
-						new AlertDialog.Builder(getContext())
-								.setMessage(errorMessage)
-								.setTitle(R.string.error_video_play)
-								.setCancelable(false)
-								.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-									@Override
-									public void onClick(DialogInterface dialog, int which) {
-										getActivity().finish();
-									}
-								})
-								.show();
+						// play the video
+						Logger.i(this, ">> PLAYING: %s", desiredStream.getUri());
+
+						DefaultDataSourceFactory dataSourceFactory = new DefaultDataSourceFactory(getContext(), "ST. Agent", new DefaultBandwidthMeter());
+						ExtractorMediaSource.Factory extMediaSourceFactory = new ExtractorMediaSource.Factory(dataSourceFactory);
+						ExtractorMediaSource mediaSource = extMediaSourceFactory.createMediaSource(desiredStream.getUri());
+						player.prepare(mediaSource);
 					}
-				}
-			});
+
+					@Override
+					public void onGetDesiredStreamError(String errorMessage) {
+						if (errorMessage != null) {
+							new AlertDialog.Builder(getContext())
+											.setMessage(errorMessage)
+											.setTitle(R.string.error_video_play)
+											.setCancelable(false)
+											.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+												@Override
+												public void onClick(DialogInterface dialog, int which) {
+													getActivity().finish();
+												}
+											})
+											.show();
+						}
+					}
+				});
+			}
 		} else {
 			// video is live:  ask the user if he wants to play the video using an other app
 			new AlertDialog.Builder(getContext())
