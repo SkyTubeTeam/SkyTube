@@ -40,6 +40,7 @@ import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.GetChannelsDetails;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
+import free.rm.skytube.businessobjects.db.Tasks.UnsubscribeFromAllChannelsTask;
 
 /**
  * A database (DB) that stores user subscriptions (with respect to YouTube channels).
@@ -49,10 +50,11 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 
 	private static final int DATABASE_VERSION = 2;
 	private static final String DATABASE_NAME = "subs.db";
-
+	private Context context;
 
 	private SubscriptionsDb(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
+		this.context = context;
 	}
 
 
@@ -130,18 +132,8 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 		return (rowsDeleted >= 0);
 	}
 
-	public boolean unsubscribeFromAllChannels(){
-		try {
-			for (YouTubeChannel channel: getSubscribedChannels()) {
-				unsubscribe(channel);
-				Log.d("", "unsubscribeFromAllChannels: " + channel);
-			}
-		} catch (Exception e){
-			Log.d("", "unsubscribeFromAllChannels: " + e.toString());
-		}
-//TODO Fix this
-
-		return false;
+	public void unsubscribeFromAllChannels() {
+		new UnsubscribeFromAllChannelsTask(context).execute();
 	}
 
 
