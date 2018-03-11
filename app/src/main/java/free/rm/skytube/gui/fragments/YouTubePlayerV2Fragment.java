@@ -99,14 +99,9 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment {
 	private View                videoDescRatingsDisabledTextView = null;
 	private TextView			videoDescPublishDateTextView = null;
 	private TextView			videoDescriptionTextView = null;
-	//private RelativeLayout      voidView = null;
-
 	private View				loadingVideoView = null;
-
 	private SlidingDrawer       videoDescriptionDrawer = null;
-	private View                videoDescriptionDrawerIconView = null;
 	private SlidingDrawer		commentsDrawer = null;
-	private View                commentsDrawerIconView = null;
 	private View				commentsProgressBar = null,
 								noVideoCommentsView = null;
 	private CommentsAdapter     commentsAdapter = null;
@@ -185,7 +180,6 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment {
 		loadingVideoView = view.findViewById(R.id.loadingVideoView);
 
 		videoDescriptionDrawer = view.findViewById(R.id.des_drawer);
-		videoDescriptionDrawerIconView = view.findViewById(R.id.video_desc_icon_image_view);
 		videoDescTitleTextView = view.findViewById(R.id.video_desc_title);
 		videoDescChannelThumbnailImageView = view.findViewById(R.id.video_desc_channel_thumbnail_image_view);
 		videoDescChannelThumbnailImageView.setOnClickListener(new View.OnClickListener() {
@@ -221,8 +215,6 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment {
 				}
 			}
 		});
-		commentsDrawerIconView = view.findViewById(R.id.comments_icon_image_view);
-
 	}
 
 
@@ -358,6 +350,15 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment {
 		new CheckIfUserSubbedToChannelTask(videoDescSubscribeButton, youTubeVideo.getChannelId()).execute();
 	}
 
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		// stop the player from playing (when this fragment is going to be destroyed) and clean up
+		player.stop();
+		player = null;
+		playerView.setPlayer(null);
+	}
 
 
 	////////////////////////////////////////////////////////////////////////////////////////////////
