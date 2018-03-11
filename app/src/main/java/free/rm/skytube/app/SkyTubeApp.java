@@ -35,8 +35,6 @@ import android.preference.PreferenceManager;
 import android.support.multidex.MultiDexApplication;
 import android.support.v4.content.IntentCompat;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -164,19 +162,6 @@ public class SkyTubeApp extends MultiDexApplication {
 						getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
 		final android.net.NetworkInfo mobile = connMgr.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
 		return mobile != null && mobile.isConnectedOrConnecting();
-	}
-
-	/**
-	 * A method to check availibility of internet connection not network connection!
-	 */
-	public static boolean isInternetAvailable(){
-		try {
-			InetAddress ipAdress = InetAddress.getByName("google.com");
-			return  !ipAdress.equals("");
-		} catch (UnknownHostException e) {
-			e.printStackTrace();
-			return false;
-		}
 	}
 
 	/*
