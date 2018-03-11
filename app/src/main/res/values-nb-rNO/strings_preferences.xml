@@ -58,7 +58,7 @@
 	<string name="pref_summary_default_tab">Forvalgt fane å vise når SkyTube startes opp: %s</string>
 
 	<string name="pref_title_screen_orientation">Skjermretning</string>
-	<string name="pref_summary_screen_orientation">Video player\'s orientation:  %s</string>
+	<string name="pref_summary_screen_orientation">Skjermretning for videoavspiller: %s</string>
 	<string-array name="screen_orientations">
 		<item>Automatisk</item>
 		<item>Landskap</item>
@@ -93,4 +93,6 @@
 <string name="pref_blocked_channel_category">Blokkerte kanaler</string>
 	<string name="pref_title_blocked_channels_list">Blokkerte kanaler</string>
 	<string name="pref_summary_blocked_channels_list">Velg kanalene du ønsker å avblokkere, og la alt annet stå umerket.</string>
-</resources>
+<string name="pref_title_choose_player">Videospiller</string>
+	<string name="pref_summary_choose_player">Videospiller å bruke: %s</string>
+	</resources>

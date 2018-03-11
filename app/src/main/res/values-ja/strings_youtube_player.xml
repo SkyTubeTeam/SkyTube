@@ -1,39 +1,39 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources>
-	<string name="error_stream_err_unavailable">Error message unavailable.</string>
-	<string name="error_stream_decryption_fail">Could not load decryption code for the YouTube service.</string>
-	<string name="error_stream_parse_error">Parsing error.</string>
+	<string name="error_stream_err_unavailable">エラーメッセージは利用できません。</string>
+	<string name="error_stream_decryption_fail">YouTube サービスの復号化コードを読み込みできませんでした。</string>
+	<string name="error_stream_parse_error">解析エラーです。</string>
 
-	<string name="error_video_play">Video Playback Error</string>
-	<string name="error_video_streams_empty">The video %s has no streams.</string>
-	<string name="error_video_streams">An error has occurred while retrieving video\'s streams.</string>
-	<string name="error_get_video_desc">An error has occurred while retrieving video\'s description.</string>
-	<string name="error_invalid_url">Invalid video URL: %s</string>
+	<string name="error_video_play">ビデオ再生エラー</string>
+	<string name="error_video_streams_empty">ビデオ %s はストリームがありません。</string>
+	<string name="error_video_streams">ビデオのストリームを取得中にエラーが発生しました。</string>
+	<string name="error_get_video_desc">ビデオの説明を取得中にエラーが発生しました。</string>
+	<string name="error_invalid_url">ビデオの URL が無効です: %s</string>
 
-	<string name="warning_live_video">Cannot play live streams for now. Open live stream in another app?</string>
+	<string name="warning_live_video">今はライブストリームを再生できません。ライブストリームを別のアプリで開きますか?</string>
 
-	<string name="ratings_disabled">Ratings disabled</string>
+	<string name="ratings_disabled">評価は無効です</string>
 
-	<string name="loading_video">Loading video…</string>
-	<string name="get_new_video_steam">New Stream</string>
-	<string name="open_in_browser">Open in web browser</string>
-	<string name="open_with">Open with…</string>
-	<string name="share">Share</string>
-	<string name="share_via">Share via</string>
-	<string name="copy_url">Copy URL</string>
-	<string name="url_copied_to_clipboard">URL copied to clipboard.</string>
+	<string name="loading_video">ビデオを読み込んでいます…</string>
+	<string name="get_new_video_steam">新しいストリーム</string>
+	<string name="open_in_browser">Web ブラウザーで開く</string>
+	<string name="open_with">開く…</string>
+	<string name="share">共有</string>
+	<string name="share_via">共有…</string>
+	<string name="copy_url">URL をコピー</string>
+	<string name="url_copied_to_clipboard">URL をクリップボードにコピーしました。</string>
 
-	<string name="error_get_comments">An error has occurred while getting comments.</string>
-	<string name="no_video_comments">This video has no comments or comments are disabled.</string>
-	<string name="view_replies">View replies</string>
-	<string name="hide_replies">Hide replies</string>
+	<string name="error_get_comments">コメントの取得中にエラーが発生しました。</string>
+	<string name="no_video_comments">このビデオにはコメントがないか、コメントが無効です。</string>
+	<string name="view_replies">返信を表示</string>
+	<string name="hide_replies">返信を非表示</string>
 
-	<string name="enter_video_url">Enter Video URL</string>
-	<string name="play">Play</string>
-	<string name="cancel">Cancel</string>
-	<string name="clear">Clear</string>
+	<string name="enter_video_url">ビデオの URL を入力</string>
+	<string name="play">再生</string>
+	<string name="cancel">キャンセル</string>
+	<string name="clear">クリア</string>
 
-	<string name="tutorial_comments_icon">Swipe to the left to view comments.</string>
-	<string name="tutorial_video_info_icon">Swipe to the top to view information about the video.</string>
-	<string name="tutorial_pause_video">Double tap to pause or play a video.</string>
+	<string name="tutorial_comments_icon">左にスワイプするとコメントを表示します。</string>
+	<string name="tutorial_video_info_icon">上にスワイプするとビデオについての情報を表示します。</string>
+	<string name="tutorial_pause_video">ダブルタップするとビデオを一時停止または再生します。</string>
 </resources>
