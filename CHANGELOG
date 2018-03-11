@@ -4,6 +4,7 @@ vX.XX - XX XX 2018:
 	* Channel blocking.
 	* Added Japanese translations.
 	* Exoplayer support.
+	* YouTube's videos and playlists links inside the video description are now handled and opened inside SkyTube.
 
 v2.81 - 28 Jan 2018:
 	* Emergency fix: "This video is unavailable" error occurred for some YouTube videos.
