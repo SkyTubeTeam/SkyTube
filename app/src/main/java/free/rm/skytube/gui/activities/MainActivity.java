@@ -40,7 +40,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
-import free.rm.skytube.gui.businessobjects.adapters.SearchHistoryCursorAdapter;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubePlaylist;
 import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
@@ -49,6 +48,7 @@ import free.rm.skytube.businessobjects.db.SearchHistoryTable;
 import free.rm.skytube.businessobjects.interfaces.SearchHistoryClickListener;
 import free.rm.skytube.gui.businessobjects.MainActivityListener;
 import free.rm.skytube.gui.businessobjects.YouTubePlayer;
+import free.rm.skytube.gui.businessobjects.adapters.SearchHistoryCursorAdapter;
 import free.rm.skytube.gui.businessobjects.updates.UpdatesCheckerTask;
 import free.rm.skytube.gui.fragments.ChannelBrowserFragment;
 import free.rm.skytube.gui.fragments.MainFragment;
@@ -76,6 +76,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 
 	public static final String ACTION_VIEW_CHANNEL = "MainActivity.ViewChannel";
 	public static final String ACTION_VIEW_FEED = "MainActivity.ViewFeed";
+	public static final String ACTION_VIEW_PLAYLIST = "MainActivity.ViewPlaylist";
 	private static final String MAIN_FRAGMENT   = "MainActivity.MainFragment";
 	private static final String SEARCH_FRAGMENT = "MainActivity.SearchFragment";
 	public static final String CHANNEL_BROWSER_FRAGMENT = "MainActivity.ChannelBrowserFragment";
@@ -115,6 +116,10 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 				dontAddToBackStack = true;
 				YouTubeChannel channel = (YouTubeChannel) getIntent().getSerializableExtra(ChannelBrowserFragment.CHANNEL_OBJ);
 				onChannelClick(channel);
+			} else if(ACTION_VIEW_PLAYLIST.equals(action)) {
+				dontAddToBackStack = true;
+				YouTubePlaylist playlist = (YouTubePlaylist)getIntent().getSerializableExtra(PlaylistVideosFragment.PLAYLIST_OBJ);
+				onPlaylistClick(playlist);
 			} else {
 				if(mainFragment == null) {
 					mainFragment = new MainFragment();

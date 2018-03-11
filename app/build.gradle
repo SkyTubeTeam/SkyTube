@@ -78,6 +78,7 @@ dependencies {
     implementation 'com.afollestad.material-dialogs:core:0.9.5.0'
     implementation 'com.github.angads25:filepicker:1.1.1'
     implementation 'com.google.android.exoplayer:exoplayer:2.7.0'
+    implementation 'com.klinkerapps:link_builder:1.6.1'
 
     // Android support modules
     implementation 'com.android.support:appcompat-v7:27.1.0'
