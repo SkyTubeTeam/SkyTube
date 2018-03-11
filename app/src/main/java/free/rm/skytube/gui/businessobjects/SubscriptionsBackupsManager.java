@@ -383,7 +383,7 @@ public class SubscriptionsBackupsManager {
 				.contentColorRes(R.color.dialog_content_text)
 				.positiveText(R.string.select_xml_file)
 				.positiveColorRes(R.color.dialog_positive_text)
-				.checkBoxPrompt("Unsubscribe from all the channels", false, new CompoundButton.OnCheckedChangeListener() {
+				.checkBoxPromptRes(R.string.unsubscribe_from_all_current_sibbed_channels, false, new CompoundButton.OnCheckedChangeListener() {
 					@Override
 					public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
 						isUnsubsribeAllChecked = true;
