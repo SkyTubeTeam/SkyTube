@@ -23,4 +23,5 @@
 	<string name="failed_to_import_subscriptions">Het importeren van uw abonnementen is mislukt.</string>
 
 	<string name="about">Over</string>
-</resources>
+<string name="unsubscribe_from_all_current_sibbed_channels">Deabonneren op alle huidige geabonneerde kanalen.</string>
+	</resources>
