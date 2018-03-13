@@ -6,7 +6,7 @@
 	<string name="pref_summary_preferred_regions">Выберите страну. Это нужно, чтобы правильно отбирать ролики в категорию \"Избранное\" (они различаются для разных стран).</string>
 
 	<string name="pref_title_preferred_languages">Язык</string>
-	<string name="pref_summary_preferred_languages">Пробная опция: выберите один или несколько языков. Это нужно, чтобы правильно отбирать видео в категорию \"Популярные\" и для поиска роликов.</string>
+	<string name="pref_summary_preferred_languages">Пробная опция: выберите один или несколько языков. Это нужно, чтобы правильно отбирать видео в категории \"Популярные\" и для поиска роликов.</string>
 
 	<string name="pref_video_player_category">Проигрывание видео</string>
 	<string name="pref_title_preferred_res">Разрешение экрана</string>
@@ -22,9 +22,9 @@
 	<string name="databases_backup_fail">Сделать резервную копию базы данных не получается.</string>
 	<string name="databases_import_select_backup">Выберите резервную копию для импорта</string>
 	<string name="databases_import_nothing_selected">Вы ничего не выбрали…</string>
-	<string name="databases_import_warning_message">Все закладки и подписки будут переписаны данными резервной копии.
-\n
-\nПродолжать?</string>
+	<string name="databases_import_warning_message">Все закладки и подписки будут переписаны данными резервной копии. 
+\n 
+\nПродолжить?</string>
 	<string name="continue_">Продолжить</string>
 	<string name="databases_importing">Импортируется…</string>
 	<string name="databases_import_fail">Импортировать базу данных не получается.</string>
@@ -86,4 +86,12 @@
 
 	<string name="pref_title_allow_mobile_downloads">Allow downloads on mobile networks</string>
 	<string name="pref_summary_allow_mobile_downloads">Select this to enable downloading videos on mobile networks. Otherwise, videos can only be downloaded on Wi-Fi.</string>
+<string name="pref_title_choose_player">Видео плеер</string>
+	<string name="pref_summary_choose_player">Будет использоваться этот видео плеер: %s</string>
+	<string name="pref_title_disable_search_history">Отключить историю поиска</string>
+	<string name="pref_summary_disable_search_history">Если включено, история поиска будет очищена и не будет использоваться.</string>
+	<string name="pref_disable_search_history_deleted">История поиска удалена.</string>
+	<string name="pref_blocked_channel_category">Заблокированные каналы</string>
+	<string name="pref_title_blocked_channels_list">Заблокированные каналы</string>
+	<string name="pref_summary_blocked_channels_list">Проверить каналы, которые вы хотите разблокировать, и оставить остальные непроверенными.</string>
 </resources>
