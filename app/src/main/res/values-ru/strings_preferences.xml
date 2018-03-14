@@ -57,7 +57,7 @@
 	<string name="pref_summary_default_tab">Вкладка, которая открыта во время запуска SkyTube: %s</string>
 
 	<string name="pref_title_screen_orientation">Ориентация экрана</string>
-	<string name="pref_summary_screen_orientation">Video player\'s orientation:  %s</string>
+	<string name="pref_summary_screen_orientation">Ориентация видеопроигрывателя: %s</string>
 	<string-array name="screen_orientations">
 		<item>Определять автоматически</item>
 		<item>Пейзаж</item>
@@ -72,11 +72,11 @@
 	<string name="pref_youtube_api_key_default">Перезапустите приложение, чтобы переключиться на API ключ по умолчанию.</string>
 	<string name="restart">Перезапустить</string>
 
-	<string name="pref_title_disable_immersive_mode">Disable Immersive Mode</string>
-	<string name="pref_summary_disable_immersive_mode">Comments and video description icons and the navigation bar shall always be displayed</string>
+	<string name="pref_title_disable_immersive_mode">Отключить погруженный режим</string>
+	<string name="pref_summary_disable_immersive_mode">Значки комментариев и описания видео и панель навигации всегда будут показаны</string>
 
-	<string name="pref_title_feed_notification">Feed Auto Notification</string>
-	<string name="pref_summary_feed_notification">How often to check for new videos from subscribed channels: %s</string>
+	<string name="pref_title_feed_notification">Автоматическое уведомление ленты</string>
+	<string name="pref_summary_feed_notification">Как часто проверять наличие новых видео в подписанных каналах: %s</string>
 	<string-array name="feed_notification">
 		<item>Off</item>
 		<item>6 Hours</item>
@@ -84,8 +84,8 @@
 		<item>24 Hours</item>
 	</string-array>
 
-	<string name="pref_title_allow_mobile_downloads">Allow downloads on mobile networks</string>
-	<string name="pref_summary_allow_mobile_downloads">Select this to enable downloading videos on mobile networks. Otherwise, videos can only be downloaded on Wi-Fi.</string>
+	<string name="pref_title_allow_mobile_downloads">Позволить загружать с мобильной сетью</string>
+	<string name="pref_summary_allow_mobile_downloads">Выберите это, чтобы включить загрузку видео в мобильной сети. В противном случае видео можно загружать только в Wi-Fi.</string>
 <string name="pref_title_choose_player">Видео плеер</string>
 	<string name="pref_summary_choose_player">Будет использоваться этот видео плеер: %s</string>
 	<string name="pref_title_disable_search_history">Отключить историю поиска</string>
