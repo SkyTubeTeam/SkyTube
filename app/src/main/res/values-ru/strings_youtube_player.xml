@@ -9,7 +9,7 @@
 	<string name="error_get_video_desc">Ошибка во время загрузки описания видео.</string>
 	<string name="error_invalid_url">Неверная ссылка на видео: %s</string>
 
-	<string name="warning_live_video">Не получается вопроизвести прямой эфир. Попробовать внешними средствами?</string>
+	<string name="warning_live_video">Не получается воспроизвести прямой эфир. Открыть прямой эфир в другом приложении?</string>
 
 	<string name="ratings_disabled">Рейтинг отключен</string>
 
