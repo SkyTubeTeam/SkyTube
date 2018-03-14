@@ -22,6 +22,6 @@
 	<string name="import_subscriptions_parse_error">Ошибка во время чтения загруженного XML файла: %s.</string>
 	<string name="failed_to_import_subscriptions">Не получается импортировать подписки YouTube.</string>
 
-	<string name="about">About</string>
+	<string name="about">Подробнее</string>
 <string name="unsubscribe_from_all_current_sibbed_channels">Отписаться от всех подписанных каналов.</string>
 	</resources>
