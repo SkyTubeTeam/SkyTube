@@ -508,7 +508,9 @@
 	<string name="pref_summary_disable_search_history">If checked, Search History will be cleared and will not be used.</string>
 	<string name="pref_disable_search_history_deleted">Search History deleted.</string>
 	<string name="restart">Restart</string>
-
+	<string name="pref_key_subscriptions_alphabetical_order" translatable="false">pref_key_subscriptions_alphabetical_order</string>
+	<string name="pref_title_subscriptions_alphabetical_order">Sort Channels Alphabetically</string>
+	<string name="pref_summary_subscriptions_alphabetical_order">If checked, Subscribed Channels will be sorted alphabetically after the first subscription/unsubscription.</string>
 	<string name="pref_key_brightness_level" translatable="false">pref_key_brightness_level</string>
 
 	<string name="pref_blocked_channel_category">Blocked Channels</string>

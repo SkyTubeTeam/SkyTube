@@ -47,6 +47,10 @@ import free.rm.skytube.gui.businessobjects.MainActivityListener;
 public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapter.SubChannelViewHolder> {
 
 	private static final String TAG = SubsAdapter.class.getSimpleName();
+
+
+
+	private boolean isChannelsSorted = false;
 	private static SubsAdapter subsAdapter = null;
 	/**
 	 * Set to true if the users' subscriptions channels list has been fully retrieved and populated
@@ -75,6 +79,14 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 		}
 
 		return subsAdapter;
+	}
+
+	public boolean isChannelsSorted() {
+		return isChannelsSorted;
+	}
+
+	public void setChannelsSorted(boolean channelsSorted) {
+		isChannelsSorted = channelsSorted;
 	}
 
 
@@ -215,7 +227,11 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 			}
 		}
 
-		sortChannelsAlphabetically(getList());
+		Logger.i(this,isChannelsSorted + "");
+		if (isChannelsSorted()) {
+			sortChannelsAlphabetically(getList());
+		}
+
 
 		// the list has now been retrieved; return it pls
 		return getList();
@@ -236,6 +252,16 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 			});
 		}
 	}
+
+/*
+	public String getFilterText() {
+		return filterText;
+	}
+
+	public void setFilterText(String text) {
+		this.filterText = text;
+	}
+*/
 
 
 	/**
