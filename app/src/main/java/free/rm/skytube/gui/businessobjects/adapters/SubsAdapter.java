@@ -29,6 +29,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -48,6 +49,8 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 
 	private static final String TAG = SubsAdapter.class.getSimpleName();
 	private static SubsAdapter subsAdapter = null;
+	public List<YouTubeChannel> listCopy = new ArrayList<>();
+
 	/**
 	 * Set to true if the users' subscriptions channels list has been fully retrieved and populated
 	 * by querying the local database and YouTube servers...
@@ -57,11 +60,14 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 
 
 	private SubsAdapter(Context context, View progressBar) {
-		super(context);
+			super(context);
 
 		// populate this adapter with user's subscribed channels
 		new GetSubscribedChannelsTask(this, progressBar).executeInParallel();
+
+
 	}
+
 
 
 	public static SubsAdapter get(Context context) {
@@ -235,6 +241,24 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 				}
 			});
 		}
+	}
+
+	public void filterSubSearch(String text){
+		// TODO: 24.3.2018 put list copy on constructor and fix npe on it
+		listCopy.addAll(getSubsLists());
+		clearList();
+		if(text.isEmpty()){
+			list.addAll(listCopy);
+		} else{
+			text = text.toLowerCase();
+			for(YouTubeChannel channel: listCopy){
+				if(channel.getTitle().toLowerCase().contains(text)){
+					list.add(channel);
+				}
+			}
+		}
+		notifyDataSetChanged();
+
 	}
 
 

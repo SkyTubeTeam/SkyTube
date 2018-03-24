@@ -16,14 +16,26 @@
 		android:background="@color/colorPrimary"
 		style="@style/SubsTextView"/>
 
+	<android.support.v7.widget.SearchView
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:padding="5dp"
+		android:layout_below="@id/subs_drawer_title"
+		android:id="@+id/sub_search_view"
+		android:actionViewClass="android.support.v7.widget.SearchView"
+		></android.support.v7.widget.SearchView>
+
+
+
 	<android.support.v7.widget.RecyclerView
 		android:id="@+id/subs_drawer"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:layout_below="@+id/subs_drawer_title"
+		android:layout_below="@+id/sub_search_view"
 		android:choiceMode="singleChoice"
 		android:divider="@android:color/transparent"
-		android:dividerHeight="0dp"/>
+		android:dividerHeight="0dp"
+		/>
 
 	<ProgressBar
 		android:id="@+id/subs_drawer_progress_bar"
