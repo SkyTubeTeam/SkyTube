@@ -18,6 +18,7 @@
 package free.rm.skytube.gui.businessobjects.adapters;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -48,6 +49,8 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 
 	private static final String TAG = SubsAdapter.class.getSimpleName();
 	private static SubsAdapter subsAdapter = null;
+	private SharedPreferences sharedPreferences = getContext().getSharedPreferences("myPref",0);
+	private SharedPreferences.Editor editor = sharedPreferences.edit();
 	/**
 	 * Set to true if the users' subscriptions channels list has been fully retrieved and populated
 	 * by querying the local database and YouTube servers...
@@ -79,11 +82,13 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 	}
 
 	public boolean isChannelsSorted() {
-		return isChannelsSorted;
+		boolean status = sharedPreferences.getBoolean("isChannelSorted",isChannelsSorted);
+		return status;
 	}
 
 	public void setChannelsSorted(boolean channelsSorted) {
 		isChannelsSorted = channelsSorted;
+		editor.putBoolean("isChannelSorted",isChannelsSorted).apply();
 	}
 
 
