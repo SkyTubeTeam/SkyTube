@@ -113,9 +113,13 @@ public class OthersPreferenceFragment extends PreferenceFragment implements Shar
 				}
 			} else if (key.equals(getString(R.string.pref_key_subscriptions_alphabetical_order))){
 				CheckBoxPreference enableChannelSort = (CheckBoxPreference) findPreference(key);
+				SubsAdapter subsAdapter = SubsAdapter.get(getActivity());
 				if (enableChannelSort.isChecked()){
-					SubsAdapter subsAdapter = SubsAdapter.get(getActivity());
 					subsAdapter.setChannelsSorted(true);
+					subsAdapter.refreshSubsList();
+				} else {
+					subsAdapter.setChannelsSorted(false);
+					subsAdapter.refreshSubsList();
 				}
 			}/*else if (key.equals(getString(R.string.pref_feed_notification_key))) {
 				ListPreference feedNotificationPref = (ListPreference) findPreference(key);
