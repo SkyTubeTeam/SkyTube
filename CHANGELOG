@@ -6,6 +6,9 @@ vX.XX - XX XX 2018:
 	* Exoplayer support.
 	* YouTube's videos and playlists links inside the video description are now handled and opened inside SkyTube.
 
+v2.82 - 24 Mar 2018:
+	* Emergency fix:  API DDOS attack mitigation controls.
+
 v2.81 - 28 Jan 2018:
 	* Emergency fix: "This video is unavailable" error occurred for some YouTube videos.
 

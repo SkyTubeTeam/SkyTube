@@ -9,17 +9,18 @@ android {
         minSdkVersion 14
         targetSdkVersion 27
 
-        versionName "2.81"    // digits of the *fractional part* shall NOT be > than "9"
-        versionCode 12
+        versionName "2.82"    // digits of the *fractional part* shall NOT be > than "9"
+        versionCode 13
 
         // Third party devs:  pls be ethical and change the below keys
+        buildConfigField 'String',   'YOUTUBE_API_KEYS_DEBUG', '"AIzaSyDU-ZZCyOB_kYkiMSZ6ooSipUZRukHU4ik"'
         buildConfigField 'String[]', 'YOUTUBE_API_KEYS',
                 '{' +
-                        '"AIzaSyBlD0IyrnYDVUklu-lEp5ZPmeUFaKEmz2I",' +
-                        '"AIzaSyCBe6h-D27WgcDkX9Wuyb3Fjef6tFja2Eg",' +
-                        '"AIzaSyC2eifJuPidYxsq7NKvZGdTxngFrhbm0G0"' +
-                        '}'
-        buildConfigField 'String', 'SKYTUBE_WEBSITE', '"http://skytube-app.com"'
+                        '"AIzaSyC27jgPDHkQsQK8TW4ngrQprSCnlMTJ04w",' +
+                        '"AIzaSyCmXsaE6ZW14-1vM5zceWnGWnB73FkY7U4",' +
+                        '"AIzaSyBd3Loyy_XN2tPHPfc1E7EkSkdCqfzTHxg"'  +
+                '}'
+        buildConfigField 'String', 'SKYTUBE_WEBSITE',         '"http://skytube-app.com"'
         buildConfigField 'String', 'SKYTUBE_WEBSITE_CREDITS', '"http://skytube-app.com/credits.html"'
         buildConfigField 'String', 'SKYTUBE_UPDATES_URL', '"https://api.github.com/repos/ram-on/SkyTube/releases/latest"'
         vectorDrawables.useSupportLibrary true
