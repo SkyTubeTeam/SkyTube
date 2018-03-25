@@ -17,118 +17,119 @@
 
 package free.rm.skytube.businessobjects.YouTube.Tasks;
 
-import android.view.View;
+import android.support.v4.widget.SwipeRefreshLayout;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
+import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.GetYouTubeVideos;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
+import free.rm.skytube.businessobjects.db.BlockedChannelsDb;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
-import free.rm.skytube.gui.businessobjects.LoadingProgressBar;
 import free.rm.skytube.gui.businessobjects.adapters.VideoGridAdapter;
+
 
 /**
  * An asynchronous task that will retrieve YouTube videos and displays them in the supplied Adapter.
  */
 public class GetYouTubeVideosTask extends AsyncTaskParallel<Void, Void, List<YouTubeVideo>> {
 
-	/** Object used to retrieve the desired YouTube videos. */
-	private GetYouTubeVideos getYouTubeVideos;
+    /** Object used to retrieve the desired YouTube videos. */
+    private GetYouTubeVideos getYouTubeVideos;
 
-	/** The Adapter where the retrieved videos will be displayed. */
-	private VideoGridAdapter	videoGridAdapter;
+    /** The Adapter where the retrieved videos will be displayed. */
+    private VideoGridAdapter	videoGridAdapter;
 
-	/** Class tag. */
-	private static final String TAG = GetYouTubeVideosTask.class.getSimpleName();
+    /** SwipeRefreshLayout will be used to display the progress bar */
+    private SwipeRefreshLayout  swipeRefreshLayout;
 
-	/** Optional non-static progressBar. If this isn't set, a static one will be used */
-	private View progressBar = null;
-
-	/** Whether or not to skip showing the progress bar. This is needed when doing swipe to refresh, since that functionality shows its own progress bar. */
-	private boolean skipProgressBar = false;
-
-	/** Runnable to be run when this task completes */
-	private Runnable onFinished;
-
-	private YouTubeChannel channel;
+    private YouTubeChannel channel;
 
 
-	public GetYouTubeVideosTask(GetYouTubeVideos getYouTubeVideos, VideoGridAdapter videoGridAdapter, View progressBar) {
-		this.getYouTubeVideos = getYouTubeVideos;
-		this.videoGridAdapter = videoGridAdapter;
-		this.progressBar = progressBar;
-	}
-
-	/**
-	 * Constructor to get youtube videos as part of a swipe to refresh. Since this functionality has its own progress bar, we'll
-	 * skip showing our own.
-	 *
-	 * @param getYouTubeVideos The object that does the actual fetching of videos.
-	 * @param videoGridAdapter The grid adapter the videos will be added to.
-	 * @param onFinished
-	 */
-	public GetYouTubeVideosTask(GetYouTubeVideos getYouTubeVideos, VideoGridAdapter videoGridAdapter, Runnable onFinished) {
-		this.getYouTubeVideos = getYouTubeVideos;
-		this.videoGridAdapter = videoGridAdapter;
-		this.skipProgressBar = true;
-		this.onFinished = onFinished;
-		this.getYouTubeVideos.reset();
-		this.videoGridAdapter.clearList();
-	}
+    /**
+     * Constructor to get youtube videos as part of a swipe to refresh. Since this functionality has its own progress bar, we'll
+     * skip showing our own.
+     *
+     * @param getYouTubeVideos The object that does the actual fetching of videos.
+     * @param videoGridAdapter The grid adapter the videos will be added to.
+     */
+    public GetYouTubeVideosTask(GetYouTubeVideos getYouTubeVideos, VideoGridAdapter videoGridAdapter, SwipeRefreshLayout swipeRefreshLayout) {
+        this.getYouTubeVideos = getYouTubeVideos;
+        this.videoGridAdapter = videoGridAdapter;
+        this.swipeRefreshLayout = swipeRefreshLayout;
+    }
 
 
-	@Override
-	protected void onPreExecute() {
-		// if this task is being called by ChannelBrowserFragment, then get the channel the user is browsing
-		channel = videoGridAdapter.getYouTubeChannel();
+    @Override
+    protected void onPreExecute() {
+        // if this task is being called by ChannelBrowserFragment, then get the channel the user is browsing
+        channel = videoGridAdapter.getYouTubeChannel();
 
-		if(!skipProgressBar) {
-			if (progressBar != null)
-				progressBar.setVisibility(View.VISIBLE);
-			else
-				LoadingProgressBar.get().show();
-		}
-	}
-
-	@Override
-	protected List<YouTubeVideo> doInBackground(Void... params) {
-		List<YouTubeVideo> videosList = null;
-
-		if (!isCancelled()) {
-			// get videos from YouTube
-			videosList = getYouTubeVideos.getNextVideos();
-
-			if (videosList != null  &&  channel != null  &&  channel.isUserSubscribed()) {
-				for (YouTubeVideo video : videosList) {
-					channel.addYouTubeVideo(video);
-				}
-
-				SubscriptionsDb.getSubscriptionsDb().saveChannelVideos(channel);
-			}
-		}
-
-		return videosList;
-	}
+        if (swipeRefreshLayout != null)
+            swipeRefreshLayout.setRefreshing(true);
+    }
 
 
-	@Override
-	protected void onPostExecute(List<YouTubeVideo> videosList) {
-		videoGridAdapter.appendList(videosList);
+    @Override
+    protected List<YouTubeVideo> doInBackground(Void... params) {
+        List<YouTubeVideo> videosList = null;
+        ArrayList<YouTubeVideo> youTubeVideoList = new ArrayList<>();
+        List<String> blockedChannelIds = new ArrayList<>();
+        final BlockedChannelsDb blockedChannelsDb = BlockedChannelsDb.getBlockedChannelsDb();
 
-		if(progressBar != null)
-			progressBar.setVisibility(View.GONE);
-		else
-			LoadingProgressBar.get().hide();
-		if(onFinished != null)
-			onFinished.run();
-	}
+        if (!isCancelled()) {
+            // get videos from YouTube
+            videosList = getYouTubeVideos.getNextVideos();
+
+            if (videosList != null && channel != null && channel.isUserSubscribed()) {
+                for (YouTubeVideo video : videosList) {
+                    channel.addYouTubeVideo(video);
+                }
+                SubscriptionsDb.getSubscriptionsDb().saveChannelVideos(channel);
+            }
+
+            try {
+                //get the IDs of blocked channels
+                for (String channelIds : blockedChannelsDb.getBlockedChannelsListId()) {
+                    blockedChannelIds.add(channelIds);
+                }
+
+                //filtering system to get the videos that are not blocked
+                //videos are checked by their IDs - if their IDs are blocked they are not loaded.
+
+                // videoList needs to be null checked - if there is not connection we get null point exception
+                if (videosList != null) {
+                    for (YouTubeVideo video : videosList) {
+                        if (!blockedChannelIds.contains(video.getChannelId())) {
+                            youTubeVideoList.add(video);
+                        }
+                    }
+                }
+            } catch (Exception e) {
+                Logger.e(this, "Error occurred while checking blocked channels", e);
+            }
+        }
+        
+        return youTubeVideoList;
+    }
 
 
-	@Override
-	protected void onCancelled() {
-		LoadingProgressBar.get().hide();
-	}
+    @Override
+    protected void onPostExecute(List<YouTubeVideo> videosList) {
+        videoGridAdapter.appendList(videosList);
+
+        if(swipeRefreshLayout != null)
+            swipeRefreshLayout.setRefreshing(false);
+    }
+
+
+    @Override
+    protected void onCancelled() {
+        if(swipeRefreshLayout != null)
+            swipeRefreshLayout.setRefreshing(false);
+    }
 
 }

@@ -1,12 +1,16 @@
 package free.rm.skytube.gui.fragments;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Rect;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.Gravity;
@@ -20,6 +24,7 @@ import android.view.WindowManager;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
@@ -28,33 +33,29 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.util.List;
 import java.util.Locale;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
-import free.rm.skytube.businessobjects.AsyncTaskParallel;
-import free.rm.skytube.businessobjects.YouTube.Tasks.GetVideoDescriptionTask;
-import free.rm.skytube.businessobjects.YouTube.GetVideosDetailsByIDs;
-import free.rm.skytube.businessobjects.YouTube.Tasks.GetYouTubeChannelInfoTask;
-import free.rm.skytube.businessobjects.YouTube.VideoStream.StreamMetaData;
+import free.rm.skytube.businessobjects.GetVideoDetailsTask;
+import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannelInterface;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
-import free.rm.skytube.businessobjects.db.Tasks.CheckIfUserSubbedToChannelTask;
+import free.rm.skytube.businessobjects.YouTube.Tasks.GetVideoDescriptionTask;
+import free.rm.skytube.businessobjects.YouTube.Tasks.GetYouTubeChannelInfoTask;
+import free.rm.skytube.businessobjects.YouTube.VideoStream.StreamMetaData;
 import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
+import free.rm.skytube.businessobjects.db.Tasks.CheckIfUserSubbedToChannelTask;
+import free.rm.skytube.businessobjects.db.Tasks.IsVideoBookmarkedTask;
 import free.rm.skytube.businessobjects.interfaces.GetDesiredStreamListener;
 import free.rm.skytube.gui.activities.MainActivity;
 import free.rm.skytube.gui.activities.ThumbnailViewerActivity;
-import free.rm.skytube.gui.businessobjects.adapters.CommentsAdapter;
-import free.rm.skytube.businessobjects.db.Tasks.IsVideoBookmarkedTask;
-import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.gui.businessobjects.MediaControllerEx;
 import free.rm.skytube.gui.businessobjects.OnSwipeTouchListener;
 import free.rm.skytube.gui.businessobjects.SubscribeButton;
+import free.rm.skytube.gui.businessobjects.YouTubeVideoListener;
+import free.rm.skytube.gui.businessobjects.adapters.CommentsAdapter;
 import free.rm.skytube.gui.businessobjects.fragments.ImmersiveModeFragment;
 import hollowsoft.slidingdrawer.OnDrawerOpenListener;
 import hollowsoft.slidingdrawer.SlidingDrawer;
@@ -62,7 +63,7 @@ import hollowsoft.slidingdrawer.SlidingDrawer;
 /**
  * A fragment that holds a standalone YouTube player.
  */
-public class YouTubePlayerFragment extends ImmersiveModeFragment implements MediaPlayer.OnPreparedListener {
+public class YouTubePlayerFragment extends ImmersiveModeFragment implements MediaPlayer.OnPreparedListener, YouTubeVideoListener {
 
 	public static final String YOUTUBE_VIDEO_OBJ = "YouTubePlayerFragment.yt_video_obj";
 
@@ -85,7 +86,10 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 	private View                videoDescRatingsDisabledTextView = null;
 	private TextView			videoDescPublishDateTextView = null;
 	private TextView			videoDescriptionTextView = null;
-	private View				voidView = null;
+	private RelativeLayout      voidView = null;
+	private ImageView           indicatorImageView = null;
+	private TextView            indicatorTextView = null;
+	private RelativeLayout      indicatorView = null;
 	private View				loadingVideoView = null;
 
 	private SlidingDrawer		videoDescriptionDrawer = null;
@@ -102,6 +106,10 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 	private Handler             hideHudTimerHandler = null;
 	private Handler             hideVideoDescAndCommentsIconsTimerHandler = null;
 
+	private float               startBrightness = -1.0f;
+	private float               startVolumePercent  = -1.0f;
+	private int                 startVideoTime = -1;
+
 	/** Timeout (in milliseconds) before the HUD (i.e. media controller + action/title bar) is hidden. */
 	private static final int HUD_VISIBILITY_TIMEOUT = 5000;
 	/** Timeout (in milliseconds) before the navigation bar is hidden (which will occur only after
@@ -110,6 +118,9 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 	private static final String VIDEO_CURRENT_POSITION = "YouTubePlayerFragment.VideoCurrentPosition";
 	private static final String TAG = YouTubePlayerFragment.class.getSimpleName();
 	private static final String TUTORIAL_COMPLETED = "YouTubePlayerFragment.TutorialCompleted";
+
+	private static final int MAX_VIDEO_STEP_TIME = 60 * 1000;
+	private static final int MAX_BRIGHTNESS = 100;
 
 
 	@Override
@@ -145,7 +156,7 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 				getVideoInfoTasks();
 			} else {
 				// ... or the video URL is passed to SkyTube via another Android app
-				new GetVideoDetailsTask().executeInParallel();
+				new GetVideoDetailsTask(getUrlFromIntent(getActivity().getIntent()), this).executeInParallel();
 			}
 
 		}
@@ -188,6 +199,9 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 		}
 
 		voidView = view.findViewById(R.id.void_view);
+		indicatorView = view.findViewById(R.id.indicatorView);
+		indicatorImageView = view.findViewById(R.id.indicatorImageView);
+		indicatorTextView = view.findViewById(R.id.indicatorTextView);
 		// detect if user's swipes motions and taps...
 		voidView.setOnTouchListener(new OnSwipeTouchListener(getActivity()) {
 
@@ -217,6 +231,135 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 			public boolean onSingleTap() {
 				showOrHideHud();
 				return true;
+			}
+
+			@Override
+			public void onGestureDone() {
+				startBrightness = -1.0f;
+				startVolumePercent = -1.0f;
+				startVideoTime = -1;
+				hideIndicator();
+			}
+
+			@Override
+			public void adjustBrightness(double adjustPercent) {
+				// We are setting brightness percent to a value that should be from -1.0 to 1.0. We need to limit it here for these values first
+				if (adjustPercent < -1.0f) {
+					adjustPercent = -1.0f;
+				} else if (adjustPercent > 1.0f) {
+					adjustPercent = 1.0f;
+				}
+
+				WindowManager.LayoutParams lp = getActivity().getWindow().getAttributes();
+				if (startBrightness < 0) {
+					startBrightness = lp.screenBrightness;
+				}
+				// We are getting a final brightness value when summing current brightness and the percent we got from swipe action. Should be >= 0 and <= 1
+				float targetBrightness = (float) (startBrightness + adjustPercent * 1.0f);
+				if (targetBrightness <= 0.0f) {
+					targetBrightness = 0.0f;
+				} else if (targetBrightness >= 1.0f) {
+					targetBrightness = 1.0f;
+				}
+				lp.screenBrightness = targetBrightness;
+				getActivity().getWindow().setAttributes(lp);
+
+				indicatorImageView.setImageResource(R.drawable.ic_brightness);
+				indicatorTextView.setText((int) (targetBrightness * MAX_BRIGHTNESS) + "%");
+
+				// Show indicator. It will be hidden once onGestureDone will be called
+				showIndicator();
+			}
+
+			@Override
+			public void adjustVolumeLevel(double adjustPercent) {
+				// We are setting volume percent to a value that should be from -1.0 to 1.0. We need to limit it here for these values first
+				if (adjustPercent < -1.0f) {
+					adjustPercent = -1.0f;
+				} else if (adjustPercent > 1.0f) {
+					adjustPercent = 1.0f;
+				}
+
+				AudioManager audioManager = (AudioManager) getContext()
+						.getSystemService(Context.AUDIO_SERVICE);
+				final int STREAM = AudioManager.STREAM_MUSIC;
+
+				// Max volume will return INDEX of volume not the percent. For example, on my device it is 15
+				int maxVolume = audioManager.getStreamMaxVolume(STREAM);
+				if (maxVolume == 0) return;
+
+				if (startVolumePercent < 0) {
+					// We are getting actual volume index (NOT volume but index). It will be >= 0.
+					int curVolume = audioManager.getStreamVolume(STREAM);
+					// And counting percents of maximum volume we have now
+					startVolumePercent = curVolume * 1.0f / maxVolume;
+				}
+				// Should be >= 0 and <= 1
+				double targetPercent = startVolumePercent + adjustPercent;
+				if (targetPercent > 1.0f) {
+					targetPercent = 1.0f;
+				} else if (targetPercent < 0) {
+					targetPercent = 0;
+				}
+
+				// Calculating index. Test values are 15 * 0.12 = 1 ( because it's int)
+				int index = (int) (maxVolume * targetPercent);
+				if (index > maxVolume) {
+					index = maxVolume;
+				} else if (index < 0) {
+					index = 0;
+				}
+				audioManager.setStreamVolume(STREAM, index, 0);
+
+				indicatorImageView.setImageResource(R.drawable.ic_volume);
+				indicatorTextView.setText(index * 100 / maxVolume + "%");
+
+				// Show indicator. It will be hidden once onGestureDone will be called
+				showIndicator();
+			}
+
+			@Override
+			public void adjustVideoPosition(double adjustPercent, boolean forwardDirection) {
+				if (adjustPercent < -1.0f) {
+					adjustPercent = -1.0f;
+				} else if (adjustPercent > 1.0f) {
+					adjustPercent = 1.0f;
+				}
+
+				int totalTime = videoView.getDuration();
+
+				if (startVideoTime < 0) {
+					startVideoTime = videoView.getCurrentPosition();
+				}
+				// adjustPercent: value from -1 to 1.
+                double positiveAdjustPercent = Math.max(adjustPercent,-adjustPercent);
+				// End of line makes seek speed not linear
+				int targetTime = startVideoTime + (int) (MAX_VIDEO_STEP_TIME * adjustPercent * (positiveAdjustPercent / 0.1));
+				if (targetTime > totalTime) {
+					targetTime = totalTime;
+				}
+				if (targetTime < 0) {
+					targetTime = 0;
+				}
+
+				String targetTimeString = formatDuration(targetTime / 1000);
+
+				if (forwardDirection) {
+					indicatorImageView.setImageResource(R.drawable.ic_forward);
+					indicatorTextView.setText(targetTimeString);
+				} else {
+					indicatorImageView.setImageResource(R.drawable.ic_rewind);
+					indicatorTextView.setText(targetTimeString);
+				}
+
+				showIndicator();
+
+				videoView.seekTo(targetTime);
+			}
+
+			@Override
+			public Rect viewRect() {
+				return new Rect(voidView.getLeft(), voidView.getTop(), voidView.getRight() , voidView.getBottom());
 			}
 		});
 
@@ -269,11 +412,11 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 
 
 	/**
-	 * Will asynchronously retrieve additional video information such as channgel avatar ...etc
+	 * Will asynchronously retrieve additional video information such as channel, avatar ...etc
 	 */
 	private void getVideoInfoTasks() {
 		// get Channel info (e.g. avatar...etc) task
-		new GetYouTubeChannelInfoTask(new YouTubeChannelInterface() {
+		new GetYouTubeChannelInfoTask(getContext(), new YouTubeChannelInterface() {
 			@Override
 			public void onGetYouTubeChannel(YouTubeChannel youTubeChannel) {
 				YouTubePlayerFragment.this.youTubeChannel = youTubeChannel;
@@ -360,7 +503,38 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 			videoCurrentPosition = videoView.getCurrentPosition();
 		}
 
+		saveCurrentBrightness();
 		super.onPause();
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+
+		setupUserPrefs();
+	}
+
+	// We can also add volume level or something in the future.
+	private void setupUserPrefs() {
+		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
+		float brightnessLevel = sp.getFloat(getString(R.string.pref_key_brightness_level), -1.0f);
+		setBrightness(brightnessLevel);
+	}
+
+
+	private void saveCurrentBrightness() {
+		WindowManager.LayoutParams lp = getActivity().getWindow().getAttributes();
+		float brightnessLevel = lp.screenBrightness;
+		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
+		sp.edit().putFloat(getString(R.string.pref_key_brightness_level), brightnessLevel).apply();
+	}
+
+	private void setBrightness(float level) {
+		if(level <= 0.0f && level > 1.0f) return;
+
+		WindowManager.LayoutParams lp = getActivity().getWindow().getAttributes();
+		lp.screenBrightness = level;
+		getActivity().getWindow().setAttributes(lp);
 	}
 
 
@@ -456,6 +630,31 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 		}
 	}
 
+
+	private void showIndicator() {
+		indicatorView.setVisibility(View.VISIBLE);
+	}
+
+
+	private void hideIndicator() {
+		indicatorView.setVisibility(View.GONE);
+	}
+
+
+	// Returns a (localized) string for the given duration (in seconds).
+	private String formatDuration(int duration) {
+		int h = duration / 3600;
+		int m = (duration - h * 3600) / 60;
+		int s = duration - (h * 3600 + m * 60);
+		String durationValue;
+		if (h == 0) {
+			durationValue = String.format(Locale.getDefault(),"%1$02d:%2$02d", m, s);
+		} else {
+			durationValue = String.format(Locale.getDefault(),"%1$d:%2$02d:%3$02d", h, m, s);
+		}
+		return durationValue;
+	}
+
 	@Override
 	public void onPrepareOptionsMenu(Menu menu) {
 		// Hide the download video option if mobile downloads are not allowed and the device is connected through mobile, and the video isn't already downloaded
@@ -520,6 +719,9 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 				youTubeVideo.downloadVideo(getContext());
 				return true;
 
+            case R.id.block_channel:
+                youTubeVideo.blockChannel(getContext());
+
 			default:
 				return super.onOptionsItemSelected(item);
 		}
@@ -561,10 +763,10 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 			} else {
 				youTubeVideo.getDesiredStream(new GetDesiredStreamListener() {
 					@Override
-					public void onGetDesiredStream(StreamMetaData desiredStream) {
+					public void onGetDesiredStream(Uri videoUri) {
 						// play the video
-						Logger.i(YouTubePlayerFragment.this, ">> PLAYING: %s", desiredStream);
-						videoView.setVideoURI(desiredStream.getUri());
+						Logger.i(YouTubePlayerFragment.this, ">> PLAYING: %s", videoUri);
+						videoView.setVideoURI(videoUri);
 					}
 
 					@Override
@@ -591,6 +793,7 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 				@Override
 				public void onFinished(String description) {
 					videoDescriptionTextView.setText(description);
+					SkyTubeApp.interceptYouTubeLinks(getActivity(), videoDescriptionTextView);
 				}
 			}).executeInParallel();
 		} else {
@@ -614,7 +817,6 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 							.show();
 		}
 	}
-
 
 	/**
 	 * Will check whether the video player tutorial was completed before.  If no, it will return
@@ -662,104 +864,51 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 
 	////////////////////////////////////////////////////////////////////////////////////////////////
 
-
 	/**
-	 * This task will, from the given video URL, get the details of the video (e.g. video name,
-	 * likes ...etc).
+	 * When a video url is clicked on, attempt to open and play it.
+	 * @param videoUrl
+	 * @param youTubeVideo
 	 */
-	private class GetVideoDetailsTask extends AsyncTaskParallel<Void, Void, YouTubeVideo> {
+	@Override
+	public void onYouTubeVideo(String videoUrl, YouTubeVideo youTubeVideo) {
+		if (youTubeVideo == null) {
+			// invalid URL error (i.e. we are unable to decode the URL)
+			String err = String.format(getString(R.string.error_invalid_url), videoUrl);
+			Toast.makeText(getActivity(), err, Toast.LENGTH_LONG).show();
 
-		private String videoUrl = null;
+			// log error
+			Log.e(TAG, err);
 
+			// close the video player activity
+			closeActivity();
+		} else {
+			YouTubePlayerFragment.this.youTubeVideo = youTubeVideo;
 
-		@Override
-		protected void onPreExecute() {
-			String url = getUrlFromIntent(getActivity().getIntent());
+			// setup the HUD and play the video
+			setUpHUDAndPlayVideo();
 
-			try {
-				// YouTube sends subscriptions updates email in which its videos' URL are encoded...
-				// Hence we need to decode them first...
-				videoUrl = URLDecoder.decode(url, "UTF-8");
-			} catch (UnsupportedEncodingException e) {
-				Log.e(TAG, "UnsupportedEncodingException on " + videoUrl + " encoding = UTF-8", e);
-				videoUrl = url;
-			}
+			getVideoInfoTasks();
+
+			// will now check if the video is bookmarked or not (and then update the menu
+			// accordingly)
+			new IsVideoBookmarkedTask(youTubeVideo, menu).executeInParallel();
 		}
-
-
-		/**
-		 * Returns an instance of {@link YouTubeVideo} from the given {@link #videoUrl}.
-		 *
-		 * @return {@link YouTubeVideo}; null if an error has occurred.
-		 */
-		@Override
-		protected YouTubeVideo doInBackground(Void... params) {
-			String videoId = YouTubeVideo.getYouTubeIdFromUrl(videoUrl);
-			YouTubeVideo youTubeVideo = null;
-
-			if (videoId != null) {
-				try {
-					GetVideosDetailsByIDs getVideo = new GetVideosDetailsByIDs();
-					getVideo.init(videoId);
-					List<YouTubeVideo> youTubeVideos = getVideo.getNextVideos();
-
-					if (youTubeVideos.size() > 0)
-						youTubeVideo = youTubeVideos.get(0);
-				} catch (IOException ex) {
-					Log.e(TAG, "Unable to get video details, where id="+videoId, ex);
-				}
-			}
-
-			return youTubeVideo;
-		}
-
-
-		@Override
-		protected void onPostExecute(YouTubeVideo youTubeVideo) {
-			if (youTubeVideo == null) {
-				// invalid URL error (i.e. we are unable to decode the URL)
-				String err = String.format(getString(R.string.error_invalid_url), videoUrl);
-				Toast.makeText(getActivity(), err, Toast.LENGTH_LONG).show();
-
-				// log error
-				Log.e(TAG, err);
-
-				// close the video player activity
-				closeActivity();
-			} else {
-				YouTubePlayerFragment.this.youTubeVideo = youTubeVideo;
-
-				// setup the HUD and play the video
-				setUpHUDAndPlayVideo();
-
-				getVideoInfoTasks();
-
-				// will now check if the video is bookmarked or not (and then update the menu
-				// accordingly)
-				new IsVideoBookmarkedTask(youTubeVideo, menu).executeInParallel();
-			}
-		}
-
-
-		/**
-		 * The video URL is passed to SkyTube via another Android app (i.e. via an intent).
-		 *
-		 * @return The URL of the YouTube video the user wants to play.
-		 */
-		private String getUrlFromIntent(final Intent intent) {
-			String url = null;
-
-			if (Intent.ACTION_VIEW.equals(intent.getAction()) && intent.getData() != null) {
-				url = intent.getData().toString();
-			}
-
-			return url;
-		}
-
 	}
-
 
 	////////////////////////////////////////////////////////////////////////////////////////////////
 
+	/**
+	 * The video URL is passed to SkyTube via another Android app (i.e. via an intent).
+	 *
+	 * @return The URL of the YouTube video the user wants to play.
+	 */
+	private String getUrlFromIntent(final Intent intent) {
+		String url = null;
 
+		if (Intent.ACTION_VIEW.equals(intent.getAction()) && intent.getData() != null) {
+			url = intent.getData().toString();
+		}
+
+		return url;
+	}
 }

@@ -11,8 +11,6 @@
 	<string name="pref_video_player_category">Videospeler</string>
 	<string name="pref_title_preferred_res">Voorkeursresolutie</string>
 	<string name="pref_summary_preferred_res">Selecteer uw voorkeursresolutie</string>
-	<string name="pref_title_use_offical_player">Officiële YouTube-speler gebruiken</string>
-	<string name="pref_summary_use_offical_player">Niet aanbevolen</string>
 
 	<string name="pref_backup_category">Back-ups</string>
 	<string name="pref_title_backup_dbs">Databases back-uppen</string>
@@ -58,12 +56,15 @@
 	<string name="pref_other_category">Anderen</string>
 	<string name="pref_title_default_tab">Standaard tabblad</string>
 	<string name="pref_summary_default_tab">Standaard tabblad dat moet worden weergegeven zodra SkyTube start: %s</string>
+
 	<string name="pref_title_screen_orientation">Schermoriëntatie</string>
-	<string name="pref_summary_screen_orientation">Draaien van de videospeler</string>
-	<string name="pref_screen_landscape">Landschap</string>
-	<string name="pref_screen_portrait">Portret</string>
-	<string name="pref_screen_auto">Automatisch</string>
-	<string name="pref_screen_sensor">Apparaatsensor</string>
+	<string name="pref_summary_screen_orientation">Video player\'s orientation:  %s</string>
+	<string-array name="screen_orientations">
+		<item>Automatisch</item>
+		<item>Landschap</item>
+		<item>Portret</item>
+		<item>Apparaatsensor</item>
+	</string-array>
 
 	<string name="pref_title_disable_immersive_mode">Theatermodus uitschakelen</string>
 	<string name="pref_summary_disable_immersive_mode">Comments and video description icons and the navigation bar shall always be displayed</string>
@@ -86,4 +87,17 @@
 	<string name="pref_title_allow_mobile_downloads">Downloads toestaan over mobiele netwerkverbinding</string>
 	<string name="pref_summary_allow_mobile_downloads">Selecteer dit om downloaden over mobiele netwerkverbindingen in te schakelen i.p.v. alleen over Wi-Fi.</string>
 
-</resources>
+	<string name="pref_title_disable_search_history">Zoekgeschiedenis uitschakelen</string>
+	<string name="pref_summary_disable_search_history">Als dit wordt aangevinkt, dan zal de zoekgeschiedenis worden gewist en niet worden gebruikt.</string>
+	<string name="pref_disable_search_history_deleted">Zoekgeschiedenis gewist.</string>
+<string name="pref_blocked_channel_key">pref_blocked_channel_key
+\n</string>
+	<string name="pref_blocked_channel_title">Geblokkeerde kanalen beheren</string>
+	<string name="pref_blocked_channel_summary">U kunt eerder geblokkeerde kanalen deblokkeren.</string>
+	<string name="pref_blocked_channel_category">Geblokkeerde kanalen</string>
+
+	<string name="pref_title_blocked_channels_list">Geblokkeerde kanalen</string>
+	<string name="pref_summary_blocked_channels_list">Vink alleen de kanalen aan die u wilt deblokkeren.</string>
+<string name="pref_title_choose_player">Videospeler</string>
+	<string name="pref_summary_choose_player">De te gebruiken videospeler: %s</string>
+	</resources>

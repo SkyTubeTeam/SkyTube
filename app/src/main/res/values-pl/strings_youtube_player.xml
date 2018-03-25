@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
-	<string name="error_stream_err_unavailable">Treść błędu nie jest dostępna.</string>
+	<string name="error_stream_err_unavailable">Treść błędu niedostępna.</string>
 	<string name="error_stream_decryption_fail">Nie można załadować kodu deszyfrowania do serwisu YouTube.</string>
 	<string name="error_stream_parse_error">Błąd analizowania.</string>
 
@@ -10,7 +10,7 @@
 	<string name="error_get_video_desc">Wystąpił błąd podczas otrzymywania opisu wideo.</string>
 	<string name="error_invalid_url">Niepoprawny adres URL wideo:  %s</string>
 
-	<string name="warning_live_video">Póki co nie można odtwarzać transmisji na żywo. Odtworzyć zewnętrznie?</string>
+	<string name="warning_live_video">Póki co nie można odtwarzać transmisji na żywo. Odtworzyć w innej aplikacji?</string>
 
 	<string name="ratings_disabled">Oceny wyłączone</string>
 

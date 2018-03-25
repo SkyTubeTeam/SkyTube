@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="block_channel">Block Channel</string>
+    <string name="channel_blocked">Channel was successfully blocked. Please refresh</string>
+    <string name="channel_blocked_error">Channel could not be blocked.</string>
+    <string name="unblock_button">Unblock</string>
+</resources>

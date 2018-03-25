@@ -26,8 +26,8 @@ public class DownloadedVideosFragment extends OrderableVideosGridFragment implem
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		videoGridAdapter = new OrderableVideoGridAdapter(getActivity(), DownloadedVideosDb.getVideoDownloadsDb());
-		setLayoutResource(R.layout.fragment_downloads);
 	}
+
 
 	@Override
 	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -36,6 +36,7 @@ public class DownloadedVideosFragment extends OrderableVideosGridFragment implem
 		populateList();
 		displayDownloadsDisabledWarning();
 	}
+
 
 	@Override
 	public void onFragmentSelected() {
@@ -48,6 +49,7 @@ public class DownloadedVideosFragment extends OrderableVideosGridFragment implem
 
 		displayDownloadsDisabledWarning();
 	}
+
 
 	/**
 	 * If the user is using mobile network (e.g. 4G) and the preferences setting was not ticked to
@@ -62,24 +64,34 @@ public class DownloadedVideosFragment extends OrderableVideosGridFragment implem
 	}
 
 	@Override
+	protected int getLayoutResource() {
+		return R.layout.fragment_downloads;
+	}
+
+
+	@Override
 	protected VideoCategory getVideoCategory() {
 		return VideoCategory.DOWNLOADED_VIDEOS;
 	}
+
 
 	@Override
 	public String getFragmentName() {
 		return SkyTubeApp.getStr(R.string.downloads);
 	}
 
+
 	@Override
 	public void onDownloadedVideosUpdated() {
 		populateList();
-		videoGridAdapter.refresh();
+		videoGridAdapter.refresh(true);
 	}
+
 
 	private void populateList() {
 		new PopulateBookmarksTask().executeInParallel();
 	}
+
 
 	/**
 	 * A task that:

@@ -17,13 +17,17 @@
 
 package free.rm.skytube.businessobjects.YouTube.Tasks;
 
+import android.content.Context;
+import android.widget.Toast;
+
 import java.io.IOException;
 
+import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
+import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.GetChannelsDetails;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannelInterface;
-import free.rm.skytube.businessobjects.Logger;
 
 /**
  * A task that given a channel ID it will try to initialize and return {@link YouTubeChannel}.
@@ -31,10 +35,21 @@ import free.rm.skytube.businessobjects.Logger;
 public class GetYouTubeChannelInfoTask extends AsyncTaskParallel<String, Void, YouTubeChannel> {
 
 	private YouTubeChannelInterface youTubeChannelInterface;
+	private Context context;
+	private boolean usingUsername = false;
 
-
-	public GetYouTubeChannelInfoTask(YouTubeChannelInterface youTubeChannelInterface) {
+	public GetYouTubeChannelInfoTask(Context context, YouTubeChannelInterface youTubeChannelInterface) {
+		this.context = context;
 		this.youTubeChannelInterface = youTubeChannelInterface;
+	}
+
+	/**
+	 * Set the flag that the execution of this task is passing a username, not an id.
+	 * @return this object, for chaining
+	 */
+	public GetYouTubeChannelInfoTask setUsingUsername() {
+		usingUsername = true;
+		return this;
 	}
 
 
@@ -43,7 +58,10 @@ public class GetYouTubeChannelInfoTask extends AsyncTaskParallel<String, Void, Y
 		YouTubeChannel channel;
 
 		try {
-			channel = new GetChannelsDetails().getYouTubeChannel(channelId[0]);
+			if(usingUsername)
+				channel = new GetChannelsDetails().getYouTubeChannelFromUsername(channelId[0]);
+			else
+				channel = new GetChannelsDetails().getYouTubeChannel(channelId[0]);
 		} catch (IOException e) {
 			Logger.e(this, "Unable to get channel info.  ChannelID=" + channelId[0], e);
 			channel = null;
@@ -56,8 +74,18 @@ public class GetYouTubeChannelInfoTask extends AsyncTaskParallel<String, Void, Y
 	@Override
 	protected void onPostExecute(YouTubeChannel youTubeChannel) {
 		if(youTubeChannelInterface != null) {
-			youTubeChannelInterface.onGetYouTubeChannel(youTubeChannel);
+			if (youTubeChannel != null) {
+				youTubeChannelInterface.onGetYouTubeChannel(youTubeChannel);
+			} else {
+				showError();
+			}
 		}
+	}
+
+	protected void showError() {
+		Toast.makeText(context,
+				context.getString(R.string.could_not_get_channel),
+				Toast.LENGTH_LONG).show();
 	}
 
 }

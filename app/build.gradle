@@ -1,14 +1,17 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion '26.0.2'
+    compileSdkVersion 27
+    buildToolsVersion '27.0.3'
 
     defaultConfig {
         applicationId "free.rm.skytube"
         minSdkVersion 14
-        targetSdkVersion 26
+        targetSdkVersion 27
+
+        versionName "2.82"    // digits of the *fractional part* shall NOT be > than "9"
         versionCode 13
+
         // Third party devs:  pls be ethical and change the below keys
         buildConfigField 'String',   'YOUTUBE_API_KEYS_DEBUG', '"AIzaSyDU-ZZCyOB_kYkiMSZ6ooSipUZRukHU4ik"'
         buildConfigField 'String[]', 'YOUTUBE_API_KEYS',
@@ -19,9 +22,9 @@ android {
                 '}'
         buildConfigField 'String', 'SKYTUBE_WEBSITE',         '"http://skytube-app.com"'
         buildConfigField 'String', 'SKYTUBE_WEBSITE_CREDITS', '"http://skytube-app.com/credits.html"'
-        buildConfigField 'String', 'SKYTUBE_UPDATES_URL',     '"https://api.github.com/repos/ram-on/SkyTube/releases/latest"'
+        buildConfigField 'String', 'SKYTUBE_UPDATES_URL', '"https://api.github.com/repos/ram-on/SkyTube/releases/latest"'
         vectorDrawables.useSupportLibrary true
-        multiDexEnabled true    // this is as we have over 65536 lines of code...
+        multiDexEnabled true    // as we have over 65536 lines of code...
     }
     buildTypes {
         release {
@@ -34,54 +37,59 @@ android {
         // 100% Open-Source Edition
         oss {
             applicationId "free.rm.skytube.oss"
-            versionName "2.82"          // the digits of the *fractional part* shall not be larger than "9"
             resValue "string", "app_name", "SkyTube"
             dimension "skytube"
         }
         // 99% Open-source edition:  uses the YouTube Player Jar [i.e. proprietary module - optional usage]
         extra {
             applicationId "free.rm.skytube.extra"
-            versionName "2.82 Extra"    // the digits of the *fractional part* shall not be larger than "9"
             resValue "string", "app_name", "SkyTube Extra"
             dimension "skytube"
         }
     }
-}
-
-configurations {
-    nonFreeCompile
-
-    all {
-        exclude module: 'httpclient'
+    // Generate APK filenames as follows:  <App Name>-<Flavor><Version>
+    android.applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            outputFileName = "${parent.name}-${variant.productFlavors[0].name}-${variant.versionName}.apk"
+        }
+    }
+    // Ignore missing translations
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
     }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.12'
 
-    nonFreeCompile files('libs/YouTubeAndroidPlayerApi.jar')
+    // YouTube modules
+    implementation 'com.google.http-client:google-http-client-android:1.23.0'
+    implementation 'com.google.apis:google-api-services-youtube:v3-rev187-1.23.0'
+    implementation 'com.github.TeamNewPipe:NewPipeExtractor:v0.11.5'
 
-    compile group: 'org.ocpsoft.prettytime', name: 'prettytime', version: '4.0.1.Final'
-    compile 'com.google.http-client:google-http-client-android:1.23.0'
-    compile 'com.google.apis:google-api-services-youtube:v3-rev187-1.23.0'
-
-    compile 'com.github.TeamNewPipe:NewPipeExtractor:v0.11.5'
-    compile 'com.github.moraisigor:slidingdrawer:1.6.7'
-    compile 'com.github.bumptech.glide:glide:4.3.1'
-    compile 'com.jakewharton:butterknife:8.8.1'
+    // other modules
+    implementation group: 'org.ocpsoft.prettytime', name: 'prettytime', version: '4.0.1.Final'
+    implementation 'com.github.moraisigor:slidingdrawer:1.6.7'
+    implementation 'com.github.bumptech.glide:glide:4.3.1'
+    implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-    compile 'com.google.code.gson:gson:2.8.2'
-    compile group: 'joda-time', name: 'joda-time', version: '2.9.9'
-    compile 'com.afollestad.material-dialogs:core:0.9.4.7'
-    compile 'com.github.angads25:filepicker:1.1.1'
+    implementation 'com.google.code.gson:gson:2.8.2'
+    implementation group: 'joda-time', name: 'joda-time', version: '2.9.9'
+    implementation 'com.afollestad.material-dialogs:core:0.9.5.0'
+    implementation 'com.github.angads25:filepicker:1.1.1'
+    implementation 'com.google.android.exoplayer:exoplayer:2.7.0'
+    implementation 'com.klinkerapps:link_builder:1.6.1'
 
-    compile 'com.android.support:appcompat-v7:26.1.0'
-    compile 'com.android.support:support-v13:26.1.0'
-    compile 'com.android.support:design:26.1.0'
-    compile 'com.android.support:recyclerview-v7:26.1.0'
-    compile 'com.android.support:cardview-v7:26.1.0'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.android.support:multidex:1.0.2'    // this is as we have over 65536 lines of code...
+    // Android support modules
+    implementation 'com.android.support:appcompat-v7:27.1.0'
+    implementation 'com.android.support:support-v13:27.1.0'
+    implementation 'com.android.support:design:27.1.0'
+    implementation 'com.android.support:recyclerview-v7:27.1.0'
+    implementation 'com.android.support:cardview-v7:27.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation 'com.android.support:multidex:1.0.3' // as we have over 65536 lines of code...
+
+    // proprietary module
+    extraImplementation files('libs/YouTubeAndroidPlayerApi.jar')
 }
-

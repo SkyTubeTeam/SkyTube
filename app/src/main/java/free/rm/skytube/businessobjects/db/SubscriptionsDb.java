@@ -48,7 +48,6 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 	private static final int DATABASE_VERSION = 2;
 	private static final String DATABASE_NAME = "subs.db";
 
-
 	private SubscriptionsDb(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 	}
@@ -121,10 +120,6 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 	 * @return True if the operation was successful; false otherwise.
 	 */
 	public boolean unsubscribe(YouTubeChannel channel) {
-		getWritableDatabase().delete(SubscriptionsVideosTable.TABLE_NAME,
-						SubscriptionsVideosTable.COL_CHANNEL_ID + " = ?",
-						new String[]{channel.getId()});
-
 		int rowsDeleted = getWritableDatabase().delete(SubscriptionsTable.TABLE_NAME,
 				SubscriptionsTable.COL_CHANNEL_ID + " = ?",
 				new String[]{channel.getId()});

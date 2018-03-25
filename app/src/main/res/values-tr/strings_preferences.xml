@@ -11,8 +11,6 @@
 	<string name="pref_video_player_category">Video Oynatıcı</string>
 	<string name="pref_title_preferred_res">Tercih Edilen Çözünürlük</string>
 	<string name="pref_summary_preferred_res">Tercih edilen çözünürlüğüzü seçin</string>
-	<string name="pref_title_use_offical_player">Resmî YouTube oynatıcısını kullan</string>
-	<string name="pref_summary_use_offical_player">Tavsiye edilmez</string>
 
 	<string name="pref_backup_category">Yedekler</string>
 	<string name="pref_title_backup_dbs">Yedeklerin Veritabanları</string>
@@ -69,12 +67,15 @@
 		<item>12 Hours</item>
 		<item>24 Hours</item>
 	</string-array>
+
 	<string name="pref_title_screen_orientation">Ekran Yönlendirme</string>
-	<string name="pref_summary_screen_orientation">Video oynatıcının yön belirlemesi</string>
-	<string name="pref_screen_landscape">Yatay</string>
-	<string name="pref_screen_portrait">Dikey</string>
-	<string name="pref_screen_auto">Otomatik</string>
-	<string name="pref_screen_sensor">Aygıt algılayıcısı</string>
+	<string name="pref_summary_screen_orientation">Video player\'s orientation:  %s</string>
+	<string-array name="screen_orientations">
+		<item>Otomatik</item>
+		<item>Yatay</item>
+		<item>Dikey</item>
+		<item>Aygıt algılayıcısı</item>
+	</string-array>
 
 	<string name="pref_title_disable_immersive_mode">Immersive Modu Devre Dışı Bırak</string>
 	<string name="pref_summary_disable_immersive_mode">Yorumlar, video tanım simgeleri ve gezinti çubuğu her zaman gösterilsin</string>

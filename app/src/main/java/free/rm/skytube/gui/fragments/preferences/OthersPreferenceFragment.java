@@ -21,6 +21,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.PreferenceFragment;
@@ -30,6 +31,7 @@ import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.YouTube.ValidateYouTubeAPIKey;
+import free.rm.skytube.businessobjects.db.SearchHistoryDb;
 
 /**
  * Preference fragment for other settings.
@@ -97,6 +99,13 @@ public class OthersPreferenceFragment extends PreferenceFragment implements Shar
 						// that we need to restart the app
 						displayRestartDialog(R.string.pref_youtube_api_key_default);
 					}
+				}
+			} else if (key.equals(getString(R.string.pref_key_disable_search_history))) {
+				CheckBoxPreference disableSearchHistoryPreference = (CheckBoxPreference)findPreference(key);
+				// If Search History is disabled, clear the Search History database.
+				if(disableSearchHistoryPreference.isChecked()) {
+					SearchHistoryDb.getSearchHistoryDb().deleteAllSearchHistory();
+					Toast.makeText(getActivity(), getString(R.string.pref_disable_search_history_deleted), Toast.LENGTH_LONG).show();
 				}
 			} /*else if (key.equals(getString(R.string.pref_feed_notification_key))) {
 				ListPreference feedNotificationPref = (ListPreference) findPreference(key);

@@ -210,7 +210,7 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
 				@Override
 				public void onClick(View view) {
 					if(comment.getAuthorChannelId() != null) {
-						new GetYouTubeChannelInfoTask(new YouTubeChannelInterface() {
+						new GetYouTubeChannelInfoTask(context, new YouTubeChannelInterface() {
 							@Override
 							public void onGetYouTubeChannel(YouTubeChannel youTubeChannel) {
 								Intent i = new Intent(context, MainActivity.class);

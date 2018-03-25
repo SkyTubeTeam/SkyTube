@@ -101,6 +101,40 @@ public class GetChannelsDetails {
 		return (channelList != null  &&  channelList.size() > 0)  ?  channelList.get(0)  :  null;
 	}
 
+	/**
+	 * Return a YouTubeChannel object from the passed username.
+	 *
+	 * This should not be called from the main thread.
+	 *
+	 * @param username	The YouTube username
+	 *
+	 * @return	YouTubeChannel
+	 */
+	public YouTubeChannel getYouTubeChannelFromUsername(String username) throws IOException {
+
+		String  bannerType = SkyTubeApp.isTablet() ? "bannerTabletHdImageUrl" : "bannerMobileHdImageUrl";
+
+		YouTube youtube = YouTubeAPI.create();
+		YouTube.Channels.List channelInfo = youtube.channels().list("snippet, statistics, brandingSettings");
+
+		channelInfo.setForUsername(username);
+		channelInfo.setFields("items(id, snippet/title, snippet/description, snippet/thumbnails/default," +
+						"statistics/subscriberCount, brandingSettings/image/" + bannerType + ")," +
+						"nextPageToken")
+						.setKey(YouTubeAPIKey.get().getYouTubeAPIKey());
+
+		ChannelListResponse response = channelInfo.execute();
+		List<Channel> channelList = response.getItems();
+
+		if(channelList != null && channelList.size() > 0) {
+			YouTubeChannel youTubeChannel = new YouTubeChannel();
+			youTubeChannel.init(channelList.get(0), false, false);
+			return youTubeChannel;
+		}
+
+		return null;
+	}
+
 
 	/**
 	 * Divides the given list into a list of lists in which each list is made up of no more than

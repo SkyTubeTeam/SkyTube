@@ -7,7 +7,7 @@
 	<string name="launch_offical_player_error">Google から公式の YouTube プレーヤーを起動しようとしたときにエラーが発生しました。お使いのデバイスにインストールされていることを確認してください。</string>
 	<string name="LIVE">ライブ</string>
 
-	<string name="featured">特集</string>
+	<string name="featured">おすすめ</string>
 	<string name="most_popular">最も人気</string>
 
 	<string name="video">ビデオ</string>
@@ -17,4 +17,6 @@
 	<string name="could_not_get_playlists">%s のプレイリストを取得できませんでした。</string>
 
 	<string name="loading">読み込み中 …</string>
-</resources>
+    <string name="could_not_get_channel">チャネル情報をダウンロードできませんでした!</string>
+<string name="hello_blank_fragment">Hello blank fragment</string>
+    </resources>

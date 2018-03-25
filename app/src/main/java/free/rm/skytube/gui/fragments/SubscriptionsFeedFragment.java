@@ -86,6 +86,12 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 
 
 	@Override
+	protected int getLayoutResource() {
+		return R.layout.fragment_subs_feed;
+	}
+
+
+	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
@@ -97,16 +103,15 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 			shouldRefresh = true;
 		}
 
-		setLayoutResource(R.layout.fragment_subs_feed);
 		subscriptionsBackupsManager = new SubscriptionsBackupsManager(getActivity(), SubscriptionsFeedFragment.this);
-
-		// setup the UI and refresh the feed (if applicable)
-		new RefreshFeedTask(isFragmentSelected()).executeInParallel();
 	}
 
 
 	@Override
 	public void onResume() {
+		// setup the UI and refresh the feed (if applicable)
+		new RefreshFeedTask(isFragmentSelected()).executeInParallel();
+
 		getActivity().registerReceiver(feedUpdaterReceiver, new IntentFilter(FeedUpdaterService.NEW_SUBSCRIPTION_VIDEOS_FOUND));
 
 		super.onResume();

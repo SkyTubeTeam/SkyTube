@@ -7,13 +7,11 @@
 	<string name="pref_summary_preferred_regions">Selecione a região preferida. Será usada para filtrar vídeos na categoria de vídeos \"Destaque\".</string>
 
 	<string name="pref_title_preferred_languages">Língua(s) preferida(s)</string>
-	<string name="pref_summary_preferred_languages">EXPERIMENTAL: Selecione uma ou mais línguas preferidas. Será usada para filtrar vídeos na categoria de vídeo \"Mais popular\" e para pesquisas de vídeo.</string>
+	<string name="pref_summary_preferred_languages">Experimental: Selecione uma ou mais línguas preferidas. Será usada para filtrar vídeos na categoria de vídeo \"Mais popular\" e para pesquisas de vídeo.</string>
 
 	<string name="pref_video_player_category">Reprodutor de vídeo</string>
 	<string name="pref_title_preferred_res">Resolução preferida</string>
 	<string name="pref_summary_preferred_res">Selecione a resolução preferida</string>
-	<string name="pref_title_use_offical_player">Usar o reprodutor oficial do YouTube</string>
-	<string name="pref_summary_use_offical_player">Não recomendado</string>
 
 	<string name="pref_backup_category">Backups</string>
 	<string name="pref_title_backup_dbs">Backup de bases de dados</string>
@@ -25,17 +23,17 @@
 	<string name="databases_backup_fail">Falha ao criar o backup.</string>
 	<string name="databases_import_select_backup">Selecione o ficheiro a importar</string>
 	<string name="databases_import_nothing_selected">Nada foi selecionado…</string>
-	<string name="databases_import_warning_message">As subscrições e os marcadores serão substituídos pelos do ficheiro de backup.
-\n
+	<string name="databases_import_warning_message">A base de dados de subscrições e marcadores serão substituídos pelas do ficheiro de backup. 
+\n 
 \nContinuar?</string>
 	<string name="continue_">Continuar</string>
 	<string name="databases_importing">A importar…</string>
 	<string name="databases_import_fail">Falha ao importar as bases de dados.</string>
-	<string name="databases_import_success">Bases de dados importadas com êxito. Reinicie a aplicação para aplicar.</string>
+	<string name="databases_import_success">Bases de dados importadas. Reinicie a aplicação para aplicar.</string>
 
 	<string name="pref_title_import_subs">Importar subscrições do YouTube</string>
 	<string name="pref_summary_import_subs">Importar as minhas subscrições de uma conta Youtube.</string>
-	<string name="subs_import_select_backup">Selecione o ficheiro xml com os dados a importar</string>
+	<string name="subs_import_select_backup">Selecione o ficheiro xml do YouTube a importar</string>
 
 	<string name="pref_about_category">Sobre</string>
 	<string name="pref_title_website">Site</string>
@@ -43,7 +41,7 @@
 	<string name="pref_summary_credits">Pessoas e projetos que tornaram esta aplicação possível.</string>
 	<string name="pref_title_version">Versão</string>
 	<string name="pref_title_updates">Atualizações</string>
-	<string name="pref_summary_updates">Procurar por atualizações.</string>
+	<string name="pref_summary_updates">Procurar por novas versões.</string>
 	<string name="pref_title_license">Licença</string>
 	<string name="pref_summary_license">GNU General Public License, versão 3</string>
 	<string name="app_license">
@@ -68,11 +66,13 @@
 	<string name="pref_summary_default_tab">Separador usado ao iniciar o SkyTube: %s</string>
 
 	<string name="pref_title_screen_orientation">Orientação do ecrã</string>
-	<string name="pref_summary_screen_orientation">Rotação do reprodutor de vídeo</string>
-	<string name="pref_screen_landscape">Horizontal</string>
-	<string name="pref_screen_portrait">Vertical</string>
-	<string name="pref_screen_auto">Automática</string>
-	<string name="pref_screen_sensor">Sensor do dispositivo</string>
+	<string name="pref_summary_screen_orientation">Video player\'s orientation:  %s</string>
+	<string-array name="screen_orientations">
+		<item>Automática</item>
+		<item>Horizontal</item>
+		<item>Vertical</item>
+		<item>Sensor do dispositivo</item>
+	</string-array>
 
 	<string name="pref_title_youtube_api_key">Chave API do YouTube</string>
 	<string name="pref_summary_youtube_api_key">Introduza a sua chave da API de dados do YouTube. Deixe em branco para usar o padrão.</string>
@@ -83,8 +83,8 @@
 	<string name="pref_title_disable_immersive_mode">Desativar modo imersivo</string>
 	<string name="pref_summary_disable_immersive_mode">Os comentários, a descrição do vídeo e a barra de navegação serão sempre mostrados</string>
 
-	<string name="pref_title_feed_notification">Feed Auto Notification</string>
-	<string name="pref_summary_feed_notification">How often to check for new videos from subscribed channels: %s</string>
+	<string name="pref_title_feed_notification">Notificação automática de fontes</string>
+	<string name="pref_summary_feed_notification">Periodicidade para procurar novos vídeos nos canais subscritos: %s</string>
 	<string-array name="feed_notification">
 		<item>Off</item>
 		<item>6 Hours</item>
@@ -92,7 +92,10 @@
 		<item>24 Hours</item>
 	</string-array>
 
-	<string name="pref_title_allow_mobile_downloads">Allow downloads on mobile networks</string>
-	<string name="pref_summary_allow_mobile_downloads">Select this to enable downloading videos on mobile networks. Otherwise, videos can only be downloaded on Wi-Fi.</string>
+	<string name="pref_title_allow_mobile_downloads">Permitir descargas em redes móveis</string>
+	<string name="pref_summary_allow_mobile_downloads">Ative esta opção para descarregar vídeos via redes móveis. Caso contrário, apenas poderá descarregar vídeos através de Wi-Fi.</string>
 
+	<string name="pref_title_disable_search_history">Desativar histórico de pesquisas</string>
+	<string name="pref_summary_disable_search_history">Se ativa, o histórico de pesquisas não será utilizado.</string>
+	<string name="pref_disable_search_history_deleted">Histórico removido.</string>
 </resources>
