@@ -2,9 +2,11 @@ vX.XX - XX XX 2018:
 	* Added search history:  search history is stored and used as suggestions for future searches.  This feature can be disabled.
 	* Volume and brightness swipe controls.
 	* Channel blocking.
-	* Added Japanese translations.
 	* Exoplayer support.
-	* YouTube's videos and playlists links inside the video description are now handled and opened inside SkyTube.
+    * YouTube's videos and playlists links inside the video description are now handled and opened inside SkyTube.
+	* Added Japanese translations.
+	* Added Chinese (traditional) translations.
+	* Updated Russian, Norwegian Bokmål and Dutch translations.
 
 v2.82 - 24 Mar 2018:
 	* Emergency fix:  API DDOS attack mitigation controls.
