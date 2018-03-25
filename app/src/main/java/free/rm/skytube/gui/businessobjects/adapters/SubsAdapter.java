@@ -49,7 +49,8 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 
 	private static final String TAG = SubsAdapter.class.getSimpleName();
 	private static SubsAdapter subsAdapter = null;
-	public List<YouTubeChannel> listCopy = new ArrayList<>();
+	public  List<YouTubeChannel> listCopy = new ArrayList<>();
+
 
 	/**
 	 * Set to true if the users' subscriptions channels list has been fully retrieved and populated
@@ -79,6 +80,7 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 		if (subsAdapter == null) {
 			subsAdapter = new SubsAdapter(context, progressBar);
 		}
+
 
 		return subsAdapter;
 	}
@@ -221,7 +223,7 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 			}
 		}
 
-		sortChannelsAlphabetically(getList());
+//		sortChannelsAlphabetically(getSubLists());
 
 		// the list has now been retrieved; return it pls
 		return getList();
@@ -230,9 +232,9 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 	/**
 	 * Method to sort channels alphabetically of Subscriptions Drawer
 	 *
-	 * @param channelList list that is going to be sorted
+//	 * @param channelList list that is going to be sorted
 	 */
-	public void sortChannelsAlphabetically(List<YouTubeChannel> channelList) {
+	/*public void sortChannelsAlphabetically(List<YouTubeChannel> channelList) {
 		if (channelList.size() > 0) {
 			Collections.sort(channelList, new Comparator<YouTubeChannel>() {
 				@Override
@@ -241,13 +243,14 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 				}
 			});
 		}
-	}
+
+	}*/
 
 	public void filterSubSearch(String text){
 		// TODO: 24.3.2018 put list copy on constructor and fix npe on it
-		listCopy.addAll(getSubsLists());
-		clearList();
-		if(text.isEmpty()){
+		listCopy.addAll(list); //--> this creates copies of items in the list which can be seen in drawer
+		clearList();           //needs to be initialized in constructor to prevent that from happening but
+		if(text.isEmpty()){    //but results in NPE.
 			list.addAll(listCopy);
 		} else{
 			text = text.toLowerCase();
