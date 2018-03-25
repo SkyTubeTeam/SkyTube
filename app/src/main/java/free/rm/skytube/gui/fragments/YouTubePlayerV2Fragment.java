@@ -268,10 +268,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment {
 					loadingVideoView.setVisibility(View.GONE);
 
 					Logger.i(YouTubePlayerV2Fragment.this, ">> PLAYING LOCALLY: %s", youTubeVideo);
-					DefaultDataSourceFactory dataSourceFactory = new DefaultDataSourceFactory(getContext(), "ST. Agent", new DefaultBandwidthMeter());
-					ExtractorMediaSource.Factory extMediaSourceFactory = new ExtractorMediaSource.Factory(dataSourceFactory);
-					ExtractorMediaSource mediaSource = extMediaSourceFactory.createMediaSource(uri);
-					player.prepare(mediaSource);
+					playVideo(uri);
 				}
 			} else {
 				youTubeVideo.getDesiredStream(new GetDesiredStreamListener() {
@@ -282,11 +279,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment {
 
 						// play the video
 						Logger.i(this, ">> PLAYING: %s", desiredStream.getUri());
-
-						DefaultDataSourceFactory dataSourceFactory = new DefaultDataSourceFactory(getContext(), "ST. Agent", new DefaultBandwidthMeter());
-						ExtractorMediaSource.Factory extMediaSourceFactory = new ExtractorMediaSource.Factory(dataSourceFactory);
-						ExtractorMediaSource mediaSource = extMediaSourceFactory.createMediaSource(desiredStream.getUri());
-						player.prepare(mediaSource);
+						playVideo(desiredStream.getUri());
 					}
 
 					@Override
@@ -327,6 +320,19 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment {
 					})
 					.show();
 		}
+	}
+
+
+	/**
+	 * Play video.
+	 *
+	 * @param videoUri  The Uri of the video that is going to be played.
+	 */
+	private void playVideo(Uri videoUri) {
+		DefaultDataSourceFactory dataSourceFactory = new DefaultDataSourceFactory(getContext(), "ST. Agent", new DefaultBandwidthMeter());
+		ExtractorMediaSource.Factory extMediaSourceFactory = new ExtractorMediaSource.Factory(dataSourceFactory);
+		ExtractorMediaSource mediaSource = extMediaSourceFactory.createMediaSource(videoUri);
+		player.prepare(mediaSource);
 	}
 
 
