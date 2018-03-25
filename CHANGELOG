@@ -6,7 +6,7 @@ vX.XX - XX XX 2018:
     * YouTube's videos and playlists links inside the video description are now handled and opened inside SkyTube.
 	* Added Japanese translations.
 	* Added Chinese (traditional) translations.
-	* Updated Russian, Norwegian Bokmål and Dutch translations.
+	* Updated Russian, Norwegian Bokmål, Dutch and German translations.
 
 v2.82 - 24 Mar 2018:
 	* Emergency fix:  API DDOS attack mitigation controls.
