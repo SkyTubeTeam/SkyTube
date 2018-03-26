@@ -24,4 +24,5 @@
 	<string name="failed_to_import_subscriptions">Falha ao importar as subscrições do YouTube.</string>
 
 	<string name="about">Acerca</string>
-</resources>
+<string name="unsubscribe_from_all_current_sibbed_channels">Cancelar subscrição de todos os canais subscritos.</string>
+	</resources>
