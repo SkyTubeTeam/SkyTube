@@ -18,68 +18,12 @@
 	android:background="#7A000000"
 	android:orientation="vertical">
 
-
-	<ImageButton
-		android:id="@+id/back_button"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_marginLeft="8dp"
-		android:layout_marginStart="8dp"
-		android:layout_marginTop="8dp"
-		android:background="?attr/selectableItemBackgroundBorderless"
-		android:src="@drawable/ic_back"
-		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toTopOf="parent"/>
-
-	<TextView
-		android:id="@+id/title_text_view"
-		android:layout_width="0dp"
-		android:layout_height="wrap_content"
-		android:layout_marginRight="8dp"
-		android:layout_marginEnd="8dp"
-		android:layout_marginLeft="16dp"
-		android:layout_marginStart="16dp"
-		android:layout_marginTop="8dp"
-		android:ellipsize="marquee"
-		android:marqueeRepeatLimit="marquee_forever"
-		android:scrollHorizontally="true"
-		android:singleLine="true"
-		android:clickable="true"
-		android:focusable="true"
-		android:fadingEdge="horizontal"
-		android:text="This is a very ultra long video title text"
-		android:textAppearance="@style/TextAppearance.AppCompat.Title.Inverse"
-		app:layout_constraintWidth_default="wrap"
-		app:layout_constraintEnd_toStartOf="@id/menu_reload_video"
-		app:layout_constraintHorizontal_bias="0.0"
-		app:layout_constraintStart_toEndOf="@+id/back_button"
-		app:layout_constraintTop_toTopOf="parent"/>
-
-	<ImageButton
-		android:id="@+id/menu_reload_video"
-		android:layout_width="32dp"
-		android:layout_height="wrap_content"
-		android:layout_marginRight="8dp"
-		android:layout_marginEnd="8dp"
-		android:layout_marginTop="8dp"
-		android:background="?attr/selectableItemBackgroundBorderless"
-		android:src="@drawable/ic_menu_reload_video"
-		app:layout_constraintEnd_toStartOf="@+id/options_button"
-		app:layout_constraintTop_toTopOf="parent"/>
-
-	<ImageButton
-		android:id="@+id/options_button"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_gravity="center_vertical"
-		android:layout_marginRight="8dp"
-		android:layout_marginEnd="8dp"
-		android:layout_marginTop="8dp"
-		android:background="?attr/selectableItemBackgroundBorderless"
-		android:src="@drawable/ic_menu"
-		app:layout_constraintEnd_toEndOf="parent"
-		app:layout_constraintTop_toTopOf="parent"/>
-
+	<!-- TOOLBAR / ACTIONBAR -->
+	<android.support.v7.widget.Toolbar
+		android:id="@+id/toolbar"
+		android:layout_width="match_parent"
+		android:layout_height="?attr/actionBarSize"
+		android:theme="@style/ThemeOverlay.AppCompat.Dark"/>
 
 	<LinearLayout
 		android:id="@+id/exo_controls"

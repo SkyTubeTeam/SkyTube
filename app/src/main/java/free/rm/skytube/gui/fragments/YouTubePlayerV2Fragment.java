@@ -27,7 +27,11 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -59,6 +63,7 @@ import java.util.List;
 import java.util.Locale;
 
 import free.rm.skytube.R;
+import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.GetVideosDetailsByIDs;
@@ -70,8 +75,10 @@ import free.rm.skytube.businessobjects.YouTube.Tasks.GetYouTubeChannelInfoTask;
 import free.rm.skytube.businessobjects.YouTube.VideoStream.StreamMetaData;
 import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
 import free.rm.skytube.businessobjects.db.Tasks.CheckIfUserSubbedToChannelTask;
+import free.rm.skytube.businessobjects.db.Tasks.IsVideoBookmarkedTask;
 import free.rm.skytube.businessobjects.interfaces.GetDesiredStreamListener;
 import free.rm.skytube.gui.activities.MainActivity;
+import free.rm.skytube.gui.activities.ThumbnailViewerActivity;
 import free.rm.skytube.gui.businessobjects.PlayerViewGestureDetector;
 import free.rm.skytube.gui.businessobjects.SubscribeButton;
 import free.rm.skytube.gui.businessobjects.adapters.CommentsAdapter;
@@ -90,7 +97,8 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment {
 	private PlayerView          playerView;
 	private SimpleExoPlayer     player;
 
-	private TextView            titleTextView = null;
+	private Menu                menu = null;
+
 	private TextView			videoDescTitleTextView = null;
 	private ImageView			videoDescChannelThumbnailImageView = null;
 	private TextView			videoDescChannelTextView = null;
@@ -124,15 +132,20 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment {
 		// indicate that this fragment has an action bar menu
 		setHasOptionsMenu(true);
 
+//		final View decorView = getActivity().getWindow().getDecorView();
+//		decorView.setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener() {
+//			@Override
+//			public void onSystemUiVisibilityChange(int visibility) {
+//				hideNavigationBar();
+//			}
+//		});
+
 		///if (savedInstanceState != null)
 		///	videoCurrentPosition = savedInstanceState.getInt(VIDEO_CURRENT_POSITION, 0);
 
 		if (youTubeVideo == null) {
 			// initialise the views
 			initViews(view);
-
-			// hide action bar
-			getSupportActionBar().hide();
 
 			// get which video we need to play...
 			Bundle bundle = getActivity().getIntent().getExtras();
@@ -159,9 +172,14 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment {
 	 * @param view Fragment view.
 	 */
 	private void initViews(View view) {
-		final PlayerViewGestureHandler playerViewGestureHandler;
+		// setup the toolbar / actionbar
+		Toolbar toolbar = view.findViewById(R.id.toolbar);
+		setSupportActionBar(toolbar);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setDisplayShowHomeEnabled(true);
 
 		// setup the player
+		final PlayerViewGestureHandler playerViewGestureHandler;
 		playerView = view.findViewById(R.id.player_view);
 		playerViewGestureHandler = new PlayerViewGestureHandler();
 		playerViewGestureHandler.initView(view);
@@ -176,9 +194,6 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment {
 		player = ExoPlayerFactory.newSimpleInstance(getContext(), trackSelector);
 		player.setPlayWhenReady(true);
 		playerView.setPlayer(player);
-
-		titleTextView = view.findViewById(R.id.title_text_view);
-		titleTextView.setSelected(true);
 
 		loadingVideoView = view.findViewById(R.id.loadingVideoView);
 
@@ -226,7 +241,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment {
 	 * will try to load and play the video.
 	 */
 	private void setUpHUDAndPlayVideo() {
-		titleTextView.setText(youTubeVideo.getTitle());
+		getSupportActionBar().setTitle(youTubeVideo.getTitle());
 		videoDescTitleTextView.setText(youTubeVideo.getTitle());
 		videoDescChannelTextView.setText(youTubeVideo.getChannelName());
 		videoDescViewsTextView.setText(youTubeVideo.getViewsCount());
@@ -342,6 +357,80 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment {
 	private void playVideoExternally() {
 		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(youTubeVideo.getVideoUrl()));
 		startActivity(browserIntent);
+	}
+
+
+	@Override
+	public void onPrepareOptionsMenu(Menu menu) {
+		// Hide the download video option if mobile downloads are not allowed and the device is connected through mobile, and the video isn't already downloaded
+		boolean allowDownloadsOnMobile = SkyTubeApp.getPreferenceManager().getBoolean(SkyTubeApp.getStr(R.string.pref_key_allow_mobile_downloads), false);
+		if((youTubeVideo != null && !youTubeVideo.isDownloaded()) && (SkyTubeApp.isConnectedToWiFi() || (SkyTubeApp.isConnectedToMobile() && allowDownloadsOnMobile))) {
+			menu.findItem(R.id.download_video).setVisible(true);
+		} else {
+			menu.findItem(R.id.download_video).setVisible(false);
+		}
+	}
+
+
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		inflater.inflate(R.menu.menu_youtube_player, menu);
+
+		this.menu = menu;
+
+		// Will now check if the video is bookmarked or not (and then update the menu accordingly).
+		//
+		// youTubeVideo might be null if we have only passed the video URL to this fragment (i.e.
+		// the app is still trying to construct youTubeVideo in the background).
+		if (youTubeVideo != null)
+			new IsVideoBookmarkedTask(youTubeVideo, menu).executeInParallel();
+	}
+
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+			case R.id.menu_reload_video:
+				loadVideo();
+				return true;
+
+			case R.id.menu_open_video_with:
+				playVideoExternally();
+				player.stop();
+				return true;
+
+			case R.id.share:
+				youTubeVideo.shareVideo(getContext());
+				return true;
+
+			case R.id.copyurl:
+				youTubeVideo.copyUrl(getContext());
+				return true;
+
+			case R.id.bookmark_video:
+				youTubeVideo.bookmarkVideo(getContext(), menu);
+				return true;
+
+			case R.id.unbookmark_video:
+				youTubeVideo.unbookmarkVideo(getContext(), menu);
+				return true;
+
+			case R.id.view_thumbnail:
+				Intent i = new Intent(getActivity(), ThumbnailViewerActivity.class);
+				i.putExtra(ThumbnailViewerActivity.YOUTUBE_VIDEO, youTubeVideo);
+				startActivity(i);
+				return true;
+
+			case R.id.download_video:
+				youTubeVideo.downloadVideo(getContext());
+				return true;
+
+			case R.id.block_channel:
+				youTubeVideo.blockChannel(getContext());
+
+			default:
+				return super.onOptionsItemSelected(item);
+		}
 	}
 
 
