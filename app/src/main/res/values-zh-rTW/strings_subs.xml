@@ -21,4 +21,7 @@
 	<string name="failed_to_import_subscriptions">無法匯入您的 YouTube 訂閱。</string>
 
 	<string name="about">關於</string>
-</resources>
+<string name="import_subscriptions_description">從 YouTube 匯入您的訂閱，首先請造訪 https://www.youtube.com/subscription_manager ，然後點按底部的「匯出訂閱項目」。再來，在下方點按「選取 XML 檔案」以選擇您匯出的 XML 檔案。</string>
+	<string name="no_new_channels_found">在您上傳的 XML 檔案中沒有發現任何您已經訂閱的 YouTube 頻道。</string>
+	<string name="import_subscriptions_parse_error">嘗試解析您上傳的 XML 檔案時遇到錯誤：%s。</string>
+	</resources>
