@@ -4,6 +4,7 @@ vX.XX - XX XX 2018:
 	* Channel blocking.
 	* Exoplayer support.
     * YouTube's videos and playlists links inside the video description are now handled and opened inside SkyTube.
+    * New launcher icon.
 	* Added Japanese translations.
 	* Added Chinese (traditional) translations.
 	* Updated Russian, Norwegian Bokmål, Dutch and German translations.

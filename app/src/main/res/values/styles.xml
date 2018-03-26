@@ -15,7 +15,6 @@
 
 		<item name="textAppearanceSmallPopupMenu">@style/VideoOptionsTextAppearanceSmall</item>
 		<item name="android:textAppearanceSmallPopupMenu">@style/VideoOptionsTextAppearanceSmall</item>
-
 	</style>
 
 
@@ -107,7 +106,7 @@
 
 	<!-- *************************************************************************************** -->
 	<!--
-	 	Video Player
+	 	Video Player:  v1 and v2
 	-->
 
 	<style name="VideoPlayerActivityTheme" parent="AppTheme">

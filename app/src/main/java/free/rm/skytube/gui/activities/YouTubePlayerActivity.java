@@ -38,13 +38,21 @@ public class YouTubePlayerActivity extends BackButtonActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		final boolean useDefaultPlayer = useDefaultPlayer();
+
+		// if the user wants to use the default player, then ensure that the activity does not
+		// have a toolbar (actionbar) -- this is as the fragment is taking care of the toolbar
+		if (useDefaultPlayer) {
+			setTheme(R.style.NoActionBarActivityTheme);
+		}
+
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_fragment_holder);
 
 		// either use the SkyTube's default video player or the legacy one
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-		FragmentEx fragment = useDefaultPlayer() ? new YouTubePlayerV2Fragment() : new YouTubePlayerFragment();
+		FragmentEx fragment = useDefaultPlayer ? new YouTubePlayerV2Fragment() : new YouTubePlayerFragment();
 		fragmentTransaction.add(R.id.fragment_container, fragment);
 		fragmentTransaction.commit();
 	}
