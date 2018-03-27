@@ -24,4 +24,5 @@
 	<string name="failed_to_import_subscriptions">Failed to import your YouTube subscriptions.</string>
 
 	<string name="about">About</string>
-</resources>
+<string name="unsubscribe_from_all_current_sibbed_channels">Leiratkozás az összes feliratkozott csatornáról.</string>
+	</resources>
