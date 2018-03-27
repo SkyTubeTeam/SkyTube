@@ -81,11 +81,21 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 		return subsAdapter;
 	}
 
-	public boolean isChannelsSorted() {
-		boolean status = sharedPreferences.getBoolean("isChannelSorted",isChannelsSorted);
-		return status;
+
+	/**
+	 * @return True if the subscribed channels are sorted alphabetically by the {@link SubsAdapter};
+	 * false otherwise.
+	 */
+	private boolean isChannelsSorted() {
+		return sharedPreferences.getBoolean("isChannelSorted",isChannelsSorted);
 	}
 
+
+	/**
+	 * Sort or unsort the subscribed channels alphabetically.
+	 *
+	 * @param channelsSorted    True to sort the channels.
+	 */
 	public void setChannelsSorted(boolean channelsSorted) {
 		isChannelsSorted = channelsSorted;
 		editor.putBoolean("isChannelSorted",isChannelsSorted).apply();
