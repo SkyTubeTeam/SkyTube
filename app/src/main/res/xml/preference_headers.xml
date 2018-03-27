@@ -25,6 +25,12 @@
 	</header>
 
 	<header
+		android:fragment="free.rm.skytube.gui.fragments.preferences.BlockedChannelsPreferenceFragment"
+		android:icon="@drawable/ic_pref_blocked"
+		android:title="@string/pref_blocked_channel_category">
+	</header>
+
+	<header
 		android:fragment="free.rm.skytube.gui.fragments.preferences.LanguagesPreferenceFragment"
 		android:icon="@drawable/ic_pref_languages_regions"
 		android:title="@string/pref_languages_category">
@@ -47,13 +53,5 @@
 		android:icon="@drawable/ic_pref_about"
 		android:title="@string/pref_about_category">
 	</header>
-
-    <header
-		android:fragment="free.rm.skytube.gui.fragments.preferences.BlockedChannelsPreferenceFragment"
-		android:icon="@drawable/ic_pref_blocked"
-        android:title="@string/pref_blocked_channel_category">
-    </header>
-
-
 
 </preference-headers>
