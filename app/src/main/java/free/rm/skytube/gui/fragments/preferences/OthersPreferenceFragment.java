@@ -24,14 +24,18 @@ import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
 import android.preference.ListPreference;
+import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.widget.Toast;
+
+import com.google.android.exoplayer2.C;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.YouTube.ValidateYouTubeAPIKey;
 import free.rm.skytube.businessobjects.db.SearchHistoryDb;
+import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
 
 /**
  * Preference fragment for other settings.
@@ -107,7 +111,17 @@ public class OthersPreferenceFragment extends PreferenceFragment implements Shar
 					SearchHistoryDb.getSearchHistoryDb().deleteAllSearchHistory();
 					Toast.makeText(getActivity(), getString(R.string.pref_disable_search_history_deleted), Toast.LENGTH_LONG).show();
 				}
-			} /*else if (key.equals(getString(R.string.pref_feed_notification_key))) {
+			} else if (key.equals(getString(R.string.pref_key_subscriptions_alphabetical_order))){
+				CheckBoxPreference enableChannelSort = (CheckBoxPreference) findPreference(key);
+				SubsAdapter subsAdapter = SubsAdapter.get(getActivity());
+				if (enableChannelSort.isChecked()){
+					subsAdapter.setChannelsSorted(true);
+					subsAdapter.refreshSubsList();
+				} else {
+					subsAdapter.setChannelsSorted(false);
+					subsAdapter.refreshSubsList();
+				}
+			}/*else if (key.equals(getString(R.string.pref_feed_notification_key))) {
 				ListPreference feedNotificationPref = (ListPreference) findPreference(key);
 				feedNotificationPref.setSummary(String.format(getString(R.string.pref_summary_feed_notification), feedNotificationPref.getEntry()));
 
