@@ -11,7 +11,7 @@
 
 	<string name="pref_video_player_category">Reprodutor de vídeo</string>
 	<string name="pref_title_preferred_res">Resolução preferida</string>
-	<string name="pref_summary_preferred_res">Selecione a resolução preferida</string>
+	<string name="pref_summary_preferred_res">Selecione a resolução preferida:  %s</string>
 
 	<string name="pref_backup_category">Backups</string>
 	<string name="pref_title_backup_dbs">Backup das bases de dados</string>

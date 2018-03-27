@@ -10,7 +10,7 @@
 
 	<string name="pref_video_player_category">Videospeler</string>
 	<string name="pref_title_preferred_res">Voorkeursresolutie</string>
-	<string name="pref_summary_preferred_res">Selecteer uw voorkeursresolutie</string>
+	<string name="pref_summary_preferred_res">Selecteer uw voorkeursresolutie:  %s</string>
 
 	<string name="pref_backup_category">Back-ups</string>
 	<string name="pref_title_backup_dbs">Databases back-uppen</string>
