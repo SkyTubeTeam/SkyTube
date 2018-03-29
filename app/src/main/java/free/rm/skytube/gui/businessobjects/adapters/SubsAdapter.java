@@ -23,8 +23,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -45,7 +43,7 @@ import free.rm.skytube.gui.businessobjects.MainActivityListener;
  * Channel subscriptions adapter: Contains a list of channels (that the user subscribed to) together
  * with a notification whether the channel has new videos since last visit to the channel or not.
  */
-public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapter.SubChannelViewHolder> implements Filterable {
+public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapter.SubChannelViewHolder> {
 
 	private static final String TAG = SubsAdapter.class.getSimpleName();
 	private static SubsAdapter subsAdapter = null;
@@ -252,27 +250,6 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 			isSubsListRetrieved.value = true;
 			isSubsListRetrieved.notify();
 		}
-	}
-
-
-	@Override
-	public Filter getFilter() {
-		return new Filter() {
-
-
-			@Override
-			protected FilterResults performFiltering(CharSequence charSequence) {
-
-				return null;
-			}
-
-			@Override
-			protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-
-			}
-
-		};
-
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////

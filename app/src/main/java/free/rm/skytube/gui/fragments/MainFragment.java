@@ -3,6 +3,7 @@ package free.rm.skytube.gui.fragments;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -30,7 +31,6 @@ import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.db.BookmarksDb;
 import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
 import free.rm.skytube.gui.businessobjects.MainActivityListener;
-import free.rm.skytube.gui.businessobjects.adapters.RecyclerViewAdapterEx;
 import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
 import free.rm.skytube.gui.businessobjects.fragments.FragmentEx;
 
@@ -48,6 +48,7 @@ public class MainFragment extends FragmentEx {
 	private TabLayout tabLayout = null;
 	private DrawerLayout subsDrawerLayout = null;
 	private SearchView subSearchView = null;
+	private SearchView subSearchViewOpener = null;
 	/**
 	 * List of fragments that will be displayed as tabs.
 	 */
@@ -100,6 +101,7 @@ public class MainFragment extends FragmentEx {
 		}
 
 		subSearchView = (SearchView) view.findViewById(R.id.sub_search_view);
+		subSearchViewOpener = (SearchView) view.findViewById(R.id.search_view_opener);
 
 		subsListView = view.findViewById(R.id.subs_drawer);
 		if (subsAdapter == null) {
@@ -112,6 +114,39 @@ public class MainFragment extends FragmentEx {
 		subsListView.setLayoutManager(new LinearLayoutManager(getActivity()));
 		subsListView.setAdapter(subsAdapter);
 
+		subSearchViewOpener.setOnSearchClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				subSearchView.setVisibility(View.VISIBLE);
+				subSearchViewOpener.setVisibility(View.GONE);
+			}
+		});
+
+
+		subsDrawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
+			@Override
+			public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
+
+			}
+
+			@Override
+			public void onDrawerOpened(@NonNull View drawerView) {
+
+			}
+
+			@Override
+			public void onDrawerClosed(@NonNull View drawerView) {
+				subSearchView.setVisibility(View.GONE);
+				subSearchViewOpener.setVisibility(View.VISIBLE);
+				subSearchViewOpener.setIconified(true);
+			}
+
+			@Override
+			public void onDrawerStateChanged(int newState) {
+
+			}
+		});
+
 		subSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 			@Override
 			public boolean onQueryTextSubmit(String s) {
@@ -123,7 +158,6 @@ public class MainFragment extends FragmentEx {
 			public boolean onQueryTextChange(String s) {
 
 
-				Logger.i("query",s);
 				subsAdapter.filter(s);
 
 				return true;
@@ -131,15 +165,6 @@ public class MainFragment extends FragmentEx {
 
 		});
 
-		subSearchView.setOnCloseListener(new SearchView.OnCloseListener() {
-			@Override
-			public boolean onClose() {
-
-				Logger.i(this,"closed search");
-
-				return false;
-			}
-		});
 
 		videosPagerAdapter = new VideosPagerAdapter(getChildFragmentManager());
 		viewPager = view.findViewById(R.id.pager);

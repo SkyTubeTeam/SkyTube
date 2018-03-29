@@ -17,12 +17,21 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Menu" />
 
     <android.support.v7.widget.SearchView
+        android:id="@+id/search_view_opener"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@id/subs_drawer_title"
+        android:layout_alignRight="@id/subs_drawer_title"
+        android:paddingTop="5dp"></android.support.v7.widget.SearchView>
+
+    <android.support.v7.widget.SearchView
         android:id="@+id/sub_search_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/subs_drawer_title"
         android:actionViewClass="android.support.v7.widget.SearchView"
-        android:padding="5dp"></android.support.v7.widget.SearchView>
+        android:padding="5dp"
+        android:visibility="gone"></android.support.v7.widget.SearchView>
 
 
     <android.support.v7.widget.RecyclerView
