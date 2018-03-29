@@ -30,6 +30,7 @@ import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.db.BookmarksDb;
 import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
 import free.rm.skytube.gui.businessobjects.MainActivityListener;
+import free.rm.skytube.gui.businessobjects.adapters.RecyclerViewAdapterEx;
 import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
 import free.rm.skytube.gui.businessobjects.fragments.FragmentEx;
 
@@ -114,22 +115,16 @@ public class MainFragment extends FragmentEx {
 		subSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 			@Override
 			public boolean onQueryTextSubmit(String s) {
-				//if (!s.equals("")) {
-				//	subsAdapter.setFilterText(s);
-				//subsAdapter.filterSubSearch(s);
-				//}
-			//	subsAdapter.filterSubSearch(s);
+				subsAdapter.filter(s);
 				return true;
 			}
 
 			@Override
 			public boolean onQueryTextChange(String s) {
-				//if (!s.equals("")) {
-				//subsAdapter.setFilterText(s);
-				//	Logger.i(this,s);
-				subsAdapter.filterSubSearch(s);
-				//}
 
+
+				Logger.i("query",s);
+				subsAdapter.filter(s);
 
 				return true;
 			}

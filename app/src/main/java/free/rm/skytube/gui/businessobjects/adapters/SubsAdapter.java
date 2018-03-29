@@ -23,6 +23,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -30,8 +32,6 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -45,30 +45,27 @@ import free.rm.skytube.gui.businessobjects.MainActivityListener;
  * Channel subscriptions adapter: Contains a list of channels (that the user subscribed to) together
  * with a notification whether the channel has new videos since last visit to the channel or not.
  */
-public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapter.SubChannelViewHolder> {
+public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapter.SubChannelViewHolder> implements Filterable {
 
 	private static final String TAG = SubsAdapter.class.getSimpleName();
 	private static SubsAdapter subsAdapter = null;
-	public  List<YouTubeChannel> listCopy = new ArrayList<>();
-
 
 	/**
 	 * Set to true if the users' subscriptions channels list has been fully retrieved and populated
 	 * by querying the local database and YouTube servers...
 	 */
 	private final Bool isSubsListRetrieved = new Bool(false);
+	public List<YouTubeChannel> listCopy = new ArrayList<>();
 	private MainActivityListener listener;
 
 
 	private SubsAdapter(Context context, View progressBar) {
-			super(context);
-
+		super(context);
 		// populate this adapter with user's subscribed channels
 		new GetSubscribedChannelsTask(this, progressBar).executeInParallel();
 
 
 	}
-
 
 
 	public static SubsAdapter get(Context context) {
@@ -223,47 +220,28 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 			}
 		}
 
-//		sortChannelsAlphabetically(getSubLists());
-
+		listCopy.addAll(getList());
 		// the list has now been retrieved; return it pls
 		return getList();
 	}
 
-	/**
-	 * Method to sort channels alphabetically of Subscriptions Drawer
-	 *
-//	 * @param channelList list that is going to be sorted
-	 */
-	/*public void sortChannelsAlphabetically(List<YouTubeChannel> channelList) {
-		if (channelList.size() > 0) {
-			Collections.sort(channelList, new Comparator<YouTubeChannel>() {
-				@Override
-				public int compare(YouTubeChannel channel, YouTubeChannel t1) {
-					return channel.getTitle().compareTo(t1.getTitle());
-				}
-			});
-		}
 
-	}*/
+	public void filter(String text) {
 
-	public void filterSubSearch(String text){
-		// TODO: 24.3.2018 put list copy on constructor and fix npe on it
-		listCopy.addAll(list); //--> this creates copies of items in the list which can be seen in drawer
-		clearList();           //needs to be initialized in constructor to prevent that from happening but
-		if(text.isEmpty()){    //but results in NPE.
+		list.clear();
+
+		if (text.isEmpty()) {
 			list.addAll(listCopy);
-		} else{
+		} else {
 			text = text.toLowerCase();
-			for(YouTubeChannel channel: listCopy){
-				if(channel.getTitle().toLowerCase().contains(text)){
-					list.add(channel);
+			for (YouTubeChannel channel : listCopy) {
+				if (channel.getTitle().toLowerCase().contains(text)) {
+					getList().add(channel);
 				}
 			}
 		}
 		notifyDataSetChanged();
-
 	}
-
 
 	/**
 	 * Method used to notify {@link SubsAdapter} that the subscriptions channels list has been
@@ -276,6 +254,26 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 		}
 	}
 
+
+	@Override
+	public Filter getFilter() {
+		return new Filter() {
+
+
+			@Override
+			protected FilterResults performFiltering(CharSequence charSequence) {
+
+				return null;
+			}
+
+			@Override
+			protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+
+			}
+
+		};
+
+	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////
 
