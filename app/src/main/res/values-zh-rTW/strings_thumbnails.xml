@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="thumbnail">縮圖</string>
+	<string name="view_thumbnail">檢視縮圖</string>
+	<string name="thumbnail_downloaded">縮圖已下載。</string>
+	<string name="thumbnail_download_error">無法下載縮圖。</string>
+</resources>

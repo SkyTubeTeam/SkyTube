@@ -99,8 +99,9 @@ public class GetYouTubeVideosTask extends AsyncTaskParallel<Void, Void, List<You
 
                 //filtering system to get the videos that are not blocked
                 //videos are checked by their IDs - if their IDs are blocked they are not loaded.
+
                 // videoList needs to be null checked - if there is not connection we get null point exception
-                if (videosList != null){
+                if (videosList != null) {
                     for (YouTubeVideo video : videosList) {
                         if (!blockedChannelIds.contains(video.getChannelId())) {
                             youTubeVideoList.add(video);

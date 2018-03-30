@@ -15,7 +15,6 @@
 
 		<item name="textAppearanceSmallPopupMenu">@style/VideoOptionsTextAppearanceSmall</item>
 		<item name="android:textAppearanceSmallPopupMenu">@style/VideoOptionsTextAppearanceSmall</item>
-
 	</style>
 
 
@@ -107,7 +106,7 @@
 
 	<!-- *************************************************************************************** -->
 	<!--
-	 	Video Player
+	 	Video Player:  v1 and v2
 	-->
 
 	<style name="VideoPlayerActivityTheme" parent="AppTheme">
@@ -146,6 +145,24 @@
 
 	<!-- Volume / Brightness indicator -->
 	<style name="VideoPlayerIndicator" parent="LoadingProgressBar" />
+
+
+	<!-- *************************************************************************************** -->
+	<!--
+	 	Video Player:  v1 and v2
+	-->
+
+	<style name="VideoPlayerSeekBarTetView" parent="AppTheme">
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_height">match_parent</item>
+		<item name="android:gravity">center_vertical</item>
+		<item name="android:paddingLeft">8dp</item>
+		<item name="android:paddingRight">8dp</item>
+		<item name="android:textColor">#FFBEBEBE</item>
+		<item name="android:textAppearance">@style/TextAppearance.AppCompat.Small</item>
+		<item name="android:textStyle">bold</item>
+	</style>
+
 
 
 	<!-- *************************************************************************************** -->

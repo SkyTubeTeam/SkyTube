@@ -44,6 +44,7 @@ import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetSubscriptionVideosTask;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
+import free.rm.skytube.businessobjects.db.Tasks.UnsubscribeFromAllChannelsTask;
 import free.rm.skytube.gui.businessobjects.adapters.ImportSubscriptionsAdapter;
 import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
 import free.rm.skytube.gui.businessobjects.preferences.BackupDatabases;
@@ -128,9 +129,6 @@ public class SubscriptionsBackupsManager {
 					if (importDb)
 						displayImportDbsBackupWarningMsg(files[0]);
 					else {
-						if (isUnsubsribeAllChecked) {
-							SubscriptionsDb.getSubscriptionsDb().unsubscribeFromAllChannels();
-						}
 						Uri uri = Uri.fromFile(new File(files[0]));
 						parseImportedSubscriptions(uri);
 					}
@@ -313,6 +311,11 @@ public class SubscriptionsBackupsManager {
 								.onPositive(new MaterialDialog.SingleButtonCallback() {
 									@Override
 									public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+										// if the user checked the "Unsubscribe to all subscribed channels" checkbox
+										if (isUnsubsribeAllChecked) {
+											new UnsubscribeFromAllChannelsTask().executeInParallel();
+										}
+
 										List<ImportSubscriptionsChannel> channelsToSubscribeTo = new ArrayList<>();
 										for(ImportSubscriptionsChannel channel: channels) {
 											if(channel.isChecked)
@@ -380,7 +383,7 @@ public class SubscriptionsBackupsManager {
 				.contentColorRes(R.color.dialog_content_text)
 				.positiveText(R.string.select_xml_file)
 				.positiveColorRes(R.color.dialog_positive_text)
-				.checkBoxPrompt("Unsubscribe from all the channels", false, new CompoundButton.OnCheckedChangeListener() {
+				.checkBoxPromptRes(R.string.unsubscribe_from_all_current_sibbed_channels, false, new CompoundButton.OnCheckedChangeListener() {
 					@Override
 					public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
 						isUnsubsribeAllChecked = true;

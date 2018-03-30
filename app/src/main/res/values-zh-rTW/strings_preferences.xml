@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="preferences">偏好設定</string>
+
+	<string name="pref_languages_category">語言和區域</string>
+	<string name="pref_title_preferred_regions">偏好的區域</string>
+	<string name="pref_summary_preferred_regions">選擇偏好的區域。這用在「特選」影片類別中篩選出影片。</string>
+
+	<string name="pref_title_preferred_languages">偏好的語言</string>
+	<string name="pref_video_player_category">影片播放器</string>
+	<string name="pref_title_preferred_res">偏好的解晰度</string>
+	<string name="pref_summary_preferred_res">選擇您偏好的解晰度:  %s</string>
+
+	<string name="pref_title_choose_player">影片播放器</string>
+	<string name="pref_summary_choose_player">要使用的影片播放器：%s</string>
+	<string name="pref_backup_category">備份</string>
+	<string name="pref_title_backup_dbs">備份資料庫</string>
+	<string name="pref_summary_backup_dbs">備份您的訂閱和書簽資料庫。</string>
+	<string name="pref_title_import_dbs">匯入備份</string>
+	<string name="pref_summary_import_dbs">匯入您的訂閱和書簽資料庫備份。</string>
+	<string name="databases_backing_up">正在備份…</string>
+	<string name="pref_title_import_subs">從 YouTube 匯入訂閱</string>
+	<string name="pref_summary_preferred_languages">實驗性的：選擇一個或多個偏好的語言。這使用在「最受歡迎」影片類別和影片搜尋中篩選出影片。</string>
+
+	<string name="databases_backup_success">資料庫備份到 %s</string>
+	<string name="databases_backup_fail">備份您的資料庫已失敗。</string>
+	<string name="databases_import_select_backup">選擇要匯入的備份檔案</string>
+	<string name="databases_import_nothing_selected">沒有任何選擇…</string>
+	<string name="databases_import_warning_message">訂閱和書簽資料庫將被替換為所選取的備份檔案中的資料。
+\n
+\n要繼續嗎？</string>
+	<string name="continue_">繼續</string>
+	<string name="databases_importing">正在匯入…</string>
+	<string name="databases_import_fail">匯入您的資料庫已失敗。</string>
+	<string name="databases_import_success">已匯入資料庫。重新開啟應用程式以套用變更。</string>
+
+	<string name="pref_summary_import_subs">從您的 YouTube 帳號匯入您的訂閱。</string>
+	<string name="subs_import_select_backup">選擇 YouTube XML 檔案以匯入</string>
+
+	<string name="pref_about_category">關於</string>
+	<string name="pref_title_website">網站</string>
+	<string name="pref_title_credits">致謝</string>
+	<string name="pref_summary_credits">使此應用程式成為可行的人員和專案。</string>
+	<string name="pref_title_version">版本</string>
+	<string name="pref_title_updates">更新</string>
+	<string name="pref_summary_updates">檢查新版本。</string>
+	<string name="pref_title_license">授權條款</string>
+	<string name="pref_summary_license">GNU 通用公共授權條款版本 3</string>
+	<string name="app_license">版權所有©2015-2018 Ramon Mifsud
+\n
+\n這個程式是自由軟體：您可以根據自由軟體基金會之法定發佈(授權條款第三版)，在 GNU 通用公共授權條款下，您可以重新發佈和修改它。
+\n
+\n 本程式發佈是希望它有用處，但不負任何擔保；不論是明確的，還是隱含的，都不提供任何類型的擔保。請參閱 GNU 通用公共授權條款獲取更多細節。
+\n
+\n您應該已經連同這個程式收到一份 GNU 通用公共授權條款的副本。如果沒有，請參閱 &lt;http://www.gnu.org/licenses/&gt;</string>
+	<string name="i_agree">我同意</string>
+
+
+	<string name="pref_other_category">其他</string>
+	<string name="pref_title_default_tab">預設分頁</string>
+	<string name="pref_summary_default_tab">SkyTube 啟動時顯示的預設分頁：%s</string>
+	<string name="pref_title_feed_notification">摘要自動通知</string>
+	<string name="pref_summary_feed_notification">從已訂閱的頻道檢查新影片的頻度：%s</string>
+	<string name="pref_title_screen_orientation">螢幕方向</string>
+	<string name="pref_summary_screen_orientation">影片播放器的方向：%s</string>
+	<string name="pref_title_disable_immersive_mode">停用沈浸模式</string>
+	<string name="pref_summary_disable_immersive_mode">評論、影片說明圖示和導覽列將一直顯示</string>
+
+	<string name="pref_title_youtube_api_key">YouTube API 金鑰</string>
+	<string name="pref_summary_youtube_api_key">輸入您自己的 YouTube 資料 API 金鑰。留空為使用預設值。</string>
+	<string name="pref_youtube_api_key_error">嘗試驗證您輸入的 API 金鑰時發生錯誤。</string>
+	<string name="pref_youtube_api_key_custom">金鑰有效。重新啟動應用程式，以使用新的 YouTube API 金鑰。</string>
+	<string name="pref_youtube_api_key_default">重新啟動應用程式以切換回預設的 YouTube API 金鑰。</string>
+
+	<string name="pref_title_allow_mobile_downloads">允許在行動網路上下載</string>
+	<string name="pref_summary_allow_mobile_downloads">選擇此項以啟用在行動網路上下載影片，否則影片只能在 Wi-Fi 上下載。</string>
+
+	<string name="pref_title_disable_search_history">停用搜尋歷史記錄</string>
+	<string name="pref_summary_disable_search_history">如果選取，搜尋歷史記錄將被清除，並且不會被使用。</string>
+	<string name="pref_disable_search_history_deleted">搜尋的歷史記錄已刪除。</string>
+	<string name="restart">重新啟動</string>
+
+	<string name="pref_blocked_channel_category">已阻擋頻道</string>
+	<string name="pref_title_blocked_channels_list">已阻擋頻道</string>
+	<string name="pref_summary_blocked_channels_list">勾選您想要解鎖的頻道，並讓別人不受抑制。</string>
+</resources>

@@ -23,10 +23,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
@@ -38,13 +35,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
-import free.rm.skytube.gui.businessobjects.adapters.SearchHistoryCursorAdapter;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubePlaylist;
 import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
@@ -53,6 +48,7 @@ import free.rm.skytube.businessobjects.db.SearchHistoryTable;
 import free.rm.skytube.businessobjects.interfaces.SearchHistoryClickListener;
 import free.rm.skytube.gui.businessobjects.MainActivityListener;
 import free.rm.skytube.gui.businessobjects.YouTubePlayer;
+import free.rm.skytube.gui.businessobjects.adapters.SearchHistoryCursorAdapter;
 import free.rm.skytube.gui.businessobjects.updates.UpdatesCheckerTask;
 import free.rm.skytube.gui.fragments.ChannelBrowserFragment;
 import free.rm.skytube.gui.fragments.MainFragment;
@@ -80,6 +76,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 
 	public static final String ACTION_VIEW_CHANNEL = "MainActivity.ViewChannel";
 	public static final String ACTION_VIEW_FEED = "MainActivity.ViewFeed";
+	public static final String ACTION_VIEW_PLAYLIST = "MainActivity.ViewPlaylist";
 	private static final String MAIN_FRAGMENT   = "MainActivity.MainFragment";
 	private static final String SEARCH_FRAGMENT = "MainActivity.SearchFragment";
 	public static final String CHANNEL_BROWSER_FRAGMENT = "MainActivity.ChannelBrowserFragment";
@@ -90,24 +87,6 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
-		//Asynctask to check network connection on background thread with a handler to reach to UI for the toast.
-		AsyncTask.execute(new Runnable() {
-			@Override
-			public void run() {
-				if (!SkyTubeApp.isInternetAvailable()){
-					Looper.prepare();
-					Handler handler = new Handler();
-					handler.post(new Runnable() {
-						@Override
-						public void run() {
-							Toast.makeText(MainActivity.this, "No internet connection", Toast.LENGTH_LONG).show();
-						}
-					});
-					Looper.loop();
-				}
-			}
-		});
 
 		// check for updates (one time only)
 		if (!updatesCheckerTaskRan) {
@@ -137,6 +116,10 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 				dontAddToBackStack = true;
 				YouTubeChannel channel = (YouTubeChannel) getIntent().getSerializableExtra(ChannelBrowserFragment.CHANNEL_OBJ);
 				onChannelClick(channel);
+			} else if(ACTION_VIEW_PLAYLIST.equals(action)) {
+				dontAddToBackStack = true;
+				YouTubePlaylist playlist = (YouTubePlaylist)getIntent().getSerializableExtra(PlaylistVideosFragment.PLAYLIST_OBJ);
+				onPlaylistClick(playlist);
 			} else {
 				if(mainFragment == null) {
 					mainFragment = new MainFragment();

@@ -23,4 +23,5 @@
 	<string name="failed_to_import_subscriptions">Klarte ikke å importere dine YouTube-abonnementer.</string>
 
 	<string name="about">Om</string>
-</resources>
+<string name="unsubscribe_from_all_current_sibbed_channels">Opphev alle abonnementer.</string>
+	</resources>

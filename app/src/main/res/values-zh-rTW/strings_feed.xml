@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="feed">摘要</string>
+
+	<string name="subscribing_to_channels">正在訂閱頻道…</string>
+	<string name="fetching_subbed_channels_info">正在獲取頻道資訊…</string>
+	<string name="fetching_subbed_channels_info_error">獲取頻道資訊時發生錯誤。</string>
+
+	<string name="fetching_subscription_videos">正從訂閱的頻道取得影片</string>
+	<string name="fetched_videos_from_channels">已從 %2$d/%3$d 頻道取得了 %1$d 影片。</string>
+	<string name="no_new_videos_found">沒有找到新影片。</string>
+	<string name="no_subscriptions_text">您沒有訂閱任何的頻道。
+\n
+\n一旦您有訂，上個月內上傳到您所訂閱頻道的所有視頻，都會出現在這裡。</string>
+	<string name="import_subscriptions_from_youtube">從 YouTube 匯入訂閱</string>
+
+	<string name="notification_channel_feed_title">摘要通知</string>
+	<string name="notification_new_videos_found">%d 個來自訂閱頻道的新影片</string>
+</resources>

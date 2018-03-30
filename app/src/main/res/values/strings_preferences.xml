@@ -14,7 +14,7 @@
 	<string name="pref_video_player_category">Video Player</string>
 	<string name="pref_title_preferred_res">Preferred Resolution</string>
 	<string name="pref_key_preferred_res" translatable="false">pref_preferred_resolution</string>
-	<string name="pref_summary_preferred_res">Select your preferred resolution</string>
+	<string name="pref_summary_preferred_res">Select your preferred resolution:  %s</string>
 
 	<string name="pref_key_choose_player" translatable="false">pref_key_choose_player</string>
 	<string name="pref_title_choose_player">Video Player</string>

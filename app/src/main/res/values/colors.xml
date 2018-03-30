@@ -53,6 +53,10 @@
 	<color name="comment_background">@color/video_player_hud</color>
 	<color name="comment_text">#b3b3b3</color>
 
+	<!-- Player v2 -->
+	<color name="video_player_v2_hud">#7A000000</color>
+	<color name="video_player_v2_seek_bar">@color/colorAccent</color>
+
 
 	<!--
 		Channel Browser

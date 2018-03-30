@@ -35,7 +35,6 @@ public class YouTubeAPIKey {
 	private Random random = new Random();
 
 	private static YouTubeAPIKey youTubeAPIKey = null;
-	private static final String TAG = YouTubeAPIKey.class.getSimpleName();
 
 
 	/**
@@ -69,12 +68,15 @@ public class YouTubeAPIKey {
 			// if the user has not set his own API key, then use the default SkyTube key
 			key = userAPIKey;
 		} else {
-			// else we are going to choose one of the defaults keys at random
-			int i = random.nextInt( BuildConfig.YOUTUBE_API_KEYS.length );
-			key = BuildConfig.YOUTUBE_API_KEYS[i];
+			if (BuildConfig.DEBUG) {
+				key = BuildConfig.YOUTUBE_API_KEYS_DEBUG;
+			} else {
+				// else we are going to choose one of the defaults keys at random
+				int i = random.nextInt(BuildConfig.YOUTUBE_API_KEYS.length);
+				key = BuildConfig.YOUTUBE_API_KEYS[i];
+			}
 		}
 
-//		Log.d(TAG, "Key = " + key);
 		return key;
 	}
 

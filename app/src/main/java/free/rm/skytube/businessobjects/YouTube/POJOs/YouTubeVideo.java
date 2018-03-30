@@ -50,6 +50,7 @@ import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.FileDownloader;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetVideoStreamTask;
+import free.rm.skytube.businessobjects.YouTube.VideoStream.StreamMetaData;
 import free.rm.skytube.businessobjects.db.BlockedChannelsDb;
 import free.rm.skytube.businessobjects.db.BookmarksDb;
 import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
@@ -522,10 +523,10 @@ public class YouTubeVideo implements Serializable {
 
 		getDesiredStream(new GetDesiredStreamListener() {
 			@Override
-			public void onGetDesiredStream(Uri videoUri) {
+			public void onGetDesiredStream(StreamMetaData desiredStream) {
 				// download the video
 				new VideoDownloader()
-						.setRemoteFileUrl(videoUri.toString())
+						.setRemoteFileUrl(desiredStream.getUri().toString())
 						.setDirType(Environment.DIRECTORY_MOVIES)
 						.setTitle(getTitle())
 						.setDescription(getStr(R.string.video) + " ― " + getChannelName())

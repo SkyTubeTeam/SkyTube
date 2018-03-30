@@ -9,7 +9,7 @@
 	<string name="error_get_video_desc">Ошибка во время загрузки описания видео.</string>
 	<string name="error_invalid_url">Неверная ссылка на видео: %s</string>
 
-	<string name="warning_live_video">Не получается вопроизвести прямой эфир. Попробовать внешними средствами?</string>
+	<string name="warning_live_video">Не получается воспроизвести прямой эфир. Открыть прямой эфир в другом приложении?</string>
 
 	<string name="ratings_disabled">Рейтинг отключен</string>
 
@@ -32,7 +32,7 @@
 	<string name="cancel">Отмена</string>
 	<string name="clear">Очистить</string>
 
-	<string name="tutorial_comments_icon">Swipe to the left to view comments.</string>
-	<string name="tutorial_video_info_icon">Swipe to the top to view information about the video.</string>
-	<string name="tutorial_pause_video">Double tap to pause or play a video.</string>
+	<string name="tutorial_comments_icon">Смахните влево, чтобы увидеть комментарии.</string>
+	<string name="tutorial_video_info_icon">Смахните вниз, чтобы увидеть информацию о видео.</string>
+	<string name="tutorial_pause_video">Дважды нажмите, чтобы остановить или продолжить воспроизведение.</string>
 </resources>

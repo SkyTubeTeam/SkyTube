@@ -21,7 +21,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -36,11 +35,9 @@ import java.util.Date;
 import java.util.List;
 
 import free.rm.skytube.app.SkyTubeApp;
-import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.GetChannelsDetails;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
-import free.rm.skytube.businessobjects.db.Tasks.UnsubscribeFromAllChannelsTask;
 
 /**
  * A database (DB) that stores user subscriptions (with respect to YouTube channels).
@@ -50,11 +47,9 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 
 	private static final int DATABASE_VERSION = 2;
 	private static final String DATABASE_NAME = "subs.db";
-	private Context context;
 
 	private SubscriptionsDb(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
-		this.context = context;
 	}
 
 
@@ -125,15 +120,17 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 	 * @return True if the operation was successful; false otherwise.
 	 */
 	public boolean unsubscribe(YouTubeChannel channel) {
+		// delete any feed videos pertaining to this channel
+		getWritableDatabase().delete(SubscriptionsVideosTable.TABLE_NAME,
+				SubscriptionsVideosTable.COL_CHANNEL_ID + " = ?",
+				new String[]{channel.getId()});
+
+		// remove this channel from the subscriptions DB
 		int rowsDeleted = getWritableDatabase().delete(SubscriptionsTable.TABLE_NAME,
 				SubscriptionsTable.COL_CHANNEL_ID + " = ?",
 				new String[]{channel.getId()});
 
 		return (rowsDeleted >= 0);
-	}
-
-	public void unsubscribeFromAllChannels() {
-		new UnsubscribeFromAllChannelsTask(context).execute();
 	}
 
 

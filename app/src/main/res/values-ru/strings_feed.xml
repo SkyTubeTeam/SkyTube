@@ -2,9 +2,9 @@
 <resources>
 	<string name="feed">Что нового</string>
 
-	<string name="subscribing_to_channels">Subscribing to channels…</string>
-	<string name="fetching_subbed_channels_info">Fetching channels\' information…</string>
-	<string name="fetching_subbed_channels_info_error">An error has occurred while fetching channels\' information.</string>
+	<string name="subscribing_to_channels">Подписка на каналы…</string>
+	<string name="fetching_subbed_channels_info">Получение информации о каналах…</string>
+	<string name="fetching_subbed_channels_info_error">Произошла ошибка при загрузке информации о каналах.</string>
 
 	<string name="fetching_subscription_videos">Загрузка видео из каналов подписки</string>
 	<string name="fetched_videos_from_channels">"Загружено %1$d видео из  %2$d/%3$d каналов."</string>
@@ -14,6 +14,6 @@
 \nВ этом списке появляются ролики, которые добавили на каналы из вашей подписки в течение месяца.</string>
 	<string name="import_subscriptions_from_youtube">Импортировать подписки из YouTube</string>
 
-	<string name="notification_channel_feed_title">Feed Notifications</string>
-	<string name="notification_new_videos_found">%d new videos from subscribed channels</string>
+	<string name="notification_channel_feed_title">Уведомления ленты</string>
+	<string name="notification_new_videos_found">%d новых видео от подписанных каналов</string>
 </resources>
