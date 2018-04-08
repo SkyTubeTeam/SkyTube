@@ -156,13 +156,9 @@ public class MainFragment extends FragmentEx {
 
 			@Override
 			public boolean onQueryTextChange(String s) {
-
-
 				subsAdapter.filter(s);
-
 				return true;
 			}
-
 		});
 
 

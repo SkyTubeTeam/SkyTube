@@ -515,4 +515,9 @@
 	<string name="pref_key_blocked_channels_list" translatable="false">pref_blocked_channels_list_key</string>
 	<string name="pref_title_blocked_channels_list">Blocked Channels</string>
 	<string name="pref_summary_blocked_channels_list">Check the channels you want to unblock and leave the others unchecked.</string>
+
+	<string name="pref_key_subscriptions_alphabetical_order" translatable="false">pref_key_subscriptions_alphabetical_order</string>
+	<string name="pref_title_subscriptions_alphabetical_order">Sort Channels Alphabetically</string>
+	<string name="pref_summary_subscriptions_alphabetical_order">If checked, Subscribed Channels will be sorted alphabetically.</string>
+
 </resources>

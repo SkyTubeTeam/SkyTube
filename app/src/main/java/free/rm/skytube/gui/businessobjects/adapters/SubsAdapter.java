@@ -18,6 +18,7 @@
 package free.rm.skytube.gui.businessobjects.adapters;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -30,6 +31,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -37,6 +40,7 @@ import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.db.Tasks.GetSubscribedChannelsTask;
+import free.rm.skytube.gui.activities.MainActivity;
 import free.rm.skytube.gui.businessobjects.MainActivityListener;
 
 /**
@@ -47,13 +51,13 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 
 	private static final String TAG = SubsAdapter.class.getSimpleName();
 	private static SubsAdapter subsAdapter = null;
-
 	/**
 	 * Set to true if the users' subscriptions channels list has been fully retrieved and populated
 	 * by querying the local database and YouTube servers...
 	 */
 	private final Bool isSubsListRetrieved = new Bool(false);
 	public List<YouTubeChannel> listCopy = new ArrayList<>();
+	private boolean isChannelsSorted;
 	private MainActivityListener listener;
 
 
@@ -122,6 +126,24 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 		}
 
 		Log.e(TAG, "Channel not removed from adapter:  id=" + channelId);
+	}
+
+	public boolean getChannelsSorted() {
+		SharedPreferences sharedPreferences = getContext().getSharedPreferences("myPref", 0);
+		isChannelsSorted = sharedPreferences.getBoolean("isChannelSorted", isChannelsSorted);
+
+		return isChannelsSorted;
+	}
+
+	public void setChannelsSorted(boolean channelsSorted) {
+		SharedPreferences sharedPreferences = getContext().getSharedPreferences("myPref", 0);
+		SharedPreferences.Editor editor = sharedPreferences.edit();
+
+		this.isChannelsSorted = channelsSorted;
+
+		editor.clear();
+		editor.putBoolean("isChannelSorted", isChannelsSorted);
+		editor.commit();
 	}
 
 
@@ -218,6 +240,11 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 			}
 		}
 
+		if (getChannelsSorted()) {
+			sortChannelsAlphabetically(getList());
+
+		}
+
 		listCopy.addAll(getList());
 		// the list has now been retrieved; return it pls
 		return getList();
@@ -239,6 +266,32 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 			}
 		}
 		notifyDataSetChanged();
+	}
+
+	/**
+	 * Method to sort channels alphabetically of Subscriptions Drawer
+	 *
+	 * @param channelList list that is going to be sorted
+	 */
+	public void sortChannelsAlphabetically(List<YouTubeChannel> channelList) {
+
+		if (channelList.size() > 0) {
+			Collections.sort(channelList, new Comparator<YouTubeChannel>() {
+				@Override
+				public int compare(YouTubeChannel channel, YouTubeChannel t1) {
+					return channel.getTitle().compareTo(t1.getTitle());
+				}
+			});
+
+			//necessary for updating the UI part
+			((MainActivity) getContext()).runOnUiThread(new Runnable() {
+				@Override
+				public void run() {
+					notifyDataSetChanged();
+				}
+			});
+
+		}
 	}
 
 	/**
