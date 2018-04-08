@@ -39,6 +39,7 @@ import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.db.Tasks.GetSubscribedChannelsTask;
+import free.rm.skytube.gui.activities.MainActivity;
 import free.rm.skytube.gui.businessobjects.MainActivityListener;
 
 /**
@@ -49,14 +50,13 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 
 	private static final String TAG = SubsAdapter.class.getSimpleName();
 	private static SubsAdapter subsAdapter = null;
-	private SharedPreferences sharedPreferences = getContext().getSharedPreferences("myPref",0);
-	private SharedPreferences.Editor editor = sharedPreferences.edit();
 	/**
 	 * Set to true if the users' subscriptions channels list has been fully retrieved and populated
 	 * by querying the local database and YouTube servers...
 	 */
 	private final Bool isSubsListRetrieved = new Bool(false);
-	private boolean isChannelsSorted;
+	public boolean isChannelsSorted;
+
 	private MainActivityListener listener;
 
 
@@ -65,6 +65,7 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 
 		// populate this adapter with user's subscribed channels
 		new GetSubscribedChannelsTask(this, progressBar).executeInParallel();
+
 	}
 
 
@@ -82,13 +83,18 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 	}
 
 
+  
 	/**
 	 * @return True if the subscribed channels are sorted alphabetically by the {@link SubsAdapter};
 	 * false otherwise.
 	 */
-	private boolean isChannelsSorted() {
-		return sharedPreferences.getBoolean("isChannelSorted",isChannelsSorted);
-	}
+	public boolean getChannelsSorted() {
+		SharedPreferences sharedPreferences = getContext().getSharedPreferences("myPref", 0);
+		isChannelsSorted = sharedPreferences.getBoolean("isChannelSorted", isChannelsSorted);
+
+		return isChannelsSorted;
+  }
+
 
 
 	/**
@@ -97,8 +103,14 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 	 * @param channelsSorted    True to sort the channels.
 	 */
 	public void setChannelsSorted(boolean channelsSorted) {
-		isChannelsSorted = channelsSorted;
-		editor.putBoolean("isChannelSorted",isChannelsSorted).apply();
+		SharedPreferences sharedPreferences = getContext().getSharedPreferences("myPref", 0);
+		SharedPreferences.Editor editor = sharedPreferences.edit();
+
+		this.isChannelsSorted = channelsSorted;
+
+		editor.clear();
+		editor.putBoolean("isChannelSorted", isChannelsSorted);
+		editor.commit();
 	}
 
 
@@ -239,12 +251,10 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 			}
 		}
 
-		Logger.i(this, isChannelsSorted + "");
-		if (isChannelsSorted()) {
+		if (getChannelsSorted()) {
 			sortChannelsAlphabetically(getList());
+
 		}
-
-
 		// the list has now been retrieved; return it pls
 		return getList();
 
@@ -257,6 +267,7 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 	 * @param channelList list that is going to be sorted
 	 */
 	public void sortChannelsAlphabetically(List<YouTubeChannel> channelList) {
+
 		if (channelList.size() > 0) {
 			Collections.sort(channelList, new Comparator<YouTubeChannel>() {
 				@Override
@@ -264,6 +275,15 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 					return channel.getTitle().compareTo(t1.getTitle());
 				}
 			});
+
+			//necessary for updating the UI part
+			((MainActivity) getContext()).runOnUiThread(new Runnable() {
+				@Override
+				public void run() {
+					notifyDataSetChanged();
+				}
+			});
+
 		}
 	}
 
