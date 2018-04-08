@@ -136,9 +136,13 @@ public class MainFragment extends FragmentEx {
 
 			@Override
 			public void onDrawerClosed(@NonNull View drawerView) {
+				subSearchView.setQuery("", false);
+				subSearchView.setIconified(true);
 				subSearchView.setVisibility(View.GONE);
 				subSearchViewOpener.setVisibility(View.VISIBLE);
 				subSearchViewOpener.setIconified(true);
+				subsAdapter.refreshSubsList();
+
 			}
 
 			@Override

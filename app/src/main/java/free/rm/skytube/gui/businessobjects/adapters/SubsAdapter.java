@@ -216,7 +216,6 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 		}
 	}
 
-
 	/**
 	 * Returns the list of channels that the user is subscribed to.
 	 * <p>
@@ -251,10 +250,13 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 	}
 
 
+	/***
+	 * Method that filters user's search for channels on the subscription drawer.
+	 * @param text text that user searches for.
+	 */
 	public void filter(String text) {
 
 		list.clear();
-
 		if (text.isEmpty()) {
 			list.addAll(listCopy);
 		} else {
@@ -265,6 +267,7 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 				}
 			}
 		}
+
 		notifyDataSetChanged();
 	}
 
