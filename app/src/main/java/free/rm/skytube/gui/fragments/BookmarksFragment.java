@@ -71,7 +71,7 @@ public class BookmarksFragment extends OrderableVideosGridFragment implements Bo
 	public void onBookmarksDbUpdated() {
 		populateList();
 		if(videoGridAdapter != null)
-			videoGridAdapter.refresh();
+			videoGridAdapter.refresh(true);
 	}
 	
 

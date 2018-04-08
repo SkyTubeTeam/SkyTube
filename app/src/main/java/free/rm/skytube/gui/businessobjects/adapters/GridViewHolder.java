@@ -203,8 +203,6 @@ class GridViewHolder extends RecyclerView.ViewHolder {
 						return true;
 					case R.id.block_channel:
 						youTubeVideo.blockChannel(context);
-						Logger.e(this,"get blocked channel info" +youTubeVideo.getChannelName() +
-								" -- "+ youTubeVideo.getChannelId() );
 				}
 				return false;
 			}
