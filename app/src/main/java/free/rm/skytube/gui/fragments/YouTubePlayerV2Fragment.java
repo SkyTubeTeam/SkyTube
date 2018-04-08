@@ -435,6 +435,17 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment {
 
 
 	/**
+	 * Called when the options menu is closed.
+	 *
+	 * <p>The Navigation Bar is displayed when the Option Menu is visible.  Hence the objective of
+	 * this method is to hide the Navigation Bar once the Options Menu is hidden.</p>
+	 */
+	public void onMenuClosed() {
+		hideNavigationBar();
+	}
+
+
+	/**
 	 * Will asynchronously retrieve additional video information such as channel avatar ...etc
 	 */
 	private void getVideoInfoTasks() {
@@ -571,7 +582,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment {
 
 				// will now check if the video is bookmarked or not (and then update the menu
 				// accordingly)
-				/////////////////////////////////////////////////////////////////////////////////////TODO new IsVideoBookmarkedTask(youTubeVideo, menu).executeInParallel();
+				new IsVideoBookmarkedTask(youTubeVideo, menu).executeInParallel();
 			}
 		}
 	}
@@ -668,6 +679,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment {
 
 			if (isControllerVisible) {
 				playerView.hideController();
+				hideNavigationBar();
 			} else {
 				playerView.showController();
 			}

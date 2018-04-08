@@ -22,6 +22,7 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.view.Menu;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
@@ -35,6 +36,8 @@ import free.rm.skytube.gui.fragments.YouTubePlayerV2Fragment;
  * {@link free.rm.skytube.gui.fragments.YouTubePlayerFragment}.
  */
 public class YouTubePlayerActivity extends BackButtonActivity {
+
+	private FragmentEx videoPlayerFragment;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +55,8 @@ public class YouTubePlayerActivity extends BackButtonActivity {
 		// either use the SkyTube's default video player or the legacy one
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-		FragmentEx fragment = useDefaultPlayer ? new YouTubePlayerV2Fragment() : new YouTubePlayerFragment();
-		fragmentTransaction.add(R.id.fragment_container, fragment);
+		videoPlayerFragment = useDefaultPlayer ? new YouTubePlayerV2Fragment() : new YouTubePlayerFragment();
+		fragmentTransaction.add(R.id.fragment_container, videoPlayerFragment);
 		fragmentTransaction.commit();
 	}
 
@@ -95,4 +98,14 @@ public class YouTubePlayerActivity extends BackButtonActivity {
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
 	}
 
+
+	@Override
+	public void onPanelClosed(int featureId, Menu menu) {
+		super.onPanelClosed(featureId, menu);
+
+		// notify the player that the menu is no longer visible
+		if (videoPlayerFragment instanceof YouTubePlayerV2Fragment) {
+			((YouTubePlayerV2Fragment) videoPlayerFragment).onMenuClosed();
+		}
+	}
 }
