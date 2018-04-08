@@ -19,15 +19,13 @@ package free.rm.skytube.businessobjects.YouTube.Tasks;
 
 import android.support.v4.widget.SwipeRefreshLayout;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
-import free.rm.skytube.businessobjects.Logger;
+import free.rm.skytube.businessobjects.YouTube.FilterVideos;
 import free.rm.skytube.businessobjects.YouTube.GetYouTubeVideos;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
-import free.rm.skytube.businessobjects.db.BlockedChannelsDb;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 import free.rm.skytube.gui.businessobjects.adapters.VideoGridAdapter;
 
@@ -75,45 +73,26 @@ public class GetYouTubeVideosTask extends AsyncTaskParallel<Void, Void, List<You
 
 	@Override
 	protected List<YouTubeVideo> doInBackground(Void... params) {
-		List<YouTubeVideo> videosList = null;
-		ArrayList<YouTubeVideo> youTubeVideoList = new ArrayList<>();
-		List<String> blockedChannelIds = new ArrayList<>();
-		final BlockedChannelsDb blockedChannelsDb = BlockedChannelsDb.getBlockedChannelsDb();
+		if (isCancelled()) {
+			return null;
+		}
 
-		if (!isCancelled()) {
-			// get videos from YouTube
-			videosList = getYouTubeVideos.getNextVideos();
+		// get videos from YouTube
+		List<YouTubeVideo> videosList = getYouTubeVideos.getNextVideos();
 
-			if (videosList != null && channel != null && channel.isUserSubscribed()) {
+		if (videosList != null) {
+			// filter videos
+			videosList = new FilterVideos().filter(videosList);
+
+			if (channel != null && channel.isUserSubscribed()) {
 				for (YouTubeVideo video : videosList) {
 					channel.addYouTubeVideo(video);
 				}
 				SubscriptionsDb.getSubscriptionsDb().saveChannelVideos(channel);
 			}
-
-			try {
-				//get the IDs of blocked channels
-				for (String channelIds : blockedChannelsDb.getBlockedChannelsListId()) {
-					blockedChannelIds.add(channelIds);
-				}
-
-				//filtering system to get the videos that are not blocked
-				//videos are checked by their IDs - if their IDs are blocked they are not loaded.
-
-				// videoList needs to be null checked - if there is not connection we get null point exception
-				if (videosList != null) {
-					for (YouTubeVideo video : videosList) {
-						if (!blockedChannelIds.contains(video.getChannelId())) {
-							youTubeVideoList.add(video);
-						}
-					}
-				}
-			} catch (Exception e) {
-				Logger.e(this, "Error occurred while checking blocked channels", e);
-			}
 		}
-		
-		return youTubeVideoList;
+
+		return videosList;
 	}
 
 

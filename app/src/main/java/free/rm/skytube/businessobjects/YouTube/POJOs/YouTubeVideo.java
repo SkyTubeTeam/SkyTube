@@ -66,10 +66,6 @@ import static free.rm.skytube.app.SkyTubeApp.getStr;
 public class YouTubeVideo implements Serializable {
 
 	/**
-	 * Default preferred language(s) -- by default, no language shall be filtered out.
-	 */
-	private static final Set<String> defaultPrefLanguages = new HashSet<>(SkyTubeApp.getStringArrayAsList(R.array.languages_iso639_codes));
-	/**
 	 * YouTube video ID.
 	 */
 	private String id;
@@ -371,44 +367,6 @@ public class YouTubeVideo implements Serializable {
 
 	public boolean isLiveStream() {
 		return isLiveStream;
-	}
-
-	/**
-	 * Return true if this video does not meet the preferred language criteria;  false otherwise.
-	 * Many YouTube videos do not set the language, hence this method will not be accurate.
-	 *
-	 * @return True to filter out the video; false otherwise.
-	 */
-	public boolean filterVideoByLanguage() {
-		Set<String> preferredLanguages = getPreferredLanguages();
-
-		// if the video's language is not defined (i.e. null)
-		//	OR if there is no linguistic content to the video (zxx)
-		//	OR if the language is undefined (und)
-		// then we are NOT going to filter this video
-		if (getLanguage() == null || getLanguage().equalsIgnoreCase("zxx") || getLanguage().equalsIgnoreCase("und"))
-			return false;
-
-		// if there are no preferred languages, then it means we must not filter this video
-		if (preferredLanguages == null || preferredLanguages.isEmpty())
-			return false;
-
-		// if this video's language is equal to the user's preferred one... then do NOT filter it out
-		for (String prefLanguage : preferredLanguages) {
-			if (getLanguage().matches(prefLanguage))
-				return false;
-		}
-
-		// this video is undesirable, hence we are going to filter it
-		Log.i("FILTERING Video", getTitle() + "[" + getLanguage() + "]");
-		return true;
-	}
-
-	/**
-	 * @return Set of user's preferred ISO 639 language codes (regex).
-	 */
-	private Set<String> getPreferredLanguages() {
-		return SkyTubeApp.getPreferenceManager().getStringSet(getStr(R.string.pref_key_preferred_languages), defaultPrefLanguages);
 	}
 
 	public void bookmarkVideo(Context context, Menu menu) {
