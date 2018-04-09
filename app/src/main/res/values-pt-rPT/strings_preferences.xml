@@ -103,4 +103,6 @@
 	<string name="pref_blocked_channel_category">Canais bloqueados</string>
 	<string name="pref_title_blocked_channels_list">Canais bloqueados</string>
 	<string name="pref_summary_blocked_channels_list">Marque os canais que deseja desbloquear e mantenha os restantes desmarcados.</string>
-</resources>
+<string name="pref_title_subscriptions_alphabetical_order">"Ordenar canais alfabeticamente "</string>
+	<string name="pref_summary_subscriptions_alphabetical_order">Se ativa, os canis subscritos serão mostrados por ordem alfabética.</string>
+	</resources>
