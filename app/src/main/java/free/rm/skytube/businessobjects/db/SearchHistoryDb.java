@@ -108,8 +108,8 @@ public class SearchHistoryDb extends SQLiteOpenHelperEx {
 	 */
 	private Cursor getSearchCursor(String searchText, boolean exactTextSearch) {
 		String searchClause = exactTextSearch
-				? String.format(" = '%s'", searchText)
-				: String.format(" LIKE '%s%%'", searchText);
+				? String.format(" = '%s'", searchText.replaceAll("'", "\''"))
+				: String.format(" LIKE '%s%%'", searchText.replaceAll("'", "\''"));
 
 		return getReadableDatabase().query(SearchHistoryTable.TABLE_NAME,
 				new String[] {SearchHistoryTable.COL_SEARCH_ID, SearchHistoryTable.COL_SEARCH_TEXT},
