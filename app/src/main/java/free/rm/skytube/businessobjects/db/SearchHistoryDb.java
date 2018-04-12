@@ -107,6 +107,7 @@ public class SearchHistoryDb extends SQLiteOpenHelperEx {
 	 * @return                  A cursor containing texts which starts with the contents of searchText.
 	 */
 	private Cursor getSearchCursor(String searchText, boolean exactTextSearch) {
+		// if the user input "'" it was causing the app to crash, hence replace "'" with "\''"
 		String searchClause = exactTextSearch
 				? String.format(" = '%s'", searchText.replaceAll("'", "\''"))
 				: String.format(" LIKE '%s%%'", searchText.replaceAll("'", "\''"));
