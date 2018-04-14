@@ -90,9 +90,9 @@
 	<string name="pref_title_disable_search_history">Skru av søkehistorikk</string>
 	<string name="pref_summary_disable_search_history">Hvis merket, vil søkehistorikken bli tømt og ikke brukt.</string>
 	<string name="pref_disable_search_history_deleted">Søkehistorikk slettet.</string>
-<string name="pref_blocked_channel_category">Blokkerte kanaler</string>
-	<string name="pref_title_blocked_channels_list">Blokkerte kanaler</string>
-	<string name="pref_summary_blocked_channels_list">Velg kanalene du ønsker å avblokkere, og la alt annet stå umerket.</string>
+<string name="pref_video_blocker_category">Blokkerte kanaler</string>
+	<string name="pref_title_channel_blacklist">Blokkerte kanaler</string>
+	<string name="pref_summary_channel_blacklist">Velg kanalene du ønsker å avblokkere, og la alt annet stå umerket.</string>
 <string name="pref_title_choose_player">Videoavspiller</string>
 	<string name="pref_summary_choose_player">Videoavspiller å bruke: %s</string>
 	</resources>

@@ -72,6 +72,7 @@ import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannelInterface;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetVideoDescriptionTask;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetYouTubeChannelInfoTask;
+import free.rm.skytube.businessobjects.YouTube.VideoBlocker;
 import free.rm.skytube.businessobjects.YouTube.VideoStream.StreamMetaData;
 import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
 import free.rm.skytube.businessobjects.db.Tasks.CheckIfUserSubbedToChannelTask;
@@ -426,7 +427,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment {
 				return true;
 
 			case R.id.block_channel:
-				youTubeVideo.blockChannel(getContext());
+				VideoBlocker.blacklistChannel(youTubeVideo);
 
 			default:
 				return super.onOptionsItemSelected(item);

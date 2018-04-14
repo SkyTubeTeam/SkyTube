@@ -22,7 +22,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import java.util.List;
 
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
-import free.rm.skytube.businessobjects.YouTube.FilterVideos;
+import free.rm.skytube.businessobjects.YouTube.VideoBlocker;
 import free.rm.skytube.businessobjects.YouTube.GetYouTubeVideos;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
@@ -82,7 +82,7 @@ public class GetYouTubeVideosTask extends AsyncTaskParallel<Void, Void, List<You
 
 		if (videosList != null) {
 			// filter videos
-			videosList = new FilterVideos().filter(videosList);
+			videosList = new VideoBlocker().filter(videosList);
 
 			if (channel != null && channel.isUserSubscribed()) {
 				for (YouTubeVideo video : videosList) {

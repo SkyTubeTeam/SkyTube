@@ -79,9 +79,9 @@
 	<string name="pref_disable_search_history_deleted">搜尋的歷史記錄已刪除。</string>
 	<string name="restart">重新啟動</string>
 
-	<string name="pref_blocked_channel_category">已阻擋頻道</string>
-	<string name="pref_title_blocked_channels_list">已阻擋頻道</string>
-	<string name="pref_summary_blocked_channels_list">勾選您想要解鎖的頻道，並讓別人不受抑制。</string>
+	<string name="pref_video_blocker_category">已阻擋頻道</string>
+	<string name="pref_title_channel_blacklist">已阻擋頻道</string>
+	<string name="pref_summary_channel_blacklist">勾選您想要解鎖的頻道，並讓別人不受抑制。</string>
 <string name="pref_title_subscriptions_alphabetical_order">按字母順序排列頻道</string>
 	<string name="pref_summary_subscriptions_alphabetical_order">如果選取，訂閱頻道將按照字母的順序排列。</string>
 	</resources>

@@ -408,22 +408,6 @@ public class YouTubeVideo implements Serializable {
 	}
 
 
-	public void blockChannel(Context context) {
-		try {
-			if (SubscriptionsDb.getSubscriptionsDb().isUserSubscribedToChannel(this.getChannelId())) {
-				Toast.makeText(context, "Please unsubscribe the channel first.", Toast.LENGTH_SHORT).show();
-			} else {
-				boolean successBlockChannel = BlockedChannelsDb.getBlockedChannelsDb().add(this);
-				Toast.makeText(context,
-						successBlockChannel ? R.string.channel_blocked : R.string.channel_blocked_error,
-						Toast.LENGTH_LONG).show();
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-
 	/**
 	 * If the user have previously downloaded the video, this method will return the Uri of the file;
 	 * else, get the stream for this video (based on the user's preference) by communicating with

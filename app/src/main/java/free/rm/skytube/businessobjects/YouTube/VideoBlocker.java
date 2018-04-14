@@ -17,6 +17,9 @@
 
 package free.rm.skytube.businessobjects.YouTube;
 
+import android.widget.Toast;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -27,18 +30,43 @@ import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.db.BlockedChannelsDb;
+import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 
 import static free.rm.skytube.app.SkyTubeApp.getStr;
 
 /**
  * Filters videos base on constraints set by the user.
  */
-public class FilterVideos {
+public class VideoBlocker {
 
 	/**
 	 * Default preferred language(s) -- by default, no language shall be filtered out.
 	 */
 	private static final Set<String> defaultPrefLanguages = new HashSet<>(SkyTubeApp.getStringArrayAsList(R.array.languages_iso639_codes));
+
+
+	/**
+	 * Blacklist a channel.
+	 *
+	 * @param video YouTube Video.
+	 */
+	public static void blacklistChannel(YouTubeVideo video) {
+		try {
+			// if user is subscribed to the channel, then ask the user to unsubscribe first...
+			if (SubscriptionsDb.getSubscriptionsDb().isUserSubscribedToChannel(video.getChannelId())) {
+				Toast.makeText(SkyTubeApp.getContext(), R.string.channel_blacklist_error_user_subscribed, Toast.LENGTH_LONG).show();
+			} else {
+				// blacklist the channel
+				boolean successBlockChannel = BlockedChannelsDb.getBlockedChannelsDb().add(video);
+
+				Toast.makeText(SkyTubeApp.getContext(),
+						successBlockChannel ? R.string.channel_blacklisted : R.string.channel_blacklist_error,
+						Toast.LENGTH_LONG).show();
+			}
+		} catch (IOException e) {
+			Logger.e(VideoBlocker.class, "Error occurred while blacklisting a channel", e);
+		}
+	}
 
 
 	/**

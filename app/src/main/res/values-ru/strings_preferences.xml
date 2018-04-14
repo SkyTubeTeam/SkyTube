@@ -91,7 +91,7 @@
 	<string name="pref_title_disable_search_history">Отключить историю поиска</string>
 	<string name="pref_summary_disable_search_history">Если включено, история поиска будет очищена и не будет использоваться.</string>
 	<string name="pref_disable_search_history_deleted">История поиска удалена.</string>
-	<string name="pref_blocked_channel_category">Заблокированные каналы</string>
-	<string name="pref_title_blocked_channels_list">Заблокированные каналы</string>
-	<string name="pref_summary_blocked_channels_list">Проверить каналы, которые вы хотите разблокировать, и оставить остальные непроверенными.</string>
+	<string name="pref_video_blocker_category">Заблокированные каналы</string>
+	<string name="pref_title_channel_blacklist">Заблокированные каналы</string>
+	<string name="pref_summary_channel_blacklist">Проверить каналы, которые вы хотите разблокировать, и оставить остальные непроверенными.</string>
 </resources>

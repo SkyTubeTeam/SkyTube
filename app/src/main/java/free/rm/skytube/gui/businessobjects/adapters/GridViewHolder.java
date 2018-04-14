@@ -22,7 +22,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,11 +33,10 @@ import com.bumptech.glide.request.RequestOptions;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
-import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
-import free.rm.skytube.gui.activities.ThumbnailViewerActivity;
-import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
+import free.rm.skytube.businessobjects.YouTube.VideoBlocker;
 import free.rm.skytube.businessobjects.db.Tasks.IsVideoBookmarkedTask;
+import free.rm.skytube.gui.activities.ThumbnailViewerActivity;
 import free.rm.skytube.gui.businessobjects.MainActivityListener;
 import free.rm.skytube.gui.businessobjects.YouTubePlayer;
 
@@ -202,7 +200,7 @@ class GridViewHolder extends RecyclerView.ViewHolder {
 						youTubeVideo.downloadVideo(context);
 						return true;
 					case R.id.block_channel:
-						youTubeVideo.blockChannel(context);
+						VideoBlocker.blacklistChannel(youTubeVideo);
 				}
 				return false;
 			}

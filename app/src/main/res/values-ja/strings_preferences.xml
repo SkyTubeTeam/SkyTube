@@ -92,9 +92,9 @@
 	<string name="pref_title_disable_search_history">検索履歴を無効にする</string>
 	<string name="pref_summary_disable_search_history">チェックすると、検索履歴が消去されて、使用されなくなります。</string>
 	<string name="pref_disable_search_history_deleted">検索履歴を削除しました。</string>
-<string name="pref_blocked_channel_category">ブロックされたチャンネル</string>
-	<string name="pref_title_blocked_channels_list">ブロックされたチャンネル</string>
-	<string name="pref_summary_blocked_channels_list">ブロックを解除するチャンネルをチェックして、他はオフのままにしてください。</string>
+<string name="pref_video_blocker_category">ブロックされたチャンネル</string>
+	<string name="pref_title_channel_blacklist">ブロックされたチャンネル</string>
+	<string name="pref_summary_channel_blacklist">ブロックを解除するチャンネルをチェックして、他はオフのままにしてください。</string>
 <string name="pref_title_choose_player">ビデオプレーヤー</string>
 	<string name="pref_summary_choose_player">使用するビデオプレーヤー: %s</string>
 	<string name="pref_title_subscriptions_alphabetical_order">チャンネルをアルファベット順に並べ替え</string>

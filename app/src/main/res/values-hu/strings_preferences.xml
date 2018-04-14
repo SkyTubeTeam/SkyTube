@@ -98,6 +98,6 @@
 	<string name="pref_summary_choose_player">A használt videó lejátszó: %s</string>
 	<string name="pref_title_subscriptions_alphabetical_order">A Csatornák ábécé-sorrendbe rendezés</string>
 	<string name="pref_summary_subscriptions_alphabetical_order">Bekapcsolva, a feliratkozott csatornákat ábécé sorrendben láthatja.</string>
-	<string name="pref_blocked_channel_category">Letiltott Csatornák</string>
-	<string name="pref_title_blocked_channels_list">Letiltott Csatornák</string>
+	<string name="pref_video_blocker_category">Letiltott Csatornák</string>
+	<string name="pref_title_channel_blacklist">Letiltott Csatornák</string>
 	</resources>
