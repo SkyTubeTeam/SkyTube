@@ -83,12 +83,12 @@ public class VideoBlocker {
 		final Set<String>   preferredLanguages = SkyTubeApp.getPreferenceManager().getStringSet(getStr(R.string.pref_key_preferred_languages), defaultPrefLanguages);
 
 		for (YouTubeVideo video : videosList) {
-			if (!filterByBlockedChannels(video, blockedChannelIds)  &&  !filterByLanguage(video, preferredLanguages)) {
+			if (!filterByBlacklistedChannels(video, blockedChannelIds)  &&  !filterByLanguage(video, preferredLanguages)) {
 				filteredVideosList.add(video);
 			}
 		}
 
-		return videosList;
+		return filteredVideosList;
 	}
 
 
@@ -105,16 +105,16 @@ public class VideoBlocker {
 
 
 	/**
-	 * Filter the videosList for blocked channels.
+	 * Filter the video for blacklisted channels.
 	 *
-	 * @param video
-	 * @param blockedChannelIds
+	 * @param video                 Video to be checked.
+	 * @param blacklistedChannelIds Blacklisted channels IDs.
 	 *
 	 * @return True if the video is to be filtered; false otherwise.
 	 */
-	private boolean filterByBlockedChannels(YouTubeVideo video, List<String> blockedChannelIds) {
-		if (blockedChannelIds.contains(video.getChannelId())) {
-			log(video, "channel", video.getChannelId());
+	private boolean filterByBlacklistedChannels(YouTubeVideo video, List<String> blacklistedChannelIds) {
+		if (blacklistedChannelIds.contains(video.getChannelId())) {
+			log(video, "channel blacklist", video.getChannelName());
 			return true;
 		} else {
 			return false;
@@ -132,13 +132,13 @@ public class VideoBlocker {
 	 * @return True to filter out the video; false otherwise.
 	 */
 	private boolean filterByLanguage(YouTubeVideo video, Set<String> preferredLanguages) {
-		// if the video's language is not defined (i.e. null) or emptyr
+		// if the video's language is not defined (i.e. null) or empty
 		//	OR if there is no linguistic content to the video (zxx)
 		//	OR if the language is undefined (und)
 		// then we are NOT going to filter this video
 		if (video.getLanguage() == null
-				||  video.getLanguage().isEmpty()
-				||  video.getLanguage().equalsIgnoreCase("zxx")
+				|| video.getLanguage().isEmpty()
+				|| video.getLanguage().equalsIgnoreCase("zxx")
 				|| video.getLanguage().equalsIgnoreCase("und"))
 			return false;
 
