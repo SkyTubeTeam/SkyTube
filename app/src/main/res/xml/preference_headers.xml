@@ -25,7 +25,7 @@
 	</header>
 
 	<header
-		android:fragment="free.rm.skytube.gui.fragments.preferences.BlockedChannelsPreferenceFragment"
+		android:fragment="free.rm.skytube.gui.fragments.preferences.VideoBlockerPreferenceFragment"
 		android:icon="@drawable/ic_pref_blocked"
 		android:title="@string/pref_video_blocker_category">
 	</header>

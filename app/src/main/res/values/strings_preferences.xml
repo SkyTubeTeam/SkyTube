@@ -514,7 +514,7 @@
 	<string name="pref_key_brightness_level" translatable="false">pref_key_brightness_level</string>
 
 	<string name="pref_video_blocker_category">Video Blocker</string>
-	<string name="pref_channel_blacklist_key" translatable="false">pref_channel_blacklist_key</string>
+	<string name="pref_key_channel_blacklist" translatable="false">pref_key_channel_blacklist</string>
 	<string name="pref_title_channel_blacklist">Channel Blacklist</string>
 	<string name="pref_summary_channel_blacklist">Check the channels you want to unblock and leave the others unchecked.</string>
 </resources>

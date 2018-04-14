@@ -9,16 +9,17 @@ import java.util.Collection;
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.db.BlockedChannelsDb;
 
-public class BlockedChannelsPreferenceFragment extends PreferenceFragment {
+/**
+ * Video blocker preference.
+ */
+public class VideoBlockerPreferenceFragment extends PreferenceFragment {
 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
 		addPreferencesFromResource(R.xml.preference_blocked_channels);
-		final MultiSelectListPreference channelBlacklistPreference = (MultiSelectListPreference) findPreference(getString(R.string.pref_channel_blacklist_key));
 
-		final BlockedChannelsDb blockedChannelsDb = BlockedChannelsDb.getBlockedChannelsDb();
+		final MultiSelectListPreference channelBlacklistPreference = (MultiSelectListPreference) findPreference(getString(R.string.pref_key_channel_blacklist));
 
 		//Need to have the blocked channels on a separate variable here
 		//Otherwise unblocked channels still on blocked channels list.
@@ -27,17 +28,15 @@ public class BlockedChannelsPreferenceFragment extends PreferenceFragment {
 		channelBlacklistPreference.setEntryValues(blockedChannelsName);
 		channelBlacklistPreference.setEntries(blockedChannelsName);
 		channelBlacklistPreference.setPositiveButtonText(R.string.unblock_button);
-
 		channelBlacklistPreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 			@Override
 			public boolean onPreferenceClick(Preference preference) {
-				if (blockedChannelsDb.getBlockedChannelsListName().isEmpty()) {
+				if (BlockedChannelsDb.getBlockedChannelsDb().getBlockedChannelsListName().isEmpty()) {
 					Toast.makeText(getActivity(), R.string.channel_blacklist_empty, Toast.LENGTH_LONG).show();
 				}
 				return true;
 			}
 		});
-
 		channelBlacklistPreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
 			@Override
 			public boolean onPreferenceChange(Preference preference, Object o) {
@@ -46,7 +45,7 @@ public class BlockedChannelsPreferenceFragment extends PreferenceFragment {
 				Collection<String> selectedChannels = (Collection<String>) o;
 
 				for (String channel : selectedChannels) {
-					blockedChannelsDb.remove(channel);
+					BlockedChannelsDb.getBlockedChannelsDb().remove(channel);
 				}
 
 				//We set the last updated version of DB here again
