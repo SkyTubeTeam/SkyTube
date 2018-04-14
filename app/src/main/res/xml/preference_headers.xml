@@ -31,12 +31,6 @@
 	</header>
 
 	<header
-		android:fragment="free.rm.skytube.gui.fragments.preferences.LanguagesPreferenceFragment"
-		android:icon="@drawable/ic_pref_languages_regions"
-		android:title="@string/pref_languages_category">
-	</header>
-
-	<header
 		android:fragment="free.rm.skytube.gui.fragments.preferences.BackupPreferenceFragment"
 		android:icon="@drawable/ic_pref_backup"
 		android:title="@string/pref_backup_category">

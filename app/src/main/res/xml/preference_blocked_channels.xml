@@ -23,4 +23,25 @@
         android:title="@string/pref_title_blocked_channels_list"
         android:summary="@string/pref_summary_blocked_channels_list" />
 
+    <PreferenceCategory
+	    android:title="@string/pref_languages_category">
+
+        <ListPreference
+            android:key="@string/pref_key_preferred_region"
+            android:title="@string/pref_title_preferred_regions"
+            android:summary="@string/pref_summary_preferred_regions"
+            android:entries="@array/country_names"
+            android:entryValues="@array/country_codes"
+            android:defaultValue=""/>
+
+        <MultiSelectListPreference
+            android:key="@string/pref_key_preferred_languages"
+            android:title="@string/pref_title_preferred_languages"
+            android:summary="@string/pref_summary_preferred_languages"
+            android:entries="@array/languages_names"
+            android:entryValues="@array/languages_iso639_codes"
+            android:defaultValue="@array/languages_iso639_codes"/>	<!-- no language shall be filtered out by DEFAULT -->
+
+    </PreferenceCategory>
+
 </PreferenceScreen>
