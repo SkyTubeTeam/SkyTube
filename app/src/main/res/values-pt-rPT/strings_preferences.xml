@@ -11,10 +11,10 @@
 
 	<string name="pref_video_player_category">Reprodutor de vídeo</string>
 	<string name="pref_title_preferred_res">Resolução preferida</string>
-	<string name="pref_summary_preferred_res">Selecione a resolução preferida</string>
+	<string name="pref_summary_preferred_res">Selecione a resolução preferida:  %s</string>
 
 	<string name="pref_backup_category">Backups</string>
-	<string name="pref_title_backup_dbs">Backup de bases de dados</string>
+	<string name="pref_title_backup_dbs">Backup das bases de dados</string>
 	<string name="pref_summary_backup_dbs">Criar backup das subscrições e dos marcadores.</string>
 	<string name="pref_title_import_dbs">Importar backup</string>
 	<string name="pref_summary_import_dbs">Importar backup das subscrições e dos marcadores.</string>
@@ -66,7 +66,7 @@
 	<string name="pref_summary_default_tab">Separador usado ao iniciar o SkyTube: %s</string>
 
 	<string name="pref_title_screen_orientation">Orientação do ecrã</string>
-	<string name="pref_summary_screen_orientation">Video player\'s orientation:  %s</string>
+	<string name="pref_summary_screen_orientation">Orientação de reprodutor: %s</string>
 	<string-array name="screen_orientations">
 		<item>Automática</item>
 		<item>Horizontal</item>
@@ -98,4 +98,11 @@
 	<string name="pref_title_disable_search_history">Desativar histórico de pesquisas</string>
 	<string name="pref_summary_disable_search_history">Se ativa, o histórico de pesquisas não será utilizado.</string>
 	<string name="pref_disable_search_history_deleted">Histórico removido.</string>
-</resources>
+<string name="pref_title_choose_player">Reprodutor de vídeo</string>
+	<string name="pref_summary_choose_player">Reprodutor de vídeo a usar: %s</string>
+	<string name="pref_video_blocker_category">Canais bloqueados</string>
+	<string name="pref_title_channel_blacklist">Canais bloqueados</string>
+	<string name="pref_summary_channel_blacklist">Marque os canais que deseja desbloquear e mantenha os restantes desmarcados.</string>
+<string name="pref_title_subscriptions_alphabetical_order">"Ordenar canais alfabeticamente "</string>
+	<string name="pref_summary_subscriptions_alphabetical_order">Se ativa, os canis subscritos serão mostrados por ordem alfabética.</string>
+	</resources>

@@ -10,7 +10,7 @@
 
 	<string name="pref_video_player_category">Videospeler</string>
 	<string name="pref_title_preferred_res">Voorkeursresolutie</string>
-	<string name="pref_summary_preferred_res">Selecteer uw voorkeursresolutie</string>
+	<string name="pref_summary_preferred_res">Selecteer uw voorkeursresolutie:  %s</string>
 
 	<string name="pref_backup_category">Back-ups</string>
 	<string name="pref_title_backup_dbs">Databases back-uppen</string>
@@ -94,8 +94,12 @@
 \n</string>
 	<string name="pref_blocked_channel_title">Geblokkeerde kanalen beheren</string>
 	<string name="pref_blocked_channel_summary">U kunt eerder geblokkeerde kanalen deblokkeren.</string>
-	<string name="pref_blocked_channel_category">Geblokkeerde kanalen</string>
+	<string name="pref_video_blocker_category">Geblokkeerde kanalen</string>
 
-	<string name="pref_title_blocked_channels_list">Geblokkeerde kanalen</string>
-	<string name="pref_summary_blocked_channels_list">Vink alleen de kanalen aan die u wilt deblokkeren.</string>
-</resources>
+	<string name="pref_title_channel_blacklist">Geblokkeerde kanalen</string>
+	<string name="pref_summary_channel_blacklist">Vink alleen de kanalen aan die u wilt deblokkeren.</string>
+<string name="pref_title_choose_player">Videospeler</string>
+	<string name="pref_summary_choose_player">De te gebruiken videospeler: %s</string>
+	<string name="pref_title_subscriptions_alphabetical_order">Kanalen alfabetisch sorteren</string>
+	<string name="pref_summary_subscriptions_alphabetical_order">Als dit wordt aangevinkt, dan wordt de lijst met geabonneerde kanalen alfabetisch gesorteerd.</string>
+	</resources>

@@ -14,7 +14,7 @@
 	<string name="pref_video_player_category">Video Player</string>
 	<string name="pref_title_preferred_res">Preferred Resolution</string>
 	<string name="pref_key_preferred_res" translatable="false">pref_preferred_resolution</string>
-	<string name="pref_summary_preferred_res">Select your preferred resolution</string>
+	<string name="pref_summary_preferred_res">Select your preferred resolution:  %s</string>
 
 	<string name="pref_key_choose_player" translatable="false">pref_key_choose_player</string>
 	<string name="pref_title_choose_player">Video Player</string>
@@ -508,7 +508,9 @@
 	<string name="pref_summary_disable_search_history">If checked, Search History will be cleared and will not be used.</string>
 	<string name="pref_disable_search_history_deleted">Search History deleted.</string>
 	<string name="restart">Restart</string>
-
+	<string name="pref_key_subscriptions_alphabetical_order" translatable="false">pref_key_subscriptions_alphabetical_order</string>
+	<string name="pref_title_subscriptions_alphabetical_order">Sort Channels Alphabetically</string>
+	<string name="pref_summary_subscriptions_alphabetical_order">If checked, Subscribed Channels will be sorted alphabetically.</string>
 	<string name="pref_key_brightness_level" translatable="false">pref_key_brightness_level</string>
 
 	<string name="pref_blocked_channel_category">Blocked Channels</string>
@@ -519,5 +521,10 @@
 	<string name="pref_key_subscriptions_alphabetical_order" translatable="false">pref_subscriptions_alphabetical_order</string>
 	<string name="pref_title_subscriptions_alphabetical_order">Sort Channels Alphabetically</string>
 	<string name="pref_summary_subscriptions_alphabetical_order">If checked, Subscribed Channels will be sorted alphabetically.</string>
+
+	<string name="pref_video_blocker_category">Video Blocker</string>
+	<string name="pref_key_channel_blacklist" translatable="false">pref_key_channel_blacklist</string>
+	<string name="pref_title_channel_blacklist">Channel Blacklist</string>
+	<string name="pref_summary_channel_blacklist">Check the channels you want to unblock and leave the others unchecked.</string>
 
 </resources>

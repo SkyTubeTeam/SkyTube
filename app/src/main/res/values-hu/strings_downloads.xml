@@ -1,13 +1,16 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources>
-	<string name="downloads">Downloads</string>
-	<string name="download_video">Download Video</string>
-	<string name="starting_video_download">Downloading \'%s\'…</string>
-	<string name="video_download_stream_error">Could not download \'%s\'.</string>
+	<string name="downloads">Letöltések</string>
+	<string name="download_video">Videó Letöltés</string>
+	<string name="starting_video_download">\'%s\' letöltése …</string>
+	<string name="video_download_stream_error">Nem lehet letölteni \'%s\'-t.</string>
 	<string name="delete_download">Delete Download</string>
-	<string name="video_downloaded">\'%s\' downloaded.</string>
-	<string name="no_downloaded_videos_text">You haven\'t downloaded any videos yet.\n\nOnce you do, they will show up here.</string>
-	<string name="downloads_disabled_warning">Video downloading is disabled as you are not using Wi-Fi.\nTo enable it, please go to Preferences > Others  and tick \'Allow downloads on Mobile Networks\'</string>
-	<string name="playing_video_file_missing">The download for this video was not found. Playing remotely.</string>
-	<string name="external_storage_not_available">Unable to download the file as the external storage is not available.</string>
+	<string name="video_downloaded">\'%s\' le lett töltve.</string>
+	<string name="no_downloaded_videos_text">Még nem töltött le egyetlen videót sem.
+\n
+\nMiután megteszi, itt fog megjelenni.</string>
+	<string name="downloads_disabled_warning">"Videó letöltés ki lett kapcsolva, mivel nem Wi-Fi-t használ.
+\nBekapcsolásához, kérem menjen a Beállítások  &gt; Egyebek és kattintson az \'Letöltés engedélyezése mobil hálózatokon\'-ra"</string>
+	<string name="playing_video_file_missing">A letöltött videó fájl nem található. Lejátszás közvetlenül a hálózatról.</string>
+	<string name="external_storage_not_available">Nem lehet letölteni a fájlt, mivel a külső tároló eszköz nem elérhető.</string>
 </resources>

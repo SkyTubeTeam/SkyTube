@@ -65,28 +65,33 @@ public class BookmarksFragment extends OrderableVideosGridFragment implements Bo
 			BookmarksDb.getBookmarksDb().setHasUpdated(false);
 		}
 	}
+	
 
 	@Override
 	public void onBookmarksDbUpdated() {
 		populateList();
 		if(videoGridAdapter != null)
-			videoGridAdapter.refresh();
+			videoGridAdapter.refresh(true);
 	}
+	
 
 	@Override
 	protected int getLayoutResource() {
 		return R.layout.fragment_bookmarks;
 	}
+	
 
 	@Override
 	protected VideoCategory getVideoCategory() {
 		return VideoCategory.BOOKMARKS_VIDEOS;
 	}
+	
 
 	@Override
 	public String getFragmentName() {
 		return SkyTubeApp.getStr(R.string.bookmarks);
 	}
+	
 
 	////////////////////////////////////////////////////////////////////////////////////////////////
 

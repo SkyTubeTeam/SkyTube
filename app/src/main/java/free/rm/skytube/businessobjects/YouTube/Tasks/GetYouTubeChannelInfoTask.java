@@ -24,10 +24,10 @@ import java.io.IOException;
 
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
+import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.GetChannelsDetails;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannelInterface;
-import free.rm.skytube.businessobjects.Logger;
 
 /**
  * A task that given a channel ID it will try to initialize and return {@link YouTubeChannel}.
@@ -36,10 +36,20 @@ public class GetYouTubeChannelInfoTask extends AsyncTaskParallel<String, Void, Y
 
 	private YouTubeChannelInterface youTubeChannelInterface;
 	private Context context;
+	private boolean usingUsername = false;
 
 	public GetYouTubeChannelInfoTask(Context context, YouTubeChannelInterface youTubeChannelInterface) {
 		this.context = context;
 		this.youTubeChannelInterface = youTubeChannelInterface;
+	}
+
+	/**
+	 * Set the flag that the execution of this task is passing a username, not an id.
+	 * @return this object, for chaining
+	 */
+	public GetYouTubeChannelInfoTask setUsingUsername() {
+		usingUsername = true;
+		return this;
 	}
 
 
@@ -48,7 +58,10 @@ public class GetYouTubeChannelInfoTask extends AsyncTaskParallel<String, Void, Y
 		YouTubeChannel channel;
 
 		try {
-			channel = new GetChannelsDetails().getYouTubeChannel(channelId[0]);
+			if(usingUsername)
+				channel = new GetChannelsDetails().getYouTubeChannelFromUsername(channelId[0]);
+			else
+				channel = new GetChannelsDetails().getYouTubeChannel(channelId[0]);
 		} catch (IOException e) {
 			Logger.e(this, "Unable to get channel info.  ChannelID=" + channelId[0], e);
 			channel = null;

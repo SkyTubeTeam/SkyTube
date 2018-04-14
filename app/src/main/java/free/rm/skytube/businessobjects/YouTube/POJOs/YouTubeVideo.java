@@ -50,6 +50,7 @@ import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.FileDownloader;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetVideoStreamTask;
+import free.rm.skytube.businessobjects.YouTube.VideoStream.StreamMetaData;
 import free.rm.skytube.businessobjects.db.BlockedChannelsDb;
 import free.rm.skytube.businessobjects.db.BookmarksDb;
 import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
@@ -64,10 +65,6 @@ import static free.rm.skytube.app.SkyTubeApp.getStr;
  */
 public class YouTubeVideo implements Serializable {
 
-	/**
-	 * Default preferred language(s) -- by default, no language shall be filtered out.
-	 */
-	private static final Set<String> defaultPrefLanguages = new HashSet<>(SkyTubeApp.getStringArrayAsList(R.array.languages_iso639_codes));
 	/**
 	 * YouTube video ID.
 	 */
@@ -372,44 +369,6 @@ public class YouTubeVideo implements Serializable {
 		return isLiveStream;
 	}
 
-	/**
-	 * Return true if this video does not meet the preferred language criteria;  false otherwise.
-	 * Many YouTube videos do not set the language, hence this method will not be accurate.
-	 *
-	 * @return True to filter out the video; false otherwise.
-	 */
-	public boolean filterVideoByLanguage() {
-		Set<String> preferredLanguages = getPreferredLanguages();
-
-		// if the video's language is not defined (i.e. null)
-		//	OR if there is no linguistic content to the video (zxx)
-		//	OR if the language is undefined (und)
-		// then we are NOT going to filter this video
-		if (getLanguage() == null || getLanguage().equalsIgnoreCase("zxx") || getLanguage().equalsIgnoreCase("und"))
-			return false;
-
-		// if there are no preferred languages, then it means we must not filter this video
-		if (preferredLanguages == null || preferredLanguages.isEmpty())
-			return false;
-
-		// if this video's language is equal to the user's preferred one... then do NOT filter it out
-		for (String prefLanguage : preferredLanguages) {
-			if (getLanguage().matches(prefLanguage))
-				return false;
-		}
-
-		// this video is undesirable, hence we are going to filter it
-		Log.i("FILTERING Video", getTitle() + "[" + getLanguage() + "]");
-		return true;
-	}
-
-	/**
-	 * @return Set of user's preferred ISO 639 language codes (regex).
-	 */
-	private Set<String> getPreferredLanguages() {
-		return SkyTubeApp.getPreferenceManager().getStringSet(getStr(R.string.pref_key_preferred_languages), defaultPrefLanguages);
-	}
-
 	public void bookmarkVideo(Context context, Menu menu) {
 		boolean successBookmark = BookmarksDb.getBookmarksDb().add(this);
 		Toast.makeText(context,
@@ -446,22 +405,6 @@ public class YouTubeVideo implements Serializable {
 		ClipData clip = ClipData.newPlainText("Video URL", getVideoUrl());
 		clipboard.setPrimaryClip(clip);
 		Toast.makeText(context, R.string.url_copied_to_clipboard, Toast.LENGTH_SHORT).show();
-	}
-
-
-	public void blockChannel(Context context) {
-		try {
-			if (SubscriptionsDb.getSubscriptionsDb().isUserSubscribedToChannel(this.getChannelId())) {
-				Toast.makeText(context, "Please unsubscribe the channel first.", Toast.LENGTH_SHORT).show();
-			} else {
-				boolean successBlockChannel = BlockedChannelsDb.getBlockedChannelsDb().add(this);
-				Toast.makeText(context,
-						successBlockChannel ? R.string.channel_blocked : R.string.channel_blocked_error,
-						Toast.LENGTH_LONG).show();
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 
 
@@ -522,10 +465,10 @@ public class YouTubeVideo implements Serializable {
 
 		getDesiredStream(new GetDesiredStreamListener() {
 			@Override
-			public void onGetDesiredStream(Uri videoUri) {
+			public void onGetDesiredStream(StreamMetaData desiredStream) {
 				// download the video
 				new VideoDownloader()
-						.setRemoteFileUrl(videoUri.toString())
+						.setRemoteFileUrl(desiredStream.getUri().toString())
 						.setDirType(Environment.DIRECTORY_MOVIES)
 						.setTitle(getTitle())
 						.setDescription(getStr(R.string.video) + " ― " + getChannelName())

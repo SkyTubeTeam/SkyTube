@@ -1,21 +1,22 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="could_not_get_videos">Загрузить видео %s не получается.</string>
+<resources><string name="could_not_get_videos">Загрузить видео %s не удаётся.</string>
 	<string name="views">%,d просмотров</string>
 	<string name="error">Ошибка</string>
 	<string name="ok">ОК</string>
 	<string name="search_videos">Поиск видео</string>
-	<string name="launch_offical_player_error">Не получается запустить официальное приложение YouTube. Проверьте, что оно установлено на вашем устройстве (Настройки → Приложения).</string>
+	<string name="launch_offical_player_error">Не получается запустить официальное приложение YouTube. Проверьте, что оно установлено на вашем устройстве.</string>
 	<string name="LIVE">Прямой эфир</string>
 
 	<string name="featured">Избранные</string>
 	<string name="most_popular">Популярные</string>
 
-	<string name="video">Video</string>
-	<string name="videos">Videos</string>
-	<string name="num_videos">%d videos</string>
-	<string name="playlists">Playlists</string>
-	<string name="could_not_get_playlists">Could not get %s playlists.</string>
+	<string name="video">Видео</string>
+	<string name="videos">Видео</string>
+	<string name="num_videos">%d видео</string>
+	<string name="playlists">Плейлисты</string>
+	<string name="could_not_get_playlists">Нет возможности получить %s плейлист.</string>
 
-	<string name="loading">Loading …</string>
-    <string name="could_not_get_channel">Could not download channel information!</string>
-</resources>
+	<string name="loading">Загрузка…</string>
+    <string name="could_not_get_channel">Не удалось загрузить информацию о канале!</string>
+<string name="hello_blank_fragment">Привет, пустой фрагмент</string>
+    </resources>

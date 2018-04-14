@@ -84,7 +84,7 @@ public class DownloadedVideosFragment extends OrderableVideosGridFragment implem
 	@Override
 	public void onDownloadedVideosUpdated() {
 		populateList();
-		videoGridAdapter.refresh();
+		videoGridAdapter.refresh(true);
 	}
 
 

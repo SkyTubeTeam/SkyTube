@@ -10,7 +10,7 @@
 
 	<string name="pref_video_player_category">مشغل فيديو</string>
 	<string name="pref_title_preferred_res">القرار المفضل</string>
-	<string name="pref_summary_preferred_res">حدد الدقة المفضلة لديك</string>
+	<string name="pref_summary_preferred_res">s% حدد الدقة المفضلة لديك</string>
 
 	<string name="pref_backup_category">النسخ الاحتياطي</string>
 	<string name="pref_title_backup_dbs">قواعد بيانات النسخ الاحتياطي</string>

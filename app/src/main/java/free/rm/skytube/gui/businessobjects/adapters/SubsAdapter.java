@@ -56,8 +56,12 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 	 * by querying the local database and YouTube servers...
 	 */
 	private final Bool isSubsListRetrieved = new Bool(false);
+
 	public List<YouTubeChannel> listCopy = new ArrayList<>();
 	private boolean isChannelsSorted;
+
+	public boolean isChannelsSorted;
+
 	private MainActivityListener listener;
 
 
@@ -65,7 +69,6 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 		super(context);
 		// populate this adapter with user's subscribed channels
 		new GetSubscribedChannelsTask(this, progressBar).executeInParallel();
-
 
 	}
 
@@ -82,6 +85,37 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 
 
 		return subsAdapter;
+	}
+
+
+  
+	/**
+	 * @return True if the subscribed channels are sorted alphabetically by the {@link SubsAdapter};
+	 * false otherwise.
+	 */
+	public boolean getChannelsSorted() {
+		SharedPreferences sharedPreferences = getContext().getSharedPreferences("myPref", 0);
+		isChannelsSorted = sharedPreferences.getBoolean("isChannelSorted", isChannelsSorted);
+
+		return isChannelsSorted;
+  }
+
+
+
+	/**
+	 * Sort or unsort the subscribed channels alphabetically.
+	 *
+	 * @param channelsSorted    True to sort the channels.
+	 */
+	public void setChannelsSorted(boolean channelsSorted) {
+		SharedPreferences sharedPreferences = getContext().getSharedPreferences("myPref", 0);
+		SharedPreferences.Editor editor = sharedPreferences.edit();
+
+		this.isChannelsSorted = channelsSorted;
+
+		editor.clear();
+		editor.putBoolean("isChannelSorted", isChannelsSorted);
+		editor.commit();
 	}
 
 
@@ -245,9 +279,12 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 		}
 
 		listCopy.addAll(getList());
+
 		// the list has now been retrieved; return it pls
 		return getList();
+
 	}
+
 
 
 	/***

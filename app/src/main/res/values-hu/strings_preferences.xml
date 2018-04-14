@@ -7,11 +7,11 @@
 	<string name="pref_summary_preferred_regions">Válassz preferált régiót. Ez szűri a \"Kiemelt\" kategóriában mutatott videókat.</string>
 
 	<string name="pref_title_preferred_languages">Preferált nyelv(ek)</string>
-	<string name="pref_summary_preferred_languages">KÍSÉRLETI ÜZEM: Válassz egy vagy több preferált nyelvet. Ez szűri a \"Legnépszerűbb\" kategóriában és a keresések közt mutatott videókat.</string>
+	<string name="pref_summary_preferred_languages">KÍSÉRLETI FUNKCIÓ: Válassz egy vagy több preferált nyelvet. Ez szűri a \"Legnépszerűbb\" kategóriában és a keresések közt mutatott videókat.</string>
 
 	<string name="pref_video_player_category">Videólejátszó</string>
 	<string name="pref_title_preferred_res">Preferált felbontás</string>
-	<string name="pref_summary_preferred_res">Válaszd ki a preferált videófelbontást</string>
+	<string name="pref_summary_preferred_res">Válaszd ki a preferált videófelbontást:  %s</string>
 
 	<string name="pref_backup_category">Biztonsági mentések</string>
 	<string name="pref_title_backup_dbs">Backup Databases</string>
@@ -23,15 +23,17 @@
 	<string name="databases_backup_fail">Nem sikerült biztonsági másolatot készíteni.</string>
 	<string name="databases_import_select_backup">Válassza ki a biztonsági másolat fájlt importálásra</string>
 	<string name="databases_import_nothing_selected">Nem választott ki semmit…</string>
-	<string name="databases_import_warning_message">The subscriptions and bookmarks databases will be REPLACED with the data of the selected backup file.\n\nContinue?</string>
+	<string name="databases_import_warning_message">A feliratkozás és könyvjelző adatbázis felül lesz írva a biztonsági mentésben található adatokkal.
+\n
+\nFolytassuk?</string>
 	<string name="continue_">Continue</string>
 	<string name="databases_importing">Importing…</string>
 	<string name="databases_import_fail">Failed to import your databases.</string>
-	<string name="databases_import_success">Databases imported successfully.  Restart the app to apply changes.</string>
+	<string name="databases_import_success">Az adatbázis sikeresen be lett olvasva. Indítsa újra az alkalmazást a változásokhoz.</string>
 
 	<string name="pref_title_import_subs">Import Subscriptions From YouTube</string>
 	<string name="pref_summary_import_subs">Import your subscriptions from your YouTube account.</string>
-	<string name="subs_import_select_backup">Select YouTube xml file to import</string>
+	<string name="subs_import_select_backup">Válassza ki a YouTube XML fájlt az importáláshoz</string>
 
 	<string name="pref_about_category">Információ</string>
 	<string name="pref_title_website">Weboldal</string>
@@ -39,7 +41,7 @@
 	<string name="pref_summary_credits">People and projects that made this app possible.</string>
 	<string name="pref_title_version">Verzió</string>
 	<string name="pref_title_updates">Updates</string>
-	<string name="pref_summary_updates">Check for updates.</string>
+	<string name="pref_summary_updates">Frissítések ellenőrzése.</string>
 	<string name="pref_title_license">Licensz</string>
 	<string name="pref_summary_license">GNU General Public License version 3</string>
 	<string name="app_license">Copyright © 2015-2018  Ramon Mifsud\n
@@ -75,7 +77,7 @@
 	<string name="pref_youtube_api_key_error">An error occurred attempting to validate the API Key you entered.</string>
 	<string name="pref_youtube_api_key_custom">Key is valid.  Restart app to use the new YouTube API key.</string>
 	<string name="pref_youtube_api_key_default">Restart app to switch back to default YouTube API key.</string>
-	<string name="restart">Restart</string>
+	<string name="restart">Újraindítás</string>
 
 	<string name="pref_title_disable_immersive_mode">Disable Immersive Mode</string>
 	<string name="pref_summary_disable_immersive_mode">A hozzászólás és videó leírás ikont mindig meg kell jeleníteni</string>
@@ -89,7 +91,13 @@
 		<item>24 Hours</item>
 	</string-array>
 
-	<string name="pref_title_allow_mobile_downloads">Allow downloads on mobile networks</string>
-	<string name="pref_summary_allow_mobile_downloads">Select this to enable downloading videos on mobile networks. Otherwise, videos can only be downloaded on Wi-Fi.</string>
+	<string name="pref_title_allow_mobile_downloads">Letöltés engedélyezése mobil hálózatokon</string>
+	<string name="pref_summary_allow_mobile_downloads">Kapcsolja be, ha engedélyezni akarja a videók letöltését mobil hálózatokon. Egyébként csak Wi-Fi- n fog tudni letölteni.</string>
 
-</resources>
+<string name="pref_title_choose_player">Videó Lejátszó</string>
+	<string name="pref_summary_choose_player">A használt videó lejátszó: %s</string>
+	<string name="pref_title_subscriptions_alphabetical_order">A Csatornák ábécé-sorrendbe rendezés</string>
+	<string name="pref_summary_subscriptions_alphabetical_order">Bekapcsolva, a feliratkozott csatornákat ábécé sorrendben láthatja.</string>
+	<string name="pref_video_blocker_category">Letiltott Csatornák</string>
+	<string name="pref_title_channel_blacklist">Letiltott Csatornák</string>
+	</resources>
