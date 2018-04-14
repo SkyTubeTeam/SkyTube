@@ -1,34 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-			  android:orientation="vertical"
-			  android:layout_width="match_parent"
-			  android:layout_height="match_parent"
-			  android:background="@color/subs_drawer_background">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/subs_drawer_background"
+    android:orientation="vertical">
 
-	<TextView
-		android:id="@+id/subs_drawer_title"
-		android:layout_width="match_parent"
-		android:layout_height="?attr/actionBarSize"
-		android:gravity="center_vertical"
-		android:padding="10dp"
-		android:textAppearance="@style/TextAppearance.AppCompat.Menu"
-		android:text="@string/subscriptions"
-		android:background="@color/colorPrimary"
-		style="@style/SubsTextView"/>
+    <TextView
+        android:id="@+id/subs_drawer_title"
+        style="@style/SubsTextView"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:gravity="center_vertical"
+        android:padding="10dp"
+        android:text="@string/subscriptions"
+        android:textAppearance="@style/TextAppearance.AppCompat.Menu" />
 
-	<android.support.v7.widget.RecyclerView
-		android:id="@+id/subs_drawer"
-		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:layout_below="@+id/subs_drawer_title"
-		android:choiceMode="singleChoice"
-		android:divider="@android:color/transparent"
-		android:dividerHeight="0dp"/>
+    <android.support.v7.widget.SearchView
+        android:id="@+id/search_view_opener"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@id/subs_drawer_title"
+        android:layout_alignRight="@id/subs_drawer_title"
+        android:paddingTop="5dp"></android.support.v7.widget.SearchView>
 
-	<ProgressBar
-		android:id="@+id/subs_drawer_progress_bar"
-		android:layout_centerInParent="true"
-		android:visibility="invisible"
-		style="@style/LoadingProgressBar"/>
+    <android.support.v7.widget.SearchView
+        android:id="@+id/sub_search_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/subs_drawer_title"
+        android:actionViewClass="android.support.v7.widget.SearchView"
+        android:padding="5dp"
+        android:visibility="gone"></android.support.v7.widget.SearchView>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/subs_drawer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/sub_search_view"
+        android:choiceMode="singleChoice"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="0dp" />
+
+    <ProgressBar
+        android:id="@+id/subs_drawer_progress_bar"
+        style="@style/LoadingProgressBar"
+        android:layout_centerInParent="true"
+        android:visibility="invisible" />
 
 </RelativeLayout>

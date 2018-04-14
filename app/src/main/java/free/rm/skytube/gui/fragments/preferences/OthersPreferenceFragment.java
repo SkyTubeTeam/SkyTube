@@ -48,7 +48,7 @@ public class OthersPreferenceFragment extends PreferenceFragment implements Shar
 		addPreferencesFromResource(R.xml.preference_others);
 
 		// Default tab
-		ListPreference defaultTabPref = (ListPreference)findPreference(getString(R.string.pref_key_default_tab));
+		ListPreference defaultTabPref = (ListPreference) findPreference(getString(R.string.pref_key_default_tab));
 		if (defaultTabPref.getValue() == null) {
 			defaultTabPref.setValueIndex(0);
 		}
@@ -62,13 +62,11 @@ public class OthersPreferenceFragment extends PreferenceFragment implements Shar
 	}
 
 
-
 	@Override
 	public void onResume() {
 		super.onResume();
 		getPreferenceManager().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
 	}
-
 
 
 	@Override
@@ -78,18 +76,17 @@ public class OthersPreferenceFragment extends PreferenceFragment implements Shar
 	}
 
 
-
 	@Override
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-		if(key != null) {
+		if (key != null) {
 			if (key.equals(getString(R.string.pref_key_default_tab))) {
 				// If the user changed the Default Tab Preference, update the summary to show the new default tab
 				ListPreference defaultTabPref = (ListPreference) findPreference(key);
 				defaultTabPref.setSummary(String.format(getString(R.string.pref_summary_default_tab), defaultTabPref.getEntry()));
 			} else if (key.equals(getString(R.string.pref_youtube_api_key))) {
 				// Validate the entered API Key when saved (and not empty), with a simple call to get the most popular video
-				EditTextPreference    youtubeAPIKeyPref = (EditTextPreference) findPreference(getString(R.string.pref_youtube_api_key));
-				String                youtubeAPIKey     = youtubeAPIKeyPref.getText();
+				EditTextPreference youtubeAPIKeyPref = (EditTextPreference) findPreference(getString(R.string.pref_youtube_api_key));
+				String youtubeAPIKey = youtubeAPIKeyPref.getText();
 
 				if (youtubeAPIKey != null) {
 					youtubeAPIKey = youtubeAPIKey.trim();
@@ -97,31 +94,43 @@ public class OthersPreferenceFragment extends PreferenceFragment implements Shar
 					if (!youtubeAPIKey.isEmpty()) {
 						// validate the user's API key
 						new ValidateYouTubeAPIKeyTask(youtubeAPIKey).executeInParallel();
-					}
-					else {
+					} else {
 						// inform the user that we are going to use the default YouTube API key and
 						// that we need to restart the app
 						displayRestartDialog(R.string.pref_youtube_api_key_default);
 					}
 				}
 			} else if (key.equals(getString(R.string.pref_key_disable_search_history))) {
-				CheckBoxPreference disableSearchHistoryPreference = (CheckBoxPreference)findPreference(key);
+				CheckBoxPreference disableSearchHistoryPreference = (CheckBoxPreference) findPreference(key);
 				// If Search History is disabled, clear the Search History database.
-				if(disableSearchHistoryPreference.isChecked()) {
+				if (disableSearchHistoryPreference.isChecked()) {
 					SearchHistoryDb.getSearchHistoryDb().deleteAllSearchHistory();
 					Toast.makeText(getActivity(), getString(R.string.pref_disable_search_history_deleted), Toast.LENGTH_LONG).show();
 				}
+
+			} else if (key.equals(getString(R.string.pref_key_subscriptions_alphabetical_order))) {
+				CheckBoxPreference enableChannelSort = (CheckBoxPreference) findPreference(key);
+				SubsAdapter subsAdapter = SubsAdapter.get(getActivity());
+				if (enableChannelSort.isChecked()) {
+
 			} else if (key.equals(getString(R.string.pref_key_subscriptions_alphabetical_order))){
 				CheckBoxPreference enableChannelSort = (CheckBoxPreference) findPreference(key);
 				SubsAdapter subsAdapter = SubsAdapter.get(getActivity());
 				if (enableChannelSort.isChecked()){
+
 					subsAdapter.setChannelsSorted(true);
 					subsAdapter.refreshSubsList();
 				} else {
 					subsAdapter.setChannelsSorted(false);
 					subsAdapter.refreshSubsList();
 				}
+
+			}
+
+			/*else if (key.equals(getString(R.string.pref_feed_notification_key))) {
+
 			}/*else if (key.equals(getString(R.string.pref_feed_notification_key))) {
+
 				ListPreference feedNotificationPref = (ListPreference) findPreference(key);
 				feedNotificationPref.setSummary(String.format(getString(R.string.pref_summary_feed_notification), feedNotificationPref.getEntry()));
 
@@ -131,7 +140,6 @@ public class OthersPreferenceFragment extends PreferenceFragment implements Shar
 			}*/
 		}
 	}
-
 
 
 	/**

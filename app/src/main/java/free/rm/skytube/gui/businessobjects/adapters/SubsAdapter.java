@@ -30,6 +30,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -55,6 +56,10 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 	 * by querying the local database and YouTube servers...
 	 */
 	private final Bool isSubsListRetrieved = new Bool(false);
+
+	public List<YouTubeChannel> listCopy = new ArrayList<>();
+	private boolean isChannelsSorted;
+
 	public boolean isChannelsSorted;
 
 	private MainActivityListener listener;
@@ -62,7 +67,6 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 
 	private SubsAdapter(Context context, View progressBar) {
 		super(context);
-
 		// populate this adapter with user's subscribed channels
 		new GetSubscribedChannelsTask(this, progressBar).executeInParallel();
 
@@ -78,6 +82,7 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 		if (subsAdapter == null) {
 			subsAdapter = new SubsAdapter(context, progressBar);
 		}
+
 
 		return subsAdapter;
 	}
@@ -157,6 +162,24 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 		Log.e(TAG, "Channel not removed from adapter:  id=" + channelId);
 	}
 
+	public boolean getChannelsSorted() {
+		SharedPreferences sharedPreferences = getContext().getSharedPreferences("myPref", 0);
+		isChannelsSorted = sharedPreferences.getBoolean("isChannelSorted", isChannelsSorted);
+
+		return isChannelsSorted;
+	}
+
+	public void setChannelsSorted(boolean channelsSorted) {
+		SharedPreferences sharedPreferences = getContext().getSharedPreferences("myPref", 0);
+		SharedPreferences.Editor editor = sharedPreferences.edit();
+
+		this.isChannelsSorted = channelsSorted;
+
+		editor.clear();
+		editor.putBoolean("isChannelSorted", isChannelsSorted);
+		editor.commit();
+	}
+
 
 	/**
 	 * Changes the channel's 'new videos' status.  The channel's view is then refreshed.
@@ -227,7 +250,6 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 		}
 	}
 
-
 	/**
 	 * Returns the list of channels that the user is subscribed to.
 	 * <p>
@@ -255,11 +277,36 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 			sortChannelsAlphabetically(getList());
 
 		}
+
+		listCopy.addAll(getList());
+
 		// the list has now been retrieved; return it pls
 		return getList();
 
 	}
 
+
+
+	/***
+	 * Method that filters user's search for channels on the subscription drawer.
+	 * @param text text that user searches for.
+	 */
+	public void filter(String text) {
+
+		list.clear();
+		if (text.isEmpty()) {
+			list.addAll(listCopy);
+		} else {
+			text = text.toLowerCase();
+			for (YouTubeChannel channel : listCopy) {
+				if (channel.getTitle().toLowerCase().contains(text)) {
+					getList().add(channel);
+				}
+			}
+		}
+
+		notifyDataSetChanged();
+	}
 
 	/**
 	 * Method to sort channels alphabetically of Subscriptions Drawer
@@ -287,7 +334,6 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 		}
 	}
 
-
 	/**
 	 * Method used to notify {@link SubsAdapter} that the subscriptions channels list has been
 	 * fully retrieved and populated.
@@ -298,7 +344,6 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 			isSubsListRetrieved.notify();
 		}
 	}
-
 
 	////////////////////////////////////////////////////////////////////////////////////////////////
 
