@@ -36,22 +36,15 @@ import free.rm.skytube.gui.businessobjects.adapters.MultiSelectListPreferenceAda
  * A dialog builder that displays a lists items, allows to user to select multiple items and can
  * select/deselect all items.
  */
-public class MultiSelectListPreferenceDialog extends MaterialDialog.Builder {
+public class MultiSelectListPreferenceDialog extends SkyTubeMaterialDialog {
 
 	private MultiSelectListPreferenceAdapter listAdapter;
 
 
 	public MultiSelectListPreferenceDialog(@NonNull Context context, List<MultiSelectListPreferenceItem> items) {
 		super(context);
-
 		listAdapter = new MultiSelectListPreferenceAdapter(items);
-
-		titleColorRes(R.color.dialog_title);
 		customView(R.layout.subs_youtube_import_dialog_list, false);
-		backgroundColorRes(R.color.dialog_backgound);
-		contentColorRes(R.color.dialog_content_text);
-		positiveColorRes(R.color.dialog_positive_text);
-		negativeColorRes(R.color.dialog_negative_text);
 	}
 
 

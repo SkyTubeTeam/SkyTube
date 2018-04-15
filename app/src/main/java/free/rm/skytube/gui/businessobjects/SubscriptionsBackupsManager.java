@@ -345,14 +345,10 @@ public class SubscriptionsBackupsManager {
 	public void displayImportSubscriptionsFromYouTubeDialog() {
 		SpannableString msg = new SpannableString(activity.getText(R.string.import_subscriptions_description));
 		Linkify.addLinks(msg, Linkify.WEB_URLS);
-		new MaterialDialog.Builder(activity)
+		new SkyTubeMaterialDialog(activity)
 				.title(R.string.import_subscriptions)
-				.titleColorRes(R.color.dialog_title)
-				.backgroundColorRes(R.color.dialog_backgound)
 				.content(msg)
-				.contentColorRes(R.color.dialog_content_text)
 				.positiveText(R.string.select_xml_file)
-				.positiveColorRes(R.color.dialog_positive_text)
 				.checkBoxPromptRes(R.string.unsubscribe_from_all_current_sibbed_channels, false, new CompoundButton.OnCheckedChangeListener() {
 					@Override
 					public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -365,14 +361,13 @@ public class SubscriptionsBackupsManager {
 						displayFilePicker(false);
 					}
 				})
-				.negativeText(R.string.cancel)
-				.negativeColorRes(R.color.dialog_negative_text)
 				.onNegative(new MaterialDialog.SingleButtonCallback() {
 					@Override
 					public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
 						dialog.dismiss();
 					}
 				})
+				.build()
 				.show();
 	}
 
