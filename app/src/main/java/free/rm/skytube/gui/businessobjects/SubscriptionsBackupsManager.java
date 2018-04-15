@@ -12,13 +12,9 @@ import android.support.annotation.NonNull;
 import android.support.v13.app.FragmentCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
 import android.text.util.Linkify;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Toast;
 
@@ -45,7 +41,6 @@ import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetSubscriptionVideosTask;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 import free.rm.skytube.businessobjects.db.Tasks.UnsubscribeFromAllChannelsTask;
-import free.rm.skytube.gui.businessobjects.adapters.ImportSubscriptionsAdapter;
 import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
 import free.rm.skytube.gui.businessobjects.preferences.BackupDatabases;
 import free.rm.skytube.gui.fragments.SubscriptionsFeedFragment;
@@ -259,7 +254,7 @@ public class SubscriptionsBackupsManager {
 	 */
 	private void parseImportedSubscriptions(Uri uri) {
 		try {
-			final List<ImportSubscriptionsChannel> channels = new ArrayList<>();
+			final List<MultiSelectListPreferenceItem> channels = new ArrayList<>();
 			Pattern channelPattern = Pattern.compile(".*channel_id=([^&]+)");
 			Matcher matcher;
 			XmlPullParserFactory xmlFactoryObject = XmlPullParserFactory.newInstance();
@@ -285,7 +280,7 @@ public class SubscriptionsBackupsManager {
 									String channelId = matcher.group(1);
 									String channelName = myParser.getAttributeValue(null, "title");
 									if(channelId != null && !SubscriptionsDb.getSubscriptionsDb().isUserSubscribedToChannel(channelId)) {
-										channels.add(new ImportSubscriptionsChannel(channelName, channelId));
+										channels.add(new MultiSelectListPreferenceItem(channelId, channelName));
 									}
 								}
 
@@ -298,63 +293,38 @@ public class SubscriptionsBackupsManager {
 			}
 
 			if(channels.size() > 0) {
-				final ImportSubscriptionsAdapter adapter = new ImportSubscriptionsAdapter(channels);
-				MaterialDialog dialog = new MaterialDialog.Builder(activity)
-								.title(R.string.import_subscriptions)
-								.titleColorRes(R.color.dialog_title)
-								.customView(R.layout.subs_youtube_import_dialog_list, false)
-								.positiveText(R.string.import_subscriptions)
-								.backgroundColorRes(R.color.dialog_backgound)
-								.contentColorRes(R.color.dialog_content_text)
-								.positiveColorRes(R.color.dialog_positive_text)
-								.negativeColorRes(R.color.dialog_negative_text)
-								.onPositive(new MaterialDialog.SingleButtonCallback() {
-									@Override
-									public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-										// if the user checked the "Unsubscribe to all subscribed channels" checkbox
-										if (isUnsubsribeAllChecked) {
-											new UnsubscribeFromAllChannelsTask().executeInParallel();
-										}
+				// display a dialog which allows the user to select the channels to import
+				new MultiSelectListPreferenceDialog(activity, channels)
+						.title(R.string.import_subscriptions)
+						.positiveText(R.string.import_subscriptions)
+						.onPositive(new MaterialDialog.SingleButtonCallback() {
+							@Override
+							public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+								// if the user checked the "Unsubscribe to all subscribed channels" checkbox
+								if (isUnsubsribeAllChecked) {
+									new UnsubscribeFromAllChannelsTask().executeInParallel();
+								}
 
-										List<ImportSubscriptionsChannel> channelsToSubscribeTo = new ArrayList<>();
-										for(ImportSubscriptionsChannel channel: channels) {
-											if(channel.isChecked)
-												channelsToSubscribeTo.add(channel);
-										}
-										SubscribeToImportedChannelsTask task = new SubscribeToImportedChannelsTask();
-										task.executeInParallel(channelsToSubscribeTo);
-									}
-								})
-								.negativeText(R.string.cancel)
-								.onNegative(new MaterialDialog.SingleButtonCallback() {
-									@Override
-									public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-										dialog.dismiss();
-									}
-								})
-								.build();
+								List<MultiSelectListPreferenceItem> channelsToSubscribeTo = new ArrayList<>();
+								for(MultiSelectListPreferenceItem channel: channels) {
+									if(channel.isChecked)
+										channelsToSubscribeTo.add(channel);
+								}
 
-				RecyclerView list = dialog.getCustomView().findViewById(R.id.channel_list);
-				list.setAdapter(adapter);
-				list.setLayoutManager(new LinearLayoutManager(activity));
-
-				Button selectAllButton = dialog.getCustomView().findViewById(R.id.select_all_button);
-				selectAllButton.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View view) {
-						adapter.selectAll();
-					}
-				});
-				Button selectNoneButton = dialog.getCustomView().findViewById(R.id.select_none_button);
-				selectNoneButton.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View view) {
-						adapter.selectNone();
-					}
-				});
-
-
-				dialog.show();
+								// subscribe to the channels selected by the user
+								SubscribeToImportedChannelsTask task = new SubscribeToImportedChannelsTask();
+								task.executeInParallel(channelsToSubscribeTo);
+							}
+						})
+						.negativeText(R.string.cancel)
+						.onNegative(new MaterialDialog.SingleButtonCallback() {
+							@Override
+							public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+								dialog.dismiss();
+							}
+						})
+						.build()
+						.show();
 			} else {
 				new AlertDialog.Builder(activity)
 						.setMessage(foundChannels ? R.string.no_new_channels_found : R.string.no_channels_found)
@@ -421,7 +391,7 @@ public class SubscriptionsBackupsManager {
 	 * AsyncTask to loop through a list of channels to subscribe to. A Dialog will appear notifying the user of the progress
 	 * of fetching videos for each channel.
 	 */
-	private class SubscribeToImportedChannelsTask extends AsyncTaskParallel<List<ImportSubscriptionsChannel>, Void, Integer> {
+	private class SubscribeToImportedChannelsTask extends AsyncTaskParallel<List<MultiSelectListPreferenceItem>, Void, Integer> {
 
 		private MaterialDialog dialog;
 
@@ -437,9 +407,9 @@ public class SubscriptionsBackupsManager {
 
 
 		@Override
-		protected Integer doInBackground(final List<ImportSubscriptionsChannel>... channels) {
-			for (ImportSubscriptionsChannel channel : channels[0]) {
-				SubscriptionsDb.getSubscriptionsDb().subscribe(channel.channelId);
+		protected Integer doInBackground(final List<MultiSelectListPreferenceItem>... channels) {
+			for (MultiSelectListPreferenceItem channel : channels[0]) {
+				SubscriptionsDb.getSubscriptionsDb().subscribe(channel.id);
 			}
 
 			return channels[0].size();

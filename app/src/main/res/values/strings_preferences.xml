@@ -517,4 +517,9 @@
 	<string name="pref_key_channel_blacklist" translatable="false">pref_key_channel_blacklist</string>
 	<string name="pref_title_channel_blacklist">Channel Blacklist</string>
 	<string name="pref_summary_channel_blacklist">Check the channels you want to unblock and leave the others unchecked.</string>
+	<string name="unblock_button">Unblock</string>
+	<string name="channel_blacklist_updated">Channel blacklist updated.  Please refresh.</string>
+	<string name="channel_blacklist_empty">Channel blacklist is empty.</string>
+	<string name="no_preferred_lang_selected">No preferred language selected.  Setting ignored.</string>
+	<string name="preferred_lang_updated">Preferred language updated.  Please refresh.</string>
 </resources>

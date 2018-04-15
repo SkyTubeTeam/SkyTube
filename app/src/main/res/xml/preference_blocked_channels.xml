@@ -34,12 +34,10 @@
             android:entryValues="@array/country_codes"
             android:defaultValue=""/>
 
-        <MultiSelectListPreference
+        <Preference
             android:key="@string/pref_key_preferred_languages"
             android:title="@string/pref_title_preferred_languages"
             android:summary="@string/pref_summary_preferred_languages"
-            android:entries="@array/languages_names"
-            android:entryValues="@array/languages_iso639_codes"
             android:defaultValue="@array/languages_iso639_codes"/>	<!-- no language shall be filtered out by DEFAULT -->
 
     </PreferenceCategory>

@@ -4,7 +4,4 @@
 	<string name="channel_blacklisted">Channel was successfully blacklisted. Please refresh.</string>
 	<string name="channel_blacklist_error">Channel could not be blacklisted.</string>
 	<string name="channel_blacklist_error_user_subscribed">Please unsubscribe the channel first.</string>
-	<string name="unblock_button">Unblock</string>
-
-	<string name="channel_blacklist_empty">Channel blacklist is empty.</string>
 </resources>
