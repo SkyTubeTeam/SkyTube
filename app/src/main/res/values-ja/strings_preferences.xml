@@ -99,4 +99,9 @@
 	<string name="pref_summary_choose_player">使用するビデオプレーヤー: %s</string>
 	<string name="pref_title_subscriptions_alphabetical_order">チャンネルをアルファベット順に並べ替え</string>
 	<string name="pref_summary_subscriptions_alphabetical_order">チェックすると、購読済みのチャンネルがアルファベット順に並べ替えられます。</string>
-	</resources>
+	<string name="unblock_button">ブロック解除</string>
+	<string name="channel_blacklist_updated">チャンネルのブラックリストが更新されました。リフレッシュしてください。</string>
+	<string name="channel_blacklist_empty">チャンネルのブラックリストは空です。</string>
+	<string name="no_preferred_lang_selected">言語が選択されていません。設定は無視されます。</string>
+	<string name="preferred_lang_updated">言語を更新しました。リフレッシュしてください。</string>
+</resources>
