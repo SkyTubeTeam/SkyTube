@@ -7,7 +7,7 @@
 	<string name="pref_summary_preferred_regions">Sélectionnez une région. Cela permettra de filter les vidéos mises en avant.</string>
 
 	<string name="pref_title_preferred_languages">Langue(s) préférée(s)</string>
-	<string name="pref_summary_preferred_languages">EXPERIMENTAL: Sélectionnez une ou plusieurs langue(s). Cela permettra de filter les vidéos populaires ainsi que vos recherches.</string>
+	<string name="pref_summary_preferred_languages">Expérimental : Sélectionnez une ou plusieurs langues. Ceci est utilisé pour filtrer les vidéos de la catégorie \"Vidéos populaires\" et pour les recherches de vidéo.</string>
 
 	<string name="pref_video_player_category">Lecteur vidéo</string>
 	<string name="pref_title_preferred_res">Résolution préférée</string>
@@ -23,15 +23,17 @@
 	<string name="databases_backup_fail">Impossible de sauvegarder vos données.</string>
 	<string name="databases_import_select_backup">Sélectionnez la sauvegarde à importer</string>
 	<string name="databases_import_nothing_selected">Aucune sauvegarde sélectionnée…</string>
-	<string name="databases_import_warning_message">Vos données seront REMPLACÉES par la sauvegarde sélectionnée.\n\nContinuer?</string>
+	<string name="databases_import_warning_message">Vos abonnements et favoris seront remplacés par les données de la sauvegarde sélectionnée.
+\n
+\nContinuer ?</string>
 	<string name="continue_">Continuer</string>
 	<string name="databases_importing">Import…</string>
 	<string name="databases_import_fail">Impossible d\'importer la sauvegarde.</string>
-	<string name="databases_import_success">Sauvegarde importée avec succès.  Redémarez l\'application.</string>
+	<string name="databases_import_success">Sauvegarde importée. Redémarrez l\'application pour appliquer les changements.</string>
 
 	<string name="pref_title_import_subs">Importer des abonnements depuis YouTube</string>
 	<string name="pref_summary_import_subs">Importez vos abonnements depuis votre compte YouTube.</string>
-	<string name="subs_import_select_backup">Sélectionner le fichier xml YouTube à importer</string>
+	<string name="subs_import_select_backup">Sélectionner le fichier YouTube XML à importer</string>
 
 	<string name="pref_about_category">À propos</string>
 	<string name="pref_title_website">Site internet</string>
@@ -41,7 +43,7 @@
 	<string name="pref_title_updates">Mise à jour</string>
 	<string name="pref_summary_updates">Rechercher des mises à jour.</string>
 	<string name="pref_title_license">Licence</string>
-	<string name="pref_summary_license">GNU General Public License version 3</string>
+	<string name="pref_summary_license">Licence Publique Générale GNU version 3</string>
 	<string name="app_license">
 		Copyright © 2015-2018  Ramon Mifsud\n
 
@@ -64,7 +66,7 @@
 	<string name="pref_summary_default_tab">Onglet par défaut lors de l\'ouverture de SkyTube : %s</string>
 
 	<string name="pref_title_screen_orientation">Orientation de l\'écran</string>
-	<string name="pref_summary_screen_orientation">Video player\'s orientation:  %s</string>
+	<string name="pref_summary_screen_orientation">Orientation du lecteur vidéo : %s</string>
 	<string-array name="screen_orientations">
 		<item>Automatique</item>
 		<item>Paysage</item>
@@ -80,10 +82,10 @@
 	<string name="restart">Redémarrer</string>
 
 	<string name="pref_title_disable_immersive_mode">Désactiver le mode immersif</string>
-	<string name="pref_summary_disable_immersive_mode">Comments and video description icons and the navigation bar shall always be displayed</string>
+	<string name="pref_summary_disable_immersive_mode">Les icônes des commentaires et de la description de la vidéo et la barre de navigation doivent toujours être affichés</string>
 
-	<string name="pref_title_feed_notification">Feed Auto Notification</string>
-	<string name="pref_summary_feed_notification">How often to check for new videos from subscribed channels: %s</string>
+	<string name="pref_title_feed_notification">Notification automatique de flux</string>
+	<string name="pref_summary_feed_notification">Quelle est la fréquence de vérification des nouvelles vidéos des abonnements : %s</string>
 	<string-array name="feed_notification">
 		<item>Off</item>
 		<item>6 Hours</item>
@@ -91,6 +93,21 @@
 		<item>24 Hours</item>
 	</string-array>
 
-	<string name="pref_title_allow_mobile_downloads">Allow downloads on mobile networks</string>
-	<string name="pref_summary_allow_mobile_downloads">Select this to enable downloading videos on mobile networks. Otherwise, videos can only be downloaded on Wi-Fi.</string>
+	<string name="pref_title_allow_mobile_downloads">Autoriser les téléchargements sur les réseaux mobiles</string>
+	<string name="pref_summary_allow_mobile_downloads">Sélectionnez cette option pour activer le téléchargement de vidéos sur les réseaux mobiles. Sinon, les vidéos ne peuvent être téléchargées qu\'en Wi-Fi.</string>
+<string name="pref_title_choose_player">Lecteur vidéo</string>
+	<string name="pref_summary_choose_player">Lecteur vidéo à utiliser : %s</string>
+	<string name="pref_title_disable_search_history">Désactiver l\'historique de recherche</string>
+	<string name="pref_summary_disable_search_history">Si coché, l\'historique de recherche sera effacé et ne sera pas utilisé.</string>
+	<string name="pref_disable_search_history_deleted">Historique de recherche effacé.</string>
+	<string name="pref_title_subscriptions_alphabetical_order">Trier les chaînes par ordre alphabétique</string>
+	<string name="pref_summary_subscriptions_alphabetical_order">Si coché, les abonnements seront triés par ordre alphabétique.</string>
+	<string name="pref_video_blocker_category">Bloqueur vidéo</string>
+	<string name="pref_title_channel_blacklist">Liste des chaînes bloquées</string>
+	<string name="pref_summary_channel_blacklist">Cochez les chaînes que vous voulez débloquer et laissez les autres non cochées.</string>
+	<string name="unblock_button">Débloqué</string>
+	<string name="channel_blacklist_updated">Liste des chaînes bloquées mise à jour. Veuillez actualiser.</string>
+	<string name="channel_blacklist_empty">La liste des chaînes bloquées est vide.</string>
+	<string name="no_preferred_lang_selected">Aucune langue préférée sélectionnée. Réglage ignoré.</string>
+	<string name="preferred_lang_updated">Langue préférée mise à jour. Veuillez actualiser.</string>
 </resources>
