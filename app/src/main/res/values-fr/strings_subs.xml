@@ -23,6 +23,6 @@
 	<string name="import_subscriptions_parse_error">Une erreur a été rencontré lors de la tentative d\'analyse du fichier XML que vous avez téléchargé : %s.</string>
 	<string name="failed_to_import_subscriptions">Échec de l\'import de vos abonnements YouTube.</string>
 
-	<string name="about">About</string>
+	<string name="about">A propos</string>
 <string name="unsubscribe_from_all_current_sibbed_channels">Se désabonner de toutes les chaînes auxquelles vous êtes actuellement abonné.</string>
 	</resources>
