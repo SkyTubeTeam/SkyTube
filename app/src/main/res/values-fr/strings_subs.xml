@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources>
 	<string name="subscriptions">Abonnements</string>
 	<string name="subscribe">S\'abonner</string>
@@ -8,8 +8,8 @@
 	<string name="subscribed">Abonné</string>
 	<string name="unsubscribed">Désabonné</string>
 
-	<string name="error_get_subbed_channels">Erreur lors de l\'abonnement à la chaine</string>
-	<string name="error_check_if_user_has_subbed">Impossible de vérifier si l\'utilisateur est abonné à cette chaine (id=%s)</string>
+	<string name="error_get_subbed_channels">Erreur lors de la récupération des abonnements.</string>
+	<string name="error_check_if_user_has_subbed">Impossible de vérifier si l\'utilisateur s\'est abonné à la chaîne (id=%s)</string>
 	<string name="error_unable_to_subscribe">Impossible de vous désabonner de cette chaine (id=%s)</string>
 
 	<string name="import_subscriptions">Importer abonnements</string>
@@ -24,4 +24,5 @@
 	<string name="failed_to_import_subscriptions">Échec de l\'import de vos abonnements YouTube.</string>
 
 	<string name="about">About</string>
-</resources>
+<string name="unsubscribe_from_all_current_sibbed_channels">Se désabonner de toutes les chaînes auxquelles vous êtes actuellement abonné.</string>
+	</resources>
