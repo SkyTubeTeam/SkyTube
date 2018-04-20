@@ -1,22 +1,22 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources>
-	<string name="error_stream_err_unavailable">Impossible d\'afficher le message d\'erreur.</string>
-	<string name="error_stream_decryption_fail">Impossible de lire le code de décryptage du service Youtube.</string>
+	<string name="error_stream_err_unavailable">Message d\'erreur non disponible.</string>
+	<string name="error_stream_decryption_fail">Impossible de lire le code de déchiffrage du service YouTube.</string>
 	<string name="error_stream_parse_error">Erreur d\'analyse.</string>
 
 	<string name="error_video_play">Erreur de lecture vidéo</string>
-	<string name="error_video_streams_empty">La vidéo %s n\'a pas de source</string>
+	<string name="error_video_streams_empty">La vidéo %s n\'a pas de flux.</string>
 	<string name="error_video_streams">Erreur lors du chagement du flux vidéo.</string>
 	<string name="error_get_video_desc">Erreur lors de la récupération de la description de la vidéo.</string>
 	<string name="error_invalid_url">URL de la vidéo invalide : %s</string>
 
-	<string name="warning_live_video">Impossible de lire des vidéos en live.  Regarder la vidéo sur une autre application ?</string>
+	<string name="warning_live_video">Impossible de lire le flux en direct. Ouvrir le flux sur une autre application ?</string>
 
 	<string name="ratings_disabled">Notation désactivée</string>
 
 	<string name="loading_video">Chargement de la vidéo…</string>
 	<string name="get_new_video_steam">Nouveau flux</string>
-	<string name="open_in_browser">Ouvrir dans un navigateur</string>
+	<string name="open_in_browser">Ouvrir dans un navigateur web</string>
 	<string name="open_with">Ouvrir avec…</string>
 	<string name="share">Partager</string>
 	<string name="share_via">Partager avec</string>
@@ -33,7 +33,7 @@
 	<string name="cancel">Annuler</string>
 	<string name="clear">Effacer</string>
 
-	<string name="tutorial_comments_icon">Swipe to the left to view comments.</string>
-	<string name="tutorial_video_info_icon">Swipe to the top to view information about the video.</string>
-	<string name="tutorial_pause_video">Double tap to pause or play a video.</string>
+	<string name="tutorial_comments_icon">Glissez vers la gauche pour voir les commentaires.</string>
+	<string name="tutorial_video_info_icon">Glissez vers le haut pour voir les informations sur la vidéo.</string>
+	<string name="tutorial_pause_video">Touchez deux fois pour mettre en pause ou lire une vidéo.</string>
 </resources>
