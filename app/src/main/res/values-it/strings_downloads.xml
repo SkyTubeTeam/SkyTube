@@ -1,13 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources>
-	<string name="downloads">Downloads</string>
-	<string name="download_video">Download Video</string>
-	<string name="starting_video_download">Downloading \'%s\'…</string>
-	<string name="video_download_stream_error">Could not download \'%s\'.</string>
+	<string name="downloads">Download</string>
+	<string name="download_video">Scarica Video</string>
+	<string name="starting_video_download">Scaricamento \'%s\'…</string>
+	<string name="video_download_stream_error">Impossibile scaricare \'%s\'.</string>
 	<string name="delete_download">Delete Download</string>
-	<string name="video_downloaded">\'%s\' downloaded.</string>
-	<string name="no_downloaded_videos_text">You haven\'t downloaded any videos yet.\n\nOnce you do, they will show up here.</string>
-	<string name="downloads_disabled_warning">Video downloading is disabled as you are not using Wi-Fi.\nTo enable it, please go to Preferences > Others  and tick \'Allow downloads on Mobile Networks\'</string>
-	<string name="playing_video_file_missing">The download for this video was not found. Playing remotely.</string>
-	<string name="external_storage_not_available">Unable to download the file as the external storage is not available.</string>
+	<string name="video_downloaded">\'%s\' scaricato.</string>
+	<string name="no_downloaded_videos_text">Non hai ancora scaricato alcun video.
+\n
+\nQuando l\'avrai fatto, sarà mostrato qui.</string>
+	<string name="downloads_disabled_warning">Video downloading is disabled as you are not using Wi-Fi.\nTo enable it, please go to Preferences &gt; Others  and tick \'Allow downloads on Mobile Networks\'</string>
+	<string name="playing_video_file_missing">Il download per questo video non è stato trovato. Riproduzione da remoto.</string>
+	<string name="external_storage_not_available">Impossibile scaricare il file poiché l\'archiviazione esterna non è disponibile.</string>
 </resources>
