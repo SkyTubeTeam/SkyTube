@@ -1,12 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources>
 	<string name="error_stream_err_unavailable">Messaggio di errore non disponibile.</string>
 	<string name="error_stream_decryption_fail">Impossibile caricare il codice di decrittografia per il servizio Youtube.</string>
 	<string name="error_stream_parse_error">Errore durante l\'analisi.</string>
 
 	<string name="error_video_play">Errore durante la riproduzione</string>
-	<string name="error_video_streams_empty">Il video %s non ha uno stream valido!</string>
-	<string name="error_video_streams">An error has occurred while retrieving video\'s streams.</string>
+	<string name="error_video_streams_empty">Il video %s non ha uno stream valido.</string>
+	<string name="error_video_streams">Si è verificato un errore durante il recupero degli stream del video.</string>
 	<string name="error_get_video_desc">Si è verificato un errore durante il recupero della descrizione del video.</string>
 	<string name="error_invalid_url">URL video non valido: %s</string>
 
@@ -16,7 +16,7 @@
 
 	<string name="loading_video">Caricamento video…</string>
 	<string name="get_new_video_steam">Nuovo stream</string>
-	<string name="open_in_browser">Apri nel browser</string>
+	<string name="open_in_browser">Apri nel browser web</string>
 	<string name="open_with">Apri con…</string>
 	<string name="share">Condividi</string>
 	<string name="share_via">Condividere tramite</string>
@@ -35,5 +35,5 @@
 
 	<string name="tutorial_comments_icon">Swipe to the left to view comments.</string>
 	<string name="tutorial_video_info_icon">Swipe to the top to view information about the video.</string>
-	<string name="tutorial_pause_video">Double tap to pause or play a video.</string>
+	<string name="tutorial_pause_video">Doppio tap per mettere in pausa o avviare un video.</string>
 </resources>
