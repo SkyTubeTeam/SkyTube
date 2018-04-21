@@ -1,27 +1,27 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources>
-	<string name="subscriptions">Sottoscrizioni</string>
-	<string name="subscribe">Sottoscrivi</string>
+	<string name="subscriptions">Iscrizioni</string>
+	<string name="subscribe">Iscriviti</string>
 	<string name="unsubscribe">Annulla l\'iscrizione</string>
 	<string name="total_subscribers">%,d iscritti</string>
 
 	<string name="subscribed">Sottoscritto</string>
-	<string name="unsubscribed">Non sottoscritto</string>
+	<string name="unsubscribed">Non iscritto</string>
 
 	<string name="error_get_subbed_channels">Si è verificato un errore durante l\'acquisizione dei canali sottoscritti.</string>
-	<string name="error_check_if_user_has_subbed">Impossibile verificare se l\'utente ha sottoscritto il canale (id=%s)</string>
+	<string name="error_check_if_user_has_subbed">Impossibile verificare se l\'utente sia iscritto al canale (id=%s)</string>
 	<string name="error_unable_to_subscribe">Impossibile annullare l\'iscrizione al canale (id=%s)</string>
 
-	<string name="import_subscriptions">Import Subscriptions</string>
-	<string name="import_subscriptions_description">Import your subscriptions from YouTube, by first visiting https://www.youtube.com/subscription_manager, and clicking the \"Export Subscriptions\" button at the bottom. Then, select the xml file you exported by clicking \"Select XML File\" below.</string>
-	<string name="subscriptions_to_channels_imported">Subscription to %d channels imported.</string>
-	<string name="select_xml_file">Select XML File</string>
-	<string name="select_all">Select All</string>
+	<string name="import_subscriptions">Importa Iscrizioni</string>
+	<string name="import_subscriptions_description">Importa le tue iscrizioni da YouTube, visitando https://www.youtube.com/subscription_manager e cliccando il pulsante \"Esporta Iscrizioni\" in fondo alla pagina. Quindi, seleziona il file XML che hai esportato cliccando \"Seleziona File XML\" qui sotto.</string>
+	<string name="subscriptions_to_channels_imported">Iscrizione a %d canali importata.</string>
+	<string name="select_xml_file">Seleziona File XML</string>
+	<string name="select_all">Seleziona Tutto</string>
 	<string name="select_none">Select None</string>
-	<string name="no_channels_found">No YouTube channels were found in the XML file you uploaded.</string>
-	<string name="no_new_channels_found">No YouTube channels that you are not already subscribed to were found in the XML file you uploaded.</string>
+	<string name="no_channels_found">Non è stato trovato nessun canale YouTube nel file XML che hai caricato.</string>
+	<string name="no_new_channels_found">Non è stato trovato nessun canale Youtube a cui tu non sia già iscritto nel file XML che hai caricato.</string>
 	<string name="import_subscriptions_parse_error">An error was encountered attempting to parse the XML file you uploaded: %s.</string>
-	<string name="failed_to_import_subscriptions">Failed to import your YouTube subscriptions.</string>
+	<string name="failed_to_import_subscriptions">Impossibile importare le tue iscrizioni YouTube.</string>
 
-	<string name="about">About</string>
+	<string name="about">Informazioni su</string>
 </resources>
