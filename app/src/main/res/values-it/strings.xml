@@ -1,22 +1,22 @@
+<?xml version='1.0' encoding='UTF-8'?>
 <resources>
 	<string name="could_not_get_videos">Impossibile ottenere %s video.</string>
 	<string name="views">%,d visualizzazioni</string>
 	<string name="error">Errore</string>
-	<string name="ok">Ok</string>
+	<string name="ok">OK</string>
 	<string name="search_videos">Cerca</string>
-	<string name="launch_offical_player_error">Si è verificato un errore durante il tentativo di lanciare il player ufficiale di YouTube.
-Assicurati che l\'applicazione ufficiale di Google (YouTube) sia installata sul tuo dispositivo.</string>
+	<string name="launch_offical_player_error">Si è verificato un errore durante il tentativo di lanciare il player ufficiale di YouTube di Google. Assicurati che sia installato sul tuo dispositivo.</string>
 	<string name="LIVE">LIVE</string>
 
 	<string name="featured">In primo piano</string>
 	<string name="most_popular">Più popolari</string>
 
 	<string name="video">Video</string>
-	<string name="videos">Videos</string>
-	<string name="num_videos">%d videos</string>
-	<string name="playlists">Playlists</string>
+	<string name="videos">Video</string>
+	<string name="num_videos">%d video</string>
+	<string name="playlists">Playlist</string>
 	<string name="could_not_get_playlists">Could not get %s playlists.</string>
 
-	<string name="loading">Loading …</string>
-    <string name="could_not_get_channel">Could not download channel information!</string>
+	<string name="loading">Caricamento …</string>
+    <string name="could_not_get_channel">Impossibile scaricare le informazioni del canale!</string>
 </resources>
