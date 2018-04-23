@@ -95,4 +95,11 @@
 	<string name="pref_summary_channel_blacklist">Velg kanalene du ønsker å avblokkere, og la alt annet stå umerket.</string>
 <string name="pref_title_choose_player">Videoavspiller</string>
 	<string name="pref_summary_choose_player">Videoavspiller å bruke: %s</string>
-	</resources>
+	<string name="pref_title_subscriptions_alphabetical_order">Sorter kanaler alfabetisk</string>
+	<string name="pref_summary_subscriptions_alphabetical_order">Hvis valgt, vil abonnerte kanaler sorteres alfabetisk.</string>
+	<string name="unblock_button">Avblokker</string>
+	<string name="channel_blacklist_updated">Kanal-svarteliste oppdatert. Gjenoppfrisk.</string>
+	<string name="channel_blacklist_empty">Kanal-svartelisten er tom.</string>
+	<string name="no_preferred_lang_selected">Inget foretrukket språk valgt. Innstilling ignorert.</string>
+	<string name="preferred_lang_updated">Foretrukket språk oppdatert. Gjenoppfrisk.</string>
+</resources>
