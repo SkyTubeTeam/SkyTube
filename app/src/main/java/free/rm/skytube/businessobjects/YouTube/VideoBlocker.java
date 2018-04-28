@@ -19,6 +19,18 @@ package free.rm.skytube.businessobjects.YouTube;
 
 import android.widget.Toast;
 
+import com.google.common.base.Optional;
+import com.optimaize.langdetect.DetectedLanguage;
+import com.optimaize.langdetect.LanguageDetector;
+import com.optimaize.langdetect.LanguageDetectorBuilder;
+import com.optimaize.langdetect.i18n.LdLocale;
+import com.optimaize.langdetect.ngram.NgramExtractors;
+import com.optimaize.langdetect.profiles.LanguageProfile;
+import com.optimaize.langdetect.profiles.LanguageProfileReader;
+import com.optimaize.langdetect.text.CommonTextObjectFactories;
+import com.optimaize.langdetect.text.TextObject;
+import com.optimaize.langdetect.text.TextObjectFactory;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -83,7 +95,9 @@ public class VideoBlocker {
 		final Set<String>   preferredLanguages = SkyTubeApp.getPreferenceManager().getStringSet(getStr(R.string.pref_key_preferred_languages), defaultPrefLanguages);
 
 		for (YouTubeVideo video : videosList) {
-			if (!filterByBlacklistedChannels(video, blockedChannelIds)  &&  !filterByLanguage(video, preferredLanguages)) {
+			if (!filterByBlacklistedChannels(video, blockedChannelIds)
+					&&  !filterByLanguage(video, preferredLanguages)
+					&&  !filterByLanguageDetection(video, preferredLanguages)) {
 				filteredVideosList.add(video);
 			}
 		}
@@ -100,7 +114,7 @@ public class VideoBlocker {
 	 * @param reason    The criteria hit (e.g. ID of the channel blocked).
 	 */
 	private void log(YouTubeVideo video, String criteria, String reason) {
-		Logger.d(this, "\uD83D\uDED1 VIDEO='%s'  |  CRITERIA='%s'  |  REASON='%s'", video.getTitle(), criteria, reason);
+		Logger.i(this, "\uD83D\uDED1 VIDEO='%s'  |  CRITERIA='%s'  |  REASON='%s'", video.getTitle(), criteria, reason);
 	}
 
 
@@ -155,6 +169,106 @@ public class VideoBlocker {
 		// this video is undesirable, hence we are going to filter it
 		log(video, "language", video.getLanguage());
 		return true;
+	}
+
+
+	/**
+	 * Filter out the given video if it does not meet the preferred language criteria.  The app will
+	 * try to determine the language of the video by analyzing the video's title.
+	 *
+	 * @param video                 Video that is going to be checked for filtering purposes.
+	 * @param preferredLanguages    A set of user's preferred ISO 639 language codes (regex).
+	 *
+	 * @return True to filter out the video; false otherwise.
+	 */
+	private boolean filterByLanguageDetection(YouTubeVideo video, Set<String> preferredLanguages) {
+		final String text = video.getTitle().toLowerCase();
+		List<String> detectLanguageList = new ArrayList<>();
+
+		// if there are no preferred languages, then it means we must not filter this video
+		if (preferredLanguages.isEmpty())
+			return false;
+
+		try {
+			// detect language
+			TextObject textObject = LanguageDetectionFactory.get().getTextObjectFactory().forText(text);
+			Optional<LdLocale> lang = LanguageDetectionFactory.get().getLanguageDetector().detect(textObject);
+
+			if (lang.isPresent()) {
+				final String langDetected = lang.get().getLanguage();
+
+				detectLanguageList.add(langDetected);
+
+				// if this video's language is equal to the user's preferred one... then do NOT filter it out
+				for (String prefLanguage : preferredLanguages) {
+					if (langDetected.matches(prefLanguage))
+						return false;
+				}
+			} else {
+				List<DetectedLanguage> detectedLangList = LanguageDetectionFactory.get().getLanguageDetector().getProbabilities(text);
+
+				for (DetectedLanguage detectedLanguage : detectedLangList) {
+					String langDetected = detectedLanguage.getLocale().getLanguage();
+
+					detectLanguageList.add(langDetected);
+
+					for (String prefLanguage : preferredLanguages) {
+						if (langDetected.matches(prefLanguage))
+							return false;
+					}
+				}
+			}
+		} catch (Throwable tr) {
+			Logger.e(this, "Exception caught while detecting language", tr);
+		}
+
+		log(video, "language-det", detectLanguageList.toString());
+		return true;
+	}
+
+
+
+	////////////////////////////////////////////////////////////////////////////////////////////////
+
+	private static class LanguageDetectionFactory {
+
+		private static LanguageDetectionFactory languageDetectionFactory = null;
+		private TextObjectFactory textObjectFactory;
+		private LanguageDetector  languageDetector;
+
+
+		private LanguageDetectionFactory() throws IOException {
+			//load all languages:
+			List<LanguageProfile> languageProfiles = new LanguageProfileReader().readAllBuiltIn();
+
+			//build language detector:
+			languageDetector = LanguageDetectorBuilder.create(NgramExtractors.standard())
+					.withProfiles(languageProfiles)
+					.build();
+
+			//create a text object factory
+			textObjectFactory = CommonTextObjectFactories.forDetectingShortCleanText();
+		}
+
+
+		public static LanguageDetectionFactory get() throws IOException {
+			if (languageDetectionFactory == null) {
+				languageDetectionFactory = new LanguageDetectionFactory();
+			}
+
+			return languageDetectionFactory;
+		}
+
+
+		public TextObjectFactory getTextObjectFactory() {
+			return textObjectFactory;
+		}
+
+
+		public LanguageDetector getLanguageDetector() {
+			return languageDetector;
+		}
+
 	}
 
 }
