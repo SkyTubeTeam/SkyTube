@@ -21,6 +21,7 @@ import java.util.Set;
 
 import free.rm.skytube.BuildConfig;
 import free.rm.skytube.R;
+import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.db.BlockedChannelsDb;
 import free.rm.skytube.gui.businessobjects.MultiSelectListPreferenceDialog;
 import free.rm.skytube.gui.businessobjects.MultiSelectListPreferenceItem;
@@ -115,7 +116,7 @@ public class VideoBlockerPreferenceFragment extends PreferenceFragment {
 
 						// if at least one language was selected, then save the settings
 						if (preferredLangIsoCodes.size() > 0) {
-							SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+							SharedPreferences sharedPref = SkyTubeApp.getPreferenceManager();
 							SharedPreferences.Editor editor = sharedPref.edit();
 							editor.putStringSet(getString(R.string.pref_key_preferred_languages), prefLangDialog.getSelectedItemsIds());
 							editor.apply();
@@ -179,7 +180,7 @@ public class VideoBlockerPreferenceFragment extends PreferenceFragment {
 	 * @return A set of languages preferred by the user.
 	 */
 	private Set<String> getPreferredLanguages() {
-		SharedPreferences pref = getActivity().getPreferences(Context.MODE_PRIVATE);
+		SharedPreferences pref = SkyTubeApp.getPreferenceManager();
 		return pref.getStringSet(getString(R.string.pref_key_preferred_languages), getDefaultPreferredLanguages());
 	}
 
