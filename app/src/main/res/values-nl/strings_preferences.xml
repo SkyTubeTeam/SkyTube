@@ -6,7 +6,7 @@
 	<string name="pref_summary_preferred_regions">Selecteer een voorkeursregio. Dit wordt gebruikt om video\'s te filteren in de \"Uitgelicht\"-categorie.</string>
 
 	<string name="pref_title_preferred_languages">Voorkeursta(a)l(en)</string>
-	<string name="pref_summary_preferred_languages">Experimenteel: Selecteer één of meer voorkeurstalen. Dit wordt gebruikt om video\'s te filteren in de \"Meest populair\"-categorie en bij zoekopdrachten.</string>
+	<string name="pref_summary_preferred_languages">Selecteer één of meer voorkeurstalen.</string>
 
 	<string name="pref_video_player_category">Videospeler</string>
 	<string name="pref_title_preferred_res">Voorkeursresolutie</string>
@@ -103,8 +103,11 @@
 	<string name="pref_title_subscriptions_alphabetical_order">Kanalen alfabetisch sorteren</string>
 	<string name="pref_summary_subscriptions_alphabetical_order">Als dit wordt aangevinkt, dan wordt de lijst met geabonneerde kanalen alfabetisch gesorteerd.</string>
 	<string name="unblock_button">Deblokkeren</string>
-	<string name="channel_blacklist_updated">De zwarte lijst is bijgewerkt. Ververs de app.</string>
+	<string name="channel_blacklist_updated">De zwarte lijst is bijgewerkt. Ververs de video\'s.</string>
 	<string name="channel_blacklist_empty">De zwarte lijst is leeg.</string>
 	<string name="no_preferred_lang_selected">Geen voorkeurstaal geselecteerd; deze instelling wordt genegeerd.</string>
-	<string name="preferred_lang_updated">Voorkeurstaal bijgewerkt. Ververs de app.</string>
+	<string name="preferred_lang_updated">Voorkeurstaal bijgewerkt. Ververs de video\'s.</string>
+<string name="pref_title_lang_detection_video_filtering">Taaldetectie - video\'s filteren</string>
+	<string name="pref_summary_lang_detection_video_filtering">Kunstmatige intelligentie gebruiken om de in video\'s gebruikte talen te detecteren en blokkeren als de taal niet overeen komt met je voorkeursta(a)l(en). Schakel dit alleen in op krachtige apparaten.</string>
+	<string name="setting_updated">Instelling bijgewerkt; ververs de video\'s.</string>
 </resources>
