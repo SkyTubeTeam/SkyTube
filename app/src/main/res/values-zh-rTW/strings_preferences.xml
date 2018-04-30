@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources><string name="preferences">偏好設定</string>
 
-	<string name="pref_languages_category">語言和區域</string>
+	<string name="pref_languages_filter_category">語言和區域</string>
 	<string name="pref_title_preferred_regions">偏好的區域</string>
 	<string name="pref_summary_preferred_regions">選擇偏好的區域。這用在「特選」影片類別中篩選出影片。</string>
 

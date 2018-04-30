@@ -2,7 +2,7 @@
 <resources>
 	<string name="preferences">Impostazioni</string>
 
-	<string name="pref_languages_category">Lingue &amp; Paesi</string>
+	<string name="pref_languages_filter_category">Lingue &amp; Paesi</string>
 	<string name="pref_title_preferred_regions">Paese preferito</string>
 	<string name="pref_summary_preferred_regions">Selezionare un paese preferito. Questo verrà utilizzata per filtrare i video nella categoria \"Preferiti\".</string>
 

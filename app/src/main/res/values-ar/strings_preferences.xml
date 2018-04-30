@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources><string name="preferences">الخيارات</string>
 
-	<string name="pref_languages_category">اللغات والمناطق</string>
+	<string name="pref_languages_filter_category">اللغات والمناطق</string>
 	<string name="pref_title_preferred_regions">المنطقة المفضلة</string>
 	<string name="pref_summary_preferred_regions">حدد منطقة مفضلة. يتم استخدام ذلك لتصفية مقاطع الفيديو في فئة مقاطع الفيديو \"المميزة\".</string>
 

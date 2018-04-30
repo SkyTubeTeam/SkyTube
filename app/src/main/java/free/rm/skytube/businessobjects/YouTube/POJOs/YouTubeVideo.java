@@ -24,7 +24,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Environment;
-import android.util.Log;
 import android.view.Menu;
 import android.widget.Toast;
 
@@ -33,15 +32,13 @@ import com.google.api.services.youtube.model.Thumbnail;
 import com.google.api.services.youtube.model.Video;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.MathContext;
 import java.math.RoundingMode;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -51,10 +48,8 @@ import free.rm.skytube.businessobjects.FileDownloader;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetVideoStreamTask;
 import free.rm.skytube.businessobjects.YouTube.VideoStream.StreamMetaData;
-import free.rm.skytube.businessobjects.db.BlockedChannelsDb;
 import free.rm.skytube.businessobjects.db.BookmarksDb;
 import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
-import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 import free.rm.skytube.businessobjects.interfaces.GetDesiredStreamListener;
 
 import static free.rm.skytube.app.SkyTubeApp.getContext;
@@ -100,9 +95,13 @@ public class YouTubeVideo implements Serializable {
 	private String duration;
 	/**
 	 * Total views count.  This can be <b>null</b> if the video does not allow the user to
-	 * like/dislike it.
+	 * like/dislike it.  Format:  "<number> Views"
 	 */
 	private String viewsCount;
+	/**
+	 * Total views count.
+	 */
+	private BigInteger viewsCountInt;
 	/**
 	 * The date/time of when this video was published.
 	 */
@@ -167,14 +166,14 @@ public class YouTubeVideo implements Serializable {
 
 			setThumbsUpPercentage(likeCount, dislikeCount);
 
-			this.viewsCount = String.format(getStr(R.string.views),
-					video.getStatistics().getViewCount());
+			this.viewsCountInt = video.getStatistics().getViewCount();
+			this.viewsCount = String.format(getStr(R.string.views), viewsCountInt);
 
 			if (likeCount != null)
-				this.likeCount = String.format("%,d", video.getStatistics().getLikeCount());
+				this.likeCount = String.format(Locale.getDefault(), "%,d", video.getStatistics().getLikeCount());
 
 			if (dislikeCount != null)
-				this.dislikeCount = String.format("%,d", video.getStatistics().getDislikeCount());
+				this.dislikeCount = String.format(Locale.getDefault(), "%,d", video.getStatistics().getDislikeCount());
 		}
 	}
 
@@ -316,6 +315,10 @@ public class YouTubeVideo implements Serializable {
 
 	public String getViewsCount() {
 		return viewsCount;
+	}
+
+	public BigInteger getViewsCountInt() {
+		return viewsCountInt;
 	}
 
 	public DateTime getPublishDate() {

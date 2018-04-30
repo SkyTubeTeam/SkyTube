@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources><string name="preferences">Tercihler</string>
 
-	<string name="pref_languages_category">Diller ve Bölgeler</string>
+	<string name="pref_languages_filter_category">Diller ve Bölgeler</string>
 	<string name="pref_title_preferred_regions">Tercih Edilen Bölge</string>
 	<string name="pref_summary_preferred_regions">Tercih edilen bölge seçiniz. Bu \"Önerilen\" videolar kategorisini süzmek için kullanılır.</string>
 

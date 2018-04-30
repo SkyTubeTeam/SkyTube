@@ -2,7 +2,7 @@
 <resources>
 	<string name="preferences">Préférences</string>
 
-	<string name="pref_languages_category">Langues et régions</string>
+	<string name="pref_languages_filter_category">Langues et régions</string>
 	<string name="pref_title_preferred_regions">Région préférée</string>
 	<string name="pref_summary_preferred_regions">Sélectionnez une région. Cela permettra de filter les vidéos mises en avant.</string>
 

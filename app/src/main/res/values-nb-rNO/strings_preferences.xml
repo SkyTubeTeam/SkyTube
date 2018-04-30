@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources><string name="preferences">Innstillinger</string>
 
-	<string name="pref_languages_category">Språk og regioner</string>
+	<string name="pref_languages_filter_category">Språk og regioner</string>
 	<string name="pref_title_preferred_regions">Foretrukket region</string>
 	<string name="pref_summary_preferred_regions">Velg en foretrukket region. Dette brukes til å filtrere ut videoer i \"Framhevet\"-kategorien.</string>
 
