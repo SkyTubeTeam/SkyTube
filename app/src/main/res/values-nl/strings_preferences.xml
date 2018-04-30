@@ -111,7 +111,9 @@
 	<string name="pref_summary_lang_detection_video_filtering">Kunstmatige intelligentie gebruiken om de in video\'s gebruikte talen te detecteren en blokkeren als de taal niet overeen komt met je voorkeursta(a)l(en). Schakel dit alleen in op krachtige apparaten.</string>
 	<string name="setting_updated">Instelling bijgewerkt; ververs de video\'s.</string>
 <string name="pref_channels_filter_category">Kanaalfilter</string>
-	<string name="pref_other_filters_category">Ander filter</string>
-	<string name="pref_title_low_views_filter">Weinig weergaven</string>
+	<string name="pref_other_filters_category">Andere filters</string>
+	<string name="pref_title_low_views_filter">Weergaven</string>
 	<string name="pref_summary_low_views_filter">Filter video\'s met weinig weergaven: %s</string>
+	<string name="pref_title_dislikes_filter">Niet leuks</string>
+	<string name="pref_summary_dislikes_filter">Filter video\'s met veel niet leuks: %s</string>
 	</resources>
