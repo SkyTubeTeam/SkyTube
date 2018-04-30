@@ -1,6 +1,5 @@
 package free.rm.skytube.gui.fragments.preferences;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.MultiSelectListPreference;
@@ -34,7 +33,7 @@ public class VideoBlockerPreferenceFragment extends PreferenceFragment {
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		addPreferencesFromResource(R.xml.preference_blocked_channels);
+		addPreferencesFromResource(R.xml.preference_video_blocker);
 
 		final MultiSelectListPreference channelBlacklistPreference = (MultiSelectListPreference) findPreference(getString(R.string.pref_key_channel_blacklist));
 
@@ -79,11 +78,26 @@ public class VideoBlockerPreferenceFragment extends PreferenceFragment {
 			}
 		});
 
-		final Preference preferredLanguagesPreference = findPreference(getString(R.string.pref_key_preferred_languages));
-		preferredLanguagesPreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+		findPreference(getString(R.string.pref_key_preferred_region)).setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+			@Override
+			public boolean onPreferenceChange(Preference preference, Object newValue) {
+				Toast.makeText(getActivity(), R.string.setting_updated, Toast.LENGTH_LONG).show();
+				return true;
+			}
+		});
+
+		findPreference(getString(R.string.pref_key_preferred_languages)).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 			@Override
 			public boolean onPreferenceClick(Preference preference) {
 				displayPreferredLanguageDialog();
+				return true;
+			}
+		});
+
+		findPreference(getString(R.string.pref_key_lang_detection_video_filtering)).setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+			@Override
+			public boolean onPreferenceChange(Preference preference, Object newValue) {
+				Toast.makeText(getActivity(), R.string.setting_updated, Toast.LENGTH_LONG).show();
 				return true;
 			}
 		});
