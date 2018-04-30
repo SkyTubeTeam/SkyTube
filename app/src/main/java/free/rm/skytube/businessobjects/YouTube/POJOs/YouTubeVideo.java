@@ -161,8 +161,8 @@ public class YouTubeVideo implements Serializable {
 		}
 
 		if (video.getStatistics() != null) {
-			BigInteger likeCount = video.getStatistics().getLikeCount(),
-					dislikeCount = video.getStatistics().getDislikeCount();
+			BigInteger  likeCount = video.getStatistics().getLikeCount(),
+						dislikeCount = video.getStatistics().getDislikeCount();
 
 			setThumbsUpPercentage(likeCount, dislikeCount);
 

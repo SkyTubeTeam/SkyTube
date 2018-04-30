@@ -64,6 +64,14 @@
 			android:entryValues="@array/views_filtering_values_list"
 			android:defaultValue="@string/views_filtering_disabled"/>
 
+		<ListPreference
+			android:key="@string/pref_key_dislikes_filter"
+			android:title="@string/pref_title_dislikes_filter"
+			android:summary="@string/pref_summary_dislikes_filter"
+			android:entries="@array/dislikes_filtering_list"
+			android:entryValues="@array/dislikes_filtering_values_list"
+			android:defaultValue="@string/dislikes_filtering_disabled"/>
+
 	</PreferenceCategory>
 
 </PreferenceScreen>

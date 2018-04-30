@@ -36,6 +36,13 @@ public class VideoBlockerPreferenceFragment extends PreferenceFragment {
 		addPreferencesFromResource(R.xml.preference_video_blocker);
 
 		final MultiSelectListPreference channelBlacklistPreference = (MultiSelectListPreference) findPreference(getString(R.string.pref_key_channel_blacklist));
+		final Preference.OnPreferenceChangeListener settingUpdatesPreferenceChange = new Preference.OnPreferenceChangeListener() {
+			@Override
+			public boolean onPreferenceChange(Preference preference, Object newValue) {
+				Toast.makeText(getActivity(), R.string.setting_updated, Toast.LENGTH_LONG).show();
+				return true;
+			}
+		};
 
 		//Need to have the blocked channels on a separate variable here
 		//Otherwise unblocked channels still on blocked channels list.
@@ -78,13 +85,7 @@ public class VideoBlockerPreferenceFragment extends PreferenceFragment {
 			}
 		});
 
-		findPreference(getString(R.string.pref_key_preferred_region)).setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-			@Override
-			public boolean onPreferenceChange(Preference preference, Object newValue) {
-				Toast.makeText(getActivity(), R.string.setting_updated, Toast.LENGTH_LONG).show();
-				return true;
-			}
-		});
+		findPreference(getString(R.string.pref_key_preferred_region)).setOnPreferenceChangeListener(settingUpdatesPreferenceChange);
 
 		findPreference(getString(R.string.pref_key_preferred_languages)).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 			@Override
@@ -94,13 +95,9 @@ public class VideoBlockerPreferenceFragment extends PreferenceFragment {
 			}
 		});
 
-		findPreference(getString(R.string.pref_key_lang_detection_video_filtering)).setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-			@Override
-			public boolean onPreferenceChange(Preference preference, Object newValue) {
-				Toast.makeText(getActivity(), R.string.setting_updated, Toast.LENGTH_LONG).show();
-				return true;
-			}
-		});
+		findPreference(getString(R.string.pref_key_lang_detection_video_filtering)).setOnPreferenceChangeListener(settingUpdatesPreferenceChange);
+		findPreference(getString(R.string.pref_key_low_views_filter)).setOnPreferenceChangeListener(settingUpdatesPreferenceChange);
+		findPreference(getString(R.string.pref_key_dislikes_filter)).setOnPreferenceChangeListener(settingUpdatesPreferenceChange);
 	}
 
 
