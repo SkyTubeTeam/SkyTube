@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources><string name="preferences">Настройки</string>
 
-	<string name="pref_languages_category">Язык и страна</string>
+	<string name="pref_languages_filter_category">Язык и страна</string>
 	<string name="pref_title_preferred_regions">Страна</string>
 	<string name="pref_summary_preferred_regions">Выберите страну. Это нужно, чтобы правильно отбирать ролики в категорию \"Избранное\" (они различаются для разных стран).</string>
 

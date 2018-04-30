@@ -505,6 +505,7 @@
 	<string name="pref_key_brightness_level" translatable="false">pref_key_brightness_level</string>
 
 	<string name="pref_video_blocker_category">Video Blocker</string>
+	<string name="pref_channels_filter_category">Channels Filter</string>
 	<string name="pref_key_channel_blacklist" translatable="false">pref_key_channel_blacklist</string>
 	<string name="pref_title_channel_blacklist">Channel Blacklist</string>
 	<string name="pref_summary_channel_blacklist">Check the channels you want to unblock and leave the others unchecked.</string>
@@ -512,7 +513,7 @@
 	<string name="channel_blacklist_updated">Channel blacklist updated.  Please refresh videos.</string>
 	<string name="channel_blacklist_empty">Channel blacklist is empty.</string>
 
-	<string name="pref_languages_category">Languages &amp; Regions</string>
+	<string name="pref_languages_filter_category">Languages &amp; Regions Filter</string>
 	<string name="pref_title_preferred_regions">Preferred Region</string>
 	<string name="pref_key_preferred_region" translatable="false">pref_key_preferred_region</string>
 	<string name="pref_summary_preferred_regions">Select a preferred region. This is used to filter out videos in the \"Featured\" videos category.</string>
@@ -527,4 +528,26 @@
 	<string name="pref_key_lang_detection_video_filtering" translatable="false">pref_key_block_videos_lang_detection</string>
 	<string name="pref_summary_lang_detection_video_filtering">Use AI to detect the languages being used in videos and block them if their language is not equal to your preferred language(s).  Should only be enabled on high end devices.</string>
 	<string name="setting_updated">Setting updated.  Please refresh videos.</string>
+
+	<string name="pref_other_filters_category">Other Filter</string>
+	<string name="pref_title_low_views_filter">Low Views</string>
+	<string name="pref_key_low_views_filter" translatable="false">pref_key_low_views_filter</string>
+	<string name="pref_summary_low_views_filter">Filter out videos with low views: %s</string>
+	<string-array name="views_filtering_list">
+		<item>Disabled</item>
+		<item>&lt; 100 views</item>
+		<item>&lt; 500 views</item>
+		<item>&lt; 1,000 views</item>
+		<item>&lt; 5,000 views</item>
+		<item>&lt; 10,000 views</item>
+	</string-array>
+	<string name="views_filtering_disabled" translatable="false">-1</string>
+	<string-array name="views_filtering_values_list" translatable="false">
+		<item>@string/views_filtering_disabled</item>
+		<item>100</item>
+		<item>500</item>
+		<item>1000</item>
+		<item>5000</item>
+		<item>10000</item>
+	</string-array>
 </resources>

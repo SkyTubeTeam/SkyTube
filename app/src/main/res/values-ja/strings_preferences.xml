@@ -2,7 +2,7 @@
 <resources>
 	<string name="preferences">設定</string>
 
-	<string name="pref_languages_category">言語・地域</string>
+	<string name="pref_languages_filter_category">言語・地域</string>
 	<string name="pref_title_preferred_regions">お好みの地域</string>
 	<string name="pref_summary_preferred_regions">最寄りの地域を選択します。「おすすめ」ビデオのカテゴリーでビデオをフィルターする処理に使用されます。</string>
 

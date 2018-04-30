@@ -2,7 +2,7 @@
 <resources>
 	<string name="preferences">Preferencias</string>
 
-	<string name="pref_languages_category">Idiomas y regiones</string>
+	<string name="pref_languages_filter_category">Idiomas y regiones</string>
 	<string name="pref_title_preferred_regions">Región preferida</string>
 	<string name="pref_summary_preferred_regions">Selecciona una región preferida.  Esto se utiliza para filtrar vídeos en la categoría de Destacados.</string>
 

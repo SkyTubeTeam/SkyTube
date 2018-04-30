@@ -18,13 +18,18 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <MultiSelectListPreference
-        android:key="@string/pref_key_channel_blacklist"
-        android:title="@string/pref_title_channel_blacklist"
-        android:summary="@string/pref_summary_channel_blacklist" />
+	<PreferenceCategory
+		android:title="@string/pref_channels_filter_category">
+
+	    <MultiSelectListPreference
+	        android:key="@string/pref_key_channel_blacklist"
+	        android:title="@string/pref_title_channel_blacklist"
+	        android:summary="@string/pref_summary_channel_blacklist" />
+
+	</PreferenceCategory>
 
     <PreferenceCategory
-	    android:title="@string/pref_languages_category">
+	    android:title="@string/pref_languages_filter_category">
 
         <ListPreference
             android:key="@string/pref_key_preferred_region"
@@ -47,5 +52,18 @@
 	        android:defaultValue="false"/>
 
     </PreferenceCategory>
+
+	<PreferenceCategory
+		android:title="@string/pref_other_filters_category">
+
+		<ListPreference
+			android:key="@string/pref_key_low_views_filter"
+			android:title="@string/pref_title_low_views_filter"
+			android:summary="@string/pref_summary_low_views_filter"
+			android:entries="@array/views_filtering_list"
+			android:entryValues="@array/views_filtering_values_list"
+			android:defaultValue="@string/views_filtering_disabled"/>
+
+	</PreferenceCategory>
 
 </PreferenceScreen>

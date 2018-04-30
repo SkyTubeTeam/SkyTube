@@ -2,7 +2,7 @@
 <resources>
 	<string name="preferences">Preferencje</string>
 
-	<string name="pref_languages_category">Języki &amp; Regiony</string>
+	<string name="pref_languages_filter_category">Języki &amp; Regiony</string>
 	<string name="pref_title_preferred_regions">Preferowany region</string>
 	<string name="pref_summary_preferred_regions">Wybierz preferowany region.  Używane w celu filtrowania filmów w kategorii Polecane.</string>
 

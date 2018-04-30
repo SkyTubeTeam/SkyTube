@@ -32,6 +32,7 @@ import com.optimaize.langdetect.text.TextObject;
 import com.optimaize.langdetect.text.TextObjectFactory;
 
 import java.io.IOException;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -90,14 +91,16 @@ public class VideoBlocker {
 	 */
 	public List<YouTubeVideo> filter(List<YouTubeVideo> videosList) {
 		List<YouTubeVideo>  filteredVideosList = new ArrayList<>();
-		final List<String>  blockedChannelIds = BlockedChannelsDb.getBlockedChannelsDb().getBlockedChannelsListId();
+		final List<String>  blockedChannelIds  = BlockedChannelsDb.getBlockedChannelsDb().getBlockedChannelsListId();
 		// set of user's preferred ISO 639 language codes (regex)
 		final Set<String>   preferredLanguages = SkyTubeApp.getPreferenceManager().getStringSet(getStr(R.string.pref_key_preferred_languages), defaultPrefLanguages);
+		final BigInteger    minimumVideoViews  = getViewsFilteringValue();
 
 		for (YouTubeVideo video : videosList) {
 			if (!filterByBlacklistedChannels(video, blockedChannelIds)
 					&&  !filterByLanguage(video, preferredLanguages)
-					&&  !filterByLanguageDetection(video, preferredLanguages)) {
+					&&  !filterByLanguageDetection(video, preferredLanguages)
+					&&  !filterByViews(video, minimumVideoViews)) {
 				filteredVideosList.add(video);
 			}
 		}
@@ -109,12 +112,12 @@ public class VideoBlocker {
 	/**
 	 * Log filtered videos.
 	 *
-	 * @param video     Video being filtered.
-	 * @param criteria  Criteria (why being filtered - e.g. channel blocked).
-	 * @param reason    The criteria hit (e.g. ID of the channel blocked).
+	 * @param video         Video being filtered.
+	 * @param filteringType Criteria (why being filtered - e.g. channel blocked).
+	 * @param reason        The criteria hit (e.g. ID of the channel blocked).
 	 */
-	private void log(YouTubeVideo video, String criteria, String reason) {
-		Logger.i(this, "\uD83D\uDED1 VIDEO='%s'  |  CRITERIA='%s'  |  REASON='%s'", video.getTitle(), criteria, reason);
+	private void log(YouTubeVideo video, FilterType filteringType, String reason) {
+		Logger.i(this, "\uD83D\uDED1 VIDEO='%s'  |  FILTER='%s'  |  REASON='%s'", video.getTitle(), filteringType, reason);
 	}
 
 
@@ -128,7 +131,7 @@ public class VideoBlocker {
 	 */
 	private boolean filterByBlacklistedChannels(YouTubeVideo video, List<String> blacklistedChannelIds) {
 		if (blacklistedChannelIds.contains(video.getChannelId())) {
-			log(video, "channel blacklist", video.getChannelName());
+			log(video, FilterType.CHANNEL_BLACKLIST, video.getChannelName());
 			return true;
 		} else {
 			return false;
@@ -167,7 +170,7 @@ public class VideoBlocker {
 		}
 
 		// this video is undesirable, hence we are going to filter it
-		log(video, "language", video.getLanguage());
+		log(video, FilterType.LANGUAGE, video.getLanguage());
 		return true;
 	}
 
@@ -229,13 +232,59 @@ public class VideoBlocker {
 			Logger.e(this, "Exception caught while detecting language", tr);
 		}
 
-		log(video, "language-det", detectLanguageList.toString());
+		log(video, FilterType.LANGUAGE_DETECTION, detectLanguageList.toString());
 		return true;
+	}
+
+
+	/**
+	 * @return The views filtering value set by the user.
+	 */
+	private BigInteger getViewsFilteringValue() {
+		final  String viewsFiltering = SkyTubeApp.getPreferenceManager().getString(getStr(R.string.pref_key_low_views_filter), getStr(R.string.views_filtering_disabled));
+		return new BigInteger(viewsFiltering);
+	}
+
+
+	/**
+	 * Filter videos by minimum views.  I.e. if videos has less than minimumVideoViews, then filter
+	 * it out.
+	 *
+	 * @param video             Video being processed.
+	 * @param minimumVideoViews The minimum amount of views that a video should have as set by the
+	 *                          user.
+	 * @return True to filter out the video; false otherwise.
+	 */
+	private boolean filterByViews(YouTubeVideo video, BigInteger minimumVideoViews) {
+		// if the user has not enabled the view filtering (i.e. it is set as -1), then do not filter
+		// this video
+		if (minimumVideoViews.signum() < 0)
+			return false;
+
+		// if the video has less views than minimumVideoViews, then filter it out
+		if (video.getViewsCountInt().compareTo(minimumVideoViews) < 0) {
+			log(video, FilterType.VIEWS, String.format(getStr(R.string.views), video.getViewsCountInt()));
+			return true;
+		}
+
+		return false;
 	}
 
 
 
 	////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+	/**
+	 * The type of video filtering.
+	 */
+	public enum FilterType {
+		CHANNEL_BLACKLIST,
+		LANGUAGE,
+		LANGUAGE_DETECTION,
+		VIEWS,
+	}
+
 
 	/**
 	 * A singleton of objects used to detect languages.  This is required to improve the language

@@ -2,7 +2,7 @@
 <resources>
 	<string name="preferences">Einstellungen</string>
 
-	<string name="pref_languages_category">Sprachen &amp; Regionen</string>
+	<string name="pref_languages_filter_category">Sprachen &amp; Regionen</string>
 	<string name="pref_title_preferred_regions">Bevorzugte Region</string>
 	<string name="pref_summary_preferred_regions">
 		Wähle eine bevorzugte Region. Dies wird zum Filtern von Videos in der

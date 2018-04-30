@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources><string name="preferences">Instellingen</string>
 
-	<string name="pref_languages_category">Talen en regio\'s</string>
+	<string name="pref_languages_filter_category">Talen en regio\'s</string>
 	<string name="pref_title_preferred_regions">Voorkeursregio</string>
 	<string name="pref_summary_preferred_regions">Selecteer een voorkeursregio. Dit wordt gebruikt om video\'s te filteren in de \"Uitgelicht\"-categorie.</string>
 

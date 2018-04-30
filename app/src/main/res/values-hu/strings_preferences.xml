@@ -2,7 +2,7 @@
 <resources>
 	<string name="preferences">Beállítások</string>
 
-	<string name="pref_languages_category">Nyelvek és régiók</string>
+	<string name="pref_languages_filter_category">Nyelvek és régiók</string>
 	<string name="pref_title_preferred_regions">Preferált régiók</string>
 	<string name="pref_summary_preferred_regions">Válassz preferált régiót. Ez szűri a \"Kiemelt\" kategóriában mutatott videókat.</string>
 
