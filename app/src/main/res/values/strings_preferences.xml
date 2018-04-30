@@ -79,20 +79,24 @@
 	<string name="i_agree">I Agree</string>
 
 
+	<!-- extracted from  YouTube.com > 3 dot menu > Language -->
 	<string-array name="languages_names" translatable="false">
 		<item>Afrikaans</item>
 		<item>Azərbaycan</item>
 		<item>Bahasa Indonesia</item>
 		<item>Bahasa Malaysia</item>
+		<item>Bosanski</item>
 		<item>Català</item>
 		<item>Čeština</item>
 		<item>Dansk</item>
 		<item>Deutsch</item>
 		<item>Eesti</item>
+		<item>English (all)</item>
 		<item>English (UK)</item>
 		<item>English (US)</item>
 		<item>Español (España)</item>
 		<item>Español (Latinoamérica)</item>
+		<item>Español (US)</item>
 		<item>Euskara</item>
 		<item>Filipino</item>
 		<item>Français</item>
@@ -107,7 +111,7 @@
 		<item>Lietuvių</item>
 		<item>Magyar</item>
 		<item>Nederlands</item>
-		<item>Norsk bokmål</item>
+		<item>Norsk</item>
 		<item>O‘zbek</item>
 		<item>Polski</item>
 		<item>Português</item>
@@ -116,10 +120,12 @@
 		<item>Shqip</item>
 		<item>Slovenčina</item>
 		<item>Slovenščina</item>
+		<item>Srpski</item>
 		<item>Suomi</item>
 		<item>Svenska</item>
 		<item>Tiếng Việt</item>
 		<item>Türkçe</item>
+		<item>Беларуская</item>
 		<item>Български</item>
 		<item>Кыргызча</item>
 		<item>Қазақ Тілі</item>
@@ -158,20 +164,24 @@
 		<item>한국어</item>
 	</string-array>
 
+	<!-- extracted from:  https://developers.google.com/youtube/v3/docs/i18nLanguages/list -->
 	<string-array name="languages_iso639_codes" translatable="false">
 		<item>af</item>
 		<item>az</item>
 		<item>id</item>
 		<item>ms</item>
+		<item>bs</item>
 		<item>ca</item>
 		<item>cs</item>
 		<item>da</item>
 		<item>de</item>
 		<item>et</item>
+		<item>"en(?:-.+)?"</item>	<!-- "en" or "en-US" or "en-CA" ... -->
 		<item>en-GB</item>
 		<item>"en(?:-US)?"</item>	<!-- "en" or "en-US" -->
 		<item>es</item>
 		<item>es-419</item>
+		<item>es-US</item>
 		<item>eu</item>
 		<item>fil</item>
 		<item>fr</item>
@@ -195,10 +205,12 @@
 		<item>sq</item>
 		<item>sk</item>
 		<item>sl</item>
+		<item>sr-Latn</item>
 		<item>fi</item>
 		<item>sv</item>
 		<item>vi</item>
 		<item>tr</item>
+		<item>be</item>
 		<item>bg</item>
 		<item>ky</item>
 		<item>kk</item>
