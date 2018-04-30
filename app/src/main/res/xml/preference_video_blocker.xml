@@ -40,6 +40,12 @@
             android:summary="@string/pref_summary_preferred_languages"
             android:defaultValue="@array/languages_iso639_codes"/>	<!-- no language shall be filtered out by DEFAULT -->
 
+        <CheckBoxPreference
+	        android:key="@string/pref_key_lang_detection_video_filtering"
+	        android:title="@string/pref_title_lang_detection_video_filtering"
+	        android:summary="@string/pref_summary_lang_detection_video_filtering"
+	        android:defaultValue="false"/>
+
     </PreferenceCategory>
 
 </PreferenceScreen>

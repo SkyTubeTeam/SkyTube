@@ -185,15 +185,21 @@ public class VideoBlocker {
 		final String text = video.getTitle().toLowerCase();
 		List<String> detectLanguageList = new ArrayList<>();
 
+		// if the user does not want to block videos based on artificial language detection, then do
+		// not filter the video
+		if (!SkyTubeApp.getPreferenceManager().getBoolean(getStr(R.string.pref_key_lang_detection_video_filtering), false))
+			return false;
+
 		// if there are no preferred languages, then it means we must not filter this video
 		if (preferredLanguages.isEmpty())
 			return false;
 
 		try {
 			// detect language
-			TextObject textObject = LanguageDetectionFactory.get().getTextObjectFactory().forText(text);
-			Optional<LdLocale> lang = LanguageDetectionFactory.get().getLanguageDetector().detect(textObject);
+			TextObject textObject = LanguageDetectionSingleton.get().getTextObjectFactory().forText(text);
+			Optional<LdLocale> lang = LanguageDetectionSingleton.get().getLanguageDetector().detect(textObject);
 
+			// if the confidence in the language detection is 100%, then ...
 			if (lang.isPresent()) {
 				final String langDetected = lang.get().getLanguage();
 
@@ -205,7 +211,8 @@ public class VideoBlocker {
 						return false;
 				}
 			} else {
-				List<DetectedLanguage> detectedLangList = LanguageDetectionFactory.get().getLanguageDetector().getProbabilities(text);
+				// else if the library is not 100% that the language detected is the correct one...
+				List<DetectedLanguage> detectedLangList = LanguageDetectionSingleton.get().getLanguageDetector().getProbabilities(text);
 
 				for (DetectedLanguage detectedLanguage : detectedLangList) {
 					String langDetected = detectedLanguage.getLocale().getLanguage();
@@ -230,42 +237,46 @@ public class VideoBlocker {
 
 	////////////////////////////////////////////////////////////////////////////////////////////////
 
-	private static class LanguageDetectionFactory {
+	/**
+	 * A singleton of objects used to detect languages.  This is required to improve the language
+	 * detection performance...
+	 */
+	private static class LanguageDetectionSingleton {
 
-		private static LanguageDetectionFactory languageDetectionFactory = null;
+		private static LanguageDetectionSingleton languageDetectionSingleton = null;
 		private TextObjectFactory textObjectFactory;
 		private LanguageDetector  languageDetector;
 
 
-		private LanguageDetectionFactory() throws IOException {
-			//load all languages:
+		private LanguageDetectionSingleton() throws IOException {
+			// load all languages
 			List<LanguageProfile> languageProfiles = new LanguageProfileReader().readAllBuiltIn();
 
-			//build language detector:
+			// build language detector
 			languageDetector = LanguageDetectorBuilder.create(NgramExtractors.standard())
 					.withProfiles(languageProfiles)
 					.build();
 
-			//create a text object factory
+			// create a text object factory
 			textObjectFactory = CommonTextObjectFactories.forDetectingShortCleanText();
 		}
 
 
-		public static LanguageDetectionFactory get() throws IOException {
-			if (languageDetectionFactory == null) {
-				languageDetectionFactory = new LanguageDetectionFactory();
+		public static LanguageDetectionSingleton get() throws IOException {
+			if (languageDetectionSingleton == null) {
+				languageDetectionSingleton = new LanguageDetectionSingleton();
 			}
 
-			return languageDetectionFactory;
+			return languageDetectionSingleton;
 		}
 
 
-		public TextObjectFactory getTextObjectFactory() {
+		TextObjectFactory getTextObjectFactory() {
 			return textObjectFactory;
 		}
 
 
-		public LanguageDetector getLanguageDetector() {
+		LanguageDetector getLanguageDetector() {
 			return languageDetector;
 		}
 

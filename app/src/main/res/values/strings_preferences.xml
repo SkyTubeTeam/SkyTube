@@ -2,15 +2,6 @@
 <resources>
 	<string name="preferences">Preferences</string>
 
-	<string name="pref_languages_category">Languages &amp; Regions</string>
-	<string name="pref_title_preferred_regions">Preferred Region</string>
-	<string name="pref_key_preferred_region" translatable="false">pref_key_preferred_region</string>
-	<string name="pref_summary_preferred_regions">Select a preferred region. This is used to filter out videos in the \"Featured\" videos category.</string>
-
-	<string name="pref_title_preferred_languages">Preferred Language(s)</string>
-	<string name="pref_key_preferred_languages" translatable="false">pref_key_preferred_languages</string>
-	<string name="pref_summary_preferred_languages">Experimental: Select one or more preferred languages. This is used to filter out videos in the \"Most Popular\" video category and for video searches.</string>
-
 	<string name="pref_video_player_category">Video Player</string>
 	<string name="pref_title_preferred_res">Preferred Resolution</string>
 	<string name="pref_key_preferred_res" translatable="false">pref_preferred_resolution</string>
@@ -518,8 +509,22 @@
 	<string name="pref_title_channel_blacklist">Channel Blacklist</string>
 	<string name="pref_summary_channel_blacklist">Check the channels you want to unblock and leave the others unchecked.</string>
 	<string name="unblock_button">Unblock</string>
-	<string name="channel_blacklist_updated">Channel blacklist updated.  Please refresh.</string>
+	<string name="channel_blacklist_updated">Channel blacklist updated.  Please refresh videos.</string>
 	<string name="channel_blacklist_empty">Channel blacklist is empty.</string>
+
+	<string name="pref_languages_category">Languages &amp; Regions</string>
+	<string name="pref_title_preferred_regions">Preferred Region</string>
+	<string name="pref_key_preferred_region" translatable="false">pref_key_preferred_region</string>
+	<string name="pref_summary_preferred_regions">Select a preferred region. This is used to filter out videos in the \"Featured\" videos category.</string>
+
+	<string name="pref_title_preferred_languages">Preferred Language(s)</string>
+	<string name="pref_key_preferred_languages" translatable="false">pref_key_preferred_languages</string>
+	<string name="pref_summary_preferred_languages">Select your preferred languages.</string>
 	<string name="no_preferred_lang_selected">No preferred language selected.  Setting ignored.</string>
-	<string name="preferred_lang_updated">Preferred language updated.  Please refresh.</string>
+	<string name="preferred_lang_updated">Preferred language updated.  Please refresh videos.</string>
+
+	<string name="pref_title_lang_detection_video_filtering">Language Detection Video Filtering</string>
+	<string name="pref_key_lang_detection_video_filtering" translatable="false">pref_key_block_videos_lang_detection</string>
+	<string name="pref_summary_lang_detection_video_filtering">Use AI to detect the languages being used in videos and block them if their language is not equal to your preferred language(s).  Should only be enabled on high end devices.</string>
+	<string name="setting_updated">Setting updated.  Please refresh videos.</string>
 </resources>
