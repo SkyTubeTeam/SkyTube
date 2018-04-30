@@ -529,8 +529,8 @@
 	<string name="pref_summary_lang_detection_video_filtering">Use AI to detect the languages being used in videos and block them if their language is not equal to your preferred language(s).  Should only be enabled on high end devices.</string>
 	<string name="setting_updated">Setting updated.  Please refresh videos.</string>
 
-	<string name="pref_other_filters_category">Other Filter</string>
-	<string name="pref_title_low_views_filter">Low Views</string>
+	<string name="pref_other_filters_category">Other Filters</string>
+	<string name="pref_title_low_views_filter">Views</string>
 	<string name="pref_key_low_views_filter" translatable="false">pref_key_low_views_filter</string>
 	<string name="pref_summary_low_views_filter">Filter out videos with low views: %s</string>
 	<string-array name="views_filtering_list">
@@ -549,5 +549,30 @@
 		<item>1000</item>
 		<item>5000</item>
 		<item>10000</item>
+	</string-array>
+
+	<string name="pref_title_dislikes_filter">Dislikes</string>
+	<string name="pref_key_dislikes_filter" translatable="false">pref_key_low_likes_filter</string>
+	<string name="pref_summary_dislikes_filter">Filter out videos with high dislikes: %s</string>
+	<string-array name="dislikes_filtering_list">
+		<item>Disabled</item>
+		<item>&gt; 40% dislikes</item>
+		<item>&gt; 50% dislikes</item>
+		<item>&gt; 60% dislikes</item>
+		<item>&gt; 70% dislikes</item>
+		<item>&gt; 80% dislikes</item>
+		<item>&gt; 90% dislikes</item>
+		<item>&gt; 100% dislikes</item>
+	</string-array>
+	<string name="dislikes_filtering_disabled" translatable="false">@string/views_filtering_disabled</string>
+	<string-array name="dislikes_filtering_values_list" translatable="false">
+		<item>@string/dislikes_filtering_disabled</item>
+		<item>40</item>
+		<item>50</item>
+		<item>60</item>
+		<item>70</item>
+		<item>80</item>
+		<item>90</item>
+		<item>100</item>
 	</string-array>
 </resources>

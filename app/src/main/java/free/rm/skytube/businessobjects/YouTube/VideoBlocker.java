@@ -90,17 +90,19 @@ public class VideoBlocker {
 	 * @return  A list of valid videos that fit the user's criteria.
 	 */
 	public List<YouTubeVideo> filter(List<YouTubeVideo> videosList) {
-		List<YouTubeVideo>  filteredVideosList = new ArrayList<>();
-		final List<String>  blockedChannelIds  = BlockedChannelsDb.getBlockedChannelsDb().getBlockedChannelsListId();
+		List<YouTubeVideo>  filteredVideosList   = new ArrayList<>();
+		final List<String>  blockedChannelIds    = BlockedChannelsDb.getBlockedChannelsDb().getBlockedChannelsListId();
 		// set of user's preferred ISO 639 language codes (regex)
-		final Set<String>   preferredLanguages = SkyTubeApp.getPreferenceManager().getStringSet(getStr(R.string.pref_key_preferred_languages), defaultPrefLanguages);
-		final BigInteger    minimumVideoViews  = getViewsFilteringValue();
+		final Set<String>   preferredLanguages   = SkyTubeApp.getPreferenceManager().getStringSet(getStr(R.string.pref_key_preferred_languages), defaultPrefLanguages);
+		final BigInteger    minimumVideoViews    = getViewsFilteringValue();
+		final int           minimumVideoDislikes = getDislikesFilteringValue();
 
 		for (YouTubeVideo video : videosList) {
 			if (!filterByBlacklistedChannels(video, blockedChannelIds)
 					&&  !filterByLanguage(video, preferredLanguages)
 					&&  !filterByLanguageDetection(video, preferredLanguages)
-					&&  !filterByViews(video, minimumVideoViews)) {
+					&&  !filterByViews(video, minimumVideoViews)
+					&&  !filterByDislikes(video, minimumVideoDislikes)) {
 				filteredVideosList.add(video);
 			}
 		}
@@ -247,12 +249,13 @@ public class VideoBlocker {
 
 
 	/**
-	 * Filter videos by minimum views.  I.e. if videos has less than minimumVideoViews, then filter
-	 * it out.
+	 * Filter videos by minimum views.  I.e. if videos has less views than minimumVideoViews, then
+	 * filter it out.
 	 *
 	 * @param video             Video being processed.
 	 * @param minimumVideoViews The minimum amount of views that a video should have as set by the
 	 *                          user.
+	 *
 	 * @return True to filter out the video; false otherwise.
 	 */
 	private boolean filterByViews(YouTubeVideo video, BigInteger minimumVideoViews) {
@@ -264,6 +267,47 @@ public class VideoBlocker {
 		// if the video has less views than minimumVideoViews, then filter it out
 		if (video.getViewsCountInt().compareTo(minimumVideoViews) < 0) {
 			log(video, FilterType.VIEWS, String.format(getStr(R.string.views), video.getViewsCountInt()));
+			return true;
+		}
+
+		return false;
+	}
+
+
+	/**
+	 * @return The dislikes filtering value set by the user.
+	 */
+	private int getDislikesFilteringValue() {
+		final  String dislikesFiltering = SkyTubeApp.getPreferenceManager().getString(getStr(R.string.pref_key_dislikes_filter), getStr(R.string.dislikes_filtering_disabled));
+		return Integer.parseInt(dislikesFiltering);
+	}
+
+
+	/**
+	 * Filter videos by dislikes.  I.e. if videos has more dislikes than minimumVideoDislikes, then
+	 * filter it out.
+	 *
+	 * @param video                 Video being processed.
+	 * @param minimumVideoDislikes  The minimum amount of dislikes that a video should have as set
+	 *                              by the user.
+	 *
+	 * @return True to filter out the video; false otherwise.
+	 */
+	private boolean filterByDislikes(YouTubeVideo video, int minimumVideoDislikes) {
+		// if the user has not enabled the dislikes filtering (i.e. it is set as -1), then do not
+		// filter this video
+		if (minimumVideoDislikes < 0)
+			return false;
+
+		// a video may not allow users to like/dislike...
+		if (video.getThumbsUpPercentage() == -1)
+			return false;
+
+		final int dislikesPercentage = 100 - video.getThumbsUpPercentage();
+
+		// if the video has more dislikes than minimumVideoDislikes, then filter it out
+		if (dislikesPercentage >= minimumVideoDislikes) {
+			log(video, FilterType.DISLIKES, String.format(getStr(R.string.dislikes), dislikesPercentage));
 			return true;
 		}
 
@@ -283,6 +327,7 @@ public class VideoBlocker {
 		LANGUAGE,
 		LANGUAGE_DETECTION,
 		VIEWS,
+		DISLIKES,
 	}
 
 

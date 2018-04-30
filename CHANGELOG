@@ -1,7 +1,11 @@
 vX.XX - XX XX 2018:
 	* Added search history:  search history is stored and used as suggestions for future searches.  This feature can be disabled.
 	* Volume and brightness swipe controls.
-	* Channel blocking.
+	* Video Blocker:
+		- Channel blocking;
+		- Block video if their language is not the same as the user's preferred one(s);
+		- Low views video blocking;
+		- High dislikes video blocking.
 	* Exoplayer support.
     * YouTube's videos and playlists links inside the video description are now handled and opened inside SkyTube.
     * New launcher icon.
