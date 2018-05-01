@@ -47,9 +47,11 @@ import free.rm.skytube.businessobjects.YouTube.Tasks.GetYouTubeChannelInfoTask;
 import free.rm.skytube.businessobjects.YouTube.VideoBlocker;
 import free.rm.skytube.businessobjects.YouTube.VideoStream.StreamMetaData;
 import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
+import free.rm.skytube.businessobjects.db.PlaybackStatusDb;
 import free.rm.skytube.businessobjects.db.Tasks.CheckIfUserSubbedToChannelTask;
 import free.rm.skytube.businessobjects.db.Tasks.IsVideoBookmarkedTask;
 import free.rm.skytube.businessobjects.interfaces.GetDesiredStreamListener;
+import free.rm.skytube.businessobjects.interfaces.YouTubePlayerFragmentInterface;
 import free.rm.skytube.gui.activities.MainActivity;
 import free.rm.skytube.gui.activities.ThumbnailViewerActivity;
 import free.rm.skytube.gui.businessobjects.MediaControllerEx;
@@ -64,7 +66,7 @@ import hollowsoft.slidingdrawer.SlidingDrawer;
 /**
  * A fragment that holds a standalone YouTube player.
  */
-public class YouTubePlayerFragment extends ImmersiveModeFragment implements MediaPlayer.OnPreparedListener, YouTubeVideoListener {
+public class YouTubePlayerFragment extends ImmersiveModeFragment implements MediaPlayer.OnPreparedListener, YouTubeVideoListener, YouTubePlayerFragmentInterface {
 
 	public static final String YOUTUBE_VIDEO_OBJ = "YouTubePlayerFragment.yt_video_obj";
 
@@ -188,11 +190,12 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 				return false;
 			}
 		});
+
 		// play the video once its loaded
 		videoView.setOnPreparedListener(this);
 
 		// setup the media controller (will control the video playing/pausing)
-		mediaController = new MediaControllerEx(getActivity(), videoView);
+		mediaController = new MediaControllerEx(getActivity(), videoView, this);
 		// ensure that the mediaController is always above the NavBar (given that the NavBar can
 		// be in immersive mode)
 		if (userWantsImmersiveMode()) {
@@ -460,8 +463,27 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 			videoDescRatingsDisabledTextView.setVisibility(View.VISIBLE);
 		}
 
-		// load the video
-		loadVideo();
+		// If Playback Status is not disabled and this video is in progress, ask the user if they would like to resume.
+		if(!SkyTubeApp.getPreferenceManager().getBoolean(getString(R.string.pref_key_disable_playback_status), false) && PlaybackStatusDb.getVideoDownloadsDb().getVideoWatchedStatus(youTubeVideo).position > 0) {
+			new AlertDialog.Builder(getActivity())
+							.setTitle(R.string.should_resume)
+							.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									videoCurrentPosition = (int)PlaybackStatusDb.getVideoDownloadsDb().getVideoWatchedStatus(youTubeVideo).position;
+									loadVideo();
+								}
+							})
+							.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialogInterface, int i) {
+									loadVideo();
+								}
+							})
+							.show();
+		} else {
+			loadVideo();
+		}
 	}
 
 
@@ -911,5 +933,15 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 		}
 
 		return url;
+	}
+
+	@Override
+	public void videoPlaybackStopped() {
+		int position = videoView.getCurrentPosition();
+		videoView.pause();
+		videoView.stopPlayback();
+		if(!SkyTubeApp.getPreferenceManager().getBoolean(getString(R.string.pref_key_disable_playback_status), false)) {
+			PlaybackStatusDb.getVideoDownloadsDb().setVideoPosition(youTubeVideo, position);
+		}
 	}
 }

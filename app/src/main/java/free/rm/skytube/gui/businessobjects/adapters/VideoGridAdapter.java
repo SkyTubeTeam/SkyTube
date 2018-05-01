@@ -58,6 +58,8 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<YouTubeVideo, GridVi
 	/** Holds a progress bar */
 	private SwipeRefreshLayout      swipeRefreshLayout = null;
 
+	private GridViewHolder activeGridViewHolder;
+
 	private static final String TAG = VideoGridAdapter.class.getSimpleName();
 
 
@@ -144,9 +146,20 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<YouTubeVideo, GridVi
 	@Override
 	public GridViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 		View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.video_cell, parent, false);
-		return new GridViewHolder(v, listener, showChannelInfo);
+		final GridViewHolder gridViewHolder = new GridViewHolder(v, listener, showChannelInfo);
+		gridViewHolder.setGridViewHolderListener(new GridViewHolder.GridViewHolderListener() {
+			@Override
+			public void onClick() {
+				activeGridViewHolder = gridViewHolder;
+			}
+		});
+		return gridViewHolder;
 	}
 
+	public void refreshActiveGridViewHolder() {
+		if(activeGridViewHolder != null)
+			activeGridViewHolder.updateViewsData(getContext());
+	}
 
 	/**
 	 * Refresh the video grid, by running the task to get the videos again.

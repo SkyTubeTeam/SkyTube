@@ -28,6 +28,7 @@ import android.view.ViewGroup;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import free.rm.skytube.R;
+import free.rm.skytube.businessobjects.db.PlaybackStatusDb;
 import free.rm.skytube.gui.businessobjects.adapters.VideoGridAdapter;
 import free.rm.skytube.gui.fragments.VideosGridFragment;
 
@@ -59,6 +60,19 @@ public abstract class BaseVideosGridFragment extends TabFragment implements Swip
 		videoGridAdapter.refresh(true);
 	}
 
+	/**
+	 * When this Fragment resumes, refresh the active GridViewHolder (i.e. the one whose video was viewed, before returning to this Fragment), if defined.
+	 * Also, if the PlaybackStatusDb has been updated (due to clearing or disabling it), refresh the entire VideoGrid.
+	 */
+	@Override
+	public void onResume() {
+		super.onResume();
+		videoGridAdapter.refreshActiveGridViewHolder();
+		if(PlaybackStatusDb.isHasUpdated()) {
+			videoGridAdapter.notifyDataSetChanged();
+			PlaybackStatusDb.setHasUpdated(false);
+		}
+	}
 
 	/**
 	 * Set the layout resource (e.g. Subscriptions resource layout, R.id.grid_view, ...etc).

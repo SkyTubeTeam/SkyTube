@@ -31,6 +31,10 @@ import com.google.api.client.util.DateTime;
 import com.google.api.services.youtube.model.Thumbnail;
 import com.google.api.services.youtube.model.Video;
 
+import org.joda.time.Period;
+import org.joda.time.format.ISOPeriodFormat;
+import org.joda.time.format.PeriodFormatter;
+
 import java.io.File;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -93,6 +97,10 @@ public class YouTubeVideo implements Serializable {
 	 * Video duration string (e.g. "5:15").
 	 */
 	private String duration;
+	/**
+	 *  Video duration in seconds
+	 */
+	private int durationInSeconds = -1;
 	/**
 	 * Total views count.  This can be <b>null</b> if the video does not allow the user to
 	 * like/dislike it.  Format:  "<number> Views"
@@ -158,6 +166,7 @@ public class YouTubeVideo implements Serializable {
 		if (video.getContentDetails() != null) {
 			setDuration(video.getContentDetails().getDuration());
 			setIsLiveStream();
+			setDurationInSeconds(video.getContentDetails().getDuration());
 		}
 
 		if (video.getStatistics() != null) {
@@ -304,6 +313,10 @@ public class YouTubeVideo implements Serializable {
 		return duration;
 	}
 
+	public int getDurationInSeconds() {
+		return durationInSeconds;
+	}
+
 	/**
 	 * Sets the {@link #duration} by converts ISO 8601 duration to human readable string.
 	 *
@@ -323,6 +336,16 @@ public class YouTubeVideo implements Serializable {
 
 	public DateTime getPublishDate() {
 		return publishDate;
+	}
+
+	/*
+	 * Sets the {@link #durationInSeconds}
+	 * @param durationInSeconds The duration in seconds.
+	 */
+	public void setDurationInSeconds(String durationInSeconds) {
+		PeriodFormatter formatter = ISOPeriodFormat.standard();
+		Period p = formatter.parsePeriod(durationInSeconds);
+		this.durationInSeconds = p.toStandardSeconds().getSeconds();
 	}
 
 	/**

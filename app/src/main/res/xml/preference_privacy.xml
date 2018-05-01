@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ SkyTube
+  ~ Copyright (C) 2017  Ramon Mifsud
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation (version 3 of the License).
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+	<CheckBoxPreference
+		android:defaultValue="false"
+		android:key="@string/pref_key_disable_search_history"
+		android:title="@string/pref_title_disable_search_history"
+		android:summary="@string/pref_summary_disable_search_history"/>
+
+	<CheckBoxPreference
+		android:defaultValue="false"
+		android:key="@string/pref_key_disable_playback_status"
+		android:title="@string/pref_title_disable_playback_status"
+		android:summary="@string/pref_summary_disable_playback_status"/>
+
+	<PreferenceScreen
+		android:key="@string/pref_key_clear_playback_status"
+		android:title="@string/pref_title_clear_playback_status"
+		android:summary="@string/pref_summary_clear_playback_status"/>
+</PreferenceScreen>

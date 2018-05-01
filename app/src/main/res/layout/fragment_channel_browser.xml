@@ -29,7 +29,7 @@
 	<android.support.design.widget.AppBarLayout
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+		android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
 		<FrameLayout
 			android:layout_width="match_parent"

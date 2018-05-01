@@ -23,9 +23,11 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
+import android.view.MenuItem;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
+import free.rm.skytube.businessobjects.interfaces.YouTubePlayerFragmentInterface;
 import free.rm.skytube.gui.businessobjects.BackButtonActivity;
 import free.rm.skytube.gui.businessobjects.fragments.FragmentEx;
 import free.rm.skytube.gui.fragments.YouTubePlayerFragment;
@@ -38,6 +40,7 @@ import free.rm.skytube.gui.fragments.YouTubePlayerV2Fragment;
 public class YouTubePlayerActivity extends BackButtonActivity {
 
 	private FragmentEx videoPlayerFragment;
+	private YouTubePlayerFragmentInterface fragmentListener;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +59,12 @@ public class YouTubePlayerActivity extends BackButtonActivity {
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 		videoPlayerFragment = useDefaultPlayer ? new YouTubePlayerV2Fragment() : new YouTubePlayerFragment();
+		try {
+			fragmentListener = (YouTubePlayerFragmentInterface) videoPlayerFragment;
+		} catch(ClassCastException e) {
+			throw new ClassCastException(videoPlayerFragment.toString()
+							+ " must implement YouTubePlayerFragmentInterface");
+		}
 		fragmentTransaction.add(R.id.fragment_container, videoPlayerFragment);
 		fragmentTransaction.commit();
 	}
@@ -107,5 +116,20 @@ public class YouTubePlayerActivity extends BackButtonActivity {
 		if (videoPlayerFragment instanceof YouTubePlayerV2Fragment) {
 			((YouTubePlayerV2Fragment) videoPlayerFragment).onMenuClosed();
 		}
+	}
+
+	@Override
+	public void onBackPressed() {
+		fragmentListener.videoPlaybackStopped();
+		super.onBackPressed();
+	}
+
+	// If the back button in the toolbar is hit, save the video's progress (if playback history is not disabled)
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if(item.getItemId() == android.R.id.home) {
+			fragmentListener.videoPlaybackStopped();
+		}
+		return super.onOptionsItemSelected(item);
 	}
 }

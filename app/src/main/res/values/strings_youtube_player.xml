@@ -23,6 +23,9 @@
 	<string name="copy_url">Copy URL</string>
 	<string name="url_copied_to_clipboard">URL copied to clipboard.</string>
 
+	<string name="mark_watched">Mark Watched</string>
+	<string name="mark_unwatched">Mark Unwatched</string>
+
 	<string name="error_get_comments">An error has occurred while getting comments.</string>
 	<string name="no_video_comments">This video has no comments or comments are disabled.</string>
 	<string name="view_replies">View replies</string>
@@ -36,4 +39,6 @@
 	<string name="tutorial_comments_icon">Swipe to the left to view comments.</string>
 	<string name="tutorial_video_info_icon">Swipe to the top to view information about the video.</string>
 	<string name="tutorial_pause_video">Double tap to pause or play a video.</string>
+
+	<string name="should_resume">Do you wish to resume from where you stopped?</string>
 </resources>
