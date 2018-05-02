@@ -102,4 +102,14 @@
 	<string name="channel_blacklist_empty">Kanal-svartelisten er tom.</string>
 	<string name="no_preferred_lang_selected">Inget foretrukket språk valgt. Innstilling ignorert.</string>
 	<string name="preferred_lang_updated">Foretrukket språk oppdatert. Gjenoppfrisk.</string>
-</resources>
+<string name="pref_channels_filter_category">Kanalfilter</string>
+	<string name="pref_title_lang_detection_video_filtering">Videofiltrering av språkoppdagelse</string>
+	<string name="pref_summary_lang_detection_video_filtering">Bruk AI til å fastsette språk brukt i videoer og blokker dem hvis språket ikke samsvarer med dine foretrukne språk. Bør kun skrus på hvis du har en flaggskipsenhet.</string>
+	<string name="setting_updated">Innstilling oppdatert. Gjenoppfrisk videoer.</string>
+
+	<string name="pref_other_filters_category">Andre filter</string>
+	<string name="pref_title_low_views_filter">Visninger</string>
+	<string name="pref_summary_low_views_filter">Filtrer ut videoer med lave visningstall: %s</string>
+	<string name="pref_title_dislikes_filter">Liker ikke</string>
+	<string name="pref_summary_dislikes_filter">Filtrer ut videoer som mange ikke liker: %s</string>
+	</resources>
