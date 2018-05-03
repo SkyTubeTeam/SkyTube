@@ -116,4 +116,17 @@
 	<string name="pref_summary_low_views_filter">Filter video\'s met weinig weergaven: %s</string>
 	<string name="pref_title_dislikes_filter">Niet leuks</string>
 	<string name="pref_summary_dislikes_filter">Filter video\'s met veel niet leuks: %s</string>
-	</resources>
+	<string name="pref_blocked_channel_category">Geblokkeerde kanalen</string>
+	<string name="pref_title_blocked_channels_list">Geblokkeerde kanalen</string>
+	<string name="pref_summary_blocked_channels_list">Vink de kanalen aan die je wilt deblokkeren en laat de andere onaangevinkt.</string>
+
+	<string name="pref_privacy_category">Privacy</string>
+	<string name="pref_title_disable_playback_status">Afspeelstatus uitschakelen</string>
+	<string name="pref_summary_disable_playback_status">Als dit wordt aangevinkt, dan wordt de afspeelstatus gewist en zal niet worden gebruikt.</string>
+	<string name="pref_disable_playback_status_deleted">Afspeelstatus verwijderd.</string>
+
+	<string name="pref_title_clear_playback_status">Afspeelstatus wissen</string>
+	<string name="pref_summary_clear_playback_status">Afspeelstatus wissen voor alle video\'s.</string>
+	<string name="pref_playback_status_cleared">Afspeelstatus gewist.</string>
+
+</resources>
