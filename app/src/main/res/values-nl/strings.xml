@@ -19,4 +19,7 @@
 	<string name="video">Video</string>
     <string name="could_not_get_channel">Could not download channel information!</string>
 <string name="hello_blank_fragment">Hallo blanco fragment</string>
+    <string name="yes">Ja</string>
+	<string name="no">Nee</string>
+
     </resources>
