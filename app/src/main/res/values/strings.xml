@@ -17,6 +17,8 @@
     <string name="could_not_get_playlists">Could not get %s playlists.</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="loading">Loading …</string>
+	<string name="yes">Yes</string>
+	<string name="no">No</string>
 
     <!-- TODO: Remove or change this placeholder text -->
 

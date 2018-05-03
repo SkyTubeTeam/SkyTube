@@ -13,6 +13,15 @@
 		android:layout_height="wrap_content"
 		android:adjustViewBounds="true"
 		android:src="@drawable/thumbnail_default"/>
+	<ProgressBar
+		android:id="@+id/video_position_progress_bar"
+		style="?android:attr/progressBarStyleHorizontal"
+		android:layout_width="match_parent"
+		android:layout_height="4dp"
+		android:progressDrawable="@drawable/video_position_progress_bar"
+		android:visibility="invisible"
+		app:layout_constraintBottom_toTopOf="@id/channel_layout"
+		app:layout_constraintStart_toStartOf="parent"/>
 
 	<TextView
 		android:id="@+id/title_text_view"

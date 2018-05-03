@@ -26,6 +26,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -36,6 +37,8 @@ import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.YouTube.VideoBlocker;
 import free.rm.skytube.businessobjects.db.Tasks.IsVideoBookmarkedTask;
+import free.rm.skytube.businessobjects.db.PlaybackStatusDb;
+import free.rm.skytube.businessobjects.db.Tasks.IsVideoWatchedTask;
 import free.rm.skytube.gui.activities.ThumbnailViewerActivity;
 import free.rm.skytube.gui.businessobjects.MainActivityListener;
 import free.rm.skytube.gui.businessobjects.YouTubePlayer;
@@ -57,6 +60,7 @@ class GridViewHolder extends RecyclerView.ViewHolder {
 	private TextView publishDateTextView;
 	private ImageView thumbnailImageView;
 	private TextView viewsTextView;
+	private ProgressBar videoPositionProgressBar;
 
 
 	/**
@@ -77,6 +81,7 @@ class GridViewHolder extends RecyclerView.ViewHolder {
 		publishDateTextView = view.findViewById(R.id.publish_date_text_view);
 		thumbnailImageView = view.findViewById(R.id.thumbnail_image_view);
 		viewsTextView = view.findViewById(R.id.views_text_view);
+		videoPositionProgressBar = view.findViewById(R.id.video_position_progress_bar);
 
 		this.mainActivityListener = listener;
 		this.showChannelInfo = showChannelInfo;
@@ -85,6 +90,8 @@ class GridViewHolder extends RecyclerView.ViewHolder {
 			@Override
 			public void onClick(View thumbnailView) {
 				if (youTubeVideo != null) {
+					if(gridViewHolderListener != null)
+						gridViewHolderListener.onClick();
 					YouTubePlayer.launch(youTubeVideo, context);
 				}
 			}
@@ -120,31 +127,55 @@ class GridViewHolder extends RecyclerView.ViewHolder {
 		this.youTubeVideo = youTubeVideo;
 		this.context = context;
 		this.mainActivityListener = listener;
-		updateViewsData(this.youTubeVideo);
+		updateViewsData();
 	}
 
 
-	/**
-	 * This method will update the {@link View}s of this object reflecting the supplied video.
-	 *
-	 * @param video		{@link YouTubeVideo} instance.
-	 */
-	private void updateViewsData(YouTubeVideo video) {
-		titleTextView.setText(video.getTitle());
-		channelTextView.setText(showChannelInfo ? video.getChannelName() : "");
-		publishDateTextView.setText(video.getPublishDatePretty());
-		videoDurationTextView.setText(video.getDuration());
-		viewsTextView.setText(video.getViewsCount());
-		Glide.with(context)
-				.load(video.getThumbnailUrl())
-				.apply(new RequestOptions().placeholder(R.drawable.thumbnail_default))
-				.into(thumbnailImageView);
+	public void updateViewsData() {
+		updateViewsData(this.context);
+	}
 
-		if (video.getThumbsUpPercentageStr() != null) {
+	/**
+	 * This method will update the {@link View}s of this object reflecting this GridView's video.
+	 *
+	 * @param context			{@link Context} current context.
+	 */
+	public void updateViewsData(Context context) {
+		this.context = context;
+		titleTextView.setText(youTubeVideo.getTitle());
+		channelTextView.setText(showChannelInfo ? youTubeVideo.getChannelName() : "");
+		publishDateTextView.setText(youTubeVideo.getPublishDatePretty());
+		videoDurationTextView.setText(youTubeVideo.getDuration());
+		viewsTextView.setText(youTubeVideo.getViewsCount());
+		Glide.with(context)
+						.load(youTubeVideo.getThumbnailUrl())
+						.apply(new RequestOptions().placeholder(R.drawable.thumbnail_default))
+						.into(thumbnailImageView);
+
+		if (youTubeVideo.getThumbsUpPercentageStr() != null) {
 			thumbsUpPercentageTextView.setVisibility(View.VISIBLE);
-			thumbsUpPercentageTextView.setText(video.getThumbsUpPercentageStr());
+			thumbsUpPercentageTextView.setText(youTubeVideo.getThumbsUpPercentageStr());
 		} else {
 			thumbsUpPercentageTextView.setVisibility(View.INVISIBLE);
+		}
+
+		if(SkyTubeApp.getPreferenceManager().getBoolean(context.getString(R.string.pref_key_disable_playback_status), false)) {
+			videoPositionProgressBar.setVisibility(View.INVISIBLE);
+		} else {
+			PlaybackStatusDb.VideoWatchedStatus videoWatchedStatus = PlaybackStatusDb.getVideoDownloadsDb().getVideoWatchedStatus(youTubeVideo);
+			if (videoWatchedStatus.position > 0) {
+				videoPositionProgressBar.setVisibility(View.VISIBLE);
+				videoPositionProgressBar.setMax(youTubeVideo.getDurationInSeconds() * 1000);
+				videoPositionProgressBar.setProgress((int) videoWatchedStatus.position);
+			} else {
+				videoPositionProgressBar.setVisibility(View.INVISIBLE);
+			}
+
+			if (videoWatchedStatus.watched) {
+				videoPositionProgressBar.setVisibility(View.VISIBLE);
+				videoPositionProgressBar.setMax(youTubeVideo.getDurationInSeconds() * 1000);
+				videoPositionProgressBar.setProgress(youTubeVideo.getDurationInSeconds() * 1000);
+			}
 		}
 	}
 
@@ -156,6 +187,13 @@ class GridViewHolder extends RecyclerView.ViewHolder {
 		Menu menu = popupMenu.getMenu();
 		new IsVideoBookmarkedTask(youTubeVideo, menu).executeInParallel();
 
+		// If playback history is not disabled, see if this video has been watched. Otherwise, hide the "mark watched" & "mark unwatched" options from the menu.
+		if(!SkyTubeApp.getPreferenceManager().getBoolean(context.getString(R.string.pref_key_disable_playback_status), false)) {
+			new IsVideoWatchedTask(youTubeVideo, menu).executeInParallel();
+		} else {
+			popupMenu.getMenu().findItem(R.id.mark_watched).setVisible(false);
+			popupMenu.getMenu().findItem(R.id.mark_unwatched).setVisible(false);
+		}
 
 		if(youTubeVideo.isDownloaded()) {
 			popupMenu.getMenu().findItem(R.id.delete_download).setVisible(true);
@@ -181,6 +219,14 @@ class GridViewHolder extends RecyclerView.ViewHolder {
 						return true;
 					case R.id.copyurl:
 						youTubeVideo.copyUrl(context);
+						return true;
+					case R.id.mark_watched:
+						PlaybackStatusDb.getVideoDownloadsDb().setVideoWatchedStatus(youTubeVideo, true);
+						updateViewsData();
+						return true;
+					case R.id.mark_unwatched:
+						PlaybackStatusDb.getVideoDownloadsDb().setVideoWatchedStatus(youTubeVideo, false);
+						updateViewsData();
 						return true;
 					case R.id.bookmark_video:
 						youTubeVideo.bookmarkVideo(context, popupMenu.getMenu());
@@ -208,4 +254,16 @@ class GridViewHolder extends RecyclerView.ViewHolder {
 		popupMenu.show();
 	}
 
+	/**
+	 * Interface to alert a listener that this GridViewHolder has been clicked.
+	 */
+	public interface GridViewHolderListener {
+		void onClick();
+	}
+
+	private GridViewHolderListener gridViewHolderListener;
+
+	public void setGridViewHolderListener(GridViewHolderListener gridViewHolderListener) {
+		this.gridViewHolderListener = gridViewHolderListener;
+	}
 }

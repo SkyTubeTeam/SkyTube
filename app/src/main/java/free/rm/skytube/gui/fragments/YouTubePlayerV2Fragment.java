@@ -75,9 +75,11 @@ import free.rm.skytube.businessobjects.YouTube.Tasks.GetYouTubeChannelInfoTask;
 import free.rm.skytube.businessobjects.YouTube.VideoBlocker;
 import free.rm.skytube.businessobjects.YouTube.VideoStream.StreamMetaData;
 import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
+import free.rm.skytube.businessobjects.db.PlaybackStatusDb;
 import free.rm.skytube.businessobjects.db.Tasks.CheckIfUserSubbedToChannelTask;
 import free.rm.skytube.businessobjects.db.Tasks.IsVideoBookmarkedTask;
 import free.rm.skytube.businessobjects.interfaces.GetDesiredStreamListener;
+import free.rm.skytube.businessobjects.interfaces.YouTubePlayerFragmentInterface;
 import free.rm.skytube.gui.activities.MainActivity;
 import free.rm.skytube.gui.activities.ThumbnailViewerActivity;
 import free.rm.skytube.gui.businessobjects.PlayerViewGestureDetector;
@@ -90,13 +92,14 @@ import hollowsoft.slidingdrawer.SlidingDrawer;
 /**
  * A fragment that holds a standalone YouTube player (version 2).
  */
-public class YouTubePlayerV2Fragment extends ImmersiveModeFragment {
+public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements YouTubePlayerFragmentInterface {
 
 	private YouTubeVideo		youTubeVideo = null;
 	private YouTubeChannel      youTubeChannel = null;
 
 	private PlayerView          playerView;
 	private SimpleExoPlayer     player;
+	private long								playerInitialPosition = 0;
 
 	private Menu                menu = null;
 
@@ -259,7 +262,27 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment {
 			videoDescRatingsDisabledTextView.setVisibility(View.VISIBLE);
 		}
 
-		loadVideo();
+
+		if(!SkyTubeApp.getPreferenceManager().getBoolean(getString(R.string.pref_key_disable_playback_status), false) && PlaybackStatusDb.getVideoDownloadsDb().getVideoWatchedStatus(youTubeVideo).position > 0) {
+			new AlertDialog.Builder(getActivity())
+				.setTitle(R.string.should_resume)
+				.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						playerInitialPosition = PlaybackStatusDb.getVideoDownloadsDb().getVideoWatchedStatus(youTubeVideo).position;
+						loadVideo();
+					}
+				})
+				.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialogInterface, int i) {
+						loadVideo();
+					}
+				})
+				.show();
+		} else {
+			loadVideo();
+		}
 	}
 
 
@@ -349,6 +372,8 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment {
 		ExtractorMediaSource.Factory extMediaSourceFactory = new ExtractorMediaSource.Factory(dataSourceFactory);
 		ExtractorMediaSource mediaSource = extMediaSourceFactory.createMediaSource(videoUri);
 		player.prepare(mediaSource);
+		if(playerInitialPosition > 0)
+			player.seekTo(playerInitialPosition);
 	}
 
 
@@ -854,4 +879,11 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment {
 
 	}
 
+	@Override
+	public void videoPlaybackStopped() {
+		player.stop();
+		if(!SkyTubeApp.getPreferenceManager().getBoolean(getString(R.string.pref_key_disable_playback_status), false)) {
+			PlaybackStatusDb.getVideoDownloadsDb().setVideoPosition(youTubeVideo, player.getCurrentPosition());
+		}
+	}
 }

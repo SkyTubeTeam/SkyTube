@@ -43,6 +43,12 @@
 	</header>
 
 	<header
+		android:fragment="free.rm.skytube.gui.fragments.preferences.PrivacyPreferenceFragment"
+		android:icon="@drawable/ic_pref_privacy"
+		android:title="@string/pref_privacy_category">
+	</header>
+
+	<header
 		android:fragment="free.rm.skytube.gui.fragments.preferences.AboutPreferenceFragment"
 		android:icon="@drawable/ic_pref_about"
 		android:title="@string/pref_about_category">
