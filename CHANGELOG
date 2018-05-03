@@ -7,6 +7,7 @@ vX.XX - XX XX 2018:
 		- Low views video blocking;
 		- High dislikes video blocking.
 	* Exoplayer support.
+	* App now gives the user the option to resume playing (previously) partially watched videos.
     * YouTube's videos and playlists links inside the video description are now handled and opened inside SkyTube.
     * New launcher icon.
     * Subscribed channels can now be sorted alphabetically.
