@@ -41,10 +41,39 @@ public class MultiSelectListPreferenceDialog extends SkyTubeMaterialDialog {
 	private MultiSelectListPreferenceAdapter listAdapter;
 
 
-	public MultiSelectListPreferenceDialog(@NonNull Context context, List<MultiSelectListPreferenceItem> items) {
+	public MultiSelectListPreferenceDialog(@NonNull Context context) {
 		super(context);
-		listAdapter = new MultiSelectListPreferenceAdapter(items);
+
+		// set the custom view to be placed inside this dialog
 		customView(R.layout.subs_youtube_import_dialog_list, false);
+	}
+
+
+	public MultiSelectListPreferenceDialog(@NonNull Context context, List<MultiSelectListPreferenceItem> items) {
+		this(context);
+		setItems(items);
+	}
+
+
+	/**
+	 * Set items to be displayed in this dialog.
+	 *
+	 * @param items A list of items to be displayed.
+	 */
+	public void setItems(List<MultiSelectListPreferenceItem> items) {
+		listAdapter = new MultiSelectListPreferenceAdapter(items);
+	}
+
+
+	/**
+	 * Add an item to this adapter.  Will fail if the item has already been added.
+	 *
+	 * @param item  Item to add.
+	 *
+	 * @return True if successful; false if the item is already stored in this adapter.
+	 */
+	public boolean addItem(MultiSelectListPreferenceItem item) {
+		return listAdapter.addItem(item);
 	}
 
 
@@ -72,6 +101,14 @@ public class MultiSelectListPreferenceDialog extends SkyTubeMaterialDialog {
 		});
 
 		return materialDialog;
+	}
+
+
+	/**
+	 * @return A set of items that are selected/checked by the user.
+	 */
+	public List<MultiSelectListPreferenceItem> getSelectedItems() {
+		return listAdapter.getSelectedItems();
 	}
 
 

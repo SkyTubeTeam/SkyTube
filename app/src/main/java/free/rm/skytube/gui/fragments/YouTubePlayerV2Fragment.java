@@ -99,7 +99,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 
 	private PlayerView          playerView;
 	private SimpleExoPlayer     player;
-	private long								playerInitialPosition = 0;
+	private long				playerInitialPosition = 0;
 
 	private Menu                menu = null;
 
@@ -452,7 +452,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 				return true;
 
 			case R.id.block_channel:
-				VideoBlocker.blacklistChannel(youTubeVideo);
+				VideoBlocker.blockChannel(youTubeChannel.getId(), youTubeChannel.getTitle());
 
 			default:
 				return super.onOptionsItemSelected(item);

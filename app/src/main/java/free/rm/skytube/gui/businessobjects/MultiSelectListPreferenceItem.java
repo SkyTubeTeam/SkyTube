@@ -14,9 +14,13 @@ public class MultiSelectListPreferenceItem {
 	public boolean isChecked;
 
 	public MultiSelectListPreferenceItem(String id, String text) {
+		this(id, text, true);
+	}
+
+	public MultiSelectListPreferenceItem(String id, String text, boolean isChecked) {
 		this.id = id;
 		this.text = text;
-		this.isChecked = true;
+		this.isChecked = isChecked;
 	}
 
 }

@@ -4,7 +4,7 @@
 
 	<string name="pref_languages_filter_category">Línguas e regiões</string>
 	<string name="pref_title_preferred_regions">Região preferida</string>
-	<string name="pref_summary_preferred_regions">Selecione a região preferida. Será usada para filtrar vídeos na categoria de vídeos \"Destaque\".</string>
+	<string name="pref_summary_preferred_regions">Selecione a região preferida. Será usada para filtrar vídeos na categoria de vídeos \"Destaque\":  %s</string>
 
 	<string name="pref_title_preferred_languages">Língua(s) preferida(s)</string>
 	<string name="pref_summary_preferred_languages">Experimental: Selecione uma ou mais línguas preferidas. Será usada para filtrar vídeos na categoria de vídeo \"Mais popular\" e para pesquisas de vídeo.</string>

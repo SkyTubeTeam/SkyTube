@@ -512,19 +512,51 @@
 	<string name="pref_summary_subscriptions_alphabetical_order">If checked, Subscribed Channels will be sorted alphabetically.</string>
 	<string name="pref_key_brightness_level" translatable="false">pref_key_brightness_level</string>
 
+	<!--
+		VIDEO BLOCKER
+	-->
 	<string name="pref_video_blocker_category">Video Blocker</string>
-	<string name="pref_channels_filter_category">Channels Filter</string>
+	<string name="pref_channels_filter_category">Channels Filters</string>
+
+	<string name="pref_key_channel_filter_method" translatable="false">pref_key_channel_filter_method</string>
+	<string name="pref_title_channel_filter_method">Channel Filter Method</string>
+	<string name="pref_summary_channel_filter_method">Select the channel filtering method:  %s</string>
+	<string name="disabled">Disabled</string>
+	<string-array name="channel_filtering_list">
+		<item>Channel Blacklisting</item>
+		<item>Channel Whitelisting</item>
+	</string-array>
+	<string name="channel_blacklisting_filtering" translatable="false">channel_blacklisting_filtering</string>
+	<string name="channel_whitelisting_filtering" translatable="false">channel_whitelisting_filtering</string>
+	<string-array name="channel_filtering_values_list" translatable="false">
+		<item>@string/channel_blacklisting_filtering</item>
+		<item>@string/channel_whitelisting_filtering</item>
+	</string-array>
+
 	<string name="pref_key_channel_blacklist" translatable="false">pref_key_channel_blacklist</string>
 	<string name="pref_title_channel_blacklist">Channel Blacklist</string>
-	<string name="pref_summary_channel_blacklist">Check the channels you want to unblock and leave the others unchecked.</string>
+	<string name="pref_summary_channel_blacklist">A list of blocked channels.</string>
 	<string name="unblock_button">Unblock</string>
 	<string name="channel_blacklist_updated">Channel blacklist updated.  Please refresh videos.</string>
 	<string name="channel_blacklist_empty">Channel blacklist is empty.</string>
 
-	<string name="pref_languages_filter_category">Languages &amp; Regions Filter</string>
+	<string name="pref_key_channel_whitelist" translatable="false">pref_key_channel_whitelist</string>
+	<string name="pref_title_channel_whitelist">Channel Whitelist</string>
+	<string name="pref_summary_channel_whitelist">A list of whitelisted channels.</string>
+	<string name="input_channel_url">Channel\'s URL to be whitelisted:</string>
+	<string name="add">Add</string>
+	<string name="block">Block</string>
+	<string name="please_wait">Please wait…</string>
+	<string name="channel_already_whitelisted">Channel already whitelisted.</string>
+	<string name="channel_whitelist_updated">Channel whitelisted.  Please refresh videos.</string>
+	<string name="channel_whitelist_update_failure">Failed to whitelist the given channel…</string>
+	<string name="channel_unwhitelist_success">Channel whitelist updated.  Please refresh videos.</string>
+	<string name="channel_unwhitelist_failure">Failed to unwhitelist the given channel(s)…</string>
+
+	<string name="pref_languages_filter_category">Languages &amp; Regions Filters</string>
 	<string name="pref_title_preferred_regions">Preferred Region</string>
 	<string name="pref_key_preferred_region" translatable="false">pref_key_preferred_region</string>
-	<string name="pref_summary_preferred_regions">Select a preferred region. This is used to filter out videos in the \"Featured\" videos category.</string>
+	<string name="pref_summary_preferred_regions">Select a preferred region. This is used to filter out videos in the \"Featured\" videos category:  %s</string>
 
 	<string name="pref_title_preferred_languages">Preferred Language(s)</string>
 	<string name="pref_key_preferred_languages" translatable="false">pref_key_preferred_languages</string>
@@ -542,7 +574,7 @@
 	<string name="pref_key_low_views_filter" translatable="false">pref_key_low_views_filter</string>
 	<string name="pref_summary_low_views_filter">Filter out videos with low views: %s</string>
 	<string-array name="views_filtering_list">
-		<item>Disabled</item>
+		<item>@string/disabled</item>
 		<item>&lt; 100 views</item>
 		<item>&lt; 500 views</item>
 		<item>&lt; 1,000 views</item>
@@ -563,7 +595,7 @@
 	<string name="pref_key_dislikes_filter" translatable="false">pref_key_low_likes_filter</string>
 	<string name="pref_summary_dislikes_filter">Filter out videos with high dislikes: %s</string>
 	<string-array name="dislikes_filtering_list">
-		<item>Disabled</item>
+		<item>@string/disabled</item>
 		<item>&gt; 40% dislikes</item>
 		<item>&gt; 50% dislikes</item>
 		<item>&gt; 60% dislikes</item>
@@ -583,11 +615,6 @@
 		<item>90</item>
 		<item>100</item>
 	</string-array>
-
-	<string name="pref_blocked_channel_category">Blocked Channels</string>
-	<string name="pref_key_blocked_channels_list" translatable="false">pref_blocked_channels_list_key</string>
-	<string name="pref_title_blocked_channels_list">Blocked Channels</string>
-	<string name="pref_summary_blocked_channels_list">Check the channels you want to unblock and leave the others unchecked.</string>
 
 	<string name="pref_privacy_category">Privacy</string>
 	<string name="pref_key_disable_search_history" translatable="false">pref_disable_search_history</string>
