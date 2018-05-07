@@ -743,7 +743,7 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 				return true;
 
             case R.id.block_channel:
-	            VideoBlocker.blacklistChannel(youTubeVideo);
+	            VideoBlocker.blockChannel(youTubeChannel.getId(), youTubeChannel.getTitle());
 
 			default:
 				return super.onOptionsItemSelected(item);

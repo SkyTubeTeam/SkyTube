@@ -25,6 +25,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -81,7 +82,42 @@ public class MultiSelectListPreferenceAdapter extends RecyclerView.Adapter<Multi
 
 
 	/**
-	 * @return A set of items that are selected/checked by the user.
+	 * Add an item to this adapter.  Will fail if the item has already been added.
+	 *
+	 * @param item  Item to add.
+	 *
+	 * @return True if successful; false if the item is already stored in this adapter.
+	 */
+	public boolean addItem(MultiSelectListPreferenceItem item) {
+		for (MultiSelectListPreferenceItem i : items) {
+			if (i.id.equals(item.id))
+				return false;
+		}
+
+		items.add(item);
+		notifyDataSetChanged();
+		return true;
+	}
+
+
+	/**
+	 * @return A list of items that are selected/checked by the user.
+	 */
+	public List<MultiSelectListPreferenceItem> getSelectedItems() {
+		List<MultiSelectListPreferenceItem> selectedItems = new ArrayList<>();
+
+		for (MultiSelectListPreferenceItem item : items) {
+			if (item.isChecked) {
+				selectedItems.add(item);
+			}
+		}
+
+		return selectedItems;
+	}
+
+
+	/**
+	 * @return A set of IDs that are selected/checked by the user.
 	 */
 	public Set<String> getSelectedItemsIds() {
 		Set<String> selectedItems = new HashSet<>();

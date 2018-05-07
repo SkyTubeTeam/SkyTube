@@ -3,7 +3,7 @@
 
 	<string name="pref_languages_filter_category">Diller ve Bölgeler</string>
 	<string name="pref_title_preferred_regions">Tercih Edilen Bölge</string>
-	<string name="pref_summary_preferred_regions">Tercih edilen bölge seçiniz. Bu \"Önerilen\" videolar kategorisini süzmek için kullanılır.</string>
+	<string name="pref_summary_preferred_regions">Tercih edilen bölge seçiniz. Bu \"Önerilen\" videolar kategorisini süzmek için kullanılır:  %s</string>
 
 	<string name="pref_title_preferred_languages">Tercih Edilen Dil(ler)</string>
 	<string name="pref_summary_preferred_languages">DENEYSEL: Bir ya da daha fazla tercih edilen dil seçiniz. Bu \"En Popüler\" video kategorisi ve video aramaları için kullanılır.</string>

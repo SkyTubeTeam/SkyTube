@@ -4,7 +4,7 @@
 
 	<string name="pref_languages_filter_category">言語・地域</string>
 	<string name="pref_title_preferred_regions">お好みの地域</string>
-	<string name="pref_summary_preferred_regions">最寄りの地域を選択します。「おすすめ」ビデオのカテゴリーでビデオをフィルターする処理に使用されます。</string>
+	<string name="pref_summary_preferred_regions">最寄りの地域を選択します。「おすすめ」ビデオのカテゴリーでビデオをフィルターする処理に使用されます: %s</string>
 
 	<string name="pref_title_preferred_languages">お好みの言語</string>
 	<string name="pref_summary_preferred_languages">実験的: 1 つまたは複数の言語を選択します。「最も人気」のビデオカテゴリーで、ビデオを検索するために使用されます。</string>

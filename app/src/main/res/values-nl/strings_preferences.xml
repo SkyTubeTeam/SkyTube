@@ -3,7 +3,7 @@
 
 	<string name="pref_languages_filter_category">Talen en regio\'s</string>
 	<string name="pref_title_preferred_regions">Voorkeursregio</string>
-	<string name="pref_summary_preferred_regions">Selecteer een voorkeursregio. Dit wordt gebruikt om video\'s te filteren in de \"Uitgelicht\"-categorie.</string>
+	<string name="pref_summary_preferred_regions">Selecteer een voorkeursregio. Dit wordt gebruikt om video\'s te filteren in de \"Uitgelicht\"-categorie:  %s</string>
 
 	<string name="pref_title_preferred_languages">Voorkeursta(a)l(en)</string>
 	<string name="pref_summary_preferred_languages">Selecteer één of meer voorkeurstalen.</string>
