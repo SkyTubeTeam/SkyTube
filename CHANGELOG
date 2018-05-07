@@ -2,8 +2,9 @@ vX.XX - XX XX 2018:
 	* Added search history:  search history is stored and used as suggestions for future searches.  This feature can be disabled.
 	* Volume and brightness swipe controls.
 	* Video Blocker:
-		- Channel blocking;
-		- Block video if their language is not the same as the user's preferred one(s);
+		- Channel blacklisting;
+		- Channel whitelisting;
+		- Block videos if their language is not the same as the user's preferred one(s);
 		- Low views video blocking;
 		- High dislikes video blocking.
 	* Exoplayer support.
