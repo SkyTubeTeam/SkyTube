@@ -17,4 +17,7 @@
     <string name="hello_blank_fragment">哈囉！空白片段</string>
     <string name="loading">正在載入…</string>
 
+    <string name="yes">是</string>
+	<string name="no">否</string>
+
     </resources>
