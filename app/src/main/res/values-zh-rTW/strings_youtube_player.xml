@@ -35,4 +35,8 @@
 	<string name="tutorial_comments_icon">向左滑動即可檢視評論。</string>
 	<string name="tutorial_video_info_icon">向頂部滑動以檢視有關影片的資訊。</string>
 	<string name="tutorial_pause_video">輕點兩下可暫停或播放影片。</string>
+<string name="mark_watched">標記已觀看</string>
+	<string name="mark_unwatched">標記未觀看</string>
+
+	<string name="should_resume">您想從停止的地方恢復嗎？</string>
 </resources>
