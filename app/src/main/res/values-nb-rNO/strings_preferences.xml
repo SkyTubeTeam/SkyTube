@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources><string name="preferences">Innstillinger</string>
 
-	<string name="pref_languages_filter_category">Språk og regioner</string>
+	<string name="pref_languages_filter_category">Språk og regionfilter</string>
 	<string name="pref_title_preferred_regions">Foretrukket region</string>
 	<string name="pref_summary_preferred_regions">Velg en foretrukket region. Dette brukes til å filtrere ut videoer i \"Framhevet\"-kategorien:  %s</string>
 
 	<string name="pref_title_preferred_languages">Foretrukket/de språk</string>
-	<string name="pref_summary_preferred_languages">Eksperimentelt: Velg ett eller flere språk. Dette brukes til å filtrere ut videoer i \"Mest populært\"-kategorien, og for videosøk.</string>
+	<string name="pref_summary_preferred_languages">Velg ditt foretrukne språk.</string>
 
 	<string name="pref_video_player_category">Videoavspiller</string>
 	<string name="pref_title_preferred_res">Foretrukket oppøsning</string>
@@ -92,16 +92,16 @@
 	<string name="pref_disable_search_history_deleted">Søkehistorikk slettet.</string>
 <string name="pref_video_blocker_category">Blokkerte kanaler</string>
 	<string name="pref_title_channel_blacklist">Blokkerte kanaler</string>
-	<string name="pref_summary_channel_blacklist">Velg kanalene du ønsker å avblokkere, og la alt annet stå umerket.</string>
+	<string name="pref_summary_channel_blacklist">En liste over blokkerte kanaler.</string>
 <string name="pref_title_choose_player">Videoavspiller</string>
 	<string name="pref_summary_choose_player">Videoavspiller å bruke: %s</string>
 	<string name="pref_title_subscriptions_alphabetical_order">Sorter kanaler alfabetisk</string>
 	<string name="pref_summary_subscriptions_alphabetical_order">Hvis valgt, vil abonnerte kanaler sorteres alfabetisk.</string>
 	<string name="unblock_button">Avblokker</string>
-	<string name="channel_blacklist_updated">Kanal-svarteliste oppdatert. Gjenoppfrisk.</string>
+	<string name="channel_blacklist_updated">Kanal-svarteliste oppdatert. Gjenoppfrisk videoer.</string>
 	<string name="channel_blacklist_empty">Kanal-svartelisten er tom.</string>
 	<string name="no_preferred_lang_selected">Inget foretrukket språk valgt. Innstilling ignorert.</string>
-	<string name="preferred_lang_updated">Foretrukket språk oppdatert. Gjenoppfrisk.</string>
+	<string name="preferred_lang_updated">Foretrukket språk oppdatert. Gjenoppfrisk videoer.</string>
 <string name="pref_channels_filter_category">Kanalfilter</string>
 	<string name="pref_title_lang_detection_video_filtering">Videofiltrering av språkoppdagelse</string>
 	<string name="pref_summary_lang_detection_video_filtering">Bruk AI til å fastsette språk brukt i videoer og blokker dem hvis språket ikke samsvarer med dine foretrukne språk. Bør kun skrus på hvis du har en flaggskipsenhet.</string>
@@ -125,4 +125,18 @@
 	<string name="pref_summary_clear_playback_status">Tøm avspillingsstatus for alle videoer.</string>
 	<string name="pref_playback_status_cleared">Avspillingsstatus tømt.</string>
 
-</resources>
+<string name="pref_title_channel_filter_method">Kanalfiltreringsmetode</string>
+	<string name="pref_summary_channel_filter_method">Velg kanalfiltreringsmetode: %s</string>
+	<string name="disabled">Avskrudd</string>
+	<string name="pref_title_channel_whitelist">Kanalhvitliste</string>
+	<string name="pref_summary_channel_whitelist">En liste over hvitlistede kanaler.</string>
+	<string name="add">Legg til</string>
+	<string name="block">Blokker</string>
+	<string name="please_wait">Vent…</string>
+	<string name="channel_already_whitelisted">Kanal allerede hvitlistet.</string>
+	<string name="channel_whitelist_updated">Kanal hvitlistet. Gjenoppfrisk videoer.</string>
+	<string name="channel_whitelist_update_failure">Klarte ikke å hvitliste gitt kanal…</string>
+	<string name="channel_unwhitelist_success">Kanalhvitliste oppdatert. Gjenoppfrisk videoer.</string>
+	<string name="channel_unwhitelist_failure">Klarte ikke å angre hvitelisting av gitt(e) kanal(er)…</string>
+
+	</resources>
