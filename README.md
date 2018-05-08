@@ -5,11 +5,11 @@
 <a href="https://hosted.weblate.org/engage/skytube/?utm_source=widget"> <img src="https://hosted.weblate.org/widgets/skytube/-/svg-badge.svg" alt="Translate"/> </a>
 
 <p align="center">
-  <a href="#features">Features</a> &bull;
-  <a href="#download"><img src="https://i.imgur.com/BYKw7FK.png" />Download</a> &bull;
-  <a href="#why-skytube">Why SkyTube?</a> &bull;
-  <a href="#screenshots">Screenshots</a> &bull;
-  <a href="#credits">Credits</a> &bull;
+  <a href="#features">Features</a> | 
+  <a href="#download"><img src="https://i.imgur.com/BYKw7FK.png" />Download</a> | 
+  <a href="#why-skytube">Why SkyTube?</a> | 
+  <a href="#screenshots">Screenshots</a> | 
+  <a href="#credits">Credits</a> | 
   <a href="#license">License</a>
 </p>
 
@@ -65,6 +65,8 @@ _* powered by a closed-source, third party library._
 
 ## Credits
 This project was possible with the support and contribution of [numerous volunteers and third-party projects](http://skytube-app.com/credits.html).
+
+Help us improve this project by [contributing!](https://github.com/ram-on/SkyTube/wiki/Contribute)
 
 ## License
 [![GNU GPLv3 Image](https://www.gnu.org/graphics/gplv3-127x51.png)](http://www.gnu.org/licenses/gpl-3.0.en.html)  
