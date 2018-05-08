@@ -1,9 +1,19 @@
 # SkyTube
 **An open-source YouTube player for the Android operating system.**
 
-<a href="https://hosted.weblate.org/engage/skytube/?utm_source=widget"> <img src="https://hosted.weblate.org/widgets/skytube/-/svg-badge.svg" alt="Translation status"/> </a>
+<a href="https://github.com/ram-on/SkyTube/releases/latest">![Download APK](https://badged.co/ram-on/SkyTube/total?badge=https://img.shields.io/badge/downloads-%s-brightgreen.svg?label=SkyTube+Extra+Downloads)</a>
+<a href="https://hosted.weblate.org/engage/skytube/?utm_source=widget"> <img src="https://hosted.weblate.org/widgets/skytube/-/svg-badge.svg" alt="Translate"/> </a>
 
-This app allows you to:
+<p align="center">
+  <a href="#features">Features</a> &bull;
+  <a href="#download"><img src="https://i.imgur.com/BYKw7FK.png" />Download</a> &bull;
+  <a href="#why-skytube">Why SkyTube?</a> &bull;
+  <a href="#screenshots">Screenshots</a> &bull;
+  <a href="#credits">Credits</a> &bull;
+  <a href="#license">License</a>
+</p>
+
+## Features
 * explore Featured and Most Popular videos,
 * browse YouTube channels,
 * play YouTube videos,
@@ -20,9 +30,6 @@ This app allows you to:
 ... all at the tip of your fingers.
 
 More features will be added in the near future.
-
-## Website
-For screenshots and more information, please visit [www.skytube-app.com](http://www.skytube-app.com).
 
 ## Download
 | Feature          | SkyTube Extra                      | SkyTube  |
