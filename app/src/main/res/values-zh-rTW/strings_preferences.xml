@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources><string name="preferences">偏好設定</string>
 
-	<string name="pref_languages_filter_category">語言和區域</string>
+	<string name="pref_languages_filter_category">語言和區域篩選</string>
 	<string name="pref_title_preferred_regions">偏好的區域</string>
 	<string name="pref_summary_preferred_regions">選擇偏好的區域。這用在「特選」影片類別中篩選出影片：%s</string>
 
@@ -81,7 +81,7 @@
 
 	<string name="pref_video_blocker_category">已阻擋頻道</string>
 	<string name="pref_title_channel_blacklist">已阻擋頻道</string>
-	<string name="pref_summary_channel_blacklist">勾選您想要解鎖的頻道，並讓別人不受抑制。</string>
+	<string name="pref_summary_channel_blacklist">已阻擋的頻道清單。</string>
 <string name="pref_title_subscriptions_alphabetical_order">按字母順序排列頻道</string>
 	<string name="pref_summary_subscriptions_alphabetical_order">如果選取，訂閱頻道將按照字母的順序排列。</string>
 	<string name="unblock_button">取消阻擋</string>
@@ -108,4 +108,16 @@
 	<string name="pref_summary_clear_playback_status">清除所有影片的重播狀態。</string>
 	<string name="pref_playback_status_cleared">重播狀態已清除。</string>
 
-</resources>
+<string name="pref_title_channel_filter_method">頻道篩選方法</string>
+	<string name="pref_summary_channel_filter_method">選擇頻道篩選時方法：%s</string>
+	<string name="disabled">已停用</string>
+	<string name="pref_title_channel_whitelist">頻道白名單</string>
+	<string name="pref_summary_channel_whitelist">列入白名單的頻道清單。</string>
+	<string name="input_channel_url">頻道的網址將列入白名單：</string>
+	<string name="add">新增</string>
+	<string name="block">阻擋</string>
+	<string name="please_wait">請稍候…</string>
+	<string name="channel_already_whitelisted">頻道已列入白名單。</string>
+	<string name="channel_whitelist_updated">頻道已列入白名單。請重新整理影片。</string>
+	<string name="channel_unwhitelist_success">頻道白名單已更新。請重新整理影片。</string>
+	</resources>
