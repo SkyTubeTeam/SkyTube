@@ -1,7 +1,7 @@
 # SkyTube
 **An open-source YouTube player for the Android operating system.**
 
-<a href="https://github.com/ram-on/SkyTube/releases/latest">![Download APK](https://badged.co/ram-on/SkyTube/total?badge=https://img.shields.io/badge/downloads-%s-brightgreen.svg?label=SkyTube+Extra+Downloads)</a>
+<a href="#download">![Download APK](https://badged.co/ram-on/SkyTube/total?badge=https://img.shields.io/badge/downloads-%s-brightgreen.svg?label=SkyTube+Extra+Downloads)</a>
 <a href="https://hosted.weblate.org/engage/skytube/?utm_source=widget"> <img src="https://hosted.weblate.org/widgets/skytube/-/svg-badge.svg" alt="Translate"/> </a>
 
 <p align="center">
@@ -9,7 +9,7 @@
   <a href="#download"><img src="https://i.imgur.com/BYKw7FK.png" />Download</a> | 
   <a href="#why-skytube">Why SkyTube?</a> | 
   <a href="#screenshots">Screenshots</a> | 
-  <a href="#credits">Credits</a> | 
+  <a href="#contribute">Contribute</a> | 
   <a href="#license">License</a>
 </p>
 
@@ -63,10 +63,10 @@ _* powered by a closed-source, third party library._
 ### Tablet
 ![Browse channel using tablet](https://ram-on.github.io/SkyTube/assets/img/screenshots/channel_tablet.jpg)
 
-## Credits
+## Contribute
 This project was possible with the support and contribution of [numerous volunteers and third-party projects](http://skytube-app.com/credits.html).
 
-Help us improve this project by [contributing!](https://github.com/ram-on/SkyTube/wiki/Contribute)
+Help us improve this project by [translating](https://github.com/ram-on/SkyTube/wiki/Contribute#translate) or by [coding](https://github.com/ram-on/SkyTube/wiki/Contribute#developers-guidelines)!
 
 ## License
 [![GNU GPLv3 Image](https://www.gnu.org/graphics/gplv3-127x51.png)](http://www.gnu.org/licenses/gpl-3.0.en.html)  
