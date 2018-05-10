@@ -101,7 +101,7 @@
 	<string name="pref_summary_disable_search_history">Se selezionato, la cronologia di ricerca sarà cancellata e non verrà usata.</string>
 	<string name="pref_disable_search_history_deleted">Cronologia di ricerca cancellata.</string>
 	<string name="pref_title_subscriptions_alphabetical_order">Ordina canali in ordine alfabetico</string>
-	<string name="unblock_button">Sblocca</string>
+	<string name="unblock">Sblocca</string>
 	<string name="pref_channels_filter_category">Filtro Canali</string>
 	<string name="no_preferred_lang_selected">Nessuna lingua preferita selezionata. Impostazione ignorata.</string>
 	<string name="pref_other_filters_category">Altri Filtri</string>

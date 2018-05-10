@@ -112,7 +112,7 @@ public class VideoBlocker {
 	public List<YouTubeVideo> filter(List<YouTubeVideo> videosList) {
 		List<YouTubeVideo>  filteredVideosList    = new ArrayList<>();
 		final boolean       isChannelBlacklistEnabled = isChannelBlacklistEnabled();
-		final List<String>  blacklistedChannelIds = isChannelBlacklistEnabled ? ChannelFilteringDb.getChannelFilteringDb().getBlacklistedChannelIdsList() : null;
+		final List<String>  blacklistedChannelIds = isChannelBlacklistEnabled  ? ChannelFilteringDb.getChannelFilteringDb().getBlacklistedChannelsIdsList() : null;
 		final List<String>  whitelistedChannelIds = !isChannelBlacklistEnabled ? ChannelFilteringDb.getChannelFilteringDb().getWhitelistedChannelsIdsList() : null;
 		// set of user's preferred ISO 639 language codes (regex)
 		final Set<String>   preferredLanguages    = SkyTubeApp.getPreferenceManager().getStringSet(getStr(R.string.pref_key_preferred_languages), defaultPrefLanguages);

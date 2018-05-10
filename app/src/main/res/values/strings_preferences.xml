@@ -536,8 +536,9 @@
 	<string name="pref_key_channel_blacklist" translatable="false">pref_key_channel_blacklist</string>
 	<string name="pref_title_channel_blacklist">Channel Blacklist</string>
 	<string name="pref_summary_channel_blacklist">A list of blocked channels.</string>
-	<string name="unblock_button">Unblock</string>
+	<string name="unblock">Unblock</string>
 	<string name="channel_blacklist_updated">Channel blacklist updated.  Please refresh videos.</string>
+	<string name="channel_blacklist_update_failure">Failed to remove the given channel(s) from the blacklist…</string>
 	<string name="channel_blacklist_empty">Channel blacklist is empty.</string>
 
 	<string name="pref_key_channel_whitelist" translatable="false">pref_key_channel_whitelist</string>

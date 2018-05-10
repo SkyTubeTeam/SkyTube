@@ -29,7 +29,7 @@
 			android:entryValues="@array/channel_filtering_values_list"
 			android:defaultValue="@string/channel_blacklisting_filtering"/>
 
-	    <MultiSelectListPreference
+	    <Preference
 	        android:key="@string/pref_key_channel_blacklist"
 	        android:title="@string/pref_title_channel_blacklist"
 	        android:summary="@string/pref_summary_channel_blacklist" />

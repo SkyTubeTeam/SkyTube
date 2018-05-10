@@ -1,3 +1,20 @@
+/*
+ * SkyTube
+ * Copyright (C) 2018  Ramon Mifsud
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation (version 3 of the License).
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package free.rm.skytube.businessobjects.db;
 
 import android.content.ContentValues;
@@ -13,7 +30,7 @@ import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.gui.businessobjects.MultiSelectListPreferenceItem;
 
 /**
- * A database (DB) that stores user's blocked channels.
+ * A database (DB) that stores user's blacklist/whitelist channels.
  */
 public class ChannelFilteringDb extends SQLiteOpenHelperEx {
 
@@ -59,86 +76,44 @@ public class ChannelFilteringDb extends SQLiteOpenHelperEx {
 	// Channel blacklisting methods.
 	//
 
-
 	/**
-	 * Blacklisted a channel.
+	 * Blacklist a channel.
 	 *
 	 * @param channelId     Channel ID.
 	 * @param channelName   Channel name.
 	 *
-	 * @return True if the channel was successfully saved/blocked to the DB.
+	 * @return  True if successful.
 	 */
 	public boolean blacklist(String channelId, String channelName) {
-		ContentValues contentValues = new ContentValues();
-		contentValues.put(ChannelBlacklistTable.COL_CHANNEL_ID, channelId);
-		contentValues.put(ChannelBlacklistTable.COL_CHANNEL_NAME, channelName);
-	  
-		return getWritableDatabase().insert(ChannelBlacklistTable.TABLE_NAME, null, contentValues) != -1;
+		return addChannel(new ChannelBlacklistTable(), channelId, channelName);
 	}
 
 
 	/**
-	 * Remove the specified channel from the list of blacklisted channels.
+	 * Unblacklist the given channels.
 	 *
-	 * @param channelName channel to unblacklist.
+	 * @param channels  Channels to unblacklist.
 	 *
-	 * @return True if the channel has been unblocked; false otherwise.
+	 * @return  True if successful.
 	 */
-	public boolean unblacklist(String channelName) {
-		int rowsDeleted = getWritableDatabase().delete(ChannelBlacklistTable.TABLE_NAME,
-				ChannelBlacklistTable.COL_CHANNEL_NAME + " = ?",
-				new String[]{String.valueOf(channelName)});
-
-		return rowsDeleted > 0;
+	public boolean unblacklist(final List<MultiSelectListPreferenceItem> channels) {
+		return removeChannels(new ChannelBlacklistTable(), channels);
 	}
-	
+
 
 	/**
-	 * Method for getting blacklisted channels' IDs as list.
-	 *
+	 * @return List of blacklisted channels.
+	 */
+	public List<MultiSelectListPreferenceItem> getBlacklistedChannels() {
+		return getChannels(new ChannelBlacklistTable());
+	}
+
+
+	/**
 	 * @return List of blacklisted channel IDs.
 	 */
-	public List<String> getBlacklistedChannelIdsList() {
-		List<String>    channelIdsList = new ArrayList<>();
-		Cursor          cursor = getReadableDatabase().query(ChannelBlacklistTable.TABLE_NAME,
-										new String[]{ChannelBlacklistTable.COL_CHANNEL_ID},
-										null, null,
-										null, null, null);
-
-		if (cursor.moveToFirst()) {
-			do {
-				String channelId = cursor.getString(0);
-				channelIdsList.add(channelId);
-			} while (cursor.moveToNext());
-		}
-		cursor.close();
-
-		return channelIdsList;
-	}
-
-
-	/**
-	 * Method for getting blocked channels' names as list.
-	 *
-	 * @return list of blocked channel names.
-	 */
-	public List<String> getBlacklistedChannelNamesList() {
-		List<String>    channelNames = new ArrayList<>();
-		Cursor          cursor = getReadableDatabase().query(ChannelBlacklistTable.TABLE_NAME,
-										new String[]{ChannelBlacklistTable.COL_CHANNEL_NAME},
-										null, null,
-										null, null,
-										ChannelBlacklistTable.COL_CHANNEL_NAME + " ASC");
-
-		if (cursor.moveToFirst()) {
-			do {
-				String channelId = cursor.getString(0);
-				channelNames.add(channelId);
-			} while (cursor.moveToNext());
-		}
-		cursor.close();
-
-		return channelNames;
+	public List<String> getBlacklistedChannelsIdsList() {
+		return getChannelsIdsList(new ChannelBlacklistTable());
 	}
 
 
@@ -147,7 +122,6 @@ public class ChannelFilteringDb extends SQLiteOpenHelperEx {
 	//
 	// Channel whitelisting methods.
 	//
-
 
 	/**
 	 * Whitelist a channel.
@@ -158,11 +132,7 @@ public class ChannelFilteringDb extends SQLiteOpenHelperEx {
 	 * @return  True if successful.
 	 */
 	public boolean whitelist(String channelId, String channelName) {
-		ContentValues values = new ContentValues();
-		values.put(ChannelWhitelistTable.COL_CHANNEL_ID, channelId);
-		values.put(ChannelWhitelistTable.COL_CHANNEL_NAME, channelName);
-
-		return getWritableDatabase().insert(ChannelWhitelistTable.TABLE_NAME, null, values) != -1;
+		return addChannel(new ChannelWhitelistTable(), channelId, channelName);
 	}
 
 
@@ -174,21 +144,7 @@ public class ChannelFilteringDb extends SQLiteOpenHelperEx {
 	 * @return  True if successful.
 	 */
 	public boolean unwhitelist(final List<MultiSelectListPreferenceItem> channels) {
-		String[] channelsIds = new String[channels.size()];
-
-		for (int i = 0;  i < channelsIds.length;  i++) {
-			channelsIds[i]= "'" + channels.get(i).id + "'";
-		}
-
-		final String  channelIdsCsv = TextUtils.join(", ", channelsIds);
-		final int     rowsDeleted;
-
-		rowsDeleted = getWritableDatabase()
-				.delete(ChannelWhitelistTable.TABLE_NAME,
-						ChannelWhitelistTable.COL_CHANNEL_ID + " IN (" + channelIdsCsv + ")",
-						null);
-
-		return (rowsDeleted > 0);
+		return removeChannels(new ChannelWhitelistTable(), channels);
 	}
 
 
@@ -200,9 +156,7 @@ public class ChannelFilteringDb extends SQLiteOpenHelperEx {
 	 * @return  True if successful.
 	 */
 	public boolean unwhitelist(final String channelId) {
-		return (getWritableDatabase().delete(ChannelWhitelistTable.TABLE_NAME,
-						ChannelWhitelistTable.COL_CHANNEL_ID + " = ?",
-						new String[]{channelId}) > 0);
+		return removeChannels(new ChannelWhitelistTable(), channelId);
 	}
 
 
@@ -210,14 +164,94 @@ public class ChannelFilteringDb extends SQLiteOpenHelperEx {
 	 * @return List of whitelisted channels.
 	 */
 	public List<MultiSelectListPreferenceItem> getWhitelistedChannels() {
+		return getChannels(new ChannelWhitelistTable());
+	}
+
+
+	/**
+	 * @return List of whitelisted channel IDs.
+	 */
+	public List<String> getWhitelistedChannelsIdsList() {
+		return getChannelsIdsList(new ChannelWhitelistTable());
+	}
+
+
+	///////////////////////////
+
+	/**
+	 * Add the given channel to the blacklist/whitelist.
+	 *
+	 * @param channelListTable  Blacklist/Whitelist table.
+	 * @param channelId         Channel ID.
+	 * @param channelName       Channel name.
+	 *
+	 * @return True if successful.
+	 */
+	private boolean addChannel(ChannelListTable channelListTable, String channelId, String channelName) {
+		ContentValues values = new ContentValues();
+		values.put(ChannelListTable.COL_CHANNEL_ID, channelId);
+		values.put(ChannelListTable.COL_CHANNEL_NAME, channelName);
+
+		return getWritableDatabase().insert(channelListTable.getTableName(), null, values) != -1;
+	}
+
+
+	/**
+	 * Remove the given channels from the blacklist/whitelist.
+	 *
+	 * @param channelListTable  Blacklist/Whitelist table.
+	 * @param channels          Channels to blacklist/whitelist.
+	 *
+	 * @return  True if successful.
+	 */
+	private boolean removeChannels(ChannelListTable channelListTable, final List<MultiSelectListPreferenceItem> channels) {
+		String[] channelsIds = new String[channels.size()];
+
+		for (int i = 0;  i < channelsIds.length;  i++) {
+			channelsIds[i]= "'" + channels.get(i).id + "'";
+		}
+
+		final String  channelIdsCsv = TextUtils.join(", ", channelsIds);
+		final int     rowsDeleted;
+
+		rowsDeleted = getWritableDatabase()
+				.delete(channelListTable.getTableName(),
+						ChannelListTable.COL_CHANNEL_ID + " IN (" + channelIdsCsv + ")",
+						null);
+
+		return (rowsDeleted > 0);
+	}
+
+
+	/**
+	 * Remove the given channel from blacklist/whitelist.
+	 *
+	 * @param channelListTable  Blacklist/Whitelist table.
+	 * @param channelId         Channel ID.
+	 *
+	 * @return  True if successful.
+	 */
+	private boolean removeChannels(ChannelListTable channelListTable, final String channelId) {
+		return (getWritableDatabase().delete(channelListTable.getTableName(),
+				ChannelListTable.COL_CHANNEL_ID + " = ?",
+				new String[]{channelId}) > 0);
+	}
+
+
+	/**
+	 * @param channelListTable  Blacklist/Whitelist table.
+	 *
+	 * @return List of blacklisted/whitelisted channels.
+	 */
+	private List<MultiSelectListPreferenceItem> getChannels(ChannelListTable channelListTable) {
 		List<MultiSelectListPreferenceItem> whitelistedChannels = new ArrayList<>();
 		String                              channelId;
 		String                              channelName;
 		Cursor                              cursor;
 
 		cursor = getReadableDatabase().query(
-				ChannelWhitelistTable.TABLE_NAME,
-				new String[]{ChannelWhitelistTable.COL_CHANNEL_ID, ChannelWhitelistTable.COL_CHANNEL_NAME},
+				channelListTable.getTableName(),
+				new String[]{ChannelListTable.COL_CHANNEL_ID, ChannelListTable.COL_CHANNEL_NAME},
 				null, null,
 				null, null, null);
 
@@ -235,16 +269,18 @@ public class ChannelFilteringDb extends SQLiteOpenHelperEx {
 
 
 	/**
-	 * @return List of whitelisted channel IDs.
+	 * @param channelListTable  Blacklist/Whitelist table.
+	 *
+	 * @return List of blacklisted/whitelisted channel IDs.
 	 */
-	public List<String> getWhitelistedChannelsIdsList() {
+	private List<String> getChannelsIdsList(ChannelListTable channelListTable) {
 		List<String>    whitelistedChannels = new ArrayList<>();
 		String          channelId;
 		Cursor          cursor;
 
 		cursor = getReadableDatabase().query(
-				ChannelWhitelistTable.TABLE_NAME,
-				new String[]{ChannelWhitelistTable.COL_CHANNEL_ID},
+				channelListTable.getTableName(),
+				new String[]{ChannelListTable.COL_CHANNEL_ID},
 				null, null,
 				null, null, null);
 

@@ -105,7 +105,7 @@
 	<string name="pref_video_blocker_category">Bloqueur vidéo</string>
 	<string name="pref_title_channel_blacklist">Liste des chaînes bloquées</string>
 	<string name="pref_summary_channel_blacklist">Cochez les chaînes que vous voulez débloquer et laissez les autres non cochées.</string>
-	<string name="unblock_button">Débloqué</string>
+	<string name="unblock">Débloqué</string>
 	<string name="channel_blacklist_updated">Liste des chaînes bloquées mise à jour. Veuillez actualiser.</string>
 	<string name="channel_blacklist_empty">La liste des chaînes bloquées est vide.</string>
 	<string name="no_preferred_lang_selected">Aucune langue préférée sélectionnée. Réglage ignoré.</string>

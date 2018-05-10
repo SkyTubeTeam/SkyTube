@@ -17,19 +17,20 @@
 
 package free.rm.skytube.businessobjects.db;
 
-public class ChannelWhitelistTable {
+/**
+ * Whitelist table.
+ */
+public class ChannelWhitelistTable extends ChannelBlacklistTable {
 
 	public static final String TABLE_NAME = "Whitelist";
-	public static final String COL_ID  = "_id";
-	public static final String COL_CHANNEL_ID = "Channel_Id";
-	public static final String COL_CHANNEL_NAME = "Channel_Name";
 
 	public static String getCreateStatement() {
-		return "CREATE TABLE "   + TABLE_NAME + " (" +
-				COL_ID           + " INTEGER PRIMARY KEY ASC, " +
-				COL_CHANNEL_ID   + " TEXT UNIQUE NOT NULL, " +
-				COL_CHANNEL_NAME + " TEXT NOT NULL " +
-				" )";
+		return ChannelListTable.getCreateStatement(TABLE_NAME);
+	}
+
+	@Override
+	public String getTableName() {
+		return TABLE_NAME;
 	}
 
 }
