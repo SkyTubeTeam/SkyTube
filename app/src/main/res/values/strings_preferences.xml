@@ -157,6 +157,7 @@
 		<item>ქართული</item>
 		<item>አማርኛ</item>
 		<item>ខ្មែរ</item>
+		<item>中文</item>
 		<item>中文 (简体)</item>
 		<item>中文 (繁體)</item>
 		<item>中文 (香港)</item>
@@ -200,7 +201,7 @@
 		<item>uz</item>
 		<item>pl</item>
 		<item>pt-PT</item>
-		<item>pt</item>
+		<item>"pt(?:-BR)?"</item>   <!-- Somehow YouTube uses both "pt" and "pt-BR" for Brazilian Portuguese -->
 		<item>ro</item>
 		<item>sq</item>
 		<item>sk</item>
@@ -242,6 +243,7 @@
 		<item>ka</item>
 		<item>am</item>
 		<item>km</item>
+		<item>zh(?:-.+)?"</item>	<!-- "zn" or "zn-CN" ... -->
 		<item>zh-CN</item>
 		<item>zh-TW</item>
 		<item>zh-HK</item>
