@@ -14,20 +14,18 @@
 </p>
 
 ## Features
-* explore Featured and Most Popular videos,
-* browse YouTube channels,
-* play YouTube videos,
-* view video comments,
-* search videos, music and channels,
-* channel subscription & non-intrusive notifications,
-* bookmark videos,
-* subscriptions feed,
-* import subscriptions from YouTube,
-* play channels' playlists **[New!]**,
-* download videos **[New!]**,
-* view and download video thumbnails **[New!]**
-
-... all at the tip of your fingers.
+* Explore Featured and Most Popular videos,
+* Browse YouTube channels,
+* Play YouTube videos,
+* View video comments,
+* Search videos, music and channels,
+* Channel subscription & non-intrusive notifications,
+* Bookmark videos,
+* Subscriptions feed,
+* Import subscriptions from YouTube,
+* Play channels' playlists **[New!]**,
+* Download videos **[New!]**,
+* View and download video thumbnails **[New!]**
 
 More features will be added in the near future.
 
