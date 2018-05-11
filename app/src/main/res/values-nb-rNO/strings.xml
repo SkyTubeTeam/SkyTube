@@ -18,4 +18,7 @@
 	<string name="video">Video</string>
     <string name="could_not_get_channel">Kunne ikke laste ned kanalinformasjon!</string>
 <string name="hello_blank_fragment">Hallo blanke ark</string>
+    <string name="yes">Ja</string>
+	<string name="no">Nei</string>
+
     </resources>
