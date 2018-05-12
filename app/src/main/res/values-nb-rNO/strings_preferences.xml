@@ -139,4 +139,7 @@
 	<string name="channel_unwhitelist_success">Kanalhvitliste oppdatert. Gjenoppfrisk videoer.</string>
 	<string name="channel_unwhitelist_failure">Klarte ikke å angre hvitelisting av gitt(e) kanal(er)…</string>
 
+	<string name="unblock">Avblokker</string>
+	<string name="channel_blacklist_update_failure">Klarte ikke å fjerne gitt(e) kanal(er) fra svarteliste…</string>
+	<string name="input_channel_url">Kanalnettadressen som hvitlistes:</string>
 	</resources>
