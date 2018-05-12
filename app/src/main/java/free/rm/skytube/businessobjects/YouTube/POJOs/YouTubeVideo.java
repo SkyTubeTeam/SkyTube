@@ -73,13 +73,9 @@ public class YouTubeVideo implements Serializable {
 	 */
 	private String title;
 	/**
-	 * Channel ID.
+	 * Channel (only id and name are set).
 	 */
-	private String channelId;
-	/**
-	 * Channel name.
-	 */
-	private String channelName;
+	private YouTubeChannel channel;
 	/**
 	 * The total number of 'likes'.
 	 */
@@ -143,8 +139,8 @@ public class YouTubeVideo implements Serializable {
 
 		if (video.getSnippet() != null) {
 			this.title = video.getSnippet().getTitle();
-			this.channelId = video.getSnippet().getChannelId();
-			this.channelName = video.getSnippet().getChannelTitle();
+
+			this.channel = new YouTubeChannel(video.getSnippet().getChannelId(), video.getSnippet().getChannelTitle());
 			setPublishDate(video.getSnippet().getPublishedAt());
 
 			if (video.getSnippet().getThumbnails() != null) {
@@ -262,12 +258,20 @@ public class YouTubeVideo implements Serializable {
 		return title;
 	}
 
+	public YouTubeChannel getChannel() {
+		return channel;
+	}
+
+	public void setChannel(YouTubeChannel channel) {
+		this.channel = channel;
+	}
+
 	public String getChannelId() {
-		return channelId;
+		return channel.getId();
 	}
 
 	public String getChannelName() {
-		return channelName;
+		return channel.getTitle();
 	}
 
 	/**

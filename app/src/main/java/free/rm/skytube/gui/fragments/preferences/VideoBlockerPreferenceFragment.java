@@ -28,6 +28,7 @@ import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.Logger;
+import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.VideoStream.HttpDownloader;
 import free.rm.skytube.businessobjects.db.ChannelFilteringDb;
 import free.rm.skytube.gui.businessobjects.MultiSelectListPreferenceDialog;
@@ -53,6 +54,7 @@ public class VideoBlockerPreferenceFragment extends PreferenceFragment {
 			@Override
 			public boolean onPreferenceChange(Preference preference, Object newValue) {
 				initChannelFilteringPreferences((String) newValue, channelBlacklistPreference, channelWhitelistPreference);
+				Toast.makeText(getActivity(), R.string.setting_updated, Toast.LENGTH_LONG).show();
 				return true;
 			}
 		});
@@ -297,11 +299,17 @@ public class VideoBlockerPreferenceFragment extends PreferenceFragment {
 			onPositive(new MaterialDialog.SingleButtonCallback() {
 				@Override
 				public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-					final List<MultiSelectListPreferenceItem> channels = getSelectedItems();
+					final List<YouTubeChannel> channelList = toYouTubeChannelList(getSelectedItems());
 
-					if (channels != null  &&  !channels.isEmpty()) {
+					if (!channelList.isEmpty()) {
 						// unwhitelist the selected channels
-						final boolean success = ChannelFilteringDb.getChannelFilteringDb().unwhitelist(channels);
+						boolean success = true;
+
+						for (YouTubeChannel channel : channelList) {
+							if (!channel.blockChannel(false)) {
+								success = false;
+							}
+						}
 
 						Toast.makeText(getActivity(),
 								success ? R.string.channel_unwhitelist_success : R.string.channel_unwhitelist_failure,
@@ -320,6 +328,20 @@ public class VideoBlockerPreferenceFragment extends PreferenceFragment {
 					displayInputChannelUrlDialog();
 				}
 			});
+		}
+
+
+		/**
+		 * Converts List<MultiSelectListPreferenceItem> to List<YouTubeChannel>.
+		 */
+		private List<YouTubeChannel> toYouTubeChannelList(final List<MultiSelectListPreferenceItem> channels) {
+			List<YouTubeChannel> channelList = new ArrayList<>();
+
+			for (MultiSelectListPreferenceItem channel : channels) {
+				channelList.add(new YouTubeChannel(channel.id, channel.text));
+			}
+
+			return channelList;
 		}
 
 

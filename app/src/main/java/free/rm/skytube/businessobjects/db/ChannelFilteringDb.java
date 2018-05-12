@@ -137,18 +137,6 @@ public class ChannelFilteringDb extends SQLiteOpenHelperEx {
 
 
 	/**
-	 * Unwhitelist the given channels.
-	 *
-	 * @param channels  Channels to unwhitelist.
-	 *
-	 * @return  True if successful.
-	 */
-	public boolean unwhitelist(final List<MultiSelectListPreferenceItem> channels) {
-		return removeChannels(new ChannelWhitelistTable(), channels);
-	}
-
-
-	/**
 	 * Unwhitelist the given channel.
 	 *
 	 * @param channelId Channel ID.

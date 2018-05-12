@@ -17,8 +17,6 @@
 
 package free.rm.skytube.businessobjects.YouTube;
 
-import android.widget.Toast;
-
 import com.google.common.base.Optional;
 import com.optimaize.langdetect.DetectedLanguage;
 import com.optimaize.langdetect.LanguageDetector;
@@ -43,7 +41,6 @@ import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.db.ChannelFilteringDb;
-import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 
 import static free.rm.skytube.app.SkyTubeApp.getStr;
 
@@ -56,49 +53,6 @@ public class VideoBlocker {
 	 * Default preferred language(s) -- by default, no language shall be filtered out.
 	 */
 	private static final Set<String> defaultPrefLanguages = new HashSet<>(SkyTubeApp.getStringArrayAsList(R.array.languages_iso639_codes));
-
-
-	/**
-	 * Block a channel.  This operation depends on what filtering method was enabled by the user:
-	 * i.e. either channel blacklisting or whitelisting.
-	 *
-	 * @param channelId     Channel ID.
-	 * @param channelName   Channel name.
-	 */
-	public static void blockChannel(String channelId, String channelName) {
-		try {
-			// if user is subscribed to the channel, then ask the user to unsubscribe first...
-			if (SubscriptionsDb.getSubscriptionsDb().isUserSubscribedToChannel(channelId)) {
-				Toast.makeText(SkyTubeApp.getContext(), R.string.channel_blockage_error_user_subscribed, Toast.LENGTH_LONG).show();
-			} else {
-				if (isChannelBlacklistEnabled()) {
-					blacklistChannel(channelId, channelName);
-				} else {
-					unwhitelistChannel(channelId);
-				}
-			}
-		} catch (IOException e) {
-			Logger.e(VideoBlocker.class, "Error occurred while blocking a channel", e);
-		}
-	}
-
-
-	private static void blacklistChannel(String channelId, String channelName) {
-		boolean successBlockChannel = ChannelFilteringDb.getChannelFilteringDb().blacklist(channelId, channelName);
-
-		Toast.makeText(SkyTubeApp.getContext(),
-				successBlockChannel ? R.string.channel_blacklisted : R.string.channel_blacklist_error,
-				Toast.LENGTH_LONG).show();
-	}
-
-
-	private static void unwhitelistChannel(String channelId) {
-		boolean success = ChannelFilteringDb.getChannelFilteringDb().unwhitelist(channelId);
-
-		Toast.makeText(SkyTubeApp.getContext(),
-				success ? R.string.channel_unwhitelist_success : R.string.channel_unwhitelist_error,
-				Toast.LENGTH_LONG).show();
-	}
 
 
 
@@ -149,7 +103,7 @@ public class VideoBlocker {
 	/**
 	 * @return True if channel blacklisting is enabled;  false if channel whitelisting is enabled.
 	 */
-	private static boolean isChannelBlacklistEnabled() {
+	public static boolean isChannelBlacklistEnabled() {
 		final String channelFilter = SkyTubeApp.getPreferenceManager().getString(getStr(R.string.pref_key_channel_filter_method), getStr(R.string.channel_blacklisting_filtering));
 		return channelFilter.equals(getStr(R.string.channel_blacklisting_filtering));
 	}

@@ -28,6 +28,8 @@ import com.google.gson.reflect.TypeToken;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.ISODateTimeFormat;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -35,6 +37,7 @@ import java.util.Date;
 import java.util.List;
 
 import free.rm.skytube.app.SkyTubeApp;
+import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.GetChannelsDetails;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
@@ -205,7 +208,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 	 * @return True if the user is subscribed; false otherwise.
 	 * @throws IOException
 	 */
-	public boolean isUserSubscribedToChannel(String channelId) throws IOException {
+	public boolean isUserSubscribedToChannel(String channelId) {
 		Cursor cursor = getReadableDatabase().query(
 				SubscriptionsTable.TABLE_NAME,
 				new String[]{SubscriptionsTable.COL_ID},
@@ -352,10 +355,24 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 
 		if (cursor.moveToNext()) {
 			do {
-				byte[] blob = cursor.getBlob(cursor.getColumnIndex(SubscriptionsVideosTable.COL_YOUTUBE_VIDEO));
+				final byte[]    blob = cursor.getBlob(cursor.getColumnIndex(SubscriptionsVideosTable.COL_YOUTUBE_VIDEO));
+				final String    videoJson = new String(blob);
 
 				// convert JSON into YouTubeVideo
-				YouTubeVideo video = new Gson().fromJson(new String(blob), new TypeToken<YouTubeVideo>(){}.getType());
+				YouTubeVideo video = new Gson().fromJson(videoJson, new TypeToken<YouTubeVideo>(){}.getType());
+
+				// due to upgrade to YouTubeVideo (by changing channel{Id,Name} to YouTubeChannel)
+				// from version 2.82 to 2.90
+				if (video.getChannel() == null) {
+					try {
+						JSONObject videoJsonObj = new JSONObject(videoJson);
+						final String channelId   = videoJsonObj.get("channelId").toString();
+						final String channelName = videoJsonObj.get("channelName").toString();
+						video.setChannel(new YouTubeChannel(channelId, channelName));
+					} catch (JSONException e) {
+						Logger.e(this, "Error occurred while extracting channel{Id,Name} from JSON", e);
+					}
+				}
 				// regenerate the video's PublishDatePretty (e.g. 5 hours ago)
 				video.forceRefreshPublishDatePretty();
 				// add the video to the list

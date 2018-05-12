@@ -17,20 +17,26 @@
 
 package free.rm.skytube.businessobjects.YouTube.POJOs;
 
+import android.widget.Toast;
+
 import com.google.api.services.youtube.model.Channel;
 import com.google.api.services.youtube.model.ChannelBrandingSettings;
 import com.google.api.services.youtube.model.ChannelSnippet;
 import com.google.api.services.youtube.model.ChannelStatistics;
 import com.google.api.services.youtube.model.ThumbnailDetails;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
-import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 import free.rm.skytube.businessobjects.Logger;
+import free.rm.skytube.businessobjects.YouTube.VideoBlocker;
+import free.rm.skytube.businessobjects.db.ChannelFilteringDb;
+import free.rm.skytube.businessobjects.db.SubscriptionsDb;
+import free.rm.skytube.businessobjects.db.Tasks.SubscribeToChannelTask;
 
 /**
  * Represents a YouTube Channel.
@@ -49,6 +55,17 @@ public class YouTubeChannel implements Serializable {
 	private long	lastVisitTime;
 	private boolean	newVideosSinceLastVisit = false;
 	private List<YouTubeVideo> youTubeVideos = new ArrayList<>();
+
+
+	public YouTubeChannel() {
+
+	}
+
+
+	public YouTubeChannel(String id, String title) {
+		this.id = id;
+		this.title = title;
+	}
 
 
 	/**
@@ -199,4 +216,81 @@ public class YouTubeChannel implements Serializable {
 	public List<YouTubeVideo> getYouTubeVideos() {
 		return youTubeVideos;
 	}
+
+
+	/**
+	 * Block a channel.  This operation depends on what filtering method was enabled by the user:
+	 * i.e. either channel blacklisting or whitelisting.
+	 */
+	public void blockChannel() {
+		blockChannel(true);
+	}
+
+
+	/**
+	 * Block a channel.  This operation depends on what filtering method was enabled by the user:
+	 * i.e. either channel blacklisting or whitelisting.
+	 *
+	 * @param displayToastMessage Set to true to display toast message when the operation is carried
+	 *                            out.
+	 */
+	public boolean blockChannel(boolean displayToastMessage) {
+		boolean success;
+
+		// if user is subscribed to the channel, then unsubscribe first...
+		if (SubscriptionsDb.getSubscriptionsDb().isUserSubscribedToChannel(getId())) {
+			new SubscribeToChannelTask(this).executeInParallel();
+		}
+
+		if (VideoBlocker.isChannelBlacklistEnabled()) {
+			success = blacklistChannel(displayToastMessage);
+		} else {
+			success = unwhitelistChannel(displayToastMessage);
+		}
+
+		return success;
+	}
+
+
+	/**
+	 * Blacklist the channel.
+	 *
+	 * @param displayToastMessage   Set to true to display toast message when the operation is carried
+	 *                              out.
+	 *
+	 * @return True if successful.
+	 */
+	private boolean blacklistChannel(boolean displayToastMessage) {
+		boolean success = ChannelFilteringDb.getChannelFilteringDb().blacklist(this.getId(), this.getTitle());
+
+		if (displayToastMessage) {
+			Toast.makeText(SkyTubeApp.getContext(),
+					success ? R.string.channel_blacklisted : R.string.channel_blacklist_error,
+					Toast.LENGTH_LONG).show();
+		}
+
+		return success;
+	}
+
+
+	/**
+	 * Whitelist the channel.
+	 *
+	 * @param displayToastMessage   Set to true to display toast message when the operation is carried
+	 *                              out.
+	 *
+	 * @return True if successful.
+	 */
+	private boolean unwhitelistChannel(boolean displayToastMessage) {
+		boolean success = ChannelFilteringDb.getChannelFilteringDb().unwhitelist(this.getId());
+
+		if (displayToastMessage) {
+			Toast.makeText(SkyTubeApp.getContext(),
+					success ? R.string.channel_unwhitelist_success : R.string.channel_unwhitelist_error,
+					Toast.LENGTH_LONG).show();
+		}
+
+		return success;
+	}
+
 }

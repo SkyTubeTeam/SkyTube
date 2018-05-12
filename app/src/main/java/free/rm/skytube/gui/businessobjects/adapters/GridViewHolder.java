@@ -35,9 +35,8 @@ import com.bumptech.glide.request.RequestOptions;
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
-import free.rm.skytube.businessobjects.YouTube.VideoBlocker;
-import free.rm.skytube.businessobjects.db.Tasks.IsVideoBookmarkedTask;
 import free.rm.skytube.businessobjects.db.PlaybackStatusDb;
+import free.rm.skytube.businessobjects.db.Tasks.IsVideoBookmarkedTask;
 import free.rm.skytube.businessobjects.db.Tasks.IsVideoWatchedTask;
 import free.rm.skytube.gui.activities.ThumbnailViewerActivity;
 import free.rm.skytube.gui.businessobjects.MainActivityListener;
@@ -246,7 +245,7 @@ class GridViewHolder extends RecyclerView.ViewHolder {
 						youTubeVideo.downloadVideo(context);
 						return true;
 					case R.id.block_channel:
-						VideoBlocker.blockChannel(youTubeVideo.getChannelId(), youTubeVideo.getChannelName());
+						youTubeVideo.getChannel().blockChannel();
 				}
 				return false;
 			}
