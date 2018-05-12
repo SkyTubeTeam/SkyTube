@@ -26,6 +26,7 @@ import java.util.List;
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
+import free.rm.skytube.businessobjects.YouTube.VideoBlocker;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
 
@@ -60,6 +61,9 @@ public class GetSubscribedChannelsTask extends AsyncTaskParallel<Void, Void, Lis
 
 		try {
 			subbedChannelsList = SubscriptionsDb.getSubscriptionsDb().getSubscribedChannels();
+
+			// filter out for any whitelisted/blacklisted channels
+			subbedChannelsList = new VideoBlocker().filterChannels(subbedChannelsList);
 		} catch (Throwable tr) {
 			Log.e(TAG, "An error has occurred while getting subbed channels", tr);
 		}

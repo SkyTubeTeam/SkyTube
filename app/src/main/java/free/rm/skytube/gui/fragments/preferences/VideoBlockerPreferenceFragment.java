@@ -34,6 +34,7 @@ import free.rm.skytube.businessobjects.db.ChannelFilteringDb;
 import free.rm.skytube.gui.businessobjects.MultiSelectListPreferenceDialog;
 import free.rm.skytube.gui.businessobjects.MultiSelectListPreferenceItem;
 import free.rm.skytube.gui.businessobjects.SkyTubeMaterialDialog;
+import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
 
 /**
  * Video blocker preference.
@@ -114,6 +115,11 @@ public class VideoBlockerPreferenceFragment extends PreferenceFragment {
 		} else {
 			Logger.e(this, "Unknown channel filtering preference", channelFilter);
 		}
+
+		// User has just changed the filtering method and hence there might be a subbed channel
+		// that needs to be filtered out...  Therefore, we need to notify the SubsAdapter to
+		// refresh...
+		SubsAdapter.get(getActivity()).refreshSubsList();
 	}
 
 
