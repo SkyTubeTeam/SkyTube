@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources><string name="preferences">Instellingen</string>
 
-	<string name="pref_languages_filter_category">Talen en regio\'s</string>
+	<string name="pref_languages_filter_category">Taal- en regiofilters</string>
 	<string name="pref_title_preferred_regions">Voorkeursregio</string>
 	<string name="pref_summary_preferred_regions">Selecteer een voorkeursregio. Dit wordt gebruikt om video\'s te filteren in de \"Uitgelicht\"-categorie:  %s</string>
 
@@ -97,7 +97,7 @@
 	<string name="pref_video_blocker_category">Geblokkeerde kanalen</string>
 
 	<string name="pref_title_channel_blacklist">Geblokkeerde kanalen</string>
-	<string name="pref_summary_channel_blacklist">Vink alleen de kanalen aan die u wilt deblokkeren.</string>
+	<string name="pref_summary_channel_blacklist">Een lijst met geblokkeerde kanalen.</string>
 <string name="pref_title_choose_player">Videospeler</string>
 	<string name="pref_summary_choose_player">De te gebruiken videospeler: %s</string>
 	<string name="pref_title_subscriptions_alphabetical_order">Kanalen alfabetisch sorteren</string>
@@ -110,7 +110,7 @@
 <string name="pref_title_lang_detection_video_filtering">Taaldetectie - video\'s filteren</string>
 	<string name="pref_summary_lang_detection_video_filtering">Kunstmatige intelligentie gebruiken om de in video\'s gebruikte talen te detecteren en blokkeren als de taal niet overeen komt met je voorkeursta(a)l(en). Schakel dit alleen in op krachtige apparaten.</string>
 	<string name="setting_updated">Instelling bijgewerkt; ververs de video\'s.</string>
-<string name="pref_channels_filter_category">Kanaalfilter</string>
+<string name="pref_channels_filter_category">Kanaalfilters</string>
 	<string name="pref_other_filters_category">Andere filters</string>
 	<string name="pref_title_low_views_filter">Weergaven</string>
 	<string name="pref_summary_low_views_filter">Filter video\'s met weinig weergaven: %s</string>
@@ -129,4 +129,19 @@
 	<string name="pref_summary_clear_playback_status">Afspeelstatus wissen voor alle video\'s.</string>
 	<string name="pref_playback_status_cleared">Afspeelstatus gewist.</string>
 
-</resources>
+<string name="pref_title_channel_filter_method">Kanaalfiltermethode</string>
+	<string name="pref_summary_channel_filter_method">Selecteer de kanaalfiltermethode: %s</string>
+	<string name="disabled">Uitgeschakeld</string>
+	<string name="pref_title_channel_whitelist">Witte lijst</string>
+	<string name="pref_summary_channel_whitelist">Een lijst met geaccepteerde kanalen.</string>
+	<string name="input_channel_url">URL van het kanaal dat je op de witte lijst wilt plaatsen:</string>
+	<string name="add">Toevoegen</string>
+	<string name="block">Blokkeren</string>
+	<string name="please_wait">Even geduld…</string>
+	<string name="channel_already_whitelisted">Het kanaal staat al op de witte lijst.</string>
+	<string name="channel_whitelist_updated">Kanaal toegevoegd aan witte lijst. Ververs de video\'s.</string>
+	<string name="channel_whitelist_update_failure">Het plaatsen van het kanaal op de witte lijst is mislukt…</string>
+	<string name="channel_unwhitelist_success">De witte lijst is bijgewerkt. Ververs de video\'s.</string>
+	<string name="channel_unwhitelist_failure">Het verwijderen van het kanaal/de kanalen van de witte lijst is mislukt…</string>
+
+	</resources>
