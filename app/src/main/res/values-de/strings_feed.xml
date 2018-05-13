@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources>
 	<string name="feed">Feed</string>
 
-	<string name="subscribing_to_channels">Subscribing to channels…</string>
-	<string name="fetching_subbed_channels_info">Fetching channels\' information…</string>
-	<string name="fetching_subbed_channels_info_error">An error has occurred while fetching channels\' information.</string>
+	<string name="subscribing_to_channels">Abonniere Kanäle.…</string>
+	<string name="fetching_subbed_channels_info">Rufe Kanalinformationen ab.…</string>
+	<string name="fetching_subbed_channels_info_error">Beim Abrufen von Kanalinformationen ist ein Fehler aufgetreten.</string>
 
 	<string name="fetching_subscription_videos">Rufe Videos von abonnierten Kanälen ab</string>
 	<string name="fetched_videos_from_channels">%1$d Videos von %2$d/%3$d Kanälen abgerufen.</string>
@@ -13,5 +13,5 @@
 	<string name="import_subscriptions_from_youtube">Abos von YouTube importieren</string>
 
 	<string name="notification_channel_feed_title">Feed Benachrichtigungen</string>
-	<string name="notification_new_videos_found">%d neue Videos von abonnierten Kanälen gefunden</string>
+	<string name="notification_new_videos_found">%d neue Videos von abonnierten Kanälen</string>
 </resources>

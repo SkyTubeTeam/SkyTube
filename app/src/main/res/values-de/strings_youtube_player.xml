@@ -36,4 +36,8 @@
 	<string name="tutorial_comments_icon">Wische nach links um Kommentare zu sehen.</string>
 	<string name="tutorial_video_info_icon">Wische nach oben um Informationen über das Video zu sehen.</string>
 	<string name="tutorial_pause_video">Tippen sie doppelt um das Video zu pausieren oder abzuspielen.</string>
+<string name="mark_watched">Angesehene markieren</string>
+	<string name="mark_unwatched">Nicht angesehene markieren</string>
+
+	<string name="should_resume">Wollen Sie fortsetzen, wo Sie aufgehört haben?</string>
 </resources>

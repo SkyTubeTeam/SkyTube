@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources>
 	<string name="subscriptions">Abos</string>
 	<string name="subscribe">Abonnieren</string>
@@ -8,8 +8,8 @@
 	<string name="subscribed">Abonniert</string>
 	<string name="unsubscribed">Abo beendet</string>
 
-	<string name="error_get_subbed_channels">Beim Abrufen der Abos ist ein Fehler aufgetreten.</string>
-	<string name="error_check_if_user_has_subbed">Fehler beim Prüfen ob der Nutzer den Kanal abonniert hat (id=%s)</string>
+	<string name="error_get_subbed_channels">Beim Abrufen der abonnierten Kanäle ist ein Fehler aufgetreten.</string>
+	<string name="error_check_if_user_has_subbed">Kann nicht überprüfen, ob der Benutzer den Channel abonniert hat (id=%s)</string>
 	<string name="error_unable_to_subscribe">Kanal konnte nicht (de)abonniert werden (id=%s)</string>
 
 	<string name="import_subscriptions">Abos importieren</string>
@@ -23,5 +23,6 @@
 	<string name="import_subscriptions_parse_error">Beim Parsen der ausgewählten XML Datei ist ein Fehler aufgetreten: %s.</string>
 	<string name="failed_to_import_subscriptions">Fehler beim Importieren der YouTube Abos.</string>
 
-	<string name="about">About</string>
-</resources>
+	<string name="about">Über</string>
+<string name="unsubscribe_from_all_current_sibbed_channels">Melden Sie sich von allen Ihren aktuell abonnierten Kanälen ab.</string>
+	</resources>

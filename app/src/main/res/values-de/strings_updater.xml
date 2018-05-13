@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources>
-	<string name="update_available">Aktualisierung verfügbar</string>
-	<string name="update_dialog_msg">Eine neue SkyTube Aktualisierung ist verfügbar. Die App wird auf Version %s aktualisiert.</string>
+	<string name="update_available">Neue Version verfügbar</string>
+	<string name="update_dialog_msg">Eine neue Version von SkyTube ist verfügbar. Version %s wird installiert.</string>
 	<string name="up_to_date">Aktuell</string>
 	<string name="up_to_date_msg">Du hast bereits die neuste Version von SkyTube installiert.</string>
 	<string name="update">Aktualisieren</string>

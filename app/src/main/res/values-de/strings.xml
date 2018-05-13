@@ -1,13 +1,11 @@
+<?xml version='1.0' encoding='UTF-8'?>
 <resources>
 	<string name="could_not_get_videos">Fehler beim Abrufen der Videos von %s.</string>
 	<string name="views">%,d Aufrufe</string>
 	<string name="error">Fehler</string>
 	<string name="ok">OK</string>
 	<string name="search_videos">Videos suchen</string>
-	<string name="launch_offical_player_error">
-		Beim Starten des offiziellen YouTube Players ist ein Fehler aufgetreten. Stelle
-		sicher, dass die offizielle Google YouTube App auf deinem Gerät installiert ist.
-	</string>
+	<string name="launch_offical_player_error">Beim Starten des offiziellen YouTube Players von Google ist ein Fehler aufgetreten. Stelle sicher, dass sie auf deinem Gerät installiert ist.</string>
 	<string name="LIVE">LIVE</string>
 
 	<string name="featured">Empfohlen</string>
@@ -15,10 +13,14 @@
 
 	<string name="video">Video</string>
 	<string name="videos">Videos</string>
-	<string name="num_videos">%d videos</string>
-	<string name="playlists">Playlists</string>
-	<string name="could_not_get_playlists">Could not get %s playlists.</string>
+	<string name="num_videos">%d Videos</string>
+	<string name="playlists">Wiedergabelisten</string>
+	<string name="could_not_get_playlists">Konnte %s Wiedergabelisten nicht abrufen.</string>
 
-	<string name="loading">Loading …</string>
-    <string name="could_not_get_channel">Could not download channel information!</string>
-</resources>
+	<string name="loading">Wird geladen…</string>
+    <string name="could_not_get_channel">Kanalinformationen konnten nicht heruntergeladen werden!</string>
+<string name="hello_blank_fragment">Hallo leeres Fragment</string>
+    <string name="yes">Ja</string>
+	<string name="no">Nein</string>
+
+    </resources>
