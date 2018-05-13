@@ -23,6 +23,6 @@
 	<string name="import_subscriptions_parse_error">Beim Parsen der ausgewählten XML Datei ist ein Fehler aufgetreten: %s.</string>
 	<string name="failed_to_import_subscriptions">Fehler beim Importieren der YouTube Abos.</string>
 
-	<string name="about">About</string>
+	<string name="about">Über</string>
 <string name="unsubscribe_from_all_current_sibbed_channels">Melden Sie sich von allen Ihren aktuell abonnierten Kanälen ab.</string>
 	</resources>
