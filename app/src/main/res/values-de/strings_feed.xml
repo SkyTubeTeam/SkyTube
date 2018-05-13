@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources>
 	<string name="feed">Feed</string>
 
@@ -13,5 +13,5 @@
 	<string name="import_subscriptions_from_youtube">Abos von YouTube importieren</string>
 
 	<string name="notification_channel_feed_title">Feed Benachrichtigungen</string>
-	<string name="notification_new_videos_found">%d neue Videos von abonnierten Kanälen gefunden</string>
+	<string name="notification_new_videos_found">%d neue Videos von abonnierten Kanälen</string>
 </resources>
