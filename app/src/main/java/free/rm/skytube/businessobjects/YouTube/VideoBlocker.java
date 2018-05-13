@@ -50,11 +50,19 @@ import static free.rm.skytube.app.SkyTubeApp.getStr;
  */
 public class VideoBlocker {
 
-	/**
-	 * Default preferred language(s) -- by default, no language shall be filtered out.
-	 */
+	/** Listener that will be called once a video is blocked. */
+	private static volatile VideoBlockerListener videoBlockerListener = null;
+
+	/** Default preferred language(s) -- by default, no language shall be filtered out. */
 	private static final Set<String> defaultPrefLanguages = new HashSet<>(SkyTubeApp.getStringArrayAsList(R.array.languages_iso639_codes));
 
+
+	/**
+	 * Sets the {@link VideoBlockerListener}.
+	 */
+	public static void setVideoBlockerListener(VideoBlockerListener listener) {
+		videoBlockerListener = listener;
+	}
 
 
 	/**
@@ -115,14 +123,19 @@ public class VideoBlocker {
 
 
 	/**
-	 * Log filtered videos.
+	 * Log filtered videos and calls the VideoBlockerListener.
 	 *
 	 * @param video         Video being filtered.
 	 * @param filteringType Criteria (why being filtered - e.g. channel blocked).
 	 * @param reason        The criteria hit (e.g. ID of the channel blocked).
 	 */
 	private void log(YouTubeVideo video, FilterType filteringType, String reason) {
+		// log the filtering event
 		Logger.i(this, "\uD83D\uDED1 VIDEO='%s'  |  FILTER='%s'  |  REASON='%s'", video.getTitle(), filteringType, reason);
+
+		if (videoBlockerListener != null) {
+			videoBlockerListener.onVideoBlocked(new BlockedVideo(video, filteringType, reason));
+		}
 	}
 
 
@@ -385,6 +398,52 @@ public class VideoBlocker {
 		LANGUAGE_DETECTION,
 		VIEWS,
 		DISLIKES,
+	}
+
+
+	/**
+	 * Represents a blocked YouTube video.
+	 */
+	public static class BlockedVideo {
+
+		private YouTubeVideo    video;
+		private FilterType      filteringType;
+		private String          reason;
+
+
+		BlockedVideo(YouTubeVideo video, FilterType filteringType, String reason) {
+			this.video = video;
+			this.filteringType = filteringType;
+			this.reason = reason;
+		}
+
+		public YouTubeVideo getVideo() {
+			return video;
+		}
+
+		public FilterType getFilteringType() {
+			return filteringType;
+		}
+
+		public String getReason() {
+			return reason;
+		}
+
+	}
+
+
+	/**
+	 * {@link VideoBlocker} listener.
+	 */
+	public interface VideoBlockerListener {
+
+		/**
+		 * Will be called once a video is blocked by {@link VideoBlocker}.
+		 *
+		 * @param video The video that has been blocked.
+		 */
+		void onVideoBlocked(BlockedVideo video);
+
 	}
 
 

@@ -83,6 +83,8 @@ dependencies {
     implementation (group: 'com.optimaize.languagedetector', name: 'language-detector', version: '0.6') {
         exclude group: 'com.google.guava', module: 'guava'
     }
+    implementation 'com.mikepenz:actionitembadge:3.3.2@aar'
+    implementation "com.mikepenz:iconics-core:3.0.3@aar"
 
     // Android support modules
     implementation 'com.android.support:appcompat-v7:27.1.1'

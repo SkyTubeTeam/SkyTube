@@ -42,6 +42,8 @@ import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubePlaylist;
+import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
+import free.rm.skytube.businessobjects.YouTube.VideoBlocker;
 import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
 import free.rm.skytube.businessobjects.db.SearchHistoryDb;
 import free.rm.skytube.businessobjects.db.SearchHistoryTable;
@@ -81,7 +83,6 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 	private static final String SEARCH_FRAGMENT = "MainActivity.SearchFragment";
 	public static final String CHANNEL_BROWSER_FRAGMENT = "MainActivity.ChannelBrowserFragment";
 	public static final String PLAYLIST_VIDEOS_FRAGMENT = "MainActivity.PlaylistVideosFragment";
-
 
 
 	@Override
@@ -164,8 +165,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 
 	@Override
 	public boolean onCreateOptionsMenu(final Menu menu) {
-		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.main_activity_menu, menu);
+		getMenuInflater().inflate(R.menu.main_activity_menu, menu);
 
 		// setup the SearchView (actionbar)
 		final MenuItem searchItem = menu.findItem(R.id.menu_search);
@@ -249,10 +249,12 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 		return super.onOptionsItemSelected(item);
 	}
 
+
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 	}
+
 
 	/**
 	 * Display the Enter Video URL dialog.
