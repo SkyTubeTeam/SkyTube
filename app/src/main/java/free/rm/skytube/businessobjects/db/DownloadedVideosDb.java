@@ -9,12 +9,17 @@ import android.net.Uri;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
+import free.rm.skytube.businessobjects.Logger;
+import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.interfaces.OrderableDatabase;
 
@@ -72,8 +77,25 @@ public class DownloadedVideosDb extends SQLiteOpenHelperEx implements OrderableD
 
 		if(cursor.moveToNext()) {
 			do {
-				byte[] blob = cursor.getBlob(cursor.getColumnIndex(DownloadedVideosTable.COL_YOUTUBE_VIDEO));
-				YouTubeVideo video = new Gson().fromJson(new String(blob), new TypeToken<YouTubeVideo>(){}.getType());
+				final byte[] blob = cursor.getBlob(cursor.getColumnIndex(DownloadedVideosTable.COL_YOUTUBE_VIDEO));
+				final String videoJson = new String(blob);
+
+				// convert JSON into YouTubeVideo
+				YouTubeVideo video = new Gson().fromJson(videoJson, new TypeToken<YouTubeVideo>(){}.getType());
+
+				// due to upgrade to YouTubeVideo (by changing channel{Id,Name} to YouTubeChannel)
+				// from version 2.82 to 2.90
+				if (video.getChannel() == null) {
+					try {
+						JSONObject videoJsonObj = new JSONObject(videoJson);
+						final String channelId   = videoJsonObj.get("channelId").toString();
+						final String channelName = videoJsonObj.get("channelName").toString();
+						video.setChannel(new YouTubeChannel(channelId, channelName));
+					} catch (JSONException e) {
+						Logger.e(this, "Error occurred while extracting channel{Id,Name} from JSON", e);
+					}
+				}
+
 				videos.add(video);
 			} while(cursor.moveToNext());
 		}
