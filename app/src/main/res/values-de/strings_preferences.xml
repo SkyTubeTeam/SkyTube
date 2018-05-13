@@ -12,7 +12,7 @@
 	<string name="pref_title_preferred_languages">Bevorzugte Sprache(n)</string>
 	<string name="pref_summary_preferred_languages">Wählen Sie Ihre bevorzugten Sprachen.</string>
 
-	<string name="pref_video_player_category">Video Player</string>
+	<string name="pref_video_player_category">Videoplayer</string>
 	<string name="pref_title_preferred_res">Bevorzugte Auflösung</string>
 	<string name="pref_summary_preferred_res">Wähle deine bevorzugte Auflösung:  %s</string>
 
@@ -40,26 +40,20 @@
 
 	<string name="pref_about_category">Über</string>
 	<string name="pref_title_website">Webseite</string>
-	<string name="pref_title_credits">Credits</string>
+	<string name="pref_title_credits">Mitwirkende</string>
 	<string name="pref_summary_credits">Menschen und Projekte die diese App möglich gemacht haben.</string>
 	<string name="pref_title_version">Version</string>
 	<string name="pref_title_updates">Aktualisierungen</string>
 	<string name="pref_summary_updates">Nach neuen Versionen suchen.</string>
 	<string name="pref_title_license">Lizenz</string>
 	<string name="pref_summary_license">GNU General Public License Version 3</string>
-	<string name="app_license">
-		Copyright © 2015-2018  Ramon Mifsud\n
-
-		\nDieses Programm ist freie Software. Sie können es unter den Bedingungen der GNU General Public License,
-		wie von der Free Software Foundation veröffentlicht (Version 3 der Lizenz), weitergeben und/oder modifizieren.\n
-
-		\nDie Veröffentlichung dieses Programms erfolgt in der Hoffnung, daß es Ihnen von Nutzen sein wird,
-		aber OHNE IRGENDEINE GARANTIE, sogar ohne die implizite Garantie der MARKTREIFE oder der
-		VERWENDBARKEIT FÜR EINEN BESTIMMTEN ZWECK. Details finden Sie in der GNU General Public License.\n
-
-		\nSie sollten ein Exemplar der GNU General Public License zusammen mit diesem Programm erhalten haben.
-		Falls nicht, siehe &lt;http://www.gnu.org/licenses/&gt;.
-	</string>
+	<string name="app_license">Copyright © 2015-2018 Ramon Mifsud
+\n 
+\nDieses Programm ist freie Software. Sie können es unter den Bedingungen der GNU General Public License, wie von der Free Software Foundation veröffentlicht (Version 3 der Lizenz), weitergeben und/oder modifizieren.
+\n 
+\nDie Veröffentlichung dieses Programms erfolgt in der Hoffnung, daß es Ihnen von Nutzen sein wird, aber OHNE IRGENDEINE GARANTIE, sogar ohne die implizite Garantie der MARKTREIFE oder der VERWENDBARKEIT FÜR EINEN BESTIMMTEN ZWECK. Details finden Sie in der GNU General Public License.
+\n 
+\nSie sollten ein Exemplar der GNU General Public License zusammen mit diesem Programm erhalten haben. Falls nicht, siehe &lt;http://www.gnu.org/licenses/&gt;</string>
 	<string name="i_agree">Zustimmen</string>
 
 	<string name="pref_other_category">Andere</string>
@@ -67,7 +61,7 @@
 	<string name="pref_summary_default_tab">Standard Tab welcher beim SkyTube-Start angezeigt wird: %s</string>
 
 	<string name="pref_title_screen_orientation">Bildschirmausrichtung</string>
-	<string name="pref_summary_screen_orientation">Video player\'s orientation:  %s</string>
+	<string name="pref_summary_screen_orientation">Ausrichtung des Videoplayers: %s</string>
 	<string-array name="screen_orientations">
 		<item>Automatisch</item>
 		<item>Querformat</item>
@@ -75,15 +69,15 @@
 		<item>Gerätesensor</item>
 	</string-array>
 
-	<string name="pref_title_youtube_api_key">YouTube API Key</string>
+	<string name="pref_title_youtube_api_key">YouTube-API-Schlüssel</string>
 	<string name="pref_summary_youtube_api_key">Gib deinen eigenen YouTube API Key ein.  Leer lassen um den Standard API Key zu verwenden.</string>
 	<string name="pref_youtube_api_key_error">Beim Versuch, den eingegebenen API Key zu validieren, ist ein Fehler aufgetreten.</string>
 	<string name="pref_youtube_api_key_custom">Der Key is gültig.  Starte die App neu um den neuen YouTube API Key zu verwenden.</string>
 	<string name="pref_youtube_api_key_default">Starte die App neu um zum Standard YouTube API Key zurück zu wechseln.</string>
 	<string name="restart">Neustarten</string>
 
-	<string name="pref_title_feed_notification">Feed Auto Notification</string>
-	<string name="pref_summary_feed_notification">How often to check for new videos from subscribed channels: %s</string>
+	<string name="pref_title_feed_notification">Automatische Feedbenachrichtigung</string>
+	<string name="pref_summary_feed_notification">Wie oft nach neuen Videos in abonnierten Kanälen gesucht wird: %s</string>
 	<string-array name="feed_notification">
 		<item>Off</item>
 		<item>6 Hours</item>
@@ -91,11 +85,11 @@
 		<item>24 Hours</item>
 	</string-array>
 
-	<string name="pref_title_disable_immersive_mode">Disable Immersive Mode</string>
-	<string name="pref_summary_disable_immersive_mode">Comments and video description icons and the navigation bar shall always be displayed</string>
+	<string name="pref_title_disable_immersive_mode">Immersiven Modus deaktivieren</string>
+	<string name="pref_summary_disable_immersive_mode">Kommentare und Videobeschreibungen sowie die Navigationsleiste werden immer angezeigt</string>
 
-	<string name="pref_title_allow_mobile_downloads">Allow downloads on mobile networks</string>
-	<string name="pref_summary_allow_mobile_downloads">Select this to enable downloading videos on mobile networks. Otherwise, videos can only be downloaded on Wi-Fi.</string>
+	<string name="pref_title_allow_mobile_downloads">Downloads in Mobilfunknetzen zulassen</string>
+	<string name="pref_summary_allow_mobile_downloads">Wählen Sie diese Option, um das Herunterladen von Videos in Mobilfunknetzen zu ermöglichen. Ansonsten können Videos nur über WLAN heruntergeladen werden.</string>
 <string name="pref_title_choose_player">Videoplayer</string>
 	<string name="pref_summary_choose_player">Zu verwendender Videoplayer: %s</string>
 	<string name="pref_title_subscriptions_alphabetical_order">Kanäle alphabetisch sortieren</string>
