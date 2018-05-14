@@ -120,4 +120,9 @@
 	<string name="channel_already_whitelisted">頻道已列入白名單。</string>
 	<string name="channel_whitelist_updated">頻道已列入白名單。請重新整理影片。</string>
 	<string name="channel_unwhitelist_success">頻道白名單已更新。請重新整理影片。</string>
+	<string name="channel_blacklist_update_failure">無法從黑名單中移除指定的頻道…</string>
+	<string name="channel_whitelist_update_failure">無法將指定的頻道列入白名單…</string>
+	<string name="channel_unwhitelist_failure">無法解除白名單指定的頻道…</string>
+
+	<string name="pref_summary_disable_playback_status">如果已選取，重播狀態會被清除並不會被使用。</string>
 	</resources>
