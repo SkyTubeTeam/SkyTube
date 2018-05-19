@@ -8,7 +8,6 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -18,20 +17,15 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.mikepenz.actionitembadge.library.ActionItemBadge;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.Logger;
-import free.rm.skytube.businessobjects.YouTube.VideoBlocker;
 import free.rm.skytube.businessobjects.db.BookmarksDb;
 import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
 import free.rm.skytube.gui.businessobjects.MainActivityListener;
@@ -45,7 +39,6 @@ public class MainFragment extends FragmentEx {
 	private ActionBarDrawerToggle		subsDrawerToggle;
 	private TabLayout                   tabLayout = null;
 	private DrawerLayout 				subsDrawerLayout = null;
-	private VideoBlockerPlugin          videoBlockerPlugin = new VideoBlockerPlugin();
 
 	/** List of fragments that will be displayed as tabs. */
 	private List<VideosGridFragment>	videoGridFragmentsList = new ArrayList<>();
@@ -186,17 +179,6 @@ public class MainFragment extends FragmentEx {
 
 
 	@Override
-	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		super.onCreateOptionsMenu(menu, inflater);
-
-		if (videoBlockerPlugin.getTotalBlockedVideos() == 0) {
-			ActionItemBadge.update(menu.findItem(R.id.menu_blocker), ContextCompat.getDrawable(getContext(), R.drawable.ic_video_blocker), "");
-		} else {
-			ActionItemBadge.update(getActivity(), menu.findItem(R.id.menu_blocker), ContextCompat.getDrawable(getContext(), R.drawable.ic_video_blocker), ActionItemBadge.BadgeStyles.RED, videoBlockerPlugin.getTotalBlockedVideos());
-		}
-	}
-
-	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Pass the event to ActionBarDrawerToggle, if it returns true, then it has handled the app
 		// icon touch event
@@ -291,38 +273,5 @@ public class MainFragment extends FragmentEx {
 	public void closeDrawer() {
 		subsDrawerLayout.closeDrawer(GravityCompat.START);
 	}
-
-
-
-	//////////////////////////////////////////////////////////////////////////////////////////
-
-
-	private class VideoBlockerPlugin implements VideoBlocker.VideoBlockerListener {
-
-		private ArrayList<VideoBlocker.BlockedVideo> blockedVideos = new ArrayList<>();
-
-
-		public VideoBlockerPlugin() {
-			// VideoBlocker will notify this class whenever a video is blocked
-			VideoBlocker.setVideoBlockerListener(this);
-		}
-
-
-		@Override
-		public void onVideoBlocked(VideoBlocker.BlockedVideo blockedVideo) {
-			blockedVideos.add(blockedVideo);
-			getAppCompatActivity().invalidateOptionsMenu();
-		}
-
-
-		private int getTotalBlockedVideos() {
-			return blockedVideos.size();
-		}
-
-	}
-
-
-
-
 
 }

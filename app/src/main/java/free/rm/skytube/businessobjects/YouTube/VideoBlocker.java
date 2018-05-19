@@ -30,6 +30,7 @@ import com.optimaize.langdetect.text.TextObject;
 import com.optimaize.langdetect.text.TextObjectFactory;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -391,7 +392,7 @@ public class VideoBlocker {
 	/**
 	 * The type of video filtering.
 	 */
-	public enum FilterType {
+	public enum FilterType implements Serializable {
 		CHANNEL_BLACKLIST,
 		CHANNEL_WHITELIST,
 		LANGUAGE,
@@ -404,7 +405,7 @@ public class VideoBlocker {
 	/**
 	 * Represents a blocked YouTube video.
 	 */
-	public static class BlockedVideo {
+	public static class BlockedVideo implements Serializable {
 
 		private YouTubeVideo    video;
 		private FilterType      filteringType;
