@@ -132,6 +132,11 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 		// inflate the layout for this fragment
 		View view = inflater.inflate(R.layout.fragment_youtube_player_v2, container, false);
 
+		// prevent the device from sleeping while playing
+		if (getActivity() != null  &&  (getActivity().getWindow()) != null) {
+			getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+		}
+
 		// indicate that this fragment has an action bar menu
 		setHasOptionsMenu(true);
 
