@@ -398,7 +398,27 @@ public class VideoBlocker {
 		LANGUAGE,
 		LANGUAGE_DETECTION,
 		VIEWS,
-		DISLIKES,
+		DISLIKES;
+
+		@Override
+		public String toString() {
+			switch (this) {
+				case CHANNEL_BLACKLIST:
+					return "⚫";
+				case CHANNEL_WHITELIST:
+					return "⚪";
+				case LANGUAGE:
+					return "\uD83D\uDDE3️";
+				case LANGUAGE_DETECTION:
+					return "\uD83D\uDD0D";
+				case VIEWS:
+					return "\uD83D\uDC41️";
+				case DISLIKES:
+					return "\uD83D\uDC4E";
+			}
+
+			return super.toString();
+		}
 	}
 
 

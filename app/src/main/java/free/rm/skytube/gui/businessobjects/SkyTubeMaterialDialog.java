@@ -38,6 +38,7 @@ public class SkyTubeMaterialDialog extends MaterialDialog.Builder {
 		contentColorRes(R.color.dialog_content_text);
 		positiveColorRes(R.color.dialog_positive_text);
 		negativeColorRes(R.color.dialog_negative_text);
+		neutralColorRes(R.color.dialog_neutral_text);
 
 		positiveText(R.string.ok);
 		negativeText(R.string.cancel);

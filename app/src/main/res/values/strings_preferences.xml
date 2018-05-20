@@ -180,7 +180,7 @@
 		<item>"en(?:-.+)?"</item>	<!-- "en" or "en-US" or "en-CA" ... -->
 		<item>en-GB</item>
 		<item>"en(?:-US)?"</item>	<!-- "en" or "en-US" -->
-		<item>es</item>
+		<item>es(?:-ES)?"</item>    <!-- Somehow YouTube uses both "es" and "es-ES" for Spanish -->
 		<item>es-419</item>
 		<item>es-US</item>
 		<item>eu</item>

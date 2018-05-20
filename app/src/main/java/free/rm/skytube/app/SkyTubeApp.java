@@ -37,6 +37,7 @@ import android.os.Build;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.support.multidex.MultiDexApplication;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AlertDialog;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -134,6 +135,16 @@ public class SkyTubeApp extends MultiDexApplication {
 	 */
 	public static float getDimension(int dimensionId) {
 		return skyTubeApp.getResources().getDimension(dimensionId);
+	}
+
+
+	/**
+	 * @param colorId   Color resource ID (e.g. R.color.green).
+	 *
+	 * @return The color for the given color resource id.
+	 */
+	public static int getColorEx(int colorId) {
+		return ResourcesCompat.getColor(skyTubeApp.getResources(), colorId, null);
 	}
 
 

@@ -30,8 +30,6 @@ import free.rm.skytube.gui.fragments.YouTubePlayerFragment;
  */
 public class YouTubePlayer {
 
-	private static final String TAG = YouTubePlayer.class.getSimpleName();
-
 	/**
 	 * Launches the custom-made YouTube player so that the user can view the selected video.
 	 *

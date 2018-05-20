@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="blocked_videos">Blocked Videos</string>
 	<string name="block_channel">Block Channel</string>
 	<string name="channel_blacklisted">Channel blacklisted. Please refresh.</string>
 	<string name="channel_blacklist_error">Channel could not be blacklisted.</string>

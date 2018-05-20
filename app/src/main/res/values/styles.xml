@@ -32,7 +32,10 @@
 		<item name="md_positive_color">@android:color/white</item>
 		<item name="md_neutral_color">@android:color/white</item>
 		<item name="md_negative_color">@android:color/white</item>
+	</style>
 
+	<style name="BlockedVideoTextView" parent="AppTheme">
+		<item name="android:padding">7dp</item>
 	</style>
 
 

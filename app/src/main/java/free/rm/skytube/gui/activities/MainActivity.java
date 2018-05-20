@@ -45,7 +45,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
-import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubePlaylist;
 import free.rm.skytube.businessobjects.YouTube.VideoBlocker;
@@ -53,6 +52,7 @@ import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
 import free.rm.skytube.businessobjects.db.SearchHistoryDb;
 import free.rm.skytube.businessobjects.db.SearchHistoryTable;
 import free.rm.skytube.businessobjects.interfaces.SearchHistoryClickListener;
+import free.rm.skytube.gui.businessobjects.BlockedVideosDialog;
 import free.rm.skytube.gui.businessobjects.MainActivityListener;
 import free.rm.skytube.gui.businessobjects.YouTubePlayer;
 import free.rm.skytube.gui.businessobjects.adapters.SearchHistoryCursorAdapter;
@@ -253,6 +253,9 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
+			case R.id.menu_blocker:
+				videoBlockerPlugin.onMenuBlockerIconClicked();
+				return true;
 			case R.id.menu_preferences:
 				Intent i = new Intent(this, PreferencesActivity.class);
 				startActivity(i);
@@ -420,7 +423,9 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 	/**
 	 * A module/"plugin"/icon that displays the total number of blocked videos.
 	 */
-	private static class VideoBlockerPlugin implements VideoBlocker.VideoBlockerListener, Serializable {
+	private static class VideoBlockerPlugin implements VideoBlocker.VideoBlockerListener,
+			BlockedVideosDialog.BlockedVideosDialogListener,
+			Serializable {
 
 		private ArrayList<VideoBlocker.BlockedVideo> blockedVideos = new ArrayList<>();
 		private transient AppCompatActivity activity = null;
@@ -441,10 +446,6 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 		@Override
 		public void onVideoBlocked(VideoBlocker.BlockedVideo blockedVideo) {
 			blockedVideos.add(blockedVideo);
-
-			if (activity == null)
-				Logger.d(this, "null");
-
 			activity.invalidateOptionsMenu();
 		}
 
@@ -466,6 +467,18 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 		}
 
 
+		void onMenuBlockerIconClicked() {
+			new BlockedVideosDialog(activity, this, blockedVideos).show();
+		}
+
+
+		@Override
+		public void onClearBlockedVideos() {
+			blockedVideos.clear();
+			activity.invalidateOptionsMenu();
+		}
+
+
 		/**
 		 * @return Total number of blocked videos.
 		 */
@@ -474,5 +487,8 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 		}
 
 	}
+
+
+
 
 }
