@@ -372,12 +372,16 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 	 * @param videoUri  The Uri of the video that is going to be played.
 	 */
 	private void playVideo(Uri videoUri) {
-		DefaultDataSourceFactory dataSourceFactory = new DefaultDataSourceFactory(getContext(), "ST. Agent", new DefaultBandwidthMeter());
-		ExtractorMediaSource.Factory extMediaSourceFactory = new ExtractorMediaSource.Factory(dataSourceFactory);
-		ExtractorMediaSource mediaSource = extMediaSourceFactory.createMediaSource(videoUri);
-		player.prepare(mediaSource);
-		if(playerInitialPosition > 0)
-			player.seekTo(playerInitialPosition);
+		// Check if this fragment is visible before playing the video.  It might not be visible if
+		// the user clicked on the back button (and hence cancelling this operation)...
+		if (isVisible()) {
+			DefaultDataSourceFactory dataSourceFactory = new DefaultDataSourceFactory(getContext(), "ST. Agent", new DefaultBandwidthMeter());
+			ExtractorMediaSource.Factory extMediaSourceFactory = new ExtractorMediaSource.Factory(dataSourceFactory);
+			ExtractorMediaSource mediaSource = extMediaSourceFactory.createMediaSource(videoUri);
+			player.prepare(mediaSource);
+			if (playerInitialPosition > 0)
+				player.seekTo(playerInitialPosition);
+		}
 	}
 
 
