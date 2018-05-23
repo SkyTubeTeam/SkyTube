@@ -6,7 +6,8 @@ vX.XX - XX XX 2018:
 		- Channel whitelisting;
 		- Block videos if their language is not the same as the user's preferred one(s);
 		- Low views video blocking;
-		- High dislikes video blocking.
+		- High dislikes video blocking;
+		- Icon in the toolbar displaying how many videos were blocked.
 	* Exoplayer support.
 	* App now gives the user the option to resume playing (previously) partially watched videos.
     * YouTube's videos and playlists links inside the video description are now handled and opened inside SkyTube.
