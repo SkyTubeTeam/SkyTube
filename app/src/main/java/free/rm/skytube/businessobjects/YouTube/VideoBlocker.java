@@ -402,19 +402,21 @@ public class VideoBlocker {
 
 		@Override
 		public String toString() {
+			final boolean legacyAndroid = (android.os.Build.VERSION.SDK_INT >= 24); // Android 7.0
+
 			switch (this) {
 				case CHANNEL_BLACKLIST:
-					return "⚫";
+					return legacyAndroid ? "B" : "⚫";
 				case CHANNEL_WHITELIST:
-					return "⚪";
+					return legacyAndroid ? "W" : "⚪";
 				case LANGUAGE:
-					return "\uD83D\uDDE3️";
+					return legacyAndroid ? "L" : "\uD83D\uDDE3️";
 				case LANGUAGE_DETECTION:
-					return "\uD83D\uDD0D";
+					return legacyAndroid ? "D" : "\uD83D\uDD0D";
 				case VIEWS:
-					return "\uD83D\uDC41️";
+					return legacyAndroid ? "V" : "\uD83D\uDC41️";
 				case DISLIKES:
-					return "\uD83D\uDC4E";
+					return legacyAndroid ? "D" : "\uD83D\uDC4E";
 			}
 
 			return super.toString();
