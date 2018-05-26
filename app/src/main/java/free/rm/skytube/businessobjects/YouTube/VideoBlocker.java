@@ -402,21 +402,23 @@ public class VideoBlocker {
 
 		@Override
 		public String toString() {
-			final boolean legacyAndroid = (android.os.Build.VERSION.SDK_INT >= 24); // Android 7.0
+			// Full emoji support was introduced in Android 7.0.
+			// Refer to:  https://www.android.com/versions/nougat-7-0/
+			final boolean emojisSupported = (android.os.Build.VERSION.SDK_INT >= 24);
 
 			switch (this) {
 				case CHANNEL_BLACKLIST:
-					return legacyAndroid ? "B" : "⚫";
+					return emojisSupported ? "⚫" : "B";
 				case CHANNEL_WHITELIST:
-					return legacyAndroid ? "W" : "⚪";
+					return emojisSupported ? "⚪" : "W";
 				case LANGUAGE:
-					return legacyAndroid ? "L" : "\uD83D\uDDE3️";
+					return emojisSupported ? "\uD83D\uDDE3️" : "L";
 				case LANGUAGE_DETECTION:
-					return legacyAndroid ? "D" : "\uD83D\uDD0D";
+					return emojisSupported ? "\uD83D\uDD0D" : "LD";
 				case VIEWS:
-					return legacyAndroid ? "V" : "\uD83D\uDC41️";
+					return emojisSupported ? "\uD83D\uDC41️" : "V";
 				case DISLIKES:
-					return legacyAndroid ? "D" : "\uD83D\uDC4E";
+					return emojisSupported ? "\uD83D\uDC4E" : "D";
 			}
 
 			return super.toString();

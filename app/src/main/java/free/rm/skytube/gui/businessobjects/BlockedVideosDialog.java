@@ -28,9 +28,10 @@ import android.widget.TextView;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.google.common.collect.Lists;
 
+import java.text.NumberFormat;
 import java.util.List;
-import java.util.Locale;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
@@ -61,7 +62,7 @@ public class BlockedVideosDialog extends SkyTubeMaterialDialog {
 		} else {
 			// display a list of blocked videos
 			title(R.string.blocked_videos);
-			adapter(new BlockedVideosAdapter(context, blockedVideos), null);
+			adapter(new BlockedVideosAdapter(context, Lists.reverse(blockedVideos)), null);     // invert the list of blocked videos
 			neutralText(R.string.clear);
 			onNeutral(new MaterialDialog.SingleButtonCallback() {
 				@Override
@@ -130,7 +131,7 @@ public class BlockedVideosDialog extends SkyTubeMaterialDialog {
 			});
 
 			// update view holder's data
-			holder.id.setText(String.format(Locale.getDefault(), "%d", position+1));
+			holder.id.setText(NumberFormat.getNumberInstance().format(getItemCount() - position)); // since the list of blocked videos is inverted, we need to get the original item position
 			holder.videoBlocked.setText(blockedVideo.getVideo().getTitle());
 			holder.filter.setText(blockedVideo.getFilteringType().toString());
 			holder.reason.setText(blockedVideo.getReason());
