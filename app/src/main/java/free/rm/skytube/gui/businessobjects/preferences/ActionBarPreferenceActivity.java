@@ -13,6 +13,23 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ *
+ * Based on:  https://android.googlesource.com/platform/development/+/58bf5b99e6132332afb8b44b4c8cedf5756ad464/samples/Support7Demos/src/com/example/android/supportv7/app/AppCompatPreferenceActivity.java
+ * Copyright (C) 2014 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 package free.rm.skytube.gui.businessobjects.preferences;
@@ -21,14 +38,13 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.support.annotation.LayoutRes;
-import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatDelegate;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+
+import org.jetbrains.annotations.NotNull;
 
 import free.rm.skytube.R;
 
@@ -46,23 +62,13 @@ public class ActionBarPreferenceActivity extends PreferenceActivity {
 
 		ActionBar actionBar = getSupportActionBar();
 		if (actionBar != null) {
+			actionBar.setHomeButtonEnabled(true);
 			actionBar.setDisplayHomeAsUpEnabled(true);
-			actionBar.setTitle(R.string.preferences);
+			actionBar.setDisplayShowTitleEnabled(true);
+			setTitle(R.string.preferences);
 		}
 
 		super.onCreate(savedInstanceState);
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-			// close this activity when the user clicks on the back button (action bar)
-			case android.R.id.home:
-				finish();
-				return true;
-			default:
-				return super.onOptionsItemSelected(item);
-		}
 	}
 
 	@Override
@@ -75,10 +81,7 @@ public class ActionBarPreferenceActivity extends PreferenceActivity {
 		return getDelegate().getSupportActionBar();
 	}
 
-	public void setSupportActionBar(@Nullable Toolbar toolbar) {
-		getDelegate().setSupportActionBar(toolbar);
-	}
-
+	@NotNull
 	@Override
 	public MenuInflater getMenuInflater() {
 		return getDelegate().getMenuInflater();
