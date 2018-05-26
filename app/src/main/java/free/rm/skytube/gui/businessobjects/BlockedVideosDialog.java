@@ -18,6 +18,7 @@
 package free.rm.skytube.gui.businessobjects;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -34,6 +35,10 @@ import java.util.Locale;
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.YouTube.VideoBlocker;
+import free.rm.skytube.gui.activities.PreferencesActivity;
+import free.rm.skytube.gui.fragments.preferences.VideoBlockerPreferenceFragment;
+
+import static android.preference.PreferenceActivity.EXTRA_SHOW_FRAGMENT;
 
 /**
  * A dialog that displays a list of blocked videos.
@@ -43,20 +48,41 @@ public class BlockedVideosDialog extends SkyTubeMaterialDialog {
 	private final BlockedVideosDialogListener listener;
 
 
-	public BlockedVideosDialog(@NonNull Context context, final BlockedVideosDialogListener blockedVideosDialogListener, final List<VideoBlocker.BlockedVideo> blockedVideos) {
+	public BlockedVideosDialog(@NonNull final Context context, final BlockedVideosDialogListener blockedVideosDialogListener, final List<VideoBlocker.BlockedVideo> blockedVideos) {
 		super(context);
-		this.listener = blockedVideosDialogListener;
 
-		adapter(new BlockedVideosAdapter(context, blockedVideos), null);
+		if (blockedVideos.isEmpty()) {
+			// if no videos have been blocked, the ask the user is he wants to configure the
+			// preferences of the video blocker...
+			title(R.string.pref_video_blocker_category);
+			content(R.string.no_videos_blocked);
 
-		title(R.string.blocked_videos);
-		negativeText("");
-		neutralText(R.string.clear);
-		onNeutral(new MaterialDialog.SingleButtonCallback() {
+			this.listener = null;
+		} else {
+			// display a list of blocked videos
+			title(R.string.blocked_videos);
+			adapter(new BlockedVideosAdapter(context, blockedVideos), null);
+			neutralText(R.string.clear);
+			onNeutral(new MaterialDialog.SingleButtonCallback() {
+				@Override
+				public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+					if (listener != null)
+						listener.onClearBlockedVideos();
+				}
+			});
+
+			this.listener = blockedVideosDialogListener;
+		}
+
+		positiveText(R.string.configure);
+		onPositive(new MaterialDialog.SingleButtonCallback() {
 			@Override
 			public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-				if (listener != null)
-					listener.onClearBlockedVideos();
+				// display the PreferenceActivity where the Videos Blocker tab is selected/opened
+				// by default
+				final Intent i = new Intent(context, PreferencesActivity.class);
+				i.putExtra(EXTRA_SHOW_FRAGMENT, VideoBlockerPreferenceFragment.class.getName());
+				context.startActivity(i);
 			}
 		});
 	}

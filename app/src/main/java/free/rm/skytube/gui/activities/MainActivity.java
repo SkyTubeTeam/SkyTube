@@ -23,6 +23,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -37,6 +38,7 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 
 import com.mikepenz.actionitembadge.library.ActionItemBadge;
+import com.mikepenz.actionitembadge.library.utils.BadgeStyle;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -454,15 +456,22 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 		 * Setup the video blocker notification icon which will be displayed in the tool bar.
  		 */
 		void setupIconForToolBar(final Menu menu) {
-			if (getTotalBlockedVideos() == 0) {
-				ActionItemBadge.update(menu.findItem(R.id.menu_blocker),
-						ContextCompat.getDrawable(activity, R.drawable.ic_video_blocker), "");
-			} else {
+			if (getTotalBlockedVideos() > 0) {
+				// display a red bubble containing the number of blocked videos
 				ActionItemBadge.update(activity,
 						menu.findItem(R.id.menu_blocker),
 						ContextCompat.getDrawable(activity, R.drawable.ic_video_blocker),
 						ActionItemBadge.BadgeStyles.RED,
 						getTotalBlockedVideos());
+			} else {
+				// Else, set the bubble to transparent.  This is required so that when the user
+				// clicks on the icon, the app will be able to detect such click and displays the
+				// BlockedVideosDialog (otherwise, the ActionItemBadge would just ignore such clicks.
+				ActionItemBadge.update(activity,
+						menu.findItem(R.id.menu_blocker),
+						ContextCompat.getDrawable(activity, R.drawable.ic_video_blocker),
+						new BadgeStyle(BadgeStyle.Style.DEFAULT, com.mikepenz.actionitembadge.library.R.layout.menu_action_item_badge, Color.TRANSPARENT, Color.TRANSPARENT, Color.WHITE),
+						"");
 			}
 		}
 
