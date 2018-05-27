@@ -40,4 +40,5 @@
 	<string name="mark_unwatched">Markeren als \'niet bekeken\'</string>
 
 	<string name="should_resume">Wil je verdergaan waar je was gebleven?</string>
+<string name="resume">Hervatten</string>
 </resources>
