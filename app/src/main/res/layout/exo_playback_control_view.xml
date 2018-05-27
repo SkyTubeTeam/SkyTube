@@ -18,11 +18,9 @@
 	<!-- CONTROL BUTTONS -->
 	<LinearLayout
 		android:id="@+id/exo_controls"
-		android:layout_width="match_parent"
+		android:layout_width="wrap_content"
 		android:layout_height="0dp"
-		android:layout_marginBottom="32dp"
-		android:layout_marginEnd="8dp"
-		android:layout_marginStart="8dp"
+		android:layout_marginBottom="0dp"
 		android:background="@color/video_player_v2_hud"
 		android:gravity="center_vertical|center_horizontal"
 		android:orientation="horizontal"
@@ -67,7 +65,7 @@
 	<LinearLayout
 		android:id="@+id/exo_timeline"
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
+		android:layout_height="26dp"
 		android:background="@color/video_player_v2_hud"
 		android:gravity="center_horizontal"
 		android:orientation="horizontal"
@@ -81,7 +79,7 @@
 		<com.google.android.exoplayer2.ui.DefaultTimeBar
 			android:id="@id/exo_progress"
 			android:layout_width="0dp"
-			android:layout_height="26dp"
+			android:layout_height="wrap_content"
 			android:layout_weight="1"
 			app:played_color="@color/video_player_v2_seek_bar"/>
 

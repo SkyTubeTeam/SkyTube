@@ -41,4 +41,5 @@
 	<string name="tutorial_pause_video">Double tap to pause or play a video.</string>
 
 	<string name="should_resume">Do you wish to resume from where you stopped?</string>
+	<string name="resume">Resume</string>
 </resources>

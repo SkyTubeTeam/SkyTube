@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.Gravity;
@@ -29,6 +30,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
@@ -55,6 +58,7 @@ import free.rm.skytube.gui.activities.MainActivity;
 import free.rm.skytube.gui.activities.ThumbnailViewerActivity;
 import free.rm.skytube.gui.businessobjects.MediaControllerEx;
 import free.rm.skytube.gui.businessobjects.OnSwipeTouchListener;
+import free.rm.skytube.gui.businessobjects.SkyTubeMaterialDialog;
 import free.rm.skytube.gui.businessobjects.SubscribeButton;
 import free.rm.skytube.gui.businessobjects.YouTubeVideoListener;
 import free.rm.skytube.gui.businessobjects.adapters.CommentsAdapter;
@@ -462,24 +466,26 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 			videoDescRatingsDisabledTextView.setVisibility(View.VISIBLE);
 		}
 
-		// If Playback Status is not disabled and this video is in progress, ask the user if they would like to resume.
+		// ask the user if he wants to resume playing this video (if he has played it in the past...)
 		if(!SkyTubeApp.getPreferenceManager().getBoolean(getString(R.string.pref_key_disable_playback_status), false) && PlaybackStatusDb.getVideoDownloadsDb().getVideoWatchedStatus(youTubeVideo).position > 0) {
-			new AlertDialog.Builder(getActivity())
-							.setTitle(R.string.should_resume)
-							.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-								@Override
-								public void onClick(DialogInterface dialog, int which) {
-									videoCurrentPosition = (int)PlaybackStatusDb.getVideoDownloadsDb().getVideoWatchedStatus(youTubeVideo).position;
-									loadVideo();
-								}
-							})
-							.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
-								@Override
-								public void onClick(DialogInterface dialogInterface, int i) {
-									loadVideo();
-								}
-							})
-							.show();
+			new SkyTubeMaterialDialog(getContext())
+					.content(R.string.should_resume)
+					.positiveText(R.string.resume)
+					.onPositive(new MaterialDialog.SingleButtonCallback() {
+						@Override
+						public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+							videoCurrentPosition = (int)PlaybackStatusDb.getVideoDownloadsDb().getVideoWatchedStatus(youTubeVideo).position;
+							loadVideo();
+						}
+					})
+					.negativeText(R.string.no)
+					.onNegative(new MaterialDialog.SingleButtonCallback() {
+						@Override
+						public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+							loadVideo();
+						}
+					})
+					.show();
 		} else {
 			loadVideo();
 		}

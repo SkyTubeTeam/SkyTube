@@ -42,6 +42,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.exoplayer2.ExoPlayerFactory;
@@ -82,6 +84,7 @@ import free.rm.skytube.businessobjects.interfaces.YouTubePlayerFragmentInterface
 import free.rm.skytube.gui.activities.MainActivity;
 import free.rm.skytube.gui.activities.ThumbnailViewerActivity;
 import free.rm.skytube.gui.businessobjects.PlayerViewGestureDetector;
+import free.rm.skytube.gui.businessobjects.SkyTubeMaterialDialog;
 import free.rm.skytube.gui.businessobjects.SubscribeButton;
 import free.rm.skytube.gui.businessobjects.adapters.CommentsAdapter;
 import free.rm.skytube.gui.businessobjects.fragments.ImmersiveModeFragment;
@@ -267,23 +270,26 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 		}
 
 
+		// ask the user if he wants to resume playing this video (if he has played it in the past...)
 		if(!SkyTubeApp.getPreferenceManager().getBoolean(getString(R.string.pref_key_disable_playback_status), false) && PlaybackStatusDb.getVideoDownloadsDb().getVideoWatchedStatus(youTubeVideo).position > 0) {
-			new AlertDialog.Builder(getActivity())
-				.setTitle(R.string.should_resume)
-				.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						playerInitialPosition = PlaybackStatusDb.getVideoDownloadsDb().getVideoWatchedStatus(youTubeVideo).position;
-						loadVideo();
-					}
-				})
-				.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialogInterface, int i) {
-						loadVideo();
-					}
-				})
-				.show();
+			new SkyTubeMaterialDialog(getContext())
+					.content(R.string.should_resume)
+					.positiveText(R.string.resume)
+					.onPositive(new MaterialDialog.SingleButtonCallback() {
+						@Override
+						public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+							playerInitialPosition = PlaybackStatusDb.getVideoDownloadsDb().getVideoWatchedStatus(youTubeVideo).position;
+							loadVideo();
+						}
+					})
+					.negativeText(R.string.no)
+					.onNegative(new MaterialDialog.SingleButtonCallback() {
+						@Override
+						public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+							loadVideo();
+						}
+					})
+					.show();
 		} else {
 			loadVideo();
 		}
