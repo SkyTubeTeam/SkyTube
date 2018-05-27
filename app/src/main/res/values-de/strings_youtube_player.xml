@@ -40,4 +40,5 @@
 	<string name="mark_unwatched">Nicht angesehene markieren</string>
 
 	<string name="should_resume">Wollen Sie fortsetzen, wo Sie aufgehört haben?</string>
+<string name="resume">Fortsetzen</string>
 </resources>
