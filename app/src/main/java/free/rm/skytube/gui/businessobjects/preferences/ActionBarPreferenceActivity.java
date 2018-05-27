@@ -41,6 +41,7 @@ import android.support.annotation.LayoutRes;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatDelegate;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -79,6 +80,19 @@ public class ActionBarPreferenceActivity extends PreferenceActivity {
 
 	public ActionBar getSupportActionBar() {
 		return getDelegate().getSupportActionBar();
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+			case android.R.id.home:
+				// Old versions of Android did not handle when the user presses the back (<-) action
+				// bar's button.  Hence why it is explicitly being handled...
+				onBackPressed();
+				return true;
+			default:
+				return super.onOptionsItemSelected(item);
+		}
 	}
 
 	@NotNull
