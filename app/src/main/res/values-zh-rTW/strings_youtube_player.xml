@@ -39,4 +39,5 @@
 	<string name="mark_unwatched">標記未觀看</string>
 
 	<string name="should_resume">您想從停止的地方恢復嗎？</string>
+<string name="resume">繼續</string>
 </resources>
