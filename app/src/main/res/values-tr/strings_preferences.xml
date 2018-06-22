@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources><string name="preferences">Tercihler</string>
 
-	<string name="pref_languages_filter_category">Diller ve Bölgeler</string>
+	<string name="pref_languages_filter_category">Dil ve Bölge Filtreleri</string>
 	<string name="pref_title_preferred_regions">Tercih Edilen Bölge</string>
 	<string name="pref_summary_preferred_regions">Tercih edilen bölge seçiniz. Bu \"Önerilen\" videolar kategorisini süzmek için kullanılır:  %s</string>
 
 	<string name="pref_title_preferred_languages">Tercih Edilen Dil(ler)</string>
-	<string name="pref_summary_preferred_languages">DENEYSEL: Bir ya da daha fazla tercih edilen dil seçiniz. Bu \"En Popüler\" video kategorisi ve video aramaları için kullanılır.</string>
+	<string name="pref_summary_preferred_languages">Tercih ettiğiniz dilleri seçin.</string>
 
 	<string name="pref_video_player_category">Video Oynatıcı</string>
 	<string name="pref_title_preferred_res">Tercih Edilen Çözünürlük</string>
@@ -113,4 +113,34 @@
 	<string name="block">Engelle</string>
 	<string name="please_wait">Lütfen bekleyin…</string>
 	<string name="channel_already_whitelisted">Kanal zaten beyaz listeye alındı.</string>
-	</resources>
+	<string name="channel_whitelist_updated">Kanal beyaz listeye ekledi. Lütfen videoları yenileyin.</string>
+	<string name="channel_whitelist_update_failure">Verilen kanalın beyaz listesi başarısız oldu…</string>
+	<string name="channel_unwhitelist_success">Kanal beyaz listesi güncellendi. Lütfen videoları yenileyin.</string>
+	<string name="channel_unwhitelist_failure">Verilen kanal(lar)ın beyaz listeden kaldırılması başarısız oldu…</string>
+
+	<string name="no_preferred_lang_selected">Tercih edilen dil seçilmedi. Ayar yok sayılır.</string>
+	<string name="preferred_lang_updated">Tercih edilen dil güncellendi. Lütfen videoları yenileyin.</string>
+
+	<string name="pref_title_lang_detection_video_filtering">Dil Algılamalı Video Filtreleme</string>
+	<string name="pref_summary_lang_detection_video_filtering">Videolarda kullanılan dilleri tespit etmek için AI\'yı kullanın ve dilleri tercih ettiğiniz dile eşit değilse bunları engelleyin. Yalnızca yüksek son cihazlarda etkinleştirilmelidir.</string>
+	<string name="setting_updated">Güncelleme ayarlandı. Lütfen videoları yenileyin.</string>
+
+	<string name="pref_other_filters_category">Diğer Filtreler</string>
+	<string name="pref_title_low_views_filter">Görüntüleme</string>
+	<string name="pref_summary_low_views_filter">Videoları düşük görüntülü olarak filtreleyin: %s</string>
+	<string name="pref_title_dislikes_filter">Beğenmeme</string>
+	<string name="pref_summary_dislikes_filter">Yüksek beğenilmeyen videoların filtrelenmesi: %s</string>
+	<string name="pref_privacy_category">Gizlilik</string>
+	<string name="pref_title_disable_search_history">Arama geçmişini devredışı bırak</string>
+	<string name="pref_summary_disable_search_history">Seçilirse, Arama Geçmişi silinecek ve kullanılmayacaktır.</string>
+	<string name="pref_disable_search_history_deleted">Arama Geçmişi silindi.</string>
+
+	<string name="pref_title_disable_playback_status">İzleme durumunu devredışı bırak</string>
+	<string name="pref_summary_disable_playback_status">Seçilirse, İzleme Durumu silinir ve kullanılmayacaktır.</string>
+	<string name="pref_disable_playback_status_deleted">İzleme Durumu silindi.</string>
+
+	<string name="pref_title_clear_playback_status">İzleme durumunu temizle</string>
+	<string name="pref_summary_clear_playback_status">Tüm videolar için oynatma durumunu temizle.</string>
+	<string name="pref_playback_status_cleared">İzleme Durumu silindi.</string>
+
+</resources>
