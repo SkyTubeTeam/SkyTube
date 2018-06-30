@@ -4,10 +4,10 @@
 	<string name="error">Hata</string>
 	<string name="ok">Tamam</string>
 	<string name="search_videos">Video Ara</string>
-	<string name="launch_offical_player_error">Resmî YouTube Oynatıcısnı başlatmaya çalışırken bir hata oldu. Resmî Goolge YouTube App\'inin cihazınızda kurulu olduğundan emin olunuz.</string>
+	<string name="launch_offical_player_error">Resmi YouTube oynatıcısını Google\'dan başlatmaya çalışırken bir hata oluştu. Cihazınıza yüklendiğinden emin olun.</string>
 	<string name="LIVE">CANLI</string>
 
-	<string name="featured">Önerilen</string>
+	<string name="featured">Öne çıkan</string>
 	<string name="most_popular">En Popüler</string>
 
 	<string name="video">Video</string>
@@ -17,5 +17,9 @@
 	<string name="could_not_get_playlists">%s oynatma listesi alınamadı.</string>
 
 	<string name="loading">Yükleniyor…</string>
-    <string name="could_not_get_channel">Could not download channel information!</string>
-</resources>
+    <string name="could_not_get_channel">Kanal bilgisi indirilemedi!</string>
+<string name="hello_blank_fragment">Merhaba boş fragman</string>
+    <string name="yes">Evet</string>
+	<string name="no">Hayır</string>
+
+    </resources>

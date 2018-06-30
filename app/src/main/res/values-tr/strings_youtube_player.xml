@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="error_stream_err_unavailable">Hata mesajı kullanılamıyor.</string>
+<resources><string name="error_stream_err_unavailable">Hata mesajı mevcut değil.</string>
 	<string name="error_stream_decryption_fail">YouTube hizmeti için çözme kodu yüklenemedi.</string>
 	<string name="error_stream_parse_error">Çözümleme hatası.</string>
 
@@ -9,7 +9,7 @@
 	<string name="error_get_video_desc">Videonun tanımı alınırken bir hata oluştu.</string>
 	<string name="error_invalid_url">Geçersiz video URL\'si: %s</string>
 
-	<string name="warning_live_video">Canlı yayın akışları şu an oynatılamıyor. Canlı yayın akışı harici olarak oynatılsın mı?</string>
+	<string name="warning_live_video">Şu an için canlı akışlar oynatılamıyor. Başka bir uygulamada canlı yayını aç?</string>
 
 	<string name="ratings_disabled">Puanlamalar devre dışı</string>
 
@@ -32,7 +32,12 @@
 	<string name="cancel">İptal</string>
 	<string name="clear">Temizle</string>
 
-	<string name="tutorial_comments_icon">Swipe to the left to view comments.</string>
-	<string name="tutorial_video_info_icon">Swipe to the top to view information about the video.</string>
-	<string name="tutorial_pause_video">Double tap to pause or play a video.</string>
+	<string name="tutorial_comments_icon">Yorumları görmek için sola kaydırın.</string>
+	<string name="tutorial_video_info_icon">Videoyla ilgili bilgileri görüntülemek için yukarı kaydırın.</string>
+	<string name="tutorial_pause_video">Videoyu duraklatmak veya oynatmak için iki kez dokunun.</string>
+<string name="mark_watched">İzlendi olarak işaretle</string>
+	<string name="mark_unwatched">İzlenmedi olarak işaretle</string>
+
+	<string name="should_resume">Durduğunuz yerden devam etmek ister misiniz?</string>
+	<string name="resume">Devam et</string>
 </resources>

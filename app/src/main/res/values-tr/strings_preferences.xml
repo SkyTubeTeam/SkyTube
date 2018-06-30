@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources><string name="preferences">Tercihler</string>
 
-	<string name="pref_languages_filter_category">Diller ve Bölgeler</string>
+	<string name="pref_languages_filter_category">Dil ve Bölge Filtreleri</string>
 	<string name="pref_title_preferred_regions">Tercih Edilen Bölge</string>
 	<string name="pref_summary_preferred_regions">Tercih edilen bölge seçiniz. Bu \"Önerilen\" videolar kategorisini süzmek için kullanılır:  %s</string>
 
 	<string name="pref_title_preferred_languages">Tercih Edilen Dil(ler)</string>
-	<string name="pref_summary_preferred_languages">DENEYSEL: Bir ya da daha fazla tercih edilen dil seçiniz. Bu \"En Popüler\" video kategorisi ve video aramaları için kullanılır.</string>
+	<string name="pref_summary_preferred_languages">Tercih ettiğiniz dilleri seçin.</string>
 
 	<string name="pref_video_player_category">Video Oynatıcı</string>
 	<string name="pref_title_preferred_res">Tercih Edilen Çözünürlük</string>
@@ -22,25 +22,25 @@
 	<string name="databases_backup_fail">Verilerinizin yedeklenmesi başarısız oldu.</string>
 	<string name="databases_import_select_backup">İçe aktarmak için yedek dosyası seçiniz</string>
 	<string name="databases_import_nothing_selected">Hiçbir şey seçilmedi…</string>
-	<string name="databases_import_warning_message">Abonelikler ve Sık Kullanılanlar veri tabanları seçilen yedekleme dosyasındaki veri ile değiştirilecek.
-\n
+	<string name="databases_import_warning_message">Abonelik ve yer imi veri tabanları, seçilen yedekleme dosyasındaki verilerle değiştirilecektir.
+\n 
 \nDevam edilsin mi?</string>
 	<string name="continue_">Devam et</string>
 	<string name="databases_importing">İçe aktarılıyor…</string>
 	<string name="databases_import_fail">Verilerinizin içe aktarılması başarısız oldu.</string>
-	<string name="databases_import_success">Veriler başarıyla içe aktarıldı. Değişiklikleri uygulamak için uygulamayı tekrar başlatınız.</string>
+	<string name="databases_import_success">Veritabanları içe aktarıldı. Değişiklikleri uygulamak için uygulamayı yeniden başlatın.</string>
 
 	<string name="pref_title_import_subs">Abonelikleri YouTube\'dan içe aktar</string>
 	<string name="pref_summary_import_subs">Abeoneliklerinizi YouTube hesabınızdan içe aktarın.</string>
-	<string name="subs_import_select_backup">İçe aktarmak için YouTube xml dosyası seçiniz</string>
+	<string name="subs_import_select_backup">İçe aktarılacak YouTube XML dosyasını seçin</string>
 
 	<string name="pref_about_category">Hakkında</string>
 	<string name="pref_title_website">Web Sitesi</string>
-	<string name="pref_title_credits">Credits</string>
-	<string name="pref_summary_credits">Bu App\'i mümkün kılan kişi ve projeler.</string>
-	<string name="pref_title_version">Versiyon</string>
+	<string name="pref_title_credits">Katkılar</string>
+	<string name="pref_summary_credits">Bu uygulamayı mümkün kılan insanlar ve projeler.</string>
+	<string name="pref_title_version">Sürüm</string>
 	<string name="pref_title_updates">Güncelleştirmeler</string>
-	<string name="pref_summary_updates">Güncelleştirmeleri kontrol et.</string>
+	<string name="pref_summary_updates">Yeni sürümleri kontrol edin.</string>
 	<string name="pref_title_license">Lisans</string>
 	<string name="pref_summary_license">GNU Genel Kamu Lisansı versiyon 3</string>
 	<string name="app_license">Copyright © 2015-2018 Ramon Mifsud
@@ -60,7 +60,7 @@
 	<string name="pref_title_default_tab">Varsayılan Sekme</string>
 	<string name="pref_summary_default_tab">SkyTube başlatılırken gösterilecek varsayılan sekme: %s</string>
 	<string name="pref_title_feed_notification">Feed Otomatik Bildirimi</string>
-	<string name="pref_summary_feed_notification">Abone Olunan Kanallardan yeni videolar ne sıklıkta kontrol edilsin: %s</string>
+	<string name="pref_summary_feed_notification">Abone olunan kanallardan yeni videolar ne sıklıkla kontrol edilir: %s</string>
 	<string-array name="feed_notification">
 		<item>Off</item>
 		<item>6 Hours</item>
@@ -77,7 +77,7 @@
 		<item>Aygıt algılayıcısı</item>
 	</string-array>
 
-	<string name="pref_title_disable_immersive_mode">Immersive Modu Devre Dışı Bırak</string>
+	<string name="pref_title_disable_immersive_mode">Sürükleyici modunu devre dışı bırak</string>
 	<string name="pref_summary_disable_immersive_mode">Yorumlar, video tanım simgeleri ve gezinti çubuğu her zaman gösterilsin</string>
 
 	<string name="pref_title_youtube_api_key">YouTube API Anahtarı</string>
@@ -89,4 +89,58 @@
 
 	<string name="pref_title_allow_mobile_downloads">Allow downloads on mobile networks</string>
 	<string name="pref_summary_allow_mobile_downloads">Select this to enable downloading videos on mobile networks. Otherwise, videos can only be downloaded on Wi-Fi.</string>
+<string name="pref_title_choose_player">Video Oynatıcı</string>
+	<string name="pref_summary_choose_player">Kullanılacak video oynatıcı: %s</string>
+	<string name="pref_title_subscriptions_alphabetical_order">Kanalları Alfabetik Olarak Sırala</string>
+	<string name="pref_summary_subscriptions_alphabetical_order">İşaretlenirse, Abone Olunan Kanallar alfabetik olarak sıralanır.</string>
+	<string name="pref_video_blocker_category">Video Engelleyici</string>
+	<string name="pref_channels_filter_category">Kanal Filtreleri</string>
+
+	<string name="pref_title_channel_filter_method">Kanal Filtre Yöntemi</string>
+	<string name="pref_summary_channel_filter_method">Kanal filtreleme yöntemini seçin: %s</string>
+	<string name="disabled">Devre dışı</string>
+	<string name="pref_title_channel_blacklist">Kanal kara listesi</string>
+	<string name="pref_summary_channel_blacklist">Engellenen kanalların listesi.</string>
+	<string name="unblock">Engeli kaldır</string>
+	<string name="channel_blacklist_updated">Kanal kara listesi güncellendi. Lütfen videoları yenileyin.</string>
+	<string name="channel_blacklist_update_failure">Verilen kanal(lar) kara listeden kaldırılamadı…</string>
+	<string name="channel_blacklist_empty">Kanal kara listesi boş.</string>
+
+	<string name="pref_title_channel_whitelist">Kanal beyaz listesi</string>
+	<string name="pref_summary_channel_whitelist">Beyaz listeye alınmış kanalların listesi.</string>
+	<string name="input_channel_url">Kanalın beyaz listeye eklenecek URL\'si:</string>
+	<string name="add">Ekle</string>
+	<string name="block">Engelle</string>
+	<string name="please_wait">Lütfen bekleyin…</string>
+	<string name="channel_already_whitelisted">Kanal zaten beyaz listeye alındı.</string>
+	<string name="channel_whitelist_updated">Kanal beyaz listeye ekledi. Lütfen videoları yenileyin.</string>
+	<string name="channel_whitelist_update_failure">Verilen kanalın beyaz listesi başarısız oldu…</string>
+	<string name="channel_unwhitelist_success">Kanal beyaz listesi güncellendi. Lütfen videoları yenileyin.</string>
+	<string name="channel_unwhitelist_failure">Verilen kanal(lar)ın beyaz listeden kaldırılması başarısız oldu…</string>
+
+	<string name="no_preferred_lang_selected">Tercih edilen dil seçilmedi. Ayar yok sayılır.</string>
+	<string name="preferred_lang_updated">Tercih edilen dil güncellendi. Lütfen videoları yenileyin.</string>
+
+	<string name="pref_title_lang_detection_video_filtering">Dil Algılamalı Video Filtreleme</string>
+	<string name="pref_summary_lang_detection_video_filtering">Videolarda kullanılan dilleri tespit etmek için AI\'yı kullanın ve dilleri tercih ettiğiniz dile eşit değilse bunları engelleyin. Yalnızca yüksek son cihazlarda etkinleştirilmelidir.</string>
+	<string name="setting_updated">Güncelleme ayarlandı. Lütfen videoları yenileyin.</string>
+
+	<string name="pref_other_filters_category">Diğer Filtreler</string>
+	<string name="pref_title_low_views_filter">Görüntüleme</string>
+	<string name="pref_summary_low_views_filter">Videoları düşük görüntülü olarak filtreleyin: %s</string>
+	<string name="pref_title_dislikes_filter">Beğenmeme</string>
+	<string name="pref_summary_dislikes_filter">Yüksek beğenilmeyen videoların filtrelenmesi: %s</string>
+	<string name="pref_privacy_category">Gizlilik</string>
+	<string name="pref_title_disable_search_history">Arama geçmişini devredışı bırak</string>
+	<string name="pref_summary_disable_search_history">Seçilirse, Arama Geçmişi silinecek ve kullanılmayacaktır.</string>
+	<string name="pref_disable_search_history_deleted">Arama Geçmişi silindi.</string>
+
+	<string name="pref_title_disable_playback_status">İzleme durumunu devredışı bırak</string>
+	<string name="pref_summary_disable_playback_status">Seçilirse, İzleme Durumu silinir ve kullanılmayacaktır.</string>
+	<string name="pref_disable_playback_status_deleted">İzleme Durumu silindi.</string>
+
+	<string name="pref_title_clear_playback_status">İzleme durumunu temizle</string>
+	<string name="pref_summary_clear_playback_status">Tüm videolar için oynatma durumunu temizle.</string>
+	<string name="pref_playback_status_cleared">İzleme Durumu silindi.</string>
+
 </resources>
