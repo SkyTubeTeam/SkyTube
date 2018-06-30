@@ -17,9 +17,11 @@
 
 package free.rm.skytube.gui.fragments;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Rect;
 import android.media.AudioManager;
 import android.net.Uri;
@@ -641,17 +643,17 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 		private RelativeLayout      indicatorView = null;
 
 		private boolean             isControllerVisible = true;
-		private float               startBrightness = -1.0f;
+		private VideoBrightness     videoBrightness;
 		private float               startVolumePercent = -1.0f;
 		private long                startVideoTime = -1;
 
 		private static final int    MAX_VIDEO_STEP_TIME = 60 * 1000;
-		private static final int    MAX_BRIGHTNESS = 100;
 
 
 		PlayerViewGestureHandler() {
 			super(getContext());
 
+			videoBrightness = new VideoBrightness(getActivity());
 			playerView.setControllerVisibilityListener(new PlayerControlView.VisibilityListener() {
 				@Override
 				public void onVisibilityChange(int visibility) {
@@ -730,7 +732,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 
 		@Override
 		public void onGestureDone() {
-			startBrightness = -1.0f;
+			videoBrightness.onGestureDone();
 			startVolumePercent = -1.0f;
 			startVideoTime = -1;
 			hideIndicator();
@@ -739,29 +741,12 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 
 		@Override
 		public void adjustBrightness(double adjustPercent) {
-			// We are setting brightness percent to a value that should be from -1.0 to 1.0. We need to limit it here for these values first
-			if (adjustPercent < -1.0f) {
-				adjustPercent = -1.0f;
-			} else if (adjustPercent > 1.0f) {
-				adjustPercent = 1.0f;
-			}
+			// adjust the video's brightness
+			videoBrightness.setVideoBrightness(adjustPercent, getActivity());
 
-			WindowManager.LayoutParams lp = getActivity().getWindow().getAttributes();
-			if (startBrightness < 0) {
-				startBrightness = lp.screenBrightness;
-			}
-			// We are getting a final brightness value when summing current brightness and the percent we got from swipe action. Should be >= 0 and <= 1
-			float targetBrightness = (float) (startBrightness + adjustPercent * 1.0f);
-			if (targetBrightness <= 0.0f) {
-				targetBrightness = 0.0f;
-			} else if (targetBrightness >= 1.0f) {
-				targetBrightness = 1.0f;
-			}
-			lp.screenBrightness = targetBrightness;
-			getActivity().getWindow().setAttributes(lp);
-
+			// set indicator
 			indicatorImageView.setImageResource(R.drawable.ic_brightness);
-			indicatorTextView.setText((int) (targetBrightness * MAX_BRIGHTNESS) + "%");
+			indicatorTextView.setText(videoBrightness.getBrightnessString());
 
 			// Show indicator. It will be hidden once onGestureDone will be called
 			showIndicator();
@@ -900,4 +885,122 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 			PlaybackStatusDb.getVideoDownloadsDb().setVideoPosition(youTubeVideo, player.getCurrentPosition());
 		}
 	}
+
+
+
+	////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+	/**
+	 * Adjust video's brightness.  Once the brightness is adjust, it is saved in the preferences to
+	 * be used when a new video is played.
+	 */
+	private static class VideoBrightness {
+
+		/** Current video brightness. */
+		private float   brightness;
+		/** Initial video brightness. */
+		private float   initialBrightness;
+		private static final String SAVE_BRIGHTNESS_FLAG = "VideoBrightness.SAVE_BRIGHTNESS_FLAG";
+
+		/**
+		 * Constructor:  load the previously saved video brightness from the preference and set it.
+		 *
+		 * @param activity  Activity.
+		 */
+		public VideoBrightness(final Activity activity) {
+			loadBrightnessFromPreference();
+			initialBrightness = brightness;
+
+			setVideoBrightness(brightness, activity);
+		}
+
+
+		/**
+		 * Set the video brightness.  Once the video brightness is updated, save it in the preference.
+		 *
+		 * @param adjustPercent Percentage.
+		 * @param activity      Activity.
+		 */
+		public void setVideoBrightness(double adjustPercent, final Activity activity) {
+			// We are setting brightness percent to a value that should be from -1.0 to 1.0. We need to limit it here for these values first
+			if (adjustPercent < -1.0f) {
+				adjustPercent = -1.0f;
+			} else if (adjustPercent > 1.0f) {
+				adjustPercent = 1.0f;
+			}
+
+			// set the brightness instance variable
+			setBrightness(initialBrightness + (float) adjustPercent);
+			// adjust the video brightness as per this.brightness
+			adjustVideoBrightness(activity);
+			// save brightness to the preference
+			saveBrightnessToPreference();
+		}
+
+
+		/**
+		 * Adjust the video brightness.
+		 *
+		 * @param activity  Current activity.
+		 */
+		private void adjustVideoBrightness(final Activity activity) {
+			WindowManager.LayoutParams lp = activity.getWindow().getAttributes();
+			lp.screenBrightness = brightness;
+			activity.getWindow().setAttributes(lp);
+		}
+
+
+		/**
+		 * Saves {@link #brightness} to preference.
+		 */
+		private void saveBrightnessToPreference() {
+			SharedPreferences.Editor editor = SkyTubeApp.getPreferenceManager().edit();
+			editor.putFloat(SAVE_BRIGHTNESS_FLAG, brightness);
+			editor.apply();
+		}
+
+
+		/**
+		 * Loads the brightness from preference and set the {@link #brightness} instance variable.
+		 */
+		private void loadBrightnessFromPreference() {
+			final float brightnessPref = SkyTubeApp.getPreferenceManager().getFloat(SAVE_BRIGHTNESS_FLAG, 1);
+			setBrightness(brightnessPref);
+		}
+
+
+		/**
+		 * Set the {@link #brightness} instance variable.
+		 *
+		 * @param brightness    Brightness (from 0.0 to 1.0).
+		 */
+		private void setBrightness(float brightness) {
+			if (brightness < 0) {
+				brightness = 0;
+			} else if (brightness > 1) {
+				brightness = 1;
+			}
+
+			this.brightness = brightness;
+		}
+
+
+		/**
+		 * @return Brightness as string:  e.g. "21%"
+		 */
+		public String getBrightnessString() {
+			return ((int) (brightness * 100)) + "%";
+		}
+
+
+		/**
+		 * To be called once the swipe gesture is done/completed.
+		 */
+		public void onGestureDone() {
+			initialBrightness = brightness;
+		}
+
+	}
+
 }
