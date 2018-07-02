@@ -42,10 +42,10 @@ public class DownloadedVideosFragment extends OrderableVideosGridFragment implem
 	public void onFragmentSelected() {
 		super.onFragmentSelected();
 
-		if (DownloadedVideosDb.getVideoDownloadsDb().isHasUpdated()) {
-			populateList();
-			DownloadedVideosDb.getVideoDownloadsDb().setHasUpdated(false);
-		}
+		populateList();
+//		if (DownloadedVideosDb.getVideoDownloadsDb().isHasUpdated()) {
+//			DownloadedVideosDb.getVideoDownloadsDb().setHasUpdated(false);
+//		}
 
 		displayDownloadsDisabledWarning();
 	}
@@ -89,17 +89,17 @@ public class DownloadedVideosFragment extends OrderableVideosGridFragment implem
 
 
 	private void populateList() {
-		new PopulateBookmarksTask().executeInParallel();
+		new PopulateDownloadsTask().executeInParallel();
 	}
 
 
 	/**
 	 * A task that:
-	 *   1. gets the current total number of bookmarks
+	 *   1. gets the current total number of downloads
 	 *   2. updated the UI accordingly (wrt step 1)
-	 *   3. get the bookmarked videos asynchronously.
+	 *   3. get the downloaded videos asynchronously.
 	 */
-	private class PopulateBookmarksTask extends AsyncTaskParallel<Void, Void, Integer> {
+	private class PopulateDownloadsTask extends AsyncTaskParallel<Void, Void, Integer> {
 
 		@Override
 		protected Integer doInBackground(Void... params) {
@@ -108,10 +108,10 @@ public class DownloadedVideosFragment extends OrderableVideosGridFragment implem
 
 
 		@Override
-		protected void onPostExecute(Integer numVideosBookmarked) {
+		protected void onPostExecute(Integer numVideosDownloaded) {
 			// If no videos have been bookmarked, show the text notifying the user, otherwise
 			// show the swipe refresh layout that contains the actual video grid.
-			if (numVideosBookmarked <= 0) {
+			if (numVideosDownloaded <= 0) {
 				swipeRefreshLayout.setVisibility(View.GONE);
 				noDownloadedVideosText.setVisibility(View.VISIBLE);
 			} else {
