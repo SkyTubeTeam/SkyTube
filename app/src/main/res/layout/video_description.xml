@@ -63,6 +63,14 @@
 						style="@style/SubscribeButton"
 						android:layout_below="@id/video_desc_channel"
 						android:text="Unsubscribe"/>
+
+					<!-- SUB COUNT -->
+					<TextView
+						android:id="@+id/video_desc_sub_count"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+
+						style="@style/VideoDescTextView"/>
 				</LinearLayout>
 
 			</RelativeLayout>

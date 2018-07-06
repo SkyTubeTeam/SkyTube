@@ -107,6 +107,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 
 	private Menu                menu = null;
 
+	private TextView			videoDescChannelSubCountTextView = null;
 	private TextView			videoDescTitleTextView = null;
 	private ImageView			videoDescChannelThumbnailImageView = null;
 	private TextView			videoDescChannelTextView = null;
@@ -224,6 +225,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 				}
 			}
 		});
+		videoDescChannelSubCountTextView = view.findViewById(R.id.video_desc_sub_count);
 		videoDescChannelTextView = view.findViewById(R.id.video_desc_channel);
 		videoDescViewsTextView = view.findViewById(R.id.video_desc_views);
 		videoDescLikesTextView = view.findViewById(R.id.video_desc_likes);
@@ -248,12 +250,33 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 		});
 	}
 
+	/**
+	 * A task that given a channel ID it will try to initialize and return {@link YouTubeChannel}.
+	 */
+	private class GetChannelInfoTask extends GetYouTubeChannelInfoTask {
+
+		GetChannelInfoTask(Context ctx) {
+			super(ctx,null);
+		}
+
+		@Override
+		protected void onPostExecute(YouTubeChannel youTubeChannel) {
+			if (youTubeChannel == null) {
+				showError();
+				return;
+			}
+			videoDescChannelSubCountTextView.setText(youTubeChannel.getTotalSubscribers());
+		}
+	}
 
 	/**
 	 * Will setup the HUD's details according to the contents of {@link #youTubeVideo}.  Then it
 	 * will try to load and play the video.
 	 */
 	private void setUpHUDAndPlayVideo() {
+		GetChannelInfoTask task = new GetChannelInfoTask(getContext());
+		task.execute(youTubeVideo.getChannel().getId());
+
 		getSupportActionBar().setTitle(youTubeVideo.getTitle());
 		videoDescTitleTextView.setText(youTubeVideo.getTitle());
 		videoDescChannelTextView.setText(youTubeVideo.getChannelName());
