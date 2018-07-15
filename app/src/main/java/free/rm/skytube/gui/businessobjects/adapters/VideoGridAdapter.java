@@ -115,8 +115,6 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<YouTubeVideo, GridVi
 		try {
 			Log.i(TAG, videoCategory.toString());
 
-			// clear all previous items in this adapter
-			this.clearList();
 
 			// create a new instance of GetYouTubeVideos
 			this.getYouTubeVideos = videoCategory.createGetYouTubeVideos();
@@ -131,7 +129,7 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<YouTubeVideo, GridVi
 			this.currentVideoCategory = videoCategory;
 
 			// get the videos from the web asynchronously
-			new GetYouTubeVideosTask(getYouTubeVideos, this, swipeRefreshLayout).executeInParallel();
+			new GetYouTubeVideosTask(getYouTubeVideos, this, swipeRefreshLayout, true).executeInParallel();
 		} catch (IOException e) {
 			Log.e(TAG, "Could not init " + videoCategory, e);
 			Toast.makeText(getContext(),
@@ -179,10 +177,9 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<YouTubeVideo, GridVi
 		if (getYouTubeVideos != null) {
 			if (clearVideosList) {
 				getYouTubeVideos.reset();
-				clearList();
 			}
 
-			new GetYouTubeVideosTask(getYouTubeVideos, this, swipeRefreshLayout).executeInParallel();
+			new GetYouTubeVideosTask(getYouTubeVideos, this, swipeRefreshLayout, clearVideosList).executeInParallel();
 		}
 	}
 
@@ -197,7 +194,7 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<YouTubeVideo, GridVi
 		if (position >= getItemCount() - 1) {
 			Log.w(TAG, "BOTTOM REACHED!!!");
 			if(getYouTubeVideos != null)
-				new GetYouTubeVideosTask(getYouTubeVideos, this, swipeRefreshLayout).executeInParallel();
+				new GetYouTubeVideosTask(getYouTubeVideos, this, swipeRefreshLayout, false).executeInParallel();
 		}
 
 	}
