@@ -19,4 +19,7 @@
 	<string name="loading">Загрузка…</string>
     <string name="could_not_get_channel">Не удалось загрузить информацию о канале!</string>
 <string name="hello_blank_fragment">Привет, пустой фрагмент</string>
+    <string name="yes">Да</string>
+	<string name="no">Нет</string>
+
     </resources>

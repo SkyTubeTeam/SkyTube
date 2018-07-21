@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="downloads">Tải xuống</string>
+	<string name="download_video">Tải xuống Video</string>
+	<string name="starting_video_download">Đang tải xuống \'%s\'…</string>
+	<string name="video_download_stream_error">Không thể tải xuống \'%s\'.</string>
+	<string name="delete_download">Xóa Tải xuống</string>
+	<string name="video_downloaded">\'%s\' đã tải xuống.</string>
+	<string name="no_downloaded_videos_text">Bạn chưa tải xuống video nào.
+\nKhi bạn tải xuống, chúng sẽ hiện lên ở đây.</string>
+	<string name="downloads_disabled_warning">Tải xuống video đã bị khóa vì bạn đang không sử dụng Wi-Fi.
+\nĐể mở khóa, vui lòng đi tới Sở thích &gt; Khác và chọn \"Cho phép tải xuống trên Mạng di động\"</string>
+	<string name="playing_video_file_missing">Tải xuống cho video này không tìm thấy. Đang chơi từ xa.</string>
+	<string name="external_storage_not_available">Không thể tải xuống tệp tin vì bộ nhớ ngoài không sẵn có.</string>
+</resources>

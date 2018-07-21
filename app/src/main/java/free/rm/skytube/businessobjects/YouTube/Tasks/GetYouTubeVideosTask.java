@@ -45,6 +45,7 @@ public class GetYouTubeVideosTask extends AsyncTaskParallel<Void, Void, List<You
 	private SwipeRefreshLayout  swipeRefreshLayout;
 
 	private YouTubeChannel channel;
+	private boolean clearList;
 
 
 	/**
@@ -53,11 +54,13 @@ public class GetYouTubeVideosTask extends AsyncTaskParallel<Void, Void, List<You
 	 *
 	 * @param getYouTubeVideos The object that does the actual fetching of videos.
 	 * @param videoGridAdapter The grid adapter the videos will be added to.
+	 * @param clearList Clear the list before adding new values to it.
 	 */
-	public GetYouTubeVideosTask(GetYouTubeVideos getYouTubeVideos, VideoGridAdapter videoGridAdapter, SwipeRefreshLayout swipeRefreshLayout) {
+	public GetYouTubeVideosTask(GetYouTubeVideos getYouTubeVideos, VideoGridAdapter videoGridAdapter, SwipeRefreshLayout swipeRefreshLayout, boolean clearList) {
 		this.getYouTubeVideos = getYouTubeVideos;
 		this.videoGridAdapter = videoGridAdapter;
 		this.swipeRefreshLayout = swipeRefreshLayout;
+		this.clearList = clearList;
 	}
 
 
@@ -98,6 +101,9 @@ public class GetYouTubeVideosTask extends AsyncTaskParallel<Void, Void, List<You
 
 	@Override
 	protected void onPostExecute(List<YouTubeVideo> videosList) {
+		if (this.clearList) {
+			videoGridAdapter.clearList();
+		}
 		videoGridAdapter.appendList(videosList);
 
 		if(swipeRefreshLayout != null)

@@ -35,4 +35,9 @@
 	<string name="tutorial_comments_icon">Смахните влево, чтобы увидеть комментарии.</string>
 	<string name="tutorial_video_info_icon">Смахните вниз, чтобы увидеть информацию о видео.</string>
 	<string name="tutorial_pause_video">Дважды нажмите, чтобы остановить или продолжить воспроизведение.</string>
+<string name="mark_watched">Пометить просмотренным</string>
+	<string name="mark_unwatched">Пометить непросмотренным</string>
+
+	<string name="should_resume">Вы хотите начать с того места, где вы остановились?</string>
+	<string name="resume">Возобновить</string>
 </resources>
