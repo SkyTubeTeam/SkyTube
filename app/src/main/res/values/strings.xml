@@ -19,7 +19,29 @@
     <string name="loading">Loading …</string>
 	<string name="yes">Yes</string>
 	<string name="no">No</string>
+    <string name="settings">Settings</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="native_icon_image">native_icon_image</string>
+    <string name="native_main_image">native_main_image</string>
+    <string name="native_privacy_information_icon_image">Privacy Information Icon image</string>
+    <string name="learn_more">Learn More</string>
+
+    <string name="Tamil">Tamil</string>
+    <string name="Tamil_playlist">PLOdWAQaAIiqlN41hLSWHlNDRuEDbb0W_l</string>
+
+    <string name="Hindi">Hindi</string>
+    <string name="Hindi_playlist">PLOdWAQaAIiqknyIchvBB9IqCZshKSA86B</string>
+
+    <string name="Telugu">Telugu</string>
+    <string name="Telugu_playlist">PLEI1TXdLd0MajQU6sxlFoMLU3h2uG0Gfu</string>
+
+    <string name="Malayalam">Malayalam</string>
+    <string name="Malayalam_playlist">PLOdWAQaAIiqlvyjppq3KoD3sYRjhyjEaQ</string>
+
+    <!-- Banner ad id. Insert your own banner id, you can get banner id via admob. -->
+    <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="banner_ad_unit_id_2">ca-app-pub-3940256099942544/6300978111</string>
+    <!-- Interstitial ad id. Insert your own interstitial id, you can get interstitial id via admob. -->
+    <string name="interstitial_ad_unit_id">ca-app-pub-8390577583063150/3676381166</string>
 
 </resources>

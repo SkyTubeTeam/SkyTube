@@ -29,6 +29,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.VideoCategory;
 
@@ -41,6 +44,7 @@ public class SearchVideoGridFragment extends VideosGridFragment {
 	private String  searchQuery = "";
 
 	public static final String QUERY = "SearchVideoGridFragment.Query";
+	private AdView mAdView;
 
 
 	@Override
@@ -69,6 +73,12 @@ public class SearchVideoGridFragment extends VideosGridFragment {
 
 		// the app will call onCreateOptionsMenu() for when the user wants to search
 		setHasOptionsMenu(true);
+
+		mAdView = view.findViewById(R.id.adView);
+		AdRequest.Builder adRequest = new AdRequest.Builder();
+		adRequest.addTestDevice("C284D5A398D80F7CE733BAAC7372C233");
+		mAdView.loadAd(adRequest.build());
+
 
 		return view;
 	}

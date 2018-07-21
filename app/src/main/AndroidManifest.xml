@@ -7,6 +7,7 @@
 	<uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>   <!-- [Optional]  Only used by SkyTube Extra flavor to update the app -->
 	<!--<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/> -->     <!-- [Optional]  If enabled via the preferences, the app will periodically check for new videos published by the subscribed channels -->
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>       <!-- Used when user tried to download a video to check whether the user is using cellular network or WIFI -->
+	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
 	<application
 		android:name=".app.SkyTubeApp"
@@ -40,7 +41,7 @@
 		</activity>
 		<activity
 			android:name=".gui.activities.YouTubePlayerActivity"
-			android:configChanges="orientation|keyboardHidden|screenSize"
+			android:configChanges="keyboardHidden|screenSize"
 			android:theme="@style/VideoPlayerActivityTheme">
 			<intent-filter>
 				<action android:name="android.intent.action.VIEW"/>
@@ -80,6 +81,21 @@
 			android:name=".gui.activities.PermissionsActivity"
 		    android:theme="@style/TransparentActivity">
 		</activity>
+
+		<activity
+			android:name="com.mopub.common.MoPubBrowser"
+			android:configChanges="keyboardHidden|orientation|screenSize" />
+
+		<activity
+			android:name="com.mopub.mobileads.MraidVideoPlayerActivity"
+			android:configChanges="keyboardHidden|orientation|screenSize" />
+
+		<activity android:name="com.mopub.common.privacy.ConsentDialogActivity"
+			android:configChanges="keyboardHidden|orientation|screenSize"/>
+
+		<meta-data android:name="com.google.android.gms.version"
+			android:value="@integer/google_play_services_version" />
+
 	</application>
 
 </manifest>

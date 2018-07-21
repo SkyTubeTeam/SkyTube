@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<color name="colorPrimary">#263238</color>
-	<color name="colorPrimaryDark">#21272B</color>
-	<color name="colorAccent">#26A69A</color>
+	<color name="colorPrimary">#000000</color>
+	<color name="colorPrimaryDark">#000000</color>
+	<color name="colorAccent">#d32828</color>
 
-	<color name="skytube_theme_colour">#ff6600</color>
+	<color name="skytube_theme_colour">#d32828</color>
 
 	<!--
 		Material Dialog Colors
 	-->
-	<color name="dialog_title">#000</color>
+	<color name="dialog_title">#FFF</color>
 	<color name="dialog_backgound">#FFF</color>
-	<color name="dialog_content_text">#000</color>
+	<color name="dialog_content_text">#FFF</color>
 	<color name="dialog_positive_text">@color/colorAccent</color>
 	<color name="dialog_negative_text">@color/colorAccent</color>
 	<color name="dialog_neutral_text">@color/colorAccent</color>
@@ -22,8 +22,8 @@
 	<!--
 		Subs Drawer Colours
 	-->
-	<color name="subs_drawer_background">#CC21272B</color>
-	<drawable name="sub_channel_pressed">@color/colorAccent</drawable>
+	<color name="subs_drawer_background">#000000</color>
+	<drawable name="sub_channel_pressed">@color/skytube_theme_colour</drawable>
 	<drawable name="sub_channel">@android:color/transparent</drawable>
 	<color name="subs_text">#FFF</color>
 
@@ -34,11 +34,11 @@
 	<!--
 		Video (Grid) Cells
 	-->
-	<color name="video_cell_background">#111517</color>
+	<color name="video_cell_background">@color/colorPrimary</color>
 	<color name="video_cell_text_main">#F5F5F5</color>
 	<color name="video_cell_text_details">#808080</color>
 	<color name="grid_view_background">@color/colorPrimaryDark</color>
-	<color name="popup_menu">#FF303030</color>  <!-- Identical to @color/background_material_dark -->
+	<color name="popup_menu">@color/colorPrimary</color>  <!-- Identical to @color/background_material_dark -->
 
 
 	<!--
@@ -46,7 +46,7 @@
 	-->
 	<!-- Actionbar background colour ~~ which is the same as com.android.internal.R.layout.media_controller
 				(used to be #BB000000) -->
-	<color name="video_player_hud">#CC000000</color>
+	<color name="video_player_hud">@color/colorPrimary</color>
 	<color name="video_player_drawer_background">@color/video_player_hud</color>
 	<color name="video_player_drawer_text">#b3b3b3</color>
 

@@ -17,12 +17,15 @@
 
 package free.rm.skytube.businessobjects;
 
+import free.rm.skytube.R;
+import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.YouTube.GetBookmarksVideos;
 import free.rm.skytube.businessobjects.YouTube.GetChannelVideos;
 import free.rm.skytube.businessobjects.YouTube.GetDownloadedVideos;
 import free.rm.skytube.businessobjects.YouTube.GetFeaturedVideos;
 import free.rm.skytube.businessobjects.YouTube.GetMostPopularVideos;
 import free.rm.skytube.businessobjects.YouTube.GetPlaylistVideos;
+import free.rm.skytube.businessobjects.YouTube.GetYouTubeVideoByPlaylist;
 import free.rm.skytube.businessobjects.YouTube.GetYouTubeVideoBySearch;
 import free.rm.skytube.businessobjects.YouTube.GetYouTubeVideos;
 import free.rm.skytube.businessobjects.db.Tasks.GetSubscriptionsVideosFromDb;
@@ -33,8 +36,9 @@ import free.rm.skytube.businessobjects.db.Tasks.GetSubscriptionsVideosFromDb;
 public enum VideoCategory {
 	/** Featured videos */
 	FEATURED (0),
-	/** Most popular videos */
 	MOST_POPULAR (1),
+	/** Most popular videos */
+
 	/** Videos related to a search query */
 	SEARCH_QUERY (2),
 	/** Videos that are owned by a channel */
@@ -46,7 +50,13 @@ public enum VideoCategory {
 	/** Videos belonging to a playlist */
 	PLAYLIST_VIDEOS (7),
 	/** Videos that have been downloaded */
-	DOWNLOADED_VIDEOS (8);
+	DOWNLOADED_VIDEOS (8),
+	TELUGU (9),
+	MALAYALAM (10),
+	TAMIL(11),
+	HINDI(12),
+
+	;
 
 	// *****************
 	// DON'T FORGET to update #createGetYouTubeVideos() methods...
@@ -82,6 +92,14 @@ public enum VideoCategory {
 			return new GetPlaylistVideos();
 		else if (id == DOWNLOADED_VIDEOS.id)
 			return new GetDownloadedVideos();
+		else if (id == TELUGU.id)
+			return new GetYouTubeVideoByPlaylist(SkyTubeApp.getStr(R.string.Telugu_playlist));
+		else if (id == MALAYALAM.id)
+			return new GetYouTubeVideoByPlaylist(SkyTubeApp.getStr(R.string.Malayalam_playlist));
+		else if (id == TAMIL.id)
+			return new GetYouTubeVideoByPlaylist(SkyTubeApp.getStr(R.string.Tamil_playlist));
+		else if (id == HINDI.id)
+			return new GetYouTubeVideoByPlaylist(SkyTubeApp.getStr(R.string.Hindi_playlist));
 
 		// this will notify the developer that he forgot to edit this method when a new type is added
 		throw new UnsupportedOperationException();

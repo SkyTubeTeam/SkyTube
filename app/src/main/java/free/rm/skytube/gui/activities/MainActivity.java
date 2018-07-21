@@ -23,25 +23,31 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 
-import com.mikepenz.actionitembadge.library.ActionItemBadge;
-import com.mikepenz.actionitembadge.library.utils.BadgeStyle;
+import com.mopub.common.MoPub;
+import com.mopub.common.SdkConfiguration;
+import com.mopub.common.SdkInitializationListener;
+import com.mopub.common.privacy.ConsentDialogListener;
+import com.mopub.common.privacy.ConsentStatus;
+import com.mopub.common.privacy.ConsentStatusChangeListener;
+import com.mopub.common.privacy.PersonalInfoManager;
+import com.mopub.mobileads.MoPubErrorCode;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -49,12 +55,10 @@ import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubePlaylist;
-import free.rm.skytube.businessobjects.YouTube.VideoBlocker;
 import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
 import free.rm.skytube.businessobjects.db.SearchHistoryDb;
 import free.rm.skytube.businessobjects.db.SearchHistoryTable;
 import free.rm.skytube.businessobjects.interfaces.SearchHistoryClickListener;
-import free.rm.skytube.gui.businessobjects.BlockedVideosDialog;
 import free.rm.skytube.gui.businessobjects.MainActivityListener;
 import free.rm.skytube.gui.businessobjects.YouTubePlayer;
 import free.rm.skytube.gui.businessobjects.adapters.SearchHistoryCursorAdapter;
@@ -63,23 +67,24 @@ import free.rm.skytube.gui.fragments.ChannelBrowserFragment;
 import free.rm.skytube.gui.fragments.MainFragment;
 import free.rm.skytube.gui.fragments.PlaylistVideosFragment;
 import free.rm.skytube.gui.fragments.SearchVideoGridFragment;
+import free.rm.skytube.gui.fragments.VideosGridFragment;
 
 /**
  * Main activity (launcher).  This activity holds {@link free.rm.skytube.gui.fragments.VideosGridFragment}.
  */
-public class MainActivity extends AppCompatActivity implements MainActivityListener {
+public class MainActivity extends AppCompatActivity implements MainActivityListener,Serializable {
 
 	@BindView(R.id.fragment_container)
-	protected FrameLayout           fragmentContainer;
+	protected transient FrameLayout           fragmentContainer;
 
-	private MainFragment            mainFragment;
-	private SearchVideoGridFragment searchVideoGridFragment;
-	private ChannelBrowserFragment  channelBrowserFragment;
+	private transient MainFragment            mainFragment;
+	private transient SearchVideoGridFragment searchVideoGridFragment;
+	private transient ChannelBrowserFragment  channelBrowserFragment;
 	/** Fragment that shows Videos from a specific Playlist */
-	private PlaylistVideosFragment  playlistVideosFragment;
-	private VideoBlockerPlugin      videoBlockerPlugin;
+	private transient PlaylistVideosFragment  playlistVideosFragment;
+	//private transient VideoBlockerPlugin      videoBlockerPlugin;
 
-	private boolean dontAddToBackStack = false;
+	private transient boolean dontAddToBackStack = false;
 
 	/** Set to true of the UpdatesCheckerTask has run; false otherwise. */
 	private static boolean updatesCheckerTaskRan = false;
@@ -92,6 +97,10 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 	private static final String CHANNEL_BROWSER_FRAGMENT = "MainActivity.ChannelBrowserFragment";
 	private static final String PLAYLIST_VIDEOS_FRAGMENT = "MainActivity.PlaylistVideosFragment";
 	private static final String VIDEO_BLOCKER_PLUGIN = "MainActivity.VideoBlockerPlugin";
+
+	@Nullable
+	transient PersonalInfoManager mPersonalInfoManager;
+	public static final String LOGTAG = VideosGridFragment.class.getName();
 
 
 	@Override
@@ -110,6 +119,14 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 
 		setContentView(R.layout.activity_fragment_holder);
 		ButterKnife.bind(this);
+
+		SdkConfiguration sdkConfiguration = new SdkConfiguration.Builder("11a17b188668469fb0412708c3d16813")
+				.build();
+		MoPub.initializeSdk(this, sdkConfiguration, initSdkListener());
+		mPersonalInfoManager = MoPub.getPersonalInformationManager();
+		if (mPersonalInfoManager != null) {
+			mPersonalInfoManager.subscribeConsentStatusChangeListener(initConsentChangeListener());
+		}
 
 		if(fragmentContainer != null) {
 			if(savedInstanceState != null) {
@@ -144,13 +161,13 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 			}
 		}
 
-		if (savedInstanceState != null) {
+		/*if (savedInstanceState != null) {
 			// restore the video blocker plugin
 			this.videoBlockerPlugin = (VideoBlockerPlugin) savedInstanceState.getSerializable(VIDEO_BLOCKER_PLUGIN);
 			this.videoBlockerPlugin.setActivity(this);
 		} else {
 			this.videoBlockerPlugin = new VideoBlockerPlugin(this);
-		}
+		}*/
 	}
 
 
@@ -168,7 +185,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 			getSupportFragmentManager().putFragment(outState, PLAYLIST_VIDEOS_FRAGMENT, playlistVideosFragment);
 
 		// save the video blocker plugin
-		outState.putSerializable(VIDEO_BLOCKER_PLUGIN, videoBlockerPlugin);
+		//outState.putSerializable(VIDEO_BLOCKER_PLUGIN, videoBlockerPlugin);
 	}
 
 
@@ -188,7 +205,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 		getMenuInflater().inflate(R.menu.main_activity_menu, menu);
 
 		// setup the video blocker notification icon which will be displayed in the tool bar
-		videoBlockerPlugin.setupIconForToolBar(menu);
+		//videoBlockerPlugin.setupIconForToolBar(menu);
 
 		// setup the SearchView (actionbar)
 		final MenuItem searchItem = menu.findItem(R.id.menu_search);
@@ -255,9 +272,9 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-			case R.id.menu_blocker:
+			/*case R.id.menu_blocker:
 				videoBlockerPlugin.onMenuBlockerIconClicked();
-				return true;
+				return true;*/
 			case R.id.menu_preferences:
 				Intent i = new Intent(this, PreferencesActivity.class);
 				startActivity(i);
@@ -286,7 +303,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 	 * Display the Enter Video URL dialog.
 	 */
 	private void displayEnterVideoUrlDialog() {
-		final AlertDialog alertDialog = new AlertDialog.Builder(this)
+		final AlertDialog alertDialog = new AlertDialog.Builder(this, R.style.MyAlertDialogStyle)
 			.setView(R.layout.dialog_enter_video_url)
 			.setTitle(R.string.enter_video_url)
 			.setPositiveButton(R.string.play, new DialogInterface.OnClickListener() {
@@ -425,7 +442,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 	/**
 	 * A module/"plugin"/icon that displays the total number of blocked videos.
 	 */
-	private static class VideoBlockerPlugin implements VideoBlocker.VideoBlockerListener,
+	/*private static class VideoBlockerPlugin implements VideoBlocker.VideoBlockerListener,
 			BlockedVideosDialog.BlockedVideosDialogListener,
 			Serializable {
 
@@ -452,9 +469,9 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 		}
 
 
-		/**
+		*//**
 		 * Setup the video blocker notification icon which will be displayed in the tool bar.
- 		 */
+ 		 *//*
 		void setupIconForToolBar(final Menu menu) {
 			if (getTotalBlockedVideos() > 0) {
 				// display a red bubble containing the number of blocked videos
@@ -488,16 +505,60 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 		}
 
 
-		/**
+		*//**
 		 * @return Total number of blocked videos.
-		 */
+		 *//*
 		private int getTotalBlockedVideos() {
 			return blockedVideos.size();
 		}
 
 	}
+*/
+	private SdkInitializationListener initSdkListener() {
+		return new SdkInitializationListener() {
 
+			@Override
+			public void onInitializationFinished() {
+				Log.d(LOGTAG, "SDK initialized.");
 
+				if (mPersonalInfoManager != null && mPersonalInfoManager.shouldShowConsentDialog()) {
+					mPersonalInfoManager.loadConsentDialog(initDialogLoadListener());
+				}
+			}
+		};
+	}
+
+	private ConsentStatusChangeListener initConsentChangeListener() {
+		return new ConsentStatusChangeListener() {
+
+			@Override
+			public void onConsentStateChange(@NonNull ConsentStatus oldConsentStatus,
+											 @NonNull ConsentStatus newConsentStatus,
+											 boolean canCollectPersonalInformation) {
+				Log.d(LOGTAG, "Consent: " + newConsentStatus.name());
+				if (mPersonalInfoManager != null && mPersonalInfoManager.shouldShowConsentDialog()) {
+					mPersonalInfoManager.loadConsentDialog(initDialogLoadListener());
+				}
+			}
+		};
+	}
+
+	private ConsentDialogListener initDialogLoadListener() {
+		return new ConsentDialogListener() {
+
+			@Override
+			public void onConsentDialogLoaded() {
+				if (mPersonalInfoManager != null) {
+					mPersonalInfoManager.showConsentDialog();
+				}
+			}
+
+			@Override
+			public void onConsentDialogLoadFailed(@NonNull MoPubErrorCode moPubErrorCode) {
+				Log.d(LOGTAG,  "Consent dialog failed to load.");
+			}
+		};
+	}
 
 
 }

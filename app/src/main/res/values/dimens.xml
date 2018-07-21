@@ -9,4 +9,7 @@
 
 	<dimen name="video_grid_progress_bar_top_margin">50dp</dimen>
 	<dimen name="fab_margin">16dp</dimen>
+	<dimen name="native_main_image_height">200dp</dimen>
+	<dimen name="mrect_width">300dp</dimen>
+	<dimen name="mrect_height">250dp</dimen>
 </resources>

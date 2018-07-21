@@ -19,19 +19,40 @@ package free.rm.skytube.gui.businessobjects.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Environment;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.mopub.mobileads.MoPubView;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.HashMap;
+import java.util.Map;
+
+import at.huber.youtubeExtractor.VideoMeta;
+import at.huber.youtubeExtractor.YouTubeExtractor;
+import at.huber.youtubeExtractor.YtFile;
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
@@ -60,6 +81,7 @@ class GridViewHolder extends RecyclerView.ViewHolder {
 	private ImageView thumbnailImageView;
 	private TextView viewsTextView;
 	private ProgressBar videoPositionProgressBar;
+	public static final String YOUTUBE_URL = "https://www.youtube.com/watch?v=";
 
 
 	/**
@@ -242,7 +264,8 @@ class GridViewHolder extends RecyclerView.ViewHolder {
 						youTubeVideo.removeDownload();
 						return true;
 					case R.id.download_video:
-						youTubeVideo.downloadVideo(context);
+						getYoutubeDownloadVideoList(YOUTUBE_URL + youTubeVideo.getId());
+						//showDialog();
 						return true;
 					case R.id.block_channel:
 						youTubeVideo.getChannel().blockChannel();
@@ -265,4 +288,166 @@ class GridViewHolder extends RecyclerView.ViewHolder {
 	public void setGridViewHolderListener(GridViewHolderListener gridViewHolderListener) {
 		this.gridViewHolderListener = gridViewHolderListener;
 	}
+
+	private MoPubView mMoPubView;
+
+	private void showDialog() {
+		MaterialDialog md = new MaterialDialog.Builder(context)
+				.title(R.string.download_video)
+				.customView(R.layout.mrect_ad, true)
+				.build();
+		mMoPubView = (MoPubView) md.findViewById(R.id.banner_mopubview);
+		LinearLayout.LayoutParams layoutParams =
+				(LinearLayout.LayoutParams) mMoPubView.getLayoutParams();
+		layoutParams.width = getWidth();
+		layoutParams.height = getHeight();
+		mMoPubView.setLayoutParams(layoutParams);
+		mMoPubView.setAdUnitId("252412d5e9364a05ab77d9396346d73d");
+		mMoPubView.loadAd();
+		md.show();
+	}
+
+	public int getWidth() {
+		return (int) context.getResources().getDimension(R.dimen.mrect_width);
+	}
+
+	public int getHeight() {
+		return (int) context.getResources().getDimension(R.dimen.mrect_height);
+	}
+
+	private void showListDialog(final Map<String,YtFile> map) {
+		new MaterialDialog.Builder(context)
+				.title(R.string.download_video)
+				.items(map.keySet())
+				.itemsCallbackSingleChoice(-1, new MaterialDialog.ListCallbackSingleChoice() {
+					@Override
+					public boolean onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
+						/**
+						 * If you use alwaysCallSingleChoiceCallback(), which is discussed below,
+						 * returning false here won't allow the newly selected radio button to actually be selected.
+						 **/
+						new DownloadFile().execute(map.get(dialog.getItems().get(which)).getUrl(),"");
+						return true;
+					}
+				})
+				.positiveText(R.string.ok).choiceWidgetColor(ColorStateList.valueOf(context.getResources().getColor(R.color.dialog_title)))
+				.show();
+	}
+	private void getYoutubeDownloadVideoList(String youtubeLink) {
+		new YouTubeExtractor(context) {
+
+			@Override
+			public void onExtractionComplete(SparseArray<YtFile> ytFiles, VideoMeta vMeta) {
+				Map<String,YtFile> map = new HashMap<>();
+				if (ytFiles == null) {
+					// Something went wrong we got no urls. Always check this.
+					//finish();
+					return;
+				}
+				// Iterate over itags
+				for (int i = 0, itag; i < ytFiles.size(); i++) {
+					itag = ytFiles.keyAt(i);
+					// ytFile represents one file with its url and meta data
+					YtFile ytFile = ytFiles.get(itag);
+
+					// Just add videos in a decent format => height -1 = audio
+					if (ytFile.getFormat().getHeight() == -1 || ytFile.getFormat().getHeight() >= 360) {
+						String str = (ytFile.getFormat().getHeight() == -1) ? "Audio " +
+								ytFile.getFormat().getAudioBitrate() + " kbit/s" :
+								ytFile.getFormat().getHeight() + "p";
+						str += (ytFile.getFormat().isDashContainer()) ? " dash" : "";
+						map.put(str,ytFile);
+					}
+				}
+				showListDialog(map);
+			}
+		}.extract(youtubeLink, true, false);
+	}
+
+	// DownloadFile AsyncTask
+	private class DownloadFile extends AsyncTask<String, Integer, String> {
+
+		MaterialDialog md;
+		private MoPubView mMoPubView;
+
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			md = new MaterialDialog.Builder(context)
+					.title(R.string.download_video)
+					.customView(R.layout.mrect_ad, true)
+					.build();
+			mMoPubView = (MoPubView) md.findViewById(R.id.banner_mopubview);
+			LinearLayout.LayoutParams layoutParams =
+					(LinearLayout.LayoutParams) mMoPubView.getLayoutParams();
+			layoutParams.width = getWidth();
+			layoutParams.height = getHeight();
+			mMoPubView.setLayoutParams(layoutParams);
+			mMoPubView.setAdUnitId("252412d5e9364a05ab77d9396346d73d");
+			mMoPubView.loadAd();
+			md.show();
+		}
+
+		@Override
+		protected String doInBackground(String... Url) {
+			try {
+				URL url = new URL(Url[0]);
+				URLConnection connection = url.openConnection();
+				connection.connect();
+
+				// Detect the file lenghth
+				int fileLength = connection.getContentLength();
+
+				// Locate storage location
+				String filepath = Environment.getExternalStorageDirectory()
+						.getPath();
+
+				// Download the file
+				InputStream input = new BufferedInputStream(url.openStream());
+
+				File f = new File(filepath, Url[1]);
+
+				// Save the downloaded file
+				OutputStream output = new FileOutputStream(f);
+
+				byte data[] = new byte[1024];
+				long total = 0;
+				int count;
+				while ((count = input.read(data)) != -1) {
+					total += count;
+					// Publish the progress
+					publishProgress((int) (total * 100 / fileLength));
+					output.write(data, 0, count);
+				}
+
+				// Close connection
+				output.flush();
+				output.close();
+				input.close();
+			} catch (Exception e) {
+				// Error Log
+				Log.e("Error", e.getMessage());
+				e.printStackTrace();
+			}
+			return null;
+		}
+
+		@Override
+		protected void onProgressUpdate(Integer... progress) {
+			super.onProgressUpdate(progress);
+
+			//bnp.setProgress(progress[0]);
+
+		}
+
+		@Override
+		protected void onPostExecute(String file_url) {
+
+
+			//dialog.dismiss();
+
+
+		}
+	}
+
 }

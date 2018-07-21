@@ -21,6 +21,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,6 +50,11 @@ public class MainFragment extends FragmentEx {
 	private SubscriptionsFeedFragment   subscriptionsFeedFragment = null;
 	private BookmarksFragment			bookmarksFragment = null;
 	private DownloadedVideosFragment    downloadedVideosFragment = null;
+	private PlaylistVideosFragment playlistVideosFragment = null;
+	private TeluguVideosFragment teluguVideosFragment = null;
+	private MalayalamVideosFragment malayalamVideosFragment = null;
+	private TamilVideosFragment tamilVideosFragment = null;
+	private HindiVideosFragment hindiVideosFragment = null;
 
 	// Constants for saving the state of this Fragment's child Fragments
 	public static final String FEATURED_VIDEOS_FRAGMENT = "MainFragment.featuredVideosFragment";
@@ -54,9 +62,15 @@ public class MainFragment extends FragmentEx {
 	public static final String SUBSCRIPTIONS_FEED_FRAGMENT = "MainFragment.subscriptionsFeedFragment";
 	public static final String BOOKMARKS_FRAGMENT = "MainFragment.bookmarksFragment";
 	public static final String DOWNLOADED_VIDEOS_FRAGMENT = "MainFragment.downloadedVideosFragment";
+	public static final String PLAYLIST_VIDEOS_FRAGMENT = "MainFragment.playslitVideosFragment";
+	public static final String TELUGU_PLAYLIST_VIDEOS_FRAGMENT = "MainFragment.teluguplayslitVideosFragment";
+	public static final String MALAYALAM_PLAYLIST_VIDEOS_FRAGMENT = "MainFragment.malayalamplayslitVideosFragment";
+	public static final String TAMIL_PLAYLIST_VIDEOS_FRAGMENT = "MainFragment.tamilplayslitVideosFragment";
+	public static final String HINDI_PLAYLIST_VIDEOS_FRAGMENT = "MainFragment.hindiplayslitVideosFragment";
 
 	private VideosPagerAdapter			videosPagerAdapter = null;
 	private ViewPager					viewPager;
+	private AdView mAdView;
 
 	public static final String SHOULD_SELECTED_FEED_TAB = "MainFragment.SHOULD_SELECTED_FEED_TAB";
 
@@ -66,11 +80,16 @@ public class MainFragment extends FragmentEx {
 		super.onCreate(savedInstanceState);
 
 		if(savedInstanceState != null) {
+			playlistVideosFragment= (PlaylistVideosFragment) getChildFragmentManager().getFragment(savedInstanceState, PLAYLIST_VIDEOS_FRAGMENT);
 			featuredVideosFragment = (FeaturedVideosFragment) getChildFragmentManager().getFragment(savedInstanceState, FEATURED_VIDEOS_FRAGMENT);
 			mostPopularVideosFragment = (MostPopularVideosFragment) getChildFragmentManager().getFragment(savedInstanceState, MOST_POPULAR_VIDEOS_FRAGMENT);
 			subscriptionsFeedFragment = (SubscriptionsFeedFragment)getChildFragmentManager().getFragment(savedInstanceState, SUBSCRIPTIONS_FEED_FRAGMENT);
 			bookmarksFragment = (BookmarksFragment) getChildFragmentManager().getFragment(savedInstanceState, BOOKMARKS_FRAGMENT);
 			downloadedVideosFragment = (DownloadedVideosFragment) getChildFragmentManager().getFragment(savedInstanceState, DOWNLOADED_VIDEOS_FRAGMENT);
+			teluguVideosFragment = (TeluguVideosFragment) getChildFragmentManager().getFragment(savedInstanceState, TELUGU_PLAYLIST_VIDEOS_FRAGMENT);
+			malayalamVideosFragment = (MalayalamVideosFragment) getChildFragmentManager().getFragment(savedInstanceState, MALAYALAM_PLAYLIST_VIDEOS_FRAGMENT);
+			tamilVideosFragment = (TamilVideosFragment) getChildFragmentManager().getFragment(savedInstanceState, TAMIL_PLAYLIST_VIDEOS_FRAGMENT);
+			hindiVideosFragment = (HindiVideosFragment) getChildFragmentManager().getFragment(savedInstanceState, HINDI_PLAYLIST_VIDEOS_FRAGMENT);
 		}
 	}
 
@@ -153,6 +172,11 @@ public class MainFragment extends FragmentEx {
 		// refresh dialog from showing when an automatic refresh happens.
 		videoGridFragmentsList.get(viewPager.getCurrentItem()).onFragmentSelected();
 
+		mAdView = view.findViewById(R.id.adView);
+		AdRequest.Builder adRequest = new AdRequest.Builder();
+		adRequest.addTestDevice("C284D5A398D80F7CE733BAAC7372C233");
+		mAdView.loadAd(adRequest.build());
+
 		return view;
 	}
 
@@ -197,11 +221,39 @@ public class MainFragment extends FragmentEx {
 			super(fm);
 
 			// initialise fragments
+
+			/*if (playlistVideosFragment == null)
+				playlistVideosFragment = new PlaylistVideosFragment();*/
+
+			/*new GetPlaylistTask("PLEI1TXdLd0MajQU6sxlFoMLU3h2uG0Gfu", new PlaylistClickListener() {
+				@Override
+				public void onClickPlaylist(YouTubePlaylist playlist) {
+						// Pass the clicked playlist to PlaylistVideosFragment.
+						Intent playlistIntent = new Intent(getContext(), MainActivity.class);
+						playlistIntent.setAction(MainActivity.ACTION_VIEW_PLAYLIST);
+						playlistIntent.putExtra(PlaylistVideosFragment.PLAYLIST_OBJ, playlist);
+						getContext().startActivity(playlistIntent);
+				}
+			}).executeInParallel();*/
+
+
 			if (featuredVideosFragment == null)
 				featuredVideosFragment = new FeaturedVideosFragment();
 
 			if (mostPopularVideosFragment == null)
 				mostPopularVideosFragment = new MostPopularVideosFragment();
+
+			if (teluguVideosFragment == null)
+				teluguVideosFragment = new TeluguVideosFragment();
+
+			if (malayalamVideosFragment == null)
+				malayalamVideosFragment = new MalayalamVideosFragment();
+
+			if (tamilVideosFragment == null)
+				tamilVideosFragment = new TamilVideosFragment();
+
+			if (hindiVideosFragment == null)
+				hindiVideosFragment = new HindiVideosFragment();
 
 			if (subscriptionsFeedFragment == null)
 				subscriptionsFeedFragment = new SubscriptionsFeedFragment();
@@ -218,6 +270,10 @@ public class MainFragment extends FragmentEx {
 
 			// add fragments to list:  do NOT forget to ***UPDATE*** @string/default_tab and @string/default_tab_values
 			videoGridFragmentsList.clear();
+			videoGridFragmentsList.add(tamilVideosFragment);
+			videoGridFragmentsList.add(hindiVideosFragment);
+			videoGridFragmentsList.add(teluguVideosFragment);
+			videoGridFragmentsList.add(malayalamVideosFragment);
 			videoGridFragmentsList.add(featuredVideosFragment);
 			videoGridFragmentsList.add(mostPopularVideosFragment);
 			videoGridFragmentsList.add(subscriptionsFeedFragment);
@@ -254,6 +310,14 @@ public class MainFragment extends FragmentEx {
 			getChildFragmentManager().putFragment(outState, BOOKMARKS_FRAGMENT, bookmarksFragment);
 		if(downloadedVideosFragment != null && downloadedVideosFragment.isAdded())
 			getChildFragmentManager().putFragment(outState, DOWNLOADED_VIDEOS_FRAGMENT, downloadedVideosFragment);
+		if(teluguVideosFragment != null && teluguVideosFragment.isAdded())
+			getChildFragmentManager().putFragment(outState, TELUGU_PLAYLIST_VIDEOS_FRAGMENT, teluguVideosFragment);
+		if(malayalamVideosFragment != null && malayalamVideosFragment.isAdded())
+			getChildFragmentManager().putFragment(outState, MALAYALAM_PLAYLIST_VIDEOS_FRAGMENT, malayalamVideosFragment);
+		if(tamilVideosFragment != null && tamilVideosFragment.isAdded())
+			getChildFragmentManager().putFragment(outState, TAMIL_PLAYLIST_VIDEOS_FRAGMENT, tamilVideosFragment);
+		if(hindiVideosFragment != null && hindiVideosFragment.isAdded())
+			getChildFragmentManager().putFragment(outState, HINDI_PLAYLIST_VIDEOS_FRAGMENT, hindiVideosFragment);
 
 		super.onSaveInstanceState(outState);
 	}

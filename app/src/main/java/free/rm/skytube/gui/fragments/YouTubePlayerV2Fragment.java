@@ -22,6 +22,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.graphics.Rect;
 import android.media.AudioManager;
 import android.net.Uri;
@@ -58,6 +59,8 @@ import com.google.android.exoplayer2.ui.PlayerControlView;
 import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 import java.io.File;
 import java.io.IOException;
@@ -125,6 +128,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 								noVideoCommentsView = null;
 	private CommentsAdapter     commentsAdapter = null;
 	private ExpandableListView  commentsExpandableListView = null;
+	private AdView mAdView;
 
 	public static final String YOUTUBE_VIDEO_OBJ = "YouTubePlayerFragment.yt_video_obj";
 
@@ -176,6 +180,46 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 		}
 
 		return view;
+	}
+
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+		super.onConfigurationChanged(newConfig);
+		renewAd();
+	}
+
+	private void renewAd() {
+		// Remove the ad keeping the attributes
+		RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) mAdView.getLayoutParams();
+		/*final boolean orientation = getContext().getResources().getBoolean(R.bool.is_landscape);
+		if (orientation) {
+			lp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
+		} else {
+			lp.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
+		}
+		lp.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);*/
+
+		RelativeLayout parentLayout = (RelativeLayout) mAdView.getParent();
+		parentLayout.removeView(mAdView);
+
+// Re-initialise the ad
+		mAdView.destroy();
+		mAdView = new AdView(getContext());
+		mAdView.setAdSize(com.google.android.gms.ads.AdSize.SMART_BANNER);
+		mAdView.setAdUnitId(getContext().getString(R.string.banner_ad_unit_id_2));
+		mAdView.setId(R.id.adView);
+		mAdView.setLayoutParams(lp);
+		parentLayout.addView(mAdView);
+
+// Re-fetch add and check successful load
+		/*AdRequest adRequest = new AdRequest.Builder()
+				.addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+				.addTestDevice(parent.getString(R.string.test_device_id))
+				.build();*/
+
+		AdRequest.Builder adRequest = new AdRequest.Builder();
+		adRequest.addTestDevice("C284D5A398D80F7CE733BAAC7372C233");
+		mAdView.loadAd(adRequest.build());
 	}
 
 
@@ -246,6 +290,10 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 				}
 			}
 		});
+		mAdView = view.findViewById(R.id.adView);
+		AdRequest.Builder adRequest = new AdRequest.Builder();
+		adRequest.addTestDevice("C284D5A398D80F7CE733BAAC7372C233");
+		mAdView.loadAd(adRequest.build());
 	}
 
 

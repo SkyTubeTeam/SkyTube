@@ -4,22 +4,24 @@
 
 	<item android:id="@+id/menu_search"
 		  android:title="@string/search_videos"
-		  android:icon="@drawable/ic_search"
+		  android:icon="@drawable/baseline_search_white_48dp"
 		  app:showAsAction="collapseActionView|ifRoom"
 		  app:actionViewClass="android.support.v7.widget.SearchView"/>
 
-	<item
+	<!--<item
 		android:id="@+id/menu_blocker"
 		android:title="@string/pref_video_blocker_category"
 		app:actionLayout="@layout/menu_action_item_badge"
-		app:showAsAction="always" />
+		app:showAsAction="always" />-->
 
 	<item android:id="@+id/menu_enter_video_url"
 		  android:title="@string/enter_video_url"
-		  app:showAsAction="never"/>
+
+		  />
 
 	<item android:id="@+id/menu_preferences"
-		  android:title="@string/preferences"
-		  app:showAsAction="never"/>
+		  android:title="@string/settings"
+		  android:icon="@drawable/baseline_settings_white_48dp"
+		  app:showAsAction="always"/>
 
 </menu>

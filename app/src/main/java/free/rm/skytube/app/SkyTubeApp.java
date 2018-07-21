@@ -76,6 +76,7 @@ public class SkyTubeApp extends MultiDexApplication {
 	public static final String NEW_VIDEOS_NOTIFICATION_CHANNEL = "free.rm.skytube.NEW_VIDEOS_NOTIFICATION_CHANNEL";
 	public static final int NEW_VIDEOS_NOTIFICATION_CHANNEL_ID = 1;
 
+
 	@Override
 	public void onCreate() {
 		super.onCreate();

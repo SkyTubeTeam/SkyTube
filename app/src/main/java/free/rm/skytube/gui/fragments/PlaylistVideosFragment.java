@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,6 +35,8 @@ public class PlaylistVideosFragment extends VideosGridFragment {
 	ImageView   playlistThumbnailImageView;
 	@BindView(R.id.playlist_title_text_view)
 	TextView    playlistTitleTextView;
+	@BindView(R.id.adView)
+	AdView mAdView;
 
 	public static final String PLAYLIST_OBJ = "PlaylistVideosFragment.PLAYLIST_OBJ";
 
@@ -67,6 +71,10 @@ public class PlaylistVideosFragment extends VideosGridFragment {
 				.load(youTubePlaylist.getBannerUrl())
 				.apply(new RequestOptions().placeholder(R.drawable.banner_default))
 				.into(playlistBannerImageView);
+
+		AdRequest.Builder adRequest = new AdRequest.Builder();
+		adRequest.addTestDevice("C284D5A398D80F7CE733BAAC7372C233");
+		mAdView.loadAd(adRequest.build());
 
 		return view;
 	}

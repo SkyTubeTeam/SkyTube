@@ -34,18 +34,20 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import free.rm.skytube.R;
-import free.rm.skytube.businessobjects.YouTube.Tasks.GetYouTubeChannelInfoTask;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
-import free.rm.skytube.gui.businessobjects.fragments.FragmentEx;
-import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
+import free.rm.skytube.businessobjects.YouTube.Tasks.GetYouTubeChannelInfoTask;
 import free.rm.skytube.gui.businessobjects.SubscribeButton;
+import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
+import free.rm.skytube.gui.businessobjects.fragments.FragmentEx;
 import free.rm.skytube.gui.businessobjects.fragments.TabFragment;
 
 /**
@@ -83,6 +85,7 @@ public class ChannelBrowserFragment extends FragmentEx {
 
 	private ChannelPagerAdapter channelPagerAdapter;
 	private ViewPager viewPager;
+	private AdView mAdView;
 
 
 	@Override
@@ -108,6 +111,12 @@ public class ChannelBrowserFragment extends FragmentEx {
 
 		// inflate the layout for this fragment
 		View fragment = inflater.inflate(R.layout.fragment_channel_browser, container, false);
+
+		mAdView = fragment.findViewById(R.id.adView);
+		AdRequest.Builder adRequest = new AdRequest.Builder();
+		adRequest.addTestDevice("C284D5A398D80F7CE733BAAC7372C233");
+		mAdView.loadAd(adRequest.build());
+
 		viewPager = fragment.findViewById(R.id.pager);
 
 		TabLayout tabLayout = fragment.findViewById(R.id.tab_layout);

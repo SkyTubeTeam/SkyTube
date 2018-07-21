@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:drawer="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000"
+    tools:context=".gui.fragments.YouTubePlayerFragment">
+
+    <!-- Video Player -->
+    <com.google.android.exoplayer2.ui.PlayerView
+        android:id="@+id/player_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/black"
+        app:resize_mode="fixed_width"
+        tools:context="com.example.ramon.exoplayertest.MainActivity" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        >
+        <!-- Admob banner  -->
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/adView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            ads:adSize="SMART_BANNER"
+            ads:adUnitId="@string/banner_ad_unit_id_2" />
+        <!-- End of admob banner -->
+    </RelativeLayout>
+
+
+    <!-- Progress bar that will be displayed before a video is loaded -->
+    <ProgressBar
+        android:id="@+id/loadingVideoView"
+        style="@style/LoadingProgressBar"
+        android:layout_gravity="center"
+        android:padding="17dp" />
+
+
+    <!-- Volume / Brightness Indicator -->
+    <RelativeLayout
+        android:id="@+id/indicatorView"
+        style="@style/VideoPlayerIndicator"
+        android:layout_width="80dp"
+        android:layout_height="90dp"
+        android:layout_gravity="center"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/indicatorImageView"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="6dp"
+            tools:background="@drawable/ic_brightness" />
+
+        <TextView
+            android:id="@+id/indicatorTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="5dp"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            tools:text="12:38" />
+
+    </RelativeLayout>
+
+
+    <!--
+        VIDEO DESCRIPTION / INFO
+    -->
+    <hollowsoft.slidingdrawer.SlidingDrawer
+        android:id="@+id/des_drawer"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/description_drawer_height"
+        android:layout_gravity="bottom"
+        android:orientation="vertical"
+        drawer:content="@+id/des_content"
+        drawer:handle="@+id/des_handle">
+
+        <LinearLayout
+            android:id="@+id/des_handle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"></LinearLayout>
+
+        <include
+            android:id="@+id/des_content"
+            layout="@layout/video_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:orientation="vertical"
+            android:padding="16dp" />
+    </hollowsoft.slidingdrawer.SlidingDrawer>
+
+
+    <!--
+        COMMENTS
+    -->
+    <hollowsoft.slidingdrawer.SlidingDrawer
+        android:id="@+id/comments_drawer"
+        android:layout_width="@dimen/comments_drawer_width"
+        android:layout_height="match_parent"
+        android:layout_gravity="right"
+        android:orientation="horizontal"
+        drawer:content="@+id/comments_content"
+        drawer:handle="@+id/comments_handle">
+
+        <LinearLayout
+            android:id="@+id/comments_handle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"></LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/comments_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/comment_background">
+
+            <TextView
+                android:id="@+id/no_video_comments_text_view"
+                style="@style/NoCommentsMsgTextView"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:paddingBottom="17dp"
+                android:paddingLeft="7dp"
+                android:paddingRight="7dp"
+                android:paddingTop="17dp"
+                android:text="@string/no_video_comments"
+                android:visibility="gone" />
+
+            <ExpandableListView xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/commentsExpandableListView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:groupIndicator="@null" />
+
+            <ProgressBar
+                android:id="@+id/comments_progress_bar"
+                style="@style/LoadingProgressBar"
+                android:layout_centerInParent="true" />
+        </RelativeLayout>
+    </hollowsoft.slidingdrawer.SlidingDrawer>
+
+
+</FrameLayout>

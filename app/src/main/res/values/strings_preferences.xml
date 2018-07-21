@@ -447,6 +447,7 @@
 		<item>@string/feed</item>
 		<item>@string/bookmarks</item>
 		<item>@string/downloads</item>
+		<item>@string/playlists</item>
 	</string-array>
 	<string-array name="default_tab_values" translatable="false">
 		<item>0</item>
@@ -454,6 +455,7 @@
 		<item>2</item>
 		<item>3</item>
 		<item>4</item>
+		<item>5</item>
 	</string-array>
 
 	<string name="pref_key_feed_notification" translatable="false">pref_key_feed_notification</string>
