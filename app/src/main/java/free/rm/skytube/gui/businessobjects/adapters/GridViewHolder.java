@@ -30,10 +30,12 @@ import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.bumptech.glide.Glide;
@@ -56,12 +58,16 @@ import at.huber.youtubeExtractor.YtFile;
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
+import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
 import free.rm.skytube.businessobjects.db.PlaybackStatusDb;
 import free.rm.skytube.businessobjects.db.Tasks.IsVideoBookmarkedTask;
 import free.rm.skytube.businessobjects.db.Tasks.IsVideoWatchedTask;
 import free.rm.skytube.gui.activities.ThumbnailViewerActivity;
 import free.rm.skytube.gui.businessobjects.MainActivityListener;
 import free.rm.skytube.gui.businessobjects.YouTubePlayer;
+
+import static free.rm.skytube.app.SkyTubeApp.getContext;
+import static free.rm.skytube.app.SkyTubeApp.getStr;
 
 /**
  * A ViewHolder for the videos grid view.
@@ -81,6 +87,17 @@ class GridViewHolder extends RecyclerView.ViewHolder {
 	private ImageView thumbnailImageView;
 	private TextView viewsTextView;
 	private ProgressBar videoPositionProgressBar;
+	/** The remote file URL that is going to be downloaded. */
+	private String  remoteFileUrl = null;
+	/** The directory type:  e.g. Environment.DIRECTORY_MOVIES or Environment.DIRECTORY_PICTURES */
+	private String  dirType = null;
+	/** The title that will be displayed by the Android's download manager. */
+	private String  title = null;
+	/** The description that will be displayed by the Android's download manager. */
+	private String  description = null;
+	/** Output file name (without file extension). */
+	private String  outputFileName = null;
+	private String  outputFileExtension = null;
 	public static final String YOUTUBE_URL = "https://www.youtube.com/watch?v=";
 
 
@@ -264,6 +281,7 @@ class GridViewHolder extends RecyclerView.ViewHolder {
 						youTubeVideo.removeDownload();
 						return true;
 					case R.id.download_video:
+						setVariables(youTubeVideo);
 						getYoutubeDownloadVideoList(YOUTUBE_URL + youTubeVideo.getId());
 						//showDialog();
 						return true;
@@ -391,6 +409,17 @@ class GridViewHolder extends RecyclerView.ViewHolder {
 		@Override
 		protected String doInBackground(String... Url) {
 			try {
+				Uri     remoteFileUri = Uri.parse(Url[0]);
+				String  downloadFileName = getCompleteFileName(outputFileName, remoteFileUri);
+
+				// if there's already a local file for this video for some reason, then do not redownload the
+				// file and halt
+				File file = new File(Environment.getExternalStoragePublicDirectory(dirType), downloadFileName);
+				if (file.exists()) {
+					onFileDownloadCompleted(true, Uri.parse(file.toURI().toString()));
+					return "";
+				}
+
 				URL url = new URL(Url[0]);
 				URLConnection connection = url.openConnection();
 				connection.connect();
@@ -398,14 +427,12 @@ class GridViewHolder extends RecyclerView.ViewHolder {
 				// Detect the file lenghth
 				int fileLength = connection.getContentLength();
 
-				// Locate storage location
-				String filepath = Environment.getExternalStorageDirectory()
-						.getPath();
 
 				// Download the file
 				InputStream input = new BufferedInputStream(url.openStream());
+				String filepath = Environment.getExternalStoragePublicDirectory(dirType).getPath();
 
-				File f = new File(filepath, Url[1]);
+				File f = new File(filepath, downloadFileName);
 
 				// Save the downloaded file
 				OutputStream output = new FileOutputStream(f);
@@ -448,6 +475,42 @@ class GridViewHolder extends RecyclerView.ViewHolder {
 
 
 		}
+	}
+
+	private void setVariables(YouTubeVideo youTubeVideo) {
+		dirType = Environment.DIRECTORY_MOVIES;
+		title = youTubeVideo.getTitle();
+		description = getStr(R.string.video) + " ― " + youTubeVideo.getChannelName();
+		outputFileName = youTubeVideo.getId();
+		outputFileExtension = "mp4";
+		this.youTubeVideo = youTubeVideo;
+	}
+
+	private String getCompleteFileName(String outputFileName, Uri remoteFileUri) {
+		String fileExt = (outputFileExtension != null)  ?  outputFileExtension  :   MimeTypeMap.getFileExtensionFromUrl(remoteFileUri.toString());
+		return outputFileName + "." + fileExt;
+	}
+
+	public void onFileDownloadStarted() {
+		Toast.makeText(getContext(),
+				String.format(getContext().getString(R.string.starting_video_download), youTubeVideo.getTitle()),
+				Toast.LENGTH_LONG).show();
+	}
+
+	public void onFileDownloadCompleted(boolean success, Uri localFileUri) {
+		if (success) {
+			success = DownloadedVideosDb.getVideoDownloadsDb().add(youTubeVideo, localFileUri.toString());
+		}
+
+		Toast.makeText(getContext(),
+				String.format(getContext().getString(success ? R.string.video_downloaded : R.string.video_download_stream_error), youTubeVideo.getTitle()),
+				Toast.LENGTH_LONG).show();
+	}
+
+	public void onExternalStorageNotAvailable() {
+		Toast.makeText(getContext(),
+				R.string.external_storage_not_available,
+				Toast.LENGTH_LONG).show();
 	}
 
 }
