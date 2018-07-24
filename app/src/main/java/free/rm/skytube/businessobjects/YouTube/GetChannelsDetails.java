@@ -23,13 +23,17 @@ import com.google.api.services.youtube.model.ChannelListResponse;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPI;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPIKey;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
+import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 
 /**
  * Returns the details/information about YouTube channel(s).
@@ -39,6 +43,15 @@ public class GetChannelsDetails {
 	private static final int    CHANNELS_PER_QUERY = 50;
 	private static final Long   MAX_RESULTS = (long) CHANNELS_PER_QUERY;
 
+	private Map<String, YouTubeChannel> channelCache;
+
+	public GetChannelsDetails() {
+		this(null);
+	}
+
+	public GetChannelsDetails(Map<String, YouTubeChannel> channelCache) {
+		this.channelCache = channelCache != null ? channelCache : new HashMap<String, YouTubeChannel>();
+	}
 
 	/**
 	 * Retrieve a list of {@link YouTubeChannel} by communicating with YouTube.
@@ -62,8 +75,8 @@ public class GetChannelsDetails {
 		// to divide the given channelIdsList into smaller lists... then we need to regroup them
 		// into youTubeChannelsList.
 		List<List<String>> dividedChannelIdsLists = divideList(channelIdsList);
+		YouTube youtube = YouTubeAPI.create();
 		for (List<String> subChannelIdsList : dividedChannelIdsLists) {
-			YouTube youtube = YouTubeAPI.create();
 			YouTube.Channels.List channelInfo = youtube.channels().list("snippet, statistics, brandingSettings");
 			channelInfo.setFields("items(id, snippet/title, snippet/description, snippet/thumbnails/default," +
 								"statistics/subscriberCount, brandingSettings/image/" + bannerType + ")," +
@@ -127,8 +140,9 @@ public class GetChannelsDetails {
 		List<Channel> channelList = response.getItems();
 
 		if(channelList != null && channelList.size() > 0) {
-			YouTubeChannel youTubeChannel = new YouTubeChannel();
-			youTubeChannel.init(channelList.get(0), false, false);
+			Channel channel = channelList.get(0);
+			YouTubeChannel youTubeChannel = getCached(channel.getId());
+			youTubeChannel.init(channel, false, false);
 			return youTubeChannel;
 		}
 
@@ -211,8 +225,10 @@ public class GetChannelsDetails {
 			// set the instance variables
 			for (Channel channel : channelList) {
 				try {
-					youTubeChannel = new YouTubeChannel();
-					youTubeChannel.init(channel, isUserSubscribed, shouldCheckForNewVideos);
+					youTubeChannel = getCached(channel.getId());
+					if (youTubeChannel.init(channel, isUserSubscribed, shouldCheckForNewVideos)) {
+						SubscriptionsDb.getSubscriptionsDb().updateChannel(youTubeChannel);
+					}
 					youTubeChannelList.add(youTubeChannel);
 				} catch (Throwable tr) {
 					Logger.e(this, "Error has occurred while getting channel info for ChannelID=" + channel.getId(), tr);
@@ -225,6 +241,19 @@ public class GetChannelsDetails {
 		return youTubeChannelList;
 	}
 
+	private YouTubeChannel getCached(String id) throws IOException {
+		YouTubeChannel channel = this.channelCache.get(id);
+		if (channel == null) {
+			// check, if it's stored in the subscription db
+			channel = SubscriptionsDb.getSubscriptionsDb().getCachedSubscribedChannel(id);
+			if (channel == null) {
+				// fallback to create a new instance
+				channel = new YouTubeChannel(id, null);
+			}
+			this.channelCache.put(id, channel);
+		}
+		return channel;
+	}
 
 	/**
 	 * Sort the order of the given youTubeChannelsList such that it is the same as that of channelIdsList.

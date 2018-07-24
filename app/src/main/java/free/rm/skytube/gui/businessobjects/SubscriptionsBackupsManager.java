@@ -38,6 +38,7 @@ import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.Logger;
+import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetSubscriptionVideosTask;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 import free.rm.skytube.businessobjects.db.Tasks.UnsubscribeFromAllChannelsTask;
@@ -404,7 +405,7 @@ public class SubscriptionsBackupsManager {
 		@Override
 		protected Integer doInBackground(final List<MultiSelectListPreferenceItem>... channels) {
 			for (MultiSelectListPreferenceItem channel : channels[0]) {
-				SubscriptionsDb.getSubscriptionsDb().subscribe(channel.id);
+				SubscriptionsDb.getSubscriptionsDb().subscribe(new YouTubeChannel(channel.id, null));
 			}
 
 			return channels[0].size();
