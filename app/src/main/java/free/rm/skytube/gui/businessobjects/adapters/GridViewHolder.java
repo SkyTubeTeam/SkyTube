@@ -17,6 +17,7 @@
 
 package free.rm.skytube.gui.businessobjects.adapters;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
@@ -387,6 +388,9 @@ class GridViewHolder extends RecyclerView.ViewHolder {
 
 		MaterialDialog md;
 		private MoPubView mMoPubView;
+		ProgressBar progressBar;
+		private int progressStatus = 0;
+		private TextView textView;
 
 		@Override
 		protected void onPreExecute() {
@@ -396,6 +400,11 @@ class GridViewHolder extends RecyclerView.ViewHolder {
 					.customView(R.layout.mrect_ad, true)
 					.build();
 			mMoPubView = (MoPubView) md.findViewById(R.id.banner_mopubview);
+			progressBar = (ProgressBar) md.findViewById(R.id.progressBar);
+			progressBar.setMax(100);
+			textView = (TextView) md.findViewById(R.id.textView);
+			progressStatus += 1;
+
 			LinearLayout.LayoutParams layoutParams =
 					(LinearLayout.LayoutParams) mMoPubView.getLayoutParams();
 			layoutParams.width = getWidth();
@@ -463,17 +472,14 @@ class GridViewHolder extends RecyclerView.ViewHolder {
 		protected void onProgressUpdate(Integer... progress) {
 			super.onProgressUpdate(progress);
 
-			//bnp.setProgress(progress[0]);
+			progressBar.setProgress(progress[0]);
+			textView.setText(progress[0]+"/"+progressBar.getMax());
 
 		}
 
 		@Override
 		protected void onPostExecute(String file_url) {
-
-
-			//dialog.dismiss();
-
-
+			md.dismiss();
 		}
 	}
 

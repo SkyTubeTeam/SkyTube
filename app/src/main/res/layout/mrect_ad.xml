@@ -12,4 +12,20 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp">
     </com.mopub.mobileads.MoPubView>
+
+    <ProgressBar
+        style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+        android:id="@+id/progressBar"
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:layout_marginTop="24dp"
+        android:indeterminate="true"
+        android:visibility="visible" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/progressBar"
+        android:layout_below="@+id/progressBar"/>
 </LinearLayout>
