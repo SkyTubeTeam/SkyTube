@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
-	<string name="downloads">Downloads</string>
-	<string name="download_video">Download Video</string>
+	<string name="downloads">Загрузки</string>
+	<string name="download_video">Скачать видео</string>
 	<string name="starting_video_download">Загрузка \'%s\'…</string>
 	<string name="video_download_stream_error">Не удалось скачать \'%s\'.</string>
-	<string name="delete_download">Delete Download</string>
+	<string name="delete_download">Удалить загрузку</string>
 	<string name="video_downloaded">\'%s\' загружено.</string>
 	<string name="no_downloaded_videos_text">Вы ещё не загрузили ни одного видео.
 \n
