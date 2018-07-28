@@ -32,8 +32,4 @@
 	<string name="play">再生</string>
 	<string name="cancel">キャンセル</string>
 	<string name="clear">クリア</string>
-
-	<string name="tutorial_comments_icon">左にスワイプするとコメントを表示します。</string>
-	<string name="tutorial_video_info_icon">上にスワイプするとビデオについての情報を表示します。</string>
-	<string name="tutorial_pause_video">ダブルタップするとビデオを一時停止または再生します。</string>
 </resources>

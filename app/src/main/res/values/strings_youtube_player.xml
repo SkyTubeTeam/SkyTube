@@ -36,10 +36,6 @@
 	<string name="cancel">Cancel</string>
 	<string name="clear">Clear</string>
 
-	<string name="tutorial_comments_icon">Swipe to the left to view comments.</string>
-	<string name="tutorial_video_info_icon">Swipe to the top to view information about the video.</string>
-	<string name="tutorial_pause_video">Double tap to pause or play a video.</string>
-
 	<string name="should_resume">Do you wish to resume from where you stopped?</string>
 	<string name="resume">Resume</string>
 </resources>

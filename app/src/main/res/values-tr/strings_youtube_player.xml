@@ -32,10 +32,7 @@
 	<string name="cancel">İptal</string>
 	<string name="clear">Temizle</string>
 
-	<string name="tutorial_comments_icon">Yorumları görmek için sola kaydırın.</string>
-	<string name="tutorial_video_info_icon">Videoyla ilgili bilgileri görüntülemek için yukarı kaydırın.</string>
-	<string name="tutorial_pause_video">Videoyu duraklatmak veya oynatmak için iki kez dokunun.</string>
-<string name="mark_watched">İzlendi olarak işaretle</string>
+	<string name="mark_watched">İzlendi olarak işaretle</string>
 	<string name="mark_unwatched">İzlenmedi olarak işaretle</string>
 
 	<string name="should_resume">Durduğunuz yerden devam etmek ister misiniz?</string>

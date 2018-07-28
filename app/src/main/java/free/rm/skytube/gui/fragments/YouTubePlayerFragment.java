@@ -14,7 +14,6 @@ import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -123,7 +122,6 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 	private static final int NAVBAR_VISIBILITY_TIMEOUT = 500;
 	private static final String VIDEO_CURRENT_POSITION = "YouTubePlayerFragment.VideoCurrentPosition";
 	private static final String TAG = YouTubePlayerFragment.class.getSimpleName();
-	private static final String TUTORIAL_COMPLETED = "YouTubePlayerFragment.TutorialCompleted";
 
 	private static final int MAX_VIDEO_STEP_TIME = 60 * 1000;
 	private static final int MAX_BRIGHTNESS = 100;
@@ -492,37 +490,14 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 	}
 
 
-
 	@Override
 	public void onPrepared(MediaPlayer mediaPlayer) {
 		loadingVideoView.setVisibility(View.GONE);
 		videoView.seekTo(videoCurrentPosition);
+		videoView.start();
 
-		// was the video player tutorial displayed before?
-		if (wasTutorialDisplayedBefore()) {
-			videoView.start();
-		} else {
-			// display the tutorial dialog boxes, then play the video
-			displayTutorialDialog(R.string.tutorial_comments_icon, Gravity.TOP | Gravity.RIGHT, new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					displayTutorialDialog(R.string.tutorial_video_info_icon, Gravity.BOTTOM | Gravity.LEFT, new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							displayTutorialDialog(R.string.tutorial_pause_video, Gravity.CENTER, new DialogInterface.OnClickListener() {
-								@Override
-								public void onClick(DialogInterface dialog, int which) {
-									videoView.start();
-								}
-							});
-						}
-					});
-				}
-			});
-		}
 		showHud();
 	}
-
 
 
 	@Override
@@ -535,12 +510,14 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 		super.onPause();
 	}
 
+
 	@Override
 	public void onResume() {
 		super.onResume();
 
 		setupUserPrefs();
 	}
+
 
 	// We can also add volume level or something in the future.
 	private void setupUserPrefs() {
@@ -843,49 +820,6 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 								}
 							})
 							.show();
-		}
-	}
-
-	/**
-	 * Will check whether the video player tutorial was completed before.  If no, it will return
-	 * false and will save the value accordingly.
-	 *
-	 * @return True if the tutorial was completed in the past.
-	 */
-	private boolean wasTutorialDisplayedBefore() {
-		SharedPreferences preferences = SkyTubeApp.getPreferenceManager();
-		boolean wasTutorialDisplayedBefore = preferences.getBoolean(TUTORIAL_COMPLETED, false);
-
-		preferences.edit().putBoolean(TUTORIAL_COMPLETED, true).commit();
-
-		return wasTutorialDisplayedBefore;
-	}
-
-
-	/**
-	 * Display a tutorial dialog.
-	 *
-	 * @param messageResId          Message resource ID.
-	 * @param dialogGravityFlags    Gravity flags, e.g. Gravity.RIGHT.
-	 * @param onClickListener       onClickListener which will be called once the user taps on OK
-	 *                              button.
-	 */
-	private void displayTutorialDialog(int messageResId, int dialogGravityFlags, DialogInterface.OnClickListener onClickListener) {
-		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-		builder.setMessage(messageResId);
-		builder.setPositiveButton(R.string.ok, onClickListener);
-
-		AlertDialog dialog = builder.create();
-		WindowManager.LayoutParams wmlp = dialog.getWindow().getAttributes();
-
-		if (wmlp != null) {
-			if (dialogGravityFlags != Gravity.CENTER) {
-				wmlp.gravity = dialogGravityFlags;
-				wmlp.x = 50;   // x position
-				wmlp.y = 50;   // y position
-			}
-
-			dialog.show();
 		}
 	}
 

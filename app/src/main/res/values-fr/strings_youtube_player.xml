@@ -32,8 +32,4 @@
 	<string name="play">Démarrer</string>
 	<string name="cancel">Annuler</string>
 	<string name="clear">Effacer</string>
-
-	<string name="tutorial_comments_icon">Glissez vers la gauche pour voir les commentaires.</string>
-	<string name="tutorial_video_info_icon">Glissez vers le haut pour voir les informations sur la vidéo.</string>
-	<string name="tutorial_pause_video">Touchez deux fois pour mettre en pause ou lire une vidéo.</string>
 </resources>

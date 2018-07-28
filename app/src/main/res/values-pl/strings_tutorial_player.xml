@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="tutorial_slide_1">Przesuń w lewo, aby pokazać komentarze.</string>
+	<string name="tutorial_slide_6">Naciśnij podwójnie, aby zatrzymać lub odtworzyć film.</string>
+</resources>

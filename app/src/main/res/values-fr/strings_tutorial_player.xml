@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="tutorial_slide_1">Glissez vers la gauche pour voir les commentaires.</string>
+	<string name="tutorial_slide_6">Touchez deux fois pour mettre en pause ou lire une vidéo.</string>
+</resources>

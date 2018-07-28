@@ -18,6 +18,7 @@
 package free.rm.skytube.gui.activities;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -31,6 +32,7 @@ import free.rm.skytube.businessobjects.interfaces.YouTubePlayerFragmentInterface
 import free.rm.skytube.gui.businessobjects.BackButtonActivity;
 import free.rm.skytube.gui.businessobjects.fragments.FragmentEx;
 import free.rm.skytube.gui.fragments.YouTubePlayerFragment;
+import free.rm.skytube.gui.fragments.YouTubePlayerTutorialFragment;
 import free.rm.skytube.gui.fragments.YouTubePlayerV2Fragment;
 
 /**
@@ -41,6 +43,9 @@ public class YouTubePlayerActivity extends BackButtonActivity {
 
 	private FragmentEx videoPlayerFragment;
 	private YouTubePlayerFragmentInterface fragmentListener;
+
+	private static final String TUTORIAL_COMPLETED = "YouTubePlayerActivity.TutorialCompleted";
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -55,18 +60,19 @@ public class YouTubePlayerActivity extends BackButtonActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_fragment_holder);
 
-		// either use the SkyTube's default video player or the legacy one
-		FragmentManager fragmentManager = getSupportFragmentManager();
-		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-		videoPlayerFragment = useDefaultPlayer ? new YouTubePlayerV2Fragment() : new YouTubePlayerFragment();
-		try {
-			fragmentListener = (YouTubePlayerFragmentInterface) videoPlayerFragment;
-		} catch(ClassCastException e) {
-			throw new ClassCastException(videoPlayerFragment.toString()
-							+ " must implement YouTubePlayerFragmentInterface");
+		// if the tutorial was previously displayed, the just "install" the video player fragment
+		if (wasTutorialDisplayedBefore()) {
+			installNewVideoPlayerFragment(useDefaultPlayer);
+		} else {
+			// display the tutorial
+			FragmentEx tutorialFragment = new YouTubePlayerTutorialFragment().setListener(new YouTubePlayerTutorialFragment.YouTubePlayerTutorialListener() {
+				@Override
+				public void onTutorialFinished() {
+					installNewVideoPlayerFragment(useDefaultPlayer);
+				}
+			});
+			installFragment(tutorialFragment);
 		}
-		fragmentTransaction.add(R.id.fragment_container, videoPlayerFragment);
-		fragmentTransaction.commit();
 	}
 
 
@@ -79,6 +85,56 @@ public class YouTubePlayerActivity extends BackButtonActivity {
 		final String str = SkyTubeApp.getPreferenceManager().getString(getString(R.string.pref_key_choose_player), defaultPlayerValue);
 
 		return str.equals(defaultPlayerValue);
+	}
+
+
+	/**
+	 * Will check whether the video player tutorial was completed before.  If no, it will return
+	 * false and will save the value accordingly.
+	 *
+	 * @return True if the tutorial was completed in the past.
+	 */
+	private boolean wasTutorialDisplayedBefore() {
+		SharedPreferences preferences = SkyTubeApp.getPreferenceManager();
+		boolean wasTutorialDisplayedBefore = preferences.getBoolean(TUTORIAL_COMPLETED, false);
+
+		preferences.edit().putBoolean(TUTORIAL_COMPLETED, true).apply();
+
+		return wasTutorialDisplayedBefore;
+	}
+
+
+	/**
+	 * "Installs" the video player fragment.
+	 *
+	 * @param useDefaultPlayer  True to use the default player; false to use the legacy one.
+	 */
+	private void installNewVideoPlayerFragment(boolean useDefaultPlayer) {
+		videoPlayerFragment = useDefaultPlayer ? new YouTubePlayerV2Fragment() : new YouTubePlayerFragment();
+
+		try {
+			fragmentListener = (YouTubePlayerFragmentInterface) videoPlayerFragment;
+		} catch(ClassCastException e) {
+			throw new ClassCastException(videoPlayerFragment.toString()
+					+ " must implement YouTubePlayerFragmentInterface");
+		}
+
+		installFragment(videoPlayerFragment);
+	}
+
+
+	/**
+	 * "Installs" a fragment inside the {@link FragmentManager}.
+	 *
+	 * @param fragment  Fragment to install and that is going to be displayed to the user.
+	 */
+	private void installFragment(FragmentEx fragment) {
+		// either use the SkyTube's default video player or the legacy one
+		FragmentManager fragmentManager = getSupportFragmentManager();
+		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+		fragmentTransaction.add(R.id.fragment_container, fragment);
+		fragmentTransaction.commit();
 	}
 
 
@@ -118,11 +174,15 @@ public class YouTubePlayerActivity extends BackButtonActivity {
 		}
 	}
 
+
 	@Override
 	public void onBackPressed() {
-		fragmentListener.videoPlaybackStopped();
+		if (fragmentListener != null) {
+			fragmentListener.videoPlaybackStopped();
+		}
 		super.onBackPressed();
 	}
+
 
 	// If the back button in the toolbar is hit, save the video's progress (if playback history is not disabled)
 	@Override
@@ -132,4 +192,5 @@ public class YouTubePlayerActivity extends BackButtonActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+
 }

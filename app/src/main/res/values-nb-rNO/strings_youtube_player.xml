@@ -32,12 +32,9 @@
 	<string name="cancel">Avbryt</string>
 	<string name="clear">Tøm</string>
 
-	<string name="tutorial_comments_icon">Dra til venstre for å vise kommentarer.</string>
-	<string name="tutorial_video_info_icon">Dra til toppen for å vise informasjon om videoen.</string>
-	<string name="tutorial_pause_video">"Dobbeltklikk for å pause eller spille av  en video."</string>
-<string name="mark_watched">Merk sette</string>
+	<string name="mark_watched">Merk sette</string>
 	<string name="mark_unwatched">Merk usette</string>
 
 	<string name="should_resume">Ønsker du å fortsette der du slapp?</string>
-<string name="resume">Fortsett</string>
+	<string name="resume">Fortsett</string>
 </resources>

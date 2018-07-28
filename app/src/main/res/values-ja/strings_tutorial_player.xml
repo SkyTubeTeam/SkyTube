@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="tutorial_slide_1">左にスワイプするとコメントを表示します。</string>
+	<string name="tutorial_slide_6">ダブルタップするとビデオを一時停止または再生します。</string>
+</resources>

@@ -32,13 +32,9 @@
 	<string name="cancel">Annuleren</string>
 	<string name="clear">Wissen</string>
 
-	<string name="tutorial_comments_icon">Veeg naar links om de reacties te weergeven.</string>
-	<string name="tutorial_video_info_icon">Veeg omhoog om de video-informatie te weergeven.</string>
-	<string name="tutorial_pause_video">Dubbeltik om een video te pauzeren of af te spelen.</string>
-
-<string name="mark_watched">Markeren als \'bekeken\'</string>
+	<string name="mark_watched">Markeren als \'bekeken\'</string>
 	<string name="mark_unwatched">Markeren als \'niet bekeken\'</string>
 
 	<string name="should_resume">Wil je verdergaan waar je was gebleven?</string>
-<string name="resume">Hervatten</string>
+	<string name="resume">Hervatten</string>
 </resources>

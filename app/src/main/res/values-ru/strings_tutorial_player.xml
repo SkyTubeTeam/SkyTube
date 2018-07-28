@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="tutorial_slide_1">Смахните влево, чтобы увидеть комментарии.</string>
+	<string name="tutorial_slide_6">Дважды нажмите, чтобы остановить или продолжить воспроизведение.</string>
+</resources>

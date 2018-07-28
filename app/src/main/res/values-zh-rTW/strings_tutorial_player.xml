@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="tutorial_slide_1">向左滑動即可檢視評論。</string>
+	<string name="tutorial_slide_6">輕點兩下可暫停或播放影片。</string>
+</resources>

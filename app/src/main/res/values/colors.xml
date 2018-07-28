@@ -42,6 +42,13 @@
 
 
 	<!--
+		Video Player Tutorial
+	-->
+	<color name="tutorial_background">@color/colorPrimary</color>
+	<color name="tutorial_swipe_area">#277AA2</color>
+
+
+	<!--
 		Video Player Colours
 	-->
 	<!-- Actionbar background colour ~~ which is the same as com.android.internal.R.layout.media_controller

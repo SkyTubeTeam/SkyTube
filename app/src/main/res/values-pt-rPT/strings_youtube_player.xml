@@ -32,8 +32,4 @@
 	<string name="play">Reproduzir</string>
 	<string name="cancel">Cancelar</string>
 	<string name="clear">Limpar</string>
-
-	<string name="tutorial_comments_icon">Deslize à esquerda para ver os comentários.</string>
-	<string name="tutorial_video_info_icon">Deslize acima para ver as informações do vídeo.</string>
-	<string name="tutorial_pause_video">Duplo toque para reproduzir ou parar um vídeo.</string>
 </resources>

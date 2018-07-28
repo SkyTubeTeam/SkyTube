@@ -32,8 +32,4 @@
 	<string name="play">Odtwarzaj</string>
 	<string name="cancel">Annuluj</string>
 	<string name="clear">Wyczyść</string>
-
-	<string name="tutorial_comments_icon">Przesuń w lewo, aby pokazać komentarze.</string>
-	<string name="tutorial_video_info_icon">Przesuń w górę, aby pokazać informacje o filmie.</string>
-	<string name="tutorial_pause_video">Naciśnij podwójnie, aby zatrzymać lub odtworzyć film.</string>
 </resources>

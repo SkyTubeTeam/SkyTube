@@ -32,8 +32,4 @@
 	<string name="play">Play</string>
 	<string name="cancel">Annulla</string>
 	<string name="clear">Cancella</string>
-
-	<string name="tutorial_comments_icon">Swipe to the left to view comments.</string>
-	<string name="tutorial_video_info_icon">Swipe to the top to view information about the video.</string>
-	<string name="tutorial_pause_video">Doppio tap per mettere in pausa o avviare un video.</string>
 </resources>
