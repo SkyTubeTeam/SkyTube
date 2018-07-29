@@ -144,4 +144,5 @@
 	<string name="channel_unwhitelist_failure">Het verwijderen van het kanaal/de kanalen van de witte lijst is mislukt…</string>
 
 	<string name="channel_blacklist_update_failure">Het verwijderen van het kanaal/de kanalen van de zwarte lijst is mislukt…</string>
+	<string name="pref_import_export_category">Importeren/Exporteren</string>
 	</resources>
