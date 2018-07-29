@@ -179,11 +179,17 @@ public abstract class FileDownloader implements Serializable, PermissionsActivit
 		Cursor  cursor = getDownloadManager().query(new DownloadManager.Query().setFilterById(downloadId));
 
 		if (cursor != null  &&  cursor.moveToFirst()) {
-			int columnIndex = cursor.getColumnIndex(DownloadManager.COLUMN_STATUS);
+			final int columnIndex = cursor.getColumnIndex(DownloadManager.COLUMN_STATUS);
 			downloadSuccessful = (cursor.getInt(columnIndex) == DownloadManager.STATUS_SUCCESSFUL);
 
 			if (downloadSuccessful) {
 				downloadedFileUri = Uri.parse(cursor.getString(cursor.getColumnIndex(DownloadManager.COLUMN_LOCAL_URI)));
+			} else {
+				final int columnReason = cursor.getColumnIndex(DownloadManager.COLUMN_REASON);
+				final int reason = cursor.getInt(columnReason);
+
+				// output why the download has failed...
+				Logger.e(this, "Download failed.  Reason=%s", reason);
 			}
 
 			cursor.close();
@@ -227,7 +233,8 @@ public abstract class FileDownloader implements Serializable, PermissionsActivit
 	 * @param outputFileName    E.g. "Hello"
 	 */
 	public FileDownloader setOutputFileName(String outputFileName) {
-		this.outputFileName = outputFileName;
+		// replace '/' with '.' as '/' is a special character in Linux/Android...
+		this.outputFileName = outputFileName.replace('/', '.');
 		return this;
 	}
 
