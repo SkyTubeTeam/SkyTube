@@ -25,7 +25,7 @@ import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
-import free.rm.skytube.gui.businessobjects.SubscribeButton;
+import free.rm.skytube.gui.businessobjects.views.SubscribeButton;
 import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
 import free.rm.skytube.gui.fragments.SubscriptionsFeedFragment;
 

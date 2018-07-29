@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package free.rm.skytube.gui.businessobjects;
+package free.rm.skytube.gui.businessobjects.views;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -41,6 +41,8 @@ import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannelInterface;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubePlaylist;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetYouTubeChannelInfoTask;
 import free.rm.skytube.gui.activities.MainActivity;
+import free.rm.skytube.gui.businessobjects.PlaylistClickListener;
+import free.rm.skytube.gui.businessobjects.YouTubePlayer;
 import free.rm.skytube.gui.fragments.ChannelBrowserFragment;
 import free.rm.skytube.gui.fragments.PlaylistVideosFragment;
 

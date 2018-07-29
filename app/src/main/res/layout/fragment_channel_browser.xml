@@ -83,7 +83,7 @@
 						style="@style/ChannelSubsTextView"/>
 
 					<!-- SUBSCRIBE BUTTON -->
-					<free.rm.skytube.gui.businessobjects.SubscribeButton
+					<free.rm.skytube.gui.businessobjects.views.SubscribeButton
 						android:id="@+id/channel_subscribe_button"
 						style="@style/SubscribeButton"
 						android:layout_alignParentRight="true"

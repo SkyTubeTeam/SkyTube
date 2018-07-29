@@ -1,6 +1,6 @@
 /*
  * SkyTube
- * Copyright (C) 2016  Ramon Mifsud
+ * Copyright (C) 2018  Ramon Mifsud
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package free.rm.skytube.gui.businessobjects;
+package free.rm.skytube.gui.businessobjects.views;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
