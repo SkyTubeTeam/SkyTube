@@ -1,21 +1,23 @@
 vX.XX - XX XX 2018:
-	* Added search history:  search history is stored and used as suggestions for future searches.  This feature can be disabled.
-	* Volume and brightness swipe controls.
-	* Video Blocker:
+	* Added a video blocker, which includes:
 		- Channel blacklisting;
 		- Channel whitelisting;
 		- Block videos if their language is not the same as the user's preferred one(s);
 		- Low views video blocking;
 		- High dislikes video blocking;
 		- Icon in the toolbar displaying how many videos were blocked.
+	* Added search history:  search history is stored and used as suggestions for future searches (this feature can be disabled).
+	* Volume and brightness swipe controls.
 	* Exoplayer support.
 	* App now gives the user the option to resume playing (previously) partially watched videos.
     * YouTube's videos and playlists links inside the video description are now handled and opened inside SkyTube.
     * New launcher icon.
     * Subscribed channels can now be sorted alphabetically.
+    * Added tutorial for the gestures applicable to the video player.
 	* Added Japanese translations.
 	* Added Chinese (traditional) translations.
-	* Updated Russian, Norwegian Bokmål, Dutch, German, Hungarian, Italian and French translations.
+	* Added Vietnamese translations.
+	* Updated Russian, Norwegian Bokmål, Dutch, German, Hungarian, Turkish, Italian and French translations.
 
 v2.82 - 24 Mar 2018:
 	* Emergency fix:  API DDOS attack mitigation controls.

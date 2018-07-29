@@ -124,7 +124,7 @@
 			android:text="7 days ago"/>
 
 
-		<com.klinker.android.link_builder.LinkConsumableTextView
+		<free.rm.skytube.gui.businessobjects.ClickableLinksTextView
 			android:id="@+id/video_desc_description"
 			android:paddingTop="10dp"
 			android:autoLink="web"

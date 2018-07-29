@@ -85,6 +85,7 @@ import free.rm.skytube.businessobjects.interfaces.GetDesiredStreamListener;
 import free.rm.skytube.businessobjects.interfaces.YouTubePlayerFragmentInterface;
 import free.rm.skytube.gui.activities.MainActivity;
 import free.rm.skytube.gui.activities.ThumbnailViewerActivity;
+import free.rm.skytube.gui.businessobjects.ClickableLinksTextView;
 import free.rm.skytube.gui.businessobjects.PlayerViewGestureDetector;
 import free.rm.skytube.gui.businessobjects.SkyTubeMaterialDialog;
 import free.rm.skytube.gui.businessobjects.SubscribeButton;
@@ -98,33 +99,33 @@ import hollowsoft.slidingdrawer.SlidingDrawer;
  */
 public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements YouTubePlayerFragmentInterface {
 
-	private YouTubeVideo		youTubeVideo = null;
-	private YouTubeChannel      youTubeChannel = null;
+	private YouTubeVideo		    youTubeVideo = null;
+	private YouTubeChannel          youTubeChannel = null;
 
-	private PlayerView          playerView;
-	private SimpleExoPlayer     player;
-	private long				playerInitialPosition = 0;
+	private PlayerView              playerView;
+	private SimpleExoPlayer         player;
+	private long				    playerInitialPosition = 0;
 
-	private Menu                menu = null;
+	private Menu                    menu = null;
 
-	private TextView			videoDescTitleTextView = null;
-	private ImageView			videoDescChannelThumbnailImageView = null;
-	private TextView			videoDescChannelTextView = null;
-	private SubscribeButton     videoDescSubscribeButton = null;
-	private TextView			videoDescViewsTextView = null;
-	private ProgressBar         videoDescLikesBar = null;
-	private TextView			videoDescLikesTextView = null;
-	private TextView			videoDescDislikesTextView = null;
-	private View                videoDescRatingsDisabledTextView = null;
-	private TextView			videoDescPublishDateTextView = null;
-	private TextView			videoDescriptionTextView = null;
-	private View				loadingVideoView = null;
-	private SlidingDrawer       videoDescriptionDrawer = null;
-	private SlidingDrawer		commentsDrawer = null;
-	private View				commentsProgressBar = null,
-								noVideoCommentsView = null;
-	private CommentsAdapter     commentsAdapter = null;
-	private ExpandableListView  commentsExpandableListView = null;
+	private TextView			    videoDescTitleTextView = null;
+	private ImageView			    videoDescChannelThumbnailImageView = null;
+	private TextView			    videoDescChannelTextView = null;
+	private SubscribeButton         videoDescSubscribeButton = null;
+	private TextView			    videoDescViewsTextView = null;
+	private ProgressBar             videoDescLikesBar = null;
+	private TextView			    videoDescLikesTextView = null;
+	private TextView			    videoDescDislikesTextView = null;
+	private View                    videoDescRatingsDisabledTextView = null;
+	private TextView			    videoDescPublishDateTextView = null;
+	private ClickableLinksTextView	videoDescriptionTextView = null;
+	private View				    loadingVideoView = null;
+	private SlidingDrawer           videoDescriptionDrawer = null;
+	private SlidingDrawer		    commentsDrawer = null;
+	private View				    commentsProgressBar = null,
+									noVideoCommentsView = null;
+	private CommentsAdapter         commentsAdapter = null;
+	private ExpandableListView      commentsExpandableListView = null;
 
 	public static final String YOUTUBE_VIDEO_OBJ = "YouTubePlayerFragment.yt_video_obj";
 
@@ -512,7 +513,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 		new GetVideoDescriptionTask(youTubeVideo, new GetVideoDescriptionTask.GetVideoDescriptionTaskListener() {
 			@Override
 			public void onFinished(String description) {
-				videoDescriptionTextView.setText(description);
+				videoDescriptionTextView.setTextAndLinkify(description);
 			}
 		}).executeInParallel();
 

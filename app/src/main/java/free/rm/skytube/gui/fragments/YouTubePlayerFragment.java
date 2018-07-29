@@ -55,6 +55,7 @@ import free.rm.skytube.businessobjects.interfaces.GetDesiredStreamListener;
 import free.rm.skytube.businessobjects.interfaces.YouTubePlayerFragmentInterface;
 import free.rm.skytube.gui.activities.MainActivity;
 import free.rm.skytube.gui.activities.ThumbnailViewerActivity;
+import free.rm.skytube.gui.businessobjects.ClickableLinksTextView;
 import free.rm.skytube.gui.businessobjects.MediaControllerEx;
 import free.rm.skytube.gui.businessobjects.OnSwipeTouchListener;
 import free.rm.skytube.gui.businessobjects.SkyTubeMaterialDialog;
@@ -72,48 +73,48 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 
 	public static final String YOUTUBE_VIDEO_OBJ = "YouTubePlayerFragment.yt_video_obj";
 
-	private YouTubeVideo		youTubeVideo = null;
-	private YouTubeChannel		youTubeChannel = null;
+	private YouTubeVideo		    youTubeVideo = null;
+	private YouTubeChannel		    youTubeChannel = null;
 
-	private VideoView			videoView = null;
+	private VideoView			    videoView = null;
 	/** The current video position (i.e. play time). */
-	private int					videoCurrentPosition = 0;
-	private MediaControllerEx	mediaController = null;
+	private int					    videoCurrentPosition = 0;
+	private MediaControllerEx	    mediaController = null;
 
-	private TextView			videoDescTitleTextView = null;
-	private ImageView			videoDescChannelThumbnailImageView = null;
-	private TextView			videoDescChannelTextView = null;
-	private SubscribeButton		videoDescSubscribeButton = null;
-	private TextView			videoDescViewsTextView = null;
-	private ProgressBar			videoDescLikesBar = null;
-	private TextView			videoDescLikesTextView = null;
-	private TextView			videoDescDislikesTextView = null;
-	private View                videoDescRatingsDisabledTextView = null;
-	private TextView			videoDescPublishDateTextView = null;
-	private TextView			videoDescriptionTextView = null;
-	private RelativeLayout      voidView = null;
-	private ImageView           indicatorImageView = null;
-	private TextView            indicatorTextView = null;
-	private RelativeLayout      indicatorView = null;
-	private View				loadingVideoView = null;
+	private TextView			    videoDescTitleTextView = null;
+	private ImageView			    videoDescChannelThumbnailImageView = null;
+	private TextView			    videoDescChannelTextView = null;
+	private SubscribeButton		    videoDescSubscribeButton = null;
+	private TextView			    videoDescViewsTextView = null;
+	private ProgressBar			    videoDescLikesBar = null;
+	private TextView			    videoDescLikesTextView = null;
+	private TextView			    videoDescDislikesTextView = null;
+	private View                    videoDescRatingsDisabledTextView = null;
+	private TextView			    videoDescPublishDateTextView = null;
+	private ClickableLinksTextView  videoDescriptionTextView = null;
+	private RelativeLayout          voidView = null;
+	private ImageView               indicatorImageView = null;
+	private TextView                indicatorTextView = null;
+	private RelativeLayout          indicatorView = null;
+	private View				    loadingVideoView = null;
 
-	private SlidingDrawer		videoDescriptionDrawer = null;
-	private View                videoDescriptionDrawerIconView = null;
-	private SlidingDrawer		commentsDrawer = null;
-	private View                commentsDrawerIconView = null;
-	private View				commentsProgressBar = null,
-								noVideoCommentsView = null;
-	private CommentsAdapter		commentsAdapter = null;
-	private ExpandableListView	commentsExpandableListView = null;
+	private SlidingDrawer		    videoDescriptionDrawer = null;
+	private View                    videoDescriptionDrawerIconView = null;
+	private SlidingDrawer		    commentsDrawer = null;
+	private View                    commentsDrawerIconView = null;
+	private View				    commentsProgressBar = null,
+									noVideoCommentsView = null;
+	private CommentsAdapter		    commentsAdapter = null;
+	private ExpandableListView	    commentsExpandableListView = null;
 
-	private Menu                menu = null;
+	private Menu                    menu = null;
 
-	private Handler             hideHudTimerHandler = null;
-	private Handler             hideVideoDescAndCommentsIconsTimerHandler = null;
+	private Handler                 hideHudTimerHandler = null;
+	private Handler                 hideVideoDescAndCommentsIconsTimerHandler = null;
 
-	private float               startBrightness = -1.0f;
-	private float               startVolumePercent  = -1.0f;
-	private int                 startVideoTime = -1;
+	private float                   startBrightness = -1.0f;
+	private float                   startVolumePercent  = -1.0f;
+	private int                     startVideoTime = -1;
 
 	/** Timeout (in milliseconds) before the HUD (i.e. media controller + action/title bar) is hidden. */
 	private static final int HUD_VISIBILITY_TIMEOUT = 5000;
@@ -797,8 +798,7 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 			new GetVideoDescriptionTask(youTubeVideo, new GetVideoDescriptionTask.GetVideoDescriptionTaskListener() {
 				@Override
 				public void onFinished(String description) {
-					videoDescriptionTextView.setText(description);
-					SkyTubeApp.interceptYouTubeLinks(getActivity(), videoDescriptionTextView);
+					videoDescriptionTextView.setTextAndLinkify(description);
 				}
 			}).executeInParallel();
 		} else {
