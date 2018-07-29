@@ -12,9 +12,9 @@
 	<string name="error_unable_to_subscribe">Не получается оформить или отменить подписку на этот канал (id=%s)</string>
 
 	<string name="import_subscriptions">Импортировать подписки</string>
-	<string name="import_subscriptions_description">Чтобы импортировать ваши подписки из YouTube, надо пойти по ссылке https://www.youtube.com/subscription_manager и выбрать кнопку \"Экспортировать подписки\" в самом низу. На выходе получится XML файл, который потом можно будет указать при выборе файла для импорта (\"Выберите XML файл\").</string>
+	<string name="import_subscriptions_description">"Чтобы импортировать подписки из YouTube, надо пойти по ссылке https://www.youtube.com/subscription_manager и выбрать кнопку \"Экспортировать подписки\" в самом низу. На выходе получится файл подписок с именем \"управление подписками\", который потом можно будет указать при выборе файла для импорта (\"Выберите  файл подписок\")."</string>
 	<string name="subscriptions_to_channels_imported">Импортированы подписки на %d каналов.</string>
-	<string name="select_xml_file">Выберите XML файл</string>
+	<string name="select_xml_file">Выберите файл подписок</string>
 	<string name="select_all">Выбрать все</string>
 	<string name="select_none">Ничего не выбирать</string>
 	<string name="no_channels_found">В загруженном XML файле нет каналов YouTube.</string>
