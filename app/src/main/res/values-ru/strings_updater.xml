@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="update_available">Новая версия доступна</string>
+<resources><string name="update_available">Доступна новая версия</string>
 	<string name="update_dialog_msg">Доступна новая версия SkyTube. Версия %s. будет установлена.</string>
 	<string name="up_to_date">Все свежие обновления установлены</string>
 	<string name="up_to_date_msg">Установлена самая свежая версия SkyTube.</string>
