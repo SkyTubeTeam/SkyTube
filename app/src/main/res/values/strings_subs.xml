@@ -13,10 +13,10 @@
 	<string name="error_unable_to_subscribe">Unable to (un)subscribe the channel (id=%s)</string>
 
 	<string name="import_subscriptions">Import Subscriptions</string>
-	<string name="import_subscriptions_description">Import your subscriptions from YouTube, by first visiting https://www.youtube.com/subscription_manager, and clicking the \"Export Subscriptions\" button at the bottom. Then, select the XML file you exported by clicking \"Select XML File\" below.</string>
+	<string name="import_subscriptions_description">Import your subscriptions from YouTube, by first visiting https://www.youtube.com/subscription_manager, and clicking the \"Export Subscriptions\" button at the bottom. Then, select the exported file titled \"subscription_manager\" by clicking \"Select Subscriptions File\" below.</string>
 	<string name="unsubscribe_from_all_current_sibbed_channels">Unsubscribe from all your current subscribed channels.</string>
 	<string name="subscriptions_to_channels_imported">Subscription to %d channel(s) imported.</string>
-	<string name="select_xml_file">Select XML File</string>
+	<string name="select_xml_file">Select Subscriptions File</string>
 	<string name="select_all">Select All</string>
 	<string name="select_none">Select None</string>
 	<string name="no_channels_found">No YouTube channels were found in the XML file you uploaded.</string>

@@ -109,10 +109,10 @@ public class SubscriptionsBackupsManager {
 
 		properties.selection_mode = DialogConfigs.SINGLE_MODE;
 		properties.selection_type = DialogConfigs.FILE_SELECT;
-		properties.root = Environment.getExternalStorageDirectory();
-		properties.error_dir = new File(DialogConfigs.DEFAULT_DIR);
-		properties.offset = new File(DialogConfigs.DEFAULT_DIR);
-		properties.extensions = importDb ? new String[]{"skytube"} : new String[]{"xml"};
+		properties.root           = Environment.getExternalStorageDirectory();
+		properties.error_dir      = new File(DialogConfigs.DEFAULT_DIR);
+		properties.offset         = importDb ? Environment.getExternalStorageDirectory() : Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+		properties.extensions     = importDb ? new String[]{"skytube"} : new String[]{"xml", "subscription_manager"};
 
 		FilePickerDialog dialog = new FilePickerDialog(activity, properties);
 		dialog.setDialogSelectionListener(new DialogSelectionListener() {
