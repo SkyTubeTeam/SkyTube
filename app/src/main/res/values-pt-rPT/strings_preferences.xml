@@ -13,7 +13,6 @@
 	<string name="pref_title_preferred_res">Resolução preferida</string>
 	<string name="pref_summary_preferred_res">Selecione a resolução preferida:  %s</string>
 
-	<string name="pref_backup_category">Backups</string>
 	<string name="pref_title_backup_dbs">Backup das bases de dados</string>
 	<string name="pref_summary_backup_dbs">Criar backup das subscrições e dos marcadores.</string>
 	<string name="pref_title_import_dbs">Importar backup</string>

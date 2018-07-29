@@ -12,7 +12,6 @@
 	<string name="pref_title_preferred_res">Tercih Edilen Çözünürlük</string>
 	<string name="pref_summary_preferred_res">Tercih edilen çözünürlüğüzü seçin:  %s</string>
 
-	<string name="pref_backup_category">Yedekler</string>
 	<string name="pref_title_backup_dbs">Yedeklerin Veritabanları</string>
 	<string name="pref_summary_backup_dbs">Aboneliklerinizi ve Sık Kullanılanlar verilerinizi yedekleyin.</string>
 	<string name="pref_title_import_dbs">Yedeği İçe Aktar</string>

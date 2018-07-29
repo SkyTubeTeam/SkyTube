@@ -33,7 +33,7 @@
 	<header
 		android:fragment="free.rm.skytube.gui.fragments.preferences.BackupPreferenceFragment"
 		android:icon="@drawable/ic_pref_backup"
-		android:title="@string/pref_backup_category">
+		android:title="@string/pref_import_export_category">
 	</header>
 
 	<header

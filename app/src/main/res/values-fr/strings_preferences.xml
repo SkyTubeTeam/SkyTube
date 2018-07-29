@@ -13,7 +13,6 @@
 	<string name="pref_title_preferred_res">Résolution préférée</string>
 	<string name="pref_summary_preferred_res">Sélectionnez une résolution:  %s</string>
 
-	<string name="pref_backup_category">Sauvegardes</string>
 	<string name="pref_title_backup_dbs">Sauvegarder</string>
 	<string name="pref_summary_backup_dbs">Sauvegardez vos chaines ainsi que vos favoris.</string>
 	<string name="pref_title_import_dbs">Importer</string>

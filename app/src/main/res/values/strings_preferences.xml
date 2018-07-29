@@ -24,7 +24,7 @@
 		<item>@string/pref_official_player_value</item>   <!-- this should remain the last item -->
 	</string-array>
 
-	<string name="pref_backup_category">Backups</string>
+	<string name="pref_import_export_category">Import/Export</string>
 	<string name="pref_title_backup_dbs">Backup Databases</string>
 	<string name="pref_key_backup_dbs" translatable="false">pref_key_backup_db</string>
 	<string name="pref_summary_backup_dbs">Backup your subscriptions and bookmarks databases.</string>
