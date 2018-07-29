@@ -21,9 +21,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import free.rm.skytube.R;
+import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.VideoBlocker;
@@ -38,6 +41,9 @@ public class GetSubscribedChannelsTask extends AsyncTaskParallel<Void, Void, Lis
 
 	private SubsAdapter adapter;
 	private View progressBar;
+	/** Set to true if the user wants channels to be sorted alphabetically (as set in the
+	 * preference). */
+	private final boolean sortChannelsAlphabetically;
 
 	private static final String TAG = GetSubscribedChannelsTask.class.getSimpleName();
 
@@ -45,6 +51,7 @@ public class GetSubscribedChannelsTask extends AsyncTaskParallel<Void, Void, Lis
 	public GetSubscribedChannelsTask(SubsAdapter adapter, View progressBar) {
 		this.adapter = adapter;
 		this.progressBar = progressBar;
+		this.sortChannelsAlphabetically = SkyTubeApp.getPreferenceManager().getBoolean(SkyTubeApp.getStr(R.string.pref_key_subscriptions_alphabetical_order), false);
 	}
 
 
@@ -62,6 +69,11 @@ public class GetSubscribedChannelsTask extends AsyncTaskParallel<Void, Void, Lis
 		try {
 			subbedChannelsList = SubscriptionsDb.getSubscriptionsDb().getSubscribedChannels();
 
+			// sort channels alphabetically (by channel name) if the user wants so...
+			if (sortChannelsAlphabetically) {
+				subbedChannelsList = sortChannelsAlphabetically(subbedChannelsList);
+			}
+
 			// filter out for any whitelisted/blacklisted channels
 			subbedChannelsList = new VideoBlocker().filterChannels(subbedChannelsList);
 		} catch (Throwable tr) {
@@ -69,6 +81,25 @@ public class GetSubscribedChannelsTask extends AsyncTaskParallel<Void, Void, Lis
 		}
 
 		return subbedChannelsList;
+	}
+
+
+	/**
+	 * Sort channels (by channel name) alphabetically.
+	 *
+	 * @param channelsList  Channels to be sorted.
+	 *
+	 * @return  The sorted channels.
+	 */
+	private List<YouTubeChannel> sortChannelsAlphabetically(List<YouTubeChannel> channelsList) {
+		Collections.sort(channelsList, new Comparator<YouTubeChannel>() {
+			@Override
+			public int compare(YouTubeChannel channel, YouTubeChannel t1) {
+				return channel.getTitle().compareToIgnoreCase(t1.getTitle());
+			}
+		});
+
+		return channelsList;
 	}
 
 
