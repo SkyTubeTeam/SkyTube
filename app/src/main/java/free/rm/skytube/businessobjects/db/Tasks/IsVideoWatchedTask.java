@@ -21,7 +21,7 @@ public class IsVideoWatchedTask extends AsyncTaskParallel<Void, Void, Boolean> {
 
 	@Override
 	protected Boolean doInBackground(Void... params) {
-		return PlaybackStatusDb.getVideoDownloadsDb().getVideoWatchedStatus(youTubeVideo).watched;
+		return PlaybackStatusDb.getVideoDownloadsDb().getVideoWatchedStatus(youTubeVideo).isFullyWatched();
 	}
 
 	@Override

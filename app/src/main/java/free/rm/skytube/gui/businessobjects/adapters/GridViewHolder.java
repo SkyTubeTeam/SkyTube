@@ -162,18 +162,16 @@ class GridViewHolder extends RecyclerView.ViewHolder {
 			videoPositionProgressBar.setVisibility(View.INVISIBLE);
 		} else {
 			PlaybackStatusDb.VideoWatchedStatus videoWatchedStatus = PlaybackStatusDb.getVideoDownloadsDb().getVideoWatchedStatus(youTubeVideo);
-			if (videoWatchedStatus.position > 0) {
+			if (videoWatchedStatus.isWatched()) {
 				videoPositionProgressBar.setVisibility(View.VISIBLE);
 				videoPositionProgressBar.setMax(youTubeVideo.getDurationInSeconds() * 1000);
-				videoPositionProgressBar.setProgress((int) videoWatchedStatus.position);
+				if (videoWatchedStatus.isFullyWatched()) {
+					videoPositionProgressBar.setProgress(youTubeVideo.getDurationInSeconds() * 1000);
+				} else {
+					videoPositionProgressBar.setProgress((int) videoWatchedStatus.getPosition());
+				}
 			} else {
 				videoPositionProgressBar.setVisibility(View.INVISIBLE);
-			}
-
-			if (videoWatchedStatus.watched) {
-				videoPositionProgressBar.setVisibility(View.VISIBLE);
-				videoPositionProgressBar.setMax(youTubeVideo.getDurationInSeconds() * 1000);
-				videoPositionProgressBar.setProgress(youTubeVideo.getDurationInSeconds() * 1000);
 			}
 		}
 	}
