@@ -1,5 +1,14 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources>
 	<string name="tutorial_slide_1">Wische nach links um Kommentare zu sehen.</string>
 	<string name="tutorial_slide_6">Tippen sie doppelt um das Video zu pausieren oder abzuspielen.</string>
-</resources>
+<string name="next">"Weiter "</string>
+	<string name="done">Fertig</string>
+	<string name="skip">Überspringen</string>
+	<string name="page_counter">%d von %d</string>
+
+	<string name="tutorial_slide_2">Streichen Sie nach oben, um die Beschreibung des Videos zu sehen.</string>
+	<string name="tutorial_slide_3">Streichen Sie horizontal, um vorwärts oder rückwärts zu suchen.</string>
+	<string name="tutorial_slide_4">Streichen Sie vertikal, um die Lautstärke einzustellen.</string>
+	<string name="tutorial_slide_5">Streichen Sie vertikal, um die Helligkeit einzustellen.</string>
+	</resources>
