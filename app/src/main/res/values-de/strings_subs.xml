@@ -13,9 +13,9 @@
 	<string name="error_unable_to_subscribe">Kanal konnte nicht (de)abonniert werden (id=%s)</string>
 
 	<string name="import_subscriptions">Abos importieren</string>
-	<string name="import_subscriptions_description">Importiere deine Abos von YouTube, indem du https://www.youtube.com/subscription_manager aufrufst und den \"Abos exportieren\" Button am Ende der Seite klickst. Wähle danach unter hier unter \"XML Datei auswählen\" die exportierte XML Datei aus.</string>
+	<string name="import_subscriptions_description">Importieren Sie Ihre Abonnements von YouTube, indem Sie zuerst https://www.youtube.com/subscription_manager besuchen und unten auf die Schaltfläche \"Abonnements exportieren\" klicken. Wählen Sie dann die exportierte Datei mit dem Titel \"subscription_manager\" aus, indem Sie unten auf \"Abonnementsdatei auswählen\" klicken.</string>
 	<string name="subscriptions_to_channels_imported">Abos für %d Kanäle importiert.</string>
-	<string name="select_xml_file">XML Datei auswählen</string>
+	<string name="select_xml_file">Abonnementsdatei auswählen</string>
 	<string name="select_all">Alle auswählen</string>
 	<string name="select_none">Keine auswählen</string>
 	<string name="no_channels_found">Es wurden keine YouTube Kanäle in der ausgewählten XML Datei gefunden.</string>
