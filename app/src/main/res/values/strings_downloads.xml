@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="download">Download</string>
 	<string name="downloads">Downloads</string>
 	<string name="download_video">Download Video</string>
 	<string name="starting_video_download">Downloading \'%s\'…</string>
