@@ -13,4 +13,5 @@
 \nЧтобы включить, пожалуйста, пройдите в  Настройки &gt; Другое и включите \'Позволить загрузку в мобильной сети\'"</string>
 	<string name="playing_video_file_missing">Загрузка для этого видео не найдена. Проигрывается удалённо.</string>
 	<string name="external_storage_not_available">Нет возможности скачать файл, так как внешний накопитель недоступен.</string>
-</resources>
+<string name="download">Загрузить</string>
+	</resources>
