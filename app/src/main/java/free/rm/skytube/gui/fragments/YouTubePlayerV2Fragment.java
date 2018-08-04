@@ -306,6 +306,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 		// if the video is NOT live
 		if (!youTubeVideo.isLiveStream()) {
 			loadingVideoView.setVisibility(View.VISIBLE);
+
 			if(youTubeVideo.isDownloaded()) {
 				Uri uri = youTubeVideo.getFileUri();
 				File file = new File(uri.getPath());
@@ -388,6 +389,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 			ExtractorMediaSource.Factory extMediaSourceFactory = new ExtractorMediaSource.Factory(dataSourceFactory);
 			ExtractorMediaSource mediaSource = extMediaSourceFactory.createMediaSource(videoUri);
 			player.prepare(mediaSource);
+
 			if (playerInitialPosition > 0)
 				player.seekTo(playerInitialPosition);
 		}
@@ -434,6 +436,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 			case R.id.menu_reload_video:
+				playerInitialPosition = player.getContentPosition();
 				loadVideo();
 				return true;
 
