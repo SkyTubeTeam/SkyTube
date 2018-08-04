@@ -1,14 +1,17 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
 	<string name="downloads">Downloads</string>
-	<string name="download_video">Download Video</string>
-	<string name="starting_video_download">Downloading \'%s\'…</string>
-	<string name="video_download_stream_error">Could not download \'%s\'.</string>
-	<string name="delete_download">Delete Download</string>
-	<string name="video_downloaded">\'%s\' downloaded.</string>
-	<string name="no_downloaded_videos_text">You haven\'t downloaded any videos yet.\n\nOnce you do, they will show up here.</string>
-	<string name="downloads_disabled_warning">Video downloading is disabled as you are not using Wi-Fi.\nTo enable it, please go to Preferences &gt; Others  and tick \'Allow downloads on Mobile Networks\'</string>
-	<string name="playing_video_file_missing">The download for this video was not found. Playing remotely.</string>
-	<string name="external_storage_not_available">Unable to download the file as the external storage is not available.</string>
+	<string name="download_video">Video downloaden</string>
+	<string name="starting_video_download">Bezig met downloaden van \'%s\'…</string>
+	<string name="video_download_stream_error">\'%s\' kan niet worden gedownload.</string>
+	<string name="delete_download">Download verwijderen</string>
+	<string name="video_downloaded">\'%s\' is gedownload.</string>
+	<string name="no_downloaded_videos_text">Je hebt nog geen video\'s gedownload.
+\n
+\nZodra je video\'s download, verschijnen ze hier.</string>
+	<string name="downloads_disabled_warning">Het downloaden van video\'s is uitgeschakeld omdat je niet verbonden met Wi-Fi.
+\nGa naar Instellingen &gt; Overig en vink \'Downloads toestaan op mobiele netwerken\' aan.</string>
+	<string name="playing_video_file_missing">De download voor deze video kan niet worden gevonden. Extern afspelen ingeschakeld.</string>
+	<string name="external_storage_not_available">Het bestand kan niet worden gedownload omdat de externe opslag niet beschikbaar is.</string>
 <string name="download">Downloaden</string>
 	</resources>
