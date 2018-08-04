@@ -763,7 +763,7 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 									Toast.LENGTH_LONG).show();
 					loadVideo();
 				} else {
-					Logger.i(YouTubePlayerFragment.this, ">> PLAYING LOCALLY: %s", youTubeVideo);
+					Logger.i(YouTubePlayerFragment.this, ">> PLAYING LOCALLY: %s", uri);
 					videoView.setVideoURI(uri);
 				}
 			} else {

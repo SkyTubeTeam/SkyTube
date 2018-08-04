@@ -320,7 +320,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 				} else {
 					loadingVideoView.setVisibility(View.GONE);
 
-					Logger.i(YouTubePlayerV2Fragment.this, ">> PLAYING LOCALLY: %s", youTubeVideo);
+					Logger.i(this, ">> PLAYING LOCALLY: %s", uri);
 					playVideo(uri);
 				}
 			} else {
@@ -330,9 +330,14 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 						// hide the loading video view (progress bar)
 						loadingVideoView.setVisibility(View.GONE);
 
-						// play the video
-						Logger.i(this, ">> PLAYING: %s", desiredStream.getUri());
-						playVideo(desiredStream.getUri());
+						// Play the video.  Check if this fragment is visible before playing the
+						// video.  It might not be visible if the user clicked on the back button
+						// before the video streams are retrieved (such action would cause the app
+						// to crash if not catered for...).
+						if (isVisible()) {
+							Logger.i(YouTubePlayerV2Fragment.this, ">> PLAYING: %s", desiredStream.getUri());
+							playVideo(desiredStream.getUri());
+						}
 					}
 
 					@Override
@@ -382,17 +387,13 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 	 * @param videoUri  The Uri of the video that is going to be played.
 	 */
 	private void playVideo(Uri videoUri) {
-		// Check if this fragment is visible before playing the video.  It might not be visible if
-		// the user clicked on the back button (and hence cancelling this operation)...
-		if (isVisible()) {
-			DefaultDataSourceFactory dataSourceFactory = new DefaultDataSourceFactory(getContext(), "ST. Agent", new DefaultBandwidthMeter());
-			ExtractorMediaSource.Factory extMediaSourceFactory = new ExtractorMediaSource.Factory(dataSourceFactory);
-			ExtractorMediaSource mediaSource = extMediaSourceFactory.createMediaSource(videoUri);
-			player.prepare(mediaSource);
+		DefaultDataSourceFactory dataSourceFactory = new DefaultDataSourceFactory(getContext(), "ST. Agent", new DefaultBandwidthMeter());
+		ExtractorMediaSource.Factory extMediaSourceFactory = new ExtractorMediaSource.Factory(dataSourceFactory);
+		ExtractorMediaSource mediaSource = extMediaSourceFactory.createMediaSource(videoUri);
+		player.prepare(mediaSource);
 
-			if (playerInitialPosition > 0)
-				player.seekTo(playerInitialPosition);
-		}
+		if (playerInitialPosition > 0)
+			player.seekTo(playerInitialPosition);
 	}
 
 
@@ -523,6 +524,16 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 		// check if the user has subscribed to a channel... if he has, then change the state of
 		// the subscribe button
 		new CheckIfUserSubbedToChannelTask(videoDescSubscribeButton, youTubeVideo.getChannelId()).execute();
+	}
+
+
+	@Override
+	public void videoPlaybackStopped() {
+		player.stop();
+		playerView.setPlayer(null);
+		if(!SkyTubeApp.getPreferenceManager().getBoolean(getString(R.string.pref_key_disable_playback_status), false)) {
+			PlaybackStatusDb.getVideoDownloadsDb().setVideoPosition(youTubeVideo, player.getCurrentPosition());
+		}
 	}
 
 
@@ -880,14 +891,6 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 			return durationValue;
 		}
 
-	}
-
-	@Override
-	public void videoPlaybackStopped() {
-		player.stop();
-		if(!SkyTubeApp.getPreferenceManager().getBoolean(getString(R.string.pref_key_disable_playback_status), false)) {
-			PlaybackStatusDb.getVideoDownloadsDb().setVideoPosition(youTubeVideo, player.getCurrentPosition());
-		}
 	}
 
 
