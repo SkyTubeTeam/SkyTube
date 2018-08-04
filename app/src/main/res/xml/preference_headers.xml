@@ -37,15 +37,15 @@
 	</header>
 
 	<header
-		android:fragment="free.rm.skytube.gui.fragments.preferences.OthersPreferenceFragment"
-		android:icon="@drawable/ic_pref_others"
-		android:title="@string/pref_other_category">
-	</header>
-
-	<header
 		android:fragment="free.rm.skytube.gui.fragments.preferences.PrivacyPreferenceFragment"
 		android:icon="@drawable/ic_pref_privacy"
 		android:title="@string/pref_privacy_category">
+	</header>
+
+	<header
+		android:fragment="free.rm.skytube.gui.fragments.preferences.OthersPreferenceFragment"
+		android:icon="@drawable/ic_pref_others"
+		android:title="@string/pref_other_category">
 	</header>
 
 	<header

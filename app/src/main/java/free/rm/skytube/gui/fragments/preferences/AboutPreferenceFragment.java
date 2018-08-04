@@ -18,6 +18,7 @@
 package free.rm.skytube.gui.fragments.preferences;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.net.Uri;
@@ -25,8 +26,8 @@ import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.util.Log;
+import android.webkit.WebChromeClient;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -35,6 +36,7 @@ import java.util.Locale;
 import free.rm.skytube.BuildConfig;
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
+import free.rm.skytube.gui.businessobjects.SkyTubeMaterialDialog;
 import free.rm.skytube.gui.businessobjects.updates.UpdatesCheckerTask;
 
 /**
@@ -151,16 +153,31 @@ public class AboutPreferenceFragment extends PreferenceFragment {
 	 * Displays the credits (i.e. contributors).
 	 */
 	private void displayCredits() {
-		AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+		final WebView webView = new WebView(getActivity());
+		webView.setWebChromeClient(new WebChromeClient() {
+			ProgressDialog progressDialog;
 
-		WebView webView = new WebView(getActivity());
-		webView.setWebViewClient(new WebViewClient());
+			@Override
+			public void onProgressChanged(WebView view, int progress) {
+				if (progressDialog == null) {
+					progressDialog = new ProgressDialog(getActivity());
+					progressDialog.show();
+					progressDialog.setMessage(getString(R.string.loading));
+				}
+
+				if (progress >= 100) {
+					progressDialog.dismiss();
+					progressDialog = null;
+				}
+			}
+		});
 		webView.getSettings().setJavaScriptEnabled(false);
 		webView.loadUrl(BuildConfig.SKYTUBE_WEBSITE_CREDITS);
 
-		alert.setView(webView);
-		alert.setPositiveButton(R.string.ok, null);
-		alert.show();
+		new SkyTubeMaterialDialog(getActivity())
+				.customView(webView, true)
+				.negativeText("")
+				.show();
 	}
 
 
