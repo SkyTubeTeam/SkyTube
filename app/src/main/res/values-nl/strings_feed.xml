@@ -5,11 +5,11 @@
 	<string name="fetching_subscription_videos">Bezig met ophalen van video\'s van geabonneerde kanalen</string>
 	<string name="fetched_videos_from_channels">%1$d video\'s opgehaald uit %2$d/%3$d kanalen.</string>
 	<string name="no_new_videos_found">Er zijn geen nieuwe video\'s gevonden.</string>
-	<string name="no_subscriptions_text">U bent niet geabonneerd op een kanaal.
-\n
-\nZodra u geabonneerd bent, worden alle in de afgelopen maand geüploade video\'s van uw geabonneerde kanalen hier weergegeven.</string>
-	<string name="import_subscriptions_from_youtube">Abonnementen importeren vanuit YouTube</string>
-<string name="notification_channel_feed_title">Feed-meldingen</string>
+	<string name="no_subscriptions_text">Je bent niet geabonneerd op een kanaal. 
+\n 
+\nZodra je je abonneert, worden alle in de afgelopen maand geüploade video\'s hier getoond.</string>
+	<string name="import_subscriptions_from_youtube">Abonnementen importeren uit YouTube</string>
+<string name="notification_channel_feed_title">Nieuwsoverzicht-meldingen</string>
 	<string name="notification_new_videos_found">%d nieuwe video\'s van geabonneerde kanalen</string>
 <string name="subscribing_to_channels">Bezig met abonneren op kanalen…</string>
 	<string name="fetching_subbed_channels_info">Bezig met ophalen van kanaalinformatie…</string>
