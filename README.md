@@ -1,7 +1,7 @@
 # SkyTube
 **An open-source YouTube player for the Android operating system.**
 
-<a href="#download">![Download APK](https://badged.co/ram-on/SkyTube/total?badge=https://img.shields.io/badge/downloads-%s-brightgreen.svg?label=SkyTube+Extra+Downloads)</a>
+<a href="#download">![Download APK](https://img.shields.io/github/downloads/ram-on/SkyTube/total.svg?label=SkyTube+Extra+Downloads)</a>
 <a href="https://hosted.weblate.org/engage/skytube/?utm_source=widget"> <img src="https://hosted.weblate.org/widgets/skytube/-/svg-badge.svg" alt="Translate"/> </a>
 
 <p align="center">
