@@ -331,7 +331,7 @@ public class VideoBlocker {
 	private boolean filterByViews(YouTubeVideo video, BigInteger minimumVideoViews) {
 		// if the user has not enabled the view filtering (i.e. it is set as -1), then do not filter
 		// this video
-		if (minimumVideoViews.signum() < 0)
+		if (minimumVideoViews.signum() < 0  ||  video.getViewsCountInt() == null)
 			return false;
 
 		// if the video has less views than minimumVideoViews, then filter it out

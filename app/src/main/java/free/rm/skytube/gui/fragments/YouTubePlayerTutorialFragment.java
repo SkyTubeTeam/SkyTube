@@ -140,6 +140,7 @@ public class YouTubePlayerTutorialFragment extends ImmersiveModeFragment impleme
 
 		@Override
 		public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
+			viewPager.removeView((View)object);
 		}
 
 		@Override
