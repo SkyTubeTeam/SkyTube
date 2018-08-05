@@ -9,7 +9,7 @@
 	<string name="error_get_video_desc">Er is een fout opgetreden tijdens het ophalen van de video-omschrijving.</string>
 	<string name="error_invalid_url">Ongeldige video-URL: %s</string>
 
-	<string name="warning_live_video">Livestreams kunnen momenteel niet worden afgespeeld. Wilt u de livestream openen in een andere app?</string>
+	<string name="warning_live_video">Livestreams kunnen momenteel niet worden afgespeeld. Wil je de livestream openen in een andere app?</string>
 
 	<string name="ratings_disabled">Waarderingen uitgeschakeld</string>
 
@@ -24,7 +24,7 @@
 
 	<string name="error_get_comments">Er is een fout opgetreden tijdens het ophalen van de reacties.</string>
 	<string name="no_video_comments">Deze video heeft geen reacties of reacties zijn uitgeschakeld.</string>
-	<string name="view_replies">Reacties weergeven</string>
+	<string name="view_replies">Reacties tonen</string>
 	<string name="hide_replies">Reacties verbergen</string>
 
 	<string name="enter_video_url">Video-URL invoeren</string>
