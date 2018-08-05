@@ -7,5 +7,5 @@
 	<string name="channel_blacklisted">Kanaal is op de zwarte lijst geplaatst; ververs de pagina.</string>
 	<string name="channel_blacklist_error">Kanaal kan niet worden toegevoegd aan de zwarte lijst.</string>
 	<string name="channel_unwhitelist_error">Kanaal kan niet worden verwijderd van de witte lijst.</string>
-	<string name="dislikes">%d%% vind-ik-niet-leuks</string>
+	<string name="dislikes">%d%% niet-leuks</string>
 </resources>

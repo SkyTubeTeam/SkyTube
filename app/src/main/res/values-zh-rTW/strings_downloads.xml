@@ -12,4 +12,5 @@
 \n要啟用它，請移到偏好 &gt; 其它，然後勾選「允許在行動網路上下載」</string>
 	<string name="playing_video_file_missing">未找到該影片的下載。遠端播放。</string>
 	<string name="external_storage_not_available">無法下載該檔案，因為外部存儲空間不能使用。</string>
-</resources>
+<string name="download">下載</string>
+	</resources>
