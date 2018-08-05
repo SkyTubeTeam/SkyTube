@@ -1,0 +1,46 @@
+<!--
+  ~ SkyTube
+  ~ Copyright (C) 2018  Ramon Mifsud
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation (version 3 of the License).
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="93dp"
+    android:height="76dp"
+    android:viewportWidth="93"
+    android:viewportHeight="76">
+  <path
+      android:pathData="m25.5362,13.9938q0,0.8318 -0.6034,1.4678l-1.2232,1.2232q-0.6197,0.6197 -1.4841,0.6197 -0.8807,0 -1.4678,-0.6197L15.9629,11.9063V23.3878q0,0.8481 -0.6116,1.3781 -0.6116,0.53 -1.476,0.53h-2.0876q-0.8644,0 -1.476,-0.53Q9.7002,24.2359 9.7002,23.3878V11.9063l-4.7948,4.7785q-0.5871,0.6197 -1.4678,0.6197 -0.8807,0 -1.4678,-0.6197L0.7466,15.4616q-0.6197,-0.6197 -0.6197,-1.4678 0,-0.8644 0.6197,-1.4841L11.3637,1.8925q0.5708,-0.6034 1.4678,-0.6034 0.8807,0 1.4841,0.6034L24.9328,12.5097q0.6034,0.636 0.6034,1.4841z"
+      android:strokeAlpha="1"
+      android:strokeWidth="2"
+      android:fillColor="#fbc23f"
+      android:strokeColor="#00000000"
+      android:fillAlpha="1"/>
+  <path
+      android:pathData="M37.6592,13.2521m-8.8388,0a8.8388,8.8388 0,1 1,17.6777 0a8.8388,8.8388 0,1 1,-17.6777 0"
+      android:strokeAlpha="1"
+      android:strokeWidth="1.5"
+      android:fillColor="#00000000"
+      android:strokeColor="#fbc23f"
+      android:fillType="nonZero"
+      android:fillAlpha="1"/>
+  <path
+      android:pathData="m34.5358,14.7538c-0.0596,-5.8352 5.2101,-4.2209 6.7751,-2.6601l15.3546,24.689c2.3481,-7.0922 7.5522,-6.5921 11.4121,-1.5161 3.4758,-5.0503 7.2706,-4.6002 9.8972,0 3.0802,-3.0659 4.868,-2.7383 7.8774,-0.2021 4.7277,10.2307 8.0705,19.8166 6.6655,27.0867 -0.4504,3.1985 -2.0461,4.6773 -3.4337,6.4685 -3.2935,3.0054 -6.4613,5.4959 -9.9982,6.3674 -10.9825,1.9275 -16.5782,0.3851 -24.541,-6.3672l-6.9685,-6.6706c-4.6156,-2.7838 -8.6379,-6.5443 -13.8359,-8.0856 -0.1752,-6.1897 6.3607,-5.1187 9.1903,-4.6492l10.6042,6.6706 2.1208,0.5054C52.8907,45.9325 39.3843,26.2614 34.5358,14.7538Z"
+      android:strokeAlpha="1"
+      android:strokeLineJoin="miter"
+      android:strokeWidth="0.14458964"
+      android:fillColor="#ffffff"
+      android:strokeColor="#58595b"
+      android:strokeLineCap="butt"/>
+</vector>

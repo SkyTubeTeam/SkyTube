@@ -33,7 +33,7 @@
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toStartOf="@+id/view"
 		app:layout_constraintTop_toTopOf="parent"
-		app:srcCompat="@drawable/ic_gesture_up_down_swipe"
+		app:srcCompat="@drawable/ic_tutorial_gesture_brightness"
 		style="@style/HandGestureImageView"/>
 
 </android.support.constraint.ConstraintLayout>

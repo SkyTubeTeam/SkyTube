@@ -2,6 +2,7 @@
 <android.support.constraint.ConstraintLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent">
 
@@ -21,9 +22,9 @@
 		app:layout_constraintStart_toStartOf="parent"/>
 
 	<TextView
+		android:id="@+id/textView"
 		style="@style/TutorialTextView"
-		android:layout_marginEnd="8dp"
-		android:layout_marginRight="8dp"
+		android:layout_marginBottom="8dp"
 		android:text="@string/tutorial_slide_3"
 		app:layout_constraintBottom_toBottomOf="parent"
 		app:layout_constraintEnd_toStartOf="@+id/guideline"
@@ -33,12 +34,11 @@
 	<ImageView
 		android:id="@+id/handGestureImageView"
 		style="@style/HandGestureImageView"
-		android:layout_marginEnd="8dp"
-		android:layout_marginRight="8dp"
-		app:layout_constraintBottom_toBottomOf="@+id/view"
+		android:layout_marginBottom="8dp"
+		app:layout_constraintBottom_toBottomOf="parent"
 		app:layout_constraintEnd_toEndOf="@+id/view"
 		app:layout_constraintStart_toStartOf="@+id/view"
 		app:layout_constraintTop_toTopOf="parent"
-		app:srcCompat="@drawable/ic_gesture_left_right_swipe"/>
+		app:srcCompat="@drawable/ic_tutorial_gesture_fast_forward"/>
 
 </android.support.constraint.ConstraintLayout>

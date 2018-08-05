@@ -2,6 +2,7 @@
 <android.support.constraint.ConstraintLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent">
 
@@ -29,17 +30,12 @@
 		app:layout_constraintTop_toTopOf="@+id/guideline"/>
 
 	<ImageView
-		style="@style/HandGestureImageView"
-		android:layout_marginBottom="8dp"
-		android:layout_marginEnd="8dp"
-		android:layout_marginLeft="8dp"
-		android:layout_marginRight="8dp"
-		android:layout_marginStart="8dp"
-		android:layout_marginTop="8dp"
+		android:layout_width="wrap_content"
+		android:layout_height="@dimen/tutorial_hand_gesture_image_width"
 		app:layout_constraintBottom_toBottomOf="@+id/view"
 		app:layout_constraintEnd_toEndOf="@+id/view"
 		app:layout_constraintStart_toStartOf="@+id/view"
 		app:layout_constraintTop_toTopOf="@+id/view"
-		app:srcCompat="@drawable/ic_gesture_up_swipe"/>
+		app:srcCompat="@drawable/ic_tutorial_gesture_video_description"/>
 
 </android.support.constraint.ConstraintLayout>

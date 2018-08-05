@@ -29,11 +29,11 @@
 		app:layout_constraintStart_toStartOf="@+id/guideline"/>
 
 	<ImageView
+		style="@style/HandGestureImageView"
 		app:layout_constraintBottom_toBottomOf="@+id/view"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toStartOf="@+id/view"
 		app:layout_constraintTop_toTopOf="parent"
-		app:srcCompat="@drawable/ic_gesture_left_swipe"
-		style="@style/HandGestureImageView"/>
+		app:srcCompat="@drawable/ic_tutorial_gesture_comments"/>
 
 </android.support.constraint.ConstraintLayout>
