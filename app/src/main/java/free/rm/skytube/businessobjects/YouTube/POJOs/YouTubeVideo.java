@@ -18,6 +18,7 @@
 package free.rm.skytube.businessobjects.YouTube.POJOs;
 
 import android.app.DownloadManager;
+import android.app.Fragment;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -530,6 +531,20 @@ public class YouTubeVideo implements Serializable {
 		});
 	}
 
+	/**
+	 * Play the video using an external app
+	 */
+	public void playVideoExternally(Context context) {
+		Uri fileUri = getFileUri();
+		if (fileUri != null) {
+			Intent intent = new Intent(Intent.ACTION_VIEW, fileUri);
+			//context.startActivity(browserIntent);
+			context.startActivity(Intent.createChooser(intent, "Play video with:"));
+		} else {
+			Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getVideoUrl()));
+			context.startActivity(browserIntent);
+		}
+	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////
 

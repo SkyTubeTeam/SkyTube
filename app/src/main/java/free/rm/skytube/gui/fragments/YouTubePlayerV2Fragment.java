@@ -372,7 +372,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 					.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
-							playVideoExternally();
+							youTubeVideo.playVideoExternally(getContext());
 							closeActivity();
 						}
 					})
@@ -394,15 +394,6 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 
 		if (playerInitialPosition > 0)
 			player.seekTo(playerInitialPosition);
-	}
-
-
-	/**
-	 * Play the video using an external app
-	 */
-	private void playVideoExternally() {
-		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(youTubeVideo.getVideoUrl()));
-		startActivity(browserIntent);
 	}
 
 
@@ -442,7 +433,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 				return true;
 
 			case R.id.menu_open_video_with:
-				playVideoExternally();
+				youTubeVideo.playVideoExternally(getContext());
 				player.stop();
 				return true;
 

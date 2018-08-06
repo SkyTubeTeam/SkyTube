@@ -695,7 +695,7 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 				return true;
 
 			case R.id.menu_open_video_with:
-				playVideoExternally();
+				youTubeVideo.playVideoExternally(getContext());
 				videoView.pause();
 				return true;
 
@@ -732,16 +732,6 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 				return super.onOptionsItemSelected(item);
 		}
 	}
-
-
-	/**
-	 * Play the video using an external app
-	 */
-	private void playVideoExternally() {
-		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(youTubeVideo.getVideoUrl()));
-		startActivity(browserIntent);
-	}
-
 
 	/**
 	 * Loads the video specified in {@link #youTubeVideo}.
@@ -815,7 +805,7 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 							.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
 								@Override
 								public void onClick(DialogInterface dialog, int which) {
-									playVideoExternally();
+									youTubeVideo.playVideoExternally(getContext());
 									closeActivity();
 								}
 							})
