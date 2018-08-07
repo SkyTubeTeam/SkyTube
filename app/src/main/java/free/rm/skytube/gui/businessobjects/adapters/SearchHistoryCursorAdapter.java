@@ -30,14 +30,16 @@ import free.rm.skytube.businessobjects.db.SearchHistoryTable;
 import free.rm.skytube.businessobjects.interfaces.SearchHistoryClickListener;
 
 /**
- * A SimpleCursorAdapter that will display search suggestions based on what the user has previously searched for.
+ * A SimpleCursorAdapter that will display search suggestions based on what the user has previously
+ * searched for.
  */
 public class SearchHistoryCursorAdapter extends SimpleCursorAdapter {
-	private Runnable onUpdate;
+
+	/** The current string that the user typed in the search bar */
+	private String searchBarString = "";
 	private SearchHistoryClickListener searchHistoryClickListener;
 
-	public SearchHistoryCursorAdapter(Context context, int layout, Cursor c,
-																			 String[] from, int[] to, int flags) {
+	public SearchHistoryCursorAdapter(Context context, int layout, Cursor c, String[] from, int[] to, int flags) {
 		super(context, layout, c, from, to, flags);
 	}
 
@@ -45,8 +47,11 @@ public class SearchHistoryCursorAdapter extends SimpleCursorAdapter {
 		this.searchHistoryClickListener = searchHistoryClickListener;
 	}
 
-	public void setOnUpdate(Runnable onUpdate) {
-		this.onUpdate = onUpdate;
+	/**
+	 * Sets the current search string.
+	 */
+	public void setSearchBarString(String searchBarString) {
+		this.searchBarString = searchBarString;
 	}
 
 	@Override
@@ -54,7 +59,6 @@ public class SearchHistoryCursorAdapter extends SimpleCursorAdapter {
 		int indexColumnSuggestion = cursor.getColumnIndex(SearchHistoryTable.COL_SEARCH_TEXT);
 		return cursor.getString(indexColumnSuggestion);
 	}
-
 
 	@Override
 	public void bindView(View view, Context context, Cursor cursor) {
@@ -71,10 +75,14 @@ public class SearchHistoryCursorAdapter extends SimpleCursorAdapter {
 		deleteButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				// delete the previous search from the search database
 				SearchHistoryDb.getSearchHistoryDb().deleteSearchText(textView.getText().toString());
-				if(onUpdate != null)
-					onUpdate.run();
+
+				// update the search suggestions by changing the cursor (N.B cursor cannot be modified)
+				Cursor cursor = SearchHistoryDb.getSearchHistoryDb().getSearchCursor(searchBarString);
+				swapCursor(cursor);
 			}
 		});
 	}
+
 }

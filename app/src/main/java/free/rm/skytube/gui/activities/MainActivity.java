@@ -229,6 +229,9 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 					searchHistoryCursorAdapter.changeCursor(cursor);
 				}
 
+				// update the current search string
+				searchHistoryCursorAdapter.setSearchBarString(newText);
+
 				return true;
 			}
 
