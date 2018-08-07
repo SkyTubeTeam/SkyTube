@@ -25,10 +25,12 @@ import android.content.IntentFilter;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Environment;
+import android.util.Log;
 import android.webkit.MimeTypeMap;
 
 import java.io.File;
 import java.io.Serializable;
+import java.util.regex.Pattern;
 
 import free.rm.skytube.gui.activities.PermissionsActivity;
 
@@ -49,6 +51,7 @@ public abstract class FileDownloader implements Serializable, PermissionsActivit
 	private String  description = null;
 	/** Output file name (without file extension). */
 	private String  outputFileName = null;
+	private String  outputDirectoryName = null;
 	private String  outputFileExtension = null;
 	/** If set to true, then the download manager will download the file over cellular network. */
 	private Boolean allowedOverRoaming = null;
@@ -59,6 +62,7 @@ public abstract class FileDownloader implements Serializable, PermissionsActivit
 	private long    downloadId;
 	private transient BroadcastReceiver onComplete;
 
+	private Pattern invalidCharacters = Pattern.compile("[^\\w\\d]+");
 
 	/**
 	 * Displays the {@link PermissionsActivity} which will first ask the user to give us permissions
@@ -94,11 +98,23 @@ public abstract class FileDownloader implements Serializable, PermissionsActivit
 		}
 
 		Uri     remoteFileUri = Uri.parse(remoteFileUrl);
-		String  downloadFileName = getCompleteFileName(outputFileName, remoteFileUri);
+		String  downloadFileName = getCompleteFileName(remoteFileUri);
 
 		// if there's already a local file for this video for some reason, then do not redownload the
 		// file and halt
-		File file = new File(Environment.getExternalStoragePublicDirectory(dirType), downloadFileName);
+		File parentDir = Environment.getExternalStoragePublicDirectory(dirType);
+		final String fullDownloadFileName;
+		if (outputDirectoryName != null && !outputDirectoryName.isEmpty()) {
+			parentDir = new File(parentDir, outputDirectoryName);
+			if (!parentDir.exists()) {
+				parentDir.mkdirs();
+			}
+			fullDownloadFileName = outputDirectoryName + '/' + downloadFileName;
+		} else {
+			fullDownloadFileName = downloadFileName;
+		}
+		File file = new File(parentDir, downloadFileName);
+		Logger.w(this, "Downloading video %s into %s -> %s", outputFileName, outputDirectoryName, file.getAbsolutePath());
 		if (file.exists()) {
 			onFileDownloadCompleted(true, Uri.parse(file.toURI().toString()));
 			return;
@@ -108,7 +124,7 @@ public abstract class FileDownloader implements Serializable, PermissionsActivit
 				.setAllowedOverRoaming(allowedOverRoaming)
 				.setTitle(title)
 				.setDescription(description)
-				.setDestinationInExternalPublicDir(dirType, downloadFileName);
+				.setDestinationInExternalPublicDir(dirType, fullDownloadFileName);
 
 		if (!allowedOverRoaming) {
 			request.setAllowedNetworkTypes(allowedNetworkTypesFlags);
@@ -164,7 +180,7 @@ public abstract class FileDownloader implements Serializable, PermissionsActivit
 	/**
 	 * Concatenates the outputFileName together with the appropriate file extension.
 	 */
-	private String getCompleteFileName(String outputFileName, Uri remoteFileUri) {
+	private String getCompleteFileName(Uri remoteFileUri) {
 		String fileExt = (outputFileExtension != null)  ?  outputFileExtension  :   MimeTypeMap.getFileExtensionFromUrl(remoteFileUri.toString());
 		return outputFileName + "." + fileExt;
 	}
@@ -233,8 +249,19 @@ public abstract class FileDownloader implements Serializable, PermissionsActivit
 	 * @param outputFileName    E.g. "Hello"
 	 */
 	public FileDownloader setOutputFileName(String outputFileName) {
-		// replace '/' with '.' as '/' is a special character in Linux/Android...
-		this.outputFileName = outputFileName.replace('/', '.');
+		// replace all the special characters with space.
+		this.outputFileName = invalidCharacters.matcher(outputFileName).replaceAll(" ").trim();
+		return this;
+	}
+
+	/**
+	 * Set the output file directory name.
+	 *
+	 * @param outputDirectoryName    E.g. "Hello"
+	 */
+	public FileDownloader setOutputDirectoryName(String outputDirectoryName) {
+		// replace all the special characters with space.
+		this.outputDirectoryName = invalidCharacters.matcher(outputDirectoryName).replaceAll(" ").trim();
 		return this;
 	}
 
