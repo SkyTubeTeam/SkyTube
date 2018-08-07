@@ -3,34 +3,34 @@
 
 	<string name="pref_languages_filter_category">Taal- en regiofilters</string>
 	<string name="pref_title_preferred_regions">Voorkeursregio</string>
-	<string name="pref_summary_preferred_regions">Selecteer een voorkeursregio. Dit wordt gebruikt om video\'s te filteren in de \"Uitgelicht\"-categorie:  %s</string>
+	<string name="pref_summary_preferred_regions">Kies een voorkeursregio. Dit wordt gebruikt om video\'s te filteren in de \"Uitgelicht\"-categorie: %s</string>
 
-	<string name="pref_title_preferred_languages">Voorkeursta(a)l(en)</string>
-	<string name="pref_summary_preferred_languages">Selecteer één of meer voorkeurstalen.</string>
+	<string name="pref_title_preferred_languages">Voorkeurstaal/-talen</string>
+	<string name="pref_summary_preferred_languages">Kies één of meer voorkeurstalen.</string>
 
 	<string name="pref_video_player_category">Videospeler</string>
 	<string name="pref_title_preferred_res">Voorkeursresolutie</string>
-	<string name="pref_summary_preferred_res">Selecteer uw voorkeursresolutie:  %s</string>
+	<string name="pref_summary_preferred_res">Selecteer je voorkeursresolutie: %s</string>
 
 	<string name="pref_title_backup_dbs">Databases back-uppen</string>
-	<string name="pref_summary_backup_dbs">Uw favorieten- en abonnementendatabases back-uppen.</string>
+	<string name="pref_summary_backup_dbs">Back-up je favorieten- en abonnementendatabases.</string>
 	<string name="pref_title_import_dbs">Back-up importeren</string>
-	<string name="pref_summary_import_dbs">Importeer uw abonnementen en favorieten uit de back-up.</string>
+	<string name="pref_summary_import_dbs">Importeer je abonnementen en favorieten uit de back-up.</string>
 	<string name="databases_backing_up">Bezig met back-uppen…</string>
 	<string name="databases_backup_success">De databases zijn geback-up\'d naar %s</string>
 	<string name="databases_backup_fail">Het back-uppen is mislukt.</string>
-	<string name="databases_import_select_backup">Selecteer het te importeren back-upbestand</string>
-	<string name="databases_import_nothing_selected">U heeft niks geselecteerd…</string>
-	<string name="databases_import_warning_message">De abonnementen en favorieten zullen worden vervangen door die uit het geselecteerde back-upbestand.
-\n
-\nWilt u doorgaan?</string>
+	<string name="databases_import_select_backup">Kies het te importeren back-upbestand</string>
+	<string name="databases_import_nothing_selected">Je hebt niks gekozen…</string>
+	<string name="databases_import_warning_message">De abonnementen en favorieten zullen worden vervangen door die uit het gekozen back-upbestand. 
+\n 
+\nWil je doorgaan?</string>
 	<string name="continue_">Doorgaan</string>
 	<string name="databases_importing">Bezig met importeren…</string>
 	<string name="databases_import_fail">Het importeren is mislukt.</string>
 	<string name="databases_import_success">De databases zijn geïmporteerd. Herstart de app om de wijzigingen toe te passen.</string>
 
-	<string name="pref_title_import_subs">Abonnementen importeren vanuit YouTube</string>
-	<string name="pref_summary_import_subs">Importeer de abonnementen uit uw YouTube-account.</string>
+	<string name="pref_title_import_subs">Abonnementen importeren uit YouTube</string>
+	<string name="pref_summary_import_subs">Importeer de abonnementen uit je YouTube-account.</string>
 	<string name="subs_import_select_backup">Selecteer het te importeren YouTube-XML-bestand</string>
 
 	<string name="pref_about_category">Over</string>
@@ -54,10 +54,10 @@
 
 	<string name="pref_other_category">Anderen</string>
 	<string name="pref_title_default_tab">Standaard tabblad</string>
-	<string name="pref_summary_default_tab">Standaard tabblad dat moet worden weergegeven zodra SkyTube start: %s</string>
+	<string name="pref_summary_default_tab">Standaard tabblad dat moet worden getoond zodra SkyTube start: %s</string>
 
 	<string name="pref_title_screen_orientation">Schermoriëntatie</string>
-	<string name="pref_summary_screen_orientation">Video player\'s orientation:  %s</string>
+	<string name="pref_summary_screen_orientation">Videospeler-oriëntatie: %s</string>
 	<string-array name="screen_orientations">
 		<item>Automatisch</item>
 		<item>Landschap</item>
@@ -66,10 +66,10 @@
 	</string-array>
 
 	<string name="pref_title_disable_immersive_mode">Theatermodus uitschakelen</string>
-	<string name="pref_summary_disable_immersive_mode">Comments and video description icons and the navigation bar shall always be displayed</string>
+	<string name="pref_summary_disable_immersive_mode">De reacties, video-omschrijvingpictogrammen en navigatiebalk zullen altijd worden getoond</string>
 
 	<string name="pref_title_youtube_api_key">YouTube API-sleutel</string>
-	<string name="pref_summary_youtube_api_key">Voer uw eigen YouTube Gegevens-API-sleutel in. Laat leeg om de standaard sleutel te gebruiken.</string>
+	<string name="pref_summary_youtube_api_key">Voer je eigen YouTube Data-API-sleutel in. Laat leeg om de standaardsleutel te gebruiken.</string>
 	<string name="pref_youtube_api_key_error">Er is een fout opgetreden tijdens het valideren van de ingevoerde API-sleutel.</string>
 	<string name="pref_youtube_api_key_custom">De sleutel is geldig. Herstart de app om de nieuwe YouTube API-sleutel te gebruiken.</string>
 	<string name="pref_youtube_api_key_default">Herstart de app om terug te schakelen naar de standaard YouTube API-sleutel.</string>
@@ -84,10 +84,10 @@
 	</string-array>
 
 	<string name="pref_title_allow_mobile_downloads">Downloads toestaan over mobiele netwerkverbinding</string>
-	<string name="pref_summary_allow_mobile_downloads">Selecteer dit om downloaden over mobiele netwerkverbindingen in te schakelen i.p.v. alleen over Wi-Fi.</string>
+	<string name="pref_summary_allow_mobile_downloads">Kies dit om downloaden over mobiele netwerkverbindingen in te schakelen i.p.v. alleen over Wi-Fi.</string>
 
 	<string name="pref_title_disable_search_history">Zoekgeschiedenis uitschakelen</string>
-	<string name="pref_summary_disable_search_history">Als dit wordt aangevinkt, dan zal de zoekgeschiedenis worden gewist en niet worden gebruikt.</string>
+	<string name="pref_summary_disable_search_history">Als dit wordt aangevinkt, dan wordt de zoekgeschiedenis gewist en niet gebruikt.</string>
 	<string name="pref_disable_search_history_deleted">Zoekgeschiedenis gewist.</string>
 <string name="pref_blocked_channel_key">pref_blocked_channel_key
 \n</string>
@@ -104,32 +104,32 @@
 	<string name="unblock">Deblokkeren</string>
 	<string name="channel_blacklist_updated">De zwarte lijst is bijgewerkt. Ververs de video\'s.</string>
 	<string name="channel_blacklist_empty">De zwarte lijst is leeg.</string>
-	<string name="no_preferred_lang_selected">Geen voorkeurstaal geselecteerd; deze instelling wordt genegeerd.</string>
+	<string name="no_preferred_lang_selected">Geen voorkeurstaal gekozen; deze instelling wordt genegeerd.</string>
 	<string name="preferred_lang_updated">Voorkeurstaal bijgewerkt. Ververs de video\'s.</string>
 <string name="pref_title_lang_detection_video_filtering">Taaldetectie - video\'s filteren</string>
-	<string name="pref_summary_lang_detection_video_filtering">Kunstmatige intelligentie gebruiken om de in video\'s gebruikte talen te detecteren en blokkeren als de taal niet overeen komt met je voorkeursta(a)l(en). Schakel dit alleen in op krachtige apparaten.</string>
+	<string name="pref_summary_lang_detection_video_filtering">Kunstmatige intelligentie gebruiken om de in video\'s gebruikte talen te detecteren en blokkeren als de taal niet overeenkomt met je voorkeurstaal/-talen. Schakel dit alleen in op krachtige apparaten.</string>
 	<string name="setting_updated">Instelling bijgewerkt; ververs de video\'s.</string>
 <string name="pref_channels_filter_category">Kanaalfilters</string>
 	<string name="pref_other_filters_category">Andere filters</string>
 	<string name="pref_title_low_views_filter">Weergaven</string>
 	<string name="pref_summary_low_views_filter">Filter video\'s met weinig weergaven: %s</string>
-	<string name="pref_title_dislikes_filter">Niet leuks</string>
-	<string name="pref_summary_dislikes_filter">Filter video\'s met veel niet leuks: %s</string>
+	<string name="pref_title_dislikes_filter">Niet-leuks</string>
+	<string name="pref_summary_dislikes_filter">Filter video\'s met veel niet-leuks: %s</string>
 	<string name="pref_blocked_channel_category">Geblokkeerde kanalen</string>
 	<string name="pref_title_blocked_channels_list">Geblokkeerde kanalen</string>
 	<string name="pref_summary_blocked_channels_list">Vink de kanalen aan die je wilt deblokkeren en laat de andere onaangevinkt.</string>
 
 	<string name="pref_privacy_category">Privacy</string>
 	<string name="pref_title_disable_playback_status">Afspeelstatus uitschakelen</string>
-	<string name="pref_summary_disable_playback_status">Als dit wordt aangevinkt, dan wordt de afspeelstatus gewist en zal niet worden gebruikt.</string>
+	<string name="pref_summary_disable_playback_status">Als dit wordt aangevinkt, dan wordt de afspeelstatus gewist en niet gebruikt.</string>
 	<string name="pref_disable_playback_status_deleted">Afspeelstatus verwijderd.</string>
 
 	<string name="pref_title_clear_playback_status">Afspeelstatus wissen</string>
-	<string name="pref_summary_clear_playback_status">Afspeelstatus wissen voor alle video\'s.</string>
+	<string name="pref_summary_clear_playback_status">Afspeelstatus van alle video\'s wissen.</string>
 	<string name="pref_playback_status_cleared">Afspeelstatus gewist.</string>
 
 <string name="pref_title_channel_filter_method">Kanaalfiltermethode</string>
-	<string name="pref_summary_channel_filter_method">Selecteer de kanaalfiltermethode: %s</string>
+	<string name="pref_summary_channel_filter_method">Kies de kanaalfiltermethode: %s</string>
 	<string name="disabled">Uitgeschakeld</string>
 	<string name="pref_title_channel_whitelist">Witte lijst</string>
 	<string name="pref_summary_channel_whitelist">Een lijst met geaccepteerde kanalen.</string>

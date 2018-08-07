@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="could_not_get_videos">%s video\'s kunnen niet worden verkregen.</string>
+<resources><string name="could_not_get_videos">%s video\'s kunnen niet worden opgehaald.</string>
 	<string name="views">%,d weergaven</string>
 	<string name="error">Fout</string>
 	<string name="ok">Oké</string>
@@ -13,11 +13,11 @@
 	<string name="videos">Video\'s</string>
 	<string name="num_videos">%d video\'s</string>
 	<string name="playlists">Afspeellijsten</string>
-	<string name="could_not_get_playlists">%s afspeellijsten kunnen niet worden verkregen.</string>
+	<string name="could_not_get_playlists">%s afspeellijsten kunnen niet worden opgehaald.</string>
 
 	<string name="loading">Bezig met laden…</string>
 	<string name="video">Video</string>
-    <string name="could_not_get_channel">Could not download channel information!</string>
+    <string name="could_not_get_channel">De kanaalinformatie kan niet worden gedownload!</string>
 <string name="hello_blank_fragment">Hallo blanco fragment</string>
     <string name="yes">Ja</string>
 	<string name="no">Nee</string>
