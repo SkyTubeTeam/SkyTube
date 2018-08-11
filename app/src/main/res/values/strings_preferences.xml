@@ -560,6 +560,7 @@
 	<string name="pref_title_preferred_regions">Preferred Region</string>
 	<string name="pref_key_preferred_region" translatable="false">pref_key_preferred_region</string>
 	<string name="pref_summary_preferred_regions">Select a preferred region. This is used to filter out videos in the \"Featured\" videos category:  %s</string>
+	<string name="preferred_region_updated">Preferred region updated.  Restart the app to apply changes.</string>
 
 	<string name="pref_title_preferred_languages">Preferred Language(s)</string>
 	<string name="pref_key_preferred_languages" translatable="false">pref_key_preferred_languages</string>
