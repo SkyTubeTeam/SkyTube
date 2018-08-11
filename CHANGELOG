@@ -8,7 +8,7 @@ vX.XX - XX XX 2018:
 		- Icon in the toolbar displaying how many videos were blocked.
 	* Added search history:  search history is stored and used as suggestions for future searches (this feature can be disabled).
 	* Volume and brightness swipe controls.
-	* Exoplayer support.
+	* Videos are now played using the Exoplayer.  Legacy player still supported.
 	* App now gives the user the option to resume playing (previously) partially watched videos.
     * YouTube's videos and playlists links inside the video description are now handled and opened inside SkyTube.
     * New launcher icon.
@@ -17,7 +17,9 @@ vX.XX - XX XX 2018:
 	* Added Japanese translations.
 	* Added Chinese (traditional) translations.
 	* Added Vietnamese translations.
+	* Added Indonesian translations.
 	* Updated Russian, Norwegian Bokmål, Dutch, German, Hungarian, Turkish, Italian and French translations.
+	* Bug fixes and other minor improvements.
 
 v2.82 - 24 Mar 2018:
 	* Emergency fix:  API DDOS attack mitigation controls.

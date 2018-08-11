@@ -40,6 +40,8 @@ import android.widget.FrameLayout;
 import com.mikepenz.actionitembadge.library.ActionItemBadge;
 import com.mikepenz.actionitembadge.library.utils.BadgeStyle;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -220,7 +222,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 					searchHistoryCursorAdapter.setSearchHistoryClickListener(new SearchHistoryClickListener() {
 						@Override
 						public void onClick(String query) {
-							displaySearchResults(query);
+							displaySearchResults(query, searchView);
 						}
 					});
 					searchView.setSuggestionsAdapter(searchHistoryCursorAdapter);
@@ -237,15 +239,12 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 
 			@Override
 			public boolean onQueryTextSubmit(String query) {
-				// hide the keyboard
-				searchView.clearFocus();
-
 				if(!SkyTubeApp.getPreferenceManager().getBoolean(SkyTubeApp.getStr(R.string.pref_key_disable_search_history), false)) {
 					// Save this search string into the Search History Database (for Suggestions)
 					SearchHistoryDb.getSearchHistoryDb().insertSearchText(query);
 				}
 
-				displaySearchResults(query);
+				displaySearchResults(query, searchView);
 
 				return true;
 			}
@@ -408,10 +407,15 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 
 
 	/**
-	 * Switch to the Search Video Grid Fragment with the selected query to search for videos.
-	 * @param query
+	 * Hide the virtual keyboard and then switch to the Search Video Grid Fragment with the selected
+	 * query to search for videos.
+	 *
+	 * @param query Query text submitted by the user.
 	 */
-	private void displaySearchResults(String query) {
+	private void displaySearchResults(String query, @NotNull final View searchView) {
+		// hide the keyboard
+		searchView.clearFocus();
+
 		// open SearchVideoGridFragment and display the results
 		searchVideoGridFragment = new SearchVideoGridFragment();
 		Bundle bundle = new Bundle();
