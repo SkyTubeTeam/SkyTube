@@ -145,4 +145,6 @@
 
 	<string name="channel_blacklist_update_failure">Het verwijderen van het kanaal/de kanalen van de zwarte lijst is mislukt…</string>
 	<string name="pref_import_export_category">Importeren/Exporteren</string>
+	<string name="preferred_region_updated">Voorkeursregio bijgewerkt. Herstart de app om de wijzigingen toe te passen.</string>
+
 	</resources>
