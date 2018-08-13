@@ -13,4 +13,5 @@
 \nPara ativar a opção, aceda a Preferências &gt; Outras e assinale \'Permitir descargas em redes móveis\'.</string>
 	<string name="playing_video_file_missing">Não foi possível encontrar o ficheiro descarregado. A reproduzir remotamente...</string>
 	<string name="external_storage_not_available">Não foi possível descarregar o vídeo porque o cartão SD não está disponível.</string>
-</resources>
+<string name="download">Descarregar</string>
+	</resources>
