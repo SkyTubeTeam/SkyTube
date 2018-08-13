@@ -32,4 +32,9 @@
 	<string name="play">Reproduzir</string>
 	<string name="cancel">Cancelar</string>
 	<string name="clear">Limpar</string>
+<string name="mark_watched">Marcar como visto</string>
+	<string name="mark_unwatched">Marcar como não visto</string>
+
+	<string name="should_resume">Deseja continuar a reprodução do local em que parou?</string>
+	<string name="resume">Continuar</string>
 </resources>
