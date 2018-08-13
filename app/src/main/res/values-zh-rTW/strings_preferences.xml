@@ -126,4 +126,6 @@
 
 	<string name="pref_summary_disable_playback_status">如果已選取，重播狀態會被清除並不會被使用。</string>
 	<string name="pref_import_export_category">匯入／匯出</string>
+	<string name="preferred_region_updated">偏好區域已更新。重新開啟應用程式以套用更改。</string>
+
 	</resources>
