@@ -20,4 +20,7 @@
 	<string name="loading">A carregar…</string>
     <string name="could_not_get_channel">Não foi possível obter a informação do canal!</string>
 <string name="hello_blank_fragment">Olá fragmento vazio</string>
+    <string name="yes">Sim</string>
+	<string name="no">Não</string>
+
     </resources>
