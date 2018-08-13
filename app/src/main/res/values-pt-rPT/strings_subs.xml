@@ -13,9 +13,9 @@
 	<string name="error_unable_to_subscribe">Não foi possível anular a subscrição no canal (id=%s)</string>
 
 	<string name="import_subscriptions">Importar subscrições</string>
-	<string name="import_subscriptions_description">Importe as suas subscrições do Youtube acedendo a https://www.youtube.com/subscription_manager e clicando no botão \"Exportar subscrições\". Depois, selecione o ficheiro xml exportado clicando em \"Selecionar ficheiro XML\".</string>
+	<string name="import_subscriptions_description">Importe as suas subscrições do Youtube acedendo a https://www.youtube.com/subscription_manager e clicando no botão \"Exportar subscrições\". Depois, selecione o ficheiro exportado e com o nome \"subscription_manager\" clicando em \"Selecionar ficheiro\".</string>
 	<string name="subscriptions_to_channels_imported">Importadas as subscrições de %d canais.</string>
-	<string name="select_xml_file">Selecionar ficheiro XML</string>
+	<string name="select_xml_file">Selecionar ficheiro de subscrições</string>
 	<string name="select_all">Selecionar tudo</string>
 	<string name="select_none">Selecionar nenhum</string>
 	<string name="no_channels_found">Não foram encontrados canais do Youtube no ficheiro XML carregado.</string>
