@@ -144,4 +144,6 @@
 	<string name="pref_playback_status_cleared">Wiedergabestatus gelöscht.</string>
 
 <string name="pref_import_export_category">Import/Export</string>
+	<string name="preferred_region_updated">Bevorzugte Region aktualisiert. Starten Sie die Anwendung neu, um die Änderungen zu übernehmen.</string>
+
 	</resources>
