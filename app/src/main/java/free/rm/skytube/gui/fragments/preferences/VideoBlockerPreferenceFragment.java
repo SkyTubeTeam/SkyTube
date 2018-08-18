@@ -69,22 +69,9 @@ public class VideoBlockerPreferenceFragment extends PreferenceFragment {
 		};
 
 		// preferred region
-		findPreference(getString(R.string.pref_key_preferred_region)).setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-			@Override
-			public boolean onPreferenceChange(Preference preference, Object newValue) {
-				new SkyTubeMaterialDialog(getActivity())
-						.content(R.string.preferred_region_updated)
-						.positiveText(R.string.restart)
-						.onPositive(new MaterialDialog.SingleButtonCallback() {
-							@Override
-							public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-								SkyTubeApp.restartApp();
-							}
-						})
-						.show();
-				return true;
-			}
-		});
+		findPreference(getString(R.string.pref_key_preferred_region)).setOnPreferenceChangeListener(settingUpdatesPreferenceChange);
+
+		// preferred language(s)
 		findPreference(getString(R.string.pref_key_preferred_languages)).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 			@Override
 			public boolean onPreferenceClick(Preference preference) {

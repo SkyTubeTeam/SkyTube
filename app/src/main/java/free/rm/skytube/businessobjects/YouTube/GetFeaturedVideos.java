@@ -48,7 +48,6 @@ public class GetFeaturedVideos extends GetYouTubeVideos {
 				"nextPageToken");
 		videosList.setKey(YouTubeAPIKey.get().getYouTubeAPIKey());
 		videosList.setChart("mostPopular");
-		videosList.setRegionCode(getPreferredRegion());
 		videosList.setMaxResults(getMaxResults());
 		nextPageToken = null;
 	}
@@ -62,6 +61,9 @@ public class GetFeaturedVideos extends GetYouTubeVideos {
 			try {
 				// set the page token/id to retrieve
 				videosList.setPageToken(nextPageToken);
+
+				// set the preferred region (placed here to reflect any changes performed at runtime)
+				videosList.setRegionCode(getPreferredRegion());
 
 				// communicate with YouTube
 				VideoListResponse response = videosList.execute();
