@@ -14,18 +14,30 @@
 </p>
 
 ## Features
+### Innovative Features
+* Video blocker which includes the following features **[New!]**:
+  - Channel blacklisting; **[New!]**
+  - Channel whitelisting; **[New!]**
+  - Block videos if their language is not the same as the user's preferred one(s); **[New!]**
+  - Low views video blocking; **[New!]**
+  - High dislikes video blocking; **[New!]**
+  - Icon in the toolbar displaying how many videos were blocked **[New!]**
+* Videos watched or partially watched are marked accordingly.  Resume playing feature also implemented. **[New!]**,
+* Video swipe controls, including volume, brightness, comments and video description controls. **[New!]**,
+* Bookmark videos,
+* Import subscriptions from YouTube,
+* Play channels' playlists
+* Download videos
+* View and download video thumbnails.
+
+### Traditional Features
 * Explore Featured and Most Popular videos,
 * Browse YouTube channels,
 * Play YouTube videos,
 * View video comments,
 * Search videos, music and channels,
 * Channel subscription & non-intrusive notifications,
-* Bookmark videos,
-* Subscriptions feed,
-* Import subscriptions from YouTube,
-* Play channels' playlists **[New!]**,
-* Download videos **[New!]**,
-* View and download video thumbnails **[New!]**
+* Subscriptions feed.
 
 More features will be added in the near future.
 
@@ -53,7 +65,7 @@ _* powered by a closed-source, third party library._
 ### Mobile
 [<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/trending.jpg" width=250>](https://ram-on.github.io/SkyTube/assets/img/screenshots/trending.jpg)
 [<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/subs.jpg" alt="Subscriptions" width="250" />](https://ram-on.github.io/SkyTube/assets/img/screenshots/subs.jpg)
-[<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/bookmarks.jpg" alt="Bookmarks" width="250" />](https://ram-on.github.io/SkyTube/assets/img/screenshots/bookmarks.jpg")
+[<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/video_blocker.jpg" alt="Video Blocker" width="250" />](https://ram-on.github.io/SkyTube/assets/img/screenshots/video_blocker.jpg")
 
 [<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/play.jpg" alt="Play video" width="250" />](https://ram-on.github.io/SkyTube/assets/img/screenshots/play.jpg")
 [<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/channel.jpg" alt="Browse channel" width="250" />](https://ram-on.github.io/SkyTube/assets/img/screenshots/channel.jpg")
