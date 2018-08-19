@@ -9,8 +9,8 @@ android {
         minSdkVersion 14
         targetSdkVersion 27
 
-        versionName "2.82"    // digits of the *fractional part* shall NOT be > than "9"
-        versionCode 13
+        versionName "2.90"    // digits of the *fractional part* shall NOT be > than "9"
+        versionCode 14
 
         // Third party devs:  pls be ethical and change the below keys
         buildConfigField 'String',   'YOUTUBE_API_KEYS_DEBUG', '"AIzaSyDU-ZZCyOB_kYkiMSZ6ooSipUZRukHU4ik"'
@@ -50,7 +50,7 @@ android {
     // Generate APK filenames as follows:  <App Name>-<Flavor><Version>
     android.applicationVariants.all { variant ->
         variant.outputs.all { output ->
-            outputFileName = "${parent.name}-${variant.productFlavors[0].name}-${variant.versionName}.apk"
+            outputFileName = "${parent.name}-${variant.productFlavors[0].name.capitalize()}-${variant.versionName}.apk"
         }
     }
     // Ignore missing translations

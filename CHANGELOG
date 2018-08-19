@@ -7,7 +7,7 @@ vX.XX - XX XX 2018:
 		- High dislikes video blocking;
 		- Icon in the toolbar displaying how many videos were blocked.
 	* Added search history:  search history is stored and used as suggestions for future searches (this feature can be disabled).
-	* Volume and brightness swipe controls.
+	* Added volume and brightness swipe controls.
 	* Videos are now played using the Exoplayer.  Legacy player still supported.
 	* App now gives the user the option to resume playing (previously) partially watched videos.
     * YouTube's videos and playlists links inside the video description are now handled and opened inside SkyTube.
