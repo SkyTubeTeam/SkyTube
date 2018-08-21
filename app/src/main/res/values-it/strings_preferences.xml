@@ -2,9 +2,9 @@
 <resources>
 	<string name="preferences">Impostazioni</string>
 
-	<string name="pref_languages_filter_category">Lingue &amp; Paesi</string>
+	<string name="pref_languages_filter_category">Lingue e Paesi</string>
 	<string name="pref_title_preferred_regions">Paese preferito</string>
-	<string name="pref_summary_preferred_regions">Selezionare un paese preferito. Questo verrà utilizzata per filtrare i video nella categoria \"Preferiti\":  %s</string>
+	<string name="pref_summary_preferred_regions">Seleziona un Paese preferito. Ciò verrà utilizzato per filtrare i video nella categoria \"Preferiti\": %s</string>
 
 	<string name="pref_title_preferred_languages">Lingua preferita(e)</string>
 	<string name="pref_summary_preferred_languages">Seleziona le tue lingue preferite.</string>
@@ -13,13 +13,13 @@
 	<string name="pref_title_preferred_res">Risoluzione preferita</string>
 	<string name="pref_summary_preferred_res">Seleziona la tua risoluzione preferita:  %s</string>
 
-	<string name="pref_title_backup_dbs">Backup Database</string>
+	<string name="pref_title_backup_dbs">Backup database</string>
 	<string name="pref_summary_backup_dbs">Effettua il backup dei database delle iscrizioni e dei segnalibri.</string>
-	<string name="pref_title_import_dbs">Importa Backup</string>
+	<string name="pref_title_import_dbs">Importa backup</string>
 	<string name="pref_summary_import_dbs">Importa il backup dei database delle iscrizioni e dei segnalibri.</string>
 	<string name="databases_backing_up">Backup in corso…</string>
 	<string name="databases_backup_success">Database salvati in %s</string>
-	<string name="databases_backup_fail">Impossibile effettuare il backup dei database.</string>
+	<string name="databases_backup_fail">Backup dei tuoi database fallito.</string>
 	<string name="databases_import_select_backup">Seleziona un file di backup da importare</string>
 	<string name="databases_import_nothing_selected">Non è stato selezionato nulla…</string>
 	<string name="databases_import_warning_message">I database delle iscrizioni e dei segnalibri saranno rimpiazzati con i dati del file di backup selezionato.
@@ -27,17 +27,17 @@
 \nContinuare?</string>
 	<string name="continue_">Continua</string>
 	<string name="databases_importing">Importazione in corso…</string>
-	<string name="databases_import_fail">Impossibile importare i database.</string>
-	<string name="databases_import_success">Database importati. Riavvia l\'applicazione per applicare le modifiche.</string>
+	<string name="databases_import_fail">Importazione dei tuoi database fallita.</string>
+	<string name="databases_import_success">Database importati. Riavvia l\'app per applicare le modifiche.</string>
 
-	<string name="pref_title_import_subs">Importa Iscrizioni Da YouTube</string>
-	<string name="pref_summary_import_subs">Importa le tue iscrizioni dal tuo account di Youtube.</string>
+	<string name="pref_title_import_subs">Importa iscrizioni da YouTube</string>
+	<string name="pref_summary_import_subs">Importa le iscrizioni dal tuo account di Youtube.</string>
 	<string name="subs_import_select_backup">Seleziona un file XML di YouTube da importare</string>
 
-	<string name="pref_about_category">Informazioni su</string>
+	<string name="pref_about_category">Informazioni</string>
 	<string name="pref_title_website">Sito web</string>
 	<string name="pref_title_credits">Crediti</string>
-	<string name="pref_summary_credits">Persone e progetti che hanno reso possibile questa applicazione.</string>
+	<string name="pref_summary_credits">Persone e progetti che hanno reso possibile questa app.</string>
 	<string name="pref_title_version">Versione</string>
 	<string name="pref_title_updates">Aggiornamenti</string>
 	<string name="pref_summary_updates">Controlla aggiornamenti.</string>
@@ -64,8 +64,8 @@
 	<string name="pref_title_default_tab">Scheda predefinita</string>
 	<string name="pref_summary_default_tab">Scheda predefinita da visualizzare quando SkyTube viene avviato: %s</string>
 
-	<string name="pref_title_screen_orientation">Screen Orientation</string>
-	<string name="pref_summary_screen_orientation">Orientazione riproduttore video: %s</string>
+	<string name="pref_title_screen_orientation">Orientamento schermo</string>
+	<string name="pref_summary_screen_orientation">Orientamento riproduttore video: %s</string>
 	<string-array name="screen_orientations">
 		<item>Automatic</item>
 		<item>Landscape</item>
@@ -73,18 +73,18 @@
 		<item>Device sensor</item>
 	</string-array>
 
-	<string name="pref_title_youtube_api_key">YouTube API Key</string>
-	<string name="pref_summary_youtube_api_key">Inserisci la tua API Key personalizzata di YouTube.  Lascia vuoto per utilizzare quella predefinita.</string>
-	<string name="pref_youtube_api_key_error">Si è verificato un errore nel tentativo di convalidare la nuova configurazione inserita.</string>
-	<string name="pref_youtube_api_key_custom">La chiave è valida. Riavvia l\'applicazione per utilizzare la nuova configurazione.</string>
-	<string name="pref_youtube_api_key_default">Riavvia l\'applicazione per tornare alla configurazione predefinita.</string>
+	<string name="pref_title_youtube_api_key">Chiave API YouTube</string>
+	<string name="pref_summary_youtube_api_key">Inserisci la tua chiave API di YouTube. Lascia vuoto per utilizzare quella predefinita.</string>
+	<string name="pref_youtube_api_key_error">Si è verificato un errore nel tentativo di convalidare la chiave API inserita.</string>
+	<string name="pref_youtube_api_key_custom">La chiave è valida. Riavvia l\'app per utilizzare la nuova chiave API di YouTube.</string>
+	<string name="pref_youtube_api_key_default">Riavvia l\'app per tornare alla chiave API predefinita di YouTube.</string>
 	<string name="restart">Riavvia</string>
 
-	<string name="pref_title_disable_immersive_mode">Disabilita Modalità Immersiva</string>
-	<string name="pref_summary_disable_immersive_mode">Comments and video description icons and the navigation bar shall always be displayed</string>
+	<string name="pref_title_disable_immersive_mode">Disattiva modalità immersiva</string>
+	<string name="pref_summary_disable_immersive_mode">Le icone dei commenti e della descrizione del video e la barra di navigazione verranno sempre mostrati</string>
 
-	<string name="pref_title_feed_notification">Feed Auto Notification</string>
-	<string name="pref_summary_feed_notification">How often to check for new videos from subscribed channels: %s</string>
+	<string name="pref_title_feed_notification">Auto-notifica dei feed</string>
+	<string name="pref_summary_feed_notification">Quanto spesso controllare nuovi video dai canali sottoscritti: %s</string>
 	<string-array name="feed_notification">
 		<item>Off</item>
 		<item>6 Hours</item>
@@ -99,9 +99,52 @@
 	<string name="pref_title_disable_search_history">Disabilita la cronologia di ricerca</string>
 	<string name="pref_summary_disable_search_history">Se selezionato, la cronologia di ricerca sarà cancellata e non verrà usata.</string>
 	<string name="pref_disable_search_history_deleted">Cronologia di ricerca cancellata.</string>
-	<string name="pref_title_subscriptions_alphabetical_order">Ordina canali in ordine alfabetico</string>
+	<string name="pref_title_subscriptions_alphabetical_order">Ordina canali alfabeticamente</string>
 	<string name="unblock">Sblocca</string>
-	<string name="pref_channels_filter_category">Filtro Canali</string>
+	<string name="pref_channels_filter_category">Filtri canali</string>
 	<string name="no_preferred_lang_selected">Nessuna lingua preferita selezionata. Impostazione ignorata.</string>
-	<string name="pref_other_filters_category">Altri Filtri</string>
-	</resources>
+	<string name="pref_other_filters_category">Altri filtri</string>
+	<string name="pref_import_export_category">Importa/Esporta</string>
+	<string name="pref_summary_subscriptions_alphabetical_order">Se selezionato, i canali sottoscritti verranno ordinati alfabeticamente.</string>
+	<string name="pref_video_blocker_category">Blocco dei video</string>
+	<string name="pref_title_channel_filter_method">Metodo di filtraggio canali</string>
+	<string name="pref_summary_channel_filter_method">Seleziona il metodo di filtraggio dei canali: %s</string>
+	<string name="disabled">Disattivato</string>
+	<string name="pref_title_channel_blacklist">Lista nera canali</string>
+	<string name="pref_summary_channel_blacklist">Una lista di canali bloccati.</string>
+	<string name="channel_blacklist_updated">Lista nera canali aggiornata. Ricarica i video.</string>
+	<string name="channel_blacklist_update_failure">Rimozione dei canali scelti dalla lista nera fallita…</string>
+	<string name="channel_blacklist_empty">La lista nera dei canali è vuota.</string>
+
+	<string name="pref_title_channel_whitelist">Lista bianca canali</string>
+	<string name="pref_summary_channel_whitelist">Una lista di canali permessi.</string>
+	<string name="input_channel_url">URL del canale da permettere:</string>
+	<string name="add">Aggiungi</string>
+	<string name="block">Blocca</string>
+	<string name="please_wait">Attendere prego…</string>
+	<string name="channel_already_whitelisted">Canale già in lista bianca.</string>
+	<string name="channel_whitelist_updated">Canale aggiunto in lista bianca. Ricarica i video.</string>
+	<string name="channel_whitelist_update_failure">Aggiunta in lista bianca del canale fallita…</string>
+	<string name="channel_unwhitelist_success">Lista bianca dei canali aggiornata. Ricarica i video.</string>
+	<string name="channel_unwhitelist_failure">Rimozione dei canali dalla lista bianca fallita…</string>
+
+	<string name="preferred_lang_updated">Lingua preferita aggiornata. Ricarica i video.</string>
+
+	<string name="pref_title_lang_detection_video_filtering">Filtraggio video per rilevamento lingua</string>
+	<string name="pref_summary_lang_detection_video_filtering">Usa l\'IA per rilevare la lingua usata nei video e bloccarli se la loro lingua non corrisponde alle tue preferite. Da attivare solo su dispositivi di fascia alta.</string>
+	<string name="setting_updated">Impostazione aggiornata. Ricarica i video.</string>
+
+	<string name="pref_title_low_views_filter">Visualizzazioni</string>
+	<string name="pref_summary_low_views_filter">Filtra i video con poche visualizzazioni: %s</string>
+	<string name="pref_title_dislikes_filter">Non mi piace</string>
+	<string name="pref_summary_dislikes_filter">Filtra i video con tanti \"Non mi piace\": %s</string>
+	<string name="pref_privacy_category">Privacy</string>
+	<string name="pref_title_disable_playback_status">Disabilita stato di riproduzione</string>
+	<string name="pref_summary_disable_playback_status">Se selezionato, lo stato di riproduzione sarà cancellato e non verrà usato.</string>
+	<string name="pref_disable_playback_status_deleted">Stato di riproduzione cancellato.</string>
+
+	<string name="pref_title_clear_playback_status">Cancella stato di riproduzione</string>
+	<string name="pref_summary_clear_playback_status">Cancella stato di riproduzione per tutti i video.</string>
+	<string name="pref_playback_status_cleared">Stato di riproduzione cancellato.</string>
+
+</resources>
