@@ -7,11 +7,13 @@
 	<string name="fetching_subbed_channels_info_error">Si è verificato un errore durante il recupero delle informazioni.</string>
 
 	<string name="fetching_subscription_videos">Recupero video dai canali sottoscritti</string>
-	<string name="fetched_videos_from_channels">Caricati %1$d video da %2$d/%3$d canali.</string>
+	<string name="fetched_videos_from_channels">Recuperati %1$d video da %2$d/%3$d canali.</string>
 	<string name="no_new_videos_found">Nessun nuovo video trovato.</string>
-	<string name="no_subscriptions_text">Non sei sottoscritto a nessun canale.\n\nQuando sottoscrivi un canale, tutti i video caricati nell\'ultimo mese verranno visualizzati qui.</string>
+	<string name="no_subscriptions_text">Non sei iscritto ad alcun canale.
+\n
+\nQuando sottoscrivi un canale, tutti i video caricati nell\'ultimo mese verranno visualizzati qui.</string>
 	<string name="import_subscriptions_from_youtube">Importa iscrizioni da YouTube</string>
 
-	<string name="notification_channel_feed_title">Feed Notifications</string>
-	<string name="notification_new_videos_found">%d new videos from subscribed channels</string>
+	<string name="notification_channel_feed_title">Notifiche feed</string>
+	<string name="notification_new_videos_found">%d nuovi video da canali sottoscritti</string>
 </resources>
