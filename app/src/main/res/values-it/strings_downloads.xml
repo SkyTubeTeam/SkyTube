@@ -12,4 +12,5 @@
 	<string name="downloads_disabled_warning">Video downloading is disabled as you are not using Wi-Fi.\nTo enable it, please go to Preferences &gt; Others  and tick \'Allow downloads on Mobile Networks\'</string>
 	<string name="playing_video_file_missing">Il download per questo video non è stato trovato. Riproduzione da remoto.</string>
 	<string name="external_storage_not_available">Impossibile scaricare il file poiché l\'archiviazione esterna non è disponibile.</string>
-</resources>
+<string name="download">Download</string>
+	</resources>
