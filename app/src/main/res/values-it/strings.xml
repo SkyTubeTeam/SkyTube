@@ -15,7 +15,7 @@
 	<string name="videos">Video</string>
 	<string name="num_videos">%d video</string>
 	<string name="playlists">Playlist</string>
-	<string name="could_not_get_playlists">Could not get %s playlists.</string>
+	<string name="could_not_get_playlists">Impossibile caricare %s playlist.</string>
 
 	<string name="loading">Caricamento …</string>
     <string name="could_not_get_channel">Impossibile scaricare le informazioni del canale!</string>
