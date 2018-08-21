@@ -5,7 +5,7 @@
 	<string name="up_to_date">Aggiornato</string>
 	<string name="up_to_date_msg">L\'ultima versione di SkyTube è già installata.</string>
 	<string name="update">Aggiorna</string>
-	<string name="later">Dopo</string>
-	<string name="update_failure">Impossibile aggiornare l\'applicazione.</string>
-	<string name="downloading">Download in corso …</string>
+	<string name="later">Più tardi</string>
+	<string name="update_failure">Impossibile aggiornare l\'app.</string>
+	<string name="downloading">Scaricamento…</string>
 </resources>
