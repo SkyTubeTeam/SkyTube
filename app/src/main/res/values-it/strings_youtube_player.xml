@@ -5,26 +5,26 @@
 	<string name="error_stream_parse_error">Errore durante l\'analisi.</string>
 
 	<string name="error_video_play">Errore durante la riproduzione</string>
-	<string name="error_video_streams_empty">Il video %s non ha uno stream valido.</string>
-	<string name="error_video_streams">Si è verificato un errore durante il recupero degli stream del video.</string>
+	<string name="error_video_streams_empty">Il video %s non ha nessun flusso.</string>
+	<string name="error_video_streams">Si è verificato un errore durante il recupero dei flussi video.</string>
 	<string name="error_get_video_desc">Si è verificato un errore durante il recupero della descrizione del video.</string>
 	<string name="error_invalid_url">URL video non valido: %s</string>
 
-	<string name="warning_live_video">Al momento è impossibile riprodurre stream in diretta. Aprire lo stream in un\'altra app?</string>
+	<string name="warning_live_video">Al momento non è possibile riprodurre video in diretta. Aprirlo in un\'altra app?</string>
 
 	<string name="ratings_disabled">Valutazioni disattivate</string>
 
 	<string name="loading_video">Caricamento video…</string>
-	<string name="get_new_video_steam">Nuovo stream</string>
+	<string name="get_new_video_steam">Nuovo flusso</string>
 	<string name="open_in_browser">Apri nel browser web</string>
 	<string name="open_with">Apri con…</string>
 	<string name="share">Condividi</string>
-	<string name="share_via">Condividere tramite</string>
+	<string name="share_via">Condividi via</string>
 	<string name="copy_url">Copia URL</string>
-	<string name="url_copied_to_clipboard">L\'URL è stato copiato negli appunti.</string>
+	<string name="url_copied_to_clipboard">URL copiato negli appunti.</string>
 
-	<string name="error_get_comments">Si è verificato un errore durante l\'acquisizione dei commenti.</string>
-	<string name="no_video_comments">Questo video non ha commenti o i commenti sono disabilitati.</string>
+	<string name="error_get_comments">Si è verificato un errore durante il recupero dei commenti.</string>
+	<string name="no_video_comments">Questo video non ha commenti o i commenti sono disattivati.</string>
 	<string name="view_replies">Visualizza risposte</string>
 	<string name="hide_replies">Nascondi risposte</string>
 
@@ -32,4 +32,9 @@
 	<string name="play">Play</string>
 	<string name="cancel">Annulla</string>
 	<string name="clear">Cancella</string>
+<string name="mark_watched">Segna come visto</string>
+	<string name="mark_unwatched">Segna come non visto</string>
+
+	<string name="should_resume">Vuoi riprendere da dove ti sei fermato?</string>
+	<string name="resume">Riprendi</string>
 </resources>
