@@ -1,18 +1,95 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
-	<string name="preferences">Préférences</string>
+	<string name="preferences">Paramètres</string>
+
+	<string name="pref_video_player_category">Lecteur vidéo</string>
+	<string name="pref_title_preferred_res">Résolution</string>
+	<string name="pref_summary_preferred_res">Choix de la résolution:  %s</string>
+
+	<string name="pref_title_choose_player">Lecteur vidéo</string>
+	<string name="pref_summary_choose_player">Lecteur vidéo utilisé:  %s</string>
+	<string-array name="pref_video_players">
+		<item>Lecteur par défault</item>
+		<item>Ancien lecteur vidéo (Pas supporté)</item>
+		<item>Lecteur vidéo youtube</item>
+		
+	<string name="pref_title_screen_orientation">Orientation de l\'écran</string>
+	<string name="pref_summary_screen_orientation">Orientation de l\'écran:  %s</string>
+	<string-array name="screen_orientations">
+		<item>Automatique</item>
+		<item>Paysage</item>
+		<item>Portrait</item>
+		<item>Capteur téléphone</item>
+		
+	<string name="pref_video_blocker_category">Bloqueur vidéo</string>
+	<string name="pref_channels_filter_category">Filtre des chaînes</string>
+
+	<string name="pref_title_channel_filter_method">Méthode de filtrage</string>
+	<string name="pref_summary_channel_filter_method">Choisir la méthode de filtrage:  %s</string>
+	<string name="disabled">Désactivé</string>
+	<string-array name="channel_filtering_list">
+		<item>Blacklister les chaînes</item>
+		<item>Whitelister les chaînes</item>
+	</string-array>
+
+	<string name="pref_title_channel_blacklist">Chaînes blacklistées</string>
+	<string name="pref_summary_channel_blacklist">Liste des chaînes bloquées.</string>
+	<string name="unblock">Débloquer</string>
+	<string name="channel_blacklist_updated">Mise à jour des chaînes blacklistées.  Rafraîchir les vidéos.</string>
+	<string name="channel_blacklist_update_failure">Echec de la suppression de(s) chaîne(s) de la blacklist…</string>
+	<string name="channel_blacklist_empty">Aucune chaîne blacklisté.</string>
+
+	<string name="pref_title_channel_whitelist">Chaînes whitelistées</string>
+	<string name="pref_summary_channel_whitelist">Liste des chaînes whitelistées.</string>
+	<string name="input_channel_url">URL de la chaîne à ajouter à la whitelist:</string>
+	<string name="add">Ajouter</string>
+	<string name="block">Bloquer</string>
+	<string name="please_wait">Patienter…</string>
+	<string name="channel_already_whitelisted">Chaîne déjà dans la whitelist</string>
+	<string name="channel_whitelist_updated">Chaîne ajoutée à la whitelist.  Rafraîchir les vidéos.</string>
+	<string name="channel_whitelist_update_failure">Echec d'ajout de(s) chaîne(s) à la whitelist…</string>
+	<string name="channel_unwhitelist_success">Mise à jour des chaînes whitelistées.  Rafraîchir les vidéos.</string>
+	<string name="channel_unwhitelist_failure">Echec lors la supression de la chaîne de la whitelist…</string>
 
 	<string name="pref_languages_filter_category">Langues et régions</string>
-	<string name="pref_title_preferred_regions">Région préférée</string>
+	<string name="pref_title_preferred_regions">Région</string>
 	<string name="pref_summary_preferred_regions">Sélectionnez une région. Cela permettra de filter les vidéos mises en avant:  %s</string>
 
 	<string name="pref_title_preferred_languages">Langue(s) préférée(s)</string>
-	<string name="pref_summary_preferred_languages">Expérimental : Sélectionnez une ou plusieurs langues. Ceci est utilisé pour filtrer les vidéos de la catégorie \"Vidéos populaires\" et pour les recherches de vidéo.</string>
+	<string name="pref_summary_preferred_languages">Sélectionner une langue.</string>
+	<string name="no_preferred_lang_selected">Aucune langue sélectionnée.  Paramètres ignorés.</string>
+	<string name="preferred_lang_updated">Mise à jour de la langue.  Rafraîchir les vidéos.</string>
 
-	<string name="pref_video_player_category">Lecteur vidéo</string>
-	<string name="pref_title_preferred_res">Résolution préférée</string>
-	<string name="pref_summary_preferred_res">Sélectionnez une résolution:  %s</string>
+	<string name="pref_title_lang_detection_video_filtering">Filtrage des vidéos étrangères</string>
+	<string name="pref_summary_lang_detection_video_filtering">Bloquer les vidéos dans la langue diffère de votre langue préférée.  À utiliser uniquement avec les nouveaux appareils.</string>
+	<string name="setting_updated">Mise à jour des paramètres.  Rafraîchir les vidéos.</string>
 
+	<string name="pref_other_filters_category">Autres filtres</string>
+	<string name="pref_title_low_views_filter">Vues</string>
+	<string name="pref_summary_low_views_filter">Filtrer les vidéos avec peu de vues: %s</string>
+	<string-array name="views_filtering_list">
+		<item>@string/disabled</item>
+		<item>&lt; 100 vues</item>
+		<item>&lt; 500 vues</item>
+		<item>&lt; 1,000 vues</item>
+		<item>&lt; 5,000 vues</item>
+		<item>&lt; 10,000 vues</item>
+	</string-array>
+
+	<string name="pref_title_dislikes_filter">Je n\'aime pas</string>
+	<string name="pref_summary_dislikes_filter">Filtrer les vidéos avec beaucoup de je n\'aime pas: %s</string>
+	<string-array name="dislikes_filtering_list">
+		<item>@string/disabled</item>
+		<item>&gt; 40% de je n\'aime pas</item>
+		<item>&gt; 50% de je n\'aime pas</item>
+		<item>&gt; 60% de je n\'aime pas</item>
+		<item>&gt; 70% de je n\'aime pas</item>
+		<item>&gt; 80% de je n\'aime pas</item>
+		<item>&gt; 90% de je n\'aime pas</item>
+		<item>&gt; 100% de je n\'aime pas</item>
+	</string-array>
+		
+	<string name="pref_import_export_category">Importer/Exporter</string>
 	<string name="pref_title_backup_dbs">Sauvegarder</string>
 	<string name="pref_summary_backup_dbs">Sauvegardez vos chaines ainsi que vos favoris.</string>
 	<string name="pref_title_import_dbs">Importer</string>
@@ -22,17 +99,59 @@
 	<string name="databases_backup_fail">Impossible de sauvegarder vos données.</string>
 	<string name="databases_import_select_backup">Sélectionnez la sauvegarde à importer</string>
 	<string name="databases_import_nothing_selected">Aucune sauvegarde sélectionnée…</string>
-	<string name="databases_import_warning_message">Vos abonnements et favoris seront remplacés par les données de la sauvegarde sélectionnée.
-\n
-\nContinuer ?</string>
+<string name="databases_import_warning_message">Vos abonnements et favoris seront remplacés par les données de la sauvegarde sélectionnée. \n\nContinuer ?</string>	
 	<string name="continue_">Continuer</string>
 	<string name="databases_importing">Import…</string>
 	<string name="databases_import_fail">Impossible d\'importer la sauvegarde.</string>
 	<string name="databases_import_success">Sauvegarde importée. Redémarrez l\'application pour appliquer les changements.</string>
 
+
 	<string name="pref_title_import_subs">Importer des abonnements depuis YouTube</string>
 	<string name="pref_summary_import_subs">Importez vos abonnements depuis votre compte YouTube.</string>
 	<string name="subs_import_select_backup">Sélectionner le fichier YouTube XML à importer</string>
+
+	<string name="pref_privacy_category">Privé</string>
+	<string name="pref_title_disable_search_history">Désactiver l\'historique de recherche</string>
+	<string name="pref_summary_disable_search_history">Si coché, l\'historique de recherche sera effacé et ne sera pas utilisé.</string>
+	<string name="pref_disable_search_history_deleted">Historique de recherche effacé.</string>
+
+	<string name="pref_title_disable_playback_status">Désactiver la mise en mémoire de lecture</string>
+	<string name="pref_summary_disable_playback_status">La mise en mémoire des vidéos sera supprimés et ne sera plus utilisées.</string>
+	<string name="pref_disable_playback_status_deleted">Mise en mémoire de vidéos arrétée.</string>
+
+	<string name="pref_title_clear_playback_status">Mise en mémoire de vos vidéos</string>
+	<string name="pref_summary_clear_playback_status">Supprimer la mise en mémoire de vos vidéos.</string>
+	<string name="pref_playback_status_cleared">Mise en mémoire des vidéos supprimée.</string>
+		
+	<string name="pref_other_category">Autre</string>
+	<string name="pref_title_default_tab">Onglet par défaut</string>
+	<string name="pref_summary_default_tab">Onglet par défaut lors de l\'ouverture de SkyTube : %s</string>
+
+	<string name="pref_title_feed_notification">Notification automatique de flux</string>
+	<string name="pref_summary_feed_notification">Quelle est la fréquence de vérification des nouvelles vidéos des abonnements : %s</string>
+	<string-array name="feed_notification">
+		<item>Désactivé</item>
+		<item>6 Heures</item>
+		<item>12 Heures</item>
+		<item>24 Heures</item>
+	</string-array>
+
+	<string name="pref_title_disable_immersive_mode">Désactiver le mode immersif</string>
+	<string name="pref_summary_disable_immersive_mode">Les icônes des commentaires et de la description de la vidéo et la barre de navigation doivent toujours être affichés</string>
+		
+	<string name="pref_title_youtube_api_key">clé API YouTube</string>
+	<string name="pref_summary_youtube_api_key">Entrer votre clé API.  Laissez vide pour utiliser la clé API par défaut.</string>
+	<string name="pref_youtube_api_key_error">Erreur lors de la validation de votre clé API.</string>
+	<string name="pref_youtube_api_key_custom">clé valide.  Redémarrez l\'application.</string>
+	<string name="pref_youtube_api_key_default">Redémarrez l\'application pour utiliser la clé par défaut.</string>
+
+	<string name="pref_title_allow_mobile_downloads">Autoriser les téléchargements sur les réseaux mobiles</string>
+	<string name="pref_summary_allow_mobile_downloads">Sélectionnez cette option pour activer le téléchargement de vidéos sur les réseaux mobiles. Sinon, les vidéos ne peuvent être téléchargées qu\'en Wi-Fi.</string>
+	
+	<string name="restart">Redémarrer</string>
+		
+	<string name="pref_title_subscriptions_alphabetical_order">Trier les chaînes par ordre alphabétique</string>
+	<string name="pref_summary_subscriptions_alphabetical_order">Si coché, les abonnements seront triés par ordre alphabétique.</string>
 
 	<string name="pref_about_category">À propos</string>
 	<string name="pref_title_website">Site internet</string>
@@ -44,7 +163,7 @@
 	<string name="pref_title_license">Licence</string>
 	<string name="pref_summary_license">Licence Publique Générale GNU version 3</string>
 	<string name="app_license">
-		Copyright © 2015-2018  Ramon Mifsud\n
+		Copyright &#169; 2015-2018  Ramon Mifsud\n
 
 		\nThis program is free software: you can redistribute it and/or modify
 		it under the terms of the GNU General Public License as published by
@@ -59,54 +178,4 @@
 		along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;
 	</string>
 	<string name="i_agree">J\'accepte</string>
-
-	<string name="pref_other_category">Autre</string>
-	<string name="pref_title_default_tab">Onglet par défaut</string>
-	<string name="pref_summary_default_tab">Onglet par défaut lors de l\'ouverture de SkyTube : %s</string>
-
-	<string name="pref_title_screen_orientation">Orientation de l\'écran</string>
-	<string name="pref_summary_screen_orientation">Orientation du lecteur vidéo : %s</string>
-	<string-array name="screen_orientations">
-		<item>Automatique</item>
-		<item>Paysage</item>
-		<item>Portrait</item>
-		<item>Capteur téléphone</item>
-	</string-array>
-
-	<string name="pref_title_youtube_api_key">clé API YouTube</string>
-	<string name="pref_summary_youtube_api_key">Entrer votre clé API.  Laissez vide pour utiliser la clé API par défaut.</string>
-	<string name="pref_youtube_api_key_error">Erreur lors de la validation de votre clé API.</string>
-	<string name="pref_youtube_api_key_custom">clé valide.  Redémarrez l\'application.</string>
-	<string name="pref_youtube_api_key_default">Redémarrez l\'application pour utiliser la clé par défaut.</string>
-	<string name="restart">Redémarrer</string>
-
-	<string name="pref_title_disable_immersive_mode">Désactiver le mode immersif</string>
-	<string name="pref_summary_disable_immersive_mode">Les icônes des commentaires et de la description de la vidéo et la barre de navigation doivent toujours être affichés</string>
-
-	<string name="pref_title_feed_notification">Notification automatique de flux</string>
-	<string name="pref_summary_feed_notification">Quelle est la fréquence de vérification des nouvelles vidéos des abonnements : %s</string>
-	<string-array name="feed_notification">
-		<item>Off</item>
-		<item>6 Hours</item>
-		<item>12 Hours</item>
-		<item>24 Hours</item>
-	</string-array>
-
-	<string name="pref_title_allow_mobile_downloads">Autoriser les téléchargements sur les réseaux mobiles</string>
-	<string name="pref_summary_allow_mobile_downloads">Sélectionnez cette option pour activer le téléchargement de vidéos sur les réseaux mobiles. Sinon, les vidéos ne peuvent être téléchargées qu\'en Wi-Fi.</string>
-<string name="pref_title_choose_player">Lecteur vidéo</string>
-	<string name="pref_summary_choose_player">Lecteur vidéo à utiliser : %s</string>
-	<string name="pref_title_disable_search_history">Désactiver l\'historique de recherche</string>
-	<string name="pref_summary_disable_search_history">Si coché, l\'historique de recherche sera effacé et ne sera pas utilisé.</string>
-	<string name="pref_disable_search_history_deleted">Historique de recherche effacé.</string>
-	<string name="pref_title_subscriptions_alphabetical_order">Trier les chaînes par ordre alphabétique</string>
-	<string name="pref_summary_subscriptions_alphabetical_order">Si coché, les abonnements seront triés par ordre alphabétique.</string>
-	<string name="pref_video_blocker_category">Bloqueur vidéo</string>
-	<string name="pref_title_channel_blacklist">Liste des chaînes bloquées</string>
-	<string name="pref_summary_channel_blacklist">Cochez les chaînes que vous voulez débloquer et laissez les autres non cochées.</string>
-	<string name="unblock">Débloqué</string>
-	<string name="channel_blacklist_updated">Liste des chaînes bloquées mise à jour. Veuillez actualiser.</string>
-	<string name="channel_blacklist_empty">La liste des chaînes bloquées est vide.</string>
-	<string name="no_preferred_lang_selected">Aucune langue préférée sélectionnée. Réglage ignoré.</string>
-	<string name="preferred_lang_updated">Langue préférée mise à jour. Veuillez actualiser.</string>
 </resources>
