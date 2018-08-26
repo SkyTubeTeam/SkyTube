@@ -12,6 +12,7 @@
 		<item>Lecteur par défault</item>
 		<item>Ancien lecteur vidéo (Pas supporté)</item>
 		<item>Lecteur vidéo youtube</item>
+	</string-array>
 		
 	<string name="pref_title_screen_orientation">Orientation de l\'écran</string>
 	<string name="pref_summary_screen_orientation">Orientation de l\'écran:  %s</string>
@@ -20,6 +21,7 @@
 		<item>Paysage</item>
 		<item>Portrait</item>
 		<item>Capteur téléphone</item>
+	</string-array>
 		
 	<string name="pref_video_blocker_category">Bloqueur vidéo</string>
 	<string name="pref_channels_filter_category">Filtre des chaînes</string>
@@ -47,7 +49,7 @@
 	<string name="please_wait">Patienter…</string>
 	<string name="channel_already_whitelisted">Chaîne déjà dans la whitelist</string>
 	<string name="channel_whitelist_updated">Chaîne ajoutée à la whitelist.  Rafraîchir les vidéos.</string>
-	<string name="channel_whitelist_update_failure">Echec d'ajout de(s) chaîne(s) à la whitelist…</string>
+	<string name="channel_whitelist_update_failure">Echec d\'ajout de(s) chaîne(s) à la whitelist…</string>
 	<string name="channel_unwhitelist_success">Mise à jour des chaînes whitelistées.  Rafraîchir les vidéos.</string>
 	<string name="channel_unwhitelist_failure">Echec lors la supression de la chaîne de la whitelist…</string>
 
