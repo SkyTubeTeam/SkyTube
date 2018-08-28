@@ -141,4 +141,5 @@
 	<string name="unblock">Avblokker</string>
 	<string name="channel_blacklist_update_failure">Klarte ikke å fjerne gitt(e) kanal(er) fra svarteliste…</string>
 	<string name="input_channel_url">Kanalnettadressen som hvitlistes:</string>
+	<string name="pref_import_export_category">Importer/eksporter</string>
 	</resources>
