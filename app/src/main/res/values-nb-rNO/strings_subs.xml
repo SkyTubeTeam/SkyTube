@@ -12,9 +12,9 @@
 	<string name="error_unable_to_subscribe">Klarte ikke å oppheve eller abonnere på kanalen (id=%s)</string>
 
 	<string name="import_subscriptions">Importer abonnementer</string>
-	<string name="import_subscriptions_description">Importer dine abonnementer fra YouTube, ved først å besøke https://www.youtube.com/subscription_manager, for så å klikke \"Eksporter abonnementer\"-knappen på bunnen. Velg så XML-fila du eksporterte ved å klikke \"Velg XML-fil\" nedenfor.</string>
+	<string name="import_subscriptions_description">Importer dine abonnementer fra YouTube, ved først å besøke https://www.youtube.com/subscription_manager, for så å klikke \"Eksporter abonnementer\"-knappen på bunnen. Velg så eksportert fil, ved navn \"abonnementsbehandler\" ved å klikke \"Velg abonnementsfil\" nedenfor.</string>
 	<string name="subscriptions_to_channels_imported">Abonnement på %d kanal(er) importert.</string>
-	<string name="select_xml_file">Velg XML-fil</string>
+	<string name="select_xml_file">Velg abonnementsfil</string>
 	<string name="select_all">Velg alt</string>
 	<string name="select_none">Ikke velg noe</string>
 	<string name="no_channels_found">Ingen YouTube-kanaler ble funnet i XML-fila du lastet opp.</string>
