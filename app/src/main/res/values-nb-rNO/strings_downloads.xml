@@ -13,4 +13,5 @@
 \nFor å tillate det, gå til Innstillinger &gt; Andre og huk av \"Tillat nedlastinger på mobilnettverk\"</string>
 	<string name="playing_video_file_missing">Nedlastningen for denne videoen ble ikke funnet. Spiller av av fra annensteds hen.</string>
 	<string name="external_storage_not_available">Kunne ikke laste ned fil som følge av at eksternt lagringsmedium ikke er tilgjengelig.</string>
-</resources>
+<string name="download">Last ned</string>
+	</resources>
