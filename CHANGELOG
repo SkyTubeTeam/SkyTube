@@ -1,4 +1,8 @@
-vX.XX - XX XX 2018:
+v2.91 - 07 Sep 2018:
+	* Emergency fix: "This video is unavailable" error occurred due to recent YouTube changes.
+	* Updated Italian, French and Norwegian Bokmål translations.
+
+v2.90 - 19 Aug 2018:
 	* Added a video blocker, which includes:
 		- Channel blacklisting;
 		- Channel whitelisting;
