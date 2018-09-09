@@ -41,12 +41,6 @@ public class DownloadedVideosFragment extends OrderableVideosGridFragment implem
 	@Override
 	public void onFragmentSelected() {
 		super.onFragmentSelected();
-
-		populateList();
-//		if (DownloadedVideosDb.getVideoDownloadsDb().isHasUpdated()) {
-//			DownloadedVideosDb.getVideoDownloadsDb().setHasUpdated(false);
-//		}
-
 		displayDownloadsDisabledWarning();
 	}
 
