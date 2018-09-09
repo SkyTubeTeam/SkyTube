@@ -18,12 +18,14 @@
 package free.rm.skytube.businessobjects.YouTube.POJOs;
 
 import android.app.DownloadManager;
+import android.app.Fragment;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Environment;
+import android.support.v4.content.FileProvider;
 import android.view.Menu;
 import android.widget.Toast;
 
@@ -46,6 +48,7 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import free.rm.skytube.BuildConfig;
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.FileDownloader;
@@ -530,6 +533,22 @@ public class YouTubeVideo implements Serializable {
 		});
 	}
 
+	/**
+	 * Play the video using an external app
+	 */
+	public void playVideoExternally(Context context) {
+		Uri fileUri = getFileUri();
+		if (fileUri != null) {
+			File file = new File(fileUri.getPath());
+			Uri uri = FileProvider.getUriForFile(context, BuildConfig.APPLICATION_ID + ".provider", file);
+			Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+			intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+			context.startActivity(intent);
+		} else {
+			Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getVideoUrl()));
+			context.startActivity(browserIntent);
+		}
+	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////
 

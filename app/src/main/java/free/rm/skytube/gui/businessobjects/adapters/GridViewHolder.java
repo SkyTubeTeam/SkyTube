@@ -210,8 +210,7 @@ class GridViewHolder extends RecyclerView.ViewHolder {
 			public boolean onMenuItemClick(MenuItem item) {
 				switch(item.getItemId()) {
 					case R.id.menu_open_video_with:
-						Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(youTubeVideo.getVideoUrl()));
-						context.startActivity(browserIntent);
+						youTubeVideo.playVideoExternally(context);
 						return true;
 					case R.id.share:
 						youTubeVideo.shareVideo(view.getContext());
