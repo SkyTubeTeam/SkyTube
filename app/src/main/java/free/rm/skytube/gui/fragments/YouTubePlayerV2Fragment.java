@@ -44,16 +44,16 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.afollestad.materialdialogs.DialogAction;
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.android.exoplayer2.C;
 import com.google.android.exoplayer2.ExoPlayerFactory;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.source.ExtractorMediaSource;
 import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection;
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
 import com.google.android.exoplayer2.trackselection.TrackSelection;
+import com.google.android.exoplayer2.ui.AspectRatioFrameLayout;
 import com.google.android.exoplayer2.ui.PlayerControlView;
 import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
@@ -85,13 +85,12 @@ import free.rm.skytube.businessobjects.interfaces.GetDesiredStreamListener;
 import free.rm.skytube.businessobjects.interfaces.YouTubePlayerFragmentInterface;
 import free.rm.skytube.gui.activities.MainActivity;
 import free.rm.skytube.gui.activities.ThumbnailViewerActivity;
-import free.rm.skytube.gui.businessobjects.ResumeVideoTask;
-import free.rm.skytube.gui.businessobjects.views.ClickableLinksTextView;
 import free.rm.skytube.gui.businessobjects.PlayerViewGestureDetector;
-import free.rm.skytube.gui.businessobjects.SkyTubeMaterialDialog;
-import free.rm.skytube.gui.businessobjects.views.SubscribeButton;
+import free.rm.skytube.gui.businessobjects.ResumeVideoTask;
 import free.rm.skytube.gui.businessobjects.adapters.CommentsAdapter;
 import free.rm.skytube.gui.businessobjects.fragments.ImmersiveModeFragment;
+import free.rm.skytube.gui.businessobjects.views.ClickableLinksTextView;
+import free.rm.skytube.gui.businessobjects.views.SubscribeButton;
 import hollowsoft.slidingdrawer.OnDrawerOpenListener;
 import hollowsoft.slidingdrawer.SlidingDrawer;
 
@@ -208,6 +207,8 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 
 		player = ExoPlayerFactory.newSimpleInstance(getContext(), trackSelector);
 		player.setPlayWhenReady(true);
+		playerView.setResizeMode(AspectRatioFrameLayout.RESIZE_MODE_FIT);               // ensure that videos are played in their correct aspect ratio
+		player.setVideoScalingMode(C.VIDEO_SCALING_MODE_SCALE_TO_FIT_WITH_CROPPING);    // ensure that videos are played in their correct aspect ratio
 		playerView.setPlayer(player);
 
 		loadingVideoView = view.findViewById(R.id.loadingVideoView);
