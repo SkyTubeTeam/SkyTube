@@ -55,6 +55,7 @@ import free.rm.skytube.businessobjects.interfaces.GetDesiredStreamListener;
 import free.rm.skytube.businessobjects.interfaces.YouTubePlayerFragmentInterface;
 import free.rm.skytube.gui.activities.MainActivity;
 import free.rm.skytube.gui.activities.ThumbnailViewerActivity;
+import free.rm.skytube.gui.businessobjects.ResumeVideoTask;
 import free.rm.skytube.gui.businessobjects.views.ClickableLinksTextView;
 import free.rm.skytube.gui.businessobjects.MediaControllerEx;
 import free.rm.skytube.gui.businessobjects.OnSwipeTouchListener;
@@ -465,29 +466,13 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 			videoDescRatingsDisabledTextView.setVisibility(View.VISIBLE);
 		}
 
-		// ask the user if he wants to resume playing this video (if he has played it in the past...)
-		if(!SkyTubeApp.getPreferenceManager().getBoolean(getString(R.string.pref_key_disable_playback_status), false) && PlaybackStatusDb.getVideoDownloadsDb().getVideoWatchedStatus(youTubeVideo).position > 0) {
-			new SkyTubeMaterialDialog(getContext())
-					.content(R.string.should_resume)
-					.positiveText(R.string.resume)
-					.onPositive(new MaterialDialog.SingleButtonCallback() {
-						@Override
-						public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-							videoCurrentPosition = (int)PlaybackStatusDb.getVideoDownloadsDb().getVideoWatchedStatus(youTubeVideo).position;
-							loadVideo();
-						}
-					})
-					.negativeText(R.string.no)
-					.onNegative(new MaterialDialog.SingleButtonCallback() {
-						@Override
-						public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-							loadVideo();
-						}
-					})
-					.show();
-		} else {
-			loadVideo();
-		}
+		new ResumeVideoTask(getContext(), youTubeVideo, new ResumeVideoTask.Callback() {
+			@Override
+			public void loadVideo(int position) {
+				videoCurrentPosition = position;
+				YouTubePlayerFragment.this.loadVideo();
+			}
+		}).ask();
 	}
 
 

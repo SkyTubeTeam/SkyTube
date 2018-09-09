@@ -165,8 +165,20 @@ public class PlaybackStatusDb extends SQLiteOpenHelperEx {
 			return String.format("Position: %d\nWatched: %s\n", position, watched);
 		}
 
-		public long position = 0;
-		public boolean watched = false;
+		private long position = 0;
+		private boolean watched = false;
+
+		public boolean isFullyWatched() {
+			return watched;
+		}
+
+		public boolean isWatched() {
+			return position > 0 || watched;
+		}
+
+		public long getPosition() {
+			return position;
+		}
 	}
 
 	/**
