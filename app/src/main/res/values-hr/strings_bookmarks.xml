@@ -1,2 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="bookmarks">Oznake</string>
+
+	<string name="bookmark">Oznaka</string>
+	<string name="video_bookmarked">Videozapis označen</string>
+	<string name="video_bookmarked_error">Nije moguće označiti videozapis.</string>
+
+	<string name="unbookmark">Odznačen</string>
+	<string name="video_unbookmarked">Videozapis odznačen</string>
+	<string name="video_unbookmarked_error">Nije moguće odznačiti videozapis.</string>
+
+	<string name="no_bookmarked_videos_text">Niste označili nijedan videozapis.
+\n
+\nKada označite, pojavit će se ovdje.</string>
+</resources>
