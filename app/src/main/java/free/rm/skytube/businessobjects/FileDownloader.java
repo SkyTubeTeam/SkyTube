@@ -25,13 +25,13 @@ import android.content.IntentFilter;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Environment;
-import android.util.Log;
 import android.webkit.MimeTypeMap;
 
 import java.io.File;
 import java.io.Serializable;
 import java.util.regex.Pattern;
 
+import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.gui.activities.PermissionsActivity;
 
 import static free.rm.skytube.app.SkyTubeApp.getContext;
@@ -40,6 +40,8 @@ import static free.rm.skytube.app.SkyTubeApp.getContext;
  * Downloads remote files by using Android's {@link DownloadManager}.
  */
 public abstract class FileDownloader implements Serializable, PermissionsActivity.PermissionsTask {
+
+	private static final String DOWNLOADS_TO_SEPARATE_DIRECTORIES = "pref_download_to_separate_directories";
 
 	/** The remote file URL that is going to be downloaded. */
 	private String  remoteFileUrl = null;
@@ -99,24 +101,14 @@ public abstract class FileDownloader implements Serializable, PermissionsActivit
 
 		Uri     remoteFileUri = Uri.parse(remoteFileUrl);
 		String  downloadFileName = getCompleteFileName(remoteFileUri);
+		FileInformation fileInformation = new FileInformation(downloadFileName);
+		String fullDownloadFileName = fileInformation.getFullDownloadFileName();
+		final File downloadDestinationFile = fileInformation.getFile();
 
-		// if there's already a local file for this video for some reason, then do not redownload the
-		// file and halt
-		File parentDir = Environment.getExternalStoragePublicDirectory(dirType);
-		final String fullDownloadFileName;
-		if (outputDirectoryName != null && !outputDirectoryName.isEmpty()) {
-			parentDir = new File(parentDir, outputDirectoryName);
-			if (!parentDir.exists()) {
-				parentDir.mkdirs();
-			}
-			fullDownloadFileName = outputDirectoryName + '/' + downloadFileName;
-		} else {
-			fullDownloadFileName = downloadFileName;
-		}
-		File file = new File(parentDir, downloadFileName);
-		Logger.w(this, "Downloading video %s into %s -> %s", outputFileName, outputDirectoryName, file.getAbsolutePath());
-		if (file.exists()) {
-			onFileDownloadCompleted(true, Uri.parse(file.toURI().toString()));
+
+		Logger.w(this, "Downloading video %s into %s -> %s", outputFileName, outputDirectoryName, downloadDestinationFile.getAbsolutePath());
+		if (downloadDestinationFile.exists()) {
+			onFileDownloadCompleted(true, Uri.parse(downloadDestinationFile.toURI().toString()));
 			return;
 		}
 
@@ -318,4 +310,34 @@ public abstract class FileDownloader implements Serializable, PermissionsActivit
 	 */
 	public abstract void onExternalStorageNotAvailable();
 
+	private class FileInformation {
+		private final String fullDownloadFileName;
+		private final File file;
+
+		public FileInformation(String downloadFileName) {
+			// if there's already a local file for this video for some reason, then do not redownload the
+			// file and halt
+			File parentDir = Environment.getExternalStoragePublicDirectory(dirType);
+			boolean toDirectories = SkyTubeApp.getPreferenceManager().getBoolean(DOWNLOADS_TO_SEPARATE_DIRECTORIES,false);
+
+			if (toDirectories && outputDirectoryName != null && !outputDirectoryName.isEmpty()) {
+				parentDir = new File(parentDir, outputDirectoryName);
+				if (!parentDir.exists()) {
+					parentDir.mkdirs();
+				}
+				fullDownloadFileName = outputDirectoryName + '/' + downloadFileName;
+			} else {
+				fullDownloadFileName = downloadFileName;
+			}
+			file = new File(parentDir, downloadFileName);
+		}
+
+		public String getFullDownloadFileName() {
+			return fullDownloadFileName;
+		}
+
+		public File getFile() {
+			return file;
+		}
+	}
 }
