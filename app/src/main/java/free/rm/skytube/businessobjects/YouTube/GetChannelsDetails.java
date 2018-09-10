@@ -69,30 +69,35 @@ public class GetChannelsDetails {
 	public List<YouTubeChannel> getYouTubeChannels(List<String> channelIdsList, boolean isUserSubscribed, boolean shouldCheckForNewVideos) throws IOException {
 		String  bannerType = SkyTubeApp.isTablet() ? "bannerTabletHdImageUrl" : "bannerMobileHdImageUrl";
 
-		List<YouTubeChannel> youTubeChannelsList = new ArrayList<>();
+		try {
+			List<YouTubeChannel> youTubeChannelsList = new ArrayList<>();
 
-		// YouTube can only return information about 50 (or so) channels at a time.  Hence we need
-		// to divide the given channelIdsList into smaller lists... then we need to regroup them
-		// into youTubeChannelsList.
-		List<List<String>> dividedChannelIdsLists = divideList(channelIdsList);
-		YouTube youtube = YouTubeAPI.create();
-		for (List<String> subChannelIdsList : dividedChannelIdsLists) {
-			YouTube.Channels.List channelInfo = youtube.channels().list("snippet, statistics, brandingSettings");
-			channelInfo.setFields("items(id, snippet/title, snippet/description, snippet/thumbnails/default," +
-								"statistics/subscriberCount, brandingSettings/image/" + bannerType + ")," +
-								"nextPageToken")
-					.setKey(YouTubeAPIKey.get().getYouTubeAPIKey())
-					.setId(convertListToCSV(subChannelIdsList))
-					.setMaxResults(MAX_RESULTS);
+			// YouTube can only return information about 50 (or so) channels at a time.  Hence we need
+			// to divide the given channelIdsList into smaller lists... then we need to regroup them
+			// into youTubeChannelsList.
+			List<List<String>> dividedChannelIdsLists = divideList(channelIdsList);
+			YouTube youtube = YouTubeAPI.create();
+			for (List<String> subChannelIdsList : dividedChannelIdsLists) {
+				YouTube.Channels.List channelInfo = youtube.channels().list("snippet, statistics, brandingSettings");
+				channelInfo.setFields("items(id, snippet/title, snippet/description, snippet/thumbnails/default," +
+						"statistics/subscriberCount, brandingSettings/image/" + bannerType + ")," +
+						"nextPageToken")
+						.setKey(YouTubeAPIKey.get().getYouTubeAPIKey())
+						.setId(convertListToCSV(subChannelIdsList))
+						.setMaxResults(MAX_RESULTS);
 
-			// get channels' info from the remote YouTube server
-			youTubeChannelsList.addAll( getYouTubeChannels(channelInfo, isUserSubscribed, shouldCheckForNewVideos) );
+				// get channels' info from the remote YouTube server
+				youTubeChannelsList.addAll(getYouTubeChannels(channelInfo, isUserSubscribed, shouldCheckForNewVideos));
+			}
+
+			// There is currently a bug in the YouTube API in the sense that the order of channels is
+			// not maintained.  Hence we currently need to manually sort the channels (to maintain the
+			// order listed in the DB) until YouTube fix their bug.
+			return sortYouTubeChannelsList(channelIdsList, youTubeChannelsList);
+		} catch (IOException e) {
+			// return the cached values
+			return new ArrayList(channelCache.values());
 		}
-
-		// There is currently a bug in the YouTube API in the sense that the order of channels is
-		// not maintained.  Hence we currently need to manually sort the channels (to maintain the
-		// order listed in the DB) until YouTube fix their bug.
-		return sortYouTubeChannelsList(channelIdsList, youTubeChannelsList);
 	}
 
 
@@ -210,7 +215,7 @@ public class GetChannelsDetails {
 	 *
 	 * @return A list of {@link YouTubeChannel}.
 	 */
-	private List<YouTubeChannel> getYouTubeChannels(YouTube.Channels.List channelInfo, boolean isUserSubscribed, boolean shouldCheckForNewVideos) {
+	private List<YouTubeChannel> getYouTubeChannels(YouTube.Channels.List channelInfo, boolean isUserSubscribed, boolean shouldCheckForNewVideos) throws IOException {
 		List<YouTubeChannel>    youTubeChannelList = new ArrayList<>();
 
 		try {
@@ -234,8 +239,9 @@ public class GetChannelsDetails {
 					Logger.e(this, "Error has occurred while getting channel info for ChannelID=" + channel.getId(), tr);
 				}
 			}
-		} catch (Throwable tr) {
+		} catch (IOException tr) {
 			Logger.e(this, "Error has occurred while getting channels info", tr);
+			throw tr;
 		}
 
 		return youTubeChannelList;
