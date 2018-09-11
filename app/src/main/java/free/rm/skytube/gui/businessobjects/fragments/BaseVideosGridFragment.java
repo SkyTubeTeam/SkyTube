@@ -38,6 +38,7 @@ import free.rm.skytube.gui.fragments.VideosGridFragment;
 public abstract class BaseVideosGridFragment extends TabFragment implements SwipeRefreshLayout.OnRefreshListener {
 
 	protected VideoGridAdapter  videoGridAdapter;
+	private int updateCount = 0;
 
 	@BindView(R.id.swipeRefreshLayout)
 	protected SwipeRefreshLayout swipeRefreshLayout;
@@ -58,6 +59,7 @@ public abstract class BaseVideosGridFragment extends TabFragment implements Swip
 	@Override
 	public void onRefresh() {
 		videoGridAdapter.refresh(true);
+		updateCount = PlaybackStatusDb.getPlaybackStatusDb().getUpdateCounter();
 	}
 
 	/**
@@ -66,9 +68,10 @@ public abstract class BaseVideosGridFragment extends TabFragment implements Swip
 	@Override
 	public void onResume() {
 		super.onResume();
-		if(PlaybackStatusDb.isHasUpdated()) {
+		int newUpdateCounter = PlaybackStatusDb.getPlaybackStatusDb().getUpdateCounter();
+		if(newUpdateCounter != updateCount) {
 			videoGridAdapter.notifyDataSetChanged();
-			PlaybackStatusDb.setHasUpdated(false);
+			updateCount = newUpdateCounter;
 		}
 	}
 
