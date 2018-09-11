@@ -74,6 +74,14 @@ public abstract class BaseVideosGridFragment extends TabFragment implements Swip
 		}
 	}
 
+	@Override
+	public void onFragmentSelected() {
+		super.onFragmentSelected();
+		if (videoGridAdapter != null) {
+			videoGridAdapter.initializeList();
+		}
+	}
+
 	/**
 	 * Set the layout resource (e.g. Subscriptions resource layout, R.id.grid_view, ...etc).
 	 */

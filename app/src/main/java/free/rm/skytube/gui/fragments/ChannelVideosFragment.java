@@ -65,8 +65,4 @@ public class ChannelVideosFragment extends VideosGridFragment {
 	}
 
 
-	@Override
-	public void onFragmentSelected() {
-	}
-
 }
