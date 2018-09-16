@@ -38,21 +38,26 @@
 
 	<CheckBoxPreference
 		android:defaultValue="false"
-		android:key="@string/pref_key_allow_mobile_downloads"
-		android:title="@string/pref_title_allow_mobile_downloads"
-		android:summary="@string/pref_summary_allow_mobile_downloads"/>
-
-	<CheckBoxPreference
-		android:defaultValue="false"
 		android:key="@string/pref_key_subscriptions_alphabetical_order"
 		android:title="@string/pref_title_subscriptions_alphabetical_order"
-		android:summary="@string/pref_summary_subscriptions_alphabetical_order"
-		/>
+		android:summary="@string/pref_summary_subscriptions_alphabetical_order"/>
 
-	<CheckBoxPreference
-		android:defaultValue="false"
-		android:key="pref_download_to_separate_directories"
-		android:title="@string/pref_title_download_to_separate_directories"
-		android:summary="@string/pref_summary_download_to_separate_directories"/>
+
+	<PreferenceCategory
+		android:title="@string/pref_category_downloads">
+
+		<CheckBoxPreference
+			android:defaultValue="false"
+			android:key="@string/pref_key_allow_mobile_downloads"
+			android:title="@string/pref_title_allow_mobile_downloads"
+			android:summary="@string/pref_summary_allow_mobile_downloads"/>
+
+		<CheckBoxPreference
+			android:defaultValue="false"
+			android:key="pref_download_to_separate_directories"
+			android:title="@string/pref_title_download_to_separate_directories"
+			android:summary="@string/pref_summary_download_to_separate_directories"/>
+
+	</PreferenceCategory>
 
 </PreferenceScreen>

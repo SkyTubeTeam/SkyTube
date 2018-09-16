@@ -514,8 +514,10 @@
 	<string name="pref_summary_subscriptions_alphabetical_order">If checked, Subscribed Channels will be sorted alphabetically.</string>
 	<string name="pref_key_brightness_level" translatable="false">pref_key_brightness_level</string>
 
+	<string name="pref_category_downloads">Downloads</string>
 	<string name="pref_title_download_to_separate_directories">Download videos in separate Directories</string>
-	<string name="pref_summary_download_to_separate_directories">Videos are saved into separate folders based on the channel name</string>
+	<string name="pref_summary_download_to_separate_directories">Videos are saved into separate folders based on the channel name.</string>
+
 	<!--
 		VIDEO BLOCKER
 	-->
