@@ -142,4 +142,8 @@
 	<string name="channel_blacklist_update_failure">Klarte ikke å fjerne gitt(e) kanal(er) fra svarteliste…</string>
 	<string name="input_channel_url">Kanalnettadressen som hvitlistes:</string>
 	<string name="pref_import_export_category">Import/eksport</string>
+	<string name="pref_category_downloads">Nedlastinger</string>
+	<string name="pref_title_download_to_separate_directories">Last ned videoer i egne mapper</string>
+	<string name="pref_summary_download_to_separate_directories">Videoer lagres i egne mapperbasert etter kanalnavn.</string>
+
 	</resources>
