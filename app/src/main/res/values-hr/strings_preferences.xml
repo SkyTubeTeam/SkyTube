@@ -117,4 +117,8 @@
 	<string name="pref_summary_clear_playback_status">Obriši status reprodukcije za sve videozapise.</string>
 	<string name="pref_playback_status_cleared">Status reprodukcije je obrisan.</string>
 
-</resources>
+<string name="pref_category_downloads">Preuzimanja</string>
+	<string name="pref_title_download_to_separate_directories">Preuzmi videozapise u posebne direktorije</string>
+	<string name="pref_summary_download_to_separate_directories">Videozapisi se spremaju u zasebne mape na temelju naziva kanala.</string>
+
+	</resources>
