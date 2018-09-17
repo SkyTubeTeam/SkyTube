@@ -138,4 +138,20 @@
 	<string name="pref_summary_clear_playback_status">Limpar estado de reprodução para todos os vídeos.</string>
 	<string name="pref_playback_status_cleared">Estado de reprodução removido.</string>
 
-</resources>
+<string name="pref_category_downloads">Descargas</string>
+	<string name="pref_title_download_to_separate_directories">Descarregar vídeos para diretórios distintos</string>
+	<string name="pref_summary_download_to_separate_directories">Os vídeos serão guardados em diretórios distintos tendo por base o nome do canal.</string>
+
+	<string name="channel_already_whitelisted">O canal já está na lista de canais permitidos.</string>
+	<string name="channel_whitelist_update_failure">Falha ao colocar o canal da lista de permitidos.</string>
+	<string name="channel_unwhitelist_success">Lista de canais atualizada. Por favor recarregue os vídeos.</string>
+	<string name="channel_unwhitelist_failure">Falha ao retirar os canais da lista de permitidos.</string>
+
+	<string name="no_preferred_lang_selected">Não escolheu o idioma preferencial. Definição ignorada.</string>
+	<string name="preferred_lang_updated">Idioma preferencial atualizado. Por favor recarregue os vídeos.</string>
+
+	<string name="pref_title_lang_detection_video_filtering">Filtrar vídeos tendo por base o idioma</string>
+	<string name="pref_summary_lang_detection_video_filtering">Utilizar inteligência artificial para detetar os idiomas dos vídeos e para os bloquear se o idioma não for igual aos que escolheu como preferencial. Apenas deve ativar esta opção em dispositivos de gama alta.</string>
+	<string name="setting_updated">Definição atualizada. Por favor recarregue os vídeos.</string>
+
+	</resources>
