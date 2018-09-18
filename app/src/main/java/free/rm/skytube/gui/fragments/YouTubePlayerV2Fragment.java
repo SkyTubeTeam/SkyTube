@@ -193,11 +193,18 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 		getSupportActionBar().setDisplayShowHomeEnabled(true);
 
 		// setup the player
-		final PlayerViewGestureHandler playerViewGestureHandler;
 		playerView = view.findViewById(R.id.player_view);
-		playerViewGestureHandler = new PlayerViewGestureHandler();
-		playerViewGestureHandler.initView(view);
-		playerView.setOnTouchListener(playerViewGestureHandler);
+
+        SharedPreferences test = SkyTubeApp.getPreferenceManager();
+
+        String enabled = SkyTubeApp.getStr(R.string.pref_screen_enabled_value);
+        String gesturesStatus = SkyTubeApp.getPreferenceManager().getString(SkyTubeApp.getStr(R.string.pref_key_screen_gestures), enabled);
+		if(gesturesStatus.equals(enabled) ){
+			final PlayerViewGestureHandler playerViewGestureHandler = new PlayerViewGestureHandler();
+			playerViewGestureHandler.initView(view);
+			playerView.setOnTouchListener(playerViewGestureHandler);
+		}
+
 		playerView.requestFocus();
 
 		DefaultBandwidthMeter bandwidthMeter = new DefaultBandwidthMeter();
