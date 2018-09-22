@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources>
-	<string name="feed">Feed</string>
+	<string name="feed">feed</string>
 
-	<string name="subscribing_to_channels">Subscribing to channels…</string>
-	<string name="fetching_subbed_channels_info">Fetching channels\' information…</string>
-	<string name="fetching_subbed_channels_info_error">An error has occurred while fetching channels\' information.</string>
+	<string name="subscribing_to_channels">Suscribiendo a los canales…</string>
+	<string name="fetching_subbed_channels_info">Consiguiendo información de los canales…</string>
+	<string name="fetching_subbed_channels_info_error">Ha ocurrido un error al conseguir la información de los canales.</string>
 
 	<string name="fetching_subscription_videos">Comprobando vídeos de los canales suscritos</string>
 	<string name="fetched_videos_from_channels">Obtenidos %1$d vídeos desde %2$d/%3$d canales.</string>
@@ -12,6 +12,6 @@
 	<string name="no_subscriptions_text">No estás suscrito a ningún canal, cuando lo estés todos los vídeos del último mes de dichos canales aparecerán aquí.</string>
 	<string name="import_subscriptions_from_youtube">Importar suscripciones desde YouTube</string>
 
-	<string name="notification_channel_feed_title">Feed Notifications</string>
-	<string name="notification_new_videos_found">%d new videos from subscribed channels</string>
+	<string name="notification_channel_feed_title">Notificaciones feed</string>
+	<string name="notification_new_videos_found">%d videos nuevos de los canales suscritos</string>
 </resources>
