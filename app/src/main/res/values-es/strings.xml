@@ -1,23 +1,26 @@
+<?xml version='1.0' encoding='UTF-8'?>
 <resources>
 	<string name="could_not_get_videos">No se encontraron vídeos de %s.</string>
 	<string name="views">visto %,d veces</string>
 	<string name="error">Error</string>
 	<string name="ok">Aceptar</string>
 	<string name="search_videos">Buscar vídeos</string>
-	<string name="launch_offical_player_error">Ocurrió un eror al tratar de abrir el reproductor 
-		oficial de YouTube. Asegúrate que la aplicación oficial de YouTube hecha por Google
-		esté instalada en tu dispositivo.</string>
+	<string name="launch_offical_player_error">Ha ocurrido un error al intentar lanzar el reproductor oficial Youtube de Google. Aseguraté de tenerlo instalado.</string>
 	<string name="LIVE">LIVE</string>
 
 	<string name="featured">Destacados</string>
 	<string name="most_popular">Más Populares</string>
 
 	<string name="video">Video</string>
-	<string name="videos">Videos</string>
-	<string name="num_videos">%d videos</string>
-	<string name="playlists">Playlists</string>
-	<string name="could_not_get_playlists">Could not get %s playlists.</string>
+	<string name="videos">Vídeos</string>
+	<string name="num_videos">%d vídeos</string>
+	<string name="playlists">Listas de reproducción</string>
+	<string name="could_not_get_playlists">No encuentro %s listas de reproducción.</string>
 
-	<string name="loading">Loading …</string>
-    <string name="could_not_get_channel">Could not download channel information!</string>
-</resources>
+	<string name="loading">Cargando …</string>
+    <string name="could_not_get_channel">No puedo descargar información del canal!</string>
+<string name="hello_blank_fragment">Fragmento inicial vacío</string>
+    <string name="yes">Si</string>
+	<string name="no">No</string>
+
+    </resources>
