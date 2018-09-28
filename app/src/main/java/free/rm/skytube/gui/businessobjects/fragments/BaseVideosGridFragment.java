@@ -61,13 +61,11 @@ public abstract class BaseVideosGridFragment extends TabFragment implements Swip
 	}
 
 	/**
-	 * When this Fragment resumes, refresh the active GridViewHolder (i.e. the one whose video was viewed, before returning to this Fragment), if defined.
-	 * Also, if the PlaybackStatusDb has been updated (due to clearing or disabling it), refresh the entire VideoGrid.
+	 * If the PlaybackStatusDb has been updated (due to clearing or disabling it), refresh the entire VideoGrid.
 	 */
 	@Override
 	public void onResume() {
 		super.onResume();
-		videoGridAdapter.refreshActiveGridViewHolder();
 		if(PlaybackStatusDb.isHasUpdated()) {
 			videoGridAdapter.notifyDataSetChanged();
 			PlaybackStatusDb.setHasUpdated(false);

@@ -5,10 +5,13 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
+import free.rm.skytube.businessobjects.interfaces.VideoPlayStatusUpdateListener;
 
 /**
  * A database (DB) that stores video playback history
@@ -20,6 +23,8 @@ public class PlaybackStatusDb extends SQLiteOpenHelperEx {
 	private static final int DATABASE_VERSION = 1;
 	private static boolean hasUpdated = false;
 	private static final String DATABASE_NAME = "playbackhistory.db";
+
+	private List<VideoPlayStatusUpdateListener> listeners = new ArrayList<>();
 
 	public static synchronized PlaybackStatusDb getVideoDownloadsDb() {
 		if (playbackStatusDb == null) {
@@ -42,6 +47,7 @@ public class PlaybackStatusDb extends SQLiteOpenHelperEx {
 		getWritableDatabase().delete(PlaybackStatusTable.TABLE_NAME, null, null);
 		playbackHistoryMap = null;
 		hasUpdated = true;
+		onUpdated();
 	}
 
 	@Override
@@ -124,6 +130,8 @@ public class PlaybackStatusDb extends SQLiteOpenHelperEx {
 		if(addSuccessful)
 				hasUpdated = true;
 
+		onUpdated();
+
 		return addSuccessful;
 	}
 
@@ -147,7 +155,16 @@ public class PlaybackStatusDb extends SQLiteOpenHelperEx {
 		boolean success = getWritableDatabase().insertWithOnConflict(PlaybackStatusTable.TABLE_NAME, null, values, SQLiteDatabase.CONFLICT_REPLACE) != -1;
 		if(success)
 			hasUpdated = true;
+
+		onUpdated();
+
 		return success;
+	}
+
+	private void onUpdated() {
+		for(VideoPlayStatusUpdateListener listener : listeners) {
+			listener.onVideoStatusUpdated();
+		}
 	}
 
 	/**
@@ -192,5 +209,15 @@ public class PlaybackStatusDb extends SQLiteOpenHelperEx {
 
 	public static void setHasUpdated(boolean hasUpdated) {
 		PlaybackStatusDb.hasUpdated = hasUpdated;
+	}
+
+	public void addListener(VideoPlayStatusUpdateListener listener) {
+		if(listeners.indexOf(listener) == -1) {
+			listeners.add(listener);
+		}
+	}
+
+	public void removeListener(VideoPlayStatusUpdateListener listener) {
+		listeners.remove(listener);
 	}
 }

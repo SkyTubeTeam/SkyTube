@@ -19,8 +19,6 @@ package free.rm.skytube.businessobjects.YouTube;
 
 import java.io.IOException;
 
-import free.rm.skytube.businessobjects.YouTube.GetFeaturedVideos;
-
 /**
  * A class that is able to query YouTube and returns information regarding the supplied videos IDs.
  */

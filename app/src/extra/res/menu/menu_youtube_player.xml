@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+	  xmlns:app="http://schemas.android.com/apk/res-auto">
+
+	<item android:id="@+id/media_route_menu_item"
+		  android:title="@string/media_route_menu_title"
+		  app:actionProviderClass="android.support.v7.app.MediaRouteActionProvider"
+		  app:showAsAction="always"/>
+	
+	<item android:id="@+id/menu_reload_video"
+		  android:title="@string/get_new_video_steam"
+		  android:icon="@drawable/ic_menu_reload_video"
+		  app:showAsAction="ifRoom"/>
+
+	<item android:id="@+id/menu_open_video_with"
+		  android:title="@string/open_with"
+		  app:showAsAction="never"/>
+
+	<item android:id="@+id/share"
+		  android:title="@string/share_via"
+		  app:showAsAction="never"/>
+
+	<item android:id="@+id/copyurl"
+		  android:title="@string/copy_url"
+		  app:showAsAction="never"/>
+
+	<item android:id="@+id/bookmark_video"
+		  android:title="@string/bookmark"
+		  app:showAsAction="never"/>
+
+	<item android:id="@+id/unbookmark_video"
+		  android:title="@string/unbookmark"
+		  app:showAsAction="never"/>
+
+	<item android:id="@+id/view_thumbnail"
+		  android:title="@string/view_thumbnail"
+		  app:showAsAction="never"/>
+
+	<item android:id="@+id/download_video"
+		  android:title="@string/download_video"
+		  app:showAsAction="never"/>
+</menu>

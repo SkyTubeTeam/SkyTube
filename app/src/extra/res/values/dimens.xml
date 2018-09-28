@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<dimen name="chromecast_panel_height">68dp</dimen>
+	<dimen name="chromecast_playback_button_container_width">48dp</dimen>
+	<dimen name="chromecast_playback_button_container_height">68dp</dimen>
+	<dimen name="chromecast_playback_button_container_width_double">96dp</dimen>
+</resources>

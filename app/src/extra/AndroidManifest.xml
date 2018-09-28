@@ -1,0 +1,41 @@
+<manifest
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools">
+
+	<application>
+		<meta-data
+				android:name="com.google.android.gms.cast.framework.OPTIONS_PROVIDER_CLASS_NAME"
+				android:value="free.rm.skytube.gui.businessobjects.CastOptionsProvider" />
+		<activity
+			android:name="free.rm.skytube.gui.activities.MainActivity"
+			android:launchMode="singleTask"
+			android:theme="@style/NoActionBarActivityTheme">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN"/>
+				<category android:name="android.intent.category.LAUNCHER"/>
+			</intent-filter>
+			<intent-filter>
+				<action android:name="android.intent.action.VIEW" />
+
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+
+				<data android:scheme="http" />
+				<data android:scheme="https" />
+
+				<data android:host="youtube.com" />
+				<data android:host="m.youtube.com" />
+				<data android:host="www.youtube.com" />
+				<data android:host="youtu.be" />
+			</intent-filter>
+		</activity>
+		<activity
+			android:name="free.rm.skytube.gui.activities.YouTubePlayerActivity"
+			android:configChanges="orientation|keyboardHidden|screenSize"
+			android:theme="@style/VideoPlayerActivityTheme"
+			tools:node="replace">
+		</activity>
+		<activity android:name="free.rm.skytube.gui.activities.NotificationClickActivity"></activity>
+	</application>
+
+</manifest>

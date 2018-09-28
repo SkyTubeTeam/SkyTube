@@ -30,6 +30,11 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "CHROMECAST_APP_ID", "\"39E8D587\""
+        }
+        debug {
+//            buildConfigField "String", "CHROMECAST_APP_ID", "\"39E8D587\"" // prod
+            buildConfigField "String", "CHROMECAST_APP_ID", "\"29A66E17\"" // dev
         }
     }
     flavorDimensions "skytube"
@@ -37,12 +42,14 @@ android {
         // 100% Open-Source Edition
         oss {
             applicationId "free.rm.skytube.oss"
+            versionName "2.91"          // the digits of the *fractional part* shall not be larger than "9"
             resValue "string", "app_name", "SkyTube"
             dimension "skytube"
         }
         // 99% Open-source edition:  uses the YouTube Player Jar [i.e. proprietary module - optional usage]
         extra {
             applicationId "free.rm.skytube.extra"
+            versionName "2.91 Extra"    // the digits of the *fractional part* shall not be larger than "9"
             resValue "string", "app_name", "SkyTube Extra"
             dimension "skytube"
         }
@@ -57,6 +64,9 @@ android {
     lintOptions {
         checkReleaseBuilds false
         abortOnError false
+    }
+    dexOptions {
+        jumboMode true
     }
 }
 
@@ -97,4 +107,11 @@ dependencies {
 
     // proprietary module
     extraImplementation files('libs/YouTubeAndroidPlayerApi.jar')
+    extraImplementation 'com.android.support:mediarouter-v7:27.1.1'
+    extraImplementation 'com.google.android.gms:play-services-cast-framework:15.0.1'
+    extraImplementation 'com.googlecode.android-query:android-query:0.25.9'
+    extraImplementation 'com.sothree.slidinguppanel:library:3.4.0'
+    extraImplementation 'com.github.rahatarmanahmed:circularprogressview:2.5.0'
+    extraImplementation 'com.google.apis:google-api-services-youtube:v3-rev178-1.22.0'
+    extraImplementation 'com.squareup.picasso:picasso:2.5.2'
 }

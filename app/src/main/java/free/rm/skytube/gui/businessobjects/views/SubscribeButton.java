@@ -25,8 +25,8 @@ import android.view.View;
 import android.widget.RemoteViews;
 
 import free.rm.skytube.R;
-import free.rm.skytube.businessobjects.YouTube.Tasks.GetChannelVideosTask;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
+import free.rm.skytube.businessobjects.YouTube.Tasks.GetChannelVideosTask;
 import free.rm.skytube.businessobjects.db.Tasks.SubscribeToChannelTask;
 
 /**
