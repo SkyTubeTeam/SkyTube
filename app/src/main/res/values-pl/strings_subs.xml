@@ -13,15 +13,16 @@
 	<string name="error_unable_to_subscribe">Nie można zasubskrybować kanału (id=%s)</string>
 
 	<string name="import_subscriptions">Importuj subskrypcje</string>
-	<string name="import_subscriptions_description">Import your subscriptions from YouTube, by first visiting https://www.youtube.com/subscription_manager, and clicking the \"Export Subscriptions\" button at the bottom. Then, select the xml file you exported by clicking \"Select XML File\" below.</string>
+	<string name="import_subscriptions_description">Importuj swoje subskrypcje z YouTube, odwiedzając najpierw https://www.youtube.com/subscription_manager i klikając przycisk \"Eksportuj subskrypcje\" na dole. Następnie wybierz wyeksportowany plik o nazwie \"subscription_manager\", klikając \"Wybierz plik subskrypcji\" poniżej.</string>
 	<string name="subscriptions_to_channels_imported">Subskrypcje %d kanałów zaimportowane.</string>
-	<string name="select_xml_file">Wybierz plik XML</string>
+	<string name="select_xml_file">Wybierz plik subskrypcji</string>
 	<string name="select_all">Wybierz wszystko</string>
 	<string name="select_none">Wybierz żadne</string>
-	<string name="no_channels_found">No YouTube channels were found in the XML file you uploaded.</string>
-	<string name="no_new_channels_found">No YouTube channels that you are not already subscribed to were found in the XML file you uploaded.</string>
-	<string name="import_subscriptions_parse_error">An error was encountered attempting to parse the XML file you uploaded: %s.</string>
+	<string name="no_channels_found">W przesłanym pliku XML nie znaleziono żadnych kanałów YouTube.</string>
+	<string name="no_new_channels_found">W przesłanym pliku XML nie znaleziono żadnych kanałów, które nie zostały jeszcze subskrybowane.</string>
+	<string name="import_subscriptions_parse_error">Napotkano błąd podczas próby przeanalizowania przesłanego pliku XML: %s.</string>
 	<string name="failed_to_import_subscriptions">Nie udało się zaimportować twoich subskrypcji YouTube.</string>
 
-	<string name="about">O</string>
-</resources>
+	<string name="about">O SkyTube</string>
+<string name="unsubscribe_from_all_current_sibbed_channels">Anuluj subskrypcję wszystkich aktualnie subskrybowanych kanałów.</string>
+	</resources>
