@@ -493,6 +493,21 @@
 		<item>@string/pref_screen_sensor_value</item>
 	</string-array>
 
+
+	<string name="pref_key_screen_gestures" translatable="false">pref_key_screen_gestures</string>
+	<string name="pref_title_screen_gestures">Gestures</string>
+	<string name="pref_summary_screen_gestures">Video gestures:  %s</string>
+	<string-array name="screen_gestures">
+		<item>Enabled</item>
+		<item>Disabled</item>
+	</string-array>
+	<string name="pref_screen_enabled_value" translatable="false">enabled</string>
+	<string name="pref_screen_disabled_value" translatable="false">disabled</string>
+	<string-array name="screen_gestures_values">
+		<item>@string/pref_screen_enabled_value</item>
+		<item>@string/pref_screen_disabled_value</item>
+	</string-array>
+
 	<string name="pref_key_disable_immersive_mode" translatable="false">pref_key_disable_immersive_mode</string>
 	<string name="pref_title_disable_immersive_mode">Disable Immersive Mode</string>
 	<string name="pref_summary_disable_immersive_mode">Comments and video description icons and the navigation bar shall always be displayed</string>
