@@ -71,8 +71,6 @@
 	<string name="pref_youtube_api_key_default">Перезапустите приложение, чтобы переключиться на API ключ по умолчанию.</string>
 	<string name="restart">Перезапустить</string>
 
-	<string name="pref_title_disable_immersive_mode">Отключить погруженный режим</string>
-	<string name="pref_summary_disable_immersive_mode">Значки комментариев и описания видео и панель навигации всегда будут показаны</string>
 
 	<string name="pref_title_feed_notification">Автоматическое уведомление ленты</string>
 	<string name="pref_summary_feed_notification">Как часто проверять наличие новых видео в подписанных каналах: %s</string>

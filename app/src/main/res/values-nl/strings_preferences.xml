@@ -65,8 +65,6 @@
 		<item>Apparaatsensor</item>
 	</string-array>
 
-	<string name="pref_title_disable_immersive_mode">Theatermodus uitschakelen</string>
-	<string name="pref_summary_disable_immersive_mode">De reacties, video-omschrijvingpictogrammen en navigatiebalk zullen altijd worden getoond</string>
 
 	<string name="pref_title_youtube_api_key">YouTube API-sleutel</string>
 	<string name="pref_summary_youtube_api_key">Voer je eigen YouTube Data-API-sleutel in. Laat leeg om de standaardsleutel te gebruiken.</string>

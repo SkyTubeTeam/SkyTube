@@ -71,8 +71,6 @@
 	<string name="pref_youtube_api_key_custom">Nøkkelen er gyldig. Start programmet på nytt for å bruke den nye YouTube-API-nøkkelen.</string>
 	<string name="pref_youtube_api_key_default">Start programmet på nytt og bytt tilbake til YouTube-API-nøkkelen.</string>
 	<string name="restart">Start på nytt</string>
-	<string name="pref_title_disable_immersive_mode">Skru av oppslukende modus</string>
-	<string name="pref_summary_disable_immersive_mode">Alltid vis kommentarer, videobeskrivelsesikoner og navigeringslinje</string>
 
 	<string name="pref_title_feed_notification">Automatisk kilde-merknad</string>
 	<string name="pref_summary_feed_notification">Hvor ofte det skal sjekkes for nye videoer fra abonnerte kanaler: %s</string>

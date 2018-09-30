@@ -89,8 +89,6 @@
 		<item>24 Hours</item>
 	</string-array>
 
-	<string name="pref_title_disable_immersive_mode">Desactivar modo inmersivo</string>
-	<string name="pref_summary_disable_immersive_mode">Siempre visibles los comentarios, la descripción del video y la barra de navegación</string>
 
 	<string name="pref_title_allow_mobile_downloads">Permitir descargas en conexión móvil</string>
 	<string name="pref_summary_allow_mobile_downloads">Seleccionar para poder descargar videos cuando la conexión es de red móvil. De otro modo sólo se pueden descargar conectado a una conexión wifi.</string>

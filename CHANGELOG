@@ -1,5 +1,6 @@
 vX.XX - XX XX XXXX:
 	* Added Android 9 (API 28) support.
+	* Video gestures can now be enabled/disabled.
 	* Added Croatian translations.
 	* Updated Polish, Spanish, Japanese, French, Portuguese (Brazil), Portuguese (Portugal), Italian, Chinese (Traditional), Norwegian Bokmål, Russian and Dutch translations.
 	* Bug fixes and other minor improvements.

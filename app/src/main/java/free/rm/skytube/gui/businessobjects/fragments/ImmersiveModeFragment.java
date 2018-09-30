@@ -31,11 +31,6 @@ import free.rm.skytube.businessobjects.Logger;
  */
 public class ImmersiveModeFragment extends FragmentEx {
 
-	protected boolean userWantsImmersiveMode() {
-		return ! SkyTubeApp.getPreferenceManager().getBoolean(getString(R.string.pref_key_disable_immersive_mode), false);
-	}
-
-
 	/**
 	 * Hide Android's bottom navigation bar.
 	 */

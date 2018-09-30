@@ -138,8 +138,6 @@
 		<item>24 Heures</item>
 	</string-array>
 
-	<string name="pref_title_disable_immersive_mode">Désactiver le mode immersif</string>
-	<string name="pref_summary_disable_immersive_mode">Les icônes des commentaires et de la description de la vidéo et la barre de navigation doivent toujours être affichés</string>
 		
 	<string name="pref_title_youtube_api_key">clé API YouTube</string>
 	<string name="pref_summary_youtube_api_key">Entrer votre clé API.  Laissez vide pour utiliser la clé API par défaut.</string>

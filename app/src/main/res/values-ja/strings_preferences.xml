@@ -74,8 +74,6 @@
 		<item>デバイスセンサー</item>
 	</string-array>
 
-	<string name="pref_title_disable_immersive_mode">イマーシブモードを無効にする</string>
-	<string name="pref_summary_disable_immersive_mode">コメントとビデオの説明アイコンおよびナビゲーションバーを常に表示する必要があります</string>
 
 	<string name="pref_title_youtube_api_key">YouTube API キー</string>
 	<string name="pref_summary_youtube_api_key">自分の YouTube データ API キーを入力します。空白にするとデフォルトを使用します。</string>

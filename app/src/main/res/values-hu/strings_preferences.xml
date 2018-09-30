@@ -78,8 +78,6 @@
 	<string name="pref_youtube_api_key_default">Restart app to switch back to default YouTube API key.</string>
 	<string name="restart">Újraindítás</string>
 
-	<string name="pref_title_disable_immersive_mode">Disable Immersive Mode</string>
-	<string name="pref_summary_disable_immersive_mode">A hozzászólás és videó leírás ikont mindig meg kell jeleníteni</string>
 
 	<string name="pref_title_feed_notification">Feed Auto Notification</string>
 	<string name="pref_summary_feed_notification">How often to check for new videos from subscribed channels: %s</string>

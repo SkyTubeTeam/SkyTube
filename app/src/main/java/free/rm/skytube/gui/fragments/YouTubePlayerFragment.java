@@ -131,10 +131,8 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		// if immersive mode is enabled then hide the navigation bar
-		if (userWantsImmersiveMode()) {
-			hideNavigationBar();
-		}
+		// hide the navigation bar
+		hideNavigationBar();
 
 		// inflate the layout for this fragment
 		View view = inflater.inflate(R.layout.fragment_youtube_player, container, false);
@@ -199,11 +197,9 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 
 		// setup the media controller (will control the video playing/pausing)
 		mediaController = new MediaControllerEx(getActivity(), videoView, this);
-		// ensure that the mediaController is always above the NavBar (given that the NavBar can
-		// be in immersive mode)
-		if (userWantsImmersiveMode()) {
-			mediaController.setPadding(0, 0, 0, getNavBarHeightInPixels());
-		}
+		// ensure that the mediaController is always above the NavBar (given that the NavBar can be
+		// in immersive mode)
+		mediaController.setPadding(0, 0, 0, getNavBarHeightInPixels());
 
 		voidView = view.findViewById(R.id.void_view);
 		indicatorView = view.findViewById(R.id.indicatorView);
@@ -606,24 +602,19 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 			getSupportActionBar().hide();
 			mediaController.hideController();
 
-			// if the user wants the IMMERSIVE mode experience...
-			if (userWantsImmersiveMode()) {
-				// Hide the navigation bar.  Due to Android pre-defined mechanisms, the nav bar can
-				// only be hidden after all animation have been rendered (e.g. mediaController is
-				// fully closed).  As a result, a delay is needed in order to explicitly hide the
-				// nav bar.
-				hideVideoDescAndCommentsIconsTimerHandler = new Handler();
-				hideVideoDescAndCommentsIconsTimerHandler.postDelayed(new Runnable() {
-					@Override
-					public void run() {
-						hideNavigationBar();
-						hideVideoDescAndCommentsIconsTimerHandler = null;
-					}
-				}, NAVBAR_VISIBILITY_TIMEOUT);
-			} else {
-				videoDescriptionDrawerIconView.setVisibility(View.VISIBLE);
-				commentsDrawerIconView.setVisibility(View.VISIBLE);
-			}
+			// Due to the IMMERSIVE mode experience (i.e. comments/desc icons are hidden by default):
+			// Hide the navigation bar.  Due to Android pre-defined mechanisms, the nav bar can
+			// only be hidden after all animation have been rendered (e.g. mediaController is
+			// fully closed).  As a result, a delay is needed in order to explicitly hide the
+			// nav bar.
+			hideVideoDescAndCommentsIconsTimerHandler = new Handler();
+			hideVideoDescAndCommentsIconsTimerHandler.postDelayed(new Runnable() {
+				@Override
+				public void run() {
+					hideNavigationBar();
+					hideVideoDescAndCommentsIconsTimerHandler = null;
+				}
+			}, NAVBAR_VISIBILITY_TIMEOUT);
 
 			// If there is a hideHudTimerHandler running, then cancel it (stop if from running).  This way,
 			// if the HUD was hidden on the 5th second, and the user reopens the HUD, this code will
