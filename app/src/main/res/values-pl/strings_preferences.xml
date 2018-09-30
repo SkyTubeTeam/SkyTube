@@ -2,12 +2,12 @@
 <resources>
 	<string name="preferences">Preferencje</string>
 
-	<string name="pref_languages_filter_category">Języki &amp; Regiony</string>
+	<string name="pref_languages_filter_category">Filtry języków i regionów</string>
 	<string name="pref_title_preferred_regions">Preferowany region</string>
 	<string name="pref_summary_preferred_regions">Wybierz preferowany region.  Używane w celu filtrowania filmów w kategorii Polecane:  %s</string>
 
 	<string name="pref_title_preferred_languages">Preferowane języki</string>
-	<string name="pref_summary_preferred_languages">Eksperymentalne: Wybierz jeden lub więcej preferowanych języków. Używane w celu filtrowania filmów w kategorii Najbardziej Polecane oraz w wyszukiwaniu.</string>
+	<string name="pref_summary_preferred_languages">Wybierz preferowane języki.</string>
 
 	<string name="pref_video_player_category">Odtwarzacz wideo</string>
 	<string name="pref_title_preferred_res">Preferowana rozdzielczość</string>
@@ -42,7 +42,7 @@
 	<string name="pref_title_updates">Aktualizacje</string>
 	<string name="pref_summary_updates">Sprawdź aktualizacje.</string>
 	<string name="pref_title_license">Licencja</string>
-	<string name="pref_summary_license">GNU General Public License version 3</string>
+	<string name="pref_summary_license">Powszechna Licencja Publiczna GNU 3</string>
 	<string name="app_license">Copyright © 2015-2018  Ramon Mifsud\n
 
 				\nThis program is free software: you can redistribute it and/or modify
@@ -63,7 +63,7 @@
 	<string name="pref_summary_default_tab">Domyślna karta do pokazywania kiedy SkyTube się uruchamia: %s</string>
 
 	<string name="pref_title_screen_orientation">Screen Orientation</string>
-	<string name="pref_summary_screen_orientation">Video player\'s orientation:  %s</string>
+	<string name="pref_summary_screen_orientation">Orientacja odtwarzacza wideo: %s</string>
 	<string-array name="screen_orientations">
 		<item>Automatycznie</item>
 		<item>Poziomo</item>
@@ -76,7 +76,7 @@
 	<string name="pref_youtube_api_key_error">Wystąpił błąd podczas próby sprawdzenia klucza API.</string>
 	<string name="pref_youtube_api_key_custom">Klucz jest poprawny.  Zrestartuj aplikację, aby użyć nowego klucza API.</string>
 	<string name="pref_youtube_api_key_default">Zrestartuj aplikację, aby powrócić do domyślnego klucza API YouTube.</string>
-	<string name="restart">Restart</string>
+	<string name="restart">Uruchom ponownie</string>
 	<string name="pref_title_feed_notification">Automatyczne powiadomienie kanału</string>
 	<string name="pref_summary_feed_notification">Jak często sprawdzać aktualizację subskrybowanych kanałów: %s</string>
 		<string-array name="feed_notification">
@@ -94,4 +94,59 @@
 	<string name="pref_title_disable_search_history">Wyłącz historię wyszukiwania</string>
 	<string name="pref_summary_disable_search_history">Jeśli zaznaczone, historia wyszukiwania zostanie wyczyszczona i nie będzie używana.</string>
 	<string name="pref_disable_search_history_deleted">Historia wyszukiwania usunięta.</string>
+<string name="pref_title_choose_player">Odtwarzacz wideo</string>
+	<string name="pref_summary_choose_player">Odtwarzacz wideo do użycia: %s</string>
+	<string name="pref_import_export_category">Import/Eksport</string>
+	<string name="pref_title_subscriptions_alphabetical_order">Sortuj kanały alfabetycznie</string>
+	<string name="pref_summary_subscriptions_alphabetical_order">Jeśli zaznaczone, kanały subskrybowane zostaną posortowane alfabetycznie.</string>
+	<string name="pref_category_downloads">Pliki do pobrania</string>
+	<string name="pref_title_download_to_separate_directories">Pobierz filmy w osobnych katalogach</string>
+	<string name="pref_summary_download_to_separate_directories">Filmy wideo są zapisywane w oddzielnych folderach na podstawie nazwy kanału.</string>
+
+	<string name="pref_video_blocker_category">Blokowanie filmów</string>
+	<string name="pref_channels_filter_category">Filtry kanałów</string>
+
+	<string name="pref_title_channel_filter_method">Metoda filtrowania kanałów</string>
+	<string name="pref_summary_channel_filter_method">Wybierz metodę filtrowania kanałów: %s</string>
+	<string name="disabled">Wyłącz</string>
+	<string name="pref_title_channel_blacklist">Czarna lista kanałów</string>
+	<string name="pref_summary_channel_blacklist">Lista zablokowanych kanałów.</string>
+	<string name="unblock">Odblokuj</string>
+	<string name="channel_blacklist_updated">Zaktualizowano czarną listę kanałów. Odśwież filmy.</string>
+	<string name="channel_blacklist_update_failure">Nie udało się usunąć danego kanału z czarnej listy…</string>
+	<string name="channel_blacklist_empty">Czarna lista kanałów jest pusta.</string>
+
+	<string name="pref_title_channel_whitelist">Biała lista kanałów</string>
+	<string name="pref_summary_channel_whitelist">Lista kanałów na białej liście.</string>
+	<string name="input_channel_url">Adres URL kanału do umieszczenia na białej liście:</string>
+	<string name="add">Dodaj</string>
+	<string name="block">Blokuj</string>
+	<string name="please_wait">Proszę czekać…</string>
+	<string name="channel_already_whitelisted">Kanał został już dodany do białej listy.</string>
+	<string name="channel_whitelist_updated">Kanał na białej liście. Odśwież filmy.</string>
+	<string name="channel_whitelist_update_failure">Nie udało się dodać białej listy do danego kanału…</string>
+	<string name="channel_unwhitelist_success">Zaktualizowano białą listę kanałów. Odśwież filmy.</string>
+	<string name="channel_unwhitelist_failure">Nie udało się wprowadzić na białą listę podanych kanałów …</string>
+
+	<string name="no_preferred_lang_selected">Nie wybrano żadnego preferowanego języka. Ustawienie ignorowane.</string>
+	<string name="preferred_lang_updated">Preferowany język został zaktualizowany. Odśwież filmy.</string>
+
+	<string name="pref_title_lang_detection_video_filtering">Wykrywanie języka Filtrowanie wideo</string>
+	<string name="pref_summary_lang_detection_video_filtering">Skorzystaj z AI, aby wykryć języki używane w filmach i zablokować je, jeśli ich język nie jest równy preferowanemu językowi. Powinien być włączony tylko na urządzeniach wysokiej klasy.</string>
+	<string name="setting_updated">Ustawienie zaktualizowane. Odśwież filmy.</string>
+
+	<string name="pref_other_filters_category">Inne filtry</string>
+	<string name="pref_title_low_views_filter">Widoki</string>
+	<string name="pref_summary_low_views_filter">Odfiltruj filmy o niskim poziomie wyświetleń: %s</string>
+	<string name="pref_title_dislikes_filter">Nie lubi</string>
+	<string name="pref_summary_dislikes_filter">Odfiltruj filmy z wysoką oceną: %s</string>
+	<string name="pref_privacy_category">Prywatność</string>
+	<string name="pref_title_disable_playback_status">Wyłącz stan odtwarzania</string>
+	<string name="pref_summary_disable_playback_status">Jeśli zaznaczone, Status odtwarzania zostanie wyczyszczony i nie będzie używany.</string>
+	<string name="pref_disable_playback_status_deleted">Status odtwarzania został usunięty.</string>
+
+	<string name="pref_title_clear_playback_status">Wyczyść stan odtwarzania</string>
+	<string name="pref_summary_clear_playback_status">Wyczyść status odtwarzania wszystkich filmów.</string>
+	<string name="pref_playback_status_cleared">Status odtwarzania został wyczyszczony.</string>
+
 </resources>
