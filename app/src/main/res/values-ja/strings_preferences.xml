@@ -2,11 +2,11 @@
 <resources>
 	<string name="preferences">設定</string>
 
-	<string name="pref_languages_filter_category">言語・地域</string>
+	<string name="pref_languages_filter_category">言語と地域フィルター</string>
 	<string name="pref_title_preferred_regions">お好みの地域</string>
-	<string name="pref_summary_preferred_regions">最寄りの地域を選択します。「おすすめ」ビデオのカテゴリーでビデオをフィルターする処理に使用されます: %s</string>
+	<string name="pref_summary_preferred_regions">優先する地域を選択します。「おすすめ」ビデオのカテゴリーでビデオをフィルターする処理に使用されます: %s</string>
 
-	<string name="pref_title_preferred_languages">お好みの言語</string>
+	<string name="pref_title_preferred_languages">優先する言語</string>
 	<string name="pref_summary_preferred_languages">実験的: 1 つまたは複数の言語を選択します。「最も人気」のビデオカテゴリーで、ビデオを検索するために使用されます。</string>
 
 	<string name="pref_video_player_category">ビデオプレーヤー</string>
@@ -57,7 +57,7 @@
 	<string name="pref_summary_default_tab">SkyTube を起動したときに表示するデフォルトのタブ: %s</string>
 
 	<string name="pref_title_feed_notification">フィードの自動通知</string>
-	<string name="pref_summary_feed_notification">サブスクライブされているチャネルから新しいビデオをチェックする頻度: %s</string>
+	<string name="pref_summary_feed_notification">購読しているチャンネルから新しいビデオをチェックする頻度: %s</string>
 	<string-array name="feed_notification">
 		<item>Off</item>
 		<item>6 Hours</item>
@@ -66,7 +66,7 @@
 	</string-array>
 
 	<string name="pref_title_screen_orientation">画面の向き</string>
-	<string name="pref_summary_screen_orientation">Video player\'s orientation:  %s</string>
+	<string name="pref_summary_screen_orientation">ビデオプレーヤーの向き: %s</string>
 	<string-array name="screen_orientations">
 		<item>自動</item>
 		<item>横向き</item>
@@ -102,5 +102,36 @@
 	<string name="channel_blacklist_updated">チャンネルのブラックリストが更新されました。リフレッシュしてください。</string>
 	<string name="channel_blacklist_empty">チャンネルのブラックリストは空です。</string>
 	<string name="no_preferred_lang_selected">言語が選択されていません。設定は無視されます。</string>
-	<string name="preferred_lang_updated">言語を更新しました。リフレッシュしてください。</string>
-</resources>
+	<string name="preferred_lang_updated">言語を更新しました。ビデオを再読み込みしてください。</string>
+<string name="pref_import_export_category">インポート/エクスポート</string>
+	<string name="pref_category_downloads">ダウンロード</string>
+	<string name="pref_title_download_to_separate_directories">別のフォルダにビデオをダウンロード</string>
+	<string name="pref_summary_download_to_separate_directories">ビデオはチャンネル名に基づいた別々のフォルダに保存されます。</string>
+
+	<string name="pref_channels_filter_category">チャンネル フィルター</string>
+
+	<string name="pref_title_channel_filter_method">チャンネルのフィルター方法</string>
+	<string name="pref_summary_channel_filter_method">チャンネルのフィルター方法を選択: %s</string>
+	<string name="disabled">無効</string>
+	<string name="channel_blacklist_update_failure">ブラックリストから特定のチャンネルを削除できませんでした…</string>
+	<string name="pref_title_channel_whitelist">チャンネルのホワイトリスト</string>
+	<string name="pref_summary_channel_whitelist">ホワイトリストに登録されたチャンネルのリスト。</string>
+	<string name="input_channel_url">ホワイトリストに登録されたチャンネルのURL:</string>
+	<string name="add">追加</string>
+	<string name="block">ブロック</string>
+	<string name="please_wait">お待ちください…</string>
+	<string name="channel_already_whitelisted">チャンネルは既にホワイトリストに登録済みです。</string>
+	<string name="channel_whitelist_updated">チャンネルをホワイトリストに登録しました。ビデオを再読み込みしてください。</string>
+	<string name="channel_whitelist_update_failure">指定されたチャンネルをホワイトリストに登録できませんでした…</string>
+	<string name="channel_unwhitelist_success">ホワイトリストのチャンネルが更新されました。ビデオを再読み込みしてください。</string>
+	<string name="channel_unwhitelist_failure">指定されたチャンネルをホワイトリストから削除できませんでした…</string>
+
+	<string name="setting_updated">設定を更新しました。ビデオを再読み込みしてください。</string>
+
+	<string name="pref_other_filters_category">その他のフィルター</string>
+	<string name="pref_title_low_views_filter">再生数</string>
+	<string name="pref_summary_low_views_filter">再生数が少ない動画を除外する: %s</string>
+	<string name="pref_title_dislikes_filter">低く評価</string>
+	<string name="pref_summary_dislikes_filter">評価の低い動画を除外する: %s</string>
+	<string name="pref_privacy_category">プライバシー</string>
+	</resources>

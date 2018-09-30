@@ -19,4 +19,7 @@
 	<string name="loading">読み込み中 …</string>
     <string name="could_not_get_channel">チャネル情報をダウンロードできませんでした!</string>
 <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="yes">はい</string>
+	<string name="no">いいえ</string>
+
     </resources>

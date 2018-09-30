@@ -13,4 +13,5 @@
 \nAby włączyć, przejdź do Preferencji &gt; Inne i zaznacz \'Pozwól na pobieranie przez sieci komórkowe\'</string>
 	<string name="playing_video_file_missing">Nie znaleziono pobrania dla tego filmu. Odtwarzanie zdalne.</string>
 	<string name="external_storage_not_available">Nie można pobrać pliku, ponieważ zewnętrzna pamięć jest niedostępna.</string>
-</resources>
+<string name="download">Pobierz</string>
+	</resources>
