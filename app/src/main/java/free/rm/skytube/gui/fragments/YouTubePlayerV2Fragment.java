@@ -194,17 +194,9 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 
 		// setup the player
 		playerView = view.findViewById(R.id.player_view);
-
-        SharedPreferences test = SkyTubeApp.getPreferenceManager();
-
-        String enabled = SkyTubeApp.getStr(R.string.pref_screen_enabled_value);
-        String gesturesStatus = SkyTubeApp.getPreferenceManager().getString(SkyTubeApp.getStr(R.string.pref_key_screen_gestures), enabled);
-		if(gesturesStatus.equals(enabled) ){
-			final PlayerViewGestureHandler playerViewGestureHandler = new PlayerViewGestureHandler();
-			playerViewGestureHandler.initView(view);
-			playerView.setOnTouchListener(playerViewGestureHandler);
-		}
-
+		final PlayerViewGestureHandler playerViewGestureHandler = new PlayerViewGestureHandler();
+		playerViewGestureHandler.initView(view);
+		playerView.setOnTouchListener(playerViewGestureHandler);
 		playerView.requestFocus();
 
 		DefaultBandwidthMeter bandwidthMeter = new DefaultBandwidthMeter();
@@ -646,6 +638,9 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 		private float               startVolumePercent = -1.0f;
 		private long                startVideoTime = -1;
 
+		/** Enable/Disable video gestures based on user preferences. */
+		private final boolean       disableGestures = SkyTubeApp.getPreferenceManager().getBoolean(SkyTubeApp.getStr(R.string.pref_key_disable_screen_gestures), false);
+
 		private static final int    MAX_VIDEO_STEP_TIME = 60 * 1000;
 
 
@@ -740,6 +735,10 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 
 		@Override
 		public void adjustBrightness(double adjustPercent) {
+			if (disableGestures) {
+				return;
+			}
+
 			// adjust the video's brightness
 			videoBrightness.setVideoBrightness(adjustPercent, getActivity());
 
@@ -754,6 +753,10 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 
 		@Override
 		public void adjustVolumeLevel(double adjustPercent) {
+			if (disableGestures) {
+				return;
+			}
+
 			// We are setting volume percent to a value that should be from -1.0 to 1.0. We need to limit it here for these values first
 			if (adjustPercent < -1.0f) {
 				adjustPercent = -1.0f;
@@ -800,6 +803,10 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 
 		@Override
 		public void adjustVideoPosition(double adjustPercent, boolean forwardDirection) {
+			if (disableGestures) {
+				return;
+			}
+
 			long totalTime = player.getDuration();
 
 			if (adjustPercent < -1.0f) {

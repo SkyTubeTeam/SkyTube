@@ -39,12 +39,9 @@
 		android:entryValues="@array/screen_orientations_values"
 		android:defaultValue="@string/pref_screen_auto_value"/>
 
-	<ListPreference
-		android:key="@string/pref_key_screen_gestures"
-		android:title="@string/pref_title_screen_gestures"
-		android:summary="@string/pref_summary_screen_gestures"
-		android:entries="@array/screen_gestures"
-		android:entryValues="@array/screen_gestures_values"
-		android:defaultValue="@string/pref_screen_enabled_value"/>
+	<CheckBoxPreference
+		android:key="@string/pref_key_disable_screen_gestures"
+		android:title="@string/pref_title_disable_screen_gestures"
+		android:summary="@string/pref_summary_disable_screen_gestures"/>
 
 </PreferenceScreen>

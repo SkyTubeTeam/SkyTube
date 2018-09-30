@@ -212,6 +212,9 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 		// detect if user's swipes motions and taps...
 		voidView.setOnTouchListener(new OnSwipeTouchListener(getActivity()) {
 
+			/** Enable/Disable video gestures based on user preferences. */
+			private final boolean disableGestures = SkyTubeApp.getPreferenceManager().getBoolean(SkyTubeApp.getStr(R.string.pref_key_disable_screen_gestures), false);
+
 			@Override
 			public boolean onSwipeLeft() {
 				commentsDrawer.animateOpen();
@@ -250,6 +253,10 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 
 			@Override
 			public void adjustBrightness(double adjustPercent) {
+				if (disableGestures) {
+					return;
+				}
+
 				// We are setting brightness percent to a value that should be from -1.0 to 1.0. We need to limit it here for these values first
 				if (adjustPercent < -1.0f) {
 					adjustPercent = -1.0f;
@@ -280,6 +287,10 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 
 			@Override
 			public void adjustVolumeLevel(double adjustPercent) {
+				if (disableGestures) {
+					return;
+				}
+
 				// We are setting volume percent to a value that should be from -1.0 to 1.0. We need to limit it here for these values first
 				if (adjustPercent < -1.0f) {
 					adjustPercent = -1.0f;
@@ -327,6 +338,10 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 
 			@Override
 			public void adjustVideoPosition(double adjustPercent, boolean forwardDirection) {
+				if (disableGestures) {
+					return;
+				}
+
 				if (adjustPercent < -1.0f) {
 					adjustPercent = -1.0f;
 				} else if (adjustPercent > 1.0f) {
