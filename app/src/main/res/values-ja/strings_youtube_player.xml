@@ -32,4 +32,9 @@
 	<string name="play">再生</string>
 	<string name="cancel">キャンセル</string>
 	<string name="clear">クリア</string>
+<string name="mark_watched">再生済みとしてマーク</string>
+	<string name="mark_unwatched">再生済みのマークを解除</string>
+
+	<string name="should_resume">停止した位置から再生を再開しますか？</string>
+	<string name="resume">再開</string>
 </resources>

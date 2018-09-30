@@ -13,4 +13,5 @@
 \nPour l\'activer, allez dans Préférences &gt; Autres et cochez \"Autoriser les téléchargements sur les réseaux mobiles\"</string>
 	<string name="playing_video_file_missing">Impossible de lire la vidéo téléchargée. Lecture en ligne.</string>
 	<string name="external_storage_not_available">Impossible de télécharger le fichier car le stockage externe n\'est pas disponible.</string>
-</resources>
+<string name="download">Téléchargement</string>
+	</resources>

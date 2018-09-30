@@ -147,4 +147,8 @@
 	<string name="pref_summary_clear_playback_status">Cancella stato di riproduzione per tutti i video.</string>
 	<string name="pref_playback_status_cleared">Stato di riproduzione cancellato.</string>
 
-</resources>
+<string name="pref_category_downloads">Scaricamenti</string>
+	<string name="pref_title_download_to_separate_directories">Scarica i video in cartelle separate</string>
+	<string name="pref_summary_download_to_separate_directories">I video vengono salvati in cartelle separate in base al nome del canale.</string>
+
+	</resources>
