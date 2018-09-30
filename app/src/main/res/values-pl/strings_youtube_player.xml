@@ -32,4 +32,6 @@
 	<string name="play">Odtwarzaj</string>
 	<string name="cancel">Annuluj</string>
 	<string name="clear">Wyczyść</string>
-</resources>
+<string name="mark_watched">Mark Watched</string>
+	<string name="should_resume">Czy chcesz wrócić do miejsca, w którym się zatrzymałeś?</string>
+	</resources>
