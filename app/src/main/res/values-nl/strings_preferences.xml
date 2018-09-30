@@ -151,4 +151,6 @@
 	<string name="pref_title_download_to_separate_directories">Video\'s opslaan in aparte mappen</string>
 	<string name="pref_summary_download_to_separate_directories">Video\'s worden opgeslagen in aparte mappen; de mapnaam is gebaseerd op de kanaalnaam.</string>
 
+	<string name="pref_title_screen_gestures">Gebaren</string>
+	<string name="pref_summary_screen_gestures">Videogebaren: %s</string>
 	</resources>
