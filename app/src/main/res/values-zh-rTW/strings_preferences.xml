@@ -130,4 +130,7 @@
 	<string name="pref_title_download_to_separate_directories">在單獨的目錄中下載影片</string>
 	<string name="pref_summary_download_to_separate_directories">影片會被儲存在以頻道名稱為基礎的獨立資料夾中。</string>
 
+	<string name="pref_title_disable_screen_gestures">停用視訊手勢</string>
+	<string name="pref_summary_disable_screen_gestures">停用音量、亮度與快轉影片手勢。</string>
+
 	</resources>
