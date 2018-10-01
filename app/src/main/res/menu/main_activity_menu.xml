@@ -15,7 +15,7 @@
 		android:id="@+id/menu_blocker"
 		android:title="@string/pref_video_blocker_category"
 		app:actionLayout="@layout/menu_action_item_badge"
-		app:showAsAction="collapseActionView|ifRoom" />
+		app:showAsAction="ifRoom" />
 
 	<item android:id="@+id/menu_enter_video_url"
 		  android:title="@string/enter_video_url"
