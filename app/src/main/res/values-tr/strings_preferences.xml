@@ -76,8 +76,6 @@
 		<item>Aygıt algılayıcısı</item>
 	</string-array>
 
-	<string name="pref_title_disable_immersive_mode">Sürükleyici modunu devre dışı bırak</string>
-	<string name="pref_summary_disable_immersive_mode">Yorumlar, video tanım simgeleri ve gezinti çubuğu her zaman gösterilsin</string>
 
 	<string name="pref_title_youtube_api_key">YouTube API Anahtarı</string>
 	<string name="pref_summary_youtube_api_key">Kendi YouTube Data API Anahtarınızı giriniz. Varsayılan olanı kullanmak için boş bırakınız.</string>

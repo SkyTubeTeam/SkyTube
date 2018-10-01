@@ -80,8 +80,6 @@
 	<string name="pref_youtube_api_key_default">Riavvia l\'app per tornare alla chiave API predefinita di YouTube.</string>
 	<string name="restart">Riavvia</string>
 
-	<string name="pref_title_disable_immersive_mode">Disattiva modalità immersiva</string>
-	<string name="pref_summary_disable_immersive_mode">Le icone dei commenti e della descrizione del video e la barra di navigazione verranno sempre mostrati</string>
 
 	<string name="pref_title_feed_notification">Auto-notifica dei feed</string>
 	<string name="pref_summary_feed_notification">Quanto spesso controllare nuovi video dai canali sottoscritti: %s</string>
@@ -147,4 +145,8 @@
 	<string name="pref_summary_clear_playback_status">Cancella stato di riproduzione per tutti i video.</string>
 	<string name="pref_playback_status_cleared">Stato di riproduzione cancellato.</string>
 
-</resources>
+<string name="pref_category_downloads">Scaricamenti</string>
+	<string name="pref_title_download_to_separate_directories">Scarica i video in cartelle separate</string>
+	<string name="pref_summary_download_to_separate_directories">I video vengono salvati in cartelle separate in base al nome del canale.</string>
+
+	</resources>

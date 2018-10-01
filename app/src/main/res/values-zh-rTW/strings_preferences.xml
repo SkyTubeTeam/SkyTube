@@ -62,8 +62,6 @@
 	<string name="pref_summary_feed_notification">從已訂閱的頻道檢查新影片的頻度：%s</string>
 	<string name="pref_title_screen_orientation">螢幕方向</string>
 	<string name="pref_summary_screen_orientation">影片播放器的方向：%s</string>
-	<string name="pref_title_disable_immersive_mode">停用沈浸模式</string>
-	<string name="pref_summary_disable_immersive_mode">評論、影片說明圖示和導覽列將一直顯示</string>
 
 	<string name="pref_title_youtube_api_key">YouTube API 金鑰</string>
 	<string name="pref_summary_youtube_api_key">輸入您自己的 YouTube 資料 API 金鑰。留空為使用預設值。</string>
@@ -131,5 +129,8 @@
 	<string name="pref_category_downloads">下載</string>
 	<string name="pref_title_download_to_separate_directories">在單獨的目錄中下載影片</string>
 	<string name="pref_summary_download_to_separate_directories">影片會被儲存在以頻道名稱為基礎的獨立資料夾中。</string>
+
+	<string name="pref_title_disable_screen_gestures">停用視訊手勢</string>
+	<string name="pref_summary_disable_screen_gestures">停用音量、亮度與快轉影片手勢。</string>
 
 	</resources>

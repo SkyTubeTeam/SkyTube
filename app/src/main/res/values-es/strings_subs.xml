@@ -8,20 +8,21 @@
 	<string name="subscribed">Suscrito</string>
 	<string name="unsubscribed">No suscrito</string>
 
-	<string name="error_get_subbed_channels">Ocurrió un error al suscribirte al canal.</string>
-	<string name="error_check_if_user_has_subbed">No se puede verificar si el usuario está suscrito al canal (id=%s)</string>
+	<string name="error_get_subbed_channels">Ocurrió un error al recuperar los canales suscritos.</string>
+	<string name="error_check_if_user_has_subbed">No se puede comprobar si el usuario está suscrito al canal (id=%s)</string>
 	<string name="error_unable_to_subscribe">No se pudo cancelar la suscripción al canal (id=%s)</string>
 	
 	<string name="import_subscriptions">Importar suscripciones</string>
-	<string name="import_subscriptions_description">Importe sus suscripciones desde YouTube, visite https://www.youtube.com/subscription_manager, y haga clic en el botón \"Exportar suscripciones\" de la parte inferior. Después, seleccione el archivo XML que ha exportado haciendo clic en \"Subir Archivo XML\".</string>
-	<string name="subscriptions_to_channels_imported">Suscripción a %d canales importado.</string>
-	<string name="select_xml_file">Seleccionar archivo XML</string>
+	<string name="import_subscriptions_description">Importe sus suscripciones desde YouTube, visite https://www.youtube.com/subscription_manager, y haga clic en el botón \"Exportar suscripciones\" de la parte inferior. Después, seleccione el archivo titulado \"subscription_manager\" haciendo clic en \"Seleccionar archivo de suscripciones\".</string>
+	<string name="subscriptions_to_channels_imported">Importada la suscripción a %d canal(es).</string>
+	<string name="select_xml_file">Seleccionar archivo de suscripciones</string>
 	<string name="select_all">Seleccionar todo</string>
-	<string name="select_none">No seleccionar nada</string>
+	<string name="select_none">Quitar selección</string>
 	<string name="no_channels_found">En el archivo XML que ha subido no se encontraron canales de YouTube.</string>
 	<string name="no_new_channels_found">En el archivo XML que ha subido no se encontraron canales de YouTube a los cuales no estés suscrito actualmente.</string>
 	<string name="import_subscriptions_parse_error">Se encontró un error al intentar analizar el archivo XML que ha subido: %s.</string>
 	<string name="failed_to_import_subscriptions">Error al importar sus suscripciones de YouTube.</string>
 
-	<string name="about">About</string>
-</resources>
+	<string name="about">Acerca de</string>
+<string name="unsubscribe_from_all_current_sibbed_channels">Cancelar todas las suscripciones a canales.</string>
+	</resources>

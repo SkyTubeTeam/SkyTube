@@ -9,14 +9,18 @@
 	<string name="LIVE">LIVE</string>
 
 	<string name="featured">Polecane</string>
-	<string name="most_popular">Najbardziej popularne</string>
+	<string name="most_popular">Popularne</string>
 
-	<string name="video">Video</string>
+	<string name="video">Film</string>
 	<string name="videos">Filmy</string>
 	<string name="num_videos">%d filmów</string>
 	<string name="playlists">Playlisty</string>
-	<string name="could_not_get_playlists">Nie można dostać %s playlist.</string>
+	<string name="could_not_get_playlists">Nie można uzyskać %s playlist.</string>
 
 	<string name="loading">Ładowanie …</string>
     <string name="could_not_get_channel">Nie można pobrać informacji o kanale!</string>
-</resources>
+<string name="hello_blank_fragment">Witaj pusty fragment</string>
+    <string name="yes">Tak</string>
+	<string name="no">Nie</string>
+
+    </resources>

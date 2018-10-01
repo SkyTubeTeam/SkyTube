@@ -72,8 +72,6 @@
 	<string name="pref_youtube_api_key_default">أعاده تشغيل التطبيق للتبديل العودة إلى الافتراضي يوتيوب API الرئيسية.</string>
 	<string name="restart">إعادة تشغيل</string>
 
-	<string name="pref_title_disable_immersive_mode">Disable Immersive Mode</string>
-	<string name="pref_summary_disable_immersive_mode">Comments and video description icons and the navigation bar shall always be displayed</string>
 
 	<string name="pref_title_allow_mobile_downloads">Allow downloads on mobile networks</string>
 	<string name="pref_summary_allow_mobile_downloads">Select this to enable downloading videos on mobile networks. Otherwise, videos can only be downloaded on Wi-Fi.</string>

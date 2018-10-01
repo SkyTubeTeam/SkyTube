@@ -84,8 +84,6 @@
 		<item>24 Hours</item>
 	</string-array>
 
-	<string name="pref_title_disable_immersive_mode">Immersiven Modus deaktivieren</string>
-	<string name="pref_summary_disable_immersive_mode">Kommentare und Videobeschreibungen sowie die Navigationsleiste werden immer angezeigt</string>
 
 	<string name="pref_title_allow_mobile_downloads">Downloads in Mobilfunknetzen zulassen</string>
 	<string name="pref_summary_allow_mobile_downloads">Wählen Sie diese Option, um das Herunterladen von Videos in Mobilfunknetzen zu ermöglichen. Ansonsten können Videos nur über WLAN heruntergeladen werden.</string>

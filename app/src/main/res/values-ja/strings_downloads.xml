@@ -13,4 +13,5 @@
 \n有効にするには、設定 &gt; その他 に移動して、\'モバイルネットワークでダウンロードを許可する\' をチェックしてください</string>
 	<string name="playing_video_file_missing">このビデオのダウンロードが見つかりませんでした。リモート再生中。</string>
 	<string name="external_storage_not_available">外部ストレージが利用できないので、ファイルをダウンロードできません。</string>
-</resources>
+<string name="download">ダウンロード</string>
+	</resources>
