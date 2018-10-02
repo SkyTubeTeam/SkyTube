@@ -120,4 +120,7 @@
 	<string name="pref_title_download_to_separate_directories">Preuzmi videozapise u posebne direktorije</string>
 	<string name="pref_summary_download_to_separate_directories">Videozapisi se spremaju u zasebne mape na temelju naziva kanala.</string>
 
+	<string name="pref_title_disable_screen_gestures">Onemogući video geste</string>
+	<string name="pref_summary_disable_screen_gestures">Onemogući glasnoću, svjetlinu i premotavanje unaprijed/unazad video geste.</string>
+
 	</resources>
