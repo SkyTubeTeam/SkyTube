@@ -149,4 +149,7 @@
 	<string name="pref_title_download_to_separate_directories">Scarica i video in cartelle separate</string>
 	<string name="pref_summary_download_to_separate_directories">I video vengono salvati in cartelle separate in base al nome del canale.</string>
 
+	<string name="pref_title_disable_screen_gestures">Disattiva gesti</string>
+	<string name="pref_summary_disable_screen_gestures">Disattiva i gesti sullo schermo per volume, luminosità e l\'avanti/indietro del video.</string>
+
 	</resources>
