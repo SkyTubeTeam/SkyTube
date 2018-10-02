@@ -145,4 +145,6 @@
 	<string name="pref_summary_download_to_separate_directories">Videoer lagres i egne mapperbasert etter kanalnavn.</string>
 
 	<string name="pref_title_disable_screen_gestures">Skru av videohåndvendinger.</string>
+	<string name="pref_summary_disable_screen_gestures">Skru av lydstyrke, lysstyrke og blafringshåndvendinger forover/bakover for video.</string>
+
 	</resources>
