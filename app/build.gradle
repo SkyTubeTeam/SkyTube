@@ -10,7 +10,7 @@ android {
         targetSdkVersion 28
 
         versionName "2.95"    // digits of the *fractional part* shall NOT be > than "9"
-        versionCode 19
+        versionCode buildNumber.toInteger()
 
         // Third party devs:  pls be ethical and change the below keys
         buildConfigField 'String',   'YOUTUBE_API_KEYS_DEBUG', '"AIzaSyDU-ZZCyOB_kYkiMSZ6ooSipUZRukHU4ik"'
