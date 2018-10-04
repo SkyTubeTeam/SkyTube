@@ -144,4 +144,11 @@
 <string name="pref_import_export_category">Import/Export</string>
 	<string name="preferred_region_updated">Bevorzugte Region aktualisiert. Starten Sie die Anwendung neu, um die Änderungen zu übernehmen.</string>
 
+	<string name="pref_title_disable_screen_gestures">Videogesten deaktivieren</string>
+	<string name="pref_summary_disable_screen_gestures">Deaktivieren Sie die Video-Gesten für die Lautstärke, die Helligkeit und zum vorwärts/rückwärts Suchen.</string>
+
+	<string name="pref_category_downloads">Downloads</string>
+	<string name="pref_title_download_to_separate_directories">Lade Videos in unterschiedliche Ordner</string>
+	<string name="pref_summary_download_to_separate_directories">Videos werden anhand der Kanalnamen in unterschiedliche Ordner gespeichert.</string>
+
 	</resources>
