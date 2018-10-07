@@ -95,7 +95,7 @@ public class DownloadedVideosDb extends SQLiteOpenHelperEx implements OrderableD
 						Logger.e(this, "Error occurred while extracting channel{Id,Name} from JSON", e);
 					}
 				}
-
+				video.forceRefreshPublishDatePretty();
 				videos.add(video);
 			} while(cursor.moveToNext());
 		}

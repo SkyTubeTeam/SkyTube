@@ -67,6 +67,7 @@ import static free.rm.skytube.app.SkyTubeApp.getStr;
  */
 public class YouTubeVideo implements Serializable {
 
+	private final static long PUBLISH_DATE_VALIDITY_TIME = 5 * 60 * 1000L;
 	/**
 	 * YouTube video ID.
 	 */
@@ -113,7 +114,8 @@ public class YouTubeVideo implements Serializable {
 	 * The date/time of when this video was published.
 	 */
 	private DateTime publishDate;
-	private String publishDatePretty;
+	private transient String publishDatePretty;
+	private transient long publishDateCalculationTime;
 	/**
 	 * Thumbnail URL.
 	 */
@@ -360,13 +362,19 @@ public class YouTubeVideo implements Serializable {
 	 */
 	private void setPublishDate(DateTime publishDate) {
 		this.publishDate = publishDate;
-		this.publishDatePretty = (publishDate != null) ? new PrettyTimeEx().format(publishDate) : "???";
+		this.publishDatePretty = null;
 	}
 
 	/**
 	 * Gets the {@link #publishDate} as a pretty string.
 	 */
 	public String getPublishDatePretty() {
+		long now = System.currentTimeMillis();
+		// if pretty is not yet calculated, or the elapsed time is more than PUBLISH_DATE_VALIDITY_TIME
+		if (publishDatePretty == null || (PUBLISH_DATE_VALIDITY_TIME < now - publishDateCalculationTime)) {
+			this.publishDatePretty = (publishDate != null) ? new PrettyTimeEx().format(publishDate) : "???";
+			this.publishDateCalculationTime = now;
+		}
 		return publishDatePretty;
 	}
 
@@ -375,7 +383,7 @@ public class YouTubeVideo implements Serializable {
 	 * you to regenerate and reset the {@link #publishDatePretty}.
 	 */
 	public void forceRefreshPublishDatePretty() {
-		setPublishDate(publishDate);
+		this.publishDatePretty = null;
 	}
 
 	public String getThumbnailUrl() {
