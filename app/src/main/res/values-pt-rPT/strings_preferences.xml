@@ -152,4 +152,7 @@
 	<string name="pref_summary_lang_detection_video_filtering">Utilizar inteligência artificial para detetar os idiomas dos vídeos e para os bloquear se o idioma não for igual aos que escolheu como preferencial. Apenas deve ativar esta opção em dispositivos de gama alta.</string>
 	<string name="setting_updated">Definição atualizada. Por favor recarregue os vídeos.</string>
 
+	<string name="pref_title_disable_screen_gestures">Desactivar gestos de vídeo</string>
+	<string name="pref_summary_disable_screen_gestures">Desative o volume, o brilho e os gestos de avanço/retrocesso de vídeo.</string>
+
 	</resources>
