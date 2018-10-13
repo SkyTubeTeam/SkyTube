@@ -60,6 +60,7 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<YouTubeVideo, GridVi
 
 	private GridViewHolder activeGridViewHolder;
 
+	/** Set to true if the video adapter is initialized. */
 	private boolean initialized = false;
 
 	private static final String TAG = VideoGridAdapter.class.getSimpleName();
