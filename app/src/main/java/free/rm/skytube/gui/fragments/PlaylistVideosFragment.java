@@ -68,6 +68,8 @@ public class PlaylistVideosFragment extends VideosGridFragment {
 				.apply(new RequestOptions().placeholder(R.drawable.banner_default))
 				.into(playlistBannerImageView);
 
+		// Force initialization
+		videoGridAdapter.initializeList();
 		return view;
 	}
 

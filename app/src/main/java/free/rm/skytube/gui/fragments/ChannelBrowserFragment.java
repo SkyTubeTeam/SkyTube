@@ -197,6 +197,7 @@ public class ChannelBrowserFragment extends FragmentEx {
 			viewPager.setOffscreenPageLimit(2);
 			viewPager.setAdapter(channelPagerAdapter);
 
+			this.channelVideosFragment.onFragmentSelected();
 
 			Glide.with(getActivity())
 					.load(channel.getThumbnailNormalUrl())

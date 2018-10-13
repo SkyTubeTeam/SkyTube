@@ -60,6 +60,8 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<YouTubeVideo, GridVi
 
 	private GridViewHolder activeGridViewHolder;
 
+	private boolean initialized = false;
+
 	private static final String TAG = VideoGridAdapter.class.getSimpleName();
 
 
@@ -128,8 +130,6 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<YouTubeVideo, GridVi
 			// set current video category
 			this.currentVideoCategory = videoCategory;
 
-			// get the videos from the web asynchronously
-			new GetYouTubeVideosTask(getYouTubeVideos, this, swipeRefreshLayout, true).executeInParallel();
 		} catch (IOException e) {
 			Log.e(TAG, "Could not init " + videoCategory, e);
 			Toast.makeText(getContext(),
@@ -138,7 +138,6 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<YouTubeVideo, GridVi
 			this.currentVideoCategory = null;
 		}
 	}
-
 
 
 	@Override
@@ -160,6 +159,16 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<YouTubeVideo, GridVi
 	}
 
 	/**
+	 * Initialize the video list, if it's not yet initialized.
+	 */
+	public void initializeList() {
+		if (!initialized && getYouTubeVideos != null) {
+			initialized = true;
+			refresh(true);
+		}
+	}
+
+	/**
 	 * Refresh the video grid, by running the task to get the videos again.
 	 */
 	public void refresh() {
@@ -178,7 +187,8 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<YouTubeVideo, GridVi
 			if (clearVideosList) {
 				getYouTubeVideos.reset();
 			}
-
+			// now, we consider this as initialized - sometimes 'refresh' can be called before the initializeList is called.
+			initialized = true;
 			new GetYouTubeVideosTask(getYouTubeVideos, this, swipeRefreshLayout, clearVideosList).executeInParallel();
 		}
 	}
