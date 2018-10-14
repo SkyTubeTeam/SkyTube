@@ -37,4 +37,8 @@
 
 	<string name="should_resume">您想從停止的地方恢復嗎？</string>
 	<string name="resume">繼續</string>
-</resources>
+<string name="mobile_data">行動數據</string>
+	<string name="warning_mobile_network_play">您的裝置未連線至 Wi-Fi 網路。為了避免潛在的資料使用費，建議連線至 Wi-Fi 網路。無論如何都要播放影片嗎？</string>
+	<string name="warning_mobile_network_disable">不要再詢問。</string>
+	<string name="play_video">播放影片</string>
+	</resources>
