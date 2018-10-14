@@ -237,7 +237,7 @@ class GridViewHolder extends RecyclerView.ViewHolder {
 						youTubeVideo.removeDownload();
 						return true;
 					case R.id.download_video:
-						new MobileNetworkWarningDialog(view.getContext())
+						final boolean warningDialogDisplayed = new MobileNetworkWarningDialog(view.getContext())
 								.onPositive(new MaterialDialog.SingleButtonCallback() {
 									@Override
 									public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
@@ -245,6 +245,10 @@ class GridViewHolder extends RecyclerView.ViewHolder {
 									}
 								})
 								.showAndGetStatus(MobileNetworkWarningDialog.ActionType.DOWNLOAD_VIDEO);
+
+						if (!warningDialogDisplayed) {
+							youTubeVideo.downloadVideo(context);
+						}
 						return true;
 					case R.id.block_channel:
 						youTubeVideo.getChannel().blockChannel();

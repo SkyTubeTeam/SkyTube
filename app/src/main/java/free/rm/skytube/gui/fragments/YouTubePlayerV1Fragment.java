@@ -712,7 +712,7 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 				return true;
 
 			case R.id.download_video:
-				new MobileNetworkWarningDialog(getContext())
+				final boolean warningDialogDisplayed = new MobileNetworkWarningDialog(getContext())
 						.onPositive(new MaterialDialog.SingleButtonCallback() {
 							@Override
 							public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
@@ -720,6 +720,10 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 							}
 						})
 						.showAndGetStatus(MobileNetworkWarningDialog.ActionType.DOWNLOAD_VIDEO);
+
+				if (!warningDialogDisplayed) {
+					youTubeVideo.downloadVideo(getContext());
+				}
 				return true;
 
             case R.id.block_channel:
