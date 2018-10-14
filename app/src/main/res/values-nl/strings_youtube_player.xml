@@ -37,4 +37,8 @@
 
 	<string name="should_resume">Wil je verdergaan waar je was gebleven?</string>
 	<string name="resume">Hervatten</string>
-</resources>
+<string name="mobile_data">Mobiel internet</string>
+	<string name="warning_mobile_network_play">Je apparaat is niet verbonden met een Wi-Fi-netwerk. Om te voorkomen dat je extra moet betalen voor gebruik van mobiel internet, raden wij aan te verbinden met een Wi-Fi-netwerk. Wil je de video tóch afspelen\?</string>
+	<string name="warning_mobile_network_disable">Niet opnieuw vragen.</string>
+	<string name="play_video">Video afspelen</string>
+	</resources>
