@@ -139,10 +139,13 @@
 	<string name="input_channel_url">Kanalnettadressen som hvitlistes:</string>
 	<string name="pref_import_export_category">Import/eksport</string>
 	<string name="pref_category_downloads">Nedlastinger</string>
-	<string name="pref_title_download_to_separate_directories">Last ned videoer i egne mapper</string>
-	<string name="pref_summary_download_to_separate_directories">Videoer lagres i egne mapperbasert etter kanalnavn.</string>
+	<string name="pref_title_download_to_separate_directories">Last ned videoer i mapper</string>
+	<string name="pref_summary_download_to_separate_directories">Videoer lagres i egne mapper etter kanalnavn.</string>
 
 	<string name="pref_title_disable_screen_gestures">Skru av videohåndvendinger.</string>
 	<string name="pref_summary_disable_screen_gestures">Skru av lydstyrke, lysstyrke og blafringshåndvendinger forover/bakover for video.</string>
+
+	<string name="pref_title_warn_mobile_downloads">Vis mobilnettverksadvarsel</string>
+	<string name="pref_summary_warn_mobile_downloads">Vis en advarsel hvis det brukes et mobilnettverk (som 4G) før nedlasting/strømming av videoer.</string>
 
 	</resources>
