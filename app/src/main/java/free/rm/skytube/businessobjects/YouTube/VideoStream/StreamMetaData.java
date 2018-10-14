@@ -34,15 +34,6 @@ public class StreamMetaData {
 	/** Video format (e.g. MPEG-4) */
 	private MediaFormat format;
 
-	private static final String TAG = StreamMetaData.class.getSimpleName();
-
-
-//	public StreamMetaData(String url, int itag) {
-//		setUri(url);
-//		setMediaFormat(itag);
-//		setResolution(itag);
-//	}
-
 
 	public StreamMetaData(VideoStream videoStream) {
 		setUri(videoStream.url);
@@ -98,6 +89,7 @@ public class StreamMetaData {
 
 		str.append("RESOLUTION:  ");
 		str.append(resolution);
+		str.append('\n');
 
 		return str.toString();
 	}

@@ -34,16 +34,16 @@ public class StreamMetaDataList extends ArrayList<StreamMetaData> {
 	private static final String TAG = StreamMetaDataList.class.getSimpleName();
 
 
-	public StreamMetaDataList() {
+	StreamMetaDataList() {
 	}
 
 
-	public StreamMetaDataList(int errorMessageId) {
+	StreamMetaDataList(int errorMessageId) {
 		this.errorMessage = SkyTubeApp.getStr(errorMessageId);
 	}
 
 
-	public StreamMetaDataList(String errorMessage) {
+	StreamMetaDataList(String errorMessage) {
 		this.errorMessage = errorMessage;
 	}
 
@@ -61,7 +61,6 @@ public class StreamMetaDataList extends ArrayList<StreamMetaData> {
 		Log.d(TAG, "Desired Video Res:  " + desiredVideoRes);
 		return getDesiredStream(desiredVideoRes);
 	}
-
 
 
 	/**
@@ -86,7 +85,6 @@ public class StreamMetaDataList extends ArrayList<StreamMetaData> {
 	}
 
 
-
 	/**
 	 * Gets the desired video resolution as defined by the user in the app preferences.
 	 *
@@ -101,14 +99,13 @@ public class StreamMetaDataList extends ArrayList<StreamMetaData> {
 	}
 
 
-
 	@Override
 	public String toString() {
 		StringBuilder out = new StringBuilder();
 
 		for (StreamMetaData streamMetaData : this) {
 			out.append(streamMetaData.toString());
-			out.append('\n');
+			out.append("-----------------\n");
 		}
 
 		return out.toString();
