@@ -504,9 +504,9 @@
 	<string name="pref_youtube_api_key_custom">Key is valid. Restart app to use the new YouTube API key.</string>
 	<string name="pref_youtube_api_key_default">Restart app to switch back to default YouTube API key.</string>
 
-	<string name="pref_key_allow_mobile_downloads" translatable="false">pref_allow_mobile_downloads_key</string>
-	<string name="pref_title_allow_mobile_downloads">Allow downloads on mobile networks</string>
-	<string name="pref_summary_allow_mobile_downloads">Select this to enable downloading videos on mobile networks. Otherwise, videos can only be downloaded on Wi-Fi.</string>
+	<string name="pref_key_warn_mobile_downloads" translatable="false">pref_key_warn_mobile_downloads</string>
+	<string name="pref_title_warn_mobile_downloads">Display Mobile Network Warning</string>
+	<string name="pref_summary_warn_mobile_downloads">Display a warning if you are using mobile network (such as 4G) before downloading/streaming videos.</string>
 
 	<string name="restart">Restart</string>
 	<string name="pref_key_subscriptions_alphabetical_order" translatable="false">pref_key_subscriptions_alphabetical_order</string>

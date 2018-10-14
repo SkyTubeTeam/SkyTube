@@ -9,8 +9,6 @@
 	<string name="no_downloaded_videos_text">Non hai ancora scaricato alcun video. 
 \n 
 \nQuando l\'avrai fatto, saranno mostrati qui.</string>
-	<string name="downloads_disabled_warning">Lo scaricamento dei video è disattivato perchè non stai usando il Wi-Fi.
-\nPer attivarlo, vai in Impostazioni &gt; Altro e seleziona \'Permetti download su reti mobili\'</string>
 	<string name="playing_video_file_missing">Il download per questo video non è stato trovato. Riproduzione da remoto.</string>
 	<string name="external_storage_not_available">Impossibile scaricare il file poiché l\'archiviazione esterna non è disponibile.</string>
 <string name="download">Download</string>

@@ -9,9 +9,6 @@
 	<string name="no_downloaded_videos_text">Niste preuzeli nijedan video.
 \n
 \nkada preuzmete, pojavit će se ovdje.</string>
-	<string name="downloads_disabled_warning">Preuzimanje videozapisa je onemogućeno jer ne koristite Wi-Fi.
-\n
-\nDa ga omogućite, molimo vas odi te Postavke &gt; Ostalo i označite \'Dopusti preuzimanje preko mobilne mreže\'</string>
 	<string name="playing_video_file_missing">Preuzeti videozapis nije nađen.</string>
 	<string name="external_storage_not_available">Nije moguće preuzeti datoteku jer vanjska pohrana nije dostupna.</string>
 </resources>

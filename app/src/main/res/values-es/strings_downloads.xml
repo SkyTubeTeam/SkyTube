@@ -9,8 +9,6 @@
 	<string name="no_downloaded_videos_text">Todavía no has descargado videos.
 \n
 \nCuando lo hagas, aparecerán aquí.</string>
-	<string name="downloads_disabled_warning">Descargar videos está desactivado si no usas conexión wifi.
-\nPara activarlo, ve a preferencias, otros, y selecciona \"permitir descargas en redes móviles\'</string>
 	<string name="playing_video_file_missing">No encuentro la descarga de este video, Reproduciendo de internet.</string>
 	<string name="external_storage_not_available">No puedo descargar el video porque el almacenamiento externo no está disponible.</string>
 <string name="download">Descargar</string>

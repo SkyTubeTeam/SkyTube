@@ -19,7 +19,7 @@ package free.rm.skytube.gui.businessobjects.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
@@ -29,6 +29,8 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
@@ -40,6 +42,7 @@ import free.rm.skytube.businessobjects.db.Tasks.IsVideoBookmarkedTask;
 import free.rm.skytube.businessobjects.db.Tasks.IsVideoWatchedTask;
 import free.rm.skytube.gui.activities.ThumbnailViewerActivity;
 import free.rm.skytube.gui.businessobjects.MainActivityListener;
+import free.rm.skytube.gui.businessobjects.MobileNetworkWarningDialog;
 import free.rm.skytube.gui.businessobjects.YouTubePlayer;
 
 /**
@@ -197,11 +200,6 @@ class GridViewHolder extends RecyclerView.ViewHolder {
 			popupMenu.getMenu().findItem(R.id.download_video).setVisible(false);
 		} else {
 			popupMenu.getMenu().findItem(R.id.delete_download).setVisible(false);
-			boolean allowDownloadsOnMobile = SkyTubeApp.getPreferenceManager().getBoolean(SkyTubeApp.getStr(R.string.pref_key_allow_mobile_downloads), false);
-			if(SkyTubeApp.isConnectedToWiFi() || (SkyTubeApp.isConnectedToMobile() && allowDownloadsOnMobile))
-				popupMenu.getMenu().findItem(R.id.download_video).setVisible(true);
-			else
-				popupMenu.getMenu().findItem(R.id.download_video).setVisible(false);
 		}
 		popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
 			@Override
@@ -239,7 +237,14 @@ class GridViewHolder extends RecyclerView.ViewHolder {
 						youTubeVideo.removeDownload();
 						return true;
 					case R.id.download_video:
-						youTubeVideo.downloadVideo(context);
+						new MobileNetworkWarningDialog(view.getContext())
+								.onPositive(new MaterialDialog.SingleButtonCallback() {
+									@Override
+									public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+										youTubeVideo.downloadVideo(context);
+									}
+								})
+								.showAndGetStatus(MobileNetworkWarningDialog.ActionType.DOWNLOAD_VIDEO);
 						return true;
 					case R.id.block_channel:
 						youTubeVideo.getChannel().blockChannel();

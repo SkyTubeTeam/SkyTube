@@ -69,8 +69,6 @@
 	<string name="pref_youtube_api_key_custom">金鑰有效。重新啟動應用程式，以使用新的 YouTube API 金鑰。</string>
 	<string name="pref_youtube_api_key_default">重新啟動應用程式以切換回預設的 YouTube API 金鑰。</string>
 
-	<string name="pref_title_allow_mobile_downloads">允許在行動網路上下載</string>
-	<string name="pref_summary_allow_mobile_downloads">選擇此項以啟用在行動網路上下載影片，否則影片只能在 Wi-Fi 上下載。</string>
 
 	<string name="pref_title_disable_search_history">停用搜尋歷史記錄</string>
 	<string name="pref_summary_disable_search_history">如果選取，搜尋歷史記錄將被清除，並且不會被使用。</string>

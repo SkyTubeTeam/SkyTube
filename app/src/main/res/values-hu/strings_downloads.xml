@@ -9,8 +9,6 @@
 	<string name="no_downloaded_videos_text">Még nem töltött le egyetlen videót sem.
 \n
 \nMiután megteszi, itt fog megjelenni.</string>
-	<string name="downloads_disabled_warning">"Videó letöltés ki lett kapcsolva, mivel nem Wi-Fi-t használ.
-\nBekapcsolásához, kérem menjen a Beállítások  &gt; Egyebek és kattintson az \'Letöltés engedélyezése mobil hálózatokon\'-ra"</string>
 	<string name="playing_video_file_missing">A letöltött videó fájl nem található. Lejátszás közvetlenül a hálózatról.</string>
 	<string name="external_storage_not_available">Nem lehet letölteni a fájlt, mivel a külső tároló eszköz nem elérhető.</string>
 </resources>

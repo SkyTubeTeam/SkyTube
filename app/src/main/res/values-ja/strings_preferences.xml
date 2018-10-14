@@ -81,8 +81,6 @@
 	<string name="pref_youtube_api_key_custom">キーは有効です。アプリを再起動して、新しい YouTube API キーを使用してください。</string>
 	<string name="pref_youtube_api_key_default">デフォルトの YouTube API キーに切り替えるにはアプリを再起動してください。</string>
 
-	<string name="pref_title_allow_mobile_downloads">モバイルネットワークでダウンロードを許可する</string>
-	<string name="pref_summary_allow_mobile_downloads">モバイルネットワークでビデオのダウンロードを有効にする場合に選択します。それ以外の場合は、ビデオは Wi-Fi でのみダウンロードできます。</string>
 
 	<string name="restart">再起動</string>
 

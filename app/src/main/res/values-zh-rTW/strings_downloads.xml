@@ -8,8 +8,6 @@
 	<string name="no_downloaded_videos_text">您還沒有下載任何影片。
 \n
 \n一旦您做了，他們就會出現在這裡。</string>
-	<string name="downloads_disabled_warning">由於您未使用 Wi-Fi，影片下載功能被停用。
-\n要啟用它，請移到偏好 &gt; 其它，然後勾選「允許在行動網路上下載」</string>
 	<string name="playing_video_file_missing">未找到該影片的下載。遠端播放。</string>
 	<string name="external_storage_not_available">無法下載該檔案，因為外部存儲空間不能使用。</string>
 <string name="download">下載</string>

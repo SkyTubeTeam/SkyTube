@@ -19,8 +19,6 @@ import free.rm.skytube.gui.businessobjects.fragments.OrderableVideosGridFragment
 public class DownloadedVideosFragment extends OrderableVideosGridFragment implements DownloadedVideosDb.DownloadedVideosListener {
 	@BindView(R.id.noDownloadedVideosText)
 	View noDownloadedVideosText;
-	@BindView(R.id.downloadsDisabledWarning)
-	View downloadsDisabledWarning;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -34,28 +32,8 @@ public class DownloadedVideosFragment extends OrderableVideosGridFragment implem
 		super.onViewCreated(view, savedInstanceState);
 		swipeRefreshLayout.setEnabled(false);
 		populateList();
-		displayDownloadsDisabledWarning();
 	}
 
-
-	@Override
-	public void onFragmentSelected() {
-		super.onFragmentSelected();
-		displayDownloadsDisabledWarning();
-	}
-
-
-	/**
-	 * If the user is using mobile network (e.g. 4G) and the preferences setting was not ticked to
-	 * allow downloading functionality over the mobile data, then inform the user by displaying the
-	 * warning;  else hide such warning.
-	 */
-	private void displayDownloadsDisabledWarning() {
-		if (downloadsDisabledWarning != null) {
-			boolean allowDownloadsOnMobile = SkyTubeApp.getPreferenceManager().getBoolean(SkyTubeApp.getStr(R.string.pref_key_allow_mobile_downloads), false);
-			downloadsDisabledWarning.setVisibility(SkyTubeApp.isConnectedToMobile() && !allowDownloadsOnMobile ? View.VISIBLE : View.GONE);
-		}
-	}
 
 	@Override
 	protected int getLayoutResource() {

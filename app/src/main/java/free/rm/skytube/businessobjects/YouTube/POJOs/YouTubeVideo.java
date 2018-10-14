@@ -509,20 +509,9 @@ public class YouTubeVideo implements Serializable {
 						.setOutputDirectoryName(getChannelName())
 						.setOutputFileExtension("mp4")
 						.setAllowedOverRoaming(false)
-						.setAllowedNetworkTypesFlags(getAllowedNetworkTypesFlags())
+						.setAllowedNetworkTypesFlags(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE)
 						.displayPermissionsActivity(context);
 			}
-
-
-			private int getAllowedNetworkTypesFlags() {
-				boolean allowDownloadsOnMobile = SkyTubeApp.getPreferenceManager().getBoolean(getStr(R.string.pref_key_allow_mobile_downloads), false);
-				int flags = DownloadManager.Request.NETWORK_WIFI;
-				if (allowDownloadsOnMobile)
-					flags = flags | DownloadManager.Request.NETWORK_MOBILE;
-
-				return flags;
-			}
-
 
 			@Override
 			public void onGetDesiredStreamError(String errorMessage) {

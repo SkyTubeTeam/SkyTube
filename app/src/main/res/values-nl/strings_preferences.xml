@@ -81,8 +81,6 @@
 		<item>24 Hours</item>
 	</string-array>
 
-	<string name="pref_title_allow_mobile_downloads">Downloads toestaan over mobiele netwerkverbinding</string>
-	<string name="pref_summary_allow_mobile_downloads">Kies dit om downloaden over mobiele netwerkverbindingen in te schakelen i.p.v. alleen over Wi-Fi.</string>
 
 	<string name="pref_title_disable_search_history">Zoekgeschiedenis uitschakelen</string>
 	<string name="pref_summary_disable_search_history">Als dit wordt aangevinkt, dan wordt de zoekgeschiedenis gewist en niet gebruikt.</string>

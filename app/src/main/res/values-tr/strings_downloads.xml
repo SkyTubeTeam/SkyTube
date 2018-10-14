@@ -9,8 +9,6 @@
 	<string name="no_downloaded_videos_text">Henüz hiç video indirmediniz.
 \n
 \nBunu yaptıktan sonra, burada görünecekler.</string>
-	<string name="downloads_disabled_warning">Wi-Fi kullanmıyorken video indirme devre dışı bırakıldı.
-\nEtkinleştirmek için, lütfen Tercihler &gt; Diğerleri bölümüne gidin ve \'Mobil Ağlarda indirmelere izin ver\' seçeneğini seçin</string>
 	<string name="playing_video_file_missing">Bu video için indirme bulunamadı. Uzaktan oynatılıyor.</string>
 	<string name="external_storage_not_available">Dosya harici depolama alanı olarak indirilemiyor.</string>
 </resources>

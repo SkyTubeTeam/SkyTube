@@ -85,8 +85,6 @@
 	</string-array>
 
 
-	<string name="pref_title_allow_mobile_downloads">Downloads in Mobilfunknetzen zulassen</string>
-	<string name="pref_summary_allow_mobile_downloads">Wählen Sie diese Option, um das Herunterladen von Videos in Mobilfunknetzen zu ermöglichen. Ansonsten können Videos nur über WLAN heruntergeladen werden.</string>
 <string name="pref_title_choose_player">Videoplayer</string>
 	<string name="pref_summary_choose_player">Zu verwendender Videoplayer: %s</string>
 	<string name="pref_title_subscriptions_alphabetical_order">Kanäle alphabetisch sortieren</string>

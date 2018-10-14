@@ -9,8 +9,6 @@
 	<string name="no_downloaded_videos_text">Vous n\'avez pas encore téléchargé de vidéos.
 \n
 \nUne fois que vous l\'aurez fait, elles apparaîtront ici.</string>
-	<string name="downloads_disabled_warning">Le téléchargement vidéo est désactivé car vous n\'utilisez pas le Wi-Fi.
-\nPour l\'activer, allez dans Préférences &gt; Autres et cochez \"Autoriser les téléchargements sur les réseaux mobiles\"</string>
 	<string name="playing_video_file_missing">Impossible de lire la vidéo téléchargée. Lecture en ligne.</string>
 	<string name="external_storage_not_available">Impossible de télécharger le fichier car le stockage externe n\'est pas disponible.</string>
 <string name="download">Téléchargement</string>

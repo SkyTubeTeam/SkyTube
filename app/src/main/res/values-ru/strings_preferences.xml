@@ -81,8 +81,6 @@
 		<item>24 Hours</item>
 	</string-array>
 
-	<string name="pref_title_allow_mobile_downloads">Позволить загружать с мобильной сетью</string>
-	<string name="pref_summary_allow_mobile_downloads">Выберите это, чтобы включить загрузку видео в мобильной сети. В противном случае видео можно загружать только в Wi-Fi.</string>
 <string name="pref_title_choose_player">Видео плеер</string>
 	<string name="pref_summary_choose_player">Будет использоваться этот видео плеер: %s</string>
 	<string name="pref_title_disable_search_history">Отключить историю поиска</string>
