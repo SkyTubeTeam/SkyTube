@@ -37,4 +37,8 @@
 
 	<string name="should_resume">Вы хотите начать с того места, где вы остановились?</string>
 	<string name="resume">Возобновить</string>
-</resources>
+<string name="mobile_data">Мобильные данные</string>
+	<string name="warning_mobile_network_play">Устройство не подключено к Wi-Fi сети. Мы советуем всё же подключиться к ней, чтобы ограничить передачу мобильных данных. Продолжить проигрывать видео без подключения Wi-Fi\?</string>
+	<string name="warning_mobile_network_disable">Больше не спрашивать.</string>
+	<string name="play_video">Проиграть видео</string>
+	</resources>
