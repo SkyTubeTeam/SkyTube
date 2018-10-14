@@ -138,7 +138,13 @@
 	<string name="preferred_region_updated">Выбран новый регион. Перезапустите приложение, чтобы изменение вступило в силу.</string>
 
 	<string name="pref_category_downloads">Загрузки</string>
-	<string name="pref_title_download_to_separate_directories">Загрузить видеоролики в отдельные директории</string>
+	<string name="pref_title_download_to_separate_directories">Загружать видеоролики в отдельные директории</string>
 	<string name="pref_summary_download_to_separate_directories">Видеоролики загружаются в отдельные папки с названием канала.</string>
+
+	<string name="pref_title_disable_screen_gestures">Отключить жесты при управлении видео</string>
+	<string name="pref_summary_disable_screen_gestures">Отключить жесты для управления громкостью, яркостью и перемоткой видеоролика.</string>
+
+	<string name="pref_title_warn_mobile_downloads">Отключить предупреждения мобильной сети</string>
+	<string name="pref_summary_warn_mobile_downloads">Предупреждать, что используется мобильная сеть (4G), перед тем, как скачать или воспроизвести видео.</string>
 
 	</resources>

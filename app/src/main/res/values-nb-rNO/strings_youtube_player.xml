@@ -37,4 +37,8 @@
 
 	<string name="should_resume">Ønsker du å fortsette der du slapp?</string>
 	<string name="resume">Fortsett</string>
-</resources>
+<string name="mobile_data">Mobildata</string>
+	<string name="warning_mobile_network_play">Enheten din er ikke tilknyttet et Wi-Fi -nettverk. For å unngå ekstra kostnader anbefales det å koble til et Wi-Fi -nettverk. Spill video uansett\?</string>
+	<string name="warning_mobile_network_disable">Aldri spør igjen.</string>
+	<string name="play_video">Spill video</string>
+	</resources>
