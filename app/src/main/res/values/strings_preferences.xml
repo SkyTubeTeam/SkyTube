@@ -225,7 +225,7 @@
 		<item>iw</item>
 		<item>ur</item>
 		<item>ar</item>
-		<item>fa</item>
+		<item>fa(?:-IR)?"</item>	<!-- "fa" or "fa-IR" -->
 		<item>ne</item>
 		<item>mr</item>
 		<item>hi</item>
