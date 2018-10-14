@@ -67,12 +67,12 @@ import free.rm.skytube.gui.businessobjects.views.SubscribeButton;
 import hollowsoft.slidingdrawer.OnDrawerOpenListener;
 import hollowsoft.slidingdrawer.SlidingDrawer;
 
+import static free.rm.skytube.gui.activities.YouTubePlayerActivity.YOUTUBE_VIDEO_OBJ;
+
 /**
  * A fragment that holds a standalone YouTube player.
  */
-public class YouTubePlayerFragment extends ImmersiveModeFragment implements MediaPlayer.OnPreparedListener, YouTubeVideoListener, YouTubePlayerFragmentInterface {
-
-	public static final String YOUTUBE_VIDEO_OBJ = "YouTubePlayerFragment.yt_video_obj";
+public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements MediaPlayer.OnPreparedListener, YouTubeVideoListener, YouTubePlayerFragmentInterface {
 
 	private YouTubeVideo		    youTubeVideo = null;
 	private YouTubeChannel		    youTubeChannel = null;
@@ -122,8 +122,8 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 	/** Timeout (in milliseconds) before the navigation bar is hidden (which will occur only after
 	 * the HUD is hidden). */
 	private static final int NAVBAR_VISIBILITY_TIMEOUT = 500;
-	private static final String VIDEO_CURRENT_POSITION = "YouTubePlayerFragment.VideoCurrentPosition";
-	private static final String TAG = YouTubePlayerFragment.class.getSimpleName();
+	private static final String VIDEO_CURRENT_POSITION = "YouTubePlayerV1Fragment.VideoCurrentPosition";
+	private static final String TAG = YouTubePlayerV1Fragment.class.getSimpleName();
 
 	private static final int MAX_VIDEO_STEP_TIME = 60 * 1000;
 	private static final int MAX_BRIGHTNESS = 100;
@@ -135,7 +135,7 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 		hideNavigationBar();
 
 		// inflate the layout for this fragment
-		View view = inflater.inflate(R.layout.fragment_youtube_player, container, false);
+		View view = inflater.inflate(R.layout.fragment_youtube_player_v1, container, false);
 
 		// indicate that this fragment has an action bar menu
 		setHasOptionsMenu(true);
@@ -437,9 +437,9 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 		new GetYouTubeChannelInfoTask(getContext(), new YouTubeChannelInterface() {
 			@Override
 			public void onGetYouTubeChannel(YouTubeChannel youTubeChannel) {
-				YouTubePlayerFragment.this.youTubeChannel = youTubeChannel;
+				YouTubePlayerV1Fragment.this.youTubeChannel = youTubeChannel;
 
-				videoDescSubscribeButton.setChannel(YouTubePlayerFragment.this.youTubeChannel);
+				videoDescSubscribeButton.setChannel(YouTubePlayerV1Fragment.this.youTubeChannel);
 				if (youTubeChannel != null) {
 					if(getActivity() != null)
 						Glide.with(getActivity())
@@ -481,7 +481,7 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 			@Override
 			public void loadVideo(int position) {
 				videoCurrentPosition = position;
-				YouTubePlayerFragment.this.loadVideo();
+				YouTubePlayerV1Fragment.this.loadVideo();
 			}
 		}).ask();
 	}
@@ -529,6 +529,7 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 		float brightnessLevel = lp.screenBrightness;
 		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
 		sp.edit().putFloat(getString(R.string.pref_key_brightness_level), brightnessLevel).apply();
+		Logger.d(this, "BRIGHTNESS: %f", brightnessLevel);
 	}
 
 	private void setBrightness(float level) {
@@ -782,7 +783,7 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 								Toast.LENGTH_LONG).show();
 						loadVideo();
 					} else {
-						Logger.i(YouTubePlayerFragment.this, ">> PLAYING LOCALLY: %s", uri);
+						Logger.i(YouTubePlayerV1Fragment.this, ">> PLAYING LOCALLY: %s", uri);
 						videoView.setVideoURI(uri);
 					}
 				} else {
@@ -790,7 +791,7 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 						@Override
 						public void onGetDesiredStream(StreamMetaData desiredStream) {
 							// play the video
-							Logger.i(YouTubePlayerFragment.this, ">> PLAYING: %s", desiredStream.getUri());
+							Logger.i(YouTubePlayerV1Fragment.this, ">> PLAYING: %s", desiredStream.getUri());
 							videoView.setVideoURI(desiredStream.getUri());
 						}
 
@@ -864,7 +865,7 @@ public class YouTubePlayerFragment extends ImmersiveModeFragment implements Medi
 			// close the video player activity
 			closeActivity();
 		} else {
-			YouTubePlayerFragment.this.youTubeVideo = youTubeVideo;
+			YouTubePlayerV1Fragment.this.youTubeVideo = youTubeVideo;
 
 			// setup the HUD and play the video
 			setUpHUDAndPlayVideo();

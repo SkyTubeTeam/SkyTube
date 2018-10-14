@@ -5,7 +5,7 @@
              android:layout_width="match_parent"
              android:layout_height="match_parent"
              android:background="#000"
-             tools:context=".gui.fragments.YouTubePlayerFragment">
+             tools:context=".gui.fragments.YouTubePlayerV1Fragment">
 
 	<!-- Video Player -->
 	<com.google.android.exoplayer2.ui.PlayerView

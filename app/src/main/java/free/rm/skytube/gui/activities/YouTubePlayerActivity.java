@@ -31,13 +31,13 @@ import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.interfaces.YouTubePlayerFragmentInterface;
 import free.rm.skytube.gui.businessobjects.BackButtonActivity;
 import free.rm.skytube.gui.businessobjects.fragments.FragmentEx;
-import free.rm.skytube.gui.fragments.YouTubePlayerFragment;
+import free.rm.skytube.gui.fragments.YouTubePlayerV1Fragment;
 import free.rm.skytube.gui.fragments.YouTubePlayerTutorialFragment;
 import free.rm.skytube.gui.fragments.YouTubePlayerV2Fragment;
 
 /**
- * An {@link Activity} that contains an instance of
- * {@link free.rm.skytube.gui.fragments.YouTubePlayerFragment}.
+ * An {@link Activity} that contains an instance of either {@link YouTubePlayerV2Fragment} or
+ * {@link YouTubePlayerV1Fragment}.
  */
 public class YouTubePlayerActivity extends BackButtonActivity {
 
@@ -45,6 +45,7 @@ public class YouTubePlayerActivity extends BackButtonActivity {
 	private YouTubePlayerFragmentInterface fragmentListener;
 
 	private static final String TUTORIAL_COMPLETED = "YouTubePlayerActivity.TutorialCompleted";
+	public  static final String YOUTUBE_VIDEO_OBJ  = "YouTubePlayerActivity.video_object";
 
 
 	@Override
@@ -110,7 +111,7 @@ public class YouTubePlayerActivity extends BackButtonActivity {
 	 * @param useDefaultPlayer  True to use the default player; false to use the legacy one.
 	 */
 	private void installNewVideoPlayerFragment(boolean useDefaultPlayer) {
-		videoPlayerFragment = useDefaultPlayer ? new YouTubePlayerV2Fragment() : new YouTubePlayerFragment();
+		videoPlayerFragment = useDefaultPlayer ? new YouTubePlayerV2Fragment() : new YouTubePlayerV1Fragment();
 
 		try {
 			fragmentListener = (YouTubePlayerFragmentInterface) videoPlayerFragment;

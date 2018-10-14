@@ -96,6 +96,8 @@ import free.rm.skytube.gui.businessobjects.views.SubscribeButton;
 import hollowsoft.slidingdrawer.OnDrawerOpenListener;
 import hollowsoft.slidingdrawer.SlidingDrawer;
 
+import static free.rm.skytube.gui.activities.YouTubePlayerActivity.YOUTUBE_VIDEO_OBJ;
+
 /**
  * A fragment that holds a standalone YouTube player (version 2).
  */
@@ -128,8 +130,6 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 									noVideoCommentsView = null;
 	private CommentsAdapter         commentsAdapter = null;
 	private ExpandableListView      commentsExpandableListView = null;
-
-	public static final String YOUTUBE_VIDEO_OBJ = "YouTubePlayerFragment.yt_video_obj";
 
 
 	@Nullable
@@ -939,7 +939,9 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 		private float   brightness;
 		/** Initial video brightness. */
 		private float   initialBrightness;
-		private static final String SAVE_BRIGHTNESS_FLAG = "VideoBrightness.SAVE_BRIGHTNESS_FLAG";
+
+		private static final String BRIGHTNESS_LEVEL_PREF = SkyTubeApp.getStr(R.string.pref_key_brightness_level);
+
 
 		/**
 		 * Constructor:  load the previously saved video brightness from the preference and set it.
@@ -950,7 +952,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 			loadBrightnessFromPreference();
 			initialBrightness = brightness;
 
-			setVideoBrightness(brightness, activity);
+			setVideoBrightness(0, activity);
 		}
 
 
@@ -994,8 +996,9 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 		 */
 		private void saveBrightnessToPreference() {
 			SharedPreferences.Editor editor = SkyTubeApp.getPreferenceManager().edit();
-			editor.putFloat(SAVE_BRIGHTNESS_FLAG, brightness);
+			editor.putFloat(BRIGHTNESS_LEVEL_PREF, brightness);
 			editor.apply();
+			Logger.d(this, "BRIGHTNESS: %f", brightness);
 		}
 
 
@@ -1003,7 +1006,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 		 * Loads the brightness from preference and set the {@link #brightness} instance variable.
 		 */
 		private void loadBrightnessFromPreference() {
-			final float brightnessPref = SkyTubeApp.getPreferenceManager().getFloat(SAVE_BRIGHTNESS_FLAG, 1);
+			final float brightnessPref = SkyTubeApp.getPreferenceManager().getFloat(BRIGHTNESS_LEVEL_PREF, 1);
 			setBrightness(brightnessPref);
 		}
 
