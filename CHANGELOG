@@ -1,4 +1,4 @@
-vX.XX - XX XX XXXX:
+v2.92 - 14 Oct 2018:
 	* Added Android 9 (API 28) support.
 	* Video gestures can now be enabled/disabled.
 	* Users are now warned before downloading/streaming videos on mobile network (such as 4G).  This
