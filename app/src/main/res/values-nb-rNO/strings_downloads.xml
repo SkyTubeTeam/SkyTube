@@ -12,4 +12,5 @@
 	<string name="playing_video_file_missing">Nedlastningen for denne videoen ble ikke funnet. Spiller av av fra annensteds hen.</string>
 	<string name="external_storage_not_available">Kunne ikke laste ned fil som følge av at eksternt lagringsmedium ikke er tilgjengelig.</string>
 <string name="download">Last ned</string>
+	<string name="warning_mobile_network_download">Enheten din er ikke tilkoblet et Wi-Fi -nettverk. For å unngå potensielle ekstrakostnader, anbefales det å koble til et Wi-Fi -nettverk. Last ned video uansett\?</string>
 	</resources>
