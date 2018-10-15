@@ -115,10 +115,21 @@
 	<string name="pref_playback_status_cleared">Status reprodukcije je obrisan.</string>
 
 <string name="pref_category_downloads">Preuzimanja</string>
-	<string name="pref_title_download_to_separate_directories">Preuzmi videozapise u posebne direktorije</string>
-	<string name="pref_summary_download_to_separate_directories">Videozapisi se spremaju u zasebne mape na temelju naziva kanala.</string>
+	<string name="pref_title_download_to_separate_directories">Preuzmi videozapise u direktorije</string>
+	<string name="pref_summary_download_to_separate_directories">Videozapisi se spremaju u mape na temelju naziva kanala.</string>
 
 	<string name="pref_title_disable_screen_gestures">Onemogući video geste</string>
 	<string name="pref_summary_disable_screen_gestures">Onemogući glasnoću, svjetlinu i premotavanje unaprijed/unazad video geste.</string>
+
+	<string name="app_license">Copyright © 2015-2018 Ramon Mifsud
+\n 
+\nThis program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation (version 3 of the License).
+\n 
+\nThis program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+\n 
+\nYou should have received a copy of the GNU General Public License along with this program. If not, see &lt;http://www.gnu.org/licenses/&gt;</string>
+	<string name="pref_title_feed_notification">Automatska obavijest o kanalu</string>
+	<string name="pref_title_warn_mobile_downloads">Prikaži upozorenje mobilne mreže</string>
+	<string name="pref_summary_warn_mobile_downloads">Prikaži upozorenje prilikom korištenja mobilne mreže (kao što je 4G) prije preuzimanja/stremanja videozapisa.</string>
 
 	</resources>
