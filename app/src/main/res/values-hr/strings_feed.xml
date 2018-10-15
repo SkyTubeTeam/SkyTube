@@ -11,7 +11,7 @@
 	<string name="no_subscriptions_text">Nisi pretplaćen na nijedan kanal.
 \n
 \nKada se pretplatite, svi preneseni videozapisi na pretplaćenim kanalima će se pojaviti ovdje.</string>
-	<string name="import_subscriptions_from_youtube">Uvoz preplata sa YouTube</string>
+	<string name="import_subscriptions_from_youtube">Uvoz pretplata sa YouTube</string>
 
 	<string name="notification_channel_feed_title">Obavijesti o pretplatama</string>
 	<string name="notification_new_videos_found">%d novih videozapisa sa pretplaćenih kanala</string>
