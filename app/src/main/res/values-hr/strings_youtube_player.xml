@@ -37,4 +37,8 @@
 
 	<string name="should_resume">Želite li nastaviti s mjesta na kojem ste prestali?</string>
 	<string name="resume">Nastavi</string>
-</resources>
+<string name="mobile_data">Mobilni podaci</string>
+	<string name="warning_mobile_network_play">Vaš uređaj nije povezan sa Wi-Fi mrežom. Da biste izbjegli potrošnju podataka, preporučujemo vam da se povežete na Wi-Fi mrežu. Reproduciraj videozapis\?</string>
+	<string name="warning_mobile_network_disable">Ne pitaj više.</string>
+	<string name="play_video">Reproduciraj videozapis</string>
+	</resources>
