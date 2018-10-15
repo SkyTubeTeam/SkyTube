@@ -54,8 +54,6 @@
 	<string name="pref_youtube_api_key_custom">Ključ ispravan. Ponovo pokrenite aplikaciju da biste upotrebljavali novi ključ API-ja YouTubea.</string>
 	<string name="pref_youtube_api_key_default">Ponovo pokrenite aplikaciju da biste se vratili na zadani ključ API-ja YouTubea.</string>
 
-	<string name="pref_title_allow_mobile_downloads">Dopusti preuzimanje na mobilnoj mreži</string>
-	<string name="pref_summary_allow_mobile_downloads">Odaberi ovo kako bi omogućili preuzimanje videozapisa preko mobilne mreže. U suprotnom, videozapisi je moguće preuzeti samo preko Wi-Fi.</string>
 
 	<string name="restart">Ponovno pokreni</string>
 	<string name="pref_title_subscriptions_alphabetical_order">Poredaj kanale prema abecedi</string>
@@ -119,5 +117,8 @@
 <string name="pref_category_downloads">Preuzimanja</string>
 	<string name="pref_title_download_to_separate_directories">Preuzmi videozapise u posebne direktorije</string>
 	<string name="pref_summary_download_to_separate_directories">Videozapisi se spremaju u zasebne mape na temelju naziva kanala.</string>
+
+	<string name="pref_title_disable_screen_gestures">Onemogući video geste</string>
+	<string name="pref_summary_disable_screen_gestures">Onemogući glasnoću, svjetlinu i premotavanje unaprijed/unazad video geste.</string>
 
 	</resources>

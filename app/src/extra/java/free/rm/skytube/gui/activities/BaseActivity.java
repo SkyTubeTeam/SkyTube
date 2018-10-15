@@ -68,7 +68,7 @@ import free.rm.skytube.gui.businessobjects.MainActivityListener;
 import free.rm.skytube.gui.businessobjects.YouTubeVideoListener;
 import free.rm.skytube.gui.fragments.ChromecastControllerFragment;
 import free.rm.skytube.gui.fragments.ChromecastMiniControllerFragment;
-import free.rm.skytube.gui.fragments.YouTubePlayerFragment;
+import free.rm.skytube.gui.fragments.YouTubePlayerV1Fragment;
 
 /**
  * Base Activity class that handles all Chromecast-related functionality. Any Activity that needs to use the Cast Icon and
@@ -208,7 +208,7 @@ public abstract class BaseActivity extends AppCompatActivity implements MainActi
 					externalPlayIntent = intent;
 				} else {
 					if (SkyTubeApp.getInstance().connectedToChromecast) {
-						new GetVideoDetailsTask(YouTubePlayerFragment.getUrlFromIntent(intent), new YouTubeVideoListener() {
+						new GetVideoDetailsTask(YouTubePlayerV1Fragment.getUrlFromIntent(intent), new YouTubeVideoListener() {
 							@Override
 							public void onYouTubeVideo(String videoUrl, YouTubeVideo video) {
 								playVideoOnChromecast(video, 0);

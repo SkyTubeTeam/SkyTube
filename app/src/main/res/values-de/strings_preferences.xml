@@ -85,8 +85,6 @@
 	</string-array>
 
 
-	<string name="pref_title_allow_mobile_downloads">Downloads in Mobilfunknetzen zulassen</string>
-	<string name="pref_summary_allow_mobile_downloads">Wählen Sie diese Option, um das Herunterladen von Videos in Mobilfunknetzen zu ermöglichen. Ansonsten können Videos nur über WLAN heruntergeladen werden.</string>
 <string name="pref_title_choose_player">Videoplayer</string>
 	<string name="pref_summary_choose_player">Zu verwendender Videoplayer: %s</string>
 	<string name="pref_title_subscriptions_alphabetical_order">Kanäle alphabetisch sortieren</string>
@@ -143,5 +141,12 @@
 
 <string name="pref_import_export_category">Import/Export</string>
 	<string name="preferred_region_updated">Bevorzugte Region aktualisiert. Starten Sie die Anwendung neu, um die Änderungen zu übernehmen.</string>
+
+	<string name="pref_title_disable_screen_gestures">Videogesten deaktivieren</string>
+	<string name="pref_summary_disable_screen_gestures">Deaktivieren Sie die Video-Gesten für die Lautstärke, die Helligkeit und zum vorwärts/rückwärts Suchen.</string>
+
+	<string name="pref_category_downloads">Downloads</string>
+	<string name="pref_title_download_to_separate_directories">Lade Videos in unterschiedliche Ordner</string>
+	<string name="pref_summary_download_to_separate_directories">Videos werden anhand der Kanalnamen in unterschiedliche Ordner gespeichert.</string>
 
 	</resources>

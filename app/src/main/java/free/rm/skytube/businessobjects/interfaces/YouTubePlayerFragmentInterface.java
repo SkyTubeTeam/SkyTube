@@ -3,9 +3,10 @@ package free.rm.skytube.businessobjects.interfaces;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 
 /**
- * Interface used by {@link free.rm.skytube.gui.fragments.YouTubePlayerFragment} & {@link free.rm.skytube.gui.fragments.YouTubePlayerV2Fragment}
+ * Interface used by {@link free.rm.skytube.gui.fragments.YouTubePlayerV1Fragment} & {@link free.rm.skytube.gui.fragments.YouTubePlayerV2Fragment}
  * Also, when a video is playing on a Chromecast, and the user disconnects from the Chromecast, that video will begin playing on the device.
  */
+
 public interface YouTubePlayerFragmentInterface {
 	void videoPlaybackStopped();
 

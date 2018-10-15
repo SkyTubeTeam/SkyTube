@@ -9,9 +9,8 @@
 	<string name="no_downloaded_videos_text">Вы ещё не загрузили ни одного видео.
 \n
 \nКак только вы это сделаете, они появятся тут.</string>
-	<string name="downloads_disabled_warning">"Загрузка видео выключена, так как вы не используете Wi-Fi.
-\nЧтобы включить, пожалуйста, пройдите в  Настройки &gt; Другое и включите \'Позволить загрузку в мобильной сети\'"</string>
 	<string name="playing_video_file_missing">Загрузка для этого видео не найдена. Проигрывается удалённо.</string>
 	<string name="external_storage_not_available">Нет возможности скачать файл, так как внешний накопитель недоступен.</string>
 <string name="download">Загрузка</string>
+	<string name="warning_mobile_network_download">Устройство не подключено к Wi-Fi сети. Мы советуем всё же подключиться к ней, чтобы ограничить передачу мобильных данных. Продолжить загрузку видео без Wi-Fi\?</string>
 	</resources>

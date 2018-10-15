@@ -4,7 +4,7 @@
 			 android:layout_width="match_parent"
 			 android:layout_height="match_parent"
 			 android:background="#000"
-			 tools:context=".gui.fragments.YouTubePlayerFragment">
+			 tools:context=".gui.fragments.YouTubePlayerV1Fragment">
 
 	<VideoView android:id="@+id/video_view"
 			   android:layout_width="match_parent"

@@ -81,8 +81,6 @@
 		<item>24 Hours</item>
 	</string-array>
 
-	<string name="pref_title_allow_mobile_downloads">Tillat nedlastinger på mobilnettverk</string>
-	<string name="pref_summary_allow_mobile_downloads">Velg dette for å skru på nedlasting av videoer på mobilnettverk. Ellers kan videoer kun lastes ned på Wi-Fi.</string>
 
 	<string name="pref_title_disable_search_history">Skru av søkehistorikk</string>
 	<string name="pref_summary_disable_search_history">Hvis merket, vil søkehistorikken bli tømt og ikke brukt.</string>
@@ -141,8 +139,13 @@
 	<string name="input_channel_url">Kanalnettadressen som hvitlistes:</string>
 	<string name="pref_import_export_category">Import/eksport</string>
 	<string name="pref_category_downloads">Nedlastinger</string>
-	<string name="pref_title_download_to_separate_directories">Last ned videoer i egne mapper</string>
-	<string name="pref_summary_download_to_separate_directories">Videoer lagres i egne mapperbasert etter kanalnavn.</string>
+	<string name="pref_title_download_to_separate_directories">Last ned videoer i mapper</string>
+	<string name="pref_summary_download_to_separate_directories">Videoer lagres i egne mapper etter kanalnavn.</string>
 
 	<string name="pref_title_disable_screen_gestures">Skru av videohåndvendinger.</string>
+	<string name="pref_summary_disable_screen_gestures">Skru av lydstyrke, lysstyrke og blafringshåndvendinger forover/bakover for video.</string>
+
+	<string name="pref_title_warn_mobile_downloads">Vis mobilnettverksadvarsel</string>
+	<string name="pref_summary_warn_mobile_downloads">Vis en advarsel hvis det brukes et mobilnettverk (som 4G) før nedlasting/strømming av videoer.</string>
+
 	</resources>

@@ -112,7 +112,14 @@ public class YouTubeVideo implements Serializable {
 	 * The date/time of when this video was published.
 	 */
 	private DateTime publishDate;
-	private String publishDatePretty;
+	/**
+	 * The video publish date in pretty format (e.g. "17 hours ago").
+	 */
+	private transient String publishDatePretty;
+	/**
+	 * The time when the publishDatePretty was calculated.
+	 */
+	private transient long publishDatePrettyCalculationTime;
 	/**
 	 * Thumbnail URL.
 	 */
@@ -133,9 +140,14 @@ public class YouTubeVideo implements Serializable {
 	 * Set to true if the video is a current live stream.
 	 */
 	private boolean isLiveStream;
+	
+	/** publishDate will remain valid for 1 hour. */
+	private final static long PUBLISH_DATE_VALIDITY_TIME = 60 * 60 * 1000L;
 
 
-
+	/**
+	 * Constructor.
+	 */
 	public YouTubeVideo(Video video) {
 		this.id = video.getId();
 
@@ -363,13 +375,19 @@ public class YouTubeVideo implements Serializable {
 	 */
 	private void setPublishDate(DateTime publishDate) {
 		this.publishDate = publishDate;
-		this.publishDatePretty = (publishDate != null) ? new PrettyTimeEx().format(publishDate) : "???";
+		this.publishDatePretty = null;
 	}
 
 	/**
 	 * Gets the {@link #publishDate} as a pretty string.
 	 */
 	public String getPublishDatePretty() {
+		long now = System.currentTimeMillis();
+		// if pretty is not yet calculated, or the publish date was generated more than (1 hour) PUBLISH_DATE_VALIDITY_TIME ago...
+		if (publishDatePretty == null || (PUBLISH_DATE_VALIDITY_TIME < now - publishDatePrettyCalculationTime)) {
+			this.publishDatePretty = (publishDate != null) ? new PrettyTimeEx().format(publishDate) : "???";
+			this.publishDatePrettyCalculationTime = now;
+		}
 		return publishDatePretty;
 	}
 
@@ -378,7 +396,8 @@ public class YouTubeVideo implements Serializable {
 	 * you to regenerate and reset the {@link #publishDatePretty}.
 	 */
 	public void forceRefreshPublishDatePretty() {
-		setPublishDate(publishDate);
+		// Will force the publishDatePretty to be regenerated.  Refer to getPublishDatePretty()
+		this.publishDatePretty = null;
 	}
 
 	public String getThumbnailUrl() {
@@ -512,20 +531,9 @@ public class YouTubeVideo implements Serializable {
 						.setOutputDirectoryName(getChannelName())
 						.setOutputFileExtension("mp4")
 						.setAllowedOverRoaming(false)
-						.setAllowedNetworkTypesFlags(getAllowedNetworkTypesFlags())
+						.setAllowedNetworkTypesFlags(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE)
 						.displayPermissionsActivity(context);
 			}
-
-
-			private int getAllowedNetworkTypesFlags() {
-				boolean allowDownloadsOnMobile = SkyTubeApp.getPreferenceManager().getBoolean(getStr(R.string.pref_key_allow_mobile_downloads), false);
-				int flags = DownloadManager.Request.NETWORK_WIFI;
-				if (allowDownloadsOnMobile)
-					flags = flags | DownloadManager.Request.NETWORK_MOBILE;
-
-				return flags;
-			}
-
 
 			@Override
 			public void onGetDesiredStreamError(String errorMessage) {

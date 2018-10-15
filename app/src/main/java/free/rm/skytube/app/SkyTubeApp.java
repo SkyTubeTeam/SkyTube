@@ -163,25 +163,6 @@ public class SkyTubeApp extends MultiDexApplication {
 		return getContext().getResources().getBoolean(R.bool.is_tablet);
 	}
 
-	/**
-	 * @return boolean determining if the device is connected via WiFi
-	 */
-	public static boolean isConnectedToWiFi() {
-		final ConnectivityManager connMgr = (ConnectivityManager)
-						getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-		final android.net.NetworkInfo wifi = connMgr.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-		return wifi != null && wifi.isConnectedOrConnecting();
-	}
-
-	/**
-	 * @return boolean determining if the device is connected via Mobile
-	 */
-	public static boolean isConnectedToMobile() {
-		final ConnectivityManager connMgr = (ConnectivityManager)
-						getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-		final android.net.NetworkInfo mobile = connMgr.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
-		return mobile != null && mobile.isConnectedOrConnecting();
-	}
 
 	/*
 	 * Initialize Notification Channels (for Android OREO)

@@ -39,7 +39,6 @@ public class GetVideoStreamTask extends AsyncTaskParallel<Void, Exception, Strea
 
 	@Override
 	protected StreamMetaDataList doInBackground(Void... param) {
-
 		StreamMetaDataList streamMetaDataList;
 
 		ParseStreamMetaData streamParser = new ParseStreamMetaData(youTubeVideo.getId());

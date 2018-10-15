@@ -145,8 +145,6 @@
 	<string name="pref_youtube_api_key_custom">clé valide.  Redémarrez l\'application.</string>
 	<string name="pref_youtube_api_key_default">Redémarrez l\'application pour utiliser la clé par défaut.</string>
 
-	<string name="pref_title_allow_mobile_downloads">Autoriser les téléchargements sur les réseaux mobiles</string>
-	<string name="pref_summary_allow_mobile_downloads">Sélectionnez cette option pour activer le téléchargement de vidéos sur les réseaux mobiles. Sinon, les vidéos ne peuvent être téléchargées qu\'en Wi-Fi.</string>
 	
 	<string name="restart">Redémarrer</string>
 		

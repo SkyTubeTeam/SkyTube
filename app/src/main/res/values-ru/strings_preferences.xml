@@ -81,8 +81,6 @@
 		<item>24 Hours</item>
 	</string-array>
 
-	<string name="pref_title_allow_mobile_downloads">Позволить загружать с мобильной сетью</string>
-	<string name="pref_summary_allow_mobile_downloads">Выберите это, чтобы включить загрузку видео в мобильной сети. В противном случае видео можно загружать только в Wi-Fi.</string>
 <string name="pref_title_choose_player">Видео плеер</string>
 	<string name="pref_summary_choose_player">Будет использоваться этот видео плеер: %s</string>
 	<string name="pref_title_disable_search_history">Отключить историю поиска</string>
@@ -140,7 +138,13 @@
 	<string name="preferred_region_updated">Выбран новый регион. Перезапустите приложение, чтобы изменение вступило в силу.</string>
 
 	<string name="pref_category_downloads">Загрузки</string>
-	<string name="pref_title_download_to_separate_directories">Загрузить видеоролики в отдельные директории</string>
+	<string name="pref_title_download_to_separate_directories">Загружать видеоролики в отдельные директории</string>
 	<string name="pref_summary_download_to_separate_directories">Видеоролики загружаются в отдельные папки с названием канала.</string>
+
+	<string name="pref_title_disable_screen_gestures">Отключить жесты при управлении видео</string>
+	<string name="pref_summary_disable_screen_gestures">Отключить жесты для управления громкостью, яркостью и перемоткой видеоролика.</string>
+
+	<string name="pref_title_warn_mobile_downloads">Отключить предупреждения мобильной сети</string>
+	<string name="pref_summary_warn_mobile_downloads">Предупреждать, что используется мобильная сеть (4G), перед тем, как скачать или воспроизвести видео.</string>
 
 	</resources>

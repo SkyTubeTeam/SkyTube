@@ -70,6 +70,8 @@ public class SearchVideoGridFragment extends VideosGridFragment {
 		// the app will call onCreateOptionsMenu() for when the user wants to search
 		setHasOptionsMenu(true);
 
+		// Enforce loading of the list
+		videoGridAdapter.initializeList();
 		return view;
 	}
 

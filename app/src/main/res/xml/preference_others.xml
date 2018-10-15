@@ -47,10 +47,10 @@
 		android:title="@string/pref_category_downloads">
 
 		<CheckBoxPreference
-			android:defaultValue="false"
-			android:key="@string/pref_key_allow_mobile_downloads"
-			android:title="@string/pref_title_allow_mobile_downloads"
-			android:summary="@string/pref_summary_allow_mobile_downloads"/>
+			android:defaultValue="true"
+			android:key="@string/pref_key_warn_mobile_downloads"
+			android:title="@string/pref_title_warn_mobile_downloads"
+			android:summary="@string/pref_summary_warn_mobile_downloads"/>
 
 		<CheckBoxPreference
 			android:defaultValue="false"

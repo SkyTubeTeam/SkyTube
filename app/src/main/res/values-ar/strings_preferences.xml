@@ -73,8 +73,6 @@
 	<string name="restart">إعادة تشغيل</string>
 
 
-	<string name="pref_title_allow_mobile_downloads">Allow downloads on mobile networks</string>
-	<string name="pref_summary_allow_mobile_downloads">Select this to enable downloading videos on mobile networks. Otherwise, videos can only be downloaded on Wi-Fi.</string>
 
 	<string name="pref_title_feed_notification">Feed Auto Notification</string>
 	<string name="pref_summary_feed_notification">How often to check for new videos from subscribed channels: %s</string>

@@ -86,8 +86,6 @@
 		<item>24 Hours</item>
 	</string-array>
 
-	<string name="pref_title_allow_mobile_downloads">Pozwól na pobieranie przez sieci komórkowe</string>
-	<string name="pref_summary_allow_mobile_downloads">Wybierz to, aby włączyć pobieranie filmów przez sieci komórkowe. W przeciwnym wypadku, filmy będą mogły być pobierane wyłącznie przez Wi-Fi.</string>
 
 	<string name="pref_title_disable_search_history">Wyłącz historię wyszukiwania</string>
 	<string name="pref_summary_disable_search_history">Jeśli zaznaczone, historia wyszukiwania zostanie wyczyszczona i nie będzie używana.</string>

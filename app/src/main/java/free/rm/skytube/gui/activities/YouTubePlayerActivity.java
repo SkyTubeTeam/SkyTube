@@ -34,13 +34,13 @@ import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubePlaylist;
 import free.rm.skytube.businessobjects.interfaces.YouTubePlayerActivityListener;
 import free.rm.skytube.businessobjects.interfaces.YouTubePlayerFragmentInterface;
 import free.rm.skytube.gui.businessobjects.fragments.FragmentEx;
-import free.rm.skytube.gui.fragments.YouTubePlayerFragment;
+import free.rm.skytube.gui.fragments.YouTubePlayerV1Fragment;
 import free.rm.skytube.gui.fragments.YouTubePlayerTutorialFragment;
 import free.rm.skytube.gui.fragments.YouTubePlayerV2Fragment;
 
 /**
- * An {@link Activity} that contains an instance of
- * {@link free.rm.skytube.gui.fragments.YouTubePlayerFragment}.
+ * An {@link Activity} that contains an instance of either {@link YouTubePlayerV2Fragment} or
+ * {@link YouTubePlayerV1Fragment}.
  */
 public class YouTubePlayerActivity extends BaseActivity implements YouTubePlayerActivityListener {
 	public static final String YOUTUBE_VIDEO = "YouTubePlayerActivity.YouTubeVideo";
@@ -51,6 +51,7 @@ public class YouTubePlayerActivity extends BaseActivity implements YouTubePlayer
 	private YouTubePlayerFragmentInterface fragmentListener;
 
 	private static final String TUTORIAL_COMPLETED = "YouTubePlayerActivity.TutorialCompleted";
+	public  static final String YOUTUBE_VIDEO_OBJ  = "YouTubePlayerActivity.video_object";
 
 
 	@Override
@@ -140,7 +141,7 @@ public class YouTubePlayerActivity extends BaseActivity implements YouTubePlayer
 	 * @param useDefaultPlayer  True to use the default player; false to use the legacy one.
 	 */
 	private void installNewVideoPlayerFragment(boolean useDefaultPlayer) {
-		videoPlayerFragment = useDefaultPlayer ? new YouTubePlayerV2Fragment() : new YouTubePlayerFragment();
+		videoPlayerFragment = useDefaultPlayer ? new YouTubePlayerV2Fragment() : new YouTubePlayerV1Fragment();
 
 		try {
 			fragmentListener = (YouTubePlayerFragmentInterface) videoPlayerFragment;

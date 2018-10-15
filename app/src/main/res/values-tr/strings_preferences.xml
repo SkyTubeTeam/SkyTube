@@ -84,8 +84,6 @@
 	<string name="pref_youtube_api_key_default">Varsayılan YouTube API anahtarına geri dönmek için APP\'i yeniden başlatın.</string>
 	<string name="restart">Yeniden Başlat</string>
 
-	<string name="pref_title_allow_mobile_downloads">Mobil ağlarda indirmeye izin ver</string>
-	<string name="pref_summary_allow_mobile_downloads">Mobil ağlarda video indirmek için bunu seçin. Aksi takdirde, videolar sadece Wi-Fi üzerinden indirilebilir.</string>
 <string name="pref_title_choose_player">Video Oynatıcı</string>
 	<string name="pref_summary_choose_player">Kullanılacak video oynatıcı: %s</string>
 	<string name="pref_title_subscriptions_alphabetical_order">Kanalları Alfabetik Olarak Sırala</string>

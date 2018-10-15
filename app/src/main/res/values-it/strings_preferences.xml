@@ -90,8 +90,6 @@
 		<item>24 Hours</item>
 	</string-array>
 
-	<string name="pref_title_allow_mobile_downloads">Permetti download su reti mobili</string>
-	<string name="pref_summary_allow_mobile_downloads">Seleziona questa opzione per abilitare il download dei video su reti mobili. Altrimenti, i video potranno solo essere scaricati con connessioni Wi-Fi.</string>
 <string name="pref_title_choose_player">Riproduttore video</string>
 	<string name="pref_summary_choose_player">Riproduttore video da usare: %s</string>
 	<string name="pref_title_disable_search_history">Disabilita la cronologia di ricerca</string>
@@ -148,5 +146,8 @@
 <string name="pref_category_downloads">Scaricamenti</string>
 	<string name="pref_title_download_to_separate_directories">Scarica i video in cartelle separate</string>
 	<string name="pref_summary_download_to_separate_directories">I video vengono salvati in cartelle separate in base al nome del canale.</string>
+
+	<string name="pref_title_disable_screen_gestures">Disattiva gesti</string>
+	<string name="pref_summary_disable_screen_gestures">Disattiva i gesti sullo schermo per volume, luminosità e l\'avanti/indietro del video.</string>
 
 	</resources>

@@ -16,28 +16,28 @@
 ## Features
 ### Innovative Features
 * Video blocker which includes the following features **[New!]**:
-  - Channel blacklisting; **[New!]**
-  - Channel whitelisting; **[New!]**
-  - Block videos if their language is not the same as the user's preferred one(s); **[New!]**
-  - Low views video blocking; **[New!]**
-  - High dislikes video blocking; **[New!]**
+  - Channel blacklisting **[New!]**
+  - Channel whitelisting **[New!]**
+  - Block videos if their language is not the same as the user's preferred one(s) **[New!]**
+  - Low views video blocking **[New!]**
+  - High dislikes video blocking **[New!]**
   - Icon in the toolbar displaying how many videos were blocked **[New!]**
-* Videos watched or partially watched are marked accordingly.  Resume playing feature also implemented. **[New!]**,
-* Video swipe controls, including volume, brightness, comments and video description controls. **[New!]**,
-* Bookmark videos,
-* Import subscriptions from YouTube,
+* Videos watched or partially watched are marked accordingly.  Resume playing feature also implemented. **[New!]**
+* Video swipe controls, including volume, brightness, comments and video description controls. **[New!]**
+* Bookmark videos
+* Import subscriptions from YouTube
 * Play channels' playlists
 * Download videos
-* View and download video thumbnails.
+* View and download video thumbnails
 
 ### Traditional Features
-* Explore Featured and Most Popular videos,
-* Browse YouTube channels,
-* Play YouTube videos,
-* View video comments,
-* Search videos, music and channels,
-* Channel subscription & non-intrusive notifications,
-* Subscriptions feed.
+* Explore Featured and Most Popular videos
+* Browse YouTube channels
+* Play YouTube videos
+* View video comments
+* Search videos, music and channels
+* Channel subscription & non-intrusive notifications
+* Subscriptions feed
 
 More features will be added in the near future.
 
@@ -49,12 +49,12 @@ More features will be added in the near future.
 | Official YouTube player support* | ✅                   | ❌       |
 | Chromecast Support*              | ✅                   | ❌       |
 | Updates availability             | Immediate            | Normally up to 5 days |
-| Download APK                     | [![Download SkyTube Extra APK](screenshots/download_apk.png)](https://github.com/ram-on/SkyTube/releases/download/v2.91/SkyTube-Extra-2.91.apk) | [![Download SkyTube (Vanilla) APK](https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Get_it_on_F-Droid.svg/200px-Get_it_on_F-Droid.svg.png)](https://f-droid.org/repository/browse/?fdid=free.rm.skytube.oss)
+| Download APK                     | [![Download SkyTube Extra APK](screenshots/download_apk.png)](https://github.com/ram-on/SkyTube/releases/download/v2.92/SkyTube-Extra-2.92.apk) | [![Download SkyTube (Vanilla) APK](https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Get_it_on_F-Droid.svg/200px-Get_it_on_F-Droid.svg.png)](https://f-droid.org/repository/browse/?fdid=free.rm.skytube.oss)
 
-_* powered by a closed-source, third party library._
+_* powered by a closed-source, third-party library._
 
 ## Why SkyTube?
-* Free and Open Source
+* Free and Open-Source
 * Innovative design
 * No intrusive ads
 * Multilingual
@@ -80,7 +80,7 @@ This project was possible with the support and contribution of [numerous volunte
 Help us improve this project by [translating](https://github.com/ram-on/SkyTube/wiki/Contribute#translate) or by [coding](https://github.com/ram-on/SkyTube/wiki/Contribute#developers-guidelines)!
 
 ## License
-[![GNU GPLv3 Image](https://www.gnu.org/graphics/gplv3-127x51.png)](http://www.gnu.org/licenses/gpl-3.0.en.html)  
+[![GNU GPLv3 Image](https://www.gnu.org/graphics/gplv3-127x51.png)](https://www.gnu.org/licenses/gpl-3.0.en.html)  
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -92,7 +92,7 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a [copy of the GNU General Public License](https://raw.githubusercontent.com/ram-on/SkyTube/master/LICENSE)
-along with this program.  If not, see http://www.gnu.org/licenses/.
+along with this program.  If not, see https://www.gnu.org/licenses/.
 
 This project is not affiliated with YouTube™ or any of its partners and/or products.
 YouTube™ and Android™ are registered trademarks of Google Inc.

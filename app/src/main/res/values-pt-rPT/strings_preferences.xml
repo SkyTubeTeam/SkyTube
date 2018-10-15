@@ -89,8 +89,6 @@
 		<item>24 Hours</item>
 	</string-array>
 
-	<string name="pref_title_allow_mobile_downloads">Permitir descargas em redes móveis</string>
-	<string name="pref_summary_allow_mobile_downloads">Ative esta opção para descarregar vídeos via redes móveis. Caso contrário, apenas poderá descarregar vídeos através de Wi-Fi.</string>
 
 	<string name="pref_title_disable_search_history">Desativar histórico de pesquisas</string>
 	<string name="pref_summary_disable_search_history">Se ativa, o histórico de pesquisas não será utilizado.</string>
@@ -151,5 +149,8 @@
 	<string name="pref_title_lang_detection_video_filtering">Filtrar vídeos tendo por base o idioma</string>
 	<string name="pref_summary_lang_detection_video_filtering">Utilizar inteligência artificial para detetar os idiomas dos vídeos e para os bloquear se o idioma não for igual aos que escolheu como preferencial. Apenas deve ativar esta opção em dispositivos de gama alta.</string>
 	<string name="setting_updated">Definição atualizada. Por favor recarregue os vídeos.</string>
+
+	<string name="pref_title_disable_screen_gestures">Desactivar gestos de vídeo</string>
+	<string name="pref_summary_disable_screen_gestures">Desative o volume, o brilho e os gestos de avanço/retrocesso de vídeo.</string>
 
 	</resources>

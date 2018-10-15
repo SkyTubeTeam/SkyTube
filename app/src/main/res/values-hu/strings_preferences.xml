@@ -88,8 +88,6 @@
 		<item>24 Hours</item>
 	</string-array>
 
-	<string name="pref_title_allow_mobile_downloads">Letöltés engedélyezése mobil hálózatokon</string>
-	<string name="pref_summary_allow_mobile_downloads">Kapcsolja be, ha engedélyezni akarja a videók letöltését mobil hálózatokon. Egyébként csak Wi-Fi- n fog tudni letölteni.</string>
 
 <string name="pref_title_choose_player">Videó Lejátszó</string>
 	<string name="pref_summary_choose_player">A használt videó lejátszó: %s</string>

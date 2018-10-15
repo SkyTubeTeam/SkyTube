@@ -9,8 +9,6 @@
 	<string name="no_downloaded_videos_text">Sie haben noch keine Videos heruntergeladen.
 \n
 \nSobald Sie das getan haben, werden sie hier auftauchen.</string>
-	<string name="downloads_disabled_warning">Das Herunterladen von Videos ist deaktiviert, da Sie kein WLAN verwenden.
-\nUm es zu aktivieren, gehen Sie bitte zu Einstellungen &gt; Andere und wählen Sie \'Downloads in Mobilfunknetzen zulassen\'</string>
 	<string name="playing_video_file_missing">Der Download für dieses Video wurde nicht gefunden. Spiele ferngesteuert.</string>
 	<string name="external_storage_not_available">Die Datei kann nicht heruntergeladen werden, da der externe Speicher nicht verfügbar ist.</string>
 <string name="download">Herunterladen</string>
