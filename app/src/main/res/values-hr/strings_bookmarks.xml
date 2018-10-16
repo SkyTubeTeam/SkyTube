@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources><string name="bookmarks">Oznake</string>
 
-	<string name="bookmark">Oznaka</string>
+	<string name="bookmark">Označi</string>
 	<string name="video_bookmarked">Videozapis označen</string>
 	<string name="video_bookmarked_error">Nije moguće označiti videozapis.</string>
 
-	<string name="unbookmark">Odznačen</string>
+	<string name="unbookmark">Odznači</string>
 	<string name="video_unbookmarked">Videozapis odznačen</string>
 	<string name="video_unbookmarked_error">Nije moguće odznačiti videozapis.</string>
 
