@@ -117,7 +117,7 @@
 	<string name="pref_title_low_views_filter">نمایش‌ها</string>
 	<string name="pref_summary_low_views_filter">فیلترکردن ویدئوهایی با تعداد نمایش کمتر از: %s</string>
 	<string name="pref_title_dislikes_filter">Dislikeها</string>
-	<string name="pref_summary_dislikes_filter">فیلتر کردن ویدئوها با dislike زیاد: %s</string>
+	<string name="pref_summary_dislikes_filter">فیلتر کردن ویدئوها با نپسندیدن‌های زیاد: %s</string>
 	<string name="pref_privacy_category">حریم شخصی</string>
 	<string name="pref_title_disable_search_history">غیرفعال‌سازی تاریخچه جستجو</string>
 	<string name="pref_summary_disable_search_history">اگر انتخاب شده باشد، تاریخچه جستجو پاک شده و دیگر مورد استفاده قرار نمی‌گیرد.</string>
