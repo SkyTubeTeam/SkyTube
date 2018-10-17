@@ -22,8 +22,8 @@
 	<string name="copy_url">Kopiraj URL</string>
 	<string name="url_copied_to_clipboard">URL kopiran u međuspremnik.</string>
 
-	<string name="mark_watched">Označi kao pregledano</string>
-	<string name="mark_unwatched">Označi kao ne pregledano</string>
+	<string name="mark_watched">Označi kao pogledano</string>
+	<string name="mark_unwatched">Označi kao ne pogledano</string>
 
 	<string name="error_get_comments">Došlo je do pogreške prilikom dohvatanja komentara.</string>
 	<string name="no_video_comments">Ovaj videozapis nema komentara ili su komentari onemogućeni.</string>
