@@ -1,3 +1,7 @@
+vX.XX - XX XX 20XX:
+	* Added Persian translations.
+	* Updated Croatian, Dutch, Norwegian Bokmål, Russian and Chinese (Traditional) translations.
+
 v2.92 - 14 Oct 2018:
 	* Added Android 9 (API 28) support.
 	* Video gestures can now be enabled/disabled.
@@ -7,7 +11,7 @@ v2.92 - 14 Oct 2018:
 	* Lazy loading for tabs - potentially reducing network usage.
 	* Added option to automatically download videos to folders named after the channel.
 	* Added Croatian translations.
-	* Updated Polish, Spanish, Japanese, French, Portuguese (Brazil), Portuguese (Portugal),
+	* Updated German, Polish, Spanish, Japanese, French, Portuguese (Brazil), Portuguese (Portugal),
 	  Italian, Chinese (Traditional), Norwegian Bokmål, Russian and Dutch translations.
 	* Bug fixes and other minor improvements.
 
