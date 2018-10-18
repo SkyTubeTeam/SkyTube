@@ -96,8 +96,8 @@
 	<string name="pref_title_subscriptions_alphabetical_order">Sortuj kanały alfabetycznie</string>
 	<string name="pref_summary_subscriptions_alphabetical_order">Jeśli zaznaczone, kanały subskrybowane zostaną posortowane alfabetycznie.</string>
 	<string name="pref_category_downloads">Pliki do pobrania</string>
-	<string name="pref_title_download_to_separate_directories">Pobierz filmy w osobnych katalogach</string>
-	<string name="pref_summary_download_to_separate_directories">Filmy wideo są zapisywane w oddzielnych folderach na podstawie nazwy kanału.</string>
+	<string name="pref_title_download_to_separate_directories">Pobierz filmy wideo do folderów</string>
+	<string name="pref_summary_download_to_separate_directories">Filmy wideo są pobierane do folderów na podstawie nazwy kanału.</string>
 
 	<string name="pref_video_blocker_category">Blokowanie filmów</string>
 	<string name="pref_channels_filter_category">Filtry kanałów</string>
@@ -145,4 +145,10 @@
 	<string name="pref_summary_clear_playback_status">Wyczyść status odtwarzania wszystkich filmów.</string>
 	<string name="pref_playback_status_cleared">Status odtwarzania został wyczyszczony.</string>
 
-</resources>
+<string name="pref_title_disable_screen_gestures">Wyłącz gesty wideo</string>
+	<string name="pref_summary_disable_screen_gestures">Wyłącz głośność, jasność i gesty wideo przewijania do przodu/do tyłu.</string>
+
+	<string name="pref_title_warn_mobile_downloads">Wyświetl ostrzeżenie o sieci komórkowej</string>
+	<string name="pref_summary_warn_mobile_downloads">Wyświetlaj ostrzeżenie, jeśli korzystasz z sieci komórkowej (takiej jak 4G) przed pobieraniem/przesyłaniem strumieniowym filmów.</string>
+
+	</resources>
