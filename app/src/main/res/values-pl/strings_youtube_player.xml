@@ -34,4 +34,11 @@
 	<string name="clear">Wyczyść</string>
 <string name="mark_watched">Mark Watched</string>
 	<string name="should_resume">Czy chcesz wrócić do miejsca, w którym się zatrzymałeś?</string>
-	</resources>
+	<string name="mobile_data">Dane mobilne</string>
+	<string name="warning_mobile_network_play">Twoje urządzenie nie jest połączone z siecią Wi-Fi. Aby uniknąć potencjalnych dodatkowych zmian wykorzystania danych, zaleca się połączenie z siecią Wi-Fi. Czy mimo to odtwarzasz wideo\?</string>
+	<string name="warning_mobile_network_disable">Nigdy więcej nie pytaj.</string>
+	<string name="play_video">Odtwórz wideo</string>
+	<string name="mark_unwatched">Oznacz jako oglądany</string>
+
+	<string name="resume">Wznawianie</string>
+</resources>
