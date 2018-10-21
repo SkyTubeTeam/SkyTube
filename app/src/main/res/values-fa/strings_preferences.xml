@@ -131,4 +131,6 @@
 	<string name="pref_summary_clear_playback_status">پاک کردن وضعیت پخش همه ویدئو‌ها.</string>
 	<string name="pref_playback_status_cleared">وضعیت پخش پاک شد.</string>
 
-</resources>
+<string name="pref_summary_enable_video_blocker">فعال کردن مسدودساز ویدئو.</string>
+
+	</resources>
