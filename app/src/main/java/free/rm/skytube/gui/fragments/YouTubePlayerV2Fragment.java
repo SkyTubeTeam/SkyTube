@@ -691,7 +691,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 		PlayerViewGestureHandler() {
 			super(getContext());
 
-			videoBrightness = new VideoBrightness(getActivity());
+			videoBrightness = new VideoBrightness(getActivity(), disableGestures);
 			playerView.setControllerVisibilityListener(new PlayerControlView.VisibilityListener() {
 				@Override
 				public void onVisibilityChange(int visibility) {
@@ -943,6 +943,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 		private float   brightness;
 		/** Initial video brightness. */
 		private float   initialBrightness;
+		private final boolean disableGestures;
 
 		private static final String BRIGHTNESS_LEVEL_PREF = SkyTubeApp.getStr(R.string.pref_key_brightness_level);
 
@@ -952,9 +953,10 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 		 *
 		 * @param activity  Activity.
 		 */
-		public VideoBrightness(final Activity activity) {
+		public VideoBrightness(final Activity activity, final boolean disableGestures) {
 			loadBrightnessFromPreference();
 			initialBrightness = brightness;
+			this.disableGestures = disableGestures;
 
 			setVideoBrightness(0, activity);
 		}
@@ -967,6 +969,10 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 		 * @param activity      Activity.
 		 */
 		public void setVideoBrightness(double adjustPercent, final Activity activity) {
+			if (disableGestures) {
+				return;
+			}
+
 			// We are setting brightness percent to a value that should be from -1.0 to 1.0. We need to limit it here for these values first
 			if (adjustPercent < -1.0f) {
 				adjustPercent = -1.0f;
