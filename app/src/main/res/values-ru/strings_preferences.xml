@@ -147,4 +147,6 @@
 	<string name="pref_title_warn_mobile_downloads">Отключить предупреждения мобильной сети</string>
 	<string name="pref_summary_warn_mobile_downloads">Предупреждать, что используется мобильная сеть (4G), перед тем, как скачать или воспроизвести видео.</string>
 
+	<string name="pref_summary_enable_video_blocker">Включить блокировку видео.</string>
+
 	</resources>

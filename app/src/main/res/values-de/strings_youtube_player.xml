@@ -38,4 +38,8 @@
 
 	<string name="should_resume">Wollen Sie fortsetzen, wo Sie aufgehört haben?</string>
 	<string name="resume">Fortsetzen</string>
-</resources>
+<string name="mobile_data">Mobile Daten</string>
+	<string name="warning_mobile_network_play">Ihr Gerät ist nicht mit einem WLAN-Netzwerk verbunden. Um mögliche zusätzliche Änderungen der Datennutzung zu vermeiden, wird empfohlen, sich mit einem WLAN-Netzwerk zu verbinden. Video trotzdem abspielen\?</string>
+	<string name="warning_mobile_network_disable">Nicht erneut fragen.</string>
+	<string name="play_video">Video abspielen</string>
+	</resources>

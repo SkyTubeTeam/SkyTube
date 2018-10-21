@@ -151,4 +151,6 @@
 	<string name="pref_title_warn_mobile_downloads">Wyświetl ostrzeżenie o sieci komórkowej</string>
 	<string name="pref_summary_warn_mobile_downloads">Wyświetlaj ostrzeżenie, jeśli korzystasz z sieci komórkowej (takiej jak 4G) przed pobieraniem/przesyłaniem strumieniowym filmów.</string>
 
+	<string name="pref_summary_enable_video_blocker">Włącz blokowanie wideo.</string>
+
 	</resources>
