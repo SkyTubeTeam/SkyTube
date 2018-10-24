@@ -2,6 +2,8 @@
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:tools="http://schemas.android.com/tools">
 
+	<uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>       <!-- Android Pie now requires this permission to run a foreground service. Chromecast support uses this. See https://developer.android.com/guide/components/services#Foreground -->
+
 	<application>
 		<meta-data
 				android:name="com.google.android.gms.cast.framework.OPTIONS_PROVIDER_CLASS_NAME"
