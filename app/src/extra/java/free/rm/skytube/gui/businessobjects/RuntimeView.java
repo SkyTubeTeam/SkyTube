@@ -6,6 +6,10 @@ import android.util.AttributeSet;
 
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Custom View class to display a video's RunTime. If the video is less than one hour long,
+ * the hours will not show.
+ */
 public class RuntimeView extends AppCompatTextView {
 	private int milliseconds;
 

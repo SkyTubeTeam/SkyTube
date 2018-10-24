@@ -16,6 +16,11 @@ import java.util.List;
 import free.rm.skytube.BuildConfig;
 import free.rm.skytube.gui.activities.NotificationClickActivity;
 
+/**
+ * Class that implements {@link com.google.android.gms.cast.framework.OptionsProvider}, which is required for Chromecast support.
+ * See https://developers.google.com/android/reference/com/google/android/gms/cast/framework/OptionsProvider
+ * Even though Android Studio will show that this class is not used anywhere, it is! Do not delete!
+ */
 public class CastOptionsProvider implements OptionsProvider {
 	@Override
 	public CastOptions getCastOptions(Context context) {

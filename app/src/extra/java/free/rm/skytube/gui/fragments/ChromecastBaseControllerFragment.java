@@ -22,6 +22,9 @@ import free.rm.skytube.gui.activities.BaseActivity;
 import free.rm.skytube.gui.businessobjects.MainActivityListener;
 import free.rm.skytube.gui.businessobjects.fragments.FragmentEx;
 
+/**
+ * Abstract Fragment class that {@link ChromecastControllerFragment} and {@link ChromecastMiniControllerFragment} extend.
+ */
 public abstract class ChromecastBaseControllerFragment extends FragmentEx {
 	public static final String KEY_DURATION = "free.rm.skytube.KEY_DURATION";
 	public static final String KEY_CURRENT_POSITION = "free.rm.skytube.KEY_CURRENT_POSITION";

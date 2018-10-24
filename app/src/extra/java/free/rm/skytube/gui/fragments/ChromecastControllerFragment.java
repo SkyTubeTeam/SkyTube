@@ -29,6 +29,10 @@ import free.rm.skytube.gui.businessobjects.RuntimeView;
 import free.rm.skytube.gui.businessobjects.views.ClickableLinksTextView;
 import free.rm.skytube.gui.businessobjects.views.SubscribeButton;
 
+/**
+ * Fragment class that is used for Chromecast control. This Fragment is full screen, and can be accessed by clicking on
+ * {@link ChromecastMiniControllerFragment} or dragging it up.
+ */
 public class ChromecastControllerFragment extends ChromecastBaseControllerFragment implements SeekBar.OnSeekBarChangeListener {
 	public static final String CHROMECAST_CONTROLLER_FRAGMENT = "free.rm.skytube.CHROMECAST_CONTROLLER_FRAGMENT";
 

@@ -27,6 +27,11 @@ import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.ChromecastListener;
 import free.rm.skytube.businessobjects.db.PlaybackStatusDb;
 
+/**
+ * Fragment class that is used for Chromecast control. This Fragment will appear at the bottom of the app when a video
+ * has started casting. It provides a few controls: Stop, Rewind, Fast Forward, and Play/Pause. Clicking on this Fragment
+ * will expand it full screen, showing {@link ChromecastControllerFragment}. Dragging this fragment up will do the same thing.
+ */
 public class ChromecastMiniControllerFragment extends ChromecastBaseControllerFragment {
 	public static final String CHROMECAST_MINI_CONTROLLER_FRAGMENT = "free.rm.skytube.CHROMECAST_MINI_CONTROLLER_FRAGMENT";
 

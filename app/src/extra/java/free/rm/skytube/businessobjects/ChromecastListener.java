@@ -2,6 +2,10 @@ package free.rm.skytube.businessobjects;
 
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 
+/**
+ * Chromecast Listener interface. {@link free.rm.skytube.gui.activities.BaseActivity} implements this interface in order
+ * for other classes to communicate with it, for Chromecast specific functionality.
+ */
 public interface ChromecastListener {
 	/**
 	 * Play the passed video on Chromecast at the passed position.

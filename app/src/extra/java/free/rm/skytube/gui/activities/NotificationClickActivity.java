@@ -5,6 +5,10 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+/**
+ * Activity that handles clicking on the Chromecast notification that appears when the app is casting to a Chromecast
+ * and has been minimized. Clicking on the notification will resume the app.
+ */
 public class NotificationClickActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
