@@ -135,8 +135,8 @@
 	<string name="pref_playback_status_cleared">Estado de reprodução removido.</string>
 
 <string name="pref_category_downloads">Descargas</string>
-	<string name="pref_title_download_to_separate_directories">Descarregar vídeos para diretórios distintos</string>
-	<string name="pref_summary_download_to_separate_directories">Os vídeos serão guardados em diretórios distintos tendo por base o nome do canal.</string>
+	<string name="pref_title_download_to_separate_directories">Descarregar vídeos para diretórios</string>
+	<string name="pref_summary_download_to_separate_directories">Os vídeos serão descarregados em diretórios tendo por base o nome do canal.</string>
 
 	<string name="channel_already_whitelisted">O canal já está na lista de canais permitidos.</string>
 	<string name="channel_whitelist_update_failure">Falha ao colocar o canal da lista de permitidos.</string>
@@ -152,5 +152,10 @@
 
 	<string name="pref_title_disable_screen_gestures">Desactivar gestos de vídeo</string>
 	<string name="pref_summary_disable_screen_gestures">Desative o volume, o brilho e os gestos de avanço/retrocesso de vídeo.</string>
+
+	<string name="pref_title_warn_mobile_downloads">Exibir aviso de rede móvel</string>
+	<string name="pref_summary_warn_mobile_downloads">Exibir um aviso se você estiver usando a rede móvel (como 4G) antes de descarregar/streaming de vídeos.</string>
+
+	<string name="pref_summary_enable_video_blocker">Ativar o bloqueador de vídeo.</string>
 
 	</resources>
