@@ -24,6 +24,11 @@
 		android:summary="@string/pref_summary_preferred_res"/>
 
 	<ListPreference
+		android:key="@string/pref_key_preferred_res_mobile"
+		android:title="@string/pref_title_preferred_res_mobile"
+		android:summary="@string/pref_summary_preferred_res_mobile"/>
+
+	<ListPreference
 		android:key="@string/pref_key_choose_player"
 		android:title="@string/pref_title_choose_player"
 		android:summary="@string/pref_summary_choose_player"
