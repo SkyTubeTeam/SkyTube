@@ -12,9 +12,9 @@
 	<string name="error_unable_to_subscribe">(id=%s) kanalı aboneliğinden çıkılamıyor</string>
 
 	<string name="import_subscriptions">Abonelikleri içe aktar</string>
-	<string name="import_subscriptions_description">YouTube\'tan abonelikerinizi içe aktarın. Öncelikle https://www.youtube.com/subscription_manager sayfasına gidin ve en aşağıda \"Abonelikleri Dışa Aktar\" düğmesine basın. Sonra aşağıda \"XML Dosyası Seç\"e tıklayarak dışa aktardığınız XML dosyasını seçin.</string>
+	<string name="import_subscriptions_description">Aboneliklerinizi YouTube\'dan, önce https://www.youtube.com/subscription_manager adresini ziyaret ederek ve alt kısımdaki \"Abonelikleri Dışarı Aktar\" düğmesini tıklayarak içe aktarın. Ardından, aşağıda \"Abonelikler Dosyasını Seç\" i tıklayarak \"subscription_manager\" başlıklı dışa aktarılmış dosyayı seçin.</string>
 	<string name="subscriptions_to_channels_imported">%d kanal(lar)ına abonelik içe aktarıldı.</string>
-	<string name="select_xml_file">XML Dosyası Seç</string>
+	<string name="select_xml_file">Abonelikler Dosyasını Seç</string>
 	<string name="select_all">Tümünü Seç</string>
 	<string name="select_none">Hiçbirini Seçme</string>
 	<string name="no_channels_found">Yüklediğiniz XML dosyasında hiçbir YouTube kanalı bulunamadı.</string>
