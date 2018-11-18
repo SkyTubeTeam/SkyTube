@@ -3,7 +3,7 @@ v2.93 - 18 Nov 2018:
 	* If the gestures control is disabled, the video brightness will be identical to those used by the Android System.
 	* Added preferred resolution when using mobile network (instead of WIFI).
 	* Added Persian translations.
-	* Updated Portuguese (Portugal), Turkish, German, Polish, Italian, Croatian, Dutch, Norwegian Bokmål, Russian and Chinese (Traditional) translations.
+	* Updated Spanish, Portuguese (Portugal), Turkish, German, Polish, Italian, Croatian, Dutch, Norwegian Bokmål, Russian and Chinese (Traditional) translations.
 
 v2.92 - 14 Oct 2018:
 	* Added Android 9 (API 28) support.
