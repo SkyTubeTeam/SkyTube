@@ -157,4 +157,7 @@
 
 	<string name="pref_summary_enable_video_blocker">Videoblokkering inschakelen.</string>
 
+	<string name="pref_title_preferred_res_mobile">Voorkeursresolutie via mobiel internet</string>
+	<string name="pref_summary_preferred_res_mobile">Selecteer je voorkeursresolutie: ŝ</string>
+
 	</resources>
