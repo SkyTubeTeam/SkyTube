@@ -17,12 +17,16 @@
 
 package free.rm.skytube.businessobjects.YouTube.VideoStream;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
 import android.util.Log;
 
 import java.util.ArrayList;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
+
+import static free.rm.skytube.app.SkyTubeApp.getContext;
 
 /**
  * A list of {@link StreamMetaData}.
@@ -95,6 +99,20 @@ public class StreamMetaDataList extends ArrayList<StreamMetaData> {
 							.getString(SkyTubeApp.getStr(R.string.pref_key_preferred_res),
 										Integer.toString(VideoResolution.DEFAULT_VIDEO_RES_ID));
 
+		/*
+		 * TODO: this is a copy paste from MobileNetworkWarningDialog class isConnectedToMobile()
+		 * method. Define this method in another class and use it also here.
+		 */
+		final ConnectivityManager connMgr = (ConnectivityManager)
+				getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+		final android.net.NetworkInfo mobile = connMgr.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+
+		// if on mobile network use the preferred resolution under mobile network if defined
+		if( mobile != null && mobile.isConnectedOrConnecting()) {
+			resIdValue = SkyTubeApp.getPreferenceManager()
+					.getString(SkyTubeApp.getStr(R.string.pref_key_preferred_res_mobile),
+							resIdValue);
+		}
 		return VideoResolution.videoResIdToVideoResolution(resIdValue);
 	}
 
