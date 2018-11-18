@@ -154,8 +154,12 @@
 	<string name="pref_summary_disable_screen_gestures">Desative o volume, o brilho e os gestos de avanço/retrocesso de vídeo.</string>
 
 	<string name="pref_title_warn_mobile_downloads">Exibir aviso de rede móvel</string>
-	<string name="pref_summary_warn_mobile_downloads">Exibir um aviso se você estiver usando a rede móvel (como 4G) antes de descarregar/streaming de vídeos.</string>
+	<string name="pref_summary_warn_mobile_downloads">Exibir um aviso se você estiver usando a rede móvel (como 4G) antes de streaming/descarregar de vídeos.</string>
 
 	<string name="pref_summary_enable_video_blocker">Ativar o bloqueador de vídeo.</string>
+
+	<string name="pref_category_mobile_network">Rede Móvel</string>
+	<string name="pref_title_preferred_res_mobile">Resolução preferencial para redes móveis</string>
+	<string name="pref_summary_preferred_res_mobile">Selecione a sua resolução preferida quando streaming através de uma rede móvel (como 4G): %s</string>
 
 	</resources>
