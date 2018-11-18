@@ -130,8 +130,12 @@
 \nYou should have received a copy of the GNU General Public License along with this program. If not, see &lt;http://www.gnu.org/licenses/&gt;</string>
 	<string name="pref_title_feed_notification">Automatska obavijest o kanalu</string>
 	<string name="pref_title_warn_mobile_downloads">Prikaži upozorenje mobilne mreže</string>
-	<string name="pref_summary_warn_mobile_downloads">Prikaži upozorenje prilikom korištenja mobilne mreže (kao što je 4G) prije preuzimanja/stremanja videozapisa.</string>
+	<string name="pref_summary_warn_mobile_downloads">Prikaži upozorenje prilikom korištenja mobilne mreže (kao što je 4G) prije stremanja/preuzimanja videozapisa.</string>
 
 	<string name="pref_summary_enable_video_blocker">Omogući blokiranje videozapisa.</string>
+
+	<string name="pref_category_mobile_network">Mobilna mreža</string>
+	<string name="pref_title_preferred_res_mobile">Preferirana rezolucija za mobilnu mrežu</string>
+	<string name="pref_summary_preferred_res_mobile">Odaberite željenu rezoluciju tijekom prijenosa putem mobilne mreže (kao što je 4G): %s</string>
 
 	</resources>
