@@ -150,8 +150,12 @@
 	<string name="pref_summary_download_to_separate_directories">Videos werden in Ordner nach Kanalnamen heruntergeladen.</string>
 
 	<string name="pref_title_warn_mobile_downloads">Mobilfunknetzwarnung anzeigen</string>
-	<string name="pref_summary_warn_mobile_downloads">Eine Warnung bei der Nutzung von Mobildaten (z.B. 4G) vor dem Downloaden/Streamen von Videos anzeigen.</string>
+	<string name="pref_summary_warn_mobile_downloads">Eine Warnung bei der Nutzung von Mobildaten (z.B. 4G) vor dem Streamen/Downloaden von Videos anzeigen.</string>
 
 	<string name="pref_summary_enable_video_blocker">Videoblocker aktivieren.</string>
+
+	<string name="pref_category_mobile_network">Mobiles Netzwerk</string>
+	<string name="pref_title_preferred_res_mobile">Bevorzugte Auflösung für das Mobilfunknetz</string>
+	<string name="pref_summary_preferred_res_mobile">Wählen Sie die gewünschte Auflösung beim Streaming über ein Mobilfunknetz (z.B. 4G): %s</string>
 
 	</resources>
