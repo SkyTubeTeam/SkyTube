@@ -99,20 +99,13 @@ public class StreamMetaDataList extends ArrayList<StreamMetaData> {
 							.getString(SkyTubeApp.getStr(R.string.pref_key_preferred_res),
 										Integer.toString(VideoResolution.DEFAULT_VIDEO_RES_ID));
 
-		/*
-		 * TODO: this is a copy paste from MobileNetworkWarningDialog class isConnectedToMobile()
-		 * method. Define this method in another class and use it also here.
-		 */
-		final ConnectivityManager connMgr = (ConnectivityManager)
-				getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-		final android.net.NetworkInfo mobile = connMgr.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
-
 		// if on mobile network use the preferred resolution under mobile network if defined
-		if( mobile != null && mobile.isConnectedOrConnecting()) {
+		if (SkyTubeApp.isConnectedToMobile()) {
 			resIdValue = SkyTubeApp.getPreferenceManager()
 					.getString(SkyTubeApp.getStr(R.string.pref_key_preferred_res_mobile),
-							resIdValue);
+							resIdValue);    // default res for mobile network = that of wifi
 		}
+
 		return VideoResolution.videoResIdToVideoResolution(resIdValue);
 	}
 
