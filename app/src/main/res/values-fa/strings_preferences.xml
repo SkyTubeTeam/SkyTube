@@ -65,7 +65,7 @@
 	<string name="pref_youtube_api_key_default">برای استفاده از کلید API یوتیوب پیش‌فرض، برنامه را از اول راه‌اندازی کنید.</string>
 
 	<string name="pref_title_warn_mobile_downloads">نمایش هشدار شبکه همراه</string>
-	<string name="pref_summary_warn_mobile_downloads">نمایش دادن هشدار پیش از بارگیری یا استریم ویدئوها در صورتی که از شبکه همراه (مانند 4G) استفاده می‌کنید.</string>
+	<string name="pref_summary_warn_mobile_downloads">نمایش دادن هشدار پیش از پخش جریان یا بارگیری ویدئوها در صورتی که از شبکه همراه (مانند 4G) استفاده می‌کنید.</string>
 
 	<string name="restart">راه‌اندازی دوباره</string>
 	<string name="pref_title_subscriptions_alphabetical_order">مرتب‌سازی کانال‌ها بر اساس الفبا</string>
@@ -116,7 +116,7 @@
 	<string name="pref_other_filters_category">فیلترهای دیگر</string>
 	<string name="pref_title_low_views_filter">نمایش‌ها</string>
 	<string name="pref_summary_low_views_filter">فیلترکردن ویدئوهایی با تعداد نمایش کمتر از: %s</string>
-	<string name="pref_title_dislikes_filter">Dislikeها</string>
+	<string name="pref_title_dislikes_filter">نپسندیده‌ها</string>
 	<string name="pref_summary_dislikes_filter">فیلتر کردن ویدئوها با نپسندیدن‌های زیاد: %s</string>
 	<string name="pref_privacy_category">حریم شخصی</string>
 	<string name="pref_title_disable_search_history">غیرفعال‌سازی تاریخچه جستجو</string>
@@ -132,5 +132,9 @@
 	<string name="pref_playback_status_cleared">وضعیت پخش پاک شد.</string>
 
 <string name="pref_summary_enable_video_blocker">فعال کردن مسدودساز ویدئو.</string>
+
+	<string name="pref_category_mobile_network">شبکه همراه</string>
+	<string name="pref_title_preferred_res_mobile">وضوح مورد نظر برای شبکه همراه</string>
+	<string name="pref_summary_preferred_res_mobile">وضوح موردنظرتان برای زمان پخش جریان روی شبکه همراه (مانند 4G): %s</string>
 
 	</resources>
