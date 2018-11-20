@@ -149,8 +149,12 @@
 	<string name="pref_summary_disable_screen_gestures">Wyłącz głośność, jasność i gesty wideo przewijania do przodu/do tyłu.</string>
 
 	<string name="pref_title_warn_mobile_downloads">Wyświetl ostrzeżenie o sieci komórkowej</string>
-	<string name="pref_summary_warn_mobile_downloads">Wyświetlaj ostrzeżenie, jeśli korzystasz z sieci komórkowej (takiej jak 4G) przed pobieraniem/przesyłaniem strumieniowym filmów.</string>
+	<string name="pref_summary_warn_mobile_downloads">Wyświetl ostrzeżenie, jeśli korzystasz z sieci komórkowej (takiej jak 4G) przed rozpoczęciem przesyłania strumieniowego/pobierania filmów.</string>
 
 	<string name="pref_summary_enable_video_blocker">Włącz blokowanie wideo.</string>
+
+	<string name="pref_category_mobile_network">Sieć komórkowa</string>
+	<string name="pref_title_preferred_res_mobile">Preferowana Rozdzielczość w Sieci Komórkowej</string>
+	<string name="pref_summary_preferred_res_mobile">Wybierz swoją preferowaną rozdzielczość przy stremowaniu przez sieć komórkową (np. 4G): %s</string>
 
 	</resources>
