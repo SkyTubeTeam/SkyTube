@@ -132,8 +132,12 @@
 	<string name="pref_summary_disable_screen_gestures">停用音量、亮度與快轉影片手勢。</string>
 
 	<string name="pref_title_warn_mobile_downloads">顯示行動網路警告</string>
-	<string name="pref_summary_warn_mobile_downloads">當您正在使用行動網路（如4G）時，在下載／串流影片前顯示警告。</string>
+	<string name="pref_summary_warn_mobile_downloads">當您正在使用行動網路（如4G）時，在串流／下載影片前顯示警告。</string>
 
 	<string name="pref_summary_enable_video_blocker">啟用影片阻擋器。</string>
+
+	<string name="pref_category_mobile_network">行動網路</string>
+	<string name="pref_title_preferred_res_mobile">行動網路偏好的解晰度</string>
+	<string name="pref_summary_preferred_res_mobile">透過行動網路(例如4G)進行串流傳輸時選擇您偏好的解晰度：%s</string>
 
 	</resources>
