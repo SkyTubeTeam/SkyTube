@@ -154,7 +154,7 @@
 	<string name="pref_summary_enable_video_blocker">Włącz blokowanie wideo.</string>
 
 	<string name="pref_category_mobile_network">Sieć komórkowa</string>
-	<string name="pref_title_preferred_res_mobile">Preferowana Rozdzielczość w Sieci Komórkowej</string>
+	<string name="pref_title_preferred_res_mobile">Preferowana Rozdzielczość dla sieci komórkowej</string>
 	<string name="pref_summary_preferred_res_mobile">Wybierz swoją preferowaną rozdzielczość przy stremowaniu przez sieć komórkową (np. 4G): %s</string>
 
 	</resources>
