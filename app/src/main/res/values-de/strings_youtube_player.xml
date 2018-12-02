@@ -4,10 +4,10 @@
 	<string name="error_stream_decryption_fail">Entschlüsselungscode für den YouTube-Dienst konnte nicht geladen werden.</string>
 	<string name="error_stream_parse_error">Fehler beim Parsen.</string>
 
-	<string name="error_video_play">Fehler beim abspielen des Videos</string>
+	<string name="error_video_play">Fehler beim Abspielen des Videos</string>
 	<string name="error_video_streams_empty">Das Video %s hat keine Streams.</string>
-	<string name="error_video_streams">Beim Abrufen der Video-Streams ist ein Fehler aufgetreten.</string>
-	<string name="error_get_video_desc">Beim Abrufen der Videobeschreibung ist ein Fehler aufgetreten.</string>
+	<string name="error_video_streams">Beim Abruf der Video-Streams ist ein Fehler aufgetreten.</string>
+	<string name="error_get_video_desc">Beim Abruf der Videobeschreibung ist ein Fehler aufgetreten.</string>
 	<string name="error_invalid_url">Ungültige Video URL: %s</string>
 
 	<string name="warning_live_video">Livestreams können derzeit nicht abgespielt werden. Livestream in einer anderen Anwendung abspielen?</string>
@@ -26,20 +26,20 @@
 	<string name="error_get_comments">Beim Abrufen der Kommentare ist ein Fehler aufgetreten.</string>
 	<string name="no_video_comments">Dieses Video hat keine Kommentare oder die Kommentare wurden deaktiviert.</string>
 	<string name="view_replies">Antworten anzeigen</string>
-	<string name="hide_replies">Antworten verstecken</string>
+	<string name="hide_replies">Antworten ausblenden</string>
 
-	<string name="enter_video_url">Video URL eingeben</string>
+	<string name="enter_video_url">Video-URL eingeben</string>
 	<string name="play">Abspielen</string>
 	<string name="cancel">Abbrechen</string>
 	<string name="clear">Leeren</string>
 
-	<string name="mark_watched">Angesehene markieren</string>
-	<string name="mark_unwatched">Nicht angesehene markieren</string>
+	<string name="mark_watched">Als angesehen markieren</string>
+	<string name="mark_unwatched">Als nicht angesehen markieren</string>
 
 	<string name="should_resume">Wollen Sie fortsetzen, wo Sie aufgehört haben?</string>
 	<string name="resume">Fortsetzen</string>
 <string name="mobile_data">Mobile Daten</string>
-	<string name="warning_mobile_network_play">Ihr Gerät ist nicht mit einem WLAN-Netzwerk verbunden. Um mögliche zusätzliche Änderungen der Datennutzung zu vermeiden, wird empfohlen, sich mit einem WLAN-Netzwerk zu verbinden. Video trotzdem abspielen\?</string>
+	<string name="warning_mobile_network_play">Ihr Gerät ist nicht mit einem WLAN verbunden. Um mögliche zusätzliche Gebühren für die Datennutzung zu vermeiden, wird empfohlen, sich mit einem WLAN zu verbinden. Video trotzdem abspielen\?</string>
 	<string name="warning_mobile_network_disable">Nicht erneut fragen.</string>
 	<string name="play_video">Video abspielen</string>
 	</resources>
