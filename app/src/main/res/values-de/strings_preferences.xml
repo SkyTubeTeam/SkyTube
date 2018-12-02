@@ -14,12 +14,12 @@
 
 	<string name="pref_video_player_category">Videoplayer</string>
 	<string name="pref_title_preferred_res">Bevorzugte Auflösung</string>
-	<string name="pref_summary_preferred_res">Wähle deine bevorzugte Auflösung:  %s</string>
+	<string name="pref_summary_preferred_res">Bevorzugte Auflösung: %s</string>
 
 	<string name="pref_title_backup_dbs">Datenbanken sichern</string>
 	<string name="pref_summary_backup_dbs">Sichere deine Abo- und Lesezeichen-Datenbanken.</string>
 	<string name="pref_title_import_dbs">Sicherung importieren</string>
-	<string name="pref_summary_import_dbs">Importiere deine Abo- und Lesezeichen-Datenbanken.</string>
+	<string name="pref_summary_import_dbs">Abo- und Lesezeichen-Datenbanken importieren.</string>
 	<string name="databases_backing_up">Sichere…</string>
 	<string name="databases_backup_success">Datenbanken gesichert nach %s</string>
 	<string name="databases_backup_fail">Fehler beim Sichern der Datenbanken.</string>
@@ -40,7 +40,7 @@
 	<string name="pref_about_category">Über</string>
 	<string name="pref_title_website">Webseite</string>
 	<string name="pref_title_credits">Mitwirkende</string>
-	<string name="pref_summary_credits">Menschen und Projekte die diese App möglich gemacht haben.</string>
+	<string name="pref_summary_credits">Menschen und Projekte, die diese App möglich gemacht haben.</string>
 	<string name="pref_title_version">Version</string>
 	<string name="pref_title_updates">Aktualisierungen</string>
 	<string name="pref_summary_updates">Nach neuen Versionen suchen.</string>
@@ -156,6 +156,6 @@
 
 	<string name="pref_category_mobile_network">Mobiles Netzwerk</string>
 	<string name="pref_title_preferred_res_mobile">Bevorzugte Auflösung für das Mobilfunknetz</string>
-	<string name="pref_summary_preferred_res_mobile">Wählen Sie die gewünschte Auflösung beim Streaming über ein Mobilfunknetz (z.B. 4G): %s</string>
+	<string name="pref_summary_preferred_res_mobile">Gewünschte Auflösung beim Streaming über ein Mobilfunknetz (z.B. 4G): %s</string>
 
 	</resources>
