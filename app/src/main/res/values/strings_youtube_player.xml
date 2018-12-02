@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources>
 	<string name="error_stream_err_unavailable">Error message unavailable.</string>
 	<string name="error_stream_decryption_fail">Could not load decryption code for the YouTube service.</string>
@@ -11,7 +11,7 @@
 	<string name="error_invalid_url">Invalid video URL: %s</string>
 
 	<string name="mobile_data">Mobile Data</string>
-	<string name="warning_mobile_network_play">Your device is not connected to a Wi-Fi network.  To avoid potential extra data usage changes, it is recommended to connect to a Wi-Fi network.  Play video anyway?</string>
+	<string name="warning_mobile_network_play">Your device is not connected to a Wi-Fi network. To avoid potential extra data usage charges, it is recommended to connect to a Wi-Fi network. Play video anyway\?</string>
 	<string name="warning_mobile_network_disable">Never ask again.</string>
 	<string name="play_video">Play Video</string>
 	<string name="warning_live_video">Cannot play live streams for now. Open live stream in another app?</string>
