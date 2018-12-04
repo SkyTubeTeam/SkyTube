@@ -38,7 +38,7 @@
 	<string name="should_resume">Vuoi riprendere da dove ti sei fermato?</string>
 	<string name="resume">Riprendi</string>
 <string name="mobile_data">Dati mobile</string>
-	<string name="warning_mobile_network_play">Il tuo dispositivo non è connesso a una rete Wi-Fi. Per evitare potenziali modifiche di utilizzo dati extra, si consiglia di connettersi a una rete Wi-Fi. Riprodurre comunque il video\?</string>
+	<string name="warning_mobile_network_play">Il tuo dispositivo non è connesso a una rete Wi-Fi. Per evitare eventuali costi extra di utilizzo dati, si consiglia di connettersi a una rete Wi-Fi. Riprodurre comunque il video\?</string>
 	<string name="warning_mobile_network_disable">Non chiedere più.</string>
 	<string name="play_video">Riproduci video</string>
 	</resources>
