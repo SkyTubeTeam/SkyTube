@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 28
-    buildToolsVersion '28.0.2'
+    buildToolsVersion '28.0.3'
 
     defaultConfig {
         applicationId "free.rm.skytube"
@@ -42,14 +42,12 @@ android {
         // 100% Open-Source Edition
         oss {
             applicationId "free.rm.skytube.oss"
-            versionName "2.92"          // the digits of the *fractional part* shall not be larger than "9"
             resValue "string", "app_name", "SkyTube"
             dimension "skytube"
         }
         // 99% Open-source edition:  uses the YouTube Player Jar [i.e. proprietary module - optional usage]
         extra {
             applicationId "free.rm.skytube.extra"
-            versionName "2.92 Extra"    // the digits of the *fractional part* shall not be larger than "9"
             resValue "string", "app_name", "SkyTube Extra"
             dimension "skytube"
         }
