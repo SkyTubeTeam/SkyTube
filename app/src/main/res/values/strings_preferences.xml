@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources>
 	<string name="preferences">Preferences</string>
 	<string name="key_preferences">preferences</string>
@@ -24,6 +24,15 @@
 		<item>@string/pref_legacy_player_value</item>
 		<item>@string/pref_official_player_value</item>   <!-- this should remain the last item -->
 	</string-array>
+
+	<string name="pref_category_mobile_network">Mobile Network</string>
+	<string name="pref_title_preferred_res_mobile">Preferred Resolution for mobile network</string>
+	<string name="pref_key_preferred_res_mobile" translatable="false">pref_preferred_resolution_mobile</string>
+	<string name="pref_summary_preferred_res_mobile">Select your preferred resolution when streaming via a mobile network (such as 4G):  %s</string>
+
+	<string name="pref_key_warn_mobile_downloads" translatable="false">pref_key_warn_mobile_downloads</string>
+	<string name="pref_title_warn_mobile_downloads">Display Mobile Network Warning</string>
+	<string name="pref_summary_warn_mobile_downloads">Display a warning if you are using mobile network (such as 4G) before streaming/downloading videos.</string>
 
 	<string name="pref_import_export_category">Import/Export</string>
 	<string name="pref_title_backup_dbs">Backup Databases</string>
@@ -71,7 +80,7 @@
 	<string name="pref_key_license" translatable="false">pref_license</string>
 	<string name="pref_summary_license">GNU General Public License version 3</string>
 	<string name="app_license">
-		Copyright &#169; 2015-2018  Ramon Mifsud\n
+		Copyright © 2015-2018  Ramon Mifsud\n
 
 		\nThis program is free software: you can redistribute it and/or modify
 		it under the terms of the GNU General Public License as published by
@@ -355,7 +364,7 @@
 	</string-array>
 
 	<string-array name="country_codes" translatable="false">
-		<item></item>
+		<item/>
 		<item>DZ</item>
 		<item>AR</item>
 		<item>AU</item>
@@ -513,10 +522,6 @@
 	<string name="pref_youtube_api_key_custom">Key is valid. Restart app to use the new YouTube API key.</string>
 	<string name="pref_youtube_api_key_default">Restart app to switch back to default YouTube API key.</string>
 
-	<string name="pref_key_warn_mobile_downloads" translatable="false">pref_key_warn_mobile_downloads</string>
-	<string name="pref_title_warn_mobile_downloads">Display Mobile Network Warning</string>
-	<string name="pref_summary_warn_mobile_downloads">Display a warning if you are using mobile network (such as 4G) before downloading/streaming videos.</string>
-
 	<string name="restart">Restart</string>
 	<string name="pref_key_subscriptions_alphabetical_order" translatable="false">pref_key_subscriptions_alphabetical_order</string>
 	<string name="pref_title_subscriptions_alphabetical_order">Sort Channels Alphabetically</string>
@@ -531,6 +536,11 @@
 		VIDEO BLOCKER
 	-->
 	<string name="pref_video_blocker_category">Video Blocker</string>
+
+	<string name="pref_key_enable_video_blocker" translatable="false">pref_key_enable_video_blocker</string>
+	<string name="pref_title_enable_video_blocker" translatable="false">@string/pref_video_blocker_category</string>
+	<string name="pref_summary_enable_video_blocker">Enable video blocker.</string>
+
 	<string name="pref_channels_filter_category">Channels Filters</string>
 
 	<string name="pref_key_channel_filter_method" translatable="false">pref_key_channel_filter_method</string>

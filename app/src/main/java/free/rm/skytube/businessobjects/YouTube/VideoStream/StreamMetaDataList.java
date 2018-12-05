@@ -17,12 +17,16 @@
 
 package free.rm.skytube.businessobjects.YouTube.VideoStream;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
 import android.util.Log;
 
 import java.util.ArrayList;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
+
+import static free.rm.skytube.app.SkyTubeApp.getContext;
 
 /**
  * A list of {@link StreamMetaData}.
@@ -94,6 +98,13 @@ public class StreamMetaDataList extends ArrayList<StreamMetaData> {
 		String resIdValue = SkyTubeApp.getPreferenceManager()
 							.getString(SkyTubeApp.getStr(R.string.pref_key_preferred_res),
 										Integer.toString(VideoResolution.DEFAULT_VIDEO_RES_ID));
+
+		// if on mobile network use the preferred resolution under mobile network if defined
+		if (SkyTubeApp.isConnectedToMobile()) {
+			resIdValue = SkyTubeApp.getPreferenceManager()
+					.getString(SkyTubeApp.getStr(R.string.pref_key_preferred_res_mobile),
+							resIdValue);    // default res for mobile network = that of wifi
+		}
 
 		return VideoResolution.videoResIdToVideoResolution(resIdValue);
 	}

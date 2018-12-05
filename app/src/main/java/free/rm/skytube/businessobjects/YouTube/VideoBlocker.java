@@ -74,6 +74,11 @@ public class VideoBlocker {
 	 * @return  A list of valid videos that fit the user's criteria.
 	 */
 	public List<YouTubeVideo> filter(List<YouTubeVideo> videosList) {
+		// if the video blocker is disabled, then do not filter any videos
+		if (!isVideoBlockerEnabled()) {
+			return videosList;
+		}
+
 		List<YouTubeVideo>  filteredVideosList    = new ArrayList<>();
 		final boolean       isChannelBlacklistEnabled = isChannelBlacklistEnabled();
 		final List<String>  blacklistedChannelIds = isChannelBlacklistEnabled  ? ChannelFilteringDb.getChannelFilteringDb().getBlacklistedChannelsIdsList() : null;
@@ -95,6 +100,14 @@ public class VideoBlocker {
 		}
 
 		return filteredVideosList;
+	}
+
+
+	/**
+	 * @return True if the user wants to use the video blocker, false otherwise.
+	 */
+	private boolean isVideoBlockerEnabled() {
+		return SkyTubeApp.getPreferenceManager().getBoolean(getStr(R.string.pref_key_enable_video_blocker), true);
 	}
 
 

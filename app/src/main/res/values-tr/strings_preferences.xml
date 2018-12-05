@@ -138,4 +138,17 @@
 	<string name="pref_summary_clear_playback_status">Tüm videolar için oynatma durumunu temizle.</string>
 	<string name="pref_playback_status_cleared">İzleme Durumu silindi.</string>
 
-</resources>
+<string name="pref_import_export_category">İçe/Dışa Aktar</string>
+	<string name="pref_title_disable_screen_gestures">Video hareketlerini devre dışı bırak</string>
+	<string name="pref_summary_disable_screen_gestures">Ses seviyesini, parlaklığı ve ileriye / geriye doğru arama video hareketlerini devre dışı bırakın.</string>
+
+	<string name="pref_title_warn_mobile_downloads">Mobil Ağ Uyarısını Görüntüle</string>
+	<string name="pref_summary_warn_mobile_downloads">Videoları indirmeden / yayınlamadan önce mobil ağ kullanıyorsanız (4G gibi) bir uyarı görüntüler.</string>
+
+	<string name="pref_category_downloads">İndirilenler</string>
+	<string name="pref_title_download_to_separate_directories">Videoları Klasörlere İndir</string>
+	<string name="pref_summary_download_to_separate_directories">Videolar kanal adına göre klasörlere indirilir.</string>
+
+	<string name="pref_summary_enable_video_blocker">Video engelleyiciyi etkinleştir.</string>
+
+	</resources>

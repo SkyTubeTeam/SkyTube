@@ -37,4 +37,8 @@
 
 	<string name="should_resume">Deseja continuar a reprodução do local em que parou?</string>
 	<string name="resume">Continuar</string>
-</resources>
+<string name="mobile_data">Dados móveis</string>
+	<string name="warning_mobile_network_play">O dispositivo não está ligado a uma rede Wi-Fi. Para evitar possíveis alterações de uso de dados extras, é recomendável conectar-se a uma rede Wi-Fi. Reproduzir vídeo de qualquer maneira\?</string>
+	<string name="warning_mobile_network_disable">Nunca pergunte novamente.</string>
+	<string name="play_video">Reproduzir vídeo</string>
+	</resources>

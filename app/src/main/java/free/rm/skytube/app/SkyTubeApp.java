@@ -164,6 +164,17 @@ public class SkyTubeApp extends MultiDexApplication {
 	}
 
 
+	/**
+	 * @return True if the device is connected via mobile network such as 4G.
+	 */
+	public static boolean isConnectedToMobile() {
+		final ConnectivityManager connMgr = (ConnectivityManager)
+				getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+		final android.net.NetworkInfo mobile = connMgr.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+		return mobile != null && mobile.isConnectedOrConnecting();
+	}
+
+
 	/*
 	 * Initialize Notification Channels (for Android OREO)
 	 * @param context

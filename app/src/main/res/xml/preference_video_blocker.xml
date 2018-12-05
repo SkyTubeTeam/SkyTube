@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ SkyTube
-  ~ Copyright (C) 2017  Ramon Mifsud
+  ~ Copyright (C) 2017-2018  Ramon Mifsud
   ~
   ~ This program is free software: you can redistribute it and/or modify
   ~ it under the terms of the GNU General Public License as published by
@@ -17,6 +17,12 @@
   -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+	<CheckBoxPreference
+		android:key="@string/pref_key_enable_video_blocker"
+		android:title="@string/pref_title_enable_video_blocker"
+		android:summary="@string/pref_summary_enable_video_blocker"
+		android:defaultValue="true"/>
 
 	<PreferenceCategory
 		android:title="@string/pref_channels_filter_category">

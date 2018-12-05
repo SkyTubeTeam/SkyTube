@@ -51,7 +51,7 @@ public class MobileNetworkWarningDialog extends SkyTubeMaterialDialog {
 		final boolean   displayWarning  = SkyTubeApp.getPreferenceManager().getBoolean(SkyTubeApp.getStr(R.string.pref_key_warn_mobile_downloads), true);
 		boolean         dialogDisplayed = false;
 
-		if (isConnectedToMobile() && displayWarning) {
+		if (SkyTubeApp.isConnectedToMobile() && displayWarning) {
 			title(R.string.mobile_data);
 			content(actionType == ActionType.STREAM_VIDEO ? R.string.warning_mobile_network_play : R.string.warning_mobile_network_download);
 			checkBoxPromptRes(R.string.warning_mobile_network_disable, false, new CompoundButton.OnCheckedChangeListener() {
@@ -66,17 +66,6 @@ public class MobileNetworkWarningDialog extends SkyTubeMaterialDialog {
 		}
 
 		return dialogDisplayed;
-	}
-
-
-	/**
-	 * @return True if the device is connected via mobile network such as 4G.
-	 */
-	private boolean isConnectedToMobile() {
-		final ConnectivityManager connMgr = (ConnectivityManager)
-				getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-		final android.net.NetworkInfo mobile = connMgr.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
-		return mobile != null && mobile.isConnectedOrConnecting();
 	}
 
 

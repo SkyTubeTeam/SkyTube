@@ -37,4 +37,8 @@
 
 	<string name="should_resume">Durduğunuz yerden devam etmek ister misiniz?</string>
 	<string name="resume">Devam et</string>
-</resources>
+<string name="mobile_data">Mobil Veri</string>
+	<string name="warning_mobile_network_play">Cihazınız bir Wi-Fi ağına bağlı değil. Olası ekstra veri kullanımı değişikliklerinden kaçınmak için bir Wi-Fi ağına bağlamanız önerilir. Yine de video oynatılsın mı\?</string>
+	<string name="warning_mobile_network_disable">Asla tekrar sorma.</string>
+	<string name="play_video">Videoyu Oynat</string>
+	</resources>
