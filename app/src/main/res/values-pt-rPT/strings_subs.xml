@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
 	<string name="subscriptions">Subscrições</string>
-	<string name="subscribe">Subscrito</string>
+	<string name="subscribe">Subscrever</string>
 	<string name="unsubscribe">Anular subscrição</string>
 	<string name="total_subscribers">%,d subscritores</string>
 
