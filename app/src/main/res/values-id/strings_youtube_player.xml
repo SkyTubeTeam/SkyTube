@@ -1,2 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources><string name="error_stream_err_unavailable">Pesan galat tidak tersedia.</string>
+    <string name="error_stream_decryption_fail">Tidak bisa memuat kode dekripsi untuk layanan YouTube.</string>
+    <string name="error_stream_parse_error">Galat penguraian.</string>
+    <string name="error_video_play">Galat Pemutaran Video</string>
+    <string name="error_video_streams_empty">Video %s tidak memiliki stream.</string>
+    <string name="error_video_streams">Terjadi kesalahan saat mengambil stream video.</string>
+    <string name="error_get_video_desc">Terjadi kesalahan saat mengambil deskripsi video.</string>
+    <string name="error_invalid_url">URL video tidak valid: %s</string>
+    <string name="mobile_data">Data Seluler</string>
+    <string name="warning_mobile_network_play">Perangkat anda tidak tersambung dengan jaringan Wi-Fi. Untuk menghindari potensi penggunaan data tambahan, direkomendasikan untuk tersambung dengan jaringan Wi-Fi. Tetap putar video\?</string>
+    <string name="warning_mobile_network_disable">Jangan tanya lagi.</string>
+    <string name="play_video">Putar Video</string>
+    <string name="warning_live_video">Tidak bisa memutar siarang langsung sekarang. Buka siaran langsung di apl lain\?</string>
+    <string name="ratings_disabled">Rating dinonaktifkan</string>
+    <string name="loading_video">Memuat video…</string>
+    <string name="get_new_video_steam">Stream Baru</string>
+    <string name="open_in_browser">Buka di peramban web</string>
+    <string name="open_with">Buka dengan…</string>
+    <string name="share">Bagikan</string>
+    <string name="share_via">Bagikan via</string>
+    <string name="copy_url">Salin URL</string>
+    <string name="url_copied_to_clipboard">URL disalin ke papan klip.</string>
+    <string name="mark_watched">Tandai Ditonton</string>
+    <string name="mark_unwatched">Tandai Belum Ditonton</string>
+    <string name="error_get_comments">Terjadi kesalahan saat menampilkan komentar.</string>
+    <string name="no_video_comments">Video ini tidak memiliki komentar atau komentar dinonaktifkan.</string>
+    <string name="view_replies">Lihat balasan</string>
+    <string name="hide_replies">Sembunyikan balasan</string>
+    <string name="enter_video_url">Masukkan URL video</string>
+    <string name="play">Putar</string>
+    <string name="cancel">Batal</string>
+    <string name="clear">Hapus</string>
+    <string name="should_resume">Apakah anda ingin melanjutkan dari posisi waktu terakhir video ditonton\?</string>
+    <string name="resume">Lanjutkan</string>
+</resources>
