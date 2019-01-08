@@ -1,2 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources><string name="update_available">Versi Baru Tersedia</string>
+    <string name="update_dialog_msg">Versi baru SkyTube telah tersedia. Versi %d akan segera dipasang.</string>
+    <string name="up_to_date">Terbaru</string>
+    <string name="up_to_date_msg">Versi SkyTube anda sudah yang paling baru.</string>
+    <string name="update">Perbarui</string>
+    <string name="later">Nanti</string>
+    <string name="update_failure">Tidak bisa memperbarui apl.</string>
+    <string name="downloading">Mengunduh…</string>
+</resources>
