@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="downloads">Downloads</string>
 	<string name="download_video">Download Video</string>
@@ -12,5 +12,5 @@
 	<string name="playing_video_file_missing">No encuentro la descarga de este video, Reproduciendo de internet.</string>
 	<string name="external_storage_not_available">No puedo descargar el video porque el almacenamiento externo no está disponible.</string>
 <string name="download">Descargar</string>
-	<string name="warning_mobile_network_download">Su dispositivo no está conectado a una red Wi-Fi. Para evitar posibles cambios en el uso de datos adicionales se recomienda conectarse a una red Wi-Fi. Descargar el video de todas formas\?</string>
+	<string name="warning_mobile_network_download">Su dispositivo no está conectado a una red Wi-Fi. Para evitar posible uso extra de datos, se recomienda conectarse a una red Wi-Fi. Desea descargar el video de todas formas\?</string>
 	</resources>
