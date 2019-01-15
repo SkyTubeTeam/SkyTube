@@ -19,4 +19,5 @@
     <string name="import_subscriptions_parse_error">Terjadi kesalahan saat mencoba untuk mengurai berkas XML yang diunggah: %s.</string>
     <string name="failed_to_import_subscriptions">Gagal mengimpor subscription YouTube anda.</string>
     <string name="about">Tentang</string>
+    <string name="error_unable_to_subscribe">Tidak bisa (un)subscribe channel (id=%s)</string>
 </resources>
