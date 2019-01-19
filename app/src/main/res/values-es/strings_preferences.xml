@@ -150,7 +150,7 @@
 	<string name="pref_playback_status_cleared">Estado de reproducción borrado.</string>
 
 <string name="pref_title_disable_screen_gestures">Deshabilitar gestos de video</string>
-	<string name="pref_summary_disable_screen_gestures">Deshabilitar gestos de video para volumen, brillo y búsqueda adelante/atrás.</string>
+	<string name="pref_summary_disable_screen_gestures">Deshabilitar gestos para controlar volumen, brillo y búsqueda adelante/atrás en videos.</string>
 
 	<string name="pref_title_warn_mobile_downloads">Mostrar Advertencia de Red Móvil</string>
 	<string name="pref_summary_warn_mobile_downloads">Mostrar una advertencia si estás usando una red móvil (como 4G) antes de reproducir/descargar videos.</string>
