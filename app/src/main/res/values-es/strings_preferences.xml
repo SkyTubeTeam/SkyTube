@@ -73,7 +73,7 @@
 		<item>Sensor del dispositivo</item>
 	</string-array>
 
-	<string name="pref_title_youtube_api_key">Clave del api de YouTube</string>
+	<string name="pref_title_youtube_api_key">Clave del API de YouTube</string>
 	<string name="pref_summary_youtube_api_key">Introduzca su propia YouTube Data API Key. Deje vacío para usar una por defecto.</string>
 	<string name="pref_youtube_api_key_error">Ocurrió un error al intentar validar la YouTube API Key que ha introducido.</string>
 	<string name="pref_youtube_api_key_custom">La clave es valida. Reinicie la aplicación para usar la nueva YouTube API Key.</string>
