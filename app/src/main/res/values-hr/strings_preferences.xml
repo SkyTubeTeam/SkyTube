@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="preferences">Postavke</string>
 
 	<string name="pref_video_player_category">Video player</string>
@@ -119,7 +119,7 @@
 	<string name="pref_summary_download_to_separate_directories">Videozapisi se spremaju u mape na temelju naziva kanala.</string>
 
 	<string name="pref_title_disable_screen_gestures">Onemogući video geste</string>
-	<string name="pref_summary_disable_screen_gestures">Onemogući glasnoću, svjetlinu i premotavanje unaprijed/unazad video geste.</string>
+	<string name="pref_summary_disable_screen_gestures">Onemogući geste za kontrolu glasnoće, svjetline i premotavanje unaprijed/unazad videa.</string>
 
 	<string name="app_license">Copyright © 2015-2018 Ramon Mifsud
 \n 
