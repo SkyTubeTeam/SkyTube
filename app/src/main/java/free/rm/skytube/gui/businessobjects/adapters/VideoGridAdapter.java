@@ -67,27 +67,18 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<YouTubeVideo, GridVi
 
 
 	/**
-	 * @see #VideoGridAdapter(Context, boolean)
+	 * Constructor.
+	 *
+	 * @param context	Context.
 	 */
 	public VideoGridAdapter(Context context) {
-		this(context, true);
+		super(context);
+		this.getYouTubeVideos = null;
 	}
+
 
 	public void setListener(MainActivityListener listener) {
 		this.listener = listener;
-	}
-
-	/**
-	 * Constructor.
-	 *
-	 * @param context			Context.
-	 * @param showChannelInfo	True to display channel information (e.g. channel name) and allows
-	 *                          user to open and browse the channel; false to hide such information.
-	 */
-	public VideoGridAdapter(Context context, boolean showChannelInfo) {
-		super(context);
-		this.getYouTubeVideos = null;
-		this.showChannelInfo = showChannelInfo;
 	}
 
 
@@ -118,6 +109,8 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<YouTubeVideo, GridVi
 		try {
 			Log.i(TAG, videoCategory.toString());
 
+			// do not show channel name if the video category == CHANNEL_VIDEOS or PLAYLIST_VIDEOS
+			this.showChannelInfo = !(videoCategory == VideoCategory.CHANNEL_VIDEOS  ||  videoCategory == VideoCategory.PLAYLIST_VIDEOS);
 
 			// create a new instance of GetYouTubeVideos
 			this.getYouTubeVideos = videoCategory.createGetYouTubeVideos();
