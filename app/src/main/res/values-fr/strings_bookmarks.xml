@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="bookmarks">Favoris</string>
 
@@ -9,5 +10,7 @@
 	<string name="video_unbookmarked">Vidéo enlevée des favoris</string>
 	<string name="video_unbookmarked_error">Impossible d\'enlever la vidéo des favoris.</string>
 
-	<string name="no_bookmarked_videos_text">Vous n\'avez pas ajouté de vidéo aux favoris. Une fois ajoutées, elles s\'afficheront ici.</string>
+	<string name="no_bookmarked_videos_text">Vous n\'avez pas ajouté de vidéos aux favoris.
+\n
+\nUne fois ajoutées, elles s\'afficheront ici.</string>
 </resources>

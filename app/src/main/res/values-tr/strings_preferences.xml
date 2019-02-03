@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="preferences">Tercihler</string>
 
 	<string name="pref_languages_filter_category">Dil ve Bölge Filtreleri</string>
@@ -150,5 +150,7 @@
 	<string name="pref_summary_download_to_separate_directories">Videolar kanal adına göre klasörlere indirilir.</string>
 
 	<string name="pref_summary_enable_video_blocker">Video engelleyiciyi etkinleştir.</string>
-
-	</resources>
+    <string name="pref_category_mobile_network">Mobil ağ</string>
+    <string name="pref_title_preferred_res_mobile">Mobil ağ için Tercih Edilen Çözünürlük</string>
+    <string name="pref_summary_preferred_res_mobile">Mobil ağ üzerinden bağlanırken tercih ettiğiniz çözünürlüğü seçin (4G gibi): %s</string>
+</resources>

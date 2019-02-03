@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="preferences">Preferências</string>
 
@@ -151,7 +151,7 @@
 	<string name="setting_updated">Definição atualizada. Por favor recarregue os vídeos.</string>
 
 	<string name="pref_title_disable_screen_gestures">Desativar gestos de vídeo</string>
-	<string name="pref_summary_disable_screen_gestures">Desativa os gestos para gerir o volume, o brilho e o recuo/avanço dos vídeos.</string>
+	<string name="pref_summary_disable_screen_gestures">Desligar gestos para controlar o volume, o brilho e a pesquisa por avanço/recuo nos vídeos.</string>
 
 	<string name="pref_title_warn_mobile_downloads">Mostrar aviso de rede móvel</string>
 	<string name="pref_summary_warn_mobile_downloads">Mostrar um aviso se estiver a ser usada uma rede móvel (como 4G) antes de descarregar ou reproduzir vídeos.</string>

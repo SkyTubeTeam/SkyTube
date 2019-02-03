@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources><string name="thumbnail">Thumbnail</string>
+    <string name="view_thumbnail">Lihat Thumbnail</string>
+    <string name="thumbnail_downloaded">Thumbnail diunduh.</string>
+    <string name="thumbnail_download_error">Thumbnail tidak bisa diunduh.</string>
+</resources>

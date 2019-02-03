@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="preferences">الخيارات</string>
 
 	<string name="pref_languages_filter_category">اللغات والمناطق</string>
@@ -8,16 +8,16 @@
 	<string name="pref_title_preferred_languages">اللغات المفضلة</string>
 	<string name="pref_summary_preferred_languages">EXPERIMENTAL: حدد لغة مفضلة واحدة أو أكثر. يتم استخدام هذه الميزة لتصفية مقاطع الفيديو في فئة الفيديو \"الأكثر شيوعا\" وعمليات البحث عن الفيديو.</string>
 
-	<string name="pref_video_player_category">مشغل فيديو</string>
-	<string name="pref_title_preferred_res">القرار المفضل</string>
+	<string name="pref_video_player_category">مشغل الفيديو</string>
+	<string name="pref_title_preferred_res">الدقة المفضلة</string>
 	<string name="pref_summary_preferred_res">s% حدد الدقة المفضلة لديك</string>
 
 	<string name="pref_title_backup_dbs">قواعد بيانات النسخ الاحتياطي</string>
 	<string name="pref_summary_backup_dbs">الاحتفاظ بنسخة احتياطية من قواعد بيانات الاشتراك وقاعدة بيانات الإشارات المرجعية.</string>
-	<string name="pref_title_import_dbs">استيراد النسخ الاحتياطي</string>
-	<string name="pref_summary_import_dbs">استيراد النسخ الاحتياطي وقاعدة بيانات الإشارات المرجعية الخاصة بك.</string>
-	<string name="databases_backing_up">النسخة الإحتياطية…</string>
-	<string name="databases_backup_success">قواعد البيانات احتياطيا إلى %s</string>
+	<string name="pref_title_import_dbs">استيراد نسخة احتياطية</string>
+	<string name="pref_summary_import_dbs">استيراد النسخة الاحتياطية وقاعدة بيانات الإشتراكات الخاصة بك.</string>
+	<string name="databases_backing_up">نسخة إحتياطية…</string>
+	<string name="databases_backup_success">حفظ قواعد البيانات احتياطيا في %s</string>
 	<string name="databases_backup_fail">فشل النسخ الاحتياطي لقواعد البيانات الخاصة بك.</string>
 	<string name="databases_import_select_backup">حدد ملف النسخ الاحتياطي للاستيراد</string>
 	<string name="databases_import_nothing_selected">لم يتم تحديد أي شيء …</string>
@@ -82,4 +82,41 @@
 		<item>12 Hours</item>
 		<item>24 Hours</item>
 	</string-array>
+    <string name="pref_title_choose_player">مشغل الفيديو</string>
+    <string name="pref_summary_choose_player">مشغل الفديو المستخدم : %s</string>
+    <string name="pref_category_mobile_network">شبكة الجوال</string>
+    <string name="pref_title_preferred_res_mobile">الدقة المفضلة على شبكة الجوال</string>
+    <string name="pref_summary_preferred_res_mobile">اختيار مشغل الفيديو المفضل لديك لتشغيل عن طريق شبكة الجوال مثل (4G):%s</string>
+    <string name="pref_title_warn_mobile_downloads">عرض تنبيه عند التشغيل على شبكة الجوال</string>
+    <string name="pref_summary_warn_mobile_downloads">عرض تحذير إذا كنت تستخدم شبكة الجوال مثل (4G) قبل التشغيل / تحميل ملفات الفيديو.</string>
+    <string name="pref_import_export_category">استيراد / تصدير</string>
+    <string name="pref_title_disable_screen_gestures">تعطيل إيماءات الفيديو</string>
+    <string name="pref_summary_disable_screen_gestures">إيقاف إيماءات التحكم بحجم والسطوع والتقديم إلى الأمام / الخلف في الفيديو.</string>
+    <string name="pref_title_subscriptions_alphabetical_order">ترتيب القنوات ابجديا</string>
+    <string name="pref_summary_subscriptions_alphabetical_order">إذا تم تفعيله ،سيتم فرز القنوات أبجديا.</string>
+    <string name="pref_category_downloads">التنزيلات</string>
+    <string name="pref_title_download_to_separate_directories">تحميل ملفات الفيديو في مجلدات</string>
+    <string name="pref_summary_download_to_separate_directories">الفيديوهات التي يتم تحميلها إلى مجلد باسم القناة.</string>
+    <string name="pref_video_blocker_category">حجب الفديوهات</string>
+    <string name="pref_summary_enable_video_blocker">تفعيل حجب الفديوهات.</string>
+    <string name="pref_channels_filter_category">فلاتر القنوات</string>
+    <string name="pref_title_channel_filter_method">طريقة فلترة القناة</string>
+    <string name="pref_summary_channel_filter_method">قم بتحديد أسلوب فلترة القناة: %s</string>
+    <string name="disabled">تم تعطيله</string>
+    <string name="pref_title_channel_blacklist">القنوات في القائمة السوداء</string>
+    <string name="pref_summary_channel_blacklist">قائمة القنوات المحظورة.</string>
+    <string name="unblock">إلغاء الحظر</string>
+    <string name="channel_blacklist_updated">تم تحديث القنوات في القائمة السوداء .يرجى تحديث الفيديو.</string>
+    <string name="channel_blacklist_empty">قائمة القنوات السوداء فارغة.</string>
+    <string name="pref_summary_channel_whitelist">قائمة قنوات اللائحة البيضاء.</string>
+    <string name="add">إضافة</string>
+    <string name="block">حجب</string>
+    <string name="please_wait">الرجاء الانتظار…</string>
+    <string name="pref_other_filters_category">الفلاتر الأخرى</string>
+    <string name="pref_title_low_views_filter">مشاهدة</string>
+    <string name="pref_title_dislikes_filter">عدم الإعجاب</string>
+    <string name="pref_privacy_category">الخصوصية</string>
+    <string name="pref_title_disable_search_history">تعطيل سجل البحث</string>
+    <string name="pref_disable_search_history_deleted">تم حذف سجل البحث.</string>
+    <string name="pref_disable_playback_status_deleted">حذف حالة التشغيل.</string>
 </resources>

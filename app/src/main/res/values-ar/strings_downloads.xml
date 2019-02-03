@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="downloads">Downloads</string>
-	<string name="download_video">Download Video</string>
-	<string name="starting_video_download">Downloading \'%s\'…</string>
-	<string name="video_download_stream_error">Could not download \'%s\'.</string>
-	<string name="delete_download">Delete Download</string>
-	<string name="video_downloaded">\'%s\' downloaded.</string>
-	<string name="no_downloaded_videos_text">You haven\'t downloaded any videos yet.\n\nOnce you do, they will show up here.</string>
-	<string name="playing_video_file_missing">The download for this video was not found. Playing remotely.</string>
-	<string name="external_storage_not_available">Unable to download the file as the external storage is not available.</string>
+	<string name="downloads">التنزيلات</string>
+	<string name="download_video">تنزيل الفيديو</string>
+	<string name="starting_video_download">جار التنزيل \'%s\'…</string>
+	<string name="video_download_stream_error">لايمكن التنزيل \'%s\'.</string>
+	<string name="delete_download">حذف التنزيل</string>
+	<string name="video_downloaded">\'%s\' تم تنزيلها.</string>
+	<string name="no_downloaded_videos_text">لم تقم بتنزيل أي مقاطع فيديو حتى الآن.
+\n
+\nبمجرد القيام بذالك ، سوف تظهر هنا.</string>
+	<string name="playing_video_file_missing">لم يتم العثور على الملف الذي تم تحميله. يتم تشغيل الفديو عن بعد.</string>
+	<string name="external_storage_not_available">غير قادر على تحميل الملف ذاكرة التخزين الخارجية غير متوفرة.</string>
+    <string name="download">تنزيل</string>
+    <string name="warning_mobile_network_download">جهازك غير متصل بشبكة واي فاي.لأجل تجنب احتمال تغييرات اضافية لاستخدام البيانات، فمن المستحسن أن تتصل بشبكة واي فاي.تحميل فيديو على أي حال؟</string>
 </resources>

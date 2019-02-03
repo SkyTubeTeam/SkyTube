@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="preferences">Preferencias</string>
 
@@ -73,8 +73,8 @@
 		<item>Sensor del dispositivo</item>
 	</string-array>
 
-	<string name="pref_title_youtube_api_key">Clave del api de YouTube</string>
-	<string name="pref_summary_youtube_api_key">Introduzca su propia YouTube Data API Key. Deje vacío para usar una por defecto.</string>
+	<string name="pref_title_youtube_api_key">Clave del API de YouTube</string>
+	<string name="pref_summary_youtube_api_key">Introduzca su propia clave de la librería de datos de YouTube. Deje en blanco para usar una por defecto.</string>
 	<string name="pref_youtube_api_key_error">Ocurrió un error al intentar validar la YouTube API Key que ha introducido.</string>
 	<string name="pref_youtube_api_key_custom">La clave es valida. Reinicie la aplicación para usar la nueva YouTube API Key.</string>
 	<string name="pref_youtube_api_key_default">Reinicie la aplicación para volver a usar la YouTube API Key por defecto.</string>
@@ -96,8 +96,8 @@
 	<string name="pref_title_subscriptions_alphabetical_order">Ordenar canales alfabéticamente</string>
 	<string name="pref_summary_subscriptions_alphabetical_order">Si lo seleccionas, los canales suscritos se ordenarán alfabéticamente.</string>
 	<string name="pref_category_downloads">Descargas</string>
-	<string name="pref_title_download_to_separate_directories">Descargar videos en carpetas separadas</string>
-	<string name="pref_summary_download_to_separate_directories">Los videos se graban en carpetas separadas según el nombre del canal.</string>
+	<string name="pref_title_download_to_separate_directories">Descargar videos en carpetas</string>
+	<string name="pref_summary_download_to_separate_directories">Los videos se descargan en carpetas separadas según el nombre del canal.</string>
 
 	<string name="pref_video_blocker_category">Bloqueador de videos</string>
 	<string name="pref_channels_filter_category">Filtros de canales</string>
@@ -150,11 +150,13 @@
 	<string name="pref_playback_status_cleared">Estado de reproducción borrado.</string>
 
 <string name="pref_title_disable_screen_gestures">Deshabilitar gestos de video</string>
-	<string name="pref_summary_disable_screen_gestures">Deshabilitar gestos de video para volumen, brillo y búsqueda adelante/atrás.</string>
+	<string name="pref_summary_disable_screen_gestures">Deshabilitar gestos para controlar volumen, brillo y búsqueda adelante/atrás en videos.</string>
 
 	<string name="pref_title_warn_mobile_downloads">Mostrar Advertencia de Red Móvil</string>
-	<string name="pref_summary_warn_mobile_downloads">Mostrar una advertencia si estás usando una red móvil (como 4G) antes de descargar/reproducir videos.</string>
+	<string name="pref_summary_warn_mobile_downloads">Mostrar una advertencia si estás usando una red móvil (como 4G) antes de reproducir/descargar videos.</string>
 
 	<string name="pref_summary_enable_video_blocker">Habilitar bloqueador de videos.</string>
-
-	</resources>
+    <string name="pref_category_mobile_network">Red móvil</string>
+    <string name="pref_title_preferred_res_mobile">Resolución preferida con Redes móviles</string>
+    <string name="pref_summary_preferred_res_mobile">Selecciona tu resolución preferida cuando visualizas desde una red móvil (como 4G):%s</string>
+</resources>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources><string name="could_not_get_videos">Tidak bisa mengambil %s video.</string>
+    <string name="could_not_get_channel">Tidak bisa mengunduh informasi channel!</string>
+    <string name="views">%,d ditonton</string>
+    <string name="error">Galat</string>
+    <string name="ok">OKE</string>
+    <string name="search_videos">Cari Video</string>
+    <string name="launch_offical_player_error">Terjadi kesalahan saat mencoba meluncurkan pemutar YouTube resmi dari Google. Pastikan apl terpasang di perangkat anda.</string>
+    <string name="LIVE">LANGSUNG</string>
+    <string name="featured">Unggulan</string>
+    <string name="most_popular">Terpopuler</string>
+    <string name="video">Video</string>
+    <string name="videos">Video</string>
+    <string name="num_videos">%d video</string>
+    <string name="playlists">Daftar Putar</string>
+    <string name="could_not_get_playlists">Tidak bisa mengambil %s daftar putar.</string>
+    <string name="loading">Memuat …</string>
+    <string name="yes">Ya</string>
+    <string name="no">Tidak</string>
+</resources>

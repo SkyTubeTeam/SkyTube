@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="preferences">تنظیمات</string>
 
 	<string name="pref_video_player_category">پخش‌کننده ویدئو</string>
@@ -56,7 +56,7 @@
 	<string name="pref_title_screen_orientation">جهت صفحه نمایش</string>
 	<string name="pref_summary_screen_orientation">جهت پخش‌کننده ویدئو: %s</string>
 	<string name="pref_title_disable_screen_gestures">غیرفعال کردن gestureهای ویدئو</string>
-	<string name="pref_summary_disable_screen_gestures">غیرفعال کردن gesture مربوط به تغییر حجم صدا، روشنایی و عقب یا جلو راندن ویدئو.</string>
+	<string name="pref_summary_disable_screen_gestures">خاموش کردن gesture مربوط به تغییر حجم صدا، روشنایی و عقب یا جلو راندن ویدئو.</string>
 
 	<string name="pref_title_youtube_api_key">کلید API یوتیوب</string>
 	<string name="pref_summary_youtube_api_key">کلید API داده یوتیوب خود را وارد کنید. برای استفاده از API پیش‌فرض، خالی رها کنید.</string>
