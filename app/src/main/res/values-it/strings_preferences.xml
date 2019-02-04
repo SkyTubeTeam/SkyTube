@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="preferences">Impostazioni</string>
 
@@ -148,11 +148,15 @@
 	<string name="pref_summary_download_to_separate_directories">I video vengono salvati in cartelle in base al nome del canale.</string>
 
 	<string name="pref_title_disable_screen_gestures">Disattiva gesti</string>
-	<string name="pref_summary_disable_screen_gestures">Disattiva i gesti sullo schermo per volume, luminosità e l\'avanti/indietro del video.</string>
+	<string name="pref_summary_disable_screen_gestures">Disattiva i gesti sullo schermo per volume, luminosità e l\'avanti/indietro dei video.</string>
 
 	<string name="pref_title_warn_mobile_downloads">Mostra avviso di rete mobile</string>
-	<string name="pref_summary_warn_mobile_downloads">Mostra un avviso se stai usando la rete mobile (come il 4G) prima di scaricare/riprodurre video.</string>
+	<string name="pref_summary_warn_mobile_downloads">Mostra un avviso se stai usando la rete mobile (come il 4G) prima di riprodurre/scaricare video.</string>
 
 	<string name="pref_summary_enable_video_blocker">Abilita il blocco dei video.</string>
+
+	<string name="pref_category_mobile_network">Rete mobile</string>
+	<string name="pref_title_preferred_res_mobile">Risoluzione preferita per rete mobile</string>
+	<string name="pref_summary_preferred_res_mobile">Seleziona la tua risoluzione preferita quando usi una rete mobile (come il 4G): %s</string>
 
 	</resources>

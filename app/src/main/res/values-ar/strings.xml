@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="could_not_get_videos">تعذر الحصول على %s من مقاطع الفيديو.</string>
 	<string name="views">%,d المشاهدات</string>
 	<string name="error">خطأ</string>
@@ -18,4 +18,6 @@
 
 	<string name="loading">Loading …</string>
     <string name="could_not_get_channel">Could not download channel information!</string>
+    <string name="yes">نعم</string>
+    <string name="no">لا</string>
 </resources>

@@ -49,7 +49,7 @@ More features will be added in the near future.
 | Official YouTube player support* | ✅                   | ❌       |
 | Chromecast Support*              | ✅                   | ❌       |
 | Updates availability             | Immediate            | Normally up to 5 days |
-| Download APK                     | [![Download SkyTube Extra APK](screenshots/download_apk.png)](https://github.com/ram-on/SkyTube/releases/download/v2.93/SkyTube-Extra-2.93.apk) | [![Download SkyTube (Vanilla) APK](https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Get_it_on_F-Droid.svg/200px-Get_it_on_F-Droid.svg.png)](https://f-droid.org/repository/browse/?fdid=free.rm.skytube.oss)
+| Download APK                     | [![Download SkyTube Extra APK](screenshots/download_apk.png)](https://github.com/ram-on/SkyTube/releases/download/v2.94/SkyTube-Extra-2.94.apk) | [![Download SkyTube (Vanilla) APK](https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Get_it_on_F-Droid.svg/200px-Get_it_on_F-Droid.svg.png)](https://f-droid.org/repository/browse/?fdid=free.rm.skytube.oss)
 
 _* powered by a closed-source, third-party library._
 

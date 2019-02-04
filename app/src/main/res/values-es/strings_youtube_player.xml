@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="error_stream_err_unavailable">Mensaje de error no disponible.</string>
 	<string name="error_stream_decryption_fail">No se pudo cargar el código para descifrar el servicio de Youtube.</string>
@@ -38,7 +38,7 @@
 	<string name="should_resume">¿Quieres ver desde el punto en el que paraste?</string>
 	<string name="resume">Continuar</string>
 <string name="mobile_data">Datos Móviles</string>
-	<string name="warning_mobile_network_play">Tu dispositivo no está conectado a una red Wi-Fi. Para evitar posibles cambios en la cantidad de datos extra en uso se recomienda conectarse a una red Wi-Fi. ¿Reproducir el video de todas formas\?</string>
+	<string name="warning_mobile_network_play">Este dispositivo no está conectado a una red Wi-Fi. Para evitar posibles cobros por uso extra de datos se recomienda conectarse a una red Wi-Fi. ¿Desea reproducir el video de todas formas\?</string>
 	<string name="warning_mobile_network_disable">No preguntar de nuevo.</string>
 	<string name="play_video">Reproducir Video</string>
 	</resources>

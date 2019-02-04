@@ -9,8 +9,8 @@ android {
         minSdkVersion 14
         targetSdkVersion 28
 
-        versionName "2.93"    // digits of the *fractional part* shall NOT be > than "9"
-        versionCode 17
+        versionName "2.94"    // digits of the *fractional part* shall NOT be > than "9"
+        versionCode 18
 
         // Third party devs:  pls be ethical and change the below keys
         buildConfigField 'String',   'YOUTUBE_API_KEYS_DEBUG', '"AIzaSyDU-ZZCyOB_kYkiMSZ6ooSipUZRukHU4ik"'
@@ -79,7 +79,8 @@ dependencies {
     // other modules
     implementation group: 'org.ocpsoft.prettytime', name: 'prettytime', version: '4.0.1.Final'
     implementation 'com.github.moraisigor:slidingdrawer:1.6.7'
-    implementation 'com.github.bumptech.glide:glide:4.3.1'
+    implementation 'com.github.bumptech.glide:glide:4.8.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     implementation 'com.google.code.gson:gson:2.8.2'
@@ -105,8 +106,8 @@ dependencies {
 
     // proprietary module
     extraImplementation files('libs/YouTubeAndroidPlayerApi.jar')
-    extraImplementation 'com.android.support:mediarouter-v7:27.1.1'
-    extraImplementation 'com.google.android.gms:play-services-cast-framework:15.0.1'
+    extraImplementation 'com.android.support:mediarouter-v7:28.0.0'
+    extraImplementation 'com.google.android.gms:play-services-cast-framework:16.1.2'
     extraImplementation 'com.googlecode.android-query:android-query:0.25.9'
     extraImplementation 'com.sothree.slidinguppanel:library:3.4.0'
     extraImplementation 'com.github.rahatarmanahmed:circularprogressview:2.5.0'

@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="error_stream_err_unavailable">رسالة الخطا غير متوفرة.</string>
 	<string name="error_stream_decryption_fail">تعذر تحميل رمز فك التشفير لخدمه YouTube.</string>
 	<string name="error_stream_parse_error">خطا في التحليل.</string>
@@ -31,4 +31,12 @@
 	<string name="play">تشغيل</string>
 	<string name="cancel">إلغاء</string>
 	<string name="clear">تنظيف</string>
+    <string name="mobile_data">البيانات المتنقلة</string>
+    <string name="warning_mobile_network_play">جهازك غير متصل بشبكة واي فاي.لأجل تجنب احتمال تغييرات اضافية لاستخدام البيانات، فمن المستحسن أن تتصل بشبكة واي فاي.تشغيل الفيديو على أي حال؟</string>
+    <string name="warning_mobile_network_disable">لا تسأل مرة أخرى.</string>
+    <string name="play_video">تشغيل الفيديو</string>
+    <string name="mark_watched">تعليمه كفيديو تمت مشاهدته</string>
+    <string name="mark_unwatched">تعليمه كفيديو لم تتم مشاهدته</string>
+    <string name="should_resume">هل ترغب في الإستئناف من حيث توقفت؟</string>
+    <string name="resume">إستئناف</string>
 </resources>
