@@ -136,7 +136,7 @@
     <string name="pref_title_warn_mobile_downloads">モバイル通信ネットワークの警告を表示</string>
     <string name="pref_summary_warn_mobile_downloads">モバイル通信ネットワークを使用する場合、ビデオのストリーミング/ダウンロードの前に警告を表示します。</string>
     <string name="pref_title_disable_screen_gestures">ビデオジェスチャーを無効にする</string>
-    <string name="pref_summary_disable_screen_gestures">音量、明るさ、早送り/巻き戻しのビデオジェスチャーを無効にします。</string>
+    <string name="pref_summary_disable_screen_gestures">ビデオの音量、明るさ、早送り/巻き戻しを制御するジェスチャーを無効にします。</string>
     <string name="pref_summary_enable_video_blocker">ビデオブロッカーを有効にします。</string>
     <string name="pref_title_lang_detection_video_filtering">言語認識ビデオフィルター</string>
     <string name="pref_summary_lang_detection_video_filtering">AIを使用してビデオで使用されている言語を検出し、お好み言語と異なる場合はそれらをブロックします。 ハイエンドデバイスでのみ有効にすることができます。</string>
