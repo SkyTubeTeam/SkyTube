@@ -1,48 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources><string name="preferences">الخيارات</string>
-
-	<string name="pref_languages_filter_category">اللغات والمناطق</string>
-	<string name="pref_title_preferred_regions">المنطقة المفضلة</string>
-	<string name="pref_summary_preferred_regions">حدد منطقة مفضلة. يتم استخدام ذلك لتصفية مقاطع الفيديو في فئة مقاطع الفيديو \"المميزة\". %s</string>
-
-	<string name="pref_title_preferred_languages">اللغات المفضلة</string>
-	<string name="pref_summary_preferred_languages">EXPERIMENTAL: حدد لغة مفضلة واحدة أو أكثر. يتم استخدام هذه الميزة لتصفية مقاطع الفيديو في فئة الفيديو \"الأكثر شيوعا\" وعمليات البحث عن الفيديو.</string>
-
-	<string name="pref_video_player_category">مشغل الفيديو</string>
-	<string name="pref_title_preferred_res">الدقة المفضلة</string>
-	<string name="pref_summary_preferred_res">s% حدد الدقة المفضلة لديك</string>
-
-	<string name="pref_title_backup_dbs">قواعد بيانات النسخ الاحتياطي</string>
-	<string name="pref_summary_backup_dbs">الاحتفاظ بنسخة احتياطية من قواعد بيانات الاشتراك وقاعدة بيانات الإشارات المرجعية.</string>
-	<string name="pref_title_import_dbs">استيراد نسخة احتياطية</string>
-	<string name="pref_summary_import_dbs">استيراد النسخة الاحتياطية وقاعدة بيانات الإشتراكات الخاصة بك.</string>
-	<string name="databases_backing_up">نسخة إحتياطية…</string>
-	<string name="databases_backup_success">حفظ قواعد البيانات احتياطيا في %s</string>
-	<string name="databases_backup_fail">فشل النسخ الاحتياطي لقواعد البيانات الخاصة بك.</string>
-	<string name="databases_import_select_backup">حدد ملف النسخ الاحتياطي للاستيراد</string>
-	<string name="databases_import_nothing_selected">لم يتم تحديد أي شيء …</string>
-	<string name="databases_import_warning_message">سيتم استبدال قواعد بيانات الاشتراكات والقوائم المرجعية مع بيانات ملف النسخ الاحتياطي المحدد.
+<resources>
+    <string name="preferences">الخيارات</string>
+    <string name="pref_languages_filter_category">اللغات والمناطق</string>
+    <string name="pref_title_preferred_regions">المنطقة المفضلة</string>
+    <string name="pref_summary_preferred_regions">حدد منطقة مفضلة. يتم استخدام ذلك لتصفية مقاطع الفيديو في فئة مقاطع الفيديو \"المميزة\". %s</string>
+    <string name="pref_title_preferred_languages">اللغات المفضلة</string>
+    <string name="pref_summary_preferred_languages">حدد لغاتك المفضلة .</string>
+    <string name="pref_video_player_category">مشغل الفيديو</string>
+    <string name="pref_title_preferred_res">الدقة المفضلة</string>
+    <string name="pref_summary_preferred_res">s% حدد الدقة المفضلة لديك</string>
+    <string name="pref_title_backup_dbs">قواعد بيانات النسخ الاحتياطي</string>
+    <string name="pref_summary_backup_dbs">الاحتفاظ بنسخة احتياطية من قواعد بيانات الاشتراك وقاعدة بيانات الإشارات المرجعية.</string>
+    <string name="pref_title_import_dbs">استيراد نسخة احتياطية</string>
+    <string name="pref_summary_import_dbs">استيراد النسخة الاحتياطية وقاعدة بيانات الإشتراكات الخاصة بك.</string>
+    <string name="databases_backing_up">نسخة إحتياطية…</string>
+    <string name="databases_backup_success">حفظ قواعد البيانات احتياطيا في %s</string>
+    <string name="databases_backup_fail">فشل النسخ الاحتياطي لقواعد البيانات الخاصة بك.</string>
+    <string name="databases_import_select_backup">حدد ملف النسخ الاحتياطي للاستيراد</string>
+    <string name="databases_import_nothing_selected">لم يتم تحديد أي شيء …</string>
+    <string name="databases_import_warning_message">سيتم استبدال قواعد بيانات الاشتراكات والقوائم المرجعية مع بيانات ملف النسخ الاحتياطي المحدد.
 \n
 \nاستمرار؟</string>
-	<string name="continue_">استمرار</string>
-	<string name="databases_importing">جارٍ الاستيراد…</string>
-	<string name="databases_import_fail">فشل استيراد قواعد البيانات.</string>
-	<string name="databases_import_success">تم استيراد قواعد البيانات بنجاح. أعد تشغيل التطبيق لتطبيق التغييرات.</string>
-
-	<string name="pref_title_import_subs">استيراد الاشتراكات من YouTube</string>
-	<string name="pref_summary_import_subs">استيراد اشتراكاتك من حسابك في YouTube .</string>
-	<string name="subs_import_select_backup">حدد ملف xml الخاص بـ YouTube للاستيراد</string>
-
-	<string name="pref_about_category">حول</string>
-	<string name="pref_title_website">الموقع</string>
-	<string name="pref_title_credits">تبرع</string>
-	<string name="pref_summary_credits">الناس والمشاريع التي جعلت هذا التطبيق ممكن.</string>
-	<string name="pref_title_version">الاصدار</string>
-	<string name="pref_title_updates">التحديثات</string>
-	<string name="pref_summary_updates">التحقق من التحديثات…</string>
-	<string name="pref_title_license">الرخصة</string>
-	<string name="pref_summary_license">"رخصة GNU  العامة الاصدار 3"</string>
-	<string name="app_license">حقوق الطبع والنشر © 2015-2018 Ramon Mifsud
+    <string name="continue_">استمرار</string>
+    <string name="databases_importing">جارٍ الاستيراد…</string>
+    <string name="databases_import_fail">فشل استيراد قواعد البيانات.</string>
+    <string name="databases_import_success">تم استيراد قواعد البيانات . أعد تشغيل التطبيق لتطبيق التغييرات.</string>
+    <string name="pref_title_import_subs">استيراد الاشتراكات من YouTube</string>
+    <string name="pref_summary_import_subs">استيراد اشتراكاتك من حسابك في YouTube .</string>
+    <string name="subs_import_select_backup">حدد ملف xml الخاص بـ YouTube للاستيراد</string>
+    <string name="pref_about_category">حول</string>
+    <string name="pref_title_website">الموقع</string>
+    <string name="pref_title_credits">تبرع</string>
+    <string name="pref_summary_credits">الناس والمشاريع التي جعلت هذا التطبيق ممكن.</string>
+    <string name="pref_title_version">الاصدار</string>
+    <string name="pref_title_updates">التحديثات</string>
+    <string name="pref_summary_updates">التحقق من التحديث.</string>
+    <string name="pref_title_license">الرخصة</string>
+    <string name="pref_summary_license">"رخصة GNU  العامة الاصدار 3"</string>
+    <string name="app_license">حقوق الطبع والنشر © 2015-2018 Ramon Mifsud
 \n 
 \nهذا البرنامج هو البرمجيات الحرة: يمكنك أعاده توزيعها و/أو تعديلها ببموجب شروط رخصه جنو العامة كما نشرتها مؤسسه البرمجيات الحرة (الإصدار 3 من الترخيص).
 \n 
@@ -50,38 +45,32 @@
 \n 
 \nيجب ان تكون قد استلمت نسخه من رخصه جنو العامة مع هذا البرنامج. إذا لم يكن كذلك ، راجع
 \n &lt;http://www.gnu.org/licenses/&gt;</string>
-	<string name="i_agree">اوافق</string>
-
-
-	<string name="pref_other_category">اخرى</string>
-	<string name="pref_title_default_tab">التبويب الافتراضي</string>
-	<string name="pref_summary_default_tab">علامة التبويب الافتراضية التي تظهر عند تشغيلSkyTube : %s</string>
-	<string name="pref_title_screen_orientation">اتجاه الشاشة</string>
-	<string name="pref_summary_screen_orientation">Video player\'s orientation:  %s</string>
-	<string-array name="screen_orientations">
-		<item>تلقائي</item>
-		<item>مناظر</item>
-		<item>بورتريه</item>
-		<item>جهاز استشعار</item>
-	</string-array>
-
-	<string name="pref_title_youtube_api_key">YouTube API مفتاح</string>
-	<string name="pref_summary_youtube_api_key">ادخل مفتاح API الخاص ببيانات YouTube. اتركه فارغه لاستخدام الاعداد الافتراضي .</string>
-	<string name="pref_youtube_api_key_error">حدث خطا اثناء محاولة التحقق من صحة مفتاح API الذي أدخلته.</string>
-	<string name="pref_youtube_api_key_custom">لمفتاح صالح. أعاده تشغيل التطبيق لاستخدام المفتاح الجديد API YouTube.</string>
-	<string name="pref_youtube_api_key_default">أعاده تشغيل التطبيق للتبديل العودة إلى الافتراضي يوتيوب API الرئيسية.</string>
-	<string name="restart">إعادة تشغيل</string>
-
-
-
-	<string name="pref_title_feed_notification">Feed Auto Notification</string>
-	<string name="pref_summary_feed_notification">How often to check for new videos from subscribed channels: %s</string>
-	<string-array name="feed_notification">
-		<item>Off</item>
-		<item>6 Hours</item>
-		<item>12 Hours</item>
-		<item>24 Hours</item>
-	</string-array>
+    <string name="i_agree">اوافق</string>
+    <string name="pref_other_category">اخرى</string>
+    <string name="pref_title_default_tab">التبويب الافتراضي</string>
+    <string name="pref_summary_default_tab">علامة التبويب الافتراضية التي تظهر عند تشغيلSkyTube : %s</string>
+    <string name="pref_title_screen_orientation">اتجاه الشاشة</string>
+    <string name="pref_summary_screen_orientation">مشغل الفديو المستخدم : %s</string>
+    <string-array name="screen_orientations">
+        <item>تلقائي</item>
+        <item>مناظر</item>
+        <item>بورتريه</item>
+        <item>جهاز استشعار</item>
+    </string-array>
+    <string name="pref_title_youtube_api_key">YouTube API مفتاح</string>
+    <string name="pref_summary_youtube_api_key">ادخل مفتاح API الخاص ببيانات YouTube. اتركه فارغه لاستخدام الاعداد الافتراضي .</string>
+    <string name="pref_youtube_api_key_error">حدث خطا اثناء محاولة التحقق من صحة مفتاح API الذي أدخلته.</string>
+    <string name="pref_youtube_api_key_custom">لمفتاح صالح. أعاده تشغيل التطبيق لاستخدام المفتاح الجديد API YouTube.</string>
+    <string name="pref_youtube_api_key_default">أعاده تشغيل التطبيق للتبديل العودة إلى الافتراضي يوتيوب API الرئيسية.</string>
+    <string name="restart">إعادة تشغيل</string>
+    <string name="pref_title_feed_notification">تنبيهات الإشتراكات التلقائية</string>
+    <string name="pref_summary_feed_notification">تحديد الفترة الزمنية التي سيتم البحث عن الفيديوهات الجديدة من القنوات: %s</string>
+    <string-array name="feed_notification">
+        <item>Off</item>
+        <item>6 Hours</item>
+        <item>12 Hours</item>
+        <item>24 Hours</item>
+    </string-array>
     <string name="pref_title_choose_player">مشغل الفيديو</string>
     <string name="pref_summary_choose_player">مشغل الفديو المستخدم : %s</string>
     <string name="pref_category_mobile_network">شبكة الجوال</string>
@@ -119,4 +108,25 @@
     <string name="pref_title_disable_search_history">تعطيل سجل البحث</string>
     <string name="pref_disable_search_history_deleted">تم حذف سجل البحث.</string>
     <string name="pref_disable_playback_status_deleted">حذف حالة التشغيل.</string>
+    <string name="channel_blacklist_update_failure">فشل إزالة القناة (القنوات) من القائمة السوداء…</string>
+    <string name="pref_title_channel_whitelist">القنوات في القائمة البيضاء</string>
+    <string name="input_channel_url">عنوان URL للقناة التي ستكون في اللائحة البيضاء:</string>
+    <string name="channel_already_whitelisted">القناة بالفعل في اللائحة البيضاء.</string>
+    <string name="channel_whitelist_updated">تم تحديث القنوات في القائمة البيضاء .يرجى تحديث الفيديو.</string>
+    <string name="channel_whitelist_update_failure">فشل نقل القناة للقائمة البيضاء …</string>
+    <string name="channel_unwhitelist_success">تم تحديث القائمة البيضاء للقناة. الرجاء تحديث فائمة الإشتراكات.</string>
+    <string name="channel_unwhitelist_failure">فشل نقل القناة من القائمة البيضاء …</string>
+    <string name="no_preferred_lang_selected">لم يتم أختيار لغات مفضلة. سيتم تجاهل الإعداد.</string>
+    <string name="preferred_lang_updated">"تم تحديث اللغات المفضلة.  الرجاء تحديث قائمة الإشتراكات."</string>
+    <string name="pref_title_lang_detection_video_filtering">الكشف عن الغة و فلاتر الفيديو</string>
+    <string name="pref_summary_lang_detection_video_filtering">نستخدم الذكاء الإصطناعي للكشف عن اللغات المستخدمة في الفيديوهات ومنعها إذا كانت لغتهم لاتطابق اللغات المفضلة التي قمت بإختيارها . وينبغي تمكين هذا الخيار فقط على الأجهزة القوية.</string>
+    <string name="setting_updated">تم تحديث الإعداد. الرجاء تحديث قائمة الإشتراكات.</string>
+    <string name="pref_summary_low_views_filter">تصفية الفيديوهات ذات معدل مشاهدة منخفض: %s</string>
+    <string name="pref_summary_dislikes_filter">تصفية ملفات الفيديو التي تحتوي على معدلات عدم الإعجاب المرتفعة : %s</string>
+    <string name="pref_summary_disable_search_history">إذا تم تفعيله ، سيتم مسح محفوظات البحث ولن يتم استخدامها.</string>
+    <string name="pref_title_disable_playback_status">تعطيل حالة وضع التشغيل</string>
+    <string name="pref_summary_disable_playback_status">إذا تم تفعيله ، سيتم مسح حالة التشغيل ولن يتم إستخدامها.</string>
+    <string name="pref_title_clear_playback_status">مسح حالة التشغيل</string>
+    <string name="pref_summary_clear_playback_status">مسح حالة التشغيل لجميع ملفات الفيديو.</string>
+    <string name="pref_playback_status_cleared">تم مسح حالة التشغيل.</string>
 </resources>
