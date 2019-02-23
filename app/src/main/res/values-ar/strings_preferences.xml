@@ -8,9 +8,9 @@
     <string name="pref_summary_preferred_languages">حدد لغاتك المفضلة .</string>
     <string name="pref_video_player_category">مشغل الفيديو</string>
     <string name="pref_title_preferred_res">الدقة المفضلة</string>
-    <string name="pref_summary_preferred_res">s% حدد الدقة المفضلة لديك</string>
-    <string name="pref_title_backup_dbs">قواعد بيانات النسخ الاحتياطي</string>
-    <string name="pref_summary_backup_dbs">الاحتفاظ بنسخة احتياطية من قواعد بيانات الاشتراك وقاعدة بيانات الإشارات المرجعية.</string>
+    <string name="pref_summary_preferred_res">حدد الدقة المفضلة لديك: s%</string>
+    <string name="pref_title_backup_dbs">تصدير نسخة احتياطية لقواعد البيانات</string>
+    <string name="pref_summary_backup_dbs">الاحتفاظ بنسخة احتياطية من قواعد البيانات للاشتراكات و الإشارات المرجعية.</string>
     <string name="pref_title_import_dbs">استيراد نسخة احتياطية</string>
     <string name="pref_summary_import_dbs">استيراد النسخة الاحتياطية وقاعدة بيانات الإشتراكات الخاصة بك.</string>
     <string name="databases_backing_up">نسخة إحتياطية…</string>
@@ -24,7 +24,7 @@
     <string name="continue_">استمرار</string>
     <string name="databases_importing">جارٍ الاستيراد…</string>
     <string name="databases_import_fail">فشل استيراد قواعد البيانات.</string>
-    <string name="databases_import_success">تم استيراد قواعد البيانات . أعد تشغيل التطبيق لتطبيق التغييرات.</string>
+    <string name="databases_import_success">تم استيراد قواعد البيانات . أعد تشغيل التطبيق لتفعيل التغييرات.</string>
     <string name="pref_title_import_subs">استيراد الاشتراكات من YouTube</string>
     <string name="pref_summary_import_subs">استيراد اشتراكاتك من حسابك في YouTube .</string>
     <string name="subs_import_select_backup">حدد ملف xml الخاص بـ YouTube للاستيراد</string>
@@ -37,18 +37,18 @@
     <string name="pref_summary_updates">التحقق من التحديث.</string>
     <string name="pref_title_license">الرخصة</string>
     <string name="pref_summary_license">"رخصة GNU  العامة الاصدار 3"</string>
-    <string name="app_license">حقوق الطبع والنشر © 2015-2018 Ramon Mifsud
+    <string name="app_license">حقوق الطبع والنشر © 2015-2018 Ramon Mifsud 
 \n 
-\nهذا البرنامج هو البرمجيات الحرة: يمكنك أعاده توزيعها و/أو تعديلها ببموجب شروط رخصه جنو العامة كما نشرتها مؤسسه البرمجيات الحرة (الإصدار 3 من الترخيص).
+\nهذا البرنامج هو برمجية حرة: يمكنك أعاده توزيعها و/أو تعديلها ببموجب شروط رخصه جنو العامة كما نشرتها مؤسسه البرمجيات الحرة (الإصدار 3 من الترخيص). 
 \n 
-\nيتم توزيع هذا البرنامج على أمل أن يكون مفيدا، ولكن من دون أي ضمان. دون حتى الضمان الضمني للتسويق أو الملاءمة لغرض معين. راجع رخصة جنو العمومية للحصول على مزيد من التفاصيل.
+\nيتم توزيع هذا البرنامج على أمل أن يكون مفيدا، ولكن من دون أي ضمان. دون حتى الضمان الضمني للتسويق أو الملاءمة لغرض معين. راجع رخصة جنو العمومية للحصول على مزيد من التفاصيل. 
 \n 
-\nيجب ان تكون قد استلمت نسخه من رخصه جنو العامة مع هذا البرنامج. إذا لم يكن كذلك ، راجع
+\nيجب ان تكون قد استلمت نسخه من رخصه جنو العامة مع هذا البرنامج. إذا لم يكن كذلك ، راجع 
 \n &lt;http://www.gnu.org/licenses/&gt;</string>
     <string name="i_agree">اوافق</string>
     <string name="pref_other_category">اخرى</string>
     <string name="pref_title_default_tab">التبويب الافتراضي</string>
-    <string name="pref_summary_default_tab">علامة التبويب الافتراضية التي تظهر عند تشغيلSkyTube : %s</string>
+    <string name="pref_summary_default_tab">علامة التبويب الافتراضية التي تظهر عند تشغيل التطبيق : %s</string>
     <string name="pref_title_screen_orientation">اتجاه الشاشة</string>
     <string name="pref_summary_screen_orientation">مشغل الفديو المستخدم : %s</string>
     <string-array name="screen_orientations">
@@ -75,17 +75,17 @@
     <string name="pref_summary_choose_player">مشغل الفديو المستخدم : %s</string>
     <string name="pref_category_mobile_network">شبكة الجوال</string>
     <string name="pref_title_preferred_res_mobile">الدقة المفضلة على شبكة الجوال</string>
-    <string name="pref_summary_preferred_res_mobile">اختيار مشغل الفيديو المفضل لديك لتشغيل عن طريق شبكة الجوال مثل (4G):%s</string>
+    <string name="pref_summary_preferred_res_mobile">اختيار مشغل الفيديو المفضل لديك لتشغيل عن طريق شبكة الجوال مثل شبكات الجيل الرابع : %s</string>
     <string name="pref_title_warn_mobile_downloads">عرض تنبيه عند التشغيل على شبكة الجوال</string>
     <string name="pref_summary_warn_mobile_downloads">عرض تحذير إذا كنت تستخدم شبكة الجوال مثل (4G) قبل التشغيل / تحميل ملفات الفيديو.</string>
     <string name="pref_import_export_category">استيراد / تصدير</string>
     <string name="pref_title_disable_screen_gestures">تعطيل إيماءات الفيديو</string>
     <string name="pref_summary_disable_screen_gestures">إيقاف إيماءات التحكم بحجم والسطوع والتقديم إلى الأمام / الخلف في الفيديو.</string>
     <string name="pref_title_subscriptions_alphabetical_order">ترتيب القنوات ابجديا</string>
-    <string name="pref_summary_subscriptions_alphabetical_order">إذا تم تفعيله ،سيتم فرز القنوات أبجديا.</string>
+    <string name="pref_summary_subscriptions_alphabetical_order">إذا تم تفعيله ،سيتم فرز القنوات بالترتيب الابجدي.</string>
     <string name="pref_category_downloads">التنزيلات</string>
     <string name="pref_title_download_to_separate_directories">تحميل ملفات الفيديو في مجلدات</string>
-    <string name="pref_summary_download_to_separate_directories">الفيديوهات التي يتم تحميلها إلى مجلد باسم القناة.</string>
+    <string name="pref_summary_download_to_separate_directories">الفيديوهات التي يتم تحميلها إلى مجلدات باسم القناة.</string>
     <string name="pref_video_blocker_category">حجب الفديوهات</string>
     <string name="pref_summary_enable_video_blocker">تفعيل حجب الفديوهات.</string>
     <string name="pref_channels_filter_category">فلاتر القنوات</string>
