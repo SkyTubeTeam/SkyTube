@@ -1,10 +1,11 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="update_available">التحديث متوفر</string>
-	<string name="update_dialog_msg">يتوفر تحديث جديد لـ SkyTube. سيتم تحديث التطبيق إلى الإصدار %s.</string>
-	<string name="up_to_date">حتى الآن</string>
-	<string name="up_to_date_msg">لديك أحدث نسخه من SkyTube مثبتة.</string>
-	<string name="update">تحديث</string>
-	<string name="later">لاحقاً</string>
-	<string name="update_failure">غير قادر علي ترقيه التطبيق.</string>
-	<string name="downloading">جارٍ التحميل…</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="update_available">يتوفر إصدار جديد</string>
+    <string name="update_dialog_msg">يتوفر إصدار جديد لـ SkyTube. سيتم تحديث التطبيق إلى الإصدار %s.</string>
+    <string name="up_to_date">تم تحديثه</string>
+    <string name="up_to_date_msg">لديك أحدث نسخه من SkyTube مثبتة.</string>
+    <string name="update">تحديث</string>
+    <string name="later">لاحقاً</string>
+    <string name="update_failure">غير قادر علي تحديث التطبيق.</string>
+    <string name="downloading">جارٍ التحميل…</string>
 </resources>
