@@ -37,16 +37,21 @@ import free.rm.skytube.gui.fragments.VideosGridFragment;
  */
 public abstract class BaseVideosGridFragment extends TabFragment implements SwipeRefreshLayout.OnRefreshListener {
 
-	protected VideoGridAdapter  videoGridAdapter;
+	protected final VideoGridAdapter  videoGridAdapter;
 	private int updateCount = 0;
 
 	@BindView(R.id.swipeRefreshLayout)
 	protected SwipeRefreshLayout swipeRefreshLayout;
 
+	public BaseVideosGridFragment(VideoGridAdapter videoGrid) {
+		this.videoGridAdapter = videoGrid;
+	}
 
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		videoGridAdapter.setContext(getActivity());
+
 		View view = inflater.inflate(getLayoutResource(), container, false);
 
 		ButterKnife.bind(this, view);
@@ -78,9 +83,7 @@ public abstract class BaseVideosGridFragment extends TabFragment implements Swip
 	@Override
 	public void onFragmentSelected() {
 		super.onFragmentSelected();
-		if (videoGridAdapter != null) {
-			videoGridAdapter.initializeList();
-		}
+		videoGridAdapter.initializeList();
 	}
 
 	/**

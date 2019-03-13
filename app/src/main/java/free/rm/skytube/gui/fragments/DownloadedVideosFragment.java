@@ -20,12 +20,9 @@ public class DownloadedVideosFragment extends OrderableVideosGridFragment implem
 	@BindView(R.id.noDownloadedVideosText)
 	View noDownloadedVideosText;
 
-	@Override
-	public void onCreate(@Nullable Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		videoGridAdapter = new OrderableVideoGridAdapter(getActivity(), DownloadedVideosDb.getVideoDownloadsDb());
+	public DownloadedVideosFragment() {
+		super(new OrderableVideoGridAdapter(null, DownloadedVideosDb.getVideoDownloadsDb()));
 	}
-
 
 	@Override
 	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {

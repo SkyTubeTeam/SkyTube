@@ -40,6 +40,12 @@ public abstract class VideosGridFragment extends BaseVideosGridFragment {
 
 	protected RecyclerView	gridView;
 
+	public VideosGridFragment() {
+		super(new VideoGridAdapter(null));
+	}
+	public VideosGridFragment(VideoGridAdapter videoGrid) {
+		super(videoGrid);
+	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -48,11 +54,6 @@ public abstract class VideosGridFragment extends BaseVideosGridFragment {
 
 		// setup the video grid view
 		gridView = view.findViewById(R.id.grid_view);
-		if (videoGridAdapter == null) {
-			videoGridAdapter = new VideoGridAdapter(getActivity());
-		} else {
-			videoGridAdapter.setContext(getActivity());
-		}
 		videoGridAdapter.setSwipeRefreshLayout(swipeRefreshLayout);
 
 		if (getVideoCategory() != null)
