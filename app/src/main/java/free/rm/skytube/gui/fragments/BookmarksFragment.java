@@ -37,10 +37,8 @@ public class BookmarksFragment extends OrderableVideosGridFragment implements Bo
 	@BindView(R.id.noBookmarkedVideosText)
 	View noBookmarkedVideosText;
 
-	@Override
-	public void onCreate(@Nullable Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		videoGridAdapter = new OrderableVideoGridAdapter(getActivity(), BookmarksDb.getBookmarksDb());
+	public BookmarksFragment() {
+		super(new OrderableVideoGridAdapter(null, BookmarksDb.getBookmarksDb()));
 	}
 
 	@Override
