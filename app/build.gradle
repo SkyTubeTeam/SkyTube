@@ -9,8 +9,8 @@ android {
         minSdkVersion 14
         targetSdkVersion 28
 
-        versionName "2.94"    // digits of the *fractional part* shall NOT be > than "9"
-        versionCode 18
+        versionName "2.95"    // digits of the *fractional part* shall NOT be > than "9"
+        versionCode 19
 
         // Third party devs:  pls be ethical and change the below keys
         buildConfigField 'String',   'YOUTUBE_API_KEYS_DEBUG', '"AIzaSyDU-ZZCyOB_kYkiMSZ6ooSipUZRukHU4ik"'
@@ -66,7 +66,7 @@ dependencies {
     // YouTube modules
     implementation 'com.google.http-client:google-http-client-android:1.23.0'
     implementation 'com.google.apis:google-api-services-youtube:v3-rev187-1.23.0'
-    implementation 'com.github.TeamNewPipe:NewPipeExtractor:v0.14.1'
+    implementation 'com.github.TeamNewPipe:NewPipeExtractor:560c648e92476cc220a036f1668c4335b98ceece'
 
     // other modules
     implementation group: 'org.ocpsoft.prettytime', name: 'prettytime', version: '4.0.1.Final'

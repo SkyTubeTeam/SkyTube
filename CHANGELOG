@@ -1,3 +1,7 @@
+v2.95 - 14 Mar 2019:
+	* Emergency fix: Video playback error.
+	* Updated French, Japanese, Arabic and Turkish translations.
+
 v2.94 - 03 Feb 2019:
 	* Videos displayed within a channel or playlist fragment will no longer output the channel name
 	  given that the user is already within the channel fragment.
