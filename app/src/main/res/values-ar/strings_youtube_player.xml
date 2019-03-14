@@ -1,36 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources><string name="error_stream_err_unavailable">رسالة الخطا غير متوفرة.</string>
-	<string name="error_stream_decryption_fail">تعذر تحميل رمز فك التشفير لخدمه YouTube.</string>
-	<string name="error_stream_parse_error">خطا في التحليل.</string>
-
-	<string name="error_video_play">خطا في تشغيل الفيديو</string>
-	<string name="error_video_streams_empty">لايحتوي الفيديو %s على بث.</string>
-	<string name="error_video_streams">حدث خطأ أثناء استرداد مجموعات بث الفيديو.</string>
-	<string name="error_get_video_desc">حدث خطا اثناء استرداد وصف الفيديو.</string>
-	<string name="error_invalid_url">رابط الفيديو غير صالح: %s</string>
-
-	<string name="warning_live_video">يتعذر تشغيل مجموعات البث المباشر في الوقت الحالي. تشغيل البث المباشر خارجيا؟</string>
-
-	<string name="ratings_disabled">تم تعطيل التقييمات</string>
-
-	<string name="loading_video">جارٍ تحميل الفيديو…</string>
-	<string name="get_new_video_steam">قناة جديدة</string>
-	<string name="open_in_browser">فتح في متصفح الويب</string>
-	<string name="open_with">فتح بواسطة…</string>
-	<string name="share">مشاركة</string>
-	<string name="share_via">مشاركة عبر</string>
-	<string name="copy_url">نسخ الرابط</string>
-	<string name="url_copied_to_clipboard">تم نسخ الرابط الى الحافظة</string>
-
-	<string name="error_get_comments">حدث خطا اثناء الحصول علي تعليقات.</string>
-	<string name="no_video_comments">لا يحتوي هذا الفيديو علي تعليقات أو تعليقات معطله.</string>
-	<string name="view_replies">عرض الردود</string>
-	<string name="hide_replies">إخفاء الردود</string>
-
-	<string name="enter_video_url">ادخل رابط الفيديو</string>
-	<string name="play">تشغيل</string>
-	<string name="cancel">إلغاء</string>
-	<string name="clear">تنظيف</string>
+<resources>
+    <string name="error_stream_err_unavailable">رسالة الخطا غير متوفرة.</string>
+    <string name="error_stream_decryption_fail">تعذر تحميل رمز فك التشفير لخدمه YouTube.</string>
+    <string name="error_stream_parse_error">خطا في التحليل.</string>
+    <string name="error_video_play">خطا في تشغيل الفيديو</string>
+    <string name="error_video_streams_empty">لايحتوي الفيديو %s على بث.</string>
+    <string name="error_video_streams">حدث خطأ أثناء استرداد مجموعات بث الفيديو.</string>
+    <string name="error_get_video_desc">حدث خطا اثناء استرداد وصف الفيديو.</string>
+    <string name="error_invalid_url">رابط الفيديو غير صالح: %s</string>
+    <string name="warning_live_video">لا يمكن تشغيل الفيديو في الوقت الراهن . افتح في تطبيق آخر؟</string>
+    <string name="ratings_disabled">تم تعطيل التقييمات</string>
+    <string name="loading_video">جارٍ تحميل الفيديو…</string>
+    <string name="get_new_video_steam">قناة جديدة</string>
+    <string name="open_in_browser">فتح في متصفح الويب</string>
+    <string name="open_with">فتح بواسطة…</string>
+    <string name="share">مشاركة</string>
+    <string name="share_via">مشاركة عبر</string>
+    <string name="copy_url">نسخ الرابط</string>
+    <string name="url_copied_to_clipboard">تم نسخ الرابط الى الحافظة.</string>
+    <string name="error_get_comments">حدث خطا اثناء الحصول علي تعليقات.</string>
+    <string name="no_video_comments">لا يحتوي هذا الفيديو علي تعليقات أو تعليقات معطله.</string>
+    <string name="view_replies">عرض الردود</string>
+    <string name="hide_replies">إخفاء الردود</string>
+    <string name="enter_video_url">ادخل رابط الفيديو</string>
+    <string name="play">تشغيل</string>
+    <string name="cancel">إلغاء</string>
+    <string name="clear">تنظيف</string>
     <string name="mobile_data">البيانات المتنقلة</string>
     <string name="warning_mobile_network_play">جهازك غير متصل بشبكة واي فاي.لأجل تجنب احتمال تغييرات اضافية لاستخدام البيانات، فمن المستحسن أن تتصل بشبكة واي فاي.تشغيل الفيديو على أي حال؟</string>
     <string name="warning_mobile_network_disable">لا تسأل مرة أخرى.</string>

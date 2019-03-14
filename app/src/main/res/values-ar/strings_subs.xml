@@ -1,26 +1,24 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="subscriptions">الاشتراكات</string>
-	<string name="subscribe">اشتراك</string>
-	<string name="unsubscribe">إلغاء الاشتراك</string>
-	<string name="total_subscribers">%,d مشترك</string>
-
-	<string name="subscribed">مشترك</string>
-	<string name="unsubscribed">إلغاء الاشتراك</string>
-
-	<string name="error_get_subbed_channels">حدث خطأ أثناء جلب القنوات المشتركة.</string>
-	<string name="error_check_if_user_has_subbed">"غير قادر علي التحقق مما إذا كان المستخدم قد اشترك في القناة  (id=%s)"</string>
-	<string name="error_unable_to_subscribe">Unable to (un)subscribe the channel (id=%s)</string>
-
-	<string name="import_subscriptions">Import Subscriptions</string>
-	<string name="import_subscriptions_description">Import your subscriptions from YouTube, by first visiting https://www.youtube.com/subscription_manager, and clicking the \"Export Subscriptions\" button at the bottom. Then, select the XML file you exported by clicking \"Select XML File\" below.</string>
-	<string name="subscriptions_to_channels_imported">Subscription to %d channel(s) imported.</string>
-	<string name="select_xml_file">Select XML File</string>
-	<string name="select_all">Select All</string>
-	<string name="select_none">Select None</string>
-	<string name="no_channels_found">No YouTube channels were found in the XML file you uploaded.</string>
-	<string name="no_new_channels_found">No YouTube channels that you are not already subscribed to were found in the XML file you uploaded.</string>
-	<string name="import_subscriptions_parse_error">An error was encountered attempting to parse the XML file you uploaded: %s.</string>
-	<string name="failed_to_import_subscriptions">Failed to import your YouTube subscriptions.</string>
-
-	<string name="about">About</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="subscriptions">الاشتراكات</string>
+    <string name="subscribe">اشتراك</string>
+    <string name="unsubscribe">إلغاء الاشتراك</string>
+    <string name="total_subscribers">%,d مشترك</string>
+    <string name="subscribed">مشترك</string>
+    <string name="unsubscribed">إلغاء الاشتراك</string>
+    <string name="error_get_subbed_channels">حدث خطأ أثناء جلب القنوات المشتركة.</string>
+    <string name="error_check_if_user_has_subbed">"غير قادر علي التحقق مما إذا كان المستخدم قد اشترك في القناة  (id=%s)"</string>
+    <string name="error_unable_to_subscribe">لايمكن إلغاء الإشتراك من عنوان (id=%s) القنوات</string>
+    <string name="import_subscriptions">استيراد الإشتراكات</string>
+    <string name="import_subscriptions_description">استيراد الاشتراكات الخاصة بك من يوتيوب، بزيارة https://www.youtube.com/subscription_manager ، والنقر فوق زر \"تصدير الإشتراكات\" في الجزء السفلي. ثم حدد الملف الذي تم تصديره بعنوان \"subscription_manager\" بواسطة النقر فوق \"تحديد ملف الإشتراكات\" أدناه.</string>
+    <string name="subscriptions_to_channels_imported">تم أستيراد الاشتراك في قناة %d .</string>
+    <string name="select_xml_file">اختر ملف الإشتراكات</string>
+    <string name="select_all">تحديد الكل</string>
+    <string name="select_none">لاتحدد شيء</string>
+    <string name="no_channels_found">لم يتم العثور على اي قنوات يوتيوب في ملف XML قمت بتحميله.</string>
+    <string name="no_new_channels_found">لم تم العثور على اي قنوات يوتيوب غير التي انت مشترك فيها بالفعل في ملف XML الذي قمت بتحميله.</string>
+    <string name="import_subscriptions_parse_error">تمت مصادفة خطأ أثناء محاولة تحليل ملف XML الذي قمت بتحميله: %s.</string>
+    <string name="failed_to_import_subscriptions">فشل استيراد اشتراكات اليوتيوب.</string>
+    <string name="about">حول</string>
+    <string name="unsubscribe_from_all_current_sibbed_channels">إلغاء الاشتراك من جميع القنوات المشترك فيها حاليا.</string>
 </resources>
