@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="preferences">الخيارات</string>
-    <string name="pref_languages_filter_category">اللغات والمناطق</string>
+    <string name="pref_languages_filter_category">فلاتر اللغات والمناطق</string>
     <string name="pref_title_preferred_regions">المنطقة المفضلة</string>
     <string name="pref_summary_preferred_regions">حدد منطقة مفضلة. يتم استخدام ذلك لتصفية مقاطع الفيديو في فئة مقاطع الفيديو \"المميزة\". %s</string>
     <string name="pref_title_preferred_languages">اللغات المفضلة</string>
@@ -18,8 +18,7 @@
     <string name="databases_backup_fail">فشل النسخ الاحتياطي لقواعد البيانات الخاصة بك.</string>
     <string name="databases_import_select_backup">حدد ملف النسخ الاحتياطي للاستيراد</string>
     <string name="databases_import_nothing_selected">لم يتم تحديد أي شيء …</string>
-    <string name="databases_import_warning_message">سيتم استبدال قواعد بيانات الاشتراكات والقوائم المرجعية مع بيانات ملف النسخ الاحتياطي المحدد.
-\n
+    <string name="databases_import_warning_message">سيتم استبدال قواعد بيانات الاشتراكات والقوائم المرجعية مع بيانات ملف النسخ الاحتياطي المحدد. 
 \nاستمرار؟</string>
     <string name="continue_">استمرار</string>
     <string name="databases_importing">جارٍ الاستيراد…</string>
@@ -31,10 +30,10 @@
     <string name="pref_about_category">حول</string>
     <string name="pref_title_website">الموقع</string>
     <string name="pref_title_credits">تبرع</string>
-    <string name="pref_summary_credits">الناس والمشاريع التي جعلت هذا التطبيق ممكن.</string>
+    <string name="pref_summary_credits">الناس والمشاريع التي جعلت هذا التطبيق ممكنا.</string>
     <string name="pref_title_version">الاصدار</string>
     <string name="pref_title_updates">التحديثات</string>
-    <string name="pref_summary_updates">التحقق من التحديث.</string>
+    <string name="pref_summary_updates">التحقق من توفر إصدار جديد.</string>
     <string name="pref_title_license">الرخصة</string>
     <string name="pref_summary_license">"رخصة GNU  العامة الاصدار 3"</string>
     <string name="app_license">حقوق الطبع والنشر © 2015-2018 Ramon Mifsud 
@@ -75,17 +74,17 @@
     <string name="pref_summary_choose_player">مشغل الفديو المستخدم : %s</string>
     <string name="pref_category_mobile_network">شبكة الجوال</string>
     <string name="pref_title_preferred_res_mobile">الدقة المفضلة على شبكة الجوال</string>
-    <string name="pref_summary_preferred_res_mobile">اختيار مشغل الفيديو المفضل لديك لتشغيل عن طريق شبكة الجوال مثل شبكات الجيل الرابع : %s</string>
+    <string name="pref_summary_preferred_res_mobile">اختيار مشغل الفيديو المفضل لديك لتشغيل عن طريق شبكة الجوال (مثل شبكات الجيل الرابع) : %s</string>
     <string name="pref_title_warn_mobile_downloads">عرض تنبيه عند التشغيل على شبكة الجوال</string>
-    <string name="pref_summary_warn_mobile_downloads">عرض تحذير إذا كنت تستخدم شبكة الجوال مثل (4G) قبل التشغيل / تحميل ملفات الفيديو.</string>
-    <string name="pref_import_export_category">استيراد / تصدير</string>
+    <string name="pref_summary_warn_mobile_downloads">عرض تحذير إذا كنت تستخدم شبكة الجوال مثل (شبكة 4G) قبل التشغيل/تحميل ملفات الفيديو.</string>
+    <string name="pref_import_export_category">استيراد/تصدير</string>
     <string name="pref_title_disable_screen_gestures">تعطيل إيماءات الفيديو</string>
     <string name="pref_summary_disable_screen_gestures">إيقاف إيماءات التحكم بحجم والسطوع والتقديم إلى الأمام / الخلف في الفيديو.</string>
     <string name="pref_title_subscriptions_alphabetical_order">ترتيب القنوات ابجديا</string>
-    <string name="pref_summary_subscriptions_alphabetical_order">إذا تم تفعيله ،سيتم فرز القنوات بالترتيب الابجدي.</string>
+    <string name="pref_summary_subscriptions_alphabetical_order">إذا تم تفعيله سوف يتم فرز القنوات بالترتيب الابجدي.</string>
     <string name="pref_category_downloads">التنزيلات</string>
     <string name="pref_title_download_to_separate_directories">تحميل ملفات الفيديو في مجلدات</string>
-    <string name="pref_summary_download_to_separate_directories">الفيديوهات التي يتم تحميلها إلى مجلدات باسم القناة.</string>
+    <string name="pref_summary_download_to_separate_directories">يتم تحميل الفيديوهات إلى مجلدات باسم القناة.</string>
     <string name="pref_video_blocker_category">حجب الفديوهات</string>
     <string name="pref_summary_enable_video_blocker">تفعيل حجب الفديوهات.</string>
     <string name="pref_channels_filter_category">فلاتر القنوات</string>
