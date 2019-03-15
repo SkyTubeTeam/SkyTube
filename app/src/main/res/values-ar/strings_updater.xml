@@ -6,6 +6,6 @@
     <string name="up_to_date_msg">لديك أحدث نسخه من SkyTube مثبتة.</string>
     <string name="update">تحديث</string>
     <string name="later">لاحقاً</string>
-    <string name="update_failure">غير قادر علي تحديث التطبيق.</string>
+    <string name="update_failure">غير قادر على تحديث التطبيق.</string>
     <string name="downloading">جارٍ التحميل…</string>
 </resources>
