@@ -479,7 +479,7 @@ public class VideoBlockerPreferenceFragment extends PreferenceFragment {
 			MultiSelectListPreferenceItem channel = null;
 
 			try {
-				NewPipe.init(new HttpDownloader());
+				NewPipe.init(new HttpDownloader(), null);
 				StreamingService youtubeService = ServiceList.YouTube;
 
 				ChannelInfo channelInfo = ChannelInfo.getInfo(youtubeService, channelUrl);

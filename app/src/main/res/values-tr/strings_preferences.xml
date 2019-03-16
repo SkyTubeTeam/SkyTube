@@ -140,10 +140,10 @@
 
 <string name="pref_import_export_category">İçe/Dışa Aktar</string>
 	<string name="pref_title_disable_screen_gestures">Video hareketlerini devre dışı bırak</string>
-	<string name="pref_summary_disable_screen_gestures">Ses seviyesini, parlaklığı ve ileriye / geriye doğru arama video hareketlerini devre dışı bırakın.</string>
+	<string name="pref_summary_disable_screen_gestures">Ses seviyesini, parlaklığı kontrol etmek ve videolarda ileri/geri arama yapmak için hareketleri kapatın.</string>
 
 	<string name="pref_title_warn_mobile_downloads">Mobil Ağ Uyarısını Görüntüle</string>
-	<string name="pref_summary_warn_mobile_downloads">Videoları indirmeden / yayınlamadan önce mobil ağ kullanıyorsanız (4G gibi) bir uyarı görüntüler.</string>
+	<string name="pref_summary_warn_mobile_downloads">Video akışı/indirme işleminden önce mobil ağ (4G gibi) kullanıyorsanız bir uyarı görüntüler.</string>
 
 	<string name="pref_category_downloads">İndirilenler</string>
 	<string name="pref_title_download_to_separate_directories">Videoları Klasörlere İndir</string>
