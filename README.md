@@ -29,6 +29,7 @@
 * Play channels' playlists
 * Download videos
 * View and download video thumbnails
+* Doesn't display any adverts when browsing or playing videos.
 
 ### Traditional Features
 * Explore Featured and Most Popular videos
