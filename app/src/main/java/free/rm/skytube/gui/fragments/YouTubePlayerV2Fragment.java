@@ -762,6 +762,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 				hideNavigationBar();
 			} else {
 				playerView.showController();
+				showNavigationBar();
 			}
 
 			return false;

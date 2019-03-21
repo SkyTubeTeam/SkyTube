@@ -38,6 +38,10 @@ public class ImmersiveModeFragment extends FragmentEx {
 		changeNavigationBarVisibility(false);
 	}
 
+	protected void showNavigationBar() {
+		changeNavigationBarVisibility(true);
+	}
+
 
 	/**
 	 * Change the navigation bar's visibility status.
