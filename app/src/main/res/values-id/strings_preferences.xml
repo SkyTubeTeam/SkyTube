@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources><string name="preferences">Preferensi</string>
+<resources>
+    <string name="preferences">Preferensi</string>
     <string name="pref_video_player_category">Pemutar Video</string>
     <string name="pref_title_preferred_res">Resolusi Video</string>
     <string name="pref_summary_preferred_res">Pilih resolusi video yang diinginkan: %s</string>
@@ -48,7 +49,7 @@
     <string name="pref_title_screen_orientation">Orientasi Layar</string>
     <string name="pref_summary_screen_orientation">Orientasi pemutar video: %s</string>
     <string name="pref_title_disable_screen_gestures">Nonaktifkan gestur video</string>
-    <string name="pref_summary_disable_screen_gestures">Menonaktifkan gestur video untuk volume, kecerahan dan tinjauan maju/mundur.</string>
+    <string name="pref_summary_disable_screen_gestures">Nonaktifkan gestur untuk mengontrol volume, kecerahan dan tinjauan maju/mundur.</string>
     <string name="pref_title_youtube_api_key">Kunci API YouTube</string>
     <string name="pref_summary_youtube_api_key">Masukkan Kunci DATA API YouTube anda sendiri. Kosongkan untuk menggunakan nilai bawaan.</string>
     <string name="pref_youtube_api_key_error">Terjadi kesalahan saat mencoba memvalidasi Kunci API yang anda masukkan.</string>
