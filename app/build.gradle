@@ -67,8 +67,8 @@ android {
         jumboMode true
     }
     compileOptions {
-        sourceCompatibility = '1.8'
-        targetCompatibility = '1.8'
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
@@ -78,17 +78,17 @@ dependencies {
     // YouTube modules
     implementation 'com.google.http-client:google-http-client-android:1.23.0'
     implementation 'com.google.apis:google-api-services-youtube:v3-rev187-1.23.0'
-    implementation 'com.github.TeamNewPipe:NewPipeExtractor:560c648e92476cc220a036f1668c4335b98ceece'
+    implementation 'com.github.TeamNewPipe.NewPipeExtractor:extractor:v0.16.2'
 
     // other modules
-    implementation group: 'org.ocpsoft.prettytime', name: 'prettytime', version: '4.0.1.Final'
-    implementation 'com.github.moraisigor:slidingdrawer:1.6.7'
+    implementation group: 'org.ocpsoft.prettytime', name: 'prettytime', version: '4.0.2.Final'
+    implementation 'com.github.moraisigor:slidingdrawer:1.7.1'
     implementation 'com.github.bumptech.glide:glide:4.9.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
     implementation 'com.jakewharton:butterknife:10.1.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
-    implementation 'com.google.code.gson:gson:2.8.2'
-    implementation group: 'joda-time', name: 'joda-time', version: '2.9.9'
+    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation group: 'joda-time', name: 'joda-time', version: '2.10.2'
     implementation 'com.afollestad.material-dialogs:core:0.9.5.0'
     implementation 'com.github.angads25:filepicker:1.1.1'
     implementation 'com.google.android.exoplayer:exoplayer:2.8.2'
