@@ -164,7 +164,7 @@ class GridViewHolder extends RecyclerView.ViewHolder {
 		if(SkyTubeApp.getPreferenceManager().getBoolean(context.getString(R.string.pref_key_disable_playback_status), false)) {
 			videoPositionProgressBar.setVisibility(View.INVISIBLE);
 		} else {
-			PlaybackStatusDb.VideoWatchedStatus videoWatchedStatus = PlaybackStatusDb.getVideoDownloadsDb().getVideoWatchedStatus(youTubeVideo);
+			PlaybackStatusDb.VideoWatchedStatus videoWatchedStatus = PlaybackStatusDb.getPlaybackStatusDb().getVideoWatchedStatus(youTubeVideo);
 			if (videoWatchedStatus.isWatched()) {
 				videoPositionProgressBar.setVisibility(View.VISIBLE);
 				videoPositionProgressBar.setMax(youTubeVideo.getDurationInSeconds() * 1000);
@@ -215,11 +215,11 @@ class GridViewHolder extends RecyclerView.ViewHolder {
 						youTubeVideo.copyUrl(context);
 						return true;
 					case R.id.mark_watched:
-						PlaybackStatusDb.getVideoDownloadsDb().setVideoWatchedStatus(youTubeVideo, true);
+						PlaybackStatusDb.getPlaybackStatusDb().setVideoWatchedStatus(youTubeVideo, true);
 						updateViewsData();
 						return true;
 					case R.id.mark_unwatched:
-						PlaybackStatusDb.getVideoDownloadsDb().setVideoWatchedStatus(youTubeVideo, false);
+						PlaybackStatusDb.getPlaybackStatusDb().setVideoWatchedStatus(youTubeVideo, false);
 						updateViewsData();
 						return true;
 					case R.id.bookmark_video:

@@ -54,7 +54,7 @@ public class ResumeVideoTask {
      */
     public void ask() {
         if(!SkyTubeApp.getPreferenceManager().getBoolean(context.getString(R.string.pref_key_disable_playback_status), false)) {
-            final PlaybackStatusDb.VideoWatchedStatus watchStatus = PlaybackStatusDb.getVideoDownloadsDb().getVideoWatchedStatus(youTubeVideo);
+            final PlaybackStatusDb.VideoWatchedStatus watchStatus = PlaybackStatusDb.getPlaybackStatusDb().getVideoWatchedStatus(youTubeVideo);
             if (watchStatus.getPosition() > 0) {
                 new SkyTubeMaterialDialog(context)
                         .content(R.string.should_resume)
