@@ -905,7 +905,7 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 		videoView.pause();
 		videoView.stopPlayback();
 		if(!SkyTubeApp.getPreferenceManager().getBoolean(getString(R.string.pref_key_disable_playback_status), false)) {
-			PlaybackStatusDb.getVideoDownloadsDb().setVideoPosition(youTubeVideo, position);
+			PlaybackStatusDb.getPlaybackStatusDb().setVideoPosition(youTubeVideo, position);
 		}
 	}
 }
