@@ -27,6 +27,7 @@ import java.util.Date;
 import java.util.TimeZone;
 
 import free.rm.skytube.businessobjects.db.BookmarksDb;
+import free.rm.skytube.businessobjects.db.PlaybackStatusDb;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 
 /**
@@ -46,15 +47,17 @@ public class BackupDatabases {
 	public String backupDbsToSdCard() throws IOException {
 		SubscriptionsDb subscriptionsDb = SubscriptionsDb.getSubscriptionsDb();
 		BookmarksDb     bookmarksDb = BookmarksDb.getBookmarksDb();
+		PlaybackStatusDb playbackDb = PlaybackStatusDb.getPlaybackStatusDb();
 		final File      backupPath = new File(EXPORT_DIR, generateFileName());
 
 		// close the databases
 		subscriptionsDb.close();
 		bookmarksDb.close();
+		playbackDb.close();
 
 		// backup the databases inside a zip file
 		ZipFile databasesZip = new ZipFile(backupPath);
-		databasesZip.zip(subscriptionsDb.getDatabasePath(), bookmarksDb.getDatabasePath());
+		databasesZip.zip(subscriptionsDb.getDatabasePath(), bookmarksDb.getDatabasePath(), playbackDb.getDatabasePath());
 
 		return backupPath.getPath();
 	}
@@ -64,11 +67,13 @@ public class BackupDatabases {
 	public void importBackupDb(String backupFilePath) throws IOException {
 		SubscriptionsDb subscriptionsDb = SubscriptionsDb.getSubscriptionsDb();
 		BookmarksDb     bookmarksDb = BookmarksDb.getBookmarksDb();
+		PlaybackStatusDb playbackDb = PlaybackStatusDb.getPlaybackStatusDb();
 		File            databasesDirectory = subscriptionsDb.getDatabaseDirectory();
 
 		// close the databases
 		subscriptionsDb.close();
 		bookmarksDb.close();
+		playbackDb.close();
 
 		// backup the databases inside a zip file
 		ZipFile databasesZip = new ZipFile(new File(backupFilePath));
