@@ -1,5 +1,5 @@
 # SkyTube
-**An open-source YouTube player for the Android operating system.**
+**An open-source YouTube player for the Android operating system, without ads.**
 
 <a href="#download">![Download APK](https://img.shields.io/github/downloads/ram-on/SkyTube/total.svg?label=SkyTube+Extra+Downloads)</a>
 <a href="https://hosted.weblate.org/engage/skytube/?utm_source=widget"> <img src="https://hosted.weblate.org/widgets/skytube/-/svg-badge.svg" alt="Translate"/> </a>
@@ -29,6 +29,7 @@
 * Play channels' playlists
 * Download videos
 * View and download video thumbnails
+* Doesn't display any adverts when browsing or playing videos.
 
 ### Traditional Features
 * Explore Featured and Most Popular videos
