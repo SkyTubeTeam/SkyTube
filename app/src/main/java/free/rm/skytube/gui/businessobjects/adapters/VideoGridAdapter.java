@@ -84,7 +84,7 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<YouTubeVideo, GridVi
 	public VideoGridAdapter(Context context) {
 		super(context);
 		this.getYouTubeVideos = null;
-		PlaybackStatusDb.getVideoDownloadsDb().addListener(this);
+		PlaybackStatusDb.getPlaybackStatusDb().addListener(this);
 	}
 
 

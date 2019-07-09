@@ -148,43 +148,39 @@ public class GridViewHolder extends RecyclerView.ViewHolder implements Serializa
 	 * @param context			{@link Context} current context.
 	 */
 	public void updateViewsData(Context context) {
-		try {
-			this.context = context;
-			titleTextView.setText(youTubeVideo.getTitle());
-			channelTextView.setText(showChannelInfo ? youTubeVideo.getChannelName() : "");
-			publishDateTextView.setText(youTubeVideo.getPublishDatePretty());
-			videoDurationTextView.setText(youTubeVideo.getDuration());
-			viewsTextView.setText(youTubeVideo.getViewsCount());
-			Glide.with(context)
-							.load(youTubeVideo.getThumbnailUrl())
-							.apply(new RequestOptions().placeholder(R.drawable.thumbnail_default))
-							.into(thumbnailImageView);
+		this.context = context;
+		titleTextView.setText(youTubeVideo.getTitle());
+		channelTextView.setText(showChannelInfo ? youTubeVideo.getChannelName() : "");
+		publishDateTextView.setText(youTubeVideo.getPublishDatePretty());
+		videoDurationTextView.setText(youTubeVideo.getDuration());
+		viewsTextView.setText(youTubeVideo.getViewsCount());
+		Glide.with(context)
+				.load(youTubeVideo.getThumbnailUrl())
+				.apply(new RequestOptions().placeholder(R.drawable.thumbnail_default))
+				.into(thumbnailImageView);
 
-			if (youTubeVideo.getThumbsUpPercentageStr() != null) {
-				thumbsUpPercentageTextView.setVisibility(View.VISIBLE);
-				thumbsUpPercentageTextView.setText(youTubeVideo.getThumbsUpPercentageStr());
-			} else {
-				thumbsUpPercentageTextView.setVisibility(View.INVISIBLE);
-			}
+		if (youTubeVideo.getThumbsUpPercentageStr() != null) {
+			thumbsUpPercentageTextView.setVisibility(View.VISIBLE);
+			thumbsUpPercentageTextView.setText(youTubeVideo.getThumbsUpPercentageStr());
+		} else {
+			thumbsUpPercentageTextView.setVisibility(View.INVISIBLE);
+		}
 
-			if(SkyTubeApp.getPreferenceManager().getBoolean(context.getString(R.string.pref_key_disable_playback_status), false)) {
-				videoPositionProgressBar.setVisibility(View.INVISIBLE);
-			} else {
-				PlaybackStatusDb.VideoWatchedStatus videoWatchedStatus = PlaybackStatusDb.getVideoDownloadsDb().getVideoWatchedStatus(youTubeVideo);
-				if (videoWatchedStatus.isWatched()) {
-					videoPositionProgressBar.setVisibility(View.VISIBLE);
-					videoPositionProgressBar.setMax(youTubeVideo.getDurationInSeconds() * 1000);
-					if (videoWatchedStatus.isFullyWatched()) {
-						videoPositionProgressBar.setProgress(youTubeVideo.getDurationInSeconds() * 1000);
-					} else {
-						videoPositionProgressBar.setProgress((int) videoWatchedStatus.getPosition());
-					}
+		if(SkyTubeApp.getPreferenceManager().getBoolean(context.getString(R.string.pref_key_disable_playback_status), false)) {
+			videoPositionProgressBar.setVisibility(View.INVISIBLE);
+		} else {
+			PlaybackStatusDb.VideoWatchedStatus videoWatchedStatus = PlaybackStatusDb.getPlaybackStatusDb().getVideoWatchedStatus(youTubeVideo);
+			if (videoWatchedStatus.isWatched()) {
+				videoPositionProgressBar.setVisibility(View.VISIBLE);
+				videoPositionProgressBar.setMax(youTubeVideo.getDurationInSeconds() * 1000);
+				if (videoWatchedStatus.isFullyWatched()) {
+					videoPositionProgressBar.setProgress(youTubeVideo.getDurationInSeconds() * 1000);
 				} else {
-					videoPositionProgressBar.setVisibility(View.INVISIBLE);
+					videoPositionProgressBar.setProgress((int) videoWatchedStatus.getPosition());
 				}
+			} else {
+				videoPositionProgressBar.setVisibility(View.INVISIBLE);
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
 	}
 
@@ -224,11 +220,11 @@ public class GridViewHolder extends RecyclerView.ViewHolder implements Serializa
 						youTubeVideo.copyUrl(context);
 						return true;
 					case R.id.mark_watched:
-						PlaybackStatusDb.getVideoDownloadsDb().setVideoWatchedStatus(youTubeVideo, true);
+						PlaybackStatusDb.getPlaybackStatusDb().setVideoWatchedStatus(youTubeVideo, true);
 						updateViewsData();
 						return true;
 					case R.id.mark_unwatched:
-						PlaybackStatusDb.getVideoDownloadsDb().setVideoWatchedStatus(youTubeVideo, false);
+						PlaybackStatusDb.getPlaybackStatusDb().setVideoWatchedStatus(youTubeVideo, false);
 						updateViewsData();
 						return true;
 					case R.id.bookmark_video:
@@ -261,6 +257,7 @@ public class GridViewHolder extends RecyclerView.ViewHolder implements Serializa
 						return true;
 					case R.id.block_channel:
 						youTubeVideo.getChannel().blockChannel();
+						return true;
 				}
 				return false;
 			}

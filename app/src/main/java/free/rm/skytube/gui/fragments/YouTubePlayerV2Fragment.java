@@ -566,7 +566,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 		player.stop();
 		playerView.setPlayer(null);
 		if(!SkyTubeApp.getPreferenceManager().getBoolean(getString(R.string.pref_key_disable_playback_status), false)) {
-			PlaybackStatusDb.getVideoDownloadsDb().setVideoPosition(youTubeVideo, player.getCurrentPosition());
+			PlaybackStatusDb.getPlaybackStatusDb().setVideoPosition(youTubeVideo, player.getCurrentPosition());
 		}
 	}
 
@@ -775,6 +775,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 				hideNavigationBar();
 			} else {
 				playerView.showController();
+				showNavigationBar();
 			}
 
 			return false;

@@ -25,8 +25,7 @@ public class PlaybackStatusDb extends SQLiteOpenHelperEx {
 	private static final String DATABASE_NAME = "playbackhistory.db";
 
 	private List<VideoPlayStatusUpdateListener> listeners = new ArrayList<>();
-
-	public static synchronized PlaybackStatusDb getVideoDownloadsDb() {
+	public static synchronized PlaybackStatusDb getPlaybackStatusDb() {
 		if (playbackStatusDb == null) {
 			playbackStatusDb = new PlaybackStatusDb(SkyTubeApp.getContext());
 		}

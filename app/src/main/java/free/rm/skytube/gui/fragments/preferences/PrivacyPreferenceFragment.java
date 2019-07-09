@@ -22,7 +22,7 @@ public class PrivacyPreferenceFragment extends PreferenceFragment implements Sha
 		clearPlaybackStatus.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 			@Override
 			public boolean onPreferenceClick(Preference preference) {
-				PlaybackStatusDb.getVideoDownloadsDb().deleteAllPlaybackHistory();
+				PlaybackStatusDb.getPlaybackStatusDb().deleteAllPlaybackHistory();
 				Toast.makeText(getActivity(), getString(R.string.pref_playback_status_cleared), Toast.LENGTH_LONG).show();
 				return true;
 			}
@@ -53,7 +53,7 @@ public class PrivacyPreferenceFragment extends PreferenceFragment implements Sha
 		} else if (key.equals(getString(R.string.pref_key_disable_playback_status))) {
 			CheckBoxPreference disablePlaybackStatusPreference = (CheckBoxPreference)findPreference(key);
 			if(disablePlaybackStatusPreference.isChecked()) {
-				PlaybackStatusDb.getVideoDownloadsDb().deleteAllPlaybackHistory();
+				PlaybackStatusDb.getPlaybackStatusDb().deleteAllPlaybackHistory();
 				Toast.makeText(getActivity(), getString(R.string.pref_disable_playback_status_deleted), Toast.LENGTH_LONG).show();
 			}
 		}

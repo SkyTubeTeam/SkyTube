@@ -104,7 +104,7 @@ public class ChromecastMiniControllerFragment extends ChromecastBaseControllerFr
 	@Override
 	protected void onPlayStopped() {
 		if(!SkyTubeApp.getPreferenceManager().getBoolean(getString(R.string.pref_key_disable_playback_status), false)) {
-			PlaybackStatusDb.getVideoDownloadsDb().setVideoPosition(video, chromecastPlaybackProgressBar.getProgress());
+			PlaybackStatusDb.getPlaybackStatusDb().setVideoPosition(video, chromecastPlaybackProgressBar.getProgress());
 		}
 
 		activityListener.onPlayStopped();

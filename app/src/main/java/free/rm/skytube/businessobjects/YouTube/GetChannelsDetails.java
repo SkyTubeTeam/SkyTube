@@ -23,13 +23,17 @@ import com.google.api.services.youtube.model.ChannelListResponse;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPI;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPIKey;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
+import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 
 /**
  * Returns the details/information about YouTube channel(s).
@@ -39,6 +43,15 @@ public class GetChannelsDetails {
 	private static final int    CHANNELS_PER_QUERY = 50;
 	private static final Long   MAX_RESULTS = (long) CHANNELS_PER_QUERY;
 
+	private Map<String, YouTubeChannel> channelCache;
+
+	public GetChannelsDetails() {
+		this(null);
+	}
+
+	public GetChannelsDetails(Map<String, YouTubeChannel> channelCache) {
+		this.channelCache = channelCache != null ? channelCache : new HashMap<String, YouTubeChannel>();
+	}
 
 	/**
 	 * Retrieve a list of {@link YouTubeChannel} by communicating with YouTube.
@@ -56,30 +69,35 @@ public class GetChannelsDetails {
 	public List<YouTubeChannel> getYouTubeChannels(List<String> channelIdsList, boolean isUserSubscribed, boolean shouldCheckForNewVideos) throws IOException {
 		String  bannerType = SkyTubeApp.isTablet() ? "bannerTabletHdImageUrl" : "bannerMobileHdImageUrl";
 
-		List<YouTubeChannel> youTubeChannelsList = new ArrayList<>();
+		try {
+			List<YouTubeChannel> youTubeChannelsList = new ArrayList<>();
 
-		// YouTube can only return information about 50 (or so) channels at a time.  Hence we need
-		// to divide the given channelIdsList into smaller lists... then we need to regroup them
-		// into youTubeChannelsList.
-		List<List<String>> dividedChannelIdsLists = divideList(channelIdsList);
-		for (List<String> subChannelIdsList : dividedChannelIdsLists) {
+			// YouTube can only return information about 50 (or so) channels at a time.  Hence we need
+			// to divide the given channelIdsList into smaller lists... then we need to regroup them
+			// into youTubeChannelsList.
+			List<List<String>> dividedChannelIdsLists = divideList(channelIdsList);
 			YouTube youtube = YouTubeAPI.create();
-			YouTube.Channels.List channelInfo = youtube.channels().list("snippet, statistics, brandingSettings");
-			channelInfo.setFields("items(id, snippet/title, snippet/description, snippet/thumbnails/default," +
-								"statistics/subscriberCount, brandingSettings/image/" + bannerType + ")," +
-								"nextPageToken")
-					.setKey(YouTubeAPIKey.get().getYouTubeAPIKey())
-					.setId(convertListToCSV(subChannelIdsList))
-					.setMaxResults(MAX_RESULTS);
+			for (List<String> subChannelIdsList : dividedChannelIdsLists) {
+				YouTube.Channels.List channelInfo = youtube.channels().list("snippet, statistics, brandingSettings");
+				channelInfo.setFields("items(id, snippet/title, snippet/description, snippet/thumbnails/default," +
+						"statistics/subscriberCount, brandingSettings/image/" + bannerType + ")," +
+						"nextPageToken")
+						.setKey(YouTubeAPIKey.get().getYouTubeAPIKey())
+						.setId(convertListToCSV(subChannelIdsList))
+						.setMaxResults(MAX_RESULTS);
 
-			// get channels' info from the remote YouTube server
-			youTubeChannelsList.addAll( getYouTubeChannels(channelInfo, isUserSubscribed, shouldCheckForNewVideos) );
+				// get channels' info from the remote YouTube server
+				youTubeChannelsList.addAll(getYouTubeChannels(channelInfo, isUserSubscribed, shouldCheckForNewVideos));
+			}
+
+			// There is currently a bug in the YouTube API in the sense that the order of channels is
+			// not maintained.  Hence we currently need to manually sort the channels (to maintain the
+			// order listed in the DB) until YouTube fix their bug.
+			return sortYouTubeChannelsList(channelIdsList, youTubeChannelsList);
+		} catch (IOException e) {
+			// return the cached values
+			return new ArrayList(channelCache.values());
 		}
-
-		// There is currently a bug in the YouTube API in the sense that the order of channels is
-		// not maintained.  Hence we currently need to manually sort the channels (to maintain the
-		// order listed in the DB) until YouTube fix their bug.
-		return sortYouTubeChannelsList(channelIdsList, youTubeChannelsList);
 	}
 
 
@@ -127,8 +145,9 @@ public class GetChannelsDetails {
 		List<Channel> channelList = response.getItems();
 
 		if(channelList != null && channelList.size() > 0) {
-			YouTubeChannel youTubeChannel = new YouTubeChannel();
-			youTubeChannel.init(channelList.get(0), false, false);
+			Channel channel = channelList.get(0);
+			YouTubeChannel youTubeChannel = getCached(channel.getId());
+			youTubeChannel.init(channel, false, false);
 			return youTubeChannel;
 		}
 
@@ -196,7 +215,7 @@ public class GetChannelsDetails {
 	 *
 	 * @return A list of {@link YouTubeChannel}.
 	 */
-	private List<YouTubeChannel> getYouTubeChannels(YouTube.Channels.List channelInfo, boolean isUserSubscribed, boolean shouldCheckForNewVideos) {
+	private List<YouTubeChannel> getYouTubeChannels(YouTube.Channels.List channelInfo, boolean isUserSubscribed, boolean shouldCheckForNewVideos) throws IOException {
 		List<YouTubeChannel>    youTubeChannelList = new ArrayList<>();
 
 		try {
@@ -211,20 +230,36 @@ public class GetChannelsDetails {
 			// set the instance variables
 			for (Channel channel : channelList) {
 				try {
-					youTubeChannel = new YouTubeChannel();
-					youTubeChannel.init(channel, isUserSubscribed, shouldCheckForNewVideos);
+					youTubeChannel = getCached(channel.getId());
+					if (youTubeChannel.init(channel, isUserSubscribed, shouldCheckForNewVideos)) {
+						SubscriptionsDb.getSubscriptionsDb().updateChannel(youTubeChannel);
+					}
 					youTubeChannelList.add(youTubeChannel);
 				} catch (Throwable tr) {
 					Logger.e(this, "Error has occurred while getting channel info for ChannelID=" + channel.getId(), tr);
 				}
 			}
-		} catch (Throwable tr) {
+		} catch (IOException tr) {
 			Logger.e(this, "Error has occurred while getting channels info", tr);
+			throw tr;
 		}
 
 		return youTubeChannelList;
 	}
 
+	private YouTubeChannel getCached(String id) throws IOException {
+		YouTubeChannel channel = this.channelCache.get(id);
+		if (channel == null) {
+			// check, if it's stored in the subscription db
+			channel = SubscriptionsDb.getSubscriptionsDb().getCachedSubscribedChannel(id);
+			if (channel == null) {
+				// fallback to create a new instance
+				channel = new YouTubeChannel(id, null);
+			}
+			this.channelCache.put(id, channel);
+		}
+		return channel;
+	}
 
 	/**
 	 * Sort the order of the given youTubeChannelsList such that it is the same as that of channelIdsList.
