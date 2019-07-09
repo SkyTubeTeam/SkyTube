@@ -17,8 +17,9 @@
 
 package free.rm.skytube.gui.activities;
 
-import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.gui.businessobjects.MainActivityListener;

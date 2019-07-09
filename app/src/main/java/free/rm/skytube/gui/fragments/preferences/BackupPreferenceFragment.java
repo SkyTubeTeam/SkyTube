@@ -21,7 +21,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import free.rm.skytube.R;
 import free.rm.skytube.gui.businessobjects.SubscriptionsBackupsManager;

@@ -32,8 +32,8 @@ import android.net.ConnectivityManager;
 import android.os.Build;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
-import android.support.multidex.MultiDexApplication;
-import android.support.v4.content.res.ResourcesCompat;
+import androidx.multidex.MultiDexApplication;
+import androidx.core.content.res.ResourcesCompat;
 
 import java.util.Arrays;
 import java.util.HashMap;

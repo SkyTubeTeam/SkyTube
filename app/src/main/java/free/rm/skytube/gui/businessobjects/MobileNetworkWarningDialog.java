@@ -18,8 +18,8 @@
 package free.rm.skytube.gui.businessobjects;
 
 import android.content.Context;
-import android.net.ConnectivityManager;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 import android.widget.CompoundButton;
 
 import com.afollestad.materialdialogs.MaterialDialog;

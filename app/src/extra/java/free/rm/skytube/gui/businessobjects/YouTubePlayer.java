@@ -119,7 +119,7 @@ public class YouTubePlayer {
 			if (context instanceof ChromecastListener) {
 				final PlaybackStatusDb.VideoWatchedStatus status = PlaybackStatusDb.getPlaybackStatusDb().getVideoWatchedStatus(youTubeVideo);
 				if(!SkyTubeApp.getPreferenceManager().getBoolean(context.getString(R.string.pref_key_disable_playback_status), false) && status.getPosition() > 0) {
-					new android.support.v7.app.AlertDialog.Builder(context)
+					new AlertDialog.Builder(context)
 									.setTitle(R.string.should_resume)
 									.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
 										@Override
