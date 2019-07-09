@@ -23,9 +23,9 @@ import free.rm.skytube.R;
 import free.rm.skytube.gui.businessobjects.preferences.ActionBarPreferenceActivity;
 import free.rm.skytube.gui.fragments.preferences.AboutPreferenceFragment;
 import free.rm.skytube.gui.fragments.preferences.BackupPreferenceFragment;
-import free.rm.skytube.gui.fragments.preferences.VideoBlockerPreferenceFragment;
 import free.rm.skytube.gui.fragments.preferences.OthersPreferenceFragment;
 import free.rm.skytube.gui.fragments.preferences.PrivacyPreferenceFragment;
+import free.rm.skytube.gui.fragments.preferences.VideoBlockerPreferenceFragment;
 import free.rm.skytube.gui.fragments.preferences.VideoPlayerPreferenceFragment;
 
 /**

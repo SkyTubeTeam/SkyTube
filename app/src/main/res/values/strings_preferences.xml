@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="preferences">Preferences</string>
+	<string name="key_preferences">preferences</string>
 
 	<string name="pref_video_player_category">Video Player</string>
 	<string name="pref_title_preferred_res">Preferred Resolution</string>
@@ -55,6 +56,14 @@
 	<string name="pref_title_import_subs">Import Subscriptions From YouTube</string>
 	<string name="pref_summary_import_subs">Import your subscriptions from your YouTube account.</string>
 	<string name="subs_import_select_backup">Select YouTube XML file to import</string>
+
+	<string name="pref_chromecast_category">Chromecast</string>
+	<string name="pref_key_chromecast_category">chromecast_category</string>
+	<string name="pref_key_chromecast_none">default_chromecast_key</string>
+	<string name="pref_title_chromecast_none">None</string>
+	<string name="pref_title_autocast">AutoCast</string>
+	<string name="pref_key_autocast">pref_external_launch</string>
+	<string name="pref_summary_autocast">Select a Chromecast device to always use when opening a video in SkyTube from another application.</string>
 
 	<string name="pref_about_category">About</string>
 	<string name="pref_title_website">Website</string>

@@ -1,5 +1,6 @@
 package free.rm.skytube.gui.fragments;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -52,6 +53,7 @@ import free.rm.skytube.businessobjects.db.PlaybackStatusDb;
 import free.rm.skytube.businessobjects.db.Tasks.CheckIfUserSubbedToChannelTask;
 import free.rm.skytube.businessobjects.db.Tasks.IsVideoBookmarkedTask;
 import free.rm.skytube.businessobjects.interfaces.GetDesiredStreamListener;
+import free.rm.skytube.businessobjects.interfaces.YouTubePlayerActivityListener;
 import free.rm.skytube.businessobjects.interfaces.YouTubePlayerFragmentInterface;
 import free.rm.skytube.gui.activities.MainActivity;
 import free.rm.skytube.gui.activities.ThumbnailViewerActivity;
@@ -109,6 +111,7 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 	private ExpandableListView	    commentsExpandableListView = null;
 
 	private Menu                    menu = null;
+	private YouTubePlayerActivityListener listener = null;
 
 	private Handler                 hideHudTimerHandler = null;
 	private Handler                 hideVideoDescAndCommentsIconsTimerHandler = null;
@@ -168,6 +171,16 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 		return view;
 	}
 
+	@Override
+	public void onAttach(Context context) {
+		super.onAttach(context);
+		try {
+			Activity activity = (Activity)context;
+			listener = (YouTubePlayerActivityListener)activity;
+		} catch (ClassCastException e) {
+			throw new ClassCastException("YouTubePlayerFragment must be instantiated from an Activity that implements YouTubePlayerActivityListener");
+		}
+	}
 
 	/**
 	 * Initialise the views.
@@ -668,6 +681,8 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 
 		this.menu = menu;
 
+		listener.onOptionsMenuCreated(menu);
+
 		// Will now check if the video is bookmarked or not (and then update the menu accordingly).
 		//
 		// youTubeVideo might be null if we have only passed the video URL to this fragment (i.e.
@@ -848,7 +863,6 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 		}
 	}
 
-
 	////////////////////////////////////////////////////////////////////////////////////////////////
 
 	/**
@@ -889,7 +903,7 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 	 *
 	 * @return The URL of the YouTube video the user wants to play.
 	 */
-	private String getUrlFromIntent(final Intent intent) {
+	public static String getUrlFromIntent(final Intent intent) {
 		String url = null;
 
 		if (Intent.ACTION_VIEW.equals(intent.getAction()) && intent.getData() != null) {
@@ -899,6 +913,7 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 		return url;
 	}
 
+	////////////////////////////////////////////////////////////////////////////////////////////////
 	@Override
 	public void videoPlaybackStopped() {
 		int position = videoView.getCurrentPosition();
@@ -907,5 +922,20 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 		if(!SkyTubeApp.getPreferenceManager().getBoolean(getString(R.string.pref_key_disable_playback_status), false)) {
 			PlaybackStatusDb.getPlaybackStatusDb().setVideoPosition(youTubeVideo, position);
 		}
+	}
+
+	@Override
+	public YouTubeVideo getYouTubeVideo() {
+		return youTubeVideo;
+	}
+
+	@Override
+	public int getCurrentVideoPosition() {
+		return videoView.getCurrentPosition();
+	}
+
+	@Override
+	public void pause() {
+		videoView.pause();
 	}
 }

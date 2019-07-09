@@ -30,6 +30,11 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "CHROMECAST_APP_ID", "\"39E8D587\""
+        }
+        debug {
+//            buildConfigField "String", "CHROMECAST_APP_ID", "\"39E8D587\"" // prod
+            buildConfigField "String", "CHROMECAST_APP_ID", "\"29A66E17\"" // dev
         }
     }
     flavorDimensions "skytube"
@@ -57,6 +62,9 @@ android {
     lintOptions {
         checkReleaseBuilds false
         abortOnError false
+    }
+    dexOptions {
+        jumboMode true
     }
 }
 
@@ -98,4 +106,11 @@ dependencies {
 
     // proprietary module
     extraImplementation files('libs/YouTubeAndroidPlayerApi.jar')
+    extraImplementation 'com.android.support:mediarouter-v7:28.0.0'
+    extraImplementation 'com.google.android.gms:play-services-cast-framework:16.1.2'
+    extraImplementation 'com.googlecode.android-query:android-query:0.25.9'
+    extraImplementation 'com.sothree.slidinguppanel:library:3.4.0'
+    extraImplementation 'com.github.rahatarmanahmed:circularprogressview:2.5.0'
+    extraImplementation 'com.google.apis:google-api-services-youtube:v3-rev178-1.22.0'
+    extraImplementation 'com.squareup.picasso:picasso:2.5.2'
 }

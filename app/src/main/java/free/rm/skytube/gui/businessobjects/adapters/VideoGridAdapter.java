@@ -33,32 +33,42 @@ import free.rm.skytube.businessobjects.YouTube.GetYouTubeVideos;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetYouTubeVideosTask;
+import free.rm.skytube.businessobjects.db.PlaybackStatusDb;
+import free.rm.skytube.businessobjects.interfaces.VideoPlayStatusUpdateListener;
 import free.rm.skytube.gui.businessobjects.MainActivityListener;
 
 /**
  * An adapter that will display videos in a {@link android.widget.GridView}.
  */
-public class VideoGridAdapter extends RecyclerViewAdapterEx<YouTubeVideo, GridViewHolder> {
+public class VideoGridAdapter extends RecyclerViewAdapterEx<YouTubeVideo, GridViewHolder> implements VideoPlayStatusUpdateListener {
 
-	/** Class used to get YouTube videos from the web. */
-	private GetYouTubeVideos	getYouTubeVideos;
-	/** Set to true to display channel information (e.g. channel name) and allows user to open and
-	 *  browse the channel;  false to hide such information. */
-	private boolean				showChannelInfo = true;
-	/** Current video category */
-	private VideoCategory		currentVideoCategory = null;
+	/**
+	 * Class used to get YouTube videos from the web.
+	 */
+	private GetYouTubeVideos getYouTubeVideos;
+	/**
+	 * Set to true to display channel information (e.g. channel name) and allows user to open and
+	 * browse the channel;  false to hide such information.
+	 */
+	private boolean showChannelInfo = true;
+	/**
+	 * Current video category
+	 */
+	private VideoCategory currentVideoCategory = null;
 
 	// This allows the grid items to pass messages back to MainActivity
 	protected MainActivityListener listener;
 
-	/** If this is set, new videos being displayed will be saved to the database, if subscribed.
-	 *  RM:  This is only set and used by ChannelBrowserFragment */
-	private YouTubeChannel			youTubeChannel;
+	/**
+	 * If this is set, new videos being displayed will be saved to the database, if subscribed.
+	 * RM:  This is only set and used by ChannelBrowserFragment
+	 */
+	private YouTubeChannel youTubeChannel;
 
-	/** Holds a progress bar */
-	private SwipeRefreshLayout      swipeRefreshLayout = null;
-
-	private GridViewHolder activeGridViewHolder;
+	/**
+	 * Holds a progress bar
+	 */
+	private SwipeRefreshLayout swipeRefreshLayout = null;
 
 	/** Set to true if the video adapter is initialized. */
 	private boolean initialized = false;
@@ -74,13 +84,13 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<YouTubeVideo, GridVi
 	public VideoGridAdapter(Context context) {
 		super(context);
 		this.getYouTubeVideos = null;
+		PlaybackStatusDb.getPlaybackStatusDb().addListener(this);
 	}
 
 
 	public void setListener(MainActivityListener listener) {
 		this.listener = listener;
 	}
-
 
 	/**
 	 * Set the video category.  Upon set, the adapter will download the videos of the specified
@@ -97,8 +107,8 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<YouTubeVideo, GridVi
 	 * Set the video category.  Upon set, the adapter will download the videos of the specified
 	 * category asynchronously.
 	 *
-	 * @param videoCategory	The video category you want to change to.
-	 * @param searchQuery	The search query.  Should only be set if videoCategory is equal to
+	 * @param videoCategory The video category you want to change to.
+	 * @param searchQuery   The search query.  Should only be set if videoCategory is equal to
 	 *                      SEARCH_QUERY.
 	 */
 	public void setVideoCategory(VideoCategory videoCategory, String searchQuery) {
@@ -127,8 +137,8 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<YouTubeVideo, GridVi
 		} catch (IOException e) {
 			Log.e(TAG, "Could not init " + videoCategory, e);
 			Toast.makeText(getContext(),
-					String.format(getContext().getString(R.string.could_not_get_videos), videoCategory.toString()),
-					Toast.LENGTH_LONG).show();
+							String.format(getContext().getString(R.string.could_not_get_videos), videoCategory.toString()),
+							Toast.LENGTH_LONG).show();
 			this.currentVideoCategory = null;
 		}
 	}
@@ -138,18 +148,7 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<YouTubeVideo, GridVi
 	public GridViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 		View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.video_cell, parent, false);
 		final GridViewHolder gridViewHolder = new GridViewHolder(v, listener, showChannelInfo);
-		gridViewHolder.setGridViewHolderListener(new GridViewHolder.GridViewHolderListener() {
-			@Override
-			public void onClick() {
-				activeGridViewHolder = gridViewHolder;
-			}
-		});
 		return gridViewHolder;
-	}
-
-	public void refreshActiveGridViewHolder() {
-		if(activeGridViewHolder != null)
-			activeGridViewHolder.updateViewsData(getContext());
 	}
 
 	/**
@@ -216,4 +215,9 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<YouTubeVideo, GridVi
 		return youTubeChannel;
 	}
 
+	@Override
+	public void onVideoStatusUpdated() {
+		notifyDataSetChanged();
+	}
 }
+

@@ -43,4 +43,9 @@ public interface MainActivityListener {
 	 * Called when a playlist is clicked on
 	 */
 	void onPlaylistClick(YouTubePlaylist playlist);
+
+	/*
+	 *	Called when the VideoGrid in the Subscriptions Feed tab should be refreshed.
+	 */
+	void refreshSubscriptionsFeedVideos();
 }

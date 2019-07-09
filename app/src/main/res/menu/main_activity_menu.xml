@@ -2,17 +2,20 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
 	  xmlns:app="http://schemas.android.com/apk/res-auto">
 
+	<!-- NOTE: Any changes made to this menu file should also be made to the Extra variant version.
+		The Extra variant version includes the Cast icon for casting to a Chromecast. -->
+
 	<item android:id="@+id/menu_search"
 		  android:title="@string/search_videos"
 		  android:icon="@drawable/ic_search"
-		  app:showAsAction="collapseActionView|ifRoom"
+		  app:showAsAction="always"
 		  app:actionViewClass="android.support.v7.widget.SearchView"/>
 
 	<item
 		android:id="@+id/menu_blocker"
 		android:title="@string/pref_video_blocker_category"
 		app:actionLayout="@layout/menu_action_item_badge"
-		app:showAsAction="always" />
+		app:showAsAction="ifRoom" />
 
 	<item android:id="@+id/menu_enter_video_url"
 		  android:title="@string/enter_video_url"

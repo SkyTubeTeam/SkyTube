@@ -17,8 +17,8 @@ import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetSubscriptionVideosTask;
-import free.rm.skytube.gui.activities.MainActivity;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetSubscriptionVideosTaskListener;
+import free.rm.skytube.gui.activities.MainActivity;
 
 /**
  * A Service to automatically refresh the Subscriptions Database for Subscribed Channels. If any new videos have been found,

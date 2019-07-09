@@ -34,6 +34,8 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
+import java.io.Serializable;
+
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
@@ -48,7 +50,7 @@ import free.rm.skytube.gui.businessobjects.YouTubePlayer;
 /**
  * A ViewHolder for the videos grid view.
  */
-class GridViewHolder extends RecyclerView.ViewHolder {
+public class GridViewHolder extends RecyclerView.ViewHolder implements Serializable {
 	/** YouTube video */
 	private YouTubeVideo            youTubeVideo = null;
 	private Context                 context = null;
@@ -92,8 +94,6 @@ class GridViewHolder extends RecyclerView.ViewHolder {
 			@Override
 			public void onClick(View thumbnailView) {
 				if (youTubeVideo != null) {
-					if(gridViewHolderListener != null)
-						gridViewHolderListener.onClick();
 					YouTubePlayer.launch(youTubeVideo, context);
 				}
 			}
@@ -118,9 +118,14 @@ class GridViewHolder extends RecyclerView.ViewHolder {
 	}
 
 
+	public void setContext(Context context) {
+		this.context = context;
+	}
+
+
 
 	/**
-	 * Updates the contents of this ViewHold such that the data of these views is equal to the
+	 * Updates the contents of this ViewHolder such that the data of these views is equal to the
 	 * given youTubeVideo.
 	 *
 	 * @param youTubeVideo		{@link YouTubeVideo} instance.
@@ -134,7 +139,7 @@ class GridViewHolder extends RecyclerView.ViewHolder {
 
 
 	public void updateViewsData() {
-		updateViewsData(this.context);
+		updateViewsData(context);
 	}
 
 	/**
@@ -150,9 +155,9 @@ class GridViewHolder extends RecyclerView.ViewHolder {
 		videoDurationTextView.setText(youTubeVideo.getDuration());
 		viewsTextView.setText(youTubeVideo.getViewsCount());
 		Glide.with(context)
-						.load(youTubeVideo.getThumbnailUrl())
-						.apply(new RequestOptions().placeholder(R.drawable.thumbnail_default))
-						.into(thumbnailImageView);
+				.load(youTubeVideo.getThumbnailUrl())
+				.apply(new RequestOptions().placeholder(R.drawable.thumbnail_default))
+				.into(thumbnailImageView);
 
 		if (youTubeVideo.getThumbsUpPercentageStr() != null) {
 			thumbsUpPercentageTextView.setVisibility(View.VISIBLE);
@@ -260,16 +265,7 @@ class GridViewHolder extends RecyclerView.ViewHolder {
 		popupMenu.show();
 	}
 
-	/**
-	 * Interface to alert a listener that this GridViewHolder has been clicked.
-	 */
-	public interface GridViewHolderListener {
-		void onClick();
-	}
-
-	private GridViewHolderListener gridViewHolderListener;
-
-	public void setGridViewHolderListener(GridViewHolderListener gridViewHolderListener) {
-		this.gridViewHolderListener = gridViewHolderListener;
+	public YouTubeVideo getYouTubeVideo() {
+		return youTubeVideo;
 	}
 }

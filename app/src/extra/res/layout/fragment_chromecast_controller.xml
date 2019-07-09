@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			  xmlns:app="http://schemas.android.com/apk/res-auto"
+			  android:orientation="vertical"
+			  android:clickable="true"
+			  android:background="?attr/colorPrimary"
+			  android:layout_width="match_parent"
+			  android:layout_height="match_parent">
+	<ScrollView
+		android:id="@+id/main_scroll_view"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:orientation="vertical">
+			<ImageView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				app:srcCompat="@drawable/thumbnail_default"
+				android:scaleType="fitStart"
+				android:adjustViewBounds="true"
+				android:id="@+id/videoImage"/>
+
+			<LinearLayout
+				android:orientation="horizontal"
+				android:layout_width="match_parent"
+				android:layout_height="50dp"
+				android:gravity="center_vertical">
+
+				<free.rm.skytube.gui.businessobjects.RuntimeView
+					android:id="@+id/currentRuntime"
+					android:textColor="@android:color/white"
+					android:layout_marginLeft="10dp"
+					android:text="00:00"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"/>
+
+				<SeekBar
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:id="@+id/chromecastPlaybackProgressBar"
+					android:layout_weight="1"/>
+
+				<free.rm.skytube.gui.businessobjects.RuntimeView
+					android:id="@+id/duration"
+					android:textColor="@android:color/white"
+					android:layout_marginRight="10dp"
+					android:text="00:00"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"/>
+
+			</LinearLayout>
+
+			<LinearLayout
+				android:orientation="horizontal"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:gravity="center_horizontal"
+				>
+
+				<ImageButton
+					app:srcCompat="@drawable/button_rewind10"
+					style="@style/ChromecastBigPlaybackButtons"
+					android:id="@+id/rewindButton"
+					android:layout_width="0dp"
+					android:layout_weight="1"
+					android:layout_height="wrap_content"/>
+
+				<ImageButton
+					app:srcCompat="@drawable/button_stop"
+					style="@style/ChromecastBigPlaybackButtons"
+					android:id="@+id/stopButton"
+					android:layout_width="0dp"
+					android:layout_weight="1"
+					android:layout_height="wrap_content"/>
+
+				<FrameLayout
+					style="@style/ChromecastBigPlaybackButtons"
+					android:id="@+id/playPauseContainer"
+					android:layout_height="wrap_content"
+					android:layout_width="0dp"
+					android:layout_weight="1">
+
+					<ImageButton
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						app:srcCompat="@drawable/button_play"
+						android:id="@+id/playButton"
+						android:visibility="gone"
+						style="@style/ChromecastPlaybackButtons"/>
+
+					<ImageButton
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						app:srcCompat="@drawable/button_pause"
+						style="@style/ChromecastPlaybackButtons"
+						android:id="@+id/pauseButton"
+						android:visibility="gone"/>
+
+					<com.github.rahatarmanahmed.cpv.CircularProgressView
+						xmlns:app="http://schemas.android.com/apk/res-auto"
+						android:id="@+id/bufferingSpinner"
+						android:layout_width="32dp"
+						android:layout_height="32dp"
+						app:cpv_color="#ffffff"
+						android:layout_gravity="center"
+						app:cpv_animAutostart="true"
+						app:cpv_indeterminate="true" />
+				</FrameLayout>
+
+				<ImageButton
+					app:srcCompat="@drawable/button_forward30"
+					style="@style/ChromecastBigPlaybackButtons"
+					android:id="@+id/forwardButton"
+					android:layout_width="0dp"
+					android:layout_weight="1"
+					android:layout_height="wrap_content"/>
+			</LinearLayout>
+
+			<include android:id="@+id/videoDescription" layout="@layout/video_description"></include>
+
+		</LinearLayout>
+	</ScrollView>
+</LinearLayout>

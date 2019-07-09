@@ -25,7 +25,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -57,20 +56,23 @@ import free.rm.skytube.businessobjects.db.SearchHistoryDb;
 import free.rm.skytube.businessobjects.db.SearchHistoryTable;
 import free.rm.skytube.businessobjects.interfaces.SearchHistoryClickListener;
 import free.rm.skytube.gui.businessobjects.BlockedVideosDialog;
-import free.rm.skytube.gui.businessobjects.MainActivityListener;
 import free.rm.skytube.gui.businessobjects.YouTubePlayer;
 import free.rm.skytube.gui.businessobjects.adapters.SearchHistoryCursorAdapter;
+import free.rm.skytube.gui.businessobjects.fragments.FragmentEx;
 import free.rm.skytube.gui.businessobjects.updates.UpdatesCheckerTask;
 import free.rm.skytube.gui.fragments.ChannelBrowserFragment;
 import free.rm.skytube.gui.fragments.MainFragment;
 import free.rm.skytube.gui.fragments.PlaylistVideosFragment;
 import free.rm.skytube.gui.fragments.SearchVideoGridFragment;
+import free.rm.skytube.gui.fragments.SubscriptionsFeedFragment;
 
 /**
  * Main activity (launcher).  This activity holds {@link free.rm.skytube.gui.fragments.VideosGridFragment}.
+ * Do NOT change this activity's superclass, as it needs to be {@link free.rm.skytube.gui.activities.BaseActivity} in order
+ * for Chromecast support to work (on the Extra variant - OSS variant's BaseActivity just has empty no-op methods for
+ * the Chromecast specific functionality)
  */
-public class MainActivity extends AppCompatActivity implements MainActivityListener {
-
+public class MainActivity extends BaseActivity {
 	@BindView(R.id.fragment_container)
 	protected FrameLayout           fragmentContainer;
 
@@ -80,6 +82,8 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 	/** Fragment that shows Videos from a specific Playlist */
 	private PlaylistVideosFragment  playlistVideosFragment;
 	private VideoBlockerPlugin      videoBlockerPlugin;
+
+	private FragmentEx currentFragment;
 
 	private boolean dontAddToBackStack = false;
 
@@ -110,7 +114,12 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 		// Delete any missing downloaded videos
 		new DownloadedVideosDb.RemoveMissingVideosTask().executeInParallel();
 
-		setContentView(R.layout.activity_fragment_holder);
+		setContentView(R.layout.activity_main);
+
+		// The Extra variant needs to initialize some Fragments that are used for Chromecast control. This is done in onLayoutSet of BaseActivity.
+		// The OSS variant has a no-op version of this method, since it doesn't need to do anything else here.
+		onLayoutSet();
+
 		ButterKnife.bind(this);
 
 		if(fragmentContainer != null) {
@@ -142,6 +151,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 						mainFragment.setArguments(args);
 					}
 					getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, mainFragment).commit();
+					currentFragment = mainFragment;
 				}
 			}
 		}
@@ -187,10 +197,13 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 
 	@Override
 	public boolean onCreateOptionsMenu(final Menu menu) {
+		super.onCreateOptionsMenu(menu);
 		getMenuInflater().inflate(R.menu.main_activity_menu, menu);
 
 		// setup the video blocker notification icon which will be displayed in the tool bar
 		videoBlockerPlugin.setupIconForToolBar(menu);
+
+		onOptionsMenuCreated(menu);
 
 		// setup the SearchView (actionbar)
 		final MenuItem searchItem = menu.findItem(R.id.menu_search);
@@ -337,30 +350,42 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 		return clipboardText;
 	}
 
-
+	/**
+	 * For the extra variant, if the Chromecast Controller is visible and expanded, we want to collapse it. So, we must
+	 * intercept onBackPressed to make sure it doesn't return us to the homescreen. shouldMinimizeOnBack will take care
+	 * of this - on the Extra variant, if the Chromecast Controller is visible and expanded, it will collapse it, and
+	 * return false, thus the app will not exit nor will it return to the homescreen. If it's collapsed, or not visible,
+	 * it will return true, which then will check if the mainFragment is visible (as opposed to searchFragment). If it is,
+	 * it will return to the home screen without exiting, otherwise it will do super.onBackPressed (so in searchFragment,
+	 * it will exit from that and return to mainFragment).
+	 *
+	 * On the OSS variant, shouldMinimizeOnBack will always return true, and the normal checks for mainFragment being visible
+	 * will be done.
+	 */
 	@Override
 	public void onBackPressed() {
-		if (mainFragment != null  &&  mainFragment.isVisible()) {
-			// If the Subscriptions Drawer is open, close it instead of minimizing the app.
-			if(mainFragment.isDrawerOpen()) {
-				mainFragment.closeDrawer();
+		if(shouldMinimizeOnBack()) {
+			if (mainFragment != null && mainFragment.isVisible()) {
+				// If the Subscriptions Drawer is open, close it instead of minimizing the app.
+				if (mainFragment.isDrawerOpen()) {
+					mainFragment.closeDrawer();
+				} else {
+					// On Android, when the user presses back button, the Activity is destroyed and will be
+					// recreated when the user relaunches the app.
+					// We do not want that behaviour, instead then the back button is pressed, the app will
+					// be **minimized**.
+					Intent startMain = new Intent(Intent.ACTION_MAIN);
+					startMain.addCategory(Intent.CATEGORY_HOME);
+					startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+					startActivity(startMain);
+				}
 			} else {
-				// On Android, when the user presses back button, the Activity is destroyed and will be
-				// recreated when the user relaunches the app.
-				// We do not want that behaviour, instead then the back button is pressed, the app will
-				// be **minimized**.
-				Intent startMain = new Intent(Intent.ACTION_MAIN);
-				startMain.addCategory(Intent.CATEGORY_HOME);
-				startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-				startActivity(startMain);
+				super.onBackPressed();
 			}
-		} else {
-			super.onBackPressed();
 		}
 	}
 
-
-	private void switchToFragment(Fragment fragment) {
+	private void switchToFragment(FragmentEx fragment) {
 		FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
 		transaction.replace(R.id.fragment_container, fragment);
@@ -369,6 +394,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 		else
 			dontAddToBackStack = false;
 		transaction.commit();
+		currentFragment = fragment;
 	}
 
 
@@ -392,6 +418,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 		channelBrowserFragment = new ChannelBrowserFragment();
 		channelBrowserFragment.getChannelPlaylistsFragment().setMainActivityListener(this);
 		channelBrowserFragment.setArguments(args);
+		currentFragment = channelBrowserFragment;
 		switchToFragment(channelBrowserFragment);
 	}
 
@@ -504,7 +531,13 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 
 	}
 
-
-
-
+	/**
+	 * This will tell the SubscriptionsFeedFragment (which lives in MainFragment) that it should refresh its video grid.
+	 * This happens when a channel is subscribed to/unsubscribed from. This is called from {@link free.rm.skytube.gui.fragments.ChromecastMiniControllerFragment}.
+	 */
+	@Override
+	public void refreshSubscriptionsFeedVideos() {
+		SubscriptionsFeedFragment.unsetFlag(SubscriptionsFeedFragment.FLAG_REFRESH_FEED_FROM_CACHE);
+		mainFragment.getSubscriptionsFeedFragment().refreshFeedFromCache();
+	}
 }

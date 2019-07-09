@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:background="?attr/colorPrimary"
+	android:layout_width="match_parent"
+	android:layout_height="@dimen/chromecast_panel_height">
+
+	<ProgressBar
+		style="?android:attr/progressBarStyleHorizontal"
+		android:layout_width="match_parent"
+		android:layout_height="4dp"
+		android:progressDrawable="@drawable/chromecast_controller_progress"
+		android:id="@+id/chromecastPlaybackProgressBar"/>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="horizontal"
+		>
+
+		<LinearLayout
+			android:orientation="horizontal"
+			android:layout_width="@dimen/chromecast_playback_button_container_width_double"
+			android:layout_height="match_parent"
+			android:animateLayoutChanges="true"
+			android:id="@+id/chromecastMiniControllerLeftContainer">
+
+			<FrameLayout
+				style="@style/ChromecastPlaybackButtonContainer"
+				android:id="@+id/stopContainer"
+				android:layout_height="match_parent">
+
+				<ImageButton
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					app:srcCompat="@drawable/button_stop"
+					style="@style/ChromecastPlaybackButtons"
+					android:id="@+id/stopButton"/>
+			</FrameLayout>
+
+			<FrameLayout
+				style="@style/ChromecastPlaybackButtonContainer"
+				android:id="@+id/rewindContainer"
+				android:layout_height="match_parent">
+
+				<ImageButton
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					app:srcCompat="@drawable/button_rewind10"
+					style="@style/ChromecastPlaybackButtons"
+					android:id="@+id/rewindButton"/>
+
+			</FrameLayout>
+		</LinearLayout>
+
+		<LinearLayout
+			android:orientation="vertical"
+			android:layout_height="match_parent"
+			android:layout_weight="1"
+			android:layout_width="match_parent"
+			android:id="@+id/chromeCastMiniControllerMiddleContainer">
+
+			<!-- This ImageView should be switch to visible when a now playing screen is added -->
+			<ImageView
+				android:layout_width="match_parent"
+				android:layout_height="24dp"
+				android:id="@+id/chromecastMiniControllerChevron"
+				android:background="@android:color/transparent"
+				app:srcCompat="@drawable/button_chevron_up"/>
+
+			<TextView
+				android:id="@+id/videoTitle"
+				android:text="Video Title"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				style="@style/ChromecastPanelText"
+				android:maxLines="1"
+				android:ellipsize="end"/>
+
+			<TextView
+				android:id="@+id/channelName"
+				android:text="Channel Name"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				style="@style/ChromecastPanelText"
+				android:maxLines="1"
+				android:ellipsize="end"/>
+		</LinearLayout>
+
+		<FrameLayout
+			android:layout_width="@dimen/chromecast_playback_button_container_width_double"
+			android:layout_height="match_parent">
+
+			<LinearLayout
+				android:orientation="horizontal"
+				android:layout_width="@dimen/chromecast_playback_button_container_width_double"
+				android:layout_height="match_parent"
+				android:animateLayoutChanges="true"
+				android:id="@+id/chromecastMiniControllerRightContainer">
+
+				<FrameLayout
+					style="@style/ChromecastPlaybackButtonContainer"
+					android:id="@+id/forwardContainer"
+					android:layout_height="match_parent">
+
+					<ImageButton
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						app:srcCompat="@drawable/button_forward30"
+						style="@style/ChromecastPlaybackButtons"
+						android:id="@+id/forwardButton"/>
+				</FrameLayout>
+
+				<FrameLayout
+					style="@style/ChromecastPlaybackButtonContainer"
+					android:id="@+id/playPauseContainer"
+					android:layout_height="match_parent">
+
+					<ImageButton
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						app:srcCompat="@drawable/button_play"
+						android:id="@+id/playButton"
+						android:visibility="gone"
+						style="@style/ChromecastPlaybackButtons"/>
+
+					<ImageButton
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						app:srcCompat="@drawable/button_pause"
+						style="@style/ChromecastPlaybackButtons"
+						android:id="@+id/pauseButton"
+						/>
+
+					<com.github.rahatarmanahmed.cpv.CircularProgressView
+						xmlns:app="http://schemas.android.com/apk/res-auto"
+						android:id="@+id/bufferingSpinner"
+						android:layout_width="32dp"
+						android:layout_height="32dp"
+						app:cpv_color="#ffffff"
+						android:visibility="gone"
+						android:layout_gravity="center"
+						app:cpv_animAutostart="true"
+						app:cpv_indeterminate="true" />
+				</FrameLayout>
+			</LinearLayout>
+
+			<ImageButton
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				app:srcCompat="@drawable/button_share"
+				android:id="@+id/chromecastMiniControllerShareButton"
+				android:background="@android:color/transparent"
+				android:visibility="invisible"
+				android:layout_gravity="end|center_vertical"
+				android:layout_marginEnd="20dp"
+				android:layout_marginRight="20dp"/>
+		</FrameLayout>
+
+	</LinearLayout>
+</RelativeLayout>

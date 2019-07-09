@@ -82,6 +82,7 @@ import free.rm.skytube.businessobjects.db.PlaybackStatusDb;
 import free.rm.skytube.businessobjects.db.Tasks.CheckIfUserSubbedToChannelTask;
 import free.rm.skytube.businessobjects.db.Tasks.IsVideoBookmarkedTask;
 import free.rm.skytube.businessobjects.interfaces.GetDesiredStreamListener;
+import free.rm.skytube.businessobjects.interfaces.YouTubePlayerActivityListener;
 import free.rm.skytube.businessobjects.interfaces.YouTubePlayerFragmentInterface;
 import free.rm.skytube.gui.activities.MainActivity;
 import free.rm.skytube.gui.activities.ThumbnailViewerActivity;
@@ -130,6 +131,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 									noVideoCommentsView = null;
 	private CommentsAdapter         commentsAdapter = null;
 	private ExpandableListView      commentsExpandableListView = null;
+	private YouTubePlayerActivityListener listener = null;
 
 
 	@Nullable
@@ -181,6 +183,16 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 		return view;
 	}
 
+	@Override
+	public void onAttach(Context context) {
+		super.onAttach(context);
+		try {
+			Activity activity = (Activity)context;
+			listener = (YouTubePlayerActivityListener)activity;
+		} catch (ClassCastException e) {
+			throw new ClassCastException("YouTubePlayerFragment must be instantiated from an Activity that implements YouTubePlayerActivityListener");
+		}
+	}
 
 	/**
 	 * Initialise the views.
@@ -432,6 +444,8 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 		inflater.inflate(R.menu.menu_youtube_player, menu);
 
 		this.menu = menu;
+
+		listener.onOptionsMenuCreated(menu);
 
 		// Will now check if the video is bookmarked or not (and then update the menu accordingly).
 		//
@@ -725,8 +739,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 			// if the user is playing a video...
 			if (player.getPlayWhenReady()) {
 				// pause video
-				player.setPlayWhenReady(false);
-				player.getPlaybackState();
+				pause();
 			} else {
 				// play video
 				player.setPlayWhenReady(true);
@@ -1055,4 +1068,19 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 
 	}
 
+	@Override
+	public YouTubeVideo getYouTubeVideo() {
+		return youTubeVideo;
+	}
+
+	@Override
+	public int getCurrentVideoPosition() {
+		return (int)player.getCurrentPosition();
+	}
+
+	@Override
+	public void pause() {
+		player.setPlayWhenReady(false);
+		player.getPlaybackState();
+	}
 }

@@ -18,7 +18,6 @@
 package free.rm.skytube.businessobjects.YouTube.POJOs;
 
 import android.app.DownloadManager;
-import android.app.Fragment;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -263,6 +262,10 @@ public class YouTubeVideo implements Serializable {
 		} else {
 			isLiveStream = false;
 		}
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public String getId() {

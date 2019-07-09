@@ -25,8 +25,8 @@ import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
-import free.rm.skytube.gui.businessobjects.views.SubscribeButton;
 import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
+import free.rm.skytube.gui.businessobjects.views.SubscribeButton;
 import free.rm.skytube.gui.fragments.SubscriptionsFeedFragment;
 
 /**
@@ -74,7 +74,10 @@ public class SubscribeToChannelTask extends AsyncTaskParallel<Void, Void, Boolea
 	@Override
 	protected Boolean doInBackground(Void... params) {
 		if (subscribeToChannel) {
-			return SubscriptionsDb.getSubscriptionsDb().subscribe(channel);
+			boolean subscribed = SubscriptionsDb.getSubscriptionsDb().subscribe(channel);
+			if(subscribed)
+				SubscriptionsFeedFragment.setFlag(SubscriptionsFeedFragment.FLAG_REFRESH_FEED_FROM_CACHE);
+			return subscribed;
 		} else {
 			return SubscriptionsDb.getSubscriptionsDb().unsubscribe(channel);
 		}

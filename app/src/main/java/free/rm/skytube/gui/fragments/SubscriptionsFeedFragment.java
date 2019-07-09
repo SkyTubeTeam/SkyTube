@@ -72,15 +72,15 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 	private BroadcastReceiver feedUpdaterReceiver = new BroadcastReceiver() {
 		@Override
 		public void onReceive(Context context, Intent intent) {
-			new RefreshFeedFromCacheTask().executeInParallel();
+			refreshFeedFromCache();
 		}
 	};
 
 	@BindView(R.id.noSubscriptionsText)
 	View noSubscriptionsText;
 
-	private static final String FLAG_REFRESH_FEED_FROM_CACHE = "SubscriptionsFeedFragment.FLAG_REFRESH_FEED_FROM_CACHE";
-	private static final String FLAG_REFRESH_FEED_FULL = "SubscriptionsFeedFragment.FLAG_REFRESH_FEED_FULL";
+	public static final String FLAG_REFRESH_FEED_FROM_CACHE = "SubscriptionsFeedFragment.FLAG_REFRESH_FEED_FROM_CACHE";
+	public static final String FLAG_REFRESH_FEED_FULL = "SubscriptionsFeedFragment.FLAG_REFRESH_FEED_FULL";
 	/** Refresh the feed (by querying the YT servers) after 3 hours since the last check. */
 	private static final int    REFRESH_TIME = 3;
 
@@ -122,7 +122,7 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 			unsetFlag(FLAG_REFRESH_FEED_FROM_CACHE);
 
 			// refresh the subs feed by reading from the cache (i.e. local DB)
-			new RefreshFeedFromCacheTask().executeInParallel();
+			refreshFeedFromCache();
 		} else if (isFlagSet(FLAG_REFRESH_FEED_FULL)) {
 			// unset the flag
 			unsetFlag(FLAG_REFRESH_FEED_FULL);
@@ -161,21 +161,20 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 	}
 
 
-	private static void setFlag(String flag) {
+	public static void setFlag(String flag) {
 		SharedPreferences.Editor editor = SkyTubeApp.getPreferenceManager().edit();
 		editor.putBoolean(flag, true);
 		editor.commit();
 	}
 
 
-	private void unsetFlag(String flag) {
+	public static void unsetFlag(String flag) {
 		SharedPreferences.Editor editor = SkyTubeApp.getPreferenceManager().edit();
 		editor.putBoolean(flag, false);
 		editor.commit();
 	}
 
-
-	private boolean isFlagSet(String flag) {
+	public static boolean isFlagSet(String flag) {
 		return SkyTubeApp.getPreferenceManager().getBoolean(flag, false);
 	}
 
@@ -223,7 +222,7 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 					if(progressDialog != null)
 						progressDialog.dismiss();
 					if(numVideosFetched > 0 || videosDeleted) {
-						new RefreshFeedFromCacheTask().executeInParallel();
+						refreshFeedFromCache();
 					} else {
 						// Only show the toast that no videos were found if the progress dialog is sh
 						if(fragmentIsVisible) {
@@ -370,6 +369,10 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 			}
 		}
 
+	}
+
+	public void refreshFeedFromCache() {
+		new RefreshFeedFromCacheTask().executeInParallel();
 	}
 
 

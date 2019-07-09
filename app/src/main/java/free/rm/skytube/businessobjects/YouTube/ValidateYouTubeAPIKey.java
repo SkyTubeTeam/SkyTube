@@ -19,8 +19,6 @@ package free.rm.skytube.businessobjects.YouTube;
 
 import java.io.IOException;
 
-import free.rm.skytube.businessobjects.YouTube.GetFeaturedVideos;
-
 /**
  * Validates the given YouTube API key by performing a test call to YouTube servers.
  */

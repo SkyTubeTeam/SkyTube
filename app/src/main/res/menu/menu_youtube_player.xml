@@ -2,6 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
 	  xmlns:app="http://schemas.android.com/apk/res-auto">
 
+	<!-- NOTE: Any changes made to this menu file should also be made to the Extra variant version.
+			The Extra variant version includes the Cast icon for casting to a Chromecast. -->
+
 	<item android:id="@+id/menu_reload_video"
 		  android:title="@string/get_new_video_steam"
 		  android:icon="@drawable/ic_menu_reload_video"

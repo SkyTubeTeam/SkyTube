@@ -49,6 +49,7 @@ More features will be added in the near future.
 | Description      | Contains extra features that are powered by non-OSS libraries. | Fully open-source and free software. |
 | GPLv3 license                    | ✅                   | ✅       |
 | Official YouTube player support* | ✅                   | ❌       |
+| Chromecast Support*              | ✅                   | ❌       |
 | Updates availability             | Immediate            | Normally up to 5 days |
 | Download APK                     | [![Download SkyTube Extra APK](screenshots/download_apk.png)](https://github.com/ram-on/SkyTube/releases/download/v2.95/SkyTube-Extra-2.95.apk) | [![Download SkyTube (Vanilla) APK](https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Get_it_on_F-Droid.svg/200px-Get_it_on_F-Droid.svg.png)](https://f-droid.org/repository/browse/?fdid=free.rm.skytube.oss)
 

@@ -10,7 +10,7 @@
 	<android.support.design.widget.CoordinatorLayout
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		tools:showIn="@layout/activity_fragment_holder">
+		tools:showIn="@layout/activity_main">
 
 
 		<android.support.v4.widget.NestedScrollView
