@@ -2,8 +2,9 @@ package free.rm.skytube.gui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 /**
  * Activity that handles clicking on the Chromecast notification that appears when the app is casting to a Chromecast
