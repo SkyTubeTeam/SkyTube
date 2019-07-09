@@ -46,6 +46,20 @@ import static free.rm.skytube.gui.activities.YouTubePlayerActivity.YOUTUBE_VIDEO
 public class YouTubePlayer {
 
 	private static final String TAG = YouTubePlayer.class.getSimpleName();
+	private static boolean connectedToChromecast = false;
+	private static boolean connectingToChromecast = false;
+
+	public static void setConnectedToChromecast(boolean flag) {
+		connectedToChromecast = flag;
+	}
+
+	public static boolean isConnectedToChromecast() {
+		return connectedToChromecast;
+	}
+
+	public static void setConnectingToChromecast(boolean flag) {
+		connectingToChromecast = flag;
+	}
 
 	/**
 	 * Launches the YouTube player so that the user can view the selected video.
@@ -53,7 +67,7 @@ public class YouTubePlayer {
 	 * @param youTubeVideo Video to be viewed.
 	 */
 	public static void launch(YouTubeVideo youTubeVideo, Context context) {
-		if(SkyTubeApp.getInstance().connectingToChromecast || SkyTubeApp.getInstance().connectedToChromecast) {
+		if(connectingToChromecast || connectedToChromecast) {
 			launchOnChromecast(youTubeVideo, context);
 		} else {
 			// if the user has selected to play the videos using the official YouTube player
@@ -73,7 +87,7 @@ public class YouTubePlayer {
 	 * @param videoUrl URL of the video to be watched.
 	 */
 	public static void launch(String videoUrl, final Context context) {
-		if(SkyTubeApp.getInstance().connectingToChromecast || SkyTubeApp.getInstance().connectedToChromecast) {
+		if(connectingToChromecast || connectedToChromecast) {
 			new GetVideoDetailsTask(videoUrl, new YouTubeVideoListener() {
 				@Override
 				public void onYouTubeVideo(String videoUrl, YouTubeVideo video) {
@@ -92,7 +106,7 @@ public class YouTubePlayer {
 	}
 
 	private static void launchOnChromecast(final YouTubeVideo youTubeVideo, final Context context) {
-		if(SkyTubeApp.getInstance().connectingToChromecast) {
+		if(connectingToChromecast) {
 			((ChromecastListener)context).showLoadingSpinner();
 			// In the process of connecting to a chromecast. Wait 500ms and try again
 			new Handler().postDelayed(new Runnable() {
@@ -175,13 +189,8 @@ public class YouTubePlayer {
 	 */
 	public static void launchCustomYouTubePlayer(YouTubeVideo youTubeVideo, Context context) {
 		Intent i = new Intent(context, YouTubePlayerActivity.class);
-//<<<<<<< HEAD
 		i.putExtra(YOUTUBE_VIDEO_OBJ, youTubeVideo);
 		((BaseActivity)context).startActivityForResult(i, YouTubePlayerActivity.YOUTUBE_PLAYER_RESUME_RESULT);
-//=======
-//		i.putExtra(YOUTUBE_VIDEO_OBJ, youTubeVideo);
-//		context.startActivity(i);
-//>>>>>>> upstream/master
 	}
 
 
