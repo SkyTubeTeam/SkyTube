@@ -66,6 +66,7 @@ import free.rm.skytube.businessobjects.YouTube.VideoStream.StreamMetaData;
 import free.rm.skytube.businessobjects.interfaces.GetDesiredStreamListener;
 import free.rm.skytube.gui.businessobjects.MainActivityListener;
 import free.rm.skytube.gui.businessobjects.YouTubeVideoListener;
+import free.rm.skytube.gui.businessobjects.YouTubePlayer;
 import free.rm.skytube.gui.fragments.ChromecastControllerFragment;
 import free.rm.skytube.gui.fragments.ChromecastMiniControllerFragment;
 import free.rm.skytube.gui.fragments.YouTubePlayerV1Fragment;
@@ -125,8 +126,6 @@ public abstract class BaseActivity extends AppCompatActivity implements MainActi
 						.addControlCategory(CastMediaControlIntent.categoryForCast(BuildConfig.CHROMECAST_APP_ID)).build();
 		mediaRouter.addCallback(mediaRouteSelector, new MediaRouter.Callback() {
 			private void onRouteAddedOrChanged(MediaRouter.RouteInfo route) {
-				if(SkyTubeApp.getInstance().chromecastDevices.get(route.getId()) == null)
-					SkyTubeApp.getInstance().chromecastDevices.put(route.getId(), route.getName());
 				SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(BaseActivity.this);
 				String defaultChromecastId = sharedPref.getString(getString(R.string.pref_key_autocast), getString(R.string.pref_title_chromecast_none));
 				if(route.getId().equals(defaultChromecastId)) {
@@ -148,7 +147,6 @@ public abstract class BaseActivity extends AppCompatActivity implements MainActi
 
 			@Override
 			public void onRouteRemoved(MediaRouter router, MediaRouter.RouteInfo route) {
-				SkyTubeApp.getInstance().chromecastDevices.remove(route.getId());
 			}
 		});
 		handleExternalPlayOnChromecast(getIntent());
@@ -203,11 +201,12 @@ public abstract class BaseActivity extends AppCompatActivity implements MainActi
 				 * externalPlayIntent set, which will allow the video to be launched on the Chromecast. Also only do
 				 * this if we aren't already connected to a Chromecast.
 				 */
-				if(launchExternalOnDefaultChromecast(this) && externalPlayIntent == null && !SkyTubeApp.getInstance().connectedToChromecast) {
+				final boolean connectedToChromecast = YouTubePlayer.isConnectedToChromecast();
+				if(launchExternalOnDefaultChromecast(this) && externalPlayIntent == null && !connectedToChromecast) {
 					showLoadingSpinner();
 					externalPlayIntent = intent;
 				} else {
-					if (SkyTubeApp.getInstance().connectedToChromecast) {
+					if (connectedToChromecast) {
 						new GetVideoDetailsTask(YouTubePlayerV1Fragment.getUrlFromIntent(intent), new YouTubeVideoListener() {
 							@Override
 							public void onYouTubeVideo(String videoUrl, YouTubeVideo video) {
@@ -293,8 +292,8 @@ public abstract class BaseActivity extends AppCompatActivity implements MainActi
 		public void onSessionStarted(Session session, String sessionId) {
 			mCastSession = CastContext.getSharedInstance(BaseActivity.this).getSessionManager().getCurrentCastSession();
 			invalidateOptionsMenu();
-			SkyTubeApp.getInstance().connectedToChromecast = true;
-			SkyTubeApp.getInstance().connectingToChromecast = false;
+			YouTubePlayer.setConnectedToChromecast(true);
+			YouTubePlayer.setConnectingToChromecast(false);
 			// If we are connecting in YouTubePlayerActivity, finish that activity and launch the currently playing
 			// video on the Chromecast.
 			if(isLocalPlayer()) {
@@ -335,19 +334,19 @@ public abstract class BaseActivity extends AppCompatActivity implements MainActi
 			new Handler().postDelayed(r, delay);
 
 			invalidateOptionsMenu();
-			SkyTubeApp.getInstance().connectedToChromecast = true;
-			SkyTubeApp.getInstance().connectingToChromecast = false;
+			YouTubePlayer.setConnectedToChromecast(true);
+			YouTubePlayer.setConnectingToChromecast(false);
 		}
 
 		@Override
 		public void onSessionEnded(Session session, int error) {
-			SkyTubeApp.getInstance().connectedToChromecast = false;
+			YouTubePlayer.setConnectedToChromecast(false);
 			hidePanel();
 		}
 
 		@Override
 		public void onSessionSuspended(Session session, int i) {
-			SkyTubeApp.getInstance().connectedToChromecast = false;
+			YouTubePlayer.setConnectedToChromecast(false);
 		}
 
 		@Override
@@ -355,12 +354,12 @@ public abstract class BaseActivity extends AppCompatActivity implements MainActi
 			if(isLocalPlayer()) {
 				BaseActivity.this.onSessionStarting();
 			}
-			SkyTubeApp.getInstance().connectingToChromecast = true;
+			YouTubePlayer.setConnectingToChromecast(true);
 		}
 
 		@Override
 		public void onSessionStartFailed(Session session, int i) {
-			SkyTubeApp.getInstance().connectingToChromecast = false;
+			YouTubePlayer.setConnectingToChromecast(false);
 		}
 
 		@Override
@@ -370,12 +369,12 @@ public abstract class BaseActivity extends AppCompatActivity implements MainActi
 
 		@Override
 		public void onSessionResuming(Session session, String s) {
-			SkyTubeApp.getInstance().connectingToChromecast = true;
+			YouTubePlayer.setConnectingToChromecast(true);
 		}
 
 		@Override
 		public void onSessionResumeFailed(Session session, int i) {
-			SkyTubeApp.getInstance().connectingToChromecast = false;
+			YouTubePlayer.setConnectingToChromecast(false);
 		}
 	}
 

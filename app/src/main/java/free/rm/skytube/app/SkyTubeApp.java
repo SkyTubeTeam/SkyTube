@@ -49,25 +49,17 @@ import free.rm.skytube.businessobjects.FeedUpdaterReceiver;
 public class SkyTubeApp extends MultiDexApplication {
 
 	/** SkyTube Application databaseInstance. */
-	protected static SkyTubeApp skyTubeApp = null;
+	private static SkyTubeApp skyTubeApp = null;
 
 	public static final String KEY_SUBSCRIPTIONS_LAST_UPDATED = "SkyTubeApp.KEY_SUBSCRIPTIONS_LAST_UPDATED";
 	public static final String NEW_VIDEOS_NOTIFICATION_CHANNEL = "free.rm.skytube.NEW_VIDEOS_NOTIFICATION_CHANNEL";
 	public static final int NEW_VIDEOS_NOTIFICATION_CHANNEL_ID = 1;
-
-	public boolean connectedToChromecast = false;
-	public boolean connectingToChromecast = false;
-	public Map<String, String> chromecastDevices = new HashMap<>();
 
 	@Override
 	public void onCreate() {
 		super.onCreate();
 		skyTubeApp = this;
 		initChannels(this);
-	}
-
-	public static SkyTubeApp getInstance() {
-		return skyTubeApp;
 	}
 
 	/**
