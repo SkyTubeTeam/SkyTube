@@ -125,8 +125,6 @@ public class YouTubePlayer {
 				} else {
 					((ChromecastListener) context).playVideoOnChromecast(youTubeVideo, 0);
 				}
-			} else {
-				// TODO: Handle this
 			}
 		}
 	}
