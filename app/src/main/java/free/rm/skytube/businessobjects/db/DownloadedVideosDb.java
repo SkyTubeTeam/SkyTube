@@ -72,16 +72,17 @@ public class DownloadedVideosDb extends SQLiteOpenHelperEx implements OrderableD
 						DownloadedVideosTable.TABLE_NAME,
 						new String[]{DownloadedVideosTable.COL_YOUTUBE_VIDEO, DownloadedVideosTable.COL_FILE_URI},
 						null,
-						null, null, null, null);
+						null, null, null, DownloadedVideosTable.COL_ORDER + " DESC");
 		List<YouTubeVideo> videos = new ArrayList<>();
 
+		Gson gson = new Gson();
 		if(cursor.moveToNext()) {
 			do {
 				final byte[] blob = cursor.getBlob(cursor.getColumnIndex(DownloadedVideosTable.COL_YOUTUBE_VIDEO));
 				final String videoJson = new String(blob);
 
 				// convert JSON into YouTubeVideo
-				YouTubeVideo video = new Gson().fromJson(videoJson, new TypeToken<YouTubeVideo>(){}.getType());
+				YouTubeVideo video = gson.fromJson(videoJson, new TypeToken<YouTubeVideo>(){}.getType());
 
 				// due to upgrade to YouTubeVideo (by changing channel{Id,Name} to YouTubeChannel)
 				// from version 2.82 to 2.90
