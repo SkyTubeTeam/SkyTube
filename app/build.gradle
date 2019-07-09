@@ -70,14 +70,17 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    packagingOptions {
+        exclude "META-INF/DEPENDENCIES"
+    }
 }
 
 dependencies {
     testImplementation 'junit:junit:4.12'
 
     // YouTube modules
-    implementation 'com.google.http-client:google-http-client-android:1.23.0'
-    implementation 'com.google.apis:google-api-services-youtube:v3-rev187-1.23.0'
+    implementation 'com.google.http-client:google-http-client-android:1.30.1'
+    implementation 'com.google.apis:google-api-services-youtube:v3-rev20190513-1.30.1'
     implementation 'com.github.TeamNewPipe.NewPipeExtractor:extractor:v0.16.2'
 
     // other modules
@@ -115,6 +118,5 @@ dependencies {
     extraImplementation 'com.googlecode.android-query:android-query:0.25.9'
     extraImplementation 'com.sothree.slidinguppanel:library:3.4.0'
     extraImplementation 'com.github.rahatarmanahmed:circularprogressview:2.5.0'
-    extraImplementation 'com.google.apis:google-api-services-youtube:v3-rev178-1.22.0'
     extraImplementation 'com.squareup.picasso:picasso:2.5.2'
 }
