@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -59,7 +58,6 @@ public class DownloadedVideosDb extends SQLiteOpenHelperEx implements OrderableD
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
 	}
 
 	/**
@@ -68,11 +66,20 @@ public class DownloadedVideosDb extends SQLiteOpenHelperEx implements OrderableD
 	 * @return List of Videos
 	 */
 	public List<YouTubeVideo> getDownloadedVideos() {
+		return getDownloadedVideos(DownloadedVideosTable.COL_ORDER + " DESC");
+	}
+
+	/**
+	 * Get the list of Videos that have been downloaded in the given order.
+	 *
+	 * @return List of Videos
+	 */
+	private List<YouTubeVideo> getDownloadedVideos(String ordering) {
 		Cursor	cursor = getReadableDatabase().query(
 						DownloadedVideosTable.TABLE_NAME,
 						new String[]{DownloadedVideosTable.COL_YOUTUBE_VIDEO, DownloadedVideosTable.COL_FILE_URI},
 						null,
-						null, null, null, DownloadedVideosTable.COL_ORDER + " DESC");
+						null, null, null, ordering);
 		List<YouTubeVideo> videos = new ArrayList<>();
 
 		Gson gson = new Gson();
@@ -82,7 +89,7 @@ public class DownloadedVideosDb extends SQLiteOpenHelperEx implements OrderableD
 				final String videoJson = new String(blob);
 
 				// convert JSON into YouTubeVideo
-				YouTubeVideo video = gson.fromJson(videoJson, new TypeToken<YouTubeVideo>(){}.getType());
+				YouTubeVideo video = gson.fromJson(videoJson, YouTubeVideo.class);
 
 				// due to upgrade to YouTubeVideo (by changing channel{Id,Name} to YouTubeChannel)
 				// from version 2.82 to 2.90
@@ -112,7 +119,7 @@ public class DownloadedVideosDb extends SQLiteOpenHelperEx implements OrderableD
 		values.put(DownloadedVideosTable.COL_YOUTUBE_VIDEO, gson.toJson(video).getBytes());
 		values.put(DownloadedVideosTable.COL_FILE_URI, fileUri);
 
-		int order = getNumDownloads();
+		int order = getMaximumOrderNumber();
 		order++;
 		values.put(DownloadedVideosTable.COL_ORDER, order);
 
@@ -204,10 +211,10 @@ public class DownloadedVideosDb extends SQLiteOpenHelperEx implements OrderableD
 	}
 
 	/**
-	 * @return The total number of downloaded videos.
+	 * @return The maximum of the order number - which could be different from the number of downloaded files, in case some of them are deleted.
 	 */
-	public int getNumDownloads() {
-		String	query = String.format("SELECT COUNT(*) FROM %s", DownloadedVideosTable.TABLE_NAME);
+	public int getMaximumOrderNumber() {
+		String	query = String.format("SELECT MAX(%s) FROM %s", DownloadedVideosTable.COL_ORDER, DownloadedVideosTable.TABLE_NAME);
 		Cursor	cursor = DownloadedVideosDb.getVideoDownloadsDb().getReadableDatabase().rawQuery(query, null);
 		int		totalDownloads = 0;
 
