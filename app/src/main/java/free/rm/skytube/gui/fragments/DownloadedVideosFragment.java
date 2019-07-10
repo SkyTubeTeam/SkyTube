@@ -75,15 +75,15 @@ public class DownloadedVideosFragment extends OrderableVideosGridFragment implem
 
 		@Override
 		protected Integer doInBackground(Void... params) {
-			return DownloadedVideosDb.getVideoDownloadsDb().getNumDownloads();
+			return DownloadedVideosDb.getVideoDownloadsDb().getMaximumOrderNumber();
 		}
 
 
 		@Override
-		protected void onPostExecute(Integer numVideosDownloaded) {
-			// If no videos have been bookmarked, show the text notifying the user, otherwise
+		protected void onPostExecute(Integer maximumOrderNumber) {
+			// If no videos have been downloaded, show the text notifying the user, otherwise
 			// show the swipe refresh layout that contains the actual video grid.
-			if (numVideosDownloaded <= 0) {
+			if (maximumOrderNumber <= 0) {
 				swipeRefreshLayout.setVisibility(View.GONE);
 				noDownloadedVideosText.setVisibility(View.VISIBLE);
 			} else {
