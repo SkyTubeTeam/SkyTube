@@ -28,12 +28,15 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
@@ -48,6 +51,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.exoplayer2.C;
 import com.google.android.exoplayer2.ExoPlayerFactory;
+import com.google.android.exoplayer2.Player;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.source.ExtractorMediaSource;
 import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection;
@@ -142,11 +146,6 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 		// inflate the layout for this fragment
 		View view = inflater.inflate(R.layout.fragment_youtube_player_v2, container, false);
 
-		// prevent the device from sleeping while playing
-		if (getActivity() != null  &&  (getActivity().getWindow()) != null) {
-			getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-		}
-
 		// indicate that this fragment has an action bar menu
 		setHasOptionsMenu(true);
 
@@ -219,6 +218,17 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 		DefaultTrackSelector trackSelector = new DefaultTrackSelector(videoTrackSelectionFactory);
 
 		player = ExoPlayerFactory.newSimpleInstance(getContext(), trackSelector);
+		player.addListener(new Player.DefaultEventListener() {
+			@Override
+			public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
+				Logger.i(this, ">> onPlayerStateChanged " + playWhenReady + " state="+playbackState);
+				if (playbackState == Player.STATE_READY && playWhenReady) {
+					preventDeviceSleeping(true);
+				} else {
+					preventDeviceSleeping(false);
+				}
+			}
+		});
 		player.setPlayWhenReady(true);
 		playerView.setResizeMode(AspectRatioFrameLayout.RESIZE_MODE_FIT);               // ensure that videos are played in their correct aspect ratio
 		player.setVideoScalingMode(C.VIDEO_SCALING_MODE_SCALE_TO_FIT_WITH_CROPPING);    // ensure that videos are played in their correct aspect ratio
@@ -305,6 +315,22 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 		loadVideo(false);
 	}
 
+	private void preventDeviceSleeping(boolean flag) {
+		// prevent the device from sleeping while playing
+		Activity activity = getActivity();
+		if (activity != null) {
+			Window window = activity.getWindow();
+			if (window != null) {
+				if (flag) {
+					Logger.i(this, ">> Setting FLAG_KEEP_SCREEN_ON");
+					window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+				} else {
+					Logger.i(this, ">> Clearing FLAG_KEEP_SCREEN_ON");
+					window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+				}
+			}
+		}
+	}
 
 	/**
 	 * Loads the video specified in {@link #youTubeVideo}.
@@ -1081,6 +1107,5 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 	@Override
 	public void pause() {
 		player.setPlayWhenReady(false);
-		player.getPlaybackState();
 	}
 }
