@@ -93,7 +93,7 @@ dependencies {
 
     // YouTube modules
     implementation 'com.google.http-client:google-http-client-android:1.31.0'
-    implementation 'com.google.apis:google-api-services-youtube:v3-rev20190722-1.30.1'
+    implementation 'com.google.apis:google-api-services-youtube:v3-rev20190827-1.30.1'
     implementation 'com.github.TeamNewPipe.NewPipeExtractor:extractor:ec3554a2ea'
 
     // other modules
@@ -113,11 +113,11 @@ dependencies {
         exclude group: 'com.google.guava', module: 'guava'
     }
     implementation 'com.mikepenz:actionitembadge:3.3.2@aar'
-    implementation "com.mikepenz:iconics-core:3.0.3@aar"
+    implementation 'com.mikepenz:iconics-core:4.0.0@aar'
     implementation 'com.github.hedzr:android-file-chooser:v1.2.0-final'
 
     // Android support modules
-    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.legacy:legacy-support-v13:1.0.0'
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
