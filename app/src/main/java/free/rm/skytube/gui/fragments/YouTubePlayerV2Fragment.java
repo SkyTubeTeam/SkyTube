@@ -312,7 +312,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 	 * Loads the video specified in {@link #youTubeVideo}.
 	 */
 	private void loadVideo() {
-		loadVideo(false);
+		loadVideo(true);
 	}
 
 	private void preventDeviceSleeping(boolean flag) {
@@ -335,19 +335,20 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 	/**
 	 * Loads the video specified in {@link #youTubeVideo}.
 	 *
-	 * @param skipMobileNetworkWarning Set to true to skip the warning displayed when the user is
+	 * @param showMobileNetworkWarning Set to true to skip the warning displayed when the user is
 	 *                                 using mobile network data (i.e. 4g).
 	 */
-	private void loadVideo(boolean skipMobileNetworkWarning) {
+	private void loadVideo(boolean showMobileNetworkWarning) {
 		boolean mobileNetworkWarningDialogDisplayed = false;
+        DownloadedVideosDb.Status downloadStatus = DownloadedVideosDb.getVideoDownloadsDb().getVideoFileUriAndValidate(youTubeVideo.getId());
 
 		// if the user is using mobile network (i.e. 4g), then warn him
-		if (!skipMobileNetworkWarning) {
+		if (showMobileNetworkWarning && downloadStatus.getUri() == null) {
 			mobileNetworkWarningDialogDisplayed = new MobileNetworkWarningDialog(getActivity())
 					.onPositive(new MaterialDialog.SingleButtonCallback() {
 						@Override
 						public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-							loadVideo(true);
+							loadVideo(false);
 						}
 					})
 					.onNegative(new MaterialDialog.SingleButtonCallback() {
@@ -364,22 +365,19 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 			if (!youTubeVideo.isLiveStream()) {
 				loadingVideoView.setVisibility(View.VISIBLE);
 
-				if (youTubeVideo.isDownloaded()) {
-					Uri uri = youTubeVideo.getFileUri();
-					File file = new File(uri.getPath());
-					// If the file for this video has gone missing, remove it from the Database and then play remotely.
-					if (!file.exists()) {
-						DownloadedVideosDb.getVideoDownloadsDb().remove(youTubeVideo);
-						Toast.makeText(getContext(),
-								getString(R.string.playing_video_file_missing),
-								Toast.LENGTH_LONG).show();
-						loadVideo();
-					} else {
-						loadingVideoView.setVisibility(View.GONE);
-
-						Logger.i(this, ">> PLAYING LOCALLY: %s", uri);
-						playVideo(uri);
-					}
+				if (downloadStatus.isDisapeared()) {
+                    // If the file for this video has gone missing, warn and then play remotely.
+                    Toast.makeText(getContext(),
+                            getString(R.string.playing_video_file_missing),
+                            Toast.LENGTH_LONG).show();
+                    loadVideo();
+                    return;
+                }
+				if (downloadStatus.getUri() != null) {
+                    loadingVideoView.setVisibility(View.GONE);
+                    Logger.i(this, ">> PLAYING LOCALLY: %s", downloadStatus.getUri());
+                    playVideo(downloadStatus.getUri());
+                    return;
 				} else {
 					youTubeVideo.getDesiredStream(new GetDesiredStreamListener() {
 						@Override
@@ -415,27 +413,32 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 						}
 					});
 				}
-			} else {    // else, if the video is a LIVE STREAM
-				// video is live:  ask the user if he wants to play the video using an other app
-				new SkyTubeMaterialDialog(getContext())
-						.content(R.string.warning_live_video)
-						.title(R.string.error_video_play)
-						.onNegative(new MaterialDialog.SingleButtonCallback() {
-							@Override
-							public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-								closeActivity();
-							}
-						})
-						.onPositive(new MaterialDialog.SingleButtonCallback() {
-							@Override
-							public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-								youTubeVideo.playVideoExternally(getContext());
-								closeActivity();
-							}
-						})
-						.show();
+			} else {
+				openAsLiveStream();
 			}
 		}
+	}
+
+	private void openAsLiveStream() {
+		// else, if the video is a LIVE STREAM
+		// video is live:  ask the user if he wants to play the video using an other app
+		new SkyTubeMaterialDialog(getContext())
+				.content(R.string.warning_live_video)
+				.title(R.string.error_video_play)
+				.onNegative(new MaterialDialog.SingleButtonCallback() {
+					@Override
+					public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+						closeActivity();
+					}
+				})
+				.onPositive(new MaterialDialog.SingleButtonCallback() {
+					@Override
+					public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+						youTubeVideo.playVideoExternally(getContext());
+						closeActivity();
+					}
+				})
+				.show();
 	}
 
 
