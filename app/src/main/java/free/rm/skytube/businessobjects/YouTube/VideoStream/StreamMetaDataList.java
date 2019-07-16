@@ -17,24 +17,21 @@
 
 package free.rm.skytube.businessobjects.YouTube.VideoStream;
 
-import android.content.Context;
-import android.net.ConnectivityManager;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 
-import static free.rm.skytube.app.SkyTubeApp.getContext;
-
 /**
  * A list of {@link StreamMetaData}.
  */
-public class StreamMetaDataList extends ArrayList<StreamMetaData> {
+public class StreamMetaDataList {
 
 	private String errorMessage = null;
-
+	private List<StreamMetaData> streamMetaDatas = new ArrayList<>();
 	private static final String TAG = StreamMetaDataList.class.getSimpleName();
 
 
@@ -77,12 +74,13 @@ public class StreamMetaDataList extends ArrayList<StreamMetaData> {
 	private StreamMetaData getDesiredStream(VideoResolution desiredVideoRes) {
 		if (desiredVideoRes == VideoResolution.RES_UNKNOWN) {
 			Log.w(TAG, "No video with the following res could be found: " + desiredVideoRes);
-			return get(0);
+			return streamMetaDatas.get(0);
 		}
 
-		for (StreamMetaData streamMetaData : this) {
-			if (streamMetaData.getResolution() == desiredVideoRes)
+		for (StreamMetaData streamMetaData : streamMetaDatas) {
+			if (streamMetaData.getResolution() == desiredVideoRes) {
 				return streamMetaData;
+			}
 		}
 
 		return getDesiredStream(desiredVideoRes.getLowerVideoResolution());
@@ -114,7 +112,7 @@ public class StreamMetaDataList extends ArrayList<StreamMetaData> {
 	public String toString() {
 		StringBuilder out = new StringBuilder();
 
-		for (StreamMetaData streamMetaData : this) {
+		for (StreamMetaData streamMetaData : streamMetaDatas) {
 			out.append(streamMetaData.toString());
 			out.append("-----------------\n");
 		}
@@ -127,4 +125,11 @@ public class StreamMetaDataList extends ArrayList<StreamMetaData> {
 		return errorMessage;
 	}
 
+	public void add(StreamMetaData streamMetaData) {
+		streamMetaDatas.add(streamMetaData);
+	}
+
+	public boolean isEmpty() {
+		return streamMetaDatas.isEmpty();
+	}
 }
