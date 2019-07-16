@@ -135,7 +135,6 @@
 	<string name="pref_playback_status_cleared">Состояние воспроизведения очищено.</string>
 
 <string name="pref_import_export_category">Импорт/Экспорт файлов</string>
-	<string name="preferred_region_updated">Выбран новый регион. Перезапустите приложение, чтобы изменение вступило в силу.</string>
 
 	<string name="pref_category_downloads">Загрузки</string>
 	<string name="pref_title_download_to_separate_directories">Загружать видеоролики в отдельные директории</string>

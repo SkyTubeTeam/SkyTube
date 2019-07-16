@@ -85,10 +85,6 @@
 	<string name="pref_title_disable_search_history">Zoekgeschiedenis uitschakelen</string>
 	<string name="pref_summary_disable_search_history">Als dit wordt aangevinkt, dan wordt de zoekgeschiedenis gewist en niet gebruikt.</string>
 	<string name="pref_disable_search_history_deleted">Zoekgeschiedenis gewist.</string>
-<string name="pref_blocked_channel_key">pref_blocked_channel_key
-\n</string>
-	<string name="pref_blocked_channel_title">Geblokkeerde kanalen beheren</string>
-	<string name="pref_blocked_channel_summary">U kunt eerder geblokkeerde kanalen deblokkeren.</string>
 	<string name="pref_video_blocker_category">Videoblokkering</string>
 
 	<string name="pref_title_channel_blacklist">Geblokkeerde kanalen</string>
@@ -111,9 +107,6 @@
 	<string name="pref_summary_low_views_filter">Filter video\'s met weinig weergaven: %s</string>
 	<string name="pref_title_dislikes_filter">Niet-leuks</string>
 	<string name="pref_summary_dislikes_filter">Filter video\'s met veel niet-leuks: %s</string>
-	<string name="pref_blocked_channel_category">Geblokkeerde kanalen</string>
-	<string name="pref_title_blocked_channels_list">Geblokkeerde kanalen</string>
-	<string name="pref_summary_blocked_channels_list">Vink de kanalen aan die je wilt deblokkeren en laat de andere onaangevinkt.</string>
 
 	<string name="pref_privacy_category">Privacy</string>
 	<string name="pref_title_disable_playback_status">Afspeelstatus uitschakelen</string>
@@ -141,14 +134,11 @@
 
 	<string name="channel_blacklist_update_failure">Het verwijderen van het kanaal/de kanalen van de zwarte lijst is mislukt…</string>
 	<string name="pref_import_export_category">Importeren/Exporteren</string>
-	<string name="preferred_region_updated">Voorkeursregio bijgewerkt. Herstart de app om de wijzigingen toe te passen.</string>
 
 	<string name="pref_category_downloads">Downloads</string>
 	<string name="pref_title_download_to_separate_directories">Video\'s opslaan in mappen</string>
 	<string name="pref_summary_download_to_separate_directories">Video\'s worden opgeslagen in mappen; de mapnaam is gebaseerd op de kanaalnaam.</string>
 
-	<string name="pref_title_screen_gestures">Gebaren</string>
-	<string name="pref_summary_screen_gestures">Videogebaren: %s</string>
 	<string name="pref_title_disable_screen_gestures">Videogebaren uitschakelen</string>
 	<string name="pref_summary_disable_screen_gestures">Videogebaren uitschakelen voor volume, helderheid en vooruit- en terugspoelen.</string>
 
