@@ -489,8 +489,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 			case R.id.menu_reload_video:
-				playerInitialPosition = player.getContentPosition();
-				loadVideo();
+				player.seekToDefaultPosition();
 				return true;
 
 			case R.id.menu_open_video_with:
