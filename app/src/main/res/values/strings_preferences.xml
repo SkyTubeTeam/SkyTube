@@ -515,6 +515,10 @@
 	<string name="pref_title_disable_screen_gestures">Disable video gestures</string>
 	<string name="pref_summary_disable_screen_gestures">Turn off gestures to control volume, brightness and seeking forward/backwards in videos.</string>
 
+	<string name="pref_key_enable_immersive_mode" translatable="false">pref_key_enable_immersive_mode</string>
+	<string name="pref_title_enable_immersive_mode">Enable immersive mode</string>
+	<string name="pref_summary_enable_immersive_mode">Hide navigation bar and the status bar during playback.</string>
+
 	<string name="pref_youtube_api_key" translatable="false">pref_youtube_api_key</string>
 	<string name="pref_title_youtube_api_key">YouTube API Key</string>
 	<string name="pref_summary_youtube_api_key">Enter your own YouTube Data API Key. Leave blank to use the default one.</string>

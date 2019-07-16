@@ -44,6 +44,12 @@
 		android:title="@string/pref_title_disable_screen_gestures"
 		android:summary="@string/pref_summary_disable_screen_gestures"/>
 
+	<CheckBoxPreference
+		android:defaultValue="true"
+		android:key="@string/pref_key_enable_immersive_mode"
+		android:summary="@string/pref_summary_enable_immersive_mode"
+		android:title="@string/pref_title_enable_immersive_mode" />
+
 	<!--
 		MOBILE NETWORK
 	-->
