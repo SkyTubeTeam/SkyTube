@@ -35,6 +35,8 @@ import android.preference.PreferenceManager;
 import androidx.multidex.MultiDexApplication;
 import androidx.core.content.res.ResourcesCompat;
 
+import org.schabi.newpipe.extractor.NewPipe;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -42,6 +44,7 @@ import java.util.Map;
 
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.FeedUpdaterReceiver;
+import free.rm.skytube.businessobjects.YouTube.VideoStream.HttpDownloader;
 
 /**
  * SkyTube application.
@@ -214,4 +217,12 @@ public class SkyTubeApp extends MultiDexApplication {
 		}
 	}
 
+	/**
+	 * Initialize NewPipe with a custom HttpDownloader.
+	 */
+	public static void initNewPipe() {
+		if (NewPipe.getDownloader() == null) {
+			NewPipe.init(new HttpDownloader(), null);
+		}
+	}
 }
