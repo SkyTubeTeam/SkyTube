@@ -118,7 +118,6 @@
 	<string name="block">Bloquear</string>
 	<string name="please_wait">Aguarde…</string>
 	<string name="channel_whitelist_updated">Lista atualizada. Recarregue os vídeos.</string>
-	<string name="preferred_region_updated">Região preferencial atualizada. Reinicie a aplicação para aplicar.</string>
 
 	<string name="pref_other_filters_category">Outros filtros</string>
 	<string name="pref_title_low_views_filter">Visualizações</string>

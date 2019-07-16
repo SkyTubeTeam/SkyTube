@@ -92,7 +92,6 @@
 	<string name="pref_summary_choose_player">Videoavspiller å bruke: %s</string>
 	<string name="pref_title_subscriptions_alphabetical_order">Sorter kanaler alfabetisk</string>
 	<string name="pref_summary_subscriptions_alphabetical_order">Hvis valgt, vil abonnerte kanaler sorteres alfabetisk.</string>
-	<string name="unblock_button">Avblokker</string>
 	<string name="channel_blacklist_updated">Kanal-svarteliste oppdatert. Gjenoppfrisk videoer.</string>
 	<string name="channel_blacklist_empty">Kanal-svartelisten er tom.</string>
 	<string name="no_preferred_lang_selected">Inget foretrukket språk valgt. Innstilling ignorert.</string>
@@ -107,9 +106,6 @@
 	<string name="pref_summary_low_views_filter">Filtrer ut videoer med lave visningstall: %s</string>
 	<string name="pref_title_dislikes_filter">Liker ikke</string>
 	<string name="pref_summary_dislikes_filter">Filtrer ut videoer som mange ikke liker: %s</string>
-	<string name="pref_blocked_channel_category">Blokkerte kanaler</string>
-	<string name="pref_title_blocked_channels_list">Blokkerte kanaler</string>
-	<string name="pref_summary_blocked_channels_list">Sjekk kanalene du ønsker å avblokkere og la andre stå umerket.</string>
 
 	<string name="pref_privacy_category">Personvern</string>
 	<string name="pref_title_disable_playback_status">Skru av avspillingsstatus</string>
