@@ -35,7 +35,9 @@ public class ImmersiveModeFragment extends FragmentEx {
 	 * Hide Android's bottom navigation bar.
 	 */
 	protected void hideNavigationBar() {
-		changeNavigationBarVisibility(false);
+		if (isImmersiveModeEnabled()) {
+			changeNavigationBarVisibility(false);
+		}
 	}
 
 	protected void showNavigationBar() {
@@ -77,6 +79,9 @@ public class ImmersiveModeFragment extends FragmentEx {
 		}
 	}
 
+	private boolean isImmersiveModeEnabled() {
+		return SkyTubeApp.getPreferenceManager().getBoolean(SkyTubeApp.getStr(R.string.pref_key_enable_immersive_mode), true);
+	}
 
 	/**
 	 * @return The navigation bar's height in pixels.  0 is the device does not have any nav bar.
