@@ -50,7 +50,7 @@ public class GetVideoStreamTask extends AsyncTaskParallel<Void, Exception, Strea
 
 	@Override
 	protected void onPostExecute(StreamMetaDataList streamMetaDataList) {
-		if (streamMetaDataList == null || streamMetaDataList.size() <= 0) {
+		if (streamMetaDataList == null || streamMetaDataList.isEmpty()) {
 			listener.onGetDesiredStreamError(streamMetaDataList.getErrorMessage());
 		} else {
 			// get the desired stream based on user preferences
