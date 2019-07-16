@@ -25,7 +25,6 @@
 package free.rm.skytube.businessobjects.YouTube.VideoStream;
 
 
-import org.schabi.newpipe.extractor.NewPipe;
 import org.schabi.newpipe.extractor.ServiceList;
 import org.schabi.newpipe.extractor.StreamingService;
 import org.schabi.newpipe.extractor.exceptions.ContentNotAvailableException;
@@ -33,6 +32,7 @@ import org.schabi.newpipe.extractor.stream.StreamInfo;
 import org.schabi.newpipe.extractor.stream.VideoStream;
 
 import free.rm.skytube.R;
+import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.Logger;
 
 
@@ -51,7 +51,7 @@ public class ParseStreamMetaData {
 	 * @param videoId	The ID of the video we are going to get its streams.
 	 */
 	public ParseStreamMetaData(String videoId) {
-		NewPipe.init(new HttpDownloader(), null);
+		SkyTubeApp.initNewPipe();
 		setYoutubeVideoUrl(videoId);
 	}
 

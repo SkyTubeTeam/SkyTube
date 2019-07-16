@@ -12,7 +12,6 @@ import android.widget.Toast;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 
-import org.schabi.newpipe.extractor.NewPipe;
 import org.schabi.newpipe.extractor.ServiceList;
 import org.schabi.newpipe.extractor.StreamingService;
 import org.schabi.newpipe.extractor.channel.ChannelInfo;
@@ -29,7 +28,6 @@ import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
-import free.rm.skytube.businessobjects.YouTube.VideoStream.HttpDownloader;
 import free.rm.skytube.businessobjects.db.ChannelFilteringDb;
 import free.rm.skytube.gui.businessobjects.MultiSelectListPreferenceDialog;
 import free.rm.skytube.gui.businessobjects.MultiSelectListPreferenceItem;
@@ -479,7 +477,7 @@ public class VideoBlockerPreferenceFragment extends PreferenceFragment {
 			MultiSelectListPreferenceItem channel = null;
 
 			try {
-				NewPipe.init(new HttpDownloader(), null);
+				SkyTubeApp.initNewPipe();
 				StreamingService youtubeService = ServiceList.YouTube;
 
 				ChannelInfo channelInfo = ChannelInfo.getInfo(youtubeService, channelUrl);
