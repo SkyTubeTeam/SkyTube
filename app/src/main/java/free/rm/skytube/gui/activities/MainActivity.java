@@ -33,6 +33,7 @@ import androidx.appcompat.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 
@@ -48,13 +49,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
+import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubePlaylist;
 import free.rm.skytube.businessobjects.YouTube.VideoBlocker;
 import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
 import free.rm.skytube.businessobjects.db.SearchHistoryDb;
 import free.rm.skytube.businessobjects.db.SearchHistoryTable;
-import free.rm.skytube.businessobjects.interfaces.SearchHistoryClickListener;
 import free.rm.skytube.gui.businessobjects.BlockedVideosDialog;
 import free.rm.skytube.gui.businessobjects.YouTubePlayer;
 import free.rm.skytube.gui.businessobjects.adapters.SearchHistoryCursorAdapter;
@@ -211,38 +212,48 @@ public class MainActivity extends BaseActivity {
 
 		searchView.setQueryHint(getString(R.string.search_videos));
 
+		AutoCompleteTextView autoCompleteTextView = searchView.findViewById(androidx.appcompat.R.id.search_src_text);
+		autoCompleteTextView.setThreshold(0);
+
+		SearchHistoryCursorAdapter searchHistoryCursorAdapter = (SearchHistoryCursorAdapter) searchView.getSuggestionsAdapter();
+		Cursor cursor = SearchHistoryDb.getSearchHistoryDb().getSearchCursor("");
+		if (searchHistoryCursorAdapter == null) {
+			searchHistoryCursorAdapter = new SearchHistoryCursorAdapter(getBaseContext(),
+					R.layout.search_hint,
+					cursor,
+					new String[]{SearchHistoryTable.COL_SEARCH_TEXT},
+					new int[]{android.R.id.text1},
+					0);
+			searchHistoryCursorAdapter.setSearchHistoryClickListener(query -> displaySearchResults(query, searchView));
+			searchView.setSuggestionsAdapter(searchHistoryCursorAdapter);
+		} else {
+			// else just change the cursor...
+			searchHistoryCursorAdapter.changeCursor(cursor);
+		}
+		searchView.setSuggestionsAdapter(searchHistoryCursorAdapter);
+
 		// set the query hints to be equal to the previously searched text
 		searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 			@Override
 			public boolean onQueryTextChange(final String newText) {
+				Logger.d(MainActivity.this, "on query text change: %s", newText);
 				// if the user does not want to have the search string saved, then skip the below...
 				if (SkyTubeApp.getPreferenceManager().getBoolean(getString(R.string.pref_key_disable_search_history), false)
-						||  newText == null  ||  newText.length() <= 1) {
+						||  newText == null) {
 					return false;
 				}
 
-				SearchHistoryCursorAdapter searchHistoryCursorAdapter = (SearchHistoryCursorAdapter) searchView.getSuggestionsAdapter();
 				Cursor cursor = SearchHistoryDb.getSearchHistoryDb().getSearchCursor(newText);
 
 				// if the adapter has not been created, then create it
-				if (searchHistoryCursorAdapter == null) {
-					searchHistoryCursorAdapter = new SearchHistoryCursorAdapter(getBaseContext(),
-							R.layout.search_hint,
-							cursor,
-							new String[]{SearchHistoryTable.COL_SEARCH_TEXT},
-							new int[]{android.R.id.text1},
-							0);
-					searchHistoryCursorAdapter.setSearchHistoryClickListener(new SearchHistoryClickListener() {
-						@Override
-						public void onClick(String query) {
-							displaySearchResults(query, searchView);
-						}
-					});
-					searchView.setSuggestionsAdapter(searchHistoryCursorAdapter);
-				} else {
-					// else just change the cursor...
-					searchHistoryCursorAdapter.changeCursor(cursor);
-				}
+				SearchHistoryCursorAdapter searchHistoryCursorAdapter = new SearchHistoryCursorAdapter(getBaseContext(),
+						R.layout.search_hint,
+						cursor,
+						new String[]{SearchHistoryTable.COL_SEARCH_TEXT},
+						new int[]{android.R.id.text1},
+						0);
+				searchHistoryCursorAdapter.setSearchHistoryClickListener(query -> displaySearchResults(query, searchView));
+				searchView.setSuggestionsAdapter(searchHistoryCursorAdapter);
 
 				// update the current search string
 				searchHistoryCursorAdapter.setSearchBarString(newText);

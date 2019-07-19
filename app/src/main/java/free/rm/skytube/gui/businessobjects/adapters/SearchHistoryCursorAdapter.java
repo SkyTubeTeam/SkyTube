@@ -65,24 +65,24 @@ public class SearchHistoryCursorAdapter extends SimpleCursorAdapter {
 		super.bindView(view, context, cursor);
 		ImageButton deleteButton = view.findViewById(R.id.delete_button);
 		final TextView textView = view.findViewById(android.R.id.text1);
-		textView.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if(searchHistoryClickListener != null)
-					searchHistoryClickListener.onClick(textView.getText().toString());
-			}
+		textView.setOnClickListener(v -> {
+			if(searchHistoryClickListener != null)
+				searchHistoryClickListener.onClick(textView.getText().toString());
+			SearchHistoryDb.getSearchHistoryDb().updateSearchTextTimestamp(textView.getText().toString());
 		});
-		deleteButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				// delete the previous search from the search database
-				SearchHistoryDb.getSearchHistoryDb().deleteSearchText(textView.getText().toString());
+		deleteButton.setOnClickListener(v -> {
+			// delete the previous search from the search database
+			SearchHistoryDb.getSearchHistoryDb().deleteSearchText(textView.getText().toString());
 
-				// update the search suggestions by changing the cursor (N.B cursor cannot be modified)
-				Cursor cursor = SearchHistoryDb.getSearchHistoryDb().getSearchCursor(searchBarString);
-				swapCursor(cursor);
-			}
+			// update the search suggestions by changing the cursor (N.B cursor cannot be modified)
+			Cursor cursor1 = SearchHistoryDb.getSearchHistoryDb().getSearchCursor(searchBarString);
+			swapCursor(cursor1);
 		});
+	}
+
+	@Override
+	public void changeCursor(Cursor newCursor) {
+		newCursor.close();
 	}
 
 }
