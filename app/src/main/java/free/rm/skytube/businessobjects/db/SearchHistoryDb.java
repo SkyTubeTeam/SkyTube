@@ -165,13 +165,14 @@ public class SearchHistoryDb extends SQLiteOpenHelperEx {
 		} else {
 			// if the user input "'" it was causing the app to crash, hence replace "'" with "\''"
 			String searchClause = exactTextSearch
-					? String.format(" = '%s'", searchText.replaceAll("'", "\''"))
-					: String.format(" LIKE '%s%%'", searchText.replaceAll("'", "\''"));
+					? " = ?"
+					: " LIKE ?";
+			String params = exactTextSearch ? searchText : "%" + searchText + '%';
 
 			return getReadableDatabase().query(SearchHistoryTable.TABLE_NAME,
 					new String[]{SearchHistoryTable.COL_SEARCH_ID, SearchHistoryTable.COL_SEARCH_TEXT},
 					SearchHistoryTable.COL_SEARCH_TEXT + searchClause,
-					null,
+					new String[] {params},
 					null,
 					null,
 					SearchHistoryTable.COL_SEARCH_TEXT + " ASC");
