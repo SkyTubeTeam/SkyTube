@@ -467,12 +467,13 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 		List<YouTubeVideo> videos = new ArrayList<>();
 
 		if (cursor.moveToNext()) {
+			final Gson gson = new Gson();
 			do {
 				final byte[]    blob = cursor.getBlob(cursor.getColumnIndex(SubscriptionsVideosTable.COL_YOUTUBE_VIDEO));
 				final String    videoJson = new String(blob);
 
 				// convert JSON into YouTubeVideo
-				YouTubeVideo video = new Gson().fromJson(videoJson, new TypeToken<YouTubeVideo>(){}.getType());
+				YouTubeVideo video = gson.fromJson(videoJson, YouTubeVideo.class);
 
 				// due to upgrade to YouTubeVideo (by changing channel{Id,Name} to YouTubeChannel)
 				// from version 2.82 to 2.90
