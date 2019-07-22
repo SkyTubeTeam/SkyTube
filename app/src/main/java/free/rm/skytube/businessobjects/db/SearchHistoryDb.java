@@ -102,7 +102,7 @@ public class SearchHistoryDb extends SQLiteOpenHelperEx {
 			values.put(SearchHistoryTable.COL_SEARCH_TEXT, text);
 			getWritableDatabase().insert(SearchHistoryTable.TABLE_NAME, null, values);
 		} else {
-			getWritableDatabase().execSQL(String.format("UPDATE %s SET %s = datetime('now','localtime') WHERE text = '%s'", SearchHistoryTable.TABLE_NAME, SearchHistoryTable.COL_SEARCH_DATE, SearchHistoryTable.COL_SEARCH_TEXT));
+			updateSearchTextTimestamp(text);
 		}
 	}
 
