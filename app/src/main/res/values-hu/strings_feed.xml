@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="feed">Feed</string>
-
-	<string name="subscribing_to_channels">Subscribing to channels…</string>
-	<string name="fetching_subbed_channels_info">Fetching channels\' information…</string>
-	<string name="fetching_subbed_channels_info_error">An error has occurred while fetching channels\' information.</string>
-
-	<string name="fetching_subscription_videos">Fetching videos from subscribed channels</string>
-	<string name="fetched_videos_from_channels">Fetched %1$d videos from %2$d/%3$d channels.</string>
-	<string name="no_new_videos_found">No new videos found.</string>
-	<string name="no_subscriptions_text">You aren\'t subscribed to any Channels.\n\nOnce you are, all videos uploaded to your subscribed Channels within the last month will appear here.</string>
-	<string name="import_subscriptions_from_youtube">Import Subscriptions From YouTube</string>
-
-	<string name="notification_channel_feed_title">Feed Notifications</string>
-	<string name="notification_new_videos_found">%d new videos from subscribed channels</string>
+    <string name="feed">Feed</string>
+    <string name="subscribing_to_channels">Csatornára feliratkozás…</string>
+    <string name="fetching_subbed_channels_info">Csatorna információk letöltése…</string>
+    <string name="fetching_subbed_channels_info_error">Hiba történt a csatorna információk letöltése közben.</string>
+    <string name="fetching_subscription_videos">Videók letöltése a feliratkozott csatornákról</string>
+    <string name="fetched_videos_from_channels">%1$d videót találtam %2$d/%3$d csatornán.</string>
+    <string name="no_new_videos_found">Nem találtam új videót.</string>
+    <string name="no_subscriptions_text">You aren\'t subscribed to any Channels.\n\nOnce you are, all videos uploaded to your subscribed Channels within the last month will appear here.</string>
+    <string name="import_subscriptions_from_youtube">Feliratkozások betöltése YouTube-ról</string>
+    <string name="notification_channel_feed_title">Feed Notifications</string>
+    <string name="notification_new_videos_found">%d új videó a feliratkozott csatornákról</string>
 </resources>

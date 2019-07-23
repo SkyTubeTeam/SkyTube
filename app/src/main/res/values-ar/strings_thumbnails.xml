@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="thumbnail">الصور المصغرة</string>
-    <string name="view_thumbnail">عرض الصور المصغرة</string>
+    <string name="view_thumbnail">عرض الصورة المصغرة</string>
     <string name="thumbnail_downloaded">تحميل الصور المصغرة.</string>
     <string name="thumbnail_download_error">تعذر تحميل الصورة المصغرة.</string>
 </resources>
