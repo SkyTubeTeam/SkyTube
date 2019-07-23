@@ -260,12 +260,9 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 			newVideosNotificationView = rowView.findViewById(R.id.sub_channel_new_videos_notification);
 			channel = null;
 
-			rowView.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					if (listener instanceof MainActivityListener)
-						listener.onChannelClick(channel);
-				}
+			rowView.setOnClickListener(v -> {
+				if (listener instanceof MainActivityListener)
+					listener.onChannelClick(channel);
 			});
 		}
 

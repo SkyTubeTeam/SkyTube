@@ -96,11 +96,7 @@ public class UpgradeAppTask extends AsyncTaskParallel<Void, Integer, Pair<File, 
 	 */
 	private void deleteOldApkFiles() {
 		// get all previously downloaded APK files
-		File[] apkFiles = apkDir.listFiles(new FilenameFilter() {
-			public boolean accept(File dir, String filename) {
-				return filename.endsWith(".apk");
-			}
-		} );
+		File[] apkFiles = apkDir.listFiles((dir, filename) -> filename.endsWith(".apk"));
 
 		// delete the previously downloaded APK files
 		if (apkFiles != null) {

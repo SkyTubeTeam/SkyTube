@@ -70,12 +70,7 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
 		this.videoId = videoId;
 		this.expandableListView = expandableListView;
 		this.expandableListView.setAdapter(this);
-		this.expandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
-			@Override
-			public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
-				return true;
-			}
-		});
+		this.expandableListView.setOnGroupClickListener((parent, v, groupPosition, id) -> true);
 		this.commentsProgressBar = commentsProgressBar;
 		this.noVideoCommentsView = noVideoCommentsView;
 		this.layoutInflater = LayoutInflater.from(expandableListView.getContext());
@@ -206,20 +201,14 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
 					.apply(new RequestOptions().placeholder(R.drawable.channel_thumbnail_default))
 					.into(thumbnailImageView);
 
-			thumbnailImageView.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					if(comment.getAuthorChannelId() != null) {
-						new GetYouTubeChannelInfoTask(context, new YouTubeChannelInterface() {
-							@Override
-							public void onGetYouTubeChannel(YouTubeChannel youTubeChannel) {
-								Intent i = new Intent(context, MainActivity.class);
-								i.setAction(MainActivity.ACTION_VIEW_CHANNEL);
-								i.putExtra(ChannelBrowserFragment.CHANNEL_OBJ, youTubeChannel);
-								context.startActivity(i);
-							}
-						}).executeInParallel(comment.getAuthorChannelId());
-					}
+			thumbnailImageView.setOnClickListener(view -> {
+				if(comment.getAuthorChannelId() != null) {
+					new GetYouTubeChannelInfoTask(context, youTubeChannel -> {
+						Intent i = new Intent(context, MainActivity.class);
+						i.setAction(MainActivity.ACTION_VIEW_CHANNEL);
+						i.putExtra(ChannelBrowserFragment.CHANNEL_OBJ, youTubeChannel);
+						context.startActivity(i);
+					}).executeInParallel(comment.getAuthorChannelId());
 				}
 			});
 
@@ -231,16 +220,13 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
 				viewRepliesTextView.setVisibility(View.VISIBLE);
 
 				// on click, hide/show the comment replies
-				commentView.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View viewReplies) {
-						if (expandableListView.isGroupExpanded(groupPosition)) {
-							viewRepliesTextView.setText(R.string.view_replies);
-							expandableListView.collapseGroup(groupPosition);
-						} else {
-							viewRepliesTextView.setText(R.string.hide_replies);
-							expandableListView.expandGroup(groupPosition);
-						}
+				commentView.setOnClickListener(viewReplies -> {
+					if (expandableListView.isGroupExpanded(groupPosition)) {
+						viewRepliesTextView.setText(R.string.view_replies);
+						expandableListView.collapseGroup(groupPosition);
+					} else {
+						viewRepliesTextView.setText(R.string.hide_replies);
+						expandableListView.expandGroup(groupPosition);
 					}
 				});
 			} else {

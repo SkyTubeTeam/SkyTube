@@ -61,46 +61,34 @@ public class AboutPreferenceFragment extends PreferenceFragment {
 			// remove the updates option if the user is running the OSS flavor...
 			getPreferenceScreen().removePreference(updatesPref);
 		} else {
-			updatesPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-				@Override
-				public boolean onPreferenceClick(Preference preference) {
-					new UpdatesCheckerTask(getActivity(), true).executeInParallel();
-					return true;
-				}
+			updatesPref.setOnPreferenceClickListener(preference -> {
+				new UpdatesCheckerTask(getActivity(), true).executeInParallel();
+				return true;
 			});
 		}
 
 		// if the user clicks on the website link, then open it using an external browser
 		Preference websitePref = findPreference(getString(R.string.pref_key_website));
 		websitePref.setSummary(BuildConfig.SKYTUBE_WEBSITE);
-		websitePref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-			@Override
-			public boolean onPreferenceClick(Preference preference) {
-				// view the app's website in a web browser
-				Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(BuildConfig.SKYTUBE_WEBSITE));
-				startActivity(browserIntent);
-				return true;
-			}
+		websitePref.setOnPreferenceClickListener(preference -> {
+			// view the app's website in a web browser
+			Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(BuildConfig.SKYTUBE_WEBSITE));
+			startActivity(browserIntent);
+			return true;
 		});
 
 		// credits
 		Preference creditsPref = findPreference(getString(R.string.pref_key_credits));
-		creditsPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-			@Override
-			public boolean onPreferenceClick(Preference preference) {
-				displayCredits();
-				return true;
-			}
+		creditsPref.setOnPreferenceClickListener(preference -> {
+			displayCredits();
+			return true;
 		});
 
 		// if the user clicks on the license, then open the display the actual license
 		Preference licensePref = findPreference(getString(R.string.pref_key_license));
-		licensePref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-			@Override
-			public boolean onPreferenceClick(Preference preference) {
-				displayAppLicense();
-				return true;
-			}
+		licensePref.setOnPreferenceClickListener(preference -> {
+			displayAppLicense();
+			return true;
 		});
 	}
 

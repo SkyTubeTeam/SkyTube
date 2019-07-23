@@ -53,25 +53,19 @@ public class YouTubePlayerTutorialFragment extends ImmersiveModeFragment impleme
 		View view = inflater.inflate(R.layout.fragment_youtube_player_tutorial, container, false);
 
 		nextTextView = view.findViewById(R.id.nextButton);
-		nextTextView.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (viewPager.getCurrentItem() < tutorialSlideViews.length-1) {
-					viewPager.setCurrentItem(viewPager.getCurrentItem()+1);
-				} else {
-					// the user wants to end the tutorial (by clicking the 'done' button)
-					if (listener != null)
-						listener.onTutorialFinished();
-				}
-			}
-		});
-		view.findViewById(R.id.skipButton).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				// the user wants to end the tutorial (by clicking the 'skip' button)
+		nextTextView.setOnClickListener(v -> {
+			if (viewPager.getCurrentItem() < tutorialSlideViews.length-1) {
+				viewPager.setCurrentItem(viewPager.getCurrentItem()+1);
+			} else {
+				// the user wants to end the tutorial (by clicking the 'done' button)
 				if (listener != null)
 					listener.onTutorialFinished();
 			}
+		});
+		view.findViewById(R.id.skipButton).setOnClickListener(v -> {
+			// the user wants to end the tutorial (by clicking the 'skip' button)
+			if (listener != null)
+				listener.onTutorialFinished();
 		});
 		pageCounterTextView = view.findViewById(R.id.pageCounterTextView);
 		viewPager = view.findViewById(R.id.pager);

@@ -63,14 +63,11 @@ public class MultiSelectListPreferenceAdapter extends RecyclerView.Adapter<Multi
 		holder.itemName.setText(item.text);
 		holder.checkBox.setChecked(item.isChecked);
 		holder.checkBox.setTag(item);
-		holder.checkBox.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				CheckBox cb = (CheckBox)view;
-				MultiSelectListPreferenceItem ch = (MultiSelectListPreferenceItem)cb.getTag();
-				ch.isChecked = cb.isChecked();
-				items.get(pos).isChecked = cb.isChecked();
-			}
+		holder.checkBox.setOnClickListener(view -> {
+			CheckBox cb = (CheckBox)view;
+			MultiSelectListPreferenceItem ch = (MultiSelectListPreferenceItem)cb.getTag();
+			ch.isChecked = cb.isChecked();
+			items.get(pos).isChecked = cb.isChecked();
 		});
 	}
 

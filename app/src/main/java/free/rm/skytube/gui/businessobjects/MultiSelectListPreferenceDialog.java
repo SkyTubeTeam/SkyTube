@@ -86,19 +86,9 @@ public class MultiSelectListPreferenceDialog extends SkyTubeMaterialDialog {
 		list.setLayoutManager(new LinearLayoutManager(materialDialog.getContext()));
 
 		Button selectAllButton = materialDialog.getCustomView().findViewById(R.id.select_all_button);
-		selectAllButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				listAdapter.selectAll();
-			}
-		});
+		selectAllButton.setOnClickListener(view -> listAdapter.selectAll());
 		Button selectNoneButton = materialDialog.getCustomView().findViewById(R.id.select_none_button);
-		selectNoneButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				listAdapter.selectNone();
-			}
-		});
+		selectNoneButton.setOnClickListener(view -> listAdapter.selectNone());
 
 		return materialDialog;
 	}

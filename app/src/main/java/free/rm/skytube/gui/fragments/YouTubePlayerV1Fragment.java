@@ -192,17 +192,14 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 
 		videoView = view.findViewById(R.id.video_view);
 		// videoView should log any errors
-		videoView.setOnErrorListener(new MediaPlayer.OnErrorListener() {
-			@Override
-			public boolean onError(MediaPlayer mp, int what, int extra) {
-				String msg = String.format(Locale.getDefault(),
-						"Error has occurred while playing video, url='%s', what=%d, extra=%d",
-						youTubeVideo != null ? youTubeVideo.getVideoUrl() : "null",
-						what,
-						extra);
-				Log.e(TAG, msg);
-				return false;
-			}
+		videoView.setOnErrorListener((mp, what, extra) -> {
+			String msg = String.format(Locale.getDefault(),
+					"Error has occurred while playing video, url='%s', what=%d, extra=%d",
+					youTubeVideo != null ? youTubeVideo.getVideoUrl() : "null",
+					what,
+					extra);
+			Log.e(TAG, msg);
+			return false;
 		});
 
 		// play the video once its loaded
@@ -398,15 +395,12 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 		videoDescriptionDrawerIconView = view.findViewById(R.id.video_desc_icon_image_view);
 		videoDescTitleTextView = view.findViewById(R.id.video_desc_title);
 		videoDescChannelThumbnailImageView = view.findViewById(R.id.video_desc_channel_thumbnail_image_view);
-		videoDescChannelThumbnailImageView.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (youTubeChannel != null) {
-					Intent i = new Intent(getActivity(), MainActivity.class);
-					i.setAction(MainActivity.ACTION_VIEW_CHANNEL);
-					i.putExtra(ChannelBrowserFragment.CHANNEL_OBJ, youTubeChannel);
-					startActivity(i);
-				}
+		videoDescChannelThumbnailImageView.setOnClickListener(v -> {
+			if (youTubeChannel != null) {
+				Intent i = new Intent(getActivity(), MainActivity.class);
+				i.setAction(MainActivity.ACTION_VIEW_CHANNEL);
+				i.putExtra(ChannelBrowserFragment.CHANNEL_OBJ, youTubeChannel);
+				startActivity(i);
 			}
 		});
 		videoDescChannelTextView = view.findViewById(R.id.video_desc_channel);
@@ -423,12 +417,9 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 		commentsProgressBar = view.findViewById(R.id.comments_progress_bar);
 		noVideoCommentsView = view.findViewById(R.id.no_video_comments_text_view);
 		commentsDrawer = view.findViewById(R.id.comments_drawer);
-		commentsDrawer.setOnDrawerOpenListener(new OnDrawerOpenListener() {
-			@Override
-			public void onDrawerOpened() {
-				if (commentsAdapter == null) {
-					commentsAdapter = new CommentsAdapter(getActivity(), youTubeVideo.getId(), commentsExpandableListView, commentsProgressBar, noVideoCommentsView);
-				}
+		commentsDrawer.setOnDrawerOpenListener(() -> {
+			if (commentsAdapter == null) {
+				commentsAdapter = new CommentsAdapter(getActivity(), youTubeVideo.getId(), commentsExpandableListView, commentsProgressBar, noVideoCommentsView);
 			}
 		});
 		commentsDrawerIconView = view.findViewById(R.id.comments_icon_image_view);
@@ -447,19 +438,16 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 	 */
 	private void getVideoInfoTasks() {
 		// get Channel info (e.g. avatar...etc) task
-		new GetYouTubeChannelInfoTask(getContext(), new YouTubeChannelInterface() {
-			@Override
-			public void onGetYouTubeChannel(YouTubeChannel youTubeChannel) {
-				YouTubePlayerV1Fragment.this.youTubeChannel = youTubeChannel;
+		new GetYouTubeChannelInfoTask(getContext(), youTubeChannel -> {
+			YouTubePlayerV1Fragment.this.youTubeChannel = youTubeChannel;
 
-				videoDescSubscribeButton.setChannel(YouTubePlayerV1Fragment.this.youTubeChannel);
-				if (youTubeChannel != null) {
-					if(getActivity() != null)
-						Glide.with(getActivity())
-										.load(youTubeChannel.getThumbnailNormalUrl())
-										.apply(new RequestOptions().placeholder(R.drawable.channel_thumbnail_default))
-										.into(videoDescChannelThumbnailImageView);
-				}
+			videoDescSubscribeButton.setChannel(YouTubePlayerV1Fragment.this.youTubeChannel);
+			if (youTubeChannel != null) {
+				if(getActivity() != null)
+					Glide.with(getActivity())
+									.load(youTubeChannel.getThumbnailNormalUrl())
+									.apply(new RequestOptions().placeholder(R.drawable.channel_thumbnail_default))
+									.into(videoDescChannelThumbnailImageView);
 			}
 		}).executeInParallel(youTubeVideo.getChannelId());
 
@@ -490,12 +478,9 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 			videoDescRatingsDisabledTextView.setVisibility(View.VISIBLE);
 		}
 
-		new ResumeVideoTask(getContext(), youTubeVideo, new ResumeVideoTask.Callback() {
-			@Override
-			public void loadVideo(int position) {
-				videoCurrentPosition = position;
-				YouTubePlayerV1Fragment.this.loadVideo();
-			}
+		new ResumeVideoTask(getContext(), youTubeVideo, position -> {
+			videoCurrentPosition = position;
+			YouTubePlayerV1Fragment.this.loadVideo();
 		}).ask();
 	}
 
@@ -598,12 +583,9 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 
 			// hide UI after a certain timeout (defined in HUD_VISIBILITY_TIMEOUT)
 			hideHudTimerHandler = new Handler();
-			hideHudTimerHandler.postDelayed(new Runnable() {
-				@Override
-				public void run() {
-					hideHud();
-					hideHudTimerHandler = null;
-				}
+			hideHudTimerHandler.postDelayed(() -> {
+				hideHud();
+				hideHudTimerHandler = null;
 			}, HUD_VISIBILITY_TIMEOUT);
 		}
 	}
@@ -623,12 +605,9 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 			// fully closed).  As a result, a delay is needed in order to explicitly hide the
 			// nav bar.
 			hideVideoDescAndCommentsIconsTimerHandler = new Handler();
-			hideVideoDescAndCommentsIconsTimerHandler.postDelayed(new Runnable() {
-				@Override
-				public void run() {
-					hideNavigationBar();
-					hideVideoDescAndCommentsIconsTimerHandler = null;
-				}
+			hideVideoDescAndCommentsIconsTimerHandler.postDelayed(() -> {
+				hideNavigationBar();
+				hideVideoDescAndCommentsIconsTimerHandler = null;
 			}, NAVBAR_VISIBILITY_TIMEOUT);
 
 			// If there is a hideHudTimerHandler running, then cancel it (stop if from running).  This way,
@@ -729,12 +708,7 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 
 			case R.id.download_video:
 				final boolean warningDialogDisplayed = new MobileNetworkWarningDialog(getContext())
-						.onPositive(new MaterialDialog.SingleButtonCallback() {
-							@Override
-							public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-								youTubeVideo.downloadVideo(getContext());
-							}
-						})
+						.onPositive((dialog, which) -> youTubeVideo.downloadVideo(getContext()))
 						.showAndGetStatus(MobileNetworkWarningDialog.ActionType.DOWNLOAD_VIDEO);
 
 				if (!warningDialogDisplayed) {
@@ -771,18 +745,8 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 		// if the user is using mobile network (i.e. 4g), then warn him
 		if (!skipMobileNetworkWarning) {
 			mobileNetworkWarningDialogDisplayed = new MobileNetworkWarningDialog(getActivity())
-					.onPositive(new MaterialDialog.SingleButtonCallback() {
-						@Override
-						public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-							loadVideo(true);
-						}
-					})
-					.onNegative(new MaterialDialog.SingleButtonCallback() {
-						@Override
-						public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-							closeActivity();
-						}
-					})
+					.onPositive((dialog, which) -> loadVideo(true))
+					.onNegative((dialog, which) -> closeActivity())
 					.showAndGetStatus(MobileNetworkWarningDialog.ActionType.STREAM_VIDEO);
 		}
 
@@ -822,12 +786,7 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 										.setMessage(errorMessage)
 										.setTitle(R.string.error_video_play)
 										.setCancelable(false)
-										.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-											@Override
-											public void onClick(DialogInterface dialog, int which) {
-												getActivity().finish();
-											}
-										})
+										.setPositiveButton(R.string.ok, (dialog, which) -> getActivity().finish())
 										.show();
 							}
 						}
@@ -835,29 +794,16 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 				}
 
 				// get the video description
-				new GetVideoDescriptionTask(youTubeVideo, new GetVideoDescriptionTask.GetVideoDescriptionTaskListener() {
-					@Override
-					public void onFinished(String description) {
-						videoDescriptionTextView.setTextAndLinkify(description);
-					}
-				}).executeInParallel();
+				new GetVideoDescriptionTask(youTubeVideo, description -> videoDescriptionTextView.setTextAndLinkify(description)).executeInParallel();
 			} else {
 				// video is live:  ask the user if he wants to play the video using an other app
 				new AlertDialog.Builder(getContext())
 						.setMessage(R.string.warning_live_video)
 						.setTitle(R.string.error_video_play)
-						.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-							@Override
-							public void onClick(DialogInterface dialog, int which) {
-								closeActivity();
-							}
-						})
-						.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-							@Override
-							public void onClick(DialogInterface dialog, int which) {
-								youTubeVideo.playVideoExternally(getContext());
-								closeActivity();
-							}
+						.setNegativeButton(R.string.cancel, (dialog, which) -> closeActivity())
+						.setPositiveButton(R.string.ok, (dialog, which) -> {
+							youTubeVideo.playVideoExternally(getContext());
+							closeActivity();
 						})
 						.show();
 			}

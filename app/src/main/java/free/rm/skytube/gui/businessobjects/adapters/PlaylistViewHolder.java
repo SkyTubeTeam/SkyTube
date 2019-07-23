@@ -78,12 +78,7 @@ class PlaylistViewHolder extends RecyclerView.ViewHolder {
 		titleTextView.setText(playlist.getTitle());
 		publishDateTextView.setText(playlist.getPublishDatePretty());
 		videoCountTextView.setText(String.format(context.getString(R.string.num_videos), playlist.getVideoCount()));
-		thumbnailImageView.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				playlistClickListener.onClickPlaylist(playlist);
-			}
-		});
+		thumbnailImageView.setOnClickListener(view -> playlistClickListener.onClickPlaylist(playlist));
 	}
 
 }

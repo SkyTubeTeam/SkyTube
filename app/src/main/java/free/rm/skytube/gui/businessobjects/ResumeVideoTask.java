@@ -59,19 +59,9 @@ public class ResumeVideoTask {
                 new SkyTubeMaterialDialog(context)
                         .content(R.string.should_resume)
                         .positiveText(R.string.resume)
-                        .onPositive(new MaterialDialog.SingleButtonCallback() {
-                            @Override
-                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                                callback.loadVideo((int) watchStatus.getPosition());
-                            }
-                        })
+                        .onPositive((dialog, which) -> callback.loadVideo((int) watchStatus.getPosition()))
                         .negativeText(R.string.no)
-                        .onNegative(new MaterialDialog.SingleButtonCallback() {
-                            @Override
-                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                                callback.loadVideo(0);
-                            }
-                        })
+                        .onNegative((dialog, which) -> callback.loadVideo(0))
                         .show();
             } else {
                 callback.loadVideo(0);

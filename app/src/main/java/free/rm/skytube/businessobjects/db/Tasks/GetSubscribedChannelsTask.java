@@ -92,12 +92,7 @@ public class GetSubscribedChannelsTask extends AsyncTaskParallel<Void, Void, Lis
 	 * @return  The sorted channels.
 	 */
 	private List<YouTubeChannel> sortChannelsAlphabetically(List<YouTubeChannel> channelsList) {
-		Collections.sort(channelsList, new Comparator<YouTubeChannel>() {
-			@Override
-			public int compare(YouTubeChannel channel, YouTubeChannel t1) {
-				return channel.getTitle().compareToIgnoreCase(t1.getTitle());
-			}
-		});
+		Collections.sort(channelsList, (channel, t1) -> channel.getTitle().compareToIgnoreCase(t1.getTitle()));
 
 		return channelsList;
 	}

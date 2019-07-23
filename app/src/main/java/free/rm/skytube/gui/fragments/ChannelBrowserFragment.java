@@ -155,15 +155,12 @@ public class ChannelBrowserFragment extends FragmentEx {
 		channelSubscribeButton.setFetchChannelVideosOnSubscribe(false);
 		if(channel != null)
 				channelSubscribeButton.setChannel(channel);
-		channelSubscribeButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				// If we're subscribing to the channel, save the list of videos we have into the channel (to be stored in the database by SubscribeToChannelTask)
-				if(channel != null && !channel.isUserSubscribed()) {
-					Iterator<YouTubeVideo> iterator = channelVideosFragment.getVideoGridAdapter().getIterator();
-					while (iterator.hasNext()) {
-						channel.addYouTubeVideo(iterator.next());
-					}
+		channelSubscribeButton.setOnClickListener(v -> {
+			// If we're subscribing to the channel, save the list of videos we have into the channel (to be stored in the database by SubscribeToChannelTask)
+			if(channel != null && !channel.isUserSubscribed()) {
+				Iterator<YouTubeVideo> iterator = channelVideosFragment.getVideoGridAdapter().getIterator();
+				while (iterator.hasNext()) {
+					channel.addYouTubeVideo(iterator.next());
 				}
 			}
 		});

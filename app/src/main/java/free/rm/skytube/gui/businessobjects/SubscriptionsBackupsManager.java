@@ -116,18 +116,15 @@ public class SubscriptionsBackupsManager {
 		properties.extensions     = importDb ? new String[]{"skytube"} : new String[]{"xml", "subscription_manager"};
 
 		FilePickerDialog dialog = new FilePickerDialog(activity, properties);
-		dialog.setDialogSelectionListener(new DialogSelectionListener() {
-			@Override
-			public void onSelectedFilePaths(String[] files) {
-				if (files == null || files.length <= 0)
-					Toast.makeText(activity, R.string.databases_import_nothing_selected, Toast.LENGTH_LONG).show();
+		dialog.setDialogSelectionListener(files -> {
+			if (files == null || files.length <= 0)
+				Toast.makeText(activity, R.string.databases_import_nothing_selected, Toast.LENGTH_LONG).show();
+			else {
+				if (importDb)
+					displayImportDbsBackupWarningMsg(files[0]);
 				else {
-					if (importDb)
-						displayImportDbsBackupWarningMsg(files[0]);
-					else {
-						Uri uri = Uri.fromFile(new File(files[0]));
-						parseImportedSubscriptions(uri);
-					}
+					Uri uri = Uri.fromFile(new File(files[0]));
+					parseImportedSubscriptions(uri);
 				}
 			}
 		});
@@ -176,12 +173,7 @@ public class SubscriptionsBackupsManager {
 	private void displayImportDbsBackupWarningMsg(final String backupFilePath) {
 		new AlertDialog.Builder(activity)
 						.setMessage(R.string.databases_import_warning_message)
-						.setPositiveButton(R.string.continue_, new DialogInterface.OnClickListener() {
-							@Override
-							public void onClick(DialogInterface dialog, int which) {
-								new ImportDatabasesTask(backupFilePath).executeInParallel();
-							}
-						})
+						.setPositiveButton(R.string.continue_, (dialog, which) -> new ImportDatabasesTask(backupFilePath).executeInParallel())
 						.setNegativeButton(R.string.cancel, null)
 						.show();
 	}
@@ -233,12 +225,7 @@ public class SubscriptionsBackupsManager {
 			new AlertDialog.Builder(activity)
 							.setCancelable(false)
 							.setMessage(successfulImport ? R.string.databases_import_success : R.string.databases_import_fail)
-							.setNeutralButton(R.string.restart, new DialogInterface.OnClickListener() {
-								@Override
-								public void onClick(DialogInterface dialog, int which) {
-									SkyTubeApp.restartApp();
-								}
-							})
+							.setNeutralButton(R.string.restart, (dialog, which) -> SkyTubeApp.restartApp())
 							.show();
 		}
 
@@ -298,32 +285,24 @@ public class SubscriptionsBackupsManager {
 				new MultiSelectListPreferenceDialog(activity, channels)
 						.title(R.string.import_subscriptions)
 						.positiveText(R.string.import_subscriptions)
-						.onPositive(new MaterialDialog.SingleButtonCallback() {
-							@Override
-							public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-								// if the user checked the "Unsubscribe to all subscribed channels" checkbox
-								if (isUnsubsribeAllChecked) {
-									new UnsubscribeFromAllChannelsTask().executeInParallel();
-								}
-
-								List<MultiSelectListPreferenceItem> channelsToSubscribeTo = new ArrayList<>();
-								for(MultiSelectListPreferenceItem channel: channels) {
-									if(channel.isChecked)
-										channelsToSubscribeTo.add(channel);
-								}
-
-								// subscribe to the channels selected by the user
-								SubscribeToImportedChannelsTask task = new SubscribeToImportedChannelsTask();
-								task.executeInParallel(channelsToSubscribeTo);
+						.onPositive((dialog, which) -> {
+							// if the user checked the "Unsubscribe to all subscribed channels" checkbox
+							if (isUnsubsribeAllChecked) {
+								new UnsubscribeFromAllChannelsTask().executeInParallel();
 							}
+
+							List<MultiSelectListPreferenceItem> channelsToSubscribeTo = new ArrayList<>();
+							for(MultiSelectListPreferenceItem channel: channels) {
+								if(channel.isChecked)
+									channelsToSubscribeTo.add(channel);
+							}
+
+							// subscribe to the channels selected by the user
+							SubscribeToImportedChannelsTask task = new SubscribeToImportedChannelsTask();
+							task.executeInParallel(channelsToSubscribeTo);
 						})
 						.negativeText(R.string.cancel)
-						.onNegative(new MaterialDialog.SingleButtonCallback() {
-							@Override
-							public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-								dialog.dismiss();
-							}
-						})
+						.onNegative((dialog, which) -> dialog.dismiss())
 						.build()
 						.show();
 			} else {
@@ -350,24 +329,9 @@ public class SubscriptionsBackupsManager {
 				.title(R.string.import_subscriptions)
 				.content(msg)
 				.positiveText(R.string.select_xml_file)
-				.checkBoxPromptRes(R.string.unsubscribe_from_all_current_sibbed_channels, false, new CompoundButton.OnCheckedChangeListener() {
-					@Override
-					public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-						isUnsubsribeAllChecked = true;
-					}
-				})
-				.onPositive(new MaterialDialog.SingleButtonCallback() {
-					@Override
-					public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-						displayFilePicker(false);
-					}
-				})
-				.onNegative(new MaterialDialog.SingleButtonCallback() {
-					@Override
-					public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-						dialog.dismiss();
-					}
-				})
+				.checkBoxPromptRes(R.string.unsubscribe_from_all_current_sibbed_channels, false, (compoundButton, b) -> isUnsubsribeAllChecked = true)
+				.onPositive((dialog, which) -> displayFilePicker(false))
+				.onNegative((dialog, which) -> dialog.dismiss())
 				.build()
 				.show();
 	}

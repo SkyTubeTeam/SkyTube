@@ -64,27 +64,24 @@ public class BlockedVideosDialog extends SkyTubeMaterialDialog {
 			title(R.string.blocked_videos);
 			adapter(new BlockedVideosAdapter(context, Lists.reverse(blockedVideos)), null);     // invert the list of blocked videos
 			neutralText(R.string.clear);
-			onNeutral(new MaterialDialog.SingleButtonCallback() {
-				@Override
-				public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-					if (listener != null)
-						listener.onClearBlockedVideos();
+
+			this.listener = blockedVideosDialogListener;
+
+			onNeutral((dialog, which) -> {
+				if (listener != null) {
+					listener.onClearBlockedVideos();
 				}
 			});
 
-			this.listener = blockedVideosDialogListener;
 		}
 
 		positiveText(R.string.configure);
-		onPositive(new MaterialDialog.SingleButtonCallback() {
-			@Override
-			public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-				// display the PreferenceActivity where the Videos Blocker tab is selected/opened
-				// by default
-				final Intent i = new Intent(context, PreferencesActivity.class);
-				i.putExtra(EXTRA_SHOW_FRAGMENT, VideoBlockerPreferenceFragment.class.getName());
-				context.startActivity(i);
-			}
+		onPositive((dialog, which) -> {
+			// display the PreferenceActivity where the Videos Blocker tab is selected/opened
+			// by default
+			final Intent i = new Intent(context, PreferencesActivity.class);
+			i.putExtra(EXTRA_SHOW_FRAGMENT, VideoBlockerPreferenceFragment.class.getName());
+			context.startActivity(i);
 		});
 	}
 
@@ -122,12 +119,9 @@ public class BlockedVideosDialog extends SkyTubeMaterialDialog {
 
 			// alternate the row colors
 			holder.row.setBackgroundColor(rowColors[position % 2]);
-			holder.row.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					// play the video
-					YouTubePlayer.launch(blockedVideo.getVideo(), context);
-				}
+			holder.row.setOnClickListener(v -> {
+				// play the video
+				YouTubePlayer.launch(blockedVideo.getVideo(), context);
 			});
 
 			// update view holder's data

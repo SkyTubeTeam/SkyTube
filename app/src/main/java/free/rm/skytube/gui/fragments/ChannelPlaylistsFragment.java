@@ -63,12 +63,7 @@ public class ChannelPlaylistsFragment extends VideosGridFragment implements Play
 
 	@Override
 	public void onRefresh() {
-		playlistsGridAdapter.refresh(new Runnable() {
-			@Override
-			public void run() {
-				swipeRefreshLayout.setRefreshing(false);
-			}
-		});
+		playlistsGridAdapter.refresh(() -> swipeRefreshLayout.setRefreshing(false));
 	}
 
 

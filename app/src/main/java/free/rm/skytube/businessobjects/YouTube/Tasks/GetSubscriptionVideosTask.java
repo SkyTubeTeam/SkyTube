@@ -109,32 +109,29 @@ public class GetSubscriptionVideosTask extends AsyncTaskParallel<Void, Void, Voi
 		for(final YouTubeChannel channel : channels) {
 			tasks.add(new GetChannelVideosTask(channel)
 				.setPublishedAfter(publishedAfter)
- 				.setGetChannelVideosTaskInterface(new GetChannelVideosTaskInterface() {
-					@Override
-					public void onGetVideos(List<YouTubeVideo> videos) {
-						numTasksFinished++;
-						boolean videosDeleted = false;
-						if(numTasksFinished < numTasksLeft) {
-							if(tasks.size() > 0) {
-								// More channels to fetch videos from
-								tasks.get(0).executeInParallel();
-								tasks.remove(0);
-							}
-							if(listener != null)
-								listener.onChannelVideosFetched(channel, videos != null ? videos : new ArrayList<YouTubeVideo>(), videosDeleted);
-						} else {
-							videosDeleted = SubscriptionsDb.getSubscriptionsDb().trimSubscriptionVideos();
+ 				.setGetChannelVideosTaskInterface(videos -> {
+					 numTasksFinished++;
+					 boolean videosDeleted = false;
+					 if(numTasksFinished < numTasksLeft) {
+						 if(tasks.size() > 0) {
+							 // More channels to fetch videos from
+							 tasks.get(0).executeInParallel();
+							 tasks.remove(0);
+						 }
+						 if(listener != null)
+							 listener.onChannelVideosFetched(channel, videos != null ? videos : new ArrayList<YouTubeVideo>(), videosDeleted);
+					 } else {
+						 videosDeleted = SubscriptionsDb.getSubscriptionsDb().trimSubscriptionVideos();
 
-							// All channels have finished querying. Update the last time this refresh was done.
-							updateFeedsLastUpdateTime();
+						 // All channels have finished querying. Update the last time this refresh was done.
+						 updateFeedsLastUpdateTime();
 
-							if (listener != null) {
-								listener.onChannelVideosFetched(channel, videos != null ? videos : new ArrayList<YouTubeVideo>(), videosDeleted);
-								listener.onAllChannelVideosFetched();
-							}
-						}
-					}
-				})
+						 if (listener != null) {
+							 listener.onChannelVideosFetched(channel, videos != null ? videos : new ArrayList<YouTubeVideo>(), videosDeleted);
+							 listener.onAllChannelVideosFetched();
+						 }
+					 }
+				 })
 			);
 		}
 

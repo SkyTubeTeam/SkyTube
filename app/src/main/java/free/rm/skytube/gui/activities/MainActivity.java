@@ -315,15 +315,12 @@ public class MainActivity extends BaseActivity {
 		final AlertDialog alertDialog = new AlertDialog.Builder(this)
 			.setView(R.layout.dialog_enter_video_url)
 			.setTitle(R.string.enter_video_url)
-			.setPositiveButton(R.string.play, new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					// get the inputted URL string
-					final String videoUrl = ((EditText)((AlertDialog) dialog).findViewById(R.id.dialog_url_edittext)).getText().toString();
+			.setPositiveButton(R.string.play, (dialog, which) -> {
+				// get the inputted URL string
+				final String videoUrl = ((EditText)((AlertDialog) dialog).findViewById(R.id.dialog_url_edittext)).getText().toString();
 
-					// play the video
-					YouTubePlayer.launch(videoUrl, MainActivity.this);
-				}
+				// play the video
+				YouTubePlayer.launch(videoUrl, MainActivity.this);
 			})
 			.setNegativeButton(R.string.cancel, null)
 			.show();
@@ -332,12 +329,7 @@ public class MainActivity extends BaseActivity {
 		((EditText) alertDialog.findViewById(R.id.dialog_url_edittext)).setText(getClipboardItem());
 
 		// clear URL edittext button
-		alertDialog.findViewById(R.id.dialog_url_clear_button).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				((EditText) alertDialog.findViewById(R.id.dialog_url_edittext)).setText("");
-			}
-		});
+		alertDialog.findViewById(R.id.dialog_url_clear_button).setOnClickListener(v -> ((EditText) alertDialog.findViewById(R.id.dialog_url_edittext)).setText(""));
 	}
 
 

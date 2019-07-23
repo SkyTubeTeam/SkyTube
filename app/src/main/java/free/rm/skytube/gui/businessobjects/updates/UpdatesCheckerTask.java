@@ -61,12 +61,7 @@ public class UpdatesCheckerTask extends AsyncTaskParallel<Void, Void, UpdatesChe
 			new AlertDialog.Builder(context)
 					.setTitle(R.string.update_available)
 					.setMessage( String.format(context.getString(R.string.update_dialog_msg), Float.toString(updatesChecker.getLatestApkVersion())) )
-					.setPositiveButton(R.string.update, new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							new UpgradeAppTask(updatesChecker.getLatestApkUrl(), context).executeInParallel();
-						}
-					})
+					.setPositiveButton(R.string.update, (dialog, which) -> new UpgradeAppTask(updatesChecker.getLatestApkUrl(), context).executeInParallel())
 					.setNegativeButton(R.string.later, null)
 					.show();
 		} else if (displayUpToDateMessage) {
