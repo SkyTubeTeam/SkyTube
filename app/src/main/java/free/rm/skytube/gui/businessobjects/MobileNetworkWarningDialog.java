@@ -54,12 +54,7 @@ public class MobileNetworkWarningDialog extends SkyTubeMaterialDialog {
 		if (SkyTubeApp.isConnectedToMobile() && displayWarning) {
 			title(R.string.mobile_data);
 			content(actionType == ActionType.STREAM_VIDEO ? R.string.warning_mobile_network_play : R.string.warning_mobile_network_download);
-			checkBoxPromptRes(R.string.warning_mobile_network_disable, false, new CompoundButton.OnCheckedChangeListener() {
-				@Override
-				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-					SkyTubeApp.getPreferenceManager().edit().putBoolean(SkyTubeApp.getStr(R.string.pref_key_warn_mobile_downloads), !isChecked).apply();
-				}
-			});
+			checkBoxPromptRes(R.string.warning_mobile_network_disable, false, (buttonView, isChecked) -> SkyTubeApp.getPreferenceManager().edit().putBoolean(SkyTubeApp.getStr(R.string.pref_key_warn_mobile_downloads), !isChecked).apply());
 			positiveText(actionType == ActionType.STREAM_VIDEO ?  R.string.play_video : R.string.download_video);
 			show();
 			dialogDisplayed = true;

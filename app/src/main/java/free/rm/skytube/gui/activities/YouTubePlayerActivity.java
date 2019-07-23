@@ -72,12 +72,7 @@ public class YouTubePlayerActivity extends BaseActivity implements YouTubePlayer
 			installNewVideoPlayerFragment(useDefaultPlayer);
 		} else {
 			// display the tutorial
-			FragmentEx tutorialFragment = new YouTubePlayerTutorialFragment().setListener(new YouTubePlayerTutorialFragment.YouTubePlayerTutorialListener() {
-				@Override
-				public void onTutorialFinished() {
-					installNewVideoPlayerFragment(useDefaultPlayer);
-				}
-			});
+			FragmentEx tutorialFragment = new YouTubePlayerTutorialFragment().setListener(() -> installNewVideoPlayerFragment(useDefaultPlayer));
 			installFragment(tutorialFragment);
 		}
 	}

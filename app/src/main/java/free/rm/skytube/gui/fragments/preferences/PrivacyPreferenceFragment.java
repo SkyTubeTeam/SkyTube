@@ -19,13 +19,10 @@ public class PrivacyPreferenceFragment extends PreferenceFragment implements Sha
 		addPreferencesFromResource(R.xml.preference_privacy);
 
 		Preference clearPlaybackStatus = findPreference(getString(R.string.pref_key_clear_playback_status));
-		clearPlaybackStatus.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-			@Override
-			public boolean onPreferenceClick(Preference preference) {
-				PlaybackStatusDb.getPlaybackStatusDb().deleteAllPlaybackHistory();
-				Toast.makeText(getActivity(), getString(R.string.pref_playback_status_cleared), Toast.LENGTH_LONG).show();
-				return true;
-			}
+		clearPlaybackStatus.setOnPreferenceClickListener(preference -> {
+			PlaybackStatusDb.getPlaybackStatusDb().deleteAllPlaybackHistory();
+			Toast.makeText(getActivity(), getString(R.string.pref_playback_status_cleared), Toast.LENGTH_LONG).show();
+			return true;
 		});
 	}
 

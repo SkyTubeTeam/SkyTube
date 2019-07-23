@@ -90,31 +90,20 @@ public class GridViewHolder extends RecyclerView.ViewHolder implements Serializa
 		this.mainActivityListener = listener;
 		this.showChannelInfo = showChannelInfo;
 
-		thumbnailImageView.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View thumbnailView) {
-				if (youTubeVideo != null) {
-					YouTubePlayer.launch(youTubeVideo, context);
-				}
+		thumbnailImageView.setOnClickListener(thumbnailView -> {
+			if (youTubeVideo != null) {
+				YouTubePlayer.launch(youTubeVideo, context);
 			}
 		});
 
-		View.OnClickListener channelOnClickListener = new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if(mainActivityListener != null)
-					mainActivityListener.onChannelClick(youTubeVideo.getChannelId());
-			}
+		View.OnClickListener channelOnClickListener = v -> {
+			if(mainActivityListener != null)
+				mainActivityListener.onChannelClick(youTubeVideo.getChannelId());
 		};
 
 		view.findViewById(R.id.channel_layout).setOnClickListener(showChannelInfo ? channelOnClickListener : null);
 
-		view.findViewById(R.id.options_button).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				onOptionsButtonClick(v);
-			}
-		});
+		view.findViewById(R.id.options_button).setOnClickListener(v -> onOptionsButtonClick(v));
 	}
 
 
@@ -206,61 +195,53 @@ public class GridViewHolder extends RecyclerView.ViewHolder implements Serializa
 		} else {
 			popupMenu.getMenu().findItem(R.id.delete_download).setVisible(false);
 		}
-		popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-			@Override
-			public boolean onMenuItemClick(MenuItem item) {
-				switch(item.getItemId()) {
-					case R.id.menu_open_video_with:
-						youTubeVideo.playVideoExternally(context);
-						return true;
-					case R.id.share:
-						youTubeVideo.shareVideo(view.getContext());
-						return true;
-					case R.id.copyurl:
-						youTubeVideo.copyUrl(context);
-						return true;
-					case R.id.mark_watched:
-						PlaybackStatusDb.getPlaybackStatusDb().setVideoWatchedStatus(youTubeVideo, true);
-						updateViewsData();
-						return true;
-					case R.id.mark_unwatched:
-						PlaybackStatusDb.getPlaybackStatusDb().setVideoWatchedStatus(youTubeVideo, false);
-						updateViewsData();
-						return true;
-					case R.id.bookmark_video:
-						youTubeVideo.bookmarkVideo(context, popupMenu.getMenu());
-						return true;
-					case R.id.unbookmark_video:
-						youTubeVideo.unbookmarkVideo(context, popupMenu.getMenu());
-						return true;
-					case R.id.view_thumbnail:
-						Intent i = new Intent(context, ThumbnailViewerActivity.class);
-						i.putExtra(ThumbnailViewerActivity.YOUTUBE_VIDEO, youTubeVideo);
-						context.startActivity(i);
-						return true;
-					case R.id.delete_download:
-						youTubeVideo.removeDownload();
-						return true;
-					case R.id.download_video:
-						final boolean warningDialogDisplayed = new MobileNetworkWarningDialog(view.getContext())
-								.onPositive(new MaterialDialog.SingleButtonCallback() {
-									@Override
-									public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-										youTubeVideo.downloadVideo(context);
-									}
-								})
-								.showAndGetStatus(MobileNetworkWarningDialog.ActionType.DOWNLOAD_VIDEO);
+		popupMenu.setOnMenuItemClickListener(item -> {
+			switch(item.getItemId()) {
+				case R.id.menu_open_video_with:
+					youTubeVideo.playVideoExternally(context);
+					return true;
+				case R.id.share:
+					youTubeVideo.shareVideo(view.getContext());
+					return true;
+				case R.id.copyurl:
+					youTubeVideo.copyUrl(context);
+					return true;
+				case R.id.mark_watched:
+					PlaybackStatusDb.getPlaybackStatusDb().setVideoWatchedStatus(youTubeVideo, true);
+					updateViewsData();
+					return true;
+				case R.id.mark_unwatched:
+					PlaybackStatusDb.getPlaybackStatusDb().setVideoWatchedStatus(youTubeVideo, false);
+					updateViewsData();
+					return true;
+				case R.id.bookmark_video:
+					youTubeVideo.bookmarkVideo(context, popupMenu.getMenu());
+					return true;
+				case R.id.unbookmark_video:
+					youTubeVideo.unbookmarkVideo(context, popupMenu.getMenu());
+					return true;
+				case R.id.view_thumbnail:
+					Intent i = new Intent(context, ThumbnailViewerActivity.class);
+					i.putExtra(ThumbnailViewerActivity.YOUTUBE_VIDEO, youTubeVideo);
+					context.startActivity(i);
+					return true;
+				case R.id.delete_download:
+					youTubeVideo.removeDownload();
+					return true;
+				case R.id.download_video:
+					final boolean warningDialogDisplayed = new MobileNetworkWarningDialog(view.getContext())
+							.onPositive((dialog, which) -> youTubeVideo.downloadVideo(context))
+							.showAndGetStatus(MobileNetworkWarningDialog.ActionType.DOWNLOAD_VIDEO);
 
-						if (!warningDialogDisplayed) {
-							youTubeVideo.downloadVideo(context);
-						}
-						return true;
-					case R.id.block_channel:
-						youTubeVideo.getChannel().blockChannel();
-						return true;
-				}
-				return false;
+					if (!warningDialogDisplayed) {
+						youTubeVideo.downloadVideo(context);
+					}
+					return true;
+				case R.id.block_channel:
+					youTubeVideo.getChannel().blockChannel();
+					return true;
 			}
+			return false;
 		});
 		popupMenu.show();
 	}

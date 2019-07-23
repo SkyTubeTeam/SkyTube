@@ -49,43 +49,31 @@ public class VideoBlockerPreferenceFragment extends PreferenceFragment {
 
 		// enable/disable the video blocker
 		enablePreferences(isVideoBlockerEnabled(), channelBlacklistPreference, channelWhitelistPreference);
-		findPreference(getString(R.string.pref_key_enable_video_blocker)).setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-			@Override
-			public boolean onPreferenceChange(Preference preference, Object newValue) {
-				enablePreferences((boolean) newValue, channelBlacklistPreference, channelWhitelistPreference);
-				Toast.makeText(getActivity(), R.string.setting_updated, Toast.LENGTH_LONG).show();
-				return true;
-			}
+		findPreference(getString(R.string.pref_key_enable_video_blocker)).setOnPreferenceChangeListener((preference, newValue) -> {
+			enablePreferences((boolean) newValue, channelBlacklistPreference, channelWhitelistPreference);
+			Toast.makeText(getActivity(), R.string.setting_updated, Toast.LENGTH_LONG).show();
+			return true;
 		});
 
 		// initialize the channel filtering UI
-		findPreference(getString(R.string.pref_key_channel_filter_method)).setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-			@Override
-			public boolean onPreferenceChange(Preference preference, Object newValue) {
-				initChannelFilteringPreferences((String) newValue, channelBlacklistPreference, channelWhitelistPreference);
-				Toast.makeText(getActivity(), R.string.setting_updated, Toast.LENGTH_LONG).show();
-				return true;
-			}
+		findPreference(getString(R.string.pref_key_channel_filter_method)).setOnPreferenceChangeListener((preference, newValue) -> {
+			initChannelFilteringPreferences((String) newValue, channelBlacklistPreference, channelWhitelistPreference);
+			Toast.makeText(getActivity(), R.string.setting_updated, Toast.LENGTH_LONG).show();
+			return true;
 		});
 
-		final Preference.OnPreferenceChangeListener settingUpdatesPreferenceChange = new Preference.OnPreferenceChangeListener() {
-			@Override
-			public boolean onPreferenceChange(Preference preference, Object newValue) {
-				Toast.makeText(getActivity(), R.string.setting_updated, Toast.LENGTH_LONG).show();
-				return true;
-			}
+		final Preference.OnPreferenceChangeListener settingUpdatesPreferenceChange = (preference, newValue) -> {
+			Toast.makeText(getActivity(), R.string.setting_updated, Toast.LENGTH_LONG).show();
+			return true;
 		};
 
 		// preferred region
 		findPreference(getString(R.string.pref_key_preferred_region)).setOnPreferenceChangeListener(settingUpdatesPreferenceChange);
 
 		// preferred language(s)
-		findPreference(getString(R.string.pref_key_preferred_languages)).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-			@Override
-			public boolean onPreferenceClick(Preference preference) {
-				new PreferredLanguageDialog(getActivity()).show();
-				return true;
-			}
+		findPreference(getString(R.string.pref_key_preferred_languages)).setOnPreferenceClickListener(preference -> {
+			new PreferredLanguageDialog(getActivity()).show();
+			return true;
 		});
 		findPreference(getString(R.string.pref_key_lang_detection_video_filtering)).setOnPreferenceChangeListener(settingUpdatesPreferenceChange);
 		findPreference(getString(R.string.pref_key_low_views_filter)).setOnPreferenceChangeListener(settingUpdatesPreferenceChange);
@@ -181,12 +169,9 @@ public class VideoBlockerPreferenceFragment extends PreferenceFragment {
 	 * Initialized the channel blacklist preference.
 	 */
 	private void initChannelBlacklistingPreference(final Preference channelBlacklistPreference) {
-		channelBlacklistPreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-			@Override
-			public boolean onPreferenceClick(Preference preference) {
-				new BlacklistChannelsDialog(getActivity()).show();
-				return true;
-			}
+		channelBlacklistPreference.setOnPreferenceClickListener(preference -> {
+			new BlacklistChannelsDialog(getActivity()).show();
+			return true;
 		});
 	}
 
@@ -195,12 +180,9 @@ public class VideoBlockerPreferenceFragment extends PreferenceFragment {
 	 * Initialized the channel whitelist preference.
 	 */
 	private void initChannelWhitelistingPreference(final Preference channelWhitelistPreference) {
-		channelWhitelistPreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-			@Override
-			public boolean onPreferenceClick(Preference preference) {
-				new WhitelistChannelsDialog(getActivity()).show();
-				return true;
-			}
+		channelWhitelistPreference.setOnPreferenceClickListener(preference -> {
+			new WhitelistChannelsDialog(getActivity()).show();
+			return true;
 		});
 	}
 
@@ -219,23 +201,20 @@ public class VideoBlockerPreferenceFragment extends PreferenceFragment {
 			setItems(getLanguagesAvailable());
 
 			title(R.string.pref_title_preferred_languages);
-			onPositive(new MaterialDialog.SingleButtonCallback() {
-				@Override
-				public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-					final Set<String> preferredLangIsoCodes = getSelectedItemsIds();
+			onPositive((dialog, which) -> {
+				final Set<String> preferredLangIsoCodes = getSelectedItemsIds();
 
-					// if at least one language was selected, then save the settings
-					if (preferredLangIsoCodes.size() > 0) {
-						SharedPreferences sharedPref = SkyTubeApp.getPreferenceManager();
-						SharedPreferences.Editor editor = sharedPref.edit();
-						editor.putStringSet(getString(R.string.pref_key_preferred_languages), getSelectedItemsIds());
-						editor.apply();
+				// if at least one language was selected, then save the settings
+				if (preferredLangIsoCodes.size() > 0) {
+					SharedPreferences sharedPref = SkyTubeApp.getPreferenceManager();
+					SharedPreferences.Editor editor = sharedPref.edit();
+					editor.putStringSet(getString(R.string.pref_key_preferred_languages), getSelectedItemsIds());
+					editor.apply();
 
-						Toast.makeText(getActivity(), R.string.preferred_lang_updated, Toast.LENGTH_LONG).show();
-					} else {
-						// no languages were selected... action is ignored
-						Toast.makeText(getActivity(), R.string.no_preferred_lang_selected, Toast.LENGTH_LONG).show();
-					}
+					Toast.makeText(getActivity(), R.string.preferred_lang_updated, Toast.LENGTH_LONG).show();
+				} else {
+					// no languages were selected... action is ignored
+					Toast.makeText(getActivity(), R.string.no_preferred_lang_selected, Toast.LENGTH_LONG).show();
 				}
 			});
 		}
@@ -314,23 +293,20 @@ public class VideoBlockerPreferenceFragment extends PreferenceFragment {
 
 			title(R.string.pref_title_channel_blacklist);
 			positiveText(R.string.unblock);
-			onPositive(new MaterialDialog.SingleButtonCallback() {
-				@Override
-				public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-					final List<MultiSelectListPreferenceItem> channels = getSelectedItems();
+			onPositive((dialog, which) -> {
+				final List<MultiSelectListPreferenceItem> channels = getSelectedItems();
 
-					if (channels != null  &&  !channels.isEmpty()) {
-						// remove the selected channels from the blacklist
-						final boolean success = ChannelFilteringDb.getChannelFilteringDb().unblacklist(channels);
+				if (channels != null  &&  !channels.isEmpty()) {
+					// remove the selected channels from the blacklist
+					final boolean success = ChannelFilteringDb.getChannelFilteringDb().unblacklist(channels);
 
-						Toast.makeText(getActivity(),
-								success ? R.string.channel_blacklist_updated : R.string.channel_blacklist_update_failure,
-								Toast.LENGTH_LONG)
-								.show();
-					}
-
-					dialog.dismiss();
+					Toast.makeText(getActivity(),
+							success ? R.string.channel_blacklist_updated : R.string.channel_blacklist_update_failure,
+							Toast.LENGTH_LONG)
+							.show();
 				}
+
+				dialog.dismiss();
 			});
 		}
 
@@ -356,38 +332,30 @@ public class VideoBlockerPreferenceFragment extends PreferenceFragment {
 
 			title(R.string.pref_title_channel_whitelist);
 			positiveText(R.string.block);
-			onPositive(new MaterialDialog.SingleButtonCallback() {
-				@Override
-				public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-					final List<YouTubeChannel> channelList = toYouTubeChannelList(getSelectedItems());
+			onPositive((dialog, which) -> {
+				final List<YouTubeChannel> channelList = toYouTubeChannelList(getSelectedItems());
 
-					if (!channelList.isEmpty()) {
-						// unwhitelist the selected channels
-						boolean success = true;
+				if (!channelList.isEmpty()) {
+					// unwhitelist the selected channels
+					boolean success = true;
 
-						for (YouTubeChannel channel : channelList) {
-							if (!channel.blockChannel(false)) {
-								success = false;
-							}
+					for (YouTubeChannel channel : channelList) {
+						if (!channel.blockChannel(false)) {
+							success = false;
 						}
-
-						Toast.makeText(getActivity(),
-								success ? R.string.channel_unwhitelist_success : R.string.channel_unwhitelist_failure,
-								Toast.LENGTH_LONG)
-								.show();
 					}
 
-					dialog.dismiss();
+					Toast.makeText(getActivity(),
+							success ? R.string.channel_unwhitelist_success : R.string.channel_unwhitelist_failure,
+							Toast.LENGTH_LONG)
+							.show();
 				}
+
+				dialog.dismiss();
 			});
 
 			neutralText(R.string.add);
-			onNeutral(new MaterialDialog.SingleButtonCallback() {
-				@Override
-				public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-					displayInputChannelUrlDialog();
-				}
-			});
+			onNeutral((dialog, which) -> displayInputChannelUrlDialog());
 		}
 
 
@@ -415,12 +383,7 @@ public class VideoBlockerPreferenceFragment extends PreferenceFragment {
 					.content(R.string.input_channel_url)
 					.positiveText(R.string.add)
 					.inputType(InputType.TYPE_TEXT_VARIATION_URI)
-					.input("https://www.youtube.com/channel/xxxxxxxxx", null, false, new MaterialDialog.InputCallback() {
-						@Override
-						public void onInput(@NonNull MaterialDialog dialog, CharSequence channelUrl) {
-							new GetChannelIdFromUrlTask(channelUrl.toString(), WhitelistChannelsDialog.this).executeInParallel();
-						}
-					})
+					.input("https://www.youtube.com/channel/xxxxxxxxx", null, false, (dialog, channelUrl) -> new GetChannelIdFromUrlTask(channelUrl.toString(), WhitelistChannelsDialog.this).executeInParallel())
 					.show();
 		}
 

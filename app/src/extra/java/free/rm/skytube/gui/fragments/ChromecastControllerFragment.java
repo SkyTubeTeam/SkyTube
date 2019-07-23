@@ -130,21 +130,18 @@ public class ChromecastControllerFragment extends ChromecastBaseControllerFragme
 		}
 
 
-		new GetYouTubeChannelInfoTask(getActivity(), new YouTubeChannelInterface() {
-			@Override
-			public void onGetYouTubeChannel(final YouTubeChannel youTubeChannel) {
-				if(youTubeChannel.isUserSubscribed())
-					videoDescriptionLayout.subscribeButton.setUnsubscribeState();
-				else
-					videoDescriptionLayout.subscribeButton.setSubscribeState();
-				videoDescriptionLayout.subscribeButton.setChannel(youTubeChannel);
+		new GetYouTubeChannelInfoTask(getActivity(), youTubeChannel -> {
+			if(youTubeChannel.isUserSubscribed())
+				videoDescriptionLayout.subscribeButton.setUnsubscribeState();
+			else
+				videoDescriptionLayout.subscribeButton.setSubscribeState();
+			videoDescriptionLayout.subscribeButton.setChannel(youTubeChannel);
 
-				if (youTubeChannel != null) {
-					Glide.with(getActivity())
-									.load(youTubeChannel.getThumbnailNormalUrl())
-									.apply(new RequestOptions().placeholder(R.drawable.channel_thumbnail_default))
-									.into(videoDescriptionLayout.thumbnail);
-				}
+			if (youTubeChannel != null) {
+				Glide.with(getActivity())
+								.load(youTubeChannel.getThumbnailNormalUrl())
+								.apply(new RequestOptions().placeholder(R.drawable.channel_thumbnail_default))
+								.into(videoDescriptionLayout.thumbnail);
 			}
 		}).executeInParallel(video.getChannelId());
 

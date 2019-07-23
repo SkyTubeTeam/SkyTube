@@ -239,15 +239,12 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 		videoDescriptionDrawer = view.findViewById(R.id.des_drawer);
 		videoDescTitleTextView = view.findViewById(R.id.video_desc_title);
 		videoDescChannelThumbnailImageView = view.findViewById(R.id.video_desc_channel_thumbnail_image_view);
-		videoDescChannelThumbnailImageView.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (youTubeChannel != null) {
-					Intent i = new Intent(getActivity(), MainActivity.class);
-					i.setAction(MainActivity.ACTION_VIEW_CHANNEL);
-					i.putExtra(ChannelBrowserFragment.CHANNEL_OBJ, youTubeChannel);
-					startActivity(i);
-				}
+		videoDescChannelThumbnailImageView.setOnClickListener(v -> {
+			if (youTubeChannel != null) {
+				Intent i = new Intent(getActivity(), MainActivity.class);
+				i.setAction(MainActivity.ACTION_VIEW_CHANNEL);
+				i.putExtra(ChannelBrowserFragment.CHANNEL_OBJ, youTubeChannel);
+				startActivity(i);
 			}
 		});
 		videoDescChannelTextView = view.findViewById(R.id.video_desc_channel);
@@ -264,12 +261,9 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 		commentsProgressBar = view.findViewById(R.id.comments_progress_bar);
 		noVideoCommentsView = view.findViewById(R.id.no_video_comments_text_view);
 		commentsDrawer = view.findViewById(R.id.comments_drawer);
-		commentsDrawer.setOnDrawerOpenListener(new OnDrawerOpenListener() {
-			@Override
-			public void onDrawerOpened() {
-				if (commentsAdapter == null) {
-					commentsAdapter = new CommentsAdapter(getActivity(), youTubeVideo.getId(), commentsExpandableListView, commentsProgressBar, noVideoCommentsView);
-				}
+		commentsDrawer.setOnDrawerOpenListener(() -> {
+			if (commentsAdapter == null) {
+				commentsAdapter = new CommentsAdapter(getActivity(), youTubeVideo.getId(), commentsExpandableListView, commentsProgressBar, noVideoCommentsView);
 			}
 		});
 	}
@@ -297,13 +291,10 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 			videoDescRatingsDisabledTextView.setVisibility(View.VISIBLE);
 		}
 
-        new ResumeVideoTask(getContext(), youTubeVideo, new ResumeVideoTask.Callback() {
-            @Override
-            public void loadVideo(int position) {
-                playerInitialPosition = position;
-                YouTubePlayerV2Fragment.this.loadVideo();
-            }
-        }).ask();
+        new ResumeVideoTask(getContext(), youTubeVideo, position -> {
+			playerInitialPosition = position;
+			YouTubePlayerV2Fragment.this.loadVideo();
+		}).ask();
 
 	}
 
@@ -345,18 +336,8 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 		// if the user is using mobile network (i.e. 4g), then warn him
 		if (showMobileNetworkWarning && downloadStatus.getUri() == null) {
 			mobileNetworkWarningDialogDisplayed = new MobileNetworkWarningDialog(getActivity())
-					.onPositive(new MaterialDialog.SingleButtonCallback() {
-						@Override
-						public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-							loadVideo(false);
-						}
-					})
-					.onNegative(new MaterialDialog.SingleButtonCallback() {
-						@Override
-						public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-							closeActivity();
-						}
-					})
+					.onPositive((dialog, which) -> loadVideo(false))
+					.onNegative((dialog, which) -> closeActivity())
 					.showAndGetStatus(MobileNetworkWarningDialog.ActionType.STREAM_VIDEO);
 		}
 
@@ -402,12 +383,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 										.content(errorMessage)
 										.title(R.string.error_video_play)
 										.cancelable(false)
-										.onPositive(new MaterialDialog.SingleButtonCallback() {
-											@Override
-											public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-												closeActivity();
-											}
-										})
+										.onPositive((dialog, which) -> closeActivity())
 										.show();
 							}
 						}
@@ -425,18 +401,10 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 		new SkyTubeMaterialDialog(getContext())
 				.content(R.string.warning_live_video)
 				.title(R.string.error_video_play)
-				.onNegative(new MaterialDialog.SingleButtonCallback() {
-					@Override
-					public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-						closeActivity();
-					}
-				})
-				.onPositive(new MaterialDialog.SingleButtonCallback() {
-					@Override
-					public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-						youTubeVideo.playVideoExternally(getContext());
-						closeActivity();
-					}
+				.onNegative((dialog, which) -> closeActivity())
+				.onPositive((dialog, which) -> {
+					youTubeVideo.playVideoExternally(getContext());
+					closeActivity();
 				})
 				.show();
 	}
@@ -521,12 +489,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 
 			case R.id.download_video:
 				final boolean warningDialogDisplayed = new MobileNetworkWarningDialog(getContext())
-						.onPositive(new MaterialDialog.SingleButtonCallback() {
-							@Override
-							public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-								youTubeVideo.downloadVideo(getContext());
-							}
-						})
+						.onPositive((dialog, which) -> youTubeVideo.downloadVideo(getContext()))
 						.showAndGetStatus(MobileNetworkWarningDialog.ActionType.DOWNLOAD_VIDEO);
 
 				if (!warningDialogDisplayed) {
@@ -559,29 +522,21 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 	 */
 	private void getVideoInfoTasks() {
 		// get Channel info (e.g. avatar...etc) task
-		new GetYouTubeChannelInfoTask(getContext(), new YouTubeChannelInterface() {
-			@Override
-			public void onGetYouTubeChannel(YouTubeChannel youTubeChannel) {
-				YouTubePlayerV2Fragment.this.youTubeChannel = youTubeChannel;
+		new GetYouTubeChannelInfoTask(getContext(), youTubeChannel -> {
+			YouTubePlayerV2Fragment.this.youTubeChannel = youTubeChannel;
 
-				videoDescSubscribeButton.setChannel(YouTubePlayerV2Fragment.this.youTubeChannel);
-				if (youTubeChannel != null) {
-					if(getActivity() != null)
-						Glide.with(getActivity())
-								.load(youTubeChannel.getThumbnailNormalUrl())
-								.apply(new RequestOptions().placeholder(R.drawable.channel_thumbnail_default))
-								.into(videoDescChannelThumbnailImageView);
-				}
+			videoDescSubscribeButton.setChannel(YouTubePlayerV2Fragment.this.youTubeChannel);
+			if (youTubeChannel != null) {
+				if(getActivity() != null)
+					Glide.with(getActivity())
+							.load(youTubeChannel.getThumbnailNormalUrl())
+							.apply(new RequestOptions().placeholder(R.drawable.channel_thumbnail_default))
+							.into(videoDescChannelThumbnailImageView);
 			}
 		}).executeInParallel(youTubeVideo.getChannelId());
 
 		// get the video description
-		new GetVideoDescriptionTask(youTubeVideo, new GetVideoDescriptionTask.GetVideoDescriptionTaskListener() {
-			@Override
-			public void onFinished(String description) {
-				videoDescriptionTextView.setTextAndLinkify(description);
-			}
-		}).executeInParallel();
+		new GetVideoDescriptionTask(youTubeVideo, description -> videoDescriptionTextView.setTextAndLinkify(description)).executeInParallel();
 
 		// check if the user has subscribed to a channel... if he has, then change the state of
 		// the subscribe button
@@ -734,12 +689,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 			super(getContext());
 
 			videoBrightness = new VideoBrightness(getActivity(), disableGestures);
-			playerView.setControllerVisibilityListener(new PlayerControlView.VisibilityListener() {
-				@Override
-				public void onVisibilityChange(int visibility) {
-					isControllerVisible = (visibility == View.VISIBLE);
-				}
-			});
+			playerView.setControllerVisibilityListener(visibility -> isControllerVisible = (visibility == View.VISIBLE));
 		}
 
 

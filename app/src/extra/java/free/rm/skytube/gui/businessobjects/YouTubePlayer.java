@@ -88,12 +88,7 @@ public class YouTubePlayer {
 	 */
 	public static void launch(String videoUrl, final Context context) {
 		if(connectingToChromecast || connectedToChromecast) {
-			new GetVideoDetailsTask(videoUrl, new YouTubeVideoListener() {
-				@Override
-				public void onYouTubeVideo(String videoUrl, YouTubeVideo video) {
-					launchOnChromecast(video, context);
-				}
-			}).executeInParallel();
+			new GetVideoDetailsTask(videoUrl, (videoUrl1, video) -> launchOnChromecast(video, context)).executeInParallel();
 		} else {
 			// if the user has selected to play the videos using the official YouTube player
 			// (in the preferences/settings) ...
@@ -109,32 +104,19 @@ public class YouTubePlayer {
 		if(connectingToChromecast) {
 			((ChromecastListener)context).showLoadingSpinner();
 			// In the process of connecting to a chromecast. Wait 500ms and try again
-			new Handler().postDelayed(new Runnable() {
-				@Override
-				public void run() {
-					launchOnChromecast(youTubeVideo, context);
-				}
-			}, 500);
+			new Handler().postDelayed(() -> launchOnChromecast(youTubeVideo, context), 500);
 		} else {
 			if (context instanceof ChromecastListener) {
 				final PlaybackStatusDb.VideoWatchedStatus status = PlaybackStatusDb.getPlaybackStatusDb().getVideoWatchedStatus(youTubeVideo);
 				if(!SkyTubeApp.getPreferenceManager().getBoolean(context.getString(R.string.pref_key_disable_playback_status), false) && status.getPosition() > 0) {
 					new AlertDialog.Builder(context)
 									.setTitle(R.string.should_resume)
-									.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-										@Override
-										public void onClick(DialogInterface dialog, int which) {
+									.setPositiveButton(R.string.yes, (dialog, which) -> {
 
-											int position = (int) status.getPosition();
-											((ChromecastListener) context).playVideoOnChromecast(youTubeVideo, position);
-										}
+										int position = (int) status.getPosition();
+										((ChromecastListener) context).playVideoOnChromecast(youTubeVideo, position);
 									})
-									.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
-										@Override
-										public void onClick(DialogInterface dialogInterface, int i) {
-											((ChromecastListener) context).playVideoOnChromecast(youTubeVideo, 0);
-										}
-									})
+									.setNegativeButton(R.string.no, (dialogInterface, i) -> ((ChromecastListener) context).playVideoOnChromecast(youTubeVideo, 0))
 									.show();
 				} else {
 					((ChromecastListener) context).playVideoOnChromecast(youTubeVideo, 0);

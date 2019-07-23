@@ -208,12 +208,7 @@ public abstract class BaseActivity extends AppCompatActivity implements MainActi
 					externalPlayIntent = intent;
 				} else {
 					if (connectedToChromecast) {
-						new GetVideoDetailsTask(YouTubePlayerV1Fragment.getUrlFromIntent(intent), new YouTubeVideoListener() {
-							@Override
-							public void onYouTubeVideo(String videoUrl, YouTubeVideo video) {
-								playVideoOnChromecast(video, 0);
-							}
-						}).executeInParallel();
+						new GetVideoDetailsTask(YouTubePlayerV1Fragment.getUrlFromIntent(intent), (videoUrl, video) -> playVideoOnChromecast(video, 0)).executeInParallel();
 					} else {
 						Intent i = new Intent(this, YouTubePlayerActivity.class);
 						i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
@@ -314,19 +309,16 @@ public abstract class BaseActivity extends AppCompatActivity implements MainActi
 		@Override
 		public void onSessionResumed(Session session, boolean wasSuspended) {
 			mCastSession = CastContext.getSharedInstance(BaseActivity.this).getSessionManager().getCurrentCastSession();
-			Runnable r = new Runnable() {
-				@Override
-				public void run() {
-					if(mCastSession.getRemoteMediaClient().getPlayerState() != MediaStatus.PLAYER_STATE_IDLE) {
-						chromecastMiniControllerFragment.init(mCastSession.getRemoteMediaClient());
-						chromecastControllerFragment.init(mCastSession.getRemoteMediaClient());
-						slidingLayout.addPanelSlideListener(getOnPanelDisplayed((int) mCastSession.getRemoteMediaClient().getApproximateStreamPosition(), (int) mCastSession.getRemoteMediaClient().getStreamDuration()));
-					} else if(externalPlayIntent != null) {
-						// A default Chromecast has been set to handle external intents, and that Chromecast has now been
-						// connected to. Play the video (which is stored in externalPlayIntent).
-						handleExternalPlayOnChromecast(externalPlayIntent);
-						externalPlayIntent = null;
-					}
+			Runnable r = () -> {
+				if(mCastSession.getRemoteMediaClient().getPlayerState() != MediaStatus.PLAYER_STATE_IDLE) {
+					chromecastMiniControllerFragment.init(mCastSession.getRemoteMediaClient());
+					chromecastControllerFragment.init(mCastSession.getRemoteMediaClient());
+					slidingLayout.addPanelSlideListener(getOnPanelDisplayed((int) mCastSession.getRemoteMediaClient().getApproximateStreamPosition(), (int) mCastSession.getRemoteMediaClient().getStreamDuration()));
+				} else if(externalPlayIntent != null) {
+					// A default Chromecast has been set to handle external intents, and that Chromecast has now been
+					// connected to. Play the video (which is stored in externalPlayIntent).
+					handleExternalPlayOnChromecast(externalPlayIntent);
+					externalPlayIntent = null;
 				}
 			};
 			// Sometimes when we resume a chromecast session, even if media is actually playing, the player state is still idle here.
@@ -409,12 +401,7 @@ public abstract class BaseActivity extends AppCompatActivity implements MainActi
 	public void redrawPanel() {
 		final LinearLayout chromecastControllersContainer = (LinearLayout)findViewById(R.id.chromecastControllersContainer);
 		if(chromecastControllersContainer != null) {
-			chromecastControllersContainer.post(new Runnable() {
-				@Override
-				public void run() {
-					chromecastControllersContainer.requestLayout();
-				}
-			});
+			chromecastControllersContainer.post(() -> chromecastControllersContainer.requestLayout());
 		}
 	}
 
@@ -450,12 +437,9 @@ public abstract class BaseActivity extends AppCompatActivity implements MainActi
 	public void playVideoOnChromecast(final YouTubeVideo video, final int position) {
 		showLoadingSpinner();
 		if(video.getDescription() == null) {
-			new GetVideoDescriptionTask(video, new GetVideoDescriptionTask.GetVideoDescriptionTaskListener() {
-				@Override
-				public void onFinished(String description) {
-					video.setDescription(description);
-					playVideoOnChromecast(video, position);
-				}
+			new GetVideoDescriptionTask(video, description -> {
+				video.setDescription(description);
+				playVideoOnChromecast(video, position);
 			}).executeInParallel();
 		} else {
 			video.getDesiredStream(new GetDesiredStreamListener() {
@@ -499,10 +483,7 @@ public abstract class BaseActivity extends AppCompatActivity implements MainActi
 										.setMessage(errorMessage)
 										.setTitle(R.string.error_video_play)
 										.setCancelable(false)
-										.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-											@Override
-											public void onClick(DialogInterface dialog, int which) {
-											}
+										.setPositiveButton(R.string.ok, (dialog, which) -> {
 										})
 										.show();
 					}

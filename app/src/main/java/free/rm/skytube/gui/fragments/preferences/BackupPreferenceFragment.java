@@ -43,32 +43,23 @@ public class BackupPreferenceFragment extends PreferenceFragment {
 
 		// backup/export databases
 		Preference backupDbsPref = findPreference(getString(R.string.pref_key_backup_dbs));
-		backupDbsPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-			@Override
-			public boolean onPreferenceClick(Preference preference) {
-				subscriptionsBackupsManager.backupDatabases();
-				return true;
-			}
+		backupDbsPref.setOnPreferenceClickListener(preference -> {
+			subscriptionsBackupsManager.backupDatabases();
+			return true;
 		});
 
 		// import databases
 		Preference importBackupsPref = findPreference(getString(R.string.pref_key_import_dbs));
-		importBackupsPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-			@Override
-			public boolean onPreferenceClick(Preference preference) {
-				subscriptionsBackupsManager.displayFilePicker();
-				return true;
-			}
+		importBackupsPref.setOnPreferenceClickListener(preference -> {
+			subscriptionsBackupsManager.displayFilePicker();
+			return true;
 		});
 
 		// import from youtube
 		Preference importSubsPref = findPreference(getString(R.string.pref_key_import_subs));
-		importSubsPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-			@Override
-			public boolean onPreferenceClick(Preference preference) {
-				subscriptionsBackupsManager.displayImportSubscriptionsFromYouTubeDialog();
-				return true;
-			}
+		importSubsPref.setOnPreferenceClickListener(preference -> {
+			subscriptionsBackupsManager.displayImportSubscriptionsFromYouTubeDialog();
+			return true;
 		});
 	}
 

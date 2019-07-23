@@ -43,12 +43,7 @@ public class SkyTubeMaterialDialog extends MaterialDialog.Builder {
 		positiveText(R.string.ok);
 		negativeText(R.string.cancel);
 
-		onNegative(new MaterialDialog.SingleButtonCallback() {
-			@Override
-			public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-				dialog.dismiss();
-			}
-		});
+		onNegative((dialog, which) -> dialog.dismiss());
 	}
 
 }

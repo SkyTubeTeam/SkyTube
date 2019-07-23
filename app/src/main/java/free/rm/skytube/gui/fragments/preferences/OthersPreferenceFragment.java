@@ -124,12 +124,7 @@ public class OthersPreferenceFragment extends PreferenceFragment implements Shar
 	private void displayRestartDialog(int messageID) {
 		new AlertDialog.Builder(getActivity())
 				.setMessage(messageID)
-				.setPositiveButton(R.string.restart, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						SkyTubeApp.restartApp();
-					}
-				})
+				.setPositiveButton(R.string.restart, (dialog, which) -> SkyTubeApp.restartApp())
 				.setCancelable(false)
 				.show();
 	}
