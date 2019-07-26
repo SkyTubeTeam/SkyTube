@@ -51,6 +51,7 @@ import free.rm.skytube.BuildConfig;
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.FileDownloader;
 import free.rm.skytube.businessobjects.Logger;
+import free.rm.skytube.businessobjects.YouTube.Tasks.GetVideoDescriptionTask;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetVideoStreamTask;
 import free.rm.skytube.businessobjects.YouTube.VideoStream.StreamMetaData;
 import free.rm.skytube.businessobjects.db.BookmarksDb;
@@ -517,31 +518,36 @@ public class YouTubeVideo implements Serializable {
 		if (isDownloaded())
 			return;
 
-		getDesiredStream(new GetDesiredStreamListener() {
-			@Override
-			public void onGetDesiredStream(StreamMetaData desiredStream) {
-				// download the video
-				new VideoDownloader()
-						.setRemoteFileUrl(desiredStream.getUri().toString())
-						.setDirType(Environment.DIRECTORY_MOVIES)
-						.setTitle(getTitle())
-						.setDescription(getStr(R.string.video) + " ― " + getChannelName())
-						.setOutputFileName(getId() + " - " + getTitle())
-						.setOutputDirectoryName(getChannelName())
-						.setOutputFileExtension("mp4")
-						.setAllowedOverRoaming(false)
-						.setAllowedNetworkTypesFlags(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE)
-						.displayPermissionsActivity(context);
-			}
+		// if description is not yet downloaded, get it, and call the download action again.
+		if (description == null) {
+			new GetVideoDescriptionTask(this, description1 -> downloadVideo(context)).executeInParallel();
+		} else {
+			getDesiredStream(new GetDesiredStreamListener() {
+				@Override
+				public void onGetDesiredStream(StreamMetaData desiredStream) {
+					// download the video
+					new VideoDownloader()
+							.setRemoteFileUrl(desiredStream.getUri().toString())
+							.setDirType(Environment.DIRECTORY_MOVIES)
+							.setTitle(getTitle())
+							.setDescription(getStr(R.string.video) + " ― " + getChannelName())
+							.setOutputFileName(getId() + " - " + getTitle())
+							.setOutputDirectoryName(getChannelName())
+							.setOutputFileExtension("mp4")
+							.setAllowedOverRoaming(false)
+							.setAllowedNetworkTypesFlags(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE)
+							.displayPermissionsActivity(context);
+				}
 
-			@Override
-			public void onGetDesiredStreamError(String errorMessage) {
-				Logger.e(YouTubeVideo.this, "Stream error: %s", errorMessage);
-				Toast.makeText(getContext(),
-						String.format(getContext().getString(R.string.video_download_stream_error), getTitle()),
-						Toast.LENGTH_LONG).show();
-			}
-		});
+				@Override
+				public void onGetDesiredStreamError(String errorMessage) {
+					Logger.e(YouTubeVideo.this, "Stream error: %s", errorMessage);
+					Toast.makeText(getContext(),
+							String.format(getContext().getString(R.string.video_download_stream_error), getTitle()),
+							Toast.LENGTH_LONG).show();
+				}
+			});
+		}
 	}
 
 	/**

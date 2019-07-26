@@ -438,7 +438,6 @@ public abstract class BaseActivity extends AppCompatActivity implements MainActi
 		showLoadingSpinner();
 		if(video.getDescription() == null) {
 			new GetVideoDescriptionTask(video, description -> {
-				video.setDescription(description);
 				playVideoOnChromecast(video, position);
 			}).executeInParallel();
 		} else {
