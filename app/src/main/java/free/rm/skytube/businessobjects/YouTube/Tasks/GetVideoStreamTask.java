@@ -29,35 +29,35 @@ import free.rm.skytube.businessobjects.interfaces.GetDesiredStreamListener;
  */
 public class GetVideoStreamTask extends AsyncTaskParallel<Void, Exception, StreamMetaDataList> {
 
-	private YouTubeVideo                youTubeVideo;
-	private GetDesiredStreamListener    listener;
+    private YouTubeVideo youTubeVideo;
+    private GetDesiredStreamListener listener;
 
-	public GetVideoStreamTask(YouTubeVideo youTubeVideo, GetDesiredStreamListener listener) {
-		this.youTubeVideo = youTubeVideo;
-		this.listener = listener;
-	}
+    public GetVideoStreamTask(YouTubeVideo youTubeVideo, GetDesiredStreamListener listener) {
+        this.youTubeVideo = youTubeVideo;
+        this.listener = listener;
+    }
 
-	@Override
-	protected StreamMetaDataList doInBackground(Void... param) {
-		StreamMetaDataList streamMetaDataList;
+    @Override
+    protected StreamMetaDataList doInBackground(Void... param) {
+        StreamMetaDataList streamMetaDataList;
 
-		ParseStreamMetaData streamParser = new ParseStreamMetaData(youTubeVideo.getId());
-		streamMetaDataList = streamParser.getStreamMetaDataList();
+        ParseStreamMetaData streamParser = new ParseStreamMetaData(youTubeVideo.getId());
+        streamMetaDataList = streamParser.getStreamMetaDataList();
 
-		return streamMetaDataList;
-	}
+        return streamMetaDataList;
+    }
 
 
-	@Override
-	protected void onPostExecute(StreamMetaDataList streamMetaDataList) {
-		if (streamMetaDataList == null || streamMetaDataList.isEmpty()) {
-			listener.onGetDesiredStreamError(streamMetaDataList.getErrorMessage());
-		} else {
-			// get the desired stream based on user preferences
-			StreamMetaData desiredStream = streamMetaDataList.getDesiredStream();
+    @Override
+    protected void onPostExecute(StreamMetaDataList streamMetaDataList) {
+        if (streamMetaDataList == null || streamMetaDataList.isEmpty()) {
+            listener.onGetDesiredStreamError(streamMetaDataList.getErrorMessage());
+        } else {
+            // get the desired stream based on user preferences
+            StreamMetaData desiredStream = streamMetaDataList.getDesiredStream();
 
-			listener.onGetDesiredStream(desiredStream);
-		}
-	}
+            listener.onGetDesiredStream(desiredStream);
+        }
+    }
 
 }
