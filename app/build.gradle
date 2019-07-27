@@ -9,7 +9,7 @@ android {
         minSdkVersion 14
         targetSdkVersion 28
 
-        versionName "2.95"    // digits of the *fractional part* shall NOT be > than "9"
+        versionName "2.96"    // digits of the *fractional part* shall NOT be > than "9"
         versionCode buildNumber.toInteger()
 
         // Third party devs:  pls be ethical and change the below keys
