@@ -1,17 +1,16 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="feed">Feed</string>
-
-	<string name="subscribing_to_channels">Abonniere Kanäle.…</string>
-	<string name="fetching_subbed_channels_info">Rufe Kanalinformationen ab.…</string>
-	<string name="fetching_subbed_channels_info_error">Beim Abrufen von Kanalinformationen ist ein Fehler aufgetreten.</string>
-
-	<string name="fetching_subscription_videos">Rufe Videos von abonnierten Kanälen ab</string>
-	<string name="fetched_videos_from_channels">%1$d Videos von %2$d/%3$d Kanälen abgerufen.</string>
-	<string name="no_new_videos_found">Keine neuen Videos gefunden.</string>
-	<string name="no_subscriptions_text">Du hast keine Kanäle abonniert.\n\nSobald du welche abonniert hast, sind hier alle Videos der abonnierten Kanäle innerhalb des letzten Monats zu finden.</string>
-	<string name="import_subscriptions_from_youtube">Abos von YouTube importieren</string>
-
-	<string name="notification_channel_feed_title">Feed Benachrichtigungen</string>
-	<string name="notification_new_videos_found">%d neue Videos von abonnierten Kanälen</string>
+    <string name="feed">Feed</string>
+    <string name="subscribing_to_channels">Kanäle abonnieren …</string>
+    <string name="fetching_subbed_channels_info">Kanalinformationen abrufen …</string>
+    <string name="fetching_subbed_channels_info_error">Beim Abrufen von Kanalinformationen ist ein Fehler aufgetreten.</string>
+    <string name="fetching_subscription_videos">Videos von abonnierten Kanälen abrufen</string>
+    <string name="fetched_videos_from_channels">%1$d Videos von %2$d/%3$d Kanälen abgerufen.</string>
+    <string name="no_new_videos_found">Keine neuen Videos gefunden.</string>
+    <string name="no_subscriptions_text">Sie haben derzeit keine Kanäle abonniert.
+\n
+\nSobald Sie Abonnements hinzugefügt haben, werden hier alle Videos angezeigt, die innerhalb des letzten Monats auf Ihren abonnierten Kanälen hochgeladen wurden.</string>
+    <string name="import_subscriptions_from_youtube">Abonnements von YouTube importieren</string>
+    <string name="notification_channel_feed_title">Feed-Benachrichtigungen</string>
+    <string name="notification_new_videos_found">%d neue Videos auf abonnierten Kanälen</string>
 </resources>
