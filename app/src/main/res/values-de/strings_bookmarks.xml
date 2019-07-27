@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="bookmarks">Lesezeichen</string>
-
-	<string name="bookmark">Merken</string>
-	<string name="video_bookmarked">Video gemerkt</string>
-	<string name="video_bookmarked_error">Fehler beim Merken des Videos.</string>
-
-	<string name="unbookmark">Vergessen</string>
-	<string name="video_unbookmarked">Video vergessen</string>
-	<string name="video_unbookmarked_error">Fehler beim Vergessen des Videos.</string>
-
-	<string name="no_bookmarked_videos_text">Du hast dir bis jetzt keine Videos gemerkt.\n\nSobald du dir welche gemerkt hast, sind sie hier zu finden.</string>
+    <string name="bookmarks">Lesezeichen</string>
+    <string name="bookmark">Lesezeichen</string>
+    <string name="video_bookmarked">Video als Lesezeichen gespeichert</string>
+    <string name="video_bookmarked_error">Das Video konnte nicht als Lesezeichen gespeichert werden.</string>
+    <string name="unbookmark">Lesezeichen entfernen</string>
+    <string name="video_unbookmarked">Lesezeichen für Video entfernt</string>
+    <string name="video_unbookmarked_error">Lesezeichen für Video konnte nicht entfernt werden.</string>
+    <string name="no_bookmarked_videos_text">Sie haben noch keine Videos als Lesezeichen gespeichert.
+\n
+\nSobald das erledigt ist, werden sie hier angezeigt.</string>
 </resources>
