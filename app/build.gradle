@@ -81,7 +81,7 @@ dependencies {
     // YouTube modules
     implementation 'com.google.http-client:google-http-client-android:1.30.2'
     implementation 'com.google.apis:google-api-services-youtube:v3-rev20190513-1.30.1'
-    implementation 'com.github.TeamNewPipe.NewPipeExtractor:extractor:v0.16.2'
+    implementation 'com.github.TeamNewPipe.NewPipeExtractor:extractor:5f65788a2f89e'
 
     // other modules
     implementation group: 'org.ocpsoft.prettytime', name: 'prettytime', version: '4.0.2.Final'
