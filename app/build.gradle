@@ -22,6 +22,7 @@ android {
         buildConfigField 'String', 'SKYTUBE_WEBSITE',         '"https://skytube-app.com"'
         buildConfigField 'String', 'SKYTUBE_WEBSITE_CREDITS', '"https://skytube-app.com/credits.html"'
         buildConfigField 'String', 'SKYTUBE_UPDATES_URL', '"https://api.github.com/repos/ram-on/SkyTube/releases/latest"'
+        buildConfigField 'long', 'BUILD_TIME', String.valueOf(System.currentTimeMillis()) + 'L'
         vectorDrawables.useSupportLibrary true
         multiDexEnabled true    // as we have over 65536 lines of code...
     }
