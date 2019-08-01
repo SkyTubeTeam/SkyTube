@@ -1,3 +1,7 @@
+v2.961 - 01 Aug 2019:
+	* Fix problem with Youtube API keys
+	* Use newer NewPipeExtractor to fix video downloading issue
+
 v2.96 - 01 Aug 2019:
 	* Chromecast support in SkyTube Extra
 	* Better off-line experience with the downloaded videos, and better handling of off-line startup, where lot's of information
