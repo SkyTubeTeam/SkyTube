@@ -16,9 +16,8 @@ android {
         buildConfigField 'String',   'YOUTUBE_API_KEYS_DEBUG', '"AIzaSyDU-ZZCyOB_kYkiMSZ6ooSipUZRukHU4ik"'
         buildConfigField 'String[]', 'YOUTUBE_API_KEYS',
                 '{' +
-                        '"AIzaSyC27jgPDHkQsQK8TW4ngrQprSCnlMTJ04w",' +
-                        '"AIzaSyCmXsaE6ZW14-1vM5zceWnGWnB73FkY7U4",' +
-                        '"AIzaSyBd3Loyy_XN2tPHPfc1E7EkSkdCqfzTHxg"'  +
+                        '"AIzaSyDc3jDqguaCZSKpAwpvgkr0OwUZPFRvcX8",' +
+                        '"AIzaSyAlDQa9lCW_YZ10_nml6mNygjEy37b0pmo"' +
                 '}'
         buildConfigField 'String', 'SKYTUBE_WEBSITE',         '"https://skytube-app.com"'
         buildConfigField 'String', 'SKYTUBE_WEBSITE_CREDITS', '"https://skytube-app.com/credits.html"'
