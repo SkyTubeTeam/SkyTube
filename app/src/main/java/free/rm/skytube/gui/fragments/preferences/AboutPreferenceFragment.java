@@ -104,9 +104,9 @@ public class AboutPreferenceFragment extends PreferenceFragment {
 		}
 
 		if (BuildConfig.DEBUG) {
-			ver.append(" (Debug ");
-			ver.append(getAppBuildTimeStamp());
-			ver.append(')');
+			ver.append(" (Debug ").append(getAppBuildTimeStamp()).append(')');
+		} else {
+			ver.append(" (").append(getAppBuildTimeStamp()).append(')');
 		}
 
 		return ver.toString();
@@ -121,12 +121,8 @@ public class AboutPreferenceFragment extends PreferenceFragment {
 		String timeStamp = "???";
 
 		try {
-			ApplicationInfo appInfo = SkyTubeApp.getContext().getPackageManager().getApplicationInfo(SkyTubeApp.getContext().getPackageName(), 0);
-			String appFile = appInfo.sourceDir;
-			long time = new File(appFile).lastModified();
-
-			SimpleDateFormat formatter = new SimpleDateFormat("yyMMddHHmm", Locale.US);
-			timeStamp = formatter.format(time);
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.US);
+			timeStamp = formatter.format(BuildConfig.BUILD_TIME);
 		} catch (Throwable tr) {
 			Log.d(TAG, "An error occurred while getting app's build timestamp", tr);
 		}
