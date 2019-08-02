@@ -6,4 +6,6 @@
 		<item>@id/cast_button_type_play_pause_toggle</item>
 		<item>@id/cast_button_type_forward_30_seconds</item>
 	</array>
+	<string name="gps_missing_title">Google Play Services not found</string>
+	<string name="gps_missing_description">Chromecast support requires Google Play Services to be installed. Visit <a href="https://opengapps.org/">https://opengapps.org/</a> to install Google Play Services.</string>
 </resources>
