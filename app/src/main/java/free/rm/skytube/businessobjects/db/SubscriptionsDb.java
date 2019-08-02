@@ -23,19 +23,17 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormatter;
-import org.joda.time.format.ISODateTimeFormat;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import free.rm.skytube.app.SkyTubeApp;
@@ -49,7 +47,12 @@ import free.rm.skytube.gui.fragments.SubscriptionsFeedFragment;
  * A database (DB) that stores user subscriptions (with respect to YouTube channels).
  */
 public class SubscriptionsDb extends SQLiteOpenHelperEx {
-	private static volatile SubscriptionsDb subscriptionsDb = null;
+    private static final String CHANNEL_HAS_NEW_VIDEO_QUERY = String.format("SELECT COUNT(*) FROM %s WHERE %s = ? AND %s > ?", SubscriptionsVideosTable.TABLE_NAME, SubscriptionsVideosTable.COL_CHANNEL_ID, SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_DATE);
+    private static final String VIDEO_DATE_IS_OLDER_THAN_1_MONTH = String.format("%s < DATETIME('now', '-1 month')", SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_DATE);
+    private static final String SUBSCRIBED_NUMBER_OF_CHANNELS_QUERY = String.format("SELECT COUNT(*) FROM %s", SubscriptionsTable.TABLE_NAME);
+    private static final String HAS_VIDEO_QUERY = String.format("SELECT COUNT(*) FROM %s WHERE %s = ?", SubscriptionsVideosTable.TABLE_NAME, SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID);
+
+    private static volatile SubscriptionsDb subscriptionsDb = null;
 
 	private static final int DATABASE_VERSION = 3;
 	private static final String DATABASE_NAME = "subs.db";
@@ -278,8 +281,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 	 * @return The total number of subscribed channels.
 	 */
 	public int getTotalSubscribedChannels() {
-		String	query  = String.format("SELECT COUNT(*) FROM %s", SubscriptionsTable.TABLE_NAME);
-		Cursor	cursor = SubscriptionsDb.getSubscriptionsDb().getReadableDatabase().rawQuery(query, null);
+		Cursor	cursor = SubscriptionsDb.getSubscriptionsDb().getReadableDatabase().rawQuery(SUBSCRIBED_NUMBER_OF_CHANNELS_QUERY, null);
 		int		totalSubbedChannels = 0;
 
 		if (cursor.moveToFirst())
@@ -385,10 +387,9 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 
 
 	private boolean hasVideo(YouTubeVideo video) {
-		String query = String.format("SELECT COUNT(*) FROM %s WHERE %s = ?", SubscriptionsVideosTable.TABLE_NAME, SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID);
 		Cursor cursor = null;
 		try {
-			cursor = SubscriptionsDb.getSubscriptionsDb().getReadableDatabase().rawQuery(query, new String[]{video.getId()});
+			cursor = SubscriptionsDb.getSubscriptionsDb().getReadableDatabase().rawQuery(HAS_VIDEO_QUERY, new String[]{video.getId()});
 			if (cursor.moveToFirst()) {
 				return cursor.getInt(0) > 0;
 			}
@@ -411,15 +412,17 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 	 * meantime; false otherwise.
 	 */
 	public boolean channelHasNewVideos(YouTubeChannel channel) {
-		DateTimeFormatter fmt = ISODateTimeFormat.dateTime();
-		String query = String.format("SELECT COUNT(*) FROM %s WHERE %s = ? AND %s > ?", SubscriptionsVideosTable.TABLE_NAME, SubscriptionsVideosTable.COL_CHANNEL_ID, SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_DATE);
+		//Unfortunately, this doesn't work, due to XXX is not supported on this API level
+		// String formatted = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX", Locale.US).format(channel.getLastVisitTime());
+		String formatted = new DateTime(channel.getLastVisitTime()).toString();
 		Cursor cursor = SubscriptionsDb.getSubscriptionsDb().getReadableDatabase().rawQuery(
-							query,
-							new String[]{channel.getId(), new DateTime(channel.getLastVisitTime()).toString()});
+                            CHANNEL_HAS_NEW_VIDEO_QUERY,
+							new String[]{channel.getId(), formatted});
 		boolean channelHasNewVideos = false;
 
-		if (cursor.moveToFirst())
+		if (cursor.moveToFirst()) {
 			channelHasNewVideos = cursor.getInt(0) > 0;
+		}
 
 		cursor.close();
 		return channelHasNewVideos;
@@ -431,7 +434,6 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 	 */
 	public void saveChannelVideos(YouTubeChannel channel) {
 		Gson gson = new Gson();
-		DateTimeFormatter fmt = ISODateTimeFormat.dateTime();
 		for (YouTubeVideo video : channel.getYouTubeVideos()) {
 			if(!hasVideo(video)) {
 				ContentValues values = new ContentValues();
@@ -450,7 +452,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 	 * @return
 	 */
 	public boolean trimSubscriptionVideos() {
-		int result = getWritableDatabase().delete(SubscriptionsVideosTable.TABLE_NAME, String.format("%s < DATETIME('now', '-1 month')", SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_DATE), null);
+		int result = getWritableDatabase().delete(SubscriptionsVideosTable.TABLE_NAME, VIDEO_DATE_IS_OLDER_THAN_1_MONTH, null);
 		return result > 0;
 	}
 

@@ -82,7 +82,8 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 	public static final String FLAG_REFRESH_FEED_FROM_CACHE = "SubscriptionsFeedFragment.FLAG_REFRESH_FEED_FROM_CACHE";
 	public static final String FLAG_REFRESH_FEED_FULL = "SubscriptionsFeedFragment.FLAG_REFRESH_FEED_FULL";
 	/** Refresh the feed (by querying the YT servers) after 3 hours since the last check. */
-	private static final int    REFRESH_TIME = 3;
+	private static final int    REFRESH_TIME_HOURS = 3;
+	private static final long   REFRESH_TIME_IN_MS = REFRESH_TIME_HOURS * (1000L*3600L);
 
 
 	@Override
@@ -96,10 +97,9 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 		super.onCreate(savedInstanceState);
 
 		// Only do an automatic refresh of subscriptions if it's been more than three hours since the last one was done.
-		long l = SkyTubeApp.getPreferenceManager().getLong(SkyTubeApp.KEY_SUBSCRIPTIONS_LAST_UPDATED, -1);
-		DateTime subscriptionsLastUpdated = new DateTime(l);
-		DateTime threeHoursAgo = new DateTime().minusHours(REFRESH_TIME);
-		if(subscriptionsLastUpdated.isBefore(threeHoursAgo)) {
+		long subscriptionsLastUpdated = SkyTubeApp.getPreferenceManager().getLong(SkyTubeApp.KEY_SUBSCRIPTIONS_LAST_UPDATED, -1);
+		long threeHoursAgo = System.currentTimeMillis() - REFRESH_TIME_IN_MS;
+		if(subscriptionsLastUpdated <= threeHoursAgo) {
 			shouldRefresh = true;
 		}
 
