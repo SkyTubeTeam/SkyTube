@@ -36,6 +36,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.mediarouter.media.MediaRouteSelector;
 import androidx.mediarouter.media.MediaRouter;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.google.android.gms.cast.CastMediaControlIntent;
 import com.google.android.gms.cast.MediaInfo;
 import com.google.android.gms.cast.MediaLoadOptions;
@@ -48,6 +49,8 @@ import com.google.android.gms.cast.framework.Session;
 import com.google.android.gms.cast.framework.SessionManager;
 import com.google.android.gms.cast.framework.SessionManagerListener;
 import com.google.android.gms.cast.framework.media.RemoteMediaClient;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.images.WebImage;
 import com.google.gson.Gson;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
@@ -83,8 +86,6 @@ public abstract class BaseActivity extends AppCompatActivity implements MainActi
 
 	private boolean panelShouldExpand = false;
 
-	private MenuItem mediaRouteMenuItem;
-	private CastContext mCastContext;
 	private CastSession mCastSession;
 	private SessionManager mSessionManager;
 	private final SessionManagerListener mSessionManagerListener =
@@ -93,7 +94,6 @@ public abstract class BaseActivity extends AppCompatActivity implements MainActi
 	private ChromecastControllerFragment chromecastControllerFragment;
 
 	private MediaRouter mediaRouter;
-	private MediaRouteSelector mediaRouteSelector;
 	private Intent externalPlayIntent;
 	private Intent notificationClickIntent;
 
@@ -104,50 +104,82 @@ public abstract class BaseActivity extends AppCompatActivity implements MainActi
 	@BindView(R.id.chromecastLoadingSpinner)
 	ProgressBar chromecastLoadingSpinner;
 
+	private String PREF_GPS_POPUP_VIEWED = "BaseActivity.pref_gps_poup_viewed";
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		if(savedInstanceState != null) {
-			chromecastMiniControllerFragment = (ChromecastMiniControllerFragment)getSupportFragmentManager().getFragment(savedInstanceState, ChromecastMiniControllerFragment.CHROMECAST_MINI_CONTROLLER_FRAGMENT);
-			chromecastControllerFragment = (ChromecastControllerFragment)getSupportFragmentManager().getFragment(savedInstanceState, ChromecastControllerFragment.CHROMECAST_CONTROLLER_FRAGMENT);
-			if(savedInstanceState.getBoolean(PANEL_EXPANDED, false)) {
-				panelShouldExpand = true;
-			}
-		}
+        /**
+         * Google Play Services is required to set up Chromecast support. If it's not available, display a popup that alerts the user,
+         * then set a flag to never show the popup again. If the user later installs GPS, Chromecast support will work after that.
+         */
+		GoogleApiAvailability googleAvail = GoogleApiAvailability.getInstance();
+		boolean googlePlayServicesAvailable = googleAvail.isGooglePlayServicesAvailable(this) == ConnectionResult.SUCCESS;
 
-		mCastContext = CastContext.getSharedInstance(this);
-		mSessionManager = mCastContext.getSessionManager();
-
-		mediaRouter = MediaRouter.getInstance(getApplicationContext());
-		mediaRouteSelector = new MediaRouteSelector.Builder()
-						.addControlCategory(CastMediaControlIntent.categoryForCast(BuildConfig.CHROMECAST_APP_ID)).build();
-		mediaRouter.addCallback(mediaRouteSelector, new MediaRouter.Callback() {
-			private void onRouteAddedOrChanged(MediaRouter.RouteInfo route) {
-				SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(BaseActivity.this);
-				String defaultChromecastId = sharedPref.getString(getString(R.string.pref_key_autocast), getString(R.string.pref_title_chromecast_none));
-				if(route.getId().equals(defaultChromecastId)) {
-					if(externalPlayIntent != null) {
-						mediaRouter.selectRoute(route);
-					}
+		if(googlePlayServicesAvailable) {
+			if (savedInstanceState != null) {
+				chromecastMiniControllerFragment = (ChromecastMiniControllerFragment) getSupportFragmentManager().getFragment(savedInstanceState, ChromecastMiniControllerFragment.CHROMECAST_MINI_CONTROLLER_FRAGMENT);
+				chromecastControllerFragment = (ChromecastControllerFragment) getSupportFragmentManager().getFragment(savedInstanceState, ChromecastControllerFragment.CHROMECAST_CONTROLLER_FRAGMENT);
+				if (savedInstanceState.getBoolean(PANEL_EXPANDED, false)) {
+					panelShouldExpand = true;
 				}
 			}
 
-			@Override
-			public void onRouteAdded(MediaRouter router, MediaRouter.RouteInfo route) {
-				onRouteAddedOrChanged(route);
-			}
+			CastContext mCastContext = CastContext.getSharedInstance(BaseActivity.this);
+			mSessionManager = mCastContext.getSessionManager();
 
-			@Override
-			public void onRouteChanged(MediaRouter router, MediaRouter.RouteInfo route) {
-				onRouteAddedOrChanged(route);
-			}
+			mediaRouter = MediaRouter.getInstance(getApplicationContext());
+			MediaRouteSelector mediaRouteSelector = new MediaRouteSelector.Builder()
+					.addControlCategory(CastMediaControlIntent.categoryForCast(BuildConfig.CHROMECAST_APP_ID)).build();
+			mediaRouter.addCallback(mediaRouteSelector, new MediaRouter.Callback() {
+				private void onRouteAddedOrChanged(MediaRouter.RouteInfo route) {
+					SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(BaseActivity.this);
+					String defaultChromecastId = sharedPref.getString(getString(R.string.pref_key_autocast), getString(R.string.pref_title_chromecast_none));
+					if (route.getId().equals(defaultChromecastId)) {
+						if (externalPlayIntent != null) {
+							mediaRouter.selectRoute(route);
+						}
+					}
+				}
 
-			@Override
-			public void onRouteRemoved(MediaRouter router, MediaRouter.RouteInfo route) {
+				@Override
+				public void onRouteAdded(MediaRouter router, MediaRouter.RouteInfo route) {
+					onRouteAddedOrChanged(route);
+				}
+
+				@Override
+				public void onRouteChanged(MediaRouter router, MediaRouter.RouteInfo route) {
+					onRouteAddedOrChanged(route);
+				}
+
+				@Override
+				public void onRouteRemoved(MediaRouter router, MediaRouter.RouteInfo route) {
+				}
+			});
+			handleExternalPlayOnChromecast(getIntent());
+		} else {
+			final SharedPreferences preferences = SkyTubeApp.getPreferenceManager();
+			if(!preferences.getBoolean(PREF_GPS_POPUP_VIEWED, false)) {
+				MaterialDialog gpsMissingDialog = new MaterialDialog.Builder(this)
+						.title(R.string.gps_missing_title)
+						.content(R.string.gps_missing_description)
+						.backgroundColorRes(R.color.colorPrimary)
+						.titleColorRes(R.color.dialog_title)
+						.backgroundColorRes(R.color.dialog_backgound)
+						.contentColorRes(R.color.dialog_content_text)
+						.positiveColorRes(R.color.dialog_positive_text)
+						.positiveText(R.string.ok)
+						.onPositive((dialog, which) -> {
+							SharedPreferences.Editor editor = preferences.edit();
+							editor.putBoolean(PREF_GPS_POPUP_VIEWED, true);
+							editor.apply();
+							dialog.dismiss();
+						})
+						.build();
+				gpsMissingDialog.show();
 			}
-		});
-		handleExternalPlayOnChromecast(getIntent());
+		}
 	}
 
 	@Override
@@ -223,23 +255,30 @@ public abstract class BaseActivity extends AppCompatActivity implements MainActi
 	 * This will be called when the options menu has been created. It's needed to set up the cast icon
 	 */
 	protected void onOptionsMenuCreated(Menu menu) {
-		mediaRouteMenuItem = CastButtonFactory.setUpMediaRouteButton(getApplicationContext(), menu, R.id.media_route_menu_item);
+		MenuItem mediaRouteMenuItem = CastButtonFactory.setUpMediaRouteButton(getApplicationContext(), menu, R.id.media_route_menu_item);
 	}
 
 	@Override
 	protected void onResume() {
-		if(mCastSession == null)
-			mCastSession = mSessionManager.getCurrentCastSession();
-		mSessionManager.addSessionManagerListener(mSessionManagerListener);
-		if(mCastSession != null && mCastSession.getRemoteMediaClient() != null) {
-			if(mCastSession.getRemoteMediaClient().getPlayerState() != MediaStatus.PLAYER_STATE_IDLE) {
-				chromecastMiniControllerFragment.init(mCastSession.getRemoteMediaClient());
-				chromecastControllerFragment.init(mCastSession.getRemoteMediaClient());
-				showPanel();
-			} else
-				hidePanel();
+        /**
+         * When resuming, make sure Google Play Services is installed before trying to resume everything for Chromecast support.
+         */
+		GoogleApiAvailability googleAvail = GoogleApiAvailability.getInstance();
+		boolean googlePlayServicesAvailable = googleAvail.isGooglePlayServicesAvailable(this) == ConnectionResult.SUCCESS;
+		if(googlePlayServicesAvailable) {
+			if (mCastSession == null)
+				mCastSession = mSessionManager.getCurrentCastSession();
+			mSessionManager.addSessionManagerListener(mSessionManagerListener);
+			if (mCastSession != null && mCastSession.getRemoteMediaClient() != null) {
+				if (mCastSession.getRemoteMediaClient().getPlayerState() != MediaStatus.PLAYER_STATE_IDLE) {
+					chromecastMiniControllerFragment.init(mCastSession.getRemoteMediaClient());
+					chromecastControllerFragment.init(mCastSession.getRemoteMediaClient());
+					showPanel();
+				} else
+					hidePanel();
+			}
+			handleNotificationClick(getIntent());
 		}
-		handleNotificationClick(getIntent());
 		super.onResume();
 	}
 
