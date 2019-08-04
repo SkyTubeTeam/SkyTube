@@ -1,16 +1,16 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="downloads">Downloads</string>
-	<string name="download_video">Download Video</string>
-	<string name="starting_video_download">\'%s\' wird heruntergeladen…</string>
-	<string name="video_download_stream_error">Konnte \'%s\' nicht herunterladen.</string>
-	<string name="delete_download">Delete Download</string>
-	<string name="video_downloaded">\'%s\' heruntergeladen.</string>
-	<string name="no_downloaded_videos_text">Sie haben noch keine Videos heruntergeladen.
+    <string name="downloads">Downloads</string>
+    <string name="download_video">Video herunterladen</string>
+    <string name="starting_video_download">„%s” wird heruntergeladen …</string>
+    <string name="video_download_stream_error">„%s” konnte nicht heruntergeladen werden.</string>
+    <string name="delete_download">Download löschen</string>
+    <string name="video_downloaded">„%s” heruntergeladen.</string>
+    <string name="no_downloaded_videos_text">Sie haben noch keine Videos heruntergeladen.
 \n
-\nSobald Sie das getan haben, werden sie hier auftauchen.</string>
-	<string name="playing_video_file_missing">Der Download für dieses Video wurde nicht gefunden. Spiele ferngesteuert.</string>
-	<string name="external_storage_not_available">Die Datei kann nicht heruntergeladen werden, da der externe Speicher nicht verfügbar ist.</string>
-<string name="download">Herunterladen</string>
-	<string name="warning_mobile_network_download">Ihr Gerät ist nicht mit einem WLAN-Netzwerk verbunden. Um mögliche zusätzliche Änderungen der Datennutzung zu vermeiden, wird empfohlen, sich mit einem WLAN-Netzwerk zu verbinden. Video trotzdem herunterladen\?</string>
-	</resources>
+\nSobald Sie es getan haben, werden sie hier angezeigt.</string>
+    <string name="playing_video_file_missing">Die heruntergeladene Video wurde nicht gefunden. Wiedergabe erfolgt über Remot-Vverbingung.</string>
+    <string name="external_storage_not_available">Die Datei kann nicht heruntergeladen werden, da der externe Speicher nicht verfügbar ist.</string>
+    <string name="download">Herunterladen</string>
+    <string name="warning_mobile_network_download">Ihr Gerät ist nicht mit einem WLAN-Netzwerk verbunden. Um mögliche zusätzliche Änderungen der Datennutzung zu vermeiden, wird empfohlen, sich mit einem WLAN-Netzwerk zu verbinden. Video trotzdem herunterladen\?</string>
+</resources>
