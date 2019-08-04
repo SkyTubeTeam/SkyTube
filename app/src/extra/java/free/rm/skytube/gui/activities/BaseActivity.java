@@ -115,8 +115,7 @@ public abstract class BaseActivity extends AppCompatActivity implements MainActi
          * Google Play Services is required to set up Chromecast support. If it's not available, display a popup that alerts the user,
          * then set a flag to never show the popup again. If the user later installs GPS, Chromecast support will work after that.
          */
-		GoogleApiAvailability googleAvail = GoogleApiAvailability.getInstance();
-		boolean googlePlayServicesAvailable = googleAvail.isGooglePlayServicesAvailable(this) == ConnectionResult.SUCCESS;
+		boolean googlePlayServicesAvailable = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this) == ConnectionResult.SUCCESS;
 
 		if(googlePlayServicesAvailable) {
 			if (savedInstanceState != null) {
@@ -166,15 +165,14 @@ public abstract class BaseActivity extends AppCompatActivity implements MainActi
 						.title(R.string.gps_missing_title)
 						.content(R.string.gps_missing_description)
 						.backgroundColorRes(R.color.colorPrimary)
-						.titleColorRes(R.color.dialog_title)
-						.backgroundColorRes(R.color.dialog_backgound)
-						.contentColorRes(R.color.dialog_content_text)
-						.positiveColorRes(R.color.dialog_positive_text)
+						.titleColorRes(R.color.textColorPrimary)
+						.contentColorRes(R.color.textColorPrimary)
+						.positiveColorRes(R.color.textColorPrimary)
 						.positiveText(R.string.ok)
 						.onPositive((dialog, which) -> {
 							SharedPreferences.Editor editor = preferences.edit();
-							editor.putBoolean(PREF_GPS_POPUP_VIEWED, true);
-							editor.apply();
+//							editor.putBoolean(PREF_GPS_POPUP_VIEWED, true);
+//							editor.apply();
 							dialog.dismiss();
 						})
 						.build();
@@ -264,8 +262,7 @@ public abstract class BaseActivity extends AppCompatActivity implements MainActi
         /**
          * When resuming, make sure Google Play Services is installed before trying to resume everything for Chromecast support.
          */
-		GoogleApiAvailability googleAvail = GoogleApiAvailability.getInstance();
-		boolean googlePlayServicesAvailable = googleAvail.isGooglePlayServicesAvailable(this) == ConnectionResult.SUCCESS;
+		boolean googlePlayServicesAvailable = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this) == ConnectionResult.SUCCESS;
 		if(googlePlayServicesAvailable) {
 			if (mCastSession == null)
 				mCastSession = mSessionManager.getCurrentCastSession();
@@ -286,8 +283,11 @@ public abstract class BaseActivity extends AppCompatActivity implements MainActi
 	@Override
 	protected void onPause() {
 		super.onPause();
-		mSessionManager.removeSessionManagerListener(mSessionManagerListener);
-		mCastSession = null;
+		boolean googlePlayServicesAvailable = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this) == ConnectionResult.SUCCESS;
+		if(googlePlayServicesAvailable) {
+			mSessionManager.removeSessionManagerListener(mSessionManagerListener);
+			mCastSession = null;
+		}
 	}
 
 	/**
