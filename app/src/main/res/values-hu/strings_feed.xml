@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="feed">Feed</string>
+    <string name="feed">Videófolyam</string>
     <string name="subscribing_to_channels">Csatornára feliratkozás…</string>
     <string name="fetching_subbed_channels_info">Csatorna információk letöltése…</string>
     <string name="fetching_subbed_channels_info_error">Hiba történt a csatorna információk letöltése közben.</string>
@@ -9,6 +9,6 @@
     <string name="no_new_videos_found">Nem találtam új videót.</string>
     <string name="no_subscriptions_text">You aren\'t subscribed to any Channels.\n\nOnce you are, all videos uploaded to your subscribed Channels within the last month will appear here.</string>
     <string name="import_subscriptions_from_youtube">Feliratkozások betöltése YouTube-ról</string>
-    <string name="notification_channel_feed_title">Feed Notifications</string>
+    <string name="notification_channel_feed_title">Értesítések a Videókról</string>
     <string name="notification_new_videos_found">%d új videó a feliratkozott csatornákról</string>
 </resources>
