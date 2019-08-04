@@ -63,9 +63,9 @@ public class GetSubscriptionVideosTask extends AsyncTaskParallel<Void, Void, Voi
 	 * @return The last time we updated the subscriptions videos feed.  Will return null if the
 	 * last refresh time is set to -1.
 	 */
-	private DateTime getFeedsLastUpdateTime() {
+	private Long getFeedsLastUpdateTime() {
 		long l = SkyTubeApp.getPreferenceManager().getLong(SkyTubeApp.KEY_SUBSCRIPTIONS_LAST_UPDATED, -1);
-		return (l != -1)  ?  new DateTime(l)  :  null;
+		return (l != -1)  ?  l  :  null;
 	}
 
 
@@ -73,19 +73,19 @@ public class GetSubscriptionVideosTask extends AsyncTaskParallel<Void, Void, Voi
 	 * Update the feeds' last update time to the current time.
 	 */
 	private void updateFeedsLastUpdateTime() {
-		updateFeedsLastUpdateTime(new DateTime(new Date()));
+		updateFeedsLastUpdateTime(System.currentTimeMillis());
 	}
 
 
 	/**
 	 * Update the feed's last update time to dateTime.
 	 *
-	 * @param dateTime  The feed's last update time.  If it is set to null, then -1 will be stored
+	 * @param dateTimeInMs  The feed's last update time.  If it is set to null, then -1 will be stored
 	 *                  to indicate that the app needs to force refresh the feeds...
 	 */
-	public static void updateFeedsLastUpdateTime(DateTime dateTime) {
+	public static void updateFeedsLastUpdateTime(Long dateTimeInMs) {
 		SharedPreferences.Editor editor = SkyTubeApp.getPreferenceManager().edit();
-		editor.putLong(SkyTubeApp.KEY_SUBSCRIPTIONS_LAST_UPDATED, dateTime != null  ?  dateTime.getValue()  :  -1);
+		editor.putLong(SkyTubeApp.KEY_SUBSCRIPTIONS_LAST_UPDATED, dateTimeInMs != null  ?  dateTimeInMs  :  -1);
 		editor.commit();
 	}
 
@@ -104,7 +104,7 @@ public class GetSubscriptionVideosTask extends AsyncTaskParallel<Void, Void, Voi
 		// If forceRefresh is set to true, then set publishedAfter to null... this will force
 		// the app to update the feeds.  Otherwise, set the publishedAfter date to the last
 		// time we updated the feeds.
-		DateTime publishedAfter = forceRefresh ? null : getFeedsLastUpdateTime();
+		Long publishedAfter = forceRefresh ? null : getFeedsLastUpdateTime();
 
 		for(final YouTubeChannel channel : channels) {
 			tasks.add(new GetChannelVideosTask(channel)

@@ -50,9 +50,10 @@ public class GetChannelVideosFull extends GetYouTubeVideoBySearch implements Get
 
 
 	@Override
-	public void setPublishedAfter(DateTime dateTime) {
-		if (videosList != null)
-			videosList.setPublishedAfter(dateTime);
+	public void setPublishedAfter(long timeInMs) {
+		if (videosList != null) {
+			videosList.setPublishedAfter(new DateTime(timeInMs));
+		}
 	}
 
 }
