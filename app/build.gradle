@@ -45,6 +45,16 @@ android {
             applicationId "free.rm.skytube.oss"
             resValue "string", "app_name", "SkyTube"
             dimension "skytube"
+            buildConfigField 'String[]', 'YOUTUBE_API_KEYS',
+                    '{' + // new keys
+                        '"AIzaSyDc3jDqguaCZSKpAwpvgkr0OwUZPFRvcX8",' +
+                        '"AIzaSyAlDQa9lCW_YZ10_nml6mNygjEy37b0pmo",' +
+                        '"AIzaSyCJjgfBdvHGoZCILxcTE1HeBd-_megm05o",' +
+                        // old keys, but this can be used with FDroid
+                        '"AIzaSyC27jgPDHkQsQK8TW4ngrQprSCnlMTJ04w",' +
+                        '"AIzaSyCmXsaE6ZW14-1vM5zceWnGWnB73FkY7U4",' +
+                        '"AIzaSyBd3Loyy_XN2tPHPfc1E7EkSkdCqfzTHxg"'  +
+                    '}'
         }
         // 99% Open-source edition:  uses the YouTube Player Jar [i.e. proprietary module - optional usage]
         extra {
