@@ -19,10 +19,7 @@ package free.rm.skytube.businessobjects.YouTube.Tasks;
 
 import android.content.SharedPreferences;
 
-import com.google.api.client.util.DateTime;
-
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import free.rm.skytube.app.SkyTubeApp;
@@ -42,22 +39,10 @@ public class GetSubscriptionVideosTask extends AsyncTaskParallel<Void, Void, Voi
 	private int numTasksLeft = 0;
 	private int numTasksFinished = 0;
 	boolean forceRefresh = false;
-	private List<YouTubeChannel> overriddenChannels;
 
 	public GetSubscriptionVideosTask(GetSubscriptionVideosTaskListener listener) {
 		this.listener = listener;
 	}
-
-	public GetSubscriptionVideosTask setForceRefresh(boolean forceRefresh) {
-		this.forceRefresh = forceRefresh;
-		return this;
-	}
-
-	public GetSubscriptionVideosTask setChannelsToRefresh(List<YouTubeChannel> channels) {
-		overriddenChannels = channels;
-		return this;
-	}
-
 
 	/**
 	 * @return The last time we updated the subscriptions videos feed.  Will return null if the
@@ -92,7 +77,7 @@ public class GetSubscriptionVideosTask extends AsyncTaskParallel<Void, Void, Voi
 
 	@Override
 	protected Void doInBackground(Void... voids) {
-		List<YouTubeChannel> channels = overriddenChannels != null ? overriddenChannels : SubsAdapter.get(null).getSubsLists();
+		List<YouTubeChannel> channels = SubsAdapter.get(null).getSubsLists();
 
 		/*
 		 * Get the last time all subscriptions were updated, and only fetch videos that were published after this.
