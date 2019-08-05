@@ -31,6 +31,8 @@ import android.widget.Toast;
 import com.google.api.client.util.DateTime;
 import com.google.api.services.youtube.model.Thumbnail;
 import com.google.api.services.youtube.model.Video;
+import com.google.api.services.youtube.model.VideoSnippet;
+import com.google.api.services.youtube.model.VideoStatistics;
 
 import org.joda.time.Period;
 import org.joda.time.format.ISOPeriodFormat;
@@ -151,26 +153,29 @@ public class YouTubeVideo implements Serializable {
 	public YouTubeVideo(Video video) {
 		this.id = video.getId();
 
-		if (video.getSnippet() != null) {
-			this.title = video.getSnippet().getTitle();
+		VideoSnippet snippet = video.getSnippet();
+		if (snippet != null) {
+			this.title = snippet.getTitle();
 
-			this.channel = new YouTubeChannel(video.getSnippet().getChannelId(), video.getSnippet().getChannelTitle());
-			setPublishDate(video.getSnippet().getPublishedAt());
+			this.channel = new YouTubeChannel(snippet.getChannelId(), snippet.getChannelTitle());
+			setPublishDate(snippet.getPublishedAt());
 
-			if (video.getSnippet().getThumbnails() != null) {
-				Thumbnail thumbnail = video.getSnippet().getThumbnails().getHigh();
-				if (thumbnail != null)
+			if (snippet.getThumbnails() != null) {
+				Thumbnail thumbnail = snippet.getThumbnails().getHigh();
+				if (thumbnail != null) {
 					this.thumbnailUrl = thumbnail.getUrl();
+				}
 
-				thumbnail = video.getSnippet().getThumbnails().getMaxres();
-				if (thumbnail != null)
+				thumbnail = snippet.getThumbnails().getMaxres();
+				if (thumbnail != null) {
 					this.thumbnailMaxResUrl = thumbnail.getUrl();
+				}
 			}
 
-			this.language = video.getSnippet().getDefaultAudioLanguage() != null ? video.getSnippet().getDefaultAudioLanguage()
-					: (video.getSnippet().getDefaultLanguage());
+			this.language = snippet.getDefaultAudioLanguage() != null ? snippet.getDefaultAudioLanguage()
+					: (snippet.getDefaultLanguage());
 
-			this.description = video.getSnippet().getDescription();
+			this.description = snippet.getDescription();
 		}
 
 		if (video.getContentDetails() != null) {
@@ -179,21 +184,27 @@ public class YouTubeVideo implements Serializable {
 			setDurationInSeconds(video.getContentDetails().getDuration());
 		}
 
-		if (video.getStatistics() != null) {
-			BigInteger  likeCount = video.getStatistics().getLikeCount(),
-						dislikeCount = video.getStatistics().getDislikeCount();
+		VideoStatistics statistics = video.getStatistics();
+		if (statistics != null) {
+			setLikeDislikeCount(statistics.getLikeCount(), statistics.getDislikeCount());
 
-			setThumbsUpPercentage(likeCount, dislikeCount);
-
-			this.viewsCountInt = video.getStatistics().getViewCount();
-			this.viewsCount = String.format(getStr(R.string.views), viewsCountInt);
-
-			if (likeCount != null)
-				this.likeCount = String.format(Locale.getDefault(), "%,d", video.getStatistics().getLikeCount());
-
-			if (dislikeCount != null)
-				this.dislikeCount = String.format(Locale.getDefault(), "%,d", video.getStatistics().getDislikeCount());
+			setViewCount(statistics.getViewCount());
 		}
+	}
+
+	private void setViewCount(BigInteger viewsCountInt) {
+		this.viewsCountInt = viewsCountInt;
+		this.viewsCount = String.format(getStr(R.string.views), viewsCountInt);
+	}
+
+	private void setLikeDislikeCount(BigInteger likeCount, BigInteger dislikeCount) {
+		if (likeCount != null) {
+			this.likeCount = String.format(Locale.getDefault(), "%,d", likeCount);
+		}
+		if (dislikeCount != null) {
+			this.dislikeCount = String.format(Locale.getDefault(), "%,d", dislikeCount);
+		}
+		setThumbsUpPercentage(likeCount, dislikeCount);
 	}
 
 	/**
