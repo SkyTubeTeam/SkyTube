@@ -1,3 +1,7 @@
+v2.962 - 06 Aug 2019:
+	* Add a new Youtube API key, re-use the old keys for F-Droid.
+	* Updated German and Hungarian translations.
+
 v2.961 - 01 Aug 2019:
 	* Fix problem with Youtube API keys
 	* Use newer NewPipeExtractor to fix video downloading issue
