@@ -18,13 +18,13 @@
 package free.rm.skytube.businessobjects;
 
 import free.rm.skytube.businessobjects.YouTube.GetBookmarksVideos;
-import free.rm.skytube.businessobjects.YouTube.GetChannelVideos;
 import free.rm.skytube.businessobjects.YouTube.GetDownloadedVideos;
 import free.rm.skytube.businessobjects.YouTube.GetFeaturedVideos;
 import free.rm.skytube.businessobjects.YouTube.GetMostPopularVideos;
 import free.rm.skytube.businessobjects.YouTube.GetPlaylistVideos;
 import free.rm.skytube.businessobjects.YouTube.GetYouTubeVideoBySearch;
 import free.rm.skytube.businessobjects.YouTube.GetYouTubeVideos;
+import free.rm.skytube.businessobjects.YouTube.Tasks.GetChannelVideosTask;
 import free.rm.skytube.businessobjects.db.Tasks.GetSubscriptionsVideosFromDb;
 
 /**
@@ -73,7 +73,7 @@ public enum VideoCategory {
 		else if (id == SEARCH_QUERY.id)
 			return new GetYouTubeVideoBySearch();
 		else if (id == CHANNEL_VIDEOS.id)
-			return new GetChannelVideos();
+			return GetChannelVideosTask.createChannelVideosFetcher();
 		else if (id == SUBSCRIPTIONS_FEED_VIDEOS.id)
 			return new GetSubscriptionsVideosFromDb();
 		else if (id == BOOKMARKS_VIDEOS.id)

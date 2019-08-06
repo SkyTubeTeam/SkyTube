@@ -17,54 +17,76 @@
 
 package free.rm.skytube.businessobjects.YouTube.Tasks;
 
-import android.widget.Toast;
-
-import com.google.api.client.util.DateTime;
+import static free.rm.skytube.app.SkyTubeApp.getContext;
 
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import android.util.Log;
+import android.widget.Toast;
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
-import free.rm.skytube.businessobjects.YouTube.GetChannelVideos;
+import free.rm.skytube.businessobjects.YouTube.GetChannelVideosFull;
+import free.rm.skytube.businessobjects.YouTube.GetChannelVideosInterface;
+import free.rm.skytube.businessobjects.YouTube.GetChannelVideosLite;
+import free.rm.skytube.businessobjects.YouTube.GetYouTubeVideos;
+import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPIKey;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
-
-import static free.rm.skytube.app.SkyTubeApp.getContext;
 
 /**
  * Task to asynchronously get videos for a specific channel.
  */
 public class GetChannelVideosTask extends AsyncTaskParallel<Void, Void, List<YouTubeVideo>> {
+	private static final String TAG = GetChannelVideosTask.class.getSimpleName();
 
-	private GetChannelVideos getChannelVideos = new GetChannelVideos();
-	private YouTubeChannel channel;
+	private final GetYouTubeVideos getChannelVideos;
+	private final YouTubeChannel channel;
 	private GetChannelVideosTaskInterface getChannelVideosTaskInterface;
 
 
 	public GetChannelVideosTask(YouTubeChannel channel) {
+		this.getChannelVideos = createChannelVideosFetcher();
+		this.channel = channel;
 		try {
 			getChannelVideos.init();
-			getChannelVideos.setPublishedAfter(getOneMonthAgo());
+			setPublishedAfter(getOneMonthAgo());
 			getChannelVideos.setQuery(channel.getId());
-			this.channel = channel;
 		} catch (IOException e) {
 			e.printStackTrace();
 			Toast.makeText(getContext(),
-							String.format(getContext().getString(R.string.could_not_get_videos), channel.getTitle()),
-							Toast.LENGTH_LONG).show();
+				String.format(getContext().getString(R.string.could_not_get_videos), channel.getTitle()),
+				Toast.LENGTH_LONG).show();
 		}
 	}
 
+	/**
+	 * Create an appropriate class to get videos of a channel. 
+	 * The channel ID is specified by calling {@link #setQuery(String)}.
+	 *
+	 * <p>This class will detect if the user is using his own YouTube API key or not... if they are, then
+	 * we are going to use {@link GetChannelVideosFull}; otherwise we are going to use
+	 * {@link GetChannelVideosLite}.</p>
+	 */
+	public static GetYouTubeVideos createChannelVideosFetcher() {
+		if (YouTubeAPIKey.get().isUserApiKeySet()) {
+			Log.d(TAG, "Using GetChannelVideosFull...");
+			return new GetChannelVideosFull();
+		} else {
+			Log.d(TAG, "Using GetChannelVideosLite...");
+			return new GetChannelVideosLite();
+		}
+
+	}
 	/**
 	 * Once set, this class will only return videos published after the specified date.  If the date
 	 * is set to null, then the class will return videos that are less than one month old.
 	 */
 	public GetChannelVideosTask setPublishedAfter(Long timeInMs) {
-		getChannelVideos.setPublishedAfter(timeInMs != null ? timeInMs : getOneMonthAgo());
+		((GetChannelVideosInterface)getChannelVideos).setPublishedAfter(timeInMs != null ? timeInMs : getOneMonthAgo());
 		return this;
 	}
 
