@@ -534,6 +534,10 @@
 	<string name="pref_youtube_api_key_custom">Key is valid. Restart app to use the new YouTube API key.</string>
 	<string name="pref_youtube_api_key_default">Restart app to switch back to default YouTube API key.</string>
 
+    <string name="pref_use_newpipe_backend" translatable="false">pref_use_newpipe_backend</string>
+    <string name="pref_title_use_newpipe_backend">Use the NewPipe backend</string>
+    <string name="pref_summary_use_newpipe_backend">If checked, the experimental NewPipe API is used to access Youtube, it may, or may not work...</string>
+
 	<string name="restart">Restart</string>
 	<string name="pref_key_subscriptions_alphabetical_order" translatable="false">pref_key_subscriptions_alphabetical_order</string>
 	<string name="pref_title_subscriptions_alphabetical_order">Sort Channels Alphabetically</string>
