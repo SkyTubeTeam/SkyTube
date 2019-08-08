@@ -27,13 +27,16 @@ import org.schabi.newpipe.extractor.channel.ChannelExtractor;
 import org.schabi.newpipe.extractor.exceptions.ContentNotAvailableException;
 import org.schabi.newpipe.extractor.exceptions.ExtractionException;
 import org.schabi.newpipe.extractor.exceptions.ParsingException;
+import org.schabi.newpipe.extractor.linkhandler.LinkHandler;
 import org.schabi.newpipe.extractor.linkhandler.LinkHandlerFactory;
 import org.schabi.newpipe.extractor.linkhandler.ListLinkHandler;
+import org.schabi.newpipe.extractor.stream.StreamExtractor;
 import org.schabi.newpipe.extractor.stream.StreamInfo;
 import org.schabi.newpipe.extractor.stream.StreamInfoItem;
 import org.schabi.newpipe.extractor.stream.VideoStream;
 
 import free.rm.skytube.R;
+import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 
@@ -88,8 +91,12 @@ public class NewPipeService {
     }
 
     public List<YouTubeVideo> getChannelVideos(String channelId) throws ExtractionException, IOException {
+        // Get channel LinkHandler
         ListLinkHandler channelLink = streamingService.getChannelLHFactory().fromId("channel/" + channelId);
+
+        // Extract from it
         ChannelExtractor channelExtractor = streamingService.getChannelExtractor(channelLink);
+
         InfoItemsPage<StreamInfoItem> initialPage = channelExtractor.getInitialPage();
         List<YouTubeVideo> result = new ArrayList<>(initialPage.getItems().size());
         LinkHandlerFactory linkHandlerFactory = streamingService.getStreamLHFactory();
@@ -99,6 +106,12 @@ public class NewPipeService {
         }
         Logger.i(this, "getChannelVideos for %s -> %s", channelId, result);
         return result;
+    }
+    
+    public YouTubeVideo getDetails(String videoId) throws ExtractionException {
+	LinkHandler url = streamingService.getStreamLHFactory().fromId(videoId);
+	StreamExtractor extractor = streamingService.getStreamExtractor(url);
+	return new YouTubeVideo(extractor);
     }
 
     /**
@@ -114,6 +127,7 @@ public class NewPipeService {
     public synchronized static NewPipeService get() {
         if (instance == null) {
             instance = new NewPipeService(ServiceList.YouTube);
+            SkyTubeApp.initNewPipe();
         }
         return instance;
     }

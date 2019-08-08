@@ -40,6 +40,7 @@ import org.joda.time.format.ISOPeriodFormat;
 import org.joda.time.format.PeriodFormatter;
 import org.schabi.newpipe.extractor.channel.ChannelExtractor;
 import org.schabi.newpipe.extractor.exceptions.ParsingException;
+import org.schabi.newpipe.extractor.stream.StreamExtractor;
 import org.schabi.newpipe.extractor.stream.StreamInfoItem;
 
 import java.io.File;
@@ -221,6 +222,19 @@ public class YouTubeVideo implements Serializable {
 		setViewCount(BigInteger.valueOf(channelItem.getViewCount()));
 		this.channel = new YouTubeChannel(channel.getId(), channel.getName());
 	}
+
+	public YouTubeVideo(StreamExtractor stream) throws ParsingException {
+	    this.id = stream.getId();
+	    this.title = stream.getName();
+	    this.description = stream.getDescription();
+	    this.durationInSeconds = (int) stream.getLength();
+	    this.setLikeDislikeCount(BigInteger.valueOf(stream.getLikeCount()), BigInteger.valueOf(stream.getDislikeCount()));
+	    this.setViewCount(BigInteger.valueOf(stream.getViewCount()));
+	    String date = stream.getUploadDate();
+	    // just for debug...
+	    this.setDuration(date);
+	}
+
 	/**
 	 * Extracts the video ID from the given video URL.
 	 *

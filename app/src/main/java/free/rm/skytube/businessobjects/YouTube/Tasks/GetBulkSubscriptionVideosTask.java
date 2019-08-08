@@ -18,6 +18,7 @@
 package free.rm.skytube.businessobjects.YouTube.Tasks;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -40,19 +41,37 @@ public class GetBulkSubscriptionVideosTask extends AsyncTaskParallel<Void, Void,
 
     private final GetSubscriptionVideosTaskListener listener;
     private final List<YouTubeChannel> channels;
+    private final SubscriptionsDb subscriptionsDb;
 
     public GetBulkSubscriptionVideosTask(List<YouTubeChannel> channels, GetSubscriptionVideosTaskListener listener) {
         this.listener = listener;
         this.channels = channels;
+        this.subscriptionsDb = SubscriptionsDb.getSubscriptionsDb();
     }
 
     @Override
     protected Void doInBackground(Void... params) {
-        Set<String> alreadyKnownVideos = SubscriptionsDb.getSubscriptionsDb().getSubscribedChannelVideos();
+        Set<String> alreadyKnownVideos = subscriptionsDb.getSubscribedChannelVideos();
+        List<YouTubeVideo> detailedList = new ArrayList<>();
         for (YouTubeChannel dbChannel : channels) {
             List<YouTubeVideo> newVideos = fetchVideos(alreadyKnownVideos, dbChannel);
+            if (!newVideos.isEmpty()) {
+                for (YouTubeVideo vid:newVideos) {
+                    YouTubeVideo details;
+		    try {
+			details = NewPipeService.get().getDetails(vid.getId());
+			details.setChannel(vid.getChannel());
+			detailedList.add(details);
+		    } catch (ExtractionException e) {
+		            Logger.e(this, "Error during parsing video page for " + vid.getId() + ",msg:" + e.getMessage(), e);
+			e.printStackTrace();
+		    }
+		}
+            }
             listener.onChannelVideosFetched(dbChannel, newVideos, false);
         }
+        subscriptionsDb.saveVideos(detailedList);
+        listener.onAllChannelVideosFetched();
         return null;
     }
 

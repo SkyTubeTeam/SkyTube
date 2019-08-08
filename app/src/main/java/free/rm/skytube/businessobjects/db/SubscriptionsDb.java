@@ -456,6 +456,19 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 		}
 	}
 
+	public void saveVideos(List<YouTubeVideo> videos) {
+		Gson gson = new Gson();
+		SQLiteDatabase db = getWritableDatabase();
+		for (YouTubeVideo video : videos) {
+			ContentValues values = new ContentValues();
+			values.put(SubscriptionsVideosTable.COL_CHANNEL_ID, video.getChannelId());
+			values.put(SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID, video.getId());
+			values.put(SubscriptionsVideosTable.COL_YOUTUBE_VIDEO, gson.toJson(video).getBytes());
+			values.put(SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_DATE, video.getPublishDate().toString());
+
+			db.insert(SubscriptionsVideosTable.TABLE_NAME, null, values);
+		}
+	}
 	/**
 	 * Delete any videos stored in the database (for subscribed channels) that are over a month old.
 	 * @return

@@ -34,6 +34,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 
 import org.joda.time.DateTime;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -45,6 +46,7 @@ import free.rm.skytube.businessobjects.FeedUpdaterService;
 import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
+import free.rm.skytube.businessobjects.YouTube.Tasks.GetBulkSubscriptionVideosTask;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetSubscriptionVideosTask;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetSubscriptionVideosTaskListener;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
@@ -327,7 +329,7 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 	 * 1.  Cached inside the local database;
 	 * 2.  No in the DB and hence we need to retrieve them from the YouTube servers.
 	 */
-	private class RefreshFeedTask extends AsyncTaskParallel<Void, Void, Integer> {
+	private class RefreshFeedTask extends AsyncTaskParallel<Void, Void, List<YouTubeChannel>> {
 
 		private MaterialDialog  fetchingChannelInfoDialog;
 		private boolean         showDialogs;
@@ -352,17 +354,18 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 
 
 		@Override
-		protected Integer doInBackground(Void... params) {
+		protected List<YouTubeChannel> doInBackground(Void... params) {
 			// get the total number of channels the user is subscribed to (from the subs adapter)
-			return SubsAdapter.get(SubscriptionsFeedFragment.this.getActivity()).getSubsLists().size();
+			// wrap it, as SubsAdapter could add/remove channels in a different thread
+			return new ArrayList<>(SubsAdapter.get(SubscriptionsFeedFragment.this.getActivity()).getSubsLists());
 		}
 
 
 		@Override
-		protected void onPostExecute(Integer totalNumberOfChannels) {
+		protected void onPostExecute(List<YouTubeChannel> totalChannels) {
 			numVideosFetched      = 0;
 			numChannelsFetched    = 0;
-			numChannelsSubscribed = totalNumberOfChannels;
+			numChannelsSubscribed = totalChannels.size();
 
 			// hide the "Fetching channels information …" dialog
 			if (showDialogs) {
@@ -370,7 +373,7 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 			}
 
 			// setup the user interface
-			setupUiAccordingToNumOfSubbedChannels(totalNumberOfChannels);
+			setupUiAccordingToNumOfSubbedChannels(numChannelsSubscribed);
 
 			if (numChannelsSubscribed > 0) {
 				// get the previously published videos currently cached in the database
@@ -378,7 +381,8 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 
 				// get any videos published after the last time the user used the app...
 				if (shouldRefresh) {
-					new GetSubscriptionVideosTask(SubscriptionsFeedFragment.this).executeInParallel();      // refer to #onChannelVideosFetched()
+					//new GetSubscriptionVideosTask(SubscriptionsFeedFragment.this).executeInParallel();      // refer to #onChannelVideosFetched()
+					new GetBulkSubscriptionVideosTask(totalChannels, SubscriptionsFeedFragment.this).executeInParallel();
 					shouldRefresh = false;
 
 					if (showDialogs) {
