@@ -19,10 +19,12 @@ package free.rm.skytube.businessobjects.YouTube.Tasks;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
-
 import org.schabi.newpipe.extractor.exceptions.ExtractionException;
 
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
@@ -31,14 +33,24 @@ import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.YouTube.VideoStream.NewPipeService;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
+import free.rm.skytube.businessobjects.utils.Predicate;
 
 /**
  * A task that returns the videos of channel the user has subscribed too. Used
  * to detect if new videos have been published since last time the user used the
  * app.
  */
-public class GetBulkSubscriptionVideosTask extends AsyncTaskParallel<Void, Void, Void> {
+public class GetBulkSubscriptionVideosTask extends AsyncTaskParallel<Void, GetBulkSubscriptionVideosTask.Progress, Void> {
 
+    static class Progress {
+        YouTubeChannel dbChannel;
+        int newVideos;
+        public Progress(YouTubeChannel dbChannel, int newVideos) {
+            this.dbChannel = dbChannel;
+            this.newVideos = newVideos;
+        }
+        
+    }
     private final GetSubscriptionVideosTaskListener listener;
     private final List<YouTubeChannel> channels;
     private final SubscriptionsDb subscriptionsDb;
@@ -58,27 +70,39 @@ public class GetBulkSubscriptionVideosTask extends AsyncTaskParallel<Void, Void,
             if (!newVideos.isEmpty()) {
                 for (YouTubeVideo vid:newVideos) {
                     YouTubeVideo details;
-		    try {
-			details = NewPipeService.get().getDetails(vid.getId());
-			details.setChannel(vid.getChannel());
-			detailedList.add(details);
-		    } catch (ExtractionException e) {
-		            Logger.e(this, "Error during parsing video page for " + vid.getId() + ",msg:" + e.getMessage(), e);
-			e.printStackTrace();
-		    }
-		}
+                    try {
+                        details = NewPipeService.get().getDetails(vid.getId());
+                        details.setChannel(vid.getChannel());
+                        detailedList.add(details);
+                    } catch (ExtractionException | IOException e) {
+                            Logger.e(this, "Error during parsing video page for " + vid.getId() + ",msg:" + e.getMessage(), e);
+                        e.printStackTrace();
+                    }
+                }
             }
-            listener.onChannelVideosFetched(dbChannel, newVideos, false);
+            publishProgress(new Progress(dbChannel, newVideos.size()));
         }
         subscriptionsDb.saveVideos(detailedList);
-        listener.onAllChannelVideosFetched();
         return null;
+    }
+
+    @Override
+    protected void onPostExecute(Void result) {
+        listener.onAllChannelVideosFetched();
+    }
+
+    @Override
+    protected void onProgressUpdate(Progress... values) {
+        for (Progress p : values) {
+            listener.onChannelVideosFetched(p.dbChannel, p.newVideos, false);
+        }
     }
 
     private List<YouTubeVideo> fetchVideos(Set<String> alreadyKnownVideos, YouTubeChannel dbChannel) {
         try {
             List<YouTubeVideo> videos = NewPipeService.get().getChannelVideos(dbChannel.getId());
-            videos.removeIf(video -> alreadyKnownVideos.contains(video.getId()));
+            Predicate<YouTubeVideo> predicate = video -> alreadyKnownVideos.contains(video.getId());
+            predicate.removeIf(videos);
             return videos;
         } catch (ExtractionException | IOException e) {
             Logger.e(this, "Error during fetching channel page for " + dbChannel + ",msg:" + e.getMessage(), e);
@@ -86,5 +110,6 @@ public class GetBulkSubscriptionVideosTask extends AsyncTaskParallel<Void, Void,
             return Collections.EMPTY_LIST;
         }
     }
+
 
 }

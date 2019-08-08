@@ -214,26 +214,24 @@ public class YouTubeVideo implements Serializable {
 	}
 
 
-	public YouTubeVideo(String id, StreamInfoItem channelItem, ChannelExtractor channel) throws ParsingException {
-		this.id = id;
-		this.title = channelItem.getName();
-		this.thumbnailUrl = channelItem.getThumbnailUrl();
-		this.thumbnailMaxResUrl = channelItem.getThumbnailUrl();
-		setViewCount(BigInteger.valueOf(channelItem.getViewCount()));
-		this.channel = new YouTubeChannel(channel.getId(), channel.getName());
-	}
+        public YouTubeVideo(String id, StreamInfoItem channelItem, ChannelExtractor channel) throws ParsingException {
+                this.id = id;
+                this.title = channelItem.getName();
+                this.thumbnailUrl = channelItem.getThumbnailUrl();
+                this.thumbnailMaxResUrl = channelItem.getThumbnailUrl();
+                setViewCount(BigInteger.valueOf(channelItem.getViewCount()));
+                this.channel = new YouTubeChannel(channel.getId(), channel.getName());
+        }
 
-	public YouTubeVideo(StreamExtractor stream) throws ParsingException {
-	    this.id = stream.getId();
-	    this.title = stream.getName();
-	    this.description = stream.getDescription();
-	    this.durationInSeconds = (int) stream.getLength();
-	    this.setLikeDislikeCount(BigInteger.valueOf(stream.getLikeCount()), BigInteger.valueOf(stream.getDislikeCount()));
-	    this.setViewCount(BigInteger.valueOf(stream.getViewCount()));
-	    String date = stream.getUploadDate();
-	    // just for debug...
-	    this.setDuration(date);
-	}
+        public YouTubeVideo(String id, String title, String description, long durationInSeconds, long likeCount, long dislikeCount, long viewCount, Date uploadDate) {
+            this.id = id;
+            this.title = title;
+            this.description = description;
+            this.durationInSeconds = (int) durationInSeconds;
+            this.setLikeDislikeCount(BigInteger.valueOf(likeCount), BigInteger.valueOf(dislikeCount));
+            this.setViewCount(BigInteger.valueOf(viewCount));
+            this.setPublishDate(new DateTime(uploadDate));
+        }
 
 	/**
 	 * Extracts the video ID from the given video URL.
