@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.schabi.newpipe.extractor.InfoItem;
 import org.schabi.newpipe.extractor.ListExtractor.InfoItemsPage;
 import org.schabi.newpipe.extractor.ServiceList;
 import org.schabi.newpipe.extractor.StreamingService;
@@ -33,6 +34,7 @@ import org.schabi.newpipe.extractor.exceptions.ParsingException;
 import org.schabi.newpipe.extractor.linkhandler.LinkHandler;
 import org.schabi.newpipe.extractor.linkhandler.LinkHandlerFactory;
 import org.schabi.newpipe.extractor.linkhandler.ListLinkHandler;
+import org.schabi.newpipe.extractor.search.SearchExtractor;
 import org.schabi.newpipe.extractor.stream.StreamExtractor;
 import org.schabi.newpipe.extractor.stream.StreamInfo;
 import org.schabi.newpipe.extractor.stream.StreamInfoItem;
@@ -102,13 +104,22 @@ public class NewPipeService {
         channelExtractor.fetchPage();
 
         InfoItemsPage<StreamInfoItem> initialPage = channelExtractor.getInitialPage();
+        String fullChannelId = channelExtractor.getId();
+        String channelName = channelExtractor.getName();
+
+        List<YouTubeVideo> result = extract(fullChannelId, channelName, initialPage);
+        Logger.i(this, "getChannelVideos for %s -> %s", channelId, result);
+        return result;
+    }
+
+    private List<YouTubeVideo> extract(String channelId, String channelName, InfoItemsPage<StreamInfoItem> initialPage)
+            throws ParsingException {
         List<YouTubeVideo> result = new ArrayList<>(initialPage.getItems().size());
         LinkHandlerFactory linkHandlerFactory = streamingService.getStreamLHFactory();
         for (StreamInfoItem item:initialPage.getItems()) {
             String id = linkHandlerFactory.getId(item.getUrl());
-            result.add(new YouTubeVideo(id, item, channelExtractor));
+            result.add(new YouTubeVideo(id, item, channelId, channelName));
         }
-        Logger.i(this, "getChannelVideos for %s -> %s", channelId, result);
         return result;
     }
 
@@ -122,12 +133,33 @@ public class NewPipeService {
             Date publishDate = new SimpleDateFormat("yyyy-MM-dd").parse(dateStr);
             return new YouTubeVideo(extractor.getId(), extractor.getName(), extractor.getDescription(),
                     extractor.getLength(), extractor.getLikeCount(), extractor.getDislikeCount(),
-                    extractor.getViewCount(), publishDate);
+                    extractor.getViewCount(), publishDate, extractor.getThumbnailUrl());
         } catch (ParseException e) {
             throw new ExtractionException("Unable parse publish date:" + dateStr + " for video=" + videoId, e);
         }
     }
 
+    public List<YouTubeVideo> getSearchResult(String query, String token) throws ExtractionException, IOException {
+	SearchExtractor extractor = streamingService.getSearchExtractor(query);
+	extractor.fetchPage();
+	return extractSearchResult(extractor.getInitialPage());
+    }
+
+    private List<YouTubeVideo> extractSearchResult(InfoItemsPage<InfoItem> initialPage)
+	    throws ParsingException {
+	List<YouTubeVideo> result = new ArrayList<>(initialPage.getItems().size());
+        LinkHandlerFactory linkHandlerFactory = streamingService.getStreamLHFactory();
+        for (InfoItem item:initialPage.getItems()) {
+            if (item instanceof StreamInfoItem) {
+                StreamInfoItem si = (StreamInfoItem) item;
+                String id = linkHandlerFactory.getId(item.getUrl());
+                result.add(new YouTubeVideo(id, item, si.getUploaderUrl(), si.getUploaderName(), si.getViewCount()));
+            }
+        }
+        return result;
+    }
+
+    
     /**
      * Given video ID it will return the video's page URL.
      *

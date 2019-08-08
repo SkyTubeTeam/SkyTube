@@ -38,6 +38,7 @@ import com.google.api.services.youtube.model.VideoStatistics;
 import org.joda.time.Period;
 import org.joda.time.format.ISOPeriodFormat;
 import org.joda.time.format.PeriodFormatter;
+import org.schabi.newpipe.extractor.InfoItem;
 import org.schabi.newpipe.extractor.channel.ChannelExtractor;
 import org.schabi.newpipe.extractor.exceptions.ParsingException;
 import org.schabi.newpipe.extractor.stream.StreamExtractor;
@@ -213,17 +214,20 @@ public class YouTubeVideo implements Serializable {
 		setThumbsUpPercentage(likeCount, dislikeCount);
 	}
 
+        public YouTubeVideo(String id, StreamInfoItem channelItem, String channelId, String channelName) throws ParsingException {
+            this(id, channelItem, channelId, channelName, channelItem.getViewCount());
+        }
 
-        public YouTubeVideo(String id, StreamInfoItem channelItem, ChannelExtractor channel) throws ParsingException {
+        public YouTubeVideo(String id, InfoItem channelItem, String channelId, String channelName, long viewCount) throws ParsingException {
                 this.id = id;
                 this.title = channelItem.getName();
                 this.thumbnailUrl = channelItem.getThumbnailUrl();
                 this.thumbnailMaxResUrl = channelItem.getThumbnailUrl();
-                setViewCount(BigInteger.valueOf(channelItem.getViewCount()));
-                this.channel = new YouTubeChannel(channel.getId(), channel.getName());
+                setViewCount(BigInteger.valueOf(viewCount));
+                this.channel = new YouTubeChannel(channelId, channelName);
         }
 
-        public YouTubeVideo(String id, String title, String description, long durationInSeconds, long likeCount, long dislikeCount, long viewCount, Date uploadDate) {
+        public YouTubeVideo(String id, String title, String description, long durationInSeconds, long likeCount, long dislikeCount, long viewCount, Date uploadDate, String thumbnailUrl) {
             this.id = id;
             this.title = title;
             this.description = description;
@@ -231,6 +235,8 @@ public class YouTubeVideo implements Serializable {
             this.setLikeDislikeCount(BigInteger.valueOf(likeCount), BigInteger.valueOf(dislikeCount));
             this.setViewCount(BigInteger.valueOf(viewCount));
             this.setPublishDate(new DateTime(uploadDate));
+            this.thumbnailMaxResUrl = thumbnailUrl;
+            this.thumbnailUrl = thumbnailUrl;
         }
 
 	/**
