@@ -382,7 +382,7 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 				// get any videos published after the last time the user used the app...
 				if (shouldRefresh) {
 					//new GetSubscriptionVideosTask(SubscriptionsFeedFragment.this).executeInParallel();      // refer to #onChannelVideosFetched()
-					new GetBulkSubscriptionVideosTask(totalChannels, SubscriptionsFeedFragment.this).executeInParallel();
+					getRefreshTask(totalChannels).executeInParallel();
 					shouldRefresh = false;
 
 					if (showDialogs) {
@@ -400,6 +400,13 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 		new RefreshFeedFromCacheTask().executeInParallel();
 	}
 
+	private AsyncTaskParallel<?,?,?> getRefreshTask(List<YouTubeChannel> totalChannels) {
+		if (SkyTubeApp.getPreferenceManager().getBoolean(SkyTubeApp.getStr(R.string.pref_use_newpipe_backend), false)) {
+			return new GetBulkSubscriptionVideosTask(totalChannels, SubscriptionsFeedFragment.this);
+		} else {
+			return new GetSubscriptionVideosTask(SubscriptionsFeedFragment.this);
+		}
+	}
 
 	/**
 	 * A task that refreshes the subscriptions feed by getting published videos currently cached in
