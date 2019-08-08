@@ -18,7 +18,6 @@
 package free.rm.skytube.gui.activities;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -57,7 +56,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import free.rm.skytube.BuildConfig;
 import free.rm.skytube.R;
-import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.ChromecastListener;
 import free.rm.skytube.businessobjects.GetVideoDetailsTask;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
@@ -66,7 +64,6 @@ import free.rm.skytube.businessobjects.YouTube.Tasks.GetVideoDescriptionTask;
 import free.rm.skytube.businessobjects.YouTube.VideoStream.StreamMetaData;
 import free.rm.skytube.businessobjects.interfaces.GetDesiredStreamListener;
 import free.rm.skytube.gui.businessobjects.MainActivityListener;
-import free.rm.skytube.gui.businessobjects.YouTubeVideoListener;
 import free.rm.skytube.gui.businessobjects.YouTubePlayer;
 import free.rm.skytube.gui.fragments.ChromecastControllerFragment;
 import free.rm.skytube.gui.fragments.ChromecastMiniControllerFragment;
@@ -559,9 +556,11 @@ public abstract class BaseActivity extends AppCompatActivity implements MainActi
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
-		getSupportFragmentManager().putFragment(outState, ChromecastMiniControllerFragment.CHROMECAST_MINI_CONTROLLER_FRAGMENT, chromecastMiniControllerFragment);
-		getSupportFragmentManager().putFragment(outState, ChromecastControllerFragment.CHROMECAST_CONTROLLER_FRAGMENT, chromecastControllerFragment);
-		outState.putBoolean(PANEL_EXPANDED, slidingLayout.getPanelState() == SlidingUpPanelLayout.PanelState.EXPANDED);
+		if(chromecastMiniControllerFragment != null && chromecastControllerFragment != null) {
+			getSupportFragmentManager().putFragment(outState, ChromecastMiniControllerFragment.CHROMECAST_MINI_CONTROLLER_FRAGMENT, chromecastMiniControllerFragment);
+			getSupportFragmentManager().putFragment(outState, ChromecastControllerFragment.CHROMECAST_CONTROLLER_FRAGMENT, chromecastControllerFragment);
+			outState.putBoolean(PANEL_EXPANDED, slidingLayout.getPanelState() == SlidingUpPanelLayout.PanelState.EXPANDED);
+		}
 	}
 
 	@Override
