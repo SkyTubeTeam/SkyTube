@@ -200,14 +200,14 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 
 
 	@Override
-	public void onChannelVideosFetched(YouTubeChannel channel, List<YouTubeVideo> videosFetched, final boolean videosDeleted) {
+	public void onChannelVideosFetched(YouTubeChannel channel, int videosFetched, final boolean videosDeleted) {
 		Log.d("SUB FRAGMENT", "onChannelVideosFetched");
 
 		// If any new videos have been fetched for a channel, update the Subscription list in the left navbar for that channel
-		if(videosFetched.size() > 0)
+		if(videosFetched > 0)
 			SubsAdapter.get(getActivity()).changeChannelNewVideosStatus(channel.getId(), true);
 
-		numVideosFetched += videosFetched.size();
+		numVideosFetched += videosFetched;
 		numChannelsFetched++;
 		if(progressDialog != null)
 			progressDialog.setContent(String.format(SkyTubeApp.getStr(R.string.fetched_videos_from_channels), numVideosFetched, numChannelsFetched, numChannelsSubscribed));

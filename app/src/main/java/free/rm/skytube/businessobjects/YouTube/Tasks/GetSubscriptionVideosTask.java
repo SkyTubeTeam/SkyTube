@@ -112,6 +112,7 @@ public class GetSubscriptionVideosTask extends AsyncTaskParallel<Void, Void, Voi
  				.setGetChannelVideosTaskInterface(videos -> {
 					 numTasksFinished++;
 					 boolean videosDeleted = false;
+					 int numberOfVideos = videos != null ? videos.size() : 0;
 					 if(numTasksFinished < numTasksLeft) {
 						 if(tasks.size() > 0) {
 							 // More channels to fetch videos from
@@ -119,7 +120,7 @@ public class GetSubscriptionVideosTask extends AsyncTaskParallel<Void, Void, Voi
 							 tasks.remove(0);
 						 }
 						 if(listener != null)
-							 listener.onChannelVideosFetched(channel, videos != null ? videos : new ArrayList<YouTubeVideo>(), videosDeleted);
+							 listener.onChannelVideosFetched(channel, numberOfVideos, videosDeleted);
 					 } else {
 						 videosDeleted = SubscriptionsDb.getSubscriptionsDb().trimSubscriptionVideos();
 
@@ -127,7 +128,7 @@ public class GetSubscriptionVideosTask extends AsyncTaskParallel<Void, Void, Voi
 						 updateFeedsLastUpdateTime();
 
 						 if (listener != null) {
-							 listener.onChannelVideosFetched(channel, videos != null ? videos : new ArrayList<YouTubeVideo>(), videosDeleted);
+							 listener.onChannelVideosFetched(channel, numberOfVideos, videosDeleted);
 							 listener.onAllChannelVideosFetched();
 						 }
 					 }
