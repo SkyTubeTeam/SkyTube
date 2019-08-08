@@ -49,8 +49,8 @@ public class FeedUpdaterService extends Service implements GetSubscriptionVideos
 	}
 
 	@Override
-	public void onChannelVideosFetched(YouTubeChannel channel, List<YouTubeVideo> videosFetched, boolean videosDeleted) {
-		newVideosFetched += videosFetched.size();
+	public void onChannelVideosFetched(YouTubeChannel channel, int videosFetched, boolean videosDeleted) {
+		newVideosFetched += videosFetched;
 	}
 
 	@Override
