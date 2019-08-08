@@ -17,7 +17,10 @@
 package free.rm.skytube.businessobjects.YouTube.VideoStream;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.schabi.newpipe.extractor.ListExtractor.InfoItemsPage;
@@ -65,7 +68,7 @@ public class NewPipeService {
 
             // now print the stream url and we are done
             for(VideoStream stream : streamInfo.getVideoStreams()) {
-                    list.add( new StreamMetaData(stream) );
+                list.add( new StreamMetaData(stream) );
             }
         } catch (ContentNotAvailableException exception) {
             list = new StreamMetaDataList(exception.getMessage());
@@ -96,6 +99,7 @@ public class NewPipeService {
 
         // Extract from it
         ChannelExtractor channelExtractor = streamingService.getChannelExtractor(channelLink);
+        channelExtractor.fetchPage();
 
         InfoItemsPage<StreamInfoItem> initialPage = channelExtractor.getInitialPage();
         List<YouTubeVideo> result = new ArrayList<>(initialPage.getItems().size());
@@ -107,11 +111,21 @@ public class NewPipeService {
         Logger.i(this, "getChannelVideos for %s -> %s", channelId, result);
         return result;
     }
-    
-    public YouTubeVideo getDetails(String videoId) throws ExtractionException {
-	LinkHandler url = streamingService.getStreamLHFactory().fromId(videoId);
-	StreamExtractor extractor = streamingService.getStreamExtractor(url);
-	return new YouTubeVideo(extractor);
+
+    public YouTubeVideo getDetails(String videoId) throws ExtractionException, IOException {
+        LinkHandler url = streamingService.getStreamLHFactory().fromId(videoId);
+        StreamExtractor extractor = streamingService.getStreamExtractor(url);
+        extractor.fetchPage();
+
+        String dateStr = extractor.getUploadDate();
+        try {
+            Date publishDate = new SimpleDateFormat("yyyy-MM-dd").parse(dateStr);
+            return new YouTubeVideo(extractor.getId(), extractor.getName(), extractor.getDescription(),
+                    extractor.getLength(), extractor.getLikeCount(), extractor.getDislikeCount(),
+                    extractor.getViewCount(), publishDate);
+        } catch (ParseException e) {
+            throw new ExtractionException("Unable parse publish date:" + dateStr + " for video=" + videoId, e);
+        }
     }
 
     /**
