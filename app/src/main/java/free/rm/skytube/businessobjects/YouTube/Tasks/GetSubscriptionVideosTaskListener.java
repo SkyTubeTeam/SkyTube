@@ -26,5 +26,5 @@ import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
  */
 public interface GetSubscriptionVideosTaskListener {
 	void onChannelVideosFetched(YouTubeChannel channel, int videosFetched, boolean videosDeleted);
-	void onAllChannelVideosFetched();
+	void onAllChannelVideosFetched(boolean changed);
 }

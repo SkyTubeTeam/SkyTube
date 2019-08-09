@@ -17,11 +17,11 @@
 
 package free.rm.skytube.businessobjects.YouTube.Tasks;
 
-import android.content.SharedPreferences;
-
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
+import android.content.SharedPreferences;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
@@ -89,6 +89,7 @@ public class GetSubscriptionVideosTask extends AsyncTaskParallel<Void, Void, Voi
 		// the app to update the feeds.  Otherwise, set the publishedAfter date to the last
 		// time we updated the feeds.
 		Long publishedAfter = forceRefresh ? null : getFeedsLastUpdateTime();
+		AtomicBoolean changed = new AtomicBoolean(false);
 
 		for(final YouTubeChannel channel : channels) {
 			tasks.add(new GetChannelVideosTask(channel)
@@ -97,6 +98,9 @@ public class GetSubscriptionVideosTask extends AsyncTaskParallel<Void, Void, Voi
 					 numTasksFinished++;
 					 boolean videosDeleted = false;
 					 int numberOfVideos = videos != null ? videos.size() : 0;
+					 if (numberOfVideos > 0) {
+					     changed.compareAndSet(false, true);
+					 }
 					 if(numTasksFinished < numTasksLeft) {
 						 if(tasks.size() > 0) {
 							 // More channels to fetch videos from
@@ -113,7 +117,7 @@ public class GetSubscriptionVideosTask extends AsyncTaskParallel<Void, Void, Voi
 
 						 if (listener != null) {
 							 listener.onChannelVideosFetched(channel, numberOfVideos, videosDeleted);
-							 listener.onAllChannelVideosFetched();
+							 listener.onAllChannelVideosFetched(videosDeleted || changed.get());
 						 }
 					 }
 				 })
