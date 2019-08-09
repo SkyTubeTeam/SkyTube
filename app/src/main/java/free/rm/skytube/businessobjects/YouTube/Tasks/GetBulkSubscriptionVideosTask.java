@@ -38,7 +38,7 @@ import free.rm.skytube.businessobjects.utils.Predicate;
  * to detect if new videos have been published since last time the user used the
  * app.
  */
-public class GetBulkSubscriptionVideosTask extends AsyncTaskParallel<Void, GetBulkSubscriptionVideosTask.Progress, Void> {
+public class GetBulkSubscriptionVideosTask extends AsyncTaskParallel<Void, GetBulkSubscriptionVideosTask.Progress, Boolean> {
 
     static class Progress {
         YouTubeChannel dbChannel;
@@ -60,7 +60,7 @@ public class GetBulkSubscriptionVideosTask extends AsyncTaskParallel<Void, GetBu
     }
 
     @Override
-    protected Void doInBackground(Void... params) {
+    protected Boolean doInBackground(Void... params) {
         Set<String> alreadyKnownVideos = subscriptionsDb.getSubscribedChannelVideos();
         List<YouTubeVideo> detailedList = new ArrayList<>();
         for (YouTubeChannel dbChannel : channels) {
@@ -82,12 +82,12 @@ public class GetBulkSubscriptionVideosTask extends AsyncTaskParallel<Void, GetBu
         }
         subscriptionsDb.saveVideos(detailedList);
         GetSubscriptionVideosTask.updateFeedsLastUpdateTime(System.currentTimeMillis());
-        return null;
+        return !detailedList.isEmpty();
     }
 
     @Override
-    protected void onPostExecute(Void result) {
-        listener.onAllChannelVideosFetched();
+    protected void onPostExecute(Boolean changed) {
+        listener.onAllChannelVideosFetched(changed);
     }
 
     @Override

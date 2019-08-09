@@ -230,34 +230,34 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 
 		numVideosFetched += videosFetched;
 		numChannelsFetched++;
-		if(progressDialog != null)
+		if(progressDialog != null) {
 			progressDialog.setContent(String.format(SkyTubeApp.getStr(R.string.fetched_videos_from_channels), numVideosFetched, numChannelsFetched, numChannelsSubscribed));
-		if(numChannelsFetched == numChannelsSubscribed) {
-			new Handler().postDelayed(() -> {
-				refreshInProgress = false;
-				// Remove the progress bar(s)
-				swipeRefreshLayout.setRefreshing(false);
-				boolean fragmentIsVisible = progressDialog != null;
-				if(progressDialog != null) {
-					progressDialog.dismiss();
-					progressDialog = null;
-				}
-				if(numVideosFetched > 0 || videosDeleted) {
-					refreshFeedFromCache();
-				} else {
-					// Only show the toast that no videos were found if the progress dialog is sh
-					if(fragmentIsVisible) {
-						Toast.makeText(getContext(),
-										R.string.no_new_videos_found,
-										Toast.LENGTH_LONG).show();
-					}
-				}
-			}, 500);
 		}
 	}
 
 	@Override
-	public void onAllChannelVideosFetched() {
+	public void onAllChannelVideosFetched(boolean changed) {
+		Log.i("SUB FRAGMENT", "onAllChannelVideosFetched:" + changed);
+		new Handler().postDelayed(() -> {
+			refreshInProgress = false;
+			// Remove the progress bar(s)
+			swipeRefreshLayout.setRefreshing(false);
+			boolean fragmentIsVisible = progressDialog != null;
+			if(progressDialog != null) {
+				progressDialog.dismiss();
+				progressDialog = null;
+			}
+			if(changed) {
+				refreshFeedFromCache();
+			} else {
+				// Only show the toast that no videos were found if the progress dialog is sh
+				if(fragmentIsVisible) {
+					Toast.makeText(getContext(),
+									R.string.no_new_videos_found,
+									Toast.LENGTH_LONG).show();
+				}
+			}
+		}, 500);
 	}
 
 	@Override

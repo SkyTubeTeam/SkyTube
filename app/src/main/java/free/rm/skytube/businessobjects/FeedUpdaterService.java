@@ -54,8 +54,8 @@ public class FeedUpdaterService extends Service implements GetSubscriptionVideos
 	}
 
 	@Override
-	public void onAllChannelVideosFetched() {
-		if(newVideosFetched > 0) {
+	public void onAllChannelVideosFetched(boolean changed) {
+		if(changed) {
 			Intent clickIntent = new Intent(this, MainActivity.class);
 			clickIntent.setAction(MainActivity.ACTION_VIEW_FEED);
 
