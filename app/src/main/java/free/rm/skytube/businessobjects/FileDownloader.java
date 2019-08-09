@@ -31,6 +31,7 @@ import java.io.File;
 import java.io.Serializable;
 import java.util.regex.Pattern;
 
+import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.gui.activities.PermissionsActivity;
 
@@ -40,8 +41,6 @@ import static free.rm.skytube.app.SkyTubeApp.getContext;
  * Downloads remote files by using Android's {@link DownloadManager}.
  */
 public abstract class FileDownloader implements Serializable, PermissionsActivity.PermissionsTask {
-
-	private static final String DOWNLOADS_TO_SEPARATE_DIRECTORIES = "pref_download_to_separate_directories";
 
 	/** The remote file URL that is going to be downloaded. */
 	private String  remoteFileUrl = null;
@@ -54,6 +53,7 @@ public abstract class FileDownloader implements Serializable, PermissionsActivit
 	/** Output file name (without file extension). */
 	private String  outputFileName = null;
 	private String  outputDirectoryName = null;
+	private String  parentDirectory = null;
 	private String  outputFileExtension = null;
 	/** If set to true, then the download manager will download the file over cellular network. */
 	private Boolean allowedOverRoaming = null;
@@ -115,8 +115,14 @@ public abstract class FileDownloader implements Serializable, PermissionsActivit
 		DownloadManager.Request request = new DownloadManager.Request(remoteFileUri)
 				.setAllowedOverRoaming(allowedOverRoaming)
 				.setTitle(title)
-				.setDescription(description)
-				.setDestinationInExternalPublicDir(dirType, fullDownloadFileName);
+				.setDescription(description);
+
+		String videoDir = SkyTubeApp.getPreferenceManager().getString(SkyTubeApp.getStr(R.string.pref_key_video_download_folder), null);
+		if(videoDir != null) {
+			request.setDestinationUri(Uri.fromFile(new File(videoDir, fullDownloadFileName)));
+		} else {
+			request.setDestinationInExternalPublicDir(dirType, fullDownloadFileName);
+		}
 
 		if (!allowedOverRoaming) {
 			request.setAllowedNetworkTypes(allowedNetworkTypesFlags);
@@ -258,6 +264,16 @@ public abstract class FileDownloader implements Serializable, PermissionsActivit
 	}
 
 	/**
+	 * Set the parent directory.
+	 *
+	 * @param parentDirectory    E.g. "/storage/emulated/0/videos"
+	 */
+	public FileDownloader setParentDirectory(String parentDirectory) {
+		this.parentDirectory = parentDirectory;
+		return this;
+	}
+
+	/**
 	 * Set the output file's extension.
 	 *
 	 * @param outputFileExtension   E.g. "mp4"
@@ -317,8 +333,8 @@ public abstract class FileDownloader implements Serializable, PermissionsActivit
 		public FileInformation(String downloadFileName) {
 			// if there's already a local file for this video for some reason, then do not redownload the
 			// file and halt
-			File parentDir = Environment.getExternalStoragePublicDirectory(dirType);
-			boolean toDirectories = SkyTubeApp.getPreferenceManager().getBoolean(DOWNLOADS_TO_SEPARATE_DIRECTORIES,false);
+			File parentDir = parentDirectory != null ? new File(parentDirectory) : Environment.getExternalStoragePublicDirectory(dirType);
+			boolean toDirectories = SkyTubeApp.getPreferenceManager().getBoolean(SkyTubeApp.getStr(R.string.pref_key_download_to_separate_directories),false);
 
 			if (toDirectories && outputDirectoryName != null && !outputDirectoryName.isEmpty()) {
 				parentDir = new File(parentDir, outputDirectoryName);

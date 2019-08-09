@@ -18,13 +18,17 @@
 package free.rm.skytube.gui.fragments.preferences;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Environment;
 import android.preference.EditTextPreference;
 import android.preference.ListPreference;
+import android.preference.Preference;
 import android.preference.PreferenceFragment;
+import android.preference.PreferenceManager;
 import android.widget.Toast;
+
+import com.obsez.android.lib.filechooser.ChooserDialog;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
@@ -36,6 +40,7 @@ import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
  * Preference fragment for other settings.
  */
 public class OthersPreferenceFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
+	private Preference folderChooser;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -48,6 +53,28 @@ public class OthersPreferenceFragment extends PreferenceFragment implements Shar
 			defaultTabPref.setValueIndex(0);
 		}
 		defaultTabPref.setSummary(String.format(getString(R.string.pref_summary_default_tab), defaultTabPref.getEntry()));
+
+		folderChooser = findPreference(getString(R.string.pref_key_video_download_folder));
+		folderChooser.setOnPreferenceClickListener(preference -> {
+			new ChooserDialog(OthersPreferenceFragment.this)
+					.withFilter(true, false)
+					.titleFollowsDir(true)
+					.enableOptions(true)
+					.withResources(R.string.pref_popup_title_video_download_folder, R.string.ok, R.string.cancel)
+					.withChosenListener((dir, dirFile) -> {
+						SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
+						SharedPreferences.Editor editor = pref.edit();
+						editor.putString(getString(R.string.pref_key_video_download_folder), dir);
+						editor.apply();
+						folderChooser.setSummary(getString(R.string.pref_summary_video_download_folder, dir));
+					})
+					.build()
+					.show();
+			return true;
+		});
+		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
+		String dir = pref.getString(getString(R.string.pref_key_video_download_folder), null);
+		folderChooser.setSummary(getString(R.string.pref_summary_video_download_folder, dir != null ? dir : Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES)));
 
 //		ListPreference feedNotificationPref = (ListPreference) findPreference(getString(R.string.pref_feed_notification_key));
 //		if(feedNotificationPref.getValue() == null) {
