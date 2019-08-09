@@ -110,7 +110,7 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 	@Override
 	public void onResume() {
 		// setup the UI and refresh the feed (if applicable)
-		new RefreshFeedTask(isFragmentSelected()).executeInParallel();
+		startRefreshTask(isFragmentSelected());
 
 		getActivity().registerReceiver(feedUpdaterReceiver, new IntentFilter(FeedUpdaterService.NEW_SUBSCRIPTION_VIDEOS_FOUND));
 
@@ -194,8 +194,17 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 
 	@Override
 	public void onRefresh() {
+		startRefreshTask(true);
+	}
+
+
+	protected synchronized void startRefreshTask(boolean showFetchingVideosDialog) {
+		if (refreshInProgress) {
+			return;
+		}
+		refreshInProgress = true;
 		shouldRefresh = true;
-		new RefreshFeedTask(true).executeInParallel();
+		new RefreshFeedTask(showFetchingVideosDialog).executeInParallel();
 	}
 
 
@@ -357,11 +366,11 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 				// get any videos published after the last time the user used the app...
 				if (shouldRefresh) {
 					new GetSubscriptionVideosTask(SubscriptionsFeedFragment.this).executeInParallel();      // refer to #onChannelVideosFetched()
-					refreshInProgress = true;
 					shouldRefresh = false;
 
-					if (showDialogs)
+					if (showDialogs) {
 						showRefreshDialog();
+					}
 				}
 			}
 		}
