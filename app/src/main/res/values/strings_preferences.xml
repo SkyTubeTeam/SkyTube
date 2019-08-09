@@ -533,12 +533,18 @@
 	<string name="pref_key_brightness_level" translatable="false">pref_key_brightness_level</string>
 
 	<string name="pref_category_downloads">Downloads</string>
+	<string name="pref_key_download_to_separate_directories">pref_key_download_to_separate_directories</string>
 	<string name="pref_title_download_to_separate_directories">Download Videos Into Folders</string>
 	<string name="pref_summary_download_to_separate_directories">Videos are downloaded into folders based on the channel name.</string>
 
-	<!--
-		VIDEO BLOCKER
-	-->
+	<string name="pref_key_video_download_folder">pref_key_video_download_folder</string>
+	<string name="pref_popup_title_video_download_folder">Choose Folder</string>
+	<string name="pref_title_video_download_folder">Video Download Folder</string>
+    <string name="pref_summary_video_download_folder">Videos are downloaded into this folder: %s</string>
+
+    <!--
+        VIDEO BLOCKER
+    -->
 	<string name="pref_video_blocker_category">Video Blocker</string>
 
 	<string name="pref_key_enable_video_blocker" translatable="false">pref_key_enable_video_blocker</string>

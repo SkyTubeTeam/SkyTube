@@ -112,6 +112,7 @@ dependencies {
     }
     implementation 'com.mikepenz:actionitembadge:3.3.2@aar'
     implementation "com.mikepenz:iconics-core:3.0.3@aar"
+    implementation 'com.github.hedzr:android-file-chooser:v1.2.0-final'
 
     // Android support modules
     implementation 'androidx.appcompat:appcompat:1.0.2'

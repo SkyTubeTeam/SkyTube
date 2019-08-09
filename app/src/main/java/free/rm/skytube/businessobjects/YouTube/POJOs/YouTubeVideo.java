@@ -24,9 +24,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Environment;
-import androidx.core.content.FileProvider;
 import android.view.Menu;
 import android.widget.Toast;
+
+import androidx.core.content.FileProvider;
 
 import com.google.api.client.util.DateTime;
 import com.google.api.services.youtube.model.Thumbnail;
@@ -51,6 +52,7 @@ import java.util.regex.Pattern;
 
 import free.rm.skytube.BuildConfig;
 import free.rm.skytube.R;
+import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.FileDownloader;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetVideoDescriptionTask;
@@ -544,6 +546,7 @@ public class YouTubeVideo implements Serializable {
 							.setDescription(getStr(R.string.video) + " ― " + getChannelName())
 							.setOutputFileName(getId() + " - " + getTitle())
 							.setOutputDirectoryName(getChannelName())
+							.setParentDirectory(SkyTubeApp.getPreferenceManager().getString(SkyTubeApp.getStr(R.string.pref_key_video_download_folder), null))
 							.setOutputFileExtension("mp4")
 							.setAllowedOverRoaming(false)
 							.setAllowedNetworkTypesFlags(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE)
