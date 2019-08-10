@@ -35,6 +35,8 @@ import free.rm.skytube.gui.businessobjects.fragments.FragmentEx;
 
 public class MainFragment extends FragmentEx {
 
+	private static final int TOP_LIST_INDEX = 0;
+
 	private RecyclerView				subsListView = null;
 	private SubsAdapter					subsAdapter  = null;
 	private ActionBarDrawerToggle		subsDrawerToggle;
@@ -141,6 +143,11 @@ public class MainFragment extends FragmentEx {
 
 			@Override
 			public void onTabReselected(TabLayout.Tab tab) {
+				//When current tab reselected scroll to the top of the video list
+				VideosGridFragment fragment = videoGridFragmentsList.get(tab.getPosition());
+				if(fragment != null && fragment.gridView != null) {
+					fragment.gridView.smoothScrollToPosition(TOP_LIST_INDEX);
+				}
 			}
 		});
 
