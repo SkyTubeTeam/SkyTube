@@ -215,15 +215,16 @@ public class YouTubeVideo implements Serializable {
 	}
 
         public YouTubeVideo(String id, StreamInfoItem channelItem, String channelId, String channelName) throws ParsingException {
-            this(id, channelItem, channelId, channelName, channelItem.getViewCount());
+            this(id, channelItem, channelId, channelName, channelItem.getViewCount(), channelItem.getDuration());
         }
 
-        public YouTubeVideo(String id, InfoItem channelItem, String channelId, String channelName, long viewCount) throws ParsingException {
+        public YouTubeVideo(String id, InfoItem channelItem, String channelId, String channelName, long viewCount, long duration) throws ParsingException {
                 this.id = id;
                 this.title = channelItem.getName();
                 this.thumbnailUrl = channelItem.getThumbnailUrl();
                 this.thumbnailMaxResUrl = channelItem.getThumbnailUrl();
                 setViewCount(BigInteger.valueOf(viewCount));
+                setDurationInSeconds((int) duration);
                 this.channel = new YouTubeChannel(channelId, channelName);
         }
 
@@ -231,7 +232,7 @@ public class YouTubeVideo implements Serializable {
             this.id = id;
             this.title = title;
             this.description = description;
-            this.durationInSeconds = (int) durationInSeconds;
+            setDurationInSeconds((int) durationInSeconds);
             this.setLikeDislikeCount(BigInteger.valueOf(likeCount), BigInteger.valueOf(dislikeCount));
             this.setViewCount(BigInteger.valueOf(viewCount));
             this.setPublishDate(new DateTime(uploadDate));
@@ -411,6 +412,11 @@ public class YouTubeVideo implements Serializable {
 		PeriodFormatter formatter = ISOPeriodFormat.standard();
 		Period p = formatter.parsePeriod(durationInSeconds);
 		this.durationInSeconds = p.toStandardSeconds().getSeconds();
+	}
+
+	public void setDurationInSeconds(int durationInSeconds) {
+		this.durationInSeconds = durationInSeconds;
+		this.duration = VideoDuration.toHumanReadableString(durationInSeconds);
 	}
 
 	/**

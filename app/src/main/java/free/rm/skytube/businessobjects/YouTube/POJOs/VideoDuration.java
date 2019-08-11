@@ -30,6 +30,39 @@ import java.util.regex.Pattern;
 public class VideoDuration {
 
 	/**
+	 * Converts number of seconds to a human readable string.  If the supplied
+	 * duration is greater than 1 day, then it will return "inf.".
+	 *
+	 * @param numberOfSeconds number of seconds to convert.
+	 * @return Human readable string
+	 */
+	public static String toHumanReadableString(int numberOfSeconds) {
+		StringBuilder s = new StringBuilder();
+		final int hours = numberOfSeconds / 3600;
+		if (hours >= 24) {
+			return "inf.";
+		}
+		numberOfSeconds -= (hours * 3600);
+		final int minutes = numberOfSeconds / 60;
+		final int seconds = numberOfSeconds % 60;
+		if (hours > 0) {
+			s.append(hours).append(':');
+			if (minutes < 10) {
+				s.append('0');
+			}
+			s.append(minutes);
+		} else {
+			s.append(minutes);
+		}
+		s.append(':');
+		if (seconds < 10) {
+			s.append('0');
+		}
+		s.append(seconds);
+		return s.toString();
+	}
+
+	/**
 	 * Converts the supplies ISO 8601 duration into a human readable string.  If the supplied
 	 * duration is greater than 1 day, then it will return "inf.".
 	 *

@@ -140,20 +140,20 @@ public class NewPipeService {
     }
 
     public List<YouTubeVideo> getSearchResult(String query, String token) throws ExtractionException, IOException {
-	SearchExtractor extractor = streamingService.getSearchExtractor(query);
-	extractor.fetchPage();
-	return extractSearchResult(extractor.getInitialPage());
+        SearchExtractor extractor = streamingService.getSearchExtractor(query);
+        extractor.fetchPage();
+        return extractSearchResult(extractor.getInitialPage());
     }
 
     private List<YouTubeVideo> extractSearchResult(InfoItemsPage<InfoItem> initialPage)
-	    throws ParsingException {
-	List<YouTubeVideo> result = new ArrayList<>(initialPage.getItems().size());
+            throws ParsingException {
+        final List<YouTubeVideo> result = new ArrayList<>(initialPage.getItems().size());
         LinkHandlerFactory linkHandlerFactory = streamingService.getStreamLHFactory();
         for (InfoItem item:initialPage.getItems()) {
             if (item instanceof StreamInfoItem) {
                 StreamInfoItem si = (StreamInfoItem) item;
                 String id = linkHandlerFactory.getId(item.getUrl());
-                result.add(new YouTubeVideo(id, item, si.getUploaderUrl(), si.getUploaderName(), si.getViewCount()));
+                result.add(new YouTubeVideo(id, item, si.getUploaderUrl(), si.getUploaderName(), si.getViewCount(), si.getDuration()));
             }
         }
         return result;
