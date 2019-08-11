@@ -211,7 +211,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 	}
 
 	protected void youTubeVideoListener(String videoUrl, YouTubeVideo video) {
-		if (youTubeVideo == null) {
+		if (video == null) {
 			// invalid URL error (i.e. we are unable to decode the URL)
 			String err = String.format(getString(R.string.error_invalid_url), videoUrl);
 			Toast.makeText(getActivity(), err, Toast.LENGTH_LONG).show();
@@ -222,7 +222,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 			// close the video player activity
 			closeActivity();
 		} else {
-			this.youTubeVideo = youTubeVideo;
+			this.youTubeVideo = video;
 
 			// setup the HUD and play the video
 			setUpHUDAndPlayVideo();
