@@ -56,16 +56,17 @@ public class OthersPreferenceFragment extends PreferenceFragment implements Shar
 		// Default tab
 		defaultTabPref = (ListPreference)findPreference(getString(R.string.pref_key_default_tab));
 		Set<String> hiddenFragments = SkyTubeApp.getPreferenceManager().getStringSet(getString(R.string.pref_key_hide_tabs), new HashSet<>());
+		String[] tabListValues = SkyTubeApp.getStringArray(R.array.tab_list_values);
 		if(hiddenFragments.size() == 0) {
 			defaultTabPref.setEntries(SkyTubeApp.getStringArray(R.array.tab_list));
-			defaultTabPref.setEntryValues(SkyTubeApp.getStringArray(R.array.tab_list_values));
+			defaultTabPref.setEntryValues(tabListValues);
 		} else {
 			List<String> defaultTabEntries = new ArrayList<>();
 			List<String> defaultTabEntryValues = new ArrayList<>();
 			for(int i=0;i<SkyTubeApp.getStringArray(R.array.tab_list).length;i++) {
-				if(!hiddenFragments.contains(SkyTubeApp.getStringArray(R.array.tab_list_values)[i])) {
+				if(!hiddenFragments.contains(tabListValues[i])) {
 					defaultTabEntries.add(SkyTubeApp.getStringArray(R.array.tab_list)[i]);
-					defaultTabEntryValues.add(SkyTubeApp.getStringArray(R.array.tab_list_values)[i]);
+					defaultTabEntryValues.add(tabListValues[i]);
 
 				}
 			}
@@ -100,7 +101,7 @@ public class OthersPreferenceFragment extends PreferenceFragment implements Shar
 		folderChooser.setSummary(getString(R.string.pref_summary_video_download_folder, dir != null ? dir : Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES)));
 
 		MultiSelectListPreference hiddenTabsPref = (MultiSelectListPreference)findPreference(getString(R.string.pref_key_hide_tabs));
-		hiddenTabsPref.setEntryValues(SkyTubeApp.getStringArray(R.array.tab_list_values));
+		hiddenTabsPref.setEntryValues(tabListValues);
 
 //		ListPreference feedNotificationPref = (ListPreference) findPreference(getString(R.string.pref_feed_notification_key));
 //		if(feedNotificationPref.getValue() == null) {

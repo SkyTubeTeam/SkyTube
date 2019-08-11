@@ -164,19 +164,20 @@ public class MainFragment extends FragmentEx {
 			viewPager.setCurrentItem(videoGridFragmentsList.indexOf(subscriptionsFeedFragment));
 		} else {
 			String defaultTab = sp.getString(getString(R.string.pref_key_default_tab_name), null);
+			String[] tabListValues = SkyTubeApp.getStringArray(R.array.tab_list_values);
 
 			if(defaultTab == null) {
 				int defaultTabNum = Integer.parseInt(sp.getString(getString(R.string.pref_key_default_tab), "0"));
-				defaultTab = SkyTubeApp.getStringArray(R.array.tab_list_values)[defaultTabNum];
-				sp.edit().putString(getString(R.string.pref_key_default_tab_name), SkyTubeApp.getStringArray(R.array.tab_list_values)[defaultTabNum]).apply();
+				defaultTab = tabListValues[defaultTabNum];
+				sp.edit().putString(getString(R.string.pref_key_default_tab_name), tabListValues[defaultTabNum]).apply();
 			}
 
 			// Create a list of non-hidden fragments in order to default to the proper tab
 			Set<String> hiddenFragments = SkyTubeApp.getPreferenceManager().getStringSet(getString(R.string.pref_key_hide_tabs), new HashSet<>());
 			List<String> shownFragmentList = new ArrayList<>();
-			for(int i=0;i<SkyTubeApp.getStringArray(R.array.tab_list_values).length;i++) {
-				if(!hiddenFragments.contains(SkyTubeApp.getStringArray(R.array.tab_list_values)[i]))
-					shownFragmentList.add(SkyTubeApp.getStringArray(R.array.tab_list_values)[i]);
+			for(int i=0;i<tabListValues.length;i++) {
+				if(!hiddenFragments.contains(tabListValues[i]))
+					shownFragmentList.add(tabListValues[i]);
 			}
 			viewPager.setCurrentItem(shownFragmentList.indexOf(defaultTab));
 		}
