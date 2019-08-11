@@ -24,11 +24,16 @@ import android.os.Environment;
 import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
+import android.preference.MultiSelectListPreference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.widget.Toast;
 
 import com.obsez.android.lib.filechooser.ChooserDialog;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
@@ -42,13 +47,31 @@ import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
 public class OthersPreferenceFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
 	private Preference folderChooser;
 
+	ListPreference defaultTabPref;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.preference_others);
 
 		// Default tab
-		ListPreference defaultTabPref = (ListPreference)findPreference(getString(R.string.pref_key_default_tab));
+		defaultTabPref = (ListPreference)findPreference(getString(R.string.pref_key_default_tab));
+		Set<String> hiddenFragments = SkyTubeApp.getPreferenceManager().getStringSet(getString(R.string.pref_key_hide_tabs), new HashSet<>());
+		if(hiddenFragments.size() == 0) {
+			defaultTabPref.setEntries(SkyTubeApp.getStringArray(R.array.tab_list));
+			defaultTabPref.setEntryValues(SkyTubeApp.getStringArray(R.array.tab_list_values));
+		} else {
+			List<String> defaultTabEntries = new ArrayList<>();
+			List<String> defaultTabEntryValues = new ArrayList<>();
+			for(int i=0;i<SkyTubeApp.getStringArray(R.array.tab_list).length;i++) {
+				if(!hiddenFragments.contains(SkyTubeApp.getStringArray(R.array.tab_list_values)[i])) {
+					defaultTabEntries.add(SkyTubeApp.getStringArray(R.array.tab_list)[i]);
+					defaultTabEntryValues.add(SkyTubeApp.getStringArray(R.array.tab_list_values)[i]);
+
+				}
+			}
+			defaultTabPref.setEntries(defaultTabEntries.toArray(new CharSequence[defaultTabEntries.size()]));
+			defaultTabPref.setEntryValues(defaultTabEntryValues.toArray(new CharSequence[defaultTabEntryValues.size()]));
+		}
 		if (defaultTabPref.getValue() == null) {
 			defaultTabPref.setValueIndex(0);
 		}
@@ -76,14 +99,15 @@ public class OthersPreferenceFragment extends PreferenceFragment implements Shar
 		String dir = pref.getString(getString(R.string.pref_key_video_download_folder), null);
 		folderChooser.setSummary(getString(R.string.pref_summary_video_download_folder, dir != null ? dir : Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES)));
 
+		MultiSelectListPreference hiddenTabsPref = (MultiSelectListPreference)findPreference(getString(R.string.pref_key_hide_tabs));
+		hiddenTabsPref.setEntryValues(SkyTubeApp.getStringArray(R.array.tab_list_values));
+
 //		ListPreference feedNotificationPref = (ListPreference) findPreference(getString(R.string.pref_feed_notification_key));
 //		if(feedNotificationPref.getValue() == null) {
 //			feedNotificationPref.setValueIndex(0);
 //		}
 //		feedNotificationPref.setSummary(String.format(getString(R.string.pref_summary_feed_notification), feedNotificationPref.getEntry()));
 	}
-
-
 
 	@Override
 	public void onResume() {
@@ -108,6 +132,8 @@ public class OthersPreferenceFragment extends PreferenceFragment implements Shar
 				// If the user changed the Default Tab Preference, update the summary to show the new default tab
 				ListPreference defaultTabPref = (ListPreference) findPreference(key);
 				defaultTabPref.setSummary(String.format(getString(R.string.pref_summary_default_tab), defaultTabPref.getEntry()));
+			} else if (key.equals(getString(R.string.pref_key_hide_tabs))) {
+				displayRestartDialog(R.string.pref_hide_tabs_restart);
 			} else if (key.equals(getString(R.string.pref_youtube_api_key))) {
 				// Validate the entered API Key when saved (and not empty), with a simple call to get the most popular video
 				EditTextPreference    youtubeAPIKeyPref = (EditTextPreference) findPreference(getString(R.string.pref_youtube_api_key));
