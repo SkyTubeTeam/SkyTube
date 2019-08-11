@@ -458,6 +458,7 @@
 	<string name="pref_other_category">Others</string>
 
 	<string name="pref_key_default_tab" translatable="false">pref_default_tab</string>
+	<string name="pref_key_default_tab_name" translatable="false">pref_default_tab_name</string>
 	<string name="pref_title_default_tab">Default Tab</string>
 	<string name="pref_summary_default_tab">Default tab to show when SkyTube launches: %s</string>
 
