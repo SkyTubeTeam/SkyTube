@@ -5,8 +5,12 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.List;
 
+import org.schabi.newpipe.extractor.exceptions.ExtractionException;
+
+import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.YouTube.GetVideosDetailsByIDs;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
+import free.rm.skytube.businessobjects.YouTube.VideoStream.NewPipeService;
 import free.rm.skytube.gui.businessobjects.YouTubeVideoListener;
 
 /**
@@ -43,22 +47,34 @@ public class GetVideoDetailsTask extends AsyncTaskParallel<Void, Void, YouTubeVi
 	@Override
 	protected YouTubeVideo doInBackground(Void... params) {
 		String videoId = YouTubeVideo.getYouTubeIdFromUrl(videoUrl);
-		YouTubeVideo youTubeVideo = null;
 
 		if (videoId != null) {
-			try {
-				GetVideosDetailsByIDs getVideo = new GetVideosDetailsByIDs();
-				getVideo.init(videoId);
-				List<YouTubeVideo> youTubeVideos = getVideo.getNextVideos();
-
-				if (youTubeVideos.size() > 0)
-					youTubeVideo = youTubeVideos.get(0);
-			} catch (IOException ex) {
-				Logger.e(this, "Unable to get video details, where id=" + videoId, ex);
+			if (NewPipeService.isPreferred()) {
+				try {
+					return NewPipeService.get().getDetails(videoId);
+				} catch (ExtractionException | IOException e) {
+					Logger.e(this, "Unable to get video details, where id=" + videoId, e);
+				}
+			} else {
+				return getYoutubeVideoDetails(videoId);
 			}
 		}
 
-		return youTubeVideo;
+		return null;
+	}
+
+	private YouTubeVideo getYoutubeVideoDetails(String videoId) {
+		try {
+			GetVideosDetailsByIDs getVideo = new GetVideosDetailsByIDs();
+			getVideo.init(videoId);
+			List<YouTubeVideo> youTubeVideos = getVideo.getNextVideos();
+			if (youTubeVideos.size() > 0) {
+				return youTubeVideos.get(0);
+			}
+		} catch (IOException ex) {
+			Logger.e(this, "Unable to get video details, where id=" + videoId, ex);
+		}
+		return null;
 	}
 
 

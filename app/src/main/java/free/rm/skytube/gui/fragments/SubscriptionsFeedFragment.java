@@ -49,6 +49,7 @@ import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetBulkSubscriptionVideosTask;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetSubscriptionVideosTask;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetSubscriptionVideosTaskListener;
+import free.rm.skytube.businessobjects.YouTube.VideoStream.NewPipeService;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 import free.rm.skytube.gui.businessobjects.SubscriptionsBackupsManager;
 import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
@@ -401,7 +402,7 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 	}
 
 	private AsyncTaskParallel<?,?,?> getRefreshTask(List<YouTubeChannel> totalChannels) {
-		if (SkyTubeApp.getPreferenceManager().getBoolean(SkyTubeApp.getStr(R.string.pref_use_newpipe_backend), false)) {
+		if (NewPipeService.isPreferred()) {
 			return new GetBulkSubscriptionVideosTask(totalChannels, SubscriptionsFeedFragment.this);
 		} else {
 			return new GetSubscriptionVideosTask(SubscriptionsFeedFragment.this);
