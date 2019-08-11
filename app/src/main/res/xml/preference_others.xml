@@ -20,9 +20,15 @@
 
 	<ListPreference
 		android:key="@string/pref_key_default_tab"
-		android:title="@string/pref_title_default_tab"
-		android:entries="@array/default_tab"
-		android:entryValues="@array/default_tab_values" />
+		android:title="@string/pref_title_default_tab" />
+
+	<MultiSelectListPreference
+		android:key="@string/pref_key_hide_tabs"
+		android:title="@string/pref_title_hide_tabs"
+		android:summary="@string/pref_summary_hide_tabs"
+		android:entries="@array/tab_list" />
+
+
 
 	<EditTextPreference
 		android:key="@string/pref_youtube_api_key"
