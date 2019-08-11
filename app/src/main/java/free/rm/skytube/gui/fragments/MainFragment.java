@@ -163,15 +163,13 @@ public class MainFragment extends FragmentEx {
 		if(args != null && args.getBoolean(SHOULD_SELECTED_FEED_TAB, false)) {
 			viewPager.setCurrentItem(videoGridFragmentsList.indexOf(subscriptionsFeedFragment));
 		} else {
-			String defaultTab = sp.getString(getString(R.string.pref_key_default_tab), SkyTubeApp.getStringArray(R.array.tab_list_values)[0]);
+			String defaultTab = sp.getString(getString(R.string.pref_key_default_tab_name), null);
 
-			// Default tab is now stored as the tab name (from @string/tab_list_values). If the user had it stored as a numeric index,
-			// convert it to the name.
-			try {
-				int defaultTabNum = Integer.parseInt(defaultTab);
+			if(defaultTab == null) {
+				int defaultTabNum = Integer.parseInt(sp.getString(getString(R.string.pref_key_default_tab), "0"));
 				defaultTab = SkyTubeApp.getStringArray(R.array.tab_list_values)[defaultTabNum];
-				sp.edit().putString(getString(R.string.pref_key_default_tab), SkyTubeApp.getStringArray(R.array.tab_list_values)[defaultTabNum]).apply();
-			} catch (NumberFormatException e) {} // this is thrown if the name is stored instead, at which point we don't care
+				sp.edit().putString(getString(R.string.pref_key_default_tab_name), SkyTubeApp.getStringArray(R.array.tab_list_values)[defaultTabNum]).apply();
+			}
 
 			// Create a list of non-hidden fragments in order to default to the proper tab
 			Set<String> hiddenFragments = SkyTubeApp.getPreferenceManager().getStringSet(getString(R.string.pref_key_hide_tabs), new HashSet<>());
