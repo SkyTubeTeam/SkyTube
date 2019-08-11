@@ -73,6 +73,7 @@ import java.util.Locale;
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
+import free.rm.skytube.businessobjects.GetVideoDetailsTask;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.GetVideosDetailsByIDs;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
@@ -165,7 +166,8 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 			initViews(view);
 
 			// get which video we need to play...
-			Bundle bundle = getActivity().getIntent().getExtras();
+			Intent intent = getActivity().getIntent();
+			Bundle bundle = intent.getExtras();
 			if (bundle != null  &&  bundle.getSerializable(YOUTUBE_VIDEO_OBJ) != null) {
 				// ... either the video details are passed through the previous activity
 				youTubeVideo = (YouTubeVideo) bundle.getSerializable(YOUTUBE_VIDEO_OBJ);
@@ -174,7 +176,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 				getVideoInfoTasks();
 			} else {
 				// ... or the video URL is passed to SkyTube via another Android app
-				new GetVideoDetailsTask().executeInParallel();
+				new GetVideoDetailsTask(getUrlFromIntent(intent),  this::youTubeVideoListener).executeInParallel();
 			}
 
 		}
@@ -193,6 +195,47 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 		}
 	}
 
+	/**
+	 * The video URL is passed to SkyTube via another Android app (i.e. via an intent).
+	 *
+	 * @return The URL of the YouTube video the user wants to play.
+	 */
+	private String getUrlFromIntent(final Intent intent) {
+		String url = null;
+
+		if (Intent.ACTION_VIEW.equals(intent.getAction()) && intent.getData() != null) {
+			url = intent.getData().toString();
+		}
+
+		return url;
+	}
+
+	protected void youTubeVideoListener(String videoUrl, YouTubeVideo video) {
+		if (youTubeVideo == null) {
+			// invalid URL error (i.e. we are unable to decode the URL)
+			String err = String.format(getString(R.string.error_invalid_url), videoUrl);
+			Toast.makeText(getActivity(), err, Toast.LENGTH_LONG).show();
+
+			// log error
+			Logger.e(this, err);
+
+			// close the video player activity
+			closeActivity();
+		} else {
+			this.youTubeVideo = youTubeVideo;
+
+			// setup the HUD and play the video
+			setUpHUDAndPlayVideo();
+
+			getVideoInfoTasks();
+
+			// will now check if the video is bookmarked or not (and then update the menu
+			// accordingly)
+			new IsVideoBookmarkedTask(youTubeVideo, menu).executeInParallel();
+		}
+	}
+
+	
 	/**
 	 * Initialise the views.
 	 *
@@ -566,104 +609,6 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 
 	////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-	/**
-	 * This task will, from the given video URL, get the details of the video (e.g. video name,
-	 * likes ...etc).
-	 */
-	private class GetVideoDetailsTask extends AsyncTaskParallel<Void, Void, YouTubeVideo> {
-
-		private String videoUrl = null;
-
-
-		@Override
-		protected void onPreExecute() {
-			String url = getUrlFromIntent(getActivity().getIntent());
-
-			try {
-				// YouTube sends subscriptions updates email in which its videos' URL are encoded...
-				// Hence we need to decode them first...
-				videoUrl = URLDecoder.decode(url, "UTF-8");
-			} catch (UnsupportedEncodingException e) {
-				Logger.e(this, "UnsupportedEncodingException on " + videoUrl + " encoding = UTF-8", e);
-				videoUrl = url;
-			}
-		}
-
-
-		/**
-		 * The video URL is passed to SkyTube via another Android app (i.e. via an intent).
-		 *
-		 * @return The URL of the YouTube video the user wants to play.
-		 */
-		private String getUrlFromIntent(final Intent intent) {
-			String url = null;
-
-			if (Intent.ACTION_VIEW.equals(intent.getAction()) && intent.getData() != null) {
-				url = intent.getData().toString();
-			}
-
-			return url;
-		}
-
-
-		/**
-		 * Returns an instance of {@link YouTubeVideo} from the given {@link #videoUrl}.
-		 *
-		 * @return {@link YouTubeVideo}; null if an error has occurred.
-		 */
-		@Override
-		protected YouTubeVideo doInBackground(Void... params) {
-			String videoId = YouTubeVideo.getYouTubeIdFromUrl(videoUrl);
-			YouTubeVideo youTubeVideo = null;
-
-			if (videoId != null) {
-				try {
-					GetVideosDetailsByIDs getVideo = new GetVideosDetailsByIDs();
-					getVideo.init(videoId);
-					List<YouTubeVideo> youTubeVideos = getVideo.getNextVideos();
-
-					if (youTubeVideos.size() > 0)
-						youTubeVideo = youTubeVideos.get(0);
-				} catch (IOException ex) {
-					Logger.e(this, "Unable to get video details, where id=" + videoId, ex);
-				}
-			}
-
-			return youTubeVideo;
-		}
-
-
-		@Override
-		protected void onPostExecute(YouTubeVideo youTubeVideo) {
-			if (youTubeVideo == null) {
-				// invalid URL error (i.e. we are unable to decode the URL)
-				String err = String.format(getString(R.string.error_invalid_url), videoUrl);
-				Toast.makeText(getActivity(), err, Toast.LENGTH_LONG).show();
-
-				// log error
-				Logger.e(this, err);
-
-				// close the video player activity
-				closeActivity();
-			} else {
-				YouTubePlayerV2Fragment.this.youTubeVideo = youTubeVideo;
-
-				// setup the HUD and play the video
-				setUpHUDAndPlayVideo();
-
-				getVideoInfoTasks();
-
-				// will now check if the video is bookmarked or not (and then update the menu
-				// accordingly)
-				new IsVideoBookmarkedTask(youTubeVideo, menu).executeInParallel();
-			}
-		}
-	}
-
-
-
-	////////////////////////////////////////////////////////////////////////////////////////////////
 
 	/**
 	 * This will handle any gesture swipe event performed by the user on the player view.
