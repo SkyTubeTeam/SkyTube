@@ -32,4 +32,22 @@ public interface Predicate<E> {
             }
         }
     }
+
+    /**
+     * Remove everything after the predicate returns true.
+     * @param collection
+     */
+    default void removeAfter(Collection<E> collection) {
+        Objects.requireNonNull(collection);
+        final Iterator<E> each = collection.iterator();
+        boolean after = false;
+        while (each.hasNext()) {
+            E object = each.next();
+            if (after || test(object)) {
+                each.remove();
+                after = true;
+            }
+        }
+    }
+
 }
