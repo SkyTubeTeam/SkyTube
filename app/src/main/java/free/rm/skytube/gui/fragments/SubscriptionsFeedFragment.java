@@ -17,6 +17,10 @@
 
 package free.rm.skytube.gui.fragments;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -26,6 +30,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.NotificationCompat;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -61,7 +67,6 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 	private int numChannelsFetched = 0;
 	private int numChannelsSubscribed = 0;
 	private boolean refreshInProgress = false;
-	private MaterialDialog progressDialog;
 	private SubscriptionsBackupsManager subscriptionsBackupsManager;
 
 	/**
@@ -83,7 +88,6 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 	/** Refresh the feed (by querying the YT servers) after 3 hours since the last check. */
 	private static final int    REFRESH_TIME_HOURS = 3;
 	private static final long   REFRESH_TIME_IN_MS = REFRESH_TIME_HOURS * (1000L*3600L);
-
 
 	@Override
 	protected int getLayoutResource() {
@@ -184,19 +188,48 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 		return SkyTubeApp.getPreferenceManager().getBoolean(flag, false);
 	}
 
+	private void showNotification() {
+		// Sets an ID for the notification, so it can be updated.
+		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+			int notifyID = 1;
+			String CHANNEL_ID = "my_channel_01";// The id of the channel.
+			String name = "channelName";// The user-visible name of the channel.
+			int importance = NotificationManager.IMPORTANCE_HIGH;
+			NotificationManager mNotificationManager =
+					(NotificationManager) getContext().getSystemService(Context.NOTIFICATION_SERVICE);
+			Notification notification = new Notification();
+
+			NotificationChannel mChannel = new NotificationChannel(CHANNEL_ID, name, importance);
+			mChannel.setSound(null,null);
+			// Create a notification and set the notification channel.
+			notification = new Notification.Builder(getContext(), name)
+					.setSmallIcon(R.drawable.ic_notification_icon)
+					.setContentTitle(getString(R.string.fetching_subscription_videos))
+					.setContentText(String.format(getContext().getString(R.string.fetched_videos_from_channels), numVideosFetched, numChannelsFetched, numChannelsSubscribed))
+					.setChannelId(CHANNEL_ID)
+					.build();
+			mNotificationManager.createNotificationChannel(mChannel);
+
+// Issue the notification.
+			mNotificationManager.notify(notifyID , notification);
+		} else {
+			final Intent emptyIntent = new Intent();
+			PendingIntent pendingIntent = PendingIntent.getActivity(getContext(), 1, emptyIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+			NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext(), "")
+					.setSmallIcon(R.drawable.ic_notification_icon)
+					.setContentTitle(getString(R.string.fetching_subscription_videos))
+					.setContentText(String.format(getContext().getString(R.string.fetched_videos_from_channels), numVideosFetched, numChannelsFetched, numChannelsSubscribed))
+					.setPriority(NotificationCompat.FLAG_ONGOING_EVENT)
+					.setContentIntent(pendingIntent);
+
+
+			NotificationManager notificationManager = (NotificationManager) getContext().getSystemService(Context.NOTIFICATION_SERVICE);
+			notificationManager.notify(1, builder.build());
+		}
+	}
 
 	private void showRefreshDialog() {
-		if (progressDialog == null || progressDialog.isCancelled()) {
-			progressDialog = new MaterialDialog.Builder(getActivity())
-						.title(R.string.fetching_subscription_videos)
-						.content(String.format(getContext().getString(R.string.fetched_videos_from_channels), numVideosFetched, numChannelsFetched, numChannelsSubscribed))
-						.progress(true, 0)
-						.backgroundColorRes(R.color.colorPrimary)
-						.titleColorRes(android.R.color.white)
-						.contentColorRes(android.R.color.white)
-						.build();
-			progressDialog.show();
-		}
+		showNotification();
 	}
 
 
@@ -231,9 +264,8 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 
 		numVideosFetched += videosFetched;
 		numChannelsFetched++;
-		if(progressDialog != null) {
-			progressDialog.setContent(String.format(SkyTubeApp.getStr(R.string.fetched_videos_from_channels), numVideosFetched, numChannelsFetched, numChannelsSubscribed));
-		}
+
+		showNotification();
 	}
 
 	@Override
@@ -243,42 +275,22 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 			refreshInProgress = false;
 			// Remove the progress bar(s)
 			swipeRefreshLayout.setRefreshing(false);
-			boolean fragmentIsVisible = dismissProgressDialog();
+
+			NotificationManager notificationManager = (NotificationManager)  getContext().getSystemService(Context.NOTIFICATION_SERVICE);
+
+			notificationManager.cancel(1);
+
 			if(changed) {
 				refreshFeedFromCache();
 			} else {
 				// Only show the toast that no videos were found if the progress dialog is sh
-				if(fragmentIsVisible) {
+				if(isFragmentSelected()) {
 					Toast.makeText(getContext(),
 									R.string.no_new_videos_found,
 									Toast.LENGTH_LONG).show();
 				}
 			}
 		}, 500);
-	}
-
-	protected synchronized boolean dismissProgressDialog() {
-		if(progressDialog != null) {
-			progressDialog.dismiss();
-			progressDialog = null;
-			return true;
-		}
-		return false;
-	}
-	@Override
-	public void onFragmentSelected() {
-		super.onFragmentSelected();
-
-		// when the Subscriptions tab is selected, if a refresh is in progress, show the dialog.
-		if (refreshInProgress) {
-			showRefreshDialog();
-		}
-	}
-
-	@Override
-	public void onFragmentUnselected() {
-		dismissProgressDialog();
-		super.onFragmentUnselected();
 	}
 
 	@Override
@@ -396,9 +408,7 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 					//new GetSubscriptionVideosTask(SubscriptionsFeedFragment.this).executeInParallel();      // refer to #onChannelVideosFetched()
 					getRefreshTask(totalChannels).executeInParallel();
 
-					if (showDialogs) {
-						showRefreshDialog();
-					}
+					showNotification();
 				}
 			} else {
 				refreshInProgress = false;
