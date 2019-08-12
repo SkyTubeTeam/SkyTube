@@ -18,6 +18,7 @@
 package free.rm.skytube.gui.fragments.preferences;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.net.Uri;
@@ -25,8 +26,8 @@ import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.util.Log;
+import android.webkit.WebChromeClient;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -35,6 +36,7 @@ import java.util.Locale;
 import free.rm.skytube.BuildConfig;
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
+import free.rm.skytube.gui.businessobjects.SkyTubeMaterialDialog;
 import free.rm.skytube.gui.businessobjects.updates.UpdatesCheckerTask;
 
 /**
@@ -59,46 +61,34 @@ public class AboutPreferenceFragment extends PreferenceFragment {
 			// remove the updates option if the user is running the OSS flavor...
 			getPreferenceScreen().removePreference(updatesPref);
 		} else {
-			updatesPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-				@Override
-				public boolean onPreferenceClick(Preference preference) {
-					new UpdatesCheckerTask(getActivity(), true).executeInParallel();
-					return true;
-				}
+			updatesPref.setOnPreferenceClickListener(preference -> {
+				new UpdatesCheckerTask(getActivity(), true).executeInParallel();
+				return true;
 			});
 		}
 
 		// if the user clicks on the website link, then open it using an external browser
 		Preference websitePref = findPreference(getString(R.string.pref_key_website));
 		websitePref.setSummary(BuildConfig.SKYTUBE_WEBSITE);
-		websitePref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-			@Override
-			public boolean onPreferenceClick(Preference preference) {
-				// view the app's website in a web browser
-				Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(BuildConfig.SKYTUBE_WEBSITE));
-				startActivity(browserIntent);
-				return true;
-			}
+		websitePref.setOnPreferenceClickListener(preference -> {
+			// view the app's website in a web browser
+			Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(BuildConfig.SKYTUBE_WEBSITE));
+			startActivity(browserIntent);
+			return true;
 		});
 
 		// credits
 		Preference creditsPref = findPreference(getString(R.string.pref_key_credits));
-		creditsPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-			@Override
-			public boolean onPreferenceClick(Preference preference) {
-				displayCredits();
-				return true;
-			}
+		creditsPref.setOnPreferenceClickListener(preference -> {
+			displayCredits();
+			return true;
 		});
 
 		// if the user clicks on the license, then open the display the actual license
 		Preference licensePref = findPreference(getString(R.string.pref_key_license));
-		licensePref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-			@Override
-			public boolean onPreferenceClick(Preference preference) {
-				displayAppLicense();
-				return true;
-			}
+		licensePref.setOnPreferenceClickListener(preference -> {
+			displayAppLicense();
+			return true;
 		});
 	}
 
@@ -114,9 +104,9 @@ public class AboutPreferenceFragment extends PreferenceFragment {
 		}
 
 		if (BuildConfig.DEBUG) {
-			ver.append(" (Debug ");
-			ver.append(getAppBuildTimeStamp());
-			ver.append(')');
+			ver.append(" (Debug ").append(getAppBuildTimeStamp()).append(')');
+		} else {
+			ver.append(" (").append(getAppBuildTimeStamp()).append(')');
 		}
 
 		return ver.toString();
@@ -131,12 +121,8 @@ public class AboutPreferenceFragment extends PreferenceFragment {
 		String timeStamp = "???";
 
 		try {
-			ApplicationInfo appInfo = SkyTubeApp.getContext().getPackageManager().getApplicationInfo(SkyTubeApp.getContext().getPackageName(), 0);
-			String appFile = appInfo.sourceDir;
-			long time = new File(appFile).lastModified();
-
-			SimpleDateFormat formatter = new SimpleDateFormat("yyMMddHHmm", Locale.US);
-			timeStamp = formatter.format(time);
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.US);
+			timeStamp = formatter.format(BuildConfig.BUILD_TIME);
 		} catch (Throwable tr) {
 			Log.d(TAG, "An error occurred while getting app's build timestamp", tr);
 		}
@@ -151,16 +137,31 @@ public class AboutPreferenceFragment extends PreferenceFragment {
 	 * Displays the credits (i.e. contributors).
 	 */
 	private void displayCredits() {
-		AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+		final WebView webView = new WebView(getActivity());
+		webView.setWebChromeClient(new WebChromeClient() {
+			ProgressDialog progressDialog;
 
-		WebView webView = new WebView(getActivity());
-		webView.setWebViewClient(new WebViewClient());
+			@Override
+			public void onProgressChanged(WebView view, int progress) {
+				if (progressDialog == null) {
+					progressDialog = new ProgressDialog(getActivity());
+					progressDialog.show();
+					progressDialog.setMessage(getString(R.string.loading));
+				}
+
+				if (progress >= 100) {
+					progressDialog.dismiss();
+					progressDialog = null;
+				}
+			}
+		});
 		webView.getSettings().setJavaScriptEnabled(false);
 		webView.loadUrl(BuildConfig.SKYTUBE_WEBSITE_CREDITS);
 
-		alert.setView(webView);
-		alert.setPositiveButton(R.string.ok, null);
-		alert.show();
+		new SkyTubeMaterialDialog(getActivity())
+				.customView(webView, true)
+				.negativeText("")
+				.show();
 	}
 
 

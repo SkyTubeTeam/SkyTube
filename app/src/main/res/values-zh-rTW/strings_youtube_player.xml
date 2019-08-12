@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="error_stream_err_unavailable">錯誤訊息無法使用。</string>
+	<string name="error_stream_decryption_fail">無法載入 YouTube 服務的解密碼。</string>
+	<string name="error_stream_parse_error">分析錯誤。</string>
+
+	<string name="error_video_play">影片重播錯誤</string>
+	<string name="error_video_streams_empty">影片 %s 沒有串流。</string>
+	<string name="error_video_streams">檢索影片串流過程時發生錯誤。</string>
+	<string name="error_get_video_desc">檢索影片說明過程時發生錯誤。</string>
+	<string name="error_invalid_url">無效的影片網址：%s</string>
+
+	<string name="warning_live_video">目前無法播放直播串流。在另一個應用程式開啟直播串流嗎？</string>
+
+	<string name="ratings_disabled">停用評等</string>
+
+	<string name="loading_video">正在載入影片…</string>
+	<string name="get_new_video_steam">新的串流</string>
+	<string name="open_in_browser">在 web 瀏覽器中開啟</string>
+	<string name="open_with">開啟用…</string>
+	<string name="share">分享</string>
+	<string name="share_via">分享透過</string>
+	<string name="copy_url">複製網址</string>
+	<string name="url_copied_to_clipboard">網址複製到剪貼簿。</string>
+
+	<string name="error_get_comments">獲取評論時出現錯誤。</string>
+	<string name="no_video_comments">此影片沒有任何評論或評論已被停用。</string>
+	<string name="view_replies">檢視答覆</string>
+	<string name="hide_replies">隱藏答覆</string>
+
+	<string name="enter_video_url">輸入影片網址</string>
+	<string name="play">播放</string>
+	<string name="cancel">取消</string>
+	<string name="clear">清除</string>
+
+	<string name="mark_watched">標示為已觀看</string>
+	<string name="mark_unwatched">標示為未觀看</string>
+
+	<string name="should_resume">您想從停止的地方恢復嗎？</string>
+	<string name="resume">繼續</string>
+<string name="mobile_data">行動數據</string>
+	<string name="warning_mobile_network_play">您的裝置未連線至 Wi-Fi 網路。為了避免潛在的資料使用費，建議連線至 Wi-Fi 網路。無論如何都要播放影片嗎？</string>
+	<string name="warning_mobile_network_disable">不要再詢問。</string>
+	<string name="play_video">播放影片</string>
+	</resources>

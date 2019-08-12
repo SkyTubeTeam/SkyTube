@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<!-- *************************************************************************************** -->
+	<!--
+	 	Chromecast Mini Controller
+	-->
+
+	<style name="CustomCastMiniController" parent="CastMiniController">
+		<item name="castShowImageThumbnail">false</item>
+		<item name="castTitleTextAppearance">@style/TextAppearance.AppCompat.Subhead</item>
+		<item name="castSubtitleTextAppearance">@style/TextAppearance.AppCompat.Caption</item>
+	</style>
+
+	<style name="ChromecastBigPlaybackButtons" parent="ChromecastPlaybackButtons">
+		<item name="android:layout_width">68dp</item>
+		<item name="android:layout_height">68dp</item>
+	</style>
+
+	<style name="ChromecastPlaybackButtons">
+		<item name="android:background">@android:color/transparent</item>
+		<item name="android:layout_gravity">center</item>
+	</style>
+
+	<style name="ChromecastPlaybackButtonContainer">
+		<item name="android:layout_width">@dimen/chromecast_playback_button_container_width</item>
+		<item name="android:layout_height">@dimen/chromecast_playback_button_container_height</item>
+	</style>
+
+	<style name="ChromecastPanelText">
+		<item name="android:textColor">@android:color/white</item>
+		<item name="android:gravity">center_horizontal</item>
+	</style>
+</resources>

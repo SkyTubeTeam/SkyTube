@@ -22,9 +22,9 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.Nullable;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -59,19 +59,16 @@ public class ThumbnailViewerActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_video_thumbnail);
 
 		FloatingActionButton fab = findViewById(R.id.fab);
-		fab.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				// download the thumbnail
-				new ThumbnailDownloader()
-						.setRemoteFileUrl(getThumbnailUrl())
-						.setDirType(Environment.DIRECTORY_PICTURES)
-						.setTitle(youTubeVideo.getTitle())
-						.setDescription(getString(R.string.thumbnail) + " ― " + youTubeVideo.getChannelName())
-						.setOutputFileName(youTubeVideo.getTitle())
-						.setAllowedOverRoaming(true)
-						.displayPermissionsActivity(ThumbnailViewerActivity.this);
-			}
+		fab.setOnClickListener(view -> {
+			// download the thumbnail
+			new ThumbnailDownloader()
+					.setRemoteFileUrl(getThumbnailUrl())
+					.setDirType(Environment.DIRECTORY_PICTURES)
+					.setTitle(youTubeVideo.getTitle())
+					.setDescription(getString(R.string.thumbnail) + " ― " + youTubeVideo.getChannelName())
+					.setOutputFileName(youTubeVideo.getTitle())
+					.setAllowedOverRoaming(true)
+					.displayPermissionsActivity(ThumbnailViewerActivity.this);
 		});
 
 		Intent intent = getIntent();
@@ -80,12 +77,7 @@ public class ThumbnailViewerActivity extends AppCompatActivity {
 		ImageView   thumbnailImageView = findViewById(R.id.thumbnail_image_view);
 		final View  loadingVideoView = findViewById(R.id.loadingVideoView);
 
-		thumbnailImageView.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				finish();
-			}
-		});
+		thumbnailImageView.setOnClickListener(v -> finish());
 
 		Glide.with(this)
 				.load(getThumbnailUrl())

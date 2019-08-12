@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<dimen name="comments_drawer_width">355dp</dimen>
+
+	<dimen name="tutorial_hand_gesture_image_width">80dp</dimen>
 </resources>

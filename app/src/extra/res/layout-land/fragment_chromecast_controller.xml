@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			  xmlns:app="http://schemas.android.com/apk/res-auto"
+			  android:orientation="vertical"
+			  android:clickable="true"
+			  android:background="?attr/colorPrimary"
+			  android:layout_width="match_parent"
+			  android:layout_height="match_parent">
+
+
+
+	<ScrollView
+		android:id="@+id/main_scroll_view"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:orientation="vertical">
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:orientation="horizontal"
+				android:paddingEnd="10dp"
+				android:paddingLeft="10dp"
+				android:paddingRight="10dp"
+				android:paddingStart="10dp">
+
+				<ImageView
+					android:id="@+id/videoImage"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:adjustViewBounds="true"
+					android:scaleType="fitStart"
+					app:srcCompat="@drawable/thumbnail_default"/>
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:orientation="vertical">
+
+
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="50dp"
+						android:gravity="center_vertical"
+						android:orientation="horizontal">
+
+						<free.rm.skytube.gui.businessobjects.RuntimeView
+							android:id="@+id/currentRuntime"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginLeft="10dp"
+							android:text="00:00"
+							android:textColor="@android:color/white"/>
+
+						<SeekBar
+							android:id="@+id/chromecastPlaybackProgressBar"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:layout_weight="1"/>
+
+						<free.rm.skytube.gui.businessobjects.RuntimeView
+							android:id="@+id/duration"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginRight="10dp"
+							android:text="00:00"
+							android:textColor="@android:color/white"/>
+
+					</LinearLayout>
+
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:gravity="center_horizontal"
+						android:orientation="horizontal"
+						>
+
+						<ImageButton
+							android:id="@+id/rewindButton"
+							style="@style/ChromecastBigPlaybackButtons"
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:layout_weight="1"
+							app:srcCompat="@drawable/button_rewind10"/>
+
+						<ImageButton
+							android:id="@+id/stopButton"
+							style="@style/ChromecastBigPlaybackButtons"
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:layout_weight="1"
+							app:srcCompat="@drawable/button_stop"/>
+
+						<FrameLayout
+							android:id="@+id/playPauseContainer"
+							style="@style/ChromecastBigPlaybackButtons"
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:layout_weight="1">
+
+							<ImageButton
+								android:id="@+id/playButton"
+								style="@style/ChromecastPlaybackButtons"
+								android:layout_width="wrap_content"
+								android:layout_height="wrap_content"
+								android:visibility="gone"
+								app:srcCompat="@drawable/button_play"/>
+
+							<ImageButton
+								android:id="@+id/pauseButton"
+								style="@style/ChromecastPlaybackButtons"
+								android:layout_width="wrap_content"
+								android:layout_height="wrap_content"
+								android:visibility="gone"
+								app:srcCompat="@drawable/button_pause"/>
+
+							<com.github.rahatarmanahmed.cpv.CircularProgressView
+								android:id="@+id/bufferingSpinner"
+								xmlns:app="http://schemas.android.com/apk/res-auto"
+								android:layout_width="32dp"
+								android:layout_height="32dp"
+								android:layout_gravity="center"
+								app:cpv_animAutostart="true"
+								app:cpv_color="#ffffff"
+								app:cpv_indeterminate="true"/>
+						</FrameLayout>
+
+						<ImageButton
+							android:id="@+id/forwardButton"
+							style="@style/ChromecastBigPlaybackButtons"
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:layout_weight="1"
+							app:srcCompat="@drawable/button_forward30"/>
+					</LinearLayout>
+
+				</LinearLayout>
+
+			</LinearLayout>
+
+			<include android:id="@+id/videoDescription" layout="@layout/video_description"></include>
+
+		</LinearLayout>
+	</ScrollView>
+
+
+</LinearLayout>

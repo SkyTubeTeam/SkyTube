@@ -17,10 +17,12 @@
 
 package free.rm.skytube.gui.businessobjects.fragments;
 
+import androidx.viewpager.widget.ViewPager;
+
 /**
  * A fragment that will act as a tab.
  *
- * <p>It will be placed inside a {@link android.support.v4.view.ViewPager}.</p>
+ * <p>It will be placed inside a {@link ViewPager}.</p>
  */
 public abstract class TabFragment extends FragmentEx {
 

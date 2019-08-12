@@ -40,6 +40,11 @@ public class YouTubePlaylist implements Serializable {
 
 	/** The YouTube Channel object that this playlist belongs to. */
 	private YouTubeChannel channel;
+	private String channelId;
+
+	public YouTubePlaylist(Playlist playlist) {
+		this(playlist, null);
+	}
 
 	public YouTubePlaylist(Playlist playlist, YouTubeChannel channel) {
 		id = playlist.getId();
@@ -49,6 +54,7 @@ public class YouTubePlaylist implements Serializable {
 			title = playlist.getSnippet().getTitle();
 			description = playlist.getSnippet().getDescription();
 			publishDate = playlist.getSnippet().getPublishedAt();
+			channelId = playlist.getSnippet().getChannelId();
 
 			if(playlist.getSnippet().getThumbnails() != null) {
 				Thumbnail thumbnail = playlist.getSnippet().getThumbnails().getHigh();
@@ -92,6 +98,14 @@ public class YouTubePlaylist implements Serializable {
 
 	public YouTubeChannel getChannel() {
 		return channel;
+	}
+
+	public void setChannel(YouTubeChannel channel) {
+		this.channel = channel;
+	}
+
+	public String getChannelId() {
+		return channelId;
 	}
 
 	/**

@@ -14,6 +14,9 @@
 	<color name="dialog_content_text">#000</color>
 	<color name="dialog_positive_text">@color/colorAccent</color>
 	<color name="dialog_negative_text">@color/colorAccent</color>
+	<color name="dialog_neutral_text">@color/colorAccent</color>
+	<color name="dialog_row_0">#F0F0F0</color>
+	<color name="dialog_row_1">@color/dialog_backgound</color>
 
 
 	<!--
@@ -39,6 +42,13 @@
 
 
 	<!--
+		Video Player Tutorial
+	-->
+	<color name="tutorial_background">@color/colorPrimary</color>
+	<color name="tutorial_swipe_area">#277AA2</color>
+
+
+	<!--
 		Video Player Colours
 	-->
 	<!-- Actionbar background colour ~~ which is the same as com.android.internal.R.layout.media_controller
@@ -52,6 +62,10 @@
 	<!-- Comments -->
 	<color name="comment_background">@color/video_player_hud</color>
 	<color name="comment_text">#b3b3b3</color>
+
+	<!-- Player v2 -->
+	<color name="video_player_v2_hud">#7A000000</color>
+	<color name="video_player_v2_seek_bar">@color/colorAccent</color>
 
 
 	<!--

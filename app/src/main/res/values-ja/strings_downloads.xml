@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="downloads">ダウンロード</string>
 	<string name="download_video">ビデオをダウンロード</string>
@@ -9,8 +9,8 @@
 	<string name="no_downloaded_videos_text">ビデオをまだダウンロードしていません。
 \n
 \nダウンロードするとここに表示されます。</string>
-	<string name="downloads_disabled_warning">Wi-Fi を使用していないので、ビデオのダウンロードが無効です。
-\n有効にするには、設定 &gt; その他 に移動して、\'モバイルネットワークでダウンロードを許可する\' をチェックしてください</string>
 	<string name="playing_video_file_missing">このビデオのダウンロードが見つかりませんでした。リモート再生中。</string>
 	<string name="external_storage_not_available">外部ストレージが利用できないので、ファイルをダウンロードできません。</string>
+<string name="download">ダウンロード</string>
+    <string name="warning_mobile_network_download">お使いのデバイスはWi-Fiネットワークに接続されていません。 余分なデータ使用量の増加を防ぐために、Wi-Fiネットワークに接続することをお勧めします。 とにかくビデオをダウンロードしますか\?</string>
 </resources>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="feed">خوراک</string>
+
+	<string name="subscribing_to_channels">مشترک شدن در کانال‌ها…</string>
+	<string name="fetching_subbed_channels_info">دریافت اطلاعات کانال‌ها…</string>
+	<string name="fetching_subbed_channels_info_error">خطایی حین دریافت اطلاعات کانال‌ها رخ داد.</string>
+
+	<string name="fetching_subscription_videos">دریافت ویدئوها از کانال‌های مشترک‌شده</string>
+	<string name="fetched_videos_from_channels">%1$d ویدئو از %2$d/%3$d کانال دریافت شد.</string>
+	<string name="no_new_videos_found">ویدئوی جدیدی پیدا نشد.</string>
+	<string name="no_subscriptions_text">هنوز مشترک هیچ کانالی نشده‌اید.
+\n
+\nپس از اشتراک در کانال‌ها، آخرین ویدئوهای آپلودشده طی یک ماه گذشته در این کانال‌ها، در اینجا نمایش می‌یابند.</string>
+	<string name="import_subscriptions_from_youtube">وارد کردن اشتراک‌ها از یوتیوب</string>
+
+	<string name="notification_channel_feed_title">اعلان‌های خوراک</string>
+	<string name="notification_new_videos_found">%d ویدئوی جدید از کانال‌های مشترک‌شده</string>
+</resources>

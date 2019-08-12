@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+<string name="blocked_videos">Geblokkeerde video\'s</string>
+	<string name="no_videos_blocked">Er worden geen video\'s geblokkeerd of gefilterd. Wil je videoblokkering instellen?</string>
+	<string name="configure">Instellen</string>
+	<string name="block_channel">Kanaal blokkeren</string>
+	<string name="channel_blacklisted">Kanaal is op de zwarte lijst geplaatst; ververs de pagina.</string>
+	<string name="channel_blacklist_error">Kanaal kan niet worden toegevoegd aan de zwarte lijst.</string>
+	<string name="channel_unwhitelist_error">Kanaal kan niet worden verwijderd van de witte lijst.</string>
+	<string name="dislikes">%d%% niet-leuks</string>
+</resources>

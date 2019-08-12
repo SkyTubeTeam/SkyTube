@@ -1,0 +1,61 @@
+<!--
+  ~ SkyTube
+  ~ Copyright (C) 2018  Ramon Mifsud
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation (version 3 of the License).
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="93dp"
+    android:height="115dp"
+    android:viewportWidth="93"
+    android:viewportHeight="115">
+  <path
+      android:pathData="m12.705,39.832q0.832,0 1.468,0.603l1.223,1.223q0.62,0.62 0.62,1.484 0,0.881 -0.62,1.468l-4.779,4.795h11.482q0.848,0 1.378,0.612 0.53,0.612 0.53,1.476v2.088q0,0.864 -0.53,1.476 -0.53,0.612 -1.378,0.612L10.617,55.668l4.779,4.795q0.62,0.587 0.62,1.468 0,0.881 -0.62,1.468l-1.223,1.223q-0.62,0.62 -1.468,0.62 -0.864,0 -1.484,-0.62L0.603,54.004Q0,53.433 0,52.536 0,51.656 0.603,51.052L11.221,40.435q0.636,-0.603 1.484,-0.603z"
+      android:strokeAlpha="1"
+      android:strokeWidth="2"
+      android:fillColor="#fbc23f"
+      android:strokeColor="#00000000"
+      android:fillAlpha="1"/>
+  <path
+      android:pathData="M37.659,52.398m-8.839,0a8.839,8.839 0,1 1,17.678 0a8.839,8.839 0,1 1,-17.678 0"
+      android:strokeAlpha="1"
+      android:strokeWidth="1.5"
+      android:fillColor="#00000000"
+      android:strokeColor="#fbc23f"
+      android:fillType="nonZero"
+      android:fillAlpha="1"/>
+  <path
+      android:pathData="m62.619,65.241q-0.832,0 -1.468,-0.603l-1.223,-1.223q-0.62,-0.62 -0.62,-1.484 0,-0.881 0.62,-1.468l4.779,-4.795L53.225,55.668q-0.848,0 -1.378,-0.612 -0.53,-0.612 -0.53,-1.476v-2.088q0,-0.864 0.53,-1.476 0.53,-0.612 1.378,-0.612L64.706,49.405L59.928,44.61q-0.62,-0.587 -0.62,-1.468 0,-0.881 0.62,-1.468l1.223,-1.223q0.62,-0.62 1.468,-0.62 0.864,0 1.484,0.62L74.72,51.069q0.603,0.571 0.603,1.468 0,0.881 -0.603,1.484L64.103,64.638q-0.636,0.603 -1.484,0.603z"
+      android:strokeAlpha="1"
+      android:strokeWidth="2"
+      android:fillColor="#fbc23f"
+      android:strokeColor="#00000000"
+      android:fillAlpha="1"/>
+  <path
+      android:pathData="m34.536,53.9c-0.06,-5.835 5.21,-4.221 6.775,-2.66l15.355,24.689c2.348,-7.092 7.552,-6.592 11.412,-1.516 3.476,-5.05 7.271,-4.6 9.897,0 3.08,-3.066 4.868,-2.738 7.877,-0.202 4.728,10.231 8.07,19.817 6.665,27.087 -0.45,3.198 -2.046,4.677 -3.434,6.468 -3.293,3.005 -6.461,5.496 -9.998,6.367 -10.983,1.927 -16.578,0.385 -24.541,-6.367l-6.968,-6.671c-4.616,-2.784 -8.638,-6.544 -13.836,-8.086 -0.175,-6.19 6.361,-5.119 9.19,-4.649l10.604,6.671 2.121,0.505C52.891,85.079 39.384,65.408 34.536,53.9Z"
+      android:strokeAlpha="1"
+      android:strokeLineJoin="miter"
+      android:strokeWidth="0.14458963"
+      android:fillColor="#ffffff"
+      android:strokeColor="#58595b"
+      android:strokeLineCap="butt"/>
+  <path
+      android:pathData="m23.412,12.895v-12l-8.5,6zM23.912,6.895 L32.412,12.895v-12z"
+      android:fillColor="#fbc23f"
+      android:fillAlpha="1"/>
+  <path
+      android:pathData="m51.912,0.895v12l8.5,-6zM51.412,6.895 L42.912,0.895v12z"
+      android:fillColor="#fbc23f"
+      android:fillAlpha="1"/>
+</vector>

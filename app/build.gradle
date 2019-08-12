@@ -1,27 +1,29 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion '27.0.3'
+    compileSdkVersion 28
+    buildToolsVersion '28.0.3'
 
     defaultConfig {
         applicationId "free.rm.skytube"
         minSdkVersion 14
-        targetSdkVersion 27
+        targetSdkVersion 28
 
-        versionName "2.81"    // digits of the *fractional part* shall NOT be > than "9"
-        versionCode 12
+        versionName "2.962"    // digits of the *fractional part* shall NOT be > than "9"
+        versionCode buildNumber.toInteger()
 
         // Third party devs:  pls be ethical and change the below keys
+        buildConfigField 'String',   'YOUTUBE_API_KEYS_DEBUG', '"AIzaSyDU-ZZCyOB_kYkiMSZ6ooSipUZRukHU4ik"'
         buildConfigField 'String[]', 'YOUTUBE_API_KEYS',
                 '{' +
-                        '"AIzaSyBlD0IyrnYDVUklu-lEp5ZPmeUFaKEmz2I",' +
-                        '"AIzaSyCBe6h-D27WgcDkX9Wuyb3Fjef6tFja2Eg",' +
-                        '"AIzaSyC2eifJuPidYxsq7NKvZGdTxngFrhbm0G0"' +
-                        '}'
-        buildConfigField 'String', 'SKYTUBE_WEBSITE', '"http://skytube-app.com"'
-        buildConfigField 'String', 'SKYTUBE_WEBSITE_CREDITS', '"http://skytube-app.com/credits.html"'
+                        '"AIzaSyDc3jDqguaCZSKpAwpvgkr0OwUZPFRvcX8",' +
+                        '"AIzaSyAlDQa9lCW_YZ10_nml6mNygjEy37b0pmo",' +
+                        '"AIzaSyCJjgfBdvHGoZCILxcTE1HeBd-_megm05o"' +
+                '}'
+        buildConfigField 'String', 'SKYTUBE_WEBSITE',         '"https://skytube-app.com"'
+        buildConfigField 'String', 'SKYTUBE_WEBSITE_CREDITS', '"https://skytube-app.com/credits.html"'
         buildConfigField 'String', 'SKYTUBE_UPDATES_URL', '"https://api.github.com/repos/ram-on/SkyTube/releases/latest"'
+        buildConfigField 'long', 'BUILD_TIME', String.valueOf(System.currentTimeMillis()) + 'L'
         vectorDrawables.useSupportLibrary true
         multiDexEnabled true    // as we have over 65536 lines of code...
     }
@@ -29,6 +31,11 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "CHROMECAST_APP_ID", "\"39E8D587\""
+        }
+        debug {
+//            buildConfigField "String", "CHROMECAST_APP_ID", "\"39E8D587\"" // prod
+            buildConfigField "String", "CHROMECAST_APP_ID", "\"29A66E17\"" // dev
         }
     }
     flavorDimensions "skytube"
@@ -38,6 +45,16 @@ android {
             applicationId "free.rm.skytube.oss"
             resValue "string", "app_name", "SkyTube"
             dimension "skytube"
+            buildConfigField 'String[]', 'YOUTUBE_API_KEYS',
+                    '{' + // new keys
+                        '"AIzaSyDc3jDqguaCZSKpAwpvgkr0OwUZPFRvcX8",' +
+                        '"AIzaSyAlDQa9lCW_YZ10_nml6mNygjEy37b0pmo",' +
+                        '"AIzaSyCJjgfBdvHGoZCILxcTE1HeBd-_megm05o",' +
+                        // old keys, but this can be used with FDroid
+                        '"AIzaSyC27jgPDHkQsQK8TW4ngrQprSCnlMTJ04w",' +
+                        '"AIzaSyCmXsaE6ZW14-1vM5zceWnGWnB73FkY7U4",' +
+                        '"AIzaSyBd3Loyy_XN2tPHPfc1E7EkSkdCqfzTHxg"'  +
+                    '}'
         }
         // 99% Open-source edition:  uses the YouTube Player Jar [i.e. proprietary module - optional usage]
         extra {
@@ -49,7 +66,7 @@ android {
     // Generate APK filenames as follows:  <App Name>-<Flavor><Version>
     android.applicationVariants.all { variant ->
         variant.outputs.all { output ->
-            outputFileName = "${parent.name}-${variant.productFlavors[0].name}-${variant.versionName}.apk"
+            outputFileName = "${parent.name}-${variant.productFlavors[0].name.capitalize()}-${variant.versionName}.apk"
         }
     }
     // Ignore missing translations
@@ -57,37 +74,60 @@ android {
         checkReleaseBuilds false
         abortOnError false
     }
+    dexOptions {
+        jumboMode true
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    packagingOptions {
+        exclude "META-INF/DEPENDENCIES"
+    }
 }
 
 dependencies {
     testImplementation 'junit:junit:4.12'
 
     // YouTube modules
-    implementation 'com.google.http-client:google-http-client-android:1.23.0'
-    implementation 'com.google.apis:google-api-services-youtube:v3-rev187-1.23.0'
-    implementation 'com.github.TeamNewPipe:NewPipeExtractor:v0.11.5'
+    implementation 'com.google.http-client:google-http-client-android:1.30.2'
+    implementation 'com.google.apis:google-api-services-youtube:v3-rev20190513-1.30.1'
+    implementation 'com.github.TeamNewPipe.NewPipeExtractor:extractor:5f65788a2f89e'
 
     // other modules
-    implementation group: 'org.ocpsoft.prettytime', name: 'prettytime', version: '4.0.1.Final'
-    implementation 'com.github.moraisigor:slidingdrawer:1.6.7'
-    implementation 'com.github.bumptech.glide:glide:4.3.1'
-    implementation 'com.jakewharton:butterknife:8.8.1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-    implementation 'com.google.code.gson:gson:2.8.2'
-    implementation group: 'joda-time', name: 'joda-time', version: '2.9.9'
+    implementation group: 'org.ocpsoft.prettytime', name: 'prettytime', version: '4.0.2.Final'
+    implementation 'com.github.moraisigor:slidingdrawer:1.7.1'
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
+    implementation 'com.jakewharton:butterknife:10.1.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
+    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation group: 'joda-time', name: 'joda-time', version: '2.10.3'
     implementation 'com.afollestad.material-dialogs:core:0.9.5.0'
-    implementation 'com.github.angads25:filepicker:1.1.1'
-    implementation 'com.google.android.exoplayer:exoplayer:2.7.0'
+    implementation 'com.google.android.exoplayer:exoplayer:2.8.2'
+    implementation 'com.klinkerapps:link_builder:1.6.1'
+    implementation (group: 'com.optimaize.languagedetector', name: 'language-detector', version: '0.6') {
+        exclude group: 'com.google.guava', module: 'guava'
+    }
+    implementation 'com.mikepenz:actionitembadge:3.3.2@aar'
+    implementation "com.mikepenz:iconics-core:3.0.3@aar"
+    implementation 'com.github.hedzr:android-file-chooser:v1.2.0-final'
 
     // Android support modules
-    implementation 'com.android.support:appcompat-v7:27.1.0'
-    implementation 'com.android.support:support-v13:27.1.0'
-    implementation 'com.android.support:design:27.1.0'
-    implementation 'com.android.support:recyclerview-v7:27.1.0'
-    implementation 'com.android.support:cardview-v7:27.1.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-    implementation 'com.android.support:multidex:1.0.3' // as we have over 65536 lines of code...
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.legacy:legacy-support-v13:1.0.0'
+    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.multidex:multidex:2.0.1' // as we have over 65536 lines of code...
 
     // proprietary module
     extraImplementation files('libs/YouTubeAndroidPlayerApi.jar')
+    extraImplementation 'com.android.support:mediarouter-v7:28.0.0'
+    extraImplementation 'com.google.android.gms:play-services-cast-framework:17.0.0'
+    extraImplementation 'com.googlecode.android-query:android-query:0.25.9'
+    extraImplementation 'com.sothree.slidinguppanel:library:3.4.0'
+    extraImplementation 'com.github.rahatarmanahmed:circularprogressview:2.5.0'
+    extraImplementation 'com.squareup.picasso:picasso:2.5.2'
 }

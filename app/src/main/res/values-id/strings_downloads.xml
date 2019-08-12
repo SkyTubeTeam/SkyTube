@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources><string name="download">Unduh</string>
+    <string name="downloads">Unduhan</string>
+    <string name="warning_mobile_network_download">Perangkat anda tidak tersambung dengan jaringan Wi-Fi. Untuk menghindari potensi penggunaan data tambahan, direkomendasikan untuk tersambung dengan jaringan Wi-Fi. Tetap mengunduh video\?</string>
+    <string name="download_video">Unduh Video</string>
+    <string name="starting_video_download">Mengunduh \'%s\'…</string>
+    <string name="video_download_stream_error">Tidak bisa mengunduh \'%s\'.</string>
+    <string name="delete_download">Hapus Unduhan</string>
+    <string name="video_downloaded">\'%s\' diunduh.</string>
+    <string name="no_downloaded_videos_text">Anda belum mengunduh video apapun.
+\n
+\nSetelah anda mengunduhnya, video akan ditampilkan di sini.</string>
+    <string name="playing_video_file_missing">Berkas unduhan untuk video ini tidak ditemukan. Memutar secara daring.</string>
+    <string name="external_storage_not_available">Tidak bisa mengunduh berkas karena penyimpanan eksternal tidak tersedia.</string>
+</resources>

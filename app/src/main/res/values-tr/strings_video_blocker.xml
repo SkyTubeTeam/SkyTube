@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources><string name="blocked_videos">Engellenen Videolar</string>
+    <string name="no_videos_blocked">Hiçbir video engellenmedi veya filtrelenmedi. Video Engelleyiciyi yapılandırmak istiyor musunuz\?</string>
+    <string name="configure">Yapılandır</string>
+    <string name="block_channel">Kanalı engelle</string>
+    <string name="channel_blacklisted">Kanal kara listeye alındı. Lütfen yenileyin.</string>
+    <string name="channel_blacklist_error">Kanal kara listeye alınamadı.</string>
+    <string name="channel_unwhitelist_error">Kanal beyaz listeden kaldırılamadı.</string>
+    <string name="dislikes">%d%% beğenmeme</string>
+</resources>

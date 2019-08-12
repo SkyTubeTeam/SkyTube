@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources>
 	<string name="error_stream_err_unavailable">Error message unavailable.</string>
 	<string name="error_stream_decryption_fail">Could not load decryption code for the YouTube service.</string>
@@ -10,6 +10,10 @@
 	<string name="error_get_video_desc">An error has occurred while retrieving video\'s description.</string>
 	<string name="error_invalid_url">Invalid video URL: %s</string>
 
+	<string name="mobile_data">Mobile Data</string>
+	<string name="warning_mobile_network_play">Your device is not connected to a Wi-Fi network. To avoid potential extra data usage charges, it is recommended to connect to a Wi-Fi network. Play video anyway\?</string>
+	<string name="warning_mobile_network_disable">Never ask again.</string>
+	<string name="play_video">Play Video</string>
 	<string name="warning_live_video">Cannot play live streams for now. Open live stream in another app?</string>
 
 	<string name="ratings_disabled">Ratings disabled</string>
@@ -23,6 +27,9 @@
 	<string name="copy_url">Copy URL</string>
 	<string name="url_copied_to_clipboard">URL copied to clipboard.</string>
 
+	<string name="mark_watched">Mark Watched</string>
+	<string name="mark_unwatched">Mark Unwatched</string>
+
 	<string name="error_get_comments">An error has occurred while getting comments.</string>
 	<string name="no_video_comments">This video has no comments or comments are disabled.</string>
 	<string name="view_replies">View replies</string>
@@ -33,7 +40,6 @@
 	<string name="cancel">Cancel</string>
 	<string name="clear">Clear</string>
 
-	<string name="tutorial_comments_icon">Swipe to the left to view comments.</string>
-	<string name="tutorial_video_info_icon">Swipe to the top to view information about the video.</string>
-	<string name="tutorial_pause_video">Double tap to pause or play a video.</string>
+	<string name="should_resume">Do you wish to resume from where you stopped?</string>
+	<string name="resume">Resume</string>
 </resources>

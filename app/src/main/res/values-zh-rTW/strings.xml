@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="could_not_get_videos">無法取得 %s 影片。</string>
+	<string name="could_not_get_channel">無法下載頻道資訊！</string>
+	<string name="views">%,d 檢視</string>
+	<string name="error">錯誤</string>
+	<string name="ok">確定</string>
+	<string name="search_videos">搜尋影</string>
+	<string name="launch_offical_player_error">嘗試從 Google 啟動官方的 YouTube 播放時發生錯誤。請確定它已安裝在您的裝置上了。</string>
+    <string name="LIVE">直播</string>
+    <string name="featured">特選</string>
+    <string name="most_popular">最受歡迎的</string>
+    <string name="video">影片</string>
+    <string name="videos">影片</string>
+    <string name="num_videos">%d 影片</string>
+    <string name="playlists">播放清單</string>
+    <string name="could_not_get_playlists">無法取得 %s 播放清單。</string>
+    <string name="hello_blank_fragment">哈囉！空白片段</string>
+    <string name="loading">正在載入…</string>
+
+    <string name="yes">是</string>
+	<string name="no">否</string>
+
+    </resources>

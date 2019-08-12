@@ -6,6 +6,7 @@
 
 	<dimen name="description_drawer_height">280dp</dimen>
 	<dimen name="comments_drawer_width">300dp</dimen>
+	<dimen name="tutorial_hand_gesture_image_width">100dp</dimen>
 
 	<dimen name="video_grid_progress_bar_top_margin">50dp</dimen>
 	<dimen name="fab_margin">16dp</dimen>

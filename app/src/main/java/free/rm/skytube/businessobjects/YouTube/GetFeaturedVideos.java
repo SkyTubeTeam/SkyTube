@@ -17,15 +17,17 @@
 
 package free.rm.skytube.businessobjects.YouTube;
 
-import android.util.Log;
-
 import com.google.api.services.youtube.YouTube;
 import com.google.api.services.youtube.model.Video;
 import com.google.api.services.youtube.model.VideoListResponse;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
+import free.rm.skytube.R;
+import free.rm.skytube.app.SkyTubeApp;
+import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPI;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPIKey;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
@@ -37,8 +39,6 @@ public class GetFeaturedVideos extends GetYouTubeVideos {
 
 	protected YouTube.Videos.List videosList = null;
 
-	private static final String	TAG = GetFeaturedVideos.class.getSimpleName();
-
 
 	@Override
 	public void init() throws IOException {
@@ -48,10 +48,10 @@ public class GetFeaturedVideos extends GetYouTubeVideos {
 				"nextPageToken");
 		videosList.setKey(YouTubeAPIKey.get().getYouTubeAPIKey());
 		videosList.setChart("mostPopular");
-		videosList.setRegionCode(getPreferredRegion());
 		videosList.setMaxResults(getMaxResults());
 		nextPageToken = null;
 	}
+
 
 	@Override
 	public List<YouTubeVideo> getNextVideos() {
@@ -61,6 +61,9 @@ public class GetFeaturedVideos extends GetYouTubeVideos {
 			try {
 				// set the page token/id to retrieve
 				videosList.setPageToken(nextPageToken);
+
+				// set the preferred region (placed here to reflect any changes performed at runtime)
+				videosList.setRegionCode(getPreferredRegion());
 
 				// communicate with YouTube
 				VideoListResponse response = videosList.execute();
@@ -75,11 +78,37 @@ public class GetFeaturedVideos extends GetYouTubeVideos {
 				if (nextPageToken == null)
 					noMoreVideoPages = true;
 			} catch (IOException e) {
-				Log.e(TAG, "Error has occurred while getting Featured Videos.", e);
+				Logger.e(this, "Error has occurred while getting Featured Videos.", e);
 			}
 		}
 
 		return toYouTubeVideoList(searchResultList);
+	}
+
+
+	/**
+	 * Converts {@link List} of {@link Video} to {@link List} of {@link YouTubeVideo}.
+	 *
+	 * @param videoList {@link List} of {@link Video}.
+	 * @return {@link List} of {@link YouTubeVideo}.
+	 */
+	private List<YouTubeVideo> toYouTubeVideoList(List<Video> videoList) {
+		List<YouTubeVideo> youTubeVideoList = new ArrayList<>();
+
+		if (videoList != null) {
+			for (Video video : videoList) {
+				youTubeVideoList.add(new YouTubeVideo(video));
+			}
+		}
+
+		return youTubeVideoList;
+	}
+
+
+	private String getPreferredRegion() {
+		String region = SkyTubeApp.getPreferenceManager()
+				.getString(SkyTubeApp.getStr(R.string.pref_key_preferred_region), "").trim();
+		return (region.isEmpty() ? null : region);
 	}
 
 

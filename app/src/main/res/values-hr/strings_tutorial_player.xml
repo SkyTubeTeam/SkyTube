@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="next">Sljedeće</string>
+	<string name="done">Gotovo</string>
+	<string name="skip">Preskoči</string>
+	<string name="page_counter">%d od %d</string>
+
+	<string name="tutorial_slide_1">Prijeđite prstom ulijevo da biste vidjeli komentare.</string>
+	<string name="tutorial_slide_2">Prijeđite prstom prema gore da biste vidjeli opis videozapisa.</string>
+	<string name="tutorial_slide_3">Prijeđite prstom vodoravno da biste premotali naprijed ili natrag.</string>
+	<string name="tutorial_slide_4">Prijeđite prstom okomito kako biste prilagodili glasnoću.</string>
+	<string name="tutorial_slide_5">Prijeđite prstom okomito kako biste podesili svjetlinu.</string>
+	<string name="tutorial_slide_6">Dvaput dodirnite za pauziranje ili reprodukciju videozapisa.</string>
+</resources>

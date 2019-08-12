@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="bookmarks">書簽</string>
+
+	<string name="bookmark">書簽</string>
+	<string name="video_bookmarked">影片書籤</string>
+	<string name="video_bookmarked_error">無法將影片加入書籤。</string>
+
+	<string name="unbookmark">取消書籤</string>
+	<string name="video_unbookmarked">取消影片書籤</string>
+	<string name="video_unbookmarked_error">無法取消影片書籤。</string>
+
+	<string name="no_bookmarked_videos_text">您尚未為任何影片加入書籤。
+\n
+\n一旦您這樣做，他們就會出現在這裡。</string>
+</resources>

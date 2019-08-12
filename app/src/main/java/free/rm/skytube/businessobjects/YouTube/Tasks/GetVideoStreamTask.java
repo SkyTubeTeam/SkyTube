@@ -17,88 +17,47 @@
 
 package free.rm.skytube.businessobjects.YouTube.Tasks;
 
-import android.net.Uri;
-
-import java.io.File;
-
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.YouTube.VideoStream.ParseStreamMetaData;
+import free.rm.skytube.businessobjects.YouTube.VideoStream.StreamMetaData;
 import free.rm.skytube.businessobjects.YouTube.VideoStream.StreamMetaDataList;
 import free.rm.skytube.businessobjects.interfaces.GetDesiredStreamListener;
 
 /**
  * AsyncTask to retrieve the Uri for the given YouTube video.
- *
- * <p>If the video was already downloaded/saved by the user, it will return the Uri of that file;
- * otherwise, if will get the desired stream from the YouTube servers.</p>
  */
-public class GetVideoStreamTask extends AsyncTaskParallel<Void, Exception, Uri> {
+public class GetVideoStreamTask extends AsyncTaskParallel<Void, Exception, StreamMetaDataList> {
 
-	private YouTubeVideo                youTubeVideo;
-	private GetDesiredStreamListener    listener;
-	private String                      errorMessage = "";
+    private YouTubeVideo youTubeVideo;
+    private GetDesiredStreamListener listener;
 
+    public GetVideoStreamTask(YouTubeVideo youTubeVideo, GetDesiredStreamListener listener) {
+        this.youTubeVideo = youTubeVideo;
+        this.listener = listener;
+    }
 
-	public GetVideoStreamTask(YouTubeVideo youTubeVideo, GetDesiredStreamListener listener) {
-		this.youTubeVideo = youTubeVideo;
-		this.listener = listener;
-	}
+    @Override
+    protected StreamMetaDataList doInBackground(Void... param) {
+        StreamMetaDataList streamMetaDataList;
 
+        ParseStreamMetaData streamParser = new ParseStreamMetaData(youTubeVideo.getId());
+        streamMetaDataList = streamParser.getStreamMetaDataList();
 
-	@Override
-	protected Uri doInBackground(Void... param) {
-		Uri videoUri = null;
-
-		// if the user has previously saved/downloaded the video...
-		if (youTubeVideo.isDownloaded()) {
-			videoUri = youTubeVideo.getFileUri();
-
-			// If the file for this video has gone missing, remove it from the Database and then
-			// play remotely.
-			if (!new File(videoUri.getPath()).exists()) {
-				youTubeVideo.removeDownload();
-
-				videoUri = null;
-			}
-		}
-
-		if (videoUri == null) {
-			videoUri = getVideoStreamUri();
-		}
-
-		return videoUri;
-	}
+        return streamMetaDataList;
+    }
 
 
-	/**
-	 * Returns a list of video/stream meta-data that is supported by this app (with respect to this
-	 * video).
-	 *
-	 * @return A list of {@link StreamMetaDataList}.
-	 */
-	private Uri getVideoStreamUri() {
-		StreamMetaDataList streamMetaDataList;
+    @Override
+    protected void onPostExecute(StreamMetaDataList streamMetaDataList) {
+        if (streamMetaDataList == null || streamMetaDataList.isEmpty()) {
+            listener.onGetDesiredStreamError(streamMetaDataList.getErrorMessage());
+        } else {
+            // get the desired stream based on user preferences
+            StreamMetaData desiredStream = streamMetaDataList.getDesiredStream();
 
-		ParseStreamMetaData streamParser = new ParseStreamMetaData(youTubeVideo.getId());
-		streamMetaDataList = streamParser.getStreamMetaDataList();
-
-		if (streamMetaDataList == null || streamMetaDataList.size() <= 0) {
-			errorMessage = streamMetaDataList.getErrorMessage();
-			return null;
-		} else {
-			return streamMetaDataList.getDesiredStream().getUri();
-		}
-	}
-
-
-	@Override
-	protected void onPostExecute(Uri videoUri) {
-		if (videoUri == null) {
-			listener.onGetDesiredStreamError(errorMessage);
-		} else {
-			listener.onGetDesiredStream(videoUri);
-		}
-	}
+            listener.onGetDesiredStream(desiredStream);
+        }
+    }
 
 }

@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="subscriptions">訂閱</string>
+	<string name="subscribe">訂閱</string>
+	<string name="unsubscribe">取消訂閱</string>
+	<string name="total_subscribers">%,d 訂閱者</string>
+
+	<string name="subscribed">已訂閱</string>
+	<string name="unsubscribed">已取消訂閱</string>
+
+	<string name="error_get_subbed_channels">正在取得訂閱頻道時發生錯誤。</string>
+	<string name="error_check_if_user_has_subbed">無法檢查使用者是否已訂閱了頻道 (id=%s)</string>
+	<string name="error_unable_to_subscribe">無法(取消)訂閱頻道 (id=%s)</string>
+
+	<string name="import_subscriptions">匯入訂閱</string>
+	<string name="unsubscribe_from_all_current_sibbed_channels">取消訂閱您目前所有訂閱的頻道。</string>
+	<string name="subscriptions_to_channels_imported">已匯入 %d 個頻道的訂閱。</string>
+	<string name="select_xml_file">選取訂閱檔案</string>
+	<string name="select_all">選擇全部</string>
+	<string name="select_none">全不選</string>
+	<string name="no_channels_found">在您已上傳的 XML 檔案中找不到 YouTube 頻道。</string>
+	<string name="failed_to_import_subscriptions">無法匯入您的 YouTube 訂閱。</string>
+
+	<string name="about">關於</string>
+<string name="import_subscriptions_description">從 YouTube 匯入您的訂閱，首先請造訪 https://www.youtube.com/subscription_manager ，然後點按底部的「匯出訂閱項目」。再來，透過點按下方的「選取訂閱檔案」來選取匯出檔案標題「訂閱管理員」。</string>
+	<string name="no_new_channels_found">在您上傳的 XML 檔案中沒有發現任何您已經訂閱的 YouTube 頻道。</string>
+	<string name="import_subscriptions_parse_error">嘗試解析您上傳的 XML 檔案時遇到錯誤：%s。</string>
+	</resources>

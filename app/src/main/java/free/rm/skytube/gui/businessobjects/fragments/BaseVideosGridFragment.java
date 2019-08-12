@@ -18,9 +18,9 @@
 package free.rm.skytube.gui.businessobjects.fragments;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.widget.SwipeRefreshLayout;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +28,7 @@ import android.view.ViewGroup;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import free.rm.skytube.R;
+import free.rm.skytube.businessobjects.db.PlaybackStatusDb;
 import free.rm.skytube.gui.businessobjects.adapters.VideoGridAdapter;
 import free.rm.skytube.gui.fragments.VideosGridFragment;
 
@@ -36,15 +37,21 @@ import free.rm.skytube.gui.fragments.VideosGridFragment;
  */
 public abstract class BaseVideosGridFragment extends TabFragment implements SwipeRefreshLayout.OnRefreshListener {
 
-	protected VideoGridAdapter  videoGridAdapter;
+	protected final VideoGridAdapter  videoGridAdapter;
+	private int updateCount = 0;
 
 	@BindView(R.id.swipeRefreshLayout)
 	protected SwipeRefreshLayout swipeRefreshLayout;
 
+	public BaseVideosGridFragment(VideoGridAdapter videoGrid) {
+		this.videoGridAdapter = videoGrid;
+	}
 
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		videoGridAdapter.setContext(getActivity());
+
 		View view = inflater.inflate(getLayoutResource(), container, false);
 
 		ButterKnife.bind(this, view);
@@ -57,8 +64,27 @@ public abstract class BaseVideosGridFragment extends TabFragment implements Swip
 	@Override
 	public void onRefresh() {
 		videoGridAdapter.refresh(true);
+		updateCount = PlaybackStatusDb.getPlaybackStatusDb().getUpdateCounter();
 	}
 
+	/**
+	 * If the PlaybackStatusDb has been updated (due to clearing or disabling it), refresh the entire VideoGrid.
+	 */
+	@Override
+	public void onResume() {
+		super.onResume();
+		int newUpdateCounter = PlaybackStatusDb.getPlaybackStatusDb().getUpdateCounter();
+		if(newUpdateCounter != updateCount) {
+			videoGridAdapter.notifyDataSetChanged();
+			updateCount = newUpdateCounter;
+		}
+	}
+
+	@Override
+	public void onFragmentSelected() {
+		super.onFragmentSelected();
+		videoGridAdapter.initializeList();
+	}
 
 	/**
 	 * Set the layout resource (e.g. Subscriptions resource layout, R.id.grid_view, ...etc).

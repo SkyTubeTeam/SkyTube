@@ -25,9 +25,6 @@
 package free.rm.skytube.businessobjects.YouTube.VideoStream;
 
 
-import android.util.Log;
-
-import org.schabi.newpipe.extractor.NewPipe;
 import org.schabi.newpipe.extractor.ServiceList;
 import org.schabi.newpipe.extractor.StreamingService;
 import org.schabi.newpipe.extractor.exceptions.ContentNotAvailableException;
@@ -35,6 +32,8 @@ import org.schabi.newpipe.extractor.stream.StreamInfo;
 import org.schabi.newpipe.extractor.stream.VideoStream;
 
 import free.rm.skytube.R;
+import free.rm.skytube.app.SkyTubeApp;
+import free.rm.skytube.businessobjects.Logger;
 
 
 /**
@@ -45,8 +44,6 @@ public class ParseStreamMetaData {
 	/** YouTube video URL (e.g. https://www.youtube.com/watch?v=XXXXXXXXX) */
 	private	String youtubeVideoUrl;
 
-	private static final String TAG = ParseStreamMetaData.class.getSimpleName();
-
 
 	/**
 	 * Initialise the {@link ParseStreamMetaData} object.
@@ -54,7 +51,7 @@ public class ParseStreamMetaData {
 	 * @param videoId	The ID of the video we are going to get its streams.
 	 */
 	public ParseStreamMetaData(String videoId) {
-		NewPipe.init(new HttpDownloader());
+		SkyTubeApp.initNewPipe();
 		setYoutubeVideoUrl(videoId);
 	}
 
@@ -69,25 +66,19 @@ public class ParseStreamMetaData {
 		StreamMetaDataList list = new StreamMetaDataList();
 
 		try {
-			StreamingService youtubeService = ServiceList.YouTube.getService();
+			StreamingService youtubeService = ServiceList.YouTube;
 
 			// actual extraction
 			StreamInfo streamInfo = StreamInfo.getInfo(youtubeService, youtubeVideoUrl);
 
-			// if non critical exceptions happened during extraction they will be printed now
-			for(Throwable error : streamInfo.errors) {
-				System.err.println("----------------");
-				error.printStackTrace();
-			}
-
 			// now print the stream url and we are done
-			for(VideoStream stream : streamInfo.video_streams) {
+			for(VideoStream stream : streamInfo.getVideoStreams()) {
 				list.add( new StreamMetaData(stream) );
 			}
 		} catch (ContentNotAvailableException exception) {
 			list = new StreamMetaDataList(exception.getMessage());
 		} catch (Throwable tr) {
-			Log.e(TAG, "An error has occurred while getting streams metadata.  URL=" + this.youtubeVideoUrl, tr);
+			Logger.e(this, "An error has occurred while getting streams metadata.  URL=" + this.youtubeVideoUrl, tr);
 			list = new StreamMetaDataList(R.string.error_video_streams);
 		}
 

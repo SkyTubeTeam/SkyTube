@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="could_not_get_videos">ناتوانی در دریافت %s ویدئو.</string>
+	<string name="could_not_get_channel">ناتوانی در دریافت اطلاعات کانال!</string>
+	<string name="views">%,d نمایش</string>
+	<string name="error">خطا</string>
+	<string name="ok">تایید</string>
+	<string name="search_videos">جستجوی ویدئوها</string>
+	<string name="launch_offical_player_error">خطایی حین اجرای پخش‌کننده رسمی یوتیوب گوگل رخ داد. اطمینان حاصل کنید که این برنامه روی دستگاه شما نصب باشد.</string>
+    <string name="LIVE">زنده</string>
+    <string name="featured">ویدئوی شاخص</string>
+    <string name="most_popular">محبوب‌ترین</string>
+    <string name="video">ویدئو</string>
+    <string name="videos">ویدئوها</string>
+    <string name="num_videos">%d ویدئو</string>
+    <string name="playlists">فهرست‌های پخش</string>
+    <string name="could_not_get_playlists">ناتوانی در دریافت %s فهرست پخش.</string>
+    <string name="loading">بارگذاری…</string>
+	<string name="yes">بله</string>
+	<string name="no">خیر</string>
+
+    <string name="hello_blank_fragment">قطعه خالی آغازین</string>
+    </resources>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="feed">Pretplate</string>
+
+	<string name="subscribing_to_channels">Pretplaćivanje na kanale…</string>
+	<string name="fetching_subbed_channels_info">Dohvaćanje informacija kanala …</string>
+	<string name="fetching_subbed_channels_info_error">Došlo je do pogreške prilikom dohvaćanja informacija.</string>
+
+	<string name="fetching_subscription_videos">Dohvaćanje videozapisa sa pretplaćenih kanala</string>
+	<string name="fetched_videos_from_channels">Dohvaćeno %1$d videozapisa sa %2$d/%3$d kanala.</string>
+	<string name="no_new_videos_found">Nema novih videozapisa.</string>
+	<string name="no_subscriptions_text">Nisi pretplaćen na nijedan kanal.
+\n
+\nKada se pretplatite, svi preneseni videozapisi na pretplaćenim kanalima će se pojaviti ovdje.</string>
+	<string name="import_subscriptions_from_youtube">Uvoz pretplata sa YouTube</string>
+
+	<string name="notification_channel_feed_title">Obavijesti o pretplatama</string>
+	<string name="notification_new_videos_found">%d novih videozapisa sa pretplaćenih kanala</string>
+</resources>

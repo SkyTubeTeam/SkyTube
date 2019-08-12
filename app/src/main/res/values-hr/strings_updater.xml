@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="update_available">Dostupna je nova verzija</string>
+	<string name="update_dialog_msg">Nova verzija SkyTube-a je dostupna. Verzija %s će biti instalirana.</string>
+	<string name="up_to_date">Najnovija verzija</string>
+	<string name="up_to_date_msg">Imate najnoviju verziju SkyTube-a instaliranu.</string>
+	<string name="update">Ažuriraj</string>
+	<string name="later">Kasnije</string>
+	<string name="update_failure">Nije moguće ažurirati aplikaciju.</string>
+	<string name="downloading">Preuzimanje…</string>
+</resources>

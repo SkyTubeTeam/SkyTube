@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<dimen name="tutorial_hand_gesture_image_width">64dp</dimen>    <!-- 20% of 320dp -->
+</resources>
