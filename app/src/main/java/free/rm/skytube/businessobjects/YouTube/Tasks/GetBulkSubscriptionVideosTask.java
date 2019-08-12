@@ -73,7 +73,7 @@ public class GetBulkSubscriptionVideosTask extends AsyncTaskParallel<Void, GetBu
                         details.setChannel(vid.getChannel());
                         detailedList.add(details);
                     } catch (ExtractionException | IOException e) {
-                            Logger.e(this, "Error during parsing video page for " + vid.getId() + ",msg:" + e.getMessage(), e);
+                        Logger.e(this, "Error during parsing video page for " + vid.getId() + ",msg:" + e.getMessage(), e);
                         e.printStackTrace();
                     }
                 }
@@ -101,7 +101,9 @@ public class GetBulkSubscriptionVideosTask extends AsyncTaskParallel<Void, GetBu
         try {
             List<YouTubeVideo> videos = NewPipeService.get().getChannelVideos(dbChannel.getId());
             Predicate<YouTubeVideo> predicate = video -> alreadyKnownVideos.contains(video.getId());
-            predicate.removeIf(videos);
+            // If we found a video which is already added to the db, no need to check the videos after,
+            // assume, they are older, and already seen
+            predicate.removeAfter(videos);
             return videos;
         } catch (ExtractionException | IOException e) {
             Logger.e(this, "Error during fetching channel page for " + dbChannel + ",msg:" + e.getMessage(), e);
