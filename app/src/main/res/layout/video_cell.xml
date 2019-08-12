@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<androidx.constraintlayout.widget.ConstraintLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:id="@+id/top_layout"
@@ -13,6 +13,15 @@
 		android:layout_height="wrap_content"
 		android:adjustViewBounds="true"
 		android:src="@drawable/thumbnail_default"/>
+	<ProgressBar
+		android:id="@+id/video_position_progress_bar"
+		style="?android:attr/progressBarStyleHorizontal"
+		android:layout_width="match_parent"
+		android:layout_height="4dp"
+		android:progressDrawable="@drawable/video_position_progress_bar"
+		android:visibility="invisible"
+		app:layout_constraintBottom_toTopOf="@id/channel_layout"
+		app:layout_constraintStart_toStartOf="parent"/>
 
 	<TextView
 		android:id="@+id/title_text_view"
@@ -46,7 +55,7 @@
 		app:layout_constraintBaseline_toBaselineOf="@+id/thumbs_up_text_view"
 		app:layout_constraintEnd_toEndOf="parent"/>
 
-	<android.support.constraint.ConstraintLayout
+	<androidx.constraintlayout.widget.ConstraintLayout
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:background="@color/video_cell_background"
@@ -117,6 +126,6 @@
 			app:layout_constraintTop_toTopOf="parent"
 			app:srcCompat="@drawable/button_options"/>
 
-	</android.support.constraint.ConstraintLayout>
+	</androidx.constraintlayout.widget.ConstraintLayout>
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

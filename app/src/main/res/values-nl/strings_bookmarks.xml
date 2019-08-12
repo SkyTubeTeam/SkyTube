@@ -9,7 +9,7 @@
 	<string name="video_unbookmarked">Video verwijderd uit favorieten</string>
 	<string name="video_unbookmarked_error">De video kan niet worden verwijderd uit de favorieten.</string>
 
-	<string name="no_bookmarked_videos_text">U heeft nog geen video\'s toegevoegd aan de favorieten.
+	<string name="no_bookmarked_videos_text">Je hebt nog geen video\'s toegevoegd aan de favorieten.
 \n
-\nZodra u dat doet, zullen ze hier verschijnen.</string>
+\nZodra je dat doet, zullen ze hier verschijnen.</string>
 </resources>

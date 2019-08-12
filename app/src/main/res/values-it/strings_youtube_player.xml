@@ -1,39 +1,44 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources>
 	<string name="error_stream_err_unavailable">Messaggio di errore non disponibile.</string>
-	<string name="error_stream_decryption_fail">Impossibile caricare il codice di decrittografia per il servizio Youtube.</string>
+	<string name="error_stream_decryption_fail">Impossibile caricare il codice di decrittazione per il servizio YouTube.</string>
 	<string name="error_stream_parse_error">Errore durante l\'analisi.</string>
 
 	<string name="error_video_play">Errore durante la riproduzione</string>
-	<string name="error_video_streams_empty">Il video %s non ha uno stream valido!</string>
-	<string name="error_video_streams">An error has occurred while retrieving video\'s streams.</string>
+	<string name="error_video_streams_empty">Il video %s non ha nessun flusso.</string>
+	<string name="error_video_streams">Si è verificato un errore durante il recupero dei flussi video.</string>
 	<string name="error_get_video_desc">Si è verificato un errore durante il recupero della descrizione del video.</string>
 	<string name="error_invalid_url">URL video non valido: %s</string>
 
-	<string name="warning_live_video">In questo momento non è possibile riprodurre lo stream in diretta.  Visualizza in diretta streaming esternamente?</string>
+	<string name="warning_live_video">Al momento non è possibile riprodurre video in diretta. Aprirlo in un\'altra app?</string>
 
 	<string name="ratings_disabled">Valutazioni disattivate</string>
 
 	<string name="loading_video">Caricamento video…</string>
-	<string name="get_new_video_steam">Nuovo stream</string>
-	<string name="open_in_browser">Apri nel browser</string>
+	<string name="get_new_video_steam">Nuovo flusso</string>
+	<string name="open_in_browser">Apri nel browser web</string>
 	<string name="open_with">Apri con…</string>
 	<string name="share">Condividi</string>
-	<string name="share_via">Condividere tramite</string>
+	<string name="share_via">Condividi via</string>
 	<string name="copy_url">Copia URL</string>
-	<string name="url_copied_to_clipboard">L\'URL è stato copiato negli appunti.</string>
+	<string name="url_copied_to_clipboard">URL copiato negli appunti.</string>
 
-	<string name="error_get_comments">Si è verificato un errore durante l\'acquisizione dei commenti.</string>
-	<string name="no_video_comments">Questo video non ha commenti o i commenti sono disabilitati.</string>
+	<string name="error_get_comments">Si è verificato un errore durante il recupero dei commenti.</string>
+	<string name="no_video_comments">Questo video non ha commenti o i commenti sono disattivati.</string>
 	<string name="view_replies">Visualizza risposte</string>
 	<string name="hide_replies">Nascondi risposte</string>
 
 	<string name="enter_video_url">Inserisci URL del video</string>
-	<string name="play">Play</string>
+	<string name="play">Riproduci</string>
 	<string name="cancel">Annulla</string>
 	<string name="clear">Cancella</string>
+<string name="mark_watched">Segna come visto</string>
+	<string name="mark_unwatched">Segna come non visto</string>
 
-	<string name="tutorial_comments_icon">Swipe to the left to view comments.</string>
-	<string name="tutorial_video_info_icon">Swipe to the top to view information about the video.</string>
-	<string name="tutorial_pause_video">Double tap to pause or play a video.</string>
-</resources>
+	<string name="should_resume">Vuoi riprendere da dove ti sei fermato?</string>
+	<string name="resume">Riprendi</string>
+<string name="mobile_data">Dati mobile</string>
+	<string name="warning_mobile_network_play">Il tuo dispositivo non è connesso a una rete Wi-Fi. Per evitare eventuali costi extra di utilizzo dati, si consiglia di connettersi a una rete Wi-Fi. Riprodurre comunque il video\?</string>
+	<string name="warning_mobile_network_disable">Non chiedere più.</string>
+	<string name="play_video">Riproduci video</string>
+	</resources>

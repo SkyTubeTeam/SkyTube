@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="download">Preuzimanje</string>
+	<string name="downloads">Preuzimanja</string>
+	<string name="download_video">Preuzmi videozapis</string>
+	<string name="starting_video_download">Preuzimanje \'%s\'…</string>
+	<string name="video_download_stream_error">Nije moguće preuzeti \'%s\'.</string>
+	<string name="delete_download">Obriši preuzimanje</string>
+	<string name="video_downloaded">\'%s\' preuzeto.</string>
+	<string name="no_downloaded_videos_text">Niste preuzeli nijedan video.
+\n
+\nkada preuzmete, pojavit će se ovdje.</string>
+	<string name="playing_video_file_missing">Preuzeti videozapis nije nađen.</string>
+	<string name="external_storage_not_available">Nije moguće preuzeti datoteku jer vanjska pohrana nije dostupna.</string>
+<string name="warning_mobile_network_download">Vaš uređaj nije povezan sa Wi-Fi mrežom. Da biste izbjegli potrošnju podataka, preporučujemo vam da se povežete na Wi-Fi mrežu. Preuzmi videozapis\?</string>
+	</resources>

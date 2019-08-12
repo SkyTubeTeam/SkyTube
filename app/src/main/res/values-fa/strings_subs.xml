@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="subscriptions">اشتراک‌ها</string>
+	<string name="subscribe">اشتراک</string>
+	<string name="unsubscribe">لغو اشتراک</string>
+	<string name="total_subscribers">%,d مشترک</string>
+
+	<string name="subscribed">اشتراک ثبت شد</string>
+	<string name="unsubscribed">اشتراک لغو شد</string>
+
+	<string name="error_get_subbed_channels">خطایی حین دریافت کانال‌های مشترک شده رخ داده است.</string>
+	<string name="error_check_if_user_has_subbed">ناتوانی در بررسی اشتراک کانال (id=%s)</string>
+	<string name="error_unable_to_subscribe">ناتوانی در (لغو) اشتراک کانال (id=%s)</string>
+
+	<string name="import_subscriptions">وارد کردن اشتراک‌ها</string>
+	<string name="import_subscriptions_description">برای وارد کردن اشتراک‌ها از یوتیوب ابتدا به https://www.youtube.com/subscription_manager رفته و روی دکمه «Export Subscriptions» در پایین صفحه کلیک کنید. سپس با کلیک روی «انتخاب پرونده اشتراک‌ها»، پرونده‌ای را که با نام «subscription_manager» خروجی گرفته‌اید را انتخاب کنید.</string>
+	<string name="unsubscribe_from_all_current_sibbed_channels">اشتراک تمام کانال‌های مشترک شده را لغو کن.</string>
+	<string name="subscriptions_to_channels_imported">اشتراک در %d کانال وارد شده.</string>
+	<string name="select_xml_file">انتخاب پرونده اشتراک‌ها</string>
+	<string name="select_all">انتخاب همه</string>
+	<string name="select_none">انتخاب هیچ‌کدام</string>
+	<string name="no_channels_found">هیچ کانال یوتیوبی در پرونده XML بارگذاری شده شما یافت نشد.</string>
+	<string name="no_new_channels_found">هیچ کانال یوتیوبی در پرونده XML بارگذاری شده شما یافت نشد که قبلا مشترک آن نبوده باشید.</string>
+	<string name="import_subscriptions_parse_error">خطایی حین تلاش برای خواندن پرونده XML بارگذاری شده شما رخ داد: %s.</string>
+	<string name="failed_to_import_subscriptions">ناتوانی در وارد کردن اشتراک‌های یوتیوب شما.</string>
+
+	<string name="about">درباره</string>
+</resources>

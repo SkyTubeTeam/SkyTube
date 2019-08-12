@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="next">Next \></string>
+	<string name="done">Done</string>
+	<string name="skip">Skip</string>
+	<string name="page_counter">%d of %d</string>
+
+	<string name="tutorial_slide_1">Swipe left to view comments.</string>
+	<string name="tutorial_slide_2">Swipe up to view the video\'s description.</string>
+	<string name="tutorial_slide_3">Swipe horizontally to seek forward or back.</string>
+	<string name="tutorial_slide_4">Swipe vertically to adjust volume.</string>
+	<string name="tutorial_slide_5">Swipe vertically to adjust brightness.</string>
+	<string name="tutorial_slide_6">Double tap to pause or play a video.</string>
+</resources>

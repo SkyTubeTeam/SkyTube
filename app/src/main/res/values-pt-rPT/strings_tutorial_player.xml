@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+	<string name="tutorial_slide_1">Deslize à esquerda para ver os comentários.</string>
+	<string name="tutorial_slide_6">Duplo toque para reproduzir ou parar um vídeo.</string>
+<string name="next">"Seguinte "</string>
+	<string name="done">Terminado</string>
+	<string name="skip">Ignorar</string>
+	<string name="page_counter">%d de %d</string>
+
+	<string name="tutorial_slide_2">Deslize acima para ver a descrição do vídeo.</string>
+	<string name="tutorial_slide_3">Deslize horizontal para avançar ou recuar.</string>
+	<string name="tutorial_slide_4">Deslize vertical para ajustar o volume.</string>
+	<string name="tutorial_slide_5">Deslize vertical para ajustar o brilho.</string>
+	</resources>

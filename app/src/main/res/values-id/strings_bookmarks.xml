@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources><string name="bookmarks">Markah</string>
+
+	<string name="bookmark">Markah</string>
+	<string name="video_bookmarked">Video telah ditandai</string>
+	<string name="video_bookmarked_error">Tidak bisa menandai video.</string>
+
+	<string name="unbookmark">Hapus markah</string>
+	<string name="video_unbookmarked">Markah video telah dihapus</string>
+	<string name="video_unbookmarked_error">Tidak bisa menghapus markah video.</string>
+
+	<string name="no_bookmarked_videos_text">Anda belum menandai video apapun.
+\n
+\nSetelah anda tandai, video akan muncul disini.</string>
+</resources>

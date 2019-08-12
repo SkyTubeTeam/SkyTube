@@ -21,7 +21,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v4.content.FileProvider;
+import androidx.core.content.FileProvider;
 import android.util.Log;
 import android.util.Pair;
 import android.widget.Toast;
@@ -96,11 +96,7 @@ public class UpgradeAppTask extends AsyncTaskParallel<Void, Integer, Pair<File, 
 	 */
 	private void deleteOldApkFiles() {
 		// get all previously downloaded APK files
-		File[] apkFiles = apkDir.listFiles(new FilenameFilter() {
-			public boolean accept(File dir, String filename) {
-				return filename.endsWith(".apk");
-			}
-		} );
+		File[] apkFiles = apkDir.listFiles((dir, filename) -> filename.endsWith(".apk"));
 
 		// delete the previously downloaded APK files
 		if (apkFiles != null) {

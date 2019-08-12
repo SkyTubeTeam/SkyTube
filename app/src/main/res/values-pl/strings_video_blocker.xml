@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="blocked_videos">Zablokowane filmy</string>
+	<string name="no_videos_blocked">Żadne filmy nie zostały zablokowane lub odfiltrowane. Czy chcesz skonfigurować Video Blocker?</string>
+	<string name="configure">Skonfiguruj</string>
+	<string name="block_channel">Zablokuj kanał</string>
+	<string name="channel_blacklisted">Kanał na czarnej liście. Odśwież.</string>
+	<string name="channel_blacklist_error">Kanał nie może być na czarnej liście.</string>
+	<string name="channel_unwhitelist_error">Nie można usunąć kanału z białej listy.</string>
+	<string name="dislikes">%d%% nie lubi</string>
+</resources>

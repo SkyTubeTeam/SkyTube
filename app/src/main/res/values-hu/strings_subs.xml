@@ -12,16 +12,17 @@
 	<string name="error_check_if_user_has_subbed">Nem sikerült ellenőrizni, hogy feliratkozott-e a csatornára (id=%s)</string>
 	<string name="error_unable_to_subscribe">Nem sikerült fel/leiratkozni a csatornára (id=%s)</string>
 
-	<string name="import_subscriptions">Import Subscriptions</string>
+	<string name="import_subscriptions">Feliratkozások Importálása</string>
 	<string name="import_subscriptions_description">"Importálja feliratkozásait a YouTube-ról, a  https://www.youtube.com/subscription_manager felkeresésével, ahol kattintson az \"Export Subscriptions\" gombra, majd válassza az XML file formátumot alatta."</string>
 	<string name="subscriptions_to_channels_imported">%d csatornára való feliratkozás importálásra került.</string>
-	<string name="select_xml_file">Select XML File</string>
-	<string name="select_all">Select All</string>
-	<string name="select_none">Select None</string>
+	<string name="select_xml_file">Válassza ki az XML fájlt</string>
+	<string name="select_all">Mind kiválasztása</string>
+	<string name="select_none">Egyik sem</string>
 	<string name="no_channels_found">No YouTube channels were found in the XML file you uploaded.</string>
 	<string name="no_new_channels_found">No YouTube channels that you are not already subscribed to were found in the XML file you uploaded.</string>
 	<string name="import_subscriptions_parse_error">An error was encountered attempting to parse the XML file you uploaded: %s.</string>
 	<string name="failed_to_import_subscriptions">Failed to import your YouTube subscriptions.</string>
 
 	<string name="about">About</string>
-</resources>
+<string name="unsubscribe_from_all_current_sibbed_channels">Leiratkozás az összes feliratkozott csatornáról.</string>
+	</resources>

@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="error_stream_err_unavailable">Greška, poruka nedostupna.</string>
+	<string name="error_stream_decryption_fail">Nije bilo moguće učitati kod za dešifriranje za YouTube uslugu.</string>
+	<string name="error_stream_parse_error">Greška prilikom analizaranja.</string>
+
+	<string name="error_video_play">Pogreška prilikom video reprodukcije</string>
+	<string name="error_video_streams_empty">Videozapis %s nema stremanja.</string>
+	<string name="error_video_streams">Došlo je do pogreške prilikom dobavljanja video strujanja.</string>
+	<string name="error_get_video_desc">Došlo je do pogreške prilikom dobavljanja video opisa.</string>
+	<string name="error_invalid_url">Nevažeći video URL: %s</string>
+
+	<string name="warning_live_video">Trenutno ne mogu reproducirati streamove uživo. Otvoriti stream uživo u drugoj aplikaciji?</string>
+
+	<string name="ratings_disabled">Ocjene su onemogućene</string>
+
+	<string name="loading_video">Učitavanje videozapisa…</string>
+	<string name="get_new_video_steam">Novi stream</string>
+	<string name="open_in_browser">Otvori u web pregledniku</string>
+	<string name="open_with">Otvori u…</string>
+	<string name="share">Dijeli</string>
+	<string name="share_via">Dijeli preko</string>
+	<string name="copy_url">Kopiraj URL</string>
+	<string name="url_copied_to_clipboard">URL kopiran u međuspremnik.</string>
+
+	<string name="mark_watched">Označi kao pogledano</string>
+	<string name="mark_unwatched">Označi kao ne pogledano</string>
+
+	<string name="error_get_comments">Došlo je do pogreške prilikom dohvatanja komentara.</string>
+	<string name="no_video_comments">Ovaj videozapis nema komentara ili su komentari onemogućeni.</string>
+	<string name="view_replies">Prikaži odgovore</string>
+	<string name="hide_replies">Sakrij odgovore</string>
+
+	<string name="enter_video_url">Unesi Video URL</string>
+	<string name="play">Reproduciraj</string>
+	<string name="cancel">Otkaži</string>
+	<string name="clear">Očisti</string>
+
+	<string name="should_resume">Želite li nastaviti s mjesta na kojem ste prestali?</string>
+	<string name="resume">Nastavi</string>
+<string name="mobile_data">Mobilni podaci</string>
+	<string name="warning_mobile_network_play">Vaš uređaj nije povezan sa Wi-Fi mrežom. Da biste izbjegli potrošnju podataka, preporučujemo vam da se povežete na Wi-Fi mrežu. Reproduciraj videozapis\?</string>
+	<string name="warning_mobile_network_disable">Ne pitaj više.</string>
+	<string name="play_video">Reproduciraj videozapis</string>
+	</resources>

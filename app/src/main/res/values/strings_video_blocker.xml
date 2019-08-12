@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="blocked_videos">Blocked Videos</string>
+	<string name="no_videos_blocked">No videos were blocked or filtered out.  Do you want to configure the Video Blocker?</string>
+	<string name="configure">Configure</string>
+	<string name="block_channel">Block Channel</string>
+	<string name="channel_blacklisted">Channel blacklisted. Please refresh.</string>
+	<string name="channel_blacklist_error">Channel could not be blacklisted.</string>
+	<string name="channel_unwhitelist_error">Channel could not be removed from whitelist.</string>
+	<string name="dislikes">%d%% dislikes</string>
+</resources>

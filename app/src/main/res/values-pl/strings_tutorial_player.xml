@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+	<string name="tutorial_slide_1">Przesuń palcem w lewo, aby wyświetlić komentarze.</string>
+	<string name="tutorial_slide_6">Naciśnij dwukrotnie, aby wstrzymać lub odtworzyć wideo.</string>
+<string name="next">"Następny "</string>
+	<string name="done">Gotowe</string>
+	<string name="skip">Pomiń</string>
+	<string name="page_counter">%d z %d</string>
+
+	<string name="tutorial_slide_2">Przesuń palcem w górę, aby wyświetlić opis filmu.</string>
+	<string name="tutorial_slide_3">Przesuń palcem poziomo, aby wyszukiwać do przodu lub do tyłu.</string>
+	<string name="tutorial_slide_4">Przesuń pionowo, by dostosować głośność.</string>
+	<string name="tutorial_slide_5">Przesuń pionowo, aby dostosować jasność.</string>
+	</resources>

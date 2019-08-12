@@ -3,31 +3,21 @@ package free.rm.skytube.gui.businessobjects;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Environment;
-import android.support.annotation.NonNull;
-import android.support.v13.app.FragmentCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.legacy.app.FragmentCompat;
+import androidx.fragment.app.Fragment;
+import androidx.core.content.ContextCompat;
 import android.text.SpannableString;
 import android.text.util.Linkify;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.Toast;
 
-import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.github.angads25.filepicker.controller.DialogSelectionListener;
-import com.github.angads25.filepicker.model.DialogConfigs;
-import com.github.angads25.filepicker.model.DialogProperties;
-import com.github.angads25.filepicker.view.FilePickerDialog;
+import com.obsez.android.lib.filechooser.ChooserDialog;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -42,9 +32,10 @@ import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.Logger;
+import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetSubscriptionVideosTask;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
-import free.rm.skytube.gui.businessobjects.adapters.ImportSubscriptionsAdapter;
+import free.rm.skytube.businessobjects.db.Tasks.UnsubscribeFromAllChannelsTask;
 import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
 import free.rm.skytube.gui.businessobjects.preferences.BackupDatabases;
 import free.rm.skytube.gui.fragments.SubscriptionsFeedFragment;
@@ -62,6 +53,7 @@ public class SubscriptionsBackupsManager {
 	private static final int EXT_STORAGE_PERM_CODE_IMPORT = 1951;
 	private static final int IMPORT_SUBSCRIPTIONS_READ_CODE = 42;
 	private static final String TAG = SubscriptionsBackupsManager.class.getSimpleName();
+	private boolean isUnsubsribeAllChecked = false;
 
 
 	public SubscriptionsBackupsManager(Activity activity, Fragment supportFragment) {
@@ -108,33 +100,26 @@ public class SubscriptionsBackupsManager {
 		if (!hasAccessToExtStorage(importDb ? EXT_STORAGE_PERM_CODE_IMPORT : IMPORT_SUBSCRIPTIONS_READ_CODE))
 			return;
 
-		DialogProperties properties = new DialogProperties();
-
-		properties.selection_mode = DialogConfigs.SINGLE_MODE;
-		properties.selection_type = DialogConfigs.FILE_SELECT;
-		properties.root = Environment.getExternalStorageDirectory();
-		properties.error_dir = new File(DialogConfigs.DEFAULT_DIR);
-		properties.offset = new File(DialogConfigs.DEFAULT_DIR);
-		properties.extensions = importDb ? new String[]{"skytube"} : new String[]{"xml"};
-
-		FilePickerDialog dialog = new FilePickerDialog(activity, properties);
-		dialog.setDialogSelectionListener(new DialogSelectionListener() {
-			@Override
-			public void onSelectedFilePaths(String[] files) {
-				if (files == null  ||  files.length <= 0)
-					Toast.makeText(activity, R.string.databases_import_nothing_selected, Toast.LENGTH_LONG).show();
-				else {
-					if(importDb)
-						displayImportDbsBackupWarningMsg(files[0]);
+		ChooserDialog dialog = new ChooserDialog(activity)
+				.withStartFile(importDb ? Environment.getExternalStorageDirectory().getAbsolutePath() : Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath())
+				.displayPath(true)
+				.withChosenListener((file, dirFile) -> {
+					if (importDb)
+						displayImportDbsBackupWarningMsg(file);
 					else {
-						Uri uri = Uri.fromFile(new File(files[0]));
+						Uri uri = Uri.fromFile(new File(file));
 						parseImportedSubscriptions(uri);
 					}
-				}
-			}
-		});
-		dialog.setTitle(importDb ? R.string.databases_import_select_backup : R.string.subs_import_select_backup);
-		dialog.show();
+				})
+				.withOnCancelListener(dialog1 -> {
+					dialog1.cancel();
+				});
+		if(importDb) {
+			dialog.withFilter(false, false, "skytube");
+		} else {
+			dialog.withFilterRegex(false, false, ".*(xml|subscription_manager)$");
+		}
+		dialog.build().show();
 	}
 
 	/**
@@ -178,12 +163,7 @@ public class SubscriptionsBackupsManager {
 	private void displayImportDbsBackupWarningMsg(final String backupFilePath) {
 		new AlertDialog.Builder(activity)
 						.setMessage(R.string.databases_import_warning_message)
-						.setPositiveButton(R.string.continue_, new DialogInterface.OnClickListener() {
-							@Override
-							public void onClick(DialogInterface dialog, int which) {
-								new ImportDatabasesTask(backupFilePath).executeInParallel();
-							}
-						})
+						.setPositiveButton(R.string.continue_, (dialog, which) -> new ImportDatabasesTask(backupFilePath).executeInParallel())
 						.setNegativeButton(R.string.cancel, null)
 						.show();
 	}
@@ -235,12 +215,7 @@ public class SubscriptionsBackupsManager {
 			new AlertDialog.Builder(activity)
 							.setCancelable(false)
 							.setMessage(successfulImport ? R.string.databases_import_success : R.string.databases_import_fail)
-							.setNeutralButton(R.string.restart, new DialogInterface.OnClickListener() {
-								@Override
-								public void onClick(DialogInterface dialog, int which) {
-									SkyTubeApp.restartApp();
-								}
-							})
+							.setNeutralButton(R.string.restart, (dialog, which) -> SkyTubeApp.restartApp())
 							.show();
 		}
 
@@ -257,7 +232,7 @@ public class SubscriptionsBackupsManager {
 	 */
 	private void parseImportedSubscriptions(Uri uri) {
 		try {
-			final List<ImportSubscriptionsChannel> channels = new ArrayList<>();
+			final List<MultiSelectListPreferenceItem> channels = new ArrayList<>();
 			Pattern channelPattern = Pattern.compile(".*channel_id=([^&]+)");
 			Matcher matcher;
 			XmlPullParserFactory xmlFactoryObject = XmlPullParserFactory.newInstance();
@@ -283,7 +258,7 @@ public class SubscriptionsBackupsManager {
 									String channelId = matcher.group(1);
 									String channelName = myParser.getAttributeValue(null, "title");
 									if(channelId != null && !SubscriptionsDb.getSubscriptionsDb().isUserSubscribedToChannel(channelId)) {
-										channels.add(new ImportSubscriptionsChannel(channelName, channelId));
+										channels.add(new MultiSelectListPreferenceItem(channelId, channelName));
 									}
 								}
 
@@ -296,58 +271,30 @@ public class SubscriptionsBackupsManager {
 			}
 
 			if(channels.size() > 0) {
-				final ImportSubscriptionsAdapter adapter = new ImportSubscriptionsAdapter(channels);
-				MaterialDialog dialog = new MaterialDialog.Builder(activity)
-								.title(R.string.import_subscriptions)
-								.titleColorRes(R.color.dialog_title)
-								.customView(R.layout.subs_youtube_import_dialog_list, false)
-								.positiveText(R.string.import_subscriptions)
-								.backgroundColorRes(R.color.dialog_backgound)
-								.contentColorRes(R.color.dialog_content_text)
-								.positiveColorRes(R.color.dialog_positive_text)
-								.negativeColorRes(R.color.dialog_negative_text)
-								.onPositive(new MaterialDialog.SingleButtonCallback() {
-									@Override
-									public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-										List<ImportSubscriptionsChannel> channelsToSubscribeTo = new ArrayList<>();
-										for(ImportSubscriptionsChannel channel: channels) {
-											if(channel.isChecked)
-												channelsToSubscribeTo.add(channel);
-										}
-										SubscribeToImportedChannelsTask task = new SubscribeToImportedChannelsTask();
-										task.executeInParallel(channelsToSubscribeTo);
-									}
-								})
-								.negativeText(R.string.cancel)
-								.onNegative(new MaterialDialog.SingleButtonCallback() {
-									@Override
-									public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-										dialog.dismiss();
-									}
-								})
-								.build();
+				// display a dialog which allows the user to select the channels to import
+				new MultiSelectListPreferenceDialog(activity, channels)
+						.title(R.string.import_subscriptions)
+						.positiveText(R.string.import_subscriptions)
+						.onPositive((dialog, which) -> {
+							// if the user checked the "Unsubscribe to all subscribed channels" checkbox
+							if (isUnsubsribeAllChecked) {
+								new UnsubscribeFromAllChannelsTask().executeInParallel();
+							}
 
-				RecyclerView list = dialog.getCustomView().findViewById(R.id.channel_list);
-				list.setAdapter(adapter);
-				list.setLayoutManager(new LinearLayoutManager(activity));
+							List<MultiSelectListPreferenceItem> channelsToSubscribeTo = new ArrayList<>();
+							for(MultiSelectListPreferenceItem channel: channels) {
+								if(channel.isChecked)
+									channelsToSubscribeTo.add(channel);
+							}
 
-				Button selectAllButton = dialog.getCustomView().findViewById(R.id.select_all_button);
-				selectAllButton.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View view) {
-						adapter.selectAll();
-					}
-				});
-				Button selectNoneButton = dialog.getCustomView().findViewById(R.id.select_none_button);
-				selectNoneButton.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View view) {
-						adapter.selectNone();
-					}
-				});
-
-
-				dialog.show();
+							// subscribe to the channels selected by the user
+							SubscribeToImportedChannelsTask task = new SubscribeToImportedChannelsTask();
+							task.executeInParallel(channelsToSubscribeTo);
+						})
+						.negativeText(R.string.cancel)
+						.onNegative((dialog, which) -> dialog.dismiss())
+						.build()
+						.show();
 			} else {
 				new AlertDialog.Builder(activity)
 						.setMessage(foundChannels ? R.string.no_new_channels_found : R.string.no_channels_found)
@@ -368,38 +315,15 @@ public class SubscriptionsBackupsManager {
 	public void displayImportSubscriptionsFromYouTubeDialog() {
 		SpannableString msg = new SpannableString(activity.getText(R.string.import_subscriptions_description));
 		Linkify.addLinks(msg, Linkify.WEB_URLS);
-		new MaterialDialog.Builder(activity)
-						.title(R.string.import_subscriptions)
-						.titleColorRes(R.color.dialog_title)
-						.backgroundColorRes(R.color.dialog_backgound)
-						.content(msg)
-						.contentColorRes(R.color.dialog_content_text)
-						.positiveText(R.string.select_xml_file)
-						.positiveColorRes(R.color.dialog_positive_text)
-				.checkBoxPrompt("Unsubscribe from all the channels", false, new CompoundButton.OnCheckedChangeListener() {
-					@Override
-					public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-						if (b){
-						boolean ba =	SubscriptionsDb.getSubscriptionsDb().unsubscribeFromAllChannels();
-							Log.d(TAG, "onCheckedChanged: " + ba);
-						}
-					}
-				})
-						.onPositive(new MaterialDialog.SingleButtonCallback() {
-							@Override
-							public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-								displayFilePicker(false);
-							}
-						})
-						.negativeText(R.string.cancel)
-						.negativeColorRes(R.color.dialog_negative_text)
-						.onNegative(new MaterialDialog.SingleButtonCallback() {
-							@Override
-							public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-								dialog.dismiss();
-							}
-						})
-						.show();
+		new SkyTubeMaterialDialog(activity)
+				.title(R.string.import_subscriptions)
+				.content(msg)
+				.positiveText(R.string.select_xml_file)
+				.checkBoxPromptRes(R.string.unsubscribe_from_all_current_sibbed_channels, false, (compoundButton, b) -> isUnsubsribeAllChecked = true)
+				.onPositive((dialog, which) -> displayFilePicker(false))
+				.onNegative((dialog, which) -> dialog.dismiss())
+				.build()
+				.show();
 	}
 
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -417,7 +341,7 @@ public class SubscriptionsBackupsManager {
 	 * AsyncTask to loop through a list of channels to subscribe to. A Dialog will appear notifying the user of the progress
 	 * of fetching videos for each channel.
 	 */
-	private class SubscribeToImportedChannelsTask extends AsyncTaskParallel<List<ImportSubscriptionsChannel>, Void, Integer> {
+	private class SubscribeToImportedChannelsTask extends AsyncTaskParallel<List<MultiSelectListPreferenceItem>, Void, Integer> {
 
 		private MaterialDialog dialog;
 
@@ -433,9 +357,9 @@ public class SubscriptionsBackupsManager {
 
 
 		@Override
-		protected Integer doInBackground(final List<ImportSubscriptionsChannel>... channels) {
-			for (ImportSubscriptionsChannel channel : channels[0]) {
-				SubscriptionsDb.getSubscriptionsDb().subscribe(channel.channelId);
+		protected Integer doInBackground(final List<MultiSelectListPreferenceItem>... channels) {
+			for (MultiSelectListPreferenceItem channel : channels[0]) {
+				SubscriptionsDb.getSubscriptionsDb().subscribe(new YouTubeChannel(channel.id, null));
 			}
 
 			return channels[0].size();

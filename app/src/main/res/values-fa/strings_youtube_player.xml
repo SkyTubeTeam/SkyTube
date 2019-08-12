@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="error_stream_err_unavailable">پیام خطا دردسترس نیست.</string>
+	<string name="error_stream_decryption_fail">ناتوانی در دریافت کد رمزنگاری برای خدمات یوتیوب.</string>
+	<string name="error_stream_parse_error">خطا در تحلیل.</string>
+
+	<string name="error_video_play">خطا در پخش ویدئو</string>
+	<string name="error_video_streams_empty">ویدئوی %s فاقد جریان (stream) است.</string>
+	<string name="error_video_streams">خطایی حین دریافت جریان ویدئو (stream) رخ داده است.</string>
+	<string name="error_get_video_desc">خطایی حین دریافت توضحیات ویدئو رخ داده است.</string>
+	<string name="error_invalid_url">نشانی ویدئوی نامعتبر: %s</string>
+
+	<string name="mobile_data">داده همراه</string>
+	<string name="warning_mobile_network_play">دستگاه شما به شبکه وای‌فای متصل نیست. برای اجتناب از هزینه‌های اضافی احتمالی مصرف داده، پیشنهاد می‌شود به شبکه وای‌فای وصل شوید. همچنان می‌خواهید ویدئو بارگیری شود؟</string>
+	<string name="warning_mobile_network_disable">دیگر نپرس.</string>
+	<string name="play_video">پخش ویدئو</string>
+	<string name="warning_live_video">امکان پخش جریان زنده در حال حاضر وجود ندارد. جریان زنده در برنامه دیگری باز شود؟</string>
+
+	<string name="ratings_disabled">امتیازدهی غیرفعال است</string>
+
+	<string name="loading_video">در حال بارگذاری ویدئو…</string>
+	<string name="get_new_video_steam">جریان جدید</string>
+	<string name="open_in_browser">"بازکردن  در مرورگر وب"</string>
+	<string name="open_with">باز کردن با…</string>
+	<string name="share">هم‌رسانی</string>
+	<string name="share_via">اشتراک از طریق</string>
+	<string name="copy_url">کپی نشانی</string>
+	<string name="url_copied_to_clipboard">نشانی در حافظه کپی شد.</string>
+
+	<string name="mark_watched">نشانه‌گذاری به عنوان دیده شده</string>
+	<string name="mark_unwatched">نشانه‌گذاری به عنوان دیده‌نشده</string>
+
+	<string name="error_get_comments">خطایی حین دریافت نظرات رخ داده است.</string>
+	<string name="no_video_comments">این فیلم فاقد نظر است و یا نظرات غیرفعال شده‌اند.</string>
+	<string name="view_replies">مشاهده پاسخ‌ها</string>
+	<string name="hide_replies">پنهان کردن پاسخ‌ها</string>
+
+	<string name="enter_video_url">ورود نشانی ویدئو</string>
+	<string name="play">پخش</string>
+	<string name="cancel">لغو</string>
+	<string name="clear">پاک کردن</string>
+
+	<string name="should_resume">"مایلید از جایی که  قبلا پخش را توقف کرده بودید ادامه دهید؟"</string>
+	<string name="resume">ادامه</string>
+</resources>

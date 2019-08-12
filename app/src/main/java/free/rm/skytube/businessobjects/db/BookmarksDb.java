@@ -25,10 +25,15 @@ import android.database.sqlite.SQLiteDatabase;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import free.rm.skytube.app.SkyTubeApp;
+import free.rm.skytube.businessobjects.Logger;
+import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.interfaces.OrderableDatabase;
 
@@ -124,9 +129,10 @@ public class BookmarksDb extends SQLiteOpenHelperEx implements OrderableDatabase
 							null,
 							null, null, null, BookmarksTable.COL_ORDER + " ASC");
 			if(cursor.moveToNext()) {
+				Gson gson = new Gson();
 				do {
 					byte[] blob = cursor.getBlob(cursor.getColumnIndex(BookmarksTable.COL_YOUTUBE_VIDEO));
-					YouTubeVideo uvideo = new Gson().fromJson(new String(blob), new TypeToken<YouTubeVideo>(){}.getType());
+					YouTubeVideo uvideo = gson.fromJson(new String(blob), YouTubeVideo.class);
 					ContentValues contentValues = new ContentValues();
 					contentValues.put(BookmarksTable.COL_ORDER, order++);
 
@@ -214,12 +220,28 @@ public class BookmarksDb extends SQLiteOpenHelperEx implements OrderableDatabase
 						null, null, null, BookmarksTable.COL_ORDER + " DESC");
 		List<YouTubeVideo> videos = new ArrayList<>();
 
+		final Gson gson = new Gson();
 		if(cursor.moveToNext()) {
 			do {
-				byte[] blob = cursor.getBlob(cursor.getColumnIndex(BookmarksTable.COL_YOUTUBE_VIDEO));
+				final byte[] blob = cursor.getBlob(cursor.getColumnIndex(BookmarksTable.COL_YOUTUBE_VIDEO));
+				final String videoJson = new String(blob);
 
 				// convert JSON into YouTubeVideo
-				YouTubeVideo video = new Gson().fromJson(new String(blob), new TypeToken<YouTubeVideo>(){}.getType());
+				YouTubeVideo video = gson.fromJson(videoJson, YouTubeVideo.class);
+
+				// due to upgrade to YouTubeVideo (by changing channel{Id,Name} to YouTubeChannel)
+				// from version 2.82 to 2.90
+				if (video.getChannel() == null) {
+					try {
+						JSONObject videoJsonObj = new JSONObject(videoJson);
+						final String channelId   = videoJsonObj.get("channelId").toString();
+						final String channelName = videoJsonObj.get("channelName").toString();
+						video.setChannel(new YouTubeChannel(channelId, channelName));
+					} catch (JSONException e) {
+						Logger.e(this, "Error occurred while extracting channel{Id,Name} from JSON", e);
+					}
+				}
+
 				// regenerate the video's PublishDatePretty (e.g. 5 hours ago)
 				video.forceRefreshPublishDatePretty();
 				// add the video to the list

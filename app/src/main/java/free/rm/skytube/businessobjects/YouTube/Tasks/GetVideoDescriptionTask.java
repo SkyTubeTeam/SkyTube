@@ -23,9 +23,9 @@ import java.util.List;
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
+import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.GetVideoDescription;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
-import free.rm.skytube.businessobjects.Logger;
 
 /**
  * Get the video's description.
@@ -45,21 +45,25 @@ public class GetVideoDescriptionTask extends AsyncTaskParallel<Void, Void, Strin
 
 	@Override
 	protected String doInBackground(Void... params) {
+		if (youTubeVideo.getDescription() != null) {
+			return youTubeVideo.getDescription();
+		}
 		GetVideoDescription getVideoDescription = new GetVideoDescription();
-		String description = SkyTubeApp.getStr(R.string.error_get_video_desc);
 
 		try {
 			getVideoDescription.init(youTubeVideo.getId());
 			List<YouTubeVideo> list = getVideoDescription.getNextVideos();
 
 			if (list.size() > 0) {
-				description = list.get(0).getDescription();
+				final String description = list.get(0).getDescription();
+				this.youTubeVideo.setDescription(description);
+				return description;
 			}
 		} catch (IOException e) {
-			Logger.e(this, description + " - id=" + youTubeVideo.getId(), e);
+			Logger.e(this, "error_get_video_desc - id=" + youTubeVideo.getId(), e);
 		}
 
-		return description;
+		return SkyTubeApp.getStr(R.string.error_get_video_desc);
 	}
 
 	@Override

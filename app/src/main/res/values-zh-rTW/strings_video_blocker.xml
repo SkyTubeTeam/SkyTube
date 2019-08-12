@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources><string name="blocked_videos">被封鎖的影片</string>
+    <string name="no_videos_blocked">沒有影片被封鎖或過濾掉。是否要配置影片阻止程式？</string>
+    <string name="configure">配置</string>
+    <string name="block_channel">封鎖頻道</string>
+    <string name="channel_blacklisted">頻道已列入黑名單。請重新整理影片。</string>
+    <string name="channel_blacklist_error">無法將頻道列入黑名單。</string>
+    <string name="channel_unwhitelist_error">無法從白名單中删除頻道。</string>
+    <string name="dislikes">%d%% 不喜歡</string>
+</resources>

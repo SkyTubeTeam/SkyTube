@@ -20,6 +20,7 @@ package free.rm.skytube.businessobjects.YouTube.VideoStream;
 
 import android.net.Uri;
 
+import org.schabi.newpipe.extractor.MediaFormat;
 import org.schabi.newpipe.extractor.stream.VideoStream;
 
 /**
@@ -34,19 +35,10 @@ public class StreamMetaData {
 	/** Video format (e.g. MPEG-4) */
 	private MediaFormat format;
 
-	private static final String TAG = StreamMetaData.class.getSimpleName();
-
-
-//	public StreamMetaData(String url, int itag) {
-//		setUri(url);
-//		setMediaFormat(itag);
-//		setResolution(itag);
-//	}
-
 
 	public StreamMetaData(VideoStream videoStream) {
 		setUri(videoStream.url);
-		setMediaFormat(videoStream.format);
+		this.format = videoStream.getFormat();
 		this.resolution = VideoResolution.resolutionToVideoResolution(videoStream.resolution);
 	}
 
@@ -56,20 +48,6 @@ public class StreamMetaData {
 	}
 
 
-	/**
-	 * Converts the given itag into {@link MediaFormat}.
-	 */
-	private void setMediaFormat(int itag) {
-		this.format = MediaFormat.itagToMediaFormat(itag);
-	}
-
-
-//	/**
-//	 * Converts the given itag into {@link VideoResolution}.
-//	 */
-//	private void setResolution(int itag) {
-//		this.resolution = VideoResolution.itagToVideoResolution(itag);
-//	}
 
 
 	public Uri getUri() {
@@ -98,6 +76,7 @@ public class StreamMetaData {
 
 		str.append("RESOLUTION:  ");
 		str.append(resolution);
+		str.append('\n');
 
 		return str.toString();
 	}

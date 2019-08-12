@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources><string name="subscriptions">Subscription</string>
+    <string name="subscribe">Subscribe</string>
+    <string name="unsubscribe">Batal Subscribe</string>
+    <string name="total_subscribers">%,d subscriber</string>
+    <string name="subscribed">Disubscribe</string>
+    <string name="unsubscribed">Batal Disubscribe</string>
+    <string name="error_get_subbed_channels">Terjadi kesalahan saat mengambil channel yang disubscribe.</string>
+    <string name="error_check_if_user_has_subbed">Tidak bisa memeriksa apakah pengguna telah berlangganan channel (id=%s)</string>
+    <string name="import_subscriptions">Impor Subscription</string>
+    <string name="import_subscriptions_description">Impor langganan anda dari YouTube, pertama kunjungi https://www.youtube.com/subscription_manager, dan klik tombol \"Ekspor Subscription\" di dasar halaman. Lalu, pilih berkas ekspor berjudul \"subscription_manager\" dengan mengklik \"Pilih Berkas Subscription\" di bawah.</string>
+    <string name="unsubscribe_from_all_current_sibbed_channels">Batal subscribe dari semua channel yang telah anda subscribe saat ini.</string>
+    <string name="subscriptions_to_channels_imported">%d channel subscription berhasil diimpor.</string>
+    <string name="select_xml_file">Pilih Berkas Subscription</string>
+    <string name="select_all">Pilih Semua</string>
+    <string name="select_none">Tidak Pilih</string>
+    <string name="no_channels_found">Tidak ada channel YouTube yang ditemukan di dalam berkas XML yang diunggah.</string>
+    <string name="no_new_channels_found">Tidak ditemukan channel YouTube yang belum anda subscribe di dalam berkas XML yang diunggah.</string>
+    <string name="import_subscriptions_parse_error">Terjadi kesalahan saat mencoba untuk mengurai berkas XML yang diunggah: %s.</string>
+    <string name="failed_to_import_subscriptions">Gagal mengimpor subscription YouTube anda.</string>
+    <string name="about">Tentang</string>
+    <string name="error_unable_to_subscribe">Tidak bisa (un)subscribe channel (id=%s)</string>
+</resources>

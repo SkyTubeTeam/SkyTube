@@ -1,9 +1,80 @@
-vX.XX - XX XX 2018:
-	* Added search history:  search history is stored and used as suggestions for future searches.  This feature can be disabled.
-	* Volume and brightness swipe controls.
-	* Channel blocking.
+v2.962 - 06 Aug 2019:
+	* Add a new Youtube API key, re-use the old keys for F-Droid.
+	* Updated German and Hungarian translations.
+
+v2.961 - 01 Aug 2019:
+	* Fix problem with Youtube API keys
+	* Use newer NewPipeExtractor to fix video downloading issue
+
+v2.96 - 01 Aug 2019:
+	* Chromecast support in SkyTube Extra
+	* Better off-line experience with the downloaded videos, and better handling of off-line startup, where lot's of information
+		previously queried from YouTube, now the app can revert to use the already stored data.
+	* Fix screen saver prevention to only be active during playtime.
+	* Video watch status tracking is much more solid, many small bug were eliminated.
+	* Add ability to disable immersive mode.
+	* Improved search autocomplete experience.
+	* Version upgrades in lot's of dependencies (Using AndroidX component library).
+
+v2.95 - 14 Mar 2019:
+	* Emergency fix: Video playback error.
+	* Updated French, Japanese, Arabic and Turkish translations.
+
+v2.94 - 03 Feb 2019:
+	* Videos displayed within a channel or playlist fragment will no longer output the channel name
+	  given that the user is already within the channel fragment.
+	* App is now using newer third-party libraries.
+	* Updated French, Japanese, Indonesian, Spanish, Chinese (traditional), Turkish, Arabic, Italian, Polish, Persian, Norwegian Bokmål, Portuguese (Portugal), German, Dutch and Croatian translations.
+
+v2.93 - 18 Nov 2018:
+	* Added an option to enable/disable the video blocker.
+	* If the gestures control is disabled, the video brightness will be identical to those used by the Android System.
+	* Added preferred resolution when using mobile network (instead of WIFI).
+	* Added Persian translations.
+	* Updated Spanish, Portuguese (Portugal), Turkish, German, Polish, Italian, Croatian, Dutch, Norwegian Bokmål, Russian and Chinese (Traditional) translations.
+
+v2.92 - 14 Oct 2018:
+	* Added Android 9 (API 28) support.
+	* Video gestures can now be enabled/disabled.
+	* Users are now warned before downloading/streaming videos on mobile network (such as 4G).  This
+	  warning can be disabled.
+	* The video publishing date for downloaded videos is now displayed/calculated correctly.
+	* Lazy loading for tabs - potentially reducing network usage.
+	* Added option to automatically download videos to folders named after the channel.
+	* Added Croatian translations.
+	* Updated German, Polish, Spanish, Japanese, French, Portuguese (Brazil), Portuguese (Portugal),
+	  Italian, Chinese (Traditional), Norwegian Bokmål, Russian and Dutch translations.
+	* Bug fixes and other minor improvements.
+
+v2.91 - 07 Sep 2018:
+	* Emergency fix: "This video is unavailable" error occurred due to recent YouTube changes.
+	* Updated Italian, French and Norwegian Bokmål translations.
+
+v2.90 - 19 Aug 2018:
+	* Added a video blocker, which includes:
+		- Channel blacklisting;
+		- Channel whitelisting;
+		- Block videos if their language is not the same as the user's preferred one(s);
+		- Low views video blocking;
+		- High dislikes video blocking;
+		- Icon in the toolbar displaying how many videos were blocked.
+	* Added search history:  search history is stored and used as suggestions for future searches (this feature can be disabled).
+	* Added volume and brightness swipe controls.
+	* Videos are now played using the Exoplayer.  Legacy player still supported.
+	* App now gives the user the option to resume playing (previously) partially watched videos.
+    * YouTube's videos and playlists links inside the video description are now handled and opened inside SkyTube.
+    * New launcher icon.
+    * Subscribed channels can now be sorted alphabetically.
+    * Added tutorial for the gestures applicable to the video player.
 	* Added Japanese translations.
-	* Exoplayer support.
+	* Added Chinese (traditional) translations.
+	* Added Vietnamese translations.
+	* Added Indonesian translations.
+	* Updated Russian, Norwegian Bokmål, Dutch, German, Hungarian, Turkish, Italian, Portuguese and French translations.
+	* Bug fixes and other minor improvements.
+
+v2.82 - 24 Mar 2018:
+	* Emergency fix:  API DDOS attack mitigation controls.
 
 v2.81 - 28 Jan 2018:
 	* Emergency fix: "This video is unavailable" error occurred for some YouTube videos.

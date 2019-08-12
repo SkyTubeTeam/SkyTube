@@ -18,7 +18,7 @@
 package free.rm.skytube.gui.businessobjects.adapters;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -78,12 +78,7 @@ class PlaylistViewHolder extends RecyclerView.ViewHolder {
 		titleTextView.setText(playlist.getTitle());
 		publishDateTextView.setText(playlist.getPublishDatePretty());
 		videoCountTextView.setText(String.format(context.getString(R.string.num_videos), playlist.getVideoCount()));
-		thumbnailImageView.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				playlistClickListener.onClickPlaylist(playlist);
-			}
-		});
+		thumbnailImageView.setOnClickListener(view -> playlistClickListener.onClickPlaylist(playlist));
 	}
 
 }

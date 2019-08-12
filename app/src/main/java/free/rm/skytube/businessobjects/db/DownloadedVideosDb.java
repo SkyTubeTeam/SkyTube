@@ -7,7 +7,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -15,6 +17,8 @@ import java.util.List;
 
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
+import free.rm.skytube.businessobjects.Logger;
+import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.interfaces.OrderableDatabase;
 
@@ -22,6 +26,22 @@ import free.rm.skytube.businessobjects.interfaces.OrderableDatabase;
  * A database (DB) that stores user's downloaded videos.
  */
 public class DownloadedVideosDb extends SQLiteOpenHelperEx implements OrderableDatabase {
+	public static class Status {
+		final Uri uri;
+		final boolean disapeared;
+		public Status(Uri uri, boolean disapeared) {
+			this.uri = uri;
+			this.disapeared = disapeared;
+		}
+
+		public Uri getUri() {
+			return uri;
+		}
+
+		public boolean isDisapeared() {
+			return disapeared;
+		}
+	}
 	private static volatile DownloadedVideosDb downloadsDb = null;
 	private static boolean hasUpdated = false;
 
@@ -54,7 +74,6 @@ public class DownloadedVideosDb extends SQLiteOpenHelperEx implements OrderableD
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
 	}
 
 	/**
@@ -63,17 +82,44 @@ public class DownloadedVideosDb extends SQLiteOpenHelperEx implements OrderableD
 	 * @return List of Videos
 	 */
 	public List<YouTubeVideo> getDownloadedVideos() {
+		return getDownloadedVideos(DownloadedVideosTable.COL_ORDER + " DESC");
+	}
+
+	/**
+	 * Get the list of Videos that have been downloaded in the given order.
+	 *
+	 * @return List of Videos
+	 */
+	private List<YouTubeVideo> getDownloadedVideos(String ordering) {
 		Cursor	cursor = getReadableDatabase().query(
 						DownloadedVideosTable.TABLE_NAME,
 						new String[]{DownloadedVideosTable.COL_YOUTUBE_VIDEO, DownloadedVideosTable.COL_FILE_URI},
 						null,
-						null, null, null, null);
+						null, null, null, ordering);
 		List<YouTubeVideo> videos = new ArrayList<>();
 
+		Gson gson = new Gson();
 		if(cursor.moveToNext()) {
 			do {
-				byte[] blob = cursor.getBlob(cursor.getColumnIndex(DownloadedVideosTable.COL_YOUTUBE_VIDEO));
-				YouTubeVideo video = new Gson().fromJson(new String(blob), new TypeToken<YouTubeVideo>(){}.getType());
+				final byte[] blob = cursor.getBlob(cursor.getColumnIndex(DownloadedVideosTable.COL_YOUTUBE_VIDEO));
+				final String videoJson = new String(blob);
+
+				// convert JSON into YouTubeVideo
+				YouTubeVideo video = gson.fromJson(videoJson, YouTubeVideo.class);
+
+				// due to upgrade to YouTubeVideo (by changing channel{Id,Name} to YouTubeChannel)
+				// from version 2.82 to 2.90
+				if (video.getChannel() == null) {
+					try {
+						JSONObject videoJsonObj = new JSONObject(videoJson);
+						final String channelId   = videoJsonObj.get("channelId").toString();
+						final String channelName = videoJsonObj.get("channelName").toString();
+						video.setChannel(new YouTubeChannel(channelId, channelName));
+					} catch (JSONException e) {
+						Logger.e(this, "Error occurred while extracting channel{Id,Name} from JSON", e);
+					}
+				}
+				video.forceRefreshPublishDatePretty();
 				videos.add(video);
 			} while(cursor.moveToNext());
 		}
@@ -89,7 +135,7 @@ public class DownloadedVideosDb extends SQLiteOpenHelperEx implements OrderableD
 		values.put(DownloadedVideosTable.COL_YOUTUBE_VIDEO, gson.toJson(video).getBytes());
 		values.put(DownloadedVideosTable.COL_FILE_URI, fileUri);
 
-		int order = getNumDownloads();
+		int order = getMaximumOrderNumber();
 		order++;
 		values.put(DownloadedVideosTable.COL_ORDER, order);
 
@@ -128,13 +174,17 @@ public class DownloadedVideosDb extends SQLiteOpenHelperEx implements OrderableD
 	}
 
 	public Uri getVideoFileUri(YouTubeVideo video) {
+		return getVideoFileUri(video.getId());
+	}
+
+	public Uri getVideoFileUri(String videoId) {
 		Cursor cursor = null;
 		try {
 			cursor = getReadableDatabase().query(
 					DownloadedVideosTable.TABLE_NAME,
 					new String[]{DownloadedVideosTable.COL_FILE_URI},
 					DownloadedVideosTable.COL_YOUTUBE_VIDEO_ID + " = ?",
-					new String[]{video.getId()}, null, null, null);
+					new String[]{videoId}, null, null, null);
 
 			if (cursor.moveToNext()) {
 				String uri = cursor.getString(cursor.getColumnIndex(DownloadedVideosTable.COL_FILE_URI));
@@ -146,6 +196,24 @@ public class DownloadedVideosDb extends SQLiteOpenHelperEx implements OrderableD
 				cursor.close();
 			}
 		}
+	}
+
+	/**
+	 * Return a locally saved file URI for the given video, the call ensures, that the file exists currently
+	 * @param videoId the id of the video
+	 * @return file URI
+	 */
+	public Status getVideoFileUriAndValidate(String videoId) {
+		Uri uri = getVideoFileUri(videoId);
+		if (uri != null) {
+			File file = new File(uri.getPath());
+			if (!file.exists()) {
+				remove(videoId);
+				return new Status(null, true);
+			}
+			return new Status(uri, false);
+		}
+		return new Status(null, false);
 	}
 
 	private void onUpdated() {
@@ -181,10 +249,10 @@ public class DownloadedVideosDb extends SQLiteOpenHelperEx implements OrderableD
 	}
 
 	/**
-	 * @return The total number of downloaded videos.
+	 * @return The maximum of the order number - which could be different from the number of downloaded files, in case some of them are deleted.
 	 */
-	public int getNumDownloads() {
-		String	query = String.format("SELECT COUNT(*) FROM %s", DownloadedVideosTable.TABLE_NAME);
+	public int getMaximumOrderNumber() {
+		String	query = String.format("SELECT MAX(%s) FROM %s", DownloadedVideosTable.COL_ORDER, DownloadedVideosTable.TABLE_NAME);
 		Cursor	cursor = DownloadedVideosDb.getVideoDownloadsDb().getReadableDatabase().rawQuery(query, null);
 		int		totalDownloads = 0;
 

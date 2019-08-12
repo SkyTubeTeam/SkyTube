@@ -25,8 +25,11 @@
 
 package free.rm.skytube.businessobjects.YouTube.VideoStream;
 
+import org.schabi.newpipe.extractor.DownloadRequest;
+import org.schabi.newpipe.extractor.DownloadResponse;
 import org.schabi.newpipe.extractor.Downloader;
 import org.schabi.newpipe.extractor.exceptions.ReCaptchaException;
+import org.schabi.newpipe.extractor.utils.Localization;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -47,12 +50,26 @@ public class HttpDownloader implements Downloader {
 	/** Mimic the Mozilla user agent */
 	private static final String USER_AGENT = "Mozilla/5.0";
 
+	@Override
+	public String download(String siteUrl, Localization localization) throws IOException, ReCaptchaException {
+		Map<String, String> requestProperties = new HashMap<>();
+		requestProperties.put("Accept-Language", localization.getLanguage());
+		return download(siteUrl, requestProperties);
+	}
 
 	@Override
-	public String download(String siteUrl, String language) throws IOException, ReCaptchaException {
-		Map<String, String> requestProperties = new HashMap<>();
-		requestProperties.put("Accept-Language", language);
-		return download(siteUrl, requestProperties);
+	public DownloadResponse get(String siteUrl, DownloadRequest request) {
+		return new DownloadResponse("ok", null);
+	}
+
+	@Override
+	public DownloadResponse get(String siteUrl) {
+		return new DownloadResponse("ok", null);
+	}
+
+	@Override
+	public DownloadResponse post(String siteUrl, DownloadRequest request) {
+		return new DownloadResponse("ok", null);
 	}
 
 	@Override

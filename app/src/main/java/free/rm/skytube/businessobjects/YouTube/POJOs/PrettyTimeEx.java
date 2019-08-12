@@ -34,7 +34,7 @@ public class PrettyTimeEx extends PrettyTime {
 	 * @see PrettyTime#format(Date)
 	 */
 	public String format(DateTime dateTime) {
-		Long unixEpoch = dateTime.getValue();
+		long unixEpoch = dateTime.getValue();
 		Date date = new Date(unixEpoch);
 		return format(date);
 	}

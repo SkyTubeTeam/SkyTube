@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources>
 	<string name="feed">Suivies</string>
 
-	<string name="subscribing_to_channels">Subscribing to channels…</string>
-	<string name="fetching_subbed_channels_info">Fetching channels\' information…</string>
-	<string name="fetching_subbed_channels_info_error">An error has occurred while fetching channels\' information.</string>
+	<string name="subscribing_to_channels">Abonnement aux chaînes…</string>
+	<string name="fetching_subbed_channels_info">Récupération des informations des chaînes…</string>
+	<string name="fetching_subbed_channels_info_error">Une erreur s\'est produite lors de la récupération des informations des chaînes.</string>
 
 	<string name="fetching_subscription_videos">Chargement des vidéos de vos abonnements</string>
 	<string name="fetched_videos_from_channels">%1$d vidéos de %2$d/%3$d chaines.</string>
@@ -12,6 +12,6 @@
 	<string name="no_subscriptions_text">Vous n\'êtes abonné à aucune chaine.\n\nDès que vous le serez, les vidéos de moins d\'un mois apparaîtront ici.</string>
 	<string name="import_subscriptions_from_youtube">Importer des abonnements depuis YouTube</string>
 
-	<string name="notification_channel_feed_title">Feed Notifications</string>
-	<string name="notification_new_videos_found">%d new videos from subscribed channels</string>
+	<string name="notification_channel_feed_title">Notifications de flux</string>
+	<string name="notification_new_videos_found">%d nouvelles vidéos provenant des abonnements</string>
 </resources>

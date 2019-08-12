@@ -24,36 +24,42 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Environment;
-import android.util.Log;
 import android.view.Menu;
 import android.widget.Toast;
+
+import androidx.core.content.FileProvider;
 
 import com.google.api.client.util.DateTime;
 import com.google.api.services.youtube.model.Thumbnail;
 import com.google.api.services.youtube.model.Video;
+import com.google.api.services.youtube.model.VideoSnippet;
+import com.google.api.services.youtube.model.VideoStatistics;
+
+import org.joda.time.Period;
+import org.joda.time.format.ISOPeriodFormat;
+import org.joda.time.format.PeriodFormatter;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.MathContext;
 import java.math.RoundingMode;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import free.rm.skytube.BuildConfig;
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.FileDownloader;
 import free.rm.skytube.businessobjects.Logger;
+import free.rm.skytube.businessobjects.YouTube.Tasks.GetVideoDescriptionTask;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetVideoStreamTask;
-import free.rm.skytube.businessobjects.db.BlockedChannelsDb;
+import free.rm.skytube.businessobjects.YouTube.VideoStream.StreamMetaData;
 import free.rm.skytube.businessobjects.db.BookmarksDb;
 import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
-import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 import free.rm.skytube.businessobjects.interfaces.GetDesiredStreamListener;
 
 import static free.rm.skytube.app.SkyTubeApp.getContext;
@@ -65,10 +71,6 @@ import static free.rm.skytube.app.SkyTubeApp.getStr;
 public class YouTubeVideo implements Serializable {
 
 	/**
-	 * Default preferred language(s) -- by default, no language shall be filtered out.
-	 */
-	private static final Set<String> defaultPrefLanguages = new HashSet<>(SkyTubeApp.getStringArrayAsList(R.array.languages_iso639_codes));
-	/**
 	 * YouTube video ID.
 	 */
 	private String id;
@@ -77,13 +79,9 @@ public class YouTubeVideo implements Serializable {
 	 */
 	private String title;
 	/**
-	 * Channel ID.
+	 * Channel (only id and name are set).
 	 */
-	private String channelId;
-	/**
-	 * Channel name.
-	 */
-	private String channelName;
+	private YouTubeChannel channel;
 	/**
 	 * The total number of 'likes'.
 	 */
@@ -102,15 +100,30 @@ public class YouTubeVideo implements Serializable {
 	 */
 	private String duration;
 	/**
+	 *  Video duration in seconds
+	 */
+	private int durationInSeconds = -1;
+	/**
 	 * Total views count.  This can be <b>null</b> if the video does not allow the user to
-	 * like/dislike it.
+	 * like/dislike it.  Format:  "<number> Views"
 	 */
 	private String viewsCount;
+	/**
+	 * Total views count.
+	 */
+	private BigInteger viewsCountInt;
 	/**
 	 * The date/time of when this video was published.
 	 */
 	private DateTime publishDate;
-	private String publishDatePretty;
+	/**
+	 * The video publish date in pretty format (e.g. "17 hours ago").
+	 */
+	private transient String publishDatePretty;
+	/**
+	 * The time when the publishDatePretty was calculated.
+	 */
+	private transient long publishDatePrettyCalculationTime;
 	/**
 	 * Thumbnail URL.
 	 */
@@ -131,54 +144,69 @@ public class YouTubeVideo implements Serializable {
 	 * Set to true if the video is a current live stream.
 	 */
 	private boolean isLiveStream;
+	
+	/** publishDate will remain valid for 1 hour. */
+	private final static long PUBLISH_DATE_VALIDITY_TIME = 60 * 60 * 1000L;
 
 
-
+	/**
+	 * Constructor.
+	 */
 	public YouTubeVideo(Video video) {
 		this.id = video.getId();
 
-		if (video.getSnippet() != null) {
-			this.title = video.getSnippet().getTitle();
-			this.channelId = video.getSnippet().getChannelId();
-			this.channelName = video.getSnippet().getChannelTitle();
-			setPublishDate(video.getSnippet().getPublishedAt());
+		VideoSnippet snippet = video.getSnippet();
+		if (snippet != null) {
+			this.title = snippet.getTitle();
 
-			if (video.getSnippet().getThumbnails() != null) {
-				Thumbnail thumbnail = video.getSnippet().getThumbnails().getHigh();
-				if (thumbnail != null)
+			this.channel = new YouTubeChannel(snippet.getChannelId(), snippet.getChannelTitle());
+			setPublishDate(snippet.getPublishedAt());
+
+			if (snippet.getThumbnails() != null) {
+				Thumbnail thumbnail = snippet.getThumbnails().getHigh();
+				if (thumbnail != null) {
 					this.thumbnailUrl = thumbnail.getUrl();
+				}
 
-				thumbnail = video.getSnippet().getThumbnails().getMaxres();
-				if (thumbnail != null)
+				thumbnail = snippet.getThumbnails().getMaxres();
+				if (thumbnail != null) {
 					this.thumbnailMaxResUrl = thumbnail.getUrl();
+				}
 			}
 
-			this.language = video.getSnippet().getDefaultAudioLanguage() != null ? video.getSnippet().getDefaultAudioLanguage()
-					: (video.getSnippet().getDefaultLanguage());
+			this.language = snippet.getDefaultAudioLanguage() != null ? snippet.getDefaultAudioLanguage()
+					: (snippet.getDefaultLanguage());
 
-			this.description = video.getSnippet().getDescription();
+			this.description = snippet.getDescription();
 		}
 
 		if (video.getContentDetails() != null) {
 			setDuration(video.getContentDetails().getDuration());
 			setIsLiveStream();
+			setDurationInSeconds(video.getContentDetails().getDuration());
 		}
 
-		if (video.getStatistics() != null) {
-			BigInteger likeCount = video.getStatistics().getLikeCount(),
-					dislikeCount = video.getStatistics().getDislikeCount();
+		VideoStatistics statistics = video.getStatistics();
+		if (statistics != null) {
+			setLikeDislikeCount(statistics.getLikeCount(), statistics.getDislikeCount());
 
-			setThumbsUpPercentage(likeCount, dislikeCount);
-
-			this.viewsCount = String.format(getStr(R.string.views),
-					video.getStatistics().getViewCount());
-
-			if (likeCount != null)
-				this.likeCount = String.format("%,d", video.getStatistics().getLikeCount());
-
-			if (dislikeCount != null)
-				this.dislikeCount = String.format("%,d", video.getStatistics().getDislikeCount());
+			setViewCount(statistics.getViewCount());
 		}
+	}
+
+	private void setViewCount(BigInteger viewsCountInt) {
+		this.viewsCountInt = viewsCountInt;
+		this.viewsCount = String.format(getStr(R.string.views), viewsCountInt);
+	}
+
+	private void setLikeDislikeCount(BigInteger likeCount, BigInteger dislikeCount) {
+		if (likeCount != null) {
+			this.likeCount = String.format(Locale.getDefault(), "%,d", likeCount);
+		}
+		if (dislikeCount != null) {
+			this.dislikeCount = String.format(Locale.getDefault(), "%,d", dislikeCount);
+		}
+		setThumbsUpPercentage(likeCount, dislikeCount);
 	}
 
 	/**
@@ -249,6 +277,10 @@ public class YouTubeVideo implements Serializable {
 		}
 	}
 
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 	public String getId() {
 		return id;
 	}
@@ -257,12 +289,20 @@ public class YouTubeVideo implements Serializable {
 		return title;
 	}
 
+	public YouTubeChannel getChannel() {
+		return channel;
+	}
+
+	public void setChannel(YouTubeChannel channel) {
+		this.channel = channel;
+	}
+
 	public String getChannelId() {
-		return channelId;
+		return channel.getId();
 	}
 
 	public String getChannelName() {
-		return channelName;
+		return channel.getTitle();
 	}
 
 	/**
@@ -308,6 +348,10 @@ public class YouTubeVideo implements Serializable {
 		return duration;
 	}
 
+	public int getDurationInSeconds() {
+		return durationInSeconds;
+	}
+
 	/**
 	 * Sets the {@link #duration} by converts ISO 8601 duration to human readable string.
 	 *
@@ -321,8 +365,22 @@ public class YouTubeVideo implements Serializable {
 		return viewsCount;
 	}
 
+	public BigInteger getViewsCountInt() {
+		return viewsCountInt;
+	}
+
 	public DateTime getPublishDate() {
 		return publishDate;
+	}
+
+	/*
+	 * Sets the {@link #durationInSeconds}
+	 * @param durationInSeconds The duration in seconds.
+	 */
+	public void setDurationInSeconds(String durationInSeconds) {
+		PeriodFormatter formatter = ISOPeriodFormat.standard();
+		Period p = formatter.parsePeriod(durationInSeconds);
+		this.durationInSeconds = p.toStandardSeconds().getSeconds();
 	}
 
 	/**
@@ -330,13 +388,19 @@ public class YouTubeVideo implements Serializable {
 	 */
 	private void setPublishDate(DateTime publishDate) {
 		this.publishDate = publishDate;
-		this.publishDatePretty = (publishDate != null) ? new PrettyTimeEx().format(publishDate) : "???";
+		this.publishDatePretty = null;
 	}
 
 	/**
 	 * Gets the {@link #publishDate} as a pretty string.
 	 */
 	public String getPublishDatePretty() {
+		long now = System.currentTimeMillis();
+		// if pretty is not yet calculated, or the publish date was generated more than (1 hour) PUBLISH_DATE_VALIDITY_TIME ago...
+		if (publishDatePretty == null || (PUBLISH_DATE_VALIDITY_TIME < now - publishDatePrettyCalculationTime)) {
+			this.publishDatePretty = (publishDate != null) ? new PrettyTimeEx().format(publishDate) : "???";
+			this.publishDatePrettyCalculationTime = now;
+		}
 		return publishDatePretty;
 	}
 
@@ -345,7 +409,8 @@ public class YouTubeVideo implements Serializable {
 	 * you to regenerate and reset the {@link #publishDatePretty}.
 	 */
 	public void forceRefreshPublishDatePretty() {
-		setPublishDate(publishDate);
+		// Will force the publishDatePretty to be regenerated.  Refer to getPublishDatePretty()
+		this.publishDatePretty = null;
 	}
 
 	public String getThumbnailUrl() {
@@ -370,44 +435,6 @@ public class YouTubeVideo implements Serializable {
 
 	public boolean isLiveStream() {
 		return isLiveStream;
-	}
-
-	/**
-	 * Return true if this video does not meet the preferred language criteria;  false otherwise.
-	 * Many YouTube videos do not set the language, hence this method will not be accurate.
-	 *
-	 * @return True to filter out the video; false otherwise.
-	 */
-	public boolean filterVideoByLanguage() {
-		Set<String> preferredLanguages = getPreferredLanguages();
-
-		// if the video's language is not defined (i.e. null)
-		//	OR if there is no linguistic content to the video (zxx)
-		//	OR if the language is undefined (und)
-		// then we are NOT going to filter this video
-		if (getLanguage() == null || getLanguage().equalsIgnoreCase("zxx") || getLanguage().equalsIgnoreCase("und"))
-			return false;
-
-		// if there are no preferred languages, then it means we must not filter this video
-		if (preferredLanguages == null || preferredLanguages.isEmpty())
-			return false;
-
-		// if this video's language is equal to the user's preferred one... then do NOT filter it out
-		for (String prefLanguage : preferredLanguages) {
-			if (getLanguage().matches(prefLanguage))
-				return false;
-		}
-
-		// this video is undesirable, hence we are going to filter it
-		Log.i("FILTERING Video", getTitle() + "[" + getLanguage() + "]");
-		return true;
-	}
-
-	/**
-	 * @return Set of user's preferred ISO 639 language codes (regex).
-	 */
-	private Set<String> getPreferredLanguages() {
-		return SkyTubeApp.getPreferenceManager().getStringSet(getStr(R.string.pref_key_preferred_languages), defaultPrefLanguages);
 	}
 
 	public void bookmarkVideo(Context context, Menu menu) {
@@ -446,22 +473,6 @@ public class YouTubeVideo implements Serializable {
 		ClipData clip = ClipData.newPlainText("Video URL", getVideoUrl());
 		clipboard.setPrimaryClip(clip);
 		Toast.makeText(context, R.string.url_copied_to_clipboard, Toast.LENGTH_SHORT).show();
-	}
-
-
-	public void blockChannel(Context context) {
-		try {
-			if (SubscriptionsDb.getSubscriptionsDb().isUserSubscribedToChannel(this.getChannelId())) {
-				Toast.makeText(context, "Please unsubscribe the channel first.", Toast.LENGTH_SHORT).show();
-			} else {
-				boolean successBlockChannel = BlockedChannelsDb.getBlockedChannelsDb().add(this);
-				Toast.makeText(context,
-						successBlockChannel ? R.string.channel_blocked : R.string.channel_blocked_error,
-						Toast.LENGTH_LONG).show();
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 
 
@@ -520,43 +531,55 @@ public class YouTubeVideo implements Serializable {
 		if (isDownloaded())
 			return;
 
-		getDesiredStream(new GetDesiredStreamListener() {
-			@Override
-			public void onGetDesiredStream(Uri videoUri) {
-				// download the video
-				new VideoDownloader()
-						.setRemoteFileUrl(videoUri.toString())
-						.setDirType(Environment.DIRECTORY_MOVIES)
-						.setTitle(getTitle())
-						.setDescription(getStr(R.string.video) + " ― " + getChannelName())
-						.setOutputFileName(getId())
-						.setOutputFileExtension("mp4")
-						.setAllowedOverRoaming(false)
-						.setAllowedNetworkTypesFlags(getAllowedNetworkTypesFlags())
-						.displayPermissionsActivity(context);
-			}
+		// if description is not yet downloaded, get it, and call the download action again.
+		if (description == null) {
+			new GetVideoDescriptionTask(this, description1 -> downloadVideo(context)).executeInParallel();
+		} else {
+			getDesiredStream(new GetDesiredStreamListener() {
+				@Override
+				public void onGetDesiredStream(StreamMetaData desiredStream) {
+					// download the video
+					new VideoDownloader()
+							.setRemoteFileUrl(desiredStream.getUri().toString())
+							.setDirType(Environment.DIRECTORY_MOVIES)
+							.setTitle(getTitle())
+							.setDescription(getStr(R.string.video) + " ― " + getChannelName())
+							.setOutputFileName(getId() + " - " + getTitle())
+							.setOutputDirectoryName(getChannelName())
+							.setParentDirectory(SkyTubeApp.getPreferenceManager().getString(SkyTubeApp.getStr(R.string.pref_key_video_download_folder), null))
+							.setOutputFileExtension("mp4")
+							.setAllowedOverRoaming(false)
+							.setAllowedNetworkTypesFlags(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE)
+							.displayPermissionsActivity(context);
+				}
 
-
-			private int getAllowedNetworkTypesFlags() {
-				boolean allowDownloadsOnMobile = SkyTubeApp.getPreferenceManager().getBoolean(getStr(R.string.pref_key_allow_mobile_downloads), false);
-				int flags = DownloadManager.Request.NETWORK_WIFI;
-				if (allowDownloadsOnMobile)
-					flags = flags | DownloadManager.Request.NETWORK_MOBILE;
-
-				return flags;
-			}
-
-
-			@Override
-			public void onGetDesiredStreamError(String errorMessage) {
-				Logger.e(YouTubeVideo.this, "Stream error: %s", errorMessage);
-				Toast.makeText(getContext(),
-						String.format(getContext().getString(R.string.video_download_stream_error), getTitle()),
-						Toast.LENGTH_LONG).show();
-			}
-		});
+				@Override
+				public void onGetDesiredStreamError(String errorMessage) {
+					Logger.e(YouTubeVideo.this, "Stream error: %s", errorMessage);
+					Toast.makeText(getContext(),
+							String.format(getContext().getString(R.string.video_download_stream_error), getTitle()),
+							Toast.LENGTH_LONG).show();
+				}
+			});
+		}
 	}
 
+	/**
+	 * Play the video using an external app
+	 */
+	public void playVideoExternally(Context context) {
+		Uri fileUri = getFileUri();
+		if (fileUri != null) {
+			File file = new File(fileUri.getPath());
+			Uri uri = FileProvider.getUriForFile(context, BuildConfig.APPLICATION_ID + ".provider", file);
+			Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+			intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+			context.startActivity(intent);
+		} else {
+			Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getVideoUrl()));
+			context.startActivity(browserIntent);
+		}
+	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////
 

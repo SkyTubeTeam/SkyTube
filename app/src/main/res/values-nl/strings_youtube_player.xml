@@ -9,7 +9,7 @@
 	<string name="error_get_video_desc">Er is een fout opgetreden tijdens het ophalen van de video-omschrijving.</string>
 	<string name="error_invalid_url">Ongeldige video-URL: %s</string>
 
-	<string name="warning_live_video">Livestreams kunnen momenteel niet worden afgespeeld. Wilt u de livestream openen in een andere app?</string>
+	<string name="warning_live_video">Livestreams kunnen momenteel niet worden afgespeeld. Wil je de livestream openen in een andere app?</string>
 
 	<string name="ratings_disabled">Waarderingen uitgeschakeld</string>
 
@@ -24,7 +24,7 @@
 
 	<string name="error_get_comments">Er is een fout opgetreden tijdens het ophalen van de reacties.</string>
 	<string name="no_video_comments">Deze video heeft geen reacties of reacties zijn uitgeschakeld.</string>
-	<string name="view_replies">Reacties weergeven</string>
+	<string name="view_replies">Reacties tonen</string>
 	<string name="hide_replies">Reacties verbergen</string>
 
 	<string name="enter_video_url">Video-URL invoeren</string>
@@ -32,8 +32,13 @@
 	<string name="cancel">Annuleren</string>
 	<string name="clear">Wissen</string>
 
-	<string name="tutorial_comments_icon">Veeg naar links om de reacties te weergeven.</string>
-	<string name="tutorial_video_info_icon">Veeg omhoog om de video-informatie te weergeven.</string>
-	<string name="tutorial_pause_video">Dubbeltik om een video te pauzeren of af te spelen.</string>
+	<string name="mark_watched">Markeren als \'bekeken\'</string>
+	<string name="mark_unwatched">Markeren als \'niet bekeken\'</string>
 
-</resources>
+	<string name="should_resume">Wil je verdergaan waar je was gebleven?</string>
+	<string name="resume">Hervatten</string>
+<string name="mobile_data">Mobiel internet</string>
+	<string name="warning_mobile_network_play">Je apparaat is niet verbonden met een Wi-Fi-netwerk. Om te voorkomen dat je extra moet betalen voor gebruik van mobiel internet, raden wij aan te verbinden met een Wi-Fi-netwerk. Wil je de video tóch afspelen\?</string>
+	<string name="warning_mobile_network_disable">Niet opnieuw vragen.</string>
+	<string name="play_video">Video afspelen</string>
+	</resources>

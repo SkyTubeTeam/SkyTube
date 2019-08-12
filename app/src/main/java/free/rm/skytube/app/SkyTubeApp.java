@@ -32,14 +32,19 @@ import android.net.ConnectivityManager;
 import android.os.Build;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
-import android.support.multidex.MultiDexApplication;
-import android.support.v4.content.IntentCompat;
+import androidx.multidex.MultiDexApplication;
+import androidx.core.content.res.ResourcesCompat;
+
+import org.schabi.newpipe.extractor.NewPipe;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.FeedUpdaterReceiver;
+import free.rm.skytube.businessobjects.YouTube.VideoStream.HttpDownloader;
 
 /**
  * SkyTube application.
@@ -59,7 +64,6 @@ public class SkyTubeApp extends MultiDexApplication {
 		skyTubeApp = this;
 		initChannels(this);
 	}
-
 
 	/**
 	 * Returns a localised string.
@@ -116,6 +120,16 @@ public class SkyTubeApp extends MultiDexApplication {
 
 
 	/**
+	 * @param colorId   Color resource ID (e.g. R.color.green).
+	 *
+	 * @return The color for the given color resource id.
+	 */
+	public static int getColorEx(int colorId) {
+		return ResourcesCompat.getColor(skyTubeApp.getResources(), colorId, null);
+	}
+
+
+	/**
 	 * @return {@link Context}.
 	 */
 	public static Context getContext() {
@@ -144,25 +158,17 @@ public class SkyTubeApp extends MultiDexApplication {
 		return getContext().getResources().getBoolean(R.bool.is_tablet);
 	}
 
-	/**
-	 * @return boolean determining if the device is connected via WiFi
-	 */
-	public static boolean isConnectedToWiFi() {
-		final ConnectivityManager connMgr = (ConnectivityManager)
-						getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-		final android.net.NetworkInfo wifi = connMgr.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-		return wifi != null && wifi.isConnectedOrConnecting();
-	}
 
 	/**
-	 * @return boolean determining if the device is connected via Mobile
+	 * @return True if the device is connected via mobile network such as 4G.
 	 */
 	public static boolean isConnectedToMobile() {
 		final ConnectivityManager connMgr = (ConnectivityManager)
-						getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+				getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
 		final android.net.NetworkInfo mobile = connMgr.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
 		return mobile != null && mobile.isConnectedOrConnecting();
 	}
+
 
 	/*
 	 * Initialize Notification Channels (for Android OREO)
@@ -211,4 +217,12 @@ public class SkyTubeApp extends MultiDexApplication {
 		}
 	}
 
+	/**
+	 * Initialize NewPipe with a custom HttpDownloader.
+	 */
+	public static void initNewPipe() {
+		if (NewPipe.getDownloader() == null) {
+			NewPipe.init(new HttpDownloader(), null);
+		}
+	}
 }

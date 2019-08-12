@@ -1,6 +1,6 @@
 package free.rm.skytube.businessobjects.interfaces;
 
-import android.net.Uri;
+import free.rm.skytube.businessobjects.YouTube.VideoStream.StreamMetaData;
 
 /**
  * Interface to be used when retrieving the desired stream (per the user's preferences) from a Video.
@@ -12,7 +12,7 @@ public interface GetDesiredStreamListener {
 	 *
 	 * @param videoUri  The retrieved video's Uri.
 	 */
-	void onGetDesiredStream(Uri videoUri);
+	void onGetDesiredStream(StreamMetaData desiredStream);
 
 	/**
 	 * Called if an error occurred while retrieving the video's Uri.

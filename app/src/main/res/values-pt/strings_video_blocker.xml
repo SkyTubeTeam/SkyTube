@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="blocked_videos">Vídeos bloqueados</string>
+	<string name="no_videos_blocked">Não existem vídeos bloqueados ou filtrados. Deseja configurar o bloqueador de vídeos?</string>
+	<string name="configure">Configurar</string>
+	<string name="block_channel">Bloquear canal</string>
+	<string name="channel_blacklisted">Canal bloqueado. Recarregue a lista.</string>
+	<string name="channel_blacklist_error">Não foi possível bloquear o canal.</string>
+	<string name="channel_unwhitelist_error">Não foi possível remover o canal da lista de permissões.</string>
+	<string name="dislikes">%d%% \"Não gosto\"</string>
+</resources>

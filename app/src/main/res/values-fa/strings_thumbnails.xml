@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="thumbnail">تصویر</string>
+	<string name="view_thumbnail">نمایش تصویر</string>
+	<string name="thumbnail_downloaded">تصویر بارگیری شد.</string>
+	<string name="thumbnail_download_error">تصویر نتوانست بارگیری شود.</string>
+</resources>

@@ -18,8 +18,8 @@
 package free.rm.skytube.gui.fragments;
 
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +40,12 @@ public abstract class VideosGridFragment extends BaseVideosGridFragment {
 
 	protected RecyclerView	gridView;
 
+	public VideosGridFragment() {
+		super(new VideoGridAdapter(null));
+	}
+	public VideosGridFragment(VideoGridAdapter videoGrid) {
+		super(videoGrid);
+	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -48,11 +54,6 @@ public abstract class VideosGridFragment extends BaseVideosGridFragment {
 
 		// setup the video grid view
 		gridView = view.findViewById(R.id.grid_view);
-		if (videoGridAdapter == null) {
-			videoGridAdapter = new VideoGridAdapter(getActivity());
-		} else {
-			videoGridAdapter.setContext(getActivity());
-		}
 		videoGridAdapter.setSwipeRefreshLayout(swipeRefreshLayout);
 
 		if (getVideoCategory() != null)
@@ -64,6 +65,10 @@ public abstract class VideosGridFragment extends BaseVideosGridFragment {
 		gridView.setLayoutManager(new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.video_grid_num_columns)));
 		gridView.setAdapter(videoGridAdapter);
 
+		// The fragment is already selected, we need to initialize the video grid
+		if (this.isFragmentSelected()) {
+			videoGridAdapter.initializeList();
+		}
 		return view;
 	}
 

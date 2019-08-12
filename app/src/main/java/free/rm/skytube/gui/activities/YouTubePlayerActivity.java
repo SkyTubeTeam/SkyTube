@@ -18,39 +18,63 @@
 package free.rm.skytube.gui.activities;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.net.Uri;
 import android.os.Bundle;
-<<<<<<< HEAD
-import android.util.Log;
-=======
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
->>>>>>> upstream/master
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
-import free.rm.skytube.gui.businessobjects.BackButtonActivity;
+import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubePlaylist;
+import free.rm.skytube.businessobjects.interfaces.YouTubePlayerActivityListener;
+import free.rm.skytube.businessobjects.interfaces.YouTubePlayerFragmentInterface;
 import free.rm.skytube.gui.businessobjects.fragments.FragmentEx;
-import free.rm.skytube.gui.fragments.YouTubePlayerFragment;
+import free.rm.skytube.gui.fragments.YouTubePlayerV1Fragment;
+import free.rm.skytube.gui.fragments.YouTubePlayerTutorialFragment;
 import free.rm.skytube.gui.fragments.YouTubePlayerV2Fragment;
 
 /**
- * An {@link Activity} that contains an instance of
- * {@link free.rm.skytube.gui.fragments.YouTubePlayerFragment}.
+ * An {@link Activity} that contains an instance of either {@link YouTubePlayerV2Fragment} or
+ * {@link YouTubePlayerV1Fragment}.
  */
-public class YouTubePlayerActivity extends BackButtonActivity {
+public class YouTubePlayerActivity extends BaseActivity implements YouTubePlayerActivityListener {
+	public static final String YOUTUBE_VIDEO = "YouTubePlayerActivity.YouTubeVideo";
+	public static final String YOUTUBE_VIDEO_POSITION = "YouTubePlayerActivity.YouTubeVideoPosition";
+	public static final int YOUTUBE_PLAYER_RESUME_RESULT = 2931;
+
+	private FragmentEx videoPlayerFragment;
+	private YouTubePlayerFragmentInterface fragmentListener;
+
+	private static final String TUTORIAL_COMPLETED = "YouTubePlayerActivity.TutorialCompleted";
+	public  static final String YOUTUBE_VIDEO_OBJ  = "YouTubePlayerActivity.video_object";
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_fragment_holder);
+		final boolean useDefaultPlayer = useDefaultPlayer();
 
-		// either use the SkyTube's default video player or the legacy one
-		FragmentManager fragmentManager = getSupportFragmentManager();
-		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-		FragmentEx fragment = useDefaultPlayer() ? new YouTubePlayerV2Fragment() : new YouTubePlayerFragment();
-		fragmentTransaction.add(R.id.fragment_container, fragment);
-		fragmentTransaction.commit();
+		// if the user wants to use the default player, then ensure that the activity does not
+		// have a toolbar (actionbar) -- this is as the fragment is taking care of the toolbar
+		if (useDefaultPlayer) {
+			setTheme(R.style.NoActionBarActivityTheme);
+		}
+
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+
+		// if the tutorial was previously displayed, the just "install" the video player fragment
+		if (wasTutorialDisplayedBefore()) {
+			installNewVideoPlayerFragment(useDefaultPlayer);
+		} else {
+			// display the tutorial
+			FragmentEx tutorialFragment = new YouTubePlayerTutorialFragment().setListener(() -> installNewVideoPlayerFragment(useDefaultPlayer));
+			installFragment(tutorialFragment);
+		}
 	}
 
 
@@ -63,6 +87,80 @@ public class YouTubePlayerActivity extends BackButtonActivity {
 		final String str = SkyTubeApp.getPreferenceManager().getString(getString(R.string.pref_key_choose_player), defaultPlayerValue);
 
 		return str.equals(defaultPlayerValue);
+	}
+
+	// If the back button in the toolbar is hit, save the video's progress (if playback history is not disabled)
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+			// close this activity when the user clicks on the back button (action bar)
+			case android.R.id.home:
+				fragmentListener.videoPlaybackStopped();
+				finish();
+				return true;
+			default:
+				return super.onOptionsItemSelected(item);
+		}
+	}
+
+	@Override
+	public void onOptionsMenuCreated(Menu menu) {
+		super.onOptionsMenuCreated(menu);
+	}
+
+	@Override
+	protected boolean isLocalPlayer() {
+		return true;
+	}
+
+
+	/**
+	 * Will check whether the video player tutorial was completed before.  If no, it will return
+	 * false and will save the value accordingly.
+	 *
+	 * @return True if the tutorial was completed in the past.
+	 */
+	private boolean wasTutorialDisplayedBefore() {
+		SharedPreferences preferences = SkyTubeApp.getPreferenceManager();
+		boolean wasTutorialDisplayedBefore = preferences.getBoolean(TUTORIAL_COMPLETED, false);
+
+		preferences.edit().putBoolean(TUTORIAL_COMPLETED, true).apply();
+
+		return wasTutorialDisplayedBefore;
+	}
+
+
+	/**
+	 * "Installs" the video player fragment.
+	 *
+	 * @param useDefaultPlayer  True to use the default player; false to use the legacy one.
+	 */
+	private void installNewVideoPlayerFragment(boolean useDefaultPlayer) {
+		videoPlayerFragment = useDefaultPlayer ? new YouTubePlayerV2Fragment() : new YouTubePlayerV1Fragment();
+
+		try {
+			fragmentListener = (YouTubePlayerFragmentInterface) videoPlayerFragment;
+		} catch(ClassCastException e) {
+			throw new ClassCastException(videoPlayerFragment.toString()
+					+ " must implement YouTubePlayerFragmentInterface");
+		}
+
+		installFragment(videoPlayerFragment);
+	}
+
+
+	/**
+	 * "Installs" a fragment inside the {@link FragmentManager}.
+	 *
+	 * @param fragment  Fragment to install and that is going to be displayed to the user.
+	 */
+	private void installFragment(FragmentEx fragment) {
+		// either use the SkyTube's default video player or the legacy one
+		FragmentManager fragmentManager = getSupportFragmentManager();
+		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+		fragmentTransaction.add(R.id.fragment_container, fragment);
+		fragmentTransaction.commit();
 	}
 
 
@@ -82,7 +180,6 @@ public class YouTubePlayerActivity extends BackButtonActivity {
 			orientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR;
 
 		setRequestedOrientation(orientation);
-		Log.d("YTPActivity", "onStart:  I AM HERE");
 	}
 
 
@@ -92,4 +189,62 @@ public class YouTubePlayerActivity extends BackButtonActivity {
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
 	}
 
+
+	@Override
+	public void onPanelClosed(int featureId, Menu menu) {
+		super.onPanelClosed(featureId, menu);
+
+		// notify the player that the menu is no longer visible
+		if (videoPlayerFragment instanceof YouTubePlayerV2Fragment) {
+			((YouTubePlayerV2Fragment) videoPlayerFragment).onMenuClosed();
+		}
+	}
+
+
+	@Override
+	public void onBackPressed() {
+		if (fragmentListener != null) {
+			fragmentListener.videoPlaybackStopped();
+		}
+		super.onBackPressed();
+	}
+
+	public void onSessionStarting() {
+		fragmentListener.pause();
+	}
+
+	// This is called when connecting to a Chromecast from this activity. It will tell BaseActivity
+	// to launch the video that was playing on the Chromecast.
+	@Override
+	protected void returnToMainAndResume() {
+		Bundle bundle = new Bundle();
+		bundle.putSerializable(YOUTUBE_VIDEO, fragmentListener.getYouTubeVideo());
+		bundle.putInt(YOUTUBE_VIDEO_POSITION, fragmentListener.getCurrentVideoPosition());
+
+		if(getIntent() != null && getIntent().getAction() != null && getIntent().getAction().equals(Intent.ACTION_VIEW)) {
+			Intent intent = new Intent(YouTubePlayerActivity.this, MainActivity.class);
+			intent.putExtras(bundle);
+			intent.setData(Uri.parse(fragmentListener.getYouTubeVideo().getVideoUrl()));
+			intent.setAction(Intent.ACTION_VIEW);
+			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_TASK_ON_HOME);
+			startActivity(intent);
+			finish();
+		} else {
+			Intent intent = new Intent();
+			intent.putExtras(bundle);
+			setResult(RESULT_OK, intent);
+			finish();
+		}
+	}
+
+	@Override
+	public void onPlaylistClick(YouTubePlaylist playlist) {}
+
+	/**
+	 * No-op method. Since this class needs to extend BaseActivity, in order to be able to connect to a Chromecast from
+	 * this activity, it needs to implement this method, but doesn't need to do anything, since it doesn't use
+	 * SubscriptionsFeedFragment.
+	 */
+	@Override
+	public void refreshSubscriptionsFeedVideos() {}
 }

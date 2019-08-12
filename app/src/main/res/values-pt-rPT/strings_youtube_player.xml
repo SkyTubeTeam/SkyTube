@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="error_stream_err_unavailable">Mensagem de erro não disponível.</string>
 	<string name="error_stream_decryption_fail">Não foi possível carregar o código de desencriptação para o serviço YouTube.</string>
@@ -32,8 +32,13 @@
 	<string name="play">Reproduzir</string>
 	<string name="cancel">Cancelar</string>
 	<string name="clear">Limpar</string>
+<string name="mark_watched">Marcar como visto</string>
+	<string name="mark_unwatched">Marcar como não visto</string>
 
-	<string name="tutorial_comments_icon">Deslize à esquerda para ver os comentários.</string>
-	<string name="tutorial_video_info_icon">Deslize acima para ver as informações do vídeo.</string>
-	<string name="tutorial_pause_video">Duplo toque para reproduzir ou parar um vídeo.</string>
-</resources>
+	<string name="should_resume">Deseja continuar a reprodução do local em que parou?</string>
+	<string name="resume">Continuar</string>
+<string name="mobile_data">Dados móveis</string>
+	<string name="warning_mobile_network_play">O dispositivo não está ligado a uma rede Wi-Fi. Para evitar possíveis taxas de uso de dados, é recomendável conectar-se a uma rede Wi-Fi. Reproduzir vídeo de qualquer maneira\?</string>
+	<string name="warning_mobile_network_disable">Não voltar a perguntar.</string>
+	<string name="play_video">Reproduzir vídeo</string>
+	</resources>

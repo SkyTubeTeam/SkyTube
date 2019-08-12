@@ -1,20 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="preferences">Preferences</string>
-
-	<string name="pref_languages_category">Languages &amp; Regions</string>
-	<string name="pref_title_preferred_regions">Preferred Region</string>
-	<string name="pref_key_preferred_region" translatable="false">pref_key_preferred_region</string>
-	<string name="pref_summary_preferred_regions">Select a preferred region. This is used to filter out videos in the \"Featured\" videos category.</string>
-
-	<string name="pref_title_preferred_languages">Preferred Language(s)</string>
-	<string name="pref_key_preferred_languages" translatable="false">pref_key_preferred_languages</string>
-	<string name="pref_summary_preferred_languages">Experimental: Select one or more preferred languages. This is used to filter out videos in the \"Most Popular\" video category and for video searches.</string>
+	<string name="key_preferences">preferences</string>
 
 	<string name="pref_video_player_category">Video Player</string>
 	<string name="pref_title_preferred_res">Preferred Resolution</string>
 	<string name="pref_key_preferred_res" translatable="false">pref_preferred_resolution</string>
-	<string name="pref_summary_preferred_res">Select your preferred resolution</string>
+	<string name="pref_summary_preferred_res">Select your preferred resolution:  %s</string>
 
 	<string name="pref_key_choose_player" translatable="false">pref_key_choose_player</string>
 	<string name="pref_title_choose_player">Video Player</string>
@@ -33,7 +25,16 @@
 		<item>@string/pref_official_player_value</item>   <!-- this should remain the last item -->
 	</string-array>
 
-	<string name="pref_backup_category">Backups</string>
+	<string name="pref_category_mobile_network">Mobile Network</string>
+	<string name="pref_title_preferred_res_mobile">Preferred Resolution for mobile network</string>
+	<string name="pref_key_preferred_res_mobile" translatable="false">pref_preferred_resolution_mobile</string>
+	<string name="pref_summary_preferred_res_mobile">Select your preferred resolution when streaming via a mobile network (such as 4G):  %s</string>
+
+	<string name="pref_key_warn_mobile_downloads" translatable="false">pref_key_warn_mobile_downloads</string>
+	<string name="pref_title_warn_mobile_downloads">Display Mobile Network Warning</string>
+	<string name="pref_summary_warn_mobile_downloads">Display a warning if you are using mobile network (such as 4G) before streaming/downloading videos.</string>
+
+	<string name="pref_import_export_category">Import/Export</string>
 	<string name="pref_title_backup_dbs">Backup Databases</string>
 	<string name="pref_key_backup_dbs" translatable="false">pref_key_backup_db</string>
 	<string name="pref_summary_backup_dbs">Backup your subscriptions and bookmarks databases.</string>
@@ -56,6 +57,14 @@
 	<string name="pref_summary_import_subs">Import your subscriptions from your YouTube account.</string>
 	<string name="subs_import_select_backup">Select YouTube XML file to import</string>
 
+	<string name="pref_chromecast_category">Chromecast</string>
+	<string name="pref_key_chromecast_category">chromecast_category</string>
+	<string name="pref_key_chromecast_none">default_chromecast_key</string>
+	<string name="pref_title_chromecast_none">None</string>
+	<string name="pref_title_autocast">AutoCast</string>
+	<string name="pref_key_autocast">pref_external_launch</string>
+	<string name="pref_summary_autocast">Select a Chromecast device to always use when opening a video in SkyTube from another application.</string>
+
 	<string name="pref_about_category">About</string>
 	<string name="pref_title_website">Website</string>
 	<string name="pref_key_website" translatable="false">pref_website</string>
@@ -71,7 +80,7 @@
 	<string name="pref_key_license" translatable="false">pref_license</string>
 	<string name="pref_summary_license">GNU General Public License version 3</string>
 	<string name="app_license">
-		Copyright &#169; 2015-2018  Ramon Mifsud\n
+		Copyright © 2015-2018  Ramon Mifsud\n
 
 		\nThis program is free software: you can redistribute it and/or modify
 		it under the terms of the GNU General Public License as published by
@@ -88,20 +97,24 @@
 	<string name="i_agree">I Agree</string>
 
 
+	<!-- extracted from  YouTube.com > 3 dot menu > Language -->
 	<string-array name="languages_names" translatable="false">
 		<item>Afrikaans</item>
 		<item>Azərbaycan</item>
 		<item>Bahasa Indonesia</item>
 		<item>Bahasa Malaysia</item>
+		<item>Bosanski</item>
 		<item>Català</item>
 		<item>Čeština</item>
 		<item>Dansk</item>
 		<item>Deutsch</item>
 		<item>Eesti</item>
+		<item>English (All)</item>
 		<item>English (UK)</item>
 		<item>English (US)</item>
 		<item>Español (España)</item>
 		<item>Español (Latinoamérica)</item>
+		<item>Español (US)</item>
 		<item>Euskara</item>
 		<item>Filipino</item>
 		<item>Français</item>
@@ -116,7 +129,7 @@
 		<item>Lietuvių</item>
 		<item>Magyar</item>
 		<item>Nederlands</item>
-		<item>Norsk bokmål</item>
+		<item>Norsk</item>
 		<item>O‘zbek</item>
 		<item>Polski</item>
 		<item>Português</item>
@@ -125,10 +138,12 @@
 		<item>Shqip</item>
 		<item>Slovenčina</item>
 		<item>Slovenščina</item>
+		<item>Srpski</item>
 		<item>Suomi</item>
 		<item>Svenska</item>
 		<item>Tiếng Việt</item>
 		<item>Türkçe</item>
+		<item>Беларуская</item>
 		<item>Български</item>
 		<item>Кыргызча</item>
 		<item>Қазақ Тілі</item>
@@ -160,6 +175,7 @@
 		<item>ქართული</item>
 		<item>አማርኛ</item>
 		<item>ខ្មែរ</item>
+		<item>中文</item>
 		<item>中文 (简体)</item>
 		<item>中文 (繁體)</item>
 		<item>中文 (香港)</item>
@@ -167,20 +183,24 @@
 		<item>한국어</item>
 	</string-array>
 
+	<!-- extracted from:  https://developers.google.com/youtube/v3/docs/i18nLanguages/list -->
 	<string-array name="languages_iso639_codes" translatable="false">
 		<item>af</item>
 		<item>az</item>
 		<item>id</item>
 		<item>ms</item>
+		<item>bs</item>
 		<item>ca</item>
 		<item>cs</item>
 		<item>da</item>
 		<item>de</item>
 		<item>et</item>
+		<item>"en(?:-.+)?"</item>	<!-- "en" or "en-US" or "en-CA" ... -->
 		<item>en-GB</item>
 		<item>"en(?:-US)?"</item>	<!-- "en" or "en-US" -->
-		<item>es</item>
+		<item>es(?:-ES)?"</item>    <!-- Somehow YouTube uses both "es" and "es-ES" for Spanish -->
 		<item>es-419</item>
+		<item>es-US</item>
 		<item>eu</item>
 		<item>fil</item>
 		<item>fr</item>
@@ -199,15 +219,17 @@
 		<item>uz</item>
 		<item>pl</item>
 		<item>pt-PT</item>
-		<item>pt</item>
+		<item>"pt(?:-BR)?"</item>   <!-- Somehow YouTube uses both "pt" and "pt-BR" for Brazilian Portuguese -->
 		<item>ro</item>
 		<item>sq</item>
 		<item>sk</item>
 		<item>sl</item>
+		<item>sr-Latn</item>
 		<item>fi</item>
 		<item>sv</item>
 		<item>vi</item>
 		<item>tr</item>
+		<item>be</item>
 		<item>bg</item>
 		<item>ky</item>
 		<item>kk</item>
@@ -221,7 +243,7 @@
 		<item>iw</item>
 		<item>ur</item>
 		<item>ar</item>
-		<item>fa</item>
+		<item>fa(?:-IR)?"</item>	<!-- "fa" or "fa-IR" -->
 		<item>ne</item>
 		<item>mr</item>
 		<item>hi</item>
@@ -239,6 +261,7 @@
 		<item>ka</item>
 		<item>am</item>
 		<item>km</item>
+		<item>zh(?:-.+)?"</item>	<!-- "zn" or "zn-CN" ... -->
 		<item>zh-CN</item>
 		<item>zh-TW</item>
 		<item>zh-HK</item>
@@ -341,7 +364,7 @@
 	</string-array>
 
 	<string-array name="country_codes" translatable="false">
-		<item></item>
+		<item/>
 		<item>DZ</item>
 		<item>AR</item>
 		<item>AU</item>
@@ -433,22 +456,30 @@
 	</string-array>
 
 	<string name="pref_other_category">Others</string>
+
 	<string name="pref_key_default_tab" translatable="false">pref_default_tab</string>
+	<string name="pref_key_default_tab_name" translatable="false">pref_default_tab_name</string>
 	<string name="pref_title_default_tab">Default Tab</string>
 	<string name="pref_summary_default_tab">Default tab to show when SkyTube launches: %s</string>
-	<string-array name="default_tab" translatable="false">
+
+	<string name="pref_key_hide_tabs" translatable="false">pref_hide_tabs</string>
+	<string name="pref_title_hide_tabs">Hide Tabs</string>
+	<string name="pref_summary_hide_tabs">Choose which tabs should not be shown. Restart required.</string>
+	<string name="pref_hide_tabs_restart">Restart app to show updated tabs.</string>
+
+	<string-array name="tab_list" translatable="false">
 		<item>@string/featured</item>
 		<item>@string/most_popular</item>
 		<item>@string/feed</item>
 		<item>@string/bookmarks</item>
 		<item>@string/downloads</item>
 	</string-array>
-	<string-array name="default_tab_values" translatable="false">
-		<item>0</item>
-		<item>1</item>
-		<item>2</item>
-		<item>3</item>
-		<item>4</item>
+	<string-array name="tab_list_values" translatable="false">
+		<item>MainFragment.featuredVideosFragment</item>
+		<item>MainFragment.mostPopularVideosFragment</item>
+		<item>MainFragment.subscriptionsFeedFragment</item>
+		<item>MainFragment.bookmarksFragment</item>
+		<item>MainFragment.downloadedVideosFragment</item>
 	</string-array>
 
 	<string name="pref_key_feed_notification" translatable="false">pref_key_feed_notification</string>
@@ -488,9 +519,13 @@
 		<item>@string/pref_screen_sensor_value</item>
 	</string-array>
 
-	<string name="pref_key_disable_immersive_mode" translatable="false">pref_key_disable_immersive_mode</string>
-	<string name="pref_title_disable_immersive_mode">Disable Immersive Mode</string>
-	<string name="pref_summary_disable_immersive_mode">Comments and video description icons and the navigation bar shall always be displayed</string>
+	<string name="pref_key_disable_screen_gestures" translatable="false">pref_key_screen_gestures</string>
+	<string name="pref_title_disable_screen_gestures">Disable video gestures</string>
+	<string name="pref_summary_disable_screen_gestures">Turn off gestures to control volume, brightness and seeking forward/backwards in videos.</string>
+
+	<string name="pref_key_enable_immersive_mode" translatable="false">pref_key_enable_immersive_mode</string>
+	<string name="pref_title_enable_immersive_mode">Enable immersive mode</string>
+	<string name="pref_summary_enable_immersive_mode">Hide navigation bar and the status bar during playback.</string>
 
 	<string name="pref_youtube_api_key" translatable="false">pref_youtube_api_key</string>
 	<string name="pref_title_youtube_api_key">YouTube API Key</string>
@@ -499,20 +534,146 @@
 	<string name="pref_youtube_api_key_custom">Key is valid. Restart app to use the new YouTube API key.</string>
 	<string name="pref_youtube_api_key_default">Restart app to switch back to default YouTube API key.</string>
 
-	<string name="pref_key_allow_mobile_downloads" translatable="false">pref_allow_mobile_downloads_key</string>
-	<string name="pref_title_allow_mobile_downloads">Allow downloads on mobile networks</string>
-	<string name="pref_summary_allow_mobile_downloads">Select this to enable downloading videos on mobile networks. Otherwise, videos can only be downloaded on Wi-Fi.</string>
+	<string name="restart">Restart</string>
+	<string name="pref_key_subscriptions_alphabetical_order" translatable="false">pref_key_subscriptions_alphabetical_order</string>
+	<string name="pref_title_subscriptions_alphabetical_order">Sort Channels Alphabetically</string>
+	<string name="pref_summary_subscriptions_alphabetical_order">If checked, Subscribed Channels will be sorted alphabetically.</string>
+	<string name="pref_key_brightness_level" translatable="false">pref_key_brightness_level</string>
 
+	<string name="pref_category_downloads">Downloads</string>
+	<string name="pref_key_download_to_separate_directories">pref_key_download_to_separate_directories</string>
+	<string name="pref_title_download_to_separate_directories">Download Videos Into Folders</string>
+	<string name="pref_summary_download_to_separate_directories">Videos are downloaded into folders based on the channel name.</string>
+
+	<string name="pref_key_video_download_folder">pref_key_video_download_folder</string>
+	<string name="pref_popup_title_video_download_folder">Choose Folder</string>
+	<string name="pref_title_video_download_folder">Video Download Folder</string>
+    <string name="pref_summary_video_download_folder">Videos are downloaded into this folder: %s</string>
+
+    <!--
+        VIDEO BLOCKER
+    -->
+	<string name="pref_video_blocker_category">Video Blocker</string>
+
+	<string name="pref_key_enable_video_blocker" translatable="false">pref_key_enable_video_blocker</string>
+	<string name="pref_title_enable_video_blocker" translatable="false">@string/pref_video_blocker_category</string>
+	<string name="pref_summary_enable_video_blocker">Enable video blocker.</string>
+
+	<string name="pref_channels_filter_category">Channels Filters</string>
+
+	<string name="pref_key_channel_filter_method" translatable="false">pref_key_channel_filter_method</string>
+	<string name="pref_title_channel_filter_method">Channel Filter Method</string>
+	<string name="pref_summary_channel_filter_method">Select the channel filtering method:  %s</string>
+	<string name="disabled">Disabled</string>
+	<string-array name="channel_filtering_list">
+		<item>Channel Blacklisting</item>
+		<item>Channel Whitelisting</item>
+	</string-array>
+	<string name="channel_blacklisting_filtering" translatable="false">channel_blacklisting_filtering</string>
+	<string name="channel_whitelisting_filtering" translatable="false">channel_whitelisting_filtering</string>
+	<string-array name="channel_filtering_values_list" translatable="false">
+		<item>@string/channel_blacklisting_filtering</item>
+		<item>@string/channel_whitelisting_filtering</item>
+	</string-array>
+
+	<string name="pref_key_channel_blacklist" translatable="false">pref_key_channel_blacklist</string>
+	<string name="pref_title_channel_blacklist">Channel Blacklist</string>
+	<string name="pref_summary_channel_blacklist">A list of blocked channels.</string>
+	<string name="unblock">Unblock</string>
+	<string name="channel_blacklist_updated">Channel blacklist updated.  Please refresh videos.</string>
+	<string name="channel_blacklist_update_failure">Failed to remove the given channel(s) from the blacklist…</string>
+	<string name="channel_blacklist_empty">Channel blacklist is empty.</string>
+
+	<string name="pref_key_channel_whitelist" translatable="false">pref_key_channel_whitelist</string>
+	<string name="pref_title_channel_whitelist">Channel Whitelist</string>
+	<string name="pref_summary_channel_whitelist">A list of whitelisted channels.</string>
+	<string name="input_channel_url">Channel\'s URL to be whitelisted:</string>
+	<string name="add">Add</string>
+	<string name="block">Block</string>
+	<string name="please_wait">Please wait…</string>
+	<string name="channel_already_whitelisted">Channel already whitelisted.</string>
+	<string name="channel_whitelist_updated">Channel whitelisted.  Please refresh videos.</string>
+	<string name="channel_whitelist_update_failure">Failed to whitelist the given channel…</string>
+	<string name="channel_unwhitelist_success">Channel whitelist updated.  Please refresh videos.</string>
+	<string name="channel_unwhitelist_failure">Failed to unwhitelist the given channel(s)…</string>
+
+	<string name="pref_languages_filter_category">Languages &amp; Regions Filters</string>
+	<string name="pref_title_preferred_regions">Preferred Region</string>
+	<string name="pref_key_preferred_region" translatable="false">pref_key_preferred_region</string>
+	<string name="pref_summary_preferred_regions">Select a preferred region. This is used to filter out videos in the \"Featured\" videos category:  %s</string>
+
+	<string name="pref_title_preferred_languages">Preferred Language(s)</string>
+	<string name="pref_key_preferred_languages" translatable="false">pref_key_preferred_languages</string>
+	<string name="pref_summary_preferred_languages">Select your preferred languages.</string>
+	<string name="no_preferred_lang_selected">No preferred language selected.  Setting ignored.</string>
+	<string name="preferred_lang_updated">Preferred language updated.  Please refresh videos.</string>
+
+	<string name="pref_title_lang_detection_video_filtering">Language Detection Video Filtering</string>
+	<string name="pref_key_lang_detection_video_filtering" translatable="false">pref_key_block_videos_lang_detection</string>
+	<string name="pref_summary_lang_detection_video_filtering">Use AI to detect the languages being used in videos and block them if their language is not equal to your preferred language(s).  Should only be enabled on high end devices.</string>
+	<string name="setting_updated">Setting updated.  Please refresh videos.</string>
+
+	<string name="pref_other_filters_category">Other Filters</string>
+	<string name="pref_title_low_views_filter">Views</string>
+	<string name="pref_key_low_views_filter" translatable="false">pref_key_low_views_filter</string>
+	<string name="pref_summary_low_views_filter">Filter out videos with low views: %s</string>
+	<string-array name="views_filtering_list">
+		<item>@string/disabled</item>
+		<item>&lt; 100 views</item>
+		<item>&lt; 500 views</item>
+		<item>&lt; 1,000 views</item>
+		<item>&lt; 5,000 views</item>
+		<item>&lt; 10,000 views</item>
+	</string-array>
+	<string name="views_filtering_disabled" translatable="false">-1</string>
+	<string-array name="views_filtering_values_list" translatable="false">
+		<item>@string/views_filtering_disabled</item>
+		<item>100</item>
+		<item>500</item>
+		<item>1000</item>
+		<item>5000</item>
+		<item>10000</item>
+	</string-array>
+
+	<string name="pref_title_dislikes_filter">Dislikes</string>
+	<string name="pref_key_dislikes_filter" translatable="false">pref_key_low_likes_filter</string>
+	<string name="pref_summary_dislikes_filter">Filter out videos with high dislikes: %s</string>
+	<string-array name="dislikes_filtering_list">
+		<item>@string/disabled</item>
+		<item>&gt; 40% dislikes</item>
+		<item>&gt; 50% dislikes</item>
+		<item>&gt; 60% dislikes</item>
+		<item>&gt; 70% dislikes</item>
+		<item>&gt; 80% dislikes</item>
+		<item>&gt; 90% dislikes</item>
+		<item>&gt; 100% dislikes</item>
+	</string-array>
+	<string name="dislikes_filtering_disabled" translatable="false">@string/views_filtering_disabled</string>
+	<string-array name="dislikes_filtering_values_list" translatable="false">
+		<item>@string/dislikes_filtering_disabled</item>
+		<item>40</item>
+		<item>50</item>
+		<item>60</item>
+		<item>70</item>
+		<item>80</item>
+		<item>90</item>
+		<item>100</item>
+	</string-array>
+
+	<string name="pref_privacy_category">Privacy</string>
 	<string name="pref_key_disable_search_history" translatable="false">pref_disable_search_history</string>
 	<string name="pref_title_disable_search_history">Disable Search History</string>
 	<string name="pref_summary_disable_search_history">If checked, Search History will be cleared and will not be used.</string>
 	<string name="pref_disable_search_history_deleted">Search History deleted.</string>
-	<string name="restart">Restart</string>
 
-	<string name="pref_key_brightness_level" translatable="false">pref_key_brightness_level</string>
+	<string name="pref_key_disable_playback_status" translatable="false">pref_disable_playback_status</string>
+	<string name="pref_title_disable_playback_status">Disable Playback Status</string>
+	<string name="pref_summary_disable_playback_status">If checked, Playback Status will be cleared and will not be used.</string>
+	<string name="pref_disable_playback_status_deleted">Playback Status deleted.</string>
 
-	<string name="pref_blocked_channel_category">Blocked Channels</string>
-	<string name="pref_key_blocked_channels_list" translatable="false">pref_blocked_channels_list_key</string>
-	<string name="pref_title_blocked_channels_list">Blocked Channels</string>
-	<string name="pref_summary_blocked_channels_list">Check the channels you want to unblock and leave the others unchecked.</string>
+	<string name="pref_key_clear_playback_status" translatable="false">pref_key_clear_playback_status</string>
+	<string name="pref_title_clear_playback_status">Clear Playback Status</string>
+	<string name="pref_summary_clear_playback_status">Clear playback status for all videos.</string>
+	<string name="pref_playback_status_cleared">Playback Status cleared.</string>
+
 </resources>
