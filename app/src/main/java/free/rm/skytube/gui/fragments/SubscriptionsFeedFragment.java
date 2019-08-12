@@ -372,6 +372,8 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 						showRefreshDialog();
 					}
 				}
+			} else {
+				refreshInProgress = false;
 			}
 		}
 
