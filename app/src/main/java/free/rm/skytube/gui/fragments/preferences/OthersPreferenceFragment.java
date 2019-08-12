@@ -54,7 +54,7 @@ public class OthersPreferenceFragment extends PreferenceFragment implements Shar
 		addPreferencesFromResource(R.xml.preference_others);
 
 		// Default tab
-		defaultTabPref = (ListPreference)findPreference(getString(R.string.pref_key_default_tab));
+		defaultTabPref = (ListPreference)findPreference(getString(R.string.pref_key_default_tab_name));
 		Set<String> hiddenFragments = SkyTubeApp.getPreferenceManager().getStringSet(getString(R.string.pref_key_hide_tabs), new HashSet<>());
 		String[] tabListValues = SkyTubeApp.getStringArray(R.array.tab_list_values);
 		if(hiddenFragments.size() == 0) {
@@ -129,7 +129,7 @@ public class OthersPreferenceFragment extends PreferenceFragment implements Shar
 	@Override
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
 		if(key != null) {
-			if (key.equals(getString(R.string.pref_key_default_tab))) {
+			if (key.equals(getString(R.string.pref_key_default_tab_name))) {
 				// If the user changed the Default Tab Preference, update the summary to show the new default tab
 				ListPreference defaultTabPref = (ListPreference) findPreference(key);
 				defaultTabPref.setSummary(String.format(getString(R.string.pref_summary_default_tab), defaultTabPref.getEntry()));

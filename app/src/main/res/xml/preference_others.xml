@@ -19,7 +19,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
 	<ListPreference
-		android:key="@string/pref_key_default_tab"
+		android:key="@string/pref_key_default_tab_name"
 		android:title="@string/pref_title_default_tab" />
 
 	<MultiSelectListPreference
