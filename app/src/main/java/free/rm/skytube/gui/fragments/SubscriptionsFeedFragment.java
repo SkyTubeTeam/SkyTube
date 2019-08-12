@@ -96,19 +96,25 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		// Only do an automatic refresh of subscriptions if it's been more than three hours since the last one was done.
-		long subscriptionsLastUpdated = SkyTubeApp.getPreferenceManager().getLong(SkyTubeApp.KEY_SUBSCRIPTIONS_LAST_UPDATED, -1);
-		long threeHoursAgo = System.currentTimeMillis() - REFRESH_TIME_IN_MS;
-		if(subscriptionsLastUpdated <= threeHoursAgo) {
-			shouldRefresh = true;
-		}
+		checkRefreshTime();
 
 		subscriptionsBackupsManager = new SubscriptionsBackupsManager(getActivity(), SubscriptionsFeedFragment.this);
 	}
 
 
+	private void checkRefreshTime() {
+	    // Only do an automatic refresh of subscriptions if it's been more than three hours since the last one was done.
+	    long subscriptionsLastUpdated = SkyTubeApp.getPreferenceManager().getLong(SkyTubeApp.KEY_SUBSCRIPTIONS_LAST_UPDATED, -1);
+	    long threeHoursAgo = System.currentTimeMillis() - REFRESH_TIME_IN_MS;
+	    if(subscriptionsLastUpdated <= threeHoursAgo) {
+	    	shouldRefresh = true;
+	    }
+	}
+
+
 	@Override
 	public void onResume() {
+	    	checkRefreshTime();
 		// setup the UI and refresh the feed (if applicable)
 		startRefreshTask(isFragmentSelected());
 
@@ -194,6 +200,7 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 
 	@Override
 	public void onRefresh() {
+		shouldRefresh = true;
 		startRefreshTask(true);
 	}
 
@@ -203,7 +210,6 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 			return;
 		}
 		refreshInProgress = true;
-		shouldRefresh = true;
 		new RefreshFeedTask(showFetchingVideosDialog).executeInParallel();
 	}
 
