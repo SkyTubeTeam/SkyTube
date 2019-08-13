@@ -171,8 +171,8 @@ public abstract class BaseActivity extends AppCompatActivity implements MainActi
 						.positiveText(R.string.ok)
 						.onPositive((dialog, which) -> {
 							SharedPreferences.Editor editor = preferences.edit();
-//							editor.putBoolean(PREF_GPS_POPUP_VIEWED, true);
-//							editor.apply();
+							editor.putBoolean(PREF_GPS_POPUP_VIEWED, true);
+							editor.apply();
 							dialog.dismiss();
 						})
 						.build();
