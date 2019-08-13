@@ -4,4 +4,6 @@
 
 	<dimen name="comments_drawer_width">380dp</dimen>
 	<dimen name="video_grid_progress_bar_top_margin">100dp</dimen>
+
+	<dimen name="tutorial_hand_gesture_image_width">120dp</dimen>
 </resources>

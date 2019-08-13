@@ -17,6 +17,7 @@
 
 package free.rm.skytube.businessobjects.db.Tasks;
 
+import android.content.Context;
 import android.widget.Toast;
 
 import free.rm.skytube.R;
@@ -25,7 +26,7 @@ import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
-import free.rm.skytube.gui.businessobjects.SubscribeButton;
+import free.rm.skytube.gui.businessobjects.views.SubscribeButton;
 import free.rm.skytube.gui.fragments.SubscriptionsFeedFragment;
 
 /**
@@ -37,9 +38,9 @@ public class SubscribeToChannelTask extends AsyncTaskParallel<Void, Void, Boolea
 	 *  unsubscribe. */
 	private boolean			subscribeToChannel;
 	private SubscribeButton subscribeButton;
+	private Context         context;
 	private YouTubeChannel	channel;
-
-	private static String TAG = SubscribeToChannelTask.class.getSimpleName();
+	private boolean         displayToastMessage = true;
 
 
 	/**
@@ -51,14 +52,32 @@ public class SubscribeToChannelTask extends AsyncTaskParallel<Void, Void, Boolea
 	public SubscribeToChannelTask(SubscribeButton subscribeButton, YouTubeChannel channel) {
 		this.subscribeToChannel = !subscribeButton.isUserSubscribed();
 		this.subscribeButton = subscribeButton;
+		this.context = subscribeButton.getContext();
 		this.channel = channel;
+	}
+
+
+	/**
+	 * Constructor.  Will unsubscribe the given channel.  No toast messages will be displayed.
+	 *
+	 * @param channel   Channel the user wants to unsubscribe.
+	 */
+	public SubscribeToChannelTask(YouTubeChannel channel) {
+		this.subscribeToChannel = false;
+		this.subscribeButton = null;
+		this.context = SkyTubeApp.getContext();
+		this.channel = channel;
+		displayToastMessage = false;
 	}
 
 
 	@Override
 	protected Boolean doInBackground(Void... params) {
 		if (subscribeToChannel) {
-			return SubscriptionsDb.getSubscriptionsDb().subscribe(channel);
+			boolean subscribed = SubscriptionsDb.getSubscriptionsDb().subscribe(channel);
+			if(subscribed)
+				SubscriptionsFeedFragment.setFlag(SubscriptionsFeedFragment.FLAG_REFRESH_FEED_FROM_CACHE);
+			return subscribed;
 		} else {
 			return SubscriptionsDb.getSubscriptionsDb().unsubscribe(channel);
 		}
@@ -68,7 +87,7 @@ public class SubscribeToChannelTask extends AsyncTaskParallel<Void, Void, Boolea
 	@Override
 	protected void onPostExecute(Boolean success) {
 		if (success) {
-			SubsAdapter adapter = SubsAdapter.get(subscribeButton.getContext());
+			SubsAdapter adapter = SubsAdapter.get(context);
 
 			// we need to refresh the Feed tab so it shows videos from the newly subscribed (or
 			// unsubscribed) channels
@@ -76,29 +95,38 @@ public class SubscribeToChannelTask extends AsyncTaskParallel<Void, Void, Boolea
 
 			if (subscribeToChannel) {
 				// change the state of the button
-				subscribeButton.setUnsubscribeState();
+				if (subscribeButton != null)
+					subscribeButton.setUnsubscribeState();
 				// Also change the subscription state of the channel
 				channel.setUserSubscribed(true);
 
 				// append the channel to the SubsAdapter (i.e. the channels subscriptions list/drawer)
 				adapter.appendChannel(channel);
 
-				Toast.makeText(subscribeButton.getContext(), R.string.subscribed, Toast.LENGTH_LONG).show();
+				if (displayToastMessage) {
+					Toast.makeText(context, R.string.subscribed, Toast.LENGTH_LONG).show();
+				}
 			} else {
 				// change the state of the button
-				subscribeButton.setSubscribeState();
+				if (subscribeButton != null)
+					subscribeButton.setSubscribeState();
 				// Also change the subscription state of the channel
 				channel.setUserSubscribed(false);
 				
 				// remove the channel from the SubsAdapter (i.e. the channels subscriptions list/drawer)
 				adapter.removeChannel(channel);
 
-				Toast.makeText(subscribeButton.getContext(), R.string.unsubscribed, Toast.LENGTH_LONG).show();
+				if (displayToastMessage) {
+					Toast.makeText(context, R.string.unsubscribed, Toast.LENGTH_LONG).show();
+				}
 			}
 		} else {
 			String err = String.format(SkyTubeApp.getStr(R.string.error_unable_to_subscribe), channel.getId());
-			Toast.makeText(subscribeButton.getContext(), err, Toast.LENGTH_LONG).show();
+			Toast.makeText(context, err, Toast.LENGTH_LONG).show();
 		}
+
+		this.subscribeButton = null;
+		this.context = null;
 	}
 
 }

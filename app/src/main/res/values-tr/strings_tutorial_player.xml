@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+	<string name="tutorial_slide_1">Yorumları görmek için sola kaydırın.</string>
+	<string name="tutorial_slide_6">Videoyu duraklatmak veya oynatmak için iki kez dokunun.</string>
+<string name="next">"Sonraki "</string>
+	<string name="done">Tamam</string>
+	<string name="skip">Atla</string>
+	<string name="page_counter">%d nin %d si</string>
+
+	<string name="tutorial_slide_2">Video açıklamasını görüntülemek için yukarı kaydırın.</string>
+	<string name="tutorial_slide_3">İleri veya geri gitmek için yatay olarak kaydırın.</string>
+	<string name="tutorial_slide_4">Sesi ayarlamak için dikey olarak kaydırın.</string>
+	<string name="tutorial_slide_5">Parlaklığı ayarlamak için dikey olarak kaydırın.</string>
+	</resources>

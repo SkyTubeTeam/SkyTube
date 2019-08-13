@@ -18,7 +18,7 @@
 package free.rm.skytube.gui.fragments;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.view.View;
 
 import butterknife.BindView;
@@ -37,10 +37,8 @@ public class BookmarksFragment extends OrderableVideosGridFragment implements Bo
 	@BindView(R.id.noBookmarkedVideosText)
 	View noBookmarkedVideosText;
 
-	@Override
-	public void onCreate(@Nullable Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		videoGridAdapter = new OrderableVideoGridAdapter(getActivity(), BookmarksDb.getBookmarksDb());
+	public BookmarksFragment() {
+		super(new OrderableVideoGridAdapter(null, BookmarksDb.getBookmarksDb()));
 	}
 
 	@Override
@@ -65,28 +63,33 @@ public class BookmarksFragment extends OrderableVideosGridFragment implements Bo
 			BookmarksDb.getBookmarksDb().setHasUpdated(false);
 		}
 	}
+	
 
 	@Override
 	public void onBookmarksDbUpdated() {
 		populateList();
 		if(videoGridAdapter != null)
-			videoGridAdapter.refresh();
+			videoGridAdapter.refresh(true);
 	}
+	
 
 	@Override
 	protected int getLayoutResource() {
 		return R.layout.fragment_bookmarks;
 	}
+	
 
 	@Override
 	protected VideoCategory getVideoCategory() {
 		return VideoCategory.BOOKMARKS_VIDEOS;
 	}
+	
 
 	@Override
 	public String getFragmentName() {
 		return SkyTubeApp.getStr(R.string.bookmarks);
 	}
+	
 
 	////////////////////////////////////////////////////////////////////////////////////////////////
 

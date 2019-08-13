@@ -20,6 +20,7 @@ package free.rm.skytube.businessobjects.YouTube.VideoStream;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
@@ -27,23 +28,23 @@ import free.rm.skytube.app.SkyTubeApp;
 /**
  * A list of {@link StreamMetaData}.
  */
-public class StreamMetaDataList extends ArrayList<StreamMetaData> {
+public class StreamMetaDataList {
 
 	private String errorMessage = null;
-
+	private List<StreamMetaData> streamMetaDatas = new ArrayList<>();
 	private static final String TAG = StreamMetaDataList.class.getSimpleName();
 
 
-	public StreamMetaDataList() {
+	StreamMetaDataList() {
 	}
 
 
-	public StreamMetaDataList(int errorMessageId) {
+	StreamMetaDataList(int errorMessageId) {
 		this.errorMessage = SkyTubeApp.getStr(errorMessageId);
 	}
 
 
-	public StreamMetaDataList(String errorMessage) {
+	StreamMetaDataList(String errorMessage) {
 		this.errorMessage = errorMessage;
 	}
 
@@ -63,7 +64,6 @@ public class StreamMetaDataList extends ArrayList<StreamMetaData> {
 	}
 
 
-
 	/**
 	 * Gets the desired stream recursively.
 	 *
@@ -74,17 +74,17 @@ public class StreamMetaDataList extends ArrayList<StreamMetaData> {
 	private StreamMetaData getDesiredStream(VideoResolution desiredVideoRes) {
 		if (desiredVideoRes == VideoResolution.RES_UNKNOWN) {
 			Log.w(TAG, "No video with the following res could be found: " + desiredVideoRes);
-			return get(0);
+			return streamMetaDatas.get(0);
 		}
 
-		for (StreamMetaData streamMetaData : this) {
-			if (streamMetaData.getResolution() == desiredVideoRes)
+		for (StreamMetaData streamMetaData : streamMetaDatas) {
+			if (streamMetaData.getResolution() == desiredVideoRes) {
 				return streamMetaData;
+			}
 		}
 
 		return getDesiredStream(desiredVideoRes.getLowerVideoResolution());
 	}
-
 
 
 	/**
@@ -97,18 +97,24 @@ public class StreamMetaDataList extends ArrayList<StreamMetaData> {
 							.getString(SkyTubeApp.getStr(R.string.pref_key_preferred_res),
 										Integer.toString(VideoResolution.DEFAULT_VIDEO_RES_ID));
 
+		// if on mobile network use the preferred resolution under mobile network if defined
+		if (SkyTubeApp.isConnectedToMobile()) {
+			resIdValue = SkyTubeApp.getPreferenceManager()
+					.getString(SkyTubeApp.getStr(R.string.pref_key_preferred_res_mobile),
+							resIdValue);    // default res for mobile network = that of wifi
+		}
+
 		return VideoResolution.videoResIdToVideoResolution(resIdValue);
 	}
-
 
 
 	@Override
 	public String toString() {
 		StringBuilder out = new StringBuilder();
 
-		for (StreamMetaData streamMetaData : this) {
+		for (StreamMetaData streamMetaData : streamMetaDatas) {
 			out.append(streamMetaData.toString());
-			out.append('\n');
+			out.append("-----------------\n");
 		}
 
 		return out.toString();
@@ -119,4 +125,11 @@ public class StreamMetaDataList extends ArrayList<StreamMetaData> {
 		return errorMessage;
 	}
 
+	public void add(StreamMetaData streamMetaData) {
+		streamMetaDatas.add(streamMetaData);
+	}
+
+	public boolean isEmpty() {
+		return streamMetaDatas.isEmpty();
+	}
 }

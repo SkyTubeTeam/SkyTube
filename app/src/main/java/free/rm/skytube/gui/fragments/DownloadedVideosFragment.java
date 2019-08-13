@@ -1,7 +1,7 @@
 package free.rm.skytube.gui.fragments;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.view.View;
 
 import butterknife.BindView;
@@ -19,49 +19,18 @@ import free.rm.skytube.gui.businessobjects.fragments.OrderableVideosGridFragment
 public class DownloadedVideosFragment extends OrderableVideosGridFragment implements DownloadedVideosDb.DownloadedVideosListener {
 	@BindView(R.id.noDownloadedVideosText)
 	View noDownloadedVideosText;
-	@BindView(R.id.downloadsDisabledWarning)
-	View downloadsDisabledWarning;
 
-	@Override
-	public void onCreate(@Nullable Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		videoGridAdapter = new OrderableVideoGridAdapter(getActivity(), DownloadedVideosDb.getVideoDownloadsDb());
+	public DownloadedVideosFragment() {
+		super(new OrderableVideoGridAdapter(null, DownloadedVideosDb.getVideoDownloadsDb()));
 	}
-
 
 	@Override
 	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 		swipeRefreshLayout.setEnabled(false);
 		populateList();
-		displayDownloadsDisabledWarning();
 	}
 
-
-	@Override
-	public void onFragmentSelected() {
-		super.onFragmentSelected();
-
-		if (DownloadedVideosDb.getVideoDownloadsDb().isHasUpdated()) {
-			populateList();
-			DownloadedVideosDb.getVideoDownloadsDb().setHasUpdated(false);
-		}
-
-		displayDownloadsDisabledWarning();
-	}
-
-
-	/**
-	 * If the user is using mobile network (e.g. 4G) and the preferences setting was not ticked to
-	 * allow downloading functionality over the mobile data, then inform the user by displaying the
-	 * warning;  else hide such warning.
-	 */
-	private void displayDownloadsDisabledWarning() {
-		if (downloadsDisabledWarning != null) {
-			boolean allowDownloadsOnMobile = SkyTubeApp.getPreferenceManager().getBoolean(SkyTubeApp.getStr(R.string.pref_key_allow_mobile_downloads), false);
-			downloadsDisabledWarning.setVisibility(SkyTubeApp.isConnectedToMobile() && !allowDownloadsOnMobile ? View.VISIBLE : View.GONE);
-		}
-	}
 
 	@Override
 	protected int getLayoutResource() {
@@ -84,34 +53,34 @@ public class DownloadedVideosFragment extends OrderableVideosGridFragment implem
 	@Override
 	public void onDownloadedVideosUpdated() {
 		populateList();
-		videoGridAdapter.refresh();
+		videoGridAdapter.refresh(true);
 	}
 
 
 	private void populateList() {
-		new PopulateBookmarksTask().executeInParallel();
+		new PopulateDownloadsTask().executeInParallel();
 	}
 
 
 	/**
 	 * A task that:
-	 *   1. gets the current total number of bookmarks
+	 *   1. gets the current total number of downloads
 	 *   2. updated the UI accordingly (wrt step 1)
-	 *   3. get the bookmarked videos asynchronously.
+	 *   3. get the downloaded videos asynchronously.
 	 */
-	private class PopulateBookmarksTask extends AsyncTaskParallel<Void, Void, Integer> {
+	private class PopulateDownloadsTask extends AsyncTaskParallel<Void, Void, Integer> {
 
 		@Override
 		protected Integer doInBackground(Void... params) {
-			return DownloadedVideosDb.getVideoDownloadsDb().getNumDownloads();
+			return DownloadedVideosDb.getVideoDownloadsDb().getMaximumOrderNumber();
 		}
 
 
 		@Override
-		protected void onPostExecute(Integer numVideosBookmarked) {
-			// If no videos have been bookmarked, show the text notifying the user, otherwise
+		protected void onPostExecute(Integer maximumOrderNumber) {
+			// If no videos have been downloaded, show the text notifying the user, otherwise
 			// show the swipe refresh layout that contains the actual video grid.
-			if (numVideosBookmarked <= 0) {
+			if (maximumOrderNumber <= 0) {
 				swipeRefreshLayout.setVisibility(View.GONE);
 				noDownloadedVideosText.setVisibility(View.VISIBLE);
 			} else {

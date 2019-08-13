@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+	<string name="tutorial_slide_1">向左滑動即可檢視評論。</string>
+	<string name="tutorial_slide_6">輕點兩下可暫停或播放影片。</string>
+<string name="next">下一個</string>
+	<string name="done">完成</string>
+	<string name="skip">略過</string>
+	<string name="page_counter">%d 之 %d</string>
+
+	<string name="tutorial_slide_2">往上滑以檢視影片描述。</string>
+	<string name="tutorial_slide_3">水平滑動以向前或向後快轉。</string>
+	<string name="tutorial_slide_4">垂直滑動以調整音量。</string>
+	<string name="tutorial_slide_5">垂直滑動以調整亮度。</string>
+	</resources>

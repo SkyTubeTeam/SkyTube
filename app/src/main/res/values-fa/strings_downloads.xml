@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="download">بارگیری</string>
+	<string name="downloads">بارگیری‌ها</string>
+	<string name="warning_mobile_network_download">دستگاه شما به شبکه وای‌فای متصل نیست. برای اجتناب از هزینه‌های اضافی احتمالی مصرف داده، پیشنهاد می‌شود به شبکه وای‌فای وصل شوید. همچنان می‌خواهید ویدئو بارگیری شود؟</string>
+	<string name="download_video">بارگیری ویدئو</string>
+	<string name="starting_video_download">بارگیری ‹%s›…</string>
+	<string name="video_download_stream_error">ناتوانی در بارگیری ‹%s›.</string>
+	<string name="delete_download">حذف بارگیری</string>
+	<string name="video_downloaded">‹%s› بارگیری شد.</string>
+	<string name="no_downloaded_videos_text">هنوز هیچ ویدئویی را بارگیری نکرده‌اید.
+\n
+\nویدئوهای بارگیری شده اینجا نمایش داده می‌شوند.</string>
+	<string name="playing_video_file_missing">نسخه بارگیری‌شده این ویدئو پیدا نشد. بخش راه‌دور انجام می‌شود.</string>
+	<string name="external_storage_not_available">ناتوانی در بارگیری پرونده به دلیل عدم درسترسی به حافظه خارجی.</string>
+</resources>

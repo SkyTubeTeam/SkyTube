@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+	<string name="tutorial_slide_1">Dra til venstre for å vise kommentarer.</string>
+	<string name="tutorial_slide_6">"Dobbeltklikk for å pause eller spille av  en video."</string>
+<string name="next">"Neste "</string>
+	<string name="done">Ferdig</string>
+	<string name="skip">Hopp over</string>
+	<string name="page_counter">%d av %d</string>
+
+	<string name="tutorial_slide_2">Dra oppover for å vise beskrivelse av videoen.</string>
+	<string name="tutorial_slide_3">Dra vannrett for å sanntidsspole framover eller tilbake.</string>
+	<string name="tutorial_slide_4">Sveip loddrett for å justere lydstyrke.</string>
+	<string name="tutorial_slide_5">Sveip vannrett for å justere lysstyrke.</string>
+	</resources>

@@ -27,11 +27,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import free.rm.skytube.businessobjects.YouTube.Tasks.GetChannelPlaylistsTask;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPI;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPIKey;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubePlaylist;
+import free.rm.skytube.businessobjects.YouTube.Tasks.GetChannelPlaylistsTask;
 
 
 /**

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ SkyTube
+  ~ Copyright (C) 2017-2018  Ramon Mifsud
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation (version 3 of the License).
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+	<CheckBoxPreference
+		android:key="@string/pref_key_enable_video_blocker"
+		android:title="@string/pref_title_enable_video_blocker"
+		android:summary="@string/pref_summary_enable_video_blocker"
+		android:defaultValue="true"/>
+
+	<PreferenceCategory
+		android:title="@string/pref_channels_filter_category">
+
+		<ListPreference
+			android:key="@string/pref_key_channel_filter_method"
+			android:title="@string/pref_title_channel_filter_method"
+			android:summary="@string/pref_summary_channel_filter_method"
+			android:entries="@array/channel_filtering_list"
+			android:entryValues="@array/channel_filtering_values_list"
+			android:defaultValue="@string/channel_blacklisting_filtering"/>
+
+	    <Preference
+	        android:key="@string/pref_key_channel_blacklist"
+	        android:title="@string/pref_title_channel_blacklist"
+	        android:summary="@string/pref_summary_channel_blacklist" />
+
+		<Preference
+			android:key="@string/pref_key_channel_whitelist"
+			android:title="@string/pref_title_channel_whitelist"
+			android:summary="@string/pref_summary_channel_whitelist" />
+
+	</PreferenceCategory>
+
+    <PreferenceCategory
+	    android:title="@string/pref_languages_filter_category">
+
+        <ListPreference
+            android:key="@string/pref_key_preferred_region"
+            android:title="@string/pref_title_preferred_regions"
+            android:summary="@string/pref_summary_preferred_regions"
+            android:entries="@array/country_names"
+            android:entryValues="@array/country_codes"
+            android:defaultValue=""/>
+
+        <Preference
+            android:key="@string/pref_key_preferred_languages"
+            android:title="@string/pref_title_preferred_languages"
+            android:summary="@string/pref_summary_preferred_languages"/>
+
+        <CheckBoxPreference
+	        android:key="@string/pref_key_lang_detection_video_filtering"
+	        android:title="@string/pref_title_lang_detection_video_filtering"
+	        android:summary="@string/pref_summary_lang_detection_video_filtering"
+	        android:defaultValue="false"/>
+
+    </PreferenceCategory>
+
+	<PreferenceCategory
+		android:title="@string/pref_other_filters_category">
+
+		<ListPreference
+			android:key="@string/pref_key_low_views_filter"
+			android:title="@string/pref_title_low_views_filter"
+			android:summary="@string/pref_summary_low_views_filter"
+			android:entries="@array/views_filtering_list"
+			android:entryValues="@array/views_filtering_values_list"
+			android:defaultValue="@string/views_filtering_disabled"/>
+
+		<ListPreference
+			android:key="@string/pref_key_dislikes_filter"
+			android:title="@string/pref_title_dislikes_filter"
+			android:summary="@string/pref_summary_dislikes_filter"
+			android:entries="@array/dislikes_filtering_list"
+			android:entryValues="@array/dislikes_filtering_values_list"
+			android:defaultValue="@string/dislikes_filtering_disabled"/>
+
+	</PreferenceCategory>
+
+</PreferenceScreen>

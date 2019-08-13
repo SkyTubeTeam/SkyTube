@@ -1,18 +1,17 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources><string name="preferences">Настройки</string>
 
-	<string name="pref_languages_category">Язык и страна</string>
+	<string name="pref_languages_filter_category">Фильтры для языков и регионов</string>
 	<string name="pref_title_preferred_regions">Страна</string>
-	<string name="pref_summary_preferred_regions">Выберите страну. Это нужно, чтобы правильно отбирать ролики в категорию \"Избранное\" (они различаются для разных стран).</string>
+	<string name="pref_summary_preferred_regions">Выберите страну. Это нужно, чтобы правильно отбирать ролики в категорию \"Избранное\" (они различаются для разных стран):  %s</string>
 
 	<string name="pref_title_preferred_languages">Язык</string>
-	<string name="pref_summary_preferred_languages">Пробная опция: выберите один или несколько языков. Это нужно, чтобы правильно отбирать видео в категорию \"Популярные\" и для поиска роликов.</string>
+	<string name="pref_summary_preferred_languages">Выберите предпочитаемые языки.</string>
 
 	<string name="pref_video_player_category">Проигрывание видео</string>
 	<string name="pref_title_preferred_res">Разрешение экрана</string>
-	<string name="pref_summary_preferred_res">Выберите разрешение экрана</string>
+	<string name="pref_summary_preferred_res">Выберите разрешение экрана:  %s</string>
 
-	<string name="pref_backup_category">Резервные копии</string>
 	<string name="pref_title_backup_dbs">Сделать резервную копию базы данных</string>
 	<string name="pref_summary_backup_dbs">Сделать резервную копию базы данных подписок и закладок.</string>
 	<string name="pref_title_import_dbs">Импортировать резервную копию базы данных</string>
@@ -22,9 +21,9 @@
 	<string name="databases_backup_fail">Сделать резервную копию базы данных не получается.</string>
 	<string name="databases_import_select_backup">Выберите резервную копию для импорта</string>
 	<string name="databases_import_nothing_selected">Вы ничего не выбрали…</string>
-	<string name="databases_import_warning_message">Все закладки и подписки будут переписаны данными резервной копии.
-\n
-\nПродолжать?</string>
+	<string name="databases_import_warning_message">Все закладки и подписки будут переписаны данными резервной копии. 
+\n 
+\nПродолжить?</string>
 	<string name="continue_">Продолжить</string>
 	<string name="databases_importing">Импортируется…</string>
 	<string name="databases_import_fail">Импортировать базу данных не получается.</string>
@@ -57,7 +56,7 @@
 	<string name="pref_summary_default_tab">Вкладка, которая открыта во время запуска SkyTube: %s</string>
 
 	<string name="pref_title_screen_orientation">Ориентация экрана</string>
-	<string name="pref_summary_screen_orientation">Video player\'s orientation:  %s</string>
+	<string name="pref_summary_screen_orientation">Ориентация видеопроигрывателя: %s</string>
 	<string-array name="screen_orientations">
 		<item>Определять автоматически</item>
 		<item>Пейзаж</item>
@@ -72,11 +71,9 @@
 	<string name="pref_youtube_api_key_default">Перезапустите приложение, чтобы переключиться на API ключ по умолчанию.</string>
 	<string name="restart">Перезапустить</string>
 
-	<string name="pref_title_disable_immersive_mode">Disable Immersive Mode</string>
-	<string name="pref_summary_disable_immersive_mode">Comments and video description icons and the navigation bar shall always be displayed</string>
 
-	<string name="pref_title_feed_notification">Feed Auto Notification</string>
-	<string name="pref_summary_feed_notification">How often to check for new videos from subscribed channels: %s</string>
+	<string name="pref_title_feed_notification">Автоматическое уведомление ленты</string>
+	<string name="pref_summary_feed_notification">Как часто проверять наличие новых видео в подписанных каналах: %s</string>
 	<string-array name="feed_notification">
 		<item>Off</item>
 		<item>6 Hours</item>
@@ -84,6 +81,71 @@
 		<item>24 Hours</item>
 	</string-array>
 
-	<string name="pref_title_allow_mobile_downloads">Allow downloads on mobile networks</string>
-	<string name="pref_summary_allow_mobile_downloads">Select this to enable downloading videos on mobile networks. Otherwise, videos can only be downloaded on Wi-Fi.</string>
-</resources>
+<string name="pref_title_choose_player">Видео плеер</string>
+	<string name="pref_summary_choose_player">Будет использоваться этот видео плеер: %s</string>
+	<string name="pref_title_disable_search_history">Отключить историю поиска</string>
+	<string name="pref_summary_disable_search_history">Если включено, история поиска будет очищена и не будет использоваться.</string>
+	<string name="pref_disable_search_history_deleted">История поиска удалена.</string>
+	<string name="pref_video_blocker_category">Заблокированные каналы</string>
+	<string name="pref_title_channel_blacklist">Заблокированные каналы</string>
+	<string name="pref_summary_channel_blacklist">Список заблокированных каналов.</string>
+<string name="pref_title_subscriptions_alphabetical_order">Сортировка каналов по алфавиту</string>
+	<string name="pref_summary_subscriptions_alphabetical_order">Если отмечено, подписанные каналы будут отсортированы по алфавиту.</string>
+	<string name="pref_channels_filter_category">Фильтры каналов</string>
+
+	<string name="pref_title_channel_filter_method">Метод фильтра каналов</string>
+	<string name="pref_summary_channel_filter_method">Выберите метод фильтрации каналов: %s</string>
+	<string name="disabled">Отключен</string>
+	<string name="unblock">Разблокировать</string>
+	<string name="channel_blacklist_updated">"Обновлен черный список каналов.  Обновите видео."</string>
+	<string name="channel_blacklist_update_failure">Не удалось удалить указанный канал(ы) из черного списка…</string>
+	<string name="channel_blacklist_empty">Черный список каналов пуст.</string>
+
+	<string name="pref_title_channel_whitelist">Белый список каналов</string>
+	<string name="pref_summary_channel_whitelist">Список белых каналов.</string>
+	<string name="input_channel_url">URL канала, который должен быть включен в белый список:</string>
+	<string name="add">Добавить</string>
+	<string name="block">Заблокировать</string>
+	<string name="please_wait">Пожалуйста, подождите…</string>
+	<string name="channel_already_whitelisted">Канал уже в белом списке.</string>
+	<string name="channel_whitelist_updated">Канал включен в белый список. Пожалуйста, обновите видео.</string>
+	<string name="channel_whitelist_update_failure">Не удалось добавить данный канал в белый список…</string>
+	<string name="channel_unwhitelist_success">Белый список каналов обновлен. Пожалуйста, обновите видео.</string>
+	<string name="channel_unwhitelist_failure">Не удалось убрать выбранный(е) канал(ы) из белого списка…</string>
+
+	<string name="no_preferred_lang_selected">Предпочтительный язык не выбран. Параметр игнорируется.</string>
+	<string name="preferred_lang_updated">Обновлен предпочтительный язык. Пожалуйста, обновите видео.</string>
+
+	<string name="pref_title_lang_detection_video_filtering">Автоматическая фильтрация</string>
+	<string name="pref_summary_lang_detection_video_filtering">"Используйте AI для определения языков, используемых в видео, и блокируйте их, если их язык не соответствует выбранным вами языкам.  Должна быть включена только на устройствах высокого уровня."</string>
+	<string name="setting_updated">Настройка обновлена. Пожалуйста, обновите видео.</string>
+
+	<string name="pref_other_filters_category">Остальные фильтры</string>
+	<string name="pref_title_low_views_filter">Просмотры</string>
+	<string name="pref_summary_low_views_filter">Отфильтровать видео с низкими просмотрами: %s</string>
+	<string name="pref_title_dislikes_filter">Дизлайки</string>
+	<string name="pref_summary_dislikes_filter">Отфильтровать видео с высоким числом дизлайков: %s</string>
+	<string name="pref_privacy_category">Конфиденциальность</string>
+	<string name="pref_title_disable_playback_status">Отключить состояние воспроизведения</string>
+	<string name="pref_summary_disable_playback_status">Если включено, то статус воспроизведения будет очищен и не будет использоваться.</string>
+	<string name="pref_disable_playback_status_deleted">Состояние воспроизведения удалено.</string>
+
+	<string name="pref_title_clear_playback_status">Очистить статус воспроизведения</string>
+	<string name="pref_summary_clear_playback_status">Очистить статус воспроизведения для всех видео.</string>
+	<string name="pref_playback_status_cleared">Состояние воспроизведения очищено.</string>
+
+<string name="pref_import_export_category">Импорт/Экспорт файлов</string>
+
+	<string name="pref_category_downloads">Загрузки</string>
+	<string name="pref_title_download_to_separate_directories">Загружать видеоролики в отдельные директории</string>
+	<string name="pref_summary_download_to_separate_directories">Видеоролики загружаются в отдельные папки с названием канала.</string>
+
+	<string name="pref_title_disable_screen_gestures">Отключить жесты при управлении видео</string>
+	<string name="pref_summary_disable_screen_gestures">Отключить жесты для управления громкостью, яркостью и перемоткой видеоролика.</string>
+
+	<string name="pref_title_warn_mobile_downloads">Отключить предупреждения мобильной сети</string>
+	<string name="pref_summary_warn_mobile_downloads">Предупреждать, что используется мобильная сеть (4G), перед тем, как скачать или воспроизвести видео.</string>
+
+	<string name="pref_summary_enable_video_blocker">Включить блокировку видео.</string>
+
+	</resources>

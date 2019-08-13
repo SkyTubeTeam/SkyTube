@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+	<string name="tutorial_slide_1">Veeg naar links om reacties te tonen.</string>
+	<string name="tutorial_slide_6">Dubbeltik om een video te pauzeren of af te spelen.</string>
+<string name="next">"Volgende: "</string>
+	<string name="done">Klaar</string>
+	<string name="skip">Overslaan</string>
+	<string name="page_counter">%d van %d</string>
+
+	<string name="tutorial_slide_2">Veeg omhoog om de video-omschrijving te tonen.</string>
+	<string name="tutorial_slide_3">Veeg horizontaal om vooruit of terug te spoelen.</string>
+	<string name="tutorial_slide_4">Veeg verticaal om het volumeniveau te wijzigen.</string>
+	<string name="tutorial_slide_5">Veeg verticaal om de helderheid aan te passen.</string>
+	</resources>

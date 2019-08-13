@@ -1,20 +1,19 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="preferences">Preferências</string>
 
-	<string name="pref_languages_category">Línguas e regiões</string>
+	<string name="pref_languages_filter_category">Filtros para línguas e regiões</string>
 	<string name="pref_title_preferred_regions">Região preferida</string>
-	<string name="pref_summary_preferred_regions">Selecione a região preferida. Será usada para filtrar vídeos na categoria de vídeos \"Destaque\".</string>
+	<string name="pref_summary_preferred_regions">Selecione a região preferida. Será usada para filtrar vídeos na categoria de vídeos \"Destaque\":  %s</string>
 
-	<string name="pref_title_preferred_languages">Língua(s) preferida(s)</string>
-	<string name="pref_summary_preferred_languages">Experimental: Selecione uma ou mais línguas preferidas. Será usada para filtrar vídeos na categoria de vídeo \"Mais popular\" e para pesquisas de vídeo.</string>
+	<string name="pref_title_preferred_languages">Idioma(s) preferido(s)</string>
+	<string name="pref_summary_preferred_languages">Selecione os idiomas preferenciais.</string>
 
 	<string name="pref_video_player_category">Reprodutor de vídeo</string>
 	<string name="pref_title_preferred_res">Resolução preferida</string>
-	<string name="pref_summary_preferred_res">Selecione a resolução preferida</string>
+	<string name="pref_summary_preferred_res">Selecione a resolução preferida:  %s</string>
 
-	<string name="pref_backup_category">Backups</string>
-	<string name="pref_title_backup_dbs">Backup de bases de dados</string>
+	<string name="pref_title_backup_dbs">Backup das bases de dados</string>
 	<string name="pref_summary_backup_dbs">Criar backup das subscrições e dos marcadores.</string>
 	<string name="pref_title_import_dbs">Importar backup</string>
 	<string name="pref_summary_import_dbs">Importar backup das subscrições e dos marcadores.</string>
@@ -66,7 +65,7 @@
 	<string name="pref_summary_default_tab">Separador usado ao iniciar o SkyTube: %s</string>
 
 	<string name="pref_title_screen_orientation">Orientação do ecrã</string>
-	<string name="pref_summary_screen_orientation">Video player\'s orientation:  %s</string>
+	<string name="pref_summary_screen_orientation">Orientação de reprodutor: %s</string>
 	<string-array name="screen_orientations">
 		<item>Automática</item>
 		<item>Horizontal</item>
@@ -80,8 +79,6 @@
 	<string name="pref_youtube_api_key_custom">A chave é válida. Reinicie a aplicação para usar a nova chave API do YouTube.</string>
 	<string name="pref_youtube_api_key_default">Reinicie a aplicação para retornar à chave padrão da API do YouTube.</string>
 	<string name="restart">Reiniciar</string>
-	<string name="pref_title_disable_immersive_mode">Desativar modo imersivo</string>
-	<string name="pref_summary_disable_immersive_mode">Os comentários, a descrição do vídeo e a barra de navegação serão sempre mostrados</string>
 
 	<string name="pref_title_feed_notification">Notificação automática de fontes</string>
 	<string name="pref_summary_feed_notification">Periodicidade para procurar novos vídeos nos canais subscritos: %s</string>
@@ -92,10 +89,76 @@
 		<item>24 Hours</item>
 	</string-array>
 
-	<string name="pref_title_allow_mobile_downloads">Permitir descargas em redes móveis</string>
-	<string name="pref_summary_allow_mobile_downloads">Ative esta opção para descarregar vídeos via redes móveis. Caso contrário, apenas poderá descarregar vídeos através de Wi-Fi.</string>
 
 	<string name="pref_title_disable_search_history">Desativar histórico de pesquisas</string>
 	<string name="pref_summary_disable_search_history">Se ativa, o histórico de pesquisas não será utilizado.</string>
 	<string name="pref_disable_search_history_deleted">Histórico removido.</string>
-</resources>
+<string name="pref_title_choose_player">Reprodutor de vídeo</string>
+	<string name="pref_summary_choose_player">Reprodutor de vídeo a usar: %s</string>
+	<string name="pref_video_blocker_category">Canais bloqueados</string>
+	<string name="pref_title_channel_blacklist">Canais bloqueados</string>
+	<string name="pref_summary_channel_blacklist">A lista de canais bloqueados.</string>
+<string name="pref_title_subscriptions_alphabetical_order">Ordenar canais alfabeticamente</string>
+	<string name="pref_summary_subscriptions_alphabetical_order">Se ativa, os canis subscritos serão mostrados por ordem alfabética.</string>
+	<string name="pref_import_export_category">Importar/Exportar</string>
+	<string name="pref_channels_filter_category">Filtros de canais</string>
+
+	<string name="pref_title_channel_filter_method">Método de filtragem</string>
+	<string name="pref_summary_channel_filter_method">Selecione o método de filtragem de canais: %s</string>
+	<string name="disabled">Desativado</string>
+	<string name="unblock">Desbloquear</string>
+	<string name="channel_blacklist_updated">Lista atualizada. Recarregue os vídeos.</string>
+	<string name="channel_blacklist_update_failure">Falha ao remover alguns canais da lista negra…</string>
+	<string name="channel_blacklist_empty">Lista negra está vazia.</string>
+
+	<string name="pref_title_channel_whitelist">Lista branca de canais</string>
+	<string name="pref_summary_channel_whitelist">A lista de canais permitidos.</string>
+	<string name="input_channel_url">URL do canal a permitir:</string>
+	<string name="add">Adicionar</string>
+	<string name="block">Bloquear</string>
+	<string name="please_wait">Aguarde…</string>
+	<string name="channel_whitelist_updated">Lista atualizada. Recarregue os vídeos.</string>
+
+	<string name="pref_other_filters_category">Outros filtros</string>
+	<string name="pref_title_low_views_filter">Visualizações</string>
+	<string name="pref_summary_low_views_filter">Não mostrar vídeos com poucas visualizações: %s</string>
+	<string name="pref_title_dislikes_filter">Não gosto</string>
+	<string name="pref_summary_dislikes_filter">Filtrar vídeos com muitos \"Não gosto\": %s</string>
+	<string name="pref_privacy_category">Privacidade</string>
+	<string name="pref_title_disable_playback_status">Desativar estado de reprodução</string>
+	<string name="pref_summary_disable_playback_status">Se ativa, o estado da reprodução será removido e não será mais utilizado.</string>
+	<string name="pref_disable_playback_status_deleted">Estado de reprodução removido.</string>
+
+	<string name="pref_title_clear_playback_status">Limpar estado de reprodução</string>
+	<string name="pref_summary_clear_playback_status">Limpar estado de reprodução para todos os vídeos.</string>
+	<string name="pref_playback_status_cleared">Estado de reprodução removido.</string>
+
+<string name="pref_category_downloads">Descargas</string>
+	<string name="pref_title_download_to_separate_directories">Descarregar vídeos para diretórios</string>
+	<string name="pref_summary_download_to_separate_directories">Os vídeos serão descarregados em diretórios tendo por base o nome do canal.</string>
+
+	<string name="channel_already_whitelisted">O canal já está na lista de canais permitidos.</string>
+	<string name="channel_whitelist_update_failure">Falha ao colocar o canal da lista de permitidos.</string>
+	<string name="channel_unwhitelist_success">Lista de canais atualizada. Por favor recarregue os vídeos.</string>
+	<string name="channel_unwhitelist_failure">Falha ao retirar os canais da lista de permitidos.</string>
+
+	<string name="no_preferred_lang_selected">Não escolheu o idioma preferencial. Definição ignorada.</string>
+	<string name="preferred_lang_updated">Idioma preferencial atualizado. Por favor recarregue os vídeos.</string>
+
+	<string name="pref_title_lang_detection_video_filtering">Filtrar vídeos tendo por base o idioma</string>
+	<string name="pref_summary_lang_detection_video_filtering">Utilizar inteligência artificial para detetar os idiomas dos vídeos e para os bloquear se o idioma não for igual aos que escolheu como preferencial. Apenas deve ativar esta opção em dispositivos de gama alta.</string>
+	<string name="setting_updated">Definição atualizada. Por favor recarregue os vídeos.</string>
+
+	<string name="pref_title_disable_screen_gestures">Desativar gestos de vídeo</string>
+	<string name="pref_summary_disable_screen_gestures">Desligar gestos para controlar o volume, o brilho e a pesquisa por avanço/recuo nos vídeos.</string>
+
+	<string name="pref_title_warn_mobile_downloads">Mostrar aviso de rede móvel</string>
+	<string name="pref_summary_warn_mobile_downloads">Mostrar um aviso se estiver a ser usada uma rede móvel (como 4G) antes de descarregar ou reproduzir vídeos.</string>
+
+	<string name="pref_summary_enable_video_blocker">Ativar bloqueador de vídeo.</string>
+
+	<string name="pref_category_mobile_network">Rede móvel</string>
+	<string name="pref_title_preferred_res_mobile">Resolução preferencial para redes móveis</string>
+	<string name="pref_summary_preferred_res_mobile">Selecione a resolução preferida ao fazer streaming através de uma rede móvel (como 4G): %s</string>
+
+	</resources>

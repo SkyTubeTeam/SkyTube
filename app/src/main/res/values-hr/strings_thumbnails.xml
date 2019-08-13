@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="thumbnail">Slika</string>
+	<string name="view_thumbnail">Pogledaj sliku</string>
+	<string name="thumbnail_downloaded">Slika preuzeta.</string>
+	<string name="thumbnail_download_error">Sliku nije moguće preuzeti.</string>
+</resources>

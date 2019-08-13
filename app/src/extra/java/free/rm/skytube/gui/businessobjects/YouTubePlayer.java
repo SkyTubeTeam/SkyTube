@@ -20,18 +20,25 @@ package free.rm.skytube.gui.businessobjects;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
+import free.rm.skytube.businessobjects.ChromecastListener;
+import free.rm.skytube.businessobjects.GetVideoDetailsTask;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPIKey;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
+import free.rm.skytube.businessobjects.db.PlaybackStatusDb;
+import free.rm.skytube.gui.activities.BaseActivity;
 import free.rm.skytube.gui.activities.YouTubePlayerActivity;
-import free.rm.skytube.gui.fragments.YouTubePlayerFragment;
+
+import static free.rm.skytube.gui.activities.YouTubePlayerActivity.YOUTUBE_VIDEO_OBJ;
 
 /**
  * Launches YouTube player.
@@ -39,6 +46,20 @@ import free.rm.skytube.gui.fragments.YouTubePlayerFragment;
 public class YouTubePlayer {
 
 	private static final String TAG = YouTubePlayer.class.getSimpleName();
+	private static boolean connectedToChromecast = false;
+	private static boolean connectingToChromecast = false;
+
+	public static void setConnectedToChromecast(boolean flag) {
+		connectedToChromecast = flag;
+	}
+
+	public static boolean isConnectedToChromecast() {
+		return connectedToChromecast;
+	}
+
+	public static void setConnectingToChromecast(boolean flag) {
+		connectingToChromecast = flag;
+	}
 
 	/**
 	 * Launches the YouTube player so that the user can view the selected video.
@@ -46,12 +67,16 @@ public class YouTubePlayer {
 	 * @param youTubeVideo Video to be viewed.
 	 */
 	public static void launch(YouTubeVideo youTubeVideo, Context context) {
-		// if the user has selected to play the videos using the official YouTube player
-		// (in the preferences/settings) ...
-		if (useOfficialYouTubePlayer(context)) {
-			launchOfficialYouTubePlayer(youTubeVideo.getId(), context);
+		if(connectingToChromecast || connectedToChromecast) {
+			launchOnChromecast(youTubeVideo, context);
 		} else {
-			launchCustomYouTubePlayer(youTubeVideo, context);
+			// if the user has selected to play the videos using the official YouTube player
+			// (in the preferences/settings) ...
+			if (useOfficialYouTubePlayer(context)) {
+				launchOfficialYouTubePlayer(youTubeVideo.getId(), context);
+			} else {
+				launchCustomYouTubePlayer(youTubeVideo, context);
+			}
 		}
 	}
 
@@ -61,16 +86,44 @@ public class YouTubePlayer {
 	 *
 	 * @param videoUrl URL of the video to be watched.
 	 */
-	public static void launch(String videoUrl, Context context) {
-		// if the user has selected to play the videos using the official YouTube player
-		// (in the preferences/settings) ...
-		if (useOfficialYouTubePlayer(context)) {
-			launchOfficialYouTubePlayer(YouTubeVideo.getYouTubeIdFromUrl(videoUrl), context);
+	public static void launch(String videoUrl, final Context context) {
+		if(connectingToChromecast || connectedToChromecast) {
+			new GetVideoDetailsTask(videoUrl, (videoUrl1, video) -> launchOnChromecast(video, context)).executeInParallel();
 		} else {
-			launchCustomYouTubePlayer(videoUrl, context);
+			// if the user has selected to play the videos using the official YouTube player
+			// (in the preferences/settings) ...
+			if (useOfficialYouTubePlayer(context)) {
+				launchOfficialYouTubePlayer(YouTubeVideo.getYouTubeIdFromUrl(videoUrl), context);
+			} else {
+				launchCustomYouTubePlayer(videoUrl, context);
+			}
 		}
 	}
 
+	private static void launchOnChromecast(final YouTubeVideo youTubeVideo, final Context context) {
+		if(connectingToChromecast) {
+			((ChromecastListener)context).showLoadingSpinner();
+			// In the process of connecting to a chromecast. Wait 500ms and try again
+			new Handler().postDelayed(() -> launchOnChromecast(youTubeVideo, context), 500);
+		} else {
+			if (context instanceof ChromecastListener) {
+				final PlaybackStatusDb.VideoWatchedStatus status = PlaybackStatusDb.getPlaybackStatusDb().getVideoWatchedStatus(youTubeVideo);
+				if(!SkyTubeApp.getPreferenceManager().getBoolean(context.getString(R.string.pref_key_disable_playback_status), false) && status.getPosition() > 0) {
+					new AlertDialog.Builder(context)
+									.setTitle(R.string.should_resume)
+									.setPositiveButton(R.string.yes, (dialog, which) -> {
+
+										int position = (int) status.getPosition();
+										((ChromecastListener) context).playVideoOnChromecast(youTubeVideo, position);
+									})
+									.setNegativeButton(R.string.no, (dialogInterface, i) -> ((ChromecastListener) context).playVideoOnChromecast(youTubeVideo, 0))
+									.show();
+				} else {
+					((ChromecastListener) context).playVideoOnChromecast(youTubeVideo, 0);
+				}
+			}
+		}
+	}
 
 	/**
 	 * Read the user's preferences and determine if the user wants to use the official YouTube video
@@ -118,8 +171,8 @@ public class YouTubePlayer {
 	 */
 	public static void launchCustomYouTubePlayer(YouTubeVideo youTubeVideo, Context context) {
 		Intent i = new Intent(context, YouTubePlayerActivity.class);
-		i.putExtra(YouTubePlayerFragment.YOUTUBE_VIDEO_OBJ, youTubeVideo);
-		context.startActivity(i);
+		i.putExtra(YOUTUBE_VIDEO_OBJ, youTubeVideo);
+		((BaseActivity)context).startActivityForResult(i, YouTubePlayerActivity.YOUTUBE_PLAYER_RESUME_RESULT);
 	}
 
 

@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="blocked_videos">ویدئوهای مسدودشده</string>
+	<string name="no_videos_blocked">هیچ ویدئویی مسدود یا فیلتر نشده است. مایل به تنظیم مسدودساز ویدئو هستید؟</string>
+	<string name="configure">تنظیم</string>
+	<string name="block_channel">مسدودسازی کانال</string>
+	<string name="channel_blacklisted">کانال در فهرست سیاه قرار گرفت. لطفا تازه‌سازی کنید.</string>
+	<string name="channel_blacklist_error">ناتوانی در قرار دادن کانال در فهرست سیاه.</string>
+	<string name="channel_unwhitelist_error">ناتوانی در حذف کانال از فهرست سفید.</string>
+	<string name="dislikes">%d%% نپسندیدن</string>
+</resources>

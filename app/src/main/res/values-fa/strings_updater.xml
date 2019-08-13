@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="update_available">نسخه جدید وجود دارد</string>
+	<string name="update_dialog_msg">نسخه جدیدی از SkyTube وجود دارد. نسخه %s نصب خواهد شد.</string>
+	<string name="up_to_date">به‌روز</string>
+	<string name="up_to_date_msg">در حال استفاده از آخرین نسخه SkyTube هستید.</string>
+	<string name="update">به‌روزرسانی</string>
+	<string name="later">بعدا</string>
+	<string name="update_failure">ناتوانی در به‌روزرسانی برنامه.</string>
+	<string name="downloading">درحال بارگیری…</string>
+</resources>

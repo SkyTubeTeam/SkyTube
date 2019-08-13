@@ -23,9 +23,9 @@ import free.rm.skytube.R;
 import free.rm.skytube.gui.businessobjects.preferences.ActionBarPreferenceActivity;
 import free.rm.skytube.gui.fragments.preferences.AboutPreferenceFragment;
 import free.rm.skytube.gui.fragments.preferences.BackupPreferenceFragment;
-import free.rm.skytube.gui.fragments.preferences.BlockedChannelsPreferenceFragment;
-import free.rm.skytube.gui.fragments.preferences.LanguagesPreferenceFragment;
 import free.rm.skytube.gui.fragments.preferences.OthersPreferenceFragment;
+import free.rm.skytube.gui.fragments.preferences.PrivacyPreferenceFragment;
+import free.rm.skytube.gui.fragments.preferences.VideoBlockerPreferenceFragment;
 import free.rm.skytube.gui.fragments.preferences.VideoPlayerPreferenceFragment;
 
 /**
@@ -40,12 +40,12 @@ public class PreferencesActivity extends ActionBarPreferenceActivity {
 
 	@Override
 	protected boolean isValidFragment(String fragmentName) {
-		return (fragmentName.equals(LanguagesPreferenceFragment.class.getName())
-			|| fragmentName.equals(VideoPlayerPreferenceFragment.class.getName())
-			|| fragmentName.equals(BlockedChannelsPreferenceFragment.class.getName())
+		return (fragmentName.equals(VideoPlayerPreferenceFragment.class.getName())
+			|| fragmentName.equals(VideoBlockerPreferenceFragment.class.getName())
 			|| fragmentName.equals(BackupPreferenceFragment.class.getName())
 			|| fragmentName.equals(OthersPreferenceFragment.class.getName())
-			|| fragmentName.equals(AboutPreferenceFragment.class.getName()));
+			|| fragmentName.equals(AboutPreferenceFragment.class.getName())
+			|| fragmentName.equals(PrivacyPreferenceFragment.class.getName()));
 	}
 
 }

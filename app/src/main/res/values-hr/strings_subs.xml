@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="subscriptions">Pretplate</string>
+	<string name="subscribe">Pretplati</string>
+	<string name="unsubscribe">Otkaži pretplatu</string>
+	<string name="total_subscribers">%,d pretplaćeno</string>
+
+	<string name="subscribed">Pretplaćen</string>
+	<string name="unsubscribed">Poništena pretplata</string>
+
+	<string name="error_get_subbed_channels">Došlo je do pogreške prilikom dobavljanja pretplaćenih kanala.</string>
+	<string name="error_check_if_user_has_subbed">Nije moguće provjeriti je li se korisnik pretplatio na kanal (id=%s)</string>
+	<string name="error_unable_to_subscribe">Nije moguće pretplatiti/ponišiti pretplatu (id=%s)</string>
+
+	<string name="import_subscriptions">Uvoz pretplatnika</string>
+	<string name="import_subscriptions_description">Uvozi pretplatnike sa YouTube-a, posjećivanjem https://www.youtube.com/subscription_manager i klikom na gumb \"Izvoz pretplatnika\" na dnu. Zatim odaberite izvezenu datoteku pod nazivom \"subscription_manager\" klikom ispod na \"Odaberi datoteku pretplatnika\".</string>
+	<string name="unsubscribe_from_all_current_sibbed_channels">Poništi pretplate sa svih pretplaćenih kanala.</string>
+	<string name="subscriptions_to_channels_imported">Pretplata sa %d kanala uvežena.</string>
+	<string name="select_xml_file">Odaberi datoteku pretplaćenih</string>
+	<string name="select_all">Odaberi sve</string>
+	<string name="select_none">Odaberi ništa</string>
+	<string name="no_channels_found">Nijedan YouTube kanala nije pronađen u XML datoteci koju ste prenijeli.</string>
+	<string name="no_new_channels_found">Nijedan YouTube kanal na koji niste pretplaćeni nije pronađen je u XML datoteci koju ste prenijeli.</string>
+	<string name="import_subscriptions_parse_error">Došlo je do pogreške prilikom pokušaja analiziranja XML datoteke koju ste prenijeli: %s.</string>
+	<string name="failed_to_import_subscriptions">Uvoz vaših pretplata sa usluge YouTube nije uspjeo.</string>
+
+	<string name="about">U vezi</string>
+</resources>

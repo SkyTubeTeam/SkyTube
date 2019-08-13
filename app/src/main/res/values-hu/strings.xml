@@ -1,12 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
-	<string name="could_not_get_videos">Could not get %s videos.</string>
+	<string name="could_not_get_videos">Nem lehet elérni a %s videót.</string>
 	<string name="views">%,d megtekintés</string>
 	<string name="error">Hiba</string>
 	<string name="ok">Rendben</string>
 	<string name="search_videos">Videók keresése</string>
-	<string name="launch_offical_player_error">Hiba történt a hivatalos Youtube lejátszó 
-    betöltése közben. Telepítsd a hivatalos Youtube alkalmazást a Google-tól.</string>
+	<string name="launch_offical_player_error">Hiba történt a hivatalos Youtube lejátszó betöltése közben. Ellenőrizze, hogy megtalálható-e az eszközén.</string>
 	<string name="LIVE">LIVE</string>
 
 	<string name="featured">Kiemelt</string>
@@ -19,5 +18,6 @@
 	<string name="could_not_get_playlists">Nem lehet elérni a %s lejátszási listát.</string>
 
 	<string name="loading">Betöltés …</string>
-    <string name="could_not_get_channel">Could not download channel information!</string>
-</resources>
+    <string name="could_not_get_channel">Nem lehet letölteni a csatorna információkat!</string>
+<string name="hello_blank_fragment">Hello</string>
+    </resources>

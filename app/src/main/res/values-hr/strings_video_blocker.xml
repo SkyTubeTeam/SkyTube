@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="blocked_videos">Blokirani videozapisi</string>
+	<string name="no_videos_blocked">Nijedan videozapis nije blokiran ili filtriran. Želite li konfigurirati blokiranje videozapisa?</string>
+	<string name="configure">Konfiguriraj</string>
+	<string name="block_channel">Blokiraj kanal</string>
+	<string name="channel_blacklisted">Kanal blokiran. Molimo vas osvježite.</string>
+	<string name="channel_blacklist_error">Kanal nije moguće blokirati.</string>
+	<string name="channel_unwhitelist_error">Kanal nije moguće ukloniti sa odobrene liste.</string>
+	<string name="dislikes">%d%% ne sviđanja</string>
+</resources>

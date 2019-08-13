@@ -22,6 +22,8 @@ import android.view.KeyEvent;
 import android.widget.MediaController;
 import android.widget.VideoView;
 
+import free.rm.skytube.businessobjects.interfaces.YouTubePlayerFragmentInterface;
+
 /**
  * A {@link MediaController} that handles the back button events.
  *
@@ -32,6 +34,7 @@ public class MediaControllerEx extends MediaController {
 
 	private VideoView   videoView;
 	private boolean     hideController = false;
+	private YouTubePlayerFragmentInterface fragmentInterface;
 
 
 	/**
@@ -40,10 +43,11 @@ public class MediaControllerEx extends MediaController {
 	 * @param activity	Activity where this controller will run on.
 	 * @param videoView	VideoView that this controller will control.
 	 */
-	public MediaControllerEx(Activity activity, VideoView videoView) {
+	public MediaControllerEx(Activity activity, VideoView videoView, YouTubePlayerFragmentInterface fragmentInterface) {
 		super(activity);
 		this.videoView = videoView;
 		this.videoView.setMediaController(this);
+		this.fragmentInterface = fragmentInterface;
 	}
 
 
@@ -77,8 +81,8 @@ public class MediaControllerEx extends MediaController {
 		// if the user has pressed the BACK button (of the Navigation Bar), then ...
 		if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
 			if (event.getAction() == KeyEvent.ACTION_DOWN) {
-				// stop playing the video
-				videoView.stopPlayback();
+				// Tell the Fragment to stop playback, and record the playing video's position if needed
+				fragmentInterface.videoPlaybackStopped();
 
 				// ask the activity to finish
 				((Activity) getContext()).finish();

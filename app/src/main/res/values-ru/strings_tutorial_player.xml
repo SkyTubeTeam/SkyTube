@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+	<string name="tutorial_slide_1">Смахните влево, чтобы увидеть комментарии.</string>
+	<string name="tutorial_slide_6">Дважды нажмите, чтобы остановить или продолжить воспроизведение.</string>
+<string name="next">Дальше</string>
+	<string name="done">Готово</string>
+	<string name="skip">Пропустить</string>
+	<string name="page_counter">%d из %d</string>
+
+	<string name="tutorial_slide_2">Смахните вверх, чтобы прочитать описание видео.</string>
+	<string name="tutorial_slide_3">Чтобы искать раньше или дальше, смахните влево или вправо.</string>
+	<string name="tutorial_slide_4">Чтобы регулировать громкость, смахните вверх или вниз.</string>
+	<string name="tutorial_slide_5">Чтобы регулировать яркость, смахните вверх или вниз.</string>
+	</resources>

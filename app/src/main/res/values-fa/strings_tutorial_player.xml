@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="next">بعدی</string>
+	<string name="done">انجام شد</string>
+	<string name="skip">پرش</string>
+	<string name="page_counter">%d از %d</string>
+
+	<string name="tutorial_slide_1">برای نمایش نظرات، به سمت چپ بکشید.</string>
+	<string name="tutorial_slide_2">برای نمایش توضیحات ویدئو، به سمت بالا بکشید.</string>
+	<string name="tutorial_slide_3">با کشیدن افقی انگشت، ویدئو را جلو یا عقب ببرید.</string>
+	<string name="tutorial_slide_4">با کشیدن عمودی انگشت، صدا را تنظیم کنید.</string>
+	<string name="tutorial_slide_5">با کشیدن عمودی انگشت، روشنایی را تنظیم کنید.</string>
+	<string name="tutorial_slide_6">برای توقف یا پخش ویدئو، دوبار صفحه را لمس کنید.</string>
+</resources>

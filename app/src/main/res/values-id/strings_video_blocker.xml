@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources><string name="blocked_videos">Video Diblokir</string>
+    <string name="no_videos_blocked">Tidak ada video yang diblokir atau disembunyikan. Apakah anda ingin mengkonfigurasi Pemblokir Video\?</string>
+    <string name="configure">Konfigurasi</string>
+    <string name="block_channel">Blokir Channel</string>
+    <string name="channel_blacklisted">Channel diblokir. Silakan segarkan ulang.</string>
+    <string name="channel_blacklist_error">Channel tidak bisa diblokir.</string>
+    <string name="channel_unwhitelist_error">Channel tidak bisa dibuang dari daftar putih.</string>
+    <string name="dislikes">%d%% tidak suka</string>
+</resources>

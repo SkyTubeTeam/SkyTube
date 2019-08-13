@@ -234,33 +234,37 @@ public abstract class PlayerViewGestureDetector implements View.OnTouchListener 
 		/**
 		 * Here we decide in what place of the screen user should swipe to get a new brightness value.
 		 */
-		private Rect getBrightnessRect(Rect playerViewRect) {
-			return new Rect(playerViewRect.right / 2, 0, playerViewRect.right, playerViewRect.bottom);
+		private Rect getBrightnessRect(final Rect playerViewRect) {
+			return new Rect(playerViewRect.right / 2, (int)(playerViewRect.bottom * 0.2),   // top (X, Y) coordinates
+					playerViewRect.right, playerViewRect.bottom);                                // bottom (X, Y) coordinates
 		}
 
 
 		/**
 		 * Here we decide in what place of the screen user should swipe to get a new volume value.
 		 */
-		private Rect getVolumeRect(Rect playerViewRect) {
-			return new Rect(0, 0, playerViewRect.right / 2, playerViewRect.bottom);
+		private Rect getVolumeRect(final Rect playerViewRect) {
+			return new Rect(0, (int)(playerViewRect.bottom * 0.2),
+					playerViewRect.right / 2, playerViewRect.bottom);
 		}
 
 
 		/**
 		 * Here we choose a rect for swipe which then will be used to open the comments view.
 		 */
-		private Rect getCommentsRect(Rect playerViewRect) {
+		private Rect getCommentsRect(final Rect playerViewRect) {
 			// 20% from right side will trigger comments view
-			return new Rect((int) (playerViewRect.right - Math.min(playerViewRect.bottom, playerViewRect.right) * 0.2), 0, playerViewRect.right, playerViewRect.bottom);
+			return new Rect((int) (playerViewRect.right - (playerViewRect.right * 0.2)), 0,
+					playerViewRect.right, playerViewRect.bottom);
 		}
 
 		/**
 		 * Here we choose a rect for swipe which then will be used to open the description view.
 		 */
-		private Rect getDescriptionRect(Rect playerViewRect) {
+		private Rect getDescriptionRect(final Rect playerViewRect) {
 			// 20% from bottom side will trigger description view
-			return new Rect(0, (int) (playerViewRect.bottom - Math.min(playerViewRect.bottom, playerViewRect.right) * 0.2), playerViewRect.right, playerViewRect.bottom);
+			return new Rect(0, (int) (playerViewRect.bottom - (playerViewRect.bottom * 0.2)),
+					playerViewRect.right, playerViewRect.bottom);
 		}
 
 	}

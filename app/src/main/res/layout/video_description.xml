@@ -5,6 +5,7 @@
 			android:background="@color/video_player_drawer_background">
 	<LinearLayout android:layout_width="match_parent"
 				  android:layout_height="match_parent"
+				  android:id="@+id/video_desc_linearlayout"
 				  android:orientation="vertical"
 				  android:padding="16dp">
 
@@ -58,7 +59,7 @@
 						android:text="Channel Name"/>
 
 					<!-- SUB BUTTON -->
-					<free.rm.skytube.gui.businessobjects.SubscribeButton
+					<free.rm.skytube.gui.businessobjects.views.SubscribeButton
 						android:id="@+id/video_desc_subscribe_button"
 						style="@style/SubscribeButton"
 						android:layout_below="@id/video_desc_channel"
@@ -124,7 +125,7 @@
 			android:text="7 days ago"/>
 
 
-		<TextView
+		<free.rm.skytube.gui.businessobjects.views.ClickableLinksTextView
 			android:id="@+id/video_desc_description"
 			android:paddingTop="10dp"
 			android:autoLink="web"

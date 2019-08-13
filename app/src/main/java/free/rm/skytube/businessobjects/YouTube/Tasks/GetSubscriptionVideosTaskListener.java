@@ -17,16 +17,14 @@
 
 package free.rm.skytube.businessobjects.YouTube.Tasks;
 
-import java.util.List;
 
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
-import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 
 /**
  * A listener that will be notified when a new YouTube video is published to a channel that the user
  * is subscribed to.
  */
 public interface GetSubscriptionVideosTaskListener {
-	void onChannelVideosFetched(YouTubeChannel channel, List<YouTubeVideo> videosFetched, boolean videosDeleted);
+	void onChannelVideosFetched(YouTubeChannel channel, int videosFetched, boolean videosDeleted);
 	void onAllChannelVideosFetched();
 }

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+	  xmlns:app="http://schemas.android.com/apk/res-auto">
+
+	<item android:id="@+id/menu_search"
+		  android:title="@string/search_videos"
+		  android:icon="@drawable/ic_search"
+		  app:showAsAction="always"
+		  app:actionViewClass="androidx.appcompat.widget.SearchView"/>
+
+	<item
+		android:id="@+id/media_route_menu_item"
+		android:title="@string/media_route_menu_title"
+		app:actionProviderClass="androidx.mediarouter.app.MediaRouteActionProvider"
+		app:showAsAction="always"/>
+
+	<item
+		android:id="@+id/menu_blocker"
+		android:title="@string/pref_video_blocker_category"
+		app:actionLayout="@layout/menu_action_item_badge"
+		app:showAsAction="ifRoom" />
+
+	<item android:id="@+id/menu_enter_video_url"
+		  android:title="@string/enter_video_url"
+		  app:showAsAction="never"/>
+
+	<item android:id="@+id/menu_preferences"
+		  android:title="@string/preferences"
+		  app:showAsAction="never"/>
+
+</menu>

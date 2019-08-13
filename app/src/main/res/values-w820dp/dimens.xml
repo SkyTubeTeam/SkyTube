@@ -3,4 +3,5 @@
 	<bool name="is_tablet">true</bool>
 
 	<dimen name="comments_drawer_width">400dp</dimen>
+	<dimen name="tutorial_hand_gesture_image_width">164dp</dimen>
 </resources>

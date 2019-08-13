@@ -30,7 +30,7 @@ public abstract class AsyncTaskParallel<Params, Progress, Result> extends AsyncT
 	 * @see #executeInParallel(Object[])
 	 */
 	public void executeInParallel() {
-		executeInParallel(null);
+		executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Params[]) null);
 	}
 
 

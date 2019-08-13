@@ -42,6 +42,11 @@ public class VideoPlayerPreferenceFragment extends PreferenceFragment {
 		resolutionPref.setEntries(VideoResolution.getAllVideoResolutionsNames());
 		resolutionPref.setEntryValues(VideoResolution.getAllVideoResolutionsIds());
 
+		// set up the list of available video resolutions on mobile network
+        ListPreference resolutionPrefMobile = (ListPreference) findPreference(getString(R.string.pref_key_preferred_res_mobile));
+		resolutionPrefMobile.setEntries(VideoResolution.getAllVideoResolutionsNames());
+		resolutionPrefMobile.setEntryValues(VideoResolution.getAllVideoResolutionsIds());
+
 		// if we are running an OSS version, then remove the last option (i.e. the "official" player
 		// option)
 		if (BuildConfig.FLAVOR.equals("oss")) {

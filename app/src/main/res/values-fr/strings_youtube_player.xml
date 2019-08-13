@@ -1,39 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="error_stream_err_unavailable">Impossible d\'afficher le message d\'erreur.</string>
-	<string name="error_stream_decryption_fail">Impossible de lire le code de décryptage du service Youtube.</string>
-	<string name="error_stream_parse_error">Erreur d\'analyse.</string>
-
-	<string name="error_video_play">Erreur de lecture vidéo</string>
-	<string name="error_video_streams_empty">La vidéo %s n\'a pas de source</string>
-	<string name="error_video_streams">Erreur lors du chagement du flux vidéo.</string>
-	<string name="error_get_video_desc">Erreur lors de la récupération de la description de la vidéo.</string>
-	<string name="error_invalid_url">URL de la vidéo invalide : %s</string>
-
-	<string name="warning_live_video">Impossible de lire des vidéos en live.  Regarder la vidéo sur une autre application ?</string>
-
-	<string name="ratings_disabled">Notation désactivée</string>
-
-	<string name="loading_video">Chargement de la vidéo…</string>
-	<string name="get_new_video_steam">Nouveau flux</string>
-	<string name="open_in_browser">Ouvrir dans un navigateur</string>
-	<string name="open_with">Ouvrir avec…</string>
-	<string name="share">Partager</string>
-	<string name="share_via">Partager avec</string>
-	<string name="copy_url">Copier le lien</string>
-	<string name="url_copied_to_clipboard">URL copié dans le presse-papier.</string>
-
-	<string name="error_get_comments">Erreur lors de la réception des commentaires.</string>
-	<string name="no_video_comments">Cette vidéo ne posséde pas de commentaire.</string>
-	<string name="view_replies">Voir les réponses</string>
-	<string name="hide_replies">Cacher les réponses</string>
-
-	<string name="enter_video_url">Coller l\'URL de la vidéo</string>
-	<string name="play">Démarrer</string>
-	<string name="cancel">Annuler</string>
-	<string name="clear">Effacer</string>
-
-	<string name="tutorial_comments_icon">Swipe to the left to view comments.</string>
-	<string name="tutorial_video_info_icon">Swipe to the top to view information about the video.</string>
-	<string name="tutorial_pause_video">Double tap to pause or play a video.</string>
+    <string name="error_stream_err_unavailable">Message d\'erreur non disponible.</string>
+    <string name="error_stream_decryption_fail">Impossible de lire le code de déchiffrage du service YouTube.</string>
+    <string name="error_stream_parse_error">Erreur d\'analyse.</string>
+    <string name="error_video_play">Erreur de lecture vidéo</string>
+    <string name="error_video_streams_empty">La vidéo %s n\'a pas de flux.</string>
+    <string name="error_video_streams">Erreur lors du chagement du flux vidéo.</string>
+    <string name="error_get_video_desc">Erreur lors de la récupération de la description de la vidéo.</string>
+    <string name="error_invalid_url">URL de la vidéo invalide : %s</string>
+    <string name="warning_live_video">Impossible de lire le flux en direct. Ouvrir le flux sur une autre application ?</string>
+    <string name="ratings_disabled">Notation désactivée</string>
+    <string name="loading_video">Chargement de la vidéo…</string>
+    <string name="get_new_video_steam">Nouveau flux</string>
+    <string name="open_in_browser">Ouvrir dans un navigateur web</string>
+    <string name="open_with">Ouvrir avec…</string>
+    <string name="share">Partager</string>
+    <string name="share_via">Partager avec</string>
+    <string name="copy_url">Copier le lien</string>
+    <string name="url_copied_to_clipboard">URL copié dans le presse-papier.</string>
+    <string name="mark_watched">Épingler comme vue</string>
+    <string name="mark_unwatched">Épingler comme non vue</string>
+    <string name="error_get_comments">Erreur lors de la réception des commentaires.</string>
+    <string name="no_video_comments">Cette vidéo ne posséde pas de commentaire.</string>
+    <string name="view_replies">Voir les réponses</string>
+    <string name="hide_replies">Cacher les réponses</string>
+    <string name="enter_video_url">Coller l\'URL de la vidéo</string>
+    <string name="play">Démarrer</string>
+    <string name="cancel">Annuler</string>
+    <string name="clear">Effacer</string>
+    <string name="should_resume">eprendre la vidéo là où vous l\'avez arrêté ?</string>
+    <string name="resume">Reprendre la vidéo</string>
+    <string name="mobile_data">Données mobiles</string>
+    <string name="warning_mobile_network_play">Votre appareil n\'est pas connecté à un réseau wi-fi. Pour éviter des frais supplémentaires liés à l\'utilisation de données, il est recommandé de vous connecter à un réseau wi-fi. Voulez-vous malgré tout lire la vidéo \?</string>
+    <string name="warning_mobile_network_disable">Ne plus demander.</string>
+    <string name="play_video">Lire la vidéo</string>
 </resources>

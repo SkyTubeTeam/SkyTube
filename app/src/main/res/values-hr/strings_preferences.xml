@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources><string name="preferences">Postavke</string>
+
+	<string name="pref_video_player_category">Video player</string>
+	<string name="pref_title_preferred_res">Preferirana rezolucija</string>
+	<string name="pref_summary_preferred_res">Odaberi preferiranu rezoluciju: %s</string>
+
+	<string name="pref_title_choose_player">Video player</string>
+	<string name="pref_summary_choose_player">Video Player koji će se koristiti: %s</string>
+	<string name="pref_import_export_category">Uvoz/Izvoz</string>
+	<string name="pref_title_backup_dbs">Izradi sigurnosnu kopiju</string>
+	<string name="pref_summary_backup_dbs">Izradi sigurnosnu kopiju pretplata i oznaka.</string>
+	<string name="pref_title_import_dbs">Uvoz sigurnosne kopije</string>
+	<string name="pref_summary_import_dbs">Uvoz vaših pretplata i oznaka.</string>
+	<string name="databases_backing_up">Radim sigurnosnu kopiju…</string>
+	<string name="databases_backup_success">Sigurnosna kopija izrađena na %s</string>
+	<string name="databases_backup_fail">Sigurnosno kopiranje nije uspjelo.</string>
+	<string name="databases_import_select_backup">Odaberi sigurnosnu kopiju za uvoz</string>
+	<string name="databases_import_nothing_selected">Ništa nije odabrano…</string>
+	<string name="databases_import_warning_message">Pretplate i oznake će biti zamijenjene sa podatcima iz sigurnosne kopije.
+\n
+\nNastavi?</string>
+	<string name="continue_">Nastavi</string>
+	<string name="databases_importing">Uvozim…</string>
+	<string name="databases_import_fail">Uvoz podataka nije uspješan.</string>
+	<string name="databases_import_success">Podatci unešeni. Ponovo pokrenite aplikaciju da biste primijenili promjene.</string>
+
+	<string name="pref_title_import_subs">Uvozi pretplate sa YouTube</string>
+	<string name="pref_summary_import_subs">Uvozi pretplate sa vašeg YouTube računa.</string>
+	<string name="subs_import_select_backup">Odaberi YouTube XML datoteku za uvoz</string>
+
+	<string name="pref_about_category">U vezi</string>
+	<string name="pref_title_website">Web stranica</string>
+	<string name="pref_title_credits">Zasluge</string>
+	<string name="pref_summary_credits">Ljudi i projekti koji su omogućili ovu aplikaciju.</string>
+	<string name="pref_title_version">Verzija</string>
+	<string name="pref_title_updates">Ažuriranja</string>
+	<string name="pref_summary_updates">Provjeri za novu verziju.</string>
+	<string name="pref_title_license">Licenca</string>
+	<string name="pref_summary_license">GNU General Public License verzija 3</string>
+	<string name="i_agree">Prihvaćam</string>
+
+
+	<string name="pref_other_category">Ostalo</string>
+	<string name="pref_title_default_tab">Zadana kartica</string>
+	<string name="pref_summary_default_tab">Zadanu karticu prikazati pri pokretanju SkyTube: %s</string>
+	<string name="pref_summary_feed_notification">Koliko često provjeriti nove videozapise s pretplaćenih kanala: %s</string>
+	<string name="pref_title_screen_orientation">Orijentacija zaslona</string>
+	<string name="pref_summary_screen_orientation">Orijentacija video player-a :%s</string>
+
+	<string name="pref_title_youtube_api_key">Youtube API ključ</string>
+	<string name="pref_summary_youtube_api_key">Unesi svoj YouTube Data API ključ. Ostavite prazno da biste upotrebili zadani.</string>
+	<string name="pref_youtube_api_key_error">Došlo je do pogreške prilikom potvrđivanja API ključa koji ste unijeli.</string>
+	<string name="pref_youtube_api_key_custom">Ključ ispravan. Ponovo pokrenite aplikaciju da biste upotrebljavali novi ključ API-ja YouTubea.</string>
+	<string name="pref_youtube_api_key_default">Ponovo pokrenite aplikaciju da biste se vratili na zadani ključ API-ja YouTubea.</string>
+
+
+	<string name="restart">Ponovno pokreni</string>
+	<string name="pref_title_subscriptions_alphabetical_order">Poredaj kanale prema abecedi</string>
+	<string name="pref_summary_subscriptions_alphabetical_order">Ako je označeno, pretplaćeni kanali bit će poredani abecedno.</string>
+	<string name="pref_video_blocker_category">Blokiranje videozapisa</string>
+	<string name="pref_channels_filter_category">Filter kanala</string>
+
+	<string name="pref_title_channel_filter_method">Metoda filtriranja kanala</string>
+	<string name="pref_summary_channel_filter_method">Odaberite metodu filtriranje kanala: %s</string>
+	<string name="disabled">Onemogućeno</string>
+	<string name="pref_title_channel_blacklist">Blokirani kanali</string>
+	<string name="pref_summary_channel_blacklist">Lista blokiranih kanala.</string>
+	<string name="unblock">Odblokirati</string>
+	<string name="channel_blacklist_updated">Lista blokiranih kanala ažurirana. Molimo vas osvježite videozapise.</string>
+	<string name="channel_blacklist_update_failure">Neuspješno uklanjanje određenih kanala sa blokirane liste…</string>
+	<string name="channel_blacklist_empty">Lista blokiranih kanala je prazna.</string>
+
+	<string name="pref_title_channel_whitelist">Odobreni kanali</string>
+	<string name="pref_summary_channel_whitelist">Lista odobrenih kanala.</string>
+	<string name="input_channel_url">URL kanala koji će biti odobren:</string>
+	<string name="add">Dodaj</string>
+	<string name="block">Blokiraj</string>
+	<string name="please_wait">Molimo vas pričekajte…</string>
+	<string name="channel_already_whitelisted">Kanala je već odobren.</string>
+	<string name="channel_whitelist_updated">Kanal odobren. Molimo vas osvježite videozapise.</string>
+	<string name="channel_whitelist_update_failure">Neuspješno odobrenje određenog kanala…</string>
+	<string name="channel_unwhitelist_success">Lista odobrenih kanala je ažurirana. Molimo vas osvježite videozapise.</string>
+	<string name="channel_unwhitelist_failure">Neuspješno uklanjanje odobrenog kanala…</string>
+
+	<string name="pref_languages_filter_category">Filter jezika i regija</string>
+	<string name="pref_title_preferred_regions">Preferirana regija</string>
+	<string name="pref_summary_preferred_regions">Odaberi preferiranu regiju. Ovo se koristi za filtriranje videozapisa iz \"Istaknutih\" video kategorija: %s</string>
+
+	<string name="pref_title_preferred_languages">Preferirani jezici</string>
+	<string name="pref_summary_preferred_languages">Odaberite vaše preferirane jezike.</string>
+	<string name="no_preferred_lang_selected">Nije odabran preferirani jezik. Postavka je zanemarena.</string>
+	<string name="preferred_lang_updated">Preferirani jezik ažuriran. Molimo vas osvježite videozapise.</string>
+
+	<string name="pref_title_lang_detection_video_filtering">Filtriranje videozapisa za otkrivanje jezika</string>
+	<string name="pref_summary_lang_detection_video_filtering">Upotrijebite AI za otkrivanje jezika koji se upotrebljavaju u videozapisima i blokiraju ih ako njihov jezik nije jednak vašem željenom jeziku. Trebao bi biti omogućen samo na high end uređajima.</string>
+	<string name="setting_updated">Postavka aužurirana. Molimo vas osvježite videozapise.</string>
+
+	<string name="pref_other_filters_category">Ostali filteri</string>
+	<string name="pref_title_low_views_filter">Pregledi</string>
+	<string name="pref_summary_low_views_filter">Filtriraj videozapise sa niskim prikazima: %s</string>
+	<string name="pref_title_dislikes_filter">Ne sviđa</string>
+	<string name="pref_summary_dislikes_filter">Filtriraj videozapise sa većinom ne sviđanja: %s</string>
+	<string name="pref_privacy_category">Privatnost</string>
+	<string name="pref_title_disable_search_history">Onemogući pretraženu povijest</string>
+	<string name="pref_summary_disable_search_history">Ako je označeno, Povijest pretraživanja će biti izbrisana i neće se koristiti.</string>
+	<string name="pref_disable_search_history_deleted">Povijest pretraživanja izbrisana.</string>
+
+	<string name="pref_title_disable_playback_status">Onemogući status reprodukcije</string>
+	<string name="pref_summary_disable_playback_status">Ako je označeno, Status reprodukcije bit će izbrisan i neće se koristiti.</string>
+	<string name="pref_disable_playback_status_deleted">Status reprodukcije izbrisana.</string>
+
+	<string name="pref_title_clear_playback_status">Obriši status reprodukcije</string>
+	<string name="pref_summary_clear_playback_status">Obriši status reprodukcije za sve videozapise.</string>
+	<string name="pref_playback_status_cleared">Status reprodukcije je obrisan.</string>
+
+<string name="pref_category_downloads">Preuzimanja</string>
+	<string name="pref_title_download_to_separate_directories">Preuzmi videozapise u direktorije</string>
+	<string name="pref_summary_download_to_separate_directories">Videozapisi se spremaju u mape na temelju naziva kanala.</string>
+
+	<string name="pref_title_disable_screen_gestures">Onemogući video geste</string>
+	<string name="pref_summary_disable_screen_gestures">Onemogući geste za kontrolu glasnoće, svjetline i premotavanje unaprijed/unazad videa.</string>
+
+	<string name="app_license">Copyright © 2015-2018 Ramon Mifsud
+\n 
+\nThis program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation (version 3 of the License).
+\n 
+\nThis program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+\n 
+\nYou should have received a copy of the GNU General Public License along with this program. If not, see &lt;http://www.gnu.org/licenses/&gt;</string>
+	<string name="pref_title_feed_notification">Automatska obavijest o kanalu</string>
+	<string name="pref_title_warn_mobile_downloads">Prikaži upozorenje mobilne mreže</string>
+	<string name="pref_summary_warn_mobile_downloads">Prikaži upozorenje prilikom korištenja mobilne mreže (kao što je 4G) prije stremanja/preuzimanja videozapisa.</string>
+
+	<string name="pref_summary_enable_video_blocker">Omogući blokiranje videozapisa.</string>
+
+	<string name="pref_category_mobile_network">Mobilna mreža</string>
+	<string name="pref_title_preferred_res_mobile">Preferirana rezolucija za mobilnu mrežu</string>
+	<string name="pref_summary_preferred_res_mobile">Odaberite željenu rezoluciju tijekom prijenosa putem mobilne mreže (kao što je 4G): %s</string>
+
+	</resources>
