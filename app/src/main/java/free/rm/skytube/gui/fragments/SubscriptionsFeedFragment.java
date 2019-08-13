@@ -186,7 +186,8 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 
 
 	private void showRefreshDialog() {
-		progressDialog = new MaterialDialog.Builder(getActivity())
+		if (progressDialog == null || progressDialog.isCancelled()) {
+			progressDialog = new MaterialDialog.Builder(getActivity())
 						.title(R.string.fetching_subscription_videos)
 						.content(String.format(getContext().getString(R.string.fetched_videos_from_channels), numVideosFetched, numChannelsFetched, numChannelsSubscribed))
 						.progress(true, 0)
@@ -194,7 +195,8 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 						.titleColorRes(android.R.color.white)
 						.contentColorRes(android.R.color.white)
 						.build();
-		progressDialog.show();
+			progressDialog.show();
+		}
 	}
 
 
@@ -209,8 +211,10 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 		if (refreshInProgress) {
 			return;
 		}
-		refreshInProgress = true;
-		new RefreshFeedTask(showFetchingVideosDialog).executeInParallel();
+		if (shouldRefresh) {
+			refreshInProgress = true;
+			new RefreshFeedTask(showFetchingVideosDialog).executeInParallel();
+		}
 	}
 
 
@@ -232,8 +236,10 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 				// Remove the progress bar(s)
 				swipeRefreshLayout.setRefreshing(false);
 				boolean fragmentIsVisible = progressDialog != null;
-				if(progressDialog != null)
+				if(progressDialog != null) {
 					progressDialog.dismiss();
+					progressDialog = null;
+				}
 				if(numVideosFetched > 0 || videosDeleted) {
 					refreshFeedFromCache();
 				} else {
@@ -257,8 +263,9 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 		super.onFragmentSelected();
 
 		// when the Subscriptions tab is selected, if a refresh is in progress, show the dialog.
-		if (refreshInProgress)
+		if (refreshInProgress) {
 			showRefreshDialog();
+		}
 	}
 
 
