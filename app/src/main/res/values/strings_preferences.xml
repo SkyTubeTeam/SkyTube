@@ -456,22 +456,30 @@
 	</string-array>
 
 	<string name="pref_other_category">Others</string>
+
 	<string name="pref_key_default_tab" translatable="false">pref_default_tab</string>
+	<string name="pref_key_default_tab_name" translatable="false">pref_default_tab_name</string>
 	<string name="pref_title_default_tab">Default Tab</string>
 	<string name="pref_summary_default_tab">Default tab to show when SkyTube launches: %s</string>
-	<string-array name="default_tab" translatable="false">
+
+	<string name="pref_key_hide_tabs" translatable="false">pref_hide_tabs</string>
+	<string name="pref_title_hide_tabs">Hide Tabs</string>
+	<string name="pref_summary_hide_tabs">Choose which tabs should not be shown. Restart required.</string>
+	<string name="pref_hide_tabs_restart">Restart app to show updated tabs.</string>
+
+	<string-array name="tab_list" translatable="false">
 		<item>@string/featured</item>
 		<item>@string/most_popular</item>
 		<item>@string/feed</item>
 		<item>@string/bookmarks</item>
 		<item>@string/downloads</item>
 	</string-array>
-	<string-array name="default_tab_values" translatable="false">
-		<item>0</item>
-		<item>1</item>
-		<item>2</item>
-		<item>3</item>
-		<item>4</item>
+	<string-array name="tab_list_values" translatable="false">
+		<item>MainFragment.featuredVideosFragment</item>
+		<item>MainFragment.mostPopularVideosFragment</item>
+		<item>MainFragment.subscriptionsFeedFragment</item>
+		<item>MainFragment.bookmarksFragment</item>
+		<item>MainFragment.downloadedVideosFragment</item>
 	</string-array>
 
 	<string name="pref_key_feed_notification" translatable="false">pref_key_feed_notification</string>
@@ -533,12 +541,18 @@
 	<string name="pref_key_brightness_level" translatable="false">pref_key_brightness_level</string>
 
 	<string name="pref_category_downloads">Downloads</string>
+	<string name="pref_key_download_to_separate_directories">pref_key_download_to_separate_directories</string>
 	<string name="pref_title_download_to_separate_directories">Download Videos Into Folders</string>
 	<string name="pref_summary_download_to_separate_directories">Videos are downloaded into folders based on the channel name.</string>
 
-	<!--
-		VIDEO BLOCKER
-	-->
+	<string name="pref_key_video_download_folder">pref_key_video_download_folder</string>
+	<string name="pref_popup_title_video_download_folder">Choose Folder</string>
+	<string name="pref_title_video_download_folder">Video Download Folder</string>
+    <string name="pref_summary_video_download_folder">Videos are downloaded into this folder: %s</string>
+
+    <!--
+        VIDEO BLOCKER
+    -->
 	<string name="pref_video_blocker_category">Video Blocker</string>
 
 	<string name="pref_key_enable_video_blocker" translatable="false">pref_key_enable_video_blocker</string>

@@ -85,8 +85,8 @@ public class GetChannelVideos extends GetYouTubeVideos implements GetChannelVide
 	}
 
 	@Override
-	public void setPublishedAfter(DateTime dateTime) {
-		((GetChannelVideosInterface) getChannelVideos).setPublishedAfter(dateTime);
+	public void setPublishedAfter(long timeInMs) {
+		((GetChannelVideosInterface) getChannelVideos).setPublishedAfter(timeInMs);
 	}
 
 }

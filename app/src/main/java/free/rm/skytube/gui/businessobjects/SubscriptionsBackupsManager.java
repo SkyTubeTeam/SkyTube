@@ -3,7 +3,6 @@ package free.rm.skytube.gui.businessobjects;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -15,15 +14,10 @@ import androidx.core.content.ContextCompat;
 import android.text.SpannableString;
 import android.text.util.Linkify;
 import android.util.Log;
-import android.widget.CompoundButton;
 import android.widget.Toast;
 
-import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.github.angads25.filepicker.controller.DialogSelectionListener;
-import com.github.angads25.filepicker.model.DialogConfigs;
-import com.github.angads25.filepicker.model.DialogProperties;
-import com.github.angads25.filepicker.view.FilePickerDialog;
+import com.obsez.android.lib.filechooser.ChooserDialog;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -106,30 +100,26 @@ public class SubscriptionsBackupsManager {
 		if (!hasAccessToExtStorage(importDb ? EXT_STORAGE_PERM_CODE_IMPORT : IMPORT_SUBSCRIPTIONS_READ_CODE))
 			return;
 
-		DialogProperties properties = new DialogProperties();
-
-		properties.selection_mode = DialogConfigs.SINGLE_MODE;
-		properties.selection_type = DialogConfigs.FILE_SELECT;
-		properties.root           = Environment.getExternalStorageDirectory();
-		properties.error_dir      = new File(DialogConfigs.DEFAULT_DIR);
-		properties.offset         = importDb ? Environment.getExternalStorageDirectory() : Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-		properties.extensions     = importDb ? new String[]{"skytube"} : new String[]{"xml", "subscription_manager"};
-
-		FilePickerDialog dialog = new FilePickerDialog(activity, properties);
-		dialog.setDialogSelectionListener(files -> {
-			if (files == null || files.length <= 0)
-				Toast.makeText(activity, R.string.databases_import_nothing_selected, Toast.LENGTH_LONG).show();
-			else {
-				if (importDb)
-					displayImportDbsBackupWarningMsg(files[0]);
-				else {
-					Uri uri = Uri.fromFile(new File(files[0]));
-					parseImportedSubscriptions(uri);
-				}
-			}
-		});
-		dialog.setTitle(importDb ? R.string.databases_import_select_backup : R.string.subs_import_select_backup);
-		dialog.show();
+		ChooserDialog dialog = new ChooserDialog(activity)
+				.withStartFile(importDb ? Environment.getExternalStorageDirectory().getAbsolutePath() : Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath())
+				.displayPath(true)
+				.withChosenListener((file, dirFile) -> {
+					if (importDb)
+						displayImportDbsBackupWarningMsg(file);
+					else {
+						Uri uri = Uri.fromFile(new File(file));
+						parseImportedSubscriptions(uri);
+					}
+				})
+				.withOnCancelListener(dialog1 -> {
+					dialog1.cancel();
+				});
+		if(importDb) {
+			dialog.withFilter(false, false, "skytube");
+		} else {
+			dialog.withFilterRegex(false, false, ".*(xml|subscription_manager)$");
+		}
+		dialog.build().show();
 	}
 
 	/**

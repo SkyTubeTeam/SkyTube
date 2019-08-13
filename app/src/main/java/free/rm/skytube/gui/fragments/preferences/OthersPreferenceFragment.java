@@ -18,13 +18,22 @@
 package free.rm.skytube.gui.fragments.preferences;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Environment;
 import android.preference.EditTextPreference;
 import android.preference.ListPreference;
+import android.preference.Preference;
+import android.preference.MultiSelectListPreference;
 import android.preference.PreferenceFragment;
+import android.preference.PreferenceManager;
 import android.widget.Toast;
+
+import com.obsez.android.lib.filechooser.ChooserDialog;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
@@ -36,18 +45,63 @@ import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
  * Preference fragment for other settings.
  */
 public class OthersPreferenceFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
+	private Preference folderChooser;
 
+	ListPreference defaultTabPref;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.preference_others);
 
 		// Default tab
-		ListPreference defaultTabPref = (ListPreference)findPreference(getString(R.string.pref_key_default_tab));
+		defaultTabPref = (ListPreference)findPreference(getString(R.string.pref_key_default_tab_name));
+		Set<String> hiddenFragments = SkyTubeApp.getPreferenceManager().getStringSet(getString(R.string.pref_key_hide_tabs), new HashSet<>());
+		String[] tabListValues = SkyTubeApp.getStringArray(R.array.tab_list_values);
+		if(hiddenFragments.size() == 0) {
+			defaultTabPref.setEntries(SkyTubeApp.getStringArray(R.array.tab_list));
+			defaultTabPref.setEntryValues(tabListValues);
+		} else {
+			List<String> defaultTabEntries = new ArrayList<>();
+			List<String> defaultTabEntryValues = new ArrayList<>();
+			for(int i=0;i<SkyTubeApp.getStringArray(R.array.tab_list).length;i++) {
+				if(!hiddenFragments.contains(tabListValues[i])) {
+					defaultTabEntries.add(SkyTubeApp.getStringArray(R.array.tab_list)[i]);
+					defaultTabEntryValues.add(tabListValues[i]);
+
+				}
+			}
+			defaultTabPref.setEntries(defaultTabEntries.toArray(new CharSequence[defaultTabEntries.size()]));
+			defaultTabPref.setEntryValues(defaultTabEntryValues.toArray(new CharSequence[defaultTabEntryValues.size()]));
+		}
 		if (defaultTabPref.getValue() == null) {
 			defaultTabPref.setValueIndex(0);
 		}
 		defaultTabPref.setSummary(String.format(getString(R.string.pref_summary_default_tab), defaultTabPref.getEntry()));
+
+		folderChooser = findPreference(getString(R.string.pref_key_video_download_folder));
+		folderChooser.setOnPreferenceClickListener(preference -> {
+			new ChooserDialog(OthersPreferenceFragment.this)
+					.withFilter(true, false)
+					.titleFollowsDir(true)
+					.enableOptions(true)
+					.withResources(R.string.pref_popup_title_video_download_folder, R.string.ok, R.string.cancel)
+					.withChosenListener((dir, dirFile) -> {
+						SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
+						SharedPreferences.Editor editor = pref.edit();
+						editor.putString(getString(R.string.pref_key_video_download_folder), dir);
+						editor.apply();
+						folderChooser.setSummary(getString(R.string.pref_summary_video_download_folder, dir));
+					})
+					.build()
+					.show();
+			return true;
+		});
+		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
+		String dir = pref.getString(getString(R.string.pref_key_video_download_folder), null);
+		folderChooser.setSummary(getString(R.string.pref_summary_video_download_folder, dir != null ? dir : Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES)));
+
+		MultiSelectListPreference hiddenTabsPref = (MultiSelectListPreference)findPreference(getString(R.string.pref_key_hide_tabs));
+		hiddenTabsPref.setEntryValues(tabListValues);
 
 //		ListPreference feedNotificationPref = (ListPreference) findPreference(getString(R.string.pref_feed_notification_key));
 //		if(feedNotificationPref.getValue() == null) {
@@ -55,8 +109,6 @@ public class OthersPreferenceFragment extends PreferenceFragment implements Shar
 //		}
 //		feedNotificationPref.setSummary(String.format(getString(R.string.pref_summary_feed_notification), feedNotificationPref.getEntry()));
 	}
-
-
 
 	@Override
 	public void onResume() {
@@ -77,10 +129,12 @@ public class OthersPreferenceFragment extends PreferenceFragment implements Shar
 	@Override
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
 		if(key != null) {
-			if (key.equals(getString(R.string.pref_key_default_tab))) {
+			if (key.equals(getString(R.string.pref_key_default_tab_name))) {
 				// If the user changed the Default Tab Preference, update the summary to show the new default tab
 				ListPreference defaultTabPref = (ListPreference) findPreference(key);
 				defaultTabPref.setSummary(String.format(getString(R.string.pref_summary_default_tab), defaultTabPref.getEntry()));
+			} else if (key.equals(getString(R.string.pref_key_hide_tabs))) {
+				displayRestartDialog(R.string.pref_hide_tabs_restart);
 			} else if (key.equals(getString(R.string.pref_youtube_api_key))) {
 				// Validate the entered API Key when saved (and not empty), with a simple call to get the most popular video
 				EditTextPreference    youtubeAPIKeyPref = (EditTextPreference) findPreference(getString(R.string.pref_youtube_api_key));

@@ -24,13 +24,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Environment;
-import androidx.core.content.FileProvider;
 import android.view.Menu;
 import android.widget.Toast;
+
+import androidx.core.content.FileProvider;
 
 import com.google.api.client.util.DateTime;
 import com.google.api.services.youtube.model.Thumbnail;
 import com.google.api.services.youtube.model.Video;
+import com.google.api.services.youtube.model.VideoSnippet;
+import com.google.api.services.youtube.model.VideoStatistics;
 
 import org.joda.time.Period;
 import org.joda.time.format.ISOPeriodFormat;
@@ -49,6 +52,7 @@ import java.util.regex.Pattern;
 
 import free.rm.skytube.BuildConfig;
 import free.rm.skytube.R;
+import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.FileDownloader;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetVideoDescriptionTask;
@@ -151,26 +155,29 @@ public class YouTubeVideo implements Serializable {
 	public YouTubeVideo(Video video) {
 		this.id = video.getId();
 
-		if (video.getSnippet() != null) {
-			this.title = video.getSnippet().getTitle();
+		VideoSnippet snippet = video.getSnippet();
+		if (snippet != null) {
+			this.title = snippet.getTitle();
 
-			this.channel = new YouTubeChannel(video.getSnippet().getChannelId(), video.getSnippet().getChannelTitle());
-			setPublishDate(video.getSnippet().getPublishedAt());
+			this.channel = new YouTubeChannel(snippet.getChannelId(), snippet.getChannelTitle());
+			setPublishDate(snippet.getPublishedAt());
 
-			if (video.getSnippet().getThumbnails() != null) {
-				Thumbnail thumbnail = video.getSnippet().getThumbnails().getHigh();
-				if (thumbnail != null)
+			if (snippet.getThumbnails() != null) {
+				Thumbnail thumbnail = snippet.getThumbnails().getHigh();
+				if (thumbnail != null) {
 					this.thumbnailUrl = thumbnail.getUrl();
+				}
 
-				thumbnail = video.getSnippet().getThumbnails().getMaxres();
-				if (thumbnail != null)
+				thumbnail = snippet.getThumbnails().getMaxres();
+				if (thumbnail != null) {
 					this.thumbnailMaxResUrl = thumbnail.getUrl();
+				}
 			}
 
-			this.language = video.getSnippet().getDefaultAudioLanguage() != null ? video.getSnippet().getDefaultAudioLanguage()
-					: (video.getSnippet().getDefaultLanguage());
+			this.language = snippet.getDefaultAudioLanguage() != null ? snippet.getDefaultAudioLanguage()
+					: (snippet.getDefaultLanguage());
 
-			this.description = video.getSnippet().getDescription();
+			this.description = snippet.getDescription();
 		}
 
 		if (video.getContentDetails() != null) {
@@ -179,21 +186,27 @@ public class YouTubeVideo implements Serializable {
 			setDurationInSeconds(video.getContentDetails().getDuration());
 		}
 
-		if (video.getStatistics() != null) {
-			BigInteger  likeCount = video.getStatistics().getLikeCount(),
-						dislikeCount = video.getStatistics().getDislikeCount();
+		VideoStatistics statistics = video.getStatistics();
+		if (statistics != null) {
+			setLikeDislikeCount(statistics.getLikeCount(), statistics.getDislikeCount());
 
-			setThumbsUpPercentage(likeCount, dislikeCount);
-
-			this.viewsCountInt = video.getStatistics().getViewCount();
-			this.viewsCount = String.format(getStr(R.string.views), viewsCountInt);
-
-			if (likeCount != null)
-				this.likeCount = String.format(Locale.getDefault(), "%,d", video.getStatistics().getLikeCount());
-
-			if (dislikeCount != null)
-				this.dislikeCount = String.format(Locale.getDefault(), "%,d", video.getStatistics().getDislikeCount());
+			setViewCount(statistics.getViewCount());
 		}
+	}
+
+	private void setViewCount(BigInteger viewsCountInt) {
+		this.viewsCountInt = viewsCountInt;
+		this.viewsCount = String.format(getStr(R.string.views), viewsCountInt);
+	}
+
+	private void setLikeDislikeCount(BigInteger likeCount, BigInteger dislikeCount) {
+		if (likeCount != null) {
+			this.likeCount = String.format(Locale.getDefault(), "%,d", likeCount);
+		}
+		if (dislikeCount != null) {
+			this.dislikeCount = String.format(Locale.getDefault(), "%,d", dislikeCount);
+		}
+		setThumbsUpPercentage(likeCount, dislikeCount);
 	}
 
 	/**
@@ -533,6 +546,7 @@ public class YouTubeVideo implements Serializable {
 							.setDescription(getStr(R.string.video) + " ― " + getChannelName())
 							.setOutputFileName(getId() + " - " + getTitle())
 							.setOutputDirectoryName(getChannelName())
+							.setParentDirectory(SkyTubeApp.getPreferenceManager().getString(SkyTubeApp.getStr(R.string.pref_key_video_download_folder), null))
 							.setOutputFileExtension("mp4")
 							.setAllowedOverRoaming(false)
 							.setAllowedNetworkTypesFlags(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE)

@@ -96,21 +96,27 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		// Only do an automatic refresh of subscriptions if it's been more than three hours since the last one was done.
-		long subscriptionsLastUpdated = SkyTubeApp.getPreferenceManager().getLong(SkyTubeApp.KEY_SUBSCRIPTIONS_LAST_UPDATED, -1);
-		long threeHoursAgo = System.currentTimeMillis() - REFRESH_TIME_IN_MS;
-		if(subscriptionsLastUpdated <= threeHoursAgo) {
-			shouldRefresh = true;
-		}
+		checkRefreshTime();
 
 		subscriptionsBackupsManager = new SubscriptionsBackupsManager(getActivity(), SubscriptionsFeedFragment.this);
 	}
 
 
+	private void checkRefreshTime() {
+	    // Only do an automatic refresh of subscriptions if it's been more than three hours since the last one was done.
+	    long subscriptionsLastUpdated = SkyTubeApp.getPreferenceManager().getLong(SkyTubeApp.KEY_SUBSCRIPTIONS_LAST_UPDATED, -1);
+	    long threeHoursAgo = System.currentTimeMillis() - REFRESH_TIME_IN_MS;
+	    if(subscriptionsLastUpdated <= threeHoursAgo) {
+	    	shouldRefresh = true;
+	    }
+	}
+
+
 	@Override
 	public void onResume() {
+	    	checkRefreshTime();
 		// setup the UI and refresh the feed (if applicable)
-		new RefreshFeedTask(isFragmentSelected()).executeInParallel();
+		startRefreshTask(isFragmentSelected());
 
 		getActivity().registerReceiver(feedUpdaterReceiver, new IntentFilter(FeedUpdaterService.NEW_SUBSCRIPTION_VIDEOS_FOUND));
 
@@ -195,19 +201,28 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 	@Override
 	public void onRefresh() {
 		shouldRefresh = true;
-		new RefreshFeedTask(true).executeInParallel();
+		startRefreshTask(true);
+	}
+
+
+	protected synchronized void startRefreshTask(boolean showFetchingVideosDialog) {
+		if (refreshInProgress) {
+			return;
+		}
+		refreshInProgress = true;
+		new RefreshFeedTask(showFetchingVideosDialog).executeInParallel();
 	}
 
 
 	@Override
-	public void onChannelVideosFetched(YouTubeChannel channel, List<YouTubeVideo> videosFetched, final boolean videosDeleted) {
+	public void onChannelVideosFetched(YouTubeChannel channel, int videosFetched, final boolean videosDeleted) {
 		Log.d("SUB FRAGMENT", "onChannelVideosFetched");
 
 		// If any new videos have been fetched for a channel, update the Subscription list in the left navbar for that channel
-		if(videosFetched.size() > 0)
+		if(videosFetched > 0)
 			SubsAdapter.get(getActivity()).changeChannelNewVideosStatus(channel.getId(), true);
 
-		numVideosFetched += videosFetched.size();
+		numVideosFetched += videosFetched;
 		numChannelsFetched++;
 		if(progressDialog != null)
 			progressDialog.setContent(String.format(SkyTubeApp.getStr(R.string.fetched_videos_from_channels), numVideosFetched, numChannelsFetched, numChannelsSubscribed));
@@ -357,12 +372,14 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 				// get any videos published after the last time the user used the app...
 				if (shouldRefresh) {
 					new GetSubscriptionVideosTask(SubscriptionsFeedFragment.this).executeInParallel();      // refer to #onChannelVideosFetched()
-					refreshInProgress = true;
 					shouldRefresh = false;
 
-					if (showDialogs)
+					if (showDialogs) {
 						showRefreshDialog();
+					}
 				}
+			} else {
+				refreshInProgress = false;
 			}
 		}
 

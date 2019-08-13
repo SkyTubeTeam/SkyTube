@@ -3,28 +3,33 @@ package free.rm.skytube.gui.fragments;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import androidx.annotation.Nullable;
-import com.google.android.material.tabs.TabLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.core.view.GravityCompat;
-import androidx.viewpager.widget.ViewPager;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.appcompat.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
+
+import com.google.android.material.tabs.TabLayout;
+
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import free.rm.skytube.R;
+import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.db.BookmarksDb;
 import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
@@ -34,6 +39,8 @@ import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
 import free.rm.skytube.gui.businessobjects.fragments.FragmentEx;
 
 public class MainFragment extends FragmentEx {
+
+	private static final int TOP_LIST_INDEX = 0;
 
 	private RecyclerView				subsListView = null;
 	private SubsAdapter					subsAdapter  = null;
@@ -60,7 +67,6 @@ public class MainFragment extends FragmentEx {
 	private ViewPager					viewPager;
 
 	public static final String SHOULD_SELECTED_FEED_TAB = "MainFragment.SHOULD_SELECTED_FEED_TAB";
-
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -121,7 +127,7 @@ public class MainFragment extends FragmentEx {
 
 		videosPagerAdapter = new VideosPagerAdapter(getChildFragmentManager());
 		viewPager = view.findViewById(R.id.pager);
-		viewPager.setOffscreenPageLimit(videoGridFragmentsList.size() - 1);
+		viewPager.setOffscreenPageLimit(videoGridFragmentsList.size() > 3 ? videoGridFragmentsList.size() - 1 : videoGridFragmentsList.size());
 		viewPager.setAdapter(videosPagerAdapter);
 
 		tabLayout = view.findViewById(R.id.tab_layout);
@@ -141,6 +147,11 @@ public class MainFragment extends FragmentEx {
 
 			@Override
 			public void onTabReselected(TabLayout.Tab tab) {
+				//When current tab reselected scroll to the top of the video list
+				VideosGridFragment fragment = videoGridFragmentsList.get(tab.getPosition());
+				if(fragment != null && fragment.gridView != null) {
+					fragment.gridView.smoothScrollToPosition(TOP_LIST_INDEX);
+				}
 			}
 		});
 
@@ -152,7 +163,23 @@ public class MainFragment extends FragmentEx {
 		if(args != null && args.getBoolean(SHOULD_SELECTED_FEED_TAB, false)) {
 			viewPager.setCurrentItem(videoGridFragmentsList.indexOf(subscriptionsFeedFragment));
 		} else {
-			viewPager.setCurrentItem(Integer.parseInt(sp.getString(getString(R.string.pref_key_default_tab), "0")));
+			String defaultTab = sp.getString(getString(R.string.pref_key_default_tab_name), null);
+			String[] tabListValues = SkyTubeApp.getStringArray(R.array.tab_list_values);
+
+			if(defaultTab == null) {
+				int defaultTabNum = Integer.parseInt(sp.getString(getString(R.string.pref_key_default_tab), "0"));
+				defaultTab = tabListValues[defaultTabNum];
+				sp.edit().putString(getString(R.string.pref_key_default_tab_name), tabListValues[defaultTabNum]).apply();
+			}
+
+			// Create a list of non-hidden fragments in order to default to the proper tab
+			Set<String> hiddenFragments = SkyTubeApp.getPreferenceManager().getStringSet(getString(R.string.pref_key_hide_tabs), new HashSet<>());
+			List<String> shownFragmentList = new ArrayList<>();
+			for(int i=0;i<tabListValues.length;i++) {
+				if(!hiddenFragments.contains(tabListValues[i]))
+					shownFragmentList.add(tabListValues[i]);
+			}
+			viewPager.setCurrentItem(shownFragmentList.indexOf(defaultTab));
 		}
 
 		// Set the current viewpager fragment as selected, as when the Activity is recreated, the Fragment
@@ -223,13 +250,22 @@ public class MainFragment extends FragmentEx {
 				DownloadedVideosDb.getVideoDownloadsDb().setListener(downloadedVideosFragment);
 			}
 
-			// add fragments to list:  do NOT forget to ***UPDATE*** @string/default_tab and @string/default_tab_values
+			Set<String> hiddenFragments = SkyTubeApp.getPreferenceManager().getStringSet(getString(R.string.pref_key_hide_tabs), new HashSet<>());
+
+			// add fragments to list:  do NOT forget to ***UPDATE*** @string/tab_list and @string/tab_list_values
 			videoGridFragmentsList.clear();
-			videoGridFragmentsList.add(featuredVideosFragment);
-			videoGridFragmentsList.add(mostPopularVideosFragment);
-			videoGridFragmentsList.add(subscriptionsFeedFragment);
-			videoGridFragmentsList.add(bookmarksFragment);
-			videoGridFragmentsList.add(downloadedVideosFragment);
+			if(!hiddenFragments.contains(FEATURED_VIDEOS_FRAGMENT))
+				videoGridFragmentsList.add(featuredVideosFragment);
+			if(!hiddenFragments.contains(MOST_POPULAR_VIDEOS_FRAGMENT))
+				videoGridFragmentsList.add(mostPopularVideosFragment);
+			if(!hiddenFragments.contains(SUBSCRIPTIONS_FEED_FRAGMENT))
+				videoGridFragmentsList.add(subscriptionsFeedFragment);
+			if(!hiddenFragments.contains(BOOKMARKS_FRAGMENT))
+				videoGridFragmentsList.add(bookmarksFragment);
+			if(!hiddenFragments.contains(DOWNLOADED_VIDEOS_FRAGMENT))
+				videoGridFragmentsList.add(downloadedVideosFragment);
+
+
 		}
 
 		@Override

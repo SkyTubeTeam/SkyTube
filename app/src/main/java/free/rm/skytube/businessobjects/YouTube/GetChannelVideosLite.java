@@ -57,9 +57,10 @@ public class GetChannelVideosLite extends GetYouTubeVideos implements GetChannel
 
 
 	@Override
-	public void setPublishedAfter(DateTime dateTime) {
-		if(activitiesList != null)
-			activitiesList.setPublishedAfter(dateTime);
+	public void setPublishedAfter(long timeInMs) {
+		if(activitiesList != null) {
+			activitiesList.setPublishedAfter(new DateTime(timeInMs));
+		}
 	}
 
 

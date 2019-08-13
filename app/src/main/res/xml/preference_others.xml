@@ -19,10 +19,16 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
 	<ListPreference
-		android:key="@string/pref_key_default_tab"
-		android:title="@string/pref_title_default_tab"
-		android:entries="@array/default_tab"
-		android:entryValues="@array/default_tab_values" />
+		android:key="@string/pref_key_default_tab_name"
+		android:title="@string/pref_title_default_tab" />
+
+	<MultiSelectListPreference
+		android:key="@string/pref_key_hide_tabs"
+		android:title="@string/pref_title_hide_tabs"
+		android:summary="@string/pref_summary_hide_tabs"
+		android:entries="@array/tab_list" />
+
+
 
 	<EditTextPreference
 		android:key="@string/pref_youtube_api_key"
@@ -48,9 +54,15 @@
 
 		<CheckBoxPreference
 			android:defaultValue="false"
-			android:key="pref_download_to_separate_directories"
+			android:key="@string/pref_key_download_to_separate_directories"
 			android:title="@string/pref_title_download_to_separate_directories"
 			android:summary="@string/pref_summary_download_to_separate_directories"/>
+
+		<Preference
+			android:title="@string/pref_title_video_download_folder"
+			android:key="@string/pref_key_video_download_folder"
+			android:summary="@string/pref_summary_video_download_folder"
+			/>
 
 	</PreferenceCategory>
 
