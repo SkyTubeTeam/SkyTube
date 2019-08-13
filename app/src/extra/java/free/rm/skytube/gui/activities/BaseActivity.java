@@ -59,6 +59,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import free.rm.skytube.BuildConfig;
 import free.rm.skytube.R;
+import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.ChromecastListener;
 import free.rm.skytube.businessobjects.GetVideoDetailsTask;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
@@ -164,9 +165,6 @@ public abstract class BaseActivity extends AppCompatActivity implements MainActi
 						.title(R.string.gps_missing_title)
 						.content(R.string.gps_missing_description)
 						.backgroundColorRes(R.color.colorPrimary)
-						.titleColorRes(R.color.textColorPrimary)
-						.contentColorRes(R.color.textColorPrimary)
-						.positiveColorRes(R.color.textColorPrimary)
 						.positiveText(R.string.ok)
 						.onPositive((dialog, which) -> {
 							SharedPreferences.Editor editor = preferences.edit();
