@@ -225,13 +225,13 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 
         showNotification();
 		/*progressDialog = new MaterialDialog.Builder(getActivity())
-						.title(R.string.fetching_subscription_videos)
-						.content(String.format(getContext().getString(R.string.fetched_videos_from_channels), numVideosFetched, numChannelsFetched, numChannelsSubscribed))
+						.title(R.string.fetching_subscription_videos)	.content(String.format(getContext().getString(R.string.fetched_videos_from_channels), numVideosFetched, numChannelsFetched, numChannelsSubscribed))
 						.progress(true, 0)
 						.backgroundColorRes(R.color.colorPrimary)
 						.titleColorRes(android.R.color.white)
 						.contentColorRes(android.R.color.white)
 						.build();
+
 		progressDialog.show();*/
     }
 
@@ -451,5 +451,4 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
         }
 
     }
-
 }
