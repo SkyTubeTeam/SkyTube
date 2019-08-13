@@ -40,7 +40,6 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import org.joda.time.DateTime;
 
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.OnClick;
 import free.rm.skytube.R;
