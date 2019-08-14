@@ -115,7 +115,8 @@ public abstract class FileDownloader implements Serializable, PermissionsActivit
 		DownloadManager.Request request = new DownloadManager.Request(remoteFileUri)
 				.setAllowedOverRoaming(allowedOverRoaming)
 				.setTitle(title)
-				.setDescription(description);
+				.setDescription(description)
+				.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
 
 		String videoDir = SkyTubeApp.getPreferenceManager().getString(SkyTubeApp.getStr(R.string.pref_key_video_download_folder), null);
 		if(videoDir != null) {

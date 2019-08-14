@@ -484,6 +484,10 @@ public class YouTubeVideo implements Serializable {
 	 *
 	 * @param listener Instance of {@link GetDesiredStreamListener} to pass the stream through.
 	 */
+	public void getDesiredStream(GetDesiredStreamListener listener, boolean forDownload) {
+		new GetVideoStreamTask(this, listener, forDownload).executeInParallel();
+	}
+
 	public void getDesiredStream(GetDesiredStreamListener listener) {
 		new GetVideoStreamTask(this, listener).executeInParallel();
 	}
@@ -560,7 +564,7 @@ public class YouTubeVideo implements Serializable {
 							String.format(getContext().getString(R.string.video_download_stream_error), getTitle()),
 							Toast.LENGTH_LONG).show();
 				}
-			});
+			}, true);
 		}
 	}
 

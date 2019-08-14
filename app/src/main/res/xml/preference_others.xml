@@ -64,6 +64,10 @@
 			android:summary="@string/pref_summary_video_download_folder"
 			/>
 
+		<ListPreference
+			android:key="@string/pref_key_video_download_preferred_resolution"
+			android:title="@string/pref_video_download_preferred_resolution_title" />
+
 	</PreferenceCategory>
 
 </PreferenceScreen>

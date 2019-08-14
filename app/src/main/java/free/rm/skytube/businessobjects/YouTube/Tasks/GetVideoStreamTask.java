@@ -31,10 +31,17 @@ public class GetVideoStreamTask extends AsyncTaskParallel<Void, Exception, Strea
 
     private YouTubeVideo youTubeVideo;
     private GetDesiredStreamListener listener;
+    private boolean forDownload = false;
 
     public GetVideoStreamTask(YouTubeVideo youTubeVideo, GetDesiredStreamListener listener) {
         this.youTubeVideo = youTubeVideo;
         this.listener = listener;
+    }
+
+    public GetVideoStreamTask(YouTubeVideo youTubeVideo, GetDesiredStreamListener listener, boolean forDownload) {
+        this.youTubeVideo = youTubeVideo;
+        this.listener = listener;
+        this.forDownload = forDownload;
     }
 
     @Override
@@ -54,7 +61,7 @@ public class GetVideoStreamTask extends AsyncTaskParallel<Void, Exception, Strea
             listener.onGetDesiredStreamError(streamMetaDataList.getErrorMessage());
         } else {
             // get the desired stream based on user preferences
-            StreamMetaData desiredStream = streamMetaDataList.getDesiredStream();
+            StreamMetaData desiredStream = streamMetaDataList.getDesiredStream(forDownload);
 
             listener.onGetDesiredStream(desiredStream);
         }

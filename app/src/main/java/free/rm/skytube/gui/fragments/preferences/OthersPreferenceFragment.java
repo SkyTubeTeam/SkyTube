@@ -39,6 +39,7 @@ import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.YouTube.ValidateYouTubeAPIKey;
+import free.rm.skytube.businessobjects.YouTube.VideoStream.VideoResolution;
 import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
 
 /**
@@ -52,6 +53,9 @@ public class OthersPreferenceFragment extends PreferenceFragment implements Shar
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.preference_others);
+
+		final SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
+		final SharedPreferences.Editor editor = pref.edit();
 
 		// Default tab
 		defaultTabPref = (ListPreference)findPreference(getString(R.string.pref_key_default_tab_name));
@@ -86,8 +90,7 @@ public class OthersPreferenceFragment extends PreferenceFragment implements Shar
 					.enableOptions(true)
 					.withResources(R.string.pref_popup_title_video_download_folder, R.string.ok, R.string.cancel)
 					.withChosenListener((dir, dirFile) -> {
-						SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-						SharedPreferences.Editor editor = pref.edit();
+
 						editor.putString(getString(R.string.pref_key_video_download_folder), dir);
 						editor.apply();
 						folderChooser.setSummary(getString(R.string.pref_summary_video_download_folder, dir));
@@ -96,12 +99,18 @@ public class OthersPreferenceFragment extends PreferenceFragment implements Shar
 					.show();
 			return true;
 		});
-		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
 		String dir = pref.getString(getString(R.string.pref_key_video_download_folder), null);
 		folderChooser.setSummary(getString(R.string.pref_summary_video_download_folder, dir != null ? dir : Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES)));
 
 		MultiSelectListPreference hiddenTabsPref = (MultiSelectListPreference)findPreference(getString(R.string.pref_key_hide_tabs));
 		hiddenTabsPref.setEntryValues(tabListValues);
+
+		ListPreference videoResolutionPref = (ListPreference)findPreference(getString(R.string.pref_key_video_download_preferred_resolution));
+		String preferredVideoResolution = pref.getString(getString(R.string.pref_key_video_download_preferred_resolution), null);
+		String preferredVideoResolutionName = preferredVideoResolution == null ? "" : VideoResolution.getAllVideoResolutionsNames()[Integer.parseInt(preferredVideoResolution)];
+		videoResolutionPref.setSummary(getString(R.string.pref_video_download_preferred_resolution_summary, preferredVideoResolutionName));
+		videoResolutionPref.setEntries(VideoResolution.getAllVideoResolutionsNames());
+		videoResolutionPref.setEntryValues(VideoResolution.getAllVideoResolutionsIds());
 
 //		ListPreference feedNotificationPref = (ListPreference) findPreference(getString(R.string.pref_feed_notification_key));
 //		if(feedNotificationPref.getValue() == null) {
@@ -153,9 +162,12 @@ public class OthersPreferenceFragment extends PreferenceFragment implements Shar
 						displayRestartDialog(R.string.pref_youtube_api_key_default);
 					}
 				}
-			} else if (key.equals(getString(R.string.pref_key_subscriptions_alphabetical_order))){
+			} else if (key.equals(getString(R.string.pref_key_subscriptions_alphabetical_order))) {
 				SubsAdapter subsAdapter = SubsAdapter.get(getActivity());
 				subsAdapter.refreshSubsList();
+			} else if (key.equals(getString(R.string.pref_key_video_download_preferred_resolution))) {
+				ListPreference videoResolutionPref = (ListPreference)findPreference(getString(R.string.pref_key_video_download_preferred_resolution));
+				videoResolutionPref.setSummary(getString(R.string.pref_video_download_preferred_resolution_summary, videoResolutionPref.getEntry()));
 			}/*else if (key.equals(getString(R.string.pref_feed_notification_key))) {
 				ListPreference feedNotificationPref = (ListPreference) findPreference(key);
 				feedNotificationPref.setSummary(String.format(getString(R.string.pref_summary_feed_notification), feedNotificationPref.getEntry()));
