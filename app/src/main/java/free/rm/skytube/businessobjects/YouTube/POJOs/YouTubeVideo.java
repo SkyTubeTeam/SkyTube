@@ -499,7 +499,23 @@ public class YouTubeVideo extends CardData implements Serializable {
 		if (file.exists()) {
 			file.delete();
 		}
+		if (SkyTubeApp.getSettings().isDownloadToSeparateFolders()) {
+			removeParentFolderIfEmpty(file);
+		}
 		DownloadedVideosDb.getVideoDownloadsDb().remove(YouTubeVideo.this);
+	}
+
+	private void removeParentFolderIfEmpty(File file) {
+		File parentFile = file.getParentFile();
+		if (parentFile.exists() && parentFile.isDirectory()) {
+			String[] fileList = parentFile.list();
+			if (fileList != null) {
+				if (fileList.length == 0) {
+					// that was the last file in the directory, remove it
+					parentFile.delete();
+				}
+			}
+		}
 	}
 
 
