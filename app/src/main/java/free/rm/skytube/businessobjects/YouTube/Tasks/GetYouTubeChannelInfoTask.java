@@ -22,12 +22,15 @@ import android.widget.Toast;
 
 import java.io.IOException;
 
+import org.schabi.newpipe.extractor.exceptions.ExtractionException;
+
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.GetChannelsDetails;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannelInterface;
+import free.rm.skytube.businessobjects.YouTube.VideoStream.NewPipeService;
 
 /**
  * A task that given a channel ID it will try to initialize and return {@link YouTubeChannel}.
@@ -55,19 +58,26 @@ public class GetYouTubeChannelInfoTask extends AsyncTaskParallel<String, Void, Y
 
 	@Override
 	protected YouTubeChannel doInBackground(String... channelId) {
-		YouTubeChannel channel;
 
 		try {
-			if(usingUsername)
-				channel = new GetChannelsDetails().getYouTubeChannelFromUsername(channelId[0]);
-			else
-				channel = new GetChannelsDetails().getYouTubeChannel(channelId[0]);
-		} catch (IOException e) {
+			if(usingUsername) {
+				return new GetChannelsDetails().getYouTubeChannelFromUsername(channelId[0]);
+			} else {
+				return getChannelById(channelId[0]);
+			}
+		} catch (IOException | ExtractionException e) {
 			Logger.e(this, "Unable to get channel info.  ChannelID=" + channelId[0], e);
-			channel = null;
 		}
 
-		return channel;
+		return null;
+	}
+
+	private YouTubeChannel getChannelById(String channelId) throws IOException, ExtractionException {
+		if (NewPipeService.isPreferred()) {
+			return NewPipeService.get().getChannelDetails(channelId);
+		} else {
+			return new GetChannelsDetails().getYouTubeChannel(channelId);
+		}
 	}
 
 
