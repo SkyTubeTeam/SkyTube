@@ -23,6 +23,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document.OutputSettings;
+import org.jsoup.safety.Whitelist;
 import org.schabi.newpipe.extractor.InfoItem;
 import org.schabi.newpipe.extractor.ListExtractor.InfoItemsPage;
 import org.schabi.newpipe.extractor.ServiceList;
@@ -108,7 +111,7 @@ public class NewPipeService {
         String channelName = channelExtractor.getName();
 
         List<YouTubeVideo> result = extract(fullChannelId, channelName, initialPage);
-        Logger.i(this, "getChannelVideos for %s -> %s", channelId, result);
+        Logger.i(this, "getChannelVideos for %s(%s)  -> %s videos", channelName, channelId, result.size());
         return result;
     }
 
@@ -131,12 +134,18 @@ public class NewPipeService {
         String dateStr = extractor.getUploadDate();
         try {
             Date publishDate = new SimpleDateFormat("yyyy-MM-dd").parse(dateStr);
-            return new YouTubeVideo(extractor.getId(), extractor.getName(), extractor.getDescription(),
+            return new YouTubeVideo(extractor.getId(), extractor.getName(), filterHtml(extractor.getDescription()),
                     extractor.getLength(), extractor.getLikeCount(), extractor.getDislikeCount(),
                     extractor.getViewCount(), publishDate, extractor.getThumbnailUrl());
         } catch (ParseException e) {
             throw new ExtractionException("Unable parse publish date:" + dateStr + " for video=" + videoId, e);
         }
+    }
+
+    private String filterHtml(String htmlContent) {
+        String result = Jsoup.clean(htmlContent, "", Whitelist.none(), new OutputSettings().prettyPrint(false));
+        Logger.i(this, "filterHtml %s -> %s", htmlContent, result);
+        return result;
     }
 
     public List<YouTubeVideo> getSearchResult(String query, String token) throws ExtractionException, IOException {
