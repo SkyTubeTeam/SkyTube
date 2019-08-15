@@ -46,6 +46,7 @@ import org.schabi.newpipe.extractor.stream.VideoStream;
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.Logger;
+import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 
 public class NewPipeService {
@@ -99,12 +100,7 @@ public class NewPipeService {
     }
 
     public List<YouTubeVideo> getChannelVideos(String channelId) throws ExtractionException, IOException {
-        // Get channel LinkHandler
-        ListLinkHandler channelLink = streamingService.getChannelLHFactory().fromId("channel/" + channelId);
-
-        // Extract from it
-        ChannelExtractor channelExtractor = streamingService.getChannelExtractor(channelLink);
-        channelExtractor.fetchPage();
+        ChannelExtractor channelExtractor = getChannelExtractor(channelId);
 
         InfoItemsPage<StreamInfoItem> initialPage = channelExtractor.getInitialPage();
         String fullChannelId = channelExtractor.getId();
@@ -113,6 +109,26 @@ public class NewPipeService {
         List<YouTubeVideo> result = extract(fullChannelId, channelName, initialPage);
         Logger.i(this, "getChannelVideos for %s(%s)  -> %s videos", channelName, channelId, result.size());
         return result;
+    }
+
+    public YouTubeChannel getChannelDetails(String channelId) throws ExtractionException, IOException {
+	ChannelExtractor extractor = getChannelExtractor(channelId);
+        String fullChannelId = extractor.getId();
+        String channelName = extractor.getName();
+        YouTubeChannel channel = new YouTubeChannel(fullChannelId, channelName, filterHtml(extractor.getDescription()), 
+            extractor.getAvatarUrl(), extractor.getBannerUrl(), extractor.getSubscriberCount(), false, 0);
+        channel.getYouTubeVideos().addAll(extract(fullChannelId, channelName, extractor.getInitialPage()));
+        return channel;
+    }
+    private ChannelExtractor getChannelExtractor(String channelId)
+	    throws ParsingException, ExtractionException, IOException {
+	// Get channel LinkHandler
+        ListLinkHandler channelLink = streamingService.getChannelLHFactory().fromId("channel/" + channelId);
+
+        // Extract from it
+        ChannelExtractor channelExtractor = streamingService.getChannelExtractor(channelLink);
+        channelExtractor.fetchPage();
+	return channelExtractor;
     }
 
     private List<YouTubeVideo> extract(String channelId, String channelName, InfoItemsPage<StreamInfoItem> initialPage)
