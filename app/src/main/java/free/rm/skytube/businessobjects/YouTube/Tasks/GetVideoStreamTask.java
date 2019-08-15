@@ -29,14 +29,9 @@ import free.rm.skytube.businessobjects.interfaces.GetDesiredStreamListener;
  */
 public class GetVideoStreamTask extends AsyncTaskParallel<Void, Exception, StreamMetaDataList> {
 
-    private YouTubeVideo youTubeVideo;
-    private GetDesiredStreamListener listener;
-    private boolean forDownload = false;
-
-    public GetVideoStreamTask(YouTubeVideo youTubeVideo, GetDesiredStreamListener listener) {
-        this.youTubeVideo = youTubeVideo;
-        this.listener = listener;
-    }
+    private final YouTubeVideo youTubeVideo;
+    private final GetDesiredStreamListener listener;
+    private final boolean forDownload;
 
     public GetVideoStreamTask(YouTubeVideo youTubeVideo, GetDesiredStreamListener listener, boolean forDownload) {
         this.youTubeVideo = youTubeVideo;
@@ -53,7 +48,6 @@ public class GetVideoStreamTask extends AsyncTaskParallel<Void, Exception, Strea
 
         return streamMetaDataList;
     }
-
 
     @Override
     protected void onPostExecute(StreamMetaDataList streamMetaDataList) {
