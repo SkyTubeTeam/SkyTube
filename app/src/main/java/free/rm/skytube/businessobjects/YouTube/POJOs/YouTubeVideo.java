@@ -489,7 +489,7 @@ public class YouTubeVideo implements Serializable {
 	}
 
 	public void getDesiredStream(GetDesiredStreamListener listener) {
-		new GetVideoStreamTask(this, listener).executeInParallel();
+		getDesiredStream(listener, false);
 	}
 
 
