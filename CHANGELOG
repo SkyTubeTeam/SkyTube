@@ -1,3 +1,13 @@
+v2.963 - 17 Aug 2019
+        * Add preference to set custom video download folder
+	* Using com.github.hedzr:android-file-chooser package for file dialogs, instead of com.github.angads25:filepicker
+	* Fix subscription refresh bugs - do not start multiple refresh concurrently
+	* Add scroll to top of list when clicking on current tab
+	* Added Preference to show/hide tabs
+	* Make sure Google Play Services is installed before attempting to support Chromecast
+	* Added Preference to select video download quality
+	* Updated French translations.
+
 v2.962 - 06 Aug 2019:
 	* Add a new Youtube API key, re-use the old keys for F-Droid.
 	* Updated German and Hungarian translations.
