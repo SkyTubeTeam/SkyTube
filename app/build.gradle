@@ -106,7 +106,7 @@ dependencies {
     implementation 'com.afollestad.material-dialogs:core:0.9.5.0'
     implementation 'com.google.android.exoplayer:exoplayer:2.8.2'
     implementation 'com.klinkerapps:link_builder:1.6.1'
-    implementation 'org.jsoup:jsoup:1.9.2'
+    implementation 'org.jsoup:jsoup:1.12.1'
     implementation (group: 'com.optimaize.languagedetector', name: 'language-detector', version: '0.6') {
         exclude group: 'com.google.guava', module: 'guava'
     }
