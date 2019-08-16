@@ -90,8 +90,8 @@ dependencies {
     testImplementation 'junit:junit:4.12'
 
     // YouTube modules
-    implementation 'com.google.http-client:google-http-client-android:1.30.2'
-    implementation 'com.google.apis:google-api-services-youtube:v3-rev20190513-1.30.1'
+    implementation 'com.google.http-client:google-http-client-android:1.31.0'
+    implementation 'com.google.apis:google-api-services-youtube:v3-rev20190722-1.30.1'
     implementation 'com.github.TeamNewPipe.NewPipeExtractor:extractor:5f65788a2f89e'
 
     // other modules
@@ -104,7 +104,7 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation group: 'joda-time', name: 'joda-time', version: '2.10.3'
     implementation 'com.afollestad.material-dialogs:core:0.9.5.0'
-    implementation 'com.google.android.exoplayer:exoplayer:2.8.2'
+    implementation 'com.google.android.exoplayer:exoplayer:2.9.6'
     implementation 'com.klinkerapps:link_builder:1.6.1'
     implementation 'org.jsoup:jsoup:1.12.1'
     implementation (group: 'com.optimaize.languagedetector', name: 'language-detector', version: '0.6') {
