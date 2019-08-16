@@ -52,6 +52,10 @@ import free.rm.skytube.gui.fragments.PlaylistVideosFragment;
  * party Android apps.
  */
 public class ClickableLinksTextView extends LinkConsumableTextView {
+	public static final Pattern videoPattern = Pattern.compile("http(?:s?):\\/\\/(?:www\\.)?youtu(?:be\\.com\\/watch\\?v=|\\.be\\/)([\\w\\-\\_]*)(&(amp;)?[\\w\\?=\\.]*)?");
+	public static final Pattern playlistPattern = Pattern.compile("^.*(youtu.be\\/|list=)([^#\\&\\?]*).*");
+	public static final Pattern channelPattern = Pattern.compile("(?:https|http)\\:\\/\\/(?:[\\w]+\\.)?youtube\\.com\\/(?:c\\/|channel\\/|user\\/)?([a-zA-Z0-9\\-]{1,})");
+
 
 	public ClickableLinksTextView(Context context) {
 		super(context);
@@ -88,9 +92,6 @@ public class ClickableLinksTextView extends LinkConsumableTextView {
 	 */
 	private void linkify() {
 		Link link = new Link(android.util.Patterns.WEB_URL);
-		final Pattern videoPattern = Pattern.compile("http(?:s?):\\/\\/(?:www\\.)?youtu(?:be\\.com\\/watch\\?v=|\\.be\\/)([\\w\\-\\_]*)(&(amp;)?[\\w\\?=\\.]*)?");
-		final Pattern playlistPattern = Pattern.compile("^.*(youtu.be\\/|list=)([^#\\&\\?]*).*");
-		final Pattern channelPattern = Pattern.compile("(?:https|http)\\:\\/\\/(?:[\\w]+\\.)?youtube\\.com\\/(?:c\\/|channel\\/|user\\/)?([a-zA-Z0-9\\-]{1,})");
 
 		// set the on click listener
 		link.setOnClickListener(clickedText -> {

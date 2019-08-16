@@ -437,16 +437,21 @@ public class YouTubeVideo implements Serializable {
 		return isLiveStream;
 	}
 
-	public void bookmarkVideo(Context context, Menu menu) {
+	public boolean bookmarkVideo(Context context) {
+		return bookmarkVideo(context, null);
+	}
+
+	public boolean bookmarkVideo(Context context, Menu menu) {
 		boolean successBookmark = BookmarksDb.getBookmarksDb().add(this);
 		Toast.makeText(context,
 				successBookmark ? R.string.video_bookmarked : R.string.video_bookmarked_error,
 				Toast.LENGTH_LONG).show();
 
-		if (successBookmark) {
+		if (successBookmark && menu != null) {
 			menu.findItem(R.id.bookmark_video).setVisible(false);
 			menu.findItem(R.id.unbookmark_video).setVisible(true);
 		}
+		return successBookmark;
 	}
 
 	public void unbookmarkVideo(Context context, Menu menu) {
