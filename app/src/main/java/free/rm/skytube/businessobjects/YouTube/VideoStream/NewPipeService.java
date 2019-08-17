@@ -114,11 +114,10 @@ public class NewPipeService {
         ChannelExtractor channelExtractor = getChannelExtractor(channelId);
 
         InfoItemsPage<StreamInfoItem> initialPage = channelExtractor.getInitialPage();
-        String fullChannelId = channelExtractor.getId();
-        String channelName = channelExtractor.getName();
+        YouTubeChannel channel = createInternalChannel(channelExtractor);
 
-        List<YouTubeVideo> result = extract(fullChannelId, channelName, initialPage);
-        Logger.i(this, "getChannelVideos for %s(%s)  -> %s videos", channelName, channelId, result.size());
+        List<YouTubeVideo> result = extract(channel, initialPage);
+        Logger.i(this, "getChannelVideos for %s(%s)  -> %s videos", channel.getTitle(), channelId, result.size());
         return result;
     }
 
@@ -131,12 +130,14 @@ public class NewPipeService {
      */
     public YouTubeChannel getChannelDetails(String channelId) throws ExtractionException, IOException {
         ChannelExtractor extractor = getChannelExtractor(channelId);
-        String fullChannelId = extractor.getId();
-        String channelName = extractor.getName();
-        YouTubeChannel channel = new YouTubeChannel(fullChannelId, channelName, filterHtml(extractor.getDescription()), 
-            extractor.getAvatarUrl(), extractor.getBannerUrl(), extractor.getSubscriberCount(), false, 0);
-        channel.getYouTubeVideos().addAll(extract(fullChannelId, channelName, extractor.getInitialPage()));
+        YouTubeChannel channel = createInternalChannel(extractor);
+        channel.getYouTubeVideos().addAll(extract(channel, extractor.getInitialPage()));
         return channel;
+    }
+
+    private YouTubeChannel createInternalChannel(ChannelExtractor extractor) throws ParsingException {
+        return new YouTubeChannel(extractor.getId(), extractor.getName(), filterHtml(extractor.getDescription()),
+                extractor.getAvatarUrl(), extractor.getBannerUrl(), extractor.getSubscriberCount(), false, 0);
     }
 
     private ChannelExtractor getChannelExtractor(String channelId)
@@ -150,7 +151,7 @@ public class NewPipeService {
         return channelExtractor;
     }
 
-    private List<YouTubeVideo> extract(String channelId, String channelName, InfoItemsPage<StreamInfoItem> initialPage)
+    private List<YouTubeVideo> extract(YouTubeChannel channel, InfoItemsPage<StreamInfoItem> initialPage)
             throws ParsingException {
         List<YouTubeVideo> result = new ArrayList<>(initialPage.getItems().size());
         LinkHandlerFactory linkHandlerFactory = streamingService.getStreamLHFactory();
@@ -160,9 +161,11 @@ public class NewPipeService {
             try {
                 publishDate = getPublishDate(item.getUploadDate());
             } catch (ParseException e) {
-                Logger.i(this, "Unable parse publish date %s(%s)  -> %s", channelName, channelId, item.getUploadDate());
+                Logger.i(this, "Unable parse publish date %s(%s)  -> %s", channel.getTitle(), channel.getId(), item.getUploadDate());
             }
-            result.add(new YouTubeVideo(id, item.getName(), null, item.getDuration(), item.getViewCount(), publishDate, item.getThumbnailUrl()));
+            YouTubeVideo video = new YouTubeVideo(id, item.getName(), null, item.getDuration(), item.getViewCount(), publishDate, item.getThumbnailUrl());
+            video.setChannel(channel);
+            result.add(video);
         }
         return result;
     }
