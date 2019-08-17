@@ -156,7 +156,13 @@ public class NewPipeService {
         LinkHandlerFactory linkHandlerFactory = streamingService.getStreamLHFactory();
         for (StreamInfoItem item:initialPage.getItems()) {
             String id = linkHandlerFactory.getId(item.getUrl());
-            result.add(new YouTubeVideo(id, item, channelId, channelName));
+            Long publishDate = null;
+            try {
+                publishDate = getPublishDate(item.getUploadDate());
+            } catch (ParseException e) {
+                Logger.i(this, "Unable parse publish date %s(%s)  -> %s", channelName, channelId, item.getUploadDate());
+            }
+            result.add(new YouTubeVideo(id, item.getName(), null, item.getDuration(), item.getViewCount(), publishDate, item.getThumbnailUrl()));
         }
         return result;
     }
@@ -175,18 +181,30 @@ public class NewPipeService {
 
         String dateStr = extractor.getUploadDate();
         try {
-            Date publishDate = new SimpleDateFormat("yyyy-MM-dd").parse(dateStr);
             return new YouTubeVideo(extractor.getId(), extractor.getName(), filterHtml(extractor.getDescription()),
-                    extractor.getLength(), extractor.getLikeCount(), extractor.getDislikeCount(),
-                    extractor.getViewCount(), publishDate, extractor.getThumbnailUrl());
+                    extractor.getLength(),
+                    extractor.getViewCount(), getPublishDate(dateStr), extractor.getThumbnailUrl()).setLikeDislikeCount(extractor.getLikeCount(), extractor.getDislikeCount());
         } catch (ParseException e) {
             throw new ExtractionException("Unable parse publish date:" + dateStr + " for video=" + videoId, e);
         }
     }
 
+    private long getPublishDate(String dateStr) throws ParseException {
+        Date publishDate = new SimpleDateFormat("yyyy-MM-dd").parse(dateStr);
+        // TODO: publish date is not accurate - as only date precision is available
+        // So it's more convenient, if the upload date happened in this day, we just assume, that it happened a minute
+        // ago, so new videos appear in a better order in the Feed fragment.
+        final long now = System.currentTimeMillis();
+        if (publishDate.getTime() > (now - (24 * 3600 * 1000))) {
+            return now - 60000;
+        } else {
+            return publishDate.getTime();
+        }
+    }
+
     private String filterHtml(String htmlContent) {
         String result = Jsoup.clean(htmlContent, "", Whitelist.none(), new OutputSettings().prettyPrint(false));
-        Logger.i(this, "filterHtml %s -> %s", htmlContent, result);
+        Logger.d(this, "filterHtml %s -> %s", htmlContent, result);
         return result;
     }
 
