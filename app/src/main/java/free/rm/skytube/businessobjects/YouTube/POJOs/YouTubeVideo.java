@@ -214,10 +214,6 @@ public class YouTubeVideo implements Serializable {
 		setThumbsUpPercentage(likeCount, dislikeCount);
 	}
 
-        public YouTubeVideo(String id, StreamInfoItem channelItem, String channelId, String channelName) throws ParsingException {
-            this(id, channelItem, channelId, channelName, channelItem.getViewCount(), channelItem.getDuration());
-        }
-
         public YouTubeVideo(String id, InfoItem channelItem, String channelId, String channelName, long viewCount, long duration) throws ParsingException {
             this.id = id;
             this.title = channelItem.getName();
@@ -228,26 +224,23 @@ public class YouTubeVideo implements Serializable {
             this.channel = new YouTubeChannel(channelId, channelName);
         }
 
-        public YouTubeVideo(String id, String title, String description, long durationInSeconds, long likeCount, long dislikeCount, long viewCount, Date uploadDate, String thumbnailUrl) {
+        public YouTubeVideo(String id, String title, String description, long durationInSeconds, long viewCount, Long uploadDate, String thumbnailUrl) {
             this.id = id;
             this.title = title;
             this.description = description;
             setDurationInSeconds((int) durationInSeconds);
-            this.setLikeDislikeCount(BigInteger.valueOf(likeCount), BigInteger.valueOf(dislikeCount));
             this.setViewCount(BigInteger.valueOf(viewCount));
-            // TODO: publish date is not accurate - as only date precision is available
-            // So it's more convenient, if the upload date happened in this day, we just assume, that it happened a minute
-            // ago, so new videos appear in a better order in the Feed fragment.
-            final long now = System.currentTimeMillis();
-            if (uploadDate.getTime() > (now - (24 * 3600 * 1000))) {
-                setPublishDate(new DateTime(now - 60000));
-            } else {
-                setPublishDate(new DateTime(uploadDate));
+            if (uploadDate != null) {
+                this.setPublishDate(new DateTime(uploadDate));
             }
             this.thumbnailMaxResUrl = thumbnailUrl;
             this.thumbnailUrl = thumbnailUrl;
         }
 
+        public YouTubeVideo setLikeDislikeCount(long likeCount, long dislikeCount) {
+            this.setLikeDislikeCount(BigInteger.valueOf(likeCount), BigInteger.valueOf(dislikeCount));
+            return this;
+        }
 	/**
 	 * Extracts the video ID from the given video URL.
 	 *

@@ -444,7 +444,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 	public void saveChannelVideos(YouTubeChannel channel) {
 		Gson gson = new Gson();
 		for (YouTubeVideo video : channel.getYouTubeVideos()) {
-			if(!hasVideo(video)) {
+			if(video.getPublishDate() != null && !hasVideo(video)) {
 				ContentValues values = new ContentValues();
 				values.put(SubscriptionsVideosTable.COL_CHANNEL_ID, channel.getId());
 				values.put(SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID, video.getId());
@@ -460,13 +460,14 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 		Gson gson = new Gson();
 		SQLiteDatabase db = getWritableDatabase();
 		for (YouTubeVideo video : videos) {
-			ContentValues values = new ContentValues();
-			values.put(SubscriptionsVideosTable.COL_CHANNEL_ID, video.getChannelId());
-			values.put(SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID, video.getId());
-			values.put(SubscriptionsVideosTable.COL_YOUTUBE_VIDEO, gson.toJson(video).getBytes());
-			values.put(SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_DATE, video.getPublishDate().toString());
-
-			db.insert(SubscriptionsVideosTable.TABLE_NAME, null, values);
+			if (video.getPublishDate() != null) {
+				ContentValues values = new ContentValues();
+				values.put(SubscriptionsVideosTable.COL_CHANNEL_ID, video.getChannelId());
+				values.put(SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID, video.getId());
+				values.put(SubscriptionsVideosTable.COL_YOUTUBE_VIDEO, gson.toJson(video).getBytes());
+				values.put(SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_DATE, video.getPublishDate().toString());
+				db.insert(SubscriptionsVideosTable.TABLE_NAME, null, values);
+			}
 		}
 	}
 	/**

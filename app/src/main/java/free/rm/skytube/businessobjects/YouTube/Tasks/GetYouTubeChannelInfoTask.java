@@ -31,6 +31,7 @@ import free.rm.skytube.businessobjects.YouTube.GetChannelsDetails;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannelInterface;
 import free.rm.skytube.businessobjects.YouTube.VideoStream.NewPipeService;
+import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 
 /**
  * A task that given a channel ID it will try to initialize and return {@link YouTubeChannel}.
@@ -74,7 +75,11 @@ public class GetYouTubeChannelInfoTask extends AsyncTaskParallel<String, Void, Y
 
 	private YouTubeChannel getChannelById(String channelId) throws IOException, ExtractionException {
 		if (NewPipeService.isPreferred()) {
-			return NewPipeService.get().getChannelDetails(channelId);
+			YouTubeChannel channel = NewPipeService.get().getChannelDetails(channelId);
+			if (channel != null) {
+				channel.setUserSubscribed(SubscriptionsDb.getSubscriptionsDb().isUserSubscribedToChannel(channelId));
+			}
+			return channel;
 		} else {
 			return new GetChannelsDetails().getYouTubeChannel(channelId);
 		}
