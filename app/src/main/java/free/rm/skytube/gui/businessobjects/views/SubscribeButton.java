@@ -18,15 +18,18 @@
 package free.rm.skytube.gui.businessobjects.views;
 
 import android.content.Context;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatButton;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.RemoteViews;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatButton;
+
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
+import free.rm.skytube.businessobjects.YouTube.Tasks.GetBulkChannelVideosTask;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetChannelVideosTask;
+import free.rm.skytube.businessobjects.YouTube.VideoStream.NewPipeService;
 import free.rm.skytube.businessobjects.db.Tasks.SubscribeToChannelTask;
 
 /**

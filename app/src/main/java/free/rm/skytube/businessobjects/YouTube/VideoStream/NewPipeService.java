@@ -16,13 +16,6 @@
  */
 package free.rm.skytube.businessobjects.YouTube.VideoStream;
 
-import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document.OutputSettings;
 import org.jsoup.safety.Whitelist;
@@ -42,6 +35,13 @@ import org.schabi.newpipe.extractor.stream.StreamExtractor;
 import org.schabi.newpipe.extractor.stream.StreamInfo;
 import org.schabi.newpipe.extractor.stream.StreamInfoItem;
 import org.schabi.newpipe.extractor.stream.VideoStream;
+
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
@@ -173,7 +173,7 @@ public class NewPipeService {
     /**
      * Return detailed information about a video from it's id.
      * @param videoId the id of the video.
-     * @return a {@link YoutTubeVideo}
+     * @return a {@link YouTubeVideo}
      * @throws ExtractionException
      * @throws IOException
      */

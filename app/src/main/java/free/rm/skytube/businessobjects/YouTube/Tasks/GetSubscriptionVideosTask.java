@@ -17,11 +17,12 @@
 
 package free.rm.skytube.businessobjects.YouTube.Tasks;
 
+import android.content.SharedPreferences;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import android.content.SharedPreferences;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
@@ -56,7 +57,7 @@ public class GetSubscriptionVideosTask extends AsyncTaskParallel<Void, Void, Voi
 	/**
 	 * Update the feeds' last update time to the current time.
 	 */
-	private void updateFeedsLastUpdateTime() {
+	public static void updateFeedsLastUpdateTime() {
 		updateFeedsLastUpdateTime(System.currentTimeMillis());
 	}
 

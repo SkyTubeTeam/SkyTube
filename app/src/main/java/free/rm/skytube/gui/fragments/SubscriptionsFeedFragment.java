@@ -24,16 +24,16 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.afollestad.materialdialogs.MaterialDialog;
 
-import org.joda.time.DateTime;
-
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -398,7 +398,7 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 	}
 
 	public void refreshFeedFromCache() {
-		new RefreshFeedFromCacheTask().executeInParallel();
+		new RefreshFeedFromCacheTask(this).executeInParallel();
 	}
 
 	private AsyncTaskParallel<?,?,?> getRefreshTask(List<YouTubeChannel> totalChannels) {
@@ -413,7 +413,12 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 	 * A task that refreshes the subscriptions feed by getting published videos currently cached in
 	 * the local database.
 	 */
-	private class RefreshFeedFromCacheTask extends AsyncTaskParallel<Void, Void, List<YouTubeVideo>> {
+	private static class RefreshFeedFromCacheTask extends AsyncTaskParallel<Void, Void, List<YouTubeVideo>> {
+		private WeakReference<SubscriptionsFeedFragment> subscriptionsFeedFragment;
+
+		public RefreshFeedFromCacheTask(SubscriptionsFeedFragment subscriptionsFeedFragment) {
+			this.subscriptionsFeedFragment = new WeakReference<>(subscriptionsFeedFragment);
+		}
 
 		@Override
 		protected List<YouTubeVideo> doInBackground(Void... params) {
@@ -422,8 +427,13 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 
 		@Override
 		protected void onPostExecute(List<YouTubeVideo> youTubeVideos) {
-			videoGridAdapter.setList(youTubeVideos);
-			setupUiAccordingToNumOfSubbedChannels(youTubeVideos.size());
+			SubscriptionsFeedFragment fragment = subscriptionsFeedFragment.get();
+
+			if(fragment == null || fragment.getActivity().isFinishing())
+				return;
+
+			fragment.videoGridAdapter.setList(youTubeVideos);
+			fragment.setupUiAccordingToNumOfSubbedChannels(youTubeVideos.size());
 		}
 
 	}
