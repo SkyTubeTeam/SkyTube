@@ -207,7 +207,6 @@ public class NewPipeService {
 
     private String filterHtml(String htmlContent) {
         String result = Jsoup.clean(htmlContent, "", Whitelist.none(), new OutputSettings().prettyPrint(false));
-        Logger.d(this, "filterHtml %s -> %s", htmlContent, result);
         return result;
     }
 
