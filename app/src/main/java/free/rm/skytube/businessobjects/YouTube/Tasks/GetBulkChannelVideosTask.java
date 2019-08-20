@@ -29,11 +29,9 @@ public class GetBulkChannelVideosTask extends AsyncTaskParallel<Void, Void, List
         Set<String> alreadyKnownVideos = SubscriptionsDb.getSubscriptionsDb().getSubscribedChannelVideos();
         List<YouTubeVideo> newVideos = fetchVideos(alreadyKnownVideos, channel);
         List<YouTubeVideo> detailedList = new ArrayList<>();
-        Logger.d(this, "666 Fetching videos for %s", channel.getTitle());
         if (!newVideos.isEmpty()) {
             for (YouTubeVideo vid:newVideos) {
                 YouTubeVideo details;
-                Logger.d(this, "666 %s got %d videos", channel.getTitle(), newVideos.size());
                 try {
                     details = NewPipeService.get().getDetails(vid.getId());
                     details.setChannel(vid.getChannel());
@@ -67,7 +65,6 @@ public class GetBulkChannelVideosTask extends AsyncTaskParallel<Void, Void, List
             Predicate<YouTubeVideo> predicate = video -> alreadyKnownVideos.contains(video.getId());
             // If we found a video which is already added to the db, no need to check the videos after,
             // assume, they are older, and already seen
-            Logger.d(this, "666 %s has %d videos", channel.getTitle(), videos.size());
             predicate.removeAfter(videos);
             return videos;
         } catch (ExtractionException | IOException e) {
