@@ -214,7 +214,7 @@ public class YouTubeVideo implements Serializable {
 		setThumbsUpPercentage(likeCount, dislikeCount);
 	}
 
-        public YouTubeVideo(String id, InfoItem channelItem, String channelId, String channelName, long viewCount, long duration) throws ParsingException {
+        public YouTubeVideo(String id, InfoItem channelItem, String channelId, String channelName, long duration, long viewCount) throws ParsingException {
             this.id = id;
             this.title = channelItem.getName();
             this.thumbnailUrl = channelItem.getThumbnailUrl();
@@ -224,7 +224,7 @@ public class YouTubeVideo implements Serializable {
             this.channel = new YouTubeChannel(channelId, channelName);
         }
 
-        public YouTubeVideo(String id, String title, String description, long durationInSeconds, long viewCount, Long uploadDate, String thumbnailUrl) {
+        public YouTubeVideo(String id, String title, String description, long durationInSeconds, YouTubeChannel channel, long viewCount, Long uploadDate, String thumbnailUrl) {
             this.id = id;
             this.title = title;
             this.description = description;
@@ -235,6 +235,7 @@ public class YouTubeVideo implements Serializable {
             }
             this.thumbnailMaxResUrl = thumbnailUrl;
             this.thumbnailUrl = thumbnailUrl;
+            this.channel = channel;
         }
 
         public YouTubeVideo setLikeDislikeCount(long likeCount, long dislikeCount) {

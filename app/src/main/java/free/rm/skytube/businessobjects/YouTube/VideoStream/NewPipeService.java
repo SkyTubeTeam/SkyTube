@@ -163,8 +163,7 @@ public class NewPipeService {
             } catch (ParseException e) {
                 Logger.i(this, "Unable parse publish date %s(%s)  -> %s", channel.getTitle(), channel.getId(), item.getUploadDate());
             }
-            YouTubeVideo video = new YouTubeVideo(id, item.getName(), null, item.getDuration(), item.getViewCount(), publishDate, item.getThumbnailUrl());
-            video.setChannel(channel);
+            YouTubeVideo video = new YouTubeVideo(id, item.getName(), null, item.getDuration(), channel, item.getViewCount(), publishDate, item.getThumbnailUrl());
             result.add(video);
         }
         return result;
@@ -184,9 +183,11 @@ public class NewPipeService {
 
         String dateStr = extractor.getUploadDate();
         try {
-            return new YouTubeVideo(extractor.getId(), extractor.getName(), filterHtml(extractor.getDescription()),
-                    extractor.getLength(),
-                    extractor.getViewCount(), getPublishDate(dateStr), extractor.getThumbnailUrl()).setLikeDislikeCount(extractor.getLikeCount(), extractor.getDislikeCount());
+            YouTubeVideo video = new YouTubeVideo(extractor.getId(), extractor.getName(), filterHtml(extractor.getDescription()),
+                    extractor.getLength(), new YouTubeChannel(extractor.getUploaderUrl(), extractor.getUploaderName()),
+                    extractor.getViewCount(), getPublishDate(dateStr), extractor.getThumbnailUrl());
+            video.setLikeDislikeCount(extractor.getLikeCount(), extractor.getDislikeCount());
+            return video;
         } catch (ParseException e) {
             throw new ExtractionException("Unable parse publish date:" + dateStr + " for video=" + videoId, e);
         }
@@ -225,7 +226,7 @@ public class NewPipeService {
             if (item instanceof StreamInfoItem) {
                 StreamInfoItem si = (StreamInfoItem) item;
                 String id = linkHandlerFactory.getId(item.getUrl());
-                result.add(new YouTubeVideo(id, item, si.getUploaderUrl(), si.getUploaderName(), si.getViewCount(), si.getDuration()));
+                result.add(new YouTubeVideo(id, item, si.getUploaderUrl(), si.getUploaderName(), si.getDuration(), si.getViewCount()));
             }
         }
         return result;
