@@ -40,7 +40,6 @@ import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
 public class GetSubscribedChannelsTask extends AsyncTaskParallel<Void, Void, List<YouTubeChannel>> {
 
 	private SubsAdapter adapter;
-	private View progressBar;
 	/** Set to true if the user wants channels to be sorted alphabetically (as set in the
 	 * preference). */
 	private final boolean sortChannelsAlphabetically;
@@ -48,17 +47,9 @@ public class GetSubscribedChannelsTask extends AsyncTaskParallel<Void, Void, Lis
 	private static final String TAG = GetSubscribedChannelsTask.class.getSimpleName();
 
 
-	public GetSubscribedChannelsTask(SubsAdapter adapter, View progressBar) {
+	public GetSubscribedChannelsTask(SubsAdapter adapter) {
 		this.adapter = adapter;
-		this.progressBar = progressBar;
 		this.sortChannelsAlphabetically = SkyTubeApp.getPreferenceManager().getBoolean(SkyTubeApp.getStr(R.string.pref_key_subscriptions_alphabetical_order), false);
-	}
-
-
-	@Override
-	protected void onPreExecute() {
-		if (progressBar != null)
-			progressBar.setVisibility(View.VISIBLE);
 	}
 
 
@@ -100,10 +91,6 @@ public class GetSubscribedChannelsTask extends AsyncTaskParallel<Void, Void, Lis
 
 	@Override
 	protected void onPostExecute(List<YouTubeChannel> subbedChannelsList) {
-		if (progressBar != null) {
-			progressBar.setVisibility(View.INVISIBLE);
-			progressBar = null;
-		}
 
 		if (subbedChannelsList == null) {
 			Toast.makeText(adapter.getContext(), R.string.error_get_subbed_channels, Toast.LENGTH_LONG).show();
