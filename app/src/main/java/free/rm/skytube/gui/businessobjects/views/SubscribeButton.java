@@ -26,7 +26,9 @@ import android.widget.RemoteViews;
 
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
+import free.rm.skytube.businessobjects.YouTube.Tasks.GetBulkSubscriptionVideosTask;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetChannelVideosTask;
+import free.rm.skytube.businessobjects.YouTube.VideoStream.NewPipeService;
 import free.rm.skytube.businessobjects.db.Tasks.SubscribeToChannelTask;
 
 /**
@@ -58,7 +60,11 @@ public class SubscribeButton extends AppCompatButton implements View.OnClickList
 		}
 		// Only fetch videos for this channel if fetchChannelVideosOnSubscribe is true AND the channel is not subscribed to yet.
 		if(fetchChannelVideosOnSubscribe && !isUserSubscribed) {
-			new GetChannelVideosTask(channel).executeInParallel();
+			if (NewPipeService.isPreferred()) {
+				new GetBulkSubscriptionVideosTask(channel, null).executeInParallel();
+			} else {
+				new GetChannelVideosTask(channel).executeInParallel();
+			}
 		}
 		if(channel != null)
 			new SubscribeToChannelTask(SubscribeButton.this, channel).executeInParallel();

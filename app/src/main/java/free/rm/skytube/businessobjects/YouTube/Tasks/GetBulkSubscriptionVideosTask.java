@@ -47,11 +47,15 @@ public class GetBulkSubscriptionVideosTask extends AsyncTaskParallel<Void, GetBu
             this.dbChannel = dbChannel;
             this.newVideos = newVideos;
         }
-        
     }
+
     private final GetSubscriptionVideosTaskListener listener;
     private final List<YouTubeChannel> channels;
     private final SubscriptionsDb subscriptionsDb;
+
+    public GetBulkSubscriptionVideosTask(YouTubeChannel channel, GetSubscriptionVideosTaskListener listener) {
+        this(Collections.singletonList(channel), listener);
+    }
 
     public GetBulkSubscriptionVideosTask(List<YouTubeChannel> channels, GetSubscriptionVideosTaskListener listener) {
         this.listener = listener;
@@ -70,7 +74,7 @@ public class GetBulkSubscriptionVideosTask extends AsyncTaskParallel<Void, GetBu
                     YouTubeVideo details;
                     try {
                         details = NewPipeService.get().getDetails(vid.getId());
-                        details.setChannel(vid.getChannel());
+                        details.setChannel(dbChannel);
                         detailedList.add(details);
                     } catch (ExtractionException | IOException e) {
                         Logger.e(this, "Error during parsing video page for " + vid.getId() + ",msg:" + e.getMessage(), e);
@@ -87,13 +91,17 @@ public class GetBulkSubscriptionVideosTask extends AsyncTaskParallel<Void, GetBu
 
     @Override
     protected void onPostExecute(Boolean changed) {
-        listener.onAllChannelVideosFetched(changed);
+        if (listener != null) {
+            listener.onAllChannelVideosFetched(changed);
+        }
     }
 
     @Override
     protected void onProgressUpdate(Progress... values) {
-        for (Progress p : values) {
-            listener.onChannelVideosFetched(p.dbChannel, p.newVideos, false);
+        if (listener != null) {
+            for (Progress p : values) {
+                listener.onChannelVideosFetched(p.dbChannel, p.newVideos, false);
+            }
         }
     }
 
