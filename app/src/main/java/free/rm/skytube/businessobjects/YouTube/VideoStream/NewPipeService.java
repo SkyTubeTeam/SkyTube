@@ -37,6 +37,7 @@ import org.schabi.newpipe.extractor.exceptions.ParsingException;
 import org.schabi.newpipe.extractor.linkhandler.LinkHandler;
 import org.schabi.newpipe.extractor.linkhandler.LinkHandlerFactory;
 import org.schabi.newpipe.extractor.linkhandler.ListLinkHandler;
+import org.schabi.newpipe.extractor.linkhandler.ListLinkHandlerFactory;
 import org.schabi.newpipe.extractor.search.SearchExtractor;
 import org.schabi.newpipe.extractor.stream.StreamExtractor;
 import org.schabi.newpipe.extractor.stream.StreamInfo;
@@ -142,13 +143,23 @@ public class NewPipeService {
 
     private ChannelExtractor getChannelExtractor(String channelId)
             throws ParsingException, ExtractionException, IOException {
-        // Get channel LinkHandler
-        ListLinkHandler channelLink = streamingService.getChannelLHFactory().fromId("channel/" + channelId);
-
         // Extract from it
-        ChannelExtractor channelExtractor = streamingService.getChannelExtractor(channelLink);
+        ChannelExtractor channelExtractor = streamingService.getChannelExtractor(getListLinkHandler(channelId));
         channelExtractor.fetchPage();
         return channelExtractor;
+    }
+
+    private ListLinkHandler getListLinkHandler(String channelId) throws ParsingException {
+        // Get channel LinkHandler, handle two cases:
+        // 1, channelId=UCbx1TZgxfIauUZyPuBzEwZg
+        // 2, channelId=https://www.youtube.com/channel/UCbx1TZgxfIauUZyPuBzEwZg
+        ListLinkHandlerFactory channelLHFactory = streamingService.getChannelLHFactory();
+        try {
+            return channelLHFactory.fromUrl(channelId);
+        } catch (ParsingException p) {
+            Logger.d(this, "Unable to parse channel url=%s", channelId);
+        }
+        return channelLHFactory.fromId("channel/" + channelId);
     }
 
     private List<YouTubeVideo> extract(YouTubeChannel channel, InfoItemsPage<StreamInfoItem> initialPage)
