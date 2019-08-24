@@ -95,10 +95,9 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 
 	private static void addNewColumns(SQLiteDatabase db) {
 		for (String addColumn : SubscriptionsTable.getAddColumns()) {
-            db.execSQL(addColumn);
-        }
+			db.execSQL(addColumn);
+		}
 	}
-
 
 	/**
 	 * Saves the given channel into the subscriptions DB.
@@ -262,13 +261,13 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 			YouTubeChannel channel = null;
 
 			if (cursor.moveToNext()) {
-				final int       colChannelIdNum = cursor.getColumnIndexOrThrow(SubscriptionsTable.COL_CHANNEL_ID);
-				final int       colTitle = cursor.getColumnIndexOrThrow(SubscriptionsTable.COL_TITLE);
-				final int       colDescription = cursor.getColumnIndexOrThrow(SubscriptionsTable.COL_DESCRIPTION);
-				final int       colBanner = cursor.getColumnIndexOrThrow(SubscriptionsTable.COL_BANNER_URL);
-				final int       colThumbnail = cursor.getColumnIndexOrThrow(SubscriptionsTable.COL_THUMBNAIL_NORMAL_URL);
-				final int       colSubscribers = cursor.getColumnIndexOrThrow(SubscriptionsTable.COL_SUBSCRIBER_COUNT);
-				final int       colLastVisit = cursor.getColumnIndexOrThrow(SubscriptionsTable.COL_LAST_VISIT_TIME);
+				final int	   colChannelIdNum = cursor.getColumnIndexOrThrow(SubscriptionsTable.COL_CHANNEL_ID);
+				final int	   colTitle = cursor.getColumnIndexOrThrow(SubscriptionsTable.COL_TITLE);
+				final int	   colDescription = cursor.getColumnIndexOrThrow(SubscriptionsTable.COL_DESCRIPTION);
+				final int	   colBanner = cursor.getColumnIndexOrThrow(SubscriptionsTable.COL_BANNER_URL);
+				final int	   colThumbnail = cursor.getColumnIndexOrThrow(SubscriptionsTable.COL_THUMBNAIL_NORMAL_URL);
+				final int	   colSubscribers = cursor.getColumnIndexOrThrow(SubscriptionsTable.COL_SUBSCRIBER_COUNT);
+				final int	   colLastVisit = cursor.getColumnIndexOrThrow(SubscriptionsTable.COL_LAST_VISIT_TIME);
 
 				final String id = cursor.getString(colChannelIdNum);
 				channel = new YouTubeChannel(id, cursor.getString(colTitle),
@@ -489,38 +488,70 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 							new String[]{SubscriptionsVideosTable.COL_YOUTUBE_VIDEO},
 							null, null, null, null,
 							SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_DATE + " DESC");
-		List<YouTubeVideo> videos = new ArrayList<>();
-
-		if (cursor.moveToNext()) {
-			final Gson gson = new Gson();
-			do {
-				final byte[]    blob = cursor.getBlob(cursor.getColumnIndex(SubscriptionsVideosTable.COL_YOUTUBE_VIDEO));
-				final String    videoJson = new String(blob);
-
-				// convert JSON into YouTubeVideo
-				YouTubeVideo video = gson.fromJson(videoJson, YouTubeVideo.class);
-
-				// due to upgrade to YouTubeVideo (by changing channel{Id,Name} to YouTubeChannel)
-				// from version 2.82 to 2.90
-				if (video.getChannel() == null) {
-					try {
-						JSONObject videoJsonObj = new JSONObject(videoJson);
-						final String channelId   = videoJsonObj.get("channelId").toString();
-						final String channelName = videoJsonObj.get("channelName").toString();
-						video.setChannel(new YouTubeChannel(channelId, channelName));
-					} catch (JSONException e) {
-						Logger.e(this, "Error occurred while extracting channel{Id,Name} from JSON", e);
-					}
-				}
-				// regenerate the video's PublishDatePretty (e.g. 5 hours ago)
-				video.forceRefreshPublishDatePretty();
-				// add the video to the list
-				videos.add(video);
-			} while(cursor.moveToNext());
-		}
-
-		cursor.close();
-		return videos;
+		return extractVideos(cursor);
 	}
+
+    /**
+     * Query the database to retrieve number of videos for subscribed channels starting from the given video.
+     * @return a list of {@link YouTubeVideo}
+     */
+    public List<YouTubeVideo> getSubscriptionVideoPage(int limit, String videoId, long beforeTimestamp) {
+        final String selection;
+        final String[] selectionArguments;
+        if (videoId != null) {
+            selection = "(" + SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_DATE + " < ?) OR (" + SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_DATE + " = ? AND " + SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID + " > ?)";
+            String formatted = new DateTime(beforeTimestamp).toString();
+            selectionArguments = new String[]{ formatted, formatted, videoId };
+        } else {
+            selection = null;
+            selectionArguments = null;
+        }
+        Cursor	cursor = getReadableDatabase().query(
+            SubscriptionsVideosTable.TABLE_NAME,
+            new String[]{SubscriptionsVideosTable.COL_YOUTUBE_VIDEO},
+            selection, selectionArguments, null, null,
+            SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_DATE + " DESC, " + SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID + " ASC",
+            String.valueOf(limit));
+        return extractVideos(cursor);
+    }
+
+    private List<YouTubeVideo> extractVideos(Cursor cursor) {
+        List<YouTubeVideo> videos = new ArrayList<>();
+        try {
+
+            if (cursor.moveToNext()) {
+                final Gson gson = new Gson();
+                do {
+                    final byte[] blob = cursor
+                            .getBlob(cursor.getColumnIndex(SubscriptionsVideosTable.COL_YOUTUBE_VIDEO));
+                    final String videoJson = new String(blob);
+
+                    // convert JSON into YouTubeVideo
+                    YouTubeVideo video = gson.fromJson(videoJson, YouTubeVideo.class);
+
+                    // due to upgrade to YouTubeVideo (by changing channel{Id,Name} to
+                    // YouTubeChannel)
+                    // from version 2.82 to 2.90
+                    if (video.getChannel() == null) {
+                        try {
+                            JSONObject videoJsonObj = new JSONObject(videoJson);
+                            final String channelId = videoJsonObj.get("channelId").toString();
+                            final String channelName = videoJsonObj.get("channelName").toString();
+                            video.setChannel(new YouTubeChannel(channelId, channelName));
+                        } catch (JSONException e) {
+                            Logger.e(this, "Error occurred while extracting channel{Id,Name} from JSON", e);
+                        }
+                    }
+                    // regenerate the video's PublishDatePretty (e.g. 5 hours ago)
+                    video.forceRefreshPublishDatePretty();
+                    // add the video to the list
+                    videos.add(video);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            cursor.close();
+        }
+        return videos;
+    }
 
 }
