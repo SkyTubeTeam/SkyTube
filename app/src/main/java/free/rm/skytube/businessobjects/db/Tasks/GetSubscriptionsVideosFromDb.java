@@ -30,17 +30,28 @@ import free.rm.skytube.businessobjects.db.SubscriptionsDb;
  */
 public class GetSubscriptionsVideosFromDb extends GetYouTubeVideos {
 
+    private String lastVideoId;
+    private long lastVideoPublishTimestamp;
+
 	@Override
-	public void init() throws IOException {
+	public synchronized void init() throws IOException {
 		noMoreVideoPages = false;
 	}
 
 
 	@Override
-	public List<YouTubeVideo> getNextVideos() {
+	public synchronized List<YouTubeVideo> getNextVideos() {
 		if (!noMoreVideoPages()) {
-			noMoreVideoPages = true;
-			return SubscriptionsDb.getSubscriptionsDb().getSubscriptionVideos();
+			List<YouTubeVideo> result = SubscriptionsDb.getSubscriptionsDb().getSubscriptionVideoPage(20, lastVideoId, lastVideoPublishTimestamp);
+			if (result.isEmpty()) {
+				noMoreVideoPages = true;
+				lastVideoId = null;
+			} else {
+				YouTubeVideo last = result.get(result.size() -1);
+				lastVideoId = last.getId();
+				lastVideoPublishTimestamp = last.getPublishDate().getValue();
+			}
+			return result;
 		}
 
 		return null;
@@ -52,4 +63,10 @@ public class GetSubscriptionsVideosFromDb extends GetYouTubeVideos {
 		return noMoreVideoPages;
 	}
 
+	@Override
+	public synchronized void reset() {
+		super.reset();
+		lastVideoId = null;
+		lastVideoPublishTimestamp = System.currentTimeMillis();
+	}
 }
