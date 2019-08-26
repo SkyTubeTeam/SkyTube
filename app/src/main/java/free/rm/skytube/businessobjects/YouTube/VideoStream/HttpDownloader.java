@@ -99,7 +99,7 @@ public class HttpDownloader implements Downloader {
              * See : https://github.com/rg3/youtube-dl/issues/5138
              */
 			if (con.getResponseCode() == 429) {
-				throw new ReCaptchaException("reCaptcha Challenge requested");
+				throw new ReCaptchaException("reCaptcha Challenge requested", con.getURL().toString());
 			}
 			throw new IOException(e);
 		} finally {
