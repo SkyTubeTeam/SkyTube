@@ -96,8 +96,4 @@ public class GetPlaylistVideos extends GetYouTubeVideos {
 		playlistItemsList.setPlaylistId(query);
 	}
 
-	@Override
-	public boolean noMoreVideoPages() {
-		return noMoreVideoPages;
-	}
 }

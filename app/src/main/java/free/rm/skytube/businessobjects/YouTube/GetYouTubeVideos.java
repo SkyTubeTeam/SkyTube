@@ -58,7 +58,9 @@ public abstract class GetYouTubeVideos {
 	/**
 	 * @return True if YouTube states that there will be no more video pages; false otherwise.
 	 */
-	public abstract boolean noMoreVideoPages();
+	public boolean noMoreVideoPages() {
+		return noMoreVideoPages;
+	}
 
 
 	/**
