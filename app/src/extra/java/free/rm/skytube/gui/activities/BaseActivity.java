@@ -387,6 +387,7 @@ public abstract class BaseActivity extends AppCompatActivity implements MainActi
 		@Override
 		public void onSessionStartFailed(Session session, int i) {
 			YouTubePlayer.setConnectingToChromecast(false);
+			hideLoadingSpinner();
 		}
 
 		@Override
@@ -402,6 +403,7 @@ public abstract class BaseActivity extends AppCompatActivity implements MainActi
 		@Override
 		public void onSessionResumeFailed(Session session, int i) {
 			YouTubePlayer.setConnectingToChromecast(false);
+			hideLoadingSpinner();
 		}
 	}
 
@@ -553,6 +555,14 @@ public abstract class BaseActivity extends AppCompatActivity implements MainActi
 	public void showLoadingSpinner() {
 		if(chromecastLoadingSpinner != null)
 			chromecastLoadingSpinner.setVisibility(View.VISIBLE);
+	}
+
+	/**
+	 * Hide the Chromecast Loading Spinner
+	 */
+	public void hideLoadingSpinner() {
+		if(chromecastLoadingSpinner != null)
+			chromecastLoadingSpinner.setVisibility(View.GONE);
 	}
 
 	/**

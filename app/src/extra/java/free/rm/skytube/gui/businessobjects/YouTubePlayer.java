@@ -104,7 +104,7 @@ public class YouTubePlayer {
 		if(connectingToChromecast) {
 			((ChromecastListener)context).showLoadingSpinner();
 			// In the process of connecting to a chromecast. Wait 500ms and try again
-			new Handler().postDelayed(() -> launchOnChromecast(youTubeVideo, context), 500);
+			new Handler().postDelayed(() -> launch(youTubeVideo, context), 500);
 		} else {
 			if (context instanceof ChromecastListener) {
 				final PlaybackStatusDb.VideoWatchedStatus status = PlaybackStatusDb.getPlaybackStatusDb().getVideoWatchedStatus(youTubeVideo);
