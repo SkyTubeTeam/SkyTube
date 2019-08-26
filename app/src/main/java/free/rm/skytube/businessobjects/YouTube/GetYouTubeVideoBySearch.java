@@ -127,9 +127,4 @@ public class GetYouTubeVideoBySearch extends GetYouTubeVideos {
 	}
 
 
-	@Override
-	public boolean noMoreVideoPages() {
-		return noMoreVideoPages;
-	}
-
 }

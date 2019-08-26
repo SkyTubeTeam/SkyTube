@@ -59,11 +59,6 @@ public class GetSubscriptionsVideosFromDb extends GetYouTubeVideos {
 
 
 	@Override
-	public boolean noMoreVideoPages() {
-		return noMoreVideoPages;
-	}
-
-	@Override
 	public synchronized void reset() {
 		super.reset();
 		lastVideoId = null;

@@ -112,12 +112,6 @@ public class GetFeaturedVideos extends GetYouTubeVideos {
 	}
 
 
-	@Override
-	public boolean noMoreVideoPages() {
-		return noMoreVideoPages;
-	}
-
-
 	/**
 	 * @return The maximum number of items that should be retrieved per YouTube query.
 	 */

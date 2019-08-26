@@ -44,9 +44,5 @@ public class GetBookmarksVideos extends GetYouTubeVideos {
 		return null;
 	}
 
-	@Override
-	public boolean noMoreVideoPages() {
-		return noMoreVideoPages;
-	}
 
 }

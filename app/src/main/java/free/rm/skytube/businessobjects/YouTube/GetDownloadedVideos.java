@@ -44,8 +44,4 @@ public class GetDownloadedVideos extends GetYouTubeVideos {
 		return null;
 	}
 
-	@Override
-	public boolean noMoreVideoPages() {
-		return noMoreVideoPages;
-	}
 }

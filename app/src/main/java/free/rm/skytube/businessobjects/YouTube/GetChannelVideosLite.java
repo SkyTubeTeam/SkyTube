@@ -133,9 +133,4 @@ public class GetChannelVideosLite extends GetYouTubeVideos implements GetChannel
 	}
 
 
-	@Override
-	public boolean noMoreVideoPages() {
-		return noMoreVideoPages;
-	}
-
 }
