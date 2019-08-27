@@ -224,16 +224,20 @@ public class YouTubeVideo implements Serializable {
             this.channel = new YouTubeChannel(channelId, channelName);
         }
 
-        public YouTubeVideo(String id, String title, String description, long durationInSeconds, YouTubeChannel channel, long viewCount, Long uploadDate, String thumbnailUrl) {
+        public YouTubeVideo(String id, String title, String description, long durationInSeconds, YouTubeChannel channel, long viewCount, Long publishDate, String publishDatePretty, String thumbnailUrl) {
             this.id = id;
             this.title = title;
             this.description = description;
             setDurationInSeconds((int) durationInSeconds);
             this.setViewCount(BigInteger.valueOf(viewCount));
-            if (uploadDate != null) {
-                this.setPublishDate(new DateTime(uploadDate));
+            if (publishDate != null) {
+                this.setPublishDate(new DateTime(publishDate));
+            } else if (publishDatePretty != null){
+                this.setPublishDatePretty(publishDatePretty);
+            } else {
+                this.setPublishDatePretty("???");
             }
-            this.thumbnailMaxResUrl = thumbnailUrl;
+            this .thumbnailMaxResUrl = thumbnailUrl;
             this.thumbnailUrl = thumbnailUrl;
             this.channel = channel;
         }
@@ -430,13 +434,21 @@ public class YouTubeVideo implements Serializable {
 	}
 
 	/**
+	 * Sets the publishDate and publishDatePretty.
+	 */
+	public void setPublishDatePretty(String publishDatePretty) {
+		this.publishDate = null;
+		this.publishDatePretty = publishDatePretty;
+	}
+
+	/**
 	 * Gets the {@link #publishDate} as a pretty string.
 	 */
 	public String getPublishDatePretty() {
 		long now = System.currentTimeMillis();
 		// if pretty is not yet calculated, or the publish date was generated more than (1 hour) PUBLISH_DATE_VALIDITY_TIME ago...
-		if (publishDatePretty == null || (PUBLISH_DATE_VALIDITY_TIME < now - publishDatePrettyCalculationTime)) {
-			this.publishDatePretty = (publishDate != null) ? new PrettyTimeEx().format(publishDate) : "???";
+		if (publishDatePretty == null || (publishDate != null && PUBLISH_DATE_VALIDITY_TIME < now - publishDatePrettyCalculationTime)) {
+			this.publishDatePretty = new PrettyTimeEx().format(publishDate);
 			this.publishDatePrettyCalculationTime = now;
 		}
 		return publishDatePretty;
@@ -448,7 +460,10 @@ public class YouTubeVideo implements Serializable {
 	 */
 	public void forceRefreshPublishDatePretty() {
 		// Will force the publishDatePretty to be regenerated.  Refer to getPublishDatePretty()
-		this.publishDatePretty = null;
+		if (publishDate != null) {
+			// only,when publishDate is set - so if only the 'pretty' is available, no refresh will occur.
+			this.publishDatePretty = null;
+		}
 	}
 
 	public String getThumbnailUrl() {

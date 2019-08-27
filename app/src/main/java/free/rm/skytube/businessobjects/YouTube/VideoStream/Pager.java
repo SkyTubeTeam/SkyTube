@@ -100,7 +100,7 @@ public class Pager {
                         item.getUploadDate());
             }
             YouTubeVideo video = new YouTubeVideo(id, item.getName(), null, item.getDuration(), channel,
-                    item.getViewCount(), publishDate, item.getThumbnailUrl());
+                    item.getViewCount(), publishDate, item.getUploadDate(), getThumbnailUrl(id));
             result.add(video);
         }
         return result;
