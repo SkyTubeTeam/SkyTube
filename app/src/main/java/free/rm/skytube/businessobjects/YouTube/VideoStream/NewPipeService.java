@@ -185,7 +185,7 @@ public class NewPipeService {
         try {
             YouTubeVideo video = new YouTubeVideo(extractor.getId(), extractor.getName(), filterHtml(extractor.getDescription()),
                     extractor.getLength(), new YouTubeChannel(extractor.getUploaderUrl(), extractor.getUploaderName()),
-                    extractor.getViewCount(), getPublishDate(dateStr), extractor.getThumbnailUrl());
+                    extractor.getViewCount(), getPublishDate(dateStr), dateStr, extractor.getThumbnailUrl());
             video.setLikeDislikeCount(extractor.getLikeCount(), extractor.getDislikeCount());
             return video;
         } catch (ParseException e) {
