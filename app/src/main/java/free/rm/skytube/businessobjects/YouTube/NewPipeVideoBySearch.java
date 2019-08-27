@@ -14,32 +14,28 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
- package free.rm.skytube.businessobjects.YouTube;
+package free.rm.skytube.businessobjects.YouTube;
 
 import java.io.IOException;
 
+import org.schabi.newpipe.extractor.InfoItem;
 import org.schabi.newpipe.extractor.exceptions.ExtractionException;
-import org.schabi.newpipe.extractor.stream.StreamInfoItem;
 
 import free.rm.skytube.businessobjects.YouTube.VideoStream.NewPipeService;
 import free.rm.skytube.businessobjects.YouTube.VideoStream.Pager;
 
-public class NewPipeChannelVideos extends NewPipeVideos<StreamInfoItem> implements GetChannelVideosInterface {
+public class NewPipeVideoBySearch extends NewPipeVideos<InfoItem> {
 
-    private String channelId;
+    private String query;
 
     @Override
-    public void setQuery(String channelId) {
-        this.channelId = channelId;
+    public void setQuery(String query) {
+        this.query = query;
     }
 
     @Override
-    public void setPublishedAfter(long timeInMs) {
-
+    protected Pager<InfoItem> createNewPager() throws ExtractionException, IOException {
+        return NewPipeService.get().getSearchResult(query);
     }
 
-    @Override
-    protected Pager<StreamInfoItem> createNewPager() throws ExtractionException, IOException {
-        return NewPipeService.get().getChannelPager(channelId);
-    }
 }

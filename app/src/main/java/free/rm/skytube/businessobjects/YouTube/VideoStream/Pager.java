@@ -17,20 +17,19 @@
 package free.rm.skytube.businessobjects.YouTube.VideoStream;
 
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.schabi.newpipe.extractor.StreamingService;
+import org.schabi.newpipe.extractor.InfoItem;
+import org.schabi.newpipe.extractor.ListExtractor;
 import org.schabi.newpipe.extractor.ListExtractor.InfoItemsPage;
-import org.schabi.newpipe.extractor.channel.ChannelExtractor;
+import org.schabi.newpipe.extractor.StreamingService;
 import org.schabi.newpipe.extractor.exceptions.ExtractionException;
 import org.schabi.newpipe.extractor.exceptions.ParsingException;
 import org.schabi.newpipe.extractor.linkhandler.LinkHandlerFactory;
 import org.schabi.newpipe.extractor.stream.StreamInfoItem;
 
-import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 
@@ -40,14 +39,14 @@ import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
  * @author zsombor
  *
  */
-public class Pager {
+public class Pager<I extends InfoItem> {
     private final StreamingService streamingService;
-    private final ChannelExtractor channelExtractor;
+    private final ListExtractor<I> channelExtractor;
     private final YouTubeChannel channel;
     private String nextPageUrl;
     private boolean hasNextPage = true;
 
-    Pager(StreamingService streamingService, ChannelExtractor channelExtractor, YouTubeChannel channel) {
+    Pager(StreamingService streamingService, ListExtractor<I> channelExtractor, YouTubeChannel channel) {
         this.streamingService = streamingService;
         this.channelExtractor = channelExtractor;
         this.channel = channel;
@@ -81,33 +80,29 @@ public class Pager {
         }
     }
 
-    private List<YouTubeVideo> process(InfoItemsPage<StreamInfoItem> page) throws ParsingException {
+    private List<YouTubeVideo> process(InfoItemsPage<I> page) throws ParsingException {
         nextPageUrl = page.getNextPageUrl();
         hasNextPage = nextPageUrl != null;
         return extract(page);
     }
 
-    private List<YouTubeVideo> extract(InfoItemsPage<StreamInfoItem> page) throws ParsingException {
+    private List<YouTubeVideo> extract(InfoItemsPage<I> page) throws ParsingException {
         List<YouTubeVideo> result = new ArrayList<>(page.getItems().size());
         LinkHandlerFactory linkHandlerFactory = streamingService.getStreamLHFactory();
-        for (StreamInfoItem item : page.getItems()) {
-            String id = linkHandlerFactory.getId(item.getUrl());
-            Long publishDate = null;
-            try {
-                publishDate = NewPipeService.getPublishDate(item.getUploadDate());
-            } catch (ParseException e) {
-                Logger.i(this, "Unable parse publish date %s(%s)  -> %s", channel.getTitle(), channel.getId(),
-                        item.getUploadDate());
+        for (I infoItem : page.getItems()) {
+            if (infoItem instanceof StreamInfoItem) {
+                result.add(convert((StreamInfoItem) infoItem, linkHandlerFactory));
             }
-            YouTubeVideo video = new YouTubeVideo(id, item.getName(), null, item.getDuration(), channel,
-                    item.getViewCount(), publishDate, item.getUploadDate(), getThumbnailUrl(id));
-            result.add(video);
         }
         return result;
     }
 
-    private String getThumbnailUrl(String id) {
-	Logger.d(this, "getThumbnailUrl  %s", id);
-        return "https://i.ytimg.com/vi/"+id+"/hqdefault.jpg";
+    private YouTubeVideo convert(StreamInfoItem item, LinkHandlerFactory linkHandlerFactory) throws ParsingException {
+        String id = linkHandlerFactory.getId(item.getUrl());
+        Long publishDate = NewPipeService.getPublishDateSafe(item.getUploadDate(), id);
+        YouTubeChannel ch = channel != null ? channel : new YouTubeChannel(item.getUploaderUrl(), item.getUploaderName());
+        return new YouTubeVideo(id, item.getName(), null, item.getDuration(), ch,
+                item.getViewCount(), publishDate, item.getUploadDate(), NewPipeService.getThumbnailUrl(id));
     }
+
 }
