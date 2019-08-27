@@ -24,7 +24,9 @@ import free.rm.skytube.businessobjects.YouTube.GetMostPopularVideos;
 import free.rm.skytube.businessobjects.YouTube.GetPlaylistVideos;
 import free.rm.skytube.businessobjects.YouTube.GetYouTubeVideoBySearch;
 import free.rm.skytube.businessobjects.YouTube.GetYouTubeVideos;
+import free.rm.skytube.businessobjects.YouTube.NewPipeVideoBySearch;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetChannelVideosTask;
+import free.rm.skytube.businessobjects.YouTube.VideoStream.NewPipeService;
 import free.rm.skytube.businessobjects.db.Tasks.GetSubscriptionsVideosFromDb;
 
 /**
@@ -66,23 +68,27 @@ public enum VideoCategory {
 	 * @return New instance of {@link GetYouTubeVideos}.
 	 */
 	public GetYouTubeVideos createGetYouTubeVideos() {
-		if (id == FEATURED.id)
+		if (id == FEATURED.id) {
 			return new GetFeaturedVideos();
-		else if (id == MOST_POPULAR.id)
+		} else if (id == MOST_POPULAR.id) {
 			return new GetMostPopularVideos();
-		else if (id == SEARCH_QUERY.id)
-			return new GetYouTubeVideoBySearch();
-		else if (id == CHANNEL_VIDEOS.id)
+		} else if (id == SEARCH_QUERY.id) {
+			if (NewPipeService.isPreferred()) {
+				return new NewPipeVideoBySearch();
+			} else {
+				return new GetYouTubeVideoBySearch();
+			}
+		} else if (id == CHANNEL_VIDEOS.id) {
 			return GetChannelVideosTask.createChannelVideosFetcher();
-		else if (id == SUBSCRIPTIONS_FEED_VIDEOS.id)
+		} else if (id == SUBSCRIPTIONS_FEED_VIDEOS.id) {
 			return new GetSubscriptionsVideosFromDb();
-		else if (id == BOOKMARKS_VIDEOS.id)
+		} else if (id == BOOKMARKS_VIDEOS.id) {
 			return new GetBookmarksVideos();
-		else if (id == PLAYLIST_VIDEOS.id)
+		} else if (id == PLAYLIST_VIDEOS.id) {
 			return new GetPlaylistVideos();
-		else if (id == DOWNLOADED_VIDEOS.id)
+		} else if (id == DOWNLOADED_VIDEOS.id) {
 			return new GetDownloadedVideos();
-
+		}
 		// this will notify the developer that he forgot to edit this method when a new type is added
 		throw new UnsupportedOperationException();
 	}

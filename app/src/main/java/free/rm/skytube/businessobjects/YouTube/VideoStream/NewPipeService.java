@@ -113,18 +113,17 @@ public class NewPipeService {
      * @throws IOException
      */
     public List<YouTubeVideo> getChannelVideos(String channelId) throws ExtractionException, IOException {
-        Pager pager = getChannelPager(channelId);
+        Pager<StreamInfoItem> pager = getChannelPager(channelId);
         List<YouTubeVideo> result = pager.getVideos();
         Logger.i(this, "getChannelVideos for %s(%s)  -> %s videos", pager.getChannel().getTitle(), channelId, result.size());
         return result;
     }
 
-    public Pager getChannelPager(String channelId) throws ParsingException, ExtractionException, IOException {
+    public Pager<StreamInfoItem> getChannelPager(String channelId) throws ParsingException, ExtractionException, IOException {
         ChannelExtractor channelExtractor = getChannelExtractor(channelId);
 
         YouTubeChannel channel = createInternalChannel(channelExtractor);
-        Pager pager = new Pager(streamingService, channelExtractor, channel);
-        return pager;
+        return new Pager<>(streamingService, channelExtractor, channel);
     }
 
     /**
@@ -136,7 +135,7 @@ public class NewPipeService {
      */
     public YouTubeChannel getChannelDetails(String channelId) throws ExtractionException, IOException {
         Objects.requireNonNull(channelId, "channelId");
-        Pager pager = getChannelPager(channelId);
+        Pager<StreamInfoItem> pager = getChannelPager(channelId);
         // get the channel, and add all the videos from the first page
         pager.getChannel().getYouTubeVideos().addAll(pager.getVideos());
         return pager.getChannel();
@@ -206,33 +205,33 @@ public class NewPipeService {
         }
     }
 
+    static Long getPublishDateSafe(String dateStr, String id) {
+        try {
+            return getPublishDate(dateStr);
+        } catch (ParseException e) {
+            Logger.i(NewPipeService.class, "Unable parse publish date for %s -> %s", id, dateStr);
+            return null;
+        }
+    }
+
+    static String getThumbnailUrl(String id) {
+        // Logger.d(NewPipeService.class, "getThumbnailUrl  %s", id);
+        return "https://i.ytimg.com/vi/" + id + "/hqdefault.jpg";
+    }
+
     private String filterHtml(String htmlContent) {
         String result = Jsoup.clean(htmlContent, "", Whitelist.none(), new OutputSettings().prettyPrint(false));
         Logger.d(this, "filterHtml %s -> %s", htmlContent, result);
         return result;
     }
 
-    public List<YouTubeVideo> getSearchResult(String query, String token) throws ExtractionException, IOException {
+    public Pager<InfoItem> getSearchResult(String query) throws ExtractionException, IOException {
         SearchExtractor extractor = streamingService.getSearchExtractor(query);
         extractor.fetchPage();
-        return extractSearchResult(extractor.getInitialPage());
+
+        return new Pager<>(streamingService, extractor, null);
     }
 
-    private List<YouTubeVideo> extractSearchResult(InfoItemsPage<InfoItem> initialPage)
-            throws ParsingException {
-        final List<YouTubeVideo> result = new ArrayList<>(initialPage.getItems().size());
-        LinkHandlerFactory linkHandlerFactory = streamingService.getStreamLHFactory();
-        for (InfoItem item:initialPage.getItems()) {
-            if (item instanceof StreamInfoItem) {
-                StreamInfoItem si = (StreamInfoItem) item;
-                String id = linkHandlerFactory.getId(item.getUrl());
-                result.add(new YouTubeVideo(id, item, si.getUploaderUrl(), si.getUploaderName(), si.getDuration(), si.getViewCount()));
-            }
-        }
-        return result;
-    }
-
-    
     /**
      * Given video ID it will return the video's page URL.
      *
