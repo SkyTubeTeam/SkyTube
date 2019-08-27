@@ -32,9 +32,11 @@ import free.rm.skytube.businessobjects.YouTube.GetChannelVideosFull;
 import free.rm.skytube.businessobjects.YouTube.GetChannelVideosInterface;
 import free.rm.skytube.businessobjects.YouTube.GetChannelVideosLite;
 import free.rm.skytube.businessobjects.YouTube.GetYouTubeVideos;
+import free.rm.skytube.businessobjects.YouTube.NewPipeChannelVideos;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPIKey;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
+import free.rm.skytube.businessobjects.YouTube.VideoStream.NewPipeService;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 
 /**
@@ -72,6 +74,9 @@ public class GetChannelVideosTask extends AsyncTaskParallel<Void, Void, List<You
 	 * {@link GetChannelVideosLite}.</p>
 	 */
 	public static GetYouTubeVideos createChannelVideosFetcher() {
+	    	if (NewPipeService.isPreferred()) {
+	    	    return new NewPipeChannelVideos();
+	    	}
 		if (YouTubeAPIKey.get().isUserApiKeySet()) {
 			Log.d(TAG, "Using GetChannelVideosFull...");
 			return new GetChannelVideosFull();

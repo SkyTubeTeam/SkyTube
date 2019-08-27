@@ -22,6 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document.OutputSettings;
@@ -112,14 +113,18 @@ public class NewPipeService {
      * @throws IOException
      */
     public List<YouTubeVideo> getChannelVideos(String channelId) throws ExtractionException, IOException {
+        Pager pager = getChannelPager(channelId);
+        List<YouTubeVideo> result = pager.getVideos();
+        Logger.i(this, "getChannelVideos for %s(%s)  -> %s videos", pager.getChannel().getTitle(), channelId, result.size());
+        return result;
+    }
+
+    public Pager getChannelPager(String channelId) throws ParsingException, ExtractionException, IOException {
         ChannelExtractor channelExtractor = getChannelExtractor(channelId);
 
-        InfoItemsPage<StreamInfoItem> initialPage = channelExtractor.getInitialPage();
         YouTubeChannel channel = createInternalChannel(channelExtractor);
-
-        List<YouTubeVideo> result = extract(channel, initialPage);
-        Logger.i(this, "getChannelVideos for %s(%s)  -> %s videos", channel.getTitle(), channelId, result.size());
-        return result;
+        Pager pager = new Pager(streamingService, channelExtractor, channel);
+        return pager;
     }
 
     /**
@@ -130,10 +135,11 @@ public class NewPipeService {
      * @throws IOException
      */
     public YouTubeChannel getChannelDetails(String channelId) throws ExtractionException, IOException {
-        ChannelExtractor extractor = getChannelExtractor(channelId);
-        YouTubeChannel channel = createInternalChannel(extractor);
-        channel.getYouTubeVideos().addAll(extract(channel, extractor.getInitialPage()));
-        return channel;
+        Objects.requireNonNull(channelId, "channelId");
+        Pager pager = getChannelPager(channelId);
+        // get the channel, and add all the videos from the first page
+        pager.getChannel().getYouTubeVideos().addAll(pager.getVideos());
+        return pager.getChannel();
     }
 
     private YouTubeChannel createInternalChannel(ChannelExtractor extractor) throws ParsingException {
@@ -143,6 +149,7 @@ public class NewPipeService {
 
     private ChannelExtractor getChannelExtractor(String channelId)
             throws ParsingException, ExtractionException, IOException {
+        Objects.requireNonNull(channelId, "channelId");
         // Extract from it
         ChannelExtractor channelExtractor = streamingService.getChannelExtractor(getListLinkHandler(channelId));
         channelExtractor.fetchPage();
@@ -160,24 +167,6 @@ public class NewPipeService {
             Logger.d(this, "Unable to parse channel url=%s", channelId);
         }
         return channelLHFactory.fromId("channel/" + channelId);
-    }
-
-    private List<YouTubeVideo> extract(YouTubeChannel channel, InfoItemsPage<StreamInfoItem> initialPage)
-            throws ParsingException {
-        List<YouTubeVideo> result = new ArrayList<>(initialPage.getItems().size());
-        LinkHandlerFactory linkHandlerFactory = streamingService.getStreamLHFactory();
-        for (StreamInfoItem item:initialPage.getItems()) {
-            String id = linkHandlerFactory.getId(item.getUrl());
-            Long publishDate = null;
-            try {
-                publishDate = getPublishDate(item.getUploadDate());
-            } catch (ParseException e) {
-                Logger.i(this, "Unable parse publish date %s(%s)  -> %s", channel.getTitle(), channel.getId(), item.getUploadDate());
-            }
-            YouTubeVideo video = new YouTubeVideo(id, item.getName(), null, item.getDuration(), channel, item.getViewCount(), publishDate, item.getThumbnailUrl());
-            result.add(video);
-        }
-        return result;
     }
 
     /**
@@ -204,7 +193,7 @@ public class NewPipeService {
         }
     }
 
-    private long getPublishDate(String dateStr) throws ParseException {
+    static long getPublishDate(String dateStr) throws ParseException {
         Date publishDate = new SimpleDateFormat("yyyy-MM-dd").parse(dateStr);
         // TODO: publish date is not accurate - as only date precision is available
         // So it's more convenient, if the upload date happened in this day, we just assume, that it happened a minute
