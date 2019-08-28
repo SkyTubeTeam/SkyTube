@@ -54,26 +54,4 @@
 		android:title="@string/pref_title_subscriptions_alphabetical_order"
 		android:summary="@string/pref_summary_subscriptions_alphabetical_order"/>
 
-
-	<PreferenceCategory
-		android:title="@string/pref_category_downloads">
-
-		<CheckBoxPreference
-			android:defaultValue="false"
-			android:key="@string/pref_key_download_to_separate_directories"
-			android:title="@string/pref_title_download_to_separate_directories"
-			android:summary="@string/pref_summary_download_to_separate_directories"/>
-
-		<Preference
-			android:title="@string/pref_title_video_download_folder"
-			android:key="@string/pref_key_video_download_folder"
-			android:summary="@string/pref_summary_video_download_folder"
-			/>
-
-		<ListPreference
-			android:key="@string/pref_key_video_download_preferred_resolution"
-			android:title="@string/pref_video_download_preferred_resolution_title" />
-
-	</PreferenceCategory>
-
 </PreferenceScreen>

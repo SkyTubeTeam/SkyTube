@@ -17,6 +17,8 @@
 
 package free.rm.skytube.businessobjects.YouTube.VideoStream;
 
+import android.preference.ListPreference;
+
 /**
  * Video resolution (e.g. 1080p).
  */
@@ -145,4 +147,13 @@ public enum VideoResolution {
 		return resStringList;
 	}
 
+	/**
+	 * Configures the given preference to list all video resolution.
+	 *
+	 * @param preference
+	 */
+	public static void setupListPreferences(ListPreference preference) {
+		preference.setEntries(VideoResolution.getAllVideoResolutionsNames());
+		preference.setEntryValues(VideoResolution.getAllVideoResolutionsIds());
+	}
 }
