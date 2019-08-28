@@ -82,35 +82,8 @@ public class OthersPreferenceFragment extends PreferenceFragment implements Shar
 		}
 		defaultTabPref.setSummary(String.format(getString(R.string.pref_summary_default_tab), defaultTabPref.getEntry()));
 
-		folderChooser = findPreference(getString(R.string.pref_key_video_download_folder));
-		folderChooser.setOnPreferenceClickListener(preference -> {
-			new ChooserDialog(OthersPreferenceFragment.this)
-					.withFilter(true, false)
-					.titleFollowsDir(true)
-					.enableOptions(true)
-					.withResources(R.string.pref_popup_title_video_download_folder, R.string.ok, R.string.cancel)
-					.withChosenListener((dir, dirFile) -> {
-
-						editor.putString(getString(R.string.pref_key_video_download_folder), dir);
-						editor.apply();
-						folderChooser.setSummary(getString(R.string.pref_summary_video_download_folder, dir));
-					})
-					.build()
-					.show();
-			return true;
-		});
-		String dir = pref.getString(getString(R.string.pref_key_video_download_folder), null);
-		folderChooser.setSummary(getString(R.string.pref_summary_video_download_folder, dir != null ? dir : Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES)));
-
 		MultiSelectListPreference hiddenTabsPref = (MultiSelectListPreference)findPreference(getString(R.string.pref_key_hide_tabs));
 		hiddenTabsPref.setEntryValues(tabListValues);
-
-		ListPreference videoResolutionPref = (ListPreference)findPreference(getString(R.string.pref_key_video_download_preferred_resolution));
-		String preferredVideoResolution = pref.getString(getString(R.string.pref_key_video_download_preferred_resolution), null);
-		String preferredVideoResolutionName = preferredVideoResolution == null ? "" : VideoResolution.getAllVideoResolutionsNames()[Integer.parseInt(preferredVideoResolution)];
-		videoResolutionPref.setSummary(getString(R.string.pref_video_download_preferred_resolution_summary, preferredVideoResolutionName));
-		videoResolutionPref.setEntries(VideoResolution.getAllVideoResolutionsNames());
-		videoResolutionPref.setEntryValues(VideoResolution.getAllVideoResolutionsIds());
 
 //		ListPreference feedNotificationPref = (ListPreference) findPreference(getString(R.string.pref_feed_notification_key));
 //		if(feedNotificationPref.getValue() == null) {
@@ -165,9 +138,6 @@ public class OthersPreferenceFragment extends PreferenceFragment implements Shar
 			} else if (key.equals(getString(R.string.pref_key_subscriptions_alphabetical_order))) {
 				SubsAdapter subsAdapter = SubsAdapter.get(getActivity());
 				subsAdapter.refreshSubsList();
-			} else if (key.equals(getString(R.string.pref_key_video_download_preferred_resolution))) {
-				ListPreference videoResolutionPref = (ListPreference)findPreference(getString(R.string.pref_key_video_download_preferred_resolution));
-				videoResolutionPref.setSummary(getString(R.string.pref_video_download_preferred_resolution_summary, videoResolutionPref.getEntry()));
 			}/*else if (key.equals(getString(R.string.pref_feed_notification_key))) {
 				ListPreference feedNotificationPref = (ListPreference) findPreference(key);
 				feedNotificationPref.setSummary(String.format(getString(R.string.pref_summary_feed_notification), feedNotificationPref.getEntry()));

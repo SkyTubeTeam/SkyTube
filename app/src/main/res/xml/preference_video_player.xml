@@ -50,22 +50,4 @@
 		android:summary="@string/pref_summary_enable_immersive_mode"
 		android:title="@string/pref_title_enable_immersive_mode" />
 
-	<!--
-		MOBILE NETWORK
-	-->
-	<PreferenceCategory
-		android:title="@string/pref_category_mobile_network">
-
-		<ListPreference
-			android:key="@string/pref_key_preferred_res_mobile"
-			android:title="@string/pref_title_preferred_res_mobile"
-			android:summary="@string/pref_summary_preferred_res_mobile"/>
-
-		<CheckBoxPreference
-			android:defaultValue="true"
-			android:key="@string/pref_key_warn_mobile_downloads"
-			android:title="@string/pref_title_warn_mobile_downloads"
-			android:summary="@string/pref_summary_warn_mobile_downloads"/>
-	</PreferenceCategory>
-
 </PreferenceScreen>

@@ -23,6 +23,7 @@ import free.rm.skytube.R;
 import free.rm.skytube.gui.businessobjects.preferences.ActionBarPreferenceActivity;
 import free.rm.skytube.gui.fragments.preferences.AboutPreferenceFragment;
 import free.rm.skytube.gui.fragments.preferences.BackupPreferenceFragment;
+import free.rm.skytube.gui.fragments.preferences.NetworkPreferenceFragment;
 import free.rm.skytube.gui.fragments.preferences.OthersPreferenceFragment;
 import free.rm.skytube.gui.fragments.preferences.PrivacyPreferenceFragment;
 import free.rm.skytube.gui.fragments.preferences.VideoBlockerPreferenceFragment;
@@ -44,6 +45,7 @@ public class PreferencesActivity extends ActionBarPreferenceActivity {
 			|| fragmentName.equals(VideoBlockerPreferenceFragment.class.getName())
 			|| fragmentName.equals(BackupPreferenceFragment.class.getName())
 			|| fragmentName.equals(OthersPreferenceFragment.class.getName())
+			|| fragmentName.equals(NetworkPreferenceFragment.class.getName())
 			|| fragmentName.equals(AboutPreferenceFragment.class.getName())
 			|| fragmentName.equals(PrivacyPreferenceFragment.class.getName()));
 	}
