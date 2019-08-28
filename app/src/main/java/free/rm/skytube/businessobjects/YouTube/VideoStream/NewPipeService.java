@@ -134,7 +134,7 @@ public class NewPipeService {
      * @throws IOException
      */
     public YouTubeChannel getChannelDetails(String channelId) throws ExtractionException, IOException {
-        Objects.requireNonNull(channelId, "channelId");
+        requireNonNull(channelId, "channelId");
         Pager<StreamInfoItem> pager = getChannelPager(channelId);
         // get the channel, and add all the videos from the first page
         pager.getChannel().getYouTubeVideos().addAll(pager.getVideos());
@@ -148,7 +148,7 @@ public class NewPipeService {
 
     private ChannelExtractor getChannelExtractor(String channelId)
             throws ParsingException, ExtractionException, IOException {
-        Objects.requireNonNull(channelId, "channelId");
+        requireNonNull(channelId, "channelId");
         // Extract from it
         ChannelExtractor channelExtractor = streamingService.getChannelExtractor(getListLinkHandler(channelId));
         channelExtractor.fetchPage();
@@ -248,6 +248,14 @@ public class NewPipeService {
             SkyTubeApp.initNewPipe();
         }
         return instance;
+    }
+
+
+    // TODO: Eliminate when API level 19 is used.
+    public static void requireNonNull(Object obj, String message) {
+        if (obj == null) {
+            throw new NullPointerException(message);
+        }
     }
 
     /**
