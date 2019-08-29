@@ -447,11 +447,11 @@ public class YouTubeVideo implements Serializable {
 	public String getPublishDatePretty() {
 		long now = System.currentTimeMillis();
 		// if pretty is not yet calculated, or the publish date was generated more than (1 hour) PUBLISH_DATE_VALIDITY_TIME ago...
-		if (publishDatePretty == null || (publishDate != null && PUBLISH_DATE_VALIDITY_TIME < now - publishDatePrettyCalculationTime)) {
+		if (publishDate != null && (publishDatePretty == null || PUBLISH_DATE_VALIDITY_TIME < now - publishDatePrettyCalculationTime)) {
 			this.publishDatePretty = new PrettyTimeEx().format(publishDate);
 			this.publishDatePrettyCalculationTime = now;
 		}
-		return publishDatePretty;
+		return publishDatePretty != null ? publishDatePretty : "???";
 	}
 
 	/**
