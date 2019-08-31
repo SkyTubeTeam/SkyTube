@@ -28,6 +28,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document.OutputSettings;
 import org.jsoup.safety.Whitelist;
 import org.schabi.newpipe.extractor.InfoItem;
+import org.schabi.newpipe.extractor.NewPipe;
 import org.schabi.newpipe.extractor.ListExtractor.InfoItemsPage;
 import org.schabi.newpipe.extractor.ServiceList;
 import org.schabi.newpipe.extractor.StreamingService;
@@ -44,6 +45,7 @@ import org.schabi.newpipe.extractor.stream.StreamExtractor;
 import org.schabi.newpipe.extractor.stream.StreamInfo;
 import org.schabi.newpipe.extractor.stream.StreamInfoItem;
 import org.schabi.newpipe.extractor.stream.VideoStream;
+import org.schabi.newpipe.extractor.utils.Localization;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
@@ -245,11 +247,19 @@ public class NewPipeService {
     public synchronized static NewPipeService get() {
         if (instance == null) {
             instance = new NewPipeService(ServiceList.YouTube);
-            SkyTubeApp.initNewPipe();
+            initNewPipe();
         }
         return instance;
     }
 
+    /**
+     * Initialize NewPipe with a custom HttpDownloader.
+     */
+    public static void initNewPipe() {
+        if (NewPipe.getDownloader() == null) {
+            NewPipe.init(new HttpDownloader(), new Localization("", "en"));
+        }
+    }
 
     // TODO: Eliminate when API level 19 is used.
     public static void requireNonNull(Object obj, String message) {
