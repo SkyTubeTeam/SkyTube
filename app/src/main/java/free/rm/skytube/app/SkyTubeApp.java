@@ -217,12 +217,4 @@ public class SkyTubeApp extends MultiDexApplication {
 		}
 	}
 
-	/**
-	 * Initialize NewPipe with a custom HttpDownloader.
-	 */
-	public static void initNewPipe() {
-		if (NewPipe.getDownloader() == null) {
-			NewPipe.init(new HttpDownloader(), null);
-		}
-	}
 }
