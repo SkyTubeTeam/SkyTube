@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="error_stream_err_unavailable">Не получается прочесть сообщение об ошибке.</string>
+<resources>
+	<string name="error_stream_err_unavailable">Не получается прочесть сообщение об ошибке.</string>
 	<string name="error_stream_decryption_fail">Не получается загрузить код расшифровки для сервиса YouTube.</string>
 	<string name="error_stream_parse_error">Ошибка чтения.</string>
 
@@ -9,6 +10,10 @@
 	<string name="error_get_video_desc">Ошибка во время загрузки описания видео.</string>
 	<string name="error_invalid_url">Неверная ссылка на видео: %s</string>
 
+	<string name="mobile_data">Мобильные данные</string>
+	<string name="warning_mobile_network_play">Устройство не подключено к Wi-Fi сети. Мы советуем всё же подключиться к ней, чтобы ограничить передачу мобильных данных. Продолжить проигрывать видео без подключения Wi-Fi\\?</string>
+	<string name="warning_mobile_network_disable">Больше не спрашивать.</string>
+	<string name="play_video">Проиграть видео</string>
 	<string name="warning_live_video">Не получается воспроизвести прямой эфир. Открыть прямой эфир в другом приложении?</string>
 
 	<string name="ratings_disabled">Рейтинг отключен</string>
@@ -22,6 +27,9 @@
 	<string name="copy_url">Скопировать ссылку</string>
 	<string name="url_copied_to_clipboard">Ссылка скопирована в буфер обмена.</string>
 
+	<string name="mark_watched">Пометить просмотренным</string>
+	<string name="mark_unwatched">Пометить непросмотренным</string>
+
 	<string name="error_get_comments">Ошибка во время загрузки комментариев к видео.</string>
 	<string name="no_video_comments">У видео нет комментариев или они отключены.</string>
 	<string name="view_replies">Посмотреть ответы</string>
@@ -32,13 +40,6 @@
 	<string name="cancel">Отмена</string>
 	<string name="clear">Очистить</string>
 
-	<string name="mark_watched">Пометить просмотренным</string>
-	<string name="mark_unwatched">Пометить непросмотренным</string>
-
 	<string name="should_resume">Вы хотите начать с того места, где вы остановились?</string>
 	<string name="resume">Возобновить</string>
-<string name="mobile_data">Мобильные данные</string>
-	<string name="warning_mobile_network_play">Устройство не подключено к Wi-Fi сети. Мы советуем всё же подключиться к ней, чтобы ограничить передачу мобильных данных. Продолжить проигрывать видео без подключения Wi-Fi\?</string>
-	<string name="warning_mobile_network_disable">Больше не спрашивать.</string>
-	<string name="play_video">Проиграть видео</string>
-	</resources>
+</resources>

@@ -1,5 +1,6 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="blocked_videos">Заблокированные видео</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="blocked_videos">Заблокированные видео</string>
 	<string name="no_videos_blocked">Заблокированных или выбранных для этого видео не нашлось. Хотите настроить Видео блокер?</string>
 	<string name="configure">Настроить</string>
 	<string name="block_channel">Заблокировать канал</string>
