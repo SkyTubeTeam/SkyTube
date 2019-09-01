@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="media_route_menu_title">Воспроизведение…</string>
+	<array name="cast_mini_controller_control_buttons">
+	</array>
+	<string name="gps_missing_title">Сервисы Google Play не найдены</string>
+	<string name="gps_missing_description">Для поддержки Chromecast необходимо установить Google Play Services. Посетите  <a href="https://opengapps.org/" >https://opengapps.org/</a> для установки Google Play Services.</string>
+</resources>
