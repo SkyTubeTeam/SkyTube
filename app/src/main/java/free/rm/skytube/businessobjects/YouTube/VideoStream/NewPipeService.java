@@ -257,7 +257,7 @@ public class NewPipeService {
      */
     public static void initNewPipe() {
         if (NewPipe.getDownloader() == null) {
-            NewPipe.init(new HttpDownloader(), new Localization("", "en"));
+            NewPipe.init(new HttpDownloader(), new Localization("GB", "en"));
         }
     }
 
