@@ -17,7 +17,24 @@
 
 package free.rm.skytube.businessobjects.db;
 
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
+
+import org.joda.time.DateTime;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -25,16 +42,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.joda.time.DateTime;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import com.google.gson.Gson;
-
-import android.content.ContentValues;
-import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.GetChannelsDetails;
@@ -57,8 +64,11 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 	private static final int DATABASE_VERSION = 3;
 	private static final String DATABASE_NAME = "subs.db";
 
+	private Gson gson;
+
 	private SubscriptionsDb(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
+		this.gson = createGson();
 	}
 
 
@@ -441,7 +451,6 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 	 * @param channel
 	 */
 	public void saveChannelVideos(YouTubeChannel channel) {
-		Gson gson = new Gson();
 		for (YouTubeVideo video : channel.getYouTubeVideos()) {
 			if(video.getPublishDate() != null && !hasVideo(video)) {
 				ContentValues values = new ContentValues();
@@ -456,7 +465,6 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 	}
 
 	public void saveVideos(List<YouTubeVideo> videos) {
-		Gson gson = new Gson();
 		SQLiteDatabase db = getWritableDatabase();
 		for (YouTubeVideo video : videos) {
 			if (video.getPublishDate() != null) {
@@ -515,12 +523,27 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
         return extractVideos(cursor);
     }
 
+    private Gson createGson() {
+    	return new GsonBuilder().registerTypeAdapter(YouTubeChannel.class, new JsonSerializer<YouTubeChannel>() {
+
+			@Override
+			public JsonElement serialize(YouTubeChannel src, Type typeOfSrc, JsonSerializationContext context) {
+				JsonObject obj = new JsonObject();
+				obj.addProperty("id", src.getId());
+				obj.addProperty("title", src.getTitle());
+				obj.addProperty("description", src.getDescription());
+				obj.addProperty("thumbnailNormalUrl", src.getThumbnailNormalUrl());
+				obj.addProperty("bannerUrl", src.getBannerUrl());
+				return obj;
+			}
+		}).create();
+	}
+
     private List<YouTubeVideo> extractVideos(Cursor cursor) {
         List<YouTubeVideo> videos = new ArrayList<>();
         try {
 
             if (cursor.moveToNext()) {
-                final Gson gson = new Gson();
                 do {
                     final byte[] blob = cursor
                             .getBlob(cursor.getColumnIndex(SubscriptionsVideosTable.COL_YOUTUBE_VIDEO));
