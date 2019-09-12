@@ -92,17 +92,17 @@ dependencies {
     testImplementation 'junit:junit:4.12'
 
     // YouTube modules
-    implementation 'com.google.http-client:google-http-client-android:1.31.0'
+    implementation 'com.google.http-client:google-http-client-android:1.32.0'
     implementation 'com.google.apis:google-api-services-youtube:v3-rev20190827-1.30.1'
-    implementation 'com.github.TeamNewPipe.NewPipeExtractor:extractor:ec3554a2ea'
+    implementation 'com.github.TeamNewPipe.NewPipeExtractor:extractor:0.17.3'
 
     // other modules
     implementation group: 'org.ocpsoft.prettytime', name: 'prettytime', version: '4.0.2.Final'
     implementation 'com.github.moraisigor:slidingdrawer:1.7.1'
-    implementation 'com.github.bumptech.glide:glide:4.9.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
-    implementation 'com.jakewharton:butterknife:10.1.0'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
+    implementation 'com.github.bumptech.glide:glide:4.10.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.10.0'
+    implementation 'com.jakewharton:butterknife:10.2.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.0'
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation group: 'joda-time', name: 'joda-time', version: '2.10.3'
     implementation 'com.afollestad.material-dialogs:core:0.9.5.0'
@@ -128,7 +128,7 @@ dependencies {
     // proprietary module
     extraImplementation files('libs/YouTubeAndroidPlayerApi.jar')
     extraImplementation 'com.android.support:mediarouter-v7:28.0.0'
-    extraImplementation 'com.google.android.gms:play-services-cast-framework:17.0.0'
+    extraImplementation 'com.google.android.gms:play-services-cast-framework:17.1.0'
     extraImplementation 'com.googlecode.android-query:android-query:0.25.9'
     extraImplementation 'com.sothree.slidinguppanel:library:3.4.0'
     extraImplementation 'com.github.rahatarmanahmed:circularprogressview:2.5.0'
