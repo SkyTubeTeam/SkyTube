@@ -26,13 +26,26 @@ public class SubscriptionsVideosTable {
 	public static final String COL_YOUTUBE_VIDEO_ID = "YouTube_Video_Id";
 	public static final String COL_YOUTUBE_VIDEO = "YouTube_Video";
 	public static final String COL_YOUTUBE_VIDEO_DATE = "YouTube_Video_Date";
+	public static final String COL_RETRIEVAL_TS = "Retrieval_Timestamp";
+	public static final String COL_PUBLISH_TS = "Publish_Timestamp";
+
+	private static final String ADD_COLUMN = "ALTER TABLE " + TABLE_NAME + " ADD COLUMN ";
 
 	public static String getCreateStatement() {
 		return "CREATE TABLE " + TABLE_NAME + " (" +
 						COL_YOUTUBE_VIDEO_ID + " TEXT PRIMARY KEY NOT NULL, " +
 						COL_CHANNEL_ID + " TEXT NOT NULL, " +
 						COL_YOUTUBE_VIDEO + " BLOB, " +
-						COL_YOUTUBE_VIDEO_DATE + " TIMESTAMP DEFAULT (strftime('%s', 'now')) " +
+						COL_YOUTUBE_VIDEO_DATE + " TIMESTAMP DEFAULT (strftime('%s', 'now')), " +
+						COL_RETRIEVAL_TS + " INTEGER, " +
+						COL_PUBLISH_TS + " INTEGER, " +
 						" )";
+	}
+
+	public static String[] getAddTimestampColumns() {
+		return new String[]{
+				ADD_COLUMN + COL_RETRIEVAL_TS + " INTEGER",
+				ADD_COLUMN + COL_PUBLISH_TS + " INTEGER",
+		};
 	}
 }

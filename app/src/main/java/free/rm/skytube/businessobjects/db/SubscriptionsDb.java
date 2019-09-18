@@ -22,6 +22,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.google.api.client.util.DateTime;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
@@ -29,7 +30,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
-import org.joda.time.DateTime;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -58,10 +58,12 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
     private static final String SUBSCRIBED_NUMBER_OF_CHANNELS_QUERY = String.format("SELECT COUNT(*) FROM %s", SubscriptionsTable.TABLE_NAME);
     private static final String HAS_VIDEO_QUERY = String.format("SELECT COUNT(*) FROM %s WHERE %s = ?", SubscriptionsVideosTable.TABLE_NAME, SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID);
     private static final String GET_VIDEO_IDS = String.format("SELECT %s FROM %s", SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID, SubscriptionsVideosTable.TABLE_NAME);
+    private static final String FIND_EMPTY_RETRIEVAL_TS = String.format("SELECT %s FROM %s WHERE %s IS NULL",
+            SubscriptionsVideosTable.COL_YOUTUBE_VIDEO, SubscriptionsVideosTable.TABLE_NAME, SubscriptionsVideosTable.COL_RETRIEVAL_TS);
 
     private static volatile SubscriptionsDb subscriptionsDb = null;
 
-	private static final int DATABASE_VERSION = 3;
+	private static final int DATABASE_VERSION = 4;
 	private static final String DATABASE_NAME = "subs.db";
 
 	private Gson gson;
@@ -98,16 +100,41 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 		if(oldVersion == 1 && newVersion >= 2) {
 			db.execSQL(SubscriptionsVideosTable.getCreateStatement());
 		}
-		if (oldVersion <= 2 && newVersion >= 3) {
-			addNewColumns(db);
+        if (oldVersion <= 2 && newVersion >= 3) {
+            execSQLUpdates(db, SubscriptionsTable.getAddColumns());
+        }
+        if (oldVersion <= 3 && newVersion >= 4) {
+            execSQLUpdates(db, SubscriptionsVideosTable.getAddTimestampColumns());
+            setupRetrievalTimestamp(db);
+        }
+	}
+
+	private static void execSQLUpdates(SQLiteDatabase db, String[] sqlUpdates) {
+		for (String sqlUpdate : sqlUpdates) {
+			db.execSQL(sqlUpdate);
 		}
 	}
 
-	private static void addNewColumns(SQLiteDatabase db) {
-		for (String addColumn : SubscriptionsTable.getAddColumns()) {
-			db.execSQL(addColumn);
-		}
-	}
+	private void setupRetrievalTimestamp(SQLiteDatabase db) {
+        List<YouTubeVideo> videos = extractVideos(db.rawQuery(FIND_EMPTY_RETRIEVAL_TS, null));
+        int count = 0;
+        for (YouTubeVideo video : videos) {
+            DateTime dateTime = video.getPublishDate();
+            if (dateTime != null) {
+                ContentValues values = new ContentValues();
+                values.put(SubscriptionsVideosTable.COL_PUBLISH_TS, dateTime.getValue());
+                values.put(SubscriptionsVideosTable.COL_RETRIEVAL_TS, dateTime.getValue());
+                int updateCount = db.update(
+                        SubscriptionsVideosTable.TABLE_NAME,
+                        values,
+                        SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID + " = ?",
+                        new String[]{video.getId()});
+                Logger.i(this,"updating " + video.getId() + " with publish date:" + dateTime + " -> " + updateCount);
+                count += updateCount;
+            }
+        }
+        Logger.i(this, "From " + videos.size() + ", retrieval timestamp filled for " + count);
+    }
 
 	/**
 	 * Saves the given channel into the subscriptions DB.
@@ -453,30 +480,36 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 	public void saveChannelVideos(YouTubeChannel channel) {
 		for (YouTubeVideo video : channel.getYouTubeVideos()) {
 			if(video.getPublishDate() != null && !hasVideo(video)) {
-				ContentValues values = new ContentValues();
-				values.put(SubscriptionsVideosTable.COL_CHANNEL_ID, channel.getId());
-				values.put(SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID, video.getId());
-				values.put(SubscriptionsVideosTable.COL_YOUTUBE_VIDEO, gson.toJson(video).getBytes());
-				values.put(SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_DATE, video.getPublishDate().toString());
-
-				getWritableDatabase().insert(SubscriptionsVideosTable.TABLE_NAME, null, values);
+                ContentValues values = createContentValues(video, channel.getId());
+                getWritableDatabase().insert(SubscriptionsVideosTable.TABLE_NAME, null, values);
 			}
 		}
 	}
 
-	public void saveVideos(List<YouTubeVideo> videos) {
+    public void saveVideos(List<YouTubeVideo> videos) {
 		SQLiteDatabase db = getWritableDatabase();
 		for (YouTubeVideo video : videos) {
 			if (video.getPublishDate() != null) {
-				ContentValues values = new ContentValues();
-				values.put(SubscriptionsVideosTable.COL_CHANNEL_ID, video.getChannelId());
-				values.put(SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID, video.getId());
-				values.put(SubscriptionsVideosTable.COL_YOUTUBE_VIDEO, gson.toJson(video).getBytes());
-				values.put(SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_DATE, video.getPublishDate().toString());
-				db.insert(SubscriptionsVideosTable.TABLE_NAME, null, values);
+                ContentValues values = createContentValues(video, video.getChannelId());
+                db.insert(SubscriptionsVideosTable.TABLE_NAME, null, values);
 			}
 		}
 	}
+
+    private ContentValues createContentValues(YouTubeVideo video, String channelId) {
+        ContentValues values = new ContentValues();
+        values.put(SubscriptionsVideosTable.COL_CHANNEL_ID, channelId);
+        values.put(SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID, video.getId());
+        values.put(SubscriptionsVideosTable.COL_YOUTUBE_VIDEO, gson.toJson(video).getBytes());
+        DateTime publishDate = video.getPublishDate();
+        values.put(SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_DATE, publishDate.toString());
+        long ts = video.getRetrievalTimestamp() != null ? video.getRetrievalTimestamp() : publishDate.getValue();
+        values.put(SubscriptionsVideosTable.COL_RETRIEVAL_TS, ts);
+        values.put(SubscriptionsVideosTable.COL_PUBLISH_TS, publishDate.getValue());
+
+        return values;
+    }
+
 	/**
 	 * Delete any videos stored in the database (for subscribed channels) that are over a month old.
 	 * @return
@@ -507,8 +540,8 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
         final String selection;
         final String[] selectionArguments;
         if (videoId != null) {
-            selection = "(" + SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_DATE + " < ?) OR (" + SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_DATE + " = ? AND " + SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID + " > ?)";
-            String formatted = new DateTime(beforeTimestamp).toString();
+            selection = "(" + SubscriptionsVideosTable.COL_RETRIEVAL_TS + " < ?) OR (" + SubscriptionsVideosTable.COL_RETRIEVAL_TS + " = ? AND " + SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID + " > ?)";
+            String formatted = String.valueOf(beforeTimestamp);
             selectionArguments = new String[]{ formatted, formatted, videoId };
         } else {
             selection = null;
@@ -518,7 +551,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
             SubscriptionsVideosTable.TABLE_NAME,
             new String[]{SubscriptionsVideosTable.COL_YOUTUBE_VIDEO},
             selection, selectionArguments, null, null,
-            SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_DATE + " DESC, " + SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID + " ASC",
+            SubscriptionsVideosTable.COL_RETRIEVAL_TS + " DESC, " + SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID + " ASC",
             String.valueOf(limit));
         return extractVideos(cursor);
     }
@@ -539,6 +572,9 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 		}).create();
 	}
 
+    /**
+     * Load YouTubeVideo objects from a cursor, only SubscriptionsVideosTable.COL_YOUTUBE_VIDEO column is needed.
+     */
     private List<YouTubeVideo> extractVideos(Cursor cursor) {
         List<YouTubeVideo> videos = new ArrayList<>();
         try {

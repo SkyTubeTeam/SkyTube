@@ -204,6 +204,7 @@ public class NewPipeService {
                     extractor.getLength(), new YouTubeChannel(extractor.getUploaderUrl(), extractor.getUploaderName()),
                     extractor.getViewCount(), getPublishDate(dateStr), dateStr, extractor.getThumbnailUrl());
             video.setLikeDislikeCount(extractor.getLikeCount(), extractor.getDislikeCount());
+            video.setRetrievalTimestamp(System.currentTimeMillis());
             return video;
         } catch (ParseException e) {
             throw new ExtractionException("Unable parse publish date:" + dateStr + " for video=" + videoId, e);
