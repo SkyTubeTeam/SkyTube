@@ -99,7 +99,9 @@ public class GetFeaturedVideos extends GetYouTubeVideos {
 
 		if (videoList != null) {
 			for (Video video : videoList) {
-				youTubeVideoList.add(new YouTubeVideo(video));
+				YouTubeVideo yv = new YouTubeVideo(video);
+				yv.setRetrievalTimestamp(System.currentTimeMillis());
+				youTubeVideoList.add(yv);
 			}
 		}
 
