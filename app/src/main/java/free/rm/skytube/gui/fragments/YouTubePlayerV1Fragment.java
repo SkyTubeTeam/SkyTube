@@ -708,8 +708,7 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 
 			case R.id.download_video:
 				final boolean warningDialogDisplayed = new MobileNetworkWarningDialog(getContext())
-						.onPositive((dialog, which) -> youTubeVideo.downloadVideo(getContext()))
-						.showAndGetStatus(MobileNetworkWarningDialog.ActionType.DOWNLOAD_VIDEO);
+						.showDownloadWarning(youTubeVideo);
 
 				if (!warningDialogDisplayed) {
 					youTubeVideo.downloadVideo(getContext());
@@ -729,24 +728,24 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 	 * Loads the video specified in {@link #youTubeVideo}.
 	 */
 	private void loadVideo() {
-		loadVideo(false);
+		loadVideo(true);
 	}
 
 
 	/**
 	 * Loads the video specified in {@link #youTubeVideo}.
 	 *
-	 * @param skipMobileNetworkWarning Set to true to skip the warning displayed when the user is
+	 * @param showMobileNetworkWarning Set to true to show the warning displayed when the user is
 	 *                                 using mobile network data (i.e. 4g).
 	 */
-	private void loadVideo(boolean skipMobileNetworkWarning) {
+	private void loadVideo(boolean showMobileNetworkWarning) {
 		boolean mobileNetworkWarningDialogDisplayed = false;
 
 		// if the user is using mobile network (i.e. 4g), then warn him
-		if (!skipMobileNetworkWarning) {
+		if (showMobileNetworkWarning) {
 			mobileNetworkWarningDialogDisplayed = new MobileNetworkWarningDialog(getActivity())
-					.onPositive((dialog, which) -> loadVideo(true))
-					.onNegative((dialog, which) -> closeActivity())
+					.onPositive((dialog, which) -> loadVideo(false))
+					.onNegativeOrCancel((dialog) -> closeActivity())
 					.showAndGetStatus(MobileNetworkWarningDialog.ActionType.STREAM_VIDEO);
 		}
 

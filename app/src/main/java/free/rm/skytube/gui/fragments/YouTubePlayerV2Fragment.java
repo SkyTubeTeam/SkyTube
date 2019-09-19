@@ -369,7 +369,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 	/**
 	 * Loads the video specified in {@link #youTubeVideo}.
 	 *
-	 * @param showMobileNetworkWarning Set to true to skip the warning displayed when the user is
+	 * @param showMobileNetworkWarning Set to true to show the warning displayed when the user is
 	 *                                 using mobile network data (i.e. 4g).
 	 */
 	private void loadVideo(boolean showMobileNetworkWarning) {
@@ -380,7 +380,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 		if (showMobileNetworkWarning && downloadStatus.getUri() == null) {
 			mobileNetworkWarningDialogDisplayed = new MobileNetworkWarningDialog(getActivity())
 					.onPositive((dialog, which) -> loadVideo(false))
-					.onNegative((dialog, which) -> closeActivity())
+					.onNegativeOrCancel((dialog) -> closeActivity())
 					.showAndGetStatus(MobileNetworkWarningDialog.ActionType.STREAM_VIDEO);
 		}
 
@@ -442,9 +442,9 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 		// else, if the video is a LIVE STREAM
 		// video is live:  ask the user if he wants to play the video using an other app
 		new SkyTubeMaterialDialog(getContext())
+				.onNegativeOrCancel((dialog) -> closeActivity())
 				.content(R.string.warning_live_video)
 				.title(R.string.error_video_play)
-				.onNegative((dialog, which) -> closeActivity())
 				.onPositive((dialog, which) -> {
 					youTubeVideo.playVideoExternally(getContext());
 					closeActivity();
@@ -532,8 +532,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 
 			case R.id.download_video:
 				final boolean warningDialogDisplayed = new MobileNetworkWarningDialog(getContext())
-						.onPositive((dialog, which) -> youTubeVideo.downloadVideo(getContext()))
-						.showAndGetStatus(MobileNetworkWarningDialog.ActionType.DOWNLOAD_VIDEO);
+						.showDownloadWarning(youTubeVideo);
 
 				if (!warningDialogDisplayed) {
 					youTubeVideo.downloadVideo(getContext());

@@ -292,7 +292,6 @@ public class SubscriptionsBackupsManager {
 							task.executeInParallel(channelsToSubscribeTo);
 						})
 						.negativeText(R.string.cancel)
-						.onNegative((dialog, which) -> dialog.dismiss())
 						.build()
 						.show();
 			} else {
@@ -321,7 +320,6 @@ public class SubscriptionsBackupsManager {
 				.positiveText(R.string.select_xml_file)
 				.checkBoxPromptRes(R.string.unsubscribe_from_all_current_sibbed_channels, false, (compoundButton, b) -> isUnsubsribeAllChecked = true)
 				.onPositive((dialog, which) -> displayFilePicker(false))
-				.onNegative((dialog, which) -> dialog.dismiss())
 				.build()
 				.show();
 	}

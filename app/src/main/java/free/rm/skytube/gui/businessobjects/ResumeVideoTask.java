@@ -57,11 +57,11 @@ public class ResumeVideoTask {
             final PlaybackStatusDb.VideoWatchedStatus watchStatus = PlaybackStatusDb.getPlaybackStatusDb().getVideoWatchedStatus(youTubeVideo);
             if (watchStatus.getPosition() > 0) {
                 new SkyTubeMaterialDialog(context)
+                        .onNegativeOrCancel((dialog) -> callback.loadVideo(0))
                         .content(R.string.should_resume)
                         .positiveText(R.string.resume)
                         .onPositive((dialog, which) -> callback.loadVideo((int) watchStatus.getPosition()))
                         .negativeText(R.string.no)
-                        .onNegative((dialog, which) -> callback.loadVideo(0))
                         .show();
             } else {
                 callback.loadVideo(0);
