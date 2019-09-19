@@ -230,8 +230,7 @@ public class GridViewHolder extends RecyclerView.ViewHolder implements Serializa
 					return true;
 				case R.id.download_video:
 					final boolean warningDialogDisplayed = new MobileNetworkWarningDialog(view.getContext())
-							.onPositive((dialog, which) -> youTubeVideo.downloadVideo(context))
-							.showAndGetStatus(MobileNetworkWarningDialog.ActionType.DOWNLOAD_VIDEO);
+							.showDownloadWarning(youTubeVideo);
 
 					if (!warningDialogDisplayed) {
 						youTubeVideo.downloadVideo(context);

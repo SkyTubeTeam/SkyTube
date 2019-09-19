@@ -18,6 +18,8 @@
 package free.rm.skytube.gui.businessobjects;
 
 import android.content.Context;
+import android.content.DialogInterface;
+
 import androidx.annotation.NonNull;
 
 import com.afollestad.materialdialogs.DialogAction;
@@ -44,6 +46,12 @@ public class SkyTubeMaterialDialog extends MaterialDialog.Builder {
 		negativeText(R.string.cancel);
 
 		onNegative((dialog, which) -> dialog.dismiss());
+	}
+
+	public SkyTubeMaterialDialog onNegativeOrCancel(@NonNull DialogInterface.OnCancelListener callback) {
+		this.onNegativeCallback = (dialog, action) -> callback.onCancel(dialog);
+		this.cancelListener = callback;
+		return this;
 	}
 
 }

@@ -20,12 +20,15 @@ package free.rm.skytube.gui.businessobjects;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
+
+import android.content.DialogInterface;
 import android.widget.CompoundButton;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
+import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 
 /**
  * Dialog that warns the user to enable the wi-fi if the device is connected to mobile network
@@ -49,7 +52,6 @@ public class MobileNetworkWarningDialog extends SkyTubeMaterialDialog {
 	 */
 	public boolean showAndGetStatus(ActionType actionType) {
 		final boolean   displayWarning  = SkyTubeApp.getPreferenceManager().getBoolean(SkyTubeApp.getStr(R.string.pref_key_warn_mobile_downloads), true);
-		boolean         dialogDisplayed = false;
 
 		if (SkyTubeApp.isConnectedToMobile() && displayWarning) {
 			title(R.string.mobile_data);
@@ -57,12 +59,21 @@ public class MobileNetworkWarningDialog extends SkyTubeMaterialDialog {
 			checkBoxPromptRes(R.string.warning_mobile_network_disable, false, (buttonView, isChecked) -> SkyTubeApp.getPreferenceManager().edit().putBoolean(SkyTubeApp.getStr(R.string.pref_key_warn_mobile_downloads), !isChecked).apply());
 			positiveText(actionType == ActionType.STREAM_VIDEO ?  R.string.play_video : R.string.download_video);
 			show();
-			dialogDisplayed = true;
+			return true;
 		}
 
-		return dialogDisplayed;
+		return false;
 	}
 
+	/**
+	 * Display a warning about downloading this video.
+	 * @param youTubeVideo
+	 * @return true, if it's on mobile, and warning is displayed.
+	 */
+	public boolean showDownloadWarning(YouTubeVideo youTubeVideo) {
+		onPositive((dialog, which) -> youTubeVideo.downloadVideo(getContext()));
+		return showAndGetStatus(MobileNetworkWarningDialog.ActionType.DOWNLOAD_VIDEO);
+	}
 
 	@Override
 	public MobileNetworkWarningDialog onPositive(@NonNull MaterialDialog.SingleButtonCallback callback) {
@@ -70,13 +81,12 @@ public class MobileNetworkWarningDialog extends SkyTubeMaterialDialog {
 		return this;
 	}
 
-
 	@Override
-	public MobileNetworkWarningDialog onNegative(@NonNull MaterialDialog.SingleButtonCallback callback) {
-		this.onNegativeCallback = callback;
+	public MobileNetworkWarningDialog onNegativeOrCancel(@NonNull DialogInterface.OnCancelListener callback) {
+		this.onNegativeCallback = (dialog, action) -> callback.onCancel(dialog);
+		this.cancelListener = callback;
 		return this;
 	}
-
 
 	////////////////////////////////////////////////////////////////////////////////////////////////
 
