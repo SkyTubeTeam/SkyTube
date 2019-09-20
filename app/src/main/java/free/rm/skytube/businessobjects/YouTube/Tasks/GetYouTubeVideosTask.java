@@ -85,7 +85,9 @@ public class GetYouTubeVideosTask extends AsyncTaskParallel<Void, Void, List<You
 
 		if (videosList != null) {
 			// filter videos
-			videosList = new VideoBlocker().filter(videosList);
+			if (videoGridAdapter.getCurrentVideoCategory().isVideoFilteringEnabled()) {
+				videosList = new VideoBlocker().filter(videosList);
+			}
 
 			if (channel != null && channel.isUserSubscribed()) {
 				for (YouTubeVideo video : videosList) {
