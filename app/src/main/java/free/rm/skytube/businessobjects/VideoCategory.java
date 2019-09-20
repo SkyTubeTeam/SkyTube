@@ -44,21 +44,27 @@ public enum VideoCategory {
 	/** Videos pertaining to the user's subscriptions feed */
 	SUBSCRIPTIONS_FEED_VIDEOS (4),
 	/** Videos bookmarked by the user */
-	BOOKMARKS_VIDEOS (5),
+	BOOKMARKS_VIDEOS (5, false),
 	/** Videos belonging to a playlist */
 	PLAYLIST_VIDEOS (7),
 	/** Videos that have been downloaded */
-	DOWNLOADED_VIDEOS (8);
+	DOWNLOADED_VIDEOS (8, false);
 
 	// *****************
 	// DON'T FORGET to update #createGetYouTubeVideos() methods...
 	// *****************
 
 	private final int id;
-
+	private final boolean videoFiltering;
 
 	VideoCategory(int id) {
 		this.id = id;
+		this.videoFiltering = true;
+	}
+
+	VideoCategory(int id, boolean videoFiltering) {
+		this.id = id;
+		this.videoFiltering = videoFiltering;
 	}
 
 	/**
@@ -93,4 +99,7 @@ public enum VideoCategory {
 		throw new UnsupportedOperationException();
 	}
 
+	public boolean isVideoFilteringEnabled() {
+		return videoFiltering;
+	}
 }

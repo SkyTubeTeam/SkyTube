@@ -215,6 +215,10 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<YouTubeVideo, GridVi
 		return youTubeChannel;
 	}
 
+	public VideoCategory getCurrentVideoCategory() {
+		return currentVideoCategory;
+	}
+
 	@Override
 	public void onVideoStatusUpdated() {
 		notifyDataSetChanged();
