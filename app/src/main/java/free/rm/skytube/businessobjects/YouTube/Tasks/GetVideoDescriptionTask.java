@@ -51,10 +51,11 @@ public class GetVideoDescriptionTask extends AsyncTaskParallel<Void, Void, Strin
 		if (youTubeVideo.getDescription() != null) {
 			return youTubeVideo.getDescription();
 		}
-		String description = getDescription();
-		if (description != null) {
-			this.youTubeVideo.setDescription(description);
-			return description;
+		YouTubeVideo freshDetails = getDetails();
+		if (freshDetails != null) {
+			this.youTubeVideo.setDescription(freshDetails.getDescription());
+			this.youTubeVideo.setLikeDislikeCount(freshDetails.getLikeCountNumber(), freshDetails.getDislikeCountNumber());
+			return youTubeVideo.getDescription();
 		}
 
 		return getErrorMessage();
@@ -64,28 +65,28 @@ public class GetVideoDescriptionTask extends AsyncTaskParallel<Void, Void, Strin
 		return SkyTubeApp.getStr(R.string.error_get_video_desc);
 	}
 
-	private String getDescription() {
+	private YouTubeVideo getDetails() {
 		if (NewPipeService.isPreferred()) {
 			try {
 				YouTubeVideo details = NewPipeService.get().getDetails(youTubeVideo.getId());
-				return details != null ? details.getDescription() : null;
+				return details;
 			} catch (ExtractionException | IOException e) {
 				Logger.e(this, "Unable to get video details, where id=" + youTubeVideo.getId(), e);
 				return null;
 			}
 		} else {
-			return getDescriptionFromAPI();
+			return getDetailsFromAPI();
 		}
 	}
 
-	private String getDescriptionFromAPI() {
+	private YouTubeVideo getDetailsFromAPI() {
 		GetVideoDescription getVideoDescription = new GetVideoDescription();
 		
 		try {
 			getVideoDescription.init(youTubeVideo.getId());
 			List<YouTubeVideo> list = getVideoDescription.getNextVideos();
 			if (!list.isEmpty()) {
-				return list.get(0).getDescription();
+				return list.get(0);
 			}
 		} catch (IOException e) {
 			Logger.e(this, "error_get_video_desc - id=" + youTubeVideo.getId(), e);
