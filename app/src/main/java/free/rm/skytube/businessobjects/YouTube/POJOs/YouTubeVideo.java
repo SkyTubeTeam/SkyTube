@@ -38,11 +38,6 @@ import com.google.api.services.youtube.model.VideoStatistics;
 import org.joda.time.Period;
 import org.joda.time.format.ISOPeriodFormat;
 import org.joda.time.format.PeriodFormatter;
-import org.schabi.newpipe.extractor.InfoItem;
-import org.schabi.newpipe.extractor.channel.ChannelExtractor;
-import org.schabi.newpipe.extractor.exceptions.ParsingException;
-import org.schabi.newpipe.extractor.stream.StreamExtractor;
-import org.schabi.newpipe.extractor.stream.StreamInfoItem;
 
 import java.io.File;
 import java.io.Serializable;
@@ -88,13 +83,25 @@ public class YouTubeVideo implements Serializable {
 	 */
 	private YouTubeChannel channel;
 	/**
-	 * The total number of 'likes'.
+	 * The total number of 'likes' - as a localized string!
 	 */
 	private String likeCount;
+
+	/**
+	 * The total number of 'likes'.
+	 */
+	private Long likeCountNumber;
+
+	/**
+	 * The total number of 'dislikes' - as a localized string!
+	 */
+	private String dislikeCount;
+
 	/**
 	 * The total number of 'dislikes'.
 	 */
-	private String dislikeCount;
+	private Long dislikeCountNumber;
+
 	/**
 	 * The percentage of people that thumbs-up this video (format:  "<percentage>%").
 	 */
@@ -193,7 +200,7 @@ public class YouTubeVideo implements Serializable {
 
 		VideoStatistics statistics = video.getStatistics();
 		if (statistics != null) {
-			setLikeDislikeCount(statistics.getLikeCount(), statistics.getDislikeCount());
+			setLikeDislikeCount(statistics.getLikeCount() != null ? statistics.getLikeCount().longValue() : null, statistics.getDislikeCount() != null ? statistics.getDislikeCount().longValue() : null);
 
 			setViewCount(statistics.getViewCount());
 		}
@@ -202,16 +209,6 @@ public class YouTubeVideo implements Serializable {
 	private void setViewCount(BigInteger viewsCountInt) {
 		this.viewsCountInt = viewsCountInt;
 		this.viewsCount = String.format(getStr(R.string.views), viewsCountInt);
-	}
-
-	private void setLikeDislikeCount(BigInteger likeCount, BigInteger dislikeCount) {
-		if (likeCount != null) {
-			this.likeCount = String.format(Locale.getDefault(), "%,d", likeCount);
-		}
-		if (dislikeCount != null) {
-			this.dislikeCount = String.format(Locale.getDefault(), "%,d", dislikeCount);
-		}
-		setThumbsUpPercentage(likeCount, dislikeCount);
 	}
 
         public YouTubeVideo(String id, String title, String description, long durationInSeconds, YouTubeChannel channel, long viewCount, Long publishDate, String publishDatePretty, String thumbnailUrl) {
@@ -227,15 +224,11 @@ public class YouTubeVideo implements Serializable {
             } else {
                 this.setPublishDatePretty("???");
             }
-            this .thumbnailMaxResUrl = thumbnailUrl;
+            this.thumbnailMaxResUrl = thumbnailUrl;
             this.thumbnailUrl = thumbnailUrl;
             this.channel = channel;
         }
 
-        public YouTubeVideo setLikeDislikeCount(long likeCount, long dislikeCount) {
-            this.setLikeDislikeCount(BigInteger.valueOf(likeCount), BigInteger.valueOf(dislikeCount));
-            return this;
-        }
 	/**
 	 * Extracts the video ID from the given video URL.
 	 *
@@ -261,30 +254,28 @@ public class YouTubeVideo implements Serializable {
 	 * @param likedCountInt	Total number of "likes".
 	 * @param dislikedCountInt Total number of "dislikes".
 	 */
-	private void setThumbsUpPercentage(BigInteger likedCountInt, BigInteger dislikedCountInt) {
+	public void setLikeDislikeCount(Long likedCountInt, Long dislikedCountInt) {
 		String fullPercentageStr = null;
-		int percentageInt = -1;
+		this.thumbsUpPercentage = -1;
 
 		// some videos do not allow users to like/dislike them:  hence likedCountInt / dislikedCountInt
 		// might be null in those cases
 		if (likedCountInt != null && dislikedCountInt != null) {
-			BigDecimal likedCount = new BigDecimal(likedCountInt),
-					dislikedCount = new BigDecimal(dislikedCountInt),
-					totalVoteCount = likedCount.add(dislikedCount),	// liked and disliked counts
-					likedPercentage = null;
 
-			if (totalVoteCount.compareTo(BigDecimal.ZERO) != 0) {
-				likedPercentage = (likedCount.divide(totalVoteCount, MathContext.DECIMAL128)).multiply(new BigDecimal(100));
+			long likedCount = likedCountInt;
+			long dislikedCount = dislikedCountInt;
+			long totalVoteCount = likedCount + dislikedCount;	// liked and disliked counts
+
+			if (totalVoteCount != 0) {
+				this.thumbsUpPercentage = (int) Math.round((double)likedCount*100/totalVoteCount);
 
 				// round the liked percentage to 0 decimal places and convert it to string
-				String percentageStr = likedPercentage.setScale(0, RoundingMode.HALF_UP).toString();
-				fullPercentageStr = percentageStr + "%";
-				percentageInt = Integer.parseInt(percentageStr);
+				fullPercentageStr = String.valueOf(thumbsUpPercentage) + "%";
 			}
 		}
-
+		this.likeCountNumber = likedCountInt;
+		this.dislikeCountNumber = dislikedCountInt;
 		this.thumbsUpPercentageStr = fullPercentageStr;
-		this.thumbsUpPercentage = percentageInt;
 	}
 
 	/**
@@ -360,7 +351,17 @@ public class YouTubeVideo implements Serializable {
 	 * users to like/dislike it.  Refer to {@link #isThumbsUpPercentageSet}.
 	 */
 	public String getLikeCount() {
+		if (likeCountNumber != null) {
+			return String.format(Locale.getDefault(), "%,d", likeCountNumber);
+		}
 		return likeCount;
+	}
+
+	/**
+	 * @return The total number of 'likes'.  Can return <b>null</b> for videos serialized with only a 'string' like count.
+	 */
+	public Long getLikeCountNumber() {
+		return likeCountNumber;
 	}
 
 	/**
@@ -368,7 +369,17 @@ public class YouTubeVideo implements Serializable {
 	 * users to like/dislike it.  Refer to {@link #isThumbsUpPercentageSet}.
 	 */
 	public String getDislikeCount() {
+		if (dislikeCountNumber != null) {
+			return String.format(Locale.getDefault(), "%,d", dislikeCountNumber);
+		}
 		return dislikeCount;
+	}
+
+	/**
+	 * @return The total number of 'dislikes'.  Can return <b>null</b> for videos serialized with only a 'string' like count.
+	 */
+	public Long getDislikeCountNumber() {
+		return dislikeCountNumber;
 	}
 
 	public String getDuration() {
