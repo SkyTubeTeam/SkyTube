@@ -145,7 +145,20 @@ public class NewPipeService {
 
     private YouTubeChannel createInternalChannel(ChannelExtractor extractor) throws ParsingException {
         return new YouTubeChannel(extractor.getId(), extractor.getName(), filterHtml(extractor.getDescription()),
-                extractor.getAvatarUrl(), extractor.getBannerUrl(), extractor.getSubscriberCount(), false, 0);
+                extractor.getAvatarUrl(), extractor.getBannerUrl(), getSubscriberCount(extractor), false, 0);
+    }
+
+    /**
+     * @param extractor
+     * @return the subscriber count, or -1 if it's not available.
+     */
+    private long getSubscriberCount(ChannelExtractor extractor) {
+        try {
+            return extractor.getSubscriberCount();
+        } catch (NullPointerException | ParsingException  npe) {
+            Logger.e(this, "Unable to get subscriber count for " + extractor.getLinkHandler().getUrl() + " : "+ npe.getMessage(), npe);
+            return -1L;
+        }
     }
 
     private ChannelExtractor getChannelExtractor(String channelId)
