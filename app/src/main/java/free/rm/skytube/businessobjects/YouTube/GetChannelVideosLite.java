@@ -66,6 +66,7 @@ public class GetChannelVideosLite extends GetYouTubeVideos implements GetChannel
 
 	@Override
 	public List<YouTubeVideo> getNextVideos() {
+		setLastException(null);
 		List<YouTubeVideo> videosList = null;
 
 		if (!noMoreVideoPages) {
@@ -84,6 +85,7 @@ public class GetChannelVideosLite extends GetYouTubeVideos implements GetChannel
 					noMoreVideoPages = true;
 
 			} catch (IOException ex) {
+				setLastException(ex);
 				Log.e(TAG, ex.getLocalizedMessage());
 			}
 		}
