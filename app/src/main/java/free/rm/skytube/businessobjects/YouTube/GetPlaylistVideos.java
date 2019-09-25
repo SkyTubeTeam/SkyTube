@@ -51,6 +51,7 @@ public class GetPlaylistVideos extends GetYouTubeVideos {
 
 	@Override
 	public List<YouTubeVideo> getNextVideos() {
+		setLastException(null);
 		List<YouTubeVideo> videoList = new ArrayList<>();
 
 		if (!noMoreVideoPages()) {
@@ -80,6 +81,7 @@ public class GetPlaylistVideos extends GetYouTubeVideos {
 				if(nextPageToken == null)
 					noMoreVideoPages = true;
 			} catch (IOException e) {
+				setLastException(e);
 				Logger.e(this, "Error has occurred while getting playlist's videos", e);
 			}
 		}

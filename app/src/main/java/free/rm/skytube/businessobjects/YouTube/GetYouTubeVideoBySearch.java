@@ -68,6 +68,8 @@ public class GetYouTubeVideoBySearch extends GetYouTubeVideos {
 
 	@Override
 	public List<YouTubeVideo> getNextVideos() {
+		setLastException(null);
+
 		List<YouTubeVideo> videosList = null;
 
 		if (!noMoreVideoPages()) {
@@ -91,6 +93,7 @@ public class GetYouTubeVideoBySearch extends GetYouTubeVideos {
 				if (nextPageToken == null)
 					noMoreVideoPages = true;
 			} catch (IOException ex) {
+				setLastException(ex);
 				Log.e(TAG, ex.getLocalizedMessage());
 			}
 		}

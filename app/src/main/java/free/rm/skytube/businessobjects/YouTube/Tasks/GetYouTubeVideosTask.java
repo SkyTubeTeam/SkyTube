@@ -17,7 +17,11 @@
 
 package free.rm.skytube.businessobjects.YouTube.Tasks;
 
+import android.widget.Toast;
+
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import com.google.api.client.googleapis.json.GoogleJsonResponseException;
 
 import java.util.List;
 
@@ -103,6 +107,13 @@ public class GetYouTubeVideosTask extends AsyncTaskParallel<Void, Void, List<You
 
 	@Override
 	protected void onPostExecute(List<YouTubeVideo> videosList) {
+		if (getYouTubeVideos.getLastException() instanceof GoogleJsonResponseException) {
+			GoogleJsonResponseException exception = (GoogleJsonResponseException) getYouTubeVideos.getLastException();
+			String message = exception.getDetails().getMessage();
+			if (message != null) {
+				Toast.makeText(videoGridAdapter.getContext(), message, Toast.LENGTH_LONG).show();
+			}
+		}
 		if (this.clearList) {
 			videoGridAdapter.clearList();
 		}

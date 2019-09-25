@@ -55,6 +55,7 @@ public class GetFeaturedVideos extends GetYouTubeVideos {
 
 	@Override
 	public List<YouTubeVideo> getNextVideos() {
+		setLastException(null);
 		List<Video> searchResultList = null;
 
 		if (!noMoreVideoPages()) {
@@ -78,6 +79,7 @@ public class GetFeaturedVideos extends GetYouTubeVideos {
 				if (nextPageToken == null)
 					noMoreVideoPages = true;
 			} catch (IOException e) {
+				setLastException(e);
 				Logger.e(this, "Error has occurred while getting Featured Videos.", e);
 			}
 		}
