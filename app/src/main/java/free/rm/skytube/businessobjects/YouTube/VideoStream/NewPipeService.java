@@ -61,6 +61,7 @@ public class NewPipeService {
     private static NewPipeService instance;
 
     private final StreamingService streamingService;
+    private final static boolean DEBUG_LOG = false;
 
     public NewPipeService(StreamingService streamingService) {
         this.streamingService = streamingService;
@@ -178,7 +179,9 @@ public class NewPipeService {
         try {
             return channelLHFactory.fromUrl(channelId);
         } catch (ParsingException p) {
-            Logger.d(this, "Unable to parse channel url=%s", channelId);
+            if (DEBUG_LOG) {
+                Logger.d(this, "Unable to parse channel url=%s", channelId);
+            }
         }
         return channelLHFactory.fromId("channel/" + channelId);
     }
@@ -224,7 +227,9 @@ public class NewPipeService {
         try {
             return getPublishDate(dateStr);
         } catch (ParseException e) {
-            Logger.i(NewPipeService.class, "Unable parse publish date for %s -> %s", id, dateStr);
+            if (DEBUG_LOG) {
+                Logger.d(NewPipeService.class, "Unable parse publish date for %s -> %s", id, dateStr);
+            }
             return null;
         }
     }
@@ -236,7 +241,9 @@ public class NewPipeService {
 
     private String filterHtml(String htmlContent) {
         String result = Jsoup.clean(htmlContent, "", Whitelist.none(), new OutputSettings().prettyPrint(false));
-        Logger.d(this, "filterHtml %s -> %s", htmlContent, result);
+        if (DEBUG_LOG) {
+            Logger.d(this, "filterHtml %s -> %s", htmlContent, result);
+        }
         return result;
     }
 
