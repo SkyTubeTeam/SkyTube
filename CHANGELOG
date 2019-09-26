@@ -1,3 +1,12 @@
+v2.965 - 27 Sep 2019
+        * Fixes for the NewPipeExtractor backend
+        * Do not block videos on bookmark and downloaded videos tab.
+        * dependency upgrades
+        * Fix to handle dialog cancellation as 'negative' response in couple of places - where an answer is expected.
+        * Remove special icon, which cause crashes on old Androids.
+        * Display YouTube API errors to the user, to avoid confusion.
+        * Updated Russian and Portuguese (Brazil) translation.
+
 v2.964 - 03 Sep 2019
         * Add ability to use NewPipeExtractor to talk to Youtube servers - not everything is covered, but the basic functionality.
 	* Added ability to bookmark videos by sharing youtube url's from other apps.
@@ -5,7 +14,7 @@ v2.964 - 03 Sep 2019
 	* Paging implemented in the Subscription Feed - so the feed loads faster now.
 	* Create a new preference fragment for 'Downloads and Network' settings
 	* Updated Russian translation
-	
+
 v2.963 - 17 Aug 2019
         * Add preference to set custom video download folder
 	* Using com.github.hedzr:android-file-chooser package for file dialogs, instead of com.github.angads25:filepicker
