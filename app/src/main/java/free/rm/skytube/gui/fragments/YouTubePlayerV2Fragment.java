@@ -499,11 +499,12 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 				return true;
 
 			case R.id.menu_open_video_with:
+				player.setPlayWhenReady(false);
 				youTubeVideo.playVideoExternally(getContext());
-				player.stop();
 				return true;
 
 			case R.id.share:
+				player.setPlayWhenReady(false);
 				youTubeVideo.shareVideo(getContext());
 				return true;
 
