@@ -29,7 +29,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -45,11 +44,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.afollestad.materialdialogs.DialogAction;
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.exoplayer2.C;
+import com.google.android.exoplayer2.DefaultLoadControl;
+import com.google.android.exoplayer2.DefaultRenderersFactory;
 import com.google.android.exoplayer2.ExoPlayerFactory;
 import com.google.android.exoplayer2.Player;
 import com.google.android.exoplayer2.SimpleExoPlayer;
@@ -58,26 +57,17 @@ import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection;
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
 import com.google.android.exoplayer2.trackselection.TrackSelection;
 import com.google.android.exoplayer2.ui.AspectRatioFrameLayout;
-import com.google.android.exoplayer2.ui.PlayerControlView;
 import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.util.List;
 import java.util.Locale;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
-import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.GetVideoDetailsTask;
 import free.rm.skytube.businessobjects.Logger;
-import free.rm.skytube.businessobjects.YouTube.GetVideosDetailsByIDs;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
-import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannelInterface;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetVideoDescriptionTask;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetYouTubeChannelInfoTask;
@@ -99,7 +89,6 @@ import free.rm.skytube.gui.businessobjects.adapters.CommentsAdapter;
 import free.rm.skytube.gui.businessobjects.fragments.ImmersiveModeFragment;
 import free.rm.skytube.gui.businessobjects.views.ClickableLinksTextView;
 import free.rm.skytube.gui.businessobjects.views.SubscribeButton;
-import hollowsoft.slidingdrawer.OnDrawerOpenListener;
 import hollowsoft.slidingdrawer.SlidingDrawer;
 
 import static free.rm.skytube.gui.activities.YouTubePlayerActivity.YOUTUBE_VIDEO_OBJ;
@@ -255,12 +244,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 		playerView.setOnTouchListener(playerViewGestureHandler);
 		playerView.requestFocus();
 
-		DefaultBandwidthMeter bandwidthMeter = new DefaultBandwidthMeter();
-
-		TrackSelection.Factory videoTrackSelectionFactory = new AdaptiveTrackSelection.Factory(bandwidthMeter);
-		DefaultTrackSelector trackSelector = new DefaultTrackSelector(videoTrackSelectionFactory);
-
-		player = ExoPlayerFactory.newSimpleInstance(getContext(), trackSelector);
+		player = createExoPlayer();
 		player.addListener(new Player.DefaultEventListener() {
 			@Override
 			public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
@@ -309,6 +293,17 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 				commentsAdapter = new CommentsAdapter(getActivity(), youTubeVideo.getId(), commentsExpandableListView, commentsProgressBar, noVideoCommentsView);
 			}
 		});
+	}
+
+	private SimpleExoPlayer createExoPlayer() {
+		DefaultBandwidthMeter bandwidthMeter = new DefaultBandwidthMeter();
+
+		TrackSelection.Factory videoTrackSelectionFactory = new AdaptiveTrackSelection.Factory();
+		DefaultTrackSelector trackSelector = new DefaultTrackSelector(videoTrackSelectionFactory);
+		Context context = getContext();
+		DefaultRenderersFactory defaultRenderersFactory = new DefaultRenderersFactory(context);
+
+		return ExoPlayerFactory.newSimpleInstance(getContext(), defaultRenderersFactory, trackSelector, new DefaultLoadControl(), null, bandwidthMeter);
 	}
 
 
@@ -541,6 +536,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 
 			case R.id.block_channel:
 				youTubeChannel.blockChannel();
+				return true;
 
 			default:
 				return super.onOptionsItemSelected(item);
