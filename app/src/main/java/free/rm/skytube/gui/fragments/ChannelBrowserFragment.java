@@ -59,7 +59,8 @@ import free.rm.skytube.gui.businessobjects.views.SubscribeButton;
  */
 public class ChannelBrowserFragment extends FragmentEx {
 
-	private YouTubeChannel		channel = null;
+	private YouTubeChannel		channel;
+	private String 				channelId;
 
 	public static final String FRAGMENT_CHANNEL_VIDEOS = "ChannelBrowserFragment.FRAGMENT_CHANNEL_VIDEOS";
 	public static final String FRAGMENT_CHANNEL_PLAYLISTS = "ChannelBrowserFragment.FRAGMENT_CHANNEL_PLAYLISTS";
@@ -78,16 +79,12 @@ public class ChannelBrowserFragment extends FragmentEx {
 	private ChannelPlaylistsFragment    channelPlaylistsFragment;
 	private ChannelAboutFragment        channelAboutFragment;
 
-	/** List of fragments that will be displayed as tabs. */
-	private List<TabFragment> channelBrowserFragmentList = new ArrayList<>();
-
 	private ChannelPagerAdapter channelPagerAdapter;
 	private ViewPager viewPager;
 
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		final String channelId;
 		final Bundle bundle = getArguments();
 
 		if(savedInstanceState != null) {
@@ -135,7 +132,9 @@ public class ChannelBrowserFragment extends FragmentEx {
 
 			@Override
 			public void onPageSelected(int position) {
-				channelBrowserFragmentList.get(position).onFragmentSelected();
+				if (channelPagerAdapter !=null) {
+					channelPagerAdapter.getItem(position).onFragmentSelected();
+				}
 			}
 
 			@Override
@@ -177,18 +176,25 @@ public class ChannelBrowserFragment extends FragmentEx {
 	}
 
 	@Override
-	public void onSaveInstanceState(Bundle outState) {
+	public synchronized void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
-		if(channelVideosFragment != null)
-			getChildFragmentManager().putFragment(outState, FRAGMENT_CHANNEL_VIDEOS, channelVideosFragment);
-		if(channelPlaylistsFragment != null)
-			getChildFragmentManager().putFragment(outState, FRAGMENT_CHANNEL_PLAYLISTS, channelPlaylistsFragment);
+		outState.putString(CHANNEL_ID, channelId);
+		// if channel is not null, the ChannelPagerAdapter is initialized, with all the sub-fragments
+		if (channel != null) {
+			outState.putSerializable(CHANNEL_OBJ, channel);
+			if (channelVideosFragment != null) {
+				getChildFragmentManager().putFragment(outState, FRAGMENT_CHANNEL_VIDEOS, channelVideosFragment);
+			}
+			if (channelPlaylistsFragment != null) {
+				getChildFragmentManager().putFragment(outState, FRAGMENT_CHANNEL_PLAYLISTS, channelPlaylistsFragment);
+			}
+		}
 	}
 
 	/**
 	 * Initialise views that are related to {@link #channel}.
 	 */
-	private void initViews() {
+	private synchronized void initViews() {
 		if (channel != null) {
 			channelPagerAdapter = new ChannelPagerAdapter(getChildFragmentManager());
 			viewPager.setOffscreenPageLimit(2);
@@ -267,18 +273,24 @@ public class ChannelBrowserFragment extends FragmentEx {
 
 
 	private class ChannelPagerAdapter extends FragmentPagerAdapter {
+		/** List of fragments that will be displayed as tabs. */
+		private final List<TabFragment> channelBrowserFragmentList = new ArrayList<>();
+
 		public ChannelPagerAdapter(FragmentManager fm) {
 			super(fm);
 
 			// Initialize fragments
-			if (channelVideosFragment == null)
+			if (channelVideosFragment == null) {
 				channelVideosFragment = new ChannelVideosFragment();
+			}
 
-			if (channelPlaylistsFragment == null)
+			if (channelPlaylistsFragment == null) {
 				channelPlaylistsFragment = new ChannelPlaylistsFragment();
+			}
 
-			if (channelAboutFragment == null)
+			if (channelAboutFragment == null) {
 				channelAboutFragment = new ChannelAboutFragment();
+			}
 
 			Bundle bundle = new Bundle();
 			bundle.putSerializable(CHANNEL_OBJ, channel);
@@ -287,14 +299,13 @@ public class ChannelBrowserFragment extends FragmentEx {
 			channelPlaylistsFragment.setArguments(bundle);
 			channelAboutFragment.setArguments(bundle);
 
-			channelBrowserFragmentList.clear();
 			channelBrowserFragmentList.add(channelVideosFragment);
 			channelBrowserFragmentList.add(channelPlaylistsFragment);
 			channelBrowserFragmentList.add(channelAboutFragment);
 		}
 
 		@Override
-		public Fragment getItem(int position) {
+		public TabFragment getItem(int position) {
 			return channelBrowserFragmentList.get(position);
 		}
 
