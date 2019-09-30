@@ -22,6 +22,7 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 
 import android.content.DialogInterface;
+import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 
@@ -56,6 +57,7 @@ public class MobileNetworkWarningDialog extends SkyTubeMaterialDialog {
 		if (SkyTubeApp.isConnectedToMobile()) {
 			switch (displayWarning) {
 				case BLOCK : {
+					Toast.makeText(getContext(), R.string.mobile_data_blocked_by_policy, Toast.LENGTH_LONG).show();
 					cancelListener.onCancel(null);
 					return false;
 				}
