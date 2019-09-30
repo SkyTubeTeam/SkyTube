@@ -49,11 +49,13 @@
             android:title="@string/pref_title_preferred_res_mobile"
             android:summary="@string/pref_summary_preferred_res_mobile"/>
 
-        <CheckBoxPreference
-            android:defaultValue="true"
-            android:key="@string/pref_key_warn_mobile_downloads"
-            android:title="@string/pref_title_warn_mobile_downloads"
-            android:summary="@string/pref_summary_warn_mobile_downloads"/>
+        <ListPreference
+            android:entries="@array/pref_mobile_network_usage"
+            android:entryValues="@array/pref_mobile_network_usage_values"
+            android:defaultValue="@string/pref_mobile_network_usage_value_ask"
+            android:key="@string/pref_key_mobile_network_usage_policy"
+            android:title="@string/pref_title_mobile_network_usage"
+            android:summary="@string/pref_summary_mobile_network_usage"/>
     </PreferenceCategory>
 
 
