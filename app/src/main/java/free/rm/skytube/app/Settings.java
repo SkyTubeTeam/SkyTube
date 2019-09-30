@@ -17,8 +17,10 @@
 
 package free.rm.skytube.app;
 
+import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import free.rm.skytube.R;
+import free.rm.skytube.app.enums.Policy;
 
 public class Settings {
     private final SkyTubeApp app;
@@ -38,6 +40,19 @@ public class Settings {
     }
 
     public boolean isDownloadToSeparateFolders() {
-	return PreferenceManager.getDefaultSharedPreferences(app).getBoolean(app.getStr(R.string.pref_key_download_to_separate_directories),false);
+	    return PreferenceManager.getDefaultSharedPreferences(app).getBoolean(app.getStr(R.string.pref_key_download_to_separate_directories),false);
     }
+
+    public Policy getWarningMobilePolicy() {
+        String currentValue = PreferenceManager.getDefaultSharedPreferences(app).getString(getStr(R.string.pref_key_mobile_network_usage_policy),
+                getStr(R.string.pref_mobile_network_usage_value_ask));
+        return Policy.valueOf(currentValue.toUpperCase());
+    }
+
+    public void setWarningMobilePolicy(Policy warnPolicy) {
+        SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(app).edit();
+        editor.putString(getStr(R.string.pref_key_mobile_network_usage_policy), warnPolicy.name().toLowerCase());
+        editor.commit();
+    }
+
 }

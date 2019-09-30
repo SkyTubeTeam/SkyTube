@@ -31,8 +31,24 @@
 	<string name="pref_summary_preferred_res_mobile">Select your preferred resolution when streaming via a mobile network (such as 4G):  %s</string>
 
 	<string name="pref_key_warn_mobile_downloads" translatable="false">pref_key_warn_mobile_downloads</string>
-	<string name="pref_title_warn_mobile_downloads">Display Mobile Network Warning</string>
-	<string name="pref_summary_warn_mobile_downloads">Display a warning if you are using mobile network (such as 4G) before streaming/downloading videos.</string>
+	<string name="pref_key_mobile_network_usage_policy" translatable="false">pref_key_mobile_network_usage_policy</string>
+	<string name="pref_title_mobile_network_usage">Mobile Network Usage</string>
+	<string name="pref_summary_mobile_network_usage">What to do, if you are using mobile network (such as 4G) for downloading, watching videos: %s</string>
+
+	<string-array name="pref_mobile_network_usage">
+		<item>Always ask</item>
+		<item>Block</item>
+		<item>Allow</item>
+	</string-array>
+	<string name="pref_mobile_network_usage_value_ask" translatable="false">ask</string>
+	<string name="pref_mobile_network_usage_value_block" translatable="false">block</string>
+	<string name="pref_mobile_network_usage_value_allow" translatable="false">allow</string>
+	<string-array name="pref_mobile_network_usage_values" translatable="false">
+		<item>@string/pref_mobile_network_usage_value_ask</item>
+		<item>@string/pref_mobile_network_usage_value_block</item>
+		<item>@string/pref_mobile_network_usage_value_allow</item>
+	</string-array>
+
 
 	<string name="pref_import_export_category">Import/Export</string>
 	<string name="pref_title_backup_dbs">Backup Databases</string>
