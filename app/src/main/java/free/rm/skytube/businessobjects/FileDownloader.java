@@ -335,7 +335,7 @@ public abstract class FileDownloader implements Serializable, PermissionsActivit
 			// if there's already a local file for this video for some reason, then do not redownload the
 			// file and halt
 			File parentDir = parentDirectory != null ? new File(parentDirectory) : Environment.getExternalStoragePublicDirectory(dirType);
-			boolean toDirectories = SkyTubeApp.getPreferenceManager().getBoolean(SkyTubeApp.getStr(R.string.pref_key_download_to_separate_directories),false);
+			boolean toDirectories = SkyTubeApp.getSettings().isDownloadToSeparateFolders();
 
 			if (toDirectories && outputDirectoryName != null && !outputDirectoryName.isEmpty()) {
 				parentDir = new File(parentDir, outputDirectoryName);

@@ -53,6 +53,7 @@ public class SkyTubeApp extends MultiDexApplication {
 
 	/** SkyTube Application databaseInstance. */
 	private static SkyTubeApp skyTubeApp = null;
+	private Settings settings;
 
 	public static final String KEY_SUBSCRIPTIONS_LAST_UPDATED = "SkyTubeApp.KEY_SUBSCRIPTIONS_LAST_UPDATED";
 	public static final String NEW_VIDEOS_NOTIFICATION_CHANNEL = "free.rm.skytube.NEW_VIDEOS_NOTIFICATION_CHANNEL";
@@ -61,6 +62,7 @@ public class SkyTubeApp extends MultiDexApplication {
 	@Override
 	public void onCreate() {
 		super.onCreate();
+		this.settings = new Settings(this);
 		skyTubeApp = this;
 		initChannels(this);
 	}
@@ -217,4 +219,7 @@ public class SkyTubeApp extends MultiDexApplication {
 		}
 	}
 
+	public static Settings getSettings() {
+		return skyTubeApp.settings;
+	}
 }
