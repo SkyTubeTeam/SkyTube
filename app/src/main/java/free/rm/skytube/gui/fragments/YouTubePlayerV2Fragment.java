@@ -65,6 +65,7 @@ import java.util.Locale;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
+import free.rm.skytube.app.enums.Policy;
 import free.rm.skytube.businessobjects.GetVideoDetailsTask;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
@@ -368,18 +369,18 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 	 *                                 using mobile network data (i.e. 4g).
 	 */
 	private void loadVideo(boolean showMobileNetworkWarning) {
-		boolean mobileNetworkWarningDialogDisplayed = false;
+		Policy decision = Policy.ALLOW;
         DownloadedVideosDb.Status downloadStatus = DownloadedVideosDb.getVideoDownloadsDb().getVideoFileUriAndValidate(youTubeVideo.getId());
 
 		// if the user is using mobile network (i.e. 4g), then warn him
 		if (showMobileNetworkWarning && downloadStatus.getUri() == null) {
-			mobileNetworkWarningDialogDisplayed = new MobileNetworkWarningDialog(getActivity())
+			decision = new MobileNetworkWarningDialog(getActivity())
 					.onPositive((dialog, which) -> loadVideo(false))
 					.onNegativeOrCancel((dialog) -> closeActivity())
 					.showAndGetStatus(MobileNetworkWarningDialog.ActionType.STREAM_VIDEO);
 		}
 
-		if (!mobileNetworkWarningDialogDisplayed) {
+		if (decision == Policy.ALLOW) {
 			// if the video is NOT live
 			if (!youTubeVideo.isLiveStream()) {
 				loadingVideoView.setVisibility(View.VISIBLE);
@@ -527,10 +528,10 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 				return true;
 
 			case R.id.download_video:
-				final boolean warningDialogDisplayed = new MobileNetworkWarningDialog(getContext())
+				final Policy decision = new MobileNetworkWarningDialog(getContext())
 						.showDownloadWarning(youTubeVideo);
 
-				if (!warningDialogDisplayed) {
+				if (decision == Policy.ALLOW) {
 					youTubeVideo.downloadVideo(getContext());
 				}
 				return true;
