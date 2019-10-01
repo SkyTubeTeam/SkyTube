@@ -38,6 +38,7 @@ import java.io.Serializable;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
+import free.rm.skytube.app.enums.Policy;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.db.PlaybackStatusDb;
 import free.rm.skytube.businessobjects.db.Tasks.IsVideoBookmarkedTask;
@@ -229,10 +230,10 @@ public class GridViewHolder extends RecyclerView.ViewHolder implements Serializa
 					youTubeVideo.removeDownload();
 					return true;
 				case R.id.download_video:
-					final boolean warningDialogDisplayed = new MobileNetworkWarningDialog(view.getContext())
+					final Policy decision = new MobileNetworkWarningDialog(view.getContext())
 							.showDownloadWarning(youTubeVideo);
 
-					if (!warningDialogDisplayed) {
+					if (decision == Policy.ALLOW) {
 						youTubeVideo.downloadVideo(context);
 					}
 					return true;
