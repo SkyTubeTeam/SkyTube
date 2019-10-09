@@ -95,19 +95,9 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 	/**
 	 * Remove channel from this adapter.
 	 *
-	 * @param channel Channel to remove.
-	 */
-	public void removeChannel(YouTubeChannel channel) {
-		removeChannel(channel.getId());
-	}
-
-
-	/**
-	 * Remove channel from this adapter.
-	 *
 	 * @param channelId Channel to remove.
 	 */
-	private void removeChannel(String channelId) {
+	public void removeChannel(String channelId) {
 		int size = getItemCount();
 
 		for (int i = 0; i < size; i++) {

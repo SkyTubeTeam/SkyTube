@@ -165,7 +165,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 	 *
 	 * @return True if the operation was successful; false otherwise.
 	 */
-	public boolean saveSubscription(YouTubeChannel channel) {
+	private boolean saveSubscription(YouTubeChannel channel) {
 		ContentValues values = new ContentValues();
 		values.put(SubscriptionsTable.COL_CHANNEL_ID, channel.getId());
 		values.put(SubscriptionsTable.COL_LAST_VISIT_TIME, channel.getLastVisitTime());
@@ -182,20 +182,20 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 	/**
 	 * Removes the given channel from the subscriptions DB.
 	 *
-	 * @param channel Channel the user wants to unsubscribe to.
+	 * @param channelId id of the channel the user wants to unsubscribe to.
 	 *
 	 * @return True if the operation was successful; false otherwise.
 	 */
-	public boolean unsubscribe(YouTubeChannel channel) {
+	public boolean unsubscribe(String channelId) {
 		// delete any feed videos pertaining to this channel
 		getWritableDatabase().delete(SubscriptionsVideosTable.TABLE_NAME,
 				SubscriptionsVideosTable.COL_CHANNEL_ID + " = ?",
-				new String[]{channel.getId()});
+				new String[]{channelId});
 
 		// remove this channel from the subscriptions DB
 		int rowsDeleted = getWritableDatabase().delete(SubscriptionsTable.TABLE_NAME,
 				SubscriptionsTable.COL_CHANNEL_ID + " = ?",
-				new String[]{channel.getId()});
+				new String[]{channelId});
 
 		// Need to make sure when we come back to MainActivity, that we refresh the Feed tab so it hides videos from the newly unsubscribed
 		SubscriptionsFeedFragment.setFlag(SubscriptionsFeedFragment.FLAG_REFRESH_FEED_FROM_CACHE);
@@ -216,15 +216,14 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 		}
 	}
 
-	/**
-	 * Returns a list of channels that the user subscribed to, without accessing the network
-	 *
-	 *
-	 * @return A list of channels that the user subscribed to.
-	 * @throws IOException
-	 */
-	public List<YouTubeChannel> getSubscribedChannels() throws IOException {
-		return getSubscribedChannels(getReadableDatabase());
+	public List<String> getSubscribedChannelIds() {
+		try (Cursor cursor = getReadableDatabase().query(SubscriptionsTable.TABLE_NAME, new String[] {SubscriptionsTable.COL_CHANNEL_ID}, null, null, null, null, null)) {
+			List<String> result = new ArrayList<>();
+			while(cursor.moveToNext()) {
+				result.add(cursor.getString(0));
+			}
+			return result;
+		}
 	}
 
 	/**
