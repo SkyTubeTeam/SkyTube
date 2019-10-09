@@ -23,9 +23,7 @@ import com.squareup.picasso.Picasso;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import free.rm.skytube.R;
-import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
-import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannelInterface;
-import free.rm.skytube.businessobjects.YouTube.Tasks.GetYouTubeChannelInfoTask;
+import free.rm.skytube.businessobjects.db.Tasks.GetChannelInfo;
 import free.rm.skytube.gui.businessobjects.RuntimeView;
 import free.rm.skytube.gui.businessobjects.views.ClickableLinksTextView;
 import free.rm.skytube.gui.businessobjects.views.SubscribeButton;
@@ -130,7 +128,7 @@ public class ChromecastControllerFragment extends ChromecastBaseControllerFragme
 		}
 
 
-		new GetYouTubeChannelInfoTask(getActivity(), youTubeChannel -> {
+		new GetChannelInfo(getActivity(), youTubeChannel -> {
 			if(youTubeChannel.isUserSubscribed())
 				videoDescriptionLayout.subscribeButton.setUnsubscribeState();
 			else

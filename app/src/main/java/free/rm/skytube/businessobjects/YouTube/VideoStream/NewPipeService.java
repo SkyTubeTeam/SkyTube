@@ -146,7 +146,7 @@ public class NewPipeService {
 
     private YouTubeChannel createInternalChannel(ChannelExtractor extractor) throws ParsingException {
         return new YouTubeChannel(extractor.getId(), extractor.getName(), filterHtml(extractor.getDescription()),
-                extractor.getAvatarUrl(), extractor.getBannerUrl(), getSubscriberCount(extractor), false, 0);
+                extractor.getAvatarUrl(), extractor.getBannerUrl(), getSubscriberCount(extractor), false, 0, System.currentTimeMillis());
     }
 
     /**

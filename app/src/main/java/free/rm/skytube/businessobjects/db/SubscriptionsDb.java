@@ -36,15 +36,12 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.Logger;
-import free.rm.skytube.businessobjects.YouTube.GetChannelsDetails;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.gui.fragments.SubscriptionsFeedFragment;
@@ -63,7 +60,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 
     private static volatile SubscriptionsDb subscriptionsDb = null;
 
-	private static final int DATABASE_VERSION = 4;
+	private static final int DATABASE_VERSION = 5;
 	private static final String DATABASE_NAME = "subs.db";
 
 	private Gson gson;
@@ -107,6 +104,17 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
             execSQLUpdates(db, SubscriptionsVideosTable.getAddTimestampColumns());
             setupRetrievalTimestamp(db);
         }
+        if (oldVersion <= 4 && newVersion >= 5) {
+            execSQLUpdates(db, SubscriptionsTable.getLastCheckTimeColumn());
+			db.execSQL(LocalChannelTable.getCreateStatement());
+			try {
+				for (YouTubeChannel channel : getSubscribedChannels(db)) {
+					cacheChannel(db, channel);
+				}
+			} catch (IOException ex) {
+				Logger.e(this, "Unable to load subscribed channels to populate cache:" + ex.getMessage(), ex);
+			}
+		}
 	}
 
 	private static void execSQLUpdates(SQLiteDatabase db, String[] sqlUpdates) {
@@ -209,39 +217,14 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 	}
 
 	/**
-	 * Returns a list of channels that the user subscribed to and will check each channel whether
-	 * new videos have been uploaded since last channel visit
+	 * Returns a list of channels that the user subscribed to, without accessing the network
+	 *
 	 *
 	 * @return A list of channels that the user subscribed to.
-	 *
 	 * @throws IOException
 	 */
 	public List<YouTubeChannel> getSubscribedChannels() throws IOException {
-		return getSubscribedChannels(true);
-	}
-
-
-	/**
-	 * Returns a list of channels that the user subscribed to.
-	 *
-	 * @param shouldCheckForNewVideos  If true it will check if new videos have been uploaded to the
-	 *                                 subscribed channels since last channel visit.
-	 *
-	 * @return A list of channels that the user subscribed to.
-	 * @throws IOException
-	 */
-	public List<YouTubeChannel> getSubscribedChannels(boolean shouldCheckForNewVideos) throws IOException {
-		List<YouTubeChannel> cachedChannels = getCachedSubscribedChannels();
-		List<String>    channelIdsList = new ArrayList<>();
-		Map<String, YouTubeChannel> channelCache = new HashMap<>();
-		for (YouTubeChannel cached : cachedChannels) {
-			channelIdsList.add(cached.getId());
-			channelCache.put(cached.getId(), cached);
-		}
-
-		// Initialize the channel.  If the initialization is successful, then add the channel
-		// to the subsChannel list...
-		return new GetChannelsDetails(channelCache).getYouTubeChannels(channelIdsList, true /* = user is subscribed to this channel*/, shouldCheckForNewVideos);
+		return getSubscribedChannels(getReadableDatabase());
 	}
 
 	/**
@@ -251,10 +234,10 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 	 * @return A list of channels that the user subscribed to.
 	 * @throws IOException
 	 */
-	public List<YouTubeChannel> getCachedSubscribedChannels() throws IOException {
+	private List<YouTubeChannel> getSubscribedChannels(SQLiteDatabase db) throws IOException {
 		Cursor cursor = null;
 		try {
-			cursor = getReadableDatabase().query(SubscriptionsTable.TABLE_NAME,
+			cursor = db.query(SubscriptionsTable.TABLE_NAME,
 					SubscriptionsTable.ALL_COLUMNS,
 					null, null,
 					null, null,
@@ -270,12 +253,14 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 				final int colThumbnail = cursor.getColumnIndexOrThrow(SubscriptionsTable.COL_THUMBNAIL_NORMAL_URL);
 				final int colSubscribers = cursor.getColumnIndexOrThrow(SubscriptionsTable.COL_SUBSCRIBER_COUNT);
 				final int colLastVisit = cursor.getColumnIndexOrThrow(SubscriptionsTable.COL_LAST_VISIT_TIME);
+				final int colLastCheck = cursor.getColumnIndexOrThrow(SubscriptionsTable.COL_LAST_CHECK_TIME);
 
 				do {
 					final String id = cursor.getString(colChannelIdNum);
 					subsChannels.add(new YouTubeChannel(id, cursor.getString(colTitle),
 							cursor.getString(colDescription), cursor.getString(colThumbnail),
-							cursor.getString(colBanner), cursor.getLong(colSubscribers), true, cursor.getLong(colLastVisit)));
+							cursor.getString(colBanner), cursor.getLong(colSubscribers), true, cursor.getLong(colLastVisit),
+							cursor.getLong(colLastCheck)));
 				} while (cursor.moveToNext());
 
 			}
@@ -305,12 +290,13 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 				final int	   colThumbnail = cursor.getColumnIndexOrThrow(SubscriptionsTable.COL_THUMBNAIL_NORMAL_URL);
 				final int	   colSubscribers = cursor.getColumnIndexOrThrow(SubscriptionsTable.COL_SUBSCRIBER_COUNT);
 				final int	   colLastVisit = cursor.getColumnIndexOrThrow(SubscriptionsTable.COL_LAST_VISIT_TIME);
+				final int	   colLastCheck = cursor.getColumnIndexOrThrow(SubscriptionsTable.COL_LAST_CHECK_TIME);
 
 				final String id = cursor.getString(colChannelIdNum);
 				channel = new YouTubeChannel(id, cursor.getString(colTitle),
 						cursor.getString(colDescription), cursor.getString(colThumbnail),
 						cursor.getString(colBanner), cursor.getLong(colSubscribers), true,
-						cursor.getLong(colLastVisit));
+						cursor.getLong(colLastVisit), cursor.getLong(colLastCheck));
 
 			}
 
@@ -358,28 +344,51 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 	}
 
 
-	/**
-	 * Updates the given channel's last visit time.
-	 *
-	 * @param channelId	Channel ID
-	 *
-	 * @return	last visit time, if the update was successful;  -1 otherwise.
-	 */
-	public long updateLastVisitTime(String channelId) {
-		SQLiteDatabase	db = getWritableDatabase();
-		long			currentTime = System.currentTimeMillis();
+    /**
+     * Updates the given channel's last visit time.
+     *
+     * @param channelId	Channel ID
+     *
+     * @return	last visit time, if the update was successful;  -1 otherwise.
+     */
+    public long updateLastVisitTime(String channelId) {
+        SQLiteDatabase	db = getWritableDatabase();
+        long			currentTime = System.currentTimeMillis();
 
-		ContentValues values = new ContentValues();
-		values.put(SubscriptionsTable.COL_LAST_VISIT_TIME, currentTime);
+        ContentValues values = new ContentValues();
+        values.put(SubscriptionsTable.COL_LAST_VISIT_TIME, currentTime);
 
-		int count = db.update(
-				SubscriptionsTable.TABLE_NAME,
-				values,
-				SubscriptionsTable.COL_CHANNEL_ID + " = ?",
-				new String[]{channelId});
+        int count = db.update(
+                SubscriptionsTable.TABLE_NAME,
+                values,
+                SubscriptionsTable.COL_CHANNEL_ID + " = ?",
+                new String[]{channelId});
 
-		return (count > 0 ? currentTime : -1);
-	}
+        return (count > 0 ? currentTime : -1);
+    }
+
+    /**
+     * Updates the given channel's last visit time.
+     *
+     * @param channelId	Channel ID
+     *
+     * @return	last visit time, if the update was successful;  -1 otherwise.
+     */
+    public long updateLastCheckTime(String channelId) {
+        SQLiteDatabase	db = getWritableDatabase();
+        long			currentTime = System.currentTimeMillis();
+
+        ContentValues values = new ContentValues();
+        values.put(SubscriptionsTable.COL_LAST_CHECK_TIME, currentTime);
+
+        int count = db.update(
+                SubscriptionsTable.TABLE_NAME,
+                values,
+                SubscriptionsTable.COL_CHANNEL_ID + " = ?",
+                new String[]{channelId});
+
+        return (count > 0 ? currentTime : -1);
+    }
 
 	/**
 	 * Update channel informations in the database from the Object.
@@ -612,5 +621,83 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
         }
         return videos;
     }
+
+    // Generic channel caching
+
+	/**
+	 *
+	 * @param channelId
+	 * @return all the information stored in the local cache about the channel.
+	 */
+	public YouTubeChannel getCachedChannel(String channelId) {
+		try (Cursor cursor = getReadableDatabase().query(LocalChannelTable.TABLE_NAME,
+				LocalChannelTable.ALL_COLUMNS,
+				LocalChannelTable.COL_CHANNEL_ID + " = ?", new String[] { channelId },
+				null, null, null)) {
+			if (cursor.moveToNext()) {
+				String title = cursor.getString(cursor.getColumnIndexOrThrow(LocalChannelTable.COL_TITLE));
+				String description = cursor.getString(cursor.getColumnIndexOrThrow(LocalChannelTable.COL_DESCRIPTION));
+				String thumnbail = cursor.getString(cursor.getColumnIndexOrThrow(LocalChannelTable.COL_THUMBNAIL_NORMAL_URL));
+				String banner = cursor.getString(cursor.getColumnIndexOrThrow(LocalChannelTable.COL_BANNER_URL));
+				long subscriberCount = cursor.getLong(cursor.getColumnIndexOrThrow(LocalChannelTable.COL_SUBSCRIBER_COUNT));
+				long lastCheckTs = cursor.getLong(cursor.getColumnIndexOrThrow(LocalChannelTable.COL_LAST_CHECK_TS));
+				return new YouTubeChannel(channelId, title, description, thumnbail, banner, subscriberCount, false, -1, lastCheckTs);
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Save channel informations in the database from the Object.
+	 *
+	 * @param channel which contains all the recent informations.
+	 * @return true, if the channel was inside the database.
+	 */
+	public boolean cacheChannel(YouTubeChannel channel) {
+		return cacheChannel(getWritableDatabase(), channel);
+	}
+
+	private boolean cacheChannel(SQLiteDatabase db, YouTubeChannel channel) {
+		ContentValues values = new ContentValues();
+		values.put(LocalChannelTable.COL_TITLE, channel.getTitle());
+		values.put(LocalChannelTable.COL_DESCRIPTION, channel.getDescription());
+		values.put(LocalChannelTable.COL_BANNER_URL, channel.getBannerUrl());
+		values.put(LocalChannelTable.COL_THUMBNAIL_NORMAL_URL, channel.getThumbnailNormalUrl());
+		values.put(LocalChannelTable.COL_SUBSCRIBER_COUNT, channel.getSubscriberCount());
+		if(channel.getLastVideoTime() > 0) {
+			values.put(LocalChannelTable.COL_LAST_VIDEO_TS, channel.getLastVideoTime());
+		}
+		if (channel.getLastCheckTime() > 0) {
+			values.put(LocalChannelTable.COL_LAST_CHECK_TS, channel.getLastCheckTime());
+		}
+
+		int count = db.update(
+				LocalChannelTable.TABLE_NAME,
+				values,
+				LocalChannelTable.COL_CHANNEL_ID + " = ?",
+				new String[]{channel.getId()});
+		if (count > 0) {
+			return true;
+		} else if (count == 0) {
+			values.put(LocalChannelTable.COL_CHANNEL_ID, channel.getId());
+			return db.insert(LocalChannelTable.TABLE_NAME, null, values) > 0;
+		}
+		return false;
+	}
+
+	/**
+	 * Removes the given channel from the local channel cache.
+	 *
+	 * @param channelId id of the channel.
+	 *
+	 * @return True if the operation was successful; false otherwise.
+	 */
+	public boolean removeCachedChannel(String channelId) {
+		// remove this channel from the subscriptions DB
+		int rowsDeleted = getWritableDatabase().delete(LocalChannelTable.TABLE_NAME,
+				LocalChannelTable.COL_CHANNEL_ID + " = ?",
+				new String[]{channelId});
+		return (rowsDeleted >= 0);
+	}
 
 }

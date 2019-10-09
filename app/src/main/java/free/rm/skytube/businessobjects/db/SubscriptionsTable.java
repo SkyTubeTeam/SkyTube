@@ -26,6 +26,7 @@ public class SubscriptionsTable {
 	public static final String COL_ID  = "_id";
 	public static final String COL_CHANNEL_ID = "Channel_Id";
 	public static final String COL_LAST_VISIT_TIME = "Last_Visit_Time";
+	public static final String COL_LAST_CHECK_TIME = "Last_Check_Time";
 	public static final String COL_TITLE = "Title";
 	public static final String COL_DESCRIPTION = "Description";
 	public static final String COL_THUMBNAIL_NORMAL_URL = "Thumbnail_Normal_Url";
@@ -38,7 +39,8 @@ public class SubscriptionsTable {
 			SubscriptionsTable.COL_BANNER_URL,
 			SubscriptionsTable.COL_THUMBNAIL_NORMAL_URL,
 			SubscriptionsTable.COL_SUBSCRIBER_COUNT,
-			SubscriptionsTable.COL_LAST_VISIT_TIME};
+			SubscriptionsTable.COL_LAST_VISIT_TIME,
+			SubscriptionsTable.COL_LAST_CHECK_TIME};
 
 	private static final String ADD_COLUMN = "ALTER TABLE " + TABLE_NAME + " ADD COLUMN ";
 
@@ -51,7 +53,8 @@ public class SubscriptionsTable {
 				COL_THUMBNAIL_NORMAL_URL+ " TEXT, " +
 				COL_BANNER_URL      	+ " TEXT, " +
 				COL_SUBSCRIBER_COUNT	+ " INTEGER, " +
-				COL_LAST_VISIT_TIME 	+ " TIMESTAMP DEFAULT (strftime('%s', 'now')) " +
+				COL_LAST_VISIT_TIME 	+ " TIMESTAMP DEFAULT (strftime('%s', 'now')), " +
+				COL_LAST_CHECK_TIME 	+ " INTEGER " +
 		" )";
 	}
 
@@ -64,5 +67,9 @@ public class SubscriptionsTable {
 				ADD_COLUMN + COL_BANNER_URL + " TEXT",
 				ADD_COLUMN + COL_SUBSCRIBER_COUNT + " INTEGER"
 		};
+	}
+
+	public static String[] getLastCheckTimeColumn() {
+		return new String[] { ADD_COLUMN + COL_LAST_CHECK_TIME + " INTEGER "};
 	}
 }

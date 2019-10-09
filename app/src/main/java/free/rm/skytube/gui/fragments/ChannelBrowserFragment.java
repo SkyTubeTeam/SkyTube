@@ -17,10 +17,8 @@
 
 package free.rm.skytube.gui.fragments;
 
-import android.content.Context;
 import android.os.Bundle;
 import com.google.android.material.tabs.TabLayout;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
@@ -41,8 +39,9 @@ import java.util.List;
 
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
+import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannelInterface;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
-import free.rm.skytube.businessobjects.YouTube.Tasks.GetYouTubeChannelInfoTask;
+import free.rm.skytube.businessobjects.db.Tasks.GetChannelInfo;
 import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
 import free.rm.skytube.gui.businessobjects.fragments.FragmentEx;
 import free.rm.skytube.gui.businessobjects.fragments.TabFragment;
@@ -69,7 +68,7 @@ public class ChannelBrowserFragment extends FragmentEx {
 	private ImageView			channelBannerImage = null;
 	private TextView			channelSubscribersTextView = null;
 	private SubscribeButton		channelSubscribeButton = null;
-	private GetChannelInfoTask	task = null;
+	private GetChannelInfo   	task = null;
 
 	public static final String CHANNEL_OBJ = "ChannelBrowserFragment.ChannelObj";
 	public static final String CHANNEL_ID  = "ChannelBrowserFragment.ChannelID";
@@ -166,7 +165,7 @@ public class ChannelBrowserFragment extends FragmentEx {
 
 		if (channel == null) {
 			if (task == null) {
-				task = new GetChannelInfoTask(getContext());
+				task = new GetChannelInfo(getContext(), new ProcessChannel());
 				task.execute(channelId);
 			}
 		} else {
@@ -248,16 +247,13 @@ public class ChannelBrowserFragment extends FragmentEx {
 	/**
 	 * A task that given a channel ID it will try to initialize and return {@link YouTubeChannel}.
 	 */
-	private class GetChannelInfoTask extends GetYouTubeChannelInfoTask {
+	private class ProcessChannel implements YouTubeChannelInterface {
 
-		GetChannelInfoTask(Context ctx) {
-			super(ctx,null);
-		}
+
 
 		@Override
-		protected void onPostExecute(YouTubeChannel youTubeChannel) {
+		public void onGetYouTubeChannel(YouTubeChannel youTubeChannel) {
 			if (youTubeChannel == null) {
-				showError();
 				return;
 			}
 			// In the event this fragment is passed a channel id and not a channel object, set the
@@ -267,8 +263,8 @@ public class ChannelBrowserFragment extends FragmentEx {
 			initViews();
 			channelSubscribeButton.setChannel(youTubeChannel);
 			channelVideosFragment.setYouTubeChannel(youTubeChannel);
-		}
 
+		}
 	}
 
 

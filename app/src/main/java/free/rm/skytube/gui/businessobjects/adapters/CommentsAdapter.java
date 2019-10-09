@@ -40,7 +40,7 @@ import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.YouTube.GetCommentThreads;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeComment;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeCommentThread;
-import free.rm.skytube.businessobjects.YouTube.Tasks.GetYouTubeChannelInfoTask;
+import free.rm.skytube.businessobjects.db.Tasks.GetChannelInfo;
 import free.rm.skytube.gui.businessobjects.YouTubePlayer;
 
 /**
@@ -199,7 +199,7 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
 
 			thumbnailImageView.setOnClickListener(view -> {
 				if(comment.getAuthorChannelId() != null) {
-					new GetYouTubeChannelInfoTask(context, youTubeChannel -> {
+					new GetChannelInfo(context, youTubeChannel -> {
 						YouTubePlayer.launchChannel(youTubeChannel, context);
 					}).executeInParallel(comment.getAuthorChannelId());
 				}

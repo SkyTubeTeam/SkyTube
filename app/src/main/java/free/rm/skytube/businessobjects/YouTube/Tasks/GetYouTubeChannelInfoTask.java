@@ -22,25 +22,20 @@ import android.widget.Toast;
 
 import java.io.IOException;
 
-import org.schabi.newpipe.extractor.exceptions.ExtractionException;
-
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.GetChannelsDetails;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannelInterface;
-import free.rm.skytube.businessobjects.YouTube.VideoStream.NewPipeService;
-import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 
 /**
- * A task that given a channel ID it will try to initialize and return {@link YouTubeChannel}.
+ * A task that given a user ID it will try to initialize and return {@link YouTubeChannel}.
  */
 public class GetYouTubeChannelInfoTask extends AsyncTaskParallel<String, Void, YouTubeChannel> {
 
 	private YouTubeChannelInterface youTubeChannelInterface;
 	private Context context;
-	private boolean usingUsername = false;
 
 	public GetYouTubeChannelInfoTask(Context context, YouTubeChannelInterface youTubeChannelInterface) {
 		this.context = context;
@@ -52,7 +47,6 @@ public class GetYouTubeChannelInfoTask extends AsyncTaskParallel<String, Void, Y
 	 * @return this object, for chaining
 	 */
 	public GetYouTubeChannelInfoTask setUsingUsername() {
-		usingUsername = true;
 		return this;
 	}
 
@@ -61,30 +55,13 @@ public class GetYouTubeChannelInfoTask extends AsyncTaskParallel<String, Void, Y
 	protected YouTubeChannel doInBackground(String... channelId) {
 
 		try {
-			if(usingUsername) {
-				return new GetChannelsDetails().getYouTubeChannelFromUsername(channelId[0]);
-			} else {
-				return getChannelById(channelId[0]);
-			}
-		} catch (IOException | ExtractionException e) {
+			return new GetChannelsDetails().getYouTubeChannelFromUsername(channelId[0]);
+		} catch (IOException e) {
 			Logger.e(this, "Unable to get channel info.  ChannelID=" + channelId[0], e);
 		}
 
 		return null;
 	}
-
-	private YouTubeChannel getChannelById(String channelId) throws IOException, ExtractionException {
-		if (NewPipeService.isPreferred()) {
-			YouTubeChannel channel = NewPipeService.get().getChannelDetails(channelId);
-			if (channel != null) {
-				channel.setUserSubscribed(SubscriptionsDb.getSubscriptionsDb().isUserSubscribedToChannel(channelId));
-			}
-			return channel;
-		} else {
-			return new GetChannelsDetails().getYouTubeChannel(channelId);
-		}
-	}
-
 
 	@Override
 	protected void onPostExecute(YouTubeChannel youTubeChannel) {
@@ -97,7 +74,7 @@ public class GetYouTubeChannelInfoTask extends AsyncTaskParallel<String, Void, Y
 		}
 	}
 
-	protected void showError() {
+	private void showError() {
 		Toast.makeText(context,
 				context.getString(R.string.could_not_get_channel),
 				Toast.LENGTH_LONG).show();
