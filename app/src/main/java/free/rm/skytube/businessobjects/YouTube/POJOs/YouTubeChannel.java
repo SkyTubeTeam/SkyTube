@@ -53,6 +53,8 @@ public class YouTubeChannel implements Serializable {
 	private long subscriberCount;
 	private boolean isUserSubscribed;
 	private long	lastVisitTime;
+	private long    lastCheckTime;
+	private long    lastVideoTime;
 	private boolean	newVideosSinceLastVisit = false;
 	private List<YouTubeVideo> youTubeVideos = new ArrayList<>();
 
@@ -68,7 +70,7 @@ public class YouTubeChannel implements Serializable {
 	}
 
 	public YouTubeChannel(String id, String title, String description, String thumbnailNormalUrl,
-						  String bannerUrl, long subscriberCount, boolean isUserSubscribed, long lastVisitTime) {
+						  String bannerUrl, long subscriberCount, boolean isUserSubscribed, long lastVisitTime, long lastCheckTime) {
 		this.id = id;
 		this.title = title;
 		this.description = description;
@@ -78,6 +80,7 @@ public class YouTubeChannel implements Serializable {
 		this.totalSubscribers = getFormattedSubscribers(subscriberCount);
 		this.isUserSubscribed = isUserSubscribed;
 		this.lastVisitTime = lastVisitTime;
+		this.lastCheckTime = lastCheckTime;
 	}
 
 	/**
@@ -195,6 +198,8 @@ public class YouTubeChannel implements Serializable {
 		return subscriberCount;
 	}
 
+	public long getLastCheckTime() { return lastCheckTime; }
+
 	public void setUserSubscribed(boolean userSubscribed) {
 		isUserSubscribed = userSubscribed;
 	}
@@ -209,6 +214,14 @@ public class YouTubeChannel implements Serializable {
 
 	public long getLastVisitTime() {
 		return lastVisitTime;
+	}
+
+	public long getLastVideoTime() {
+		return lastVideoTime;
+	}
+
+	public void setLastVideoTime(long lastVideoTime) {
+		this.lastVideoTime = lastVideoTime;
 	}
 
 	public boolean newVideosSinceLastVisit() {
