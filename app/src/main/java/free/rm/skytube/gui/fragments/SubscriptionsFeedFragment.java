@@ -241,11 +241,7 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 			refreshInProgress = false;
 			// Remove the progress bar(s)
 			swipeRefreshLayout.setRefreshing(false);
-			boolean fragmentIsVisible = progressDialog != null;
-			if(progressDialog != null) {
-				progressDialog.dismiss();
-				progressDialog = null;
-			}
+			boolean fragmentIsVisible = dismissProgressDialog();
 			if(changed) {
 				refreshFeedFromCache();
 			} else {
@@ -259,6 +255,14 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 		}, 500);
 	}
 
+	protected synchronized boolean dismissProgressDialog() {
+		if(progressDialog != null) {
+			progressDialog.dismiss();
+			progressDialog = null;
+			return true;
+		}
+		return false;
+	}
 	@Override
 	public void onFragmentSelected() {
 		super.onFragmentSelected();
@@ -269,6 +273,11 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 		}
 	}
 
+	@Override
+	public void onFragmentUnselected() {
+		dismissProgressDialog();
+		super.onFragmentUnselected();
+	}
 
 	@Override
 	protected VideoCategory getVideoCategory() {
