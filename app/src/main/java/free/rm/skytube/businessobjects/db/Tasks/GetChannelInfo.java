@@ -41,17 +41,26 @@ public class GetChannelInfo extends AsyncTaskParallel<String, Void, YouTubeChann
     private final Context context;
     private Exception exception;
     private final YouTubeChannelInterface channelReceiver;
+    private final boolean staleAcceptable;
 
     public GetChannelInfo(Context context, YouTubeChannelInterface channelReceiver) {
+        this(context, channelReceiver, false);
+    }
+    public GetChannelInfo(Context context, YouTubeChannelInterface channelReceiver, boolean staleAcceptable) {
         NewPipeService.requireNonNull(context, "context missing");
         NewPipeService.requireNonNull(channelReceiver, "channelReceiver missing");
         this.context = context;
         this.channelReceiver = channelReceiver;
+        this.staleAcceptable = staleAcceptable;
     }
 
     @Override
     protected YouTubeChannel doInBackground(String... params) {
         String channelId = params[0];
+        return getChannelInfoSync(channelId);
+    }
+
+    YouTubeChannel getChannelInfoSync(String channelId) {
         final SubscriptionsDb db = SubscriptionsDb.getSubscriptionsDb();
         YouTubeChannel channel = db.getCachedChannel(channelId);
         if (channel == null || channel.getLastCheckTime() < System.currentTimeMillis() - CHANNEL_INFO_VALIDITY) {
