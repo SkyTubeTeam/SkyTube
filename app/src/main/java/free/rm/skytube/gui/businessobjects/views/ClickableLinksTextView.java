@@ -38,7 +38,6 @@ import free.rm.skytube.businessobjects.YouTube.Tasks.GetPlaylistTask;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetYouTubeChannelInfoTask;
 import free.rm.skytube.gui.activities.MainActivity;
 import free.rm.skytube.gui.businessobjects.YouTubePlayer;
-import free.rm.skytube.gui.fragments.ChannelBrowserFragment;
 import free.rm.skytube.gui.fragments.PlaylistVideosFragment;
 
 /**
@@ -108,10 +107,7 @@ public class ClickableLinksTextView extends LinkConsumableTextView {
 			} else if(channelMatcher.matches()) {
 				String username = channelMatcher.group(1);
 				new GetYouTubeChannelInfoTask(getContext(), youTubeChannel -> {
-					Intent channelIntent = new Intent(getContext(), MainActivity.class);
-					channelIntent.setAction(MainActivity.ACTION_VIEW_CHANNEL);
-					channelIntent.putExtra(ChannelBrowserFragment.CHANNEL_OBJ, youTubeChannel);
-					getContext().startActivity(channelIntent);
+					YouTubePlayer.launchChannel(youTubeChannel, getContext());
 				}).setUsingUsername().executeInParallel(username);
 			} else {
 				Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(clickedText));

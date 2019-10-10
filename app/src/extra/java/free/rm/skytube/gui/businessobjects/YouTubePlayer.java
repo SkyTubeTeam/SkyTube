@@ -20,7 +20,6 @@ package free.rm.skytube.gui.businessobjects;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -33,10 +32,13 @@ import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.ChromecastListener;
 import free.rm.skytube.businessobjects.GetVideoDetailsTask;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPIKey;
+import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.db.PlaybackStatusDb;
 import free.rm.skytube.gui.activities.BaseActivity;
+import free.rm.skytube.gui.activities.MainActivity;
 import free.rm.skytube.gui.activities.YouTubePlayerActivity;
+import free.rm.skytube.gui.fragments.ChannelBrowserFragment;
 
 import static free.rm.skytube.gui.activities.YouTubePlayerActivity.YOUTUBE_VIDEO_OBJ;
 
@@ -186,4 +188,15 @@ public class YouTubePlayer {
 		context.startActivity(i);
 	}
 
+	/**
+	 * Launches the channel view, so the user can see all the videos from a channel.
+	 *
+	 * @param youTubeChannel the channel to be displayed.
+	 */
+	public static void launchChannel(YouTubeChannel youTubeChannel, Context context) {
+		Intent i = new Intent(context, MainActivity.class);
+		i.setAction(MainActivity.ACTION_VIEW_CHANNEL);
+		i.putExtra(ChannelBrowserFragment.CHANNEL_OBJ, youTubeChannel);
+		context.startActivity(i);
+	}
 }
