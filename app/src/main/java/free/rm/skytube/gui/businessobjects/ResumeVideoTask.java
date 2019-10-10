@@ -37,11 +37,11 @@ public class ResumeVideoTask {
         void loadVideo(int position);
     }
 
-    final Context context;
-    final Callback callback;
-    final YouTubeVideo youTubeVideo;
+    private final @NonNull Context context;
+    private final @NonNull Callback callback;
+    private final @NonNull YouTubeVideo youTubeVideo;
 
-    public ResumeVideoTask(Context context, YouTubeVideo youTubeVideo, Callback callback) {
+    public ResumeVideoTask(@NonNull Context context, @NonNull YouTubeVideo youTubeVideo, @NonNull Callback callback) {
         this.context = context;
         this.youTubeVideo = youTubeVideo;
         this.callback = callback;
