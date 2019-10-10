@@ -80,12 +80,12 @@ import free.rm.skytube.businessobjects.db.Tasks.IsVideoBookmarkedTask;
 import free.rm.skytube.businessobjects.interfaces.GetDesiredStreamListener;
 import free.rm.skytube.businessobjects.interfaces.YouTubePlayerActivityListener;
 import free.rm.skytube.businessobjects.interfaces.YouTubePlayerFragmentInterface;
-import free.rm.skytube.gui.activities.MainActivity;
 import free.rm.skytube.gui.activities.ThumbnailViewerActivity;
 import free.rm.skytube.gui.businessobjects.MobileNetworkWarningDialog;
 import free.rm.skytube.gui.businessobjects.PlayerViewGestureDetector;
 import free.rm.skytube.gui.businessobjects.ResumeVideoTask;
 import free.rm.skytube.gui.businessobjects.SkyTubeMaterialDialog;
+import free.rm.skytube.gui.businessobjects.YouTubePlayer;
 import free.rm.skytube.gui.businessobjects.adapters.CommentsAdapter;
 import free.rm.skytube.gui.businessobjects.fragments.ImmersiveModeFragment;
 import free.rm.skytube.gui.businessobjects.views.ClickableLinksTextView;
@@ -269,10 +269,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 		videoDescChannelThumbnailImageView = view.findViewById(R.id.video_desc_channel_thumbnail_image_view);
 		videoDescChannelThumbnailImageView.setOnClickListener(v -> {
 			if (youTubeChannel != null) {
-				Intent i = new Intent(getActivity(), MainActivity.class);
-				i.setAction(MainActivity.ACTION_VIEW_CHANNEL);
-				i.putExtra(ChannelBrowserFragment.CHANNEL_OBJ, youTubeChannel);
-				startActivity(i);
+				YouTubePlayer.launchChannel(youTubeChannel, getActivity());
 			}
 		});
 		videoDescChannelTextView = view.findViewById(R.id.video_desc_channel);
