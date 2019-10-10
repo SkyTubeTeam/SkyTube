@@ -415,7 +415,12 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 						@Override
 						public void onGetDesiredStreamError(String errorMessage) {
 							if (errorMessage != null) {
-								new SkyTubeMaterialDialog(getContext())
+								Context ctx = getContext();
+								if (ctx == null) {
+									Logger.e(YouTubePlayerV2Fragment.this, "Error during getting stream: %s", errorMessage);
+									return;
+								}
+								new SkyTubeMaterialDialog(ctx)
 										.content(errorMessage)
 										.title(R.string.error_video_play)
 										.cancelable(false)
@@ -434,15 +439,18 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 	private void openAsLiveStream() {
 		// else, if the video is a LIVE STREAM
 		// video is live:  ask the user if he wants to play the video using an other app
-		new SkyTubeMaterialDialog(getContext())
-				.onNegativeOrCancel((dialog) -> closeActivity())
-				.content(R.string.warning_live_video)
-				.title(R.string.error_video_play)
-				.onPositive((dialog, which) -> {
-					youTubeVideo.playVideoExternally(getContext());
-					closeActivity();
-				})
-				.show();
+		Context ctx = getContext();
+		if (ctx != null) {
+			new SkyTubeMaterialDialog(ctx)
+					.onNegativeOrCancel((dialog) -> closeActivity())
+					.content(R.string.warning_live_video)
+					.title(R.string.error_video_play)
+					.onPositive((dialog, which) -> {
+						youTubeVideo.playVideoExternally(getContext());
+						closeActivity();
+					})
+					.show();
+		}
 	}
 
 
