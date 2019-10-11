@@ -71,7 +71,12 @@ public class GetSubscribedChannelsTask extends AsyncTaskParallel<Void, Void, Lis
 		try {
 			List<String> channelIds = SubscriptionsDb.getSubscriptionsDb().getSubscribedChannelIds();
 			for (String id : channelIds) {
-				subbedChannelsList.add(channelInfo.getChannelInfoSync(id));
+				YouTubeChannel channel = channelInfo.getChannelInfoSync(id);
+				// This shouldn't be null, but could happen in rare scenarios, where the app is offline,
+				// and the info previously not saved
+				if (channel != null) {
+					subbedChannelsList.add(channel);
+				}
 			}
 
 			// sort channels alphabetically (by channel name) if the user wants so...
