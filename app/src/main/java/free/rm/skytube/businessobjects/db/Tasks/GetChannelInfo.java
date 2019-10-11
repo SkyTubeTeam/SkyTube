@@ -63,7 +63,7 @@ public class GetChannelInfo extends AsyncTaskParallel<String, Void, YouTubeChann
     YouTubeChannel getChannelInfoSync(String channelId) {
         final SubscriptionsDb db = SubscriptionsDb.getSubscriptionsDb();
         YouTubeChannel channel = db.getCachedChannel(channelId);
-        if (channel == null || channel.getLastCheckTime() < System.currentTimeMillis() - CHANNEL_INFO_VALIDITY) {
+        if (needRefresh(channel)) {
             try {
                 channel = NewPipeService.get().getChannelDetails(channelId);
                 db.cacheChannel(channel);
@@ -75,6 +75,16 @@ public class GetChannelInfo extends AsyncTaskParallel<String, Void, YouTubeChann
             channel.setUserSubscribed(db.isUserSubscribedToChannel(channelId));
         }
         return channel;
+    }
+
+    private boolean needRefresh(YouTubeChannel channel) {
+        if (channel == null) {
+            return true;
+        }
+        if (staleAcceptable) {
+            return false;
+        }
+        return (channel.getLastCheckTime() < System.currentTimeMillis() - CHANNEL_INFO_VALIDITY);
     }
 
     @Override
