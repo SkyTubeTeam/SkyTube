@@ -107,7 +107,7 @@ public class MobileNetworkWarningDialog extends SkyTubeMaterialDialog {
 		    if (dialog.isPromptCheckBoxChecked()) {
                 SkyTubeApp.getSettings().setWarningMobilePolicy(Policy.BLOCK);
             }
-            callback.onCancel(dialog);
+            // no need to call the 'callback', as the cancelListener will be called.
         };
 		this.cancelListener = callback;
 		return this;
