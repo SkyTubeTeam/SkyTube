@@ -103,7 +103,7 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.10.0'
     implementation 'com.jakewharton:butterknife:10.2.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.0'
-    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'com.google.code.gson:gson:2.8.6'
     implementation group: 'joda-time', name: 'joda-time', version: '2.10.4'
     implementation 'com.afollestad.material-dialogs:core:0.9.5.0'
     implementation 'com.google.android.exoplayer:exoplayer:2.9.6'
