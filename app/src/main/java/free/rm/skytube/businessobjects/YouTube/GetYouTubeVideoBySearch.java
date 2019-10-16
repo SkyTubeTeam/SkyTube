@@ -24,6 +24,7 @@ import com.google.api.services.youtube.model.SearchListResponse;
 import com.google.api.services.youtube.model.SearchResult;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPI;
@@ -114,19 +115,14 @@ public class GetYouTubeVideoBySearch extends GetYouTubeVideos {
 	 * @throws IOException
 	 */
 	private List<YouTubeVideo> getVideosList(List<SearchResult> searchResultList) throws IOException {
-		StringBuilder videoIds = new StringBuilder();
+		List<String> videoIds = new ArrayList<>(searchResultList.size());
 
 		// append the video IDs into a strings (CSV)
 		for (SearchResult res : searchResultList) {
-			videoIds.append(res.getId().getVideoId());
-			videoIds.append(',');
+			videoIds.add(res.getId().getVideoId());
 		}
 
-		// get video details by supplying the videos IDs
-		GetVideosDetailsByIDs getVideo = new GetVideosDetailsByIDs();
-		getVideo.init(videoIds.toString());
-
-		return getVideo.getNextVideos();
+		return getVideoListFromIds(videoIds);
 	}
 
 

@@ -109,10 +109,8 @@ public class GetChannelVideosTask extends AsyncTaskParallel<Void, Void, List<You
 		}
 
 		if(videos != null) {
-			for (YouTubeVideo video : videos)
-				channel.addYouTubeVideo(video);
 			if(channel.isUserSubscribed()) {
-				SubscriptionsDb.getSubscriptionsDb().saveChannelVideos(channel);
+				SubscriptionsDb.getSubscriptionsDb().saveVideos(videos);
 			}
 		}
 		return videos;
