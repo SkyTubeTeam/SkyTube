@@ -25,6 +25,7 @@ import com.google.api.services.youtube.model.Activity;
 import com.google.api.services.youtube.model.ActivityListResponse;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPI;
@@ -107,19 +108,13 @@ public class GetChannelVideosLite extends GetYouTubeVideos implements GetChannel
 	 * @throws IOException
 	 */
 	private List<YouTubeVideo> getVideosList(List<Activity> activityList) throws IOException {
-		StringBuilder videoIds = new StringBuilder();
+        List<String> videoIds = new ArrayList<>(activityList.size());
 
 		// append the video IDs into a strings (CSV)
 		for (Activity res : activityList) {
-			videoIds.append(res.getContentDetails().getUpload().getVideoId());
-			videoIds.append(',');
+			videoIds.add(res.getContentDetails().getUpload().getVideoId());
 		}
-
-		// get video details by supplying the videos IDs
-		GetVideosDetailsByIDs getVideo = new GetVideosDetailsByIDs();
-		getVideo.init(videoIds.toString());
-
-		return getVideo.getNextVideos();
+        return getVideoListFromIds(videoIds);
 	}
 
 
