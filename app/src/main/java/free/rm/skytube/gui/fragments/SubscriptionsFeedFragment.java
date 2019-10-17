@@ -61,9 +61,6 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 	private int numChannelsSubscribed = 0;
 	private boolean refreshInProgress = false;
 	private MaterialDialog progressDialog;
-	/** When set to true, it will retrieve any published video (wrt subbed channels) by querying the
-	 *  remote YouTube servers. */
-	private boolean shouldRefresh = false;
 	private SubscriptionsBackupsManager subscriptionsBackupsManager;
 
 	/**
@@ -97,31 +94,28 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		checkRefreshTime();
-
 		subscriptionsBackupsManager = new SubscriptionsBackupsManager(getActivity(), SubscriptionsFeedFragment.this);
 	}
 
 
-	private void checkRefreshTime() {
+	private boolean checkRefreshTime() {
 	    // Only do an automatic refresh of subscriptions if it's been more than three hours since the last one was done.
 	    long subscriptionsLastUpdated = SkyTubeApp.getPreferenceManager().getLong(SkyTubeApp.KEY_SUBSCRIPTIONS_LAST_UPDATED, -1);
 	    long threeHoursAgo = System.currentTimeMillis() - REFRESH_TIME_IN_MS;
-	    if(subscriptionsLastUpdated <= threeHoursAgo) {
-	    	shouldRefresh = true;
-	    }
+	    return subscriptionsLastUpdated <= threeHoursAgo;
 	}
 
 
 	@Override
 	public void onResume() {
-	    	checkRefreshTime();
-		// setup the UI and refresh the feed (if applicable)
-		startRefreshTask(isFragmentSelected());
 
 		getActivity().registerReceiver(feedUpdaterReceiver, new IntentFilter(FeedUpdaterService.NEW_SUBSCRIPTION_VIDEOS_FOUND));
 
 		super.onResume();
+
+		// setup the UI and refresh the feed (if applicable)
+		startRefreshTask(isFragmentSelected(), checkRefreshTime() || isFlagSet(FLAG_REFRESH_FEED_FULL));
+
 		// this will detect whether we have previous instructed the app (via refreshSubsFeedFromCache())
 		// to refresh the subs feed
 		if (isFlagSet(FLAG_REFRESH_FEED_FROM_CACHE)) {
@@ -203,19 +197,19 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 
 	@Override
 	public void onRefresh() {
-		shouldRefresh = true;
-		startRefreshTask(true);
+		startRefreshTask(true, true);
 	}
 
 
-	protected synchronized void startRefreshTask(boolean showFetchingVideosDialog) {
+	protected synchronized void startRefreshTask(boolean showFetchingVideosDialog, boolean forcedFullRefresh) {
 		if (refreshInProgress) {
 			return;
 		}
-		if (shouldRefresh) {
+		if (forcedFullRefresh) {
+			unsetFlag(FLAG_REFRESH_FEED_FULL);
 			refreshInProgress = true;
-			new RefreshFeedTask(showFetchingVideosDialog).executeInParallel();
 		}
+		new RefreshFeedTask(showFetchingVideosDialog, forcedFullRefresh).executeInParallel();
 	}
 
 
@@ -341,10 +335,12 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 
 		private MaterialDialog  fetchingChannelInfoDialog;
 		private boolean         showDialogs;
+		private boolean 		fullRefresh;
 
 
-		private RefreshFeedTask(boolean showFetchingVideosDialog) {
+		private RefreshFeedTask(boolean showFetchingVideosDialog, boolean fullRefresh) {
 			this.showDialogs = showFetchingVideosDialog;
+			this.fullRefresh = fullRefresh;
 		}
 
 
@@ -388,10 +384,9 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 				videoGridAdapter.setVideoCategory(VideoCategory.SUBSCRIPTIONS_FEED_VIDEOS);
 
 				// get any videos published after the last time the user used the app...
-				if (shouldRefresh) {
+				if (fullRefresh) {
 					//new GetSubscriptionVideosTask(SubscriptionsFeedFragment.this).executeInParallel();      // refer to #onChannelVideosFetched()
 					getRefreshTask(totalChannels).executeInParallel();
-					shouldRefresh = false;
 
 					if (showDialogs) {
 						showRefreshDialog();

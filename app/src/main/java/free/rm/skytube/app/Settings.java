@@ -22,6 +22,9 @@ import android.preference.PreferenceManager;
 import free.rm.skytube.R;
 import free.rm.skytube.app.enums.Policy;
 
+/**
+ * Type safe wrapper to access the various preferences.
+ */
 public class Settings {
     private final SkyTubeApp app;
 
