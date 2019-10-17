@@ -614,4 +614,13 @@ public abstract class BaseActivity extends AppCompatActivity implements MainActi
 	public boolean onCreateOptionsMenu(Menu menu) {
 		return true;
 	}
+
+	/**
+	 * No-op method, in order to be able to connect to a Chromecast from
+	 * this activity, it needs to implement this method, but doesn't need to do anything, since it doesn't use
+	 * SubscriptionsFeedFragment.
+	 */
+	@Override
+	public void refreshSubscriptionsFeedVideos() {}
+
 }
