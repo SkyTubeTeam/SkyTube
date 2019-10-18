@@ -46,23 +46,15 @@ public class GetChannelVideosTask extends AsyncTaskParallel<Void, Void, List<You
 	private static final String TAG = GetChannelVideosTask.class.getSimpleName();
 
 	private final GetYouTubeVideos getChannelVideos;
-	private final YouTubeChannel channel;
+	private final String channelId;
+	private IOException exception;
+	private YouTubeChannel channel;
 	private GetChannelVideosTaskInterface getChannelVideosTaskInterface;
 
 
-	public GetChannelVideosTask(YouTubeChannel channel) {
+	public GetChannelVideosTask(String channelId) {
 		this.getChannelVideos = createChannelVideosFetcher();
-		this.channel = channel;
-		try {
-			getChannelVideos.init();
-			setPublishedAfter(getOneMonthAgo());
-			getChannelVideos.setQuery(channel.getId());
-		} catch (IOException e) {
-			e.printStackTrace();
-			Toast.makeText(getContext(),
-				String.format(getContext().getString(R.string.could_not_get_videos), channel.getTitle()),
-				Toast.LENGTH_LONG).show();
-		}
+		this.channelId = channelId;
 	}
 
 	/**
@@ -104,13 +96,22 @@ public class GetChannelVideosTask extends AsyncTaskParallel<Void, Void, List<You
 	protected List<YouTubeVideo> doInBackground(Void... voids) {
 		List<YouTubeVideo> videos = null;
 
+		final SubscriptionsDb db = SubscriptionsDb.getSubscriptionsDb();
 		if (!isCancelled()) {
-			videos = getChannelVideos.getNextVideos();
+			try {
+				getChannelVideos.init();
+				setPublishedAfter(getOneMonthAgo());
+				getChannelVideos.setQuery(channelId);
+				videos = getChannelVideos.getNextVideos();
+			} catch (IOException e) {
+				exception = e;
+				channel = db.getCachedChannel(channelId);
+			}
 		}
 
-		if(videos != null) {
-			if(channel.isUserSubscribed()) {
-				SubscriptionsDb.getSubscriptionsDb().saveVideos(videos);
+		if(videos != null && !videos.isEmpty()) {
+			if (db.isUserSubscribedToChannel(channelId)) {
+				db.saveVideos(videos);
 			}
 		}
 		return videos;
@@ -119,8 +120,14 @@ public class GetChannelVideosTask extends AsyncTaskParallel<Void, Void, List<You
 
 	@Override
 	protected void onPostExecute(List<YouTubeVideo> youTubeVideos) {
-		if(getChannelVideosTaskInterface != null)
+		if (exception != null && channel != null) {
+			Toast.makeText(getContext(),
+					String.format(getContext().getString(R.string.could_not_get_videos), channel.getTitle()),
+					Toast.LENGTH_LONG).show();
+		}
+		if(getChannelVideosTaskInterface != null) {
 			getChannelVideosTaskInterface.onGetVideos(youTubeVideos);
+		}
 	}
 
 

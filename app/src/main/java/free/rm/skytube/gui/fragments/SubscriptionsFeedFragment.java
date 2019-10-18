@@ -99,10 +99,13 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 
 
 	private boolean checkRefreshTime() {
-	    // Only do an automatic refresh of subscriptions if it's been more than three hours since the last one was done.
-	    long subscriptionsLastUpdated = SkyTubeApp.getPreferenceManager().getLong(SkyTubeApp.KEY_SUBSCRIPTIONS_LAST_UPDATED, -1);
-	    long threeHoursAgo = System.currentTimeMillis() - REFRESH_TIME_IN_MS;
-	    return subscriptionsLastUpdated <= threeHoursAgo;
+		// Only do an automatic refresh of subscriptions if it's been more than three hours since the last one was done.
+		Long subscriptionsLastUpdated = SkyTubeApp.getSettings().getFeedsLastUpdateTime();
+		if (subscriptionsLastUpdated == null) {
+			return true;
+		}
+		long threeHoursAgo = System.currentTimeMillis() - REFRESH_TIME_IN_MS;
+		return subscriptionsLastUpdated <= threeHoursAgo;
 	}
 
 
@@ -208,18 +211,21 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 		if (forcedFullRefresh) {
 			unsetFlag(FLAG_REFRESH_FEED_FULL);
 			refreshInProgress = true;
+			new RefreshFeedTask(showFetchingVideosDialog, forcedFullRefresh).executeInParallel();
+		} else {
+			new RefreshFeedFromCacheTask().executeInParallel();
 		}
-		new RefreshFeedTask(showFetchingVideosDialog, forcedFullRefresh).executeInParallel();
 	}
 
 
 	@Override
-	public void onChannelVideosFetched(YouTubeChannel channel, int videosFetched, final boolean videosDeleted) {
+	public void onChannelVideosFetched(String channelId, int videosFetched, final boolean videosDeleted) {
 		Log.d("SUB FRAGMENT", "onChannelVideosFetched");
 
 		// If any new videos have been fetched for a channel, update the Subscription list in the left navbar for that channel
-		if(videosFetched > 0)
-			SubsAdapter.get(getActivity()).changeChannelNewVideosStatus(channel.getId(), true);
+		if(videosFetched > 0) {
+			SubsAdapter.get(getActivity()).changeChannelNewVideosStatus(channelId, true);
+		}
 
 		numVideosFetched += videosFetched;
 		numChannelsFetched++;
@@ -407,7 +413,11 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 		if (NewPipeService.isPreferred()) {
 			return new GetBulkSubscriptionVideosTask(totalChannels, SubscriptionsFeedFragment.this);
 		} else {
-			return new GetSubscriptionVideosTask(SubscriptionsFeedFragment.this);
+			List<String> channelIds = new ArrayList<>(totalChannels.size());
+			for (YouTubeChannel ch: totalChannels) {
+				channelIds.add(ch.getId());
+			}
+			return new GetSubscriptionVideosTask(SubscriptionsFeedFragment.this, channelIds);
 		}
 	}
 

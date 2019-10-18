@@ -25,6 +25,7 @@ import java.util.Set;
 
 import org.schabi.newpipe.extractor.exceptions.ExtractionException;
 
+import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
@@ -41,9 +42,9 @@ import free.rm.skytube.businessobjects.utils.Predicate;
 public class GetBulkSubscriptionVideosTask extends AsyncTaskParallel<Void, GetBulkSubscriptionVideosTask.Progress, Boolean> {
 
     static class Progress {
-        YouTubeChannel dbChannel;
+        String dbChannel;
         int newVideos;
-        public Progress(YouTubeChannel dbChannel, int newVideos) {
+        public Progress(String dbChannel, int newVideos) {
             this.dbChannel = dbChannel;
             this.newVideos = newVideos;
         }
@@ -82,10 +83,10 @@ public class GetBulkSubscriptionVideosTask extends AsyncTaskParallel<Void, GetBu
                     }
                 }
             }
-            publishProgress(new Progress(dbChannel, newVideos.size()));
+            publishProgress(new Progress(dbChannel.getId(), newVideos.size()));
         }
         subscriptionsDb.saveVideos(detailedList);
-        GetSubscriptionVideosTask.updateFeedsLastUpdateTime(System.currentTimeMillis());
+        SkyTubeApp.getSettings().updateFeedsLastUpdateTime(System.currentTimeMillis());
         return !detailedList.isEmpty();
     }
 

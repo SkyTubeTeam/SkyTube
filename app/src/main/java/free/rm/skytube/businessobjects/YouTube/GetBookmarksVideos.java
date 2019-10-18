@@ -30,7 +30,7 @@ import free.rm.skytube.businessobjects.db.BookmarksDb;
 public class GetBookmarksVideos extends GetYouTubeVideos {
 
 	@Override
-	public void init() throws IOException {
+	public void init() {
 		noMoreVideoPages = false;
 	}
 
