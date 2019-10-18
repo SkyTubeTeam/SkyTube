@@ -499,8 +499,15 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 		SQLiteDatabase db = getWritableDatabase();
 		for (YouTubeVideo video : videos) {
 			if (video.getPublishDate() != null) {
-                ContentValues values = createContentValues(video, video.getChannelId());
-                db.insert(SubscriptionsVideosTable.TABLE_NAME, null, values);
+				ContentValues values = createContentValues(video, video.getChannelId());
+				if (hasVideo(video)) {
+					values.remove(SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID);
+					db.update(SubscriptionsVideosTable.TABLE_NAME, values,
+			 SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID + " = ?",
+						new String[]{video.getId()});
+				} else {
+					db.insert(SubscriptionsVideosTable.TABLE_NAME, null, values);
+				}
 			}
 		}
 	}

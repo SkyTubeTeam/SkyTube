@@ -63,7 +63,7 @@ public class SubscribeButton extends AppCompatButton implements View.OnClickList
 			if (NewPipeService.isPreferred()) {
 				new GetBulkSubscriptionVideosTask(channel, null).executeInParallel();
 			} else {
-				new GetChannelVideosTask(channel).executeInParallel();
+				new GetChannelVideosTask(channel.getId()).executeInParallel();
 			}
 		}
 		if(channel != null)
