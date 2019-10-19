@@ -17,6 +17,7 @@
 
 package free.rm.skytube.businessobjects.YouTube.Tasks;
 
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Semaphore;
@@ -26,15 +27,13 @@ import android.util.Log;
 
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
-import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
-import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
 
 /**
  * A task that returns the videos of channel the user has subscribed too.  Used to detect if new
  * videos have been published since last time the user used the app.
  */
-public class GetSubscriptionVideosTask extends AsyncTaskParallel<Void, Void, Void> {
+public class GetSubscriptionVideosTask extends AsyncTaskParallel<Void, Void, Boolean> {
 	private GetSubscriptionVideosTaskListener listener;
 	private List<String> channelIds;
 	public GetSubscriptionVideosTask(GetSubscriptionVideosTaskListener listener, List<String> channelIds) {
@@ -45,7 +44,7 @@ public class GetSubscriptionVideosTask extends AsyncTaskParallel<Void, Void, Voi
 
 
 	@Override
-	protected Void doInBackground(Void... voids) {
+	protected Boolean doInBackground(Void... voids) {
 		if (channelIds == null) {
 			channelIds = SubscriptionsDb.getSubscriptionsDb().getSubscribedChannelIds();
 		}
@@ -66,19 +65,17 @@ public class GetSubscriptionVideosTask extends AsyncTaskParallel<Void, Void, Voi
 		for(final String channelId: channelIds) {
 			try {
 				semaphore.acquire();
-				new GetChannelVideosTask(channelId)
-						.setPublishedAfter(publishedAfter)
-						.setGetChannelVideosTaskInterface(videos -> {
-							semaphore.release();
-							int numberOfVideos = videos != null ? videos.size() : 0;
-							if (numberOfVideos > 0) {
-								changed.compareAndSet(false, true);
-							}
-							if (listener != null) {
-								listener.onChannelVideosFetched(channelId, numberOfVideos, false);
-							}
-							countDown.countDown();
-						}).executeInParallel();
+				new GetChannelVideosTask(channelId, publishedAfter, videos -> {
+					semaphore.release();
+					int numberOfVideos = videos != null ? videos.size() : 0;
+					if (numberOfVideos > 0) {
+						changed.compareAndSet(false, true);
+					}
+					if (listener != null) {
+						listener.onChannelVideosFetched(channelId, numberOfVideos, false);
+					}
+					countDown.countDown();
+				}).executeInParallel();
 			} catch (InterruptedException e) {
 				Log.e(GetSubscriptionVideosTask.class.getName(), "Interrupt in semaphore.acquire:"+ e.getMessage(), e);
 			}
@@ -86,17 +83,19 @@ public class GetSubscriptionVideosTask extends AsyncTaskParallel<Void, Void, Voi
 
 		try {
 			countDown.await();
-			if (listener != null) {
-				listener.onAllChannelVideosFetched(changed.get());
-			}
 		} catch (InterruptedException e) {
 			Log.e(GetSubscriptionVideosTask.class.getName(), "Interrupt in countDown.await:"+ e.getMessage(), e);
 		}
 
-		return null;
+		return changed.get();
 	}
 
 
+	@Override
+	protected void onPostExecute(Boolean changed) {
+		if (listener != null) {
+			listener.onAllChannelVideosFetched(changed);
+		}
 
-
+	}
 }

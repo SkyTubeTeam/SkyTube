@@ -495,7 +495,11 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 		}
 	}
 
-    public void saveVideos(List<YouTubeVideo> videos) {
+	/**
+	 * Insert or update the list of videos
+	 * @param videos
+	 */
+	public void saveVideos(List<YouTubeVideo> videos) {
 		SQLiteDatabase db = getWritableDatabase();
 		for (YouTubeVideo video : videos) {
 			if (video.getPublishDate() != null) {
@@ -503,11 +507,25 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 				if (hasVideo(video)) {
 					values.remove(SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID);
 					db.update(SubscriptionsVideosTable.TABLE_NAME, values,
-			 SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID + " = ?",
-						new String[]{video.getId()});
+							SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID + " = ?",
+							new String[]{video.getId()});
 				} else {
 					db.insert(SubscriptionsVideosTable.TABLE_NAME, null, values);
 				}
+			}
+		}
+	}
+
+	/**
+	 * Insert videos into the subscription video table.
+	 * @param videos
+	 */
+	public void insertVideos(List<YouTubeVideo> videos) {
+		SQLiteDatabase db = getWritableDatabase();
+		for (YouTubeVideo video : videos) {
+			if (video.getPublishDate() != null) {
+				ContentValues values = createContentValues(video, video.getChannelId());
+				db.insert(SubscriptionsVideosTable.TABLE_NAME, null, values);
 			}
 		}
 	}

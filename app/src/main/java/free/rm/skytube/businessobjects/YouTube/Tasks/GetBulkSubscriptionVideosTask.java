@@ -17,11 +17,16 @@
 
 package free.rm.skytube.businessobjects.YouTube.Tasks;
 
+import android.util.Log;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.Semaphore;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.schabi.newpipe.extractor.exceptions.ExtractionException;
 
@@ -67,27 +72,60 @@ public class GetBulkSubscriptionVideosTask extends AsyncTaskParallel<Void, GetBu
     @Override
     protected Boolean doInBackground(Void... params) {
         Set<String> alreadyKnownVideos = subscriptionsDb.getSubscribedChannelVideos();
-        List<YouTubeVideo> detailedList = new ArrayList<>();
+
+        AtomicBoolean changed = new AtomicBoolean(false);
+        CountDownLatch countDown = new CountDownLatch(channels.size());
+
+        Semaphore semaphore = new Semaphore(4);
+
         for (YouTubeChannel dbChannel : channels) {
-            List<YouTubeVideo> newVideos = fetchVideos(alreadyKnownVideos, dbChannel);
-            if (!newVideos.isEmpty()) {
-                for (YouTubeVideo vid:newVideos) {
-                    YouTubeVideo details;
-                    try {
-                        details = NewPipeService.get().getDetails(vid.getId());
-                        details.setChannel(dbChannel);
-                        detailedList.add(details);
-                    } catch (ExtractionException | IOException e) {
-                        Logger.e(this, "Error during parsing video page for " + vid.getId() + ",msg:" + e.getMessage(), e);
-                        e.printStackTrace();
+            try {
+                semaphore.acquire();
+                new AsyncTaskParallel<Void, Void, Integer>() {
+
+                    @Override
+                    protected Integer doInBackground(Void... voids) {
+                        List<YouTubeVideo> newVideos = fetchVideos(alreadyKnownVideos, dbChannel);
+                        List<YouTubeVideo> detailedList = new ArrayList<>();
+                        if (!newVideos.isEmpty()) {
+                            for (YouTubeVideo vid : newVideos) {
+                                YouTubeVideo details;
+                                try {
+                                    details = NewPipeService.get().getDetails(vid.getId());
+                                    details.setChannel(dbChannel);
+                                    detailedList.add(details);
+                                } catch (ExtractionException | IOException e) {
+                                    Logger.e(this, "Error during parsing video page for " + vid.getId() + ",msg:" + e.getMessage(), e);
+                                    e.printStackTrace();
+                                }
+                            }
+                            changed.compareAndSet(false, true);
+                            subscriptionsDb.insertVideos(detailedList);
+                        }
+                        semaphore.release();
+                        return detailedList.size();
                     }
-                }
+
+                    @Override
+                    protected void onPostExecute(Integer newYouTubeVideos) {
+                        if (listener != null) {
+                            listener.onChannelVideosFetched(dbChannel.getId(), newYouTubeVideos, false);
+                        }
+                        countDown.countDown();
+                    }
+                }.executeInParallel();
+            } catch (InterruptedException e) {
+                Logger.e(this, "Interrupt in semaphore.acquire:"+ e.getMessage(), e);
             }
-            publishProgress(new Progress(dbChannel.getId(), newVideos.size()));
         }
-        subscriptionsDb.saveVideos(detailedList);
+
+        try {
+            countDown.await();
+        } catch (InterruptedException e) {
+            Logger.e(this, "Interrupt in countDown.await:"+ e.getMessage(), e);
+        }
         SkyTubeApp.getSettings().updateFeedsLastUpdateTime(System.currentTimeMillis());
-        return !detailedList.isEmpty();
+        return changed.get();
     }
 
     @Override
