@@ -88,6 +88,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL(SubscriptionsTable.getCreateStatement());
 		db.execSQL(SubscriptionsVideosTable.getCreateStatement());
+		db.execSQL(LocalChannelTable.getCreateStatement());
 	}
 
 
