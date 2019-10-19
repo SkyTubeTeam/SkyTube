@@ -17,14 +17,21 @@
 
 package free.rm.skytube.businessobjects;
 
+import android.util.Log;
+
 import free.rm.skytube.businessobjects.YouTube.GetBookmarksVideos;
+import free.rm.skytube.businessobjects.YouTube.GetChannelVideosFull;
+import free.rm.skytube.businessobjects.YouTube.GetChannelVideosInterface;
+import free.rm.skytube.businessobjects.YouTube.GetChannelVideosLite;
 import free.rm.skytube.businessobjects.YouTube.GetDownloadedVideos;
 import free.rm.skytube.businessobjects.YouTube.GetFeaturedVideos;
 import free.rm.skytube.businessobjects.YouTube.GetMostPopularVideos;
 import free.rm.skytube.businessobjects.YouTube.GetPlaylistVideos;
 import free.rm.skytube.businessobjects.YouTube.GetYouTubeVideoBySearch;
 import free.rm.skytube.businessobjects.YouTube.GetYouTubeVideos;
+import free.rm.skytube.businessobjects.YouTube.NewPipeChannelVideos;
 import free.rm.skytube.businessobjects.YouTube.NewPipeVideoBySearch;
+import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPIKey;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetChannelVideosTask;
 import free.rm.skytube.businessobjects.YouTube.VideoStream.NewPipeService;
 import free.rm.skytube.businessobjects.db.Tasks.GetSubscriptionsVideosFromDb;
@@ -85,7 +92,7 @@ public enum VideoCategory {
 				return new GetYouTubeVideoBySearch();
 			}
 		} else if (id == CHANNEL_VIDEOS.id) {
-			return GetChannelVideosTask.createChannelVideosFetcher();
+			return (GetYouTubeVideos) createChannelVideosFetcher();
 		} else if (id == SUBSCRIPTIONS_FEED_VIDEOS.id) {
 			return new GetSubscriptionsVideosFromDb();
 		} else if (id == BOOKMARKS_VIDEOS.id) {
@@ -102,4 +109,27 @@ public enum VideoCategory {
 	public boolean isVideoFilteringEnabled() {
 		return videoFiltering;
 	}
+
+
+	/**
+	 * Create an appropriate class to get videos of a channel.
+	 *
+	 * <p>This class will detect if the user is using his own YouTube API key or not... if they are, then
+	 * we are going to use {@link GetChannelVideosFull}; otherwise we are going to use
+	 * {@link GetChannelVideosLite}.</p>
+	 */
+	public static GetChannelVideosInterface createChannelVideosFetcher() {
+		if (NewPipeService.isPreferred()) {
+			return new NewPipeChannelVideos();
+		}
+		if (YouTubeAPIKey.get().isUserApiKeySet()) {
+			Log.d(VideoCategory.class.getName(), "Using GetChannelVideosFull...");
+			return new GetChannelVideosFull();
+		} else {
+			Log.d(VideoCategory.class.getName(), "Using GetChannelVideosLite...");
+			return new GetChannelVideosLite();
+		}
+
+	}
+
 }
