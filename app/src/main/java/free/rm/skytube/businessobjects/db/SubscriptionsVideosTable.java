@@ -38,7 +38,7 @@ public class SubscriptionsVideosTable {
 						COL_YOUTUBE_VIDEO + " BLOB, " +
 						COL_YOUTUBE_VIDEO_DATE + " TIMESTAMP DEFAULT (strftime('%s', 'now')), " +
 						COL_RETRIEVAL_TS + " INTEGER, " +
-						COL_PUBLISH_TS + " INTEGER, " +
+						COL_PUBLISH_TS + " INTEGER " +
 						" )";
 	}
 
