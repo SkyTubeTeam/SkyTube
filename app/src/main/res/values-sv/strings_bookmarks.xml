@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="video_bookmarked">Video bokmärkt</string>
+    <string name="no_bookmarked_videos_text">Du har inte bokmärkt några videor ännu.
+\n
+\nNär du gör det kommer de att dyka upp här.</string>
+    <string name="video_unbookmarked">Videons bokmärke borttagen</string>
+    <string name="bookmark">Bokmärke</string>
+    <string name="video_unbookmarked_error">Kunde inte ta bort bokmärket för videon.</string>
+    <string name="unbookmark">Ta bort bokmärke</string>
+    <string name="video_bookmarked_error">Kunde inte bokmärka videon.</string>
+    <string name="bookmarks">Bokmärken</string>
+</resources>

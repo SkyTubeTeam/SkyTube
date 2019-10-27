@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="subscribe">Prenumerera</string>
+    <string name="import_subscriptions_description">Importera dina prenumerationer från YouTube, genom att först besöka https://www.youtube.com/subscription_manager och klicka på knappen \"Exportera prenumerationer\" längst ner. Välj sedan den exporterade filen med titeln \"subscription_manager\" genom att klicka på \"Välj prenumerationsfil\" nedan.</string>
+    <string name="no_new_channels_found">Inga YouTube-kanaler som du inte redan prenumererar på hittades i den XML-fil som du laddade upp.</string>
+    <string name="error_check_if_user_has_subbed">Det går inte att kontrollera om användaren har prenumererat på kanalen (id=%s)</string>
+    <string name="subscribed">Prenumererad</string>
+    <string name="total_subscribers">%,d prenumeranter</string>
+    <string name="error_unable_to_subscribe">Det går inte att (av)prenumerera på kanalen (id=%s)</string>
+    <string name="no_channels_found">Inga YouTube-kanaler hittades i den XML-fil som du laddade upp.</string>
+    <string name="error_get_subbed_channels">Ett fel har uppstått vid hämtning av prenumererade kanaler.</string>
+    <string name="select_all">Välj alla</string>
+    <string name="unsubscribed">Prenumeration avslutad</string>
+    <string name="about">Om</string>
+    <string name="unsubscribe_from_all_current_sibbed_channels">Avsluta prenumerationen på alla dina nuvarande prenumererade kanaler.</string>
+    <string name="select_none">Välj ingen</string>
+    <string name="failed_to_import_subscriptions">Det gick inte att importera dina YouTube-prenumerationer.</string>
+    <string name="select_xml_file">Välj prenumerationsfil</string>
+    <string name="subscriptions_to_channels_imported">Prenumeration på %d kanal(er) som importerats.</string>
+    <string name="subscriptions">Prenumerationer</string>
+    <string name="import_subscriptions_parse_error">Ett fel uppstod när man försökte analysera XML-filen som du laddade upp: %s.</string>
+    <string name="import_subscriptions">Importera prenumerationer</string>
+    <string name="unsubscribe">Avsluta prenumerationen</string>
+</resources>

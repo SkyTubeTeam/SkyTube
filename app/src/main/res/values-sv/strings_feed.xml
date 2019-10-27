@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="subscribing_to_channels">Prenumererar på kanaler…</string>
+    <string name="import_subscriptions_from_youtube">Importera prenumerationer från YouTube</string>
+    <string name="no_new_videos_found">Inga nya videor hittades.</string>
+    <string name="no_subscriptions_text">Du prenumererar inte på några kanaler.
+\n
+\nNär du väl gör det, visas alla videor som laddats upp till dina prenumererade kanaler under den senaste månaden.</string>
+    <string name="fetching_subbed_channels_info_error">Ett fel har uppstått vid hämtning av kanalens information.</string>
+    <string name="notification_new_videos_found">%d nya videor från prenumererade kanaler</string>
+    <string name="feed">Flöde</string>
+    <string name="notification_channel_feed_title">Flödesaviseringar</string>
+    <string name="fetching_subscription_videos">Hämtar videor från prenumererade kanaler</string>
+    <string name="fetching_subbed_channels_info">Hämtar kanalinformation…</string>
+    <string name="fetched_videos_from_channels">Hämtade %1$d videor från %2$d/%3$d kanaler.</string>
+</resources>

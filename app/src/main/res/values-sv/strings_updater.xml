@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="downloading">Hämtar…</string>
+    <string name="update_failure">Det gick inte att uppgradera appen.</string>
+    <string name="up_to_date">Uppdaterad</string>
+    <string name="update">Uppdatera</string>
+    <string name="update_available">Ny version finns tillgänglig</string>
+    <string name="up_to_date_msg">Du har den senaste versionen av SkyTube installerad.</string>
+    <string name="update_dialog_msg">En ny version av SkyTube finns tillgänglig. Version %s kommer att installeras.</string>
+    <string name="later">Senare</string>
+</resources>
