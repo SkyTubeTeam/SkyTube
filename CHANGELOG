@@ -1,3 +1,15 @@
+v2.966 - 27 Oct 2019
+        * Implement channel cache, which will reduce network usage, and improve offline experience.
+        * #570 - fix "cannot play video after returning from `open with`"
+        * #571 - fix 'configure channel blocking at the subscribe page leading to fatal crash'
+        * #572 - new policies for downloading videos on mobile network: "Always ask"/"Block"/"Allow"
+        * #574 - "play video under mobile data" dialog can only be dismissed by double clicking "Play Video"
+        * #580 - fix exception in DialogUtils.java line 125
+        * #586 - fix fatal failure on new installations.
+        * Fixes for the NewPipeExtractor backend
+        * dependency upgrades
+        * New Swedish translation.
+
 v2.965 - 27 Sep 2019
         * Fixes for the NewPipeExtractor backend
         * Do not block videos on bookmark and downloaded videos tab.
