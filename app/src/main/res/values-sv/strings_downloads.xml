@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="download_video">Ladda ner video</string>
+    <string name="video_download_stream_error">Kunde inte ladda ner \'%s\'.</string>
+    <string name="warning_mobile_network_download">Din enhet är inte ansluten till ett Wi-Fi-nätverk. För att undvika eventuella extra kostnader för dataanvändning rekommenderas det att ansluta till ett Wi-Fi-nätverk. Hämta video ändå\?</string>
+    <string name="downloads">Nedladdningar</string>
+    <string name="download">Ladda ner</string>
+    <string name="external_storage_not_available">Det går inte att hämta filen eftersom den externa lagringen inte är tillgänglig.</string>
+    <string name="starting_video_download">Hämtar \'%s\'…</string>
+    <string name="delete_download">Ta bort nedladdning</string>
+    <string name="playing_video_file_missing">Nedladdningen för den här videon hittades inte. Spelar på distans.</string>
+    <string name="no_downloaded_videos_text">Du har inte laddat ner några videor ännu.
+\n
+\nNär du gör det kommer de att dyka upp här.</string>
+    <string name="video_downloaded">\'%s\' har hämtats.</string>
+</resources>

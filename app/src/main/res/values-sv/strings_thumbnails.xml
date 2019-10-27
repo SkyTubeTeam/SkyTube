@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="thumbnail">Miniatyr</string>
+    <string name="view_thumbnail">Visa miniatyrbild</string>
+    <string name="thumbnail_download_error">Det gick inte att hämta miniatyrbilden.</string>
+    <string name="thumbnail_downloaded">Hämtade miniatyrbilden.</string>
+</resources>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="configure">Konfigurera</string>
+    <string name="channel_blacklist_error">Kanalen kunde inte svartlistas.</string>
+    <string name="blocked_videos">Blockerade videor</string>
+    <string name="dislikes">%d%% ogillar</string>
+    <string name="no_videos_blocked">Inga videor har blockerats eller filtrerats bort. Vill du konfigurera videoblockeraren\?</string>
+    <string name="channel_blacklisted">Kanal svartlistad. Vänligen uppdatera.</string>
+    <string name="channel_unwhitelist_error">Kanalen kunde inte tas bort från vitlistan.</string>
+    <string name="block_channel">Blockera kanal</string>
+</resources>
