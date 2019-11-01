@@ -49,8 +49,11 @@ public class GetSubscriptionsVideosFromDb extends GetYouTubeVideos {
 			} else {
 				YouTubeVideo last = result.get(result.size() -1);
 				lastVideoId = last.getId();
-				//lastVideoPublishTimestamp = last.getPublishDate().getValue();
-				lastVideoPublishTimestamp = last.getRetrievalTimestamp();//last.getPublishDate().getValue();
+				if (last.getRetrievalTimestamp() == null) {
+					lastVideoPublishTimestamp = System.currentTimeMillis();
+				} else {
+					lastVideoPublishTimestamp = last.getRetrievalTimestamp();
+				}
 			}
 			return result;
 		}
