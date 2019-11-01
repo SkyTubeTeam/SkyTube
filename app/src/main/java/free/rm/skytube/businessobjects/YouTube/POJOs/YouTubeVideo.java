@@ -437,6 +437,14 @@ public class YouTubeVideo implements Serializable {
 	}
 
 	/**
+	 * Sets the publishDate and publishDatePretty from a timestamp.
+	 */
+	public void setPublishDate(long timestamp) {
+		this.publishDate = new DateTime(timestamp);
+		this.publishDatePretty = null;
+	}
+
+	/**
 	 * Sets the publishDate and publishDatePretty.
 	 */
 	public void setPublishDatePretty(String publishDatePretty) {
