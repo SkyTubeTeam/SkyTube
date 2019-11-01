@@ -125,7 +125,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 	}
 
 	private void setupRetrievalTimestamp(SQLiteDatabase db) {
-        List<YouTubeVideo> videos = extractVideos(db.rawQuery(FIND_EMPTY_RETRIEVAL_TS, null));
+        List<YouTubeVideo> videos = extractVideos(db.rawQuery(FIND_EMPTY_RETRIEVAL_TS, null), false);
         int count = 0;
         for (YouTubeVideo video : videos) {
             DateTime dateTime = video.getPublishDate();
@@ -560,10 +560,10 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 	public List<YouTubeVideo> getSubscriptionVideos() {
 		Cursor	cursor = getReadableDatabase().query(
 							SubscriptionsVideosTable.TABLE_NAME,
-							new String[]{SubscriptionsVideosTable.COL_YOUTUBE_VIDEO},
+							SubscriptionsVideosTable.ALL_COLUMNS_FOR_EXTRACT,
 							null, null, null, null,
 							SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_DATE + " DESC");
-		return extractVideos(cursor);
+		return extractVideos(cursor, true);
 	}
 
     /**
@@ -583,11 +583,11 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
         }
         Cursor	cursor = getReadableDatabase().query(
             SubscriptionsVideosTable.TABLE_NAME,
-            new String[]{SubscriptionsVideosTable.COL_YOUTUBE_VIDEO},
+            SubscriptionsVideosTable.ALL_COLUMNS_FOR_EXTRACT,
             selection, selectionArguments, null, null,
             SubscriptionsVideosTable.COL_RETRIEVAL_TS + " DESC, " + SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID + " ASC",
             String.valueOf(limit));
-        return extractVideos(cursor);
+        return extractVideos(cursor, true);
     }
 
     private Gson createGson() {
@@ -608,19 +608,29 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 
     /**
      * Load YouTubeVideo objects from a cursor, only SubscriptionsVideosTable.COL_YOUTUBE_VIDEO column is needed.
+     * @param cursor the cursor to process
+     * @param fullColumnList get all the columns, not just the JSON blob - set to false only for db
+     *                       maintenance queries!
      */
-    private List<YouTubeVideo> extractVideos(Cursor cursor) {
+    private List<YouTubeVideo> extractVideos(Cursor cursor, boolean fullColumnList) {
         List<YouTubeVideo> videos = new ArrayList<>();
         try {
 
             if (cursor.moveToNext()) {
+                final int jsonIdx = cursor.getColumnIndex(SubscriptionsVideosTable.COL_YOUTUBE_VIDEO);
+                final int retrievalIdx = fullColumnList ? cursor.getColumnIndex(SubscriptionsVideosTable.COL_RETRIEVAL_TS) : -1;
+                final int publishTsIdx = fullColumnList ? cursor.getColumnIndex(SubscriptionsVideosTable.COL_PUBLISH_TS) : -1;
+
                 do {
-                    final byte[] blob = cursor
-                            .getBlob(cursor.getColumnIndex(SubscriptionsVideosTable.COL_YOUTUBE_VIDEO));
+                    final byte[] blob = cursor.getBlob(jsonIdx);
                     final String videoJson = new String(blob);
 
                     // convert JSON into YouTubeVideo
                     YouTubeVideo video = gson.fromJson(videoJson, YouTubeVideo.class);
+                    if (fullColumnList) {
+                        video.setRetrievalTimestamp(cursor.getLong(retrievalIdx));
+                        video.setPublishDate(cursor.getLong(publishTsIdx));
+                    }
 
                     // due to upgrade to YouTubeVideo (by changing channel{Id,Name} to
                     // YouTubeChannel)

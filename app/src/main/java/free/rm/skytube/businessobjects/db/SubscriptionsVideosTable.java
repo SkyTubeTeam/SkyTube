@@ -29,6 +29,14 @@ public class SubscriptionsVideosTable {
 	public static final String COL_RETRIEVAL_TS = "Retrieval_Timestamp";
 	public static final String COL_PUBLISH_TS = "Publish_Timestamp";
 
+	static final String[] ALL_COLUMNS_FOR_EXTRACT = new String[] {
+			COL_CHANNEL_ID,
+			COL_YOUTUBE_VIDEO_ID,
+			COL_YOUTUBE_VIDEO,
+			COL_RETRIEVAL_TS,
+			COL_PUBLISH_TS
+	};
+
 	private static final String ADD_COLUMN = "ALTER TABLE " + TABLE_NAME + " ADD COLUMN ";
 
 	public static String getCreateStatement() {
