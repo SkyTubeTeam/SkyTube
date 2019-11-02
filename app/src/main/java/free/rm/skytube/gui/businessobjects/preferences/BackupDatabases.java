@@ -27,6 +27,9 @@ import java.util.Date;
 import java.util.TimeZone;
 
 import free.rm.skytube.businessobjects.db.BookmarksDb;
+import free.rm.skytube.businessobjects.db.ChannelFilteringDb;
+import free.rm.skytube.businessobjects.db.PlaybackStatusDb;
+import free.rm.skytube.businessobjects.db.SearchHistoryDb;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 
 /**
@@ -38,39 +41,60 @@ public class BackupDatabases {
 	private static final String BACKUPS_EXT = ".skytube";
 
 	/**
-	 * Backs up the subscriptions and bookmarks databases to external storage.
+	 * Backs up the databases to external storage.
 	 *
 	 * @return The path of the archive file generated (containing the backup).
 	 * @throws IOException
 	 */
 	public String backupDbsToSdCard() throws IOException {
-		SubscriptionsDb subscriptionsDb = SubscriptionsDb.getSubscriptionsDb();
-		BookmarksDb     bookmarksDb = BookmarksDb.getBookmarksDb();
-		final File      backupPath = new File(EXPORT_DIR, generateFileName());
+		SubscriptionsDb     subscriptionsDb = SubscriptionsDb.getSubscriptionsDb();
+		BookmarksDb         bookmarksDb = BookmarksDb.getBookmarksDb();
+		PlaybackStatusDb    playbackDb = PlaybackStatusDb.getVideoDownloadsDb();
+		ChannelFilteringDb  channelFilteringDb = ChannelFilteringDb.getChannelFilteringDb();
+		SearchHistoryDb     searchHistoryDb = SearchHistoryDb.getSearchHistoryDb();
+		final File          backupPath = new File(EXPORT_DIR, generateFileName());
 
 		// close the databases
 		subscriptionsDb.close();
 		bookmarksDb.close();
+		playbackDb.close();
+		channelFilteringDb.close();
+		searchHistoryDb.close();
 
 		// backup the databases inside a zip file
 		ZipFile databasesZip = new ZipFile(backupPath);
-		databasesZip.zip(subscriptionsDb.getDatabasePath(), bookmarksDb.getDatabasePath());
+		databasesZip.zip(subscriptionsDb.getDatabasePath(),
+				bookmarksDb.getDatabasePath(),
+				playbackDb.getDatabasePath(),
+				channelFilteringDb.getDatabasePath(),
+				searchHistoryDb.getDatabasePath());
 
 		return backupPath.getPath();
 	}
 
 
-
+	/**
+	 * Imports the backed-up databases.
+	 *
+	 * @param backupFilePath    Path to the backup file (*.skytube)
+	 * @throws IOException
+	 */
 	public void importBackupDb(String backupFilePath) throws IOException {
-		SubscriptionsDb subscriptionsDb = SubscriptionsDb.getSubscriptionsDb();
-		BookmarksDb     bookmarksDb = BookmarksDb.getBookmarksDb();
-		File            databasesDirectory = subscriptionsDb.getDatabaseDirectory();
+		SubscriptionsDb     subscriptionsDb = SubscriptionsDb.getSubscriptionsDb();
+		BookmarksDb         bookmarksDb = BookmarksDb.getBookmarksDb();
+		PlaybackStatusDb    playbackDb = PlaybackStatusDb.getVideoDownloadsDb();
+		ChannelFilteringDb  channelFilteringDb = ChannelFilteringDb.getChannelFilteringDb();
+		SearchHistoryDb     searchHistoryDb = SearchHistoryDb.getSearchHistoryDb();
+		File                databasesDirectory = subscriptionsDb.getDatabaseDirectory();
 
 		// close the databases
 		subscriptionsDb.close();
 		bookmarksDb.close();
+		playbackDb.close();
+		channelFilteringDb.close();
+		searchHistoryDb.close();
 
-		// backup the databases inside a zip file
+		// extract the databases from the backup zip file
 		ZipFile databasesZip = new ZipFile(new File(backupFilePath));
 		databasesZip.unzip(databasesDirectory);
 	}
