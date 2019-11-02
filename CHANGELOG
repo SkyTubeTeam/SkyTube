@@ -1,3 +1,8 @@
+v2.967 - 02 Nov 2019
+        * Fix crash in Subscription feed retrieval
+        * Fix multiple, concurrent play, due to ExoPlayer creation
+        * App is now able to backup (and restore) channelFiltering and searchHistory databases.
+
 v2.966 - 27 Oct 2019
         * Implement channel cache, which will reduce network usage, and improve offline experience.
         * #570 - fix "cannot play video after returning from `open with`"
