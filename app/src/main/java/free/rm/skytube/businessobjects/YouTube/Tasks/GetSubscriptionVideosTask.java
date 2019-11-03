@@ -17,7 +17,6 @@
 
 package free.rm.skytube.businessobjects.YouTube.Tasks;
 
-import java.util.Date;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Semaphore;
@@ -93,6 +92,7 @@ public class GetSubscriptionVideosTask extends AsyncTaskParallel<Void, Void, Boo
 
 	@Override
 	protected void onPostExecute(Boolean changed) {
+		SkyTubeApp.getSettings().updateFeedsLastUpdateTime();
 		if (listener != null) {
 			listener.onAllChannelVideosFetched(changed);
 		}
