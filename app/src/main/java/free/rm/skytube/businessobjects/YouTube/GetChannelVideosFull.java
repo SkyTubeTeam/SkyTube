@@ -20,6 +20,11 @@ package free.rm.skytube.businessobjects.YouTube;
 import com.google.api.client.util.DateTime;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Set;
+
+import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
+import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 
 /**
  * Returns the videos of a channel.
@@ -29,6 +34,8 @@ import java.io.IOException;
  * the results are accurate.
  */
 public class GetChannelVideosFull extends GetYouTubeVideoBySearch implements GetChannelVideosInterface {
+
+	private String channelId;
 
 	@Override
 	public void init() throws IOException {
@@ -44,8 +51,10 @@ public class GetChannelVideosFull extends GetYouTubeVideoBySearch implements Get
 	 */
 	@Override
 	public void setQuery(String channelId) {
-		if (videosList != null)
+		this.channelId = channelId;
+		if (videosList != null) {
 			videosList.setChannelId(channelId);
+		}
 	}
 
 
@@ -56,4 +65,12 @@ public class GetChannelVideosFull extends GetYouTubeVideoBySearch implements Get
 		}
 	}
 
+	@Override
+	protected List<YouTubeVideo> getVideoListFromIds(List<String> videoIds) throws IOException {
+		if (videoIds != null && !videoIds.isEmpty() && channelId != null) {
+			final Set<String> videosByChannel = SubscriptionsDb.getSubscriptionsDb().getSubscribedChannelVideosByChannel(channelId);
+			videoIds.removeAll(videosByChannel);
+		}
+		return super.getVideoListFromIds(videoIds);
+	}
 }

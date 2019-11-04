@@ -27,10 +27,12 @@ import com.google.api.services.youtube.model.ActivityListResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPI;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPIKey;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
+import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 
 /**
  * Returns the videos of a channel.
@@ -42,6 +44,7 @@ import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 public class GetChannelVideosLite extends GetYouTubeVideos implements GetChannelVideosInterface {
 
 	private YouTube.Activities.List activitiesList;
+	private String channelId;
 
 	private static final String	TAG = GetChannelVideosLite.class.getSimpleName();
 	private static final Long	MAX_RESULTS = 45L;
@@ -76,7 +79,7 @@ public class GetChannelVideosLite extends GetYouTubeVideos implements GetChannel
 
 				ActivityListResponse response = activitiesList.execute();
 				List<Activity> activityList = response.getItems();
-				if(activityList != null && activityList.size() > 0) {
+				if(activityList != null && !activityList.isEmpty()) {
 					videosList = getVideosList(activityList);
 				}
 
@@ -114,6 +117,10 @@ public class GetChannelVideosLite extends GetYouTubeVideos implements GetChannel
 		for (Activity res : activityList) {
 			videoIds.add(res.getContentDetails().getUpload().getVideoId());
 		}
+		if (!videoIds.isEmpty() && channelId != null) {
+			final Set<String> videosByChannel = SubscriptionsDb.getSubscriptionsDb().getSubscribedChannelVideosByChannel(channelId);
+			videoIds.removeAll(videosByChannel);
+		}
         return getVideoListFromIds(videoIds);
 	}
 
@@ -125,8 +132,12 @@ public class GetChannelVideosLite extends GetYouTubeVideos implements GetChannel
 	 */
 	@Override
 	public void setQuery(String channelId) {
-		if (activitiesList != null)
+		this.channelId = channelId;
+		if (activitiesList != null) {
 			activitiesList.setChannelId(channelId);
+		} else {
+			throw new NullPointerException("activitiesList not initialized!");
+		}
 	}
 
 
