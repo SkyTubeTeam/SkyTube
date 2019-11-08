@@ -23,7 +23,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v7.app.AlertDialog;
 import android.util.AttributeSet;
 import android.widget.Toast;
 
@@ -34,6 +33,7 @@ import com.klinker.android.link_builder.LinkConsumableTextView;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import androidx.appcompat.app.AlertDialog;
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.GetPlaylistTask;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;

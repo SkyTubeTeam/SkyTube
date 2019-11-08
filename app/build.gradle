@@ -58,6 +58,11 @@ android {
         checkReleaseBuilds false
         abortOnError false
     }
+    // Use Java 1.8 as it is required by Butterknife
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
@@ -66,35 +71,35 @@ dependencies {
     // YouTube modules
     implementation 'com.google.http-client:google-http-client-android:1.23.0'
     implementation 'com.google.apis:google-api-services-youtube:v3-rev187-1.23.0'
-    implementation 'com.github.TeamNewPipe:NewPipeExtractor:560c648e92476cc220a036f1668c4335b98ceece'
+    implementation 'com.github.TeamNewPipe:NewPipeExtractor:0.17.4'
 
     // other modules
-    implementation group: 'org.ocpsoft.prettytime', name: 'prettytime', version: '4.0.1.Final'
-    implementation 'com.github.moraisigor:slidingdrawer:1.6.7'
-    implementation 'com.github.bumptech.glide:glide:4.8.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
-    implementation 'com.jakewharton:butterknife:8.8.1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-    implementation 'com.google.code.gson:gson:2.8.2'
-    implementation group: 'joda-time', name: 'joda-time', version: '2.9.9'
+    implementation group: 'org.ocpsoft.prettytime', name: 'prettytime', version: '4.0.2.Final'
+    implementation 'com.github.moraisigor:slidingdrawer:1.7.1'
+    implementation 'com.github.bumptech.glide:glide:4.10.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.10.0'
+    implementation 'com.jakewharton:butterknife:10.2.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.0'
+    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation group: 'joda-time', name: 'joda-time', version: '2.10.4'
     implementation 'com.afollestad.material-dialogs:core:0.9.5.0'
     implementation 'com.github.angads25:filepicker:1.1.1'
-    implementation 'com.google.android.exoplayer:exoplayer:2.8.2'
+    implementation 'com.google.android.exoplayer:exoplayer:2.9.6'
     implementation 'com.klinkerapps:link_builder:1.6.1'
     implementation (group: 'com.optimaize.languagedetector', name: 'language-detector', version: '0.6') {
         exclude group: 'com.google.guava', module: 'guava'
     }
     implementation 'com.mikepenz:actionitembadge:3.3.2@aar'
-    implementation "com.mikepenz:iconics-core:3.0.3@aar"
+    implementation "com.mikepenz:iconics-core:4.0.0@aar"
 
     // Android support modules
-    implementation 'com.android.support:appcompat-v7:28.0.0'
-    implementation 'com.android.support:support-v13:28.0.0'
-    implementation 'com.android.support:design:28.0.0'
-    implementation 'com.android.support:recyclerview-v7:28.0.0'
-    implementation 'com.android.support:cardview-v7:28.0.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
-    implementation 'com.android.support:multidex:1.0.3' // as we have over 65536 lines of code...
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.legacy:legacy-support-v13:1.0.0'
+    implementation 'com.google.android.material:material:1.2.0-alpha01'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.multidex:multidex:2.0.1' // as we have over 65536 lines of code...
 
     // proprietary module
     extraImplementation files('libs/YouTubeAndroidPlayerApi.jar')

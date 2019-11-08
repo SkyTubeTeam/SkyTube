@@ -17,16 +17,18 @@
 
 package free.rm.skytube.gui.businessobjects.fragments;
 
+import androidx.viewpager.widget.ViewPager;
+
 /**
  * A fragment that will act as a tab.
  *
- * <p>It will be placed inside a {@link android.support.v4.view.ViewPager}.</p>
+ * <p>It will be placed inside a {@link ViewPager}.</p>
  */
 public abstract class TabFragment extends FragmentEx {
 
 	/** True indicates that this fragment is selected and can be used by the user;  false means that
 	 *  this fragment is hidden and cannot be used. */
-	private boolean         isFragmentSelected = false;
+	private boolean isFragmentSelected = false;
 
 
 	/**

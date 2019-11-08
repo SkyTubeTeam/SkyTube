@@ -1,8 +1,6 @@
 package free.rm.skytube.gui.fragments;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +10,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.widget.Toolbar;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import free.rm.skytube.R;
@@ -26,7 +26,7 @@ public class PlaylistVideosFragment extends VideosGridFragment {
 	private YouTubePlaylist youTubePlaylist;
 
 	@BindView(R.id.toolbar)
-	Toolbar     toolbar;
+	Toolbar toolbar;
 	@BindView(R.id.playlist_banner_image_view)
 	ImageView   playlistBannerImageView;
 	@BindView(R.id.playlist_thumbnail_image_view)

@@ -22,9 +22,9 @@ import android.annotation.TargetApi;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import free.rm.skytube.R;
 
 /**
@@ -49,8 +49,7 @@ public class PermissionsActivity extends AppCompatActivity {
 
 		permissionsTask = (PermissionsTask) getIntent().getExtras().getSerializable(PERMISSIONS_TASK_OBJ);
 
-		if ((android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M  &&  hasAccessToExtStorage(EXT_STORAGE_PERM_CODE))
-			|| android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M || hasAccessToExtStorage(EXT_STORAGE_PERM_CODE)) {
 				permissionsTask.onExternalStoragePermissionsGranted();
 				finish();
 		}

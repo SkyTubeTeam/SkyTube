@@ -18,11 +18,12 @@
 package free.rm.skytube.gui.businessobjects.adapters;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * An extended class of {@link RecyclerView.Adapter} that accepts a context and a list of items.

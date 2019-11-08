@@ -18,7 +18,6 @@
 package free.rm.skytube.gui.businessobjects.adapters;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,6 +31,7 @@ import com.bumptech.glide.request.RequestOptions;
 import java.util.Iterator;
 import java.util.List;
 
+import androidx.recyclerview.widget.RecyclerView;
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;

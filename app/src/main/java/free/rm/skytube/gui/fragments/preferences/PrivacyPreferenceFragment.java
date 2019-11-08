@@ -5,9 +5,9 @@ import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
-import android.support.annotation.Nullable;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.db.PlaybackStatusDb;
 import free.rm.skytube.businessobjects.db.SearchHistoryDb;

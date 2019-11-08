@@ -59,17 +59,22 @@ public class HttpDownloader implements Downloader {
 
 	@Override
 	public DownloadResponse get(String siteUrl, DownloadRequest request) {
-		return new DownloadResponse("ok", null);
+		return new DownloadResponse(200, null, null);
 	}
 
 	@Override
 	public DownloadResponse get(String siteUrl) {
-		return new DownloadResponse("ok", null);
+		return new DownloadResponse(200, null, null);
 	}
 
 	@Override
 	public DownloadResponse post(String siteUrl, DownloadRequest request) {
-		return new DownloadResponse("ok", null);
+		return new DownloadResponse(200, null, null);
+	}
+
+	@Override
+	public DownloadResponse head(String siteUrl) throws IOException, ReCaptchaException {
+		return new DownloadResponse(200, null, null);
 	}
 
 	@Override
@@ -99,7 +104,7 @@ public class HttpDownloader implements Downloader {
              * See : https://github.com/rg3/youtube-dl/issues/5138
              */
 			if (con.getResponseCode() == 429) {
-				throw new ReCaptchaException("reCaptcha Challenge requested");
+				throw new ReCaptchaException("reCaptcha Challenge requested", siteUrl);
 			}
 			throw new IOException(e);
 		} finally {

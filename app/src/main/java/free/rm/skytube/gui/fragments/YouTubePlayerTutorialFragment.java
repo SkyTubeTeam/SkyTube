@@ -19,15 +19,15 @@ package free.rm.skytube.gui.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 import free.rm.skytube.R;
 import free.rm.skytube.gui.businessobjects.fragments.ImmersiveModeFragment;
 
@@ -40,8 +40,10 @@ public class YouTubePlayerTutorialFragment extends ImmersiveModeFragment impleme
 	private ViewPager                       viewPager;
 	private TextView                        nextTextView;
 	private TextView                        pageCounterTextView;
-	/** Tutorial slides layout resources. */
-	private final static int tutorialSlideViews[] = {R.layout.tutorial_player_1, R.layout.tutorial_player_2, R.layout.tutorial_player_3, R.layout.tutorial_player_4, R.layout.tutorial_player_5, R.layout.tutorial_player_6};
+	/**
+	 * Tutorial slides layout resources.
+	 */
+	private final static int[] tutorialSlideViews = {R.layout.tutorial_player_1, R.layout.tutorial_player_2, R.layout.tutorial_player_3, R.layout.tutorial_player_4, R.layout.tutorial_player_5, R.layout.tutorial_player_6};
 
 
 	@Nullable

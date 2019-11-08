@@ -19,11 +19,11 @@ package free.rm.skytube.gui.businessobjects.adapters;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.support.v4.widget.SimpleCursorAdapter;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import androidx.cursoradapter.widget.SimpleCursorAdapter;
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.db.SearchHistoryDb;
 import free.rm.skytube.businessobjects.db.SearchHistoryTable;

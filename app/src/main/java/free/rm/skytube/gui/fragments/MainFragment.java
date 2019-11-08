@@ -3,27 +3,28 @@ package free.rm.skytube.gui.fragments;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.view.ViewPager;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.material.tabs.TabLayout;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.db.BookmarksDb;
@@ -34,11 +35,11 @@ import free.rm.skytube.gui.businessobjects.fragments.FragmentEx;
 
 public class MainFragment extends FragmentEx {
 
-	private RecyclerView				subsListView = null;
-	private SubsAdapter					subsAdapter  = null;
-	private ActionBarDrawerToggle		subsDrawerToggle;
-	private TabLayout                   tabLayout = null;
-	private DrawerLayout 				subsDrawerLayout = null;
+	private RecyclerView            subsListView = null;
+	private SubsAdapter             subsAdapter  = null;
+	private ActionBarDrawerToggle   subsDrawerToggle;
+	private TabLayout               tabLayout = null;
+	private DrawerLayout            subsDrawerLayout = null;
 
 	/** List of fragments that will be displayed as tabs. */
 	private List<VideosGridFragment>	videoGridFragmentsList = new ArrayList<>();
@@ -56,7 +57,7 @@ public class MainFragment extends FragmentEx {
 	public static final String DOWNLOADED_VIDEOS_FRAGMENT = "MainFragment.downloadedVideosFragment";
 
 	private VideosPagerAdapter			videosPagerAdapter = null;
-	private ViewPager					viewPager;
+	private ViewPager                   viewPager;
 
 	public static final String SHOULD_SELECTED_FEED_TAB = "MainFragment.SHOULD_SELECTED_FEED_TAB";
 

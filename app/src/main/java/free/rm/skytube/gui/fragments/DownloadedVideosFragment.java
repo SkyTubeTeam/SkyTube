@@ -1,9 +1,9 @@
 package free.rm.skytube.gui.fragments;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.View;
 
+import androidx.annotation.Nullable;
 import butterknife.BindView;
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;

@@ -18,9 +18,10 @@
 package free.rm.skytube.gui.businessobjects;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 
 /**
  * An activity that enables the back button (located at the top left hand side of the ActionBar).

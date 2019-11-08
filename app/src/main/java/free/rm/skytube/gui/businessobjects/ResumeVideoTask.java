@@ -17,11 +17,11 @@
 package free.rm.skytube.gui.businessobjects;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 
+import androidx.annotation.NonNull;
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
@@ -33,7 +33,7 @@ import free.rm.skytube.businessobjects.db.PlaybackStatusDb;
  */
 public class ResumeVideoTask {
 
-    public static interface Callback {
+    public interface Callback {
         void loadVideo(int position);
     }
 

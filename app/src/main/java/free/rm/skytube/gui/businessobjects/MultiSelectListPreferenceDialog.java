@@ -18,9 +18,6 @@
 package free.rm.skytube.gui.businessobjects;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 
@@ -29,6 +26,9 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import java.util.List;
 import java.util.Set;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import free.rm.skytube.R;
 import free.rm.skytube.gui.businessobjects.adapters.MultiSelectListPreferenceAdapter;
 

@@ -21,18 +21,18 @@ import android.app.Activity;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.interfaces.YouTubePlayerFragmentInterface;
 import free.rm.skytube.gui.businessobjects.BackButtonActivity;
 import free.rm.skytube.gui.businessobjects.fragments.FragmentEx;
-import free.rm.skytube.gui.fragments.YouTubePlayerV1Fragment;
 import free.rm.skytube.gui.fragments.YouTubePlayerTutorialFragment;
+import free.rm.skytube.gui.fragments.YouTubePlayerV1Fragment;
 import free.rm.skytube.gui.fragments.YouTubePlayerV2Fragment;
 
 /**

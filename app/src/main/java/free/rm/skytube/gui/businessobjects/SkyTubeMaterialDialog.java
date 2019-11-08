@@ -18,11 +18,11 @@
 package free.rm.skytube.gui.businessobjects;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 
+import androidx.annotation.NonNull;
 import free.rm.skytube.R;
 
 /**
