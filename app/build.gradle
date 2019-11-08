@@ -63,14 +63,17 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    packagingOptions {
+        exclude "META-INF/DEPENDENCIES"
+    }
 }
 
 dependencies {
     testImplementation 'junit:junit:4.12'
 
     // YouTube modules
-    implementation 'com.google.http-client:google-http-client-android:1.23.0'
-    implementation 'com.google.apis:google-api-services-youtube:v3-rev187-1.23.0'
+    implementation 'com.google.http-client:google-http-client-android:1.32.1'
+    implementation 'com.google.apis:google-api-services-youtube:v3-rev212-1.25.0'
     implementation 'com.github.TeamNewPipe:NewPipeExtractor:0.17.4'
 
     // other modules
