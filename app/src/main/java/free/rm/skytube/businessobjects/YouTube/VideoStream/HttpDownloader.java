@@ -59,17 +59,22 @@ public class HttpDownloader implements Downloader {
 
 	@Override
 	public DownloadResponse get(String siteUrl, DownloadRequest request) {
-		return new DownloadResponse("ok", null);
+		return new DownloadResponse(200, null, null);
 	}
 
 	@Override
 	public DownloadResponse get(String siteUrl) {
-		return new DownloadResponse("ok", null);
+		return new DownloadResponse(200, null, null);
 	}
 
 	@Override
 	public DownloadResponse post(String siteUrl, DownloadRequest request) {
-		return new DownloadResponse("ok", null);
+		return new DownloadResponse(200, null, null);
+	}
+
+	@Override
+	public DownloadResponse head(String siteUrl) throws IOException, ReCaptchaException {
+		return new DownloadResponse(200, null, null);
 	}
 
 	@Override
@@ -93,13 +98,13 @@ public class HttpDownloader implements Downloader {
 		} catch(UnknownHostException uhe) {//thrown when there's no internet connection
 			throw new IOException("unknown host or no network", uhe);
 		} catch(Exception e) {
-            /*
-             * HTTP 429 == Too Many Request
-             * Receive from Youtube.com = ReCaptcha challenge request
-             * See : https://github.com/rg3/youtube-dl/issues/5138
-             */
+			/*
+			 * HTTP 429 == Too Many Request
+			 * Receive from Youtube.com = ReCaptcha challenge request
+			 * See : https://github.com/rg3/youtube-dl/issues/5138
+			 */
 			if (con.getResponseCode() == 429) {
-				throw new ReCaptchaException("reCaptcha Challenge requested", con.getURL().toString());
+				throw new ReCaptchaException("reCaptcha Challenge requested", siteUrl);
 			}
 			throw new IOException(e);
 		} finally {
