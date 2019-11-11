@@ -44,6 +44,7 @@ public class GetChannelVideosTask extends AsyncTaskParallel<Void, Void, List<You
 
 	private final GetChannelVideosInterface getChannelVideos;
 	private final String channelId;
+	private final boolean filterSubscribedVideos;
 	private IOException exception;
 	private YouTubeChannel channel;
 	private final GetChannelVideosTaskInterface getChannelVideosTaskInterface;
@@ -56,9 +57,10 @@ public class GetChannelVideosTask extends AsyncTaskParallel<Void, Void, List<You
 	 * we are going to use {@link GetChannelVideosFull}; otherwise we are going to use
 	 * {@link GetChannelVideosLite}.</p>
 	 */
-	public GetChannelVideosTask(String channelId, Long publishedAfter,
+	public GetChannelVideosTask(String channelId, Long publishedAfter, boolean filterSubscribedVideos,
 								GetChannelVideosTaskInterface getChannelVideosTaskInterface) {
 		this.getChannelVideos = VideoCategory.createChannelVideosFetcher();
+		this.filterSubscribedVideos = filterSubscribedVideos;
 		this.channelId = channelId;
 		this.publishedAfter = publishedAfter;
 		this.getChannelVideosTaskInterface = getChannelVideosTaskInterface;
@@ -74,7 +76,7 @@ public class GetChannelVideosTask extends AsyncTaskParallel<Void, Void, List<You
 			try {
 				getChannelVideos.init();
 				getChannelVideos.setPublishedAfter(publishedAfter != null ? publishedAfter : getOneMonthAgo());
-				getChannelVideos.setQuery(channelId);
+				getChannelVideos.setChannelQuery(channelId, filterSubscribedVideos);
 				videos = getChannelVideos.getNextVideos();
 			} catch (IOException e) {
 				exception = e;

@@ -45,6 +45,7 @@ public class GetChannelVideosLite extends GetYouTubeVideos implements GetChannel
 
 	private YouTube.Activities.List activitiesList;
 	private String channelId;
+	private boolean filterSubscribedVideos;
 
 	private static final String	TAG = GetChannelVideosLite.class.getSimpleName();
 	private static final Long	MAX_RESULTS = 45L;
@@ -117,7 +118,7 @@ public class GetChannelVideosLite extends GetYouTubeVideos implements GetChannel
 		for (Activity res : activityList) {
 			videoIds.add(res.getContentDetails().getUpload().getVideoId());
 		}
-		if (!videoIds.isEmpty() && channelId != null) {
+		if (!videoIds.isEmpty() && channelId != null && filterSubscribedVideos) {
 			final Set<String> videosByChannel = SubscriptionsDb.getSubscriptionsDb().getSubscribedChannelVideosByChannel(channelId);
 			videoIds.removeAll(videosByChannel);
 		}
@@ -129,10 +130,12 @@ public class GetChannelVideosLite extends GetYouTubeVideos implements GetChannel
 	 * Set the channel id.
 	 *
 	 * @param channelId	Channel ID.
+     * @param filterSubscribedVideos to filter out the subscribed videos.
 	 */
 	@Override
-	public void setQuery(String channelId) {
+	public void setChannelQuery(String channelId, boolean filterSubscribedVideos) {
 		this.channelId = channelId;
+		this.filterSubscribedVideos = filterSubscribedVideos;
 		if (activitiesList != null) {
 			activitiesList.setChannelId(channelId);
 		} else {
@@ -140,5 +143,8 @@ public class GetChannelVideosLite extends GetYouTubeVideos implements GetChannel
 		}
 	}
 
-
+    @Override
+    public void setQuery(String query) {
+        setChannelQuery(query, false);
+    }
 }

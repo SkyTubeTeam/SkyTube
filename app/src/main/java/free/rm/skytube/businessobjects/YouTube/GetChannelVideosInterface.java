@@ -44,7 +44,7 @@ public interface GetChannelVideosInterface {
 	/**
 	 * Sets user's query. [optional]
 	 */
-	void setQuery(String query);
+	void setChannelQuery(String channelId, boolean filter);
 
 
 	/**

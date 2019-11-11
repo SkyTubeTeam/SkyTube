@@ -64,7 +64,7 @@ public class GetSubscriptionVideosTask extends AsyncTaskParallel<Void, Void, Boo
 		for(final String channelId: channelIds) {
 			try {
 				semaphore.acquire();
-				new GetChannelVideosTask(channelId, publishedAfter, videos -> {
+				new GetChannelVideosTask(channelId, publishedAfter, true, videos -> {
 					semaphore.release();
 					int numberOfVideos = videos != null ? videos.size() : 0;
 					if (numberOfVideos > 0) {

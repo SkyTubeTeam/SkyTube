@@ -24,12 +24,15 @@ import org.schabi.newpipe.extractor.stream.StreamInfoItem;
 import free.rm.skytube.businessobjects.YouTube.VideoStream.NewPipeService;
 import free.rm.skytube.businessobjects.YouTube.VideoStream.Pager;
 
+/**
+ * Adapter class to get list of videos from a channel.
+ */
 public class NewPipeChannelVideos extends NewPipeVideos<StreamInfoItem> implements GetChannelVideosInterface {
 
     private String channelId;
 
     @Override
-    public void setQuery(String channelId) {
+    public void setChannelQuery(String channelId, boolean filterSubscribedVideos) {
         this.channelId = channelId;
     }
 
