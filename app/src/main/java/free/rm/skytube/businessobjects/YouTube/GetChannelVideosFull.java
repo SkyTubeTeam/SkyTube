@@ -36,6 +36,7 @@ import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 public class GetChannelVideosFull extends GetYouTubeVideoBySearch implements GetChannelVideosInterface {
 
 	private String channelId;
+	private boolean filterSubscribedVideos;
 
 	@Override
 	public void init() throws IOException {
@@ -43,20 +44,25 @@ public class GetChannelVideosFull extends GetYouTubeVideoBySearch implements Get
 		videosList.setOrder("date");
 	}
 
-
 	/**
 	 * Set the channel id.
 	 *
 	 * @param channelId	Channel ID.
+	 * @param filterSubscribedVideos to filter out the subscribed videos.
 	 */
 	@Override
-	public void setQuery(String channelId) {
+	public void setChannelQuery(String channelId, boolean filterSubscribedVideos) {
 		this.channelId = channelId;
+		this.filterSubscribedVideos = filterSubscribedVideos;
 		if (videosList != null) {
 			videosList.setChannelId(channelId);
 		}
 	}
 
+	@Override
+	public void setQuery(String query) {
+		setChannelQuery(query, false);
+	}
 
 	@Override
 	public void setPublishedAfter(long timeInMs) {
@@ -67,7 +73,7 @@ public class GetChannelVideosFull extends GetYouTubeVideoBySearch implements Get
 
 	@Override
 	protected List<YouTubeVideo> getVideoListFromIds(List<String> videoIds) throws IOException {
-		if (videoIds != null && !videoIds.isEmpty() && channelId != null) {
+		if (videoIds != null && !videoIds.isEmpty() && channelId != null && filterSubscribedVideos) {
 			final Set<String> videosByChannel = SubscriptionsDb.getSubscriptionsDb().getSubscribedChannelVideosByChannel(channelId);
 			videoIds.removeAll(videosByChannel);
 		}
