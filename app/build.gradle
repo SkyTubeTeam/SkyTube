@@ -92,7 +92,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
 
     // YouTube modules
-    implementation 'com.google.http-client:google-http-client-android:1.32.1'
+    implementation 'com.google.http-client:google-http-client-android:1.33.0'
     implementation 'com.google.apis:google-api-services-youtube:v3-rev20190827-1.30.1'
     implementation 'com.github.TeamNewPipe.NewPipeExtractor:extractor:0.17.4'
 
@@ -104,7 +104,7 @@ dependencies {
     implementation 'com.jakewharton:butterknife:10.2.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.0'
     implementation 'com.google.code.gson:gson:2.8.6'
-    implementation group: 'joda-time', name: 'joda-time', version: '2.10.4'
+    implementation group: 'joda-time', name: 'joda-time', version: '2.10.5'
     implementation 'com.afollestad.material-dialogs:core:0.9.5.0'
     implementation 'com.google.android.exoplayer:exoplayer:2.9.6'
     implementation 'com.klinkerapps:link_builder:1.6.1'
@@ -112,15 +112,15 @@ dependencies {
     implementation (group: 'com.optimaize.languagedetector', name: 'language-detector', version: '0.6') {
         exclude group: 'com.google.guava', module: 'guava'
     }
-    implementation 'com.mikepenz:actionitembadge:3.3.2@aar'
-    implementation 'com.mikepenz:iconics-core:4.0.0@aar'
+    implementation 'com.mikepenz:actionitembadge:4.0.0@aar'
+    implementation 'com.mikepenz:iconics-core:4.0.2@aar'
     implementation 'com.github.hedzr:android-file-chooser:v1.2.0-final'
 
     // Android support modules
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.legacy:legacy-support-v13:1.0.0'
     implementation 'com.google.android.material:material:1.0.0'
-    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'androidx.multidex:multidex:2.0.1' // as we have over 65536 lines of code...
