@@ -33,7 +33,15 @@ public class NewPipeChannelVideos extends NewPipeVideos<StreamInfoItem> implemen
 
     @Override
     public void setChannelQuery(String channelId, boolean filterSubscribedVideos) {
+        NewPipeService.requireNonNull(channelId, "channelId missing");
         this.channelId = channelId;
+    }
+
+    // Important, this is called from the channel tab
+    @Override
+    public void setQuery(String query) {
+        NewPipeService.requireNonNull(query, "query missing");
+        this.channelId = query;
     }
 
     @Override
@@ -43,6 +51,7 @@ public class NewPipeChannelVideos extends NewPipeVideos<StreamInfoItem> implemen
 
     @Override
     protected Pager<StreamInfoItem> createNewPager() throws ExtractionException, IOException {
+        NewPipeService.requireNonNull(channelId, "channelId missing");
         return NewPipeService.get().getChannelPager(channelId);
     }
 }
