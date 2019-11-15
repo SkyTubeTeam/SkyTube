@@ -27,7 +27,9 @@ import android.os.Handler;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -95,8 +97,15 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 		super.onCreate(savedInstanceState);
 
 		subscriptionsBackupsManager = new SubscriptionsBackupsManager(getActivity(), SubscriptionsFeedFragment.this);
+
 	}
 
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		View result = super.onCreateView(inflater, container, savedInstanceState);
+		videoGridAdapter.setVideoGridUpdated(this::setupUiAccordingToNumOfSubbedChannels);
+		return result;
+	}
 
 	private boolean checkRefreshTime() {
 		// Only do an automatic refresh of subscriptions if it's been more than three hours since the last one was done.
@@ -213,7 +222,7 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 			refreshInProgress = true;
 			new RefreshFeedTask(showFetchingVideosDialog, forcedFullRefresh).executeInParallel();
 		} else {
-			new RefreshFeedFromCacheTask().executeInParallel();
+			videoGridAdapter.refresh(true);
 		}
 	}
 
@@ -406,7 +415,7 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 	}
 
 	public void refreshFeedFromCache() {
-		new RefreshFeedFromCacheTask().executeInParallel();
+		videoGridAdapter.refresh(true);
 	}
 
 	private AsyncTaskParallel<?,?,?> getRefreshTask(List<YouTubeChannel> totalChannels) {
@@ -419,25 +428,6 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 			}
 			return new GetSubscriptionVideosTask(SubscriptionsFeedFragment.this, channelIds);
 		}
-	}
-
-	/**
-	 * A task that refreshes the subscriptions feed by getting published videos currently cached in
-	 * the local database.
-	 */
-	private class RefreshFeedFromCacheTask extends AsyncTaskParallel<Void, Void, List<YouTubeVideo>> {
-
-		@Override
-		protected List<YouTubeVideo> doInBackground(Void... params) {
-			return SubscriptionsDb.getSubscriptionsDb().getSubscriptionVideos();
-		}
-
-		@Override
-		protected void onPostExecute(List<YouTubeVideo> youTubeVideos) {
-			videoGridAdapter.setList(youTubeVideos);
-			setupUiAccordingToNumOfSubbedChannels(youTubeVideos.size());
-		}
-
 	}
 
 }
