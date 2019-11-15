@@ -40,16 +40,18 @@ import free.rm.skytube.gui.businessobjects.adapters.VideoGridAdapter;
 public class GetYouTubeVideosTask extends AsyncTaskParallel<Void, Void, List<YouTubeVideo>> {
 
 	/** Object used to retrieve the desired YouTube videos. */
-	private GetYouTubeVideos getYouTubeVideos;
+	private final GetYouTubeVideos getYouTubeVideos;
 
 	/** The Adapter where the retrieved videos will be displayed. */
-	private VideoGridAdapter	videoGridAdapter;
+	private final VideoGridAdapter	videoGridAdapter;
 
 	/** SwipeRefreshLayout will be used to display the progress bar */
-	private SwipeRefreshLayout  swipeRefreshLayout;
+	private final SwipeRefreshLayout  swipeRefreshLayout;
 
 	private YouTubeChannel channel;
-	private boolean clearList;
+	private final boolean clearList;
+
+	private final VideoGridAdapter.Callback callback;
 
 
 	/**
@@ -58,13 +60,17 @@ public class GetYouTubeVideosTask extends AsyncTaskParallel<Void, Void, List<You
 	 *
 	 * @param getYouTubeVideos The object that does the actual fetching of videos.
 	 * @param videoGridAdapter The grid adapter the videos will be added to.
+	 * @param swipeRefreshLayout The layout which shows animation about the refresh process.
 	 * @param clearList Clear the list before adding new values to it.
+	 * @param callback To notify about the updated {@link VideoGridAdapter}
 	 */
-	public GetYouTubeVideosTask(GetYouTubeVideos getYouTubeVideos, VideoGridAdapter videoGridAdapter, SwipeRefreshLayout swipeRefreshLayout, boolean clearList) {
+	public GetYouTubeVideosTask(GetYouTubeVideos getYouTubeVideos, VideoGridAdapter videoGridAdapter, SwipeRefreshLayout swipeRefreshLayout, boolean clearList,
+								VideoGridAdapter.Callback callback) {
 		this.getYouTubeVideos = getYouTubeVideos;
 		this.videoGridAdapter = videoGridAdapter;
 		this.swipeRefreshLayout = swipeRefreshLayout;
 		this.clearList = clearList;
+		this.callback = callback;
 	}
 
 
@@ -73,8 +79,9 @@ public class GetYouTubeVideosTask extends AsyncTaskParallel<Void, Void, List<You
 		// if this task is being called by ChannelBrowserFragment, then get the channel the user is browsing
 		channel = videoGridAdapter.getYouTubeChannel();
 
-		if (swipeRefreshLayout != null)
+		if (swipeRefreshLayout != null) {
 			swipeRefreshLayout.setRefreshing(true);
+		}
 	}
 
 
@@ -119,15 +126,20 @@ public class GetYouTubeVideosTask extends AsyncTaskParallel<Void, Void, List<You
 		}
 		videoGridAdapter.appendList(videosList);
 
-		if(swipeRefreshLayout != null)
+		if (callback != null) {
+			callback.onVideoGridUpdated(videoGridAdapter.getItemCount());
+		}
+		if(swipeRefreshLayout != null) {
 			swipeRefreshLayout.setRefreshing(false);
+		}
 	}
 
 
 	@Override
 	protected void onCancelled() {
-		if(swipeRefreshLayout != null)
+		if(swipeRefreshLayout != null) {
 			swipeRefreshLayout.setRefreshing(false);
+		}
 	}
 
 }

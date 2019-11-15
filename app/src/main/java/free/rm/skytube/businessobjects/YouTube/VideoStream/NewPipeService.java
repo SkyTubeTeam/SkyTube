@@ -189,7 +189,7 @@ public class NewPipeService {
     /**
      * Return detailed information about a video from it's id.
      * @param videoId the id of the video.
-     * @return a {@link YoutTubeVideo}
+     * @return a {@link YouTubeVideo}
      * @throws ExtractionException
      * @throws IOException
      */
