@@ -19,17 +19,14 @@ package free.rm.skytube.businessobjects.YouTube.VideoStream;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document.OutputSettings;
 import org.jsoup.safety.Whitelist;
 import org.schabi.newpipe.extractor.InfoItem;
 import org.schabi.newpipe.extractor.NewPipe;
-import org.schabi.newpipe.extractor.ListExtractor.InfoItemsPage;
 import org.schabi.newpipe.extractor.ServiceList;
 import org.schabi.newpipe.extractor.StreamingService;
 import org.schabi.newpipe.extractor.channel.ChannelExtractor;
@@ -37,7 +34,6 @@ import org.schabi.newpipe.extractor.exceptions.ContentNotAvailableException;
 import org.schabi.newpipe.extractor.exceptions.ExtractionException;
 import org.schabi.newpipe.extractor.exceptions.ParsingException;
 import org.schabi.newpipe.extractor.linkhandler.LinkHandler;
-import org.schabi.newpipe.extractor.linkhandler.LinkHandlerFactory;
 import org.schabi.newpipe.extractor.linkhandler.ListLinkHandler;
 import org.schabi.newpipe.extractor.linkhandler.ListLinkHandlerFactory;
 import org.schabi.newpipe.extractor.search.SearchExtractor;
@@ -122,7 +118,7 @@ public class NewPipeService {
         return result;
     }
 
-    public Pager<StreamInfoItem> getChannelPager(String channelId) throws ParsingException, ExtractionException, IOException {
+    public Pager<StreamInfoItem> getChannelPager(String channelId) throws ExtractionException, IOException {
         ChannelExtractor channelExtractor = getChannelExtractor(channelId);
 
         YouTubeChannel channel = createInternalChannel(channelExtractor);

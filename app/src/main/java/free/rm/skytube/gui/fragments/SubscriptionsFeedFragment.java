@@ -45,12 +45,10 @@ import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.FeedUpdaterService;
 import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
-import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetBulkSubscriptionVideosTask;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetSubscriptionVideosTask;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetSubscriptionVideosTaskListener;
 import free.rm.skytube.businessobjects.YouTube.VideoStream.NewPipeService;
-import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 import free.rm.skytube.gui.businessobjects.SubscriptionsBackupsManager;
 import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
 
