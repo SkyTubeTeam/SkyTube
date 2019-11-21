@@ -23,9 +23,11 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.api.client.googleapis.json.GoogleJsonResponseException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
+import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.businessobjects.YouTube.GetYouTubeVideos;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
@@ -91,8 +93,8 @@ public class GetYouTubeVideosTask extends AsyncTaskParallel<Void, Void, List<You
 			return null;
 		}
 
-		// get videos from YouTube
-		List<YouTubeVideo> videosList = getYouTubeVideos.getNextVideos();
+		// get videos from YouTube or the database.
+		List<YouTubeVideo> videosList = getNextVideos();
 
 		if (videosList != null) {
 			// filter videos
@@ -111,6 +113,24 @@ public class GetYouTubeVideosTask extends AsyncTaskParallel<Void, Void, List<You
 		return videosList;
 	}
 
+	private List<YouTubeVideo> getNextVideos() {
+		if (this.clearList && videoGridAdapter.getCurrentVideoCategory() == VideoCategory.SUBSCRIPTIONS_FEED_VIDEOS) {
+			return collectUntil(videoGridAdapter.getItemCount());
+		} else {
+			return getYouTubeVideos.getNextVideos();
+		}
+	}
+
+	private List<YouTubeVideo> collectUntil(int currentSize) {
+		List<YouTubeVideo> result = new ArrayList<>(currentSize);
+		boolean hasNew = false;
+		do {
+			List<YouTubeVideo> videosList = getYouTubeVideos.getNextVideos();
+			hasNew = !videosList.isEmpty();
+			result.addAll(videosList);
+		} while(result.size() < currentSize && hasNew);
+		return result;
+	}
 
 	@Override
 	protected void onPostExecute(List<YouTubeVideo> videosList) {
