@@ -19,7 +19,9 @@ package free.rm.skytube.businessobjects.YouTube.VideoStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.schabi.newpipe.extractor.InfoItem;
 import org.schabi.newpipe.extractor.ListExtractor;
@@ -30,6 +32,7 @@ import org.schabi.newpipe.extractor.exceptions.ParsingException;
 import org.schabi.newpipe.extractor.linkhandler.LinkHandlerFactory;
 import org.schabi.newpipe.extractor.stream.StreamInfoItem;
 
+import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 
@@ -45,6 +48,7 @@ public class Pager<I extends InfoItem> {
     private final YouTubeChannel channel;
     private String nextPageUrl;
     private boolean hasNextPage = true;
+    private final Set<String> seenVideos = new HashSet<>();
 
     Pager(StreamingService streamingService, ListExtractor<I> channelExtractor, YouTubeChannel channel) {
         this.streamingService = streamingService;
@@ -88,17 +92,30 @@ public class Pager<I extends InfoItem> {
 
     private List<YouTubeVideo> extract(InfoItemsPage<I> page) throws ParsingException {
         List<YouTubeVideo> result = new ArrayList<>(page.getItems().size());
+        Logger.i(this, "extract from %s, items: %s", page, page.getItems().size());
+        int repeatCounter = 0;
+        int unexpected = 0;
         LinkHandlerFactory linkHandlerFactory = streamingService.getStreamLHFactory();
         for (I infoItem : page.getItems()) {
             if (infoItem instanceof StreamInfoItem) {
-                result.add(convert((StreamInfoItem) infoItem, linkHandlerFactory));
+                StreamInfoItem streamInfo = (StreamInfoItem) infoItem;
+                String id = linkHandlerFactory.getId(streamInfo.getUrl());
+                if (seenVideos.contains(id)) {
+                    repeatCounter++;
+                } else {
+                    seenVideos.add(id);
+                    result.add(convert(streamInfo, id));
+                }
+            } else {
+                Logger.i(this, "Unexpected item %s, type:%s", infoItem, infoItem.getClass());
+                unexpected ++;
             }
         }
+        Logger.i(this, "From the requested %s, number of duplicates: %s, wrong types: %s", page.getItems().size(), repeatCounter, unexpected);
         return result;
     }
 
-    private YouTubeVideo convert(StreamInfoItem item, LinkHandlerFactory linkHandlerFactory) throws ParsingException {
-        String id = linkHandlerFactory.getId(item.getUrl());
+    private YouTubeVideo convert(StreamInfoItem item, String id) throws ParsingException {
         Long publishDate = NewPipeService.getPublishDateSafe(item.getUploadDate(), id);
         YouTubeChannel ch = channel != null ? channel : new YouTubeChannel(item.getUploaderUrl(), item.getUploaderName());
         return new YouTubeVideo(id, item.getName(), null, item.getDuration(), ch,
