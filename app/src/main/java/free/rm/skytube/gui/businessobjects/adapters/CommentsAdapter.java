@@ -235,9 +235,8 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
 
 		protected GetCommentsTask(String videoId) {
 			if (getCommentThreads == null) {
-				getCommentThreads = new GetCommentThreads();
 				try {
-					getCommentThreads.init(videoId);
+					getCommentThreads = new GetCommentThreads(videoId);
 				} catch (Throwable tr) {
 					Toast.makeText(expandableListView.getContext(), R.string.error_get_comments, Toast.LENGTH_LONG).show();
 				}
@@ -257,6 +256,8 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
 
 		@Override
 		protected void onPostExecute(List<YouTubeCommentThread> commentThreadsList) {
+			SkyTubeApp.notifyUserOnError(expandableListView.getContext(), getCommentThreads.getLastException());
+
 			if (commentThreadsList != null) {
 				if (commentThreadsList.size() > 0) {
 					CommentsAdapter.this.commentThreadsList.addAll(commentThreadsList);

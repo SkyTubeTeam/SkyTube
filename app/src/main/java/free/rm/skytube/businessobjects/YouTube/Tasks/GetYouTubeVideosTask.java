@@ -17,15 +17,12 @@
 
 package free.rm.skytube.businessobjects.YouTube.Tasks;
 
-import android.widget.Toast;
-
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
-import com.google.api.client.googleapis.json.GoogleJsonResponseException;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.businessobjects.YouTube.GetYouTubeVideos;
@@ -134,13 +131,8 @@ public class GetYouTubeVideosTask extends AsyncTaskParallel<Void, Void, List<You
 
 	@Override
 	protected void onPostExecute(List<YouTubeVideo> videosList) {
-		if (getYouTubeVideos.getLastException() instanceof GoogleJsonResponseException) {
-			GoogleJsonResponseException exception = (GoogleJsonResponseException) getYouTubeVideos.getLastException();
-			String message = exception.getDetails().getMessage();
-			if (message != null) {
-				Toast.makeText(videoGridAdapter.getContext(), message, Toast.LENGTH_LONG).show();
-			}
-		}
+		SkyTubeApp.notifyUserOnError(videoGridAdapter.getContext(), getYouTubeVideos.getLastException());
+
 		if (this.clearList) {
 			videoGridAdapter.clearList();
 		}

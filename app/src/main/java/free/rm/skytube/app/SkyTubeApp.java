@@ -32,8 +32,13 @@ import android.net.ConnectivityManager;
 import android.os.Build;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
+import android.widget.Toast;
+
 import androidx.multidex.MultiDexApplication;
 import androidx.core.content.res.ResourcesCompat;
+
+import com.google.api.client.googleapis.json.GoogleJsonError;
+import com.google.api.client.googleapis.json.GoogleJsonResponseException;
 
 import org.schabi.newpipe.extractor.NewPipe;
 
@@ -221,5 +226,26 @@ public class SkyTubeApp extends MultiDexApplication {
 
 	public static Settings getSettings() {
 		return skyTubeApp.settings;
+	}
+
+	public static void notifyUserOnError(Context ctx, Exception exc) {
+		if (exc == null) {
+			return;
+		}
+		final String message;
+		if (exc instanceof GoogleJsonResponseException) {
+			GoogleJsonResponseException exception = (GoogleJsonResponseException) exc;
+			List<GoogleJsonError.ErrorInfo> errors = exception.getDetails().getErrors();
+			if (errors != null && !errors.isEmpty()) {
+				message =  "Server error:" + errors.get(0).getMessage()+ ", reason: "+ errors.get(0).getReason();
+			} else {
+				message = exception.getDetails().getMessage();
+			}
+		} else {
+			message = exc.getMessage();
+		}
+		if (message != null) {
+			Toast.makeText(ctx, message, Toast.LENGTH_LONG).show();
+		}
 	}
 }
