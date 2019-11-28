@@ -213,7 +213,7 @@ public class YouTubeVideo implements Serializable {
 		this.viewsCount = String.format(getStr(R.string.views), viewsCountInt);
 	}
 
-        public YouTubeVideo(String id, String title, String description, long durationInSeconds, YouTubeChannel channel, long viewCount, Long publishDate, String publishDatePretty, String thumbnailUrl) {
+        public YouTubeVideo(String id, String title, String description, long durationInSeconds, YouTubeChannel channel, long viewCount, Long publishDate, String thumbnailUrl) {
             this.id = id;
             this.title = title;
             this.description = description;
@@ -221,10 +221,6 @@ public class YouTubeVideo implements Serializable {
             this.setViewCount(BigInteger.valueOf(viewCount));
             if (publishDate != null) {
                 this.setPublishDate(new DateTime(publishDate));
-            } else if (publishDatePretty != null){
-                this.setPublishDatePretty(publishDatePretty);
-            } else {
-                this.setPublishDatePretty("???");
             }
             this.thumbnailMaxResUrl = thumbnailUrl;
             this.thumbnailUrl = thumbnailUrl;
