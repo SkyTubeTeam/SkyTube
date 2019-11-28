@@ -17,9 +17,6 @@
 package free.rm.skytube.businessobjects.YouTube.VideoStream;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import org.jsoup.Jsoup;
@@ -36,12 +33,13 @@ import org.schabi.newpipe.extractor.exceptions.ParsingException;
 import org.schabi.newpipe.extractor.linkhandler.LinkHandler;
 import org.schabi.newpipe.extractor.linkhandler.ListLinkHandler;
 import org.schabi.newpipe.extractor.linkhandler.ListLinkHandlerFactory;
+import org.schabi.newpipe.extractor.localization.DateWrapper;
 import org.schabi.newpipe.extractor.search.SearchExtractor;
 import org.schabi.newpipe.extractor.stream.StreamExtractor;
 import org.schabi.newpipe.extractor.stream.StreamInfo;
 import org.schabi.newpipe.extractor.stream.StreamInfoItem;
 import org.schabi.newpipe.extractor.stream.VideoStream;
-import org.schabi.newpipe.extractor.utils.Localization;
+import org.schabi.newpipe.extractor.localization.Localization;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
@@ -194,19 +192,25 @@ public class NewPipeService {
         StreamExtractor extractor = streamingService.getStreamExtractor(url);
         extractor.fetchPage();
 
-        String dateStr = extractor.getUploadDate();
-        try {
-            YouTubeVideo video = new YouTubeVideo(extractor.getId(), extractor.getName(), filterHtml(extractor.getDescription()),
-                    extractor.getLength(), new YouTubeChannel(extractor.getUploaderUrl(), extractor.getUploaderName()),
-                    extractor.getViewCount(), getPublishDate(dateStr), dateStr, extractor.getThumbnailUrl());
-            video.setLikeDislikeCount(extractor.getLikeCount(), extractor.getDislikeCount());
-            video.setRetrievalTimestamp(System.currentTimeMillis());
-            return video;
-        } catch (ParseException e) {
-            throw new ExtractionException("Unable parse publish date:" + dateStr + " for video=" + videoId, e);
-        }
+        DateWrapper uploadDate = extractor.getUploadDate();
+
+        YouTubeVideo video = new YouTubeVideo(extractor.getId(), extractor.getName(), filterHtml(extractor.getDescription()),
+                extractor.getLength(), new YouTubeChannel(extractor.getUploaderUrl(), extractor.getUploaderName()),
+                extractor.getViewCount(), getPublishDate(uploadDate), extractor.getThumbnailUrl());
+        video.setLikeDislikeCount(extractor.getLikeCount(), extractor.getDislikeCount());
+        video.setRetrievalTimestamp(System.currentTimeMillis());
+        // Logger.i(this, " -> publishDate is %s, pretty: %s - orig value: %s", video.getPublishDate(),video.getPublishDatePretty(), uploadDate);
+        return video;
     }
 
+    static Long getPublishDate(DateWrapper date) {
+        if (date != null && date.date() != null) {
+            return date.date().getTimeInMillis();
+        } else {
+            return System.currentTimeMillis();
+        }
+    }
+/*
     static long getPublishDate(String dateStr) throws ParseException {
         Date publishDate = new SimpleDateFormat("yyyy-MM-dd").parse(dateStr);
         // TODO: publish date is not accurate - as only date precision is available
@@ -219,18 +223,7 @@ public class NewPipeService {
             return publishDate.getTime();
         }
     }
-
-    static Long getPublishDateSafe(String dateStr, String id) {
-        try {
-            return getPublishDate(dateStr);
-        } catch (ParseException e) {
-            if (DEBUG_LOG) {
-                Logger.d(NewPipeService.class, "Unable parse publish date for %s -> %s", id, dateStr);
-            }
-            return null;
-        }
-    }
-
+*/
     static String getThumbnailUrl(String id) {
         // Logger.d(NewPipeService.class, "getThumbnailUrl  %s", id);
         return "https://i.ytimg.com/vi/" + id + "/hqdefault.jpg";

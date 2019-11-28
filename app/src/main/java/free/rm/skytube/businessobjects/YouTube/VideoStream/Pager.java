@@ -116,10 +116,10 @@ public class Pager<I extends InfoItem> {
     }
 
     private YouTubeVideo convert(StreamInfoItem item, String id) throws ParsingException {
-        Long publishDate = NewPipeService.getPublishDateSafe(item.getUploadDate(), id);
+        Long publishDate = NewPipeService.getPublishDate(item.getUploadDate());
         YouTubeChannel ch = channel != null ? channel : new YouTubeChannel(item.getUploaderUrl(), item.getUploaderName());
         return new YouTubeVideo(id, item.getName(), null, item.getDuration(), ch,
-                item.getViewCount(), publishDate, item.getUploadDate(), NewPipeService.getThumbnailUrl(id));
+                item.getViewCount(), publishDate, NewPipeService.getThumbnailUrl(id));
     }
 
 }
