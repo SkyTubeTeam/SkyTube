@@ -7,10 +7,9 @@ import java.util.List;
 
 import org.schabi.newpipe.extractor.exceptions.ExtractionException;
 
-import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.YouTube.GetVideosDetailsByIDs;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
-import free.rm.skytube.businessobjects.YouTube.VideoStream.NewPipeService;
+import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
 import free.rm.skytube.gui.businessobjects.YouTubeVideoListener;
 
 /**

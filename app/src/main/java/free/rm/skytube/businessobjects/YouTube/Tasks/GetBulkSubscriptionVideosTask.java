@@ -17,8 +17,6 @@
 
 package free.rm.skytube.businessobjects.YouTube.Tasks;
 
-import android.util.Log;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -35,7 +33,7 @@ import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
-import free.rm.skytube.businessobjects.YouTube.VideoStream.NewPipeService;
+import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 import free.rm.skytube.businessobjects.utils.Predicate;
 

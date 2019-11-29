@@ -28,7 +28,7 @@ import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetBulkSubscriptionVideosTask;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetChannelVideosTask;
-import free.rm.skytube.businessobjects.YouTube.VideoStream.NewPipeService;
+import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
 import free.rm.skytube.businessobjects.db.Tasks.SubscribeToChannelTask;
 
 /**

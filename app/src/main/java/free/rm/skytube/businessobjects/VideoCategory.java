@@ -32,8 +32,7 @@ import free.rm.skytube.businessobjects.YouTube.GetYouTubeVideos;
 import free.rm.skytube.businessobjects.YouTube.NewPipeChannelVideos;
 import free.rm.skytube.businessobjects.YouTube.NewPipeVideoBySearch;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPIKey;
-import free.rm.skytube.businessobjects.YouTube.Tasks.GetChannelVideosTask;
-import free.rm.skytube.businessobjects.YouTube.VideoStream.NewPipeService;
+import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
 import free.rm.skytube.businessobjects.db.Tasks.GetSubscriptionsVideosFromDb;
 
 /**

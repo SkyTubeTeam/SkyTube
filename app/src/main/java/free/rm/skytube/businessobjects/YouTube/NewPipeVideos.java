@@ -25,7 +25,7 @@ import org.schabi.newpipe.extractor.exceptions.ExtractionException;
 
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
-import free.rm.skytube.businessobjects.YouTube.VideoStream.Pager;
+import free.rm.skytube.businessobjects.YouTube.newpipe.VideoPager;
 
 /**
  * Base class to adapt the UI to the NewPipe based paging.
@@ -34,9 +34,9 @@ import free.rm.skytube.businessobjects.YouTube.VideoStream.Pager;
  */
 public abstract class NewPipeVideos<ITEM extends InfoItem> extends GetYouTubeVideos {
 
-    private Pager<ITEM> pager;
+    private VideoPager pager;
 
-    protected abstract Pager<ITEM> createNewPager() throws ExtractionException, IOException;
+    protected abstract VideoPager createNewPager() throws ExtractionException, IOException;
 
     @Override
     public void init() throws IOException {
@@ -53,7 +53,7 @@ public abstract class NewPipeVideos<ITEM extends InfoItem> extends GetYouTubeVid
             }
         }
         try {
-            return pager.getVideos();
+            return pager.getNextPage();
         } catch (IOException | ExtractionException e) {
             Logger.e(this, "An error has occurred while getting videos:" + e.getMessage(), e);
             return Collections.emptyList();

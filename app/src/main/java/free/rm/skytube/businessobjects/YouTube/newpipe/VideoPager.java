@@ -14,45 +14,30 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package free.rm.skytube.businessobjects.YouTube.VideoStream;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+package free.rm.skytube.businessobjects.YouTube.newpipe;
 
 import org.schabi.newpipe.extractor.InfoItem;
 import org.schabi.newpipe.extractor.ListExtractor;
-import org.schabi.newpipe.extractor.ListExtractor.InfoItemsPage;
 import org.schabi.newpipe.extractor.StreamingService;
-import org.schabi.newpipe.extractor.exceptions.ExtractionException;
 import org.schabi.newpipe.extractor.exceptions.ParsingException;
 import org.schabi.newpipe.extractor.linkhandler.LinkHandlerFactory;
 import org.schabi.newpipe.extractor.stream.StreamInfoItem;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 
-/**
- * Class to parse a channel screen for searching for videos and returning as pages with {@link #getVideos()}.
- * 
- * @author zsombor
- *
- */
-public class Pager<I extends InfoItem> {
-    private final StreamingService streamingService;
-    private final ListExtractor<I> channelExtractor;
+public class VideoPager extends Pager<InfoItem, YouTubeVideo> {
     private final YouTubeChannel channel;
-    private String nextPageUrl;
-    private boolean hasNextPage = true;
     private final Set<String> seenVideos = new HashSet<>();
 
-    Pager(StreamingService streamingService, ListExtractor<I> channelExtractor, YouTubeChannel channel) {
-        this.streamingService = streamingService;
-        this.channelExtractor = channelExtractor;
+    public VideoPager(StreamingService streamingService, ListExtractor<InfoItem> channelExtractor, YouTubeChannel channel) {
+        super(streamingService, channelExtractor);
         this.channel = channel;
     }
 
@@ -60,43 +45,15 @@ public class Pager<I extends InfoItem> {
         return channel;
     }
 
-    /**
-     * @return true, if there could be more videos available in the next page.
-     */
-    public boolean isHasNextPage() {
-        return hasNextPage;
-    }
 
-    /**
-     * @return the next page of videos.
-     * @throws ParsingException
-     * @throws IOException
-     * @throws ExtractionException
-     */
-    public List<YouTubeVideo> getVideos() throws ParsingException, IOException, ExtractionException {
-        if (!hasNextPage) {
-            return Collections.emptyList();
-        }
-        if (nextPageUrl == null) {
-            return process(channelExtractor.getInitialPage());
-        } else {
-            return process(channelExtractor.getPage(nextPageUrl));
-        }
-    }
-
-    private List<YouTubeVideo> process(InfoItemsPage<I> page) throws ParsingException {
-        nextPageUrl = page.getNextPageUrl();
-        hasNextPage = nextPageUrl != null;
-        return extract(page);
-    }
-
-    private List<YouTubeVideo> extract(InfoItemsPage<I> page) throws ParsingException {
+    @Override
+    protected List<YouTubeVideo> extract(ListExtractor.InfoItemsPage<InfoItem> page) throws ParsingException {
         List<YouTubeVideo> result = new ArrayList<>(page.getItems().size());
         Logger.i(this, "extract from %s, items: %s", page, page.getItems().size());
         int repeatCounter = 0;
         int unexpected = 0;
-        LinkHandlerFactory linkHandlerFactory = streamingService.getStreamLHFactory();
-        for (I infoItem : page.getItems()) {
+        LinkHandlerFactory linkHandlerFactory = getStreamingService().getStreamLHFactory();
+        for (InfoItem infoItem : page.getItems()) {
             if (infoItem instanceof StreamInfoItem) {
                 StreamInfoItem streamInfo = (StreamInfoItem) infoItem;
                 String id = linkHandlerFactory.getId(streamInfo.getUrl());
@@ -121,5 +78,6 @@ public class Pager<I extends InfoItem> {
         return new YouTubeVideo(id, item.getName(), null, item.getDuration(), ch,
                 item.getViewCount(), publishDate, NewPipeService.getThumbnailUrl(id));
     }
+
 
 }

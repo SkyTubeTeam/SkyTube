@@ -30,11 +30,12 @@ import java.util.List;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPI;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPIKey;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeCommentThread;
+import free.rm.skytube.businessobjects.YouTube.newpipe.PagerBackend;
 
 /**
  * Queries the YouTube service and gets the comments of a video.
  */
-public class GetCommentThreads {
+public class GetCommentThreads implements PagerBackend<YouTubeCommentThread> {
 
 	private final String	videoId;
 	private String	nextPageToken = null;
@@ -65,7 +66,8 @@ public class GetCommentThreads {
 	 *
 	 * @return	A list/page of {@link YouTubeCommentThread}.
 	 */
-	public List<YouTubeCommentThread> get() {
+	@Override
+	public List<YouTubeCommentThread> getSafeNextPage() {
 		lastException = null;
 		List<YouTubeCommentThread> commentThreadList = new ArrayList<>();
 
@@ -102,7 +104,9 @@ public class GetCommentThreads {
 		return commentThreadList;
 	}
 
+	@Override
 	public IOException getLastException() {
 		return lastException;
 	}
+
 }

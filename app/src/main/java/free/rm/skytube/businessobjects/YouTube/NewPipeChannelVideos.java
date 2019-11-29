@@ -21,8 +21,8 @@ import java.io.IOException;
 import org.schabi.newpipe.extractor.exceptions.ExtractionException;
 import org.schabi.newpipe.extractor.stream.StreamInfoItem;
 
-import free.rm.skytube.businessobjects.YouTube.VideoStream.NewPipeService;
-import free.rm.skytube.businessobjects.YouTube.VideoStream.Pager;
+import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
+import free.rm.skytube.businessobjects.YouTube.newpipe.VideoPager;
 
 /**
  * Adapter class to get list of videos from a channel.
@@ -50,7 +50,7 @@ public class NewPipeChannelVideos extends NewPipeVideos<StreamInfoItem> implemen
     }
 
     @Override
-    protected Pager<StreamInfoItem> createNewPager() throws ExtractionException, IOException {
+    protected VideoPager createNewPager() throws ExtractionException, IOException {
         NewPipeService.requireNonNull(channelId, "channelId missing");
         return NewPipeService.get().getChannelPager(channelId);
     }

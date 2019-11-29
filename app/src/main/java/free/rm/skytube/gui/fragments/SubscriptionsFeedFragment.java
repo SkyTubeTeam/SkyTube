@@ -48,7 +48,7 @@ import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetBulkSubscriptionVideosTask;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetSubscriptionVideosTask;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetSubscriptionVideosTaskListener;
-import free.rm.skytube.businessobjects.YouTube.VideoStream.NewPipeService;
+import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
 import free.rm.skytube.gui.businessobjects.SubscriptionsBackupsManager;
 import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
 

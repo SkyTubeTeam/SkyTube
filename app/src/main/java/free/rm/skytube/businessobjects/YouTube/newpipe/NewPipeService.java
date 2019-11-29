@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package free.rm.skytube.businessobjects.YouTube.VideoStream;
+package free.rm.skytube.businessobjects.YouTube.newpipe;
 
 import java.io.IOException;
 import java.util.List;
@@ -22,11 +22,12 @@ import java.util.List;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document.OutputSettings;
 import org.jsoup.safety.Whitelist;
-import org.schabi.newpipe.extractor.InfoItem;
+import org.schabi.newpipe.extractor.ListExtractor;
 import org.schabi.newpipe.extractor.NewPipe;
 import org.schabi.newpipe.extractor.ServiceList;
 import org.schabi.newpipe.extractor.StreamingService;
 import org.schabi.newpipe.extractor.channel.ChannelExtractor;
+import org.schabi.newpipe.extractor.comments.CommentsExtractor;
 import org.schabi.newpipe.extractor.exceptions.ContentNotAvailableException;
 import org.schabi.newpipe.extractor.exceptions.ExtractionException;
 import org.schabi.newpipe.extractor.exceptions.ParsingException;
@@ -37,7 +38,6 @@ import org.schabi.newpipe.extractor.localization.DateWrapper;
 import org.schabi.newpipe.extractor.search.SearchExtractor;
 import org.schabi.newpipe.extractor.stream.StreamExtractor;
 import org.schabi.newpipe.extractor.stream.StreamInfo;
-import org.schabi.newpipe.extractor.stream.StreamInfoItem;
 import org.schabi.newpipe.extractor.stream.VideoStream;
 import org.schabi.newpipe.extractor.localization.Localization;
 
@@ -46,6 +46,9 @@ import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
+import free.rm.skytube.businessobjects.YouTube.VideoStream.HttpDownloader;
+import free.rm.skytube.businessobjects.YouTube.VideoStream.StreamMetaData;
+import free.rm.skytube.businessobjects.YouTube.VideoStream.StreamMetaDataList;
 
 /**
  * Service to interact with remote video services, using the NewPipeExtractor backend.
@@ -110,17 +113,23 @@ public class NewPipeService {
      * @throws IOException
      */
     public List<YouTubeVideo> getChannelVideos(String channelId) throws ExtractionException, IOException {
-        Pager<StreamInfoItem> pager = getChannelPager(channelId);
-        List<YouTubeVideo> result = pager.getVideos();
+        VideoPager pager = getChannelPager(channelId);
+        List<YouTubeVideo> result = pager.getNextPage();
         Logger.i(this, "getChannelVideos for %s(%s)  -> %s videos", pager.getChannel().getTitle(), channelId, result.size());
         return result;
     }
 
-    public Pager<StreamInfoItem> getChannelPager(String channelId) throws ExtractionException, IOException {
+    public VideoPager getChannelPager(String channelId) throws ExtractionException, IOException {
         ChannelExtractor channelExtractor = getChannelExtractor(channelId);
 
         YouTubeChannel channel = createInternalChannel(channelExtractor);
-        return new Pager<>(streamingService, channelExtractor, channel);
+        return new VideoPager(streamingService, (ListExtractor) channelExtractor, channel);
+    }
+
+    public CommentPager getCommentPager(String videoId) throws ExtractionException {
+        final ListLinkHandler linkHandler = streamingService.getCommentsLHFactory().fromId(videoId);
+        final CommentsExtractor commentsExtractor = streamingService.getCommentsExtractor(linkHandler);
+        return new CommentPager(streamingService, commentsExtractor);
     }
 
     /**
@@ -132,9 +141,9 @@ public class NewPipeService {
      */
     public YouTubeChannel getChannelDetails(String channelId) throws ExtractionException, IOException {
         requireNonNull(channelId, "channelId");
-        Pager<StreamInfoItem> pager = getChannelPager(channelId);
+        VideoPager pager = getChannelPager(channelId);
         // get the channel, and add all the videos from the first page
-        pager.getChannel().getYouTubeVideos().addAll(pager.getVideos());
+        pager.getChannel().getYouTubeVideos().addAll(pager.getNextPage());
         return pager.getChannel();
     }
 
@@ -237,11 +246,10 @@ public class NewPipeService {
         return result;
     }
 
-    public Pager<InfoItem> getSearchResult(String query) throws ExtractionException, IOException {
+    public VideoPager getSearchResult(String query) throws ExtractionException, IOException {
         SearchExtractor extractor = streamingService.getSearchExtractor(query);
         extractor.fetchPage();
-
-        return new Pager<>(streamingService, extractor, null);
+        return new VideoPager(streamingService, extractor, null);
     }
 
     /**
