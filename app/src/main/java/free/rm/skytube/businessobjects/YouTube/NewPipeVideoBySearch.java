@@ -21,8 +21,8 @@ import java.io.IOException;
 import org.schabi.newpipe.extractor.InfoItem;
 import org.schabi.newpipe.extractor.exceptions.ExtractionException;
 
-import free.rm.skytube.businessobjects.YouTube.VideoStream.NewPipeService;
-import free.rm.skytube.businessobjects.YouTube.VideoStream.Pager;
+import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
+import free.rm.skytube.businessobjects.YouTube.newpipe.VideoPager;
 
 public class NewPipeVideoBySearch extends NewPipeVideos<InfoItem> {
 
@@ -34,7 +34,7 @@ public class NewPipeVideoBySearch extends NewPipeVideos<InfoItem> {
     }
 
     @Override
-    protected Pager<InfoItem> createNewPager() throws ExtractionException, IOException {
+    protected VideoPager createNewPager() throws ExtractionException, IOException {
         return NewPipeService.get().getSearchResult(query);
     }
 

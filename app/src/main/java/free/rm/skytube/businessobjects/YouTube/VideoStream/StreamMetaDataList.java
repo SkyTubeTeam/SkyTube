@@ -35,16 +35,16 @@ public class StreamMetaDataList {
 	private static final String TAG = StreamMetaDataList.class.getSimpleName();
 
 
-	StreamMetaDataList() {
+	public StreamMetaDataList() {
 	}
 
 
-	StreamMetaDataList(int errorMessageId) {
+	public StreamMetaDataList(int errorMessageId) {
 		this.errorMessage = SkyTubeApp.getStr(errorMessageId);
 	}
 
 
-	StreamMetaDataList(String errorMessage) {
+	public StreamMetaDataList(String errorMessage) {
 		this.errorMessage = errorMessage;
 	}
 

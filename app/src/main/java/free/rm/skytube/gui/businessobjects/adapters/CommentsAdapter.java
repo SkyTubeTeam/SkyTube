@@ -27,7 +27,6 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -40,6 +39,8 @@ import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.YouTube.GetCommentThreads;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeComment;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeCommentThread;
+import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
+import free.rm.skytube.businessobjects.YouTube.newpipe.PagerBackend;
 import free.rm.skytube.businessobjects.db.Tasks.GetChannelInfo;
 import free.rm.skytube.gui.businessobjects.YouTubePlayer;
 
@@ -48,10 +49,10 @@ import free.rm.skytube.gui.businessobjects.YouTubePlayer;
  */
 public class CommentsAdapter extends BaseExpandableListAdapter {
 
-	private String						videoId;
+	private final String				videoId;
+	private PagerBackend<YouTubeCommentThread> commentThreadPager;
 	private List<YouTubeCommentThread>	commentThreadsList = new ArrayList<>();
 	private GetCommentsTask				getCommentsTask = null;
-	private GetCommentThreads			getCommentThreads = null;
 	private ExpandableListView			expandableListView;
 	private View						commentsProgressBar;
 	private View						noVideoCommentsView;
@@ -70,8 +71,13 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
 		this.commentsProgressBar = commentsProgressBar;
 		this.noVideoCommentsView = noVideoCommentsView;
 		this.layoutInflater = LayoutInflater.from(expandableListView.getContext());
-		this.getCommentsTask = new GetCommentsTask(videoId);
-		this.getCommentsTask.execute();
+		try {
+			this.commentThreadPager = NewPipeService.isPreferred() ? NewPipeService.get().getCommentPager(videoId) : new GetCommentThreads(videoId);
+			this.getCommentsTask = new GetCommentsTask();
+			this.getCommentsTask.execute();
+		} catch (Exception e) {
+			SkyTubeApp.notifyUserOnError(context, e);
+		}
 	}
 
 	@Override
@@ -151,10 +157,12 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
 
 		// if it reached the bottom of the list, then try to get the next page of videos
 		if (getParentView  &&  groupPosition == getGroupCount() - 1) {
-			if (this.getCommentsTask == null) {
-				Log.w(TAG, "Getting next page of comments...");
-				this.getCommentsTask = new GetCommentsTask(this.videoId);
-				this.getCommentsTask.execute();
+			synchronized (this) {
+				if (this.getCommentsTask == null) {
+					Log.w(TAG, "Getting next page of comments...");
+					this.getCommentsTask = new GetCommentsTask();
+					this.getCommentsTask.execute();
+				}
 			}
 		}
 
@@ -191,7 +199,7 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
 			authorTextView.setText(comment.getAuthor());
 			commentTextView.setText(comment.getComment());
 			dateTextView.setText(comment.getDatePublished());
-			upvotesTextView.setText(comment.getLikeCount());
+			upvotesTextView.setText(String.valueOf(comment.getLikeCount()));
 			Glide.with(context)
 					.load(comment.getThumbnailUrl())
 					.apply(new RequestOptions().placeholder(R.drawable.channel_thumbnail_default))
@@ -233,16 +241,6 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
 
 	private class GetCommentsTask extends AsyncTask<Void, Void, List<YouTubeCommentThread>> {
 
-		protected GetCommentsTask(String videoId) {
-			if (getCommentThreads == null) {
-				try {
-					getCommentThreads = new GetCommentThreads(videoId);
-				} catch (Throwable tr) {
-					Toast.makeText(expandableListView.getContext(), R.string.error_get_comments, Toast.LENGTH_LONG).show();
-				}
-			}
-		}
-
 		@Override
 		protected void onPreExecute() {
 			commentsProgressBar.setVisibility(View.VISIBLE);
@@ -251,20 +249,21 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
 
 		@Override
 		protected  List<YouTubeCommentThread> doInBackground(Void... params) {
-			return getCommentThreads.get();
+			return commentThreadPager.getSafeNextPage();
 		}
 
 		@Override
-		protected void onPostExecute(List<YouTubeCommentThread> commentThreadsList) {
-			SkyTubeApp.notifyUserOnError(expandableListView.getContext(), getCommentThreads.getLastException());
+		protected void onPostExecute(List<YouTubeCommentThread> newComments) {
+			SkyTubeApp.notifyUserOnError(expandableListView.getContext(), commentThreadPager.getLastException());
 
-			if (commentThreadsList != null) {
-				if (commentThreadsList.size() > 0) {
-					CommentsAdapter.this.commentThreadsList.addAll(commentThreadsList);
+			if (newComments != null) {
+				if (newComments.size() > 0) {
+					CommentsAdapter.this.commentThreadsList.addAll(newComments);
 					CommentsAdapter.this.notifyDataSetChanged();
-				} else {
-					noVideoCommentsView.setVisibility(View.VISIBLE);
 				}
+				if (commentThreadsList.isEmpty()) {
+                    noVideoCommentsView.setVisibility(View.VISIBLE);
+                }
 			}
 
 			commentsProgressBar.setVisibility(View.GONE);
