@@ -201,11 +201,18 @@ public class NewPipeService {
         StreamExtractor extractor = streamingService.getStreamExtractor(url);
         extractor.fetchPage();
 
-        DateWrapper uploadDate = extractor.getUploadDate();
+        String textualUploadDate = extractor.getTextualUploadDate();
+        Long uploadTimestamp;
+        if (textualUploadDate != null && !textualUploadDate.trim().isEmpty()) {
+            DateWrapper uploadDate = extractor.getUploadDate();
+            uploadTimestamp = getPublishDate(uploadDate);
+        } else {
+            uploadTimestamp = System.currentTimeMillis();
+        }
 
         YouTubeVideo video = new YouTubeVideo(extractor.getId(), extractor.getName(), filterHtml(extractor.getDescription()),
                 extractor.getLength(), new YouTubeChannel(extractor.getUploaderUrl(), extractor.getUploaderName()),
-                extractor.getViewCount(), getPublishDate(uploadDate), extractor.getThumbnailUrl());
+                extractor.getViewCount(), uploadTimestamp, extractor.getThumbnailUrl());
         video.setLikeDislikeCount(extractor.getLikeCount(), extractor.getDislikeCount());
         video.setRetrievalTimestamp(System.currentTimeMillis());
         // Logger.i(this, " -> publishDate is %s, pretty: %s - orig value: %s", video.getPublishDate(),video.getPublishDatePretty(), uploadDate);
