@@ -1,3 +1,10 @@
+v2.968 - 02 Dec 2019
+		* Reduce the number of Youtube API calls
+		* Implement comment fetching with the NewPipe backend
+		* Fix the repeating search result problem with the NewPipe backend.
+		* Subscription feed refresh should not force the UI to the head of the list.
+		* Show error when comment fetching fails due to Youtube API error.
+
 v2.967 - 02 Nov 2019
         * Fix crash in Subscription feed retrieval
         * Fix multiple, concurrent play, due to ExoPlayer creation
