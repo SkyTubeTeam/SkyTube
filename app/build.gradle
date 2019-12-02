@@ -9,16 +9,15 @@ android {
         minSdkVersion 14
         targetSdkVersion 28
 
-        versionName "2.967"    // digits of the *fractional part* shall NOT be > than "9"
+        versionName "2.968"    // digits of the *fractional part* shall NOT be > than "9"
         versionCode buildNumber.toInteger()
-
         // Third party devs:  pls be ethical and change the below keys
         buildConfigField 'String',   'YOUTUBE_API_KEYS_DEBUG', '"AIzaSyDU-ZZCyOB_kYkiMSZ6ooSipUZRukHU4ik"'
         buildConfigField 'String[]', 'YOUTUBE_API_KEYS',
                 '{' +
-                        '"AIzaSyDc3jDqguaCZSKpAwpvgkr0OwUZPFRvcX8",' +
-                        '"AIzaSyAlDQa9lCW_YZ10_nml6mNygjEy37b0pmo",' +
-                        '"AIzaSyCJjgfBdvHGoZCILxcTE1HeBd-_megm05o",' +
+                        '"AIzaSyDR7X3W95oAJRaAmKxP9H0c7B3Q82r2iz8",' +
+                        '"AIzaSyC6cJs9Aa_kEhXwleH2b448h9CiHYIfxnc",' +
+                        '"AIzaSyDXZMFLY_9vXXmQIA_ql_6SftiRsLZbpxA",' +
                         '"AIzaSyBVxY5Tqtf95caxIXlwVlfHGe9e3PK0azg",' +
                         '"AIzaSyDjz67GD023IyFOBZdvfxg7SnLDgeOQ6yc"'  +
                 '}'
@@ -49,9 +48,9 @@ android {
             dimension "skytube"
             buildConfigField 'String[]', 'YOUTUBE_API_KEYS',
                     '{' + // new keys
-                        '"AIzaSyDc3jDqguaCZSKpAwpvgkr0OwUZPFRvcX8",' +
-                        '"AIzaSyAlDQa9lCW_YZ10_nml6mNygjEy37b0pmo",' +
-                        '"AIzaSyCJjgfBdvHGoZCILxcTE1HeBd-_megm05o",' +
+                        '"AIzaSyDR7X3W95oAJRaAmKxP9H0c7B3Q82r2iz8",' +
+                        '"AIzaSyC6cJs9Aa_kEhXwleH2b448h9CiHYIfxnc",' +
+                        '"AIzaSyDXZMFLY_9vXXmQIA_ql_6SftiRsLZbpxA",' +
                         // old keys, but this can be used with FDroid
                         '"AIzaSyC27jgPDHkQsQK8TW4ngrQprSCnlMTJ04w",' +
                         '"AIzaSyCmXsaE6ZW14-1vM5zceWnGWnB73FkY7U4",' +
