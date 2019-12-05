@@ -125,8 +125,8 @@ public enum VideoCategory {
 			Log.d(VideoCategory.class.getName(), "Using GetChannelVideosFull...");
 			return new GetChannelVideosFull();
 		} else {
-			Log.d(VideoCategory.class.getName(), "Using GetChannelVideosLite...");
-			return new GetChannelVideosLite();
+			Log.d(VideoCategory.class.getName(), "Using NewPipeChannelVideos...");
+			return new NewPipeChannelVideos();
 		}
 
 	}
