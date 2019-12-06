@@ -29,6 +29,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
@@ -40,16 +41,11 @@ import androidx.core.content.res.ResourcesCompat;
 import com.google.api.client.googleapis.json.GoogleJsonError;
 import com.google.api.client.googleapis.json.GoogleJsonResponseException;
 
-import org.schabi.newpipe.extractor.NewPipe;
-
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.FeedUpdaterReceiver;
-import free.rm.skytube.businessobjects.YouTube.VideoStream.HttpDownloader;
 
 /**
  * SkyTube application.
@@ -176,6 +172,25 @@ public class SkyTubeApp extends MultiDexApplication {
 		return mobile != null && mobile.isConnectedOrConnecting();
 	}
 
+	/**
+	 * Get the network info
+	 * @param context
+	 * @return
+	 */
+	public static NetworkInfo getNetworkInfo(Context context){
+		ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+		return cm.getActiveNetworkInfo();
+	}
+
+	/**
+	 * Check if there is any connectivity
+	 * @param context
+	 * @return
+	 */
+	public static boolean isConnected(Context context){
+		NetworkInfo info = getNetworkInfo(context);
+		return (info != null && info.isConnected());
+	}
 
 	/*
 	 * Initialize Notification Channels (for Android OREO)
