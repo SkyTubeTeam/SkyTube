@@ -134,12 +134,6 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 
 			// refresh the subs feed by reading from the cache (i.e. local DB)
 			refreshFeedFromCache();
-		} else if (isFlagSet(FLAG_REFRESH_FEED_FULL)) {
-			// unset the flag
-			unsetFlag(FLAG_REFRESH_FEED_FULL);
-
-			// refresh the subs feed by retrieving videos from the YT servers
-			onRefresh();
 		}
 	}
 
@@ -215,7 +209,7 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 		if (refreshInProgress) {
 			return;
 		}
-		if (forcedFullRefresh) {
+		if (forcedFullRefresh && SkyTubeApp.isConnected(getContext())) {
 			unsetFlag(FLAG_REFRESH_FEED_FULL);
 			refreshInProgress = true;
 			new RefreshFeedTask(showFetchingVideosDialog, forcedFullRefresh).executeInParallel();

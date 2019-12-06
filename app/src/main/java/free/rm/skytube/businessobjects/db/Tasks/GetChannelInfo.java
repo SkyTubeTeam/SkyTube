@@ -24,6 +24,7 @@ import org.schabi.newpipe.extractor.exceptions.ExtractionException;
 import java.io.IOException;
 
 import free.rm.skytube.R;
+import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
@@ -63,7 +64,7 @@ public class GetChannelInfo extends AsyncTaskParallel<String, Void, YouTubeChann
     YouTubeChannel getChannelInfoSync(String channelId) {
         final SubscriptionsDb db = SubscriptionsDb.getSubscriptionsDb();
         YouTubeChannel channel = db.getCachedChannel(channelId);
-        if (needRefresh(channel)) {
+        if (needRefresh(channel) && SkyTubeApp.isConnected(context)) {
             try {
                 channel = NewPipeService.get().getChannelDetails(channelId);
                 db.cacheChannel(channel);
