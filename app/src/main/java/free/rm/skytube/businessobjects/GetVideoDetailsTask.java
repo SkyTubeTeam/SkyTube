@@ -6,10 +6,12 @@ import java.net.URLDecoder;
 import java.util.List;
 
 import org.schabi.newpipe.extractor.exceptions.ExtractionException;
+import org.schabi.newpipe.extractor.exceptions.ParsingException;
 
 import free.rm.skytube.businessobjects.YouTube.GetVideosDetailsByIDs;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
+import free.rm.skytube.businessobjects.YouTube.newpipe.VideoId;
 import free.rm.skytube.gui.businessobjects.YouTubeVideoListener;
 
 /**
@@ -20,6 +22,7 @@ public class GetVideoDetailsTask extends AsyncTaskParallel<Void, Void, YouTubeVi
 
 	private String videoUrl = null;
 	private YouTubeVideoListener youTubeVideoListener;
+	private Exception lastException;
 
 	public GetVideoDetailsTask(String videoUrl, YouTubeVideoListener youTubeVideoListener) {
 		this.videoUrl = videoUrl;
@@ -45,18 +48,17 @@ public class GetVideoDetailsTask extends AsyncTaskParallel<Void, Void, YouTubeVi
 	 */
 	@Override
 	protected YouTubeVideo doInBackground(Void... params) {
-		String videoId = YouTubeVideo.getYouTubeIdFromUrl(videoUrl);
-
-		if (videoId != null) {
-			if (NewPipeService.isPreferred()) {
-				try {
-					return NewPipeService.get().getDetails(videoId);
-				} catch (ExtractionException | IOException e) {
-					Logger.e(this, "Unable to get video details, where id=" + videoId, e);
-				}
-			} else {
-				return getYoutubeVideoDetails(videoId);
+	    try {
+			VideoId videoId = NewPipeService.get().getVideoId(videoUrl);
+			try {
+				return NewPipeService.get().getDetails(videoId.getId());
+			} catch (ExtractionException | IOException e) {
+				Logger.e(this, "Unable to get video details, where id=" + videoId, e);
+				this.lastException = e;
 			}
+		} catch (ParsingException videoUrlParsing) {
+			Logger.e(this, "Unable to get video details, where id=" + videoUrl, videoUrlParsing);
+			this.lastException = videoUrlParsing;
 		}
 
 		return null;
@@ -79,7 +81,8 @@ public class GetVideoDetailsTask extends AsyncTaskParallel<Void, Void, YouTubeVi
 
 	@Override
 	protected void onPostExecute(YouTubeVideo youTubeVideo) {
-		if(youTubeVideoListener != null)
+		if(youTubeVideoListener != null) {
 			youTubeVideoListener.onYouTubeVideo(videoUrl, youTubeVideo);
+		}
 	}
 }

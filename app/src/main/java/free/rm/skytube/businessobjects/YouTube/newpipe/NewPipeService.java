@@ -91,6 +91,12 @@ public class NewPipeService {
         return list;
     }
 
+    public VideoId getVideoId(String url) throws ParsingException {
+        LinkHandler lh = streamingService.getStreamLHFactory().fromUrl(url);
+        return new VideoId(lh.getId(), lh.getUrl());
+    }
+
+
     /**
      * Returns a list of video/stream meta-data that is supported by this app for this video ID.
      *

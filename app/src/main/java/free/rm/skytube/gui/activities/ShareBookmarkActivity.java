@@ -20,24 +20,21 @@ public class ShareBookmarkActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        boolean matched = false;
 
         if(getIntent() != null) {
             String text_data = getIntent().getStringExtra(Intent.EXTRA_TEXT);
-            if(ClickableLinksTextView.videoPattern.matcher(text_data).matches()) {
-                matched = true;
-                new GetVideoDetailsTask(text_data, (videoUrl, video) -> {
+            new GetVideoDetailsTask(text_data, (videoUrl, video) -> {
+                if (video != null) {
                     boolean bookmarked = video.bookmarkVideo(ShareBookmarkActivity.this);
                     Toast.makeText(ShareBookmarkActivity.this,
                             bookmarked ? R.string.video_bookmarked : R.string.video_bookmarked_error,
                             Toast.LENGTH_LONG).show();
                     finish();
-                }).executeInParallel();
-            }
-        }
-        if(!matched) {
-            Toast.makeText(ShareBookmarkActivity.this, R.string.bookmark_share_invalid_url, Toast.LENGTH_LONG).show();
-            finish();
+                } else {
+                    Toast.makeText(ShareBookmarkActivity.this, R.string.bookmark_share_invalid_url, Toast.LENGTH_LONG).show();
+                    finish();
+                }
+            }).executeInParallel();
         }
     }
 }
