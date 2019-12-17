@@ -26,6 +26,9 @@ import android.net.Uri;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.widget.Toast;
+
+import org.schabi.newpipe.extractor.exceptions.ParsingException;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
@@ -34,6 +37,8 @@ import free.rm.skytube.businessobjects.GetVideoDetailsTask;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPIKey;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
+import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
+import free.rm.skytube.businessobjects.YouTube.newpipe.VideoId;
 import free.rm.skytube.businessobjects.db.PlaybackStatusDb;
 import free.rm.skytube.gui.activities.BaseActivity;
 import free.rm.skytube.gui.activities.MainActivity;
@@ -95,7 +100,13 @@ public class YouTubePlayer {
 			// if the user has selected to play the videos using the official YouTube player
 			// (in the preferences/settings) ...
 			if (useOfficialYouTubePlayer(context)) {
-				launchOfficialYouTubePlayer(YouTubeVideo.getYouTubeIdFromUrl(videoUrl), context);
+				try {
+					VideoId id = NewPipeService.get().getVideoId(videoUrl);
+					launchOfficialYouTubePlayer(id.getId(), context);
+				} catch (ParsingException p) {
+					String err = String.format(context.getString(R.string.error_invalid_url), videoUrl);
+					Toast.makeText(context, err, Toast.LENGTH_LONG).show();
+				}
 			} else {
 				launchCustomYouTubePlayer(videoUrl, context);
 			}

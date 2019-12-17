@@ -228,24 +228,6 @@ public class YouTubeVideo implements Serializable {
         }
 
 	/**
-	 * Extracts the video ID from the given video URL.
-	 *
-	 * @param url YouTube video URL.
-	 * @return ID if everything went as planned; null otherwise.
-	 */
-	public static String getYouTubeIdFromUrl(String url) {
-		if (url == null)
-			return null;
-
-		// TODO:  support playlists (i.e. video_ids=... <-- URL submitted via email by YouTube)
-		final String pattern = "(?<=v=|/videos/|embed/|youtu\\.be/|/v/|/e/|video_ids=)[^#&?%]*";
-		Pattern compiledPattern = Pattern.compile(pattern);
-		Matcher matcher = compiledPattern.matcher(url);
-
-		return matcher.find() ? matcher.group() /*video id*/ : null;
-	}
-
-	/**
 	 * Sets the {@link #thumbsUpPercentageStr}, i.e. the percentage of people that thumbs-up this video
 	 * (format:  "<percentage>%").
 	 *
