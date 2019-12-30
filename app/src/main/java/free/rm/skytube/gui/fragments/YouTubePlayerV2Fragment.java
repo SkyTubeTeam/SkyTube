@@ -671,7 +671,14 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 
 		@Override
 		public void onCommentsGesture() {
-			commentsDrawer.animateOpen();
+			Context ctx = getContext();
+			if (SkyTubeApp.isConnected(ctx)) {
+				commentsDrawer.animateOpen();
+			} else {
+				Toast.makeText(ctx,
+						getString(R.string.error_get_comments_no_network),
+						Toast.LENGTH_LONG).show();
+			}
 		}
 
 
