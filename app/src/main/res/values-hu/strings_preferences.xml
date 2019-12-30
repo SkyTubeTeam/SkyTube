@@ -1,21 +1,31 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="preferences">Beállítások</string>
-
-	<string name="pref_languages_filter_category">Nyelvek és régiók</string>
-	<string name="pref_title_preferred_regions">Preferált régiók</string>
-	<string name="pref_summary_preferred_regions">Válassz preferált régiót. Ez szűri a \"Kiemelt\" kategóriában mutatott videókat:  %s</string>
-
-	<string name="pref_title_preferred_languages">Preferált nyelv(ek)</string>
-	<string name="pref_summary_preferred_languages">KÍSÉRLETI FUNKCIÓ: Válassz egy vagy több preferált nyelvet. Ez szűri a \"Legnépszerűbb\" kategóriában és a keresések közt mutatott videókat.</string>
-
+	<string name="key_preferences">beállítások</string>
 	<string name="pref_video_player_category">Videólejátszó</string>
 	<string name="pref_title_preferred_res">Preferált felbontás</string>
 	<string name="pref_summary_preferred_res">Válaszd ki a preferált videófelbontást:  %s</string>
-
-	<string name="pref_title_backup_dbs">Backup Databases</string>
+	<string name="pref_title_choose_player">Videó Lejátszó</string>
+	<string name="pref_summary_choose_player">A használt videó lejátszó: %s</string>
+	<string-array name="pref_video_players">
+		<item>Alapértelmezett Lejátszó</item>
+		<item>Legacy Player (unsupported)</item>
+		<item>Hivatalos YouTube Lejátszó</item>
+	</string-array>
+	<string name="pref_category_mobile_network">Mobilhálózat</string>
+	<string name="pref_title_preferred_res_mobile">Preferred Resolution for mobile network</string>
+	<string name="pref_summary_preferred_res_mobile">Select your preferred resolution when streaming via a mobile network (such as 4G):  %s</string>
+	<string name="pref_title_mobile_network_usage">Mobile Network Usage</string>
+	<string name="pref_summary_mobile_network_usage">What to do, if you are using mobile network (such as 4G) for downloading, watching videos: %s</string>
+	<string-array name="pref_mobile_network_usage">
+		<item>Mindig kérdezzen rá</item>
+		<item>Tiltás</item>
+		<item>Engedélyezés</item>
+	</string-array>
+	<string name="pref_import_export_category">Importálás/Exportálás</string>
+	<string name="pref_title_backup_dbs">Adatbázis biztonsági másolata</string>
 	<string name="pref_summary_backup_dbs">Mentse le a feliratkozás és könyvjelző adatbázist.</string>
-	<string name="pref_title_import_dbs">Import Backup</string>
+	<string name="pref_title_import_dbs">Biztonsági mentés importálása</string>
 	<string name="pref_summary_import_dbs">Import your subscriptions and bookmarks databases backup.</string>
 	<string name="databases_backing_up">Biztonsági mentés készítése…</string>
 	<string name="databases_backup_success">Biztonsági másolat készült %s -ra</string>
@@ -25,24 +35,30 @@
 	<string name="databases_import_warning_message">A feliratkozás és könyvjelző adatbázis felül lesz írva a biztonsági mentésben található adatokkal.
 \n
 \nFolytassuk?</string>
-	<string name="continue_">Continue</string>
-	<string name="databases_importing">Importing…</string>
-	<string name="databases_import_fail">Failed to import your databases.</string>
+	<string name="continue_">Tovább</string>
+	<string name="databases_importing">Importálás…</string>
+	<string name="databases_import_fail">Adatbázis importálás sikertelen.</string>
 	<string name="databases_import_success">Az adatbázis sikeresen be lett olvasva. Indítsa újra az alkalmazást a változásokhoz.</string>
-
-	<string name="pref_title_import_subs">Import Subscriptions From YouTube</string>
+	<string name="pref_title_import_subs">Feliratkozások betöltése YouTube-ról</string>
 	<string name="pref_summary_import_subs">Import your subscriptions from your YouTube account.</string>
 	<string name="subs_import_select_backup">Válassza ki a YouTube XML fájlt az importáláshoz</string>
-
+	<string name="pref_chromecast_category">Chromecast</string>
+	<string name="pref_key_chromecast_category">chromecast_category</string>
+	<string name="pref_key_chromecast_none">default_chromecast_key</string>
+	<string name="pref_title_chromecast_none">Egyik sem</string>
+	<string name="pref_title_autocast">AutoCast</string>
+	<string name="pref_key_autocast">pref_external_launch</string>
+	<string name="pref_summary_autocast">Select a Chromecast device to always use when opening a video in SkyTube from another application.</string>
+	<string name="pref_network_downloads_category">Hálózatok és Letöltések</string>
 	<string name="pref_about_category">Információ</string>
 	<string name="pref_title_website">Weboldal</string>
-	<string name="pref_title_credits">Credits</string>
+	<string name="pref_title_credits">Készítők</string>
 	<string name="pref_summary_credits">People and projects that made this app possible.</string>
 	<string name="pref_title_version">Verzió</string>
-	<string name="pref_title_updates">Updates</string>
+	<string name="pref_title_updates">Frissítések</string>
 	<string name="pref_summary_updates">Frissítések ellenőrzése.</string>
-	<string name="pref_title_license">Licensz</string>
-	<string name="pref_summary_license">GNU General Public License version 3</string>
+	<string name="pref_title_license">Licenc</string>
+	<string name="pref_summary_license">GNU Általános Nyilvános Licenc - 3-as verzió</string>
 	<string name="app_license">Copyright © 2015-2018  Ramon Mifsud\n
 
 				\nThis program is free software: you can redistribute it and/or modify
@@ -56,13 +72,26 @@
 
 				\nYou should have received a copy of the GNU General Public License
 				along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;</string>
-	<string name="i_agree">I Agree</string>
-
+	<string name="i_agree">Elfogadom</string>
+	<!-- extracted from  YouTube.com > 3 dot menu > Language -->
+	<!-- extracted from:  https://developers.google.com/youtube/v3/docs/i18nLanguages/list -->
+	<!-- NB for Translators:  Country names shall all be written in English -->
 	<string name="pref_other_category">Other</string>
-	<string name="pref_title_default_tab">Defaut Tab</string>
+	<string name="pref_title_default_tab">Kezdő Lap</string>
 	<string name="pref_summary_default_tab">Default tab to show when SkyTube launches: %s</string>
-
-	<string name="pref_title_screen_orientation">Screen Orientation</string>
+	<string name="pref_title_hide_tabs">Fülek Elrejtése</string>
+	<string name="pref_summary_hide_tabs">Choose which tabs should not be shown. Restart required.</string>
+	<string name="pref_hide_tabs_restart">Restart app to show updated tabs.</string>
+	<string name="pref_title_feed_notification">Feed Auto Notification</string>
+	<string name="pref_summary_feed_notification">Milyen gyakran keressen új videókat a feliratkozott csatornákon: %s</string>
+	<string-array name="feed_notification">
+		<item>Kikapcsolva</item>
+		<item>6 óránként</item>
+		<item>12 óránként</item>
+		<item>24 óránként</item>
+	</string-array>
+	<!-- Notification values are in milliseconds -->
+	<string name="pref_title_screen_orientation">Képernyőforgatás</string>
 	<string name="pref_summary_screen_orientation">Video player\'s orientation:  %s</string>
 	<string-array name="screen_orientations">
 		<item>Automatic</item>
@@ -70,29 +99,99 @@
 		<item>Portrait</item>
 		<item>Device sensor</item>
 	</string-array>
-
+	<string name="pref_title_disable_screen_gestures">Disable video gestures</string>
+	<string name="pref_summary_disable_screen_gestures">Turn off gestures to control volume, brightness and seeking forward/backwards in videos.</string>
+	<string name="pref_title_enable_immersive_mode">Enable immersive mode</string>
+	<string name="pref_summary_enable_immersive_mode">Hide navigation bar and the status bar during playback.</string>
 	<string name="pref_title_youtube_api_key">YouTube API Key</string>
 	<string name="pref_summary_youtube_api_key">Enter your own YouTube Data API Key.  Leave blank to use the default one.</string>
 	<string name="pref_youtube_api_key_error">An error occurred attempting to validate the API Key you entered.</string>
 	<string name="pref_youtube_api_key_custom">Key is valid.  Restart app to use the new YouTube API key.</string>
 	<string name="pref_youtube_api_key_default">Restart app to switch back to default YouTube API key.</string>
+	<string name="pref_title_use_newpipe_backend">Use the NewPipe backend</string>
+	<string name="pref_summary_use_newpipe_backend">If checked, the experimental NewPipe API is used to access Youtube, it may, or may not work...</string>
 	<string name="restart">Újraindítás</string>
-
-
-	<string name="pref_title_feed_notification">Feed Auto Notification</string>
-	<string name="pref_summary_feed_notification">How often to check for new videos from subscribed channels: %s</string>
-	<string-array name="feed_notification">
-		<item>Off</item>
-		<item>6 Hours</item>
-		<item>12 Hours</item>
-		<item>24 Hours</item>
-	</string-array>
-
-
-<string name="pref_title_choose_player">Videó Lejátszó</string>
-	<string name="pref_summary_choose_player">A használt videó lejátszó: %s</string>
 	<string name="pref_title_subscriptions_alphabetical_order">A Csatornák ábécé-sorrendbe rendezés</string>
 	<string name="pref_summary_subscriptions_alphabetical_order">Bekapcsolva, a feliratkozott csatornákat ábécé sorrendben láthatja.</string>
+	<string name="pref_category_downloads">Downloads</string>
+	<string name="pref_title_download_to_separate_directories">Download Videos Into Folders</string>
+	<string name="pref_summary_download_to_separate_directories">Videos are downloaded into folders based on the channel name.</string>
+	<string name="pref_popup_title_video_download_folder">Choose Folder</string>
+	<string name="pref_title_video_download_folder">Video Download Folder</string>
+	<string name="pref_summary_video_download_folder">Videos are downloaded into this folder: %s</string>
+	<string name="pref_video_download_preferred_resolution_title">Preferred Video Download Resolution</string>
+	<string name="pref_video_download_preferred_resolution_summary">Video downloads will prefer this resolution: %s</string>
+	<!--
+		VIDEO BLOCKER
+	-->
 	<string name="pref_video_blocker_category">Letiltott Csatornák</string>
+	<string name="pref_summary_enable_video_blocker">Enable video blocker.</string>
+	<string name="pref_channels_filter_category">Channels Filters</string>
+	<string name="pref_title_channel_filter_method">Channel Filter Method</string>
+	<string name="pref_summary_channel_filter_method">Select the channel filtering method:  %s</string>
+	<string name="disabled">Disabled</string>
+	<string-array name="channel_filtering_list">
+		<item>Channel Blacklisting</item>
+		<item>Channel Whitelisting</item>
+	</string-array>
 	<string name="pref_title_channel_blacklist">Letiltott Csatornák</string>
-	</resources>
+	<string name="pref_summary_channel_blacklist">A list of blocked channels.</string>
+	<string name="unblock">Unblock</string>
+	<string name="channel_blacklist_updated">Channel blacklist updated.  Please refresh videos.</string>
+	<string name="channel_blacklist_update_failure">Failed to remove the given channel(s) from the blacklist…</string>
+	<string name="channel_blacklist_empty">Channel blacklist is empty.</string>
+	<string name="pref_title_channel_whitelist">Channel Whitelist</string>
+	<string name="pref_summary_channel_whitelist">A list of whitelisted channels.</string>
+	<string name="input_channel_url">Channel\'s URL to be whitelisted:</string>
+	<string name="add">Add</string>
+	<string name="block">Block</string>
+	<string name="please_wait">Please wait…</string>
+	<string name="channel_already_whitelisted">Channel already whitelisted.</string>
+	<string name="channel_whitelist_updated">Channel whitelisted.  Please refresh videos.</string>
+	<string name="channel_whitelist_update_failure">Failed to whitelist the given channel…</string>
+	<string name="channel_unwhitelist_success">Channel whitelist updated.  Please refresh videos.</string>
+	<string name="channel_unwhitelist_failure">Failed to unwhitelist the given channel(s)…</string>
+	<string name="pref_languages_filter_category">Nyelv és régió szűrők</string>
+	<string name="pref_title_preferred_regions">Preferált régiók</string>
+	<string name="pref_summary_preferred_regions">Válassz preferált régiót. Ez szűri a \"Kiemelt\" kategóriában mutatott videókat:  %s</string>
+	<string name="pref_title_preferred_languages">Preferált nyelv(ek)</string>
+	<string name="pref_summary_preferred_languages">KÍSÉRLETI FUNKCIÓ: Válassz egy vagy több preferált nyelvet. Ez szűri a \"Legnépszerűbb\" kategóriában és a keresések közt mutatott videókat.</string>
+	<string name="no_preferred_lang_selected">No preferred language selected.  Setting ignored.</string>
+	<string name="preferred_lang_updated">Preferred language updated.  Please refresh videos.</string>
+	<string name="pref_title_lang_detection_video_filtering">Language Detection Video Filtering</string>
+	<string name="pref_summary_lang_detection_video_filtering">Use AI to detect the languages being used in videos and block them if their language is not equal to your preferred language(s).  Should only be enabled on high end devices.</string>
+	<string name="setting_updated">Setting updated.  Please refresh videos.</string>
+	<string name="pref_other_filters_category">Other Filters</string>
+	<string name="pref_title_low_views_filter">Views</string>
+	<string name="pref_summary_low_views_filter">Filter out videos with low views: %s</string>
+	<string-array name="views_filtering_list">
+		<item>@string/disabled</item>
+		<item>&lt; 100 views</item>
+		<item>&lt; 500 views</item>
+		<item>&lt; 1,000 views</item>
+		<item>&lt; 5,000 views</item>
+		<item>&lt; 10,000 views</item>
+	</string-array>
+	<string name="pref_title_dislikes_filter">Dislikes</string>
+	<string name="pref_summary_dislikes_filter">Filter out videos with high dislikes: %s</string>
+	<string-array name="dislikes_filtering_list">
+		<item>@string/disabled</item>
+		<item>&gt; 40% dislikes</item>
+		<item>&gt; 50% dislikes</item>
+		<item>&gt; 60% dislikes</item>
+		<item>&gt; 70% dislikes</item>
+		<item>&gt; 80% dislikes</item>
+		<item>&gt; 90% dislikes</item>
+		<item>&gt; 100% dislikes</item>
+	</string-array>
+	<string name="pref_privacy_category">Privacy</string>
+	<string name="pref_title_disable_search_history">Disable Search History</string>
+	<string name="pref_summary_disable_search_history">If checked, Search History will be cleared and will not be used.</string>
+	<string name="pref_disable_search_history_deleted">Search History deleted.</string>
+	<string name="pref_title_disable_playback_status">Disable Playback Status</string>
+	<string name="pref_summary_disable_playback_status">If checked, Playback Status will be cleared and will not be used.</string>
+	<string name="pref_disable_playback_status_deleted">Playback Status deleted.</string>
+	<string name="pref_title_clear_playback_status">Clear Playback Status</string>
+	<string name="pref_summary_clear_playback_status">Clear playback status for all videos.</string>
+	<string name="pref_playback_status_cleared">Playback Status cleared.</string>
+</resources>
