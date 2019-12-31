@@ -46,11 +46,11 @@ public class Settings {
     }
 
     public boolean isDownloadToSeparateFolders() {
-	    return PreferenceManager.getDefaultSharedPreferences(app).getBoolean(app.getStr(R.string.pref_key_download_to_separate_directories),false);
+        return getPreference(R.string.pref_key_download_to_separate_directories,false);
     }
 
     public Policy getWarningMobilePolicy() {
-        String currentValue = PreferenceManager.getDefaultSharedPreferences(app).getString(getStr(R.string.pref_key_mobile_network_usage_policy),
+        String currentValue = getSharedPreferences().getString(getStr(R.string.pref_key_mobile_network_usage_policy),
                 getStr(R.string.pref_mobile_network_usage_value_ask));
         return Policy.valueOf(currentValue.toUpperCase());
     }
@@ -59,12 +59,19 @@ public class Settings {
         setPreference(R.string.pref_key_mobile_network_usage_policy, warnPolicy.name().toLowerCase());
     }
 
+    public boolean isDisableGestures() {
+        return getPreference(R.string.pref_key_disable_screen_gestures, false);
+    }
+
+    public void setDisableGestures(boolean disableGestures) {
+        setPreference(R.string.pref_key_disable_screen_gestures, disableGestures);
+    }
     /**
      * @return The last time we updated the subscriptions videos feed.  Will return null if the
      * last refresh time is set to -1.
      */
     public Long getFeedsLastUpdateTime() {
-        long l = PreferenceManager.getDefaultSharedPreferences(app).getLong(SkyTubeApp.KEY_SUBSCRIPTIONS_LAST_UPDATED, -1);
+        long l = getSharedPreferences().getLong(SkyTubeApp.KEY_SUBSCRIPTIONS_LAST_UPDATED, -1);
         return (l != -1)  ?  l  :  null;
     }
 
@@ -93,19 +100,34 @@ public class Settings {
         return getPreference(R.string.pref_key_video_download_folder, defaultValue);
     }
 
+    private void setPreference(@StringRes int resId, boolean value) {
+        final SharedPreferences.Editor editor = getSharedPreferences().edit();
+        editor.putBoolean(getStr(resId), value);
+        editor.apply();
+    }
+
     private void setPreference(String preferenceName, Long value) {
-        final SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(app).edit();
+        final SharedPreferences.Editor editor = getSharedPreferences().edit();
         editor.putLong(preferenceName, value);
         editor.apply();
     }
 
     private void setPreference(@StringRes int resId, String value) {
-        final SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(app).edit();
+        final SharedPreferences.Editor editor = getSharedPreferences().edit();
         editor.putString(getStr(resId), value);
         editor.apply();
     }
 
     private String getPreference(@StringRes int resId, String defaultValue) {
-        return PreferenceManager.getDefaultSharedPreferences(app).getString(app.getStr(resId), defaultValue);
+        return getSharedPreferences().getString(app.getStr(resId), defaultValue);
     }
+
+    private boolean getPreference(@StringRes int resId, boolean defaultValue) {
+        return getSharedPreferences().getBoolean(app.getStr(resId), defaultValue);
+    }
+
+    private SharedPreferences getSharedPreferences() {
+        return PreferenceManager.getDefaultSharedPreferences(app);
+    }
+
 }
