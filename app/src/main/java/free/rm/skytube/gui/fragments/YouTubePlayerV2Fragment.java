@@ -127,12 +127,15 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 	private CommentsAdapter         commentsAdapter = null;
 	private ExpandableListView      commentsExpandableListView = null;
 	private YouTubePlayerActivityListener listener = null;
-
+	private PlayerViewGestureHandler playerViewGestureHandler;
 
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		hideNavigationBar();
+
+
+		playerViewGestureHandler = new PlayerViewGestureHandler(SkyTubeApp.getSettings().isDisableGestures());
 
 		// inflate the layout for this fragment
 		View view = inflater.inflate(R.layout.fragment_youtube_player_v2, container, false);
@@ -240,7 +243,6 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 
 		// setup the player
 		playerView = view.findViewById(R.id.player_view);
-		final PlayerViewGestureHandler playerViewGestureHandler = new PlayerViewGestureHandler();
 		playerViewGestureHandler.initView(view);
 		playerView.setOnTouchListener(playerViewGestureHandler);
 		playerView.requestFocus();
@@ -495,6 +497,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 		inflater.inflate(R.menu.menu_youtube_player, menu);
 
 		this.menu = menu;
+		menu.findItem(R.id.disable_gestures).setChecked(playerViewGestureHandler.disableGestures);
 
 		listener.onOptionsMenuCreated(menu);
 
@@ -553,6 +556,12 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 
 			case R.id.block_channel:
 				youTubeChannel.blockChannel();
+				return true;
+			case R.id.disable_gestures:
+				boolean disableGestures = !item.isChecked();
+				item.setChecked(disableGestures);
+				SkyTubeApp.getSettings().setDisableGestures(disableGestures);
+				playerViewGestureHandler.setDisableGestures(disableGestures);
 				return true;
 
 			default:
@@ -638,16 +647,16 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 		private long                startVideoTime = -1;
 
 		/** Enable/Disable video gestures based on user preferences. */
-		private final boolean       disableGestures = SkyTubeApp.getPreferenceManager().getBoolean(SkyTubeApp.getStr(R.string.pref_key_disable_screen_gestures), false);
+		private boolean       disableGestures;
 
 		private static final int    MAX_VIDEO_STEP_TIME = 60 * 1000;
 
 
-		PlayerViewGestureHandler() {
+		PlayerViewGestureHandler(boolean disableGestures) {
 			super(getContext());
 
+			this.disableGestures = disableGestures;
 			videoBrightness = new VideoBrightness(getActivity(), disableGestures);
-			playerView.setControllerVisibilityListener(visibility -> isControllerVisible = (visibility == View.VISIBLE));
 		}
 
 
@@ -655,6 +664,8 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 			indicatorView = view.findViewById(R.id.indicatorView);
 			indicatorImageView = view.findViewById(R.id.indicatorImageView);
 			indicatorTextView = view.findViewById(R.id.indicatorTextView);
+
+			playerView.setControllerVisibilityListener(visibility -> isControllerVisible = (visibility == View.VISIBLE));
 		}
 
 
@@ -876,6 +887,10 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 			return durationValue;
 		}
 
+		public void setDisableGestures(boolean disableGestures) {
+			this.disableGestures = disableGestures;
+			this.videoBrightness.setDisableGestures(disableGestures);
+		}
 	}
 
 
@@ -893,7 +908,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 		private float   brightness;
 		/** Initial video brightness. */
 		private float   initialBrightness;
-		private final boolean disableGestures;
+		private boolean disableGestures;
 
 		private static final String BRIGHTNESS_LEVEL_PREF = SkyTubeApp.getStr(R.string.pref_key_brightness_level);
 
@@ -911,6 +926,9 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 			setVideoBrightness(0, activity);
 		}
 
+		public void setDisableGestures(boolean disableGestures) {
+			this.disableGestures = disableGestures;
+		}
 
 		/**
 		 * Set the video brightness.  Once the video brightness is updated, save it in the preference.

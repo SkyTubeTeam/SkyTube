@@ -39,4 +39,10 @@
 	<item android:id="@+id/download_video"
 		  android:title="@string/download_video"
 		  app:showAsAction="never"/>
+
+	<item
+		android:id="@+id/disable_gestures"
+		android:checkable="true"
+		android:title="@string/pref_title_disable_screen_gestures" />
+
 </menu>
