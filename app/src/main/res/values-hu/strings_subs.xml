@@ -18,11 +18,6 @@
 	<string name="select_xml_file">Válassza ki az XML fájlt</string>
 	<string name="select_all">Mind kiválasztása</string>
 	<string name="select_none">Egyik sem</string>
-	<string name="no_channels_found">No YouTube channels were found in the XML file you uploaded.</string>
-	<string name="no_new_channels_found">No YouTube channels that you are not already subscribed to were found in the XML file you uploaded.</string>
-	<string name="import_subscriptions_parse_error">An error was encountered attempting to parse the XML file you uploaded: %s.</string>
-	<string name="failed_to_import_subscriptions">Failed to import your YouTube subscriptions.</string>
 
-	<string name="about">About</string>
 	<string name="unsubscribe_from_all_current_sibbed_channels">Leiratkozás az összes feliratkozott csatornáról.</string>
 </resources>
