@@ -26,6 +26,7 @@
     <string name="mark_watched">Megjelölés Látottként</string>
     <string name="mark_unwatched">Megjelölés Látatlanként</string>
     <string name="error_get_comments">A hozzászólások lekérése közben hiba lépett fel.</string>
+    <string name="error_get_comments_no_network">A hozzászólások megtekintéséhez hálózati hozzáférés szükséges!</string>
     <string name="no_video_comments">A videó alatt nincsenek hozzászólások, vagy le vannak tiltva.</string>
     <string name="view_replies">Válaszok megtekintése</string>
     <string name="hide_replies">Válaszok elrejtése</string>
