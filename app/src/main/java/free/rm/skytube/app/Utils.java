@@ -24,6 +24,9 @@ public class Utils {
         return  a == b || (a != null && a.equals(b));
     }
 
+    public static boolean isEmpty(String str) {
+        return str == null || str.isEmpty();
+    }
 
     public static int hash(Object... obj) {
         return Arrays.hashCode(obj);

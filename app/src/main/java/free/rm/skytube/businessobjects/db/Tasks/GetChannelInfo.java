@@ -25,6 +25,7 @@ import java.io.IOException;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
+import free.rm.skytube.app.Utils;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
@@ -79,7 +80,7 @@ public class GetChannelInfo extends AsyncTaskParallel<String, Void, YouTubeChann
     }
 
     private boolean needRefresh(YouTubeChannel channel) {
-        if (channel == null) {
+        if (channel == null || Utils.isEmpty(channel.getTitle())) {
             return true;
         }
         if (staleAcceptable) {
