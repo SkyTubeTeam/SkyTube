@@ -41,6 +41,7 @@ import java.util.List;
 import java.util.Set;
 
 import free.rm.skytube.app.SkyTubeApp;
+import free.rm.skytube.app.Utils;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
@@ -112,7 +113,13 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 			db.execSQL(LocalChannelTable.getCreateStatement());
 			try {
 				for (YouTubeChannel channel : getSubscribedChannels(db)) {
-					cacheChannel(db, channel);
+					if (!Utils.isEmpty(channel.getId()) &&
+							!Utils.isEmpty(channel.getTitle()) &&
+							!Utils.isEmpty(channel.getBannerUrl()) &&
+							!Utils.isEmpty(channel.getThumbnailNormalUrl()) &&
+							!Utils.isEmpty(channel.getDescription())) {
+						cacheChannel(db, channel);
+					}
 				}
 			} catch (IOException ex) {
 				Logger.e(this, "Unable to load subscribed channels to populate cache:" + ex.getMessage(), ex);
