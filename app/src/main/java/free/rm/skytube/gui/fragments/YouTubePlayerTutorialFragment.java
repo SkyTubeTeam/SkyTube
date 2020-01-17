@@ -29,6 +29,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import free.rm.skytube.R;
+import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.gui.businessobjects.fragments.ImmersiveModeFragment;
 
 /**
@@ -128,6 +129,8 @@ public class YouTubePlayerTutorialFragment extends ImmersiveModeFragment impleme
 			LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			View tutorialSlideView = inflater.inflate(tutorialSlideViews[position], null);
 
+			configureBrightnessVolumeLabels(tutorialSlideView);
+
 			viewPager.addView(tutorialSlideView);
 			return tutorialSlideView;
 		}
@@ -145,6 +148,25 @@ public class YouTubePlayerTutorialFragment extends ImmersiveModeFragment impleme
 		@Override
 		public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
 			return view == object;
+		}
+
+		private void configureBrightnessVolumeLabels(View view) {
+			TextView slide4 = view.findViewById(R.id.tutorial_slide_4_textview);
+			if (slide4 != null) {
+				if (SkyTubeApp.getSettings().isSwitchVolumeAndBrightness()) {
+					slide4.setText(R.string.tutorial_slide_5);
+				} else {
+					slide4.setText(R.string.tutorial_slide_4);
+				}
+			}
+			TextView slide5 = view.findViewById(R.id.tutorial_slide_5_textview);
+			if (slide5 != null) {
+				if (SkyTubeApp.getSettings().isSwitchVolumeAndBrightness()) {
+					slide5.setText(R.string.tutorial_slide_4);
+				} else {
+					slide5.setText(R.string.tutorial_slide_5);
+				}
+			}
 		}
 
 	}

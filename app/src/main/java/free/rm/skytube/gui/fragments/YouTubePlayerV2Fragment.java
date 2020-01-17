@@ -64,6 +64,7 @@ import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import java.util.Locale;
 
 import free.rm.skytube.R;
+import free.rm.skytube.app.Settings;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.app.enums.Policy;
 import free.rm.skytube.businessobjects.GetVideoDetailsTask;
@@ -135,7 +136,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 		hideNavigationBar();
 
 
-		playerViewGestureHandler = new PlayerViewGestureHandler(SkyTubeApp.getSettings().isDisableGestures());
+		playerViewGestureHandler = new PlayerViewGestureHandler(SkyTubeApp.getSettings());
 
 		// inflate the layout for this fragment
 		View view = inflater.inflate(R.layout.fragment_youtube_player_v2, container, false);
@@ -652,8 +653,8 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 		private static final int    MAX_VIDEO_STEP_TIME = 60 * 1000;
 
 
-		PlayerViewGestureHandler(boolean disableGestures) {
-			super(getContext());
+		PlayerViewGestureHandler(Settings settings) {
+			super(getContext(), settings);
 
 			this.disableGestures = disableGestures;
 			videoBrightness = new VideoBrightness(getActivity(), disableGestures);

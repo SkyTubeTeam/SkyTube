@@ -55,9 +55,6 @@ public class OthersPreferenceFragment extends PreferenceFragment implements Shar
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.preference_others);
 
-		final SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-		final SharedPreferences.Editor editor = pref.edit();
-
 		// Default tab
 		defaultTabPref = (ListPreference)findPreference(getString(R.string.pref_key_default_tab_name));
 		Set<String> hiddenFragments = SkyTubeApp.getPreferenceManager().getStringSet(getString(R.string.pref_key_hide_tabs), new HashSet<>());

@@ -50,4 +50,9 @@
 		android:summary="@string/pref_summary_enable_immersive_mode"
 		android:title="@string/pref_title_enable_immersive_mode" />
 
+	<CheckBoxPreference
+		android:key="@string/pref_key_switch_volume_and_brightness"
+		android:title="@string/pref_title_switch_volume_and_brightness"
+		android:summary="@string/pref_summary_switch_volume_and_brightness"/>
+
 </PreferenceScreen>

@@ -30,6 +30,7 @@ import free.rm.skytube.app.enums.Policy;
  */
 public class Settings {
     private final SkyTubeApp app;
+    private static final String TUTORIAL_COMPLETED = "YouTubePlayerActivity.TutorialCompleted";
 
     Settings(SkyTubeApp app) {
         this.app = app;
@@ -66,6 +67,27 @@ public class Settings {
     public void setDisableGestures(boolean disableGestures) {
         setPreference(R.string.pref_key_disable_screen_gestures, disableGestures);
     }
+
+    public boolean isSwitchVolumeAndBrightness() {
+        return getPreference(R.string.pref_key_switch_volume_and_brightness, false);
+    }
+
+    /**
+     * Will check whether the video player tutorial was completed before.  If no, it will return
+     * false and will save the value accordingly.
+     *
+     * @return True if the tutorial was completed in the past.
+     */
+    public boolean wasTutorialDisplayedBefore() {
+        boolean wasTutorialDisplayedBefore = getPreference(TUTORIAL_COMPLETED, false);
+        setPreference(TUTORIAL_COMPLETED, true);
+        return wasTutorialDisplayedBefore;
+    }
+
+    public void showTutorialAgain() {
+        setPreference(TUTORIAL_COMPLETED, false);
+    }
+
     /**
      * @return The last time we updated the subscriptions videos feed.  Will return null if the
      * last refresh time is set to -1.
@@ -101,8 +123,12 @@ public class Settings {
     }
 
     private void setPreference(@StringRes int resId, boolean value) {
+        setPreference(getStr(resId), value);
+    }
+
+    private void setPreference(String key, boolean value) {
         final SharedPreferences.Editor editor = getSharedPreferences().edit();
-        editor.putBoolean(getStr(resId), value);
+        editor.putBoolean(key, value);
         editor.apply();
     }
 
@@ -124,6 +150,10 @@ public class Settings {
 
     private boolean getPreference(@StringRes int resId, boolean defaultValue) {
         return getSharedPreferences().getBoolean(app.getStr(resId), defaultValue);
+    }
+
+    private boolean getPreference(String preference, boolean defaultValue) {
+        return getSharedPreferences().getBoolean(preference, defaultValue);
     }
 
     private SharedPreferences getSharedPreferences() {

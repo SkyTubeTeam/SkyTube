@@ -545,6 +545,10 @@
 	<string name="pref_title_enable_immersive_mode">Enable immersive mode</string>
 	<string name="pref_summary_enable_immersive_mode">Hide navigation bar and the status bar during playback.</string>
 
+	<string name="pref_key_switch_volume_and_brightness" translatable="false">pref_key_switch_volume_and_brightness</string>
+	<string name="pref_title_switch_volume_and_brightness">Switch Volume and Brightness Gesture</string>
+	<string name="pref_summary_switch_volume_and_brightness">Check if you want to have the volume control on the right side, and brightness on the left.</string>
+
 	<string name="pref_youtube_api_key" translatable="false">pref_youtube_api_key</string>
 	<string name="pref_title_youtube_api_key">YouTube API Key</string>
 	<string name="pref_summary_youtube_api_key">Enter your own YouTube Data API Key. Leave blank to use the default one.</string>

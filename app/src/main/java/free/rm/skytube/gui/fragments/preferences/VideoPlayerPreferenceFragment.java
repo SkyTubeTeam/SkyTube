@@ -19,12 +19,14 @@ package free.rm.skytube.gui.fragments.preferences;
 
 import android.os.Bundle;
 import android.preference.ListPreference;
+import android.preference.Preference;
 import android.preference.PreferenceFragment;
 
 import java.util.Arrays;
 
 import free.rm.skytube.BuildConfig;
 import free.rm.skytube.R;
+import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.YouTube.VideoStream.VideoResolution;
 
 /**
@@ -49,6 +51,13 @@ public class VideoPlayerPreferenceFragment extends PreferenceFragment {
 
 			videoPlayersListPref.setEntries(modifiedVideoPlayersList);
 		}
+
+		Preference creditsPref = findPreference(getString(R.string.pref_key_switch_volume_and_brightness));
+		creditsPref.setOnPreferenceClickListener(preference -> {
+			SkyTubeApp.getSettings().showTutorialAgain();
+			return true;
+		});
+
 	}
 
 }
