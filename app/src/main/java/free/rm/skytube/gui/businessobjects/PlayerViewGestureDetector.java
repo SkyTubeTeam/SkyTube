@@ -23,6 +23,8 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 
+import free.rm.skytube.app.Settings;
+
 /**
  * Gesture detector for a PlayerView.  It will detect gestures that may result in showing comments,
  * video description, change in volume or brightness.
@@ -31,9 +33,11 @@ public abstract class PlayerViewGestureDetector implements View.OnTouchListener 
 
 	private GestureDetector             gestureDetector;
 	private PlayerViewGestureListener   playerViewGestureListener;
+	private Settings 					settings;
 
 
-	public PlayerViewGestureDetector(Context context) {
+	public PlayerViewGestureDetector(Context context, Settings settings) {
+		this.settings = settings;
 		playerViewGestureListener = new PlayerViewGestureListener();
 		gestureDetector = new GestureDetector(context, playerViewGestureListener);
 	}
@@ -221,9 +225,9 @@ public abstract class PlayerViewGestureDetector implements View.OnTouchListener 
 				if (getDescriptionRect(playerViewRect).contains((int) startX, (int) startY) && diffY > 0) {
 					return SwipeGestureType.DESCRIPTION;
 				} else if (getBrightnessRect(playerViewRect).contains((int) startX, (int) startY)) {
-					return SwipeGestureType.BRIGHTNESS;
+					return settings.isSwitchVolumeAndBrightness() ? SwipeGestureType.VOLUME : SwipeGestureType.BRIGHTNESS;
 				} else if (getVolumeRect(playerViewRect).contains((int) startX, (int) startY)) {
-					return SwipeGestureType.VOLUME;
+					return settings.isSwitchVolumeAndBrightness() ? SwipeGestureType.BRIGHTNESS : SwipeGestureType.VOLUME;
 				}
 			}
 

@@ -50,7 +50,6 @@ public class YouTubePlayerActivity extends BaseActivity implements YouTubePlayer
 	private FragmentEx videoPlayerFragment;
 	private YouTubePlayerFragmentInterface fragmentListener;
 
-	private static final String TUTORIAL_COMPLETED = "YouTubePlayerActivity.TutorialCompleted";
 	public  static final String YOUTUBE_VIDEO_OBJ  = "YouTubePlayerActivity.video_object";
 
 
@@ -68,7 +67,7 @@ public class YouTubePlayerActivity extends BaseActivity implements YouTubePlayer
 		setContentView(R.layout.activity_main);
 
 		// if the tutorial was previously displayed, the just "install" the video player fragment
-		if (wasTutorialDisplayedBefore()) {
+		if (SkyTubeApp.getSettings().wasTutorialDisplayedBefore()) {
 			installNewVideoPlayerFragment(useDefaultPlayer);
 		} else {
 			// display the tutorial
@@ -111,22 +110,6 @@ public class YouTubePlayerActivity extends BaseActivity implements YouTubePlayer
 	@Override
 	protected boolean isLocalPlayer() {
 		return true;
-	}
-
-
-	/**
-	 * Will check whether the video player tutorial was completed before.  If no, it will return
-	 * false and will save the value accordingly.
-	 *
-	 * @return True if the tutorial was completed in the past.
-	 */
-	private boolean wasTutorialDisplayedBefore() {
-		SharedPreferences preferences = SkyTubeApp.getPreferenceManager();
-		boolean wasTutorialDisplayedBefore = preferences.getBoolean(TUTORIAL_COMPLETED, false);
-
-		preferences.edit().putBoolean(TUTORIAL_COMPLETED, true).apply();
-
-		return wasTutorialDisplayedBefore;
 	}
 
 
