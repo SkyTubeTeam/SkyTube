@@ -43,6 +43,7 @@ import org.schabi.newpipe.extractor.localization.Localization;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
+import free.rm.skytube.app.Utils;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
@@ -146,7 +147,7 @@ public class NewPipeService {
      * @throws IOException
      */
     public YouTubeChannel getChannelDetails(String channelId) throws ExtractionException, IOException {
-        requireNonNull(channelId, "channelId");
+        Utils.requireNonNull(channelId, "channelId");
         VideoPager pager = getChannelPager(channelId);
         // get the channel, and add all the videos from the first page
         pager.getChannel().getYouTubeVideos().addAll(pager.getNextPage());
@@ -173,7 +174,7 @@ public class NewPipeService {
 
     private ChannelExtractor getChannelExtractor(String channelId)
             throws ParsingException, ExtractionException, IOException {
-        requireNonNull(channelId, "channelId");
+        Utils.requireNonNull(channelId, "channelId");
         // Extract from it
         ChannelExtractor channelExtractor = streamingService.getChannelExtractor(getListLinkHandler(channelId));
         channelExtractor.fetchPage();
@@ -289,13 +290,6 @@ public class NewPipeService {
     public static void initNewPipe() {
         if (NewPipe.getDownloader() == null) {
             NewPipe.init(new HttpDownloader(), new Localization("GB", "en"));
-        }
-    }
-
-    // TODO: Eliminate when API level 19 is used.
-    public static void requireNonNull(Object obj, String message) {
-        if (obj == null) {
-            throw new NullPointerException(message);
         }
     }
 

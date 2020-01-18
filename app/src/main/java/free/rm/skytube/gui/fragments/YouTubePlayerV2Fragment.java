@@ -83,6 +83,7 @@ import free.rm.skytube.businessobjects.interfaces.YouTubePlayerActivityListener;
 import free.rm.skytube.businessobjects.interfaces.YouTubePlayerFragmentInterface;
 import free.rm.skytube.gui.activities.ThumbnailViewerActivity;
 import free.rm.skytube.gui.businessobjects.MobileNetworkWarningDialog;
+import free.rm.skytube.gui.businessobjects.PlaybackSpeedController;
 import free.rm.skytube.gui.businessobjects.PlayerViewGestureDetector;
 import free.rm.skytube.gui.businessobjects.ResumeVideoTask;
 import free.rm.skytube.gui.businessobjects.SkyTubeMaterialDialog;
@@ -129,12 +130,12 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 	private ExpandableListView      commentsExpandableListView = null;
 	private YouTubePlayerActivityListener listener = null;
 	private PlayerViewGestureHandler playerViewGestureHandler;
+	private PlaybackSpeedController playbackSpeedController;
 
-	@Nullable
+    @Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		hideNavigationBar();
-
 
 		playerViewGestureHandler = new PlayerViewGestureHandler(SkyTubeApp.getSettings());
 
@@ -280,7 +281,9 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 				commentsAdapter = new CommentsAdapter(getActivity(), youTubeVideo.getId(), commentsExpandableListView, commentsProgressBar, noVideoCommentsView);
 			}
 		});
-	}
+        this.playbackSpeedController= new PlaybackSpeedController(getContext(), view.findViewById(R.id.playbackSpeed), player);
+
+    }
 
 	private synchronized void setupPlayer() {
 		if (playerView.getPlayer() == null) {
@@ -295,6 +298,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 					Logger.i(this, ">> onPlayerStateChanged " + playWhenReady + " state=" + playbackState);
 					if (playbackState == Player.STATE_READY && playWhenReady) {
 						preventDeviceSleeping(true);
+						playbackSpeedController.updateMenu();
 					} else {
 						preventDeviceSleeping(false);
 					}
@@ -564,12 +568,10 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 				SkyTubeApp.getSettings().setDisableGestures(disableGestures);
 				playerViewGestureHandler.setDisableGestures(disableGestures);
 				return true;
-
 			default:
 				return super.onOptionsItemSelected(item);
 		}
 	}
-
 
 	/**
 	 * Called when the options menu is closed.
@@ -652,7 +654,6 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 
 		private static final int    MAX_VIDEO_STEP_TIME = 60 * 1000;
 
-
 		PlayerViewGestureHandler(Settings settings) {
 			super(getContext(), settings);
 
@@ -660,13 +661,27 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 			videoBrightness = new VideoBrightness(getActivity(), disableGestures);
 		}
 
-
 		void initView(View view) {
 			indicatorView = view.findViewById(R.id.indicatorView);
 			indicatorImageView = view.findViewById(R.id.indicatorImageView);
 			indicatorTextView = view.findViewById(R.id.indicatorTextView);
 
-			playerView.setControllerVisibilityListener(visibility -> isControllerVisible = (visibility == View.VISIBLE));
+			playerView.setControllerVisibilityListener(visibility -> {
+				isControllerVisible = (visibility == View.VISIBLE);
+				switch (visibility) {
+					case View.VISIBLE : {
+						showNavigationBar();
+						playerView.getOverlayFrameLayout().setVisibility(View.VISIBLE);
+						break;
+					}
+					case View.GONE: {
+						hideNavigationBar();
+						playerView.getOverlayFrameLayout().setVisibility(View.GONE);
+						break;
+					}
+				}
+			});
+
 		}
 
 
@@ -693,15 +708,20 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 		public void onDoubleTap() {
 			// if the user is playing a video...
 			if (player.getPlayWhenReady()) {
-				// pause video
+				// pause video - without showing the controller automatically
+				boolean controllerAutoshow = playerView.getControllerAutoShow();
+				playerView.setControllerAutoShow(false);
 				pause();
+				playerView.setControllerAutoShow(controllerAutoshow);
 			} else {
 				// play video
 				player.setPlayWhenReady(true);
-				player.getPlaybackState();
+				// This is to force that the automatic hiding of the controller is re-triggered.
+				if (isControllerVisible) {
+					playerView.showController();
+				}
 			}
 
-			playerView.hideController();
 		}
 
 
@@ -727,10 +747,8 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 
 			if (isControllerVisible) {
 				playerView.hideController();
-				hideNavigationBar();
 			} else {
 				playerView.showController();
-				showNavigationBar();
 			}
 
 			return false;
@@ -1044,4 +1062,5 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 	public void pause() {
 		player.setPlayWhenReady(false);
 	}
+
 }
