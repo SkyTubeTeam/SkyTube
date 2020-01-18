@@ -105,9 +105,12 @@ public abstract class GetYouTubeVideos {
 			videoIdsStr.append(',');
 		}
 
+		if (videoIdsStr.length() > 0) {
+			videoIdsStr.setLength(videoIdsStr.length() - 1);
+		}
 		// get video details by supplying the videos IDs
 		GetVideosDetailsByIDs getVideo = new GetVideosDetailsByIDs();
-		getVideo.init(videoIds.toString());
+		getVideo.init(videoIdsStr.toString());
 		Logger.i(this, "getVideList light from %s id, video ids: %s", videoIds.size(), videoIdsStr);
 
 		return getVideo.getNextVideos();
