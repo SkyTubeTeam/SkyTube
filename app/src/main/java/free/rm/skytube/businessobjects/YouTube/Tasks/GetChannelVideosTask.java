@@ -26,6 +26,7 @@ import java.util.List;
 
 import android.widget.Toast;
 import free.rm.skytube.R;
+import free.rm.skytube.app.Utils;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.businessobjects.YouTube.GetChannelVideosFull;
@@ -33,7 +34,6 @@ import free.rm.skytube.businessobjects.YouTube.GetChannelVideosInterface;
 import free.rm.skytube.businessobjects.YouTube.GetChannelVideosLite;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
-import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 
 /**
@@ -59,7 +59,7 @@ public class GetChannelVideosTask extends AsyncTaskParallel<Void, Void, List<You
 	 */
 	public GetChannelVideosTask(String channelId, Long publishedAfter, boolean filterSubscribedVideos,
 								GetChannelVideosTaskInterface getChannelVideosTaskInterface) {
-		NewPipeService.requireNonNull(channelId, "channelId missing");
+		Utils.requireNonNull(channelId, "channelId missing");
 		this.getChannelVideos = VideoCategory.createChannelVideosFetcher();
 		this.filterSubscribedVideos = filterSubscribedVideos;
 		this.channelId = channelId;

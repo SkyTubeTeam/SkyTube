@@ -49,8 +49,8 @@ public class GetChannelInfo extends AsyncTaskParallel<String, Void, YouTubeChann
         this(context, channelReceiver, false);
     }
     public GetChannelInfo(Context context, YouTubeChannelInterface channelReceiver, boolean staleAcceptable) {
-        NewPipeService.requireNonNull(context, "context missing");
-        NewPipeService.requireNonNull(channelReceiver, "channelReceiver missing");
+        Utils.requireNonNull(context, "context missing");
+        Utils.requireNonNull(channelReceiver, "channelReceiver missing");
         this.context = context;
         this.channelReceiver = channelReceiver;
         this.staleAcceptable = staleAcceptable;

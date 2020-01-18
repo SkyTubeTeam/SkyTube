@@ -16,9 +16,25 @@
  */
 package free.rm.skytube.app;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.Arrays;
 
 public class Utils {
+
+    private static final NumberFormat speedFormatter = new DecimalFormat("0.0x");
+
+    public static String formatSpeed(double speed) {
+        return speedFormatter.format(speed);
+    }
+
+
+    // TODO: Eliminate when API level 19 is used.
+    public static void requireNonNull(Object obj, String message) {
+        if (obj == null) {
+            throw new NullPointerException(message);
+        }
+    }
 
     public static boolean equals(Object a, Object b) {
         return  a == b || (a != null && a.equals(b));

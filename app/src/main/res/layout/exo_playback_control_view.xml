@@ -12,7 +12,8 @@
 		android:layout_width="match_parent"
 		android:layout_height="?attr/actionBarSize"
 		android:background="@color/video_player_v2_hud"
-		android:theme="@style/ThemeOverlay.AppCompat.Dark"/>
+		android:theme="@style/ThemeOverlay.AppCompat.Dark"
+		app:layout_constraintTop_toTopOf="parent" />
 
 
 	<!-- CONTROL BUTTONS -->
