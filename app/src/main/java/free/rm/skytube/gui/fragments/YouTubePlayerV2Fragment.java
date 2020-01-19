@@ -208,7 +208,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 				youTubeVideo = (YouTubeVideo) bundle.getSerializable(YOUTUBE_VIDEO_OBJ);
 				setUpHUDAndPlayVideo();
 
-				getVideoInfoTasks();
+				getVideoInfoTasks(true);
 			} else {
 				// ... or the video URL is passed to SkyTube via another Android app
 				final ContentId contentId = SkyTubeApp.getUrlFromIntent(requireContext(), intent);
@@ -231,7 +231,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 								// setup the HUD and play the video
 								setUpHUDAndPlayVideo();
 
-								getVideoInfoTasks();
+								getVideoInfoTasks(false);
 
 								// will now check if the video is bookmarked or not (and then update the menu
 								// accordingly)
@@ -656,7 +656,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 	/**
 	 * Will asynchronously retrieve additional video information such as channel avatar ...etc
 	 */
-	private void getVideoInfoTasks() {
+	private void getVideoInfoTasks(boolean fetchDescriptionAndLikeCount) {
 		// get Channel info (e.g. avatar...etc) task
 		compositeDisposable.add(
 				DatabaseTasks.getChannelInfo(requireContext(), youTubeVideo.getChannelId(), false)
@@ -673,9 +673,11 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 						})
 		);
 
-		// get the video description
-		compositeDisposable.add(YouTubeTasks.getVideoDescription(youTubeVideo)
-				.subscribe(description -> Linker.setTextAndLinkify(videoDescriptionTextView, description)));
+		if (youTubeVideo.getDescription() == null && fetchDescriptionAndLikeCount) {
+			// get the video description
+			compositeDisposable.add(YouTubeTasks.getVideoDescription(youTubeVideo)
+					.subscribe(description -> Linker.setTextAndLinkify(videoDescriptionTextView, description)));
+		}
 
 		// check if the user has subscribed to a channel... if he has, then change the state of
 		// the subscribe button
