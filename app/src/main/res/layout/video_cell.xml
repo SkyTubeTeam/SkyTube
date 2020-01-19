@@ -85,7 +85,8 @@
 			android:layout_marginLeft="8dp"
 			android:text="199 Views"
 			app:layout_constraintBottom_toBottomOf="parent"
-			app:layout_constraintStart_toStartOf="parent"/>
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@+id/channel_text_view" />
 
 		<TextView
 			android:id="@+id/separator_text_view"
