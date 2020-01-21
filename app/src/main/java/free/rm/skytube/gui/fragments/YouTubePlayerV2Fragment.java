@@ -656,7 +656,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 		PlayerViewGestureHandler(Settings settings) {
 			super(getContext(), settings);
 
-			this.disableGestures = disableGestures;
+			this.disableGestures = settings.isDisableGestures();
 			videoBrightness = new VideoBrightness(getActivity(), disableGestures);
 		}
 
