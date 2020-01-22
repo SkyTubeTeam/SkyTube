@@ -6,7 +6,7 @@
 			  android:background="@android:color/black"
 			  android:orientation="horizontal">
 
-	<ImageView
+	<androidx.appcompat.widget.AppCompatImageView
 		android:id="@+id/history_icon"
 		android:layout_width="40dp"
 		android:layout_height="wrap_content"
@@ -28,7 +28,7 @@
 			  android:textAppearance="?android:attr/textAppearanceListItemSmall"
 			  android:textColor="@android:color/white"/>
 
-	<ImageButton
+	<androidx.appcompat.widget.AppCompatImageButton
 		android:id="@+id/delete_button"
 		android:layout_width="20dp"
 		android:layout_height="wrap_content"
