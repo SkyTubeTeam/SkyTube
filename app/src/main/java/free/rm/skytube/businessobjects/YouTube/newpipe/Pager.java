@@ -94,7 +94,7 @@ public abstract class Pager<I extends InfoItem, O> implements PagerBackend<O> {
 
     protected List<O> process(ListExtractor.InfoItemsPage<I> page) throws ParsingException {
         nextPageUrl = page.getNextPageUrl();
-        hasNextPage = nextPageUrl != null && nextPageUrl.isEmpty();
+        hasNextPage = nextPageUrl != null && !nextPageUrl.isEmpty();
         return extract(page);
     }
 
