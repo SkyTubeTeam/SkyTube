@@ -30,7 +30,8 @@
 * Play channels' playlists
 * Download videos
 * View and download video thumbnails
-* Doesn't display any adverts when browsing or playing videos.
+* Doesn't display any adverts when browsing or playing videos
+* Backup and restore bookmarks and subscriptions (all stored locally on your device)
 
 ### Traditional Features
 * Explore Featured and Most Popular videos
@@ -42,6 +43,9 @@
 * Subscriptions feed
 
 More features will be added in the near future.
+
+## Requirements
+Android 4.0 (Ice Cream Sandwich) or later. For techies, that means an API level of 14 or greater.
 
 ## Download
 | Feature          | SkyTube Extra                      | SkyTube  |
@@ -60,12 +64,12 @@ _* powered by a closed-source, third-party library._
 * Innovative design
 * No intrusive ads
 * Multilingual
-* Not dependent on the GAPPS/Google Apps (i.e. YouTube official app)
+* Not dependent on GAPPS/Google Apps (i.e. YouTube official app)
 * No need for Google/YouTube account to operate
 * My code does not spy on your behaviour!
 
 ## Screenshots
-### Mobile
+### Phone
 [<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/trending.jpg" width=250>](https://ram-on.github.io/SkyTube/assets/img/screenshots/trending.jpg)
 [<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/subs.jpg" alt="Subscriptions" width="250" />](https://ram-on.github.io/SkyTube/assets/img/screenshots/subs.jpg)
 [<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/video_blocker.jpg" alt="Video Blocker" width="250" />](https://ram-on.github.io/SkyTube/assets/img/screenshots/video_blocker.jpg")
