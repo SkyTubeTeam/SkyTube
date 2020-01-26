@@ -15,71 +15,34 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/*
- * Parts of the code below were written by Christian Schabesberger.
- *
- * Copyright (C) Christian Schabesberger 2015 <chris.schabesberger@mailbox.org>
- * Code written by Schabesberger are Licensed under GPL version 3 of the License, or (at your
- * option) any later version.
- */
-
 package free.rm.skytube.businessobjects.YouTube.VideoStream;
 
-import org.schabi.newpipe.extractor.DownloadRequest;
-import org.schabi.newpipe.extractor.DownloadResponse;
-import org.schabi.newpipe.extractor.Downloader;
+import org.schabi.newpipe.extractor.downloader.Downloader;
+import org.schabi.newpipe.extractor.downloader.Request;
+import org.schabi.newpipe.extractor.downloader.Response;
 import org.schabi.newpipe.extractor.exceptions.ReCaptchaException;
-import org.schabi.newpipe.extractor.utils.Localization;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.UnknownHostException;
-import java.util.HashMap;
-import java.util.Map;
 
+import javax.annotation.Nonnull;
 import javax.net.ssl.HttpsURLConnection;
 
 
 /**
  * Downloads HTTP content.
  */
-public class HttpDownloader implements Downloader {
+public class HttpDownloader extends Downloader {
 
 	/** Mimic the Mozilla user agent */
 	private static final String USER_AGENT = "Mozilla/5.0";
 
 	@Override
-	public String download(String siteUrl, Localization localization) throws IOException, ReCaptchaException {
-		Map<String, String> requestProperties = new HashMap<>();
-		requestProperties.put("Accept-Language", localization.getLanguage());
-		return download(siteUrl, requestProperties);
-	}
-
-	@Override
-	public DownloadResponse get(String siteUrl, DownloadRequest request) {
-		return new DownloadResponse(200, null, null);
-	}
-
-	@Override
-	public DownloadResponse get(String siteUrl) {
-		return new DownloadResponse(200, null, null);
-	}
-
-	@Override
-	public DownloadResponse post(String siteUrl, DownloadRequest request) {
-		return new DownloadResponse(200, null, null);
-	}
-
-	@Override
-	public DownloadResponse head(String siteUrl) throws IOException, ReCaptchaException {
-		return new DownloadResponse(200, null, null);
-	}
-
-	@Override
-	public String download(String siteUrl, Map<String, String> customProperties) throws IOException, ReCaptchaException {
-		URL url = new URL(siteUrl);
+	public Response execute(@Nonnull Request request) throws IOException, ReCaptchaException {
+		URL url = new URL(request.url());
 		HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
 		BufferedReader in = null;
 		StringBuilder response = new StringBuilder();
@@ -88,8 +51,7 @@ public class HttpDownloader implements Downloader {
 			con.setRequestMethod("GET");
 			con.setRequestProperty("User-Agent", USER_AGENT);
 
-			in = new BufferedReader(
-					new InputStreamReader(con.getInputStream()));
+			in = new BufferedReader(new InputStreamReader(con.getInputStream()));
 			String inputLine;
 
 			while((inputLine = in.readLine()) != null) {
@@ -98,13 +60,13 @@ public class HttpDownloader implements Downloader {
 		} catch(UnknownHostException uhe) {//thrown when there's no internet connection
 			throw new IOException("unknown host or no network", uhe);
 		} catch(Exception e) {
-            /*
-             * HTTP 429 == Too Many Request
-             * Receive from Youtube.com = ReCaptcha challenge request
-             * See : https://github.com/rg3/youtube-dl/issues/5138
-             */
+			/*
+			 * HTTP 429 == Too Many Request
+			 * Receive from Youtube.com = ReCaptcha challenge request
+			 * See : https://github.com/rg3/youtube-dl/issues/5138
+			 */
 			if (con.getResponseCode() == 429) {
-				throw new ReCaptchaException("reCaptcha Challenge requested", siteUrl);
+				throw new ReCaptchaException("reCaptcha Challenge requested", url.toString());
 			}
 			throw new IOException(e);
 		} finally {
@@ -113,13 +75,7 @@ public class HttpDownloader implements Downloader {
 			}
 		}
 
-		return response.toString();
-	}
-
-	@Override
-	public String download(String siteUrl) throws IOException, ReCaptchaException {
-		Map<String, String> requestProperties = new HashMap<>();
-		return download(siteUrl, requestProperties);
+		return new Response(con.getResponseCode(), con.getResponseMessage(), con.getHeaderFields(), response.toString());
 	}
 
 }

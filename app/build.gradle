@@ -13,7 +13,7 @@ android {
         versionCode 19
 
         // Third party devs:  pls be ethical and change the below keys
-        buildConfigField 'String',   'YOUTUBE_API_KEYS_DEBUG', '"AIzaSyDU-ZZCyOB_kYkiMSZ6ooSipUZRukHU4ik"'
+        buildConfigField 'String',   'YOUTUBE_API_KEYS_DEBUG', '"AIzaSyC2r3UUbTzHf-iUqMrVc5TI6MMnQ_geDXs"'
         buildConfigField 'String[]', 'YOUTUBE_API_KEYS',
                 '{' +
                         '"AIzaSyC27jgPDHkQsQK8TW4ngrQprSCnlMTJ04w",' +
@@ -74,7 +74,7 @@ dependencies {
     // YouTube modules
     implementation 'com.google.http-client:google-http-client-android:1.32.1'
     implementation 'com.google.apis:google-api-services-youtube:v3-rev212-1.25.0'
-    implementation 'com.github.TeamNewPipe:NewPipeExtractor:0.17.4'
+    implementation 'com.github.TeamNewPipe:NewPipeExtractor:0.18.2'
 
     // other modules
     implementation group: 'org.ocpsoft.prettytime', name: 'prettytime', version: '4.0.2.Final'
@@ -98,8 +98,8 @@ dependencies {
     // Android support modules
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.legacy:legacy-support-v13:1.0.0'
-    implementation 'com.google.android.material:material:1.2.0-alpha01'
-    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'com.google.android.material:material:1.2.0-alpha04'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'androidx.multidex:multidex:2.0.1' // as we have over 65536 lines of code...

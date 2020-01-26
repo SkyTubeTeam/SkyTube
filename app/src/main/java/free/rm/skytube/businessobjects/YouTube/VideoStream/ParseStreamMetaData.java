@@ -29,6 +29,7 @@ import org.schabi.newpipe.extractor.NewPipe;
 import org.schabi.newpipe.extractor.ServiceList;
 import org.schabi.newpipe.extractor.StreamingService;
 import org.schabi.newpipe.extractor.exceptions.ContentNotAvailableException;
+import org.schabi.newpipe.extractor.localization.Localization;
 import org.schabi.newpipe.extractor.stream.StreamInfo;
 import org.schabi.newpipe.extractor.stream.VideoStream;
 
@@ -51,7 +52,7 @@ public class ParseStreamMetaData {
 	 * @param videoId	The ID of the video we are going to get its streams.
 	 */
 	public ParseStreamMetaData(String videoId) {
-		NewPipe.init(new HttpDownloader(), null);
+		NewPipe.init(new HttpDownloader(), Localization.DEFAULT);
 		setYoutubeVideoUrl(videoId);
 	}
 
