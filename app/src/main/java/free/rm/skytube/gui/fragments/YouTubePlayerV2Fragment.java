@@ -208,7 +208,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 				youTubeVideo = (YouTubeVideo) bundle.getSerializable(YOUTUBE_VIDEO_OBJ);
 				setUpHUDAndPlayVideo();
 
-				getVideoInfoTasks(true);
+				fetchVideoInformations();
 			} else {
 				// ... or the video URL is passed to SkyTube via another Android app
 				final ContentId contentId = SkyTubeApp.getUrlFromIntent(requireContext(), intent);
@@ -231,7 +231,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 								// setup the HUD and play the video
 								setUpHUDAndPlayVideo();
 
-								getVideoInfoTasks(false);
+								fetchVideoInformations();
 
 								// will now check if the video is bookmarked or not (and then update the menu
 								// accordingly)
@@ -680,7 +680,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 	/**
 	 * Will asynchronously retrieve additional video information such as channel avatar ...etc
 	 */
-	private void getVideoInfoTasks(boolean fetchDescriptionAndLikeCount) {
+	private void fetchVideoInformations() {
 		// get Channel info (e.g. avatar...etc) task
 		compositeDisposable.add(
 				DatabaseTasks.getChannelInfo(requireContext(), youTubeVideo.getChannelId(), false)
