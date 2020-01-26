@@ -1,3 +1,11 @@
+v2.970 - 26 Jan 2020
+        * Fix Subscription DB upgrade error
+        * Add ability to switch brightness and volume control
+        * Fixing a typo found by Avently, which prevented loading the first video in a page with Youtube API
+        * Re-enabled image and image button in search hints dropdown.
+        * Fix paging with NewPipeBackend
+        * NewPipeExtractor update needed due to Youtube.com change.
+        * Video playback speed controller added
 v2.969 - 31 Dec 2019
 		* Use NewPipe backend for checking new videos on subscriptions.
 		* No need to restart the app for an Youtube key change.
