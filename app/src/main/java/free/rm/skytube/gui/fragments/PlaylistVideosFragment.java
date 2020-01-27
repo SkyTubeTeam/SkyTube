@@ -52,8 +52,9 @@ public class PlaylistVideosFragment extends VideosGridFragment {
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 		ActionBar actionBar = getSupportActionBar();
-		if (actionBar != null && youTubePlaylist.getChannel() != null) {
-			actionBar.setTitle(youTubePlaylist.getChannel().getTitle());
+		String channelTitle = youTubePlaylist.getChannelTitle();
+		if (actionBar != null && channelTitle != null) {
+			actionBar.setTitle(channelTitle);
 		}
 
 		// set the playlist's thumbnail

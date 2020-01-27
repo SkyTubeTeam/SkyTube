@@ -33,17 +33,21 @@ public class YouTubePlaylist implements Serializable {
 	private String              id;
 	private String              title;
 	private String              description;
-	private DateTime            publishDate;
+	private Long                publishDate;
 	private int                 videoCount = 0;
 	private String              thumbnailUrl;
-	private List<YouTubeVideo>  videos = new ArrayList<>();
 
 	/** The YouTube Channel object that this playlist belongs to. */
 	private YouTubeChannel channel;
-	private String channelId;
 
-	public YouTubePlaylist(Playlist playlist) {
-		this(playlist, null);
+	public YouTubePlaylist(String id, String title, String description, Long publishDate, int videoCount, String thumbnailUrl, YouTubeChannel channel) {
+		this.id = id;
+		this.title = title;
+		this.description = description;
+		this.publishDate = publishDate;
+		this.videoCount = videoCount;
+		this.thumbnailUrl = thumbnailUrl;
+		this.channel = channel;
 	}
 
 	public YouTubePlaylist(Playlist playlist, YouTubeChannel channel) {
@@ -53,8 +57,8 @@ public class YouTubePlaylist implements Serializable {
 		if(playlist.getSnippet() != null) {
 			title = playlist.getSnippet().getTitle();
 			description = playlist.getSnippet().getDescription();
-			publishDate = playlist.getSnippet().getPublishedAt();
-			channelId = playlist.getSnippet().getChannelId();
+			DateTime dt = playlist.getSnippet().getPublishedAt();
+			publishDate = dt != null ? dt.getValue() : null;
 
 			if(playlist.getSnippet().getThumbnails() != null) {
 				Thumbnail thumbnail = playlist.getSnippet().getThumbnails().getHigh();
@@ -88,24 +92,12 @@ public class YouTubePlaylist implements Serializable {
 		return videoCount;
 	}
 
-	public List<YouTubeVideo> getVideos() {
-		return videos;
-	}
-
 	public String getBannerUrl() {
-		return channel.getBannerUrl();
+		return channel != null ? channel.getBannerUrl() : null;
 	}
 
-	public YouTubeChannel getChannel() {
-		return channel;
-	}
-
-	public void setChannel(YouTubeChannel channel) {
-		this.channel = channel;
-	}
-
-	public String getChannelId() {
-		return channelId;
+	public String getChannelTitle() {
+		return channel != null ? channel.getTitle() : null;
 	}
 
 	/**

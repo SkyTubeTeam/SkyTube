@@ -97,7 +97,7 @@ public class ClickableLinksTextView extends LinkConsumableTextView {
 			} else if(playlistMatcher.matches()) {
 				String playlistId = playlistMatcher.group(2);
 				// Retrieve the playlist from the playlist ID that was in the url the user clicked on
-				new GetPlaylistTask(playlistId, playlist -> {
+				new GetPlaylistTask(getContext(), playlistId, playlist -> {
 					// Pass the clicked playlist to PlaylistVideosFragment.
 					Intent playlistIntent = new Intent(getContext(), MainActivity.class);
 					playlistIntent.setAction(MainActivity.ACTION_VIEW_PLAYLIST);

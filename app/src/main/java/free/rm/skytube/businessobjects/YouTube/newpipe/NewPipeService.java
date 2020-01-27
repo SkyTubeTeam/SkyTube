@@ -35,6 +35,7 @@ import org.schabi.newpipe.extractor.linkhandler.LinkHandler;
 import org.schabi.newpipe.extractor.linkhandler.ListLinkHandler;
 import org.schabi.newpipe.extractor.linkhandler.ListLinkHandlerFactory;
 import org.schabi.newpipe.extractor.localization.DateWrapper;
+import org.schabi.newpipe.extractor.playlist.PlaylistExtractor;
 import org.schabi.newpipe.extractor.search.SearchExtractor;
 import org.schabi.newpipe.extractor.stream.StreamExtractor;
 import org.schabi.newpipe.extractor.stream.StreamInfo;
@@ -131,6 +132,13 @@ public class NewPipeService {
 
         YouTubeChannel channel = createInternalChannel(channelExtractor);
         return new VideoPager(streamingService, (ListExtractor) channelExtractor, channel);
+    }
+
+    public PlaylistPager getPlaylistPager(String channelId) throws ExtractionException, IOException {
+        ListLinkHandler channelList = getListLinkHandler(channelId);
+        PlaylistExtractor playlistExtractor = streamingService.getPlaylistExtractor(channelList);
+        playlistExtractor.fetchPage();
+        return new PlaylistPager(streamingService, playlistExtractor);
     }
 
     public CommentPager getCommentPager(String videoId) throws ExtractionException {

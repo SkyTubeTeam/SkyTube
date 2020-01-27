@@ -29,7 +29,7 @@ import free.rm.skytube.gui.businessobjects.adapters.PlaylistsGridAdapter;
  */
 public class GetChannelPlaylistsTask extends AsyncTaskParallel<Void, Void, List<YouTubePlaylist>> {
 	// Used to retrieve the playlists
-	private GetChannelPlaylists getChannelPlaylists = new GetChannelPlaylists();
+	private final GetChannelPlaylists getChannelPlaylists;
 
 	// The adapter where the playlists will be displayed
 	private PlaylistsGridAdapter playlistsGridAdapter;

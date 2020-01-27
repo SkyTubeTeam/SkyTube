@@ -39,11 +39,17 @@ import free.rm.skytube.businessobjects.db.SubscriptionsDb;
  */
 public class GetChannelInfo extends AsyncTaskParallel<String, Void, YouTubeChannel> {
 
+    public static final YouTubeChannelInterface EMPTY = youTubeChannel -> {};
+
     private final long CHANNEL_INFO_VALIDITY = 24 * 60 * 60 * 1000L;
     private final Context context;
     private Exception exception;
     private final YouTubeChannelInterface channelReceiver;
     private final boolean staleAcceptable;
+
+    public GetChannelInfo(Context context, boolean staleAcceptable) {
+        this(context, EMPTY, staleAcceptable);
+    }
 
     public GetChannelInfo(Context context, YouTubeChannelInterface channelReceiver) {
         this(context, channelReceiver, false);
@@ -62,7 +68,12 @@ public class GetChannelInfo extends AsyncTaskParallel<String, Void, YouTubeChann
         return getChannelInfoSync(channelId);
     }
 
-    YouTubeChannel getChannelInfoSync(String channelId) {
+    /**
+     *
+     * @param channelId
+     * @return a channel object from an id, this is a blocking operation, should only be called from a background thread!
+     */
+    public YouTubeChannel getChannelInfoSync(String channelId) {
         final SubscriptionsDb db = SubscriptionsDb.getSubscriptionsDb();
         YouTubeChannel channel = db.getCachedChannel(channelId);
         if (needRefresh(channel) && SkyTubeApp.isConnected(context)) {
@@ -91,11 +102,15 @@ public class GetChannelInfo extends AsyncTaskParallel<String, Void, YouTubeChann
 
     @Override
     protected void onPostExecute(YouTubeChannel youTubeChannel) {
+        showErrorToUi();
+        channelReceiver.onGetYouTubeChannel(youTubeChannel);
+    }
+
+    public void showErrorToUi() {
         if (exception != null) {
             Logger.e(this, "Error: "+exception.getMessage(), exception);
             showError(exception.getMessage());
         }
-        channelReceiver.onGetYouTubeChannel(youTubeChannel);
     }
 
     protected void showError(String msg) {
