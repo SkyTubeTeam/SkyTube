@@ -39,4 +39,13 @@ public class PrettyTimeEx extends PrettyTime {
 		return format(date);
 	}
 
+	/**
+	 * It will convert the timestamp - since unix epoch to a pretty string.
+	 *
+	 * @see PrettyTime#format(Date)
+	 */
+	public String format(long unixEpoch) {
+		return format(new Date(unixEpoch));
+	}
+
 }

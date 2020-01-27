@@ -67,7 +67,7 @@ public class GetSubscribedChannelsTask extends AsyncTaskParallel<Void, Void, Lis
 	@Override
 	protected List<YouTubeChannel> doInBackground(Void... params) {
 		List<YouTubeChannel> subbedChannelsList = new ArrayList<>();
-		GetChannelInfo channelInfo = new GetChannelInfo(adapter.getContext(), youTubeChannel -> {}, true);
+		GetChannelInfo channelInfo = new GetChannelInfo(adapter.getContext(),true);
 		try {
 			List<String> channelIds = SubscriptionsDb.getSubscriptionsDb().getSubscribedChannelIds();
 			for (String id : channelIds) {
