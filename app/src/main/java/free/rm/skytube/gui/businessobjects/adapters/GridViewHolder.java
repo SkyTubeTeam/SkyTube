@@ -52,6 +52,7 @@ import free.rm.skytube.gui.activities.ThumbnailViewerActivity;
 import free.rm.skytube.gui.businessobjects.MainActivityListener;
 import free.rm.skytube.gui.businessobjects.MobileNetworkWarningDialog;
 import free.rm.skytube.gui.businessobjects.YouTubePlayer;
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 
 /**
@@ -249,9 +250,7 @@ public class GridViewHolder extends RecyclerView.ViewHolder implements Serializa
 	private void onOptionsButtonClick(final View view, YouTubeChannel channel) {
 		final PopupMenu popupMenu = createPopup(R.menu.channel_options_menu, view);
 		Menu menu = popupMenu.getMenu();
-		if (!SubscriptionsDb.getSubscriptionsDb().isUserSubscribedToChannel(channel.getId())) {
-			menu.findItem(R.id.subscribe_channel).setVisible(true);
-		}
+		updateSubscribeMenuItem(channel.getId(), menu);
 		popupMenu.setOnMenuItemClickListener(item -> {
 			switch (item.getItemId()) {
 				case R.id.share:
@@ -273,6 +272,16 @@ public class GridViewHolder extends RecyclerView.ViewHolder implements Serializa
 			return false;
 		});
 		popupMenu.show();
+	}
+
+	private void updateSubscribeMenuItem(String channelId, Menu menu) {
+		compositeDisposable.add(SubscriptionsDb.getSubscriptionsDb().getUserSubscribedToChannel(channelId)
+				.observeOn(AndroidSchedulers.mainThread())
+				.subscribe((subscribed) -> {
+					if (!subscribed) {
+						menu.findItem(R.id.subscribe_channel).setVisible(true);
+					}
+				}));
 	}
 
 	private void onOptionsButtonClick(final View view, YouTubeVideo youTubeVideo) {

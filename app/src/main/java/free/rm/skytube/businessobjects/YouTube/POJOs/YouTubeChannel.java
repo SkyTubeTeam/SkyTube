@@ -239,7 +239,7 @@ public class YouTubeChannel extends CardData implements Serializable {
 	 *                            out.
 	 */
 	public Single<Boolean> blockChannel(boolean displayToastMessage) {
-		return Single.fromCallable(() -> SubscriptionsDb.getSubscriptionsDb().isUserSubscribedToChannel(getId()))
+		return SubscriptionsDb.getSubscriptionsDb().getUserSubscribedToChannel(getId())
 				.flatMap(isSubscribed -> DatabaseTasks.subscribeToChannel(false,
 						null, SkyTubeApp.getContext(), this, false))
 				.map(result -> VideoBlocker.isChannelBlacklistEnabled())
@@ -250,7 +250,6 @@ public class YouTubeChannel extends CardData implements Serializable {
 						return unwhitelistChannel(displayToastMessage);
 					}
 				})
-				.subscribeOn(Schedulers.io())
 				.observeOn(AndroidSchedulers.mainThread());
 	}
 
