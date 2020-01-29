@@ -47,8 +47,7 @@ public class DatabaseTasks {
      */
     public static Disposable checkIfUserSubbedToChannel(@NonNull SubscribeButton subscribeButton,
                                                         @NonNull String channelId) {
-        return Single.fromCallable(() -> SubscriptionsDb.getSubscriptionsDb().isUserSubscribedToChannel(channelId))
-                .subscribeOn(Schedulers.io())
+        return SubscriptionsDb.getSubscriptionsDb().getUserSubscribedToChannel(channelId)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(isUserSubbed -> {
                     if (isUserSubbed) {

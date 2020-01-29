@@ -50,6 +50,8 @@ import free.rm.skytube.businessobjects.YouTube.POJOs.ChannelView;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.gui.fragments.SubscriptionsFeedFragment;
+import io.reactivex.rxjava3.core.Single;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 /**
  * A database (DB) that stores user subscriptions (with respect to YouTube channels).
@@ -381,6 +383,10 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 		return executeQueryForInteger(IS_SUBSCRIBED_QUERY, new String[]{channelId}, 0) > 0;
 	}
 
+
+	public Single<Boolean> getUserSubscribedToChannel(String channelId) {
+		return Single.fromCallable(() -> isUserSubscribedToChannel(channelId)).subscribeOn(Schedulers.io());
+	}
 
     /**
      * Updates the given channel's last visit time.
