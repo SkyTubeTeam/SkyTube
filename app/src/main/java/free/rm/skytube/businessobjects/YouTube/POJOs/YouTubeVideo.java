@@ -65,16 +65,8 @@ import static free.rm.skytube.app.SkyTubeApp.getStr;
 /**
  * Represents a YouTube video.
  */
-public class YouTubeVideo implements Serializable {
+public class YouTubeVideo extends CardData implements Serializable {
 
-	/**
-	 * YouTube video ID.
-	 */
-	private String id;
-	/**
-	 * Video title.
-	 */
-	private String title;
 	/**
 	 * Channel (only id and name are set).
 	 */
@@ -126,18 +118,6 @@ public class YouTubeVideo implements Serializable {
 	 */
 	private DateTime publishDate;
 	/**
-	 * The video publish date in pretty format (e.g. "17 hours ago").
-	 */
-	private transient String publishDatePretty;
-	/**
-	 * The time when the publishDatePretty was calculated.
-	 */
-	private transient long publishDatePrettyCalculationTime;
-	/**
-	 * Thumbnail URL.
-	 */
-	private String thumbnailUrl;
-	/**
 	 * Thumbnail URL (maximum resolution).
 	 */
 	private String thumbnailMaxResUrl;
@@ -145,10 +125,6 @@ public class YouTubeVideo implements Serializable {
 	 * The language of this video.  (This tends to be ISO 639-1).
 	 */
 	private String language;
-	/**
-	 * The description of the video (set by the YouTuber/Owner).
-	 */
-	private String description;
 	/**
 	 * Set to true if the video is a current live stream.
 	 */
@@ -158,9 +134,6 @@ public class YouTubeVideo implements Serializable {
 	 * Timestamp of the data retrieval.
 	 */
 	private Long retrievalTimestamp;
-	
-	/** publishDate will remain valid for 1 hour. */
-	private final static long PUBLISH_DATE_VALIDITY_TIME = 60 * 60 * 1000L;
 
 
 	/**
@@ -220,7 +193,8 @@ public class YouTubeVideo implements Serializable {
             setDurationInSeconds((int) durationInSeconds);
             this.setViewCount(BigInteger.valueOf(viewCount));
             if (publishDate != null) {
-                this.setPublishDate(new DateTime(publishDate));
+                this.setPublishTimestamp(publishDate);
+                this.publishDate = new DateTime(publishDate);
             }
             this.thumbnailMaxResUrl = thumbnailUrl;
             this.thumbnailUrl = thumbnailUrl;
@@ -273,18 +247,6 @@ public class YouTubeVideo implements Serializable {
 		} else {
 			isLiveStream = false;
 		}
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public String getTitle() {
-		return title;
 	}
 
 	public YouTubeChannel getChannel() {
@@ -407,56 +369,27 @@ public class YouTubeVideo implements Serializable {
 	}
 
 	/**
-	 * Sets the publishDate and publishDatePretty.
+	 * Sets the {@link #publishDate}, {@link #publishTimestamp}.
 	 */
 	private void setPublishDate(DateTime publishDate) {
 		this.publishDate = publishDate;
-		this.publishDatePretty = null;
-	}
-
-	/**
-	 * Sets the publishDate and publishDatePretty from a timestamp.
-	 */
-	public void setPublishDate(long timestamp) {
-		this.publishDate = new DateTime(timestamp);
-		this.publishDatePretty = null;
-	}
-
-	/**
-	 * Sets the publishDate and publishDatePretty.
-	 */
-	public void setPublishDatePretty(String publishDatePretty) {
-		this.publishDate = null;
-		this.publishDatePretty = publishDatePretty;
-	}
-
-	/**
-	 * Gets the {@link #publishDate} as a pretty string.
-	 */
-	public String getPublishDatePretty() {
-		long now = System.currentTimeMillis();
-		// if pretty is not yet calculated, or the publish date was generated more than (1 hour) PUBLISH_DATE_VALIDITY_TIME ago...
-		if (publishDate != null && (publishDatePretty == null || PUBLISH_DATE_VALIDITY_TIME < now - publishDatePrettyCalculationTime)) {
-			this.publishDatePretty = new PrettyTimeEx().format(publishDate);
-			this.publishDatePrettyCalculationTime = now;
-		}
-		return publishDatePretty != null ? publishDatePretty : "???";
-	}
-
-	/**
-	 * Given that {@link #publishDatePretty} is being cached once generated, this method will allow
-	 * you to regenerate and reset the {@link #publishDatePretty}.
-	 */
-	public void forceRefreshPublishDatePretty() {
-		// Will force the publishDatePretty to be regenerated.  Refer to getPublishDatePretty()
-		if (publishDate != null) {
-			// only,when publishDate is set - so if only the 'pretty' is available, no refresh will occur.
-			this.publishDatePretty = null;
+		if (this.publishDate != null) {
+			setPublishTimestamp(this.publishDate.getValue());
 		}
 	}
 
-	public String getThumbnailUrl() {
-		return thumbnailUrl;
+	/**
+	 * Update the {@link #publishTimestamp} from {@link #publishDate} if the former is not set, just the later.
+	 * Useful when deserialized from json.
+	 * @return self.
+	 */
+	public YouTubeVideo updatePublishTimestampFromDate() {
+		if (this.publishTimestamp == null) {
+			if (this.publishDate != null) {
+				setPublishTimestamp(this.publishDate.getValue());
+			}
+		}
+		return this;
 	}
 
 	public String getThumbnailMaxResUrl() {
@@ -469,10 +402,6 @@ public class YouTubeVideo implements Serializable {
 
 	public String getLanguage() {
 		return language;
-	}
-
-	public String getDescription() {
-		return description;
 	}
 
 	public boolean isLiveStream() {
