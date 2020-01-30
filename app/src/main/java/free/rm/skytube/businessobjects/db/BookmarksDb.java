@@ -132,7 +132,7 @@ public class BookmarksDb extends SQLiteOpenHelperEx implements OrderableDatabase
 				Gson gson = new Gson();
 				do {
 					byte[] blob = cursor.getBlob(cursor.getColumnIndex(BookmarksTable.COL_YOUTUBE_VIDEO));
-					YouTubeVideo uvideo = gson.fromJson(new String(blob), YouTubeVideo.class);
+					YouTubeVideo uvideo = gson.fromJson(new String(blob), YouTubeVideo.class).updatePublishTimestampFromDate();
 					ContentValues contentValues = new ContentValues();
 					contentValues.put(BookmarksTable.COL_ORDER, order++);
 
@@ -227,7 +227,7 @@ public class BookmarksDb extends SQLiteOpenHelperEx implements OrderableDatabase
 				final String videoJson = new String(blob);
 
 				// convert JSON into YouTubeVideo
-				YouTubeVideo video = gson.fromJson(videoJson, YouTubeVideo.class);
+				YouTubeVideo video = gson.fromJson(videoJson, YouTubeVideo.class).updatePublishTimestampFromDate();
 
 				// due to upgrade to YouTubeVideo (by changing channel{Id,Name} to YouTubeChannel)
 				// from version 2.82 to 2.90

@@ -22,20 +22,13 @@ import com.google.api.services.youtube.model.Playlist;
 import com.google.api.services.youtube.model.Thumbnail;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A POJO class to store a YouTube Playlist.
  */
-public class YouTubePlaylist implements Serializable {
+public class YouTubePlaylist extends CardData implements Serializable {
 
-	private String              id;
-	private String              title;
-	private String              description;
-	private Long                publishDate;
 	private int                 videoCount = 0;
-	private String              thumbnailUrl;
 
 	/** The YouTube Channel object that this playlist belongs to. */
 	private YouTubeChannel channel;
@@ -44,7 +37,7 @@ public class YouTubePlaylist implements Serializable {
 		this.id = id;
 		this.title = title;
 		this.description = description;
-		this.publishDate = publishDate;
+		this.publishTimestamp = publishDate;
 		this.videoCount = videoCount;
 		this.thumbnailUrl = thumbnailUrl;
 		this.channel = channel;
@@ -58,7 +51,7 @@ public class YouTubePlaylist implements Serializable {
 			title = playlist.getSnippet().getTitle();
 			description = playlist.getSnippet().getDescription();
 			DateTime dt = playlist.getSnippet().getPublishedAt();
-			publishDate = dt != null ? dt.getValue() : null;
+            publishTimestamp = dt != null ? dt.getValue() : null;
 
 			if(playlist.getSnippet().getThumbnails() != null) {
 				Thumbnail thumbnail = playlist.getSnippet().getThumbnails().getHigh();
@@ -70,22 +63,6 @@ public class YouTubePlaylist implements Serializable {
 		if(playlist.getContentDetails() != null) {
 			videoCount = playlist.getContentDetails().getItemCount().intValue();
 		}
-	}
-
-	public String getThumbnailUrl() {
-		return thumbnailUrl;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public String getDescription() {
-		return description;
 	}
 
 	public int getVideoCount() {
@@ -100,12 +77,4 @@ public class YouTubePlaylist implements Serializable {
 		return channel != null ? channel.getTitle() : null;
 	}
 
-	/**
-	 * Gets the {@link #publishDate} as a pretty string.
-	 */
-	public String getPublishDatePretty() {
-		return (publishDate != null)
-						? new PrettyTimeEx().format(publishDate)
-						: "???";
-	}
 }

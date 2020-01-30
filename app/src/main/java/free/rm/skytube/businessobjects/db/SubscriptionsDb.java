@@ -653,8 +653,9 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
                     YouTubeVideo video = gson.fromJson(videoJson, YouTubeVideo.class);
                     if (fullColumnList) {
                         video.setRetrievalTimestamp(cursor.getLong(retrievalIdx));
-                        video.setPublishDate(cursor.getLong(publishTsIdx));
+                        video.setPublishTimestamp(cursor.getLong(publishTsIdx));
                     }
+                    video.updatePublishTimestampFromDate();
 
                     // due to upgrade to YouTubeVideo (by changing channel{Id,Name} to
                     // YouTubeChannel)
