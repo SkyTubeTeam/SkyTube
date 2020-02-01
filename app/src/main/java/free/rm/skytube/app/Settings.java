@@ -103,7 +103,7 @@ public class Settings {
     }
 
     public boolean isPlaybackStatusEnabled() {
-        return getPreference(R.string.pref_key_disable_playback_status, false);
+        return !getPreference(R.string.pref_key_disable_playback_status, false);
     }
 
     /**
