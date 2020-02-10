@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import free.rm.skytube.businessobjects.Logger;
+import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPI;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPIKey;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
@@ -50,9 +51,9 @@ public class GetPlaylistVideos extends GetYouTubeVideos {
 	}
 
 	@Override
-	public List<YouTubeVideo> getNextVideos() {
+	public List<CardData> getNextVideos() {
 		setLastException(null);
-		List<YouTubeVideo> videoList = new ArrayList<>();
+		List<CardData> videoList = new ArrayList<>();
 
 		if (!noMoreVideoPages()) {
 			try {

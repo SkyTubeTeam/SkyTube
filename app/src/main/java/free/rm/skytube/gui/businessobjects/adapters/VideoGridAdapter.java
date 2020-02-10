@@ -30,6 +30,7 @@ import java.io.IOException;
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.businessobjects.YouTube.GetYouTubeVideos;
+import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetYouTubeVideosTask;
@@ -40,7 +41,7 @@ import free.rm.skytube.gui.businessobjects.MainActivityListener;
 /**
  * An adapter that will display videos in a {@link android.widget.GridView}.
  */
-public class VideoGridAdapter extends RecyclerViewAdapterEx<YouTubeVideo, GridViewHolder> implements VideoPlayStatusUpdateListener {
+public class VideoGridAdapter extends RecyclerViewAdapterEx<CardData, GridViewHolder> implements VideoPlayStatusUpdateListener {
 
 	public interface Callback {
 		void onVideoGridUpdated(int newVideoListSize);

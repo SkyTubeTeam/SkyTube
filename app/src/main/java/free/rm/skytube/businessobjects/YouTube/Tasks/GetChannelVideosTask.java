@@ -20,6 +20,7 @@ package free.rm.skytube.businessobjects.YouTube.Tasks;
 import static free.rm.skytube.app.SkyTubeApp.getContext;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -32,6 +33,7 @@ import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.businessobjects.YouTube.GetChannelVideosFull;
 import free.rm.skytube.businessobjects.YouTube.GetChannelVideosInterface;
 import free.rm.skytube.businessobjects.YouTube.GetChannelVideosLite;
+import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
@@ -39,7 +41,7 @@ import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 /**
  * Task to asynchronously get videos for a specific channel.
  */
-public class GetChannelVideosTask extends AsyncTaskParallel<Void, Void, List<YouTubeVideo>> {
+public class GetChannelVideosTask extends AsyncTaskParallel<Void, Void, List<CardData>> {
 	private static final String TAG = GetChannelVideosTask.class.getSimpleName();
 
 	private final GetChannelVideosInterface getChannelVideos;
@@ -69,8 +71,8 @@ public class GetChannelVideosTask extends AsyncTaskParallel<Void, Void, List<You
 
 
 	@Override
-	protected List<YouTubeVideo> doInBackground(Void... voids) {
-		List<YouTubeVideo> videos = null;
+	protected List<CardData> doInBackground(Void... voids) {
+		List<CardData> videos = null;
 
 		final SubscriptionsDb db = SubscriptionsDb.getSubscriptionsDb();
 		if (!isCancelled()) {
@@ -87,14 +89,20 @@ public class GetChannelVideosTask extends AsyncTaskParallel<Void, Void, List<You
 
 		if(videos != null && !videos.isEmpty()) {
 			if (db.isUserSubscribedToChannel(channelId)) {
-				db.saveVideos(videos);
+				List<YouTubeVideo> realVideos = new ArrayList<>(videos.size());
+				for (CardData cd : videos) {
+					if (cd instanceof YouTubeVideo) {
+						realVideos.add((YouTubeVideo) cd);
+					}
+				}
+				db.saveVideos(realVideos);
 			}
 		}
 		return videos;
 	}
 
 	@Override
-	protected void onPostExecute(List<YouTubeVideo> youTubeVideos) {
+	protected void onPostExecute(List<CardData> youTubeVideos) {
 		if (exception != null && channel != null) {
 			Toast.makeText(getContext(),
 					String.format(getContext().getString(R.string.could_not_get_videos), channel.getTitle()),

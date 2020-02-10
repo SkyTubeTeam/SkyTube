@@ -28,12 +28,12 @@ import java.io.Serializable;
  */
 public class YouTubePlaylist extends CardData implements Serializable {
 
-	private int                 videoCount = 0;
+	private long                 videoCount = 0;
 
 	/** The YouTube Channel object that this playlist belongs to. */
 	private YouTubeChannel channel;
 
-	public YouTubePlaylist(String id, String title, String description, Long publishDate, int videoCount, String thumbnailUrl, YouTubeChannel channel) {
+	public YouTubePlaylist(String id, String title, String description, Long publishDate, long videoCount, String thumbnailUrl, YouTubeChannel channel) {
 		this.id = id;
 		this.title = title;
 		this.description = description;
@@ -61,11 +61,11 @@ public class YouTubePlaylist extends CardData implements Serializable {
 		}
 
 		if(playlist.getContentDetails() != null) {
-			videoCount = playlist.getContentDetails().getItemCount().intValue();
+			videoCount = playlist.getContentDetails().getItemCount();
 		}
 	}
 
-	public int getVideoCount() {
+	public long getVideoCount() {
 		return videoCount;
 	}
 

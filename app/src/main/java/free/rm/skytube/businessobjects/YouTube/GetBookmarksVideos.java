@@ -17,10 +17,10 @@
 
 package free.rm.skytube.businessobjects.YouTube;
 
-import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
-import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
+import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
 import free.rm.skytube.businessobjects.db.BookmarksDb;
 
 
@@ -35,10 +35,10 @@ public class GetBookmarksVideos extends GetYouTubeVideos {
 	}
 
 	@Override
-	public List<YouTubeVideo> getNextVideos() {
+	public List<CardData> getNextVideos() {
 		if (!noMoreVideoPages()) {
 			noMoreVideoPages = true;
-			return BookmarksDb.getBookmarksDb().getBookmarkedVideos();
+			return new ArrayList<>(BookmarksDb.getBookmarksDb().getBookmarkedVideos());
 		}
 
 		return null;

@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPI;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPIKey;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
@@ -68,10 +69,10 @@ public class GetYouTubeVideoBySearch extends GetYouTubeVideos {
 
 
 	@Override
-	public List<YouTubeVideo> getNextVideos() {
+	public List<CardData> getNextVideos() {
 		setLastException(null);
 
-		List<YouTubeVideo> videosList = null;
+		List<CardData> videosList = null;
 
 		if (!noMoreVideoPages()) {
 			try {
@@ -114,7 +115,7 @@ public class GetYouTubeVideoBySearch extends GetYouTubeVideos {
 	 * @return List of {@link YouTubeVideo}s.
 	 * @throws IOException
 	 */
-	private List<YouTubeVideo> getVideosList(List<SearchResult> searchResultList) throws IOException {
+	private List<CardData> getVideosList(List<SearchResult> searchResultList) throws IOException {
 		List<String> videoIds = new ArrayList<>(searchResultList.size());
 
 		// append the video IDs into a strings (CSV)

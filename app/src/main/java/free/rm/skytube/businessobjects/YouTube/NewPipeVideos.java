@@ -24,6 +24,7 @@ import org.schabi.newpipe.extractor.InfoItem;
 import org.schabi.newpipe.extractor.exceptions.ExtractionException;
 
 import free.rm.skytube.businessobjects.Logger;
+import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.YouTube.newpipe.VideoPager;
 
@@ -43,7 +44,7 @@ public abstract class NewPipeVideos<ITEM extends InfoItem> extends GetYouTubeVid
     }
 
     @Override
-    public List<YouTubeVideo> getNextVideos() {
+    public List<CardData> getNextVideos() {
         if (pager == null) {
             try {
                 pager = createNewPager();

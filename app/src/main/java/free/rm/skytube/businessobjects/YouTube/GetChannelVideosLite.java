@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPI;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPIKey;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
@@ -70,9 +71,9 @@ public class GetChannelVideosLite extends GetYouTubeVideos implements GetChannel
 
 
 	@Override
-	public List<YouTubeVideo> getNextVideos() {
+	public List<CardData> getNextVideos() {
 		setLastException(null);
-		List<YouTubeVideo> videosList = null;
+		List<CardData> videosList = null;
 
 		if (!noMoreVideoPages) {
 			try {
@@ -111,7 +112,7 @@ public class GetChannelVideosLite extends GetYouTubeVideos implements GetChannel
 	 * @return List of {@link YouTubeVideo}s.
 	 * @throws IOException
 	 */
-	private List<YouTubeVideo> getVideosList(List<Activity> activityList) throws IOException {
+	private List<CardData> getVideosList(List<Activity> activityList) throws IOException {
         List<String> videoIds = new ArrayList<>(activityList.size());
 
 		// append the video IDs into a strings (CSV)

@@ -17,10 +17,10 @@
 
 package free.rm.skytube.businessobjects.YouTube;
 
-import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
-import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
+import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
 import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
 
 
@@ -30,15 +30,15 @@ import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
 public class GetDownloadedVideos extends GetYouTubeVideos {
 
 	@Override
-	public void init() throws IOException {
+	public void init() {
 		noMoreVideoPages = false;
 	}
 
 	@Override
-	public List<YouTubeVideo> getNextVideos() {
+	public List<CardData> getNextVideos() {
 		if (!noMoreVideoPages()) {
 			noMoreVideoPages = true;
-			return DownloadedVideosDb.getVideoDownloadsDb().getDownloadedVideos();
+			return new ArrayList<>(DownloadedVideosDb.getVideoDownloadsDb().getDownloadedVideos());
 		}
 
 		return null;

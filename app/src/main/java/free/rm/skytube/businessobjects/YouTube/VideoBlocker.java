@@ -40,6 +40,7 @@ import java.util.Set;
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.Logger;
+import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.db.ChannelFilteringDb;
@@ -73,13 +74,13 @@ public class VideoBlocker {
 	 *
 	 * @return  A list of valid videos that fit the user's criteria.
 	 */
-	public List<YouTubeVideo> filter(List<YouTubeVideo> videosList) {
+	public List<CardData> filter(List<CardData> videosList) {
 		// if the video blocker is disabled, then do not filter any videos
 		if (!isVideoBlockerEnabled()) {
 			return videosList;
 		}
 
-		List<YouTubeVideo>  filteredVideosList    = new ArrayList<>();
+		List<CardData>      filteredVideosList    = new ArrayList<>();
 		final boolean       isChannelBlacklistEnabled = isChannelBlacklistEnabled();
 		final List<String>  blacklistedChannelIds = isChannelBlacklistEnabled  ? ChannelFilteringDb.getChannelFilteringDb().getBlacklistedChannelsIdsList() : null;
 		final List<String>  whitelistedChannelIds = !isChannelBlacklistEnabled ? ChannelFilteringDb.getChannelFilteringDb().getWhitelistedChannelsIdsList() : null;
@@ -88,14 +89,19 @@ public class VideoBlocker {
 		final BigInteger    minimumVideoViews     = getViewsFilteringValue();
 		final int           minimumVideoDislikes  = getDislikesFilteringValue();
 
-		for (YouTubeVideo video : videosList) {
-			if ( !((isChannelBlacklistEnabled  &&  filterByBlacklistedChannels(video, blacklistedChannelIds))
-					|| (!isChannelBlacklistEnabled  &&  filterByWhitelistedChannels(video, whitelistedChannelIds))
-					||  filterByLanguage(video, preferredLanguages)
-					||  filterByLanguageDetection(video, preferredLanguages)
-					||  filterByViews(video, minimumVideoViews)
-					||  filterByDislikes(video, minimumVideoDislikes)) ) {
-				filteredVideosList.add(video);
+		for (CardData cardData : videosList) {
+			if (cardData instanceof YouTubeVideo) {
+				YouTubeVideo video = (YouTubeVideo) cardData;
+				if (!((isChannelBlacklistEnabled && filterByBlacklistedChannels(video, blacklistedChannelIds))
+						|| (!isChannelBlacklistEnabled && filterByWhitelistedChannels(video, whitelistedChannelIds))
+						|| filterByLanguage(video, preferredLanguages)
+						|| filterByLanguageDetection(video, preferredLanguages)
+						|| filterByViews(video, minimumVideoViews)
+						|| filterByDislikes(video, minimumVideoDislikes))) {
+					filteredVideosList.add(video);
+				}
+			} else {
+				filteredVideosList.add(cardData);
 			}
 		}
 

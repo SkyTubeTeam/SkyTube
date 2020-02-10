@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
+import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 
@@ -72,7 +73,7 @@ public class GetChannelVideosFull extends GetYouTubeVideoBySearch implements Get
 	}
 
 	@Override
-	protected List<YouTubeVideo> getVideoListFromIds(List<String> videoIds) throws IOException {
+	protected List<CardData> getVideoListFromIds(List<String> videoIds) throws IOException {
 		if (videoIds != null && !videoIds.isEmpty() && channelId != null && filterSubscribedVideos) {
 			final Set<String> videosByChannel = SubscriptionsDb.getSubscriptionsDb().getSubscribedChannelVideosByChannel(channelId);
 			videoIds.removeAll(videosByChannel);
