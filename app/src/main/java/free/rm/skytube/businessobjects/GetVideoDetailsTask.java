@@ -9,6 +9,7 @@ import org.schabi.newpipe.extractor.exceptions.ExtractionException;
 import org.schabi.newpipe.extractor.exceptions.ParsingException;
 
 import free.rm.skytube.businessobjects.YouTube.GetVideosDetailsByIDs;
+import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
 import free.rm.skytube.businessobjects.YouTube.newpipe.VideoId;
@@ -63,21 +64,6 @@ public class GetVideoDetailsTask extends AsyncTaskParallel<Void, Void, YouTubeVi
 
 		return null;
 	}
-
-	private YouTubeVideo getYoutubeVideoDetails(String videoId) {
-		try {
-			GetVideosDetailsByIDs getVideo = new GetVideosDetailsByIDs();
-			getVideo.init(videoId);
-			List<YouTubeVideo> youTubeVideos = getVideo.getNextVideos();
-			if (youTubeVideos.size() > 0) {
-				return youTubeVideos.get(0);
-			}
-		} catch (IOException ex) {
-			Logger.e(this, "Unable to get video details, where id=" + videoId, ex);
-		}
-		return null;
-	}
-
 
 	@Override
 	protected void onPostExecute(YouTubeVideo youTubeVideo) {

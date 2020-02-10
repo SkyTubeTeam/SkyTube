@@ -22,6 +22,7 @@ import java.util.Collections;
 import java.util.List;
 
 import free.rm.skytube.businessobjects.Logger;
+import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetYouTubeVideosTask;
 
@@ -55,7 +56,7 @@ public abstract class GetYouTubeVideos {
 	 *
 	 * @return List of {@link YouTubeVideo}s.
 	 */
-	public abstract List<YouTubeVideo> getNextVideos();
+	public abstract List<CardData> getNextVideos();
 
 
 	/**
@@ -93,7 +94,7 @@ public abstract class GetYouTubeVideos {
 	 * @return List of {@link YouTubeVideo}s.
 	 * @throws IOException
 	 */
-	protected List<YouTubeVideo> getVideoListFromIds(List<String> videoIds) throws IOException {
+	protected List<CardData> getVideoListFromIds(List<String> videoIds) throws IOException {
 		if (videoIds == null || videoIds.isEmpty()) {
 			return Collections.emptyList();
 		}

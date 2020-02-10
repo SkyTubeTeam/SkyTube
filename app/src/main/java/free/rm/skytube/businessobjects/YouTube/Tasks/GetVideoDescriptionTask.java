@@ -27,6 +27,7 @@ import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.GetVideoDescription;
+import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
 
@@ -84,9 +85,9 @@ public class GetVideoDescriptionTask extends AsyncTaskParallel<Void, Void, Strin
 		
 		try {
 			getVideoDescription.init(youTubeVideo.getId());
-			List<YouTubeVideo> list = getVideoDescription.getNextVideos();
+			List<CardData> list = getVideoDescription.getNextVideos();
 			if (!list.isEmpty()) {
-				return list.get(0);
+				return (YouTubeVideo) list.get(0);
 			}
 		} catch (IOException e) {
 			Logger.e(this, "error_get_video_desc - id=" + youTubeVideo.getId(), e);

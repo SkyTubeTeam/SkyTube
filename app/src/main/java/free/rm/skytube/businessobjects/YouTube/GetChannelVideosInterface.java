@@ -20,6 +20,7 @@ package free.rm.skytube.businessobjects.YouTube;
 import java.io.IOException;
 import java.util.List;
 
+import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 
 /**
@@ -52,6 +53,6 @@ public interface GetChannelVideosInterface {
 	 *
 	 * @return List of {@link YouTubeVideo}s.
 	 */
-	List<YouTubeVideo> getNextVideos();
+	List<CardData> getNextVideos();
 
 }

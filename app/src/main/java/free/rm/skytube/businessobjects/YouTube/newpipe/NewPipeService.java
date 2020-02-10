@@ -122,7 +122,7 @@ public class NewPipeService {
      */
     public List<YouTubeVideo> getChannelVideos(String channelId) throws ExtractionException, IOException {
         VideoPager pager = getChannelPager(channelId);
-        List<YouTubeVideo> result = pager.getNextPage();
+        List<YouTubeVideo> result = pager.getNextPageAsVideos();
         Logger.i(this, "getChannelVideos for %s(%s)  -> %s videos", pager.getChannel().getTitle(), channelId, result.size());
         return result;
     }
@@ -158,7 +158,7 @@ public class NewPipeService {
         Utils.requireNonNull(channelId, "channelId");
         VideoPager pager = getChannelPager(channelId);
         // get the channel, and add all the videos from the first page
-        pager.getChannel().getYouTubeVideos().addAll(pager.getNextPage());
+        pager.getChannel().getYouTubeVideos().addAll(pager.getNextPageAsVideos());
         return pager.getChannel();
     }
 

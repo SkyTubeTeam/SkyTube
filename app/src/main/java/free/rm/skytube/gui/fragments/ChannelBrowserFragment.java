@@ -38,6 +38,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import free.rm.skytube.R;
+import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannelInterface;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
@@ -156,9 +157,12 @@ public class ChannelBrowserFragment extends FragmentEx {
 		channelSubscribeButton.setOnClickListener(v -> {
 			// If we're subscribing to the channel, save the list of videos we have into the channel (to be stored in the database by SubscribeToChannelTask)
 			if(channel != null && !channel.isUserSubscribed()) {
-				Iterator<YouTubeVideo> iterator = channelVideosFragment.getVideoGridAdapter().getIterator();
+				Iterator<CardData> iterator = channelVideosFragment.getVideoGridAdapter().getIterator();
 				while (iterator.hasNext()) {
-					channel.addYouTubeVideo(iterator.next());
+					CardData cd = iterator.next();
+					if (cd instanceof YouTubeVideo) {
+						channel.addYouTubeVideo((YouTubeVideo) cd);
+					}
 				}
 			}
 		});

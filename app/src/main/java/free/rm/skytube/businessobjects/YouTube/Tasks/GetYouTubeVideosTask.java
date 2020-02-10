@@ -26,6 +26,7 @@ import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.businessobjects.YouTube.GetYouTubeVideos;
+import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.YouTube.VideoBlocker;
@@ -36,7 +37,7 @@ import free.rm.skytube.gui.businessobjects.adapters.VideoGridAdapter;
 /**
  * An asynchronous task that will retrieve YouTube videos and displays them in the supplied Adapter.
  */
-public class GetYouTubeVideosTask extends AsyncTaskParallel<Void, Void, List<YouTubeVideo>> {
+public class GetYouTubeVideosTask extends AsyncTaskParallel<Void, Void, List<CardData>> {
 
 	/** Object used to retrieve the desired YouTube videos. */
 	private final GetYouTubeVideos getYouTubeVideos;
@@ -85,13 +86,13 @@ public class GetYouTubeVideosTask extends AsyncTaskParallel<Void, Void, List<You
 
 
 	@Override
-	protected List<YouTubeVideo> doInBackground(Void... params) {
+	protected List<CardData> doInBackground(Void... params) {
 		if (isCancelled()) {
 			return null;
 		}
 
 		// get videos from YouTube or the database.
-		List<YouTubeVideo> videosList = getNextVideos();
+		List<CardData> videosList = getNextVideos();
 
 		if (videosList != null) {
 			// filter videos
@@ -100,8 +101,10 @@ public class GetYouTubeVideosTask extends AsyncTaskParallel<Void, Void, List<You
 			}
 
 			if (channel != null && channel.isUserSubscribed()) {
-				for (YouTubeVideo video : videosList) {
-					channel.addYouTubeVideo(video);
+				for (CardData video : videosList) {
+					if (video instanceof YouTubeVideo) {
+						channel.addYouTubeVideo((YouTubeVideo) video);
+					}
 				}
 				SubscriptionsDb.getSubscriptionsDb().saveChannelVideos(channel);
 			}
@@ -110,7 +113,7 @@ public class GetYouTubeVideosTask extends AsyncTaskParallel<Void, Void, List<You
 		return videosList;
 	}
 
-	private List<YouTubeVideo> getNextVideos() {
+	private List<CardData> getNextVideos() {
 		if (this.clearList && videoGridAdapter.getCurrentVideoCategory() == VideoCategory.SUBSCRIPTIONS_FEED_VIDEOS) {
 			return collectUntil(videoGridAdapter.getItemCount());
 		} else {
@@ -118,11 +121,11 @@ public class GetYouTubeVideosTask extends AsyncTaskParallel<Void, Void, List<You
 		}
 	}
 
-	private List<YouTubeVideo> collectUntil(int currentSize) {
-		List<YouTubeVideo> result = new ArrayList<>(currentSize);
+	private List<CardData> collectUntil(int currentSize) {
+		List<CardData> result = new ArrayList<>(currentSize);
 		boolean hasNew = false;
 		do {
-			List<YouTubeVideo> videosList = getYouTubeVideos.getNextVideos();
+			List<CardData> videosList = getYouTubeVideos.getNextVideos();
 			hasNew = !videosList.isEmpty();
 			result.addAll(videosList);
 		} while(result.size() < currentSize && hasNew);
@@ -130,7 +133,7 @@ public class GetYouTubeVideosTask extends AsyncTaskParallel<Void, Void, List<You
 	}
 
 	@Override
-	protected void onPostExecute(List<YouTubeVideo> videosList) {
+	protected void onPostExecute(List<CardData> videosList) {
 		SkyTubeApp.notifyUserOnError(videoGridAdapter.getContext(), getYouTubeVideos.getLastException());
 
 		if (this.clearList) {

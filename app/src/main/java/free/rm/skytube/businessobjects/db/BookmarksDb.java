@@ -32,6 +32,7 @@ import java.util.List;
 
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.Logger;
+import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.interfaces.OrderableDatabase;
@@ -158,10 +159,10 @@ public class BookmarksDb extends SQLiteOpenHelperEx implements OrderableDatabase
 	 * @param videos List of Videos to update their order.
 	 */
 	@Override
-	public void updateOrder(List<YouTubeVideo> videos) {
+	public void updateOrder(List<CardData> videos) {
 		int order = videos.size();
 
-		for(YouTubeVideo video : videos) {
+		for(CardData video : videos) {
 			ContentValues cv = new ContentValues();
 			cv.put(BookmarksTable.COL_ORDER, order--);
 			getWritableDatabase().update(BookmarksTable.TABLE_NAME, cv, BookmarksTable.COL_YOUTUBE_VIDEO_ID + " = ?", new String[]{video.getId()});
