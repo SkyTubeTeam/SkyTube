@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import androidx.annotation.NonNull;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -64,11 +66,11 @@ public class PlaybackStatusDb extends SQLiteOpenHelperEx {
 	 * is constructed that stores the watch status of all videos (that have a status). Subsequent calls to this method
 	 * will return the watch status for the passed video from this HashMap (which also gets updated by calls to setWatchedStatus().
 	 *
-	 * @param video {@link YouTubeVideo}
+	 * @param videoId {@link YouTubeVideo}
 	 * @return {@link VideoWatchedStatus} of the passed video, which contains the position (in ms) and whether or not the video
 	 * 					has been (completely) watched.
 	 */
-	public VideoWatchedStatus getVideoWatchedStatus(YouTubeVideo video) {
+	public VideoWatchedStatus getVideoWatchedStatus(@NonNull String videoId) {
 		if(playbackHistoryMap == null) {
 			Cursor cursor = getReadableDatabase().query(
 							PlaybackStatusTable.TABLE_NAME,
@@ -87,13 +89,13 @@ public class PlaybackStatusDb extends SQLiteOpenHelperEx {
 			}
 			cursor.close();
 		}
-		if(playbackHistoryMap.get(video.getId()) == null) {
+		if(playbackHistoryMap.get(videoId) == null) {
 			// Requested video has no entry in the database, so create one in the Map. No need to create it in the Database yet - if needed,
 			// that will happen when video position is set
 			VideoWatchedStatus status = new VideoWatchedStatus();
-			playbackHistoryMap.put(video.getId(), status);
+			playbackHistoryMap.put(videoId, status);
 		}
-		return playbackHistoryMap.get(video.getId());
+		return playbackHistoryMap.get(videoId);
 	}
 
 	/**

@@ -18,10 +18,10 @@
 package free.rm.skytube.businessobjects.db.Tasks;
 
 import android.view.Menu;
+import androidx.annotation.NonNull;
 
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
-import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.db.BookmarksDb;
 
 /**
@@ -30,17 +30,17 @@ import free.rm.skytube.businessobjects.db.BookmarksDb;
  * video.
  */
 public class IsVideoBookmarkedTask extends AsyncTaskParallel<Void, Void, Boolean> {
-	private Menu menu;
-	private YouTubeVideo youTubeVideo;
+	private @NonNull Menu menu;
+	private @NonNull String videoId;
 
-	public IsVideoBookmarkedTask(YouTubeVideo youTubeVideo, Menu menu) {
-		this.youTubeVideo = youTubeVideo;
+	public IsVideoBookmarkedTask(@NonNull String videoId, @NonNull Menu menu) {
+		this.videoId = videoId;
 		this.menu = menu;
 	}
 
 	@Override
 	protected Boolean doInBackground(Void... params) {
-		return BookmarksDb.getBookmarksDb().isBookmarked(youTubeVideo);
+		return BookmarksDb.getBookmarksDb().isBookmarked(videoId);
 	}
 
 	@Override

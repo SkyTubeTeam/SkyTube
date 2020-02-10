@@ -159,7 +159,7 @@ public class GridViewHolder extends RecyclerView.ViewHolder implements Serializa
 		if(SkyTubeApp.getPreferenceManager().getBoolean(context.getString(R.string.pref_key_disable_playback_status), false)) {
 			videoPositionProgressBar.setVisibility(View.INVISIBLE);
 		} else {
-			PlaybackStatusDb.VideoWatchedStatus videoWatchedStatus = PlaybackStatusDb.getPlaybackStatusDb().getVideoWatchedStatus(youTubeVideo);
+			PlaybackStatusDb.VideoWatchedStatus videoWatchedStatus = PlaybackStatusDb.getPlaybackStatusDb().getVideoWatchedStatus(youTubeVideo.getId());
 			if (videoWatchedStatus.isWatched()) {
 				videoPositionProgressBar.setVisibility(View.VISIBLE);
 				videoPositionProgressBar.setMax(youTubeVideo.getDurationInSeconds() * 1000);
@@ -180,11 +180,11 @@ public class GridViewHolder extends RecyclerView.ViewHolder implements Serializa
 		final PopupMenu popupMenu = new PopupMenu(view.getContext(), view);
 		popupMenu.getMenuInflater().inflate(R.menu.video_options_menu, popupMenu.getMenu());
 		Menu menu = popupMenu.getMenu();
-		new IsVideoBookmarkedTask(youTubeVideo, menu).executeInParallel();
+		new IsVideoBookmarkedTask(youTubeVideo.getId(), menu).executeInParallel();
 
 		// If playback history is not disabled, see if this video has been watched. Otherwise, hide the "mark watched" & "mark unwatched" options from the menu.
 		if(!SkyTubeApp.getPreferenceManager().getBoolean(context.getString(R.string.pref_key_disable_playback_status), false)) {
-			new IsVideoWatchedTask(youTubeVideo, menu).executeInParallel();
+			new IsVideoWatchedTask(youTubeVideo.getId(), menu).executeInParallel();
 		} else {
 			popupMenu.getMenu().findItem(R.id.mark_watched).setVisible(false);
 			popupMenu.getMenu().findItem(R.id.mark_unwatched).setVisible(false);

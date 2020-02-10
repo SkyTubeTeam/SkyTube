@@ -23,7 +23,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -173,16 +172,16 @@ public class BookmarksDb extends SQLiteOpenHelperEx implements OrderableDatabase
 	/**
 	 * Check if the specified Video has been bookmarked.
 	 *
-	 * @param video Video to check
+	 * @param videoId Video to check
 	 *
 	 * @return True if it has been bookmarked, false if not.
 	 */
-	public boolean isBookmarked(YouTubeVideo video) {
+	public boolean isBookmarked(String videoId) {
 		Cursor cursor = getReadableDatabase().query(
 						BookmarksTable.TABLE_NAME,
 						new String[]{BookmarksTable.COL_YOUTUBE_VIDEO_ID},
 						BookmarksTable.COL_YOUTUBE_VIDEO_ID + " = ?",
-						new String[]{video.getId()}, null, null, null);
+						new String[]{videoId}, null, null, null);
 		boolean	hasVideo = cursor.moveToNext();
 
 		cursor.close();

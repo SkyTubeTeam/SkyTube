@@ -19,12 +19,8 @@ package free.rm.skytube.gui.businessobjects;
 import android.content.Context;
 import androidx.annotation.NonNull;
 
-import com.afollestad.materialdialogs.DialogAction;
-import com.afollestad.materialdialogs.MaterialDialog;
-
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
-import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.db.PlaybackStatusDb;
 
 /**
@@ -39,11 +35,11 @@ public class ResumeVideoTask {
 
     private final @NonNull Context context;
     private final @NonNull Callback callback;
-    private final @NonNull YouTubeVideo youTubeVideo;
+    private final @NonNull String videoId;
 
-    public ResumeVideoTask(@NonNull Context context, @NonNull YouTubeVideo youTubeVideo, @NonNull Callback callback) {
+    public ResumeVideoTask(@NonNull Context context, @NonNull String videoId, @NonNull Callback callback) {
         this.context = context;
-        this.youTubeVideo = youTubeVideo;
+        this.videoId = videoId;
         this.callback = callback;
     }
 
@@ -54,7 +50,7 @@ public class ResumeVideoTask {
      */
     public void ask() {
         if(!SkyTubeApp.getPreferenceManager().getBoolean(context.getString(R.string.pref_key_disable_playback_status), false)) {
-            final PlaybackStatusDb.VideoWatchedStatus watchStatus = PlaybackStatusDb.getPlaybackStatusDb().getVideoWatchedStatus(youTubeVideo);
+            final PlaybackStatusDb.VideoWatchedStatus watchStatus = PlaybackStatusDb.getPlaybackStatusDb().getVideoWatchedStatus(videoId);
             if (watchStatus.getPosition() > 0) {
                 new SkyTubeMaterialDialog(context)
                         .onNegativeOrCancel((dialog) -> callback.loadVideo(0))
