@@ -120,7 +120,7 @@ public class YouTubePlayer {
 			new Handler().postDelayed(() -> launch(youTubeVideo, context), 500);
 		} else {
 			if (context instanceof ChromecastListener) {
-				final PlaybackStatusDb.VideoWatchedStatus status = PlaybackStatusDb.getPlaybackStatusDb().getVideoWatchedStatus(youTubeVideo);
+				final PlaybackStatusDb.VideoWatchedStatus status = PlaybackStatusDb.getPlaybackStatusDb().getVideoWatchedStatus(youTubeVideo.getId());
 				if(!SkyTubeApp.getPreferenceManager().getBoolean(context.getString(R.string.pref_key_disable_playback_status), false) && status.getPosition() > 0) {
 					new AlertDialog.Builder(context)
 									.setTitle(R.string.should_resume)
