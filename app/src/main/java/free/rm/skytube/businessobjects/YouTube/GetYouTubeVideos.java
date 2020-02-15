@@ -34,7 +34,7 @@ import free.rm.skytube.businessobjects.YouTube.Tasks.GetYouTubeVideosTask;
 public abstract class GetYouTubeVideos {
 	protected String nextPageToken = null;
 	protected boolean noMoreVideoPages = false;
-	private IOException lastException;
+	private Exception lastException;
 
 	/**
 	 * Initialise this object.
@@ -76,11 +76,11 @@ public abstract class GetYouTubeVideos {
 		lastException = null;
 	}
 
-	public IOException getLastException() {
+	public Exception getLastException() {
 		return lastException;
 	}
 
-	protected void setLastException(IOException lastException) {
+	protected void setLastException(Exception lastException) {
 		this.lastException = lastException;
 	}
 

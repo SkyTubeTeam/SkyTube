@@ -50,6 +50,7 @@ public abstract class NewPipeVideos<ITEM extends InfoItem> extends GetYouTubeVid
                 pager = createNewPager();
             } catch (ExtractionException | IOException e) {
                 Logger.e(this, "An error has occurred while getting videos:" + e.getMessage(), e);
+                setLastException(e);
                 return Collections.emptyList();
             }
         }
@@ -57,6 +58,7 @@ public abstract class NewPipeVideos<ITEM extends InfoItem> extends GetYouTubeVid
             return pager.getNextPage();
         } catch (IOException | ExtractionException e) {
             Logger.e(this, "An error has occurred while getting videos:" + e.getMessage(), e);
+            setLastException(e);
             return Collections.emptyList();
         } finally {
             noMoreVideoPages = !pager.isHasNextPage();
