@@ -32,6 +32,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
+import org.schabi.newpipe.extractor.playlist.PlaylistInfoItem;
+
 import java.io.Serializable;
 
 import butterknife.BindView;
@@ -85,7 +87,7 @@ public class GridViewHolder extends RecyclerView.ViewHolder implements Serializa
 	ProgressBar videoPositionProgressBar;
 
 	@BindView(R.id.options_button)
-	View optionButton;
+	View optionsButton;
 
 
 	/**
@@ -108,20 +110,23 @@ public class GridViewHolder extends RecyclerView.ViewHolder implements Serializa
 			if (currentCard instanceof YouTubeVideo) {
 				YouTubePlayer.launch((YouTubeVideo) currentCard, context);
 			} else if (currentCard instanceof YouTubePlaylist) {
-
-
+				mainActivityListener.onPlaylistClick((YouTubePlaylist) currentCard);
 			}
 		});
 
 		View.OnClickListener channelOnClickListener = v -> {
-			if((mainActivityListener != null) && (currentCard instanceof YouTubeVideo)) {
-				mainActivityListener.onChannelClick(((YouTubeVideo)currentCard).getChannelId());
+			if(mainActivityListener != null) {
+				if (currentCard instanceof YouTubeVideo) {
+					mainActivityListener.onChannelClick(((YouTubeVideo) currentCard).getChannelId());
+				} else if (currentCard instanceof YouTubePlaylist) {
+					mainActivityListener.onPlaylistClick((YouTubePlaylist) currentCard);
+				}
 			}
 		};
 
 		view.findViewById(R.id.channel_layout).setOnClickListener(showChannelInfo ? channelOnClickListener : null);
 
-		optionButton.setOnClickListener(v -> onOptionsButtonClick(v));
+		optionsButton.setOnClickListener(v -> onOptionsButtonClick(v));
 	}
 
 	/**
@@ -151,14 +156,19 @@ public class GridViewHolder extends RecyclerView.ViewHolder implements Serializa
 
 		if (currentCard instanceof YouTubeVideo) {
 			updateViewsData((YouTubeVideo) currentCard);
-		} else {
-			channelTextView.setVisibility(View.INVISIBLE);
-			videoDurationTextView.setVisibility(View.INVISIBLE);
-			viewsTextView.setVisibility(View.INVISIBLE);
-			thumbsUpPercentageTextView.setVisibility(View.INVISIBLE);
-			videoPositionProgressBar.setVisibility(View.INVISIBLE);
-			channelTextView.setVisibility(View.INVISIBLE);
+		} else if (currentCard instanceof YouTubePlaylist) {
+			updateViewsData((YouTubePlaylist) currentCard);
 		}
+	}
+	private void updateViewsData(@NonNull YouTubePlaylist playlistInfoItem) {
+		viewsTextView.setText(String.format(context.getString(R.string.num_videos), playlistInfoItem.getVideoCount()));
+
+		thumbsUpPercentageTextView.setVisibility(View.GONE);
+		videoDurationTextView.setVisibility(View.GONE);
+		channelTextView.setVisibility(View.GONE);
+		optionsButton.setVisibility(View.GONE);
+
+		videoPositionProgressBar.setVisibility(View.GONE);
 	}
 
 	private void updateViewsData(@NonNull YouTubeVideo youTubeVideo) {

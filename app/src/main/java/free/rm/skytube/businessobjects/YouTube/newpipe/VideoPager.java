@@ -22,6 +22,7 @@ import org.schabi.newpipe.extractor.StreamingService;
 import org.schabi.newpipe.extractor.exceptions.ExtractionException;
 import org.schabi.newpipe.extractor.exceptions.ParsingException;
 import org.schabi.newpipe.extractor.linkhandler.LinkHandlerFactory;
+import org.schabi.newpipe.extractor.linkhandler.ListLinkHandlerFactory;
 import org.schabi.newpipe.extractor.playlist.PlaylistInfoItem;
 import org.schabi.newpipe.extractor.stream.StreamInfoItem;
 
@@ -57,10 +58,12 @@ public class VideoPager extends Pager<InfoItem, CardData> {
         Logger.i(this, "extract from %s, items: %s", page, page.getItems().size());
         int repeatCounter = 0;
         int unexpected = 0;
-        LinkHandlerFactory linkHandlerFactory = getStreamingService().getStreamLHFactory();
+        LinkHandlerFactory streamLinkHandler = getStreamingService().getStreamLHFactory();
+        ListLinkHandlerFactory playlistLinkHandler = getStreamingService().getPlaylistLHFactory();
+
         for (InfoItem infoItem : page.getItems()) {
-            String id = linkHandlerFactory.getId(infoItem.getUrl());
             if (infoItem instanceof StreamInfoItem) {
+                String id = streamLinkHandler.getId(infoItem.getUrl());
                 StreamInfoItem streamInfo = (StreamInfoItem) infoItem;
                 if (seenVideos.contains(id)) {
                     repeatCounter++;
@@ -70,7 +73,7 @@ public class VideoPager extends Pager<InfoItem, CardData> {
                 }
             } else if (infoItem instanceof PlaylistInfoItem) {
                 PlaylistInfoItem playlistInfoItem = (PlaylistInfoItem) infoItem;
-                result.add(convert(playlistInfoItem, id));
+                result.add(convert(playlistInfoItem, playlistLinkHandler.getId(infoItem.getUrl())));
             } else {
                 Logger.i(this, "Unexpected item %s, type:%s", infoItem, infoItem.getClass());
                 unexpected ++;
