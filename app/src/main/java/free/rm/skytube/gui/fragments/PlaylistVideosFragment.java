@@ -88,7 +88,7 @@ public class PlaylistVideosFragment extends VideosGridFragment {
 
 	@Override
 	protected VideoCategory getVideoCategory() {
-		return VideoCategory.PLAYLIST_VIDEOS;
+		return youTubePlaylist.getChannelTitle() != null ? VideoCategory.PLAYLIST_VIDEOS : VideoCategory.MIXED_PLAYLIST_VIDEOS;
 	}
 
 
