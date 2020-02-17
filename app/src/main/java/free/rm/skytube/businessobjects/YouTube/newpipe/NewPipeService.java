@@ -37,6 +37,7 @@ import org.schabi.newpipe.extractor.linkhandler.ListLinkHandlerFactory;
 import org.schabi.newpipe.extractor.localization.DateWrapper;
 import org.schabi.newpipe.extractor.playlist.PlaylistExtractor;
 import org.schabi.newpipe.extractor.search.SearchExtractor;
+import org.schabi.newpipe.extractor.stream.Description;
 import org.schabi.newpipe.extractor.stream.StreamExtractor;
 import org.schabi.newpipe.extractor.stream.StreamInfo;
 import org.schabi.newpipe.extractor.stream.VideoStream;
@@ -260,10 +261,19 @@ public class NewPipeService {
         return "https://i.ytimg.com/vi/" + id + "/hqdefault.jpg";
     }
 
-    private String filterHtml(String htmlContent) {
-        String result = Jsoup.clean(htmlContent, "", Whitelist.none(), new OutputSettings().prettyPrint(false));
+    private String filterHtml(String content) {
+        return Jsoup.clean(content, "", Whitelist.none(), new OutputSettings().prettyPrint(false));
+    }
+
+    private String filterHtml(Description description) {
+        String result;
+        if (description.getType() == Description.HTML) {
+            result = filterHtml(description.getContent());
+        } else {
+            result = description.getContent();
+        }
         if (DEBUG_LOG) {
-            Logger.d(this, "filterHtml %s -> %s", htmlContent, result);
+            Logger.d(this, "filterHtml %s -> %s", description, result);
         }
         return result;
     }
