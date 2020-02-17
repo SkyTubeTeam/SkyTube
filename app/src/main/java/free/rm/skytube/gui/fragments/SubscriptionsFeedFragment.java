@@ -89,6 +89,10 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 	private static final int    REFRESH_TIME_HOURS = 3;
 	private static final long   REFRESH_TIME_IN_MS = REFRESH_TIME_HOURS * (1000L*3600L);
 
+	private static final String NOTIFICATION_CHANNEL_NAME = "SkyTube";
+	private static final String NOTIFICATION_CHANNEL_ID = "subscriptionChecking";
+	private static final int NOTIFICATION_ID = 1;
+
 	@Override
 	protected int getLayoutResource() {
 		return R.layout.fragment_subs_feed;
@@ -191,27 +195,22 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 	private void showNotification() {
 		// Sets an ID for the notification, so it can be updated.
 		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-			int notifyID = 1;
-			String CHANNEL_ID = "my_channel_01";// The id of the channel.
-			String name = "channelName";// The user-visible name of the channel.
-			int importance = NotificationManager.IMPORTANCE_HIGH;
 			NotificationManager mNotificationManager =
 					(NotificationManager) getContext().getSystemService(Context.NOTIFICATION_SERVICE);
-			Notification notification = new Notification();
 
-			NotificationChannel mChannel = new NotificationChannel(CHANNEL_ID, name, importance);
+			NotificationChannel mChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, NOTIFICATION_CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH);
 			mChannel.setSound(null,null);
 			// Create a notification and set the notification channel.
-			notification = new Notification.Builder(getContext(), name)
+			Notification notification = new Notification.Builder(getContext(), NOTIFICATION_CHANNEL_NAME)
 					.setSmallIcon(R.drawable.ic_notification_icon)
 					.setContentTitle(getString(R.string.fetching_subscription_videos))
 					.setContentText(String.format(getContext().getString(R.string.fetched_videos_from_channels), numVideosFetched, numChannelsFetched, numChannelsSubscribed))
-					.setChannelId(CHANNEL_ID)
+					.setChannelId(NOTIFICATION_CHANNEL_ID)
 					.build();
 			mNotificationManager.createNotificationChannel(mChannel);
 
 // Issue the notification.
-			mNotificationManager.notify(notifyID , notification);
+			mNotificationManager.notify(NOTIFICATION_ID , notification);
 		} else {
 			final Intent emptyIntent = new Intent();
 			PendingIntent pendingIntent = PendingIntent.getActivity(getContext(), 1, emptyIntent, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -224,14 +223,9 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 
 
 			NotificationManager notificationManager = (NotificationManager) getContext().getSystemService(Context.NOTIFICATION_SERVICE);
-			notificationManager.notify(1, builder.build());
+			notificationManager.notify(NOTIFICATION_ID, builder.build());
 		}
 	}
-
-	private void showRefreshDialog() {
-		showNotification();
-	}
-
 
 	@Override
 	public void onRefresh() {
@@ -251,7 +245,6 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 			videoGridAdapter.refresh(true);
 		}
 	}
-
 
 	@Override
 	public void onChannelVideosFetched(String channelId, int videosFetched, final boolean videosDeleted) {
@@ -275,20 +268,21 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 			refreshInProgress = false;
 			// Remove the progress bar(s)
 			swipeRefreshLayout.setRefreshing(false);
+			Context context = getContext();
 
-			NotificationManager notificationManager = (NotificationManager)  getContext().getSystemService(Context.NOTIFICATION_SERVICE);
+			NotificationManager notificationManager = (NotificationManager)  context.getSystemService(Context.NOTIFICATION_SERVICE);
 
-			notificationManager.cancel(1);
+			notificationManager.cancel(NOTIFICATION_ID);
 
 			if(changed) {
 				refreshFeedFromCache();
+				Toast.makeText(context,
+						String.format(context.getString(R.string.fetched_videos_from_channels),
+								numVideosFetched, numChannelsFetched, numChannelsSubscribed), Toast.LENGTH_LONG).show();
 			} else {
-				// Only show the toast that no videos were found if the progress dialog is sh
-				if(isFragmentSelected()) {
-					Toast.makeText(getContext(),
+				Toast.makeText(context,
 									R.string.no_new_videos_found,
 									Toast.LENGTH_LONG).show();
-				}
 			}
 		}, 500);
 	}
