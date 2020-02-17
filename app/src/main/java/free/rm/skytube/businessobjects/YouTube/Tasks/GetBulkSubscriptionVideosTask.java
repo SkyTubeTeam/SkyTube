@@ -144,7 +144,7 @@ public class GetBulkSubscriptionVideosTask extends AsyncTaskParallel<Void, GetBu
 
     private List<YouTubeVideo> fetchVideos(Set<String> alreadyKnownVideos, YouTubeChannel dbChannel) {
         try {
-            List<YouTubeVideo> videos = NewPipeService.get().getChannelVideos(dbChannel.getId());
+            List<YouTubeVideo> videos = NewPipeService.get().getVideosFromFeedOrFromChannel(dbChannel.getId());
             Predicate<YouTubeVideo> predicate = video -> alreadyKnownVideos.contains(video.getId());
             // If we found a video which is already added to the db, no need to check the videos after,
             // assume, they are older, and already seen

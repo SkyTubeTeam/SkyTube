@@ -22,6 +22,7 @@ import java.util.List;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document.OutputSettings;
 import org.jsoup.safety.Whitelist;
+import org.schabi.newpipe.extractor.InfoItem;
 import org.schabi.newpipe.extractor.ListExtractor;
 import org.schabi.newpipe.extractor.NewPipe;
 import org.schabi.newpipe.extractor.ServiceList;
@@ -31,6 +32,7 @@ import org.schabi.newpipe.extractor.comments.CommentsExtractor;
 import org.schabi.newpipe.extractor.exceptions.ContentNotAvailableException;
 import org.schabi.newpipe.extractor.exceptions.ExtractionException;
 import org.schabi.newpipe.extractor.exceptions.ParsingException;
+import org.schabi.newpipe.extractor.feed.FeedExtractor;
 import org.schabi.newpipe.extractor.linkhandler.LinkHandler;
 import org.schabi.newpipe.extractor.linkhandler.ListLinkHandler;
 import org.schabi.newpipe.extractor.linkhandler.ListLinkHandlerFactory;
@@ -115,17 +117,55 @@ public class NewPipeService {
     }
 
     /**
-     * Return the post recent videos for the given channel
+     * Return the most recent videos for the given channel
      * @param channelId the id of the channel
      * @return list of recent {@link YouTubeVideo}.
      * @throws ExtractionException
      * @throws IOException
      */
-    public List<YouTubeVideo> getChannelVideos(String channelId) throws ExtractionException, IOException {
+    private List<YouTubeVideo> getChannelVideos(String channelId) throws ExtractionException, IOException {
         VideoPager pager = getChannelPager(channelId);
         List<YouTubeVideo> result = pager.getNextPageAsVideos();
         Logger.i(this, "getChannelVideos for %s(%s)  -> %s videos", pager.getChannel().getTitle(), channelId, result.size());
         return result;
+    }
+
+    /**
+     * Return the most recent videos for the given channel from a dedicated feed (with a {@link FeedExtractor}).
+     * @param channelId the id of the channel
+     * @return list of recent {@link YouTubeVideo}, or null, if there is no feed.
+     * @throws ExtractionException
+     * @throws IOException
+     */
+    private List<YouTubeVideo> getFeedVideos(String channelId) throws ExtractionException, IOException {
+        final String url = getListLinkHandler(channelId).getUrl();
+        final FeedExtractor feedExtractor = streamingService.getFeedExtractor(url);
+        if (feedExtractor == null) {
+            Logger.i(this, "getFeedExtractor doesn't return anything for %s -> %s", channelId, url);
+            return null;
+        }
+        feedExtractor.fetchPage();
+        return new VideoPager(streamingService, (ListExtractor)feedExtractor, createInternalChannelFromFeed(feedExtractor)).getNextPageAsVideos();
+    }
+
+    /**
+     * Return the most recent videos for the given channel, either from a dedicated feed (with a {@link FeedExtractor} or from
+     * the generic {@link ChannelExtractor}.
+     * @param channelId the id of the channel
+     * @return list of recent {@link YouTubeVideo}.
+     * @throws ExtractionException
+     * @throws IOException
+     */
+    public List<YouTubeVideo> getVideosFromFeedOrFromChannel(String channelId) throws IOException, ExtractionException {
+        try {
+            List<YouTubeVideo> videos = getFeedVideos(channelId);
+            if (videos != null) {
+                return videos;
+            }
+        } catch (IOException | ExtractionException e) {
+            Logger.e(this, "Unable to get videos from a feed " + channelId + " : "+ e.getMessage(), e);
+        }
+        return getChannelVideos(channelId);
     }
 
     public VideoPager getChannelPager(String channelId) throws ExtractionException, IOException {
@@ -161,6 +201,11 @@ public class NewPipeService {
         // get the channel, and add all the videos from the first page
         pager.getChannel().getYouTubeVideos().addAll(pager.getNextPageAsVideos());
         return pager.getChannel();
+    }
+
+    private YouTubeChannel createInternalChannelFromFeed(FeedExtractor extractor) throws ParsingException {
+        return new YouTubeChannel(extractor.getId(), extractor.getName(), null,
+                null, null, -1, false, 0, System.currentTimeMillis());
     }
 
     private YouTubeChannel createInternalChannel(ChannelExtractor extractor) throws ParsingException {
