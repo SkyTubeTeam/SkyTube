@@ -83,7 +83,7 @@ public class VideoPager extends Pager<InfoItem, CardData> {
         return result;
     }
 
-    public List<YouTubeVideo> getNextPageAsVideos() throws ParsingException, IOException, ExtractionException {
+    public List<YouTubeVideo> getNextPageAsVideos() throws IOException, ExtractionException {
         List<CardData> cards = getNextPage();
         List<YouTubeVideo> result = new ArrayList<>(cards.size());
         for (CardData cardData: cards) {
