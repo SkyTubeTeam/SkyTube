@@ -148,7 +148,7 @@ public class GetBulkSubscriptionVideosTask extends AsyncTaskParallel<Void, GetBu
             Predicate<YouTubeVideo> predicate = video -> alreadyKnownVideos.contains(video.getId());
             // If we found a video which is already added to the db, no need to check the videos after,
             // assume, they are older, and already seen
-            predicate.removeAfter(videos);
+            predicate.removeIf(videos);
             return videos;
         } catch (ExtractionException | IOException e) {
             Logger.e(this, "Error during fetching channel page for " + dbChannel + ",msg:" + e.getMessage(), e);
