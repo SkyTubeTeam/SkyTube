@@ -262,45 +262,33 @@ public class NewPipeService {
         StreamExtractor extractor = streamingService.getStreamExtractor(url);
         extractor.fetchPage();
 
-        String textualUploadDate = extractor.getTextualUploadDate();
-        Long uploadTimestamp;
-        if (textualUploadDate != null && !textualUploadDate.trim().isEmpty()) {
-            DateWrapper uploadDate = extractor.getUploadDate();
-            uploadTimestamp = getPublishDate(uploadDate);
-        } else {
-            uploadTimestamp = System.currentTimeMillis();
-        }
+        DateInfo uploadDate = new DateInfo(extractor.getUploadDate());
 
         YouTubeVideo video = new YouTubeVideo(extractor.getId(), extractor.getName(), filterHtml(extractor.getDescription()),
                 extractor.getLength(), new YouTubeChannel(extractor.getUploaderUrl(), extractor.getUploaderName()),
-                extractor.getViewCount(), uploadTimestamp, extractor.getThumbnailUrl());
+                extractor.getViewCount(), uploadDate.timestamp, uploadDate.approximation, extractor.getThumbnailUrl());
         video.setLikeDislikeCount(extractor.getLikeCount(), extractor.getDislikeCount());
         video.setRetrievalTimestamp(System.currentTimeMillis());
         // Logger.i(this, " -> publishDate is %s, pretty: %s - orig value: %s", video.getPublishDate(),video.getPublishDatePretty(), uploadDate);
         return video;
     }
 
-    static Long getPublishDate(DateWrapper date) {
-        if (date != null && date.date() != null) {
-            return date.date().getTimeInMillis();
-        } else {
-            return System.currentTimeMillis();
+    static class DateInfo {
+        boolean approximation;
+        Long timestamp;
+
+        public DateInfo(DateWrapper uploadDate) {
+            if (uploadDate != null) {
+                timestamp = uploadDate.date().getTimeInMillis();
+                approximation = uploadDate.isApproximation();
+            } else {
+                timestamp = System.currentTimeMillis();
+                approximation = true;
+            }
+
         }
     }
-/*
-    static long getPublishDate(String dateStr) throws ParseException {
-        Date publishDate = new SimpleDateFormat("yyyy-MM-dd").parse(dateStr);
-        // TODO: publish date is not accurate - as only date precision is available
-        // So it's more convenient, if the upload date happened in this day, we just assume, that it happened a minute
-        // ago, so new videos appear in a better order in the Feed fragment.
-        final long now = System.currentTimeMillis();
-        if (publishDate.getTime() > (now - (24 * 3600 * 1000))) {
-            return now - 60000;
-        } else {
-            return publishDate.getTime();
-        }
-    }
-*/
+
     static String getThumbnailUrl(String id) {
         // Logger.d(NewPipeService.class, "getThumbnailUrl  %s", id);
         return "https://i.ytimg.com/vi/" + id + "/hqdefault.jpg";
