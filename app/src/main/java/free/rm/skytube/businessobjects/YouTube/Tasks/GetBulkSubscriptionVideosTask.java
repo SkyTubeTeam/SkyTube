@@ -69,8 +69,6 @@ public class GetBulkSubscriptionVideosTask extends AsyncTaskParallel<Void, GetBu
 
     @Override
     protected Boolean doInBackground(Void... params) {
-        Set<String> alreadyKnownVideos = subscriptionsDb.getSubscribedChannelVideos();
-
         AtomicBoolean changed = new AtomicBoolean(false);
         CountDownLatch countDown = new CountDownLatch(channels.size());
 
@@ -83,6 +81,7 @@ public class GetBulkSubscriptionVideosTask extends AsyncTaskParallel<Void, GetBu
 
                     @Override
                     protected Integer doInBackground(Void... voids) {
+                        Set<String> alreadyKnownVideos = subscriptionsDb.getSubscribedChannelVideosByChannel(dbChannel.getId());
                         List<YouTubeVideo> newVideos = fetchVideos(alreadyKnownVideos, dbChannel);
                         List<YouTubeVideo> detailedList = new ArrayList<>();
                         if (!newVideos.isEmpty()) {
@@ -90,6 +89,10 @@ public class GetBulkSubscriptionVideosTask extends AsyncTaskParallel<Void, GetBu
                                 YouTubeVideo details;
                                 try {
                                     details = NewPipeService.get().getDetails(vid.getId());
+                                    if (Boolean.FALSE.equals(vid.getPublishTimestampApproximate())) {
+                                        details.setPublishTimestamp(vid.getPublishTimestamp());
+                                        details.setPublishTimestampApproximate(vid.getPublishTimestampApproximate());
+                                    }
                                     details.setChannel(dbChannel);
                                     detailedList.add(details);
                                 } catch (ExtractionException | IOException e) {

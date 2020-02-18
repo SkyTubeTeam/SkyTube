@@ -95,10 +95,10 @@ public class VideoPager extends Pager<InfoItem, CardData> {
     }
 
     private YouTubeVideo convert(StreamInfoItem item, String id) throws ParsingException {
-        Long publishDate = NewPipeService.getPublishDate(item.getUploadDate());
+        NewPipeService.DateInfo date = new NewPipeService.DateInfo(item.getUploadDate());
         YouTubeChannel ch = channel != null ? channel : new YouTubeChannel(item.getUploaderUrl(), item.getUploaderName());
         return new YouTubeVideo(id, item.getName(), null, item.getDuration(), ch,
-                item.getViewCount(), publishDate, NewPipeService.getThumbnailUrl(id));
+                item.getViewCount(), date.timestamp, date.approximation, NewPipeService.getThumbnailUrl(id));
     }
 
     private CardData convert(PlaylistInfoItem playlistInfoItem, String id) {
