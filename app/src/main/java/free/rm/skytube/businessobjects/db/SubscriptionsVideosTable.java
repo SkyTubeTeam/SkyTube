@@ -29,6 +29,8 @@ public class SubscriptionsVideosTable {
 	public static final String COL_RETRIEVAL_TS = "Retrieval_Timestamp";
 	public static final String COL_PUBLISH_TS = "Publish_Timestamp";
 
+	public static final String COL_YOUTUBE_VIDEO_ID_EQUALS_TO = SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID + " = ?";
+
 	static final String[] ALL_COLUMNS_FOR_EXTRACT = new String[] {
 			COL_CHANNEL_ID,
 			COL_YOUTUBE_VIDEO_ID,

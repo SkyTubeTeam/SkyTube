@@ -7,7 +7,7 @@ public class CardData implements Serializable {
     protected String              title;
     protected String              description;
     protected Long                publishTimestamp;
-    protected Boolean             publishTimestampApproximate;
+    protected Boolean             publishTimestampExact;
     protected String              thumbnailUrl;
 
     /**
@@ -46,12 +46,12 @@ public class CardData implements Serializable {
         this.description = description;
     }
 
-    public void setPublishTimestampApproximate(Boolean publishTimestampApproximate) {
-        this.publishTimestampApproximate = publishTimestampApproximate;
+    public void setPublishTimestampExact(Boolean publishTimestampExact) {
+        this.publishTimestampExact = publishTimestampExact;
     }
 
-    public Boolean getPublishTimestampApproximate() {
-        return publishTimestampApproximate;
+    public Boolean getPublishTimestampExact() {
+        return publishTimestampExact;
     }
 
     public final Long getPublishTimestamp() {

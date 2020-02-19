@@ -16,7 +16,11 @@
  */
 package free.rm.skytube.businessobjects.YouTube.newpipe;
 
+import androidx.annotation.NonNull;
+
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.jsoup.Jsoup;
@@ -263,29 +267,42 @@ public class NewPipeService {
         extractor.fetchPage();
 
         DateInfo uploadDate = new DateInfo(extractor.getUploadDate());
+        Logger.i(this, "getDetails for %s -> %s %s", videoId, url.getUrl(), uploadDate);
 
         YouTubeVideo video = new YouTubeVideo(extractor.getId(), extractor.getName(), filterHtml(extractor.getDescription()),
                 extractor.getLength(), new YouTubeChannel(extractor.getUploaderUrl(), extractor.getUploaderName()),
-                extractor.getViewCount(), uploadDate.timestamp, uploadDate.approximation, extractor.getThumbnailUrl());
-        video.setLikeDislikeCount(extractor.getLikeCount(), extractor.getDislikeCount());
+                extractor.getViewCount(), uploadDate.timestamp, uploadDate.exact, extractor.getThumbnailUrl());
+        try {
+            video.setLikeDislikeCount(extractor.getLikeCount(), extractor.getDislikeCount());
+        } catch (ParsingException pe) {
+            Logger.e(this, "Unable get like count for " + url.getUrl() + ", created at " + uploadDate + ", error:" + pe.getMessage(), pe);
+            video.setLikeDislikeCount(null, null);
+        }
         video.setRetrievalTimestamp(System.currentTimeMillis());
         // Logger.i(this, " -> publishDate is %s, pretty: %s - orig value: %s", video.getPublishDate(),video.getPublishDatePretty(), uploadDate);
         return video;
     }
 
     static class DateInfo {
-        boolean approximation;
+        boolean exact;
         Long timestamp;
 
         public DateInfo(DateWrapper uploadDate) {
             if (uploadDate != null) {
                 timestamp = uploadDate.date().getTimeInMillis();
-                approximation = uploadDate.isApproximation();
+                exact = !uploadDate.isApproximation();
             } else {
                 timestamp = System.currentTimeMillis();
-                approximation = true;
+                exact = false;
             }
 
+        }
+
+        static final SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        @NonNull
+        @Override
+        public String toString() {
+            return "[time= " + sdf.format(new Date(timestamp)) + ",exact=" + exact + ']';
         }
     }
 

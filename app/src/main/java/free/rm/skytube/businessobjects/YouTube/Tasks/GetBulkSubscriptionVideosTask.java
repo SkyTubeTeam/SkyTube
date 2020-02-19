@@ -20,7 +20,9 @@ package free.rm.skytube.businessobjects.YouTube.Tasks;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Semaphore;
@@ -81,7 +83,7 @@ public class GetBulkSubscriptionVideosTask extends AsyncTaskParallel<Void, GetBu
 
                     @Override
                     protected Integer doInBackground(Void... voids) {
-                        Set<String> alreadyKnownVideos = subscriptionsDb.getSubscribedChannelVideosByChannel(dbChannel.getId());
+                        Map<String, Long> alreadyKnownVideos = subscriptionsDb.getSubscribedChannelVideosByChannelToTimestamp(dbChannel.getId());
                         List<YouTubeVideo> newVideos = fetchVideos(alreadyKnownVideos, dbChannel);
                         List<YouTubeVideo> detailedList = new ArrayList<>();
                         if (!newVideos.isEmpty()) {
@@ -89,15 +91,17 @@ public class GetBulkSubscriptionVideosTask extends AsyncTaskParallel<Void, GetBu
                                 YouTubeVideo details;
                                 try {
                                     details = NewPipeService.get().getDetails(vid.getId());
-                                    if (Boolean.FALSE.equals(vid.getPublishTimestampApproximate())) {
+                                    if (Boolean.TRUE.equals(vid.getPublishTimestampExact())) {
+                                        Logger.i(this, "updating %s with %s from %s", vid.getTitle(),
+                                                new Date(vid.getPublishTimestamp()),
+                                                new Date(details.getPublishTimestamp()));
                                         details.setPublishTimestamp(vid.getPublishTimestamp());
-                                        details.setPublishTimestampApproximate(vid.getPublishTimestampApproximate());
+                                        details.setPublishTimestampExact(vid.getPublishTimestampExact());
                                     }
                                     details.setChannel(dbChannel);
                                     detailedList.add(details);
                                 } catch (ExtractionException | IOException e) {
                                     Logger.e(this, "Error during parsing video page for " + vid.getId() + ",msg:" + e.getMessage(), e);
-                                    e.printStackTrace();
                                 }
                             }
                             changed.compareAndSet(false, true);
@@ -145,10 +149,19 @@ public class GetBulkSubscriptionVideosTask extends AsyncTaskParallel<Void, GetBu
         }
     }
 
-    private List<YouTubeVideo> fetchVideos(Set<String> alreadyKnownVideos, YouTubeChannel dbChannel) {
+    private List<YouTubeVideo> fetchVideos(Map<String, Long> alreadyKnownVideos, YouTubeChannel dbChannel) {
         try {
             List<YouTubeVideo> videos = NewPipeService.get().getVideosFromFeedOrFromChannel(dbChannel.getId());
-            Predicate<YouTubeVideo> predicate = video -> alreadyKnownVideos.contains(video.getId());
+            Predicate<YouTubeVideo> predicate = video -> {
+                Long storedTs = alreadyKnownVideos.get(video.getId());
+                if (storedTs != null && Boolean.TRUE.equals(video.getPublishTimestampExact()) && !storedTs.equals(video.getPublishTimestamp())) {
+                    // the freshly retrieved video contains an exact, and different publish timestamp
+                    int result = subscriptionsDb.setPublishTimestamp(video);
+                    Logger.i(this, "Updating publish timestamp for %s - %s with %s",
+                            video.getId(), video.getTitle(), new Date(video.getPublishTimestamp()));
+                }
+                return storedTs != null;
+            };
             // If we found a video which is already added to the db, no need to check the videos after,
             // assume, they are older, and already seen
             predicate.removeIf(videos);
