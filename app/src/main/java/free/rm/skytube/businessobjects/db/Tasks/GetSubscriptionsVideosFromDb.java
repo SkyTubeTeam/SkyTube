@@ -18,9 +18,11 @@
 package free.rm.skytube.businessobjects.db.Tasks;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import free.rm.skytube.businessobjects.YouTube.GetYouTubeVideos;
+import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 
@@ -30,17 +32,30 @@ import free.rm.skytube.businessobjects.db.SubscriptionsDb;
  */
 public class GetSubscriptionsVideosFromDb extends GetYouTubeVideos {
 
+    private String lastVideoId;
+    private long lastVideoPublishTimestamp;
+
 	@Override
-	public void init() throws IOException {
+	public synchronized void init() throws IOException {
 		noMoreVideoPages = false;
 	}
 
 
 	@Override
-	public List<YouTubeVideo> getNextVideos() {
+	public synchronized List<CardData> getNextVideos() {
 		if (!noMoreVideoPages()) {
-			noMoreVideoPages = true;
-			return SubscriptionsDb.getSubscriptionsDb().getSubscriptionVideos();
+			List<YouTubeVideo> result = SubscriptionsDb.getSubscriptionsDb().getSubscriptionVideoPage(20, lastVideoId, lastVideoPublishTimestamp);
+			if (result.isEmpty()) {
+				noMoreVideoPages = true;
+				lastVideoId = null;
+			} else {
+				YouTubeVideo last = result.get(result.size() -1);
+				lastVideoId = last.getId();
+				//lastVideoPublishTimestamp = last.getPublishDate().getValue();
+				lastVideoPublishTimestamp = last.getRetrievalTimestamp();//last.getPublishDate().getValue();
+			}
+
+			return new ArrayList<>(result);
 		}
 
 		return null;
@@ -48,8 +63,9 @@ public class GetSubscriptionsVideosFromDb extends GetYouTubeVideos {
 
 
 	@Override
-	public boolean noMoreVideoPages() {
-		return noMoreVideoPages;
+	public synchronized void reset() {
+		super.reset();
+		lastVideoId = null;
+		lastVideoPublishTimestamp = System.currentTimeMillis();
 	}
-
 }

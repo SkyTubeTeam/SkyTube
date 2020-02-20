@@ -30,22 +30,24 @@ import java.util.List;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPI;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPIKey;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeCommentThread;
+import free.rm.skytube.businessobjects.YouTube.newpipe.PagerBackend;
 
 /**
  * Queries the YouTube service and gets the comments of a video.
  */
-public class GetCommentThreads {
+public class GetCommentThreads implements PagerBackend<YouTubeCommentThread> {
 
-	private String	videoId;
+	private final String	videoId;
 	private String	nextPageToken = null;
 	private boolean	noMoreCommentPages = false;
-	private YouTube.CommentThreads.List commentsList = null;
+	private final YouTube.CommentThreads.List commentsList;
+	private IOException lastException;
 
 	private static final Long	MAX_RESULTS = 20L;
 	private static final String	TAG = GetCommentThreads.class.getSimpleName();
 
 
-	public void init(String videoId) throws IOException {
+	public GetCommentThreads(String videoId) throws IOException {
 		this.videoId = videoId;
 		this.commentsList = YouTubeAPI.create().commentThreads()
 				.list("snippet, replies")
@@ -64,7 +66,9 @@ public class GetCommentThreads {
 	 *
 	 * @return	A list/page of {@link YouTubeCommentThread}.
 	 */
-	public List<YouTubeCommentThread> get() {
+	@Override
+	public List<YouTubeCommentThread> getSafeNextPage() {
+		lastException = null;
 		List<YouTubeCommentThread> commentThreadList = new ArrayList<>();
 
 		if (noMoreCommentPages  ||  commentsList == null) {
@@ -92,10 +96,17 @@ public class GetCommentThreads {
 				if (nextPageToken == null)
 					noMoreCommentPages = true;
 			} catch (IOException ex) {
-				Log.e(TAG, "An error has occurred while retrieving comments for video with id=" + videoId, ex);
+				lastException = ex;
+				Log.e(TAG, "An error has occurred while retrieving comments for video with id=" + videoId + ", key="+ commentsList.getKey()+", error="+ ex.getMessage(), ex);
 			}
 		}
 
 		return commentThreadList;
 	}
+
+	@Override
+	public IOException getLastException() {
+		return lastException;
+	}
+
 }

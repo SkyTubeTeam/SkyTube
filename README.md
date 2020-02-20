@@ -30,7 +30,8 @@
 * Play channels' playlists
 * Download videos
 * View and download video thumbnails
-* Doesn't display any adverts when browsing or playing videos.
+* Doesn't display any adverts when browsing or playing videos
+* Backup and restore bookmarks and subscriptions (all stored locally on your device)
 
 ### Traditional Features
 * Explore Featured and Most Popular videos
@@ -43,6 +44,9 @@
 
 More features will be added in the near future.
 
+## Requirements
+Android 4.0 (Ice Cream Sandwich) or later. For techies, that means an API level of 14 or greater.
+
 ## Download
 | Feature          | SkyTube Extra                      | SkyTube  |
 | ---------------- |------------------------------------| ---------|
@@ -51,7 +55,7 @@ More features will be added in the near future.
 | Official YouTube player support* | ✅                   | ❌       |
 | Chromecast Support*              | ✅                   | ❌       |
 | Updates availability             | Immediate            | Normally up to 5 days |
-| Download APK                     | [![Download SkyTube Extra APK](screenshots/download_apk.png)](https://github.com/ram-on/SkyTube/releases/download/v2.961/SkyTube-Extra-2.961.apk) | [![Download SkyTube (Vanilla) APK](https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Get_it_on_F-Droid.svg/200px-Get_it_on_F-Droid.svg.png)](https://f-droid.org/repository/browse/?fdid=free.rm.skytube.oss)
+| Download APK                     | [![Download SkyTube Extra APK](screenshots/download_apk.png)](https://github.com/ram-on/SkyTube/releases/download/v2.969/SkyTube-Extra-2.969.apk) | [![Download SkyTube (Vanilla) APK](https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Get_it_on_F-Droid.svg/200px-Get_it_on_F-Droid.svg.png)](https://f-droid.org/repository/browse/?fdid=free.rm.skytube.oss)
 
 _* powered by a closed-source, third-party library._
 
@@ -60,12 +64,12 @@ _* powered by a closed-source, third-party library._
 * Innovative design
 * No intrusive ads
 * Multilingual
-* Not dependent on the GAPPS/Google Apps (i.e. YouTube official app)
+* Not dependent on GAPPS/Google Apps (i.e. YouTube official app)
 * No need for Google/YouTube account to operate
 * My code does not spy on your behaviour!
 
 ## Screenshots
-### Mobile
+### Phone
 [<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/trending.jpg" width=250>](https://ram-on.github.io/SkyTube/assets/img/screenshots/trending.jpg)
 [<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/subs.jpg" alt="Subscriptions" width="250" />](https://ram-on.github.io/SkyTube/assets/img/screenshots/subs.jpg)
 [<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/video_blocker.jpg" alt="Video Blocker" width="250" />](https://ram-on.github.io/SkyTube/assets/img/screenshots/video_blocker.jpg")

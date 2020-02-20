@@ -17,6 +17,12 @@
 
 package free.rm.skytube.businessobjects.YouTube;
 
+import java.io.IOException;
+import java.util.List;
+
+import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
+import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
+
 /**
  * Interface to be used by {@link GetChannelVideosFull} and {@link GetChannelVideosLite}.
  */
@@ -26,5 +32,27 @@ public interface GetChannelVideosInterface {
 	 * Used to retrieve channel videos published after the specified date.
 	 */
 	void setPublishedAfter(long timeInMs);
+
+
+	/**
+	 * Initialise this object.
+	 *
+	 * @throws IOException
+	 */
+	void init() throws IOException;
+
+
+	/**
+	 * Sets user's query. [optional]
+	 */
+	void setChannelQuery(String channelId, boolean filter);
+
+
+	/**
+	 * Gets the next page of videos.
+	 *
+	 * @return List of {@link YouTubeVideo}s.
+	 */
+	List<CardData> getNextVideos();
 
 }

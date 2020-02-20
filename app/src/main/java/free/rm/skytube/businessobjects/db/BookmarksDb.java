@@ -23,7 +23,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,6 +32,7 @@ import java.util.List;
 
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.Logger;
+import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.interfaces.OrderableDatabase;
@@ -132,7 +132,7 @@ public class BookmarksDb extends SQLiteOpenHelperEx implements OrderableDatabase
 				Gson gson = new Gson();
 				do {
 					byte[] blob = cursor.getBlob(cursor.getColumnIndex(BookmarksTable.COL_YOUTUBE_VIDEO));
-					YouTubeVideo uvideo = gson.fromJson(new String(blob), YouTubeVideo.class);
+					YouTubeVideo uvideo = gson.fromJson(new String(blob), YouTubeVideo.class).updatePublishTimestampFromDate();
 					ContentValues contentValues = new ContentValues();
 					contentValues.put(BookmarksTable.COL_ORDER, order++);
 
@@ -159,10 +159,10 @@ public class BookmarksDb extends SQLiteOpenHelperEx implements OrderableDatabase
 	 * @param videos List of Videos to update their order.
 	 */
 	@Override
-	public void updateOrder(List<YouTubeVideo> videos) {
+	public void updateOrder(List<CardData> videos) {
 		int order = videos.size();
 
-		for(YouTubeVideo video : videos) {
+		for(CardData video : videos) {
 			ContentValues cv = new ContentValues();
 			cv.put(BookmarksTable.COL_ORDER, order--);
 			getWritableDatabase().update(BookmarksTable.TABLE_NAME, cv, BookmarksTable.COL_YOUTUBE_VIDEO_ID + " = ?", new String[]{video.getId()});
@@ -173,16 +173,16 @@ public class BookmarksDb extends SQLiteOpenHelperEx implements OrderableDatabase
 	/**
 	 * Check if the specified Video has been bookmarked.
 	 *
-	 * @param video Video to check
+	 * @param videoId Video to check
 	 *
 	 * @return True if it has been bookmarked, false if not.
 	 */
-	public boolean isBookmarked(YouTubeVideo video) {
+	public boolean isBookmarked(String videoId) {
 		Cursor cursor = getReadableDatabase().query(
 						BookmarksTable.TABLE_NAME,
 						new String[]{BookmarksTable.COL_YOUTUBE_VIDEO_ID},
 						BookmarksTable.COL_YOUTUBE_VIDEO_ID + " = ?",
-						new String[]{video.getId()}, null, null, null);
+						new String[]{videoId}, null, null, null);
 		boolean	hasVideo = cursor.moveToNext();
 
 		cursor.close();
@@ -227,7 +227,7 @@ public class BookmarksDb extends SQLiteOpenHelperEx implements OrderableDatabase
 				final String videoJson = new String(blob);
 
 				// convert JSON into YouTubeVideo
-				YouTubeVideo video = gson.fromJson(videoJson, YouTubeVideo.class);
+				YouTubeVideo video = gson.fromJson(videoJson, YouTubeVideo.class).updatePublishTimestampFromDate();
 
 				// due to upgrade to YouTubeVideo (by changing channel{Id,Name} to YouTubeChannel)
 				// from version 2.82 to 2.90

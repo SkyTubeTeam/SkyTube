@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+	      xmlns:tools="http://schemas.android.com/tools"
           package="free.rm.skytube">
 
 	<uses-permission android:name="android.permission.INTERNET"/>                   <!-- Mandatory permission -->
@@ -79,6 +80,16 @@
 		<activity
 			android:name=".gui.activities.PermissionsActivity"
 		    android:theme="@style/TransparentActivity">
+		</activity>
+
+		<activity android:name=".gui.activities.ShareBookmarkActivity"
+			android:theme="@style/TransparentActivity">
+			<intent-filter android:label="@string/bookmark_share_label">
+				<action android:name="android.intent.action.SEND" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<data android:mimeType="text/plain"/>
+			</intent-filter>
+
 		</activity>
 	</application>
 

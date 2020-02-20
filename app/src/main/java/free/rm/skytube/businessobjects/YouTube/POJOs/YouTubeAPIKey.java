@@ -17,6 +17,8 @@
 
 package free.rm.skytube.businessobjects.YouTube.POJOs;
 
+import android.os.Build;
+
 import java.util.Random;
 
 import free.rm.skytube.BuildConfig;
@@ -48,7 +50,7 @@ public class YouTubeAPIKey {
 	/**
 	 * @return An instance of {@link YouTubeAPIKey}.
 	 */
-	public static YouTubeAPIKey get() {
+	public synchronized static YouTubeAPIKey get() {
 		if (youTubeAPIKey == null) {
 			youTubeAPIKey = new YouTubeAPIKey();
 		}
@@ -57,6 +59,10 @@ public class YouTubeAPIKey {
 	}
 
 
+	public synchronized static YouTubeAPIKey reset() {
+		youTubeAPIKey = null;
+		return get();
+	}
 
 	/**
 	 * @return Return YouTube API key.
@@ -99,11 +105,21 @@ public class YouTubeAPIKey {
 		if (userApiKey != null) {
 			userApiKey = userApiKey.trim();
 
-			if (userApiKey.isEmpty())
-				userApiKey = null;
+			if (userApiKey.isEmpty()) {
+				return null;
+			}
+			if (userApiKey.equals(BuildConfig.YOUTUBE_API_KEYS_DEBUG)) {
+				return null;
+			}
+			for (String builtInKey : BuildConfig.YOUTUBE_API_KEYS) {
+				if (builtInKey.equals(userApiKey)) {
+					return null;
+				}
+			}
+			return userApiKey;
 		}
 
-		return userApiKey;
+		return null;
 	}
 
 }

@@ -19,10 +19,14 @@ package free.rm.skytube.businessobjects.YouTube.Tasks;
 
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
+import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.businessobjects.YouTube.GetYouTubeVideos;
+import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.YouTube.VideoBlocker;
@@ -33,19 +37,21 @@ import free.rm.skytube.gui.businessobjects.adapters.VideoGridAdapter;
 /**
  * An asynchronous task that will retrieve YouTube videos and displays them in the supplied Adapter.
  */
-public class GetYouTubeVideosTask extends AsyncTaskParallel<Void, Void, List<YouTubeVideo>> {
+public class GetYouTubeVideosTask extends AsyncTaskParallel<Void, Void, List<CardData>> {
 
 	/** Object used to retrieve the desired YouTube videos. */
-	private GetYouTubeVideos getYouTubeVideos;
+	private final GetYouTubeVideos getYouTubeVideos;
 
 	/** The Adapter where the retrieved videos will be displayed. */
-	private VideoGridAdapter	videoGridAdapter;
+	private final VideoGridAdapter	videoGridAdapter;
 
 	/** SwipeRefreshLayout will be used to display the progress bar */
-	private SwipeRefreshLayout  swipeRefreshLayout;
+	private final SwipeRefreshLayout  swipeRefreshLayout;
 
 	private YouTubeChannel channel;
-	private boolean clearList;
+	private final boolean clearList;
+
+	private final VideoGridAdapter.Callback callback;
 
 
 	/**
@@ -54,13 +60,17 @@ public class GetYouTubeVideosTask extends AsyncTaskParallel<Void, Void, List<You
 	 *
 	 * @param getYouTubeVideos The object that does the actual fetching of videos.
 	 * @param videoGridAdapter The grid adapter the videos will be added to.
+	 * @param swipeRefreshLayout The layout which shows animation about the refresh process.
 	 * @param clearList Clear the list before adding new values to it.
+	 * @param callback To notify about the updated {@link VideoGridAdapter}
 	 */
-	public GetYouTubeVideosTask(GetYouTubeVideos getYouTubeVideos, VideoGridAdapter videoGridAdapter, SwipeRefreshLayout swipeRefreshLayout, boolean clearList) {
+	public GetYouTubeVideosTask(GetYouTubeVideos getYouTubeVideos, VideoGridAdapter videoGridAdapter, SwipeRefreshLayout swipeRefreshLayout, boolean clearList,
+								VideoGridAdapter.Callback callback) {
 		this.getYouTubeVideos = getYouTubeVideos;
 		this.videoGridAdapter = videoGridAdapter;
 		this.swipeRefreshLayout = swipeRefreshLayout;
 		this.clearList = clearList;
+		this.callback = callback;
 	}
 
 
@@ -69,27 +79,32 @@ public class GetYouTubeVideosTask extends AsyncTaskParallel<Void, Void, List<You
 		// if this task is being called by ChannelBrowserFragment, then get the channel the user is browsing
 		channel = videoGridAdapter.getYouTubeChannel();
 
-		if (swipeRefreshLayout != null)
+		if (swipeRefreshLayout != null) {
 			swipeRefreshLayout.setRefreshing(true);
+		}
 	}
 
 
 	@Override
-	protected List<YouTubeVideo> doInBackground(Void... params) {
+	protected List<CardData> doInBackground(Void... params) {
 		if (isCancelled()) {
 			return null;
 		}
 
-		// get videos from YouTube
-		List<YouTubeVideo> videosList = getYouTubeVideos.getNextVideos();
+		// get videos from YouTube or the database.
+		List<CardData> videosList = getNextVideos();
 
 		if (videosList != null) {
 			// filter videos
-			videosList = new VideoBlocker().filter(videosList);
+			if (videoGridAdapter.getCurrentVideoCategory().isVideoFilteringEnabled()) {
+				videosList = new VideoBlocker().filter(videosList);
+			}
 
 			if (channel != null && channel.isUserSubscribed()) {
-				for (YouTubeVideo video : videosList) {
-					channel.addYouTubeVideo(video);
+				for (CardData video : videosList) {
+					if (video instanceof YouTubeVideo) {
+						channel.addYouTubeVideo((YouTubeVideo) video);
+					}
 				}
 				SubscriptionsDb.getSubscriptionsDb().saveChannelVideos(channel);
 			}
@@ -98,23 +113,48 @@ public class GetYouTubeVideosTask extends AsyncTaskParallel<Void, Void, List<You
 		return videosList;
 	}
 
+	private List<CardData> getNextVideos() {
+		if (this.clearList && videoGridAdapter.getCurrentVideoCategory() == VideoCategory.SUBSCRIPTIONS_FEED_VIDEOS) {
+			return collectUntil(videoGridAdapter.getItemCount());
+		} else {
+			return getYouTubeVideos.getNextVideos();
+		}
+	}
+
+	private List<CardData> collectUntil(int currentSize) {
+		List<CardData> result = new ArrayList<>(currentSize);
+		boolean hasNew = false;
+		do {
+			List<CardData> videosList = getYouTubeVideos.getNextVideos();
+			hasNew = !videosList.isEmpty();
+			result.addAll(videosList);
+		} while(result.size() < currentSize && hasNew);
+		return result;
+	}
 
 	@Override
-	protected void onPostExecute(List<YouTubeVideo> videosList) {
+	protected void onPostExecute(List<CardData> videosList) {
+		SkyTubeApp.notifyUserOnError(videoGridAdapter.getContext(), getYouTubeVideos.getLastException());
+
 		if (this.clearList) {
 			videoGridAdapter.clearList();
 		}
 		videoGridAdapter.appendList(videosList);
 
-		if(swipeRefreshLayout != null)
+		if (callback != null) {
+			callback.onVideoGridUpdated(videoGridAdapter.getItemCount());
+		}
+		if(swipeRefreshLayout != null) {
 			swipeRefreshLayout.setRefreshing(false);
+		}
 	}
 
 
 	@Override
 	protected void onCancelled() {
-		if(swipeRefreshLayout != null)
+		if(swipeRefreshLayout != null) {
 			swipeRefreshLayout.setRefreshing(false);
+		}
 	}
 
 }

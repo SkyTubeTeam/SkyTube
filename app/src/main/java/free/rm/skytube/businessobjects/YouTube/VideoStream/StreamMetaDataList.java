@@ -35,16 +35,16 @@ public class StreamMetaDataList {
 	private static final String TAG = StreamMetaDataList.class.getSimpleName();
 
 
-	StreamMetaDataList() {
+	public StreamMetaDataList() {
 	}
 
 
-	StreamMetaDataList(int errorMessageId) {
+	public StreamMetaDataList(int errorMessageId) {
 		this.errorMessage = SkyTubeApp.getStr(errorMessageId);
 	}
 
 
-	StreamMetaDataList(String errorMessage) {
+	public StreamMetaDataList(String errorMessage) {
 		this.errorMessage = errorMessage;
 	}
 
@@ -57,8 +57,8 @@ public class StreamMetaDataList {
 	 *
 	 * @return The desired {@link StreamMetaData}.
 	 */
-	public StreamMetaData getDesiredStream() {
-		VideoResolution desiredVideoRes = getDesiredVideoResolution();
+	public StreamMetaData getDesiredStream(boolean forDownload) {
+		VideoResolution desiredVideoRes = getDesiredVideoResolution(forDownload);
 		Log.d(TAG, "Desired Video Res:  " + desiredVideoRes);
 		return getDesiredStream(desiredVideoRes);
 	}
@@ -92,9 +92,9 @@ public class StreamMetaDataList {
 	 *
 	 * @return Desired {@link VideoResolution}.
 	 */
-	private VideoResolution getDesiredVideoResolution() {
+	private VideoResolution getDesiredVideoResolution(boolean forDownload) {
 		String resIdValue = SkyTubeApp.getPreferenceManager()
-							.getString(SkyTubeApp.getStr(R.string.pref_key_preferred_res),
+							.getString(SkyTubeApp.getStr(forDownload ? R.string.pref_key_video_download_preferred_resolution : R.string.pref_key_preferred_res),
 										Integer.toString(VideoResolution.DEFAULT_VIDEO_RES_ID));
 
 		// if on mobile network use the preferred resolution under mobile network if defined

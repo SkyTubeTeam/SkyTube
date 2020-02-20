@@ -6,6 +6,7 @@
 	android:layout_height="match_parent">
 
 	<TextView
+		android:id="@+id/tutorial_slide_5_textview"
 		android:text="@string/tutorial_slide_5"
 		style="@style/TutorialTextView"
 		app:layout_constraintBottom_toBottomOf="parent"

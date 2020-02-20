@@ -17,6 +17,10 @@
 
 package free.rm.skytube.gui.fragments;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -26,14 +30,17 @@ import android.os.Bundle;
 import android.os.Handler;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.NotificationCompat;
+
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 
-import org.joda.time.DateTime;
-
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -43,11 +50,12 @@ import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.FeedUpdaterService;
 import free.rm.skytube.businessobjects.VideoCategory;
+import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPIKey;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
-import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
+import free.rm.skytube.businessobjects.YouTube.Tasks.GetBulkSubscriptionVideosTask;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetSubscriptionVideosTask;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetSubscriptionVideosTaskListener;
-import free.rm.skytube.businessobjects.db.SubscriptionsDb;
+import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
 import free.rm.skytube.gui.businessobjects.SubscriptionsBackupsManager;
 import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
 
@@ -59,10 +67,6 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 	private int numChannelsFetched = 0;
 	private int numChannelsSubscribed = 0;
 	private boolean refreshInProgress = false;
-	private MaterialDialog progressDialog;
-	/** When set to true, it will retrieve any published video (wrt subbed channels) by querying the
-	 *  remote YouTube servers. */
-	private boolean shouldRefresh = false;
 	private SubscriptionsBackupsManager subscriptionsBackupsManager;
 
 	/**
@@ -85,6 +89,9 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 	private static final int    REFRESH_TIME_HOURS = 3;
 	private static final long   REFRESH_TIME_IN_MS = REFRESH_TIME_HOURS * (1000L*3600L);
 
+	private static final String NOTIFICATION_CHANNEL_NAME = "SkyTube";
+	private static final String NOTIFICATION_CHANNEL_ID = "subscriptionChecking";
+	private static final int NOTIFICATION_ID = 1;
 
 	@Override
 	protected int getLayoutResource() {
@@ -96,25 +103,38 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		// Only do an automatic refresh of subscriptions if it's been more than three hours since the last one was done.
-		long subscriptionsLastUpdated = SkyTubeApp.getPreferenceManager().getLong(SkyTubeApp.KEY_SUBSCRIPTIONS_LAST_UPDATED, -1);
-		long threeHoursAgo = System.currentTimeMillis() - REFRESH_TIME_IN_MS;
-		if(subscriptionsLastUpdated <= threeHoursAgo) {
-			shouldRefresh = true;
-		}
-
 		subscriptionsBackupsManager = new SubscriptionsBackupsManager(getActivity(), SubscriptionsFeedFragment.this);
+
+	}
+
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		View result = super.onCreateView(inflater, container, savedInstanceState);
+		videoGridAdapter.setVideoGridUpdated(this::setupUiAccordingToNumOfSubbedChannels);
+		return result;
+	}
+
+	private boolean checkRefreshTime() {
+		// Only do an automatic refresh of subscriptions if it's been more than three hours since the last one was done.
+		Long subscriptionsLastUpdated = SkyTubeApp.getSettings().getFeedsLastUpdateTime();
+		if (subscriptionsLastUpdated == null) {
+			return true;
+		}
+		long threeHoursAgo = System.currentTimeMillis() - REFRESH_TIME_IN_MS;
+		return subscriptionsLastUpdated <= threeHoursAgo;
 	}
 
 
 	@Override
 	public void onResume() {
-		// setup the UI and refresh the feed (if applicable)
-		startRefreshTask(isFragmentSelected());
 
 		getActivity().registerReceiver(feedUpdaterReceiver, new IntentFilter(FeedUpdaterService.NEW_SUBSCRIPTION_VIDEOS_FOUND));
 
 		super.onResume();
+
+		// setup the UI and refresh the feed (if applicable)
+		startRefreshTask(isFragmentSelected(), checkRefreshTime() || isFlagSet(FLAG_REFRESH_FEED_FULL));
+
 		// this will detect whether we have previous instructed the app (via refreshSubsFeedFromCache())
 		// to refresh the subs feed
 		if (isFlagSet(FLAG_REFRESH_FEED_FROM_CACHE)) {
@@ -123,12 +143,6 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 
 			// refresh the subs feed by reading from the cache (i.e. local DB)
 			refreshFeedFromCache();
-		} else if (isFlagSet(FLAG_REFRESH_FEED_FULL)) {
-			// unset the flag
-			unsetFlag(FLAG_REFRESH_FEED_FULL);
-
-			// refresh the subs feed by retrieving videos from the YT servers
-			onRefresh();
 		}
 	}
 
@@ -178,83 +192,100 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 		return SkyTubeApp.getPreferenceManager().getBoolean(flag, false);
 	}
 
+	private void showNotification() {
+		// Sets an ID for the notification, so it can be updated.
+		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+			NotificationManager mNotificationManager =
+					(NotificationManager) getContext().getSystemService(Context.NOTIFICATION_SERVICE);
 
-	private void showRefreshDialog() {
-		progressDialog = new MaterialDialog.Builder(getActivity())
-						.title(R.string.fetching_subscription_videos)
-						.content(String.format(getContext().getString(R.string.fetched_videos_from_channels), numVideosFetched, numChannelsFetched, numChannelsSubscribed))
-						.progress(true, 0)
-						.backgroundColorRes(R.color.colorPrimary)
-						.titleColorRes(android.R.color.white)
-						.contentColorRes(android.R.color.white)
-						.build();
-		progressDialog.show();
+			NotificationChannel mChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, NOTIFICATION_CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH);
+			mChannel.setSound(null,null);
+			// Create a notification and set the notification channel.
+			Notification notification = new Notification.Builder(getContext(), NOTIFICATION_CHANNEL_NAME)
+					.setSmallIcon(R.drawable.ic_notification_icon)
+					.setContentTitle(getString(R.string.fetching_subscription_videos))
+					.setContentText(String.format(getContext().getString(R.string.fetched_videos_from_channels), numVideosFetched, numChannelsFetched, numChannelsSubscribed))
+					.setChannelId(NOTIFICATION_CHANNEL_ID)
+					.build();
+			mNotificationManager.createNotificationChannel(mChannel);
+
+// Issue the notification.
+			mNotificationManager.notify(NOTIFICATION_ID , notification);
+		} else {
+			final Intent emptyIntent = new Intent();
+			PendingIntent pendingIntent = PendingIntent.getActivity(getContext(), 1, emptyIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+			NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext(), "")
+					.setSmallIcon(R.drawable.ic_notification_icon)
+					.setContentTitle(getString(R.string.fetching_subscription_videos))
+					.setContentText(String.format(getContext().getString(R.string.fetched_videos_from_channels), numVideosFetched, numChannelsFetched, numChannelsSubscribed))
+					.setPriority(NotificationCompat.FLAG_ONGOING_EVENT)
+					.setContentIntent(pendingIntent);
+
+
+			NotificationManager notificationManager = (NotificationManager) getContext().getSystemService(Context.NOTIFICATION_SERVICE);
+			notificationManager.notify(NOTIFICATION_ID, builder.build());
+		}
 	}
-
 
 	@Override
 	public void onRefresh() {
-		startRefreshTask(true);
+		startRefreshTask(true, true);
 	}
 
 
-	protected synchronized void startRefreshTask(boolean showFetchingVideosDialog) {
+	protected synchronized void startRefreshTask(boolean showFetchingVideosDialog, boolean forcedFullRefresh) {
 		if (refreshInProgress) {
 			return;
 		}
-		refreshInProgress = true;
-		shouldRefresh = true;
-		new RefreshFeedTask(showFetchingVideosDialog).executeInParallel();
-	}
-
-
-	@Override
-	public void onChannelVideosFetched(YouTubeChannel channel, int videosFetched, final boolean videosDeleted) {
-		Log.d("SUB FRAGMENT", "onChannelVideosFetched");
-
-		// If any new videos have been fetched for a channel, update the Subscription list in the left navbar for that channel
-		if(videosFetched > 0)
-			SubsAdapter.get(getActivity()).changeChannelNewVideosStatus(channel.getId(), true);
-
-		numVideosFetched += videosFetched;
-		numChannelsFetched++;
-		if(progressDialog != null)
-			progressDialog.setContent(String.format(SkyTubeApp.getStr(R.string.fetched_videos_from_channels), numVideosFetched, numChannelsFetched, numChannelsSubscribed));
-		if(numChannelsFetched == numChannelsSubscribed) {
-			new Handler().postDelayed(() -> {
-				refreshInProgress = false;
-				// Remove the progress bar(s)
-				swipeRefreshLayout.setRefreshing(false);
-				boolean fragmentIsVisible = progressDialog != null;
-				if(progressDialog != null)
-					progressDialog.dismiss();
-				if(numVideosFetched > 0 || videosDeleted) {
-					refreshFeedFromCache();
-				} else {
-					// Only show the toast that no videos were found if the progress dialog is sh
-					if(fragmentIsVisible) {
-						Toast.makeText(getContext(),
-										R.string.no_new_videos_found,
-										Toast.LENGTH_LONG).show();
-					}
-				}
-			}, 500);
+		if (forcedFullRefresh && SkyTubeApp.isConnected(getContext())) {
+			unsetFlag(FLAG_REFRESH_FEED_FULL);
+			refreshInProgress = true;
+			new RefreshFeedTask(showFetchingVideosDialog, forcedFullRefresh).executeInParallel();
+		} else {
+			videoGridAdapter.refresh(true);
 		}
 	}
 
 	@Override
-	public void onAllChannelVideosFetched() {
+	public void onChannelVideosFetched(String channelId, int videosFetched, final boolean videosDeleted) {
+		Log.d("SUB FRAGMENT", "onChannelVideosFetched");
+
+		// If any new videos have been fetched for a channel, update the Subscription list in the left navbar for that channel
+		if(videosFetched > 0) {
+			SubsAdapter.get(getActivity()).changeChannelNewVideosStatus(channelId, true);
+		}
+
+		numVideosFetched += videosFetched;
+		numChannelsFetched++;
+
+		showNotification();
 	}
 
 	@Override
-	public void onFragmentSelected() {
-		super.onFragmentSelected();
+	public void onAllChannelVideosFetched(boolean changed) {
+		Log.i("SUB FRAGMENT", "onAllChannelVideosFetched:" + changed);
+		new Handler().postDelayed(() -> {
+			refreshInProgress = false;
+			// Remove the progress bar(s)
+			swipeRefreshLayout.setRefreshing(false);
+			Context context = getContext();
 
-		// when the Subscriptions tab is selected, if a refresh is in progress, show the dialog.
-		if (refreshInProgress)
-			showRefreshDialog();
+			NotificationManager notificationManager = (NotificationManager)  context.getSystemService(Context.NOTIFICATION_SERVICE);
+
+			notificationManager.cancel(NOTIFICATION_ID);
+
+			if(changed) {
+				refreshFeedFromCache();
+				Toast.makeText(context,
+						String.format(context.getString(R.string.fetched_videos_from_channels),
+								numVideosFetched, numChannelsFetched, numChannelsSubscribed), Toast.LENGTH_LONG).show();
+			} else {
+				Toast.makeText(context,
+									R.string.no_new_videos_found,
+									Toast.LENGTH_LONG).show();
+			}
+		}, 500);
 	}
-
 
 	@Override
 	protected VideoCategory getVideoCategory() {
@@ -314,14 +345,16 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 	 * 1.  Cached inside the local database;
 	 * 2.  No in the DB and hence we need to retrieve them from the YouTube servers.
 	 */
-	private class RefreshFeedTask extends AsyncTaskParallel<Void, Void, Integer> {
+	private class RefreshFeedTask extends AsyncTaskParallel<Void, Void, List<YouTubeChannel>> {
 
 		private MaterialDialog  fetchingChannelInfoDialog;
 		private boolean         showDialogs;
+		private boolean 		fullRefresh;
 
 
-		private RefreshFeedTask(boolean showFetchingVideosDialog) {
+		private RefreshFeedTask(boolean showFetchingVideosDialog, boolean fullRefresh) {
 			this.showDialogs = showFetchingVideosDialog;
+			this.fullRefresh = fullRefresh;
 		}
 
 
@@ -339,17 +372,18 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 
 
 		@Override
-		protected Integer doInBackground(Void... params) {
+		protected List<YouTubeChannel> doInBackground(Void... params) {
 			// get the total number of channels the user is subscribed to (from the subs adapter)
-			return SubsAdapter.get(SubscriptionsFeedFragment.this.getActivity()).getSubsLists().size();
+			// wrap it, as SubsAdapter could add/remove channels in a different thread
+			return new ArrayList<>(SubsAdapter.get(SubscriptionsFeedFragment.this.getActivity()).getSubsLists());
 		}
 
 
 		@Override
-		protected void onPostExecute(Integer totalNumberOfChannels) {
+		protected void onPostExecute(List<YouTubeChannel> totalChannels) {
 			numVideosFetched      = 0;
 			numChannelsFetched    = 0;
-			numChannelsSubscribed = totalNumberOfChannels;
+			numChannelsSubscribed = totalChannels.size();
 
 			// hide the "Fetching channels information …" dialog
 			if (showDialogs) {
@@ -357,20 +391,18 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 			}
 
 			// setup the user interface
-			setupUiAccordingToNumOfSubbedChannels(totalNumberOfChannels);
+			setupUiAccordingToNumOfSubbedChannels(numChannelsSubscribed);
 
 			if (numChannelsSubscribed > 0) {
 				// get the previously published videos currently cached in the database
 				videoGridAdapter.setVideoCategory(VideoCategory.SUBSCRIPTIONS_FEED_VIDEOS);
 
 				// get any videos published after the last time the user used the app...
-				if (shouldRefresh) {
-					new GetSubscriptionVideosTask(SubscriptionsFeedFragment.this).executeInParallel();      // refer to #onChannelVideosFetched()
-					shouldRefresh = false;
+				if (fullRefresh) {
+					//new GetSubscriptionVideosTask(SubscriptionsFeedFragment.this).executeInParallel();      // refer to #onChannelVideosFetched()
+					getRefreshTask(totalChannels).executeInParallel();
 
-					if (showDialogs) {
-						showRefreshDialog();
-					}
+					showNotification();
 				}
 			} else {
 				refreshInProgress = false;
@@ -380,27 +412,19 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 	}
 
 	public void refreshFeedFromCache() {
-		new RefreshFeedFromCacheTask().executeInParallel();
+		videoGridAdapter.refresh(true);
 	}
 
-
-	/**
-	 * A task that refreshes the subscriptions feed by getting published videos currently cached in
-	 * the local database.
-	 */
-	private class RefreshFeedFromCacheTask extends AsyncTaskParallel<Void, Void, List<YouTubeVideo>> {
-
-		@Override
-		protected List<YouTubeVideo> doInBackground(Void... params) {
-			return SubscriptionsDb.getSubscriptionsDb().getSubscriptionVideos();
+	private AsyncTaskParallel<?,?,?> getRefreshTask(List<YouTubeChannel> totalChannels) {
+		if (NewPipeService.isPreferred() || !YouTubeAPIKey.get().isUserApiKeySet()) {
+			return new GetBulkSubscriptionVideosTask(totalChannels, SubscriptionsFeedFragment.this);
+		} else {
+			List<String> channelIds = new ArrayList<>(totalChannels.size());
+			for (YouTubeChannel ch: totalChannels) {
+				channelIds.add(ch.getId());
+			}
+			return new GetSubscriptionVideosTask(SubscriptionsFeedFragment.this, channelIds);
 		}
-
-		@Override
-		protected void onPostExecute(List<YouTubeVideo> youTubeVideos) {
-			videoGridAdapter.setList(youTubeVideos);
-			setupUiAccordingToNumOfSubbedChannels(youTubeVideos.size());
-		}
-
 	}
 
 }

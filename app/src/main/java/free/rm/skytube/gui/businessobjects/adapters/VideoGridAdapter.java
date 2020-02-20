@@ -30,6 +30,7 @@ import java.io.IOException;
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.businessobjects.YouTube.GetYouTubeVideos;
+import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetYouTubeVideosTask;
@@ -40,7 +41,11 @@ import free.rm.skytube.gui.businessobjects.MainActivityListener;
 /**
  * An adapter that will display videos in a {@link android.widget.GridView}.
  */
-public class VideoGridAdapter extends RecyclerViewAdapterEx<YouTubeVideo, GridViewHolder> implements VideoPlayStatusUpdateListener {
+public class VideoGridAdapter extends RecyclerViewAdapterEx<CardData, GridViewHolder> implements VideoPlayStatusUpdateListener {
+
+	public interface Callback {
+		void onVideoGridUpdated(int newVideoListSize);
+	}
 
 	/**
 	 * Class used to get YouTube videos from the web.
@@ -72,6 +77,8 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<YouTubeVideo, GridVi
 
 	/** Set to true if the video adapter is initialized. */
 	private boolean initialized = false;
+
+	private VideoGridAdapter.Callback videoGridUpdated;
 
 	private static final String TAG = VideoGridAdapter.class.getSimpleName();
 
@@ -182,7 +189,7 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<YouTubeVideo, GridVi
 			}
 			// now, we consider this as initialized - sometimes 'refresh' can be called before the initializeList is called.
 			initialized = true;
-			new GetYouTubeVideosTask(getYouTubeVideos, this, swipeRefreshLayout, clearVideosList).executeInParallel();
+			new GetYouTubeVideosTask(getYouTubeVideos, this, swipeRefreshLayout, clearVideosList, videoGridUpdated).executeInParallel();
 		}
 	}
 
@@ -197,7 +204,7 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<YouTubeVideo, GridVi
 		if (position >= getItemCount() - 1) {
 			Log.w(TAG, "BOTTOM REACHED!!!");
 			if(getYouTubeVideos != null)
-				new GetYouTubeVideosTask(getYouTubeVideos, this, swipeRefreshLayout, false).executeInParallel();
+				new GetYouTubeVideosTask(getYouTubeVideos, this, swipeRefreshLayout, false, videoGridUpdated).executeInParallel();
 		}
 
 	}
@@ -211,8 +218,16 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<YouTubeVideo, GridVi
 		this.youTubeChannel = youTubeChannel;
 	}
 
+	public void setVideoGridUpdated(Callback videoGridUpdated) {
+		this.videoGridUpdated = videoGridUpdated;
+	}
+
 	public YouTubeChannel getYouTubeChannel() {
 		return youTubeChannel;
+	}
+
+	public VideoCategory getCurrentVideoCategory() {
+		return currentVideoCategory;
 	}
 
 	@Override

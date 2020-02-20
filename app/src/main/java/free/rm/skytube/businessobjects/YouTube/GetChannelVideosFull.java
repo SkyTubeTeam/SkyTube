@@ -20,6 +20,12 @@ package free.rm.skytube.businessobjects.YouTube;
 import com.google.api.client.util.DateTime;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Set;
+
+import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
+import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
+import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 
 /**
  * Returns the videos of a channel.
@@ -30,24 +36,34 @@ import java.io.IOException;
  */
 public class GetChannelVideosFull extends GetYouTubeVideoBySearch implements GetChannelVideosInterface {
 
+	private String channelId;
+	private boolean filterSubscribedVideos;
+
 	@Override
 	public void init() throws IOException {
 		super.init();
 		videosList.setOrder("date");
 	}
 
-
 	/**
 	 * Set the channel id.
 	 *
 	 * @param channelId	Channel ID.
+	 * @param filterSubscribedVideos to filter out the subscribed videos.
 	 */
 	@Override
-	public void setQuery(String channelId) {
-		if (videosList != null)
+	public void setChannelQuery(String channelId, boolean filterSubscribedVideos) {
+		this.channelId = channelId;
+		this.filterSubscribedVideos = filterSubscribedVideos;
+		if (videosList != null) {
 			videosList.setChannelId(channelId);
+		}
 	}
 
+	@Override
+	public void setQuery(String query) {
+		setChannelQuery(query, false);
+	}
 
 	@Override
 	public void setPublishedAfter(long timeInMs) {
@@ -56,4 +72,12 @@ public class GetChannelVideosFull extends GetYouTubeVideoBySearch implements Get
 		}
 	}
 
+	@Override
+	protected List<CardData> getVideoListFromIds(List<String> videoIds) throws IOException {
+		if (videoIds != null && !videoIds.isEmpty() && channelId != null && filterSubscribedVideos) {
+			final Set<String> videosByChannel = SubscriptionsDb.getSubscriptionsDb().getSubscribedChannelVideosByChannel(channelId);
+			videoIds.removeAll(videosByChannel);
+		}
+		return super.getVideoListFromIds(videoIds);
+	}
 }

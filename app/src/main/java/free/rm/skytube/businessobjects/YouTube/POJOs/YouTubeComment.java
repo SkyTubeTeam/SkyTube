@@ -27,7 +27,7 @@ public class YouTubeComment {
 	private String author;
 	private String comment;
 	private String datePublished;
-	private String likeCount;
+	private Long likeCount;
 	private String thumbnailUrl;
 	private String authorChannelId;
 
@@ -39,9 +39,18 @@ public class YouTubeComment {
 				this.authorChannelId = channelIdMap.get("value");
 			this.comment = comment.getSnippet().getTextDisplay();
 			this.datePublished = new PrettyTimeEx().format(comment.getSnippet().getPublishedAt());
-			this.likeCount = comment.getSnippet().getLikeCount().toString();
+			this.likeCount = comment.getSnippet().getLikeCount();
 			this.thumbnailUrl = comment.getSnippet().getAuthorProfileImageUrl();
 		}
+	}
+
+	public YouTubeComment(String authorChannelId, String author, String thumbnailUrl, String comment, String datePublished, Long likeCount) {
+		this.author = author;
+		this.comment = comment;
+		this.datePublished = datePublished;
+		this.likeCount = likeCount;
+		this.thumbnailUrl = thumbnailUrl;
+		this.authorChannelId = authorChannelId;
 	}
 
 	public String getAuthor() {
@@ -56,7 +65,7 @@ public class YouTubeComment {
 		return datePublished;
 	}
 
-	public String getLikeCount() {
+	public Long getLikeCount() {
 		return likeCount;
 	}
 

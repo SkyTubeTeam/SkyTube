@@ -25,18 +25,17 @@
 
 package free.rm.skytube.businessobjects.YouTube.VideoStream;
 
-import org.schabi.newpipe.extractor.DownloadRequest;
-import org.schabi.newpipe.extractor.DownloadResponse;
-import org.schabi.newpipe.extractor.Downloader;
+import org.schabi.newpipe.extractor.downloader.Downloader;
+import org.schabi.newpipe.extractor.downloader.Request;
+import org.schabi.newpipe.extractor.downloader.Response;
 import org.schabi.newpipe.extractor.exceptions.ReCaptchaException;
-import org.schabi.newpipe.extractor.utils.Localization;
+import org.schabi.newpipe.extractor.localization.Localization;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.URL;
-import java.net.UnknownHostException;
-import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -45,76 +44,87 @@ import javax.net.ssl.HttpsURLConnection;
 /**
  * Downloads HTTP content.
  */
-public class HttpDownloader implements Downloader {
+public class HttpDownloader extends Downloader {
 
 	/** Mimic the Mozilla user agent */
 	private static final String USER_AGENT = "Mozilla/5.0";
 
 	@Override
-	public String download(String siteUrl, Localization localization) throws IOException, ReCaptchaException {
-		Map<String, String> requestProperties = new HashMap<>();
-		requestProperties.put("Accept-Language", localization.getLanguage());
-		return download(siteUrl, requestProperties);
-	}
+	public Response execute(Request request) throws IOException, ReCaptchaException {
+		final String httpMethod = request.httpMethod();
+		final String url = request.url();
+		final Map<String, List<String>> headers = request.headers();
+		final Localization localization = request.localization();
 
-	@Override
-	public DownloadResponse get(String siteUrl, DownloadRequest request) {
-		return new DownloadResponse("ok", null);
-	}
+		final HttpsURLConnection connection = (HttpsURLConnection) new URL(url).openConnection();
 
-	@Override
-	public DownloadResponse get(String siteUrl) {
-		return new DownloadResponse("ok", null);
-	}
+		connection.setConnectTimeout(30 * 1000); // 30s
+		connection.setReadTimeout(30 * 1000); // 30s
+		connection.setRequestMethod(httpMethod);
 
-	@Override
-	public DownloadResponse post(String siteUrl, DownloadRequest request) {
-		return new DownloadResponse("ok", null);
-	}
+		connection.setRequestProperty("User-Agent", USER_AGENT);
+		connection.setRequestProperty("Accept-Language", "en");
 
-	@Override
-	public String download(String siteUrl, Map<String, String> customProperties) throws IOException, ReCaptchaException {
-		URL url = new URL(siteUrl);
-		HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
-		BufferedReader in = null;
-		StringBuilder response = new StringBuilder();
+		for (Map.Entry<String, List<String>> pair : headers.entrySet()) {
+			final String headerName = pair.getKey();
+			final List<String> headerValueList = pair.getValue();
 
-		try {
-			con.setRequestMethod("GET");
-			con.setRequestProperty("User-Agent", USER_AGENT);
-
-			in = new BufferedReader(
-					new InputStreamReader(con.getInputStream()));
-			String inputLine;
-
-			while((inputLine = in.readLine()) != null) {
-				response.append(inputLine);
-			}
-		} catch(UnknownHostException uhe) {//thrown when there's no internet connection
-			throw new IOException("unknown host or no network", uhe);
-		} catch(Exception e) {
-            /*
-             * HTTP 429 == Too Many Request
-             * Receive from Youtube.com = ReCaptcha challenge request
-             * See : https://github.com/rg3/youtube-dl/issues/5138
-             */
-			if (con.getResponseCode() == 429) {
-				throw new ReCaptchaException("reCaptcha Challenge requested");
-			}
-			throw new IOException(e);
-		} finally {
-			if(in != null) {
-				in.close();
+			if (headerValueList.size() > 1) {
+				connection.setRequestProperty(headerName, null);
+				for (String headerValue : headerValueList) {
+					connection.addRequestProperty(headerName, headerValue);
+				}
+			} else if (headerValueList.size() == 1) {
+				connection.setRequestProperty(headerName, headerValueList.get(0));
 			}
 		}
 
-		return response.toString();
+		try(OutputStream outputStream = sendOutput(request, connection)) {
+
+			final String response = readResponse(connection);
+
+			final int responseCode = connection.getResponseCode();
+			final String responseMessage = connection.getResponseMessage();
+			final Map<String, List<String>> responseHeaders = connection.getHeaderFields();
+
+			return new Response(responseCode, responseMessage, responseHeaders, response.toString());
+		} catch (Exception e) {
+			/*
+			 * HTTP 429 == Too Many Request
+			 * Receive from Youtube.com = ReCaptcha challenge request
+			 * See : https://github.com/rg3/youtube-dl/issues/5138
+			 */
+			if (connection.getResponseCode() == 429) {
+				throw new ReCaptchaException("reCaptcha Challenge requested", url);
+			}
+
+			throw new IOException(connection.getResponseCode() + " " + connection.getResponseMessage(), e);
+		}
 	}
 
-	@Override
-	public String download(String siteUrl) throws IOException, ReCaptchaException {
-		Map<String, String> requestProperties = new HashMap<>();
-		return download(siteUrl, requestProperties);
+	private OutputStream sendOutput(Request request, HttpsURLConnection connection) throws IOException {
+		final byte[] dataToSend = request.dataToSend();
+		if (dataToSend != null && dataToSend.length > 0) {
+			connection.setDoOutput(true);
+			connection.setRequestProperty("Content-Length", dataToSend.length + "");
+			OutputStream outputStream = connection.getOutputStream();
+			outputStream.write(dataToSend);
+			return outputStream;
+		}
+		return null;
+	}
+
+	private String readResponse(HttpsURLConnection connection) throws IOException {
+		try (InputStreamReader input = new InputStreamReader(connection.getInputStream())) {
+			final StringBuilder response = new StringBuilder();
+
+			int readCount;
+			char[] buffer = new char[32 * 1024];
+			while ((readCount = input.read(buffer)) != -1) {
+				response.append(buffer, 0, readCount);
+			}
+			return response.toString();
+		}
 	}
 
 }

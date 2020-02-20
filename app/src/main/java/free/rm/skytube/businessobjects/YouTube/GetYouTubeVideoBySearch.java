@@ -24,8 +24,10 @@ import com.google.api.services.youtube.model.SearchListResponse;
 import com.google.api.services.youtube.model.SearchResult;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
+import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPI;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPIKey;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
@@ -67,8 +69,10 @@ public class GetYouTubeVideoBySearch extends GetYouTubeVideos {
 
 
 	@Override
-	public List<YouTubeVideo> getNextVideos() {
-		List<YouTubeVideo> videosList = null;
+	public List<CardData> getNextVideos() {
+		setLastException(null);
+
+		List<CardData> videosList = null;
 
 		if (!noMoreVideoPages()) {
 			try {
@@ -91,6 +95,7 @@ public class GetYouTubeVideoBySearch extends GetYouTubeVideos {
 				if (nextPageToken == null)
 					noMoreVideoPages = true;
 			} catch (IOException ex) {
+				setLastException(ex);
 				Log.e(TAG, ex.getLocalizedMessage());
 			}
 		}
@@ -110,26 +115,16 @@ public class GetYouTubeVideoBySearch extends GetYouTubeVideos {
 	 * @return List of {@link YouTubeVideo}s.
 	 * @throws IOException
 	 */
-	private List<YouTubeVideo> getVideosList(List<SearchResult> searchResultList) throws IOException {
-		StringBuilder videoIds = new StringBuilder();
+	private List<CardData> getVideosList(List<SearchResult> searchResultList) throws IOException {
+		List<String> videoIds = new ArrayList<>(searchResultList.size());
 
 		// append the video IDs into a strings (CSV)
 		for (SearchResult res : searchResultList) {
-			videoIds.append(res.getId().getVideoId());
-			videoIds.append(',');
+			videoIds.add(res.getId().getVideoId());
 		}
 
-		// get video details by supplying the videos IDs
-		GetVideosDetailsByIDs getVideo = new GetVideosDetailsByIDs();
-		getVideo.init(videoIds.toString());
-
-		return getVideo.getNextVideos();
+		return getVideoListFromIds(videoIds);
 	}
 
-
-	@Override
-	public boolean noMoreVideoPages() {
-		return noMoreVideoPages;
-	}
 
 }

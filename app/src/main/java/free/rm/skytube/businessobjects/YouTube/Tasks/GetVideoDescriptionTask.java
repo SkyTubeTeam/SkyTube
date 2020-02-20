@@ -20,12 +20,16 @@ package free.rm.skytube.businessobjects.YouTube.Tasks;
 import java.io.IOException;
 import java.util.List;
 
+import org.schabi.newpipe.extractor.exceptions.ExtractionException;
+
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.GetVideoDescription;
+import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
+import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
 
 /**
  * Get the video's description.
@@ -48,28 +52,54 @@ public class GetVideoDescriptionTask extends AsyncTaskParallel<Void, Void, Strin
 		if (youTubeVideo.getDescription() != null) {
 			return youTubeVideo.getDescription();
 		}
-		GetVideoDescription getVideoDescription = new GetVideoDescription();
+		YouTubeVideo freshDetails = getDetails();
+		if (freshDetails != null) {
+			this.youTubeVideo.setDescription(freshDetails.getDescription());
+			this.youTubeVideo.setLikeDislikeCount(freshDetails.getLikeCountNumber(), freshDetails.getDislikeCountNumber());
+			return youTubeVideo.getDescription();
+		}
 
+		return getErrorMessage();
+	}
+
+	private String getErrorMessage() {
+		return SkyTubeApp.getStr(R.string.error_get_video_desc);
+	}
+
+	private YouTubeVideo getDetails() {
+		if (NewPipeService.isPreferred()) {
+			try {
+				YouTubeVideo details = NewPipeService.get().getDetails(youTubeVideo.getId());
+				return details;
+			} catch (ExtractionException | IOException e) {
+				Logger.e(this, "Unable to get video details, where id=" + youTubeVideo.getId(), e);
+				return null;
+			}
+		} else {
+			return getDetailsFromAPI();
+		}
+	}
+
+	private YouTubeVideo getDetailsFromAPI() {
+		GetVideoDescription getVideoDescription = new GetVideoDescription();
+		
 		try {
 			getVideoDescription.init(youTubeVideo.getId());
-			List<YouTubeVideo> list = getVideoDescription.getNextVideos();
-
-			if (list.size() > 0) {
-				final String description = list.get(0).getDescription();
-				this.youTubeVideo.setDescription(description);
-				return description;
+			List<CardData> list = getVideoDescription.getNextVideos();
+			if (!list.isEmpty()) {
+				return (YouTubeVideo) list.get(0);
 			}
 		} catch (IOException e) {
 			Logger.e(this, "error_get_video_desc - id=" + youTubeVideo.getId(), e);
 		}
-
-		return SkyTubeApp.getStr(R.string.error_get_video_desc);
+		return null;
 	}
 
 	@Override
 	protected void onPostExecute(String description) {
-		if(listener instanceof GetVideoDescriptionTaskListener)
+		if(listener instanceof GetVideoDescriptionTaskListener) {
 			listener.onFinished(description);
+		}
 	}
 
 }

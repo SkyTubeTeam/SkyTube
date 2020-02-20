@@ -19,7 +19,7 @@ package free.rm.skytube.businessobjects.YouTube.Tasks;
 
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
-import free.rm.skytube.businessobjects.YouTube.VideoStream.ParseStreamMetaData;
+import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
 import free.rm.skytube.businessobjects.YouTube.VideoStream.StreamMetaData;
 import free.rm.skytube.businessobjects.YouTube.VideoStream.StreamMetaDataList;
 import free.rm.skytube.businessobjects.interfaces.GetDesiredStreamListener;
@@ -29,24 +29,22 @@ import free.rm.skytube.businessobjects.interfaces.GetDesiredStreamListener;
  */
 public class GetVideoStreamTask extends AsyncTaskParallel<Void, Exception, StreamMetaDataList> {
 
-    private YouTubeVideo youTubeVideo;
-    private GetDesiredStreamListener listener;
+    private final YouTubeVideo youTubeVideo;
+    private final GetDesiredStreamListener listener;
+    private final boolean forDownload;
 
-    public GetVideoStreamTask(YouTubeVideo youTubeVideo, GetDesiredStreamListener listener) {
+    public GetVideoStreamTask(YouTubeVideo youTubeVideo, GetDesiredStreamListener listener, boolean forDownload) {
         this.youTubeVideo = youTubeVideo;
         this.listener = listener;
+        this.forDownload = forDownload;
     }
 
     @Override
     protected StreamMetaDataList doInBackground(Void... param) {
-        StreamMetaDataList streamMetaDataList;
-
-        ParseStreamMetaData streamParser = new ParseStreamMetaData(youTubeVideo.getId());
-        streamMetaDataList = streamParser.getStreamMetaDataList();
+        StreamMetaDataList streamMetaDataList = NewPipeService.get().getStreamMetaDataList(youTubeVideo.getId());
 
         return streamMetaDataList;
     }
-
 
     @Override
     protected void onPostExecute(StreamMetaDataList streamMetaDataList) {
@@ -54,7 +52,7 @@ public class GetVideoStreamTask extends AsyncTaskParallel<Void, Exception, Strea
             listener.onGetDesiredStreamError(streamMetaDataList.getErrorMessage());
         } else {
             // get the desired stream based on user preferences
-            StreamMetaData desiredStream = streamMetaDataList.getDesiredStream();
+            StreamMetaData desiredStream = streamMetaDataList.getDesiredStream(forDownload);
 
             listener.onGetDesiredStream(desiredStream);
         }

@@ -209,7 +209,7 @@ public class SubscriptionsBackupsManager {
 			// We need to force the app to refresh the subscriptions feed when the app is
 			// restarted (irrespective to when the feeds were last refreshed -- which could be
 			// during the last 5 mins).  This is as we are loading new databases...
-			GetSubscriptionVideosTask.updateFeedsLastUpdateTime(null);
+			SkyTubeApp.getSettings().updateFeedsLastUpdateTime(null);
 
 			// ask the user to restart the app
 			new AlertDialog.Builder(activity)
@@ -292,7 +292,6 @@ public class SubscriptionsBackupsManager {
 							task.executeInParallel(channelsToSubscribeTo);
 						})
 						.negativeText(R.string.cancel)
-						.onNegative((dialog, which) -> dialog.dismiss())
 						.build()
 						.show();
 			} else {
@@ -321,7 +320,6 @@ public class SubscriptionsBackupsManager {
 				.positiveText(R.string.select_xml_file)
 				.checkBoxPromptRes(R.string.unsubscribe_from_all_current_sibbed_channels, false, (compoundButton, b) -> isUnsubsribeAllChecked = true)
 				.onPositive((dialog, which) -> displayFilePicker(false))
-				.onNegative((dialog, which) -> dialog.dismiss())
 				.build()
 				.show();
 	}

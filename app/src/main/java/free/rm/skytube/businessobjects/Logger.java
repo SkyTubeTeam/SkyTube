@@ -22,18 +22,15 @@ import android.util.Log;
 public class Logger {
 
 	public static void i(Object obj, String format, Object ... args) {
-		String msg = String.format(format, args);
-		Log.i(obj.getClass().getSimpleName(), msg);
+		Log.i(obj.getClass().getSimpleName(), format(format, args));
 	}
 
 	public static void d(Object obj, String format, Object ... args) {
-		String msg = String.format(format, args);
-		Log.d(obj.getClass().getSimpleName(), msg);
+		Log.d(obj.getClass().getSimpleName(), format(format, args));
 	}
 
 	public static void w(Object obj, String format, Object ... args) {
-		String msg = String.format(format, args);
-		Log.w(obj.getClass().getSimpleName(), msg);
+		Log.w(obj.getClass().getSimpleName(), format(format, args));
 	}
 
 	public static void e(Object obj, String msg, Throwable tr) {
@@ -41,8 +38,10 @@ public class Logger {
 	}
 
 	public static void e(Object obj, String format, Object ... args) {
-		String msg = String.format(format, args);
-		Log.e(obj.getClass().getSimpleName(), msg);
+		Log.e(obj.getClass().getSimpleName(), format(format, args));
 	}
 
+	private static String format(String format, Object... args) {
+		return args.length > 0 ? String.format(format, args) : format;
+	}
 }

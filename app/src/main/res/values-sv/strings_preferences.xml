@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="pref_summary_disable_screen_gestures">Stäng av gester för att styra volym, ljusstyrka och sökning framåt/bakåt i videor.</string>
+    <string name="continue_">Fortsätt</string>
+    <string name="channel_blacklist_updated">Kanalsvartlista uppdaterad. Uppdatera videor.</string>
+    <string name="pref_about_category">Om</string>
+    <string name="databases_backing_up">Säkerhetskopierar…</string>
+    <string name="pref_title_choose_player">Videospelare</string>
+    <string name="databases_backup_fail">Det gick inte att säkerhetskopiera dina databaser.</string>
+    <string name="pref_title_preferred_languages">Föredragna språk</string>
+    <string name="pref_title_website">Webbplats</string>
+    <string name="pref_import_export_category">Importera/Exportera</string>
+    <string name="databases_import_select_backup">Välj säkerhetskopieringsfil att importera</string>
+    <string name="pref_summary_lang_detection_video_filtering">Använd AI för att identifiera de språk som används i videor och blockera dem om deras språk inte är lika med de språk du föredrar. Bör endast aktiveras på avancerade enheter.</string>
+    <string name="pref_youtube_api_key_default">Starta om appen för att byta tillbaka till standard YouTube API-nyckeln.</string>
+    <string name="pref_summary_preferred_languages">Välj dina föredragna språk.</string>
+    <string name="pref_summary_dislikes_filter">Filtrera bort videoklipp med höga ogillar: %s</string>
+    <string name="pref_summary_screen_orientation">Videospelarens orientering: %s</string>
+    <string name="pref_title_screen_orientation">Skärmorientering</string>
+    <string name="pref_title_channel_blacklist">Kanalsvartlista</string>
+    <string name="channel_already_whitelisted">Kanalen är redan vitlistad.</string>
+    <string name="pref_title_dislikes_filter">Ogillar</string>
+    <string name="pref_summary_import_dbs">Importera dina prenumerationer och bokmärkesdatabaser.</string>
+    <string name="pref_title_import_dbs">Importera säkerhetskopia</string>
+    <string name="i_agree">Jag godkänner</string>
+    <string name="pref_playback_status_cleared">Uppspelningsstatus rensad.</string>
+    <string name="pref_title_license">Licens</string>
+    <string name="pref_title_preferred_res">Föredragen upplösning</string>
+    <string name="pref_languages_filter_category">Språk och regionfilter</string>
+    <string name="pref_title_low_views_filter">Visningar</string>
+    <string name="databases_import_nothing_selected">Ingenting valdes…</string>
+    <string name="pref_title_download_to_separate_directories">Ladda ner videor till mappar</string>
+    <string name="pref_title_warn_mobile_downloads">Visa varning för mobilt nätverk</string>
+    <string name="pref_title_disable_screen_gestures">Inaktivera videogester</string>
+    <string name="databases_import_fail">Det gick inte att importera dina databaser.</string>
+    <string name="pref_youtube_api_key_error">Ett fel uppstod vid försök att validera den API-nyckel som du angav.</string>
+    <string name="pref_summary_channel_whitelist">En lista över vitlistade kanaler.</string>
+    <string name="pref_title_preferred_regions">Föredragen region</string>
+    <string name="pref_summary_channel_blacklist">En lista över blockerade kanaler.</string>
+    <string name="preferences">Inställningar</string>
+    <string name="pref_title_preferred_res_mobile">Föredragen upplösning för mobilt nätverk</string>
+    <string name="pref_channels_filter_category">Kanalers filter</string>
+    <string name="block">Blockera</string>
+    <string name="channel_whitelist_updated">Kanal vitlistad. Vänligen uppdatera videor.</string>
+    <string name="pref_other_category">Andra</string>
+    <string name="channel_unwhitelist_success">Kanalvitlista uppdaterad. Vänligen uppdatera videor.</string>
+    <string name="pref_summary_choose_player">Videospelare som ska användas: %s</string>
+    <string name="pref_title_import_subs">Importera prenumerationer från YouTube</string>
+    <string name="pref_title_youtube_api_key">YouTube API-nyckel</string>
+    <string name="pref_summary_license">GNU General Public License version 3</string>
+    <string name="databases_import_success">Databaser importerade. Starta om appen för att tillämpa ändringar.</string>
+    <string name="pref_title_version">Version</string>
+    <string name="pref_summary_disable_playback_status">Om markerad, kommer uppspelningsstatus att rensas och kommer inte att användas.</string>
+    <string name="pref_title_backup_dbs">Säkerhetskopiera databaser</string>
+    <string name="channel_whitelist_update_failure">Det gick inte att vitlista den angivna kanalen…</string>
+    <string name="pref_video_blocker_category">Videoblockerare</string>
+    <string name="pref_title_lang_detection_video_filtering">Språkdetektering videofiltrering</string>
+    <string name="pref_summary_subscriptions_alphabetical_order">Om markerad, kommer prenumererade kanaler att sorteras alfabetiskt.</string>
+    <string name="pref_title_channel_whitelist">Kanalvitlista</string>
+    <string name="pref_title_disable_playback_status">Inaktivera uppspelningsstatus</string>
+    <string name="channel_unwhitelist_failure">Det gick inte att avvitlista de givna kanalerna…</string>
+    <string name="pref_category_mobile_network">Mobilt nätverk</string>
+    <string name="pref_summary_channel_filter_method">Välj kanalfiltreringsmetod: %s</string>
+    <string name="setting_updated">Inställningen uppdaterad. Vänligen uppdatera videor.</string>
+    <string name="pref_summary_backup_dbs">Säkerhetskopiera dina prenumerationer och bokmärkesdatabaser.</string>
+    <string name="pref_title_disable_search_history">Inaktivera sökhistorik</string>
+    <string name="databases_backup_success">Databaser säkerhetskopierade till %s</string>
+    <string name="subs_import_select_backup">Välj YouTube XML-fil som ska importeras</string>
+    <string name="pref_privacy_category">Integritet</string>
+    <string name="restart">Starta om</string>
+    <string name="pref_title_updates">Uppdateringar</string>
+    <string name="pref_summary_preferred_regions">Välj en föredragen region. Detta används för att filtrera ut videor i kategorin \"utvalda\" videor: %s</string>
+    <string name="pref_summary_updates">Sök efter nya versioner.</string>
+    <string name="pref_summary_youtube_api_key">Ange din egna YouTube Data API-nyckel. Lämna tomt för att använda standard.</string>
+    <string name="pref_summary_enable_video_blocker">Aktivera videoblockerare.</string>
+    <string name="pref_title_subscriptions_alphabetical_order">Sortera kanaler alfabetiskt</string>
+    <string name="pref_title_channel_filter_method">Kanalfiltermetod</string>
+    <string name="channel_blacklist_empty">Kanalsvartlistan är tom.</string>
+    <string name="pref_summary_feed_notification">Hur ofta ska vi leta efter nya videor från prenumererade kanaler: %s</string>
+    <string name="pref_title_default_tab">Standardflik</string>
+    <string name="pref_disable_search_history_deleted">Sökhistoriken har raderats.</string>
+    <string name="please_wait">Vänligen vänta…</string>
+    <string name="pref_summary_download_to_separate_directories">Videor hämtas till mappar baserat på kanalnamnet.</string>
+    <string name="pref_category_downloads">Nedladdningar</string>
+    <string name="databases_importing">Importerar…</string>
+    <string name="channel_blacklist_update_failure">Det gick inte att ta bort den angivna kanalen från den svarta listan…</string>
+    <string name="pref_other_filters_category">Andra filter</string>
+    <string name="pref_summary_preferred_res">Välj önskad upplösning: %s</string>
+    <string name="disabled">Inaktiverad</string>
+    <string name="pref_summary_disable_search_history">Om markerad, kommer sökhistoriken att rensas och kommer inte att användas.</string>
+    <string name="pref_title_feed_notification">Automatisk flödesavisering</string>
+    <string name="pref_summary_warn_mobile_downloads">Visa en varning om du använder ett mobilt nätverk (t. ex. 4G) innan du streamar/laddar ner videor.</string>
+    <string name="pref_disable_playback_status_deleted">Uppspelningsstatus raderad.</string>
+    <string name="preferred_lang_updated">Föredraget språk uppdaterat. Uppdatera videor.</string>
+    <string name="pref_summary_import_subs">Importera dina prenumerationer från ditt YouTube-konto.</string>
+    <string name="no_preferred_lang_selected">Inget föredraget språk har valts. Inställning ignorerad.</string>
+    <string name="app_license">Copyright © 2015-2018 Ramon Mifsud
+\n 
+\nDetta program är fri programvara: du kan vidaredistribuera den och/eller modifiera den enligt villkoren i GNU General Public License som publicerats av Free Software Foundation (version 3 av licensen).
+\n 
+\nDetta program distribueras i hopp om att det kommer att vara användbart, men utan någon garanti; underförstådda garantier för säljbarhet eller lämplighet för ett visst ändamål. Se GNU General Public License för mer information.
+\n 
+\nDu bör ha fått en kopia av GNU General Public License tillsammans med detta program. Om inte, se &lt;http://www.gnu.org/licenses/&gt;</string>
+    <string name="pref_summary_clear_playback_status">Rensa uppspelningsstatus för alla videor.</string>
+    <string name="unblock">Avblockera</string>
+    <string name="pref_summary_credits">Personer och projekt som gjorde den här appen möjlig.</string>
+    <string name="pref_summary_default_tab">Standardflik att visa när SkyTube startar: %s</string>
+    <string name="databases_import_warning_message">Prenumerations-och bokmärkesdatabaserna ersätts med data i den valda säkerhetskopian.
+\n
+\nFortsätt\?</string>
+    <string name="input_channel_url">Kanalens URL som ska vitlistas:</string>
+    <string name="pref_video_player_category">Videospelare</string>
+    <string name="add">Lägg till</string>
+    <string name="pref_summary_preferred_res_mobile">Välj önskad upplösning när du strömmar via ett mobilt nätverk (t. ex. 4G): %s</string>
+    <string name="pref_title_credits">Tack till</string>
+    <string name="pref_title_clear_playback_status">Rensa uppspelningsstatus</string>
+    <string name="pref_summary_low_views_filter">Filtrera bort videor med låga visningar: %s</string>
+    <string name="pref_youtube_api_key_custom">Nyckeln är giltig. Starta om appen för att använda den nya YouTube API-nyckeln.</string>
+</resources>

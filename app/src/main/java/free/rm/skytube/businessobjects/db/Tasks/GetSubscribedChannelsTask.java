@@ -21,6 +21,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -57,17 +58,26 @@ public class GetSubscribedChannelsTask extends AsyncTaskParallel<Void, Void, Lis
 
 	@Override
 	protected void onPreExecute() {
-		if (progressBar != null)
+		if (progressBar != null) {
 			progressBar.setVisibility(View.VISIBLE);
+		}
 	}
 
 
 	@Override
 	protected List<YouTubeChannel> doInBackground(Void... params) {
-		List<YouTubeChannel> subbedChannelsList = null;
-
+		List<YouTubeChannel> subbedChannelsList = new ArrayList<>();
+		GetChannelInfo channelInfo = new GetChannelInfo(adapter.getContext(),true);
 		try {
-			subbedChannelsList = SubscriptionsDb.getSubscriptionsDb().getSubscribedChannels();
+			List<String> channelIds = SubscriptionsDb.getSubscriptionsDb().getSubscribedChannelIds();
+			for (String id : channelIds) {
+				YouTubeChannel channel = channelInfo.getChannelInfoSync(id);
+				// This shouldn't be null, but could happen in rare scenarios, where the app is offline,
+				// and the info previously not saved
+				if (channel != null) {
+					subbedChannelsList.add(channel);
+				}
+			}
 
 			// sort channels alphabetically (by channel name) if the user wants so...
 			if (sortChannelsAlphabetically) {

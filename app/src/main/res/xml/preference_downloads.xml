@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ SkyTube
+  ~ Copyright (C) 2019  Zsombor Gegesy
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation (version 3 of the License).
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:title="@string/pref_category_downloads">
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_key_download_to_separate_directories"
+            android:title="@string/pref_title_download_to_separate_directories"
+            android:summary="@string/pref_summary_download_to_separate_directories"/>
+
+        <Preference
+            android:title="@string/pref_title_video_download_folder"
+            android:key="@string/pref_key_video_download_folder"
+            android:summary="@string/pref_summary_video_download_folder"
+            />
+
+        <ListPreference
+            android:key="@string/pref_key_video_download_preferred_resolution"
+            android:title="@string/pref_video_download_preferred_resolution_title" />
+
+    </PreferenceCategory>
+
+    <!--
+        MOBILE NETWORK
+    -->
+    <PreferenceCategory
+        android:title="@string/pref_category_mobile_network">
+
+        <ListPreference
+            android:key="@string/pref_key_preferred_res_mobile"
+            android:title="@string/pref_title_preferred_res_mobile"
+            android:summary="@string/pref_summary_preferred_res_mobile"/>
+
+        <ListPreference
+            android:entries="@array/pref_mobile_network_usage"
+            android:entryValues="@array/pref_mobile_network_usage_values"
+            android:defaultValue="@string/pref_mobile_network_usage_value_ask"
+            android:key="@string/pref_key_mobile_network_usage_policy"
+            android:title="@string/pref_title_mobile_network_usage"
+            android:summary="@string/pref_summary_mobile_network_usage"/>
+    </PreferenceCategory>
+
+
+</PreferenceScreen>

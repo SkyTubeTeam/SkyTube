@@ -17,68 +17,36 @@
 
 package free.rm.skytube.businessobjects.YouTube.Tasks;
 
-import android.content.SharedPreferences;
-
-import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.Semaphore;
+import java.util.concurrent.atomic.AtomicBoolean;
+
+import android.util.Log;
 
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
-import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
-import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
-import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
 
 /**
  * A task that returns the videos of channel the user has subscribed too.  Used to detect if new
  * videos have been published since last time the user used the app.
  */
-public class GetSubscriptionVideosTask extends AsyncTaskParallel<Void, Void, Void> {
-	private List<GetChannelVideosTask> tasks = new ArrayList<>();
+public class GetSubscriptionVideosTask extends AsyncTaskParallel<Void, Void, Boolean> {
 	private GetSubscriptionVideosTaskListener listener;
-	private int numTasksLeft = 0;
-	private int numTasksFinished = 0;
-	boolean forceRefresh = false;
-
-	public GetSubscriptionVideosTask(GetSubscriptionVideosTaskListener listener) {
+	private List<String> channelIds;
+	public GetSubscriptionVideosTask(GetSubscriptionVideosTaskListener listener, List<String> channelIds) {
 		this.listener = listener;
+		this.channelIds = channelIds;
 	}
 
-	/**
-	 * @return The last time we updated the subscriptions videos feed.  Will return null if the
-	 * last refresh time is set to -1.
-	 */
-	private Long getFeedsLastUpdateTime() {
-		long l = SkyTubeApp.getPreferenceManager().getLong(SkyTubeApp.KEY_SUBSCRIPTIONS_LAST_UPDATED, -1);
-		return (l != -1)  ?  l  :  null;
-	}
-
-
-	/**
-	 * Update the feeds' last update time to the current time.
-	 */
-	private void updateFeedsLastUpdateTime() {
-		updateFeedsLastUpdateTime(System.currentTimeMillis());
-	}
-
-
-	/**
-	 * Update the feed's last update time to dateTime.
-	 *
-	 * @param dateTimeInMs  The feed's last update time.  If it is set to null, then -1 will be stored
-	 *                  to indicate that the app needs to force refresh the feeds...
-	 */
-	public static void updateFeedsLastUpdateTime(Long dateTimeInMs) {
-		SharedPreferences.Editor editor = SkyTubeApp.getPreferenceManager().edit();
-		editor.putLong(SkyTubeApp.KEY_SUBSCRIPTIONS_LAST_UPDATED, dateTimeInMs != null  ?  dateTimeInMs  :  -1);
-		editor.commit();
-	}
 
 
 	@Override
-	protected Void doInBackground(Void... voids) {
-		List<YouTubeChannel> channels = SubsAdapter.get(null).getSubsLists();
-
+	protected Boolean doInBackground(Void... voids) {
+		if (channelIds == null) {
+			channelIds = SubscriptionsDb.getSubscriptionsDb().getSubscribedChannelIds();
+		}
 		/*
 		 * Get the last time all subscriptions were updated, and only fetch videos that were published after this.
 		 * Any new channels that have been subscribed to since the last time this refresh was done will have any
@@ -86,55 +54,48 @@ public class GetSubscriptionVideosTask extends AsyncTaskParallel<Void, Void, Voi
 		 * any.
 		 */
 
-		// If forceRefresh is set to true, then set publishedAfter to null... this will force
-		// the app to update the feeds.  Otherwise, set the publishedAfter date to the last
-		// time we updated the feeds.
-		Long publishedAfter = forceRefresh ? null : getFeedsLastUpdateTime();
+		Long publishedAfter =  SkyTubeApp.getSettings().getFeedsLastUpdateTime();
+		AtomicBoolean changed = new AtomicBoolean(false);
+		CountDownLatch countDown = new CountDownLatch(channelIds.size());
 
-		for(final YouTubeChannel channel : channels) {
-			tasks.add(new GetChannelVideosTask(channel)
-				.setPublishedAfter(publishedAfter)
- 				.setGetChannelVideosTaskInterface(videos -> {
-					 numTasksFinished++;
-					 boolean videosDeleted = false;
-					 int numberOfVideos = videos != null ? videos.size() : 0;
-					 if(numTasksFinished < numTasksLeft) {
-						 if(tasks.size() > 0) {
-							 // More channels to fetch videos from
-							 tasks.get(0).executeInParallel();
-							 tasks.remove(0);
-						 }
-						 if(listener != null)
-							 listener.onChannelVideosFetched(channel, numberOfVideos, videosDeleted);
-					 } else {
-						 videosDeleted = SubscriptionsDb.getSubscriptionsDb().trimSubscriptionVideos();
+		Semaphore semaphore = new Semaphore(4);
 
-						 // All channels have finished querying. Update the last time this refresh was done.
-						 updateFeedsLastUpdateTime();
 
-						 if (listener != null) {
-							 listener.onChannelVideosFetched(channel, numberOfVideos, videosDeleted);
-							 listener.onAllChannelVideosFetched();
-						 }
-					 }
-				 })
-			);
+		for(final String channelId: channelIds) {
+			try {
+				semaphore.acquire();
+				new GetChannelVideosTask(channelId, publishedAfter, true, videos -> {
+					semaphore.release();
+					int numberOfVideos = videos != null ? videos.size() : 0;
+					if (numberOfVideos > 0) {
+						changed.compareAndSet(false, true);
+					}
+					if (listener != null) {
+						listener.onChannelVideosFetched(channelId, numberOfVideos, false);
+					}
+					countDown.countDown();
+				}).executeInParallel();
+			} catch (InterruptedException e) {
+				Log.e(GetSubscriptionVideosTask.class.getName(), "Interrupt in semaphore.acquire:"+ e.getMessage(), e);
+			}
 		}
 
-		numTasksLeft = tasks.size();
-
-		int numToStart = tasks.size() >= 4 ? 4 : tasks.size();
-
-		// Start fetching videos for up to 4 channels simultaneously.
-		for(int i=0;i<numToStart;i++) {
-			tasks.get(0).executeInParallel();
-			tasks.remove(0);
+		try {
+			countDown.await();
+		} catch (InterruptedException e) {
+			Log.e(GetSubscriptionVideosTask.class.getName(), "Interrupt in countDown.await:"+ e.getMessage(), e);
 		}
 
-		return null;
+		return changed.get();
 	}
 
 
+	@Override
+	protected void onPostExecute(Boolean changed) {
+		SkyTubeApp.getSettings().updateFeedsLastUpdateTime();
+		if (listener != null) {
+			listener.onAllChannelVideosFetched(changed);
+		}
 
-
+	}
 }

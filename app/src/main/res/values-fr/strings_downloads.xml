@@ -1,15 +1,16 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="downloads">Téléchargements</string>
-	<string name="download_video">Télécharger la vidéo</string>
-	<string name="starting_video_download">Téléchargement de \'%s\'…</string>
-	<string name="video_download_stream_error">Impossible de télécharger \'%s\'.</string>
-	<string name="delete_download">Supprimer la vidéo</string>
-	<string name="video_downloaded">\'%s\' téléchargée.</string>
-	<string name="no_downloaded_videos_text">Vous n\'avez pas encore téléchargé de vidéos.
+    <string name="downloads">Téléchargements</string>
+    <string name="download_video">Télécharger la vidéo</string>
+    <string name="starting_video_download">Téléchargement de \'%s\'…</string>
+    <string name="video_download_stream_error">Impossible de télécharger \'%s\'.</string>
+    <string name="delete_download">Supprimer la vidéo</string>
+    <string name="video_downloaded">\'%s\' téléchargée.</string>
+    <string name="no_downloaded_videos_text">Vous n\'avez pas encore téléchargé de vidéos.
 \n
 \nUne fois que vous l\'aurez fait, elles apparaîtront ici.</string>
-	<string name="playing_video_file_missing">Impossible de lire la vidéo téléchargée. Lecture en ligne.</string>
-	<string name="external_storage_not_available">Impossible de télécharger le fichier car le stockage externe n\'est pas disponible.</string>
-<string name="download">Téléchargement</string>
-	</resources>
+    <string name="playing_video_file_missing">Impossible de lire la vidéo téléchargée. Lecture en ligne.</string>
+    <string name="external_storage_not_available">Impossible de télécharger le fichier car le stockage externe n\'est pas disponible.</string>
+    <string name="download">Téléchargement</string>
+    <string name="warning_mobile_network_download">Votre appareil n\'est pas connecté à un réseau wifi. Nous vous recommandons de vous connecter à un réseau wifi pour éviter des frais de données supplémentaires. Télécharger la vidéo malgré tout \?</string>
+</resources>

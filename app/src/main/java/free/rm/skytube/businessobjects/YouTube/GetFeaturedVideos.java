@@ -28,6 +28,7 @@ import java.util.List;
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.Logger;
+import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPI;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPIKey;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
@@ -54,7 +55,8 @@ public class GetFeaturedVideos extends GetYouTubeVideos {
 
 
 	@Override
-	public List<YouTubeVideo> getNextVideos() {
+	public List<CardData> getNextVideos() {
+		setLastException(null);
 		List<Video> searchResultList = null;
 
 		if (!noMoreVideoPages()) {
@@ -78,6 +80,7 @@ public class GetFeaturedVideos extends GetYouTubeVideos {
 				if (nextPageToken == null)
 					noMoreVideoPages = true;
 			} catch (IOException e) {
+				setLastException(e);
 				Logger.e(this, "Error has occurred while getting Featured Videos.", e);
 			}
 		}
@@ -92,12 +95,14 @@ public class GetFeaturedVideos extends GetYouTubeVideos {
 	 * @param videoList {@link List} of {@link Video}.
 	 * @return {@link List} of {@link YouTubeVideo}.
 	 */
-	private List<YouTubeVideo> toYouTubeVideoList(List<Video> videoList) {
-		List<YouTubeVideo> youTubeVideoList = new ArrayList<>();
+	private List<CardData> toYouTubeVideoList(List<Video> videoList) {
+		List<CardData> youTubeVideoList = new ArrayList<>();
 
 		if (videoList != null) {
 			for (Video video : videoList) {
-				youTubeVideoList.add(new YouTubeVideo(video));
+				YouTubeVideo yv = new YouTubeVideo(video);
+				yv.setRetrievalTimestamp(System.currentTimeMillis());
+				youTubeVideoList.add(yv);
 			}
 		}
 
@@ -109,12 +114,6 @@ public class GetFeaturedVideos extends GetYouTubeVideos {
 		String region = SkyTubeApp.getPreferenceManager()
 				.getString(SkyTubeApp.getStr(R.string.pref_key_preferred_region), "").trim();
 		return (region.isEmpty() ? null : region);
-	}
-
-
-	@Override
-	public boolean noMoreVideoPages() {
-		return noMoreVideoPages;
 	}
 
 

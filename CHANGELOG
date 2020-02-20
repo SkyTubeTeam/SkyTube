@@ -1,3 +1,73 @@
+v2.970 - 26 Jan 2020
+        * Fix Subscription DB upgrade error
+        * Add ability to switch brightness and volume control
+        * Fixing a typo found by Avently, which prevented loading the first video in a page with Youtube API
+        * Re-enabled image and image button in search hints dropdown.
+        * Fix paging with NewPipeBackend
+        * NewPipeExtractor update needed due to Youtube.com change.
+        * Video playback speed controller added
+v2.969 - 31 Dec 2019
+		* Use NewPipe backend for checking new videos on subscriptions.
+		* No need to restart the app for an Youtube key change.
+		* Add checks for network availability before:
+			* channel metadata download
+			* displaying download menuitem
+			* showing the comment panel
+		* Improve URL parsing, to handle more variant.
+		* Add a simple menuitem to disable video gestures without leaving the player screen.
+		* Updated Polish and Hungarian translations
+
+v2.968 - 02 Dec 2019
+		* Reduce the number of Youtube API calls
+		* Implement comment fetching with the NewPipe backend
+		* Fix the repeating search result problem with the NewPipe backend.
+		* Subscription feed refresh should not force the UI to the head of the list.
+		* Show error when comment fetching fails due to Youtube API error.
+
+v2.967 - 02 Nov 2019
+        * Fix crash in Subscription feed retrieval
+        * Fix multiple, concurrent play, due to ExoPlayer creation
+        * App is now able to backup (and restore) channelFiltering and searchHistory databases.
+
+v2.966 - 27 Oct 2019
+        * Implement channel cache, which will reduce network usage, and improve offline experience.
+        * #570 - fix "cannot play video after returning from `open with`"
+        * #571 - fix 'configure channel blocking at the subscribe page leading to fatal crash'
+        * #572 - new policies for downloading videos on mobile network: "Always ask"/"Block"/"Allow"
+        * #574 - "play video under mobile data" dialog can only be dismissed by double clicking "Play Video"
+        * #580 - fix exception in DialogUtils.java line 125
+        * #586 - fix fatal failure on new installations.
+        * Fixes for the NewPipeExtractor backend
+        * dependency upgrades
+        * New Swedish translation.
+
+v2.965 - 27 Sep 2019
+        * Fixes for the NewPipeExtractor backend
+        * Do not block videos on bookmark and downloaded videos tab.
+        * dependency upgrades
+        * Fix to handle dialog cancellation as 'negative' response in couple of places - where an answer is expected.
+        * Remove special icon, which cause crashes on old Androids.
+        * Display YouTube API errors to the user, to avoid confusion.
+        * Updated Russian and Portuguese (Brazil) translation.
+
+v2.964 - 03 Sep 2019
+        * Add ability to use NewPipeExtractor to talk to Youtube servers - not everything is covered, but the basic functionality.
+	* Added ability to bookmark videos by sharing youtube url's from other apps.
+	* Fix bug in Chromecast occured during pause-resume.
+	* Paging implemented in the Subscription Feed - so the feed loads faster now.
+	* Create a new preference fragment for 'Downloads and Network' settings
+	* Updated Russian translation
+
+v2.963 - 17 Aug 2019
+        * Add preference to set custom video download folder
+	* Using com.github.hedzr:android-file-chooser package for file dialogs, instead of com.github.angads25:filepicker
+	* Fix subscription refresh bugs - do not start multiple refresh concurrently
+	* Add scroll to top of list when clicking on current tab
+	* Added Preference to show/hide tabs
+	* Make sure Google Play Services is installed before attempting to support Chromecast
+	* Added Preference to select video download quality
+	* Updated French translations.
+
 v2.962 - 06 Aug 2019:
 	* Add a new Youtube API key, re-use the old keys for F-Droid.
 	* Updated German and Hungarian translations.

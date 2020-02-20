@@ -20,7 +20,6 @@ package free.rm.skytube.gui.businessobjects.views;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import androidx.appcompat.app.AlertDialog;
@@ -35,15 +34,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import free.rm.skytube.R;
-import free.rm.skytube.businessobjects.GetPlaylistTask;
-import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
-import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannelInterface;
-import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubePlaylist;
+import free.rm.skytube.businessobjects.YouTube.Tasks.GetPlaylistTask;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetYouTubeChannelInfoTask;
 import free.rm.skytube.gui.activities.MainActivity;
-import free.rm.skytube.gui.businessobjects.PlaylistClickListener;
 import free.rm.skytube.gui.businessobjects.YouTubePlayer;
-import free.rm.skytube.gui.fragments.ChannelBrowserFragment;
 import free.rm.skytube.gui.fragments.PlaylistVideosFragment;
 
 /**
@@ -52,6 +46,10 @@ import free.rm.skytube.gui.fragments.PlaylistVideosFragment;
  * party Android apps.
  */
 public class ClickableLinksTextView extends LinkConsumableTextView {
+	private static final Pattern videoPattern = Pattern.compile("http(?:s?):\\/\\/(?:www\\.)?youtu(?:be\\.com\\/watch\\?v=|\\.be\\/)([\\w\\-\\_]*)(&(amp;)?[\\w\\?=\\.]*)?");
+	private static final Pattern playlistPattern = Pattern.compile("^.*(youtu.be\\/|list=)([^#\\&\\?]*).*");
+	private static final Pattern channelPattern = Pattern.compile("(?:https|http)\\:\\/\\/(?:[\\w]+\\.)?youtube\\.com\\/(?:c\\/|channel\\/|user\\/)?([a-zA-Z0-9\\-]{1,})");
+
 
 	public ClickableLinksTextView(Context context) {
 		super(context);
@@ -88,9 +86,6 @@ public class ClickableLinksTextView extends LinkConsumableTextView {
 	 */
 	private void linkify() {
 		Link link = new Link(android.util.Patterns.WEB_URL);
-		final Pattern videoPattern = Pattern.compile("http(?:s?):\\/\\/(?:www\\.)?youtu(?:be\\.com\\/watch\\?v=|\\.be\\/)([\\w\\-\\_]*)(&(amp;)?[\\w\\?=\\.]*)?");
-		final Pattern playlistPattern = Pattern.compile("^.*(youtu.be\\/|list=)([^#\\&\\?]*).*");
-		final Pattern channelPattern = Pattern.compile("(?:https|http)\\:\\/\\/(?:[\\w]+\\.)?youtube\\.com\\/(?:c\\/|channel\\/|user\\/)?([a-zA-Z0-9\\-]{1,})");
 
 		// set the on click listener
 		link.setOnClickListener(clickedText -> {
@@ -102,7 +97,7 @@ public class ClickableLinksTextView extends LinkConsumableTextView {
 			} else if(playlistMatcher.matches()) {
 				String playlistId = playlistMatcher.group(2);
 				// Retrieve the playlist from the playlist ID that was in the url the user clicked on
-				new GetPlaylistTask(playlistId, playlist -> {
+				new GetPlaylistTask(getContext(), playlistId, playlist -> {
 					// Pass the clicked playlist to PlaylistVideosFragment.
 					Intent playlistIntent = new Intent(getContext(), MainActivity.class);
 					playlistIntent.setAction(MainActivity.ACTION_VIEW_PLAYLIST);
@@ -112,10 +107,7 @@ public class ClickableLinksTextView extends LinkConsumableTextView {
 			} else if(channelMatcher.matches()) {
 				String username = channelMatcher.group(1);
 				new GetYouTubeChannelInfoTask(getContext(), youTubeChannel -> {
-					Intent channelIntent = new Intent(getContext(), MainActivity.class);
-					channelIntent.setAction(MainActivity.ACTION_VIEW_CHANNEL);
-					channelIntent.putExtra(ChannelBrowserFragment.CHANNEL_OBJ, youTubeChannel);
-					getContext().startActivity(channelIntent);
+					YouTubePlayer.launchChannel(youTubeChannel, getContext());
 				}).setUsingUsername().executeInParallel(username);
 			} else {
 				Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(clickedText));

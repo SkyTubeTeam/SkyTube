@@ -18,8 +18,11 @@
 package free.rm.skytube.businessobjects.YouTube;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
+import free.rm.skytube.businessobjects.Logger;
+import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetYouTubeVideosTask;
 
@@ -31,6 +34,7 @@ import free.rm.skytube.businessobjects.YouTube.Tasks.GetYouTubeVideosTask;
 public abstract class GetYouTubeVideos {
 	protected String nextPageToken = null;
 	protected boolean noMoreVideoPages = false;
+	private Exception lastException;
 
 	/**
 	 * Initialise this object.
@@ -52,13 +56,15 @@ public abstract class GetYouTubeVideos {
 	 *
 	 * @return List of {@link YouTubeVideo}s.
 	 */
-	public abstract List<YouTubeVideo> getNextVideos();
+	public abstract List<CardData> getNextVideos();
 
 
 	/**
 	 * @return True if YouTube states that there will be no more video pages; false otherwise.
 	 */
-	public abstract boolean noMoreVideoPages();
+	public boolean noMoreVideoPages() {
+		return noMoreVideoPages;
+	}
 
 
 	/**
@@ -67,5 +73,48 @@ public abstract class GetYouTubeVideos {
 	public void reset() {
 		nextPageToken = null;
 		noMoreVideoPages = false;
+		lastException = null;
 	}
+
+	public Exception getLastException() {
+		return lastException;
+	}
+
+	protected void setLastException(Exception lastException) {
+		this.lastException = lastException;
+	}
+
+
+
+	/**
+	 * <p>Hence, we need to submit the video IDs to YouTube to retrieve more information about the
+	 * given video list.</p>
+	 *
+	 * @param videoIds Search results
+	 * @return List of {@link YouTubeVideo}s.
+	 * @throws IOException
+	 */
+	protected List<CardData> getVideoListFromIds(List<String> videoIds) throws IOException {
+		if (videoIds == null || videoIds.isEmpty()) {
+			return Collections.emptyList();
+		}
+		StringBuilder videoIdsStr = new StringBuilder();
+
+		// append the video IDs into a strings (CSV)
+		for (String id : videoIds) {
+			videoIdsStr.append(id);
+			videoIdsStr.append(',');
+		}
+
+		if (videoIdsStr.length() > 0) {
+			videoIdsStr.setLength(videoIdsStr.length() - 1);
+		}
+		// get video details by supplying the videos IDs
+		GetVideosDetailsByIDs getVideo = new GetVideosDetailsByIDs();
+		getVideo.init(videoIdsStr.toString());
+		Logger.i(this, "getVideList light from %s id, video ids: %s", videoIds.size(), videoIdsStr);
+
+		return getVideo.getNextVideos();
+	}
+
 }

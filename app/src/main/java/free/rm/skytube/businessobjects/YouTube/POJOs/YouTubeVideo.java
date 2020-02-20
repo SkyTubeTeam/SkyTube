@@ -41,10 +41,7 @@ import org.joda.time.format.PeriodFormatter;
 
 import java.io.File;
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.math.MathContext;
-import java.math.RoundingMode;
 import java.util.Date;
 import java.util.Locale;
 import java.util.regex.Matcher;
@@ -68,28 +65,32 @@ import static free.rm.skytube.app.SkyTubeApp.getStr;
 /**
  * Represents a YouTube video.
  */
-public class YouTubeVideo implements Serializable {
+public class YouTubeVideo extends CardData implements Serializable {
 
-	/**
-	 * YouTube video ID.
-	 */
-	private String id;
-	/**
-	 * Video title.
-	 */
-	private String title;
 	/**
 	 * Channel (only id and name are set).
 	 */
 	private YouTubeChannel channel;
 	/**
-	 * The total number of 'likes'.
+	 * The total number of 'likes' - as a localized string!
 	 */
 	private String likeCount;
+
+	/**
+	 * The total number of 'likes'.
+	 */
+	private Long likeCountNumber;
+
+	/**
+	 * The total number of 'dislikes' - as a localized string!
+	 */
+	private String dislikeCount;
+
 	/**
 	 * The total number of 'dislikes'.
 	 */
-	private String dislikeCount;
+	private Long dislikeCountNumber;
+
 	/**
 	 * The percentage of people that thumbs-up this video (format:  "<percentage>%").
 	 */
@@ -117,18 +118,6 @@ public class YouTubeVideo implements Serializable {
 	 */
 	private DateTime publishDate;
 	/**
-	 * The video publish date in pretty format (e.g. "17 hours ago").
-	 */
-	private transient String publishDatePretty;
-	/**
-	 * The time when the publishDatePretty was calculated.
-	 */
-	private transient long publishDatePrettyCalculationTime;
-	/**
-	 * Thumbnail URL.
-	 */
-	private String thumbnailUrl;
-	/**
 	 * Thumbnail URL (maximum resolution).
 	 */
 	private String thumbnailMaxResUrl;
@@ -137,16 +126,14 @@ public class YouTubeVideo implements Serializable {
 	 */
 	private String language;
 	/**
-	 * The description of the video (set by the YouTuber/Owner).
-	 */
-	private String description;
-	/**
 	 * Set to true if the video is a current live stream.
 	 */
 	private boolean isLiveStream;
-	
-	/** publishDate will remain valid for 1 hour. */
-	private final static long PUBLISH_DATE_VALIDITY_TIME = 60 * 60 * 1000L;
+
+	/**
+	 * Timestamp of the data retrieval.
+	 */
+	private Long retrievalTimestamp;
 
 
 	/**
@@ -188,7 +175,7 @@ public class YouTubeVideo implements Serializable {
 
 		VideoStatistics statistics = video.getStatistics();
 		if (statistics != null) {
-			setLikeDislikeCount(statistics.getLikeCount(), statistics.getDislikeCount());
+			setLikeDislikeCount(statistics.getLikeCount() != null ? statistics.getLikeCount().longValue() : null, statistics.getDislikeCount() != null ? statistics.getDislikeCount().longValue() : null);
 
 			setViewCount(statistics.getViewCount());
 		}
@@ -199,33 +186,20 @@ public class YouTubeVideo implements Serializable {
 		this.viewsCount = String.format(getStr(R.string.views), viewsCountInt);
 	}
 
-	private void setLikeDislikeCount(BigInteger likeCount, BigInteger dislikeCount) {
-		if (likeCount != null) {
-			this.likeCount = String.format(Locale.getDefault(), "%,d", likeCount);
-		}
-		if (dislikeCount != null) {
-			this.dislikeCount = String.format(Locale.getDefault(), "%,d", dislikeCount);
-		}
-		setThumbsUpPercentage(likeCount, dislikeCount);
-	}
-
-	/**
-	 * Extracts the video ID from the given video URL.
-	 *
-	 * @param url YouTube video URL.
-	 * @return ID if everything went as planned; null otherwise.
-	 */
-	public static String getYouTubeIdFromUrl(String url) {
-		if (url == null)
-			return null;
-
-		// TODO:  support playlists (i.e. video_ids=... <-- URL submitted via email by YouTube)
-		final String pattern = "(?<=v=|/videos/|embed/|youtu\\.be/|/v/|/e/|video_ids=)[^#&?%]*";
-		Pattern compiledPattern = Pattern.compile(pattern);
-		Matcher matcher = compiledPattern.matcher(url);
-
-		return matcher.find() ? matcher.group() /*video id*/ : null;
-	}
+        public YouTubeVideo(String id, String title, String description, long durationInSeconds, YouTubeChannel channel, long viewCount, Long publishDate, String thumbnailUrl) {
+            this.id = id;
+            this.title = title;
+            this.description = description;
+            setDurationInSeconds((int) durationInSeconds);
+            this.setViewCount(BigInteger.valueOf(viewCount));
+            if (publishDate != null) {
+                this.setPublishTimestamp(publishDate);
+                this.publishDate = new DateTime(publishDate);
+            }
+            this.thumbnailMaxResUrl = thumbnailUrl;
+            this.thumbnailUrl = thumbnailUrl;
+            this.channel = channel;
+        }
 
 	/**
 	 * Sets the {@link #thumbsUpPercentageStr}, i.e. the percentage of people that thumbs-up this video
@@ -234,30 +208,28 @@ public class YouTubeVideo implements Serializable {
 	 * @param likedCountInt	Total number of "likes".
 	 * @param dislikedCountInt Total number of "dislikes".
 	 */
-	private void setThumbsUpPercentage(BigInteger likedCountInt, BigInteger dislikedCountInt) {
+	public void setLikeDislikeCount(Long likedCountInt, Long dislikedCountInt) {
 		String fullPercentageStr = null;
-		int percentageInt = -1;
+		this.thumbsUpPercentage = -1;
 
 		// some videos do not allow users to like/dislike them:  hence likedCountInt / dislikedCountInt
 		// might be null in those cases
 		if (likedCountInt != null && dislikedCountInt != null) {
-			BigDecimal likedCount = new BigDecimal(likedCountInt),
-					dislikedCount = new BigDecimal(dislikedCountInt),
-					totalVoteCount = likedCount.add(dislikedCount),	// liked and disliked counts
-					likedPercentage = null;
 
-			if (totalVoteCount.compareTo(BigDecimal.ZERO) != 0) {
-				likedPercentage = (likedCount.divide(totalVoteCount, MathContext.DECIMAL128)).multiply(new BigDecimal(100));
+			long likedCount = likedCountInt;
+			long dislikedCount = dislikedCountInt;
+			long totalVoteCount = likedCount + dislikedCount;	// liked and disliked counts
+
+			if (totalVoteCount != 0) {
+				this.thumbsUpPercentage = (int) Math.round((double)likedCount*100/totalVoteCount);
 
 				// round the liked percentage to 0 decimal places and convert it to string
-				String percentageStr = likedPercentage.setScale(0, RoundingMode.HALF_UP).toString();
-				fullPercentageStr = percentageStr + "%";
-				percentageInt = Integer.parseInt(percentageStr);
+				fullPercentageStr = String.valueOf(thumbsUpPercentage) + "%";
 			}
 		}
-
+		this.likeCountNumber = likedCountInt;
+		this.dislikeCountNumber = dislikedCountInt;
 		this.thumbsUpPercentageStr = fullPercentageStr;
-		this.thumbsUpPercentage = percentageInt;
 	}
 
 	/**
@@ -275,18 +247,6 @@ public class YouTubeVideo implements Serializable {
 		} else {
 			isLiveStream = false;
 		}
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public String getTitle() {
-		return title;
 	}
 
 	public YouTubeChannel getChannel() {
@@ -333,7 +293,17 @@ public class YouTubeVideo implements Serializable {
 	 * users to like/dislike it.  Refer to {@link #isThumbsUpPercentageSet}.
 	 */
 	public String getLikeCount() {
+		if (likeCountNumber != null) {
+			return String.format(Locale.getDefault(), "%,d", likeCountNumber);
+		}
 		return likeCount;
+	}
+
+	/**
+	 * @return The total number of 'likes'.  Can return <b>null</b> for videos serialized with only a 'string' like count.
+	 */
+	public Long getLikeCountNumber() {
+		return likeCountNumber;
 	}
 
 	/**
@@ -341,7 +311,17 @@ public class YouTubeVideo implements Serializable {
 	 * users to like/dislike it.  Refer to {@link #isThumbsUpPercentageSet}.
 	 */
 	public String getDislikeCount() {
+		if (dislikeCountNumber != null) {
+			return String.format(Locale.getDefault(), "%,d", dislikeCountNumber);
+		}
 		return dislikeCount;
+	}
+
+	/**
+	 * @return The total number of 'dislikes'.  Can return <b>null</b> for videos serialized with only a 'string' like count.
+	 */
+	public Long getDislikeCountNumber() {
+		return dislikeCountNumber;
 	}
 
 	public String getDuration() {
@@ -383,38 +363,33 @@ public class YouTubeVideo implements Serializable {
 		this.durationInSeconds = p.toStandardSeconds().getSeconds();
 	}
 
+	public void setDurationInSeconds(int durationInSeconds) {
+		this.durationInSeconds = durationInSeconds;
+		this.duration = VideoDuration.toHumanReadableString(durationInSeconds);
+	}
+
 	/**
-	 * Sets the publishDate and publishDatePretty.
+	 * Sets the {@link #publishDate}, {@link #publishTimestamp}.
 	 */
 	private void setPublishDate(DateTime publishDate) {
 		this.publishDate = publishDate;
-		this.publishDatePretty = null;
-	}
-
-	/**
-	 * Gets the {@link #publishDate} as a pretty string.
-	 */
-	public String getPublishDatePretty() {
-		long now = System.currentTimeMillis();
-		// if pretty is not yet calculated, or the publish date was generated more than (1 hour) PUBLISH_DATE_VALIDITY_TIME ago...
-		if (publishDatePretty == null || (PUBLISH_DATE_VALIDITY_TIME < now - publishDatePrettyCalculationTime)) {
-			this.publishDatePretty = (publishDate != null) ? new PrettyTimeEx().format(publishDate) : "???";
-			this.publishDatePrettyCalculationTime = now;
+		if (this.publishDate != null) {
+			setPublishTimestamp(this.publishDate.getValue());
 		}
-		return publishDatePretty;
 	}
 
 	/**
-	 * Given that {@link #publishDatePretty} is being cached once generated, this method will allow
-	 * you to regenerate and reset the {@link #publishDatePretty}.
+	 * Update the {@link #publishTimestamp} from {@link #publishDate} if the former is not set, just the later.
+	 * Useful when deserialized from json.
+	 * @return self.
 	 */
-	public void forceRefreshPublishDatePretty() {
-		// Will force the publishDatePretty to be regenerated.  Refer to getPublishDatePretty()
-		this.publishDatePretty = null;
-	}
-
-	public String getThumbnailUrl() {
-		return thumbnailUrl;
+	public YouTubeVideo updatePublishTimestampFromDate() {
+		if (this.publishTimestamp == null) {
+			if (this.publishDate != null) {
+				setPublishTimestamp(this.publishDate.getValue());
+			}
+		}
+		return this;
 	}
 
 	public String getThumbnailMaxResUrl() {
@@ -429,24 +404,25 @@ public class YouTubeVideo implements Serializable {
 		return language;
 	}
 
-	public String getDescription() {
-		return description;
-	}
-
 	public boolean isLiveStream() {
 		return isLiveStream;
 	}
 
-	public void bookmarkVideo(Context context, Menu menu) {
+	public boolean bookmarkVideo(Context context) {
+		return bookmarkVideo(context, null);
+	}
+
+	public boolean bookmarkVideo(Context context, Menu menu) {
 		boolean successBookmark = BookmarksDb.getBookmarksDb().add(this);
 		Toast.makeText(context,
 				successBookmark ? R.string.video_bookmarked : R.string.video_bookmarked_error,
 				Toast.LENGTH_LONG).show();
 
-		if (successBookmark) {
+		if (successBookmark && menu != null) {
 			menu.findItem(R.id.bookmark_video).setVisible(false);
 			menu.findItem(R.id.unbookmark_video).setVisible(true);
 		}
+		return successBookmark;
 	}
 
 	public void unbookmarkVideo(Context context, Menu menu) {
@@ -484,10 +460,21 @@ public class YouTubeVideo implements Serializable {
 	 *
 	 * @param listener Instance of {@link GetDesiredStreamListener} to pass the stream through.
 	 */
-	public void getDesiredStream(GetDesiredStreamListener listener) {
-		new GetVideoStreamTask(this, listener).executeInParallel();
+	public void getDesiredStream(GetDesiredStreamListener listener, boolean forDownload) {
+		new GetVideoStreamTask(this, listener, forDownload).executeInParallel();
 	}
 
+	public void getDesiredStream(GetDesiredStreamListener listener) {
+		getDesiredStream(listener, false);
+	}
+
+	public Long getRetrievalTimestamp() {
+		return retrievalTimestamp;
+	}
+
+	public void setRetrievalTimestamp(Long retrievalTimestamp) {
+		this.retrievalTimestamp = retrievalTimestamp;
+	}
 
 	/**
 	 * Remove local copy of this video, and delete it from the VideoDownloads DB.
@@ -560,7 +547,7 @@ public class YouTubeVideo implements Serializable {
 							String.format(getContext().getString(R.string.video_download_stream_error), getTitle()),
 							Toast.LENGTH_LONG).show();
 				}
-			});
+			}, true);
 		}
 	}
 

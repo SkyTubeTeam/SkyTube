@@ -31,8 +31,24 @@
 	<string name="pref_summary_preferred_res_mobile">Select your preferred resolution when streaming via a mobile network (such as 4G):  %s</string>
 
 	<string name="pref_key_warn_mobile_downloads" translatable="false">pref_key_warn_mobile_downloads</string>
-	<string name="pref_title_warn_mobile_downloads">Display Mobile Network Warning</string>
-	<string name="pref_summary_warn_mobile_downloads">Display a warning if you are using mobile network (such as 4G) before streaming/downloading videos.</string>
+	<string name="pref_key_mobile_network_usage_policy" translatable="false">pref_key_mobile_network_usage_policy</string>
+	<string name="pref_title_mobile_network_usage">Mobile Network Usage</string>
+	<string name="pref_summary_mobile_network_usage">What to do, if you are using mobile network (such as 4G) for downloading, watching videos: %s</string>
+
+	<string-array name="pref_mobile_network_usage">
+		<item>Always ask</item>
+		<item>Block</item>
+		<item>Allow</item>
+	</string-array>
+	<string name="pref_mobile_network_usage_value_ask" translatable="false">ask</string>
+	<string name="pref_mobile_network_usage_value_block" translatable="false">block</string>
+	<string name="pref_mobile_network_usage_value_allow" translatable="false">allow</string>
+	<string-array name="pref_mobile_network_usage_values" translatable="false">
+		<item>@string/pref_mobile_network_usage_value_ask</item>
+		<item>@string/pref_mobile_network_usage_value_block</item>
+		<item>@string/pref_mobile_network_usage_value_allow</item>
+	</string-array>
+
 
 	<string name="pref_import_export_category">Import/Export</string>
 	<string name="pref_title_backup_dbs">Backup Databases</string>
@@ -64,6 +80,8 @@
 	<string name="pref_title_autocast">AutoCast</string>
 	<string name="pref_key_autocast">pref_external_launch</string>
 	<string name="pref_summary_autocast">Select a Chromecast device to always use when opening a video in SkyTube from another application.</string>
+
+	<string name="pref_network_downloads_category">Network and Downloads</string>
 
 	<string name="pref_about_category">About</string>
 	<string name="pref_title_website">Website</string>
@@ -527,12 +545,20 @@
 	<string name="pref_title_enable_immersive_mode">Enable immersive mode</string>
 	<string name="pref_summary_enable_immersive_mode">Hide navigation bar and the status bar during playback.</string>
 
+	<string name="pref_key_switch_volume_and_brightness" translatable="false">pref_key_switch_volume_and_brightness</string>
+	<string name="pref_title_switch_volume_and_brightness">Switch Volume and Brightness Gesture</string>
+	<string name="pref_summary_switch_volume_and_brightness">Check if you want to have the volume control on the right side, and brightness on the left.</string>
+
 	<string name="pref_youtube_api_key" translatable="false">pref_youtube_api_key</string>
 	<string name="pref_title_youtube_api_key">YouTube API Key</string>
 	<string name="pref_summary_youtube_api_key">Enter your own YouTube Data API Key. Leave blank to use the default one.</string>
 	<string name="pref_youtube_api_key_error">An error occurred attempting to validate the API Key you entered.</string>
 	<string name="pref_youtube_api_key_custom">Key is valid. Restart app to use the new YouTube API key.</string>
 	<string name="pref_youtube_api_key_default">Restart app to switch back to default YouTube API key.</string>
+
+    <string name="pref_use_newpipe_backend" translatable="false">pref_use_newpipe_backend</string>
+    <string name="pref_title_use_newpipe_backend">Use the NewPipe backend</string>
+    <string name="pref_summary_use_newpipe_backend">If checked, the experimental NewPipe API is used to access Youtube, it may, or may not work...</string>
 
 	<string name="restart">Restart</string>
 	<string name="pref_key_subscriptions_alphabetical_order" translatable="false">pref_key_subscriptions_alphabetical_order</string>
@@ -541,16 +567,20 @@
 	<string name="pref_key_brightness_level" translatable="false">pref_key_brightness_level</string>
 
 	<string name="pref_category_downloads">Downloads</string>
-	<string name="pref_key_download_to_separate_directories">pref_key_download_to_separate_directories</string>
+	<string name="pref_key_download_to_separate_directories" translatable="false">pref_key_download_to_separate_directories</string>
 	<string name="pref_title_download_to_separate_directories">Download Videos Into Folders</string>
 	<string name="pref_summary_download_to_separate_directories">Videos are downloaded into folders based on the channel name.</string>
 
-	<string name="pref_key_video_download_folder">pref_key_video_download_folder</string>
+	<string name="pref_key_video_download_folder" translatable="false">pref_key_video_download_folder</string>
 	<string name="pref_popup_title_video_download_folder">Choose Folder</string>
 	<string name="pref_title_video_download_folder">Video Download Folder</string>
     <string name="pref_summary_video_download_folder">Videos are downloaded into this folder: %s</string>
 
-    <!--
+	<string name="pref_key_video_download_preferred_resolution" translatable="false">pref_key_video_preferred_resolution</string>
+	<string name="pref_video_download_preferred_resolution_title">Preferred Video Download Resolution</string>
+	<string name="pref_video_download_preferred_resolution_summary">Video downloads will prefer this resolution: %s</string>
+
+	<!--
         VIDEO BLOCKER
     -->
 	<string name="pref_video_blocker_category">Video Blocker</string>

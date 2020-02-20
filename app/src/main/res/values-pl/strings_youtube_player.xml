@@ -1,44 +1,37 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="error_stream_err_unavailable">Treść błędu niedostępna.</string>
-	<string name="error_stream_decryption_fail">Nie można załadować kodu deszyfrowania do serwisu YouTube.</string>
-	<string name="error_stream_parse_error">Błąd analizowania.</string>
-
-	<string name="error_video_play">Błąd odtwarzania</string>
-	<string name="error_video_streams_empty">Wideo %s nie ma strumieni.</string>
-	<string name="error_video_streams">Wystąpił błąd podczas otrzymywania strumienia wideo.</string>
-	<string name="error_get_video_desc">Wystąpił błąd podczas otrzymywania opisu wideo.</string>
-	<string name="error_invalid_url">Niepoprawny adres URL wideo:  %s</string>
-
-	<string name="warning_live_video">Póki co nie można odtwarzać transmisji na żywo. Odtworzyć w innej aplikacji?</string>
-
-	<string name="ratings_disabled">Oceny wyłączone</string>
-
-	<string name="loading_video">Ładowanie filmu…</string>
-	<string name="get_new_video_steam">Nowy strumień</string>
-	<string name="open_in_browser">Otwórz w przeglądarce</string>
-	<string name="open_with">Otwórz z…</string>
-	<string name="share">Udostępnij</string>
-	<string name="share_via">Udostępnij przez</string>
-	<string name="copy_url">Skopiuj URL</string>
-	<string name="url_copied_to_clipboard">Adres URL skopiowany do schowka.</string>
-
-	<string name="error_get_comments">Wystąpił bład podczas otrzymywania komentarzy.</string>
-	<string name="no_video_comments">Ten film nie ma komentarzy lub są one wyłączone.</string>
-	<string name="view_replies">Pokaż odpowiedzi</string>
-	<string name="hide_replies">Ukryj odpowiedzi</string>
-
-	<string name="enter_video_url">Wprowadź adres URL filmu</string>
-	<string name="play">Odtwarzaj</string>
-	<string name="cancel">Annuluj</string>
-	<string name="clear">Wyczyść</string>
-<string name="mark_watched">Mark Watched</string>
-	<string name="should_resume">Czy chcesz wrócić do miejsca, w którym się zatrzymałeś?</string>
-	<string name="mobile_data">Dane mobilne</string>
-	<string name="warning_mobile_network_play">Twoje urządzenie nie jest połączone z siecią Wi-Fi. Aby uniknąć potencjalnych dodatkowych zmian wykorzystania danych, zaleca się połączenie z siecią Wi-Fi. Czy mimo to odtwarzasz wideo\?</string>
-	<string name="warning_mobile_network_disable">Nigdy więcej nie pytaj.</string>
-	<string name="play_video">Odtwórz wideo</string>
-	<string name="mark_unwatched">Oznacz jako oglądany</string>
-
-	<string name="resume">Wznawianie</string>
+    <string name="error_stream_err_unavailable">Treść błędu niedostępna.</string>
+    <string name="error_stream_decryption_fail">Nie można załadować kodu deszyfrowania do serwisu YouTube.</string>
+    <string name="error_stream_parse_error">Błąd analizowania.</string>
+    <string name="error_video_play">Błąd odtwarzania</string>
+    <string name="error_video_streams_empty">Wideo %s nie ma strumieni.</string>
+    <string name="error_video_streams">Wystąpił błąd podczas otrzymywania strumienia wideo.</string>
+    <string name="error_get_video_desc">Wystąpił błąd podczas otrzymywania opisu wideo.</string>
+    <string name="error_invalid_url">Niepoprawny adres URL wideo:  %s</string>
+    <string name="warning_live_video">Póki co nie można odtwarzać transmisji na żywo. Odtworzyć w innej aplikacji?</string>
+    <string name="ratings_disabled">Oceny wyłączone</string>
+    <string name="loading_video">Ładowanie filmu…</string>
+    <string name="get_new_video_steam">Nowy strumień</string>
+    <string name="open_in_browser">Otwórz w przeglądarce</string>
+    <string name="open_with">Otwórz z…</string>
+    <string name="share">Udostępnij</string>
+    <string name="share_via">Udostępnij przez</string>
+    <string name="copy_url">Skopiuj URL</string>
+    <string name="url_copied_to_clipboard">Adres URL skopiowany do schowka.</string>
+    <string name="error_get_comments">Wystąpił bład podczas otrzymywania komentarzy.</string>
+    <string name="no_video_comments">Ten film nie ma komentarzy lub są one wyłączone.</string>
+    <string name="view_replies">Pokaż odpowiedzi</string>
+    <string name="hide_replies">Ukryj odpowiedzi</string>
+    <string name="enter_video_url">Wprowadź adres URL filmu</string>
+    <string name="play">Odtwarzaj</string>
+    <string name="cancel">Annuluj</string>
+    <string name="clear">Wyczyść</string>
+    <string name="mark_watched">Mark Watched</string>
+    <string name="should_resume">Czy chcesz wrócić do miejsca, w którym się zatrzymałeś?</string>
+    <string name="mobile_data">Dane mobilne</string>
+    <string name="warning_mobile_network_play">Twoje urządzenie nie jest połączone z siecią Wi-Fi. Aby uniknąć potencjalnych dodatkowych opłat za wykorzystywanie danych, zaleca się połączenie z siecią Wi-Fi. Czy mimo to odtworzyć wideo\?</string>
+    <string name="warning_mobile_network_disable">Nigdy więcej nie pytaj.</string>
+    <string name="play_video">Odtwórz wideo</string>
+    <string name="mark_unwatched">Oznacz jako oglądany</string>
+    <string name="resume">Wznawianie</string>
 </resources>

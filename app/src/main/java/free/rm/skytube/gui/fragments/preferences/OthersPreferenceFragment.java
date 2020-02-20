@@ -38,7 +38,9 @@ import java.util.Set;
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
+import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPIKey;
 import free.rm.skytube.businessobjects.YouTube.ValidateYouTubeAPIKey;
+import free.rm.skytube.businessobjects.YouTube.VideoStream.VideoResolution;
 import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
 
 /**
@@ -78,28 +80,6 @@ public class OthersPreferenceFragment extends PreferenceFragment implements Shar
 		}
 		defaultTabPref.setSummary(String.format(getString(R.string.pref_summary_default_tab), defaultTabPref.getEntry()));
 
-		folderChooser = findPreference(getString(R.string.pref_key_video_download_folder));
-		folderChooser.setOnPreferenceClickListener(preference -> {
-			new ChooserDialog(OthersPreferenceFragment.this)
-					.withFilter(true, false)
-					.titleFollowsDir(true)
-					.enableOptions(true)
-					.withResources(R.string.pref_popup_title_video_download_folder, R.string.ok, R.string.cancel)
-					.withChosenListener((dir, dirFile) -> {
-						SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-						SharedPreferences.Editor editor = pref.edit();
-						editor.putString(getString(R.string.pref_key_video_download_folder), dir);
-						editor.apply();
-						folderChooser.setSummary(getString(R.string.pref_summary_video_download_folder, dir));
-					})
-					.build()
-					.show();
-			return true;
-		});
-		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-		String dir = pref.getString(getString(R.string.pref_key_video_download_folder), null);
-		folderChooser.setSummary(getString(R.string.pref_summary_video_download_folder, dir != null ? dir : Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES)));
-
 		MultiSelectListPreference hiddenTabsPref = (MultiSelectListPreference)findPreference(getString(R.string.pref_key_hide_tabs));
 		hiddenTabsPref.setEntryValues(tabListValues);
 
@@ -134,7 +114,7 @@ public class OthersPreferenceFragment extends PreferenceFragment implements Shar
 				ListPreference defaultTabPref = (ListPreference) findPreference(key);
 				defaultTabPref.setSummary(String.format(getString(R.string.pref_summary_default_tab), defaultTabPref.getEntry()));
 			} else if (key.equals(getString(R.string.pref_key_hide_tabs))) {
-				displayRestartDialog(R.string.pref_hide_tabs_restart);
+				displayRestartDialog(R.string.pref_hide_tabs_restart, true);
 			} else if (key.equals(getString(R.string.pref_youtube_api_key))) {
 				// Validate the entered API Key when saved (and not empty), with a simple call to get the most popular video
 				EditTextPreference    youtubeAPIKeyPref = (EditTextPreference) findPreference(getString(R.string.pref_youtube_api_key));
@@ -150,10 +130,10 @@ public class OthersPreferenceFragment extends PreferenceFragment implements Shar
 					else {
 						// inform the user that we are going to use the default YouTube API key and
 						// that we need to restart the app
-						displayRestartDialog(R.string.pref_youtube_api_key_default);
+						displayRestartDialog(R.string.pref_youtube_api_key_default,false);
 					}
 				}
-			} else if (key.equals(getString(R.string.pref_key_subscriptions_alphabetical_order))){
+			} else if (key.equals(getString(R.string.pref_key_subscriptions_alphabetical_order))) {
 				SubsAdapter subsAdapter = SubsAdapter.get(getActivity());
 				subsAdapter.refreshSubsList();
 			}/*else if (key.equals(getString(R.string.pref_feed_notification_key))) {
@@ -175,12 +155,16 @@ public class OthersPreferenceFragment extends PreferenceFragment implements Shar
 	 *
 	 * @param messageID Message resource ID.
 	 */
-	private void displayRestartDialog(int messageID) {
-		new AlertDialog.Builder(getActivity())
+	private void displayRestartDialog(int messageID, boolean restart) {
+		AlertDialog.Builder b = new AlertDialog.Builder(getActivity())
 				.setMessage(messageID)
-				.setPositiveButton(R.string.restart, (dialog, which) -> SkyTubeApp.restartApp())
-				.setCancelable(false)
-				.show();
+				.setCancelable(false);
+		if (restart) {
+			b.setPositiveButton(R.string.restart, (dialog, which) -> SkyTubeApp.restartApp());
+		} else {
+			b.setPositiveButton(R.string.ok, (dialog, which) -> {});
+		}
+		b.show();
 	}
 
 
@@ -213,9 +197,14 @@ public class OthersPreferenceFragment extends PreferenceFragment implements Shar
 				// if the validation failed, reset the preference to null
 				((EditTextPreference) findPreference(getString(R.string.pref_youtube_api_key))).setText(null);
 			} else {
-				// if the key is valid, then inform the user that the custom API key is valid and
-				// that he needs to restart the app in order to use it
-				displayRestartDialog(R.string.pref_youtube_api_key_custom);
+				YouTubeAPIKey key = YouTubeAPIKey.reset();
+				if (key.isUserApiKeySet()) {
+					// if the key is valid, then inform the user that the custom API key is valid and
+					// that he needs to restart the app in order to use it
+					displayRestartDialog(R.string.pref_youtube_api_key_custom, false);
+				} else {
+					displayRestartDialog(R.string.pref_youtube_api_key_default, false);
+				}
 			}
 
 			// display a toast to show that the key is not valid

@@ -29,22 +29,23 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
+import android.widget.Toast;
+
 import androidx.multidex.MultiDexApplication;
 import androidx.core.content.res.ResourcesCompat;
 
-import org.schabi.newpipe.extractor.NewPipe;
+import com.google.api.client.googleapis.json.GoogleJsonError;
+import com.google.api.client.googleapis.json.GoogleJsonResponseException;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.FeedUpdaterReceiver;
-import free.rm.skytube.businessobjects.YouTube.VideoStream.HttpDownloader;
 
 /**
  * SkyTube application.
@@ -53,6 +54,7 @@ public class SkyTubeApp extends MultiDexApplication {
 
 	/** SkyTube Application databaseInstance. */
 	private static SkyTubeApp skyTubeApp = null;
+	private Settings settings;
 
 	public static final String KEY_SUBSCRIPTIONS_LAST_UPDATED = "SkyTubeApp.KEY_SUBSCRIPTIONS_LAST_UPDATED";
 	public static final String NEW_VIDEOS_NOTIFICATION_CHANNEL = "free.rm.skytube.NEW_VIDEOS_NOTIFICATION_CHANNEL";
@@ -61,6 +63,7 @@ public class SkyTubeApp extends MultiDexApplication {
 	@Override
 	public void onCreate() {
 		super.onCreate();
+		this.settings = new Settings(this);
 		skyTubeApp = this;
 		initChannels(this);
 	}
@@ -169,6 +172,25 @@ public class SkyTubeApp extends MultiDexApplication {
 		return mobile != null && mobile.isConnectedOrConnecting();
 	}
 
+	/**
+	 * Get the network info
+	 * @param context
+	 * @return
+	 */
+	public static NetworkInfo getNetworkInfo(Context context){
+		ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+		return cm.getActiveNetworkInfo();
+	}
+
+	/**
+	 * Check if there is any connectivity
+	 * @param context
+	 * @return
+	 */
+	public static boolean isConnected(Context context){
+		NetworkInfo info = getNetworkInfo(context);
+		return (info != null && info.isConnected());
+	}
 
 	/*
 	 * Initialize Notification Channels (for Android OREO)
@@ -217,12 +239,28 @@ public class SkyTubeApp extends MultiDexApplication {
 		}
 	}
 
-	/**
-	 * Initialize NewPipe with a custom HttpDownloader.
-	 */
-	public static void initNewPipe() {
-		if (NewPipe.getDownloader() == null) {
-			NewPipe.init(new HttpDownloader(), null);
+	public static Settings getSettings() {
+		return skyTubeApp.settings;
+	}
+
+	public static void notifyUserOnError(Context ctx, Exception exc) {
+		if (exc == null) {
+			return;
+		}
+		final String message;
+		if (exc instanceof GoogleJsonResponseException) {
+			GoogleJsonResponseException exception = (GoogleJsonResponseException) exc;
+			List<GoogleJsonError.ErrorInfo> errors = exception.getDetails().getErrors();
+			if (errors != null && !errors.isEmpty()) {
+				message =  "Server error:" + errors.get(0).getMessage()+ ", reason: "+ errors.get(0).getReason();
+			} else {
+				message = exception.getDetails().getMessage();
+			}
+		} else {
+			message = exc.getMessage();
+		}
+		if (message != null) {
+			Toast.makeText(ctx, message, Toast.LENGTH_LONG).show();
 		}
 	}
 }

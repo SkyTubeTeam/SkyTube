@@ -60,6 +60,7 @@ public class ValidateYouTubeAPIKey extends GetFeaturedVideos {
 				isKeyValid = true;
 			}
 		} catch (IOException e){
+			setLastException(e);
 		}
 
 		return isKeyValid;

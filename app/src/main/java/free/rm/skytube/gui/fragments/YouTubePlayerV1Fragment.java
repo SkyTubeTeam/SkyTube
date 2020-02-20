@@ -2,7 +2,6 @@ package free.rm.skytube.gui.fragments;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Rect;
@@ -12,7 +11,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -30,8 +28,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
-import com.afollestad.materialdialogs.DialogAction;
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
@@ -40,33 +36,32 @@ import java.util.Locale;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
+import free.rm.skytube.app.enums.Policy;
 import free.rm.skytube.businessobjects.GetVideoDetailsTask;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
-import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannelInterface;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetVideoDescriptionTask;
-import free.rm.skytube.businessobjects.YouTube.Tasks.GetYouTubeChannelInfoTask;
 import free.rm.skytube.businessobjects.YouTube.VideoStream.StreamMetaData;
 import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
 import free.rm.skytube.businessobjects.db.PlaybackStatusDb;
 import free.rm.skytube.businessobjects.db.Tasks.CheckIfUserSubbedToChannelTask;
+import free.rm.skytube.businessobjects.db.Tasks.GetChannelInfo;
 import free.rm.skytube.businessobjects.db.Tasks.IsVideoBookmarkedTask;
 import free.rm.skytube.businessobjects.interfaces.GetDesiredStreamListener;
 import free.rm.skytube.businessobjects.interfaces.YouTubePlayerActivityListener;
 import free.rm.skytube.businessobjects.interfaces.YouTubePlayerFragmentInterface;
-import free.rm.skytube.gui.activities.MainActivity;
 import free.rm.skytube.gui.activities.ThumbnailViewerActivity;
 import free.rm.skytube.gui.businessobjects.MediaControllerEx;
 import free.rm.skytube.gui.businessobjects.MobileNetworkWarningDialog;
 import free.rm.skytube.gui.businessobjects.OnSwipeTouchListener;
 import free.rm.skytube.gui.businessobjects.ResumeVideoTask;
+import free.rm.skytube.gui.businessobjects.YouTubePlayer;
 import free.rm.skytube.gui.businessobjects.YouTubeVideoListener;
 import free.rm.skytube.gui.businessobjects.adapters.CommentsAdapter;
 import free.rm.skytube.gui.businessobjects.fragments.ImmersiveModeFragment;
 import free.rm.skytube.gui.businessobjects.views.ClickableLinksTextView;
 import free.rm.skytube.gui.businessobjects.views.SubscribeButton;
-import hollowsoft.slidingdrawer.OnDrawerOpenListener;
 import hollowsoft.slidingdrawer.SlidingDrawer;
 
 import static free.rm.skytube.gui.activities.YouTubePlayerActivity.YOUTUBE_VIDEO_OBJ;
@@ -397,10 +392,7 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 		videoDescChannelThumbnailImageView = view.findViewById(R.id.video_desc_channel_thumbnail_image_view);
 		videoDescChannelThumbnailImageView.setOnClickListener(v -> {
 			if (youTubeChannel != null) {
-				Intent i = new Intent(getActivity(), MainActivity.class);
-				i.setAction(MainActivity.ACTION_VIEW_CHANNEL);
-				i.putExtra(ChannelBrowserFragment.CHANNEL_OBJ, youTubeChannel);
-				startActivity(i);
+				YouTubePlayer.launchChannel(youTubeChannel, getActivity());
 			}
 		});
 		videoDescChannelTextView = view.findViewById(R.id.video_desc_channel);
@@ -438,7 +430,7 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 	 */
 	private void getVideoInfoTasks() {
 		// get Channel info (e.g. avatar...etc) task
-		new GetYouTubeChannelInfoTask(getContext(), youTubeChannel -> {
+		new GetChannelInfo(getContext(), youTubeChannel -> {
 			YouTubePlayerV1Fragment.this.youTubeChannel = youTubeChannel;
 
 			videoDescSubscribeButton.setChannel(YouTubePlayerV1Fragment.this.youTubeChannel);
@@ -478,7 +470,7 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 			videoDescRatingsDisabledTextView.setVisibility(View.VISIBLE);
 		}
 
-		new ResumeVideoTask(getContext(), youTubeVideo, position -> {
+		new ResumeVideoTask(getContext(), youTubeVideo.getId(), position -> {
 			videoCurrentPosition = position;
 			YouTubePlayerV1Fragment.this.loadVideo();
 		}).ask();
@@ -667,8 +659,9 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 		//
 		// youTubeVideo might be null if we have only passed the video URL to this fragment (i.e.
 		// the app is still trying to construct youTubeVideo in the background).
-		if (youTubeVideo != null)
-			new IsVideoBookmarkedTask(youTubeVideo, menu).executeInParallel();
+		if (youTubeVideo != null) {
+			new IsVideoBookmarkedTask(youTubeVideo.getId(), menu).executeInParallel();
+		}
 	}
 
 
@@ -707,11 +700,10 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 				return true;
 
 			case R.id.download_video:
-				final boolean warningDialogDisplayed = new MobileNetworkWarningDialog(getContext())
-						.onPositive((dialog, which) -> youTubeVideo.downloadVideo(getContext()))
-						.showAndGetStatus(MobileNetworkWarningDialog.ActionType.DOWNLOAD_VIDEO);
+				final Policy decision = new MobileNetworkWarningDialog(getContext())
+						.showDownloadWarning(youTubeVideo);
 
-				if (!warningDialogDisplayed) {
+				if (decision == Policy.ALLOW) {
 					youTubeVideo.downloadVideo(getContext());
 				}
 				return true;
@@ -729,28 +721,28 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 	 * Loads the video specified in {@link #youTubeVideo}.
 	 */
 	private void loadVideo() {
-		loadVideo(false);
+		loadVideo(true);
 	}
 
 
 	/**
 	 * Loads the video specified in {@link #youTubeVideo}.
 	 *
-	 * @param skipMobileNetworkWarning Set to true to skip the warning displayed when the user is
+	 * @param showMobileNetworkWarning Set to true to show the warning displayed when the user is
 	 *                                 using mobile network data (i.e. 4g).
 	 */
-	private void loadVideo(boolean skipMobileNetworkWarning) {
-		boolean mobileNetworkWarningDialogDisplayed = false;
+	private void loadVideo(boolean showMobileNetworkWarning) {
+		Policy decision = Policy.ALLOW;
 
 		// if the user is using mobile network (i.e. 4g), then warn him
-		if (!skipMobileNetworkWarning) {
-			mobileNetworkWarningDialogDisplayed = new MobileNetworkWarningDialog(getActivity())
-					.onPositive((dialog, which) -> loadVideo(true))
-					.onNegative((dialog, which) -> closeActivity())
+		if (showMobileNetworkWarning) {
+			decision = new MobileNetworkWarningDialog(getActivity())
+					.onPositive((dialog, which) -> loadVideo(false))
+					.onNegativeOrCancel((dialog) -> closeActivity())
 					.showAndGetStatus(MobileNetworkWarningDialog.ActionType.STREAM_VIDEO);
 		}
 
-		if (!mobileNetworkWarningDialogDisplayed) {
+		if (decision == Policy.ALLOW) {
 			// if the video is NOT live
 			if (!youTubeVideo.isLiveStream()) {
 				videoView.pause();
@@ -839,7 +831,7 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 
 			// will now check if the video is bookmarked or not (and then update the menu
 			// accordingly)
-			new IsVideoBookmarkedTask(youTubeVideo, menu).executeInParallel();
+			new IsVideoBookmarkedTask(youTubeVideo.getId(), menu).executeInParallel();
 		}
 	}
 

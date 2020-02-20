@@ -25,11 +25,15 @@ import com.google.api.services.youtube.model.Activity;
 import com.google.api.services.youtube.model.ActivityListResponse;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
+import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPI;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPIKey;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
+import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 
 /**
  * Returns the videos of a channel.
@@ -41,6 +45,8 @@ import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 public class GetChannelVideosLite extends GetYouTubeVideos implements GetChannelVideosInterface {
 
 	private YouTube.Activities.List activitiesList;
+	private String channelId;
+	private boolean filterSubscribedVideos;
 
 	private static final String	TAG = GetChannelVideosLite.class.getSimpleName();
 	private static final Long	MAX_RESULTS = 45L;
@@ -65,8 +71,9 @@ public class GetChannelVideosLite extends GetYouTubeVideos implements GetChannel
 
 
 	@Override
-	public List<YouTubeVideo> getNextVideos() {
-		List<YouTubeVideo> videosList = null;
+	public List<CardData> getNextVideos() {
+		setLastException(null);
+		List<CardData> videosList = null;
 
 		if (!noMoreVideoPages) {
 			try {
@@ -74,7 +81,7 @@ public class GetChannelVideosLite extends GetYouTubeVideos implements GetChannel
 
 				ActivityListResponse response = activitiesList.execute();
 				List<Activity> activityList = response.getItems();
-				if(activityList != null && activityList.size() > 0) {
+				if(activityList != null && !activityList.isEmpty()) {
 					videosList = getVideosList(activityList);
 				}
 
@@ -84,6 +91,7 @@ public class GetChannelVideosLite extends GetYouTubeVideos implements GetChannel
 					noMoreVideoPages = true;
 
 			} catch (IOException ex) {
+				setLastException(ex);
 				Log.e(TAG, ex.getLocalizedMessage());
 			}
 		}
@@ -104,20 +112,18 @@ public class GetChannelVideosLite extends GetYouTubeVideos implements GetChannel
 	 * @return List of {@link YouTubeVideo}s.
 	 * @throws IOException
 	 */
-	private List<YouTubeVideo> getVideosList(List<Activity> activityList) throws IOException {
-		StringBuilder videoIds = new StringBuilder();
+	private List<CardData> getVideosList(List<Activity> activityList) throws IOException {
+        List<String> videoIds = new ArrayList<>(activityList.size());
 
 		// append the video IDs into a strings (CSV)
 		for (Activity res : activityList) {
-			videoIds.append(res.getContentDetails().getUpload().getVideoId());
-			videoIds.append(',');
+			videoIds.add(res.getContentDetails().getUpload().getVideoId());
 		}
-
-		// get video details by supplying the videos IDs
-		GetVideosDetailsByIDs getVideo = new GetVideosDetailsByIDs();
-		getVideo.init(videoIds.toString());
-
-		return getVideo.getNextVideos();
+		if (!videoIds.isEmpty() && channelId != null && filterSubscribedVideos) {
+			final Set<String> videosByChannel = SubscriptionsDb.getSubscriptionsDb().getSubscribedChannelVideosByChannel(channelId);
+			videoIds.removeAll(videosByChannel);
+		}
+        return getVideoListFromIds(videoIds);
 	}
 
 
@@ -125,17 +131,21 @@ public class GetChannelVideosLite extends GetYouTubeVideos implements GetChannel
 	 * Set the channel id.
 	 *
 	 * @param channelId	Channel ID.
+     * @param filterSubscribedVideos to filter out the subscribed videos.
 	 */
 	@Override
-	public void setQuery(String channelId) {
-		if (activitiesList != null)
+	public void setChannelQuery(String channelId, boolean filterSubscribedVideos) {
+		this.channelId = channelId;
+		this.filterSubscribedVideos = filterSubscribedVideos;
+		if (activitiesList != null) {
 			activitiesList.setChannelId(channelId);
+		} else {
+			throw new NullPointerException("activitiesList not initialized!");
+		}
 	}
 
-
-	@Override
-	public boolean noMoreVideoPages() {
-		return noMoreVideoPages;
-	}
-
+    @Override
+    public void setQuery(String query) {
+        setChannelQuery(query, false);
+    }
 }

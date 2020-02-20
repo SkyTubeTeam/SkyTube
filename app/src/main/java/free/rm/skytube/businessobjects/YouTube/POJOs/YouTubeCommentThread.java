@@ -50,6 +50,10 @@ public class YouTubeCommentThread {
 
 	}
 
+	public YouTubeCommentThread(YouTubeComment comment) {
+		this.comment = comment;
+	}
+
 	private boolean isCommentThreadOkay(CommentThread commentThread) {
 		return (commentThread.getSnippet() != null
 				&& commentThread.getSnippet().getTopLevelComment() != null);

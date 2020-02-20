@@ -20,23 +20,30 @@ package free.rm.skytube.gui.businessobjects;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.widget.Toast;
+
+import org.schabi.newpipe.extractor.exceptions.ParsingException;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.ChromecastListener;
 import free.rm.skytube.businessobjects.GetVideoDetailsTask;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPIKey;
+import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
+import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
+import free.rm.skytube.businessobjects.YouTube.newpipe.VideoId;
 import free.rm.skytube.businessobjects.db.PlaybackStatusDb;
 import free.rm.skytube.gui.activities.BaseActivity;
+import free.rm.skytube.gui.activities.MainActivity;
 import free.rm.skytube.gui.activities.YouTubePlayerActivity;
+import free.rm.skytube.gui.fragments.ChannelBrowserFragment;
 
 import static free.rm.skytube.gui.activities.YouTubePlayerActivity.YOUTUBE_VIDEO_OBJ;
 
@@ -93,7 +100,13 @@ public class YouTubePlayer {
 			// if the user has selected to play the videos using the official YouTube player
 			// (in the preferences/settings) ...
 			if (useOfficialYouTubePlayer(context)) {
-				launchOfficialYouTubePlayer(YouTubeVideo.getYouTubeIdFromUrl(videoUrl), context);
+				try {
+					VideoId id = NewPipeService.get().getVideoId(videoUrl);
+					launchOfficialYouTubePlayer(id.getId(), context);
+				} catch (ParsingException p) {
+					String err = String.format(context.getString(R.string.error_invalid_url), videoUrl);
+					Toast.makeText(context, err, Toast.LENGTH_LONG).show();
+				}
 			} else {
 				launchCustomYouTubePlayer(videoUrl, context);
 			}
@@ -104,10 +117,10 @@ public class YouTubePlayer {
 		if(connectingToChromecast) {
 			((ChromecastListener)context).showLoadingSpinner();
 			// In the process of connecting to a chromecast. Wait 500ms and try again
-			new Handler().postDelayed(() -> launchOnChromecast(youTubeVideo, context), 500);
+			new Handler().postDelayed(() -> launch(youTubeVideo, context), 500);
 		} else {
 			if (context instanceof ChromecastListener) {
-				final PlaybackStatusDb.VideoWatchedStatus status = PlaybackStatusDb.getPlaybackStatusDb().getVideoWatchedStatus(youTubeVideo);
+				final PlaybackStatusDb.VideoWatchedStatus status = PlaybackStatusDb.getPlaybackStatusDb().getVideoWatchedStatus(youTubeVideo.getId());
 				if(!SkyTubeApp.getPreferenceManager().getBoolean(context.getString(R.string.pref_key_disable_playback_status), false) && status.getPosition() > 0) {
 					new AlertDialog.Builder(context)
 									.setTitle(R.string.should_resume)
@@ -186,4 +199,15 @@ public class YouTubePlayer {
 		context.startActivity(i);
 	}
 
+	/**
+	 * Launches the channel view, so the user can see all the videos from a channel.
+	 *
+	 * @param youTubeChannel the channel to be displayed.
+	 */
+	public static void launchChannel(YouTubeChannel youTubeChannel, Context context) {
+		Intent i = new Intent(context, MainActivity.class);
+		i.setAction(MainActivity.ACTION_VIEW_CHANNEL);
+		i.putExtra(ChannelBrowserFragment.CHANNEL_OBJ, youTubeChannel);
+		context.startActivity(i);
+	}
 }

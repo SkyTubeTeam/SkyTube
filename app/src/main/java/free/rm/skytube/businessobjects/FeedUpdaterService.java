@@ -41,7 +41,7 @@ public class FeedUpdaterService extends Service implements GetSubscriptionVideos
 		int feedUpdaterInterval = Integer.parseInt(SkyTubeApp.getPreferenceManager().getString(SkyTubeApp.getStr(R.string.pref_key_feed_notification), "0"));
 		if(feedUpdaterInterval > 0) {
 			newVideosFetched = 0;
-			getSubscriptionVideosTask = new GetSubscriptionVideosTask(this);
+			getSubscriptionVideosTask = new GetSubscriptionVideosTask(this, null);
 			getSubscriptionVideosTask.executeInParallel();
 		}
 		return START_STICKY;
@@ -49,13 +49,13 @@ public class FeedUpdaterService extends Service implements GetSubscriptionVideos
 	}
 
 	@Override
-	public void onChannelVideosFetched(YouTubeChannel channel, int videosFetched, boolean videosDeleted) {
+	public void onChannelVideosFetched(String channelId, int videosFetched, boolean videosDeleted) {
 		newVideosFetched += videosFetched;
 	}
 
 	@Override
-	public void onAllChannelVideosFetched() {
-		if(newVideosFetched > 0) {
+	public void onAllChannelVideosFetched(boolean changed) {
+		if(changed) {
 			Intent clickIntent = new Intent(this, MainActivity.class);
 			clickIntent.setAction(MainActivity.ACTION_VIEW_FEED);
 

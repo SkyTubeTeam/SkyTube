@@ -20,12 +20,16 @@ package free.rm.skytube.gui.businessobjects;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
-import android.widget.CompoundButton;
+
+import android.content.DialogInterface;
+import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
+import free.rm.skytube.app.enums.Policy;
+import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 
 /**
  * Dialog that warns the user to enable the wi-fi if the device is connected to mobile network
@@ -45,38 +49,69 @@ public class MobileNetworkWarningDialog extends SkyTubeMaterialDialog {
 	 *
 	 * @param actionType    Action Type:  either video downloads or video streaming.
 	 *
-	 * @return True if the dialog was displayed; false otherwise.
+	 * @return Policy which needs to be followed, either BLOCK or ALLOW - or ASK, when a warning dialog is displayed.
 	 */
-	public boolean showAndGetStatus(ActionType actionType) {
-		final boolean   displayWarning  = SkyTubeApp.getPreferenceManager().getBoolean(SkyTubeApp.getStr(R.string.pref_key_warn_mobile_downloads), true);
-		boolean         dialogDisplayed = false;
+	public Policy showAndGetStatus(ActionType actionType) {
+		final Policy displayWarning  = SkyTubeApp.getSettings().getWarningMobilePolicy();
 
-		if (SkyTubeApp.isConnectedToMobile() && displayWarning) {
-			title(R.string.mobile_data);
-			content(actionType == ActionType.STREAM_VIDEO ? R.string.warning_mobile_network_play : R.string.warning_mobile_network_download);
-			checkBoxPromptRes(R.string.warning_mobile_network_disable, false, (buttonView, isChecked) -> SkyTubeApp.getPreferenceManager().edit().putBoolean(SkyTubeApp.getStr(R.string.pref_key_warn_mobile_downloads), !isChecked).apply());
-			positiveText(actionType == ActionType.STREAM_VIDEO ?  R.string.play_video : R.string.download_video);
-			show();
-			dialogDisplayed = true;
+		if (SkyTubeApp.isConnectedToMobile()) {
+			switch (displayWarning) {
+				case BLOCK : {
+					Toast.makeText(getContext(), R.string.mobile_data_blocked_by_policy, Toast.LENGTH_LONG).show();
+					if (cancelListener != null) {
+						cancelListener.onCancel(null);
+					}
+					return Policy.BLOCK;
+				}
+				case ALLOW : {
+					return Policy.ALLOW;
+				}
+				case ASK : {
+					title(R.string.mobile_data);
+					content(actionType == ActionType.STREAM_VIDEO ? R.string.warning_mobile_network_play : R.string.warning_mobile_network_download);
+					checkBoxPromptRes(R.string.warning_mobile_network_disable, false, null);
+					positiveText(actionType == ActionType.STREAM_VIDEO ?  R.string.play_video : R.string.download_video);
+					show();
+					return Policy.ASK;
+				}
+			}
 		}
 
-		return dialogDisplayed;
+		return Policy.ALLOW;
 	}
 
+	/**
+	 * Display a warning about downloading this video.
+	 * @param youTubeVideo
+	 * @return Policy which needs to be followed, either BLOCK or ALLOW - or ASK, when a warning dialog is displayed.
+	 */
+	public Policy showDownloadWarning(YouTubeVideo youTubeVideo) {
+		onPositive((dialog, which) -> youTubeVideo.downloadVideo(getContext()));
+		return showAndGetStatus(MobileNetworkWarningDialog.ActionType.DOWNLOAD_VIDEO);
+	}
 
 	@Override
 	public MobileNetworkWarningDialog onPositive(@NonNull MaterialDialog.SingleButtonCallback callback) {
-		this.onPositiveCallback = callback;
+		this.onPositiveCallback = (dialog, action) -> {
+            if (dialog.isPromptCheckBoxChecked()) {
+                SkyTubeApp.getSettings().setWarningMobilePolicy(Policy.ALLOW);
+            }
+            callback.onClick(dialog, action);
+        };
 		return this;
 	}
-
 
 	@Override
-	public MobileNetworkWarningDialog onNegative(@NonNull MaterialDialog.SingleButtonCallback callback) {
-		this.onNegativeCallback = callback;
+	public MobileNetworkWarningDialog onNegativeOrCancel(@NonNull DialogInterface.OnCancelListener callback) {
+		this.onNegativeCallback = (dialog, action) -> {
+		    if (dialog.isPromptCheckBoxChecked()) {
+                SkyTubeApp.getSettings().setWarningMobilePolicy(Policy.BLOCK);
+            }
+            // no need to call the 'callback', as the cancelListener will be called.
+        };
+		this.cancelListener = callback;
 		return this;
 	}
-
 
 	////////////////////////////////////////////////////////////////////////////////////////////////
 

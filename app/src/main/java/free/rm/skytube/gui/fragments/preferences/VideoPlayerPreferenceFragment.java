@@ -19,12 +19,14 @@ package free.rm.skytube.gui.fragments.preferences;
 
 import android.os.Bundle;
 import android.preference.ListPreference;
+import android.preference.Preference;
 import android.preference.PreferenceFragment;
 
 import java.util.Arrays;
 
 import free.rm.skytube.BuildConfig;
 import free.rm.skytube.R;
+import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.YouTube.VideoStream.VideoResolution;
 
 /**
@@ -38,14 +40,7 @@ public class VideoPlayerPreferenceFragment extends PreferenceFragment {
 		addPreferencesFromResource(R.xml.preference_video_player);
 
 		// set up the list of available video resolutions
-		ListPreference resolutionPref = (ListPreference) findPreference(getString(R.string.pref_key_preferred_res));
-		resolutionPref.setEntries(VideoResolution.getAllVideoResolutionsNames());
-		resolutionPref.setEntryValues(VideoResolution.getAllVideoResolutionsIds());
-
-		// set up the list of available video resolutions on mobile network
-        ListPreference resolutionPrefMobile = (ListPreference) findPreference(getString(R.string.pref_key_preferred_res_mobile));
-		resolutionPrefMobile.setEntries(VideoResolution.getAllVideoResolutionsNames());
-		resolutionPrefMobile.setEntryValues(VideoResolution.getAllVideoResolutionsIds());
+		VideoResolution.setupListPreferences((ListPreference) findPreference(getString(R.string.pref_key_preferred_res)));
 
 		// if we are running an OSS version, then remove the last option (i.e. the "official" player
 		// option)
@@ -56,6 +51,13 @@ public class VideoPlayerPreferenceFragment extends PreferenceFragment {
 
 			videoPlayersListPref.setEntries(modifiedVideoPlayersList);
 		}
+
+		Preference creditsPref = findPreference(getString(R.string.pref_key_switch_volume_and_brightness));
+		creditsPref.setOnPreferenceClickListener(preference -> {
+			SkyTubeApp.getSettings().showTutorialAgain();
+			return true;
+		});
+
 	}
 
 }

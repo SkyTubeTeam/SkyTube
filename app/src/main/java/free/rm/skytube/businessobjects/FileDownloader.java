@@ -115,7 +115,8 @@ public abstract class FileDownloader implements Serializable, PermissionsActivit
 		DownloadManager.Request request = new DownloadManager.Request(remoteFileUri)
 				.setAllowedOverRoaming(allowedOverRoaming)
 				.setTitle(title)
-				.setDescription(description);
+				.setDescription(description)
+				.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
 
 		String videoDir = SkyTubeApp.getPreferenceManager().getString(SkyTubeApp.getStr(R.string.pref_key_video_download_folder), null);
 		if(videoDir != null) {
@@ -334,7 +335,7 @@ public abstract class FileDownloader implements Serializable, PermissionsActivit
 			// if there's already a local file for this video for some reason, then do not redownload the
 			// file and halt
 			File parentDir = parentDirectory != null ? new File(parentDirectory) : Environment.getExternalStoragePublicDirectory(dirType);
-			boolean toDirectories = SkyTubeApp.getPreferenceManager().getBoolean(SkyTubeApp.getStr(R.string.pref_key_download_to_separate_directories),false);
+			boolean toDirectories = SkyTubeApp.getSettings().isDownloadToSeparateFolders();
 
 			if (toDirectories && outputDirectoryName != null && !outputDirectoryName.isEmpty()) {
 				parentDir = new File(parentDir, outputDirectoryName);

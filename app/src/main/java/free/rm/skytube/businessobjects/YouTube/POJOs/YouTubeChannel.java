@@ -53,6 +53,8 @@ public class YouTubeChannel implements Serializable {
 	private long subscriberCount;
 	private boolean isUserSubscribed;
 	private long	lastVisitTime;
+	private long    lastCheckTime;
+	private long    lastVideoTime;
 	private boolean	newVideosSinceLastVisit = false;
 	private List<YouTubeVideo> youTubeVideos = new ArrayList<>();
 
@@ -68,7 +70,7 @@ public class YouTubeChannel implements Serializable {
 	}
 
 	public YouTubeChannel(String id, String title, String description, String thumbnailNormalUrl,
-						  String bannerUrl, long subscriberCount, boolean isUserSubscribed, long lastVisitTime) {
+						  String bannerUrl, long subscriberCount, boolean isUserSubscribed, long lastVisitTime, long lastCheckTime) {
 		this.id = id;
 		this.title = title;
 		this.description = description;
@@ -78,6 +80,7 @@ public class YouTubeChannel implements Serializable {
 		this.totalSubscribers = getFormattedSubscribers(subscriberCount);
 		this.isUserSubscribed = isUserSubscribed;
 		this.lastVisitTime = lastVisitTime;
+		this.lastCheckTime = lastCheckTime;
 	}
 
 	/**
@@ -163,31 +166,6 @@ public class YouTubeChannel implements Serializable {
 		}
 	}
 
-	/**
-	 * Get any channel info that is stored in the database (locally).
-	 *
-	 * @param isUserSubscribed	if set to true, then it means the user is subscribed to this channel;
-	 *                          otherwise it means that we currently do not know if the user is
-	 *                          subbed or not (hence we need to check).
-	 */
-	private void getChannelInfoFromDB(boolean isUserSubscribed) {
-		// check if the user is subscribed to this channel or not
-		if (!isUserSubscribed) {
-			try {
-				this.isUserSubscribed = SubscriptionsDb.getSubscriptionsDb().isUserSubscribedToChannel(id);
-			} catch (Throwable tr) {
-				Logger.e(this, "Unable to check if user has subscribed to channel id=" + id, tr);
-				this.isUserSubscribed = false;
-			}
-		} else {
-			this.isUserSubscribed = true;
-		}
-
-		// get the last time the user has visited this channel
-		this.lastVisitTime = SubscriptionsDb.getSubscriptionsDb().getLastVisitTime(this);
-	}
-
-
 	public String getId() {
 		return id;
 	}
@@ -220,6 +198,8 @@ public class YouTubeChannel implements Serializable {
 		return subscriberCount;
 	}
 
+	public long getLastCheckTime() { return lastCheckTime; }
+
 	public void setUserSubscribed(boolean userSubscribed) {
 		isUserSubscribed = userSubscribed;
 	}
@@ -234,6 +214,14 @@ public class YouTubeChannel implements Serializable {
 
 	public long getLastVisitTime() {
 		return lastVisitTime;
+	}
+
+	public long getLastVideoTime() {
+		return lastVideoTime;
+	}
+
+	public void setLastVideoTime(long lastVideoTime) {
+		this.lastVideoTime = lastVideoTime;
 	}
 
 	public boolean newVideosSinceLastVisit() {

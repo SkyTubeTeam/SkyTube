@@ -74,12 +74,9 @@ public class SubscribeToChannelTask extends AsyncTaskParallel<Void, Void, Boolea
 	@Override
 	protected Boolean doInBackground(Void... params) {
 		if (subscribeToChannel) {
-			boolean subscribed = SubscriptionsDb.getSubscriptionsDb().subscribe(channel);
-			if(subscribed)
-				SubscriptionsFeedFragment.setFlag(SubscriptionsFeedFragment.FLAG_REFRESH_FEED_FROM_CACHE);
-			return subscribed;
+			return SubscriptionsDb.getSubscriptionsDb().subscribe(channel);
 		} else {
-			return SubscriptionsDb.getSubscriptionsDb().unsubscribe(channel);
+			return SubscriptionsDb.getSubscriptionsDb().unsubscribe(channel.getId());
 		}
 	}
 
@@ -114,7 +111,7 @@ public class SubscribeToChannelTask extends AsyncTaskParallel<Void, Void, Boolea
 				channel.setUserSubscribed(false);
 				
 				// remove the channel from the SubsAdapter (i.e. the channels subscriptions list/drawer)
-				adapter.removeChannel(channel);
+				adapter.removeChannel(channel.getId());
 
 				if (displayToastMessage) {
 					Toast.makeText(context, R.string.unsubscribed, Toast.LENGTH_LONG).show();
