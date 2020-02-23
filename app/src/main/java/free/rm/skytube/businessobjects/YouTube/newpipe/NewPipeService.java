@@ -302,7 +302,11 @@ public class NewPipeService {
         @NonNull
         @Override
         public String toString() {
-            return "[time= " + sdf.format(new Date(timestamp)) + ",exact=" + exact + ']';
+            try {
+                return "[time= " + sdf.format(new Date(timestamp)) + ",exact=" + exact + ']';
+            } catch (Exception e){
+                return "[incorrect time= "+timestamp+" ,exact=" + exact + ']';
+            }
         }
     }
 
