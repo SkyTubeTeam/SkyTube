@@ -18,7 +18,6 @@
 package free.rm.skytube.businessobjects.YouTube.Tasks;
 
 import java.io.IOException;
-import java.util.List;
 
 import org.schabi.newpipe.extractor.exceptions.ExtractionException;
 
@@ -26,8 +25,6 @@ import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.Logger;
-import free.rm.skytube.businessobjects.YouTube.GetVideoDescription;
-import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
 
@@ -67,32 +64,13 @@ public class GetVideoDescriptionTask extends AsyncTaskParallel<Void, Void, Strin
 	}
 
 	private YouTubeVideo getDetails() {
-		if (NewPipeService.isPreferred()) {
-			try {
-				YouTubeVideo details = NewPipeService.get().getDetails(youTubeVideo.getId());
-				return details;
-			} catch (ExtractionException | IOException e) {
-				Logger.e(this, "Unable to get video details, where id=" + youTubeVideo.getId(), e);
-				return null;
-			}
-		} else {
-			return getDetailsFromAPI();
-		}
-	}
-
-	private YouTubeVideo getDetailsFromAPI() {
-		GetVideoDescription getVideoDescription = new GetVideoDescription();
-		
 		try {
-			getVideoDescription.init(youTubeVideo.getId());
-			List<CardData> list = getVideoDescription.getNextVideos();
-			if (!list.isEmpty()) {
-				return (YouTubeVideo) list.get(0);
-			}
-		} catch (IOException e) {
-			Logger.e(this, "error_get_video_desc - id=" + youTubeVideo.getId(), e);
+			YouTubeVideo details = NewPipeService.get().getDetails(youTubeVideo.getId());
+			return details;
+		} catch (ExtractionException | IOException e) {
+			Logger.e(this, "Unable to get video details, where id=" + youTubeVideo.getId(), e);
+			return null;
 		}
-		return null;
 	}
 
 	@Override

@@ -17,7 +17,10 @@
 
 package free.rm.skytube.businessobjects.YouTube;
 
+import org.schabi.newpipe.extractor.exceptions.ExtractionException;
+
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -25,6 +28,7 @@ import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetYouTubeVideosTask;
+import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
 
 /**
  * Returns a list of YouTube videos.
@@ -98,6 +102,25 @@ public abstract class GetYouTubeVideos {
 		if (videoIds == null || videoIds.isEmpty()) {
 			return Collections.emptyList();
 		}
+		if (NewPipeService.isPreferred()) {
+			NewPipeService newPipe = NewPipeService.get();
+			List<CardData> result = new ArrayList<>(videoIds.size());
+			for (String id : videoIds) {
+				try {
+					result.add(newPipe.getDetails(id));
+				} catch (ExtractionException | IOException  e) {
+					Logger.e(this, "Unable to fetch "+id+", error:"+ e.getMessage(), e);
+				}
+			}
+			return result;
+		} else {
+
+			return getVideoListFromIdsWithAPI(videoIds);
+		}
+	}
+
+	private List<CardData> getVideoListFromIdsWithAPI(List<String> videoIds) throws IOException {
+
 		StringBuilder videoIdsStr = new StringBuilder();
 
 		// append the video IDs into a strings (CSV)
