@@ -253,8 +253,7 @@ public class DownloadedVideosDb extends SQLiteOpenHelperEx implements OrderableD
 	 * @return The maximum of the order number - which could be different from the number of downloaded files, in case some of them are deleted.
 	 */
 	public int getMaximumOrderNumber() {
-		String	query = String.format("SELECT MAX(%s) FROM %s", DownloadedVideosTable.COL_ORDER, DownloadedVideosTable.TABLE_NAME);
-		Cursor	cursor = DownloadedVideosDb.getVideoDownloadsDb().getReadableDatabase().rawQuery(query, null);
+		Cursor	cursor = getReadableDatabase().rawQuery(DownloadedVideosTable.MAXIMUM_ORDER_QUERY, null);
 		int		totalDownloads = 0;
 
 		if (cursor.moveToFirst()) {

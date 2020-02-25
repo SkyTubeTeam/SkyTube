@@ -17,10 +17,14 @@
 
 package free.rm.skytube.businessobjects.YouTube;
 
+import androidx.core.util.Pair;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import free.rm.skytube.app.Utils;
 import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
+import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.db.BookmarksDb;
 
 
@@ -29,20 +33,35 @@ import free.rm.skytube.businessobjects.db.BookmarksDb;
  */
 public class GetBookmarksVideos extends GetYouTubeVideos {
 
-	@Override
-	public void init() {
-		noMoreVideoPages = false;
-	}
+    Integer minOrder;
 
-	@Override
-	public List<CardData> getNextVideos() {
-		if (!noMoreVideoPages()) {
-			noMoreVideoPages = true;
-			return new ArrayList<>(BookmarksDb.getBookmarksDb().getBookmarkedVideos());
-		}
+    @Override
+    public void init() {
+        reset();
+    }
 
-		return null;
-	}
+    @Override
+    public void reset() {
+        minOrder = null;
+        noMoreVideoPages = false;
+    }
+
+    @Override
+    public List<CardData> getNextVideos() {
+        if (!noMoreVideoPages()) {
+            BookmarksDb db = BookmarksDb.getBookmarksDb();
+            Pair<List<YouTubeVideo>, Integer> bookmarkedVideos = db.getBookmarkedVideos(20, minOrder);
+            if (!bookmarkedVideos.first.isEmpty()) {
+                minOrder = Utils.min(bookmarkedVideos.second, minOrder);
+                noMoreVideoPages = bookmarkedVideos.first.isEmpty();
+            } else {
+                noMoreVideoPages = true;
+            }
+            return new ArrayList<>(bookmarkedVideos.first);
+        }
+
+        return null;
+    }
 
 
 }
