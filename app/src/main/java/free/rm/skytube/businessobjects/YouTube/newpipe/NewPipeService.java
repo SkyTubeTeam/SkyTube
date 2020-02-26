@@ -239,10 +239,14 @@ public class NewPipeService {
     }
 
     private ListLinkHandler getListLinkHandler(String channelId) throws ParsingException {
-        // Get channel LinkHandler, handle two cases:
+        // Get channel LinkHandler, handle three cases:
         // 1, channelId=UCbx1TZgxfIauUZyPuBzEwZg
         // 2, channelId=https://www.youtube.com/channel/UCbx1TZgxfIauUZyPuBzEwZg
+        // 3, channelId=channel/UCbx1TZgxfIauUZyPuBzEwZg
         ListLinkHandlerFactory channelLHFactory = streamingService.getChannelLHFactory();
+        if (channelId.startsWith("channel/")) {
+            return channelLHFactory.fromId(channelId);
+        }
         try {
             return channelLHFactory.fromUrl(channelId);
         } catch (ParsingException p) {
