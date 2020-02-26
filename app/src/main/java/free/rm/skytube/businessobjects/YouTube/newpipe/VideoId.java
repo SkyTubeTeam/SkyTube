@@ -23,7 +23,7 @@ public final class VideoId {
     private final String id;
     private final String canonicalUrl;
 
-    VideoId(String id, String canonicalUrl) {
+    public VideoId(String id, String canonicalUrl) {
         this.id = id;
         this.canonicalUrl = canonicalUrl;
     }

@@ -26,6 +26,8 @@ import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.VideoCategory;
+import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
+import free.rm.skytube.businessobjects.YouTube.newpipe.VideoId;
 import free.rm.skytube.businessobjects.db.BookmarksDb;
 import free.rm.skytube.gui.businessobjects.adapters.OrderableVideoGridAdapter;
 import free.rm.skytube.gui.businessobjects.fragments.OrderableVideosGridFragment;
@@ -63,15 +65,17 @@ public class BookmarksFragment extends OrderableVideosGridFragment implements Bo
 			BookmarksDb.getBookmarksDb().setHasUpdated(false);
 		}
 	}
-	
+
 
 	@Override
-	public void onBookmarksDbUpdated() {
-		populateList();
-		if(videoGridAdapter != null)
-			videoGridAdapter.refresh(true);
+	public void onBookmarkAdded(YouTubeVideo video) {
+		videoGridAdapter.prepend(video);
 	}
-	
+
+	@Override
+	public void onBookmarkDeleted(VideoId videoId) {
+		videoGridAdapter.remove( card -> videoId.getId().equals(card.getId()));
+	}
 
 	@Override
 	protected int getLayoutResource() {
