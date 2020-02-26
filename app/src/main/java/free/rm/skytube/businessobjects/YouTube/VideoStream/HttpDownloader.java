@@ -47,7 +47,7 @@ import javax.net.ssl.HttpsURLConnection;
 public class HttpDownloader extends Downloader {
 
 	/** Mimic the Mozilla user agent */
-	private static final String USER_AGENT = "Mozilla/5.0";
+	private static final String USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101 Firefox/68.0";
 
 	@Override
 	public Response execute(Request request) throws IOException, ReCaptchaException {
