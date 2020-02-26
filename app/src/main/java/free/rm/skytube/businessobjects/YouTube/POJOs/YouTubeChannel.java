@@ -31,6 +31,7 @@ import java.util.List;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
+import free.rm.skytube.app.Utils;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.VideoBlocker;
 import free.rm.skytube.businessobjects.db.ChannelFilteringDb;
@@ -42,12 +43,8 @@ import free.rm.skytube.businessobjects.db.Tasks.SubscribeToChannelTask;
  *
  * <p>This class has the ability to query channel info by using the given channel ID.</p>
  */
-public class YouTubeChannel implements Serializable {
+public class YouTubeChannel extends CardData implements Serializable {
 
-	private String id;
-	private String title;
-	private String description;
-	private String thumbnailNormalUrl;
 	private String bannerUrl;
 	private String totalSubscribers;
 	private long subscriberCount;
@@ -69,12 +66,12 @@ public class YouTubeChannel implements Serializable {
 		this.title = title;
 	}
 
-	public YouTubeChannel(String id, String title, String description, String thumbnailNormalUrl,
+	public YouTubeChannel(String id, String title, String description, String thumbnailUrl,
 						  String bannerUrl, long subscriberCount, boolean isUserSubscribed, long lastVisitTime, long lastCheckTime) {
 		this.id = id;
 		this.title = title;
 		this.description = description;
-		this.thumbnailNormalUrl = thumbnailNormalUrl;
+		this.thumbnailUrl = thumbnailUrl;
 		this.bannerUrl = bannerUrl;
 		this.subscriberCount = subscriberCount;
 		this.totalSubscribers = getFormattedSubscribers(subscriberCount);
@@ -116,9 +113,9 @@ public class YouTubeChannel implements Serializable {
 		boolean ret = false;
 		ChannelSnippet snippet = channel.getSnippet();
 		if (snippet != null) {
-			ret |= equals(this.title, snippet.getTitle());
+			ret |= Utils.equals(this.title, snippet.getTitle());
 			this.title = snippet.getTitle();
-			ret |= equals(this.description, snippet.getDescription());
+			ret |= Utils.equals(this.description, snippet.getDescription());
 			this.description = snippet.getDescription();
 
 			ThumbnailDetails thumbnail = snippet.getThumbnails();
@@ -132,15 +129,15 @@ public class YouTubeChannel implements Serializable {
 				if ( !(thumbnailUrlLowerCase.startsWith("http://")  ||  thumbnailUrlLowerCase.startsWith("https://")) ) {
 					thmbNormalUrl = "https:" + thmbNormalUrl;
 				}
-				ret |= equals(this.thumbnailNormalUrl, thmbNormalUrl);
-				this.thumbnailNormalUrl = thmbNormalUrl;
+				ret |= Utils.equals(this.thumbnailUrl, thmbNormalUrl);
+				this.thumbnailUrl = thmbNormalUrl;
 			}
 		}
 
 		ChannelBrandingSettings branding = channel.getBrandingSettings();
 		if (branding != null) {
 			String bannerUrl = SkyTubeApp.isTablet() ? branding.getImage().getBannerTabletHdImageUrl() : branding.getImage().getBannerMobileHdImageUrl();
-			ret |= equals(this.bannerUrl, bannerUrl);
+			ret |= Utils.equals(this.bannerUrl, bannerUrl);
 			this.bannerUrl = bannerUrl;
 		}
 
@@ -156,30 +153,6 @@ public class YouTubeChannel implements Serializable {
 
 	private static String getFormattedSubscribers(long subscriberCount) {
 		return String.format(SkyTubeApp.getStr(R.string.total_subscribers),subscriberCount);
-	}
-
-	private static boolean equals(Object a, Object b) {
-		if (a!=null) {
-			return a.equals(b);
-		} else {
-			return b == null;
-		}
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public String getThumbnailNormalUrl() {
-		return thumbnailNormalUrl;
 	}
 
 	public String getBannerUrl() {
@@ -296,7 +269,6 @@ public class YouTubeChannel implements Serializable {
 
 		return success;
 	}
-
 
 	/**
 	 * Whitelist the channel.

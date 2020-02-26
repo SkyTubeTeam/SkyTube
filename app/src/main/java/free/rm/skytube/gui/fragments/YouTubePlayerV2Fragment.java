@@ -596,7 +596,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 			if (youTubeChannel != null) {
 				if(getActivity() != null)
 					Glide.with(getActivity())
-							.load(youTubeChannel.getThumbnailNormalUrl())
+							.load(youTubeChannel.getThumbnailUrl())
 							.apply(new RequestOptions().placeholder(R.drawable.channel_thumbnail_default))
 							.into(videoDescChannelThumbnailImageView);
 			}

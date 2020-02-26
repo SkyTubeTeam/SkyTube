@@ -206,7 +206,7 @@ public class ChannelBrowserFragment extends FragmentEx {
 			this.channelVideosFragment.onFragmentSelected();
 
 			Glide.with(getActivity())
-					.load(channel.getThumbnailNormalUrl())
+					.load(channel.getThumbnailUrl())
 					.apply(new RequestOptions().placeholder(R.drawable.channel_thumbnail_default))
 					.into(channelThumbnailImage);
 
