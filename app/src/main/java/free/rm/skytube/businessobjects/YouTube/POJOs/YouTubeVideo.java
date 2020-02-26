@@ -53,6 +53,7 @@ import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetVideoDescriptionTask;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetVideoStreamTask;
 import free.rm.skytube.businessobjects.YouTube.VideoStream.StreamMetaData;
+import free.rm.skytube.businessobjects.YouTube.newpipe.VideoId;
 import free.rm.skytube.businessobjects.db.BookmarksDb;
 import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
 import free.rm.skytube.businessobjects.interfaces.GetDesiredStreamListener;
@@ -191,6 +192,12 @@ public class YouTubeVideo extends CardData implements Serializable {
             this.thumbnailUrl = thumbnailUrl;
             this.channel = channel;
             this.thumbsUpPercentage = -1;
+        }
+
+
+        public VideoId getVideoId() {
+            // TODO: this should be created by the NewPipe backend
+            return new VideoId(id, getVideoUrl());
         }
 
 	/**
@@ -415,7 +422,7 @@ public class YouTubeVideo extends CardData implements Serializable {
 	}
 
 	public void unbookmarkVideo(Context context, Menu menu) {
-		boolean successUnbookmark = BookmarksDb.getBookmarksDb().remove(this);
+		boolean successUnbookmark = BookmarksDb.getBookmarksDb().remove(getVideoId());
 		Toast.makeText(context,
 				successUnbookmark ? R.string.video_unbookmarked : R.string.video_unbookmarked_error,
 				Toast.LENGTH_LONG).show();
