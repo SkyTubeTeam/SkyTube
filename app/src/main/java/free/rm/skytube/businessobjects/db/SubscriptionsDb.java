@@ -119,7 +119,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 					if (!Utils.isEmpty(channel.getId()) &&
 							!Utils.isEmpty(channel.getTitle()) &&
 							!Utils.isEmpty(channel.getBannerUrl()) &&
-							!Utils.isEmpty(channel.getThumbnailNormalUrl()) &&
+							!Utils.isEmpty(channel.getThumbnailUrl()) &&
 							!Utils.isEmpty(channel.getDescription())) {
 						cacheChannel(db, channel);
 					}
@@ -185,7 +185,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 		values.put(SubscriptionsTable.COL_TITLE, channel.getTitle());
 		values.put(SubscriptionsTable.COL_DESCRIPTION, channel.getDescription());
 		values.put(SubscriptionsTable.COL_BANNER_URL, channel.getBannerUrl());
-		values.put(SubscriptionsTable.COL_THUMBNAIL_NORMAL_URL, channel.getThumbnailNormalUrl());
+		values.put(SubscriptionsTable.COL_THUMBNAIL_NORMAL_URL, channel.getThumbnailUrl());
 		values.put(SubscriptionsTable.COL_SUBSCRIBER_COUNT, channel.getSubscriberCount());
 
 		return getWritableDatabase().insert(SubscriptionsTable.TABLE_NAME, null, values) != -1;
@@ -465,7 +465,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 		values.put(SubscriptionsTable.COL_TITLE, channel.getTitle());
 		values.put(SubscriptionsTable.COL_DESCRIPTION, channel.getDescription());
 		values.put(SubscriptionsTable.COL_BANNER_URL, channel.getBannerUrl());
-		values.put(SubscriptionsTable.COL_THUMBNAIL_NORMAL_URL, channel.getThumbnailNormalUrl());
+		values.put(SubscriptionsTable.COL_THUMBNAIL_NORMAL_URL, channel.getThumbnailUrl());
 		values.put(SubscriptionsTable.COL_SUBSCRIBER_COUNT, channel.getSubscriberCount());
 		values.put(SubscriptionsTable.COL_LAST_VISIT_TIME, channel.getLastVisitTime());
 
@@ -670,7 +670,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 				obj.addProperty("id", src.getId());
 				obj.addProperty("title", src.getTitle());
 				obj.addProperty("description", src.getDescription());
-				obj.addProperty("thumbnailNormalUrl", src.getThumbnailNormalUrl());
+				obj.addProperty("thumbnailNormalUrl", src.getThumbnailUrl());
 				obj.addProperty("bannerUrl", src.getBannerUrl());
 				return obj;
 			}
@@ -769,7 +769,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 		values.put(LocalChannelTable.COL_TITLE, channel.getTitle());
 		values.put(LocalChannelTable.COL_DESCRIPTION, channel.getDescription());
 		values.put(LocalChannelTable.COL_BANNER_URL, channel.getBannerUrl());
-		values.put(LocalChannelTable.COL_THUMBNAIL_NORMAL_URL, channel.getThumbnailNormalUrl());
+		values.put(LocalChannelTable.COL_THUMBNAIL_NORMAL_URL, channel.getThumbnailUrl());
 		values.put(LocalChannelTable.COL_SUBSCRIBER_COUNT, channel.getSubscriberCount());
 		if(channel.getLastVideoTime() > 0) {
 			values.put(LocalChannelTable.COL_LAST_VIDEO_TS, channel.getLastVideoTime());

@@ -42,6 +42,7 @@ import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.app.enums.Policy;
 import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
+import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubePlaylist;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.db.PlaybackStatusDb;
@@ -148,7 +149,11 @@ public class GridViewHolder extends RecyclerView.ViewHolder implements Serializa
 	 */
 	public void updateViewsData() {
 		titleTextView.setText(currentCard.getTitle());
-		publishDateTextView.setText(currentCard.getPublishDatePretty());
+		if (currentCard.getPublishTimestamp() != null) {
+			publishDateTextView.setText(currentCard.getPublishDatePretty());
+		} else {
+			publishDateTextView.setVisibility(View.GONE);
+		}
 		Glide.with(context)
 				.load(currentCard.getThumbnailUrl())
 				.apply(new RequestOptions().placeholder(R.drawable.thumbnail_default))

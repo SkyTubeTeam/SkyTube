@@ -19,10 +19,9 @@ package free.rm.skytube.businessobjects.YouTube.newpipe;
 import org.schabi.newpipe.extractor.InfoItem;
 import org.schabi.newpipe.extractor.ListExtractor;
 import org.schabi.newpipe.extractor.StreamingService;
+import org.schabi.newpipe.extractor.channel.ChannelInfoItem;
 import org.schabi.newpipe.extractor.exceptions.ExtractionException;
 import org.schabi.newpipe.extractor.exceptions.ParsingException;
-import org.schabi.newpipe.extractor.linkhandler.LinkHandlerFactory;
-import org.schabi.newpipe.extractor.linkhandler.ListLinkHandlerFactory;
 import org.schabi.newpipe.extractor.playlist.PlaylistInfoItem;
 import org.schabi.newpipe.extractor.stream.StreamInfoItem;
 
@@ -51,15 +50,12 @@ public class VideoPager extends Pager<InfoItem, CardData> {
         return channel;
     }
 
-
     @Override
     protected List<CardData> extract(ListExtractor.InfoItemsPage<InfoItem> page) throws ParsingException {
         List<CardData> result = new ArrayList<>(page.getItems().size());
         Logger.i(this, "extract from %s, items: %s", page, page.getItems().size());
         int repeatCounter = 0;
         int unexpected = 0;
-        LinkHandlerFactory streamLinkHandler = getStreamingService().getStreamLHFactory();
-        ListLinkHandlerFactory playlistLinkHandler = getStreamingService().getPlaylistLHFactory();
 
         for (InfoItem infoItem : page.getItems()) {
             if (infoItem instanceof StreamInfoItem) {
@@ -74,6 +70,9 @@ public class VideoPager extends Pager<InfoItem, CardData> {
             } else if (infoItem instanceof PlaylistInfoItem) {
                 PlaylistInfoItem playlistInfoItem = (PlaylistInfoItem) infoItem;
                 result.add(convert(playlistInfoItem, playlistLinkHandler.getId(infoItem.getUrl())));
+            } else if (infoItem instanceof ChannelInfoItem) {
+                ChannelInfoItem channelInfoItem = (ChannelInfoItem) infoItem;
+                result.add(convert(channelInfoItem));
             } else {
                 Logger.i(this, "Unexpected item %s, type:%s", infoItem, infoItem.getClass());
                 unexpected ++;
@@ -107,5 +106,17 @@ public class VideoPager extends Pager<InfoItem, CardData> {
                 null);
     }
 
+    private CardData convert(ChannelInfoItem channelInfoItem) {
+        String url = channelInfoItem.getUrl();
+        String id = null;
+        try {
+            id = channelLinkHandler.getId(url);
+        } catch (ParsingException p) {
+            Logger.e(this, "Unable to parse channel url "+url, p);
+            id = url;
+        }
+        return new YouTubeChannel(id, channelInfoItem.getName(), channelInfoItem.getDescription(), channelInfoItem.getThumbnailUrl(), null,
+                channelInfoItem.getSubscriberCount(), false, -1, System.currentTimeMillis() );
+    }
 
 }
