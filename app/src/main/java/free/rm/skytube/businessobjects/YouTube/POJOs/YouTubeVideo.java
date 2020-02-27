@@ -18,8 +18,6 @@
 package free.rm.skytube.businessobjects.YouTube.POJOs;
 
 import android.app.DownloadManager;
-import android.content.ClipData;
-import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -434,19 +432,22 @@ public class YouTubeVideo extends CardData implements Serializable {
 	}
 
 	public void shareVideo(Context context) {
-		Intent intent = new Intent(android.content.Intent.ACTION_SEND);
-		intent.setType("text/plain");
-		intent.putExtra(android.content.Intent.EXTRA_TEXT, getVideoUrl());
-		context.startActivity(Intent.createChooser(intent, context.getString(R.string.share_via)));
+		SkyTubeApp.shareUrl(context, getVideoUrl());
 	}
 
 	public void copyUrl(Context context) {
-		ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
-		ClipData clip = ClipData.newPlainText("Video URL", getVideoUrl());
-		clipboard.setPrimaryClip(clip);
-		Toast.makeText(context, R.string.url_copied_to_clipboard, Toast.LENGTH_SHORT).show();
+		SkyTubeApp.copyUrl(context, "Video URL", getVideoUrl());
 	}
 
+    public void openChannel(final Context context) {
+		final String channelId = getChannelId();
+		YouTubeChannel.openChannel(context, channelId);
+	}
+
+	public void subscribeChannel(final Context context, final Menu menu) {
+		final String channelId = getChannelId();
+		YouTubeChannel.subscribeChannel(context, menu, channelId);
+	}
 
 	/**
 	 * If the user have previously downloaded the video, this method will return the Uri of the file;

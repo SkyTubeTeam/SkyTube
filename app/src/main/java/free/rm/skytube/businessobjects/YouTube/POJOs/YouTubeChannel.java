@@ -17,6 +17,8 @@
 
 package free.rm.skytube.businessobjects.YouTube.POJOs;
 
+import android.content.Context;
+import android.view.Menu;
 import android.widget.Toast;
 
 import com.google.api.services.youtube.model.Channel;
@@ -24,6 +26,9 @@ import com.google.api.services.youtube.model.ChannelBrandingSettings;
 import com.google.api.services.youtube.model.ChannelSnippet;
 import com.google.api.services.youtube.model.ChannelStatistics;
 import com.google.api.services.youtube.model.ThumbnailDetails;
+
+import org.schabi.newpipe.extractor.exceptions.ParsingException;
+import org.schabi.newpipe.extractor.services.youtube.linkHandler.YoutubeChannelLinkHandlerFactory;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -36,7 +41,11 @@ import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.VideoBlocker;
 import free.rm.skytube.businessobjects.db.ChannelFilteringDb;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
+import free.rm.skytube.businessobjects.db.Tasks.GetChannelInfo;
 import free.rm.skytube.businessobjects.db.Tasks.SubscribeToChannelTask;
+import free.rm.skytube.gui.businessobjects.YouTubePlayer;
+import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
+import free.rm.skytube.gui.fragments.SubscriptionsFeedFragment;
 
 /**
  * Represents a YouTube Channel.
@@ -290,4 +299,50 @@ public class YouTubeChannel extends CardData implements Serializable {
 		return success;
 	}
 
+	public void openChannel(final Context context) {
+		openChannel(context,getId());
+	}
+
+	public static void openChannel(final Context context, String channelId){
+		if (channelId != null) {
+			new GetChannelInfo(context, new YouTubeChannelInterface() {
+				@Override
+				public void onGetYouTubeChannel(YouTubeChannel youTubeChannel) {
+					YouTubePlayer.launchChannel(youTubeChannel, context);
+				}
+			}).executeInParallel(channelId);
+		}
+	}
+
+	public void subscribeChannel(final Context context, final Menu menu) {
+		subscribeChannel(context, menu, getId());
+	}
+
+	public static void subscribeChannel(final Context context, final Menu menu, final String channelId) {
+		if (channelId != null) {
+			new GetChannelInfo(context, youTubeChannel -> {
+				if (SubscriptionsDb.getSubscriptionsDb().subscribe(youTubeChannel)) {
+					youTubeChannel.setUserSubscribed(true);
+					SubsAdapter adapter = SubsAdapter.get(context);
+					adapter.appendChannel(youTubeChannel);
+					SubscriptionsFeedFragment.refreshSubsFeedFromCache();
+					Toast.makeText(context, "Channel subscribed", Toast.LENGTH_LONG).show();
+				} else {
+					Toast.makeText(context, "Subscription failed", Toast.LENGTH_LONG).show();
+				}
+			}).executeInParallel(channelId);
+
+		} else {
+			Toast.makeText(context, "Channel is not specified", Toast.LENGTH_LONG).show();
+		}
+	}
+
+	public String getChannelUrl() {
+		try {
+			return YoutubeChannelLinkHandlerFactory.getInstance().getUrl(getId());
+		} catch (ParsingException p) {
+			Logger.e(this, "getChannel URL for " + getId() + ", error:" + p.getMessage(), p);
+			return id;
+		}
+	}
 }

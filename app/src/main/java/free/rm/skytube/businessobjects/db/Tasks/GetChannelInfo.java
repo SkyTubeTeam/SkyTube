@@ -103,7 +103,9 @@ public class GetChannelInfo extends AsyncTaskParallel<String, Void, YouTubeChann
     @Override
     protected void onPostExecute(YouTubeChannel youTubeChannel) {
         showErrorToUi();
-        channelReceiver.onGetYouTubeChannel(youTubeChannel);
+        if (youTubeChannel != null) {
+            channelReceiver.onGetYouTubeChannel(youTubeChannel);
+        }
     }
 
     public void showErrorToUi() {
