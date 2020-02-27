@@ -20,6 +20,7 @@ package free.rm.skytube.gui.businessobjects.adapters;
 import android.content.Context;
 import android.content.Intent;
 
+import androidx.annotation.MenuRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.recyclerview.widget.RecyclerView;
@@ -112,6 +113,8 @@ public class GridViewHolder extends RecyclerView.ViewHolder implements Serializa
 				YouTubePlayer.launch((YouTubeVideo) currentCard, context);
 			} else if (currentCard instanceof YouTubePlaylist) {
 				mainActivityListener.onPlaylistClick((YouTubePlaylist) currentCard);
+			} else if (currentCard instanceof YouTubeChannel) {
+				mainActivityListener.onChannelClick( ((YouTubeChannel) currentCard).getId());
 			}
 		});
 
@@ -163,8 +166,20 @@ public class GridViewHolder extends RecyclerView.ViewHolder implements Serializa
 			updateViewsData((YouTubeVideo) currentCard);
 		} else if (currentCard instanceof YouTubePlaylist) {
 			updateViewsData((YouTubePlaylist) currentCard);
+		} else if (currentCard instanceof YouTubeChannel) {
+			updateViewsData((YouTubeChannel) currentCard);
 		}
 	}
+
+	private void updateViewsData(@NonNull YouTubeChannel currentCard) {
+		viewsTextView.setText(currentCard.getTotalSubscribers());
+
+		thumbsUpPercentageTextView.setVisibility(View.GONE);
+		videoDurationTextView.setVisibility(View.GONE);
+		videoPositionProgressBar.setVisibility(View.GONE);
+		channelTextView.setVisibility(View.GONE);
+	}
+
 	private void updateViewsData(@NonNull YouTubePlaylist playlistInfoItem) {
 		viewsTextView.setText(String.format(context.getString(R.string.num_videos), playlistInfoItem.getVideoCount()));
 
@@ -209,12 +224,43 @@ public class GridViewHolder extends RecyclerView.ViewHolder implements Serializa
 
 
  	private void onOptionsButtonClick(final View view) {
-		if (!(currentCard instanceof YouTubeVideo)) {
-			return;
+		if (currentCard instanceof YouTubeVideo) {
+			onOptionsButtonClick(view, (YouTubeVideo) currentCard);
+		} else if (currentCard instanceof YouTubeChannel) {
+			onOptionsButtonClick(view, (YouTubeChannel) currentCard);
 		}
-		YouTubeVideo youTubeVideo = (YouTubeVideo) currentCard;
-		final PopupMenu popupMenu = new PopupMenu(view.getContext(), view);
-		popupMenu.getMenuInflater().inflate(R.menu.video_options_menu, popupMenu.getMenu());
+	}
+	private void onOptionsButtonClick(final View view, YouTubeChannel channel) {
+		final PopupMenu popupMenu = createPopup(R.menu.channel_options_menu, view);
+		Menu menu = popupMenu.getMenu();
+		if (!SubscriptionsDb.getSubscriptionsDb().isUserSubscribedToChannel(channel.getId())) {
+			menu.findItem(R.id.subscribe_channel).setVisible(true);
+		}
+		popupMenu.setOnMenuItemClickListener(item -> {
+			switch (item.getItemId()) {
+				case R.id.share:
+					SkyTubeApp.shareUrl(context, channel.getChannelUrl());
+					return true;
+				case R.id.copyurl:
+					SkyTubeApp.copyUrl(context, "Channel URL", channel.getChannelUrl());
+					return true;
+				case R.id.subscribe_channel:
+					YouTubeChannel.subscribeChannel(context, popupMenu.getMenu(), channel.getId());
+					return true;
+				case R.id.open_channel:
+					YouTubeChannel.openChannel(context, channel.getId());
+					return true;
+				case R.id.block_channel:
+					channel.blockChannel();
+					return true;
+			}
+			return false;
+		});
+		popupMenu.show();
+	}
+
+	private void onOptionsButtonClick(final View view, YouTubeVideo youTubeVideo) {
+		final PopupMenu popupMenu = createPopup(R.menu.video_options_menu, view);
 		Menu menu = popupMenu.getMenu();
 		new IsVideoBookmarkedTask(youTubeVideo.getId(), menu).executeInParallel();
 
@@ -283,6 +329,12 @@ public class GridViewHolder extends RecyclerView.ViewHolder implements Serializa
 			return false;
 		});
 		popupMenu.show();
+	}
+
+	private PopupMenu createPopup(@MenuRes int menuId, View view) {
+		final PopupMenu popupMenu = new PopupMenu(view.getContext(), view);
+		popupMenu.getMenuInflater().inflate(menuId, popupMenu.getMenu());
+		return popupMenu;
 	}
 
 }

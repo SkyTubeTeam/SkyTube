@@ -22,6 +22,8 @@ import android.app.AlarmManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -263,4 +265,20 @@ public class SkyTubeApp extends MultiDexApplication {
 			Toast.makeText(ctx, message, Toast.LENGTH_LONG).show();
 		}
 	}
+
+
+	public static void shareUrl(Context context, String url) {
+		Intent intent = new Intent(android.content.Intent.ACTION_SEND);
+		intent.setType("text/plain");
+		intent.putExtra(android.content.Intent.EXTRA_TEXT, url);
+		context.startActivity(Intent.createChooser(intent, context.getString(R.string.share_via)));
+	}
+
+	public static void copyUrl(Context context, String text, String url) {
+		ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+		ClipData clip = ClipData.newPlainText(text, url);
+		clipboard.setPrimaryClip(clip);
+		Toast.makeText(context, R.string.url_copied_to_clipboard, Toast.LENGTH_SHORT).show();
+	}
+
 }
