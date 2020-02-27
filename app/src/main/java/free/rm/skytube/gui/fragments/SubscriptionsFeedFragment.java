@@ -277,8 +277,8 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 			if(changed) {
 				refreshFeedFromCache();
 				Toast.makeText(context,
-						String.format(context.getString(R.string.fetched_videos_from_channels),
-								numVideosFetched, numChannelsFetched, numChannelsSubscribed), Toast.LENGTH_LONG).show();
+						String.format(context.getString(R.string.notification_new_videos_found),
+								numVideosFetched), Toast.LENGTH_LONG).show();
 			} else {
 				Toast.makeText(context,
 									R.string.no_new_videos_found,
