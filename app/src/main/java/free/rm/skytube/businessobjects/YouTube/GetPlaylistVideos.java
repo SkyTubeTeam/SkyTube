@@ -29,7 +29,6 @@ import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPI;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPIKey;
-import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 
 /**
  * Returns a list of videos for a specific playlist.
@@ -61,21 +60,17 @@ public class GetPlaylistVideos extends GetYouTubeVideos {
 
 				PlaylistItemListResponse response = playlistItemsList.execute();
 
-				StringBuilder videoIds = new StringBuilder();
+				List<String> videoIds = new ArrayList<>();
 
 				List<PlaylistItem> items = response.getItems();
 				if(items != null) {
 					for(PlaylistItem item : items) {
-						videoIds.append(item.getContentDetails().getVideoId());
-						videoIds.append(',');
+						videoIds.add(item.getContentDetails().getVideoId());
 					}
 				}
 
 				// get video details by supplying the videos IDs
-				GetVideosDetailsByIDs getVideo = new GetVideosDetailsByIDs();
-				getVideo.init(videoIds.toString());
-
-				videoList = getVideo.getNextVideos();
+				videoList = getVideoListFromIds(videoIds);
 
 				nextPageToken = response.getNextPageToken();
 
