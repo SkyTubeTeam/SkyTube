@@ -17,14 +17,18 @@
 
 package free.rm.skytube.businessobjects.db.Tasks;
 
+import android.content.res.Resources;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.core.os.ConfigurationCompat;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
@@ -42,6 +46,7 @@ public class GetSubscribedChannelsTask extends AsyncTaskParallel<Void, Void, Lis
 
 	private SubsAdapter adapter;
 	private View progressBar;
+	private String searchText; //when it is null user is just opening subscription drawer - when it is not user is searching for subs
 	/** Set to true if the user wants channels to be sorted alphabetically (as set in the
 	 * preference). */
 	private final boolean sortChannelsAlphabetically;
@@ -53,9 +58,15 @@ public class GetSubscribedChannelsTask extends AsyncTaskParallel<Void, Void, Lis
 		this.adapter = adapter;
 		this.progressBar = progressBar;
 		this.sortChannelsAlphabetically = SkyTubeApp.getPreferenceManager().getBoolean(SkyTubeApp.getStr(R.string.pref_key_subscriptions_alphabetical_order), false);
+		this.searchText = null;
 	}
 
-
+	public GetSubscribedChannelsTask(SubsAdapter adapter, View progressBar,String searchText) {
+		this.adapter = adapter;
+		this.progressBar = progressBar;
+		this.sortChannelsAlphabetically = SkyTubeApp.getPreferenceManager().getBoolean(SkyTubeApp.getStr(R.string.pref_key_subscriptions_alphabetical_order), false);
+		this.searchText = searchText;
+	}
 	@Override
 	protected void onPreExecute() {
 		if (progressBar != null) {
@@ -72,10 +83,19 @@ public class GetSubscribedChannelsTask extends AsyncTaskParallel<Void, Void, Lis
 			List<String> channelIds = SubscriptionsDb.getSubscriptionsDb().getSubscribedChannelIds();
 			for (String id : channelIds) {
 				YouTubeChannel channel = channelInfo.getChannelInfoSync(id);
-				// This shouldn't be null, but could happen in rare scenarios, where the app is offline,
-				// and the info previously not saved
-				if (channel != null) {
-					subbedChannelsList.add(channel);
+				if (searchText == null){
+					// This shouldn't be null, but could happen in rare scenarios, where the app is offline,
+					// and the info previously not saved
+					if (channel != null) {
+						subbedChannelsList.add(channel);
+					}
+				} else {
+					Locale currentLocale = ConfigurationCompat.getLocales(Resources.getSystem().getConfiguration()).get(0);
+					if (channel.getTitle().toLowerCase(currentLocale).contains(searchText.toLowerCase(currentLocale))){
+						if (channel != null) {
+							subbedChannelsList.add(channel);
+						}
+					}
 				}
 			}
 
