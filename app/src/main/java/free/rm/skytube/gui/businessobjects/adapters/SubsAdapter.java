@@ -88,6 +88,7 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 	 * @param channel Channel to append.
 	 */
 	public void appendChannel(YouTubeChannel channel) {
+
 		append(channel);
 	}
 
@@ -168,6 +169,20 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 		}
 		clearList();
 		new GetSubscribedChannelsTask(this, null).executeInParallel();
+	}
+
+	public void refreshFilteredSubsList(String searchText) {
+		synchronized (isSubsListRetrieved) {
+			isSubsListRetrieved.value = false;
+		}
+		clearList();
+		new GetSubscribedChannelsTask(this, null,searchText).executeInParallel();
+	}
+
+	public void filterSubSearch(String searchText){
+		clearList();
+		refreshFilteredSubsList(searchText);
+		System.out.println("searchText " + searchText);
 	}
 
 
