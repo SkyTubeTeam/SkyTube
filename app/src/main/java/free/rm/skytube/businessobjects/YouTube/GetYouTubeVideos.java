@@ -102,42 +102,46 @@ public abstract class GetYouTubeVideos {
 		if (videoIds == null || videoIds.isEmpty()) {
 			return Collections.emptyList();
 		}
-		if (NewPipeService.isPreferred()) {
-			NewPipeService newPipe = NewPipeService.get();
-			List<CardData> result = new ArrayList<>(videoIds.size());
-			for (String id : videoIds) {
-				try {
-					result.add(newPipe.getDetails(id));
-				} catch (ExtractionException | IOException  e) {
-					Logger.e(this, "Unable to fetch "+id+", error:"+ e.getMessage(), e);
-				}
-			}
-			return result;
-		} else {
+		return getVideoListFromIdsWithAPI(videoIds);
+	}
 
-			return getVideoListFromIdsWithAPI(videoIds);
+	private List<CardData> getWithNewPipe(List<String> videoIds) {
+		NewPipeService newPipe = NewPipeService.get();
+		List<CardData> result = new ArrayList<>(videoIds.size());
+		for (String id : videoIds) {
+			try {
+				result.add(newPipe.getDetails(id));
+			} catch (ExtractionException | IOException e) {
+				Logger.e(this, "Unable to fetch "+id+", error:"+ e.getMessage(), e);
+			}
 		}
+		return result;
 	}
 
 	private List<CardData> getVideoListFromIdsWithAPI(List<String> videoIds) throws IOException {
+		final StringBuilder videoIdsStr = new StringBuilder();
+		try {
 
-		StringBuilder videoIdsStr = new StringBuilder();
+			// append the video IDs into a strings (CSV)
+			for (String id : videoIds) {
+				videoIdsStr.append(id);
+				videoIdsStr.append(',');
+			}
 
-		// append the video IDs into a strings (CSV)
-		for (String id : videoIds) {
-			videoIdsStr.append(id);
-			videoIdsStr.append(',');
+			if (videoIdsStr.length() > 0) {
+				videoIdsStr.setLength(videoIdsStr.length() - 1);
+			}
+			// get video details by supplying the videos IDs
+			GetVideosDetailsByIDs getVideo = new GetVideosDetailsByIDs();
+			getVideo.init(videoIdsStr.toString());
+			Logger.i(this, "getVideoList light from %s id, video ids: %s", videoIds.size(), videoIdsStr);
+
+			return getVideo.getNextVideos();
+		} catch (IOException e) {
+			Logger.e(this, "Unable to fetch with API, revert to newpipe:"+e.getMessage()+",ids="+videoIdsStr, e);
+			lastException = e;
+			return getWithNewPipe(videoIds);
 		}
-
-		if (videoIdsStr.length() > 0) {
-			videoIdsStr.setLength(videoIdsStr.length() - 1);
-		}
-		// get video details by supplying the videos IDs
-		GetVideosDetailsByIDs getVideo = new GetVideosDetailsByIDs();
-		getVideo.init(videoIdsStr.toString());
-		Logger.i(this, "getVideList light from %s id, video ids: %s", videoIds.size(), videoIdsStr);
-
-		return getVideo.getNextVideos();
 	}
 
 }
