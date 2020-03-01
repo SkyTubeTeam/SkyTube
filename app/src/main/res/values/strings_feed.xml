@@ -3,6 +3,7 @@
 	<string name="feed">Feed</string>
 
 	<string name="subscribing_to_channels">Subscribing to channels…</string>
+	<string name="open_channel">Open Channel</string>
 	<string name="fetching_subbed_channels_info">Fetching channels\' information…</string>
 	<string name="fetching_subbed_channels_info_error">An error has occurred while fetching channels\' information.</string>
 
