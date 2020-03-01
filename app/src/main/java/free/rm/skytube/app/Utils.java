@@ -44,6 +44,18 @@ public class Utils {
         return str == null || str.isEmpty();
     }
 
+    public static Integer min(Integer a, Integer b) {
+        if (a == null) {
+            return b;
+        } else {
+            if (b != null) {
+                return Math.min(a, b);
+            } else {
+                return a;
+            }
+        }
+    }
+
     public static int hash(Object... obj) {
         return Arrays.hashCode(obj);
     }

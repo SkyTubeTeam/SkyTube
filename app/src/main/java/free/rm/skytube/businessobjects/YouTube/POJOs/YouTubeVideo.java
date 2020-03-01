@@ -44,8 +44,6 @@ import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Date;
 import java.util.Locale;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import free.rm.skytube.BuildConfig;
 import free.rm.skytube.R;
@@ -55,6 +53,7 @@ import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetVideoDescriptionTask;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetVideoStreamTask;
 import free.rm.skytube.businessobjects.YouTube.VideoStream.StreamMetaData;
+import free.rm.skytube.businessobjects.YouTube.newpipe.VideoId;
 import free.rm.skytube.businessobjects.db.BookmarksDb;
 import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
 import free.rm.skytube.businessobjects.interfaces.GetDesiredStreamListener;
@@ -71,20 +70,12 @@ public class YouTubeVideo extends CardData implements Serializable {
 	 * Channel (only id and name are set).
 	 */
 	private YouTubeChannel channel;
-	/**
-	 * The total number of 'likes' - as a localized string!
-	 */
-	private String likeCount;
 
 	/**
 	 * The total number of 'likes'.
 	 */
 	private Long likeCountNumber;
 
-	/**
-	 * The total number of 'dislikes' - as a localized string!
-	 */
-	private String dislikeCount;
 
 	/**
 	 * The total number of 'dislikes'.
@@ -92,9 +83,8 @@ public class YouTubeVideo extends CardData implements Serializable {
 	private Long dislikeCountNumber;
 
 	/**
-	 * The percentage of people that thumbs-up this video (format:  "<percentage>%").
+	 * The percentage of people that thumbs-up this video.
 	 */
-	private String thumbsUpPercentageStr;
 	private int thumbsUpPercentage;
 	/**
 	 * Video duration string (e.g. "5:15").
@@ -186,7 +176,8 @@ public class YouTubeVideo extends CardData implements Serializable {
 		this.viewsCount = String.format(getStr(R.string.views), viewsCountInt);
 	}
 
-        public YouTubeVideo(String id, String title, String description, long durationInSeconds, YouTubeChannel channel, long viewCount, Long publishDate, String thumbnailUrl) {
+        public YouTubeVideo(String id, String title, String description, long durationInSeconds, YouTubeChannel channel, long viewCount,
+							Long publishDate, Boolean publishDateExact, String thumbnailUrl) {
             this.id = id;
             this.title = title;
             this.description = description;
@@ -196,20 +187,27 @@ public class YouTubeVideo extends CardData implements Serializable {
                 this.setPublishTimestamp(publishDate);
                 this.publishDate = new DateTime(publishDate);
             }
+            this.setPublishTimestampExact(publishDateExact);
             this.thumbnailMaxResUrl = thumbnailUrl;
             this.thumbnailUrl = thumbnailUrl;
             this.channel = channel;
+            this.thumbsUpPercentage = -1;
+        }
+
+
+        public VideoId getVideoId() {
+            // TODO: this should be created by the NewPipe backend
+            return new VideoId(id, getVideoUrl());
         }
 
 	/**
-	 * Sets the {@link #thumbsUpPercentageStr}, i.e. the percentage of people that thumbs-up this video
+	 * Sets the {@link #thumbsUpPercentage}, i.e. the percentage of people that thumbs-up this video
 	 * (format:  "<percentage>%").
 	 *
 	 * @param likedCountInt	Total number of "likes".
 	 * @param dislikedCountInt Total number of "dislikes".
 	 */
 	public void setLikeDislikeCount(Long likedCountInt, Long dislikedCountInt) {
-		String fullPercentageStr = null;
 		this.thumbsUpPercentage = -1;
 
 		// some videos do not allow users to like/dislike them:  hence likedCountInt / dislikedCountInt
@@ -223,13 +221,10 @@ public class YouTubeVideo extends CardData implements Serializable {
 			if (totalVoteCount != 0) {
 				this.thumbsUpPercentage = (int) Math.round((double)likedCount*100/totalVoteCount);
 
-				// round the liked percentage to 0 decimal places and convert it to string
-				fullPercentageStr = String.valueOf(thumbsUpPercentage) + "%";
 			}
 		}
 		this.likeCountNumber = likedCountInt;
 		this.dislikeCountNumber = dislikedCountInt;
-		this.thumbsUpPercentageStr = fullPercentageStr;
 	}
 
 	/**
@@ -269,7 +264,7 @@ public class YouTubeVideo extends CardData implements Serializable {
 	 * @return True if the video allows the users to like/dislike it.
 	 */
 	public boolean isThumbsUpPercentageSet() {
-		return (thumbsUpPercentageStr != null);
+		return (thumbsUpPercentage >= 0);
 	}
 
 	/**
@@ -285,7 +280,8 @@ public class YouTubeVideo extends CardData implements Serializable {
 	 * video does not allow the users to like/dislike it.  Refer to {@link #isThumbsUpPercentageSet}.
 	 */
 	public String getThumbsUpPercentageStr() {
-		return thumbsUpPercentageStr;
+		// round the liked percentage to 0 decimal places and convert it to string
+		return thumbsUpPercentage >= 0 ? String.valueOf(thumbsUpPercentage) + "%" : null;
 	}
 
 	/**
@@ -296,7 +292,7 @@ public class YouTubeVideo extends CardData implements Serializable {
 		if (likeCountNumber != null) {
 			return String.format(Locale.getDefault(), "%,d", likeCountNumber);
 		}
-		return likeCount;
+		return null;
 	}
 
 	/**
@@ -314,7 +310,7 @@ public class YouTubeVideo extends CardData implements Serializable {
 		if (dislikeCountNumber != null) {
 			return String.format(Locale.getDefault(), "%,d", dislikeCountNumber);
 		}
-		return dislikeCount;
+		return null;
 	}
 
 	/**
@@ -426,7 +422,7 @@ public class YouTubeVideo extends CardData implements Serializable {
 	}
 
 	public void unbookmarkVideo(Context context, Menu menu) {
-		boolean successUnbookmark = BookmarksDb.getBookmarksDb().remove(this);
+		boolean successUnbookmark = BookmarksDb.getBookmarksDb().remove(getVideoId());
 		Toast.makeText(context,
 				successUnbookmark ? R.string.video_unbookmarked : R.string.video_unbookmarked_error,
 				Toast.LENGTH_LONG).show();

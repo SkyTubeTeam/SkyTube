@@ -36,8 +36,10 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import free.rm.skytube.app.SkyTubeApp;
@@ -56,8 +58,10 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
     private static final String SUBSCRIBED_NUMBER_OF_CHANNELS_QUERY = String.format("SELECT COUNT(*) FROM %s", SubscriptionsTable.TABLE_NAME);
     private static final String HAS_VIDEO_QUERY = String.format("SELECT COUNT(*) FROM %s WHERE %s = ?", SubscriptionsVideosTable.TABLE_NAME, SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID);
 	private static final String GET_VIDEO_IDS = String.format("SELECT %s FROM %s", SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID, SubscriptionsVideosTable.TABLE_NAME);
-	private static final String GET_VIDEO_IDS_BY_CHANNEL = String.format("SELECT %s FROM %s WHERE %s = ?",
-			SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID, SubscriptionsVideosTable.TABLE_NAME, SubscriptionsVideosTable.COL_CHANNEL_ID);
+    private static final String GET_VIDEO_IDS_BY_CHANNEL_TO_PUBLISH_TS = String.format("SELECT %s,%s FROM %s WHERE %s = ?",
+            SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID, SubscriptionsVideosTable.COL_PUBLISH_TS, SubscriptionsVideosTable.TABLE_NAME, SubscriptionsVideosTable.COL_CHANNEL_ID);
+    private static final String GET_VIDEO_IDS_BY_CHANNEL = String.format("SELECT %s FROM %s WHERE %s = ?",
+            SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID, SubscriptionsVideosTable.TABLE_NAME, SubscriptionsVideosTable.COL_CHANNEL_ID);
     private static final String FIND_EMPTY_RETRIEVAL_TS = String.format("SELECT %s FROM %s WHERE %s IS NULL",
             SubscriptionsVideosTable.COL_YOUTUBE_VIDEO, SubscriptionsVideosTable.TABLE_NAME, SubscriptionsVideosTable.COL_RETRIEVAL_TS);
 
@@ -145,7 +149,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
                 int updateCount = db.update(
                         SubscriptionsVideosTable.TABLE_NAME,
                         values,
-                        SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID + " = ?",
+                        SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID_EQUALS_TO,
                         new String[]{video.getId()});
                 Logger.i(this,"updating " + video.getId() + " with publish date:" + dateTime + " -> " + updateCount);
                 count += updateCount;
@@ -240,8 +244,33 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 		}
 	}
 
+    /**
+     * @param channelId the id of the channel
+     * @return all the video ids for the subscribed channels from the database, mapped to publication times
+     */
+    public Map<String, Long> getSubscribedChannelVideosByChannelToTimestamp(String channelId) {
+        try(Cursor cursor = getReadableDatabase().rawQuery(GET_VIDEO_IDS_BY_CHANNEL_TO_PUBLISH_TS, new String[] { channelId})) {
+            Map<String, Long> result = new HashMap<>();
+            while(cursor.moveToNext()) {
+                result.put(cursor.getString(0), cursor.getLong(1));
+            }
+            return result;
+        }
+    }
 
-	public List<String> getSubscribedChannelIds() {
+    public int setPublishTimestamp(YouTubeVideo video) {
+        ContentValues values = new ContentValues();
+        values.put(SubscriptionsVideosTable.COL_PUBLISH_TS, video.getPublishTimestamp());
+
+        return getWritableDatabase().update(
+                SubscriptionsVideosTable.TABLE_NAME,
+                values,
+                SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID_EQUALS_TO,
+                new String[] { video.getId() });
+    }
+
+
+    public List<String> getSubscribedChannelIds() {
 		try (Cursor cursor = getReadableDatabase().query(SubscriptionsTable.TABLE_NAME, new String[] {SubscriptionsTable.COL_CHANNEL_ID}, null, null, null, null, null)) {
 			List<String> result = new ArrayList<>();
 			while(cursor.moveToNext()) {
@@ -530,8 +559,9 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 				ContentValues values = createContentValues(video, video.getChannelId());
 				if (hasVideo(video)) {
 					values.remove(SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID);
-					db.update(SubscriptionsVideosTable.TABLE_NAME, values,
-							SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID + " = ?",
+					db.update(SubscriptionsVideosTable.TABLE_NAME,
+                            values,
+                            SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID_EQUALS_TO,
 							new String[]{video.getId()});
 				} else {
 					db.insert(SubscriptionsVideosTable.TABLE_NAME, null, values);
@@ -595,10 +625,18 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
      * @return a list of {@link YouTubeVideo}
      */
     public List<YouTubeVideo> getSubscriptionVideoPage(int limit, String videoId, long beforeTimestamp) {
+        return getSubscriptionVideoPage(limit, videoId, beforeTimestamp, SubscriptionsVideosTable.COL_PUBLISH_TS);
+    }
+
+    /**
+     * Query the database to retrieve number of videos for subscribed channels starting from the given video.
+     * @return a list of {@link YouTubeVideo}
+     */
+    private List<YouTubeVideo> getSubscriptionVideoPage(int limit, String videoId, long beforeTimestamp, String sortingColumn) {
         final String selection;
         final String[] selectionArguments;
         if (videoId != null) {
-            selection = "(" + SubscriptionsVideosTable.COL_RETRIEVAL_TS + " < ?) OR (" + SubscriptionsVideosTable.COL_RETRIEVAL_TS + " = ? AND " + SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID + " > ?)";
+            selection = "(" + sortingColumn + " < ?) OR (" + sortingColumn + " = ? AND " + SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID + " > ?)";
             String formatted = String.valueOf(beforeTimestamp);
             selectionArguments = new String[]{ formatted, formatted, videoId };
         } else {
@@ -609,7 +647,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
             SubscriptionsVideosTable.TABLE_NAME,
             SubscriptionsVideosTable.ALL_COLUMNS_FOR_EXTRACT,
             selection, selectionArguments, null, null,
-            SubscriptionsVideosTable.COL_RETRIEVAL_TS + " DESC, " + SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID + " ASC",
+                sortingColumn + " DESC, " + SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID + " ASC",
             String.valueOf(limit));
         return extractVideos(cursor, true);
     }

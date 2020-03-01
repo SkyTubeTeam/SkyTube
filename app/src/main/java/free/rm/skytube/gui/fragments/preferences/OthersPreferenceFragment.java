@@ -20,16 +20,13 @@ package free.rm.skytube.gui.fragments.preferences;
 import android.app.AlertDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Environment;
 import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.MultiSelectListPreference;
 import android.preference.PreferenceFragment;
-import android.preference.PreferenceManager;
 import android.widget.Toast;
 
-import com.obsez.android.lib.filechooser.ChooserDialog;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -40,7 +37,6 @@ import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPIKey;
 import free.rm.skytube.businessobjects.YouTube.ValidateYouTubeAPIKey;
-import free.rm.skytube.businessobjects.YouTube.VideoStream.VideoResolution;
 import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
 
 /**

@@ -22,6 +22,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import androidx.annotation.NonNull;
+import androidx.core.util.Pair;
+
 import com.google.gson.Gson;
 
 import org.json.JSONException;
@@ -31,10 +34,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import free.rm.skytube.app.SkyTubeApp;
+import free.rm.skytube.app.Utils;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
+import free.rm.skytube.businessobjects.YouTube.newpipe.VideoId;
 import free.rm.skytube.businessobjects.interfaces.OrderableDatabase;
 
 /**
@@ -76,8 +81,7 @@ public class BookmarksDb extends SQLiteOpenHelperEx implements OrderableDatabase
 
 
 	@Override
-	public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-
+	public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
 	}
 
 
@@ -96,12 +100,12 @@ public class BookmarksDb extends SQLiteOpenHelperEx implements OrderableDatabase
 		values.put(BookmarksTable.COL_YOUTUBE_VIDEO_ID, video.getId());
 		values.put(BookmarksTable.COL_YOUTUBE_VIDEO, gson.toJson(video).getBytes());
 
-		int order = getTotalBookmarks();
+		int order = getMaximumOrderNumber();
 		order++;
 		values.put(BookmarksTable.COL_ORDER, order);
 
 		boolean addSuccessful = getWritableDatabase().insert(BookmarksTable.TABLE_NAME, null, values) != -1;
-		onUpdated();
+		onBookmarkAdded(video);
 
 		return addSuccessful;
 	}
@@ -114,7 +118,7 @@ public class BookmarksDb extends SQLiteOpenHelperEx implements OrderableDatabase
 	 *
 	 * @return True if the video has been unbookmarked; false otherwise.
 	 */
-	public boolean remove(YouTubeVideo video) {
+	public boolean remove(VideoId video) {
 		int rowsDeleted = getWritableDatabase().delete(BookmarksTable.TABLE_NAME,
 						BookmarksTable.COL_YOUTUBE_VIDEO_ID + " = ?",
 						new String[]{video.getId()});
@@ -143,7 +147,7 @@ public class BookmarksDb extends SQLiteOpenHelperEx implements OrderableDatabase
 
 			cursor.close();
 
-			onUpdated();
+			onBookmarkDeleted(video);
 			successful = true;
 		}
 
@@ -160,7 +164,7 @@ public class BookmarksDb extends SQLiteOpenHelperEx implements OrderableDatabase
 	 */
 	@Override
 	public void updateOrder(List<CardData> videos) {
-		int order = videos.size();
+		int order = getMaximumOrderNumber();
 
 		for(CardData video : videos) {
 			ContentValues cv = new ContentValues();
@@ -206,30 +210,59 @@ public class BookmarksDb extends SQLiteOpenHelperEx implements OrderableDatabase
 		return totalBookmarks;
 	}
 
+	/**
+	 * @return The maximum of the order number - which could be different from the number of bookmarked videos, in case some of them are deleted.
+	 */
+	public int getMaximumOrderNumber() {
+		Cursor	cursor = getReadableDatabase().rawQuery(BookmarksTable.MAXIMUM_ORDER_QUERY, null);
+		int		maxBookmarkOrder = 0;
+
+		if (cursor.moveToFirst()) {
+			maxBookmarkOrder = cursor.getInt(0);
+		}
+
+		cursor.close();
+		return maxBookmarkOrder;
+	}
+
 
 	/**
 	 * Get the list of Videos that have been bookmarked.
 	 *
 	 * @return List of Videos
 	 */
-	public List<YouTubeVideo> getBookmarkedVideos() {
-		Cursor	cursor = getReadableDatabase().query(
-						BookmarksTable.TABLE_NAME,
-						new String[]{BookmarksTable.COL_YOUTUBE_VIDEO, BookmarksTable.COL_ORDER},
-						null,
-						null, null, null, BookmarksTable.COL_ORDER + " DESC");
+	public @NonNull Pair<List<YouTubeVideo>, Integer> getBookmarkedVideos(int limit, Integer maxOrderLimit) {
+        //Logger.i(this, "getBookmarkedVideos " + limit + ',' + maxOrderLimit +
+        //        " - " + (maxOrderLimit != null ? BookmarksTable.PAGED_QUERY : BookmarksTable.PAGED_QUERY_UNBOUNDED));
+
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor	cursor = maxOrderLimit != null ?
+                db.rawQuery(
+                        BookmarksTable.PAGED_QUERY, new String[] { String.valueOf(maxOrderLimit), String.valueOf(limit)}) :
+                db.rawQuery(
+                        BookmarksTable.PAGED_QUERY_UNBOUNDED, new String[] { String.valueOf(limit)});
+
 		List<YouTubeVideo> videos = new ArrayList<>();
 
 		final Gson gson = new Gson();
+		Integer minOrder = null;
 		if(cursor.moveToNext()) {
+			final int colOrder = cursor.getColumnIndex(BookmarksTable.COL_ORDER);
+			final int colVideo = cursor.getColumnIndex(BookmarksTable.COL_YOUTUBE_VIDEO);
 			do {
-				final byte[] blob = cursor.getBlob(cursor.getColumnIndex(BookmarksTable.COL_YOUTUBE_VIDEO));
+				final byte[] blob = cursor.getBlob(colVideo);
+				final int currentOrder = cursor.getInt(colOrder);
+
+                minOrder = Utils.min(currentOrder, minOrder);
+
 				final String videoJson = new String(blob);
 
 				// convert JSON into YouTubeVideo
 				YouTubeVideo video = gson.fromJson(videoJson, YouTubeVideo.class).updatePublishTimestampFromDate();
 
-				// due to upgrade to YouTubeVideo (by changing channel{Id,Name} to YouTubeChannel)
+                // Logger.i(this, "Order "+cursor.getInt(colOrder)+ ", id="+video.getId()+","+video.getTitle());
+
+                // due to upgrade to YouTubeVideo (by changing channel{Id,Name} to YouTubeChannel)
 				// from version 2.82 to 2.90
 				if (video.getChannel() == null) {
 					try {
@@ -243,14 +276,14 @@ public class BookmarksDb extends SQLiteOpenHelperEx implements OrderableDatabase
 				}
 
 				// regenerate the video's PublishDatePretty (e.g. 5 hours ago)
-				video.forceRefreshPublishDatePretty();
+				//video.forceRefreshPublishDatePretty();
 				// add the video to the list
 				videos.add(video);
 			} while(cursor.moveToNext());
 		}
 
 		cursor.close();
-		return videos;
+		return Pair.create(videos, minOrder);
 	}
 
 
@@ -267,13 +300,21 @@ public class BookmarksDb extends SQLiteOpenHelperEx implements OrderableDatabase
 
 
 	/**
-	 * Called when the Bookmarks DB is updated by either a bookmark insertion or deletion.
+	 * Called when the Bookmarks DB is updated by a bookmark insertion.
 	 */
-	private void onUpdated() {
-		hasUpdated = true;
+	private void onBookmarkAdded(YouTubeVideo video) {
+		for (BookmarksDbListener listener : listeners) {
+			listener.onBookmarkAdded(video);
+		}
+	}
 
-		for (BookmarksDbListener listener : listeners)
-			listener.onBookmarksDbUpdated();
+	/**
+	 * Called when the Bookmarks DB is updated by deletion.
+	 */
+	private void onBookmarkDeleted(VideoId video) {
+		for (BookmarksDbListener listener : listeners) {
+			listener.onBookmarkDeleted(video);
+		}
 	}
 
 	public static boolean isHasUpdated() {
@@ -291,10 +332,14 @@ public class BookmarksDb extends SQLiteOpenHelperEx implements OrderableDatabase
 
 	public interface BookmarksDbListener {
 		/**
-		 * Will be called once the bookmarks DB is updated (by either a bookmark insertion or
-		 * deletion).
+		 * Will be called once the bookmarks DB is updated - by a bookmark insertion.
 		 */
-		void onBookmarksDbUpdated();
+		void onBookmarkAdded(YouTubeVideo video);
+
+		/**
+		 * Will be called once the bookmarks DB is updated - by a bookmark deletion.
+		 */
+		void onBookmarkDeleted(VideoId videoId);
 	}
 
 }

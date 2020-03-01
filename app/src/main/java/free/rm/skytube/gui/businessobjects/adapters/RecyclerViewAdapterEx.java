@@ -24,6 +24,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import free.rm.skytube.businessobjects.utils.Predicate;
+
 /**
  * An extended class of {@link RecyclerView.Adapter} that accepts a context and a list of items.
  */
@@ -67,12 +69,18 @@ public abstract class RecyclerViewAdapterEx<T, HolderType extends RecyclerView.V
 	 * @param l The items to append.
 	 */
 	public void appendList(List<T> l) {
-		if (l != null  &&  l.size() > 0) {
+		if (l != null  && !l.isEmpty()) {
 			this.list.addAll(l);
 			this.notifyDataSetChanged();
 		}
 	}
 
+	public void prepend(T item) {
+		if (item != null) {
+			this.list.add(0, item);
+			this.notifyItemInserted(0);
+		}
+	}
 
 	/**
 	 * Append the given item to the Adapter's list.
@@ -99,6 +107,17 @@ public abstract class RecyclerViewAdapterEx<T, HolderType extends RecyclerView.V
 		}
 	}
 
+
+	public void remove(Predicate<T> predicate) {
+		for (int i=0;i<list.size();i++) {
+			T item = list.get(i);
+			if (predicate.test(item)) {
+				list.remove(i);
+				this.notifyItemRemoved(i);
+				i--;
+			}
+		}
+	}
 
 	/**
 	 * Clear all items that are in the list.

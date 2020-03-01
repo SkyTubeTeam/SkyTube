@@ -16,7 +16,11 @@
  */
 package free.rm.skytube.businessobjects.YouTube.newpipe;
 
+import androidx.annotation.NonNull;
+
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.jsoup.Jsoup;
@@ -31,6 +35,7 @@ import org.schabi.newpipe.extractor.comments.CommentsExtractor;
 import org.schabi.newpipe.extractor.exceptions.ContentNotAvailableException;
 import org.schabi.newpipe.extractor.exceptions.ExtractionException;
 import org.schabi.newpipe.extractor.exceptions.ParsingException;
+import org.schabi.newpipe.extractor.feed.FeedExtractor;
 import org.schabi.newpipe.extractor.linkhandler.LinkHandler;
 import org.schabi.newpipe.extractor.linkhandler.ListLinkHandler;
 import org.schabi.newpipe.extractor.linkhandler.ListLinkHandlerFactory;
@@ -115,17 +120,55 @@ public class NewPipeService {
     }
 
     /**
-     * Return the post recent videos for the given channel
+     * Return the most recent videos for the given channel
      * @param channelId the id of the channel
      * @return list of recent {@link YouTubeVideo}.
      * @throws ExtractionException
      * @throws IOException
      */
-    public List<YouTubeVideo> getChannelVideos(String channelId) throws ExtractionException, IOException {
+    private List<YouTubeVideo> getChannelVideos(String channelId) throws ExtractionException, IOException {
         VideoPager pager = getChannelPager(channelId);
         List<YouTubeVideo> result = pager.getNextPageAsVideos();
         Logger.i(this, "getChannelVideos for %s(%s)  -> %s videos", pager.getChannel().getTitle(), channelId, result.size());
         return result;
+    }
+
+    /**
+     * Return the most recent videos for the given channel from a dedicated feed (with a {@link FeedExtractor}).
+     * @param channelId the id of the channel
+     * @return list of recent {@link YouTubeVideo}, or null, if there is no feed.
+     * @throws ExtractionException
+     * @throws IOException
+     */
+    private List<YouTubeVideo> getFeedVideos(String channelId) throws ExtractionException, IOException {
+        final String url = getListLinkHandler(channelId).getUrl();
+        final FeedExtractor feedExtractor = streamingService.getFeedExtractor(url);
+        if (feedExtractor == null) {
+            Logger.i(this, "getFeedExtractor doesn't return anything for %s -> %s", channelId, url);
+            return null;
+        }
+        feedExtractor.fetchPage();
+        return new VideoPager(streamingService, (ListExtractor)feedExtractor, createInternalChannelFromFeed(feedExtractor)).getNextPageAsVideos();
+    }
+
+    /**
+     * Return the most recent videos for the given channel, either from a dedicated feed (with a {@link FeedExtractor} or from
+     * the generic {@link ChannelExtractor}.
+     * @param channelId the id of the channel
+     * @return list of recent {@link YouTubeVideo}.
+     * @throws ExtractionException
+     * @throws IOException
+     */
+    public List<YouTubeVideo> getVideosFromFeedOrFromChannel(String channelId) throws IOException, ExtractionException {
+        try {
+            List<YouTubeVideo> videos = getFeedVideos(channelId);
+            if (videos != null) {
+                return videos;
+            }
+        } catch (IOException | ExtractionException e) {
+            Logger.e(this, "Unable to get videos from a feed " + channelId + " : "+ e.getMessage(), e);
+        }
+        return getChannelVideos(channelId);
     }
 
     public VideoPager getChannelPager(String channelId) throws ExtractionException, IOException {
@@ -163,6 +206,11 @@ public class NewPipeService {
         return pager.getChannel();
     }
 
+    private YouTubeChannel createInternalChannelFromFeed(FeedExtractor extractor) throws ParsingException {
+        return new YouTubeChannel(extractor.getId(), extractor.getName(), null,
+                null, null, -1, false, 0, System.currentTimeMillis());
+    }
+
     private YouTubeChannel createInternalChannel(ChannelExtractor extractor) throws ParsingException {
         return new YouTubeChannel(extractor.getId(), extractor.getName(), filterHtml(extractor.getDescription()),
                 extractor.getAvatarUrl(), extractor.getBannerUrl(), getSubscriberCount(extractor), false, 0, System.currentTimeMillis());
@@ -191,10 +239,14 @@ public class NewPipeService {
     }
 
     private ListLinkHandler getListLinkHandler(String channelId) throws ParsingException {
-        // Get channel LinkHandler, handle two cases:
+        // Get channel LinkHandler, handle three cases:
         // 1, channelId=UCbx1TZgxfIauUZyPuBzEwZg
         // 2, channelId=https://www.youtube.com/channel/UCbx1TZgxfIauUZyPuBzEwZg
+        // 3, channelId=channel/UCbx1TZgxfIauUZyPuBzEwZg
         ListLinkHandlerFactory channelLHFactory = streamingService.getChannelLHFactory();
+        if (channelId.startsWith("channel/")) {
+            return channelLHFactory.fromId(channelId);
+        }
         try {
             return channelLHFactory.fromUrl(channelId);
         } catch (ParsingException p) {
@@ -217,45 +269,50 @@ public class NewPipeService {
         StreamExtractor extractor = streamingService.getStreamExtractor(url);
         extractor.fetchPage();
 
-        String textualUploadDate = extractor.getTextualUploadDate();
-        Long uploadTimestamp;
-        if (textualUploadDate != null && !textualUploadDate.trim().isEmpty()) {
-            DateWrapper uploadDate = extractor.getUploadDate();
-            uploadTimestamp = getPublishDate(uploadDate);
-        } else {
-            uploadTimestamp = System.currentTimeMillis();
-        }
+        DateInfo uploadDate = new DateInfo(extractor.getUploadDate());
+        Logger.i(this, "getDetails for %s -> %s %s", videoId, url.getUrl(), uploadDate);
 
         YouTubeVideo video = new YouTubeVideo(extractor.getId(), extractor.getName(), filterHtml(extractor.getDescription()),
                 extractor.getLength(), new YouTubeChannel(extractor.getUploaderUrl(), extractor.getUploaderName()),
-                extractor.getViewCount(), uploadTimestamp, extractor.getThumbnailUrl());
-        video.setLikeDislikeCount(extractor.getLikeCount(), extractor.getDislikeCount());
+                extractor.getViewCount(), uploadDate.timestamp, uploadDate.exact, extractor.getThumbnailUrl());
+        try {
+            video.setLikeDislikeCount(extractor.getLikeCount(), extractor.getDislikeCount());
+        } catch (ParsingException pe) {
+            Logger.e(this, "Unable get like count for " + url.getUrl() + ", created at " + uploadDate + ", error:" + pe.getMessage(), pe);
+            video.setLikeDislikeCount(null, null);
+        }
         video.setRetrievalTimestamp(System.currentTimeMillis());
         // Logger.i(this, " -> publishDate is %s, pretty: %s - orig value: %s", video.getPublishDate(),video.getPublishDatePretty(), uploadDate);
         return video;
     }
 
-    static Long getPublishDate(DateWrapper date) {
-        if (date != null && date.date() != null) {
-            return date.date().getTimeInMillis();
-        } else {
-            return System.currentTimeMillis();
+    static class DateInfo {
+        boolean exact;
+        Long timestamp;
+
+        public DateInfo(DateWrapper uploadDate) {
+            if (uploadDate != null) {
+                timestamp = uploadDate.date().getTimeInMillis();
+                exact = !uploadDate.isApproximation();
+            } else {
+                timestamp = System.currentTimeMillis();
+                exact = false;
+            }
+
+        }
+
+        static final SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        @NonNull
+        @Override
+        public String toString() {
+            try {
+                return "[time= " + sdf.format(new Date(timestamp)) + ",exact=" + exact + ']';
+            } catch (Exception e){
+                return "[incorrect time= "+timestamp+" ,exact=" + exact + ']';
+            }
         }
     }
-/*
-    static long getPublishDate(String dateStr) throws ParseException {
-        Date publishDate = new SimpleDateFormat("yyyy-MM-dd").parse(dateStr);
-        // TODO: publish date is not accurate - as only date precision is available
-        // So it's more convenient, if the upload date happened in this day, we just assume, that it happened a minute
-        // ago, so new videos appear in a better order in the Feed fragment.
-        final long now = System.currentTimeMillis();
-        if (publishDate.getTime() > (now - (24 * 3600 * 1000))) {
-            return now - 60000;
-        } else {
-            return publishDate.getTime();
-        }
-    }
-*/
+
     static String getThumbnailUrl(String id) {
         // Logger.d(NewPipeService.class, "getThumbnailUrl  %s", id);
         return "https://i.ytimg.com/vi/" + id + "/hqdefault.jpg";
