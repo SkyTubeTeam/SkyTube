@@ -25,7 +25,8 @@
 		android:layout_below="@id/subs_drawer_title"
 		android:id="@+id/subs_search_view"
 		app:iconifiedByDefault="false"
-		android:actionViewClass="androidx.appcompat.widget.SearchView"/>
+		android:actionViewClass="androidx.appcompat.widget.SearchView"
+		app:queryHint="@string/search_channel" />
 
 	<androidx.recyclerview.widget.RecyclerView
 		android:id="@+id/subs_drawer"
