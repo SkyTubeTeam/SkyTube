@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -122,10 +123,12 @@ public class MainFragment extends FragmentEx {
 
 		subsListView = view.findViewById(R.id.subs_drawer);
 		subSearchView = view.findViewById(R.id.subs_search_view);
-		subSearchView.setQueryHint(getString(R.string.search_channel));
 		AutoCompleteTextView autoCompleteTextView = subSearchView.findViewById(androidx.appcompat.R.id.search_src_text);
-		autoCompleteTextView.setTextColor(Color.parseColor("#ffffff"));
-		autoCompleteTextView.setHintTextColor(Color.parseColor("#ffffff"));
+		int fontColor = getResources().getColor(R.color.subs_text);
+		autoCompleteTextView.setTextColor(fontColor);
+		autoCompleteTextView.setHintTextColor(fontColor);
+		final ImageView searchIcon = subSearchView.findViewById(androidx.appcompat.R.id.search_mag_icon);
+		searchIcon.setColorFilter(fontColor);
 
 
 		if (subsAdapter == null) {
