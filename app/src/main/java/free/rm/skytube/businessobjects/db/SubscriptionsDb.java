@@ -64,7 +64,6 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
             SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID, SubscriptionsVideosTable.TABLE_NAME, SubscriptionsVideosTable.COL_CHANNEL_ID);
     private static final String FIND_EMPTY_RETRIEVAL_TS = String.format("SELECT %s FROM %s WHERE %s IS NULL",
             SubscriptionsVideosTable.COL_YOUTUBE_VIDEO, SubscriptionsVideosTable.TABLE_NAME, SubscriptionsVideosTable.COL_RETRIEVAL_TS);
-
     private static volatile SubscriptionsDb subscriptionsDb = null;
 
 	private static final int DATABASE_VERSION = 5;
@@ -272,6 +271,16 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 
     public List<String> getSubscribedChannelIds() {
 		try (Cursor cursor = getReadableDatabase().query(SubscriptionsTable.TABLE_NAME, new String[] {SubscriptionsTable.COL_CHANNEL_ID}, null, null, null, null, null)) {
+			List<String> result = new ArrayList<>();
+			while(cursor.moveToNext()) {
+				result.add(cursor.getString(0));
+			}
+			return result;
+		}
+	}
+
+	public List<String> getSubscribedChannelIdsBySearch(String searchText) {
+		try (Cursor cursor = getReadableDatabase().query(SubscriptionsTable.TABLE_NAME, new String[] {SubscriptionsTable.COL_CHANNEL_ID}, "LOWER("+SubscriptionsTable.COL_TITLE + ") LIKE ?", new String[]{"%"+searchText.toLowerCase()+"%"}, null, null, null)) {
 			List<String> result = new ArrayList<>();
 			while(cursor.moveToNext()) {
 				result.add(cursor.getString(0));

@@ -80,23 +80,22 @@ public class GetSubscribedChannelsTask extends AsyncTaskParallel<Void, Void, Lis
 		List<YouTubeChannel> subbedChannelsList = new ArrayList<>();
 		GetChannelInfo channelInfo = new GetChannelInfo(adapter.getContext(),true);
 		try {
-			List<String> channelIds = SubscriptionsDb.getSubscriptionsDb().getSubscribedChannelIds();
+
+			List<String> channelIds;
+
+			if (searchText != null){
+				channelIds = SubscriptionsDb.getSubscriptionsDb().getSubscribedChannelIdsBySearch(searchText);
+			} else {
+				channelIds = SubscriptionsDb.getSubscriptionsDb().getSubscribedChannelIds();
+			}
+			System.out.println("channelIds size " + channelIds.size() );
 			for (String id : channelIds) {
 				YouTubeChannel channel = channelInfo.getChannelInfoSync(id);
-				if (searchText == null){
 					// This shouldn't be null, but could happen in rare scenarios, where the app is offline,
 					// and the info previously not saved
 					if (channel != null) {
 						subbedChannelsList.add(channel);
 					}
-				} else {
-					Locale currentLocale = ConfigurationCompat.getLocales(Resources.getSystem().getConfiguration()).get(0);
-					if (channel.getTitle().toLowerCase(currentLocale).contains(searchText.toLowerCase(currentLocale))){
-						if (channel != null) {
-							subbedChannelsList.add(channel);
-						}
-					}
-				}
 			}
 
 			// sort channels alphabetically (by channel name) if the user wants so...

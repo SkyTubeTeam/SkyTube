@@ -1,12 +1,16 @@
 package free.rm.skytube.gui.fragments;
 
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
@@ -118,7 +122,11 @@ public class MainFragment extends FragmentEx {
 
 		subsListView = view.findViewById(R.id.subs_drawer);
 		subSearchView = view.findViewById(R.id.subs_search_view);
-		subSearchView.setQueryHint("Channel name");
+		subSearchView.setQueryHint(getString(R.string.search_channel));
+		AutoCompleteTextView autoCompleteTextView = subSearchView.findViewById(androidx.appcompat.R.id.search_src_text);
+		autoCompleteTextView.setTextColor(Color.parseColor("#ffffff"));
+		autoCompleteTextView.setHintTextColor(Color.parseColor("#ffffff"));
+
 
 		if (subsAdapter == null) {
 			subsAdapter = SubsAdapter.get(getActivity(), view.findViewById(R.id.subs_drawer_progress_bar));
