@@ -26,6 +26,8 @@ import org.schabi.newpipe.extractor.ListExtractor.InfoItemsPage;
 import org.schabi.newpipe.extractor.StreamingService;
 import org.schabi.newpipe.extractor.exceptions.ExtractionException;
 import org.schabi.newpipe.extractor.exceptions.ParsingException;
+import org.schabi.newpipe.extractor.linkhandler.LinkHandlerFactory;
+import org.schabi.newpipe.extractor.linkhandler.ListLinkHandlerFactory;
 
 import free.rm.skytube.businessobjects.Logger;
 
@@ -41,10 +43,16 @@ public abstract class Pager<I extends InfoItem, O> implements PagerBackend<O> {
     private String nextPageUrl;
     private boolean hasNextPage = true;
     private Exception lastException;
+    protected final LinkHandlerFactory streamLinkHandler;
+    protected final ListLinkHandlerFactory playlistLinkHandler;
+    protected final LinkHandlerFactory channelLinkHandler;
 
     Pager(StreamingService streamingService, ListExtractor<I> channelExtractor) {
         this.streamingService = streamingService;
         this.channelExtractor = channelExtractor;
+        this.streamLinkHandler = streamingService.getStreamLHFactory();
+        this.playlistLinkHandler = streamingService.getPlaylistLHFactory();
+        this.channelLinkHandler = streamingService.getChannelLHFactory();
     }
 
 

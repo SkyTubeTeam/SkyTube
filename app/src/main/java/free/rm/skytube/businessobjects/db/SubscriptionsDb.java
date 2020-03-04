@@ -64,7 +64,6 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
             SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID, SubscriptionsVideosTable.TABLE_NAME, SubscriptionsVideosTable.COL_CHANNEL_ID);
     private static final String FIND_EMPTY_RETRIEVAL_TS = String.format("SELECT %s FROM %s WHERE %s IS NULL",
             SubscriptionsVideosTable.COL_YOUTUBE_VIDEO, SubscriptionsVideosTable.TABLE_NAME, SubscriptionsVideosTable.COL_RETRIEVAL_TS);
-
     private static volatile SubscriptionsDb subscriptionsDb = null;
 
 	private static final int DATABASE_VERSION = 5;
@@ -120,7 +119,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 					if (!Utils.isEmpty(channel.getId()) &&
 							!Utils.isEmpty(channel.getTitle()) &&
 							!Utils.isEmpty(channel.getBannerUrl()) &&
-							!Utils.isEmpty(channel.getThumbnailNormalUrl()) &&
+							!Utils.isEmpty(channel.getThumbnailUrl()) &&
 							!Utils.isEmpty(channel.getDescription())) {
 						cacheChannel(db, channel);
 					}
@@ -186,7 +185,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 		values.put(SubscriptionsTable.COL_TITLE, channel.getTitle());
 		values.put(SubscriptionsTable.COL_DESCRIPTION, channel.getDescription());
 		values.put(SubscriptionsTable.COL_BANNER_URL, channel.getBannerUrl());
-		values.put(SubscriptionsTable.COL_THUMBNAIL_NORMAL_URL, channel.getThumbnailNormalUrl());
+		values.put(SubscriptionsTable.COL_THUMBNAIL_NORMAL_URL, channel.getThumbnailUrl());
 		values.put(SubscriptionsTable.COL_SUBSCRIBER_COUNT, channel.getSubscriberCount());
 
 		return getWritableDatabase().insert(SubscriptionsTable.TABLE_NAME, null, values) != -1;
@@ -272,6 +271,16 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 
     public List<String> getSubscribedChannelIds() {
 		try (Cursor cursor = getReadableDatabase().query(SubscriptionsTable.TABLE_NAME, new String[] {SubscriptionsTable.COL_CHANNEL_ID}, null, null, null, null, null)) {
+			List<String> result = new ArrayList<>();
+			while(cursor.moveToNext()) {
+				result.add(cursor.getString(0));
+			}
+			return result;
+		}
+	}
+
+	public List<String> getSubscribedChannelIdsBySearch(String searchText) {
+		try (Cursor cursor = getReadableDatabase().query(SubscriptionsTable.TABLE_NAME, new String[] {SubscriptionsTable.COL_CHANNEL_ID}, "LOWER("+SubscriptionsTable.COL_TITLE + ") LIKE ?", new String[]{"%"+searchText.toLowerCase()+"%"}, null, null, null)) {
 			List<String> result = new ArrayList<>();
 			while(cursor.moveToNext()) {
 				result.add(cursor.getString(0));
@@ -456,7 +465,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 		values.put(SubscriptionsTable.COL_TITLE, channel.getTitle());
 		values.put(SubscriptionsTable.COL_DESCRIPTION, channel.getDescription());
 		values.put(SubscriptionsTable.COL_BANNER_URL, channel.getBannerUrl());
-		values.put(SubscriptionsTable.COL_THUMBNAIL_NORMAL_URL, channel.getThumbnailNormalUrl());
+		values.put(SubscriptionsTable.COL_THUMBNAIL_NORMAL_URL, channel.getThumbnailUrl());
 		values.put(SubscriptionsTable.COL_SUBSCRIBER_COUNT, channel.getSubscriberCount());
 		values.put(SubscriptionsTable.COL_LAST_VISIT_TIME, channel.getLastVisitTime());
 
@@ -661,7 +670,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 				obj.addProperty("id", src.getId());
 				obj.addProperty("title", src.getTitle());
 				obj.addProperty("description", src.getDescription());
-				obj.addProperty("thumbnailNormalUrl", src.getThumbnailNormalUrl());
+				obj.addProperty("thumbnailNormalUrl", src.getThumbnailUrl());
 				obj.addProperty("bannerUrl", src.getBannerUrl());
 				return obj;
 			}
@@ -760,7 +769,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 		values.put(LocalChannelTable.COL_TITLE, channel.getTitle());
 		values.put(LocalChannelTable.COL_DESCRIPTION, channel.getDescription());
 		values.put(LocalChannelTable.COL_BANNER_URL, channel.getBannerUrl());
-		values.put(LocalChannelTable.COL_THUMBNAIL_NORMAL_URL, channel.getThumbnailNormalUrl());
+		values.put(LocalChannelTable.COL_THUMBNAIL_NORMAL_URL, channel.getThumbnailUrl());
 		values.put(LocalChannelTable.COL_SUBSCRIBER_COUNT, channel.getSubscriberCount());
 		if(channel.getLastVideoTime() > 0) {
 			values.put(LocalChannelTable.COL_LAST_VIDEO_TS, channel.getLastVideoTime());

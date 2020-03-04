@@ -1,16 +1,22 @@
 package free.rm.skytube.gui.fragments;
 
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -47,6 +53,7 @@ public class MainFragment extends FragmentEx {
 	private ActionBarDrawerToggle		subsDrawerToggle;
 	private TabLayout                   tabLayout = null;
 	private DrawerLayout 				subsDrawerLayout = null;
+	private SearchView 					subSearchView = null;
 
 	/** List of fragments that will be displayed as tabs. */
 	private List<VideosGridFragment>	videoGridFragmentsList = new ArrayList<>();
@@ -115,6 +122,15 @@ public class MainFragment extends FragmentEx {
 		}
 
 		subsListView = view.findViewById(R.id.subs_drawer);
+		subSearchView = view.findViewById(R.id.subs_search_view);
+		AutoCompleteTextView autoCompleteTextView = subSearchView.findViewById(androidx.appcompat.R.id.search_src_text);
+		int fontColor = getResources().getColor(R.color.subs_text);
+		autoCompleteTextView.setTextColor(fontColor);
+		autoCompleteTextView.setHintTextColor(fontColor);
+		final ImageView searchIcon = subSearchView.findViewById(androidx.appcompat.R.id.search_mag_icon);
+		searchIcon.setColorFilter(fontColor);
+
+
 		if (subsAdapter == null) {
 			subsAdapter = SubsAdapter.get(getActivity(), view.findViewById(R.id.subs_drawer_progress_bar));
 		} else {
@@ -124,6 +140,30 @@ public class MainFragment extends FragmentEx {
 
 		subsListView.setLayoutManager(new LinearLayoutManager(getActivity()));
 		subsListView.setAdapter(subsAdapter);
+
+		subSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+			@Override
+			public boolean onQueryTextSubmit(String s) {
+				return true;
+			}
+
+			@Override
+			public boolean onQueryTextChange(String s) {
+				subsAdapter.filterSubSearch(s);
+				return true;
+			}
+
+		});
+
+		subSearchView.setOnCloseListener(new SearchView.OnCloseListener() {
+			@Override
+			public boolean onClose() {
+
+				Logger.i(this,"closed search");
+
+				return false;
+			}
+		});
 
 		videosPagerAdapter = new VideosPagerAdapter(getChildFragmentManager());
 		viewPager = view.findViewById(R.id.pager);

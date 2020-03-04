@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-			  android:orientation="vertical"
-			  android:layout_width="match_parent"
-			  android:layout_height="match_parent"
-			  android:background="@color/subs_drawer_background">
+	xmlns:tools="http://schemas.android.com/tools"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:orientation="vertical"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="@color/subs_drawer_background">
 
 	<TextView
 		android:id="@+id/subs_drawer_title"
@@ -16,11 +18,21 @@
 		android:background="@color/colorPrimary"
 		style="@style/SubsTextView"/>
 
+	<androidx.appcompat.widget.SearchView
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:padding="5dp"
+		android:layout_below="@id/subs_drawer_title"
+		android:id="@+id/subs_search_view"
+		app:iconifiedByDefault="false"
+		android:actionViewClass="androidx.appcompat.widget.SearchView"
+		app:queryHint="@string/search_channel" />
+
 	<androidx.recyclerview.widget.RecyclerView
 		android:id="@+id/subs_drawer"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:layout_below="@+id/subs_drawer_title"
+		android:layout_below="@+id/subs_search_view"
 		android:choiceMode="singleChoice"
 		android:divider="@android:color/transparent"
 		android:dividerHeight="0dp"/>

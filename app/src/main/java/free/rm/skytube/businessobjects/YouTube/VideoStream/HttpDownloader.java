@@ -86,8 +86,8 @@ public class HttpDownloader extends Downloader {
 			final int responseCode = connection.getResponseCode();
 			final String responseMessage = connection.getResponseMessage();
 			final Map<String, List<String>> responseHeaders = connection.getHeaderFields();
-
-			return new Response(responseCode, responseMessage, responseHeaders, response.toString());
+			final URL latestUrl = connection.getURL();
+			return new Response(responseCode, responseMessage, responseHeaders, response, latestUrl.toString());
 		} catch (Exception e) {
 			/*
 			 * HTTP 429 == Too Many Request

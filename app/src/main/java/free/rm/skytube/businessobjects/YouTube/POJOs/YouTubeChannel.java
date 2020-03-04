@@ -17,6 +17,8 @@
 
 package free.rm.skytube.businessobjects.YouTube.POJOs;
 
+import android.content.Context;
+import android.view.Menu;
 import android.widget.Toast;
 
 import com.google.api.services.youtube.model.Channel;
@@ -25,29 +27,33 @@ import com.google.api.services.youtube.model.ChannelSnippet;
 import com.google.api.services.youtube.model.ChannelStatistics;
 import com.google.api.services.youtube.model.ThumbnailDetails;
 
+import org.schabi.newpipe.extractor.exceptions.ParsingException;
+import org.schabi.newpipe.extractor.services.youtube.linkHandler.YoutubeChannelLinkHandlerFactory;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
+import free.rm.skytube.app.Utils;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.VideoBlocker;
 import free.rm.skytube.businessobjects.db.ChannelFilteringDb;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
+import free.rm.skytube.businessobjects.db.Tasks.GetChannelInfo;
 import free.rm.skytube.businessobjects.db.Tasks.SubscribeToChannelTask;
+import free.rm.skytube.gui.businessobjects.YouTubePlayer;
+import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
+import free.rm.skytube.gui.fragments.SubscriptionsFeedFragment;
 
 /**
  * Represents a YouTube Channel.
  *
  * <p>This class has the ability to query channel info by using the given channel ID.</p>
  */
-public class YouTubeChannel implements Serializable {
+public class YouTubeChannel extends CardData implements Serializable {
 
-	private String id;
-	private String title;
-	private String description;
-	private String thumbnailNormalUrl;
 	private String bannerUrl;
 	private String totalSubscribers;
 	private long subscriberCount;
@@ -69,12 +75,12 @@ public class YouTubeChannel implements Serializable {
 		this.title = title;
 	}
 
-	public YouTubeChannel(String id, String title, String description, String thumbnailNormalUrl,
+	public YouTubeChannel(String id, String title, String description, String thumbnailUrl,
 						  String bannerUrl, long subscriberCount, boolean isUserSubscribed, long lastVisitTime, long lastCheckTime) {
 		this.id = id;
 		this.title = title;
 		this.description = description;
-		this.thumbnailNormalUrl = thumbnailNormalUrl;
+		this.thumbnailUrl = thumbnailUrl;
 		this.bannerUrl = bannerUrl;
 		this.subscriberCount = subscriberCount;
 		this.totalSubscribers = getFormattedSubscribers(subscriberCount);
@@ -116,9 +122,9 @@ public class YouTubeChannel implements Serializable {
 		boolean ret = false;
 		ChannelSnippet snippet = channel.getSnippet();
 		if (snippet != null) {
-			ret |= equals(this.title, snippet.getTitle());
+			ret |= Utils.equals(this.title, snippet.getTitle());
 			this.title = snippet.getTitle();
-			ret |= equals(this.description, snippet.getDescription());
+			ret |= Utils.equals(this.description, snippet.getDescription());
 			this.description = snippet.getDescription();
 
 			ThumbnailDetails thumbnail = snippet.getThumbnails();
@@ -132,15 +138,15 @@ public class YouTubeChannel implements Serializable {
 				if ( !(thumbnailUrlLowerCase.startsWith("http://")  ||  thumbnailUrlLowerCase.startsWith("https://")) ) {
 					thmbNormalUrl = "https:" + thmbNormalUrl;
 				}
-				ret |= equals(this.thumbnailNormalUrl, thmbNormalUrl);
-				this.thumbnailNormalUrl = thmbNormalUrl;
+				ret |= Utils.equals(this.thumbnailUrl, thmbNormalUrl);
+				this.thumbnailUrl = thmbNormalUrl;
 			}
 		}
 
 		ChannelBrandingSettings branding = channel.getBrandingSettings();
 		if (branding != null) {
 			String bannerUrl = SkyTubeApp.isTablet() ? branding.getImage().getBannerTabletHdImageUrl() : branding.getImage().getBannerMobileHdImageUrl();
-			ret |= equals(this.bannerUrl, bannerUrl);
+			ret |= Utils.equals(this.bannerUrl, bannerUrl);
 			this.bannerUrl = bannerUrl;
 		}
 
@@ -156,30 +162,6 @@ public class YouTubeChannel implements Serializable {
 
 	private static String getFormattedSubscribers(long subscriberCount) {
 		return String.format(SkyTubeApp.getStr(R.string.total_subscribers),subscriberCount);
-	}
-
-	private static boolean equals(Object a, Object b) {
-		if (a!=null) {
-			return a.equals(b);
-		} else {
-			return b == null;
-		}
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public String getThumbnailNormalUrl() {
-		return thumbnailNormalUrl;
 	}
 
 	public String getBannerUrl() {
@@ -297,7 +279,6 @@ public class YouTubeChannel implements Serializable {
 		return success;
 	}
 
-
 	/**
 	 * Whitelist the channel.
 	 *
@@ -318,4 +299,50 @@ public class YouTubeChannel implements Serializable {
 		return success;
 	}
 
+	public void openChannel(final Context context) {
+		openChannel(context,getId());
+	}
+
+	public static void openChannel(final Context context, String channelId){
+		if (channelId != null) {
+			new GetChannelInfo(context, new YouTubeChannelInterface() {
+				@Override
+				public void onGetYouTubeChannel(YouTubeChannel youTubeChannel) {
+					YouTubePlayer.launchChannel(youTubeChannel, context);
+				}
+			}).executeInParallel(channelId);
+		}
+	}
+
+	public void subscribeChannel(final Context context, final Menu menu) {
+		subscribeChannel(context, menu, getId());
+	}
+
+	public static void subscribeChannel(final Context context, final Menu menu, final String channelId) {
+		if (channelId != null) {
+			new GetChannelInfo(context, youTubeChannel -> {
+				if (SubscriptionsDb.getSubscriptionsDb().subscribe(youTubeChannel)) {
+					youTubeChannel.setUserSubscribed(true);
+					SubsAdapter adapter = SubsAdapter.get(context);
+					adapter.appendChannel(youTubeChannel);
+					SubscriptionsFeedFragment.refreshSubsFeedFromCache();
+					Toast.makeText(context, "Channel subscribed", Toast.LENGTH_LONG).show();
+				} else {
+					Toast.makeText(context, "Subscription failed", Toast.LENGTH_LONG).show();
+				}
+			}).executeInParallel(channelId);
+
+		} else {
+			Toast.makeText(context, "Channel is not specified", Toast.LENGTH_LONG).show();
+		}
+	}
+
+	public String getChannelUrl() {
+		try {
+			return YoutubeChannelLinkHandlerFactory.getInstance().getUrl(getId());
+		} catch (ParsingException p) {
+			Logger.e(this, "getChannel URL for " + getId() + ", error:" + p.getMessage(), p);
+			return id;
+		}
+	}
 }
