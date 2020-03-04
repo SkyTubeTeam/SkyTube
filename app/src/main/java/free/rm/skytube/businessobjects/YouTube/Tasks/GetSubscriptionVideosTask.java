@@ -45,7 +45,7 @@ public class GetSubscriptionVideosTask extends AsyncTaskParallel<Void, Void, Boo
 	@Override
 	protected Boolean doInBackground(Void... voids) {
 		if (channelIds == null) {
-			channelIds = SubscriptionsDb.getSubscriptionsDb().getSubscribedChannelIds();
+			channelIds = SubscriptionsDb.getSubscriptionsDb().getSubscribedChannelIds(false);
 		}
 		/*
 		 * Get the last time all subscriptions were updated, and only fetch videos that were published after this.

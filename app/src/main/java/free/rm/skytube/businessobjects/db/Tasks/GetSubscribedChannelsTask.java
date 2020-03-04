@@ -84,9 +84,9 @@ public class GetSubscribedChannelsTask extends AsyncTaskParallel<Void, Void, Lis
 			List<String> channelIds;
 
 			if (searchText != null){
-				channelIds = SubscriptionsDb.getSubscriptionsDb().getSubscribedChannelIdsBySearch(searchText);
+				channelIds = SubscriptionsDb.getSubscriptionsDb().getSubscribedChannelIdsBySearch(searchText,sortChannelsAlphabetically);
 			} else {
-				channelIds = SubscriptionsDb.getSubscriptionsDb().getSubscribedChannelIds();
+				channelIds = SubscriptionsDb.getSubscriptionsDb().getSubscribedChannelIds(sortChannelsAlphabetically);
 			}
 			System.out.println("channelIds size " + channelIds.size() );
 			for (String id : channelIds) {
@@ -98,11 +98,6 @@ public class GetSubscribedChannelsTask extends AsyncTaskParallel<Void, Void, Lis
 					}
 			}
 
-			// sort channels alphabetically (by channel name) if the user wants so...
-			if (sortChannelsAlphabetically) {
-				subbedChannelsList = sortChannelsAlphabetically(subbedChannelsList);
-			}
-
 			// filter out for any whitelisted/blacklisted channels
 			subbedChannelsList = new VideoBlocker().filterChannels(subbedChannelsList);
 		} catch (Throwable tr) {
@@ -111,21 +106,6 @@ public class GetSubscribedChannelsTask extends AsyncTaskParallel<Void, Void, Lis
 
 		return subbedChannelsList;
 	}
-
-
-	/**
-	 * Sort channels (by channel name) alphabetically.
-	 *
-	 * @param channelsList  Channels to be sorted.
-	 *
-	 * @return  The sorted channels.
-	 */
-	private List<YouTubeChannel> sortChannelsAlphabetically(List<YouTubeChannel> channelsList) {
-		Collections.sort(channelsList, (channel, t1) -> channel.getTitle().compareToIgnoreCase(t1.getTitle()));
-
-		return channelsList;
-	}
-
 
 	@Override
 	protected void onPostExecute(List<YouTubeChannel> subbedChannelsList) {
