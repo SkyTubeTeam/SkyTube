@@ -61,7 +61,7 @@ public class SubscribeButton extends AppCompatButton implements View.OnClickList
 		// Only fetch videos for this channel if fetchChannelVideosOnSubscribe is true AND the channel is not subscribed to yet.
 		if(fetchChannelVideosOnSubscribe && !isUserSubscribed) {
 			if (NewPipeService.isPreferred()) {
-				new GetBulkSubscriptionVideosTask(channel, null).executeInParallel();
+				new GetBulkSubscriptionVideosTask(channel.getId(), null).executeInParallel();
 			} else {
 				new GetChannelVideosTask(channel.getId(), null, false, null).executeInParallel();
 			}

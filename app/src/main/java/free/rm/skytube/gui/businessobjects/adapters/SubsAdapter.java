@@ -182,7 +182,6 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 	public void filterSubSearch(String searchText){
 		clearList();
 		refreshFilteredSubsList(searchText);
-		System.out.println("searchText " + searchText);
 	}
 
 

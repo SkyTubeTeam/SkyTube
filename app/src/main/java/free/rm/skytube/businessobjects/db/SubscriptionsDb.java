@@ -336,7 +336,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 		}
 	}
 
-	public YouTubeChannel getCachedSubscribedChannel(String channelId) throws IOException {
+	public YouTubeChannel getCachedSubscribedChannel(String channelId) {
 		Cursor cursor = null;
 		try {
 			cursor = getReadableDatabase().query(SubscriptionsTable.TABLE_NAME,
