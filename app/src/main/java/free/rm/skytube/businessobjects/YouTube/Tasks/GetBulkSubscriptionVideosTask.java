@@ -55,37 +55,38 @@ public class GetBulkSubscriptionVideosTask extends AsyncTaskParallel<Void, GetBu
     }
 
     private final GetSubscriptionVideosTaskListener listener;
-    private final List<YouTubeChannel> channels;
+    private final List<String> channelIds;
     private final SubscriptionsDb subscriptionsDb;
 
-    public GetBulkSubscriptionVideosTask(YouTubeChannel channel, GetSubscriptionVideosTaskListener listener) {
-        this(Collections.singletonList(channel), listener);
+    public GetBulkSubscriptionVideosTask(String channelId, GetSubscriptionVideosTaskListener listener) {
+        this(Collections.singletonList(channelId), listener);
     }
 
-    public GetBulkSubscriptionVideosTask(List<YouTubeChannel> channels, GetSubscriptionVideosTaskListener listener) {
+    public GetBulkSubscriptionVideosTask(List<String> channelIds, GetSubscriptionVideosTaskListener listener) {
         this.listener = listener;
-        this.channels = channels;
+        this.channelIds = channelIds;
         this.subscriptionsDb = SubscriptionsDb.getSubscriptionsDb();
     }
 
     @Override
     protected Boolean doInBackground(Void... params) {
         AtomicBoolean changed = new AtomicBoolean(false);
-        CountDownLatch countDown = new CountDownLatch(channels.size());
+        CountDownLatch countDown = new CountDownLatch(channelIds.size());
 
         Semaphore semaphore = new Semaphore(4);
 
-        for (YouTubeChannel dbChannel : channels) {
+        for (String channelId : channelIds) {
             try {
                 semaphore.acquire();
                 new AsyncTaskParallel<Void, Void, Integer>() {
 
                     @Override
                     protected Integer doInBackground(Void... voids) {
-                        Map<String, Long> alreadyKnownVideos = subscriptionsDb.getSubscribedChannelVideosByChannelToTimestamp(dbChannel.getId());
-                        List<YouTubeVideo> newVideos = fetchVideos(alreadyKnownVideos, dbChannel);
+                        Map<String, Long> alreadyKnownVideos = subscriptionsDb.getSubscribedChannelVideosByChannelToTimestamp(channelId);
+                        List<YouTubeVideo> newVideos = fetchVideos(alreadyKnownVideos, channelId);
                         List<YouTubeVideo> detailedList = new ArrayList<>();
                         if (!newVideos.isEmpty()) {
+                            YouTubeChannel dbChannel = subscriptionsDb.getCachedSubscribedChannel(channelId);
                             for (YouTubeVideo vid : newVideos) {
                                 YouTubeVideo details;
                                 try {
@@ -113,7 +114,7 @@ public class GetBulkSubscriptionVideosTask extends AsyncTaskParallel<Void, GetBu
                     @Override
                     protected void onPostExecute(Integer newYouTubeVideos) {
                         if (listener != null) {
-                            listener.onChannelVideosFetched(dbChannel.getId(), newYouTubeVideos, false);
+                            listener.onChannelVideosFetched(channelId, newYouTubeVideos, false);
                         }
                         countDown.countDown();
                     }
@@ -148,9 +149,9 @@ public class GetBulkSubscriptionVideosTask extends AsyncTaskParallel<Void, GetBu
         }
     }
 
-    private List<YouTubeVideo> fetchVideos(Map<String, Long> alreadyKnownVideos, YouTubeChannel dbChannel) {
+    private List<YouTubeVideo> fetchVideos(Map<String, Long> alreadyKnownVideos, String channelId) {
         try {
-            List<YouTubeVideo> videos = NewPipeService.get().getVideosFromFeedOrFromChannel(dbChannel.getId());
+            List<YouTubeVideo> videos = NewPipeService.get().getVideosFromFeedOrFromChannel(channelId);
             Predicate<YouTubeVideo> predicate = video -> {
                 Long storedTs = alreadyKnownVideos.get(video.getId());
                 if (storedTs != null && Boolean.TRUE.equals(video.getPublishTimestampExact()) && !storedTs.equals(video.getPublishTimestamp())) {
@@ -166,7 +167,7 @@ public class GetBulkSubscriptionVideosTask extends AsyncTaskParallel<Void, GetBu
             predicate.removeIf(videos);
             return videos;
         } catch (ExtractionException | IOException e) {
-            Logger.e(this, "Error during fetching channel page for " + dbChannel + ",msg:" + e.getMessage(), e);
+            Logger.e(this, "Error during fetching channel page for " + channelId + ",msg:" + e.getMessage(), e);
             e.printStackTrace();
             return Collections.EMPTY_LIST;
         }
