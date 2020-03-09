@@ -53,7 +53,7 @@ public class BlockedVideosDialog extends SkyTubeMaterialDialog {
 		super(context);
 
 		if (blockedVideos.isEmpty()) {
-			// if no videos have been blocked, the ask the user is he wants to configure the
+			// if no videos have been blocked, then ask the user if they want to configure the
 			// preferences of the video blocker...
 			title(R.string.pref_video_blocker_category);
 			content(R.string.no_videos_blocked);

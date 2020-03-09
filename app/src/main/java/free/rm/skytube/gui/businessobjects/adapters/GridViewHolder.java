@@ -282,6 +282,11 @@ public class GridViewHolder extends RecyclerView.ViewHolder implements Serializa
 			popupMenu.getMenu().findItem(R.id.delete_download).setVisible(false);
 			popupMenu.getMenu().findItem(R.id.download_video).setVisible(online);
 		}
+		if(SkyTubeApp.getPreferenceManager().getBoolean(context.getString(R.string.pref_key_enable_video_blocker), true)) {
+			popupMenu.getMenu().findItem(R.id.block_channel).setVisible(true);
+		} else {
+			popupMenu.getMenu().findItem(R.id.block_channel).setVisible(false);
+		}
 		popupMenu.setOnMenuItemClickListener(item -> {
 			switch(item.getItemId()) {
 				case R.id.menu_open_video_with:
