@@ -65,6 +65,8 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
     private static final String FIND_EMPTY_RETRIEVAL_TS = String.format("SELECT %s FROM %s WHERE %s IS NULL",
             SubscriptionsVideosTable.COL_YOUTUBE_VIDEO, SubscriptionsVideosTable.TABLE_NAME, SubscriptionsVideosTable.COL_RETRIEVAL_TS);
     private static volatile SubscriptionsDb subscriptionsDb = null;
+	private static final String sortChannelsASC = SubscriptionsTable.COL_TITLE + " ASC ";
+
 
 	private static final int DATABASE_VERSION = 5;
 	private static final String DATABASE_NAME = "subs.db";
@@ -269,8 +271,8 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
     }
 
 
-    public List<String> getSubscribedChannelIds() {
-		try (Cursor cursor = getReadableDatabase().query(SubscriptionsTable.TABLE_NAME, new String[] {SubscriptionsTable.COL_CHANNEL_ID}, null, null, null, null, null)) {
+    public List<String> getSubscribedChannelIds(boolean sortChannel) {
+		try (Cursor cursor = getReadableDatabase().query(SubscriptionsTable.TABLE_NAME, new String[] {SubscriptionsTable.COL_CHANNEL_ID}, null, null, null, null, sortChannel ? sortChannelsASC : null)) {
 			List<String> result = new ArrayList<>();
 			while(cursor.moveToNext()) {
 				result.add(cursor.getString(0));
@@ -279,8 +281,8 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 		}
 	}
 
-	public List<String> getSubscribedChannelIdsBySearch(String searchText) {
-		try (Cursor cursor = getReadableDatabase().query(SubscriptionsTable.TABLE_NAME, new String[] {SubscriptionsTable.COL_CHANNEL_ID}, "LOWER("+SubscriptionsTable.COL_TITLE + ") LIKE ?", new String[]{"%"+searchText.toLowerCase()+"%"}, null, null, null)) {
+	public List<String> getSubscribedChannelIdsBySearch(String searchText, boolean sortChannel) {
+		try (Cursor cursor = getReadableDatabase().query(SubscriptionsTable.TABLE_NAME, new String[] {SubscriptionsTable.COL_CHANNEL_ID}, "LOWER("+SubscriptionsTable.COL_TITLE + ") LIKE ?", new String[]{"%"+searchText.toLowerCase()+"%"}, null, null, sortChannel ? sortChannelsASC : null)) {
 			List<String> result = new ArrayList<>();
 			while(cursor.moveToNext()) {
 				result.add(cursor.getString(0));
@@ -334,7 +336,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 		}
 	}
 
-	public YouTubeChannel getCachedSubscribedChannel(String channelId) throws IOException {
+	public YouTubeChannel getCachedSubscribedChannel(String channelId) {
 		Cursor cursor = null;
 		try {
 			cursor = getReadableDatabase().query(SubscriptionsTable.TABLE_NAME,

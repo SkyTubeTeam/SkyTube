@@ -56,6 +56,7 @@ import free.rm.skytube.businessobjects.YouTube.Tasks.GetBulkSubscriptionVideosTa
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetSubscriptionVideosTask;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetSubscriptionVideosTaskListener;
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
+import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 import free.rm.skytube.gui.businessobjects.SubscriptionsBackupsManager;
 import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
 
@@ -345,7 +346,7 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 	 * 1.  Cached inside the local database;
 	 * 2.  No in the DB and hence we need to retrieve them from the YouTube servers.
 	 */
-	private class RefreshFeedTask extends AsyncTaskParallel<Void, Void, List<YouTubeChannel>> {
+	private class RefreshFeedTask extends AsyncTaskParallel<Void, Void, List<String>> {
 
 		private MaterialDialog  fetchingChannelInfoDialog;
 		private boolean         showDialogs;
@@ -372,15 +373,14 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 
 
 		@Override
-		protected List<YouTubeChannel> doInBackground(Void... params) {
-			// get the total number of channels the user is subscribed to (from the subs adapter)
-			// wrap it, as SubsAdapter could add/remove channels in a different thread
-			return new ArrayList<>(SubsAdapter.get(SubscriptionsFeedFragment.this.getActivity()).getSubsLists());
+		protected List<String> doInBackground(Void... params) {
+			List<String> channelIds = SubscriptionsDb.getSubscriptionsDb().getSubscribedChannelIds(false);
+			return channelIds;
 		}
 
 
 		@Override
-		protected void onPostExecute(List<YouTubeChannel> totalChannels) {
+		protected void onPostExecute(List<String> totalChannels) {
 			numVideosFetched      = 0;
 			numChannelsFetched    = 0;
 			numChannelsSubscribed = totalChannels.size();
@@ -415,14 +415,10 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 		videoGridAdapter.refresh(true);
 	}
 
-	private AsyncTaskParallel<?,?,?> getRefreshTask(List<YouTubeChannel> totalChannels) {
+	private AsyncTaskParallel<?,?,?> getRefreshTask(List<String> channelIds) {
 		if (NewPipeService.isPreferred() || !YouTubeAPIKey.get().isUserApiKeySet()) {
-			return new GetBulkSubscriptionVideosTask(totalChannels, SubscriptionsFeedFragment.this);
+			return new GetBulkSubscriptionVideosTask(channelIds, SubscriptionsFeedFragment.this);
 		} else {
-			List<String> channelIds = new ArrayList<>(totalChannels.size());
-			for (YouTubeChannel ch: totalChannels) {
-				channelIds.add(ch.getId());
-			}
 			return new GetSubscriptionVideosTask(SubscriptionsFeedFragment.this, channelIds);
 		}
 	}
