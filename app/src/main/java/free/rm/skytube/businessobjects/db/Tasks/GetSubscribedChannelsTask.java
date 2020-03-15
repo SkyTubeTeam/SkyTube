@@ -32,6 +32,7 @@ import java.util.Locale;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
+import free.rm.skytube.app.Utils;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.VideoBlocker;
@@ -83,14 +84,13 @@ public class GetSubscribedChannelsTask extends AsyncTaskParallel<Void, Void, Lis
 
 			List<String> channelIds;
 
-			if (searchText != null){
+			if (!Utils.isEmpty(searchText)){
 				channelIds = SubscriptionsDb.getSubscriptionsDb().getSubscribedChannelIdsBySearch(searchText,sortChannelsAlphabetically);
 			} else {
 				channelIds = SubscriptionsDb.getSubscriptionsDb().getSubscribedChannelIds(sortChannelsAlphabetically);
 			}
-			System.out.println("channelIds size " + channelIds.size() );
 			for (String id : channelIds) {
-				YouTubeChannel channel = channelInfo.getChannelInfoSync(id);
+				YouTubeChannel channel = channelInfo.getChannelInfoSync(id, true);
 					// This shouldn't be null, but could happen in rare scenarios, where the app is offline,
 					// and the info previously not saved
 					if (channel != null) {

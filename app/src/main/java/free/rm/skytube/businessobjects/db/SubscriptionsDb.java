@@ -65,7 +65,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
     private static final String FIND_EMPTY_RETRIEVAL_TS = String.format("SELECT %s FROM %s WHERE %s IS NULL",
             SubscriptionsVideosTable.COL_YOUTUBE_VIDEO, SubscriptionsVideosTable.TABLE_NAME, SubscriptionsVideosTable.COL_RETRIEVAL_TS);
     private static volatile SubscriptionsDb subscriptionsDb = null;
-	private static final String sortChannelsASC = SubscriptionsTable.COL_TITLE + " ASC ";
+	private static final String sortChannelsASC = "LOWER(" + SubscriptionsTable.COL_TITLE + ") ASC ";
 
 
 	private static final int DATABASE_VERSION = 5;

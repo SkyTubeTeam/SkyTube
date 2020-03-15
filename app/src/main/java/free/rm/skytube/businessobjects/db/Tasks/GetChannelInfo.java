@@ -65,7 +65,7 @@ public class GetChannelInfo extends AsyncTaskParallel<String, Void, YouTubeChann
     @Override
     protected YouTubeChannel doInBackground(String... params) {
         String channelId = params[0];
-        return getChannelInfoSync(channelId);
+        return getChannelInfoSync(channelId, null);
     }
 
     /**
@@ -73,7 +73,7 @@ public class GetChannelInfo extends AsyncTaskParallel<String, Void, YouTubeChann
      * @param channelId
      * @return a channel object from an id, this is a blocking operation, should only be called from a background thread!
      */
-    public YouTubeChannel getChannelInfoSync(String channelId) {
+    public YouTubeChannel getChannelInfoSync(String channelId, Boolean setUserSubscribed) {
         final SubscriptionsDb db = SubscriptionsDb.getSubscriptionsDb();
         YouTubeChannel channel = db.getCachedChannel(channelId);
         if (needRefresh(channel) && SkyTubeApp.isConnected(context)) {
@@ -85,7 +85,11 @@ public class GetChannelInfo extends AsyncTaskParallel<String, Void, YouTubeChann
             }
         }
         if (channel != null) {
-            channel.setUserSubscribed(db.isUserSubscribedToChannel(channelId));
+            if (setUserSubscribed != null) {
+                channel.setUserSubscribed(setUserSubscribed);
+            } else {
+                channel.setUserSubscribed(db.isUserSubscribedToChannel(channelId));
+            }
         }
         return channel;
     }

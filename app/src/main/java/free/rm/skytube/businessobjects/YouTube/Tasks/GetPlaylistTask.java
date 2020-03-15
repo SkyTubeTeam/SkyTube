@@ -74,7 +74,7 @@ public class GetPlaylistTask extends AsyncTaskParallel<Void, Void, YouTubePlayli
 
             if (!playlistList.isEmpty()) {
                 Playlist playlist = playlistList.get(0);
-                YouTubeChannel channel = channelInfo.getChannelInfoSync(playlist.getSnippet().getChannelId());
+                YouTubeChannel channel = channelInfo.getChannelInfoSync(playlist.getSnippet().getChannelId(), null);
                 return new YouTubePlaylist(playlist, channel);
             }
             // set the next page token
