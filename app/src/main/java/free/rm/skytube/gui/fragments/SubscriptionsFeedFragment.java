@@ -40,7 +40,6 @@ import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -51,12 +50,12 @@ import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.FeedUpdaterService;
 import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPIKey;
-import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetBulkSubscriptionVideosTask;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetSubscriptionVideosTask;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetSubscriptionVideosTaskListener;
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
+import free.rm.skytube.businessobjects.db.Tasks.GetSubscribedChannelsTask;
 import free.rm.skytube.gui.businessobjects.SubscriptionsBackupsManager;
 import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
 
@@ -241,6 +240,9 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 		if (forcedFullRefresh && SkyTubeApp.isConnected(getContext())) {
 			unsetFlag(FLAG_REFRESH_FEED_FULL);
 			refreshInProgress = true;
+			new GetSubscribedChannelsTask(this.getContext(), channelsRefreshed -> {
+				Log.i("SUB FRAGMENT", "Refreshed "+ channelsRefreshed.size());
+			}).executeInParallel();
 			new RefreshFeedTask(showFetchingVideosDialog, forcedFullRefresh).executeInParallel();
 		} else {
 			videoGridAdapter.refresh(true);
@@ -374,7 +376,7 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 
 		@Override
 		protected List<String> doInBackground(Void... params) {
-			List<String> channelIds = SubscriptionsDb.getSubscriptionsDb().getSubscribedChannelIds(false);
+			List<String> channelIds = SubscriptionsDb.getSubscriptionsDb().getSubscribedChannelIds();
 			return channelIds;
 		}
 

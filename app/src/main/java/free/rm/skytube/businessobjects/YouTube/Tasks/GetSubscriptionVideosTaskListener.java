@@ -18,8 +18,6 @@
 package free.rm.skytube.businessobjects.YouTube.Tasks;
 
 
-import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
-
 /**
  * A listener that will be notified when a new YouTube video is published to a channel that the user
  * is subscribed to.
