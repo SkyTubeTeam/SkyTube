@@ -30,19 +30,17 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
 import java.util.Iterator;
-import java.util.List;
 
 import free.rm.skytube.R;
-import free.rm.skytube.businessobjects.Logger;
-import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
-import free.rm.skytube.businessobjects.db.Tasks.GetSubscribedChannelsTask;
+import free.rm.skytube.businessobjects.YouTube.POJOs.ChannelView;
+import free.rm.skytube.businessobjects.db.Tasks.GetSubscribedChannelViewTask;
 import free.rm.skytube.gui.businessobjects.MainActivityListener;
 
 /**
  * Channel subscriptions adapter: Contains a list of channels (that the user subscribed to) together
  * with a notification whether the channel has new videos since last visit to the channel or not.
  */
-public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapter.SubChannelViewHolder> {
+public class SubsAdapter extends RecyclerViewAdapterEx<ChannelView, SubsAdapter.SubChannelViewHolder> {
 
 	private static final String TAG = SubsAdapter.class.getSimpleName();
 	private static SubsAdapter subsAdapter = null;
@@ -53,12 +51,13 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 	private final Bool isSubsListRetrieved = new Bool(false);
 	private MainActivityListener listener;
 
+	private String searchText;
 
 	private SubsAdapter(Context context, View progressBar) {
 		super(context);
 
 		// populate this adapter with user's subscribed channels
-		new GetSubscribedChannelsTask(this, progressBar).executeInParallel();
+		executeQuery(null, progressBar);
 
 	}
 
@@ -80,18 +79,6 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 	public void setListener(MainActivityListener listener) {
 		this.listener = listener;
 	}
-
-
-	/**
-	 * Append channel to this adapter.
-	 *
-	 * @param channel Channel to append.
-	 */
-	public void appendChannel(YouTubeChannel channel) {
-
-		append(channel);
-	}
-
 
 	/**
 	 * Remove channel from this adapter.
@@ -121,10 +108,10 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 	 * @return True if the operations have been successful; false otherwise.
 	 */
 	public boolean changeChannelNewVideosStatus(String channelId, boolean newVideos) {
-		YouTubeChannel channel;
+		ChannelView channel;
 		int position = 0;
 
-		for (Iterator<YouTubeChannel> i = getIterator(); i.hasNext(); position++) {
+		for (Iterator<ChannelView> i = getIterator(); i.hasNext(); position++) {
 			channel = i.next();
 
 			if (channel.getId() != null && channel.getId().equals(channelId)) {
@@ -168,60 +155,31 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 			isSubsListRetrieved.value = false;
 		}
 		clearList();
-		new GetSubscribedChannelsTask(this, null).executeInParallel();
+		executeQuery(searchText, null);
 	}
 
-	public void refreshFilteredSubsList(String searchText) {
+	private void refreshFilteredSubsList(String searchText) {
 		synchronized (isSubsListRetrieved) {
 			isSubsListRetrieved.value = false;
 		}
 		clearList();
-		new GetSubscribedChannelsTask(this, null,searchText).executeInParallel();
+		executeQuery(searchText, null);
+	}
+
+	private void executeQuery(String searchText, View progressBar) {
+		new GetSubscribedChannelViewTask(searchText, progressBar, channelViews -> {
+			appendList(channelViews);
+			// Notify the SubsAdapter that the subbed channel list has been retrieved and populated.  If
+			// there is an error we still need to notify the adapter that the task has been completed
+			// from this end...
+			subsListRetrieved();
+		}).executeInParallel();
 	}
 
 	public void filterSubSearch(String searchText){
-		clearList();
+		this.searchText = searchText;
 		refreshFilteredSubsList(searchText);
 	}
-
-
-	/**
-	 * @return True if the subscriptions channel list has been fully retrieved and populated.
-	 */
-	private Bool isSubsListRetrieved() {
-		synchronized (isSubsListRetrieved) {
-			return isSubsListRetrieved;
-		}
-	}
-
-
-	/**
-	 * Returns the list of channels that the user is subscribed to.
-	 * <p>
-	 * <p>If currently the Subs List is being retrieved by the {@link SubsAdapter} then wait until the
-	 * {@link SubsAdapter} retrieves the list.</p>
-	 *
-	 * @return List of YouTube channels the user is subscribed to.
-	 */
-	public List<YouTubeChannel> getSubsLists() {
-		SubsAdapter.Bool isSubsListRetrieved = isSubsListRetrieved();
-
-		synchronized (isSubsListRetrieved) {
-			// if the SubsAdapter is still retrieving the channels...
-			if (!isSubsListRetrieved.value) {
-				try {
-					// ...then we have to wait...
-					isSubsListRetrieved.wait();
-				} catch (InterruptedException e) {
-					Logger.e(this, "Something went wrong when waiting for the Subs Lists...", e);
-				}
-			}
-		}
-
-		// the list has now been retrieved; return it pls
-		return getList();
-	}
-
 
 	/**
 	 * Method used to notify {@link SubsAdapter} that the subscriptions channels list has been
@@ -255,7 +213,7 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 		private ImageView thumbnailImageView;
 		private TextView channelNameTextView;
 		private View newVideosNotificationView;
-		private YouTubeChannel channel = null;
+		private ChannelView channel = null;
 
 		SubChannelViewHolder(View rowView) {
 			super(rowView);
@@ -266,18 +224,18 @@ public class SubsAdapter extends RecyclerViewAdapterEx<YouTubeChannel, SubsAdapt
 
 			rowView.setOnClickListener(v -> {
 				if (listener instanceof MainActivityListener)
-					listener.onChannelClick(channel);
+					listener.onChannelClick(channel.getId());
 			});
 		}
 
-		void updateInfo(YouTubeChannel channel) {
+		void updateInfo(ChannelView channel) {
 			Glide.with(getContext().getApplicationContext())
 					.load(channel.getThumbnailUrl())
 					.apply(new RequestOptions().placeholder(R.drawable.channel_thumbnail_default))
 					.into(thumbnailImageView);
 
 			channelNameTextView.setText(channel.getTitle());
-			newVideosNotificationView.setVisibility(channel.newVideosSinceLastVisit() ? View.VISIBLE : View.INVISIBLE);
+			newVideosNotificationView.setVisibility(channel.isNewVideosSinceLastVisit() ? View.VISIBLE : View.INVISIBLE);
 			this.channel = channel;
 		}
 

@@ -41,6 +41,7 @@ import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
+import free.rm.skytube.businessobjects.YouTube.POJOs.ChannelView;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.db.ChannelFilteringDb;
@@ -125,15 +126,18 @@ public class VideoBlocker {
 	 *
 	 * @return A list of valid channels that fit the user's criteria.
 	 */
-	public List<YouTubeChannel> filterChannels(List<YouTubeChannel> channels) {
-		List<YouTubeChannel>    filteredChannels    = new ArrayList<>();
+	public List<ChannelView> filterChannels(List<ChannelView> channels) {
+		List<ChannelView>       filteredChannels    = new ArrayList<>();
 		final boolean           isChannelBlacklistEnabled = isChannelBlacklistEnabled();
+		if (!isChannelBlacklistEnabled) {
+			return channels;
+		}
 		final List<String>      blacklistedChannelIds = isChannelBlacklistEnabled  ? ChannelFilteringDb.getChannelFilteringDb().getBlacklistedChannelsIdsList() : null;
 		final List<String>      whitelistedChannelIds = !isChannelBlacklistEnabled ? ChannelFilteringDb.getChannelFilteringDb().getWhitelistedChannelsIdsList() : null;
 
-		for (YouTubeChannel channel : channels) {
-			if ( !((isChannelBlacklistEnabled  &&  filterByBlacklistedChannels(channel, blacklistedChannelIds))
-					|| (!isChannelBlacklistEnabled  &&  filterByWhitelistedChannels(channel, whitelistedChannelIds))) ) {
+		for (ChannelView channel : channels) {
+			if ( !((isChannelBlacklistEnabled  &&  filterByBlacklistedChannels(channel.getId(), blacklistedChannelIds))
+					|| (!isChannelBlacklistEnabled  &&  filterByWhitelistedChannels(channel.getId(), whitelistedChannelIds))) ) {
 				filteredChannels.add(channel);
 			}
 		}
@@ -177,7 +181,7 @@ public class VideoBlocker {
 	 * @return True if the video is to be filtered; false otherwise.
 	 */
 	private boolean filterByBlacklistedChannels(YouTubeVideo video, List<String> blacklistedChannelIds) {
-		if (filterByBlacklistedChannels(video.getChannel(), blacklistedChannelIds)) {
+		if (filterByBlacklistedChannels(video.getChannel().getId(), blacklistedChannelIds)) {
 			log(video, FilterType.CHANNEL_BLACKLIST, video.getChannelName());
 			return true;
 		} else {
@@ -189,13 +193,13 @@ public class VideoBlocker {
 	/**
 	 * Filter the channel for blacklisted channels.
 	 *
-	 * @param channel               Channel to be checked.
+	 * @param channelId             Id of the channel to be checked.
 	 * @param blacklistedChannelIds Blacklisted channels IDs.
 	 *
 	 * @return True if the channel is to be filtered; false otherwise.
 	 */
-	private boolean filterByBlacklistedChannels(YouTubeChannel channel, List<String> blacklistedChannelIds) {
-		return blacklistedChannelIds.contains(channel.getId());
+	private boolean filterByBlacklistedChannels(String channelId, List<String> blacklistedChannelIds) {
+		return blacklistedChannelIds.contains(channelId);
 	}
 
 
@@ -208,7 +212,7 @@ public class VideoBlocker {
 	 * @return True if the video is to be filtered; false otherwise.
 	 */
 	private boolean filterByWhitelistedChannels(YouTubeVideo video, List<String> whitelistedChannelIds) {
-		if (filterByWhitelistedChannels(video.getChannel(), whitelistedChannelIds)) {
+		if (filterByWhitelistedChannels(video.getChannel().getId(), whitelistedChannelIds)) {
 			log(video, FilterType.CHANNEL_WHITELIST, video.getChannelName());
 			return true;
 		} else {
@@ -220,13 +224,13 @@ public class VideoBlocker {
 	/**
 	 * Filter the channel for whitelisted channels.
 	 *
-	 * @param channel               Channel to be checked.
+	 * @param channelId             Id of the channel to be checked.
 	 * @param whitelistedChannelIds Whitelisted channels IDs.
 	 *
 	 * @return True if the channel is to be filtered; false otherwise.
 	 */
-	private boolean filterByWhitelistedChannels(YouTubeChannel channel, List<String> whitelistedChannelIds) {
-		return !whitelistedChannelIds.contains(channel.getId());
+	private boolean filterByWhitelistedChannels(String channelId, List<String> whitelistedChannelIds) {
+		return !whitelistedChannelIds.contains(channelId);
 	}
 
 
