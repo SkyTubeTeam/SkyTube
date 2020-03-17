@@ -272,9 +272,17 @@ public class NewPipeService {
         DateInfo uploadDate = new DateInfo(extractor.getUploadDate());
         Logger.i(this, "getDetails for %s -> %s %s", videoId, url.getUrl(), uploadDate);
 
+        long viewCount;
+        try {
+            viewCount = extractor.getViewCount();
+        } catch (NumberFormatException|ParsingException e) {
+            Logger.e(this, "Unable to get view count for " + url.getUrl()+", error: "+e.getMessage(), e);
+            viewCount = 0;
+        }
+
         YouTubeVideo video = new YouTubeVideo(extractor.getId(), extractor.getName(), filterHtml(extractor.getDescription()),
                 extractor.getLength(), new YouTubeChannel(extractor.getUploaderUrl(), extractor.getUploaderName()),
-                extractor.getViewCount(), uploadDate.timestamp, uploadDate.exact, extractor.getThumbnailUrl());
+                viewCount, uploadDate.timestamp, uploadDate.exact, extractor.getThumbnailUrl());
         try {
             video.setLikeDislikeCount(extractor.getLikeCount(), extractor.getDislikeCount());
         } catch (ParsingException pe) {
