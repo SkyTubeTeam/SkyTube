@@ -380,6 +380,9 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 	 * @throws IOException
 	 */
 	public boolean isUserSubscribedToChannel(String channelId) {
+	    if (channelId.contains("channel/")){
+	        channelId = channelId.split("channel/")[1];
+        }
 		Cursor cursor = getReadableDatabase().query(
 				SubscriptionsTable.TABLE_NAME,
 				new String[]{SubscriptionsTable.COL_ID},
