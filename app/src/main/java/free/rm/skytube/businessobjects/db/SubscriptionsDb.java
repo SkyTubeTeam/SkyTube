@@ -77,7 +77,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 	private static final String IS_SUBSCRIBED_QUERY = String.format("SELECT EXISTS(SELECT %s FROM %s WHERE %s =?) AS VAL ", SubscriptionsTable.COL_ID, SubscriptionsTable.TABLE_NAME, SubscriptionsTable.COL_CHANNEL_ID);
 	private static volatile SubscriptionsDb subscriptionsDb = null;
 
-	private static final int DATABASE_VERSION = 5;
+	private static final int DATABASE_VERSION = 7;
 	private static final String DATABASE_NAME = "subs.db";
 
 	private Gson gson;
@@ -96,13 +96,13 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 		return subscriptionsDb;
 	}
 
-	@Override
-	public void onCreate(SQLiteDatabase db) {
-		db.execSQL(SubscriptionsTable.getCreateStatement());
-		db.execSQL(SubscriptionsVideosTable.getCreateStatement());
-		db.execSQL(LocalChannelTable.getCreateStatement());
-	}
-
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        db.execSQL(SubscriptionsTable.getCreateStatement());
+        db.execSQL(SubscriptionsVideosTable.getCreateStatement());
+        db.execSQL(LocalChannelTable.getCreateStatement());
+        db.execSQL(SubscriptionsVideosTable.getIndexOnVideos());
+    }
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -134,6 +134,9 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 				Logger.e(this, "Unable to load subscribed channels to populate cache:" + ex.getMessage(), ex);
 			}
 		}
+        if (oldVersion <= 6 && newVersion >= 7) {
+            db.execSQL(SubscriptionsVideosTable.getIndexOnVideos());
+        }
 	}
 
 	private static void execSQLUpdates(SQLiteDatabase db, String[] sqlUpdates) {
