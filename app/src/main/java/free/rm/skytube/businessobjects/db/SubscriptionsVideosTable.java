@@ -31,6 +31,8 @@ public class SubscriptionsVideosTable {
 
 	public static final String COL_YOUTUBE_VIDEO_ID_EQUALS_TO = SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID + " = ?";
 
+	private static final String IDX_PUBLISH_TS = "IDX_SubsVideo_Publish";
+
 	static final String[] ALL_COLUMNS_FOR_EXTRACT = new String[] {
 			COL_CHANNEL_ID,
 			COL_YOUTUBE_VIDEO_ID,
@@ -58,4 +60,8 @@ public class SubscriptionsVideosTable {
 				ADD_COLUMN + COL_PUBLISH_TS + " INTEGER",
 		};
 	}
+
+    public static String getIndexOnVideos() {
+        return "CREATE INDEX " + IDX_PUBLISH_TS + " ON " + TABLE_NAME + "(" + COL_PUBLISH_TS + ")";
+    }
 }
