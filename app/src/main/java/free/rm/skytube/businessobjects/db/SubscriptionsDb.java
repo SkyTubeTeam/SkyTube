@@ -581,6 +581,9 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 
     private ContentValues createContentValues(YouTubeVideo video, String channelId) {
         ContentValues values = new ContentValues();
+		if (channelId.contains("channel/")){
+			channelId = channelId.split("channel/")[1];
+		}
         values.put(SubscriptionsVideosTable.COL_CHANNEL_ID, channelId);
         values.put(SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID, video.getId());
         values.put(SubscriptionsVideosTable.COL_YOUTUBE_VIDEO, gson.toJson(video).getBytes());
