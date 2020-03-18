@@ -93,7 +93,7 @@ dependencies {
     // YouTube modules
     implementation 'com.google.http-client:google-http-client-android:1.34.2'
     implementation 'com.google.apis:google-api-services-youtube:v3-rev20200109-1.30.8'
-    implementation 'com.github.TeamNewPipe.NewPipeExtractor:extractor:v0.18.6'
+    implementation 'com.github.TeamNewPipe.NewPipeExtractor:extractor:65a7eda'
     //implementation 'com.github.gzsombor.NewPipeExtractor:extractor:41dd748cb3003cb2'
 
     // other modules

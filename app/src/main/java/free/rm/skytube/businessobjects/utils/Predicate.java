@@ -20,6 +20,9 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.Objects;
 
+/**
+ * TODO, remove when old Android support can be dropped!
+ */
 public interface Predicate<E> {
     boolean test(E object);
 

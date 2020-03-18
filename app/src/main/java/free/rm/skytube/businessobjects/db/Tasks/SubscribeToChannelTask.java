@@ -97,8 +97,8 @@ public class SubscribeToChannelTask extends AsyncTaskParallel<Void, Void, Boolea
 				// Also change the subscription state of the channel
 				channel.setUserSubscribed(true);
 
-				// append the channel to the SubsAdapter (i.e. the channels subscriptions list/drawer)
-				adapter.appendChannel(channel);
+				// update the SubsAdapter (i.e. the channels subscriptions list/drawer)
+				adapter.refreshSubsList();
 
 				if (displayToastMessage) {
 					Toast.makeText(context, R.string.subscribed, Toast.LENGTH_LONG).show();

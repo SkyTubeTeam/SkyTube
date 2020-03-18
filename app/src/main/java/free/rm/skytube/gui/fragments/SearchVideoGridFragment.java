@@ -39,6 +39,8 @@ public class SearchVideoGridFragment extends VideosGridFragment {
 
 	/** User's search query string. */
 	private String  searchQuery = "";
+	/** Edit searched query through long press on search query**/
+	private SearchView editSearchView;
 
 	public static final String QUERY = "SearchVideoGridFragment.Query";
 
@@ -67,6 +69,15 @@ public class SearchVideoGridFragment extends VideosGridFragment {
 		if (actionBar != null)
 			actionBar.setTitle(searchQuery);
 
+		//makes searched query editable on long press
+		toolbar.setOnLongClickListener(new View.OnLongClickListener() {
+			@Override
+			public boolean onLongClick(View view) {
+				editSearchView.setIconified(false);
+				editSearchView.setQuery(searchQuery,false);
+				return false;
+			}
+		});
 		// the app will call onCreateOptionsMenu() for when the user wants to search
 		setHasOptionsMenu(true);
 
@@ -78,9 +89,9 @@ public class SearchVideoGridFragment extends VideosGridFragment {
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		final MenuItem   searchMenuItem = menu.findItem(R.id.menu_search);
-		final SearchView searchView = (SearchView) searchMenuItem.getActionView();
-
+		MenuItem   searchMenuItem = menu.findItem(R.id.menu_search);
+		SearchView searchView = (SearchView) searchMenuItem.getActionView();
+		editSearchView = searchView;
 		// will be called when the user clicks on the actionbar's search icon
 		searchMenuItem.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
 			@Override

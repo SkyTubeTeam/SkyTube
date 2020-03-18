@@ -323,8 +323,7 @@ public class YouTubeChannel extends CardData implements Serializable {
 			new GetChannelInfo(context, youTubeChannel -> {
 				if (SubscriptionsDb.getSubscriptionsDb().subscribe(youTubeChannel)) {
 					youTubeChannel.setUserSubscribed(true);
-					SubsAdapter adapter = SubsAdapter.get(context);
-					adapter.appendChannel(youTubeChannel);
+					SubsAdapter.get(context).refreshSubsList();
 					SubscriptionsFeedFragment.refreshSubsFeedFromCache();
 					Toast.makeText(context, "Channel subscribed", Toast.LENGTH_LONG).show();
 				} else {
