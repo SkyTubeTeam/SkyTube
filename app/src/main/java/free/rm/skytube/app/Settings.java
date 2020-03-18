@@ -18,7 +18,7 @@
 package free.rm.skytube.app;
 
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
+import androidx.preference.PreferenceManager ;
 
 import androidx.annotation.StringRes;
 
@@ -157,7 +157,7 @@ public class Settings {
     }
 
     private SharedPreferences getSharedPreferences() {
-        return PreferenceManager.getDefaultSharedPreferences(app);
+        return PreferenceManager.getDefaultSharedPreferences(app) ;
     }
 
 }
