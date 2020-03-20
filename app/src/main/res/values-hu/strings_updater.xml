@@ -4,6 +4,7 @@
 	<string name="update_dialog_msg">Egy új SkyTube frissítés érhető el. Az alkalmazás a %s verzióra lesz frissítve.</string>
 	<string name="up_to_date">Legfrissebb</string>
 	<string name="up_to_date_msg">A legújabb SkyTube verzióval rendelkezik.</string>
+	<string name="release_notes">Újdonságok a %s-s verzióban</string>
 	<string name="update">Frissítés</string>
 	<string name="later">Később</string>
 	<string name="update_failure">Nem sikerült frissíteni az alkalmazást.</string>
