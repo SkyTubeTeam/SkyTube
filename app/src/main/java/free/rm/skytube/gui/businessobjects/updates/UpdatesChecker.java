@@ -19,22 +19,34 @@ package free.rm.skytube.gui.businessobjects.updates;
 
 import android.util.Log;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 
 import free.rm.skytube.BuildConfig;
+import free.rm.skytube.app.Utils;
 
 /**
  * Checks for app updates.
  */
 public class UpdatesChecker {
 
-	private URL		latestApkUrl = null;
-	private float	latestApkVersion = 0;
+	private URL		latestApkUrl;
+	private String	latestApkVersion;
+	private String	releaseNotes;
+	private final boolean	fetchReleaseNotes;
+	private final String	currentVersionNumber;
+	private boolean updatesAvailable;
 
 	private static String TAG = UpdatesChecker.class.getSimpleName();
 
+
+	UpdatesChecker(boolean fetchReleaseNotes, String	currentVersionNumber) {
+		this.fetchReleaseNotes = fetchReleaseNotes;
+		this.currentVersionNumber = currentVersionNumber;
+	}
 
 	/**
 	 * Check for app updates.  If an update is available, {@link this#latestApkUrl} and {@link this#latestApkVersion}
@@ -43,38 +55,39 @@ public class UpdatesChecker {
 	 * @return True if if an update is available;  false otherwise.
 	 */
 	public boolean checkForUpdates() {
-		boolean updatesAvailable = false;
+		updatesAvailable = false;
+		boolean oss = BuildConfig.FLAVOR.equalsIgnoreCase("oss");
 
-		if (BuildConfig.FLAVOR.equalsIgnoreCase("oss")) {
+		if (oss && !fetchReleaseNotes) {
 			// OSS version update checker is the responsibility of FDROID
 			Log.d(TAG, "OSS version - will not be checking for updates.");
-		}
-		else {
+		} else {
+
 			try {
-				WebStream   webStream = new WebStream(BuildConfig.SKYTUBE_UPDATES_URL);
-				String      updatesJSONStr = webStream.downloadRemoteTextFile();
+				WebStream webStream = new WebStream(BuildConfig.SKYTUBE_UPDATES_URL);
+				String updatesJSONStr = webStream.downloadRemoteTextFile();
 				webStream.close();
 
-				JSONObject  json = new JSONObject(updatesJSONStr);
-				float remoteVersionNumber = getLatestVersionNumber(json);
-				float currentVersionNumber = getCurrentVerNumber();
+				JSONObject json = new JSONObject(updatesJSONStr);
+				latestApkVersion = getLatestVersionNumber(json);
+				releaseNotes = getReleaseNotes(json);
 
 				Log.d(TAG, "CURRENT_VER: " + currentVersionNumber);
-				Log.d(TAG, "REMOTE_VER: " + remoteVersionNumber);
+				Log.d(TAG, "REMOTE_VER: " + latestApkVersion);
 
-				if (currentVersionNumber < remoteVersionNumber) {
-					this.latestApkUrl = getLatestApkUrl(json);
-					this.latestApkVersion = remoteVersionNumber;
-					updatesAvailable = true;
-					Log.d(TAG, "Update available.  APK_URL: " + latestApkUrl);
-				} else {
-					Log.d(TAG, "Not updating.");
+				if (!oss) {
+					if (!Utils.equals(currentVersionNumber, latestApkVersion)) {
+						this.latestApkUrl = getLatestApkUrl(json);
+						updatesAvailable = true;
+						Log.d(TAG, "Update available.  APK_URL: " + latestApkUrl);
+					} else {
+						Log.d(TAG, "Not updating.");
+					}
 				}
 			} catch (Throwable e) {
 				Log.e(TAG, "An error has occurred while checking for updates", e);
 			}
 		}
-
 		return updatesAvailable;
 	}
 
@@ -83,49 +96,47 @@ public class UpdatesChecker {
 		return latestApkUrl;
 	}
 
-	public float getLatestApkVersion() {
+	public String getLatestApkVersion() {
 		return latestApkVersion;
 	}
 
+	public String getReleaseNotes() {
+		return releaseNotes;
+	}
+
+	public boolean isUpdateAvailable() {
+		return updatesAvailable;
+	}
 
 	/**
 	 * Extracts from json the latest APP's version.
 	 *
 	 * @param json
 	 * @return
-	 * @throws Exception
+	 * @throws JSONException
 	 */
-	private float getLatestVersionNumber(JSONObject json) throws Exception {
+	private String getLatestVersionNumber(JSONObject json) throws JSONException {
 		String  versionNumberStr = json.getString("tag_name").substring(1);  // tag_name = "v2.0" --> so we are going to delete the 'v' character
-		return Float.parseFloat(versionNumberStr);
+		return versionNumberStr;
 	}
 
+
+	private String getReleaseNotes(JSONObject json) throws JSONException {
+		return json.getString("body");
+	}
 
 	/**
 	 * Extracts from json the APK's URL of the latest version.
 	 *
 	 * @param json
 	 * @return
-	 * @throws Exception
+	 * @throws JSONException
 	 */
-	private URL getLatestApkUrl(JSONObject json) throws Exception {
+	private URL getLatestApkUrl(JSONObject json) throws JSONException, MalformedURLException {
 		String apkUrl = json.getJSONArray("assets").getJSONObject(0).getString("browser_download_url");
 		return new URL(apkUrl);
 	}
 
 
-	/**
-	 * @return The current app's version number.
-	 */
-	private float getCurrentVerNumber() {
-		String currentAppVersionStr = BuildConfig.VERSION_NAME;
-
-		if (BuildConfig.FLAVOR.equalsIgnoreCase("extra")) {
-			String[] ver = BuildConfig.VERSION_NAME.split("\\s+");
-			currentAppVersionStr = ver[0];
-		}
-
-		return Float.parseFloat(currentAppVersionStr);
-	}
 
 }
