@@ -59,4 +59,17 @@ public class Utils {
     public static int hash(Object... obj) {
         return Arrays.hashCode(obj);
     }
+
+    /**
+     * Some channelIds have prefix in them.
+     * We need to remove them otherwise channel ids might not match in different places and cause problems.
+     * @param channelId to check for prefix
+     * @return channelId without prefix
+     */
+    public static String removeChannelIdPrefix(String channelId){
+        if (channelId.contains("channel/")){
+            channelId = channelId.split("channel/")[1];
+        }
+        return  channelId;
+    }
 }
