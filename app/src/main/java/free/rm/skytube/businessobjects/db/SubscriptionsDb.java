@@ -380,9 +380,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 	 * @throws IOException
 	 */
 	public boolean isUserSubscribedToChannel(String channelId) {
-	    if (channelId.contains("channel/")){
-	        channelId = channelId.split("channel/")[1];
-        }
+	    channelId = Utils.removeChannelIdPrefix(channelId);
 		Cursor cursor = getReadableDatabase().query(
 				SubscriptionsTable.TABLE_NAME,
 				new String[]{SubscriptionsTable.COL_ID},
@@ -583,10 +581,8 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 	}
 
     private ContentValues createContentValues(YouTubeVideo video, String channelId) {
+		channelId = Utils.removeChannelIdPrefix(channelId);
         ContentValues values = new ContentValues();
-		if (channelId.contains("channel/")){
-			channelId = channelId.split("channel/")[1];
-		}
         values.put(SubscriptionsVideosTable.COL_CHANNEL_ID, channelId);
         values.put(SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID, video.getId());
         values.put(SubscriptionsVideosTable.COL_YOUTUBE_VIDEO, gson.toJson(video).getBytes());
