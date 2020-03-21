@@ -18,7 +18,7 @@
 package free.rm.skytube.app;
 
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
+import androidx.preference.PreferenceManager ;
 
 import androidx.annotation.StringRes;
 
@@ -31,6 +31,7 @@ import free.rm.skytube.app.enums.Policy;
 public class Settings {
     private final SkyTubeApp app;
     private static final String TUTORIAL_COMPLETED = "YouTubePlayerActivity.TutorialCompleted";
+    private static final String LATEST_RELEASE_NOTES_DISPLAYED = "Settings.LATEST_RELEASE_NOTES_DISPLAYED";
 
     Settings(SkyTubeApp app) {
         this.app = app;
@@ -138,10 +139,14 @@ public class Settings {
         editor.apply();
     }
 
-    private void setPreference(@StringRes int resId, String value) {
+    private void setPreference(String preferenceName, String value) {
         final SharedPreferences.Editor editor = getSharedPreferences().edit();
-        editor.putString(getStr(resId), value);
+        editor.putString(preferenceName, value);
         editor.apply();
+    }
+
+    private void setPreference(@StringRes int resId, String value) {
+        setPreference(getStr(resId), value);
     }
 
     private String getPreference(@StringRes int resId, String defaultValue) {
@@ -157,7 +162,14 @@ public class Settings {
     }
 
     private SharedPreferences getSharedPreferences() {
-        return PreferenceManager.getDefaultSharedPreferences(app);
+        return PreferenceManager.getDefaultSharedPreferences(app) ;
     }
 
+    public String getDisplayedReleaseNoteTag() {
+        return getSharedPreferences().getString(LATEST_RELEASE_NOTES_DISPLAYED, "");
+    }
+
+    public void setDisplayedReleaseNoteTag(String newValue) {
+        setPreference(LATEST_RELEASE_NOTES_DISPLAYED, newValue);
+    }
 }
