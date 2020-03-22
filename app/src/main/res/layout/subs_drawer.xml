@@ -26,6 +26,7 @@
 		android:id="@+id/subs_search_view"
 		app:iconifiedByDefault="false"
 		android:actionViewClass="androidx.appcompat.widget.SearchView"
+		app:closeIcon="@android:drawable/ic_menu_close_clear_cancel"
 		app:queryHint="@string/search_channel" />
 
 	<androidx.recyclerview.widget.RecyclerView
