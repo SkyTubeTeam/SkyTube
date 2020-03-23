@@ -1,3 +1,12 @@
+v2.971 - 23 Mar 2020
+        * Search result should contain playlists and channels.
+        * Subscription feed checking should display notification instead of a dialog - by @okan35
+        * channel search added for subscriptions - by @okan35
+        * Hide the Block Channel menu item when the Video Blocker is not enabled. - by @atomjack
+        * Migrate PreferenceManager to androidx - by @ChemWater
+        * Implement paging in the bookmark fragment - this will improve the responsiveness of the bookmark tab.
+        * Add padding and background to make the option menuitem more finger-friendly
+        * Rename values-id folder to values-in to enable Indonesian translations
 v2.970 - 26 Jan 2020
         * Fix Subscription DB upgrade error
         * Add ability to switch brightness and volume control
