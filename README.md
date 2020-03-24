@@ -16,19 +16,20 @@
 
 ## Features
 ### Innovative Features
-* Video blocker which includes the following features **[New!]**:
-  - Channel blacklisting **[New!]**
-  - Channel whitelisting **[New!]**
-  - Block videos if their language is not the same as the user's preferred one(s) **[New!]**
-  - Low views video blocking **[New!]**
-  - High dislikes video blocking **[New!]**
-  - Icon in the toolbar displaying how many videos were blocked **[New!]**
-* Videos watched or partially watched are marked accordingly.  Resume playing feature also implemented. **[New!]**
-* Video swipe controls, including volume, brightness, comments and video description controls. **[New!]**
+* Video blocker which includes the following features:
+  - Channel blacklisting
+  - Channel whitelisting
+  - Block videos if their language is not the same as the user's preferred one(s)
+  - Low views video blocking
+  - High dislikes video blocking
+  - Icon in the toolbar displaying how many videos were blocked
+* Videos watched or partially watched are marked accordingly.  Resume playing feature also implemented.
+* Video swipe controls, including volume, brightness, comments and video description controls.
 * Bookmark videos
 * Import subscriptions from YouTube
 * Play channels' playlists
 * Download videos
+* Ability to play the video faster - or slower than live. **[New!]**
 * View and download video thumbnails
 * Doesn't display any adverts when browsing or playing videos
 * Backup and restore bookmarks and subscriptions (all stored locally on your device)
@@ -55,7 +56,7 @@ Android 4.0 (Ice Cream Sandwich) or later. For techies, that means an API level 
 | Official YouTube player support* | ✅                   | ❌       |
 | Chromecast Support*              | ✅                   | ❌       |
 | Updates availability             | Immediate            | Normally up to 5 days |
-| Download APK                     | [![Download SkyTube Extra APK](screenshots/download_apk.png)](https://github.com/ram-on/SkyTube/releases/download/v2.969/SkyTube-Extra-2.969.apk) | [![Download SkyTube (Vanilla) APK](https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Get_it_on_F-Droid.svg/200px-Get_it_on_F-Droid.svg.png)](https://f-droid.org/repository/browse/?fdid=free.rm.skytube.oss)
+| Download APK                     | [![Download SkyTube Extra APK](screenshots/download_apk.png)](https://github.com/ram-on/SkyTube/releases/download/v2.971/SkyTube-Extra-2.971.apk) | [![Download SkyTube (Vanilla) APK](https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Get_it_on_F-Droid.svg/200px-Get_it_on_F-Droid.svg.png)](https://f-droid.org/repository/browse/?fdid=free.rm.skytube.oss)
 
 _* powered by a closed-source, third-party library._
 

@@ -44,11 +44,6 @@ public class SubsAdapter extends RecyclerViewAdapterEx<ChannelView, SubsAdapter.
 
 	private static final String TAG = SubsAdapter.class.getSimpleName();
 	private static SubsAdapter subsAdapter = null;
-	/**
-	 * Set to true if the users' subscriptions channels list has been fully retrieved and populated
-	 * by querying the local database and YouTube servers...
-	 */
-	private final Bool isSubsListRetrieved = new Bool(false);
 	private MainActivityListener listener;
 
 	private String searchText;
@@ -61,11 +56,9 @@ public class SubsAdapter extends RecyclerViewAdapterEx<ChannelView, SubsAdapter.
 
 	}
 
-
 	public static SubsAdapter get(Context context) {
 		return get(context, null);
 	}
-
 
 	public static SubsAdapter get(Context context, View progressBar) {
 		if (subsAdapter == null) {
@@ -74,7 +67,6 @@ public class SubsAdapter extends RecyclerViewAdapterEx<ChannelView, SubsAdapter.
 
 		return subsAdapter;
 	}
-
 
 	public void setListener(MainActivityListener listener) {
 		this.listener = listener;
@@ -97,7 +89,6 @@ public class SubsAdapter extends RecyclerViewAdapterEx<ChannelView, SubsAdapter.
 
 		Log.e(TAG, "Channel not removed from adapter:  id=" + channelId);
 	}
-
 
 	/**
 	 * Changes the channel's 'new videos' status.  The channel's view is then refreshed.
@@ -126,7 +117,6 @@ public class SubsAdapter extends RecyclerViewAdapterEx<ChannelView, SubsAdapter.
 		return false;
 	}
 
-
 	/**
 	 * Update the contents of a view (i.e. refreshes the given view).
 	 *
@@ -136,32 +126,23 @@ public class SubsAdapter extends RecyclerViewAdapterEx<ChannelView, SubsAdapter.
 		notifyItemChanged(viewPosition);
 	}
 
-
 	@Override
 	public SubChannelViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 		View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.sub_channel, parent, false);
 		return new SubChannelViewHolder(v);
 	}
 
-
 	@Override
 	public void onBindViewHolder(SubChannelViewHolder viewHolder, int position) {
 		viewHolder.updateInfo(get(position));
 	}
 
-
 	public void refreshSubsList() {
-		synchronized (isSubsListRetrieved) {
-			isSubsListRetrieved.value = false;
-		}
 		clearList();
 		executeQuery(searchText, null);
 	}
 
 	private void refreshFilteredSubsList(String searchText) {
-		synchronized (isSubsListRetrieved) {
-			isSubsListRetrieved.value = false;
-		}
 		clearList();
 		executeQuery(searchText, null);
 	}
@@ -169,10 +150,6 @@ public class SubsAdapter extends RecyclerViewAdapterEx<ChannelView, SubsAdapter.
 	private void executeQuery(String searchText, View progressBar) {
 		new GetSubscribedChannelViewTask(searchText, progressBar, channelViews -> {
 			appendList(channelViews);
-			// Notify the SubsAdapter that the subbed channel list has been retrieved and populated.  If
-			// there is an error we still need to notify the adapter that the task has been completed
-			// from this end...
-			subsListRetrieved();
 		}).executeInParallel();
 	}
 
@@ -181,32 +158,7 @@ public class SubsAdapter extends RecyclerViewAdapterEx<ChannelView, SubsAdapter.
 		refreshFilteredSubsList(searchText);
 	}
 
-	/**
-	 * Method used to notify {@link SubsAdapter} that the subscriptions channels list has been
-	 * fully retrieved and populated.
-	 */
-	public void subsListRetrieved() {
-		synchronized (isSubsListRetrieved) {
-			isSubsListRetrieved.value = true;
-			isSubsListRetrieved.notify();
-		}
-	}
-
-
 	////////////////////////////////////////////////////////////////////////////////////////////////
-
-	/**
-	 * Boolean class that is mutable.
-	 * <p>
-	 * Required in order to perform Bool.wait() and Bool.notify().
-	 */
-	public static class Bool {
-		public boolean value = false;
-
-		public Bool(boolean value) {
-			this.value = value;
-		}
-	}
 
 	class SubChannelViewHolder extends RecyclerView.ViewHolder {
 
