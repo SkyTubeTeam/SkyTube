@@ -435,9 +435,9 @@ public class NewPipeService {
      * @return true, if it's the preferred backend API
      */
     public static boolean isPreferred() {
-        boolean sortChannels = SkyTubeApp.getPreferenceManager().getBoolean(SkyTubeApp.getStr(R.string.pref_use_newpipe_backend), false);
+        boolean isNewPipeBackendPreferred = SkyTubeApp.getPreferenceManager().getBoolean(SkyTubeApp.getStr(R.string.pref_use_newpipe_backend), false);
         BackupDataDb backupDataDb = BackupDataDb.getBackupDataDbDb();
-        backupDataDb.insertBackupData(null,null,sortChannels ? "1" : "0");
-        return sortChannels;
+        backupDataDb.insertBackupData(null,null,null,isNewPipeBackendPreferred ? "1" : "0",null);
+        return isNewPipeBackendPreferred;
     }
 }
