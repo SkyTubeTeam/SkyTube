@@ -7,13 +7,17 @@ public class BackupDataTable {
     public static final String COL_YOUTUBE_API_KEY = "youtube_api_key";
     public static final String COL_DEFAULT_TAB = "default_tab";
     public static final String COL_SORT_CHANNELS = "sort_channels";
+    public static final String COL_HIDDEN_TABS = "hidden_tabs";
+    public static final String COL_PREFERRED_BACKEND = "preferred_backend";
 
     public static String getCreateStatement() {
         return "CREATE TABLE " + TABLE_NAME + " (" +
                 COL_BACKUP_ID + " INTEGER , " +
                 COL_YOUTUBE_API_KEY + " TEXT, " +
                 COL_DEFAULT_TAB + " TEXT, " +
-                COL_SORT_CHANNELS + " TEXT " +
+                COL_SORT_CHANNELS + " TEXT, " +
+                COL_HIDDEN_TABS + " TEXT, " +
+                COL_PREFERRED_BACKEND + " TEXT " +
                 " )";
     }
 }
