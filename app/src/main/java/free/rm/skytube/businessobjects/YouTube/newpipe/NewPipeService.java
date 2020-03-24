@@ -57,6 +57,8 @@ import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.YouTube.VideoStream.HttpDownloader;
 import free.rm.skytube.businessobjects.YouTube.VideoStream.StreamMetaData;
 import free.rm.skytube.businessobjects.YouTube.VideoStream.StreamMetaDataList;
+import free.rm.skytube.businessobjects.db.BackupDataDb;
+import free.rm.skytube.businessobjects.db.BackupDataTable;
 
 /**
  * Service to interact with remote video services, using the NewPipeExtractor backend.
@@ -380,6 +382,9 @@ public class NewPipeService {
      * @return true, if it's the preferred backend API
      */
     public static boolean isPreferred() {
-        return SkyTubeApp.getPreferenceManager().getBoolean(SkyTubeApp.getStr(R.string.pref_use_newpipe_backend), false);
+        boolean sortChannels = SkyTubeApp.getPreferenceManager().getBoolean(SkyTubeApp.getStr(R.string.pref_use_newpipe_backend), false);
+        BackupDataDb backupDataDb = BackupDataDb.getBackupDataDbDb();
+        backupDataDb.insertBackupData(null,null,sortChannels ? "1" : "0");
+        return sortChannels;
     }
 }

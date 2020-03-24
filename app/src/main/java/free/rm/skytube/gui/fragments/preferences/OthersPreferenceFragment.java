@@ -27,7 +27,9 @@ import android.preference.MultiSelectListPreference;
 import android.preference.PreferenceFragment;
 import android.widget.Toast;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -37,6 +39,7 @@ import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPIKey;
 import free.rm.skytube.businessobjects.YouTube.ValidateYouTubeAPIKey;
+import free.rm.skytube.businessobjects.db.BackupDataDb;
 import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
 
 /**
@@ -46,6 +49,7 @@ public class OthersPreferenceFragment extends PreferenceFragment implements Shar
 	private Preference folderChooser;
 
 	ListPreference defaultTabPref;
+	BackupDataDb backupDataDb;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -79,6 +83,9 @@ public class OthersPreferenceFragment extends PreferenceFragment implements Shar
 		MultiSelectListPreference hiddenTabsPref = (MultiSelectListPreference)findPreference(getString(R.string.pref_key_hide_tabs));
 		hiddenTabsPref.setEntryValues(tabListValues);
 
+		backupDataDb = BackupDataDb.getBackupDataDbDb();
+		backupDataDb.getBackupData();
+
 //		ListPreference feedNotificationPref = (ListPreference) findPreference(getString(R.string.pref_feed_notification_key));
 //		if(feedNotificationPref.getValue() == null) {
 //			feedNotificationPref.setValueIndex(0);
@@ -106,8 +113,10 @@ public class OthersPreferenceFragment extends PreferenceFragment implements Shar
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
 		if(key != null) {
 			if (key.equals(getString(R.string.pref_key_default_tab_name))) {
+
 				// If the user changed the Default Tab Preference, update the summary to show the new default tab
 				ListPreference defaultTabPref = (ListPreference) findPreference(key);
+				backupDataDb.insertBackupData(null,defaultTabPref.getEntry().toString());
 				defaultTabPref.setSummary(String.format(getString(R.string.pref_summary_default_tab), defaultTabPref.getEntry()));
 			} else if (key.equals(getString(R.string.pref_key_hide_tabs))) {
 				displayRestartDialog(R.string.pref_hide_tabs_restart, true);
@@ -130,6 +139,7 @@ public class OthersPreferenceFragment extends PreferenceFragment implements Shar
 					}
 				}
 			} else if (key.equals(getString(R.string.pref_key_subscriptions_alphabetical_order))) {
+
 				SubsAdapter subsAdapter = SubsAdapter.get(getActivity());
 				subsAdapter.refreshSubsList();
 			}/*else if (key.equals(getString(R.string.pref_feed_notification_key))) {
@@ -183,7 +193,13 @@ public class OthersPreferenceFragment extends PreferenceFragment implements Shar
 		@Override
 		protected Boolean doInBackground(Void... voids) {
 			ValidateYouTubeAPIKey validateKey = new ValidateYouTubeAPIKey(youtubeAPIKey);
-			return validateKey.isKeyValid();
+			boolean resultValidateKey = validateKey.isKeyValid();
+			BackupDataDb backupDataDb = BackupDataDb.getBackupDataDbDb();
+			if (resultValidateKey) {
+				long a = backupDataDb.insertBackupData(youtubeAPIKey,null);
+				System.out.println("inserted " + a);
+			}
+			return resultValidateKey;
 		}
 
 
@@ -197,6 +213,7 @@ public class OthersPreferenceFragment extends PreferenceFragment implements Shar
 				if (key.isUserApiKeySet()) {
 					// if the key is valid, then inform the user that the custom API key is valid and
 					// that he needs to restart the app in order to use it
+
 					displayRestartDialog(R.string.pref_youtube_api_key_custom, false);
 				} else {
 					displayRestartDialog(R.string.pref_youtube_api_key_default, false);
