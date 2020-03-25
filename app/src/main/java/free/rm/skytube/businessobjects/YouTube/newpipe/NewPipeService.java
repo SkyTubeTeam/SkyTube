@@ -126,7 +126,7 @@ public class NewPipeService {
      * @throws ExtractionException
      * @throws IOException
      */
-    private List<YouTubeVideo> getChannelVideos(String channelId) throws ExtractionException, IOException {
+    private List<YouTubeVideo> getChannelVideos(String channelId) throws NewPipeException {
         VideoPager pager = getChannelPager(channelId);
         List<YouTubeVideo> result = pager.getNextPageAsVideos();
         Logger.i(this, "getChannelVideos for %s(%s)  -> %s videos", pager.getChannel().getTitle(), channelId, result.size());
@@ -140,7 +140,7 @@ public class NewPipeService {
      * @throws ExtractionException
      * @throws IOException
      */
-    private List<YouTubeVideo> getFeedVideos(String channelId) throws ExtractionException, IOException {
+    private List<YouTubeVideo> getFeedVideos(String channelId) throws ExtractionException, IOException, NewPipeException {
         final String url = getListLinkHandler(channelId).getUrl();
         final FeedExtractor feedExtractor = streamingService.getFeedExtractor(url);
         if (feedExtractor == null) {
@@ -159,36 +159,48 @@ public class NewPipeService {
      * @throws ExtractionException
      * @throws IOException
      */
-    public List<YouTubeVideo> getVideosFromFeedOrFromChannel(String channelId) throws IOException, ExtractionException {
+    public List<YouTubeVideo> getVideosFromFeedOrFromChannel(String channelId) throws NewPipeException {
         try {
             List<YouTubeVideo> videos = getFeedVideos(channelId);
             if (videos != null) {
                 return videos;
             }
-        } catch (IOException | ExtractionException e) {
+        } catch (IOException | ExtractionException | RuntimeException | NewPipeException e) {
             Logger.e(this, "Unable to get videos from a feed " + channelId + " : "+ e.getMessage(), e);
         }
         return getChannelVideos(channelId);
     }
 
-    public VideoPager getChannelPager(String channelId) throws ExtractionException, IOException {
-        ChannelExtractor channelExtractor = getChannelExtractor(channelId);
+    public VideoPager getChannelPager(String channelId) throws NewPipeException {
+        try {
+            ChannelExtractor channelExtractor = getChannelExtractor(channelId);
 
-        YouTubeChannel channel = createInternalChannel(channelExtractor);
-        return new VideoPager(streamingService, (ListExtractor) channelExtractor, channel);
+            YouTubeChannel channel = createInternalChannel(channelExtractor);
+            return new VideoPager(streamingService, (ListExtractor) channelExtractor, channel);
+        } catch (ExtractionException | IOException | RuntimeException e) {
+            throw new NewPipeException("Getting videos for " + channelId + " fails:" + e.getMessage(), e);
+        }
     }
 
-    public PlaylistPager getPlaylistPager(String channelId) throws ExtractionException, IOException {
-        ListLinkHandler channelList = getListLinkHandler(channelId);
-        PlaylistExtractor playlistExtractor = streamingService.getPlaylistExtractor(channelList);
-        playlistExtractor.fetchPage();
-        return new PlaylistPager(streamingService, playlistExtractor);
+    public PlaylistPager getPlaylistPager(String channelId) throws NewPipeException {
+        try {
+            ListLinkHandler channelList = getListLinkHandler(channelId);
+            PlaylistExtractor playlistExtractor = streamingService.getPlaylistExtractor(channelList);
+            playlistExtractor.fetchPage();
+            return new PlaylistPager(streamingService, playlistExtractor);
+        } catch (ExtractionException | IOException | RuntimeException e) {
+            throw new NewPipeException("Getting playlists for " + channelId + " fails:" + e.getMessage(), e);
+        }
     }
 
-    public CommentPager getCommentPager(String videoId) throws ExtractionException {
-        final ListLinkHandler linkHandler = streamingService.getCommentsLHFactory().fromId(videoId);
-        final CommentsExtractor commentsExtractor = streamingService.getCommentsExtractor(linkHandler);
-        return new CommentPager(streamingService, commentsExtractor);
+    public CommentPager getCommentPager(String videoId) throws NewPipeException {
+        try {
+            final ListLinkHandler linkHandler = streamingService.getCommentsLHFactory().fromId(videoId);
+            final CommentsExtractor commentsExtractor = streamingService.getCommentsExtractor(linkHandler);
+            return new CommentPager(streamingService, commentsExtractor);
+        } catch (ExtractionException | RuntimeException e) {
+            throw new NewPipeException("Getting comments for " + videoId + " fails:" + e.getMessage(), e);
+        }
     }
 
     /**
@@ -198,7 +210,7 @@ public class NewPipeService {
      * @throws ExtractionException
      * @throws IOException
      */
-    public YouTubeChannel getChannelDetails(String channelId) throws ExtractionException, IOException {
+    public YouTubeChannel getChannelDetails(String channelId) throws NewPipeException {
         Utils.requireNonNull(channelId, "channelId");
         VideoPager pager = getChannelPager(channelId);
         // get the channel, and add all the videos from the first page
@@ -343,10 +355,14 @@ public class NewPipeService {
         return result;
     }
 
-    public VideoPager getSearchResult(String query) throws ExtractionException, IOException {
-        SearchExtractor extractor = streamingService.getSearchExtractor(query);
-        extractor.fetchPage();
-        return new VideoPager(streamingService, extractor, null);
+    public VideoPager getSearchResult(String query) throws NewPipeException {
+        try {
+            SearchExtractor extractor = streamingService.getSearchExtractor(query);
+            extractor.fetchPage();
+            return new VideoPager(streamingService, extractor, null);
+        } catch (ExtractionException | IOException | RuntimeException e) {
+            throw new NewPipeException("Getting search result for " + query + " fails:" + e.getMessage(), e);
+        }
     }
 
     /**

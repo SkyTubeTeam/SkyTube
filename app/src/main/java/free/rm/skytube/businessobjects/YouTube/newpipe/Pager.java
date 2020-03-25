@@ -78,14 +78,18 @@ public abstract class Pager<I extends InfoItem, O> implements PagerBackend<O> {
      * @throws IOException
      * @throws ExtractionException
      */
-    public List<O> getNextPage() throws ParsingException, IOException, ExtractionException {
+    public List<O> getNextPage() throws NewPipeException {
         if (!hasNextPage) {
             return Collections.emptyList();
         }
-        if (nextPageUrl == null || nextPageUrl.isEmpty()) {
-            return process(channelExtractor.getInitialPage());
-        } else {
-            return process(channelExtractor.getPage(nextPageUrl));
+        try {
+            if (nextPageUrl == null || nextPageUrl.isEmpty()) {
+                return process(channelExtractor.getInitialPage());
+            } else {
+                return process(channelExtractor.getPage(nextPageUrl));
+            }
+        } catch (IOException| ExtractionException| RuntimeException e) {
+            throw new NewPipeException("getNextPage on "+this+", nextPageUrl="+nextPageUrl, e);
         }
     }
 
@@ -93,20 +97,20 @@ public abstract class Pager<I extends InfoItem, O> implements PagerBackend<O> {
     public List<O> getSafeNextPage() {
         try {
             return getNextPage();
-        } catch (Exception e) {
+        } catch (NewPipeException e) {
             lastException = e;
             Logger.e(this.getClass().getSimpleName(), "Error: " + e.getMessage(), e);
             return Collections.emptyList();
         }
     }
 
-    protected List<O> process(ListExtractor.InfoItemsPage<I> page) throws ParsingException {
+    protected List<O> process(ListExtractor.InfoItemsPage<I> page) throws NewPipeException {
         nextPageUrl = page.getNextPageUrl();
         hasNextPage = nextPageUrl != null && !nextPageUrl.isEmpty();
         return extract(page);
     }
 
 
-    protected abstract List<O> extract(InfoItemsPage<I> page) throws ParsingException;
+    protected abstract List<O> extract(InfoItemsPage<I> page) throws NewPipeException;
 
 }
