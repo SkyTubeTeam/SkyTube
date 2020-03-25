@@ -5,14 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import free.rm.skytube.app.SkyTubeApp;
 
@@ -55,26 +50,28 @@ public class BackupDataDb extends SQLiteOpenHelperEx {
         ContentValues values = new ContentValues();
         values.put(BackupDataTable.COL_BACKUP_ID, 1);
         if (defaultTab != null){
-            values.put(BackupDataTable.COL_DEFAULT_TAB, defaultTab);
+            values.put(BackupDataTable.COL_DEFAULT_TAB_NAME, defaultTab);
         }
         if (youtubeApiKey != null){
             values.put(BackupDataTable.COL_YOUTUBE_API_KEY, youtubeApiKey);
         }
         if (isNewPipePreferredBackend != null){
-            values.put(BackupDataTable.COL_PREFERRED_BACKEND, isNewPipePreferredBackend);
+            values.put(BackupDataTable.COL_USE_NEWPIPE_BACKEND, isNewPipePreferredBackend);
         }
         if (hiddenTabs != null){
-            values.put(BackupDataTable.COL_HIDDEN_TABS, hiddenTabs);
+            values.put(BackupDataTable.COL_HIDE_TABS, hiddenTabs);
         }
         if (sortChannels != null){
             values.put(BackupDataTable.COL_SORT_CHANNELS, sortChannels);
         }
-        long isInsertSuccesfull = getWritableDatabase().insert(BackupDataTable.TABLE_NAME, null, values);
+        System.out.println("values " + values.toString());
+        long isInsertSuccessfull = getWritableDatabase().insert(BackupDataTable.TABLE_NAME, null, values);
         getWritableDatabase().close();
-        return isInsertSuccesfull;
+        return isInsertSuccessfull;
     }
 
-    public void getBackupData(){
+    public JsonObject getBackupData(){
+        JsonObject backupObject = new JsonObject();
         Cursor cursor = getWritableDatabase().query(
                 BackupDataTable.TABLE_NAME,   // The table to query
                 null,             // The array of columns to return (pass null to get all)
@@ -87,17 +84,26 @@ public class BackupDataDb extends SQLiteOpenHelperEx {
 
         String[] backupArray = new String[1];
         while(cursor.moveToNext()) {
+
             long backupId = cursor.getLong(cursor.getColumnIndexOrThrow(BackupDataTable.COL_BACKUP_ID));
             String youtubeApiKey = cursor.getString(cursor.getColumnIndexOrThrow(BackupDataTable.COL_YOUTUBE_API_KEY));
-            String defaultTab = cursor.getString(cursor.getColumnIndexOrThrow(BackupDataTable.COL_DEFAULT_TAB));
+            String defaultTab = cursor.getString(cursor.getColumnIndexOrThrow(BackupDataTable.COL_DEFAULT_TAB_NAME));
             String sortChannels = cursor.getString(cursor.getColumnIndexOrThrow(BackupDataTable.COL_SORT_CHANNELS));
-            String hiddenTabs = cursor.getString(cursor.getColumnIndexOrThrow(BackupDataTable.COL_HIDDEN_TABS));
-            String preferredBackend = cursor.getString(cursor.getColumnIndexOrThrow(BackupDataTable.COL_PREFERRED_BACKEND));
-            backupArray = new String[] {String.valueOf(backupId),youtubeApiKey,defaultTab,sortChannels,hiddenTabs,preferredBackend};
+            String hiddenTabs = cursor.getString(cursor.getColumnIndexOrThrow(BackupDataTable.COL_HIDE_TABS));
+            String preferredBackend = cursor.getString(cursor.getColumnIndexOrThrow(BackupDataTable.COL_USE_NEWPIPE_BACKEND));
+            backupArray = new String[] {String.valueOf(backupId),defaultTab,hiddenTabs,youtubeApiKey,preferredBackend,sortChannels};
+            backupObject.addProperty(BackupDataTable.COL_BACKUP_ID,backupId);
+            backupObject.addProperty(BackupDataTable.COL_YOUTUBE_API_KEY,youtubeApiKey);
+            backupObject.addProperty(BackupDataTable.COL_DEFAULT_TAB_NAME,defaultTab);
+            backupObject.addProperty(BackupDataTable.COL_SORT_CHANNELS,sortChannels);
+            backupObject.addProperty(BackupDataTable.COL_HIDE_TABS,hiddenTabs);
+            backupObject.addProperty(BackupDataTable.COL_USE_NEWPIPE_BACKEND,preferredBackend);
+
         }
         cursor.close();
         getWritableDatabase().close();
         System.out.println("Backup data " + Arrays.toString(backupArray));
+        return backupObject;
         }
     }
 
