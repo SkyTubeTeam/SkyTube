@@ -38,6 +38,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import free.rm.skytube.R;
+import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannelInterface;
@@ -152,8 +153,6 @@ public class ChannelBrowserFragment extends FragmentEx {
 		channelSubscribersTextView = fragment.findViewById(R.id.channel_subs_text_view);
 		channelSubscribeButton = fragment.findViewById(R.id.channel_subscribe_button);
 		channelSubscribeButton.setFetchChannelVideosOnSubscribe(false);
-		if(channel != null)
-				channelSubscribeButton.setChannel(channel);
 		channelSubscribeButton.setOnClickListener(v -> {
 			// If we're subscribing to the channel, save the list of videos we have into the channel (to be stored in the database by SubscribeToChannelTask)
 			if(channel != null && !channel.isUserSubscribed()) {
@@ -170,7 +169,7 @@ public class ChannelBrowserFragment extends FragmentEx {
 		if (channel == null) {
 			if (task == null) {
 				task = new GetChannelInfo(getContext(), new ProcessChannel());
-				task.execute(channelId);
+				task.executeInParallel(channelId);
 			}
 		} else {
 			initViews();
@@ -194,14 +193,29 @@ public class ChannelBrowserFragment extends FragmentEx {
 		}
 	}
 
+	private FragmentManager getChildFragmentManagerSafely() {
+		try {
+			return getChildFragmentManager();
+		} catch (IllegalStateException e) {
+			Logger.e(this, "Fragment mapper is not available, as the Fragment is not attached :"+e.getMessage(), e);
+			return null;
+		}
+	}
+
 	/**
 	 * Initialise views that are related to {@link #channel}.
 	 */
 	private synchronized void initViews() {
 		if (channel != null) {
-			channelPagerAdapter = new ChannelPagerAdapter(getChildFragmentManager());
+			FragmentManager fm = getChildFragmentManagerSafely();
+			if (fm == null) {
+				return;
+			}
+			channelPagerAdapter = new ChannelPagerAdapter(fm);
 			viewPager.setOffscreenPageLimit(2);
 			viewPager.setAdapter(channelPagerAdapter);
+
+			this.channelVideosFragment.setYouTubeChannel(channel);
 
 			this.channelVideosFragment.onFragmentSelected();
 
@@ -224,6 +238,7 @@ public class ChannelBrowserFragment extends FragmentEx {
 
 			// if the user has subscribed to this channel, then change the state of the
 			// subscribe button
+			channelSubscribeButton.setChannel(channel);
 			if (channel.isUserSubscribed()) {
 				channelSubscribeButton.setUnsubscribeState();
 			} else {
@@ -265,9 +280,6 @@ public class ChannelBrowserFragment extends FragmentEx {
 			// the button was created.
 			channel = youTubeChannel;
 			initViews();
-			channelSubscribeButton.setChannel(youTubeChannel);
-			channelVideosFragment.setYouTubeChannel(youTubeChannel);
-
 		}
 	}
 
@@ -277,7 +289,7 @@ public class ChannelBrowserFragment extends FragmentEx {
 		private final List<TabFragment> channelBrowserFragmentList = new ArrayList<>();
 
 		public ChannelPagerAdapter(FragmentManager fm) {
-			super(fm);
+			super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
 
 			// Initialize fragments
 			if (channelVideosFragment == null) {
