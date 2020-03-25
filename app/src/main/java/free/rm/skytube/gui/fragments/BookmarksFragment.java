@@ -50,11 +50,9 @@ public class BookmarksFragment extends OrderableVideosGridFragment implements Bo
 		populateList();
 	}
 
-
 	private void populateList() {
 		new PopulateBookmarksTask().executeInParallel();
 	}
-
 
 	@Override
 	public void onFragmentSelected() {
@@ -65,7 +63,6 @@ public class BookmarksFragment extends OrderableVideosGridFragment implements Bo
 			BookmarksDb.getBookmarksDb().setHasUpdated(false);
 		}
 	}
-
 
 	@Override
 	public void onBookmarkAdded(YouTubeVideo video) {
@@ -112,6 +109,10 @@ public class BookmarksFragment extends OrderableVideosGridFragment implements Bo
 
 		@Override
 		protected void onPostExecute(Integer numVideosBookmarked) {
+			if (swipeRefreshLayout == null) {
+				// fragment already disposed
+				return;
+			}
 			// If no videos have been bookmarked, show the text notifying the user, otherwise
 			// show the swipe refresh layout that contains the actual video grid.
 			if (numVideosBookmarked <= 0) {

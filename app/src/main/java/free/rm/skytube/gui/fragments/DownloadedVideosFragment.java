@@ -78,6 +78,10 @@ public class DownloadedVideosFragment extends OrderableVideosGridFragment implem
 
 		@Override
 		protected void onPostExecute(Integer maximumOrderNumber) {
+			if (swipeRefreshLayout == null) {
+				// fragment already disposed
+				return;
+			}
 			// If no videos have been downloaded, show the text notifying the user, otherwise
 			// show the swipe refresh layout that contains the actual video grid.
 			if (maximumOrderNumber <= 0) {

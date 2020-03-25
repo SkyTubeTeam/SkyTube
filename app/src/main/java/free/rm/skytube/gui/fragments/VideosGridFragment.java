@@ -27,6 +27,7 @@ import android.widget.GridView;
 
 import com.bumptech.glide.Glide;
 
+import butterknife.BindView;
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.gui.businessobjects.MainActivityListener;
@@ -38,6 +39,7 @@ import free.rm.skytube.gui.businessobjects.fragments.BaseVideosGridFragment;
  */
 public abstract class VideosGridFragment extends BaseVideosGridFragment {
 
+	@BindView(R.id.grid_view)
 	protected RecyclerView	gridView;
 
 	public VideosGridFragment() {
@@ -53,7 +55,6 @@ public abstract class VideosGridFragment extends BaseVideosGridFragment {
 		View view = super.onCreateView(inflater, container, savedInstanceState);
 
 		// setup the video grid view
-		gridView = view.findViewById(R.id.grid_view);
 		videoGridAdapter.setSwipeRefreshLayout(swipeRefreshLayout);
 
 		if (getVideoCategory() != null)
