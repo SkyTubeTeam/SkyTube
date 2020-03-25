@@ -16,12 +16,10 @@
  */
  package free.rm.skytube.businessobjects.YouTube;
 
-import java.io.IOException;
-
-import org.schabi.newpipe.extractor.exceptions.ExtractionException;
 import org.schabi.newpipe.extractor.stream.StreamInfoItem;
 
 import free.rm.skytube.app.Utils;
+import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeException;
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
 import free.rm.skytube.businessobjects.YouTube.newpipe.VideoPager;
 
@@ -51,7 +49,7 @@ public class NewPipeChannelVideos extends NewPipeVideos<StreamInfoItem> implemen
     }
 
     @Override
-    protected VideoPager createNewPager() throws ExtractionException, IOException {
+    protected VideoPager createNewPager() throws NewPipeException {
         Utils.requireNonNull(channelId, "channelId missing");
         return NewPipeService.get().getChannelPager(channelId);
     }

@@ -34,6 +34,7 @@ import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
+import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeException;
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 import free.rm.skytube.businessobjects.utils.Predicate;
@@ -166,9 +167,8 @@ public class GetBulkSubscriptionVideosTask extends AsyncTaskParallel<Void, GetBu
             // assume, they are older, and already seen
             predicate.removeIf(videos);
             return videos;
-        } catch (ExtractionException | IOException e) {
+        } catch (NewPipeException e) {
             Logger.e(this, "Error during fetching channel page for " + channelId + ",msg:" + e.getMessage(), e);
-            e.printStackTrace();
             return Collections.EMPTY_LIST;
         }
     }

@@ -19,7 +19,6 @@ package free.rm.skytube.businessobjects.YouTube.newpipe;
 import org.schabi.newpipe.extractor.ListExtractor;
 import org.schabi.newpipe.extractor.StreamingService;
 import org.schabi.newpipe.extractor.comments.CommentsInfoItem;
-import org.schabi.newpipe.extractor.exceptions.ParsingException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +32,7 @@ public class CommentPager extends Pager<CommentsInfoItem, YouTubeCommentThread> 
     }
 
     @Override
-    protected List<YouTubeCommentThread> extract(ListExtractor.InfoItemsPage<CommentsInfoItem> page) throws ParsingException {
+    protected List<YouTubeCommentThread> extract(ListExtractor.InfoItemsPage<CommentsInfoItem> page) {
         List<YouTubeCommentThread> result = new ArrayList<>(page.getItems().size());
         for (CommentsInfoItem infoItem : page.getItems()) {
             YouTubeCommentThread thread = new YouTubeCommentThread(new YouTubeComment(
