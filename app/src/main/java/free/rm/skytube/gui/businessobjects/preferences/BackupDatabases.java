@@ -26,6 +26,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
+import free.rm.skytube.R;
+import free.rm.skytube.app.SkyTubeApp;
+import free.rm.skytube.businessobjects.db.BackupDataDb;
+import free.rm.skytube.businessobjects.db.BackupDataTable;
 import free.rm.skytube.businessobjects.db.BookmarksDb;
 import free.rm.skytube.businessobjects.db.ChannelFilteringDb;
 import free.rm.skytube.businessobjects.db.PlaybackStatusDb;
@@ -52,6 +56,7 @@ public class BackupDatabases {
 		PlaybackStatusDb    playbackDb = PlaybackStatusDb.getPlaybackStatusDb();
 		ChannelFilteringDb  channelFilteringDb = ChannelFilteringDb.getChannelFilteringDb();
 		SearchHistoryDb     searchHistoryDb = SearchHistoryDb.getSearchHistoryDb();
+		BackupDataDb        backupDataDb = BackupDataDb.getBackupDataDbDb();
 		final File          backupPath = new File(EXPORT_DIR, generateFileName());
 
 		// close the databases
@@ -60,6 +65,7 @@ public class BackupDatabases {
 		playbackDb.close();
 		channelFilteringDb.close();
 		searchHistoryDb.close();
+		backupDataDb.close();
 
 		// backup the databases inside a zip file
 		ZipFile databasesZip = new ZipFile(backupPath);
@@ -67,7 +73,8 @@ public class BackupDatabases {
 				bookmarksDb.getDatabasePath(),
 				playbackDb.getDatabasePath(),
 				channelFilteringDb.getDatabasePath(),
-				searchHistoryDb.getDatabasePath());
+				searchHistoryDb.getDatabasePath(),
+                backupDataDb.getDatabasePath());
 
 		return backupPath.getPath();
 	}
@@ -80,12 +87,34 @@ public class BackupDatabases {
 	 * @throws IOException
 	 */
 	public void importBackupDb(String backupFilePath) throws IOException {
+
 		SubscriptionsDb     subscriptionsDb = SubscriptionsDb.getSubscriptionsDb();
 		BookmarksDb         bookmarksDb = BookmarksDb.getBookmarksDb();
 		PlaybackStatusDb    playbackDb = PlaybackStatusDb.getPlaybackStatusDb();
 		ChannelFilteringDb  channelFilteringDb = ChannelFilteringDb.getChannelFilteringDb();
 		SearchHistoryDb     searchHistoryDb = SearchHistoryDb.getSearchHistoryDb();
-		File                databasesDirectory = subscriptionsDb.getDatabaseDirectory();
+		BackupDataDb        backupDataDb = BackupDataDb.getBackupDataDbDb();
+
+        SkyTubeApp.getPreferenceManager().edit().putString(SkyTubeApp.getStr(R.string.pref_youtube_api_key),backupDataDb.getBackupData().get(BackupDataTable.COL_YOUTUBE_API_KEY).getAsString()).apply();
+        SkyTubeApp.getPreferenceManager().edit().putString(SkyTubeApp.getStr(R.string.pref_key_hide_tabs),backupDataDb.getBackupData().get(BackupDataTable.COL_HIDE_TABS).getAsString()).apply();
+        SkyTubeApp.getPreferenceManager().edit().putString(SkyTubeApp.getStr(R.string.pref_key_default_tab),backupDataDb.getBackupData().get(BackupDataTable.COL_DEFAULT_TAB_NAME).getAsString()).apply();
+        SkyTubeApp.getPreferenceManager().edit().putBoolean(SkyTubeApp.getStr(R.string.pref_key_subscriptions_alphabetical_order),backupDataDb.getBackupData().get(BackupDataTable.COL_SORT_CHANNELS).getAsBoolean()).apply();
+        SkyTubeApp.getPreferenceManager().edit().putBoolean(SkyTubeApp.getStr(R.string.pref_use_newpipe_backend),backupDataDb.getBackupData().get(BackupDataTable.COL_USE_NEWPIPE_BACKEND).getAsBoolean()).apply();
+
+		//File                databasesDirectory = subscriptionsDb.getDatabaseDirectory();
+        File[] dbFiles = new File[]{
+                subscriptionsDb.getDatabaseDirectory(),
+                bookmarksDb.getDatabaseDirectory(),
+                playbackDb.getDatabaseDirectory(),
+                channelFilteringDb.getDatabaseDirectory(),
+                searchHistoryDb.getDatabaseDirectory(),
+                backupDataDb.getDatabaseDirectory()};
+
+        // extract the databases from the backup zip file
+        ZipFile databasesZip = new ZipFile(new File(backupFilePath));
+        for (File f: dbFiles) {
+            databasesZip.unzip(f);
+        }
 
 		// close the databases
 		subscriptionsDb.close();
@@ -93,10 +122,9 @@ public class BackupDatabases {
 		playbackDb.close();
 		channelFilteringDb.close();
 		searchHistoryDb.close();
+		backupDataDb.close();
 
-		// extract the databases from the backup zip file
-		ZipFile databasesZip = new ZipFile(new File(backupFilePath));
-		databasesZip.unzip(databasesDirectory);
+
 	}
 
 
