@@ -2,7 +2,6 @@ package free.rm.skytube.businessobjects.YouTube.newpipe;
 
 import org.schabi.newpipe.extractor.ListExtractor;
 import org.schabi.newpipe.extractor.StreamingService;
-import org.schabi.newpipe.extractor.exceptions.ParsingException;
 import org.schabi.newpipe.extractor.localization.DateWrapper;
 import org.schabi.newpipe.extractor.playlist.PlaylistExtractor;
 import org.schabi.newpipe.extractor.stream.StreamInfoItem;
@@ -19,7 +18,7 @@ class PlaylistPager extends Pager<StreamInfoItem, YouTubePlaylist>  {
     }
 
     @Override
-    protected List<YouTubePlaylist> extract(ListExtractor.InfoItemsPage<StreamInfoItem> page) throws ParsingException {
+    protected List<YouTubePlaylist> extract(ListExtractor.InfoItemsPage<StreamInfoItem> page) {
         List<YouTubePlaylist> result = new ArrayList<>(page.getItems().size());
         Logger.i(this, "extract from %s, items: %s", page, page.getItems().size());
         for (StreamInfoItem item: page.getItems()) {

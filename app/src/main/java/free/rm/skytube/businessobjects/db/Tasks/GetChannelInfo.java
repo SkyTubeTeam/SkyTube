@@ -30,6 +30,7 @@ import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannelInterface;
+import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeException;
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 
@@ -80,7 +81,7 @@ public class GetChannelInfo extends AsyncTaskParallel<String, Void, YouTubeChann
             try {
                 channel = NewPipeService.get().getChannelDetails(channelId);
                 db.cacheChannel(channel);
-            } catch (ExtractionException | IOException e) {
+            } catch (NewPipeException | RuntimeException e) {
                 exception = e;
             }
         }

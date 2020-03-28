@@ -22,6 +22,8 @@ import org.schabi.newpipe.extractor.StreamingService;
 import org.schabi.newpipe.extractor.channel.ChannelInfoItem;
 import org.schabi.newpipe.extractor.exceptions.ExtractionException;
 import org.schabi.newpipe.extractor.exceptions.ParsingException;
+import org.schabi.newpipe.extractor.linkhandler.LinkHandler;
+import org.schabi.newpipe.extractor.linkhandler.LinkHandlerFactory;
 import org.schabi.newpipe.extractor.playlist.PlaylistInfoItem;
 import org.schabi.newpipe.extractor.stream.StreamInfoItem;
 
@@ -51,7 +53,7 @@ public class VideoPager extends Pager<InfoItem, CardData> {
     }
 
     @Override
-    protected List<CardData> extract(ListExtractor.InfoItemsPage<InfoItem> page) throws ParsingException {
+    protected List<CardData> extract(ListExtractor.InfoItemsPage<InfoItem> page) throws NewPipeException {
         List<CardData> result = new ArrayList<>(page.getItems().size());
         Logger.i(this, "extract from %s, items: %s", page, page.getItems().size());
         int repeatCounter = 0;
@@ -59,7 +61,7 @@ public class VideoPager extends Pager<InfoItem, CardData> {
 
         for (InfoItem infoItem : page.getItems()) {
             if (infoItem instanceof StreamInfoItem) {
-                String id = streamLinkHandler.getId(infoItem.getUrl());
+                String id = getId(streamLinkHandler, infoItem.getUrl());
                 StreamInfoItem streamInfo = (StreamInfoItem) infoItem;
                 if (seenVideos.contains(id)) {
                     repeatCounter++;
@@ -69,7 +71,7 @@ public class VideoPager extends Pager<InfoItem, CardData> {
                 }
             } else if (infoItem instanceof PlaylistInfoItem) {
                 PlaylistInfoItem playlistInfoItem = (PlaylistInfoItem) infoItem;
-                result.add(convert(playlistInfoItem, playlistLinkHandler.getId(infoItem.getUrl())));
+                result.add(convert(playlistInfoItem, getId(playlistLinkHandler, infoItem.getUrl())));
             } else if (infoItem instanceof ChannelInfoItem) {
                 ChannelInfoItem channelInfoItem = (ChannelInfoItem) infoItem;
                 result.add(convert(channelInfoItem));
@@ -82,7 +84,15 @@ public class VideoPager extends Pager<InfoItem, CardData> {
         return result;
     }
 
-    public List<YouTubeVideo> getNextPageAsVideos() throws IOException, ExtractionException {
+    private String getId(LinkHandlerFactory handler, String url) throws NewPipeException {
+        try {
+            return handler.getId(url);
+        } catch (ParsingException e) {
+            throw new NewPipeException("Unable to convert " + url + " with " + handler, e);
+        }
+    }
+
+    public List<YouTubeVideo> getNextPageAsVideos() throws NewPipeException {
         List<CardData> cards = getNextPage();
         List<YouTubeVideo> result = new ArrayList<>(cards.size());
         for (CardData cardData: cards) {

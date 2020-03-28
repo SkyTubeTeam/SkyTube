@@ -270,7 +270,9 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 		new Handler().postDelayed(() -> {
 			refreshInProgress = false;
 			// Remove the progress bar(s)
-			swipeRefreshLayout.setRefreshing(false);
+			if (swipeRefreshLayout != null) {
+				swipeRefreshLayout.setRefreshing(false);
+			}
 			Context context = getContext();
 
 			NotificationManager notificationManager = (NotificationManager)  context.getSystemService(Context.NOTIFICATION_SERVICE);
