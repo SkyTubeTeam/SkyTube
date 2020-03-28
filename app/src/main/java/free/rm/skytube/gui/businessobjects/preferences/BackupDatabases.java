@@ -18,7 +18,7 @@
 package free.rm.skytube.gui.businessobjects.preferences;
 
 import android.os.Environment;
-
+import com.google.gson.JsonObject;
 import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
@@ -38,6 +38,12 @@ import free.rm.skytube.businessobjects.db.ChannelFilteringDb;
 import free.rm.skytube.businessobjects.db.PlaybackStatusDb;
 import free.rm.skytube.businessobjects.db.SearchHistoryDb;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
+import free.rm.skytube.gui.fragments.MainFragment;
+
+import static free.rm.skytube.gui.fragments.MainFragment.BOOKMARKS_FRAGMENT;
+import static free.rm.skytube.gui.fragments.MainFragment.DOWNLOADED_VIDEOS_FRAGMENT;
+import static free.rm.skytube.gui.fragments.MainFragment.MOST_POPULAR_VIDEOS_FRAGMENT;
+import static free.rm.skytube.gui.fragments.MainFragment.SUBSCRIPTIONS_FEED_FRAGMENT;
 
 /**
  * A class that handles subscriptions and bookmarks databases backups.
@@ -60,8 +66,8 @@ public class BackupDatabases {
 		ChannelFilteringDb  channelFilteringDb = ChannelFilteringDb.getChannelFilteringDb();
 		SearchHistoryDb     searchHistoryDb = SearchHistoryDb.getSearchHistoryDb();
 		BackupDataDb        backupDataDb = BackupDataDb.getBackupDataDbDb();
-		final File          backupPath = new File(EXPORT_DIR, generateFileName());
 
+		final File          backupPath = new File(EXPORT_DIR, generateFileName());
 
 		// close the databases
 		subscriptionsDb.close();
@@ -70,18 +76,10 @@ public class BackupDatabases {
 		channelFilteringDb.close();
 		searchHistoryDb.close();
 		backupDataDb.close();
+
 		ZipFile databasesZip = new ZipFile(backupPath);
+
 		// backup the databases inside a zip file
-		/*ZipFile databasesZip = new ZipFile(backupPath);
-		String[] pathArray = new String[]{subscriptionsDb.getDatabasePath(),bookmarksDb.getDatabasePath(),playbackDb.getDatabasePath(),channelFilteringDb.getDatabasePath(),searchHistoryDb.getDatabasePath(),backupDataDb.getDatabasePath()};
-		for (String s: pathArray) {
-			File file = new File(s);
-			if (file.exists()){
-				databasesZip.zip(s);
-			} else {
-				System.out.println("no file");
-			}
-		}*/
 		databasesZip.zip(subscriptionsDb.getDatabasePath(),
 				bookmarksDb.getDatabasePath(),
 				playbackDb.getDatabasePath(),
@@ -122,13 +120,39 @@ public class BackupDatabases {
         ZipFile databasesZip = new ZipFile(new File(backupFilePath));
         databasesZip.unzip(databasesDirectory);
 
-		SkyTubeApp.getPreferenceManager().edit().putString(SkyTubeApp.getStr(R.string.pref_youtube_api_key),backupDataDb.getBackupData().get(BackupDataTable.COL_YOUTUBE_API_KEY).getAsString()).apply();
-		System.out.println("hiddenTabsDB " + Arrays.toString(backupDataDb.getBackupData().get(BackupDataTable.COL_HIDE_TABS).getAsString().split(",")));
-		Set<String> hiddenTabsSet = new HashSet<>(Arrays.asList(backupDataDb.getBackupData().get(BackupDataTable.COL_HIDE_TABS).getAsString().split(",")));
+		JsonObject backupObject = backupDataDb.getBackupData();
+
+		SkyTubeApp.getPreferenceManager().edit().putString(SkyTubeApp.getStr(R.string.pref_youtube_api_key),backupObject.get(BackupDataTable.COL_YOUTUBE_API_KEY).getAsString()).apply();
+		String tabString = backupObject.get(BackupDataTable.COL_HIDE_TABS).getAsString();
+		String[] hiddenTabs = tabString.substring(1,tabString.length()-1).split(",");
+		hiddenTabs[1] = hiddenTabs[1].substring(1);
+		hiddenTabs[2] = hiddenTabs[2].substring(1);
+		hiddenTabs[3] = hiddenTabs[3].substring(1);
+		hiddenTabs[4] = hiddenTabs[4].substring(1);
+		Set<String> hiddenTabsSet = new HashSet<>();
+
+		if(Arrays.asList(hiddenTabs).contains(MainFragment.FEATURED_VIDEOS_FRAGMENT)){
+			hiddenTabsSet.add(MainFragment.FEATURED_VIDEOS_FRAGMENT);
+		}
+		if(Arrays.asList(hiddenTabs).contains(MOST_POPULAR_VIDEOS_FRAGMENT)){
+			hiddenTabsSet.add(MainFragment.MOST_POPULAR_VIDEOS_FRAGMENT);
+		}
+
+		if(Arrays.asList(hiddenTabs).contains(SUBSCRIPTIONS_FEED_FRAGMENT)){
+			hiddenTabsSet.add(MainFragment.SUBSCRIPTIONS_FEED_FRAGMENT);
+		}
+
+		if(Arrays.asList(hiddenTabs).contains(BOOKMARKS_FRAGMENT)){
+			hiddenTabsSet.add(MainFragment.BOOKMARKS_FRAGMENT);
+		}
+
+		if(Arrays.asList(hiddenTabs).contains(DOWNLOADED_VIDEOS_FRAGMENT)){
+			hiddenTabsSet.add(MainFragment.DOWNLOADED_VIDEOS_FRAGMENT);
+		}
 		SkyTubeApp.getPreferenceManager().edit().putStringSet(SkyTubeApp.getStr(R.string.pref_key_hide_tabs), hiddenTabsSet).apply();
-		SkyTubeApp.getPreferenceManager().edit().putString(SkyTubeApp.getStr(R.string.pref_key_default_tab_name),backupDataDb.getBackupData().get(BackupDataTable.COL_DEFAULT_TAB_NAME).getAsString()).apply();
-		SkyTubeApp.getPreferenceManager().edit().putBoolean(SkyTubeApp.getStr(R.string.pref_key_subscriptions_alphabetical_order),backupDataDb.getBackupData().get(BackupDataTable.COL_SORT_CHANNELS).getAsBoolean()).apply();
-		SkyTubeApp.getPreferenceManager().edit().putBoolean(SkyTubeApp.getStr(R.string.pref_use_newpipe_backend),backupDataDb.getBackupData().get(BackupDataTable.COL_USE_NEWPIPE_BACKEND).getAsBoolean()).apply();
+		SkyTubeApp.getPreferenceManager().edit().putString(SkyTubeApp.getStr(R.string.pref_key_default_tab_name),backupObject.get(BackupDataTable.COL_DEFAULT_TAB_NAME).getAsString()).apply();
+		SkyTubeApp.getPreferenceManager().edit().putBoolean(SkyTubeApp.getStr(R.string.pref_key_subscriptions_alphabetical_order),backupObject.get(BackupDataTable.COL_SORT_CHANNELS).getAsBoolean()).apply();
+		SkyTubeApp.getPreferenceManager().edit().putBoolean(SkyTubeApp.getStr(R.string.pref_use_newpipe_backend),backupObject.get(BackupDataTable.COL_USE_NEWPIPE_BACKEND).getAsBoolean()).apply();
 	}
 
 
