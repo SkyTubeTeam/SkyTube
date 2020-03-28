@@ -23,7 +23,10 @@ import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.TimeZone;
 
 import free.rm.skytube.R;
@@ -59,6 +62,7 @@ public class BackupDatabases {
 		BackupDataDb        backupDataDb = BackupDataDb.getBackupDataDbDb();
 		final File          backupPath = new File(EXPORT_DIR, generateFileName());
 
+
 		// close the databases
 		subscriptionsDb.close();
 		bookmarksDb.close();
@@ -69,12 +73,21 @@ public class BackupDatabases {
 
 		// backup the databases inside a zip file
 		ZipFile databasesZip = new ZipFile(backupPath);
-		databasesZip.zip(subscriptionsDb.getDatabasePath(),
+		String[] pathArray = new String[]{subscriptionsDb.getDatabasePath(),bookmarksDb.getDatabasePath(),playbackDb.getDatabasePath(),channelFilteringDb.getDatabasePath(),searchHistoryDb.getDatabasePath(),backupDataDb.getDatabasePath()};
+		for (String s: pathArray) {
+			File file = new File(s);
+			if (file.exists()){
+				databasesZip.zip(s);
+			} else {
+				System.out.println("no file");
+			}
+		}
+		/*databasesZip.zip(subscriptionsDb.getDatabasePath(),
 				bookmarksDb.getDatabasePath(),
 				playbackDb.getDatabasePath(),
 				channelFilteringDb.getDatabasePath(),
 				searchHistoryDb.getDatabasePath(),
-                backupDataDb.getDatabasePath());
+                backupDataDb.getDatabasePath());*/
 
 		return backupPath.getPath();
 	}
@@ -95,13 +108,7 @@ public class BackupDatabases {
 		SearchHistoryDb     searchHistoryDb = SearchHistoryDb.getSearchHistoryDb();
 		BackupDataDb        backupDataDb = BackupDataDb.getBackupDataDbDb();
 
-        SkyTubeApp.getPreferenceManager().edit().putString(SkyTubeApp.getStr(R.string.pref_youtube_api_key),backupDataDb.getBackupData().get(BackupDataTable.COL_YOUTUBE_API_KEY).getAsString()).apply();
-        SkyTubeApp.getPreferenceManager().edit().putString(SkyTubeApp.getStr(R.string.pref_key_hide_tabs),backupDataDb.getBackupData().get(BackupDataTable.COL_HIDE_TABS).getAsString()).apply();
-        SkyTubeApp.getPreferenceManager().edit().putString(SkyTubeApp.getStr(R.string.pref_key_default_tab),backupDataDb.getBackupData().get(BackupDataTable.COL_DEFAULT_TAB_NAME).getAsString()).apply();
-        SkyTubeApp.getPreferenceManager().edit().putBoolean(SkyTubeApp.getStr(R.string.pref_key_subscriptions_alphabetical_order),backupDataDb.getBackupData().get(BackupDataTable.COL_SORT_CHANNELS).getAsBoolean()).apply();
-        SkyTubeApp.getPreferenceManager().edit().putBoolean(SkyTubeApp.getStr(R.string.pref_use_newpipe_backend),backupDataDb.getBackupData().get(BackupDataTable.COL_USE_NEWPIPE_BACKEND).getAsBoolean()).apply();
-
-		//File                databasesDirectory = subscriptionsDb.getDatabaseDirectory();
+        //File                databasesDirectory = subscriptionsDb.getDatabaseDirectory();
         File[] dbFiles = new File[]{
                 subscriptionsDb.getDatabaseDirectory(),
                 bookmarksDb.getDatabaseDirectory(),
@@ -123,6 +130,16 @@ public class BackupDatabases {
 		channelFilteringDb.close();
 		searchHistoryDb.close();
 		backupDataDb.close();
+
+		SkyTubeApp.getPreferenceManager().edit().putString(SkyTubeApp.getStr(R.string.pref_youtube_api_key),backupDataDb.getBackupData().get(BackupDataTable.COL_YOUTUBE_API_KEY).getAsString()).apply();
+		System.out.println("hiddenTabsDB " + Arrays.toString(backupDataDb.getBackupData().get(BackupDataTable.COL_HIDE_TABS).getAsString().split(",")));
+		Set<String> hiddenTabsSet = new HashSet<>(Arrays.asList(backupDataDb.getBackupData().get(BackupDataTable.COL_HIDE_TABS).getAsString().split(",")));
+		SkyTubeApp.getPreferenceManager().edit().putStringSet(SkyTubeApp.getStr(R.string.pref_key_hide_tabs), hiddenTabsSet).apply();
+		SkyTubeApp.getPreferenceManager().edit().putString(SkyTubeApp.getStr(R.string.pref_key_default_tab_name),backupDataDb.getBackupData().get(BackupDataTable.COL_DEFAULT_TAB_NAME).getAsString()).apply();
+		SkyTubeApp.getPreferenceManager().edit().putBoolean(SkyTubeApp.getStr(R.string.pref_key_subscriptions_alphabetical_order),backupDataDb.getBackupData().get(BackupDataTable.COL_SORT_CHANNELS).getAsBoolean()).apply();
+		SkyTubeApp.getPreferenceManager().edit().putBoolean(SkyTubeApp.getStr(R.string.pref_use_newpipe_backend),backupDataDb.getBackupData().get(BackupDataTable.COL_USE_NEWPIPE_BACKEND).getAsBoolean()).apply();
+
+
 
 
 	}
