@@ -162,15 +162,12 @@ public class OthersPreferenceFragment extends PreferenceFragment implements Shar
 		boolean subscriptions_alphabetical_order = SkyTubeApp.getPreferenceManager().getBoolean(SkyTubeApp.getStr(R.string.pref_key_subscriptions_alphabetical_order), false);
 		boolean use_newpipe_backend = SkyTubeApp.getPreferenceManager().getBoolean(SkyTubeApp.getStr(R.string.pref_use_newpipe_backend), false);
 		Set<String> hidden_tabs = SkyTubeApp.getPreferenceManager().getStringSet(getString(R.string.pref_key_hide_tabs), new HashSet<>());
-		String hiddenTabs="";
-		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-			hiddenTabs = String.join(",", hidden_tabs);
-		} else {
-			hiddenTabs = Arrays.toString(hidden_tabs.toArray());
-		}
+		String[] hidden_tabs_array = hidden_tabs.toArray(new String[hidden_tabs.size()]);
 		String youtube_api_key = SkyTubeApp.getPreferenceManager().getString(SkyTubeApp.getStr(R.string.pref_youtube_api_key), "");
 		String default_tab = SkyTubeApp.getPreferenceManager().getString(SkyTubeApp.getStr(R.string.pref_key_default_tab_name), "");
-		backupDataDb.insertBackupData(default_tab,hiddenTabs,youtube_api_key,String.valueOf(use_newpipe_backend),String.valueOf(subscriptions_alphabetical_order));
+		String hiddenTabsString = Arrays.toString(hidden_tabs_array);
+		System.out.println("hiddenTabs " + hiddenTabsString.substring(1,hiddenTabsString.length()-1));
+		backupDataDb.insertBackupData(default_tab,hiddenTabsString.substring(1,hiddenTabsString.length()-1),youtube_api_key,String.valueOf(use_newpipe_backend),String.valueOf(subscriptions_alphabetical_order));
 
 	}
 
