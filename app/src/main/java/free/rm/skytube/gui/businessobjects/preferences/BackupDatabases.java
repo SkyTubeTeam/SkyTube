@@ -70,9 +70,9 @@ public class BackupDatabases {
 		channelFilteringDb.close();
 		searchHistoryDb.close();
 		backupDataDb.close();
-
-		// backup the databases inside a zip file
 		ZipFile databasesZip = new ZipFile(backupPath);
+		// backup the databases inside a zip file
+		/*ZipFile databasesZip = new ZipFile(backupPath);
 		String[] pathArray = new String[]{subscriptionsDb.getDatabasePath(),bookmarksDb.getDatabasePath(),playbackDb.getDatabasePath(),channelFilteringDb.getDatabasePath(),searchHistoryDb.getDatabasePath(),backupDataDb.getDatabasePath()};
 		for (String s: pathArray) {
 			File file = new File(s);
@@ -81,13 +81,13 @@ public class BackupDatabases {
 			} else {
 				System.out.println("no file");
 			}
-		}
-		/*databasesZip.zip(subscriptionsDb.getDatabasePath(),
+		}*/
+		databasesZip.zip(subscriptionsDb.getDatabasePath(),
 				bookmarksDb.getDatabasePath(),
 				playbackDb.getDatabasePath(),
 				channelFilteringDb.getDatabasePath(),
 				searchHistoryDb.getDatabasePath(),
-                backupDataDb.getDatabasePath());*/
+                backupDataDb.getDatabasePath());
 
 		return backupPath.getPath();
 	}
@@ -108,20 +108,7 @@ public class BackupDatabases {
 		SearchHistoryDb     searchHistoryDb = SearchHistoryDb.getSearchHistoryDb();
 		BackupDataDb        backupDataDb = BackupDataDb.getBackupDataDbDb();
 
-        //File                databasesDirectory = subscriptionsDb.getDatabaseDirectory();
-        File[] dbFiles = new File[]{
-                subscriptionsDb.getDatabaseDirectory(),
-                bookmarksDb.getDatabaseDirectory(),
-                playbackDb.getDatabaseDirectory(),
-                channelFilteringDb.getDatabaseDirectory(),
-                searchHistoryDb.getDatabaseDirectory(),
-                backupDataDb.getDatabaseDirectory()};
-
-        // extract the databases from the backup zip file
-        ZipFile databasesZip = new ZipFile(new File(backupFilePath));
-        for (File f: dbFiles) {
-            databasesZip.unzip(f);
-        }
+        File                databasesDirectory = subscriptionsDb.getDatabaseDirectory();
 
 		// close the databases
 		subscriptionsDb.close();
@@ -131,6 +118,10 @@ public class BackupDatabases {
 		searchHistoryDb.close();
 		backupDataDb.close();
 
+        // extract the databases from the backup zip file
+        ZipFile databasesZip = new ZipFile(new File(backupFilePath));
+        databasesZip.unzip(databasesDirectory);
+
 		SkyTubeApp.getPreferenceManager().edit().putString(SkyTubeApp.getStr(R.string.pref_youtube_api_key),backupDataDb.getBackupData().get(BackupDataTable.COL_YOUTUBE_API_KEY).getAsString()).apply();
 		System.out.println("hiddenTabsDB " + Arrays.toString(backupDataDb.getBackupData().get(BackupDataTable.COL_HIDE_TABS).getAsString().split(",")));
 		Set<String> hiddenTabsSet = new HashSet<>(Arrays.asList(backupDataDb.getBackupData().get(BackupDataTable.COL_HIDE_TABS).getAsString().split(",")));
@@ -138,10 +129,6 @@ public class BackupDatabases {
 		SkyTubeApp.getPreferenceManager().edit().putString(SkyTubeApp.getStr(R.string.pref_key_default_tab_name),backupDataDb.getBackupData().get(BackupDataTable.COL_DEFAULT_TAB_NAME).getAsString()).apply();
 		SkyTubeApp.getPreferenceManager().edit().putBoolean(SkyTubeApp.getStr(R.string.pref_key_subscriptions_alphabetical_order),backupDataDb.getBackupData().get(BackupDataTable.COL_SORT_CHANNELS).getAsBoolean()).apply();
 		SkyTubeApp.getPreferenceManager().edit().putBoolean(SkyTubeApp.getStr(R.string.pref_use_newpipe_backend),backupDataDb.getBackupData().get(BackupDataTable.COL_USE_NEWPIPE_BACKEND).getAsBoolean()).apply();
-
-
-
-
 	}
 
 
