@@ -29,6 +29,8 @@ import android.preference.PreferenceFragment;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.google.gson.JsonObject;
+
 import org.apache.commons.codec.binary.StringUtils;
 import org.jsoup.internal.StringUtil;
 
@@ -49,6 +51,13 @@ import free.rm.skytube.businessobjects.YouTube.ValidateYouTubeAPIKey;
 import free.rm.skytube.businessobjects.db.BackupDataDb;
 import free.rm.skytube.businessobjects.db.BackupDataTable;
 import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
+import free.rm.skytube.gui.fragments.MainFragment;
+
+import static free.rm.skytube.gui.fragments.MainFragment.BOOKMARKS_FRAGMENT;
+import static free.rm.skytube.gui.fragments.MainFragment.DOWNLOADED_VIDEOS_FRAGMENT;
+import static free.rm.skytube.gui.fragments.MainFragment.FEATURED_VIDEOS_FRAGMENT;
+import static free.rm.skytube.gui.fragments.MainFragment.MOST_POPULAR_VIDEOS_FRAGMENT;
+import static free.rm.skytube.gui.fragments.MainFragment.SUBSCRIPTIONS_FEED_FRAGMENT;
 
 /**
  * Preference fragment for other settings.
@@ -93,25 +102,6 @@ public class OthersPreferenceFragment extends PreferenceFragment implements Shar
 		hiddenTabsPref.setEntryValues(tabListValues);
 
 		backupDataDb = BackupDataDb.getBackupDataDbDb();
-
-		Map<String, ?> allEntries = SkyTubeApp.getPreferenceManager().getAll();
-
-		for (Map.Entry<String, ?> entry : allEntries.entrySet()) {
-			Log.d("map values", entry.getKey() + ": " + entry.getValue().toString());
-		}
-
-		if (backupDataDb.getBackupData().size() >0){
-			SkyTubeApp.getPreferenceManager().edit().putString(SkyTubeApp.getStr(R.string.pref_youtube_api_key),backupDataDb.getBackupData().get(BackupDataTable.COL_YOUTUBE_API_KEY).getAsString()).apply();
-			System.out.println("hiddenTabsFromDB " + Arrays.toString(backupDataDb.getBackupData().get(BackupDataTable.COL_HIDE_TABS).getAsString().split(",")));
-			Set<String> hiddenTabsSet = new HashSet<>(Arrays.asList(backupDataDb.getBackupData().get(BackupDataTable.COL_HIDE_TABS).getAsString().split(",")));
-			SkyTubeApp.getPreferenceManager().edit().putStringSet(SkyTubeApp.getStr(R.string.pref_key_hide_tabs), hiddenTabsSet).apply();
-			SkyTubeApp.getPreferenceManager().edit().putString(SkyTubeApp.getStr(R.string.pref_key_default_tab_name),backupDataDb.getBackupData().get(BackupDataTable.COL_DEFAULT_TAB_NAME).getAsString()).apply();
-			SkyTubeApp.getPreferenceManager().edit().putBoolean(SkyTubeApp.getStr(R.string.pref_key_subscriptions_alphabetical_order),backupDataDb.getBackupData().get(BackupDataTable.COL_SORT_CHANNELS).getAsBoolean()).apply();
-			SkyTubeApp.getPreferenceManager().edit().putBoolean(SkyTubeApp.getStr(R.string.pref_use_newpipe_backend),backupDataDb.getBackupData().get(BackupDataTable.COL_USE_NEWPIPE_BACKEND).getAsBoolean()).apply();
-
-		}
-
-
 
 //		ListPreference feedNotificationPref = (ListPreference) findPreference(getString(R.string.pref_feed_notification_key));
 //		if(feedNotificationPref.getValue() == null) {
@@ -174,19 +164,30 @@ public class OthersPreferenceFragment extends PreferenceFragment implements Shar
 
 		boolean subscriptions_alphabetical_order = SkyTubeApp.getPreferenceManager().getBoolean(SkyTubeApp.getStr(R.string.pref_key_subscriptions_alphabetical_order), false);
 		boolean use_newpipe_backend = SkyTubeApp.getPreferenceManager().getBoolean(SkyTubeApp.getStr(R.string.pref_use_newpipe_backend), false);
-		Set<String> hidden_tabs = SkyTubeApp.getPreferenceManager().getStringSet(getString(R.string.pref_key_hide_tabs), new HashSet<>());
-		String[] hidden_tabs_array = hidden_tabs.toArray(new String[hidden_tabs.size()]);
 		String youtube_api_key = SkyTubeApp.getPreferenceManager().getString(SkyTubeApp.getStr(R.string.pref_youtube_api_key), "");
 		String default_tab = SkyTubeApp.getPreferenceManager().getString(SkyTubeApp.getStr(R.string.pref_key_default_tab_name), "");
-		String hiddenTabsString = hidden_tabs_array.length != 0 ? Arrays.toString(hidden_tabs_array) : "";
-		System.out.println("hiddenTabsString " + hiddenTabsString );
-		/*if (hiddenTabsString.length() >0){
-			System.out.println("hiddenTabs " + hiddenTabsString.substring(2,hiddenTabsString.length()-1));
-		}*/
+		Set<String> hiddenFragments = SkyTubeApp.getPreferenceManager().getStringSet(getString(R.string.pref_key_hide_tabs), new HashSet<>());
+		String[] hiddenFragmentsArray = new String[5];
 
+		if(hiddenFragments.contains(MainFragment.FEATURED_VIDEOS_FRAGMENT)){
+			hiddenFragmentsArray[0] = MainFragment.FEATURED_VIDEOS_FRAGMENT;
+		}
+		if(hiddenFragments.contains(MOST_POPULAR_VIDEOS_FRAGMENT)){
+			hiddenFragmentsArray[1] = MainFragment.MOST_POPULAR_VIDEOS_FRAGMENT;
+		}
 
-		backupDataDb.insertBackupData(default_tab,hiddenTabsString,youtube_api_key,String.valueOf(use_newpipe_backend),String.valueOf(subscriptions_alphabetical_order));
+		if(hiddenFragments.contains(SUBSCRIPTIONS_FEED_FRAGMENT)){
+			hiddenFragmentsArray[2] = MainFragment.SUBSCRIPTIONS_FEED_FRAGMENT;
+		}
 
+		if(hiddenFragments.contains(BOOKMARKS_FRAGMENT)){
+			hiddenFragmentsArray[3] = MainFragment.BOOKMARKS_FRAGMENT;
+		}
+
+		if(hiddenFragments.contains(DOWNLOADED_VIDEOS_FRAGMENT)){
+			hiddenFragmentsArray[4] = MainFragment.DOWNLOADED_VIDEOS_FRAGMENT;
+		}
+		backupDataDb.insertBackupData(default_tab,Arrays.toString(hiddenFragmentsArray),youtube_api_key,String.valueOf(use_newpipe_backend),String.valueOf(subscriptions_alphabetical_order));
 	}
 
 

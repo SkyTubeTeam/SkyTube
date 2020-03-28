@@ -46,9 +46,10 @@ public class BackupDataDb extends SQLiteOpenHelperEx {
 
 
     public long insertBackupData(String defaultTab, String hiddenTabs, String youtubeApiKey, String isNewPipePreferredBackend, String sortChannels) {
-        // Create a new map of values, where column names are the keys
         ContentValues values = new ContentValues();
+
         values.put(BackupDataTable.COL_BACKUP_ID, 1);
+
         if (defaultTab != null){
             values.put(BackupDataTable.COL_DEFAULT_TAB_NAME, defaultTab);
         }
@@ -58,13 +59,13 @@ public class BackupDataDb extends SQLiteOpenHelperEx {
         if (isNewPipePreferredBackend != null){
             values.put(BackupDataTable.COL_USE_NEWPIPE_BACKEND, isNewPipePreferredBackend);
         }
-        if (hiddenTabs != null){
+        if (hiddenTabs != null && !hiddenTabs.equals("[]")){
             values.put(BackupDataTable.COL_HIDE_TABS, hiddenTabs);
         }
         if (sortChannels != null){
             values.put(BackupDataTable.COL_SORT_CHANNELS, sortChannels);
         }
-        System.out.println("values " + values.toString());
+
         long isInsertSuccessfull = getWritableDatabase().insert(BackupDataTable.TABLE_NAME, null, values);
         getWritableDatabase().close();
         return isInsertSuccessfull;
@@ -82,27 +83,17 @@ public class BackupDataDb extends SQLiteOpenHelperEx {
                 null               // The sort order
         );
 
-        String[] backupArray = new String[1];
         while(cursor.moveToNext()) {
-
-            long backupId = cursor.getLong(cursor.getColumnIndexOrThrow(BackupDataTable.COL_BACKUP_ID));
-            String youtubeApiKey = cursor.getString(cursor.getColumnIndexOrThrow(BackupDataTable.COL_YOUTUBE_API_KEY));
-            String defaultTab = cursor.getString(cursor.getColumnIndexOrThrow(BackupDataTable.COL_DEFAULT_TAB_NAME));
-            String sortChannels = cursor.getString(cursor.getColumnIndexOrThrow(BackupDataTable.COL_SORT_CHANNELS));
-            String hiddenTabs = cursor.getString(cursor.getColumnIndexOrThrow(BackupDataTable.COL_HIDE_TABS));
-            String preferredBackend = cursor.getString(cursor.getColumnIndexOrThrow(BackupDataTable.COL_USE_NEWPIPE_BACKEND));
-            backupArray = new String[] {String.valueOf(backupId),defaultTab,hiddenTabs,youtubeApiKey,preferredBackend,sortChannels};
-            backupObject.addProperty(BackupDataTable.COL_BACKUP_ID,backupId);
-            backupObject.addProperty(BackupDataTable.COL_YOUTUBE_API_KEY,youtubeApiKey);
-            backupObject.addProperty(BackupDataTable.COL_DEFAULT_TAB_NAME,defaultTab);
-            backupObject.addProperty(BackupDataTable.COL_SORT_CHANNELS,sortChannels);
-            backupObject.addProperty(BackupDataTable.COL_HIDE_TABS,hiddenTabs);
-            backupObject.addProperty(BackupDataTable.COL_USE_NEWPIPE_BACKEND,preferredBackend);
-
+            backupObject.addProperty(BackupDataTable.COL_BACKUP_ID,cursor.getLong(cursor.getColumnIndexOrThrow(BackupDataTable.COL_BACKUP_ID)));
+            backupObject.addProperty(BackupDataTable.COL_YOUTUBE_API_KEY,cursor.getString(cursor.getColumnIndexOrThrow(BackupDataTable.COL_YOUTUBE_API_KEY)));
+            backupObject.addProperty(BackupDataTable.COL_DEFAULT_TAB_NAME,cursor.getString(cursor.getColumnIndexOrThrow(BackupDataTable.COL_DEFAULT_TAB_NAME)));
+            backupObject.addProperty(BackupDataTable.COL_SORT_CHANNELS,cursor.getString(cursor.getColumnIndexOrThrow(BackupDataTable.COL_SORT_CHANNELS)));
+            backupObject.addProperty(BackupDataTable.COL_HIDE_TABS,cursor.getString(cursor.getColumnIndexOrThrow(BackupDataTable.COL_HIDE_TABS)));
+            backupObject.addProperty(BackupDataTable.COL_USE_NEWPIPE_BACKEND,cursor.getString(cursor.getColumnIndexOrThrow(BackupDataTable.COL_USE_NEWPIPE_BACKEND)));
         }
         cursor.close();
         getWritableDatabase().close();
-        System.out.println("Backup data " + Arrays.toString(backupArray));
+
         return backupObject;
         }
     }
