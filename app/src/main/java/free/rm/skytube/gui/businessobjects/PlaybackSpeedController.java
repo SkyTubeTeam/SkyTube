@@ -30,7 +30,7 @@ import free.rm.skytube.app.Utils;
 
 public class PlaybackSpeedController implements PopupMenu.OnMenuItemClickListener, PopupMenu.OnDismissListener, View.OnClickListener {
 
-    private final static float[] PLAYBACK_SPEEDS = {0.6f, 0.8f, 1f, 1.2f, 1.4f, 1.6f, 1.8f, 2f};
+    private final static float[] PLAYBACK_SPEEDS = {0.6f, 0.8f, 1f, 1.2f, 1.4f, 1.6f, 1.8f, 2f, 2.5f, 3f, 3.5f, 4f, 4.5f, 5f, 5.5f, 6f};
     private final static int GROUP_ID = 999;
 
     private final PopupMenu playbackSpeedPopupMenu;
