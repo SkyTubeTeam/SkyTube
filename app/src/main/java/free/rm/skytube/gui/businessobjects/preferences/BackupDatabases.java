@@ -125,10 +125,12 @@ public class BackupDatabases {
 		SkyTubeApp.getPreferenceManager().edit().putString(SkyTubeApp.getStr(R.string.pref_youtube_api_key),backupObject.get(BackupDataTable.COL_YOUTUBE_API_KEY).getAsString()).apply();
 		String tabString = backupObject.get(BackupDataTable.COL_HIDE_TABS).getAsString();
 		String[] hiddenTabs = tabString.substring(1,tabString.length()-1).split(",");
+		//here we need to remove empty space before tab names before otherwise it imports wrong and hidden tabs dont' work
 		hiddenTabs[1] = hiddenTabs[1].substring(1);
 		hiddenTabs[2] = hiddenTabs[2].substring(1);
 		hiddenTabs[3] = hiddenTabs[3].substring(1);
 		hiddenTabs[4] = hiddenTabs[4].substring(1);
+		
 		Set<String> hiddenTabsSet = new HashSet<>();
 
 		if(Arrays.asList(hiddenTabs).contains(MainFragment.FEATURED_VIDEOS_FRAGMENT)){
