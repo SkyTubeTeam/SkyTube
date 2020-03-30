@@ -106,7 +106,7 @@ public class GetYouTubeVideosTask extends AsyncTaskParallel<Void, Void, List<Car
 						channel.addYouTubeVideo((YouTubeVideo) video);
 					}
 				}
-				SubscriptionsDb.getSubscriptionsDb().saveChannelVideos(channel);
+				SubscriptionsDb.getSubscriptionsDb().saveChannelVideos(channel.getYouTubeVideos(), channel.getId());
 			}
 		}
 

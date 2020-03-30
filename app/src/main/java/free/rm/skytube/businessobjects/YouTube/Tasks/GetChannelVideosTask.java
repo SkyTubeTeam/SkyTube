@@ -95,7 +95,7 @@ public class GetChannelVideosTask extends AsyncTaskParallel<Void, Void, List<Car
 						realVideos.add((YouTubeVideo) cd);
 					}
 				}
-				db.saveVideos(realVideos);
+				db.saveVideos(realVideos, channelId);
 			}
 		}
 		return videos;

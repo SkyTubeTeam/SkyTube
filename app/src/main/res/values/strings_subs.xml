@@ -6,7 +6,12 @@
 	<string name="total_subscribers">%,d subscribers</string>
 
 	<string name="subscribed">Subscribed</string>
+	<string name="channel_subscribed">Channel subscribed</string>
+	<string name="channel_already_subscribed">Channel subscribed</string>
+	<string name="channel_subscribe_failed">Unable to subscribe to channel</string>
+
 	<string name="unsubscribed">Unsubscribed</string>
+	<string name="channel_unsubscribed">Channel subscribed</string>
 
 	<string name="error_get_subbed_channels">An error has occurred while fetching subscribed channels.</string>
 	<string name="error_check_if_user_has_subbed">Unable to check whether user has subscribed to the channel (id=%s)</string>

@@ -24,6 +24,7 @@ import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
+import free.rm.skytube.businessobjects.db.DatabaseResult;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
 import free.rm.skytube.gui.businessobjects.views.SubscribeButton;
@@ -32,7 +33,7 @@ import free.rm.skytube.gui.fragments.SubscriptionsFeedFragment;
 /**
  * A task that subscribes / unsubscribes to a YouTube channel.
  */
-public class SubscribeToChannelTask extends AsyncTaskParallel<Void, Void, Boolean> {
+public class SubscribeToChannelTask extends AsyncTaskParallel<Void, Void, DatabaseResult> {
 
 	/** Set to true if the user wants to subscribe to a youtube channel;  false if the user wants to
 	 *  unsubscribe. */
@@ -72,7 +73,7 @@ public class SubscribeToChannelTask extends AsyncTaskParallel<Void, Void, Boolea
 
 
 	@Override
-	protected Boolean doInBackground(Void... params) {
+	protected DatabaseResult doInBackground(Void... params) {
 		if (subscribeToChannel) {
 			return SubscriptionsDb.getSubscriptionsDb().subscribe(channel);
 		} else {
@@ -82,8 +83,8 @@ public class SubscribeToChannelTask extends AsyncTaskParallel<Void, Void, Boolea
 
 
 	@Override
-	protected void onPostExecute(Boolean success) {
-		if (success) {
+	protected void onPostExecute(DatabaseResult databaseResult) {
+		if (databaseResult == DatabaseResult.SUCCESS) {
 			SubsAdapter adapter = SubsAdapter.get(context);
 
 			// we need to refresh the Feed tab so it shows videos from the newly subscribed (or
@@ -116,6 +117,10 @@ public class SubscribeToChannelTask extends AsyncTaskParallel<Void, Void, Boolea
 				if (displayToastMessage) {
 					Toast.makeText(context, R.string.unsubscribed, Toast.LENGTH_LONG).show();
 				}
+			}
+		} else if (databaseResult == DatabaseResult.NOT_MODIFIED) {
+			if (subscribeToChannel) {
+				Toast.makeText(context, R.string.channel_already_subscribed, Toast.LENGTH_LONG).show();
 			}
 		} else {
 			String err = String.format(SkyTubeApp.getStr(R.string.error_unable_to_subscribe), channel.getId());
