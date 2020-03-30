@@ -25,6 +25,7 @@ import android.os.Environment;
 import android.view.Menu;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.core.content.FileProvider;
 
 import com.google.api.client.util.DateTime;
@@ -53,6 +54,7 @@ import free.rm.skytube.businessobjects.YouTube.Tasks.GetVideoStreamTask;
 import free.rm.skytube.businessobjects.YouTube.VideoStream.StreamMetaData;
 import free.rm.skytube.businessobjects.YouTube.newpipe.VideoId;
 import free.rm.skytube.businessobjects.db.BookmarksDb;
+import free.rm.skytube.businessobjects.db.DatabaseResult;
 import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
 import free.rm.skytube.businessobjects.interfaces.GetDesiredStreamListener;
 
@@ -407,25 +409,43 @@ public class YouTubeVideo extends CardData implements Serializable {
 	}
 
 	public boolean bookmarkVideo(Context context, Menu menu) {
-		boolean successBookmark = BookmarksDb.getBookmarksDb().add(this);
+		DatabaseResult result = BookmarksDb.getBookmarksDb().add(this);
 		Toast.makeText(context,
-				successBookmark ? R.string.video_bookmarked : R.string.video_bookmarked_error,
+				getBookmarkMessage(result),
 				Toast.LENGTH_LONG).show();
 
-		if (successBookmark && menu != null) {
+		if (result.isPositive() && menu != null) {
 			menu.findItem(R.id.bookmark_video).setVisible(false);
 			menu.findItem(R.id.unbookmark_video).setVisible(true);
 		}
-		return successBookmark;
+		return result.isPositive();
+	}
+
+	static int getBookmarkMessage(@NonNull DatabaseResult result) {
+		switch (result) {
+			case ERROR: return R.string.video_bookmarked_error;
+			case NOT_MODIFIED: return R.string.video_already_bookmarked;
+			case SUCCESS: return R.string.video_bookmarked;
+		}
+		throw new IllegalStateException("Result "+ result);
+	}
+
+	static int getUnBookmarkMessage(@NonNull DatabaseResult result) {
+		switch (result) {
+			case ERROR: return R.string.video_unbookmarked_error;
+			case NOT_MODIFIED: return R.string.video_was_not_bookmarked;
+			case SUCCESS: return R.string.video_unbookmarked;
+		}
+		throw new IllegalStateException("Result "+ result);
 	}
 
 	public void unbookmarkVideo(Context context, Menu menu) {
-		boolean successUnbookmark = BookmarksDb.getBookmarksDb().remove(getVideoId());
+		DatabaseResult result = BookmarksDb.getBookmarksDb().remove(getVideoId());
 		Toast.makeText(context,
-				successUnbookmark ? R.string.video_unbookmarked : R.string.video_unbookmarked_error,
+				getUnBookmarkMessage(result),
 				Toast.LENGTH_LONG).show();
 
-		if (successUnbookmark) {
+		if (result.isPositive()) {
 			menu.findItem(R.id.bookmark_video).setVisible(true);
 			menu.findItem(R.id.unbookmark_video).setVisible(false);
 		}
