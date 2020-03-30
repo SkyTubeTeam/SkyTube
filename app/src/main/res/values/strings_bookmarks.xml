@@ -4,10 +4,12 @@
 
 	<string name="bookmark">Bookmark</string>
 	<string name="video_bookmarked">Video bookmarked</string>
+	<string name="video_already_bookmarked">Video already bookmarked</string>
 	<string name="video_bookmarked_error">Could not bookmark the video.</string>
 
 	<string name="unbookmark">Unbookmark</string>
 	<string name="video_unbookmarked">Video unbookmarked</string>
+	<string name="video_was_not_bookmarked">Video was not bookmarked</string>
 	<string name="video_unbookmarked_error">Could not unbookmark the video.</string>
 
 	<string name="no_bookmarked_videos_text">You haven\'t bookmarked any videos yet.\n\nOnce you do, they will show up here.</string>

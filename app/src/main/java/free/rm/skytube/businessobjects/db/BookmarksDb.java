@@ -20,6 +20,7 @@ package free.rm.skytube.businessobjects.db;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
 import androidx.annotation.NonNull;
@@ -94,7 +95,7 @@ public class BookmarksDb extends SQLiteOpenHelperEx implements OrderableDatabase
 	 *
 	 * @return True if the video was successfully saved/bookmarked to the DB.
 	 */
-	public boolean add(YouTubeVideo video) {
+	public DatabaseResult add(YouTubeVideo video) {
 		Gson gson = new Gson();
 		ContentValues values = new ContentValues();
 		values.put(BookmarksTable.COL_YOUTUBE_VIDEO_ID, video.getId());
@@ -104,12 +105,23 @@ public class BookmarksDb extends SQLiteOpenHelperEx implements OrderableDatabase
 		order++;
 		values.put(BookmarksTable.COL_ORDER, order);
 
-		boolean addSuccessful = getWritableDatabase().insert(BookmarksTable.TABLE_NAME, null, values) != -1;
-		onBookmarkAdded(video);
-
-		return addSuccessful;
+		try {
+			long result = getWritableDatabase().insertWithOnConflict(BookmarksTable.TABLE_NAME, null, values, SQLiteDatabase.CONFLICT_IGNORE);
+			Logger.i(this, "Result for adding "+ video+ " IS "+ result);
+			if (result >= 1) {
+				onBookmarkAdded(video);
+				return DatabaseResult.SUCCESS;
+			}
+			if (isBookmarked(video.getId())) {
+				return DatabaseResult.NOT_MODIFIED;
+			} else {
+				return DatabaseResult.ERROR;
+			}
+		} catch (SQLException e) {
+			Logger.e(this, "Unexpected error in bookmark creation :"+ video+" - error:"+e.getMessage(), e);
+			return DatabaseResult.ERROR;
+		}
 	}
-
 
 	/**
 	 * Remove the specified video from the list of bookmarked videos.
@@ -118,40 +130,43 @@ public class BookmarksDb extends SQLiteOpenHelperEx implements OrderableDatabase
 	 *
 	 * @return True if the video has been unbookmarked; false otherwise.
 	 */
-	public boolean remove(VideoId video) {
-		int rowsDeleted = getWritableDatabase().delete(BookmarksTable.TABLE_NAME,
-						BookmarksTable.COL_YOUTUBE_VIDEO_ID + " = ?",
-						new String[]{video.getId()});
-		boolean successful = false;
+	public DatabaseResult remove(VideoId video) {
+		try {
+			int rowsDeleted = getWritableDatabase().delete(BookmarksTable.TABLE_NAME,
+					BookmarksTable.COL_YOUTUBE_VIDEO_ID + " = ?",
+					new String[]{video.getId()});
 
-		if(rowsDeleted >= 0) {
-			// Since we've removed a video, we will need to update the order column for all the videos.
-			int order = 1;
-			Cursor	cursor = getReadableDatabase().query(
-							BookmarksTable.TABLE_NAME,
-							new String[]{BookmarksTable.COL_YOUTUBE_VIDEO, BookmarksTable.COL_ORDER},
-							null,
-							null, null, null, BookmarksTable.COL_ORDER + " ASC");
-			if(cursor.moveToNext()) {
-				Gson gson = new Gson();
-				do {
-					byte[] blob = cursor.getBlob(cursor.getColumnIndex(BookmarksTable.COL_YOUTUBE_VIDEO));
-					YouTubeVideo uvideo = gson.fromJson(new String(blob), YouTubeVideo.class).updatePublishTimestampFromDate();
-					ContentValues contentValues = new ContentValues();
-					contentValues.put(BookmarksTable.COL_ORDER, order++);
+			if (rowsDeleted > 0) {
+				// Since we've removed a video, we will need to update the order column for all the videos.
+				int order = 1;
+				Cursor cursor = getReadableDatabase().query(
+						BookmarksTable.TABLE_NAME,
+						new String[]{BookmarksTable.COL_YOUTUBE_VIDEO, BookmarksTable.COL_ORDER},
+						null,
+						null, null, null, BookmarksTable.COL_ORDER + " ASC");
+				if (cursor.moveToNext()) {
+					Gson gson = new Gson();
+					do {
+						byte[] blob = cursor.getBlob(cursor.getColumnIndex(BookmarksTable.COL_YOUTUBE_VIDEO));
+						YouTubeVideo uvideo = gson.fromJson(new String(blob), YouTubeVideo.class).updatePublishTimestampFromDate();
+						ContentValues contentValues = new ContentValues();
+						contentValues.put(BookmarksTable.COL_ORDER, order++);
 
-					getWritableDatabase().update(BookmarksTable.TABLE_NAME, contentValues, BookmarksTable.COL_YOUTUBE_VIDEO_ID + " = ?",
-									new String[]{uvideo.getId()});
-				} while(cursor.moveToNext());
+						getWritableDatabase().update(BookmarksTable.TABLE_NAME, contentValues, BookmarksTable.COL_YOUTUBE_VIDEO_ID + " = ?",
+								new String[]{uvideo.getId()});
+					} while (cursor.moveToNext());
+				}
+
+				cursor.close();
+
+				onBookmarkDeleted(video);
+				return DatabaseResult.SUCCESS;
 			}
-
-			cursor.close();
-
-			onBookmarkDeleted(video);
-			successful = true;
+				return DatabaseResult.NOT_MODIFIED;
+		} catch (SQLException e) {
+			Logger.e(this, "Database error: " + e.getMessage(), e);
+			return DatabaseResult.ERROR;
 		}
-
-		return successful;
 	}
 
 
