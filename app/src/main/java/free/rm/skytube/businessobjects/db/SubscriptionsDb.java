@@ -20,6 +20,7 @@ package free.rm.skytube.businessobjects.db;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.google.api.client.util.DateTime;
@@ -36,6 +37,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -172,14 +174,13 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 	 *
 	 * @param channel Channel the user wants to subscribe to.
 	 *
-	 * @return True if the operation was successful; false otherwise.
+	 * @return DatabaseResult.SUCCESS if the operation was successful; NOT_MODIFIED or ERROR otherwise.
 	 */
-	public boolean subscribe(YouTubeChannel channel) {
-		saveChannelVideos(channel);
+	public DatabaseResult subscribe(YouTubeChannel channel) {
+		saveChannelVideos(channel.getYouTubeVideos(), channel.getId());
 
 		return saveSubscription(channel);
 	}
-
 
 	/**
 	 * Saves the given channel into the subscriptions DB.
@@ -188,7 +189,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 	 *
 	 * @return True if the operation was successful; false otherwise.
 	 */
-	private boolean saveSubscription(YouTubeChannel channel) {
+	private DatabaseResult saveSubscription(YouTubeChannel channel) {
 		ContentValues values = new ContentValues();
 		values.put(SubscriptionsTable.COL_CHANNEL_ID, channel.getId());
 		values.put(SubscriptionsTable.COL_LAST_VISIT_TIME, channel.getLastVisitTime());
@@ -198,7 +199,22 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 		values.put(SubscriptionsTable.COL_THUMBNAIL_NORMAL_URL, channel.getThumbnailUrl());
 		values.put(SubscriptionsTable.COL_SUBSCRIBER_COUNT, channel.getSubscriberCount());
 
-		return getWritableDatabase().insert(SubscriptionsTable.TABLE_NAME, null, values) != -1;
+		SQLiteDatabase db = getWritableDatabase();
+		try {
+			long result = db.insertWithOnConflict(SubscriptionsTable.TABLE_NAME, null, values, SQLiteDatabase.CONFLICT_IGNORE);
+			if (result > 0) {
+				return DatabaseResult.SUCCESS;
+			}
+			if (isUserSubscribedToChannel(channel.getId())) {
+				Logger.i(this, "Already subscribed to " + channel.getId());
+				return DatabaseResult.NOT_MODIFIED;
+			}
+			Logger.i(this, "Unable to subscribe to " + channel.getId());
+			return DatabaseResult.ERROR;
+		} catch (SQLException e) {
+			Logger.e(this, "Error during subscribing: " + e.getMessage(), e);
+			return DatabaseResult.ERROR;
+		}
 	}
 
 
@@ -209,7 +225,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 	 *
 	 * @return True if the operation was successful; false otherwise.
 	 */
-	public boolean unsubscribe(String channelId) {
+	public DatabaseResult unsubscribe(String channelId) {
 		// delete any feed videos pertaining to this channel
 		getWritableDatabase().delete(SubscriptionsVideosTable.TABLE_NAME,
 				SubscriptionsVideosTable.COL_CHANNEL_ID + " = ?",
@@ -223,7 +239,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 		// Need to make sure when we come back to MainActivity, that we refresh the Feed tab so it hides videos from the newly unsubscribed
 		SubscriptionsFeedFragment.setFlag(SubscriptionsFeedFragment.FLAG_REFRESH_FEED_FROM_CACHE);
 
-		return (rowsDeleted >= 0);
+		return (rowsDeleted >= 0) ? DatabaseResult.SUCCESS : DatabaseResult.NOT_MODIFIED;
 	}
 
 	/**
@@ -533,26 +549,28 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 
 	/**
 	 * Loop through each video saved in the passed {@link YouTubeChannel} and save it into the database, if it's not already been saved
-	 * @param channel
+	 * @param videos the list of videos
+	 * @param channelId the channel id
 	 */
-	public void saveChannelVideos(YouTubeChannel channel) {
-		for (YouTubeVideo video : channel.getYouTubeVideos()) {
+	public void saveChannelVideos(Collection<YouTubeVideo> videos, String channelId) {
+		for (YouTubeVideo video : videos) {
 			if(video.getPublishDate() != null && !hasVideo(video)) {
-                ContentValues values = createContentValues(video, channel.getId());
+                ContentValues values = createContentValues(video, channelId);
                 getWritableDatabase().insert(SubscriptionsVideosTable.TABLE_NAME, null, values);
 			}
 		}
 	}
 
 	/**
-	 * Insert or update the list of videos
-	 * @param videos
+	 * Loop through each video saved in the passed {@link YouTubeChannel} and insert it into the database, or update it.
+	 * @param videos the list of videos
+	 * @param channelId the channel id
 	 */
-	public void saveVideos(List<YouTubeVideo> videos) {
+	public void saveVideos(List<YouTubeVideo> videos, String channelId) {
 		SQLiteDatabase db = getWritableDatabase();
 		for (YouTubeVideo video : videos) {
 			if (video.getPublishDate() != null) {
-				ContentValues values = createContentValues(video, video.getChannelId());
+				ContentValues values = createContentValues(video, channelId);
 				if (hasVideo(video)) {
 					values.remove(SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID);
 					db.update(SubscriptionsVideosTable.TABLE_NAME,

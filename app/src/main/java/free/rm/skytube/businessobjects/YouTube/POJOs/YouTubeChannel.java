@@ -40,6 +40,7 @@ import free.rm.skytube.app.Utils;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.VideoBlocker;
 import free.rm.skytube.businessobjects.db.ChannelFilteringDb;
+import free.rm.skytube.businessobjects.db.DatabaseResult;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 import free.rm.skytube.businessobjects.db.Tasks.GetChannelInfo;
 import free.rm.skytube.businessobjects.db.Tasks.SubscribeToChannelTask;
@@ -299,35 +300,32 @@ public class YouTubeChannel extends CardData implements Serializable {
 		return success;
 	}
 
-	public void openChannel(final Context context) {
-		openChannel(context,getId());
-	}
-
 	public static void openChannel(final Context context, String channelId){
 		if (channelId != null) {
-			new GetChannelInfo(context, new YouTubeChannelInterface() {
-				@Override
-				public void onGetYouTubeChannel(YouTubeChannel youTubeChannel) {
-					YouTubePlayer.launchChannel(youTubeChannel, context);
-				}
-			}).executeInParallel(channelId);
+			new GetChannelInfo(context, youTubeChannel -> YouTubePlayer.launchChannel(youTubeChannel, context)).executeInParallel(channelId);
 		}
-	}
-
-	public void subscribeChannel(final Context context, final Menu menu) {
-		subscribeChannel(context, menu, getId());
 	}
 
 	public static void subscribeChannel(final Context context, final Menu menu, final String channelId) {
 		if (channelId != null) {
 			new GetChannelInfo(context, youTubeChannel -> {
-				if (SubscriptionsDb.getSubscriptionsDb().subscribe(youTubeChannel)) {
-					youTubeChannel.setUserSubscribed(true);
-					SubsAdapter.get(context).refreshSubsList();
-					SubscriptionsFeedFragment.refreshSubsFeedFromCache();
-					Toast.makeText(context, "Channel subscribed", Toast.LENGTH_LONG).show();
-				} else {
-					Toast.makeText(context, "Subscription failed", Toast.LENGTH_LONG).show();
+				DatabaseResult result = SubscriptionsDb.getSubscriptionsDb().subscribe(youTubeChannel);
+				switch(result) {
+					case SUCCESS: {
+						youTubeChannel.setUserSubscribed(true);
+						SubsAdapter.get(context).refreshSubsList();
+						SubscriptionsFeedFragment.refreshSubsFeedFromCache();
+						Toast.makeText(context, R.string.channel_subscribed, Toast.LENGTH_LONG).show();
+						break;
+					}
+					case NOT_MODIFIED: {
+						Toast.makeText(context, R.string.channel_already_subscribed, Toast.LENGTH_LONG).show();
+						break;
+					}
+					default: {
+						Toast.makeText(context, R.string.channel_subscribe_failed, Toast.LENGTH_LONG).show();
+						break;
+					}
 				}
 			}).executeInParallel(channelId);
 
