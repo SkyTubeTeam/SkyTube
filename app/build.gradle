@@ -92,8 +92,13 @@ dependencies {
 
     // YouTube modules
     implementation 'com.google.http-client:google-http-client-android:1.34.2'
-    implementation 'com.google.apis:google-api-services-youtube:v3-rev20200213-1.30.9'
-    implementation 'com.github.TeamNewPipe.NewPipeExtractor:extractor:65a7eda'
+
+    implementation ('com.google.apis:google-api-services-youtube:v3-rev20200312-1.30.9') {
+        exclude group: 'com.google.http-client', module:'google-http-client'
+        exclude group: 'com.google.http-client', module:'google-http-client-jackson2'
+    }
+
+    implementation 'com.github.TeamNewPipe.NewPipeExtractor:extractor:v0.19.0'
     //implementation 'com.github.gzsombor.NewPipeExtractor:extractor:41dd748cb3003cb2'
 
     // other modules
@@ -129,7 +134,7 @@ dependencies {
     // proprietary module
     extraImplementation files('libs/YouTubeAndroidPlayerApi.jar')
     extraImplementation 'com.android.support:mediarouter-v7:28.0.0'
-    extraImplementation 'com.google.android.gms:play-services-cast-framework:18.0.0'
+    extraImplementation 'com.google.android.gms:play-services-cast-framework:18.1.0'
     extraImplementation 'com.googlecode.android-query:android-query:0.25.9'
     extraImplementation 'com.sothree.slidinguppanel:library:3.4.0'
     extraImplementation 'com.github.rahatarmanahmed:circularprogressview:2.5.0'
