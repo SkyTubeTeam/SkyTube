@@ -30,7 +30,6 @@
 	<string name="pref_key_preferred_res_mobile" translatable="false">pref_preferred_resolution_mobile</string>
 	<string name="pref_summary_preferred_res_mobile">Select your preferred resolution when streaming via a mobile network (such as 4G):  %s</string>
 
-	<string name="pref_key_warn_mobile_downloads" translatable="false">pref_key_warn_mobile_downloads</string>
 	<string name="pref_key_mobile_network_usage_policy" translatable="false">pref_key_mobile_network_usage_policy</string>
 	<string name="pref_title_mobile_network_usage">Mobile Network Usage</string>
 	<string name="pref_summary_mobile_network_usage">What to do, if you are using mobile network (such as 4G) for downloading, watching videos: %s</string>
@@ -74,11 +73,11 @@
 	<string name="subs_import_select_backup">Select YouTube XML file to import</string>
 
 	<string name="pref_chromecast_category">Chromecast</string>
-	<string name="pref_key_chromecast_category">chromecast_category</string>
-	<string name="pref_key_chromecast_none">default_chromecast_key</string>
+	<string name="pref_key_chromecast_category" translatable="false">chromecast_category</string>
+	<string name="pref_key_chromecast_none" translatable="false">default_chromecast_key</string>
 	<string name="pref_title_chromecast_none">None</string>
 	<string name="pref_title_autocast">AutoCast</string>
-	<string name="pref_key_autocast">pref_external_launch</string>
+	<string name="pref_key_autocast" translatable="false">pref_external_launch</string>
 	<string name="pref_summary_autocast">Select a Chromecast device to always use when opening a video in SkyTube from another application.</string>
 
 	<string name="pref_network_downloads_category">Network and Downloads</string>

@@ -64,9 +64,6 @@
 	<string name="pref_youtube_api_key_custom">کلید معتبر است. برای استفاده از کلید API جدید، برنامه را از اول اجرا کنید.</string>
 	<string name="pref_youtube_api_key_default">برای استفاده از کلید API یوتیوب پیش‌فرض، برنامه را از اول راه‌اندازی کنید.</string>
 
-	<string name="pref_title_warn_mobile_downloads">نمایش هشدار شبکه همراه</string>
-	<string name="pref_summary_warn_mobile_downloads">نمایش دادن هشدار پیش از پخش جریان یا بارگیری ویدئوها در صورتی که از شبکه همراه (مانند 4G) استفاده می‌کنید.</string>
-
 	<string name="restart">راه‌اندازی دوباره</string>
 	<string name="pref_title_subscriptions_alphabetical_order">مرتب‌سازی کانال‌ها بر اساس الفبا</string>
 	<string name="pref_summary_subscriptions_alphabetical_order">اگر انتخاب شده باشد، کانال‌های مشترک شده به صورت الفبایی مرتب می‌شوند.</string>

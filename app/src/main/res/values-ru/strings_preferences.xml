@@ -123,8 +123,6 @@
     <string name="pref_summary_download_to_separate_directories">Видеоролики загружаются в отдельные папки с названием канала.</string>
     <string name="pref_title_disable_screen_gestures">Отключить жесты при управлении видео</string>
     <string name="pref_summary_disable_screen_gestures">Отключите жесты, чтобы управления громкостью, яркостью и перемоткой видеоролика.</string>
-    <string name="pref_title_warn_mobile_downloads">Отключить предупреждения мобильной сети</string>
-    <string name="pref_summary_warn_mobile_downloads">"Предупреждать, что используется мобильная сеть (например 4G), перед тем, как воспроизвести или  скачать видео."</string>
     <string name="pref_summary_enable_video_blocker">Включить блокировку видео.</string>
     <string name="pref_title_preferred_res_mobile">Предпочитаемое разрешение через мобильную сеть</string>
     <string name="pref_summary_preferred_res_mobile">Выберите разрешение при потоковой передаче через мобильную сеть (например, 4G): %s</string>
