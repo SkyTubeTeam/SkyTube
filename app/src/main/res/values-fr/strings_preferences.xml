@@ -155,8 +155,6 @@
     <string name="pref_category_mobile_network">Réseau mobile</string>
     <string name="pref_title_preferred_res_mobile">Résolution préférée pour réseau mobile</string>
     <string name="pref_summary_preferred_res_mobile">Sélectionnez la résolution que vous préférez pour la diffusion en continu via un réseau mobile (par exemple 4G) : %s</string>
-    <string name="pref_title_warn_mobile_downloads">Afficher l\'avertissement réseau mobile</string>
-    <string name="pref_summary_warn_mobile_downloads">Affiche un avertissement si vous utilisez un réseau mobile (par exemple 4G) avant de diffuser/télécharger des vidéos.</string>
     <string name="pref_title_disable_screen_gestures">Désactiver les gestes vidéo</string>
     <string name="pref_summary_disable_screen_gestures">Désactivez les gestes pour contrôler le volume, la luminosité et la recherche avant/arrière dans les vidéos.</string>
     <string name="pref_summary_download_to_separate_directories">Les vidéos sont téléchargées dans des dossiers en fonction du nom de la chaîne.</string>
