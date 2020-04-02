@@ -5,7 +5,7 @@
 <string name="next">"Weiter "</string>
 	<string name="done">Fertig</string>
 	<string name="skip">Überspringen</string>
-	<string name="page_counter">%d von %d</string>
+	<string name="page_counter">%1$d von %2$d</string>
 
 	<string name="tutorial_slide_2">Streichen Sie nach oben, um die Beschreibung des Videos zu sehen.</string>
 	<string name="tutorial_slide_3">Streichen Sie horizontal, um vorwärts oder rückwärts zu spulen.</string>

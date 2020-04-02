@@ -141,9 +141,6 @@
 	<string name="pref_title_disable_screen_gestures">Skru av videohåndvendinger.</string>
 	<string name="pref_summary_disable_screen_gestures">Skru håndvendinger for kontroll av lyd-, lys-styrke og blafringshåndvendinger forover/bakover for video.</string>
 
-	<string name="pref_title_warn_mobile_downloads">Vis mobilnettverksadvarsel</string>
-	<string name="pref_summary_warn_mobile_downloads">Vis en advarsel hvis det brukes et mobilnettverk (som 4G) før strømming/nedlasting av videoer.</string>
-
 	<string name="pref_summary_enable_video_blocker">Skru på videoblokkering.</string>
 
 	<string name="pref_category_mobile_network">Mobilnettverk</string>

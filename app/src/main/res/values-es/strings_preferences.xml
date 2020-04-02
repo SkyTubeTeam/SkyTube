@@ -152,9 +152,6 @@
 <string name="pref_title_disable_screen_gestures">Deshabilitar gestos de video</string>
 	<string name="pref_summary_disable_screen_gestures">Deshabilitar gestos para controlar volumen, brillo y búsqueda adelante/atrás en videos.</string>
 
-	<string name="pref_title_warn_mobile_downloads">Mostrar Advertencia de Red Móvil</string>
-	<string name="pref_summary_warn_mobile_downloads">Mostrar una advertencia si estás usando una red móvil (como 4G) antes de reproducir/descargar videos.</string>
-
 	<string name="pref_summary_enable_video_blocker">Habilitar bloqueador de videos.</string>
     <string name="pref_category_mobile_network">Red móvil</string>
     <string name="pref_title_preferred_res_mobile">Resolución preferida con Redes móviles</string>

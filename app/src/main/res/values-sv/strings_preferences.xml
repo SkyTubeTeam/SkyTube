@@ -30,7 +30,6 @@
     <string name="pref_title_low_views_filter">Visningar</string>
     <string name="databases_import_nothing_selected">Ingenting valdes…</string>
     <string name="pref_title_download_to_separate_directories">Ladda ner videor till mappar</string>
-    <string name="pref_title_warn_mobile_downloads">Visa varning för mobilt nätverk</string>
     <string name="pref_title_disable_screen_gestures">Inaktivera videogester</string>
     <string name="databases_import_fail">Det gick inte att importera dina databaser.</string>
     <string name="pref_youtube_api_key_error">Ett fel uppstod vid försök att validera den API-nyckel som du angav.</string>
@@ -89,7 +88,6 @@
     <string name="disabled">Inaktiverad</string>
     <string name="pref_summary_disable_search_history">Om markerad, kommer sökhistoriken att rensas och kommer inte att användas.</string>
     <string name="pref_title_feed_notification">Automatisk flödesavisering</string>
-    <string name="pref_summary_warn_mobile_downloads">Visa en varning om du använder ett mobilt nätverk (t. ex. 4G) innan du streamar/laddar ner videor.</string>
     <string name="pref_disable_playback_status_deleted">Uppspelningsstatus raderad.</string>
     <string name="preferred_lang_updated">Föredraget språk uppdaterat. Uppdatera videor.</string>
     <string name="pref_summary_import_subs">Importera dina prenumerationer från ditt YouTube-konto.</string>
