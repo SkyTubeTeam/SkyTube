@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources><string name="could_not_get_videos">Tidak bisa mengambil %s video.</string>
+<resources>
+    <string name="could_not_get_videos">Tidak bisa mengambil %s video.</string>
     <string name="could_not_get_channel">Tidak bisa mengunduh informasi channel!</string>
     <string name="views">%,d ditonton</string>
     <string name="error">Galat</string>
@@ -17,4 +18,6 @@
     <string name="loading">Memuat …</string>
     <string name="yes">Ya</string>
     <string name="no">Tidak</string>
+    <string name="search_channel">Cari channel</string>
+    <string name="could_not_get_channel_detailed">Tidak bisa mengunduh informasi channel, galat: %s!</string>
 </resources>
