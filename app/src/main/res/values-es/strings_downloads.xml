@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="downloads">Downloads</string>
-	<string name="download_video">Download Video</string>
-	<string name="starting_video_download">Descargando \'%s\'…</string>
-	<string name="video_download_stream_error">No puedo descargar \'%s\'.</string>
-	<string name="delete_download">Delete Download</string>
-	<string name="video_downloaded">\'%s\' descargado.</string>
-	<string name="no_downloaded_videos_text">Todavía no has descargado videos.
+    <string name="downloads">Downloads</string>
+    <string name="download_video">Download Video</string>
+    <string name="starting_video_download">Descargando \'%s\'…</string>
+    <string name="video_download_stream_error">No puedo descargar \'%s\'.</string>
+    <string name="delete_download">Delete Download</string>
+    <string name="video_downloaded">\'%s\' descargado.</string>
+    <string name="no_downloaded_videos_text">Todavía no has descargado videos.
 \n
 \nCuando lo hagas, aparecerán aquí.</string>
-	<string name="playing_video_file_missing">No encuentro la descarga de este video, Reproduciendo de internet.</string>
-	<string name="external_storage_not_available">No puedo descargar el video porque el almacenamiento externo no está disponible.</string>
-<string name="download">Descargar</string>
-	<string name="warning_mobile_network_download">Su dispositivo no está conectado a una red Wi-Fi. Para evitar posible uso extra de datos, se recomienda conectarse a una red Wi-Fi. Desea descargar el video de todas formas\?</string>
-	</resources>
+    <string name="playing_video_file_missing">No encuentro la descarga de este video, Reproduciendo de internet.</string>
+    <string name="external_storage_not_available">No puedo descargar el video porque el almacenamiento externo no está disponible.</string>
+    <string name="download">Descargar</string>
+    <string name="warning_mobile_network_download">Su dispositivo no está conectado a una red Wi-Fi. Para evitar cargos por uso extra de datos, se recomienda conectarse a una red Wi-Fi. Desea descargar el vídeo de todas formas\?</string>
+</resources>
