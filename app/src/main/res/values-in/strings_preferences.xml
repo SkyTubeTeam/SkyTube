@@ -107,4 +107,26 @@
     <string name="channel_whitelist_update_failure">Gagal memasukkan channel ke daftar putih…</string>
     <string name="channel_unwhitelist_success">Daftar putih channel diperbarui. Silakan segarkan daftar video.</string>
     <string name="channel_unwhitelist_failure">Gagal menghapus channel dari daftar putih…</string>
+    <string name="pref_summary_autocast">Selalu gunakan perangkat Chromecast ini saat membuka video di SkyTube dari aplikasi lain.</string>
+    <string name="pref_video_download_preferred_resolution_summary">Unduhan video mengutamakan resolusi ini: %s</string>
+    <string name="pref_video_download_preferred_resolution_title">Resolusi Unduh Video</string>
+    <string name="pref_summary_video_download_folder">Video akan diunduh ke dalam folder ini: %s</string>
+    <string name="pref_title_video_download_folder">Folder Unduhan Video</string>
+    <string name="pref_popup_title_video_download_folder">Pilih Folder</string>
+    <string name="pref_summary_use_newpipe_backend">Jika diaktifkan, API NewPipe eksperimental akan digunakan untuk mengakses YouTube, mungkin berfungsi, mungkin tidak...</string>
+    <string name="pref_title_use_newpipe_backend">Gunakan backend NewPipe</string>
+    <string name="pref_summary_switch_volume_and_brightness">Aktifkan jika anda ingin kontrol volume di sebelah kanan, dan kecerahan di sebelah kiri.</string>
+    <string name="pref_title_switch_volume_and_brightness">Tukar Gestur Volume dan Kecerahan</string>
+    <string name="pref_summary_enable_immersive_mode">Sembunyikan bilah navigasi dan bilah status saat pemutaran.</string>
+    <string name="pref_title_enable_immersive_mode">Aktifkan mode imersif</string>
+    <string name="pref_hide_tabs_restart">Mulai ulang app untuk menampilkan pembaruan tab.</string>
+    <string name="pref_summary_hide_tabs">Pilih tab yang akan disembunyikan. Butuh memulai ulang.</string>
+    <string name="pref_title_hide_tabs">Sembunyikan Tab</string>
+    <string name="pref_network_downloads_category">Jaringan dan Unduhan</string>
+    <string name="pref_title_autocast">AutoCast</string>
+    <string name="pref_title_chromecast_none">Nihil</string>
+    <string name="pref_chromecast_category">Chromecast</string>
+    <string name="pref_summary_mobile_network_usage">Yang harus dilakukan jika anda menggunakan jaringan data seluler (seperti 4G) untuk mengunduh, menonton video: %s</string>
+    <string name="pref_title_mobile_network_usage">Penggunaan Jaringan Seluler</string>
+    <string name="key_preferences">preferensi</string>
 </resources>
