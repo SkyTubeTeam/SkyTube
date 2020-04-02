@@ -9,6 +9,17 @@
 	<string name="error_video_streams">An error has occurred while retrieving video\'s streams.</string>
 	<string name="error_get_video_desc">An error has occurred while retrieving video\'s description.</string>
 	<string name="error_invalid_url">Invalid video URL: %s</string>
+	<string name="error_downloaded_file_is_corrupted">The downloaded video looks &lt;b&gt;corrupted&lt;/b&gt; - the error message is:
+		&lt;br/&gt;
+		&lt;br/&gt;
+		"%s".
+		&lt;br/&gt;
+		&lt;br/&gt;
+		Do you want to &lt;b&gt;delete&lt;/b&gt; the file?</string>
+	<string name="error_video_parse_error">Unable to start playing the video, the error message is:
+		&lt;br/&gt;
+		&lt;br/&gt;
+		"%s".</string>
 
 	<string name="mobile_data">Mobile Data</string>
 	<string name="warning_mobile_network_play">Your device is not connected to a Wi-Fi network. To avoid potential extra data usage charges, it is recommended to connect to a Wi-Fi network. Play video anyway\?</string>

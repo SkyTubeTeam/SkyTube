@@ -49,10 +49,12 @@ import com.bumptech.glide.request.RequestOptions;
 import com.google.android.exoplayer2.C;
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.DefaultRenderersFactory;
+import com.google.android.exoplayer2.ExoPlaybackException;
 import com.google.android.exoplayer2.ExoPlayerFactory;
 import com.google.android.exoplayer2.Player;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.source.ExtractorMediaSource;
+import com.google.android.exoplayer2.source.UnrecognizedInputFormatException;
 import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection;
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
 import com.google.android.exoplayer2.trackselection.TrackSelection;
@@ -302,6 +304,36 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 					} else {
 						preventDeviceSleeping(false);
 					}
+				}
+
+				@Override
+				public void onPlayerError(ExoPlaybackException error) {
+					Logger.e(this, ":: onPlayerError " + error.getMessage(), error);
+
+					boolean askForDelete = askForDelete(error);
+					String errorMessage = error.getCause().getMessage();
+					new SkyTubeMaterialDialog(YouTubePlayerV2Fragment.this.getContext())
+								.onNegativeOrCancel(dialog -> closeActivity())
+								.content(askForDelete ? R.string.error_downloaded_file_is_corrupted : R.string.error_video_parse_error, errorMessage)
+								.title(R.string.error_video_play)
+								.negativeText(R.string.close)
+								.positiveText(null)
+								.positiveText(askForDelete ? R.string.delete_download : 0)
+								.onPositive((dialog, which) -> {
+									if (askForDelete) {
+										YouTubePlayerV2Fragment.this.youTubeVideo.removeDownload();
+									}
+									closeActivity();
+								}).show();
+				}
+
+				private boolean askForDelete(ExoPlaybackException error) {
+					Throwable cause = error.getCause();
+					if (cause instanceof UnrecognizedInputFormatException) {
+						UnrecognizedInputFormatException uie = (UnrecognizedInputFormatException) cause;
+						return "file".equals(uie.uri.getScheme());
+					}
+					return false;
 				}
 			});
 			player.setPlayWhenReady(true);
