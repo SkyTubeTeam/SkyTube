@@ -9,7 +9,7 @@
     <string name="video_unbookmarked_error">Este vídeo no se puede desmarcar.</string>
     <string name="no_bookmarked_videos_text">No tienes ningún vídeo marcado todavía.\n\nCuando lo tengas, aparecerán aquí.</string>
     <string name="bookmark_share_invalid_url">Sólo se pueden marcar como favoritas URL válidas de YouTube.</string>
-    <string name="bookmark_share_label">Favoritos de Skytube</string>
-    <string name="video_was_not_bookmarked">El Vídeo no estaba marcado como favorito</string>
+    <string name="bookmark_share_label">Marcadores de Skytube</string>
+    <string name="video_was_not_bookmarked">El vídeo no estaba marcado como favorito</string>
     <string name="video_already_bookmarked">Vídeo ya marcado como favorito</string>
 </resources>
