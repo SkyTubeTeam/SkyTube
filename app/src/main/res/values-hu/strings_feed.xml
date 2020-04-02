@@ -10,4 +10,8 @@
     <string name="import_subscriptions_from_youtube">Feliratkozások betöltése YouTube-ról</string>
     <string name="notification_channel_feed_title">Értesítések a Videókról</string>
     <string name="notification_new_videos_found">%d új videó a feliratkozott csatornákról</string>
+    <string name="no_subscriptions_text">Nem iratkozott fel még egyetlen csatornára sem.
+\n
+\nMiután megteszi, az összes videó a feliratkozott csatornáiról itt fog megjelenni.</string>
+    <string name="open_channel">Csatorna megnyitása</string>
 </resources>
