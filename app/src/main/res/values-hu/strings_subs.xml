@@ -21,4 +21,8 @@
     <string name="import_subscriptions_parse_error">Az XML fájl feldolgozása során hiba keletkezett: %s.</string>
     <string name="no_channels_found">Nem található YouTube csatorna a feltöltött fájlban.</string>
     <string name="no_new_channels_found">Nem található olyan YouTube csatorna a feltöltött fájlban, amire korábban nem volt még feliratkozva.</string>
+    <string name="channel_unsubscribed">Leiratkozott a csatornáról</string>
+    <string name="channel_subscribe_failed">Nem sikerült feliratkozni a csatornára</string>
+    <string name="channel_already_subscribed">A csatornára már korábban feliratkozott</string>
+    <string name="channel_subscribed">Feliratkozott a csatornára</string>
 </resources>
