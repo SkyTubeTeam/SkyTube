@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="thumbnail">Előnézeti kép</string>
+    <string name="thumbnail_download_error">Az indexképet nem lehet letölteni.</string>
+    <string name="thumbnail_downloaded">Indexkép letöltése.</string>
+    <string name="view_thumbnail">Indexkép megtekintése</string>
 </resources>
