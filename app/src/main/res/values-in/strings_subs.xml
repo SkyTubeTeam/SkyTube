@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources><string name="subscriptions">Subscription</string>
+<resources>
+    <string name="subscriptions">Subscription</string>
     <string name="subscribe">Subscribe</string>
     <string name="unsubscribe">Batal Subscribe</string>
     <string name="total_subscribers">%,d subscriber</string>
@@ -20,4 +21,8 @@
     <string name="failed_to_import_subscriptions">Gagal mengimpor subscription YouTube anda.</string>
     <string name="about">Tentang</string>
     <string name="error_unable_to_subscribe">Tidak bisa (un)subscribe channel (id=%s)</string>
+    <string name="channel_unsubscribed">Channel disubscribe</string>
+    <string name="channel_subscribe_failed">Subscribe channel gagal</string>
+    <string name="channel_already_subscribed">Channel telah disubscribe</string>
+    <string name="channel_subscribed">Channel disubscribe</string>
 </resources>
