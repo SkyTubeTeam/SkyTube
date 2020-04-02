@@ -48,4 +48,10 @@
 		android:title="@string/pref_title_disable_screen_gestures"
 		app:showAsAction="never" />
 
+	<item
+		android:id="@+id/video_repeat_toggle"
+		android:checkable="true"
+		android:title="@string/pref_video_continuous_repeat_toggle"
+		app:showAsAction="never" />
+
 </menu>

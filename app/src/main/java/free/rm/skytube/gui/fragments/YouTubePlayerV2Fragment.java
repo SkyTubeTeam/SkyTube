@@ -568,6 +568,11 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 				SkyTubeApp.getSettings().setDisableGestures(disableGestures);
 				playerViewGestureHandler.setDisableGestures(disableGestures);
 				return true;
+			case R.id.video_repeat_toggle:
+				boolean repeat = !item.isChecked();
+				player.setRepeatMode(repeat ? Player.REPEAT_MODE_ALL : Player.REPEAT_MODE_OFF);
+				item.setChecked(repeat);
+				return true;
 			default:
 				return super.onOptionsItemSelected(item);
 		}
