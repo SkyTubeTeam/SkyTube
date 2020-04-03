@@ -2,7 +2,7 @@
 <resources>
     <string name="could_not_get_videos">Nem lehet elérni a %s videót.</string>
     <string name="could_not_get_channel">Nem lehet letölteni a csatorna információkat!</string>
-    <string name="could_not_get_channel_detailed">Nem lehet letölteni a csatorna információkat, hiba: %s!</string>
+    <string name="could_not_get_channel_detailed">Nem lehet letölteni a csatorna információkat, a hiba: \"%s\".</string>
     <string name="views">%,d megtekintés</string>
     <string name="error">Hiba</string>
     <string name="ok">Rendben</string>
@@ -22,4 +22,5 @@
     <string name="no">Nem</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="search_channel">Csatornák keresése</string>
+    <string name="close">Bezárás</string>
 </resources>
