@@ -95,7 +95,7 @@
     <string name="pref_youtube_api_key_error">Hiba történt az API kulcs validálása közben.</string>
     <string name="pref_summary_youtube_api_key">Írja be a saját YouTube Adat API kulcsát. Hagyja üresen, ha az alapértelmezett kulcsokat akarja használni.</string>
     <string name="pref_title_youtube_api_key">YouTube API Kulcs</string>
-    <string name="pref_summary_switch_volume_and_brightness">Kapcsolja be, ha a hangerőt a jobb oldalon, míg a fényerőt a baloldalon szeretné állítani.</string>
+    <string name="pref_summary_switch_volume_and_brightness">Legyen a hangerő szabályozása a jobb oldalon, a fényerőé pedig a baloldalon.</string>
     <string name="pref_title_switch_volume_and_brightness">A hangerő és a fényerő szabályozó kézmozdulat felcserélése</string>
     <string name="pref_summary_enable_immersive_mode">A navigációs sáv és az állapotsor elrejtése lejátszás esetén.</string>
     <string name="pref_summary_screen_orientation">Videó lejátszó tájolása: %s</string>
@@ -107,4 +107,57 @@
     <string name="pref_chromecast_category">Chromecast</string>
     <string name="pref_summary_import_subs">Importálja előfizetéseit YouTube-fiókjából.</string>
     <string name="pref_summary_mobile_network_usage">Mi a teendő, ha mobil hálózatot (például 4G-t) használ letöltéshez, videó nézéshez: %s</string>
+    <string name="app_license">Copyright © 2015-2018 Ramon Mifsud
+\n
+\nEz a program szabad szoftver: terjesztheti és/vagy módosíthatja a Szabad Szoftver Alapítvány (Free Software Foundation) által kiadott GNU Általános Nyilvános Licenc (General Public License) feltételei alapján (a Licenc 3. verziója).
+\n
+\nEzt a programot annak reményében terjesztjük, hogy hasznos lesz, de mindenféle GARANCIA NÉLKÜL, legyen az kifejezett vagy beleértett, beleértve, de nem kizárólagosan a FORGALOMBA HOZHATÓSÁGRA vagy ALKALMAZHATÓSÁGRA vonatkozó garanciákat. Lásd a GNU Általános Nyilvános Licenc a részletekért.
+\n
+\nKellett, hogy kapjon egy példánya a GNU Általános Nyilvános Licenc-ből, a programmal együtt. Ha nem, lásd &lt;http://www.gnu.org/licenses/&gt;</string>
+    <string name="preferred_lang_updated">A preferált nyelv frissítve. Kérjük, frissítse a videókat.</string>
+    <string name="channel_already_whitelisted">A csatorna már engedélyezett.</string>
+    <string name="pref_playback_status_cleared">A lejátszás állapota törölve.</string>
+    <string name="pref_summary_clear_playback_status">Az összes videó lejátszási állapotának törlése.</string>
+    <string name="pref_title_clear_playback_status">Lejátszási állapot törlése</string>
+    <string name="pref_disable_playback_status_deleted">Lejátszási állapotok törölve.</string>
+    <string name="pref_summary_disable_playback_status">Ha be van jelölve, az eddigi lejátszási állapotok törlődnek, és ezután nem lesz mentve.</string>
+    <string name="pref_title_disable_playback_status">Letiltja a lejátszás állapot megjegyzését</string>
+    <string name="pref_disable_search_history_deleted">Keresési előzmények törölve.</string>
+    <string name="pref_summary_disable_search_history">Ha bejelöli, a jelenlegi Keresési előzmények törlődnek, és ezután nem kerülnek mentésre.</string>
+    <string name="pref_title_disable_search_history">Keresési előzmények letiltása</string>
+    <string name="pref_privacy_category">Adatvédelem</string>
+    <string name="pref_summary_dislikes_filter">A magas nem tetszésekkel rendelkező videók kiszűrése: %s</string>
+    <string name="pref_title_dislikes_filter">Nem tetszik</string>
+    <string name="pref_summary_low_views_filter">Szűrje ki az alacsony nézettségű videókat: %s</string>
+    <string name="pref_title_low_views_filter">Nézetek</string>
+    <string name="pref_other_filters_category">Egyéb szűrők</string>
+    <string name="setting_updated">A beállítás frissítve. Kérjük, frissítse a videókat.</string>
+    <string name="pref_summary_lang_detection_video_filtering">Észleli a videókban használt nyelveket, és tilt minden, nem preferált nyelvet. Csak csúcskategóriás eszközök esetén.</string>
+    <string name="pref_title_lang_detection_video_filtering">Nyelv-felismerő videó szűrés</string>
+    <string name="no_preferred_lang_selected">Nincs kiválasztott preferált nyelv. A beállítás figyelmen kívül van hagyva.</string>
+    <string name="channel_unwhitelist_failure">Nem sikerült eltávolítani az engedélyezett csatornák listájáról…</string>
+    <string name="channel_unwhitelist_success">Csatorna engedélyezési lista frissítve. Kérjük, töltse újra a videókat.</string>
+    <string name="channel_whitelist_update_failure">Nem sikerült az adott csatornát engedélyezni…</string>
+    <string name="channel_whitelist_updated">A csatorna engedélyezve lett. Kérjük, frissítse a videókat.</string>
+    <string name="please_wait">Kérem várjon…</string>
+    <string name="input_channel_url">Az engedélyezendő csatorna URL-je:</string>
+    <string name="pref_summary_channel_whitelist">Az engedélyezett csatornák listája.</string>
+    <string name="pref_title_channel_whitelist">Csatorna engedélyezési lista</string>
+    <string name="channel_blacklist_empty">A csatorna feketelista üres.</string>
+    <string name="channel_blacklist_update_failure">Nem sikerült eltávolítani az adott csatornát (csatornákat) a feketelistáról…</string>
+    <string name="channel_blacklist_updated">Csatorna feketelista frissítve. Kérjük, frissítse a videókat.</string>
+    <string name="unblock">Letiltás feloldása</string>
+    <string name="pref_summary_channel_blacklist">A letiltott csatornák listája.</string>
+    <string name="disabled">Letiltva</string>
+    <string name="pref_summary_channel_filter_method">Válassza ki a csatornaszűrési módszert: %s</string>
+    <string name="pref_title_channel_filter_method">Csatornaszűrő módszer</string>
+    <string name="pref_channels_filter_category">Csatorna szűrők</string>
+    <string name="pref_summary_enable_video_blocker">Engedélyezze a videoblokkolót.</string>
+    <string name="pref_title_enable_immersive_mode">Teljes képernyős mód engedélyezése</string>
+    <string name="pref_video_continuous_repeat_toggle">Folyamatos ismétlés</string>
+    <string name="pref_summary_disable_screen_gestures">Kapcsolja ki a kézmozdulatokat a hangerő, fényerő állításához, és az előre/hátra ugráshoz a videókban.</string>
+    <string name="pref_title_disable_screen_gestures">Speciális kézmozdulatok letiltása</string>
+    <string name="pref_title_feed_notification">Automatikus Csatorna Értesítés</string>
+    <string name="pref_summary_autocast">Válassza ki azt a Chromecast-eszközt, amelyet akkor szeretne használni, amikor más alkalmazásokat használ a videók megnyitásához a SkyTube-ban.</string>
+    <string name="pref_title_autocast">AutoCast</string>
 </resources>
