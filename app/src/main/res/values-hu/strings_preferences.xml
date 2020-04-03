@@ -88,7 +88,7 @@
     <string name="pref_summary_download_to_separate_directories">Videók letöltése csatorna nevek szerint külön könyvtárakba.</string>
     <string name="pref_title_download_to_separate_directories">Videók letöltése külön könyvtárakba</string>
     <string name="pref_category_downloads">Letöltések</string>
-    <string name="pref_summary_use_newpipe_backend">Ha be van kapcsolva, akkor a kísérleti NewPipe réteg van használva a YouTube eléréséhez. Lehet, nem működik...</string>
+    <string name="pref_summary_use_newpipe_backend">Ha be van kapcsolva, akkor a kísérleti NewPipe réteg van használva a YouTube eléréséhez. Lehet, nem működik…</string>
     <string name="pref_title_use_newpipe_backend">A NewPipe réteg használata a kommunikációhoz</string>
     <string name="pref_youtube_api_key_default">Indítsa újra az alkalmazást, az alapértelmezett YouTube API kulcs használatához.</string>
     <string name="pref_youtube_api_key_custom">A kulcs használható. Indítsa újra az alkalmazást, az új YouTube API kulcs használatához.</string>
