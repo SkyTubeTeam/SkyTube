@@ -20,5 +20,6 @@
     <string name="yes">Si</string>
     <string name="no">No</string>
     <string name="search_channel">Buscar canal</string>
-    <string name="could_not_get_channel_detailed">No se puede descargar información del canal, error: %s!</string>
+    <string name="could_not_get_channel_detailed">No se puede descargar info del canal: %s.</string>
+    <string name="close">Cerrar</string>
 </resources>
