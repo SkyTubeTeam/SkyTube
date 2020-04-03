@@ -1,10 +1,12 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="update_available">Ny versjon tilgjengelig</string>
-	<string name="update_dialog_msg">En ny versjon av SkyTube er tilgjengelig. Versjon %s vil bli installert.</string>
-	<string name="up_to_date">Av nyeste dato</string>
-	<string name="up_to_date_msg">Du har den siste versjonen av SkyTube installert.</string>
-	<string name="update">Oppgrader</string>
-	<string name="later">Senere</string>
-	<string name="update_failure">Kunne ikke oppgradere programmet.</string>
-	<string name="downloading">Laster ned…</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="update_available">Ny versjon tilgjengelig</string>
+    <string name="update_dialog_msg">En ny versjon av SkyTube er tilgjengelig. Versjon %s vil bli installert.</string>
+    <string name="up_to_date">Av nyeste dato</string>
+    <string name="up_to_date_msg">Du har den siste versjonen av SkyTube installert.</string>
+    <string name="update">Oppgrader</string>
+    <string name="later">Senere</string>
+    <string name="update_failure">Kunne ikke oppgradere programmet.</string>
+    <string name="downloading">Laster ned…</string>
+    <string name="release_notes">Endres om %s</string>
 </resources>
