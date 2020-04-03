@@ -16,7 +16,7 @@
     <string name="warning_live_video">Élő közvetítés lejátszása nem lehetséges. Megnyitná külső alkalmazásban\?</string>
     <string name="ratings_disabled">Értékelések letiltva</string>
     <string name="loading_video">Videó betöltése…</string>
-    <string name="get_new_video_steam">New Stream</string>
+    <string name="get_new_video_steam">Új stream</string>
     <string name="open_in_browser">Megnyitás böngészőben</string>
     <string name="open_with">Megnyitás ezzel…</string>
     <string name="share">Megosztás</string>
@@ -36,4 +36,6 @@
     <string name="clear">Törlés</string>
     <string name="should_resume">Ott akarja folytatni, ahol abbahagyta\?</string>
     <string name="resume">Folytatás</string>
+    <string name="error_video_parse_error">Nem lehet lejátszani a videót, a hiba üzenet: <br/><br/> %s.</string>
+    <string name="error_downloaded_file_is_corrupted">A letöltött videó fájl <b>sérültnek</b> látszik - a hiba üzenet: <br/><br/>%s. <br/><br/> Le akarja <b>törölni</b> a fájlt\?</string>
 </resources>
