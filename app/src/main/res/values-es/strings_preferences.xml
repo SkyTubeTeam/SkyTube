@@ -142,7 +142,7 @@
     <string name="pref_summary_video_download_folder">Vídeos descargados en esta carpeta: %s</string>
     <string name="pref_title_video_download_folder">Carpeta descargas de vídeos</string>
     <string name="pref_popup_title_video_download_folder">Selecciona carpeta</string>
-    <string name="pref_summary_use_newpipe_backend">Si está seleccionado, se utilizará para acceder a YouTube la nueva API experimental, que puede funcionar o no...</string>
+    <string name="pref_summary_use_newpipe_backend">Si está seleccionado, se utilizará para acceder a YouTube la nueva API experimental, que puede funcionar o no…</string>
     <string name="pref_title_use_newpipe_backend">Usar la nueva infraestructura del cliente de YouTube</string>
     <string name="pref_summary_switch_volume_and_brightness">Selecciona si quieres el control de volumen en la derecha y el brillo en la izquierda.</string>
     <string name="pref_title_switch_volume_and_brightness">Gestos para cambio de volumen y brillo</string>
