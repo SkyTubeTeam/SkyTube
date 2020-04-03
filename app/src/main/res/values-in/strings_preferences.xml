@@ -113,7 +113,7 @@
     <string name="pref_summary_video_download_folder">Video akan diunduh ke dalam folder ini: %s</string>
     <string name="pref_title_video_download_folder">Folder Unduhan Video</string>
     <string name="pref_popup_title_video_download_folder">Pilih Folder</string>
-    <string name="pref_summary_use_newpipe_backend">Jika diaktifkan, API NewPipe eksperimental akan digunakan untuk mengakses YouTube, mungkin berfungsi, mungkin tidak...</string>
+    <string name="pref_summary_use_newpipe_backend">Jika diaktifkan, API NewPipe eksperimental akan digunakan untuk mengakses YouTube, mungkin berfungsi, mungkin tidak…</string>
     <string name="pref_title_use_newpipe_backend">Gunakan backend NewPipe</string>
     <string name="pref_summary_switch_volume_and_brightness">Aktifkan jika anda ingin kontrol volume di sebelah kanan, dan kecerahan di sebelah kiri.</string>
     <string name="pref_title_switch_volume_and_brightness">Tukar Gestur Volume dan Kecerahan</string>
