@@ -19,7 +19,7 @@
     <string name="copy_url">Kopier nettadresse</string>
     <string name="url_copied_to_clipboard">Nettadresse kopiert til utklippstavle.</string>
     <string name="error_get_comments">En feil inntraff under innhenting av kommentarer.</string>
-    <string name="no_video_comments">Denne videoen har ingen kommentarer, eller så er de avskrudd.</string>
+    <string name="no_video_comments">Denne videoen har enten ingen kommentarer, eller så er de skrudd av.</string>
     <string name="view_replies">Vis svar</string>
     <string name="hide_replies">Skjul svar</string>
     <string name="enter_video_url">Skriv inn videonettadresse</string>
@@ -34,4 +34,8 @@
     <string name="warning_mobile_network_play">Enheten din er ikke tilknyttet et Wi-Fi -nettverk. For å unngå ekstra brukskostnader, anbefales det å koble til et Wi-Fi -nettverk. Spill video uansett\?</string>
     <string name="warning_mobile_network_disable">Aldri spør igjen.</string>
     <string name="play_video">Spill video</string>
+    <string name="error_get_comments_no_network">Nettverkstilgang behøves for å hente kommentarer.</string>
+    <string name="mobile_data_blocked_by_policy">Nedlasting blokkert, fordi din enhet ikke er tilknyttet et Wi-Fi-nettverk.</string>
+    <string name="error_video_parse_error">Kunne ikke starte videoavspilling, feilmeldingen er: <br/> <br/> %s.</string>
+    <string name="error_downloaded_file_is_corrupted">Nedlastet video later til å være <b>skadet</b> - feilmeldingen er: <br/> <br/> %s. <br/> <br/> Ønsker du å <b>slette</b> filen\?</string>
 </resources>

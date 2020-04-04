@@ -86,7 +86,7 @@
     <string name="no_preferred_lang_selected">Geen voorkeurstaal gekozen; deze instelling wordt genegeerd.</string>
     <string name="preferred_lang_updated">Voorkeurstaal bijgewerkt. Ververs de video\'s.</string>
     <string name="pref_title_lang_detection_video_filtering">Taaldetectie - video\'s filteren</string>
-    <string name="pref_summary_lang_detection_video_filtering">Kunstmatige intelligentie gebruiken om de in video\'s gebruikte talen te detecteren en blokkeren als de taal niet overeenkomt met je voorkeurstaal/-talen. Schakel dit alleen in op krachtige apparaten.</string>
+    <string name="pref_summary_lang_detection_video_filtering">Detecteer de in video\'s gebruikte talen en blokkeer deze als de taal niet overeenkomt met je voorkeurstaal/-talen. Schakel dit alleen in op krachtige apparaten.</string>
     <string name="setting_updated">Instelling bijgewerkt; ververs de video\'s.</string>
     <string name="pref_channels_filter_category">Kanaalfilters</string>
     <string name="pref_other_filters_category">Andere filters</string>
@@ -131,9 +131,9 @@
     <string name="pref_summary_video_download_folder">Video\'s worden opgeslagen in %s</string>
     <string name="pref_title_video_download_folder">Videodownloadmap</string>
     <string name="pref_popup_title_video_download_folder">Map kiezen</string>
-    <string name="pref_summary_use_newpipe_backend">Kruis aan om de experimentele NewPipe-API te gebruiken voor YouTube-toegang. Het is echter de vraag of het werkt...</string>
+    <string name="pref_summary_use_newpipe_backend">Experimentele NewPipe-API gebruiken voor YouTube-toegang…</string>
     <string name="pref_title_use_newpipe_backend">NewPipe-backend gebruiken</string>
-    <string name="pref_summary_switch_volume_and_brightness">Kruis aan als je de volumeregeling rechts wilt en de helderheidsregeling links.</string>
+    <string name="pref_summary_switch_volume_and_brightness">Plaatst de volumeregeling rechts en de helderheidsregeling links.</string>
     <string name="pref_summary_enable_immersive_mode">Verberg de navigatie- en statusbalk tijdens het afspelen.</string>
     <string name="pref_title_switch_volume_and_brightness">Volume- en helderheidsgebaar omwisselen</string>
     <string name="pref_title_enable_immersive_mode">Beeldvullende modus inschakelen</string>
@@ -148,4 +148,5 @@
     <string name="pref_summary_mobile_network_usage">Wat er moet gebeuren als je mobiel internet (bijv. 4G) gebruikt voor het downloaden of bekijken van video\'s: %s</string>
     <string name="pref_title_mobile_network_usage">Mobiel datagebruik</string>
     <string name="key_preferences">instellingen</string>
+    <string name="pref_video_continuous_repeat_toggle">Herhalen</string>
 </resources>

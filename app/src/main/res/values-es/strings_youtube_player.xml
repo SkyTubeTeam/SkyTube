@@ -19,7 +19,7 @@
     <string name="copy_url">Copiar URL</string>
     <string name="url_copied_to_clipboard">URL copiada al portapapeles.</string>
     <string name="error_get_comments">Ocurrió un error al obtener los comentarios.</string>
-    <string name="no_video_comments">Este vídeo no tiene comentarios o están desactivados.</string>
+    <string name="no_video_comments">Este vídeo no tiene comentarios o se han desactivado.</string>
     <string name="view_replies">Mostrar respuestas</string>
     <string name="hide_replies">Ocultar respuestas</string>
     <string name="enter_video_url">Introducir la URL del vídeo</string>
@@ -34,6 +34,8 @@
     <string name="warning_mobile_network_play">Este dispositivo no está conectado a una red Wi-Fi. Para evitar posibles cobros por uso extra de datos se recomienda conectarse a una red Wi-Fi. ¿Desea reproducir el video de todas formas\?</string>
     <string name="warning_mobile_network_disable">No preguntar de nuevo.</string>
     <string name="play_video">Reproducir Video</string>
-    <string name="error_get_comments_no_network">Los comentarios no están disponibles sin acceso a red!</string>
+    <string name="error_get_comments_no_network">Se necesita acceso a la red para ir a buscar los comentarios.</string>
     <string name="mobile_data_blocked_by_policy">Descargas bloqueadas, porque no estás conectado a una red Wi-Fi.</string>
+    <string name="error_video_parse_error">Imposible reproducir el vídeo, el mensaje de error es:<br/><br/>%s.</string>
+    <string name="error_downloaded_file_is_corrupted">El vídeo descargado parece <b>corrupto</b> -El mensaje de error es: <br/><br/> %s<br/><br/> Quieres <b>borrar</b> el archivo\?</string>
 </resources>
