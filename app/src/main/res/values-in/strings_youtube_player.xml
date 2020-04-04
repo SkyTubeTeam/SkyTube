@@ -34,6 +34,6 @@
     <string name="clear">Hapus</string>
     <string name="should_resume">Apakah anda ingin melanjutkan dari posisi waktu terakhir video ditonton\?</string>
     <string name="resume">Lanjutkan</string>
-    <string name="error_get_comments_no_network">Komentar tidak tersedia tanpa akses jaringan!</string>
+    <string name="error_get_comments_no_network">Komentar tidak tersedia tanpa akses jaringan.</string>
     <string name="mobile_data_blocked_by_policy">Unduh diblokir, karena perangkat anda tidak tersambung ke jaringan Wi-Fi.</string>
 </resources>

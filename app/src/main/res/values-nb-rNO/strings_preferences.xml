@@ -1,150 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources><string name="preferences">Innstillinger</string>
-
-	<string name="pref_languages_filter_category">Språk og regionfilter</string>
-	<string name="pref_title_preferred_regions">Foretrukket region</string>
-	<string name="pref_summary_preferred_regions">Velg en foretrukket region. Dette brukes til å filtrere ut videoer i \"Framhevet\"-kategorien:  %s</string>
-
-	<string name="pref_title_preferred_languages">Foretrukket/de språk</string>
-	<string name="pref_summary_preferred_languages">Velg ditt foretrukne språk.</string>
-
-	<string name="pref_video_player_category">Videoavspiller</string>
-	<string name="pref_title_preferred_res">Foretrukket oppøsning</string>
-	<string name="pref_summary_preferred_res">Velg din foretrukne oppløsning:  %s</string>
-
-	<string name="pref_title_backup_dbs">Sikkerhetskopier databaser</string>
-	<string name="pref_summary_backup_dbs">Sikkerhetskopier dine abonnementer og bokmerkedatabaser.</string>
-	<string name="pref_title_import_dbs">Importer sikkerhetskopi</string>
-	<string name="pref_summary_import_dbs">Importer din sikkerhetskopi av abonnementer og bokmerkedatabaser.</string>
-	<string name="databases_backing_up">Sikkerhetskopierer…</string>
-	<string name="databases_backup_success">Databaser sikkerhetskopiert til %s</string>
-	<string name="databases_backup_fail">Klarte ikke å sikkerhetskopiere dine databaser.</string>
-	<string name="databases_import_select_backup">Velg sikkerhetskopifil å importere</string>
-	<string name="databases_import_nothing_selected">Ingenting ble valgt…</string>
-	<string name="databases_import_warning_message">Abonnement- og bokmerkedatabaser vil bli erstattet med data fra valgt sikkerhetskopifil.
+<resources>
+    <string name="preferences">Innstillinger</string>
+    <string name="pref_languages_filter_category">Språk og regionfilter</string>
+    <string name="pref_title_preferred_regions">Foretrukket region</string>
+    <string name="pref_summary_preferred_regions">Velg en foretrukket region. Dette brukes til å filtrere ut videoer i \"Framhevet\"-kategorien:  %s</string>
+    <string name="pref_title_preferred_languages">Foretrukket/de språk</string>
+    <string name="pref_summary_preferred_languages">Velg ditt foretrukne språk.</string>
+    <string name="pref_video_player_category">Videoavspiller</string>
+    <string name="pref_title_preferred_res">Foretrukket oppøsning</string>
+    <string name="pref_summary_preferred_res">Velg din foretrukne oppløsning:  %s</string>
+    <string name="pref_title_backup_dbs">Sikkerhetskopier databaser</string>
+    <string name="pref_summary_backup_dbs">Sikkerhetskopier dine abonnementer og bokmerkedatabaser.</string>
+    <string name="pref_title_import_dbs">Importer sikkerhetskopi</string>
+    <string name="pref_summary_import_dbs">Importer din sikkerhetskopi av abonnementer og bokmerkedatabaser.</string>
+    <string name="databases_backing_up">Sikkerhetskopierer…</string>
+    <string name="databases_backup_success">Databaser sikkerhetskopiert til %s</string>
+    <string name="databases_backup_fail">Klarte ikke å sikkerhetskopiere dine databaser.</string>
+    <string name="databases_import_select_backup">Velg sikkerhetskopifil å importere</string>
+    <string name="databases_import_nothing_selected">Ingenting ble valgt…</string>
+    <string name="databases_import_warning_message">Abonnement- og bokmerkedatabaser vil bli erstattet med data fra valgt sikkerhetskopifil.
 \n
 \nFortsett?</string>
-	<string name="continue_">Fortsett</string>
-	<string name="databases_importing">Importerer…</string>
-	<string name="databases_import_fail">Klarte ikke å importere dine databaser.</string>
-	<string name="databases_import_success">Databaser ble importer. Endringer vil tre i effekt når programmet startes på nytt.</string>
-
-	<string name="pref_title_import_subs">Importer abonnementer fra YouTube</string>
-	<string name="pref_summary_import_subs">Importer dine abonnementer fra din YouTube-konto.</string>
-	<string name="subs_import_select_backup">Velg YouTube-XML-fil å importere</string>
-
-	<string name="pref_about_category">Om</string>
-	<string name="pref_title_website">Nettside</string>
-	<string name="pref_title_credits">Bidragsytere</string>
-	<string name="pref_summary_credits">Folk og prosjekter som har gjort dette programmet mulig.</string>
-	<string name="pref_title_version">Versjon</string>
-	<string name="pref_title_updates">Oppdateringer</string>
-	<string name="pref_summary_updates">Se etter nye versjoner.</string>
-	<string name="pref_title_license">Lisens</string>
-	<string name="pref_summary_license">GNU General Public Lisens versjon 3</string>
-	<string name="app_license">Kopirett © 2015-2018 Ramon Mifsud
+    <string name="continue_">Fortsett</string>
+    <string name="databases_importing">Importerer…</string>
+    <string name="databases_import_fail">Klarte ikke å importere dine databaser.</string>
+    <string name="databases_import_success">Databaser ble importer. Endringer vil tre i effekt når programmet startes på nytt.</string>
+    <string name="pref_title_import_subs">Importer abonnementer fra YouTube</string>
+    <string name="pref_summary_import_subs">Importer dine abonnementer fra din YouTube-konto.</string>
+    <string name="subs_import_select_backup">Velg YouTube-XML-fil å importere</string>
+    <string name="pref_about_category">Om</string>
+    <string name="pref_title_website">Nettside</string>
+    <string name="pref_title_credits">Bidragsytere</string>
+    <string name="pref_summary_credits">Folk og prosjekter som har gjort dette programmet mulig.</string>
+    <string name="pref_title_version">Versjon</string>
+    <string name="pref_title_updates">Oppdateringer</string>
+    <string name="pref_summary_updates">Se etter nye versjoner.</string>
+    <string name="pref_title_license">Lisens</string>
+    <string name="pref_summary_license">GNU General Public Lisens versjon 3</string>
+    <string name="app_license">Kopirett © 2015-2018 Ramon Mifsud
 \n
 \nDette programmet er fri programvare: Du kan dele det og/eller endre det i henhold til vilkårene i GNU General Public Lisensen, utgitt av Free Software Foundation (versjon 3).
 \n
 \nDette programmet har kommet deg i hende i håp om at det skal være nyttig, men UTEN NOEN FOR FOR GARANTI; selv under implisitt garanti om SALGBARHET eller FORMÅLSTJENLIGHET FOR NOE SPESIELT FORMÅL. Se GNU General Public Lisensen for flere detaljer.
 \n
 \nDu skal ha mottatt en kopi av GNU General Public Lisensen sammen me dette programmet. Hvis ikke, se &lt;https://www.gnu.org/licenses/&gt;</string>
-	<string name="i_agree">Jeg samtykker</string>
-
-
-	<string name="pref_other_category">Andre</string>
-	<string name="pref_title_default_tab">Forvalgt fane</string>
-	<string name="pref_summary_default_tab">Forvalgt fane å vise når SkyTube startes opp: %s</string>
-
-	<string name="pref_title_screen_orientation">Skjermretning</string>
-	<string name="pref_summary_screen_orientation">Skjermretning for videoavspiller: %s</string>
-	<string-array name="screen_orientations">
-		<item>Automatisk</item>
-		<item>Landskap</item>
-		<item>Portrett</item>
-		<item>Enhetssensor</item>
-	</string-array>
-
-	<string name="pref_title_youtube_api_key">API-nøkkel for YouTube</string>
-	<string name="pref_summary_youtube_api_key">Skriv inn din egen API-nøkkel for YouTube-data. La stå tom for å bruke forvalg.</string>
-	<string name="pref_youtube_api_key_error">En feil inntraff under bekreftelse av API-nøkkelen du skrev inn.</string>
-	<string name="pref_youtube_api_key_custom">Nøkkelen er gyldig. Start programmet på nytt for å bruke den nye YouTube-API-nøkkelen.</string>
-	<string name="pref_youtube_api_key_default">Start programmet på nytt og bytt tilbake til YouTube-API-nøkkelen.</string>
-	<string name="restart">Start på nytt</string>
-
-	<string name="pref_title_feed_notification">Automatisk kilde-merknad</string>
-	<string name="pref_summary_feed_notification">Hvor ofte det skal sjekkes for nye videoer fra abonnerte kanaler: %s</string>
-	<string-array name="feed_notification">
-		<item>Off</item>
-		<item>6 Hours</item>
-		<item>12 Hours</item>
-		<item>24 Hours</item>
-	</string-array>
-
-
-	<string name="pref_title_disable_search_history">Skru av søkehistorikk</string>
-	<string name="pref_summary_disable_search_history">Hvis merket, vil søkehistorikken bli tømt og ikke brukt.</string>
-	<string name="pref_disable_search_history_deleted">Søkehistorikk slettet.</string>
-<string name="pref_video_blocker_category">Blokkerte kanaler</string>
-	<string name="pref_title_channel_blacklist">Blokkerte kanaler</string>
-	<string name="pref_summary_channel_blacklist">En liste over blokkerte kanaler.</string>
-<string name="pref_title_choose_player">Videoavspiller</string>
-	<string name="pref_summary_choose_player">Videoavspiller å bruke: %s</string>
-	<string name="pref_title_subscriptions_alphabetical_order">Sorter kanaler alfabetisk</string>
-	<string name="pref_summary_subscriptions_alphabetical_order">Hvis valgt, vil abonnerte kanaler sorteres alfabetisk.</string>
-	<string name="channel_blacklist_updated">Kanal-svarteliste oppdatert. Gjenoppfrisk videoer.</string>
-	<string name="channel_blacklist_empty">Kanal-svartelisten er tom.</string>
-	<string name="no_preferred_lang_selected">Inget foretrukket språk valgt. Innstilling ignorert.</string>
-	<string name="preferred_lang_updated">Foretrukket språk oppdatert. Gjenoppfrisk videoer.</string>
-<string name="pref_channels_filter_category">Kanalfilter</string>
-	<string name="pref_title_lang_detection_video_filtering">Videofiltrering av språkoppdagelse</string>
-	<string name="pref_summary_lang_detection_video_filtering">Bruk AI til å fastsette språk brukt i videoer og blokker dem hvis språket ikke samsvarer med dine foretrukne språk. Bør kun skrus på hvis du har en flaggskipsenhet.</string>
-	<string name="setting_updated">Innstilling oppdatert. Gjenoppfrisk videoer.</string>
-
-	<string name="pref_other_filters_category">Andre filter</string>
-	<string name="pref_title_low_views_filter">Visninger</string>
-	<string name="pref_summary_low_views_filter">Filtrer ut videoer med lave visningstall: %s</string>
-	<string name="pref_title_dislikes_filter">Liker ikke</string>
-	<string name="pref_summary_dislikes_filter">Filtrer ut videoer som mange ikke liker: %s</string>
-
-	<string name="pref_privacy_category">Personvern</string>
-	<string name="pref_title_disable_playback_status">Skru av avspillingsstatus</string>
-	<string name="pref_summary_disable_playback_status">Hvis valgt, vil avspillingsstatus bli tømt og ikke brukt.</string>
-	<string name="pref_disable_playback_status_deleted">Avspillingsstatus slettet.</string>
-
-	<string name="pref_title_clear_playback_status">Tøm avspillingsstatus</string>
-	<string name="pref_summary_clear_playback_status">Tøm avspillingsstatus for alle videoer.</string>
-	<string name="pref_playback_status_cleared">Avspillingsstatus tømt.</string>
-
-<string name="pref_title_channel_filter_method">Kanalfiltreringsmetode</string>
-	<string name="pref_summary_channel_filter_method">Velg kanalfiltreringsmetode: %s</string>
-	<string name="disabled">Avskrudd</string>
-	<string name="pref_title_channel_whitelist">Kanalhvitliste</string>
-	<string name="pref_summary_channel_whitelist">En liste over hvitlistede kanaler.</string>
-	<string name="add">Legg til</string>
-	<string name="block">Blokker</string>
-	<string name="please_wait">Vent…</string>
-	<string name="channel_already_whitelisted">Kanal allerede hvitlistet.</string>
-	<string name="channel_whitelist_updated">Kanal hvitlistet. Gjenoppfrisk videoer.</string>
-	<string name="channel_whitelist_update_failure">Klarte ikke å hvitliste gitt kanal…</string>
-	<string name="channel_unwhitelist_success">Kanalhvitliste oppdatert. Gjenoppfrisk videoer.</string>
-	<string name="channel_unwhitelist_failure">Klarte ikke å angre hvitelisting av gitt(e) kanal(er)…</string>
-
-	<string name="unblock">Avblokker</string>
-	<string name="channel_blacklist_update_failure">Klarte ikke å fjerne gitt(e) kanal(er) fra svarteliste…</string>
-	<string name="input_channel_url">Kanalnettadressen som hvitlistes:</string>
-	<string name="pref_import_export_category">Import/eksport</string>
-	<string name="pref_category_downloads">Nedlastinger</string>
-	<string name="pref_title_download_to_separate_directories">Last ned videoer i mapper</string>
-	<string name="pref_summary_download_to_separate_directories">Videoer lagres i mapper etter kanalnavn.</string>
-
-	<string name="pref_title_disable_screen_gestures">Skru av videohåndvendinger.</string>
-	<string name="pref_summary_disable_screen_gestures">Skru håndvendinger for kontroll av lyd-, lys-styrke og blafringshåndvendinger forover/bakover for video.</string>
-
-	<string name="pref_summary_enable_video_blocker">Skru på videoblokkering.</string>
-
-	<string name="pref_category_mobile_network">Mobilnettverk</string>
-	<string name="pref_title_preferred_res_mobile">Foretrukket oppløsning for mobilnettverk</string>
-	<string name="pref_summary_preferred_res_mobile">Velg din foretrukne oppløsning ved strømming via mobilnettverk (som 4G): %s</string>
-
-	</resources>
+    <string name="i_agree">Jeg samtykker</string>
+    <string name="pref_other_category">Andre</string>
+    <string name="pref_title_default_tab">Forvalgt fane</string>
+    <string name="pref_summary_default_tab">Forvalgt fane å vise når SkyTube startes opp: %s</string>
+    <string name="pref_title_screen_orientation">Skjermretning</string>
+    <string name="pref_summary_screen_orientation">Skjermretning for videoavspiller: %s</string>
+    <string-array name="screen_orientations">
+        <item>Automatisk</item>
+        <item>Landskap</item>
+        <item>Portrett</item>
+        <item>Enhetssensor</item>
+    </string-array>
+    <string name="pref_title_youtube_api_key">API-nøkkel for YouTube</string>
+    <string name="pref_summary_youtube_api_key">Skriv inn din egen API-nøkkel for YouTube-data. La stå tom for å bruke forvalg.</string>
+    <string name="pref_youtube_api_key_error">En feil inntraff under bekreftelse av API-nøkkelen du skrev inn.</string>
+    <string name="pref_youtube_api_key_custom">Nøkkelen er gyldig. Start programmet på nytt for å bruke den nye YouTube-API-nøkkelen.</string>
+    <string name="pref_youtube_api_key_default">Start programmet på nytt og bytt tilbake til YouTube-API-nøkkelen.</string>
+    <string name="restart">Start på nytt</string>
+    <string name="pref_title_feed_notification">Automatisk kilde-merknad</string>
+    <string name="pref_summary_feed_notification">Hvor ofte det skal sjekkes for nye videoer fra abonnerte kanaler: %s</string>
+    <string-array name="feed_notification">
+        <item>Off</item>
+        <item>6 Hours</item>
+        <item>12 Hours</item>
+        <item>24 Hours</item>
+    </string-array>
+    <string name="pref_title_disable_search_history">Skru av søkehistorikk</string>
+    <string name="pref_summary_disable_search_history">Hvis merket, vil søkehistorikken bli tømt og ikke brukt.</string>
+    <string name="pref_disable_search_history_deleted">Søkehistorikk slettet.</string>
+    <string name="pref_video_blocker_category">Blokkerte kanaler</string>
+    <string name="pref_title_channel_blacklist">Blokkerte kanaler</string>
+    <string name="pref_summary_channel_blacklist">En liste over blokkerte kanaler.</string>
+    <string name="pref_title_choose_player">Videoavspiller</string>
+    <string name="pref_summary_choose_player">Videoavspiller å bruke: %s</string>
+    <string name="pref_title_subscriptions_alphabetical_order">Sorter kanaler alfabetisk</string>
+    <string name="pref_summary_subscriptions_alphabetical_order">Hvis valgt, vil abonnerte kanaler sorteres alfabetisk.</string>
+    <string name="channel_blacklist_updated">Kanal-svarteliste oppdatert. Gjenoppfrisk videoer.</string>
+    <string name="channel_blacklist_empty">Kanal-svartelisten er tom.</string>
+    <string name="no_preferred_lang_selected">Inget foretrukket språk valgt. Innstilling ignorert.</string>
+    <string name="preferred_lang_updated">Foretrukket språk oppdatert. Gjenoppfrisk videoer.</string>
+    <string name="pref_channels_filter_category">Kanalfilter</string>
+    <string name="pref_title_lang_detection_video_filtering">Videofiltrering av språkoppdagelse</string>
+    <string name="pref_summary_lang_detection_video_filtering">Oppdag språk brukt i videoer, og blokker alt unntatt foretrukne språk. Kun for flaggskipsenheter.</string>
+    <string name="setting_updated">Innstilling oppdatert. Gjenoppfrisk videoer.</string>
+    <string name="pref_other_filters_category">Andre filter</string>
+    <string name="pref_title_low_views_filter">Visninger</string>
+    <string name="pref_summary_low_views_filter">Filtrer ut videoer med lave visningstall: %s</string>
+    <string name="pref_title_dislikes_filter">Liker ikke</string>
+    <string name="pref_summary_dislikes_filter">Filtrer ut videoer som mange ikke liker: %s</string>
+    <string name="pref_privacy_category">Personvern</string>
+    <string name="pref_title_disable_playback_status">Skru av avspillingsstatus</string>
+    <string name="pref_summary_disable_playback_status">Hvis valgt, vil avspillingsstatus bli tømt og ikke brukt.</string>
+    <string name="pref_disable_playback_status_deleted">Avspillingsstatus slettet.</string>
+    <string name="pref_title_clear_playback_status">Tøm avspillingsstatus</string>
+    <string name="pref_summary_clear_playback_status">Tøm avspillingsstatus for alle videoer.</string>
+    <string name="pref_playback_status_cleared">Avspillingsstatus tømt.</string>
+    <string name="pref_title_channel_filter_method">Kanalfiltreringsmetode</string>
+    <string name="pref_summary_channel_filter_method">Velg kanalfiltreringsmetode: %s</string>
+    <string name="disabled">Avskrudd</string>
+    <string name="pref_title_channel_whitelist">Kanalhvitliste</string>
+    <string name="pref_summary_channel_whitelist">En liste over hvitlistede kanaler.</string>
+    <string name="add">Legg til</string>
+    <string name="block">Blokker</string>
+    <string name="please_wait">Vent…</string>
+    <string name="channel_already_whitelisted">Kanal allerede hvitlistet.</string>
+    <string name="channel_whitelist_updated">Kanal hvitlistet. Gjenoppfrisk videoer.</string>
+    <string name="channel_whitelist_update_failure">Klarte ikke å hvitliste gitt kanal…</string>
+    <string name="channel_unwhitelist_success">Kanalhvitliste oppdatert. Gjenoppfrisk videoer.</string>
+    <string name="channel_unwhitelist_failure">Klarte ikke å angre hvitelisting av gitt(e) kanal(er)…</string>
+    <string name="unblock">Avblokker</string>
+    <string name="channel_blacklist_update_failure">Klarte ikke å fjerne gitt(e) kanal(er) fra svarteliste…</string>
+    <string name="input_channel_url">Kanalnettadressen som hvitlistes:</string>
+    <string name="pref_import_export_category">Import/eksport</string>
+    <string name="pref_category_downloads">Nedlastinger</string>
+    <string name="pref_title_download_to_separate_directories">Last ned videoer i mapper</string>
+    <string name="pref_summary_download_to_separate_directories">Videoer lagres i mapper etter kanalnavn.</string>
+    <string name="pref_title_disable_screen_gestures">Skru av videohåndvendinger.</string>
+    <string name="pref_summary_disable_screen_gestures">Skru håndvendinger for kontroll av lyd-, lys-styrke og blafringshåndvendinger forover/bakover for video.</string>
+    <string name="pref_summary_enable_video_blocker">Skru på videoblokkering.</string>
+    <string name="pref_category_mobile_network">Mobilnettverk</string>
+    <string name="pref_title_preferred_res_mobile">Foretrukket oppløsning for mobilnettverk</string>
+    <string name="pref_summary_preferred_res_mobile">Velg din foretrukne oppløsning ved strømming via mobilnettverk (som 4G): %s</string>
+    <string name="pref_summary_autocast">Velg Chromecast-enhet å bruke når videoes åpnes i SkyTube fra andre programmer.</string>
+    <string name="pref_title_autocast">AutoCast</string>
+    <string name="pref_chromecast_category">Chromecast</string>
+    <string name="pref_summary_switch_volume_and_brightness">Plasserer lydstyrkekontroll til høyre, og lysstyrkejustering til venstre.</string>
+    <string name="pref_summary_enable_immersive_mode">Skjul navigering- og statusfelt under avspilling.</string>
+    <string name="pref_title_enable_immersive_mode">Skru på oppslukende modus</string>
+    <string name="pref_title_switch_volume_and_brightness">Bytt lydstyrke- og lysstyrke-kontroll</string>
+    <string name="pref_summary_use_newpipe_backend">Bruk eksperimentelt NewPipe-API til anvendelse av YouTube…</string>
+    <string name="pref_video_download_preferred_resolution_summary">Videonedlasting vil fortrinnsvis skje i denne oppløsningen: %s</string>
+    <string name="pref_video_download_preferred_resolution_title">Foretrukket videonedlastingsoppløsning</string>
+    <string name="pref_summary_video_download_folder">Videoer lastes ned til denne mappen: %s</string>
+    <string name="pref_title_video_download_folder">Videonedlastingsmappe</string>
+    <string name="pref_popup_title_video_download_folder">Velg mappe</string>
+    <string name="pref_title_use_newpipe_backend">Bruk NewPipe-bakende</string>
+    <string name="pref_video_continuous_repeat_toggle">Vedvarende gjentagelse</string>
+    <string name="pref_hide_tabs_restart">Start programmet på ny for å vise oppdaterte faner.</string>
+    <string name="pref_summary_hide_tabs">Velg hvilke faner som ikke skal vises. Programomstart kreves.</string>
+    <string name="pref_title_hide_tabs">Skjul faner</string>
+    <string name="pref_network_downloads_category">Nettverk og nedlastinger</string>
+    <string name="pref_title_chromecast_none">Ingenting</string>
+    <string name="pref_summary_mobile_network_usage">Hva skal skje hvis du bruker mobilnettverk (som 4G) til å laste ned, og se på videoer\? %s</string>
+    <string name="pref_title_mobile_network_usage">Mobildatabruk</string>
+    <string name="key_preferences">innstillinger</string>
+</resources>

@@ -21,8 +21,8 @@
     <string name="failed_to_import_subscriptions">Het importeren van je abonnementen is mislukt.</string>
     <string name="about">Over</string>
     <string name="unsubscribe_from_all_current_sibbed_channels">De-abonneren op alle huidige geabonneerde kanalen.</string>
-    <string name="channel_unsubscribed">Geabonneerd op kanaal</string>
+    <string name="channel_unsubscribed">Gedeabonneerd op kanaal</string>
     <string name="channel_subscribe_failed">Kan niet abonneren op kanaal</string>
-    <string name="channel_already_subscribed">Geabonneerd op kanaal</string>
+    <string name="channel_already_subscribed">Je bent al geabonneerd op dit kanaal</string>
     <string name="channel_subscribed">Geabonneerd op kanaal</string>
 </resources>

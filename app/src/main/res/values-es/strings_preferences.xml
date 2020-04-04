@@ -87,7 +87,7 @@
     <string name="pref_title_download_to_separate_directories">Descargar videos en carpetas</string>
     <string name="pref_summary_download_to_separate_directories">Los videos se descargan en carpetas separadas según el nombre del canal.</string>
     <string name="pref_video_blocker_category">Bloqueador de videos</string>
-    <string name="pref_channels_filter_category">Filtros de canal</string>
+    <string name="pref_channels_filter_category">Filtros de canales</string>
     <string name="pref_title_channel_filter_method">Método de filtrar canales</string>
     <string name="pref_summary_channel_filter_method">Seleccionar el método de filtrar canales: %s</string>
     <string name="disabled">Desactivado</string>
@@ -111,7 +111,7 @@
     <string name="no_preferred_lang_selected">No hay seleccionado idioma preferido. Se ignora el ajuste.</string>
     <string name="preferred_lang_updated">Actualizado el idioma preferido. Por favor, refresque los videos.</string>
     <string name="pref_title_lang_detection_video_filtering">Filtrado de videos por detección de idioma</string>
-    <string name="pref_summary_lang_detection_video_filtering">Usar IA para detectar el idioma de los videos y bloquearlos si no es igual a tu(s) idioma(s) preferido(s). Activar sólo con terminales potentes.</string>
+    <string name="pref_summary_lang_detection_video_filtering">Detectar el idioma de los videos y bloquearlos si no es igual a tu(s) idioma(s) preferido(s). Sólo para terminales potentes.</string>
     <string name="setting_updated">Ajuste actualizado. Por favor, refresque los videos.</string>
     <string name="pref_other_filters_category">Otros Filtros</string>
     <string name="pref_title_low_views_filter">Visualizaciones</string>
@@ -142,9 +142,9 @@
     <string name="pref_summary_video_download_folder">Vídeos descargados en esta carpeta: %s</string>
     <string name="pref_title_video_download_folder">Carpeta descargas de vídeos</string>
     <string name="pref_popup_title_video_download_folder">Selecciona carpeta</string>
-    <string name="pref_summary_use_newpipe_backend">Si está seleccionado, se utilizará para acceder a YouTube la nueva API experimental, que puede funcionar o no...</string>
+    <string name="pref_summary_use_newpipe_backend">Si está seleccionado, se utilizará para acceder a YouTube la nueva API experimental, que puede funcionar o no…</string>
     <string name="pref_title_use_newpipe_backend">Usar la nueva infraestructura del cliente de YouTube</string>
-    <string name="pref_summary_switch_volume_and_brightness">Selecciona si quieres el control de volumen en la derecha y el brillo en la izquierda.</string>
+    <string name="pref_summary_switch_volume_and_brightness">Pone el control de volumen en la derecha y el brillo en la izquierda.</string>
     <string name="pref_title_switch_volume_and_brightness">Gestos para cambio de volumen y brillo</string>
     <string name="pref_summary_enable_immersive_mode">Ocultar barras de estado y navegación al reproducir.</string>
     <string name="pref_title_enable_immersive_mode">Activar modo inmersivo</string>
@@ -152,8 +152,9 @@
     <string name="pref_summary_hide_tabs">Elegir que pestañas no se mostrarán. Necesita reinicio.</string>
     <string name="pref_title_hide_tabs">Ocultar pestañas</string>
     <string name="pref_network_downloads_category">Redes y Descargas</string>
-    <string name="pref_summary_autocast">Selecciona un reproductor Chromecast para usar siempre al abrir un vídeo en SkyTube desde otra aplicación.</string>
+    <string name="pref_summary_autocast">Selecciona un reproductor Chromecast para usar cuando uses otras apps para abrir vídeos en SkyTube.</string>
     <string name="pref_title_autocast">Guardado automático</string>
     <string name="pref_title_chromecast_none">Ninguno</string>
     <string name="pref_chromecast_category">Reproductor Chromecast</string>
+    <string name="pref_video_continuous_repeat_toggle">Repetición conitnua</string>
 </resources>
