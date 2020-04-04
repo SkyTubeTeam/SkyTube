@@ -74,7 +74,7 @@
     <string name="no_preferred_lang_selected">未選取偏號的語言。已忽略設定。</string>
     <string name="preferred_lang_updated">偏好的語言已更新。請重新整理影片。</string>
     <string name="pref_title_lang_detection_video_filtering">語言偵測影片過濾</string>
-    <string name="pref_summary_lang_detection_video_filtering">使用 AI 來偵測要用於影片的語言，並在它們的語言不等於您偏好的語言時阻擋。應該只在高階裝置上啟用。</string>
+    <string name="pref_summary_lang_detection_video_filtering">偵測影片中使用的語言，並封鎖除了您偏好語言以外的內容。僅適用於高階裝置。</string>
     <string name="setting_updated">設定已更新。請重新整理影片。</string>
     <string name="pref_channels_filter_category">頻道篩選</string>
     <string name="pref_other_filters_category">其他篩選</string>
@@ -125,18 +125,19 @@
     <string name="pref_summary_video_download_folder">影片下載到此資料夾：%s</string>
     <string name="pref_title_video_download_folder">影片下載資料夾</string>
     <string name="pref_popup_title_video_download_folder">選擇資料夾</string>
-    <string name="pref_summary_use_newpipe_backend">若勾選，將會使用實驗性的 NewPipe API 以存取 Youtube，其可能可以也可能無法運作……</string>
+    <string name="pref_summary_use_newpipe_backend">使用實驗性的 NewPipe API 存取 YouTube……</string>
     <string name="pref_title_use_newpipe_backend">使用 NewPipe 後端</string>
-    <string name="pref_summary_switch_volume_and_brightness">檢查您是否想要在右側加入音量控制，左側加入亮度。</string>
+    <string name="pref_summary_switch_volume_and_brightness">將音量控制放在右側，將亮度放在左側。</string>
     <string name="pref_title_switch_volume_and_brightness">切換音量與亮度手勢</string>
     <string name="pref_title_enable_immersive_mode">啟用沉浸式模式</string>
     <string name="pref_hide_tabs_restart">重新啟動應用程式以顯示更新過的分頁。</string>
     <string name="pref_summary_hide_tabs">選擇哪些分頁不要顯示。必須重新啟動。</string>
     <string name="pref_title_hide_tabs">隱藏分頁</string>
     <string name="pref_network_downloads_category">網路與下載</string>
-    <string name="pref_summary_autocast">選取 Chromecast 裝置來總是從其他應用程式在 SkyTube 中開啟影片。</string>
+    <string name="pref_summary_autocast">選取在使用其他應用程式在 SkyTube 中打開影片時要使用的 Chromecast 裝置。</string>
     <string name="pref_title_chromecast_none">無</string>
     <string name="pref_summary_mobile_network_usage">如果使用行動網路（例如 4G）來下載、觀看影片時要如何處理：%s</string>
     <string name="pref_title_mobile_network_usage">行動網路使用量</string>
     <string name="key_preferences">偏好設定</string>
+    <string name="pref_video_continuous_repeat_toggle">連續重覆</string>
 </resources>
