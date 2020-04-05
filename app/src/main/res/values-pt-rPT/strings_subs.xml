@@ -1,28 +1,28 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="subscriptions">Subscrições</string>
-	<string name="subscribe">Subscrever</string>
-	<string name="unsubscribe">Anular subscrição</string>
-	<string name="total_subscribers">%,d subscritores</string>
-
-	<string name="subscribed">Subscrito</string>
-	<string name="unsubscribed">Subscrição anulada</string>
-
-	<string name="error_get_subbed_channels">Ocorreu um erro ao tentar obter os canais subscritos.</string>
-	<string name="error_check_if_user_has_subbed">Não foi possível verificar se o utilizador subscreveu o canal (id=%s)</string>
-	<string name="error_unable_to_subscribe">Não foi possível anular a subscrição no canal (id=%s)</string>
-
-	<string name="import_subscriptions">Importar subscrições</string>
-	<string name="import_subscriptions_description">Importe as suas subscrições do Youtube acedendo a https://www.youtube.com/subscription_manager e clicando no botão \"Exportar subscrições\". Depois, selecione o ficheiro exportado e com o nome \"subscription_manager\" clicando em \"Selecionar ficheiro\".</string>
-	<string name="subscriptions_to_channels_imported">Importadas as subscrições de %d canais.</string>
-	<string name="select_xml_file">Selecionar ficheiro de subscrições</string>
-	<string name="select_all">Selecionar tudo</string>
-	<string name="select_none">Selecionar nenhum</string>
-	<string name="no_channels_found">Não foram encontrados canais do Youtube no ficheiro XML carregado.</string>
-	<string name="no_new_channels_found">Não foram encontrados canais do Youtube que não estejam já subscritos.</string>
-	<string name="import_subscriptions_parse_error">Ocorreu um erro ao processar o ficheiro XML carregado: %s.</string>
-	<string name="failed_to_import_subscriptions">Falha ao importar as subscrições do YouTube.</string>
-
-	<string name="about">Acerca</string>
-<string name="unsubscribe_from_all_current_sibbed_channels">Cancelar subscrição de todos os canais subscritos.</string>
-	</resources>
+    <string name="subscriptions">Subscrições</string>
+    <string name="subscribe">Subscrever</string>
+    <string name="unsubscribe">Anular subscrição</string>
+    <string name="total_subscribers">%,d subscritores</string>
+    <string name="subscribed">Subscrito</string>
+    <string name="unsubscribed">Subscrição anulada</string>
+    <string name="error_get_subbed_channels">Ocorreu um erro ao tentar obter os canais subscritos.</string>
+    <string name="error_check_if_user_has_subbed">Não foi possível verificar se o utilizador subscreveu o canal (id=%s)</string>
+    <string name="error_unable_to_subscribe">Não foi possível anular a subscrição no canal (id=%s)</string>
+    <string name="import_subscriptions">Importar subscrições</string>
+    <string name="import_subscriptions_description">Importe as suas subscrições do Youtube acedendo a https://www.youtube.com/subscription_manager e clicando no botão \"Exportar subscrições\". Depois, selecione o ficheiro exportado e com o nome \"subscription_manager\" clicando em \"Selecionar ficheiro\".</string>
+    <string name="subscriptions_to_channels_imported">Importadas as subscrições de %d canais.</string>
+    <string name="select_xml_file">Selecionar ficheiro de subscrições</string>
+    <string name="select_all">Selecionar tudo</string>
+    <string name="select_none">Selecionar nenhum</string>
+    <string name="no_channels_found">Não foram encontrados canais do Youtube no ficheiro XML carregado.</string>
+    <string name="no_new_channels_found">Não foram encontrados canais do Youtube que não estejam já subscritos.</string>
+    <string name="import_subscriptions_parse_error">Ocorreu um erro ao processar o ficheiro XML carregado: %s.</string>
+    <string name="failed_to_import_subscriptions">Falha ao importar as subscrições do YouTube.</string>
+    <string name="about">Acerca</string>
+    <string name="unsubscribe_from_all_current_sibbed_channels">Cancelar subscrição de todos os canais subscritos.</string>
+    <string name="channel_unsubscribed">Canal cancelado</string>
+    <string name="channel_subscribe_failed">Incapaz de subscrever canal</string>
+    <string name="channel_already_subscribed">Já subscreveu este canal</string>
+    <string name="channel_subscribed">Canal subscrito</string>
+</resources>
