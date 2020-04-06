@@ -34,6 +34,8 @@
     <string name="warning_mobile_network_play">您的裝置未連線至 Wi-Fi 網路。為了避免潛在的資料使用費，建議連線至 Wi-Fi 網路。無論如何都要播放影片嗎？</string>
     <string name="warning_mobile_network_disable">不要再詢問。</string>
     <string name="play_video">播放影片</string>
-    <string name="error_get_comments_no_network">沒有網際網路存取，留言不可用！</string>
+    <string name="error_get_comments_no_network">需要網際網路存取才能擷取留言。</string>
     <string name="mobile_data_blocked_by_policy">已封鎖下載，因為您的裝置未連線到 Wi-Fi 網路。</string>
+    <string name="error_video_parse_error">無法開始擘放影片，錯誤訊息：<br/> <br/> %s。</string>
+    <string name="error_downloaded_file_is_corrupted">下䵧的影片看起來似乎<b>已損毀</b> - 錯誤訊息為：<br/> <br/> %s。 <br/> <br/> 您想要<b>刪除</b>檔案嗎？</string>
 </resources>

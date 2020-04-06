@@ -20,5 +20,6 @@
     <string name="yes">是</string>
     <string name="no">否</string>
     <string name="search_channel">搜尋頻道</string>
-    <string name="could_not_get_channel_detailed">無法下載頻道資訊，錯誤：%s！</string>
+    <string name="could_not_get_channel_detailed">無法下載頻道資訊：%s。</string>
+    <string name="close">關閉</string>
 </resources>
