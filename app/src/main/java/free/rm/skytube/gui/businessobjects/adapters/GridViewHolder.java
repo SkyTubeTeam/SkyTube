@@ -173,7 +173,12 @@ public class GridViewHolder extends RecyclerView.ViewHolder implements Serializa
 	}
 
 	private void updateViewsData(@NonNull YouTubeChannel currentCard) {
-		viewsTextView.setText(currentCard.getTotalSubscribers());
+		if (currentCard.getSubscriberCount() >= 0) {
+			viewsTextView.setText(currentCard.getTotalSubscribers());
+		} else {
+			// the subscriber count is hidden/disabled
+			viewsTextView.setVisibility(View.GONE);
+		}
 
 		thumbsUpPercentageTextView.setVisibility(View.GONE);
 		videoDurationTextView.setVisibility(View.GONE);
