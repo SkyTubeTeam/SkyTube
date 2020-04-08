@@ -29,6 +29,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 
+import android.text.Html;
+import android.text.Spanned;
+import android.text.method.LinkMovementMethod;
+import android.text.util.Linkify;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -94,7 +98,7 @@ import free.rm.skytube.gui.businessobjects.SkyTubeMaterialDialog;
 import free.rm.skytube.gui.businessobjects.YouTubePlayer;
 import free.rm.skytube.gui.businessobjects.adapters.CommentsAdapter;
 import free.rm.skytube.gui.businessobjects.fragments.ImmersiveModeFragment;
-import free.rm.skytube.gui.businessobjects.views.ClickableLinksTextView;
+import free.rm.skytube.gui.businessobjects.views.Linker;
 import free.rm.skytube.gui.businessobjects.views.SubscribeButton;
 import hollowsoft.slidingdrawer.SlidingDrawer;
 
@@ -136,7 +140,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 	@BindView(R.id.video_desc_publish_date)
 	protected TextView			    videoDescPublishDateTextView = null;
 	@BindView(R.id.video_desc_description)
-	protected ClickableLinksTextView	videoDescriptionTextView = null;
+	protected TextView	videoDescriptionTextView = null;
 
 	@BindView(R.id.loadingVideoView)
 	protected View				    loadingVideoView = null;
@@ -292,7 +296,9 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 		});
         this.playbackSpeedController= new PlaybackSpeedController(getContext(), playbackSpeedTextView, player);
 
-    }
+		Linker.configure(this.videoDescriptionTextView);
+
+	}
 
 	private synchronized void setupPlayer() {
 		if (playerView.getPlayer() == null) {
@@ -649,13 +655,12 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 		}).executeInParallel(youTubeVideo.getChannelId());
 
 		// get the video description
-		new GetVideoDescriptionTask(youTubeVideo, description -> videoDescriptionTextView.setTextAndLinkify(description)).executeInParallel();
+		new GetVideoDescriptionTask(youTubeVideo, description -> Linker.setTextAndLinkify(videoDescriptionTextView, description)).executeInParallel();
 
 		// check if the user has subscribed to a channel... if he has, then change the state of
 		// the subscribe button
 		new CheckIfUserSubbedToChannelTask(videoDescSubscribeButton, youTubeVideo.getChannelId()).execute();
 	}
-
 
 	@Override
 	public void videoPlaybackStopped() {

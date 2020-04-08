@@ -339,7 +339,7 @@ public class NewPipeService {
     }
 
     private String filterHtml(String content) {
-        return Jsoup.clean(content, "", Whitelist.none(), new OutputSettings().prettyPrint(false));
+        return Jsoup.clean(content, "", Whitelist.basic(), new OutputSettings().prettyPrint(false));
     }
 
     private String filterHtml(Description description) {
