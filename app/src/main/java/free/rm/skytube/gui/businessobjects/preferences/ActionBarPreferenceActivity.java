@@ -38,14 +38,13 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatDelegate;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-
-import org.jetbrains.annotations.NotNull;
 
 import free.rm.skytube.R;
 
@@ -95,7 +94,7 @@ public class ActionBarPreferenceActivity extends PreferenceActivity {
 		}
 	}
 
-	@NotNull
+	@NonNull
 	@Override
 	public MenuInflater getMenuInflater() {
 		return getDelegate().getMenuInflater();

@@ -20,12 +20,13 @@ package free.rm.skytube.gui.activities;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AlertDialog;
@@ -40,8 +41,6 @@ import android.widget.FrameLayout;
 
 import com.mikepenz.actionitembadge.library.ActionItemBadge;
 import com.mikepenz.actionitembadge.library.utils.BadgeStyle;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -449,7 +448,7 @@ public class MainActivity extends BaseActivity {
 	 *
 	 * @param query Query text submitted by the user.
 	 */
-	private void displaySearchResults(String query, @NotNull final View searchView) {
+	private void displaySearchResults(String query, @NonNull final View searchView) {
 		// hide the keyboard
 		searchView.clearFocus();
 

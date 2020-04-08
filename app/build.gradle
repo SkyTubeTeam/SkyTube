@@ -115,7 +115,7 @@ dependencies {
     implementation 'org.jsoup:jsoup:1.13.1'
     implementation (group: 'com.optimaize.languagedetector', name: 'language-detector', version: '0.6') {
         exclude group: 'com.google.guava', module: 'guava'
-        // exclude group: 'com.intellij', module: 'annotations'
+        exclude group: 'com.intellij', module: 'annotations'
     }
     implementation 'com.mikepenz:actionitembadge:4.0.0@aar'
     implementation 'com.mikepenz:iconics-core:4.0.2@aar'
