@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.GetVideoDetailsTask;
-import free.rm.skytube.gui.businessobjects.views.ClickableLinksTextView;
 
 /**
  * Activity that receives an intent from other apps in order to bookmark a video from another app.

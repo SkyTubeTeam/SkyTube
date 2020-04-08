@@ -60,7 +60,7 @@ import free.rm.skytube.gui.businessobjects.YouTubePlayer;
 import free.rm.skytube.gui.businessobjects.YouTubeVideoListener;
 import free.rm.skytube.gui.businessobjects.adapters.CommentsAdapter;
 import free.rm.skytube.gui.businessobjects.fragments.ImmersiveModeFragment;
-import free.rm.skytube.gui.businessobjects.views.ClickableLinksTextView;
+import free.rm.skytube.gui.businessobjects.views.Linker;
 import free.rm.skytube.gui.businessobjects.views.SubscribeButton;
 import hollowsoft.slidingdrawer.SlidingDrawer;
 
@@ -89,7 +89,7 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 	private TextView			    videoDescDislikesTextView = null;
 	private View                    videoDescRatingsDisabledTextView = null;
 	private TextView			    videoDescPublishDateTextView = null;
-	private ClickableLinksTextView  videoDescriptionTextView = null;
+	private TextView			    videoDescriptionTextView = null;
 	private RelativeLayout          voidView = null;
 	private ImageView               indicatorImageView = null;
 	private TextView                indicatorTextView = null;
@@ -415,6 +415,8 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 			}
 		});
 		commentsDrawerIconView = view.findViewById(R.id.comments_icon_image_view);
+
+		Linker.configure(videoDescriptionTextView);
 	}
 
 
@@ -786,7 +788,7 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 				}
 
 				// get the video description
-				new GetVideoDescriptionTask(youTubeVideo, description -> videoDescriptionTextView.setTextAndLinkify(description)).executeInParallel();
+				new GetVideoDescriptionTask(youTubeVideo, description -> Linker.setTextAndLinkify(videoDescriptionTextView, description)).executeInParallel();
 			} else {
 				// video is live:  ask the user if he wants to play the video using an other app
 				new AlertDialog.Builder(getContext())
