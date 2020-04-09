@@ -1,16 +1,17 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="bookmarks">Marcadores</string>
-
-	<string name="bookmark">Adicionar aos marcadores</string>
-	<string name="video_bookmarked">Vídeo adicionado aos marcadores</string>
-	<string name="video_bookmarked_error">Não foi possível adicionar o vídeo aos marcadores.</string>
-
-	<string name="unbookmark">Remover dos marcadores</string>
-	<string name="video_unbookmarked">Vídeo removido dos marcadores</string>
-	<string name="video_unbookmarked_error">Não foi possível remover o vídeo dos marcadores.</string>
-
-	<string name="no_bookmarked_videos_text">Ainda não adicionou qualquer vídeo aos marcadores.
+    <string name="bookmarks">Marcadores</string>
+    <string name="bookmark">Adicionar aos marcadores</string>
+    <string name="video_bookmarked">Vídeo adicionado aos marcadores</string>
+    <string name="video_bookmarked_error">Não foi possível adicionar o vídeo aos marcadores.</string>
+    <string name="unbookmark">Remover dos marcadores</string>
+    <string name="video_unbookmarked">Vídeo removido dos marcadores</string>
+    <string name="video_unbookmarked_error">Não foi possível remover o vídeo dos marcadores.</string>
+    <string name="no_bookmarked_videos_text">Ainda não adicionou qualquer vídeo aos marcadores.
 \n
 \nAssim que o fizer, serão mostrados aqui.</string>
+    <string name="bookmark_share_invalid_url">Apenas os URLs válidos do YouTube podem ser marcados.</string>
+    <string name="bookmark_share_label">Marca do SkyTube</string>
+    <string name="video_was_not_bookmarked">Vídeo não foi marcado</string>
+    <string name="video_already_bookmarked">Vídeo já marcado</string>
 </resources>
