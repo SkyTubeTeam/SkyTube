@@ -1,26 +1,25 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="could_not_get_videos">Não foi possível obter os vídeos de %s.</string>
-	<string name="views">%,d visualizações</string>
-	<string name="error">Erro</string>
-	<string name="ok">OK</string>
-	<string name="search_videos">Pesquisar vídeos</string>
-	<string name="launch_offical_player_error">Ocorreu um erro ao tentar iniciar o reprodutor oficial YouTube da Google. Certifique-se de que a aplicação está instalada.</string>
-	<string name="LIVE">Direto</string>
-
-	<string name="featured">Destaque</string>
-	<string name="most_popular">Mais popular</string>
-
-	<string name="video">Vídeo</string>
-	<string name="videos">Vídeos</string>
-	<string name="num_videos">%d vídeos</string>
-	<string name="playlists">Listas de reprodução</string>
-	<string name="could_not_get_playlists">Incapaz de obter as listas de %s.</string>
-
-	<string name="loading">A carregar…</string>
+    <string name="could_not_get_videos">Não foi possível obter os vídeos de %s.</string>
+    <string name="views">%,d visualizações</string>
+    <string name="error">Erro</string>
+    <string name="ok">OK</string>
+    <string name="search_videos">Pesquisar vídeos</string>
+    <string name="launch_offical_player_error">Ocorreu um erro ao tentar iniciar o reprodutor oficial YouTube da Google. Certifique-se de que a aplicação está instalada.</string>
+    <string name="LIVE">Direto</string>
+    <string name="featured">Destaque</string>
+    <string name="most_popular">Mais popular</string>
+    <string name="video">Vídeo</string>
+    <string name="videos">Vídeos</string>
+    <string name="num_videos">%d vídeos</string>
+    <string name="playlists">Listas de reprodução</string>
+    <string name="could_not_get_playlists">Incapaz de obter as listas de %s.</string>
+    <string name="loading">A carregar…</string>
     <string name="could_not_get_channel">Não foi possível obter a informação do canal!</string>
-<string name="hello_blank_fragment">Olá fragmento vazio</string>
+    <string name="hello_blank_fragment">Olá fragmento vazio</string>
     <string name="yes">Sim</string>
-	<string name="no">Não</string>
-
-    </resources>
+    <string name="no">Não</string>
+    <string name="search_channel">Procurar canal</string>
+    <string name="close">Fechar</string>
+    <string name="could_not_get_channel_detailed">Não foi possível descarregar as informações do canal: %s.</string>
+</resources>
