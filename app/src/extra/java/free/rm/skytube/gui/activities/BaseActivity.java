@@ -233,7 +233,7 @@ public abstract class BaseActivity extends AppCompatActivity implements MainActi
 					externalPlayIntent = intent;
 				} else {
 					if (connectedToChromecast) {
-						new GetVideoDetailsTask(YouTubePlayerV1Fragment.getUrlFromIntent(intent), (videoUrl, video) -> playVideoOnChromecast(video, 0)).executeInParallel();
+						new GetVideoDetailsTask(this, intent, (videoId, video) -> playVideoOnChromecast(video, 0)).executeInParallel();
 					} else {
 						Intent i = new Intent(this, YouTubePlayerActivity.class);
 						i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
