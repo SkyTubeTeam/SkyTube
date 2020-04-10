@@ -1,13 +1,13 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="next">Sljedeće</string>
-	<string name="done">Gotovo</string>
-	<string name="skip">Preskoči</string>
-	<string name="page_counter">%d od %d</string>
-
-	<string name="tutorial_slide_1">Prijeđite prstom ulijevo da biste vidjeli komentare.</string>
-	<string name="tutorial_slide_2">Prijeđite prstom prema gore da biste vidjeli opis videozapisa.</string>
-	<string name="tutorial_slide_3">Prijeđite prstom vodoravno da biste premotali naprijed ili natrag.</string>
-	<string name="tutorial_slide_4">Prijeđite prstom okomito kako biste prilagodili glasnoću.</string>
-	<string name="tutorial_slide_5">Prijeđite prstom okomito kako biste podesili svjetlinu.</string>
-	<string name="tutorial_slide_6">Dvaput dodirnite za pauziranje ili reprodukciju videozapisa.</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="next">Sljedeće</string>
+    <string name="done">Gotovo</string>
+    <string name="skip">Preskoči</string>
+    <string name="page_counter">%1$d od %2$d</string>
+    <string name="tutorial_slide_1">Povuci prstom ulijevo za prikaz komentara.</string>
+    <string name="tutorial_slide_2">Povuci prstom prema gore za prikaz opisa videozapisa.</string>
+    <string name="tutorial_slide_3">Povuci prstom vodoravno za kretanje prema naprijed ili natrag.</string>
+    <string name="tutorial_slide_4">Povuci prstom okomito za prilagođavanje glasnoće.</string>
+    <string name="tutorial_slide_5">Povuci prstom okomito za podešavanje svjetline.</string>
+    <string name="tutorial_slide_6">Dodirni dvaput za pauziranje ili pokretanje videozapisa.</string>
 </resources>
