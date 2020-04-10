@@ -43,11 +43,18 @@ import androidx.core.content.res.ResourcesCompat;
 import com.google.api.client.googleapis.json.GoogleJsonError;
 import com.google.api.client.googleapis.json.GoogleJsonResponseException;
 
+import org.schabi.newpipe.extractor.exceptions.FoundAdException;
+
 import java.util.Arrays;
 import java.util.List;
 
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.FeedUpdaterReceiver;
+import free.rm.skytube.businessobjects.YouTube.Tasks.GetPlaylistTask;
+import free.rm.skytube.businessobjects.YouTube.newpipe.ContentId;
+import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
+import free.rm.skytube.businessobjects.db.Tasks.GetChannelInfo;
+import free.rm.skytube.gui.businessobjects.YouTubePlayer;
 
 /**
  * SkyTube application.
@@ -279,6 +286,80 @@ public class SkyTubeApp extends MultiDexApplication {
 		ClipData clip = ClipData.newPlainText(text, url);
 		clipboard.setPrimaryClip(clip);
 		Toast.makeText(context, R.string.url_copied_to_clipboard, Toast.LENGTH_SHORT).show();
+	}
+
+	/**
+	 * The video URL is passed to SkyTube via another Android app (i.e. via an intent).
+	 *
+	 * @return The URL of the YouTube video the user wants to play.
+	 */
+	public static ContentId getUrlFromIntent(final Context ctx, final Intent intent) {
+		if (Intent.ACTION_VIEW.equals(intent.getAction()) && intent.getData() != null) {
+			return parseUrl(ctx, intent.getData().toString());
+		}
+		return null;
+	}
+
+	public static void openUrl(Context ctx, String url) {
+		openUrl(ctx, url, true);
+	}
+
+	public static ContentId parseUrl(Context context, String url) {
+		try {
+			ContentId id = NewPipeService.get().getContentId(url);
+			if (id == null) {
+				String message = String.format(context.getString(R.string.error_invalid_url), url);
+				Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+			}
+			return id;
+		} catch (FoundAdException e) {
+			SkyTubeApp.notifyUserOnError(context, e);
+			return null;
+		} catch (RuntimeException e) {
+			SkyTubeApp.notifyUserOnError(context, e);
+			return null;
+		}
+
+	}
+	/**
+	 * Open the url - internally, or externally if useExternalBrowser is switched on.
+	 * @param ctx
+	 * @param url
+	 * @param useExternalBrowser
+	 */
+	public static void openUrl(Context ctx, String url, boolean useExternalBrowser) {
+		ContentId content = parseUrl(ctx, url);
+
+		if (content == null) {
+			if (useExternalBrowser) {
+				YouTubePlayer.viewInBrowser(url, ctx);
+			}
+		} else {
+			switch (content.getType()) {
+				case STREAM: {
+					YouTubePlayer.launch(content, ctx);
+					break;
+				}
+				case CHANNEL: {
+					new GetChannelInfo(ctx, channel -> {
+						YouTubePlayer.launchChannel(channel, ctx);
+					}, true).executeInParallel(content.getId());
+					break;
+				}
+				case PLAYLIST: {
+					new GetPlaylistTask(ctx, content.getId(), playlist -> {
+						YouTubePlayer.launchPlaylist(playlist, ctx);
+					}).executeInParallel();
+					break;
+				}
+				default: {
+					if (useExternalBrowser) {
+						YouTubePlayer.viewInBrowser(url, ctx);
+					}
+				}
+			}
+		}
+
 	}
 
 }

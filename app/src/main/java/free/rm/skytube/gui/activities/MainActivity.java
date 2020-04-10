@@ -327,7 +327,7 @@ public class MainActivity extends BaseActivity {
 				final String videoUrl = ((EditText)((AlertDialog) dialog).findViewById(R.id.dialog_url_edittext)).getText().toString();
 
 				// play the video
-				YouTubePlayer.launch(videoUrl, MainActivity.this);
+				SkyTubeApp.openUrl(MainActivity.this, videoUrl);
 			})
 			.setNegativeButton(R.string.cancel, null)
 			.show();

@@ -43,6 +43,7 @@ import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetVideoDescriptionTask;
 import free.rm.skytube.businessobjects.YouTube.VideoStream.StreamMetaData;
+import free.rm.skytube.businessobjects.YouTube.newpipe.ContentId;
 import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
 import free.rm.skytube.businessobjects.db.PlaybackStatusDb;
 import free.rm.skytube.businessobjects.db.Tasks.CheckIfUserSubbedToChannelTask;
@@ -158,7 +159,10 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 				getVideoInfoTasks();
 			} else {
 				// ... or the video URL is passed to SkyTube via another Android app
-				new GetVideoDetailsTask(getUrlFromIntent(getActivity().getIntent()), this).executeInParallel();
+				new GetVideoDetailsTask(
+						getContext(),
+						getActivity().getIntent(),
+						this).executeInParallel();
 			}
 
 		}
@@ -812,10 +816,10 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 	 * @param youTubeVideo
 	 */
 	@Override
-	public void onYouTubeVideo(String videoUrl, YouTubeVideo youTubeVideo) {
+	public void onYouTubeVideo(ContentId videoUrl, YouTubeVideo youTubeVideo) {
 		if (youTubeVideo == null) {
 			// invalid URL error (i.e. we are unable to decode the URL)
-			String err = String.format(getString(R.string.error_invalid_url), videoUrl);
+			String err = String.format(getString(R.string.error_invalid_url), videoUrl.getCanonicalUrl());
 			Toast.makeText(getActivity(), err, Toast.LENGTH_LONG).show();
 
 			// log error
@@ -837,22 +841,6 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 		}
 	}
 
-	////////////////////////////////////////////////////////////////////////////////////////////////
-
-	/**
-	 * The video URL is passed to SkyTube via another Android app (i.e. via an intent).
-	 *
-	 * @return The URL of the YouTube video the user wants to play.
-	 */
-	public static String getUrlFromIntent(final Intent intent) {
-		String url = null;
-
-		if (Intent.ACTION_VIEW.equals(intent.getAction()) && intent.getData() != null) {
-			url = intent.getData().toString();
-		}
-
-		return url;
-	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////
 	@Override
