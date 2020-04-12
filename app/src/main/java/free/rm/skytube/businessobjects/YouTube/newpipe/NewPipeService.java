@@ -293,15 +293,15 @@ public class NewPipeService {
         // 2, channelId=https://www.youtube.com/channel/UCbx1TZgxfIauUZyPuBzEwZg
         // 3, channelId=channel/UCbx1TZgxfIauUZyPuBzEwZg
         ListLinkHandlerFactory channelLHFactory = streamingService.getChannelLHFactory();
-        if (channelId.startsWith("channel/")) {
-            return channelLHFactory.fromId(channelId);
-        }
         try {
             return channelLHFactory.fromUrl(channelId);
         } catch (ParsingException p) {
             if (DEBUG_LOG) {
                 Logger.d(this, "Unable to parse channel url=%s", channelId);
             }
+        }
+        if (channelId.startsWith("channel/") || channelId.startsWith("c/") || channelId.startsWith("user/")) {
+            return channelLHFactory.fromId(channelId);
         }
         return channelLHFactory.fromId("channel/" + channelId);
     }
