@@ -7,12 +7,11 @@ import com.google.api.services.youtube.model.Playlist;
 import com.google.api.services.youtube.model.PlaylistListResponse;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
+import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.Logger;
-import free.rm.skytube.businessobjects.YouTube.GetChannelsDetails;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPI;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPIKey;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
@@ -27,10 +26,13 @@ public class GetPlaylistTask extends AsyncTaskParallel<Void, Void, YouTubePlayli
     private final String playlistId;
     private final YouTubePlaylistListener playlistListener;
     private final GetChannelInfo channelInfo;
+    private final Context context;
+    private Exception exception;
 
     protected static final Long MAX_RESULTS = 45L;
 
     public GetPlaylistTask(Context context, String playlistId, YouTubePlaylistListener playlistClickListener) {
+        this.context = context;
         this.channelInfo = new GetChannelInfo(context, true);
         this.playlistId = playlistId;
         this.playlistListener = playlistClickListener;
@@ -47,9 +49,9 @@ public class GetPlaylistTask extends AsyncTaskParallel<Void, Void, YouTubePlayli
             playlistList.setId(playlistId);
 
             return getFirstPlaylist(playlistList);
-        } catch (IOException e) {
-            Logger.e(this, "Couldn't initialize GetPlaylist");
-            e.printStackTrace();
+        } catch (Exception e) {
+            Logger.e(this, "Couldn't initialize GetPlaylist", e);
+            exception = e;
         }
         return null;
     }
@@ -57,6 +59,7 @@ public class GetPlaylistTask extends AsyncTaskParallel<Void, Void, YouTubePlayli
     @Override
     protected void onPostExecute(YouTubePlaylist youTubePlaylist) {
         channelInfo.showErrorToUi();
+        SkyTubeApp.notifyUserOnError(context, exception);
         if (playlistListener != null) {
             playlistListener.onYouTubePlaylist(youTubePlaylist);
         }

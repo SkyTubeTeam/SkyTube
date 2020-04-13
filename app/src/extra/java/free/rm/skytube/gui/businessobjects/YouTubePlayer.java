@@ -26,9 +26,6 @@ import android.net.Uri;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.widget.Toast;
-
-import org.schabi.newpipe.extractor.exceptions.ParsingException;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
@@ -36,14 +33,15 @@ import free.rm.skytube.businessobjects.ChromecastListener;
 import free.rm.skytube.businessobjects.GetVideoDetailsTask;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPIKey;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
+import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubePlaylist;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
-import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
-import free.rm.skytube.businessobjects.YouTube.newpipe.VideoId;
+import free.rm.skytube.businessobjects.YouTube.newpipe.ContentId;
 import free.rm.skytube.businessobjects.db.PlaybackStatusDb;
 import free.rm.skytube.gui.activities.BaseActivity;
 import free.rm.skytube.gui.activities.MainActivity;
 import free.rm.skytube.gui.activities.YouTubePlayerActivity;
 import free.rm.skytube.gui.fragments.ChannelBrowserFragment;
+import free.rm.skytube.gui.fragments.PlaylistVideosFragment;
 
 import static free.rm.skytube.gui.activities.YouTubePlayerActivity.YOUTUBE_VIDEO_OBJ;
 
@@ -91,26 +89,41 @@ public class YouTubePlayer {
 	/**
 	 * Launches the custom-made YouTube player so that the user can view the selected video.
 	 *
-	 * @param videoUrl URL of the video to be watched.
+	 * @param videoId ContentId of the video to be watched.
 	 */
-	public static void launch(String videoUrl, final Context context) {
+	public static void launch(ContentId videoId, final Context context) {
 		if(connectingToChromecast || connectedToChromecast) {
-			new GetVideoDetailsTask(videoUrl, (videoUrl1, video) -> launchOnChromecast(video, context)).executeInParallel();
+			new GetVideoDetailsTask(context, videoId, (videoUrl1, video) -> launchOnChromecast(video, context)).executeInParallel();
 		} else {
 			// if the user has selected to play the videos using the official YouTube player
 			// (in the preferences/settings) ...
 			if (useOfficialYouTubePlayer(context)) {
-				try {
-					VideoId id = NewPipeService.get().getVideoId(videoUrl);
-					launchOfficialYouTubePlayer(id.getId(), context);
-				} catch (ParsingException p) {
-					String err = String.format(context.getString(R.string.error_invalid_url), videoUrl);
-					Toast.makeText(context, err, Toast.LENGTH_LONG).show();
-				}
+				launchOfficialYouTubePlayer(videoId.getId(), context);
 			} else {
-				launchCustomYouTubePlayer(videoUrl, context);
+				launchCustomYouTubePlayer(videoId, context);
 			}
 		}
+	}
+
+	/**
+	 * Launch the {@link PlaylistVideosFragment}
+	 * @param playlist the playlist to display
+	 */
+	public static void launchPlaylist(final YouTubePlaylist playlist, final Context context) {
+		Intent playlistIntent = new Intent(context, MainActivity.class);
+		playlistIntent.setAction(MainActivity.ACTION_VIEW_PLAYLIST);
+		playlistIntent.putExtra(PlaylistVideosFragment.PLAYLIST_OBJ, playlist);
+		context.startActivity(playlistIntent);
+	}
+
+	/**
+	 * Launch an external activity to actually open the given URL
+	 * @param url
+	 */
+	public static void viewInBrowser(String url, final Context context) {
+		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+		browserIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		context.startActivity(browserIntent);
 	}
 
 	private static void launchOnChromecast(final YouTubeVideo youTubeVideo, final Context context) {
@@ -192,10 +205,10 @@ public class YouTubePlayer {
 	/**
 	 * Launch the custom-made YouTube player.
 	 */
-	private static void launchCustomYouTubePlayer(String videoUrl, Context context) {
+	private static void launchCustomYouTubePlayer(ContentId videoId, Context context) {
 		Intent i = new Intent(context, YouTubePlayerActivity.class);
 		i.setAction(Intent.ACTION_VIEW);
-		i.setData(Uri.parse(videoUrl));
+		i.setData(Uri.parse(videoId.getCanonicalUrl()));
 		context.startActivity(i);
 	}
 

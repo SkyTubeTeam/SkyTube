@@ -1,5 +1,8 @@
 package free.rm.skytube.businessobjects;
 
+import android.content.Context;
+import android.content.Intent;
+
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -7,7 +10,9 @@ import java.net.URLDecoder;
 import org.schabi.newpipe.extractor.exceptions.ExtractionException;
 import org.schabi.newpipe.extractor.exceptions.ParsingException;
 
+import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
+import free.rm.skytube.businessobjects.YouTube.newpipe.ContentId;
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
 import free.rm.skytube.businessobjects.YouTube.newpipe.VideoId;
 import free.rm.skytube.gui.businessobjects.YouTubeVideoListener;
@@ -18,45 +23,35 @@ import free.rm.skytube.gui.businessobjects.YouTubeVideoListener;
  */
 public class GetVideoDetailsTask extends AsyncTaskParallel<Void, Void, YouTubeVideo> {
 
-	private String videoUrl = null;
-	private YouTubeVideoListener youTubeVideoListener;
+	private final Context context;
+	private final ContentId content;
+	private final YouTubeVideoListener youTubeVideoListener;
 	private Exception lastException;
 
-	public GetVideoDetailsTask(String videoUrl, YouTubeVideoListener youTubeVideoListener) {
-		this.videoUrl = videoUrl;
+	public GetVideoDetailsTask(Context context, ContentId content, YouTubeVideoListener youTubeVideoListener) {
+		this.context = context;
+		this.content = content;
 		this.youTubeVideoListener = youTubeVideoListener;
 	}
 
-	@Override
-	protected void onPreExecute() {
-		try {
-			// YouTube sends subscriptions updates email in which its videos' URL are encoded...
-			// Hence we need to decode them first...
-			videoUrl = URLDecoder.decode(videoUrl, "UTF-8");
-		} catch (UnsupportedEncodingException e) {
-			Logger.e(this, "UnsupportedEncodingException on " + videoUrl + " encoding = UTF-8", e);
-		}
+	public GetVideoDetailsTask(Context context, Intent intent, YouTubeVideoListener youTubeVideoListener) {
+		this.context = context;
+		this.content = SkyTubeApp.getUrlFromIntent(context, intent);
+		this.youTubeVideoListener = youTubeVideoListener;
 	}
 
-
 	/**
-	 * Returns an instance of {@link YouTubeVideo} from the given {@link #videoUrl}.
+	 * Returns an instance of {@link YouTubeVideo} from the given {@link #content}.
 	 *
 	 * @return {@link YouTubeVideo}; null if an error has occurred.
 	 */
 	@Override
 	protected YouTubeVideo doInBackground(Void... params) {
-	    try {
-			VideoId videoId = NewPipeService.get().getVideoId(videoUrl);
-			try {
-				return NewPipeService.get().getDetails(videoId.getId());
-			} catch (ExtractionException | IOException e) {
-				Logger.e(this, "Unable to get video details, where id=" + videoId, e);
-				this.lastException = e;
-			}
-		} catch (ParsingException videoUrlParsing) {
-			Logger.e(this, "Unable to get video details, where id=" + videoUrl, videoUrlParsing);
-			this.lastException = videoUrlParsing;
+		try {
+			return NewPipeService.get().getDetails(content.getId());
+		} catch (ExtractionException | IOException e) {
+			Logger.e(this, "Unable to get video details, where id=" + content, e);
+			this.lastException = e;
 		}
 
 		return null;
@@ -64,8 +59,10 @@ public class GetVideoDetailsTask extends AsyncTaskParallel<Void, Void, YouTubeVi
 
 	@Override
 	protected void onPostExecute(YouTubeVideo youTubeVideo) {
+		SkyTubeApp.notifyUserOnError(context, lastException);
+
 		if(youTubeVideoListener != null) {
-			youTubeVideoListener.onYouTubeVideo(videoUrl, youTubeVideo);
+			youTubeVideoListener.onYouTubeVideo(content, youTubeVideo);
 		}
 	}
 }

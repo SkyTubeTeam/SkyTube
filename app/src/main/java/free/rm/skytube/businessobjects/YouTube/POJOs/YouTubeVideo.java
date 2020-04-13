@@ -575,7 +575,13 @@ public class YouTubeVideo extends CardData implements Serializable {
 		Uri fileUri = getFileUri();
 		if (fileUri != null) {
 			File file = new File(fileUri.getPath());
-			Uri uri = FileProvider.getUriForFile(context, BuildConfig.APPLICATION_ID + ".provider", file);
+			Uri uri;
+			try {
+				uri = FileProvider.getUriForFile(context, BuildConfig.APPLICATION_ID + ".provider", file);
+			} catch (Exception e) {
+				Logger.e(YouTubeVideo.this, "Error accessing path: " + file +", message:"+ e.getMessage(), e);
+				uri = fileUri;
+			}
 			Intent intent = new Intent(Intent.ACTION_VIEW, uri);
 			intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 			context.startActivity(intent);

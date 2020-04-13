@@ -67,6 +67,8 @@ import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 
+import org.schabi.newpipe.extractor.exceptions.ParsingException;
+
 import java.util.Locale;
 
 import butterknife.BindView;
@@ -81,6 +83,8 @@ import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetVideoDescriptionTask;
 import free.rm.skytube.businessobjects.YouTube.VideoStream.StreamMetaData;
+import free.rm.skytube.businessobjects.YouTube.newpipe.ContentId;
+import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
 import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
 import free.rm.skytube.businessobjects.db.PlaybackStatusDb;
 import free.rm.skytube.businessobjects.db.Tasks.CheckIfUserSubbedToChannelTask;
@@ -204,7 +208,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 				getVideoInfoTasks();
 			} else {
 				// ... or the video URL is passed to SkyTube via another Android app
-				new GetVideoDetailsTask(getUrlFromIntent(intent),  this::youTubeVideoListener).executeInParallel();
+				new GetVideoDetailsTask(getContext(), intent, this::youTubeVideoListener).executeInParallel();
 			}
 
 		}
@@ -223,25 +227,10 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 		}
 	}
 
-	/**
-	 * The video URL is passed to SkyTube via another Android app (i.e. via an intent).
-	 *
-	 * @return The URL of the YouTube video the user wants to play.
-	 */
-	private String getUrlFromIntent(final Intent intent) {
-		String url = null;
-
-		if (Intent.ACTION_VIEW.equals(intent.getAction()) && intent.getData() != null) {
-			url = intent.getData().toString();
-		}
-
-		return url;
-	}
-
-	protected void youTubeVideoListener(String videoUrl, YouTubeVideo video) {
+	protected void youTubeVideoListener(ContentId videoUrl, YouTubeVideo video) {
 		if (video == null) {
 			// invalid URL error (i.e. we are unable to decode the URL)
-			String err = String.format(getString(R.string.error_invalid_url), videoUrl);
+			String err = String.format(getString(R.string.error_invalid_url), videoUrl.getCanonicalUrl());
 			Toast.makeText(getActivity(), err, Toast.LENGTH_LONG).show();
 
 			// log error
