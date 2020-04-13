@@ -1,0 +1,21 @@
+The new release contains the following changes:
+• Better URL handling
+    • Opening Youtube URL's from other apps should work better,
+    • SkyTube now can detect better if it's a channel/playlist or video, even on hooktube.com or on invidio.us (or related) sites.
+    • Bookmarking works better too (if it's not a video, then the app just opens the channel/playlist)
+    • Clicking in the video description on channel or playlist links works too
+• UI fixes which caused occasional crashes, due to timing issues.
+• Better error messages if the user tries to subscribe to an already subscribed channel, or bookmark an already bookmarked video.
+• added more playback speed options - by @okan35
+• Restore Android 4.0 compatibility.
+• Enable TLS 1.1/1.2 usage for Android 4.1 - 4.4, where it wasn't enabled by default.
+• Updated translations:
+    • Chinese (Traditional) - by Jeff Huang
+    • Croatian - by Milo Ivir
+    • Dutch - by Heimen Stoffels
+    * French - by Jeannette Lavoie
+    • Hungarian - by Zsombor Gegesy
+    • Indonesian - by zmni
+    • Norwegian Bokmål - by Allan Nordhøy
+    • Portuguese - by ssantos
+    • Spanish - by Julio Montero
