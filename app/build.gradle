@@ -98,8 +98,8 @@ dependencies {
         exclude group: 'com.google.http-client', module:'google-http-client-jackson2'
     }
 
-    implementation 'com.github.TeamNewPipe.NewPipeExtractor:extractor:v0.19.0'
-    //implementation 'com.github.gzsombor.NewPipeExtractor:extractor:41dd748cb3003cb2'
+    // implementation 'com.github.TeamNewPipe.NewPipeExtractor:extractor:v0.19.0'
+    implementation 'com.github.SkyTubeTeam.NewPipeExtractor:extractor:d7925c905e24876f8d'
 
     // other modules
     implementation group: 'org.ocpsoft.prettytime', name: 'prettytime', version: '4.0.4.Final'
