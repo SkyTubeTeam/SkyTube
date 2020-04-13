@@ -29,6 +29,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 
+import android.text.Html;
+import android.text.Spanned;
+import android.text.method.LinkMovementMethod;
+import android.text.util.Linkify;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -49,10 +53,12 @@ import com.bumptech.glide.request.RequestOptions;
 import com.google.android.exoplayer2.C;
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.DefaultRenderersFactory;
+import com.google.android.exoplayer2.ExoPlaybackException;
 import com.google.android.exoplayer2.ExoPlayerFactory;
 import com.google.android.exoplayer2.Player;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.source.ExtractorMediaSource;
+import com.google.android.exoplayer2.source.UnrecognizedInputFormatException;
 import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection;
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
 import com.google.android.exoplayer2.trackselection.TrackSelection;
@@ -63,6 +69,8 @@ import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 
 import java.util.Locale;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import free.rm.skytube.R;
 import free.rm.skytube.app.Settings;
 import free.rm.skytube.app.SkyTubeApp;
@@ -90,7 +98,7 @@ import free.rm.skytube.gui.businessobjects.SkyTubeMaterialDialog;
 import free.rm.skytube.gui.businessobjects.YouTubePlayer;
 import free.rm.skytube.gui.businessobjects.adapters.CommentsAdapter;
 import free.rm.skytube.gui.businessobjects.fragments.ImmersiveModeFragment;
-import free.rm.skytube.gui.businessobjects.views.ClickableLinksTextView;
+import free.rm.skytube.gui.businessobjects.views.Linker;
 import free.rm.skytube.gui.businessobjects.views.SubscribeButton;
 import hollowsoft.slidingdrawer.SlidingDrawer;
 
@@ -104,32 +112,55 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 	private YouTubeVideo		    youTubeVideo = null;
 	private YouTubeChannel          youTubeChannel = null;
 
-	private PlayerView              playerView;
+	@BindView(R.id.player_view)
+	protected PlayerView              playerView;
 	private SimpleExoPlayer         player;
 	private long				    playerInitialPosition = 0;
 
 	private Menu                    menu = null;
 
-	private TextView			    videoDescTitleTextView = null;
-	private ImageView			    videoDescChannelThumbnailImageView = null;
-	private TextView			    videoDescChannelTextView = null;
-	private SubscribeButton         videoDescSubscribeButton = null;
-	private TextView			    videoDescViewsTextView = null;
-	private ProgressBar             videoDescLikesBar = null;
-	private TextView			    videoDescLikesTextView = null;
-	private TextView			    videoDescDislikesTextView = null;
-	private View                    videoDescRatingsDisabledTextView = null;
-	private TextView			    videoDescPublishDateTextView = null;
-	private ClickableLinksTextView	videoDescriptionTextView = null;
-	private View				    loadingVideoView = null;
-	private SlidingDrawer           videoDescriptionDrawer = null;
-	private SlidingDrawer		    commentsDrawer = null;
-	private View				    commentsProgressBar = null,
-									noVideoCommentsView = null;
+	@BindView(R.id.video_desc_title)
+	protected  TextView			    videoDescTitleTextView = null;
+	@BindView(R.id.video_desc_channel_thumbnail_image_view)
+	protected ImageView			    videoDescChannelThumbnailImageView = null;
+	@BindView(R.id.video_desc_channel)
+	protected TextView			    videoDescChannelTextView = null;
+	@BindView(R.id.video_desc_subscribe_button)
+	protected SubscribeButton         videoDescSubscribeButton = null;
+	@BindView(R.id.video_desc_views)
+	protected TextView			    videoDescViewsTextView = null;
+	@BindView(R.id.video_desc_likes_bar)
+	protected ProgressBar             videoDescLikesBar = null;
+	@BindView(R.id.video_desc_likes)
+	protected TextView			    videoDescLikesTextView = null;
+	@BindView(R.id.video_desc_dislikes)
+	protected TextView			    videoDescDislikesTextView = null;
+	@BindView(R.id.video_desc_ratings_disabled)
+	protected View                    videoDescRatingsDisabledTextView = null;
+	@BindView(R.id.video_desc_publish_date)
+	protected TextView			    videoDescPublishDateTextView = null;
+	@BindView(R.id.video_desc_description)
+	protected TextView	videoDescriptionTextView = null;
+
+	@BindView(R.id.loadingVideoView)
+	protected View				    loadingVideoView = null;
+	@BindView(R.id.des_drawer)
+	protected SlidingDrawer           videoDescriptionDrawer = null;
+
+	@BindView(R.id.comments_drawer)
+	protected SlidingDrawer		    commentsDrawer = null;
+	@BindView(R.id.comments_progress_bar)
+	protected View				    commentsProgressBar = null;
+	@BindView(R.id.no_video_comments_text_view)
+	protected View 					noVideoCommentsView = null;
 	private CommentsAdapter         commentsAdapter = null;
-	private ExpandableListView      commentsExpandableListView = null;
+	@BindView(R.id.commentsExpandableListView)
+	protected ExpandableListView      commentsExpandableListView = null;
 	private YouTubePlayerActivityListener listener = null;
 	private PlayerViewGestureHandler playerViewGestureHandler;
+
+	@BindView(R.id.playbackSpeed)
+	protected TextView playbackSpeedTextView;
 	private PlaybackSpeedController playbackSpeedController;
 
     @Nullable
@@ -141,6 +172,8 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 
 		// inflate the layout for this fragment
 		View view = inflater.inflate(R.layout.fragment_youtube_player_v2, container, false);
+
+		ButterKnife.bind(this, view);
 
 		// indicate that this fragment has an action bar menu
 		setHasOptionsMenu(true);
@@ -244,7 +277,6 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 		getSupportActionBar().setDisplayShowHomeEnabled(true);
 
 		// setup the player
-		playerView = view.findViewById(R.id.player_view);
 		playerViewGestureHandler.initView(view);
 		playerView.setOnTouchListener(playerViewGestureHandler);
 		playerView.requestFocus();
@@ -252,38 +284,21 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 		setupPlayer();
 		playerView.setResizeMode(AspectRatioFrameLayout.RESIZE_MODE_FIT);               // ensure that videos are played in their correct aspect ratio
 
-		loadingVideoView = view.findViewById(R.id.loadingVideoView);
-
-		videoDescriptionDrawer = view.findViewById(R.id.des_drawer);
-		videoDescTitleTextView = view.findViewById(R.id.video_desc_title);
-		videoDescChannelThumbnailImageView = view.findViewById(R.id.video_desc_channel_thumbnail_image_view);
 		videoDescChannelThumbnailImageView.setOnClickListener(v -> {
 			if (youTubeChannel != null) {
 				YouTubePlayer.launchChannel(youTubeChannel, getActivity());
 			}
 		});
-		videoDescChannelTextView = view.findViewById(R.id.video_desc_channel);
-		videoDescViewsTextView = view.findViewById(R.id.video_desc_views);
-		videoDescLikesTextView = view.findViewById(R.id.video_desc_likes);
-		videoDescDislikesTextView = view.findViewById(R.id.video_desc_dislikes);
-		videoDescRatingsDisabledTextView = view.findViewById(R.id.video_desc_ratings_disabled);
-		videoDescPublishDateTextView = view.findViewById(R.id.video_desc_publish_date);
-		videoDescriptionTextView = view.findViewById(R.id.video_desc_description);
-		videoDescLikesBar = view.findViewById(R.id.video_desc_likes_bar);
-		videoDescSubscribeButton = view.findViewById(R.id.video_desc_subscribe_button);
-
-		commentsExpandableListView = view.findViewById(R.id.commentsExpandableListView);
-		commentsProgressBar = view.findViewById(R.id.comments_progress_bar);
-		noVideoCommentsView = view.findViewById(R.id.no_video_comments_text_view);
-		commentsDrawer = view.findViewById(R.id.comments_drawer);
 		commentsDrawer.setOnDrawerOpenListener(() -> {
 			if (commentsAdapter == null) {
 				commentsAdapter = new CommentsAdapter(getActivity(), youTubeVideo.getId(), commentsExpandableListView, commentsProgressBar, noVideoCommentsView);
 			}
 		});
-        this.playbackSpeedController= new PlaybackSpeedController(getContext(), view.findViewById(R.id.playbackSpeed), player);
+        this.playbackSpeedController= new PlaybackSpeedController(getContext(), playbackSpeedTextView, player);
 
-    }
+		Linker.configure(this.videoDescriptionTextView);
+
+	}
 
 	private synchronized void setupPlayer() {
 		if (playerView.getPlayer() == null) {
@@ -302,6 +317,36 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 					} else {
 						preventDeviceSleeping(false);
 					}
+				}
+
+				@Override
+				public void onPlayerError(ExoPlaybackException error) {
+					Logger.e(this, ":: onPlayerError " + error.getMessage(), error);
+
+					boolean askForDelete = askForDelete(error);
+					String errorMessage = error.getCause().getMessage();
+					new SkyTubeMaterialDialog(YouTubePlayerV2Fragment.this.getContext())
+								.onNegativeOrCancel(dialog -> closeActivity())
+								.content(askForDelete ? R.string.error_downloaded_file_is_corrupted : R.string.error_video_parse_error, errorMessage)
+								.title(R.string.error_video_play)
+								.negativeText(R.string.close)
+								.positiveText(null)
+								.positiveText(askForDelete ? R.string.delete_download : 0)
+								.onPositive((dialog, which) -> {
+									if (askForDelete) {
+										YouTubePlayerV2Fragment.this.youTubeVideo.removeDownload();
+									}
+									closeActivity();
+								}).show();
+				}
+
+				private boolean askForDelete(ExoPlaybackException error) {
+					Throwable cause = error.getCause();
+					if (cause instanceof UnrecognizedInputFormatException) {
+						UnrecognizedInputFormatException uie = (UnrecognizedInputFormatException) cause;
+						return "file".equals(uie.uri.getScheme());
+					}
+					return false;
 				}
 			});
 			player.setPlayWhenReady(true);
@@ -489,10 +534,11 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 
 	@Override
 	public void onPrepareOptionsMenu(Menu menu) {
+		final MenuItem downloadVideo = menu.findItem(R.id.download_video);
 		if (youTubeVideo != null && !youTubeVideo.isDownloaded()) {
-			menu.findItem(R.id.download_video).setVisible(true);
+			downloadVideo.setVisible(true);
 		} else {
-			menu.findItem(R.id.download_video).setVisible(false);
+			downloadVideo.setVisible(false);
 		}
 	}
 
@@ -510,8 +556,9 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 		//
 		// youTubeVideo might be null if we have only passed the video URL to this fragment (i.e.
 		// the app is still trying to construct youTubeVideo in the background).
-		if (youTubeVideo != null)
+		if (youTubeVideo != null) {
 			new IsVideoBookmarkedTask(youTubeVideo.getId(), menu).executeInParallel();
+		}
 	}
 
 
@@ -568,6 +615,11 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 				SkyTubeApp.getSettings().setDisableGestures(disableGestures);
 				playerViewGestureHandler.setDisableGestures(disableGestures);
 				return true;
+			case R.id.video_repeat_toggle:
+				boolean repeat = !item.isChecked();
+				player.setRepeatMode(repeat ? Player.REPEAT_MODE_ALL : Player.REPEAT_MODE_OFF);
+				item.setChecked(repeat);
+				return true;
 			default:
 				return super.onOptionsItemSelected(item);
 		}
@@ -603,13 +655,12 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 		}).executeInParallel(youTubeVideo.getChannelId());
 
 		// get the video description
-		new GetVideoDescriptionTask(youTubeVideo, description -> videoDescriptionTextView.setTextAndLinkify(description)).executeInParallel();
+		new GetVideoDescriptionTask(youTubeVideo, description -> Linker.setTextAndLinkify(videoDescriptionTextView, description)).executeInParallel();
 
 		// check if the user has subscribed to a channel... if he has, then change the state of
 		// the subscribe button
 		new CheckIfUserSubbedToChannelTask(videoDescSubscribeButton, youTubeVideo.getChannelId()).execute();
 	}
-
 
 	@Override
 	public void videoPlaybackStopped() {
@@ -638,11 +689,14 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 	/**
 	 * This will handle any gesture swipe event performed by the user on the player view.
 	 */
-	private class PlayerViewGestureHandler extends PlayerViewGestureDetector {
+	class PlayerViewGestureHandler extends PlayerViewGestureDetector {
 
-		private ImageView           indicatorImageView = null;
-		private TextView            indicatorTextView = null;
-		private RelativeLayout      indicatorView = null;
+		@BindView(R.id.indicatorImageView)
+		protected  ImageView           indicatorImageView = null;
+		@BindView(R.id.indicatorTextView)
+		protected  TextView            indicatorTextView = null;
+		@BindView(R.id.indicatorView)
+		protected  RelativeLayout      indicatorView = null;
 
 		private boolean             isControllerVisible = true;
 		private VideoBrightness     videoBrightness;
@@ -662,9 +716,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 		}
 
 		void initView(View view) {
-			indicatorView = view.findViewById(R.id.indicatorView);
-			indicatorImageView = view.findViewById(R.id.indicatorImageView);
-			indicatorTextView = view.findViewById(R.id.indicatorTextView);
+			ButterKnife.bind(this, view);
 
 			playerView.setControllerVisibilityListener(visibility -> {
 				isControllerVisible = (visibility == View.VISIBLE);

@@ -125,7 +125,7 @@
 			android:text="7 days ago"/>
 
 
-		<free.rm.skytube.gui.businessobjects.views.ClickableLinksTextView
+		<TextView
 			android:id="@+id/video_desc_description"
 			android:paddingTop="10dp"
 			android:autoLink="web"

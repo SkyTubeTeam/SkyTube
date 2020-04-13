@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.GetVideoDetailsTask;
-import free.rm.skytube.gui.businessobjects.views.ClickableLinksTextView;
 
 /**
  * Activity that receives an intent from other apps in order to bookmark a video from another app.
@@ -25,10 +24,7 @@ public class ShareBookmarkActivity extends AppCompatActivity {
             String text_data = getIntent().getStringExtra(Intent.EXTRA_TEXT);
             new GetVideoDetailsTask(text_data, (videoUrl, video) -> {
                 if (video != null) {
-                    boolean bookmarked = video.bookmarkVideo(ShareBookmarkActivity.this);
-                    Toast.makeText(ShareBookmarkActivity.this,
-                            bookmarked ? R.string.video_bookmarked : R.string.video_bookmarked_error,
-                            Toast.LENGTH_LONG).show();
+                    video.bookmarkVideo(ShareBookmarkActivity.this);
                     finish();
                 } else {
                     Toast.makeText(ShareBookmarkActivity.this, R.string.bookmark_share_invalid_url, Toast.LENGTH_LONG).show();

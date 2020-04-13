@@ -229,7 +229,12 @@ public class ChannelBrowserFragment extends FragmentEx {
 					.apply(new RequestOptions().placeholder(R.drawable.banner_default))
 					.into(channelBannerImage);
 
-			channelSubscribersTextView.setText(channel.getTotalSubscribers());
+			if (channel.getSubscriberCount() >= 0) {
+				channelSubscribersTextView.setText(channel.getTotalSubscribers());
+			} else {
+				Logger.i(this, "Channel subscriber count for {} is {}", channel.getTitle(), channel.getSubscriberCount());
+				channelSubscribersTextView.setVisibility(View.GONE);
+			}
 
 			ActionBar actionBar = getSupportActionBar();
 			if (actionBar != null) {

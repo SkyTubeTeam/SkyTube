@@ -1,27 +1,28 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="subscriptions">Abonnementen</string>
-	<string name="subscribe">Abonneren</string>
-	<string name="unsubscribe">De-abonneren</string>
-	<string name="total_subscribers">%,d geabonneerden</string>
-
-	<string name="subscribed">Geabonneerd</string>
-	<string name="unsubscribed">Ge-deabonneerd</string>
-
-	<string name="error_get_subbed_channels">Er is een fout opgetreden tijdens het ophalen van de geabonneerde kanalen.</string>
-	<string name="error_check_if_user_has_subbed">Het is niet mogelijk om te controleren of de gebruiker is geabonneerd op het kanaal (id=%s)</string>
-	<string name="error_unable_to_subscribe">Het is niet mogelijk om te (de-)abonneren op het kanaal (id=%s)</string>
-
-	<string name="import_subscriptions">Abonnementen importeren</string>
-	<string name="import_subscriptions_description">Ga naar https://www.youtube.com/subscription_manager en klik op \"Abonnementen exporteren\", helemaal onderaan de pagina. Kies dan het geëxporteerde bestand genaamd \"subscription_manager\" door hieronder te drukken op \"Kies subscriptions-bestand\".</string>
-	<string name="subscriptions_to_channels_imported">Abonnement op %d kana(a)l(en) geïmporteerd.</string>
-	<string name="select_xml_file">Kies subscriptions-bestand</string>
-	<string name="select_all">Alles selecteren</string>
-	<string name="select_none">Niks selecteren</string>
-	<string name="no_channels_found">Er zijn geen YouTube-kanalen aangetroffen in het gekozen XML-bestand.</string>
-	<string name="no_new_channels_found">Er zijn geen YouTube-kanalen aangetroffen waarop je niet al geabonneerd was in het gekozen XML-bestand.</string>
-	<string name="import_subscriptions_parse_error">Er is een fout opgetreden tijdens het verwerken van het gekozen XML-bestand: %s.</string>
-	<string name="failed_to_import_subscriptions">Het importeren van je abonnementen is mislukt.</string>
-
-	<string name="about">Over</string>
-<string name="unsubscribe_from_all_current_sibbed_channels">De-abonneren op alle huidige geabonneerde kanalen.</string>
-	</resources>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="subscriptions">Abonnementen</string>
+    <string name="subscribe">Abonneren</string>
+    <string name="unsubscribe">De-abonneren</string>
+    <string name="total_subscribers">%,d geabonneerden</string>
+    <string name="subscribed">Geabonneerd</string>
+    <string name="unsubscribed">Ge-deabonneerd</string>
+    <string name="error_get_subbed_channels">Er is een fout opgetreden tijdens het ophalen van de geabonneerde kanalen.</string>
+    <string name="error_check_if_user_has_subbed">Het is niet mogelijk om te controleren of de gebruiker is geabonneerd op het kanaal (id=%s)</string>
+    <string name="error_unable_to_subscribe">Het is niet mogelijk om te (de-)abonneren op het kanaal (id=%s)</string>
+    <string name="import_subscriptions">Abonnementen importeren</string>
+    <string name="import_subscriptions_description">Ga naar https://www.youtube.com/subscription_manager en klik op \"Abonnementen exporteren\", helemaal onderaan de pagina. Kies dan het geëxporteerde bestand genaamd \"subscription_manager\" door hieronder te drukken op \"Kies subscriptions-bestand\".</string>
+    <string name="subscriptions_to_channels_imported">Abonnement op %d kana(a)l(en) geïmporteerd.</string>
+    <string name="select_xml_file">Kies subscriptions-bestand</string>
+    <string name="select_all">Alles selecteren</string>
+    <string name="select_none">Niks selecteren</string>
+    <string name="no_channels_found">Er zijn geen YouTube-kanalen aangetroffen in het gekozen XML-bestand.</string>
+    <string name="no_new_channels_found">Er zijn geen YouTube-kanalen aangetroffen waarop je niet al geabonneerd was in het gekozen XML-bestand.</string>
+    <string name="import_subscriptions_parse_error">Er is een fout opgetreden tijdens het verwerken van het gekozen XML-bestand: %s.</string>
+    <string name="failed_to_import_subscriptions">Het importeren van je abonnementen is mislukt.</string>
+    <string name="about">Over</string>
+    <string name="unsubscribe_from_all_current_sibbed_channels">De-abonneren op alle huidige geabonneerde kanalen.</string>
+    <string name="channel_unsubscribed">Gedeabonneerd op kanaal</string>
+    <string name="channel_subscribe_failed">Kan niet abonneren op kanaal</string>
+    <string name="channel_already_subscribed">Je bent al geabonneerd op dit kanaal</string>
+    <string name="channel_subscribed">Geabonneerd op kanaal</string>
+</resources>

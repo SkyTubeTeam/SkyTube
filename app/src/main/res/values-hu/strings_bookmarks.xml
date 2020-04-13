@@ -12,4 +12,6 @@
 \nMajd ha megteszi, itt fognak megjelenni.</string>
     <string name="bookmark_share_label">SkyTube Könyvjelző</string>
     <string name="bookmark_share_invalid_url">Csak érvényes YouTube URL-t lehet könyvjelzőzni.</string>
+    <string name="video_was_not_bookmarked">A videó nem lett könyvjelzőzve</string>
+    <string name="video_already_bookmarked">Videó már könyvjelzőzve lett</string>
 </resources>

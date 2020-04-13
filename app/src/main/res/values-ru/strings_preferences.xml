@@ -102,7 +102,7 @@
     <string name="no_preferred_lang_selected">Предпочтительный язык не выбран. Параметр игнорируется.</string>
     <string name="preferred_lang_updated">Обновлен предпочтительный язык. Пожалуйста, обновите видео.</string>
     <string name="pref_title_lang_detection_video_filtering">Автоматическая фильтрация</string>
-    <string name="pref_summary_lang_detection_video_filtering">"Используйте AI для определения языков, используемых в видео, и блокируйте их, если их язык не соответствует выбранным вами языкам.  Должна быть включена только на устройствах высокого уровня."</string>
+    <string name="pref_summary_lang_detection_video_filtering">Используйте AI для определения языков, используемых в видео, и блокируйте их, если их язык не соответствует выбранным вами языкам. Должна быть включена только на устройствах высокого уровня.</string>
     <string name="setting_updated">Настройка обновлена. Пожалуйста, обновите видео.</string>
     <string name="pref_other_filters_category">Остальные фильтры</string>
     <string name="pref_title_low_views_filter">Просмотры</string>
@@ -123,8 +123,6 @@
     <string name="pref_summary_download_to_separate_directories">Видеоролики загружаются в отдельные папки с названием канала.</string>
     <string name="pref_title_disable_screen_gestures">Отключить жесты при управлении видео</string>
     <string name="pref_summary_disable_screen_gestures">Отключите жесты, чтобы управления громкостью, яркостью и перемоткой видеоролика.</string>
-    <string name="pref_title_warn_mobile_downloads">Отключить предупреждения мобильной сети</string>
-    <string name="pref_summary_warn_mobile_downloads">"Предупреждать, что используется мобильная сеть (например 4G), перед тем, как воспроизвести или  скачать видео."</string>
     <string name="pref_summary_enable_video_blocker">Включить блокировку видео.</string>
     <string name="pref_title_preferred_res_mobile">Предпочитаемое разрешение через мобильную сеть</string>
     <string name="pref_summary_preferred_res_mobile">Выберите разрешение при потоковой передаче через мобильную сеть (например, 4G): %s</string>

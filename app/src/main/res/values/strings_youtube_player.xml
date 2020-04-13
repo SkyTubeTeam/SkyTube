@@ -1,47 +1,50 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="error_stream_err_unavailable">Error message unavailable.</string>
-	<string name="error_stream_decryption_fail">Could not load decryption code for the YouTube service.</string>
-	<string name="error_stream_parse_error">Parsing error.</string>
-
-	<string name="error_video_play">Video Playback Error</string>
-	<string name="error_video_streams_empty">The video %s has no streams.</string>
-	<string name="error_video_streams">An error has occurred while retrieving video\'s streams.</string>
-	<string name="error_get_video_desc">An error has occurred while retrieving video\'s description.</string>
-	<string name="error_invalid_url">Invalid video URL: %s</string>
-
-	<string name="mobile_data">Mobile Data</string>
-	<string name="warning_mobile_network_play">Your device is not connected to a Wi-Fi network. To avoid potential extra data usage charges, it is recommended to connect to a Wi-Fi network. Play video anyway\?</string>
-	<string name="warning_mobile_network_disable">Never ask again.</string>
-	<string name="mobile_data_blocked_by_policy">Download blocked, because your device is not connected to a Wi-Fi network.</string>
-	<string name="play_video">Play Video</string>
-	<string name="warning_live_video">Cannot play live streams for now. Open live stream in another app?</string>
-
-	<string name="ratings_disabled">Ratings disabled</string>
-
-	<string name="loading_video">Loading video…</string>
-	<string name="get_new_video_steam">New Stream</string>
-	<string name="open_in_browser">Open in web browser</string>
-	<string name="open_with">Open with…</string>
-	<string name="share">Share</string>
-	<string name="share_via">Share via</string>
-	<string name="copy_url">Copy URL</string>
-	<string name="url_copied_to_clipboard">URL copied to clipboard.</string>
-
-	<string name="mark_watched">Mark Watched</string>
-	<string name="mark_unwatched">Mark Unwatched</string>
-
-	<string name="error_get_comments">An error has occurred while getting comments.</string>
-	<string name="error_get_comments_no_network">Comments are not available without network access!</string>
-	<string name="no_video_comments">This video has no comments or comments are disabled.</string>
-	<string name="view_replies">View replies</string>
-	<string name="hide_replies">Hide replies</string>
-
-	<string name="enter_video_url">Enter Video URL</string>
-	<string name="play">Play</string>
-	<string name="cancel">Cancel</string>
-	<string name="clear">Clear</string>
-
-	<string name="should_resume">Do you wish to resume from where you stopped?</string>
-	<string name="resume">Resume</string>
+    <string name="error_stream_err_unavailable">Error message unavailable.</string>
+    <string name="error_stream_decryption_fail">Could not load decryption code for the YouTube service.</string>
+    <string name="error_stream_parse_error">Parsing error.</string>
+    <string name="error_video_play">Video Playback Error</string>
+    <string name="error_video_streams_empty">The video %s has no streams.</string>
+    <string name="error_video_streams">An error has occurred while retrieving video\'s streams.</string>
+    <string name="error_get_video_desc">An error has occurred while retrieving video\'s description.</string>
+    <string name="error_invalid_url">Invalid video URL: %s</string>
+    <string name="error_downloaded_file_is_corrupted">The downloaded video looks &lt;b&gt;corrupted&lt;/b&gt; - the error message is:
+		&lt;br/&gt;
+		&lt;br/&gt;
+		"%s".
+		&lt;br/&gt;
+		&lt;br/&gt;
+		Do you want to &lt;b&gt;delete&lt;/b&gt; the file?</string>
+    <string name="error_video_parse_error">Unable to start playing the video, the error message is:
+		&lt;br/&gt;
+		&lt;br/&gt;
+		"%s".</string>
+    <string name="mobile_data">Mobile Data</string>
+    <string name="warning_mobile_network_play">Your device is not connected to a Wi-Fi network. To avoid potential extra data usage charges, it is recommended to connect to a Wi-Fi network. Play video anyway\?</string>
+    <string name="warning_mobile_network_disable">Never ask again.</string>
+    <string name="mobile_data_blocked_by_policy">Download blocked, because your device is not connected to a Wi-Fi network.</string>
+    <string name="play_video">Play Video</string>
+    <string name="warning_live_video">Cannot play live streams for now. Open live stream in another app?</string>
+    <string name="ratings_disabled">Ratings disabled</string>
+    <string name="loading_video">Loading video…</string>
+    <string name="get_new_video_steam">New Stream</string>
+    <string name="open_in_browser">Open in web browser</string>
+    <string name="open_with">Open with…</string>
+    <string name="share">Share</string>
+    <string name="share_via">Share via</string>
+    <string name="copy_url">Copy URL</string>
+    <string name="url_copied_to_clipboard">URL copied to clipboard.</string>
+    <string name="mark_watched">Mark Watched</string>
+    <string name="mark_unwatched">Mark Unwatched</string>
+    <string name="error_get_comments">An error has occurred while getting comments.</string>
+    <string name="error_get_comments_no_network">Network access is needed to fetch comments.</string>
+    <string name="no_video_comments">This video either has no comments, or they are turned off.</string>
+    <string name="view_replies">View replies</string>
+    <string name="hide_replies">Hide replies</string>
+    <string name="enter_video_url">Enter Video URL</string>
+    <string name="play">Play</string>
+    <string name="cancel">Cancel</string>
+    <string name="clear">Clear</string>
+    <string name="should_resume">Do you wish to resume from where you stopped?</string>
+    <string name="resume">Resume</string>
 </resources>

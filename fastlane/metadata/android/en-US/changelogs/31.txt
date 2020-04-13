@@ -1,0 +1,11 @@
+In 54 commits, 1697 lines were added, 1088 lines were deleted, the new release contains the following changes:
+
+• Search result now contains playlists and channels among the videos.
+• Subscription feed checking displays notification instead of a modal dialog - by @okan35
+• Channel list can be filtered - by @okan35
+• Hide the Block Channel menu item when the Video Blocker is not enabled. - by @atomjack
+• Migrate PreferenceManager to androidx - by @ChemWater
+• Implement paging in the bookmark fragment - this will improve the responsiveness of the bookmark
+• Add padding and background to make the option menu item more finger-friendly
+• Rename values-id folder to values-in to enable Indonesian translations
+

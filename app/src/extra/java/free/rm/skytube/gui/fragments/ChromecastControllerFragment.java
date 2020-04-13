@@ -25,7 +25,7 @@ import butterknife.ButterKnife;
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.db.Tasks.GetChannelInfo;
 import free.rm.skytube.gui.businessobjects.RuntimeView;
-import free.rm.skytube.gui.businessobjects.views.ClickableLinksTextView;
+import free.rm.skytube.gui.businessobjects.views.Linker;
 import free.rm.skytube.gui.businessobjects.views.SubscribeButton;
 
 /**
@@ -70,7 +70,7 @@ public class ChromecastControllerFragment extends ChromecastBaseControllerFragme
 		@BindView(R.id.video_desc_publish_date)
 		TextView publishDate;
 		@BindView(R.id.video_desc_description)
-		ClickableLinksTextView videoDescription;
+		TextView videoDescription;
 	}
 
 	@Nullable
@@ -85,6 +85,8 @@ public class ChromecastControllerFragment extends ChromecastBaseControllerFragme
 		TypedValue typedValue = new TypedValue();
 		getContext().getTheme().resolveAttribute(R.attr.colorPrimary, typedValue, true);
 		videoDescriptionLayout.linearLayout.setBackgroundResource(typedValue.resourceId);
+
+		Linker.configure(videoDescriptionLayout.videoDescription);
 
 		((SeekBar)chromecastPlaybackProgressBar).setOnSeekBarChangeListener(this);
 		if(savedInstanceState != null) {
@@ -111,7 +113,8 @@ public class ChromecastControllerFragment extends ChromecastBaseControllerFragme
 	private void setupDescription() {
 		if(video == null)
 			return;
-		videoDescriptionLayout.videoDescription.setTextAndLinkify(video.getDescription());
+		Linker.setTextAndLinkify(videoDescriptionLayout.videoDescription, video.getDescription());
+
 		videoDescriptionLayout.title.setText(video.getTitle());
 		videoDescriptionLayout.channel.setText(video.getChannelName());
 		videoDescriptionLayout.publishDate.setText(video.getPublishDatePretty());
