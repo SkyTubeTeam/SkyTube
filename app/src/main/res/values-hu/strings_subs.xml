@@ -16,7 +16,7 @@
     <string name="select_all">Mind kiválasztása</string>
     <string name="select_none">Egyik sem</string>
     <string name="unsubscribe_from_all_current_sibbed_channels">Leiratkozás az összes feliratkozott csatornáról.</string>
-    <string name="about">A Programról</string>
+    <string name="about">Ismertető</string>
     <string name="failed_to_import_subscriptions">Nem sikerült importálni a YouTube feliratkozásait.</string>
     <string name="import_subscriptions_parse_error">Az XML fájl feldolgozása során hiba keletkezett: %s.</string>
     <string name="no_channels_found">Nem található YouTube csatorna a feltöltött fájlban.</string>

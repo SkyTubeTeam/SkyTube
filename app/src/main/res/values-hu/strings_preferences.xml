@@ -55,7 +55,7 @@
     <!-- extracted from:  https://developers.google.com/youtube/v3/docs/i18nLanguages/list -->
     <!-- NB for Translators:  Country names shall all be written in English -->
     <string name="pref_title_default_tab">Kezdő Lap</string>
-    <string name="pref_title_hide_tabs">Fülek Elrejtése</string>
+    <string name="pref_title_hide_tabs">Lapok elrejtése</string>
     <string name="pref_summary_feed_notification">Milyen gyakran keressen új videókat a feliratkozott csatornákon: %s</string>
     <string-array name="feed_notification">
         <item>Kikapcsolva</item>
@@ -99,10 +99,10 @@
     <string name="pref_title_switch_volume_and_brightness">A hangerő és a fényerő szabályozó kézmozdulat felcserélése</string>
     <string name="pref_summary_enable_immersive_mode">A navigációs sáv és az állapotsor elrejtése lejátszás esetén.</string>
     <string name="pref_summary_screen_orientation">Videó lejátszó tájolása: %s</string>
-    <string name="pref_hide_tabs_restart">Indítsa újra az alkalmazást, hogy a fülek frissüljenek.</string>
-    <string name="pref_summary_hide_tabs">Válassza ki, hogy mely fülek ne látszódjanak. Újraindítás szükséges.</string>
+    <string name="pref_hide_tabs_restart">Indítsa újra az alkalmazást, hogy a lapok frissüljenek.</string>
+    <string name="pref_summary_hide_tabs">Válassza ki, hogy mely lapok ne látszódjanak. Újraindítás szükséges.</string>
     <string name="pref_summary_default_tab">A fül, ami a SkyTube indítása után először látható: %s</string>
-    <string name="pref_other_category">Egyebek</string>
+    <string name="pref_other_category">Egyéb beállítások</string>
     <string name="pref_summary_credits">Az emberek és projektek amik lehetővé tették ezt az alkalmazást.</string>
     <string name="pref_chromecast_category">Chromecast</string>
     <string name="pref_summary_import_subs">Importálja előfizetéseit YouTube-fiókjából.</string>
@@ -119,7 +119,7 @@
     <string name="pref_playback_status_cleared">A lejátszás állapota törölve.</string>
     <string name="pref_summary_clear_playback_status">Az összes videó lejátszási állapotának törlése.</string>
     <string name="pref_title_clear_playback_status">Lejátszási állapot törlése</string>
-    <string name="pref_disable_playback_status_deleted">Lejátszási állapotok törölve.</string>
+    <string name="pref_disable_playback_status_deleted">Lejátszás állapota törölve lett.</string>
     <string name="pref_summary_disable_playback_status">Ha be van jelölve, az eddigi lejátszási állapotok törlődnek, és ezután nem lesz mentve.</string>
     <string name="pref_title_disable_playback_status">Letiltja a lejátszás állapot megjegyzését</string>
     <string name="pref_disable_search_history_deleted">Keresési előzmények törölve.</string>
