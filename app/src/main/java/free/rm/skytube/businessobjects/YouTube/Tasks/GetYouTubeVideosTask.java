@@ -71,6 +71,7 @@ public class GetYouTubeVideosTask extends AsyncTaskParallel<Void, Void, List<Car
 		this.swipeRefreshLayout = swipeRefreshLayout;
 		this.clearList = clearList;
 		this.callback = callback;
+		getYouTubeVideos.resetKey();
 	}
 
 
@@ -123,7 +124,7 @@ public class GetYouTubeVideosTask extends AsyncTaskParallel<Void, Void, List<Car
 
 	private List<CardData> collectUntil(int currentSize) {
 		List<CardData> result = new ArrayList<>(currentSize);
-		boolean hasNew = false;
+		boolean hasNew;
 		do {
 			List<CardData> videosList = getYouTubeVideos.getNextVideos();
 			hasNew = !videosList.isEmpty();

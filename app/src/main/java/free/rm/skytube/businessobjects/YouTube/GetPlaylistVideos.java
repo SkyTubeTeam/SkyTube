@@ -50,6 +50,11 @@ public class GetPlaylistVideos extends GetYouTubeVideos {
 	}
 
 	@Override
+	public void resetKey() {
+		playlistItemsList.setKey(YouTubeAPIKey.get().getYouTubeAPIKey());
+	}
+
+	@Override
 	public List<CardData> getNextVideos() {
 		setLastException(null);
 		List<CardData> videoList = new ArrayList<>();

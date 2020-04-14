@@ -117,5 +117,6 @@ public class GetChannelPlaylists {
 	public void reset() {
 		nextPageToken = null;
 		noMorePlaylistPages = false;
+		playlistList.setKey(YouTubeAPIKey.get().getYouTubeAPIKey());
 	}
 }

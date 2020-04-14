@@ -23,6 +23,7 @@ import com.google.api.services.youtube.model.VideoListResponse;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import free.rm.skytube.R;
@@ -53,11 +54,14 @@ public class GetFeaturedVideos extends GetYouTubeVideos {
 		nextPageToken = null;
 	}
 
+	@Override
+	public void resetKey() {
+		videosList.setKey(YouTubeAPIKey.get().getYouTubeAPIKey());
+	}
 
 	@Override
 	public List<CardData> getNextVideos() {
 		setLastException(null);
-		List<Video> searchResultList = null;
 
 		if (!noMoreVideoPages()) {
 			try {
@@ -71,7 +75,7 @@ public class GetFeaturedVideos extends GetYouTubeVideos {
 				VideoListResponse response = videosList.execute();
 
 				// get videos
-				searchResultList = response.getItems();
+				List<Video> searchResultList = response.getItems();
 
 				// set the next page token
 				nextPageToken = response.getNextPageToken();
@@ -79,13 +83,13 @@ public class GetFeaturedVideos extends GetYouTubeVideos {
 				// if nextPageToken is null, it means that there are no more videos
 				if (nextPageToken == null)
 					noMoreVideoPages = true;
+				return toYouTubeVideoList(searchResultList);
 			} catch (IOException e) {
 				setLastException(e);
-				Logger.e(this, "Error has occurred while getting Featured Videos.", e);
+				Logger.e(this, "Error has occurred while getting Featured Videos:" + e.getMessage(), e);
 			}
 		}
-
-		return toYouTubeVideoList(searchResultList);
+		return Collections.emptyList();
 	}
 
 
