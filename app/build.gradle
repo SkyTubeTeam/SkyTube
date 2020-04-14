@@ -18,8 +18,7 @@ android {
                         '"AIzaSyDR7X3W95oAJRaAmKxP9H0c7B3Q82r2iz8",' +
                         '"AIzaSyC6cJs9Aa_kEhXwleH2b448h9CiHYIfxnc",' +
                         '"AIzaSyDXZMFLY_9vXXmQIA_ql_6SftiRsLZbpxA",' +
-                        '"AIzaSyBVxY5Tqtf95caxIXlwVlfHGe9e3PK0azg",' +
-                        '"AIzaSyDjz67GD023IyFOBZdvfxg7SnLDgeOQ6yc"'  +
+                        '"AIzaSyBVxY5Tqtf95caxIXlwVlfHGe9e3PK0azg"' +
                 '}'
         buildConfigField 'String', 'SKYTUBE_WEBSITE',         '"https://skytube-app.com"'
         buildConfigField 'String', 'SKYTUBE_WEBSITE_CREDITS', '"https://skytube-app.com/credits.html"'
