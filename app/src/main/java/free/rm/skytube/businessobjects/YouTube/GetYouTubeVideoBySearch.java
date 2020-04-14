@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPI;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPIKey;
@@ -37,7 +38,7 @@ import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
  */
 public class GetYouTubeVideoBySearch extends GetYouTubeVideos {
 
-	protected YouTube.Search.List videosList = null;
+	YouTube.Search.List videosList = null;
 
 	private static final String	TAG = GetYouTubeVideoBySearch.class.getSimpleName();
 	protected static final Long	MAX_RESULTS = 45L;
@@ -55,6 +56,10 @@ public class GetYouTubeVideoBySearch extends GetYouTubeVideos {
 		nextPageToken = null;
 	}
 
+	@Override
+	public void resetKey() {
+		videosList.setKey(YouTubeAPIKey.get().getYouTubeAPIKey());
+	}
 
 	/**
 	 * Set the user's query.
@@ -96,7 +101,7 @@ public class GetYouTubeVideoBySearch extends GetYouTubeVideos {
 					noMoreVideoPages = true;
 			} catch (IOException ex) {
 				setLastException(ex);
-				Log.e(TAG, ex.getLocalizedMessage());
+				Logger.e(this, "Error has occurred while getting Featured Videos:" + ex.getMessage(), ex);
 			}
 		}
 

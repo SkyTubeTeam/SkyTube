@@ -35,6 +35,7 @@ import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.multidex.MultiDexApplication;
@@ -269,6 +270,7 @@ public class SkyTubeApp extends MultiDexApplication {
 			message = exc.getMessage();
 		}
 		if (message != null) {
+			Log.e("SkyTubeApp", "Error: "+message);
 			Toast.makeText(ctx, message, Toast.LENGTH_LONG).show();
 		}
 	}

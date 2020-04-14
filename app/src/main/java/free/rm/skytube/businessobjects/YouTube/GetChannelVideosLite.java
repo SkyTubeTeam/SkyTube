@@ -69,6 +69,10 @@ public class GetChannelVideosLite extends GetYouTubeVideos implements GetChannel
 		}
 	}
 
+	@Override
+	public void resetKey() {
+		activitiesList.setKey(YouTubeAPIKey.get().getYouTubeAPIKey());
+	}
 
 	@Override
 	public List<CardData> getNextVideos() {
