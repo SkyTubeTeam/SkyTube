@@ -21,8 +21,8 @@
     <string name="failed_to_import_subscriptions">Gagal mengimpor subscription YouTube anda.</string>
     <string name="about">Tentang</string>
     <string name="error_unable_to_subscribe">Tidak bisa (un)subscribe channel (id=%s)</string>
-    <string name="channel_unsubscribed">Channel disubscribe</string>
+    <string name="channel_unsubscribed">Channel batal berlangganan</string>
     <string name="channel_subscribe_failed">Subscribe channel gagal</string>
-    <string name="channel_already_subscribed">Channel telah disubscribe</string>
+    <string name="channel_already_subscribed">Anda sudah berlangganan channel ini</string>
     <string name="channel_subscribed">Channel disubscribe</string>
 </resources>
