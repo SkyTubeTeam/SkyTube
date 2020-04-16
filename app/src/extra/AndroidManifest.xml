@@ -1,6 +1,7 @@
 <manifest
 	xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:tools="http://schemas.android.com/tools">
+	xmlns:tools="http://schemas.android.com/tools"
+	package="free.rm.skytube">
 
 	<uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>       <!-- Android Pie now requires this permission to run a foreground service. Chromecast support uses this. See https://developer.android.com/guide/components/services#Foreground -->
 
@@ -9,19 +10,27 @@
 				android:name="com.google.android.gms.cast.framework.OPTIONS_PROVIDER_CLASS_NAME"
 				android:value="free.rm.skytube.gui.businessobjects.CastOptionsProvider" />
 		<activity
-			android:name="free.rm.skytube.gui.activities.MainActivity"
+			android:name=".gui.activities.MainActivity"
 			android:launchMode="singleTask"
 			android:theme="@style/NoActionBarActivityTheme">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN"/>
 				<category android:name="android.intent.category.LAUNCHER"/>
 			</intent-filter>
+
 		</activity>
 		<activity
-			android:name="free.rm.skytube.gui.activities.YouTubePlayerActivity"
+			android:name=".gui.activities.YouTubePlayerActivity"
 			android:configChanges="orientation|keyboardHidden|screenSize"
 			android:theme="@style/VideoPlayerActivityTheme"
 			tools:node="replace">
+
+		</activity>
+		<activity android:name=".gui.activities.NotificationClickActivity"></activity>
+
+
+		<activity android:name=".gui.activities.RouterActivity"
+			android:theme="@style/TransparentActivity">
 			<!-- Youtube filter -->
 			<intent-filter>
 				<action android:name="android.intent.action.VIEW"/>
@@ -143,8 +152,9 @@
 				<!-- playlist prefix -->
 				<data android:pathPrefix="/playlist"/>
 			</intent-filter>
+
 		</activity>
-		<activity android:name="free.rm.skytube.gui.activities.NotificationClickActivity"></activity>
+
 	</application>
 
 </manifest>

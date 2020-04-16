@@ -112,7 +112,11 @@ public class GetChannelInfo extends AsyncTaskParallel<String, Void, YouTubeChann
     public void showErrorToUi() {
         if (exception != null) {
             Logger.e(this, "Error: "+exception.getMessage(), exception);
-            showError(exception.getMessage());
+            if (exception.getCause() != null) {
+                showError(exception.getCause().getMessage());
+            } else {
+                showError(exception.getMessage());
+            }
         }
     }
 

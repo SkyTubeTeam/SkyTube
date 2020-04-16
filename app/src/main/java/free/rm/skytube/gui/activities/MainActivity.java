@@ -32,6 +32,8 @@ import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -139,13 +141,16 @@ public class MainActivity extends BaseActivity {
 
 			// If this Activity was called to view a particular channel, display that channel via ChannelBrowserFragment, instead of MainFragment
 			String action = getIntent().getAction();
+			Logger.i(MainActivity.this, "Action is : " + action);
 			if(ACTION_VIEW_CHANNEL.equals(action)) {
 				dontAddToBackStack = true;
 				YouTubeChannel channel = (YouTubeChannel) getIntent().getSerializableExtra(ChannelBrowserFragment.CHANNEL_OBJ);
+				Logger.i(MainActivity.this, "Channel found: " + channel);
 				onChannelClick(channel);
 			} else if(ACTION_VIEW_PLAYLIST.equals(action)) {
 				dontAddToBackStack = true;
 				YouTubePlaylist playlist = (YouTubePlaylist)getIntent().getSerializableExtra(PlaylistVideosFragment.PLAYLIST_OBJ);
+				Logger.i(MainActivity.this, "playlist found: " + playlist);
 				onPlaylistClick(playlist);
 			} else {
 				if(mainFragment == null) {

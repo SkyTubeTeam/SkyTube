@@ -89,7 +89,7 @@ public abstract class Pager<I extends InfoItem, O> implements PagerBackend<O> {
                 return process(channelExtractor.getPage(nextPageUrl));
             }
         } catch (IOException| ExtractionException| RuntimeException e) {
-            throw new NewPipeException("getNextPage on "+this+", nextPageUrl="+nextPageUrl, e);
+            throw new NewPipeException("Error:" + e.getMessage() + (nextPageUrl != null ? " (nextPageUrl=" + nextPageUrl + ")" : ""), e);
         }
     }
 

@@ -332,36 +332,47 @@ public class SkyTubeApp extends MultiDexApplication {
 	public static void openUrl(Context ctx, String url, boolean useExternalBrowser) {
 		ContentId content = parseUrl(ctx, url);
 
-		if (content == null) {
+		if (openContent(ctx, content)) {
+			return;
+		} else {
 			if (useExternalBrowser) {
 				YouTubePlayer.viewInBrowser(url, ctx);
 			}
-		} else {
-			switch (content.getType()) {
-				case STREAM: {
-					YouTubePlayer.launch(content, ctx);
-					break;
-				}
-				case CHANNEL: {
-					new GetChannelInfo(ctx, channel -> {
-						YouTubePlayer.launchChannel(channel, ctx);
-					}, true).executeInParallel(content.getId());
-					break;
-				}
-				case PLAYLIST: {
-					new GetPlaylistTask(ctx, content.getId(), playlist -> {
-						YouTubePlayer.launchPlaylist(playlist, ctx);
-					}).executeInParallel();
-					break;
-				}
-				default: {
-					if (useExternalBrowser) {
-						YouTubePlayer.viewInBrowser(url, ctx);
-					}
-				}
+		}
+	}
+
+	/**
+	 * Open the content in the appropriate viewer Activity, return true if it found one.
+	 * @param ctx
+	 * @param content
+	 * @return
+	 */
+	public static boolean openContent(Context ctx, ContentId content) {
+		if (content == null) {
+			return false;
+		}
+		switch (content.getType()) {
+			case STREAM: {
+				YouTubePlayer.launch(content, ctx);
+				break;
+			}
+			case CHANNEL: {
+				new GetChannelInfo(ctx, channel -> {
+					YouTubePlayer.launchChannel(channel, ctx);
+				}, true).executeInParallel(content.getId());
+				break;
+			}
+			case PLAYLIST: {
+				new GetPlaylistTask(ctx, content.getId(), playlist -> {
+					YouTubePlayer.launchPlaylist(playlist, ctx);
+				}).executeInParallel();
+				break;
+			}
+			default: {
+				return false;
 			}
 		}
-
+		return true;
 	}
 
 }

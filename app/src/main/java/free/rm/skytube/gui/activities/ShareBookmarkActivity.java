@@ -43,7 +43,7 @@ public class ShareBookmarkActivity extends AppCompatActivity {
     }
 
     private void invalidUrlError() {
-        Toast.makeText(ShareBookmarkActivity.this, R.string.bookmark_share_invalid_url, Toast.LENGTH_LONG).show();
+        Toast.makeText(this, R.string.bookmark_share_invalid_url, Toast.LENGTH_LONG).show();
         finish();
     }
 }

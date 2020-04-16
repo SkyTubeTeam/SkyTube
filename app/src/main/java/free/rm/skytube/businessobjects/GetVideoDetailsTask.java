@@ -7,10 +7,12 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
+import org.schabi.newpipe.extractor.StreamingService;
 import org.schabi.newpipe.extractor.exceptions.ExtractionException;
 import org.schabi.newpipe.extractor.exceptions.ParsingException;
 
 import free.rm.skytube.app.SkyTubeApp;
+import free.rm.skytube.app.Utils;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.YouTube.newpipe.ContentId;
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
@@ -37,6 +39,8 @@ public class GetVideoDetailsTask extends AsyncTaskParallel<Void, Void, YouTubeVi
 	public GetVideoDetailsTask(Context context, Intent intent, YouTubeVideoListener youTubeVideoListener) {
 		this.context = context;
 		this.content = SkyTubeApp.getUrlFromIntent(context, intent);
+		Utils.isTrue(content.getType() == StreamingService.LinkType.STREAM, "Content is a video:"+content);
+
 		this.youTubeVideoListener = youTubeVideoListener;
 	}
 
