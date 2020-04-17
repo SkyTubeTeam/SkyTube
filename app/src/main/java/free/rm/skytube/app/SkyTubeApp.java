@@ -29,7 +29,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
+import androidx.core.graphics.ColorUtils;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -37,6 +37,7 @@ import android.os.Build;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import androidx.core.os.BuildCompat;
 import android.widget.Toast;
 
 import androidx.multidex.MultiDexApplication;
@@ -215,18 +216,18 @@ public class SkyTubeApp extends MultiDexApplication {
 	@TargetApi(26)
 	private void initChannels(Context context) {
 
-		if(Build.VERSION.SDK_INT < 26) {
+		if(BuildCompat.isAtLeastR()) {
 			return;
 		}
 		NotificationManager notificationManager =
-						(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+				(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
 		String channelId = NEW_VIDEOS_NOTIFICATION_CHANNEL;
 		CharSequence channelName = context.getString(R.string.notification_channel_feed_title);
 		int importance = NotificationManager.IMPORTANCE_LOW;
 		NotificationChannel notificationChannel = new NotificationChannel(channelId, channelName, importance);
 		notificationChannel.enableLights(true);
-		notificationChannel.setLightColor(Color.RED);
+		notificationChannel.setLightColor(ColorUtils.compositeColors(0xFFFF0000, 0xFFFF0000));
 		notificationChannel.enableVibration(false);
 		notificationManager.createNotificationChannel(notificationChannel);
 	}
@@ -241,7 +242,7 @@ public class SkyTubeApp extends MultiDexApplication {
 
 	/**
 	 * Setup the Feed Updater Service. First, cancel the Alarm that will trigger the next fetch (if there is one), then set the
-	 * Alarm with the passed interval, if it's greater than 0. 
+	 * Alarm with the passed interval, if it's greater than 0.
 	 * @param interval The number of milliseconds between each time new videos for subscribed channels should be fetched.
 	 */
 	public static void setFeedUpdateInterval(int interval) {
