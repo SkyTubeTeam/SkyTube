@@ -30,10 +30,11 @@ public class ShareBookmarkActivity extends AppCompatActivity {
                 new GetVideoDetailsTask(this, content, (videoUrl, video) -> {
                     if (video != null) {
                         video.bookmarkVideo(ShareBookmarkActivity.this);
-                        finish();
                     } else {
                         invalidUrlError();
                     }
+                }).setFinishCallback(() -> {
+                    finish();
                 }).executeInParallel();
             } else {
                 SkyTubeApp.openUrl(this, text_data, false);

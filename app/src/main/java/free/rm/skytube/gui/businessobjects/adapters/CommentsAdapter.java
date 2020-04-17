@@ -207,9 +207,7 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
 
 			thumbnailImageView.setOnClickListener(view -> {
 				if(comment.getAuthorChannelId() != null) {
-					new GetChannelInfo(context, youTubeChannel -> {
-						YouTubePlayer.launchChannel(youTubeChannel, context);
-					}).executeInParallel(comment.getAuthorChannelId());
+					SkyTubeApp.launchChannel(comment.getAuthorChannelId(), context);
 				}
 			});
 

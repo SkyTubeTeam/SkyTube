@@ -61,38 +61,4 @@ public class YouTubePlayer {
 		context.startActivity(i);
 	}
 
-	/**
-	 * Launches the channel view, so the user can see all the videos from a channel.
-	 *
-	 * @param youTubeChannel the channel to be displayed.
-	 */
-	public static void launchChannel(YouTubeChannel youTubeChannel, Context context) {
-		Intent i = new Intent(context, MainActivity.class);
-		i.setAction(MainActivity.ACTION_VIEW_CHANNEL);
-		i.putExtra(ChannelBrowserFragment.CHANNEL_OBJ, youTubeChannel);
-		context.startActivity(i);
-	}
-
-	/**
-	 * Launch the {@link PlaylistVideosFragment}
-	 * @param playlist the playlist to display
-	 */
-	public static void launchPlaylist(final YouTubePlaylist playlist, final Context context) {
-		Intent playlistIntent = new Intent(context, MainActivity.class);
-		playlistIntent.setAction(MainActivity.ACTION_VIEW_PLAYLIST);
-		playlistIntent.putExtra(PlaylistVideosFragment.PLAYLIST_OBJ, playlist);
-		context.startActivity(playlistIntent);
-	}
-
-	/**
-	 * Launch an external activity to actually open the given URL
-	 * @param url
-	 */
-	public static void viewInBrowser(String url, final Context context) {
-		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-		browserIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		context.startActivity(browserIntent);
-	}
-
-
 }
