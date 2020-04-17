@@ -27,6 +27,7 @@ import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AlertDialog;
@@ -60,7 +61,6 @@ import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
 import free.rm.skytube.businessobjects.db.SearchHistoryDb;
 import free.rm.skytube.businessobjects.db.SearchHistoryTable;
 import free.rm.skytube.gui.businessobjects.BlockedVideosDialog;
-import free.rm.skytube.gui.businessobjects.YouTubePlayer;
 import free.rm.skytube.gui.businessobjects.adapters.SearchHistoryCursorAdapter;
 import free.rm.skytube.gui.businessobjects.fragments.FragmentEx;
 import free.rm.skytube.gui.businessobjects.updates.UpdatesCheckerTask;
@@ -133,39 +133,14 @@ public class MainActivity extends BaseActivity {
 
 		if(fragmentContainer != null) {
 			if(savedInstanceState != null) {
-				mainFragment = (MainFragment)getSupportFragmentManager().getFragment(savedInstanceState, MAIN_FRAGMENT);
-				searchVideoGridFragment = (SearchVideoGridFragment) getSupportFragmentManager().getFragment(savedInstanceState, SEARCH_FRAGMENT);
-				channelBrowserFragment = (ChannelBrowserFragment) getSupportFragmentManager().getFragment(savedInstanceState, CHANNEL_BROWSER_FRAGMENT);
-				playlistVideosFragment = (PlaylistVideosFragment) getSupportFragmentManager().getFragment(savedInstanceState, PLAYLIST_VIDEOS_FRAGMENT);
+				final FragmentManager supportFragmentManager = getSupportFragmentManager();
+				mainFragment = (MainFragment) supportFragmentManager.getFragment(savedInstanceState, MAIN_FRAGMENT);
+				searchVideoGridFragment = (SearchVideoGridFragment) supportFragmentManager.getFragment(savedInstanceState, SEARCH_FRAGMENT);
+				channelBrowserFragment = (ChannelBrowserFragment) supportFragmentManager.getFragment(savedInstanceState, CHANNEL_BROWSER_FRAGMENT);
+				playlistVideosFragment = (PlaylistVideosFragment) supportFragmentManager.getFragment(savedInstanceState, PLAYLIST_VIDEOS_FRAGMENT);
 			}
+			handleIntent(getIntent());
 
-			// If this Activity was called to view a particular channel, display that channel via ChannelBrowserFragment, instead of MainFragment
-			String action = getIntent().getAction();
-			Logger.i(MainActivity.this, "Action is : " + action);
-			if(ACTION_VIEW_CHANNEL.equals(action)) {
-				dontAddToBackStack = true;
-				YouTubeChannel channel = (YouTubeChannel) getIntent().getSerializableExtra(ChannelBrowserFragment.CHANNEL_OBJ);
-				Logger.i(MainActivity.this, "Channel found: " + channel);
-				onChannelClick(channel);
-			} else if(ACTION_VIEW_PLAYLIST.equals(action)) {
-				dontAddToBackStack = true;
-				YouTubePlaylist playlist = (YouTubePlaylist)getIntent().getSerializableExtra(PlaylistVideosFragment.PLAYLIST_OBJ);
-				Logger.i(MainActivity.this, "playlist found: " + playlist);
-				onPlaylistClick(playlist);
-			} else {
-				if(mainFragment == null) {
-					mainFragment = new MainFragment();
-					// If we're coming here via a click on the Notification that new videos for subscribed channels have been found, make sure to
-					// select the Feed tab.
-					if(action != null && action.equals(ACTION_VIEW_FEED)) {
-						Bundle args = new Bundle();
-						args.putBoolean(MainFragment.SHOULD_SELECTED_FEED_TAB, true);
-						mainFragment.setArguments(args);
-					}
-					getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, mainFragment).commit();
-					currentFragment = mainFragment;
-				}
-			}
 		}
 
 		if (savedInstanceState != null) {
@@ -177,6 +152,41 @@ public class MainActivity extends BaseActivity {
 		}
 	}
 
+	private void handleIntent(Intent intent) {
+		// If this Activity was called to view a particular channel, display that channel via ChannelBrowserFragment, instead of MainFragment
+		String action = intent.getAction();
+		Logger.i(MainActivity.this, "Action is : " + action);
+		initMainFragment(action);
+		if(ACTION_VIEW_CHANNEL.equals(action)) {
+			dontAddToBackStack = true;
+			YouTubeChannel channel = (YouTubeChannel) intent.getSerializableExtra(ChannelBrowserFragment.CHANNEL_OBJ);
+			Logger.i(MainActivity.this, "Channel found: " + channel);
+			onChannelClick(channel);
+		} else if(ACTION_VIEW_PLAYLIST.equals(action)) {
+			dontAddToBackStack = true;
+			YouTubePlaylist playlist = (YouTubePlaylist) intent.getSerializableExtra(PlaylistVideosFragment.PLAYLIST_OBJ);
+			Logger.i(MainActivity.this, "playlist found: " + playlist);
+			onPlaylistClick(playlist);
+		}
+	}
+
+	private void initMainFragment(String action) {
+		if(mainFragment == null) {
+			Logger.i(MainActivity.this,"initMainFragment called "+action);
+			mainFragment = new MainFragment();
+			// If we're coming here via a click on the Notification that new videos for subscribed channels have been found, make sure to
+			// select the Feed tab.
+			if(action != null && action.equals(ACTION_VIEW_FEED)) {
+				Bundle args = new Bundle();
+				args.putBoolean(MainFragment.SHOULD_SELECTED_FEED_TAB, true);
+				mainFragment.setArguments(args);
+			}
+			getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, mainFragment).commit();
+			currentFragment = mainFragment;
+		} else {
+			Logger.i(MainActivity.this, "mainFragment already exists, action:"+action+" fragment:"+mainFragment +", manager:"+mainFragment.getFragmentManager() +", support="+getSupportFragmentManager());
+		}
+	}
 
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
