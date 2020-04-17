@@ -19,12 +19,61 @@ package free.rm.skytube.businessobjects;
 
 import android.os.AsyncTask;
 
+import androidx.core.util.Consumer;
+
 /**
  * Can run multiple {@link AsyncTask}s in parallel.
  *
  * <p>To run in parallel, call the method {@link #executeInParallel(Object[])}.</p>
  */
 public abstract class AsyncTaskParallel<Params, Progress, Result> extends AsyncTask<Params, Progress, Result> {
+
+	protected Exception lastException;
+	private Consumer<Exception> errorCallback;
+	private Runnable finishCallback;
+
+	protected AsyncTaskParallel() {
+		errorCallback = null;
+		finishCallback = null;
+	}
+
+	protected AsyncTaskParallel(Consumer<Exception> errorCallback, Runnable finishCallback) {
+		this.errorCallback = errorCallback;
+		this.finishCallback = finishCallback;
+	}
+
+	public AsyncTaskParallel<Params, Progress, Result> setFinishCallback(Runnable finishCallback) {
+		this.finishCallback = finishCallback;
+		return this;
+	}
+
+	public AsyncTaskParallel<Params, Progress, Result> setErrorCallback(Consumer<Exception> errorCallback) {
+		this.errorCallback = errorCallback;
+		return this;
+	}
+
+	/**
+	 * Child classes should call as the super implementation as the last statement.
+	 * @param result
+	 */
+	@Override
+	protected void onPostExecute(Result result) {
+		if (lastException != null) {
+			if (errorCallback != null) {
+				errorCallback.accept(lastException);
+			}
+			showErrorToUi();
+		}
+		if (finishCallback != null) {
+			finishCallback.run();
+		}
+	}
+
+	/**
+	 * Override, if a custom error handling should happen.
+	 */
+	protected void showErrorToUi() {
+	}
 
 	/**
 	 * @see #executeInParallel(Object[])

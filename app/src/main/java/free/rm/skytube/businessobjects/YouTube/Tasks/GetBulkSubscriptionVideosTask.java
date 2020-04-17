@@ -139,6 +139,7 @@ public class GetBulkSubscriptionVideosTask extends AsyncTaskParallel<Void, GetBu
         if (listener != null) {
             listener.onAllChannelVideosFetched(changed);
         }
+        super.onPostExecute(changed);
     }
 
     @Override
