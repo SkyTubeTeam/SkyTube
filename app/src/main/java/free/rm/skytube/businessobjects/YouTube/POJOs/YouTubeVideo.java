@@ -461,7 +461,7 @@ public class YouTubeVideo extends CardData implements Serializable {
 
     public void openChannel(final Context context) {
 		final String channelId = getChannelId();
-		YouTubeChannel.openChannel(context, channelId);
+		SkyTubeApp.launchChannel(channelId, context);
 	}
 
 	public void subscribeChannel(final Context context, final Menu menu) {

@@ -126,7 +126,7 @@ public class Linker {
 							(dialog, which) -> {
 								switch (which) {
 									case 0:
-										YouTubePlayer.viewInBrowser(clickedText, ctx);
+										SkyTubeApp.viewInBrowser(clickedText, ctx);
 										break;
 									case 1:
 										ClipboardManager clipboard = (ClipboardManager) ctx.getSystemService(Context.CLIPBOARD_SERVICE);

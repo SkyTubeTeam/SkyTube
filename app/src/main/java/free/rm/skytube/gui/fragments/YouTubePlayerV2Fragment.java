@@ -275,7 +275,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 
 		videoDescChannelThumbnailImageView.setOnClickListener(v -> {
 			if (youTubeChannel != null) {
-				YouTubePlayer.launchChannel(youTubeChannel, getActivity());
+				SkyTubeApp.launchChannel(youTubeChannel, getActivity());
 			}
 		});
 		commentsDrawer.setOnDrawerOpenListener(() -> {

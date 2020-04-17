@@ -32,6 +32,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Build;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
@@ -51,11 +52,16 @@ import java.util.List;
 
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.FeedUpdaterReceiver;
+import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
+import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubePlaylist;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetPlaylistTask;
 import free.rm.skytube.businessobjects.YouTube.newpipe.ContentId;
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
 import free.rm.skytube.businessobjects.db.Tasks.GetChannelInfo;
+import free.rm.skytube.gui.activities.MainActivity;
 import free.rm.skytube.gui.businessobjects.YouTubePlayer;
+import free.rm.skytube.gui.fragments.ChannelBrowserFragment;
+import free.rm.skytube.gui.fragments.PlaylistVideosFragment;
 
 /**
  * SkyTube application.
@@ -336,7 +342,7 @@ public class SkyTubeApp extends MultiDexApplication {
 			return;
 		} else {
 			if (useExternalBrowser) {
-				YouTubePlayer.viewInBrowser(url, ctx);
+				viewInBrowser(url, ctx);
 			}
 		}
 	}
@@ -357,14 +363,12 @@ public class SkyTubeApp extends MultiDexApplication {
 				break;
 			}
 			case CHANNEL: {
-				new GetChannelInfo(ctx, channel -> {
-					YouTubePlayer.launchChannel(channel, ctx);
-				}, true).executeInParallel(content.getId());
+				SkyTubeApp.launchChannel(content.getId(), ctx);
 				break;
 			}
 			case PLAYLIST: {
 				new GetPlaylistTask(ctx, content.getId(), playlist -> {
-					YouTubePlayer.launchPlaylist(playlist, ctx);
+					launchPlaylist(playlist, ctx);
 				}).executeInParallel();
 				break;
 			}
@@ -373,6 +377,54 @@ public class SkyTubeApp extends MultiDexApplication {
 			}
 		}
 		return true;
+	}
+
+
+	/**
+	 * Launches the channel view, so the user can see all the videos from a channel.
+	 *
+	 * @param channelId the channel to be displayed.
+	 */
+	public static void launchChannel(String channelId, Context context) {
+		if (channelId != null) {
+			new GetChannelInfo(context,
+					youTubeChannel -> SkyTubeApp.launchChannel(youTubeChannel, context),
+					true)
+					.executeInParallel(channelId);
+		}
+	}
+
+	/**
+	 * Launches the channel view, so the user can see all the videos from a channel.
+	 *
+	 * @param youTubeChannel the channel to be displayed.
+	 */
+	public static void launchChannel(YouTubeChannel youTubeChannel, Context context) {
+		Intent i = new Intent(context, MainActivity.class);
+		i.setAction(MainActivity.ACTION_VIEW_CHANNEL);
+		i.putExtra(ChannelBrowserFragment.CHANNEL_OBJ, youTubeChannel);
+		context.startActivity(i);
+	}
+
+	/**
+	 * Launch the {@link PlaylistVideosFragment}
+	 * @param playlist the playlist to display
+	 */
+	public static void launchPlaylist(final YouTubePlaylist playlist, final Context context) {
+		Intent playlistIntent = new Intent(context, MainActivity.class);
+		playlistIntent.setAction(MainActivity.ACTION_VIEW_PLAYLIST);
+		playlistIntent.putExtra(PlaylistVideosFragment.PLAYLIST_OBJ, playlist);
+		context.startActivity(playlistIntent);
+	}
+
+	/**
+	 * Launch an external activity to actually open the given URL
+	 * @param url
+	 */
+	public static void viewInBrowser(String url, final Context context) {
+		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+		browserIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		context.startActivity(browserIntent);
 	}
 
 }
