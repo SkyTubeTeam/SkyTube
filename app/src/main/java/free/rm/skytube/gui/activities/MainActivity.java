@@ -152,6 +152,21 @@ public class MainActivity extends BaseActivity {
 		}
 	}
 
+	@Override
+	protected void onNewIntent(Intent intent) {
+		super.onNewIntent(intent);
+		Logger.i(MainActivity.this, "onNewIntent "+ intent +" old "+getIntent());
+		setIntent(intent);
+		Logger.i(MainActivity.this, "---> "+getIntent());
+		handleIntent(intent);
+	}
+
+	@Override
+	protected void onResumeFragments() {
+		super.onResumeFragments();
+		Logger.i(MainActivity.this, "onResumeFragments "+getIntent());
+	}
+
 	private void handleIntent(Intent intent) {
 		// If this Activity was called to view a particular channel, display that channel via ChannelBrowserFragment, instead of MainFragment
 		String action = intent.getAction();
