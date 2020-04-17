@@ -19,6 +19,8 @@ package free.rm.skytube.businessobjects.db.Tasks;
 import android.content.Context;
 import android.widget.Toast;
 
+import androidx.core.util.Consumer;
+
 import org.schabi.newpipe.extractor.exceptions.ExtractionException;
 
 import java.io.IOException;
@@ -44,7 +46,6 @@ public class GetChannelInfo extends AsyncTaskParallel<String, Void, YouTubeChann
 
     private final long CHANNEL_INFO_VALIDITY = 24 * 60 * 60 * 1000L;
     private final Context context;
-    private Exception exception;
     private final YouTubeChannelInterface channelReceiver;
     private final boolean staleAcceptable;
 
@@ -53,9 +54,14 @@ public class GetChannelInfo extends AsyncTaskParallel<String, Void, YouTubeChann
     }
 
     public GetChannelInfo(Context context, YouTubeChannelInterface channelReceiver) {
-        this(context, channelReceiver, false);
+        this(context, channelReceiver, false, null);
     }
     public GetChannelInfo(Context context, YouTubeChannelInterface channelReceiver, boolean staleAcceptable) {
+        this(context, channelReceiver, staleAcceptable, null);
+    }
+
+    public GetChannelInfo(Context context, YouTubeChannelInterface channelReceiver, boolean staleAcceptable, Consumer<Exception> errorCallback) {
+        super(errorCallback, null);
         Utils.requireNonNull(context, "context missing");
         Utils.requireNonNull(channelReceiver, "channelReceiver missing");
         this.context = context;
@@ -82,7 +88,7 @@ public class GetChannelInfo extends AsyncTaskParallel<String, Void, YouTubeChann
                 channel = NewPipeService.get().getChannelDetails(channelId);
                 db.cacheChannel(channel);
             } catch (NewPipeException | RuntimeException e) {
-                exception = e;
+                lastException = e;
             }
         }
         if (channel != null) {
@@ -103,19 +109,20 @@ public class GetChannelInfo extends AsyncTaskParallel<String, Void, YouTubeChann
 
     @Override
     protected void onPostExecute(YouTubeChannel youTubeChannel) {
-        showErrorToUi();
         if (youTubeChannel != null) {
             channelReceiver.onGetYouTubeChannel(youTubeChannel);
         }
+        super.onPostExecute(youTubeChannel);
     }
 
+    @Override
     public void showErrorToUi() {
-        if (exception != null) {
-            Logger.e(this, "Error: "+exception.getMessage(), exception);
-            if (exception.getCause() != null) {
-                showError(exception.getCause().getMessage());
+        if (lastException != null) {
+            Logger.e(this, "Error: "+lastException.getMessage(), lastException);
+            if (lastException.getCause() != null) {
+                showError(lastException.getCause().getMessage());
             } else {
-                showError(exception.getMessage());
+                showError(lastException.getMessage());
             }
         }
     }

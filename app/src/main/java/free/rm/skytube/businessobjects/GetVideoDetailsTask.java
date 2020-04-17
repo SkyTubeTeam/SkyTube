@@ -3,6 +3,8 @@ package free.rm.skytube.businessobjects;
 import android.content.Context;
 import android.content.Intent;
 
+import androidx.core.util.Consumer;
+
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -28,7 +30,6 @@ public class GetVideoDetailsTask extends AsyncTaskParallel<Void, Void, YouTubeVi
 	private final Context context;
 	private final ContentId content;
 	private final YouTubeVideoListener youTubeVideoListener;
-	private Exception lastException;
 
 	public GetVideoDetailsTask(Context context, ContentId content, YouTubeVideoListener youTubeVideoListener) {
 		this.context = context;
@@ -63,10 +64,14 @@ public class GetVideoDetailsTask extends AsyncTaskParallel<Void, Void, YouTubeVi
 
 	@Override
 	protected void onPostExecute(YouTubeVideo youTubeVideo) {
-		SkyTubeApp.notifyUserOnError(context, lastException);
-
 		if(youTubeVideoListener != null) {
 			youTubeVideoListener.onYouTubeVideo(content, youTubeVideo);
 		}
+		super.onPostExecute(youTubeVideo);
+	}
+
+	@Override
+	protected void showErrorToUi() {
+		SkyTubeApp.notifyUserOnError(context, lastException);
 	}
 }

@@ -47,7 +47,6 @@ public class GetChannelVideosTask extends AsyncTaskParallel<Void, Void, List<Car
 	private final GetChannelVideosInterface getChannelVideos;
 	private final String channelId;
 	private final boolean filterSubscribedVideos;
-	private IOException exception;
 	private YouTubeChannel channel;
 	private final GetChannelVideosTaskInterface getChannelVideosTaskInterface;
 	private final Long publishedAfter;
@@ -82,7 +81,7 @@ public class GetChannelVideosTask extends AsyncTaskParallel<Void, Void, List<Car
 				getChannelVideos.setChannelQuery(channelId, filterSubscribedVideos);
 				videos = getChannelVideos.getNextVideos();
 			} catch (IOException e) {
-				exception = e;
+				lastException = e;
 				channel = db.getCachedChannel(channelId);
 			}
 		}
@@ -103,13 +102,18 @@ public class GetChannelVideosTask extends AsyncTaskParallel<Void, Void, List<Car
 
 	@Override
 	protected void onPostExecute(List<CardData> youTubeVideos) {
-		if (exception != null && channel != null) {
+		if(getChannelVideosTaskInterface != null) {
+			getChannelVideosTaskInterface.onGetVideos(youTubeVideos);
+		}
+		super.onPostExecute(youTubeVideos);
+	}
+
+	@Override
+	protected void showErrorToUi() {
+		if (lastException != null && channel != null) {
 			Toast.makeText(getContext(),
 					String.format(getContext().getString(R.string.could_not_get_videos), channel.getTitle()),
 					Toast.LENGTH_LONG).show();
-		}
-		if(getChannelVideosTaskInterface != null) {
-			getChannelVideosTaskInterface.onGetVideos(youTubeVideos);
 		}
 	}
 
