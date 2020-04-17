@@ -53,7 +53,7 @@
     <string name="no_preferred_lang_selected">Aucune langue sélectionnée.  Paramètres ignorés.</string>
     <string name="preferred_lang_updated">Mise à jour de la langue. Veuillez actualiser les vidéos.</string>
     <string name="pref_title_lang_detection_video_filtering">Filtrage des vidéos étrangères</string>
-    <string name="pref_summary_lang_detection_video_filtering">Bloquer les vidéos dans la langue diffère de votre langue préférée.  À utiliser uniquement avec les nouveaux appareils.</string>
+    <string name="pref_summary_lang_detection_video_filtering">Détectez les langues utilisées dans les vidéos et bloquez tout ce qui est en dehors de votre/vos langue(s) préférée(s). Seulement pour les appareils haut de gamme.</string>
     <string name="setting_updated">Mise à jour des paramètres. Veuillez actualiser les vidéos.</string>
     <string name="pref_other_filters_category">Autres filtres</string>
     <string name="pref_title_low_views_filter">Vues</string>
@@ -159,4 +159,27 @@
     <string name="pref_summary_disable_screen_gestures">Désactivez les gestes pour contrôler le volume, la luminosité et la recherche avant/arrière dans les vidéos.</string>
     <string name="pref_summary_download_to_separate_directories">Les vidéos sont téléchargées dans des dossiers en fonction du nom de la chaîne.</string>
     <string name="pref_summary_enable_video_blocker">Activer le bloqueur de vidéos.</string>
+    <string name="pref_video_download_preferred_resolution_summary">Les téléchargements vidéos préfèreront cette résolution : %s</string>
+    <string name="pref_video_download_preferred_resolution_title">Résolution de téléchargement vidéo préférée</string>
+    <string name="pref_summary_video_download_folder">Les vidéos sont téléchargées dans ce dossier : %s</string>
+    <string name="pref_title_video_download_folder">Dossier de téléchargement vidéo</string>
+    <string name="pref_popup_title_video_download_folder">Choisissez un dossier</string>
+    <string name="pref_summary_use_newpipe_backend">Utilisez l\'API expérimentale NewPipe pour accéder à YouTube…</string>
+    <string name="pref_title_use_newpipe_backend">Utilisez le backend NewPipe</string>
+    <string name="pref_summary_switch_volume_and_brightness">Place le contrôle du volume sur la droite et la luminosité sur la gauche.</string>
+    <string name="pref_title_switch_volume_and_brightness">Geste de changement de volume et de luminosité</string>
+    <string name="pref_summary_enable_immersive_mode">Masquer la barre de navigation et la barre d\'état pendant la lecture.</string>
+    <string name="pref_title_enable_immersive_mode">Activer le mode immersif</string>
+    <string name="pref_video_continuous_repeat_toggle">Répétition continue</string>
+    <string name="pref_hide_tabs_restart">Redémarrez l\'application pour afficher les onglets mis à jour.</string>
+    <string name="pref_summary_hide_tabs">Choisissez les onglets qui ne doivent pas être affichés. Redémarrage nécessaire.</string>
+    <string name="pref_title_hide_tabs">Masquer les onglets</string>
+    <string name="pref_network_downloads_category">Réseau et téléchargements</string>
+    <string name="pref_summary_autocast">Sélectionnez un appareil Chromecast à utiliser lorsque vous utilisez d\'autres applications pour ouvrir des vidéos dans SkyTube.</string>
+    <string name="pref_title_autocast">AutoCast</string>
+    <string name="pref_title_chromecast_none">Aucun</string>
+    <string name="pref_chromecast_category">Chromecast</string>
+    <string name="pref_summary_mobile_network_usage">Que faire si vous utilisez un réseau mobile (comme la 4G) pour télécharger, regarder des vidéos : %s</string>
+    <string name="pref_title_mobile_network_usage">Utilisation du réseau mobile</string>
+    <string name="key_preferences">préférences</string>
 </resources>
