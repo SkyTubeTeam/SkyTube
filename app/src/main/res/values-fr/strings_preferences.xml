@@ -2,7 +2,7 @@
 <resources>
     <string name="preferences">Préférences</string>
     <string name="pref_video_player_category">Lecteur vidéo</string>
-    <string name="pref_title_preferred_res">Résolution</string>
+    <string name="pref_title_preferred_res">Résolution par défault</string>
     <string name="pref_summary_preferred_res">Choix de la résolution : %s</string>
     <string name="pref_title_choose_player">Lecteur vidéo</string>
     <string name="pref_summary_choose_player">Lecteur vidéo utilisé : %s</string>
