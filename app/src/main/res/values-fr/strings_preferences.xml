@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="preferences">Préférances</string>
+    <string name="preferences">Préférences</string>
     <string name="pref_video_player_category">Lecteur vidéo</string>
     <string name="pref_title_preferred_res">Résolution</string>
     <string name="pref_summary_preferred_res">Choix de la résolution : %s</string>
