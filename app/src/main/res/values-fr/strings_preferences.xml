@@ -82,7 +82,7 @@
     <string name="pref_title_backup_dbs">Sauvegarder</string>
     <string name="pref_summary_backup_dbs">Sauvegardez vos chaînes ainsi que vos favoris.</string>
     <string name="pref_title_import_dbs">Importer</string>
-    <string name="pref_summary_import_dbs">Importez vos chaines et vos favoris.</string>
+    <string name="pref_summary_import_dbs">Importez vos abonnements et vos sauvegardes de signets.</string>
     <string name="databases_backing_up">Sauvegarde en cours…</string>
     <string name="databases_backup_success">Données sauvegardées à %s</string>
     <string name="databases_backup_fail">Impossible de sauvegarder vos données.</string>
