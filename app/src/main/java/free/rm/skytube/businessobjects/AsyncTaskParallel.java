@@ -52,6 +52,12 @@ public abstract class AsyncTaskParallel<Params, Progress, Result> extends AsyncT
 		return this;
 	}
 
+	@Override
+	protected void onPreExecute() {
+		super.onPreExecute();
+		lastException = null;
+	}
+
 	/**
 	 * Child classes should call as the super implementation as the last statement.
 	 * @param result

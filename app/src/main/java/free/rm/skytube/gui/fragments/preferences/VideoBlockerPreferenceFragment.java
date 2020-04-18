@@ -427,6 +427,7 @@ public class VideoBlockerPreferenceFragment extends PreferenceFragment {
 
 		@Override
 		protected void onPreExecute() {
+			super.onPreExecute();
 			getChannelInfoDialog = new SkyTubeMaterialDialog(getActivity())
 					.progress(true, 0)
 					.content(R.string.please_wait)
@@ -446,7 +447,8 @@ public class VideoBlockerPreferenceFragment extends PreferenceFragment {
 				ChannelInfo channelInfo = ChannelInfo.getInfo(youtubeService, channelUrl);
 				channel = new MultiSelectListPreferenceItem(channelInfo.getId(), channelInfo.getName(), false);
 
-			} catch (Throwable tr) {
+			} catch (Exception tr) {
+				lastException = tr;
 				Logger.e(this, "An error occurred while getting channel ID", tr);
 			}
 
@@ -456,6 +458,7 @@ public class VideoBlockerPreferenceFragment extends PreferenceFragment {
 
 		@Override
 		protected void onPostExecute(MultiSelectListPreferenceItem channel) {
+			super.onPostExecute(channel);
 			onGetChannelInfoListener.onChannelInfo(channel);
 			getChannelInfoDialog.dismiss();
 			getChannelInfoDialog = null;
