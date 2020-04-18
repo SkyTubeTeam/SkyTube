@@ -716,7 +716,7 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 
             case R.id.block_channel:
 	            youTubeChannel.blockChannel();
-
+				return true;
 			default:
 				return super.onOptionsItemSelected(item);
 		}
