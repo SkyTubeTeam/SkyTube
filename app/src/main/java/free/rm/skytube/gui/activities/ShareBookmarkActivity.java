@@ -25,7 +25,7 @@ public class ShareBookmarkActivity extends AppCompatActivity {
 
         if(getIntent() != null) {
             String text_data = getIntent().getStringExtra(Intent.EXTRA_TEXT);
-            ContentId content = SkyTubeApp.parseUrl(this, text_data);
+            ContentId content = SkyTubeApp.parseUrl(this, text_data, false);
             if (content != null && content.getType() == StreamingService.LinkType.STREAM) {
                 new GetVideoDetailsTask(this, content, (videoUrl, video) -> {
                     if (video != null) {

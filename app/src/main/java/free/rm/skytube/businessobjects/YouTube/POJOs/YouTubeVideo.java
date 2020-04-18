@@ -459,16 +459,6 @@ public class YouTubeVideo extends CardData implements Serializable {
 		SkyTubeApp.copyUrl(context, "Video URL", getVideoUrl());
 	}
 
-    public void openChannel(final Context context) {
-		final String channelId = getChannelId();
-		SkyTubeApp.launchChannel(channelId, context);
-	}
-
-	public void subscribeChannel(final Context context, final Menu menu) {
-		final String channelId = getChannelId();
-		YouTubeChannel.subscribeChannel(context, menu, channelId);
-	}
-
 	/**
 	 * If the user have previously downloaded the video, this method will return the Uri of the file;
 	 * else, get the stream for this video (based on the user's preference) by communicating with

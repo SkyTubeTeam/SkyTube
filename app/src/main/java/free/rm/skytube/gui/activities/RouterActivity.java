@@ -36,7 +36,7 @@ public class RouterActivity extends AppCompatActivity {
             String textData = getUrlFromIntent(intent);
             Log.i("RouterActivity", "Found url : " + textData);
             if (textData != null) {
-                ContentId content = SkyTubeApp.parseUrl(this, textData);
+                ContentId content = SkyTubeApp.parseUrl(this, textData, true);
                 Log.i("RouterActivity", "Parsed into: " + content);
                 if (content != null) {
                     SkyTubeApp.openContent(this, content);

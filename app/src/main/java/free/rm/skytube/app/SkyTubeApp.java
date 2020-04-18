@@ -303,19 +303,15 @@ public class SkyTubeApp extends MultiDexApplication {
 	 */
 	public static ContentId getUrlFromIntent(final Context ctx, final Intent intent) {
 		if (Intent.ACTION_VIEW.equals(intent.getAction()) && intent.getData() != null) {
-			return parseUrl(ctx, intent.getData().toString());
+			return parseUrl(ctx, intent.getData().toString(), true);
 		}
 		return null;
 	}
 
-	public static void openUrl(Context ctx, String url) {
-		openUrl(ctx, url, true);
-	}
-
-	public static ContentId parseUrl(Context context, String url) {
+	public static ContentId parseUrl(Context context, String url, boolean showErrorIfNotValid) {
 		try {
 			ContentId id = NewPipeService.get().getContentId(url);
-			if (id == null) {
+			if (id == null && showErrorIfNotValid) {
 				String message = String.format(context.getString(R.string.error_invalid_url), url);
 				Toast.makeText(context, message, Toast.LENGTH_LONG).show();
 			}
@@ -336,7 +332,9 @@ public class SkyTubeApp extends MultiDexApplication {
 	 * @param useExternalBrowser
 	 */
 	public static void openUrl(Context ctx, String url, boolean useExternalBrowser) {
-		ContentId content = parseUrl(ctx, url);
+		// Show error message only if we don't want to use external browser, so we expect that the URL
+		// can be handled internally, and if the URL is invalid, it's an error.
+		ContentId content = parseUrl(ctx, url, !useExternalBrowser);
 
 		if (openContent(ctx, content)) {
 			return;

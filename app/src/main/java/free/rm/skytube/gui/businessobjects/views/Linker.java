@@ -112,7 +112,7 @@ public class Linker {
 			if (longClick) {
 				longClick(span.getURL());
 			} else {
-				SkyTubeApp.openUrl(ctx, span.getURL());
+				SkyTubeApp.openUrl(ctx, span.getURL(), true);
 			}
 		}
 
