@@ -27,6 +27,7 @@ import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.core.content.ContextCompat;
@@ -207,19 +208,32 @@ public class MainActivity extends BaseActivity {
 	protected void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 
-		if(mainFragment != null)
-			getSupportFragmentManager().putFragment(outState, MAIN_FRAGMENT, mainFragment);
-		if(searchVideoGridFragment != null && searchVideoGridFragment.isVisible())
-			getSupportFragmentManager().putFragment(outState, SEARCH_FRAGMENT, searchVideoGridFragment);
-		if(channelBrowserFragment != null && channelBrowserFragment.isVisible())
-			getSupportFragmentManager().putFragment(outState, CHANNEL_BROWSER_FRAGMENT, channelBrowserFragment);
-		if(playlistVideosFragment != null && playlistVideosFragment.isVisible())
-			getSupportFragmentManager().putFragment(outState, PLAYLIST_VIDEOS_FRAGMENT, playlistVideosFragment);
+		final FragmentManager supportFragmentManager = getSupportFragmentManager();
+		if(mainFragment != null) {
+			putFragment(supportFragmentManager, outState, MAIN_FRAGMENT, mainFragment);
+		}
+		if(searchVideoGridFragment != null && searchVideoGridFragment.isVisible()) {
+			putFragment(supportFragmentManager, outState, SEARCH_FRAGMENT, searchVideoGridFragment);
+		}
+		if(channelBrowserFragment != null && channelBrowserFragment.isVisible()) {
+			putFragment(supportFragmentManager, outState, CHANNEL_BROWSER_FRAGMENT, channelBrowserFragment);
+		}
+		if(playlistVideosFragment != null && playlistVideosFragment.isVisible()) {
+			putFragment(supportFragmentManager, outState, PLAYLIST_VIDEOS_FRAGMENT, playlistVideosFragment);
+		}
 
 		// save the video blocker plugin
 		outState.putSerializable(VIDEO_BLOCKER_PLUGIN, videoBlockerPlugin);
 	}
 
+	private void putFragment(FragmentManager fragmentManager,  Bundle bundle, @NonNull String key,
+						@NonNull Fragment fragment) {
+		if (fragment.getFragmentManager() != fragmentManager) {
+			Logger.e(MainActivity.this, "Error fragment has a different FragmentManager than expected: Fragment=" + fragment + ", manager=" + fragmentManager + ", Fragment.manager=" + fragment.getFragmentManager() + " for key=" + key);
+		} else {
+			fragmentManager.putFragment(bundle, key, fragment);
+		}
+	}
 
 	@Override
 	protected void onResume() {
