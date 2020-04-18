@@ -1,26 +1,25 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="could_not_get_videos">Impossible de charger les vidéos de %s.</string>
-	<string name="views">Vu %,d fois</string>
-	<string name="error">Erreur</string>
-	<string name="ok">OK</string>
-	<string name="search_videos">Rechercher</string>
-	<string name="launch_offical_player_error">Une erreur s\'est produite lors de l\'ouverture du lecteur YouTube officiel de Google. Assurez-vous de bien l\'avoir installé sur votre appareil.</string>
-	<string name="LIVE">LIVE</string>
-
-	<string name="featured">Tendance</string>
-	<string name="most_popular">Populaires</string>
-
-	<string name="video">Video</string>
-	<string name="videos">Vidéos</string>
-	<string name="num_videos">%d vidéos</string>
-	<string name="playlists">Listes de lecture</string>
-	<string name="could_not_get_playlists">Impossible d\'obtenir les listes de lecture %s.</string>
-
-	<string name="loading">Chargement…</string>
+    <string name="could_not_get_videos">Impossible de charger les vidéos de %s.</string>
+    <string name="views">%,d vues</string>
+    <string name="error">Erreur</string>
+    <string name="ok">OK</string>
+    <string name="search_videos">Rechercher des vidéos</string>
+    <string name="launch_offical_player_error">Une erreur s\'est produite lors de l\'ouverture du lecteur YouTube officiel de Google. Assurez-vous de bien l\'avoir installé sur votre appareil.</string>
+    <string name="LIVE">EN DIRECT</string>
+    <string name="featured">Tendances</string>
+    <string name="most_popular">Populaires</string>
+    <string name="video">Vidéo</string>
+    <string name="videos">Vidéos</string>
+    <string name="num_videos">%d vidéos</string>
+    <string name="playlists">Listes de lecture</string>
+    <string name="could_not_get_playlists">Impossible d\'obtenir les listes de lecture %s.</string>
+    <string name="loading">Chargement…</string>
     <string name="could_not_get_channel">Impossible de télécharger les informations de la chaîne !</string>
-<string name="hello_blank_fragment">Bonjour fragment vide</string>
+    <string name="hello_blank_fragment">Bonjour fragment vide</string>
     <string name="yes">Oui</string>
-	<string name="no">Non</string>
-
-    </resources>
+    <string name="no">Non</string>
+    <string name="search_channel">Chercher un chaîne</string>
+    <string name="close">Fermer</string>
+    <string name="could_not_get_channel_detailed">Impossible de télécharger les infos de la chaîne : %s.</string>
+</resources>

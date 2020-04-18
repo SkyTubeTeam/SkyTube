@@ -20,7 +20,7 @@
         <item>Capteur téléphone</item>
     </string-array>
     <string name="pref_video_blocker_category">Bloqueur de vidéos</string>
-    <string name="pref_channels_filter_category">Filtre de chaînes</string>
+    <string name="pref_channels_filter_category">Filtres de chaînes</string>
     <string name="pref_title_channel_filter_method">Méthode de filtrage</string>
     <string name="pref_summary_channel_filter_method">Choisir la méthode de filtrage : %s</string>
     <string name="disabled">Désactivé</string>
