@@ -21,8 +21,8 @@
     <string name="import_subscriptions_parse_error">Došlo je do greške prilikom pokušaja analiziranja XML datoteke koju si prenio/la: %s.</string>
     <string name="failed_to_import_subscriptions">Neuspio uvoz tvojih pretplata na YouTube-u.</string>
     <string name="about">Informacije</string>
-    <string name="channel_subscribed">Pretplata na kanal</string>
+    <string name="channel_subscribed">Pretplaćen kanal</string>
     <string name="channel_unsubscribed">Otkazana pretplata na kanal</string>
     <string name="channel_subscribe_failed">Nije moguće pretplatiti se na kanal</string>
-    <string name="channel_already_subscribed">Već si pretplaćen/a na ovaj kanal</string>
+    <string name="channel_already_subscribed">Već imaš pretplatu na ovaj kanal</string>
 </resources>
