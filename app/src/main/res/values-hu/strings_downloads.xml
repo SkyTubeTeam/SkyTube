@@ -2,15 +2,15 @@
 <resources>
     <string name="download">Letöltés</string>
     <string name="downloads">Letöltések</string>
-    <string name="warning_mobile_network_download">A készüléke nem csatlakozik Wi-Fi hálózathoz. Hogy elkerülje az extra adat forgalommal járó költségeket, javasolt a Wi-Fi hálózat használata. Letöltsük a videót ennek ellenére is\?</string>
-    <string name="download_video">Videó Letöltés</string>
-    <string name="starting_video_download">\'%s\' letöltése …</string>
-    <string name="video_download_stream_error">Nem lehet letölteni \'%s\'-t.</string>
-    <string name="delete_download">Letöltés Törlése</string>
-    <string name="video_downloaded">\'%s\' le lett töltve.</string>
+    <string name="warning_mobile_network_download">Az eszköze nem csatlakozik Wi-Fi hálózathoz. Hogy elkerülje az extra adatforgalommal járó költségeket, javasolt a Wi-Fi hálózat használata. Mindenképp letölti a videót\?</string>
+    <string name="download_video">Videó letöltése</string>
+    <string name="starting_video_download">„%s” letöltése…</string>
+    <string name="video_download_stream_error">Nem sikerült letölteni: „%s”.</string>
+    <string name="delete_download">Letöltés törlése</string>
+    <string name="video_downloaded">„%s” letöltve.</string>
     <string name="no_downloaded_videos_text">Még nem töltött le egyetlen videót sem.
 \n
 \nMiután megteszi, itt fog megjelenni.</string>
-    <string name="playing_video_file_missing">A letöltött videó fájl nem található. Lejátszás közvetlenül a hálózatról.</string>
-    <string name="external_storage_not_available">Nem lehet letölteni a fájlt, mivel a külső tároló eszköz nem elérhető.</string>
+    <string name="playing_video_file_missing">A letöltött videófájl nem található. Lejátszás közvetlenül a hálózatról.</string>
+    <string name="external_storage_not_available">Nem lehet letölteni a fájlt, mivel a külső tároló nem érhető el.</string>
 </resources>
