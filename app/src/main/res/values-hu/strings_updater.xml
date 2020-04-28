@@ -1,12 +1,12 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="update_available">Új verzió elérhető</string>
-	<string name="update_dialog_msg">Egy új SkyTube frissítés érhető el. Az alkalmazás a %s verzióra lesz frissítve.</string>
-	<string name="up_to_date">Legfrissebb</string>
-	<string name="up_to_date_msg">A legújabb SkyTube verzióval rendelkezik.</string>
-	<string name="release_notes">Újdonságok a %s-s verzióban</string>
-	<string name="update">Frissítés</string>
-	<string name="later">Később</string>
-	<string name="update_failure">Nem sikerült frissíteni az alkalmazást.</string>
-	<string name="downloading">Letöltés…</string>
+    <string name="update_available">Új verzió érhető el</string>
+    <string name="update_dialog_msg">A SkyTube új verziója érhető el. A(z) %s verzió lesz telepítve.</string>
+    <string name="up_to_date">Naprakész</string>
+    <string name="up_to_date_msg">A legújabb SkyTube verzióval rendelkezik.</string>
+    <string name="release_notes">Újdonságok a(z) %s verzióban</string>
+    <string name="update">Frissítés</string>
+    <string name="later">Később</string>
+    <string name="update_failure">Nem sikerült frissíteni az alkalmazást.</string>
+    <string name="downloading">Letöltés…</string>
 </resources>
