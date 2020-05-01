@@ -89,7 +89,7 @@
     <string name="no_preferred_lang_selected">Nessuna lingua preferita selezionata. Impostazione ignorata.</string>
     <string name="pref_other_filters_category">Altri filtri</string>
     <string name="pref_import_export_category">Importa/Esporta</string>
-    <string name="pref_summary_subscriptions_alphabetical_order">Se selezionato, i canali sottoscritti verranno ordinati alfabeticamente.</string>
+    <string name="pref_summary_subscriptions_alphabetical_order">Se selezionato, i canali a cui sei iscritto saranno ordinati in ordine alfabetico.</string>
     <string name="pref_video_blocker_category">Blocco dei video</string>
     <string name="pref_title_channel_filter_method">Metodo di filtraggio canali</string>
     <string name="pref_summary_channel_filter_method">Seleziona il metodo di filtraggio dei canali: %s</string>
