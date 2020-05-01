@@ -20,7 +20,7 @@
     <string name="import_subscriptions_parse_error">Si è verificato un errore nel tentativo di analizzare il file XML che hai caricato: %s.</string>
     <string name="failed_to_import_subscriptions">Importazione delle tue iscrizioni YouTube fallita.</string>
     <string name="about">Informazioni</string>
-    <string name="unsubscribe_from_all_current_sibbed_channels">Annulla l\'iscrizione da tutti gli attuali canali sottoscritti.</string>
+    <string name="unsubscribe_from_all_current_sibbed_channels">Annulla l\'iscrizione da tutti i canali a cui sei attualmente iscritto.</string>
     <string name="channel_unsubscribed">Iscrizione canale annullata</string>
     <string name="channel_subscribe_failed">Impossibile iscriversi al canale</string>
     <string name="channel_already_subscribed">Sei già iscritto/a a questo canale</string>
