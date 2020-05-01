@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="downloads">Downloads</string>
+    <string name="downloads">Heruntergeladene</string>
     <string name="download_video">Video herunterladen</string>
-    <string name="starting_video_download">„%s” wird heruntergeladen …</string>
-    <string name="video_download_stream_error">„%s” konnte nicht heruntergeladen werden.</string>
+    <string name="starting_video_download">„%s“ wird heruntergeladen …</string>
+    <string name="video_download_stream_error">„%s“ konnte nicht heruntergeladen werden.</string>
     <string name="delete_download">Download löschen</string>
-    <string name="video_downloaded">„%s” heruntergeladen.</string>
+    <string name="video_downloaded">„%s“ heruntergeladen.</string>
     <string name="no_downloaded_videos_text">Sie haben noch keine Videos heruntergeladen.
 \n
 \nSobald Sie es getan haben, werden sie hier angezeigt.</string>
