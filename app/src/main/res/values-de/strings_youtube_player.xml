@@ -19,7 +19,7 @@
     <string name="copy_url">URL kopieren</string>
     <string name="url_copied_to_clipboard">URL in die Zwischenablage kopiert.</string>
     <string name="error_get_comments">Beim Abrufen der Kommentare ist ein Fehler aufgetreten.</string>
-    <string name="no_video_comments">Dieses Video hat keine Kommentare oder die Kommentare wurden deaktiviert.</string>
+    <string name="no_video_comments">Dieses Video hat entweder keine Kommentare oder sie sind deaktiviert.</string>
     <string name="view_replies">Antworten anzeigen</string>
     <string name="hide_replies">Antworten ausblenden</string>
     <string name="enter_video_url">Video-URL eingeben</string>
@@ -35,4 +35,7 @@
     <string name="warning_mobile_network_disable">Nicht erneut fragen.</string>
     <string name="play_video">Video abspielen</string>
     <string name="mobile_data_blocked_by_policy">Herunterladen blockiert, weil Ihr Gerät nicht mit einem Wi-Fi-Netzwerk verbunden ist.</string>
+    <string name="error_get_comments_no_network">Zum Abrufen von Kommentaren ist Netzwerkzugang erforderlich.</string>
+    <string name="error_video_parse_error">Das Video kann nicht abgespielt werden; die Fehlermeldung lautet: <br/> <br/> %s.</string>
+    <string name="error_downloaded_file_is_corrupted">Das heruntergeladene Video sieht <b>beschädigt</b> aus – die Fehlermeldung lautet: <br/> <br/> %s. <br/> <br/> Möchten Sie die Datei <b>löschen</b>\?</string>
 </resources>
