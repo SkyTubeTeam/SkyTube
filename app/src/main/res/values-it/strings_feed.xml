@@ -12,6 +12,6 @@
 \nQuando sottoscrivi un canale, tutti i video caricati nell\'ultimo mese verranno visualizzati qui.</string>
     <string name="import_subscriptions_from_youtube">Importa iscrizioni da YouTube</string>
     <string name="notification_channel_feed_title">Notifiche di flusso</string>
-    <string name="notification_new_videos_found">%d nuovi video da canali sottoscritti</string>
+    <string name="notification_new_videos_found">%d nuovi video dai canali</string>
     <string name="open_channel">Apri il canale</string>
 </resources>
