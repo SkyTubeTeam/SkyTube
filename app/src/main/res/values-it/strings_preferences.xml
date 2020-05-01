@@ -9,7 +9,7 @@
     <string name="pref_video_player_category">Riproduttore video</string>
     <string name="pref_title_preferred_res">Risoluzione preferita</string>
     <string name="pref_summary_preferred_res">Seleziona la tua risoluzione preferita:  %s</string>
-    <string name="pref_title_backup_dbs">Backup database</string>
+    <string name="pref_title_backup_dbs">Fai backup delle banche dati</string>
     <string name="pref_summary_backup_dbs">Effettua il backup dei database delle iscrizioni e dei segnalibri.</string>
     <string name="pref_title_import_dbs">Importa backup</string>
     <string name="pref_summary_import_dbs">Importa il backup dei database delle iscrizioni e dei segnalibri.</string>
@@ -18,9 +18,9 @@
     <string name="databases_backup_fail">Backup dei tuoi database fallito.</string>
     <string name="databases_import_select_backup">Seleziona un file di backup da importare</string>
     <string name="databases_import_nothing_selected">Non è stato selezionato nulla…</string>
-    <string name="databases_import_warning_message">I database delle iscrizioni e dei segnalibri saranno rimpiazzati con i dati del file di backup selezionato.
-\n
-\nContinuare?</string>
+    <string name="databases_import_warning_message">Le banche dati delle iscrizioni e dei segnalibri saranno rimpiazzati con i dati del file di backup selezionato. 
+\n 
+\nContinuare\?</string>
     <string name="continue_">Continua</string>
     <string name="databases_importing">Importazione in corso…</string>
     <string name="databases_import_fail">Importazione dei tuoi database fallita.</string>
@@ -112,7 +112,7 @@
     <string name="channel_unwhitelist_failure">Rimozione dei canali dalla lista bianca fallita…</string>
     <string name="preferred_lang_updated">Lingua preferita aggiornata. Ricarica i video.</string>
     <string name="pref_title_lang_detection_video_filtering">Filtraggio video per rilevamento lingua</string>
-    <string name="pref_summary_lang_detection_video_filtering">Usa l\'IA per rilevare le lingue usate nei video e bloccali se le lingue non corrispondono a quelle preferite. Impostazione consigliata solo per dispositivi di fascia alta.</string>
+    <string name="pref_summary_lang_detection_video_filtering">Rileva le lingue utilizzate nei video e blocca qualsiasi cosa al di fuori delle tue lingue preferite. Solo per dispositivi di fascia alta.</string>
     <string name="setting_updated">Impostazione aggiornata. Ricarica i video.</string>
     <string name="pref_title_low_views_filter">Visualizzazioni</string>
     <string name="pref_summary_low_views_filter">Filtra i video con poche visualizzazioni: %s</string>
