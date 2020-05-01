@@ -112,7 +112,7 @@
     <string name="channel_unwhitelist_failure">Rimozione dei canali dalla lista bianca fallita…</string>
     <string name="preferred_lang_updated">Lingua preferita aggiornata. Ricarica i video.</string>
     <string name="pref_title_lang_detection_video_filtering">Filtraggio video per rilevamento lingua</string>
-    <string name="pref_summary_lang_detection_video_filtering">Usa l\'IA per rilevare la lingua usata nei video e bloccarli se la loro lingua non corrisponde alle tue preferite. Da attivare solo su dispositivi di fascia alta.</string>
+    <string name="pref_summary_lang_detection_video_filtering">Usa l\'IA per rilevare le lingue usate nei video e bloccali se le lingue non corrispondono a quelle preferite. Impostazione consigliata solo per dispositivi di fascia alta.</string>
     <string name="setting_updated">Impostazione aggiornata. Ricarica i video.</string>
     <string name="pref_title_low_views_filter">Visualizzazioni</string>
     <string name="pref_summary_low_views_filter">Filtra i video con poche visualizzazioni: %s</string>
