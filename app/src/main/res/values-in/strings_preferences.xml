@@ -130,4 +130,11 @@
     <string name="pref_title_mobile_network_usage">Penggunaan Jaringan Seluler</string>
     <string name="key_preferences">preferensi</string>
     <string name="pref_video_continuous_repeat_toggle">Pengulangan berkelanjutan</string>
+    <string name="app_license">"Hak Cipta © 2015-2018 Ramon Mifsud
+\n 
+\nProgram ini adalah perangkat lunak bebas: Anda dapat mendistribusikan ulang dan/atau memodifikasinya di bawah ketentuan Lisensi Publik Umum GNU yang diterbitkan oleh Free Software Foundation (versi 3 dari Lisensi).
+\n 
+\nProgram ini didistribusikan dengan harapan akan bermanfaat, tetapi TANPA GARANSI APA PUN;  bahkan tanpa jaminan tersirat DAGANG atau KECOCOKAN UNTUK TUJUAN TERTENTU. Lihat Lisensi Publik Umum GNU untuk detail lebih lanjut.
+\n 
+\nAnda seharusnya telah menerima salinan Lisensi Publik Umum GNU bersama dengan program ini. Jika tidak, lihat &lt;http://www.gnu.org/licenses/&gt;"</string>
 </resources>
