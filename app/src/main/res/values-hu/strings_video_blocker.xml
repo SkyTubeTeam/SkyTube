@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="dislikes">%d%%-os nemtetszés</string>
+    <string name="channel_unwhitelist_error">A csatorna nem távolítható el a fehérlistáról.</string>
+    <string name="channel_blacklist_error">A csatorna nem tehető feketelistára.</string>
+    <string name="channel_blacklisted">Csatorna feketelistára téve. Frissítsen.</string>
+    <string name="block_channel">Csatorna blokkolása</string>
+    <string name="configure">Beállítás</string>
+    <string name="no_videos_blocked">Egy videó sincs blokkolva vagy kiszűrve. Beállítja a videóblokkolót\?</string>
+    <string name="blocked_videos">Blokkolt videók</string>
+</resources>

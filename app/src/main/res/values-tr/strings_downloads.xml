@@ -1,16 +1,16 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="downloads">İndirmeler</string>
-	<string name="download_video">Video İndir</string>
-	<string name="starting_video_download">İndiriliyor \'%s\'…</string>
-	<string name="video_download_stream_error">İndirilemedi \'%s\'.</string>
-	<string name="delete_download">İndirmeyi Sil</string>
-	<string name="video_downloaded">\'%s\' indirildi.</string>
-	<string name="no_downloaded_videos_text">Henüz hiç video indirmediniz.
+    <string name="downloads">İndirmeler</string>
+    <string name="download_video">Video İndir</string>
+    <string name="starting_video_download">İndiriliyor \'%s\'…</string>
+    <string name="video_download_stream_error">İndirilemedi \'%s\'.</string>
+    <string name="delete_download">İndirmeyi Sil</string>
+    <string name="video_downloaded">\'%s\' indirildi.</string>
+    <string name="no_downloaded_videos_text">Henüz hiç video indirmediniz.
 \n
 \nBunu yaptıktan sonra, burada görünecekler.</string>
-	<string name="playing_video_file_missing">Bu video için indirme bulunamadı. Uzaktan oynatılıyor.</string>
-	<string name="external_storage_not_available">Dosya harici depolama alanı olarak indirilemiyor.</string>
-<string name="download">İndir</string>
-	<string name="warning_mobile_network_download">Cihazınız bir Wi-Fi ağına bağlı değil. Olası ekstra veri kullanımı değişikliklerinden kaçınmak için bir Wi-Fi ağına bağlamanız önerilir. Yine de video indirilsin mi\?</string>
-	</resources>
+    <string name="playing_video_file_missing">Bu video için indirme bulunamadı. Uzaktan oynatılıyor.</string>
+    <string name="external_storage_not_available">Dosya harici depolama alanı olarak indirilemiyor.</string>
+    <string name="download">İndir</string>
+    <string name="warning_mobile_network_download">Cihazınız bir Wi-Fi ağına bağlı değil. Olası fazladan veri kullanımı ücretlerinden kaçınmak için bir Wi-Fi ağına bağlamanız önerilir. Yine de video indirilsin mi\?</string>
+</resources>

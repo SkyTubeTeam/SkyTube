@@ -21,4 +21,8 @@
     <string name="failed_to_import_subscriptions">Fehler beim Importieren der YouTube Abos.</string>
     <string name="about">Über</string>
     <string name="unsubscribe_from_all_current_sibbed_channels">Von allen Ihren aktuell abonnierten Kanälen abmelden.</string>
+    <string name="channel_unsubscribed">Abonnement beendet</string>
+    <string name="channel_subscribe_failed">Kanal kann nicht abonniert werden</string>
+    <string name="channel_already_subscribed">Sie haben diesen Kanal bereits abonniert</string>
+    <string name="channel_subscribed">Kanal abonniert</string>
 </resources>

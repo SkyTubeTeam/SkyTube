@@ -1,25 +1,25 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="could_not_get_videos">%s videolar alınamadı.</string>
-	<string name="views">%,d görüntüleme</string>
-	<string name="error">Hata</string>
-	<string name="ok">Tamam</string>
-	<string name="search_videos">Video Ara</string>
-	<string name="launch_offical_player_error">Resmi YouTube oynatıcısını Google\'dan başlatmaya çalışırken bir hata oluştu. Cihazınıza yüklendiğinden emin olun.</string>
-	<string name="LIVE">CANLI</string>
-
-	<string name="featured">Öne çıkan</string>
-	<string name="most_popular">En Popüler</string>
-
-	<string name="video">Video</string>
-	<string name="videos">Videolar</string>
-	<string name="num_videos">%d video</string>
-	<string name="playlists">Oynatma Listeleri</string>
-	<string name="could_not_get_playlists">%s oynatma listesi alınamadı.</string>
-
-	<string name="loading">Yükleniyor…</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="could_not_get_videos">%s videolar alınamadı.</string>
+    <string name="views">%,d görüntüleme</string>
+    <string name="error">Hata</string>
+    <string name="ok">Tamam</string>
+    <string name="search_videos">Video Ara</string>
+    <string name="launch_offical_player_error">Resmi YouTube oynatıcısını Google\'dan başlatmaya çalışırken bir hata oluştu. Cihazınıza yüklendiğinden emin olun.</string>
+    <string name="LIVE">CANLI</string>
+    <string name="featured">Öne çıkan</string>
+    <string name="most_popular">En Popüler</string>
+    <string name="video">Video</string>
+    <string name="videos">Videolar</string>
+    <string name="num_videos">%d video</string>
+    <string name="playlists">Oynatma Listeleri</string>
+    <string name="could_not_get_playlists">%s oynatma listesi alınamadı.</string>
+    <string name="loading">Yükleniyor…</string>
     <string name="could_not_get_channel">Kanal bilgisi indirilemedi!</string>
-<string name="hello_blank_fragment">Merhaba boş fragman</string>
+    <string name="hello_blank_fragment">Merhaba boş fragman</string>
     <string name="yes">Evet</string>
-	<string name="no">Hayır</string>
-
-    </resources>
+    <string name="no">Hayır</string>
+    <string name="search_channel">Kanal ara</string>
+    <string name="close">Kapat</string>
+    <string name="could_not_get_channel_detailed">Kanal bilgileri indirilemedi: %s.</string>
+</resources>
