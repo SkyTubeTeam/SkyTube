@@ -17,7 +17,7 @@
 
 package free.rm.skytube.businessobjects.YouTube.POJOs;
 
-import android.os.Build;
+import com.google.common.base.Charsets;
 
 import java.util.Random;
 
@@ -34,9 +34,13 @@ public class YouTubeAPIKey {
 	 * {@link free.rm.skytube.gui.fragments.preferences.OthersPreferenceFragment}.  Will be null if the user did not
 	 * input a key. **/
 	private String userAPIKey;
+	private String debugKey;
+	private String[] apiKeys;
+
 	private Random random = new Random();
 
 	private static YouTubeAPIKey youTubeAPIKey = null;
+
 
 
 	/**
@@ -44,6 +48,21 @@ public class YouTubeAPIKey {
 	 */
 	private YouTubeAPIKey() {
 		userAPIKey = getUserApiKey();
+		debugKey = reconstruct(BuildConfig.YOUTUBE_API_KEYS_DEBUG);
+		apiKeys = new String[BuildConfig.YOUTUBE_API_KEYS.length];
+		for (int i=0;i<apiKeys.length;i++) {
+			apiKeys[i] = reconstruct(BuildConfig.YOUTUBE_API_KEYS[i]);
+		}
+	}
+
+	private String reconstruct(String youtubeApiKey) {
+		if (youtubeApiKey.startsWith("hidden:")) {
+			String realHiddenKey = youtubeApiKey.substring("hidden:".length());
+			// We don't need UTF-8 here
+			return new ObfuscateKey("SkyTubeIsTheBest").decrypt(realHiddenKey);
+		} else {
+			return youtubeApiKey;
+		}
 	}
 
 
@@ -68,22 +87,18 @@ public class YouTubeAPIKey {
 	 * @return Return YouTube API key.
 	 */
 	public String getYouTubeAPIKey() {
-		String key;
-
 		if (isUserApiKeySet()) {
 			// if the user has not set his own API key, then use the default SkyTube key
-			key = userAPIKey;
+			return userAPIKey;
 		} else {
 			if (BuildConfig.DEBUG) {
-				key = BuildConfig.YOUTUBE_API_KEYS_DEBUG;
+				return debugKey;
 			} else {
 				// else we are going to choose one of the defaults keys at random
-				int i = random.nextInt(BuildConfig.YOUTUBE_API_KEYS.length);
-				key = BuildConfig.YOUTUBE_API_KEYS[i];
+				int i = random.nextInt(apiKeys.length);
+				return apiKeys[i];
 			}
 		}
-
-		return key;
 	}
 
 

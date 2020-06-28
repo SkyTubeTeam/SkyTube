@@ -12,12 +12,13 @@ android {
         versionName "2.972"    // digits of the *fractional part* shall NOT be > than "9"
         versionCode 32
         // Third party devs:  pls be ethical and change the below keys
-        buildConfigField 'String',   'YOUTUBE_API_KEYS_DEBUG', '"AIzaSyDU-ZZCyOB_kYkiMSZ6ooSipUZRukHU4ik"'
+        //buildConfigField 'String',   'YOUTUBE_API_KEYS_DEBUG', '"AIzaSyDU-ZZCyOB_kYkiMSZ6ooSipUZRukHU4ik"'
+        buildConfigField 'String',   'YOUTUBE_API_KEYS_DEBUG', '"hidden:A0C0B03EED58193F4CD52DF668495D523A5229C6B66B0ED6282AE09BD8FF08CD5AF9A6B52C214F"'
         buildConfigField 'String[]', 'YOUTUBE_API_KEYS',
                 '{' +
-                        '"AIzaSyDR7X3W95oAJRaAmKxP9H0c7B3Q82r2iz8",' +
-                        '"AIzaSyC6cJs9Aa_kEhXwleH2b448h9CiHYIfxnc",' +
-                        '"AIzaSyDXZMFLY_9vXXmQIA_ql_6SftiRsLZbpxA"' +
+                        '"hidden:A0C0B03EED581E1E18E900CF3E365C70253320C5D8040BF53818F2EAF4D62AEC6FA7E68F5F2175",' +
+                        '"hidden:A0C0B03EED581E277FCC2BD47E75526C06401FB4F66E3EDB2A2BE2B7F9C606896DDEF9875F3804",' +
+                        '"hidden:A0C0B03EED58183878F501C639336957395D24B2CC7C2FD43919CB92F682408C4CBEC1C2280F4B"' +
                 '}'
         buildConfigField 'String', 'SKYTUBE_WEBSITE',         '"https://skytube-app.com"'
         buildConfigField 'String', 'SKYTUBE_WEBSITE_CREDITS', '"https://skytube-app.com/credits.html"'
@@ -46,9 +47,9 @@ android {
             dimension "skytube"
             buildConfigField 'String[]', 'YOUTUBE_API_KEYS',
                     '{' + // new keys
-                        '"AIzaSyDR7X3W95oAJRaAmKxP9H0c7B3Q82r2iz8",' +
-                        '"AIzaSyC6cJs9Aa_kEhXwleH2b448h9CiHYIfxnc",' +
-                        '"AIzaSyDXZMFLY_9vXXmQIA_ql_6SftiRsLZbpxA",' +
+                        '"hidden:A0C0B03EED581E1E18E900CF3E365C70253320C5D8040BF53818F2EAF4D62AEC6FA7E68F5F2175",' +
+                        '"hidden:A0C0B03EED581E277FCC2BD47E75526C06401FB4F66E3EDB2A2BE2B7F9C606896DDEF9875F3804",' +
+                        '"hidden:A0C0B03EED58183878F501C639336957395D24B2CC7C2FD43919CB92F682408C4CBEC1C2280F4B",' +
                         // old keys, but this can be used with FDroid
                         '"AIzaSyC27jgPDHkQsQK8TW4ngrQprSCnlMTJ04w",' +
                         '"AIzaSyCmXsaE6ZW14-1vM5zceWnGWnB73FkY7U4",' +
