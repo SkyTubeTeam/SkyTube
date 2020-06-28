@@ -59,8 +59,6 @@ import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.YouTube.VideoStream.HttpDownloader;
 import free.rm.skytube.businessobjects.YouTube.VideoStream.StreamMetaData;
 import free.rm.skytube.businessobjects.YouTube.VideoStream.StreamMetaDataList;
-import free.rm.skytube.businessobjects.db.BackupDataDb;
-import free.rm.skytube.businessobjects.db.BackupDataTable;
 
 /**
  * Service to interact with remote video services, using the NewPipeExtractor backend.
