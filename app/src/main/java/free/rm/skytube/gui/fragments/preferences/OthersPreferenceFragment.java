@@ -19,28 +19,17 @@ package free.rm.skytube.gui.fragments.preferences;
 
 import android.app.AlertDialog;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.MultiSelectListPreference;
 import android.preference.PreferenceFragment;
-import android.util.Log;
 import android.widget.Toast;
 
-import com.google.gson.JsonObject;
-
-import org.apache.commons.codec.binary.StringUtils;
-import org.jsoup.internal.StringUtil;
-
-import java.lang.reflect.Array;
-import java.nio.channels.AsynchronousChannel;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import free.rm.skytube.R;
@@ -48,16 +37,7 @@ import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPIKey;
 import free.rm.skytube.businessobjects.YouTube.ValidateYouTubeAPIKey;
-import free.rm.skytube.businessobjects.db.BackupDataDb;
-import free.rm.skytube.businessobjects.db.BackupDataTable;
 import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
-import free.rm.skytube.gui.fragments.MainFragment;
-
-import static free.rm.skytube.gui.fragments.MainFragment.BOOKMARKS_FRAGMENT;
-import static free.rm.skytube.gui.fragments.MainFragment.DOWNLOADED_VIDEOS_FRAGMENT;
-import static free.rm.skytube.gui.fragments.MainFragment.FEATURED_VIDEOS_FRAGMENT;
-import static free.rm.skytube.gui.fragments.MainFragment.MOST_POPULAR_VIDEOS_FRAGMENT;
-import static free.rm.skytube.gui.fragments.MainFragment.SUBSCRIPTIONS_FEED_FRAGMENT;
 
 /**
  * Preference fragment for other settings.
@@ -66,7 +46,6 @@ public class OthersPreferenceFragment extends PreferenceFragment implements Shar
 	private Preference folderChooser;
 
 	ListPreference defaultTabPref;
-	BackupDataDb backupDataDb;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -100,8 +79,6 @@ public class OthersPreferenceFragment extends PreferenceFragment implements Shar
 
 		MultiSelectListPreference hiddenTabsPref = (MultiSelectListPreference)findPreference(getString(R.string.pref_key_hide_tabs));
 		hiddenTabsPref.setEntryValues(tabListValues);
-
-		backupDataDb = BackupDataDb.getBackupDataDbDb();
 
 //		ListPreference feedNotificationPref = (ListPreference) findPreference(getString(R.string.pref_feed_notification_key));
 //		if(feedNotificationPref.getValue() == null) {
@@ -161,36 +138,7 @@ public class OthersPreferenceFragment extends PreferenceFragment implements Shar
 				SkyTubeApp.setFeedUpdateInterval(interval);
 			}*/
 		}
-
-		boolean subscriptions_alphabetical_order = SkyTubeApp.getPreferenceManager().getBoolean(SkyTubeApp.getStr(R.string.pref_key_subscriptions_alphabetical_order), false);
-		boolean use_newpipe_backend = SkyTubeApp.getPreferenceManager().getBoolean(SkyTubeApp.getStr(R.string.pref_use_newpipe_backend), false);
-		String youtube_api_key = SkyTubeApp.getPreferenceManager().getString(SkyTubeApp.getStr(R.string.pref_youtube_api_key), "");
-		String default_tab = SkyTubeApp.getPreferenceManager().getString(SkyTubeApp.getStr(R.string.pref_key_default_tab_name), "");
-		Set<String> hiddenFragments = SkyTubeApp.getPreferenceManager().getStringSet(getString(R.string.pref_key_hide_tabs), new HashSet<>());
-		String[] hiddenFragmentsArray = new String[5];
-
-		if(hiddenFragments.contains(MainFragment.FEATURED_VIDEOS_FRAGMENT)){
-			hiddenFragmentsArray[0] = MainFragment.FEATURED_VIDEOS_FRAGMENT;
-		}
-		if(hiddenFragments.contains(MOST_POPULAR_VIDEOS_FRAGMENT)){
-			hiddenFragmentsArray[1] = MainFragment.MOST_POPULAR_VIDEOS_FRAGMENT;
-		}
-
-		if(hiddenFragments.contains(SUBSCRIPTIONS_FEED_FRAGMENT)){
-			hiddenFragmentsArray[2] = MainFragment.SUBSCRIPTIONS_FEED_FRAGMENT;
-		}
-
-		if(hiddenFragments.contains(BOOKMARKS_FRAGMENT)){
-			hiddenFragmentsArray[3] = MainFragment.BOOKMARKS_FRAGMENT;
-		}
-
-		if(hiddenFragments.contains(DOWNLOADED_VIDEOS_FRAGMENT)){
-			hiddenFragmentsArray[4] = MainFragment.DOWNLOADED_VIDEOS_FRAGMENT;
-		}
-		backupDataDb.insertBackupData(default_tab,Arrays.toString(hiddenFragmentsArray),youtube_api_key,String.valueOf(use_newpipe_backend),String.valueOf(subscriptions_alphabetical_order));
 	}
-
-
 
 	/**
 	 * Display a dialog with message <code>messageID</code> and force the user to restart the app by
