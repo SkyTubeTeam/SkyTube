@@ -101,14 +101,14 @@ dependencies {
     implementation 'com.github.SkyTubeTeam.NewPipeExtractor:extractor:d7925c905e24876f8d'
 
     // other modules
-    implementation group: 'org.ocpsoft.prettytime', name: 'prettytime', version: '4.0.4.Final'
+    implementation group: 'org.ocpsoft.prettytime', name: 'prettytime', version: '4.0.5.Final'
     implementation 'com.github.moraisigor:slidingdrawer:1.7.1'
     implementation 'com.github.bumptech.glide:glide:4.10.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.10.0'
     implementation 'com.jakewharton:butterknife:10.2.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
     implementation 'com.google.code.gson:gson:2.8.6'
-    implementation group: 'joda-time', name: 'joda-time', version: '2.10.5'
+    implementation group: 'joda-time', name: 'joda-time', version: '2.10.6'
     implementation 'com.afollestad.material-dialogs:core:0.9.5.0'
     implementation 'com.google.android.exoplayer:exoplayer:2.9.6'
     implementation 'org.jsoup:jsoup:1.13.1'
