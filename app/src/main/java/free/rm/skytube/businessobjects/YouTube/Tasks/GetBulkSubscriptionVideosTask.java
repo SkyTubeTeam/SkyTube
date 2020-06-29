@@ -79,7 +79,7 @@ public class GetBulkSubscriptionVideosTask extends AsyncTaskParallel<Void, GetBu
         for (String channelId : channelIds) {
             try {
                 semaphore.acquire();
-                new AsyncTaskParallel<Void, Void, Integer>() {
+                NetworkAccess.runOnNetworkPool(new AsyncTaskParallel<Void, Void, Integer>() {
 
                     @Override
                     protected Integer doInBackground(Void... voids) {
@@ -119,7 +119,7 @@ public class GetBulkSubscriptionVideosTask extends AsyncTaskParallel<Void, GetBu
                         }
                         countDown.countDown();
                     }
-                }.executeInParallel();
+                });
             } catch (InterruptedException e) {
                 Logger.e(this, "Interrupt in semaphore.acquire:"+ e.getMessage(), e);
             }
