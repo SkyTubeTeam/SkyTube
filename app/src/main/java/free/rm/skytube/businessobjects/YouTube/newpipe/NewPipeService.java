@@ -433,6 +433,6 @@ public class NewPipeService {
      * @return true, if it's the preferred backend API
      */
     public static boolean isPreferred() {
-        return SkyTubeApp.getPreferenceManager().getBoolean(SkyTubeApp.getStr(R.string.pref_use_newpipe_backend), false);
+        return SkyTubeApp.getPreferenceManager().getBoolean(SkyTubeApp.getStr(R.string.pref_use_default_newpipe_backend), true);
     }
 }

@@ -54,7 +54,7 @@ public class BackupDatabases {
 	private static final String BACKUPS_EXT = ".skytube";
 	public static final String PREFERENCES_JSON = "preferences.json";
 	private static final int[] KEY_IDS = {
-			R.string.pref_use_newpipe_backend,
+			R.string.pref_use_default_newpipe_backend,
 			R.string.pref_key_subscriptions_alphabetical_order,
 			R.string.pref_youtube_api_key,
 			R.string.pref_key_default_tab_name,
