@@ -98,7 +98,7 @@ dependencies {
     }
 
     // implementation 'com.github.TeamNewPipe.NewPipeExtractor:extractor:v0.19.0'
-    implementation 'com.github.SkyTubeTeam.NewPipeExtractor:extractor:d7925c905e24876f8d'
+    implementation 'com.github.SkyTubeTeam.NewPipeExtractor:extractor:f7288ea9219b64e1c0'
 
     // other modules
     implementation group: 'org.ocpsoft.prettytime', name: 'prettytime', version: '4.0.5.Final'

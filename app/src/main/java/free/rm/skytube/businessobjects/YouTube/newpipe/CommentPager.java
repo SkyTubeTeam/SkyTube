@@ -36,11 +36,11 @@ public class CommentPager extends Pager<CommentsInfoItem, YouTubeCommentThread> 
         List<YouTubeCommentThread> result = new ArrayList<>(page.getItems().size());
         for (CommentsInfoItem infoItem : page.getItems()) {
             YouTubeCommentThread thread = new YouTubeCommentThread(new YouTubeComment(
-                    infoItem.getAuthorEndpoint(),
-                    infoItem.getAuthorName(),
+                    infoItem.getUploaderUrl(),
+                    infoItem.getUploaderName(),
                     infoItem.getThumbnailUrl(),
                     infoItem.getCommentText(),
-                    infoItem.getTextualPublishedTime(),
+                    infoItem.getTextualUploadDate(),
                     (long) infoItem.getLikeCount()));
             result.add(thread);
         }
