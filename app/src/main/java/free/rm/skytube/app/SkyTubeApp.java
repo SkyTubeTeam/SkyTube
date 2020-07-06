@@ -37,7 +37,6 @@ import android.os.Build;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import androidx.core.os.BuildCompat;
 import android.widget.Toast;
 
 import androidx.multidex.MultiDexApplication;
@@ -216,7 +215,7 @@ public class SkyTubeApp extends MultiDexApplication {
 	@TargetApi(26)
 	private void initChannels(Context context) {
 
-		if(BuildCompat.isAtLeastR()) {
+		if(Build.VERSION.SDK_INT < 26) {
 			return;
 		}
 		NotificationManager notificationManager =
