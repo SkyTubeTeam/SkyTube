@@ -56,8 +56,12 @@ public class NetworkAccess {
         executor = threadPoolExecutor;
     }
 
-    public static <Params> void runOnNetworkPool(AsyncTaskParallel task, Params... params) {
+    public static <Params, Progress, Result> void runOnNetworkPool(AsyncTaskParallel<Params, Progress, Result> task, Params... params) {
         task.executeOnExecutor(executor, params);
+    }
+
+    public static <Progress, Result> void runOnNetworkPool(AsyncTaskParallel<Void, Progress, Result> task) {
+        task.executeOnExecutor(executor, (Void[]) null);
     }
 
 }
