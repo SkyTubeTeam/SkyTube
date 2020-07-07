@@ -37,16 +37,13 @@
     <string name="pref_summary_updates">Yeni sürümleri kontrol edin.</string>
     <string name="pref_title_license">Lisans</string>
     <string name="pref_summary_license">GNU Genel Kamu Lisansı versiyon 3</string>
-    <string name="app_license">Copyright © 2015-2018 Ramon Mifsud
+    <string name="app_license">Telif Hakkı © 2015-2018 Ramon Mifsud 
 \n 
-\nThis program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation (version 3 of the License).
-\nBu program özgür yazılımdır: Free Software Foundation tarafından yayımlanan GNU Genel Kamu Lisansı (versiyon 3) kapsamında Bu programı yeniden dağıtabilir ve/veya değiştirebilirsiniz. 
+\nBu program özgür bir yazılımdır: Özgür Yazılım Vakfı tarafından yayımlanan GNU Genel Kamu Lisansı (sürüm 3) kapsamında bu programı yeniden dağıtabilir ve/veya değiştirebilirsiniz. 
 \n 
-\nThis program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
-\nBu program faydalı olması umuduyla dağıtılmaktadır. Ancak HİÇBİR GARANTİ OLMAKSIZIN; hatta imayla dahi TİCARİ ELVERİŞLİLİK ya da BELİRGİN BİR AMACA UYGUNLUK garantisi olmaksızın dağıtılmaktadır. Daha fazla detay için GNU GENEL Kamu Lisansına bakınız.
+\nBu program faydalı olması umuduyla, ancak HİÇBİR GARANTİ OLMAKSIZIN; hatta imayla dahi TİCARİ ELVERİŞLİLİK ya da BELİRGİN BİR AMACA UYGUNLUK garantisi olmaksızın dağıtılmaktadır. Daha fazla ayrıntı için GNU Genel Kamu Lisansına bakın. 
 \n 
-\nYou should have received a copy of the GNU General Public License along with this program. If not, see &lt;http://www.gnu.org/licenses/&gt;
-\nBu programla birlikte GNU Genel Kamu Lisansının bir koyasını almış olmalısınız. Eğer öyle değilse lütfen &lt;http://www.gnu.org/licenses/&gt; sayfasına bakınız</string>
+\nBu programla birlikte GNU Genel Kamu Lisansının bir koyasını almış olmalısınız. Eğer almadıysanız lütfen &lt;http://www.gnu.org/licenses/&gt; sayfasına bakın</string>
     <string name="i_agree">Kabul</string>
     <string name="pref_other_category">Diğerleri</string>
     <string name="pref_title_default_tab">Varsayılan Sekme</string>
@@ -134,7 +131,7 @@
     <string name="pref_summary_video_download_folder">Videolar bu klasöre indirilir: %s</string>
     <string name="pref_title_video_download_folder">Video İndirme Klasörü</string>
     <string name="pref_popup_title_video_download_folder">Klasör Seç</string>
-    <string name="pref_summary_use_newpipe_backend">YouTube\'a erişmek için deneysel NewPipe API\'sini kullan…</string>
+    <string name="pref_summary_use_newpipe_backend">YouTube\'a erişmek için NewPipe API\'sini kullan…</string>
     <string name="pref_title_use_newpipe_backend">NewPipe arka ucunu kullan</string>
     <string name="pref_summary_switch_volume_and_brightness">Ses seviyesi denetimini sağ tarafa, parlaklığı sol tarafa yerleştirir.</string>
     <string name="pref_title_switch_volume_and_brightness">Ses Seviyesi ve Parlaklık Hareketini Değiştir</string>

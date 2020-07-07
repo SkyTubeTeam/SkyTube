@@ -131,7 +131,7 @@
     <string name="pref_summary_video_download_folder">Video\'s worden opgeslagen in %s</string>
     <string name="pref_title_video_download_folder">Videodownloadmap</string>
     <string name="pref_popup_title_video_download_folder">Map kiezen</string>
-    <string name="pref_summary_use_newpipe_backend">Experimentele NewPipe-API gebruiken voor YouTube-toegang…</string>
+    <string name="pref_summary_use_newpipe_backend">NewPipe-API gebruiken voor YouTube-toegang…</string>
     <string name="pref_title_use_newpipe_backend">NewPipe-backend gebruiken</string>
     <string name="pref_summary_switch_volume_and_brightness">Plaatst de volumeregeling rechts en de helderheidsregeling links.</string>
     <string name="pref_summary_enable_immersive_mode">Verberg de navigatie- en statusbalk tijdens het afspelen.</string>
