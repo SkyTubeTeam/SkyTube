@@ -445,7 +445,7 @@ public class YouTubeVideo extends CardData implements Serializable {
 				getUnBookmarkMessage(result),
 				Toast.LENGTH_LONG).show();
 
-		if (result.isPositive()) {
+		if (result.isPositive() && menu != null) {
 			menu.findItem(R.id.bookmark_video).setVisible(true);
 			menu.findItem(R.id.unbookmark_video).setVisible(false);
 		}
