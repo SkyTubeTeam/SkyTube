@@ -32,16 +32,18 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 
-import org.schabi.newpipe.extractor.exceptions.FoundAdException;
+import org.schabi.newpipe.extractor.StreamingService;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
+import free.rm.skytube.businessobjects.GetVideoDetailsTask;
 import free.rm.skytube.businessobjects.Logger;
-import free.rm.skytube.businessobjects.YouTube.Tasks.GetPlaylistTask;
+import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.YouTube.newpipe.ContentId;
-import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
-import free.rm.skytube.businessobjects.db.Tasks.GetChannelInfo;
-import free.rm.skytube.gui.businessobjects.YouTubePlayer;
+import free.rm.skytube.gui.businessobjects.YouTubeVideoListener;
 
 /**
  * A {@link android.widget.TextView} which is able to handle clicks on links within the set text.
@@ -117,12 +119,14 @@ public class Linker {
 		}
 
 		private void longClick(String clickedText) {
+			List<String> items = new ArrayList<>(Arrays.asList(ctx.getString(R.string.open_in_browser), ctx.getString(R.string.copy_url), ctx.getString(R.string.share_via)));
+			ContentId content = SkyTubeApp.parseUrl(ctx, clickedText, false);
+			if(content != null && content.getType() == StreamingService.LinkType.STREAM) {
+				items.add(ctx.getString(R.string.bookmark));
+			}
 			AlertDialog.Builder builder = new AlertDialog.Builder(ctx)
 					.setTitle(clickedText)
-					.setItems(new CharSequence[] {
-									ctx.getString(R.string.open_in_browser),
-									ctx.getString(R.string.copy_url),
-									ctx.getString(R.string.share_via)},
+					.setItems(items.toArray(new CharSequence[0]),
 							(dialog, which) -> {
 								switch (which) {
 									case 0:
@@ -139,6 +143,14 @@ public class Linker {
 										intent.setType("text/plain");
 										intent.putExtra(Intent.EXTRA_TEXT, clickedText);
 										ctx.startActivity(Intent.createChooser(intent, ctx.getString(R.string.share_via)));
+										break;
+									case 3:
+										new GetVideoDetailsTask(ctx, content, new YouTubeVideoListener() {
+											@Override
+											public void onYouTubeVideo(ContentId videoUrl, YouTubeVideo video) {
+												video.bookmarkVideo(ctx);
+											}
+										}).executeInParallel();
 										break;
 								}
 							});

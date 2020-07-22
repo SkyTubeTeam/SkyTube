@@ -118,7 +118,6 @@ public class YouTubePlayer {
 					new AlertDialog.Builder(context)
 									.setTitle(R.string.should_resume)
 									.setPositiveButton(R.string.yes, (dialog, which) -> {
-
 										int position = (int) status.getPosition();
 										((ChromecastListener) context).playVideoOnChromecast(youTubeVideo, position);
 									})
