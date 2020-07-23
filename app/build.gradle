@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 28
-    buildToolsVersion '28.0.3'
+    compileSdkVersion 29
+    buildToolsVersion '29.0.2'
 
     defaultConfig {
         applicationId "free.rm.skytube"
         minSdkVersion 14
-        targetSdkVersion 28
+        targetSdkVersion 29
 
         versionName "2.972"    // digits of the *fractional part* shall NOT be > than "9"
         versionCode 32
