@@ -19,6 +19,10 @@ package free.rm.skytube.app;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import javax.annotation.Nullable;
 
 public class Utils {
 
@@ -77,5 +81,20 @@ public class Utils {
             channelId = channelId.split("channel/")[1];
         }
         return  channelId;
+    }
+
+    /**
+     * Parse the passed url and return the YouTubeVideo ID, if it is a valid Video url.
+     *
+     * @param url
+     * @return The video id (String), or null if it is an invalid url.
+     */
+    @Nullable
+    public static String youTubeVideoIdFromUrl(String url) {
+        Matcher m = Pattern.compile("(?:https?:\\/\\/)?(?:youtu\\.be\\/|(?:www\\.|m\\.)?youtube\\.com\\/(?:watch|v|embed)(?:\\.php)?(?:\\?.*v=|\\/))([a-zA-Z0-9\\-_]+)").matcher(url);
+        if(m.find()) {
+            return m.group(1);
+        }
+        return null;
     }
 }
