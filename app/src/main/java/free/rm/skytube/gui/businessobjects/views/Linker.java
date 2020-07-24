@@ -39,11 +39,11 @@ import java.util.List;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
+import free.rm.skytube.app.Utils;
 import free.rm.skytube.businessobjects.GetVideoDetailsTask;
 import free.rm.skytube.businessobjects.Logger;
-import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.YouTube.newpipe.ContentId;
-import free.rm.skytube.gui.businessobjects.YouTubeVideoListener;
+import free.rm.skytube.businessobjects.db.BookmarksDb;
 
 /**
  * A {@link android.widget.TextView} which is able to handle clicks on links within the set text.
@@ -122,7 +122,14 @@ public class Linker {
 			List<String> items = new ArrayList<>(Arrays.asList(ctx.getString(R.string.open_in_browser), ctx.getString(R.string.copy_url), ctx.getString(R.string.share_via)));
 			ContentId content = SkyTubeApp.parseUrl(ctx, clickedText, false);
 			if(content != null && content.getType() == StreamingService.LinkType.STREAM) {
-				items.add(ctx.getString(R.string.bookmark));
+				String videoId = Utils.youTubeVideoIdFromUrl(clickedText);
+				if(videoId != null) {
+					if(BookmarksDb.getBookmarksDb().isBookmarked(videoId)) {
+						items.add(ctx.getString(R.string.unbookmark));
+					} else {
+						items.add(ctx.getString(R.string.bookmark));
+					}
+				}
 			}
 			AlertDialog.Builder builder = new AlertDialog.Builder(ctx)
 					.setTitle(clickedText)
@@ -145,10 +152,11 @@ public class Linker {
 										ctx.startActivity(Intent.createChooser(intent, ctx.getString(R.string.share_via)));
 										break;
 									case 3:
-										new GetVideoDetailsTask(ctx, content, new YouTubeVideoListener() {
-											@Override
-											public void onYouTubeVideo(ContentId videoUrl, YouTubeVideo video) {
+										new GetVideoDetailsTask(ctx, content, (videoUrl, video) -> {
+											if(ctx.getString(R.string.bookmark).equals(items.get(which))) {
 												video.bookmarkVideo(ctx);
+											} else {
+												video.unbookmarkVideo(ctx, null);
 											}
 										}).executeInParallel();
 										break;
