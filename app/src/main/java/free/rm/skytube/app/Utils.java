@@ -83,18 +83,4 @@ public class Utils {
         return  channelId;
     }
 
-    /**
-     * Parse the passed url and return the YouTubeVideo ID, if it is a valid Video url.
-     *
-     * @param url
-     * @return The video id (String), or null if it is an invalid url.
-     */
-    @Nullable
-    public static String youTubeVideoIdFromUrl(String url) {
-        Matcher m = Pattern.compile("(?:https?:\\/\\/)?(?:youtu\\.be\\/|(?:www\\.|m\\.)?youtube\\.com\\/(?:watch|v|embed)(?:\\.php)?(?:\\?.*v=|\\/))([a-zA-Z0-9\\-_]+)").matcher(url);
-        if(m.find()) {
-            return m.group(1);
-        }
-        return null;
-    }
 }
