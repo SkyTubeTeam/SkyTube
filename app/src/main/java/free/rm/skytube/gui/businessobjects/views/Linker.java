@@ -121,15 +121,16 @@ public class Linker {
 		private void longClick(String clickedText) {
 			List<String> items = new ArrayList<>(Arrays.asList(ctx.getString(R.string.open_in_browser), ctx.getString(R.string.copy_url), ctx.getString(R.string.share_via)));
 			ContentId content = SkyTubeApp.parseUrl(ctx, clickedText, false);
+			final boolean isBookmarked;
 			if(content != null && content.getType() == StreamingService.LinkType.STREAM) {
-				String videoId = Utils.youTubeVideoIdFromUrl(clickedText);
-				if(videoId != null) {
-					if(BookmarksDb.getBookmarksDb().isBookmarked(videoId)) {
-						items.add(ctx.getString(R.string.unbookmark));
-					} else {
-						items.add(ctx.getString(R.string.bookmark));
-					}
+				isBookmarked = BookmarksDb.getBookmarksDb().isBookmarked(content.getId());
+				if(isBookmarked) {
+					items.add(ctx.getString(R.string.unbookmark));
+				} else {
+					items.add(ctx.getString(R.string.bookmark));
 				}
+			} else {
+				isBookmarked = false;
 			}
 			AlertDialog.Builder builder = new AlertDialog.Builder(ctx)
 					.setTitle(clickedText)
@@ -153,7 +154,7 @@ public class Linker {
 										break;
 									case 3:
 										new GetVideoDetailsTask(ctx, content, (videoUrl, video) -> {
-											if(ctx.getString(R.string.bookmark).equals(items.get(which))) {
+											if(!isBookmarked) {
 												video.bookmarkVideo(ctx);
 											} else {
 												video.unbookmarkVideo(ctx, null);
