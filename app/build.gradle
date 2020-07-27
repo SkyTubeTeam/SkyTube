@@ -131,6 +131,9 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'androidx.multidex:multidex:2.0.1' // as we have over 65536 lines of code...
 
+    // debugImplementation because LeakCanary should only run in debug builds.
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.4'
+
     // proprietary module
     extraImplementation files('libs/YouTubeAndroidPlayerApi.jar')
     extraImplementation 'com.android.support:mediarouter-v7:28.0.0'
