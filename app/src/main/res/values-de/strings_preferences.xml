@@ -93,7 +93,7 @@
     <string name="please_wait">Bitte warten …</string>
     <string name="channel_already_whitelisted">Kanal befindet sich bereits auf der Positivliste.</string>
     <string name="channel_whitelist_updated">Kanal auf die Positivliste gesetzt. Bitte Videos aktualisieren.</string>
-    <string name="channel_whitelist_update_failure">Der angegebene Kanal konnte nicht in die Positivliste eingetragen werden werden …</string>
+    <string name="channel_whitelist_update_failure">Der angegebene Kanal konnte nicht in die Positivliste eingetragen werden …</string>
     <string name="channel_unwhitelist_success">Kanal-Positivliste aktualisiert. Bitte Videos aktualisieren.</string>
     <string name="channel_unwhitelist_failure">Das Austragen der angegebenen Kanäle aus der Positvliste fehlgeschlagen …</string>
     <string name="no_preferred_lang_selected">Keine bevorzugte Sprache ausgewählt. Einstellung ignoriert.</string>
@@ -131,7 +131,7 @@
     <string name="pref_summary_video_download_folder">Videos werden in diesen Ordner heruntergeladen: %s</string>
     <string name="pref_title_video_download_folder">Video-Herunterladen-Ordner</string>
     <string name="pref_popup_title_video_download_folder">Wählen Sie einen Ordner</string>
-    <string name="pref_summary_use_newpipe_backend">Experimentelle NewPipe-API verwenden, um auf YouTube zuzugreifen…</string>
+    <string name="pref_summary_use_newpipe_backend">NewPipe-API verwenden, um auf YouTube zuzugreifen…</string>
     <string name="pref_title_use_newpipe_backend">NewPipe-Backend verwenden</string>
     <string name="pref_summary_switch_volume_and_brightness">Stellt den Lautstärkeregler auf der rechten Seite und die Helligkeit auf der linken Seite.</string>
     <string name="pref_title_switch_volume_and_brightness">Geste zum Umschalten von Lautstärke und Helligkeit</string>
