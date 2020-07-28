@@ -88,7 +88,7 @@
     <string name="pref_summary_download_to_separate_directories">Videók letöltése csatornanevek szerinti külön mappákba.</string>
     <string name="pref_title_download_to_separate_directories">Videók letöltése külön mappákba</string>
     <string name="pref_category_downloads">Letöltések</string>
-    <string name="pref_summary_use_newpipe_backend">A kísérleti NewPipe API használata a YouTube eléréséhez…</string>
+    <string name="pref_summary_use_newpipe_backend">A NewPipe API használata a YouTube eléréséhez…</string>
     <string name="pref_title_use_newpipe_backend">A NewPipe héttérszolgáltatás használata</string>
     <string name="pref_youtube_api_key_default">Indítsa újra az alkalmazást, hogy visszaváltson az alapértelmezett YouTube API-kulcs használatához.</string>
     <string name="pref_youtube_api_key_custom">A kulcs érvényes. Indítsa újra az alkalmazást az új YouTube API-kulcs használatához.</string>

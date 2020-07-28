@@ -133,7 +133,7 @@
     <string name="pref_summary_enable_immersive_mode">Skjul navigering- og statusfelt under avspilling.</string>
     <string name="pref_title_enable_immersive_mode">Skru på oppslukende modus</string>
     <string name="pref_title_switch_volume_and_brightness">Bytt lydstyrke- og lysstyrke-kontroll</string>
-    <string name="pref_summary_use_newpipe_backend">Bruk eksperimentelt NewPipe-API til anvendelse av YouTube…</string>
+    <string name="pref_summary_use_newpipe_backend">Bruk NewPipe-API-et til anvendelse av YouTube…</string>
     <string name="pref_video_download_preferred_resolution_summary">Videonedlasting vil fortrinnsvis skje i denne oppløsningen: %s</string>
     <string name="pref_video_download_preferred_resolution_title">Foretrukket videonedlastingsoppløsning</string>
     <string name="pref_summary_video_download_folder">Videoer lastes ned til denne mappen: %s</string>
