@@ -25,6 +25,7 @@ import androidx.annotation.NonNull;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.Logger;
@@ -273,7 +274,7 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<CardData, GridViewHo
     @Override
     public void onVideoStatusUpdated(CardData video) {
         if (video != null) {
-            notifyItemChanged(video);
+            replace(item -> Objects.equals(item.getId(), video.getId()), video);
         } else {
             notifyDataSetChanged();
         }
