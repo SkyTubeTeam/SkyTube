@@ -134,10 +134,25 @@ public abstract class RecyclerViewAdapterEx<T, HolderType extends RecyclerView.V
         }
     }
 
-	public Iterator<T> getIterator() {
-		return this.list.iterator();
-	}
+    /**
+     * Replace the first matching item with the given item
+     * @return the index of the new match, or -1 if none found 
+     */
+    protected int replace(Predicate<T> predicate, T newItem) {
+        for (int i=0;i<list.size();i++) {
+            T item = list.get(i);
+            if (predicate.test(item)) {
+                list.set(i, newItem);
+                this.notifyItemChanged(i);
+                return i;
+            }
+        }
+        return -1;
+    }
 
+    public Iterator<T> getIterator() {
+        return this.list.iterator();
+    }
 
 	@Override
 	public int getItemCount() {
