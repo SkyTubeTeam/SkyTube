@@ -81,6 +81,12 @@ public abstract class BaseVideosGridFragment extends TabFragment implements Swip
 	}
 
 	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		videoGridAdapter.onDestroy();
+	}
+
+	@Override
 	public void onFragmentSelected() {
 		super.onFragmentSelected();
 		videoGridAdapter.initializeList();

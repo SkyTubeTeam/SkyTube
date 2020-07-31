@@ -9,7 +9,9 @@ import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
@@ -26,7 +28,8 @@ public class PlaybackStatusDb extends SQLiteOpenHelperEx {
 	private int updateCounter = 0;
 	private static final String DATABASE_NAME = "playbackhistory.db";
 
-	private List<VideoPlayStatusUpdateListener> listeners = new ArrayList<>();
+	private final Set<VideoPlayStatusUpdateListener> listeners = new HashSet<>();
+
 	public static synchronized PlaybackStatusDb getPlaybackStatusDb() {
 		if (playbackStatusDb == null) {
 			playbackStatusDb = new PlaybackStatusDb(SkyTubeApp.getContext());
@@ -206,9 +209,7 @@ public class PlaybackStatusDb extends SQLiteOpenHelperEx {
 	}
 
 	public void addListener(VideoPlayStatusUpdateListener listener) {
-		if(!listeners.contains(listener)) {
-			listeners.add(listener);
-		}
+		listeners.add(listener);
 	}
 
 	public void removeListener(VideoPlayStatusUpdateListener listener) {
