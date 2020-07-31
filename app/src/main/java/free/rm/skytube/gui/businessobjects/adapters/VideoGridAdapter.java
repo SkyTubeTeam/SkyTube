@@ -43,6 +43,7 @@ import free.rm.skytube.gui.businessobjects.MainActivityListener;
  */
 public class VideoGridAdapter extends RecyclerViewAdapterEx<CardData, GridViewHolder> implements VideoPlayStatusUpdateListener {
 
+
 	public interface Callback {
 		void onVideoGridUpdated(int newVideoListSize);
 	}
@@ -92,6 +93,10 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<CardData, GridViewHo
 		super(context);
 		this.getYouTubeVideos = null;
 		PlaybackStatusDb.getPlaybackStatusDb().addListener(this);
+	}
+
+	public void onDestroy() {
+		PlaybackStatusDb.getPlaybackStatusDb().removeListener(this);
 	}
 
 

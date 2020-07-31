@@ -17,7 +17,10 @@
 
 package free.rm.skytube.gui.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import android.view.View;
 
@@ -90,7 +93,18 @@ public class BookmarksFragment extends OrderableVideosGridFragment implements Bo
 	public String getFragmentName() {
 		return SkyTubeApp.getStr(R.string.bookmarks);
 	}
-	
+
+	@Override
+	public void onAttach(@NonNull Context context) {
+		super.onAttach(context);
+		BookmarksDb.getBookmarksDb().addListener(this);
+	}
+
+	@Override
+	public void onDetach() {
+		super.onDetach();
+		BookmarksDb.getBookmarksDb().removeListener(this);
+	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////
 

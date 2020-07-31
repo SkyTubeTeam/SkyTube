@@ -21,6 +21,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -249,8 +250,17 @@ public class MainFragment extends FragmentEx {
 			Logger.d(this, "MAINFRAGMENT RESUMED " + tabLayout.getSelectedTabPosition());
 			videoGridFragmentsList.get(tabLayout.getSelectedTabPosition()).onFragmentSelected();
 		}
+		FragmentActivity activity = getActivity();
+		subsAdapter.setContext(activity);
+		subsAdapter.setListener((MainActivityListener)activity);
 	}
 
+	@Override
+	public void onPause() {
+		super.onPause();
+		subsAdapter.setListener(null);
+		subsAdapter.setContext(null);
+	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
