@@ -111,4 +111,8 @@ public class PlaylistVideosFragment extends VideosGridFragment {
 		return youTubePlaylist.getId();
 	}
 
+	@Override
+	public int getPriority() {
+		return 0;
+	}
 }

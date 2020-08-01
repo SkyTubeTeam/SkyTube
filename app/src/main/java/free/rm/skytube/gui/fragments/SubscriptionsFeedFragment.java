@@ -303,6 +303,15 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 		return SkyTubeApp.getStr(R.string.feed);
 	}
 
+	@Override
+	public int getPriority() {
+		return 2;
+	}
+
+	@Override
+	public String getBundleKey() {
+		return MainFragment.SUBSCRIPTIONS_FEED_FRAGMENT;
+	}
 
 	@OnClick(R.id.importSubscriptionsButton)
 	public void importSubscriptions(View v) {

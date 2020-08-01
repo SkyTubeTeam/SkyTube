@@ -70,7 +70,8 @@ class PlaylistViewHolder extends RecyclerView.ViewHolder {
 		this.playlistClickListener = playlistClickListener;
 	}
 
-	void setPlaylist(final YouTubePlaylist playlist, Context context) {
+	void setPlaylist(final YouTubePlaylist playlist) {
+		Context context = itemView.getContext();
 		Glide.with(context)
 						.load(playlist.getThumbnailUrl())
 						.apply(new RequestOptions().placeholder(R.drawable.thumbnail_default))

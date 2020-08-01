@@ -89,8 +89,8 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<CardData, GridViewHo
 	 *
 	 * @param context	Context.
 	 */
-	public VideoGridAdapter(Context context) {
-		super(context);
+	public VideoGridAdapter() {
+		super();
 		this.getYouTubeVideos = null;
 		PlaybackStatusDb.getPlaybackStatusDb().addListener(this);
 	}
@@ -158,7 +158,8 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<CardData, GridViewHo
 
 	@Override
 	public GridViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-		View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.video_cell, parent, false);
+		setContext(parent.getContext());
+		View v = LayoutInflater.from(getContext()).inflate(R.layout.video_cell, parent, false);
 		final GridViewHolder gridViewHolder = new GridViewHolder(v, listener, showChannelInfo);
 		return gridViewHolder;
 	}

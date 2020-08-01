@@ -22,6 +22,10 @@ import androidx.preference.PreferenceManager ;
 
 import androidx.annotation.StringRes;
 
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+
 import free.rm.skytube.R;
 import free.rm.skytube.app.enums.Policy;
 
@@ -49,6 +53,10 @@ public class Settings {
 
     public boolean isDownloadToSeparateFolders() {
         return getPreference(R.string.pref_key_download_to_separate_directories,false);
+    }
+
+    public Set<String> getHiddenTabs() {
+        return getPreference(R.string.pref_key_hide_tabs, Collections.emptySet());
     }
 
     public Policy getWarningMobilePolicy() {
@@ -159,6 +167,10 @@ public class Settings {
 
     private boolean getPreference(String preference, boolean defaultValue) {
         return getSharedPreferences().getBoolean(preference, defaultValue);
+    }
+
+    private Set<String> getPreference(@StringRes int resId, Set<String> defaultValue) {
+        return getSharedPreferences().getStringSet(app.getStr(resId), defaultValue);
     }
 
     private SharedPreferences getSharedPreferences() {
