@@ -14,8 +14,7 @@ import free.rm.skytube.gui.fragments.VideosGridFragment;
  * A VideosGridFragment that supports reordering of the videos in the Grid.
  */
 public abstract class OrderableVideosGridFragment extends VideosGridFragment {
-	public OrderableVideosGridFragment(OrderableVideoGridAdapter orderableVideoGridAdapter) {
-		super(orderableVideoGridAdapter);
+	public OrderableVideosGridFragment() {
 	}
 
 	@Override

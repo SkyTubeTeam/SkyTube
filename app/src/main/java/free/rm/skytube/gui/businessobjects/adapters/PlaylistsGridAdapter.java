@@ -56,7 +56,7 @@ public class PlaylistsGridAdapter extends RecyclerViewAdapterEx<YouTubePlaylist,
 	@Override
 	public void onBindViewHolder(PlaylistViewHolder viewHolder, int position) {
 		if (viewHolder != null) {
-			viewHolder.setPlaylist(get(position), getContext());
+			viewHolder.setPlaylist(get(position));
 		}
 
 		// if it reached the bottom of the list, then try to get the next page of videos

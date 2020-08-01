@@ -591,6 +591,6 @@ public class MainActivity extends BaseActivity {
 	@Override
 	public void refreshSubscriptionsFeedVideos() {
 		SubscriptionsFeedFragment.unsetFlag(SubscriptionsFeedFragment.FLAG_REFRESH_FEED_FROM_CACHE);
-		mainFragment.getSubscriptionsFeedFragment().refreshFeedFromCache();
+		mainFragment.refreshSubscriptionsFeedVideos();
 	}
 }

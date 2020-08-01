@@ -17,6 +17,7 @@
 
 package free.rm.skytube.gui.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -43,10 +44,6 @@ public abstract class VideosGridFragment extends BaseVideosGridFragment {
 	protected RecyclerView	gridView;
 
 	public VideosGridFragment() {
-		super(new VideoGridAdapter(null));
-	}
-	public VideosGridFragment(VideoGridAdapter videoGrid) {
-		super(videoGrid);
 	}
 
 	@Override
@@ -106,4 +103,9 @@ public abstract class VideosGridFragment extends BaseVideosGridFragment {
 	 */
 	public abstract String getFragmentName();
 
+	public abstract int getPriority();
+
+	public String getBundleKey() {
+		return null;
+	}
 }

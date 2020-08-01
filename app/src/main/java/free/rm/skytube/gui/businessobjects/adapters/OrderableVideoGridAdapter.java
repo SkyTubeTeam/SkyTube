@@ -29,8 +29,7 @@ import free.rm.skytube.businessobjects.interfaces.OrderableDatabase;
 public class OrderableVideoGridAdapter extends VideoGridAdapter implements ItemTouchHelperAdapter {
 	private OrderableDatabase database = null;
 
-	public OrderableVideoGridAdapter(Context context, OrderableDatabase database) {
-		super(context);
+	public OrderableVideoGridAdapter(OrderableDatabase database) {
 		this.database = database;
 	}
 
