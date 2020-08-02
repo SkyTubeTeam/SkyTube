@@ -35,7 +35,6 @@
 		<activity
 			android:name=".gui.activities.MainActivity"
 			android:theme="@style/NoActionBarActivityTheme"
-			android:configChanges="orientation|screenSize|smallestScreenSize|density|screenLayout|uiMode|keyboard|keyboardHidden|navigation"
 			>
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN"/>
