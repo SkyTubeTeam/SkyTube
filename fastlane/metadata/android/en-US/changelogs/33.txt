@@ -1,0 +1,18 @@
+The new release contains the following changes:
+• The NewPipe backend is now the default, so the initial impression of the app will be better.
+• Upgrade NewPipeExtractor to the latest, to eliminate parsing bugs
+• Preference flags are saved into the backups - by @okan35
+• Added menu option to bookmark valid video urls when long pressed - by @atomjack
+* Add flags to enable resizing the window for better Samsung DeX experience
+• Updated translations:
+    • Chinese (Traditional) - by Jeff Huang
+    • Croatian - by Milo Ivir
+    • Dutch - by Heimen Stoffels
+    • German - by Milo Ivir
+    • Hungarian - by Zsombor Gegesy
+    • Indonesian - by zmni
+    • Norwegian Bokmal - by Allan Nordhøy
+    • Portuguese - by ssantos
+    • Russian - by Nikita Epifanov
+    • Spanish - by Julio Montero
+    • Turkish - by Oğuz Ersen
