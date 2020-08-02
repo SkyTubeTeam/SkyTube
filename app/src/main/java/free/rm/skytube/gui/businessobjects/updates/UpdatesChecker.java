@@ -19,6 +19,7 @@ package free.rm.skytube.gui.businessobjects.updates;
 
 import android.util.Log;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -78,7 +79,7 @@ public class UpdatesChecker {
 				if (!oss) {
 					if (!Utils.equals(currentVersionNumber, latestApkVersion)) {
 						this.latestApkUrl = getLatestApkUrl(json);
-						updatesAvailable = true;
+						updatesAvailable = latestApkUrl != null;
 						Log.d(TAG, "Update available.  APK_URL: " + latestApkUrl);
 					} else {
 						Log.d(TAG, "Not updating.");
@@ -133,8 +134,17 @@ public class UpdatesChecker {
 	 * @throws JSONException
 	 */
 	private URL getLatestApkUrl(JSONObject json) throws JSONException, MalformedURLException {
-		String apkUrl = json.getJSONArray("assets").getJSONObject(0).getString("browser_download_url");
-		return new URL(apkUrl);
+		JSONArray assets = json.getJSONArray("assets");
+		for (int i=0; i < assets.length();i ++) {
+			JSONObject asset = assets.getJSONObject(i);
+			String name = asset.getString("name");
+			if (name != null) {
+				if (name.toLowerCase().startsWith("skytube-" + BuildConfig.FLAVOR + "-")) {
+					return new URL(asset.getString("browser_download_url"));
+				}
+			}
+		}
+		return null;
 	}
 
 
