@@ -85,6 +85,7 @@ public abstract class Pager<I extends InfoItem, O> implements PagerBackend<O> {
         }
         try {
             if (nextPage == null) {
+                channelExtractor.fetchPage();
                 return process(channelExtractor.getInitialPage());
             } else {
                 return process(channelExtractor.getPage(nextPage));
