@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="tutorial_slide_1">Dra til venstre for å vise kommentarer.</string>
-    <string name="tutorial_slide_6">"Dobbeltklikk for å pause eller spille av  en video."</string>
+    <string name="tutorial_slide_6">Dobbeltklikk for å pause eller spille av en video.</string>
     <string name="next">"Neste "</string>
     <string name="done">Ferdig</string>
     <string name="skip">Hopp over</string>

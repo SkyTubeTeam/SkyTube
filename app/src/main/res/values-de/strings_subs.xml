@@ -10,7 +10,7 @@
     <string name="error_check_if_user_has_subbed">Es konnte nicht geprüft werden, ob der Benutzer den Kanal abonniert hat (id=%s)</string>
     <string name="error_unable_to_subscribe">Kanal konnte nicht (de)abonniert werden (id=%s)</string>
     <string name="import_subscriptions">Abonnements importieren</string>
-    <string name="import_subscriptions_description">Importieren Sie Ihre Abonnements von YouTube, indem Sie zuerst https://www.youtube.com/subscription_manager besuchen und unten auf die Schaltfläche \"Abonnements exportieren\" klicken. Wählen Sie dann die exportierte Datei mit dem Titel \"subscription_manager\" aus, indem Sie unten auf \"Abonnementsdatei auswählen\" klicken.</string>
+    <string name="import_subscriptions_description">Importieren Sie Ihre Abonnements von YouTube, indem Sie zuerst https://www.youtube.com/subscription_manager besuchen und unten auf die Schaltfläche „Abonnements exportieren“ klicken. Wählen Sie dann die exportierte Datei mit dem Titel „subscription_manager“ aus, indem Sie unten auf „Abonnementsdatei auswählen“ klicken.</string>
     <string name="subscriptions_to_channels_imported">Abonnements für %d Kanäle importiert.</string>
     <string name="select_xml_file">Abonnementsdatei auswählen</string>
     <string name="select_all">Alle auswählen</string>
@@ -21,4 +21,8 @@
     <string name="failed_to_import_subscriptions">Fehler beim Importieren der YouTube Abos.</string>
     <string name="about">Über</string>
     <string name="unsubscribe_from_all_current_sibbed_channels">Von allen Ihren aktuell abonnierten Kanälen abmelden.</string>
+    <string name="channel_unsubscribed">Abonnement beendet</string>
+    <string name="channel_subscribe_failed">Kanal kann nicht abonniert werden</string>
+    <string name="channel_already_subscribed">Sie haben diesen Kanal bereits abonniert</string>
+    <string name="channel_subscribed">Kanal abonniert</string>
 </resources>

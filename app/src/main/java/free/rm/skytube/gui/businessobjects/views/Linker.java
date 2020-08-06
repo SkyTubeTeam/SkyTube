@@ -21,9 +21,6 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
-import androidx.appcompat.app.AlertDialog;
-
 import android.os.Build;
 import android.text.Html;
 import android.text.SpannableStringBuilder;
@@ -33,16 +30,20 @@ import android.text.util.Linkify;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import androidx.appcompat.app.AlertDialog;
+
+import org.schabi.newpipe.extractor.StreamingService;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import free.rm.skytube.R;
+import free.rm.skytube.app.SkyTubeApp;
+import free.rm.skytube.app.Utils;
+import free.rm.skytube.businessobjects.GetVideoDetailsTask;
 import free.rm.skytube.businessobjects.Logger;
-import free.rm.skytube.businessobjects.YouTube.Tasks.GetPlaylistTask;
-import free.rm.skytube.businessobjects.YouTube.Tasks.GetYouTubeChannelInfoTask;
-import free.rm.skytube.gui.activities.MainActivity;
-import free.rm.skytube.gui.businessobjects.YouTubePlayer;
-import free.rm.skytube.gui.fragments.PlaylistVideosFragment;
+import free.rm.skytube.businessobjects.YouTube.newpipe.ContentId;
+import free.rm.skytube.businessobjects.db.BookmarksDb;
 
 /**
  * A {@link android.widget.TextView} which is able to handle clicks on links within the set text.
@@ -50,9 +51,6 @@ import free.rm.skytube.gui.fragments.PlaylistVideosFragment;
  * party Android apps.
  */
 public class Linker {
-	private static final Pattern videoPattern = Pattern.compile("http(?:s?):\\/\\/(?:www\\.)?youtu(?:be\\.com\\/watch\\?v=|\\.be\\/)([\\w\\-\\_]*)(&(amp;)?[\\w\\?=\\.]*)?");
-	private static final Pattern playlistPattern = Pattern.compile("^.*(youtu.be\\/|list=)([^#\\&\\?]*).*");
-	private static final Pattern channelPattern = Pattern.compile("(?:https|http)\\:\\/\\/(?:[\\w]+\\.)?youtube\\.com\\/(?:c\\/|channel\\/|user\\/)?([a-zA-Z0-9\\-]{1,})");
 
 	public static void configure(TextView textView) {
 		textView.setAutoLinkMask(0);
@@ -116,51 +114,31 @@ public class Linker {
 			if (longClick) {
 				longClick(span.getURL());
 			} else {
-				shortClick(span.getURL());
-			}
-		}
-
-		private void shortClick(String clickedText) {
-			final Matcher playlistMatcher = playlistPattern.matcher(clickedText);
-			final Matcher channelMatcher = channelPattern.matcher(clickedText);
-
-			if(videoPattern.matcher(clickedText).matches()) {
-				YouTubePlayer.launch(clickedText, ctx);
-			} else if(playlistMatcher.matches()) {
-				String playlistId = playlistMatcher.group(2);
-				// Retrieve the playlist from the playlist ID that was in the url the user clicked on
-				new GetPlaylistTask(ctx, playlistId, playlist -> {
-					// Pass the clicked playlist to PlaylistVideosFragment.
-					Intent playlistIntent = new Intent(ctx, MainActivity.class);
-					playlistIntent.setAction(MainActivity.ACTION_VIEW_PLAYLIST);
-					playlistIntent.putExtra(PlaylistVideosFragment.PLAYLIST_OBJ, playlist);
-					ctx.startActivity(playlistIntent);
-				}).executeInParallel();
-			} else if(channelMatcher.matches()) {
-				String username = channelMatcher.group(1);
-				new GetYouTubeChannelInfoTask(ctx, youTubeChannel -> {
-					YouTubePlayer.launchChannel(youTubeChannel, ctx);
-				}).setUsingUsername().executeInParallel(username);
-			} else {
-				Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(clickedText));
-				browserIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-				ctx.startActivity(browserIntent);
+				SkyTubeApp.openUrl(ctx, span.getURL(), true);
 			}
 		}
 
 		private void longClick(String clickedText) {
+			List<String> items = new ArrayList<>(Arrays.asList(ctx.getString(R.string.open_in_browser), ctx.getString(R.string.copy_url), ctx.getString(R.string.share_via)));
+			ContentId content = SkyTubeApp.parseUrl(ctx, clickedText, false);
+			final boolean isBookmarked;
+			if(content != null && content.getType() == StreamingService.LinkType.STREAM) {
+				isBookmarked = BookmarksDb.getBookmarksDb().isBookmarked(content.getId());
+				if(isBookmarked) {
+					items.add(ctx.getString(R.string.unbookmark));
+				} else {
+					items.add(ctx.getString(R.string.bookmark));
+				}
+			} else {
+				isBookmarked = false;
+			}
 			AlertDialog.Builder builder = new AlertDialog.Builder(ctx)
 					.setTitle(clickedText)
-					.setItems(new CharSequence[] {
-									ctx.getString(R.string.open_in_browser),
-									ctx.getString(R.string.copy_url),
-									ctx.getString(R.string.share_via)},
+					.setItems(items.toArray(new CharSequence[0]),
 							(dialog, which) -> {
 								switch (which) {
 									case 0:
-										Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(clickedText));
-										browserIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-										ctx.startActivity(browserIntent);
+										SkyTubeApp.viewInBrowser(clickedText, ctx);
 										break;
 									case 1:
 										ClipboardManager clipboard = (ClipboardManager) ctx.getSystemService(Context.CLIPBOARD_SERVICE);
@@ -173,6 +151,15 @@ public class Linker {
 										intent.setType("text/plain");
 										intent.putExtra(Intent.EXTRA_TEXT, clickedText);
 										ctx.startActivity(Intent.createChooser(intent, ctx.getString(R.string.share_via)));
+										break;
+									case 3:
+										new GetVideoDetailsTask(ctx, content, (videoUrl, video) -> {
+											if(!isBookmarked) {
+												video.bookmarkVideo(ctx);
+											} else {
+												video.unbookmarkVideo(ctx, null);
+											}
+										}).executeInParallel();
 										break;
 								}
 							});

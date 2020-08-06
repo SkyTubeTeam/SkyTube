@@ -300,12 +300,6 @@ public class YouTubeChannel extends CardData implements Serializable {
 		return success;
 	}
 
-	public static void openChannel(final Context context, String channelId){
-		if (channelId != null) {
-			new GetChannelInfo(context, youTubeChannel -> YouTubePlayer.launchChannel(youTubeChannel, context)).executeInParallel(channelId);
-		}
-	}
-
 	public static void subscribeChannel(final Context context, final Menu menu, final String channelId) {
 		if (channelId != null) {
 			new GetChannelInfo(context, youTubeChannel -> {

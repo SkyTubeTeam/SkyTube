@@ -1,8 +1,11 @@
 package free.rm.skytube.gui.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,6 +47,12 @@ public class PlaylistVideosFragment extends VideosGridFragment {
 
 		View view = super.onCreateView(inflater, container, savedInstanceState);
 
+		if (youTubePlaylist == null) {
+			Log.e(this.getClass().getSimpleName(), "No playlist object found:" + getArguments());
+			showMain();
+			return view;
+		}
+
 		ButterKnife.bind(this, view);
 		playlistTitleTextView.setText(youTubePlaylist.getTitle());
 
@@ -74,6 +83,11 @@ public class PlaylistVideosFragment extends VideosGridFragment {
 		return view;
 	}
 
+	private void showMain() {
+		Intent startMain = new Intent(Intent.ACTION_MAIN);
+		startMain.addCategory(Intent.CATEGORY_HOME);
+		startActivity(startMain);
+	}
 
 	@Override
 	protected int getLayoutResource() {

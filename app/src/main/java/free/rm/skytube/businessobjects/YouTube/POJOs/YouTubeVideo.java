@@ -445,7 +445,7 @@ public class YouTubeVideo extends CardData implements Serializable {
 				getUnBookmarkMessage(result),
 				Toast.LENGTH_LONG).show();
 
-		if (result.isPositive()) {
+		if (result.isPositive() && menu != null) {
 			menu.findItem(R.id.bookmark_video).setVisible(true);
 			menu.findItem(R.id.unbookmark_video).setVisible(false);
 		}
@@ -457,16 +457,6 @@ public class YouTubeVideo extends CardData implements Serializable {
 
 	public void copyUrl(Context context) {
 		SkyTubeApp.copyUrl(context, "Video URL", getVideoUrl());
-	}
-
-    public void openChannel(final Context context) {
-		final String channelId = getChannelId();
-		YouTubeChannel.openChannel(context, channelId);
-	}
-
-	public void subscribeChannel(final Context context, final Menu menu) {
-		final String channelId = getChannelId();
-		YouTubeChannel.subscribeChannel(context, menu, channelId);
 	}
 
 	/**

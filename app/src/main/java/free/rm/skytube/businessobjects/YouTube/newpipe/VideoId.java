@@ -17,36 +17,11 @@
 
 package free.rm.skytube.businessobjects.YouTube.newpipe;
 
-import free.rm.skytube.app.Utils;
+import org.schabi.newpipe.extractor.StreamingService;
 
-public final class VideoId {
-    private final String id;
-    private final String canonicalUrl;
+public final class VideoId extends ContentId {
 
     public VideoId(String id, String canonicalUrl) {
-        this.id = id;
-        this.canonicalUrl = canonicalUrl;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public String getCanonicalUrl() {
-        return canonicalUrl;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        VideoId videoId = (VideoId) o;
-        return Utils.equals(id, videoId.id) &&
-                Utils.equals(canonicalUrl, videoId.canonicalUrl);
-    }
-
-    @Override
-    public int hashCode() {
-        return Utils.hash(id, canonicalUrl);
+        super(id, canonicalUrl, StreamingService.LinkType.STREAM);
     }
 }

@@ -8,7 +8,7 @@
     <string name="error_video_streams">Erreur lors du chagement du flux vidéo.</string>
     <string name="error_get_video_desc">Erreur lors de la récupération de la description de la vidéo.</string>
     <string name="error_invalid_url">URL de la vidéo invalide : %s</string>
-    <string name="warning_live_video">Impossible de lire le flux en direct. Ouvrir le flux sur une autre application ?</string>
+    <string name="warning_live_video">Impossible de lire le flux en direct. Ouvrir le flux dans une autre application \?</string>
     <string name="ratings_disabled">Notation désactivée</string>
     <string name="loading_video">Chargement de la vidéo…</string>
     <string name="get_new_video_steam">Nouveau flux</string>
@@ -21,7 +21,7 @@
     <string name="mark_watched">Épingler comme vue</string>
     <string name="mark_unwatched">Épingler comme non vue</string>
     <string name="error_get_comments">Erreur lors de la réception des commentaires.</string>
-    <string name="no_video_comments">Cette vidéo ne posséde pas de commentaire.</string>
+    <string name="no_video_comments">Soit cette vidéo n\'a pas de commentaires, soit ils sont désactivés.</string>
     <string name="view_replies">Voir les réponses</string>
     <string name="hide_replies">Cacher les réponses</string>
     <string name="enter_video_url">Coller l\'URL de la vidéo</string>
@@ -34,4 +34,8 @@
     <string name="warning_mobile_network_play">Votre appareil n\'est pas connecté à un réseau wi-fi. Pour éviter des frais supplémentaires liés à l\'utilisation de données, il est recommandé de vous connecter à un réseau wi-fi. Voulez-vous malgré tout lire la vidéo \?</string>
     <string name="warning_mobile_network_disable">Ne plus demander.</string>
     <string name="play_video">Lire la vidéo</string>
+    <string name="error_get_comments_no_network">Accès au réseau requis pour récupérer les commentaires.</string>
+    <string name="mobile_data_blocked_by_policy">Téléchargement bloqué parce que votre appareil n\'est pas connecté à un réseau Wi-Fi.</string>
+    <string name="error_video_parse_error">Impossible de lire la vidéo, le message d\'erreur est : <br/><br/> %s.</string>
+    <string name="error_downloaded_file_is_corrupted">La vidéo téléchargée a l\'air <b>corrompue</b> – le message d\'erreur : <br/> <br/> %s. <br/> <br/> Voulez-vous <b>supprimer</b> le fichier \?</string>
 </resources>

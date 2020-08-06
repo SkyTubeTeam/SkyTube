@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="tutorial_slide_6">Doble pulsación para pausar o reproducir un video.</string>
+    <string name="tutorial_slide_5">Desliza verticalmente para ajustar el brillo.</string>
+    <string name="tutorial_slide_4">Desliza verticalmente para ajustar el volumen.</string>
+    <string name="tutorial_slide_3">Desliza horizontalmente para buscar hacia delante o hacia atrás.</string>
+    <string name="tutorial_slide_2">Desliza hacia arriba para ver la descripción del video.</string>
+    <string name="tutorial_slide_1">Desliza a la izquierda para ver comentarios.</string>
+    <string name="page_counter">%1$d de %2$d</string>
+    <string name="skip">Saltar</string>
+    <string name="done">Hecho</string>
+    <string name="next">"Siguiente "</string>
+</resources>

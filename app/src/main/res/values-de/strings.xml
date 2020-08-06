@@ -19,4 +19,7 @@
     <string name="hello_blank_fragment">Hallo leeres Fragment</string>
     <string name="yes">Ja</string>
     <string name="no">Nein</string>
+    <string name="could_not_get_channel_detailed">Kanalinformationen von %s konnten nicht heruntergeladen werden.</string>
+    <string name="search_channel">Kanal suchen</string>
+    <string name="close">Schließen</string>
 </resources>

@@ -83,7 +83,7 @@
     <string name="no_preferred_lang_selected">Tidak ada bahasa yang dipilih. Pengaturan diabaikan.</string>
     <string name="preferred_lang_updated">Bahasa diperbarui. Silakan segarkan daftar video.</string>
     <string name="pref_title_lang_detection_video_filtering">Filter Deteksi Bahasa Video</string>
-    <string name="pref_summary_lang_detection_video_filtering">Menggunakan AI untuk mendeteksi bahasa yang digunakan di dalam video dan memblokirnya jika tidak sama dengan bahasa pilihan anda. Hanya aktifkan pada perangkat high end.</string>
+    <string name="pref_summary_lang_detection_video_filtering">Deteksi bahasa yang digunakan di dalam video dan blokir semua yang tidak sama dengan bahasa pilihan anda. Hanya untuk perangkat high-end.</string>
     <string name="setting_updated">Pengaturan diperbarui. Silakan segarkan daftar video.</string>
     <string name="pref_other_filters_category">Filter Lainnya</string>
     <string name="pref_title_low_views_filter">Ditonton</string>
@@ -107,15 +107,15 @@
     <string name="channel_whitelist_update_failure">Gagal memasukkan channel ke daftar putih…</string>
     <string name="channel_unwhitelist_success">Daftar putih channel diperbarui. Silakan segarkan daftar video.</string>
     <string name="channel_unwhitelist_failure">Gagal menghapus channel dari daftar putih…</string>
-    <string name="pref_summary_autocast">Selalu gunakan perangkat Chromecast ini saat membuka video di SkyTube dari aplikasi lain.</string>
+    <string name="pref_summary_autocast">Pilih perangkat Chromecast yang akan digunakan saat menggunakan apl lain untuk membuka video di SkyTube.</string>
     <string name="pref_video_download_preferred_resolution_summary">Unduhan video mengutamakan resolusi ini: %s</string>
     <string name="pref_video_download_preferred_resolution_title">Resolusi Unduh Video</string>
     <string name="pref_summary_video_download_folder">Video akan diunduh ke dalam folder ini: %s</string>
     <string name="pref_title_video_download_folder">Folder Unduhan Video</string>
     <string name="pref_popup_title_video_download_folder">Pilih Folder</string>
-    <string name="pref_summary_use_newpipe_backend">Jika diaktifkan, API NewPipe eksperimental akan digunakan untuk mengakses YouTube, mungkin berfungsi, mungkin tidak…</string>
+    <string name="pref_summary_use_newpipe_backend">Gunakan API NewPipe untuk mengakses YouTube…</string>
     <string name="pref_title_use_newpipe_backend">Gunakan backend NewPipe</string>
-    <string name="pref_summary_switch_volume_and_brightness">Aktifkan jika anda ingin kontrol volume di sebelah kanan, dan kecerahan di sebelah kiri.</string>
+    <string name="pref_summary_switch_volume_and_brightness">Kontrol volume di sebelah kanan, dan kecerahan di sebelah kiri.</string>
     <string name="pref_title_switch_volume_and_brightness">Tukar Gestur Volume dan Kecerahan</string>
     <string name="pref_summary_enable_immersive_mode">Sembunyikan bilah navigasi dan bilah status saat pemutaran.</string>
     <string name="pref_title_enable_immersive_mode">Aktifkan mode imersif</string>
@@ -129,4 +129,12 @@
     <string name="pref_summary_mobile_network_usage">Yang harus dilakukan jika anda menggunakan jaringan data seluler (seperti 4G) untuk mengunduh, menonton video: %s</string>
     <string name="pref_title_mobile_network_usage">Penggunaan Jaringan Seluler</string>
     <string name="key_preferences">preferensi</string>
+    <string name="pref_video_continuous_repeat_toggle">Pengulangan berkelanjutan</string>
+    <string name="app_license">Hak Cipta © 2015-2018 Ramon Mifsud
+\n 
+\nProgram ini adalah perangkat lunak bebas: Anda dapat mendistribusikan ulang dan/atau memodifikasinya di bawah ketentuan Lisensi Publik Umum GNU yang diterbitkan oleh Free Software Foundation (versi 3 dari Lisensi).
+\n 
+\nProgram ini didistribusikan dengan harapan akan bermanfaat, tetapi TANPA GARANSI APA PUN; bahkan tanpa jaminan tersirat DAGANG atau KECOCOKAN UNTUK TUJUAN TERTENTU. Lihat Lisensi Publik Umum GNU untuk detail lebih lanjut.
+\n 
+\nAnda seharusnya telah menerima salinan Lisensi Publik Umum GNU bersama dengan program ini. Jika tidak, lihat &lt;http://www.gnu.org/licenses/&gt;</string>
 </resources>

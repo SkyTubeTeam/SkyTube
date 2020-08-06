@@ -1,28 +1,28 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="subscriptions">Abonnements</string>
-	<string name="subscribe">S\'abonner</string>
-	<string name="unsubscribe">Se désabonner</string>
-	<string name="total_subscribers">%,d abonnés</string>
-
-	<string name="subscribed">Abonné</string>
-	<string name="unsubscribed">Désabonné</string>
-
-	<string name="error_get_subbed_channels">Erreur lors de la récupération des abonnements.</string>
-	<string name="error_check_if_user_has_subbed">Impossible de vérifier si l\'utilisateur s\'est abonné à la chaîne (id=%s)</string>
-	<string name="error_unable_to_subscribe">Impossible de vous désabonner de cette chaine (id=%s)</string>
-
-	<string name="import_subscriptions">Importer abonnements</string>
-	<string name="import_subscriptions_description">Importez vos abonnements depuis YouTube, en visitant https://www.youtube.com/subscription_manager et en cliquant sur le bouton « Export Subscriptions » en bas. Ensuite, sélectionnez le fichier exporté nommé « subscription_manager » en cliquant sur « Select Subscriptions File » en dessous.</string>
-	<string name="subscriptions_to_channels_imported">Abonnements pour %d chaines importés.</string>
-	<string name="select_xml_file">Sélectionner le fichier d\'abonnements</string>
-	<string name="select_all">Tout sélectionner</string>
-	<string name="select_none">Tout déselectionner</string>
-	<string name="no_channels_found">Aucune chaine YouTube trouvée dans le fichier XML file que vous avez importé.</string>
-	<string name="no_new_channels_found">Aucune chaine YouTube auquelle vous n\'êtes pas déjà abonné n\'a été trouvée dans le fichier XML que vous avez importé.</string>
-	<string name="import_subscriptions_parse_error">Une erreur a été rencontré lors de la tentative d\'analyse du fichier XML que vous avez importé : %s.</string>
-	<string name="failed_to_import_subscriptions">Échec de l\'import de vos abonnements YouTube.</string>
-
-	<string name="about">À propos</string>
-	<string name="unsubscribe_from_all_current_sibbed_channels">Se désabonner de toutes les chaînes auxquelles vous êtes actuellement abonné.</string>
+    <string name="subscriptions">Abonnements</string>
+    <string name="subscribe">S\'abonner</string>
+    <string name="unsubscribe">Se désabonner</string>
+    <string name="total_subscribers">%,d abonnés</string>
+    <string name="subscribed">Abonné</string>
+    <string name="unsubscribed">Désabonné</string>
+    <string name="error_get_subbed_channels">Erreur lors de la récupération des abonnements.</string>
+    <string name="error_check_if_user_has_subbed">Impossible de vérifier si l\'utilisateur s\'est abonné à la chaîne (id=%s)</string>
+    <string name="error_unable_to_subscribe">Impossible de vous désabonner de cette chaine (id=%s)</string>
+    <string name="import_subscriptions">Importer abonnements</string>
+    <string name="import_subscriptions_description">Importez vos abonnements depuis YouTube, en visitant https://www.youtube.com/subscription_manager et en cliquant sur le bouton « Export Subscriptions » en bas. Ensuite, sélectionnez le fichier exporté nommé « subscription_manager » en cliquant sur « Select Subscriptions File » en dessous.</string>
+    <string name="subscriptions_to_channels_imported">Abonnements pour %d chaines importés.</string>
+    <string name="select_xml_file">Sélectionner le fichier d\'abonnements</string>
+    <string name="select_all">Tout sélectionner</string>
+    <string name="select_none">Tout déselectionner</string>
+    <string name="no_channels_found">Aucune chaine YouTube trouvée dans le fichier XML file que vous avez importé.</string>
+    <string name="no_new_channels_found">Aucune chaine YouTube auquelle vous n\'êtes pas déjà abonné n\'a été trouvée dans le fichier XML que vous avez importé.</string>
+    <string name="import_subscriptions_parse_error">Une erreur a été rencontré lors de la tentative d\'analyse du fichier XML que vous avez importé : %s.</string>
+    <string name="failed_to_import_subscriptions">Échec de l\'import de vos abonnements YouTube.</string>
+    <string name="about">À propos</string>
+    <string name="unsubscribe_from_all_current_sibbed_channels">Se désabonner de toutes les chaînes auxquelles vous êtes actuellement abonné.</string>
+    <string name="channel_unsubscribed">Désabonné de la chaîne</string>
+    <string name="channel_subscribe_failed">Impossible de s\'abonner à la chaîne</string>
+    <string name="channel_already_subscribed">Vous être déjà aboné·e à cette chaîne</string>
+    <string name="channel_subscribed">Abonné à la chaîne</string>
 </resources>

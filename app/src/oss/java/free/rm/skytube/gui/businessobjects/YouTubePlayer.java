@@ -23,9 +23,12 @@ import android.net.Uri;
 
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
+import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubePlaylist;
+import free.rm.skytube.businessobjects.YouTube.newpipe.ContentId;
 import free.rm.skytube.gui.activities.MainActivity;
 import free.rm.skytube.gui.activities.YouTubePlayerActivity;
 import free.rm.skytube.gui.fragments.ChannelBrowserFragment;
+import free.rm.skytube.gui.fragments.PlaylistVideosFragment;
 
 import static free.rm.skytube.gui.activities.YouTubePlayerActivity.YOUTUBE_VIDEO_OBJ;
 
@@ -49,24 +52,12 @@ public class YouTubePlayer {
 	/**
 	 * Launches the custom-made YouTube player so that the user can view the selected video.
 	 *
-	 * @param videoUrl URL of the video to be watched.
+	 * @param videoId ContentId of the video to be watched.
 	 */
-	public static void launch(String videoUrl, Context context) {
+	public static void launch(ContentId videoId, Context context) {
 		Intent i = new Intent(context, YouTubePlayerActivity.class);
 		i.setAction(Intent.ACTION_VIEW);
-		i.setData(Uri.parse(videoUrl));
-		context.startActivity(i);
-	}
-
-	/**
-	 * Launches the channel view, so the user can see all the videos from a channel.
-	 *
-	 * @param youTubeChannel the channel to be displayed.
-	 */
-	public static void launchChannel(YouTubeChannel youTubeChannel, Context context) {
-		Intent i = new Intent(context, MainActivity.class);
-		i.setAction(MainActivity.ACTION_VIEW_CHANNEL);
-		i.putExtra(ChannelBrowserFragment.CHANNEL_OBJ, youTubeChannel);
+		i.setData(Uri.parse(videoId.getCanonicalUrl()));
 		context.startActivity(i);
 	}
 

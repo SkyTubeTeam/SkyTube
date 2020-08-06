@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="dislikes">%d%% votos negativos</string>
+    <string name="channel_unwhitelist_error">El Canal no se puede quitar de la lista de autorizados.</string>
+    <string name="channel_blacklist_error">El Canal no se puede bloquear.</string>
+    <string name="channel_blacklisted">Canal bloqueado. Por favor recarga.</string>
+    <string name="block_channel">Bloquear Canal</string>
+    <string name="configure">Configurar</string>
+    <string name="no_videos_blocked">No hay videos bloqueados o filtrados. Quieres configurar el bloqueador de videos\?</string>
+    <string name="blocked_videos">Videos bloqueados</string>
+</resources>

@@ -139,7 +139,7 @@
     <string name="pref_summary_video_download_folder">Os vídeos são descarregados nesta pasta: %s</string>
     <string name="pref_title_video_download_folder">Pasta de Descarregamentos de Vídeo</string>
     <string name="pref_popup_title_video_download_folder">Escolher Pasta</string>
-    <string name="pref_summary_use_newpipe_backend">Usar a API experimental NewPipe para acessar o YouTube…</string>
+    <string name="pref_summary_use_newpipe_backend">Usar a API NewPipe para acessar o YouTube…</string>
     <string name="pref_title_use_newpipe_backend">Usar o backend NewPipe</string>
     <string name="pref_summary_switch_volume_and_brightness">Põe o controlo de volume à direita e do brilho à esquerda.</string>
     <string name="pref_title_switch_volume_and_brightness">Alterar Gestos de Volume e Brilho</string>

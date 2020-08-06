@@ -19,26 +19,37 @@ package free.rm.skytube.gui.businessobjects.preferences;
 
 import android.util.Log;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
+import org.apache.commons.codec.Charsets;
+
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
-import java.util.zip.ZipOutputStream;
 
 /**
  * A class that represents a zip file.  Used for database backups.
  */
 public class ZipFile {
 
+	static class JsonFile {
+		String name;
+		String content;
+
+		public JsonFile(String name, String content) {
+			this.name = name;
+			this.content = content;
+		}
+	}
 	private final File zipFilePath;
 
 	private static final int BUFFER_SIZE = 2048;
 	private static final String TAG = ZipFile.class.getSimpleName();
-
 
 	/**
 	 * Constructor.
@@ -51,69 +62,54 @@ public class ZipFile {
 
 
 	/**
-	 * Zips/Compresses the given files.
-	 *
-	 * @param files Files to compress.
-	 */
-	public void zip(String... files) throws IOException {
-		FileOutputStream    dest            = new FileOutputStream(zipFilePath);
-		ZipOutputStream     outputZipStream = new ZipOutputStream(new BufferedOutputStream(dest));
-		byte[]              buffer            = new byte[BUFFER_SIZE];
-
-		for (String file : files) {
-			FileInputStream     fi = new FileInputStream(file);
-			BufferedInputStream origin = new BufferedInputStream(fi, BUFFER_SIZE);
-			ZipEntry            entry = new ZipEntry(file.substring(file.lastIndexOf("/") + 1));
-
-			outputZipStream.putNextEntry(entry);
-
-			int count;
-			while ((count = origin.read(buffer, 0, BUFFER_SIZE)) != -1) {
-				outputZipStream.write(buffer, 0, count);
-			}
-			origin.close();
-			fi.close();
-
-			Log.d(TAG, "Added: " + file);
-		}
-
-		outputZipStream.close();
-		dest.close();
-	}
-
-
-	/**
 	 * Unzips the given zip file to the specified extraction path.
 	 *
 	 * @param extractionDirectory   The directory where the files (inside the zip) will be extracted to.
 	 */
-	public void unzip(File extractionDirectory) throws IOException {
+	public Map<String, JsonFile> unzip(File extractionDirectory) throws IOException {
 		FileInputStream fin             = new FileInputStream(zipFilePath);
 		ZipInputStream  zipInputStream  = new ZipInputStream(fin);
 		ZipEntry        zipEntry;
 
+		Map<String, JsonFile> result = new HashMap<>();
 		while ((zipEntry = zipInputStream.getNextEntry()) != null) {
 			Log.v(TAG, "Unzipping " + zipEntry.getName());
 
 			if (zipEntry.isDirectory()) {
 				throw new IllegalStateException("The zip file should not contain any directories.");
 			} else {
-				FileOutputStream    fout = new FileOutputStream(new File(extractionDirectory, zipEntry.getName()));
-				byte[]              buffer = new byte[BUFFER_SIZE];
-				int                 count;
-
-				while ((count = zipInputStream.read(buffer)) != -1) {
-					fout.write(buffer, 0, count);
+				if (zipEntry.getName().toLowerCase().endsWith(".json")) {
+					if (zipEntry.getSize() < 100_000) {
+						ByteArrayOutputStream sw = new ByteArrayOutputStream();
+						copyStream(zipInputStream, sw);
+						result.put(
+								zipEntry.getName().toLowerCase(),
+								new JsonFile(zipEntry.getName(), new String(sw.toByteArray(), Charsets.UTF_8)));
+					}
+				} else {
+					FileOutputStream fout = new FileOutputStream(new File(extractionDirectory, zipEntry.getName()));
+					copyStream(zipInputStream, fout);
 				}
-
-				zipInputStream.closeEntry();
-				fout.close();
 			}
 
 		}
 
 		zipInputStream.close();
 		fin.close();
+		return result;
 	}
+
+	private void copyStream(ZipInputStream zipInputStream, OutputStream fout) throws IOException {
+		byte[]              buffer = new byte[BUFFER_SIZE];
+		int                 count;
+
+		while ((count = zipInputStream.read(buffer)) != -1) {
+			fout.write(buffer, 0, count);
+		}
+
+		zipInputStream.closeEntry();
+		fout.close();
+	}
+
 
 }

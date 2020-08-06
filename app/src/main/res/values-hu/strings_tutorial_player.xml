@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="tutorial_slide_6">Koppintson duplán a videó szüneteltetéséhez és folytatásához.</string>
+    <string name="tutorial_slide_5">Seperjen függőlegesen a fényerő beállításához.</string>
+    <string name="tutorial_slide_4">Seperjen függőlegesen a hangerő beállításához.</string>
+    <string name="tutorial_slide_3">Seperjen vízszintesen az előre- vagy hátratekeréshez.</string>
+    <string name="tutorial_slide_2">Seperjen fel a videó leírásának megtekintéséhez.</string>
+    <string name="tutorial_slide_1">Seperjen balra a hozzászólások megtekintéséhez.</string>
+    <string name="page_counter">%1$d/%2$d</string>
+    <string name="skip">Kihagyás</string>
+    <string name="done">Kész</string>
+    <string name="next">"Következő "</string>
+</resources>

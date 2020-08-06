@@ -1,44 +1,41 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="error_stream_err_unavailable">Hata mesajı mevcut değil.</string>
-	<string name="error_stream_decryption_fail">YouTube hizmeti için çözme kodu yüklenemedi.</string>
-	<string name="error_stream_parse_error">Çözümleme hatası.</string>
-
-	<string name="error_video_play">Video Oynatma Hatası</string>
-	<string name="error_video_streams_empty">%s videosunun yayın akışı yok.</string>
-	<string name="error_video_streams">Videonun yayın akışı alınırken bir hata oluştu.</string>
-	<string name="error_get_video_desc">Videonun tanımı alınırken bir hata oluştu.</string>
-	<string name="error_invalid_url">Geçersiz video URL\'si: %s</string>
-
-	<string name="warning_live_video">Şu an için canlı akışlar oynatılamıyor. Başka bir uygulamada canlı yayını aç?</string>
-
-	<string name="ratings_disabled">Puanlamalar devre dışı</string>
-
-	<string name="loading_video">Video yükleniyor…</string>
-	<string name="get_new_video_steam">Yeni yayın akışı</string>
-	<string name="open_in_browser">Web tarayıcısında aç</string>
-	<string name="open_with">Birlikte aç…</string>
-	<string name="share">Paylaş</string>
-	<string name="share_via">Aracılığıyla paylaş</string>
-	<string name="copy_url">URL kopyala</string>
-	<string name="url_copied_to_clipboard">URL panoya kopyalandı.</string>
-
-	<string name="error_get_comments">Yorumlar alınırken bir hata oluştu.</string>
-	<string name="no_video_comments">Bu video için yorum yok veya yorumlar devre dışı bırakılmış.</string>
-	<string name="view_replies">Yanıtları gör</string>
-	<string name="hide_replies">Yanıtları gizle</string>
-
-	<string name="enter_video_url">Video URL\'si gir</string>
-	<string name="play">Oynat</string>
-	<string name="cancel">İptal</string>
-	<string name="clear">Temizle</string>
-
-	<string name="mark_watched">İzlendi olarak işaretle</string>
-	<string name="mark_unwatched">İzlenmedi olarak işaretle</string>
-
-	<string name="should_resume">Durduğunuz yerden devam etmek ister misiniz?</string>
-	<string name="resume">Devam et</string>
-<string name="mobile_data">Mobil Veri</string>
-	<string name="warning_mobile_network_play">Cihazınız bir Wi-Fi ağına bağlı değil. Olası ekstra veri kullanımı değişikliklerinden kaçınmak için bir Wi-Fi ağına bağlamanız önerilir. Yine de video oynatılsın mı\?</string>
-	<string name="warning_mobile_network_disable">Asla tekrar sorma.</string>
-	<string name="play_video">Videoyu Oynat</string>
-	</resources>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="error_stream_err_unavailable">Hata mesajı mevcut değil.</string>
+    <string name="error_stream_decryption_fail">YouTube hizmeti için çözme kodu yüklenemedi.</string>
+    <string name="error_stream_parse_error">Çözümleme hatası.</string>
+    <string name="error_video_play">Video Oynatma Hatası</string>
+    <string name="error_video_streams_empty">%s videosunun yayın akışı yok.</string>
+    <string name="error_video_streams">Videonun yayın akışı alınırken bir hata oluştu.</string>
+    <string name="error_get_video_desc">Videonun tanımı alınırken bir hata oluştu.</string>
+    <string name="error_invalid_url">Geçersiz video URL\'si: %s</string>
+    <string name="warning_live_video">Şu an için canlı akışlar oynatılamıyor. Başka bir uygulamada canlı yayını aç?</string>
+    <string name="ratings_disabled">Puanlamalar devre dışı</string>
+    <string name="loading_video">Video yükleniyor…</string>
+    <string name="get_new_video_steam">Yeni yayın akışı</string>
+    <string name="open_in_browser">Web tarayıcısında aç</string>
+    <string name="open_with">Birlikte aç…</string>
+    <string name="share">Paylaş</string>
+    <string name="share_via">Aracılığıyla paylaş</string>
+    <string name="copy_url">URL kopyala</string>
+    <string name="url_copied_to_clipboard">URL panoya kopyalandı.</string>
+    <string name="error_get_comments">Yorumlar alınırken bir hata oluştu.</string>
+    <string name="no_video_comments">Bu video için yorum yok veya yorumlar kapatılmış.</string>
+    <string name="view_replies">Yanıtları gör</string>
+    <string name="hide_replies">Yanıtları gizle</string>
+    <string name="enter_video_url">Video URL\'si gir</string>
+    <string name="play">Oynat</string>
+    <string name="cancel">İptal</string>
+    <string name="clear">Temizle</string>
+    <string name="mark_watched">İzlendi olarak işaretle</string>
+    <string name="mark_unwatched">İzlenmedi olarak işaretle</string>
+    <string name="should_resume">Durduğunuz yerden devam etmek ister misiniz?</string>
+    <string name="resume">Devam et</string>
+    <string name="mobile_data">Mobil Veri</string>
+    <string name="warning_mobile_network_play">Cihazınız bir Wi-Fi ağına bağlı değil. Olası ekstra veri kullanımı değişikliklerinden kaçınmak için bir Wi-Fi ağına bağlamanız önerilir. Yine de video oynatılsın mı\?</string>
+    <string name="warning_mobile_network_disable">Asla tekrar sorma.</string>
+    <string name="play_video">Videoyu Oynat</string>
+    <string name="mobile_data_blocked_by_policy">İndirme başarısız: Cihazın Wi-Fi bağlantısı yok.</string>
+    <string name="error_video_parse_error">Video oynatma başlatılamadı, hata mesajı: <br/> <br/> %s.</string>
+    <string name="error_downloaded_file_is_corrupted">İndirilen video <b>bozuk</b> görünüyor - hata mesajı: <br/> <br/> %s. <br/> <br/> Dosyayı <b>silmek</b> istiyor musunuz\?</string>
+    <string name="error_get_comments_no_network">Yorumların yüklenmesi için ağ erişimi gerekli.</string>
+</resources>

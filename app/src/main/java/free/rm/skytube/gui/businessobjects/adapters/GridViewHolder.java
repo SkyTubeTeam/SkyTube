@@ -254,7 +254,7 @@ public class GridViewHolder extends RecyclerView.ViewHolder implements Serializa
 					YouTubeChannel.subscribeChannel(context, popupMenu.getMenu(), channel.getId());
 					return true;
 				case R.id.open_channel:
-					YouTubeChannel.openChannel(context, channel.getId());
+					SkyTubeApp.launchChannel(channel.getId(), context);
 					return true;
 				case R.id.block_channel:
 					channel.blockChannel();

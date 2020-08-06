@@ -34,9 +34,11 @@ import org.schabi.newpipe.extractor.channel.ChannelExtractor;
 import org.schabi.newpipe.extractor.comments.CommentsExtractor;
 import org.schabi.newpipe.extractor.exceptions.ContentNotAvailableException;
 import org.schabi.newpipe.extractor.exceptions.ExtractionException;
+import org.schabi.newpipe.extractor.exceptions.FoundAdException;
 import org.schabi.newpipe.extractor.exceptions.ParsingException;
 import org.schabi.newpipe.extractor.feed.FeedExtractor;
 import org.schabi.newpipe.extractor.linkhandler.LinkHandler;
+import org.schabi.newpipe.extractor.linkhandler.LinkHandlerFactory;
 import org.schabi.newpipe.extractor.linkhandler.ListLinkHandler;
 import org.schabi.newpipe.extractor.linkhandler.ListLinkHandlerFactory;
 import org.schabi.newpipe.extractor.localization.DateWrapper;
@@ -99,11 +101,46 @@ public class NewPipeService {
         return list;
     }
 
-    public VideoId getVideoId(String url) throws ParsingException {
-        LinkHandler lh = streamingService.getStreamLHFactory().fromUrl(url);
-        return new VideoId(lh.getId(), lh.getUrl());
+    public ContentId getVideoId(String url) throws ParsingException {
+        if (url == null) {
+            return null;
+        }
+        return parse(streamingService.getStreamLHFactory(), url, StreamingService.LinkType.STREAM);
     }
 
+    public ContentId getContentId(String url) throws FoundAdException {
+        if (url == null) {
+            return null;
+        }
+        ContentId id;
+        id = parse(streamingService.getStreamLHFactory(), url, StreamingService.LinkType.STREAM);
+        if (id != null) {
+            return id;
+        }
+        id = parse(streamingService.getChannelLHFactory(), url, StreamingService.LinkType.CHANNEL);
+        if (id != null) {
+            return id;
+        }
+        id = parse(streamingService.getPlaylistLHFactory(), url, StreamingService.LinkType.PLAYLIST);
+        if (id != null) {
+            return id;
+        }
+        return null;
+    }
+
+    private ContentId parse(LinkHandlerFactory handlerFactory, String url, StreamingService.LinkType type) throws FoundAdException {
+        if (handlerFactory != null) {
+            try {
+                String id = handlerFactory.getId(url);
+                return new ContentId(id, handlerFactory.getUrl(id), type);
+            } catch (FoundAdException fa) {
+                throw fa;
+            } catch (ParsingException pe) {
+                return null;
+            }
+        }
+        return null;
+    }
 
     /**
      * Returns a list of video/stream meta-data that is supported by this app for this video ID.
@@ -256,15 +293,15 @@ public class NewPipeService {
         // 2, channelId=https://www.youtube.com/channel/UCbx1TZgxfIauUZyPuBzEwZg
         // 3, channelId=channel/UCbx1TZgxfIauUZyPuBzEwZg
         ListLinkHandlerFactory channelLHFactory = streamingService.getChannelLHFactory();
-        if (channelId.startsWith("channel/")) {
-            return channelLHFactory.fromId(channelId);
-        }
         try {
             return channelLHFactory.fromUrl(channelId);
         } catch (ParsingException p) {
             if (DEBUG_LOG) {
                 Logger.d(this, "Unable to parse channel url=%s", channelId);
             }
+        }
+        if (channelId.startsWith("channel/") || channelId.startsWith("c/") || channelId.startsWith("user/")) {
+            return channelLHFactory.fromId(channelId);
         }
         return channelLHFactory.fromId("channel/" + channelId);
     }
@@ -396,6 +433,6 @@ public class NewPipeService {
      * @return true, if it's the preferred backend API
      */
     public static boolean isPreferred() {
-        return SkyTubeApp.getPreferenceManager().getBoolean(SkyTubeApp.getStr(R.string.pref_use_newpipe_backend), false);
+        return SkyTubeApp.getPreferenceManager().getBoolean(SkyTubeApp.getStr(R.string.pref_use_default_newpipe_backend), true);
     }
 }

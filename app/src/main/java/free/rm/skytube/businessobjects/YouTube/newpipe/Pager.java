@@ -23,6 +23,7 @@ import java.util.List;
 import org.schabi.newpipe.extractor.InfoItem;
 import org.schabi.newpipe.extractor.ListExtractor;
 import org.schabi.newpipe.extractor.ListExtractor.InfoItemsPage;
+import org.schabi.newpipe.extractor.Page;
 import org.schabi.newpipe.extractor.StreamingService;
 import org.schabi.newpipe.extractor.exceptions.ExtractionException;
 import org.schabi.newpipe.extractor.exceptions.ParsingException;
@@ -40,7 +41,7 @@ import free.rm.skytube.businessobjects.Logger;
 public abstract class Pager<I extends InfoItem, O> implements PagerBackend<O> {
     private final StreamingService streamingService;
     private final ListExtractor<I> channelExtractor;
-    private String nextPageUrl;
+    private Page nextPage;
     private boolean hasNextPage = true;
     private Exception lastException;
     protected final LinkHandlerFactory streamLinkHandler;
@@ -83,13 +84,15 @@ public abstract class Pager<I extends InfoItem, O> implements PagerBackend<O> {
             return Collections.emptyList();
         }
         try {
-            if (nextPageUrl == null || nextPageUrl.isEmpty()) {
+            if (nextPage == null) {
+                channelExtractor.fetchPage();
                 return process(channelExtractor.getInitialPage());
             } else {
-                return process(channelExtractor.getPage(nextPageUrl));
+                return process(channelExtractor.getPage(nextPage));
             }
         } catch (IOException| ExtractionException| RuntimeException e) {
-            throw new NewPipeException("getNextPage on "+this+", nextPageUrl="+nextPageUrl, e);
+            throw new NewPipeException("Error:" + e.getMessage() +
+                    (nextPage != null ? " (nextPage=" + nextPage.getUrl() + ",ids=" + nextPage.getIds() + ")" : ""), e);
         }
     }
 
@@ -105,8 +108,8 @@ public abstract class Pager<I extends InfoItem, O> implements PagerBackend<O> {
     }
 
     protected List<O> process(ListExtractor.InfoItemsPage<I> page) throws NewPipeException {
-        nextPageUrl = page.getNextPageUrl();
-        hasNextPage = nextPageUrl != null && !nextPageUrl.isEmpty();
+        nextPage = page.getNextPage();
+        hasNextPage = page.hasNextPage();
         return extract(page);
     }
 

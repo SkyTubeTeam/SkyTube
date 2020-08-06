@@ -17,7 +17,9 @@
 		android:label="@string/app_name"
 		android:largeHeap="true"
 		android:supportsRtl="true"
+		android:resizeableActivity="true"
 		android:theme="@style/AppTheme">
+
 
 		<!-- This will allow the app to use update its self (due to security changes in Android 7.0+) -->
 		<provider
@@ -32,7 +34,8 @@
 
 		<activity
 			android:name=".gui.activities.MainActivity"
-			android:theme="@style/NoActionBarActivityTheme">
+			android:theme="@style/NoActionBarActivityTheme"
+			>
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN"/>
 
@@ -43,19 +46,8 @@
 			android:name=".gui.activities.YouTubePlayerActivity"
 			android:configChanges="orientation|keyboardHidden|screenSize"
 			android:theme="@style/VideoPlayerActivityTheme">
-			<intent-filter>
-				<action android:name="android.intent.action.VIEW"/>
 
-				<category android:name="android.intent.category.DEFAULT"/>
-				<category android:name="android.intent.category.BROWSABLE"/>
 
-				<data android:scheme="http"/>
-				<data android:scheme="https"/>
-				<data android:host="youtube.com"/>
-				<data android:host="m.youtube.com"/>
-				<data android:host="www.youtube.com"/>
-				<data android:host="youtu.be"/>
-			</intent-filter>
 		</activity>
 		<activity android:name=".gui.activities.PreferencesActivity"/>
 		<activity
@@ -91,6 +83,138 @@
 			</intent-filter>
 
 		</activity>
+
+		<activity android:name=".gui.activities.RouterActivity"
+			android:theme="@style/TransparentActivity">
+			<!-- Youtube filter -->
+			<intent-filter>
+				<action android:name="android.intent.action.VIEW"/>
+				<action android:name="android.media.action.MEDIA_PLAY_FROM_SEARCH"/>
+				<action android:name="android.nfc.action.NDEF_DISCOVERED"/>
+
+				<category android:name="android.intent.category.DEFAULT"/>
+				<category android:name="android.intent.category.BROWSABLE"/>
+
+				<data android:scheme="http"/>
+				<data android:scheme="https"/>
+				<data android:host="youtube.com"/>
+				<data android:host="m.youtube.com"/>
+				<data android:host="www.youtube.com"/>
+				<!-- video prefix -->
+				<data android:pathPrefix="/v/"/>
+				<data android:pathPrefix="/embed/"/>
+				<data android:pathPrefix="/watch"/>
+				<data android:pathPrefix="/attribution_link"/>
+				<!-- channel prefix -->
+				<data android:pathPrefix="/channel/"/>
+				<data android:pathPrefix="/user/"/>
+				<data android:pathPrefix="/c/"/>
+				<!-- playlist prefix -->
+				<data android:pathPrefix="/playlist"/>
+			</intent-filter>
+			<intent-filter>
+				<action android:name="android.intent.action.VIEW"/>
+				<action android:name="android.media.action.MEDIA_PLAY_FROM_SEARCH"/>
+				<action android:name="android.nfc.action.NDEF_DISCOVERED"/>
+
+				<category android:name="android.intent.category.DEFAULT"/>
+				<category android:name="android.intent.category.BROWSABLE"/>
+
+				<data android:scheme="http"/>
+				<data android:scheme="https"/>
+				<data android:host="youtu.be"/>
+				<data android:pathPrefix="/"/>
+			</intent-filter>
+			<intent-filter>
+				<action android:name="android.intent.action.VIEW"/>
+				<action android:name="android.media.action.MEDIA_PLAY_FROM_SEARCH"/>
+				<action android:name="android.nfc.action.NDEF_DISCOVERED"/>
+
+				<category android:name="android.intent.category.DEFAULT"/>
+				<category android:name="android.intent.category.BROWSABLE"/>
+
+				<data android:scheme="http"/>
+				<data android:scheme="https"/>
+				<data android:host="www.youtube-nocookie.com"/>
+				<data android:pathPrefix="/embed/"/>
+			</intent-filter>
+			<intent-filter>
+				<action android:name="android.intent.action.VIEW"/>
+				<action android:name="android.media.action.MEDIA_PLAY_FROM_SEARCH"/>
+				<action android:name="android.nfc.action.NDEF_DISCOVERED"/>
+
+				<category android:name="android.intent.category.DEFAULT"/>
+				<category android:name="android.intent.category.BROWSABLE"/>
+
+				<data android:scheme="vnd.youtube"/>
+				<data android:scheme="vnd.youtube.launch"/>
+			</intent-filter>
+
+			<!-- Hooktube filter -->
+			<intent-filter>
+				<action android:name="android.intent.action.VIEW"/>
+				<action android:name="android.media.action.MEDIA_PLAY_FROM_SEARCH"/>
+				<action android:name="android.nfc.action.NDEF_DISCOVERED"/>
+
+				<category android:name="android.intent.category.DEFAULT"/>
+				<category android:name="android.intent.category.BROWSABLE"/>
+
+				<data android:scheme="http"/>
+				<data android:scheme="https"/>
+				<data android:host="hooktube.com"/>
+				<data android:host="*.hooktube.com"/>
+				<!-- video prefix -->
+				<data android:pathPrefix="/v/"/>
+				<data android:pathPrefix="/embed/"/>
+				<data android:pathPrefix="/watch"/>
+				<!-- channel prefix -->
+				<data android:pathPrefix="/channel/"/>
+				<data android:pathPrefix="/user/"/>
+			</intent-filter>
+
+			<!-- Invidious filter -->
+			<intent-filter>
+				<action android:name="android.intent.action.VIEW"/>
+				<action android:name="android.media.action.MEDIA_PLAY_FROM_SEARCH"/>
+				<action android:name="android.nfc.action.NDEF_DISCOVERED"/>
+
+				<category android:name="android.intent.category.DEFAULT"/>
+				<category android:name="android.intent.category.BROWSABLE"/>
+
+				<data android:scheme="http"/>
+				<data android:scheme="https"/>
+				<data android:host="invidio.us"/>
+				<data android:host="dev.invidio.us"/>
+				<data android:host="www.invidio.us"/>
+				<data android:host="invidious.snopyta.org"/>
+				<data android:host="de.invidious.snopyta.org"/>
+				<data android:host="fi.invidious.snopyta.org"/>
+				<data android:host="vid.wxzm.sx"/>
+				<data android:host="invidious.kabi.tk"/>
+				<data android:host="invidiou.sh"/>
+				<data android:host="www.invidiou.sh"/>
+				<data android:host="no.invidiou.sh"/>
+				<data android:host="invidious.enkirton.net"/>
+				<data android:host="tube.poal.co"/>
+				<data android:host="invidious.13ad.de"/>
+				<data android:host="yt.elukerio.org"/>
+				<!-- video prefix -->
+				<data android:pathPrefix="/embed/"/>
+				<data android:pathPrefix="/watch"/>
+				<!-- channel prefix -->
+				<data android:pathPrefix="/channel/"/>
+				<data android:pathPrefix="/user/"/>
+				<!-- playlist prefix -->
+				<data android:pathPrefix="/playlist"/>
+			</intent-filter>
+
+		</activity>
+
+		<!-- Version < 3.0. DeX Mode and Screen Mirroring support -->
+		<meta-data android:name="com.samsung.android.keepalive.density" android:value="true"/>
+		<!-- Version >= 3.0. DeX Dual Mode support -->
+		<meta-data android:name="com.samsung.android.multidisplay.keep_process_alive" android:value="true"/>
+
 	</application>
 
 </manifest>

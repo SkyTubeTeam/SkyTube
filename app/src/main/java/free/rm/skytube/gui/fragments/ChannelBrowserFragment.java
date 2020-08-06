@@ -17,6 +17,7 @@
 
 package free.rm.skytube.gui.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import com.google.android.material.tabs.TabLayout;
 import androidx.fragment.app.FragmentManager;
@@ -38,12 +39,14 @@ import java.util.Iterator;
 import java.util.List;
 
 import free.rm.skytube.R;
+import free.rm.skytube.app.Utils;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannelInterface;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.db.Tasks.GetChannelInfo;
+import free.rm.skytube.gui.activities.MainActivity;
 import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
 import free.rm.skytube.gui.businessobjects.fragments.FragmentEx;
 import free.rm.skytube.gui.businessobjects.fragments.TabFragment;
@@ -86,22 +89,10 @@ public class ChannelBrowserFragment extends FragmentEx {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		final Bundle bundle = getArguments();
 
 		if(savedInstanceState != null) {
 			channelVideosFragment = (ChannelVideosFragment)getChildFragmentManager().getFragment(savedInstanceState, FRAGMENT_CHANNEL_VIDEOS);
 			channelPlaylistsFragment = (ChannelPlaylistsFragment)getChildFragmentManager().getFragment(savedInstanceState, FRAGMENT_CHANNEL_PLAYLISTS);
-		}
-
-		// we need to create a YouTubeChannel object:  this can be done by either:
-		//   (1) the YouTubeChannel object is passed to this Fragment
-		//   (2) passing the channel ID... a task is then created to create a YouTubeChannel
-		//       instance using the given channel ID
-		if (bundle != null  &&  bundle.getSerializable(CHANNEL_OBJ) != null) {
-			this.channel = (YouTubeChannel) bundle.getSerializable(CHANNEL_OBJ);
-			channelId = channel.getId();
-		} else {
-			channelId = bundle.getString(CHANNEL_ID);
 		}
 
 		// inflate the layout for this fragment
@@ -166,15 +157,36 @@ public class ChannelBrowserFragment extends FragmentEx {
 			}
 		});
 
+		getChannelParameters();
+
+		return fragment;
+	}
+	private void getChannelParameters() {
+		// we need to create a YouTubeChannel object:  this can be done by either:
+		//   (1) the YouTubeChannel object is passed to this Fragment
+		//   (2) passing the channel ID... a task is then created to create a YouTubeChannel
+		//       instance using the given channel ID
+		final Bundle bundle = getArguments();
+		final String oldChannelId = this.channelId;
+
+		Logger.i(ChannelBrowserFragment.this, "getChannelParameters " + bundle);
+		if (bundle != null  &&  bundle.getSerializable(CHANNEL_OBJ) != null) {
+			this.channel = (YouTubeChannel) bundle.getSerializable(CHANNEL_OBJ);
+			channelId = channel.getId();
+		} else {
+			channelId = bundle.getString(CHANNEL_ID);
+			if (!Utils.equals(oldChannelId, channelId)) {
+				this.channel = null;
+			}
+		}
 		if (channel == null) {
 			if (task == null) {
 				task = new GetChannelInfo(getContext(), new ProcessChannel());
-				task.executeInParallel(channelId);
 			}
+			task.executeInParallel(channelId);
 		} else {
 			initViews();
 		}
-		return fragment;
 	}
 
 	@Override

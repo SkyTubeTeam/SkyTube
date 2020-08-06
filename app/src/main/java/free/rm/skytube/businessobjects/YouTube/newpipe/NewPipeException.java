@@ -17,9 +17,6 @@
 package free.rm.skytube.businessobjects.YouTube.newpipe;
 
 public class NewPipeException extends Exception {
-    public NewPipeException(String message) {
-        super(message);
-    }
 
     public NewPipeException(String message, Throwable cause) {
         super(message, cause);

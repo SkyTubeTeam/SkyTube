@@ -85,7 +85,7 @@
     <string name="pref_summary_channel_filter_method">Выберите метод фильтрации каналов: %s</string>
     <string name="disabled">Отключен</string>
     <string name="unblock">Разблокировать</string>
-    <string name="channel_blacklist_updated">"Обновлен черный список каналов.  Обновите видео."</string>
+    <string name="channel_blacklist_updated">Обновлен черный список каналов. Обновите видео.</string>
     <string name="channel_blacklist_update_failure">Не удалось удалить указанный канал(ы) из черного списка…</string>
     <string name="channel_blacklist_empty">Черный список каналов пуст.</string>
     <string name="pref_title_channel_whitelist">Белый список каналов</string>
@@ -102,7 +102,7 @@
     <string name="no_preferred_lang_selected">Предпочтительный язык не выбран. Параметр игнорируется.</string>
     <string name="preferred_lang_updated">Обновлен предпочтительный язык. Пожалуйста, обновите видео.</string>
     <string name="pref_title_lang_detection_video_filtering">Автоматическая фильтрация</string>
-    <string name="pref_summary_lang_detection_video_filtering">Используйте AI для определения языков, используемых в видео, и блокируйте их, если их язык не соответствует выбранным вами языкам. Должна быть включена только на устройствах высокого уровня.</string>
+    <string name="pref_summary_lang_detection_video_filtering">Определить языки, используемых в видео, и заблокировать все, что вам не нравится. Только для высококлассных устройств.</string>
     <string name="setting_updated">Настройка обновлена. Пожалуйста, обновите видео.</string>
     <string name="pref_other_filters_category">Остальные фильтры</string>
     <string name="pref_title_low_views_filter">Просмотры</string>
@@ -127,4 +127,27 @@
     <string name="pref_title_preferred_res_mobile">Предпочитаемое разрешение через мобильную сеть</string>
     <string name="pref_summary_preferred_res_mobile">Выберите разрешение при потоковой передаче через мобильную сеть (например, 4G): %s</string>
     <string name="pref_category_mobile_network">Мобильная сеть</string>
+    <string name="pref_video_download_preferred_resolution_summary">Для загрузки видео предпочтение будет отдано такому разрешению: %s</string>
+    <string name="pref_video_download_preferred_resolution_title">Предпочтительное разрешение загрузки видео</string>
+    <string name="pref_summary_video_download_folder">Видео загружены в эту папку: %s</string>
+    <string name="pref_title_video_download_folder">Папка для скачивания видео</string>
+    <string name="pref_popup_title_video_download_folder">Выберите папку</string>
+    <string name="pref_summary_use_newpipe_backend">Использовать API NewPipe для доступа к YouTube …</string>
+    <string name="pref_title_use_newpipe_backend">Использовать бэкэнд NewPipe</string>
+    <string name="pref_summary_switch_volume_and_brightness">Разместить регулятор громкости справа, а яркость слева.</string>
+    <string name="pref_title_switch_volume_and_brightness">Сменить громкость и яркость жестами</string>
+    <string name="pref_summary_enable_immersive_mode">Скрыть панель навигации и строку состояния во время воспроизведения.</string>
+    <string name="pref_title_enable_immersive_mode">Включить режим погружения</string>
+    <string name="pref_video_continuous_repeat_toggle">Непрерывное повторение</string>
+    <string name="pref_hide_tabs_restart">Перезапустите приложение, чтобы показать обновленные вкладки.</string>
+    <string name="pref_summary_hide_tabs">Выберите, какие вкладки не должны отображаться. Требуется перезагрузка.</string>
+    <string name="pref_title_hide_tabs">Скрыть вкладки</string>
+    <string name="pref_network_downloads_category">Сеть и загрузка</string>
+    <string name="pref_summary_autocast">Выберите устройство Chromecast, которое будет использоваться при пользовании других приложений для открытия видеороликов в SkyTube.</string>
+    <string name="pref_title_autocast">AutoCast</string>
+    <string name="pref_title_chromecast_none">Ничего</string>
+    <string name="pref_chromecast_category">Chromecast</string>
+    <string name="pref_summary_mobile_network_usage">Что делать, если вы используете мобильную сеть (например, 4G) для загрузки, просмотра видео: %s</string>
+    <string name="pref_title_mobile_network_usage">Использование мобильной сети</string>
+    <string name="key_preferences">настройки</string>
 </resources>

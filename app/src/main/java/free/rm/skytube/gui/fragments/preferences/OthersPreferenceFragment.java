@@ -46,6 +46,7 @@ public class OthersPreferenceFragment extends PreferenceFragment implements Shar
 	private Preference folderChooser;
 
 	ListPreference defaultTabPref;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -92,15 +93,11 @@ public class OthersPreferenceFragment extends PreferenceFragment implements Shar
 		getPreferenceManager().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
 	}
 
-
-
 	@Override
 	public void onPause() {
 		super.onPause();
 		getPreferenceManager().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
 	}
-
-
 
 	@Override
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
@@ -142,8 +139,6 @@ public class OthersPreferenceFragment extends PreferenceFragment implements Shar
 			}*/
 		}
 	}
-
-
 
 	/**
 	 * Display a dialog with message <code>messageID</code> and force the user to restart the app by
@@ -197,6 +192,7 @@ public class OthersPreferenceFragment extends PreferenceFragment implements Shar
 				if (key.isUserApiKeySet()) {
 					// if the key is valid, then inform the user that the custom API key is valid and
 					// that he needs to restart the app in order to use it
+
 					displayRestartDialog(R.string.pref_youtube_api_key_custom, false);
 				} else {
 					displayRestartDialog(R.string.pref_youtube_api_key_default, false);

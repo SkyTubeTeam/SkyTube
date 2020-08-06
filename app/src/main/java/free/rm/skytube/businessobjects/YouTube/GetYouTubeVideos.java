@@ -71,6 +71,9 @@ public abstract class GetYouTubeVideos {
 	}
 
 
+	public void resetKey() {
+	}
+
 	/**
 	 * Reset the fetching of videos. This will be called when a swipe to refresh is done.
 	 */
@@ -136,7 +139,12 @@ public abstract class GetYouTubeVideos {
 			getVideo.init(videoIdsStr.toString());
 			Logger.i(this, "getVideoList light from %s id, video ids: %s", videoIds.size(), videoIdsStr);
 
-			return getVideo.getNextVideos();
+			List<CardData> cards = getVideo.getNextVideos();
+			if (cards == null || cards.isEmpty()) {
+				Logger.e(this, "Unable to fetch with API, use Newpipe,ids="+videoIdsStr);
+				return getWithNewPipe(videoIds);
+			}
+			return cards;
 		} catch (IOException e) {
 			Logger.e(this, "Unable to fetch with API, revert to newpipe:"+e.getMessage()+",ids="+videoIdsStr, e);
 			lastException = e;

@@ -29,12 +29,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
+import androidx.core.graphics.ColorUtils;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Build;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.multidex.MultiDexApplication;
@@ -43,11 +45,23 @@ import androidx.core.content.res.ResourcesCompat;
 import com.google.api.client.googleapis.json.GoogleJsonError;
 import com.google.api.client.googleapis.json.GoogleJsonResponseException;
 
+import org.schabi.newpipe.extractor.exceptions.FoundAdException;
+
 import java.util.Arrays;
 import java.util.List;
 
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.FeedUpdaterReceiver;
+import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
+import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubePlaylist;
+import free.rm.skytube.businessobjects.YouTube.Tasks.GetPlaylistTask;
+import free.rm.skytube.businessobjects.YouTube.newpipe.ContentId;
+import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
+import free.rm.skytube.businessobjects.db.Tasks.GetChannelInfo;
+import free.rm.skytube.gui.activities.MainActivity;
+import free.rm.skytube.gui.businessobjects.YouTubePlayer;
+import free.rm.skytube.gui.fragments.ChannelBrowserFragment;
+import free.rm.skytube.gui.fragments.PlaylistVideosFragment;
 
 /**
  * SkyTube application.
@@ -205,14 +219,14 @@ public class SkyTubeApp extends MultiDexApplication {
 			return;
 		}
 		NotificationManager notificationManager =
-						(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+				(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
 		String channelId = NEW_VIDEOS_NOTIFICATION_CHANNEL;
 		CharSequence channelName = context.getString(R.string.notification_channel_feed_title);
 		int importance = NotificationManager.IMPORTANCE_LOW;
 		NotificationChannel notificationChannel = new NotificationChannel(channelId, channelName, importance);
 		notificationChannel.enableLights(true);
-		notificationChannel.setLightColor(Color.RED);
+		notificationChannel.setLightColor(ColorUtils.compositeColors(0xFFFF0000, 0xFFFF0000));
 		notificationChannel.enableVibration(false);
 		notificationManager.createNotificationChannel(notificationChannel);
 	}
@@ -227,7 +241,7 @@ public class SkyTubeApp extends MultiDexApplication {
 
 	/**
 	 * Setup the Feed Updater Service. First, cancel the Alarm that will trigger the next fetch (if there is one), then set the
-	 * Alarm with the passed interval, if it's greater than 0. 
+	 * Alarm with the passed interval, if it's greater than 0.
 	 * @param interval The number of milliseconds between each time new videos for subscribed channels should be fetched.
 	 */
 	public static void setFeedUpdateInterval(int interval) {
@@ -262,6 +276,7 @@ public class SkyTubeApp extends MultiDexApplication {
 			message = exc.getMessage();
 		}
 		if (message != null) {
+			Log.e("SkyTubeApp", "Error: "+message);
 			Toast.makeText(ctx, message, Toast.LENGTH_LONG).show();
 		}
 	}
@@ -279,6 +294,135 @@ public class SkyTubeApp extends MultiDexApplication {
 		ClipData clip = ClipData.newPlainText(text, url);
 		clipboard.setPrimaryClip(clip);
 		Toast.makeText(context, R.string.url_copied_to_clipboard, Toast.LENGTH_SHORT).show();
+	}
+
+	/**
+	 * The video URL is passed to SkyTube via another Android app (i.e. via an intent).
+	 *
+	 * @return The URL of the YouTube video the user wants to play.
+	 */
+	public static ContentId getUrlFromIntent(final Context ctx, final Intent intent) {
+		if (Intent.ACTION_VIEW.equals(intent.getAction()) && intent.getData() != null) {
+			return parseUrl(ctx, intent.getData().toString(), true);
+		}
+		return null;
+	}
+
+	public static ContentId parseUrl(Context context, String url, boolean showErrorIfNotValid) {
+		try {
+			ContentId id = NewPipeService.get().getContentId(url);
+			if (id == null && showErrorIfNotValid) {
+				String message = String.format(context.getString(R.string.error_invalid_url), url);
+				Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+			}
+			return id;
+		} catch (FoundAdException e) {
+			SkyTubeApp.notifyUserOnError(context, e);
+			return null;
+		} catch (RuntimeException e) {
+			SkyTubeApp.notifyUserOnError(context, e);
+			return null;
+		}
+
+	}
+	/**
+	 * Open the url - internally, or externally if useExternalBrowser is switched on.
+	 * @param ctx
+	 * @param url
+	 * @param useExternalBrowser
+	 */
+	public static void openUrl(Context ctx, String url, boolean useExternalBrowser) {
+		// Show error message only if we don't want to use external browser, so we expect that the URL
+		// can be handled internally, and if the URL is invalid, it's an error.
+		ContentId content = parseUrl(ctx, url, !useExternalBrowser);
+
+		if (openContent(ctx, content)) {
+			return;
+		} else {
+			if (useExternalBrowser) {
+				viewInBrowser(url, ctx);
+			}
+		}
+	}
+
+	/**
+	 * Open the content in the appropriate viewer Activity, return true if it found one.
+	 * @param ctx
+	 * @param content
+	 * @return
+	 */
+	public static boolean openContent(Context ctx, ContentId content) {
+		if (content == null) {
+			return false;
+		}
+		switch (content.getType()) {
+			case STREAM: {
+				YouTubePlayer.launch(content, ctx);
+				break;
+			}
+			case CHANNEL: {
+				SkyTubeApp.launchChannel(content.getId(), ctx);
+				break;
+			}
+			case PLAYLIST: {
+				new GetPlaylistTask(ctx, content.getId(), playlist -> {
+					launchPlaylist(playlist, ctx);
+				}).executeInParallel();
+				break;
+			}
+			default: {
+				return false;
+			}
+		}
+		return true;
+	}
+
+
+	/**
+	 * Launches the channel view, so the user can see all the videos from a channel.
+	 *
+	 * @param channelId the channel to be displayed.
+	 */
+	public static void launchChannel(String channelId, Context context) {
+		if (channelId != null) {
+			new GetChannelInfo(context,
+					youTubeChannel -> SkyTubeApp.launchChannel(youTubeChannel, context),
+					true)
+					.executeInParallel(channelId);
+		}
+	}
+
+	/**
+	 * Launches the channel view, so the user can see all the videos from a channel.
+	 *
+	 * @param youTubeChannel the channel to be displayed.
+	 */
+	public static void launchChannel(YouTubeChannel youTubeChannel, Context context) {
+		Intent i = new Intent(context, MainActivity.class);
+		i.setAction(MainActivity.ACTION_VIEW_CHANNEL);
+		i.putExtra(ChannelBrowserFragment.CHANNEL_OBJ, youTubeChannel);
+		context.startActivity(i);
+	}
+
+	/**
+	 * Launch the {@link PlaylistVideosFragment}
+	 * @param playlist the playlist to display
+	 */
+	public static void launchPlaylist(final YouTubePlaylist playlist, final Context context) {
+		Intent playlistIntent = new Intent(context, MainActivity.class);
+		playlistIntent.setAction(MainActivity.ACTION_VIEW_PLAYLIST);
+		playlistIntent.putExtra(PlaylistVideosFragment.PLAYLIST_OBJ, playlist);
+		context.startActivity(playlistIntent);
+	}
+
+	/**
+	 * Launch an external activity to actually open the given URL
+	 * @param url
+	 */
+	public static void viewInBrowser(String url, final Context context) {
+		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+		browserIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		context.startActivity(browserIntent);
 	}
 
 }

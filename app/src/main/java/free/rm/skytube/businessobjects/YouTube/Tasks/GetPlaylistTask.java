@@ -7,13 +7,11 @@ import com.google.api.services.youtube.model.Playlist;
 import com.google.api.services.youtube.model.PlaylistListResponse;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.Logger;
-import free.rm.skytube.businessobjects.YouTube.GetChannelsDetails;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPI;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPIKey;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
@@ -29,7 +27,6 @@ public class GetPlaylistTask extends AsyncTaskParallel<Void, Void, YouTubePlayli
     private final YouTubePlaylistListener playlistListener;
     private final GetChannelInfo channelInfo;
     private final Context context;
-    private Exception exception;
 
     protected static final Long MAX_RESULTS = 45L;
 
@@ -53,7 +50,7 @@ public class GetPlaylistTask extends AsyncTaskParallel<Void, Void, YouTubePlayli
             return getFirstPlaylist(playlistList);
         } catch (Exception e) {
             Logger.e(this, "Couldn't initialize GetPlaylist", e);
-            exception = e;
+            lastException = e;
         }
         return null;
     }
@@ -61,12 +58,15 @@ public class GetPlaylistTask extends AsyncTaskParallel<Void, Void, YouTubePlayli
     @Override
     protected void onPostExecute(YouTubePlaylist youTubePlaylist) {
         channelInfo.showErrorToUi();
-        SkyTubeApp.notifyUserOnError(context, exception);
         if (playlistListener != null) {
             playlistListener.onYouTubePlaylist(youTubePlaylist);
         }
     }
 
+    @Override
+    protected void showErrorToUi() {
+        SkyTubeApp.notifyUserOnError(context, lastException);
+    }
 
     private YouTubePlaylist getFirstPlaylist(YouTube.Playlists.List api) {
         List<Playlist> playlistList = null;

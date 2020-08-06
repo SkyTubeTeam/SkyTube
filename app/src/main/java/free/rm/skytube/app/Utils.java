@@ -19,6 +19,10 @@ package free.rm.skytube.app;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import javax.annotation.Nullable;
 
 public class Utils {
 
@@ -33,6 +37,12 @@ public class Utils {
     public static void requireNonNull(Object obj, String message) {
         if (obj == null) {
             throw new NullPointerException(message);
+        }
+    }
+
+    public static void isTrue(boolean flag, String message) {
+        if (!flag) {
+            throw new IllegalArgumentException("Error: "+message);
         }
     }
 
@@ -72,4 +82,5 @@ public class Utils {
         }
         return  channelId;
     }
+
 }
