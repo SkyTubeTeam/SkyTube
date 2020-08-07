@@ -53,6 +53,7 @@ public class BookmarksFragment extends OrderableVideosGridFragment implements Bo
 		setVideoGridAdapter(new OrderableVideoGridAdapter(BookmarksDb.getBookmarksDb()));
 		View view = super.onCreateView(inflater, container, savedInstanceState);
 		swipeRefreshLayout.setEnabled(false);
+		BookmarksDb.getBookmarksDb().addListener(this);
 		populateList();
 		return view;
 	}
@@ -109,15 +110,9 @@ public class BookmarksFragment extends OrderableVideosGridFragment implements Bo
 	}
 
 	@Override
-	public void onAttach(@NonNull Context context) {
-		super.onAttach(context);
-		BookmarksDb.getBookmarksDb().addListener(this);
-	}
-
-	@Override
-	public void onDetach() {
-		super.onDetach();
+	public void onDestroyView() {
 		BookmarksDb.getBookmarksDb().removeListener(this);
+		super.onDestroyView();
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////

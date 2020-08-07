@@ -31,6 +31,7 @@ import com.bumptech.glide.Glide;
 import butterknife.BindView;
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.VideoCategory;
+import free.rm.skytube.businessobjects.db.BookmarksDb;
 import free.rm.skytube.gui.businessobjects.MainActivityListener;
 import free.rm.skytube.gui.businessobjects.adapters.VideoGridAdapter;
 import free.rm.skytube.gui.businessobjects.fragments.BaseVideosGridFragment;
@@ -72,9 +73,10 @@ public abstract class VideosGridFragment extends BaseVideosGridFragment {
 
 
 	@Override
-	public void onDestroy() {
-		super.onDestroy();
+	public void onDestroyView() {
 		gridView.setAdapter(null);
+		videoGridAdapter.onDestroy();
+		super.onDestroyView();
 		Glide.get(getActivity()).clearMemory();
 	}
 
