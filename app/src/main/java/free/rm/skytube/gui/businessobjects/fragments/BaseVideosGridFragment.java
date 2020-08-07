@@ -92,6 +92,7 @@ public abstract class BaseVideosGridFragment extends TabFragment implements Swip
 	public void onDestroy() {
 		super.onDestroy();
 		videoGridAdapter.onDestroy();
+		videoGridAdapter = null;
 	}
 
 	@Override

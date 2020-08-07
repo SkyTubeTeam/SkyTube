@@ -74,6 +74,7 @@ public abstract class VideosGridFragment extends BaseVideosGridFragment {
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
+		gridView.setAdapter(null);
 		Glide.get(getActivity()).clearMemory();
 	}
 
