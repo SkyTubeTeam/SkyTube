@@ -31,20 +31,15 @@ public class DownloadedVideosFragment extends OrderableVideosGridFragment implem
 		setVideoGridAdapter(new OrderableVideoGridAdapter(DownloadedVideosDb.getVideoDownloadsDb()));
 		View view = super.onCreateView(inflater, container, savedInstanceState);
 		swipeRefreshLayout.setEnabled(false);
+		DownloadedVideosDb.getVideoDownloadsDb().addListener(this);
 		populateList();
 		return view;
 	}
 
 	@Override
-	public void onAttach(@NonNull Context context) {
-		super.onAttach(context);
-		DownloadedVideosDb.getVideoDownloadsDb().addListener(this);
-	}
-
-	@Override
-	public void onDetach() {
-		super.onDetach();
+	public void onDestroyView() {
 		DownloadedVideosDb.getVideoDownloadsDb().removeListener(this);
+		super.onDestroyView();
 	}
 
 	@Override
