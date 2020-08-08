@@ -37,6 +37,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -51,6 +52,8 @@ import free.rm.skytube.businessobjects.YouTube.POJOs.ChannelView;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.gui.fragments.SubscriptionsFeedFragment;
+
+import static free.rm.skytube.app.Utils.makePlaceholders;
 
 /**
  * A database (DB) that stores user subscriptions (with respect to YouTube channels).
@@ -235,6 +238,25 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 		int rowsDeleted = getWritableDatabase().delete(SubscriptionsTable.TABLE_NAME,
 				SubscriptionsTable.COL_CHANNEL_ID + " = ?",
 				new String[]{channelId});
+
+		// Need to make sure when we come back to MainActivity, that we refresh the Feed tab so it hides videos from the newly unsubscribed
+		SubscriptionsFeedFragment.setFlag(SubscriptionsFeedFragment.FLAG_REFRESH_FEED_FROM_CACHE);
+
+		return (rowsDeleted >= 0) ? DatabaseResult.SUCCESS : DatabaseResult.NOT_MODIFIED;
+	}
+
+
+
+	public DatabaseResult unsubscribeFromAllChannels(String[] channelIds) {
+		// delete any feed videos pertaining to this channel
+		getWritableDatabase().delete(SubscriptionsVideosTable.TABLE_NAME,
+				SubscriptionsVideosTable.COL_CHANNEL_ID + " IN ("+makePlaceholders(channelIds.length)+")",
+				channelIds);
+
+		// remove this channel from the subscriptions DB
+		int rowsDeleted = getWritableDatabase().delete(SubscriptionsTable.TABLE_NAME,
+				SubscriptionsTable.COL_CHANNEL_ID + " IN ("+makePlaceholders(channelIds.length)+")",
+				channelIds);
 
 		// Need to make sure when we come back to MainActivity, that we refresh the Feed tab so it hides videos from the newly unsubscribed
 		SubscriptionsFeedFragment.setFlag(SubscriptionsFeedFragment.FLAG_REFRESH_FEED_FROM_CACHE);
