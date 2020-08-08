@@ -17,18 +17,10 @@ import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
  */
 public class UnsubscribeFromAllChannelsTask extends AsyncTaskParallel<YouTubeChannel, Void, Void> {
 
-	private Handler handler = new Handler();
-
 	@Override
 	protected Void doInBackground(YouTubeChannel... youTubeChannels) {
 		List<String> channelList = SubscriptionsDb.getSubscriptionsDb().getSubscribedChannelIds();
-
-		for (final String channelId : channelList) {
-			SubscriptionsDb.getSubscriptionsDb().unsubscribe(channelId);
-
-			handler.post(() -> SubsAdapter.get(SkyTubeApp.getContext()).removeChannel(channelId));
-		}
-
+		SubscriptionsDb.getSubscriptionsDb().unsubscribeFromAllChannels(channelList.toArray(new String[0]));
 		return null;
 	}
 
