@@ -29,7 +29,9 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.YouTube.POJOs.ChannelView;
@@ -44,7 +46,7 @@ public class SubsAdapter extends RecyclerViewAdapterEx<ChannelView, SubsAdapter.
 
 	private static final String TAG = SubsAdapter.class.getSimpleName();
 	private static SubsAdapter subsAdapter = null;
-	private MainActivityListener listener;
+	private Set<MainActivityListener> listeners = new HashSet<>();
 
 	private String searchText;
 
@@ -68,8 +70,12 @@ public class SubsAdapter extends RecyclerViewAdapterEx<ChannelView, SubsAdapter.
 		return subsAdapter;
 	}
 
-	public void setListener(MainActivityListener listener) {
-		this.listener = listener;
+	public void addListener(MainActivityListener listener) {
+		this.listeners.add(listener);
+	}
+
+	public void removeListener(MainActivityListener listener) {
+		this.listeners.remove(listener);
 	}
 
 	/**
@@ -175,8 +181,9 @@ public class SubsAdapter extends RecyclerViewAdapterEx<ChannelView, SubsAdapter.
 			channel = null;
 
 			rowView.setOnClickListener(v -> {
-				if (listener instanceof MainActivityListener)
+				for (MainActivityListener listener: listeners) {
 					listener.onChannelClick(channel.getId());
+				}
 			});
 		}
 

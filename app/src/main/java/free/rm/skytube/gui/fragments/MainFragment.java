@@ -114,7 +114,7 @@ public class MainFragment extends FragmentEx {
 		} else {
 			subsAdapter.setContext(getActivity());
 		}
-		subsAdapter.setListener((MainActivityListener) getActivity());
+		subsAdapter.addListener((MainActivityListener) getActivity());
 
 		subsListView.setLayoutManager(new LinearLayoutManager(getActivity()));
 		subsListView.setAdapter(subsAdapter);
@@ -217,6 +217,12 @@ public class MainFragment extends FragmentEx {
 	}
 
 	@Override
+	public void onDestroyView() {
+		subsAdapter.removeListener((MainActivityListener) getActivity());
+		super.onDestroyView();
+	}
+
+	@Override
 	public void onDestroy() {
 		videosPagerAdapter = null;
 		viewPager = null;
@@ -243,13 +249,11 @@ public class MainFragment extends FragmentEx {
 		}
 		FragmentActivity activity = getActivity();
 		subsAdapter.setContext(activity);
-		subsAdapter.setListener((MainActivityListener) activity);
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
-		subsAdapter.setListener(null);
 		subsAdapter.setContext(null);
 	}
 
