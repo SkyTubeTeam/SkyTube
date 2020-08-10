@@ -247,21 +247,9 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 
 
 
-	public DatabaseResult unsubscribeFromAllChannels(String[] channelIds) {
-		// delete any feed videos pertaining to this channel
-		getWritableDatabase().delete(SubscriptionsVideosTable.TABLE_NAME,
-				SubscriptionsVideosTable.COL_CHANNEL_ID + " IN ("+makePlaceholders(channelIds.length)+")",
-				channelIds);
-
-		// remove this channel from the subscriptions DB
-		int rowsDeleted = getWritableDatabase().delete(SubscriptionsTable.TABLE_NAME,
-				SubscriptionsTable.COL_CHANNEL_ID + " IN ("+makePlaceholders(channelIds.length)+")",
-				channelIds);
-
-		// Need to make sure when we come back to MainActivity, that we refresh the Feed tab so it hides videos from the newly unsubscribed
-		SubscriptionsFeedFragment.setFlag(SubscriptionsFeedFragment.FLAG_REFRESH_FEED_FROM_CACHE);
-
-		return (rowsDeleted >= 0) ? DatabaseResult.SUCCESS : DatabaseResult.NOT_MODIFIED;
+	public void unsubscribeFromAllChannels() {
+		getWritableDatabase().delete(SubscriptionsVideosTable.TABLE_NAME,null,null);
+		getWritableDatabase().delete(SubscriptionsTable.TABLE_NAME,null,null);
 	}
 
 	/**
