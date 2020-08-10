@@ -88,8 +88,6 @@ public class MainActivity extends BaseActivity {
 	private PlaylistVideosFragment  playlistVideosFragment;
 	private VideoBlockerPlugin      videoBlockerPlugin;
 
-	private FragmentEx currentFragment;
-
 	private boolean dontAddToBackStack = false;
 
 	/** Set to true of the UpdatesCheckerTask has run; false otherwise. */
@@ -198,7 +196,6 @@ public class MainActivity extends BaseActivity {
 				mainFragment.setArguments(args);
 			}
 			getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, mainFragment).commit();
-			currentFragment = mainFragment;
 		} else {
 			Logger.i(MainActivity.this, "mainFragment already exists, action:"+action+" fragment:"+mainFragment +", manager:"+mainFragment.getFragmentManager() +", support="+getSupportFragmentManager());
 		}
@@ -351,12 +348,6 @@ public class MainActivity extends BaseActivity {
 	}
 
 
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		super.onActivityResult(requestCode, resultCode, data);
-	}
-
-
 	/**
 	 * Display the Enter Video URL dialog.
 	 */
@@ -446,7 +437,6 @@ public class MainActivity extends BaseActivity {
 		else
 			dontAddToBackStack = false;
 		transaction.commit();
-		currentFragment = fragment;
 	}
 
 
@@ -470,7 +460,6 @@ public class MainActivity extends BaseActivity {
 		channelBrowserFragment = new ChannelBrowserFragment();
 		channelBrowserFragment.getChannelPlaylistsFragment().setMainActivityListener(this);
 		channelBrowserFragment.setArguments(args);
-		currentFragment = channelBrowserFragment;
 		switchToFragment(channelBrowserFragment);
 	}
 
