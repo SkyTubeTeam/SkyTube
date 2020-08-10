@@ -288,8 +288,7 @@ public class MainActivity extends BaseActivity {
 			public boolean onQueryTextChange(final String newText) {
 				Logger.d(MainActivity.this, "on query text change: %s", newText);
 				// if the user does not want to have the search string saved, then skip the below...
-				if (SkyTubeApp.getPreferenceManager().getBoolean(getString(R.string.pref_key_disable_search_history), false)
-						||  newText == null) {
+				if (newText == null || SkyTubeApp.getSettings().isDisableSearchHistory()) {
 					return false;
 				}
 
@@ -313,7 +312,7 @@ public class MainActivity extends BaseActivity {
 
 			@Override
 			public boolean onQueryTextSubmit(String query) {
-				if(!SkyTubeApp.getPreferenceManager().getBoolean(SkyTubeApp.getStr(R.string.pref_key_disable_search_history), false)) {
+				if(!SkyTubeApp.getSettings().isDisableSearchHistory()) {
 					// Save this search string into the Search History Database (for Suggestions)
 					SearchHistoryDb.getSearchHistoryDb().insertSearchText(query);
 				}
