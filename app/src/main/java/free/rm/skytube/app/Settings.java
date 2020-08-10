@@ -65,6 +65,10 @@ public class Settings {
         return Policy.valueOf(currentValue.toUpperCase());
     }
 
+    public boolean isDisableSearchHistory() {
+        return getSharedPreferences().getBoolean(app.getStr(R.string.pref_key_disable_search_history), false);
+    }
+
     public void setWarningMobilePolicy(Policy warnPolicy) {
         setPreference(R.string.pref_key_mobile_network_usage_policy, warnPolicy.name().toLowerCase());
     }
