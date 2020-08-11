@@ -1,2 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="no">ⵉⵀⵉ</string>
+    <string name="yes">ⵢⴰⵀ</string>
+    <string name="close">ⵇⵇⵏ</string>
+    <string name="num_videos">%d ⵏ ⵉⴼⵉⴷⵢⵓⵜⵏ</string>
+    <string name="videos">ⵉⴼⵉⴷⵢⵓⵜⵏ</string>
+    <string name="video">ⴰⴼⵉⴷⵢⵓ</string>
+    <string name="LIVE">ⵓⵙⵔⵉⴷ</string>
+    <string name="search_videos">ⵔⵣⵓ ⵉⴼⵉⴷⵢⵓⵜⵏ</string>
+    <string name="ok">ⵡⴰⵅⵅⴰ</string>
+    <string name="views">%,d ⵉⵥⵕⴰⵏ</string>
+</resources>
