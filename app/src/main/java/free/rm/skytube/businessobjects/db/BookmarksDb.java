@@ -32,7 +32,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.app.Utils;
@@ -53,7 +55,7 @@ public class BookmarksDb extends SQLiteOpenHelperEx implements OrderableDatabase
 	private static final int DATABASE_VERSION = 1;
 	private static final String DATABASE_NAME = "bookmarks.db";
 
-	private List<BookmarksDbListener> listeners = new ArrayList<>();
+	private final Set<BookmarksDbListener> listeners = new HashSet<>();
 
 
 	private BookmarksDb(Context context) {
@@ -308,11 +310,18 @@ public class BookmarksDb extends SQLiteOpenHelperEx implements OrderableDatabase
 	 *
 	 * @param listener The Listener (which implements BookmarksDbListener) to add.
 	 */
-	public void addListener(BookmarksDbListener listener) {
-		if(!listeners.contains(listener))
-			listeners.add(listener);
+	public void addListener(@NonNull BookmarksDbListener listener) {
+		listeners.add(listener);
 	}
 
+	/**
+	 * Remove the Listener
+	 *
+	 * @param listener The Listener (which implements BookmarksDbListener) to remove.
+	 */
+	public void removeListener(@NonNull BookmarksDbListener listener) {
+		listeners.remove(listener);
+	}
 
 	/**
 	 * Called when the Bookmarks DB is updated by a bookmark insertion.

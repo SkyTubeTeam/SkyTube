@@ -37,4 +37,13 @@ public class FeaturedVideosFragment extends VideosGridFragment {
 		return SkyTubeApp.getStr(R.string.featured);
 	}
 
+	@Override
+	public int getPriority() {
+		return 0;
+	}
+
+	@Override
+	public String getBundleKey() {
+		return MainFragment.FEATURED_VIDEOS_FRAGMENT;
+	}
 }

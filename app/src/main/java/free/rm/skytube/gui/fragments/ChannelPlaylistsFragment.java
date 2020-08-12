@@ -72,4 +72,8 @@ public class ChannelPlaylistsFragment extends VideosGridFragment implements Play
 		return null;
 	}
 
+	@Override
+	public int getPriority() {
+		return 6;
+	}
 }

@@ -64,5 +64,8 @@ public class ChannelVideosFragment extends VideosGridFragment {
 		return SkyTubeApp.getStr(R.string.videos);
 	}
 
-
+	@Override
+	public int getPriority() {
+		return 0;
+	}
 }

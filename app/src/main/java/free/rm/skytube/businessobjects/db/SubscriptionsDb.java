@@ -37,6 +37,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -51,6 +52,8 @@ import free.rm.skytube.businessobjects.YouTube.POJOs.ChannelView;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.gui.fragments.SubscriptionsFeedFragment;
+
+import static free.rm.skytube.app.Utils.makePlaceholders;
 
 /**
  * A database (DB) that stores user subscriptions (with respect to YouTube channels).
@@ -240,6 +243,13 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 		SubscriptionsFeedFragment.setFlag(SubscriptionsFeedFragment.FLAG_REFRESH_FEED_FROM_CACHE);
 
 		return (rowsDeleted >= 0) ? DatabaseResult.SUCCESS : DatabaseResult.NOT_MODIFIED;
+	}
+
+
+
+	public void unsubscribeFromAllChannels() {
+		getWritableDatabase().delete(SubscriptionsVideosTable.TABLE_NAME,null,null);
+		getWritableDatabase().delete(SubscriptionsTable.TABLE_NAME,null,null);
 	}
 
 	/**

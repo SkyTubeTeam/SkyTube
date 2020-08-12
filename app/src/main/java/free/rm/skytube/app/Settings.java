@@ -22,6 +22,10 @@ import androidx.preference.PreferenceManager ;
 
 import androidx.annotation.StringRes;
 
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+
 import free.rm.skytube.R;
 import free.rm.skytube.app.enums.Policy;
 
@@ -51,10 +55,18 @@ public class Settings {
         return getPreference(R.string.pref_key_download_to_separate_directories,false);
     }
 
+    public Set<String> getHiddenTabs() {
+        return getPreference(R.string.pref_key_hide_tabs, Collections.emptySet());
+    }
+
     public Policy getWarningMobilePolicy() {
         String currentValue = getSharedPreferences().getString(getStr(R.string.pref_key_mobile_network_usage_policy),
                 getStr(R.string.pref_mobile_network_usage_value_ask));
         return Policy.valueOf(currentValue.toUpperCase());
+    }
+
+    public boolean isDisableSearchHistory() {
+        return getSharedPreferences().getBoolean(app.getStr(R.string.pref_key_disable_search_history), false);
     }
 
     public void setWarningMobilePolicy(Policy warnPolicy) {
@@ -159,6 +171,10 @@ public class Settings {
 
     private boolean getPreference(String preference, boolean defaultValue) {
         return getSharedPreferences().getBoolean(preference, defaultValue);
+    }
+
+    private Set<String> getPreference(@StringRes int resId, Set<String> defaultValue) {
+        return getSharedPreferences().getStringSet(app.getStr(resId), defaultValue);
     }
 
     private SharedPreferences getSharedPreferences() {

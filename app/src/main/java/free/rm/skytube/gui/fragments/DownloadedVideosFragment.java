@@ -1,8 +1,14 @@
 package free.rm.skytube.gui.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import butterknife.BindView;
 import free.rm.skytube.R;
@@ -20,17 +26,21 @@ public class DownloadedVideosFragment extends OrderableVideosGridFragment implem
 	@BindView(R.id.noDownloadedVideosText)
 	View noDownloadedVideosText;
 
-	public DownloadedVideosFragment() {
-		super(new OrderableVideoGridAdapter(null, DownloadedVideosDb.getVideoDownloadsDb()));
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, @Nullable Bundle savedInstanceState) {
+		setVideoGridAdapter(new OrderableVideoGridAdapter(DownloadedVideosDb.getVideoDownloadsDb()));
+		View view = super.onCreateView(inflater, container, savedInstanceState);
+		swipeRefreshLayout.setEnabled(false);
+		DownloadedVideosDb.getVideoDownloadsDb().addListener(this);
+		populateList();
+		return view;
 	}
 
 	@Override
-	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-		super.onViewCreated(view, savedInstanceState);
-		swipeRefreshLayout.setEnabled(false);
-		populateList();
+	public void onDestroyView() {
+		DownloadedVideosDb.getVideoDownloadsDb().removeListener(this);
+		super.onDestroyView();
 	}
-
 
 	@Override
 	protected int getLayoutResource() {
@@ -49,13 +59,21 @@ public class DownloadedVideosFragment extends OrderableVideosGridFragment implem
 		return SkyTubeApp.getStr(R.string.downloads);
 	}
 
+	@Override
+	public int getPriority() {
+		return 4;
+	}
+
+	@Override
+	public String getBundleKey() {
+		return MainFragment.DOWNLOADED_VIDEOS_FRAGMENT;
+	}
 
 	@Override
 	public void onDownloadedVideosUpdated() {
 		populateList();
 		videoGridAdapter.refresh(true);
 	}
-
 
 	private void populateList() {
 		new PopulateDownloadsTask().executeInParallel();

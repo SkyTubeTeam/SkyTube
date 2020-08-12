@@ -37,26 +37,34 @@ import free.rm.skytube.gui.fragments.VideosGridFragment;
  */
 public abstract class BaseVideosGridFragment extends TabFragment implements SwipeRefreshLayout.OnRefreshListener {
 
-	protected final VideoGridAdapter  videoGridAdapter;
+	protected VideoGridAdapter  videoGridAdapter;
 	private int updateCount = 0;
 
 	@BindView(R.id.swipeRefreshLayout)
 	protected SwipeRefreshLayout swipeRefreshLayout;
 
-	public BaseVideosGridFragment(VideoGridAdapter videoGrid) {
-		this.videoGridAdapter = videoGrid;
+	public BaseVideosGridFragment() {
+	}
+
+	protected void setVideoGridAdapter(VideoGridAdapter adapter) {
+		this.videoGridAdapter = adapter;
 	}
 
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		videoGridAdapter.setContext(getActivity());
+		if (videoGridAdapter == null) {
+			videoGridAdapter = new VideoGridAdapter();
+		}
 
 		View view = inflater.inflate(getLayoutResource(), container, false);
 
 		ButterKnife.bind(this, view);
 		swipeRefreshLayout.setOnRefreshListener(this);
 
+		if (isFragmentSelected()) {
+			videoGridAdapter.initializeList();
+		}
 		return view;
 	}
 
@@ -81,9 +89,18 @@ public abstract class BaseVideosGridFragment extends TabFragment implements Swip
 	}
 
 	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		videoGridAdapter.onDestroy();
+		videoGridAdapter = null;
+	}
+
+	@Override
 	public void onFragmentSelected() {
 		super.onFragmentSelected();
-		videoGridAdapter.initializeList();
+		if (videoGridAdapter != null) {
+			videoGridAdapter.initializeList();
+		}
 	}
 
 	/**

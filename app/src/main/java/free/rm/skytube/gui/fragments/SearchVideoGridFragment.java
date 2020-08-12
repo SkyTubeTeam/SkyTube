@@ -136,4 +136,8 @@ public class SearchVideoGridFragment extends VideosGridFragment {
 		return null;
 	}
 
+	@Override
+	public int getPriority() {
+		return 0;
+	}
 }

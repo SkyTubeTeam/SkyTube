@@ -88,8 +88,6 @@ public class MainActivity extends BaseActivity {
 	private PlaylistVideosFragment  playlistVideosFragment;
 	private VideoBlockerPlugin      videoBlockerPlugin;
 
-	private FragmentEx currentFragment;
-
 	private boolean dontAddToBackStack = false;
 
 	/** Set to true of the UpdatesCheckerTask has run; false otherwise. */
@@ -198,7 +196,6 @@ public class MainActivity extends BaseActivity {
 				mainFragment.setArguments(args);
 			}
 			getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, mainFragment).commit();
-			currentFragment = mainFragment;
 		} else {
 			Logger.i(MainActivity.this, "mainFragment already exists, action:"+action+" fragment:"+mainFragment +", manager:"+mainFragment.getFragmentManager() +", support="+getSupportFragmentManager());
 		}
@@ -288,8 +285,7 @@ public class MainActivity extends BaseActivity {
 			public boolean onQueryTextChange(final String newText) {
 				Logger.d(MainActivity.this, "on query text change: %s", newText);
 				// if the user does not want to have the search string saved, then skip the below...
-				if (SkyTubeApp.getPreferenceManager().getBoolean(getString(R.string.pref_key_disable_search_history), false)
-						||  newText == null) {
+				if (newText == null || SkyTubeApp.getSettings().isDisableSearchHistory()) {
 					return false;
 				}
 
@@ -313,7 +309,7 @@ public class MainActivity extends BaseActivity {
 
 			@Override
 			public boolean onQueryTextSubmit(String query) {
-				if(!SkyTubeApp.getPreferenceManager().getBoolean(SkyTubeApp.getStr(R.string.pref_key_disable_search_history), false)) {
+				if(!SkyTubeApp.getSettings().isDisableSearchHistory()) {
 					// Save this search string into the Search History Database (for Suggestions)
 					SearchHistoryDb.getSearchHistoryDb().insertSearchText(query);
 				}
@@ -349,12 +345,6 @@ public class MainActivity extends BaseActivity {
 		}
 
 		return super.onOptionsItemSelected(item);
-	}
-
-
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		super.onActivityResult(requestCode, resultCode, data);
 	}
 
 
@@ -447,7 +437,6 @@ public class MainActivity extends BaseActivity {
 		else
 			dontAddToBackStack = false;
 		transaction.commit();
-		currentFragment = fragment;
 	}
 
 
@@ -471,7 +460,6 @@ public class MainActivity extends BaseActivity {
 		channelBrowserFragment = new ChannelBrowserFragment();
 		channelBrowserFragment.getChannelPlaylistsFragment().setMainActivityListener(this);
 		channelBrowserFragment.setArguments(args);
-		currentFragment = channelBrowserFragment;
 		switchToFragment(channelBrowserFragment);
 	}
 
@@ -591,6 +579,6 @@ public class MainActivity extends BaseActivity {
 	@Override
 	public void refreshSubscriptionsFeedVideos() {
 		SubscriptionsFeedFragment.unsetFlag(SubscriptionsFeedFragment.FLAG_REFRESH_FEED_FROM_CACHE);
-		mainFragment.getSubscriptionsFeedFragment().refreshFeedFromCache();
+		mainFragment.refreshSubscriptionsFeedVideos();
 	}
 }
