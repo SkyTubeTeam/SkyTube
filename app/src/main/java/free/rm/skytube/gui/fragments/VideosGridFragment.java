@@ -53,8 +53,9 @@ public abstract class VideosGridFragment extends BaseVideosGridFragment {
 		// setup the video grid view
 		videoGridAdapter.setSwipeRefreshLayout(swipeRefreshLayout);
 
-		if (getVideoCategory() != null)
-			videoGridAdapter.setVideoCategory(getVideoCategory(), getSearchString());
+		VideoCategory category = getVideoCategory();
+		if (category != null)
+			videoGridAdapter.setVideoCategory(category, getSearchString());
 
 		videoGridAdapter.setListener((MainActivityListener)getActivity());
 
