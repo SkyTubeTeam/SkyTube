@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="cancel">ⵙⵙⵔ</string>
+    <string name="play">ⵖⵔ</string>
+    <string name="mark_unwatched">ⵕⵛⵎ ⴰⵎ ⵓⵔ ⵉⵜⵜⵡⴰⵥⵕ</string>
+    <string name="mark_watched">ⵕⵛⵎ ⴰⵎ ⵉⵜⵜⵡⴰⵥⵕ</string>
+    <string name="share_via">ⴱⴹⵓ ⵙ</string>
+    <string name="share">ⴱⴹⵓ</string>
+    <string name="open_with">ⵕⵥⵎ ⵙ…</string>
+    <string name="get_new_video_steam">ⵓⵙⵔⵉⴷ ⴰⵎⴰⵢⵏⵓ</string>
+    <string name="play_video">ⵖⵔ ⴰⴼⵉⴷⵢⵓ</string>
+    <string name="warning_mobile_network_disable">ⴰⴷ ⵓⵔ ⵜⵙⵇⵙⴰ ⴰⵎⴰⵔ ⵢⴰⴹⵏ.</string>
+</resources>
