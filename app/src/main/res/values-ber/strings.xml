@@ -10,4 +10,7 @@
     <string name="search_videos">ⵔⵣⵓ ⵉⴼⵉⴷⵢⵓⵜⵏ</string>
     <string name="ok">ⵡⴰⵅⵅⴰ</string>
     <string name="views">%,d ⵉⵥⵕⴰⵏ</string>
+    <string name="search_channel">ⵔⵣⵓ ⴰⵙⴰⵔⵓ</string>
+    <string name="error">ⵜⴰⵣⴳⵍⵜ</string>
+    <string name="could_not_get_videos">ⵓⵔ ⵢⵓⴳⴳⵎ %s ⵉⴼⵉⴷⵢⵓⵜⵏ.</string>
 </resources>
