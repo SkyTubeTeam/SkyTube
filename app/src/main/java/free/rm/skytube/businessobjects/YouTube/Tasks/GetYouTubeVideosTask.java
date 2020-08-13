@@ -17,12 +17,15 @@
 
 package free.rm.skytube.businessobjects.YouTube.Tasks;
 
+import android.content.Context;
+
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import free.rm.skytube.app.SkyTubeApp;
+import free.rm.skytube.app.Utils;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.businessobjects.YouTube.GetYouTubeVideos;
@@ -51,6 +54,7 @@ public class GetYouTubeVideosTask extends AsyncTaskParallel<Void, Void, List<Car
 	private YouTubeChannel channel;
 	private final boolean clearList;
 
+	private final Context context;
 	private final VideoGridAdapter.Callback callback;
 
 
@@ -71,6 +75,8 @@ public class GetYouTubeVideosTask extends AsyncTaskParallel<Void, Void, List<Car
 		this.swipeRefreshLayout = swipeRefreshLayout;
 		this.clearList = clearList;
 		this.callback = callback;
+		this.context = videoGridAdapter.getContext();
+		Utils.requireNonNull(context, "context is missing");
 		getYouTubeVideos.resetKey();
 	}
 
@@ -135,7 +141,7 @@ public class GetYouTubeVideosTask extends AsyncTaskParallel<Void, Void, List<Car
 
 	@Override
 	protected void onPostExecute(List<CardData> videosList) {
-		SkyTubeApp.notifyUserOnError(videoGridAdapter.getContext(), getYouTubeVideos.getLastException());
+		SkyTubeApp.notifyUserOnError(context, getYouTubeVideos.getLastException());
 
 		if (this.clearList) {
 			videoGridAdapter.clearList();

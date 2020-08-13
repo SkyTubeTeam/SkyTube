@@ -217,11 +217,14 @@ public class MainFragment extends FragmentEx {
 		subsAdapter.removeListener((MainActivityListener) getActivity());
 		subsListView.setAdapter(null); // cleanup the reference from the SubsAdapter back to the view
 		subsDrawerLayout = null;
+		subsDrawerToggle = null;
+		tabLayout = null;
 		super.onDestroyView();
 	}
 
 	@Override
 	public void onDestroy() {
+		// this should happen after onSaveInstanceState
 		videosPagerAdapter = null;
 		super.onDestroy();
 	}
