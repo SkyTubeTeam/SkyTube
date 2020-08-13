@@ -60,7 +60,6 @@ public class MainFragment extends FragmentEx {
 	public static final String DOWNLOADED_VIDEOS_FRAGMENT = "MainFragment.downloadedVideosFragment";
 
 	private VideosPagerAdapter			videosPagerAdapter = null;
-	private ViewPager					viewPager;
 
 	public static final String SHOULD_SELECTED_FEED_TAB = "MainFragment.SHOULD_SELECTED_FEED_TAB";
 
@@ -143,7 +142,7 @@ public class MainFragment extends FragmentEx {
 		videosPagerAdapter = new VideosPagerAdapter(getChildFragmentManager());
 		videosPagerAdapter.init(savedInstanceState);
 
-		viewPager = view.findViewById(R.id.pager);
+		ViewPager viewPager = view.findViewById(R.id.pager);
 		final int tabCount = videosPagerAdapter.getCount();
 		viewPager.setOffscreenPageLimit(tabCount > 3 ? tabCount - 1 : tabCount);
 		viewPager.setAdapter(videosPagerAdapter);
@@ -216,13 +215,13 @@ public class MainFragment extends FragmentEx {
 	@Override
 	public void onDestroyView() {
 		subsAdapter.removeListener((MainActivityListener) getActivity());
+		subsDrawerLayout = null;
 		super.onDestroyView();
 	}
 
 	@Override
 	public void onDestroy() {
 		videosPagerAdapter = null;
-		viewPager = null;
 		super.onDestroy();
 	}
 
@@ -390,7 +389,13 @@ public class MainFragment extends FragmentEx {
 	 * Returns true if the subscriptions drawer is opened.
 	 */
 	public boolean isDrawerOpen() {
-		return subsDrawerLayout.isDrawerOpen(GravityCompat.START);
+		if (subsDrawerLayout != null) {
+			return subsDrawerLayout.isDrawerOpen(GravityCompat.START);
+		} else {
+			Logger.e(this, "subsDrawerLayout is null for isDrawerOpen");
+			Thread.dumpStack();
+			return false;
+		}
 	}
 
 
@@ -398,7 +403,12 @@ public class MainFragment extends FragmentEx {
 	 * Close the subscriptions drawer.
 	 */
 	public void closeDrawer() {
-		subsDrawerLayout.closeDrawer(GravityCompat.START);
+		if (subsDrawerLayout != null) {
+			subsDrawerLayout.closeDrawer(GravityCompat.START);
+		} else {
+			Logger.e(this, "subsDrawerLayout is null for closeDrawer");
+			Thread.dumpStack();
+		}
 	}
 
 	/**
