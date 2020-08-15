@@ -199,11 +199,7 @@ public class BookmarksDb extends SQLiteOpenHelperEx implements OrderableDatabase
 	 * @return True if it has been bookmarked, false if not.
 	 */
 	public boolean isBookmarked(String videoId) {
-		Cursor cursor = getReadableDatabase().query(
-						BookmarksTable.TABLE_NAME,
-						new String[]{BookmarksTable.COL_YOUTUBE_VIDEO_ID},
-						BookmarksTable.COL_YOUTUBE_VIDEO_ID + " = ?",
-						new String[]{videoId}, null, null, null);
+		Cursor cursor = getReadableDatabase().rawQuery("SELECT EXISTS(SELECT "+ BookmarksTable.COL_YOUTUBE_VIDEO_ID +" FROM "+BookmarksTable.TABLE_NAME+" WHERE "+BookmarksTable.COL_YOUTUBE_VIDEO_ID+" =?)",new String[]{videoId});
 		boolean	hasVideo = cursor.moveToNext();
 
 		cursor.close();
