@@ -377,7 +377,7 @@ public class MainFragment extends FragmentEx {
 		void onSaveInstanceState(Bundle outState) {
 			for (VideosGridFragment videosGridFragment : videoGridFragmentsList) {
 				String key = videosGridFragment.getBundleKey();
-				if (key != null) {
+				if (key != null && videosGridFragment.isAdded()) {
 					fragmentManager.putFragment(outState, key, videosGridFragment);
 				}
 			}
