@@ -407,15 +407,14 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 	 */
 	public boolean isUserSubscribedToChannel(String channelId) {
 	    channelId = Utils.removeChannelIdPrefix(channelId);
-		Cursor cursor = getReadableDatabase().query(
-				SubscriptionsTable.TABLE_NAME,
-				new String[]{SubscriptionsTable.COL_ID},
-				SubscriptionsTable.COL_CHANNEL_ID + " = ?",
-				new String[]{channelId}, null, null, null);
-		boolean	isUserSubbed = cursor.moveToNext();
 
-		cursor.close();
-		return isUserSubbed;
+	    Cursor cursor = getReadableDatabase().rawQuery("SELECT EXISTS(SELECT "+ SubscriptionsTable.COL_ID +" FROM "+SubscriptionsTable.TABLE_NAME+" WHERE "+SubscriptionsTable.COL_CHANNEL_ID+" =?)",new String[]{channelId});
+
+	    boolean	isUserSubbed = cursor.moveToNext();
+
+	    cursor.close();
+
+	    return isUserSubbed;
 	}
 
 

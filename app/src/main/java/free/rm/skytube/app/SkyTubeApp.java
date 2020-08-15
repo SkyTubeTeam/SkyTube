@@ -275,9 +275,11 @@ public class SkyTubeApp extends MultiDexApplication {
 		} else {
 			message = exc.getMessage();
 		}
-		if (message != null) {
+		if (message != null && ctx !=null) {
 			Log.e("SkyTubeApp", "Error: "+message);
 			Toast.makeText(ctx, message, Toast.LENGTH_LONG).show();
+		} else {
+			Log.w("SkytubeApp",message == null ? "message " : "ctx " + "is NULL");
 		}
 	}
 
