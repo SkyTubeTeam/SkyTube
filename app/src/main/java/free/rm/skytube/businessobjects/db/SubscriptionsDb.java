@@ -292,13 +292,17 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
     }
 
 	public List<String> getSubscribedChannelIds() {
-		try (Cursor cursor = getReadableDatabase().query(SubscriptionsTable.TABLE_NAME, new String[] {SubscriptionsTable.COL_CHANNEL_ID}, null, null, null, null, null)) {
-			List<String> result = new ArrayList<>();
+		List<String> result = new ArrayList<>();
+		try {
+			Cursor cursor = getReadableDatabase().rawQuery("SELECT "+SubscriptionsTable.COL_CHANNEL_ID + " FROM "+SubscriptionsTable.TABLE_NAME,null);
 			while(cursor.moveToNext()) {
 				result.add(cursor.getString(0));
 			}
-			return result;
+			cursor.close();
+		} catch (Exception e){
+			e.printStackTrace();
 		}
+		return result;
 	}
 
 	/**
