@@ -114,4 +114,10 @@
     <string name="pref_title_clear_playback_status">Rensa uppspelningsstatus</string>
     <string name="pref_summary_low_views_filter">Filtrera bort videor med låga visningar: %s</string>
     <string name="pref_youtube_api_key_custom">Nyckeln är giltig. Starta om appen för att använda den nya YouTube API-nyckeln.</string>
+    <string name="pref_popup_title_video_download_folder">Välj katalog</string>
+    <string name="pref_title_hide_tabs">Göm flikar</string>
+    <string name="pref_title_autocast">AutoCast</string>
+    <string name="pref_title_chromecast_none">Ingen</string>
+    <string name="pref_chromecast_category">Chromecast</string>
+    <string name="key_preferences">inställningar</string>
 </resources>
