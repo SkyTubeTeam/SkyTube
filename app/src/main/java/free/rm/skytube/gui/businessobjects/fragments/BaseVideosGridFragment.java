@@ -57,6 +57,7 @@ public abstract class BaseVideosGridFragment extends TabFragment implements Swip
 		if (videoGridAdapter == null) {
 			videoGridAdapter = new VideoGridAdapter();
 		}
+		videoGridAdapter.setContext(container.getContext());
 
 		View view = inflater.inflate(getLayoutResource(), container, false);
 
