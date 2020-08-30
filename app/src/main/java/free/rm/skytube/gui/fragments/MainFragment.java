@@ -215,6 +215,7 @@ public class MainFragment extends FragmentEx {
 	@Override
 	public void onDestroyView() {
 		subsAdapter.removeListener((MainActivityListener) getActivity());
+		subsListView.setAdapter(null); // cleanup the reference from the SubsAdapter back to the view
 		subsDrawerLayout = null;
 		super.onDestroyView();
 	}
