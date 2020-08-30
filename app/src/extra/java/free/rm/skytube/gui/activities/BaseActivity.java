@@ -457,11 +457,6 @@ public abstract class BaseActivity extends AppCompatActivity implements MainActi
 	}
 
 	@Override
-	public void onChannelClick(YouTubeChannel channel) {
-
-	}
-
-	@Override
 	public void onChannelClick(String channelId) {
 	}
 

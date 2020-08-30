@@ -33,8 +33,6 @@ public abstract class BaseActivity extends AppCompatActivity implements MainActi
 	protected void onOptionsMenuCreated(Menu menu) {}
 	public void onLayoutSet() {}
 	@Override
-	public void onChannelClick(YouTubeChannel channel) {}
-	@Override
 	public void onChannelClick(String channelId) {}
 	public void redrawPanel() {}
 	protected boolean isLocalPlayer() {
