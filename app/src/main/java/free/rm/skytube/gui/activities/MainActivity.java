@@ -86,8 +86,6 @@ public class MainActivity extends BaseActivity {
 	private PlaylistVideosFragment  playlistVideosFragment;
 	private VideoBlockerPlugin      videoBlockerPlugin;
 
-	private boolean dontAddToBackStack = false;
-
 	/** Set to true of the UpdatesCheckerTask has run; false otherwise. */
 	private static boolean updatesCheckerTaskRan = false;
 
@@ -170,15 +168,13 @@ public class MainActivity extends BaseActivity {
 		Logger.i(MainActivity.this, "Action is : " + action);
 		initMainFragment(action);
 		if(ACTION_VIEW_CHANNEL.equals(action)) {
-			dontAddToBackStack = true;
 			YouTubeChannel channel = (YouTubeChannel) intent.getSerializableExtra(ChannelBrowserFragment.CHANNEL_OBJ);
 			Logger.i(MainActivity.this, "Channel found: " + channel);
-			onChannelClick(channel);
+			onChannelClick(channel, false);
 		} else if(ACTION_VIEW_PLAYLIST.equals(action)) {
-			dontAddToBackStack = true;
 			YouTubePlaylist playlist = (YouTubePlaylist) intent.getSerializableExtra(PlaylistVideosFragment.PLAYLIST_OBJ);
 			Logger.i(MainActivity.this, "playlist found: " + playlist);
-			onPlaylistClick(playlist);
+			onPlaylistClick(playlist, false);
 		}
 	}
 
@@ -429,49 +425,48 @@ public class MainActivity extends BaseActivity {
 		}
 	}
 
-	private void switchToFragment(FragmentEx fragment) {
+	private void switchToFragment(FragmentEx fragment, boolean addToBackStack) {
 		FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
 		transaction.replace(R.id.fragment_container, fragment);
-		if(!dontAddToBackStack)
+		if(addToBackStack) {
 			transaction.addToBackStack(null);
-		else
-			dontAddToBackStack = false;
+		}
 		transaction.commit();
 	}
 
 
-	@Override
-	public void onChannelClick(YouTubeChannel channel) {
+	public void onChannelClick(YouTubeChannel channel, boolean addToBackStack) {
 		Bundle args = new Bundle();
 		args.putSerializable(ChannelBrowserFragment.CHANNEL_OBJ, channel);
-		switchToChannelBrowserFragment(args);
+		switchToChannelBrowserFragment(args, addToBackStack);
 	}
-
 
 	@Override
 	public void onChannelClick(String channelId) {
 		Bundle args = new Bundle();
 		args.putString(ChannelBrowserFragment.CHANNEL_ID, channelId);
-		switchToChannelBrowserFragment(args);
+		switchToChannelBrowserFragment(args, true);
 	}
 
-
-	private void switchToChannelBrowserFragment(Bundle args) {
+	private void switchToChannelBrowserFragment(Bundle args, boolean addToBackStack) {
 		channelBrowserFragment = new ChannelBrowserFragment();
 		channelBrowserFragment.getChannelPlaylistsFragment().setMainActivityListener(this);
 		channelBrowserFragment.setArguments(args);
-		switchToFragment(channelBrowserFragment);
+		switchToFragment(channelBrowserFragment, addToBackStack);
 	}
-
 
 	@Override
 	public void onPlaylistClick(YouTubePlaylist playlist) {
+		onPlaylistClick(playlist, true);
+	}
+
+	private void onPlaylistClick(YouTubePlaylist playlist, boolean addToBackStack) {
 		playlistVideosFragment = new PlaylistVideosFragment();
 		Bundle args = new Bundle();
 		args.putSerializable(PlaylistVideosFragment.PLAYLIST_OBJ, playlist);
 		playlistVideosFragment.setArguments(args);
-		switchToFragment(playlistVideosFragment);
+		switchToFragment(playlistVideosFragment, addToBackStack);
 	}
 
 
@@ -490,7 +485,7 @@ public class MainActivity extends BaseActivity {
 		Bundle bundle = new Bundle();
 		bundle.putString(SearchVideoGridFragment.QUERY, query);
 		searchVideoGridFragment.setArguments(bundle);
-		switchToFragment(searchVideoGridFragment);
+		switchToFragment(searchVideoGridFragment, true);
 	}
 
 

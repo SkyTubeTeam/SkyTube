@@ -33,13 +33,6 @@ public interface MainActivityListener {
 	void onChannelClick(String channelId);
 
 	/**
-	 * Called whenever a channel view has been clicked.
-	 *
-	 * @param channel Channel
-	 */
-	void onChannelClick(YouTubeChannel channel);
-
-	/**
 	 * Called when a playlist is clicked on
 	 */
 	void onPlaylistClick(YouTubePlaylist playlist);
