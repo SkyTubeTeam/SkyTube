@@ -46,6 +46,7 @@ import com.mikepenz.actionitembadge.library.utils.BadgeStyle;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -81,7 +82,6 @@ public class MainActivity extends BaseActivity {
 
 	private MainFragment            mainFragment;
 	private SearchVideoGridFragment searchVideoGridFragment;
-	private ChannelBrowserFragment  channelBrowserFragment;
 	/** Fragment that shows Videos from a specific Playlist */
 	private PlaylistVideosFragment  playlistVideosFragment;
 	private VideoBlockerPlugin      videoBlockerPlugin;
@@ -131,7 +131,6 @@ public class MainActivity extends BaseActivity {
 				final FragmentManager supportFragmentManager = getSupportFragmentManager();
 				mainFragment = (MainFragment) supportFragmentManager.getFragment(savedInstanceState, MAIN_FRAGMENT);
 				searchVideoGridFragment = (SearchVideoGridFragment) supportFragmentManager.getFragment(savedInstanceState, SEARCH_FRAGMENT);
-				channelBrowserFragment = (ChannelBrowserFragment) supportFragmentManager.getFragment(savedInstanceState, CHANNEL_BROWSER_FRAGMENT);
 				playlistVideosFragment = (PlaylistVideosFragment) supportFragmentManager.getFragment(savedInstanceState, PLAYLIST_VIDEOS_FRAGMENT);
 			}
 			handleIntent(getIntent());
@@ -206,6 +205,7 @@ public class MainActivity extends BaseActivity {
 		if(searchVideoGridFragment != null && searchVideoGridFragment.isVisible()) {
 			putFragment(supportFragmentManager, outState, SEARCH_FRAGMENT, searchVideoGridFragment);
 		}
+		ChannelBrowserFragment channelBrowserFragment = getChannelBrowserFragment();
 		if(channelBrowserFragment != null && channelBrowserFragment.isVisible()) {
 			putFragment(supportFragmentManager, outState, CHANNEL_BROWSER_FRAGMENT, channelBrowserFragment);
 		}
@@ -232,10 +232,21 @@ public class MainActivity extends BaseActivity {
 
 		// Activity may be destroyed when the devices is rotated, so we need to make sure that the
 		// channel play list is holding a reference to the activity being currently in use...
-		if (channelBrowserFragment != null)
+		ChannelBrowserFragment channelBrowserFragment = getChannelBrowserFragment();
+		if (channelBrowserFragment != null) {
 			channelBrowserFragment.getChannelPlaylistsFragment().setMainActivityListener(this);
+		}
 	}
 
+	private ChannelBrowserFragment getChannelBrowserFragment() {
+		List<Fragment> fragments = getSupportFragmentManager().getFragments();
+		for (Fragment fragment : fragments) {
+			if (fragment instanceof ChannelBrowserFragment) {
+				return (ChannelBrowserFragment) fragment;
+			}
+		}
+		return null;
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(final Menu menu) {
@@ -450,7 +461,7 @@ public class MainActivity extends BaseActivity {
 	}
 
 	private void switchToChannelBrowserFragment(Bundle args, boolean addToBackStack) {
-		channelBrowserFragment = new ChannelBrowserFragment();
+		ChannelBrowserFragment channelBrowserFragment = new ChannelBrowserFragment();
 		channelBrowserFragment.getChannelPlaylistsFragment().setMainActivityListener(this);
 		channelBrowserFragment.setArguments(args);
 		switchToFragment(channelBrowserFragment, addToBackStack);
