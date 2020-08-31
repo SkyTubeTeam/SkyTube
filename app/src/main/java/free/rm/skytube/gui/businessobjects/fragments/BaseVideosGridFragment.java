@@ -28,6 +28,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.db.PlaybackStatusDb;
 import free.rm.skytube.gui.businessobjects.adapters.VideoGridAdapter;
@@ -43,6 +44,8 @@ public abstract class BaseVideosGridFragment extends TabFragment implements Swip
 
 	@BindView(R.id.swipeRefreshLayout)
 	protected SwipeRefreshLayout swipeRefreshLayout;
+
+	protected Unbinder unbinder;
 
 	public BaseVideosGridFragment() {
 	}
@@ -61,7 +64,7 @@ public abstract class BaseVideosGridFragment extends TabFragment implements Swip
 
 		View view = inflater.inflate(getLayoutResource(), container, false);
 
-		ButterKnife.bind(this, view);
+		unbinder = ButterKnife.bind(this, view);
 		swipeRefreshLayout.setOnRefreshListener(this);
 
 		if (isFragmentSelected()) {
@@ -95,6 +98,7 @@ public abstract class BaseVideosGridFragment extends TabFragment implements Swip
 		super.onDestroy();
 		videoGridAdapter.onDestroy();
 		videoGridAdapter = null;
+		unbinder.unbind();
 	}
 
 	@Override
