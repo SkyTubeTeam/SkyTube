@@ -103,7 +103,7 @@ public class ChromecastControllerFragment extends ChromecastBaseControllerFragme
 		}
 		durationTextView.setMilliseconds(chromecastPlaybackProgressBar.getMax());
 		if(media.getMetadata().getImages().size() > 0) {
-			Picasso.with(getActivity().getApplicationContext())
+			Picasso.get()
 							.load(media.getMetadata().getImages().get(0).getUrl().toString())
 							.placeholder(R.drawable.thumbnail_default)
 							.into(videoImage);

@@ -42,7 +42,7 @@ public class YouTubeCommentThread {
 				List<Comment> commentRepliesList = commentThread.getReplies().getComments();
 				Collections.reverse(commentRepliesList);	// reverse as the newest comments are put at the front of the list -- so we need to invert it
 
-				for (com.google.api.services.youtube.model.Comment comment : commentRepliesList) {
+				for (Comment comment : commentRepliesList) {
 					repliesList.add(new YouTubeComment(comment));
 				}
 			}
