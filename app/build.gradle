@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 29
-    buildToolsVersion '29.0.2'
+    buildToolsVersion '29.0.3'
 
     defaultConfig {
         applicationId "free.rm.skytube"
@@ -64,9 +64,9 @@ android {
         }
     }
     // Generate APK filenames as follows:  <App Name>-<Flavor><Version>
-    android.applicationVariants.all { variant ->
-        variant.outputs.all { output ->
-            outputFileName = "${parent.name}-${variant.productFlavors[0].name.capitalize()}-${variant.versionName}.apk"
+    applicationVariants.all { variant ->
+        outputs.all { output ->
+            outputFileName = "${parent.name}-${productFlavors[0].name.capitalize()}-${versionName}.apk"
         }
     }
     // Ignore missing translations
@@ -82,7 +82,7 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     packagingOptions {
-        exclude "META-INF/DEPENDENCIES"
+        exclude "META-INF/*"
     }
 }
 
@@ -92,7 +92,7 @@ dependencies {
     // YouTube modules
     implementation 'com.github.SkyTubeTeam.google-http-java-client:google-http-client-android:1.34.3.1'
 
-    implementation ('com.google.apis:google-api-services-youtube:v3-rev20200312-1.30.9') {
+    implementation ('com.google.apis:google-api-services-youtube:v3-rev20200423-1.30.9') {
         exclude group: 'com.google.http-client', module:'google-http-client'
         exclude group: 'com.google.http-client', module:'google-http-client-jackson2'
     }
@@ -101,18 +101,18 @@ dependencies {
     implementation 'com.github.SkyTubeTeam.NewPipeExtractor:extractor:89ad9ee450a9e7fb7e'
 
     // other modules
-    implementation group: 'org.ocpsoft.prettytime', name: 'prettytime', version: '4.0.5.Final'
+    implementation 'org.ocpsoft.prettytime:prettytime:4.0.5.Final'
     implementation 'com.github.moraisigor:slidingdrawer:1.7.1'
-    implementation 'com.github.bumptech.glide:glide:4.10.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.10.0'
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
     implementation 'com.jakewharton:butterknife:10.2.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
     implementation 'com.google.code.gson:gson:2.8.6'
-    implementation group: 'joda-time', name: 'joda-time', version: '2.10.6'
-    implementation 'com.afollestad.material-dialogs:core:0.9.5.0'
+    implementation 'joda-time:joda-time:2.10.6'
+    implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
     implementation 'com.google.android.exoplayer:exoplayer:2.9.6'
     implementation 'org.jsoup:jsoup:1.13.1'
-    implementation (group: 'com.optimaize.languagedetector', name: 'language-detector', version: '0.6') {
+    implementation ('com.optimaize.languagedetector:language-detector:0.6') {
         exclude group: 'com.google.guava', module: 'guava'
         exclude group: 'com.intellij', module: 'annotations'
     }
@@ -136,10 +136,8 @@ dependencies {
 
     // proprietary module
     extraImplementation files('libs/YouTubeAndroidPlayerApi.jar')
-    extraImplementation 'com.android.support:mediarouter-v7:28.0.0'
-    extraImplementation 'com.google.android.gms:play-services-cast-framework:18.1.0'
-    extraImplementation 'com.googlecode.android-query:android-query:0.25.9'
+    extraImplementation 'com.google.android.gms:play-services-cast-framework:19.0.0'
     extraImplementation 'com.sothree.slidinguppanel:library:3.4.0'
     extraImplementation 'com.github.rahatarmanahmed:circularprogressview:2.5.0'
-    extraImplementation 'com.squareup.picasso:picasso:2.5.2'
+    extraImplementation 'com.squareup.picasso:picasso:2.71828'
 }
