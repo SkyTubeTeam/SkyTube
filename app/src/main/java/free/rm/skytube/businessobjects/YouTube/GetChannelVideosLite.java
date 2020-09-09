@@ -108,8 +108,10 @@ public class GetChannelVideosLite extends GetYouTubeVideos implements GetChannel
 
 		// append the video IDs into a strings (CSV)
 		for (Activity res : activityList) {
-			videoIds.append(res.getContentDetails().getUpload().getVideoId());
-			videoIds.append(',');
+			if (res.getContentDetails().getUpload() != null) {
+				videoIds.append(res.getContentDetails().getUpload().getVideoId());
+				videoIds.append(',');
+			}
 		}
 
 		// get video details by supplying the videos IDs

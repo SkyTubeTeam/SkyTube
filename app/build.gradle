@@ -6,19 +6,19 @@ android {
 
     defaultConfig {
         applicationId "free.rm.skytube"
-        minSdkVersion 14
+        minSdkVersion 16
         targetSdkVersion 28
 
         versionName "2.95"    // digits of the *fractional part* shall NOT be > than "9"
         versionCode 19
 
         // Third party devs:  pls be ethical and change the below keys
-        buildConfigField 'String',   'YOUTUBE_API_KEYS_DEBUG', '"AIzaSyC2r3UUbTzHf-iUqMrVc5TI6MMnQ_geDXs"'
+        buildConfigField 'String',   'YOUTUBE_API_KEYS_DEBUG', '"AIzaSyAEzlY8WP_BLzEWMJW_NHOLvw_zVyt9lBY"'
         buildConfigField 'String[]', 'YOUTUBE_API_KEYS',
                 '{' +
-                        '"AIzaSyC27jgPDHkQsQK8TW4ngrQprSCnlMTJ04w",' +
-                        '"AIzaSyCmXsaE6ZW14-1vM5zceWnGWnB73FkY7U4",' +
-                        '"AIzaSyBd3Loyy_XN2tPHPfc1E7EkSkdCqfzTHxg"'  +
+                        '"AIzaSyAEzlY8WP_BLzEWMJW_NHOLvw_zVyt9lBY",' +
+                        '"AIzaSyAEzlY8WP_BLzEWMJW_NHOLvw_zVyt9lBY",' +
+                        '"AIzaSyAEzlY8WP_BLzEWMJW_NHOLvw_zVyt9lBY"'  +
                 '}'
         buildConfigField 'String', 'SKYTUBE_WEBSITE',         '"https://skytube-app.com"'
         buildConfigField 'String', 'SKYTUBE_WEBSITE_CREDITS', '"https://skytube-app.com/credits.html"'
@@ -74,10 +74,10 @@ dependencies {
     // YouTube modules
     implementation 'com.google.http-client:google-http-client-android:1.32.1'
     implementation 'com.google.apis:google-api-services-youtube:v3-rev212-1.25.0'
-    implementation 'com.github.TeamNewPipe:NewPipeExtractor:0.18.2'
+    implementation 'com.github.TeamNewPipe:NewPipeExtractor:0.19.8'
 
     // other modules
-    implementation group: 'org.ocpsoft.prettytime', name: 'prettytime', version: '4.0.2.Final'
+    implementation group: 'org.ocpsoft.prettytime', name: 'prettytime', version: '4.0.3.Final'
     implementation 'com.github.moraisigor:slidingdrawer:1.7.1'
     implementation 'com.github.bumptech.glide:glide:4.10.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.10.0'
@@ -87,7 +87,7 @@ dependencies {
     implementation group: 'joda-time', name: 'joda-time', version: '2.10.4'
     implementation 'com.afollestad.material-dialogs:core:0.9.5.0'
     implementation 'com.github.angads25:filepicker:1.1.1'
-    implementation 'com.google.android.exoplayer:exoplayer:2.9.6'
+    implementation 'com.google.android.exoplayer:exoplayer:2.11.4'
     implementation 'com.klinkerapps:link_builder:1.6.1'
     implementation (group: 'com.optimaize.languagedetector', name: 'language-detector', version: '0.6') {
         exclude group: 'com.google.guava', module: 'guava'
@@ -96,12 +96,12 @@ dependencies {
     implementation "com.mikepenz:iconics-core:4.0.0@aar"
 
     // Android support modules
-    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.legacy:legacy-support-v13:1.0.0'
-    implementation 'com.google.android.material:material:1.2.0-alpha04'
+    implementation 'com.google.android.material:material:1.2.1'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'androidx.cardview:cardview:1.0.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
     implementation 'androidx.multidex:multidex:2.0.1' // as we have over 65536 lines of code...
 
     // proprietary module
