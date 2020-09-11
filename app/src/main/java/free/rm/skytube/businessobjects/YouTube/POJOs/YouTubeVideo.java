@@ -281,7 +281,7 @@ public class YouTubeVideo extends CardData implements Serializable {
 	 */
 	public String getThumbsUpPercentageStr() {
 		// round the liked percentage to 0 decimal places and convert it to string
-		return thumbsUpPercentage >= 0 ? String.valueOf(thumbsUpPercentage) + "%" : null;
+		return thumbsUpPercentage >= 0 ? thumbsUpPercentage + "%" : null;
 	}
 
 	/**
