@@ -154,9 +154,7 @@ public class SubsAdapter extends RecyclerViewAdapterEx<ChannelView, SubsAdapter.
 	}
 
 	private void executeQuery(String searchText, View progressBar) {
-		new GetSubscribedChannelViewTask(searchText, progressBar, channelViews -> {
-			appendList(channelViews);
-		}).executeInParallel();
+		new GetSubscribedChannelViewTask(searchText, progressBar, this::appendList).executeInParallel();
 	}
 
 	public void filterSubSearch(String searchText){

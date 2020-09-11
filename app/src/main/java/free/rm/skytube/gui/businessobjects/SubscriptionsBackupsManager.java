@@ -3,6 +3,7 @@ package free.rm.skytube.gui.businessobjects;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -110,9 +111,7 @@ public class SubscriptionsBackupsManager {
 						parseImportedSubscriptions(uri);
 					}
 				})
-				.withOnCancelListener(dialog1 -> {
-					dialog1.cancel();
-				});
+				.withOnCancelListener(DialogInterface::cancel);
 		if(importDb) {
 			dialog.withFilter(false, false, "skytube");
 		} else {

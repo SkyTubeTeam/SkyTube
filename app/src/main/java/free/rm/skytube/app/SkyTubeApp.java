@@ -364,9 +364,8 @@ public class SkyTubeApp extends MultiDexApplication {
 				break;
 			}
 			case PLAYLIST: {
-				new GetPlaylistTask(ctx, content.getId(), playlist -> {
-					launchPlaylist(playlist, ctx);
-				}).executeInParallel();
+				new GetPlaylistTask(ctx, content.getId(), playlist ->
+						launchPlaylist(playlist, ctx)).executeInParallel();
 				break;
 			}
 			default: {

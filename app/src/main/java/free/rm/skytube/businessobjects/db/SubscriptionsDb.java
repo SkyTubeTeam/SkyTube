@@ -309,13 +309,11 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 	 * @throws IOException
 	 */
 	private List<YouTubeChannel> getSubscribedChannels(SQLiteDatabase db) throws IOException {
-		Cursor cursor = null;
-		try {
-			cursor = db.query(SubscriptionsTable.TABLE_NAME,
-					SubscriptionsTable.ALL_COLUMNS,
-					null, null,
-					null, null,
-					SubscriptionsTable.COL_ID + " ASC");
+		try (Cursor cursor = db.query(SubscriptionsTable.TABLE_NAME,
+				SubscriptionsTable.ALL_COLUMNS,
+				null, null,
+				null, null,
+				SubscriptionsTable.COL_ID + " ASC")) {
 
 			List<YouTubeChannel> subsChannels = new ArrayList<>();
 
@@ -339,20 +337,14 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 
 			}
 			return subsChannels;
-		} finally {
-			if (cursor != null) {
-				cursor.close();
-			}
 		}
 	}
 
 	public YouTubeChannel getCachedSubscribedChannel(String channelId) {
-		Cursor cursor = null;
-		try {
-			cursor = getReadableDatabase().query(SubscriptionsTable.TABLE_NAME,
-					SubscriptionsTable.ALL_COLUMNS,
-					SubscriptionsTable.COL_CHANNEL_ID + " = ?", new String[] { channelId },
-					null, null,null);
+		try (Cursor cursor = getReadableDatabase().query(SubscriptionsTable.TABLE_NAME,
+				SubscriptionsTable.ALL_COLUMNS,
+				SubscriptionsTable.COL_CHANNEL_ID + " = ?", new String[]{channelId},
+				null, null, null)) {
 
 			YouTubeChannel channel = null;
 
@@ -375,10 +367,6 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 			}
 
 			return channel;
-		} finally {
-			if (cursor != null) {
-				cursor.close();
-			}
 		}
 	}
 
@@ -517,17 +505,11 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 
 
 	private boolean hasVideo(YouTubeVideo video) {
-		Cursor cursor = null;
-		try {
-			cursor = getReadableDatabase().rawQuery(HAS_VIDEO_QUERY, new String[]{video.getId()});
+		try (Cursor cursor = getReadableDatabase().rawQuery(HAS_VIDEO_QUERY, new String[]{video.getId()})) {
 			if (cursor.moveToFirst()) {
 				return cursor.getInt(0) > 0;
 			}
 			return false;
-		} finally {
-			if (cursor != null) {
-				cursor.close();
-			}
 		}
 	}
 
@@ -678,18 +660,14 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
     }
 
     private Gson createGson() {
-    	return new GsonBuilder().registerTypeAdapter(YouTubeChannel.class, new JsonSerializer<YouTubeChannel>() {
-
-			@Override
-			public JsonElement serialize(YouTubeChannel src, Type typeOfSrc, JsonSerializationContext context) {
-				JsonObject obj = new JsonObject();
-				obj.addProperty("id", src.getId());
-				obj.addProperty("title", src.getTitle());
-				obj.addProperty("description", src.getDescription());
-				obj.addProperty("thumbnailNormalUrl", src.getThumbnailUrl());
-				obj.addProperty("bannerUrl", src.getBannerUrl());
-				return obj;
-			}
+    	return new GsonBuilder().registerTypeAdapter(YouTubeChannel.class, (JsonSerializer<YouTubeChannel>) (src, typeOfSrc, context) -> {
+			JsonObject obj = new JsonObject();
+			obj.addProperty("id", src.getId());
+			obj.addProperty("title", src.getTitle());
+			obj.addProperty("description", src.getDescription());
+			obj.addProperty("thumbnailNormalUrl", src.getThumbnailUrl());
+			obj.addProperty("bannerUrl", src.getBannerUrl());
+			return obj;
 		}).create();
 	}
 
@@ -853,7 +831,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 			while(cursor.moveToNext()) {
 				Long lastVisit = cursor.getLong(colLastVisit);
 				Long latestVideoTs = cursor.getLong(colLatestVideoTs);
-				boolean hasNew = (latestVideoTs != null && (lastVisit == null || latestVideoTs.longValue() > lastVisit.longValue()));
+				boolean hasNew = (latestVideoTs != null && (lastVisit == null || latestVideoTs > lastVisit));
 				result.add(new ChannelView(cursor.getString(channelId), cursor.getString(title), cursor.getString(thumbnail), hasNew));
 			}
 			return result;

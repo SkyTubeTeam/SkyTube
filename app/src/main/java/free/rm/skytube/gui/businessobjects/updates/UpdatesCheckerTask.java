@@ -84,9 +84,8 @@ public class UpdatesCheckerTask extends AsyncTaskParallel<Void, Void, UpdatesChe
 			new AlertDialog.Builder(context)
 					.setTitle(String.format(context.getString(R.string.release_notes), updatesChecker.getLatestApkVersion()))
 					.setMessage(updatesChecker.getReleaseNotes())
-					.setNeutralButton(R.string.ok, (dialog,button) -> {
-						SkyTubeApp.getSettings().setDisplayedReleaseNoteTag(currentVersionNumber);
-					})
+					.setNeutralButton(R.string.ok, (dialog,button) ->
+							SkyTubeApp.getSettings().setDisplayedReleaseNoteTag(currentVersionNumber))
 					.show();
 		}
 	}

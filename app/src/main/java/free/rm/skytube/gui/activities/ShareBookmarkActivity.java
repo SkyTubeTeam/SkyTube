@@ -33,9 +33,7 @@ public class ShareBookmarkActivity extends AppCompatActivity {
                     } else {
                         invalidUrlError();
                     }
-                }).setFinishCallback(() -> {
-                    finish();
-                }).executeInParallel();
+                }).setFinishCallback(this::finish).executeInParallel();
             } else {
                 SkyTubeApp.openUrl(this, text_data, false);
                 finish();
