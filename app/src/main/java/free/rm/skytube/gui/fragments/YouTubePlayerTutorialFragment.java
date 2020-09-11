@@ -42,7 +42,7 @@ public class YouTubePlayerTutorialFragment extends ImmersiveModeFragment impleme
 	private TextView                        nextTextView;
 	private TextView                        pageCounterTextView;
 	/** Tutorial slides layout resources. */
-	private final static int tutorialSlideViews[] = {R.layout.tutorial_player_1, R.layout.tutorial_player_2, R.layout.tutorial_player_3, R.layout.tutorial_player_4, R.layout.tutorial_player_5, R.layout.tutorial_player_6};
+	private final static int[] tutorialSlideViews = {R.layout.tutorial_player_1, R.layout.tutorial_player_2, R.layout.tutorial_player_3, R.layout.tutorial_player_4, R.layout.tutorial_player_5, R.layout.tutorial_player_6};
 
 
 	@Nullable

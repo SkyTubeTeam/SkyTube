@@ -43,7 +43,7 @@ public class GetSubscribedChannelViewTask extends AsyncTaskParallel<Void, Void, 
         this.searchText = searchText;
         this.progressBar = progressBar;
         this.callback = callback;
-        this.sortChannelsAlphabetically = SkyTubeApp.getPreferenceManager().getBoolean(SkyTubeApp.getStr(R.string.pref_key_subscriptions_alphabetical_order), false);;
+        this.sortChannelsAlphabetically = SkyTubeApp.getPreferenceManager().getBoolean(SkyTubeApp.getStr(R.string.pref_key_subscriptions_alphabetical_order), false);
     }
 
     @Override
