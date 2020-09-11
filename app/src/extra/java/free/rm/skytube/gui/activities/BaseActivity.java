@@ -71,7 +71,6 @@ import free.rm.skytube.gui.businessobjects.MainActivityListener;
 import free.rm.skytube.gui.businessobjects.YouTubePlayer;
 import free.rm.skytube.gui.fragments.ChromecastControllerFragment;
 import free.rm.skytube.gui.fragments.ChromecastMiniControllerFragment;
-import free.rm.skytube.gui.fragments.YouTubePlayerV1Fragment;
 
 /**
  * Base Activity class that handles all Chromecast-related functionality. Any Activity that needs to use the Cast Icon and
@@ -437,7 +436,7 @@ public abstract class BaseActivity extends AppCompatActivity implements MainActi
 	public void redrawPanel() {
 		final LinearLayout chromecastControllersContainer = (LinearLayout)findViewById(R.id.chromecastControllersContainer);
 		if(chromecastControllersContainer != null) {
-			chromecastControllersContainer.post(() -> chromecastControllersContainer.requestLayout());
+			chromecastControllersContainer.post(chromecastControllersContainer::requestLayout);
 		}
 	}
 
@@ -473,9 +472,8 @@ public abstract class BaseActivity extends AppCompatActivity implements MainActi
 	public void playVideoOnChromecast(final YouTubeVideo video, final int position) {
 		showLoadingSpinner();
 		if(video.getDescription() == null) {
-			new GetVideoDescriptionTask(video, description -> {
-				playVideoOnChromecast(video, position);
-			}).executeInParallel();
+			new GetVideoDescriptionTask(video, description ->
+					playVideoOnChromecast(video, position)).executeInParallel();
 		} else {
 			video.getDesiredStream(new GetDesiredStreamListener() {
 				@Override

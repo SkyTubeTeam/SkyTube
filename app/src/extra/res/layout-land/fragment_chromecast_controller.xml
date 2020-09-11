@@ -16,7 +16,7 @@
 
 		<LinearLayout
 			android:layout_width="match_parent"
-			android:layout_height="match_parent"
+			android:layout_height="wrap_content"
 			android:orientation="vertical">
 
 			<LinearLayout
@@ -58,7 +58,7 @@
 
 						<SeekBar
 							android:id="@+id/chromecastPlaybackProgressBar"
-							android:layout_width="match_parent"
+							android:layout_width="0dp"
 							android:layout_height="wrap_content"
 							android:layout_weight="1"/>
 
@@ -120,7 +120,6 @@
 
 							<com.github.rahatarmanahmed.cpv.CircularProgressView
 								android:id="@+id/bufferingSpinner"
-								xmlns:app="http://schemas.android.com/apk/res-auto"
 								android:layout_width="32dp"
 								android:layout_height="32dp"
 								android:layout_gravity="center"
@@ -142,7 +141,9 @@
 
 			</LinearLayout>
 
-			<include android:id="@+id/videoDescription" layout="@layout/video_description"></include>
+			<include
+				android:id="@+id/videoDescription"
+				layout="@layout/video_description" />
 
 		</LinearLayout>
 	</ScrollView>

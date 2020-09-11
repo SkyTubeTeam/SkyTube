@@ -31,7 +31,7 @@ import free.rm.skytube.gui.businessobjects.MainActivityListener;
 public abstract class BaseActivity extends AppCompatActivity implements MainActivityListener {
 	// No-op methods that aren't necessarily needed by all classes that extend this one
 	protected void onOptionsMenuCreated(Menu menu) {}
-	public void onLayoutSet() {};
+	public void onLayoutSet() {}
 	@Override
 	public void onChannelClick(YouTubeChannel channel) {}
 	@Override

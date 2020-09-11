@@ -26,7 +26,7 @@
 			tools:node="replace">
 
 		</activity>
-		<activity android:name=".gui.activities.NotificationClickActivity"></activity>
+		<activity android:name=".gui.activities.NotificationClickActivity" />
 
 
 		<activity android:name=".gui.activities.RouterActivity"

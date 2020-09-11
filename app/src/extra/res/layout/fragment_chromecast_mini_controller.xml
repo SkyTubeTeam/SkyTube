@@ -58,7 +58,7 @@
 			android:orientation="vertical"
 			android:layout_height="match_parent"
 			android:layout_weight="1"
-			android:layout_width="match_parent"
+			android:layout_width="0dp"
 			android:id="@+id/chromeCastMiniControllerMiddleContainer">
 
 			<!-- This ImageView should be switch to visible when a now playing screen is added -->
@@ -134,7 +134,6 @@
 						/>
 
 					<com.github.rahatarmanahmed.cpv.CircularProgressView
-						xmlns:app="http://schemas.android.com/apk/res-auto"
 						android:id="@+id/bufferingSpinner"
 						android:layout_width="32dp"
 						android:layout_height="32dp"
