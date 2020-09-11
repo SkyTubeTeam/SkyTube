@@ -69,8 +69,8 @@ public class OthersPreferenceFragment extends PreferenceFragment implements Shar
 
 				}
 			}
-			defaultTabPref.setEntries(defaultTabEntries.toArray(new CharSequence[defaultTabEntries.size()]));
-			defaultTabPref.setEntryValues(defaultTabEntryValues.toArray(new CharSequence[defaultTabEntryValues.size()]));
+			defaultTabPref.setEntries(defaultTabEntries.toArray(new CharSequence[0]));
+			defaultTabPref.setEntryValues(defaultTabEntryValues.toArray(new CharSequence[0]));
 		}
 		if (defaultTabPref.getValue() == null) {
 			defaultTabPref.setValueIndex(0);

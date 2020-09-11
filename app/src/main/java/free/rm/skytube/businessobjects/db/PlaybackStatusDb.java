@@ -170,7 +170,7 @@ public class PlaybackStatusDb extends SQLiteOpenHelperEx {
 	/**
 	 * Class that contains the position and watched status of a video.
 	 */
-	public class VideoWatchedStatus {
+	public static class VideoWatchedStatus {
 		public VideoWatchedStatus() {}
 		public VideoWatchedStatus(long position, boolean watched) {
 			this.position = position;
