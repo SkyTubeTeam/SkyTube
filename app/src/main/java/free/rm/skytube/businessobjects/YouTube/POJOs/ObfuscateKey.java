@@ -25,14 +25,13 @@ import com.google.common.base.Charsets;
 public class ObfuscateKey {
     private final byte[] S = new byte[256];
     private final byte[] T = new byte[256];
-    private final int keylen;
 
     public ObfuscateKey(final byte[] key) {
         if (key.length < 1 || key.length > 256) {
             throw new IllegalArgumentException(
                     "key must be between 1 and 256 bytes");
         } else {
-            keylen = key.length;
+            int keylen = key.length;
             for (int i = 0; i < 256; i++) {
                 S[i] = (byte) i;
                 T[i] = key[i % keylen];

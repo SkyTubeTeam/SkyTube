@@ -49,7 +49,6 @@ import free.rm.skytube.gui.businessobjects.YouTubePlayer;
  */
 public class CommentsAdapter extends BaseExpandableListAdapter {
 
-	private final String				videoId;
 	private PagerBackend<YouTubeCommentThread> commentThreadPager;
 	private List<YouTubeCommentThread>	commentThreadsList = new ArrayList<>();
 	private GetCommentsTask				getCommentsTask = null;
@@ -64,7 +63,6 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
 
 	public CommentsAdapter(Context context, String videoId, ExpandableListView expandableListView, View commentsProgressBar, View noVideoCommentsView) {
 		this.context = context;
-		this.videoId = videoId;
 		this.expandableListView = expandableListView;
 		this.expandableListView.setAdapter(this);
 		this.expandableListView.setOnGroupClickListener((parent, v, groupPosition, id) -> true);

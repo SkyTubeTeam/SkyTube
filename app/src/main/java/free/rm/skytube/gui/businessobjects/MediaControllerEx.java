@@ -32,7 +32,6 @@ import free.rm.skytube.businessobjects.interfaces.YouTubePlayerFragmentInterface
  */
 public class MediaControllerEx extends MediaController {
 
-	private VideoView   videoView;
 	private boolean     hideController = false;
 	private YouTubePlayerFragmentInterface fragmentInterface;
 
@@ -45,8 +44,7 @@ public class MediaControllerEx extends MediaController {
 	 */
 	public MediaControllerEx(Activity activity, VideoView videoView, YouTubePlayerFragmentInterface fragmentInterface) {
 		super(activity);
-		this.videoView = videoView;
-		this.videoView.setMediaController(this);
+		videoView.setMediaController(this);
 		this.fragmentInterface = fragmentInterface;
 	}
 

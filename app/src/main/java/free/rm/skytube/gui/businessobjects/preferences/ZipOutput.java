@@ -34,7 +34,6 @@ import java.util.zip.ZipOutputStream;
 // @RequiresApi(api = Build.VERSION_CODES.KITKAT)
 public class ZipOutput { // implements AutoCloseable {
     private static final String TAG = ZipOutput.class.getSimpleName();
-    private final File zipFilePath;
 
     private static final int BUFFER_SIZE = 2048;
     private FileOutputStream dest;
@@ -47,7 +46,6 @@ public class ZipOutput { // implements AutoCloseable {
      * @param zipFilePath   The zip file.
      */
     public ZipOutput(File zipFilePath) throws FileNotFoundException {
-        this.zipFilePath = zipFilePath;
         this.dest            = new FileOutputStream(zipFilePath);
         this.outputZipStream = new ZipOutputStream(new BufferedOutputStream(dest));
     }
