@@ -89,7 +89,7 @@ public class TLSSocketFactory extends SSLSocketFactory {
     }
 
     private Socket enableTLSOnSocket(Socket socket) {
-        if (socket != null && (socket instanceof SSLSocket)) {
+        if (socket instanceof SSLSocket) {
             String[] protocols = filterTLS((SSLSocket) socket);
             if (protocols.length > 0) {
                 ((SSLSocket) socket).setEnabledProtocols(protocols);

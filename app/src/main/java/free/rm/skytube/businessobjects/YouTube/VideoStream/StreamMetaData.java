@@ -64,21 +64,15 @@ public class StreamMetaData {
 
 	@Override
 	public String toString() {
-		StringBuilder str = new StringBuilder();
-
-		str.append("URI:  ");
-		str.append(uri);
-		str.append('\n');
-
-		str.append("FORMAT:  ");
-		str.append(format);
-		str.append('\n');
-
-		str.append("RESOLUTION:  ");
-		str.append(resolution);
-		str.append('\n');
-
-		return str.toString();
+		return "URI:  " +
+				uri +
+				'\n' +
+				"FORMAT:  " +
+				format +
+				'\n' +
+				"RESOLUTION:  " +
+				resolution +
+				'\n';
 	}
 
 }
