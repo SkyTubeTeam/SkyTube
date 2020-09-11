@@ -91,15 +91,13 @@ public class YouTubePlayerActivity extends BaseActivity implements YouTubePlayer
 	// If the back button in the toolbar is hit, save the video's progress (if playback history is not disabled)
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-			// close this activity when the user clicks on the back button (action bar)
-			case android.R.id.home:
-				fragmentListener.videoPlaybackStopped();
-				finish();
-				return true;
-			default:
-				return super.onOptionsItemSelected(item);
+		// close this activity when the user clicks on the back button (action bar)
+		if (item.getItemId() == android.R.id.home) {
+			fragmentListener.videoPlaybackStopped();
+			finish();
+			return true;
 		}
+		return super.onOptionsItemSelected(item);
 	}
 
 	@Override

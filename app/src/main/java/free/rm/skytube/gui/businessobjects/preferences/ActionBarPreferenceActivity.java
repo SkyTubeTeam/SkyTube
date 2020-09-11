@@ -83,15 +83,12 @@ public class ActionBarPreferenceActivity extends PreferenceActivity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-			case android.R.id.home:
-				// Old versions of Android did not handle when the user presses the back (<-) action
-				// bar's button.  Hence why it is explicitly being handled...
-				onBackPressed();
-				return true;
-			default:
-				return super.onOptionsItemSelected(item);
+		if (item.getItemId() == android.R.id.home) {// Old versions of Android did not handle when the user presses the back (<-) action
+			// bar's button.  Hence why it is explicitly being handled...
+			onBackPressed();
+			return true;
 		}
+		return super.onOptionsItemSelected(item);
 	}
 
 	@NonNull

@@ -122,10 +122,7 @@ public class NewPipeService {
             return id;
         }
         id = parse(streamingService.getPlaylistLHFactory(), url, StreamingService.LinkType.PLAYLIST);
-        if (id != null) {
-            return id;
-        }
-        return null;
+        return id;
     }
 
     private ContentId parse(LinkHandlerFactory handlerFactory, String url, StreamingService.LinkType type) throws FoundAdException {

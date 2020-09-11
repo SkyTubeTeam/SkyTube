@@ -373,11 +373,10 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 
 				if (forwardDirection) {
 					indicatorImageView.setImageResource(R.drawable.ic_forward);
-					indicatorTextView.setText(targetTimeString);
 				} else {
 					indicatorImageView.setImageResource(R.drawable.ic_rewind);
-					indicatorTextView.setText(targetTimeString);
 				}
+				indicatorTextView.setText(targetTimeString);
 
 				showIndicator();
 

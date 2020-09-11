@@ -50,10 +50,8 @@ public class VideoDuration {
 			if (minutes < 10) {
 				s.append('0');
 			}
-			s.append(minutes);
-		} else {
-			s.append(minutes);
 		}
+		s.append(minutes);
 		s.append(':');
 		if (seconds < 10) {
 			s.append('0');
