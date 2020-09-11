@@ -53,9 +53,8 @@ public class UpdatesChecker {
 	 * Check for app updates.  If an update is available, {@link this#latestApkUrl} and {@link this#latestApkVersion}
 	 * will be set.
 	 *
-	 * @return True if if an update is available;  false otherwise.
 	 */
-	public boolean checkForUpdates() {
+	public void checkForUpdates() {
 		updatesAvailable = false;
 		boolean oss = BuildConfig.FLAVOR.equalsIgnoreCase("oss");
 
@@ -89,7 +88,6 @@ public class UpdatesChecker {
 				Log.e(TAG, "An error has occurred while checking for updates", e);
 			}
 		}
-		return updatesAvailable;
 	}
 
 
