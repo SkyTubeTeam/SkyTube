@@ -49,8 +49,7 @@ public class PermissionsActivity extends AppCompatActivity {
 
 		permissionsTask = (PermissionsTask) getIntent().getExtras().getSerializable(PERMISSIONS_TASK_OBJ);
 
-		if ((android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M  &&  hasAccessToExtStorage(EXT_STORAGE_PERM_CODE))
-			|| android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M || hasAccessToExtStorage(EXT_STORAGE_PERM_CODE)) {
 				permissionsTask.onExternalStoragePermissionsGranted();
 				finish();
 		}
@@ -93,12 +92,11 @@ public class PermissionsActivity extends AppCompatActivity {
 			if (grantResults.length > 0  &&  grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 				// permission was granted by the user
 				permissionsTask.onExternalStoragePermissionsGranted();
-				finish();
 
 			} else {
 				// permission denied by the user
-				finish();
 			}
+			finish();
 		}
 	}
 

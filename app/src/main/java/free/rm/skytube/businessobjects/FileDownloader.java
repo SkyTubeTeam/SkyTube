@@ -144,7 +144,7 @@ public abstract class FileDownloader implements Serializable, PermissionsActivit
 	private void checkIfVariablesWereSet() {
 		if (remoteFileUrl == null  ||  dirType == null  ||  title == null
 				||  outputFileName == null  ||  allowedOverRoaming == null
-				|| (allowedOverRoaming == false  &&  allowedNetworkTypesFlags == null)) {
+				|| (!allowedOverRoaming &&  allowedNetworkTypesFlags == null)) {
 			throw new IllegalStateException("One of the parameters was not set for the FileDownloader");
 		}
 
