@@ -20,10 +20,11 @@ package free.rm.skytube.businessobjects.YouTube.POJOs;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 
-import com.google.api.client.extensions.android.http.AndroidHttp;
+import com.google.api.client.extensions.android.json.AndroidJsonFactory;
 import com.google.api.client.http.HttpRequest;
 import com.google.api.client.http.HttpRequestInitializer;
 import com.google.api.client.http.HttpTransport;
+import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.services.youtube.YouTube;
 import com.google.common.io.BaseEncoding;
@@ -47,8 +48,8 @@ public class YouTubeAPI {
 	 * @return {@link YouTube}
 	 */
 	public static YouTube create() {
-		HttpTransport httpTransport = AndroidHttp.newCompatibleTransport();
-		JsonFactory jsonFactory = com.google.api.client.extensions.android.json.AndroidJsonFactory.getDefaultInstance();
+		HttpTransport httpTransport = new NetHttpTransport();
+		JsonFactory jsonFactory = AndroidJsonFactory.getDefaultInstance();
 		return new YouTube.Builder(httpTransport, jsonFactory, new HttpRequestInitializer() {
 			private String getSha1() {
 				String sha1 = null;
