@@ -387,8 +387,7 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 
 		@Override
 		protected List<String> doInBackground(Void... params) {
-			List<String> channelIds = SubscriptionsDb.getSubscriptionsDb().getSubscribedChannelIds();
-			return channelIds;
+			return SubscriptionsDb.getSubscriptionsDb().getSubscribedChannelIds();
 		}
 
 

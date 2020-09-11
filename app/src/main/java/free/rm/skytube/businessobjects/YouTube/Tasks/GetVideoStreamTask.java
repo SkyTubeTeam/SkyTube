@@ -41,9 +41,7 @@ public class GetVideoStreamTask extends AsyncTaskParallel<Void, Exception, Strea
 
     @Override
     protected StreamMetaDataList doInBackground(Void... param) {
-        StreamMetaDataList streamMetaDataList = NewPipeService.get().getStreamMetaDataList(youTubeVideo.getId());
-
-        return streamMetaDataList;
+        return NewPipeService.get().getStreamMetaDataList(youTubeVideo.getId());
     }
 
     @Override

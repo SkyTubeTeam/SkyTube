@@ -117,8 +117,7 @@ public class UpdatesChecker {
 	 * @throws JSONException
 	 */
 	private String getLatestVersionNumber(JSONObject json) throws JSONException {
-		String  versionNumberStr = json.getString("tag_name").substring(1);  // tag_name = "v2.0" --> so we are going to delete the 'v' character
-		return versionNumberStr;
+		return json.getString("tag_name").substring(1);
 	}
 
 

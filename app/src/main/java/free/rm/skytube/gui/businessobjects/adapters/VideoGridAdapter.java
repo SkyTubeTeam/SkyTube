@@ -162,8 +162,7 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<CardData, GridViewHo
 	public GridViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 		setContext(parent.getContext());
 		View v = LayoutInflater.from(getContext()).inflate(R.layout.video_cell, parent, false);
-		final GridViewHolder gridViewHolder = new GridViewHolder(v, listener, showChannelInfo);
-		return gridViewHolder;
+		return new GridViewHolder(v, listener, showChannelInfo);
 	}
 
 	/**

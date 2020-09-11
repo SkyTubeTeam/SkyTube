@@ -221,10 +221,9 @@ public class SkyTubeApp extends MultiDexApplication {
 		NotificationManager notificationManager =
 				(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
-		String channelId = NEW_VIDEOS_NOTIFICATION_CHANNEL;
 		CharSequence channelName = context.getString(R.string.notification_channel_feed_title);
 		int importance = NotificationManager.IMPORTANCE_LOW;
-		NotificationChannel notificationChannel = new NotificationChannel(channelId, channelName, importance);
+		NotificationChannel notificationChannel = new NotificationChannel(NEW_VIDEOS_NOTIFICATION_CHANNEL, channelName, importance);
 		notificationChannel.enableLights(true);
 		notificationChannel.setLightColor(ColorUtils.compositeColors(0xFFFF0000, 0xFFFF0000));
 		notificationChannel.enableVibration(false);
