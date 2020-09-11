@@ -113,6 +113,6 @@ public class TLSSocketFactory extends SSLSocketFactory {
             }
         }
         Log.i("TLSSocketFactory", "Enabled protocols: "+result);
-        return result.toArray(new String[result.size()]);
+        return result.toArray(new String[0]);
     }
 }
