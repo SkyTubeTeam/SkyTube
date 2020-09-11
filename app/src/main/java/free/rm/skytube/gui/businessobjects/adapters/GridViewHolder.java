@@ -131,7 +131,7 @@ public class GridViewHolder extends RecyclerView.ViewHolder implements Serializa
 
 		view.findViewById(R.id.channel_layout).setOnClickListener(showChannelInfo ? channelOnClickListener : null);
 
-		optionsButton.setOnClickListener(v -> onOptionsButtonClick(v));
+		optionsButton.setOnClickListener(this::onOptionsButtonClick);
 	}
 
 	/**

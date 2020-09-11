@@ -240,9 +240,8 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 		if (forcedFullRefresh && SkyTubeApp.isConnected(getContext())) {
 			unsetFlag(FLAG_REFRESH_FEED_FULL);
 			refreshInProgress = true;
-			new GetSubscribedChannelsTask(this.getContext(), channelsRefreshed -> {
-				Log.i("SUB FRAGMENT", "Refreshed "+ channelsRefreshed.size());
-			}).executeInParallel();
+			new GetSubscribedChannelsTask(this.getContext(), channelsRefreshed ->
+					Log.i("SUB FRAGMENT", "Refreshed "+ channelsRefreshed.size())).executeInParallel();
 			new RefreshFeedTask(showFetchingVideosDialog, forcedFullRefresh).executeInParallel();
 		} else {
 			videoGridAdapter.refresh(true);

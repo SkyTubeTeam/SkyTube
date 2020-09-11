@@ -70,13 +70,10 @@ public class SearchVideoGridFragment extends VideosGridFragment {
 			actionBar.setTitle(searchQuery);
 
 		//makes searched query editable on long press
-		toolbar.setOnLongClickListener(new View.OnLongClickListener() {
-			@Override
-			public boolean onLongClick(View view) {
-				editSearchView.setIconified(false);
-				editSearchView.setQuery(searchQuery,false);
-				return false;
-			}
+		toolbar.setOnLongClickListener(view1 -> {
+			editSearchView.setIconified(false);
+			editSearchView.setQuery(searchQuery,false);
+			return false;
 		});
 		// the app will call onCreateOptionsMenu() for when the user wants to search
 		setHasOptionsMenu(true);

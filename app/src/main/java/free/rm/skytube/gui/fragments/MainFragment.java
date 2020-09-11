@@ -194,9 +194,9 @@ public class MainFragment extends FragmentEx {
 			// Create a list of non-hidden fragments in order to default to the proper tab
 			Set<String> hiddenFragments = SkyTubeApp.getSettings().getHiddenTabs();
 			List<String> shownFragmentList = new ArrayList<>();
-			for (int i = 0; i < tabListValues.length; i++) {
-				if (!hiddenFragments.contains(tabListValues[i]))
-					shownFragmentList.add(tabListValues[i]);
+			for (final String tabListValue : tabListValues) {
+				if (!hiddenFragments.contains(tabListValue))
+					shownFragmentList.add(tabListValue);
 			}
 			viewPager.setCurrentItem(shownFragmentList.indexOf(defaultTab));
 		}
