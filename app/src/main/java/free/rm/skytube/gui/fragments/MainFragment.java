@@ -29,15 +29,12 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.Logger;
-import free.rm.skytube.businessobjects.db.BookmarksDb;
-import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
 import free.rm.skytube.gui.activities.BaseActivity;
 import free.rm.skytube.gui.businessobjects.MainActivityListener;
 import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
@@ -344,7 +341,7 @@ public class MainFragment extends FragmentEx {
 			return videoGridFragmentsList.get(tab.getPosition());
 		}
 
-		public boolean notifyTab(TabLayout.Tab tab, boolean onSelect) {
+		public void notifyTab(TabLayout.Tab tab, boolean onSelect) {
 			VideosGridFragment fragment = videoGridFragmentsList.get(tab.getPosition());
 			if (fragment != null) {
 				if (onSelect) {
@@ -352,9 +349,7 @@ public class MainFragment extends FragmentEx {
 				} else {
 					fragment.onFragmentUnselected();
 				}
-				return true;
 			}
-			return false;
 		}
 
 		public void selectTabAtPosition(int position) {

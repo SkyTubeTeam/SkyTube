@@ -66,7 +66,7 @@ public class Settings {
     }
 
     public boolean isDisableSearchHistory() {
-        return getSharedPreferences().getBoolean(app.getStr(R.string.pref_key_disable_search_history), false);
+        return getSharedPreferences().getBoolean(SkyTubeApp.getStr(R.string.pref_key_disable_search_history), false);
     }
 
     public void setWarningMobilePolicy(Policy warnPolicy) {
@@ -162,11 +162,11 @@ public class Settings {
     }
 
     private String getPreference(@StringRes int resId, String defaultValue) {
-        return getSharedPreferences().getString(app.getStr(resId), defaultValue);
+        return getSharedPreferences().getString(SkyTubeApp.getStr(resId), defaultValue);
     }
 
     private boolean getPreference(@StringRes int resId, boolean defaultValue) {
-        return getSharedPreferences().getBoolean(app.getStr(resId), defaultValue);
+        return getSharedPreferences().getBoolean(SkyTubeApp.getStr(resId), defaultValue);
     }
 
     private boolean getPreference(String preference, boolean defaultValue) {
@@ -174,7 +174,7 @@ public class Settings {
     }
 
     private Set<String> getPreference(@StringRes int resId, Set<String> defaultValue) {
-        return getSharedPreferences().getStringSet(app.getStr(resId), defaultValue);
+        return getSharedPreferences().getStringSet(SkyTubeApp.getStr(resId), defaultValue);
     }
 
     private SharedPreferences getSharedPreferences() {
