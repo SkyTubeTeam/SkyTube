@@ -17,9 +17,9 @@
 
 package free.rm.skytube.businessobjects.YouTube.Tasks;
 
-import java.io.IOException;
-
 import org.schabi.newpipe.extractor.exceptions.ExtractionException;
+
+import java.io.IOException;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;

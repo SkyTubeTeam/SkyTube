@@ -17,8 +17,6 @@
 
 package free.rm.skytube.businessobjects.YouTube.POJOs;
 
-import com.google.common.base.Charsets;
-
 import java.util.Random;
 
 import free.rm.skytube.BuildConfig;

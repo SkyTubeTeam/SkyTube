@@ -27,8 +27,6 @@ import android.view.HapticFeedbackConstants;
 import android.view.MotionEvent;
 import android.widget.TextView;
 
-
-import java.lang.IndexOutOfBoundsException;
 import java.util.HashSet;
 import java.util.Set;
 

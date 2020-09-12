@@ -16,16 +16,13 @@
  */
 package free.rm.skytube.businessobjects.YouTube;
 
-import java.io.IOException;
+import org.schabi.newpipe.extractor.InfoItem;
+
 import java.util.Collections;
 import java.util.List;
 
-import org.schabi.newpipe.extractor.InfoItem;
-import org.schabi.newpipe.extractor.exceptions.ExtractionException;
-
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
-import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeException;
 import free.rm.skytube.businessobjects.YouTube.newpipe.VideoPager;
 

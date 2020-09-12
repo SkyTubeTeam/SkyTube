@@ -18,10 +18,11 @@
 package free.rm.skytube.gui.businessobjects.fragments;
 
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
+
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 
 /**
  * An extension of {@link Fragment} in which a fragment instance is retained across Activity

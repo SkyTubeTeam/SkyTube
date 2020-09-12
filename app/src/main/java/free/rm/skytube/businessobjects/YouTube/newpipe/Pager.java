@@ -16,10 +16,6 @@
  */
 package free.rm.skytube.businessobjects.YouTube.newpipe;
 
-import java.io.IOException;
-import java.util.Collections;
-import java.util.List;
-
 import org.schabi.newpipe.extractor.InfoItem;
 import org.schabi.newpipe.extractor.ListExtractor;
 import org.schabi.newpipe.extractor.ListExtractor.InfoItemsPage;
@@ -29,6 +25,10 @@ import org.schabi.newpipe.extractor.exceptions.ExtractionException;
 import org.schabi.newpipe.extractor.exceptions.ParsingException;
 import org.schabi.newpipe.extractor.linkhandler.LinkHandlerFactory;
 import org.schabi.newpipe.extractor.linkhandler.ListLinkHandlerFactory;
+
+import java.io.IOException;
+import java.util.Collections;
+import java.util.List;
 
 import free.rm.skytube.businessobjects.Logger;
 

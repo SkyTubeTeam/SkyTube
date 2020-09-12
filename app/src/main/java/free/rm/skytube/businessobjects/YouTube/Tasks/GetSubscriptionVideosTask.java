@@ -17,12 +17,12 @@
 
 package free.rm.skytube.businessobjects.YouTube.Tasks;
 
+import android.util.Log;
+
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.atomic.AtomicBoolean;
-
-import android.util.Log;
 
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;

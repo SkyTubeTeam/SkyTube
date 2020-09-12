@@ -17,8 +17,6 @@
 
 package free.rm.skytube.gui.businessobjects.adapters;
 
-import android.content.Context;
-
 import java.util.Collections;
 
 import free.rm.skytube.businessobjects.interfaces.OrderableDatabase;

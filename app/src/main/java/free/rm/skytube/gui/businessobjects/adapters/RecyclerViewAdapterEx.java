@@ -18,14 +18,13 @@
 package free.rm.skytube.gui.businessobjects.adapters;
 
 import android.content.Context;
+
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Objects;
 
-import free.rm.skytube.app.Utils;
 import free.rm.skytube.businessobjects.utils.Predicate;
 
 /**

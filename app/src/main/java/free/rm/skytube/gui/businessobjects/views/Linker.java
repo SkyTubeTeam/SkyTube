@@ -33,13 +33,13 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 
 import org.schabi.newpipe.extractor.StreamingService;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
-import free.rm.skytube.app.Utils;
 import free.rm.skytube.businessobjects.GetVideoDetailsTask;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.newpipe.ContentId;

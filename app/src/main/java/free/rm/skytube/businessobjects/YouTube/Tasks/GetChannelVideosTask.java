@@ -17,7 +17,7 @@
 
 package free.rm.skytube.businessobjects.YouTube.Tasks;
 
-import static free.rm.skytube.app.SkyTubeApp.getContext;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -25,7 +25,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import android.widget.Toast;
 import free.rm.skytube.R;
 import free.rm.skytube.app.Utils;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
@@ -37,6 +36,8 @@ import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
+
+import static free.rm.skytube.app.SkyTubeApp.getContext;
 
 /**
  * Task to asynchronously get videos for a specific channel.
