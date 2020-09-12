@@ -17,8 +17,8 @@
 
 package free.rm.skytube.gui.businessobjects;
 
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.RecyclerView;
 
 import free.rm.skytube.gui.businessobjects.adapters.ItemTouchHelperAdapter;
 

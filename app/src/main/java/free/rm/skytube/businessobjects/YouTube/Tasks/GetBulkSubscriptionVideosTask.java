@@ -17,6 +17,8 @@
 
 package free.rm.skytube.businessobjects.YouTube.Tasks;
 
+import org.schabi.newpipe.extractor.exceptions.ExtractionException;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -26,8 +28,6 @@ import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.atomic.AtomicBoolean;
-
-import org.schabi.newpipe.extractor.exceptions.ExtractionException;
 
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;

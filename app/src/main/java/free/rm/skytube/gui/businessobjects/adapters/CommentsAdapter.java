@@ -41,8 +41,6 @@ import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeComment;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeCommentThread;
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
 import free.rm.skytube.businessobjects.YouTube.newpipe.PagerBackend;
-import free.rm.skytube.businessobjects.db.Tasks.GetChannelInfo;
-import free.rm.skytube.gui.businessobjects.YouTubePlayer;
 
 /**
  * An adapter that will display comments in an {@link ExpandableListView}.

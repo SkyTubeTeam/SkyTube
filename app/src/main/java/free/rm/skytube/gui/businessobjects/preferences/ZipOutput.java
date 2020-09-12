@@ -16,7 +16,6 @@
  */
 package free.rm.skytube.gui.businessobjects.preferences;
 
-import android.os.Build;
 import android.util.Log;
 
 import org.apache.commons.codec.Charsets;

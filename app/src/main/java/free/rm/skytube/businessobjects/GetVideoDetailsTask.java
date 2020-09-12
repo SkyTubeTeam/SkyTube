@@ -3,22 +3,16 @@ package free.rm.skytube.businessobjects;
 import android.content.Context;
 import android.content.Intent;
 
-import androidx.core.util.Consumer;
-
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-
 import org.schabi.newpipe.extractor.StreamingService;
 import org.schabi.newpipe.extractor.exceptions.ExtractionException;
-import org.schabi.newpipe.extractor.exceptions.ParsingException;
+
+import java.io.IOException;
 
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.app.Utils;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.YouTube.newpipe.ContentId;
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
-import free.rm.skytube.businessobjects.YouTube.newpipe.VideoId;
 import free.rm.skytube.gui.businessobjects.YouTubeVideoListener;
 
 /**

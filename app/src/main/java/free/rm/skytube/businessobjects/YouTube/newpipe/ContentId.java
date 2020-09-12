@@ -18,6 +18,7 @@
 package free.rm.skytube.businessobjects.YouTube.newpipe;
 
 import org.schabi.newpipe.extractor.StreamingService.LinkType;
+
 import free.rm.skytube.app.Utils;
 
 public class ContentId {

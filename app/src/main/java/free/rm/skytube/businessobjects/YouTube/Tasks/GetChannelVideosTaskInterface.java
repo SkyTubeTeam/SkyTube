@@ -20,7 +20,6 @@ package free.rm.skytube.businessobjects.YouTube.Tasks;
 import java.util.List;
 
 import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
-import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 
 /**
  * Interface used by {@link GetChannelVideosTask} to return the videos belonging to a channel.

@@ -18,12 +18,11 @@
 package free.rm.skytube.app;
 
 import android.content.SharedPreferences;
-import androidx.preference.PreferenceManager ;
 
 import androidx.annotation.StringRes;
+import androidx.preference.PreferenceManager;
 
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.Set;
 
 import free.rm.skytube.R;

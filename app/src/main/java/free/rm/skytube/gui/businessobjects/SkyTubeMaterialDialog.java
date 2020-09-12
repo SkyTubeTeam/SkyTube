@@ -22,7 +22,6 @@ import android.content.DialogInterface;
 
 import androidx.annotation.NonNull;
 
-import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 
 import free.rm.skytube.R;

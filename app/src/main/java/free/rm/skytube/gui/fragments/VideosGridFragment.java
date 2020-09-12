@@ -17,23 +17,21 @@
 
 package free.rm.skytube.gui.fragments;
 
-import android.content.Context;
 import android.os.Bundle;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
+
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
 import butterknife.BindView;
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.VideoCategory;
-import free.rm.skytube.businessobjects.db.BookmarksDb;
 import free.rm.skytube.gui.businessobjects.MainActivityListener;
-import free.rm.skytube.gui.businessobjects.adapters.VideoGridAdapter;
 import free.rm.skytube.gui.businessobjects.fragments.BaseVideosGridFragment;
 
 /**

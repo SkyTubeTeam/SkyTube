@@ -20,7 +20,6 @@ package free.rm.skytube.gui.fragments.preferences;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.Preference;
@@ -29,13 +28,11 @@ import android.util.Log;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 
-import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 import free.rm.skytube.BuildConfig;
 import free.rm.skytube.R;
-import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.gui.businessobjects.SkyTubeMaterialDialog;
 import free.rm.skytube.gui.businessobjects.updates.UpdatesCheckerTask;
 
