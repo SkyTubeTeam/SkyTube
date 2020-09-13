@@ -134,21 +134,13 @@
     <string name="pref_summary_updates">Rechercher des mises à jour.</string>
     <string name="pref_title_license">Licence</string>
     <string name="pref_summary_license">Licence Publique Générale GNU version 3</string>
-    <string name="app_license">
-		Copyright © 2015-2018  Ramon Mifsud\n
-
-		\nThis program is free software: you can redistribute it and/or modify
-		it under the terms of the GNU General Public License as published by
-		the Free Software Foundation (version 3 of the License).\n
-
-		\nThis program is distributed in the hope that it will be useful,
-		but WITHOUT ANY WARRANTY; without even the implied warranty of
-		MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-		GNU General Public License for more details.\n
-
-		\nYou should have received a copy of the GNU General Public License
-		along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;
-	</string>
+    <string name="app_license">Copyright © 2015-2018 Ramon Mifsud
+\n 
+\nThis program is free software : you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation (version 3 of the License).
+\n 
+\nThis program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY ; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+\n 
+\nYou should have received a copy of the GNU General Public License along with this program. If not, see &lt;http ://www.gnu.org/licenses/&gt;</string>
     <string name="i_agree">J\'accepte</string>
     <string name="pref_category_downloads">Téléchargements</string>
     <string name="pref_title_download_to_separate_directories">Télécharger les vidéos dans des dossiers</string>
