@@ -286,17 +286,13 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
     }
 
 	public List<String> getSubscribedChannelIds() {
-		List<String> result = new ArrayList<>();
-		try {
-			Cursor cursor = getReadableDatabase().rawQuery("SELECT "+SubscriptionsTable.COL_CHANNEL_ID + " FROM "+SubscriptionsTable.TABLE_NAME,null);
+		try (Cursor cursor = getReadableDatabase().rawQuery("SELECT "+SubscriptionsTable.COL_CHANNEL_ID + " FROM "+SubscriptionsTable.TABLE_NAME,null)) {
+			List<String> result = new ArrayList<>();
 			while(cursor.moveToNext()) {
 				result.add(cursor.getString(0));
 			}
-			cursor.close();
-		} catch (Exception e){
-			e.printStackTrace();
+			return result;
 		}
-		return result;
 	}
 
 	/**
@@ -368,20 +364,6 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 		}
 	}
 
-
-	/**
-	 * @return The total number of subscribed channels.
-	 */
-	public int getTotalSubscribedChannels() {
-		Cursor	cursor = getReadableDatabase().rawQuery(SUBSCRIBED_NUMBER_OF_CHANNELS_QUERY, null);
-		int		totalSubbedChannels = 0;
-
-		if (cursor.moveToFirst())
-			totalSubbedChannels = cursor.getInt(0);
-
-		cursor.close();
-		return totalSubbedChannels;
-	}
 
 
 	/**
@@ -475,32 +457,6 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 		return count > 0;
 	}
 
-	/**
-	 * Returns the last time the user has visited this channel.
-	 *
-	 * @param channel
-	 *
-	 * @return	last visit time, if the update was successful;  -1 otherwise.
-	 * @throws IOException
-	 */
-	public long getLastVisitTime(YouTubeChannel channel) {
-		Cursor	cursor = getReadableDatabase().query(
-							SubscriptionsTable.TABLE_NAME,
-							new String[]{SubscriptionsTable.COL_LAST_VISIT_TIME},
-							SubscriptionsTable.COL_CHANNEL_ID + " = ?",
-							new String[]{channel.getId()}, null, null, null);
-		long	lastVisitTime = -1;
-
-		if (cursor.moveToNext()) {
-			int colLastVisitTIme = cursor.getColumnIndexOrThrow(SubscriptionsTable.COL_LAST_VISIT_TIME);
-			lastVisitTime = cursor.getLong(colLastVisitTIme);
-		}
-
-		cursor.close();
-		return lastVisitTime;
-	}
-
-
 	private boolean hasVideo(YouTubeVideo video) {
 		try (Cursor cursor = getReadableDatabase().rawQuery(HAS_VIDEO_QUERY, new String[]{video.getId()})) {
 			if (cursor.moveToFirst()) {
@@ -524,16 +480,14 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 		//Unfortunately, this doesn't work, due to XXX is not supported on this API level
 		// String formatted = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX", Locale.US).format(channel.getLastVisitTime());
 		String formatted = new DateTime(channel.getLastVisitTime()).toString();
-		Cursor cursor = getReadableDatabase().rawQuery(CHANNEL_HAS_NEW_VIDEO_QUERY,
-							new String[]{channel.getId(), formatted});
-		boolean channelHasNewVideos = false;
+		try (Cursor cursor = getReadableDatabase().rawQuery(CHANNEL_HAS_NEW_VIDEO_QUERY,
+							new String[]{channel.getId(), formatted})) {
 
-		if (cursor.moveToFirst()) {
-			channelHasNewVideos = cursor.getInt(0) > 0;
+			if (cursor.moveToFirst()) {
+				return cursor.getInt(0) > 0;
+			}
+			return false;
 		}
-
-		cursor.close();
-		return channelHasNewVideos;
 	}
 
 	/**
