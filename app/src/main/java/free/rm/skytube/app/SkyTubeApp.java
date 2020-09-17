@@ -38,6 +38,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.core.graphics.ColorUtils;
 import androidx.multidex.MultiDexApplication;
@@ -193,7 +194,7 @@ public class SkyTubeApp extends MultiDexApplication {
 	 * @param context
 	 * @return
 	 */
-	public static NetworkInfo getNetworkInfo(Context context){
+	public static NetworkInfo getNetworkInfo(@NonNull Context context){
 		ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 		return cm.getActiveNetworkInfo();
 	}
@@ -203,7 +204,7 @@ public class SkyTubeApp extends MultiDexApplication {
 	 * @param context
 	 * @return
 	 */
-	public static boolean isConnected(Context context){
+	public static boolean isConnected(@NonNull Context context){
 		NetworkInfo info = getNetworkInfo(context);
 		return (info != null && info.isConnected());
 	}
@@ -213,7 +214,7 @@ public class SkyTubeApp extends MultiDexApplication {
 	 * @param context
 	 */
 	@TargetApi(26)
-	private void initChannels(Context context) {
+	private void initChannels(@NonNull Context context) {
 
 		if(Build.VERSION.SDK_INT < 26) {
 			return;
@@ -258,7 +259,7 @@ public class SkyTubeApp extends MultiDexApplication {
 		return skyTubeApp.settings;
 	}
 
-	public static void notifyUserOnError(Context ctx, Exception exc) {
+	public static void notifyUserOnError(@NonNull Context ctx, Exception exc) {
 		if (exc == null) {
 			return;
 		}
@@ -274,23 +275,21 @@ public class SkyTubeApp extends MultiDexApplication {
 		} else {
 			message = exc.getMessage();
 		}
-		if (message != null && ctx !=null) {
+		if (message != null) {
 			Log.e("SkyTubeApp", "Error: "+message);
 			Toast.makeText(ctx, message, Toast.LENGTH_LONG).show();
-		} else {
-			Log.w("SkytubeApp",message == null ? "message " : "ctx " + "is NULL");
 		}
 	}
 
 
-	public static void shareUrl(Context context, String url) {
+	public static void shareUrl(@NonNull Context context, String url) {
 		Intent intent = new Intent(android.content.Intent.ACTION_SEND);
 		intent.setType("text/plain");
 		intent.putExtra(android.content.Intent.EXTRA_TEXT, url);
 		context.startActivity(Intent.createChooser(intent, context.getString(R.string.share_via)));
 	}
 
-	public static void copyUrl(Context context, String text, String url) {
+	public static void copyUrl(@NonNull Context context, String text, String url) {
 		ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
 		ClipData clip = ClipData.newPlainText(text, url);
 		clipboard.setPrimaryClip(clip);
@@ -302,14 +301,14 @@ public class SkyTubeApp extends MultiDexApplication {
 	 *
 	 * @return The URL of the YouTube video the user wants to play.
 	 */
-	public static ContentId getUrlFromIntent(final Context ctx, final Intent intent) {
+	public static ContentId getUrlFromIntent(@NonNull final Context ctx, final Intent intent) {
 		if (Intent.ACTION_VIEW.equals(intent.getAction()) && intent.getData() != null) {
 			return parseUrl(ctx, intent.getData().toString(), true);
 		}
 		return null;
 	}
 
-	public static ContentId parseUrl(Context context, String url, boolean showErrorIfNotValid) {
+	public static ContentId parseUrl(@NonNull Context context, String url, boolean showErrorIfNotValid) {
 		try {
 			ContentId id = NewPipeService.get().getContentId(url);
 			if (id == null && showErrorIfNotValid) {
