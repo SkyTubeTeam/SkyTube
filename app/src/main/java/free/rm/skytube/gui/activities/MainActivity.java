@@ -80,10 +80,7 @@ public class MainActivity extends BaseActivity {
 	@BindView(R.id.fragment_container)
 	protected FrameLayout           fragmentContainer;
 
-	private MainFragment            mainFragment;
-	private SearchVideoGridFragment searchVideoGridFragment;
 	/** Fragment that shows Videos from a specific Playlist */
-	private PlaylistVideosFragment  playlistVideosFragment;
 	private VideoBlockerPlugin      videoBlockerPlugin;
 
 	/** Set to true of the UpdatesCheckerTask has run; false otherwise. */
@@ -97,6 +94,12 @@ public class MainActivity extends BaseActivity {
 	private static final String CHANNEL_BROWSER_FRAGMENT = "MainActivity.ChannelBrowserFragment";
 	private static final String PLAYLIST_VIDEOS_FRAGMENT = "MainActivity.PlaylistVideosFragment";
 	private static final String VIDEO_BLOCKER_PLUGIN = "MainActivity.VideoBlockerPlugin";
+
+	private static final String MAIN_FRAGMENT_TAG = MAIN_FRAGMENT + ".Tag";
+	private static final String CHANNEL_BROWSER_FRAGMENT_TAG = CHANNEL_BROWSER_FRAGMENT + ".Tag";
+	private static final String PLAYLIST_VIDEOS_FRAGMENT_TAG = PLAYLIST_VIDEOS_FRAGMENT + ".Tag";
+	private static final String SEARCH_FRAGMENT_TAG = SEARCH_FRAGMENT + ".Tag";
+	private static final String[] FRAGMENTS = {MAIN_FRAGMENT, SEARCH_FRAGMENT, CHANNEL_BROWSER_FRAGMENT, PLAYLIST_VIDEOS_FRAGMENT};
 
 
 	@Override
@@ -127,14 +130,7 @@ public class MainActivity extends BaseActivity {
 		ButterKnife.bind(this);
 
 		if(fragmentContainer != null) {
-			if(savedInstanceState != null) {
-				final FragmentManager supportFragmentManager = getSupportFragmentManager();
-				mainFragment = (MainFragment) supportFragmentManager.getFragment(savedInstanceState, MAIN_FRAGMENT);
-				searchVideoGridFragment = (SearchVideoGridFragment) supportFragmentManager.getFragment(savedInstanceState, SEARCH_FRAGMENT);
-				playlistVideosFragment = (PlaylistVideosFragment) supportFragmentManager.getFragment(savedInstanceState, PLAYLIST_VIDEOS_FRAGMENT);
-			}
 			handleIntent(getIntent());
-
 		}
 
 		if (savedInstanceState != null) {
@@ -178,6 +174,7 @@ public class MainActivity extends BaseActivity {
 	}
 
 	private void initMainFragment(String action) {
+		MainFragment mainFragment = getMainFragment();
 		if(mainFragment == null) {
 			Logger.i(MainActivity.this,"initMainFragment called "+action);
 			mainFragment = new MainFragment();
@@ -188,7 +185,7 @@ public class MainActivity extends BaseActivity {
 				args.putBoolean(MainFragment.SHOULD_SELECTED_FEED_TAB, true);
 				mainFragment.setArguments(args);
 			}
-			getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, mainFragment).commit();
+			getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, mainFragment, MAIN_FRAGMENT_TAG).commit();
 		} else {
 			Logger.i(MainActivity.this, "mainFragment already exists, action:"+action+" fragment:"+mainFragment +", manager:"+mainFragment.getFragmentManager() +", support="+getSupportFragmentManager());
 		}
@@ -199,18 +196,12 @@ public class MainActivity extends BaseActivity {
 		super.onSaveInstanceState(outState);
 
 		final FragmentManager supportFragmentManager = getSupportFragmentManager();
-		if(mainFragment != null) {
-			putFragment(supportFragmentManager, outState, MAIN_FRAGMENT, mainFragment);
-		}
-		if(searchVideoGridFragment != null && searchVideoGridFragment.isVisible()) {
-			putFragment(supportFragmentManager, outState, SEARCH_FRAGMENT, searchVideoGridFragment);
-		}
-		ChannelBrowserFragment channelBrowserFragment = getChannelBrowserFragment();
-		if(channelBrowserFragment != null && channelBrowserFragment.isVisible()) {
-			putFragment(supportFragmentManager, outState, CHANNEL_BROWSER_FRAGMENT, channelBrowserFragment);
-		}
-		if(playlistVideosFragment != null && playlistVideosFragment.isVisible()) {
-			putFragment(supportFragmentManager, outState, PLAYLIST_VIDEOS_FRAGMENT, playlistVideosFragment);
+
+		for (String fragmentName : FRAGMENTS) {
+			Fragment fragment = supportFragmentManager.findFragmentByTag(fragmentName + ".Tag");
+			if (fragment != null && fragment.isVisible()) {
+				putFragment(supportFragmentManager, outState, fragmentName, fragment);
+			}
 		}
 
 		// save the video blocker plugin
@@ -239,10 +230,24 @@ public class MainActivity extends BaseActivity {
 	}
 
 	private ChannelBrowserFragment getChannelBrowserFragment() {
-		List<Fragment> fragments = getSupportFragmentManager().getFragments();
-		for (Fragment fragment : fragments) {
+		Fragment fragment = getSupportFragmentManager().findFragmentByTag(CHANNEL_BROWSER_FRAGMENT_TAG);
+		if (fragment != null) {
 			if (fragment instanceof ChannelBrowserFragment) {
 				return (ChannelBrowserFragment) fragment;
+			} else {
+				Logger.e(MainActivity.this, "Unexpected fragment: "+fragment);
+			}
+		}
+		return null;
+	}
+
+	private MainFragment getMainFragment() {
+		Fragment fragment = getSupportFragmentManager().findFragmentByTag(MAIN_FRAGMENT_TAG);
+		if (fragment != null) {
+			if (fragment instanceof MainFragment) {
+				return (MainFragment) fragment;
+			} else {
+				Logger.e(MainActivity.this, "Unexpected fragment: "+fragment);
 			}
 		}
 		return null;
@@ -343,6 +348,7 @@ public class MainActivity extends BaseActivity {
 				displayEnterVideoUrlDialog();
 				return true;
 			case android.R.id.home:
+				Fragment mainFragment = getMainFragment();
 				if(mainFragment == null || !mainFragment.isVisible()) {
 					onBackPressed();
 					return true;
@@ -416,6 +422,7 @@ public class MainActivity extends BaseActivity {
 	@Override
 	public void onBackPressed() {
 		if(shouldMinimizeOnBack()) {
+			MainFragment mainFragment = getMainFragment();
 			if (mainFragment != null && mainFragment.isVisible()) {
 				// If the Subscriptions Drawer is open, close it instead of minimizing the app.
 				if (mainFragment.isDrawerOpen()) {
@@ -436,10 +443,10 @@ public class MainActivity extends BaseActivity {
 		}
 	}
 
-	private void switchToFragment(FragmentEx fragment, boolean addToBackStack) {
+	private void switchToFragment(FragmentEx fragment, boolean addToBackStack, String tag) {
 		FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
-		transaction.replace(R.id.fragment_container, fragment);
+		transaction.replace(R.id.fragment_container, fragment, tag);
 		if(addToBackStack) {
 			transaction.addToBackStack(null);
 		}
@@ -464,7 +471,7 @@ public class MainActivity extends BaseActivity {
 		ChannelBrowserFragment channelBrowserFragment = new ChannelBrowserFragment();
 		channelBrowserFragment.getChannelPlaylistsFragment().setMainActivityListener(this);
 		channelBrowserFragment.setArguments(args);
-		switchToFragment(channelBrowserFragment, addToBackStack);
+		switchToFragment(channelBrowserFragment, addToBackStack, CHANNEL_BROWSER_FRAGMENT_TAG);
 	}
 
 	@Override
@@ -473,11 +480,11 @@ public class MainActivity extends BaseActivity {
 	}
 
 	private void onPlaylistClick(YouTubePlaylist playlist, boolean addToBackStack) {
-		playlistVideosFragment = new PlaylistVideosFragment();
+		PlaylistVideosFragment playlistVideosFragment = new PlaylistVideosFragment();
 		Bundle args = new Bundle();
 		args.putSerializable(PlaylistVideosFragment.PLAYLIST_OBJ, playlist);
 		playlistVideosFragment.setArguments(args);
-		switchToFragment(playlistVideosFragment, addToBackStack);
+		switchToFragment(playlistVideosFragment, addToBackStack, PLAYLIST_VIDEOS_FRAGMENT_TAG);
 	}
 
 
@@ -492,14 +499,12 @@ public class MainActivity extends BaseActivity {
 		searchView.clearFocus();
 
 		// open SearchVideoGridFragment and display the results
-		searchVideoGridFragment = new SearchVideoGridFragment();
+		SearchVideoGridFragment searchVideoGridFragment = new SearchVideoGridFragment();
 		Bundle bundle = new Bundle();
 		bundle.putString(SearchVideoGridFragment.QUERY, query);
 		searchVideoGridFragment.setArguments(bundle);
-		switchToFragment(searchVideoGridFragment, true);
+		switchToFragment(searchVideoGridFragment, true, SEARCH_FRAGMENT_TAG);
 	}
-
-
 
 	//////////////////////////////////////////////////////////////////////////////////////////
 
@@ -586,6 +591,9 @@ public class MainActivity extends BaseActivity {
 	@Override
 	public void refreshSubscriptionsFeedVideos() {
 		SubscriptionsFeedFragment.unsetFlag(SubscriptionsFeedFragment.FLAG_REFRESH_FEED_FROM_CACHE);
-		mainFragment.refreshSubscriptionsFeedVideos();
+		MainFragment mainFragment = getMainFragment();
+		if (mainFragment != null) {
+			mainFragment.refreshSubscriptionsFeedVideos();
+		}
 	}
 }
