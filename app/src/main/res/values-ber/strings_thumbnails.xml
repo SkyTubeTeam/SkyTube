@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="thumbnail_download_error">ⵓⵔ ⵜⵣⵎⵉⵔ ⴰⴷ ⵜⴰⴳⵎ ⵜⴰⵡⵍⴰⴼⵜ ⵜⴰⵎⵥⵢⴰⵏⵜ.</string>
+    <string name="thumbnail_downloaded">ⵜⴻⵜⵜⵡⴰⴳⵎ ⵜⴰⵡⵍⴰⴼⵜ ⵜⴰⵎⵥⵢⴰⵏⵜ.</string>
+    <string name="thumbnail">ⵜⴰⵡⵍⴰⴼⵜ ⵜⴰⵎⵥⵢⴰⵏⵜ</string>
+    <string name="view_thumbnail">ⵥⵕ ⵜⴰⵡⵍⴰⴼⵜ ⵜⴰⵎⵥⵢⴰⵏⵜ</string>
+</resources>
