@@ -423,7 +423,9 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 	}
 
 	public void refreshFeedFromCache() {
-		videoGridAdapter.refresh(true);
+		if (videoGridAdapter != null) {
+			videoGridAdapter.refresh(true);
+		}
 	}
 
 	private AsyncTaskParallel<?,?,?> getRefreshTask(List<String> channelIds) {
