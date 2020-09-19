@@ -3,6 +3,7 @@ package free.rm.skytube.gui.fragments;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,6 +29,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -59,7 +61,7 @@ public class MainFragment extends FragmentEx {
 	public static final String BOOKMARKS_FRAGMENT = "MainFragment.bookmarksFragment";
 	public static final String DOWNLOADED_VIDEOS_FRAGMENT = "MainFragment.downloadedVideosFragment";
 
-	private VideosPagerAdapter			videosPagerAdapter = null;
+	private SimplePagerAdapter			videosPagerAdapter = null;
 
 	public static final String SHOULD_SELECTED_FEED_TAB = "MainFragment.SHOULD_SELECTED_FEED_TAB";
 
@@ -139,8 +141,7 @@ public class MainFragment extends FragmentEx {
 			}
 		});
 
-		videosPagerAdapter = new VideosPagerAdapter(getChildFragmentManager());
-		videosPagerAdapter.init(savedInstanceState);
+		videosPagerAdapter = new SimplePagerAdapter(getChildFragmentManager());
 
 		ViewPager viewPager = view.findViewById(R.id.pager);
 		final int tabCount = videosPagerAdapter.getCount();
@@ -179,7 +180,7 @@ public class MainFragment extends FragmentEx {
 		// If the app is being opened via the Notification that new videos from Subscribed channels have been found, select the Subscriptions Feed Fragment
 		Bundle args = getArguments();
 		if (args != null && args.getBoolean(SHOULD_SELECTED_FEED_TAB, false)) {
-			viewPager.setCurrentItem(videosPagerAdapter.getIndexOf(SubscriptionsFeedFragment.class));
+			viewPager.setCurrentItem(videosPagerAdapter.getIndexOf(SUBSCRIPTIONS_FEED_FRAGMENT));
 		} else {
 			String defaultTab = sp.getString(getString(R.string.pref_key_default_tab_name), null);
 			String[] tabListValues = getTabListValues();
@@ -269,6 +270,119 @@ public class MainFragment extends FragmentEx {
 		return super.onOptionsItemSelected(item);
 	}
 
+	public class SimplePagerAdapter extends FragmentPagerAdapter {
+		private final SparseArray<WeakReference<Fragment>> instantiatedFragments = new SparseArray<>();
+		private final List<String> visibleTabs = new ArrayList<>();
+
+		public SimplePagerAdapter(FragmentManager fm) {
+			// TODO: Investigate, if we need this
+			super(fm, BEHAVIOR_SET_USER_VISIBLE_HINT);
+			Set<String> hiddenTabs = SkyTubeApp.getSettings().getHiddenTabs();
+			for (String key : getTabListValues()) {
+				if (!hiddenTabs.contains(key)) {
+					visibleTabs.add(key);
+				}
+			}
+		}
+
+		@Override
+		public Fragment getItem(int position) {
+			if (0<=position && position<visibleTabs.size()) {
+				String key = visibleTabs.get(position);
+				return create(key);
+			}
+			return null;
+		}
+
+		VideosGridFragment create(String key) {
+			// add fragments to list:  do NOT forget to ***UPDATE*** @string/tab_list and @string/tab_list_values
+			if (MOST_POPULAR_VIDEOS_FRAGMENT.equals(key)) {
+				return new MostPopularVideosFragment();
+			}
+			if (FEATURED_VIDEOS_FRAGMENT.equals(key)) {
+				return new FeaturedVideosFragment();
+			}
+			if (SUBSCRIPTIONS_FEED_FRAGMENT.equals(key)) {
+				return new SubscriptionsFeedFragment();
+			}
+			if (BOOKMARKS_FRAGMENT.equals(key)) {
+				return new BookmarksFragment();
+			}
+			if (DOWNLOADED_VIDEOS_FRAGMENT.equals(key)) {
+				return new DownloadedVideosFragment();
+			}
+			return null;
+		}
+
+		@Override
+		public int getCount() {
+			return visibleTabs.size();
+		}
+
+		@Override
+		public Object instantiateItem(final ViewGroup container, final int position) {
+			final Fragment fragment = (Fragment) super.instantiateItem(container, position);
+			instantiatedFragments.put(position, new WeakReference<>(fragment));
+			return fragment;
+		}
+
+		@Override
+		public void destroyItem(final ViewGroup container, final int position, final Object object) {
+			instantiatedFragments.remove(position);
+			super.destroyItem(container, position, object);
+		}
+
+		@Nullable
+		public VideosGridFragment getFragment(final int position) {
+			if (0 <= position && position <= instantiatedFragments.size()) {
+				final WeakReference<Fragment> wr = instantiatedFragments.get(position);
+				if (wr != null) {
+					return (VideosGridFragment) wr.get();
+				}
+			}
+			return null;
+		}
+
+		public int getIndexOf(String fragmentName) {
+			return visibleTabs.indexOf(fragmentName);
+		}
+
+		public VideosGridFragment getTabOf(String fragmentName) {
+			return getFragment(getIndexOf(fragmentName));
+		}
+
+		public VideosGridFragment getTab(TabLayout.Tab tab) {
+			return getFragment(tab.getPosition());
+		}
+
+		public void notifyTab(TabLayout.Tab tab, boolean onSelect) {
+			VideosGridFragment fragment = getTab(tab);
+			if (fragment != null) {
+				if (onSelect) {
+					fragment.onFragmentSelected();
+				} else {
+					fragment.onFragmentUnselected();
+				}
+			}
+		}
+
+		public void selectTabAtPosition(int position) {
+			VideosGridFragment fragment = getFragment(position);
+			if (fragment != null) {
+				fragment.onFragmentSelected();
+			}
+		}
+
+		@Override
+		public CharSequence getPageTitle(int position) {
+			String title = null;
+			if (0<=position && position<visibleTabs.size()) {
+				String tabKey = visibleTabs.get(position);
+				title = SkyTubeApp.getFragmentNames().getName(tabKey);
+			}
+			return title != null ? title : "Unknown";
+		}
+	}
 
 	private static class VideosPagerAdapter extends FragmentPagerAdapter {
 		private final List<VideosGridFragment> videoGridFragmentsList = new ArrayList<>();
@@ -388,7 +502,7 @@ public class MainFragment extends FragmentEx {
 
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
-		videosPagerAdapter.onSaveInstanceState(outState);
+//		videosPagerAdapter.onSaveInstanceState(outState);
 
 		super.onSaveInstanceState(outState);
 	}
@@ -423,7 +537,7 @@ public class MainFragment extends FragmentEx {
 	 * Refresh the SubscriptionsFeedFragment's feed.
 	 */
 	public void refreshSubscriptionsFeedVideos() {
-		SubscriptionsFeedFragment subscriptionsFeedFragment = videosPagerAdapter.getTabOf(SubscriptionsFeedFragment.class);
+		SubscriptionsFeedFragment subscriptionsFeedFragment = (SubscriptionsFeedFragment) videosPagerAdapter.getTabOf(SUBSCRIPTIONS_FEED_FRAGMENT);
 		if (subscriptionsFeedFragment != null) {
 			subscriptionsFeedFragment.refreshFeedFromCache();
 		}
