@@ -62,10 +62,6 @@ public abstract class VideosGridFragment extends BaseVideosGridFragment {
 		gridView.setLayoutManager(new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.video_grid_num_columns)));
 		gridView.setAdapter(videoGridAdapter);
 
-		// The fragment is already selected, we need to initialize the video grid
-		if (this.isFragmentSelected()) {
-			videoGridAdapter.initializeList();
-		}
 		return view;
 	}
 
