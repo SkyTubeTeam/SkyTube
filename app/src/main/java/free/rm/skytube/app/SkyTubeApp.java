@@ -64,6 +64,7 @@ import free.rm.skytube.businessobjects.db.Tasks.GetChannelInfo;
 import free.rm.skytube.gui.activities.MainActivity;
 import free.rm.skytube.gui.businessobjects.YouTubePlayer;
 import free.rm.skytube.gui.fragments.ChannelBrowserFragment;
+import free.rm.skytube.gui.fragments.FragmentNames;
 import free.rm.skytube.gui.fragments.PlaylistVideosFragment;
 
 /**
@@ -74,6 +75,7 @@ public class SkyTubeApp extends MultiDexApplication {
 	/** SkyTube Application databaseInstance. */
 	private static SkyTubeApp skyTubeApp = null;
 	private Settings settings;
+	private FragmentNames names;
 
 	public static final String KEY_SUBSCRIPTIONS_LAST_UPDATED = "SkyTubeApp.KEY_SUBSCRIPTIONS_LAST_UPDATED";
 	public static final String NEW_VIDEOS_NOTIFICATION_CHANNEL = "free.rm.skytube.NEW_VIDEOS_NOTIFICATION_CHANNEL";
@@ -83,6 +85,7 @@ public class SkyTubeApp extends MultiDexApplication {
 	public void onCreate() {
 		super.onCreate();
 		this.settings = new Settings(this);
+		this.names = new FragmentNames(this);
 		skyTubeApp = this;
 		initChannels(this);
 	}
@@ -158,6 +161,9 @@ public class SkyTubeApp extends MultiDexApplication {
 		return skyTubeApp.getBaseContext();
 	}
 
+	public static FragmentNames getFragmentNames() {
+		return skyTubeApp.names;
+	}
 
 	/**
 	 * Restart the app.
