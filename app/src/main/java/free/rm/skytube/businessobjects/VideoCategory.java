@@ -32,6 +32,7 @@ import free.rm.skytube.businessobjects.YouTube.NewPipeChannelVideos;
 import free.rm.skytube.businessobjects.YouTube.NewPipeVideoBySearch;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPIKey;
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
+import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeTrendingItems;
 import free.rm.skytube.businessobjects.db.Tasks.GetSubscriptionsVideosFromDb;
 
 /**
@@ -80,7 +81,7 @@ public enum VideoCategory {
 	public GetYouTubeVideos createGetYouTubeVideos() {
 		switch (this) {
 			case FEATURED: return new GetFeaturedVideos();
-			case MOST_POPULAR: return new GetMostPopularVideos();
+			case MOST_POPULAR: return new NewPipeTrendingItems(); //new GetMostPopularVideos();
 			case SEARCH_QUERY: return new NewPipeVideoBySearch();
 			case CHANNEL_VIDEOS: return (GetYouTubeVideos) createChannelVideosFetcher();
 			case SUBSCRIPTIONS_FEED_VIDEOS: return new GetSubscriptionsVideosFromDb();
