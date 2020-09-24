@@ -32,6 +32,8 @@ import org.schabi.newpipe.extractor.exceptions.ExtractionException;
 import org.schabi.newpipe.extractor.exceptions.FoundAdException;
 import org.schabi.newpipe.extractor.exceptions.ParsingException;
 import org.schabi.newpipe.extractor.feed.FeedExtractor;
+import org.schabi.newpipe.extractor.kiosk.KioskExtractor;
+import org.schabi.newpipe.extractor.kiosk.KioskList;
 import org.schabi.newpipe.extractor.linkhandler.LinkHandler;
 import org.schabi.newpipe.extractor.linkhandler.LinkHandlerFactory;
 import org.schabi.newpipe.extractor.linkhandler.ListLinkHandler;
@@ -203,6 +205,17 @@ public class NewPipeService {
             Logger.e(this, "Unable to get videos from a feed " + channelId + " : "+ e.getMessage(), e);
         }
         return getChannelVideos(channelId);
+    }
+
+    public VideoPager getTrending() throws NewPipeException {
+        try {
+            KioskList kiosks = streamingService.getKioskList();
+            KioskExtractor kex = kiosks.getDefaultKioskExtractor();
+            kex.fetchPage();
+            return new VideoPager(streamingService, kex, null);
+        } catch (ExtractionException | IOException e) {
+            throw new NewPipeException("Unable to get 'trending' list:" + e.getMessage(), e);
+        }
     }
 
     public VideoPager getChannelPager(String channelId) throws NewPipeException {
