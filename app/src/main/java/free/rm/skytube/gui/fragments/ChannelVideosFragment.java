@@ -30,8 +30,9 @@ public class ChannelVideosFragment extends VideosGridFragment {
 		// create and return the view
 		View view =  super.onCreateView(inflater, container, savedInstanceState);
 
-		if (channel != null)
+		if (channel != null) {
 			videoGridAdapter.setYouTubeChannel(channel);
+		}
 
 		return view;
 	}
@@ -39,7 +40,9 @@ public class ChannelVideosFragment extends VideosGridFragment {
 
 	public void setYouTubeChannel(YouTubeChannel youTubeChannel) {
 		channel = youTubeChannel;
-		videoGridAdapter.setYouTubeChannel(youTubeChannel);
+		if (videoGridAdapter != null) {
+			videoGridAdapter.setYouTubeChannel(youTubeChannel);
+		}
 	}
 
 
