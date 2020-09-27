@@ -276,7 +276,7 @@ public class MainFragment extends FragmentEx {
 
 		public SimplePagerAdapter(FragmentManager fm) {
 			// TODO: Investigate, if we need this
-			super(fm, BEHAVIOR_SET_USER_VISIBLE_HINT);
+			super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
 			Set<String> hiddenTabs = SkyTubeApp.getSettings().getHiddenTabs();
 			for (String key : getTabListValues()) {
 				if (!hiddenTabs.contains(key)) {

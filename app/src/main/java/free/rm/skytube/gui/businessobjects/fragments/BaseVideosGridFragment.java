@@ -30,6 +30,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import free.rm.skytube.R;
+import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.db.PlaybackStatusDb;
 import free.rm.skytube.gui.businessobjects.adapters.VideoGridAdapter;
 import free.rm.skytube.gui.fragments.VideosGridFragment;
@@ -86,6 +87,10 @@ public abstract class BaseVideosGridFragment extends TabFragment implements Swip
 	@Override
 	public void onResume() {
 		super.onResume();
+		if (videoGridAdapter != null) {
+			videoGridAdapter.initializeList();
+		}
+
 		int newUpdateCounter = PlaybackStatusDb.getPlaybackStatusDb().getUpdateCounter();
 		if(newUpdateCounter != updateCount) {
 			videoGridAdapter.notifyDataSetChanged();
