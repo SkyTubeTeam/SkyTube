@@ -56,21 +56,22 @@ public class OthersPreferenceFragment extends PreferenceFragment implements Shar
 		defaultTabPref = (ListPreference)findPreference(getString(R.string.pref_key_default_tab_name));
 		Set<String> hiddenFragments = SkyTubeApp.getPreferenceManager().getStringSet(getString(R.string.pref_key_hide_tabs), new HashSet<>());
 		String[] tabListValues = SkyTubeApp.getStringArray(R.array.tab_list_values);
+		final String[] tabList = SkyTubeApp.getStringArray(R.array.tab_list);
 		if(hiddenFragments.size() == 0) {
-			defaultTabPref.setEntries(SkyTubeApp.getStringArray(R.array.tab_list));
+			defaultTabPref.setEntries(tabList);
 			defaultTabPref.setEntryValues(tabListValues);
 		} else {
 			List<String> defaultTabEntries = new ArrayList<>();
 			List<String> defaultTabEntryValues = new ArrayList<>();
-			for(int i=0;i<SkyTubeApp.getStringArray(R.array.tab_list).length;i++) {
+			for(int i = 0; i< tabList.length; i++) {
 				if(!hiddenFragments.contains(tabListValues[i])) {
-					defaultTabEntries.add(SkyTubeApp.getStringArray(R.array.tab_list)[i]);
+					defaultTabEntries.add(tabList[i]);
 					defaultTabEntryValues.add(tabListValues[i]);
 
 				}
 			}
-			defaultTabPref.setEntries(defaultTabEntries.toArray(new CharSequence[0]));
-			defaultTabPref.setEntryValues(defaultTabEntryValues.toArray(new CharSequence[0]));
+			defaultTabPref.setEntries(defaultTabEntries.toArray(new CharSequence[defaultTabEntries.size()]));
+			defaultTabPref.setEntryValues(defaultTabEntryValues.toArray(new CharSequence[defaultTabEntryValues.size()]));
 		}
 		if (defaultTabPref.getValue() == null) {
 			defaultTabPref.setValueIndex(0);
