@@ -23,6 +23,8 @@ public class SearchHistoryDb extends SQLiteOpenHelperEx {
 	private static final int DATABASE_VERSION = 2;
 	private static final String DATABASE_NAME = "searchHistory.db";
 
+	private static final String UPDATE_SEARCH_TEXT_TIMESTAMP = String.format("UPDATE %s SET %s = datetime('now','localtime') WHERE %s = ?", SearchHistoryTable.TABLE_NAME, SearchHistoryTable.COL_SEARCH_DATE, SearchHistoryTable.COL_SEARCH_TEXT);
+
 
 	private SearchHistoryDb(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -112,7 +114,7 @@ public class SearchHistoryDb extends SQLiteOpenHelperEx {
 	 * @param text   Text the user searched for.
 	 */
 	public void updateSearchTextTimestamp(String text) {
-		getWritableDatabase().execSQL(String.format("UPDATE %s SET %s = datetime('now','localtime') WHERE %s = '%s'", SearchHistoryTable.TABLE_NAME, SearchHistoryTable.COL_SEARCH_DATE, SearchHistoryTable.COL_SEARCH_TEXT, text));
+		getWritableDatabase().rawQuery(UPDATE_SEARCH_TEXT_TIMESTAMP, new String[]{ text });
 	}
 
 
@@ -123,10 +125,9 @@ public class SearchHistoryDb extends SQLiteOpenHelperEx {
 	 * @return True if the given search text has already been stored in the database; false otherwise.
 	 */
 	private boolean isSearchTextAlreadyStored(String text) {
-		Cursor  cursor = getSearchCursor(text, true);
-		boolean	isSearchTextAlreadyStored = cursor.moveToNext();
-		cursor.close();
-		return isSearchTextAlreadyStored;
+		try(Cursor cursor =  getSearchCursor(text, true)) {
+			return cursor.moveToNext();
+		}
 	}
 
 
