@@ -251,12 +251,12 @@ public class NewPipeService {
 
     private YouTubeChannel createInternalChannelFromFeed(FeedExtractor extractor) throws ParsingException {
         return new YouTubeChannel(extractor.getId(), extractor.getName(), null,
-                null, null, -1, false, 0, System.currentTimeMillis());
+                null, null, -1, false, 0, System.currentTimeMillis(), null);
     }
 
     private YouTubeChannel createInternalChannel(ChannelExtractor extractor) throws ParsingException {
         return new YouTubeChannel(extractor.getId(), extractor.getName(), NewPipeUtils.filterHtml(extractor.getDescription()),
-                extractor.getAvatarUrl(), extractor.getBannerUrl(), getSubscriberCount(extractor), false, 0, System.currentTimeMillis());
+                extractor.getAvatarUrl(), extractor.getBannerUrl(), getSubscriberCount(extractor), false, 0, System.currentTimeMillis(), null);
     }
 
     /**

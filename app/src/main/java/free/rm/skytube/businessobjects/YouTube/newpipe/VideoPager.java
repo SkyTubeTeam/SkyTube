@@ -123,7 +123,7 @@ public class VideoPager extends Pager<InfoItem, CardData> {
             id = url;
         }
         return new YouTubeChannel(id, channelInfoItem.getName(), channelInfoItem.getDescription(), channelInfoItem.getThumbnailUrl(), null,
-                channelInfoItem.getSubscriberCount(), false, -1, System.currentTimeMillis() );
+                channelInfoItem.getSubscriberCount(), false, -1, System.currentTimeMillis(), null);
     }
 
 }

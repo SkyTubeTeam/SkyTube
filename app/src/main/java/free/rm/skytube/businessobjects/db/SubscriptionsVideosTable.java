@@ -28,6 +28,7 @@ public class SubscriptionsVideosTable {
 	public static final String COL_YOUTUBE_VIDEO_DATE = "YouTube_Video_Date";
 	public static final String COL_RETRIEVAL_TS = "Retrieval_Timestamp";
 	public static final String COL_PUBLISH_TS = "Publish_Timestamp";
+	public static final String COL_CATEGORY_ID = "category_id";
 
 	public static final String COL_YOUTUBE_VIDEO_ID_EQUALS_TO = SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID + " = ?";
 
@@ -37,6 +38,7 @@ public class SubscriptionsVideosTable {
 			COL_CHANNEL_ID,
 			COL_YOUTUBE_VIDEO_ID,
 			COL_YOUTUBE_VIDEO,
+			COL_CATEGORY_ID,
 			COL_RETRIEVAL_TS,
 			COL_PUBLISH_TS
 	};
@@ -49,6 +51,7 @@ public class SubscriptionsVideosTable {
 						COL_CHANNEL_ID + " TEXT NOT NULL, " +
 						COL_YOUTUBE_VIDEO + " BLOB, " +
 						COL_YOUTUBE_VIDEO_DATE + " TIMESTAMP DEFAULT (strftime('%s', 'now')), " +
+						COL_CATEGORY_ID         + " INTEGER, " +
 						COL_RETRIEVAL_TS + " INTEGER, " +
 						COL_PUBLISH_TS + " INTEGER " +
 						" )";
@@ -64,4 +67,9 @@ public class SubscriptionsVideosTable {
     public static String getIndexOnVideos() {
         return "CREATE INDEX " + IDX_PUBLISH_TS + " ON " + TABLE_NAME + "(" + COL_PUBLISH_TS + ")";
     }
+
+    public static String getAddCategoryColumn() {
+        return ADD_COLUMN + COL_CATEGORY_ID + " INTEGER";
+    }
+
 }

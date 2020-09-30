@@ -62,6 +62,7 @@ public class YouTubeChannel extends CardData implements Serializable {
 	private long	lastVisitTime;
 	private long    lastCheckTime;
 	private long    lastVideoTime;
+	private Integer categoryId;
 	private boolean	newVideosSinceLastVisit = false;
 	private final List<YouTubeVideo> youTubeVideos = new ArrayList<>();
 
@@ -73,7 +74,8 @@ public class YouTubeChannel extends CardData implements Serializable {
 	}
 
 	public YouTubeChannel(String id, String title, String description, String thumbnailUrl,
-						  String bannerUrl, long subscriberCount, boolean isUserSubscribed, long lastVisitTime, long lastCheckTime) {
+						  String bannerUrl, long subscriberCount, boolean isUserSubscribed, long lastVisitTime, long lastCheckTime,
+						  Integer categoryId) {
 		this.id = id;
 		this.title = title;
 		this.description = description;
@@ -84,6 +86,7 @@ public class YouTubeChannel extends CardData implements Serializable {
 		this.isUserSubscribed = isUserSubscribed;
 		this.lastVisitTime = lastVisitTime;
 		this.lastCheckTime = lastCheckTime;
+		this.categoryId = categoryId;
 	}
 
 	/**
@@ -178,6 +181,14 @@ public class YouTubeChannel extends CardData implements Serializable {
 	}
 
 	public long getLastCheckTime() { return lastCheckTime; }
+
+	public Integer getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(Integer categoryId) {
+		this.categoryId = categoryId;
+	}
 
 	public void setUserSubscribed(boolean userSubscribed) {
 		isUserSubscribed = userSubscribed;
