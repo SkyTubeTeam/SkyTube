@@ -73,6 +73,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 	private static final String SUBSCRIBED_CHANNEL_INFO_ORDER_BY = " ORDER BY "+sortChannelsASC;
 	private static final String SUBSCRIBED_CHANNEL_LIMIT_BY_TITLE = " WHERE LOWER(" +SubscriptionsTable.COL_TITLE + ") like ?";
 
+	private static final String IS_SUBSCRIBED_QUERY = String.format("SELECT EXISTS(SELECT %s FROM %s WHERE %s =?) AS VAL ", SubscriptionsTable.COL_ID, SubscriptionsTable.TABLE_NAME, SubscriptionsTable.COL_CHANNEL_ID);
 	private static volatile SubscriptionsDb subscriptionsDb = null;
 
 	private static final int DATABASE_VERSION = 5;
@@ -376,15 +377,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 	public boolean isUserSubscribedToChannel(String channelId) {
 	    channelId = Utils.removeChannelIdPrefix(channelId);
 
-		try (Cursor cursor = getReadableDatabase().rawQuery(
-				"SELECT EXISTS(SELECT " + SubscriptionsTable.COL_ID + " FROM " + SubscriptionsTable.TABLE_NAME + " WHERE " + SubscriptionsTable.COL_CHANNEL_ID + " =?) AS VAL ",
-				new String[] { channelId })) {
-			if (cursor.moveToNext()) {
-				return cursor.getInt(0) > 0;
-			}
-		}
-
-	    return false;
+		return executeQueryForInteger(IS_SUBSCRIBED_QUERY, new String[]{channelId}, 0) > 0;
 	}
 
 
@@ -460,12 +453,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 	}
 
 	private boolean hasVideo(YouTubeVideo video) {
-		try (Cursor cursor = getReadableDatabase().rawQuery(HAS_VIDEO_QUERY, new String[]{video.getId()})) {
-			if (cursor.moveToFirst()) {
-				return cursor.getInt(0) > 0;
-			}
-			return false;
-		}
+		return executeQueryForInteger(HAS_VIDEO_QUERY, new String[]{video.getId()}, 0) > 0;
 	}
 
 
@@ -482,14 +470,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 		//Unfortunately, this doesn't work, due to XXX is not supported on this API level
 		// String formatted = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX", Locale.US).format(channel.getLastVisitTime());
 		String formatted = new DateTime(channel.getLastVisitTime()).toString();
-		try (Cursor cursor = getReadableDatabase().rawQuery(CHANNEL_HAS_NEW_VIDEO_QUERY,
-							new String[]{channel.getId(), formatted})) {
-
-			if (cursor.moveToFirst()) {
-				return cursor.getInt(0) > 0;
-			}
-			return false;
-		}
+		return executeQueryForInteger(CHANNEL_HAS_NEW_VIDEO_QUERY, new String[]{channel.getId(), formatted}, 0) > 0;
 	}
 
 	/**

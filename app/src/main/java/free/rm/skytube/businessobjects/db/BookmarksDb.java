@@ -211,31 +211,14 @@ public class BookmarksDb extends SQLiteOpenHelperEx implements OrderableDatabase
 	 * @return The total number of bookmarked videos.
 	 */
 	public int getTotalBookmarks() {
-		String	query = String.format("SELECT COUNT(*) FROM %s", BookmarksTable.TABLE_NAME);
-		Cursor	cursor = BookmarksDb.getBookmarksDb().getReadableDatabase().rawQuery(query, null);
-		int		totalBookmarks = 0;
-
-		if (cursor.moveToFirst()) {
-			totalBookmarks = cursor.getInt(0);
-		}
-
-		cursor.close();
-		return totalBookmarks;
+		return executeQueryForInteger(BookmarksTable.COUNT_ALL_BOOKMARKS, 0);
 	}
 
 	/**
 	 * @return The maximum of the order number - which could be different from the number of bookmarked videos, in case some of them are deleted.
 	 */
 	public int getMaximumOrderNumber() {
-		Cursor	cursor = getReadableDatabase().rawQuery(BookmarksTable.MAXIMUM_ORDER_QUERY, null);
-		int		maxBookmarkOrder = 0;
-
-		if (cursor.moveToFirst()) {
-			maxBookmarkOrder = cursor.getInt(0);
-		}
-
-		cursor.close();
-		return maxBookmarkOrder;
+		return executeQueryForInteger(BookmarksTable.MAXIMUM_ORDER_QUERY, 0);
 	}
 
 

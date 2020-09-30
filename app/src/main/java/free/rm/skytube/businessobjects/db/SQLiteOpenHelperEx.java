@@ -18,6 +18,8 @@
 package free.rm.skytube.businessobjects.db;
 
 import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.io.File;
@@ -65,6 +67,54 @@ public abstract class SQLiteOpenHelperEx extends SQLiteOpenHelper {
 	 */
 	public File getDatabaseDirectory() {
 		return SkyTubeApp.getContext().getDatabasePath(getDatabaseName()).getParentFile();
+	}
+
+	/**
+	 * Execute a <b>constant</b> query, and return the number in the first row, first column.
+	 *
+	 * @param query the query to execute
+	 * @param selectionArgs the arguments for the query.
+	 * @return a number.
+	 */
+	public Integer executeQueryForInteger(String query, String[] selectionArgs, Integer defaultValue) {
+		return executeQueryForInteger(getReadableDatabase(), query, selectionArgs, defaultValue);
+	}
+
+	/**
+	 * Execute a <b>constant</b> query, and return the number in the first row, first column.
+	 *
+	 * @param query the query to execute
+	 * @return a number.
+	 */
+	public Integer executeQueryForInteger(String query, Integer defaultValue) {
+		return executeQueryForInteger(getReadableDatabase(), query, null, defaultValue);
+	}
+
+	/**
+	 * Execute a <b>constant</b> query, and return the number in the first row, first column.
+	 *
+	 * @param db the database to execute on.
+	 * @param query the query to execute
+	 * @param selectionArgs the arguments for the query.
+	 * @return a number.
+	 */
+	public static Integer executeQueryForInteger(SQLiteDatabase db, String query, String[] selectionArgs, Integer defaultValue) {
+		try (Cursor cursor = db.rawQuery(query, selectionArgs)) {
+			if (cursor.moveToFirst()) {
+				return cursor.getInt(0);
+			}
+		}
+		return defaultValue;
+	}
+
+	/**
+	 * Execute a <b>constant</b> query, and return the number in the first row, first column.
+	 *
+	 * @param query the query to execute
+	 * @return a number.
+	 */
+	public static Integer executeQueryForInteger(SQLiteDatabase db, String query, Integer defaultValue) {
+		return executeQueryForInteger(db, query, null, defaultValue);
 	}
 
 }
