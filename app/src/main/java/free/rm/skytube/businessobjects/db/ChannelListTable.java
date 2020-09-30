@@ -18,13 +18,19 @@
 package free.rm.skytube.businessobjects.db;
 
 /**
- * The parent class for {@link ChannelBlacklistTable} and {@link ChannelWhitelistTable}.
+ * The enumeration of the blacklist and whitelist.
  */
-public abstract class ChannelListTable {
+public enum ChannelListTable {
+	BLACKLIST("Blacklist"), WHITELIST("Whitelist");
 
 	public static final String COL_ID  = "_id";
 	public static final String COL_CHANNEL_ID = "Channel_Id";
 	public static final String COL_CHANNEL_NAME = "Channel_Name";
+
+	private final String tableName;
+	ChannelListTable(String tableName) {
+		this.tableName = tableName;
+	}
 
 	/**
 	 * Returns the create table statement.
@@ -41,10 +47,16 @@ public abstract class ChannelListTable {
 				")";
 	}
 
+	public String getCreateStatement() {
+		return getCreateStatement(getTableName());
+	}
+
 
 	/**
 	 * @return The table name.
 	 */
-	public abstract String getTableName();
+	public String getTableName() {
+		return tableName;
+	}
 
 }
