@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="category_games" translatable="false">category_games</string>
+    <string name="category_music" translatable="false">category_music</string>
+    <string name="category_news" translatable="false">category_news</string>
+    <string name="category_youtuber" translatable="false">category_youtuber</string>
+    <string name="category_tutorials" translatable="false">category_tutorials</string>
+    <string name="category_for_kids" translatable="false">category_for_kids</string>
+
+    <string name="category_games_label">Games</string>
+    <string name="category_music_label">Music</string>
+    <string name="category_news_label">News</string>
+    <string name="category_youtuber_label">Youtubers</string>
+    <string name="category_tutorials_label">Tutorials</string>
+    <string name="category_for_kids_label">For Kids</string>
+
+</resources>
