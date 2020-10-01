@@ -364,7 +364,10 @@ public class MainActivity extends BaseActivity {
 			.show();
 
 		// paste whatever there is in the clipboard (hopefully it is a video url)
-		((EditText) alertDialog.findViewById(R.id.dialog_url_edittext)).setText(getClipboardItem());
+		CharSequence charSequence = getClipboardItem();
+		if (charSequence != null) {
+			((EditText) alertDialog.findViewById(R.id.dialog_url_edittext)).setText(charSequence.toString());
+		}
 
 		// clear URL edittext button
 		alertDialog.findViewById(R.id.dialog_url_clear_button).setOnClickListener(v -> ((EditText) alertDialog.findViewById(R.id.dialog_url_edittext)).setText(""));
@@ -374,10 +377,10 @@ public class MainActivity extends BaseActivity {
 	/**
 	 * Return the last item stored in the clipboard.
 	 *
-	 * @return	{@link String}
+	 * @return	{@link CharSequence}
 	 */
-	private String getClipboardItem() {
-		String              clipboardText    = "";
+	private CharSequence getClipboardItem() {
+		CharSequence              clipboardText    = null;
 		ClipboardManager    clipboardManager = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
 
 		// if the clipboard contain data ...
@@ -385,7 +388,7 @@ public class MainActivity extends BaseActivity {
 			ClipData.Item item = clipboardManager.getPrimaryClip().getItemAt(0);
 
 			// gets the clipboard as text.
-			clipboardText = item.getText().toString();
+			clipboardText = item.coerceToText(this);
 		}
 
 		return clipboardText;

@@ -22,6 +22,7 @@ import android.app.AlarmManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.ActivityNotFoundException;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.ComponentName;
@@ -53,6 +54,7 @@ import java.util.List;
 
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.FeedUpdaterReceiver;
+import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubePlaylist;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetPlaylistTask;
@@ -312,8 +314,7 @@ public class SkyTubeApp extends MultiDexApplication {
 		try {
 			ContentId id = NewPipeService.get().getContentId(url);
 			if (id == null && showErrorIfNotValid) {
-				String message = String.format(context.getString(R.string.error_invalid_url), url);
-				Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+				showInvalidUrlToast(context, url);
 			}
 			return id;
 		} catch (FoundAdException e) {
@@ -325,6 +326,12 @@ public class SkyTubeApp extends MultiDexApplication {
 		}
 
 	}
+
+	private static void showInvalidUrlToast(@NonNull Context context, String url) {
+		String message = String.format(context.getString(R.string.error_invalid_url), url);
+		Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+	}
+
 	/**
 	 * Open the url - internally, or externally if useExternalBrowser is switched on.
 	 * @param ctx
@@ -421,7 +428,12 @@ public class SkyTubeApp extends MultiDexApplication {
 	public static void viewInBrowser(String url, final Context context) {
 		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
 		browserIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		context.startActivity(browserIntent);
+		try {
+			context.startActivity(browserIntent);
+		} catch (ActivityNotFoundException e) {
+			showInvalidUrlToast(context, url);
+			Log.e("SkyTubeApp", "Activity not found for " + url + ", error:" + e.getMessage(), e);
+		}
 	}
 
 }
