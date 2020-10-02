@@ -13,4 +13,5 @@
     <string name="fetching_subscription_videos">Hämtar videor från prenumererade kanaler</string>
     <string name="fetching_subbed_channels_info">Hämtar kanalinformation…</string>
     <string name="fetched_videos_from_channels">Hämtade %1$d videor från %2$d/%3$d kanaler.</string>
+    <string name="open_channel">Öppna kanal</string>
 </resources>

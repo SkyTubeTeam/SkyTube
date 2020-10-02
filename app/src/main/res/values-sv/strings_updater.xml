@@ -8,4 +8,5 @@
     <string name="up_to_date_msg">Du har den senaste versionen av SkyTube installerad.</string>
     <string name="update_dialog_msg">En ny version av SkyTube finns tillgänglig. Version %s kommer att installeras.</string>
     <string name="later">Senare</string>
+    <string name="release_notes">Förändringar i %s</string>
 </resources>

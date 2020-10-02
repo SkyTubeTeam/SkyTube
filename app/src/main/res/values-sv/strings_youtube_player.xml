@@ -33,5 +33,9 @@
     <string name="error_invalid_url">Ogiltig video-URL: %s</string>
     <string name="share">Dela</string>
     <string name="error_get_video_desc">Ett fel inträffade vid hämtning av videons beskrivning.</string>
-    <string name="no_video_comments">Den här videon har inga kommentarer eller så är kommentarer inaktiverade.</string>
+    <string name="no_video_comments">Den här videon har antingen inga kommentarer eller så är de inaktiverade.</string>
+    <string name="error_get_comments_no_network">Nätverksåtkomst krävs för att hämta kommentarer.</string>
+    <string name="mobile_data_blocked_by_policy">Nedladdning blockerad eftersom din enhet inte är ansluten till ett Wi-Fi-nätverk.</string>
+    <string name="error_video_parse_error">Det går inte att börja spela upp videon, felmeddelandet är: <br/> <br/> %s.</string>
+    <string name="error_downloaded_file_is_corrupted">Den nedladdade videon ser <b>skadad</b> ut - felmeddelandet är: <br/> <br/> %s. <br/> <br/> Vill du <b>radera</b> filen\?</string>
 </resources>

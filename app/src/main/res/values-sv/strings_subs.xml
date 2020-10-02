@@ -21,4 +21,8 @@
     <string name="import_subscriptions_parse_error">Ett fel uppstod när man försökte analysera XML-filen som du laddade upp: %s.</string>
     <string name="import_subscriptions">Importera prenumerationer</string>
     <string name="unsubscribe">Avsluta prenumerationen</string>
+    <string name="channel_unsubscribed">Prenumeration avslutad</string>
+    <string name="channel_subscribe_failed">Det gick inte att prenumerera på kanalen</string>
+    <string name="channel_already_subscribed">Du prenumererar redan på den här kanalen</string>
+    <string name="channel_subscribed">Kanal prenumererad</string>
 </resources>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="bookmark_share_invalid_url">Kun gyldig YouTube-URL\'er kan bogmærkes.</string>
+    <string name="bookmark_share_label">SkyTube bogmærke</string>
+    <string name="no_bookmarked_videos_text">Du har ikke tilføjet nogen bogmærker til nogen videoer endnu.
+\n
+\nNår du har gjort det, vises de her.</string>
+    <string name="video_unbookmarked_error">Kunne ikke fjerne bogmærke af videoen.</string>
+    <string name="video_was_not_bookmarked">Videoen blev ikke bogmærket</string>
+    <string name="video_unbookmarked">Videoen er ikke bogmærket</string>
+    <string name="unbookmark">Fjern bogmærke</string>
+    <string name="video_bookmarked_error">Kunne ikke bogmærke videoen.</string>
+    <string name="video_already_bookmarked">Videoen er allerede bogmærket</string>
+    <string name="video_bookmarked">Videobogmærke</string>
+    <string name="bookmark">Bogmærke</string>
+    <string name="bookmarks">Bogmærker</string>
+</resources>

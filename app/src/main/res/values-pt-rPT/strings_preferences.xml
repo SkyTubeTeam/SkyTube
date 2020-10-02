@@ -54,8 +54,8 @@
 	</string>
     <string name="i_agree">Concordo</string>
     <string name="pref_other_category">Outras</string>
-    <string name="pref_title_default_tab">Separador padrão</string>
-    <string name="pref_summary_default_tab">Separador usado ao iniciar o SkyTube: %s</string>
+    <string name="pref_title_default_tab">Guia predefinida</string>
+    <string name="pref_summary_default_tab">Guia predefinida usada ao iniciar o SkyTube: %s</string>
     <string name="pref_title_screen_orientation">Orientação do ecrã</string>
     <string name="pref_summary_screen_orientation">Orientação de reprodutor: %s</string>
     <string-array name="screen_orientations">
@@ -68,7 +68,7 @@
     <string name="pref_summary_youtube_api_key">Introduza a sua chave da API de dados do YouTube. Deixe em branco para usar o padrão.</string>
     <string name="pref_youtube_api_key_error">Ocorreu um erro ao tentar validar a chave da API introduzida.</string>
     <string name="pref_youtube_api_key_custom">A chave é válida. Reinicie a aplicação para usar a nova chave API do YouTube.</string>
-    <string name="pref_youtube_api_key_default">Reinicie a aplicação para retornar à chave padrão da API do YouTube.</string>
+    <string name="pref_youtube_api_key_default">Reinicie a aplicação para retornar à chave predefinida da API do YouTube.</string>
     <string name="restart">Reiniciar</string>
     <string name="pref_title_feed_notification">Notificação automática de fontes</string>
     <string name="pref_summary_feed_notification">Periodicidade para procurar novos vídeos nos canais subscritos: %s</string>
@@ -120,7 +120,7 @@
     <string name="pref_title_download_to_separate_directories">Descarregar vídeos para diretórios</string>
     <string name="pref_summary_download_to_separate_directories">Os vídeos serão descarregados em diretórios tendo por base o nome do canal.</string>
     <string name="channel_already_whitelisted">O canal já está na lista de canais permitidos.</string>
-    <string name="channel_whitelist_update_failure">Falha ao colocar o canal da lista de permitidos.</string>
+    <string name="channel_whitelist_update_failure">Falha ao pôr o canal da lista de permitidos.</string>
     <string name="channel_unwhitelist_success">Lista de canais atualizada. Por favor recarregue os vídeos.</string>
     <string name="channel_unwhitelist_failure">Falha ao retirar os canais da lista de permitidos.</string>
     <string name="no_preferred_lang_selected">Não escolheu o idioma preferencial. Definição ignorada.</string>
