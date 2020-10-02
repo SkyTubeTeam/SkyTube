@@ -57,7 +57,6 @@ public class BookmarksDb extends SQLiteOpenHelperEx implements OrderableDatabase
 
 	private final Set<BookmarksDbListener> listeners = new HashSet<>();
 
-
 	private BookmarksDb(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 	}
@@ -190,7 +189,6 @@ public class BookmarksDb extends SQLiteOpenHelperEx implements OrderableDatabase
 		}
 	}
 
-
 	/**
 	 * Check if the specified Video has been bookmarked.
 	 *
@@ -199,13 +197,8 @@ public class BookmarksDb extends SQLiteOpenHelperEx implements OrderableDatabase
 	 * @return True if it has been bookmarked, false if not.
 	 */
 	public boolean isBookmarked(String videoId) {
-		Cursor cursor = getReadableDatabase().rawQuery("SELECT EXISTS(SELECT "+ BookmarksTable.COL_YOUTUBE_VIDEO_ID +" FROM "+BookmarksTable.TABLE_NAME+" WHERE "+BookmarksTable.COL_YOUTUBE_VIDEO_ID+" =?)",new String[]{videoId});
-		boolean	hasVideo = cursor.moveToNext();
-
-		cursor.close();
-		return hasVideo;
+		return executeQueryForInteger(BookmarksTable.IS_BOOKMARKED_QUERY, new String[]{videoId}, 0) > 0;
 	}
-
 
 	/**
 	 * @return The total number of bookmarked videos.
