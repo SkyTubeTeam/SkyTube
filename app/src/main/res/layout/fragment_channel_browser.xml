@@ -27,9 +27,11 @@
 
 
 	<com.google.android.material.appbar.AppBarLayout
+		android:id="@+id/app_bar_layout"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        android:background="@color/colorPrimary"
+		>
 
 		<FrameLayout
 			android:layout_width="match_parent"
@@ -43,8 +45,7 @@
 				android:layout_height="wrap_content"
 				android:adjustViewBounds="true"
 				android:scaleType="fitXY"
-				android:src="@drawable/banner_default"
-				android:tint="#14000000" />
+				android:src="@drawable/banner_default"/>
 
 			<LinearLayout
 				android:layout_width="match_parent"
@@ -56,7 +57,7 @@
 					android:id="@+id/toolbar"
 					android:layout_width="match_parent"
 					android:layout_height="?attr/actionBarSize"
-					android:theme="@style/ThemeOverlay.AppCompat.Dark" />
+					/>
 
 				<RelativeLayout
 					android:layout_width="match_parent"
@@ -77,18 +78,11 @@
 					<TextView
 						android:id="@+id/channel_subs_text_view"
 						android:layout_centerVertical="true"
-						android:layout_toRightOf="@+id/channel_thumbnail_image_view"
+						android:layout_toEndOf="@+id/channel_thumbnail_image_view"
 						android:padding="10dp"
 						android:text="@string/loading"
 						style="@style/ChannelSubsTextView"/>
 
-					<!-- SUBSCRIBE BUTTON -->
-					<free.rm.skytube.gui.businessobjects.views.SubscribeButton
-						android:id="@+id/channel_subscribe_button"
-						style="@style/SubscribeButton"
-						android:layout_alignParentRight="true"
-						android:layout_centerVertical="true"
-						android:layout_margin="16dp"/>
 
 				</RelativeLayout>
 
@@ -98,12 +92,24 @@
 
 		<com.google.android.material.tabs.TabLayout
 			android:id="@+id/tab_layout"
-			android:layout_width="wrap_content"
+			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:background="?attr/colorPrimary"
 			android:layout_gravity="center_horizontal"
+			style="@style/FixedTabs"
+
 			app:tabMode="scrollable"/>
 
 	</com.google.android.material.appbar.AppBarLayout>
+
+	<com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+		android:id="@+id/channel_subscribe_button"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_margin="8dp"
+		android:visibility="invisible"
+		android:text="@string/subscribe"
+
+		app:layout_anchor="@id/app_bar_layout"
+		app:layout_anchorGravity="top|right|end" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

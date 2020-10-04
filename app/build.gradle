@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: "de.mannodermaus.android-junit5"
 
 android {
-    compileSdkVersion 33
+    compileSdkVersion 34
     buildToolsVersion '34.0.0'
     namespace 'free.rm.skytube'
 
@@ -110,7 +110,7 @@ dependencies {
     implementation 'androidx.preference:preference:1.1.1'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
-    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'com.google.android.material:material:1.11.0'
 
 /** ExoPlayer **/
     // Application level media player

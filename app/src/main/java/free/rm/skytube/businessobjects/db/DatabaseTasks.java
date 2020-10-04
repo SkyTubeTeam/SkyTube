@@ -23,6 +23,7 @@ import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.YouTube.VideoBlocker;
 import free.rm.skytube.businessobjects.YouTube.newpipe.ChannelId;
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
+import free.rm.skytube.gui.businessobjects.views.ChannelSubscriber;
 import free.rm.skytube.gui.businessobjects.views.SubscribeButton;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Completable;
@@ -149,7 +150,7 @@ public class DatabaseTasks {
      * @param displayToastMessage Whether or not a toast should be shown.
      */
     public static Single<DatabaseResult> subscribeToChannel(boolean subscribeToChannel,
-                                                            @Nullable SubscribeButton subscribeButton,
+                                                            @Nullable ChannelSubscriber subscribeButton,
                                                             @NonNull Context context,
                                                             @NonNull YouTubeChannel channel,
                                                             boolean displayToastMessage) {

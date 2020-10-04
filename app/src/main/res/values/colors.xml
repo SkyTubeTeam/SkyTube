@@ -3,6 +3,8 @@
 	<color name="colorPrimary">#263238</color>
 	<color name="colorPrimaryDark">#21272B</color>
 	<color name="colorAccent">#26A69A</color>
+	<color name="brightText">#FFF</color>
+	<color name="darkerText">#F5F5F5</color>
 
 	<color name="skytube_theme_colour">#ff6600</color>
 
@@ -10,7 +12,7 @@
 		Material Dialog Colors
 	-->
 	<color name="dialog_title">#000</color>
-	<color name="dialog_backgound">#FFF</color>
+	<color name="dialog_backgound">@color/brightText</color>
 	<color name="dialog_content_text">#000</color>
 	<color name="dialog_positive_text">@color/colorAccent</color>
 	<color name="dialog_negative_text">@color/colorAccent</color>
@@ -36,7 +38,7 @@
 	<color name="subs_drawer_background">#CC21272B</color>
 	<drawable name="sub_channel_pressed">@color/colorAccent</drawable>
 	<drawable name="sub_channel">@android:color/transparent</drawable>
-	<color name="subs_text">#FFF</color>
+	<color name="subs_text">@color/brightText</color>
 
 	<drawable name="subscribe_button">@color/skytube_theme_colour</drawable>
 	<drawable name="subscribe_button_pressed">#ff8e44</drawable>
@@ -92,6 +94,6 @@
 	<!--
 		Subscriptions Feed
 	-->
-	<color name="feed_message_text">#FFF</color>
+	<color name="feed_message_text">@color/brightText</color>
 
 </resources>
