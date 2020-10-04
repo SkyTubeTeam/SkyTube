@@ -41,17 +41,19 @@
 				android:id="@+id/toolbar"
 				android:layout_width="match_parent"
 				android:layout_height="?attr/actionBarSize"
-				android:theme="@style/ThemeOverlay.AppCompat.Dark"
+				android:theme="@style/AppTheme.CustomBackground"
 				app:layout_scrollFlags="scroll|enterAlways" />
 
 			<!-- TABS -->
 			<com.google.android.material.tabs.TabLayout
 				android:id="@+id/tab_layout"
-				android:layout_width="wrap_content"
+				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:background="?attr/colorPrimary"
 				android:layout_gravity="center_horizontal"
-				app:tabMode="scrollable"/>
+                app:tabMode="scrollable"
+                style="@style/FixedTabs"
+
+            />
 
 		</com.google.android.material.appbar.AppBarLayout>
 
