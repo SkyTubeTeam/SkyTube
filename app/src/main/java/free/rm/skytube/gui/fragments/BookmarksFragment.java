@@ -72,11 +72,15 @@ public class BookmarksFragment extends OrderableVideosGridFragment implements Bo
 	@Override
 	public void onBookmarkAdded(YouTubeVideo video) {
 		videoGridAdapter.prepend(video);
+		setBookmarkListVisible(true);
 	}
 
 	@Override
 	public void onBookmarkDeleted(VideoId videoId) {
 		videoGridAdapter.remove( card -> videoId.getId().equals(card.getId()));
+		if (videoGridAdapter.getItemCount() == 0) {
+			setBookmarkListVisible(false);
+		}
 	}
 
 	@Override
@@ -112,6 +116,15 @@ public class BookmarksFragment extends OrderableVideosGridFragment implements Bo
 		super.onDestroyView();
 	}
 
+	private void setBookmarkListVisible(boolean visible) {
+		if (visible) {
+			swipeRefreshLayout.setVisibility(View.VISIBLE);
+			noBookmarkedVideosText.setVisibility(View.GONE);
+		} else {
+			swipeRefreshLayout.setVisibility(View.GONE);
+			noBookmarkedVideosText.setVisibility(View.VISIBLE);
+		}
+	}
 	////////////////////////////////////////////////////////////////////////////////////////////////
 
 	/**
@@ -135,13 +148,9 @@ public class BookmarksFragment extends OrderableVideosGridFragment implements Bo
 			}
 			// If no videos have been bookmarked, show the text notifying the user, otherwise
 			// show the swipe refresh layout that contains the actual video grid.
-			if (numVideosBookmarked <= 0) {
-				swipeRefreshLayout.setVisibility(View.GONE);
-				noBookmarkedVideosText.setVisibility(View.VISIBLE);
-			} else {
-				swipeRefreshLayout.setVisibility(View.VISIBLE);
-				noBookmarkedVideosText.setVisibility(View.GONE);
-
+			boolean listShouldBeVisible = numVideosBookmarked > 0;
+			setBookmarkListVisible(listShouldBeVisible);
+			if (listShouldBeVisible) {
 				// set video category and get the bookmarked videos asynchronously
 				videoGridAdapter.setVideoCategory(VideoCategory.BOOKMARKS_VIDEOS);
 			}
