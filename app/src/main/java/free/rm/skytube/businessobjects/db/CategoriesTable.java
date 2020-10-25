@@ -26,13 +26,15 @@ public class CategoriesTable {
     public static final String COL_ENABLED = "enabled";
     public static final String COL_PRIORITY = "priority";
     public static final String COL_LABEL = "label";
+    public static final String COL_ICON = "icon";
 
     static final String[] ALL_COLUMNS_FOR_EXTRACT = new String[] {
             COL_ID,
             COL_BUILTIN,
             COL_ENABLED,
             COL_PRIORITY,
-            COL_LABEL
+            COL_LABEL,
+            COL_ICON
     };
 
     static final String MAXIMUM_PRIORITY_QUERY = String.format("SELECT MAX(%s) FROM %s", COL_PRIORITY, TABLE_NAME);
@@ -43,6 +45,7 @@ public class CategoriesTable {
         return "CREATE TABLE " + TABLE_NAME + " (" +
                 COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
                 COL_LABEL + " TEXT NOT NULL, " +
+                COL_ICON + " TEXT, " +
                 COL_BUILTIN + " INTEGER, " +
                 COL_ENABLED + " INTEGER, " +
                 COL_PRIORITY + " INTEGER" +
