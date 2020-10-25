@@ -163,7 +163,7 @@ public class NewPipeService {
      * @throws IOException
      */
     private List<YouTubeVideo> getChannelVideos(String channelId) throws NewPipeException {
-        VideoPager pager = getChannelPager(channelId);
+        VideoPagerWithChannel pager = getChannelPager(channelId);
         List<YouTubeVideo> result = pager.getNextPageAsVideos();
         Logger.i(this, "getChannelVideos for %s(%s)  -> %s videos", pager.getChannel().getTitle(), channelId, result.size());
         return result;
@@ -184,7 +184,7 @@ public class NewPipeService {
             return null;
         }
         feedExtractor.fetchPage();
-        return new VideoPager(streamingService, (ListExtractor)feedExtractor, createInternalChannelFromFeed(feedExtractor)).getNextPageAsVideos();
+        return new VideoPagerWithChannel(streamingService, (ListExtractor)feedExtractor, createInternalChannelFromFeed(feedExtractor)).getNextPageAsVideos();
     }
 
     /**
@@ -212,31 +212,31 @@ public class NewPipeService {
             KioskList kiosks = streamingService.getKioskList();
             KioskExtractor kex = kiosks.getDefaultKioskExtractor();
             kex.fetchPage();
-            return new VideoPager(streamingService, kex, null);
+            return new VideoPager(streamingService, kex);
         } catch (ExtractionException | IOException e) {
             throw new NewPipeException("Unable to get 'trending' list:" + e.getMessage(), e);
         }
     }
 
-    public VideoPager getChannelPager(String channelId) throws NewPipeException {
+    public VideoPagerWithChannel getChannelPager(String channelId) throws NewPipeException {
         try {
             ChannelExtractor channelExtractor = getChannelExtractor(channelId);
 
             YouTubeChannel channel = createInternalChannel(channelExtractor);
-            return new VideoPager(streamingService, (ListExtractor) channelExtractor, channel);
+            return new VideoPagerWithChannel(streamingService, (ListExtractor) channelExtractor, channel);
         } catch (ExtractionException | IOException | RuntimeException e) {
             throw new NewPipeException("Getting videos for " + channelId + " fails:" + e.getMessage(), e);
         }
     }
 
-    public PlaylistPager getPlaylistPager(String channelId) throws NewPipeException {
+    public PlaylistPager getPlaylistPager(String playlistId) throws NewPipeException {
         try {
-            ListLinkHandler channelList = getListLinkHandler(channelId);
-            PlaylistExtractor playlistExtractor = streamingService.getPlaylistExtractor(channelList);
+            ListLinkHandler playlistLinkHandler = getPlaylistHandler(playlistId);
+            PlaylistExtractor playlistExtractor = streamingService.getPlaylistExtractor(playlistLinkHandler);
             playlistExtractor.fetchPage();
             return new PlaylistPager(streamingService, playlistExtractor);
         } catch (ExtractionException | IOException | RuntimeException e) {
-            throw new NewPipeException("Getting playlists for " + channelId + " fails:" + e.getMessage(), e);
+            throw new NewPipeException("Getting playlists for " + playlistId + " fails:" + e.getMessage(), e);
         }
     }
 
@@ -259,10 +259,11 @@ public class NewPipeService {
      */
     public YouTubeChannel getChannelDetails(String channelId) throws NewPipeException {
         Utils.requireNonNull(channelId, "channelId");
-        VideoPager pager = getChannelPager(channelId);
+        VideoPagerWithChannel pager = getChannelPager(channelId);
         // get the channel, and add all the videos from the first page
-        pager.getChannel().getYouTubeVideos().addAll(pager.getNextPageAsVideos());
-        return pager.getChannel();
+        YouTubeChannel channel = pager.getChannel();
+        channel.getYouTubeVideos().addAll(pager.getNextPageAsVideos());
+        return channel;
     }
 
     private YouTubeChannel createInternalChannelFromFeed(FeedExtractor extractor) throws ParsingException {
@@ -314,6 +315,10 @@ public class NewPipeService {
             return channelLHFactory.fromId(channelId);
         }
         return channelLHFactory.fromId("channel/" + channelId);
+    }
+
+    private ListLinkHandler getPlaylistHandler(String playlistId) throws ParsingException {
+        return streamingService.getPlaylistLHFactory().fromId(playlistId);
     }
 
     /**
@@ -406,7 +411,7 @@ public class NewPipeService {
         try {
             SearchExtractor extractor = streamingService.getSearchExtractor(query);
             extractor.fetchPage();
-            return new VideoPager(streamingService, extractor, null);
+            return new VideoPager(streamingService, extractor);
         } catch (ExtractionException | IOException | RuntimeException e) {
             throw new NewPipeException("Getting search result for " + query + " fails:" + e.getMessage(), e);
         }

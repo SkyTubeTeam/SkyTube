@@ -29,6 +29,7 @@ import free.rm.skytube.businessobjects.YouTube.GetMostPopularVideos;
 import free.rm.skytube.businessobjects.YouTube.GetPlaylistVideos;
 import free.rm.skytube.businessobjects.YouTube.GetYouTubeVideos;
 import free.rm.skytube.businessobjects.YouTube.NewPipeChannelVideos;
+import free.rm.skytube.businessobjects.YouTube.NewPipePlaylistVideos;
 import free.rm.skytube.businessobjects.YouTube.NewPipeVideoBySearch;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPIKey;
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
@@ -87,7 +88,7 @@ public enum VideoCategory {
 			case SUBSCRIPTIONS_FEED_VIDEOS: return new GetSubscriptionsVideosFromDb();
 			case BOOKMARKS_VIDEOS: return new GetBookmarksVideos();
 			case MIXED_PLAYLIST_VIDEOS:
-			case PLAYLIST_VIDEOS: return new GetPlaylistVideos();
+			case PLAYLIST_VIDEOS: return new NewPipePlaylistVideos();// new GetPlaylistVideos();
 			case DOWNLOADED_VIDEOS: return new GetDownloadedVideos();
 		}
 		// this will notify the developer that he forgot to edit this method when a new type is added

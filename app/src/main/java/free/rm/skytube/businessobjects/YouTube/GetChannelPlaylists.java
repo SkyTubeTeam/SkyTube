@@ -25,6 +25,7 @@ import com.google.api.services.youtube.model.PlaylistListResponse;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPI;
@@ -65,32 +66,29 @@ public class GetChannelPlaylists {
 			playlistList.setChannelId(channel.getId());
 	}
 
-	public List<YouTubePlaylist> getNextPlaylists() {
-		List<Playlist> playlistList = null;
+	public List<YouTubePlaylist> getNextPlaylists() throws IOException {
 
 		if (!noMorePlaylistPages()) {
-			try {
-				// set the page token/id to retrieve
-				this.playlistList.setPageToken(nextPageToken);
+			List<Playlist> playlistList = null;
+			// set the page token/id to retrieve
+			this.playlistList.setPageToken(nextPageToken);
 
-				// communicate with YouTube
-				PlaylistListResponse listResponse = this.playlistList.execute();
+			// communicate with YouTube
+			PlaylistListResponse listResponse = this.playlistList.execute();
 
-				// get playlists
-				playlistList = listResponse.getItems();
+			// get playlists
+			playlistList = listResponse.getItems();
 
-				// set the next page token
-				nextPageToken = listResponse.getNextPageToken();
+			// set the next page token
+			nextPageToken = listResponse.getNextPageToken();
 
-				// if nextPageToken is null, it means that there are no more videos
-				if (nextPageToken == null)
-					noMorePlaylistPages = true;
-			} catch (IOException ex) {
-				Log.e(TAG, ex.getLocalizedMessage());
-			}
+			// if nextPageToken is null, it means that there are no more videos
+			if (nextPageToken == null)
+				noMorePlaylistPages = true;
+			return toYouTubePlaylistList(playlistList);
 		}
+		return Collections.emptyList();
 
-		return toYouTubePlaylistList(playlistList);
 	}
 
 	public boolean noMorePlaylistPages() {
