@@ -1,33 +1,62 @@
+/*
+ * SkyTube
+ * Copyright (C) 2020  Zsombor Gegesy
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation (version 3 of the License).
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package free.rm.skytube.businessobjects.YouTube.newpipe;
 
+import org.schabi.newpipe.extractor.InfoItem;
 import org.schabi.newpipe.extractor.ListExtractor;
 import org.schabi.newpipe.extractor.StreamingService;
-import org.schabi.newpipe.extractor.localization.DateWrapper;
+import org.schabi.newpipe.extractor.exceptions.ParsingException;
 import org.schabi.newpipe.extractor.playlist.PlaylistExtractor;
-import org.schabi.newpipe.extractor.stream.StreamInfoItem;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import free.rm.skytube.businessobjects.Logger;
+import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
+import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubePlaylist;
 
-class PlaylistPager extends Pager<StreamInfoItem, YouTubePlaylist>  {
+class PlaylistPager extends VideoPager {
+    private YouTubePlaylist playlist;
+    private final PlaylistExtractor playlistExtractor;
     public PlaylistPager(StreamingService streamingService, PlaylistExtractor playlistExtractor) {
-        super(streamingService, playlistExtractor);
+        super(streamingService, (ListExtractor) playlistExtractor);
+        this.playlistExtractor = playlistExtractor;
     }
 
     @Override
-    protected List<YouTubePlaylist> extract(ListExtractor.InfoItemsPage<StreamInfoItem> page) {
-        List<YouTubePlaylist> result = new ArrayList<>(page.getItems().size());
-        Logger.i(this, "extract from %s, items: %s", page, page.getItems().size());
-        for (StreamInfoItem item: page.getItems()) {
-            Logger.i(this, "item is %s - uploader: %s / %s", item, item.getUploaderUrl(), item.getUploaderName());
-            DateWrapper dw = item.getUploadDate();
-            Long publishTimestamp = dw != null ? dw.date().getTimeInMillis() : null;
-            YouTubePlaylist playlist = new YouTubePlaylist(item.getUrl(), item.getName(), "", publishTimestamp, 1, item.getThumbnailUrl(),  null);
-            result.add(playlist);
+    protected List<CardData> extract(ListExtractor.InfoItemsPage<InfoItem> page) throws NewPipeException {
+        if (playlist == null) {
+            try {
+                String uploaderUrl = playlistExtractor.getUploaderUrl();
+                String channelId = uploaderUrl != null ? getStreamingService().getChannelLHFactory().fromUrl(uploaderUrl).getId() : null;
+                playlist = new YouTubePlaylist(
+                        playlistExtractor.getId(),
+                        playlistExtractor.getName(),
+                        "" /* description */,
+                        null /* publishDate */,
+                        playlistExtractor.getStreamCount(),
+                        playlistExtractor.getThumbnailUrl(),
+                        new YouTubeChannel(channelId, playlistExtractor.getUploaderName())
+                );
+            } catch (ParsingException e) {
+                e.printStackTrace();
+            }
         }
-        return result;
+        return super.extract(page);
     }
+
 }
