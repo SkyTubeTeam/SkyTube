@@ -24,6 +24,8 @@ import android.database.sqlite.SQLiteDatabase;
 
 import androidx.annotation.StringRes;
 
+import com.mikepenz.iconics.typeface.library.materialdesigniconic.MaterialDesignIconic;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -39,19 +41,21 @@ public class CategoryManagement {
     private static class KeyLabel {
         @StringRes int key;
         @StringRes int label;
-        KeyLabel(@StringRes int key, @StringRes int label) {
+        String icon;
+        KeyLabel(@StringRes int key, @StringRes int label, String icon) {
             this.key = key;
             this.label = label;
+            this.icon = icon;
         }
     }
 
     private final static List<KeyLabel> CATEGORIES = Arrays.asList (
-            new KeyLabel(R.string.category_games, R.string.category_games_label),
-            new KeyLabel(R.string.category_music, R.string.category_music_label),
-            new KeyLabel(R.string.category_news, R.string.category_news_label),
-            new KeyLabel(R.string.category_tutorials, R.string.category_tutorials_label),
-            new KeyLabel(R.string.category_youtuber, R.string.category_youtuber_label),
-            new KeyLabel(R.string.category_for_kids, R.string.category_for_kids_label)
+            new KeyLabel(R.string.category_games, R.string.category_games_label, MaterialDesignIconic.Icon.gmi_bike.name()),
+            new KeyLabel(R.string.category_music, R.string.category_music_label, MaterialDesignIconic.Icon.gmi_audio.name()),
+            new KeyLabel(R.string.category_news, R.string.category_news_label, MaterialDesignIconic.Icon.gmi_compass.name()),
+            new KeyLabel(R.string.category_tutorials, R.string.category_tutorials_label, MaterialDesignIconic.Icon.gmi_collection_bookmark.name()),
+            new KeyLabel(R.string.category_youtuber, R.string.category_youtuber_label, MaterialDesignIconic.Icon.gmi_youtube_play.name()),
+            new KeyLabel(R.string.category_for_kids, R.string.category_for_kids_label, MaterialDesignIconic.Icon.gmi_cake.name())
     );
 
     CategoryManagement(SQLiteDatabase db) {
@@ -61,7 +65,7 @@ public class CategoryManagement {
     public void setupDefaultCategories() {
         final Resources resources = SkyTubeApp.getContext().getResources();
         for (KeyLabel keyLabel: CATEGORIES) {
-            addNew(resources.getString(keyLabel.key), true);
+            addNew(resources.getString(keyLabel.key),  keyLabel.icon, true);
         }
     }
 
@@ -77,6 +81,7 @@ public class CategoryManagement {
             final int colBuiltin = query.getColumnIndexOrThrow(CategoriesTable.COL_BUILTIN);
             final int colEnabled = query.getColumnIndexOrThrow(CategoriesTable.COL_ENABLED);
             final int colPriority = query.getColumnIndexOrThrow(CategoriesTable.COL_PRIORITY);
+            final int colIcon = query.getColumnIndexOrThrow(CategoriesTable.COL_ICON);
             List<Category> result = new ArrayList<>();
             while(query.moveToNext()) {
                 boolean builtin = query.getInt(colBuiltin) != 0;
@@ -89,6 +94,7 @@ public class CategoryManagement {
                         query.getInt(colEnabled) != 0,
                         builtin,
                         label,
+                        query.getString(colIcon),
                         query.getInt(colPriority)));
             }
             return result;
@@ -107,12 +113,13 @@ public class CategoryManagement {
         values.put(CategoriesTable.COL_PRIORITY, priority);
         values.put(CategoriesTable.COL_BUILTIN, builtin ? 1 : 0);
         values.put(CategoriesTable.COL_LABEL, name);
+        values.put(CategoriesTable.COL_ICON, icon);
         long id = db.insert(
                 CategoriesTable.TABLE_NAME,
                 null,
                 values);
         Logger.i(this, "Adding new category: %s (%s) [priority: %s] -> %s", name, builtin, priority, id);
-        return new Category(id, true, builtin, name, priority);
+        return new Category(id, true, builtin, name, icon, priority);
     }
 
     private String translate(String label) {
@@ -124,6 +131,5 @@ public class CategoryManagement {
         }
         return label;
     }
-
 
 }

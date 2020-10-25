@@ -22,13 +22,15 @@ public class Category {
     private final boolean enabled;
     private final boolean builtin;
     private final String label;
+    private final String icon;
     private final int priority;
 
-    public Category(Long id, boolean enabled, boolean builtin, String label, int priority) {
+    public Category(Long id, boolean enabled, boolean builtin, String label, String icon, int priority) {
         this.id = id;
         this.enabled = enabled;
         this.builtin = builtin;
         this.label = label;
+        this.icon = icon;
         this.priority = priority;
     }
 
@@ -46,6 +48,10 @@ public class Category {
 
     public String getLabel() {
         return label;
+    }
+
+    public String getIcon() {
+        return icon;
     }
 
     public int getPriority() {
