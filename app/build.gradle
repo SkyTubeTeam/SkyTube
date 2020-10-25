@@ -96,7 +96,7 @@ dependencies {
     }
 
     // implementation 'com.github.TeamNewPipe.NewPipeExtractor:extractor:v0.19.0'
-    implementation 'com.github.SkyTubeTeam.NewPipeExtractor:extractor:2aadfc44790b30a212'
+    implementation 'com.github.SkyTubeTeam.NewPipeExtractor:extractor:0fd43076b5c4e36617'
 
     // other modules
     implementation 'org.ocpsoft.prettytime:prettytime:4.0.5.Final'
@@ -132,7 +132,7 @@ dependencies {
     implementation 'androidx.multidex:multidex:2.0.1' // as we have over 65536 lines of code...
 
     // debugImplementation because LeakCanary should only run in debug builds.
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.4'
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.5'
 
     // proprietary module
     extraImplementation files('libs/YouTubeAndroidPlayerApi.jar')
