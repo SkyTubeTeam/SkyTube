@@ -182,7 +182,9 @@ public class YouTubeVideo extends CardData implements Serializable {
             this.title = title;
             this.description = description;
             setDurationInSeconds((int) durationInSeconds);
-            this.setViewCount(BigInteger.valueOf(viewCount));
+            if (viewCount >= 0) {
+                this.setViewCount(BigInteger.valueOf(viewCount));
+            }
             if (publishDate != null) {
                 this.setPublishTimestamp(publishDate);
                 this.publishDate = new DateTime(publishDate);
