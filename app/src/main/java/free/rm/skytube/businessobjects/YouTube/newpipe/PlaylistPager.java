@@ -29,7 +29,7 @@ import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubePlaylist;
 
-class PlaylistPager extends VideoPager {
+public class PlaylistPager extends VideoPager {
     private YouTubePlaylist playlist;
     private final PlaylistExtractor playlistExtractor;
     public PlaylistPager(StreamingService streamingService, PlaylistExtractor playlistExtractor) {
@@ -59,4 +59,7 @@ class PlaylistPager extends VideoPager {
         return super.extract(page);
     }
 
+    public YouTubePlaylist getPlaylist() {
+        return playlist;
+    }
 }

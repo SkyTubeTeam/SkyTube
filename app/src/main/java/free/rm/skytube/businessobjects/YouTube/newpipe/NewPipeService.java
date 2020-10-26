@@ -367,7 +367,7 @@ public class NewPipeService {
                 timestamp = uploadDate.date().getTimeInMillis();
                 exact = !uploadDate.isApproximation();
             } else {
-                timestamp = System.currentTimeMillis();
+                timestamp = null;
                 exact = false;
             }
 
