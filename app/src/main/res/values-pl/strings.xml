@@ -1,26 +1,25 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="could_not_get_videos">Nie można pobrać %s filmów.</string>
-	<string name="views">%,d wyświetleń</string>
-	<string name="error">Błąd</string>
-	<string name="ok">OK</string>
-	<string name="search_videos">Szukaj filmów</string>
-	<string name="launch_offical_player_error">Wystąpił błąd podczas uruchamiania oficjalnego odtwarzacza YouTube od Google. Upewnij się, że jest on zainstalowany na twoim urządzeniu.</string>
-	<string name="LIVE">LIVE</string>
-
-	<string name="featured">Polecane</string>
-	<string name="most_popular">Popularne</string>
-
-	<string name="video">Film</string>
-	<string name="videos">Filmy</string>
-	<string name="num_videos">%d filmów</string>
-	<string name="playlists">Playlisty</string>
-	<string name="could_not_get_playlists">Nie można uzyskać %s playlist.</string>
-
-	<string name="loading">Ładowanie …</string>
+    <string name="could_not_get_videos">Nie można pobrać %s filmów.</string>
+    <string name="views">%,d wyświetleń</string>
+    <string name="error">Błąd</string>
+    <string name="ok">OK</string>
+    <string name="search_videos">Szukaj filmów</string>
+    <string name="launch_offical_player_error">Wystąpił błąd podczas uruchamiania oficjalnego odtwarzacza YouTube od Google. Upewnij się, że jest on zainstalowany na twoim urządzeniu.</string>
+    <string name="LIVE">LIVE</string>
+    <string name="featured">Polecane</string>
+    <string name="most_popular">Popularne</string>
+    <string name="video">Film</string>
+    <string name="videos">Filmy</string>
+    <string name="num_videos">%d filmów</string>
+    <string name="playlists">Playlisty</string>
+    <string name="could_not_get_playlists">Nie można uzyskać %s playlist.</string>
+    <string name="loading">Ładowanie …</string>
     <string name="could_not_get_channel">Nie można pobrać informacji o kanale!</string>
-<string name="hello_blank_fragment">Witaj pusty fragment</string>
+    <string name="hello_blank_fragment">Witaj pusty fragment</string>
     <string name="yes">Tak</string>
-	<string name="no">Nie</string>
-
-    </resources>
+    <string name="no">Nie</string>
+    <string name="close">Zamknij</string>
+    <string name="search_channel">Szukaj kanału</string>
+    <string name="could_not_get_channel_detailed">Nie można pobrać informacji o kanale: %s.</string>
+</resources>
