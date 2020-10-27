@@ -1,3 +1,17 @@
+v2.974 - 27 Oct 2020
+        * Using NewPipe backend for loading the playlists, and the trending videos.
+        * Update NewPipe backend to support latest YouTube changes.
+        * Code cleanups, minor optimizations contributed by @okan35 and @TacoTheDank
+        * Fix crashes in handling user inputs in the search field, and in the 'Enter URL' dialog.
+        * Fix a couple of possible source of memory leaks
+        * Added new translations for:
+            * Berber - by Hakim Oubouali
+            * Danish - by Vidar
+        * Updated translations for:
+            * Swedish by Mattias Münster and Luna Jernberg
+            * Portuguese - by ssantos
+            * French - by Nathan
+
 v2.973 - 06 Aug 2020
         * The NewPipe backend is now the default, so the initial impression of the app will be better.
         * Upgrade NewPipeExtractor to the latest, to eliminate parsing bugs

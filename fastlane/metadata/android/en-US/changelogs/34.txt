@@ -1,0 +1,13 @@
+The new release contains the following changes:
+• Using NewPipe backend for loading the playlists, and the trending videos.
+• Update NewPipe backend to support latest YouTube changes.
+• Code cleanups, minor optimizations contributed by @okan35 and @TacoTheDank
+• Fix crashes in handling user inputs in the search field, and in the 'Enter URL' dialog.
+• Fix a couple of possible source of memory leaks
+• Added new translations for:
+    • Berber - by Hakim Oubouali
+    • Danish - by Vidar
+• Updated translations for:
+    • Swedish by Mattias Münster and Luna Jernberg
+    • Portuguese - by ssantos
+    • French - by Nathan
