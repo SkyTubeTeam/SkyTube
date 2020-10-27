@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="pref_category_downloads">ⵓⴳⴰⵎⵏ</string>
+    <string name="pref_title_hide_tabs">ⴼⴼⵔ ⵉⵙⴽⵙⴰⵍ</string>
+    <string name="pref_title_updates">ⵜⵉⵙⴷⵖⵉⵏ</string>
+    <string name="pref_about_category">ⵅⴼ</string>
+    <string name="pref_title_chromecast_none">ⵡⴰⵍⵓ</string>
+    <string name="pref_chromecast_category">ⴽⵕⵓⵎⴽⴰⵙⵟ</string>
+    <string name="pref_title_choose_player">ⴰⵎⵖⵔⵉ ⵏ ⵓⴼⵉⴷⵢⵓ</string>
+    <string name="pref_video_player_category">ⴰⵎⵖⵔⵉ ⵏ ⵓⴼⵉⴷⵢⵓ</string>
+    <string name="pref_category_mobile_network">ⴰⵥⵟⵟⴰ ⵏ ⵓⵜⵉⵍⵉⴼⵓⵏ</string>
+    <string name="key_preferences">ⵜⵉⵙⵖⴰⵍ</string>
+    <string name="preferences">ⵜⵉⵙⵖⴰⵍ</string>
+</resources>

@@ -19,4 +19,7 @@
     <string name="video">Video</string>
     <string name="loading">Laddar …</string>
     <string name="hello_blank_fragment">Hej tomt fragment</string>
+    <string name="search_channel">Sök kanal</string>
+    <string name="close">Stäng</string>
+    <string name="could_not_get_channel_detailed">Det gick inte att ladda ner kanalinformation: %s.</string>
 </resources>
