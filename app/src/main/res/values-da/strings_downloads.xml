@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="external_storage_not_available">Kunne ikke downloade filen, da det eksterne lager ikke er tilgængeligt.</string>
+    <string name="playing_video_file_missing">Download til denne video blev ikke fundet. Afspiller eksternt.</string>
+    <string name="no_downloaded_videos_text">Du har ikke hentet nogen videoer endnu.
+\n
+\nNår du har gjort det, vises de her.</string>
+    <string name="video_downloaded">\'%s\' blev hentet.</string>
+    <string name="delete_download">Slet download</string>
+    <string name="video_download_stream_error">Kunne ikke hente \'%s\'.</string>
+    <string name="starting_video_download">Henter \'%s\'…</string>
+    <string name="download_video">Hent Video</string>
+    <string name="warning_mobile_network_download">Din enhed er ikke forbundet til et Wi-Fi netværk. For at undgå potentielle ekstra dataforbrugsafgifter anbefales det at oprette forbindelse til et Wi-Fi-netværk. Download video alligevel\?</string>
+    <string name="downloads">Hentet</string>
+    <string name="download">Hent</string>
+</resources>

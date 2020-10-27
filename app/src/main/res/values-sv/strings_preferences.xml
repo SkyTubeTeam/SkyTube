@@ -11,7 +11,7 @@
     <string name="pref_title_website">Webbplats</string>
     <string name="pref_import_export_category">Importera/Exportera</string>
     <string name="databases_import_select_backup">Välj säkerhetskopieringsfil att importera</string>
-    <string name="pref_summary_lang_detection_video_filtering">Använd AI för att identifiera de språk som används i videor och blockera dem om deras språk inte är lika med de språk du föredrar. Bör endast aktiveras på avancerade enheter.</string>
+    <string name="pref_summary_lang_detection_video_filtering">Upptäck språk som används i videor och blockera allt utanför dina önskade språk. Endast för avancerade enheter.</string>
     <string name="pref_youtube_api_key_default">Starta om appen för att byta tillbaka till standard YouTube API-nyckeln.</string>
     <string name="pref_summary_preferred_languages">Välj dina föredragna språk.</string>
     <string name="pref_summary_dislikes_filter">Filtrera bort videoklipp med höga ogillar: %s</string>
@@ -114,4 +114,27 @@
     <string name="pref_title_clear_playback_status">Rensa uppspelningsstatus</string>
     <string name="pref_summary_low_views_filter">Filtrera bort videor med låga visningar: %s</string>
     <string name="pref_youtube_api_key_custom">Nyckeln är giltig. Starta om appen för att använda den nya YouTube API-nyckeln.</string>
+    <string name="pref_popup_title_video_download_folder">Välj katalog</string>
+    <string name="pref_title_hide_tabs">Göm flikar</string>
+    <string name="pref_title_autocast">AutoCast</string>
+    <string name="pref_title_chromecast_none">Ingen</string>
+    <string name="pref_chromecast_category">Chromecast</string>
+    <string name="key_preferences">inställningar</string>
+    <string name="pref_video_download_preferred_resolution_summary">Videonedladdningar föredrar denna upplösning: %s</string>
+    <string name="pref_video_download_preferred_resolution_title">Föredragen nedladdningsupplösning för video</string>
+    <string name="pref_summary_video_download_folder">Videor laddas ner till den här mappen: %s</string>
+    <string name="pref_title_video_download_folder">Mapp för nedladdning av video</string>
+    <string name="pref_summary_use_newpipe_backend">Använd NewPipe API för att komma åt YouTube…</string>
+    <string name="pref_title_use_newpipe_backend">Använd NewPipe-backend</string>
+    <string name="pref_summary_switch_volume_and_brightness">Placerar volymkontrollen till höger och ljusstyrkan till vänster.</string>
+    <string name="pref_title_switch_volume_and_brightness">Byt volym- och ljusstyrkekontroll</string>
+    <string name="pref_summary_enable_immersive_mode">Dölj navigeringsfältet och statusfältet under uppspelning.</string>
+    <string name="pref_title_enable_immersive_mode">Aktivera uppslukande läge</string>
+    <string name="pref_video_continuous_repeat_toggle">Kontinuerlig upprepning</string>
+    <string name="pref_hide_tabs_restart">Starta om appen för att visa uppdaterade flikar.</string>
+    <string name="pref_summary_hide_tabs">Välj vilka flikar som inte ska visas. Omstart krävs.</string>
+    <string name="pref_network_downloads_category">Nätverk och nedladdningar</string>
+    <string name="pref_summary_autocast">Välj en Chromecast-enhet som ska användas när du använder andra appar för att öppna videor i SkyTube.</string>
+    <string name="pref_summary_mobile_network_usage">Vad du ska göra om du använder mobilnätverk (t.ex. 4G) för nedladdning, tittar på videor: %s</string>
+    <string name="pref_title_mobile_network_usage">Användning av mobilnätverk</string>
 </resources>

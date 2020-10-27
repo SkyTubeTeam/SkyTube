@@ -10,4 +10,8 @@
     <string name="unbookmark">Ta bort bokmärke</string>
     <string name="video_bookmarked_error">Kunde inte bokmärka videon.</string>
     <string name="bookmarks">Bokmärken</string>
+    <string name="bookmark_share_invalid_url">Endast giltiga webbadresser till YouTube kan bokmärkas.</string>
+    <string name="bookmark_share_label">SkyTube-bokmärke</string>
+    <string name="video_was_not_bookmarked">Videon var inte bokmärkt</string>
+    <string name="video_already_bookmarked">Videon är redan bokmärkt</string>
 </resources>

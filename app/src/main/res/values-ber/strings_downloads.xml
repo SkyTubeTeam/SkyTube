@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="downloads">ⵓⴳⴰⵎⵏ</string>
+    <string name="delete_download">ⴽⴽⵙ ⴰⴳⴳⴰⵎ</string>
+    <string name="starting_video_download">ⴷⴰ ⵉⵜⵜⵡⴰⴳⴳⴰⵎ \'%s\'…</string>
+    <string name="download_video">ⴰⴳⵎ ⴰⴼⵉⴷⵢⵓ</string>
+    <string name="download">ⴰⴳⵎ</string>
+</resources>

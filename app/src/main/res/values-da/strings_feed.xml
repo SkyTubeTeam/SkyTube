@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="feed">Feed</string>
+    <string name="notification_new_videos_found">%d nye videoer fra abonnerede kanaler</string>
+    <string name="notification_channel_feed_title">Feedmeddelelser</string>
+    <string name="import_subscriptions_from_youtube">Importér abonnementer fra YouTube</string>
+    <string name="no_subscriptions_text">Du abonnerer ikke på nogen kanaler.
+\n
+\nNår du gør det, vises alle videoer, der er uploadet til dine abonnerede kanaler inden for den sidste måned, her.</string>
+    <string name="no_new_videos_found">Ingen nye videoer fundet.</string>
+    <string name="fetched_videos_from_channels">Hentede %1$d videoer fra %2$d/%3$d kanaler.</string>
+    <string name="fetching_subscription_videos">Henter videoer fra kanaler, du abonnerer på</string>
+    <string name="fetching_subbed_channels_info_error">Der opstod en fejl under hentning af kanalinformation.</string>
+    <string name="fetching_subbed_channels_info">Henter kanaloplysninger…</string>
+    <string name="open_channel">Åbn kanal</string>
+    <string name="subscribing_to_channels">Abonnerer på kanaler…</string>
+</resources>

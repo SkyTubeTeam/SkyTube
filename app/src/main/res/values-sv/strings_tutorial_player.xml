@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="page_counter">%d av %d</string>
+    <string name="page_counter">%1$d av %2$d</string>
     <string name="next">"Nästa "</string>
     <string name="tutorial_slide_3">Svep vågrätt för att söka framåt eller bakåt.</string>
     <string name="tutorial_slide_5">Svep lodrätt för att justera ljusstyrkan.</string>
