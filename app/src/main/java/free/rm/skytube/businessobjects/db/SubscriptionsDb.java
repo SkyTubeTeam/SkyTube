@@ -512,11 +512,11 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 	 * Insert videos into the subscription video table.
 	 * @param videos
 	 */
-	public void insertVideos(List<YouTubeVideo> videos) {
+	public void insertVideosForChannel(List<YouTubeVideo> videos, String channelId) {
 		SQLiteDatabase db = getWritableDatabase();
 		for (YouTubeVideo video : videos) {
 			if (video.getPublishDate() != null) {
-				ContentValues values = createContentValues(video, video.getChannelId());
+				ContentValues values = createContentValues(video, channelId);
 				db.insert(SubscriptionsVideosTable.TABLE_NAME, null, values);
 			}
 		}

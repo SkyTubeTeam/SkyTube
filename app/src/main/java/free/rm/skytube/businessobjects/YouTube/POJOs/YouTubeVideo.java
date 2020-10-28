@@ -177,7 +177,7 @@ public class YouTubeVideo extends CardData implements Serializable {
 	}
 
         public YouTubeVideo(String id, String title, String description, long durationInSeconds, YouTubeChannel channel, long viewCount,
-							Long publishDate, Boolean publishDateExact, String thumbnailUrl) {
+							Long publishDate, boolean publishDateExact, String thumbnailUrl) {
             this.id = id;
             this.title = title;
             this.description = description;
