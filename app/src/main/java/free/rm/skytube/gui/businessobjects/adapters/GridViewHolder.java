@@ -84,6 +84,9 @@ public class GridViewHolder extends RecyclerView.ViewHolder implements Serializa
 	@BindView(R.id.views_text_view)
 	TextView viewsTextView;
 
+	@BindView(R.id.separator_text_view)
+	TextView separatorView;
+
 	@BindView(R.id.video_position_progress_bar)
 	ProgressBar videoPositionProgressBar;
 
@@ -155,6 +158,7 @@ public class GridViewHolder extends RecyclerView.ViewHolder implements Serializa
 			publishDateTextView.setText(currentCard.getPublishDatePretty());
 		} else {
 			publishDateTextView.setVisibility(View.GONE);
+			separatorView.setVisibility(View.GONE);
 		}
 		Glide.with(context)
 				.load(currentCard.getThumbnailUrl())
@@ -176,6 +180,7 @@ public class GridViewHolder extends RecyclerView.ViewHolder implements Serializa
 		} else {
 			// the subscriber count is hidden/disabled
 			viewsTextView.setVisibility(View.GONE);
+			separatorView.setVisibility(View.GONE);
 		}
 
 		thumbsUpPercentageTextView.setVisibility(View.GONE);
@@ -224,8 +229,6 @@ public class GridViewHolder extends RecyclerView.ViewHolder implements Serializa
 			}
 		}
 	}
-
-
 
  	private void onOptionsButtonClick(final View view) {
 		if (currentCard instanceof YouTubeVideo) {
