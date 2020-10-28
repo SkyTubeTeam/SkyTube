@@ -92,10 +92,7 @@ public class GetBulkSubscriptionVideosTask extends AsyncTaskParallel<Void, GetBu
                                 YouTubeVideo details;
                                 try {
                                     details = NewPipeService.get().getDetails(vid.getId());
-                                    if (Boolean.TRUE.equals(vid.getPublishTimestampExact())) {
-                                        Logger.i(this, "updating %s with %s from %s", vid.getTitle(),
-                                                new Date(vid.getPublishTimestamp()),
-                                                new Date(details.getPublishTimestamp()));
+                                    if (vid.getPublishTimestampExact()) {
                                         details.setPublishTimestamp(vid.getPublishTimestamp());
                                         details.setPublishTimestampExact(vid.getPublishTimestampExact());
                                     }
@@ -106,7 +103,7 @@ public class GetBulkSubscriptionVideosTask extends AsyncTaskParallel<Void, GetBu
                                 }
                             }
                             changed.compareAndSet(false, true);
-                            subscriptionsDb.insertVideos(detailedList);
+                            subscriptionsDb.insertVideosForChannel(detailedList, channelId);
                         }
                         semaphore.release();
                         return detailedList.size();
