@@ -1,3 +1,7 @@
+v2.975 - 31 Oct 2020
+        * Fix crash on subscription update
+        * Do not show separator item, when neither side is visible on the GridView
+
 v2.974 - 27 Oct 2020
         * Using NewPipe backend for loading the playlists, and the trending videos.
         * Update NewPipe backend to support latest YouTube changes.
