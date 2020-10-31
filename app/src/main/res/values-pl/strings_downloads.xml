@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="downloads">Downloads</string>
-    <string name="download_video">Download Video</string>
+    <string name="downloads">Pobrane</string>
+    <string name="download_video">Pobierz film</string>
     <string name="starting_video_download">Pobieranie \'%s\'…</string>
     <string name="video_download_stream_error">Nie można pobrać \'%s\'.</string>
-    <string name="delete_download">Delete Download</string>
+    <string name="delete_download">Usuń pobrany film</string>
     <string name="video_downloaded">\'%s\' pobrane.</string>
     <string name="no_downloaded_videos_text">Nie pobrano jeszcze żadnych filmów.
 \n
