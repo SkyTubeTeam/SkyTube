@@ -16,7 +16,7 @@
     <string name="open_with">Otwórz z…</string>
     <string name="share">Udostępnij</string>
     <string name="share_via">Udostępnij przez</string>
-    <string name="copy_url">Skopiuj URL</string>
+    <string name="copy_url">Skopiuj adres URL</string>
     <string name="url_copied_to_clipboard">Adres URL skopiowany do schowka.</string>
     <string name="error_get_comments">Wystąpił błąd podczas pobierania komentarzy.</string>
     <string name="no_video_comments">Ten film nie ma komentarzy, albo są wyłączone.</string>
