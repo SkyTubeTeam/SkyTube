@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="bookmarks">Zakładki</string>
-    <string name="bookmark">Zakładka</string>
+    <string name="bookmark">Dodaj do zakładek</string>
     <string name="video_bookmarked">Film zapisany</string>
     <string name="video_bookmarked_error">Nie można zapisać filmu.</string>
     <string name="unbookmark">Usuń zakładkę</string>
