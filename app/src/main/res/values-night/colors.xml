@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#263238</color>
+    <color name="colorPrimaryDark">#21272B</color>
+    <color name="colorAccent">#26A69A</color>
+
+    <color name="skytube_theme_colour">#ff6600</color>
+
+    <!--
+        Material Dialog Colors
+    -->
+    <color name="dialog_title">#000</color>
+    <color name="dialog_backgound">#FFF</color>
+    <color name="dialog_content_text">#000</color>
+    <color name="dialog_positive_text">@color/colorAccent</color>
+    <color name="dialog_negative_text">@color/colorAccent</color>
+    <color name="dialog_neutral_text">@color/colorAccent</color>
+    <color name="dialog_row_0">#F0F0F0</color>
+    <color name="dialog_row_1">@color/dialog_backgound</color>
+
+
+    <!--
+        Subs Drawer Colours
+    -->
+    <color name="subs_drawer_background">#CC21272B</color>
+    <drawable name="sub_channel_pressed">@color/colorAccent</drawable>
+    <drawable name="sub_channel">@android:color/transparent</drawable>
+    <color name="subs_text">#FFF</color>
+
+    <drawable name="subscribe_button">@color/skytube_theme_colour</drawable>
+    <drawable name="subscribe_button_pressed">#ff8e44</drawable>
+
+
+    <!--
+        Video (Grid) Cells
+    -->
+    <color name="video_cell_background">#111517</color>
+    <color name="video_cell_text_main">#F5F5F5</color>
+    <color name="video_cell_text_details">#808080</color>
+    <color name="video_cell_highlighted_background">@color/colorPrimaryDark</color>
+
+    <color name="grid_view_background">@color/colorPrimaryDark</color>
+    <color name="popup_menu">#FF303030</color>  <!-- Identical to @color/background_material_dark -->
+
+
+    <!--
+        Video Player Tutorial
+    -->
+    <color name="tutorial_background">@color/colorPrimary</color>
+    <color name="tutorial_swipe_area">#277AA2</color>
+
+
+    <!--
+        Video Player Colours
+    -->
+    <!-- Actionbar background colour ~~ which is the same as com.android.internal.R.layout.media_controller
+                (used to be #BB000000) -->
+    <color name="video_player_hud">#CC000000</color>
+    <color name="video_player_drawer_background">@color/video_player_hud</color>
+    <color name="video_player_drawer_text">#b3b3b3</color>
+
+    <color name="video_desc_like_bar">@color/skytube_theme_colour</color>
+
+    <!-- Comments -->
+    <color name="comment_background">@color/video_player_hud</color>
+    <color name="comment_text">#b3b3b3</color>
+
+    <!-- Player v2 -->
+    <color name="video_player_v2_hud">#7A000000</color>
+    <color name="video_player_v2_seek_bar">@color/colorAccent</color>
+
+
+    <!--
+        Channel Browser
+    -->
+    <color name="channel_subs">@color/video_cell_text_main</color>
+    <color name="channel_about">@color/video_cell_text_main</color>
+    <color name="channel_subscribers_bkg">#66000000</color>
+
+
+    <!--
+        Subscriptions Feed
+    -->
+    <color name="feed_message_text">#FFF</color>
+
+</resources>

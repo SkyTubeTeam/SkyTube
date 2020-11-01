@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<color name="colorPrimary">#263238</color>
-	<color name="colorPrimaryDark">#21272B</color>
+	<color name="colorPrimary">#ffffff</color>
+	<color name="colorPrimaryDark">#cccccc</color>
 	<color name="colorAccent">#26A69A</color>
 
 	<color name="skytube_theme_colour">#ff6600</color>
@@ -9,23 +9,23 @@
 	<!--
 		Material Dialog Colors
 	-->
-	<color name="dialog_title">#000</color>
-	<color name="dialog_backgound">#FFF</color>
-	<color name="dialog_content_text">#000</color>
+	<color name="dialog_title">#fff</color>
+	<color name="dialog_backgound">#000</color>
+	<color name="dialog_content_text">#fff</color>
 	<color name="dialog_positive_text">@color/colorAccent</color>
 	<color name="dialog_negative_text">@color/colorAccent</color>
 	<color name="dialog_neutral_text">@color/colorAccent</color>
-	<color name="dialog_row_0">#F0F0F0</color>
+	<color name="dialog_row_0">#0f0f0f</color>
 	<color name="dialog_row_1">@color/dialog_backgound</color>
 
 
 	<!--
 		Subs Drawer Colours
 	-->
-	<color name="subs_drawer_background">#CC21272B</color>
+	<color name="subs_drawer_background">#CC9DABB4</color>
 	<drawable name="sub_channel_pressed">@color/colorAccent</drawable>
 	<drawable name="sub_channel">@android:color/transparent</drawable>
-	<color name="subs_text">#FFF</color>
+	<color name="subs_text">#000</color>
 
 	<drawable name="subscribe_button">@color/skytube_theme_colour</drawable>
 	<drawable name="subscribe_button_pressed">#ff8e44</drawable>
@@ -34,13 +34,13 @@
 	<!--
 		Video (Grid) Cells
 	-->
-	<color name="video_cell_background">#111517</color>
-	<color name="video_cell_text_main">#F5F5F5</color>
-	<color name="video_cell_text_details">#808080</color>
+	<color name="video_cell_background">#eeeae8</color>
+	<color name="video_cell_text_main">#0a0a0a</color>
+	<color name="video_cell_text_details">#7f7f7f</color>
 	<color name="video_cell_highlighted_background">@color/colorPrimaryDark</color>
 
 	<color name="grid_view_background">@color/colorPrimaryDark</color>
-	<color name="popup_menu">#FF303030</color>  <!-- Identical to @color/background_material_dark -->
+	<color name="popup_menu">#cfcfcf</color>  <!-- Identical to @color/background_material_dark -->
 
 
 	<!--
@@ -55,9 +55,9 @@
 	-->
 	<!-- Actionbar background colour ~~ which is the same as com.android.internal.R.layout.media_controller
 				(used to be #BB000000) -->
-	<color name="video_player_hud">#CC000000</color>
+	<color name="video_player_hud">#CCffffff</color>
 	<color name="video_player_drawer_background">@color/video_player_hud</color>
-	<color name="video_player_drawer_text">#b3b3b3</color>
+	<color name="video_player_drawer_text">#4c4c4c</color>
 
 	<color name="video_desc_like_bar">@color/skytube_theme_colour</color>
 
@@ -66,7 +66,7 @@
 	<color name="comment_text">#b3b3b3</color>
 
 	<!-- Player v2 -->
-	<color name="video_player_v2_hud">#7A000000</color>
+	<color name="video_player_v2_hud">#7Affffff</color>
 	<color name="video_player_v2_seek_bar">@color/colorAccent</color>
 
 
@@ -75,12 +75,12 @@
 	-->
 	<color name="channel_subs">@color/video_cell_text_main</color>
 	<color name="channel_about">@color/video_cell_text_main</color>
-	<color name="channel_subscribers_bkg">#66000000</color>
+	<color name="channel_subscribers_bkg">#66ffffff</color>
 
 
 	<!--
 		Subscriptions Feed
 	-->
-	<color name="feed_message_text">#FFF</color>
+	<color name="feed_message_text">#000</color>
 
 </resources>
