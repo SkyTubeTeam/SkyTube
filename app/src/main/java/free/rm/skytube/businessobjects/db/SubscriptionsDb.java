@@ -60,8 +60,8 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
             SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID, SubscriptionsVideosTable.COL_PUBLISH_TS, SubscriptionsVideosTable.TABLE_NAME, SubscriptionsVideosTable.COL_CHANNEL_ID);
     private static final String GET_VIDEO_IDS_BY_CHANNEL = String.format("SELECT %s FROM %s WHERE %s = ?",
             SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID, SubscriptionsVideosTable.TABLE_NAME, SubscriptionsVideosTable.COL_CHANNEL_ID);
-    private static final String FIND_EMPTY_RETRIEVAL_TS = String.format("SELECT %s FROM %s WHERE %s IS NULL",
-            SubscriptionsVideosTable.COL_YOUTUBE_VIDEO, SubscriptionsVideosTable.TABLE_NAME, SubscriptionsVideosTable.COL_RETRIEVAL_TS);
+    private static final String FIND_EMPTY_RETRIEVAL_TS = String.format("SELECT %s,%s FROM %s WHERE %s IS NULL",
+			SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID, SubscriptionsVideosTable.COL_YOUTUBE_VIDEO, SubscriptionsVideosTable.TABLE_NAME, SubscriptionsVideosTable.COL_RETRIEVAL_TS);
 	private static final String sortChannelsASC = "LOWER(" + SubscriptionsTable.COL_TITLE + ") ASC ";
 
 	private static final String SUBSCRIBED_CHANNEL_INFO = String.format("SELECT %1$s,%2$s,%3$s,%4$s,(select max(%6$s) from %7$s videos where videos.%8$s = subs.%1$s) as latest_video_ts FROM %5$s subs",
@@ -611,14 +611,17 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
      */
     private List<YouTubeVideo> extractVideos(Cursor cursor, boolean fullColumnList) {
         List<YouTubeVideo> videos = new ArrayList<>();
+        Set<String> invalidIds = new HashSet<>();
         try {
 
             if (cursor.moveToNext()) {
                 final int jsonIdx = cursor.getColumnIndex(SubscriptionsVideosTable.COL_YOUTUBE_VIDEO);
+                final int idIdx = cursor.getColumnIndex(SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID);
                 final int retrievalIdx = fullColumnList ? cursor.getColumnIndex(SubscriptionsVideosTable.COL_RETRIEVAL_TS) : -1;
                 final int publishTsIdx = fullColumnList ? cursor.getColumnIndex(SubscriptionsVideosTable.COL_PUBLISH_TS) : -1;
 
                 do {
+                    final String id = cursor.getString(idIdx);
                     final byte[] blob = cursor.getBlob(jsonIdx);
                     final String videoJson = new String(blob);
 
@@ -643,16 +646,33 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
                             Logger.e(this, "Error occurred while extracting channel{Id,Name} from JSON", e);
                         }
                     }
-                    // regenerate the video's PublishDatePretty (e.g. 5 hours ago)
-                    video.forceRefreshPublishDatePretty();
-                    // add the video to the list
-                    videos.add(video);
+                    if (video.getChannel() != null) {
+                        // regenerate the video's PublishDatePretty (e.g. 5 hours ago)
+                        video.forceRefreshPublishDatePretty();
+                        // add the video to the list
+                        videos.add(video);
+                    } else {
+                        invalidIds.add(id);
+                    }
                 } while (cursor.moveToNext());
             }
         } finally {
             cursor.close();
         }
+        if (!invalidIds.isEmpty()) {
+            deleteVideosByIds(invalidIds);
+        }
         return videos;
+    }
+
+    private void deleteVideosByIds(Set<String> ids) {
+        for (String id: ids) {
+            Logger.w(this, "delete video by id: "+ id);
+            int rowsDeleted = getWritableDatabase().delete(SubscriptionsVideosTable.TABLE_NAME,
+                        SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID + " = ?",
+                        new String[]{id});
+            Logger.w(this, "result "+rowsDeleted+" deleted");
+        }
     }
 
     // Generic channel caching
@@ -670,11 +690,11 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 			if (cursor.moveToNext()) {
 				String title = cursor.getString(cursor.getColumnIndexOrThrow(LocalChannelTable.COL_TITLE));
 				String description = cursor.getString(cursor.getColumnIndexOrThrow(LocalChannelTable.COL_DESCRIPTION));
-				String thumnbail = cursor.getString(cursor.getColumnIndexOrThrow(LocalChannelTable.COL_THUMBNAIL_NORMAL_URL));
+				String thumbnail = cursor.getString(cursor.getColumnIndexOrThrow(LocalChannelTable.COL_THUMBNAIL_NORMAL_URL));
 				String banner = cursor.getString(cursor.getColumnIndexOrThrow(LocalChannelTable.COL_BANNER_URL));
 				long subscriberCount = cursor.getLong(cursor.getColumnIndexOrThrow(LocalChannelTable.COL_SUBSCRIBER_COUNT));
 				long lastCheckTs = cursor.getLong(cursor.getColumnIndexOrThrow(LocalChannelTable.COL_LAST_CHECK_TS));
-				return new YouTubeChannel(channelId, title, description, thumnbail, banner, subscriberCount, false, -1, lastCheckTs);
+				return new YouTubeChannel(channelId, title, description, thumbnail, banner, subscriberCount, false, -1, lastCheckTs);
 			}
 		}
 		return null;
