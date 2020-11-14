@@ -129,33 +129,34 @@ public class YouTubeVideo extends CardData implements Serializable {
 	/**
 	 * Constructor.
 	 */
-	public YouTubeVideo(Video video) {
+	public YouTubeVideo(Video video) throws IllegalArgumentException {
 		this.id = video.getId();
 
 		VideoSnippet snippet = video.getSnippet();
-		if (snippet != null) {
-			this.title = snippet.getTitle();
+		if (snippet == null) {
+			throw new IllegalArgumentException("Missing snippet in "+video);
+		}
+		this.title = snippet.getTitle();
 
-			this.channel = new YouTubeChannel(snippet.getChannelId(), snippet.getChannelTitle());
-			setPublishDate(snippet.getPublishedAt());
+		this.channel = new YouTubeChannel(snippet.getChannelId(), snippet.getChannelTitle());
+		setPublishDate(snippet.getPublishedAt());
 
-			if (snippet.getThumbnails() != null) {
-				Thumbnail thumbnail = snippet.getThumbnails().getHigh();
-				if (thumbnail != null) {
-					this.thumbnailUrl = thumbnail.getUrl();
-				}
-
-				thumbnail = snippet.getThumbnails().getMaxres();
-				if (thumbnail != null) {
-					this.thumbnailMaxResUrl = thumbnail.getUrl();
-				}
+		if (snippet.getThumbnails() != null) {
+			Thumbnail thumbnail = snippet.getThumbnails().getHigh();
+			if (thumbnail != null) {
+				this.thumbnailUrl = thumbnail.getUrl();
 			}
 
-			this.language = snippet.getDefaultAudioLanguage() != null ? snippet.getDefaultAudioLanguage()
-					: (snippet.getDefaultLanguage());
-
-			this.description = snippet.getDescription();
+			thumbnail = snippet.getThumbnails().getMaxres();
+			if (thumbnail != null) {
+				this.thumbnailMaxResUrl = thumbnail.getUrl();
+			}
 		}
+
+		this.language = snippet.getDefaultAudioLanguage() != null ? snippet.getDefaultAudioLanguage()
+				: (snippet.getDefaultLanguage());
+
+		this.description = snippet.getDescription();
 
 		if (video.getContentDetails() != null) {
 			setDuration(video.getContentDetails().getDuration());
