@@ -59,16 +59,17 @@ public class SubscribeButton extends AppCompatButton implements View.OnClickList
 		if(externalClickListener != null) {
 			externalClickListener.onClick(SubscribeButton.this);
 		}
-		// Only fetch videos for this channel if fetchChannelVideosOnSubscribe is true AND the channel is not subscribed to yet.
-		if(fetchChannelVideosOnSubscribe && !isUserSubscribed) {
-			if (NewPipeService.isPreferred()) {
-				new GetBulkSubscriptionVideosTask(channel.getId(), null).executeInParallel();
-			} else {
-				new GetChannelVideosTask(channel.getId(), null, false, null).executeInParallel();
+		if(channel != null) {
+			// Only fetch videos for this channel if fetchChannelVideosOnSubscribe is true AND the channel is not subscribed to yet.
+			if (fetchChannelVideosOnSubscribe && !isUserSubscribed) {
+				if (NewPipeService.isPreferred()) {
+					new GetBulkSubscriptionVideosTask(channel.getId(), null).executeInParallel();
+				} else {
+					new GetChannelVideosTask(channel.getId(), null, false, null).executeInParallel();
+				}
 			}
-		}
-		if(channel != null)
 			new SubscribeToChannelTask(SubscribeButton.this, channel).executeInParallel();
+		}
 	}
 
 	@Override

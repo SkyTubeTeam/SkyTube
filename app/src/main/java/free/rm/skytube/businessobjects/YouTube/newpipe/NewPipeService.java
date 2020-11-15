@@ -262,7 +262,11 @@ public class NewPipeService {
         VideoPagerWithChannel pager = getChannelPager(channelId);
         // get the channel, and add all the videos from the first page
         YouTubeChannel channel = pager.getChannel();
-        channel.getYouTubeVideos().addAll(pager.getNextPageAsVideos());
+        try {
+            channel.getYouTubeVideos().addAll(pager.getNextPageAsVideos());
+        } catch (NewPipeException e) {
+            Logger.e(this, "Unable to retrieve videos for "+channelId+", error: "+e.getMessage(), e);
+        }
         return channel;
     }
 
