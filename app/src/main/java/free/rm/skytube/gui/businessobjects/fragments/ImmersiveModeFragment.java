@@ -21,6 +21,8 @@ import android.content.res.Resources;
 import android.os.Build;
 import android.view.View;
 
+import androidx.fragment.app.FragmentActivity;
+
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.Logger;
@@ -50,7 +52,13 @@ public class ImmersiveModeFragment extends FragmentEx {
 	 */
 	private void changeNavigationBarVisibility(boolean setBarToVisible) {
 		try {
-			int newUiOptions = getActivity().getWindow().getDecorView().getSystemUiVisibility();
+			FragmentActivity activity = getActivity();
+			if (activity == null) {
+				Logger.e(this, "Activity is not available!");
+				return;
+			}
+			final View decorView = activity.getWindow().getDecorView();
+			int newUiOptions = decorView.getSystemUiVisibility();
 
 			// navigation bar hiding:  backwards compatible to ICS.
 			if (Build.VERSION.SDK_INT >= 14) {
@@ -73,7 +81,7 @@ public class ImmersiveModeFragment extends FragmentEx {
 						: newUiOptions | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
 			}
 
-			getActivity().getWindow().getDecorView().setSystemUiVisibility(newUiOptions);
+			decorView.setSystemUiVisibility(newUiOptions);
 		} catch (Throwable tr) {
 			Logger.e(this, "Exception caught while trying to change the nav bar visibility...", tr);
 		}
