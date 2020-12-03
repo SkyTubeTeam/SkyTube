@@ -64,6 +64,11 @@ public class BackupPreferenceFragment extends PreferenceFragment {
 		});
 	}
 
+	@Override
+	public void onDestroy() {
+		subscriptionsBackupsManager.clearBackgroundTasks();
+		super.onDestroy();
+	}
 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {

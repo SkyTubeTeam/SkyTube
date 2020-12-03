@@ -68,6 +68,7 @@ import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import free.rm.skytube.R;
 import free.rm.skytube.app.Settings;
 import free.rm.skytube.app.SkyTubeApp;
@@ -79,11 +80,9 @@ import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetVideoDescriptionTask;
 import free.rm.skytube.businessobjects.YouTube.VideoStream.StreamMetaData;
 import free.rm.skytube.businessobjects.YouTube.newpipe.ContentId;
+import free.rm.skytube.businessobjects.db.DatabaseTasks;
 import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
 import free.rm.skytube.businessobjects.db.PlaybackStatusDb;
-import free.rm.skytube.businessobjects.db.Tasks.CheckIfUserSubbedToChannelTask;
-import free.rm.skytube.businessobjects.db.Tasks.GetChannelInfo;
-import free.rm.skytube.businessobjects.db.Tasks.IsVideoBookmarkedTask;
 import free.rm.skytube.businessobjects.interfaces.GetDesiredStreamListener;
 import free.rm.skytube.businessobjects.interfaces.YouTubePlayerActivityListener;
 import free.rm.skytube.businessobjects.interfaces.YouTubePlayerFragmentInterface;
@@ -98,6 +97,7 @@ import free.rm.skytube.gui.businessobjects.fragments.ImmersiveModeFragment;
 import free.rm.skytube.gui.businessobjects.views.Linker;
 import free.rm.skytube.gui.businessobjects.views.SubscribeButton;
 import hollowsoft.slidingdrawer.SlidingDrawer;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
 
 import static free.rm.skytube.gui.activities.YouTubePlayerActivity.YOUTUBE_VIDEO_OBJ;
 
@@ -160,6 +160,9 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 	protected TextView playbackSpeedTextView;
 	private PlaybackSpeedController playbackSpeedController;
 
+	private final CompositeDisposable compositeDisposable = new CompositeDisposable();
+	private Unbinder unbinder;
+
     @Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -170,7 +173,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 		// inflate the layout for this fragment
 		View view = inflater.inflate(R.layout.fragment_youtube_player_v2, container, false);
 
-		ButterKnife.bind(this, view);
+		unbinder = ButterKnife.bind(this, view);
 
 		// indicate that this fragment has an action bar menu
 		setHasOptionsMenu(true);
@@ -241,7 +244,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 
 			// will now check if the video is bookmarked or not (and then update the menu
 			// accordingly)
-			new IsVideoBookmarkedTask(youTubeVideo.getId(), menu).executeInParallel();
+			compositeDisposable.add(DatabaseTasks.isVideoBookmarked(youTubeVideo.getId(), menu));
 		}
 	}
 
@@ -539,7 +542,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 		// youTubeVideo might be null if we have only passed the video URL to this fragment (i.e.
 		// the app is still trying to construct youTubeVideo in the background).
 		if (youTubeVideo != null) {
-			new IsVideoBookmarkedTask(youTubeVideo.getId(), menu).executeInParallel();
+			compositeDisposable.add(DatabaseTasks.isVideoBookmarked(youTubeVideo.getId(), menu));
 		}
 	}
 
@@ -589,7 +592,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 				return true;
 
 			case R.id.block_channel:
-				youTubeChannel.blockChannel();
+				compositeDisposable.add(youTubeChannel.blockChannel().subscribe());
 				return true;
 			case R.id.disable_gestures:
 				boolean disableGestures = !item.isChecked();
@@ -623,25 +626,28 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 	 */
 	private void getVideoInfoTasks() {
 		// get Channel info (e.g. avatar...etc) task
-		new GetChannelInfo(getContext(), youTubeChannel -> {
-			YouTubePlayerV2Fragment.this.youTubeChannel = youTubeChannel;
+		compositeDisposable.add(
+				DatabaseTasks.getChannelInfo(requireContext(), youTubeVideo.getChannelId(), false)
+						.subscribe(youTubeChannel1 -> {
+							youTubeChannel = youTubeChannel1;
 
-			videoDescSubscribeButton.setChannel(YouTubePlayerV2Fragment.this.youTubeChannel);
-			if (youTubeChannel != null) {
-				if(getActivity() != null)
-					Glide.with(getActivity())
-							.load(youTubeChannel.getThumbnailUrl())
-							.apply(new RequestOptions().placeholder(R.drawable.channel_thumbnail_default))
-							.into(videoDescChannelThumbnailImageView);
-			}
-		}).executeInParallel(youTubeVideo.getChannelId());
+							videoDescSubscribeButton.setChannel(youTubeChannel);
+							if (youTubeChannel != null) {
+								Glide.with(requireContext())
+										.load(youTubeChannel.getThumbnailUrl())
+										.apply(new RequestOptions().placeholder(R.drawable.channel_thumbnail_default))
+										.into(videoDescChannelThumbnailImageView);
+							}
+						})
+		);
 
 		// get the video description
 		new GetVideoDescriptionTask(youTubeVideo, description -> Linker.setTextAndLinkify(videoDescriptionTextView, description)).executeInParallel();
 
 		// check if the user has subscribed to a channel... if he has, then change the state of
 		// the subscribe button
-		new CheckIfUserSubbedToChannelTask(videoDescSubscribeButton, youTubeVideo.getChannelId()).execute();
+		compositeDisposable.add(DatabaseTasks.checkIfUserSubbedToChannel(videoDescSubscribeButton,
+				youTubeVideo.getChannelId()));
 	}
 
 	@Override
@@ -656,12 +662,15 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 
 	@Override
 	public void onDestroy() {
+		compositeDisposable.clear();
 		super.onDestroy();
 		// stop the player from playing (when this fragment is going to be destroyed) and clean up
 		player.stop();
 		player.release();
 		player = null;
 		playerView.setPlayer(null);
+		videoDescSubscribeButton.clearBackgroundTasks();
+		unbinder.unbind();
 	}
 
 

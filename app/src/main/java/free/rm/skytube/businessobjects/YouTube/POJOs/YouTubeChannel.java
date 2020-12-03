@@ -37,16 +37,18 @@ import java.util.Objects;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
-import free.rm.skytube.app.Utils;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.VideoBlocker;
 import free.rm.skytube.businessobjects.db.ChannelFilteringDb;
 import free.rm.skytube.businessobjects.db.DatabaseResult;
+import free.rm.skytube.businessobjects.db.DatabaseTasks;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
-import free.rm.skytube.businessobjects.db.Tasks.GetChannelInfo;
-import free.rm.skytube.businessobjects.db.Tasks.SubscribeToChannelTask;
 import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
 import free.rm.skytube.gui.fragments.SubscriptionsFeedFragment;
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Single;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 /**
  * Represents a YouTube Channel.
@@ -54,7 +56,6 @@ import free.rm.skytube.gui.fragments.SubscriptionsFeedFragment;
  * <p>This class has the ability to query channel info by using the given channel ID.</p>
  */
 public class YouTubeChannel extends CardData implements Serializable {
-
 	private String bannerUrl;
 	private String totalSubscribers;
 	private long subscriberCount;
@@ -63,13 +64,9 @@ public class YouTubeChannel extends CardData implements Serializable {
 	private long    lastCheckTime;
 	private long    lastVideoTime;
 	private boolean	newVideosSinceLastVisit = false;
-	private List<YouTubeVideo> youTubeVideos = new ArrayList<>();
+	private final List<YouTubeVideo> youTubeVideos = new ArrayList<>();
 
-
-	public YouTubeChannel() {
-
-	}
-
+	public YouTubeChannel() { }
 
 	public YouTubeChannel(String id, String title) {
 		this.id = id;
@@ -230,10 +227,9 @@ public class YouTubeChannel extends CardData implements Serializable {
 	 * Block a channel.  This operation depends on what filtering method was enabled by the user:
 	 * i.e. either channel blacklisting or whitelisting.
 	 */
-	public void blockChannel() {
-		blockChannel(true);
+	public Single<Boolean> blockChannel() {
+		return blockChannel(true);
 	}
-
 
 	/**
 	 * Block a channel.  This operation depends on what filtering method was enabled by the user:
@@ -242,23 +238,21 @@ public class YouTubeChannel extends CardData implements Serializable {
 	 * @param displayToastMessage Set to true to display toast message when the operation is carried
 	 *                            out.
 	 */
-	public boolean blockChannel(boolean displayToastMessage) {
-		boolean success;
-
-		// if user is subscribed to the channel, then unsubscribe first...
-		if (SubscriptionsDb.getSubscriptionsDb().isUserSubscribedToChannel(getId())) {
-			new SubscribeToChannelTask(this).executeInParallel();
-		}
-
-		if (VideoBlocker.isChannelBlacklistEnabled()) {
-			success = blacklistChannel(displayToastMessage);
-		} else {
-			success = unwhitelistChannel(displayToastMessage);
-		}
-
-		return success;
+	public Single<Boolean> blockChannel(boolean displayToastMessage) {
+		return Single.fromCallable(() -> SubscriptionsDb.getSubscriptionsDb().isUserSubscribedToChannel(getId()))
+				.flatMap(isSubscribed -> DatabaseTasks.subscribeToChannel(false,
+						null, SkyTubeApp.getContext(), this, false))
+				.map(result -> VideoBlocker.isChannelBlacklistEnabled())
+				.flatMap(isEnabled -> {
+					if (isEnabled) {
+						return blacklistChannel(displayToastMessage);
+					} else {
+						return unwhitelistChannel(displayToastMessage);
+					}
+				})
+				.subscribeOn(Schedulers.io())
+				.observeOn(AndroidSchedulers.mainThread());
 	}
-
 
 	/**
 	 * Blacklist the channel.
@@ -268,16 +262,17 @@ public class YouTubeChannel extends CardData implements Serializable {
 	 *
 	 * @return True if successful.
 	 */
-	private boolean blacklistChannel(boolean displayToastMessage) {
-		boolean success = ChannelFilteringDb.getChannelFilteringDb().blacklist(this.getId(), this.getTitle());
-
-		if (displayToastMessage) {
-			Toast.makeText(SkyTubeApp.getContext(),
-					success ? R.string.channel_blacklisted : R.string.channel_blacklist_error,
-					Toast.LENGTH_LONG).show();
-		}
-
-		return success;
+	private Single<Boolean> blacklistChannel(boolean displayToastMessage) {
+		return Single.fromCallable(() -> ChannelFilteringDb.getChannelFilteringDb().blacklist(id, title))
+				.subscribeOn(Schedulers.io())
+				.observeOn(AndroidSchedulers.mainThread())
+				.doOnSuccess(success -> {
+					if (displayToastMessage) {
+						Toast.makeText(SkyTubeApp.getContext(),
+								success ? R.string.channel_blacklisted : R.string.channel_blacklist_error,
+								Toast.LENGTH_LONG).show();
+					}
+				});
 	}
 
 	/**
@@ -288,43 +283,45 @@ public class YouTubeChannel extends CardData implements Serializable {
 	 *
 	 * @return True if successful.
 	 */
-	private boolean unwhitelistChannel(boolean displayToastMessage) {
-		boolean success = ChannelFilteringDb.getChannelFilteringDb().unwhitelist(this.getId());
-
-		if (displayToastMessage) {
-			Toast.makeText(SkyTubeApp.getContext(),
-					success ? R.string.channel_unwhitelist_success : R.string.channel_unwhitelist_error,
-					Toast.LENGTH_LONG).show();
-		}
-
-		return success;
+	private Single<Boolean> unwhitelistChannel(boolean displayToastMessage) {
+		return Single.fromCallable(() -> ChannelFilteringDb.getChannelFilteringDb().unwhitelist(id))
+				.subscribeOn(Schedulers.io())
+				.observeOn(AndroidSchedulers.mainThread())
+				.doOnSuccess(success -> {
+					if (displayToastMessage) {
+						Toast.makeText(SkyTubeApp.getContext(),
+								success ? R.string.channel_unwhitelist_success : R.string.channel_unwhitelist_error,
+								Toast.LENGTH_LONG).show();
+					}
+				});
 	}
 
-	public static void subscribeChannel(final Context context, final Menu menu, final String channelId) {
+	public static Disposable subscribeChannel(final Context context, final Menu menu, final String channelId) {
 		if (channelId != null) {
-			new GetChannelInfo(context, youTubeChannel -> {
-				DatabaseResult result = SubscriptionsDb.getSubscriptionsDb().subscribe(youTubeChannel);
-				switch(result) {
-					case SUCCESS: {
-						youTubeChannel.setUserSubscribed(true);
-						SubsAdapter.get(context).refreshSubsList();
-						SubscriptionsFeedFragment.refreshSubsFeedFromCache();
-						Toast.makeText(context, R.string.channel_subscribed, Toast.LENGTH_LONG).show();
-						break;
-					}
-					case NOT_MODIFIED: {
-						Toast.makeText(context, R.string.channel_already_subscribed, Toast.LENGTH_LONG).show();
-						break;
-					}
-					default: {
-						Toast.makeText(context, R.string.channel_subscribe_failed, Toast.LENGTH_LONG).show();
-						break;
-					}
-				}
-			}).executeInParallel(channelId);
-
+			return DatabaseTasks.getChannelInfo(context, channelId, false)
+					.subscribe(youTubeChannel -> {
+						DatabaseResult result = SubscriptionsDb.getSubscriptionsDb().subscribe(youTubeChannel);
+						switch(result) {
+							case SUCCESS: {
+								youTubeChannel.setUserSubscribed(true);
+								SubsAdapter.get(context).refreshSubsList();
+								SubscriptionsFeedFragment.refreshSubsFeedFromCache();
+								Toast.makeText(context, R.string.channel_subscribed, Toast.LENGTH_LONG).show();
+								break;
+							}
+							case NOT_MODIFIED: {
+								Toast.makeText(context, R.string.channel_already_subscribed, Toast.LENGTH_LONG).show();
+								break;
+							}
+							default: {
+								Toast.makeText(context, R.string.channel_subscribe_failed, Toast.LENGTH_LONG).show();
+								break;
+							}
+						}
+					});
 		} else {
 			Toast.makeText(context, "Channel is not specified", Toast.LENGTH_LONG).show();
+			return Disposable.empty();
 		}
 	}
 

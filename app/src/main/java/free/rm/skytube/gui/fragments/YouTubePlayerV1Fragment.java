@@ -46,11 +46,9 @@ import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetVideoDescriptionTask;
 import free.rm.skytube.businessobjects.YouTube.VideoStream.StreamMetaData;
 import free.rm.skytube.businessobjects.YouTube.newpipe.ContentId;
+import free.rm.skytube.businessobjects.db.DatabaseTasks;
 import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
 import free.rm.skytube.businessobjects.db.PlaybackStatusDb;
-import free.rm.skytube.businessobjects.db.Tasks.CheckIfUserSubbedToChannelTask;
-import free.rm.skytube.businessobjects.db.Tasks.GetChannelInfo;
-import free.rm.skytube.businessobjects.db.Tasks.IsVideoBookmarkedTask;
 import free.rm.skytube.businessobjects.interfaces.GetDesiredStreamListener;
 import free.rm.skytube.businessobjects.interfaces.YouTubePlayerActivityListener;
 import free.rm.skytube.businessobjects.interfaces.YouTubePlayerFragmentInterface;
@@ -65,6 +63,7 @@ import free.rm.skytube.gui.businessobjects.fragments.ImmersiveModeFragment;
 import free.rm.skytube.gui.businessobjects.views.Linker;
 import free.rm.skytube.gui.businessobjects.views.SubscribeButton;
 import hollowsoft.slidingdrawer.SlidingDrawer;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
 
 import static free.rm.skytube.gui.activities.YouTubePlayerActivity.YOUTUBE_VIDEO_OBJ;
 
@@ -116,6 +115,8 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 	private float                   startBrightness = -1.0f;
 	private float                   startVolumePercent  = -1.0f;
 	private int                     startVideoTime = -1;
+
+	private final CompositeDisposable compositeDisposable = new CompositeDisposable();
 
 	/** Timeout (in milliseconds) before the HUD (i.e. media controller + action/title bar) is hidden. */
 	private static final int HUD_VISIBILITY_TIMEOUT = 5000;
@@ -180,6 +181,13 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 		} catch (ClassCastException e) {
 			throw new ClassCastException("YouTubePlayerFragment must be instantiated from an Activity that implements YouTubePlayerActivityListener");
 		}
+	}
+
+	@Override
+	public void onDestroy() {
+		compositeDisposable.clear();
+		videoDescSubscribeButton.clearBackgroundTasks();
+		super.onDestroy();
 	}
 
 	/**
@@ -435,22 +443,23 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 	 */
 	private void getVideoInfoTasks() {
 		// get Channel info (e.g. avatar...etc) task
-		new GetChannelInfo(getContext(), youTubeChannel -> {
-			YouTubePlayerV1Fragment.this.youTubeChannel = youTubeChannel;
+		compositeDisposable.add(DatabaseTasks.getChannelInfo(requireContext(), youTubeVideo.getChannelId(), false)
+				.subscribe(youTubeChannel1 -> {
+					youTubeChannel = youTubeChannel1;
 
-			videoDescSubscribeButton.setChannel(YouTubePlayerV1Fragment.this.youTubeChannel);
-			if (youTubeChannel != null) {
-				if(getActivity() != null)
-					Glide.with(getActivity())
-									.load(youTubeChannel.getThumbnailUrl())
-									.apply(new RequestOptions().placeholder(R.drawable.channel_thumbnail_default))
-									.into(videoDescChannelThumbnailImageView);
-			}
-		}).executeInParallel(youTubeVideo.getChannelId());
+					videoDescSubscribeButton.setChannel(youTubeChannel);
+					if (youTubeChannel != null) {
+						Glide.with(requireContext())
+								.load(youTubeChannel.getThumbnailUrl())
+								.apply(new RequestOptions().placeholder(R.drawable.channel_thumbnail_default))
+								.into(videoDescChannelThumbnailImageView);
+					}
+				}));
 
 		// check if the user has subscribed to a channel... if he has, then change the state of
 		// the subscribe button
-		new CheckIfUserSubbedToChannelTask(videoDescSubscribeButton, youTubeVideo.getChannelId()).execute();
+		compositeDisposable.add(DatabaseTasks.checkIfUserSubbedToChannel(videoDescSubscribeButton,
+				youTubeVideo.getChannelId()));
 	}
 
 
@@ -665,7 +674,7 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 		// youTubeVideo might be null if we have only passed the video URL to this fragment (i.e.
 		// the app is still trying to construct youTubeVideo in the background).
 		if (youTubeVideo != null) {
-			new IsVideoBookmarkedTask(youTubeVideo.getId(), menu).executeInParallel();
+			compositeDisposable.add(DatabaseTasks.isVideoBookmarked(youTubeVideo.getId(), menu));
 		}
 	}
 
@@ -714,7 +723,7 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 				return true;
 
             case R.id.block_channel:
-	            youTubeChannel.blockChannel();
+	            compositeDisposable.add(youTubeChannel.blockChannel().subscribe());
 				return true;
 			default:
 				return super.onOptionsItemSelected(item);
@@ -836,7 +845,7 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 
 			// will now check if the video is bookmarked or not (and then update the menu
 			// accordingly)
-			new IsVideoBookmarkedTask(youTubeVideo.getId(), menu).executeInParallel();
+			compositeDisposable.add(DatabaseTasks.isVideoBookmarked(youTubeVideo.getId(), menu));
 		}
 	}
 

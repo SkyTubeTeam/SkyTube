@@ -30,7 +30,8 @@ import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetBulkSubscriptionVideosTask;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetChannelVideosTask;
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
-import free.rm.skytube.businessobjects.db.Tasks.SubscribeToChannelTask;
+import free.rm.skytube.businessobjects.db.DatabaseTasks;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
 
 /**
  * The (channel) subscribe button.
@@ -45,6 +46,7 @@ public class SubscribeButton extends AppCompatButton implements View.OnClickList
 	private boolean fetchChannelVideosOnSubscribe = true;
 	private OnClickListener externalClickListener = null;
 
+	private final CompositeDisposable compositeDisposable = new CompositeDisposable();
 
 	public SubscribeButton(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -68,7 +70,8 @@ public class SubscribeButton extends AppCompatButton implements View.OnClickList
 					new GetChannelVideosTask(channel.getId(), null, false, null).executeInParallel();
 				}
 			}
-			new SubscribeToChannelTask(SubscribeButton.this, channel).executeInParallel();
+			compositeDisposable.add(DatabaseTasks.subscribeToChannel(!isUserSubscribed,
+					this, getContext(), channel, true).subscribe());
 		}
 	}
 
@@ -76,6 +79,10 @@ public class SubscribeButton extends AppCompatButton implements View.OnClickList
 	public void setOnClickListener(@Nullable OnClickListener l) {
 		externalClickListener = l;
 		super.setOnClickListener(this);
+	}
+
+	public void clearBackgroundTasks() {
+		compositeDisposable.clear();
 	}
 
 	public void setChannel(YouTubeChannel channel) {

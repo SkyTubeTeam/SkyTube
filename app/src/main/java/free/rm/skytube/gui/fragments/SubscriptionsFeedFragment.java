@@ -55,10 +55,11 @@ import free.rm.skytube.businessobjects.YouTube.Tasks.GetBulkSubscriptionVideosTa
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetSubscriptionVideosTask;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetSubscriptionVideosTaskListener;
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
+import free.rm.skytube.businessobjects.db.DatabaseTasks;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
-import free.rm.skytube.businessobjects.db.Tasks.GetSubscribedChannelsTask;
 import free.rm.skytube.gui.businessobjects.SubscriptionsBackupsManager;
 import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
 
 /**
  * Fragment that displays subscriptions videos feed from all channels the user is subscribed to.
@@ -93,6 +94,8 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 	private static final String NOTIFICATION_CHANNEL_NAME = "SkyTube";
 	private static final String NOTIFICATION_CHANNEL_ID = "subscriptionChecking";
 	private static final int NOTIFICATION_ID = 1;
+
+	private final CompositeDisposable compositeDisposable = new CompositeDisposable();
 
 	@Override
 	protected int getLayoutResource() {
@@ -154,6 +157,12 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 		getActivity().unregisterReceiver(feedUpdaterReceiver);
 	}
 
+	@Override
+	public void onDestroy() {
+		subscriptionsBackupsManager.clearBackgroundTasks();
+		compositeDisposable.clear();
+		super.onDestroy();
+	}
 
 	/**
 	 * Instruct the {@link SubscriptionsFeedFragment} to refresh the subscriptions feed.
@@ -228,12 +237,14 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 		if (refreshInProgress) {
 			return;
 		}
-		if (forcedFullRefresh && SkyTubeApp.isConnected(getContext())) {
+		if (forcedFullRefresh && SkyTubeApp.isConnected(requireContext())) {
 			unsetFlag(FLAG_REFRESH_FEED_FULL);
 			refreshInProgress = true;
-			new GetSubscribedChannelsTask(this.getContext(), channelsRefreshed ->
-					Log.i("SUB FRAGMENT", "Refreshed "+ channelsRefreshed.size())).executeInParallel();
-			new RefreshFeedTask(showFetchingVideosDialog, forcedFullRefresh).executeInParallel();
+			compositeDisposable.add(DatabaseTasks.getSubscribedChannels(requireContext())
+					.toList()
+					.subscribe(channelsRefreshed -> Log.i("SUB FRAGMENT", "Refreshed " +
+							channelsRefreshed.size())));
+			new RefreshFeedTask(showFetchingVideosDialog, true).executeInParallel();
 		} else {
 			videoGridAdapter.refresh(true);
 		}

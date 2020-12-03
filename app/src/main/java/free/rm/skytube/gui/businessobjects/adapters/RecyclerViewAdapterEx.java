@@ -68,8 +68,8 @@ public abstract class RecyclerViewAdapterEx<T, HolderType extends RecyclerView.V
 	 */
 	public void appendList(List<T> l) {
 		if (l != null  && !l.isEmpty()) {
-			this.list.addAll(l);
-			this.notifyDataSetChanged();
+			list.addAll(l);
+			notifyDataSetChanged();
 		}
 	}
 

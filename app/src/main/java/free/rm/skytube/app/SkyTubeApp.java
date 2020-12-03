@@ -59,12 +59,13 @@ import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubePlaylist;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetPlaylistTask;
 import free.rm.skytube.businessobjects.YouTube.newpipe.ContentId;
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
-import free.rm.skytube.businessobjects.db.Tasks.GetChannelInfo;
+import free.rm.skytube.businessobjects.db.DatabaseTasks;
 import free.rm.skytube.gui.activities.MainActivity;
 import free.rm.skytube.gui.businessobjects.YouTubePlayer;
 import free.rm.skytube.gui.fragments.ChannelBrowserFragment;
 import free.rm.skytube.gui.fragments.FragmentNames;
 import free.rm.skytube.gui.fragments.PlaylistVideosFragment;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
 
 /**
  * SkyTube application.
@@ -80,6 +81,8 @@ public class SkyTubeApp extends MultiDexApplication {
 	public static final String NEW_VIDEOS_NOTIFICATION_CHANNEL = "free.rm.skytube.NEW_VIDEOS_NOTIFICATION_CHANNEL";
 	public static final int NEW_VIDEOS_NOTIFICATION_CHANNEL_ID = 1;
 
+	private static final CompositeDisposable COMPOSITE_DISPOSABLE = new CompositeDisposable();
+
 	@Override
 	public void onCreate() {
 		super.onCreate();
@@ -87,6 +90,12 @@ public class SkyTubeApp extends MultiDexApplication {
 		this.names = new FragmentNames(this);
 		skyTubeApp = this;
 		initChannels(this);
+	}
+
+	@Override
+	public void onTerminate() {
+		COMPOSITE_DISPOSABLE.clear();
+		super.onTerminate();
 	}
 
 	/**
@@ -390,10 +399,8 @@ public class SkyTubeApp extends MultiDexApplication {
 	 */
 	public static void launchChannel(String channelId, Context context) {
 		if (channelId != null) {
-			new GetChannelInfo(context,
-					youTubeChannel -> SkyTubeApp.launchChannel(youTubeChannel, context),
-					true)
-					.executeInParallel(channelId);
+			COMPOSITE_DISPOSABLE.add(DatabaseTasks.getChannelInfo(context, channelId, true)
+					.subscribe(youTubeChannel -> launchChannel(youTubeChannel, context)));
 		}
 	}
 
