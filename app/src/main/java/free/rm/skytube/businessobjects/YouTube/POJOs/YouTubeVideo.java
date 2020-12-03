@@ -180,20 +180,21 @@ public class YouTubeVideo extends CardData implements Serializable {
 		this.viewsCount = String.format(getStr(R.string.views), viewsCountInt);
 	}
 
-        public YouTubeVideo(String id, String title, String description, long durationInSeconds, YouTubeChannel channel, long viewCount,
-							Long publishDate, boolean publishDateExact, String thumbnailUrl) {
+        public YouTubeVideo(String id, String title, String description, long durationInSeconds,
+							YouTubeChannel channel, long viewCount, ZonedDateTime publishDate,
+							boolean publishDateExact, String thumbnailUrl) {
             this.id = id;
             this.title = title;
             this.description = description;
             setDurationInSeconds((int) durationInSeconds);
             if (viewCount >= 0) {
-                this.setViewCount(BigInteger.valueOf(viewCount));
+                setViewCount(BigInteger.valueOf(viewCount));
             }
             if (publishDate != null) {
-                this.setPublishTimestamp(publishDate);
-                this.publishDate = Instant.ofEpochMilli(publishDate).atZone(ZoneId.systemDefault());
+                setPublishTimestamp(publishDate.toInstant().toEpochMilli());
+                this.publishDate = publishDate;
             }
-            this.setPublishTimestampExact(publishDateExact);
+            setPublishTimestampExact(publishDateExact);
             this.thumbnailMaxResUrl = thumbnailUrl;
             this.thumbnailUrl = thumbnailUrl;
             this.channel = channel;
