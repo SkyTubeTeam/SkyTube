@@ -112,7 +112,6 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.3'
     
     implementation 'com.google.code.gson:gson:2.8.6'
-    implementation 'joda-time:joda-time:2.10.6'
     implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
     implementation 'com.google.android.exoplayer:exoplayer:2.9.6'
     implementation 'org.jsoup:jsoup:1.13.1'
