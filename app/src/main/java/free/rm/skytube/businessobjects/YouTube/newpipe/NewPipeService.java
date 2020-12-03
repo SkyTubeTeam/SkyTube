@@ -79,28 +79,11 @@ public class NewPipeService {
     /**
      * Returns a list of video/stream meta-data that is supported by this app.
      *
-     * @return List of {@link StreamMetaData}.
+     * @return The {@link StreamInfo}.
      */
-    public StreamMetaDataList getStreamMetaDataListByUrl(String videoUrl) {
-        StreamMetaDataList list = new StreamMetaDataList();
-
-        try {
-
-            // actual extraction
-            StreamInfo streamInfo = StreamInfo.getInfo(streamingService, videoUrl);
-
-            // now print the stream url and we are done
-            for(VideoStream stream : streamInfo.getVideoStreams()) {
-                list.add( new StreamMetaData(stream) );
-            }
-        } catch (ContentNotAvailableException exception) {
-            list = new StreamMetaDataList(exception.getMessage());
-        } catch (Throwable tr) {
-            Logger.e(this, "An error has occurred while getting streams metadata.  URL=" + videoUrl, tr);
-            list = new StreamMetaDataList(R.string.error_video_streams);
-        }
-
-        return list;
+    public StreamInfo getStreamInfoByUrl(String videoUrl) throws IOException, ExtractionException {
+        // actual extraction
+        return StreamInfo.getInfo(streamingService, videoUrl);
     }
 
     public ContentId getVideoId(String url) throws ParsingException {
@@ -147,12 +130,8 @@ public class NewPipeService {
      * @param videoId the id of the video.
      * @return List of {@link StreamMetaData}.
      */
-    public StreamMetaDataList getStreamMetaDataList(String videoId) {
-        try {
-            return getStreamMetaDataListByUrl(getVideoUrl(videoId));
-        } catch (ParsingException e) {
-            return new StreamMetaDataList(e.getMessage());
-        }
+    public StreamInfo getStreamInfoByVideoId(String videoId) throws ExtractionException, IOException {
+        return getStreamInfoByUrl(getVideoUrl(videoId));
     }
 
     /**

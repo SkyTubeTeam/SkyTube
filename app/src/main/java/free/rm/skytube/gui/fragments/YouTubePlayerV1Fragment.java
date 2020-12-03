@@ -33,11 +33,14 @@ import androidx.preference.PreferenceManager;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
+import org.schabi.newpipe.extractor.stream.StreamInfo;
+
 import java.io.File;
 import java.util.Locale;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
+import free.rm.skytube.app.StreamSelectionPolicy;
 import free.rm.skytube.app.enums.Policy;
 import free.rm.skytube.businessobjects.GetVideoDetailsTask;
 import free.rm.skytube.businessobjects.Logger;
@@ -779,21 +782,24 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 				} else {
 					youTubeVideo.getDesiredStream(new GetDesiredStreamListener() {
 						@Override
-						public void onGetDesiredStream(StreamMetaData desiredStream) {
+						public void onGetDesiredStream(StreamInfo desiredStream) {
 							// play the video
-							Logger.i(YouTubePlayerV1Fragment.this, ">> PLAYING: %s", desiredStream.getUri());
-							videoView.setVideoURI(desiredStream.getUri());
+							StreamSelectionPolicy selectionPolicy = SkyTubeApp.getSettings().getDesiredVideoResolution(false).withAllowVideoOnly(false);
+							StreamSelectionPolicy.StreamSelection selection = selectionPolicy.select(desiredStream);
+							if (selection != null) {
+								Uri uri = selection.getVideoStreamUri();
+								Logger.i(YouTubePlayerV1Fragment.this, ">> PLAYING: %s", uri);
+								videoView.setVideoURI(uri);
+							} else {
+								videoPlaybackError(selectionPolicy.getErrorMessage(getContext()));
+							}
 						}
 
 						@Override
-						public void onGetDesiredStreamError(String errorMessage) {
-							if (errorMessage != null) {
-								new AlertDialog.Builder(getContext())
-										.setMessage(errorMessage)
-										.setTitle(R.string.error_video_play)
-										.setCancelable(false)
-										.setPositiveButton(R.string.ok, (dialog, which) -> getActivity().finish())
-										.show();
+						public void onGetDesiredStreamError(Exception exception) {
+							if (exception != null) {
+								Logger.e(YouTubePlayerV1Fragment.this, "Error getting stream info: "+ exception.getMessage(), exception);
+								videoPlaybackError(exception.getMessage());
 							}
 						}
 					});
@@ -814,6 +820,15 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 						.show();
 			}
 		}
+	}
+
+	void videoPlaybackError(String errorMessage) {
+		new AlertDialog.Builder(getContext())
+				.setMessage(errorMessage)
+				.setTitle(R.string.error_video_play)
+				.setCancelable(false)
+				.setPositiveButton(R.string.ok, (dialog, which) -> getActivity().finish())
+				.show();
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////

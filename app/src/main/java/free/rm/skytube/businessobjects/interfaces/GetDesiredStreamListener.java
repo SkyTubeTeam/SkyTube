@@ -1,5 +1,7 @@
 package free.rm.skytube.businessobjects.interfaces;
 
+import org.schabi.newpipe.extractor.stream.StreamInfo;
+
 import free.rm.skytube.businessobjects.YouTube.VideoStream.StreamMetaData;
 
 /**
@@ -10,15 +12,15 @@ public interface GetDesiredStreamListener {
 	/**
 	 * Called when the video's stream has been successfully retrieved.
 	 *
-	 * @param videoUri  The retrieved video's Uri.
+	 * @param streamInfo  The retrieved video's Uri.
 	 */
-	void onGetDesiredStream(StreamMetaData desiredStream);
+	void onGetDesiredStream(StreamInfo streamInfo);
 
 	/**
 	 * Called if an error occurred while retrieving the video's Uri.
 	 *
 	 * @param errorMessage  Error message.
 	 */
-	void onGetDesiredStreamError(String errorMessage);
+	void onGetDesiredStreamError(Exception errorMessage);
 
 }
