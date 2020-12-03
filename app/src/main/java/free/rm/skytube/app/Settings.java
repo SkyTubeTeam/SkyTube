@@ -27,6 +27,7 @@ import java.util.Set;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.enums.Policy;
+import free.rm.skytube.businessobjects.YouTube.VideoStream.VideoResolution;
 
 /**
  * Type safe wrapper to access the various preferences.
@@ -62,6 +63,31 @@ public class Settings {
         String currentValue = getSharedPreferences().getString(getStr(R.string.pref_key_mobile_network_usage_policy),
                 getStr(R.string.pref_mobile_network_usage_value_ask));
         return Policy.valueOf(currentValue.toUpperCase());
+    }
+
+    /**
+     * Gets the policy which defines the desired video resolution by the user in the app preferences.
+     *
+     * @return Desired {@link StreamSelectionPolicy}.
+     */
+    public StreamSelectionPolicy getDesiredVideoResolution(boolean forDownload, boolean onMobile) {
+        String key = app.getStr(forDownload ? R.string.pref_key_video_download_preferred_resolution : R.string.pref_key_preferred_res);
+        SharedPreferences prefs = getSharedPreferences();
+        String resIdValue = prefs.getString(key, Integer.toString(VideoResolution.DEFAULT_VIDEO_RES_ID));
+
+        // if on mobile network use the preferred resolution under mobile network if defined
+        if (onMobile) {
+            String mobileKey = app.getStr(R.string.pref_key_preferred_res_mobile);
+            // default res for mobile network = that of wifi
+            resIdValue = prefs.getString(mobileKey, resIdValue);
+        }
+        VideoResolution maxResolution = VideoResolution.videoResIdToVideoResolution(resIdValue);
+
+        return new StreamSelectionPolicy(!forDownload, maxResolution, null);
+    }
+
+    public StreamSelectionPolicy getDesiredVideoResolution(boolean forDownload) {
+        return getDesiredVideoResolution(forDownload, SkyTubeApp.isConnectedToMobile());
     }
 
     public boolean isDisableSearchHistory() {

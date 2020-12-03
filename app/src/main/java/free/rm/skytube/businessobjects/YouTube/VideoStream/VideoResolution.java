@@ -34,13 +34,13 @@ public enum VideoResolution {
 	/** 720p - HD */
 	RES_720P	(4, 720),
 	/** 1080p - HD */
-	RES_1080P	(5, 1080);
+	RES_1080P	(5, 1080),
 
 	// these will be added eventually
 	/** 1440p - HD */
-	//RES_1440P,
+	RES_1440P   (6, 1440),
 	/** 2160p - 4k */
-	//RES_2160P,
+	RES_2160P (7, 2160);
 	/** 4320p - 8k */
 	//RES_4320P;
 
@@ -62,7 +62,6 @@ public enum VideoResolution {
 		this.verticalPixels = verticalPixels;
 	}
 
-
 	@Override
 	public String toString() {
 		return verticalPixels + "p";
@@ -82,6 +81,10 @@ public enum VideoResolution {
 		return resList[this.id];
 	}
 
+
+	public boolean isBiggerThan(VideoResolution other) {
+		return this.ordinal() > other.ordinal();
+	}
 
 	public static VideoResolution resolutionToVideoResolution(String resolution) {
 		VideoResolution[] resList = VideoResolution.values();
