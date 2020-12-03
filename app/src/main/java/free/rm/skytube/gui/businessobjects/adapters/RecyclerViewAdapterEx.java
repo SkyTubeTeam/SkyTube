@@ -24,8 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
-import free.rm.skytube.businessobjects.utils.Predicate;
+import java.util.function.Predicate;
 
 /**
  * An extended class of {@link RecyclerView.Adapter} that accepts a context and a list of items.
