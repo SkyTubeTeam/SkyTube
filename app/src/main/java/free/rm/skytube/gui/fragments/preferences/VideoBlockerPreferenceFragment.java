@@ -34,11 +34,16 @@ import free.rm.skytube.gui.businessobjects.MultiSelectListPreferenceDialog;
 import free.rm.skytube.gui.businessobjects.MultiSelectListPreferenceItem;
 import free.rm.skytube.gui.businessobjects.SkyTubeMaterialDialog;
 import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Flowable;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 /**
  * Video blocker preference.
  */
 public class VideoBlockerPreferenceFragment extends PreferenceFragment {
+	private final CompositeDisposable compositeDisposable = new CompositeDisposable();
 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
@@ -334,23 +339,19 @@ public class VideoBlockerPreferenceFragment extends PreferenceFragment {
 			title(R.string.pref_title_channel_whitelist);
 			positiveText(R.string.block);
 			onPositive((dialog, which) -> {
-				final List<YouTubeChannel> channelList = toYouTubeChannelList(getSelectedItems());
-
-				if (!channelList.isEmpty()) {
-					// unwhitelist the selected channels
-					boolean success = true;
-
-					for (YouTubeChannel channel : channelList) {
-						if (!channel.blockChannel(false)) {
-							success = false;
-						}
-					}
-
-					Toast.makeText(getActivity(),
-							success ? R.string.channel_unwhitelist_success : R.string.channel_unwhitelist_failure,
-							Toast.LENGTH_LONG)
-							.show();
-				}
+				compositeDisposable.add(
+						toYouTubeChannelList(getSelectedItems())
+								.flatMapSingle(channel -> channel.blockChannel(false))
+								.reduce((blockChannel1, blockChannel2) -> blockChannel1 && blockChannel2)
+								.subscribeOn(Schedulers.io())
+								.observeOn(AndroidSchedulers.mainThread())
+								.subscribe(success ->
+										Toast.makeText(getActivity(),
+												success ? R.string.channel_unwhitelist_success
+														: R.string.channel_unwhitelist_failure,
+												Toast.LENGTH_LONG).show()
+								)
+				);
 
 				dialog.dismiss();
 			});
@@ -359,20 +360,13 @@ public class VideoBlockerPreferenceFragment extends PreferenceFragment {
 			onNeutral((dialog, which) -> displayInputChannelUrlDialog());
 		}
 
-
 		/**
 		 * Converts List<MultiSelectListPreferenceItem> to List<YouTubeChannel>.
 		 */
-		private List<YouTubeChannel> toYouTubeChannelList(final List<MultiSelectListPreferenceItem> channels) {
-			List<YouTubeChannel> channelList = new ArrayList<>();
-
-			for (MultiSelectListPreferenceItem channel : channels) {
-				channelList.add(new YouTubeChannel(channel.id, channel.text));
-			}
-
-			return channelList;
+		private Flowable<YouTubeChannel> toYouTubeChannelList(final List<MultiSelectListPreferenceItem> channels) {
+			return Flowable.fromIterable(channels)
+					.map(channel -> new YouTubeChannel(channel.id, channel.text));
 		}
-
 
 		/**
 		 * Display a dialog which allows the user to input the channel's URL that he wished to be

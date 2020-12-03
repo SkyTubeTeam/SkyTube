@@ -36,8 +36,9 @@ import java.util.Set;
 
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.YouTube.POJOs.ChannelView;
-import free.rm.skytube.businessobjects.db.Tasks.GetSubscribedChannelViewTask;
+import free.rm.skytube.businessobjects.db.DatabaseTasks;
 import free.rm.skytube.gui.businessobjects.MainActivityListener;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
 
 /**
  * Channel subscriptions adapter: Contains a list of channels (that the user subscribed to) together
@@ -47,16 +48,17 @@ public class SubsAdapter extends RecyclerViewAdapterEx<ChannelView, SubsAdapter.
 
 	private static final String TAG = SubsAdapter.class.getSimpleName();
 	private static SubsAdapter subsAdapter = null;
-	private Set<MainActivityListener> listeners = new HashSet<>();
+	private final Set<MainActivityListener> listeners = new HashSet<>();
 
 	private String searchText;
+
+	private final CompositeDisposable compositeDisposable = new CompositeDisposable();
 
 	private SubsAdapter(Context context, View progressBar) {
 		super(context);
 
 		// populate this adapter with user's subscribed channels
 		executeQuery(null, progressBar);
-
 	}
 
 	public static SubsAdapter get(Context context) {
@@ -155,7 +157,8 @@ public class SubsAdapter extends RecyclerViewAdapterEx<ChannelView, SubsAdapter.
 	}
 
 	private void executeQuery(String searchText, View progressBar) {
-		new GetSubscribedChannelViewTask(searchText, progressBar, this::appendList).executeInParallel();
+		compositeDisposable.add(DatabaseTasks.getSubscribedChannelView(progressBar, searchText)
+				.subscribe(this::appendList));
 	}
 
 	public void filterSubSearch(String searchText){

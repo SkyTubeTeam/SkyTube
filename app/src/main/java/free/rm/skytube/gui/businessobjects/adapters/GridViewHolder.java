@@ -44,14 +44,14 @@ import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubePlaylist;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
+import free.rm.skytube.businessobjects.db.DatabaseTasks;
 import free.rm.skytube.businessobjects.db.PlaybackStatusDb;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
-import free.rm.skytube.businessobjects.db.Tasks.IsVideoBookmarkedTask;
-import free.rm.skytube.businessobjects.db.Tasks.IsVideoWatchedTask;
 import free.rm.skytube.gui.activities.ThumbnailViewerActivity;
 import free.rm.skytube.gui.businessobjects.MainActivityListener;
 import free.rm.skytube.gui.businessobjects.MobileNetworkWarningDialog;
 import free.rm.skytube.gui.businessobjects.YouTubePlayer;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
 
 /**
  * A ViewHolder for the videos grid view.
@@ -93,6 +93,8 @@ public class GridViewHolder extends RecyclerView.ViewHolder implements Serializa
 	@BindView(R.id.options_button)
 	View optionsButton;
 
+	private final transient CompositeDisposable compositeDisposable;
+
 
 	/**
 	 * Constructor.
@@ -109,6 +111,7 @@ public class GridViewHolder extends RecyclerView.ViewHolder implements Serializa
 
 		this.mainActivityListener = listener;
 		this.showChannelInfo = showChannelInfo;
+		compositeDisposable = new CompositeDisposable();
 
 		thumbnailImageView.setOnClickListener(thumbnailView -> {
 			if (currentCard instanceof YouTubeVideo) {
@@ -133,6 +136,10 @@ public class GridViewHolder extends RecyclerView.ViewHolder implements Serializa
 		view.findViewById(R.id.channel_layout).setOnClickListener(showChannelInfo ? channelOnClickListener : null);
 
 		optionsButton.setOnClickListener(this::onOptionsButtonClick);
+	}
+
+	void clearBackgroundTasks() {
+		compositeDisposable.clear();
 	}
 
 	/**
@@ -237,6 +244,7 @@ public class GridViewHolder extends RecyclerView.ViewHolder implements Serializa
 			onOptionsButtonClick(view, (YouTubeChannel) currentCard);
 		}
 	}
+
 	private void onOptionsButtonClick(final View view, YouTubeChannel channel) {
 		final PopupMenu popupMenu = createPopup(R.menu.channel_options_menu, view);
 		Menu menu = popupMenu.getMenu();
@@ -252,13 +260,13 @@ public class GridViewHolder extends RecyclerView.ViewHolder implements Serializa
 					SkyTubeApp.copyUrl(context, "Channel URL", channel.getChannelUrl());
 					return true;
 				case R.id.subscribe_channel:
-					YouTubeChannel.subscribeChannel(context, popupMenu.getMenu(), channel.getId());
+					compositeDisposable.add(YouTubeChannel.subscribeChannel(context, popupMenu.getMenu(), channel.getId()));
 					return true;
 				case R.id.open_channel:
 					SkyTubeApp.launchChannel(channel.getId(), context);
 					return true;
 				case R.id.block_channel:
-					channel.blockChannel();
+					compositeDisposable.add(channel.blockChannel().subscribe());
 					return true;
 			}
 			return false;
@@ -269,11 +277,11 @@ public class GridViewHolder extends RecyclerView.ViewHolder implements Serializa
 	private void onOptionsButtonClick(final View view, YouTubeVideo youTubeVideo) {
 		final PopupMenu popupMenu = createPopup(R.menu.video_options_menu, view);
 		Menu menu = popupMenu.getMenu();
-		new IsVideoBookmarkedTask(youTubeVideo.getId(), menu).executeInParallel();
+		compositeDisposable.add(DatabaseTasks.isVideoBookmarked(youTubeVideo.getId(), menu));
 
 		// If playback history is not disabled, see if this video has been watched. Otherwise, hide the "mark watched" & "mark unwatched" options from the menu.
 		if(!SkyTubeApp.getPreferenceManager().getBoolean(context.getString(R.string.pref_key_disable_playback_status), false)) {
-			new IsVideoWatchedTask(youTubeVideo.getId(), menu).executeInParallel();
+			compositeDisposable.add(DatabaseTasks.isVideoWatched(youTubeVideo.getId(), menu));
 		} else {
 			popupMenu.getMenu().findItem(R.id.mark_watched).setVisible(false);
 			popupMenu.getMenu().findItem(R.id.mark_unwatched).setVisible(false);
@@ -335,7 +343,7 @@ public class GridViewHolder extends RecyclerView.ViewHolder implements Serializa
 					}
 					return true;
 				case R.id.block_channel:
-					youTubeVideo.getChannel().blockChannel();
+					compositeDisposable.add(youTubeVideo.getChannel().blockChannel().subscribe());
 					return true;
 			}
 			return false;
