@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
+import androidx.core.text.util.LinkifyCompat;
 import androidx.fragment.app.Fragment;
 import androidx.legacy.app.FragmentCompat;
 
@@ -312,7 +313,7 @@ public class SubscriptionsBackupsManager {
 	 */
 	public void displayImportSubscriptionsFromYouTubeDialog() {
 		SpannableString msg = new SpannableString(activity.getText(R.string.import_subscriptions_description));
-		Linkify.addLinks(msg, Linkify.WEB_URLS);
+		LinkifyCompat.addLinks(msg, Linkify.WEB_URLS);
 		new SkyTubeMaterialDialog(activity)
 				.title(R.string.import_subscriptions)
 				.content(msg)

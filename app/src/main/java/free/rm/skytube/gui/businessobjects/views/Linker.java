@@ -30,6 +30,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.text.HtmlCompat;
+import androidx.core.text.util.LinkifyCompat;
 
 import org.schabi.newpipe.extractor.StreamingService;
 
@@ -81,7 +82,7 @@ public class Linker {
 
 	private static Spanned spanText(String text) {
 		SpannableStringBuilder spanner = new SpannableStringBuilder(text);
-		Linkify.addLinks(spanner, Linkify.WEB_URLS);
+		LinkifyCompat.addLinks(spanner, Linkify.WEB_URLS);
 		return spanner;
 	}
 
