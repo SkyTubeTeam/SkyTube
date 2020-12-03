@@ -48,8 +48,9 @@ import org.schabi.newpipe.extractor.stream.StreamInfo;
 import org.schabi.newpipe.extractor.stream.VideoStream;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
 
@@ -327,7 +328,7 @@ public class NewPipeService {
 
         YouTubeVideo video = new YouTubeVideo(extractor.getId(), extractor.getName(), filterHtml(extractor.getDescription()),
                 extractor.getLength(), new YouTubeChannel(extractor.getUploaderUrl(), extractor.getUploaderName()),
-                viewCount, uploadDate.timestamp, uploadDate.exact, extractor.getThumbnailUrl());
+                viewCount, uploadDate.zonedDateTime, uploadDate.exact, extractor.getThumbnailUrl());
         try {
             video.setLikeDislikeCount(extractor.getLikeCount(), extractor.getDislikeCount());
         } catch (ParsingException pe) {
@@ -341,27 +342,27 @@ public class NewPipeService {
 
     static class DateInfo {
         boolean exact;
-        Long timestamp;
+        ZonedDateTime zonedDateTime;
 
         public DateInfo(DateWrapper uploadDate) {
             if (uploadDate != null) {
-                timestamp = uploadDate.date().getTimeInMillis();
+                zonedDateTime = uploadDate.offsetDateTime().atZoneSameInstant(ZoneId.systemDefault());
                 exact = !uploadDate.isApproximation();
             } else {
-                timestamp = null;
+                zonedDateTime = null;
                 exact = false;
             }
-
         }
 
-        static final SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        private static final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
         @NonNull
         @Override
         public String toString() {
             try {
-                return "[time= " + sdf.format(new Date(timestamp)) + ",exact=" + exact + ']';
+                return "[time= " + dtf.format(zonedDateTime) + ",exact=" + exact + ']';
             } catch (Exception e){
-                return "[incorrect time= "+timestamp+" ,exact=" + exact + ']';
+                return "[incorrect time= " + zonedDateTime + " ,exact=" + exact + ']';
             }
         }
     }
