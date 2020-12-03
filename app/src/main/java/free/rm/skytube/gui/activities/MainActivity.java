@@ -19,7 +19,6 @@ package free.rm.skytube.gui.activities;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
@@ -46,7 +45,6 @@ import com.mikepenz.actionitembadge.library.utils.BadgeStyle;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -393,8 +391,8 @@ public class MainActivity extends BaseActivity {
 	 * @return	{@link CharSequence}
 	 */
 	private CharSequence getClipboardItem() {
-		CharSequence              clipboardText    = null;
-		ClipboardManager    clipboardManager = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+		CharSequence clipboardText = null;
+		ClipboardManager clipboardManager = ContextCompat.getSystemService(this, ClipboardManager.class);
 
 		// if the clipboard contain data ...
 		if (clipboardManager != null  &&  clipboardManager.hasPrimaryClip()) {

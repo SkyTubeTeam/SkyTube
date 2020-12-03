@@ -4,11 +4,11 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
 
 import androidx.core.app.NotificationCompat;
+import androidx.core.content.ContextCompat;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
@@ -65,8 +65,8 @@ public class FeedUpdaterService extends Service implements GetSubscriptionVideos
 							.setAutoCancel(true)
 							.build();
 
-			NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
-			notificationManager.notify(SkyTubeApp.NEW_VIDEOS_NOTIFICATION_CHANNEL_ID, notification);
+			ContextCompat.getSystemService(this, NotificationManager.class)
+					.notify(SkyTubeApp.NEW_VIDEOS_NOTIFICATION_CHANNEL_ID, notification);
 
 			// Send a broadcast that new subscription videos have been found. The feed tab will receive the broadcast and
 			// refresh its video grid to show the new videos.

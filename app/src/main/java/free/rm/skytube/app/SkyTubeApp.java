@@ -17,7 +17,6 @@
 
 package free.rm.skytube.app;
 
-import android.annotation.TargetApi;
 import android.app.AlarmManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -40,6 +39,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.core.graphics.ColorUtils;
 import androidx.multidex.MultiDexApplication;
@@ -54,7 +54,6 @@ import java.util.List;
 
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.FeedUpdaterReceiver;
-import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubePlaylist;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetPlaylistTask;
@@ -191,9 +190,8 @@ public class SkyTubeApp extends MultiDexApplication {
 	 * @return True if the device is connected via mobile network such as 4G.
 	 */
 	public static boolean isConnectedToMobile() {
-		final ConnectivityManager connMgr = (ConnectivityManager)
-				getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-		final android.net.NetworkInfo mobile = connMgr.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+		final NetworkInfo mobile = ContextCompat.getSystemService(getContext(), ConnectivityManager.class)
+				.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
 		return mobile != null && mobile.isConnectedOrConnecting();
 	}
 
@@ -203,8 +201,7 @@ public class SkyTubeApp extends MultiDexApplication {
 	 * @return
 	 */
 	public static NetworkInfo getNetworkInfo(@NonNull Context context){
-		ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-		return cm.getActiveNetworkInfo();
+		return ContextCompat.getSystemService(context, ConnectivityManager.class).getActiveNetworkInfo();
 	}
 
 	/**
@@ -221,14 +218,11 @@ public class SkyTubeApp extends MultiDexApplication {
 	 * Initialize Notification Channels (for Android OREO)
 	 * @param context
 	 */
-	@TargetApi(26)
 	private void initChannels(@NonNull Context context) {
-
 		if(Build.VERSION.SDK_INT < 26) {
 			return;
 		}
-		NotificationManager notificationManager =
-				(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+		NotificationManager notificationManager = getSystemService(NotificationManager.class);
 
 		CharSequence channelName = context.getString(R.string.notification_channel_feed_title);
 		int importance = NotificationManager.IMPORTANCE_LOW;
@@ -255,7 +249,7 @@ public class SkyTubeApp extends MultiDexApplication {
 	public static void setFeedUpdateInterval(int interval) {
 		Intent alarm = new Intent(getContext(), FeedUpdaterReceiver.class);
 		PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), 0, alarm, PendingIntent.FLAG_CANCEL_CURRENT);
-		AlarmManager alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
+		AlarmManager alarmManager = ContextCompat.getSystemService(getContext(), AlarmManager.class);
 
 		// Feed Auto Updater has been cancelled. If the selected interval is greater than 0, set the new alarm to call FeedUpdaterService
 		if(interval > 0) {
@@ -298,9 +292,8 @@ public class SkyTubeApp extends MultiDexApplication {
 	}
 
 	public static void copyUrl(@NonNull Context context, String text, String url) {
-		ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
 		ClipData clip = ClipData.newPlainText(text, url);
-		clipboard.setPrimaryClip(clip);
+		ContextCompat.getSystemService(context, ClipboardManager.class).setPrimaryClip(clip);
 		Toast.makeText(context, R.string.url_copied_to_clipboard, Toast.LENGTH_SHORT).show();
 	}
 

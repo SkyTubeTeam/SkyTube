@@ -7,6 +7,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.SystemClock;
 
+import androidx.core.content.ContextCompat;
+
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 
@@ -23,9 +25,8 @@ public class FeedUpdaterSetupReceiver extends BroadcastReceiver {
 		PendingIntent intentExecuted = PendingIntent.getBroadcast(context, 0, i,
 						PendingIntent.FLAG_CANCEL_CURRENT);
 		if(feedUpdaterInterval > 0) {
-			AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-
-			alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME,
+			ContextCompat.getSystemService(context, AlarmManager.class)
+					.setRepeating(AlarmManager.ELAPSED_REALTIME,
 							SystemClock.elapsedRealtime()+feedUpdaterInterval, feedUpdaterInterval, intentExecuted);
 		}
 	}

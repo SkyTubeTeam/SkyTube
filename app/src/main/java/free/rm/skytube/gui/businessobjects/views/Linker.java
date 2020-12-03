@@ -29,6 +29,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
 import androidx.core.text.HtmlCompat;
 import androidx.core.text.util.LinkifyCompat;
 
@@ -132,9 +133,8 @@ public class Linker {
 										SkyTubeApp.viewInBrowser(clickedText, ctx);
 										break;
 									case 1:
-										ClipboardManager clipboard = (ClipboardManager) ctx.getSystemService(Context.CLIPBOARD_SERVICE);
 										ClipData clip = ClipData.newPlainText("URL", clickedText);
-										clipboard.setPrimaryClip(clip);
+										ContextCompat.getSystemService(ctx, ClipboardManager.class).setPrimaryClip(clip);
 										Toast.makeText(ctx, R.string.url_copied_to_clipboard, Toast.LENGTH_SHORT).show();
 										break;
 									case 2:
