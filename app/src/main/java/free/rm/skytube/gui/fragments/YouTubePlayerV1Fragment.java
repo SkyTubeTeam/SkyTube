@@ -28,6 +28,7 @@ import android.widget.Toast;
 import android.widget.VideoView;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -303,8 +304,7 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 					adjustPercent = 1.0f;
 				}
 
-				AudioManager audioManager = (AudioManager) getContext()
-						.getSystemService(Context.AUDIO_SERVICE);
+				AudioManager audioManager = ContextCompat.getSystemService(requireContext(), AudioManager.class);
 				final int STREAM = AudioManager.STREAM_MUSIC;
 
 				// Max volume will return INDEX of volume not the percent. For example, on my device it is 15

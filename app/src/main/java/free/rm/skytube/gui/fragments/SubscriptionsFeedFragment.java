@@ -26,6 +26,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -37,6 +38,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
+import androidx.core.content.ContextCompat;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 
@@ -194,10 +196,9 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 
 	private void showNotification() {
 		// Sets an ID for the notification, so it can be updated.
-		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-			NotificationManager mNotificationManager =
-					(NotificationManager) getContext().getSystemService(Context.NOTIFICATION_SERVICE);
-
+		NotificationManager notificationManager = ContextCompat.getSystemService(requireContext(),
+				NotificationManager.class);
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 			NotificationChannel mChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, NOTIFICATION_CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH);
 			mChannel.setSound(null,null);
 			// Create a notification and set the notification channel.
@@ -207,10 +208,10 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 					.setContentText(String.format(getContext().getString(R.string.fetched_videos_from_channels), numVideosFetched, numChannelsFetched, numChannelsSubscribed))
 					.setChannelId(NOTIFICATION_CHANNEL_ID)
 					.build();
-			mNotificationManager.createNotificationChannel(mChannel);
+			notificationManager.createNotificationChannel(mChannel);
 
-// Issue the notification.
-			mNotificationManager.notify(NOTIFICATION_ID , notification);
+			// Issue the notification.
+			notificationManager.notify(NOTIFICATION_ID , notification);
 		} else {
 			final Intent emptyIntent = new Intent();
 			PendingIntent pendingIntent = PendingIntent.getActivity(getContext(), 1, emptyIntent, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -221,8 +222,6 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 					.setPriority(NotificationCompat.FLAG_ONGOING_EVENT)
 					.setContentIntent(pendingIntent);
 
-
-			NotificationManager notificationManager = (NotificationManager) getContext().getSystemService(Context.NOTIFICATION_SERVICE);
 			notificationManager.notify(NOTIFICATION_ID, builder.build());
 		}
 	}
@@ -272,19 +271,16 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 			if (swipeRefreshLayout != null) {
 				swipeRefreshLayout.setRefreshing(false);
 			}
-			Context context = getContext();
 
-			NotificationManager notificationManager = (NotificationManager)  context.getSystemService(Context.NOTIFICATION_SERVICE);
-
-			notificationManager.cancel(NOTIFICATION_ID);
+			ContextCompat.getSystemService(requireContext(), NotificationManager.class).cancel(NOTIFICATION_ID);
 
 			if(changed) {
 				refreshFeedFromCache();
-				Toast.makeText(context,
-						String.format(context.getString(R.string.notification_new_videos_found),
+				Toast.makeText(requireContext(),
+						String.format(requireContext().getString(R.string.notification_new_videos_found),
 								numVideosFetched), Toast.LENGTH_LONG).show();
 			} else {
-				Toast.makeText(context,
+				Toast.makeText(requireContext(),
 									R.string.no_new_videos_found,
 									Toast.LENGTH_LONG).show();
 			}
