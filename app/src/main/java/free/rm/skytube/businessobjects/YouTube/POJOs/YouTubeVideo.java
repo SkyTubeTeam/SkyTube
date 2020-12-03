@@ -21,7 +21,6 @@ import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Environment;
 import android.view.Menu;
 import android.widget.Toast;
@@ -29,15 +28,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.core.content.FileProvider;
 
-import com.google.api.client.util.DateTime;
 import com.google.api.services.youtube.model.Thumbnail;
 import com.google.api.services.youtube.model.Video;
 import com.google.api.services.youtube.model.VideoSnippet;
 import com.google.api.services.youtube.model.VideoStatistics;
 
-import org.joda.time.Period;
-import org.joda.time.format.ISOPeriodFormat;
-import org.joda.time.format.PeriodFormatter;
 import org.schabi.newpipe.extractor.stream.Stream;
 import org.schabi.newpipe.extractor.stream.StreamInfo;
 import org.schabi.newpipe.extractor.stream.VideoStream;
@@ -45,7 +40,10 @@ import org.schabi.newpipe.extractor.stream.VideoStream;
 import java.io.File;
 import java.io.Serializable;
 import java.math.BigInteger;
-import java.util.Date;
+import java.time.Duration;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.Locale;
 
 import free.rm.skytube.BuildConfig;
@@ -110,7 +108,7 @@ public class YouTubeVideo extends CardData implements Serializable {
 	/**
 	 * The date/time of when this video was published.
 	 */
-	private DateTime publishDate;
+	private transient ZonedDateTime publishDate;
 	/**
 	 * Thumbnail URL (maximum resolution).
 	 */
@@ -143,7 +141,8 @@ public class YouTubeVideo extends CardData implements Serializable {
 		this.title = snippet.getTitle();
 
 		this.channel = new YouTubeChannel(snippet.getChannelId(), snippet.getChannelTitle());
-		setPublishDate(snippet.getPublishedAt());
+		setPublishDate(Instant.ofEpochMilli(snippet.getPublishedAt().getValue())
+				.atZone(ZoneId.systemDefault()));
 
 		if (snippet.getThumbnails() != null) {
 			Thumbnail thumbnail = snippet.getThumbnails().getHigh();
@@ -192,7 +191,7 @@ public class YouTubeVideo extends CardData implements Serializable {
             }
             if (publishDate != null) {
                 this.setPublishTimestamp(publishDate);
-                this.publishDate = new DateTime(publishDate);
+                this.publishDate = Instant.ofEpochMilli(publishDate).atZone(ZoneId.systemDefault());
             }
             this.setPublishTimestampExact(publishDateExact);
             this.thumbnailMaxResUrl = thumbnailUrl;
@@ -245,7 +244,8 @@ public class YouTubeVideo extends CardData implements Serializable {
 		if (duration.equals("0:00")) {
 			isLiveStream = true;
 			duration = getStr(R.string.LIVE);
-			setPublishDate(new DateTime(new Date()));	// set publishDate to current (as there is a bug in YouTube API in which live videos's date is incorrect)
+			// set publishDate to current (as there is a bug in YouTube API in which live videos's date is incorrect)
+			setPublishDate(ZonedDateTime.now());
 		} else {
 			isLiveStream = false;
 		}
@@ -352,7 +352,7 @@ public class YouTubeVideo extends CardData implements Serializable {
 		return viewsCountInt;
 	}
 
-	public DateTime getPublishDate() {
+	public ZonedDateTime getPublishDate() {
 		return publishDate;
 	}
 
@@ -361,9 +361,7 @@ public class YouTubeVideo extends CardData implements Serializable {
 	 * @param durationInSeconds The duration in seconds.
 	 */
 	public void setDurationInSeconds(String durationInSeconds) {
-		PeriodFormatter formatter = ISOPeriodFormat.standard();
-		Period p = formatter.parsePeriod(durationInSeconds);
-		this.durationInSeconds = p.toStandardSeconds().getSeconds();
+		this.durationInSeconds = (int) Duration.parse(durationInSeconds).toMillis() / 1000;
 	}
 
 	public void setDurationInSeconds(int durationInSeconds) {
@@ -374,10 +372,10 @@ public class YouTubeVideo extends CardData implements Serializable {
 	/**
 	 * Sets the {@link #publishDate}, {@link #publishTimestamp}.
 	 */
-	private void setPublishDate(DateTime publishDate) {
+	private void setPublishDate(ZonedDateTime publishDate) {
 		this.publishDate = publishDate;
 		if (this.publishDate != null) {
-			setPublishTimestamp(this.publishDate.getValue());
+			setPublishTimestamp(this.publishDate.toInstant().toEpochMilli());
 		}
 	}
 
@@ -389,7 +387,7 @@ public class YouTubeVideo extends CardData implements Serializable {
 	public YouTubeVideo updatePublishTimestampFromDate() {
 		if (this.publishTimestamp == null) {
 			if (this.publishDate != null) {
-				setPublishTimestamp(this.publishDate.getValue());
+				setPublishTimestamp(this.publishDate.toInstant().toEpochMilli());
 			}
 		}
 		return this;
