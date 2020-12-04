@@ -14,6 +14,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.text.util.LinkifyCompat;
 import androidx.fragment.app.Fragment;
@@ -381,9 +382,8 @@ public class SubscriptionsBackupsManager {
 
 			// if the user imported the subs channels from the Feed tab/fragment, then we
 			// need to refresh the fragment in order for the fragment to update the feed...
-			activity.recreate();
+			ActivityCompat.recreate(activity);
 		}
-
 	}
 
 
