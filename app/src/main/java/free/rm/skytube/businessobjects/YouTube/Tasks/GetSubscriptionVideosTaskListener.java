@@ -24,5 +24,4 @@ package free.rm.skytube.businessobjects.YouTube.Tasks;
  */
 public interface GetSubscriptionVideosTaskListener {
 	void onChannelVideosFetched(String channelId, int videosFetched, boolean videosDeleted);
-	void onAllChannelVideosFetched(boolean changed);
 }

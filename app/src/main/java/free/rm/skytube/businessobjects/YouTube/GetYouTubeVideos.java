@@ -17,6 +17,8 @@
 
 package free.rm.skytube.businessobjects.YouTube;
 
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import org.schabi.newpipe.extractor.exceptions.ExtractionException;
 
 import java.io.IOException;
@@ -27,13 +29,14 @@ import java.util.List;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
-import free.rm.skytube.businessobjects.YouTube.Tasks.GetYouTubeVideosTask;
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
+import free.rm.skytube.gui.businessobjects.adapters.VideoGridAdapter;
 
 /**
  * Returns a list of YouTube videos.
  *
- * <p>Do not run this directly, but rather use {@link GetYouTubeVideosTask}.</p>
+ * <p>Do not run this directly, but rather use {@link YouTubeTasks#getYouTubeVideos(GetYouTubeVideos,
+ * VideoGridAdapter, SwipeRefreshLayout, boolean, VideoGridAdapter.Callback)}.</p>
  */
 public abstract class GetYouTubeVideos {
 	protected String nextPageToken = null;

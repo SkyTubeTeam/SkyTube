@@ -64,16 +64,14 @@ import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.app.StreamSelectionPolicy;
 import free.rm.skytube.businessobjects.ChromecastListener;
-import free.rm.skytube.businessobjects.GetVideoDetailsTask;
-import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
-import free.rm.skytube.businessobjects.YouTube.Tasks.GetVideoDescriptionTask;
-import free.rm.skytube.businessobjects.YouTube.VideoStream.StreamMetaData;
+import free.rm.skytube.businessobjects.YouTube.YouTubeTasks;
 import free.rm.skytube.businessobjects.interfaces.GetDesiredStreamListener;
 import free.rm.skytube.gui.businessobjects.MainActivityListener;
 import free.rm.skytube.gui.businessobjects.YouTubePlayer;
 import free.rm.skytube.gui.fragments.ChromecastControllerFragment;
 import free.rm.skytube.gui.fragments.ChromecastMiniControllerFragment;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
 
 /**
  * Base Activity class that handles all Chromecast-related functionality. Any Activity that needs to use the Cast Icon and
@@ -86,6 +84,8 @@ public abstract class BaseActivity extends AppCompatActivity implements MainActi
 	public static final String ACTION_NOTIFICATION_CLICK = "free.rm.skytube.ACTION_NOTIFICATION_CLICK";
 
 	public static final String PANEL_EXPANDED = "free.rm.skytube.PANEL_EXPANDED";
+
+	private static final String PREF_GPS_POPUP_VIEWED = "BaseActivity.pref_gps_poup_viewed";
 
 	private boolean panelShouldExpand = false;
 
@@ -107,7 +107,7 @@ public abstract class BaseActivity extends AppCompatActivity implements MainActi
 	@BindView(R.id.chromecastLoadingSpinner)
 	ProgressBar chromecastLoadingSpinner;
 
-	private String PREF_GPS_POPUP_VIEWED = "BaseActivity.pref_gps_poup_viewed";
+	private final CompositeDisposable compositeDisposable = new CompositeDisposable();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -181,6 +181,12 @@ public abstract class BaseActivity extends AppCompatActivity implements MainActi
 	}
 
 	@Override
+	protected void onDestroy() {
+		compositeDisposable.clear();
+		super.onDestroy();
+	}
+
+	@Override
 	protected void onNewIntent(Intent intent) {
 		super.onNewIntent(intent);
 		handleExternalPlayOnChromecast(intent);
@@ -235,7 +241,8 @@ public abstract class BaseActivity extends AppCompatActivity implements MainActi
 					externalPlayIntent = intent;
 				} else {
 					if (connectedToChromecast) {
-						new GetVideoDetailsTask(this, intent, (videoId, video) -> playVideoOnChromecast(video, 0)).executeInParallel();
+						compositeDisposable.add(YouTubeTasks.getVideoDetails(this, intent)
+								.subscribe(video -> playVideoOnChromecast(video, 0)));
 					} else {
 						Intent i = new Intent(this, YouTubePlayerActivity.class);
 						i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
@@ -470,21 +477,22 @@ public abstract class BaseActivity extends AppCompatActivity implements MainActi
 	public void playVideoOnChromecast(final YouTubeVideo video, final int position) {
 		showLoadingSpinner();
 		if(video.getDescription() == null) {
-			new GetVideoDescriptionTask(video, description ->
-					playVideoOnChromecast(video, position)).executeInParallel();
+			compositeDisposable.add(YouTubeTasks.getVideoDescription(video)
+					.subscribe(description -> playVideoOnChromecast(video, position)));
 		} else {
-			video.getDesiredStream(new GetDesiredStreamListener() {
-				@Override
-				public void onGetDesiredStream(StreamInfo desiredStream) {
-					if(mCastSession == null)
-						return;
-					Gson gson = new Gson();
-					final RemoteMediaClient remoteMediaClient = mCastSession.getRemoteMediaClient();
-					MediaMetadata metadata = new MediaMetadata(MediaMetadata.MEDIA_TYPE_GENERIC);
-					metadata.putInt(KEY_POSITION, position);
-					metadata.putString(KEY_VIDEO, gson.toJson(video));
+			compositeDisposable.add(
+					video.getDesiredStream(new GetDesiredStreamListener() {
+						@Override
+						public void onGetDesiredStream(StreamInfo desiredStream) {
+							if(mCastSession == null)
+								return;
+							Gson gson = new Gson();
+							final RemoteMediaClient remoteMediaClient = mCastSession.getRemoteMediaClient();
+							MediaMetadata metadata = new MediaMetadata(MediaMetadata.MEDIA_TYPE_GENERIC);
+							metadata.putInt(KEY_POSITION, position);
+							metadata.putString(KEY_VIDEO, gson.toJson(video));
 
-					metadata.addImage(new WebImage(Uri.parse(video.getThumbnailUrl())));
+							metadata.addImage(new WebImage(Uri.parse(video.getThumbnailUrl())));
 
 					StreamSelectionPolicy policy = SkyTubeApp.getSettings().getDesiredVideoResolution(false).withAllowVideoOnly(false);
 					StreamSelectionPolicy.StreamSelection selection = policy.select(desiredStream);
@@ -494,34 +502,35 @@ public abstract class BaseActivity extends AppCompatActivity implements MainActi
 									.setMetadata(metadata)
 									.build();
 
-					MediaLoadOptions options = new MediaLoadOptions.Builder().setAutoplay(true).setPlayPosition(0).build();
-					remoteMediaClient.load(currentPlayingMedia, options);
-					chromecastMiniControllerFragment.init(remoteMediaClient, currentPlayingMedia, position);
-					chromecastControllerFragment.init(remoteMediaClient, currentPlayingMedia, position);
-					// If the Controller panel isn't visible, setting the progress of the progressbar in the mini controller won't
-					// work until the panel is visible, so do it as soon as the sliding panel is visible. Adding this listener when
-					// the panel is not hidden will lead to a java.util.ConcurrentModificationException the next time a video is
-					// switching from local playback to chromecast, so we should only do this if the panel is hidden.
-					if(slidingLayout.getPanelState() == SlidingUpPanelLayout.PanelState.HIDDEN) {
-						slidingLayout.addPanelSlideListener(getOnPanelDisplayed(position, video.getDurationInSeconds()*1000));
-					}
-				}
+							MediaLoadOptions options = new MediaLoadOptions.Builder().setAutoplay(true).setPlayPosition(0).build();
+							remoteMediaClient.load(currentPlayingMedia, options);
+							chromecastMiniControllerFragment.init(remoteMediaClient, currentPlayingMedia, position);
+							chromecastControllerFragment.init(remoteMediaClient, currentPlayingMedia, position);
+							// If the Controller panel isn't visible, setting the progress of the progressbar in the mini controller won't
+							// work until the panel is visible, so do it as soon as the sliding panel is visible. Adding this listener when
+							// the panel is not hidden will lead to a java.util.ConcurrentModificationException the next time a video is
+							// switching from local playback to chromecast, so we should only do this if the panel is hidden.
+							if (slidingLayout.getPanelState() == SlidingUpPanelLayout.PanelState.HIDDEN) {
+								slidingLayout.addPanelSlideListener(getOnPanelDisplayed(position, video.getDurationInSeconds() * 1000));
+							}
+						}
 
-				@Override
-				public void onGetDesiredStreamError(Exception errorMessage) {
-					if (errorMessage != null) {
-						if(chromecastLoadingSpinner != null)
-							chromecastLoadingSpinner.setVisibility(View.GONE);
-						new AlertDialog.Builder(BaseActivity.this)
-										.setMessage(errorMessage.getMessage())
+						@Override
+						public void onGetDesiredStreamError(Throwable throwable) {
+							if (throwable != null) {
+								if (chromecastLoadingSpinner != null)
+									chromecastLoadingSpinner.setVisibility(View.GONE);
+								new AlertDialog.Builder(BaseActivity.this)
+										.setMessage(throwable.getMessage())
 										.setTitle(R.string.error_video_play)
 										.setCancelable(false)
 										.setPositiveButton(R.string.ok, (dialog, which) -> {
 										})
 										.show();
-					}
-				}
-			});
+							}
+						}
+					})
+			);
 		}
 	}
 

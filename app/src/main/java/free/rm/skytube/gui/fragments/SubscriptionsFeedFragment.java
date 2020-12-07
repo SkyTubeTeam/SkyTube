@@ -27,7 +27,6 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,6 +41,7 @@ import androidx.core.content.ContextCompat;
 import com.afollestad.materialdialogs.MaterialDialog;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -51,15 +51,16 @@ import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.FeedUpdaterService;
 import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPIKey;
-import free.rm.skytube.businessobjects.YouTube.Tasks.GetBulkSubscriptionVideosTask;
-import free.rm.skytube.businessobjects.YouTube.Tasks.GetSubscriptionVideosTask;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetSubscriptionVideosTaskListener;
+import free.rm.skytube.businessobjects.YouTube.YouTubeTasks;
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
 import free.rm.skytube.businessobjects.db.DatabaseTasks;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 import free.rm.skytube.gui.businessobjects.SubscriptionsBackupsManager;
 import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
+import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import io.reactivex.rxjava3.disposables.Disposable;
 
 /**
  * Fragment that displays subscriptions videos feed from all channels the user is subscribed to.
@@ -267,31 +268,6 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 	}
 
 	@Override
-	public void onAllChannelVideosFetched(boolean changed) {
-		Log.i("SUB FRAGMENT", "onAllChannelVideosFetched:" + changed);
-		new Handler().postDelayed(() -> {
-			refreshInProgress = false;
-			// Remove the progress bar(s)
-			if (swipeRefreshLayout != null) {
-				swipeRefreshLayout.setRefreshing(false);
-			}
-
-			ContextCompat.getSystemService(requireContext(), NotificationManager.class).cancel(NOTIFICATION_ID);
-
-			if(changed) {
-				refreshFeedFromCache();
-				Toast.makeText(requireContext(),
-						String.format(requireContext().getString(R.string.notification_new_videos_found),
-								numVideosFetched), Toast.LENGTH_LONG).show();
-			} else {
-				Toast.makeText(requireContext(),
-									R.string.no_new_videos_found,
-									Toast.LENGTH_LONG).show();
-			}
-		}, 500);
-	}
-
-	@Override
 	protected VideoCategory getVideoCategory() {
 		return VideoCategory.SUBSCRIPTIONS_FEED_VIDEOS;
 	}
@@ -411,7 +387,7 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 				// get any videos published after the last time the user used the app...
 				if (fullRefresh) {
 					//new GetSubscriptionVideosTask(SubscriptionsFeedFragment.this).executeInParallel();      // refer to #onChannelVideosFetched()
-					getRefreshTask(totalChannels).executeInParallel();
+					compositeDisposable.add(getRefreshTask(totalChannels));
 
 					showNotification();
 				}
@@ -428,12 +404,34 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 		}
 	}
 
-	private AsyncTaskParallel<?,?,?> getRefreshTask(List<String> channelIds) {
+	private Disposable getRefreshTask(List<String> channelIds) {
 		if (NewPipeService.isPreferred() || !YouTubeAPIKey.get().isUserApiKeySet()) {
-			return new GetBulkSubscriptionVideosTask(channelIds, SubscriptionsFeedFragment.this);
+			return YouTubeTasks.getBulkSubscriptionVideos(channelIds, this)
+					.delay(500, TimeUnit.MILLISECONDS)
+					.flatMapCompletable(changed ->
+							Completable.fromRunnable(() -> {
+								Log.i("SUB FRAGMENT", "onAllChannelVideosFetched:" + changed);
+								refreshInProgress = false;
+								// Remove the progress bar(s)
+								if (swipeRefreshLayout != null) {
+									swipeRefreshLayout.setRefreshing(false);
+								}
+
+								ContextCompat.getSystemService(requireContext(), NotificationManager.class)
+										.cancel(NOTIFICATION_ID);
+
+								if (changed) {
+									refreshFeedFromCache();
+									Toast.makeText(requireContext(),
+											String.format(getString(R.string.notification_new_videos_found),
+													numVideosFetched), Toast.LENGTH_LONG).show();
+								} else {
+									Toast.makeText(requireContext(), R.string.no_new_videos_found, Toast.LENGTH_LONG).show();
+								}
+							})
+				).subscribe();
 		} else {
-			return new GetSubscriptionVideosTask(SubscriptionsFeedFragment.this, channelIds);
+			return YouTubeTasks.getSubscriptionVideos(this, channelIds).subscribe();
 		}
 	}
-
 }

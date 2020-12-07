@@ -25,10 +25,11 @@ import android.widget.RemoteViews;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
 
+import java.util.Collections;
+
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
-import free.rm.skytube.businessobjects.YouTube.Tasks.GetBulkSubscriptionVideosTask;
-import free.rm.skytube.businessobjects.YouTube.Tasks.GetChannelVideosTask;
+import free.rm.skytube.businessobjects.YouTube.YouTubeTasks;
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
 import free.rm.skytube.businessobjects.db.DatabaseTasks;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
@@ -65,9 +66,11 @@ public class SubscribeButton extends AppCompatButton implements View.OnClickList
 			// Only fetch videos for this channel if fetchChannelVideosOnSubscribe is true AND the channel is not subscribed to yet.
 			if (fetchChannelVideosOnSubscribe && !isUserSubscribed) {
 				if (NewPipeService.isPreferred()) {
-					new GetBulkSubscriptionVideosTask(channel.getId(), null).executeInParallel();
+					compositeDisposable.add(YouTubeTasks.getBulkSubscriptionVideos(Collections.singletonList(channel.getId()), null)
+							.subscribe());
 				} else {
-					new GetChannelVideosTask(channel.getId(), null, false, null).executeInParallel();
+					compositeDisposable.add(YouTubeTasks.getChannelVideos(channel.getId(), null, false)
+							.subscribe());
 				}
 			}
 			compositeDisposable.add(DatabaseTasks.subscribeToChannel(!isUserSubscribed,

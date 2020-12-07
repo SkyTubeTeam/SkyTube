@@ -33,16 +33,17 @@ import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.businessobjects.YouTube.GetYouTubeVideos;
 import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
-import free.rm.skytube.businessobjects.YouTube.Tasks.GetYouTubeVideosTask;
+import free.rm.skytube.businessobjects.YouTube.YouTubeTasks;
 import free.rm.skytube.businessobjects.db.PlaybackStatusDb;
 import free.rm.skytube.businessobjects.interfaces.VideoPlayStatusUpdateListener;
 import free.rm.skytube.gui.businessobjects.MainActivityListener;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
 
 /**
  * An adapter that will display videos in a {@link android.widget.GridView}.
  */
 public class VideoGridAdapter extends RecyclerViewAdapterEx<CardData, GridViewHolder> implements VideoPlayStatusUpdateListener {
-
+	private static final String TAG = VideoGridAdapter.class.getSimpleName();
 
 	public interface Callback {
 		void onVideoGridUpdated(int newVideoListSize);
@@ -81,8 +82,7 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<CardData, GridViewHo
 
 	private VideoGridAdapter.Callback videoGridUpdated;
 
-	private static final String TAG = VideoGridAdapter.class.getSimpleName();
-
+	private final CompositeDisposable compositeDisposable = new CompositeDisposable();
 
 	/**
 	 * Constructor.
@@ -94,6 +94,7 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<CardData, GridViewHo
 	}
 
 	public void onDestroy() {
+		compositeDisposable.clear();
 		PlaybackStatusDb.getPlaybackStatusDb().removeListener(this);
 		this.listener = null;
 		this.videoGridUpdated = null;
@@ -194,10 +195,10 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<CardData, GridViewHo
 			}
 			// now, we consider this as initialized - sometimes 'refresh' can be called before the initializeList is called.
 			initialized = true;
-			new GetYouTubeVideosTask(getYouTubeVideos, this, swipeRefreshLayout, clearVideosList, videoGridUpdated).executeInParallel();
+			compositeDisposable.add(YouTubeTasks.getYouTubeVideos(getYouTubeVideos, this,
+					swipeRefreshLayout, clearVideosList, videoGridUpdated).subscribe());
 		}
 	}
-
 
 	@Override
 	public void onBindViewHolder(@NonNull GridViewHolder viewHolder, int position) {
@@ -207,7 +208,8 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<CardData, GridViewHo
 		if (position >= getItemCount() - 1) {
 			Log.w(TAG, "BOTTOM REACHED!!!");
 			if(getYouTubeVideos != null)
-				new GetYouTubeVideosTask(getYouTubeVideos, this, swipeRefreshLayout, false, videoGridUpdated).executeInParallel();
+				compositeDisposable.add(YouTubeTasks.getYouTubeVideos(getYouTubeVideos, this,
+						swipeRefreshLayout, false, videoGridUpdated).subscribe());
 		}
 	}
 
