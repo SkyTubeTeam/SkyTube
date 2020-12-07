@@ -17,7 +17,6 @@
 
 package free.rm.skytube.gui.fragments;
 
-import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -195,35 +194,28 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 	}
 
 	private void showNotification() {
-		// Sets an ID for the notification, so it can be updated.
-		NotificationManager notificationManager = ContextCompat.getSystemService(requireContext(),
+		final NotificationManager notificationManager = ContextCompat.getSystemService(requireContext(),
 				NotificationManager.class);
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-			NotificationChannel mChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, NOTIFICATION_CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH);
-			mChannel.setSound(null,null);
-			// Create a notification and set the notification channel.
-			Notification notification = new Notification.Builder(getContext(), NOTIFICATION_CHANNEL_NAME)
-					.setSmallIcon(R.drawable.ic_notification_icon)
-					.setContentTitle(getString(R.string.fetching_subscription_videos))
-					.setContentText(String.format(getContext().getString(R.string.fetched_videos_from_channels), numVideosFetched, numChannelsFetched, numChannelsSubscribed))
-					.setChannelId(NOTIFICATION_CHANNEL_ID)
-					.build();
-			notificationManager.createNotificationChannel(mChannel);
+		final NotificationCompat.Builder builder = new NotificationCompat.Builder(requireContext(), NOTIFICATION_CHANNEL_ID)
+				.setSmallIcon(R.drawable.ic_notification_icon)
+				.setContentTitle(getString(R.string.fetching_subscription_videos))
+				.setContentText(String.format(getString(R.string.fetched_videos_from_channels),
+						numVideosFetched, numChannelsFetched, numChannelsSubscribed));
 
-			// Issue the notification.
-			notificationManager.notify(NOTIFICATION_ID , notification);
-		} else {
-			final Intent emptyIntent = new Intent();
-			PendingIntent pendingIntent = PendingIntent.getActivity(getContext(), 1, emptyIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-			NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext(), "")
-					.setSmallIcon(R.drawable.ic_notification_icon)
-					.setContentTitle(getString(R.string.fetching_subscription_videos))
-					.setContentText(String.format(getContext().getString(R.string.fetched_videos_from_channels), numVideosFetched, numChannelsFetched, numChannelsSubscribed))
-					.setPriority(NotificationCompat.FLAG_ONGOING_EVENT)
+		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+			PendingIntent pendingIntent = PendingIntent.getActivity(requireContext(),
+					1, new Intent(), PendingIntent.FLAG_UPDATE_CURRENT);
+			builder.setPriority(NotificationCompat.FLAG_ONGOING_EVENT)
 					.setContentIntent(pendingIntent);
-
-			notificationManager.notify(NOTIFICATION_ID, builder.build());
+		} else {
+			final NotificationChannel channel = new NotificationChannel(NOTIFICATION_CHANNEL_ID,
+					NOTIFICATION_CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH);
+			channel.setSound(null,null);
+			notificationManager.createNotificationChannel(channel);
 		}
+
+		// Issue the notification.
+		notificationManager.notify(NOTIFICATION_ID, builder.build());
 	}
 
 	@Override
