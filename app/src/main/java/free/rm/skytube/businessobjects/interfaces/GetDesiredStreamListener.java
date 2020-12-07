@@ -19,8 +19,7 @@ public interface GetDesiredStreamListener {
 	/**
 	 * Called if an error occurred while retrieving the video's Uri.
 	 *
-	 * @param errorMessage  Error message.
+	 * @param throwable  Error.
 	 */
-	void onGetDesiredStreamError(Exception errorMessage);
-
+	void onGetDesiredStreamError(Throwable throwable);
 }

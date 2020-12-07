@@ -48,6 +48,12 @@ public class ChannelPlaylistsFragment extends VideosGridFragment implements Play
 	}
 
 	@Override
+	public void onDestroy() {
+		playlistsGridAdapter.clearBackgroundTasks();
+		super.onDestroy();
+	}
+
+	@Override
 	public String getFragmentName() {
 		return SkyTubeApp.getStr(R.string.playlists);
 	}
@@ -64,9 +70,8 @@ public class ChannelPlaylistsFragment extends VideosGridFragment implements Play
 
 	@Override
 	public void onRefresh() {
-		playlistsGridAdapter.refresh(() -> swipeRefreshLayout.setRefreshing(false));
+		playlistsGridAdapter.refresh(youTubePlaylists -> swipeRefreshLayout.setRefreshing(false));
 	}
-
 
 	@Override
 	protected VideoCategory getVideoCategory() {

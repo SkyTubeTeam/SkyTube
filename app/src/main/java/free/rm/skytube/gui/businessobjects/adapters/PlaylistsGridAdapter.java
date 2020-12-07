@@ -24,22 +24,29 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
 import java.io.IOException;
+import java.util.List;
 
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.YouTube.GetChannelPlaylists;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubePlaylist;
-import free.rm.skytube.businessobjects.YouTube.Tasks.GetChannelPlaylistsTask;
+import free.rm.skytube.businessobjects.YouTube.YouTubeTasks;
 import free.rm.skytube.gui.businessobjects.PlaylistClickListener;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import io.reactivex.rxjava3.functions.Consumer;
 
 /**
  * An adapter that will display playlists in a {@link android.widget.GridView}.
  */
 public class PlaylistsGridAdapter extends RecyclerViewAdapterEx<YouTubePlaylist, PlaylistViewHolder> {
-	private GetChannelPlaylists getChannelPlaylists;
 	private static final String TAG = PlaylistsGridAdapter.class.getSimpleName();
-	private PlaylistClickListener playlistClickListener;
+
+	private GetChannelPlaylists getChannelPlaylists;
+	private final PlaylistClickListener playlistClickListener;
+	private final CompositeDisposable compositeDisposable = new CompositeDisposable();
 
 	public PlaylistsGridAdapter(Context context, PlaylistClickListener playlistClickListener) {
 		super(context);
@@ -47,6 +54,7 @@ public class PlaylistsGridAdapter extends RecyclerViewAdapterEx<YouTubePlaylist,
 		this.playlistClickListener = playlistClickListener;
 	}
 
+	@NonNull
 	@Override
 	public PlaylistViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 		View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.video_cell, parent, false);
@@ -54,17 +62,20 @@ public class PlaylistsGridAdapter extends RecyclerViewAdapterEx<YouTubePlaylist,
 	}
 
 	@Override
-	public void onBindViewHolder(PlaylistViewHolder viewHolder, int position) {
-		if (viewHolder != null) {
-			viewHolder.setPlaylist(get(position));
-		}
+	public void onBindViewHolder(@NonNull PlaylistViewHolder viewHolder, int position) {
+		viewHolder.setPlaylist(get(position));
 
 		// if it reached the bottom of the list, then try to get the next page of videos
 		if (position >= getItemCount() - 1) {
 			Log.w(TAG, "BOTTOM REACHED!!!");
 			if(getChannelPlaylists != null)
-				new GetChannelPlaylistsTask(getChannelPlaylists, this).executeInParallel();
+				compositeDisposable.add(YouTubeTasks.getChannelPlaylists(getChannelPlaylists, this, false)
+						.subscribe());
 		}
+	}
+
+	public void clearBackgroundTasks() {
+		compositeDisposable.clear();
 	}
 
 	public void setYouTubeChannel(YouTubeChannel youTubeChannel) {
@@ -73,7 +84,8 @@ public class PlaylistsGridAdapter extends RecyclerViewAdapterEx<YouTubePlaylist,
 			getChannelPlaylists = new GetChannelPlaylists();
 			getChannelPlaylists.init();
 			getChannelPlaylists.setYouTubeChannel(youTubeChannel);
-			new GetChannelPlaylistsTask(getChannelPlaylists, this).executeInParallel();
+			compositeDisposable.add(YouTubeTasks.getChannelPlaylists(getChannelPlaylists, this, false)
+					.subscribe());
 		} catch (IOException e) {
 			e.printStackTrace();
 			Toast.makeText(getContext(),
@@ -82,8 +94,9 @@ public class PlaylistsGridAdapter extends RecyclerViewAdapterEx<YouTubePlaylist,
 		}
 	}
 
-	public void refresh(Runnable onFinished) {
+	public void refresh(@NonNull Consumer<List<YouTubePlaylist>> onFinished) {
 		if(getChannelPlaylists != null)
-			new GetChannelPlaylistsTask(getChannelPlaylists, this, onFinished).executeInParallel();
+			compositeDisposable.add(YouTubeTasks.getChannelPlaylists(getChannelPlaylists, this, false)
+					.subscribe(onFinished));
 	}
 }

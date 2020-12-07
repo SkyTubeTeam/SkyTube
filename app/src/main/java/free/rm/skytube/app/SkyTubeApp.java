@@ -38,6 +38,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.core.graphics.ColorUtils;
@@ -57,7 +58,7 @@ import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.FeedUpdaterReceiver;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubePlaylist;
-import free.rm.skytube.businessobjects.YouTube.Tasks.GetPlaylistTask;
+import free.rm.skytube.businessobjects.YouTube.YouTubeTasks;
 import free.rm.skytube.businessobjects.YouTube.newpipe.ContentId;
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
 import free.rm.skytube.businessobjects.db.DatabaseTasks;
@@ -271,13 +272,13 @@ public class SkyTubeApp extends MultiDexApplication {
 		return skyTubeApp.settings;
 	}
 
-	public static void notifyUserOnError(@NonNull Context ctx, Exception exc) {
-		if (exc == null) {
+	public static void notifyUserOnError(@NonNull Context ctx, @Nullable Throwable throwable) {
+		if (throwable == null) {
 			return;
 		}
 		final String message;
-		if (exc instanceof GoogleJsonResponseException) {
-			GoogleJsonResponseException exception = (GoogleJsonResponseException) exc;
+		if (throwable instanceof GoogleJsonResponseException) {
+			GoogleJsonResponseException exception = (GoogleJsonResponseException) throwable;
 			List<GoogleJsonError.ErrorInfo> errors = exception.getDetails().getErrors();
 			if (errors != null && !errors.isEmpty()) {
 				message =  "Server error:" + errors.get(0).getMessage()+ ", reason: "+ errors.get(0).getReason();
@@ -285,14 +286,13 @@ public class SkyTubeApp extends MultiDexApplication {
 				message = exception.getDetails().getMessage();
 			}
 		} else {
-			message = exc.getMessage();
+			message = throwable.getMessage();
 		}
 		if (message != null) {
 			Log.e("SkyTubeApp", "Error: "+message);
 			Toast.makeText(ctx, message, Toast.LENGTH_LONG).show();
 		}
 	}
-
 
 	public static void shareUrl(@NonNull Context context, String url) {
 		Intent intent = new Intent(android.content.Intent.ACTION_SEND);
@@ -373,7 +373,7 @@ public class SkyTubeApp extends MultiDexApplication {
 		}
 		switch (content.getType()) {
 			case STREAM: {
-				YouTubePlayer.launch(content, ctx);
+				COMPOSITE_DISPOSABLE.add(YouTubePlayer.launch(content, ctx));
 				break;
 			}
 			case CHANNEL: {
@@ -381,13 +381,12 @@ public class SkyTubeApp extends MultiDexApplication {
 				break;
 			}
 			case PLAYLIST: {
-				new GetPlaylistTask(ctx, content.getId(), playlist ->
-						launchPlaylist(playlist, ctx)).executeInParallel();
+				COMPOSITE_DISPOSABLE.add(YouTubeTasks.getPlaylist(ctx, content.getId())
+						.subscribe(playlist -> launchPlaylist(playlist, ctx)));
 				break;
 			}
-			default: {
+			default:
 				return false;
-			}
 		}
 		return true;
 	}
