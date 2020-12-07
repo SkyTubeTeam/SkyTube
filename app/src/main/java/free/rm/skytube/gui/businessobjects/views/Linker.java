@@ -41,8 +41,8 @@ import java.util.List;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
-import free.rm.skytube.businessobjects.GetVideoDetailsTask;
 import free.rm.skytube.businessobjects.Logger;
+import free.rm.skytube.businessobjects.YouTube.YouTubeTasks;
 import free.rm.skytube.businessobjects.YouTube.newpipe.ContentId;
 import free.rm.skytube.businessobjects.db.BookmarksDb;
 
@@ -144,13 +144,14 @@ public class Linker {
 										ctx.startActivity(Intent.createChooser(intent, ctx.getString(R.string.share_via)));
 										break;
 									case 3:
-										new GetVideoDetailsTask(ctx, content, (videoUrl, video) -> {
-											if(!isBookmarked) {
-												video.bookmarkVideo(ctx);
-											} else {
-												video.unbookmarkVideo(ctx, null);
-											}
-										}).executeInParallel();
+										YouTubeTasks.getVideoDetails(ctx, content)
+												.blockingSubscribe(video -> {
+													if(!isBookmarked) {
+														video.bookmarkVideo(ctx);
+													} else {
+														video.unbookmarkVideo(ctx, null);
+													}
+												});
 										break;
 								}
 							});

@@ -17,8 +17,6 @@
 
 package free.rm.skytube.businessobjects.YouTube;
 
-import android.util.Log;
-
 import com.google.api.services.youtube.YouTube;
 import com.google.api.services.youtube.model.Playlist;
 import com.google.api.services.youtube.model.PlaylistListResponse;
@@ -32,13 +30,14 @@ import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPI;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPIKey;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubePlaylist;
-import free.rm.skytube.businessobjects.YouTube.Tasks.GetChannelPlaylistsTask;
+import free.rm.skytube.gui.businessobjects.adapters.PlaylistsGridAdapter;
 
 
 /**
  * Returns a list of YouTube playlists for a specific channel.
  *
- * <p>Do not run this directly, but rather use {@link GetChannelPlaylistsTask}.</p>
+ * <p>Do not run this directly, but rather use
+ * {@link YouTubeTasks#getChannelPlaylists(GetChannelPlaylists, PlaylistsGridAdapter, boolean)}.</p>
  */
 public class GetChannelPlaylists {
 	protected YouTube.Playlists.List playlistList = null;

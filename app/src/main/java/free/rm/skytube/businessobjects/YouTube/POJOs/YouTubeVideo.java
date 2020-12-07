@@ -54,12 +54,13 @@ import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.app.StreamSelectionPolicy;
 import free.rm.skytube.businessobjects.FileDownloader;
 import free.rm.skytube.businessobjects.Logger;
-import free.rm.skytube.businessobjects.YouTube.Tasks.GetVideoStreamTask;
+import free.rm.skytube.businessobjects.YouTube.YouTubeTasks;
 import free.rm.skytube.businessobjects.YouTube.newpipe.VideoId;
 import free.rm.skytube.businessobjects.db.BookmarksDb;
 import free.rm.skytube.businessobjects.db.DatabaseResult;
 import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
 import free.rm.skytube.businessobjects.interfaces.GetDesiredStreamListener;
+import io.reactivex.rxjava3.disposables.Disposable;
 
 import static free.rm.skytube.app.SkyTubeApp.getContext;
 import static free.rm.skytube.app.SkyTubeApp.getStr;
@@ -474,12 +475,8 @@ public class YouTubeVideo extends CardData implements Serializable {
 	 *
 	 * @param listener Instance of {@link GetDesiredStreamListener} to pass the stream through.
 	 */
-	private void getDesiredStream(GetDesiredStreamListener listener, boolean forDownload) {
-		new GetVideoStreamTask(this, listener, forDownload).executeInParallel();
-	}
-
-	public void getDesiredStream(GetDesiredStreamListener listener) {
-		getDesiredStream(listener, false);
+	public Disposable getDesiredStream(@NonNull GetDesiredStreamListener listener) {
+		return YouTubeTasks.getVideoStream(this, listener);
 	}
 
 	public Long getRetrievalTimestamp() {
@@ -520,14 +517,15 @@ public class YouTubeVideo extends CardData implements Serializable {
 	/**
 	 * Downloads this video.
 	 *
+	 * @return The download task.
 	 * @param context Context
 	 */
-	public void downloadVideo(final Context context) {
+	public Disposable downloadVideo(final Context context) {
 		if (isDownloaded())
-			return;
+			return Disposable.empty();
 
 		// if description is not yet downloaded, get it, and call the download action again.
-		getDesiredStream(new GetDesiredStreamListener() {
+		return getDesiredStream(new GetDesiredStreamListener() {
 			@Override
 			public void onGetDesiredStream(StreamInfo streamInfo) {
 				description = streamInfo.getDescription().getContent();
@@ -568,14 +566,14 @@ public class YouTubeVideo extends CardData implements Serializable {
 			}
 
 			@Override
-			public void onGetDesiredStreamError(Exception errorMessage) {
-				Logger.e(YouTubeVideo.this, "Stream error: " + errorMessage.getMessage(), errorMessage);
+			public void onGetDesiredStreamError(Throwable throwable) {
+				Logger.e(YouTubeVideo.this, "Stream error: " + throwable.getMessage(), throwable);
 				Context context = getContext();
 				Toast.makeText(context,
 						String.format(context.getString(R.string.video_download_stream_error), getTitle()),
 						Toast.LENGTH_LONG).show();
 			}
-		}, true);
+		});
 	}
 
 	/**

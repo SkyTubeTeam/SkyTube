@@ -63,6 +63,7 @@ import com.google.android.exoplayer2.ui.AspectRatioFrameLayout;
 import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 
+import org.schabi.newpipe.extractor.StreamingService;
 import org.schabi.newpipe.extractor.stream.StreamInfo;
 
 import java.util.Locale;
@@ -74,12 +75,12 @@ import free.rm.skytube.R;
 import free.rm.skytube.app.Settings;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.app.StreamSelectionPolicy;
+import free.rm.skytube.app.Utils;
 import free.rm.skytube.app.enums.Policy;
-import free.rm.skytube.businessobjects.GetVideoDetailsTask;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
-import free.rm.skytube.businessobjects.YouTube.Tasks.GetVideoDescriptionTask;
+import free.rm.skytube.businessobjects.YouTube.YouTubeTasks;
 import free.rm.skytube.businessobjects.YouTube.newpipe.ContentId;
 import free.rm.skytube.businessobjects.db.DatabaseTasks;
 import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
@@ -209,9 +210,34 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 				getVideoInfoTasks();
 			} else {
 				// ... or the video URL is passed to SkyTube via another Android app
-				new GetVideoDetailsTask(getContext(), intent, this::youTubeVideoListener).executeInParallel();
-			}
+				final ContentId contentId = SkyTubeApp.getUrlFromIntent(requireContext(), intent);
+				Utils.isTrue(contentId.getType() == StreamingService.LinkType.STREAM, "Content is a video:"+contentId);
+				compositeDisposable.add(YouTubeTasks.getVideoDetails(requireContext(), contentId)
+						.subscribe(video -> {
+							if (video == null) {
+								// invalid URL error (i.e. we are unable to decode the URL)
+								String err = String.format(getString(R.string.error_invalid_url), contentId.getCanonicalUrl());
+								Toast.makeText(getActivity(), err, Toast.LENGTH_LONG).show();
 
+								// log error
+								Logger.e(this, err);
+
+								// close the video player activity
+								closeActivity();
+							} else {
+								this.youTubeVideo = video;
+
+								// setup the HUD and play the video
+								setUpHUDAndPlayVideo();
+
+								getVideoInfoTasks();
+
+								// will now check if the video is bookmarked or not (and then update the menu
+								// accordingly)
+								compositeDisposable.add(DatabaseTasks.isVideoBookmarked(youTubeVideo.getId(), menu));
+							}
+						}));
+			}
 		}
 
 		return view;
@@ -228,32 +254,6 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 		}
 	}
 
-	protected void youTubeVideoListener(ContentId videoUrl, YouTubeVideo video) {
-		if (video == null) {
-			// invalid URL error (i.e. we are unable to decode the URL)
-			String err = String.format(getString(R.string.error_invalid_url), videoUrl.getCanonicalUrl());
-			Toast.makeText(getActivity(), err, Toast.LENGTH_LONG).show();
-
-			// log error
-			Logger.e(this, err);
-
-			// close the video player activity
-			closeActivity();
-		} else {
-			this.youTubeVideo = video;
-
-			// setup the HUD and play the video
-			setUpHUDAndPlayVideo();
-
-			getVideoInfoTasks();
-
-			// will now check if the video is bookmarked or not (and then update the menu
-			// accordingly)
-			compositeDisposable.add(DatabaseTasks.isVideoBookmarked(youTubeVideo.getId(), menu));
-		}
-	}
-
-	
 	/**
 	 * Initialise the views.
 	 *
@@ -475,9 +475,9 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 						}
 
 						@Override
-						public void onGetDesiredStreamError(Exception errorMessage) {
-							if (errorMessage != null) {
-								videoPlaybackError(errorMessage.getMessage());
+						public void onGetDesiredStreamError(Throwable throwable) {
+							if (throwable != null) {
+								videoPlaybackError(throwable.getMessage());
 							}
 						}
 					});
@@ -661,7 +661,8 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 		);
 
 		// get the video description
-		new GetVideoDescriptionTask(youTubeVideo, description -> Linker.setTextAndLinkify(videoDescriptionTextView, description)).executeInParallel();
+		compositeDisposable.add(YouTubeTasks.getVideoDescription(youTubeVideo)
+				.subscribe(description -> Linker.setTextAndLinkify(videoDescriptionTextView, description)));
 
 		// check if the user has subscribed to a channel... if he has, then change the state of
 		// the subscribe button

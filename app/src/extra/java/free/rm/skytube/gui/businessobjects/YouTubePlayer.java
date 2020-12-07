@@ -31,13 +31,14 @@ import androidx.preference.PreferenceManager;
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.ChromecastListener;
-import free.rm.skytube.businessobjects.GetVideoDetailsTask;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPIKey;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
+import free.rm.skytube.businessobjects.YouTube.YouTubeTasks;
 import free.rm.skytube.businessobjects.YouTube.newpipe.ContentId;
 import free.rm.skytube.businessobjects.db.PlaybackStatusDb;
 import free.rm.skytube.gui.activities.BaseActivity;
 import free.rm.skytube.gui.activities.YouTubePlayerActivity;
+import io.reactivex.rxjava3.disposables.Disposable;
 
 import static free.rm.skytube.gui.activities.YouTubePlayerActivity.YOUTUBE_VIDEO_OBJ;
 
@@ -87,9 +88,10 @@ public class YouTubePlayer {
 	 *
 	 * @param videoId ContentId of the video to be watched.
 	 */
-	public static void launch(ContentId videoId, final Context context) {
-		if(connectingToChromecast || connectedToChromecast) {
-			new GetVideoDetailsTask(context, videoId, (videoUrl1, video) -> launchOnChromecast(video, context)).executeInParallel();
+	public static Disposable launch(ContentId videoId, final Context context) {
+		if (connectingToChromecast || connectedToChromecast) {
+			return YouTubeTasks.getVideoDetails(context, videoId)
+					.subscribe(video -> launchOnChromecast(video, context));
 		} else {
 			// if the user has selected to play the videos using the official YouTube player
 			// (in the preferences/settings) ...
@@ -98,6 +100,7 @@ public class YouTubePlayer {
 			} else {
 				launchCustomYouTubePlayer(videoId, context);
 			}
+			return Disposable.empty();
 		}
 	}
 
