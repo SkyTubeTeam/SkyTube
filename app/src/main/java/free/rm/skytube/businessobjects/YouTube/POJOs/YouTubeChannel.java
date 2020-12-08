@@ -33,6 +33,7 @@ import org.schabi.newpipe.extractor.services.youtube.linkHandler.YoutubeChannelL
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
@@ -122,9 +123,9 @@ public class YouTubeChannel extends CardData implements Serializable {
 		boolean ret = false;
 		ChannelSnippet snippet = channel.getSnippet();
 		if (snippet != null) {
-			ret |= Utils.equals(this.title, snippet.getTitle());
+			ret |= Objects.equals(this.title, snippet.getTitle());
 			this.title = snippet.getTitle();
-			ret |= Utils.equals(this.description, snippet.getDescription());
+			ret |= Objects.equals(this.description, snippet.getDescription());
 			this.description = snippet.getDescription();
 
 			ThumbnailDetails thumbnail = snippet.getThumbnails();
@@ -138,7 +139,7 @@ public class YouTubeChannel extends CardData implements Serializable {
 				if ( !(thumbnailUrlLowerCase.startsWith("http://")  ||  thumbnailUrlLowerCase.startsWith("https://")) ) {
 					thmbNormalUrl = "https:" + thmbNormalUrl;
 				}
-				ret |= Utils.equals(this.thumbnailUrl, thmbNormalUrl);
+				ret |= Objects.equals(this.thumbnailUrl, thmbNormalUrl);
 				this.thumbnailUrl = thmbNormalUrl;
 			}
 		}
@@ -146,7 +147,7 @@ public class YouTubeChannel extends CardData implements Serializable {
 		ChannelBrandingSettings branding = channel.getBrandingSettings();
 		if (branding != null) {
 			String bannerUrl = SkyTubeApp.isTablet() ? branding.getImage().getBannerTabletHdImageUrl() : branding.getImage().getBannerMobileHdImageUrl();
-			ret |= Utils.equals(this.bannerUrl, bannerUrl);
+			ret |= Objects.equals(this.bannerUrl, bannerUrl);
 			this.bannerUrl = bannerUrl;
 		}
 

@@ -25,6 +25,7 @@ import org.json.JSONObject;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Objects;
 
 import free.rm.skytube.BuildConfig;
 import free.rm.skytube.app.Utils;
@@ -76,7 +77,7 @@ public class UpdatesChecker {
 				Log.d(TAG, "REMOTE_VER: " + latestApkVersion);
 
 				if (!oss) {
-					if (!Utils.equals(currentVersionNumber, latestApkVersion)) {
+					if (!Objects.equals(currentVersionNumber, latestApkVersion)) {
 						this.latestApkUrl = getLatestApkUrl(json);
 						updatesAvailable = latestApkUrl != null;
 						Log.d(TAG, "Update available.  APK_URL: " + latestApkUrl);

@@ -34,10 +34,6 @@ public class Utils {
         }
     }
 
-    public static boolean equals(Object a, Object b) {
-        return  a == b || (a != null && a.equals(b));
-    }
-
     public static boolean isEmpty(String str) {
         return str == null || str.isEmpty();
     }
