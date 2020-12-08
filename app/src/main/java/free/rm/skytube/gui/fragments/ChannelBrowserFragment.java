@@ -37,6 +37,7 @@ import com.google.android.material.tabs.TabLayout;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.Utils;
@@ -174,7 +175,7 @@ public class ChannelBrowserFragment extends FragmentEx {
 			channelId = channel.getId();
 		} else {
 			channelId = bundle.getString(CHANNEL_ID);
-			if (!Utils.equals(oldChannelId, channelId)) {
+			if (!Objects.equals(oldChannelId, channelId)) {
 				this.channel = null;
 			}
 		}
