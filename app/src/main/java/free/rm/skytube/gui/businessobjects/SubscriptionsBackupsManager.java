@@ -18,7 +18,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.text.util.LinkifyCompat;
 import androidx.fragment.app.Fragment;
-import androidx.legacy.app.FragmentCompat;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.obsez.android.lib.filechooser.ChooserDialog;
@@ -52,9 +51,8 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
  * in this class in order to pass the permission request result on to this class for handling.
  */
 public class SubscriptionsBackupsManager {
-	private Activity activity;
-	private android.app.Fragment fragment;
-	private Fragment supportFragment;
+	private final Activity activity;
+	private final Fragment fragment;
 	private static final int EXT_STORAGE_PERM_CODE_BACKUP = 1950;
 	private static final int EXT_STORAGE_PERM_CODE_IMPORT = 1951;
 	private static final int IMPORT_SUBSCRIPTIONS_READ_CODE = 42;
@@ -63,12 +61,7 @@ public class SubscriptionsBackupsManager {
 
 	private final CompositeDisposable compositeDisposable = new CompositeDisposable();
 
-	public SubscriptionsBackupsManager(Activity activity, Fragment supportFragment) {
-		this.activity = activity;
-		this.supportFragment = supportFragment;
-	}
-
-	public SubscriptionsBackupsManager(Activity activity, android.app.Fragment fragment) {
+	public SubscriptionsBackupsManager(Activity activity, Fragment fragment) {
 		this.activity = activity;
 		this.fragment = fragment;
 	}
@@ -169,12 +162,8 @@ public class SubscriptionsBackupsManager {
 		if (ContextCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
 			// We can request the permission (to the users).  If the user grants us access (or
 			// otherwise), then the method #onRequestPermissionsResult() will be called.
-			if(fragment != null)
-				FragmentCompat.requestPermissions(fragment, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-							permissionRequestCode);
-			else if(supportFragment != null)
-				supportFragment.requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-							permissionRequestCode);
+			fragment.requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+					permissionRequestCode);
 
 			hasAccessToExtStorage = false;
 		}

@@ -17,7 +17,7 @@
 
 package free.rm.skytube.businessobjects.YouTube.VideoStream;
 
-import android.preference.ListPreference;
+import androidx.preference.ListPreference;
 
 /**
  * Video resolution (e.g. 1080p).

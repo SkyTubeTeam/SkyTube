@@ -16,21 +16,21 @@
   ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
 	<CheckBoxPreference
-		android:defaultValue="false"
-		android:key="@string/pref_key_disable_search_history"
-		android:title="@string/pref_title_disable_search_history"
-		android:summary="@string/pref_summary_disable_search_history"/>
+		app:defaultValue="false"
+		app:key="@string/pref_key_disable_search_history"
+		app:title="@string/pref_title_disable_search_history"
+		app:summary="@string/pref_summary_disable_search_history"/>
 
 	<CheckBoxPreference
-		android:defaultValue="false"
-		android:key="@string/pref_key_disable_playback_status"
-		android:title="@string/pref_title_disable_playback_status"
-		android:summary="@string/pref_summary_disable_playback_status"/>
+		app:defaultValue="false"
+		app:key="@string/pref_key_disable_playback_status"
+		app:title="@string/pref_title_disable_playback_status"
+		app:summary="@string/pref_summary_disable_playback_status"/>
 
 	<PreferenceScreen
-		android:key="@string/pref_key_clear_playback_status"
-		android:title="@string/pref_title_clear_playback_status"
-		android:summary="@string/pref_summary_clear_playback_status"/>
+		app:key="@string/pref_key_clear_playback_status"
+		app:title="@string/pref_title_clear_playback_status"
+		app:summary="@string/pref_summary_clear_playback_status"/>
 </PreferenceScreen>
