@@ -6,7 +6,8 @@ import android.os.Environment;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
-import android.preference.PreferenceManager;
+
+import androidx.preference.PreferenceManager;
 
 import com.obsez.android.lib.filechooser.ChooserDialog;
 
