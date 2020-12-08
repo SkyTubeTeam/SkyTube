@@ -21,8 +21,6 @@ import org.schabi.newpipe.extractor.StreamingService.LinkType;
 
 import java.util.Objects;
 
-import free.rm.skytube.app.Utils;
-
 public class ContentId {
     final String id;
     final String canonicalUrl;
@@ -70,6 +68,6 @@ public class ContentId {
 
     @Override
     public int hashCode() {
-        return Utils.hash(id, canonicalUrl, type);
+        return Objects.hash(id, canonicalUrl, type);
     }
 }
