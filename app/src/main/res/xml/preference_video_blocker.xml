@@ -16,79 +16,83 @@
   ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto">
 
 	<CheckBoxPreference
-		android:key="@string/pref_key_enable_video_blocker"
-		android:title="@string/pref_title_enable_video_blocker"
-		android:summary="@string/pref_summary_enable_video_blocker"
-		android:defaultValue="true"/>
+		app:key="@string/pref_key_enable_video_blocker"
+		app:title="@string/pref_title_enable_video_blocker"
+		app:summary="@string/pref_summary_enable_video_blocker"
+		app:defaultValue="true"/>
 
 	<PreferenceCategory
-		android:title="@string/pref_channels_filter_category">
+		app:key="channel_filters"
+		app:title="@string/pref_channels_filter_category">
 
 		<ListPreference
-			android:key="@string/pref_key_channel_filter_method"
-			android:title="@string/pref_title_channel_filter_method"
-			android:summary="@string/pref_summary_channel_filter_method"
-			android:entries="@array/channel_filtering_list"
-			android:entryValues="@array/channel_filtering_values_list"
-			android:defaultValue="@string/channel_blacklisting_filtering"/>
+			app:key="@string/pref_key_channel_filter_method"
+			app:title="@string/pref_title_channel_filter_method"
+			app:summary="@string/pref_summary_channel_filter_method"
+			app:entries="@array/channel_filtering_list"
+			app:entryValues="@array/channel_filtering_values_list"
+			app:defaultValue="@string/channel_blacklisting_filtering"/>
 
 	    <Preference
-	        android:key="@string/pref_key_channel_blacklist"
-	        android:title="@string/pref_title_channel_blacklist"
-	        android:summary="@string/pref_summary_channel_blacklist" />
+	        app:key="@string/pref_key_channel_blacklist"
+	        app:title="@string/pref_title_channel_blacklist"
+	        app:summary="@string/pref_summary_channel_blacklist" />
 
 		<Preference
-			android:key="@string/pref_key_channel_whitelist"
-			android:title="@string/pref_title_channel_whitelist"
-			android:summary="@string/pref_summary_channel_whitelist" />
+			app:key="@string/pref_key_channel_whitelist"
+			app:title="@string/pref_title_channel_whitelist"
+			app:summary="@string/pref_summary_channel_whitelist" />
 
 	</PreferenceCategory>
 
     <PreferenceCategory
-	    android:title="@string/pref_languages_filter_category">
+		app:key="languages_filter"
+	    app:title="@string/pref_languages_filter_category">
 
         <ListPreference
-            android:key="@string/pref_key_preferred_region"
-            android:title="@string/pref_title_preferred_regions"
-            android:summary="@string/pref_summary_preferred_regions"
-            android:entries="@array/country_names"
-            android:entryValues="@array/country_codes"
-            android:defaultValue=""/>
+            app:key="@string/pref_key_preferred_region"
+            app:title="@string/pref_title_preferred_regions"
+            app:summary="@string/pref_summary_preferred_regions"
+            app:entries="@array/country_names"
+            app:entryValues="@array/country_codes"
+            app:defaultValue=""/>
 
         <Preference
-            android:key="@string/pref_key_preferred_languages"
-            android:title="@string/pref_title_preferred_languages"
-            android:summary="@string/pref_summary_preferred_languages"/>
+            app:key="@string/pref_key_preferred_languages"
+            app:title="@string/pref_title_preferred_languages"
+            app:summary="@string/pref_summary_preferred_languages"/>
 
         <CheckBoxPreference
-	        android:key="@string/pref_key_lang_detection_video_filtering"
-	        android:title="@string/pref_title_lang_detection_video_filtering"
-	        android:summary="@string/pref_summary_lang_detection_video_filtering"
-	        android:defaultValue="false"/>
+	        app:key="@string/pref_key_lang_detection_video_filtering"
+	        app:title="@string/pref_title_lang_detection_video_filtering"
+	        app:summary="@string/pref_summary_lang_detection_video_filtering"
+	        app:defaultValue="false"/>
 
     </PreferenceCategory>
 
 	<PreferenceCategory
-		android:title="@string/pref_other_filters_category">
+		app:key="other_filters"
+		app:title="@string/pref_other_filters_category">
 
 		<ListPreference
-			android:key="@string/pref_key_low_views_filter"
-			android:title="@string/pref_title_low_views_filter"
-			android:summary="@string/pref_summary_low_views_filter"
-			android:entries="@array/views_filtering_list"
-			android:entryValues="@array/views_filtering_values_list"
-			android:defaultValue="@string/views_filtering_disabled"/>
+			app:key="@string/pref_key_low_views_filter"
+			app:title="@string/pref_title_low_views_filter"
+			app:summary="@string/pref_summary_low_views_filter"
+			app:entries="@array/views_filtering_list"
+			app:entryValues="@array/views_filtering_values_list"
+			app:defaultValue="@string/views_filtering_disabled"/>
 
 		<ListPreference
-			android:key="@string/pref_key_dislikes_filter"
-			android:title="@string/pref_title_dislikes_filter"
-			android:summary="@string/pref_summary_dislikes_filter"
-			android:entries="@array/dislikes_filtering_list"
-			android:entryValues="@array/dislikes_filtering_values_list"
-			android:defaultValue="@string/dislikes_filtering_disabled"/>
+			app:key="@string/pref_key_dislikes_filter"
+			app:title="@string/pref_title_dislikes_filter"
+			app:summary="@string/pref_summary_dislikes_filter"
+			app:entries="@array/dislikes_filtering_list"
+			app:entryValues="@array/dislikes_filtering_values_list"
+			app:defaultValue="@string/dislikes_filtering_disabled"/>
 
 	</PreferenceCategory>
 

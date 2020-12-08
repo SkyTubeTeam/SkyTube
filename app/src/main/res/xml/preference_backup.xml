@@ -16,21 +16,21 @@
   ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
 
 	<PreferenceScreen
-		android:key="@string/pref_key_backup_dbs"
-		android:title="@string/pref_title_backup_dbs"
-		android:summary="@string/pref_summary_backup_dbs"/>
+		app:key="@string/pref_key_backup_dbs"
+		app:title="@string/pref_title_backup_dbs"
+		app:summary="@string/pref_summary_backup_dbs"/>
 
 	<PreferenceScreen
-		android:key="@string/pref_key_import_dbs"
-		android:title="@string/pref_title_import_dbs"
-		android:summary="@string/pref_summary_import_dbs"/>
+		app:key="@string/pref_key_import_dbs"
+		app:title="@string/pref_title_import_dbs"
+		app:summary="@string/pref_summary_import_dbs"/>
 
 	<PreferenceScreen
-		android:key="@string/pref_key_import_subs"
-		android:title="@string/pref_title_import_subs"
-		android:summary="@string/pref_summary_import_subs"/>
+		app:key="@string/pref_key_import_subs"
+		app:title="@string/pref_title_import_subs"
+		app:summary="@string/pref_summary_import_subs"/>
 
 </PreferenceScreen>

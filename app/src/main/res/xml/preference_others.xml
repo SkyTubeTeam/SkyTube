@@ -16,42 +16,40 @@
   ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
 
 	<ListPreference
-		android:key="@string/pref_key_default_tab_name"
-		android:title="@string/pref_title_default_tab" />
+		app:key="@string/pref_key_default_tab_name"
+		app:title="@string/pref_title_default_tab" />
 
 	<MultiSelectListPreference
-		android:key="@string/pref_key_hide_tabs"
-		android:title="@string/pref_title_hide_tabs"
-		android:summary="@string/pref_summary_hide_tabs"
-		android:entries="@array/tab_list" />
-
-
+		app:key="@string/pref_key_hide_tabs"
+		app:title="@string/pref_title_hide_tabs"
+		app:summary="@string/pref_summary_hide_tabs"
+		app:entries="@array/tab_list" />
 
 	<EditTextPreference
-		android:key="@string/pref_youtube_api_key"
-		android:title="@string/pref_title_youtube_api_key"
-		android:summary="@string/pref_summary_youtube_api_key"
-		android:dialogTitle="@string/pref_title_youtube_api_key" />
+		app:key="@string/pref_youtube_api_key"
+		app:title="@string/pref_title_youtube_api_key"
+		app:summary="@string/pref_summary_youtube_api_key"
+		app:dialogTitle="@string/pref_title_youtube_api_key" />
 
 	<!--<ListPreference-->
-		<!--android:key="@string/pref_feed_notification_key"-->
-		<!--android:title="@string/pref_title_feed_notification"-->
-		<!--android:entries="@array/feed_notification"-->
-		<!--android:entryValues="@array/feed_notification_values" />-->
+		<!--app:key="@string/pref_feed_notification_key"-->
+		<!--app:title="@string/pref_title_feed_notification"-->
+		<!--app:entries="@array/feed_notification"-->
+		<!--app:entryValues="@array/feed_notification_values" />-->
 
 	<CheckBoxPreference
-		android:defaultValue="true"
-		android:key="@string/pref_use_default_newpipe_backend"
-		android:summary="@string/pref_summary_use_newpipe_backend"
-		android:title="@string/pref_title_use_newpipe_backend" />
+		app:defaultValue="true"
+		app:key="@string/pref_use_default_newpipe_backend"
+		app:summary="@string/pref_summary_use_newpipe_backend"
+		app:title="@string/pref_title_use_newpipe_backend" />
 
 	<CheckBoxPreference
-		android:defaultValue="false"
-		android:key="@string/pref_key_subscriptions_alphabetical_order"
-		android:title="@string/pref_title_subscriptions_alphabetical_order"
-		android:summary="@string/pref_summary_subscriptions_alphabetical_order"/>
+		app:defaultValue="false"
+		app:key="@string/pref_key_subscriptions_alphabetical_order"
+		app:title="@string/pref_title_subscriptions_alphabetical_order"
+		app:summary="@string/pref_summary_subscriptions_alphabetical_order"/>
 
 </PreferenceScreen>
