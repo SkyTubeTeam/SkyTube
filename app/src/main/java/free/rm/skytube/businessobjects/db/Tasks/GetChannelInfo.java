@@ -21,6 +21,8 @@ import android.widget.Toast;
 
 import androidx.core.util.Consumer;
 
+import java.util.Objects;
+
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.app.Utils;
@@ -58,10 +60,8 @@ public class GetChannelInfo extends AsyncTaskParallel<String, Void, YouTubeChann
 
     public GetChannelInfo(Context context, YouTubeChannelInterface channelReceiver, boolean staleAcceptable, Consumer<Exception> errorCallback) {
         super(errorCallback, null);
-        Utils.requireNonNull(context, "context missing");
-        Utils.requireNonNull(channelReceiver, "channelReceiver missing");
-        this.context = context;
-        this.channelReceiver = channelReceiver;
+        this.context = Objects.requireNonNull(context, "context missing");
+        this.channelReceiver = Objects.requireNonNull(channelReceiver, "channelReceiver missing");
         this.staleAcceptable = staleAcceptable;
     }
 

@@ -51,10 +51,10 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
-import free.rm.skytube.app.Utils;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
@@ -258,8 +258,7 @@ public class NewPipeService {
      * @throws IOException
      */
     public YouTubeChannel getChannelDetails(String channelId) throws NewPipeException {
-        Utils.requireNonNull(channelId, "channelId");
-        VideoPagerWithChannel pager = getChannelPager(channelId);
+        VideoPagerWithChannel pager = getChannelPager(Objects.requireNonNull(channelId, "channelId"));
         // get the channel, and add all the videos from the first page
         YouTubeChannel channel = pager.getChannel();
         try {
@@ -295,9 +294,9 @@ public class NewPipeService {
 
     private ChannelExtractor getChannelExtractor(String channelId)
             throws ParsingException, ExtractionException, IOException {
-        Utils.requireNonNull(channelId, "channelId");
         // Extract from it
-        ChannelExtractor channelExtractor = streamingService.getChannelExtractor(getListLinkHandler(channelId));
+        ChannelExtractor channelExtractor = streamingService
+                .getChannelExtractor(getListLinkHandler(Objects.requireNonNull(channelId, "channelId")));
         channelExtractor.fetchPage();
         return channelExtractor;
     }

@@ -24,9 +24,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import free.rm.skytube.R;
-import free.rm.skytube.app.Utils;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.businessobjects.YouTube.GetChannelVideosFull;
@@ -61,14 +61,12 @@ public class GetChannelVideosTask extends AsyncTaskParallel<Void, Void, List<Car
 	 */
 	public GetChannelVideosTask(String channelId, Long publishedAfter, boolean filterSubscribedVideos,
 								GetChannelVideosTaskInterface getChannelVideosTaskInterface) {
-		Utils.requireNonNull(channelId, "channelId missing");
 		this.getChannelVideos = VideoCategory.createChannelVideosFetcher();
 		this.filterSubscribedVideos = filterSubscribedVideos;
-		this.channelId = channelId;
+		this.channelId = Objects.requireNonNull(channelId, "channelId missing");;
 		this.publishedAfter = publishedAfter;
 		this.getChannelVideosTaskInterface = getChannelVideosTaskInterface;
 	}
-
 
 	@Override
 	protected List<CardData> doInBackground(Void... voids) {

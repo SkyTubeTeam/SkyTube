@@ -23,9 +23,9 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import free.rm.skytube.app.SkyTubeApp;
-import free.rm.skytube.app.Utils;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.businessobjects.YouTube.GetYouTubeVideos;
@@ -75,11 +75,9 @@ public class GetYouTubeVideosTask extends AsyncTaskParallel<Void, Void, List<Car
 		this.swipeRefreshLayout = swipeRefreshLayout;
 		this.clearList = clearList;
 		this.callback = callback;
-		this.context = videoGridAdapter.getContext();
-		Utils.requireNonNull(context, "context is missing");
+		this.context = Objects.requireNonNull(videoGridAdapter.getContext(), "context is missing");
 		getYouTubeVideos.resetKey();
 	}
-
 
 	@Override
 	protected void onPreExecute() {
