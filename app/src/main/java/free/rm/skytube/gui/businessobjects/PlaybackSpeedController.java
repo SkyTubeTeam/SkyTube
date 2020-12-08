@@ -26,6 +26,8 @@ import android.widget.TextView;
 import com.google.android.exoplayer2.PlaybackParameters;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 
+import java.util.Objects;
+
 import free.rm.skytube.app.Utils;
 
 public class PlaybackSpeedController implements PopupMenu.OnMenuItemClickListener, PopupMenu.OnDismissListener, View.OnClickListener {
@@ -38,10 +40,8 @@ public class PlaybackSpeedController implements PopupMenu.OnMenuItemClickListene
     private final SimpleExoPlayer player;
 
     public PlaybackSpeedController(Context context, TextView playbackSpeedTextView, SimpleExoPlayer player) {
-        Utils.requireNonNull(playbackSpeedTextView, "playbackSpeedTextView");
-        Utils.requireNonNull(player, "SimpleExoPlayer");
-        this.player = player;
-        this.playbackSpeedTextView = playbackSpeedTextView;
+        this.player = Objects.requireNonNull(player, "SimpleExoPlayer");
+        this.playbackSpeedTextView = Objects.requireNonNull(playbackSpeedTextView, "playbackSpeedTextView");
         this.playbackSpeedPopupMenu = new PopupMenu(context, playbackSpeedTextView);
         this.playbackSpeedTextView.setOnClickListener(this);
     }

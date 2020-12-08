@@ -28,14 +28,6 @@ public class Utils {
         return speedFormatter.format(speed);
     }
 
-
-    // TODO: Eliminate when API level 19 is used.
-    public static void requireNonNull(Object obj, String message) {
-        if (obj == null) {
-            throw new NullPointerException(message);
-        }
-    }
-
     public static void isTrue(boolean flag, String message) {
         if (!flag) {
             throw new IllegalArgumentException("Error: "+message);
