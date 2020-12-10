@@ -20,6 +20,7 @@ package free.rm.skytube.gui.businessobjects.updates;
 import android.util.Log;
 
 import java.io.BufferedReader;
+import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -29,8 +30,7 @@ import java.net.URL;
 /**
  * Given a {@link URL}, it will extract the stream ({@link InputStream} and the stream size.
  */
-public class WebStream {
-
+public class WebStream implements Closeable {
 	/** Stream of the remote file */
 	private InputStream stream = null;
 	/** Stream size in bytes */
@@ -38,10 +38,9 @@ public class WebStream {
 
 	private static final String TAG = WebStream.class.getSimpleName();
 
-
 	public WebStream(URL remoteFileUrl) throws IOException {
 		HttpURLConnection urlConnection = (HttpURLConnection) remoteFileUrl.openConnection();
-		int					responseCode = urlConnection.getResponseCode();
+		int	responseCode = urlConnection.getResponseCode();
 
 		if (responseCode < 0) {
 			Log.e(TAG, "Cannot establish connection with the update server.  Response code = " + responseCode);
@@ -51,11 +50,9 @@ public class WebStream {
 		}
 	}
 
-
 	public WebStream(String remoteFileUrl) throws Exception {
 		this(new URL(remoteFileUrl));
 	}
-
 
 	/**
 	 * Downloads the remote Text File.
@@ -64,34 +61,30 @@ public class WebStream {
 	 * @throws IOException
 	 */
 	public String downloadRemoteTextFile() throws IOException {
-		BufferedReader  bufferedReader = new BufferedReader(new InputStreamReader(stream));
-		StringBuilder	htmlBuilder = new StringBuilder();
-		String			line;
+		try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(stream))) {
+			StringBuilder htmlBuilder = new StringBuilder();
+			String line;
 
-		while ((line = bufferedReader.readLine()) != null) {
-			htmlBuilder.append(line);
-			htmlBuilder.append('\n');
+			while ((line = bufferedReader.readLine()) != null) {
+				htmlBuilder.append(line);
+				htmlBuilder.append('\n');
+			}
+
+			return htmlBuilder.toString();
 		}
-
-		return htmlBuilder.toString();
 	}
-
 
 	/**
 	 * Closes the {@link WebStream}.
 	 */
-	public void close() {
+	@Override
+	public void close() throws IOException {
 		if (stream == null)
 			return;
 
-		try {
-			stream.close();
-			stream = null;
-		} catch (IOException e) {
-			Log.e(TAG, "An error has occurred while closing the stream.", e);
-		}
+		stream.close();
+		stream = null;
 	}
-
 
 	public InputStream getStream() {
 		return stream;
@@ -100,5 +93,4 @@ public class WebStream {
 	public int getStreamSize() {
 		return streamSize;
 	}
-
 }
