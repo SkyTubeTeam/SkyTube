@@ -18,10 +18,8 @@
 package free.rm.skytube.gui.businessobjects.adapters;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -31,7 +29,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import free.rm.skytube.R;
+import free.rm.skytube.databinding.MultiSelectListDialogBinding;
 import free.rm.skytube.gui.businessobjects.MultiSelectListPreferenceItem;
 
 /**
@@ -51,24 +49,23 @@ public class MultiSelectListPreferenceAdapter extends RecyclerView.Adapter<Multi
 	@NonNull
 	@Override
 	public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-		View itemLayoutView = LayoutInflater.from(parent.getContext()).inflate(
-						R.layout.multi_select_list_dialog, null);
-		return new ViewHolder(itemLayoutView);
+		MultiSelectListDialogBinding binding = MultiSelectListDialogBinding.inflate(
+				LayoutInflater.from(parent.getContext()));
+		return new ViewHolder(binding);
 	}
 
 
 	@Override
 	public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-		final int pos = position;
 		MultiSelectListPreferenceItem item = items.get(position);
-		holder.itemName.setText(item.text);
-		holder.checkBox.setChecked(item.isChecked);
-		holder.checkBox.setTag(item);
-		holder.checkBox.setOnClickListener(view -> {
+		holder.binding.channelName.setText(item.text);
+		holder.binding.checkBox.setChecked(item.isChecked);
+		holder.binding.checkBox.setTag(item);
+		holder.binding.checkBox.setOnClickListener(view -> {
 			CheckBox cb = (CheckBox)view;
 			MultiSelectListPreferenceItem ch = (MultiSelectListPreferenceItem)cb.getTag();
 			ch.isChecked = cb.isChecked();
-			items.get(pos).isChecked = cb.isChecked();
+			items.get(position).isChecked = cb.isChecked();
 		});
 	}
 
@@ -155,16 +152,11 @@ public class MultiSelectListPreferenceAdapter extends RecyclerView.Adapter<Multi
 	////////////////////////////////////////////////////////////////////////////////////////////////
 
 	static class ViewHolder extends RecyclerView.ViewHolder {
-		TextView itemName;
-		CheckBox checkBox;
+		MultiSelectListDialogBinding binding;
 
-		ViewHolder(View itemView) {
-			super(itemView);
-
-			itemName = itemView.findViewById(R.id.channel_name);
-			checkBox = itemView.findViewById(R.id.check_box);
-
+		ViewHolder(MultiSelectListDialogBinding binding) {
+			super(binding.getRoot());
+			this.binding = binding;
 		}
 	}
-
 }

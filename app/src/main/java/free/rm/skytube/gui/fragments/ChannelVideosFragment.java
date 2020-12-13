@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import free.rm.skytube.R;
@@ -20,12 +21,11 @@ public class ChannelVideosFragment extends VideosGridFragment {
 	/** YouTube Channel */
 	private YouTubeChannel channel;
 
-
 	@Nullable
 	@Override
-	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		// get the channel
-		channel = (YouTubeChannel)getArguments().getSerializable(ChannelBrowserFragment.CHANNEL_OBJ);
+		channel = (YouTubeChannel) requireArguments().getSerializable(ChannelBrowserFragment.CHANNEL_OBJ);
 
 		// create and return the view
 		View view =  super.onCreateView(inflater, container, savedInstanceState);
@@ -37,7 +37,6 @@ public class ChannelVideosFragment extends VideosGridFragment {
 		return view;
 	}
 
-
 	public void setYouTubeChannel(YouTubeChannel youTubeChannel) {
 		channel = youTubeChannel;
 		if (videoGridAdapter != null) {
@@ -45,23 +44,19 @@ public class ChannelVideosFragment extends VideosGridFragment {
 		}
 	}
 
-
 	public VideoGridAdapter getVideoGridAdapter() {
 		return videoGridAdapter;
 	}
-
 
 	@Override
 	protected VideoCategory getVideoCategory() {
 		return VideoCategory.CHANNEL_VIDEOS;
 	}
 
-
 	@Override
 	protected String getSearchString() {
 		return channel.getId();
 	}
-
 
 	@Override
 	public String getFragmentName() {

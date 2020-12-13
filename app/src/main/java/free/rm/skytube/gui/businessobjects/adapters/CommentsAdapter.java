@@ -25,8 +25,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -41,6 +39,7 @@ import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeComment;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeCommentThread;
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
 import free.rm.skytube.businessobjects.YouTube.newpipe.PagerBackend;
+import free.rm.skytube.databinding.CommentBinding;
 
 /**
  * An adapter that will display comments in an {@link ExpandableListView}.
@@ -133,7 +132,7 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
 
 		if (convertView == null) {
 			row = layoutInflater.inflate(R.layout.comment, parent, false);
-			viewHolder = new CommentViewHolder(row);
+			viewHolder = new CommentViewHolder(CommentBinding.bind(row));
 			row.setTag(viewHolder);
 		} else {
 			row = convertView;
@@ -169,67 +168,51 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
 	////////////
 
 	private class CommentViewHolder {
-		private View		commentView,
-							paddingView;
-		private TextView	authorTextView,
-							commentTextView,
-							dateTextView,
-							upvotesTextView,
-							viewRepliesTextView;
-		private ImageView	thumbnailImageView;
+		private final CommentBinding binding;
 
-		protected CommentViewHolder(View commentView) {
-			this.commentView = commentView;
-			paddingView		= commentView.findViewById(R.id.comment_padding_view);
-			authorTextView	= commentView.findViewById(R.id.author_text_view);
-			commentTextView	= commentView.findViewById(R.id.comment_text_view);
-			dateTextView	= commentView.findViewById(R.id.comment_date_text_view);
-			upvotesTextView	= commentView.findViewById(R.id.comment_upvotes_text_view);
-			viewRepliesTextView	= commentView.findViewById(R.id.view_all_replies_text_view);
-			thumbnailImageView	= commentView.findViewById(R.id.comment_thumbnail_image_view);
+		protected CommentViewHolder(CommentBinding binding) {
+			this.binding = binding;
 		}
 
-
 		protected void updateInfo(final YouTubeComment comment, boolean isTopLevelComment, final int groupPosition) {
-			paddingView.setVisibility(isTopLevelComment ? View.GONE : View.VISIBLE);
-			authorTextView.setText(comment.getAuthor());
-			commentTextView.setText(comment.getComment());
-			dateTextView.setText(comment.getDatePublished());
-			upvotesTextView.setText(String.valueOf(comment.getLikeCount()));
+			binding.commentPaddingView.setVisibility(isTopLevelComment ? View.GONE : View.VISIBLE);
+			binding.authorTextView.setText(comment.getAuthor());
+			binding.commentTextView.setText(comment.getComment());
+			binding.commentDateTextView.setText(comment.getDatePublished());
+			binding.commentUpvotesTextView.setText(String.valueOf(comment.getLikeCount()));
 			Glide.with(context)
 					.load(comment.getThumbnailUrl())
 					.apply(new RequestOptions().placeholder(R.drawable.channel_thumbnail_default))
-					.into(thumbnailImageView);
+					.into(binding.commentThumbnailImageView);
 
-			thumbnailImageView.setOnClickListener(view -> {
+			binding.commentThumbnailImageView.setOnClickListener(view -> {
 				if(comment.getAuthorChannelId() != null) {
 					SkyTubeApp.launchChannel(comment.getAuthorChannelId(), context);
 				}
 			});
 
 			// change the width dimensions depending on whether the comment is a top level or a child
-			ViewGroup.LayoutParams lp = thumbnailImageView.getLayoutParams();
+			ViewGroup.LayoutParams lp = binding.commentThumbnailImageView.getLayoutParams();
 			lp.width = (int) SkyTubeApp.getDimension(isTopLevelComment  ?  R.dimen.top_level_comment_thumbnail_width  :  R.dimen.child_comment_thumbnail_width);
 
 			if (isTopLevelComment  &&  getChildrenCount(groupPosition) > 0) {
-				viewRepliesTextView.setVisibility(View.VISIBLE);
+				binding.viewAllRepliesTextView.setVisibility(View.VISIBLE);
 
 				// on click, hide/show the comment replies
-				commentView.setOnClickListener(viewReplies -> {
+				binding.getRoot().setOnClickListener(viewReplies -> {
 					if (expandableListView.isGroupExpanded(groupPosition)) {
-						viewRepliesTextView.setText(R.string.view_replies);
+						binding.viewAllRepliesTextView.setText(R.string.view_replies);
 						expandableListView.collapseGroup(groupPosition);
 					} else {
-						viewRepliesTextView.setText(R.string.hide_replies);
+						binding.viewAllRepliesTextView.setText(R.string.hide_replies);
 						expandableListView.expandGroup(groupPosition);
 					}
 				});
 			} else {
-				viewRepliesTextView.setVisibility(View.GONE);
+				binding.viewAllRepliesTextView.setVisibility(View.GONE);
 			}
 		}
 	}
-
 
 	////////////////////////////////////////////////////////////////////////////////////////////////
 

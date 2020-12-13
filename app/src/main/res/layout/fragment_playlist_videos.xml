@@ -25,8 +25,8 @@
 				android:adjustViewBounds="true"
 				android:scaleType="fitXY"
 				android:src="@drawable/banner_default"
-				android:tint="#14000000"
-				custom:defaultImage="@drawable/banner_default"/>
+				app:tint="#14000000"
+				custom:defaultImage="@drawable/banner_default" />
 
 			<LinearLayout
 				android:layout_width="match_parent"
@@ -73,10 +73,11 @@
 		</FrameLayout>
 	</com.google.android.material.appbar.AppBarLayout>
 
-
 	<include
+		android:id="@+id/videos_gridview"
 		layout="@layout/videos_gridview"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

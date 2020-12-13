@@ -5,9 +5,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import butterknife.BindView;
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.VideoCategory;
@@ -15,6 +15,7 @@ import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
 import free.rm.skytube.businessobjects.YouTube.newpipe.ContentId;
 import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
 import free.rm.skytube.businessobjects.interfaces.CardListener;
+import free.rm.skytube.databinding.FragmentDownloadsBinding;
 import free.rm.skytube.gui.businessobjects.adapters.OrderableVideoGridAdapter;
 import free.rm.skytube.gui.businessobjects.fragments.OrderableVideosGridFragment;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
@@ -23,31 +24,29 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
  * A fragment that holds videos downloaded by the user.
  */
 public class DownloadedVideosFragment extends OrderableVideosGridFragment implements CardListener {
-	@BindView(R.id.noDownloadedVideosText)
-	View noDownloadedVideosText;
+	private FragmentDownloadsBinding binding;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, @Nullable Bundle savedInstanceState) {
         setVideoGridAdapter(new OrderableVideoGridAdapter(DownloadedVideosDb.getVideoDownloadsDb()));
-        DownloadedVideosDb.getVideoDownloadsDb().registerListener(this);
+		binding = FragmentDownloadsBinding.inflate(inflater, container, false);
+		swipeRefreshLayout = binding.videosGridview.swipeRefreshLayout;
+
+		DownloadedVideosDb.getVideoDownloadsDb().registerListener(this);
         View view = super.onCreateView(inflater, container, savedInstanceState);
         setListVisible(false);
         swipeRefreshLayout.setEnabled(false);
 
         populateList();
-        return view;
+        return binding.getRoot();
     }
 
     @Override
     public void onDestroyView() {
         DownloadedVideosDb.getVideoDownloadsDb().unregisterListener(this);
+        binding = null;
         super.onDestroyView();
     }
-
-	@Override
-	protected int getLayoutResource() {
-		return R.layout.fragment_downloads;
-	}
 
 
 	@Override
@@ -100,10 +99,10 @@ public class DownloadedVideosFragment extends OrderableVideosGridFragment implem
     private void setListVisible(boolean visible) {
         if (visible) {
             swipeRefreshLayout.setVisibility(View.VISIBLE);
-            noDownloadedVideosText.setVisibility(View.GONE);
+            binding.noDownloadedVideosText.setVisibility(View.GONE);
         } else {
             swipeRefreshLayout.setVisibility(View.GONE);
-            noDownloadedVideosText.setVisibility(View.VISIBLE);
+            binding.noDownloadedVideosText.setVisibility(View.VISIBLE);
         }
     }
 

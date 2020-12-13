@@ -6,58 +6,47 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubePlaylist;
+import free.rm.skytube.databinding.FragmentPlaylistVideosBinding;
 
 /**
  * A Fragment that displays the videos of a playlist in a {@link VideosGridFragment}
  */
 public class PlaylistVideosFragment extends VideosGridFragment {
-
 	private YouTubePlaylist youTubePlaylist;
 
-	@BindView(R.id.toolbar)
-	Toolbar     toolbar;
-	@BindView(R.id.playlist_banner_image_view)
-	ImageView   playlistBannerImageView;
-	@BindView(R.id.playlist_thumbnail_image_view)
-	ImageView   playlistThumbnailImageView;
-	@BindView(R.id.playlist_title_text_view)
-	TextView    playlistTitleTextView;
+	private FragmentPlaylistVideosBinding binding;
 
 	public static final String PLAYLIST_OBJ = "PlaylistVideosFragment.PLAYLIST_OBJ";
 
-
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		// sets the play list
-		youTubePlaylist = (YouTubePlaylist)getArguments().getSerializable(PLAYLIST_OBJ);
+		youTubePlaylist = (YouTubePlaylist) requireArguments().getSerializable(PLAYLIST_OBJ);
 
-		View view = super.onCreateView(inflater, container, savedInstanceState);
+		binding = FragmentPlaylistVideosBinding.inflate(inflater, container, false);
+		swipeRefreshLayout = binding.videosGridview.swipeRefreshLayout;
+		super.onCreateView(inflater, container, savedInstanceState);
 
 		if (youTubePlaylist == null) {
-			Log.e(this.getClass().getSimpleName(), "No playlist object found:" + getArguments());
+			Log.e(getClass().getSimpleName(), "No playlist object found:" + getArguments());
 			showMain();
-			return view;
+			return binding.getRoot();
 		}
 
-		ButterKnife.bind(this, view);
-		playlistTitleTextView.setText(youTubePlaylist.getTitle());
+		binding.playlistTitleTextView.setText(youTubePlaylist.getTitle());
 
 		// setup the toolbar/actionbar
-		setSupportActionBar(toolbar);
+		setSupportActionBar(binding.toolbar);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 		ActionBar actionBar = getSupportActionBar();
@@ -67,31 +56,32 @@ public class PlaylistVideosFragment extends VideosGridFragment {
 		}
 
 		// set the playlist's thumbnail
-		Glide.with(getActivity())
+		Glide.with(requireContext())
 				.load(youTubePlaylist.getThumbnailUrl())
 				.apply(new RequestOptions().placeholder(R.drawable.channel_thumbnail_default))
-				.into(playlistThumbnailImageView);
+				.into(binding.playlistThumbnailImageView);
 
 		// set the channel's banner
-		Glide.with(getActivity())
+		Glide.with(requireContext())
 				.load(youTubePlaylist.getBannerUrl())
 				.apply(new RequestOptions().placeholder(R.drawable.banner_default))
-				.into(playlistBannerImageView);
+				.into(binding.playlistBannerImageView);
 
 		// Force initialization
 		videoGridAdapter.initializeList();
-		return view;
+		return binding.getRoot();
+	}
+
+	@Override
+	public void onDestroyView() {
+		binding = null;
+		super.onDestroyView();
 	}
 
 	private void showMain() {
 		Intent startMain = new Intent(Intent.ACTION_MAIN);
 		startMain.addCategory(Intent.CATEGORY_HOME);
 		startActivity(startMain);
-	}
-
-	@Override
-	protected int getLayoutResource() {
-		return R.layout.fragment_playlist_videos;
 	}
 
 	@Override

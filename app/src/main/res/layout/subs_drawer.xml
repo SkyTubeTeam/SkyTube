@@ -5,7 +5,8 @@
 	android:orientation="vertical"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	android:background="@color/subs_drawer_background">
+	android:background="@color/subs_drawer_background"
+	android:id="@+id/subs_drawer">
 
 	<TextView
 		android:id="@+id/subs_drawer_title"
@@ -30,7 +31,7 @@
 		app:queryHint="@string/search_channel" />
 
 	<androidx.recyclerview.widget.RecyclerView
-		android:id="@+id/subs_drawer"
+		android:id="@+id/subs_drawer_recycler_view"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
 		android:layout_below="@+id/subs_search_view"

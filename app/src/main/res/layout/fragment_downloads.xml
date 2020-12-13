@@ -5,6 +5,7 @@
 			 android:background="@color/grid_view_background">
 
 	<include
+		android:id="@+id/videos_gridview"
 		layout="@layout/videos_gridview"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"/>

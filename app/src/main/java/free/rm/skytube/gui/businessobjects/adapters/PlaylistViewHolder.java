@@ -19,54 +19,34 @@ package free.rm.skytube.gui.businessobjects.adapters;
 
 import android.content.Context;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubePlaylist;
+import free.rm.skytube.databinding.VideoCellBinding;
 import free.rm.skytube.gui.businessobjects.PlaylistClickListener;
 
 /**
  * A ViewHolder for the playlists grid view.
  */
 class PlaylistViewHolder extends RecyclerView.ViewHolder {
+	private final VideoCellBinding binding;
+	private final PlaylistClickListener playlistClickListener;
 
-	@BindView(R.id.thumbnail_image_view)
-	ImageView thumbnailImageView;
-	@BindView(R.id.title_text_view)
-	TextView titleTextView;
-	@BindView(R.id.views_text_view)
-	TextView videoCountTextView;
-	@BindView(R.id.publish_date_text_view)
-	TextView publishDateTextView;
+	PlaylistViewHolder(@NonNull VideoCellBinding binding,
+					   @NonNull PlaylistClickListener playlistClickListener) {
+		super(binding.getRoot());
+		this.binding = binding;
 
-	@BindView(R.id.thumbs_up_text_view)
-	View thumbsUpView;
-	@BindView(R.id.video_duration_text_view)
-	View videoDurationTextView;
-	@BindView(R.id.channel_text_view)
-	View channelTextView;
-	@BindView(R.id.options_button)
-	View optionsButton;
-
-	private PlaylistClickListener playlistClickListener;
-
-
-	PlaylistViewHolder(View view, PlaylistClickListener playlistClickListener) {
-		super(view);
-		ButterKnife.bind(this, view);
-
-		thumbsUpView.setVisibility(View.GONE);
-		videoDurationTextView.setVisibility(View.GONE);
-		channelTextView.setVisibility(View.GONE);
-		optionsButton.setVisibility(View.GONE);
+		binding.thumbsUpTextView.setVisibility(View.GONE);
+		binding.videoDurationTextView.setVisibility(View.GONE);
+		binding.channelTextView.setVisibility(View.GONE);
+		binding.optionsButton.setVisibility(View.GONE);
 
 		this.playlistClickListener = playlistClickListener;
 	}
@@ -76,11 +56,10 @@ class PlaylistViewHolder extends RecyclerView.ViewHolder {
 		Glide.with(context)
 						.load(playlist.getThumbnailUrl())
 						.apply(new RequestOptions().placeholder(R.drawable.thumbnail_default))
-						.into(thumbnailImageView);
-		titleTextView.setText(playlist.getTitle());
-		publishDateTextView.setText(playlist.getPublishDatePretty());
-		videoCountTextView.setText(String.format(context.getString(R.string.num_videos), playlist.getVideoCount()));
-		thumbnailImageView.setOnClickListener(view -> playlistClickListener.onClickPlaylist(playlist));
+						.into(binding.thumbnailImageView);
+		binding.titleTextView.setText(playlist.getTitle());
+		binding.publishDateTextView.setText(playlist.getPublishDatePretty());
+		binding.viewsTextView.setText(String.format(context.getString(R.string.num_videos), playlist.getVideoCount()));
+		binding.thumbnailImageView.setOnClickListener(view -> playlistClickListener.onClickPlaylist(playlist));
 	}
-
 }
