@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.google.android.gms.cast.MediaInfo;
@@ -15,9 +16,6 @@ import com.google.android.gms.cast.framework.media.RemoteMediaClient;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import butterknife.BindView;
-import butterknife.OnClick;
-import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.gui.activities.BaseActivity;
 import free.rm.skytube.gui.businessobjects.MainActivityListener;
@@ -39,7 +37,6 @@ public abstract class ChromecastBaseControllerFragment extends FragmentEx {
 	protected int currentPlayerState = MediaStatus.PLAYER_STATE_IDLE;
 
 	protected int duration = 0;
-	protected int currentPosition = 0;
 
 	protected boolean didSeek = false;
 	protected boolean isSeeking = false;
@@ -50,32 +47,57 @@ public abstract class ChromecastBaseControllerFragment extends FragmentEx {
 
 	protected ChromecastBaseControllerFragment otherControllerFragment;
 
-	@BindView(R.id.chromecastPlaybackProgressBar)
-	ProgressBar chromecastPlaybackProgressBar;
+	protected ProgressBar chromecastPlaybackProgressBar;
 
 	/** Playback buttons */
-	@BindView(R.id.playButton)
-	ImageButton playButton;
-	@BindView(R.id.pauseButton)
-	ImageButton pauseButton;
-	@BindView(R.id.bufferingSpinner)
-	View bufferingSpinner;
+	protected ImageButton playButton;
+	protected ImageButton pauseButton;
+	protected ImageButton forwardButton;
+	protected ImageButton rewindButton;
+	protected ImageButton stopButton;
+	protected View bufferingSpinner;
 
 	@Nullable
 	@Override
-	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		return super.onCreateView(inflater, container, savedInstanceState);
 	}
 
 	@Override
-	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
+		playButton.setOnClickListener(v -> remoteMediaClient.play());
+		pauseButton.setOnClickListener(v -> remoteMediaClient.pause());
+		forwardButton.setOnClickListener(v -> {
+			if(remoteMediaClient.getApproximateStreamPosition() + 30000 < remoteMediaClient.getStreamDuration()) {
+				didSeek = true;
+				remoteMediaClient.seek(remoteMediaClient.getApproximateStreamPosition() + 30000);
+			}
+		});
+		rewindButton.setOnClickListener(v -> {
+			didSeek = true;
+			remoteMediaClient.seek(remoteMediaClient.getApproximateStreamPosition() - 10000);
+		});
+		stopButton.setOnClickListener(v -> remoteMediaClient.stop());
+
 		if(savedInstanceState != null) {
 			int currentPosition = savedInstanceState.getInt(KEY_CURRENT_POSITION, 0);
 			int duration = savedInstanceState.getInt(KEY_DURATION, 0);
 			setDuration(duration);
 			setProgress(currentPosition);
 		}
+	}
+
+	@Override
+	public void onDestroyView() {
+		chromecastPlaybackProgressBar = null;
+		playButton = null;
+		pauseButton = null;
+		forwardButton = null;
+		rewindButton = null;
+		stopButton = null;
+		bufferingSpinner = null;
+		super.onDestroyView();
 	}
 
 	public void init(RemoteMediaClient client) {
@@ -202,36 +224,6 @@ public abstract class ChromecastBaseControllerFragment extends FragmentEx {
 			bufferingSpinner.setVisibility(View.VISIBLE);
 		}
 	}
-
-	@OnClick(R.id.playButton)
-	public void play(View v) {
-		remoteMediaClient.play();
-	}
-
-	@OnClick(R.id.pauseButton)
-	public void pause(View v) {
-		remoteMediaClient.pause();
-	}
-
-	@OnClick(R.id.forwardButton)
-	public void forward(View v) {
-		if(remoteMediaClient.getApproximateStreamPosition() + 30000 < remoteMediaClient.getStreamDuration()) {
-			didSeek = true;
-			remoteMediaClient.seek(remoteMediaClient.getApproximateStreamPosition() + 30000);
-		}
-	}
-
-	@OnClick(R.id.rewindButton)
-	public void rewind(View v) {
-		didSeek = true;
-		remoteMediaClient.seek(remoteMediaClient.getApproximateStreamPosition() - 10000);
-	}
-
-	@OnClick(R.id.stopButton)
-	public void stop(View v) {
-		remoteMediaClient.stop();
-	}
-
 
 	@Override
 	public void onResume() {
