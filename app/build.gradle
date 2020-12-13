@@ -86,6 +86,9 @@ android {
     packagingOptions {
         exclude "META-INF/*"
     }
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
