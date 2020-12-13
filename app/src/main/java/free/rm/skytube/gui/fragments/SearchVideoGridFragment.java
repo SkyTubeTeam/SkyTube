@@ -25,44 +25,43 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.SearchView;
-import androidx.appcompat.widget.Toolbar;
 
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.VideoCategory;
+import free.rm.skytube.databinding.FragmentSearchBinding;
 
 /**
  * Fragment that will hold a list of videos corresponding to the user's query.
  */
 public class SearchVideoGridFragment extends VideosGridFragment {
-
-	/** User's search query string. */
-	private String  searchQuery = "";
-	/** Edit searched query through long press on search query**/
-	private SearchView editSearchView;
-
 	public static final String QUERY = "SearchVideoGridFragment.Query";
 
+	/** User's search query string. */
+	private String searchQuery = "";
+	/** Edit searched query through long press on search query**/
+	private SearchView editSearchView;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		// set the user's search query
-		searchQuery = getArguments().getString(QUERY);
+		searchQuery = requireArguments().getString(QUERY);
 	}
 
-
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		// inflate the layout for this fragment
-		View view = super.onCreateView(inflater, container, savedInstanceState);
+		final FragmentSearchBinding binding = FragmentSearchBinding.inflate(inflater, container, false);
+		swipeRefreshLayout = binding.videosGridview.swipeRefreshLayout;
+		super.onCreateView(inflater, container, savedInstanceState);
 
 		// setup the toolbar/actionbar
-		Toolbar toolbar = view.findViewById(R.id.toolbar);
-		setSupportActionBar(toolbar);
+		setSupportActionBar(binding.toolbar);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 		// set the action bar's title
@@ -71,7 +70,7 @@ public class SearchVideoGridFragment extends VideosGridFragment {
 			actionBar.setTitle(searchQuery);
 
 		//makes searched query editable on long press
-		toolbar.setOnLongClickListener(view1 -> {
+		binding.toolbar.setOnLongClickListener(view1 -> {
 			editSearchView.setIconified(false);
 			editSearchView.setQuery(searchQuery,false);
 			return false;
@@ -81,12 +80,11 @@ public class SearchVideoGridFragment extends VideosGridFragment {
 
 		// Enforce loading of the list
 		videoGridAdapter.initializeList();
-		return view;
+		return binding.getRoot();
 	}
 
-
 	@Override
-	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+	public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
 		MenuItem   searchMenuItem = menu.findItem(R.id.menu_search);
 		SearchView searchView = (SearchView) searchMenuItem.getActionView();
 		editSearchView = searchView;
@@ -111,11 +109,6 @@ public class SearchVideoGridFragment extends VideosGridFragment {
 		});
 	}
 
-
-	@Override
-	protected int getLayoutResource() {
-		return R.layout.fragment_search;
-	}
 
 	@Override
 	protected VideoCategory getVideoCategory() {

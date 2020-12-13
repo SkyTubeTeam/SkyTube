@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.ItemTouchHelper;
 
 import free.rm.skytube.gui.businessobjects.SimpleItemTouchHelperCallback;
@@ -19,13 +20,12 @@ public abstract class OrderableVideosGridFragment extends VideosGridFragment {
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = super.onCreateView(inflater, container, savedInstanceState);
 		if(videoGridAdapter instanceof OrderableVideoGridAdapter) {
-
 			ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback((OrderableVideoGridAdapter)videoGridAdapter);
 			ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
-			touchHelper.attachToRecyclerView(gridView);
+			touchHelper.attachToRecyclerView(gridviewBinding.gridView);
 		}
 		return view;
 	}

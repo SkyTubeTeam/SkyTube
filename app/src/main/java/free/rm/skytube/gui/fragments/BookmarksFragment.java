@@ -22,9 +22,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import butterknife.BindView;
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
@@ -32,6 +32,7 @@ import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.YouTube.newpipe.VideoId;
 import free.rm.skytube.businessobjects.db.BookmarksDb;
+import free.rm.skytube.databinding.FragmentBookmarksBinding;
 import free.rm.skytube.gui.businessobjects.adapters.OrderableVideoGridAdapter;
 import free.rm.skytube.gui.businessobjects.fragments.OrderableVideosGridFragment;
 
@@ -39,20 +40,21 @@ import free.rm.skytube.gui.businessobjects.fragments.OrderableVideosGridFragment
  * Fragment that displays bookmarked videos.
  */
 public class BookmarksFragment extends OrderableVideosGridFragment implements BookmarksDb.BookmarksDbListener {
-	@BindView(R.id.noBookmarkedVideosText)
-	View noBookmarkedVideosText;
+	private FragmentBookmarksBinding binding;
 
 	public BookmarksFragment() {
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, @Nullable Bundle savedInstanceState) {
+	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, @Nullable Bundle savedInstanceState) {
 		setVideoGridAdapter(new OrderableVideoGridAdapter(BookmarksDb.getBookmarksDb()));
-		View view = super.onCreateView(inflater, container, savedInstanceState);
+		binding = FragmentBookmarksBinding.inflate(inflater, container, false);
+		swipeRefreshLayout = binding.videosGridview.swipeRefreshLayout;
+		super.onCreateView(inflater, container, savedInstanceState);
 		swipeRefreshLayout.setEnabled(false);
 		BookmarksDb.getBookmarksDb().addListener(this);
 		populateList();
-		return view;
+		return binding.getRoot();
 	}
 
 	private void populateList() {
@@ -83,11 +85,6 @@ public class BookmarksFragment extends OrderableVideosGridFragment implements Bo
 		}
 	}
 
-	@Override
-	protected int getLayoutResource() {
-		return R.layout.fragment_bookmarks;
-	}
-	
 
 	@Override
 	protected VideoCategory getVideoCategory() {
@@ -113,16 +110,17 @@ public class BookmarksFragment extends OrderableVideosGridFragment implements Bo
 	@Override
 	public void onDestroyView() {
 		BookmarksDb.getBookmarksDb().removeListener(this);
+		binding = null;
 		super.onDestroyView();
 	}
 
 	private void setBookmarkListVisible(boolean visible) {
 		if (visible) {
 			swipeRefreshLayout.setVisibility(View.VISIBLE);
-			noBookmarkedVideosText.setVisibility(View.GONE);
+			binding.noBookmarkedVideosText.setVisibility(View.GONE);
 		} else {
 			swipeRefreshLayout.setVisibility(View.GONE);
-			noBookmarkedVideosText.setVisibility(View.VISIBLE);
+			binding.noBookmarkedVideosText.setVisibility(View.VISIBLE);
 		}
 	}
 	////////////////////////////////////////////////////////////////////////////////////////////////

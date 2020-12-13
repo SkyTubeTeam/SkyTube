@@ -167,8 +167,8 @@ public class MainFragment extends FragmentEx {
 			public void onTabReselected(TabLayout.Tab tab) {
 				//When current tab reselected scroll to the top of the video list
 				VideosGridFragment fragment = videosPagerAdapter.getTab(tab);
-				if (fragment != null && fragment.gridView != null) {
-					fragment.gridView.smoothScrollToPosition(TOP_LIST_INDEX);
+				if (fragment != null && fragment.gridviewBinding != null) {
+					fragment.gridviewBinding.gridView.smoothScrollToPosition(TOP_LIST_INDEX);
 				}
 			}
 		});

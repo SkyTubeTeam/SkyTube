@@ -5,14 +5,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import butterknife.BindView;
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
+import free.rm.skytube.databinding.FragmentDownloadsBinding;
 import free.rm.skytube.gui.businessobjects.adapters.OrderableVideoGridAdapter;
 import free.rm.skytube.gui.businessobjects.fragments.OrderableVideosGridFragment;
 
@@ -20,28 +21,25 @@ import free.rm.skytube.gui.businessobjects.fragments.OrderableVideosGridFragment
  * A fragment that holds videos downloaded by the user.
  */
 public class DownloadedVideosFragment extends OrderableVideosGridFragment implements DownloadedVideosDb.DownloadedVideosListener {
-	@BindView(R.id.noDownloadedVideosText)
-	View noDownloadedVideosText;
+	private FragmentDownloadsBinding binding;
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, @Nullable Bundle savedInstanceState) {
+	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, @Nullable Bundle savedInstanceState) {
 		setVideoGridAdapter(new OrderableVideoGridAdapter(DownloadedVideosDb.getVideoDownloadsDb()));
-		View view = super.onCreateView(inflater, container, savedInstanceState);
+		binding = FragmentDownloadsBinding.inflate(inflater, container, false);
+		swipeRefreshLayout = binding.videosGridview.swipeRefreshLayout;
+		super.onCreateView(inflater, container, savedInstanceState);
 		swipeRefreshLayout.setEnabled(false);
 		DownloadedVideosDb.getVideoDownloadsDb().addListener(this);
 		populateList();
-		return view;
+		return binding.getRoot();
 	}
 
 	@Override
 	public void onDestroyView() {
 		DownloadedVideosDb.getVideoDownloadsDb().removeListener(this);
+		binding = null;
 		super.onDestroyView();
-	}
-
-	@Override
-	protected int getLayoutResource() {
-		return R.layout.fragment_downloads;
 	}
 
 
@@ -101,15 +99,14 @@ public class DownloadedVideosFragment extends OrderableVideosGridFragment implem
 			// show the swipe refresh layout that contains the actual video grid.
 			if (maximumOrderNumber <= 0) {
 				swipeRefreshLayout.setVisibility(View.GONE);
-				noDownloadedVideosText.setVisibility(View.VISIBLE);
+				binding.noDownloadedVideosText.setVisibility(View.VISIBLE);
 			} else {
 				swipeRefreshLayout.setVisibility(View.VISIBLE);
-				noDownloadedVideosText.setVisibility(View.GONE);
+				binding.noDownloadedVideosText.setVisibility(View.GONE);
 
 				// set video category and get the bookmarked videos asynchronously
 				videoGridAdapter.setVideoCategory(VideoCategory.DOWNLOADED_VIDEOS);
 			}
 		}
-
 	}
 }

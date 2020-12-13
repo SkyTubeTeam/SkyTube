@@ -23,14 +23,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
-import butterknife.BindView;
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.VideoCategory;
+import free.rm.skytube.databinding.VideosGridviewBinding;
 import free.rm.skytube.gui.businessobjects.MainActivityListener;
 import free.rm.skytube.gui.businessobjects.fragments.BaseVideosGridFragment;
 
@@ -38,17 +38,17 @@ import free.rm.skytube.gui.businessobjects.fragments.BaseVideosGridFragment;
  * A fragment that will hold a {@link GridView} full of YouTube videos.
  */
 public abstract class VideosGridFragment extends BaseVideosGridFragment {
-
-	@BindView(R.id.grid_view)
-	protected RecyclerView	gridView;
+	protected VideosGridviewBinding gridviewBinding;
 
 	public VideosGridFragment() {
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		// inflate the layout for this fragment
-		View view = super.onCreateView(inflater, container, savedInstanceState);
+		gridviewBinding = VideosGridviewBinding.inflate(inflater, container, false);
+		swipeRefreshLayout = gridviewBinding.swipeRefreshLayout;
+		super.onCreateView(inflater, container, savedInstanceState);
 
 		// setup the video grid view
 		videoGridAdapter.setSwipeRefreshLayout(swipeRefreshLayout);
@@ -59,34 +59,27 @@ public abstract class VideosGridFragment extends BaseVideosGridFragment {
 
 		videoGridAdapter.setListener((MainActivityListener)getActivity());
 
-		gridView.setHasFixedSize(true);
-		gridView.setLayoutManager(new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.video_grid_num_columns)));
-		gridView.setAdapter(videoGridAdapter);
+		gridviewBinding.gridView.setHasFixedSize(true);
+		gridviewBinding.gridView.setLayoutManager(new GridLayoutManager(getActivity(),
+				getResources().getInteger(R.integer.video_grid_num_columns)));
+		gridviewBinding.gridView.setAdapter(videoGridAdapter);
 
-		return view;
+		return gridviewBinding.getRoot();
 	}
-
 
 	@Override
 	public void onDestroyView() {
-		gridView.setAdapter(null);
+		gridviewBinding.gridView.setAdapter(null);
 		videoGridAdapter.onDestroy();
+		gridviewBinding = null;
 		super.onDestroyView();
-		Glide.get(getActivity()).clearMemory();
+		Glide.get(requireContext()).clearMemory();
 	}
-
-
-	@Override
-	protected int getLayoutResource() {
-		return R.layout.videos_gridview;
-	}
-
 
 	/**
 	 * @return Returns the category of videos being displayed by this fragment.
 	 */
 	protected abstract VideoCategory getVideoCategory();
-
 
 	/**
 	 * @return Returns the search string used when setting the video category.  (Can be used to

@@ -26,10 +26,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
-import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.db.PlaybackStatusDb;
 import free.rm.skytube.gui.businessobjects.adapters.VideoGridAdapter;
@@ -39,14 +35,10 @@ import free.rm.skytube.gui.fragments.VideosGridFragment;
  * A class that supports swipe-to-refresh on {@link VideosGridFragment}.
  */
 public abstract class BaseVideosGridFragment extends TabFragment implements SwipeRefreshLayout.OnRefreshListener {
-
-	protected VideoGridAdapter  videoGridAdapter;
+	protected VideoGridAdapter videoGridAdapter;
 	private int updateCount = 0;
 
-	@BindView(R.id.swipeRefreshLayout)
 	protected SwipeRefreshLayout swipeRefreshLayout;
-
-	protected Unbinder unbinder;
 
 	public BaseVideosGridFragment() {
 	}
@@ -63,17 +55,13 @@ public abstract class BaseVideosGridFragment extends TabFragment implements Swip
 		}
 		videoGridAdapter.setContext(container.getContext());
 
-		View view = inflater.inflate(getLayoutResource(), container, false);
-
-		unbinder = ButterKnife.bind(this, view);
 		swipeRefreshLayout.setOnRefreshListener(this);
 
 		if (isFragmentSelected()) {
 			videoGridAdapter.initializeList();
 		}
-		return view;
+		return null;
 	}
-
 
 	@Override
 	public void onRefresh() {
@@ -101,7 +89,7 @@ public abstract class BaseVideosGridFragment extends TabFragment implements Swip
 	@Override
 	public void onDestroyView() {
 		Logger.i(this, "onDestroyView " + videoGridAdapter);
-		unbinder.unbind();
+		swipeRefreshLayout = null;
 		super.onDestroyView();
 	}
 
@@ -119,10 +107,4 @@ public abstract class BaseVideosGridFragment extends TabFragment implements Swip
 			videoGridAdapter.initializeList();
 		}
 	}
-
-	/**
-	 * Set the layout resource (e.g. Subscriptions resource layout, R.id.grid_view, ...etc).
-	 */
-	protected  abstract int getLayoutResource();
-
 }
