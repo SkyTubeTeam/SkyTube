@@ -59,9 +59,10 @@
 
 
 	<include
+		android:id="@+id/subs_drawer"
+		layout="@layout/subs_drawer"
 		android:layout_width="240dp"
 		android:layout_height="match_parent"
-		android:layout_gravity="start"
-		layout="@layout/subs_drawer"/>
+		android:layout_gravity="start" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

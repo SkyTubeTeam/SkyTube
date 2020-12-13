@@ -34,6 +34,7 @@ import free.rm.skytube.businessobjects.YouTube.GetChannelPlaylists;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubePlaylist;
 import free.rm.skytube.businessobjects.YouTube.YouTubeTasks;
+import free.rm.skytube.databinding.VideoCellBinding;
 import free.rm.skytube.gui.businessobjects.PlaylistClickListener;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.functions.Consumer;
@@ -57,8 +58,9 @@ public class PlaylistsGridAdapter extends RecyclerViewAdapterEx<YouTubePlaylist,
 	@NonNull
 	@Override
 	public PlaylistViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-		View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.video_cell, parent, false);
-		return new PlaylistViewHolder(v, playlistClickListener);
+		VideoCellBinding binding = VideoCellBinding.inflate(LayoutInflater.from(parent.getContext()),
+				parent, false);
+		return new PlaylistViewHolder(binding, playlistClickListener);
 	}
 
 	@Override

@@ -20,9 +20,7 @@ package free.rm.skytube.gui.businessobjects;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -35,6 +33,7 @@ import java.util.List;
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.YouTube.VideoBlocker;
+import free.rm.skytube.databinding.BlockedVideoItemBinding;
 import free.rm.skytube.gui.activities.PreferencesActivity;
 import free.rm.skytube.gui.fragments.preferences.VideoBlockerPreferenceFragment;
 
@@ -99,34 +98,31 @@ public class BlockedVideosDialog extends SkyTubeMaterialDialog {
 			this.blockedVideos = blockedVideos;
 		}
 
-
 		@NonNull
 		@Override
 		public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-			View itemLayoutView = LayoutInflater.from(parent.getContext()).inflate(
-					R.layout.blocked_video_item, parent, false);
-			return new ViewHolder(itemLayoutView);
+			BlockedVideoItemBinding binding = BlockedVideoItemBinding.inflate(
+					LayoutInflater.from(parent.getContext()), parent, false);
+			return new ViewHolder(binding);
 		}
-
 
 		@Override
 		public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 			final VideoBlocker.BlockedVideo blockedVideo = blockedVideos.get(position);
 
 			// alternate the row colors
-			holder.row.setBackgroundColor(rowColors[position % 2]);
-			holder.row.setOnClickListener(v -> {
+			holder.binding.blockedVideoRow.setBackgroundColor(rowColors[position % 2]);
+			holder.binding.blockedVideoRow.setOnClickListener(v -> {
 				// play the video
 				YouTubePlayer.launch(blockedVideo.getVideo(), context);
 			});
 
 			// update view holder's data
-			holder.id.setText(NumberFormat.getNumberInstance().format(getItemCount() - position)); // since the list of blocked videos is inverted, we need to get the original item position
-			holder.videoBlocked.setText(blockedVideo.getVideo().getTitle());
-			holder.filter.setText(blockedVideo.getFilteringType().toString());
-			holder.reason.setText(blockedVideo.getReason());
+			holder.binding.idTextView.setText(NumberFormat.getNumberInstance().format(getItemCount() - position)); // since the list of blocked videos is inverted, we need to get the original item position
+			holder.binding.videoTitleTextView.setText(blockedVideo.getVideo().getTitle());
+			holder.binding.filterTextView.setText(blockedVideo.getFilteringType().toString());
+			holder.binding.reasonTextView.setText(blockedVideo.getReason());
 		}
-
 
 		@Override
 		public int getItemCount() {
@@ -139,23 +135,13 @@ public class BlockedVideosDialog extends SkyTubeMaterialDialog {
 	////////////////////////////////////////////////////////////////////////////////////////////////
 
 	private static class ViewHolder extends RecyclerView.ViewHolder {
-		View row;
-		TextView    id;
-		TextView    videoBlocked;
-		TextView    filter;
-		TextView    reason;
+		BlockedVideoItemBinding binding;
 
-		ViewHolder(View itemView) {
-			super(itemView);
-
-			row = itemView.findViewById(R.id.blocked_video_row);
-			id = itemView.findViewById(R.id.id_text_view);
-			videoBlocked = itemView.findViewById(R.id.video_title_text_view);
-			filter = itemView.findViewById(R.id.filter_text_view);
-			reason = itemView.findViewById(R.id.reason_text_view);
+		ViewHolder(BlockedVideoItemBinding binding) {
+			super(binding.getRoot());
+			this.binding = binding;
 		}
 	}
-
 
 	////////////////////////////////////////////////////////////////////////////////////////////////
 

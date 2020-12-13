@@ -17,14 +17,11 @@ import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 
@@ -38,35 +35,37 @@ import free.rm.skytube.app.FeedUpdateTask;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.app.utils.WeaklyReferencedMap;
 import free.rm.skytube.businessobjects.Logger;
+import free.rm.skytube.databinding.FragmentMainBinding;
+import free.rm.skytube.databinding.SubsDrawerBinding;
 import free.rm.skytube.gui.activities.BaseActivity;
 import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
 import free.rm.skytube.gui.businessobjects.fragments.FragmentEx;
 
 public class MainFragment extends FragmentEx {
-
-	private static final int TOP_LIST_INDEX = 0;
-
-	private SubsAdapter					subsAdapter  = null;
-	private ActionBarDrawerToggle		subsDrawerToggle;
-	private TabLayout                   tabLayout = null;
-	private DrawerLayout 				subsDrawerLayout = null;
-	private RecyclerView subsListView= null;
-
 	// Constants for saving the state of this Fragment's child Fragments
 	public static final String FEATURED_VIDEOS_FRAGMENT = "MainFragment.featuredVideosFragment";
 	public static final String MOST_POPULAR_VIDEOS_FRAGMENT = "MainFragment.mostPopularVideosFragment";
 	public static final String SUBSCRIPTIONS_FEED_FRAGMENT = "MainFragment.subscriptionsFeedFragment";
 	public static final String BOOKMARKS_FRAGMENT = "MainFragment.bookmarksFragment";
 	public static final String DOWNLOADED_VIDEOS_FRAGMENT = "MainFragment.downloadedVideosFragment";
-
-	private SimplePagerAdapter			videosPagerAdapter = null;
-
 	public static final String SHOULD_SELECTED_FEED_TAB = "MainFragment.SHOULD_SELECTED_FEED_TAB";
+
+	private static final int TOP_LIST_INDEX = 0;
+
+	private FragmentMainBinding fragmentBinding;
+	private SubsDrawerBinding subsDrawerBinding;
+
+	private SubsAdapter subsAdapter = null;
+	private ActionBarDrawerToggle subsDrawerToggle;
+
+	private SimplePagerAdapter videosPagerAdapter = null;
 
 	@Nullable
 	@Override
-	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_main, container, false);
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+							 @Nullable Bundle savedInstanceState) {
+		fragmentBinding = FragmentMainBinding.inflate(inflater, container, false);
+		subsDrawerBinding = fragmentBinding.subsDrawer;
 
 		// For the non-oss version, when using a Chromecast, returning to this fragment from another fragment that uses
 		// CoordinatorLayout results in the SlidingUpPanel to be positioned improperly. We need to redraw the panel
@@ -74,17 +73,15 @@ public class MainFragment extends FragmentEx {
 		((BaseActivity) getActivity()).redrawPanel();
 
 		// setup the toolbar / actionbar
-		Toolbar toolbar = view.findViewById(R.id.toolbar);
-		setSupportActionBar(toolbar);
+		setSupportActionBar(fragmentBinding.toolbar);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
 		// indicate that this fragment has an action bar menu
 		setHasOptionsMenu(true);
 
-		subsDrawerLayout = view.findViewById(R.id.subs_drawer_layout);
 		subsDrawerToggle = new ActionBarDrawerToggle(
 				getActivity(),
-				subsDrawerLayout,
+				fragmentBinding.subsDrawerLayout,
 				R.string.app_name,
 				R.string.app_name
 		);
@@ -95,24 +92,24 @@ public class MainFragment extends FragmentEx {
 			actionBar.setHomeButtonEnabled(true);
 		}
 
-		subsListView = view.findViewById(R.id.subs_drawer);
-		SearchView subSearchView = view.findViewById(R.id.subs_search_view);
-		AutoCompleteTextView autoCompleteTextView = subSearchView.findViewById(androidx.appcompat.R.id.search_src_text);
-		int fontColor = ContextCompat.getColor(getContext(), R.color.subs_text);
+		SearchView subSearchView = subsDrawerBinding.subsSearchView;
+		AutoCompleteTextView autoCompleteTextView = subSearchView
+				.findViewById(androidx.appcompat.R.id.search_src_text);
+		int fontColor = ContextCompat.getColor(requireContext(), R.color.subs_text);
 		autoCompleteTextView.setTextColor(fontColor);
 		autoCompleteTextView.setHintTextColor(fontColor);
-		final ImageView searchIcon = subSearchView.findViewById(androidx.appcompat.R.id.search_mag_icon);
+		final ImageView searchIcon = subsDrawerBinding.subsSearchView
+				.findViewById(androidx.appcompat.R.id.search_mag_icon);
 		searchIcon.setColorFilter(fontColor);
 
-
 		if (subsAdapter == null) {
-			subsAdapter = new SubsAdapter(getActivity(), view.findViewById(R.id.subs_drawer_progress_bar));
+			subsAdapter = new SubsAdapter(getActivity(), subsDrawerBinding.subsDrawerProgressBar);
 		}
 
-		subsListView.setLayoutManager(new LinearLayoutManager(getActivity()));
-		subsListView.setAdapter(subsAdapter);
+		subsDrawerBinding.subsDrawerRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+		subsDrawerBinding.subsDrawerRecyclerView.setAdapter(subsAdapter);
 
-		subSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+		subsDrawerBinding.subsSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 			@Override
 			public boolean onQueryTextSubmit(String s) {
 				return true;
@@ -123,13 +120,11 @@ public class MainFragment extends FragmentEx {
 				subsAdapter.filterSubSearch(s);
 				return true;
 			}
-
 		});
 
-		subSearchView.setOnCloseListener(new SearchView.OnCloseListener() {
+		subsDrawerBinding.subsSearchView.setOnCloseListener(new SearchView.OnCloseListener() {
 			@Override
 			public boolean onClose() {
-
 				Logger.i(this, "closed search");
 
 				return false;
@@ -138,18 +133,16 @@ public class MainFragment extends FragmentEx {
 
 		videosPagerAdapter = new SimplePagerAdapter(getChildFragmentManager());
 
-		ViewPager viewPager = view.findViewById(R.id.pager);
 		final int tabCount = videosPagerAdapter.getCount();
-		viewPager.setOffscreenPageLimit(tabCount > 3 ? tabCount - 1 : tabCount);
-		viewPager.setAdapter(videosPagerAdapter);
+		fragmentBinding.pager.setOffscreenPageLimit(tabCount > 3 ? tabCount - 1 : tabCount);
+		fragmentBinding.pager.setAdapter(videosPagerAdapter);
 
-		tabLayout = view.findViewById(R.id.tab_layout);
-		tabLayout.setupWithViewPager(viewPager);
+		fragmentBinding.tabLayout.setupWithViewPager(fragmentBinding.pager);
 
-		tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+		fragmentBinding.tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
 			@Override
 			public void onTabSelected(TabLayout.Tab tab) {
-				viewPager.setCurrentItem(tab.getPosition());
+				fragmentBinding.pager.setCurrentItem(tab.getPosition());
 
 			}
 
@@ -161,8 +154,8 @@ public class MainFragment extends FragmentEx {
 			public void onTabReselected(TabLayout.Tab tab) {
 				//When current tab reselected scroll to the top of the video list
 				VideosGridFragment fragment = videosPagerAdapter.getFragmentFrom(tab, true);
-				if (fragment != null && fragment.gridView != null) {
-					fragment.gridView.smoothScrollToPosition(TOP_LIST_INDEX);
+				if (fragment != null && fragment.gridviewBinding != null) {
+					fragment.gridviewBinding.gridView.smoothScrollToPosition(TOP_LIST_INDEX);
 				} else {
 					Logger.i(MainFragment.this, "onTabReselected: %s - %s failed fragment is %s", tab.getPosition(), tab.getText(), fragment);
 				}
@@ -175,7 +168,7 @@ public class MainFragment extends FragmentEx {
 		// If the app is being opened via the Notification that new videos from Subscribed channels have been found, select the Subscriptions Feed Fragment
 		Bundle args = getArguments();
 		if (args != null && args.getBoolean(SHOULD_SELECTED_FEED_TAB, false)) {
-			viewPager.setCurrentItem(videosPagerAdapter.getIndexOf(SUBSCRIPTIONS_FEED_FRAGMENT));
+			fragmentBinding.pager.setCurrentItem(videosPagerAdapter.getIndexOf(SUBSCRIPTIONS_FEED_FRAGMENT));
 		} else {
 			String defaultTab = sp.getString(getString(R.string.pref_key_default_tab_name), null);
 			String[] tabListValues = getTabListValues();
@@ -193,17 +186,17 @@ public class MainFragment extends FragmentEx {
 				if (!hiddenFragments.contains(tabListValue))
 					shownFragmentList.add(tabListValue);
 			}
-			viewPager.setCurrentItem(shownFragmentList.indexOf(defaultTab));
+			fragmentBinding.pager.setCurrentItem(shownFragmentList.indexOf(defaultTab));
 		}
 
 		// Set the current viewpager fragment as selected, as when the Activity is recreated, the Fragment
 		// won't know that it's selected. When the Feeds fragment is the default tab, this will prevent the
 		// refresh dialog from showing when an automatic refresh happens.
-		videosPagerAdapter.selectTabAtPosition(viewPager.getCurrentItem());
+		videosPagerAdapter.selectTabAtPosition(fragmentBinding.pager.getCurrentItem());
 
 		EventBus.getInstance().registerMainFragment(this);
 
-		return view;
+		return fragmentBinding.getRoot();
 	}
 
 	private static String[] getTabListValues() {
@@ -212,12 +205,11 @@ public class MainFragment extends FragmentEx {
 
 	@Override
 	public void onDestroyView() {
-		subsListView.setAdapter(null);
-		subsListView = null;
-		subsDrawerLayout = null;
 		videosPagerAdapter = null;
+		subsDrawerBinding.subsDrawerRecyclerView.setAdapter(null); // cleanup the reference from the SubsAdapter back to the view
 		subsDrawerToggle = null;
-		tabLayout = null;
+		fragmentBinding = null;
+		subsDrawerBinding = null;
 		super.onDestroyView();
 	}
 
@@ -241,9 +233,9 @@ public class MainFragment extends FragmentEx {
 
 		// when the MainFragment is resumed (e.g. after Preferences is minimized), inform the
 		// current fragment that it is selected.
-		if (videosPagerAdapter != null && tabLayout != null) {
-			Logger.d(this, "MAINFRAGMENT RESUMED " + tabLayout.getSelectedTabPosition());
-			videosPagerAdapter.selectTabAtPosition(tabLayout.getSelectedTabPosition());
+		if (videosPagerAdapter != null && fragmentBinding != null) {
+			Logger.d(this, "MAINFRAGMENT RESUMED " + fragmentBinding.tabLayout.getSelectedTabPosition());
+			videosPagerAdapter.selectTabAtPosition(fragmentBinding.tabLayout.getSelectedTabPosition());
 		}
 		// If the selectedFragment is not the subscriptionsFeedFragment, try out refreshing the subs in the background
 		if (SkyTubeApp.getSettings().isFullRefreshTimely()) {
@@ -460,8 +452,8 @@ public class MainFragment extends FragmentEx {
 	 * Returns true if the subscriptions drawer is opened.
 	 */
 	public boolean isDrawerOpen() {
-		if (subsDrawerLayout != null) {
-			return subsDrawerLayout.isDrawerOpen(GravityCompat.START);
+		if (fragmentBinding != null) {
+			return fragmentBinding.subsDrawerLayout.isDrawerOpen(GravityCompat.START);
 		} else {
 			Logger.e(this, "subsDrawerLayout is null for isDrawerOpen");
 			Thread.dumpStack();
@@ -474,8 +466,8 @@ public class MainFragment extends FragmentEx {
 	 * Close the subscriptions drawer.
 	 */
 	public void closeDrawer() {
-		if (subsDrawerLayout != null) {
-			subsDrawerLayout.closeDrawer(GravityCompat.START);
+		if (fragmentBinding != null) {
+			fragmentBinding.subsDrawerLayout.closeDrawer(GravityCompat.START);
 		} else {
 			Logger.e(this, "subsDrawerLayout is null for closeDrawer");
 			Thread.dumpStack();

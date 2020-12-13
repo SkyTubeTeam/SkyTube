@@ -32,8 +32,6 @@ import androidx.annotation.Nullable;
 import com.afollestad.materialdialogs.MaterialDialog;
 
 
-import butterknife.BindView;
-import butterknife.OnClick;
 import free.rm.skytube.R;
 import free.rm.skytube.app.EventBus;
 import free.rm.skytube.app.FeedUpdateTask;
@@ -42,6 +40,7 @@ import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.FeedUpdaterService;
 import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetSubscriptionVideosTaskListener;
+import free.rm.skytube.databinding.FragmentSubsFeedBinding;
 import free.rm.skytube.gui.businessobjects.SubscriptionsBackupsManager;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 
@@ -62,17 +61,10 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 		}
 	};
 
-	@BindView(R.id.noSubscriptionsText)
-	View noSubscriptionsText;
+	private FragmentSubsFeedBinding binding;
 
 	private final CompositeDisposable compositeDisposable = new CompositeDisposable();
 	private MaterialDialog fetchingChannelInfoDialog;
-
-	@Override
-	protected int getLayoutResource() {
-		return R.layout.fragment_subs_feed;
-	}
-
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -80,24 +72,26 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 
 		subscriptionsBackupsManager = new SubscriptionsBackupsManager(getActivity(), SubscriptionsFeedFragment.this);
 
-
 		EventBus.getInstance().registerSubscriptionListener(this);
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View result = super.onCreateView(inflater, container, savedInstanceState);
+	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		binding = FragmentSubsFeedBinding.inflate(inflater, container, false);
+		binding.importSubscriptionsButton.setOnClickListener(v -> subscriptionsBackupsManager
+				.displayImportSubscriptionsFromYouTubeDialog());
+		binding.importBackupButton.setOnClickListener(v -> subscriptionsBackupsManager.displayFilePicker());
+		swipeRefreshLayout = binding.videosGridview.swipeRefreshLayout;
+		super.onCreateView(inflater, container, savedInstanceState);
 		videoGridAdapter.setVideoGridUpdated(this::setupUiAccordingToNumOfSubbedChannels);
-
 		// get the previously published videos currently cached in the database
 		videoGridAdapter.setVideoCategory(VideoCategory.SUBSCRIPTIONS_FEED_VIDEOS);
-		return result;
+		return binding.getRoot();
 	}
 
 	@Override
 	public void onResume() {
-
-		getActivity().registerReceiver(feedUpdaterReceiver, new IntentFilter(FeedUpdaterService.NEW_SUBSCRIPTION_VIDEOS_FOUND));
+		requireActivity().registerReceiver(feedUpdaterReceiver, new IntentFilter(FeedUpdaterService.NEW_SUBSCRIPTION_VIDEOS_FOUND));
 
 		super.onResume();
 
@@ -116,12 +110,11 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 		}
 	}
 
-
 	@Override
 	public synchronized void onPause() {
 		hideFetchingVideosDialog();
 		super.onPause();
-		getActivity().unregisterReceiver(feedUpdaterReceiver);
+		requireActivity().unregisterReceiver(feedUpdaterReceiver);
 	}
 
 	@Override
@@ -133,6 +126,11 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 		super.onDestroy();
 	}
 
+    @Override
+    public void onDestroyView() {
+        binding = null;
+        super.onDestroyView();
+    }
 
 	@Override
 	public void onRefresh() {
@@ -194,7 +192,6 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 		return VideoCategory.SUBSCRIPTIONS_FEED_VIDEOS;
 	}
 
-
 	@Override
 	public String getFragmentName() {
 		return SkyTubeApp.getStr(R.string.feed);
@@ -208,16 +205,6 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 	@Override
 	public String getBundleKey() {
 		return MainFragment.SUBSCRIPTIONS_FEED_FRAGMENT;
-	}
-
-	@OnClick(R.id.importSubscriptionsButton)
-	public void importSubscriptions(View v) {
-		subscriptionsBackupsManager.displayImportSubscriptionsFromYouTubeDialog();
-	}
-
-	@OnClick(R.id.importBackupButton)
-	public void importBackup(View v) {
-		subscriptionsBackupsManager.displayFilePicker();
 	}
 
 	@Override
@@ -234,13 +221,14 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 		if (hasChannels) {
 			if (swipeRefreshLayout.getVisibility() != View.VISIBLE) {
 				swipeRefreshLayout.setVisibility(View.VISIBLE);
-				noSubscriptionsText.setVisibility(View.GONE);
+				binding.noSubscriptionsText.setVisibility(View.GONE);
 			}
 		} else {
 			swipeRefreshLayout.setVisibility(View.GONE);
-			noSubscriptionsText.setVisibility(View.VISIBLE);
+			binding.noSubscriptionsText.setVisibility(View.VISIBLE);
 		}
 	}
+
 	private synchronized void hideFetchingVideosDialog() {
 		if (fetchingChannelInfoDialog != null) {
 			fetchingChannelInfoDialog.dismiss();

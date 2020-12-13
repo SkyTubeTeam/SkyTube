@@ -5,12 +5,9 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.SeekBar;
-import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.bumptech.glide.Glide;
@@ -19,13 +16,11 @@ import com.google.android.gms.cast.MediaInfo;
 import com.google.android.gms.cast.MediaStatus;
 import com.google.android.gms.cast.framework.media.RemoteMediaClient;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.db.DatabaseTasks;
-import free.rm.skytube.gui.businessobjects.RuntimeView;
+import free.rm.skytube.databinding.FragmentChromecastControllerBinding;
+import free.rm.skytube.databinding.VideoDescriptionBinding;
 import free.rm.skytube.gui.businessobjects.views.Linker;
-import free.rm.skytube.gui.businessobjects.views.SubscribeButton;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 
 /**
@@ -35,66 +30,37 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable;
 public class ChromecastControllerFragment extends ChromecastBaseControllerFragment implements SeekBar.OnSeekBarChangeListener {
 	public static final String CHROMECAST_CONTROLLER_FRAGMENT = "free.rm.skytube.CHROMECAST_CONTROLLER_FRAGMENT";
 
-	@BindView(R.id.currentRuntime)
-	RuntimeView currentPositionTextView;
-	@BindView(R.id.duration)
-	RuntimeView durationTextView;
-	@BindView(R.id.videoImage)
-	ImageView videoImage;
-	@BindView(R.id.videoDescription)
-	View videoDescriptionInclude;
-
-	VideoDescriptionLayout videoDescriptionLayout;
+	private FragmentChromecastControllerBinding fragmentBinding;
+	private VideoDescriptionBinding videoDescriptionBinding;
 
 	private final CompositeDisposable compositeDisposable = new CompositeDisposable();
 
-	static class VideoDescriptionLayout {
-		@BindView(R.id.video_desc_linearlayout)
-		LinearLayout linearLayout;
-		@BindView(R.id.video_desc_title)
-		TextView title;
-		@BindView(R.id.video_desc_channel_thumbnail_image_view)
-		ImageView thumbnail;
-		@BindView(R.id.video_desc_channel)
-		TextView channel;
-		@BindView(R.id.video_desc_subscribe_button)
-		SubscribeButton subscribeButton;
-		@BindView(R.id.video_desc_views)
-		TextView views;
-		@BindView(R.id.video_desc_likes_bar)
-		ProgressBar likesBar;
-		@BindView(R.id.video_desc_likes)
-		TextView likes;
-		@BindView(R.id.video_desc_dislikes)
-		TextView dislikes;
-		@BindView(R.id.video_desc_ratings_disabled)
-		TextView ratingsDisabled;
-		@BindView(R.id.video_desc_publish_date)
-		TextView publishDate;
-		@BindView(R.id.video_desc_description)
-		TextView videoDescription;
-	}
-
 	@Nullable
 	@Override
-	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_chromecast_controller, container);
-		ButterKnife.bind(this, view);
-		videoDescriptionLayout = new VideoDescriptionLayout();
-		ButterKnife.bind(videoDescriptionLayout, videoDescriptionInclude);
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		fragmentBinding = FragmentChromecastControllerBinding.inflate(inflater, container, false);
+		videoDescriptionBinding = fragmentBinding.videoDescription;
+
+		chromecastPlaybackProgressBar = fragmentBinding.chromecastPlaybackProgressBar;
+		playButton = fragmentBinding.playButton;
+		pauseButton = fragmentBinding.pauseButton;
+		forwardButton = fragmentBinding.forwardButton;
+		rewindButton = fragmentBinding.rewindButton;
+		stopButton = fragmentBinding.stopButton;
+		bufferingSpinner = fragmentBinding.bufferingSpinner;
 
 		// Set the background color of the video description layout since by default it doesn't match the background color of the Chromecast controller
 		TypedValue typedValue = new TypedValue();
 		getContext().getTheme().resolveAttribute(R.attr.colorPrimary, typedValue, true);
-		videoDescriptionLayout.linearLayout.setBackgroundResource(typedValue.resourceId);
+		videoDescriptionBinding.videoDescLinearlayout.setBackgroundResource(typedValue.resourceId);
 
-		Linker.configure(videoDescriptionLayout.videoDescription);
+		Linker.configure(videoDescriptionBinding.videoDescDescription);
 
-		((SeekBar)chromecastPlaybackProgressBar).setOnSeekBarChangeListener(this);
+		fragmentBinding.chromecastPlaybackProgressBar.setOnSeekBarChangeListener(this);
 		if(savedInstanceState != null) {
 			setupDescription();
 		}
-		return view;
+		return fragmentBinding.getRoot();
 	}
 
 	@Override
@@ -109,72 +75,69 @@ public class ChromecastControllerFragment extends ChromecastBaseControllerFragme
 		if(video != null) {
 			setupDescription();
 		}
-		durationTextView.setMilliseconds(chromecastPlaybackProgressBar.getMax());
-		if(media.getMetadata().getImages().size() > 0) {
-			Glide.with(getContext())
-					.load(media.getMetadata().getImages().get(0).getUrl().toString())
-					.apply(new RequestOptions().placeholder(R.drawable.thumbnail_default))
-					.into(videoImage);
+		fragmentBinding.duration.setMilliseconds(chromecastPlaybackProgressBar.getMax());
+		if(!media.getMetadata().getImages().isEmpty()) {
+			Picasso.get()
+							.load(media.getMetadata().getImages().get(0).getUrl().toString())
+							.placeholder(R.drawable.thumbnail_default)
+							.into(fragmentBinding.videoImage);
 		}
 	}
 
 	private void setupDescription() {
 		if(video == null)
 			return;
-		Linker.setTextAndLinkify(videoDescriptionLayout.videoDescription, video.getDescription());
+		Linker.setTextAndLinkify(videoDescriptionBinding.videoDescDescription, video.getDescription());
 
-		videoDescriptionLayout.title.setText(video.getTitle());
-		videoDescriptionLayout.channel.setText(video.getChannelName());
-		videoDescriptionLayout.publishDate.setText(video.getPublishDatePretty());
-		videoDescriptionLayout.views.setText(video.getViewsCount());
+		videoDescriptionBinding.videoDescTitle.setText(video.getTitle());
+		videoDescriptionBinding.videoDescChannel.setText(video.getChannelName());
+		videoDescriptionBinding.videoDescPublishDate.setText(video.getPublishDatePretty());
+		videoDescriptionBinding.videoDescViews.setText(video.getViewsCount());
 		if (video.isThumbsUpPercentageSet()) {
-			videoDescriptionLayout.likesBar.setProgress(video.getThumbsUpPercentage());
-			videoDescriptionLayout.likes.setText(video.getLikeCount());
-			videoDescriptionLayout.dislikes.setText(video.getDislikeCount());
+			videoDescriptionBinding.videoDescLikesBar.setProgress(video.getThumbsUpPercentage());
+			videoDescriptionBinding.videoDescLikes.setText(video.getLikeCount());
+			videoDescriptionBinding.videoDescDislikes.setText(video.getDislikeCount());
 		} else {
-			videoDescriptionLayout.likesBar.setVisibility(View.INVISIBLE);
-			videoDescriptionLayout.likes.setVisibility(View.INVISIBLE);
-			videoDescriptionLayout.dislikes.setVisibility(View.INVISIBLE);
-			videoDescriptionLayout.ratingsDisabled.setVisibility(View.VISIBLE);
+			videoDescriptionBinding.videoDescLikesBar.setVisibility(View.INVISIBLE);
+			videoDescriptionBinding.videoDescLikes.setVisibility(View.INVISIBLE);
+			videoDescriptionBinding.videoDescDislikes.setVisibility(View.INVISIBLE);
+			videoDescriptionBinding.videoDescRatingsDisabled.setVisibility(View.VISIBLE);
 		}
 
 		compositeDisposable.add(
 				DatabaseTasks.getChannelInfo(requireContext(), video.getChannelId(), false)
 						.subscribe(youTubeChannel -> {
 							if (youTubeChannel.isUserSubscribed())
-								videoDescriptionLayout.subscribeButton.setUnsubscribeState();
+								videoDescriptionBinding.videoDescSubscribeButton.setUnsubscribeState();
 							else
-								videoDescriptionLayout.subscribeButton.setSubscribeState();
-							videoDescriptionLayout.subscribeButton.setChannel(youTubeChannel);
+								videoDescriptionBinding.videoDescSubscribeButton.setSubscribeState();
+							videoDescriptionBinding.videoDescSubscribeButton.setChannel(youTubeChannel);
 
 							Glide.with(requireContext())
 									.load(youTubeChannel.getThumbnailUrl())
 									.apply(new RequestOptions().placeholder(R.drawable.channel_thumbnail_default))
-									.into(videoDescriptionLayout.thumbnail);
+									.into(videoDescriptionBinding.videoDescChannelThumbnailImageView);
 						})
 		);
 	}
 
 	@Override
 	public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-		if(fromUser) {
-		} else {
-			if(durationTextView.getMilliseconds() != seekBar.getMax())
-				durationTextView.setMilliseconds(seekBar.getMax());
-		}
-		currentPositionTextView.setMilliseconds(progress);
+		if (!fromUser && fragmentBinding.duration.getMilliseconds() != seekBar.getMax())
+			fragmentBinding.duration.setMilliseconds(seekBar.getMax());
+		fragmentBinding.currentRuntime.setMilliseconds(progress);
 	}
 
 	@Override
 	public void setProgress(int progress) {
 		super.setProgress(progress);
-		currentPositionTextView.setMilliseconds(progress);
+		fragmentBinding.currentRuntime.setMilliseconds(progress);
 	}
 
 	@Override
 	public void setDuration(int duration) {
 		super.setDuration(duration);
-		this.durationTextView.setMilliseconds(duration);
+		fragmentBinding.duration.setMilliseconds(duration);
 	}
 
 	@Override
