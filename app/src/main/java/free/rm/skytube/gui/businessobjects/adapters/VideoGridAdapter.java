@@ -36,6 +36,7 @@ import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetYouTubeVideosTask;
 import free.rm.skytube.businessobjects.db.PlaybackStatusDb;
 import free.rm.skytube.businessobjects.interfaces.VideoPlayStatusUpdateListener;
+import free.rm.skytube.databinding.VideoCellBinding;
 import free.rm.skytube.gui.businessobjects.MainActivityListener;
 
 /**
@@ -159,8 +160,9 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<CardData, GridViewHo
 	@Override
 	public GridViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 		setContext(parent.getContext());
-		View v = LayoutInflater.from(getContext()).inflate(R.layout.video_cell, parent, false);
-		return new GridViewHolder(v, listener, showChannelInfo);
+		final VideoCellBinding binding = VideoCellBinding.inflate(LayoutInflater.from(getContext()),
+				parent, false);
+		return new GridViewHolder(binding, listener, showChannelInfo);
 	}
 
 	/**
