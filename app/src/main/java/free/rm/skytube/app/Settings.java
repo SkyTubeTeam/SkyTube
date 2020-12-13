@@ -27,6 +27,7 @@ import java.util.Set;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.enums.Policy;
+import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.VideoStream.VideoResolution;
 
 /**
@@ -39,6 +40,26 @@ public class Settings {
 
     Settings(SkyTubeApp app) {
         this.app = app;
+    }
+
+
+    void migrate() {
+        SharedPreferences sharedPreferences = getSharedPreferences();
+        migrate(sharedPreferences, "pref_preferred_resolution", R.string.pref_key_maximum_res);
+        migrate(sharedPreferences, "pref_preferred_resolution_mobile", R.string.pref_key_maximum_res_mobile);
+        migrate(sharedPreferences, "pref_key_video_preferred_resolution", R.string.pref_key_video_download_maximum_resolution);
+    }
+
+    private void migrate(SharedPreferences sharedPreferences, String oldKey, @StringRes int newKey) {
+        String oldValue = sharedPreferences.getString(oldKey, null);
+        if (oldValue != null) {
+            String newKeyStr = app.getString(newKey);
+            Logger.i(this, "Migrate %s : %s into %s", oldKey, oldValue, newKeyStr);
+            final SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString(newKeyStr, oldValue);
+            editor.remove(oldKey);
+            editor.commit();
+        }
     }
 
     /**
@@ -71,19 +92,23 @@ public class Settings {
      * @return Desired {@link StreamSelectionPolicy}.
      */
     public StreamSelectionPolicy getDesiredVideoResolution(boolean forDownload, boolean onMobile) {
-        String key = app.getStr(forDownload ? R.string.pref_key_video_download_preferred_resolution : R.string.pref_key_preferred_res);
         SharedPreferences prefs = getSharedPreferences();
-        String resIdValue = prefs.getString(key, Integer.toString(VideoResolution.DEFAULT_VIDEO_RES_ID));
+        String maxKey = app.getStr(forDownload ? R.string.pref_key_video_download_maximum_resolution : R.string.pref_key_maximum_res);
+        String maxResIdValue = prefs.getString(maxKey, Integer.toString(VideoResolution.DEFAULT_VIDEO_RES_ID));
+
+        String minKey = app.getStr(forDownload ? R.string.pref_key_video_download_minimum_resolution : R.string.pref_key_minimum_res);
+        String minResIdValue = prefs.getString(minKey, null);
 
         // if on mobile network use the preferred resolution under mobile network if defined
         if (onMobile) {
-            String mobileKey = app.getStr(R.string.pref_key_preferred_res_mobile);
             // default res for mobile network = that of wifi
-            resIdValue = prefs.getString(mobileKey, resIdValue);
+            maxResIdValue = prefs.getString(app.getStr(R.string.pref_key_maximum_res_mobile), maxResIdValue);
+            minResIdValue = prefs.getString(app.getStr(R.string.pref_key_maximum_res_mobile), minResIdValue);
         }
-        VideoResolution maxResolution = VideoResolution.videoResIdToVideoResolution(resIdValue);
+        VideoResolution maxResolution = VideoResolution.videoResIdToVideoResolution(maxResIdValue);
+        VideoResolution minResolution = VideoResolution.videoResIdToVideoResolution(minResIdValue);
 
-        return new StreamSelectionPolicy(!forDownload, maxResolution, null);
+        return new StreamSelectionPolicy(!forDownload, maxResolution, minResolution);
     }
 
     public StreamSelectionPolicy getDesiredVideoResolution(boolean forDownload) {

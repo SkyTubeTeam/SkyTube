@@ -105,6 +105,9 @@ public enum VideoResolution {
 	 * @return {@link VideoResolution}
 	 */
 	public static VideoResolution videoResIdToVideoResolution(String resIdString) {
+		if (resIdString == null) {
+			return VideoResolution.RES_UNKNOWN;
+		}
 		VideoResolution[] resList = VideoResolution.values();
 		int resId = Integer.parseInt(resIdString);
 

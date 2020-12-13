@@ -3,9 +3,13 @@
     <string name="preferences">Preferences</string>
     <string name="key_preferences">preferences</string>
     <string name="pref_video_player_category">Video Player</string>
-    <string name="pref_title_preferred_res">Preferred Resolution</string>
-    <string name="pref_key_preferred_res" translatable="false">pref_preferred_resolution</string>
-    <string name="pref_summary_preferred_res">Select your preferred resolution:  %s</string>
+    <string name="pref_key_maximum_res" translatable="false">pref_maximum_resolution</string>
+    <string name="pref_title_maximum_res">Maximum Resolution</string>
+    <string name="pref_summary_maximum_res">Select your maximum resolution:  %s</string>
+    <string name="pref_key_minimum_res" translatable="false">pref_minimum_resolution</string>
+    <string name="pref_title_minimum_res">Minimum Resolution</string>
+    <string name="pref_summary_minimum_res">Select your minimum resolution:  %s</string>
+
     <string name="pref_key_choose_player" translatable="false">pref_key_choose_player</string>
     <string name="pref_title_choose_player">Video Player</string>
     <string name="pref_summary_choose_player">Video Player to be used:  %s</string>
@@ -24,9 +28,14 @@
         <!-- this should remain the last item -->
     </string-array>
     <string name="pref_category_mobile_network">Mobile Network</string>
-    <string name="pref_title_preferred_res_mobile">Preferred Resolution for mobile network</string>
-    <string name="pref_key_preferred_res_mobile" translatable="false">pref_preferred_resolution_mobile</string>
-    <string name="pref_summary_preferred_res_mobile">Select your preferred resolution when streaming via a mobile network (such as 4G):  %s</string>
+
+    <string name="pref_title_minimum_res_mobile">Minimum Resolution for mobile network</string>
+    <string name="pref_key_minimum_res_mobile" translatable="false">pref_minimum_resolution_mobile</string>
+    <string name="pref_summary_minimum_res_mobile">Select your minimum resolution when streaming via a mobile network (such as 4G):  %s</string>
+    <string name="pref_title_maximum_res_mobile">Maximum Resolution for mobile network</string>
+    <string name="pref_key_maximum_res_mobile" translatable="false">pref_maximum_resolution_mobile</string>
+    <string name="pref_summary_maximum_res_mobile">Select your maximum resolution when streaming via a mobile network (such as 4G):  %s</string>
+
     <string name="pref_key_mobile_network_usage_policy" translatable="false">pref_key_mobile_network_usage_policy</string>
     <string name="pref_title_mobile_network_usage">Mobile Network Usage</string>
     <string name="pref_summary_mobile_network_usage">What to do, if you are using mobile network (such as 4G) for downloading, watching videos: %s</string>
@@ -554,9 +563,12 @@
     <string name="pref_popup_title_video_download_folder">Choose Folder</string>
     <string name="pref_title_video_download_folder">Video Download Folder</string>
     <string name="pref_summary_video_download_folder">Videos are downloaded into this folder: %s</string>
-    <string name="pref_key_video_download_preferred_resolution" translatable="false">pref_key_video_preferred_resolution</string>
-    <string name="pref_video_download_preferred_resolution_title">Preferred Video Download Resolution</string>
-    <string name="pref_video_download_preferred_resolution_summary">Video downloads will prefer this resolution: %s</string>
+    <string name="pref_key_video_download_maximum_resolution" translatable="false">pref_key_video_maximum_resolution</string>
+    <string name="pref_video_download_maximum_resolution_title">Maximum Video Download Resolution</string>
+    <string name="pref_video_download_maximum_resolution_summary">Video downloads will be at most in this resolution: %s</string>
+    <string name="pref_key_video_download_minimum_resolution" translatable="false">pref_key_video_minimum_resolution</string>
+    <string name="pref_video_download_minimum_resolution_title">Minimum Video Download Resolution</string>
+    <string name="pref_video_download_minimum_resolution_summary">Video downloads will be at least in this resolution: %s</string>
     <!--
         VIDEO BLOCKER
     -->

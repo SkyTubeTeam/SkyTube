@@ -34,8 +34,15 @@
             />
 
         <ListPreference
-            app:key="@string/pref_key_video_download_preferred_resolution"
-            app:title="@string/pref_video_download_preferred_resolution_title" />
+            app:key="@string/pref_key_video_download_maximum_resolution"
+            app:title="@string/pref_video_download_maximum_resolution_title"
+            app:summary="@string/pref_video_download_maximum_resolution_summary"/>
+
+        <ListPreference
+            app:key="@string/pref_key_video_download_minimum_resolution"
+            app:title="@string/pref_video_download_minimum_resolution_title"
+            app:summary="@string/pref_video_download_minimum_resolution_summary"
+            />
 
     </PreferenceCategory>
 
@@ -47,9 +54,14 @@
         app:title="@string/pref_category_mobile_network">
 
         <ListPreference
-            app:key="@string/pref_key_preferred_res_mobile"
-            app:title="@string/pref_title_preferred_res_mobile"
-            app:summary="@string/pref_summary_preferred_res_mobile"/>
+            app:key="@string/pref_key_maximum_res_mobile"
+            app:title="@string/pref_title_maximum_res_mobile"
+            app:summary="@string/pref_summary_maximum_res_mobile"/>
+
+        <ListPreference
+            app:key="@string/pref_key_minimum_res_mobile"
+            app:title="@string/pref_title_minimum_res_mobile"
+            app:summary="@string/pref_summary_minimum_res_mobile"/>
 
         <ListPreference
             app:entries="@array/pref_mobile_network_usage"

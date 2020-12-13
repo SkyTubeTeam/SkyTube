@@ -87,6 +87,7 @@ public class SkyTubeApp extends MultiDexApplication {
 	public void onCreate() {
 		super.onCreate();
 		this.settings = new Settings(this);
+		this.settings.migrate();
 		this.names = new FragmentNames(this);
 		skyTubeApp = this;
 		initChannels(this);
