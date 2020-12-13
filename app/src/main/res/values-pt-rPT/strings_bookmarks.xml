@@ -10,8 +10,8 @@
     <string name="no_bookmarked_videos_text">Ainda não adicionou qualquer vídeo aos marcadores.
 \n
 \nAssim que o fizer, serão mostrados aqui.</string>
-    <string name="bookmark_share_invalid_url">Apenas os URLs válidos do YouTube podem ser marcados.</string>
-    <string name="bookmark_share_label">Marca do SkyTube</string>
-    <string name="video_was_not_bookmarked">Vídeo não foi marcado</string>
-    <string name="video_already_bookmarked">Vídeo já marcado</string>
+    <string name="bookmark_share_invalid_url">Apenas pode adicionar aos marcadores os URL válidos do YouTube.</string>
+    <string name="bookmark_share_label">Marcador do SkyTube</string>
+    <string name="video_was_not_bookmarked">Vídeo não existe nos marcadores</string>
+    <string name="video_already_bookmarked">Vídeo já existe nos marcadores</string>
 </resources>

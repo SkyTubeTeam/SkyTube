@@ -6,7 +6,7 @@
     <string name="ok">OK</string>
     <string name="search_videos">Szukaj filmów</string>
     <string name="launch_offical_player_error">Wystąpił błąd podczas uruchamiania oficjalnego odtwarzacza YouTube od Google. Upewnij się, że jest on zainstalowany na twoim urządzeniu.</string>
-    <string name="LIVE">LIVE</string>
+    <string name="LIVE">Na żywo</string>
     <string name="featured">Polecane</string>
     <string name="most_popular">Popularne</string>
     <string name="video">Film</string>
