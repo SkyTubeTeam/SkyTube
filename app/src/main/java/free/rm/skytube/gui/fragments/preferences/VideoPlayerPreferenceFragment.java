@@ -39,7 +39,8 @@ public class VideoPlayerPreferenceFragment extends PreferenceFragmentCompat {
 		addPreferencesFromResource(R.xml.preference_video_player);
 
 		// set up the list of available video resolutions
-		VideoResolution.setupListPreferences(findPreference(getString(R.string.pref_key_preferred_res)));
+		VideoResolution.setupListPreferences(findPreference(getString(R.string.pref_key_maximum_res)));
+		VideoResolution.setupListPreferences(findPreference(getString(R.string.pref_key_minimum_res)));
 
 		// if we are running an OSS version, then remove the last option (i.e. the "official" player
 		// option)
