@@ -21,37 +21,34 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
+import free.rm.skytube.databinding.FragmentChannelAboutBinding;
 import free.rm.skytube.gui.businessobjects.fragments.TabFragment;
 
 /**
  * A fragment that displays the channel's description (about section).
  */
 public class ChannelAboutFragment extends TabFragment {
-
 	@Nullable
 	@Override
-	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_channel_about, container, false);
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		final FragmentChannelAboutBinding binding = FragmentChannelAboutBinding.inflate(inflater, container, false);
 
 		// set the about text
-		YouTubeChannel channel = (YouTubeChannel)getArguments().getSerializable(ChannelBrowserFragment.CHANNEL_OBJ);
-		TextView aboutTextView = view.findViewById(R.id.about_text_view);
-		aboutTextView.setText(channel.getDescription());
+		YouTubeChannel channel = (YouTubeChannel) requireArguments().getSerializable(ChannelBrowserFragment.CHANNEL_OBJ);
+		binding.aboutTextView.setText(channel.getDescription());
 
-		return view;
+		return binding.getRoot();
 	}
-
 
 	@Override
 	public String getFragmentName() {
 		return SkyTubeApp.getStr(R.string.about);
 	}
-
 }
