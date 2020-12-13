@@ -19,7 +19,7 @@
     <string name="copy_url">Copiar URL</string>
     <string name="url_copied_to_clipboard">URL copiado para a área de transferência.</string>
     <string name="error_get_comments">Ocorreu um erro ao tentar obter os comentários.</string>
-    <string name="no_video_comments">Este vídeo ou não tem comentários, ou eles estão desligados.</string>
+    <string name="no_video_comments">Este vídeo não tem comentários ou então estão desativados.</string>
     <string name="view_replies">Ver respostas</string>
     <string name="hide_replies">Ocultar respostas</string>
     <string name="enter_video_url">Digitar URL do vídeo</string>
@@ -31,11 +31,11 @@
     <string name="should_resume">Deseja continuar a reprodução do local em que parou?</string>
     <string name="resume">Continuar</string>
     <string name="mobile_data">Dados móveis</string>
-    <string name="warning_mobile_network_play">O aparelho não está ligado a uma rede Wi-Fi. Para evitar possíveis taxas de uso de dados, é recomendável conectar-se a uma rede Wi-Fi. Reproduzir vídeo de qualquer maneira\?</string>
-    <string name="warning_mobile_network_disable">Não voltar a perguntar.</string>
+    <string name="warning_mobile_network_play">O seu dispositivo não está ligado a uma rede Wi-Fi. Para evitar possíveis taxas de utilização de dados, recomenda-se a ligação a uma rede Wi-Fi. Reproduzir vídeo de qualquer forma\?</string>
+    <string name="warning_mobile_network_disable">Não perguntar novamente.</string>
     <string name="play_video">Reproduzir vídeo</string>
     <string name="error_get_comments_no_network">O acesso à rede é necessário para obter comentários.</string>
-    <string name="mobile_data_blocked_by_policy">Descarregue bloqueado, porque o seu aparelho não está ligado a uma rede Wi-Fi.</string>
-    <string name="error_video_parse_error">Incapaz de começar a reproduzir o vídeo, a mensagem de erro é: <br/> <br/> %s.</string>
-    <string name="error_downloaded_file_is_corrupted">O vídeo descarregado parece <b>corrupto</b> - a mensagem de erro é: <br/><br/>%s.<br/><br/> Deseja <b>apagar</b> o ficheiro\?</string>
+    <string name="mobile_data_blocked_by_policy">Descarga bloqueada porque o seu dispositivo não está ligado a uma rede Wi-Fi.</string>
+    <string name="error_video_parse_error">Não foi possível reproduzir o vídeo, a mensagem de erro é: <br/>.<br/>.%s.</string>
+    <string name="error_downloaded_file_is_corrupted">O vídeo descarregado parece estar <b>danificado</b> - a mensagem de erro é: <br/><br/>%s.<br/><br/> Deseja <b>apagar</b> o ficheiro\?</string>
 </resources>

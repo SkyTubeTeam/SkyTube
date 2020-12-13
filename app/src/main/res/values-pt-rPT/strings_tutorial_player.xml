@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="tutorial_slide_1">Deslize à esquerda para ver os comentários.</string>
-    <string name="tutorial_slide_6">Duplo toque para reproduzir ou parar um vídeo.</string>
+    <string name="tutorial_slide_6">Dois toques para reproduzir ou parar um vídeo.</string>
     <string name="next">"Seguinte "</string>
     <string name="done">Terminado</string>
     <string name="skip">Ignorar</string>

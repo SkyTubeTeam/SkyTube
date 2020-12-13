@@ -1,16 +1,16 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="downloads">Downloads</string>
-	<string name="download_video">Download Video</string>
-	<string name="starting_video_download">Pobieranie \'%s\'…</string>
-	<string name="video_download_stream_error">Nie można pobrać \'%s\'.</string>
-	<string name="delete_download">Delete Download</string>
-	<string name="video_downloaded">\'%s\' pobrane.</string>
-	<string name="no_downloaded_videos_text">Nie pobrano jeszcze żadnych filmów.
+    <string name="downloads">Pobrane</string>
+    <string name="download_video">Pobierz film</string>
+    <string name="starting_video_download">Pobieranie \'%s\'…</string>
+    <string name="video_download_stream_error">Nie można pobrać \'%s\'.</string>
+    <string name="delete_download">Usuń pobrany film</string>
+    <string name="video_downloaded">\'%s\' pobrane.</string>
+    <string name="no_downloaded_videos_text">Nie pobrano jeszcze żadnych filmów.
 \n
 \nGdy to się zmieni, pojawią się tutaj.</string>
-	<string name="playing_video_file_missing">Nie znaleziono pobrania dla tego filmu. Odtwarzanie zdalne.</string>
-	<string name="external_storage_not_available">Nie można pobrać pliku, ponieważ zewnętrzna pamięć jest niedostępna.</string>
-<string name="download">Pobierz</string>
-	<string name="warning_mobile_network_download">Twoje urządzenie nie jest połączone z siecią Wi-Fi. Aby uniknąć potencjalnych dodatkowych zmian wykorzystania danych, zaleca się połączenie z siecią Wi-Fi. Pobierz wideo mimo to\?</string>
-	</resources>
+    <string name="playing_video_file_missing">Nie znaleziono pobrania dla tego filmu. Odtwarzanie zdalne.</string>
+    <string name="external_storage_not_available">Nie można pobrać pliku, ponieważ zewnętrzna pamięć jest niedostępna.</string>
+    <string name="download">Pobierz</string>
+    <string name="warning_mobile_network_download">Twoje urządzenie nie jest połączone z siecią Wi-Fi. Aby uniknąć potencjalnych dodatkowych opłat za wykorzystanie danych, zaleca się połączenie z siecią Wi-Fi. Pobierz wideo mimo to\?</string>
+</resources>
