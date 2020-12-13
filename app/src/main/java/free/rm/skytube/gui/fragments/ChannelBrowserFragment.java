@@ -21,11 +21,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
@@ -40,17 +38,16 @@ import java.util.List;
 import java.util.Objects;
 
 import free.rm.skytube.R;
-import free.rm.skytube.app.Utils;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannelInterface;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.db.DatabaseTasks;
+import free.rm.skytube.databinding.FragmentChannelBrowserBinding;
 import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
 import free.rm.skytube.gui.businessobjects.fragments.FragmentEx;
 import free.rm.skytube.gui.businessobjects.fragments.TabFragment;
-import free.rm.skytube.gui.businessobjects.views.SubscribeButton;
 import io.reactivex.rxjava3.disposables.Disposable;
 
 /**
@@ -70,11 +67,8 @@ public class ChannelBrowserFragment extends FragmentEx {
 	public static final String FRAGMENT_CHANNEL_VIDEOS = "ChannelBrowserFragment.FRAGMENT_CHANNEL_VIDEOS";
 	public static final String FRAGMENT_CHANNEL_PLAYLISTS = "ChannelBrowserFragment.FRAGMENT_CHANNEL_PLAYLISTS";
 
-	private ImageView 			channelThumbnailImage = null;
-	private ImageView			channelBannerImage = null;
-	private TextView			channelSubscribersTextView = null;
-	private SubscribeButton		channelSubscribeButton = null;
-	private Disposable          disposable = null;
+	private FragmentChannelBrowserBinding binding;
+	private Disposable disposable;
 
 	public static final String CHANNEL_OBJ = "ChannelBrowserFragment.ChannelObj";
 	public static final String CHANNEL_ID  = "ChannelBrowserFragment.ChannelID";
@@ -85,28 +79,22 @@ public class ChannelBrowserFragment extends FragmentEx {
 	private ChannelAboutFragment        channelAboutFragment;
 
 	private ChannelPagerAdapter channelPagerAdapter;
-	private ViewPager viewPager;
-
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
+	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		if(savedInstanceState != null) {
 			channelVideosFragment = (ChannelVideosFragment)getChildFragmentManager().getFragment(savedInstanceState, FRAGMENT_CHANNEL_VIDEOS);
 			channelPlaylistsFragment = (ChannelPlaylistsFragment)getChildFragmentManager().getFragment(savedInstanceState, FRAGMENT_CHANNEL_PLAYLISTS);
 		}
 
 		// inflate the layout for this fragment
-		View fragment = inflater.inflate(R.layout.fragment_channel_browser, container, false);
-		viewPager = fragment.findViewById(R.id.pager);
+		binding = FragmentChannelBrowserBinding.inflate(inflater, container, false);
 
-		TabLayout tabLayout = fragment.findViewById(R.id.tab_layout);
-		tabLayout.setupWithViewPager(viewPager);
-
-		tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+		binding.tabLayout.setupWithViewPager(binding.pager);
+		binding.tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
 			@Override
 			public void onTabSelected(TabLayout.Tab tab) {
-				viewPager.setCurrentItem(tab.getPosition());
+				binding.pager.setCurrentItem(tab.getPosition());
 			}
 
 			@Override
@@ -118,14 +106,14 @@ public class ChannelBrowserFragment extends FragmentEx {
 			}
 		});
 
-		viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+		binding.pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 			@Override
 			public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 			}
 
 			@Override
 			public void onPageSelected(int position) {
-				if (channelPagerAdapter !=null) {
+				if (channelPagerAdapter != null) {
 					channelPagerAdapter.getItem(position).onFragmentSelected();
 				}
 			}
@@ -136,16 +124,11 @@ public class ChannelBrowserFragment extends FragmentEx {
 		});
 
 		// setup the toolbar/actionbar
-		Toolbar toolbar = fragment.findViewById(R.id.toolbar);
-		setSupportActionBar(toolbar);
+		setSupportActionBar(binding.toolbar);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-		channelBannerImage = fragment.findViewById(R.id.channel_banner_image_view);
-		channelThumbnailImage = fragment.findViewById(R.id.channel_thumbnail_image_view);
-		channelSubscribersTextView = fragment.findViewById(R.id.channel_subs_text_view);
-		channelSubscribeButton = fragment.findViewById(R.id.channel_subscribe_button);
-		channelSubscribeButton.setFetchChannelVideosOnSubscribe(false);
-		channelSubscribeButton.setOnClickListener(v -> {
+		binding.channelSubscribeButton.setFetchChannelVideosOnSubscribe(false);
+		binding.channelSubscribeButton.setOnClickListener(v -> {
 			// If we're subscribing to the channel, save the list of videos we have into the channel (to be stored in the database by SubscribeToChannelTask)
 			if(channel != null && !channel.isUserSubscribed()) {
 				Iterator<CardData> iterator = channelVideosFragment.getVideoGridAdapter().getIterator();
@@ -160,7 +143,7 @@ public class ChannelBrowserFragment extends FragmentEx {
 
 		getChannelParameters();
 
-		return fragment;
+		return binding.getRoot();
 	}
 
 	@Override
@@ -168,7 +151,8 @@ public class ChannelBrowserFragment extends FragmentEx {
 		if (disposable != null) {
 			disposable.dispose();
 		}
-		channelSubscribeButton.clearBackgroundTasks();
+		binding.channelSubscribeButton.clearBackgroundTasks();
+		binding = null;
 		super.onDestroy();
 	}
 
@@ -244,28 +228,28 @@ public class ChannelBrowserFragment extends FragmentEx {
 				return;
 			}
 			channelPagerAdapter = new ChannelPagerAdapter(fm);
-			viewPager.setOffscreenPageLimit(2);
-			viewPager.setAdapter(channelPagerAdapter);
+			binding.pager.setOffscreenPageLimit(2);
+			binding.pager.setAdapter(channelPagerAdapter);
 
 			this.channelVideosFragment.setYouTubeChannel(channel);
 
 			this.channelVideosFragment.onFragmentSelected();
 
-			Glide.with(getActivity())
+			Glide.with(requireContext())
 					.load(channel.getThumbnailUrl())
 					.apply(new RequestOptions().placeholder(R.drawable.channel_thumbnail_default))
-					.into(channelThumbnailImage);
+					.into(binding.channelThumbnailImageView);
 
-			Glide.with(getActivity())
+			Glide.with(requireContext())
 					.load(channel.getBannerUrl())
 					.apply(new RequestOptions().placeholder(R.drawable.banner_default))
-					.into(channelBannerImage);
+					.into(binding.channelBannerImageView);
 
 			if (channel.getSubscriberCount() >= 0) {
-				channelSubscribersTextView.setText(channel.getTotalSubscribers());
+				binding.channelSubsTextView.setText(channel.getTotalSubscribers());
 			} else {
 				Logger.i(this, "Channel subscriber count for {} is {}", channel.getTitle(), channel.getSubscriberCount());
-				channelSubscribersTextView.setVisibility(View.GONE);
+				binding.channelSubsTextView.setVisibility(View.GONE);
 			}
 
 			ActionBar actionBar = getSupportActionBar();
@@ -275,11 +259,11 @@ public class ChannelBrowserFragment extends FragmentEx {
 
 			// if the user has subscribed to this channel, then change the state of the
 			// subscribe button
-			channelSubscribeButton.setChannel(channel);
+			binding.channelSubscribeButton.setChannel(channel);
 			if (channel.isUserSubscribed()) {
-				channelSubscribeButton.setUnsubscribeState();
+				binding.channelSubscribeButton.setUnsubscribeState();
 			} else {
-				channelSubscribeButton.setSubscribeState();
+				binding.channelSubscribeButton.setSubscribeState();
 			}
 
 			if (channel.isUserSubscribed()) {
