@@ -25,7 +25,7 @@
 
     <Preference
         app:fragment="free.rm.skytube.gui.fragments.preferences.VideoBlockerPreferenceFragment"
-        app:icon="@drawable/ic_pref_blocked"
+        app:icon="@drawable/ic_blocker"
         app:key="pref_video_blocker"
         app:title="@string/pref_video_blocker_category" />
 
@@ -43,7 +43,7 @@
 
     <Preference
         app:fragment="free.rm.skytube.gui.fragments.preferences.NetworkPreferenceFragment"
-        app:icon="@drawable/ic_pref_others"
+        app:icon="@drawable/ic_pref_network"
         app:key="pref_network_downloads"
         app:title="@string/pref_network_downloads_category" />
 
