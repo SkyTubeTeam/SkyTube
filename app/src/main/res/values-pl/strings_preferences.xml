@@ -155,4 +155,16 @@
     <string name="pref_title_mobile_network_usage">Użycie sieci komórkowej</string>
     <string name="key_preferences">preferencje</string>
     <string name="pref_chromecast_category">Chromecast</string>
+    <string name="pref_video_download_maximum_resolution_summary">Pliki wideo będą pobierane co najwyżej w tej rozdzielczości: %s</string>
+    <string name="pref_video_download_minimum_resolution_summary">Pliki wideo będą pobierane co najmniej w tej rozdzielczości: %s</string>
+    <string name="pref_video_download_minimum_resolution_title">Minimalna rozdzielczość pobierania wideo</string>
+    <string name="pref_video_download_maximum_resolution_title">Maksymalna rozdzielczość pobierania wideo</string>
+    <string name="pref_summary_minimum_res_mobile">Wybierz minimalną rozdzielczość podczas przesyłania strumieniowego za pośrednictwem sieci komórkowej (np. 4G): %s</string>
+    <string name="pref_summary_maximum_res_mobile">Wybierz maksymalną rozdzielczość podczas przesyłania strumieniowego za pośrednictwem sieci komórkowej (np. 4G): %s</string>
+    <string name="pref_title_maximum_res_mobile">Maksymalna rozdzielczość dla sieci komórkowej</string>
+    <string name="pref_title_minimum_res_mobile">Minimalna rozdzielczość dla sieci komórkowej</string>
+    <string name="pref_summary_minimum_res">Wybierz minimalną rozdzielczość: %s</string>
+    <string name="pref_summary_maximum_res">Wybierz maksymalną rozdzielczość: %s</string>
+    <string name="pref_title_minimum_res">Minimalna rozdzielczość</string>
+    <string name="pref_title_maximum_res">Maksymalna rozdzielczość</string>
 </resources>
