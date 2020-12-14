@@ -26,6 +26,6 @@
 		android:layout_height="wrap_content"
 		android:layout_gravity="bottom|end"
 		android:layout_margin="@dimen/fab_margin"
-		app:srcCompat="@drawable/ic_download"/>
+		app:srcCompat="@drawable/ic_cloud_download"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
