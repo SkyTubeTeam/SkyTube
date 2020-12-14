@@ -18,11 +18,9 @@
 package free.rm.skytube.gui.businessobjects;
 
 import android.content.Context;
-import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 
@@ -30,6 +28,7 @@ import java.util.List;
 import java.util.Set;
 
 import free.rm.skytube.R;
+import free.rm.skytube.databinding.SubsYoutubeImportDialogListBinding;
 import free.rm.skytube.gui.businessobjects.adapters.MultiSelectListPreferenceAdapter;
 
 /**
@@ -80,15 +79,13 @@ public class MultiSelectListPreferenceDialog extends SkyTubeMaterialDialog {
 	@Override
 	public MaterialDialog build() {
 		MaterialDialog materialDialog = super.build();
+		SubsYoutubeImportDialogListBinding binding = SubsYoutubeImportDialogListBinding
+				.bind(materialDialog.getCustomView());
 
-		RecyclerView list = materialDialog.getCustomView().findViewById(R.id.channel_list);
-		list.setAdapter(listAdapter);
-		list.setLayoutManager(new LinearLayoutManager(materialDialog.getContext()));
-
-		Button selectAllButton = materialDialog.getCustomView().findViewById(R.id.select_all_button);
-		selectAllButton.setOnClickListener(view -> listAdapter.selectAll());
-		Button selectNoneButton = materialDialog.getCustomView().findViewById(R.id.select_none_button);
-		selectNoneButton.setOnClickListener(view -> listAdapter.selectNone());
+		binding.channelList.setAdapter(listAdapter);
+		binding.channelList.setLayoutManager(new LinearLayoutManager(materialDialog.getContext()));
+		binding.selectAllButton.setOnClickListener(view -> listAdapter.selectAll());
+		binding.selectNoneButton.setOnClickListener(view -> listAdapter.selectNone());
 
 		return materialDialog;
 	}
