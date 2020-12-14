@@ -7,7 +7,7 @@
 
 	<item android:id="@+id/menu_reload_video"
 		  android:title="@string/get_new_video_steam"
-		  android:icon="@drawable/ic_menu_reload_video"
+		  app:icon="@drawable/ic_menu_reload_video"
 		  app:showAsAction="ifRoom"/>
 
 	<item android:id="@+id/menu_open_video_with"

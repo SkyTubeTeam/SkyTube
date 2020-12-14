@@ -26,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.preference.PreferenceManager;
@@ -47,7 +48,6 @@ import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetVideoDescriptionTask;
-import free.rm.skytube.businessobjects.YouTube.VideoStream.StreamMetaData;
 import free.rm.skytube.businessobjects.YouTube.newpipe.ContentId;
 import free.rm.skytube.businessobjects.db.DatabaseTasks;
 import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
@@ -665,7 +665,7 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 	}
 
 	@Override
-	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+	public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
 		inflater.inflate(R.menu.menu_youtube_player, menu);
 
 		this.menu = menu;

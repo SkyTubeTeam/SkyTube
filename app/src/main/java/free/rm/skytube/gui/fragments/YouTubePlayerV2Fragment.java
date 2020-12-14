@@ -17,8 +17,6 @@
 
 package free.rm.skytube.gui.fragments;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -26,7 +24,6 @@ import android.content.SharedPreferences;
 import android.graphics.Rect;
 import android.media.AudioManager;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -45,6 +42,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 
@@ -548,7 +546,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 
 
 	@Override
-	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+	public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
 		inflater.inflate(R.menu.menu_youtube_player, menu);
 
 		this.menu = menu;
