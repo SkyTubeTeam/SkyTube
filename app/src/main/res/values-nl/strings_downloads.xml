@@ -1,16 +1,17 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="downloads">Downloads</string>
-	<string name="download_video">Video downloaden</string>
-	<string name="starting_video_download">Bezig met downloaden van \'%s\'…</string>
-	<string name="video_download_stream_error">\'%s\' kan niet worden gedownload.</string>
-	<string name="delete_download">Download verwijderen</string>
-	<string name="video_downloaded">\'%s\' is gedownload.</string>
-	<string name="no_downloaded_videos_text">Je hebt nog geen video\'s gedownload.
+    <string name="downloads">Downloads</string>
+    <string name="download_video">Video downloaden</string>
+    <string name="starting_video_download">Bezig met downloaden van \'%s\'…</string>
+    <string name="video_download_stream_error">\'%s\' kan niet worden gedownload.</string>
+    <string name="delete_download">Download verwijderen</string>
+    <string name="video_downloaded">\'%s\' is gedownload.</string>
+    <string name="no_downloaded_videos_text">Je hebt nog geen video\'s gedownload.
 \n
 \nZodra je video\'s download, verschijnen ze hier.</string>
-	<string name="playing_video_file_missing">De download voor deze video kan niet worden gevonden. Extern afspelen ingeschakeld.</string>
-	<string name="external_storage_not_available">Het bestand kan niet worden gedownload omdat de externe opslag niet beschikbaar is.</string>
-<string name="download">Downloaden</string>
-	<string name="warning_mobile_network_download">Je apparaat is niet verbonden met een Wi-Fi-netwerk. Om te voorkomen dat je extra moet betalen voor het gebruik van mobiel internet, raden wij aan om te verbinden met een Wi-Fi-netwerk. Wil je de video tóch downloaden\?</string>
-	</resources>
+    <string name="playing_video_file_missing">De download voor deze video kan niet worden gevonden. Extern afspelen ingeschakeld.</string>
+    <string name="external_storage_not_available">Het bestand kan niet worden gedownload omdat de externe opslag niet beschikbaar is.</string>
+    <string name="download">Downloaden</string>
+    <string name="warning_mobile_network_download">Je apparaat is niet verbonden met een Wi-Fi-netwerk. Om te voorkomen dat je extra moet betalen voor het gebruik van mobiel internet, raden wij aan om te verbinden met een Wi-Fi-netwerk. Wil je de video tóch downloaden\?</string>
+    <string name="video_stream_not_found_with_request_resolution">Geen videostream aangetroffen bij de gevraagde resolutie tussen %s en %s</string>
+</resources>
