@@ -1,2 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="external_storage_not_available">Неможливо завантажити файл через брак зовнішнього накопичувача.</string>
+    <string name="no_downloaded_videos_text">Завантажені відео відсутні.
+\n
+\nПісля завантаження, вони з\'являться тут.</string>
+    <string name="video_downloaded">\'%s\' завантажено.</string>
+    <string name="delete_download">Видалити завантаження</string>
+    <string name="video_stream_not_found_with_request_resolution">Відео з розширенням між %s - %s не знайдено</string>
+    <string name="video_download_stream_error">Не вдалося завантажити \'%s\'.</string>
+    <string name="starting_video_download">Завантажується \'%s\'…</string>
+    <string name="download_video">Завантажити відео</string>
+    <string name="warning_mobile_network_download">Пристрій не має Wi-Fi з\'єднання. Аби уникнути зайвих витрат, рекомендовано під\'єднатися до Wi-Fi мережі. Все одно завантажити\?</string>
+    <string name="downloads">Завантаження</string>
+    <string name="download">Завантаження</string>
+</resources>
