@@ -58,12 +58,14 @@
 					<!-- PLAYLIST TITLE -->
 					<TextView
 						android:id="@+id/playlist_title_text_view"
-						android:layout_toRightOf="@+id/playlist_thumbnail_image_view"
+						style="@style/PlaylistTitleTextView"
 						android:layout_centerVertical="true"
+						android:layout_toEndOf="@+id/playlist_thumbnail_image_view"
+						android:layout_toRightOf="@+id/playlist_thumbnail_image_view"
 						android:gravity="center_vertical"
-						android:drawableLeft="@drawable/ic_playlists"
 						android:text="Playlist Title"
-						style="@style/PlaylistTitleTextView"/>
+						app:drawableLeftCompat="@drawable/ic_playlists"
+						app:drawableStartCompat="@drawable/ic_playlists" />
 
 				</RelativeLayout>
 
