@@ -22,9 +22,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -37,6 +36,7 @@ import java.util.Set;
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.YouTube.POJOs.ChannelView;
 import free.rm.skytube.businessobjects.db.DatabaseTasks;
+import free.rm.skytube.databinding.SubChannelBinding;
 import free.rm.skytube.gui.businessobjects.MainActivityListener;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 
@@ -136,9 +136,11 @@ public class SubsAdapter extends RecyclerViewAdapterEx<ChannelView, SubsAdapter.
 	}
 
 	@Override
-	public SubChannelViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-		View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.sub_channel, parent, false);
-		return new SubChannelViewHolder(v);
+	@NonNull
+	public SubChannelViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+		SubChannelBinding binding = SubChannelBinding.inflate(LayoutInflater.from(parent.getContext()),
+				parent, false);
+		return new SubChannelViewHolder(binding);
 	}
 
 	@Override
@@ -169,20 +171,13 @@ public class SubsAdapter extends RecyclerViewAdapterEx<ChannelView, SubsAdapter.
 	////////////////////////////////////////////////////////////////////////////////////////////////
 
 	class SubChannelViewHolder extends RecyclerView.ViewHolder {
+		private final SubChannelBinding binding;
+		private ChannelView channel;
 
-		private ImageView thumbnailImageView;
-		private TextView channelNameTextView;
-		private View newVideosNotificationView;
-		private ChannelView channel = null;
-
-		SubChannelViewHolder(View rowView) {
-			super(rowView);
-			thumbnailImageView = rowView.findViewById(R.id.sub_channel_thumbnail_image_view);
-			channelNameTextView = rowView.findViewById(R.id.sub_channel_name_text_view);
-			newVideosNotificationView = rowView.findViewById(R.id.sub_channel_new_videos_notification);
-			channel = null;
-
-			rowView.setOnClickListener(v -> {
+		SubChannelViewHolder(SubChannelBinding binding) {
+			super(binding.getRoot());
+			this.binding = binding;
+			binding.getRoot().setOnClickListener(v -> {
 				for (MainActivityListener listener: listeners) {
 					listener.onChannelClick(channel.getId());
 				}
@@ -193,13 +188,11 @@ public class SubsAdapter extends RecyclerViewAdapterEx<ChannelView, SubsAdapter.
 			Glide.with(itemView.getContext().getApplicationContext())
 					.load(channel.getThumbnailUrl())
 					.apply(new RequestOptions().placeholder(R.drawable.channel_thumbnail_default))
-					.into(thumbnailImageView);
+					.into(binding.subChannelThumbnailImageView);
 
-			channelNameTextView.setText(channel.getTitle());
-			newVideosNotificationView.setVisibility(channel.isNewVideosSinceLastVisit() ? View.VISIBLE : View.INVISIBLE);
+			binding.subChannelNameTextView.setText(channel.getTitle());
+			binding.subChannelNewVideosNotification.setVisibility(channel.isNewVideosSinceLastVisit() ? View.VISIBLE : View.INVISIBLE);
 			this.channel = channel;
 		}
-
 	}
-
 }
