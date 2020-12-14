@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-			android:layout_width="match_parent"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
 			android:layout_height="match_parent"
 			android:background="@color/video_player_drawer_background">
 	<LinearLayout android:layout_width="match_parent"
@@ -41,14 +42,16 @@
 					android:layout_height="wrap_content"
 					android:layout_centerVertical="true"
 					android:adjustViewBounds="true"
+					android:paddingEnd="10dp"
 					android:paddingRight="10dp"
 					android:scaleType="fitXY"
-					android:src="@drawable/channel_thumbnail_default"/>
+					android:src="@drawable/channel_thumbnail_default" />
 
 				<LinearLayout
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_centerVertical="true"
+					android:layout_toEndOf="@+id/video_desc_channel_thumbnail_image_view"
 					android:layout_toRightOf="@+id/video_desc_channel_thumbnail_image_view"
 					android:orientation="vertical">
 
@@ -75,7 +78,8 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_weight="1"
-				android:paddingLeft="30dp">
+				android:paddingLeft="30dp"
+				android:paddingStart="30dp">
 
 				<TextView
 					android:id="@+id/video_desc_views"
@@ -93,19 +97,23 @@
 					android:id="@+id/video_desc_likes"
 					style="@style/VideoDescTextView"
 					android:layout_below="@id/video_desc_likes_bar"
-					android:drawableLeft="@drawable/ic_thumb_up_white"
 					android:drawablePadding="5dp"
-					android:text="1,000,000"/>
+					android:text="1,000,000"
+					app:drawableLeftCompat="@drawable/ic_thumb_up"
+					app:drawableStartCompat="@drawable/ic_thumb_up" />
 
 				<TextView
 					android:id="@+id/video_desc_dislikes"
 					style="@style/VideoDescTextView"
 					android:layout_below="@id/video_desc_likes_bar"
+					android:layout_toEndOf="@+id/video_desc_likes"
 					android:layout_toRightOf="@+id/video_desc_likes"
-					android:drawableLeft="@drawable/ic_thumb_down_white"
 					android:drawablePadding="5dp"
+					android:paddingStart="15dp"
 					android:paddingLeft="15dp"
-					android:text="1,000"/>
+					android:text="1,000"
+					app:drawableLeftCompat="@drawable/ic_thumb_down"
+					app:drawableStartCompat="@drawable/ic_thumb_down" />
 
 				<TextView
 					android:id="@+id/video_desc_ratings_disabled"
