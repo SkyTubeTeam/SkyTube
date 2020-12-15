@@ -38,6 +38,7 @@ import com.google.api.services.youtube.model.VideoStatistics;
 import org.joda.time.Period;
 import org.joda.time.format.ISOPeriodFormat;
 import org.joda.time.format.PeriodFormatter;
+import org.schabi.newpipe.extractor.stream.Stream;
 import org.schabi.newpipe.extractor.stream.StreamInfo;
 import org.schabi.newpipe.extractor.stream.VideoStream;
 
@@ -548,24 +549,28 @@ public class YouTubeVideo extends CardData implements Serializable {
 				final Settings settings = SkyTubeApp.getSettings();
 				StreamSelectionPolicy selectionPolicy = settings.getDesiredVideoResolution(true);
 				StreamSelectionPolicy.StreamSelection streamSelection = selectionPolicy.select(streamInfo);
-				if (streamInfo != null) {
+				if (streamSelection != null) {
 					VideoStream videoStream = streamSelection.getVideoStream();
 					// download the video
-					new VideoDownloader()
-							.setRemoteFileUrl(videoStream.toString())
-							.setDirType(Environment.DIRECTORY_MOVIES)
-							.setTitle(getTitle())
-							.setDescription(getStr(R.string.video) + " ― " + getChannelName())
-							.setOutputFileName(getId() + " - " + getTitle())
-							.setOutputDirectoryName(getChannelName())
-							.setParentDirectory(SkyTubeApp.getPreferenceManager().getString(SkyTubeApp.getStr(R.string.pref_key_video_download_folder), null))
-							.setOutputFileExtension(videoStream.getFormat().suffix)
-							.setAllowedOverRoaming(false)
-							.setAllowedNetworkTypesFlags(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE)
-							.displayPermissionsActivity(context);
+					downloadTheVideo(videoStream, settings);
 				} else {
 					Toast.makeText(context, selectionPolicy.getErrorMessage(context), Toast.LENGTH_LONG).show();
 				}
+			}
+
+			private void downloadTheVideo(Stream stream, Settings settings) {
+				new VideoDownloader()
+						.setRemoteFileUrl(stream.getUrl())
+						.setDirType(Environment.DIRECTORY_MOVIES)
+						.setTitle(getTitle())
+						.setDescription(getStr(R.string.video) + " ― " + getChannelName())
+						.setOutputFileName(getId() + " - " + getTitle())
+						.setOutputDirectoryName(getChannelName())
+						.setParentDirectory(settings.getDownloadFolder(null))
+						.setOutputFileExtension(stream.getFormat().suffix)
+						.setAllowedOverRoaming(false)
+						.setAllowedNetworkTypesFlags(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE)
+						.displayPermissionsActivity(context);
 			}
 
 			@Override

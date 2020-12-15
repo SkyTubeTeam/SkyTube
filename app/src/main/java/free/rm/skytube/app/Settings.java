@@ -103,7 +103,7 @@ public class Settings {
         if (onMobile) {
             // default res for mobile network = that of wifi
             maxResIdValue = prefs.getString(app.getStr(R.string.pref_key_maximum_res_mobile), maxResIdValue);
-            minResIdValue = prefs.getString(app.getStr(R.string.pref_key_maximum_res_mobile), minResIdValue);
+            minResIdValue = prefs.getString(app.getStr(R.string.pref_key_minimum_res_mobile), minResIdValue);
         }
         VideoResolution maxResolution = VideoResolution.videoResIdToVideoResolution(maxResIdValue);
         VideoResolution minResolution = VideoResolution.videoResIdToVideoResolution(minResIdValue);

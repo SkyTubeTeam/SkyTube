@@ -12,6 +12,7 @@ import androidx.preference.PreferenceManager;
 import com.obsez.android.lib.filechooser.ChooserDialog;
 
 import free.rm.skytube.R;
+import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.YouTube.VideoStream.VideoResolution;
 
 public class NetworkPreferenceFragment extends PreferenceFragmentCompat {
@@ -30,15 +31,14 @@ public class NetworkPreferenceFragment extends PreferenceFragmentCompat {
                     .enableOptions(true)
                     .withResources(R.string.pref_popup_title_video_download_folder, R.string.ok, R.string.cancel)
                     .withChosenListener((dir, dirFile) -> {
-                        editor.putString(getString(R.string.pref_key_video_download_folder), dir);
-                        editor.apply();
+                        SkyTubeApp.getSettings().setDownloadFolder(dir);
                         folderChooser.setSummary(getString(R.string.pref_summary_video_download_folder, dir));
                     })
                     .build()
                     .show();
             return true;
         });
-        String dir = pref.getString(getString(R.string.pref_key_video_download_folder), null);
+        String dir = SkyTubeApp.getSettings().getDownloadFolder(null);
         folderChooser.setSummary(getString(R.string.pref_summary_video_download_folder, dir != null ? dir : Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES)));
 
         VideoResolution.setupListPreferences ((ListPreference) findPreference(getString(R.string.pref_key_video_download_maximum_resolution)));

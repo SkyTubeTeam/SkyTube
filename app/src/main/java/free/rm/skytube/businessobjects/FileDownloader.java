@@ -120,7 +120,7 @@ public abstract class FileDownloader implements Serializable, PermissionsActivit
 				.setDescription(description)
 				.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
 
-		String videoDir = SkyTubeApp.getPreferenceManager().getString(SkyTubeApp.getStr(R.string.pref_key_video_download_folder), null);
+		String videoDir = SkyTubeApp.getSettings().getDownloadFolder(null);
 		if(videoDir != null) {
 			request.setDestinationUri(Uri.fromFile(new File(videoDir, fullDownloadFileName)));
 		} else {
