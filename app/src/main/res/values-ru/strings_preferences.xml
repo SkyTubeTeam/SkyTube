@@ -150,4 +150,16 @@
     <string name="pref_summary_mobile_network_usage">Что делать, если вы используете мобильную сеть (например, 4G) для загрузки, просмотра видео: %s</string>
     <string name="pref_title_mobile_network_usage">Использование мобильной сети</string>
     <string name="key_preferences">настройки</string>
+    <string name="pref_video_download_maximum_resolution_summary">Видео будут скачиваться не более чем в этом разрешении: %s</string>
+    <string name="pref_video_download_minimum_resolution_summary">Видео будут скачиваться как минимум в этом разрешении: %s</string>
+    <string name="pref_video_download_minimum_resolution_title">Минимальное разрешение загрузки видео</string>
+    <string name="pref_video_download_maximum_resolution_title">Максимальное разрешение загрузки видео</string>
+    <string name="pref_summary_maximum_res_mobile">Выберите максимальное разрешение при потоковой передаче через мобильную сеть (например, 4G): %s</string>
+    <string name="pref_title_maximum_res_mobile">Максимальное разрешение для мобильной сети</string>
+    <string name="pref_summary_minimum_res_mobile">Выберите минимальное разрешение при потоковой передаче через мобильную сеть (например, 4G): %s</string>
+    <string name="pref_title_minimum_res_mobile">Минимальное разрешение для мобильной сети</string>
+    <string name="pref_summary_minimum_res">Выберите минимальное разрешение: %s</string>
+    <string name="pref_title_minimum_res">Минимальное разрешение</string>
+    <string name="pref_summary_maximum_res">Выберите максимальное разрешение: %s</string>
+    <string name="pref_title_maximum_res">Максимальное разрешение</string>
 </resources>
