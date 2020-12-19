@@ -1,10 +1,11 @@
 <resources>
 
 	<!-- SkyTube theme -->
-	<style name="AppTheme" parent="Theme.AppCompat.DayNight.DarkActionBar">
+	<style name="AppTheme" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
 		<item name="colorPrimary">@color/colorPrimary</item>
 		<item name="colorPrimaryDark">@color/colorPrimaryDark</item>
 		<item name="colorAccent">@color/colorAccent</item>
+		<item name="android:textColor">@color/colorText</item>
 
 		<item name="actionBarPopupTheme">@style/ThemeOverlay.AppCompat</item>
 		<item name="android:popupMenuStyle">@style/PopupMenu</item>
@@ -27,11 +28,11 @@
 		<item name="windowActionBar">false</item>
 		<item name="windowNoTitle">true</item>
 		<item name="md_background_color">@color/colorPrimary</item>
-		<item name="md_title_color">@android:color/white</item>
-		<item name="md_content_color">@android:color/white</item>
-		<item name="md_positive_color">@android:color/white</item>
-		<item name="md_neutral_color">@android:color/white</item>
-		<item name="md_negative_color">@android:color/white</item>
+		<item name="md_title_color">@color/colorPrimary</item>
+		<item name="md_content_color">@color/colorPrimary</item>
+		<item name="md_positive_color">@color/colorPrimary</item>
+		<item name="md_neutral_color">@color/colorPrimary</item>
+		<item name="md_negative_color">@color/colorPrimary</item>
 	</style>
 
 	<style name="BlockedVideoTextView" parent="AppTheme">

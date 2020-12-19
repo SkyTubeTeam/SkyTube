@@ -49,9 +49,10 @@
 				android:id="@+id/tab_layout"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:background="?attr/colorPrimary"
 				android:layout_gravity="center_horizontal"
-				app:tabMode="scrollable"/>
+				android:background="?attr/colorPrimary"
+				app:tabMode="scrollable"
+				app:tabSelectedTextColor="@color/colorPrimaryDark" />
 
 		</com.google.android.material.appbar.AppBarLayout>
 

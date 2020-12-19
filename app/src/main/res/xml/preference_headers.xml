@@ -60,4 +60,10 @@
 		android:title="@string/pref_about_category">
 	</header>
 
+	<header
+		android:fragment="free.rm.skytube.gui.fragments.preferences.ThemePreferenceFragment"
+		android:icon="@drawable/ic_pref_theme"
+		android:title="@string/pref_theme_category">
+	</header>
+
 </preference-headers>

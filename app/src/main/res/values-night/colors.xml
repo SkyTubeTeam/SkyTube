@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#263238</color>
+    <color name="colorPrimary">#424c54</color>
     <color name="colorPrimaryDark">#21272B</color>
     <color name="colorAccent">#26A69A</color>
+    <color name="colorText">#ffffff</color>
 
     <color name="skytube_theme_colour">#ff6600</color>
 
@@ -10,13 +11,13 @@
         Material Dialog Colors
     -->
     <color name="dialog_title">#000</color>
-    <color name="dialog_backgound">#FFF</color>
+    <color name="dialog_background">#FFF</color>
     <color name="dialog_content_text">#000</color>
     <color name="dialog_positive_text">@color/colorAccent</color>
     <color name="dialog_negative_text">@color/colorAccent</color>
     <color name="dialog_neutral_text">@color/colorAccent</color>
     <color name="dialog_row_0">#F0F0F0</color>
-    <color name="dialog_row_1">@color/dialog_backgound</color>
+    <color name="dialog_row_1">@color/dialog_background</color>
 
 
     <!--
@@ -34,13 +35,13 @@
     <!--
         Video (Grid) Cells
     -->
-    <color name="video_cell_background">#111517</color>
-    <color name="video_cell_text_main">#F5F5F5</color>
-    <color name="video_cell_text_details">#808080</color>
+    <color name="video_cell_background">#94a3b1</color>
+    <color name="video_cell_text_main">#ffffff</color>
+    <color name="video_cell_text_details">#ffffff</color>
     <color name="video_cell_highlighted_background">@color/colorPrimaryDark</color>
 
     <color name="grid_view_background">@color/colorPrimaryDark</color>
-    <color name="popup_menu">#FF303030</color>  <!-- Identical to @color/background_material_dark -->
+    <color name="popup_menu">#cfcfcf</color>  <!-- Identical to @color/background_material_dark -->
 
 
     <!--
