@@ -18,6 +18,11 @@
 package free.rm.skytube.businessobjects.YouTube.POJOs;
 
 import com.google.api.client.util.ArrayMap;
+import com.google.api.client.util.DateTime;
+
+import org.ocpsoft.prettytime.PrettyTime;
+
+import java.time.Instant;
 
 /**
  * A YouTube comment.
@@ -38,7 +43,8 @@ public class YouTubeComment {
 			if(channelIdMap != null)
 				this.authorChannelId = channelIdMap.get("value");
 			this.comment = comment.getSnippet().getTextDisplay();
-			this.datePublished = new PrettyTimeEx().format(comment.getSnippet().getPublishedAt());
+			final DateTime publishedAt = comment.getSnippet().getPublishedAt();
+			this.datePublished = new PrettyTime().format(Instant.ofEpochMilli(publishedAt.getValue()));
 			this.likeCount = comment.getSnippet().getLikeCount();
 			this.thumbnailUrl = comment.getSnippet().getAuthorProfileImageUrl();
 		}
