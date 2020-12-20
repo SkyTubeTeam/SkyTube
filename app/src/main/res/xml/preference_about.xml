@@ -16,30 +16,30 @@
   ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
 
 	<PreferenceScreen
-		android:key="@string/pref_key_version"
-		android:title="@string/pref_title_version" />
+		app:key="@string/pref_key_version"
+		app:title="@string/pref_title_version" />
 
 	<PreferenceScreen
-		android:key="@string/pref_key_updates"
-		android:title="@string/pref_title_updates"
-		android:summary="@string/pref_summary_updates" />
+		app:key="@string/pref_key_updates"
+		app:title="@string/pref_title_updates"
+		app:summary="@string/pref_summary_updates" />
 
 	<PreferenceScreen
-		android:key="@string/pref_key_website"
-		android:title="@string/pref_title_website"
-		android:summary="Skytube Website goes here..." />
+		app:key="@string/pref_key_website"
+		app:title="@string/pref_title_website"
+		app:summary="Skytube Website goes here..." />
 
 	<PreferenceScreen
-		android:key="@string/pref_key_credits"
-		android:title="@string/pref_title_credits"
-		android:summary="@string/pref_summary_credits" />
+		app:key="@string/pref_key_credits"
+		app:title="@string/pref_title_credits"
+		app:summary="@string/pref_summary_credits" />
 
 	<PreferenceScreen
-		android:key="@string/pref_key_license"
-		android:title="@string/pref_title_license"
-		android:summary="@string/pref_summary_license" />
+		app:key="@string/pref_key_license"
+		app:title="@string/pref_title_license"
+		app:summary="@string/pref_summary_license" />
 
 </PreferenceScreen>

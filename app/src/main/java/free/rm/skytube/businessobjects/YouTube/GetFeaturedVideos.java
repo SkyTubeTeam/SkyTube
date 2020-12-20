@@ -104,9 +104,13 @@ public class GetFeaturedVideos extends GetYouTubeVideos {
 
 		if (videoList != null) {
 			for (Video video : videoList) {
-				YouTubeVideo yv = new YouTubeVideo(video);
-				yv.setRetrievalTimestamp(System.currentTimeMillis());
-				youTubeVideoList.add(yv);
+				try {
+					YouTubeVideo yv = new YouTubeVideo(video);
+					yv.setRetrievalTimestamp(System.currentTimeMillis());
+					youTubeVideoList.add(yv);
+				} catch (Exception ex) {
+					Logger.e(this, "Unable to convert video: " + video + ", error:" + ex.getMessage(), ex);
+				}
 			}
 		}
 

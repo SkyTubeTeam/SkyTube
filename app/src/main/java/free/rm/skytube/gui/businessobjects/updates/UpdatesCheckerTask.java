@@ -21,6 +21,8 @@ import android.content.Context;
 
 import androidx.appcompat.app.AlertDialog;
 
+import java.util.Objects;
+
 import free.rm.skytube.BuildConfig;
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
@@ -56,7 +58,7 @@ public class UpdatesCheckerTask extends AsyncTaskParallel<Void, Void, UpdatesChe
 	protected UpdatesChecker doInBackground(Void... params) {
 		currentVersionNumber = getCurrentVerNumber();
 		String displayedReleaseNotesVersion = SkyTubeApp.getSettings().getDisplayedReleaseNoteTag();
-		showReleaseNotes = !Utils.equals(currentVersionNumber, displayedReleaseNotesVersion) && !displayUpToDateMessage;
+		showReleaseNotes = !Objects.equals(currentVersionNumber, displayedReleaseNotesVersion) && !displayUpToDateMessage;
 		Logger.d(this, "Current Version Number: %s, last displayed: %s, show release notes: %s", currentVersionNumber, displayedReleaseNotesVersion, showReleaseNotes);
 		UpdatesChecker updatesChecker = new UpdatesChecker(showReleaseNotes, currentVersionNumber);
 		updatesChecker.checkForUpdates();

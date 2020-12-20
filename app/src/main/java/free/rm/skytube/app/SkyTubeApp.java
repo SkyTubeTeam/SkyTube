@@ -17,7 +17,6 @@
 
 package free.rm.skytube.app;
 
-import android.annotation.TargetApi;
 import android.app.AlarmManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -35,14 +34,15 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.SystemClock;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.core.graphics.ColorUtils;
 import androidx.multidex.MultiDexApplication;
+import androidx.preference.PreferenceManager;
 
 import com.google.api.client.googleapis.json.GoogleJsonError;
 import com.google.api.client.googleapis.json.GoogleJsonResponseException;
@@ -54,18 +54,18 @@ import java.util.List;
 
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.FeedUpdaterReceiver;
-import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubePlaylist;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetPlaylistTask;
 import free.rm.skytube.businessobjects.YouTube.newpipe.ContentId;
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
-import free.rm.skytube.businessobjects.db.Tasks.GetChannelInfo;
+import free.rm.skytube.businessobjects.db.DatabaseTasks;
 import free.rm.skytube.gui.activities.MainActivity;
 import free.rm.skytube.gui.businessobjects.YouTubePlayer;
 import free.rm.skytube.gui.fragments.ChannelBrowserFragment;
 import free.rm.skytube.gui.fragments.FragmentNames;
 import free.rm.skytube.gui.fragments.PlaylistVideosFragment;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
 
 /**
  * SkyTube application.
@@ -81,13 +81,22 @@ public class SkyTubeApp extends MultiDexApplication {
 	public static final String NEW_VIDEOS_NOTIFICATION_CHANNEL = "free.rm.skytube.NEW_VIDEOS_NOTIFICATION_CHANNEL";
 	public static final int NEW_VIDEOS_NOTIFICATION_CHANNEL_ID = 1;
 
+	private static final CompositeDisposable COMPOSITE_DISPOSABLE = new CompositeDisposable();
+
 	@Override
 	public void onCreate() {
 		super.onCreate();
 		this.settings = new Settings(this);
+		this.settings.migrate();
 		this.names = new FragmentNames(this);
 		skyTubeApp = this;
 		initChannels(this);
+	}
+
+	@Override
+	public void onTerminate() {
+		COMPOSITE_DISPOSABLE.clear();
+		super.onTerminate();
 	}
 
 	/**
@@ -191,9 +200,8 @@ public class SkyTubeApp extends MultiDexApplication {
 	 * @return True if the device is connected via mobile network such as 4G.
 	 */
 	public static boolean isConnectedToMobile() {
-		final ConnectivityManager connMgr = (ConnectivityManager)
-				getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-		final android.net.NetworkInfo mobile = connMgr.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+		final NetworkInfo mobile = ContextCompat.getSystemService(getContext(), ConnectivityManager.class)
+				.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
 		return mobile != null && mobile.isConnectedOrConnecting();
 	}
 
@@ -203,8 +211,7 @@ public class SkyTubeApp extends MultiDexApplication {
 	 * @return
 	 */
 	public static NetworkInfo getNetworkInfo(@NonNull Context context){
-		ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-		return cm.getActiveNetworkInfo();
+		return ContextCompat.getSystemService(context, ConnectivityManager.class).getActiveNetworkInfo();
 	}
 
 	/**
@@ -221,14 +228,11 @@ public class SkyTubeApp extends MultiDexApplication {
 	 * Initialize Notification Channels (for Android OREO)
 	 * @param context
 	 */
-	@TargetApi(26)
 	private void initChannels(@NonNull Context context) {
-
 		if(Build.VERSION.SDK_INT < 26) {
 			return;
 		}
-		NotificationManager notificationManager =
-				(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+		NotificationManager notificationManager = getSystemService(NotificationManager.class);
 
 		CharSequence channelName = context.getString(R.string.notification_channel_feed_title);
 		int importance = NotificationManager.IMPORTANCE_LOW;
@@ -255,7 +259,7 @@ public class SkyTubeApp extends MultiDexApplication {
 	public static void setFeedUpdateInterval(int interval) {
 		Intent alarm = new Intent(getContext(), FeedUpdaterReceiver.class);
 		PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), 0, alarm, PendingIntent.FLAG_CANCEL_CURRENT);
-		AlarmManager alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
+		AlarmManager alarmManager = ContextCompat.getSystemService(getContext(), AlarmManager.class);
 
 		// Feed Auto Updater has been cancelled. If the selected interval is greater than 0, set the new alarm to call FeedUpdaterService
 		if(interval > 0) {
@@ -298,9 +302,8 @@ public class SkyTubeApp extends MultiDexApplication {
 	}
 
 	public static void copyUrl(@NonNull Context context, String text, String url) {
-		ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
 		ClipData clip = ClipData.newPlainText(text, url);
-		clipboard.setPrimaryClip(clip);
+		ContextCompat.getSystemService(context, ClipboardManager.class).setPrimaryClip(clip);
 		Toast.makeText(context, R.string.url_copied_to_clipboard, Toast.LENGTH_SHORT).show();
 	}
 
@@ -397,10 +400,8 @@ public class SkyTubeApp extends MultiDexApplication {
 	 */
 	public static void launchChannel(String channelId, Context context) {
 		if (channelId != null) {
-			new GetChannelInfo(context,
-					youTubeChannel -> SkyTubeApp.launchChannel(youTubeChannel, context),
-					true)
-					.executeInParallel(channelId);
+			COMPOSITE_DISPOSABLE.add(DatabaseTasks.getChannelInfo(context, channelId, true)
+					.subscribe(youTubeChannel -> launchChannel(youTubeChannel, context)));
 		}
 	}
 

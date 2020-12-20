@@ -19,7 +19,7 @@ package free.rm.skytube.businessobjects.YouTube.newpipe;
 
 import org.schabi.newpipe.extractor.StreamingService.LinkType;
 
-import free.rm.skytube.app.Utils;
+import java.util.Objects;
 
 public class ContentId {
     final String id;
@@ -27,14 +27,11 @@ public class ContentId {
     final LinkType type;
 
     public ContentId(String id, String canonicalUrl, LinkType type) {
-        Utils.requireNonNull(id, "id");
-        Utils.requireNonNull(canonicalUrl, "canonicalUrl");
-        Utils.requireNonNull(type, "type");
-        if (type == LinkType.NONE) {
+        if (Objects.requireNonNull(type, "type") == LinkType.NONE) {
             throw new IllegalArgumentException("LinkType.NONE for id=" + id + ", url=" + canonicalUrl);
         }
-        this.id = id;
-        this.canonicalUrl = canonicalUrl;
+        this.id = Objects.requireNonNull(id, "id");
+        this.canonicalUrl = Objects.requireNonNull(canonicalUrl, "canonicalUrl");
         this.type = type;
     }
 
@@ -71,6 +68,6 @@ public class ContentId {
 
     @Override
     public int hashCode() {
-        return Utils.hash(id, canonicalUrl, type);
+        return Objects.hash(id, canonicalUrl, type);
     }
 }

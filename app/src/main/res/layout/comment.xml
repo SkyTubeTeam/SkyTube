@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-			  android:orientation="horizontal"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:orientation="horizontal"
 			  android:layout_width="match_parent"
 			  android:layout_height="match_parent"
 			  android:padding="10dp"
@@ -58,10 +59,11 @@
 			<TextView
 				android:id="@+id/comment_upvotes_text_view"
 				style="@style/CommentInfoTextView"
-				android:drawableLeft="@drawable/ic_thumb_up_white"
 				android:drawablePadding="5dp"
 				android:gravity="center_vertical"
-				android:text="21"/>
+				android:text="21"
+				app:drawableLeftCompat="@drawable/ic_thumb_up"
+				app:drawableStartCompat="@drawable/ic_thumb_up" />
 		</LinearLayout>
 
 		<TextView

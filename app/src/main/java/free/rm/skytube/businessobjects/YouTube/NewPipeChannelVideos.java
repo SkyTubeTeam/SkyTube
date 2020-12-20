@@ -18,7 +18,8 @@
 
 import org.schabi.newpipe.extractor.stream.StreamInfoItem;
 
-import free.rm.skytube.app.Utils;
+import java.util.Objects;
+
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeException;
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
 import free.rm.skytube.businessobjects.YouTube.newpipe.VideoPager;
@@ -32,15 +33,13 @@ public class NewPipeChannelVideos extends NewPipeVideos<StreamInfoItem> implemen
 
     @Override
     public void setChannelQuery(String channelId, boolean filterSubscribedVideos) {
-        Utils.requireNonNull(channelId, "channelId missing");
-        this.channelId = channelId;
+        this.channelId = Objects.requireNonNull(channelId, "channelId missing");
     }
 
     // Important, this is called from the channel tab
     @Override
     public void setQuery(String query) {
-        Utils.requireNonNull(query, "query missing");
-        this.channelId = query;
+        this.channelId = Objects.requireNonNull(query, "query missing");
     }
 
     @Override
@@ -50,7 +49,6 @@ public class NewPipeChannelVideos extends NewPipeVideos<StreamInfoItem> implemen
 
     @Override
     protected VideoPager createNewPager() throws NewPipeException {
-        Utils.requireNonNull(channelId, "channelId missing");
-        return NewPipeService.get().getChannelPager(channelId);
+        return NewPipeService.get().getChannelPager(Objects.requireNonNull(channelId, "channelId missing"));
     }
 }

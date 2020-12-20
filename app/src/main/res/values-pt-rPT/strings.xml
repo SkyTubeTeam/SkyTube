@@ -13,13 +13,13 @@
     <string name="videos">Vídeos</string>
     <string name="num_videos">%d vídeos</string>
     <string name="playlists">Listas de reprodução</string>
-    <string name="could_not_get_playlists">Incapaz de obter as listas de %s.</string>
+    <string name="could_not_get_playlists">Não foi possível obter as listas de %s.</string>
     <string name="loading">A carregar…</string>
     <string name="could_not_get_channel">Não foi possível obter a informação do canal!</string>
     <string name="hello_blank_fragment">Olá fragmento vazio</string>
     <string name="yes">Sim</string>
     <string name="no">Não</string>
-    <string name="search_channel">Procurar canal</string>
+    <string name="search_channel">Pesquisar canal</string>
     <string name="close">Fechar</string>
     <string name="could_not_get_channel_detailed">Não foi possível descarregar as informações do canal: %s.</string>
 </resources>

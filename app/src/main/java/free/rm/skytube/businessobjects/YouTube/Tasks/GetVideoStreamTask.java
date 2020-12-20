@@ -17,17 +17,22 @@
 
 package free.rm.skytube.businessobjects.YouTube.Tasks;
 
+import org.schabi.newpipe.extractor.exceptions.ExtractionException;
+import org.schabi.newpipe.extractor.stream.StreamInfo;
+
+import java.io.IOException;
+
+import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
+import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
-import free.rm.skytube.businessobjects.YouTube.VideoStream.StreamMetaData;
-import free.rm.skytube.businessobjects.YouTube.VideoStream.StreamMetaDataList;
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
 import free.rm.skytube.businessobjects.interfaces.GetDesiredStreamListener;
 
 /**
  * AsyncTask to retrieve the Uri for the given YouTube video.
  */
-public class GetVideoStreamTask extends AsyncTaskParallel<Void, Exception, StreamMetaDataList> {
+public class GetVideoStreamTask extends AsyncTaskParallel<Void, Exception, StreamInfo> {
 
     private final YouTubeVideo youTubeVideo;
     private final GetDesiredStreamListener listener;
@@ -40,20 +45,28 @@ public class GetVideoStreamTask extends AsyncTaskParallel<Void, Exception, Strea
     }
 
     @Override
-    protected StreamMetaDataList doInBackground(Void... param) {
-        return NewPipeService.get().getStreamMetaDataList(youTubeVideo.getId());
+    protected StreamInfo doInBackground(Void... param) {
+        try {
+            return NewPipeService.get().getStreamInfoByVideoId(youTubeVideo.getId());
+        } catch (ExtractionException | IOException e) {
+            lastException = e;
+            Logger.e(this, "Unable to get stream information for " + youTubeVideo.getId() + " error:" + e.getMessage(), e);
+            return null;
+        }
+    }
+
+
+    @Override
+    protected void showErrorToUi() {
+        listener.onGetDesiredStreamError(lastException);
     }
 
     @Override
-    protected void onPostExecute(StreamMetaDataList streamMetaDataList) {
-        if (streamMetaDataList == null || streamMetaDataList.isEmpty()) {
-            listener.onGetDesiredStreamError(streamMetaDataList.getErrorMessage());
-        } else {
-            // get the desired stream based on user preferences
-            StreamMetaData desiredStream = streamMetaDataList.getDesiredStream(forDownload);
-
-            listener.onGetDesiredStream(desiredStream);
+    protected void onPostExecute(StreamInfo streamInfo) {
+        if (streamInfo != null){
+            listener.onGetDesiredStream(streamInfo);
         }
+        super.onPostExecute(streamInfo);
     }
 
 }

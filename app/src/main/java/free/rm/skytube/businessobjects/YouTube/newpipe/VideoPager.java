@@ -99,7 +99,7 @@ public class VideoPager extends Pager<InfoItem, CardData> {
         Logger.i(this, "item %s, title=%s at %s", id, item.getName(), date);
         YouTubeChannel ch = new YouTubeChannel(item.getUploaderUrl(), item.getUploaderName());
         return new YouTubeVideo(id, item.getName(), null, item.getDuration(), ch,
-                item.getViewCount(), date.timestamp, date.exact, NewPipeService.getThumbnailUrl(id));
+                item.getViewCount(), date.zonedDateTime, date.exact, NewPipeService.getThumbnailUrl(id));
     }
 
     private CardData convert(PlaylistInfoItem playlistInfoItem, String id) {

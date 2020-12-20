@@ -25,9 +25,9 @@ import org.json.JSONObject;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Objects;
 
 import free.rm.skytube.BuildConfig;
-import free.rm.skytube.app.Utils;
 
 /**
  * Checks for app updates.
@@ -62,11 +62,8 @@ public class UpdatesChecker {
 			// OSS version update checker is the responsibility of FDROID
 			Log.d(TAG, "OSS version - will not be checking for updates.");
 		} else {
-
-			try {
-				WebStream webStream = new WebStream(BuildConfig.SKYTUBE_UPDATES_URL);
+			try (WebStream webStream = new WebStream(BuildConfig.SKYTUBE_UPDATES_URL)) {
 				String updatesJSONStr = webStream.downloadRemoteTextFile();
-				webStream.close();
 
 				JSONObject json = new JSONObject(updatesJSONStr);
 				latestApkVersion = getLatestVersionNumber(json);
@@ -76,7 +73,7 @@ public class UpdatesChecker {
 				Log.d(TAG, "REMOTE_VER: " + latestApkVersion);
 
 				if (!oss) {
-					if (!Utils.equals(currentVersionNumber, latestApkVersion)) {
+					if (!Objects.equals(currentVersionNumber, latestApkVersion)) {
 						this.latestApkUrl = getLatestApkUrl(json);
 						updatesAvailable = latestApkUrl != null;
 						Log.d(TAG, "Update available.  APK_URL: " + latestApkUrl);

@@ -29,7 +29,7 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField "String", "CHROMECAST_APP_ID", "\"39E8D587\""
         }
@@ -80,6 +80,8 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+
+        coreLibraryDesugaringEnabled true
     }
     packagingOptions {
         exclude "META-INF/*"
@@ -87,6 +89,8 @@ android {
 }
 
 dependencies {
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.1'
+
     // YouTube modules
     implementation 'com.github.SkyTubeTeam.google-http-java-client:google-http-client-android:1.34.3.1'
 
@@ -96,7 +100,7 @@ dependencies {
     }
 
     // implementation 'com.github.TeamNewPipe.NewPipeExtractor:extractor:v0.19.0'
-    implementation 'com.github.SkyTubeTeam.NewPipeExtractor:extractor:2b4db1b4810bb08bda'
+    implementation 'com.github.SkyTubeTeam.NewPipeExtractor:extractor:ed2cf2ed30cdd691c6'
 
     // other modules
     implementation 'org.ocpsoft.prettytime:prettytime:4.0.5.Final'
@@ -108,7 +112,6 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.3'
     
     implementation 'com.google.code.gson:gson:2.8.6'
-    implementation 'joda-time:joda-time:2.10.6'
     implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
     implementation 'com.google.android.exoplayer:exoplayer:2.9.6'
     implementation 'org.jsoup:jsoup:1.13.1'
@@ -122,14 +125,17 @@ dependencies {
 
     // Android support modules
     implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'androidx.legacy:legacy-support-v13:1.0.0'
     implementation 'com.google.android.material:material:1.2.1'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'androidx.cardview:cardview:1.0.0'
-    implementation 'androidx.core:core:1.3.1'
+    implementation 'androidx.core:core:1.3.2'
     implementation 'androidx.preference:preference:1.1.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
-    implementation 'androidx.multidex:multidex:2.0.1' // as we have over 65536 lines of code...
+    implementation 'androidx.multidex:multidex:2.0.1' // as we have over 65536 methods...
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+
+    implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
+    implementation 'io.reactivex.rxjava3:rxjava:3.0.8'
 
     // debugImplementation because LeakCanary should only run in debug builds.
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.5'

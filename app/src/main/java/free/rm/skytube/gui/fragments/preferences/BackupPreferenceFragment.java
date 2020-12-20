@@ -19,10 +19,10 @@ package free.rm.skytube.gui.fragments.preferences;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.preference.Preference;
-import android.preference.PreferenceFragment;
 
 import androidx.annotation.NonNull;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
 
 import free.rm.skytube.R;
 import free.rm.skytube.gui.businessobjects.SubscriptionsBackupsManager;
@@ -30,14 +30,11 @@ import free.rm.skytube.gui.businessobjects.SubscriptionsBackupsManager;
 /**
  * Preference fragment for backup related settings.
  */
-public class BackupPreferenceFragment extends PreferenceFragment {
-
+public class BackupPreferenceFragment extends PreferenceFragmentCompat {
 	private SubscriptionsBackupsManager subscriptionsBackupsManager;
 
-
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+	public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
 		addPreferencesFromResource(R.xml.preference_backup);
 
 		subscriptionsBackupsManager = new SubscriptionsBackupsManager(getActivity(), this);
@@ -64,13 +61,17 @@ public class BackupPreferenceFragment extends PreferenceFragment {
 		});
 	}
 
+	@Override
+	public void onDestroy() {
+		subscriptionsBackupsManager.clearBackgroundTasks();
+		super.onDestroy();
+	}
 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		subscriptionsBackupsManager.onActivityResult(requestCode, resultCode, data);
 	}
-
 
 	@Override
 	public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

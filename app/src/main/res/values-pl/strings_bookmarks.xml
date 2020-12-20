@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="bookmarks">Zakładki</string>
-
-	<string name="bookmark">Zakładka</string>
-	<string name="video_bookmarked">Film zapisany</string>
-	<string name="video_bookmarked_error">Nie można zapisać filmu.</string>
-
-	<string name="unbookmark">Usuń zakładkę</string>
-	<string name="video_unbookmarked">Zakładka usunięta</string>
-	<string name="video_unbookmarked_error">Nie można usunąć zakładki.</string>
-
-	<string name="no_bookmarked_videos_text">Nie zapisałeś jeszcze żadnych filmów.\n\nKiedy to uczynisz, pojawią się one tutaj.</string>
+    <string name="bookmarks">Zakładki</string>
+    <string name="bookmark">Dodaj do zakładek</string>
+    <string name="video_bookmarked">Film zapisany</string>
+    <string name="video_bookmarked_error">Nie można zapisać filmu.</string>
+    <string name="unbookmark">Usuń zakładkę</string>
+    <string name="video_unbookmarked">Zakładka usunięta</string>
+    <string name="video_unbookmarked_error">Nie można usunąć zakładki.</string>
+    <string name="no_bookmarked_videos_text">Nie zapisałeś jeszcze żadnych filmów.\n\nKiedy to uczynisz, pojawią się one tutaj.</string>
+    <string name="bookmark_share_label">Zakładki SkyTube</string>
+    <string name="bookmark_share_invalid_url">Tylko prawidłowe adresy URL filmów YouTube mogą zostać zapisane.</string>
+    <string name="video_was_not_bookmarked">Film nie został zapisany</string>
+    <string name="video_already_bookmarked">Film został już zapisany</string>
 </resources>

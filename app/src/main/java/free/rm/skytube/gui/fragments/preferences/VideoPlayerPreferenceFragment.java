@@ -18,9 +18,10 @@
 package free.rm.skytube.gui.fragments.preferences;
 
 import android.os.Bundle;
-import android.preference.ListPreference;
-import android.preference.Preference;
-import android.preference.PreferenceFragment;
+
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
 
 import java.util.Arrays;
 
@@ -32,15 +33,14 @@ import free.rm.skytube.businessobjects.YouTube.VideoStream.VideoResolution;
 /**
  * Preference fragment for video player related settings.
  */
-public class VideoPlayerPreferenceFragment extends PreferenceFragment {
-
+public class VideoPlayerPreferenceFragment extends PreferenceFragmentCompat {
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+	public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
 		addPreferencesFromResource(R.xml.preference_video_player);
 
 		// set up the list of available video resolutions
-		VideoResolution.setupListPreferences((ListPreference) findPreference(getString(R.string.pref_key_preferred_res)));
+		VideoResolution.setupListPreferences(findPreference(getString(R.string.pref_key_maximum_res)));
+		VideoResolution.setupListPreferences(findPreference(getString(R.string.pref_key_minimum_res)));
 
 		// if we are running an OSS version, then remove the last option (i.e. the "official" player
 		// option)
@@ -57,7 +57,5 @@ public class VideoPlayerPreferenceFragment extends PreferenceFragment {
 			SkyTubeApp.getSettings().showTutorialAgain();
 			return true;
 		});
-
 	}
-
 }

@@ -34,14 +34,20 @@ public class DownloadedVideosDb extends SQLiteOpenHelperEx implements OrderableD
 
 	public static class Status {
 		final Uri uri;
+		final Uri audioUri;
 		final boolean disapeared;
-		public Status(Uri uri, boolean disapeared) {
+		public Status(Uri uri, Uri audioUri, boolean disapeared) {
 			this.uri = uri;
+			this.audioUri = audioUri;
 			this.disapeared = disapeared;
 		}
 
 		public Uri getUri() {
 			return uri;
+		}
+
+		public Uri getAudioUri() {
+			return audioUri;
 		}
 
 		public boolean isDisapeared() {
@@ -214,11 +220,11 @@ public class DownloadedVideosDb extends SQLiteOpenHelperEx implements OrderableD
 			File file = new File(uri.getPath());
 			if (!file.exists()) {
 				remove(videoId);
-				return new Status(null, true);
+				return new Status(null, null, true);
 			}
-			return new Status(uri, false);
+			return new Status(uri,  null,false);
 		}
-		return new Status(null, false);
+		return new Status(null,null, false);
 	}
 
 	private synchronized void onUpdated() {

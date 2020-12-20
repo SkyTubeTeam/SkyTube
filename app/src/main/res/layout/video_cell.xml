@@ -37,14 +37,15 @@
 	<TextView
 		android:id="@+id/thumbs_up_text_view"
 		style="@style/GridMicroDetailsTextView"
-		android:layout_marginBottom="8dp"
 		android:layout_marginStart="8dp"
 		android:layout_marginLeft="8dp"
-		android:drawableLeft="@drawable/ic_thumb_up_white"
+		android:layout_marginBottom="8dp"
 		android:drawablePadding="5dp"
 		android:text="97%"
+		app:drawableLeftCompat="@drawable/ic_thumb_up"
+		app:drawableStartCompat="@drawable/ic_thumb_up"
 		app:layout_constraintBottom_toTopOf="@+id/channel_layout"
-		app:layout_constraintStart_toStartOf="parent"/>
+		app:layout_constraintStart_toStartOf="parent" />
 
 	<TextView
 		android:id="@+id/video_duration_text_view"

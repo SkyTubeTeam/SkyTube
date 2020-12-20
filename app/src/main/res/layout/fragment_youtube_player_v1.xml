@@ -71,13 +71,15 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:orientation="vertical">
+
 			<ImageView
 				android:id="@+id/video_desc_icon_image_view"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
+				android:background="@color/video_player_drawer_background"
 				android:padding="5dp"
-				android:src="@drawable/ic_info_white"
-				android:background="@color/video_player_drawer_background"/>
+				drawer:srcCompat="@drawable/ic_info" />
+
 		</LinearLayout>
 
 		<include
@@ -108,13 +110,15 @@
 			android:layout_width="wrap_content"
 			android:layout_height="match_parent"
 			android:orientation="vertical">
+
 			<ImageView
 				android:id="@+id/comments_icon_image_view"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
+				android:background="@color/video_player_drawer_background"
 				android:padding="5dp"
-				android:src="@drawable/ic_comment_white"
-				android:background="@color/video_player_drawer_background"/>
+				drawer:srcCompat="@drawable/ic_comment" />
+
 		</LinearLayout>
 
 		<RelativeLayout

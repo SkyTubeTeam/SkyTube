@@ -23,7 +23,6 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -35,6 +34,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.mediarouter.media.MediaRouteSelector;
 import androidx.mediarouter.media.MediaRouter;
+import androidx.preference.PreferenceManager;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.google.android.gms.cast.CastMediaControlIntent;
@@ -55,11 +55,14 @@ import com.google.android.gms.common.images.WebImage;
 import com.google.gson.Gson;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
+import org.schabi.newpipe.extractor.stream.StreamInfo;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import free.rm.skytube.BuildConfig;
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
+import free.rm.skytube.app.StreamSelectionPolicy;
 import free.rm.skytube.businessobjects.ChromecastListener;
 import free.rm.skytube.businessobjects.GetVideoDetailsTask;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
@@ -472,7 +475,7 @@ public abstract class BaseActivity extends AppCompatActivity implements MainActi
 		} else {
 			video.getDesiredStream(new GetDesiredStreamListener() {
 				@Override
-				public void onGetDesiredStream(StreamMetaData desiredStream) {
+				public void onGetDesiredStream(StreamInfo desiredStream) {
 					if(mCastSession == null)
 						return;
 					Gson gson = new Gson();
@@ -483,9 +486,11 @@ public abstract class BaseActivity extends AppCompatActivity implements MainActi
 
 					metadata.addImage(new WebImage(Uri.parse(video.getThumbnailUrl())));
 
-					MediaInfo currentPlayingMedia = new MediaInfo.Builder(desiredStream.getUri().toString())
+					StreamSelectionPolicy policy = SkyTubeApp.getSettings().getDesiredVideoResolution(false).withAllowVideoOnly(false);
+					StreamSelectionPolicy.StreamSelection selection = policy.select(desiredStream);
+					MediaInfo currentPlayingMedia = new MediaInfo.Builder(selection.getVideoStreamUri().toString())
 									.setStreamType(MediaInfo.STREAM_TYPE_BUFFERED)
-									.setContentType(desiredStream.getFormat().mimeType)
+									.setContentType(selection.getVideoStream().getFormat().mimeType)
 									.setMetadata(metadata)
 									.build();
 
@@ -503,12 +508,12 @@ public abstract class BaseActivity extends AppCompatActivity implements MainActi
 				}
 
 				@Override
-				public void onGetDesiredStreamError(String errorMessage) {
+				public void onGetDesiredStreamError(Exception errorMessage) {
 					if (errorMessage != null) {
 						if(chromecastLoadingSpinner != null)
 							chromecastLoadingSpinner.setVisibility(View.GONE);
 						new AlertDialog.Builder(BaseActivity.this)
-										.setMessage(errorMessage)
+										.setMessage(errorMessage.getMessage())
 										.setTitle(R.string.error_video_play)
 										.setCancelable(false)
 										.setPositiveButton(R.string.ok, (dialog, which) -> {

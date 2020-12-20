@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ SkyTube
-  ~ Copyright (C) 2017  Ramon Mifsud
+  ~ Copyright (C) 2017 Ramon Mifsud, 2020 Isira Seneviratne
   ~
   ~ This program is free software: you can redistribute it and/or modify
   ~ it under the terms of the GNU General Public License as published by
@@ -15,55 +15,53 @@
   ~ You should have received a copy of the GNU General Public License
   ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   -->
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
 
-<preference-headers xmlns:android="http://schemas.android.com/apk/res/android">
+    <Preference
+        app:fragment="free.rm.skytube.gui.fragments.preferences.VideoPlayerPreferenceFragment"
+        app:icon="@drawable/ic_pref_video_player"
+        app:key="pref_video_player"
+        app:title="@string/pref_video_player_category" />
 
-	<header
-		android:fragment="free.rm.skytube.gui.fragments.preferences.VideoPlayerPreferenceFragment"
-		android:icon="@drawable/ic_pref_video_player"
-		android:title="@string/pref_video_player_category">
-	</header>
+    <Preference
+        app:fragment="free.rm.skytube.gui.fragments.preferences.VideoBlockerPreferenceFragment"
+        app:icon="@drawable/ic_blocker"
+        app:key="pref_video_blocker"
+        app:title="@string/pref_video_blocker_category" />
 
-	<header
-		android:fragment="free.rm.skytube.gui.fragments.preferences.VideoBlockerPreferenceFragment"
-		android:icon="@drawable/ic_pref_blocked"
-		android:title="@string/pref_video_blocker_category">
-	</header>
+    <Preference
+        app:fragment="free.rm.skytube.gui.fragments.preferences.BackupPreferenceFragment"
+        app:icon="@drawable/ic_pref_backup"
+        app:key="pref_import_export"
+        app:title="@string/pref_import_export_category" />
 
-	<header
-		android:fragment="free.rm.skytube.gui.fragments.preferences.BackupPreferenceFragment"
-		android:icon="@drawable/ic_pref_backup"
-		android:title="@string/pref_import_export_category">
-	</header>
+    <Preference
+        app:fragment="free.rm.skytube.gui.fragments.preferences.PrivacyPreferenceFragment"
+        app:icon="@drawable/ic_pref_privacy"
+        app:key="pref_privacy"
+        app:title="@string/pref_privacy_category" />
 
-	<header
-		android:fragment="free.rm.skytube.gui.fragments.preferences.PrivacyPreferenceFragment"
-		android:icon="@drawable/ic_pref_privacy"
-		android:title="@string/pref_privacy_category">
-	</header>
+    <Preference
+        app:fragment="free.rm.skytube.gui.fragments.preferences.NetworkPreferenceFragment"
+        app:icon="@drawable/ic_pref_network"
+        app:key="pref_network_downloads"
+        app:title="@string/pref_network_downloads_category" />
 
-	<header
-		android:fragment="free.rm.skytube.gui.fragments.preferences.NetworkPreferenceFragment"
-		android:icon="@drawable/ic_pref_others"
-		android:title="@string/pref_network_downloads_category">
-	</header>
+    <Preference
+        app:fragment="free.rm.skytube.gui.fragments.preferences.OthersPreferenceFragment"
+        app:icon="@drawable/ic_pref_others"
+        app:key="pref_other"
+        app:title="@string/pref_other_category" />
 
-	<header
-		android:fragment="free.rm.skytube.gui.fragments.preferences.OthersPreferenceFragment"
-		android:icon="@drawable/ic_pref_others"
-		android:title="@string/pref_other_category">
-	</header>
+    <SwitchPreference app:fragment="free.rm.skytube.gui.fragments.preferences.OthersPreferenceFragment"
+        app:icon="@drawable/ic_baseline_nights_stay_24"
+        app:key="pref_theme"
+        app:title="@string/pref_night_theme" />
 
-	<header
-		android:fragment="free.rm.skytube.gui.fragments.preferences.AboutPreferenceFragment"
-		android:icon="@drawable/ic_pref_about"
-		android:title="@string/pref_about_category">
-	</header>
+    <Preference
+        app:fragment="free.rm.skytube.gui.fragments.preferences.AboutPreferenceFragment"
+        app:icon="@drawable/ic_pref_about"
+        app:key="pref_about"
+        app:title="@string/pref_about_category" />
 
-	<header
-		android:fragment="free.rm.skytube.gui.fragments.preferences.ThemePreferenceFragment"
-		android:icon="@drawable/ic_pref_theme"
-		android:title="@string/pref_theme_category">
-	</header>
-
-</preference-headers>
+</PreferenceScreen>

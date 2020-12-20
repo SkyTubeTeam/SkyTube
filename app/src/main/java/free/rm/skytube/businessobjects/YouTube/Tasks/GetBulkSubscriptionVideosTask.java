@@ -37,7 +37,6 @@ import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeException;
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
-import free.rm.skytube.businessobjects.utils.Predicate;
 
 /**
  * A task that returns the videos of channel the user has subscribed too. Used
@@ -151,19 +150,18 @@ public class GetBulkSubscriptionVideosTask extends AsyncTaskParallel<Void, GetBu
     private List<YouTubeVideo> fetchVideos(Map<String, Long> alreadyKnownVideos, String channelId) {
         try {
             List<YouTubeVideo> videos = NewPipeService.get().getVideosFromFeedOrFromChannel(channelId);
-            Predicate<YouTubeVideo> predicate = video -> {
+            // If we found a video which is already added to the db, no need to check the videos after,
+            // assume, they are older, and already seen
+            videos.removeIf(video -> {
                 Long storedTs = alreadyKnownVideos.get(video.getId());
                 if (storedTs != null && Boolean.TRUE.equals(video.getPublishTimestampExact()) && !storedTs.equals(video.getPublishTimestamp())) {
                     // the freshly retrieved video contains an exact, and different publish timestamp
-                    int result = subscriptionsDb.setPublishTimestamp(video);
+                    subscriptionsDb.setPublishTimestamp(video);
                     Logger.i(this, "Updating publish timestamp for %s - %s with %s",
                             video.getId(), video.getTitle(), new Date(video.getPublishTimestamp()));
                 }
                 return storedTs != null;
-            };
-            // If we found a video which is already added to the db, no need to check the videos after,
-            // assume, they are older, and already seen
-            predicate.removeIf(videos);
+            });
             return videos;
         } catch (NewPipeException e) {
             Logger.e(this, "Error during fetching channel page for " + channelId + ",msg:" + e.getMessage(), e);

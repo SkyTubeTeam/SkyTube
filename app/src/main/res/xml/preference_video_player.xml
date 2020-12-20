@@ -16,43 +16,48 @@
   ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
 
 	<ListPreference
-		android:key="@string/pref_key_preferred_res"
-		android:title="@string/pref_title_preferred_res"
-		android:summary="@string/pref_summary_preferred_res"/>
+		app:key="@string/pref_key_maximum_res"
+		app:title="@string/pref_title_maximum_res"
+		app:summary="@string/pref_summary_maximum_res"/>
 
 	<ListPreference
-		android:key="@string/pref_key_choose_player"
-		android:title="@string/pref_title_choose_player"
-		android:summary="@string/pref_summary_choose_player"
-		android:entries="@array/pref_video_players"
-		android:entryValues="@array/pref_video_players_values"
-		android:defaultValue="@string/pref_default_player_value"/>
+		app:key="@string/pref_key_minimum_res"
+		app:title="@string/pref_title_minimum_res"
+		app:summary="@string/pref_summary_minimum_res"/>
 
 	<ListPreference
-		android:key="@string/pref_key_screen_orientation"
-		android:title="@string/pref_title_screen_orientation"
-		android:summary="@string/pref_summary_screen_orientation"
-		android:entries="@array/screen_orientations"
-		android:entryValues="@array/screen_orientations_values"
-		android:defaultValue="@string/pref_screen_auto_value"/>
+		app:key="@string/pref_key_choose_player"
+		app:title="@string/pref_title_choose_player"
+		app:summary="@string/pref_summary_choose_player"
+		app:entries="@array/pref_video_players"
+		app:entryValues="@array/pref_video_players_values"
+		app:defaultValue="@string/pref_default_player_value"/>
+
+	<ListPreference
+		app:key="@string/pref_key_screen_orientation"
+		app:title="@string/pref_title_screen_orientation"
+		app:summary="@string/pref_summary_screen_orientation"
+		app:entries="@array/screen_orientations"
+		app:entryValues="@array/screen_orientations_values"
+		app:defaultValue="@string/pref_screen_auto_value"/>
 
 	<CheckBoxPreference
-		android:key="@string/pref_key_disable_screen_gestures"
-		android:title="@string/pref_title_disable_screen_gestures"
-		android:summary="@string/pref_summary_disable_screen_gestures"/>
+		app:key="@string/pref_key_disable_screen_gestures"
+		app:title="@string/pref_title_disable_screen_gestures"
+		app:summary="@string/pref_summary_disable_screen_gestures"/>
 
 	<CheckBoxPreference
-		android:defaultValue="true"
-		android:key="@string/pref_key_enable_immersive_mode"
-		android:summary="@string/pref_summary_enable_immersive_mode"
-		android:title="@string/pref_title_enable_immersive_mode" />
+		app:defaultValue="true"
+		app:key="@string/pref_key_enable_immersive_mode"
+		app:summary="@string/pref_summary_enable_immersive_mode"
+		app:title="@string/pref_title_enable_immersive_mode" />
 
 	<CheckBoxPreference
-		android:key="@string/pref_key_switch_volume_and_brightness"
-		android:title="@string/pref_title_switch_volume_and_brightness"
-		android:summary="@string/pref_summary_switch_volume_and_brightness"/>
+		app:key="@string/pref_key_switch_volume_and_brightness"
+		app:title="@string/pref_title_switch_volume_and_brightness"
+		app:summary="@string/pref_summary_switch_volume_and_brightness"/>
 
 </PreferenceScreen>

@@ -28,7 +28,7 @@
     <string name="play">Démarrer</string>
     <string name="cancel">Annuler</string>
     <string name="clear">Effacer</string>
-    <string name="should_resume">eprendre la vidéo là où vous l\'avez arrêté ?</string>
+    <string name="should_resume">Reprendre la vidéo là où vous l\'avez arrêtée \?</string>
     <string name="resume">Reprendre la vidéo</string>
     <string name="mobile_data">Données mobiles</string>
     <string name="warning_mobile_network_play">Votre appareil n\'est pas connecté à un réseau wi-fi. Pour éviter des frais supplémentaires liés à l\'utilisation de données, il est recommandé de vous connecter à un réseau wi-fi. Voulez-vous malgré tout lire la vidéo \?</string>

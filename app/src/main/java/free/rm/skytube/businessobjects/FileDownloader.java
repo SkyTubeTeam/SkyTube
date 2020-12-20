@@ -27,6 +27,8 @@ import android.net.Uri;
 import android.os.Environment;
 import android.webkit.MimeTypeMap;
 
+import androidx.core.content.ContextCompat;
+
 import java.io.File;
 import java.io.Serializable;
 import java.util.regex.Pattern;
@@ -118,7 +120,7 @@ public abstract class FileDownloader implements Serializable, PermissionsActivit
 				.setDescription(description)
 				.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
 
-		String videoDir = SkyTubeApp.getPreferenceManager().getString(SkyTubeApp.getStr(R.string.pref_key_video_download_folder), null);
+		String videoDir = SkyTubeApp.getSettings().getDownloadFolder(null);
 		if(videoDir != null) {
 			request.setDestinationUri(Uri.fromFile(new File(videoDir, fullDownloadFileName)));
 		} else {
@@ -133,7 +135,7 @@ public abstract class FileDownloader implements Serializable, PermissionsActivit
 		getContext().registerReceiver(onComplete, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
 
 		// start downloading
-		downloadId = getDownloadManager().enqueue(request);
+		downloadId = ContextCompat.getSystemService(getContext(), DownloadManager.class).enqueue(request);
 		onFileDownloadStarted();
 	}
 
@@ -190,8 +192,9 @@ public abstract class FileDownloader implements Serializable, PermissionsActivit
 	 */
 	private void fileDownloadStatus() {
 		boolean downloadSuccessful = false;
-		Uri     downloadedFileUri  = null;
-		Cursor  cursor = getDownloadManager().query(new DownloadManager.Query().setFilterById(downloadId));
+		Uri downloadedFileUri  = null;
+		Cursor cursor = ContextCompat.getSystemService(getContext(), DownloadManager.class)
+				.query(new DownloadManager.Query().setFilterById(downloadId));
 
 		if (cursor != null  &&  cursor.moveToFirst()) {
 			final int columnIndex = cursor.getColumnIndex(DownloadManager.COLUMN_STATUS);
@@ -297,11 +300,6 @@ public abstract class FileDownloader implements Serializable, PermissionsActivit
 		this.allowedNetworkTypesFlags = allowedNetworkTypesFlags;
 		return this;
 	}
-
-	private DownloadManager getDownloadManager() {
-		return (DownloadManager) getContext().getSystemService(Context.DOWNLOAD_SERVICE);
-	}
-
 
 	////////////////////////////////////////////////////////////////////////////////////////////////
 
