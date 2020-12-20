@@ -22,4 +22,14 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="search_channel">Search channel</string>
+    <string name="pref_key_night" translatable="false">key_night_mode</string>
+    <string name="pref_night_title">Night mode</string>
+    <string name="pref_night_summary">Select a dark or light theme.</string>
+    <string name="pref_night_dialog">Set Night mode</string>
+    <string name="pref_night_auto" translatable="false">auto</string>
+    <string name="pref_night_on" translatable="false">on</string>
+    <string name="pref_night_off" translatable="false">off</string>
+    <string name="night_mode_auto">Automatic</string>
+    <string name="night_mode_on">Night mode</string>
+    <string name="night_mode_off">Day mode</string>
 </resources>

@@ -111,9 +111,9 @@ public class SkyTubeApp extends MultiDexApplication {
 
 
 	/**
-	 * Given a string array resource ID, it returns an array of strings.
+	 * Given a string array.xml resource ID, it returns an array.xml of strings.
 	 *
-	 * @param stringArrayResId String array resource ID (e.g. R.string.my_array_string)
+	 * @param stringArrayResId String array.xml resource ID (e.g. R.string.my_array_string)
 	 * @return Array of String.
 	 */
 	public static String[] getStringArray(int stringArrayResId) {
@@ -122,9 +122,9 @@ public class SkyTubeApp extends MultiDexApplication {
 
 
 	/**
-	 * Given a string array resource ID, it returns an list of strings.
+	 * Given a string array.xml resource ID, it returns an list of strings.
 	 *
-	 * @param stringArrayResId String array resource ID (e.g. R.string.my_array_string)
+	 * @param stringArrayResId String array.xml resource ID (e.g. R.string.my_array_string)
 	 * @return List of String.
 	 */
 	public static List<String> getStringArrayAsList(int stringArrayResId) {

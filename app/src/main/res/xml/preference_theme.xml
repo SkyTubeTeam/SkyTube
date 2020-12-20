@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ListPreference
+        android:defaultValue="@string/pref_night_auto"
+        android:dialogTitle="@string/pref_night_dialog"
+        android:entries="@array/night_mode"
+        android:entryValues="@array/night_mode_value"
+        app:key="@string/pref_key_night"
+        app:summary="@string/pref_night_summary"
+        app:title="@string/pref_night_title" />
+
+</androidx.preference.PreferenceScreen>

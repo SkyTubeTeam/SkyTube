@@ -37,8 +37,8 @@
 	<!--<ListPreference-->
 		<!--app:key="@string/pref_feed_notification_key"-->
 		<!--app:title="@string/pref_title_feed_notification"-->
-		<!--app:entries="@array/feed_notification"-->
-		<!--app:entryValues="@array/feed_notification_values" />-->
+		<!--app:entries="@array.xml/feed_notification"-->
+		<!--app:entryValues="@array.xml/feed_notification_values" />-->
 
 	<CheckBoxPreference
 		app:defaultValue="true"
