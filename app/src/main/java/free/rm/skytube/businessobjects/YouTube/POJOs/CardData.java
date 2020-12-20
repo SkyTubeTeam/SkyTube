@@ -1,6 +1,9 @@
 package free.rm.skytube.businessobjects.YouTube.POJOs;
 
+import org.ocpsoft.prettytime.PrettyTime;
+
 import java.io.Serializable;
+import java.time.Instant;
 
 public class CardData implements Serializable {
     protected String              id;
@@ -77,8 +80,9 @@ public class CardData implements Serializable {
     public final String getPublishDatePretty() {
         long now = System.currentTimeMillis();
         // if pretty is not yet calculated, or the publish date was generated more than (1 hour) PUBLISH_DATE_VALIDITY_TIME ago...
-        if (publishTimestamp != null && (publishDatePretty == null || PUBLISH_DATE_VALIDITY_TIME < now - publishDatePrettyCalculationTime)) {
-            this.publishDatePretty = new PrettyTimeEx().format(publishTimestamp);
+        if (publishTimestamp != null && (publishDatePretty == null ||
+                PUBLISH_DATE_VALIDITY_TIME < now - publishDatePrettyCalculationTime)) {
+            this.publishDatePretty = new PrettyTime().format(Instant.ofEpochMilli(publishTimestamp));
             this.publishDatePrettyCalculationTime = now;
         }
         return publishDatePretty != null ? publishDatePretty : "???";

@@ -33,6 +33,7 @@ import com.google.api.services.youtube.model.Video;
 import com.google.api.services.youtube.model.VideoSnippet;
 import com.google.api.services.youtube.model.VideoStatistics;
 
+import org.ocpsoft.prettytime.PrettyTime;
 import org.schabi.newpipe.extractor.stream.Stream;
 import org.schabi.newpipe.extractor.stream.StreamInfo;
 import org.schabi.newpipe.extractor.stream.VideoStream;
@@ -238,7 +239,7 @@ public class YouTubeVideo extends CardData implements Serializable {
 	 * Using {@link #duration} it detects if the video/stream is live or not.
 	 * <p>
 	 * <p>If it is live, then it will change {@link #duration} to "LIVE" and modify {@link #publishDate}
-	 * to current time (which will appear as "moments ago" when using {@link PrettyTimeEx}).</p>
+	 * to current time (which will appear as "moments ago" when using {@link PrettyTime}).</p>
 	 */
 	private void setIsLiveStream() {
 		// is live stream?
