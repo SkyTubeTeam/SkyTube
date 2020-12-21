@@ -30,12 +30,12 @@
     <string name="mark_unwatched">Merk usette</string>
     <string name="should_resume">Ønsker du å fortsette der du slapp?</string>
     <string name="resume">Fortsett</string>
-    <string name="mobile_data">Mobildata</string>
-    <string name="warning_mobile_network_play">Enheten din er ikke tilknyttet et Wi-Fi -nettverk. For å unngå ekstra brukskostnader, anbefales det å koble til et Wi-Fi -nettverk. Spill video uansett\?</string>
-    <string name="warning_mobile_network_disable">Aldri spør igjen.</string>
+    <string name="metered_network">Mobildata</string>
+    <string name="warning_metered_network_play">Enheten din er ikke tilknyttet et Wi-Fi -nettverk. For å unngå ekstra brukskostnader, anbefales det å koble til et Wi-Fi -nettverk. Spill video uansett\?</string>
+    <string name="warning_metered_network_disable">Aldri spør igjen.</string>
     <string name="play_video">Spill video</string>
     <string name="error_get_comments_no_network">Nettverkstilgang behøves for å hente kommentarer.</string>
-    <string name="mobile_data_blocked_by_policy">Nedlasting blokkert, fordi din enhet ikke er tilknyttet et Wi-Fi-nettverk.</string>
+    <string name="metered_network_blocked_by_policy">Nedlasting blokkert, fordi din enhet ikke er tilknyttet et Wi-Fi-nettverk.</string>
     <string name="error_video_parse_error">Kunne ikke starte videoavspilling, feilmeldingen er: <br/> <br/> %s.</string>
     <string name="error_downloaded_file_is_corrupted">Nedlastet video later til å være <b>skadet</b> - feilmeldingen er: <br/> <br/> %s. <br/> <br/> Ønsker du å <b>slette</b> filen\?</string>
 </resources>

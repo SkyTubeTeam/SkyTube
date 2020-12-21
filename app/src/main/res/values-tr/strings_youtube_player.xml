@@ -30,11 +30,11 @@
     <string name="mark_unwatched">İzlenmedi olarak işaretle</string>
     <string name="should_resume">Durduğunuz yerden devam etmek ister misiniz?</string>
     <string name="resume">Devam et</string>
-    <string name="mobile_data">Mobil Veri</string>
-    <string name="warning_mobile_network_play">Cihazınız bir Wi-Fi ağına bağlı değil. Olası ekstra veri kullanımı değişikliklerinden kaçınmak için bir Wi-Fi ağına bağlamanız önerilir. Yine de video oynatılsın mı\?</string>
-    <string name="warning_mobile_network_disable">Asla tekrar sorma.</string>
+    <string name="metered_network">Mobil Veri</string>
+    <string name="warning_metered_network_play">Cihazınız bir Wi-Fi ağına bağlı değil. Olası ekstra veri kullanımı değişikliklerinden kaçınmak için bir Wi-Fi ağına bağlamanız önerilir. Yine de video oynatılsın mı\?</string>
+    <string name="warning_metered_network_disable">Asla tekrar sorma.</string>
     <string name="play_video">Videoyu Oynat</string>
-    <string name="mobile_data_blocked_by_policy">İndirme başarısız: Cihazın Wi-Fi bağlantısı yok.</string>
+    <string name="metered_network_blocked_by_policy">İndirme başarısız: Cihazın Wi-Fi bağlantısı yok.</string>
     <string name="error_video_parse_error">Video oynatma başlatılamadı, hata mesajı: <br/> <br/> %s.</string>
     <string name="error_downloaded_file_is_corrupted">İndirilen video <b>bozuk</b> görünüyor - hata mesajı: <br/> <br/> %s. <br/> <br/> Dosyayı <b>silmek</b> istiyor musunuz\?</string>
     <string name="error_get_comments_no_network">Yorumların yüklenmesi için ağ erişimi gerekli.</string>

@@ -11,5 +11,5 @@
 	<string name="playing_video_file_missing">未找到該影片的下載。遠端播放。</string>
 	<string name="external_storage_not_available">無法下載該檔案，因為外部存儲空間不能使用。</string>
 <string name="download">下載</string>
-	<string name="warning_mobile_network_download">您的裝置未連線至 Wi-Fi 網路。為了避免額外的資料使用費，建議您連線到 Wi-Fi 網路。無論如何都要下載嗎？</string>
+	<string name="warning_metered_network_download">您的裝置未連線至 Wi-Fi 網路。為了避免額外的資料使用費，建議您連線到 Wi-Fi 網路。無論如何都要下載嗎？</string>
 	</resources>

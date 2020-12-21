@@ -131,11 +131,11 @@
     <string name="pref_title_disable_screen_gestures">Deshabilitar gestos de video</string>
     <string name="pref_summary_disable_screen_gestures">Deshabilitar gestos para controlar volumen, brillo y búsqueda adelante/atrás en videos.</string>
     <string name="pref_summary_enable_video_blocker">Habilitar bloqueador de videos.</string>
-    <string name="pref_category_mobile_network">Red móvil</string>
+    <string name="pref_category_metered_network">Red móvil</string>
     <string name="pref_title_preferred_res_mobile">Resolución preferida con Redes móviles</string>
     <string name="pref_summary_preferred_res_mobile">Selecciona tu resolución preferida cuando visualizas desde una red móvil (como 4G):%s</string>
-    <string name="pref_summary_mobile_network_usage">Qué hacer, si estás usando red móvil (como 4G) para descargar, ver vídeos: %s</string>
-    <string name="pref_title_mobile_network_usage">Uso de redes móviles</string>
+    <string name="pref_summary_metered_network_usage">Qué hacer, si estás usando red móvil (como 4G) para descargar, ver vídeos: %s</string>
+    <string name="pref_title_metered_network_usage">Uso de redes móviles</string>
     <string name="key_preferences">preferencias</string>
     <string name="pref_video_download_preferred_resolution_summary">Las descargas de vídeos prefieren esta resolución: %s</string>
     <string name="pref_video_download_preferred_resolution_title">Resolución preferida de descarga de vídeo</string>

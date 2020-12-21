@@ -12,5 +12,5 @@
     <string name="playing_video_file_missing">Bu video için indirme bulunamadı. Uzaktan oynatılıyor.</string>
     <string name="external_storage_not_available">Dosya harici depolama alanı olarak indirilemiyor.</string>
     <string name="download">İndir</string>
-    <string name="warning_mobile_network_download">Cihazınız bir Wi-Fi ağına bağlı değil. Olası fazladan veri kullanımı ücretlerinden kaçınmak için bir Wi-Fi ağına bağlamanız önerilir. Yine de video indirilsin mi\?</string>
+    <string name="warning_metered_network_download">Cihazınız bir Wi-Fi ağına bağlı değil. Olası fazladan veri kullanımı ücretlerinden kaçınmak için bir Wi-Fi ağına bağlamanız önerilir. Yine de video indirilsin mi\?</string>
 </resources>

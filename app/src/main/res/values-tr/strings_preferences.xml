@@ -123,7 +123,7 @@
     <string name="pref_title_download_to_separate_directories">Videoları Klasörlere İndir</string>
     <string name="pref_summary_download_to_separate_directories">Videolar kanal adına göre klasörlere indirilir.</string>
     <string name="pref_summary_enable_video_blocker">Video engelleyiciyi etkinleştir.</string>
-    <string name="pref_category_mobile_network">Mobil ağ</string>
+    <string name="pref_category_metered_network">Mobil ağ</string>
     <string name="pref_title_preferred_res_mobile">Mobil ağ için Tercih Edilen Çözünürlük</string>
     <string name="pref_summary_preferred_res_mobile">Mobil ağ üzerinden bağlanırken tercih ettiğiniz çözünürlüğü seçin (4G gibi): %s</string>
     <string name="pref_video_download_preferred_resolution_summary">Video indirmeleri için bu çözünürlük tercih edilecek: %s</string>
@@ -146,7 +146,7 @@
     <string name="pref_title_autocast">AutoCast</string>
     <string name="pref_title_chromecast_none">Yok</string>
     <string name="pref_chromecast_category">Chromecast</string>
-    <string name="pref_summary_mobile_network_usage">Videoları indirmek, izlemek için mobil ağ (örneğin 4G) kullanıyorsanız ne yapılacağı: %s</string>
-    <string name="pref_title_mobile_network_usage">Mobil Ağ Kullanımı</string>
+    <string name="pref_summary_metered_network_usage">Videoları indirmek, izlemek için mobil ağ (örneğin 4G) kullanıyorsanız ne yapılacağı: %s</string>
+    <string name="pref_title_metered_network_usage">Mobil Ağ Kullanımı</string>
     <string name="key_preferences">tercihler</string>
 </resources>

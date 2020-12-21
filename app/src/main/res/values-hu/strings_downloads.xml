@@ -2,7 +2,7 @@
 <resources>
     <string name="download">Letöltés</string>
     <string name="downloads">Letöltések</string>
-    <string name="warning_mobile_network_download">Az eszköze nem csatlakozik Wi-Fi hálózathoz. Hogy elkerülje az extra adatforgalommal járó költségeket, javasolt a Wi-Fi hálózat használata. Mindenképp letölti a videót\?</string>
+    <string name="warning_metered_network_download">Az eszköze nem csatlakozik Wi-Fi hálózathoz. Hogy elkerülje az extra adatforgalommal járó költségeket, javasolt a Wi-Fi hálózat használata. Mindenképp letölti a videót\?</string>
     <string name="download_video">Videó letöltése</string>
     <string name="starting_video_download">„%s” letöltése…</string>
     <string name="video_download_stream_error">Nem sikerült letölteni: „%s”.</string>

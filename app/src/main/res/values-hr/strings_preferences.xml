@@ -111,7 +111,7 @@
 \nU prilogu ovog programa trebala bi se nalaziti i GNU opća javna licenca. Ako ne, pogledaj &lt;http://www.gnu.org/licenses/&gt;</string>
     <string name="pref_title_feed_notification">Automatska feed obavijest</string>
     <string name="pref_summary_enable_video_blocker">Aktiviraj blokiranje videozapisa.</string>
-    <string name="pref_category_mobile_network">Mobilna mreža</string>
+    <string name="pref_category_metered_network">Mobilna mreža</string>
     <string name="pref_title_preferred_res_mobile">Preferirana rezolucija za mobilnu mrežu</string>
     <string name="pref_summary_preferred_res_mobile">Odaberi preferiranu rezoluciju za prijenos putem mobilne mreže (kao što je 4G): %s</string>
     <string name="pref_video_continuous_repeat_toggle">Stalno ponavljanje</string>
@@ -134,7 +134,7 @@
     <string name="pref_title_autocast">AutoCast</string>
     <string name="pref_title_chromecast_none">Ništa</string>
     <string name="pref_chromecast_category">Chromecast</string>
-    <string name="pref_summary_mobile_network_usage">Što učiniti, ako za preuzimanje i gledanje videozapisa koristiš mobilnu mrežu (poput 4G): %s</string>
-    <string name="pref_title_mobile_network_usage">Upotreba mobilne mreže</string>
+    <string name="pref_summary_metered_network_usage">Što učiniti, ako za preuzimanje i gledanje videozapisa koristiš mobilnu mrežu (poput 4G): %s</string>
+    <string name="pref_title_metered_network_usage">Upotreba mobilne mreže</string>
     <string name="key_preferences">postavke</string>
 </resources>

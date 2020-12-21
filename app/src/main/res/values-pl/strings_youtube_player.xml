@@ -28,14 +28,14 @@
     <string name="clear">Wyczyść</string>
     <string name="mark_watched">Oznacz jako obejrzane</string>
     <string name="should_resume">Czy chcesz wrócić do miejsca, w którym zatrzymałeś odtwarzanie\?</string>
-    <string name="mobile_data">Dane mobilne</string>
-    <string name="warning_mobile_network_play">Twoje urządzenie nie jest połączone z siecią Wi-Fi. Aby uniknąć potencjalnych dodatkowych opłat za wykorzystywanie danych, zaleca się połączenie z siecią Wi-Fi. Czy mimo to odtworzyć wideo\?</string>
-    <string name="warning_mobile_network_disable">Nigdy więcej nie pytaj.</string>
+    <string name="metered_network">Dane mobilne</string>
+    <string name="warning_metered_network_play">Twoje urządzenie nie jest połączone z siecią Wi-Fi. Aby uniknąć potencjalnych dodatkowych opłat za wykorzystywanie danych, zaleca się połączenie z siecią Wi-Fi. Czy mimo to odtworzyć wideo\?</string>
+    <string name="warning_metered_network_disable">Nigdy więcej nie pytaj.</string>
     <string name="play_video">Odtwórz wideo</string>
     <string name="mark_unwatched">Oznacz jako nieobejrzane</string>
     <string name="resume">Wznów</string>
     <string name="error_video_parse_error">Nie można rozpocząć odtwarzania wideo, komunikat o błędzie to: <br/> <br/> %s.</string>
     <string name="error_downloaded_file_is_corrupted">Pobrany plik wideo wygląda na <b>uszkodzony</b> - komunikat o błędzie to: <br/> <br/> %s. <br/> <br/> Czy chcesz <b>usunąć</b> plik\?</string>
     <string name="error_get_comments_no_network">Do pobierania komentarzy potrzebny jest dostęp do sieci.</string>
-    <string name="mobile_data_blocked_by_policy">Pobieranie zablokowane, ponieważ urządzenie nie jest podłączone do sieci Wi-Fi.</string>
+    <string name="metered_network_blocked_by_policy">Pobieranie zablokowane, ponieważ urządzenie nie jest podłączone do sieci Wi-Fi.</string>
 </resources>

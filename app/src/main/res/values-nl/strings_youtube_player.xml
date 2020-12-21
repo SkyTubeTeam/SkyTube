@@ -30,12 +30,12 @@
     <string name="mark_unwatched">Markeren als \'niet bekeken\'</string>
     <string name="should_resume">Wil je verdergaan waar je was gebleven?</string>
     <string name="resume">Hervatten</string>
-    <string name="mobile_data">Mobiel internet</string>
-    <string name="warning_mobile_network_play">Je apparaat is niet verbonden met een Wi-Fi-netwerk. Om te voorkomen dat je extra moet betalen voor gebruik van mobiel internet, raden wij aan te verbinden met een Wi-Fi-netwerk. Wil je de video tóch afspelen\?</string>
-    <string name="warning_mobile_network_disable">Niet opnieuw vragen.</string>
+    <string name="metered_network">Mobiel internet</string>
+    <string name="warning_metered_network_play">Je apparaat is niet verbonden met een Wi-Fi-netwerk. Om te voorkomen dat je extra moet betalen voor gebruik van mobiel internet, raden wij aan te verbinden met een Wi-Fi-netwerk. Wil je de video tóch afspelen\?</string>
+    <string name="warning_metered_network_disable">Niet opnieuw vragen.</string>
     <string name="play_video">Video afspelen</string>
     <string name="error_get_comments_no_network">Reacties zijn niet beschikbaar zonder internettoegang.</string>
-    <string name="mobile_data_blocked_by_policy">Het downloaden is tegengehouden omdat je niet verbonden bent met een Wi-Fi-netwerk.</string>
+    <string name="metered_network_blocked_by_policy">Het downloaden is tegengehouden omdat je niet verbonden bent met een Wi-Fi-netwerk.</string>
     <string name="error_video_parse_error">De video kan niet worden afgespeeld. De foutmelding is: <br/> <br/> %s.</string>
     <string name="error_downloaded_file_is_corrupted">De gedownloade video lijkt <b>beschadigd</b> te zijn. De foutmelding is: <br/> <br/> %s. <br/> <br/> Wil je het bestand <b>verwijderen</b>\?</string>
 </resources>

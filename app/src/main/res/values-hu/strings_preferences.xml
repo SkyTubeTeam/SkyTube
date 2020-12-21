@@ -12,11 +12,11 @@
         <item>Régi Lejátszó (nem javasolt)</item>
         <item>Hivatalos YouTube Lejátszó</item>
     </string-array>
-    <string name="pref_category_mobile_network">Mobilhálózat</string>
+    <string name="pref_category_metered_network">Mobilhálózat</string>
     <string name="pref_title_preferred_res_mobile">Előnyben részesített felbontás mobilhálózat esetén</string>
     <string name="pref_summary_preferred_res_mobile">Válassza ki az előnyben részesített videófelbontást, ha mobilhálózaton (például 4G-n) tölt le: %s</string>
-    <string name="pref_title_mobile_network_usage">Mobil adathasználat</string>
-    <string-array name="pref_mobile_network_usage">
+    <string name="pref_title_metered_network_usage">Mobil adathasználat</string>
+    <string-array name="pref_metered_network_usage">
         <item>Mindig kérdezzen rá</item>
         <item>Tiltás</item>
         <item>Engedélyezés</item>
@@ -106,7 +106,7 @@
     <string name="pref_summary_credits">Az emberek és projektek amik lehetővé tették ezt az alkalmazást.</string>
     <string name="pref_chromecast_category">Chromecast</string>
     <string name="pref_summary_import_subs">Feliratkozások importálása a YouTube-fiókjából.</string>
-    <string name="pref_summary_mobile_network_usage">Mi a teendő, ha mobilhálózatot (például 4G-t) használ letöltéshez, videónézéshez: %s</string>
+    <string name="pref_summary_metered_network_usage">Mi a teendő, ha mobilhálózatot (például 4G-t) használ letöltéshez, videónézéshez: %s</string>
     <string name="app_license">Copyright © 2015-2018 Ramon Mifsud
 \n
 \nEz a program szabad szoftver: terjesztheti és/vagy módosíthatja a Free Software Foundation által kiadott GNU General Public License feltételei alapján (a licenc 3-as verziója szerint).

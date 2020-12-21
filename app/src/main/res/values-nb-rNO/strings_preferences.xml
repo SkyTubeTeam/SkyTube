@@ -123,7 +123,7 @@
     <string name="pref_title_disable_screen_gestures">Skru av videohåndvendinger.</string>
     <string name="pref_summary_disable_screen_gestures">Skru håndvendinger for kontroll av lyd-, lys-styrke og blafringshåndvendinger forover/bakover for video.</string>
     <string name="pref_summary_enable_video_blocker">Skru på videoblokkering.</string>
-    <string name="pref_category_mobile_network">Mobilnettverk</string>
+    <string name="pref_category_metered_network">Mobilnettverk</string>
     <string name="pref_title_preferred_res_mobile">Foretrukket oppløsning for mobilnettverk</string>
     <string name="pref_summary_preferred_res_mobile">Velg din foretrukne oppløsning ved strømming via mobilnettverk (som 4G): %s</string>
     <string name="pref_summary_autocast">Velg Chromecast-enhet å bruke når videoes åpnes i SkyTube fra andre programmer.</string>
@@ -146,7 +146,7 @@
     <string name="pref_title_hide_tabs">Skjul faner</string>
     <string name="pref_network_downloads_category">Nettverk og nedlastinger</string>
     <string name="pref_title_chromecast_none">Ingenting</string>
-    <string name="pref_summary_mobile_network_usage">Hva skal skje hvis du bruker mobilnettverk (som 4G) til å laste ned, og se på videoer\? %s</string>
-    <string name="pref_title_mobile_network_usage">Mobildatabruk</string>
+    <string name="pref_summary_metered_network_usage">Hva skal skje hvis du bruker mobilnettverk (som 4G) til å laste ned, og se på videoer\? %s</string>
+    <string name="pref_title_metered_network_usage">Mobildatabruk</string>
     <string name="key_preferences">innstillinger</string>
 </resources>

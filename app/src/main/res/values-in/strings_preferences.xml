@@ -6,7 +6,7 @@
     <string name="pref_summary_preferred_res">Pilih resolusi video yang diinginkan: %s</string>
     <string name="pref_title_choose_player">Pemutar Video</string>
     <string name="pref_summary_choose_player">Pemutar Video yang digunakan: %s</string>
-    <string name="pref_category_mobile_network">Jaringan Seluler</string>
+    <string name="pref_category_metered_network">Jaringan Seluler</string>
     <string name="pref_title_preferred_res_mobile">Resolusi video untuk jaringan seluler</string>
     <string name="pref_summary_preferred_res_mobile">Pilih resolusi video yang diinginkan ketika streaming via jaringan seluler (seperti 4G): %s</string>
     <string name="pref_import_export_category">Impor/Ekspor</string>
@@ -126,8 +126,8 @@
     <string name="pref_title_autocast">AutoCast</string>
     <string name="pref_title_chromecast_none">Nihil</string>
     <string name="pref_chromecast_category">Chromecast</string>
-    <string name="pref_summary_mobile_network_usage">Yang harus dilakukan jika anda menggunakan jaringan data seluler (seperti 4G) untuk mengunduh, menonton video: %s</string>
-    <string name="pref_title_mobile_network_usage">Penggunaan Jaringan Seluler</string>
+    <string name="pref_summary_metered_network_usage">Yang harus dilakukan jika anda menggunakan jaringan data seluler (seperti 4G) untuk mengunduh, menonton video: %s</string>
+    <string name="pref_title_metered_network_usage">Penggunaan Jaringan Seluler</string>
     <string name="key_preferences">preferensi</string>
     <string name="pref_video_continuous_repeat_toggle">Pengulangan berkelanjutan</string>
     <string name="app_license">Hak Cipta © 2015-2018 Ramon Mifsud

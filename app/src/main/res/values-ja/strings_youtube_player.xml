@@ -37,8 +37,8 @@
 
 	<string name="should_resume">停止した位置から再生を再開しますか？</string>
 	<string name="resume">再開</string>
-    <string name="mobile_data">モバイル通信データ</string>
-    <string name="warning_mobile_network_play">お使いのデバイスはWi-Fiネットワークに接続されていません。 余分なデータ使用料が発生するのを避けるために、Wi-Fiネットワークに接続することをお勧めします。 とにかくビデオを再生しますか\?</string>
-    <string name="warning_mobile_network_disable">今後、表示しない。</string>
+    <string name="metered_network">モバイル通信データ</string>
+    <string name="warning_metered_network_play">お使いのデバイスはWi-Fiネットワークに接続されていません。 余分なデータ使用料が発生するのを避けるために、Wi-Fiネットワークに接続することをお勧めします。 とにかくビデオを再生しますか\?</string>
+    <string name="warning_metered_network_disable">今後、表示しない。</string>
     <string name="play_video">ビデオを再生</string>
 </resources>

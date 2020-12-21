@@ -27,30 +27,30 @@
         <item>@string/pref_official_player_value</item>
         <!-- this should remain the last item -->
     </string-array>
-    <string name="pref_category_mobile_network">Mobile Network</string>
+    <string name="pref_category_metered_network">Metered Network</string>
 
-    <string name="pref_title_minimum_res_mobile">Minimum Resolution for mobile network</string>
+    <string name="pref_title_minimum_res_metered">Minimum Resolution for metered network</string>
     <string name="pref_key_minimum_res_mobile" translatable="false">pref_minimum_resolution_mobile</string>
-    <string name="pref_summary_minimum_res_mobile">Select your minimum resolution when streaming via a mobile network (such as 4G):  %s</string>
-    <string name="pref_title_maximum_res_mobile">Maximum Resolution for mobile network</string>
+    <string name="pref_summary_minimum_res_mobile">Select your minimum resolution when streaming via a metered network:  %s</string>
+    <string name="pref_title_maximum_res_mobile">Maximum Resolution for metered network</string>
     <string name="pref_key_maximum_res_mobile" translatable="false">pref_maximum_resolution_mobile</string>
-    <string name="pref_summary_maximum_res_mobile">Select your maximum resolution when streaming via a mobile network (such as 4G):  %s</string>
+    <string name="pref_summary_maximum_res_mobile">Select your maximum resolution when streaming via a metered network:  %s</string>
 
     <string name="pref_key_mobile_network_usage_policy" translatable="false">pref_key_mobile_network_usage_policy</string>
-    <string name="pref_title_mobile_network_usage">Mobile Network Usage</string>
-    <string name="pref_summary_mobile_network_usage">What to do, if you are using mobile network (such as 4G) for downloading, watching videos: %s</string>
-    <string-array name="pref_mobile_network_usage">
+    <string name="pref_title_metered_network_usage">Metered Network Usage</string>
+    <string name="pref_summary_metered_network_usage">What to do if you are using a metered network for downloading/watching videos: %s</string>
+    <string-array name="pref_metered_network_usage">
         <item>Always ask</item>
         <item>Block</item>
         <item>Allow</item>
     </string-array>
-    <string name="pref_mobile_network_usage_value_ask" translatable="false">ask</string>
-    <string name="pref_mobile_network_usage_value_block" translatable="false">block</string>
-    <string name="pref_mobile_network_usage_value_allow" translatable="false">allow</string>
+    <string name="pref_metered_network_usage_value_ask" translatable="false">ask</string>
+    <string name="pref_metered_network_usage_value_block" translatable="false">block</string>
+    <string name="pref_metered_network_usage_value_allow" translatable="false">allow</string>
     <string-array name="pref_mobile_network_usage_values" translatable="false">
-        <item>@string/pref_mobile_network_usage_value_ask</item>
-        <item>@string/pref_mobile_network_usage_value_block</item>
-        <item>@string/pref_mobile_network_usage_value_allow</item>
+        <item>@string/pref_metered_network_usage_value_ask</item>
+        <item>@string/pref_metered_network_usage_value_block</item>
+        <item>@string/pref_metered_network_usage_value_allow</item>
     </string-array>
     <string name="pref_import_export_category">Import/Export</string>
     <string name="pref_title_backup_dbs">Backup Databases</string>

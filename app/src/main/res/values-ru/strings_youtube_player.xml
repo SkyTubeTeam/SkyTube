@@ -30,12 +30,12 @@
     <string name="mark_unwatched">Пометить непросмотренным</string>
     <string name="should_resume">Вы хотите начать с того места, где вы остановились?</string>
     <string name="resume">Возобновить</string>
-    <string name="mobile_data">Мобильные данные</string>
-    <string name="warning_mobile_network_play">Устройство не подключено к Wi-Fi сети. Мы советуем всё же подключиться к ней, чтобы ограничить передачу мобильных данных. Продолжить проигрывать видео без подключения к Wi-Fi\?</string>
-    <string name="warning_mobile_network_disable">Больше не спрашивать.</string>
+    <string name="metered_network">Мобильные данные</string>
+    <string name="warning_metered_network_play">Устройство не подключено к Wi-Fi сети. Мы советуем всё же подключиться к ней, чтобы ограничить передачу мобильных данных. Продолжить проигрывать видео без подключения к Wi-Fi\?</string>
+    <string name="warning_metered_network_disable">Больше не спрашивать.</string>
     <string name="play_video">Проиграть видео</string>
     <string name="error_get_comments_no_network">Доступ к сети необходим для получения комментариев.</string>
-    <string name="mobile_data_blocked_by_policy">Загрузка заблокирована, поскольку ваше устройство не подключено к сети Wi-Fi.</string>
+    <string name="metered_network_blocked_by_policy">Загрузка заблокирована, поскольку ваше устройство не подключено к сети Wi-Fi.</string>
     <string name="error_video_parse_error">Невозможно начать воспроизведение видео, сообщение об ошибке: <br/> <br/> %s.</string>
     <string name="error_downloaded_file_is_corrupted">Загруженное видео выглядит <b>поврежденным</b> - сообщение об ошибке: <br/><br/> %s. <br/><br/> Хотите <b>удалить</b> файл\?</string>
 </resources>

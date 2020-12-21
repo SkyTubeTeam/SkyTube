@@ -30,12 +30,12 @@
     <string name="mark_unwatched">Marcar como não visto</string>
     <string name="should_resume">Deseja continuar a reprodução do local em que parou?</string>
     <string name="resume">Continuar</string>
-    <string name="mobile_data">Dados móveis</string>
-    <string name="warning_mobile_network_play">O seu dispositivo não está ligado a uma rede Wi-Fi. Para evitar possíveis taxas de utilização de dados, recomenda-se a ligação a uma rede Wi-Fi. Reproduzir vídeo de qualquer forma\?</string>
-    <string name="warning_mobile_network_disable">Não perguntar novamente.</string>
+    <string name="metered_network">Dados móveis</string>
+    <string name="warning_metered_network_play">O seu dispositivo não está ligado a uma rede Wi-Fi. Para evitar possíveis taxas de utilização de dados, recomenda-se a ligação a uma rede Wi-Fi. Reproduzir vídeo de qualquer forma\?</string>
+    <string name="warning_metered_network_disable">Não perguntar novamente.</string>
     <string name="play_video">Reproduzir vídeo</string>
     <string name="error_get_comments_no_network">O acesso à rede é necessário para obter comentários.</string>
-    <string name="mobile_data_blocked_by_policy">Descarga bloqueada porque o seu dispositivo não está ligado a uma rede Wi-Fi.</string>
+    <string name="metered_network_blocked_by_policy">Descarga bloqueada porque o seu dispositivo não está ligado a uma rede Wi-Fi.</string>
     <string name="error_video_parse_error">Não foi possível reproduzir o vídeo, a mensagem de erro é: <br/>.<br/>.%s.</string>
     <string name="error_downloaded_file_is_corrupted">O vídeo descarregado parece estar <b>danificado</b> - a mensagem de erro é: <br/><br/>%s.<br/><br/> Deseja <b>apagar</b> o ficheiro\?</string>
 </resources>

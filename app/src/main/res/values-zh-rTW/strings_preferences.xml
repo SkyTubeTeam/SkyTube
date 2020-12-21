@@ -111,7 +111,7 @@
     <string name="pref_title_disable_screen_gestures">停用視訊手勢</string>
     <string name="pref_summary_disable_screen_gestures">關閉手勢以控制在影片中的音量、亮度和向前/向後查找。</string>
     <string name="pref_summary_enable_video_blocker">啟用影片阻擋器。</string>
-    <string name="pref_category_mobile_network">行動網路</string>
+    <string name="pref_category_metered_network">行動網路</string>
     <string name="pref_title_preferred_res_mobile">行動網路偏好的解晰度</string>
     <string name="pref_summary_preferred_res_mobile">透過行動網路(例如4G)進行串流傳輸時選擇您偏好的解晰度：%s</string>
     <string name="pref_summary_enable_immersive_mode">在播放時隱藏導航列與狀態列。</string>
@@ -136,8 +136,8 @@
     <string name="pref_network_downloads_category">網路與下載</string>
     <string name="pref_summary_autocast">選取在使用其他應用程式在 SkyTube 中打開影片時要使用的 Chromecast 裝置。</string>
     <string name="pref_title_chromecast_none">無</string>
-    <string name="pref_summary_mobile_network_usage">如果使用行動網路（例如 4G）來下載、觀看影片時要如何處理：%s</string>
-    <string name="pref_title_mobile_network_usage">行動網路使用量</string>
+    <string name="pref_summary_metered_network_usage">如果使用行動網路（例如 4G）來下載、觀看影片時要如何處理：%s</string>
+    <string name="pref_title_metered_network_usage">行動網路使用量</string>
     <string name="key_preferences">偏好設定</string>
     <string name="pref_video_continuous_repeat_toggle">連續重覆</string>
 </resources>

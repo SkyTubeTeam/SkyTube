@@ -123,7 +123,7 @@
     <string name="pref_title_disable_screen_gestures">Desativar gestos de vídeo</string>
     <string name="pref_summary_disable_screen_gestures">Desativar gestos para controlar o volume, o brilho e o avanço/recuo nos vídeos.</string>
     <string name="pref_summary_enable_video_blocker">Ativar bloqueador de vídeos.</string>
-    <string name="pref_category_mobile_network">Rede móvel</string>
+    <string name="pref_category_metered_network">Rede móvel</string>
     <string name="pref_title_preferred_res_mobile">Resolução preferida para redes móveis</string>
     <string name="pref_summary_preferred_res_mobile">Selecione a resolução preferida para reprodução através de uma rede móvel (como 4G): %s</string>
     <string name="pref_video_download_preferred_resolution_summary">Os vídeos serão descarregados com esta resolução: %s</string>
@@ -146,7 +146,7 @@
     <string name="pref_title_autocast">AutoCast</string>
     <string name="pref_title_chromecast_none">Nenhum</string>
     <string name="pref_chromecast_category">Chromecast</string>
-    <string name="pref_summary_mobile_network_usage">O que fazer se estiver a usar uma rede móvel (como 4G) para descarregar e/ou ver vídeos: %s</string>
-    <string name="pref_title_mobile_network_usage">Utilização de rede móvel</string>
+    <string name="pref_summary_metered_network_usage">O que fazer se estiver a usar uma rede móvel (como 4G) para descarregar e/ou ver vídeos: %s</string>
+    <string name="pref_title_metered_network_usage">Utilização de rede móvel</string>
     <string name="key_preferences">preferências</string>
 </resources>

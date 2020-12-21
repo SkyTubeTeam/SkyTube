@@ -2,7 +2,7 @@
 <resources>
 	<string name="download">Загрузка</string>
 	<string name="downloads">Загрузки</string>
-	<string name="warning_mobile_network_download">Устройство не подключено к Wi-Fi сети. Мы советуем всё же подключиться к ней, чтобы ограничить передачу мобильных данных. Продолжить загрузку видео без Wi-Fi\\?</string>
+	<string name="warning_metered_network_download">Устройство не подключено к Wi-Fi сети. Мы советуем всё же подключиться к ней, чтобы ограничить передачу мобильных данных. Продолжить загрузку видео без Wi-Fi\\?</string>
 	<string name="download_video">Скачать видео</string>
 	<string name="starting_video_download">Загрузка \'%s\'…</string>
 	<string name="video_download_stream_error">Не удалось скачать \'%s\'.</string>

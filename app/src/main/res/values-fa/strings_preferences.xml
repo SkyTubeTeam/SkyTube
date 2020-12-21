@@ -130,7 +130,7 @@
 
 <string name="pref_summary_enable_video_blocker">فعال کردن مسدودساز ویدئو.</string>
 
-	<string name="pref_category_mobile_network">شبکه همراه</string>
+	<string name="pref_category_metered_network">شبکه همراه</string>
 	<string name="pref_title_preferred_res_mobile">وضوح مورد نظر برای شبکه همراه</string>
 	<string name="pref_summary_preferred_res_mobile">وضوح موردنظرتان برای زمان پخش جریان روی شبکه همراه (مانند 4G): %s</string>
 

@@ -8,7 +8,7 @@
     <string name="pref_chromecast_category">ⴽⵕⵓⵎⴽⴰⵙⵟ</string>
     <string name="pref_title_choose_player">ⴰⵎⵖⵔⵉ ⵏ ⵓⴼⵉⴷⵢⵓ</string>
     <string name="pref_video_player_category">ⴰⵎⵖⵔⵉ ⵏ ⵓⴼⵉⴷⵢⵓ</string>
-    <string name="pref_category_mobile_network">ⴰⵥⵟⵟⴰ ⵏ ⵓⵜⵉⵍⵉⴼⵓⵏ</string>
+    <string name="pref_category_metered_network">ⴰⵥⵟⵟⴰ ⵏ ⵓⵜⵉⵍⵉⴼⵓⵏ</string>
     <string name="key_preferences">ⵜⵉⵙⵖⴰⵍ</string>
     <string name="preferences">ⵜⵉⵙⵖⴰⵍ</string>
 </resources>

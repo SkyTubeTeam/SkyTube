@@ -129,7 +129,7 @@
     <string name="pref_title_disable_screen_gestures">Wyłącz gesty wideo</string>
     <string name="pref_summary_disable_screen_gestures">Wyłącz gesty do kontrolowania głośności, jasności i przewijania filmów do przodu/tyłu.</string>
     <string name="pref_summary_enable_video_blocker">Włącz blokowanie wideo.</string>
-    <string name="pref_category_mobile_network">Sieć komórkowa</string>
+    <string name="pref_category_metered_network">Sieć komórkowa</string>
     <string name="pref_title_preferred_res_mobile">Preferowana rozdzielczość dla sieci komórkowej</string>
     <string name="pref_summary_preferred_res_mobile">Wybierz preferowaną rozdzielczość podczas przesyłania strumieniowego przez sieć komórkową (np. 4G): %s</string>
     <string name="pref_title_use_newpipe_backend">Korzystaj z infrastruktury NewPipe</string>
@@ -145,14 +145,14 @@
     <string name="pref_video_continuous_repeat_toggle">Ciągłe powtarzanie</string>
     <string name="pref_hide_tabs_restart">Uruchom ponownie aplikację, aby wyświetlić zaktualizowane karty.</string>
     <string name="pref_title_autocast">AutoCast</string>
-    <string name="pref_summary_mobile_network_usage">Co ma zrobić aplikacja, jeśli korzystasz z sieci komórkowej (np. 4G) do pobierania, oglądania filmów: %s</string>
+    <string name="pref_summary_metered_network_usage">Co ma zrobić aplikacja, jeśli korzystasz z sieci komórkowej (np. 4G) do pobierania, oglądania filmów: %s</string>
     <string name="pref_video_download_preferred_resolution_title">Preferowana rozdzielczość pobieranych filmów</string>
     <string name="pref_summary_video_download_folder">Filmy są pobierane do tego folderu: %s</string>
     <string name="pref_title_video_download_folder">Folder pobierania filmów</string>
     <string name="pref_popup_title_video_download_folder">Wybierz folder</string>
     <string name="pref_title_hide_tabs">Ukryj karty</string>
     <string name="pref_network_downloads_category">Sieć i pobieranie</string>
-    <string name="pref_title_mobile_network_usage">Użycie sieci komórkowej</string>
+    <string name="pref_title_metered_network_usage">Użycie sieci komórkowej</string>
     <string name="key_preferences">preferencje</string>
     <string name="pref_chromecast_category">Chromecast</string>
 </resources>

@@ -9,5 +9,5 @@
     <string name="open_with">ⵕⵥⵎ ⵙ…</string>
     <string name="get_new_video_steam">ⵓⵙⵔⵉⴷ ⴰⵎⴰⵢⵏⵓ</string>
     <string name="play_video">ⵖⵔ ⴰⴼⵉⴷⵢⵓ</string>
-    <string name="warning_mobile_network_disable">ⴰⴷ ⵓⵔ ⵜⵙⵇⵙⴰ ⴰⵎⴰⵔ ⵢⴰⴹⵏ.</string>
+    <string name="warning_metered_network_disable">ⴰⴷ ⵓⵔ ⵜⵙⵇⵙⴰ ⴰⵎⴰⵔ ⵢⴰⴹⵏ.</string>
 </resources>

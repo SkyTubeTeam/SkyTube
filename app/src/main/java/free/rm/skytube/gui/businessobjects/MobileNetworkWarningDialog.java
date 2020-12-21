@@ -51,28 +51,26 @@ public class MobileNetworkWarningDialog extends SkyTubeMaterialDialog {
 	 * @return Policy which needs to be followed, either BLOCK or ALLOW - or ASK, when a warning dialog is displayed.
 	 */
 	public Policy showAndGetStatus(ActionType actionType) {
-		final Policy displayWarning  = SkyTubeApp.getSettings().getWarningMobilePolicy();
+		final Policy displayWarning  = SkyTubeApp.getSettings().getWarningMeteredPolicy();
 
-		if (SkyTubeApp.isConnectedToMobile()) {
+		if (SkyTubeApp.isActiveNetworkMetered()) {
 			switch (displayWarning) {
-				case BLOCK : {
-					Toast.makeText(getContext(), R.string.mobile_data_blocked_by_policy, Toast.LENGTH_LONG).show();
+				case BLOCK:
+					Toast.makeText(getContext(), R.string.metered_network_blocked_by_policy, Toast.LENGTH_LONG).show();
 					if (cancelListener != null) {
 						cancelListener.onCancel(null);
 					}
 					return Policy.BLOCK;
-				}
-				case ALLOW : {
+				case ALLOW:
 					return Policy.ALLOW;
-				}
-				case ASK : {
-					title(R.string.mobile_data);
-					content(actionType == ActionType.STREAM_VIDEO ? R.string.warning_mobile_network_play : R.string.warning_mobile_network_download);
-					checkBoxPromptRes(R.string.warning_mobile_network_disable, false, null);
+				case ASK:
+					title(R.string.metered_network);
+					content(actionType == ActionType.STREAM_VIDEO ? R.string.warning_metered_network_play
+							: R.string.warning_metered_network_download);
+					checkBoxPromptRes(R.string.warning_metered_network_disable, false, null);
 					positiveText(actionType == ActionType.STREAM_VIDEO ?  R.string.play_video : R.string.download_video);
 					show();
 					return Policy.ASK;
-				}
 			}
 		}
 

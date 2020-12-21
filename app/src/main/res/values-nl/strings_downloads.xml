@@ -12,5 +12,5 @@
 	<string name="playing_video_file_missing">De download voor deze video kan niet worden gevonden. Extern afspelen ingeschakeld.</string>
 	<string name="external_storage_not_available">Het bestand kan niet worden gedownload omdat de externe opslag niet beschikbaar is.</string>
 <string name="download">Downloaden</string>
-	<string name="warning_mobile_network_download">Je apparaat is niet verbonden met een Wi-Fi-netwerk. Om te voorkomen dat je extra moet betalen voor het gebruik van mobiel internet, raden wij aan om te verbinden met een Wi-Fi-netwerk. Wil je de video tóch downloaden\?</string>
+	<string name="warning_metered_network_download">Je apparaat is niet verbonden met een Wi-Fi-netwerk. Om te voorkomen dat je extra moet betalen voor het gebruik van mobiel internet, raden wij aan om te verbinden met een Wi-Fi-netwerk. Wil je de video tóch downloaden\?</string>
 	</resources>
