@@ -41,6 +41,7 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.core.graphics.ColorUtils;
+import androidx.core.net.ConnectivityManagerCompat;
 import androidx.multidex.MultiDexApplication;
 import androidx.preference.PreferenceManager;
 
@@ -197,12 +198,11 @@ public class SkyTubeApp extends MultiDexApplication {
 
 
 	/**
-	 * @return True if the device is connected via mobile network such as 4G.
+	 * @return True if the device is connected to a metered network.
 	 */
-	public static boolean isConnectedToMobile() {
-		final NetworkInfo mobile = ContextCompat.getSystemService(getContext(), ConnectivityManager.class)
-				.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
-		return mobile != null && mobile.isConnectedOrConnecting();
+	public static boolean isActiveNetworkMetered() {
+		return ConnectivityManagerCompat.isActiveNetworkMetered(ContextCompat.getSystemService(skyTubeApp,
+				ConnectivityManager.class));
 	}
 
 	/**

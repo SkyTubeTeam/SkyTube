@@ -2,7 +2,7 @@
 <resources>
 	<string name="download">Download</string>
 	<string name="downloads">Downloads</string>
-	<string name="warning_mobile_network_download">Your device is not connected to a Wi-Fi network. To avoid potential extra data usage charges, it is recommended to connect to a Wi-Fi network. Download video anyway?</string>
+	<string name="warning_metered_network_download">Your device is connected to a metered network. To avoid potential extra data usage charges, it is recommended to connect to an unmetered network. Download video anyway?</string>
 	<string name="download_video">Download Video</string>
 	<string name="starting_video_download">Downloading \'%s\'…</string>
 	<string name="video_download_stream_error">Could not download \'%s\'.</string>
