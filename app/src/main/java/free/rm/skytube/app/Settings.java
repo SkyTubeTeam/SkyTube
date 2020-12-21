@@ -94,9 +94,9 @@ public class Settings {
         return getPreference(R.string.pref_key_hide_tabs, Collections.emptySet());
     }
 
-    public Policy getWarningMobilePolicy() {
+    public Policy getWarningMeteredPolicy() {
         String currentValue = getSharedPreferences().getString(getStr(R.string.pref_key_mobile_network_usage_policy),
-                getStr(R.string.pref_mobile_network_usage_value_ask));
+                getStr(R.string.pref_metered_network_usage_value_ask));
         return Policy.valueOf(currentValue.toUpperCase());
     }
 
@@ -105,7 +105,7 @@ public class Settings {
      *
      * @return Desired {@link StreamSelectionPolicy}.
      */
-    public StreamSelectionPolicy getDesiredVideoResolution(boolean forDownload, boolean onMobile) {
+    public StreamSelectionPolicy getDesiredVideoResolution(boolean forDownload, boolean onMetered) {
         SharedPreferences prefs = getSharedPreferences();
         String maxKey = app.getStr(forDownload ? R.string.pref_key_video_download_maximum_resolution : R.string.pref_key_maximum_res);
         String maxResIdValue = prefs.getString(maxKey, Integer.toString(VideoResolution.DEFAULT_VIDEO_RES_ID));
@@ -116,8 +116,8 @@ public class Settings {
         String qualityKey = app.getStr(forDownload ? R.string.pref_key_video_quality_for_downloads : R.string.pref_key_video_quality);
         String qualityValue = prefs.getString(qualityKey, null);
 
-        // if on mobile network use the preferred resolution under mobile network if defined
-        if (onMobile) {
+        // if on metered network, use the preferred resolution under metered network if defined
+        if (onMetered) {
             // default res for mobile network = that of wifi
             maxResIdValue = prefs.getString(app.getStr(R.string.pref_key_maximum_res_mobile), maxResIdValue);
             minResIdValue = prefs.getString(app.getStr(R.string.pref_key_minimum_res_mobile), minResIdValue);
@@ -131,7 +131,7 @@ public class Settings {
     }
 
     public StreamSelectionPolicy getDesiredVideoResolution(boolean forDownload) {
-        return getDesiredVideoResolution(forDownload, SkyTubeApp.isConnectedToMobile());
+        return getDesiredVideoResolution(forDownload, SkyTubeApp.isActiveNetworkMetered());
     }
 
     public boolean isDisableSearchHistory() {

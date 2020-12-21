@@ -83,30 +83,30 @@
     -->
     <PreferenceCategory
         app:key="mobile_network"
-        app:title="@string/pref_category_mobile_network">
+        app:title="@string/pref_category_metered_network">
 
         <ListPreference
             app:key="@string/pref_key_maximum_res_mobile"
-            app:title="@string/pref_title_maximum_res_mobile"
-            app:summary="@string/pref_summary_maximum_res_mobile"/>
+            app:title="@string/pref_title_maximum_res_metered"
+            app:summary="@string/pref_summary_maximum_res_metered"/>
 
         <ListPreference
             app:key="@string/pref_key_minimum_res_mobile"
-            app:title="@string/pref_title_minimum_res_mobile"
-            app:summary="@string/pref_summary_minimum_res_mobile"/>
+            app:title="@string/pref_title_minimum_res_metered"
+            app:summary="@string/pref_summary_minimum_res_metered"/>
 
         <ListPreference
             app:key="@string/pref_key_video_quality_on_mobile"
-            app:title="@string/pref_key_video_quality_on_mobile_title"
-            app:summary="@string/pref_key_video_quality_on_mobile_summary"/>
+            app:title="@string/pref_key_video_quality_metered_title"
+            app:summary="@string/pref_key_video_quality_metered_summary"/>
 
         <ListPreference
-            app:entries="@array/pref_mobile_network_usage"
+            app:entries="@array/pref_metered_network_usage"
             app:entryValues="@array/pref_mobile_network_usage_values"
-            app:defaultValue="@string/pref_mobile_network_usage_value_ask"
+            app:defaultValue="@string/pref_metered_network_usage_value_ask"
             app:key="@string/pref_key_mobile_network_usage_policy"
-            app:title="@string/pref_title_mobile_network_usage"
-            app:summary="@string/pref_summary_mobile_network_usage"/>
+            app:title="@string/pref_title_metered_network_usage"
+            app:summary="@string/pref_summary_metered_network_usage"/>
     </PreferenceCategory>
 
 </PreferenceScreen>
