@@ -8,8 +8,8 @@
 		  app:showAsAction="always"/>
 
 	<item android:id="@+id/menu_reload_video"
-		  android:title="@string/get_new_video_steam"
-		  app:icon="@drawable/ic_menu_reload_video"
+		  android:title="@string/reload_video"
+		  android:icon="@drawable/ic_menu_reload_video"
 		  app:showAsAction="ifRoom" />
 
 	<item android:id="@+id/menu_open_video_with"
