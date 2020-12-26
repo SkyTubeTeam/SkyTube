@@ -27,7 +27,7 @@
     <string name="warning_live_video">Cannot play live streams for now. Open live stream in another app?</string>
     <string name="ratings_disabled">Ratings disabled</string>
     <string name="loading_video">Loading video…</string>
-    <string name="get_new_video_steam">New Stream</string>
+    <string name="reload_video">Reload Video</string>
     <string name="open_in_browser">Open in web browser</string>
     <string name="open_with">Open with…</string>
     <string name="share">Share</string>
