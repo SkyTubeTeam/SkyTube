@@ -474,7 +474,7 @@ public class YouTubeVideo extends CardData implements Serializable {
 	 *
 	 * @param listener Instance of {@link GetDesiredStreamListener} to pass the stream through.
 	 */
-	public void getDesiredStream(GetDesiredStreamListener listener, boolean forDownload) {
+	private void getDesiredStream(GetDesiredStreamListener listener, boolean forDownload) {
 		new GetVideoStreamTask(this, listener, forDownload).executeInParallel();
 	}
 
@@ -494,38 +494,16 @@ public class YouTubeVideo extends CardData implements Serializable {
 	 * Remove local copy of this video, and delete it from the VideoDownloads DB.
 	 */
 	public void removeDownload() {
-		Uri uri = DownloadedVideosDb.getVideoDownloadsDb().getVideoFileUri(YouTubeVideo.this);
-		File file = new File(uri.getPath());
-		if (file.exists()) {
-			file.delete();
-		}
-		if (SkyTubeApp.getSettings().isDownloadToSeparateFolders()) {
-			removeParentFolderIfEmpty(file);
-		}
-		DownloadedVideosDb.getVideoDownloadsDb().remove(YouTubeVideo.this);
+		DownloadedVideosDb.getVideoDownloadsDb().removeDownload(getVideoId());
 	}
-
-	private void removeParentFolderIfEmpty(File file) {
-		File parentFile = file.getParentFile();
-		if (parentFile.exists() && parentFile.isDirectory()) {
-			String[] fileList = parentFile.list();
-			if (fileList != null) {
-				if (fileList.length == 0) {
-					// that was the last file in the directory, remove it
-					parentFile.delete();
-				}
-			}
-		}
-	}
-
 
 	/**
 	 * Get the Uri for the local copy of this Video.
 	 *
 	 * @return Uri
 	 */
-	public Uri getFileUri() {
-		return DownloadedVideosDb.getVideoDownloadsDb().getVideoFileUri(this);
+	public DownloadedVideosDb.Status getDownloadedFileStatus() {
+		return DownloadedVideosDb.getVideoDownloadsDb().getVideoFileUriAndValidate(getVideoId());
 	}
 
 
@@ -535,7 +513,7 @@ public class YouTubeVideo extends CardData implements Serializable {
 	 * @return  True if the video was previously saved by the user.
 	 */
 	public boolean isDownloaded() {
-		return DownloadedVideosDb.getVideoDownloadsDb().isVideoDownloaded(YouTubeVideo.this);
+		return DownloadedVideosDb.getVideoDownloadsDb().isVideoDownloaded(YouTubeVideo.this.getVideoId());
 	}
 
 
@@ -604,23 +582,25 @@ public class YouTubeVideo extends CardData implements Serializable {
 	 * Play the video using an external app
 	 */
 	public void playVideoExternally(Context context) {
-		Uri fileUri = getFileUri();
-		if (fileUri != null) {
-			File file = new File(fileUri.getPath());
+		DownloadedVideosDb.Status fileStatus = getDownloadedFileStatus();
+		if (fileStatus != null) {
 			Uri uri;
-			try {
-				uri = FileProvider.getUriForFile(context, BuildConfig.APPLICATION_ID + ".provider", file);
-			} catch (Exception e) {
-				Logger.e(YouTubeVideo.this, "Error accessing path: " + file +", message:"+ e.getMessage(), e);
-				uri = fileUri;
+			File file = fileStatus.getLocalVideoFile();
+			if (file != null) {
+				try {
+					uri = FileProvider.getUriForFile(context, BuildConfig.APPLICATION_ID + ".provider", file);
+				} catch (Exception e) {
+					Logger.e(YouTubeVideo.this, "Error accessing path: " + file + ", message:" + e.getMessage(), e);
+					uri = fileStatus.getUri();
+				}
+				Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+				intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+				context.startActivity(intent);
+				return;
 			}
-			Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-			intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-			context.startActivity(intent);
-		} else {
-			Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getVideoUrl()));
-			context.startActivity(browserIntent);
 		}
+		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getVideoUrl()));
+		context.startActivity(browserIntent);
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////
@@ -640,7 +620,7 @@ public class YouTubeVideo extends CardData implements Serializable {
 		@Override
 		public void onFileDownloadCompleted(boolean success, Uri localFileUri) {
 			if (success) {
-				success = DownloadedVideosDb.getVideoDownloadsDb().add(YouTubeVideo.this, localFileUri.toString());
+				success = DownloadedVideosDb.getVideoDownloadsDb().add(YouTubeVideo.this, localFileUri, null);
 			}
 
 			Toast.makeText(getContext(),
