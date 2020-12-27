@@ -19,16 +19,6 @@
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
 
 	<ListPreference
-		app:key="@string/pref_key_maximum_res"
-		app:title="@string/pref_title_maximum_res"
-		app:summary="@string/pref_summary_maximum_res"/>
-
-	<ListPreference
-		app:key="@string/pref_key_minimum_res"
-		app:title="@string/pref_title_minimum_res"
-		app:summary="@string/pref_summary_minimum_res"/>
-
-	<ListPreference
 		app:key="@string/pref_key_choose_player"
 		app:title="@string/pref_title_choose_player"
 		app:summary="@string/pref_summary_choose_player"

@@ -32,6 +32,27 @@
             app:key="@string/pref_key_video_download_folder"
             app:summary="@string/pref_summary_video_download_folder"
             />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:key="videoplayer_resolutions"
+        app:title="@string/pref_category_video_resolutions">
+
+    <ListPreference
+        app:key="@string/pref_key_maximum_res"
+        app:title="@string/pref_title_maximum_res"
+        app:summary="@string/pref_summary_maximum_res"/>
+
+    <ListPreference
+        app:key="@string/pref_key_minimum_res"
+        app:title="@string/pref_title_minimum_res"
+        app:summary="@string/pref_summary_minimum_res"/>
+    </PreferenceCategory>
+
+
+    <PreferenceCategory
+        app:key="download_resolutions"
+        app:title="@string/pref_category_download_resolutions">
 
         <ListPreference
             app:key="@string/pref_key_video_download_maximum_resolution"

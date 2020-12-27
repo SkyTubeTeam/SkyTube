@@ -1,13 +1,10 @@
 package free.rm.skytube.gui.fragments.preferences;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Environment;
 
-import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
-import androidx.preference.PreferenceManager;
 
 import com.obsez.android.lib.filechooser.ChooserDialog;
 
@@ -19,9 +16,6 @@ public class NetworkPreferenceFragment extends PreferenceFragmentCompat {
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         addPreferencesFromResource(R.xml.preference_downloads);
-
-        final SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        final SharedPreferences.Editor editor = pref.edit();
 
         final Preference folderChooser = findPreference(getString(R.string.pref_key_video_download_folder));
         folderChooser.setOnPreferenceClickListener(preference -> {
@@ -41,12 +35,16 @@ public class NetworkPreferenceFragment extends PreferenceFragmentCompat {
         String dir = SkyTubeApp.getSettings().getDownloadFolder(null);
         folderChooser.setSummary(getString(R.string.pref_summary_video_download_folder, dir != null ? dir : Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES)));
 
-        VideoResolution.setupListPreferences ((ListPreference) findPreference(getString(R.string.pref_key_video_download_maximum_resolution)));
-        VideoResolution.setupListPreferences ((ListPreference) findPreference(getString(R.string.pref_key_video_download_minimum_resolution)));
+        VideoResolution.setupListPreferences (findPreference(getString(R.string.pref_key_video_download_maximum_resolution)));
+        VideoResolution.setupListPreferences (findPreference(getString(R.string.pref_key_video_download_minimum_resolution)));
+
+        // set up the list of available video resolutions
+        VideoResolution.setupListPreferences(findPreference(getString(R.string.pref_key_maximum_res)));
+        VideoResolution.setupListPreferences(findPreference(getString(R.string.pref_key_minimum_res)));
 
         // set up the list of available video resolutions on mobile network
-        VideoResolution.setupListPreferences ((ListPreference) findPreference(getString(R.string.pref_key_maximum_res_mobile)));
-        VideoResolution.setupListPreferences ((ListPreference) findPreference(getString(R.string.pref_key_minimum_res_mobile)));
+        VideoResolution.setupListPreferences (findPreference(getString(R.string.pref_key_maximum_res_mobile)));
+        VideoResolution.setupListPreferences (findPreference(getString(R.string.pref_key_minimum_res_mobile)));
     }
 
 }
