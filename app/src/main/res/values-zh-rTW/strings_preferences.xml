@@ -140,4 +140,16 @@
     <string name="pref_title_mobile_network_usage">行動網路使用量</string>
     <string name="key_preferences">偏好設定</string>
     <string name="pref_video_continuous_repeat_toggle">連續重覆</string>
+    <string name="pref_video_download_minimum_resolution_summary">影片下載的最小解析度為：%s</string>
+    <string name="pref_video_download_minimum_resolution_title">最小影片下載解析度</string>
+    <string name="pref_video_download_maximum_resolution_summary">影片下載的最大解析度為：%s</string>
+    <string name="pref_video_download_maximum_resolution_title">最大影片下載解析度</string>
+    <string name="pref_summary_maximum_res_mobile">選取串流透過行動網路（如 4G）傳輸時的最大解析度：%s</string>
+    <string name="pref_title_maximum_res_mobile">行動網路的最大解析度</string>
+    <string name="pref_summary_minimum_res_mobile">選取串流透過行動網路（如 4G）傳輸時的最小解析度：%s</string>
+    <string name="pref_title_minimum_res_mobile">行動網路的最小解析度</string>
+    <string name="pref_summary_minimum_res">選取您的最小解析度：%s</string>
+    <string name="pref_title_minimum_res">最小解析度</string>
+    <string name="pref_summary_maximum_res">選取您的最大解析度：%s</string>
+    <string name="pref_title_maximum_res">最大解析度</string>
 </resources>

@@ -160,4 +160,16 @@
     <string name="pref_title_feed_notification">Automatikus videófolyam-értesítés</string>
     <string name="pref_summary_autocast">Válassza ki azt a Chromecast-eszközt, amelyet akkor szeretne használni, amikor más alkalmazásokat használ a videók megnyitásához a SkyTube-ban.</string>
     <string name="pref_title_autocast">AutoCast</string>
+    <string name="pref_video_download_minimum_resolution_summary">A videókat minimum %s felbontásban töltjük le</string>
+    <string name="pref_video_download_minimum_resolution_title">Letöltéseknél használt minimális felbontás</string>
+    <string name="pref_video_download_maximum_resolution_summary">A videókat maximum %s felbontásban töltjük le</string>
+    <string name="pref_video_download_maximum_resolution_title">Letöltéseknél használt maximális felbontás</string>
+    <string name="pref_summary_maximum_res_mobile">Válassza ki a maximális felbontást, amit mobil hálózaton keresztül szeretne használni (mint pl 4G-n): %s</string>
+    <string name="pref_title_maximum_res_mobile">Mobil hálózaton használt maximális felbontás</string>
+    <string name="pref_summary_minimum_res_mobile">Válassza ki a minimális felbontást, amit mobil hálózaton keresztül szeretne használni (mint pl 4G-n): %s</string>
+    <string name="pref_title_minimum_res_mobile">Mobil hálózaton használt minimális felbontás</string>
+    <string name="pref_summary_minimum_res">Válassza ki a minimális felbontást: %s</string>
+    <string name="pref_title_minimum_res">Minimális Felbontás</string>
+    <string name="pref_summary_maximum_res">Válassza ki a maximális videófelbontást: %s</string>
+    <string name="pref_title_maximum_res">Maximális Felbontás</string>
 </resources>

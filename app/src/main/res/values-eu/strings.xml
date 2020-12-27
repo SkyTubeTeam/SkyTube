@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="could_not_get_videos">Ezin izan dira %s bideoak lortu.</string>
+    <string name="search_channel">Bilatu kanala</string>
+    <string name="no">Ez</string>
+    <string name="yes">Bai</string>
+    <string name="loading">Abiarazten…</string>
+    <string name="close">Itxi</string>
+    <string name="could_not_get_playlists">Ezin izan dira %s erreprodukzio zerrendak eskuratu.</string>
+    <string name="playlists">Erreprodukzio-zerrendak</string>
+    <string name="num_videos">%d bideoak</string>
+    <string name="videos">Bideoak</string>
+    <string name="video">Bideoa</string>
+    <string name="most_popular">Ezagunena</string>
+    <string name="featured">Nabarmenduak</string>
+    <string name="LIVE">BIZI</string>
+    <string name="launch_offical_player_error">Akats bat gertatu da Google-ren YouTube erreproduzitzaile ofiziala abiarazten saiatzean. Ziurtatu zure gailuan instalatuta dagoela.</string>
+    <string name="search_videos">Bilatu bideoak</string>
+    <string name="ok">Ados</string>
+    <string name="error">Akatsa</string>
+    <string name="views">%,d ikustaldi</string>
+    <string name="could_not_get_channel_detailed">Ezin izan da kanalaren informazioa deskargatu: %s.</string>
+    <string name="could_not_get_channel">Ezin izan da kanalaren informazioa deskargatu!</string>
+</resources>
