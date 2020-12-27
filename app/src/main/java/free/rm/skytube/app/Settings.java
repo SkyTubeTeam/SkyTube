@@ -113,16 +113,21 @@ public class Settings {
         String minKey = app.getStr(forDownload ? R.string.pref_key_video_download_minimum_resolution : R.string.pref_key_minimum_res);
         String minResIdValue = prefs.getString(minKey, null);
 
+        String qualityKey = app.getStr(forDownload ? R.string.pref_key_video_quality_for_downloads : R.string.pref_key_video_quality);
+        String qualityValue = prefs.getString(qualityKey, null);
+
         // if on mobile network use the preferred resolution under mobile network if defined
         if (onMobile) {
             // default res for mobile network = that of wifi
             maxResIdValue = prefs.getString(app.getStr(R.string.pref_key_maximum_res_mobile), maxResIdValue);
             minResIdValue = prefs.getString(app.getStr(R.string.pref_key_minimum_res_mobile), minResIdValue);
+            qualityValue = prefs.getString(app.getStr(R.string.pref_key_video_quality_on_mobile), qualityValue);
         }
         VideoResolution maxResolution = VideoResolution.videoResIdToVideoResolution(maxResIdValue);
         VideoResolution minResolution = VideoResolution.videoResIdToVideoResolution(minResIdValue);
+        VideoQuality quality = VideoQuality.valueOf(qualityValue);
 
-        return new StreamSelectionPolicy(!forDownload, maxResolution, minResolution);
+        return new StreamSelectionPolicy(!forDownload, maxResolution, minResolution, quality);
     }
 
     public StreamSelectionPolicy getDesiredVideoResolution(boolean forDownload) {
