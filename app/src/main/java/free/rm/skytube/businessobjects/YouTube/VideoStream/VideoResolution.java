@@ -85,8 +85,12 @@ public enum VideoResolution {
 	}
 
 
-	public boolean isBiggerThan(VideoResolution other) {
+	public boolean isBetterQualityThan(VideoResolution other) {
 		return this.ordinal() > other.ordinal();
+	}
+
+	public boolean isLessNetworkUsageThan(VideoResolution other) {
+		return this != RES_UNKNOWN && this.ordinal() < other.ordinal();
 	}
 
 	public static VideoResolution resolutionToVideoResolution(String resolution) {

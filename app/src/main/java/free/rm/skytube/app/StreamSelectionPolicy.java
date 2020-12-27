@@ -27,21 +27,24 @@ import org.schabi.newpipe.extractor.stream.VideoStream;
 import java.util.Collection;
 
 import free.rm.skytube.R;
+import free.rm.skytube.businessobjects.YouTube.VideoStream.VideoQuality;
 import free.rm.skytube.businessobjects.YouTube.VideoStream.VideoResolution;
 
 public class StreamSelectionPolicy {
     private final boolean allowVideoOnly;
     private final VideoResolution maxResolution;
     private final VideoResolution minResolution;
+    private final VideoQuality videoQuality;
 
-    public StreamSelectionPolicy(boolean allowVideoOnly, VideoResolution maxResolution, VideoResolution minResolution) {
+    public StreamSelectionPolicy(boolean allowVideoOnly, VideoResolution maxResolution, VideoResolution minResolution, VideoQuality videoQuality) {
         this.allowVideoOnly = allowVideoOnly;
-        this.maxResolution = maxResolution;
-        this.minResolution = minResolution;
+        this.maxResolution = maxResolution != VideoResolution.RES_UNKNOWN ? maxResolution : null;
+        this.minResolution = minResolution != VideoResolution.RES_UNKNOWN ? minResolution : null;
+        this.videoQuality = videoQuality;
     }
 
     public StreamSelectionPolicy withAllowVideoOnly(boolean newValue) {
-        return new StreamSelectionPolicy(newValue, maxResolution, minResolution);
+        return new StreamSelectionPolicy(newValue, maxResolution, minResolution, videoQuality);
     }
 
     public StreamSelection select(StreamInfo streamInfo) {
@@ -59,6 +62,21 @@ public class StreamSelectionPolicy {
         return null;
     }
 
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("StreamSelectionPolicy{");
+        sb.append("allowVideoOnly=").append(allowVideoOnly);
+        if (maxResolution != null) {
+            sb.append(", maxResolution=").append(maxResolution);
+        }
+        if (minResolution != null) {
+            sb.append(", minResolution=").append(minResolution);
+        }
+        sb.append(", videoQuality=").append(videoQuality);
+        sb.append('}');
+        return sb.toString();
+    }
+
     public String getErrorMessage(Context context) {
         String min = "*";
         String max = "*";
@@ -74,18 +92,29 @@ public class StreamSelectionPolicy {
     private AudioStream pickAudio(StreamInfo streamInfo) {
         AudioStream best = null;
         for (AudioStream audioStream : streamInfo.getAudioStreams()) {
-            if (best == null || audioStream.average_bitrate < best.average_bitrate) {
+            if (isBetter(best, audioStream)) {
                 best = audioStream;
             }
         }
         return best;
     }
 
+    private boolean isBetter(AudioStream best, AudioStream other) {
+        if (best == null) {
+            return true;
+        }
+        switch (videoQuality) {
+            case LEAST_BANDWITH: return other.average_bitrate < best.average_bitrate;
+            case BEST_QUALITY: return best.average_bitrate < other.average_bitrate;
+        }
+        throw new IllegalStateException("Unexpected videoQuality:" + videoQuality);
+    }
+
     private VideoStreamWithResolution pickVideo(StreamInfo streamInfo) {
         VideoStreamWithResolution videoStream = pick(streamInfo.getVideoStreams());
         if (allowVideoOnly) {
             VideoStreamWithResolution videoOnlyStream = pick(streamInfo.getVideoOnlyStreams());
-            if (videoOnlyStream != null && videoOnlyStream.isBiggerThan(videoStream)) {
+            if (videoOnlyStream != null && videoOnlyStream.isBetterQualityThan(videoStream)) {
                 return videoOnlyStream;
             }
         }
@@ -97,8 +126,17 @@ public class StreamSelectionPolicy {
         for (VideoStream stream: streams) {
             VideoStreamWithResolution videoStream = new VideoStreamWithResolution(stream);
             if (isAllowed(videoStream.resolution)) {
-                if (videoStream.isBiggerThan(best)) {
-                    best = videoStream;
+                switch (videoQuality) {
+                    case BEST_QUALITY:
+                        if (videoStream.isBetterQualityThan(best)) {
+                            best = videoStream;
+                        }
+                        break;
+                    case LEAST_BANDWITH:
+                        if (videoStream.isLessNetworkUsageThan(best)) {
+                            best = videoStream;
+                        }
+                        break;
                 }
             }
         }
@@ -106,11 +144,11 @@ public class StreamSelectionPolicy {
     }
 
     private boolean isAllowed(VideoResolution resolution) {
-        if (minResolution != null && minResolution.isBiggerThan(resolution)) {
+        if (minResolution != null && minResolution.isBetterQualityThan(resolution)) {
             return false;
         }
 
-        if (maxResolution != null && resolution.isBiggerThan(maxResolution)) {
+        if (maxResolution != null && resolution.isBetterQualityThan(maxResolution)) {
             return false;
         }
 
@@ -126,8 +164,12 @@ public class StreamSelectionPolicy {
             this.resolution = VideoResolution.resolutionToVideoResolution(videoStream.getResolution());
         }
 
-        boolean isBiggerThan(VideoStreamWithResolution other) {
-            return other == null || resolution.isBiggerThan(other.resolution);
+        boolean isBetterQualityThan(VideoStreamWithResolution other) {
+            return other == null || resolution.isBetterQualityThan(other.resolution);
+        }
+
+        boolean isLessNetworkUsageThan(VideoStreamWithResolution other) {
+            return other == null || resolution.isLessNetworkUsageThan(other.resolution);
         }
     }
 
