@@ -28,6 +28,7 @@ import java.util.Set;
 import free.rm.skytube.R;
 import free.rm.skytube.app.enums.Policy;
 import free.rm.skytube.businessobjects.Logger;
+import free.rm.skytube.businessobjects.YouTube.VideoStream.VideoQuality;
 import free.rm.skytube.businessobjects.YouTube.VideoStream.VideoResolution;
 
 /**
@@ -48,6 +49,9 @@ public class Settings {
         migrate(sharedPreferences, "pref_preferred_resolution", R.string.pref_key_maximum_res);
         migrate(sharedPreferences, "pref_preferred_resolution_mobile", R.string.pref_key_maximum_res_mobile);
         migrate(sharedPreferences, "pref_key_video_preferred_resolution", R.string.pref_key_video_download_maximum_resolution);
+        setDefault(sharedPreferences, R.string.pref_key_video_quality, VideoQuality.BEST_QUALITY.name());
+        setDefault(sharedPreferences, R.string.pref_key_video_quality_for_downloads, VideoQuality.BEST_QUALITY.name());
+        setDefault(sharedPreferences, R.string.pref_key_video_quality_on_mobile, VideoQuality.LEAST_BANDWITH.name());
     }
 
     private void migrate(SharedPreferences sharedPreferences, String oldKey, @StringRes int newKey) {
@@ -58,6 +62,16 @@ public class Settings {
             final SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putString(newKeyStr, oldValue);
             editor.remove(oldKey);
+            editor.commit();
+        }
+    }
+
+    private void setDefault(SharedPreferences sharedPreferences, @StringRes int key, String defaultValue) {
+        String keyStr = app.getString(key);
+        String value = sharedPreferences.getString(keyStr, null);
+        if (value == null) {
+            final SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString(keyStr, defaultValue);
             editor.commit();
         }
     }

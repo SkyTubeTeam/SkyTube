@@ -573,6 +573,20 @@
     <string name="pref_key_video_download_minimum_resolution" translatable="false">pref_key_video_minimum_resolution</string>
     <string name="pref_video_download_minimum_resolution_title">Minimum Video Download Resolution</string>
     <string name="pref_video_download_minimum_resolution_summary">Video downloads will be at least in this resolution: %s</string>
+
+    <string name="pref_key_video_quality" translatable="false">pref_key_video_quality</string>
+    <string name="pref_key_video_quality_on_mobile" translatable="false">pref_key_video_quality_on_mobile</string>
+    <string name="pref_key_video_quality_for_downloads" translatable="false">pref_key_video_quality_for_downloads</string>
+
+    <string name="pref_key_video_quality_title">Video Quality Selection</string>
+    <string name="pref_key_video_quality_summary">Optimize for: %s</string>
+
+    <string name="pref_key_video_quality_on_mobile_title">Video Quality Selection on Mobile</string>
+    <string name="pref_key_video_quality_on_mobile_summary">Optimize for: %s</string>
+
+    <string name="pref_key_video_quality_for_downloads_title">Video Quality Selection for Downloads</string>
+    <string name="pref_key_video_quality_for_downloads_summary">Optimize for: %s</string>
+
     <!--
         VIDEO BLOCKER
     -->
@@ -685,4 +699,15 @@
     <string name="pref_title_clear_playback_status">Clear Playback Status</string>
     <string name="pref_summary_clear_playback_status">Clear playback status for all videos.</string>
     <string name="pref_playback_status_cleared">Playback Status cleared.</string>
+
+    <string-array name="pref_network_usage" translatable="false">
+        <item>LEAST_BANDWITH</item>
+        <item>BEST_QUALITY</item>
+    </string-array>
+
+    <string-array name="pref_network_usage_display">
+        <item>Least Bandwith</item>
+        <item>Best Quality</item>
+    </string-array>
+
 </resources>

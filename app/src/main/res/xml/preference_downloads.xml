@@ -47,6 +47,12 @@
         app:key="@string/pref_key_minimum_res"
         app:title="@string/pref_title_minimum_res"
         app:summary="@string/pref_summary_minimum_res"/>
+
+    <ListPreference
+        app:key="@string/pref_key_video_quality"
+        app:title="@string/pref_key_video_quality_title"
+        app:summary="@string/pref_key_video_quality_summary"/>
+
     </PreferenceCategory>
 
 
@@ -64,6 +70,11 @@
             app:title="@string/pref_video_download_minimum_resolution_title"
             app:summary="@string/pref_video_download_minimum_resolution_summary"
             />
+
+        <ListPreference
+            app:key="@string/pref_key_video_quality_for_downloads"
+            app:title="@string/pref_key_video_quality_for_downloads_title"
+            app:summary="@string/pref_key_video_quality_for_downloads_summary"/>
 
     </PreferenceCategory>
 
@@ -83,6 +94,11 @@
             app:key="@string/pref_key_minimum_res_mobile"
             app:title="@string/pref_title_minimum_res_mobile"
             app:summary="@string/pref_summary_minimum_res_mobile"/>
+
+        <ListPreference
+            app:key="@string/pref_key_video_quality_on_mobile"
+            app:title="@string/pref_key_video_quality_on_mobile_title"
+            app:summary="@string/pref_key_video_quality_on_mobile_summary"/>
 
         <ListPreference
             app:entries="@array/pref_mobile_network_usage"
