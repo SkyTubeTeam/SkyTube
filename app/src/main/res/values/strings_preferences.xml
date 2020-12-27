@@ -18,6 +18,8 @@
         <item>Legacy Player (unsupported)</item>
         <item>Official YouTube Player</item>
     </string-array>
+    <string name="no_resolution_specified">None</string>
+
     <string name="pref_default_player_value" translatable="false">default</string>
     <string name="pref_legacy_player_value" translatable="false">legacy_v1</string>
     <string name="pref_official_player_value" translatable="false">official</string>

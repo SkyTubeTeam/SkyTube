@@ -19,6 +19,9 @@ package free.rm.skytube.businessobjects.YouTube.VideoStream;
 
 import androidx.preference.ListPreference;
 
+import free.rm.skytube.R;
+import free.rm.skytube.app.SkyTubeApp;
+
 /**
  * Video resolution (e.g. 1080p).
  */
@@ -89,8 +92,9 @@ public enum VideoResolution {
 	public static VideoResolution resolutionToVideoResolution(String resolution) {
 		VideoResolution[] resList = VideoResolution.values();
 
+		final int verticalPixel = Integer.parseInt(resolution.substring(0, resolution.length() - 1));
 		for (VideoResolution res : resList) {
-			if (res.verticalPixels == Integer.parseInt(resolution.substring(0, resolution.length()-1)))
+			if (res.verticalPixels == verticalPixel)
 				return res;
 		}
 
@@ -127,10 +131,11 @@ public enum VideoResolution {
 	 */
 	public static String[] getAllVideoResolutionsNames() {
 		VideoResolution[] resList = VideoResolution.values();
-		String[] resStringList = new String[resList.length - 1];
+		String[] resStringList = new String[resList.length];
 
+		resStringList[0] = SkyTubeApp.getStr(R.string.no_resolution_specified);
 		for (int i = 1;  i < resList.length;  i++) {
-			resStringList[i-1] = resList[i].toString();
+			resStringList[i] = resList[i].toString();
 		}
 
 		return resStringList;
@@ -144,10 +149,10 @@ public enum VideoResolution {
 	 */
 	public static String[] getAllVideoResolutionsIds() {
 		VideoResolution[] resList = VideoResolution.values();
-		String[] resStringList = new String[resList.length - 1];
+		String[] resStringList = new String[resList.length];
 
-		for (int i = 1;  i < resList.length;  i++) {
-			resStringList[i-1] = Integer.toString(resList[i].id);
+		for (int i = 0;  i < resList.length;  i++) {
+			resStringList[i] = Integer.toString(resList[i].id);
 		}
 
 		return resStringList;
