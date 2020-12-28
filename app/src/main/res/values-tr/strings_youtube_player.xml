@@ -38,4 +38,5 @@
     <string name="error_video_parse_error">Video oynatma başlatılamadı, hata mesajı: <br/> <br/> %s.</string>
     <string name="error_downloaded_file_is_corrupted">İndirilen video <b>bozuk</b> görünüyor - hata mesajı: <br/> <br/> %s. <br/> <br/> Dosyayı <b>silmek</b> istiyor musunuz\?</string>
     <string name="error_get_comments_no_network">Yorumların yüklenmesi için ağ erişimi gerekli.</string>
+    <string name="reload_video">Videoyu Yeniden Yükle</string>
 </resources>
