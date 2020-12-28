@@ -203,16 +203,17 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 	}
 
 	private void showNotification() {
-		final NotificationManager notificationManager = ContextCompat.getSystemService(requireContext(),
+		final Context context = SkyTubeApp.getContext();
+		final NotificationManager notificationManager = ContextCompat.getSystemService(context,
 				NotificationManager.class);
-		final NotificationCompat.Builder builder = new NotificationCompat.Builder(requireContext(), NOTIFICATION_CHANNEL_ID)
+		final NotificationCompat.Builder builder = new NotificationCompat.Builder(context, NOTIFICATION_CHANNEL_ID)
 				.setSmallIcon(R.drawable.ic_notification_icon)
 				.setContentTitle(getString(R.string.fetching_subscription_videos))
 				.setContentText(String.format(getString(R.string.fetched_videos_from_channels),
 						numVideosFetched, numChannelsFetched, numChannelsSubscribed));
 
 		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
-			PendingIntent pendingIntent = PendingIntent.getActivity(requireContext(),
+			PendingIntent pendingIntent = PendingIntent.getActivity(context,
 					1, new Intent(), PendingIntent.FLAG_UPDATE_CURRENT);
 			builder.setPriority(NotificationCompat.FLAG_ONGOING_EVENT)
 					.setContentIntent(pendingIntent);
