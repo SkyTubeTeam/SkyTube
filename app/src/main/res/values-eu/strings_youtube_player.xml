@@ -1,2 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="error_invalid_url">Baliogabeko bideoa URL: %s</string>
+    <string name="error_get_video_desc">Akats bat gertatu da bideo deskripzioa berreskuratzean.</string>
+    <string name="error_video_streams">Akats bat gertatu da bideoak berreskuratzean.</string>
+    <string name="error_video_streams_empty">%s bideoak ez du edukirik.</string>
+    <string name="error_video_play">Errorea bideoa ikustean</string>
+    <string name="error_stream_parse_error">Parsing errorea.</string>
+    <string name="error_stream_decryption_fail">Ezin zuen deszifratze kodea kargatu Youtube zerbitzurako.</string>
+    <string name="error_stream_err_unavailable">Errorearen mezua ez dago eskuragarri.</string>
+</resources>
