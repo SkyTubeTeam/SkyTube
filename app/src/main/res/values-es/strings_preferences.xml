@@ -157,4 +157,16 @@
     <string name="pref_title_chromecast_none">Ninguno</string>
     <string name="pref_chromecast_category">Reproductor Chromecast</string>
     <string name="pref_video_continuous_repeat_toggle">Repetición conitnua</string>
+    <string name="pref_video_download_minimum_resolution_summary">Las descargas de video serán al menos en esta resolución: %s</string>
+    <string name="pref_video_download_minimum_resolution_title">Resolución mínima para descarga de video</string>
+    <string name="pref_video_download_maximum_resolution_summary">Las descargas de video serán como mucho de esta resolución: %s</string>
+    <string name="pref_video_download_maximum_resolution_title">Resolución máxima para descarga de video</string>
+    <string name="pref_summary_maximum_res_mobile">Selecciona tu resolución máxima para video en directo a través de redes móviles (como 4G): %s</string>
+    <string name="pref_title_maximum_res_mobile">Resolución máxima para redes móviles</string>
+    <string name="pref_summary_minimum_res_mobile">Selecciona tu resolución minima para video en directo a través de redes móviles (como 4G): %s</string>
+    <string name="pref_title_minimum_res_mobile">Resolución mínima para redes móviles</string>
+    <string name="pref_summary_minimum_res">Selecciona tu resolución mínima: %s</string>
+    <string name="pref_title_minimum_res">Resolución mínima</string>
+    <string name="pref_summary_maximum_res">Selecciona tu resolución máxima: %s</string>
+    <string name="pref_title_maximum_res">Resolución máxima</string>
 </resources>

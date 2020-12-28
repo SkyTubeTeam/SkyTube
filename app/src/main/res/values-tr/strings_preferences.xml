@@ -149,4 +149,16 @@
     <string name="pref_summary_mobile_network_usage">Videoları indirmek, izlemek için mobil ağ (örneğin 4G) kullanıyorsanız ne yapılacağı: %s</string>
     <string name="pref_title_mobile_network_usage">Mobil Ağ Kullanımı</string>
     <string name="key_preferences">tercihler</string>
+    <string name="pref_video_download_minimum_resolution_summary">Video indirmeleri en az bu çözünürlükte olacak: %s</string>
+    <string name="pref_video_download_minimum_resolution_title">En Düşük Video İndirme Çözünürlüğü</string>
+    <string name="pref_video_download_maximum_resolution_summary">Video indirmeleri en fazla bu çözünürlükte olacak: %s</string>
+    <string name="pref_video_download_maximum_resolution_title">En Yüksek Video İndirme Çözünürlüğü</string>
+    <string name="pref_summary_maximum_res_mobile">Bir mobil ağ (4G gibi) üzerinden yayın yaparken kullanılacak en yüksek çözünürlüğünüzü seçin: %s</string>
+    <string name="pref_title_maximum_res_mobile">Mobil ağ için en yüksek çözünürlük</string>
+    <string name="pref_summary_minimum_res_mobile">Bir mobil ağ (4G gibi) üzerinden yayın yaparken kullanılacak en düşük çözünürlüğünüzü seçin: %s</string>
+    <string name="pref_title_minimum_res_mobile">Mobil ağ için en düşük çözünürlük</string>
+    <string name="pref_summary_minimum_res">En düşük çözünürlüğünüzü seçin: %s</string>
+    <string name="pref_title_minimum_res">En Düşük Çözünürlük</string>
+    <string name="pref_summary_maximum_res">En yüksek çözünürlüğünüzü seçin: %s</string>
+    <string name="pref_title_maximum_res">En Yüksek Çözünürlük</string>
 </resources>

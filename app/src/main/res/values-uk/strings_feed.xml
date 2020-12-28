@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="notification_new_videos_found">%d нових відео з підписаних каналів</string>
+    <string name="notification_channel_feed_title">Стрічка сповіщень</string>
+    <string name="import_subscriptions_from_youtube">Імпортувати підписки з YouTube</string>
+    <string name="no_subscriptions_text">Немає підписок на канали.
+\n
+\nЩойно вони з\'являться, відео з них, за останній місяць, будуть доступні тут.</string>
+    <string name="no_new_videos_found">Не знайдено нових відео.</string>
+    <string name="fetched_videos_from_channels">Завантажено %1$d відео з %2$d/%3$d каналів.</string>
+    <string name="fetching_subscription_videos">Завантаження відео з підписаних каналів</string>
+    <string name="fetching_subbed_channels_info_error">Сталася помилка під час завантаження інформації про канал.</string>
+    <string name="fetching_subbed_channels_info">Завантаження інформації про канал…</string>
+    <string name="open_channel">Відкрити канал</string>
+    <string name="subscribing_to_channels">Підписування на канали…</string>
+    <string name="feed">Стрічка</string>
+</resources>
