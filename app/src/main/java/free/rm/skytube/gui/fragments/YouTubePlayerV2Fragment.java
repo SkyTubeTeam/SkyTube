@@ -314,6 +314,8 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 				public void onPlayerError(ExoPlaybackException error) {
 					Logger.e(this, ":: onPlayerError " + error.getMessage(), error);
 
+					saveVideoPosition();
+
 					boolean askForDelete = askForDelete(error);
 					String errorMessage = error.getCause().getMessage();
 					new SkyTubeMaterialDialog(YouTubePlayerV2Fragment.this.getContext())
@@ -671,6 +673,10 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 	public void videoPlaybackStopped() {
 		player.stop();
 		// playerView.setPlayer(null);
+		saveVideoPosition();
+	}
+
+	private void saveVideoPosition() {
 		if(!SkyTubeApp.getPreferenceManager().getBoolean(getString(R.string.pref_key_disable_playback_status), false)) {
 			PlaybackStatusDb.getPlaybackStatusDb().setVideoPosition(youTubeVideo, player.getCurrentPosition());
 		}
