@@ -161,4 +161,20 @@
     <string name="pref_title_minimum_res">En Düşük Çözünürlük</string>
     <string name="pref_summary_maximum_res">En yüksek çözünürlüğünüzü seçin: %s</string>
     <string name="pref_title_maximum_res">En Yüksek Çözünürlük</string>
+    <string name="pref_key_video_quality_for_downloads_summary">Şunun için iyileştir: %s</string>
+    <string name="pref_key_video_quality_for_downloads_title">İndirmeler için Video Kalitesi Seçimi</string>
+    <string name="pref_key_video_quality_metered_summary">Şunun için iyileştir: %s</string>
+    <string name="pref_key_video_quality_metered_title">Kotalı Bağlantıda Video Kalitesi Seçimi</string>
+    <string name="pref_key_video_quality_summary">Şunun için iyileştir: %s</string>
+    <string name="pref_key_video_quality_title">Video Kalitesi Seçimi</string>
+    <string name="pref_category_download_resolutions">İndirmek için Video Çözünürlüğü</string>
+    <string name="pref_category_video_resolutions">Video Çözünürlüğü</string>
+    <string name="pref_summary_metered_network_usage">Videoları indirmek/izlemek için kotalı bir ağ kullanıyorsanız ne yapılacağı: %s</string>
+    <string name="pref_title_metered_network_usage">Kotalı Ağ Kullanımı</string>
+    <string name="pref_summary_maximum_res_metered">Kotalı bir ağ üzerinden yayın yaparken kullanılacak en yüksek çözünürlüğünüzü seçin: %s</string>
+    <string name="pref_title_maximum_res_metered">Kotalı ağ için en yüksek çözünürlük</string>
+    <string name="pref_summary_minimum_res_metered">Kotalı bir ağ üzerinden yayın yaparken kullanılacak en düşük çözünürlüğünüzü seçin: %s</string>
+    <string name="pref_title_minimum_res_metered">Kotalı ağ için en düşük çözünürlük</string>
+    <string name="pref_category_metered_network">Kotalı Ağ</string>
+    <string name="no_resolution_specified">Hiçbiri</string>
 </resources>
