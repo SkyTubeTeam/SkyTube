@@ -38,4 +38,5 @@
     <string name="mobile_data_blocked_by_policy">Het downloaden is tegengehouden omdat je niet verbonden bent met een Wi-Fi-netwerk.</string>
     <string name="error_video_parse_error">De video kan niet worden afgespeeld. De foutmelding is: <br/> <br/> %s.</string>
     <string name="error_downloaded_file_is_corrupted">De gedownloade video lijkt <b>beschadigd</b> te zijn. De foutmelding is: <br/> <br/> %s. <br/> <br/> Wil je het bestand <b>verwijderen</b>\?</string>
+    <string name="reload_video">Video herladen</string>
 </resources>

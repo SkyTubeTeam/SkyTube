@@ -161,4 +161,13 @@
     <string name="pref_title_minimum_res">Minimale resolutie</string>
     <string name="pref_summary_maximum_res">Kies de maximale resolutie: %s</string>
     <string name="pref_title_maximum_res">Maximale resolutie</string>
+    <string name="pref_key_video_quality_for_downloads_summary">Optimaliseren voor: %s</string>
+    <string name="pref_key_video_quality_for_downloads_title">Videokwaliteit bij downloads</string>
+    <string name="pref_key_video_quality_on_mobile_summary">Optimaliseren voor: %s</string>
+    <string name="pref_key_video_quality_on_mobile_title">Videokwaliteit via mobiel internet</string>
+    <string name="pref_key_video_quality_summary">Optimaliseren voor: %s</string>
+    <string name="pref_key_video_quality_title">Videokwaliteit</string>
+    <string name="pref_category_download_resolutions">Videoresolutie bij downloaden</string>
+    <string name="pref_category_video_resolutions">Videoresolutie</string>
+    <string name="no_resolution_specified">Geen</string>
 </resources>

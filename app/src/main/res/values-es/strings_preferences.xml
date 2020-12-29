@@ -169,4 +169,13 @@
     <string name="pref_title_minimum_res">Resolución mínima</string>
     <string name="pref_summary_maximum_res">Selecciona tu resolución máxima: %s</string>
     <string name="pref_title_maximum_res">Resolución máxima</string>
+    <string name="pref_key_video_quality_for_downloads_summary">Optimizar para: %s</string>
+    <string name="pref_key_video_quality_for_downloads_title">Selección de calidad de video para descargas</string>
+    <string name="pref_key_video_quality_on_mobile_summary">Optimizar para: %s</string>
+    <string name="pref_key_video_quality_on_mobile_title">Selección de calidad video en red móvil</string>
+    <string name="pref_key_video_quality_summary">Optimizar para: %s</string>
+    <string name="pref_key_video_quality_title">Selección de calidad de video</string>
+    <string name="pref_category_download_resolutions">Resolución de video para descargas</string>
+    <string name="pref_category_video_resolutions">Resolución de video</string>
+    <string name="no_resolution_specified">Ninguna</string>
 </resources>
