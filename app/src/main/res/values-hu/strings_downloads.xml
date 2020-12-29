@@ -14,4 +14,5 @@
     <string name="playing_video_file_missing">A letöltött videófájl nem található. Lejátszás közvetlenül a hálózatról.</string>
     <string name="external_storage_not_available">Nem lehet letölteni a fájlt, mivel a külső tároló nem érhető el.</string>
     <string name="video_stream_not_found_with_request_resolution">Nincsen megfelelő felbontású videó %s és %s között</string>
+    <string name="warning_metered_network_download">Az eszköze forgalmi díjas kapcsolatot használ. Hogy elkerülje az extra adatforgalommal járó költségeket, javasolt forgalmi díj mentes hálózat használata. Ennek ellenére letölti a videót\\\?</string>
 </resources>
