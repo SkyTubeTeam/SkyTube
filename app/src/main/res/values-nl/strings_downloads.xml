@@ -14,4 +14,5 @@
     <string name="download">Downloaden</string>
     <string name="warning_mobile_network_download">Je apparaat is niet verbonden met een Wi-Fi-netwerk. Om te voorkomen dat je extra moet betalen voor het gebruik van mobiel internet, raden wij aan om te verbinden met een Wi-Fi-netwerk. Wil je de video tóch downloaden\?</string>
     <string name="video_stream_not_found_with_request_resolution">Geen videostream aangetroffen bij de gevraagde resolutie tussen %s en %s</string>
+    <string name="warning_metered_network_download">Je apparaat is verbonden met een beperkt netwerk. Om extra kosten te voorkomen, is het advies om te verbinden met een onbeperkt netwerk. Wil je de video tóch downloaden\?</string>
 </resources>
