@@ -38,4 +38,5 @@
     <string name="resume">Folytatás</string>
     <string name="error_video_parse_error">A videó lejátszása nem indítható el, a hibaüzenet: <br/><br/> %s.</string>
     <string name="error_downloaded_file_is_corrupted">A letöltött videófájl <b>sérültnek</b> tűnik – a hibaüzenet: <br/><br/>%s. <br/><br/> Le akarja <b>törölni</b> a fájlt\?</string>
+    <string name="reload_video">Videó Újra Töltése</string>
 </resources>
