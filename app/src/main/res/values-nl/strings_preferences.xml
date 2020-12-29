@@ -170,4 +170,13 @@
     <string name="pref_category_download_resolutions">Videoresolutie bij downloaden</string>
     <string name="pref_category_video_resolutions">Videoresolutie</string>
     <string name="no_resolution_specified">Geen</string>
+    <string name="pref_key_video_quality_metered_summary">Optimaliseren voor: %s</string>
+    <string name="pref_key_video_quality_metered_title">Videokwaliteit op beperkt netwerk</string>
+    <string name="pref_summary_metered_network_usage">Wat wil je doen als je een beperkt netwerk gebruikt voor het downloaden/bekijken van video\'s: %s</string>
+    <string name="pref_title_metered_network_usage">Beperkt netwerk</string>
+    <string name="pref_summary_maximum_res_metered">Kies de maximale resolutie bij streamen via een beperkt netwerk: %s</string>
+    <string name="pref_title_maximum_res_metered">Maximale resolutie op beperkt netwerk</string>
+    <string name="pref_summary_minimum_res_metered">Kies de minimale resolutie bij streamen via een beperkt netwerk: %s</string>
+    <string name="pref_title_minimum_res_metered">Minimale resolutie op beperkt netwerk</string>
+    <string name="pref_category_metered_network">Beperkt netwerk</string>
 </resources>
