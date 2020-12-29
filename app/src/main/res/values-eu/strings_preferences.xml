@@ -65,4 +65,19 @@
     <string name="key_preferences">lehentasunak</string>
     <string name="preferences">Lehentasunak</string>
     <string name="no_resolution_specified">Ezer ez</string>
+    <string name="pref_title_enable_immersive_mode">Modu inmeriosoa</string>
+    <string name="pref_video_continuous_repeat_toggle">Errepikapen etengabea</string>
+    <string name="pref_summary_disable_screen_gestures">Itzali keinuak bolumena kontrolatzeko, argitasuna eta bilatu atzera egitea bideoetan.</string>
+    <string name="pref_title_disable_screen_gestures">Bideo keinu desegokiak</string>
+    <string name="pref_summary_screen_orientation">Bideo-jotzailearen orientazioa: %s</string>
+    <string name="pref_title_screen_orientation">Pantaila Orientazioa</string>
+    <string name="pref_summary_feed_notification">Zenbat aldiz bilatu behar diren bideoklip berriak harpidetzatutako kanaletatik: %s</string>
+    <string name="pref_title_feed_notification">Jaso Autonotifikazioak</string>
+    <string name="pref_summary_metered_network_usage">Zer egin, datu-mugatua erabiltzen baduzu bideoak deskargatzeko/ikusteko: %s</string>
+    <string name="pref_title_metered_network_usage">Datu-mugatua usatua</string>
+    <string name="pref_summary_maximum_res_metered">Aukeratu zure gehien erresoluzioa bideo zuzenean ikusteko datu-mugatua sare batekin: %s</string>
+    <string name="pref_title_maximum_res_metered">Gehien erresoluzioa datu-mugatua sareentzat</string>
+    <string name="pref_summary_minimum_res_metered">Aukeratu zure gutzien erresoluzioa bideo zuzenean ikusteko datu-mugatua sare batekin: %s</string>
+    <string name="pref_title_minimum_res_metered">Gutxien erresoluzioa datu-mugatua sareentzat</string>
+    <string name="pref_category_metered_network">Datu-mugatua sarea</string>
 </resources>
