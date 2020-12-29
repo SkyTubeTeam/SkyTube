@@ -39,4 +39,8 @@
     <string name="error_downloaded_file_is_corrupted">İndirilen video <b>bozuk</b> görünüyor - hata mesajı: <br/> <br/> %s. <br/> <br/> Dosyayı <b>silmek</b> istiyor musunuz\?</string>
     <string name="error_get_comments_no_network">Yorumların yüklenmesi için ağ erişimi gerekli.</string>
     <string name="reload_video">Videoyu Yeniden Yükle</string>
+    <string name="metered_network_blocked_by_policy">Aygıtınız kotalı bir ağa bağlı olduğu için indirme işlemi engellendi.</string>
+    <string name="warning_metered_network_disable">Bir daha asla sorma.</string>
+    <string name="warning_metered_network_play">Aygıtınız kotalı bir ağa bağlı. Olası ek veri kullanım ücretlerinden kaçınmak için, kotasız bir ağa bağlanmanız önerilir. Video yine de oynatılsın mı\?</string>
+    <string name="metered_network">Kotalı Ağ</string>
 </resources>
