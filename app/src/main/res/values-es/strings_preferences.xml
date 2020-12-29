@@ -178,4 +178,13 @@
     <string name="pref_category_download_resolutions">Resolución de video para descargas</string>
     <string name="pref_category_video_resolutions">Resolución de video</string>
     <string name="no_resolution_specified">Ninguna</string>
+    <string name="pref_key_video_quality_metered_summary">Optimizar para: %s</string>
+    <string name="pref_key_video_quality_metered_title">Calidad de video seleccionada en red con límite de datos</string>
+    <string name="pref_summary_metered_network_usage">Que hacer si esta en uso una red con límite de datos para descargar/ver videos: %s</string>
+    <string name="pref_title_metered_network_usage">Uso de red con límite de datos</string>
+    <string name="pref_summary_maximum_res_metered">Selecciona tu resolución máxima para streaming con una red con limite de datos: %s</string>
+    <string name="pref_title_maximum_res_metered">Resolución máxima para red con límite de datos</string>
+    <string name="pref_summary_minimum_res_metered">Selecciona tu resolución mínima para streaming con una red que tiene límite de datos: %s</string>
+    <string name="pref_title_minimum_res_metered">Resolución mínima para red con límite de datos</string>
+    <string name="pref_category_metered_network">Red con límite de datos</string>
 </resources>
