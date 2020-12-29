@@ -64,4 +64,5 @@
     <string name="pref_video_player_category">Bideo-jotzailea</string>
     <string name="key_preferences">lehentasunak</string>
     <string name="preferences">Lehentasunak</string>
+    <string name="no_resolution_specified">Ezer ez</string>
 </resources>
