@@ -147,4 +147,22 @@
     <string name="pref_title_minimum_res">Resolusi Minimum</string>
     <string name="pref_summary_maximum_res">Pilih resolusi maksimum anda: %s</string>
     <string name="pref_title_maximum_res">Resolusi Maksimum</string>
+    <string name="pref_key_video_quality_for_downloads_summary">Optimal untuk: %s</string>
+    <string name="pref_key_video_quality_for_downloads_title">Pilihan Kualitas Video untuk Unduhan</string>
+    <string name="pref_key_video_quality_metered_summary">Optimal untuk: %s</string>
+    <string name="pref_key_video_quality_metered_title">Pilihan Kualitas Video pada Jaringan Terukur</string>
+    <string name="pref_key_video_quality_summary">Optimal untuk: %s</string>
+    <string name="pref_key_video_quality_title">Pilihan Kualitas Video</string>
+    <string name="pref_video_download_minimum_resolution_summary">Video diunduh minimal pada resolusi ini: %s</string>
+    <string name="pref_video_download_maximum_resolution_summary">Video diunduh maksimal pada resolusi ini: %s</string>
+    <string name="pref_category_download_resolutions">Resolusi Video Unduh</string>
+    <string name="pref_category_video_resolutions">Resolusi Video</string>
+    <string name="pref_summary_metered_network_usage">Apa yang ingin anda lakukan jika anda menggunakan jaringan terukur untuk mengunduh/menonton video: %s</string>
+    <string name="pref_title_metered_network_usage">Penggunaan Jaringan Terukur</string>
+    <string name="pref_summary_maximum_res_metered">Pilih resolusi maksimum saat streaming melalui jaringan terukur: %s</string>
+    <string name="pref_title_maximum_res_metered">Resolusi Maksimum untuk jaringan terukur</string>
+    <string name="pref_summary_minimum_res_metered">Pilih resolusi minimum saat streaming melalui jaringan terukur: %s</string>
+    <string name="pref_title_minimum_res_metered">Resolusi Minimum untuk jaringan terukur</string>
+    <string name="pref_category_metered_network">Jaringan Terukur</string>
+    <string name="no_resolution_specified">Nihil</string>
 </resources>
