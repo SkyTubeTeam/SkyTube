@@ -10,7 +10,6 @@
     <string name="video_download_stream_error">Kunne ikke hente \'%s\'.</string>
     <string name="starting_video_download">Henter \'%s\'…</string>
     <string name="download_video">Hent Video</string>
-    <string name="warning_mobile_network_download">Din enhed er ikke forbundet til et Wi-Fi netværk. For at undgå potentielle ekstra dataforbrugsafgifter anbefales det at oprette forbindelse til et Wi-Fi-netværk. Download video alligevel\?</string>
     <string name="downloads">Hentet</string>
     <string name="download">Hent</string>
 </resources>

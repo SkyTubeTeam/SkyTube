@@ -1,7 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources><string name="download">بارگیری</string>
 	<string name="downloads">بارگیری‌ها</string>
-	<string name="warning_mobile_network_download">دستگاه شما به شبکه وای‌فای متصل نیست. برای اجتناب از هزینه‌های اضافی احتمالی مصرف داده، پیشنهاد می‌شود به شبکه وای‌فای وصل شوید. همچنان می‌خواهید ویدئو بارگیری شود؟</string>
 	<string name="download_video">بارگیری ویدئو</string>
 	<string name="starting_video_download">بارگیری ‹%s›…</string>
 	<string name="video_download_stream_error">ناتوانی در بارگیری ‹%s›.</string>

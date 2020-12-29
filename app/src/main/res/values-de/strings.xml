@@ -16,7 +16,6 @@
     <string name="could_not_get_playlists">Wiedergabelisten von %s konnten nicht abgerufen werden.</string>
     <string name="loading">Wird geladen …</string>
     <string name="could_not_get_channel">Kanalinformationen konnten nicht heruntergeladen werden!</string>
-    <string name="hello_blank_fragment">Hallo leeres Fragment</string>
     <string name="yes">Ja</string>
     <string name="no">Nein</string>
     <string name="could_not_get_channel_detailed">Kanalinformationen von %s konnten nicht heruntergeladen werden.</string>

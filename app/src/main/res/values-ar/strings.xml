@@ -18,5 +18,4 @@
     <string name="could_not_get_channel">لا يمكن تحميل معلومات القناة!</string>
     <string name="yes">نعم</string>
     <string name="no">لا</string>
-    <string name="hello_blank_fragment">مرحبا جزء فارغ</string>
 </resources>

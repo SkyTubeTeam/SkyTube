@@ -2,7 +2,6 @@
 <resources>
     <string name="download_video">Ladda ner video</string>
     <string name="video_download_stream_error">Kunde inte ladda ner \'%s\'.</string>
-    <string name="warning_mobile_network_download">Din enhet är inte ansluten till ett Wi-Fi-nätverk. För att undvika eventuella extra kostnader för dataanvändning rekommenderas det att ansluta till ett Wi-Fi-nätverk. Hämta video ändå\?</string>
     <string name="downloads">Nedladdningar</string>
     <string name="download">Ladda ner</string>
     <string name="external_storage_not_available">Det går inte att hämta filen eftersom den externa lagringen inte är tillgänglig.</string>

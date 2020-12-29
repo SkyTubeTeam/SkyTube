@@ -16,7 +16,6 @@
     <string name="could_not_get_playlists">Impossible d\'obtenir les listes de lecture %s.</string>
     <string name="loading">Chargement…</string>
     <string name="could_not_get_channel">Impossible de télécharger les informations de la chaîne !</string>
-    <string name="hello_blank_fragment">Bonjour fragment vide</string>
     <string name="yes">Oui</string>
     <string name="no">Non</string>
     <string name="search_channel">Chercher une chaîne</string>

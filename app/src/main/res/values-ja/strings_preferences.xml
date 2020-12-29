@@ -10,8 +10,6 @@
 	<string name="pref_summary_preferred_languages">お好みの言語を選択してください。</string>
 
 	<string name="pref_video_player_category">ビデオプレーヤー</string>
-	<string name="pref_title_preferred_res">お好みの解像度</string>
-	<string name="pref_summary_preferred_res">お好みの解像度を選択:  %s</string>
 
 	<string name="pref_title_backup_dbs">データベースのバックアップ</string>
 	<string name="pref_summary_backup_dbs">サブスクリプションとブックマークのデータベースをバックアップします。</string>
@@ -130,9 +128,6 @@
 	<string name="pref_title_dislikes_filter">低く評価</string>
 	<string name="pref_summary_dislikes_filter">評価の低い動画を除外する: %s</string>
 	<string name="pref_privacy_category">プライバシー</string>
-    <string name="pref_category_mobile_network">モバイル通信ネットワーク</string>
-    <string name="pref_title_preferred_res_mobile">モバイル通信ネットワーク用お好みの解像度</string>
-    <string name="pref_summary_preferred_res_mobile">モバイル通信ネットワークでストリーミングする際のお好みの解像度を選択 (4Gなど): %s</string>
     <string name="pref_title_disable_screen_gestures">ビデオジェスチャーを無効にする</string>
     <string name="pref_summary_disable_screen_gestures">ビデオの音量、明るさ、早送り/巻き戻しを制御するジェスチャーを無効にします。</string>
     <string name="pref_summary_enable_video_blocker">ビデオブロッカーを有効にします。</string>

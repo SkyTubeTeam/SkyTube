@@ -12,7 +12,6 @@
     <string name="playing_video_file_missing">No encuentro la descarga de este video, Reproduciendo de internet.</string>
     <string name="external_storage_not_available">No puedo descargar el video porque el almacenamiento externo no está disponible.</string>
     <string name="download">Descargar</string>
-    <string name="warning_mobile_network_download">Su dispositivo no está conectado a una red Wi-Fi. Para evitar cargos por uso extra de datos, se recomienda conectarse a una red Wi-Fi. Desea descargar el vídeo de todas formas\?</string>
     <string name="video_stream_not_found_with_request_resolution">No se ha encontrado video para la resolución solicitada, entre %s - %s</string>
     <string name="warning_metered_network_download">Tu dispositivo esta conectado a una red con límite de datos. Para evitar cargos por uso extra de datos, se recomienda conectar a una red sin límite de datos. Descargar el video de todos modos\?</string>
 </resources>

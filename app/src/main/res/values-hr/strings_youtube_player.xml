@@ -11,7 +11,6 @@
     <string name="warning_live_video">Trenutačno nije moguće pokrenuti prijenos uživo. Otvoriti prijenos uživo u jednom drugom programu\?</string>
     <string name="ratings_disabled">Ocjene su deaktivirane</string>
     <string name="loading_video">Učitavanje videozapisa …</string>
-    <string name="get_new_video_steam">Novi prijenos</string>
     <string name="open_in_browser">Otvori u web pregledniku</string>
     <string name="open_with">Otvori s …</string>
     <string name="share">Dijeli</string>
@@ -30,11 +29,7 @@
     <string name="clear">Izbriši</string>
     <string name="should_resume">Želiš li nastaviti s mjesta na kojem si prestao/la\?</string>
     <string name="resume">Nastavi</string>
-    <string name="mobile_data">Mobilni podaci</string>
-    <string name="warning_mobile_network_play">Tvoj uređaj nije povezan s Wi-Fi mrežom. Za izbjegavanje potrošnje datotečnog prometa, preporučujemo da se povežeš na Wi-Fi mrežu. Svejedno pokrenuti videozapis\?</string>
-    <string name="warning_mobile_network_disable">Ne pitaj više.</string>
     <string name="play_video">Pokreni videozapis</string>
-    <string name="mobile_data_blocked_by_policy">Preuzimanje je blokirano, jer tvoj uređaj nije povezan s Wi-Fi mrežom.</string>
     <string name="error_downloaded_file_is_corrupted">Čini se da je preuzeti videozapis &lt;b&gt;oštećen&lt;/b&gt; – poruka greške: &lt;br/&gt; &lt;br/&gt; %s. &lt;br/&gt; &lt;br/&gt; Želiš li &lt;b&gt;izbrisati&lt;/b&gt; datoteku\?</string>
     <string name="error_video_parse_error">Nije moguće pokrenuti videozapis, poruka greške: &lt;br/&gt; &lt;br/&gt; %s.</string>
     <string name="error_get_comments_no_network">Za dohvaćanje komentara potreban je pristup mreži.</string>

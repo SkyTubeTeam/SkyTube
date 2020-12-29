@@ -12,5 +12,4 @@
 	<string name="playing_video_file_missing">このビデオのダウンロードが見つかりませんでした。リモート再生中。</string>
 	<string name="external_storage_not_available">外部ストレージが利用できないので、ファイルをダウンロードできません。</string>
 <string name="download">ダウンロード</string>
-    <string name="warning_mobile_network_download">お使いのデバイスはWi-Fiネットワークに接続されていません。 余分なデータ使用量の増加を防ぐために、Wi-Fiネットワークに接続することをお勧めします。 とにかくビデオをダウンロードしますか\?</string>
 </resources>

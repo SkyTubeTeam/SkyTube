@@ -16,7 +16,6 @@
     <string name="could_not_get_playlists">Nie można uzyskać %s playlist.</string>
     <string name="loading">Ładowanie …</string>
     <string name="could_not_get_channel">Nie można pobrać informacji o kanale!</string>
-    <string name="hello_blank_fragment">Witaj pusty fragment</string>
     <string name="yes">Tak</string>
     <string name="no">Nie</string>
     <string name="close">Zamknij</string>

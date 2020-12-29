@@ -8,15 +8,10 @@
     <string name="error_video_streams">Hiba történt a videó adatfolyamainak lekérésekor.</string>
     <string name="error_get_video_desc">Hiba történt a videóleírás lekérésekor.</string>
     <string name="error_invalid_url">Érvénytelen videó URL: %s</string>
-    <string name="mobile_data">Mobil adathasználat</string>
-    <string name="warning_mobile_network_play">Az eszköze nem csatlakozik Wi-Fi hálózathoz. Hogy elkerülje az extra adatforgalommal járó költségeket, javasolt a Wi-Fi hálózat használata. Mindenképp lejátssza a videót\?</string>
-    <string name="warning_mobile_network_disable">Ne kérdezze újra.</string>
-    <string name="mobile_data_blocked_by_policy">Letöltés blokkolva, mert az eszköze nem csatlakozik Wi-Fi hálózathoz.</string>
     <string name="play_video">Videólejátszás</string>
     <string name="warning_live_video">Az élő közvetítések lejátszása egyelőre nem lehetséges. Megnyitja egy másik alkalmazásban\?</string>
     <string name="ratings_disabled">Értékelések letiltva</string>
     <string name="loading_video">Videó betöltése…</string>
-    <string name="get_new_video_steam">Új adatfolyam</string>
     <string name="open_in_browser">Megnyitás böngészőben</string>
     <string name="open_with">Megnyitás ezzel…</string>
     <string name="share">Megosztás</string>

@@ -7,8 +7,6 @@
     <string name="pref_title_preferred_languages">اللغات المفضلة</string>
     <string name="pref_summary_preferred_languages">حدد لغاتك المفضلة .</string>
     <string name="pref_video_player_category">مشغل الفيديو</string>
-    <string name="pref_title_preferred_res">الدقة المفضلة</string>
-    <string name="pref_summary_preferred_res">حدد الدقة المفضلة لديك: s%</string>
     <string name="pref_title_backup_dbs">تصدير نسخة احتياطية لقواعد البيانات</string>
     <string name="pref_summary_backup_dbs">الاحتفاظ بنسخة احتياطية من قواعد البيانات للاشتراكات و الإشارات المرجعية.</string>
     <string name="pref_title_import_dbs">استيراد نسخة احتياطية</string>
@@ -72,9 +70,6 @@
     </string-array>
     <string name="pref_title_choose_player">مشغل الفيديو</string>
     <string name="pref_summary_choose_player">مشغل الفديو المستخدم : %s</string>
-    <string name="pref_category_mobile_network">شبكة الجوال</string>
-    <string name="pref_title_preferred_res_mobile">الدقة المفضلة على شبكة الجوال</string>
-    <string name="pref_summary_preferred_res_mobile">اختيار مشغل الفيديو المفضل لديك لتشغيل عن طريق شبكة الجوال (مثل شبكات الجيل الرابع) : %s</string>
     <string name="pref_import_export_category">استيراد/تصدير</string>
     <string name="pref_title_disable_screen_gestures">تعطيل إيماءات الفيديو</string>
     <string name="pref_summary_disable_screen_gestures">إيقاف إيماءات التحكم بحجم والسطوع والتقديم إلى الأمام / الخلف في الفيديو.</string>

@@ -11,7 +11,6 @@
     <string name="warning_live_video">لا يمكن تشغيل الفيديو في الوقت الراهن . افتح في تطبيق آخر؟</string>
     <string name="ratings_disabled">تم تعطيل التقييمات</string>
     <string name="loading_video">جارٍ تحميل الفيديو…</string>
-    <string name="get_new_video_steam">بث جديد</string>
     <string name="open_in_browser">فتح في متصفح الويب</string>
     <string name="open_with">فتح بواسطة…</string>
     <string name="share">مشاركة</string>
@@ -26,9 +25,6 @@
     <string name="play">تشغيل</string>
     <string name="cancel">إلغاء</string>
     <string name="clear">تنظيف</string>
-    <string name="mobile_data">البيانات المتنقلة</string>
-    <string name="warning_mobile_network_play">جهازك غير متصل بشبكة واي فاي.لأجل تجنب احتمال تغييرات اضافية لاستخدام البيانات، فمن المستحسن أن تتصل بشبكة واي فاي.تشغيل الفيديو على أي حال؟</string>
-    <string name="warning_mobile_network_disable">لا تسأل مرة أخرى.</string>
     <string name="play_video">تشغيل الفيديو</string>
     <string name="mark_watched">تعليمه كفيديو تمت مشاهدته</string>
     <string name="mark_unwatched">تعليمه كفيديو لم تتم مشاهدته</string>

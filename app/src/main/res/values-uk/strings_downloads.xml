@@ -10,7 +10,6 @@
     <string name="video_download_stream_error">Не вдалося завантажити \'%s\'.</string>
     <string name="starting_video_download">Завантажується \'%s\'…</string>
     <string name="download_video">Завантажити відео</string>
-    <string name="warning_mobile_network_download">Пристрій не має Wi-Fi з\'єднання. Аби уникнути зайвих витрат, рекомендовано під\'єднатися до Wi-Fi мережі. Все одно завантажити\?</string>
     <string name="downloads">Завантаження</string>
     <string name="download">Завантаження</string>
 </resources>

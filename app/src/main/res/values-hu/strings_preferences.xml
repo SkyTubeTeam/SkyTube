@@ -3,23 +3,12 @@
     <string name="preferences">Beállítások</string>
     <string name="key_preferences">beállítások</string>
     <string name="pref_video_player_category">Videólejátszó</string>
-    <string name="pref_title_preferred_res">Előnyben részesített felbontás</string>
-    <string name="pref_summary_preferred_res">Válassza ki az előnyben részesített videófelbontást: %s</string>
     <string name="pref_title_choose_player">Videólejátszó</string>
     <string name="pref_summary_choose_player">A használandó videólejátszó: %s</string>
     <string-array name="pref_video_players">
         <item>Alapértelmezett Lejátszó</item>
         <item>Régi Lejátszó (nem javasolt)</item>
         <item>Hivatalos YouTube Lejátszó</item>
-    </string-array>
-    <string name="pref_category_mobile_network">Mobilhálózat</string>
-    <string name="pref_title_preferred_res_mobile">Előnyben részesített felbontás mobilhálózat esetén</string>
-    <string name="pref_summary_preferred_res_mobile">Válassza ki az előnyben részesített videófelbontást, ha mobilhálózaton (például 4G-n) tölt le: %s</string>
-    <string name="pref_title_mobile_network_usage">Mobil adathasználat</string>
-    <string-array name="pref_mobile_network_usage">
-        <item>Mindig kérdezzen rá</item>
-        <item>Tiltás</item>
-        <item>Engedélyezés</item>
     </string-array>
     <string name="pref_import_export_category">Importálás/exportálás</string>
     <string name="pref_title_backup_dbs">Adatbázis biztonsági mentése</string>
@@ -80,8 +69,6 @@
     <string name="pref_summary_preferred_regions">Válassza ki az előnyben részesített régiót. Ez szűri a „Kiemelt” kategóriában lévő videókat: %s</string>
     <string name="pref_title_preferred_languages">Előnyben részesített nyelv(ek)</string>
     <string name="pref_summary_preferred_languages">Válassza ki az Ön által előnyben részesített nyelveket.</string>
-    <string name="pref_video_download_preferred_resolution_summary">A videóletöltéseknél ezen felbontás előnyben részesítése: %s</string>
-    <string name="pref_video_download_preferred_resolution_title">Letöltéseknél előnyben részesített videófelbontás</string>
     <string name="pref_summary_video_download_folder">A videók ebbe a mappába lesznek letöltve: %s</string>
     <string name="pref_title_video_download_folder">Videóletöltési mappa</string>
     <string name="pref_popup_title_video_download_folder">Mappa kiválasztása</string>
@@ -106,7 +93,6 @@
     <string name="pref_summary_credits">Az emberek és projektek amik lehetővé tették ezt az alkalmazást.</string>
     <string name="pref_chromecast_category">Chromecast</string>
     <string name="pref_summary_import_subs">Feliratkozások importálása a YouTube-fiókjából.</string>
-    <string name="pref_summary_mobile_network_usage">Mi a teendő, ha mobilhálózatot (például 4G-t) használ letöltéshez, videónézéshez: %s</string>
     <string name="app_license">Copyright © 2015-2018 Ramon Mifsud
 \n
 \nEz a program szabad szoftver: terjesztheti és/vagy módosíthatja a Free Software Foundation által kiadott GNU General Public License feltételei alapján (a licenc 3-as verziója szerint).
@@ -164,10 +150,6 @@
     <string name="pref_video_download_minimum_resolution_title">Letöltéseknél használt minimális felbontás</string>
     <string name="pref_video_download_maximum_resolution_summary">A videókat maximum %s felbontásban töltjük le</string>
     <string name="pref_video_download_maximum_resolution_title">Letöltéseknél használt maximális felbontás</string>
-    <string name="pref_summary_maximum_res_mobile">Válassza ki a maximális felbontást, amit mobil hálózaton keresztül szeretne használni (mint pl 4G-n): %s</string>
-    <string name="pref_title_maximum_res_mobile">Mobil hálózaton használt maximális felbontás</string>
-    <string name="pref_summary_minimum_res_mobile">Válassza ki a minimális felbontást, amit mobil hálózaton keresztül szeretne használni (mint pl 4G-n): %s</string>
-    <string name="pref_title_minimum_res_mobile">Mobil hálózaton használt minimális felbontás</string>
     <string name="pref_summary_minimum_res">Válassza ki a minimális felbontást: %s</string>
     <string name="pref_title_minimum_res">Minimális Felbontás</string>
     <string name="pref_summary_maximum_res">Válassza ki a maximális videófelbontást: %s</string>

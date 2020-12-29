@@ -11,7 +11,6 @@
     <string name="warning_live_video">Póki co nie można odtwarzać transmisji na żywo. Odtworzyć w innej aplikacji?</string>
     <string name="ratings_disabled">Oceny wyłączone</string>
     <string name="loading_video">Ładowanie filmu…</string>
-    <string name="get_new_video_steam">Nowy strumień</string>
     <string name="open_in_browser">Otwórz w przeglądarce</string>
     <string name="open_with">Otwórz z…</string>
     <string name="share">Udostępnij</string>
@@ -28,14 +27,10 @@
     <string name="clear">Wyczyść</string>
     <string name="mark_watched">Oznacz jako obejrzane</string>
     <string name="should_resume">Czy chcesz wrócić do miejsca, w którym zatrzymałeś odtwarzanie\?</string>
-    <string name="mobile_data">Dane mobilne</string>
-    <string name="warning_mobile_network_play">Twoje urządzenie nie jest połączone z siecią Wi-Fi. Aby uniknąć potencjalnych dodatkowych opłat za wykorzystywanie danych, zaleca się połączenie z siecią Wi-Fi. Czy mimo to odtworzyć wideo\?</string>
-    <string name="warning_mobile_network_disable">Nigdy więcej nie pytaj.</string>
     <string name="play_video">Odtwórz wideo</string>
     <string name="mark_unwatched">Oznacz jako nieobejrzane</string>
     <string name="resume">Wznów</string>
     <string name="error_video_parse_error">Nie można rozpocząć odtwarzania wideo, komunikat o błędzie to: <br/> <br/> %s.</string>
     <string name="error_downloaded_file_is_corrupted">Pobrany plik wideo wygląda na <b>uszkodzony</b> - komunikat o błędzie to: <br/> <br/> %s. <br/> <br/> Czy chcesz <b>usunąć</b> plik\?</string>
     <string name="error_get_comments_no_network">Do pobierania komentarzy potrzebny jest dostęp do sieci.</string>
-    <string name="mobile_data_blocked_by_policy">Pobieranie zablokowane, ponieważ urządzenie nie jest podłączone do sieci Wi-Fi.</string>
 </resources>

@@ -16,7 +16,6 @@
     <string name="loading">Bezig met laden…</string>
     <string name="video">Video</string>
     <string name="could_not_get_channel">De kanaalinformatie kan niet worden gedownload!</string>
-    <string name="hello_blank_fragment">Hallo blanco fragment</string>
     <string name="yes">Ja</string>
     <string name="no">Nee</string>
     <string name="search_channel">Kanaal doorzoeken</string>

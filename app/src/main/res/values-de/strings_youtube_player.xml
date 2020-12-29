@@ -11,7 +11,6 @@
     <string name="warning_live_video">Livestreams können derzeit nicht abgespielt werden. Livestream in einer anderen Anwendung abspielen?</string>
     <string name="ratings_disabled">Bewertungen deaktiviert</string>
     <string name="loading_video">Lade Video…</string>
-    <string name="get_new_video_steam">Neuer Stream</string>
     <string name="open_in_browser">Im Webbrowser öffnen</string>
     <string name="open_with">Öffnen mit…</string>
     <string name="share">Teilen</string>
@@ -30,11 +29,7 @@
     <string name="mark_unwatched">Als nicht angesehen markieren</string>
     <string name="should_resume">Wollen Sie fortsetzen, wo Sie aufgehört haben?</string>
     <string name="resume">Fortsetzen</string>
-    <string name="mobile_data">Mobile Daten</string>
-    <string name="warning_mobile_network_play">Ihr Gerät ist nicht mit einem WLAN verbunden. Um mögliche zusätzliche Gebühren für die Datennutzung zu vermeiden, wird empfohlen, sich mit einem WLAN zu verbinden. Video trotzdem abspielen\?</string>
-    <string name="warning_mobile_network_disable">Nicht erneut fragen.</string>
     <string name="play_video">Video abspielen</string>
-    <string name="mobile_data_blocked_by_policy">Herunterladen blockiert, weil Ihr Gerät nicht mit einem Wi-Fi-Netzwerk verbunden ist.</string>
     <string name="error_get_comments_no_network">Zum Abrufen von Kommentaren ist Netzwerkzugang erforderlich.</string>
     <string name="error_video_parse_error">Das Video kann nicht abgespielt werden; die Fehlermeldung lautet: <br/> <br/> %s.</string>
     <string name="error_downloaded_file_is_corrupted">Das heruntergeladene Video sieht <b>beschädigt</b> aus – die Fehlermeldung lautet: <br/> <br/> %s. <br/> <br/> Möchten Sie die Datei <b>löschen</b>\?</string>

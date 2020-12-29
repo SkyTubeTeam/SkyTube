@@ -2,8 +2,6 @@
 <resources>
     <string name="preferences">Préférences</string>
     <string name="pref_video_player_category">Lecteur vidéo</string>
-    <string name="pref_title_preferred_res">Résolution préférée</string>
-    <string name="pref_summary_preferred_res">Choix de la résolution par défaut : %s</string>
     <string name="pref_title_choose_player">Lecteur vidéo</string>
     <string name="pref_summary_choose_player">Lecteur vidéo à utiliser : %s</string>
     <string-array name="pref_video_players">
@@ -144,15 +142,10 @@
     <string name="i_agree">J\'accepte</string>
     <string name="pref_category_downloads">Téléchargements</string>
     <string name="pref_title_download_to_separate_directories">Télécharger les vidéos dans des dossiers</string>
-    <string name="pref_category_mobile_network">Réseau mobile</string>
-    <string name="pref_title_preferred_res_mobile">Résolution préférée pour réseau mobile</string>
-    <string name="pref_summary_preferred_res_mobile">Sélectionnez la résolution que vous préférez pour la diffusion en continu via un réseau mobile (par exemple 4G) : %s</string>
     <string name="pref_title_disable_screen_gestures">Désactiver les gestes vidéo</string>
     <string name="pref_summary_disable_screen_gestures">Désactivez les gestes pour contrôler le volume, la luminosité et la recherche avant/arrière dans les vidéos.</string>
     <string name="pref_summary_download_to_separate_directories">Les vidéos sont téléchargées dans des dossiers en fonction du nom de la chaîne.</string>
     <string name="pref_summary_enable_video_blocker">Activer le bloqueur de vidéos.</string>
-    <string name="pref_video_download_preferred_resolution_summary">Les téléchargements vidéos préfèreront cette résolution : %s</string>
-    <string name="pref_video_download_preferred_resolution_title">Résolution de téléchargement vidéo préférée</string>
     <string name="pref_summary_video_download_folder">Les vidéos sont téléchargées dans ce dossier : %s</string>
     <string name="pref_title_video_download_folder">Dossier de téléchargement vidéo</string>
     <string name="pref_popup_title_video_download_folder">Choisissez un dossier</string>
@@ -171,7 +164,5 @@
     <string name="pref_title_autocast">AutoCast</string>
     <string name="pref_title_chromecast_none">Aucun</string>
     <string name="pref_chromecast_category">Chromecast</string>
-    <string name="pref_summary_mobile_network_usage">Que faire si vous utilisez un réseau mobile (comme la 4G) pour télécharger, regarder des vidéos : %s</string>
-    <string name="pref_title_mobile_network_usage">Utilisation du réseau mobile</string>
     <string name="key_preferences">préférences</string>
 </resources>

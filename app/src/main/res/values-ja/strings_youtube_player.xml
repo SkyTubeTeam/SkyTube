@@ -15,7 +15,6 @@
 	<string name="ratings_disabled">評価は無効です</string>
 
 	<string name="loading_video">ビデオを読み込んでいます…</string>
-	<string name="get_new_video_steam">新しいストリーム</string>
 	<string name="open_in_browser">Web ブラウザーで開く</string>
 	<string name="open_with">開く…</string>
 	<string name="share">共有</string>
@@ -37,8 +36,5 @@
 
 	<string name="should_resume">停止した位置から再生を再開しますか？</string>
 	<string name="resume">再開</string>
-    <string name="mobile_data">モバイル通信データ</string>
-    <string name="warning_mobile_network_play">お使いのデバイスはWi-Fiネットワークに接続されていません。 余分なデータ使用料が発生するのを避けるために、Wi-Fiネットワークに接続することをお勧めします。 とにかくビデオを再生しますか\?</string>
-    <string name="warning_mobile_network_disable">今後、表示しない。</string>
     <string name="play_video">ビデオを再生</string>
 </resources>

@@ -12,5 +12,4 @@
     <string name="playing_video_file_missing">Impossible de lire la vidéo téléchargée. Lecture en ligne.</string>
     <string name="external_storage_not_available">Impossible de télécharger le fichier car le stockage externe n\'est pas disponible.</string>
     <string name="download">Télécharger</string>
-    <string name="warning_mobile_network_download">Votre appareil n\'est pas connecté à un réseau wifi. Nous vous recommandons de vous connecter à un réseau wifi pour éviter des frais de données supplémentaires. Télécharger la vidéo malgré tout \?</string>
 </resources>
