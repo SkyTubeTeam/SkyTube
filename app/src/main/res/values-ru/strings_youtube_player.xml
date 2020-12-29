@@ -38,4 +38,5 @@
     <string name="mobile_data_blocked_by_policy">Загрузка заблокирована, поскольку ваше устройство не подключено к сети Wi-Fi.</string>
     <string name="error_video_parse_error">Невозможно начать воспроизведение видео, сообщение об ошибке: <br/> <br/> %s.</string>
     <string name="error_downloaded_file_is_corrupted">Загруженное видео выглядит <b>поврежденным</b> - сообщение об ошибке: <br/><br/> %s. <br/><br/> Хотите <b>удалить</b> файл\?</string>
+    <string name="reload_video">Перезагрузить видео</string>
 </resources>

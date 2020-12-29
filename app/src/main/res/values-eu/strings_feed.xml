@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="notification_new_videos_found">%d bideo berri, harpidetuta dauden kanaletakoak</string>
+    <string name="notification_channel_feed_title">Elikatu notifikazioak</string>
+    <string name="import_subscriptions_from_youtube">Youtuben harpidetzak inportatzea</string>
+    <string name="no_subscriptions_text">Ez zaude harpidetuta inongo kanaletan.
+\n
+\nHarpidetuz gero, zure kanal harpidedunetara igo dituzten bideo guztiak azken hilabetean, hemen egongo dira.</string>
+    <string name="no_new_videos_found">Ez da bideo berririk aurkitu.</string>
+    <string name="fetched_videos_from_channels">%1$d bideo lortuta, %2$d/%3$d kanaletatik.</string>
+    <string name="fetching_subscription_videos">Bideoak biltzen harpidetutako kanaletatik</string>
+    <string name="fetching_subbed_channels_info_error">Akats bat gertatu da kanalen informazioa jasotzean.</string>
+    <string name="fetching_subbed_channels_info">Kanalen informazioa biltzen…</string>
+    <string name="open_channel">Kanal irekia</string>
+    <string name="subscribing_to_channels">Kanaletarako harpidatzen…</string>
+    <string name="feed">Web-jario</string>
+</resources>

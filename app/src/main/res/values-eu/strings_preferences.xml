@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="pref_title_default_tab">Taula lehenetsia</string>
+    <string name="pref_summary_default_tab">Taula lehenetsia SkyTube noiz jaurtitzen den erakusteko: %s</string>
+    <string name="pref_title_hide_tabs">Izkutatuta taulak</string>
+    <string name="pref_hide_tabs_restart">Berrabiatu app Taula eguneratuak erakusteko.</string>
+    <string name="pref_summary_hide_tabs">Aukeratu zeintzuk ez diren erakutsi behar. Berrabiatu behar da.</string>
+    <string name="pref_other_category">Besteak</string>
+    <string name="i_agree">Ados</string>
+    <string name="app_license">Copyright 2015-2018 Ramon Mifsud
+\n
+\nPrograma hau software librea da: birbanatu eta/edo aldatu daiteke Gnu General Public License izenpean, Free Software Fundazioak argitaratu duenez (Lizentziaren 3garren bertsioa).
+\n
+\nPrograma hau baliagarria izango delako esperantzan banatzen da, baina inolako baimenik gabe, eta helburu jakin baterako MERCHANTABILITATEARI edo egokitasunari buruzko agindu inpliziturik gabe. Ikusi Gnu General Public License xehetasun gehiagoren bila.
+\n
+\nPrograma honekin batera, Gnu General Public License aldizkariaren kopia bat jaso behar zenuen. Bestela, ikusi &lt;http://www.gnu.org/licenses/&gt;</string>
+    <string name="pref_summary_license">GNU General Public License 3 bertsioa</string>
+    <string name="pref_title_license">Lizentzia</string>
+    <string name="pref_summary_updates">Ohartu bertsio berriak.</string>
+    <string name="pref_title_updates">Eguneraketak</string>
+    <string name="pref_title_version">Bertsio</string>
+    <string name="pref_summary_credits">Aplikazio hau posible egin duten pertsonak eta proiektuak.</string>
+    <string name="pref_title_credits">Kredituak</string>
+    <string name="pref_title_website">Webgune</string>
+    <string name="pref_about_category">Zertaz</string>
+    <string name="pref_network_downloads_category">Sareak eta deskargak</string>
+    <string name="pref_summary_autocast">Aukeratu Kromekast gailu bat beste appseko bideo batzuk SkyTuben erabiltzeko.</string>
+    <string name="pref_title_autocast">AutoKast</string>
+    <string name="pref_title_chromecast_none">Ezer ez</string>
+    <string name="pref_chromecast_category">KromeKast</string>
+    <string name="subs_import_select_backup">Aukeratu Youtube XML fitxategia inportatzeko</string>
+    <string name="pref_summary_import_subs">zure harpidetzak zure YouTubeko kontutik inportatu.</string>
+    <string name="pref_title_import_subs">Harpidetzak YouTubetik inportatu</string>
+    <string name="databases_import_success">Datu-baseak inportatuak. berrabiarazi app, aldaketak egiteko.</string>
+    <string name="databases_import_fail">Arazoa zure datu-baseak inportatzen.</string>
+    <string name="databases_importing">Inportatzen…</string>
+    <string name="continue_">Jarraitu</string>
+    <string name="databases_import_warning_message">Harpidetza eta markatzaile datu-baseak, aukeratutako segurtasun-kopiaren datuekin ordeztuko dira.
+\n
+\nJarraitu\?</string>
+    <string name="databases_import_nothing_selected">Ez zen ezer aukeratu…</string>
+    <string name="databases_import_select_backup">Aukeratu segurtasun-kopia inportatzeko</string>
+    <string name="databases_backup_fail">Arazoa datu-basea babesten.</string>
+    <string name="databases_backup_success">datu-base kopiatuak %s -n</string>
+    <string name="databases_backing_up">Segurtasun-kopia egiten…</string>
+    <string name="pref_summary_import_dbs">Inportatu zure harpidetzak eta datu-base markatzaileekin segurtasun-kopiak.</string>
+    <string name="pref_summary_backup_dbs">Egin segurtasun-kopiak zure harpidetzak eta datu-base markatzaileekin.</string>
+    <string name="pref_title_import_dbs">Segurtasun-kopia inportazioa</string>
+    <string name="pref_title_backup_dbs">Datu-baseen segurtasun-kopiak</string>
+    <string name="pref_import_export_category">Inport/Esport</string>
+    <string name="pref_summary_mobile_network_usage">Zer egin, sare mugikorra (4G bezala) erabiltzen ari bazara deskargatzeko, bideoak ikusteko: %s</string>
+    <string name="pref_category_mobile_network">Sare mugikorra</string>
+    <string name="pref_title_minimum_res_mobile">Gutxien erresoluzioa sare mugikorrarentzat</string>
+    <string name="pref_summary_minimum_res_mobile">Aukeratu zure gutxien erresoluzioa bideo zuzenearentzat sare mugikorra batekin (4G bezala):%s</string>
+    <string name="pref_title_maximum_res_mobile">Gehien erresoluzioa sare mugikorrarentzat</string>
+    <string name="pref_title_mobile_network_usage">Mugikorra sarea erabilia</string>
+    <string name="pref_summary_maximum_res_mobile">Aukeratu zure gehien erresoluzioa bideo zuzenearentzat mugikorra sare batekin (4G bezala): %s</string>
+    <string name="pref_summary_choose_player">Bideo-jotzailea erabiltzeko: %s</string>
+    <string name="pref_title_choose_player">Bideo-jotzailea</string>
+    <string name="pref_summary_minimum_res">Aukeratu zure gutxien erresoluzioa: %s</string>
+    <string name="pref_title_minimum_res">Gutxien erresoluzioa</string>
+    <string name="pref_summary_maximum_res">Aukeratu zure gehien erresoluzioa: %s</string>
+    <string name="pref_title_maximum_res">Gehien erresoluzioa</string>
+    <string name="pref_video_player_category">Bideo-jotzailea</string>
+    <string name="key_preferences">lehentasunak</string>
+    <string name="preferences">Lehentasunak</string>
+</resources>
