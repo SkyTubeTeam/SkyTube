@@ -38,4 +38,9 @@
     <string name="mobile_data_blocked_by_policy">Unduh diblokir, karena perangkat anda tidak tersambung ke jaringan Wi-Fi.</string>
     <string name="error_video_parse_error">Tidak bisa memutar video, pesan galat: <br/> <br/> %s.</string>
     <string name="error_downloaded_file_is_corrupted">Video yang diunduh sepertinya <b>rusak</b> - pesan galat: <br/> <br/> %s. <br/> <br/> Apakah anda ingin <b>menghapus</b> berkas tersebut\?</string>
+    <string name="reload_video">Muat Ulang Video</string>
+    <string name="metered_network_blocked_by_policy">Unduh diblokir karena perangkat anda tersambung ke jaringan terukur.</string>
+    <string name="warning_metered_network_disable">Jangan tanya lagi.</string>
+    <string name="warning_metered_network_play">Perangkat anda tersambung ke jaringan terukur. Untuk menghindari potensi biaya ekstra penggunaan data, direkomendasikan untuk tersambung ke jaringan tak terbatas. Tetap putar video\?</string>
+    <string name="metered_network">Sambungan Terukur</string>
 </resources>
