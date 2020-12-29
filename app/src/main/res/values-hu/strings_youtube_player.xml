@@ -41,4 +41,6 @@
     <string name="reload_video">Videó Újra Töltése</string>
     <string name="warning_metered_network_play">Az eszköze forgalmi díjas kapcsolatot használ. Hogy elkerülje az extra adatforgalommal járó költségeket, javasolt forgalmi díj mentes hálózat használata. Ennek ellenére lejátszaná a videót\\\?</string>
     <string name="metered_network">Forgalmi Díjas Hálózatok</string>
+    <string name="metered_network_blocked_by_policy">Letöltés blokkolva, mert az eszköze forgalmi díjas hálózathoz csatlakozik.</string>
+    <string name="warning_metered_network_disable">Ne kérdezze újra.</string>
 </resources>
