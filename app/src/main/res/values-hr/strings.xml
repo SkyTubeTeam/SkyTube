@@ -15,7 +15,6 @@
     <string name="num_videos">%d videozapisa</string>
     <string name="playlists">Playliste</string>
     <string name="could_not_get_playlists">Nije bilo moguće dobiti %s playliste.</string>
-    <string name="hello_blank_fragment">Zdravo</string>
     <string name="loading">Učitavanje …</string>
     <string name="yes">Da</string>
     <string name="no">Ne</string>

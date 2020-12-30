@@ -16,7 +16,6 @@
     <string name="could_not_get_playlists">Impossibile caricare %s playlist.</string>
     <string name="loading">Caricamento …</string>
     <string name="could_not_get_channel">Impossibile scaricare le informazioni del canale!</string>
-    <string name="hello_blank_fragment">Ciao frammento vuoto</string>
     <string name="yes">Sì</string>
     <string name="no">No</string>
     <string name="search_channel">Cerca il canale</string>

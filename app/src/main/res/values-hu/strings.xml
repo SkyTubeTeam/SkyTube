@@ -16,7 +16,6 @@
     <string name="num_videos">%d videó</string>
     <string name="playlists">Lejátszási listák</string>
     <string name="could_not_get_playlists">Nem lehet elérni a(z) %s lejátszási listát.</string>
-    <string name="hello_blank_fragment">Hello</string>
     <string name="loading">Betöltés …</string>
     <string name="yes">Igen</string>
     <string name="no">Nem</string>

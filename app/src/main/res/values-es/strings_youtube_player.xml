@@ -11,7 +11,6 @@
     <string name="warning_live_video">Todavía no se puede ver video en directo. ¿Quieres ver video en directo con otra app?</string>
     <string name="ratings_disabled">Evaluaciones desactivadas</string>
     <string name="loading_video">Cargando video…</string>
-    <string name="get_new_video_steam">Nueva transmisión</string>
     <string name="open_in_browser">Abrir en navegador web</string>
     <string name="open_with">Abrir con…</string>
     <string name="share">Compartir</string>
@@ -30,12 +29,13 @@
     <string name="mark_unwatched">Marcador sin ver</string>
     <string name="should_resume">¿Quieres ver desde el punto en el que paraste?</string>
     <string name="resume">Continuar</string>
-    <string name="mobile_data">Datos Móviles</string>
-    <string name="warning_mobile_network_play">Este dispositivo no está conectado a una red Wi-Fi. Para evitar posibles cobros por uso extra de datos se recomienda conectarse a una red Wi-Fi. ¿Desea reproducir el video de todas formas\?</string>
-    <string name="warning_mobile_network_disable">No preguntar de nuevo.</string>
     <string name="play_video">Reproducir Video</string>
     <string name="error_get_comments_no_network">Se necesita acceso a la red para ir a buscar los comentarios.</string>
-    <string name="mobile_data_blocked_by_policy">Descargas bloqueadas, porque no estás conectado a una red Wi-Fi.</string>
     <string name="error_video_parse_error">Imposible reproducir el vídeo, el mensaje de error es:<br/><br/>%s.</string>
     <string name="error_downloaded_file_is_corrupted">El vídeo descargado parece <b>corrupto</b> -El mensaje de error es: <br/><br/> %s<br/><br/> Quieres <b>borrar</b> el archivo\?</string>
+    <string name="reload_video">Recargar Video</string>
+    <string name="metered_network_blocked_by_policy">Descarga bloqueada porque tu dispositivo esta conectado a una red con límite de datos.</string>
+    <string name="warning_metered_network_disable">No volver a preguntar.</string>
+    <string name="warning_metered_network_play">Tu dispositivo está conectado a una red con límite de datos. Para evitar cargos por uso extra de datos, se recomienda conectar a una red sin límite. Reproducir el video de todos modos\?</string>
+    <string name="metered_network">Red con límite de datos</string>
 </resources>

@@ -7,8 +7,6 @@
     <string name="pref_title_preferred_languages">Lingua preferita(e)</string>
     <string name="pref_summary_preferred_languages">Seleziona le tue lingue preferite.</string>
     <string name="pref_video_player_category">Riproduttore video</string>
-    <string name="pref_title_preferred_res">Risoluzione preferita</string>
-    <string name="pref_summary_preferred_res">Seleziona la tua risoluzione preferita:  %s</string>
     <string name="pref_title_backup_dbs">Fai backup delle banche dati</string>
     <string name="pref_summary_backup_dbs">Effettua il backup dei database delle iscrizioni e dei segnalibri.</string>
     <string name="pref_title_import_dbs">Importa backup</string>
@@ -131,11 +129,6 @@
     <string name="pref_title_disable_screen_gestures">Disattiva gesti</string>
     <string name="pref_summary_disable_screen_gestures">Disattiva i gesti sullo schermo per volume, luminosità e l\'avanti/indietro dei video.</string>
     <string name="pref_summary_enable_video_blocker">Abilita il blocco dei video.</string>
-    <string name="pref_category_mobile_network">Rete mobile</string>
-    <string name="pref_title_preferred_res_mobile">Risoluzione preferita per rete mobile</string>
-    <string name="pref_summary_preferred_res_mobile">Seleziona la tua risoluzione preferita quando usi una rete mobile (come il 4G): %s</string>
-    <string name="pref_video_download_preferred_resolution_summary">Gli scaricamenti video preferiranno questa risoluzione: %s</string>
-    <string name="pref_video_download_preferred_resolution_title">Risoluzione preferita per lo scaricamento dei video</string>
     <string name="pref_summary_video_download_folder">I video vengono scaricati in questa cartella: %s</string>
     <string name="pref_title_video_download_folder">Cartella di scaricamento video</string>
     <string name="pref_popup_title_video_download_folder">Scegli una cartella</string>
@@ -154,7 +147,5 @@
     <string name="pref_title_autocast">AutoCast</string>
     <string name="pref_title_chromecast_none">Nessuno</string>
     <string name="pref_chromecast_category">Chromecast</string>
-    <string name="pref_summary_mobile_network_usage">Cosa fare, se si utilizza la rete mobile (ad esempio 4G) per scaricare, guardare i video: %s</string>
-    <string name="pref_title_mobile_network_usage">Utilizzo della rete mobile</string>
     <string name="key_preferences">preferenze</string>
 </resources>

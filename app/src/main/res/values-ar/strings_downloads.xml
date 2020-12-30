@@ -12,5 +12,4 @@
 	<string name="playing_video_file_missing">لم يتم العثور على الملف الذي تم تحميله. يتم تشغيل الفديو عن بعد.</string>
 	<string name="external_storage_not_available">غير قادر على تحميل الملف ذاكرة التخزين الخارجية غير متوفرة.</string>
     <string name="download">تنزيل</string>
-    <string name="warning_mobile_network_download">جهازك غير متصل بشبكة واي فاي.لأجل تجنب احتمال تغييرات اضافية لاستخدام البيانات، فمن المستحسن أن تتصل بشبكة واي فاي.تحميل فيديو على أي حال؟</string>
 </resources>

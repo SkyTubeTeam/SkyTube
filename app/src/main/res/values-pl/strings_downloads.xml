@@ -12,6 +12,5 @@
     <string name="playing_video_file_missing">Nie znaleziono pobrania dla tego filmu. Odtwarzanie zdalne.</string>
     <string name="external_storage_not_available">Nie można pobrać pliku, ponieważ zewnętrzna pamięć jest niedostępna.</string>
     <string name="download">Pobierz</string>
-    <string name="warning_mobile_network_download">Twoje urządzenie nie jest połączone z siecią Wi-Fi. Aby uniknąć potencjalnych dodatkowych opłat za wykorzystanie danych, zaleca się połączenie z siecią Wi-Fi. Pobierz wideo mimo to\?</string>
     <string name="video_stream_not_found_with_request_resolution">Nie znaleziono strumienia wideo dla żądanej rozdzielczości, między %s - %s</string>
 </resources>

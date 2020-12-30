@@ -2,13 +2,8 @@
 <resources>
     <string name="preferences">Preferensi</string>
     <string name="pref_video_player_category">Pemutar Video</string>
-    <string name="pref_title_preferred_res">Resolusi Video</string>
-    <string name="pref_summary_preferred_res">Pilih resolusi video yang diinginkan: %s</string>
     <string name="pref_title_choose_player">Pemutar Video</string>
     <string name="pref_summary_choose_player">Pemutar Video yang digunakan: %s</string>
-    <string name="pref_category_mobile_network">Jaringan Seluler</string>
-    <string name="pref_title_preferred_res_mobile">Resolusi video untuk jaringan seluler</string>
-    <string name="pref_summary_preferred_res_mobile">Pilih resolusi video yang diinginkan ketika streaming via jaringan seluler (seperti 4G): %s</string>
     <string name="pref_import_export_category">Impor/Ekspor</string>
     <string name="pref_title_backup_dbs">Pencadangan Basis Data</string>
     <string name="pref_summary_backup_dbs">Cadangkan basis data langganan dan markah anda.</string>
@@ -108,8 +103,6 @@
     <string name="channel_unwhitelist_success">Daftar putih channel diperbarui. Silakan segarkan daftar video.</string>
     <string name="channel_unwhitelist_failure">Gagal menghapus channel dari daftar putih…</string>
     <string name="pref_summary_autocast">Pilih perangkat Chromecast yang akan digunakan saat menggunakan apl lain untuk membuka video di SkyTube.</string>
-    <string name="pref_video_download_preferred_resolution_summary">Unduhan video mengutamakan resolusi ini: %s</string>
-    <string name="pref_video_download_preferred_resolution_title">Resolusi Unduh Video</string>
     <string name="pref_summary_video_download_folder">Video akan diunduh ke dalam folder ini: %s</string>
     <string name="pref_title_video_download_folder">Folder Unduhan Video</string>
     <string name="pref_popup_title_video_download_folder">Pilih Folder</string>
@@ -126,8 +119,6 @@
     <string name="pref_title_autocast">AutoCast</string>
     <string name="pref_title_chromecast_none">Nihil</string>
     <string name="pref_chromecast_category">Chromecast</string>
-    <string name="pref_summary_mobile_network_usage">Yang harus dilakukan jika anda menggunakan jaringan data seluler (seperti 4G) untuk mengunduh, menonton video: %s</string>
-    <string name="pref_title_mobile_network_usage">Penggunaan Jaringan Seluler</string>
     <string name="key_preferences">preferensi</string>
     <string name="pref_video_continuous_repeat_toggle">Pengulangan berkelanjutan</string>
     <string name="app_license">Hak Cipta © 2015-2018 Ramon Mifsud
@@ -139,12 +130,26 @@
 \nAnda seharusnya telah menerima salinan Lisensi Publik Umum GNU bersama dengan program ini. Jika tidak, lihat &lt;http://www.gnu.org/licenses/&gt;</string>
     <string name="pref_video_download_minimum_resolution_title">Resolusi Minimum Unduhan Video</string>
     <string name="pref_video_download_maximum_resolution_title">Resolusi Maksimum Unduhan Video</string>
-    <string name="pref_summary_maximum_res_mobile">Pilih resolusi maksimum saat streaming melalui jaringan seluler (seperti 4G): %s</string>
-    <string name="pref_title_maximum_res_mobile">Resolusi Maksimum untuk jaringan seluler</string>
-    <string name="pref_summary_minimum_res_mobile">Pilih resolusi minimum saat streaming melalui jaringan seluler (seperti 4G): %s</string>
-    <string name="pref_title_minimum_res_mobile">Resolusi Minimum untuk jaringan seluler</string>
     <string name="pref_summary_minimum_res">Pilih resolusi minimum anda: %s</string>
     <string name="pref_title_minimum_res">Resolusi Minimum</string>
     <string name="pref_summary_maximum_res">Pilih resolusi maksimum anda: %s</string>
     <string name="pref_title_maximum_res">Resolusi Maksimum</string>
+    <string name="pref_key_video_quality_for_downloads_summary">Optimal untuk: %s</string>
+    <string name="pref_key_video_quality_for_downloads_title">Pilihan Kualitas Video untuk Unduhan</string>
+    <string name="pref_key_video_quality_metered_summary">Optimal untuk: %s</string>
+    <string name="pref_key_video_quality_metered_title">Pilihan Kualitas Video pada Jaringan Terukur</string>
+    <string name="pref_key_video_quality_summary">Optimal untuk: %s</string>
+    <string name="pref_key_video_quality_title">Pilihan Kualitas Video</string>
+    <string name="pref_video_download_minimum_resolution_summary">Video diunduh minimal pada resolusi ini: %s</string>
+    <string name="pref_video_download_maximum_resolution_summary">Video diunduh maksimal pada resolusi ini: %s</string>
+    <string name="pref_category_download_resolutions">Resolusi Video Unduh</string>
+    <string name="pref_category_video_resolutions">Resolusi Video</string>
+    <string name="pref_summary_metered_network_usage">Apa yang ingin anda lakukan jika anda menggunakan jaringan terukur untuk mengunduh/menonton video: %s</string>
+    <string name="pref_title_metered_network_usage">Penggunaan Jaringan Terukur</string>
+    <string name="pref_summary_maximum_res_metered">Pilih resolusi maksimum saat streaming melalui jaringan terukur: %s</string>
+    <string name="pref_title_maximum_res_metered">Resolusi Maksimum untuk jaringan terukur</string>
+    <string name="pref_summary_minimum_res_metered">Pilih resolusi minimum saat streaming melalui jaringan terukur: %s</string>
+    <string name="pref_title_minimum_res_metered">Resolusi Minimum untuk jaringan terukur</string>
+    <string name="pref_category_metered_network">Jaringan Terukur</string>
+    <string name="no_resolution_specified">Nihil</string>
 </resources>

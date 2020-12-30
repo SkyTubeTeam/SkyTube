@@ -16,7 +16,6 @@
     <string name="could_not_get_playlists">%s oynatma listesi alınamadı.</string>
     <string name="loading">Yükleniyor…</string>
     <string name="could_not_get_channel">Kanal bilgisi indirilemedi!</string>
-    <string name="hello_blank_fragment">Merhaba boş fragman</string>
     <string name="yes">Evet</string>
     <string name="no">Hayır</string>
     <string name="search_channel">Kanal ara</string>

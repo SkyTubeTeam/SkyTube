@@ -12,5 +12,4 @@
     <string name="playing_video_file_missing">Die heruntergeladene Video wurde nicht gefunden. Wiedergabe erfolgt über Remot-Vverbingung.</string>
     <string name="external_storage_not_available">Die Datei kann nicht heruntergeladen werden, da der externe Speicher nicht verfügbar ist.</string>
     <string name="download">Herunterladen</string>
-    <string name="warning_mobile_network_download">Ihr Gerät ist nicht mit einem WLAN-Netzwerk verbunden. Um mögliche zusätzliche Gebühren der Datennutzung zu vermeiden, wird empfohlen, sich mit einem WLAN-Netzwerk zu verbinden. Video trotzdem herunterladen\?</string>
 </resources>

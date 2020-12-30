@@ -8,14 +8,10 @@
     <string name="error_video_streams">Terjadi kesalahan saat mengambil stream video.</string>
     <string name="error_get_video_desc">Terjadi kesalahan saat mengambil deskripsi video.</string>
     <string name="error_invalid_url">URL video tidak valid: %s</string>
-    <string name="mobile_data">Data Seluler</string>
-    <string name="warning_mobile_network_play">Perangkat anda tidak tersambung dengan jaringan Wi-Fi. Untuk menghindari potensi penggunaan data tambahan, direkomendasikan untuk tersambung dengan jaringan Wi-Fi. Tetap putar video\?</string>
-    <string name="warning_mobile_network_disable">Jangan tanya lagi.</string>
     <string name="play_video">Putar Video</string>
     <string name="warning_live_video">Tidak bisa memutar siarang langsung sekarang. Buka siaran langsung di apl lain\?</string>
     <string name="ratings_disabled">Rating dinonaktifkan</string>
     <string name="loading_video">Memuat video…</string>
-    <string name="get_new_video_steam">Stream Baru</string>
     <string name="open_in_browser">Buka di peramban web</string>
     <string name="open_with">Buka dengan…</string>
     <string name="share">Bagikan</string>
@@ -35,7 +31,11 @@
     <string name="should_resume">Apakah anda ingin melanjutkan dari posisi waktu terakhir video ditonton\?</string>
     <string name="resume">Lanjutkan</string>
     <string name="error_get_comments_no_network">Komentar tidak tersedia tanpa akses jaringan.</string>
-    <string name="mobile_data_blocked_by_policy">Unduh diblokir, karena perangkat anda tidak tersambung ke jaringan Wi-Fi.</string>
     <string name="error_video_parse_error">Tidak bisa memutar video, pesan galat: <br/> <br/> %s.</string>
     <string name="error_downloaded_file_is_corrupted">Video yang diunduh sepertinya <b>rusak</b> - pesan galat: <br/> <br/> %s. <br/> <br/> Apakah anda ingin <b>menghapus</b> berkas tersebut\?</string>
+    <string name="reload_video">Muat Ulang Video</string>
+    <string name="metered_network_blocked_by_policy">Unduh diblokir karena perangkat anda tersambung ke jaringan terukur.</string>
+    <string name="warning_metered_network_disable">Jangan tanya lagi.</string>
+    <string name="warning_metered_network_play">Perangkat anda tersambung ke jaringan terukur. Untuk menghindari potensi biaya ekstra penggunaan data, direkomendasikan untuk tersambung ke jaringan tak terbatas. Tetap putar video\?</string>
+    <string name="metered_network">Sambungan Terukur</string>
 </resources>

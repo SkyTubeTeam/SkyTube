@@ -12,5 +12,4 @@
     <string name="playing_video_file_missing">Il download per questo video non è stato trovato. Riproduzione da remoto.</string>
     <string name="external_storage_not_available">Impossibile scaricare il file poiché l\'archiviazione esterna non è disponibile.</string>
     <string name="download">Scarica</string>
-    <string name="warning_mobile_network_download">Il tuo dispositivo non è connesso a una rete Wi-Fi. Per evitare potenziali costi extra di utilizzo dati, si consiglia di connettersi a una rete Wi-Fi. Scaricare comunque il video\?</string>
 </resources>

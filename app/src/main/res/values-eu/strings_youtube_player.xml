@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="error_invalid_url">Baliogabeko bideoa URL: %s</string>
+    <string name="error_get_video_desc">Akats bat gertatu da bideo deskripzioa berreskuratzean.</string>
+    <string name="error_video_streams">Akats bat gertatu da bideoak berreskuratzean.</string>
+    <string name="error_video_streams_empty">%s bideoak ez du edukirik.</string>
+    <string name="error_video_play">Errorea bideoa ikustean</string>
+    <string name="error_stream_parse_error">Parsing errorea.</string>
+    <string name="error_stream_decryption_fail">Ezin zuen deszifratze kodea kargatu Youtube zerbitzurako.</string>
+    <string name="error_stream_err_unavailable">Errorearen mezua ez dago eskuragarri.</string>
+    <string name="open_with">Ireki …</string>
+    <string name="resume">Jarraitu</string>
+    <string name="should_resume">Gelditu zaren lekutik jarraitu nahi duzu\?</string>
+    <string name="clear">Garbitu</string>
+    <string name="cancel">Utzi</string>
+    <string name="play">Ikusi</string>
+    <string name="enter_video_url">Sartu Bideoaren URL</string>
+    <string name="hide_replies">Erantzunak ezkutatu</string>
+    <string name="view_replies">Erantzunak begira</string>
+    <string name="no_video_comments">Bideo honek ez du komentariorik, edo itzalita daude.</string>
+    <string name="error_get_comments_no_network">Sareko konexioa behar da komentarioak jasotzeko.</string>
+    <string name="error_get_comments">Errorea gertatu da iruzkinak ekartzean.</string>
+    <string name="mark_unwatched">Ez ikusitakoak markatu</string>
+    <string name="mark_watched">Ikusitakoak markatu</string>
+    <string name="url_copied_to_clipboard">URL kopiatua paper-zorroan.</string>
+    <string name="copy_url">Kopiatu URL</string>
+    <string name="share_via">Zabaldu ...z</string>
+    <string name="share">Zabaldu</string>
+    <string name="open_in_browser">Ireki nabigatzailean</string>
+    <string name="reload_video">Birkargatu bideoa</string>
+    <string name="loading_video">Bideoak kargatzen…</string>
+    <string name="ratings_disabled">Balorazioak desgaituta</string>
+    <string name="warning_live_video">Oraingoz ezin da zuzenean ikusi. Zuzeneko bideoa ireki beste aplikazio batean\?</string>
+    <string name="play_video">Ikusi bideoa</string>
+    <string name="mobile_data_blocked_by_policy">Deskarga blokeatuta, zure gailua ez baitago Wi-Fi sare batera konektatuta.</string>
+    <string name="warning_mobile_network_disable">Ez galdetu berriro.</string>
+    <string name="warning_mobile_network_play">Zure gailua ez dago konektatuta wifi sare batera. Datuak erabiltzeagatik karguak saihesteko, Wifi sare batera konektatzea gomendatzen da. Bideoa ikusi nahi duzu nolanahi ere\?</string>
+    <string name="mobile_data">Data Mugikorra</string>
+    <string name="error_video_parse_error">Ezin da bideoa ikusten hasi, errorearen mezua da: <br/> <br/> %s.</string>
+    <string name="error_downloaded_file_is_corrupted">Deskargatutako bideoa <b>ustelduta</b> dirudi - errorearen mezua da: <br/> <br/> %s. <br/> <br/> Artxiboa <b>ezabatu</b> nahi duzu\?</string>
+    <string name="metered_network_blocked_by_policy">Deskarga blokeatuta zure gailua Datu-mugatua sare batera konektatuta dagoelako.</string>
+    <string name="warning_metered_network_disable">Ez galdetu berriro.</string>
+    <string name="warning_metered_network_play">Zure gailua Datu-mugatua sare batera konektatuta dago. Datu-karga gehigarriak saihesteko, metatu gabeko sare batera konektatzea gomendatzen da. Bideoa ikusi\?</string>
+    <string name="metered_network">Datu-mugatua sarea</string>
+</resources>

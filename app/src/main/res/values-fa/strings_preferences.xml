@@ -2,8 +2,6 @@
 <resources><string name="preferences">تنظیمات</string>
 
 	<string name="pref_video_player_category">پخش‌کننده ویدئو</string>
-	<string name="pref_title_preferred_res">وضوح مورد نظر</string>
-	<string name="pref_summary_preferred_res">وضوح موردنظرتان را انتخاب کنید: %s</string>
 
 	<string name="pref_title_choose_player">پخش‌کننده ویدئو</string>
 	<string name="pref_summary_choose_player">پخش‌کننده ویدئوی مورد استفاده: %s</string>
@@ -130,8 +128,5 @@
 
 <string name="pref_summary_enable_video_blocker">فعال کردن مسدودساز ویدئو.</string>
 
-	<string name="pref_category_mobile_network">شبکه همراه</string>
-	<string name="pref_title_preferred_res_mobile">وضوح مورد نظر برای شبکه همراه</string>
-	<string name="pref_summary_preferred_res_mobile">وضوح موردنظرتان برای زمان پخش جریان روی شبکه همراه (مانند 4G): %s</string>
 
 	</resources>

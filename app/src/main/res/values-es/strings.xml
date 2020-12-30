@@ -16,7 +16,6 @@
     <string name="could_not_get_playlists">No encuentro %s listas de reproducción.</string>
     <string name="loading">Cargando …</string>
     <string name="could_not_get_channel">No puedo descargar información del canal!</string>
-    <string name="hello_blank_fragment">Fragmento inicial vacío</string>
     <string name="yes">Si</string>
     <string name="no">No</string>
     <string name="search_channel">Buscar canal</string>

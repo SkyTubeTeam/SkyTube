@@ -11,7 +11,6 @@
     <string name="warning_live_video">Şu an için canlı akışlar oynatılamıyor. Başka bir uygulamada canlı yayını aç?</string>
     <string name="ratings_disabled">Puanlamalar devre dışı</string>
     <string name="loading_video">Video yükleniyor…</string>
-    <string name="get_new_video_steam">Yeni yayın akışı</string>
     <string name="open_in_browser">Web tarayıcısında aç</string>
     <string name="open_with">Birlikte aç…</string>
     <string name="share">Paylaş</string>
@@ -30,12 +29,13 @@
     <string name="mark_unwatched">İzlenmedi olarak işaretle</string>
     <string name="should_resume">Durduğunuz yerden devam etmek ister misiniz?</string>
     <string name="resume">Devam et</string>
-    <string name="mobile_data">Mobil Veri</string>
-    <string name="warning_mobile_network_play">Cihazınız bir Wi-Fi ağına bağlı değil. Olası ekstra veri kullanımı değişikliklerinden kaçınmak için bir Wi-Fi ağına bağlamanız önerilir. Yine de video oynatılsın mı\?</string>
-    <string name="warning_mobile_network_disable">Asla tekrar sorma.</string>
     <string name="play_video">Videoyu Oynat</string>
-    <string name="mobile_data_blocked_by_policy">İndirme başarısız: Cihazın Wi-Fi bağlantısı yok.</string>
     <string name="error_video_parse_error">Video oynatma başlatılamadı, hata mesajı: <br/> <br/> %s.</string>
     <string name="error_downloaded_file_is_corrupted">İndirilen video <b>bozuk</b> görünüyor - hata mesajı: <br/> <br/> %s. <br/> <br/> Dosyayı <b>silmek</b> istiyor musunuz\?</string>
     <string name="error_get_comments_no_network">Yorumların yüklenmesi için ağ erişimi gerekli.</string>
+    <string name="reload_video">Videoyu Yeniden Yükle</string>
+    <string name="metered_network_blocked_by_policy">Aygıtınız kotalı bir ağa bağlı olduğu için indirme işlemi engellendi.</string>
+    <string name="warning_metered_network_disable">Bir daha asla sorma.</string>
+    <string name="warning_metered_network_play">Aygıtınız kotalı bir ağa bağlı. Olası ek veri kullanım ücretlerinden kaçınmak için, kotasız bir ağa bağlanmanız önerilir. Video yine de oynatılsın mı\?</string>
+    <string name="metered_network">Kotalı Ağ</string>
 </resources>

@@ -2,8 +2,6 @@
 <resources>
     <string name="preferences">Postavke</string>
     <string name="pref_video_player_category">Video player</string>
-    <string name="pref_title_preferred_res">Preferirana rezolucija</string>
-    <string name="pref_summary_preferred_res">Odaberi preferiranu rezoluciju: %s</string>
     <string name="pref_title_choose_player">Video player</string>
     <string name="pref_summary_choose_player">Video player koji će se koristiti: %s</string>
     <string name="pref_import_export_category">Uvoz/Izvoz</string>
@@ -111,15 +109,10 @@
 \nU prilogu ovog programa trebala bi se nalaziti i GNU opća javna licenca. Ako ne, pogledaj &lt;http://www.gnu.org/licenses/&gt;</string>
     <string name="pref_title_feed_notification">Automatska feed obavijest</string>
     <string name="pref_summary_enable_video_blocker">Aktiviraj blokiranje videozapisa.</string>
-    <string name="pref_category_mobile_network">Mobilna mreža</string>
-    <string name="pref_title_preferred_res_mobile">Preferirana rezolucija za mobilnu mrežu</string>
-    <string name="pref_summary_preferred_res_mobile">Odaberi preferiranu rezoluciju za prijenos putem mobilne mreže (kao što je 4G): %s</string>
     <string name="pref_video_continuous_repeat_toggle">Stalno ponavljanje</string>
     <string name="pref_hide_tabs_restart">Za prikaz aktualiziranih kartica ponovo pokreni program.</string>
     <string name="pref_summary_hide_tabs">Odaberi kartice koje se ne smiju prikazivati. Moraš ponovo pokrenuti program.</string>
     <string name="pref_summary_autocast">Odaberi jedan Chromecast uređaj koji želiš koristiti, kad koristiš druge programe za otvaranje videozapisa na SkyTubeu.</string>
-    <string name="pref_video_download_preferred_resolution_summary">Preuzimanja videozapisa preferirat će ovu rezoluciju: %s</string>
-    <string name="pref_video_download_preferred_resolution_title">Preferirana rezolucija za preuzimanje videozapisa</string>
     <string name="pref_title_video_download_folder">Mapa za preuzimanje videozapisa</string>
     <string name="pref_summary_video_download_folder">Videozapisi se preuzimaju u ovu mapu: %s</string>
     <string name="pref_popup_title_video_download_folder">Odaberi mapu</string>
@@ -134,17 +127,11 @@
     <string name="pref_title_autocast">AutoCast</string>
     <string name="pref_title_chromecast_none">Ništa</string>
     <string name="pref_chromecast_category">Chromecast</string>
-    <string name="pref_summary_mobile_network_usage">Što činiti, ako za preuzimanje i gledanje videozapisa koristiš mobilnu mrežu (poput 4G): %s</string>
-    <string name="pref_title_mobile_network_usage">Upotreba mobilne mreže</string>
     <string name="key_preferences">postavke</string>
-    <string name="pref_summary_maximum_res_mobile">Odaberi najvišu razlučivost za prijenos putem mobilne mreže (npr. 4G): %s</string>
-    <string name="pref_summary_minimum_res_mobile">Odaberi najnižu razlučivost za prijenos putem mobilne mreže (npr. 4G): %s</string>
     <string name="pref_video_download_minimum_resolution_summary">Najniža razlučivost za preuzimanje videozapisa bit će: %s</string>
     <string name="pref_video_download_minimum_resolution_title">Najniža razlučivost za preuzimanje videozapisa</string>
     <string name="pref_video_download_maximum_resolution_summary">Najviša razlučivost za preuzimanje videozapisa bit će: %s</string>
     <string name="pref_video_download_maximum_resolution_title">Najviša razlučivost za preuzimanje videozapisa</string>
-    <string name="pref_title_maximum_res_mobile">Najviša razlučivost za mobilnu mrežu</string>
-    <string name="pref_title_minimum_res_mobile">Najniža razlučivost za mobilnu mrežu</string>
     <string name="pref_summary_minimum_res">Odaberi najnižu razlučivost: %s</string>
     <string name="pref_title_minimum_res">Najniža razlučivost</string>
     <string name="pref_summary_maximum_res">Odaberi najvišu razlučivost: %s</string>

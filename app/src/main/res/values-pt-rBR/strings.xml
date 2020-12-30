@@ -15,7 +15,6 @@
     <string name="num_videos">%d vídeos</string>
     <string name="playlists">Playlists</string>
     <string name="could_not_get_playlists">Não foi possível obter %s playlists.</string>
-    <string name="hello_blank_fragment">Olá fragmento em branco</string>
     <string name="loading">Carregando …</string>
     <string name="yes">Sim</string>
     <string name="no">Não</string>

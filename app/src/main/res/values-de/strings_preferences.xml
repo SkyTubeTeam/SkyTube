@@ -7,8 +7,6 @@
     <string name="pref_title_preferred_languages">Bevorzugte Sprache(n)</string>
     <string name="pref_summary_preferred_languages">Wählen Sie Ihre bevorzugten Sprachen.</string>
     <string name="pref_video_player_category">Videoplayer</string>
-    <string name="pref_title_preferred_res">Bevorzugte Auflösung</string>
-    <string name="pref_summary_preferred_res">Bevorzugte Auflösung: %s</string>
     <string name="pref_title_backup_dbs">Datenbanken sichern</string>
     <string name="pref_summary_backup_dbs">Sicheren Sie Ihre Abo- und Lesezeichen-Datenbanken.</string>
     <string name="pref_title_import_dbs">Sicherung importieren</string>
@@ -123,11 +121,6 @@
     <string name="pref_title_download_to_separate_directories">Videos in Ordner herunterladen</string>
     <string name="pref_summary_download_to_separate_directories">Videos werden in Ordner nach Kanalnamen heruntergeladen.</string>
     <string name="pref_summary_enable_video_blocker">Videoblocker aktivieren.</string>
-    <string name="pref_category_mobile_network">Mobiles Netzwerk</string>
-    <string name="pref_title_preferred_res_mobile">Bevorzugte Auflösung für das Mobilfunknetz</string>
-    <string name="pref_summary_preferred_res_mobile">Gewünschte Auflösung beim Streaming über ein Mobilfunknetz (z.B. 4G): %s</string>
-    <string name="pref_video_download_preferred_resolution_summary">Beim Herunterladen von Videos wird diese Auflösung bevorzugt werden: %s</string>
-    <string name="pref_video_download_preferred_resolution_title">Bevorzugte Video-Herunterladen-Auflösung</string>
     <string name="pref_summary_video_download_folder">Videos werden in diesen Ordner heruntergeladen: %s</string>
     <string name="pref_title_video_download_folder">Video-Herunterladen-Ordner</string>
     <string name="pref_popup_title_video_download_folder">Wählen Sie einen Ordner</string>
@@ -146,7 +139,5 @@
     <string name="pref_title_autocast">AutoCast</string>
     <string name="pref_title_chromecast_none">Keine</string>
     <string name="pref_chromecast_category">Chromecast</string>
-    <string name="pref_summary_mobile_network_usage">Was zu tun ist, wenn Sie das Mobilfunknetz (z. B. 4G) zum Herunterladen oder zum Ansehen von Videos verwenden: %s</string>
-    <string name="pref_title_mobile_network_usage">Nutzung des Mobilfunknetzes</string>
     <string name="key_preferences">Einstellungen</string>
 </resources>

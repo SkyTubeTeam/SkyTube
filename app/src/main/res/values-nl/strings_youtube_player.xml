@@ -11,7 +11,6 @@
     <string name="warning_live_video">Livestreams kunnen momenteel niet worden afgespeeld. Wil je de livestream openen in een andere app?</string>
     <string name="ratings_disabled">Waarderingen uitgeschakeld</string>
     <string name="loading_video">Bezig met laden van video…</string>
-    <string name="get_new_video_steam">Nieuwe stream</string>
     <string name="open_in_browser">Openen in webbrowser</string>
     <string name="open_with">Openen met…</string>
     <string name="share">Delen</string>
@@ -30,12 +29,13 @@
     <string name="mark_unwatched">Markeren als \'niet bekeken\'</string>
     <string name="should_resume">Wil je verdergaan waar je was gebleven?</string>
     <string name="resume">Hervatten</string>
-    <string name="mobile_data">Mobiel internet</string>
-    <string name="warning_mobile_network_play">Je apparaat is niet verbonden met een Wi-Fi-netwerk. Om te voorkomen dat je extra moet betalen voor gebruik van mobiel internet, raden wij aan te verbinden met een Wi-Fi-netwerk. Wil je de video tóch afspelen\?</string>
-    <string name="warning_mobile_network_disable">Niet opnieuw vragen.</string>
     <string name="play_video">Video afspelen</string>
     <string name="error_get_comments_no_network">Reacties zijn niet beschikbaar zonder internettoegang.</string>
-    <string name="mobile_data_blocked_by_policy">Het downloaden is tegengehouden omdat je niet verbonden bent met een Wi-Fi-netwerk.</string>
     <string name="error_video_parse_error">De video kan niet worden afgespeeld. De foutmelding is: <br/> <br/> %s.</string>
     <string name="error_downloaded_file_is_corrupted">De gedownloade video lijkt <b>beschadigd</b> te zijn. De foutmelding is: <br/> <br/> %s. <br/> <br/> Wil je het bestand <b>verwijderen</b>\?</string>
+    <string name="reload_video">Video herladen</string>
+    <string name="metered_network_blocked_by_policy">De download is geblokkeerd omdat je verbonden bent met een beperkt netwerk.</string>
+    <string name="warning_metered_network_disable">Nooit meer vragen</string>
+    <string name="warning_metered_network_play">Je apparaat is verbonden met een beperkt netwerk. Om extra kosten te voorkomen, is het advies om te verbinden met een onbeperkt netwerkt. Wil je de video tóch afspelen\?</string>
+    <string name="metered_network">Beperkt netwerk</string>
 </resources>

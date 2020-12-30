@@ -11,7 +11,6 @@
     <string name="warning_live_video">Al momento non è possibile riprodurre video in diretta. Aprirlo in un\'altra app?</string>
     <string name="ratings_disabled">Valutazioni disattivate</string>
     <string name="loading_video">Caricamento video…</string>
-    <string name="get_new_video_steam">Nuovo flusso</string>
     <string name="open_in_browser">Apri nel browser web</string>
     <string name="open_with">Apri con…</string>
     <string name="share">Condividi</string>
@@ -30,12 +29,8 @@
     <string name="mark_unwatched">Segna come non visto</string>
     <string name="should_resume">Vuoi riprendere da dove ti sei fermato?</string>
     <string name="resume">Riprendi</string>
-    <string name="mobile_data">Dati mobile</string>
-    <string name="warning_mobile_network_play">Il tuo dispositivo non è connesso a una rete Wi-Fi. Per evitare eventuali costi extra di utilizzo dati, si consiglia di connettersi a una rete Wi-Fi. Riprodurre comunque il video\?</string>
-    <string name="warning_mobile_network_disable">Non chiedere più.</string>
     <string name="play_video">Riproduci video</string>
     <string name="error_get_comments_no_network">L\'accesso alla rete è necessario per raccogliere i commenti.</string>
-    <string name="mobile_data_blocked_by_policy">Scaricamento bloccato, perché il dispositivo non è collegato a una rete Wi-Fi.</string>
     <string name="error_video_parse_error">Impossibile avviare la riproduzione del video, il messaggio di errore è: <br/> <br/> %s.</string>
     <string name="error_downloaded_file_is_corrupted">Il video scaricato sembra <b>corrotto</b> – il messaggio di errore è: <br/> <br/> %s. <br/> <br/> Vuoi <b>eliminare</b> il file\?</string>
 </resources>

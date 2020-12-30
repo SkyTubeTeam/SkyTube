@@ -7,8 +7,6 @@
     <string name="pref_title_preferred_languages">Foretrukket/de språk</string>
     <string name="pref_summary_preferred_languages">Velg ditt foretrukne språk.</string>
     <string name="pref_video_player_category">Videoavspiller</string>
-    <string name="pref_title_preferred_res">Foretrukket oppøsning</string>
-    <string name="pref_summary_preferred_res">Velg din foretrukne oppløsning:  %s</string>
     <string name="pref_title_backup_dbs">Sikkerhetskopier databaser</string>
     <string name="pref_summary_backup_dbs">Sikkerhetskopier dine abonnementer og bokmerkedatabaser.</string>
     <string name="pref_title_import_dbs">Importer sikkerhetskopi</string>
@@ -123,9 +121,6 @@
     <string name="pref_title_disable_screen_gestures">Skru av videohåndvendinger.</string>
     <string name="pref_summary_disable_screen_gestures">Skru håndvendinger for kontroll av lyd-, lys-styrke og blafringshåndvendinger forover/bakover for video.</string>
     <string name="pref_summary_enable_video_blocker">Skru på videoblokkering.</string>
-    <string name="pref_category_mobile_network">Mobilnettverk</string>
-    <string name="pref_title_preferred_res_mobile">Foretrukket oppløsning for mobilnettverk</string>
-    <string name="pref_summary_preferred_res_mobile">Velg din foretrukne oppløsning ved strømming via mobilnettverk (som 4G): %s</string>
     <string name="pref_summary_autocast">Velg Chromecast-enhet å bruke når videoes åpnes i SkyTube fra andre programmer.</string>
     <string name="pref_title_autocast">AutoCast</string>
     <string name="pref_chromecast_category">Chromecast</string>
@@ -134,8 +129,6 @@
     <string name="pref_title_enable_immersive_mode">Skru på oppslukende modus</string>
     <string name="pref_title_switch_volume_and_brightness">Bytt lydstyrke- og lysstyrke-kontroll</string>
     <string name="pref_summary_use_newpipe_backend">Bruk NewPipe-API-et til anvendelse av YouTube…</string>
-    <string name="pref_video_download_preferred_resolution_summary">Videonedlasting vil fortrinnsvis skje i denne oppløsningen: %s</string>
-    <string name="pref_video_download_preferred_resolution_title">Foretrukket videonedlastingsoppløsning</string>
     <string name="pref_summary_video_download_folder">Videoer lastes ned til denne mappen: %s</string>
     <string name="pref_title_video_download_folder">Videonedlastingsmappe</string>
     <string name="pref_popup_title_video_download_folder">Velg mappe</string>
@@ -146,7 +139,26 @@
     <string name="pref_title_hide_tabs">Skjul faner</string>
     <string name="pref_network_downloads_category">Nettverk og nedlastinger</string>
     <string name="pref_title_chromecast_none">Ingenting</string>
-    <string name="pref_summary_mobile_network_usage">Hva skal skje hvis du bruker mobilnettverk (som 4G) til å laste ned, og se på videoer\? %s</string>
-    <string name="pref_title_mobile_network_usage">Mobildatabruk</string>
     <string name="key_preferences">innstillinger</string>
+    <string name="pref_key_video_quality_for_downloads_summary">Optimiser for: %s</string>
+    <string name="pref_key_video_quality_for_downloads_title">Videokvalitetsinnstilling for nedlastinger</string>
+    <string name="pref_key_video_quality_on_mobile_summary">Optimiser for: %s</string>
+    <string name="pref_key_video_quality_on_mobile_title">Videokvalitetsinnstilling mobilnettverk</string>
+    <string name="pref_key_video_quality_summary">Optimiser for: %s</string>
+    <string name="pref_key_video_quality_title">Videokvalitetsvalg</string>
+    <string name="pref_video_download_maximum_resolution_summary">Videoer vil ikke lastes ned i mer enn denne oppløsningen: %s</string>
+    <string name="pref_video_download_minimum_resolution_summary">Videoer vil ikke lastes ned i mindre enn denne oppløsningen: %s</string>
+    <string name="pref_video_download_minimum_resolution_title">Minimal videonedlastingsoppløsning</string>
+    <string name="pref_video_download_maximum_resolution_title">Maksimal videonedlastingsoppløsning</string>
+    <string name="pref_category_download_resolutions">Videooppløsning for nedlastinger</string>
+    <string name="pref_category_video_resolutions">Videooppløsning</string>
+    <string name="pref_summary_maximum_res_mobile">Velg din maksimale oppløsning ved strømming via mobilnettverk (som f.eks. 4G): %s</string>
+    <string name="pref_summary_minimum_res_mobile">Velg din minimumsoppløsning ved strømming via mobilnettverk (som f.eks. 4G): %s</string>
+    <string name="pref_title_maximum_res_mobile">Maksimal oppløsning for mobilnettverk</string>
+    <string name="pref_title_minimum_res_mobile">Minimumsoppløsning for mobilnettverk</string>
+    <string name="no_resolution_specified">Ingen</string>
+    <string name="pref_summary_minimum_res">Velg din minimumsoppløsning: %s</string>
+    <string name="pref_title_minimum_res">Minimumsoppløsning</string>
+    <string name="pref_summary_maximum_res">Velg din maksimale oppløsning: %s</string>
+    <string name="pref_title_maximum_res">Maksimal oppløsning</string>
 </resources>

@@ -9,16 +9,12 @@
 	<string name="error_get_video_desc">خطایی حین دریافت توضحیات ویدئو رخ داده است.</string>
 	<string name="error_invalid_url">نشانی ویدئوی نامعتبر: %s</string>
 
-	<string name="mobile_data">داده همراه</string>
-	<string name="warning_mobile_network_play">دستگاه شما به شبکه وای‌فای متصل نیست. برای اجتناب از هزینه‌های اضافی احتمالی مصرف داده، پیشنهاد می‌شود به شبکه وای‌فای وصل شوید. همچنان می‌خواهید ویدئو بارگیری شود؟</string>
-	<string name="warning_mobile_network_disable">دیگر نپرس.</string>
 	<string name="play_video">پخش ویدئو</string>
 	<string name="warning_live_video">امکان پخش جریان زنده در حال حاضر وجود ندارد. جریان زنده در برنامه دیگری باز شود؟</string>
 
 	<string name="ratings_disabled">امتیازدهی غیرفعال است</string>
 
 	<string name="loading_video">در حال بارگذاری ویدئو…</string>
-	<string name="get_new_video_steam">جریان جدید</string>
 	<string name="open_in_browser">"بازکردن  در مرورگر وب"</string>
 	<string name="open_with">باز کردن با…</string>
 	<string name="share">هم‌رسانی</string>

@@ -11,7 +11,6 @@
     <string name="warning_live_video">Не получается воспроизвести прямой эфир. Открыть прямой эфир в другом приложении?</string>
     <string name="ratings_disabled">Рейтинг отключен</string>
     <string name="loading_video">Загрузка видео выполняется…</string>
-    <string name="get_new_video_steam">Новая трансляция</string>
     <string name="open_in_browser">Открыть в веб-браузере</string>
     <string name="open_with">Открыть с помощью…</string>
     <string name="share">Поделиться</string>
@@ -30,12 +29,9 @@
     <string name="mark_unwatched">Пометить непросмотренным</string>
     <string name="should_resume">Вы хотите начать с того места, где вы остановились?</string>
     <string name="resume">Возобновить</string>
-    <string name="mobile_data">Мобильные данные</string>
-    <string name="warning_mobile_network_play">Устройство не подключено к Wi-Fi сети. Мы советуем всё же подключиться к ней, чтобы ограничить передачу мобильных данных. Продолжить проигрывать видео без подключения к Wi-Fi\?</string>
-    <string name="warning_mobile_network_disable">Больше не спрашивать.</string>
     <string name="play_video">Проиграть видео</string>
     <string name="error_get_comments_no_network">Доступ к сети необходим для получения комментариев.</string>
-    <string name="mobile_data_blocked_by_policy">Загрузка заблокирована, поскольку ваше устройство не подключено к сети Wi-Fi.</string>
     <string name="error_video_parse_error">Невозможно начать воспроизведение видео, сообщение об ошибке: <br/> <br/> %s.</string>
     <string name="error_downloaded_file_is_corrupted">Загруженное видео выглядит <b>поврежденным</b> - сообщение об ошибке: <br/><br/> %s. <br/><br/> Хотите <b>удалить</b> файл\?</string>
+    <string name="reload_video">Перезагрузить видео</string>
 </resources>

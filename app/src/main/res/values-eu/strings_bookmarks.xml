@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="bookmark_share_invalid_url">Bakarrik YouTubeko URL baliodunak markatu daitezke.</string>
+    <string name="bookmark_share_label">SkyTube Markatzailea</string>
+    <string name="no_bookmarked_videos_text">Oraindik ez duzu bideo markaturik.
+\n
+\nEgin ondoren, hemen agertuko dira.</string>
+    <string name="video_unbookmarked_error">Ezin da bideoa desmarkatu.</string>
+    <string name="video_was_not_bookmarked">Bideoa ez zen markatua</string>
+    <string name="video_unbookmarked">Bideo desmarkatua</string>
+    <string name="unbookmark">Markatzailea kendu</string>
+    <string name="video_bookmarked_error">Ezin da bideoa markatu.</string>
+    <string name="video_already_bookmarked">Lehen markatutako bideoa</string>
+    <string name="video_bookmarked">Markatutako bideoa</string>
+    <string name="bookmark">Markatzailea</string>
+    <string name="bookmarks">Markatzaileak</string>
+</resources>

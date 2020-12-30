@@ -12,6 +12,5 @@
 \nKad se preuzmu, pojavit će se ovdje.</string>
     <string name="playing_video_file_missing">Preuzimanje ovog videozapisa nije nađeno. Pokreće se izravno s mreže.</string>
     <string name="external_storage_not_available">Nije moguće preuzeti datoteku, jer vanjsko spremište nije dostupno.</string>
-    <string name="warning_mobile_network_download">Tvoj uređaj nije povezan s Wi-Fi mrežom. Za izbjegavanje dodatne potrošnje prometa, preporučujemo da se povežeš na Wi-Fi mrežu. Svejedno preuzeti videozapis\?</string>
     <string name="video_stream_not_found_with_request_resolution">Nema podataka za prijenos videozapisa za traženu razlučivost od %s do %s</string>
 </resources>
