@@ -156,8 +156,6 @@
     <string name="pref_title_maximum_res">Maximális Felbontás</string>
     <string name="pref_key_video_quality_for_downloads_summary">Optimalizáljunk %s -ra</string>
     <string name="pref_key_video_quality_for_downloads_title">Letöltött Videó Minőségének Kiválasztása</string>
-    <string name="pref_key_video_quality_on_mobile_summary">Optimalizáljunk %s -ra</string>
-    <string name="pref_key_video_quality_on_mobile_title">Videó Minőség Kiválasztása Mobil Hálózatokon</string>
     <string name="pref_key_video_quality_summary">Optimalizáljunk %s -ra</string>
     <string name="pref_key_video_quality_title">Videó Minőség Kiválasztása</string>
     <string name="pref_category_download_resolutions">Letöltött Videók Felbontása</string>

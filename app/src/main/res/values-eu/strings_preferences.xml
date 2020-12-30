@@ -48,13 +48,6 @@
     <string name="pref_title_import_dbs">Segurtasun-kopia inportazioa</string>
     <string name="pref_title_backup_dbs">Datu-baseen segurtasun-kopiak</string>
     <string name="pref_import_export_category">Inport/Esport</string>
-    <string name="pref_summary_mobile_network_usage">Zer egin, sare mugikorra (4G bezala) erabiltzen ari bazara deskargatzeko, bideoak ikusteko: %s</string>
-    <string name="pref_category_mobile_network">Sare mugikorra</string>
-    <string name="pref_title_minimum_res_mobile">Gutxien erresoluzioa sare mugikorrarentzat</string>
-    <string name="pref_summary_minimum_res_mobile">Aukeratu zure gutxien erresoluzioa bideo zuzenearentzat sare mugikorra batekin (4G bezala):%s</string>
-    <string name="pref_title_maximum_res_mobile">Gehien erresoluzioa sare mugikorrarentzat</string>
-    <string name="pref_title_mobile_network_usage">Mugikorra sarea erabilia</string>
-    <string name="pref_summary_maximum_res_mobile">Aukeratu zure gehien erresoluzioa bideo zuzenearentzat mugikorra sare batekin (4G bezala): %s</string>
     <string name="pref_summary_choose_player">Bideo-jotzailea erabiltzeko: %s</string>
     <string name="pref_title_choose_player">Bideo-jotzailea</string>
     <string name="pref_summary_minimum_res">Aukeratu zure gutxien erresoluzioa: %s</string>
