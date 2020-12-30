@@ -139,4 +139,20 @@
     <string name="pref_title_minimum_res">最小解析度</string>
     <string name="pref_summary_maximum_res">選取您的最大解析度：%s</string>
     <string name="pref_title_maximum_res">最大解析度</string>
+    <string name="pref_key_video_quality_for_downloads_summary">最佳化為：%s</string>
+    <string name="pref_key_video_quality_for_downloads_title">下載時的影片品質選取</string>
+    <string name="pref_key_video_quality_metered_summary">最佳化為：%s</string>
+    <string name="pref_key_video_quality_metered_title">計量網路的影片品質選取</string>
+    <string name="pref_key_video_quality_summary">最佳化為：%s</string>
+    <string name="pref_key_video_quality_title">影片品質選取</string>
+    <string name="pref_category_download_resolutions">用於下載的影片解析度</string>
+    <string name="pref_category_video_resolutions">影片解析度</string>
+    <string name="pref_summary_metered_network_usage">如果您使用計量網路來下載／觀看影片時怎麼處理：%s</string>
+    <string name="pref_title_metered_network_usage">計量網路使用方法</string>
+    <string name="pref_summary_maximum_res_metered">選取當您透過計量網路觀看串流時的最高解析度：%s</string>
+    <string name="pref_title_maximum_res_metered">計量網路的最高解析度</string>
+    <string name="pref_summary_minimum_res_metered">選取當您透過計量網路觀看串流時的最低解析度：%s</string>
+    <string name="pref_title_minimum_res_metered">計量網路的最低解析度</string>
+    <string name="pref_category_metered_network">計量網路</string>
+    <string name="no_resolution_specified">無</string>
 </resources>

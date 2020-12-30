@@ -34,4 +34,8 @@
     <string name="error_video_parse_error">無法開始擘放影片，錯誤訊息：<br/> <br/> %s。</string>
     <string name="error_downloaded_file_is_corrupted">下䵧的影片看起來似乎<b>已損毀</b> - 錯誤訊息為：<br/> <br/> %s。 <br/> <br/> 您想要<b>刪除</b>檔案嗎？</string>
     <string name="reload_video">重新載入影片</string>
+    <string name="metered_network_blocked_by_policy">因為您的裝置已連線至計量網路，所以下載被封鎖。</string>
+    <string name="warning_metered_network_disable">不要再問。</string>
+    <string name="warning_metered_network_play">您的裝置已連線至計量網路。為了避免額外的資料使用費，建議連線至未計量的網路。仍要播放嗎？</string>
+    <string name="metered_network">計量網路</string>
 </resources>
