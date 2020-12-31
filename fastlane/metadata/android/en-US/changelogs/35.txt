@@ -1,0 +1,4 @@
+The new release contains the following changes:
+ * Fix crash on subscription update
+ * Do not show separator item, when neither side is visible on the GridView
+ 

@@ -1,0 +1,21 @@
+The new release contains the following changes:
+• Video stream selection is greatly improved and extended. Now it is possible to set minimum and maximum resolution and to optimize either for better quality or minimal network bandwith. Reviewing Your setting is higly recommended!
+• Automatically retry playing the videos on broken connection
+• Instead of mobile network, the app now checks for metered network usage  by Isira Seneviratne
+• Update NewPipe backend to support latest YouTube changes.
+• Using vector icons instead of PNGs for the user interface by Isira Seneviratne
+• Code cleanups, removing deprecated libraries, using newer constructs by Isira Seneviratne 
+• Updated translations for:
+    • Basque and Spanish - by Julio Montero
+    • Croatian - by Milo Ivir
+    • Dutch - by Heimen Stoffels
+    • French - by Arnaud Redslob
+    • Hungarian - by Zsombor Gegesy
+    • Norwegian Bokmål - by Allan Nordhøy
+    • Indonesian - by zmni
+    • Polish - by Michal L
+    • Portuguese - by Sérgio Marques
+    • Russian - by Nikita Epifanov
+    • Traditional Chinese - by Jeff Huang
+    • Turkish - by Oğuz Ersen
+    • Ukrainian 
