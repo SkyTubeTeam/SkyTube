@@ -16,3 +16,10 @@
 #   public *;
 #}
 -dontobfuscate
+
+-keep class org.schabi.newpipe.extractor.timeago.patterns.** { *; }
+-keep class org.mozilla.javascript.** { *; }
+-keep class org.ocpsoft.prettytime.i18n.** { *; }
+-keep class com.google.api.services.youtube.** { *; }
+
+-keep class * extends androidx.preference.PreferenceFragmentCompat

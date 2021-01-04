@@ -26,7 +26,6 @@ import free.rm.skytube.businessobjects.YouTube.GetChannelVideosLite;
 import free.rm.skytube.businessobjects.YouTube.GetDownloadedVideos;
 import free.rm.skytube.businessobjects.YouTube.GetFeaturedVideos;
 import free.rm.skytube.businessobjects.YouTube.GetMostPopularVideos;
-import free.rm.skytube.businessobjects.YouTube.GetPlaylistVideos;
 import free.rm.skytube.businessobjects.YouTube.GetYouTubeVideos;
 import free.rm.skytube.businessobjects.YouTube.NewPipeChannelVideos;
 import free.rm.skytube.businessobjects.YouTube.NewPipePlaylistVideos;

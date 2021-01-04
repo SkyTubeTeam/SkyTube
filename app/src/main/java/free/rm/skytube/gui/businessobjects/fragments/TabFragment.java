@@ -42,7 +42,6 @@ public abstract class TabFragment extends FragmentEx {
 	 * called when inherited.
 	 */
 	public void onFragmentSelected() {
-		System.out.println(getFragmentName() + " selected" );
 		isFragmentSelected = true;
 	}
 
@@ -52,7 +51,6 @@ public abstract class TabFragment extends FragmentEx {
 	 * selected.
 	 */
 	public void onFragmentUnselected() {
-		System.out.println(getFragmentName() + " UNselected" );
 		isFragmentSelected = false;
 	}
 
