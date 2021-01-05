@@ -62,6 +62,15 @@ public class BackupDatabases {
 			R.string.pref_key_mobile_network_usage_policy,
 			R.string.pref_key_download_to_separate_directories,
 			R.string.pref_key_video_download_folder,
+			R.string.pref_key_minimum_res,
+			R.string.pref_key_maximum_res,
+			R.string.pref_key_video_quality,
+			R.string.pref_key_minimum_res_mobile,
+			R.string.pref_key_maximum_res_mobile,
+			R.string.pref_key_video_quality_on_mobile,
+			R.string.pref_key_video_download_minimum_resolution,
+			R.string.pref_key_video_download_maximum_resolution,
+			R.string.pref_key_video_quality_for_downloads,
 			R.string.pref_key_hide_tabs
 	};
 
@@ -109,7 +118,7 @@ public class BackupDatabases {
 		for (int key : KEY_IDS) {
 			String keyStr = SkyTubeApp.getStr(key);
 			Object value = allPreferences.get(keyStr);
-			Log.i(TAG, "Saving " + keyStr + " as " + value);
+			Log.i(TAG, String.format("Saving %s as %s", keyStr, value));
 			result.put(keyStr, value);
 		}
 		return result;
@@ -155,7 +164,7 @@ public class BackupDatabases {
 				String keyStr = SkyTubeApp.getStr(key);
 				Object newValue = preferences.get(keyStr);
 				if (newValue != null) {
-					Log.i(TAG, "Setting " + keyStr + " to " + newValue);
+					Log.i(TAG, String.format("Setting %s to %s", keyStr, newValue));
 					if (newValue instanceof String) {
 						editor.putString(keyStr, (String) newValue);
 					} else if (newValue instanceof Long) {
@@ -172,10 +181,14 @@ public class BackupDatabases {
 					} else if (newValue instanceof Boolean) {
 						editor.putBoolean(keyStr, (Boolean) newValue);
 					} else {
-						Log.e(TAG, "Failed to set preference: " + keyStr + " from " + newValue + "(type="+newValue.getClass()+")");
+						Log.e(TAG, String.format("Failed to set preference: %s from %s (type=%s)", keyStr, newValue, newValue.getClass()));
 					}
+				} else {
+					Log.i(TAG, "Removing "+ keyStr );
+					editor.remove(keyStr);
 				}
 			}
+			editor.commit();
 		}
 	}
 
