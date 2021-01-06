@@ -319,7 +319,7 @@ public class SubscriptionsBackupsManager {
 			}
 			JsonPrimitive channelId = resourceId.getAsJsonPrimitive("channelId");
 			if (channelId != null && channelName != null) {
-				channels.add(new MultiSelectListPreferenceItem(channelId.toString(), channelName.toString()));
+				channels.add(new MultiSelectListPreferenceItem(channelId.getAsString(), channelName.getAsString()));
 			}
 		}
 		return channels;
