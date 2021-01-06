@@ -112,7 +112,8 @@ dependencies {
 
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
-    implementation 'com.google.android.exoplayer:exoplayer:2.9.6'
+    implementation 'com.google.android.exoplayer:exoplayer-core:2.9.6'
+    implementation 'com.google.android.exoplayer:exoplayer-ui:2.9.6'
     implementation 'org.jsoup:jsoup:1.13.1'
     implementation ('com.optimaize.languagedetector:language-detector:0.6') {
         exclude group: 'com.google.guava', module: 'guava'
