@@ -99,7 +99,6 @@ dependencies {
         exclude group: 'com.google.http-client', module:'google-http-client-jackson2'
     }
 
-    // implementation 'com.github.TeamNewPipe.NewPipeExtractor:extractor:v0.19.0'
     implementation 'com.github.SkyTubeTeam.NewPipeExtractor:extractor:95a4c841b42f83c1e1'
 
     // other modules
@@ -110,7 +109,7 @@ dependencies {
 
     implementation 'com.jakewharton:butterknife:10.2.3'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.3'
-    
+
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
     implementation 'com.google.android.exoplayer:exoplayer:2.9.6'
@@ -145,5 +144,4 @@ dependencies {
     extraImplementation 'com.google.android.gms:play-services-cast-framework:19.0.0'
     extraImplementation 'com.sothree.slidinguppanel:library:3.4.0'
     extraImplementation 'com.github.rahatarmanahmed:circularprogressview:2.5.0'
-    extraImplementation 'com.squareup.picasso:picasso:2.71828'
 }
