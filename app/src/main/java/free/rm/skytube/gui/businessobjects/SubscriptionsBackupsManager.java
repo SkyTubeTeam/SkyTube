@@ -19,13 +19,23 @@ import androidx.core.content.ContextCompat;
 import androidx.core.text.util.LinkifyCompat;
 import androidx.fragment.app.Fragment;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.JsonPrimitive;
+
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.obsez.android.lib.filechooser.ChooserDialog;
 
 import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -113,7 +123,7 @@ public class SubscriptionsBackupsManager {
 
 	/**
 	 * Display file picker to be used by the user to select the BACKUP (database) or
-	 * YOUTUBE SUBS (xml file) to import.
+	 * YOUTUBE SUBS (json or xml file) to import.
 	 *
 	 * @param importDb  If set to true, the app will import (previously backed-up) database;
 	 *                  Otherwise, it will import YouTube subs (xml file).
@@ -138,7 +148,7 @@ public class SubscriptionsBackupsManager {
 		if(importDb) {
 			dialog.withFilter(false, false, "skytube");
 		} else {
-			dialog.withFilterRegex(false, false, ".*(xml|subscription_manager)$");
+			dialog.withFilterRegex(false, false, ".*(json|xml|subscription_manager)$");
 		}
 		dialog.build().show();
 	}
@@ -220,25 +230,112 @@ public class SubscriptionsBackupsManager {
 	}
 
 	/**
-	 * Parse the XML file that the user selected to import subscriptions from. Each channel contained in the XML
+	 * Parse the file that the user selected to import subscriptions from. Each channel contained in the file
 	 * that the user is not already subscribed to will appear in a dialog, to allow the user to select individual channels
 	 * to subscribe to, via a new Dialog. Once the user chooses to import the selected channels via the Import Subscriptions
 	 * button, {@link #subscribeToImportedChannels(List)} will be executed with a list of the selected channels.
 	 *
-	 * @param uri The URI pointing to the XML file containing YouTube Channels to subscribe to.
+	 * @param uri The URI pointing to the file containing YouTube Channels to subscribe to.
 	 */
 	private void parseImportedSubscriptions(Uri uri) {
+		ArrayList<MultiSelectListPreferenceItem> channels;
+		String uriString = uri.toString();
+		int lastIndexOf = uriString.lastIndexOf(".");
+		if (lastIndexOf > 0 && uriString.substring(lastIndexOf).equalsIgnoreCase("xml")) {
+			channels = parseChannelsXML(uri);
+		} else {
+			channels = parseChannelsJson(uri);
+		}
+
+		// Check the channel list for new channels
+		ArrayList<MultiSelectListPreferenceItem> newChannels = new ArrayList<>();
+		for (MultiSelectListPreferenceItem  channel : channels) {
+			if(channel.id != null && !SubscriptionsDb.getSubscriptionsDb().isUserSubscribedToChannel(channel.id)) {
+				newChannels.add(channel);
+			}
+		}
+
+
+		if(newChannels.size() > 0) {
+			// display a dialog which allows the user to select the channels to import
+			new MultiSelectListPreferenceDialog(activity, newChannels)
+					.title(R.string.import_subscriptions)
+					.positiveText(R.string.import_subscriptions)
+					.onPositive((dialog, which) -> {
+						// if the user checked the "Unsubscribe to all subscribed channels" checkbox
+						if (isUnsubsribeAllChecked) {
+							compositeDisposable.add(DatabaseTasks.unsubscribeFromAllChannels());
+						}
+
+						List<MultiSelectListPreferenceItem> channelsToSubscribeTo = new ArrayList<>();
+						for(MultiSelectListPreferenceItem channel: newChannels) {
+							if(channel.isChecked)
+								channelsToSubscribeTo.add(channel);
+						}
+
+						// subscribe to the channels selected by the user
+						subscribeToImportedChannels(channelsToSubscribeTo);
+					})
+					.negativeText(R.string.cancel)
+					.build()
+					.show();
+		} else {
+			new AlertDialog.Builder(activity)
+					.setMessage(channels.size() > 0 ? R.string.no_new_channels_found : R.string.no_channels_found)
+					.setNeutralButton(R.string.ok, null)
+					.show();
+		}
+	}
+
+	/**
+	 * Parse the JSON file that the user selected to import subscriptions from.
+	 *
+	 * @param uri The URI pointing to the JSON file containing YouTube Channels to subscribe to
+	 * @return The channels found in the given file
+	 */
+	private ArrayList<MultiSelectListPreferenceItem> parseChannelsJson(Uri uri) {
+		InputStreamReader fileReader;
+		final ArrayList<MultiSelectListPreferenceItem> channels = new ArrayList<>();
+
 		try {
-			final List<MultiSelectListPreferenceItem> channels = new ArrayList<>();
-			Pattern channelPattern = Pattern.compile(".*channel_id=([^&]+)");
-			Matcher matcher;
+			fileReader = new InputStreamReader(activity.getContentResolver().openInputStream(uri));
+		} catch (FileNotFoundException e) {
+			Logger.e(this, "The specified file could not be found");
+			Toast.makeText(activity, String.format(activity.getString(R.string.import_subscriptions_parse_error), e.getMessage()), Toast.LENGTH_LONG).show();
+			return channels;
+		}
+
+		JsonArray jsonArray = JsonParser.parseReader(fileReader).getAsJsonArray();
+		for (JsonElement obj : jsonArray) {
+			JsonObject snippet = obj.getAsJsonObject().getAsJsonObject("snippet");
+			JsonObject resourceId = snippet == null ? null : snippet.getAsJsonObject("resourceId");
+			JsonPrimitive channelName = snippet == null ? null : snippet.getAsJsonPrimitive("title");
+			JsonPrimitive channelId = resourceId == null ? null : resourceId.getAsJsonPrimitive("channelId");
+			if (channelId != null || channelName != null) {
+				channels.add(new MultiSelectListPreferenceItem(channelId.toString(), channelName.toString()));
+			}
+		}
+		return channels;
+	}
+
+	/**
+	 * Parse the XML file that the user selected to import subscriptions from.
+	 *
+	 * @param uri The URI pointing to the XML file containing YouTube Channels to subscribe to
+	 * @return The channels found in the given file
+	 */
+	private ArrayList<MultiSelectListPreferenceItem> parseChannelsXML(Uri uri) {
+		final ArrayList<MultiSelectListPreferenceItem> channels = new ArrayList<>();
+		Pattern channelPattern = Pattern.compile(".*channel_id=([^&]+)");
+		Matcher matcher;
+
+		try {
 			XmlPullParserFactory xmlFactoryObject = XmlPullParserFactory.newInstance();
 			XmlPullParser parser = xmlFactoryObject.newPullParser();
 			parser.setInput(activity.getContentResolver().openInputStream(uri), null);
 			int event = parser.getEventType();
 			// If channels are found in the XML file but they are all already subscribed to, alert the user with a different
 			// message than if no channels were found at all.
-			boolean foundChannels = false;
 			while (event != XmlPullParser.END_DOCUMENT) {
 				String name = parser.getName();
 				switch (event) {
@@ -250,8 +347,7 @@ public class SubscriptionsBackupsManager {
 							String xmlUrl = parser.getAttributeValue(null, "xmlUrl");
 							if (xmlUrl != null) {
 								matcher = channelPattern.matcher(xmlUrl);
-								if(matcher.matches()) {
-									foundChannels = true;
+								if (matcher.matches()) {
 									String channelId = matcher.group(1);
 									String channelName = parser.getAttributeValue(null, "title");
 									channels.add(new MultiSelectListPreferenceItem(channelId, channelName));
@@ -264,40 +360,14 @@ public class SubscriptionsBackupsManager {
 				}
 				event = parser.next();
 			}
-
-			if(channels.size() > 0) {
-				// display a dialog which allows the user to select the channels to import
-				new MultiSelectListPreferenceDialog(activity, channels)
-						.title(R.string.import_subscriptions)
-						.positiveText(R.string.import_subscriptions)
-						.onPositive((dialog, which) -> {
-							// if the user checked the "Unsubscribe to all subscribed channels" checkbox
-							if (isUnsubsribeAllChecked) {
-								compositeDisposable.add(DatabaseTasks.unsubscribeFromAllChannels());
-							}
-
-							List<MultiSelectListPreferenceItem> channelsToSubscribeTo = new ArrayList<>();
-							for(MultiSelectListPreferenceItem channel: channels) {
-								if(channel.isChecked)
-									channelsToSubscribeTo.add(channel);
-							}
-
-							// subscribe to the channels selected by the user
-							subscribeToImportedChannels(channelsToSubscribeTo);
-						})
-						.negativeText(R.string.cancel)
-						.build()
-						.show();
-			} else {
-				new AlertDialog.Builder(activity)
-						.setMessage(foundChannels ? R.string.no_new_channels_found : R.string.no_channels_found)
-						.setNeutralButton(R.string.ok, null)
-						.show();
-			}
-		} catch(Exception e) {
-			Logger.e(this, "An error encountered while attempting to parse the XML file uploaded", e);
+		} catch (IOException e) {
+			Logger.e(this, "An error occurred while reading the file", e);
+			Toast.makeText(activity, String.format(activity.getString(R.string.import_subscriptions_parse_error), e.getMessage()), Toast.LENGTH_LONG).show();
+		} catch (XmlPullParserException e) {
+			Logger.e(this, "An error occurred while attempting to parse the XML file uploaded", e);
 			Toast.makeText(activity, String.format(activity.getString(R.string.import_subscriptions_parse_error), e.getMessage()), Toast.LENGTH_LONG).show();
 		}
+		return channels;
 	}
 
 
