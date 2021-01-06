@@ -309,9 +309,15 @@ public class SubscriptionsBackupsManager {
 
 		for (JsonElement obj : jsonArray) {
 			JsonObject snippet = obj.getAsJsonObject().getAsJsonObject("snippet");
-			JsonObject resourceId = snippet == null ? null : snippet.getAsJsonObject("resourceId");
-			JsonPrimitive channelName = snippet == null ? null : snippet.getAsJsonPrimitive("title");
-			JsonPrimitive channelId = resourceId == null ? null : resourceId.getAsJsonPrimitive("channelId");
+			if (snippet == null) {
+				continue;
+			}
+			JsonPrimitive channelName = snippet.getAsJsonPrimitive("title");
+			JsonObject resourceId = snippet.getAsJsonObject("resourceId");
+			if (resourceId == null) {
+				continue;
+			}
+			JsonPrimitive channelId = resourceId.getAsJsonPrimitive("channelId");
 			if (channelId != null && channelName != null) {
 				channels.add(new MultiSelectListPreferenceItem(channelId.toString(), channelName.toString()));
 			}
