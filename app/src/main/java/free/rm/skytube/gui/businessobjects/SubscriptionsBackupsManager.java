@@ -233,30 +233,28 @@ public class SubscriptionsBackupsManager {
 			Pattern channelPattern = Pattern.compile(".*channel_id=([^&]+)");
 			Matcher matcher;
 			XmlPullParserFactory xmlFactoryObject = XmlPullParserFactory.newInstance();
-			XmlPullParser myParser = xmlFactoryObject.newPullParser();
-			myParser.setInput(activity.getContentResolver().openInputStream(uri), null);
-			int event = myParser.getEventType();
+			XmlPullParser parser = xmlFactoryObject.newPullParser();
+			parser.setInput(activity.getContentResolver().openInputStream(uri), null);
+			int event = parser.getEventType();
 			// If channels are found in the XML file but they are all already subscribed to, alert the user with a different
 			// message than if no channels were found at all.
 			boolean foundChannels = false;
 			while (event != XmlPullParser.END_DOCUMENT) {
-				String name=myParser.getName();
+				String name = parser.getName();
 				switch (event) {
 					case XmlPullParser.START_TAG:
 						break;
 
 					case XmlPullParser.END_TAG:
-						if(name.equals("outline")){
-							String xmlUrl = myParser.getAttributeValue(null,"xmlUrl");
-							if(xmlUrl != null) {
+						if (name.equals("outline")) {
+							String xmlUrl = parser.getAttributeValue(null, "xmlUrl");
+							if (xmlUrl != null) {
 								matcher = channelPattern.matcher(xmlUrl);
 								if(matcher.matches()) {
 									foundChannels = true;
 									String channelId = matcher.group(1);
-									String channelName = myParser.getAttributeValue(null, "title");
-									if(channelId != null && !SubscriptionsDb.getSubscriptionsDb().isUserSubscribedToChannel(channelId)) {
-										channels.add(new MultiSelectListPreferenceItem(channelId, channelName));
-									}
+									String channelName = parser.getAttributeValue(null, "title");
+									channels.add(new MultiSelectListPreferenceItem(channelId, channelName));
 								}
 
 							}
@@ -264,7 +262,7 @@ public class SubscriptionsBackupsManager {
 						break;
 
 				}
-				event = myParser.next();
+				event = parser.next();
 			}
 
 			if(channels.size() > 0) {
