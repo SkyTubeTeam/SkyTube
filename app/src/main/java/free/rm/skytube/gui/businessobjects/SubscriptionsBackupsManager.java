@@ -294,18 +294,19 @@ public class SubscriptionsBackupsManager {
 	 * @return The channels found in the given file
 	 */
 	private ArrayList<MultiSelectListPreferenceItem> parseChannelsJson(Uri uri) {
-		InputStreamReader fileReader;
+		JsonArray jsonArray;
 		final ArrayList<MultiSelectListPreferenceItem> channels = new ArrayList<>();
 
 		try {
-			fileReader = new InputStreamReader(activity.getContentResolver().openInputStream(uri));
-		} catch (FileNotFoundException e) {
-			Logger.e(this, "The specified file could not be found");
+			InputStreamReader fileReader = new InputStreamReader(activity.getContentResolver().openInputStream(uri));
+			jsonArray = JsonParser.parseReader(fileReader).getAsJsonArray();
+			fileReader.close();
+		} catch (IOException e) {
+			Logger.e(this, "An error occurred while reading the file", e);
 			Toast.makeText(activity, String.format(activity.getString(R.string.import_subscriptions_parse_error), e.getMessage()), Toast.LENGTH_LONG).show();
 			return channels;
 		}
 
-		JsonArray jsonArray = JsonParser.parseReader(fileReader).getAsJsonArray();
 		for (JsonElement obj : jsonArray) {
 			JsonObject snippet = obj.getAsJsonObject().getAsJsonObject("snippet");
 			JsonObject resourceId = snippet == null ? null : snippet.getAsJsonObject("resourceId");
