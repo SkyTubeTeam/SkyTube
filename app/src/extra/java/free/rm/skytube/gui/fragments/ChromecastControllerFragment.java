@@ -18,7 +18,6 @@ import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.cast.MediaInfo;
 import com.google.android.gms.cast.MediaStatus;
 import com.google.android.gms.cast.framework.media.RemoteMediaClient;
-import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -112,10 +111,10 @@ public class ChromecastControllerFragment extends ChromecastBaseControllerFragme
 		}
 		durationTextView.setMilliseconds(chromecastPlaybackProgressBar.getMax());
 		if(media.getMetadata().getImages().size() > 0) {
-			Picasso.get()
-							.load(media.getMetadata().getImages().get(0).getUrl().toString())
-							.placeholder(R.drawable.thumbnail_default)
-							.into(videoImage);
+			Glide.with(getContext())
+					.load(media.getMetadata().getImages().get(0).getUrl().toString())
+					.apply(new RequestOptions().placeholder(R.drawable.thumbnail_default))
+					.into(videoImage);
 		}
 	}
 
