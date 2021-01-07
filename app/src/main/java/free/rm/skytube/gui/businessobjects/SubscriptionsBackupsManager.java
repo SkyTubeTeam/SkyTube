@@ -114,7 +114,7 @@ public class SubscriptionsBackupsManager {
 
 	/**
 	 * Display file picker to be used by the user to select the BACKUP (database) or
-	 * YOUTUBE SUBS (xml file) to import.
+	 * YOUTUBE SUBS (json or xml file) to import.
 	 */
 	public void displayFilePicker() {
 		displayFilePicker(true);
@@ -126,7 +126,7 @@ public class SubscriptionsBackupsManager {
 	 * YOUTUBE SUBS (json or xml file) to import.
 	 *
 	 * @param importDb  If set to true, the app will import (previously backed-up) database;
-	 *                  Otherwise, it will import YouTube subs (xml file).
+	 *                  Otherwise, it will import YouTube subs (json or xml file).
 	 */
 	private void displayFilePicker(final boolean importDb) {
 		// do not display the file picker until the user gives us access to the external storage
