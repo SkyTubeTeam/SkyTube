@@ -17,8 +17,6 @@
 
 package free.rm.skytube.gui.businessobjects.views;
 
-import android.content.ClipData;
-import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.text.SpannableStringBuilder;
@@ -26,10 +24,8 @@ import android.text.Spanned;
 import android.text.style.URLSpan;
 import android.text.util.Linkify;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.core.content.ContextCompat;
 import androidx.core.text.HtmlCompat;
 import androidx.core.text.util.LinkifyCompat;
 
@@ -133,9 +129,7 @@ public class Linker {
 										SkyTubeApp.viewInBrowser(clickedText, ctx);
 										break;
 									case 1:
-										ClipData clip = ClipData.newPlainText("URL", clickedText);
-										ContextCompat.getSystemService(ctx, ClipboardManager.class).setPrimaryClip(clip);
-										Toast.makeText(ctx, R.string.url_copied_to_clipboard, Toast.LENGTH_SHORT).show();
+										SkyTubeApp.copyUrl(ctx, "URL", clickedText);
 										break;
 									case 2:
 										Intent intent = new Intent(Intent.ACTION_SEND);
