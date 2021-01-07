@@ -12,7 +12,7 @@
     <string name="import_subscriptions">Abonnements importieren</string>
     <string name="import_subscriptions_description">Importieren Sie Ihre Abonnements von YouTube, indem Sie zuerst https://www.youtube.com/subscription_manager besuchen und unten auf die Schaltfläche „Abonnements exportieren“ klicken. Wählen Sie dann die exportierte Datei mit dem Titel „subscription_manager“ aus, indem Sie unten auf „Abonnementsdatei auswählen“ klicken.</string>
     <string name="subscriptions_to_channels_imported">Abonnements für %d Kanäle importiert.</string>
-    <string name="select_xml_file">Abonnementsdatei auswählen</string>
+    <string name="select_sub_file">Abonnementsdatei auswählen</string>
     <string name="select_all">Alle auswählen</string>
     <string name="select_none">Keine auswählen</string>
     <string name="no_channels_found">Es wurden keine YouTube Kanäle in der ausgewählten XML Datei gefunden.</string>

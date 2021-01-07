@@ -12,7 +12,7 @@
     <string name="import_subscriptions">Importuj subskrypcje</string>
     <string name="import_subscriptions_description">Importuj swoje subskrypcje z YouTube, odwiedzając najpierw https://www.youtube.com/subscription_manager i klikając przycisk \"Eksportuj subskrypcje\" na dole. Następnie wybierz wyeksportowany plik o nazwie \"subscription_manager\", klikając \"Wybierz plik subskrypcji\" poniżej.</string>
     <string name="subscriptions_to_channels_imported">Subskrypcje %d kanałów zaimportowane.</string>
-    <string name="select_xml_file">Wybierz plik subskrypcji</string>
+    <string name="select_sub_file">Wybierz plik subskrypcji</string>
     <string name="select_all">Wybierz wszystko</string>
     <string name="select_none">Wybierz żadne</string>
     <string name="no_channels_found">W przesłanym pliku XML nie znaleziono żadnych kanałów YouTube.</string>

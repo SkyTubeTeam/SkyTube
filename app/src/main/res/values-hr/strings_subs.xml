@@ -13,7 +13,7 @@
     <string name="import_subscriptions_description">Uvezi svoje pretplate s YouTube-a. Idi na stranicu https://www.youtube.com/subscription_manager i pritisni gumb „Izvezi pretplate”. Zatim odaberi izvezenu datoteku pod nazivom „subscription_manager” pritiskom na „Odaberi datoteku pretplata”.</string>
     <string name="unsubscribe_from_all_current_sibbed_channels">Otkaži pretplate za sve tvoje trenutačne pretplaćene kanale.</string>
     <string name="subscriptions_to_channels_imported">Pretplata na %d kanala uvezena.</string>
-    <string name="select_xml_file">Odaberi datoteku pretplata</string>
+    <string name="select_sub_file">Odaberi datoteku pretplata</string>
     <string name="select_all">Odaberi sve</string>
     <string name="select_none">Odaberi ništa</string>
     <string name="no_channels_found">Nijedan YouTube kanal nije pronađen u XML datoteci koju si prenio/la.</string>
