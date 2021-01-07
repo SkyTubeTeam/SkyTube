@@ -270,7 +270,7 @@ public class MainFragment extends FragmentEx {
 		return super.onOptionsItemSelected(item);
 	}
 
-	public class SimplePagerAdapter extends FragmentPagerAdapter {
+	public static class SimplePagerAdapter extends FragmentPagerAdapter {
 		private final SparseArray<WeakReference<Fragment>> instantiatedFragments = new SparseArray<>();
 		private final List<String> visibleTabs = new ArrayList<>();
 

@@ -450,7 +450,6 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
                     loadingVideoView.setVisibility(View.GONE);
                     Logger.i(this, ">> PLAYING LOCALLY: %s", downloadStatus.getUri());
                     playVideo(downloadStatus.getUri(), downloadStatus.getAudioUri(), null);
-                    return;
 				} else {
 					youTubeVideo.getDesiredStream(new GetDesiredStreamListener() {
 						@Override

@@ -73,10 +73,10 @@ public class SearchHistoryDb extends SQLiteOpenHelperEx {
 				db.execSQL("DROP TABLE " + SearchHistoryTable.TABLE_NAME);
 				onCreate(db);
 				for(Map<Integer, String> entry : history) {
-					for(Integer id : entry.keySet()) {
-						String text = entry.get(id);
+					for(Map.Entry<Integer, String> e : entry.entrySet()) {
+						String text = e.getValue();
 						ContentValues values = new ContentValues();
-						values.put(SearchHistoryTable.COL_SEARCH_ID, id);
+						values.put(SearchHistoryTable.COL_SEARCH_ID, e.getKey());
 						values.put(SearchHistoryTable.COL_SEARCH_TEXT, text);
 						db.insert(SearchHistoryTable.TABLE_NAME, null, values);
 					}
