@@ -94,8 +94,7 @@ public class DatabaseTasks {
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnError(throwable -> {
                     Log.e(TAG, "Error: " + throwable.getMessage(), throwable);
-                    final String msg = throwable.getCause() != null ? throwable.getCause().getMessage() :
-                            throwable.getMessage();
+                    final String msg = (throwable.getCause() != null ? throwable.getCause() : throwable).getMessage();
                     final String toastMsg = msg != null ?
                             context.getString(R.string.could_not_get_channel_detailed, msg) :
                             context.getString(R.string.could_not_get_channel);

@@ -107,21 +107,21 @@ public class Settings {
      */
     public StreamSelectionPolicy getDesiredVideoResolution(boolean forDownload, boolean onMetered) {
         SharedPreferences prefs = getSharedPreferences();
-        String maxKey = app.getStr(forDownload ? R.string.pref_key_video_download_maximum_resolution : R.string.pref_key_maximum_res);
+        String maxKey = SkyTubeApp.getStr(forDownload ? R.string.pref_key_video_download_maximum_resolution : R.string.pref_key_maximum_res);
         String maxResIdValue = prefs.getString(maxKey, Integer.toString(VideoResolution.DEFAULT_VIDEO_RES_ID));
 
-        String minKey = app.getStr(forDownload ? R.string.pref_key_video_download_minimum_resolution : R.string.pref_key_minimum_res);
+        String minKey = SkyTubeApp.getStr(forDownload ? R.string.pref_key_video_download_minimum_resolution : R.string.pref_key_minimum_res);
         String minResIdValue = prefs.getString(minKey, null);
 
-        String qualityKey = app.getStr(forDownload ? R.string.pref_key_video_quality_for_downloads : R.string.pref_key_video_quality);
+        String qualityKey = SkyTubeApp.getStr(forDownload ? R.string.pref_key_video_quality_for_downloads : R.string.pref_key_video_quality);
         String qualityValue = prefs.getString(qualityKey, null);
 
         // if on metered network, use the preferred resolution under metered network if defined
         if (onMetered) {
             // default res for mobile network = that of wifi
-            maxResIdValue = prefs.getString(app.getStr(R.string.pref_key_maximum_res_mobile), maxResIdValue);
-            minResIdValue = prefs.getString(app.getStr(R.string.pref_key_minimum_res_mobile), minResIdValue);
-            qualityValue = prefs.getString(app.getStr(R.string.pref_key_video_quality_on_mobile), qualityValue);
+            maxResIdValue = prefs.getString(SkyTubeApp.getStr(R.string.pref_key_maximum_res_mobile), maxResIdValue);
+            minResIdValue = prefs.getString(SkyTubeApp.getStr(R.string.pref_key_minimum_res_mobile), minResIdValue);
+            qualityValue = prefs.getString(SkyTubeApp.getStr(R.string.pref_key_video_quality_on_mobile), qualityValue);
         }
         VideoResolution maxResolution = VideoResolution.videoResIdToVideoResolution(maxResIdValue);
         VideoResolution minResolution = VideoResolution.videoResIdToVideoResolution(minResIdValue);

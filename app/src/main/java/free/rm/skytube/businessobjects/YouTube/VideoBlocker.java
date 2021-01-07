@@ -135,8 +135,8 @@ public class VideoBlocker {
 		final List<String>      whitelistedChannelIds = !isChannelBlacklistEnabled ? ChannelFilteringDb.getChannelFilteringDb().getWhitelistedChannelsIdsList() : null;
 
 		for (ChannelView channel : channels) {
-			if ( !((isChannelBlacklistEnabled  &&  filterByBlacklistedChannels(channel.getId(), blacklistedChannelIds))
-					|| (!isChannelBlacklistEnabled  &&  filterByWhitelistedChannels(channel.getId(), whitelistedChannelIds))) ) {
+			if ( !(isChannelBlacklistEnabled ? filterByBlacklistedChannels(channel.getId(), blacklistedChannelIds)
+					: filterByWhitelistedChannels(channel.getId(), whitelistedChannelIds)) ) {
 				filteredChannels.add(channel);
 			}
 		}
