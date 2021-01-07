@@ -12,12 +12,12 @@
     <string name="import_subscriptions">Importer abonnements</string>
     <string name="import_subscriptions_description">Importez vos abonnements depuis YouTube, en visitant https://www.youtube.com/subscription_manager et en cliquant sur le bouton « Export Subscriptions » en bas. Ensuite, sélectionnez le fichier exporté nommé « subscription_manager » en cliquant sur « Select Subscriptions File » en dessous.</string>
     <string name="subscriptions_to_channels_imported">Abonnements pour %d chaines importés.</string>
-    <string name="select_sub_file">Sélectionner le fichier d\'abonnements</string>
+    <string name="select_xml_file">Sélectionner le fichier d\'abonnements</string>
     <string name="select_all">Tout sélectionner</string>
     <string name="select_none">Tout déselectionner</string>
-    <string name="no_channels_found">Aucune chaine YouTube trouvée dans le fichier file que vous avez importé.</string>
-    <string name="no_new_channels_found">Aucune chaine YouTube auquelle vous n\'êtes pas déjà abonné n\'a été trouvée dans le fichier que vous avez importé.</string>
-    <string name="import_subscriptions_parse_error">Une erreur a été rencontré lors de la tentative d\'analyse du fichier que vous avez importé : %s.</string>
+    <string name="no_channels_found">Aucune chaine YouTube trouvée dans le fichier XML file que vous avez importé.</string>
+    <string name="no_new_channels_found">Aucune chaine YouTube auquelle vous n\'êtes pas déjà abonné n\'a été trouvée dans le fichier XML que vous avez importé.</string>
+    <string name="import_subscriptions_parse_error">Une erreur a été rencontré lors de la tentative d\'analyse du fichier XML que vous avez importé : %s.</string>
     <string name="failed_to_import_subscriptions">Échec de l\'import de vos abonnements YouTube.</string>
     <string name="about">À propos</string>
     <string name="unsubscribe_from_all_current_sibbed_channels">Se désabonner de toutes les chaînes auxquelles vous êtes actuellement abonné.</string>

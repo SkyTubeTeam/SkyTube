@@ -12,12 +12,12 @@
     <string name="import_subscriptions">Importar subscripciones</string>
     <string name="import_subscriptions_description">Importe sus subscripciones desde YouTube, visite https://www.youtube.com/subscription_manager, y haga clic en el botón \"Exportar suscripciones\" de la parte inferior. Después, seleccione el archivo titulado \"subscription_manager\" haciendo clic en \"Seleccionar archivo de subscripciones\".</string>
     <string name="subscriptions_to_channels_imported">Importada la subscripción a %d canal(es).</string>
-    <string name="select_sub_file">Seleccionar archivo de subscripciones</string>
+    <string name="select_xml_file">Seleccionar archivo de subscripciones</string>
     <string name="select_all">Seleccionar todo</string>
     <string name="select_none">Quitar selección</string>
-    <string name="no_channels_found">En el archivo que ha subido no se encontraron canales de YouTube.</string>
-    <string name="no_new_channels_found">En el archivo que ha subido no se encontraron canales de YouTube a los cuales no estés subscrito actualmente.</string>
-    <string name="import_subscriptions_parse_error">Se encontró un error al intentar analizar el archivo que ha subido: %s.</string>
+    <string name="no_channels_found">En el archivo XML que ha subido no se encontraron canales de YouTube.</string>
+    <string name="no_new_channels_found">En el archivo XML que ha subido no se encontraron canales de YouTube a los cuales no estés subscrito actualmente.</string>
+    <string name="import_subscriptions_parse_error">Se encontró un error al intentar analizar el archivo XML que ha subido: %s.</string>
     <string name="failed_to_import_subscriptions">Error al importar sus subscripciones de YouTube.</string>
     <string name="about">Acerca de</string>
     <string name="unsubscribe_from_all_current_sibbed_channels">Desubscribir de todos los canales actualmente subscritos.</string>
