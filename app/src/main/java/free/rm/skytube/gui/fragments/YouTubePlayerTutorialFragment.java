@@ -25,7 +25,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
@@ -127,8 +126,7 @@ public class YouTubePlayerTutorialFragment extends ImmersiveModeFragment impleme
 		@Override
 		public Object instantiateItem(@NonNull ViewGroup container, int position) {
 			// inflate the tutorial slide layout resource according to the give position...
-			LayoutInflater inflater = ContextCompat.getSystemService(getActivity(), LayoutInflater.class);
-			View tutorialSlideView = inflater.inflate(tutorialSlideViews[position], null);
+			View tutorialSlideView = LayoutInflater.from(getActivity()).inflate(tutorialSlideViews[position], null);
 
 			configureBrightnessVolumeLabels(tutorialSlideView);
 
