@@ -19,6 +19,9 @@ package free.rm.skytube.businessobjects.YouTube.VideoStream;
 
 import androidx.preference.ListPreference;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 
@@ -58,6 +61,7 @@ public enum VideoResolution {
 	 */
 	public  static final int	DEFAULT_VIDEO_RES_ID = RES_1080P.id;
 	private static final String TAG = VideoResolution.class.getSimpleName();
+	private static final Pattern NUMBERS = Pattern.compile("[0-9]*");
 
 
 	VideoResolution(int id, int verticalPixels) {
@@ -96,10 +100,14 @@ public enum VideoResolution {
 	public static VideoResolution resolutionToVideoResolution(String resolution) {
 		VideoResolution[] resList = VideoResolution.values();
 
-		final int verticalPixel = Integer.parseInt(resolution.substring(0, resolution.length() - 1));
-		for (VideoResolution res : resList) {
-			if (res.verticalPixels == verticalPixel)
-				return res;
+		Matcher matcher = NUMBERS.matcher(resolution);
+		if (matcher.find()) {
+			final int verticalPixel = Integer.parseInt(matcher.group());
+			for (VideoResolution res : resList) {
+				if (res.verticalPixels == verticalPixel) {
+					return res;
+				}
+			}
 		}
 
 		return RES_UNKNOWN;
