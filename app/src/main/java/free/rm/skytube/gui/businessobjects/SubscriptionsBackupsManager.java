@@ -388,7 +388,7 @@ public class SubscriptionsBackupsManager {
 		new SkyTubeMaterialDialog(activity)
 				.title(R.string.import_subscriptions)
 				.content(msg)
-				.positiveText(R.string.select_xml_file)
+				.positiveText(R.string.select_sub_file)
 				.checkBoxPromptRes(R.string.unsubscribe_from_all_current_sibbed_channels, false, (compoundButton, b) -> isUnsubsribeAllChecked = true)
 				.onPositive((dialog, which) -> displayFilePicker(false))
 				.build()
