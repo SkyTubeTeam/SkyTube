@@ -12,7 +12,7 @@
     <string name="import_subscriptions">Importa iscrizioni</string>
     <string name="import_subscriptions_description">Importa le tue iscrizioni da YouTube, visitando https://www.youtube.com/subscription_manager e cliccando il pulsante «Esporta iscrizioni» in fondo alla pagina. Quindi, seleziona il file esportato chiamato «subscription_manager» cliccando «Seleziona file iscrizioni» qui sotto.</string>
     <string name="subscriptions_to_channels_imported">Iscrizione a %d canali importata.</string>
-    <string name="select_sub_file">Seleziona file iscrizioni</string>
+    <string name="select_xml_file">Seleziona file iscrizioni</string>
     <string name="select_all">Seleziona tutto</string>
     <string name="select_none">Deseleziona tutto</string>
     <string name="no_channels_found">Non è stato trovato alcun canale YouTube nel file XML che hai caricato.</string>

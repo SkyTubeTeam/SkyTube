@@ -21,12 +21,12 @@
 	<string name="import_subscriptions_description">Import your subscriptions from YouTube, by first visiting https://www.youtube.com/subscription_manager, and clicking the \"Export Subscriptions\" button at the bottom. Then, select the exported file titled \"subscription_manager\" by clicking \"Select Subscriptions File\" below.</string>
 	<string name="unsubscribe_from_all_current_sibbed_channels">Unsubscribe from all your current subscribed channels.</string>
 	<string name="subscriptions_to_channels_imported">Subscription to %d channel(s) imported.</string>
-	<string name="select_sub_file">Select Subscriptions File</string>
+	<string name="select_xml_file">Select Subscriptions File</string>
 	<string name="select_all">Select All</string>
 	<string name="select_none">Select None</string>
-	<string name="no_channels_found">No YouTube channels were found in the file you uploaded.</string>
-	<string name="no_new_channels_found">No YouTube channels that you are not already subscribed to were found in the file you uploaded.</string>
-	<string name="import_subscriptions_parse_error">An error was encountered attempting to parse the file you uploaded: %s.</string>
+	<string name="no_channels_found">No YouTube channels were found in the XML file you uploaded.</string>
+	<string name="no_new_channels_found">No YouTube channels that you are not already subscribed to were found in the XML file you uploaded.</string>
+	<string name="import_subscriptions_parse_error">An error was encountered attempting to parse the XML file you uploaded: %s.</string>
 	<string name="failed_to_import_subscriptions">Failed to import your YouTube subscriptions.</string>
 
 	<string name="about">About</string>

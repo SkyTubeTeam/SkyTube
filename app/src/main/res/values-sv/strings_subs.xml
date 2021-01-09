@@ -15,7 +15,7 @@
     <string name="unsubscribe_from_all_current_sibbed_channels">Avsluta prenumerationen på alla dina nuvarande prenumererade kanaler.</string>
     <string name="select_none">Välj ingen</string>
     <string name="failed_to_import_subscriptions">Det gick inte att importera dina YouTube-prenumerationer.</string>
-    <string name="select_sub_file">Välj prenumerationsfil</string>
+    <string name="select_xml_file">Välj prenumerationsfil</string>
     <string name="subscriptions_to_channels_imported">Prenumeration på %d kanal(er) som importerats.</string>
     <string name="subscriptions">Prenumerationer</string>
     <string name="import_subscriptions_parse_error">Ett fel uppstod när man försökte analysera filen som du laddade upp: %s.</string>

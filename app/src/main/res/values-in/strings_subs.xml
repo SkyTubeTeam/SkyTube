@@ -12,7 +12,7 @@
     <string name="import_subscriptions_description">Impor langganan anda dari YouTube, pertama kunjungi https://www.youtube.com/subscription_manager, dan klik tombol \"Ekspor Subscription\" di dasar halaman. Lalu, pilih berkas ekspor berjudul \"subscription_manager\" dengan mengklik \"Pilih Berkas Subscription\" di bawah.</string>
     <string name="unsubscribe_from_all_current_sibbed_channels">Batal subscribe dari semua channel yang telah anda subscribe saat ini.</string>
     <string name="subscriptions_to_channels_imported">%d channel subscription berhasil diimpor.</string>
-    <string name="select_sub_file">Pilih Berkas Subscription</string>
+    <string name="select_xml_file">Pilih Berkas Subscription</string>
     <string name="select_all">Pilih Semua</string>
     <string name="select_none">Tidak Pilih</string>
     <string name="no_channels_found">Tidak ada channel YouTube yang ditemukan di dalam berkas XML yang diunggah.</string>
