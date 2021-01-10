@@ -2,7 +2,7 @@
 <resources>
     <string name="error_stream_err_unavailable">Hata mesajı mevcut değil.</string>
     <string name="error_stream_decryption_fail">YouTube hizmeti için çözme kodu yüklenemedi.</string>
-    <string name="error_stream_parse_error">Çözümleme hatası.</string>
+    <string name="error_stream_parse_error">Ayrıştırma hatası.</string>
     <string name="error_video_play">Video Oynatma Hatası</string>
     <string name="error_video_streams_empty">%s videosunun yayın akışı yok.</string>
     <string name="error_video_streams">Videonun yayın akışı alınırken bir hata oluştu.</string>
