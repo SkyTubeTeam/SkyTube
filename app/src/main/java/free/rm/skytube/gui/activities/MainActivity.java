@@ -283,7 +283,6 @@ public class MainActivity extends BaseActivity {
 					new int[]{android.R.id.text1},
 					0);
 			searchHistoryCursorAdapter.setSearchHistoryClickListener(query -> displaySearchResults(query, searchView));
-			searchView.setSuggestionsAdapter(searchHistoryCursorAdapter);
 		} else {
 			// else just change the cursor...
 			searchHistoryCursorAdapter.changeCursor(cursor);
