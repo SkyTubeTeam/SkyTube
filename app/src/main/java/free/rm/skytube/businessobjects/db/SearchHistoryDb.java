@@ -114,7 +114,9 @@ public class SearchHistoryDb extends SQLiteOpenHelperEx {
 	 * @param text   Text the user searched for.
 	 */
 	public void updateSearchTextTimestamp(String text) {
-		getWritableDatabase().rawQuery(UPDATE_SEARCH_TEXT_TIMESTAMP, new String[]{ text });
+		try (Cursor cursor = getWritableDatabase().rawQuery(UPDATE_SEARCH_TEXT_TIMESTAMP, new String[]{ text })) {
+			cursor.moveToFirst();
+		}
 	}
 
 
