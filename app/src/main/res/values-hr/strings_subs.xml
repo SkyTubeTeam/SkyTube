@@ -16,13 +16,14 @@
     <string name="select_xml_file">Odaberi datoteku pretplata</string>
     <string name="select_all">Odaberi sve</string>
     <string name="select_none">Odaberi ništa</string>
-    <string name="no_channels_found">Nijedan YouTube kanal nije pronađen u XML datoteci koju si prenio/la.</string>
-    <string name="no_new_channels_found">Nijedan YouTube kanal na koji nisi već pretplaćen/a nije pronađen je u XML datoteci koju si prenio/la.</string>
-    <string name="import_subscriptions_parse_error">Došlo je do greške prilikom pokušaja analiziranja XML datoteke koju si prenio/la: %s.</string>
+    <string name="no_channels_found">U tvojoj prenesenoj datoteci nije pronađen nijedan YouTube kanal.</string>
+    <string name="no_new_channels_found">U tvojoj prenesenoj datoteci nije pronađen nijedan YouTube kanal na koji nisi već pretplaćen/a.</string>
+    <string name="import_subscriptions_parse_error">Došlo je do greške prilikom pokušaja analiziranja tvoje prenesene datoteke: %s.</string>
     <string name="failed_to_import_subscriptions">Neuspio uvoz tvojih pretplata na YouTube-u.</string>
     <string name="about">Informacije</string>
     <string name="channel_subscribed">Pretplaćen kanal</string>
     <string name="channel_unsubscribed">Otkazana pretplata na kanal</string>
     <string name="channel_subscribe_failed">Nije moguće pretplatiti se na kanal</string>
     <string name="channel_already_subscribed">Već imaš pretplatu na ovaj kanal</string>
+    <string name="select_sub_file">Odaberi datoteku pretplata</string>
 </resources>
