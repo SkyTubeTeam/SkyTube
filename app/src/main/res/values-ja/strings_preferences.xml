@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="preferences">設定</string>
-    <string name="pref_languages_filter_category">言語と地域フィルター</string>
+    <string name="pref_languages_filter_category">言語・地域</string>
     <string name="pref_title_preferred_regions">お好みの地域</string>
     <string name="pref_summary_preferred_regions">優先する地域を選択します。「おすすめ」ビデオのカテゴリーでビデオをフィルターする処理に使用されます: %s</string>
     <string name="pref_title_preferred_languages">優先する言語</string>
