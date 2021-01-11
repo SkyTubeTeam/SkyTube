@@ -25,4 +25,5 @@
     <string name="channel_subscribe_failed">無法訂閱頻道</string>
     <string name="channel_already_subscribed">您已訂閱此頻道</string>
     <string name="channel_subscribed">已訂閱頻道</string>
+    <string name="select_sub_file">選取訂閱檔案</string>
 </resources>
