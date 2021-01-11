@@ -33,4 +33,9 @@
     <string name="error_video_parse_error">Nie można rozpocząć odtwarzania wideo, komunikat o błędzie to: <br/> <br/> %s.</string>
     <string name="error_downloaded_file_is_corrupted">Pobrany plik wideo wygląda na <b>uszkodzony</b> - komunikat o błędzie to: <br/> <br/> %s. <br/> <br/> Czy chcesz <b>usunąć</b> plik\?</string>
     <string name="error_get_comments_no_network">Do pobierania komentarzy potrzebny jest dostęp do sieci.</string>
+    <string name="metered_network">Sieć taryfowa</string>
+    <string name="warning_metered_network_play">Twoje urządzenie jest połączone z siecią taryfową. Aby uniknąć potencjalnych dodatkowych opłat za wykorzystanie danych, zaleca się połączenie z siecią bez limitu danych. Czy mimo to odtworzyć wideo\?</string>
+    <string name="metered_network_blocked_by_policy">Pobieranie zablokowane, ponieważ urządzenie jest połączone z siecią taryfową.</string>
+    <string name="reload_video">Załaduj ponownie wideo</string>
+    <string name="warning_metered_network_disable">Nigdy więcej nie pytaj.</string>
 </resources>
