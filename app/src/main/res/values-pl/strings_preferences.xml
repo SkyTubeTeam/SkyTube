@@ -157,4 +157,17 @@
     <string name="pref_title_minimum_res_metered">Minimalna rozdzielczość podczas korzystania z sieci taryfowej</string>
     <string name="pref_category_metered_network">Sieć taryfowa</string>
     <string name="no_resolution_specified">Brak</string>
+    <string name="pref_summary_minimum_res_metered">Wybierz minimalną rozdzielczość podczas przesyłania strumieniowego za pośrednictwem sieci taryfowej: %s</string>
+    <string name="pref_summary_maximum_res_metered">Wybierz maksymalną rozdzielczość podczas przesyłania strumieniowego za pośrednictwem sieci taryfowej: %s</string>
+    <string name="pref_title_maximum_res_metered">Rozdzielczość maksymalna podczas korzystania z sieci taryfowej</string>
+    <string name="pref_summary_metered_network_usage">Co ma zrobić program, jeśli używasz sieci taryfowej do pobierania/oglądania filmów: %s</string>
+    <string name="pref_title_metered_network_usage">Użycie sieci taryfowej</string>
+    <string name="pref_key_video_quality_for_downloads_summary">Optymalizacja pod kątem: %s</string>
+    <string name="pref_key_video_quality_for_downloads_title">Wybór jakości wideo dla pobieranych plików</string>
+    <string name="pref_key_video_quality_metered_summary">Optymalizacja pod kątem: %s</string>
+    <string name="pref_key_video_quality_metered_title">Wybór jakości wideo w przypadku korzystania z sieci taryfowej</string>
+    <string name="pref_key_video_quality_summary">Optymalizacja pod kątem: %s</string>
+    <string name="pref_key_video_quality_title">Wybór jakości wideo</string>
+    <string name="pref_category_download_resolutions">Rozdzielczość wideo do pobrania</string>
+    <string name="pref_category_video_resolutions">Rozdzielczość wideo</string>
 </resources>
