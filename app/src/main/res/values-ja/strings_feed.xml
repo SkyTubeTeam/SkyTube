@@ -1,19 +1,17 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="feed">フィード</string>
-
-	<string name="subscribing_to_channels">チャンネルを購読しています…</string>
-	<string name="fetching_subbed_channels_info">チャンネルの情報を取得しています…</string>
-	<string name="fetching_subbed_channels_info_error">チャンネルの情報を取得中にエラーが発生しました。</string>
-
-	<string name="fetching_subscription_videos">購読しているチャンネルからビデオを取得しています</string>
-	<string name="fetched_videos_from_channels">%2$d/%3$d チャンネルから %1$d のビデオを取得しました。</string>
-	<string name="no_new_videos_found">新しいビデオはありません。</string>
-	<string name="no_subscriptions_text">チャンネルを購読していません。
+    <string name="feed">フィード</string>
+    <string name="subscribing_to_channels">チャンネルを購読しています…</string>
+    <string name="fetching_subbed_channels_info">チャンネルの情報を取得しています…</string>
+    <string name="fetching_subbed_channels_info_error">チャンネルの情報を取得中にエラーが発生しました。</string>
+    <string name="fetching_subscription_videos">購読しているチャンネルからビデオを取得しています</string>
+    <string name="fetched_videos_from_channels">%2$d/%3$d チャンネルから %1$d のビデオを取得しました。</string>
+    <string name="no_new_videos_found">新しいビデオはありません。</string>
+    <string name="no_subscriptions_text">チャンネルを購読していません。
 \n
 \n購読すると、先月以降に購読しているチャンネルにアップロードされたすべてのビデオがここに表示されます。</string>
-	<string name="import_subscriptions_from_youtube">YouTube からサブスクリプションをインポート</string>
-
-	<string name="notification_channel_feed_title">フィードの通知</string>
-	<string name="notification_new_videos_found">購読しているチャンネルから %d の新しいビデオ</string>
+    <string name="import_subscriptions_from_youtube">YouTube からサブスクリプションをインポート</string>
+    <string name="notification_channel_feed_title">フィードの通知</string>
+    <string name="notification_new_videos_found">購読しているチャンネルから %d の新しいビデオ</string>
+    <string name="open_channel">チャンネルを開く</string>
 </resources>
