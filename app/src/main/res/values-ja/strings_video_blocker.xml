@@ -1,2 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="dislikes">%d%% 低評価</string>
+    <string name="block_channel">チャンネルをブロック</string>
+    <string name="configure">設定</string>
+    <string name="no_videos_blocked">ブロックまたはフィルターされたビデオはありません。ビデオブロッカーを設定しますか？</string>
+    <string name="blocked_videos">ブロックされたビデオ</string>
+</resources>
