@@ -28,6 +28,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -37,7 +38,6 @@ public class ZipOutput implements Closeable {
     private static final int BUFFER_SIZE = 2048;
     private final FileOutputStream dest;
     private final ZipOutputStream outputZipStream;
-    private final byte[] buffer = new byte[BUFFER_SIZE];
 
     /**
      * Constructor.
@@ -56,10 +56,12 @@ public class ZipOutput implements Closeable {
 
             outputZipStream.putNextEntry(entry);
 
+            final byte[] buffer = new byte[BUFFER_SIZE];
             int count;
             while ((count = origin.read(buffer, 0, BUFFER_SIZE)) != -1) {
                 outputZipStream.write(buffer, 0, count);
             }
+            outputZipStream.flush();
         }
 
         Log.d(TAG, "Added: " + path);
