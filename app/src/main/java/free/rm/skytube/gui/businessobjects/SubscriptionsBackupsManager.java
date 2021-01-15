@@ -134,7 +134,9 @@ public class SubscriptionsBackupsManager {
 			return;
 
 		ChooserDialog dialog = new ChooserDialog(activity)
-				.withStartFile(importDb ? Environment.getExternalStorageDirectory().getAbsolutePath() : Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath())
+				.withStartFile((importDb ? Environment.getExternalStorageDirectory()
+						: Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS))
+						.getAbsolutePath())
 				.displayPath(true)
 				.withChosenListener((file, dirFile) -> {
 					if (importDb)

@@ -15,6 +15,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -99,7 +100,7 @@ public class MainFragment extends FragmentEx {
 		subsListView = view.findViewById(R.id.subs_drawer);
 		subSearchView = view.findViewById(R.id.subs_search_view);
 		AutoCompleteTextView autoCompleteTextView = subSearchView.findViewById(androidx.appcompat.R.id.search_src_text);
-		int fontColor = getResources().getColor(R.color.subs_text);
+		int fontColor = ContextCompat.getColor(getContext(), R.color.subs_text);
 		autoCompleteTextView.setTextColor(fontColor);
 		autoCompleteTextView.setHintTextColor(fontColor);
 		final ImageView searchIcon = subSearchView.findViewById(androidx.appcompat.R.id.search_mag_icon);
@@ -269,7 +270,7 @@ public class MainFragment extends FragmentEx {
 		return super.onOptionsItemSelected(item);
 	}
 
-	public class SimplePagerAdapter extends FragmentPagerAdapter {
+	public static class SimplePagerAdapter extends FragmentPagerAdapter {
 		private final SparseArray<WeakReference<Fragment>> instantiatedFragments = new SparseArray<>();
 		private final List<String> visibleTabs = new ArrayList<>();
 

@@ -106,7 +106,7 @@ public class HttpDownloader extends Downloader {
 		final byte[] dataToSend = request.dataToSend();
 		if (dataToSend != null && dataToSend.length > 0) {
 			connection.setDoOutput(true);
-			connection.setRequestProperty("Content-Length", dataToSend.length + "");
+			connection.setRequestProperty("Content-Length", String.valueOf(dataToSend.length));
 			OutputStream outputStream = connection.getOutputStream();
 			outputStream.write(dataToSend);
 			return outputStream;

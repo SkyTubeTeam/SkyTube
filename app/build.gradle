@@ -99,7 +99,6 @@ dependencies {
         exclude group: 'com.google.http-client', module:'google-http-client-jackson2'
     }
 
-    // implementation 'com.github.TeamNewPipe.NewPipeExtractor:extractor:v0.19.0'
     implementation 'com.github.SkyTubeTeam.NewPipeExtractor:extractor:95a4c841b42f83c1e1'
 
     // other modules
@@ -110,10 +109,11 @@ dependencies {
 
     implementation 'com.jakewharton:butterknife:10.2.3'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.3'
-    
+
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
-    implementation 'com.google.android.exoplayer:exoplayer:2.9.6'
+    implementation 'com.google.android.exoplayer:exoplayer-core:2.9.6'
+    implementation 'com.google.android.exoplayer:exoplayer-ui:2.9.6'
     implementation 'org.jsoup:jsoup:1.13.1'
     implementation ('com.optimaize.languagedetector:language-detector:0.6') {
         exclude group: 'com.google.guava', module: 'guava'
@@ -129,13 +129,14 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.core:core:1.3.2'
+    implementation 'androidx.media:media:1.2.1'
     implementation 'androidx.preference:preference:1.1.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
     implementation 'androidx.multidex:multidex:2.0.1' // as we have over 65536 methods...
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
 
     implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
-    implementation 'io.reactivex.rxjava3:rxjava:3.0.8'
+    implementation 'io.reactivex.rxjava3:rxjava:3.0.9'
 
     // debugImplementation because LeakCanary should only run in debug builds.
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.5'
@@ -145,5 +146,4 @@ dependencies {
     extraImplementation 'com.google.android.gms:play-services-cast-framework:19.0.0'
     extraImplementation 'com.sothree.slidinguppanel:library:3.4.0'
     extraImplementation 'com.github.rahatarmanahmed:circularprogressview:2.5.0'
-    extraImplementation 'com.squareup.picasso:picasso:2.71828'
 }

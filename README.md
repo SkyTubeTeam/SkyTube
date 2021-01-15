@@ -11,6 +11,7 @@
   <a href="#why-skytube">Why SkyTube?</a> | 
   <a href="#screenshots">Screenshots</a> | 
   <a href="#contribute">Contribute</a> | 
+  <a href="#translate">Translate</a> | 
   <a href="#license">License</a>
 </p>
 
@@ -68,6 +69,15 @@ _* powered by a closed-source, third-party library._
 * Not dependent on GAPPS/Google Apps (i.e. YouTube official app)
 * No need for Google/YouTube account to operate
 * My code does not spy on your behaviour!
+
+## Translate
+You can help us translate this app into your native language by visiting [SkyTube's Weblate page](https://hosted.weblate.org/engage/skytube/).  Just log in using your GitHub/GitLab/BitBucket/Google/Facebook account and start translating!
+
+### Translation status:
+<a href="https://hosted.weblate.org/engage/skytube/?utm_source=widget">
+<img src="https://hosted.weblate.org/widgets/skytube/-/multi-auto.svg" alt="Translation status" />
+</a>
+
 
 ## Screenshots
 ### Phone

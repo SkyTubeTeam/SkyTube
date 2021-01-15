@@ -165,7 +165,7 @@ public class GetBulkSubscriptionVideosTask extends AsyncTaskParallel<Void, GetBu
             return videos;
         } catch (NewPipeException e) {
             Logger.e(this, "Error during fetching channel page for " + channelId + ",msg:" + e.getMessage(), e);
-            return Collections.EMPTY_LIST;
+            return Collections.emptyList();
         }
     }
 
