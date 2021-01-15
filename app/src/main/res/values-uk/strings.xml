@@ -1,2 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="search_channel">Шукати канал</string>
+    <string name="no">Ні</string>
+    <string name="yes">Так</string>
+    <string name="loading">Завантаження…</string>
+    <string name="close">Закрити</string>
+    <string name="could_not_get_playlists">Не вдалося одержати %s плейлисти.</string>
+    <string name="playlists">Плейлисти</string>
+    <string name="num_videos">%d відео</string>
+    <string name="videos">Відео</string>
+    <string name="video">Відео</string>
+    <string name="most_popular">Популярне у світі</string>
+    <string name="featured">Популярне</string>
+    <string name="LIVE">НАЖИВО</string>
+    <string name="launch_offical_player_error">Під час запуску офіційного YouTube програвача від Google сталася помилка. Переконайтеся, що програвач встановлено.</string>
+    <string name="search_videos">Пошук відео</string>
+    <string name="ok">Добре</string>
+    <string name="error">Помилка</string>
+    <string name="views">%,d переглядів</string>
+    <string name="could_not_get_channel_detailed">Не вдалося завантажити інформацію по каналу: %s.</string>
+    <string name="could_not_get_channel">Не вдалося завантажити інформацію по каналу!</string>
+    <string name="could_not_get_videos">Не вдалося заватнажити %s відео.</string>
+</resources>

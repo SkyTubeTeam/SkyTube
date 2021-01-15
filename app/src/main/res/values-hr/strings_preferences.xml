@@ -136,4 +136,20 @@
     <string name="pref_title_minimum_res">Najniža razlučivost</string>
     <string name="pref_summary_maximum_res">Odaberi najvišu razlučivost: %s</string>
     <string name="pref_title_maximum_res">Najviša razlučivost</string>
+    <string name="pref_category_download_resolutions">Razlučivost videozapisa za preuzimanje</string>
+    <string name="pref_category_video_resolutions">Razlučivost videozapisa</string>
+    <string name="pref_summary_maximum_res_metered">Odaberi najvišu razlučivost za prijenos putem mrežne veze s ograničenjem prometa: %s</string>
+    <string name="pref_title_maximum_res_metered">Najviša razlučivost za mrežne veze s ograničenjem prometa</string>
+    <string name="pref_summary_minimum_res_metered">Odaberi najnižu razlučivost za prijenos putem mrežne veze s ograničenjem prometa: %s</string>
+    <string name="pref_title_minimum_res_metered">Najniža razlučivost za mrežne veze s ograničenjem prometa</string>
+    <string name="pref_key_video_quality_metered_title">Biranje kvalitete videozapisa za mrežnu vezu s ograničenjem prometa</string>
+    <string name="pref_summary_metered_network_usage">Što činiti ako koristiš mrežnu vezu s ograničenjem prometa za preuzimanje/gledanje videa: %s</string>
+    <string name="pref_title_metered_network_usage">Upotreba mrežne veze s ograničenjem prometa</string>
+    <string name="pref_category_metered_network">Mrežna veza s ograničenjem prometa</string>
+    <string name="pref_key_video_quality_for_downloads_summary">Optimiraj za: %s</string>
+    <string name="pref_key_video_quality_metered_summary">Optimiraj za: %s</string>
+    <string name="pref_key_video_quality_summary">Optimiraj za: %s</string>
+    <string name="pref_key_video_quality_for_downloads_title">Biranje kvalitete videozapisa za preuzimanje</string>
+    <string name="pref_key_video_quality_title">Biranje kvalitete videozapisa</string>
+    <string name="no_resolution_specified">Ništa</string>
 </resources>

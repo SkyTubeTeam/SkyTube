@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="downloads">ダウンロード</string>
-	<string name="download_video">ビデオをダウンロード</string>
-	<string name="starting_video_download">\'%s\' をダウンロード中…</string>
-	<string name="video_download_stream_error">\'%s\' をダウンロードできません。</string>
-	<string name="delete_download">ダウンロードを削除</string>
-	<string name="video_downloaded">\'%s\' をダウンロードしました。</string>
-	<string name="no_downloaded_videos_text">ビデオをまだダウンロードしていません。
+    <string name="downloads">ダウンロード</string>
+    <string name="download_video">ビデオをダウンロード</string>
+    <string name="starting_video_download">\'%s\' をダウンロード中…</string>
+    <string name="video_download_stream_error">\'%s\' をダウンロードできません。</string>
+    <string name="delete_download">ダウンロードを削除</string>
+    <string name="video_downloaded">\'%s\' をダウンロードしました。</string>
+    <string name="no_downloaded_videos_text">ビデオをまだダウンロードしていません。
 \n
 \nダウンロードするとここに表示されます。</string>
-	<string name="playing_video_file_missing">このビデオのダウンロードが見つかりませんでした。リモート再生中。</string>
-	<string name="external_storage_not_available">外部ストレージが利用できないので、ファイルをダウンロードできません。</string>
-<string name="download">ダウンロード</string>
+    <string name="playing_video_file_missing">このビデオのダウンロードが見つかりませんでした。リモート再生中。</string>
+    <string name="external_storage_not_available">外部ストレージが利用できないので、ファイルをダウンロードできません。</string>
+    <string name="download">ダウンロード</string>
+    <string name="warning_metered_network_download">あなたのデバイスは従量制課金ネットワークに接続されています。余分なデータ使用料を避けるため、定額制課金ネットワークへの接続をおすすめします。それでもビデオをダウンロードしますか？</string>
+    <string name="video_stream_not_found_with_request_resolution">指定された解像度(%s - %s)のビデオストリームは見つかりませんでした。</string>
 </resources>

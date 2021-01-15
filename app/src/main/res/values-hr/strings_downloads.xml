@@ -13,4 +13,5 @@
     <string name="playing_video_file_missing">Preuzimanje ovog videozapisa nije nađeno. Pokreće se izravno s mreže.</string>
     <string name="external_storage_not_available">Nije moguće preuzeti datoteku, jer vanjsko spremište nije dostupno.</string>
     <string name="video_stream_not_found_with_request_resolution">Nema podataka za prijenos videozapisa za traženu razlučivost od %s do %s</string>
+    <string name="warning_metered_network_download">Tvoj je uređaj povezan na mrežnu vezu s ograničenjem prometa. Za izbjegavanje dodatne potrošnje prometa, preporučujemo da se povežeš na mrežnu vezu bez ograničenja prometa. Svejedno preuzeti videozapis\?</string>
 </resources>

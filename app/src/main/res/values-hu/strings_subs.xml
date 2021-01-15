@@ -18,11 +18,12 @@
     <string name="unsubscribe_from_all_current_sibbed_channels">Leiratkozás az összes feliratkozott csatornáról.</string>
     <string name="about">Névjegy</string>
     <string name="failed_to_import_subscriptions">Nem sikerült importálni a YouTube feliratkozásait.</string>
-    <string name="import_subscriptions_parse_error">Az XML-fájl feldolgozásakor hiba keletkezett: %s.</string>
-    <string name="no_channels_found">Nem található YouTube csatorna a feltöltött XML-fájlban.</string>
-    <string name="no_new_channels_found">Nem található olyan YouTube csatorna a feltöltött XML-fájlban, amire korábban nem volt még feliratkozva.</string>
+    <string name="import_subscriptions_parse_error">A fájl feldolgozásakor hiba keletkezett: %s.</string>
+    <string name="no_channels_found">Nem található YouTube csatorna a feltöltött fájlban.</string>
+    <string name="no_new_channels_found">Nem található olyan YouTube csatorna a feltöltött fájlban, amire korábban nem volt még feliratkozva.</string>
     <string name="channel_unsubscribed">Leiratkozott a csatornáról</string>
     <string name="channel_subscribe_failed">Nem sikerült feliratkozni a csatornára</string>
     <string name="channel_already_subscribed">Erre a csatornára már korábban feliratkozott</string>
     <string name="channel_subscribed">Feliratkozott a csatornára</string>
+    <string name="select_sub_file">Feliratkozásokat tartalmazó fájl kiválasztása</string>
 </resources>

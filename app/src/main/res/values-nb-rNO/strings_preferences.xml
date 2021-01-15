@@ -140,9 +140,9 @@
     <string name="pref_network_downloads_category">Nettverk og nedlastinger</string>
     <string name="pref_title_chromecast_none">Ingenting</string>
     <string name="key_preferences">innstillinger</string>
-    <string name="pref_key_video_quality_for_downloads_summary">Optimiser for: %s</string>
+    <string name="pref_key_video_quality_for_downloads_summary">Optimaliser for: %s</string>
     <string name="pref_key_video_quality_for_downloads_title">Videokvalitetsinnstilling for nedlastinger</string>
-    <string name="pref_key_video_quality_summary">Optimiser for: %s</string>
+    <string name="pref_key_video_quality_summary">Optimaliser for: %s</string>
     <string name="pref_key_video_quality_title">Videokvalitetsvalg</string>
     <string name="pref_video_download_maximum_resolution_summary">Videoer vil ikke lastes ned i mer enn denne oppløsningen: %s</string>
     <string name="pref_video_download_minimum_resolution_summary">Videoer vil ikke lastes ned i mindre enn denne oppløsningen: %s</string>
@@ -155,4 +155,13 @@
     <string name="pref_title_minimum_res">Minimumsoppløsning</string>
     <string name="pref_summary_maximum_res">Velg din maksimale oppløsning: %s</string>
     <string name="pref_title_maximum_res">Maksimal oppløsning</string>
+    <string name="pref_key_video_quality_metered_summary">Optimaliser for: %s</string>
+    <string name="pref_key_video_quality_metered_title">Videokvalitetsvalg på kvotebasert nett</string>
+    <string name="pref_summary_metered_network_usage">Foretagende for bruk av kvotebasert nettverk ved nedlasting/visning av videoer: %s</string>
+    <string name="pref_title_metered_network_usage">Kvotebasert nettverksbruk</string>
+    <string name="pref_summary_maximum_res_metered">Velg din maksimumsoppløsning ved strømming fra et kvotebasert nettverk: %s</string>
+    <string name="pref_title_maximum_res_metered">Maksimal oppløsning for kvotebasert nettverk</string>
+    <string name="pref_summary_minimum_res_metered">Velg din minimumsoppløsning når du strømmer fra et kvotebasert nettverk: %s</string>
+    <string name="pref_title_minimum_res_metered">Minimumsoppløsning for kvotebasert nettverk</string>
+    <string name="pref_category_metered_network">Kvotebasert nettverk</string>
 </resources>
