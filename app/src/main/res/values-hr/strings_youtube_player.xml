@@ -33,4 +33,9 @@
     <string name="error_downloaded_file_is_corrupted">Čini se da je preuzeti videozapis &lt;b&gt;oštećen&lt;/b&gt; – poruka greške: &lt;br/&gt; &lt;br/&gt; %s. &lt;br/&gt; &lt;br/&gt; Želiš li &lt;b&gt;izbrisati&lt;/b&gt; datoteku\?</string>
     <string name="error_video_parse_error">Nije moguće pokrenuti videozapis, poruka greške: &lt;br/&gt; &lt;br/&gt; %s.</string>
     <string name="error_get_comments_no_network">Za dohvaćanje komentara potreban je pristup mreži.</string>
+    <string name="reload_video">Ponovo učitaj videozapis</string>
+    <string name="metered_network_blocked_by_policy">Preuzimanje je blokirano jer je tvoj uređaj povezan na mrežnu vezu s ograničenjem prometa.</string>
+    <string name="warning_metered_network_disable">Ne pitaj više.</string>
+    <string name="warning_metered_network_play">Tvoj je uređaj povezan na mrežnu vezu s ograničenjem prometa. Za izbjegavanje dodatne potrošnje prometa, preporučujemo da se povežeš na mrežnu vezu bez ograničenja prometa. Svejedno pokrenuti videozapis\?</string>
+    <string name="metered_network">Mrežna veza s ograničenjem prometa</string>
 </resources>

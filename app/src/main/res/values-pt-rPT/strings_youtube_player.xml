@@ -33,4 +33,9 @@
     <string name="error_get_comments_no_network">O acesso à rede é necessário para obter comentários.</string>
     <string name="error_video_parse_error">Não foi possível reproduzir o vídeo, a mensagem de erro é: <br/>.<br/>.%s.</string>
     <string name="error_downloaded_file_is_corrupted">O vídeo descarregado parece estar <b>danificado</b> - a mensagem de erro é: <br/><br/>%s.<br/><br/> Deseja <b>apagar</b> o ficheiro\?</string>
+    <string name="reload_video">Recarregar vídeo</string>
+    <string name="metered_network_blocked_by_policy">A descarga foi bloqueada porque o dispositivo está ligado a uma rede de dados móveis.</string>
+    <string name="warning_metered_network_disable">Não voltar a perguntar.</string>
+    <string name="warning_metered_network_play">O seu dispositivo está conectado a uma rede de dados móveis. Para evitar que exceda o seu plano de dados, recomendamos que se conecte a uma rede Wi-fi. Reproduzir na mesma\?</string>
+    <string name="metered_network">Dados móveis</string>
 </resources>

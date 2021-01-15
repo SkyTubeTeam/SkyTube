@@ -33,4 +33,9 @@
     <string name="error_get_comments_no_network">Nettverkstilgang behøves for å hente kommentarer.</string>
     <string name="error_video_parse_error">Kunne ikke starte videoavspilling, feilmeldingen er: <br/> <br/> %s.</string>
     <string name="error_downloaded_file_is_corrupted">Nedlastet video later til å være <b>skadet</b> - feilmeldingen er: <br/> <br/> %s. <br/> <br/> Ønsker du å <b>slette</b> filen\?</string>
+    <string name="reload_video">Last inn video på ny</string>
+    <string name="metered_network_blocked_by_policy">Nedlastning blokkert fordi enheten din er tilkoblet et kvotebasert nettverk.</string>
+    <string name="warning_metered_network_disable">Aldri spør igjen.</string>
+    <string name="warning_metered_network_play">Enheten din er tilkoblet et kvotebasert nettverk. For å unngå unødige kostnader for databruk anbefales det å koble til et ubegrenset nettverk. Spill av video uansett\?</string>
+    <string name="metered_network">Kvotebasert nettverk</string>
 </resources>

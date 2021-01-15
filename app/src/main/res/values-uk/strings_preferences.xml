@@ -3,4 +3,88 @@
     <string name="pref_video_player_category">Відеопрогравач</string>
     <string name="key_preferences">налаштування</string>
     <string name="preferences">Налаштування</string>
+    <string name="pref_title_video_download_folder">Теки для завантаження відео</string>
+    <string name="pref_popup_title_video_download_folder">Обрати теку</string>
+    <string name="pref_summary_download_to_separate_directories">Відео завантажуються до тек згідно назв каналів.</string>
+    <string name="pref_title_download_to_separate_directories">Завантажувати відео до тек</string>
+    <string name="pref_category_download_resolutions">Розширення відео для завантаження</string>
+    <string name="pref_category_video_resolutions">Розширення відео</string>
+    <string name="pref_category_downloads">Завантаження</string>
+    <string name="pref_summary_use_newpipe_backend">Використовувати NewPipe API для доступу до YouTube…</string>
+    <string name="pref_title_use_newpipe_backend">Використовувати бекенд NewPipe</string>
+    <string name="pref_title_youtube_api_key">Ключ YouTube API</string>
+    <string name="pref_title_switch_volume_and_brightness">Змінити жести гучності і яскравості</string>
+    <string name="pref_summary_enable_immersive_mode">Сховати панелі навігації і стану під час перегляду.</string>
+    <string name="pref_title_enable_immersive_mode">Увімкнути режим занурення</string>
+    <string name="pref_video_continuous_repeat_toggle">Безперервне повторення</string>
+    <string name="pref_summary_disable_screen_gestures">Вимкнути жести для контролю гучності, яскравості та перемотування відео.</string>
+    <string name="pref_title_disable_screen_gestures">Вимкнути відеожести</string>
+    <string name="pref_summary_screen_orientation">Положення відеопрогравача: %s</string>
+    <string name="pref_title_screen_orientation">Положення екрану</string>
+    <string name="pref_summary_feed_notification">Як часто перевіряти наявність нових відео на підписаних каналах: %s</string>
+    <string name="pref_title_feed_notification">Автосповіщення стрічки</string>
+    <string name="pref_hide_tabs_restart">Перезапустіть застосунок аби побачити оновлені вкладки.</string>
+    <string name="pref_network_downloads_category">Мережа та завантаження</string>
+    <string name="pref_summary_autocast">Оберіть пристрій Chromecast для використання, під час використовування інших застосунків для відкривання відео у SkyTube.</string>
+    <string name="pref_title_autocast">AutoCast</string>
+    <string name="pref_title_chromecast_none">Нічого</string>
+    <string name="subs_import_select_backup">Аби імпортувати, оберіть YouTube XML файл</string>
+    <string name="pref_summary_import_subs">Імпортувати підписки з вашого YouTube-акаунту.</string>
+    <string name="pref_title_import_subs">Імпортувати підписки з YouTube</string>
+    <string name="databases_import_success">Резервні копії імпортовано. Перезапустіть застосунок, аби зміни набули чинності.</string>
+    <string name="databases_import_fail">Не вдалося імпортувати резевні копії.</string>
+    <string name="databases_import_warning_message">Резервна копія підпискок та закладкок буде замінена даними нової резервної копії.
+\n
+\nПродовжити\?</string>
+    <string name="databases_import_nothing_selected">Нічого не обрано…</string>
+    <string name="databases_import_select_backup">Оберіть резервну копію для імпортування</string>
+    <string name="databases_backup_fail">Не вдалося створити резервну копію.</string>
+    <string name="pref_summary_import_dbs">Імпортувати закладки та підписки з резервної копії.</string>
+    <string name="pref_summary_metered_network_usage">Дія під час використання мобільного трафіку для перегляду/завантаження відео: %s</string>
+    <string name="databases_importing">Йде імпортування…</string>
+    <string name="continue_">Продовжити</string>
+    <string name="databases_backup_success">Резервні копії збережені до %s</string>
+    <string name="databases_backing_up">Зберігається резервна копія…</string>
+    <string name="pref_title_subscriptions_alphabetical_order">Сортувати канали за абеткою</string>
+    <string name="restart">Перезапустити</string>
+    <string name="pref_summary_hide_tabs">Оберіть, які вкладки приховати. Для зміни необхідний перезапуск.</string>
+    <string name="pref_title_hide_tabs">Приховати вкладки</string>
+    <string name="pref_summary_default_tab">Вкладка для показу після увімкнення SkyTube: %s</string>
+    <string name="pref_title_default_tab">Стандартна вкладка</string>
+    <string name="pref_other_category">Інше</string>
+    <string name="i_agree">Погоджуюся</string>
+    <string name="app_license">Copyright © 2015-2018 Рамон Місфуд
+\n
+\nThis program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation (version 3 of the License).
+\n
+\nThis program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+\n
+\nYou should have received a copy of the GNU General Public License along with this program. If not, see &lt;http://www.gnu.org/licenses/&gt;</string>
+    <string name="pref_summary_license">GNU General Public License version 3</string>
+    <string name="pref_title_license">Ліцензія</string>
+    <string name="pref_summary_updates">Перевірити наявність оновлень.</string>
+    <string name="pref_title_updates">Оновлення</string>
+    <string name="pref_title_version">Версія</string>
+    <string name="pref_summary_credits">Люди і проєкти, завдяки яким застосунок існує.</string>
+    <string name="pref_title_credits">Розробники</string>
+    <string name="pref_title_website">Вебсайт</string>
+    <string name="pref_about_category">Візитівка</string>
+    <string name="pref_chromecast_category">Chromecast</string>
+    <string name="pref_title_import_dbs">Імпортування резервної копії</string>
+    <string name="pref_summary_backup_dbs">Зробити резервну копію підписок та закладок.</string>
+    <string name="pref_title_backup_dbs">Резервна копія даних</string>
+    <string name="pref_import_export_category">Імпортування/Експортування</string>
+    <string name="pref_title_metered_network_usage">Використання мобільного трафіку</string>
+    <string name="pref_summary_maximum_res_metered">Оберіть максимальне розширення стримінгу відео з обмеженим трафіком: %s</string>
+    <string name="pref_title_maximum_res_metered">Максимальне розширення для мобільного трафіку</string>
+    <string name="pref_summary_minimum_res_metered">Оберіть мінімальне розширення для стримінгу відео з обмеженим трафіком: %s</string>
+    <string name="pref_title_minimum_res_metered">Мінімальне розширення для мобільного трафіку</string>
+    <string name="pref_category_metered_network">Мобільний трафік</string>
+    <string name="no_resolution_specified">Ніяке</string>
+    <string name="pref_summary_choose_player">Відеопрогравач для використання: %s</string>
+    <string name="pref_title_choose_player">Відеопрогравач</string>
+    <string name="pref_summary_minimum_res">Оберіть ваше мінімальне розширення: %s</string>
+    <string name="pref_title_minimum_res">Мінімальне розширення</string>
+    <string name="pref_summary_maximum_res">Оберіть ваше максимальне розширення: %s</string>
+    <string name="pref_title_maximum_res">Максимальне розширення</string>
 </resources>

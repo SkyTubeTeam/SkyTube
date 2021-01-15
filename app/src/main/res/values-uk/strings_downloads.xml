@@ -12,4 +12,6 @@
     <string name="download_video">Завантажити відео</string>
     <string name="downloads">Завантаження</string>
     <string name="download">Завантаження</string>
+    <string name="playing_video_file_missing">Завантаження для відео не знайдено. Відтворюється віддалено.</string>
+    <string name="warning_metered_network_download">Ви споживаєте мобільний трафік. Аби уникнути додаткових витрат, рекомендуємо під\'єднатися до wi-fi. Чи продовжити завантаження відео\?</string>
 </resources>

@@ -12,4 +12,6 @@
     <string name="playing_video_file_missing">Não foi possível encontrar o ficheiro descarregado. A reproduzir remotamente.</string>
     <string name="external_storage_not_available">Não foi possível descarregar o vídeo porque o cartão SD não está disponível.</string>
     <string name="download">Descarregar</string>
+    <string name="video_stream_not_found_with_request_resolution">Não foi encontrado um vídeo para a resolução solicitada, entre %s - %s</string>
+    <string name="warning_metered_network_download">O seu dispositivo está conectado a uma rede de dados móveis. Para evitar que exceda o seu plano de dados, recomendamos que se conecte a uma rede Wi-fi. Descarregar na mesma\?</string>
 </resources>
