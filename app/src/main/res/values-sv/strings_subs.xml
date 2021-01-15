@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="subscribe">Prenumerera</string>
-    <string name="import_subscriptions_description">Importera dina prenumerationer från YouTube, genom att först besöka https://www.youtube.com/subscription_manager och klicka på knappen \"Exportera prenumerationer\" längst ner. Välj sedan den exporterade filen med titeln \"subscription_manager\" genom att klicka på \"Välj prenumerationsfil\" nedan.</string>
+    <string name="import_subscriptions_description">Importera dina prenumerationer från YouTube genom att först besöka https://takeout.google.com. Välj bort alla tjänster utom \"YouTube and YouTube Music\" och klicka på \"All YouTube data included\" för att välja bort allt utom \"subscriptions\". Klicka på \"Next\" och sedan \"Create export\". När exporten är klar kommer den att synas på sidan du precis hamnade på och du kommer att få ett e-mail med en nedladdningslänk. Ladda ner filen och extrahera filen subscriptions.json ur den (finns under /Takeout/YouTube and YouTube Music/subscriptions/). Välj sedan den exporterade filen genom att klicka på \"Välj prenumerationsfil\" nedan.</string>
     <string name="no_new_channels_found">Inga YouTube-kanaler som du inte redan prenumererar på hittades i den fil som du laddade upp.</string>
     <string name="error_check_if_user_has_subbed">Det går inte att kontrollera om användaren har prenumererat på kanalen (id=%s)</string>
     <string name="subscribed">Prenumererad</string>
