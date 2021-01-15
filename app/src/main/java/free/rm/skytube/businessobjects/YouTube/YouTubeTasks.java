@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.stream.Collectors;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
@@ -55,6 +56,7 @@ import static free.rm.skytube.app.SkyTubeApp.getContext;
  */
 public class YouTubeTasks {
     private static final String TAG = YouTubeTasks.class.getSimpleName();
+    private static final Scheduler scheduler = Schedulers.from(Executors.newFixedThreadPool(4));
 
     private YouTubeTasks() { }
 
@@ -82,7 +84,6 @@ public class YouTubeTasks {
      */
     public static Single<Boolean> getBulkSubscriptionVideos(@NonNull List<String> channelIds,
                                                             @Nullable GetSubscriptionVideosTaskListener listener) {
-        final Scheduler scheduler = Schedulers.from(Executors.newFixedThreadPool(4));
         final SubscriptionsDb subscriptionsDb = SubscriptionsDb.getSubscriptionsDb();
         final AtomicBoolean changed = new AtomicBoolean(false);
         return Flowable.fromIterable(channelIds)
@@ -120,12 +121,13 @@ public class YouTubeTasks {
                                     }
                                 })
                 )
-                .flatMapCompletable(value ->
-                        Completable.fromAction(() ->
-                                SkyTubeApp.getSettings().updateFeedsLastUpdateTime(System.currentTimeMillis())))
-                .toSingle(changed::get)
+                .collect(Collectors.summingInt(Integer::intValue))
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
+                .observeOn(AndroidSchedulers.mainThread())
+                .map(allVideos -> {
+                    SkyTubeApp.getSettings().updateFeedsLastUpdateTime(System.currentTimeMillis());
+                    return changed.get();
+                });
     }
 
     private static List<YouTubeVideo> fetchVideos(@NonNull SubscriptionsDb subscriptionsDb,
@@ -218,22 +220,22 @@ public class YouTubeTasks {
         final Long publishedAfter = SkyTubeApp.getSettings().getFeedsLastUpdateTime();
         final AtomicBoolean changed = new AtomicBoolean(false);
 
-        return Flowable.fromCallable(() -> {
+        return Single.fromCallable(() -> {
             if (channelIds != null) return channelIds;
             else return SubscriptionsDb.getSubscriptionsDb().getSubscribedChannelIds();
         })
-                .flatMap(Flowable::fromIterable)
-                .concatMapSingle(channelId ->
+                .flatMapPublisher(Flowable::fromIterable)
+                .flatMapSingle(channelId ->
                         YouTubeTasks.getChannelVideos(channelId, publishedAfter, true)
-                        .doOnSuccess(videos -> {
-                            if (!videos.isEmpty()) {
-                                changed.compareAndSet(false, true);
-                            }
-                            listener.onChannelVideosFetched(channelId, videos.size(), false);
-                        })
-                        .doOnError(throwable ->
+                            .doOnSuccess(videos -> {
+                                if (!videos.isEmpty()) {
+                                    changed.compareAndSet(false, true);
+                                }
+                                listener.onChannelVideosFetched(channelId, videos.size(), false);
+                            })
+                            .doOnError(throwable ->
                                 Log.e(TAG, "Interrupt in semaphore.acquire:" + throwable.getMessage(), throwable)
-                        )
+                            )
                 )
                 .flatMapCompletable(list -> Completable.complete())
                 .toSingle(changed::get)
