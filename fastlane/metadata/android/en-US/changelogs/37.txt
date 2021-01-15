@@ -1,0 +1,19 @@
+The new release contains the following changes:
+• Implement JSON import for subscriptions - the format which is used by takeout.google.com - by Sebastian Magnusson
+• Fix crash happing in parsing of the resolution string (It failed for videos with resolutions 2160p60/1080p60/720p60) by Zsombor
+• Code cleanups, library upgrades by TacoTheDank
+• Fix updating the search history by Zsombor
+• Updated translations for:
+    • Arabic - by Mahmoud Hussain
+    • Basque and Spanish - by Julio Montero
+    • Croatian - by Milo Ivir
+    • Dutch - by Heimen Stoffels
+    • Japanese - by Takaki Iekura
+    • Indonesian - by zmni
+    • Norwegian Bokmål - by Allan Nordhøy
+    • Russian - by Александр
+    • Polish - by Michal L
+    • Portuguese - by Sérgio Marques
+    • Traditional Chinese - by Jeff Huang
+    • Turkish - by Oğuz Ersen
+    • Ukrainian
