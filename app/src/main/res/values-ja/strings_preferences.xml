@@ -124,4 +124,11 @@
     <string name="pref_summary_maximum_res">最大解像度の選択: %s</string>
     <string name="pref_title_maximum_res">最大解像度</string>
     <string name="key_preferences">設定</string>
+    <string name="pref_title_maximum_res_metered">従量課金制ネットワークでの最大解像度</string>
+    <string name="pref_summary_minimum_res_metered">従量課金制ネットワーク経由でストリーミング時の最小解像度を選択: %s</string>
+    <string name="pref_title_minimum_res_metered">従量課金制ネットワークでの最小解像度</string>
+    <string name="pref_category_metered_network">従量課金制ネットワーク</string>
+    <string name="no_resolution_specified">なし</string>
+    <string name="pref_summary_minimum_res">最小解像度の選択: %s</string>
+    <string name="pref_title_minimum_res">最小解像度</string>
 </resources>
