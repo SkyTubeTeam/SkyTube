@@ -1,2 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="databases_import_fail">No s\'ha pogut importar les vostres bases de dades.</string>
+    <string name="databases_importing">S\'està important…</string>
+    <string name="continue_">Continua</string>
+    <string name="databases_import_nothing_selected">No s\'ha seleccionat res…</string>
+    <string name="databases_import_select_backup">Seleccioneu el fitxer de còpia de seguretat que voleu importar</string>
+    <string name="databases_backup_fail">No s\'ha pogut fer la còpia de seguretat de les vostres bases de dades.</string>
+    <string name="databases_backing_up">S\'està fent una còpia de seguretat…</string>
+    <string name="pref_summary_import_dbs">Importeu la còpia de seguretat de les vostres subscripcions i adreces d\'interès.</string>
+    <string name="pref_title_import_dbs">Importa una còpia de seguretat</string>
+    <string name="pref_summary_backup_dbs">Feu una còpia de seguretat de les vostres bases de dades de subscripcions i adreces d\'interès.</string>
+    <string name="pref_import_export_category">Importació/exportació</string>
+    <string name="pref_summary_choose_player">Reproductor de vídeo a utilitzar: %s</string>
+    <string name="pref_title_choose_player">Reproductor de vídeo</string>
+    <string name="pref_summary_minimum_res">Seleccioneu la vostra resolució mínima: %s</string>
+    <string name="pref_title_minimum_res">Resolució mínima</string>
+    <string name="pref_summary_maximum_res">Seleccioneu la vostra resolució màxima: %s</string>
+    <string name="pref_title_maximum_res">Resolució màxima</string>
+    <string name="pref_video_player_category">Reproductor de vídeo</string>
+    <string name="key_preferences">preferències</string>
+    <string name="preferences">Preferències</string>
+</resources>
