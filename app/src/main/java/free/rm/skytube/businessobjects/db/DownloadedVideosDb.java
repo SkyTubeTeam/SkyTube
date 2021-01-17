@@ -21,6 +21,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import free.rm.skytube.app.Settings;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.Logger;
@@ -39,11 +40,11 @@ public class DownloadedVideosDb extends SQLiteOpenHelperEx implements OrderableD
 	public static class Status {
 		final Uri uri;
 		final Uri audioUri;
-		final boolean disapeared;
-		public Status(Uri uri, Uri audioUri, boolean disapeared) {
+		final boolean disappeared;
+		public Status(Uri uri, Uri audioUri, boolean disappeared) {
 			this.uri = uri;
 			this.audioUri = audioUri;
-			this.disapeared = disapeared;
+			this.disappeared = disappeared;
 		}
 
 		public Uri getUri() {
@@ -76,8 +77,8 @@ public class DownloadedVideosDb extends SQLiteOpenHelperEx implements OrderableD
 			return audioUri;
 		}
 
-		public boolean isDisapeared() {
-			return disapeared;
+		public boolean isDisappeared() {
+			return disappeared;
 		}
 
 		@Override
@@ -89,7 +90,7 @@ public class DownloadedVideosDb extends SQLiteOpenHelperEx implements OrderableD
 			if (audioUri != null) {
 				sb.append(", audioUri=").append(audioUri);
 			}
-			sb.append(", disapeared=").append(disapeared);
+			sb.append(", disapeared=").append(disappeared);
 			sb.append('}');
 			return sb.toString();
 		}
@@ -238,24 +239,30 @@ public class DownloadedVideosDb extends SQLiteOpenHelperEx implements OrderableD
 			deleteIfExists(status.getLocalAudioFile());
 			deleteIfExists(status.getLocalVideoFile());
 			remove(videoId.getId());
-			if (SkyTubeApp.getSettings().isDownloadToSeparateFolders()) {
-				removeParentFolderIfEmpty(status);
+			final Settings settings = SkyTubeApp.getSettings();
+			if (settings.isDownloadToSeparateFolders()) {
+				removeParentFolderIfEmpty(status, settings.getDownloadParentFolder());
 			}
 		}
 	}
 
-	private void removeParentFolderIfEmpty(Status file) {
+	private void removeParentFolderIfEmpty(Status file, File downloadParentFolder) {
 		File parentFile = file.getParentFolder();
 		Log.i(TAG, "removeParentFolderIfEmpty " + parentFile.getAbsolutePath() + " " + parentFile.exists() + " " + parentFile.isDirectory());
 		if (parentFile.exists() && parentFile.isDirectory()) {
-			String[] fileList = parentFile.list();
-			Log.i(TAG, "file list is " + Arrays.asList(fileList));
-			if (fileList != null) {
-				if (fileList.length == 0) {
-					// that was the last file in the directory, remove it
-					Log.i(TAG, "now delete it:" + parentFile);
-					parentFile.delete();
+			if (parentFile.getParentFile().getAbsolutePath().equals(downloadParentFolder.getAbsolutePath())) {
+				String[] fileList = parentFile.list();
+				Log.i(TAG, "file list is " + Arrays.asList(fileList) + " under " + parentFile.getAbsolutePath());
+				if (fileList != null) {
+					if (fileList.length == 0) {
+						// that was the last file in the directory, remove it
+						Log.i(TAG, "now delete it:" + parentFile);
+						parentFile.delete();
+					}
 				}
+			} else {
+				Log.w(TAG, "Download parent folder is " + downloadParentFolder.getAbsolutePath() +
+						" but the file is stored under " + parentFile.getParentFile().getAbsolutePath());
 			}
 		}
 		Log.i(TAG, "exit removeParentFolderIfEmpty");
