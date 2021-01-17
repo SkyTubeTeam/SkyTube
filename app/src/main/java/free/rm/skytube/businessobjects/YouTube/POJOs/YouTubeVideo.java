@@ -558,7 +558,7 @@ public class YouTubeVideo extends CardData implements Serializable {
 						.setDescription(getStr(R.string.video) + " ― " + getChannelName())
 						.setOutputFileName(getId() + " - " + getTitle())
 						.setOutputDirectoryName(getChannelName())
-						.setParentDirectory(settings.getDownloadFolder(null))
+						.setParentDirectory(settings.getDownloadParentFolder())
 						.setOutputFileExtension(stream.getFormat().suffix)
 						.setAllowedOverRoaming(false)
 						.setAllowedNetworkTypesFlags(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE)

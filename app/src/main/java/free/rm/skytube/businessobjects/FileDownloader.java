@@ -33,7 +33,6 @@ import java.io.File;
 import java.io.Serializable;
 import java.util.regex.Pattern;
 
-import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.gui.activities.PermissionsActivity;
 
@@ -55,7 +54,7 @@ public abstract class FileDownloader implements Serializable, PermissionsActivit
 	/** Output file name (without file extension). */
 	private String  outputFileName = null;
 	private String  outputDirectoryName = null;
-	private String  parentDirectory = null;
+	private File  parentDirectory = null;
 	private String  outputFileExtension = null;
 	/** If set to true, then the download manager will download the file over cellular network. */
 	private Boolean allowedOverRoaming = null;
@@ -103,7 +102,7 @@ public abstract class FileDownloader implements Serializable, PermissionsActivit
 
 		Uri     remoteFileUri = Uri.parse(remoteFileUrl);
 		String  downloadFileName = getCompleteFileName(remoteFileUri);
-		FileInformation fileInformation = new FileInformation(downloadFileName);
+		FileInformation fileInformation = new FileInformation(downloadFileName, parentDirectory, dirType);
 		String fullDownloadFileName = fileInformation.getFullDownloadFileName();
 		final File downloadDestinationFile = fileInformation.getFile();
 
@@ -272,7 +271,7 @@ public abstract class FileDownloader implements Serializable, PermissionsActivit
 	 *
 	 * @param parentDirectory    E.g. "/storage/emulated/0/videos"
 	 */
-	public FileDownloader setParentDirectory(String parentDirectory) {
+	public FileDownloader setParentDirectory(File parentDirectory) {
 		this.parentDirectory = parentDirectory;
 		return this;
 	}
@@ -329,10 +328,12 @@ public abstract class FileDownloader implements Serializable, PermissionsActivit
 		private final String fullDownloadFileName;
 		private final File file;
 
-		public FileInformation(String downloadFileName) {
+		public FileInformation(String downloadFileName,
+				File parentDirectory, String dirType) {
 			// if there's already a local file for this video for some reason, then do not redownload the
 			// file and halt
-			File parentDir = parentDirectory != null ? new File(parentDirectory) : Environment.getExternalStoragePublicDirectory(dirType);
+			final File externalStorageDir = Environment.getExternalStoragePublicDirectory(dirType);
+			File parentDir = parentDirectory != null ? parentDirectory : externalStorageDir;
 			boolean toDirectories = SkyTubeApp.getSettings().isDownloadToSeparateFolders();
 
 			if (toDirectories && outputDirectoryName != null && !outputDirectoryName.isEmpty()) {

@@ -438,7 +438,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 			if (!youTubeVideo.isLiveStream()) {
 				loadingVideoView.setVisibility(View.VISIBLE);
 
-				if (downloadStatus.isDisapeared()) {
+				if (downloadStatus.isDisappeared()) {
                     // If the file for this video has gone missing, warn and then play remotely.
                     Toast.makeText(getContext(),
                             getString(R.string.playing_video_file_missing),

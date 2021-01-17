@@ -18,10 +18,12 @@
 package free.rm.skytube.app;
 
 import android.content.SharedPreferences;
+import android.os.Environment;
 
 import androidx.annotation.StringRes;
 import androidx.preference.PreferenceManager;
 
+import java.io.File;
 import java.util.Collections;
 import java.util.Set;
 
@@ -202,6 +204,11 @@ public class Settings {
 
     public String getDownloadFolder(String defaultValue) {
         return getPreference(R.string.pref_key_video_download_folder, defaultValue);
+    }
+
+    public File getDownloadParentFolder() {
+        String parentDirectory = getDownloadFolder(null);
+        return parentDirectory != null ? new File(parentDirectory) : Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES);
     }
 
     private void setPreference(@StringRes int resId, boolean value) {
