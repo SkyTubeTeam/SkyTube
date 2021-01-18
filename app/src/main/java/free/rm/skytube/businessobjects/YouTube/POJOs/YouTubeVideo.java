@@ -488,23 +488,6 @@ public class YouTubeVideo extends CardData implements Serializable {
 	}
 
 	/**
-	 * Remove local copy of this video, and delete it from the VideoDownloads DB.
-	 */
-	public void removeDownload() {
-		DownloadedVideosDb.getVideoDownloadsDb().removeDownload(getVideoId());
-	}
-
-	/**
-	 * Get the Uri for the local copy of this Video.
-	 *
-	 * @return Uri
-	 */
-	public DownloadedVideosDb.Status getDownloadedFileStatus() {
-		return DownloadedVideosDb.getVideoDownloadsDb().getVideoFileUriAndValidate(getVideoId());
-	}
-
-
-	/**
 	 * Returns whether or not this video has been downloaded.
 	 *
 	 * @return  True if the video was previously saved by the user.
@@ -512,7 +495,6 @@ public class YouTubeVideo extends CardData implements Serializable {
 	public boolean isDownloaded() {
 		return DownloadedVideosDb.getVideoDownloadsDb().isVideoDownloaded(YouTubeVideo.this.getVideoId());
 	}
-
 
 	/**
 	 * Downloads this video.
@@ -580,22 +562,20 @@ public class YouTubeVideo extends CardData implements Serializable {
 	 * Play the video using an external app
 	 */
 	public void playVideoExternally(Context context) {
-		DownloadedVideosDb.Status fileStatus = getDownloadedFileStatus();
-		if (fileStatus != null) {
+		DownloadedVideosDb.Status fileStatus = DownloadedVideosDb.getVideoDownloadsDb().getDownloadedFileStatus(context, getVideoId());
+		if (fileStatus.getLocalVideoFile() != null) {
 			Uri uri;
 			File file = fileStatus.getLocalVideoFile();
-			if (file != null) {
-				try {
-					uri = FileProvider.getUriForFile(context, BuildConfig.APPLICATION_ID + ".provider", file);
-				} catch (Exception e) {
-					Logger.e(YouTubeVideo.this, "Error accessing path: " + file + ", message:" + e.getMessage(), e);
-					uri = fileStatus.getUri();
-				}
-				Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-				intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-				context.startActivity(intent);
-				return;
+			try {
+				uri = FileProvider.getUriForFile(context, BuildConfig.APPLICATION_ID + ".provider", file);
+			} catch (Exception e) {
+				Logger.e(YouTubeVideo.this, "Error accessing path: " + file + ", message:" + e.getMessage(), e);
+				uri = fileStatus.getUri();
 			}
+			Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+			intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+			context.startActivity(intent);
+			return;
 		}
 		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getVideoUrl()));
 		context.startActivity(browserIntent);
