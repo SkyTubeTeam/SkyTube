@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -21,6 +22,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import free.rm.skytube.R;
 import free.rm.skytube.app.Settings;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
@@ -93,6 +95,18 @@ public class DownloadedVideosDb extends SQLiteOpenHelperEx implements OrderableD
 			sb.append(", disapeared=").append(disappeared);
 			sb.append('}');
 			return sb.toString();
+		}
+	}
+
+	public static class FileDeletionFailed extends Exception {
+		String path;
+		FileDeletionFailed(String path) {
+			super("File deletion failed for "+path);
+			this.path = path;
+		}
+
+		public String getPath() {
+			return path;
 		}
 	}
 
@@ -232,17 +246,21 @@ public class DownloadedVideosDb extends SQLiteOpenHelperEx implements OrderableD
 	/**
 	 * Remove local copy of this video, and delete it from the VideoDownloads DB.
 	 */
-	public void removeDownload(VideoId videoId) {
-		Status status = getVideoFileStatus(videoId);
-		Log.i(TAG, "removeDownload for " + videoId + " -> " + status);
-		if (status != null) {
-			deleteIfExists(status.getLocalAudioFile());
-			deleteIfExists(status.getLocalVideoFile());
-			remove(videoId.getId());
-			final Settings settings = SkyTubeApp.getSettings();
-			if (settings.isDownloadToSeparateFolders()) {
-				removeParentFolderIfEmpty(status, settings.getDownloadParentFolder());
+	public void removeDownload(Context ctx, VideoId videoId) {
+		try {
+			Status status = getVideoFileStatus(videoId);
+			Log.i(TAG, "removeDownload for " + videoId + " -> " + status);
+			if (status != null) {
+				deleteIfExists(status.getLocalAudioFile());
+				deleteIfExists(status.getLocalVideoFile());
+				remove(videoId.getId());
+				final Settings settings = SkyTubeApp.getSettings();
+				if (settings.isDownloadToSeparateFolders()) {
+					removeParentFolderIfEmpty(status, settings.getDownloadParentFolder());
+				}
 			}
+		} catch (FileDeletionFailed exc) {
+			displayError(ctx, exc);
 		}
 	}
 
@@ -315,7 +333,7 @@ public class DownloadedVideosDb extends SQLiteOpenHelperEx implements OrderableD
 	 * @param videoId the id of the video
 	 * @return the status, never null
 	 */
-	public Status getVideoFileUriAndValidate(VideoId videoId) {
+	public @NonNull Status getVideoFileUriAndValidate(@NonNull VideoId videoId) throws FileDeletionFailed {
 		Status downloadStatus = getVideoFileStatus(videoId);
 		if (downloadStatus != null) {
 			File localVideo = downloadStatus.getLocalVideoFile();
@@ -339,10 +357,32 @@ public class DownloadedVideosDb extends SQLiteOpenHelperEx implements OrderableD
 		return new Status(null,null, false);
 	}
 
-	private void deleteIfExists(File file) {
+	/**
+	 * Get the Uri for the local copy of this Video, if the file is missing, or incorrect state, it tries to cleanup,
+	 * and notifies the user about that error
+	 *
+	 * @return Status object - never null
+	 */
+	public @NonNull DownloadedVideosDb.Status getDownloadedFileStatus(Context context, @NonNull VideoId videoId) {
+		try {
+			return getVideoFileUriAndValidate(videoId);
+		} catch (DownloadedVideosDb.FileDeletionFailed exc) {
+			displayError(context, exc);
+			return new Status(null, null, true);
+		}
+	}
+
+	private void displayError(Context context, DownloadedVideosDb.FileDeletionFailed fileDeletionFailed) {
+		Logger.e(this, "Unable to delete file : %s", fileDeletionFailed.getPath());
+		Toast.makeText(context, context.getString(R.string.unable_to_delete_file, fileDeletionFailed.getPath()), Toast.LENGTH_LONG).show();
+	}
+
+	private void deleteIfExists(File file) throws FileDeletionFailed {
 		if (file != null && file.exists()) {
 			Log.i(TAG, "File exists " + file.getAbsolutePath());
-			file.delete();
+			if (!file.delete()) {
+				throw new FileDeletionFailed(file.getAbsolutePath());
+			}
 		}
 	}
 

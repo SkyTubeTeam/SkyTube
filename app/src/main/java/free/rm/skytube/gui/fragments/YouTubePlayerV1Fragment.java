@@ -788,12 +788,11 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 				videoView.pause();
 				videoView.stopPlayback();
 				loadingVideoView.setVisibility(View.VISIBLE);
-				DownloadedVideosDb.Status status = youTubeVideo.getDownloadedFileStatus();
-				if (status != null && status.getLocalVideoFile() != null) {
+				DownloadedVideosDb.Status status = DownloadedVideosDb.getVideoDownloadsDb().getDownloadedFileStatus(getContext(), youTubeVideo.getVideoId());
+				if (status.getLocalVideoFile() != null) {
 					File file = status.getLocalVideoFile();
 					// If the file for this video has gone missing, remove it from the Database and then play remotely.
 					if (!file.exists()) {
-						DownloadedVideosDb.getVideoDownloadsDb().remove(youTubeVideo);
 						Toast.makeText(getContext(),
 								getContext().getString(R.string.playing_video_file_missing),
 								Toast.LENGTH_LONG).show();

@@ -45,6 +45,7 @@ import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubePlaylist;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.db.DatabaseTasks;
+import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
 import free.rm.skytube.businessobjects.db.PlaybackStatusDb;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 import free.rm.skytube.gui.activities.ThumbnailViewerActivity;
@@ -332,7 +333,7 @@ public class GridViewHolder extends RecyclerView.ViewHolder implements Serializa
 					context.startActivity(i);
 					return true;
 				case R.id.delete_download:
-					youTubeVideo.removeDownload();
+					DownloadedVideosDb.getVideoDownloadsDb().removeDownload(context, youTubeVideo.getVideoId());
 					return true;
 				case R.id.download_video:
 					final Policy decision = new MobileNetworkWarningDialog(view.getContext())

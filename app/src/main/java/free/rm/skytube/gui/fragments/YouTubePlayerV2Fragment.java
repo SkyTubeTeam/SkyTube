@@ -319,7 +319,8 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 
 					boolean askForDelete = askForDelete(error);
 					String errorMessage = error.getCause().getMessage();
-					new SkyTubeMaterialDialog(YouTubePlayerV2Fragment.this.getContext())
+					Context ctx = YouTubePlayerV2Fragment.this.getContext();
+					new SkyTubeMaterialDialog(ctx)
 								.onNegativeOrCancel(dialog -> closeActivity())
 								.content(askForDelete ? R.string.error_downloaded_file_is_corrupted : R.string.error_video_parse_error, errorMessage)
 								.title(R.string.error_video_play)
@@ -328,7 +329,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 								.positiveText(askForDelete ? R.string.delete_download : 0)
 								.onPositive((dialog, which) -> {
 									if (askForDelete) {
-										YouTubePlayerV2Fragment.this.youTubeVideo.removeDownload();
+										DownloadedVideosDb.getVideoDownloadsDb().removeDownload(ctx, youTubeVideo.getVideoId());
 									}
 									closeActivity();
 								}).show();
@@ -423,7 +424,8 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 	 */
 	private void loadVideo(boolean showMobileNetworkWarning) {
 		Policy decision = Policy.ALLOW;
-        DownloadedVideosDb.Status downloadStatus = DownloadedVideosDb.getVideoDownloadsDb().getVideoFileUriAndValidate(youTubeVideo.getVideoId());
+		Context ctx = getContext();
+        DownloadedVideosDb.Status downloadStatus = DownloadedVideosDb.getVideoDownloadsDb().getDownloadedFileStatus(ctx, youTubeVideo.getVideoId());
 
 		// if the user is using mobile network (i.e. 4g), then warn him
 		if (showMobileNetworkWarning && downloadStatus.getUri() == null) {
