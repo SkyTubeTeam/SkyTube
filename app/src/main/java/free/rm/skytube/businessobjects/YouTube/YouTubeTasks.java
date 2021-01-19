@@ -13,6 +13,7 @@ import org.schabi.newpipe.extractor.StreamingService;
 import org.schabi.newpipe.extractor.exceptions.ExtractionException;
 
 import java.io.IOException;
+import java.math.BigInteger;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -35,6 +36,7 @@ import free.rm.skytube.businessobjects.YouTube.Tasks.GetSubscriptionVideosTaskLi
 import free.rm.skytube.businessobjects.YouTube.newpipe.ContentId;
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeException;
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
+import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeUtils;
 import free.rm.skytube.businessobjects.YouTube.newpipe.PlaylistPager;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 import free.rm.skytube.businessobjects.interfaces.GetDesiredStreamListener;
@@ -300,8 +302,19 @@ public class YouTubeTasks {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(streamInfo -> {
-                    if (streamInfo != null){
-                        listener.onGetDesiredStream(streamInfo);
+                    if (streamInfo != null) {
+                        long like = streamInfo.getLikeCount();
+                        long dislike = streamInfo.getDislikeCount();
+                        youTubeVideo.setLikeDislikeCount(like >= 0 ? like : null, dislike >= 0 ? dislike : null);
+
+                        long views = streamInfo.getViewCount();
+                        if (views >= 0) {
+                            youTubeVideo.setViewCount(BigInteger.valueOf(views));
+                        }
+
+                        youTubeVideo.setLikeDislikeCount(streamInfo.getLikeCount(), streamInfo.getDislikeCount());
+                        youTubeVideo.setDescription(NewPipeUtils.filterHtml(streamInfo.getDescription()));
+                        listener.onGetDesiredStream(streamInfo, youTubeVideo);
                     }
                 }, listener::onGetDesiredStreamError);
     }

@@ -483,7 +483,7 @@ public abstract class BaseActivity extends AppCompatActivity implements MainActi
 			compositeDisposable.add(
 					video.getDesiredStream(new GetDesiredStreamListener() {
 						@Override
-						public void onGetDesiredStream(StreamInfo desiredStream) {
+						public void onGetDesiredStream(StreamInfo desiredStream, YouTubeVideo video) {
 							if(mCastSession == null)
 								return;
 							Gson gson = new Gson();

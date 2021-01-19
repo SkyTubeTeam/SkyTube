@@ -2,6 +2,7 @@ package free.rm.skytube.businessobjects.interfaces;
 
 import org.schabi.newpipe.extractor.stream.StreamInfo;
 
+import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.YouTube.VideoStream.StreamMetaData;
 
 /**
@@ -14,7 +15,7 @@ public interface GetDesiredStreamListener {
 	 *
 	 * @param streamInfo  The retrieved video's Uri.
 	 */
-	void onGetDesiredStream(StreamInfo streamInfo);
+	void onGetDesiredStream(StreamInfo streamInfo, YouTubeVideo video);
 
 	/**
 	 * Called if an error occurred while retrieving the video's Uri.
