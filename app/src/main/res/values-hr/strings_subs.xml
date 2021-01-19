@@ -10,7 +10,7 @@
     <string name="error_check_if_user_has_subbed">Nije moguće provjeriti je li se korisnik pretplatio na kanal (id=%s)</string>
     <string name="error_unable_to_subscribe">Nije moguće pretplatiti se/otkazati pretplatu na kanal (id=%s)</string>
     <string name="import_subscriptions">Uvoz pretplatnika</string>
-    <string name="import_subscriptions_description">Uvezi svoje pretplate s YouTube-a. Idi na stranicu https://www.youtube.com/subscription_manager i pritisni gumb „Izvezi pretplate”. Zatim odaberi izvezenu datoteku pod nazivom „subscription_manager” pritiskom na „Odaberi datoteku pretplata”.</string>
+    <string name="import_subscriptions_description">Uvezi tvoje pretplate s YouTubea. Najprije idi na stranicu https://takeout.google.com. Odznači sve usluge osim „YouTube i YouTube glazba” i pritisni „Uključeni su svi YouTube podaci” za odznačivanje svega osim pretplata. Pritsni „Dalje”, a zatim „Stvori izvoz”. Nakon što izvoz završi, on će se prikazati na sljedećoj web-stranici i dobit ćeš e-poruku s poveznicom za preuzimanje. Preuzmi datoteku i iz nje izdvoji datoteku subscription.json (nalazi se u /Takeout/YouTube i YouTube Music/subscription/). Nakon toga odaberi izvezenu datoteku pritiskom na „Odaberi datoteku pretplata”.</string>
     <string name="unsubscribe_from_all_current_sibbed_channels">Otkaži pretplate za sve tvoje trenutačne pretplaćene kanale.</string>
     <string name="subscriptions_to_channels_imported">Pretplata na %d kanala uvezena.</string>
     <string name="select_xml_file">Odaberi datoteku pretplata</string>
