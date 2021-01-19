@@ -58,6 +58,7 @@ import free.rm.skytube.businessobjects.db.DatabaseTasks;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 import free.rm.skytube.gui.businessobjects.SubscriptionsBackupsManager;
 import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.disposables.Disposable;
@@ -408,6 +409,7 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 		if (NewPipeService.isPreferred() || !YouTubeAPIKey.get().isUserApiKeySet()) {
 			return YouTubeTasks.getBulkSubscriptionVideos(channelIds, this)
 					.delay(500, TimeUnit.MILLISECONDS)
+					.observeOn(AndroidSchedulers.mainThread())
 					.flatMapCompletable(changed ->
 							Completable.fromRunnable(() -> {
 								Log.i("SUB FRAGMENT", "onAllChannelVideosFetched:" + changed);

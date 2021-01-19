@@ -365,6 +365,9 @@ public class YouTubeTasks {
         })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .doOnError(error -> {
+                    SkyTubeApp.notifyUserOnError(context, error);
+                })
                 .doOnSuccess(videosList -> {
                     SkyTubeApp.notifyUserOnError(context, getYouTubeVideos.getLastException());
 
