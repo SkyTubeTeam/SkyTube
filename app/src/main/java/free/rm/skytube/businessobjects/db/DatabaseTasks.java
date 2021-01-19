@@ -90,7 +90,6 @@ public class DatabaseTasks {
             }
             return channel;
         })
-                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnError(throwable -> {
                     Log.e(TAG, "Error: " + throwable.getMessage(), throwable);
@@ -99,7 +98,8 @@ public class DatabaseTasks {
                             context.getString(R.string.could_not_get_channel_detailed, msg) :
                             context.getString(R.string.could_not_get_channel);
                     Toast.makeText(context, toastMsg, Toast.LENGTH_LONG).show();
-                });
+                })
+                .subscribeOn(Schedulers.io());
     }
 
     /**
