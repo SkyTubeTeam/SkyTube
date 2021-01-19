@@ -51,6 +51,8 @@ import com.google.api.client.googleapis.json.GoogleJsonResponseException;
 
 import org.schabi.newpipe.extractor.exceptions.FoundAdException;
 
+import java.io.IOException;
+import java.net.SocketException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -68,6 +70,8 @@ import free.rm.skytube.gui.fragments.ChannelBrowserFragment;
 import free.rm.skytube.gui.fragments.FragmentNames;
 import free.rm.skytube.gui.fragments.PlaylistVideosFragment;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import io.reactivex.rxjava3.exceptions.UndeliverableException;
+import io.reactivex.rxjava3.plugins.RxJavaPlugins;
 
 /**
  * SkyTube application.
@@ -92,9 +96,38 @@ public class SkyTubeApp extends MultiDexApplication {
 		this.settings.migrate();
 		this.names = new FragmentNames(this);
 		skyTubeApp = this;
+		setupRxJava();
 		initChannels(this);
 	}
 
+	private void setupRxJava() {
+		RxJavaPlugins.setErrorHandler(e -> {
+			if (e instanceof UndeliverableException) {
+				e = e.getCause();
+			}
+			if ((e instanceof IOException) || (e instanceof SocketException)) {
+				// fine, irrelevant network problem or API that throws on cancellation
+				return;
+			}
+			if (e instanceof InterruptedException) {
+				// fine, some blocking code was interrupted by a dispose call
+				return;
+			}
+			if ((e instanceof NullPointerException) || (e instanceof IllegalArgumentException)) {
+				// that's likely a bug in the application
+				Thread.currentThread().getUncaughtExceptionHandler()
+						.uncaughtException(Thread.currentThread(), e);
+				return;
+			}
+			if (e instanceof IllegalStateException) {
+				// that's a bug in RxJava or in a custom operator
+				Thread.currentThread().getUncaughtExceptionHandler()
+						.uncaughtException(Thread.currentThread(), e);
+				return;
+			}
+			Log.e("SkyTubeApp", "Undeliverable exception received, not sure what to do" + e.getMessage(), e);
+		});
+	}
 	@Override
 	public void onTerminate() {
 		COMPOSITE_DISPOSABLE.clear();
