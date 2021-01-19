@@ -51,6 +51,7 @@ import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.YouTube.YouTubeTasks;
 import free.rm.skytube.businessobjects.YouTube.newpipe.ContentId;
+import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeUtils;
 import free.rm.skytube.businessobjects.db.DatabaseTasks;
 import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
 import free.rm.skytube.businessobjects.db.PlaybackStatusDb;
@@ -713,8 +714,8 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 				return true;
 
 			case R.id.menu_open_video_with:
-				youTubeVideo.playVideoExternally(getContext());
-				videoView.pause();
+				compositeDisposable.add(youTubeVideo.playVideoExternally(getContext())
+						.subscribe(status -> videoView.pause()));
 				return true;
 
 			case R.id.share:
@@ -788,50 +789,50 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 				videoView.pause();
 				videoView.stopPlayback();
 				loadingVideoView.setVisibility(View.VISIBLE);
-				DownloadedVideosDb.Status status = DownloadedVideosDb.getVideoDownloadsDb().getDownloadedFileStatus(getContext(), youTubeVideo.getVideoId());
-				if (status.getLocalVideoFile() != null) {
-					File file = status.getLocalVideoFile();
-					// If the file for this video has gone missing, remove it from the Database and then play remotely.
-					if (!file.exists()) {
-						Toast.makeText(getContext(),
-								getContext().getString(R.string.playing_video_file_missing),
-								Toast.LENGTH_LONG).show();
-						loadVideo();
-					} else {
-						Logger.i(YouTubePlayerV1Fragment.this, ">> PLAYING LOCALLY: %s", file);
-						videoView.setVideoURI(status.getUri());
-					}
-				} else {
-					compositeDisposable.add(
-							youTubeVideo.getDesiredStream(new GetDesiredStreamListener() {
-								@Override
-								public void onGetDesiredStream(StreamInfo desiredStream) {
-									// play the video
-									StreamSelectionPolicy selectionPolicy = SkyTubeApp.getSettings().getDesiredVideoResolution(false).withAllowVideoOnly(false);
-									StreamSelectionPolicy.StreamSelection selection = selectionPolicy.select(desiredStream);
-									if (selection != null) {
-										Uri uri = selection.getVideoStreamUri();
-										Logger.i(YouTubePlayerV1Fragment.this, ">> PLAYING: %s", uri);
-										videoView.setVideoURI(uri);
-									} else {
-										videoPlaybackError(selectionPolicy.getErrorMessage(getContext()));
-									}
+				compositeDisposable.add(
+					DownloadedVideosDb.getVideoDownloadsDb().getDownloadedFileStatus(getContext(), youTubeVideo.getVideoId())
+						.subscribe(status -> {
+							if (status.getLocalVideoFile() != null) {
+								File file = status.getLocalVideoFile();
+								// If the file for this video has gone missing, remove it from the Database and then play remotely.
+								if (!file.exists()) {
+									Toast.makeText(getContext(),
+											getContext().getString(R.string.playing_video_file_missing),
+											Toast.LENGTH_LONG).show();
+									loadVideo();
+								} else {
+									Logger.i(YouTubePlayerV1Fragment.this, ">> PLAYING LOCALLY: %s", file);
+									videoView.setVideoURI(status.getUri());
 								}
+							} else {
+								compositeDisposable.add(
+										youTubeVideo.getDesiredStream(new GetDesiredStreamListener() {
+											@Override
+											public void onGetDesiredStream(StreamInfo desiredStream, YouTubeVideo youTubeVideo) {
+												Linker.setTextAndLinkify(videoDescriptionTextView, youTubeVideo.getDescription());
 
-								@Override
-								public void onGetDesiredStreamError(Throwable throwable) {
-									if (throwable != null) {
-										Logger.e(YouTubePlayerV1Fragment.this, "Error getting stream info: "+ throwable.getMessage(), throwable);
-										videoPlaybackError(throwable.getMessage());
-									}
-								}
-							})
-					);
-				}
+												StreamSelectionPolicy selectionPolicy = SkyTubeApp.getSettings().getDesiredVideoResolution(false).withAllowVideoOnly(false);
+												StreamSelectionPolicy.StreamSelection selection = selectionPolicy.select(desiredStream);
+												if (selection != null) {
+													Uri uri = selection.getVideoStreamUri();
+													Logger.i(YouTubePlayerV1Fragment.this, ">> PLAYING: %s", uri);
+													videoView.setVideoURI(uri);
+												} else {
+													videoPlaybackError(selectionPolicy.getErrorMessage(getContext()));
+												}
+											}
 
-				// get the video description
-				compositeDisposable.add(YouTubeTasks.getVideoDescription(youTubeVideo)
-						.subscribe(description -> Linker.setTextAndLinkify(videoDescriptionTextView, description)));
+											@Override
+											public void onGetDesiredStreamError(Throwable throwable) {
+												if (throwable != null) {
+													Logger.e(YouTubePlayerV1Fragment.this, "Error getting stream info: " + throwable.getMessage(), throwable);
+													videoPlaybackError(throwable.getMessage());
+												}
+											}
+										})
+								);
+							}
+						}));
 			} else {
 				// video is live:  ask the user if he wants to play the video using an other app
 				new AlertDialog.Builder(requireContext())
@@ -839,8 +840,7 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 						.setTitle(R.string.error_video_play)
 						.setNegativeButton(R.string.cancel, (dialog, which) -> closeActivity())
 						.setPositiveButton(R.string.ok, (dialog, which) -> {
-							youTubeVideo.playVideoExternally(getContext());
-							closeActivity();
+							youTubeVideo.playVideoExternally(getContext()).subscribe(status -> closeActivity());
 						})
 						.show();
 			}

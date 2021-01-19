@@ -32,6 +32,10 @@ import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.YouTube.newpipe.VideoId;
 import free.rm.skytube.businessobjects.interfaces.OrderableDatabase;
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Completable;
+import io.reactivex.rxjava3.core.Single;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 /**
  * A database (DB) that stores user's downloaded videos.
@@ -239,15 +243,12 @@ public class DownloadedVideosDb extends SQLiteOpenHelperEx implements OrderableD
 		return (rowsDeleted >= 0);
 	}
 
-	public boolean remove(YouTubeVideo video) {
-		return remove(video.getId());
-	}
-
 	/**
 	 * Remove local copy of this video, and delete it from the VideoDownloads DB.
+	 * @return
 	 */
-	public void removeDownload(Context ctx, VideoId videoId) {
-		try {
+	public @NonNull Completable removeDownload(Context ctx, VideoId videoId) {
+		return Completable.fromCallable(() -> {
 			Status status = getVideoFileStatus(videoId);
 			Log.i(TAG, "removeDownload for " + videoId + " -> " + status);
 			if (status != null) {
@@ -259,9 +260,13 @@ public class DownloadedVideosDb extends SQLiteOpenHelperEx implements OrderableD
 					removeParentFolderIfEmpty(status, settings.getDownloadParentFolder());
 				}
 			}
-		} catch (FileDeletionFailed exc) {
-			displayError(ctx, exc);
-		}
+			return status;
+		}).observeOn(AndroidSchedulers.mainThread())
+			.doOnError(exception -> {
+				displayGenericError(ctx, exception);
+			})
+			.onErrorComplete()
+			.subscribeOn(Schedulers.io());
 	}
 
 	private void removeParentFolderIfEmpty(Status file, File downloadParentFolder) {
@@ -333,28 +338,31 @@ public class DownloadedVideosDb extends SQLiteOpenHelperEx implements OrderableD
 	 * @param videoId the id of the video
 	 * @return the status, never null
 	 */
-	public @NonNull Status getVideoFileUriAndValidate(@NonNull VideoId videoId) throws FileDeletionFailed {
-		Status downloadStatus = getVideoFileStatus(videoId);
-		if (downloadStatus != null) {
-			File localVideo = downloadStatus.getLocalVideoFile();
-			if (localVideo != null) {
-				if (!localVideo.exists()) {
-					deleteIfExists(downloadStatus.getLocalAudioFile());
-					remove(videoId.getId());
-					return new Status(null, null, true);
+	private @NonNull Single<Status> getVideoFileUriAndValidate(@NonNull VideoId videoId) {
+		return Single.fromCallable( () -> {
+			Status downloadStatus = getVideoFileStatus(videoId);
+			if (downloadStatus != null) {
+				File localVideo = downloadStatus.getLocalVideoFile();
+				if (localVideo != null) {
+					if (!localVideo.exists()) {
+						deleteIfExists(downloadStatus.getLocalAudioFile());
+						remove(videoId.getId());
+						return new Status(null, null, true);
+					}
 				}
-			}
-			File localAudio = downloadStatus.getLocalAudioFile();
-			if (localAudio != null) {
-				if (!localAudio.exists()) {
-					deleteIfExists(downloadStatus.getLocalVideoFile());
-					remove(videoId.getId());
-					return new Status(null, null, true);
+				File localAudio = downloadStatus.getLocalAudioFile();
+				if (localAudio != null) {
+					if (!localAudio.exists()) {
+						deleteIfExists(downloadStatus.getLocalVideoFile());
+						remove(videoId.getId());
+						return new Status(null, null, true);
+					}
 				}
+				return downloadStatus;
 			}
-			return downloadStatus;
-		}
-		return new Status(null,null, false);
+			return new Status(null, null, false);
+		}).subscribeOn(Schedulers.io())
+				.observeOn(AndroidSchedulers.mainThread());
 	}
 
 	/**
@@ -363,12 +371,18 @@ public class DownloadedVideosDb extends SQLiteOpenHelperEx implements OrderableD
 	 *
 	 * @return Status object - never null
 	 */
-	public @NonNull DownloadedVideosDb.Status getDownloadedFileStatus(Context context, @NonNull VideoId videoId) {
-		try {
-			return getVideoFileUriAndValidate(videoId);
-		} catch (DownloadedVideosDb.FileDeletionFailed exc) {
-			displayError(context, exc);
+	public @NonNull Single<Status> getDownloadedFileStatus(Context context, @NonNull VideoId videoId) {
+		return getVideoFileUriAndValidate(videoId).onErrorReturn(error -> {
+			displayGenericError(context, error);
 			return new Status(null, null, true);
+		});
+	}
+
+	private void displayGenericError(Context context, Throwable exception) {
+		if (exception instanceof FileDeletionFailed) {
+			displayError(context, (FileDeletionFailed) exception);
+		} else {
+			Log.e(TAG, "Exception : "+ exception.getMessage(), exception);
 		}
 	}
 

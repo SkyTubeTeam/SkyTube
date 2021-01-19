@@ -18,16 +18,12 @@ package free.rm.skytube.businessobjects.YouTube.newpipe;
 
 import androidx.annotation.NonNull;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document.OutputSettings;
-import org.jsoup.safety.Whitelist;
 import org.schabi.newpipe.extractor.ListExtractor;
 import org.schabi.newpipe.extractor.NewPipe;
 import org.schabi.newpipe.extractor.ServiceList;
 import org.schabi.newpipe.extractor.StreamingService;
 import org.schabi.newpipe.extractor.channel.ChannelExtractor;
 import org.schabi.newpipe.extractor.comments.CommentsExtractor;
-import org.schabi.newpipe.extractor.exceptions.ContentNotAvailableException;
 import org.schabi.newpipe.extractor.exceptions.ExtractionException;
 import org.schabi.newpipe.extractor.exceptions.FoundAdException;
 import org.schabi.newpipe.extractor.exceptions.ParsingException;
@@ -42,10 +38,8 @@ import org.schabi.newpipe.extractor.localization.DateWrapper;
 import org.schabi.newpipe.extractor.localization.Localization;
 import org.schabi.newpipe.extractor.playlist.PlaylistExtractor;
 import org.schabi.newpipe.extractor.search.SearchExtractor;
-import org.schabi.newpipe.extractor.stream.Description;
 import org.schabi.newpipe.extractor.stream.StreamExtractor;
 import org.schabi.newpipe.extractor.stream.StreamInfo;
-import org.schabi.newpipe.extractor.stream.VideoStream;
 
 import java.io.IOException;
 import java.time.ZoneId;
@@ -254,7 +248,7 @@ public class NewPipeService {
     }
 
     private YouTubeChannel createInternalChannel(ChannelExtractor extractor) throws ParsingException {
-        return new YouTubeChannel(extractor.getId(), extractor.getName(), filterHtml(extractor.getDescription()),
+        return new YouTubeChannel(extractor.getId(), extractor.getName(), NewPipeUtils.filterHtml(extractor.getDescription()),
                 extractor.getAvatarUrl(), extractor.getBannerUrl(), getSubscriberCount(extractor), false, 0, System.currentTimeMillis());
     }
 
@@ -326,7 +320,7 @@ public class NewPipeService {
             viewCount = 0;
         }
 
-        YouTubeVideo video = new YouTubeVideo(extractor.getId(), extractor.getName(), filterHtml(extractor.getDescription()),
+        YouTubeVideo video = new YouTubeVideo(extractor.getId(), extractor.getName(), NewPipeUtils.filterHtml(extractor.getDescription()),
                 extractor.getLength(), new YouTubeChannel(extractor.getUploaderUrl(), extractor.getUploaderName()),
                 viewCount, uploadDate.zonedDateTime, uploadDate.exact, extractor.getThumbnailUrl());
         try {
@@ -372,22 +366,6 @@ public class NewPipeService {
         return "https://i.ytimg.com/vi/" + id + "/hqdefault.jpg";
     }
 
-    private String filterHtml(String content) {
-        return Jsoup.clean(content, "", Whitelist.basic(), new OutputSettings().prettyPrint(false));
-    }
-
-    private String filterHtml(Description description) {
-        String result;
-        if (description.getType() == Description.HTML) {
-            result = filterHtml(description.getContent());
-        } else {
-            result = description.getContent();
-        }
-        if (DEBUG_LOG) {
-            Logger.d(this, "filterHtml %s -> %s", description, result);
-        }
-        return result;
-    }
 
     public VideoPager getSearchResult(String query) throws NewPipeException {
         try {

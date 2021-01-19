@@ -60,6 +60,7 @@ import free.rm.skytube.businessobjects.db.BookmarksDb;
 import free.rm.skytube.businessobjects.db.DatabaseResult;
 import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
 import free.rm.skytube.businessobjects.interfaces.GetDesiredStreamListener;
+import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.disposables.Disposable;
 
 import static free.rm.skytube.app.SkyTubeApp.getContext;
@@ -177,7 +178,7 @@ public class YouTubeVideo extends CardData implements Serializable {
 		}
 	}
 
-	private void setViewCount(BigInteger viewsCountInt) {
+	public void setViewCount(BigInteger viewsCountInt) {
 		this.viewsCountInt = viewsCountInt;
 		this.viewsCount = String.format(getStr(R.string.views), viewsCountInt);
 	}
@@ -509,16 +510,7 @@ public class YouTubeVideo extends CardData implements Serializable {
 		// if description is not yet downloaded, get it, and call the download action again.
 		return getDesiredStream(new GetDesiredStreamListener() {
 			@Override
-			public void onGetDesiredStream(StreamInfo streamInfo) {
-				description = streamInfo.getDescription().getContent();
-				long like = streamInfo.getLikeCount();
-				long dislike = streamInfo.getDislikeCount();
-				setLikeDislikeCount(like >= 0 ? like : null, dislike >= 0 ? dislike : null);
-
-				long views = streamInfo.getViewCount();
-				if (views >= 0) {
-					setViewCount(BigInteger.valueOf(views));
-				}
+			public void onGetDesiredStream(StreamInfo streamInfo, YouTubeVideo video) {
 
 				final Settings settings = SkyTubeApp.getSettings();
 				StreamSelectionPolicy selectionPolicy = settings.getDesiredVideoResolution(true);
@@ -561,24 +553,26 @@ public class YouTubeVideo extends CardData implements Serializable {
 	/**
 	 * Play the video using an external app
 	 */
-	public void playVideoExternally(Context context) {
-		DownloadedVideosDb.Status fileStatus = DownloadedVideosDb.getVideoDownloadsDb().getDownloadedFileStatus(context, getVideoId());
-		if (fileStatus.getLocalVideoFile() != null) {
-			Uri uri;
-			File file = fileStatus.getLocalVideoFile();
-			try {
-				uri = FileProvider.getUriForFile(context, BuildConfig.APPLICATION_ID + ".provider", file);
-			} catch (Exception e) {
-				Logger.e(YouTubeVideo.this, "Error accessing path: " + file + ", message:" + e.getMessage(), e);
-				uri = fileStatus.getUri();
+	public Single<DownloadedVideosDb.Status> playVideoExternally(Context context) {
+		return DownloadedVideosDb.getVideoDownloadsDb().getDownloadedFileStatus(context, getVideoId()).map(fileStatus -> {
+			if (fileStatus.getLocalVideoFile() != null) {
+				Uri uri;
+				File file = fileStatus.getLocalVideoFile();
+				try {
+					uri = FileProvider.getUriForFile(context, BuildConfig.APPLICATION_ID + ".provider", file);
+				} catch (Exception e) {
+					Logger.e(YouTubeVideo.this, "Error accessing path: " + file + ", message:" + e.getMessage(), e);
+					uri = fileStatus.getUri();
+				}
+				Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+				intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+				context.startActivity(intent);
+			} else {
+				Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getVideoUrl()));
+				context.startActivity(browserIntent);
 			}
-			Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-			intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-			context.startActivity(intent);
-			return;
-		}
-		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getVideoUrl()));
-		context.startActivity(browserIntent);
+			return fileStatus;
+		});
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////

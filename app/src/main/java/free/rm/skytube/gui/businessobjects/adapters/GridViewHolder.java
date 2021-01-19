@@ -305,7 +305,7 @@ public class GridViewHolder extends RecyclerView.ViewHolder implements Serializa
 		popupMenu.setOnMenuItemClickListener(item -> {
 			switch(item.getItemId()) {
 				case R.id.menu_open_video_with:
-					youTubeVideo.playVideoExternally(context);
+					compositeDisposable.add(youTubeVideo.playVideoExternally(context).subscribe());
 					return true;
 				case R.id.share:
 					youTubeVideo.shareVideo(view.getContext());
@@ -333,7 +333,8 @@ public class GridViewHolder extends RecyclerView.ViewHolder implements Serializa
 					context.startActivity(i);
 					return true;
 				case R.id.delete_download:
-					DownloadedVideosDb.getVideoDownloadsDb().removeDownload(context, youTubeVideo.getVideoId());
+					compositeDisposable.add(
+							DownloadedVideosDb.getVideoDownloadsDb().removeDownload(context, youTubeVideo.getVideoId()).subscribe());
 					return true;
 				case R.id.download_video:
 					final Policy decision = new MobileNetworkWarningDialog(view.getContext())
