@@ -14,4 +14,5 @@
     <string name="warning_metered_network_download">Zure gailua sare mugatu batean konektatuta dago. Gastu erantsiagatik kosteak saihesteko, metatu gabeko sare batera konektatzea gomendatzen da. Deskargatu bideoa, dena den\?</string>
     <string name="downloads">Deskargak</string>
     <string name="download">Deskargak</string>
+    <string name="unable_to_delete_file">Ezin da deskargatutako fitxategia ezabatu: \'%s\'</string>
 </resources>
