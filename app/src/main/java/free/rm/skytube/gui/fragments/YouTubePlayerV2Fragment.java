@@ -372,30 +372,44 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 	 * will try to load and play the video.
 	 */
 	private void setUpHUDAndPlayVideo() {
-		getSupportActionBar().setTitle(youTubeVideo.getTitle());
-		videoDescTitleTextView.setText(youTubeVideo.getTitle());
-		videoDescChannelTextView.setText(youTubeVideo.getChannelName());
-		videoDescViewsTextView.setText(youTubeVideo.getViewsCount());
-		videoDescPublishDateTextView.setText(youTubeVideo.getPublishDatePretty());
+		setupInfoDisplay(youTubeVideo);
 
-		if (youTubeVideo.isThumbsUpPercentageSet()) {
-			videoDescLikesTextView.setText(youTubeVideo.getLikeCount());
-			videoDescDislikesTextView.setText(youTubeVideo.getDislikeCount());
-			videoDescLikesBar.setProgress(youTubeVideo.getThumbsUpPercentage());
-		} else {
-			videoDescLikesTextView.setVisibility(View.GONE);
-			videoDescDislikesTextView.setVisibility(View.GONE);
-			videoDescLikesBar.setVisibility(View.GONE);
-			videoDescRatingsDisabledTextView.setVisibility(View.VISIBLE);
-		}
-
-        new ResumeVideoTask(getContext(), youTubeVideo.getId(), position -> {
+		new ResumeVideoTask(getContext(), youTubeVideo.getId(), position -> {
 			playerInitialPosition = position;
 			YouTubePlayerV2Fragment.this.loadVideo();
 		}).ask();
 
 	}
 
+	private void setupInfoDisplay(YouTubeVideo video) {
+		getSupportActionBar().setTitle(video.getTitle());
+		videoDescTitleTextView.setText(video.getTitle());
+		videoDescChannelTextView.setText(video.getChannelName());
+		videoDescViewsTextView.setText(video.getViewsCount());
+		videoDescPublishDateTextView.setText(video.getPublishDatePretty());
+
+		if (video.getDescription() != null) {
+			Linker.setTextAndLinkify(videoDescriptionTextView, video.getDescription());
+		}
+
+		if (video.isThumbsUpPercentageSet()) {
+			videoDescLikesTextView.setText(video.getLikeCount());
+			videoDescDislikesTextView.setText(video.getDislikeCount());
+			videoDescLikesBar.setProgress(video.getThumbsUpPercentage());
+
+			videoDescRatingsDisabledTextView.setVisibility(View.GONE);
+
+			videoDescLikesTextView.setVisibility(View.VISIBLE);
+			videoDescDislikesTextView.setVisibility(View.VISIBLE);
+			videoDescLikesBar.setVisibility(View.VISIBLE);
+
+		} else {
+			videoDescLikesTextView.setVisibility(View.GONE);
+			videoDescDislikesTextView.setVisibility(View.GONE);
+			videoDescLikesBar.setVisibility(View.GONE);
+			videoDescRatingsDisabledTextView.setVisibility(View.VISIBLE);
+		}
+	}
 
 	/**
 	 * Loads the video specified in {@link #youTubeVideo}.
@@ -459,6 +473,15 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 						loadingVideoView.setVisibility(View.GONE);
 						Logger.i(this, ">> PLAYING LOCALLY: %s", downloadStatus.getUri());
 						playVideo(downloadStatus.getUri(), downloadStatus.getAudioUri(), null);
+
+						// get the video statistics
+						compositeDisposable.add(YouTubeTasks.getVideoDetails(ctx, youTubeVideo.getVideoId())
+							.subscribe(video -> {
+								if (video != null) {
+									setupInfoDisplay(video);
+								}
+							}));
+
 					} else {
 						compositeDisposable.add(
 							youTubeVideo.getDesiredStream(
@@ -480,6 +503,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 										Uri uri = selection.getVideoStreamUri();
 										Logger.i(YouTubePlayerV2Fragment.this, ">> PLAYING: %s, audio: %s", uri, selection.getAudioStreamUri());
 										playVideo(uri, selection.getAudioStreamUri(), desiredStream);
+										setupInfoDisplay(video);
 									} else {
 										videoPlaybackError(selectionPolicy.getErrorMessage(getContext()));
 									}
@@ -672,12 +696,6 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 							}
 						})
 		);
-
-		if (youTubeVideo.getDescription() == null && fetchDescriptionAndLikeCount) {
-			// get the video description
-			compositeDisposable.add(YouTubeTasks.getVideoDescription(youTubeVideo)
-					.subscribe(description -> Linker.setTextAndLinkify(videoDescriptionTextView, description)));
-		}
 
 		// check if the user has subscribed to a channel... if he has, then change the state of
 		// the subscribe button
