@@ -14,4 +14,5 @@
     <string name="external_storage_not_available">Tidak bisa mengunduh berkas karena penyimpanan eksternal tidak tersedia.</string>
     <string name="video_stream_not_found_with_request_resolution">Tidak ada stream video yang ditemukan untuk resolusi yang diminta, antara %s - %s</string>
     <string name="warning_metered_network_download">Perangkat anda tersambung ke jaringan terukur. Untuk menghindari potensi biaya ekstra penggunaan data, direkomendasikan untuk tersambung ke jaringan tak terbatas. Tetap unduh video\?</string>
+    <string name="unable_to_delete_file">Tidak bisa menghapus berkas unduhan: \'%s\'</string>
 </resources>
