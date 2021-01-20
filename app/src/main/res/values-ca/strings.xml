@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="could_not_get_channel">No s\'ha pogut baixar la informació del canal.</string>
+    <string name="could_not_get_videos">No s\'han pogut obtenir %s vídeos.</string>
+</resources>

@@ -10,7 +10,7 @@
     <string name="error_check_if_user_has_subbed">Kullanıcı (id=%s) kanalına abone mi değil mi kontrol edilemiyor</string>
     <string name="error_unable_to_subscribe">(id=%s) kanalı aboneliğinden çıkılamıyor</string>
     <string name="import_subscriptions">Abonelikleri içe aktar</string>
-    <string name="import_subscriptions_description">Aboneliklerinizi YouTube\'dan, önce https://www.youtube.com/subscription_manager adresini ziyaret ederek ve alt kısımdaki \"Abonelikleri Dışarı Aktar\" düğmesini tıklayarak içe aktarın. Ardından, aşağıda \"Abonelikler Dosyasını Seç\" i tıklayarak \"subscription_manager\" başlıklı dışa aktarılmış dosyayı seçin.</string>
+    <string name="import_subscriptions_description">Önce https://takeout.google.com adresini ziyaret ederek aboneliklerinizi YouTube\'dan içe aktarın. \"YouTube ve YouTube Müzik\" dışındaki tüm hizmetlerin seçimini kaldırın ve abonelikler dışında her şeyin seçimini kaldırmak için \"Tüm YouTube verileri dahil\" seçeneğini tıklayın. \"İleri\" ve ardından \"Dışa aktarım oluştur\" seçeneğini tıklayın. Dışa aktarma işlemi tamamlandığında, yeni geldiğiniz web sayfasında görünecek ve indirme bağlantısını içeren bir e-posta alacaksınız. Dosyayı indirin ve ondan subscriptions.json dosyasını çıkarın (/Takeout/YouTube and YouTube Music/subscriptions/ altında bulunur). Ardından, aşağıdaki \"Abonelik Dosyasını Seç\" seçeneğini tıklayarak dışa aktarılan dosyayı seçin.</string>
     <string name="subscriptions_to_channels_imported">%d kanal(lar)ına abonelik içe aktarıldı.</string>
     <string name="select_xml_file">Abonelikler Dosyasını Seç</string>
     <string name="select_all">Tümünü Seç</string>

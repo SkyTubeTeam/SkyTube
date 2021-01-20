@@ -131,4 +131,10 @@
     <string name="no_resolution_specified">なし</string>
     <string name="pref_summary_minimum_res">最小解像度の選択: %s</string>
     <string name="pref_title_minimum_res">最小解像度</string>
+    <string name="pref_title_autocast">AutoCast</string>
+    <string name="pref_title_chromecast_none">なし</string>
+    <string name="pref_chromecast_category">Chromecast</string>
+    <string name="pref_summary_metered_network_usage">従量課金制ネットワークでビデオをダウンロード/視聴しようとした時: %s</string>
+    <string name="pref_title_metered_network_usage">従量課金制ネットワークの使用</string>
+    <string name="pref_summary_maximum_res_metered">従量課金制ネットワーク経由でストリーミング時の最大解像度を選択: %s</string>
 </resources>
