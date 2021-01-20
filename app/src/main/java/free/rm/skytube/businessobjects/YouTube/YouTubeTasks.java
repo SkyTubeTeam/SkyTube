@@ -279,7 +279,8 @@ public class YouTubeTasks {
                 .doOnError(throwable -> {
                     Log.e(TAG, "Unable to get video details, where id=" + content, throwable);
                     SkyTubeApp.notifyUserOnError(context, throwable);
-                });
+                })
+                .onErrorComplete();
     }
 
     /**
@@ -303,16 +304,15 @@ public class YouTubeTasks {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(streamInfo -> {
                     if (streamInfo != null) {
-                        long like = streamInfo.getLikeCount();
-                        long dislike = streamInfo.getDislikeCount();
+                        final long like = streamInfo.getLikeCount();
+                        final long dislike = streamInfo.getDislikeCount();
                         youTubeVideo.setLikeDislikeCount(like >= 0 ? like : null, dislike >= 0 ? dislike : null);
 
-                        long views = streamInfo.getViewCount();
+                        final long views = streamInfo.getViewCount();
                         if (views >= 0) {
                             youTubeVideo.setViewCount(BigInteger.valueOf(views));
                         }
 
-                        youTubeVideo.setLikeDislikeCount(streamInfo.getLikeCount(), streamInfo.getDislikeCount());
                         youTubeVideo.setDescription(NewPipeUtils.filterHtml(streamInfo.getDescription()));
                         listener.onGetDesiredStream(streamInfo, youTubeVideo);
                     }
