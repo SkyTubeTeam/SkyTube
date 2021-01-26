@@ -23,6 +23,8 @@ jobs:
         path: ~/.gradle/caches
         key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
         restore-keys: ${{ runner.os }}-gradle
+    - name: Run Tests
+      run: ./gradlew testOssDebugUnitTest
     - name: Build with Gradle
       run: ./gradlew assembleDebug
     - name: Upload Artifacts - OSS version
