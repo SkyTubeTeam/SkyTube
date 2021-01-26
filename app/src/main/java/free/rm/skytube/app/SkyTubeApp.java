@@ -33,6 +33,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Looper;
 import android.os.SystemClock;
 import android.util.Log;
 import android.widget.Toast;
@@ -40,6 +41,7 @@ import android.widget.Toast;
 import androidx.annotation.ArrayRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.core.graphics.ColorUtils;
@@ -57,6 +59,7 @@ import java.net.SocketException;
 import java.util.Arrays;
 import java.util.List;
 
+import free.rm.skytube.BuildConfig;
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.FeedUpdaterReceiver;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
@@ -129,6 +132,39 @@ public class SkyTubeApp extends MultiDexApplication {
 			Log.e("SkyTubeApp", "Undeliverable exception received, not sure what to do" + e.getMessage(), e);
 		});
 	}
+
+	@RequiresApi(api = Build.VERSION_CODES.M)
+	private static void uiThreadImpl() {
+		if (!Looper.getMainLooper().isCurrentThread()) {
+			throw new RuntimeException("Expected to be executing in UI!");
+		}
+	}
+
+	public static void uiThread() {
+		if (BuildConfig.DEBUG) {
+			Log.i("SkyTubeApp", "Expected to be UI thread : " + Thread.currentThread().getName() + " [" + Build.VERSION.SDK_INT + ']');
+			if (Build.VERSION.SDK_INT >= 29) {
+				uiThreadImpl();
+			}
+		}
+	}
+
+	@RequiresApi(api = Build.VERSION_CODES.M)
+	private static void nonUiThreadImpl() {
+		if (Looper.getMainLooper().isCurrentThread()) {
+			throw new RuntimeException("Expected to be NOT blocking the UI!");
+		}
+	}
+
+	public static void nonUiThread() {
+		if (BuildConfig.DEBUG) {
+			Log.i("SkyTubeApp", "Expected to be non-UI thread : " + Thread.currentThread().getName() + " [" + Build.VERSION.SDK_INT + ']');
+			if (Build.VERSION.SDK_INT >= 29) {
+				nonUiThreadImpl();
+			}
+		}
+	}
+
 	@Override
 	public void onTerminate() {
 		COMPOSITE_DISPOSABLE.clear();

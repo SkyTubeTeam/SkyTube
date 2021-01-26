@@ -139,6 +139,7 @@ public class NewPipeService {
      * @throws IOException
      */
     private List<YouTubeVideo> getChannelVideos(String channelId) throws NewPipeException {
+        SkyTubeApp.nonUiThread();
         VideoPagerWithChannel pager = getChannelPager(channelId);
         List<YouTubeVideo> result = pager.getNextPageAsVideos();
         Logger.i(this, "getChannelVideos for %s(%s)  -> %s videos", pager.getChannel().getTitle(), channelId, result.size());
@@ -153,6 +154,7 @@ public class NewPipeService {
      * @throws IOException
      */
     private List<YouTubeVideo> getFeedVideos(String channelId) throws ExtractionException, IOException, NewPipeException {
+        SkyTubeApp.nonUiThread();
         final String url = getListLinkHandler(channelId).getUrl();
         final FeedExtractor feedExtractor = streamingService.getFeedExtractor(url);
         if (feedExtractor == null) {
@@ -173,6 +175,8 @@ public class NewPipeService {
      */
     public List<YouTubeVideo> getVideosFromFeedOrFromChannel(String channelId) throws NewPipeException {
         try {
+            SkyTubeApp.nonUiThread();
+
             List<YouTubeVideo> videos = getFeedVideos(channelId);
             if (videos != null) {
                 return videos;
@@ -308,6 +312,7 @@ public class NewPipeService {
      * @throws IOException
      */
     public YouTubeVideo getDetails(String videoId) throws ExtractionException, IOException {
+        SkyTubeApp.nonUiThread();
         LinkHandler url = streamingService.getStreamLHFactory().fromId(videoId);
         StreamExtractor extractor = streamingService.getStreamExtractor(url);
         extractor.fetchPage();
@@ -371,6 +376,7 @@ public class NewPipeService {
 
 
     public VideoPager getSearchResult(String query) throws NewPipeException {
+        SkyTubeApp.nonUiThread();
         try {
             SearchExtractor extractor = streamingService.getSearchExtractor(query);
             extractor.fetchPage();
