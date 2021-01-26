@@ -162,6 +162,7 @@ public class DownloadedVideosDb extends SQLiteOpenHelperEx implements OrderableD
 	 * @return List of Videos
 	 */
 	public List<YouTubeVideo> getDownloadedVideos() {
+		SkyTubeApp.nonUiThread();
 		return getDownloadedVideos(DownloadedVideosTable.COL_ORDER + " DESC");
 	}
 
@@ -249,6 +250,7 @@ public class DownloadedVideosDb extends SQLiteOpenHelperEx implements OrderableD
 	 */
 	public @NonNull Completable removeDownload(Context ctx, VideoId videoId) {
 		return Completable.fromCallable(() -> {
+			SkyTubeApp.nonUiThread();
 			Status status = getVideoFileStatus(videoId);
 			Log.i(TAG, "removeDownload for " + videoId + " -> " + status);
 			if (status != null) {
@@ -268,6 +270,7 @@ public class DownloadedVideosDb extends SQLiteOpenHelperEx implements OrderableD
 			.onErrorComplete()
 			.subscribeOn(Schedulers.io())
 				.doOnComplete(() -> {
+					SkyTubeApp.uiThread();
 					for (DownloadedVideosListener listener : listeners) {
 						listener.onDownloadedVideosUpdated();
 					}
@@ -312,6 +315,7 @@ public class DownloadedVideosDb extends SQLiteOpenHelperEx implements OrderableD
 	 */
 	public Single<Boolean> isVideoDownloaded(VideoId video) {
 		return Single.fromCallable(() -> {
+			SkyTubeApp.nonUiThread();
 			Cursor cursor = getReadableDatabase().query(
 					DownloadedVideosTable.TABLE_NAME,
 					new String[]{DownloadedVideosTable.COL_FILE_URI},

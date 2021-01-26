@@ -253,6 +253,7 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 					.observeOn(AndroidSchedulers.mainThread())
 					.flatMapCompletable(channelIds ->
 						processChannelIds(channelIds).doOnComplete(() -> {
+							SkyTubeApp.uiThread();
 							if (showFetchingVideosDialog) {
 								hideFetchingVideosDialog();
 							}
@@ -343,6 +344,7 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 	 * 2.  No in the DB and hence we need to retrieve them from the YouTube servers.
 	 */
 	Completable processChannelIds(List<String> channelIds) {
+		SkyTubeApp.uiThread();
 		numVideosFetched      = 0;
 		numChannelsFetched    = 0;
 		numChannelsSubscribed = channelIds.size();

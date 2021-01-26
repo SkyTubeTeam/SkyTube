@@ -93,6 +93,7 @@ public class YouTubeTasks {
         return Flowable.fromIterable(channelIds)
                 .flatMapSingle(channelId ->
                         Single.fromCallable(() -> {
+                            SkyTubeApp.nonUiThread();
                             Map<String, Long> alreadyKnownVideos = subscriptionsDb.getSubscribedChannelVideosByChannelToTimestamp(channelId);
                             List<YouTubeVideo> newVideos = fetchVideos(subscriptionsDb, alreadyKnownVideos, channelId);
                             List<YouTubeVideo> detailedList = new ArrayList<>();

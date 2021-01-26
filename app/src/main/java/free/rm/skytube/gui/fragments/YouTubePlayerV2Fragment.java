@@ -578,6 +578,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 		downloadVideo.setVisible(false);
 		if (youTubeVideo != null) {
 			DownloadedVideosDb.getVideoDownloadsDb().isVideoDownloaded(youTubeVideo).subscribe(isDownloaded -> {
+				SkyTubeApp.uiThread();
 				if (!isDownloaded) {
 					downloadVideo.setVisible(true);
 				}
