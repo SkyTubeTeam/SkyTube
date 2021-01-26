@@ -49,6 +49,8 @@ import free.rm.skytube.businessobjects.db.BookmarksDb;
  */
 public class Linker {
 
+	private final static String TAG = Linker.class.getSimpleName();
+
 	public static void configure(TextView textView) {
 		textView.setAutoLinkMask(0);
 		textView.setMovementMethod(new TouchableMovementMethod(new LinkListener(textView.getContext())));
@@ -59,7 +61,7 @@ public class Linker {
 	 * @param text
 	 */
 	public static void setTextAndLinkify(TextView textView, String text) {
-		Logger.i(Linker.class.getSimpleName(), "setText: %s", text);
+		Logger.i(TAG, String.format("setText: %s", text));
 		Spanned spanns = span(text);
 		textView.setText(spanns);
 	}
@@ -98,7 +100,7 @@ public class Linker {
 
 		@Override
 		public void onClick(URLSpan span, boolean longClick) {
-			Logger.i(Linker.class.getSimpleName(), "onClick: %s, longClick= %s", span.getURL(), longClick);
+			Logger.i(TAG, String.format("onClick: %s, longClick= %s", span.getURL(), longClick));
 			if (longClick) {
 				longClick(span.getURL());
 			} else {
