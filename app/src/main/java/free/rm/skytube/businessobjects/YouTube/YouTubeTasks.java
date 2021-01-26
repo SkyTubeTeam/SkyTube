@@ -11,6 +11,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import org.schabi.newpipe.extractor.StreamingService;
 import org.schabi.newpipe.extractor.exceptions.ExtractionException;
+import org.schabi.newpipe.extractor.stream.StreamInfo;
 
 import java.io.IOException;
 import java.math.BigInteger;
@@ -50,6 +51,7 @@ import io.reactivex.rxjava3.core.Scheduler;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
+import io.reactivex.rxjava3.subjects.CompletableSubject;
 
 import static free.rm.skytube.app.SkyTubeApp.getContext;
 
@@ -295,28 +297,23 @@ public class YouTubeTasks {
     }
 
     /**
-     * Task to retrieve the Uri for the given YouTube video.
+     * Task to setup the appropriate Uri for the streams for the given YouTube video.
      */
-    public static Disposable getVideoStream(@NonNull YouTubeVideo youTubeVideo,
-                                            @NonNull GetDesiredStreamListener listener) {
+    public static Completable getDesiredStream(@NonNull YouTubeVideo youTubeVideo,
+                                                    @NonNull GetDesiredStreamListener listener) {
         return Single.fromCallable(() -> NewPipeService.get().getStreamInfoByVideoId(youTubeVideo.getId()))
                 .subscribeOn(Schedulers.io())
+                .doOnError(listener::onGetDesiredStreamError)
+                .onErrorComplete()
+                .map(streamInfo -> {
+                    youTubeVideo.updateFromStreamInfo(streamInfo);
+                    return streamInfo;
+                })
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(streamInfo -> {
-                    if (streamInfo != null) {
-                        final long like = streamInfo.getLikeCount();
-                        final long dislike = streamInfo.getDislikeCount();
-                        youTubeVideo.setLikeDislikeCount(like >= 0 ? like : null, dislike >= 0 ? dislike : null);
-
-                        final long views = streamInfo.getViewCount();
-                        if (views >= 0) {
-                            youTubeVideo.setViewCount(BigInteger.valueOf(views));
-                        }
-
-                        youTubeVideo.setDescription(NewPipeUtils.filterHtml(streamInfo.getDescription()));
-                        listener.onGetDesiredStream(streamInfo, youTubeVideo);
-                    }
-                }, listener::onGetDesiredStreamError);
+                .flatMapCompletable(streamInfo -> {
+                    listener.onGetDesiredStream(streamInfo, youTubeVideo);
+                    return CompletableSubject.create();
+                });
     }
 
     /**

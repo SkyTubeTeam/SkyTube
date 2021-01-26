@@ -296,22 +296,39 @@ public class DownloadedVideosDb extends SQLiteOpenHelperEx implements OrderableD
 		Log.i(TAG, "exit removeParentFolderIfEmpty");
 	}
 
-	public boolean isVideoDownloaded(VideoId video) {
-		Cursor cursor = getReadableDatabase().query(
-						DownloadedVideosTable.TABLE_NAME,
-						new String[]{DownloadedVideosTable.COL_FILE_URI},
-						DownloadedVideosTable.COL_YOUTUBE_VIDEO_ID + " = ?",
-						new String[]{video.getId()}, null, null, null);
-
-		boolean isDownloaded = false;
-		if (cursor.moveToNext()) {
-			String uri = cursor.getString(cursor.getColumnIndex(DownloadedVideosTable.COL_FILE_URI));
-			isDownloaded = uri != null;
-		}
-		cursor.close();
-		return isDownloaded;
+	/**
+	 * Returns whether or not the video has been downloaded.
+	 *
+	 * @return  True if the video was previously saved by the user.
+	 */
+	public Single<Boolean> isVideoDownloaded(@NonNull YouTubeVideo video) {
+		return isVideoDownloaded(video.getVideoId());
 	}
 
+	/**
+	 * Returns whether or not the video with the given ID has been downloaded.
+	 *
+	 * @return  True if the video was previously saved by the user.
+	 */
+	public Single<Boolean> isVideoDownloaded(VideoId video) {
+		return Single.fromCallable(() -> {
+			Cursor cursor = getReadableDatabase().query(
+					DownloadedVideosTable.TABLE_NAME,
+					new String[]{DownloadedVideosTable.COL_FILE_URI},
+					DownloadedVideosTable.COL_YOUTUBE_VIDEO_ID + " = ?",
+					new String[]{video.getId()}, null, null, null);
+
+			boolean isDownloaded = false;
+			if (cursor.moveToNext()) {
+				String uri = cursor.getString(cursor.getColumnIndex(DownloadedVideosTable.COL_FILE_URI));
+				isDownloaded = uri != null;
+			}
+			cursor.close();
+			return isDownloaded;
+		})
+				.subscribeOn(Schedulers.io())
+				.observeOn(AndroidSchedulers.mainThread());
+	}
 
 	private Status getVideoFileStatus(VideoId videoId) {
 		try (Cursor cursor = getReadableDatabase().query(

@@ -681,11 +681,13 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 
 	@Override
 	public void onPrepareOptionsMenu(Menu menu) {
-		if (youTubeVideo != null && !youTubeVideo.isDownloaded()) {
-			menu.findItem(R.id.download_video).setVisible(true);
-		} else {
-			menu.findItem(R.id.download_video).setVisible(false);
-		}
+		menu.findItem(R.id.download_video).setVisible(false);
+		compositeDisposable.add(DownloadedVideosDb.getVideoDownloadsDb().isVideoDownloaded(youTubeVideo)
+				.subscribe(isDownloaded -> {
+					if (!isDownloaded) {
+						menu.findItem(R.id.download_video).setVisible(true);
+					}
+				}));
 	}
 
 	@Override
@@ -806,7 +808,7 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 								}
 							} else {
 								compositeDisposable.add(
-										youTubeVideo.getDesiredStream(new GetDesiredStreamListener() {
+										YouTubeTasks.getDesiredStream(youTubeVideo, new GetDesiredStreamListener() {
 											@Override
 											public void onGetDesiredStream(StreamInfo desiredStream, YouTubeVideo youTubeVideo) {
 												Linker.setTextAndLinkify(videoDescriptionTextView, youTubeVideo.getDescription());
@@ -830,7 +832,7 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 												}
 											}
 										})
-								);
+								.subscribe());
 							}
 						}));
 			} else {
