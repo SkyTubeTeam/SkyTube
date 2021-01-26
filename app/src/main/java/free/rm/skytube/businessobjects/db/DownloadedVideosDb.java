@@ -266,7 +266,12 @@ public class DownloadedVideosDb extends SQLiteOpenHelperEx implements OrderableD
 				displayGenericError(ctx, exception);
 			})
 			.onErrorComplete()
-			.subscribeOn(Schedulers.io());
+			.subscribeOn(Schedulers.io())
+				.doOnComplete(() -> {
+					for (DownloadedVideosListener listener : listeners) {
+						listener.onDownloadedVideosUpdated();
+					}
+				});
 	}
 
 	private void removeParentFolderIfEmpty(Status file, File downloadParentFolder) {
