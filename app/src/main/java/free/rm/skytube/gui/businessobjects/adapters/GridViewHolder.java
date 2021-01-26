@@ -277,30 +277,33 @@ public class GridViewHolder extends RecyclerView.ViewHolder implements Serializa
 
 	private void onOptionsButtonClick(final View view, YouTubeVideo youTubeVideo) {
 		final PopupMenu popupMenu = createPopup(R.menu.video_options_menu, view);
-		Menu menu = popupMenu.getMenu();
+		final Menu menu = popupMenu.getMenu();
 		compositeDisposable.add(DatabaseTasks.isVideoBookmarked(youTubeVideo.getId(), menu));
 
 		// If playback history is not disabled, see if this video has been watched. Otherwise, hide the "mark watched" & "mark unwatched" options from the menu.
 		if(!SkyTubeApp.getPreferenceManager().getBoolean(context.getString(R.string.pref_key_disable_playback_status), false)) {
 			compositeDisposable.add(DatabaseTasks.isVideoWatched(youTubeVideo.getId(), menu));
 		} else {
-			popupMenu.getMenu().findItem(R.id.mark_watched).setVisible(false);
-			popupMenu.getMenu().findItem(R.id.mark_unwatched).setVisible(false);
+			menu.findItem(R.id.mark_watched).setVisible(false);
+			menu.findItem(R.id.mark_unwatched).setVisible(false);
 		}
 
 		boolean online = SkyTubeApp.isConnected(view.getContext());
 
-		if(youTubeVideo.isDownloaded()) {
-			popupMenu.getMenu().findItem(R.id.delete_download).setVisible(true);
-			popupMenu.getMenu().findItem(R.id.download_video).setVisible(false);
-		} else {
-			popupMenu.getMenu().findItem(R.id.delete_download).setVisible(false);
-			popupMenu.getMenu().findItem(R.id.download_video).setVisible(online);
-		}
+		menu.findItem(R.id.download_video).setVisible(false);
+		menu.findItem(R.id.delete_download).setVisible(false);
+
+		compositeDisposable.add(DownloadedVideosDb.getVideoDownloadsDb().isVideoDownloaded(youTubeVideo).subscribe(isDownloaded -> {
+			if(isDownloaded) {
+				menu.findItem(R.id.delete_download).setVisible(true);
+			} else {
+				menu.findItem(R.id.download_video).setVisible(online);
+			}
+		}));
 		if(SkyTubeApp.getPreferenceManager().getBoolean(context.getString(R.string.pref_key_enable_video_blocker), true)) {
-			popupMenu.getMenu().findItem(R.id.block_channel).setVisible(true);
+			menu.findItem(R.id.block_channel).setVisible(true);
 		} else {
-			popupMenu.getMenu().findItem(R.id.block_channel).setVisible(false);
+			menu.findItem(R.id.block_channel).setVisible(false);
 		}
 		popupMenu.setOnMenuItemClickListener(item -> {
 			switch(item.getItemId()) {
@@ -322,10 +325,10 @@ public class GridViewHolder extends RecyclerView.ViewHolder implements Serializa
 					updateViewsData();
 					return true;
 				case R.id.bookmark_video:
-					youTubeVideo.bookmarkVideo(context, popupMenu.getMenu());
+					youTubeVideo.bookmarkVideo(context, menu);
 					return true;
 				case R.id.unbookmark_video:
-					youTubeVideo.unbookmarkVideo(context, popupMenu.getMenu());
+					youTubeVideo.unbookmarkVideo(context, menu);
 					return true;
 				case R.id.view_thumbnail:
 					Intent i = new Intent(context, ThumbnailViewerActivity.class);

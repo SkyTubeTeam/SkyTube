@@ -481,7 +481,7 @@ public abstract class BaseActivity extends AppCompatActivity implements MainActi
 					.subscribe(description -> playVideoOnChromecast(video, position)));
 		} else {
 			compositeDisposable.add(
-					video.getDesiredStream(new GetDesiredStreamListener() {
+					YouTubeTasks.getDesiredStream(video, new GetDesiredStreamListener() {
 						@Override
 						public void onGetDesiredStream(StreamInfo desiredStream, YouTubeVideo video) {
 							if(mCastSession == null)
@@ -530,7 +530,7 @@ public abstract class BaseActivity extends AppCompatActivity implements MainActi
 							}
 						}
 					})
-			);
+						.subscribe());
 		}
 	}
 

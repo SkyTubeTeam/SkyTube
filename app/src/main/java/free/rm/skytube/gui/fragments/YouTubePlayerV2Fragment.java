@@ -484,39 +484,38 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 
 					} else {
 						compositeDisposable.add(
-							youTubeVideo.getDesiredStream(
+							YouTubeTasks.getDesiredStream(youTubeVideo,
 								new GetDesiredStreamListener() {
+									@Override
+									public void onGetDesiredStream(StreamInfo desiredStream, YouTubeVideo video) {
+										// hide the loading video view (progress bar)
+										loadingVideoView.setVisibility(View.GONE);
 
-							@Override
-							public void onGetDesiredStream(StreamInfo desiredStream, YouTubeVideo video) {
-								// hide the loading video view (progress bar)
-								loadingVideoView.setVisibility(View.GONE);
-
-								// Play the video.  Check if this fragment is visible before playing the
-								// video.  It might not be visible if the user clicked on the back button
-								// before the video streams are retrieved (such action would cause the app
-								// to crash if not catered for...).
-								if (isVisible()) {
-									StreamSelectionPolicy selectionPolicy = SkyTubeApp.getSettings().getDesiredVideoResolution(false);
-									StreamSelectionPolicy.StreamSelection selection = selectionPolicy.select(desiredStream);
-									if (selection != null) {
-										Uri uri = selection.getVideoStreamUri();
-										Logger.i(YouTubePlayerV2Fragment.this, ">> PLAYING: %s, audio: %s", uri, selection.getAudioStreamUri());
-										playVideo(uri, selection.getAudioStreamUri(), desiredStream);
-										setupInfoDisplay(video);
-									} else {
-										videoPlaybackError(selectionPolicy.getErrorMessage(getContext()));
+										// Play the video.  Check if this fragment is visible before playing the
+										// video.  It might not be visible if the user clicked on the back button
+										// before the video streams are retrieved (such action would cause the app
+										// to crash if not catered for...).
+										if (isVisible()) {
+											StreamSelectionPolicy selectionPolicy = SkyTubeApp.getSettings().getDesiredVideoResolution(false);
+											StreamSelectionPolicy.StreamSelection selection = selectionPolicy.select(desiredStream);
+											if (selection != null) {
+												Uri uri = selection.getVideoStreamUri();
+												Logger.i(YouTubePlayerV2Fragment.this, ">> PLAYING: %s, audio: %s", uri, selection.getAudioStreamUri());
+												playVideo(uri, selection.getAudioStreamUri(), desiredStream);
+												setupInfoDisplay(video);
+											} else {
+												videoPlaybackError(selectionPolicy.getErrorMessage(getContext()));
+											}
+										}
 									}
-								}
-							}
 
-							@Override
-							public void onGetDesiredStreamError(Throwable throwable) {
-								if (throwable != null) {
-									videoPlaybackError(throwable.getMessage());
-								}
-							}
-						}));
+									@Override
+									public void onGetDesiredStreamError(Throwable throwable) {
+										if (throwable != null) {
+											videoPlaybackError(throwable.getMessage());
+										}
+									}
+						}).subscribe());
 					}
 				} else {
 					openAsLiveStream();
@@ -576,11 +575,12 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 	@Override
 	public void onPrepareOptionsMenu(Menu menu) {
 		final MenuItem downloadVideo = menu.findItem(R.id.download_video);
-		if (youTubeVideo != null && !youTubeVideo.isDownloaded()) {
-			downloadVideo.setVisible(true);
-		} else {
-			downloadVideo.setVisible(false);
-		}
+		downloadVideo.setVisible(false);
+		DownloadedVideosDb.getVideoDownloadsDb().isVideoDownloaded(youTubeVideo).subscribe(isDownloaded -> {
+			if (!isDownloaded) {
+				downloadVideo.setVisible(true);
+			}
+		});
 	}
 
 

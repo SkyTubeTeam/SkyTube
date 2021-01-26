@@ -55,13 +55,18 @@ import free.rm.skytube.app.StreamSelectionPolicy;
 import free.rm.skytube.businessobjects.FileDownloader;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.YouTubeTasks;
+import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeUtils;
 import free.rm.skytube.businessobjects.YouTube.newpipe.VideoId;
 import free.rm.skytube.businessobjects.db.BookmarksDb;
 import free.rm.skytube.businessobjects.db.DatabaseResult;
 import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
 import free.rm.skytube.businessobjects.interfaces.GetDesiredStreamListener;
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Completable;
+import io.reactivex.rxjava3.core.Maybe;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.subjects.CompletableSubject;
 
 import static free.rm.skytube.app.SkyTubeApp.getContext;
 import static free.rm.skytube.app.SkyTubeApp.getStr;
@@ -468,16 +473,16 @@ public class YouTubeVideo extends CardData implements Serializable {
 		SkyTubeApp.copyUrl(context, "Video URL", getVideoUrl());
 	}
 
-	/**
-	 * If the user have previously downloaded the video, this method will return the Uri of the file;
-	 * else, get the stream for this video (based on the user's preference) by communicating with
-	 * YouTube servers.  When done, the stream Uri will be returned via the passed
-	 * {@link GetDesiredStreamListener}.
-	 *
-	 * @param listener Instance of {@link GetDesiredStreamListener} to pass the stream through.
-	 */
-	public Disposable getDesiredStream(@NonNull GetDesiredStreamListener listener) {
-		return YouTubeTasks.getVideoStream(this, listener);
+	public void updateFromStreamInfo(StreamInfo streamInfo) {
+		final long like = streamInfo.getLikeCount();
+		final long dislike = streamInfo.getDislikeCount();
+		this.setLikeDislikeCount(like >= 0 ? like : null, dislike >= 0 ? dislike : null);
+
+		final long views = streamInfo.getViewCount();
+		if (views >= 0) {
+			this.setViewCount(BigInteger.valueOf(views));
+		}
+		this.setDescription(NewPipeUtils.filterHtml(streamInfo.getDescription()));
 	}
 
 	public Long getRetrievalTimestamp() {
@@ -489,63 +494,57 @@ public class YouTubeVideo extends CardData implements Serializable {
 	}
 
 	/**
-	 * Returns whether or not this video has been downloaded.
-	 *
-	 * @return  True if the video was previously saved by the user.
-	 */
-	public boolean isDownloaded() {
-		return DownloadedVideosDb.getVideoDownloadsDb().isVideoDownloaded(YouTubeVideo.this.getVideoId());
-	}
-
-	/**
 	 * Downloads this video.
 	 *
 	 * @return The download task.
 	 * @param context Context
 	 */
-	public Disposable downloadVideo(final Context context) {
-		if (isDownloaded())
-			return Disposable.empty();
+	public Completable downloadVideo(final Context context) {
+		return DownloadedVideosDb.getVideoDownloadsDb().isVideoDownloaded(YouTubeVideo.this.getVideoId())
+				.flatMapCompletable((downloadedVideo) -> {
+			if (downloadedVideo) {
+				return Completable.complete();
+			} else {
+				return YouTubeTasks.getDesiredStream(this, new GetDesiredStreamListener() {
+					@Override
+					public void onGetDesiredStream(StreamInfo streamInfo, YouTubeVideo video) {
 
-		// if description is not yet downloaded, get it, and call the download action again.
-		return getDesiredStream(new GetDesiredStreamListener() {
-			@Override
-			public void onGetDesiredStream(StreamInfo streamInfo, YouTubeVideo video) {
+						final Settings settings = SkyTubeApp.getSettings();
+						StreamSelectionPolicy selectionPolicy = settings.getDesiredVideoResolution(true);
+						StreamSelectionPolicy.StreamSelection streamSelection = selectionPolicy.select(streamInfo);
+						if (streamSelection != null) {
+							VideoStream videoStream = streamSelection.getVideoStream();
+							// download the video
+							downloadTheVideo(videoStream, settings);
+						} else {
+							Toast.makeText(context, selectionPolicy.getErrorMessage(context), Toast.LENGTH_LONG).show();
+						}
+					}
 
-				final Settings settings = SkyTubeApp.getSettings();
-				StreamSelectionPolicy selectionPolicy = settings.getDesiredVideoResolution(true);
-				StreamSelectionPolicy.StreamSelection streamSelection = selectionPolicy.select(streamInfo);
-				if (streamSelection != null) {
-					VideoStream videoStream = streamSelection.getVideoStream();
-					// download the video
-					downloadTheVideo(videoStream, settings);
-				} else {
-					Toast.makeText(context, selectionPolicy.getErrorMessage(context), Toast.LENGTH_LONG).show();
-				}
-			}
+					private void downloadTheVideo(Stream stream, Settings settings) {
+						new VideoDownloader()
+								.setRemoteFileUrl(stream.getUrl())
+								.setDirType(Environment.DIRECTORY_MOVIES)
+								.setTitle(getTitle())
+								.setDescription(getStr(R.string.video) + " ― " + getChannelName())
+								.setOutputFileName(getId() + " - " + getTitle())
+								.setOutputDirectoryName(getChannelName())
+								.setParentDirectory(settings.getDownloadParentFolder())
+								.setOutputFileExtension(stream.getFormat().suffix)
+								.setAllowedOverRoaming(false)
+								.setAllowedNetworkTypesFlags(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE)
+								.displayPermissionsActivity(context);
+					}
 
-			private void downloadTheVideo(Stream stream, Settings settings) {
-				new VideoDownloader()
-						.setRemoteFileUrl(stream.getUrl())
-						.setDirType(Environment.DIRECTORY_MOVIES)
-						.setTitle(getTitle())
-						.setDescription(getStr(R.string.video) + " ― " + getChannelName())
-						.setOutputFileName(getId() + " - " + getTitle())
-						.setOutputDirectoryName(getChannelName())
-						.setParentDirectory(settings.getDownloadParentFolder())
-						.setOutputFileExtension(stream.getFormat().suffix)
-						.setAllowedOverRoaming(false)
-						.setAllowedNetworkTypesFlags(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE)
-						.displayPermissionsActivity(context);
-			}
-
-			@Override
-			public void onGetDesiredStreamError(Throwable throwable) {
-				Logger.e(YouTubeVideo.this, "Stream error: " + throwable.getMessage(), throwable);
-				Context context = getContext();
-				Toast.makeText(context,
-						String.format(context.getString(R.string.video_download_stream_error), getTitle()),
-						Toast.LENGTH_LONG).show();
+					@Override
+					public void onGetDesiredStreamError(Throwable throwable) {
+						Logger.e(YouTubeVideo.this, "Stream error: " + throwable.getMessage(), throwable);
+						Context context = getContext();
+						Toast.makeText(context,
+								String.format(context.getString(R.string.video_download_stream_error), getTitle()),
+								Toast.LENGTH_LONG).show();
+					}
+				});
 			}
 		});
 	}
