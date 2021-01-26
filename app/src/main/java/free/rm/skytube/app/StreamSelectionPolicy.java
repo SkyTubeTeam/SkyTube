@@ -20,17 +20,23 @@ package free.rm.skytube.app;
 import android.content.Context;
 import android.net.Uri;
 
+import org.schabi.newpipe.extractor.MediaFormat;
 import org.schabi.newpipe.extractor.stream.AudioStream;
 import org.schabi.newpipe.extractor.stream.StreamInfo;
 import org.schabi.newpipe.extractor.stream.VideoStream;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.YouTube.VideoStream.VideoQuality;
 import free.rm.skytube.businessobjects.YouTube.VideoStream.VideoResolution;
 
 public class StreamSelectionPolicy {
+    private final static List<MediaFormat> VIDEO_FORMAT_QUALITY = Arrays.asList(MediaFormat.WEBM, MediaFormat.MPEG_4, MediaFormat.v3GPP);
+
     private final boolean allowVideoOnly;
     private final VideoResolution maxResolution;
     private final VideoResolution minResolution;
@@ -110,22 +116,32 @@ public class StreamSelectionPolicy {
         throw new IllegalStateException("Unexpected videoQuality:" + videoQuality);
     }
 
-    private VideoStreamWithResolution pickVideo(StreamInfo streamInfo) {
-        VideoStreamWithResolution videoStream = pick(streamInfo.getVideoStreams());
-        if (allowVideoOnly) {
-            VideoStreamWithResolution videoOnlyStream = pick(streamInfo.getVideoOnlyStreams());
-            if (videoOnlyStream != null && videoOnlyStream.isBetterQualityThan(videoStream)) {
-                return videoOnlyStream;
-            }
+    private static boolean isSecondBetterFormat(VideoStream stream1, VideoStream stream2) {
+        final int format1Idx = VIDEO_FORMAT_QUALITY.indexOf(stream1.getFormat());
+        final int format2Idx = VIDEO_FORMAT_QUALITY.indexOf(stream2.getFormat());
+        if (format2Idx < 0) {
+            return false;
         }
-        return videoStream;
+        if (format1Idx < 0) {
+            return true;
+        }
+        return (format2Idx < format1Idx);
+    }
+
+    private VideoStreamWithResolution pickVideo(StreamInfo streamInfo) {
+        List<VideoStream> streams = streamInfo.getVideoStreams();
+        if (allowVideoOnly) {
+            streams = new ArrayList<>(streams);
+            streams.addAll(streamInfo.getVideoOnlyStreams());
+        }
+        return pick(streams);
     }
 
     private VideoStreamWithResolution pick(Collection<VideoStream> streams) {
         VideoStreamWithResolution best = null;
         for (VideoStream stream: streams) {
             VideoStreamWithResolution videoStream = new VideoStreamWithResolution(stream);
-            if (isAllowed(videoStream.resolution)) {
+            if (isAllowed(videoStream.resolution) && isAllowedVideoFormat(videoStream.videoStream.getFormat())) {
                 switch (videoQuality) {
                     case BEST_QUALITY:
                         if (videoStream.isBetterQualityThan(best)) {
@@ -155,6 +171,10 @@ public class StreamSelectionPolicy {
         return true;
     }
 
+    private boolean isAllowedVideoFormat(MediaFormat format) {
+        return VIDEO_FORMAT_QUALITY.contains(format);
+    }
+
     private static class VideoStreamWithResolution {
         final VideoStream videoStream;
         final VideoResolution resolution;
@@ -165,11 +185,11 @@ public class StreamSelectionPolicy {
         }
 
         boolean isBetterQualityThan(VideoStreamWithResolution other) {
-            return other == null || resolution.isBetterQualityThan(other.resolution);
+            return other == null || resolution.isBetterQualityThan(other.resolution) || (resolution == other.resolution && isSecondBetterFormat(other.videoStream, videoStream));
         }
 
         boolean isLessNetworkUsageThan(VideoStreamWithResolution other) {
-            return other == null || resolution.isLessNetworkUsageThan(other.resolution);
+            return other == null || resolution.isLessNetworkUsageThan(other.resolution) || (resolution == other.resolution && isSecondBetterFormat(other.videoStream, videoStream));
         }
     }
 
