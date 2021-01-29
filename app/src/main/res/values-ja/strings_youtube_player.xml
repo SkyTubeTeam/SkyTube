@@ -1,40 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="error_stream_err_unavailable">エラーメッセージは利用できません。</string>
-	<string name="error_stream_decryption_fail">YouTube サービスの復号化コードを読み込みできませんでした。</string>
-	<string name="error_stream_parse_error">解析エラーです。</string>
-
-	<string name="error_video_play">ビデオ再生エラー</string>
-	<string name="error_video_streams_empty">ビデオ %s はストリームがありません。</string>
-	<string name="error_video_streams">ビデオのストリームを取得中にエラーが発生しました。</string>
-	<string name="error_get_video_desc">ビデオの説明を取得中にエラーが発生しました。</string>
-	<string name="error_invalid_url">ビデオの URL が無効です: %s</string>
-
-	<string name="warning_live_video">今はライブストリームを再生できません。ライブストリームを別のアプリで開きますか?</string>
-
-	<string name="ratings_disabled">評価は無効です</string>
-
-	<string name="loading_video">ビデオを読み込んでいます…</string>
-	<string name="open_in_browser">Web ブラウザーで開く</string>
-	<string name="open_with">開く…</string>
-	<string name="share">共有</string>
-	<string name="share_via">共有…</string>
-	<string name="copy_url">URL をコピー</string>
-	<string name="url_copied_to_clipboard">URL をクリップボードにコピーしました。</string>
-
-	<string name="error_get_comments">コメントの取得中にエラーが発生しました。</string>
-	<string name="no_video_comments">このビデオにはコメントがないか、コメントが無効です。</string>
-	<string name="view_replies">返信を表示</string>
-	<string name="hide_replies">返信を非表示</string>
-
-	<string name="enter_video_url">ビデオの URL を入力</string>
-	<string name="play">再生</string>
-	<string name="cancel">キャンセル</string>
-	<string name="clear">クリア</string>
-<string name="mark_watched">再生済みとしてマーク</string>
-	<string name="mark_unwatched">再生済みのマークを解除</string>
-
-	<string name="should_resume">停止した位置から再生を再開しますか？</string>
-	<string name="resume">再開</string>
+    <string name="error_stream_err_unavailable">エラーメッセージは利用できません。</string>
+    <string name="error_stream_decryption_fail">YouTube サービスの復号化コードを読み込みできませんでした。</string>
+    <string name="error_stream_parse_error">解析エラーです。</string>
+    <string name="error_video_play">ビデオ再生エラー</string>
+    <string name="error_video_streams_empty">ビデオ %s はストリームがありません。</string>
+    <string name="error_video_streams">ビデオのストリームを取得中にエラーが発生しました。</string>
+    <string name="error_get_video_desc">ビデオの説明を取得中にエラーが発生しました。</string>
+    <string name="error_invalid_url">ビデオの URL が無効です: %s</string>
+    <string name="warning_live_video">今はライブストリームを再生できません。ライブストリームを別のアプリで開きますか?</string>
+    <string name="ratings_disabled">評価は無効です</string>
+    <string name="loading_video">ビデオを読み込んでいます…</string>
+    <string name="open_in_browser">Web ブラウザーで開く</string>
+    <string name="open_with">開く…</string>
+    <string name="share">共有</string>
+    <string name="share_via">共有…</string>
+    <string name="copy_url">URL をコピー</string>
+    <string name="url_copied_to_clipboard">URL をクリップボードにコピーしました。</string>
+    <string name="error_get_comments">コメントの取得中にエラーが発生しました。</string>
+    <string name="no_video_comments">このビデオにはコメントがないか、コメントがオフになっています。</string>
+    <string name="view_replies">返信を表示</string>
+    <string name="hide_replies">返信を非表示</string>
+    <string name="enter_video_url">ビデオの URL を入力</string>
+    <string name="play">再生</string>
+    <string name="cancel">キャンセル</string>
+    <string name="clear">クリア</string>
+    <string name="mark_watched">再生済みとしてマーク</string>
+    <string name="mark_unwatched">再生済みのマークを解除</string>
+    <string name="should_resume">停止した位置から再生を再開しますか？</string>
+    <string name="resume">再開</string>
     <string name="play_video">ビデオを再生</string>
 </resources>
