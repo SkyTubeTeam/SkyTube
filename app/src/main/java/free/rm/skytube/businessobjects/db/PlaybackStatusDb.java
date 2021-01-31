@@ -11,9 +11,16 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
+import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
+import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.interfaces.VideoPlayStatusUpdateListener;
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Maybe;
+import io.reactivex.rxjava3.core.Single;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 /**
  * A database (DB) that stores video playback history
@@ -106,21 +113,33 @@ public class PlaybackStatusDb extends SQLiteOpenHelperEx {
 	 *
 	 * @param video {@link YouTubeVideo}
 	 * @param position Number of milliseconds
-	 * @return boolean on whether the database was updated successfully.
+	 * @return Disposable which contains the background task.
 	 */
-	public boolean setVideoPosition(YouTubeVideo video, long position) {
+	public Disposable setVideoPositionInBackground(YouTubeVideo video, long position) {
 		// Don't record the position if it's < 5 seconds
-		if(position < 5000)
-			return false;
+		if (SkyTubeApp.getSettings().isPlaybackStatusEnabled() && position >= 5000) {
+			boolean watched = false;
+			// If the user has stopped watching the video and the position is greater than 90% of the duration, mark the video as watched and reset position
+			if((float)position / (video.getDurationInSeconds()*1000) >= 0.9) {
+				watched = true;
+				position = 0;
+			}
+			final long positionValue = position;
+			final boolean watchedValue = watched;
+			return Single.fromCallable(() -> saveVideoWatchStatus(video.getId(), positionValue, watchedValue))
+					.subscribeOn(Schedulers.io())
+					.observeOn(AndroidSchedulers.mainThread())
+					.subscribe((success) -> {
+						Logger.i(this, "onUpdated " + success);
 
-		boolean watched = false;
-		// If the user has stopped watching the video and the position is greater than 90% of the duration, mark the video as watched and reset position
-		if((float)position / (video.getDurationInSeconds()*1000) >= 0.9) {
-			watched = true;
-			position = 0;
+						if (success) {
+							onUpdated();
+						}
+					});
+		} else {
+			return Disposable.empty();
 		}
 
-		return saveVideoWatchStatus(video.getId(), position, watched);
 	}
 
 	/**
@@ -131,8 +150,21 @@ public class PlaybackStatusDb extends SQLiteOpenHelperEx {
 	 * @param watched boolean on whether or not the passed video has been watched
 	 * @return boolean on whether the database was updated successfully.
 	 */
-	public boolean setVideoWatchedStatus(YouTubeVideo video, boolean watched) {
-		return saveVideoWatchStatus(video.getId(), 0, watched);
+	public Maybe<Boolean> setVideoWatchedStatusInBackground(YouTubeVideo video, boolean watched) {
+		if (SkyTubeApp.getSettings().isPlaybackStatusEnabled()) {
+			return Maybe.fromCallable(() -> saveVideoWatchStatus(video.getId(), 0, watched))
+					.subscribeOn(Schedulers.io())
+					.observeOn(AndroidSchedulers.mainThread())
+					.doOnSuccess((success) -> {
+						Logger.i(this, "onUpdated " + success);
+
+						if (success) {
+							onUpdated();
+						}
+					});
+		} else {
+			return Maybe.empty();
+		}
 	}
 
 	private boolean saveVideoWatchStatus(String videoId, long position, boolean watched) {
@@ -154,7 +186,6 @@ public class PlaybackStatusDb extends SQLiteOpenHelperEx {
 		status.position = position;
 		status.watched = watched;
 
-		onUpdated();
 
 		return addSuccessful;
 	}

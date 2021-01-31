@@ -27,6 +27,7 @@ import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.ChromecastListener;
 import free.rm.skytube.businessobjects.db.PlaybackStatusDb;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
 
 /**
  * Fragment class that is used for Chromecast control. This Fragment will appear at the bottom of the app when a video
@@ -58,6 +59,7 @@ public class ChromecastMiniControllerFragment extends ChromecastBaseControllerFr
 	private SlidingUpPanelLayout slidingLayout;
 
 	private boolean didClickNotification = false;
+	protected final CompositeDisposable compositeDisposable = new CompositeDisposable();
 
 	@Nullable
 	@Override
@@ -104,9 +106,8 @@ public class ChromecastMiniControllerFragment extends ChromecastBaseControllerFr
 
 	@Override
 	protected void onPlayStopped() {
-		if(!SkyTubeApp.getPreferenceManager().getBoolean(getString(R.string.pref_key_disable_playback_status), false)) {
-			PlaybackStatusDb.getPlaybackStatusDb().setVideoPosition(video, chromecastPlaybackProgressBar.getProgress());
-		}
+		compositeDisposable.add(
+				PlaybackStatusDb.getPlaybackStatusDb().setVideoPositionInBackground(video, chromecastPlaybackProgressBar.getProgress()));
 
 		activityListener.onPlayStopped();
 	}

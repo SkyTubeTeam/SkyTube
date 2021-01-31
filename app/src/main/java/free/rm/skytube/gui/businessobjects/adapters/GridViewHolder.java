@@ -326,12 +326,14 @@ public class GridViewHolder extends RecyclerView.ViewHolder implements Serializa
 					youTubeVideo.copyUrl(context);
 					return true;
 				case R.id.mark_watched:
-					PlaybackStatusDb.getPlaybackStatusDb().setVideoWatchedStatus(youTubeVideo, true);
-					updateViewsData();
+					compositeDisposable.add(
+							PlaybackStatusDb.getPlaybackStatusDb().setVideoWatchedStatusInBackground(youTubeVideo, true)
+									.subscribe((success) -> updateViewsData()));
 					return true;
 				case R.id.mark_unwatched:
-					PlaybackStatusDb.getPlaybackStatusDb().setVideoWatchedStatus(youTubeVideo, false);
-					updateViewsData();
+					compositeDisposable.add(
+							PlaybackStatusDb.getPlaybackStatusDb().setVideoWatchedStatusInBackground(youTubeVideo, false)
+									.subscribe((success) -> updateViewsData()));
 					return true;
 				case R.id.bookmark_video:
 					youTubeVideo.bookmarkVideo(context, menu);
