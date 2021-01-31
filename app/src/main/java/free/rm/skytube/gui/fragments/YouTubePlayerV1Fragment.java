@@ -868,9 +868,8 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 	}
 
 	private void saveVideoPosition(int position) {
-		if(!SkyTubeApp.getPreferenceManager().getBoolean(getString(R.string.pref_key_disable_playback_status), false)) {
-			PlaybackStatusDb.getPlaybackStatusDb().setVideoPosition(youTubeVideo, position);
-		}
+		compositeDisposable.add(
+				PlaybackStatusDb.getPlaybackStatusDb().setVideoPositionInBackground(youTubeVideo, position));
 	}
 
 	@Override

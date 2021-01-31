@@ -102,6 +102,10 @@ public class Settings {
         return Policy.valueOf(currentValue.toUpperCase());
     }
 
+    public boolean isPlaybackStatusEnabled() {
+        return getPreference(R.string.pref_key_disable_playback_status, false);
+    }
+
     /**
      * Gets the policy which defines the desired video resolution by the user in the app preferences.
      *
