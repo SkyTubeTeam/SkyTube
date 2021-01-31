@@ -643,7 +643,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 						.showDownloadWarning(youTubeVideo);
 
 				if (decision == Policy.ALLOW) {
-					youTubeVideo.downloadVideo(getContext());
+					youTubeVideo.downloadVideo(getContext()).subscribe();
 				}
 				return true;
 

@@ -353,7 +353,7 @@ public class GridViewHolder extends RecyclerView.ViewHolder implements Serializa
 							.showDownloadWarning(youTubeVideo);
 
 					if (decision == Policy.ALLOW) {
-						youTubeVideo.downloadVideo(context);
+						youTubeVideo.downloadVideo(context).subscribe();
 					}
 					return true;
 				case R.id.block_channel:

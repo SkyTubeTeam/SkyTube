@@ -83,7 +83,7 @@ public class MobileNetworkWarningDialog extends SkyTubeMaterialDialog {
 	 * @return Policy which needs to be followed, either BLOCK or ALLOW - or ASK, when a warning dialog is displayed.
 	 */
 	public Policy showDownloadWarning(YouTubeVideo youTubeVideo) {
-		onPositive((dialog, which) -> youTubeVideo.downloadVideo(getContext()));
+		onPositive((dialog, which) -> youTubeVideo.downloadVideo(getContext()).subscribe());
 		return showAndGetStatus(MobileNetworkWarningDialog.ActionType.DOWNLOAD_VIDEO);
 	}
 
