@@ -102,6 +102,10 @@ public class Settings {
         return Policy.valueOf(currentValue.toUpperCase());
     }
 
+    public String getPreferredContentCountry() {
+        return getPreference(R.string.pref_key_default_content_country, "");
+    }
+
     public boolean isPlaybackStatusEnabled() {
         return !getPreference(R.string.pref_key_disable_playback_status, false);
     }

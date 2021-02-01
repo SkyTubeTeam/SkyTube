@@ -12,6 +12,7 @@
     <string name="LIVE">LIVE</string>
     <string name="featured">Featured</string>
     <string name="most_popular">Most Popular</string>
+    <string name="trending_in">Trending (%s)</string>
     <string name="video">Video</string>
     <string name="videos">Videos</string>
     <string name="num_videos">%d videos</string>

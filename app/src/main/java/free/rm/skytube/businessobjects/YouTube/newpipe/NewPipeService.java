@@ -16,6 +16,8 @@
  */
 package free.rm.skytube.businessobjects.YouTube.newpipe;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import org.schabi.newpipe.extractor.ListExtractor;
@@ -34,6 +36,7 @@ import org.schabi.newpipe.extractor.linkhandler.LinkHandler;
 import org.schabi.newpipe.extractor.linkhandler.LinkHandlerFactory;
 import org.schabi.newpipe.extractor.linkhandler.ListLinkHandler;
 import org.schabi.newpipe.extractor.linkhandler.ListLinkHandlerFactory;
+import org.schabi.newpipe.extractor.localization.ContentCountry;
 import org.schabi.newpipe.extractor.localization.DateWrapper;
 import org.schabi.newpipe.extractor.localization.Localization;
 import org.schabi.newpipe.extractor.playlist.PlaylistExtractor;
@@ -400,8 +403,23 @@ public class NewPipeService {
      */
     public static void initNewPipe() {
         if (NewPipe.getDownloader() == null) {
-            NewPipe.init(new HttpDownloader(), new Localization("GB", "en"));
+            NewPipe.init(new HttpDownloader(), Localization.DEFAULT, toContentCountry(SkyTubeApp.getSettings().getPreferredContentCountry()));
         }
+    }
+
+    private static ContentCountry toContentCountry(String countryCode){
+        if (countryCode == null || countryCode.isEmpty()) {
+            return ContentCountry.DEFAULT;
+        } else {
+            return new ContentCountry(countryCode);
+        }
+    }
+
+    public static void setCountry(String countryCodeStr) {
+        initNewPipe();
+        final ContentCountry contentCountry = toContentCountry(countryCodeStr);
+        Log.i("NewPipeService", "set preferred content country to " + contentCountry);
+        NewPipe.setPreferredContentCountry(contentCountry);
     }
 
     /**

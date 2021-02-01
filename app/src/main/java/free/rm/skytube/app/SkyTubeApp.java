@@ -305,6 +305,10 @@ public class SkyTubeApp extends MultiDexApplication {
 		return skyTubeApp.settings;
 	}
 
+	public Settings getAppSettings() {
+		return settings;
+	}
+
 	public static void notifyUserOnError(@NonNull Context ctx, @Nullable Throwable throwable) {
 		if (throwable == null) {
 			return;

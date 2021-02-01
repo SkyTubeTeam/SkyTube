@@ -56,6 +56,7 @@ public class BackupDatabases {
 			R.string.pref_use_default_newpipe_backend,
 			R.string.pref_key_subscriptions_alphabetical_order,
 			R.string.pref_youtube_api_key,
+			R.string.pref_key_default_content_country,
 			R.string.pref_key_default_tab_name,
 			R.string.pref_key_switch_volume_and_brightness,
 			R.string.pref_key_disable_screen_gestures,

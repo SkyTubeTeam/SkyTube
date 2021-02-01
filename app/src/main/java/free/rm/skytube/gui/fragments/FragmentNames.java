@@ -32,7 +32,7 @@ public class FragmentNames {
 
     public String getName(String key) {
         if (MOST_POPULAR_VIDEOS_FRAGMENT.equals(key)) {
-            return app.getString(R.string.most_popular);
+            return app.getString(R.string.trending_in, app.getAppSettings().getPreferredContentCountry());
         }
         if (FEATURED_VIDEOS_FRAGMENT.equals(key)) {
             return app.getString(R.string.featured);

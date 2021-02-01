@@ -28,7 +28,7 @@ import java.util.Arrays;
 import free.rm.skytube.BuildConfig;
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
-import free.rm.skytube.businessobjects.YouTube.VideoStream.VideoResolution;
+import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
 
 /**
  * Preference fragment for video player related settings.
@@ -37,7 +37,6 @@ public class VideoPlayerPreferenceFragment extends PreferenceFragmentCompat {
 	@Override
 	public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
 		addPreferencesFromResource(R.xml.preference_video_player);
-
 
 		// if we are running an OSS version, then remove the last option (i.e. the "official" player
 		// option)
@@ -54,5 +53,21 @@ public class VideoPlayerPreferenceFragment extends PreferenceFragmentCompat {
 			SkyTubeApp.getSettings().showTutorialAgain();
 			return true;
 		});
+
+		configureCountrySelector();
 	}
+
+	private void configureCountrySelector() {
+		ListPreference countrySelector = findPreference(getString(R.string.pref_key_default_content_country));
+		String[] countryCodes = SkyTubeApp.getStringArray(R.array.country_codes);
+		String[] countryNames = SkyTubeApp.getStringArray(R.array.country_names);
+		countrySelector.setEntryValues(Arrays.copyOfRange(countryCodes, 1, countryCodes.length));
+		countrySelector.setEntries(Arrays.copyOfRange(countryNames, 1, countryNames.length));
+
+		countrySelector.setOnPreferenceChangeListener((preference, newValue) -> {
+			NewPipeService.setCountry((String) newValue);
+			return true;
+		});
+	}
+
 }
