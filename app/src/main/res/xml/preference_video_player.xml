@@ -50,4 +50,12 @@
 		app:title="@string/pref_title_switch_volume_and_brightness"
 		app:summary="@string/pref_summary_switch_volume_and_brightness"/>
 
+	<ListPreference
+		app:key="@string/pref_key_default_content_country"
+		app:title="@string/pref_title_default_content_country"
+		app:summary="@string/pref_summary_default_content_country"
+		app:entries="@array/country_names"
+		app:entryValues="@array/country_codes"
+		app:defaultValue=""/>
+
 </PreferenceScreen>
