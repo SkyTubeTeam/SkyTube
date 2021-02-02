@@ -14,7 +14,7 @@
     <string name="open_in_browser">Web ブラウザーで開く</string>
     <string name="open_with">開く…</string>
     <string name="share">共有</string>
-    <string name="share_via">共有…</string>
+    <string name="share_via">共有する</string>
     <string name="copy_url">URL をコピー</string>
     <string name="url_copied_to_clipboard">URL をクリップボードにコピーしました。</string>
     <string name="error_get_comments">コメントの取得中にエラーが発生しました。</string>
@@ -30,4 +30,12 @@
     <string name="should_resume">停止した位置から再生を再開しますか？</string>
     <string name="resume">再開</string>
     <string name="play_video">ビデオを再生</string>
+    <string name="error_get_comments_no_network">コメントの取得にはネットワークアクセスが必要です。</string>
+    <string name="reload_video">ビデオをリロード</string>
+    <string name="metered_network_blocked_by_policy">デバイスが従量制課金ネットワークに接続されているため、ダウンロードがブロックされました。</string>
+    <string name="warning_metered_network_disable">今後、表示しない。</string>
+    <string name="warning_metered_network_play">あなたのデバイスは従量制課金ネットワークに接続されています。余計なデータ使用料を避けるため、定額制課金ネットワークへの接続をおすすめします。それでもビデオを再生しますか？</string>
+    <string name="metered_network">従量課金制ネットワーク</string>
+    <string name="error_video_parse_error">ビデオを再生できません。エラーメッセージ: <br/><br/>%s。</string>
+    <string name="error_downloaded_file_is_corrupted">ダウンロードしたファイルは<b>破損</b>しているようです。エラーメッセージ: <br/><br/>%s<br/><br/> ファイルを<b>削除</b>しますか？</string>
 </resources>
