@@ -5,4 +5,7 @@
     <string name="configure">設定</string>
     <string name="no_videos_blocked">ブロックまたはフィルターされたビデオはありません。ビデオブロッカーを設定しますか？</string>
     <string name="blocked_videos">ブロックされたビデオ</string>
+    <string name="channel_unwhitelist_error">チャンネルをホワイトリストから削除できませんでした。</string>
+    <string name="channel_blacklist_error">チャンネルをブロックできませんでした。</string>
+    <string name="channel_blacklisted">チャンネルはブロックされました。更新してください。</string>
 </resources>

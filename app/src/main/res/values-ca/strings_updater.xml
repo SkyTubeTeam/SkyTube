@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="downloading">S\'està baixant …</string>
+    <string name="update_failure">No es pot actualitzar l\'aplicació.</string>
+    <string name="later">Més tard</string>
+    <string name="update">Actualització</string>
+    <string name="release_notes">Canvis en %s</string>
+    <string name="up_to_date_msg">Teniu instal·lada la versió més recent de SkyTube.</string>
+    <string name="up_to_date">Actualitzat</string>
+    <string name="update_dialog_msg">Hi ha disponible una nova versió de SkyTube. S\'instal·larà la versió %s.</string>
+    <string name="update_available">Nova versió disponible</string>
+</resources>
