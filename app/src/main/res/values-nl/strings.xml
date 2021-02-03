@@ -21,4 +21,5 @@
     <string name="search_channel">Kanaal doorzoeken</string>
     <string name="could_not_get_channel_detailed">De kanaalinformatie kan niet worden gedownload: %s</string>
     <string name="close">Sluiten</string>
+    <string name="trending_in">Populair (%s)</string>
 </resources>
