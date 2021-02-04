@@ -21,7 +21,7 @@ Steps to reproduce the behavior:
 A clear and concise description of what you expected to happen.
 
 **Screenshots**
-If applicable, add screenshots to help explain your problem.
+If applicable, add screenshots to help explain your problem, or the link for the video, where You've found the issue
 
 **Setup:**
  - Android version: [e.g. 7 or 10, etc]
