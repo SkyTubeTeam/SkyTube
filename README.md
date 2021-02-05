@@ -57,7 +57,7 @@ Android 4.0 (Ice Cream Sandwich) or later. For techies, that means an API level 
 | Official YouTube player support* | ✅                   | ❌       |
 | Chromecast Support*              | ✅                   | ❌       |
 | Updates availability             | Immediate            | Normally up to 5 days |
-| Download APK                     | [![Download SkyTube Extra APK](screenshots/download_apk.png)](https://github.com/ram-on/SkyTube/releases/download/v2.977/SkyTube-Extra-2.977.apk) | [![Download SkyTube (Vanilla) APK](https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Get_it_on_F-Droid.svg/200px-Get_it_on_F-Droid.svg.png)](https://f-droid.org/repository/browse/?fdid=free.rm.skytube.oss)
+| Download APK                     | [![Download SkyTube Extra APK](screenshots/download_apk.png)](https://github.com/SkyTubeTeam/SkyTube/releases/download/v2.977/SkyTube-Extra-2.977.apk) | [![Download SkyTube (Vanilla) APK](https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Get_it_on_F-Droid.svg/200px-Get_it_on_F-Droid.svg.png)](https://f-droid.org/repository/browse/?fdid=free.rm.skytube.oss)
 
 _* powered by a closed-source, third-party library._
 
@@ -94,7 +94,7 @@ You can help us translate this app into your native language by visiting [SkyTub
 ## Contribute
 This project was possible with the support and contribution of [numerous volunteers and third-party projects](http://skytube-app.com/credits.html).
 
-Help us improve this project by [translating](https://github.com/ram-on/SkyTube/wiki/Contribute#translate) or by [coding](https://github.com/ram-on/SkyTube/wiki/Contribute#developers-guidelines)!
+Help us improve this project by [translating](https://github.com/SkyTubeTeam/SkyTube/wiki/Contribute#translate) or by [coding](https://github.com/SkyTubeTeam/SkyTube/wiki/Contribute#developers-guidelines)!
 
 ## License
 [![GNU GPLv3 Image](https://www.gnu.org/graphics/gplv3-127x51.png)](https://www.gnu.org/licenses/gpl-3.0.en.html)  
@@ -108,7 +108,7 @@ but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
-You should have received a [copy of the GNU General Public License](https://raw.githubusercontent.com/ram-on/SkyTube/master/LICENSE)
+You should have received a [copy of the GNU General Public License](https://raw.githubusercontent.com/SkyTubeTeam/SkyTube/master/LICENSE)
 along with this program.  If not, see https://www.gnu.org/licenses/.
 
 This project is not affiliated with YouTube™ or any of its partners and/or products.
