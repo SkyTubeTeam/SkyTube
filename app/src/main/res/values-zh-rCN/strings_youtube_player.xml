@@ -17,7 +17,7 @@
     <string name="copy_url">复制URL</string>
     <string name="share_via">分享至</string>
     <string name="share">分享</string>
-    <string name="open_with">用此打开……</string>
+    <string name="open_with">用此打开…</string>
     <string name="open_in_browser">在浏览器中打开</string>
     <string name="reload_video">重新加载视频</string>
     <string name="loading_video">加载视频中……</string>
@@ -37,4 +37,5 @@
     <string name="error_stream_parse_error">解析错误。</string>
     <string name="error_stream_decryption_fail">无法加载YouTube服务的解密码。</string>
     <string name="error_stream_err_unavailable">错误信息不可用。</string>
+    <string name="warning_metered_network_play">您的设备连接到计费网络。为了避免潜在的额外数据使用费用，建议您连接非计费网络。是否仍要播放？</string>
 </resources>
