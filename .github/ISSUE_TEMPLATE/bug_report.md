@@ -25,8 +25,8 @@ If applicable, add screenshots to help explain your problem, or the link for the
 
 **Setup:**
  - Android version: [e.g. 7 or 10, etc]
- - Is your phone rooted?
- - Do you use Tor or any VPN service with your phone?
+ - Is Your device rooted?
+ - Do You use Tor or any VPN service with your device?
  - App source [e.g. FDroid, Downloaded from GitHub, self build]
  - App Version [e.g. v2.977]
  - App Flavour [e.g. Extra or OSS]
