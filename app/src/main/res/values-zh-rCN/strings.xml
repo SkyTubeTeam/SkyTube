@@ -1,2 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="search_channel">搜索频道</string>
+    <string name="no">不</string>
+    <string name="yes">是的</string>
+    <string name="loading">加载中……</string>
+    <string name="close">关闭</string>
+    <string name="could_not_get_playlists">无法获取 %s 播放列表。</string>
+    <string name="playlists">播放列表</string>
+    <string name="num_videos">%d 个视频</string>
+    <string name="videos">视频</string>
+    <string name="featured">个性化</string>
+    <string name="video">视频</string>
+    <string name="trending_in">趋势（%s）</string>
+    <string name="most_popular">最受欢迎</string>
+    <string name="LIVE">直播</string>
+    <string name="launch_offical_player_error">尝试启动官方Youtube时发生错误。请确保已安装。</string>
+    <string name="search_videos">搜索视频</string>
+    <string name="ok">好</string>
+    <string name="error">错误</string>
+    <string name="views">%d 观看数</string>
+    <string name="could_not_get_channel_detailed">无法加载频道信息：%s。</string>
+    <string name="could_not_get_channel">无法加载频道信息！</string>
+    <string name="could_not_get_videos">无法获取 %s 视频。</string>
+</resources>
