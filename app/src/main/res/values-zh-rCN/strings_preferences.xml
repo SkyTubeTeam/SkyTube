@@ -29,7 +29,7 @@
     <string name="setting_updated">设置已更新。请刷新视频。</string>
     <string name="pref_summary_lang_detection_video_filtering">探测视频中的语言并屏蔽首选语言之外的视频。高级设备使用。</string>
     <string name="pref_title_lang_detection_video_filtering">语言探测视频过滤</string>
-    <string name="preferred_lang_updated">首先语言已更新，请刷新视频。</string>
+    <string name="preferred_lang_updated">首选语言已更新，请刷新视频。</string>
     <string name="no_preferred_lang_selected">没有首选语言被选择。设置已忽略。</string>
     <string name="pref_summary_preferred_languages">选择您的首选语言。</string>
     <string name="pref_title_preferred_languages">首选语言</string>
@@ -90,7 +90,7 @@
     <string name="pref_title_switch_volume_and_brightness">对调音量和亮度手势</string>
     <string name="pref_summary_enable_immersive_mode">播放时隐藏导航和状态栏。</string>
     <string name="pref_title_enable_immersive_mode">启用沉浸式</string>
-    <string name="pref_video_continuous_repeat_toggle">继播</string>
+    <string name="pref_video_continuous_repeat_toggle">循环播放</string>
     <string name="pref_summary_disable_screen_gestures">关闭控制音量、亮度以及快进/快退的手势。</string>
     <string name="pref_title_disable_screen_gestures">禁用视频手势</string>
     <string name="pref_summary_screen_orientation">视频播放器的朝向：%s</string>
