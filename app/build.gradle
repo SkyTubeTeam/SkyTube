@@ -91,8 +91,8 @@ android {
 
 dependencies {
     // Required for local unit tests (JUnit 5 framework)
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.1'
 
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.1'
 
@@ -117,8 +117,10 @@ dependencies {
 
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
+
     implementation 'com.google.android.exoplayer:exoplayer-core:2.9.6'
     implementation 'com.google.android.exoplayer:exoplayer-ui:2.9.6'
+
     implementation 'org.jsoup:jsoup:1.13.1'
     implementation ('com.optimaize.languagedetector:language-detector:0.6') {
         exclude group: 'com.google.guava', module: 'guava'
@@ -136,15 +138,15 @@ dependencies {
     implementation 'androidx.core:core:1.3.2'
     implementation 'androidx.media:media:1.2.1'
     implementation 'androidx.preference:preference:1.1.1'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'androidx.multidex:multidex:2.0.1' // as we have over 65536 methods...
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
 
     implementation 'com.github.SkyTubeTeam:RxAndroid:3.0.1.SkyTubeTeam'
-    implementation 'io.reactivex.rxjava3:rxjava:3.0.9'
+    implementation 'io.reactivex.rxjava3:rxjava:3.0.10'
 
     // debugImplementation because LeakCanary should only run in debug builds.
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.5'
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.6'
 
     // proprietary module
     extraImplementation files('libs/YouTubeAndroidPlayerApi.jar')
