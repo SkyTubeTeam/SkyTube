@@ -42,8 +42,7 @@ import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
 /**
  * Preference fragment for other settings.
  */
-public class OthersPreferenceFragment extends PreferenceFragmentCompat
-		implements SharedPreferences.OnSharedPreferenceChangeListener {
+public class OthersPreferenceFragment extends BasePreferenceFragment {
 	ListPreference defaultTabPref;
 
 	@Override
@@ -84,18 +83,6 @@ public class OthersPreferenceFragment extends PreferenceFragmentCompat
 //			feedNotificationPref.setValueIndex(0);
 //		}
 //		feedNotificationPref.setSummary(String.format(getString(R.string.pref_summary_feed_notification), feedNotificationPref.getEntry()));
-	}
-
-	@Override
-	public void onResume() {
-		super.onResume();
-		getPreferenceManager().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
-	}
-
-	@Override
-	public void onPause() {
-		super.onPause();
-		getPreferenceManager().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
 	}
 
 	@Override

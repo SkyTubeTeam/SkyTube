@@ -1,3 +1,19 @@
+/*
+ * SkyTube
+ * Copyright (C) 2021
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation (version 3 of the License).
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package free.rm.skytube.gui.fragments.preferences;
 
 import android.content.SharedPreferences;
@@ -12,8 +28,7 @@ import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.db.PlaybackStatusDb;
 import free.rm.skytube.businessobjects.db.SearchHistoryDb;
 
-public class PrivacyPreferenceFragment extends PreferenceFragmentCompat
-		implements SharedPreferences.OnSharedPreferenceChangeListener {
+public class PrivacyPreferenceFragment extends BasePreferenceFragment {
 	@Override
 	public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
 		addPreferencesFromResource(R.xml.preference_privacy);
@@ -24,18 +39,6 @@ public class PrivacyPreferenceFragment extends PreferenceFragmentCompat
 			Toast.makeText(getActivity(), getString(R.string.pref_playback_status_cleared), Toast.LENGTH_LONG).show();
 			return true;
 		});
-	}
-
-	@Override
-	public void onResume() {
-		super.onResume();
-		getPreferenceManager().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
-	}
-
-	@Override
-	public void onPause() {
-		super.onPause();
-		getPreferenceManager().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
 	}
 
 	@Override
