@@ -36,7 +36,7 @@ import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
 /**
  * Preference fragment for video player related settings.
  */
-public class VideoPlayerPreferenceFragment extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener {
+public class VideoPlayerPreferenceFragment extends BasePreferenceFragment {
 	@Override
 	public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
 		addPreferencesFromResource(R.xml.preference_video_player);
@@ -58,18 +58,6 @@ public class VideoPlayerPreferenceFragment extends PreferenceFragmentCompat impl
 		});
 
 		configureCountrySelector();
-
-	}
-	@Override
-	public void onResume() {
-		super.onResume();
-		getPreferenceManager().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
-	}
-
-	@Override
-	public void onPause() {
-		getPreferenceManager().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
-		super.onPause();
 	}
 
 	private void configureCountrySelector() {
