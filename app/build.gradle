@@ -140,7 +140,7 @@ dependencies {
     implementation 'androidx.multidex:multidex:2.0.1' // as we have over 65536 methods...
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
 
-    implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
+    implementation 'com.github.SkyTubeTeam:RxAndroid:3.0.1.SkyTubeTeam'
     implementation 'io.reactivex.rxjava3:rxjava:3.0.9'
 
     // debugImplementation because LeakCanary should only run in debug builds.
