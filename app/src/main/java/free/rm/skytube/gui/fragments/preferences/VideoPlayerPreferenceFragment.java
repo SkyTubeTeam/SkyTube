@@ -17,6 +17,7 @@
 
 package free.rm.skytube.gui.fragments.preferences;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.preference.ListPreference;
@@ -27,13 +28,15 @@ import java.util.Arrays;
 
 import free.rm.skytube.BuildConfig;
 import free.rm.skytube.R;
+import free.rm.skytube.app.EventBus;
 import free.rm.skytube.app.SkyTubeApp;
+import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
 
 /**
  * Preference fragment for video player related settings.
  */
-public class VideoPlayerPreferenceFragment extends PreferenceFragmentCompat {
+public class VideoPlayerPreferenceFragment extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener {
 	@Override
 	public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
 		addPreferencesFromResource(R.xml.preference_video_player);
@@ -55,19 +58,38 @@ public class VideoPlayerPreferenceFragment extends PreferenceFragmentCompat {
 		});
 
 		configureCountrySelector();
+
+	}
+	@Override
+	public void onResume() {
+		super.onResume();
+		getPreferenceManager().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
+	}
+
+	@Override
+	public void onPause() {
+		getPreferenceManager().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
+		super.onPause();
 	}
 
 	private void configureCountrySelector() {
 		ListPreference countrySelector = findPreference(getString(R.string.pref_key_default_content_country));
 		String[] countryCodes = SkyTubeApp.getStringArray(R.array.country_codes);
 		String[] countryNames = SkyTubeApp.getStringArray(R.array.country_names);
-		countrySelector.setEntryValues(Arrays.copyOfRange(countryCodes, 1, countryCodes.length));
-		countrySelector.setEntries(Arrays.copyOfRange(countryNames, 1, countryNames.length));
-
-		countrySelector.setOnPreferenceChangeListener((preference, newValue) -> {
-			NewPipeService.setCountry((String) newValue);
-			return true;
-		});
+		countrySelector.setEntryValues(countryCodes);
+		String[] countryNamesWithSystemDefault = new String[countryNames.length];
+		System.arraycopy(countryNames, 1, countryNamesWithSystemDefault, 1, countryNames.length - 1);
+		countryNamesWithSystemDefault[0] = getString(R.string.system_default_country);
+		countrySelector.setEntries(countryNamesWithSystemDefault);
 	}
 
+	@Override
+	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+		Logger.i(this, "onSharedPreferenceChanged %s - key: %s", sharedPreferences, key);
+		if (getString(R.string.pref_key_default_content_country).equals(key)) {
+			String newCountry = sharedPreferences.getString(key, null);
+			NewPipeService.setCountry(newCountry);
+			EventBus.getInstance().notifyMainTabChanged(EventBus.SettingChange.CONTENT_COUNTRY);
+		}
+	}
 }

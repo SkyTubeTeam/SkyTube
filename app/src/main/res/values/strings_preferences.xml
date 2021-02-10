@@ -472,6 +472,7 @@
         <item>YE</item>
         <item>ZW</item>
     </string-array>
+    <string name="system_default_country">System Default Country</string>
     <string name="pref_other_category">Others</string>
     <string name="pref_key_default_tab" translatable="false">pref_default_tab</string>
     <string name="pref_key_default_tab_name" translatable="false">pref_default_tab_name</string>
