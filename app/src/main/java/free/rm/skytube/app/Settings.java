@@ -25,6 +25,7 @@ import androidx.preference.PreferenceManager;
 
 import java.io.File;
 import java.util.Collections;
+import java.util.Locale;
 import java.util.Set;
 
 import free.rm.skytube.R;
@@ -103,7 +104,10 @@ public class Settings {
     }
 
     public String getPreferredContentCountry() {
-        return getPreference(R.string.pref_key_default_content_country, "");
+        String defaultCountryCode = Locale.getDefault().getCountry();
+        String code = getPreference(R.string.pref_key_default_content_country, "");
+        Logger.i(this, "Default country code is %s - app selection: %s", defaultCountryCode, code);
+        return (code != null && !code.isEmpty()) ? code : defaultCountryCode;
     }
 
     public boolean isPlaybackStatusEnabled() {

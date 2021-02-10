@@ -35,6 +35,7 @@ import java.util.List;
 import java.util.Set;
 
 import free.rm.skytube.R;
+import free.rm.skytube.app.EventBus;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.gui.activities.BaseActivity;
@@ -206,6 +207,8 @@ public class MainFragment extends FragmentEx {
 		// refresh dialog from showing when an automatic refresh happens.
 		videosPagerAdapter.selectTabAtPosition(viewPager.getCurrentItem());
 
+		EventBus.getInstance().registerMainFragment(this);
+
 		return view;
 	}
 
@@ -270,6 +273,14 @@ public class MainFragment extends FragmentEx {
 		return super.onOptionsItemSelected(item);
 	}
 
+	public void refreshTabs(EventBus.SettingChange settingChange) {
+		Logger.i(this, "refreshTabs called");
+		if (settingChange == EventBus.SettingChange.HIDE_TABS) {
+			videosPagerAdapter.setupVisibleTabs();
+		}
+		videosPagerAdapter.notifyDataSetChanged();
+	}
+
 	public static class SimplePagerAdapter extends FragmentPagerAdapter {
 		private final SparseArray<WeakReference<Fragment>> instantiatedFragments = new SparseArray<>();
 		private final List<String> visibleTabs = new ArrayList<>();
@@ -277,6 +288,12 @@ public class MainFragment extends FragmentEx {
 		public SimplePagerAdapter(FragmentManager fm) {
 			// TODO: Investigate, if we need this
 			super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+			setupVisibleTabs();
+		}
+
+		synchronized void setupVisibleTabs() {
+			visibleTabs.clear();
+			instantiatedFragments.clear();
 			Set<String> hiddenTabs = SkyTubeApp.getSettings().getHiddenTabs();
 			for (String key : getTabListValues()) {
 				if (!hiddenTabs.contains(key)) {
@@ -286,7 +303,7 @@ public class MainFragment extends FragmentEx {
 		}
 
 		@Override
-		public Fragment getItem(int position) {
+		public synchronized Fragment getItem(int position) {
 			if (0<=position && position<visibleTabs.size()) {
 				String key = visibleTabs.get(position);
 				return create(key);
@@ -315,25 +332,25 @@ public class MainFragment extends FragmentEx {
 		}
 
 		@Override
-		public int getCount() {
+		public synchronized int getCount() {
 			return visibleTabs.size();
 		}
 
 		@Override
-		public Object instantiateItem(final ViewGroup container, final int position) {
+		public synchronized Object instantiateItem(final ViewGroup container, final int position) {
 			final Fragment fragment = (Fragment) super.instantiateItem(container, position);
 			instantiatedFragments.put(position, new WeakReference<>(fragment));
 			return fragment;
 		}
 
 		@Override
-		public void destroyItem(final ViewGroup container, final int position, final Object object) {
+		public synchronized void destroyItem(final ViewGroup container, final int position, final Object object) {
 			instantiatedFragments.remove(position);
 			super.destroyItem(container, position, object);
 		}
 
 		@Nullable
-		public VideosGridFragment getFragment(final int position) {
+		public synchronized VideosGridFragment getFragment(final int position) {
 			if (0 <= position && position <= instantiatedFragments.size()) {
 				final WeakReference<Fragment> wr = instantiatedFragments.get(position);
 				if (wr != null) {
@@ -343,15 +360,15 @@ public class MainFragment extends FragmentEx {
 			return null;
 		}
 
-		public int getIndexOf(String fragmentName) {
+		public synchronized int getIndexOf(String fragmentName) {
 			return visibleTabs.indexOf(fragmentName);
 		}
 
-		public VideosGridFragment getTabOf(String fragmentName) {
+		public synchronized VideosGridFragment getTabOf(String fragmentName) {
 			return getFragment(getIndexOf(fragmentName));
 		}
 
-		public VideosGridFragment getTab(TabLayout.Tab tab) {
+		public synchronized VideosGridFragment getTab(TabLayout.Tab tab) {
 			return getFragment(tab.getPosition());
 		}
 
@@ -374,7 +391,7 @@ public class MainFragment extends FragmentEx {
 		}
 
 		@Override
-		public CharSequence getPageTitle(int position) {
+		public synchronized CharSequence getPageTitle(int position) {
 			String title = null;
 			if (0<=position && position<visibleTabs.size()) {
 				String tabKey = visibleTabs.get(position);
