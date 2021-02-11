@@ -166,4 +166,5 @@
     <string name="pref_category_metered_network">Beperkt netwerk</string>
     <string name="pref_summary_default_content_country">Toon inhoud bestemd voor het volgende land: %s</string>
     <string name="pref_title_default_content_country">Standaardland voor video-inhoud</string>
+    <string name="system_default_country">Systeemstandaard</string>
 </resources>
