@@ -1,2 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="tutorial_slide_6">Tap bi aldiz bideo bat eten edo ikusteko.</string>
+    <string name="tutorial_slide_5">Swipe bertikalki argitasuna doitzeko.</string>
+    <string name="tutorial_slide_4">Swipe bertikalki bolumena doitzeko.</string>
+    <string name="tutorial_slide_3">Swipe horizontalki aurrera edo atzera bilatzeko.</string>
+    <string name="tutorial_slide_2">Swipe gora bideoaren deskripzioa ikusteko.</string>
+    <string name="tutorial_slide_1">Swipe ezkerretara, iruzkinak ikusteko.</string>
+    <string name="page_counter">%1$d / %2$d</string>
+    <string name="skip">Utzi</string>
+    <string name="done">Egina</string>
+    <string name="next">"Hurrengoa "</string>
+</resources>

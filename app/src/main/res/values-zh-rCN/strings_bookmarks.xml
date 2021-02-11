@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="bookmark_share_invalid_url">只有有效的YouTube链接才能被收藏。</string>
+    <string name="bookmark_share_label">SkyTube 收藏</string>
+    <string name="no_bookmarked_videos_text">您还未收藏任何视频。
+\n
+\n收藏的视频将会出现在这里。</string>
+    <string name="video_unbookmarked_error">无法取消收藏此视频。</string>
+    <string name="video_was_not_bookmarked">视频未收藏</string>
+    <string name="video_unbookmarked">视频已取消收藏</string>
+    <string name="bookmarks">收藏</string>
+    <string name="bookmark">收藏</string>
+    <string name="unbookmark">取消收藏</string>
+    <string name="video_bookmarked_error">无法收藏此视频。</string>
+    <string name="video_already_bookmarked">视频已收藏</string>
+    <string name="video_bookmarked">收藏的视频</string>
+</resources>

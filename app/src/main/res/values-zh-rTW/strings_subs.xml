@@ -18,7 +18,7 @@
     <string name="no_channels_found">在您已上傳的檔案中找不到 YouTube 頻道。</string>
     <string name="failed_to_import_subscriptions">無法匯入您的 YouTube 訂閱。</string>
     <string name="about">關於</string>
-    <string name="import_subscriptions_description">從 YouTube 匯入您的訂閱，首先請造訪 https://www.youtube.com/subscription_manager ，然後點按底部的「匯出訂閱項目」。再來，透過點按下方的「選取訂閱檔案」來選取匯出檔案標題「訂閱管理員」。</string>
+    <string name="import_subscriptions_description">要從 YouTube 匯入訂閱，請先造訪 https://takeout.google.com。取消選取除了「YouTube 與 YouTube 音樂」以外的所有服務，然後點擊「包含所有 YouTube 資料」以取消選取除了訂閱以外的所有東西。點擊「下一步」，然後「建立匯出」。一旦匯出完成，它會顯示在您剛剛造訪的網頁上，也會收到有下載連結的電子郵件。下載檔案然後從其中解開並找出 subscriptions.json（位於 /Takeout/YouTube 與 YouTube Music/subscriptions/）。然後透過點擊下方的「選取訂閱檔案」選取匯出的檔案。</string>
     <string name="no_new_channels_found">在您上傳的檔案中沒有發現任何您已經訂閱的 YouTube 頻道。</string>
     <string name="import_subscriptions_parse_error">嘗試解析您上傳的檔案時遇到錯誤：%s。</string>
     <string name="channel_unsubscribed">已取消訂閱頻道</string>

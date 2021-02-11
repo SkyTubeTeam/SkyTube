@@ -1,2 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="external_storage_not_available">Ezin da artxiboa deskargatu, kanpoko biltegia ez baitago eskuragarri.</string>
+    <string name="playing_video_file_missing">Bideo honen deskarga ez da aurkitu. Saretik ikusten.</string>
+    <string name="no_downloaded_videos_text">Oraindik ez duzu bideo bat bidali.
+\n
+\nBehin hori eginda, hona etorriko dira.</string>
+    <string name="video_downloaded">\'%s\' deskargatuta.</string>
+    <string name="delete_download">Ezabatu deskarga</string>
+    <string name="video_stream_not_found_with_request_resolution">Ez da bideorik aurkitu eskatutako ebazpenerako, %s-%s artean</string>
+    <string name="video_download_stream_error">Ezin da deskargatu \'%s\'.</string>
+    <string name="starting_video_download">Deskargatzen \'%s\'…</string>
+    <string name="download_video">Deskargatu bideoa</string>
+    <string name="warning_metered_network_download">Zure gailua sare mugatu batean konektatuta dago. Gastu erantsiagatik kosteak saihesteko, metatu gabeko sare batera konektatzea gomendatzen da. Deskargatu bideoa, dena den\?</string>
+    <string name="downloads">Deskargak</string>
+    <string name="download">Deskargak</string>
+    <string name="unable_to_delete_file">Ezin da deskargatutako fitxategia ezabatu: \'%s\'</string>
+</resources>

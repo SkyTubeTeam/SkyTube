@@ -14,4 +14,5 @@
     <string name="download">Pobierz</string>
     <string name="video_stream_not_found_with_request_resolution">Nie znaleziono strumienia wideo dla żądanej rozdzielczości, między %s - %s</string>
     <string name="warning_metered_network_download">Urządzenie jest połączone z siecią taryfową. Aby uniknąć potencjalnych dodatkowych opłat za użycie danych, zaleca się połączenie z siecią bez limitu danych. Czy mimo to pobrać film\?</string>
+    <string name="unable_to_delete_file">Nie udało się usunąć pobranego pliku: \'%s\'</string>
 </resources>

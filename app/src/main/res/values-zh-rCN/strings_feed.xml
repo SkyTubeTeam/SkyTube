@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="notification_new_videos_found">%d 个新的视频来自订阅的频道</string>
+    <string name="notification_channel_feed_title">订阅通知</string>
+    <string name="import_subscriptions_from_youtube">从YouTube导入订阅</string>
+    <string name="no_subscriptions_text">您未订阅任何频道。
+\n
+\n订阅频道的月内更新视频将会出现在这里。</string>
+    <string name="no_new_videos_found">未发现新的视频。</string>
+    <string name="fetched_videos_from_channels">已从 %2$d/%3$d 频道获取了 %1$d 个视频。</string>
+    <string name="fetching_subscription_videos">正在获取订阅频道的视频</string>
+    <string name="fetching_subbed_channels_info_error">获取频道信息时发生了错误。</string>
+    <string name="fetching_subbed_channels_info">正在获取频道信息……</string>
+    <string name="open_channel">打开频道</string>
+    <string name="feed">订阅</string>
+    <string name="subscribing_to_channels">正在订阅频道……</string>
+</resources>

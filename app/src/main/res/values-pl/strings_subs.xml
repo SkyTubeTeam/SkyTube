@@ -10,7 +10,7 @@
     <string name="error_check_if_user_has_subbed">Nie można sprawdzić czy użytkownik zasubskrybował kanał (id=%s)</string>
     <string name="error_unable_to_subscribe">Nie można zasubskrybować kanału (id=%s)</string>
     <string name="import_subscriptions">Importuj subskrypcje</string>
-    <string name="import_subscriptions_description">Importuj swoje subskrypcje z YouTube, odwiedzając najpierw https://www.youtube.com/subscription_manager i klikając przycisk \"Eksportuj subskrypcje\" na dole. Następnie wybierz wyeksportowany plik o nazwie \"subscription_manager\", klikając \"Wybierz plik subskrypcji\" poniżej.</string>
+    <string name="import_subscriptions_description">Zaimportuj subskrypcje z YouTube, odwiedzając najpierw https://takeout.google.com. Odznacz wszystkie usługi poza \"YouTube i Youtube Music\" i kliknij \"Wybrałeś wszystkie dane z Youtube\", aby odznaczyć wszystko poza subskrypcjami. Kliknij \"Dalej\", a następnie \"Utwórz eksport\". Po zakończeniu procesu eksportu plik zostanie wyświetlony na stronie internetowej, na którą właśnie trafiłeś oraz otrzymasz wiadomość e-mail z linkiem do pobrania. Pobierz ten plik i wyodrębnij z niego plik subskrypcje.json (znajdujący się w /Takeout/YouTube i Youtube Music/subskrypcje/). Następnie, wybierz wyeksportowany plik, klikając poniżej \"Wybierz plik subskrypcji\".</string>
     <string name="subscriptions_to_channels_imported">Subskrypcje %d kanałów zaimportowane.</string>
     <string name="select_xml_file">Wybierz plik subskrypcji</string>
     <string name="select_all">Wybierz wszystko</string>

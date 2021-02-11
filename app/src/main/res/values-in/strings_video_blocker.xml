@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources><string name="blocked_videos">Video Diblokir</string>
-    <string name="no_videos_blocked">Tidak ada video yang diblokir atau disembunyikan. Apakah anda ingin mengkonfigurasi Pemblokir Video\?</string>
+<resources>
+    <string name="blocked_videos">Video Diblokir</string>
+    <string name="no_videos_blocked">Tidak ada video yang diblokir atau disembunyikan. Apakah Anda ingin mengkonfigurasi Pemblokir Video\?</string>
     <string name="configure">Konfigurasi</string>
     <string name="block_channel">Blokir Channel</string>
     <string name="channel_blacklisted">Channel diblokir. Silakan segarkan ulang.</string>

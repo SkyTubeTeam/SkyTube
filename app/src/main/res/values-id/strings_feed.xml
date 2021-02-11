@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="notification_new_videos_found">%d video baru dari kanal langganan Anda</string>
+    <string name="notification_channel_feed_title">Notifikasi Umpan</string>
+    <string name="import_subscriptions_from_youtube">Impor Langganan Dari YouTube</string>
+    <string name="no_subscriptions_text">Anda tidak berlangganan ke kanal manapun.
+\n
+\nSetelah Anda berlangganan, semua video yang diunggah ke kanal tersebut selama satu bulan terakhir akan muncul di sini.</string>
+    <string name="no_new_videos_found">Tidak ada video baru yang ditemukan.</string>
+    <string name="fetched_videos_from_channels">Mengambil %1$d video dari %2$d/%3$d kanal.</string>
+    <string name="fetching_subscription_videos">Mengambil video dari langganan kanal</string>
+    <string name="fetching_subbed_channels_info_error">Telah terjadi kesalahan saat mengambil informasi kanal.</string>
+    <string name="fetching_subbed_channels_info">Mengambil informasi kanal…</string>
+    <string name="open_channel">Buka Kanal</string>
+    <string name="subscribing_to_channels">Berlangganan ke kanal…</string>
+    <string name="feed">Umpan</string>
+</resources>
