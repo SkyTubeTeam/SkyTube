@@ -37,6 +37,7 @@ import android.os.SystemClock;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.annotation.ArrayRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
@@ -151,10 +152,19 @@ public class SkyTubeApp extends MultiDexApplication {
 	 * @param stringArrayResId String array resource ID (e.g. R.string.my_array_string)
 	 * @return Array of String.
 	 */
-	public static String[] getStringArray(int stringArrayResId) {
-		return skyTubeApp.getResources().getStringArray(stringArrayResId);
+	public static String[] getStringArray(@ArrayRes int stringArrayResId) {
+		return skyTubeApp.getStrArray(stringArrayResId);
 	}
 
+	/**
+	 * Given a string array resource ID, it returns an array of strings.
+	 *
+	 * @param stringArrayResId String array resource ID (e.g. R.string.my_array_string)
+	 * @return Array of String.
+	 */
+	public String[] getStrArray(@ArrayRes int stringArrayResId) {
+		return getResources().getStringArray(stringArrayResId);
+	}
 
 	/**
 	 * Given a string array resource ID, it returns an list of strings.
@@ -162,10 +172,9 @@ public class SkyTubeApp extends MultiDexApplication {
 	 * @param stringArrayResId String array resource ID (e.g. R.string.my_array_string)
 	 * @return List of String.
 	 */
-	public static List<String> getStringArrayAsList(int stringArrayResId) {
+	public static List<String> getStringArrayAsList(@ArrayRes int stringArrayResId) {
 		return Arrays.asList(getStringArray(stringArrayResId));
 	}
-
 
 	/**
 	 * Returns the App's {@link SharedPreferences}.
@@ -175,7 +184,6 @@ public class SkyTubeApp extends MultiDexApplication {
 	public static SharedPreferences getPreferenceManager() {
 		return PreferenceManager.getDefaultSharedPreferences(skyTubeApp);
 	}
-
 
 	/**
 	 * Returns the dimension value that is specified in R.dimens.*.  This value is NOT converted into

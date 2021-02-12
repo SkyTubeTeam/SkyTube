@@ -26,7 +26,7 @@
 		app:key="@string/pref_key_hide_tabs"
 		app:title="@string/pref_title_hide_tabs"
 		app:summary="@string/pref_summary_hide_tabs"
-		app:entries="@array/tab_list" />
+		app:entryValues="@array/tab_list_values" />
 
 	<EditTextPreference
 		app:key="@string/pref_youtube_api_key"

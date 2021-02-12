@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -37,6 +38,7 @@ import java.util.Set;
 import free.rm.skytube.R;
 import free.rm.skytube.app.EventBus;
 import free.rm.skytube.app.SkyTubeApp;
+import free.rm.skytube.app.utils.WeaklyReferencedMap;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.gui.activities.BaseActivity;
 import free.rm.skytube.gui.businessobjects.MainActivityListener;
@@ -168,7 +170,7 @@ public class MainFragment extends FragmentEx {
 			@Override
 			public void onTabReselected(TabLayout.Tab tab) {
 				//When current tab reselected scroll to the top of the video list
-				VideosGridFragment fragment = videosPagerAdapter.getTab(tab);
+				VideosGridFragment fragment = videosPagerAdapter.getFragmentFrom(tab, true);
 				if (fragment != null && fragment.gridView != null) {
 					fragment.gridView.smoothScrollToPosition(TOP_LIST_INDEX);
 				}
@@ -276,13 +278,14 @@ public class MainFragment extends FragmentEx {
 	public void refreshTabs(EventBus.SettingChange settingChange) {
 		Logger.i(this, "refreshTabs called");
 		if (settingChange == EventBus.SettingChange.HIDE_TABS) {
-			videosPagerAdapter.setupVisibleTabs();
+			videosPagerAdapter.updateVisibleTabs(tabLayout);
+		} else {
+			videosPagerAdapter.notifyDataSetChanged();
 		}
-		videosPagerAdapter.notifyDataSetChanged();
 	}
 
 	public static class SimplePagerAdapter extends FragmentPagerAdapter {
-		private final SparseArray<WeakReference<Fragment>> instantiatedFragments = new SparseArray<>();
+		private final WeaklyReferencedMap<String, VideosGridFragment> instantiatedFragments = new WeaklyReferencedMap<>();
 		private final List<String> visibleTabs = new ArrayList<>();
 
 		public SimplePagerAdapter(FragmentManager fm) {
@@ -293,25 +296,57 @@ public class MainFragment extends FragmentEx {
 
 		synchronized void setupVisibleTabs() {
 			visibleTabs.clear();
-			instantiatedFragments.clear();
 			Set<String> hiddenTabs = SkyTubeApp.getSettings().getHiddenTabs();
 			for (String key : getTabListValues()) {
-				if (!hiddenTabs.contains(key)) {
+				if (hiddenTabs.contains(key)) {
+					instantiatedFragments.remove(key);
+				} else {
 					visibleTabs.add(key);
 				}
 			}
 		}
 
+		synchronized void updateVisibleTabs(TabLayout pager) {
+			final int currentItem = pager.getSelectedTabPosition();
+			String oldSelection = getTabKey(currentItem);
+			setupVisibleTabs();
+			notifyDataSetChanged();
+			if (oldSelection != null && !isVisible(oldSelection)) {
+				int newSelection = Math.min(visibleTabs.size() - 1, currentItem);
+				if (newSelection>=0) {
+					TabLayout.Tab tab = pager.getTabAt(newSelection);
+					pager.selectTab(tab);
+				}
+			}
+		}
+
+		@Override
+		public int getItemPosition(@NonNull Object object) {
+			VideosGridFragment fragment = (VideosGridFragment) object;
+			String key = fragment.getBundleKey();
+			int currPos = visibleTabs.indexOf(key);
+			return currPos < 0 ? POSITION_NONE : currPos;
+		}
+
 		@Override
 		public synchronized Fragment getItem(int position) {
-			if (0<=position && position<visibleTabs.size()) {
-				String key = visibleTabs.get(position);
-				return create(key);
+			String key = getTabKey(position);
+			if (key != null) {
+				return createOrGetFromCache(key, true);
 			}
 			return null;
 		}
 
-		VideosGridFragment create(String key) {
+		private VideosGridFragment createOrGetFromCache(String key, boolean create) {
+			VideosGridFragment fragment = instantiatedFragments.get(key);
+			if (fragment == null && create){
+				fragment = create(key);
+				instantiatedFragments.put(key, fragment);
+			}
+			return fragment;
+		}
+
+		private VideosGridFragment create(String key) {
 			// add fragments to list:  do NOT forget to ***UPDATE*** @string/tab_list and @string/tab_list_values
 			if (MOST_POPULAR_VIDEOS_FRAGMENT.equals(key)) {
 				return new MostPopularVideosFragment();
@@ -337,43 +372,33 @@ public class MainFragment extends FragmentEx {
 		}
 
 		@Override
-		public synchronized Object instantiateItem(final ViewGroup container, final int position) {
-			final Fragment fragment = (Fragment) super.instantiateItem(container, position);
-			instantiatedFragments.put(position, new WeakReference<>(fragment));
-			return fragment;
-		}
-
-		@Override
 		public synchronized void destroyItem(final ViewGroup container, final int position, final Object object) {
-			instantiatedFragments.remove(position);
 			super.destroyItem(container, position, object);
+			instantiatedFragments.remove(getTabKey(position));
 		}
 
-		@Nullable
-		public synchronized VideosGridFragment getFragment(final int position) {
-			if (0 <= position && position <= instantiatedFragments.size()) {
-				final WeakReference<Fragment> wr = instantiatedFragments.get(position);
-				if (wr != null) {
-					return (VideosGridFragment) wr.get();
-				}
+		private String getTabKey(int position) {
+			if (0 <= position && position < visibleTabs.size()) {
+				return visibleTabs.get(position);
 			}
 			return null;
 		}
 
-		public synchronized int getIndexOf(String fragmentName) {
+		private int getIndexOf(String fragmentName) {
 			return visibleTabs.indexOf(fragmentName);
 		}
 
-		public synchronized VideosGridFragment getTabOf(String fragmentName) {
-			return getFragment(getIndexOf(fragmentName));
+		private synchronized VideosGridFragment getFragmentFrom(int position, boolean createIfNotFound) {
+			String key = getTabKey(position);
+			return createOrGetFromCache(key, createIfNotFound);
 		}
 
-		public synchronized VideosGridFragment getTab(TabLayout.Tab tab) {
-			return getFragment(tab.getPosition());
+		private synchronized VideosGridFragment getFragmentFrom(TabLayout.Tab tab, boolean createIfNotFound) {
+			return getFragmentFrom(tab.getPosition(), createIfNotFound);
 		}
 
-		public void notifyTab(TabLayout.Tab tab, boolean onSelect) {
-			VideosGridFragment fragment = getTab(tab);
+		public synchronized void notifyTab(TabLayout.Tab tab, boolean onSelect) {
+			VideosGridFragment fragment = getFragmentFrom(tab, onSelect);
 			if (fragment != null) {
 				if (onSelect) {
 					fragment.onFragmentSelected();
@@ -383,8 +408,8 @@ public class MainFragment extends FragmentEx {
 			}
 		}
 
-		public void selectTabAtPosition(int position) {
-			VideosGridFragment fragment = getFragment(position);
+		public synchronized void selectTabAtPosition(int position) {
+			VideosGridFragment fragment = getFragmentFrom(position, true);
 			if (fragment != null) {
 				fragment.onFragmentSelected();
 			}
@@ -392,12 +417,15 @@ public class MainFragment extends FragmentEx {
 
 		@Override
 		public synchronized CharSequence getPageTitle(int position) {
-			String title = null;
-			if (0<=position && position<visibleTabs.size()) {
-				String tabKey = visibleTabs.get(position);
-				title = SkyTubeApp.getFragmentNames().getName(tabKey);
+			String tabKey = getTabKey(position);
+			if (tabKey != null) {
+				return SkyTubeApp.getFragmentNames().getName(tabKey);
 			}
-			return title != null ? title : "Unknown";
+			return "Unknown";
+		}
+
+		private boolean isVisible(String key) {
+			return getIndexOf(key) >= 0;
 		}
 	}
 
@@ -438,7 +466,7 @@ public class MainFragment extends FragmentEx {
 	 * Refresh the SubscriptionsFeedFragment's feed.
 	 */
 	public void refreshSubscriptionsFeedVideos() {
-		SubscriptionsFeedFragment subscriptionsFeedFragment = (SubscriptionsFeedFragment) videosPagerAdapter.getTabOf(SUBSCRIPTIONS_FEED_FRAGMENT);
+		SubscriptionsFeedFragment subscriptionsFeedFragment = (SubscriptionsFeedFragment) videosPagerAdapter.createOrGetFromCache(SUBSCRIPTIONS_FEED_FRAGMENT, false);
 		if (subscriptionsFeedFragment != null) {
 			subscriptionsFeedFragment.refreshFeedFromCache();
 		}
