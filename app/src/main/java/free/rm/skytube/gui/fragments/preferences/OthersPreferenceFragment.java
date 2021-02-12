@@ -33,11 +33,13 @@ import java.util.List;
 import java.util.Set;
 
 import free.rm.skytube.R;
+import free.rm.skytube.app.EventBus;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPIKey;
 import free.rm.skytube.businessobjects.YouTube.ValidateYouTubeAPIKey;
 import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
+import free.rm.skytube.gui.fragments.FragmentNames;
 
 /**
  * Preference fragment for other settings.
@@ -52,17 +54,17 @@ public class OthersPreferenceFragment extends BasePreferenceFragment {
 		// Default tab
 		defaultTabPref = findPreference(getString(R.string.pref_key_default_tab_name));
 		Set<String> hiddenFragments = SkyTubeApp.getPreferenceManager().getStringSet(getString(R.string.pref_key_hide_tabs), new HashSet<>());
-		String[] tabListValues = SkyTubeApp.getStringArray(R.array.tab_list_values);
-		final String[] tabList = SkyTubeApp.getStringArray(R.array.tab_list);
+		final String[] tabListValues = SkyTubeApp.getStringArray(R.array.tab_list_values);
+		final String[] tabListLabels = SkyTubeApp.getFragmentNames().getAllNames(tabListValues);
 		if(hiddenFragments.isEmpty()) {
-			defaultTabPref.setEntries(tabList);
+			defaultTabPref.setEntries(tabListLabels);
 			defaultTabPref.setEntryValues(tabListValues);
 		} else {
 			List<String> defaultTabEntries = new ArrayList<>();
 			List<String> defaultTabEntryValues = new ArrayList<>();
-			for(int i = 0; i< tabList.length; i++) {
+			for(int i = 0; i< tabListValues.length; i++) {
 				if(!hiddenFragments.contains(tabListValues[i])) {
-					defaultTabEntries.add(tabList[i]);
+					defaultTabEntries.add(tabListLabels[i]);
 					defaultTabEntryValues.add(tabListValues[i]);
 
 				}
@@ -76,7 +78,7 @@ public class OthersPreferenceFragment extends BasePreferenceFragment {
 		defaultTabPref.setSummary(String.format(getString(R.string.pref_summary_default_tab), defaultTabPref.getEntry()));
 
 		MultiSelectListPreference hiddenTabsPref = findPreference(getString(R.string.pref_key_hide_tabs));
-		hiddenTabsPref.setEntryValues(tabListValues);
+		hiddenTabsPref.setEntries(tabListLabels);
 
 //		ListPreference feedNotificationPref = (ListPreference) findPreference(getString(R.string.pref_feed_notification_key));
 //		if(feedNotificationPref.getValue() == null) {
@@ -93,7 +95,10 @@ public class OthersPreferenceFragment extends BasePreferenceFragment {
 				ListPreference defaultTabPref = (ListPreference) findPreference(key);
 				defaultTabPref.setSummary(String.format(getString(R.string.pref_summary_default_tab), defaultTabPref.getEntry()));
 			} else if (key.equals(getString(R.string.pref_key_hide_tabs))) {
-				displayRestartDialog(R.string.pref_hide_tabs_restart, true);
+				//
+				EventBus.getInstance().notifyMainTabChanged(EventBus.SettingChange.HIDE_TABS);
+
+				// displayRestartDialog(R.string.pref_hide_tabs_restart, true);
 			} else if (key.equals(getString(R.string.pref_youtube_api_key))) {
 				// Validate the entered API Key when saved (and not empty), with a simple call to get the most popular video
 				EditTextPreference    youtubeAPIKeyPref = (EditTextPreference) findPreference(getString(R.string.pref_youtube_api_key));

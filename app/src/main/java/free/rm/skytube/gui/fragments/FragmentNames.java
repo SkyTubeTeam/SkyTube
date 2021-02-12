@@ -48,4 +48,12 @@ public class FragmentNames {
         }
         return null;
     }
+
+    public String[] getAllNames(String[] tabListValues) {
+        String[] result = new String[tabListValues.length];
+        for (int i = 0; i < tabListValues.length; i++) {
+            result[i] = getName(tabListValues[i]);
+        }
+        return result;
+    }
 }

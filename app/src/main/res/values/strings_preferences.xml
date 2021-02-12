@@ -482,13 +482,6 @@
     <string name="pref_title_hide_tabs">Hide Tabs</string>
     <string name="pref_summary_hide_tabs">Choose which tabs should not be shown. Restart required.</string>
     <string name="pref_hide_tabs_restart">Restart app to show updated tabs.</string>
-    <string-array name="tab_list" translatable="false">
-        <item>@string/featured</item>
-        <item>@string/most_popular</item>
-        <item>@string/feed</item>
-        <item>@string/bookmarks</item>
-        <item>@string/downloads</item>
-    </string-array>
     <string-array name="tab_list_values" translatable="false">
         <item>MainFragment.featuredVideosFragment</item>
         <item>MainFragment.mostPopularVideosFragment</item>
