@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="thumbnail_downloaded">封面已下载。</string>
+    <string name="view_thumbnail">查看封面</string>
+    <string name="thumbnail">封面</string>
+    <string name="thumbnail_download_error">无法下载封面。</string>
+</resources>

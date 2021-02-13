@@ -6,12 +6,12 @@
     <string name="pref_summary_choose_player">Pemutar Video yang digunakan: %s</string>
     <string name="pref_import_export_category">Impor/Ekspor</string>
     <string name="pref_title_backup_dbs">Pencadangan Basis Data</string>
-    <string name="pref_summary_backup_dbs">Cadangkan basis data langganan dan markah anda.</string>
+    <string name="pref_summary_backup_dbs">Cadangkan basis data langganan dan markah Anda.</string>
     <string name="pref_title_import_dbs">Impor Cadangan</string>
-    <string name="pref_summary_import_dbs">Impor cadangan basis data langganan dan markah anda.</string>
+    <string name="pref_summary_import_dbs">Impor cadangan basis data langganan dan markah Anda.</string>
     <string name="databases_backing_up">Mencadangkan…</string>
     <string name="databases_backup_success">Basis data dicadangkan ke %s</string>
-    <string name="databases_backup_fail">Gagal mencadangkan basis data anda.</string>
+    <string name="databases_backup_fail">Gagal mencadangkan basis data Anda.</string>
     <string name="databases_import_select_backup">Pilih berkas cadangan untuk diimpor</string>
     <string name="databases_import_nothing_selected">Tidak ada yang dipilih…</string>
     <string name="databases_import_warning_message">Basis data langganan dan markah akan diganti dengan data dari berkas cadangan yang dipilih.
@@ -19,10 +19,10 @@
 \nLanjutkan\?</string>
     <string name="continue_">Lanjutkan</string>
     <string name="databases_importing">Mengimpor…</string>
-    <string name="databases_import_fail">Gagal mengimpor basis data anda.</string>
+    <string name="databases_import_fail">Gagal mengimpor basis data Anda.</string>
     <string name="databases_import_success">Basis data diimpor. Mulai ulang apl untuk menerapkan perubahan.</string>
     <string name="pref_title_import_subs">Impor Langganan Dari YouTube</string>
-    <string name="pref_summary_import_subs">Impor langganan anda dari akun YouTube anda.</string>
+    <string name="pref_summary_import_subs">Impor langganan Anda dari akun YouTube Anda.</string>
     <string name="subs_import_select_backup">Pilih berkas XML YouTube untuk diimpor</string>
     <string name="pref_about_category">Tentang</string>
     <string name="pref_title_website">Situs Web</string>
@@ -44,8 +44,8 @@
     <string name="pref_title_disable_screen_gestures">Nonaktifkan gestur video</string>
     <string name="pref_summary_disable_screen_gestures">Nonaktifkan gestur untuk mengontrol volume, kecerahan dan tinjauan maju/mundur.</string>
     <string name="pref_title_youtube_api_key">Kunci API YouTube</string>
-    <string name="pref_summary_youtube_api_key">Masukkan Kunci DATA API YouTube anda sendiri. Kosongkan untuk menggunakan nilai bawaan.</string>
-    <string name="pref_youtube_api_key_error">Terjadi kesalahan saat mencoba memvalidasi Kunci API yang anda masukkan.</string>
+    <string name="pref_summary_youtube_api_key">Masukkan Kunci DATA API YouTube Anda sendiri. Kosongkan untuk menggunakan nilai bawaan.</string>
+    <string name="pref_youtube_api_key_error">Terjadi kesalahan saat mencoba memvalidasi Kunci API yang Anda masukkan.</string>
     <string name="pref_youtube_api_key_custom">Kunci valid. Mulai ulang apl untuk menggunakan kunci API YouTube yang baru.</string>
     <string name="pref_youtube_api_key_default">Mulai ulang apl untuk beralih ke kunci API YouTube bawaan.</string>
     <string name="restart">Mulai Ulang</string>
@@ -74,11 +74,11 @@
     <string name="pref_title_preferred_regions">Wilayah Video</string>
     <string name="pref_summary_preferred_regions">Pilih wilayah yang diinginkan. Ini digunakan untuk memilah video di dalam kategori video \"Unggulan\": %s</string>
     <string name="pref_title_preferred_languages">Bahasa Video</string>
-    <string name="pref_summary_preferred_languages">Pilih bahasa yang anda inginkan.</string>
+    <string name="pref_summary_preferred_languages">Pilih bahasa yang Anda inginkan.</string>
     <string name="no_preferred_lang_selected">Tidak ada bahasa yang dipilih. Pengaturan diabaikan.</string>
     <string name="preferred_lang_updated">Bahasa diperbarui. Silakan segarkan daftar video.</string>
     <string name="pref_title_lang_detection_video_filtering">Filter Deteksi Bahasa Video</string>
-    <string name="pref_summary_lang_detection_video_filtering">Deteksi bahasa yang digunakan di dalam video dan blokir semua yang tidak sama dengan bahasa pilihan anda. Hanya untuk perangkat high-end.</string>
+    <string name="pref_summary_lang_detection_video_filtering">Deteksi bahasa yang digunakan di dalam video dan blokir semua yang tidak sama dengan bahasa pilihan Anda. Hanya untuk perangkat high-end.</string>
     <string name="setting_updated">Pengaturan diperbarui. Silakan segarkan daftar video.</string>
     <string name="pref_other_filters_category">Filter Lainnya</string>
     <string name="pref_title_low_views_filter">Ditonton</string>
@@ -130,9 +130,9 @@
 \nAnda seharusnya telah menerima salinan Lisensi Publik Umum GNU bersama dengan program ini. Jika tidak, lihat &lt;http://www.gnu.org/licenses/&gt;</string>
     <string name="pref_video_download_minimum_resolution_title">Resolusi Minimum Unduhan Video</string>
     <string name="pref_video_download_maximum_resolution_title">Resolusi Maksimum Unduhan Video</string>
-    <string name="pref_summary_minimum_res">Pilih resolusi minimum anda: %s</string>
+    <string name="pref_summary_minimum_res">Pilih resolusi minimum Anda: %s</string>
     <string name="pref_title_minimum_res">Resolusi Minimum</string>
-    <string name="pref_summary_maximum_res">Pilih resolusi maksimum anda: %s</string>
+    <string name="pref_summary_maximum_res">Pilih resolusi maksimum Anda: %s</string>
     <string name="pref_title_maximum_res">Resolusi Maksimum</string>
     <string name="pref_key_video_quality_for_downloads_summary">Optimal untuk: %s</string>
     <string name="pref_key_video_quality_for_downloads_title">Pilihan Kualitas Video untuk Unduhan</string>
@@ -144,7 +144,7 @@
     <string name="pref_video_download_maximum_resolution_summary">Video diunduh maksimal pada resolusi ini: %s</string>
     <string name="pref_category_download_resolutions">Resolusi Video Unduh</string>
     <string name="pref_category_video_resolutions">Resolusi Video</string>
-    <string name="pref_summary_metered_network_usage">Apa yang ingin anda lakukan jika anda menggunakan jaringan terukur untuk mengunduh/menonton video: %s</string>
+    <string name="pref_summary_metered_network_usage">Apa yang ingin Anda lakukan jika Anda menggunakan jaringan terukur untuk mengunduh/menonton video: %s</string>
     <string name="pref_title_metered_network_usage">Penggunaan Jaringan Terukur</string>
     <string name="pref_summary_maximum_res_metered">Pilih resolusi maksimum saat streaming melalui jaringan terukur: %s</string>
     <string name="pref_title_maximum_res_metered">Resolusi Maksimum untuk jaringan terukur</string>
@@ -152,4 +152,6 @@
     <string name="pref_title_minimum_res_metered">Resolusi Minimum untuk jaringan terukur</string>
     <string name="pref_category_metered_network">Jaringan Terukur</string>
     <string name="no_resolution_specified">Nihil</string>
+    <string name="pref_summary_default_content_country">Tampilkan konten yang disesuaikan untuk negara ini: %s</string>
+    <string name="pref_title_default_content_country">Lokasi konten</string>
 </resources>

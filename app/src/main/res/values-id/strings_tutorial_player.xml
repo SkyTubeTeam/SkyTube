@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="tutorial_slide_6">Klik dua kali untuk jeda atau memutar video.</string>
+    <string name="tutorial_slide_5">Geser secara vertikal untuk mengatur kecerahan.</string>
+    <string name="tutorial_slide_4">Geser secara vertikal untuk mengatur volume.</string>
+    <string name="tutorial_slide_3">Geser secara horizontal untuk memajukan atau memundurkan laju video.</string>
+    <string name="tutorial_slide_2">Geser ke atas untuk melihat deskripsi video.</string>
+    <string name="tutorial_slide_1">Geser ke kiri untuk melihat komentar.</string>
+    <string name="page_counter">%1$d dari %2$d</string>
+    <string name="skip">Lewati</string>
+    <string name="done">Selasai</string>
+    <string name="next">"Selanjutnya "</string>
+</resources>

@@ -28,14 +28,14 @@
     <string name="play">Putar</string>
     <string name="cancel">Batal</string>
     <string name="clear">Hapus</string>
-    <string name="should_resume">Apakah anda ingin melanjutkan dari posisi waktu terakhir video ditonton\?</string>
+    <string name="should_resume">Apakah Anda ingin melanjutkan dari posisi waktu terakhir video ditonton\?</string>
     <string name="resume">Lanjutkan</string>
     <string name="error_get_comments_no_network">Komentar tidak tersedia tanpa akses jaringan.</string>
     <string name="error_video_parse_error">Tidak bisa memutar video, pesan galat: <br/> <br/> %s.</string>
-    <string name="error_downloaded_file_is_corrupted">Video yang diunduh sepertinya <b>rusak</b> - pesan galat: <br/> <br/> %s. <br/> <br/> Apakah anda ingin <b>menghapus</b> berkas tersebut\?</string>
+    <string name="error_downloaded_file_is_corrupted">Video yang diunduh sepertinya <b>rusak</b> - pesan galat: <br/> <br/> %s. <br/> <br/> Apakah Anda ingin <b>menghapus</b> berkas tersebut\?</string>
     <string name="reload_video">Muat Ulang Video</string>
-    <string name="metered_network_blocked_by_policy">Unduh diblokir karena perangkat anda tersambung ke jaringan terukur.</string>
+    <string name="metered_network_blocked_by_policy">Unduh diblokir karena perangkat Anda tersambung ke jaringan terukur.</string>
     <string name="warning_metered_network_disable">Jangan tanya lagi.</string>
-    <string name="warning_metered_network_play">Perangkat anda tersambung ke jaringan terukur. Untuk menghindari potensi biaya ekstra penggunaan data, direkomendasikan untuk tersambung ke jaringan tak terbatas. Tetap putar video\?</string>
+    <string name="warning_metered_network_play">Perangkat Anda tersambung ke jaringan terukur. Untuk menghindari potensi biaya ekstra penggunaan data, direkomendasikan untuk tersambung ke jaringan tak terbatas. Tetap putar video\?</string>
     <string name="metered_network">Sambungan Terukur</string>
 </resources>

@@ -13,5 +13,6 @@
     <string name="external_storage_not_available">外部ストレージが利用できないので、ファイルをダウンロードできません。</string>
     <string name="download">ダウンロード</string>
     <string name="warning_metered_network_download">あなたのデバイスは従量制課金ネットワークに接続されています。余分なデータ使用料を避けるため、定額制課金ネットワークへの接続をおすすめします。それでもビデオをダウンロードしますか？</string>
-    <string name="video_stream_not_found_with_request_resolution">指定された解像度(%s - %s)のビデオストリームは見つかりませんでした。</string>
+    <string name="video_stream_not_found_with_request_resolution">指定された解像度(%s - %s)のビデオストリームは見つかりませんでした</string>
+    <string name="unable_to_delete_file">ダウンロード済みファイル \'%s\' を削除できません</string>
 </resources>

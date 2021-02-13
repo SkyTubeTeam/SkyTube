@@ -164,4 +164,7 @@
     <string name="pref_summary_minimum_res_metered">Velg din minimumsoppløsning når du strømmer fra et kvotebasert nettverk: %s</string>
     <string name="pref_title_minimum_res_metered">Minimumsoppløsning for kvotebasert nettverk</string>
     <string name="pref_category_metered_network">Kvotebasert nettverk</string>
+    <string name="pref_summary_default_content_country">Vis innhold ment for dette landet: %s</string>
+    <string name="pref_title_default_content_country">Forvalgt innholdsland</string>
+    <string name="system_default_country">Systemforvalgsland</string>
 </resources>

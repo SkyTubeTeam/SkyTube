@@ -164,4 +164,7 @@
     <string name="pref_title_minimum_res">Resolução mínima</string>
     <string name="pref_summary_maximum_res">Selecione a resolução máxima: %s</string>
     <string name="pref_title_maximum_res">Resolução máxima</string>
+    <string name="pref_summary_default_content_country">Mostrar conteúdo idealizado para este país: %s</string>
+    <string name="pref_title_default_content_country">País padrão do conteúdo</string>
+    <string name="system_default_country">País definido no sistema</string>
 </resources>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="resume">Reprèn</string>
+    <string name="no_video_comments">Aquest vídeo o bé no té comentaris o estan desactivats.</string>
+    <string name="error_video_parse_error">No es pot començar a reproduir el vídeo, el missatge d\'error és: <br/> <br/> %s.</string>
+    <string name="should_resume">Voleu reprendre des del lloc on us heu aturat\?</string>
+    <string name="clear">Neteja</string>
+    <string name="cancel">Cancel·la</string>
+    <string name="play">Reprodueix</string>
+    <string name="enter_video_url">Introduïu l\'URL del vídeo</string>
+    <string name="hide_replies">Amaga les respostes</string>
+    <string name="view_replies">Veure respostes</string>
+    <string name="error_get_comments_no_network">Es necessita accés a la xarxa per obtenir comentaris.</string>
+    <string name="error_get_comments">S\'ha produït un error en rebre comentaris.</string>
+    <string name="mark_unwatched">Marca com a no vist</string>
+    <string name="mark_watched">Marca com a vist</string>
+    <string name="url_copied_to_clipboard">URL copiat al porta-retalls.</string>
+    <string name="copy_url">Copia l\'adreça URL</string>
+    <string name="share_via">Comparteix via</string>
+    <string name="share">Comparteix</string>
+    <string name="open_with">Obre amb…</string>
+    <string name="open_in_browser">Obre al navegador web</string>
+    <string name="reload_video">Torna a carregar el vídeo</string>
+    <string name="loading_video">S\'està carregant el vídeo…</string>
+    <string name="ratings_disabled">Les valoracions estan desactivades</string>
+    <string name="play_video">Reprodueix vídeo</string>
+    <string name="warning_metered_network_disable">No ho preguntis mai més.</string>
+    <string name="error_invalid_url">URL del vídeo no vàlid: %s</string>
+    <string name="error_get_video_desc">S\'ha produït un error en recuperar la descripció del vídeo.</string>
+    <string name="error_video_streams">S\'ha produït un error en recuperar els fluxes de vídeo.</string>
+    <string name="error_video_streams_empty">El vídeo %s no té fluxos.</string>
+    <string name="error_video_play">Error de reproducció de vídeo</string>
+    <string name="error_stream_decryption_fail">No s\'ha pogut carregar el codi de desxifratge del servei de YouTube.</string>
+    <string name="error_stream_err_unavailable">El missatge d\'error no està disponible.</string>
+</resources>

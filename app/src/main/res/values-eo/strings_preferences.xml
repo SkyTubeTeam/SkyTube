@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="pref_title_hide_tabs">Kaŝi Langetojn</string>
+    <string name="pref_title_version">Versio</string>
+    <string name="pref_title_website">Retejo</string>
+    <string name="pref_about_category">Pri</string>
+    <string name="pref_title_choose_player">Filmeta Ludilo</string>
+    <string name="pref_video_player_category">Filmeta ludilo</string>
+    <string name="key_preferences">preferencoj</string>
+    <string name="preferences">Preferencoj</string>
+</resources>

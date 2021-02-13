@@ -14,4 +14,5 @@
     <string name="download">下載</string>
     <string name="video_stream_not_found_with_request_resolution">在 %s - %s 間找不到請求解析度的視訊串流</string>
     <string name="warning_metered_network_download">您的裝置已連線到計量收費網路。為了避免產生額外的資料使用費，建議連線到非計量收費的網路。仍要下載影片嗎？</string>
+    <string name="unable_to_delete_file">無法刪除已下載的檔案：「%s」</string>
 </resources>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="tutorial_slide_5">上下划动调整亮度。</string>
+    <string name="tutorial_slide_4">上下划动调整音量。</string>
+    <string name="tutorial_slide_3">水平划动前进或后退。</string>
+    <string name="tutorial_slide_2">上划查看视频简介。</string>
+    <string name="tutorial_slide_6">双击暂停或者播放。</string>
+    <string name="tutorial_slide_1">左划查看评论。</string>
+    <string name="page_counter">%2$d 的 %1$d</string>
+    <string name="skip">跳过</string>
+    <string name="done">完成</string>
+    <string name="next">"下一个 "</string>
+</resources>
