@@ -49,12 +49,10 @@ public class MainFragment extends FragmentEx {
 
 	private static final int TOP_LIST_INDEX = 0;
 
-	private RecyclerView				subsListView = null;
 	private SubsAdapter					subsAdapter  = null;
 	private ActionBarDrawerToggle		subsDrawerToggle;
 	private TabLayout                   tabLayout = null;
 	private DrawerLayout 				subsDrawerLayout = null;
-	private SearchView 					subSearchView = null;
 
 
 	// Constants for saving the state of this Fragment's child Fragments
@@ -100,8 +98,8 @@ public class MainFragment extends FragmentEx {
 			actionBar.setHomeButtonEnabled(true);
 		}
 
-		subsListView = view.findViewById(R.id.subs_drawer);
-		subSearchView = view.findViewById(R.id.subs_search_view);
+		RecyclerView subsListView = view.findViewById(R.id.subs_drawer);
+		SearchView subSearchView = view.findViewById(R.id.subs_search_view);
 		AutoCompleteTextView autoCompleteTextView = subSearchView.findViewById(androidx.appcompat.R.id.search_src_text);
 		int fontColor = ContextCompat.getColor(getContext(), R.color.subs_text);
 		autoCompleteTextView.setTextColor(fontColor);
@@ -221,8 +219,8 @@ public class MainFragment extends FragmentEx {
 	@Override
 	public void onDestroyView() {
 		subsAdapter.removeListener((MainActivityListener) getActivity());
-		subsListView.setAdapter(null); // cleanup the reference from the SubsAdapter back to the view
 		subsDrawerLayout = null;
+		videosPagerAdapter = null;
 		subsDrawerToggle = null;
 		tabLayout = null;
 		super.onDestroyView();
@@ -231,7 +229,6 @@ public class MainFragment extends FragmentEx {
 	@Override
 	public void onDestroy() {
 		// this should happen after onSaveInstanceState
-		videosPagerAdapter = null;
 		super.onDestroy();
 	}
 
