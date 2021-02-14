@@ -1,5 +1,5 @@
 # SkyTube
-**An open-source YouTube player for the Android operating system, without ads.**
+**A copylefted libre YouTube player for Android, without ads.**
 
 <a href="#download">![Download APK](https://img.shields.io/github/downloads/ram-on/SkyTube/total.svg?label=SkyTube+Extra+Downloads)</a>
 <a href="https://hosted.weblate.org/engage/skytube/?utm_source=widget"> <img src="https://hosted.weblate.org/widgets/skytube/-/svg-badge.svg" alt="Translate"/> </a>
@@ -17,32 +17,32 @@
 
 ## Features
 ### Innovative Features
-* Video blocker which includes the following features:
-  - Channel blacklisting
-  - Channel whitelisting
-  - Block videos if their language is not the same as the user's preferred one(s)
-  - Low views video blocking
-  - High dislikes video blocking
-  - Icon in the toolbar displaying how many videos were blocked
-* Videos watched or partially watched are marked accordingly.  Resume playing feature also implemented.
-* Video swipe controls, including volume, brightness, comments and video description controls.
-* Bookmark videos
-* Import subscriptions from YouTube
-* Play channels' playlists
-* Download videos
-* Ability to play the video faster - or slower than live. **[New!]**
-* View and download video thumbnails
-* Doesn't display any adverts when browsing or playing videos
-* Backup and restore bookmarks and subscriptions (all stored locally on your device)
+* Video blocker featuring:
+  - Channel blacklisting.
+  - Channel whitelisting.
+  - Block videos if their language is not the same as the user's preferred one(s).
+  - Block low-view videos.
+  - Block high-dislike videos.
+  - Toolbar icon showing number of blocked videos.
+* Watched or partially watched videos are marked accordingly. "Resume playing" feature also implemented.
+* Video swipe controls, including controls for volume, brightness, comments and video description.
+* Bookmark videos.
+* Import subscriptions from YouTube.
+* Play channels' playlists.
+* Download videos.
+* Ability to play the video faster — or slower than live. **[New!]**
+* View and download video thumbnails.
+* No adverts when browsing or playing videos.
+* Back up and restore bookmarks and subscriptions (all stored locally on your device).
 
 ### Traditional Features
-* Explore Featured and Most Popular videos
-* Browse YouTube channels
-* Play YouTube videos
-* View video comments
-* Search videos, music and channels
-* Channel subscription & non-intrusive notifications
-* Subscriptions feed
+* Explore Featured and Most Popular videos.
+* Browse YouTube channels.
+* Play YouTube videos.
+* View video comments.
+* Search videos, music and channels.
+* Channel subscription & non-intrusive notifications.
+* Subscriptions feed.
 
 More features will be added in the near future.
 
@@ -61,32 +61,51 @@ Android 4.0 (Ice Cream Sandwich) or later. For techies, that means an API level 
 
 _* powered by a closed-source, third-party library._
 
-## Why SkyTube?
-* Free and Open-Source
-* Innovative design
-* No intrusive ads
-* Multilingual
-* Not dependent on GAPPS/Google Apps (i.e. YouTube official app)
-* No need for Google/YouTube account to operate
-* My code does not spy on your behaviour!
+## Features
+* Copylefted libre software.
+* Gratis.
+* Innovative design.
+* No ads.
+* Multilingual.
+* Not dependent on GApps/Google Apps (the official YouTube app).
+* No need for Google/YouTube account to operate.
+* Does not spy on your behaviour!
 
 ## Translate
-You can help us translate this app into your native language by visiting [SkyTube's Weblate page](https://hosted.weblate.org/engage/skytube/).  Just log in using your GitHub/GitLab/BitBucket/Google/Facebook account and start translating!
+You can help us translate this app into your native language by visiting [SkyTube's Weblate page](https://hosted.weblate.org/engage/skytube/). Just log in using your GitHub/GitLab/BitBucket/Google/Facebook account and start translating!
 
 ### Translation status:
 <a href="https://hosted.weblate.org/engage/skytube/?utm_source=widget">
 <img src="https://hosted.weblate.org/widgets/skytube/-/multi-auto.svg" alt="Translation status" />
 </a>
 
-
 ## Screenshots
 ### Phone
-[<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/trending.jpg" width=250>](https://ram-on.github.io/SkyTube/assets/img/screenshots/trending.jpg)
-[<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/subs.jpg" alt="Subscriptions" width="250" />](https://ram-on.github.io/SkyTube/assets/img/screenshots/subs.jpg)
-[<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/video_blocker.jpg" alt="Video Blocker" width="250" />](https://ram-on.github.io/SkyTube/assets/img/screenshots/video_blocker.jpg")
 
-[<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/play.jpg" alt="Play video" width="250" />](https://ram-on.github.io/SkyTube/assets/img/screenshots/play.jpg")
-[<img src="https://ram-on.github.io/SkyTube/assets/img/screenshots/channel.jpg" alt="Browse channel" width="250" />](https://ram-on.github.io/SkyTube/assets/img/screenshots/channel.jpg")
+.. image:: https://skytube-app.com/assets/img/screenshots/trending.jpg
+   :alt: Trending
+   :target: https://skytube-app.com#features
+   :height: 250px
+
+.. image:: https://skytube-app.com/assets/img/screenshots/subs.jpg
+   :alt: Subscriptions
+   :target: https://skytube-app.com#features
+   :height: 250px
+
+.. image:: https://skytube-app.com/assets/img/screenshots/channel.jpg
+   :alt: Browse video
+   :target: https://skytube-app.com#features
+   :height: 250px
+
+.. image:: https://skytube-app.com/assets/img/screenshots/play.jpg
+   :alt: Play video
+   :target: https://skytube-app.com#features
+   :height: 250px
+
+.. image:: https://skytube-app.com/assets/img/screenshots/video_blocker.jpg
+   :alt: Video blocker
+   :target: https://skytube-app.com#features
+   :height: 250px
 
 ### Tablet
 ![Browse channel using tablet](https://ram-on.github.io/SkyTube/assets/img/screenshots/channel_tablet.jpg)
@@ -94,22 +113,14 @@ You can help us translate this app into your native language by visiting [SkyTub
 ## Contribute
 This project was possible with the support and contribution of [numerous volunteers and third-party projects](http://skytube-app.com/credits.html).
 
-Help us improve this project by [translating](https://github.com/SkyTubeTeam/SkyTube/wiki/Contribute#translate) or by [coding](https://github.com/SkyTubeTeam/SkyTube/wiki/Contribute#developers-guidelines)!
+Help improve SkyTube by [translating](https://github.com/SkyTubeTeam/SkyTube/wiki/Contribute#translate) or [developing](https://github.com/SkyTubeTeam/SkyTube/wiki/Contribute#developers-guidelines) it.
 
 ## License
-[![GNU GPLv3 Image](https://www.gnu.org/graphics/gplv3-127x51.png)](https://www.gnu.org/licenses/gpl-3.0.en.html)  
 
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation (version 3 of the License).
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a [copy of the GNU General Public License](https://raw.githubusercontent.com/SkyTubeTeam/SkyTube/master/LICENSE)
-along with this program.  If not, see https://www.gnu.org/licenses/.
+.. image:: https://www.gnu.org/graphics/gplv3-127x51.png
+   :alt: GNU GPLv3 image
+   :target: https://www.gnu.org/licenses/gpl-3.0.html#language-container
+   :height: 250px
 
 This project is not affiliated with YouTube™ or any of its partners and/or products.
 YouTube™ and Android™ are registered trademarks of Google Inc.
