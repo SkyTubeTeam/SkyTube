@@ -17,17 +17,24 @@
 
 package free.rm.skytube.app;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.function.Consumer;
+
 import free.rm.skytube.app.utils.WeakList;
+import free.rm.skytube.gui.businessobjects.MainActivityListener;
 import free.rm.skytube.gui.fragments.MainFragment;
 
 public class EventBus {
     public enum SettingChange {
         HIDE_TABS,
-        CONTENT_COUNTRY
+        CONTENT_COUNTRY,
+        SUBSCRIPTION_LIST_CHANGED
     }
     private static EventBus instance;
 
     private WeakList<MainFragment> mainFragments = new WeakList<>();
+    private WeakList<MainActivityListener> mainActivityListeners = new WeakList<>();
 
     public static synchronized EventBus getInstance() {
         if (instance == null) {
@@ -43,4 +50,21 @@ public class EventBus {
     public void notifyMainTabChanged(SettingChange settingChange) {
         this.mainFragments.forEach(main -> main.refreshTabs(settingChange));
     }
+
+    public void notifyChannelNewVideosStatus(String channelId, boolean newVideos) {
+        this.mainFragments.forEach(main -> main.notifyChangeChannelNewVideosStatus(channelId, newVideos));
+    }
+
+    public void notifyChannelRemoved(String channelId) {
+        this.mainFragments.forEach(main -> main.notifyChannelRemoved(channelId));
+    }
+
+    public void addMainActivityListener(MainActivityListener listener) {
+        this.mainActivityListeners.add(listener);
+    }
+
+    public void notifyMainActivities(Consumer<MainActivityListener> function) {
+        this.mainActivityListeners.forEach(function);
+    }
+
 }

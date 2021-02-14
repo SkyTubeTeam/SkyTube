@@ -36,6 +36,7 @@ import java.util.List;
 import java.util.Objects;
 
 import free.rm.skytube.R;
+import free.rm.skytube.app.EventBus;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.VideoBlocker;
@@ -43,7 +44,6 @@ import free.rm.skytube.businessobjects.db.ChannelFilteringDb;
 import free.rm.skytube.businessobjects.db.DatabaseResult;
 import free.rm.skytube.businessobjects.db.DatabaseTasks;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
-import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
 import free.rm.skytube.gui.fragments.SubscriptionsFeedFragment;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Single;
@@ -303,7 +303,7 @@ public class YouTubeChannel extends CardData implements Serializable {
 						switch(result) {
 							case SUCCESS: {
 								youTubeChannel.setUserSubscribed(true);
-								SubsAdapter.get(context).refreshSubsList();
+								EventBus.getInstance().notifyMainTabChanged(EventBus.SettingChange.SUBSCRIPTION_LIST_CHANGED);
 								SubscriptionsFeedFragment.refreshSubsFeedFromCache();
 								Toast.makeText(context, R.string.channel_subscribed, Toast.LENGTH_LONG).show();
 								break;

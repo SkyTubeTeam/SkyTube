@@ -35,6 +35,7 @@ import java.util.Iterator;
 import java.util.Set;
 
 import free.rm.skytube.R;
+import free.rm.skytube.app.EventBus;
 import free.rm.skytube.businessobjects.YouTube.POJOs.ChannelView;
 import free.rm.skytube.businessobjects.db.DatabaseTasks;
 import free.rm.skytube.gui.businessobjects.MainActivityListener;
@@ -47,38 +48,16 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable;
 public class SubsAdapter extends RecyclerViewAdapterEx<ChannelView, SubsAdapter.SubChannelViewHolder> {
 
 	private static final String TAG = SubsAdapter.class.getSimpleName();
-	private static SubsAdapter subsAdapter = null;
-	private final Set<MainActivityListener> listeners = new HashSet<>();
 
 	private String searchText;
 
 	private final CompositeDisposable compositeDisposable = new CompositeDisposable();
 
-	private SubsAdapter(Context context, View progressBar) {
+	public SubsAdapter(Context context, View progressBar) {
 		super(context);
 
 		// populate this adapter with user's subscribed channels
 		executeQuery(null, progressBar);
-	}
-
-	public static SubsAdapter get(Context context) {
-		return get(context, null);
-	}
-
-	public static SubsAdapter get(Context context, View progressBar) {
-		if (subsAdapter == null) {
-			subsAdapter = new SubsAdapter(context, progressBar);
-		}
-
-		return subsAdapter;
-	}
-
-	public void addListener(MainActivityListener listener) {
-		this.listeners.add(listener);
-	}
-
-	public void removeListener(MainActivityListener listener) {
-		this.listeners.remove(listener);
 	}
 
 	/**
@@ -146,6 +125,9 @@ public class SubsAdapter extends RecyclerViewAdapterEx<ChannelView, SubsAdapter.
 		viewHolder.updateInfo(get(position));
 	}
 
+	/**
+	 * This should be called only from MainFragment
+	 */
 	public void refreshSubsList() {
 		clearList();
 		executeQuery(searchText, null);
@@ -173,7 +155,7 @@ public class SubsAdapter extends RecyclerViewAdapterEx<ChannelView, SubsAdapter.
 		private ImageView thumbnailImageView;
 		private TextView channelNameTextView;
 		private View newVideosNotificationView;
-		private ChannelView channel = null;
+		private ChannelView channel;
 
 		SubChannelViewHolder(View rowView) {
 			super(rowView);
@@ -183,9 +165,10 @@ public class SubsAdapter extends RecyclerViewAdapterEx<ChannelView, SubsAdapter.
 			channel = null;
 
 			rowView.setOnClickListener(v -> {
-				for (MainActivityListener listener: listeners) {
-					listener.onChannelClick(channel.getId());
-				}
+				String channelId = channel.getId();
+				EventBus.getInstance().notifyMainActivities(listener -> {
+					listener.onChannelClick(channelId);
+				});
 			});
 		}
 

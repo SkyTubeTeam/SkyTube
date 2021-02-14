@@ -42,6 +42,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import free.rm.skytube.R;
+import free.rm.skytube.app.EventBus;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
@@ -425,7 +426,7 @@ public class SubscriptionsBackupsManager {
 				.observeOn(AndroidSchedulers.mainThread())
 				.subscribe(totalChannelsSubscribedTo -> {
 					// inform the SubsAdapter that it needs to repopulate the subbed channels list
-					SubsAdapter.get(activity).refreshSubsList();
+					EventBus.getInstance().notifyMainTabChanged(EventBus.SettingChange.SUBSCRIPTION_LIST_CHANGED);
 
 					// hide the dialog
 					dialog.dismiss();

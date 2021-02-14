@@ -2,7 +2,6 @@ package free.rm.skytube.gui.fragments;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,7 +19,6 @@ import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.preference.PreferenceManager;
@@ -30,7 +28,6 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -41,7 +38,6 @@ import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.app.utils.WeaklyReferencedMap;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.gui.activities.BaseActivity;
-import free.rm.skytube.gui.businessobjects.MainActivityListener;
 import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
 import free.rm.skytube.gui.businessobjects.fragments.FragmentEx;
 
@@ -109,11 +105,8 @@ public class MainFragment extends FragmentEx {
 
 
 		if (subsAdapter == null) {
-			subsAdapter = SubsAdapter.get(getActivity(), view.findViewById(R.id.subs_drawer_progress_bar));
-		} else {
-			subsAdapter.setContext(getActivity());
+			subsAdapter = new SubsAdapter(getActivity(), view.findViewById(R.id.subs_drawer_progress_bar));
 		}
-		subsAdapter.addListener((MainActivityListener) getActivity());
 
 		subsListView.setLayoutManager(new LinearLayoutManager(getActivity()));
 		subsListView.setAdapter(subsAdapter);
@@ -218,7 +211,6 @@ public class MainFragment extends FragmentEx {
 
 	@Override
 	public void onDestroyView() {
-		subsAdapter.removeListener((MainActivityListener) getActivity());
 		subsListView.setAdapter(null);
 		subsListView = null;
 		subsDrawerLayout = null;
@@ -252,14 +244,14 @@ public class MainFragment extends FragmentEx {
 			Logger.d(this, "MAINFRAGMENT RESUMED " + tabLayout.getSelectedTabPosition());
 			videosPagerAdapter.selectTabAtPosition(tabLayout.getSelectedTabPosition());
 		}
-		FragmentActivity activity = getActivity();
-		subsAdapter.setContext(activity);
+//		FragmentActivity activity = getActivity();
+//		subsAdapter.setContext(activity);
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
-		subsAdapter.setContext(null);
+//		subsAdapter.setContext(null);
 	}
 
 	@Override
@@ -276,14 +268,33 @@ public class MainFragment extends FragmentEx {
 
 	public void refreshTabs(EventBus.SettingChange settingChange) {
 		Logger.i(this, "refreshTabs called");
-		if (settingChange == EventBus.SettingChange.HIDE_TABS) {
-			videosPagerAdapter.updateVisibleTabs(tabLayout);
-		} else {
-			videosPagerAdapter.notifyDataSetChanged();
+		switch (settingChange) {
+			case HIDE_TABS: {
+				videosPagerAdapter.updateVisibleTabs(tabLayout);
+				break;
+			}
+			case CONTENT_COUNTRY: {
+				videosPagerAdapter.notifyDataSetChanged();
+				break;
+			}
+			case SUBSCRIPTION_LIST_CHANGED: {
+				subsAdapter.refreshSubsList();
+				break;
+			}
+			default:
+				break;
 		}
 	}
 
-	public static class SimplePagerAdapter extends FragmentPagerAdapter {
+	public void notifyChangeChannelNewVideosStatus(String channelId, boolean newVideos) {
+		subsAdapter.changeChannelNewVideosStatus(channelId, newVideos);
+	}
+
+	public void notifyChannelRemoved(String channelId) {
+		subsAdapter.removeChannel(channelId);
+	}
+
+	public class SimplePagerAdapter extends FragmentPagerAdapter {
 		private final WeaklyReferencedMap<String, VideosGridFragment> instantiatedFragments = new WeaklyReferencedMap<>();
 		private final List<String> visibleTabs = new ArrayList<>();
 

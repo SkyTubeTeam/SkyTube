@@ -38,8 +38,6 @@ import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPIKey;
 import free.rm.skytube.businessobjects.YouTube.ValidateYouTubeAPIKey;
-import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
-import free.rm.skytube.gui.fragments.FragmentNames;
 
 /**
  * Preference fragment for other settings.
@@ -118,8 +116,7 @@ public class OthersPreferenceFragment extends BasePreferenceFragment {
 					}
 				}
 			} else if (key.equals(getString(R.string.pref_key_subscriptions_alphabetical_order))) {
-				SubsAdapter subsAdapter = SubsAdapter.get(getActivity());
-				subsAdapter.refreshSubsList();
+				EventBus.getInstance().notifyMainTabChanged(EventBus.SettingChange.SUBSCRIPTION_LIST_CHANGED);
 			}/*else if (key.equals(getString(R.string.pref_feed_notification_key))) {
 				ListPreference feedNotificationPref = (ListPreference) findPreference(key);
 				feedNotificationPref.setSummary(String.format(getString(R.string.pref_summary_feed_notification), feedNotificationPref.getEntry()));
