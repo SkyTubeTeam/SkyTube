@@ -52,6 +52,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import free.rm.skytube.R;
+import free.rm.skytube.app.EventBus;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.TLSSocketFactory;
@@ -117,6 +118,8 @@ public class MainActivity extends BaseActivity {
 			new UpdatesCheckerTask(this, false).executeInParallel();
 			updatesCheckerTaskRan = true;
 		}
+
+		EventBus.getInstance().addMainActivityListener(this);
 
 		SkyTubeApp.setFeedUpdateInterval();
 		// Delete any missing downloaded videos

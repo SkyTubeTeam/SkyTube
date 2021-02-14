@@ -14,13 +14,13 @@ import java.util.List;
 import java.util.Objects;
 
 import free.rm.skytube.R;
+import free.rm.skytube.app.EventBus;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.YouTube.POJOs.ChannelView;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.YouTube.VideoBlocker;
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
-import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
 import free.rm.skytube.gui.businessobjects.views.SubscribeButton;
 import free.rm.skytube.gui.fragments.SubscriptionsFeedFragment;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
@@ -103,15 +103,8 @@ public class DatabaseTasks {
 
     /**
      * Gets a flow of channels (from the DB) that the user is subscribed to and then
-     * passes it to the given {@link SubsAdapter}.
+     * tries to refresh it from the network.
      */
-    public static Flowable<YouTubeChannel> getSubscribedChannels(@NonNull Context context) {
-        // TODO, add bookmark and downloaded videos channel id too...
-        return SubscriptionsDb.getSubscriptionsDb().getSubscribedChannelIdsAsync().flatMapPublisher(channelIds ->
-            getLoadChannelInfo(context, channelIds)
-        );
-    }
-
     public static Flowable<YouTubeChannel> getLoadChannelInfo(@NonNull Context context, List<String> channelIds) {
         // TODO, add bookmark and downloaded videos channel id too...
         return Flowable.fromIterable(channelIds)
@@ -199,8 +192,6 @@ public class DatabaseTasks {
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSuccess(databaseResult -> {
                     if (databaseResult == DatabaseResult.SUCCESS) {
-                        SubsAdapter adapter = SubsAdapter.get(context);
-
                         // we need to refresh the Feed tab so it shows videos from the newly subscribed (or
                         // unsubscribed) channels
                         SubscriptionsFeedFragment.refreshSubsFeedFromCache();
@@ -212,8 +203,8 @@ public class DatabaseTasks {
                             // Also change the subscription state of the channel
                             channel.setUserSubscribed(true);
 
-                            // update the SubsAdapter (i.e. the channels subscriptions list/drawer)
-                            adapter.refreshSubsList();
+                            // notify about the subscription list change
+                            EventBus.getInstance().notifyMainTabChanged(EventBus.SettingChange.SUBSCRIPTION_LIST_CHANGED);
 
                             if (displayToastMessage) {
                                 Toast.makeText(context, R.string.subscribed, Toast.LENGTH_LONG).show();
@@ -225,8 +216,8 @@ public class DatabaseTasks {
                             // Also change the subscription state of the channel
                             channel.setUserSubscribed(false);
 
-                            // remove the channel from the SubsAdapter (i.e. the channels subscriptions list/drawer)
-                            adapter.removeChannel(channel.getId());
+                            // remove the channel from the channels subscriptions list/drawer
+                            EventBus.getInstance().notifyChannelRemoved(channel.getId());
 
                             if (displayToastMessage) {
                                 Toast.makeText(context, R.string.unsubscribed, Toast.LENGTH_LONG).show();

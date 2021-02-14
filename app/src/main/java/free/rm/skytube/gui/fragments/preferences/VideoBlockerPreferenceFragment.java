@@ -40,6 +40,7 @@ import java.util.Set;
 
 import free.rm.skytube.BuildConfig;
 import free.rm.skytube.R;
+import free.rm.skytube.app.EventBus;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.Logger;
@@ -49,7 +50,6 @@ import free.rm.skytube.businessobjects.db.ChannelFilteringDb;
 import free.rm.skytube.gui.businessobjects.MultiSelectListPreferenceDialog;
 import free.rm.skytube.gui.businessobjects.MultiSelectListPreferenceItem;
 import free.rm.skytube.gui.businessobjects.SkyTubeMaterialDialog;
-import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
@@ -178,7 +178,7 @@ public class VideoBlockerPreferenceFragment extends PreferenceFragmentCompat {
 		// User has just changed the filtering method and hence there might be a subbed channel
 		// that needs to be filtered out...  Therefore, we need to notify the SubsAdapter to
 		// refresh...
-		SubsAdapter.get(getActivity()).refreshSubsList();
+		EventBus.getInstance().notifyMainTabChanged(EventBus.SettingChange.SUBSCRIPTION_LIST_CHANGED);
 	}
 
 	/**

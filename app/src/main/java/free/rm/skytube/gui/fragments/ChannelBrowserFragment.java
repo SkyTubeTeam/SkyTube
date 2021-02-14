@@ -40,14 +40,13 @@ import java.util.List;
 import java.util.Objects;
 
 import free.rm.skytube.R;
-import free.rm.skytube.app.Utils;
+import free.rm.skytube.app.EventBus;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannelInterface;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.db.DatabaseTasks;
-import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
 import free.rm.skytube.gui.businessobjects.fragments.FragmentEx;
 import free.rm.skytube.gui.businessobjects.fragments.TabFragment;
 import free.rm.skytube.gui.businessobjects.views.SubscribeButton;
@@ -291,7 +290,7 @@ public class ChannelBrowserFragment extends FragmentEx {
 					channel.setNewVideosSinceLastVisit(false);
 					// since this.channel and SubsAdapter's channel are different instances, then we
 					// need to modify both of them [different because of bundle.getSerializable(channel)]
-					SubsAdapter.get(getActivity()).changeChannelNewVideosStatus(channel.getId(), false);
+					EventBus.getInstance().notifyChannelNewVideosStatus(channel.getId(), false);
 				}
 			}
 		}
