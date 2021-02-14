@@ -53,7 +53,7 @@ public class MainFragment extends FragmentEx {
 	private ActionBarDrawerToggle		subsDrawerToggle;
 	private TabLayout                   tabLayout = null;
 	private DrawerLayout 				subsDrawerLayout = null;
-
+	private RecyclerView subsListView= null;
 
 	// Constants for saving the state of this Fragment's child Fragments
 	public static final String FEATURED_VIDEOS_FRAGMENT = "MainFragment.featuredVideosFragment";
@@ -98,7 +98,7 @@ public class MainFragment extends FragmentEx {
 			actionBar.setHomeButtonEnabled(true);
 		}
 
-		RecyclerView subsListView = view.findViewById(R.id.subs_drawer);
+		subsListView = view.findViewById(R.id.subs_drawer);
 		SearchView subSearchView = view.findViewById(R.id.subs_search_view);
 		AutoCompleteTextView autoCompleteTextView = subSearchView.findViewById(androidx.appcompat.R.id.search_src_text);
 		int fontColor = ContextCompat.getColor(getContext(), R.color.subs_text);
@@ -219,6 +219,8 @@ public class MainFragment extends FragmentEx {
 	@Override
 	public void onDestroyView() {
 		subsAdapter.removeListener((MainActivityListener) getActivity());
+		subsListView.setAdapter(null);
+		subsListView = null;
 		subsDrawerLayout = null;
 		videosPagerAdapter = null;
 		subsDrawerToggle = null;
