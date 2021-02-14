@@ -155,4 +155,6 @@
     <string name="pref_title_minimum_res_metered">計量網路的最低解析度</string>
     <string name="pref_category_metered_network">計量網路</string>
     <string name="no_resolution_specified">無</string>
+    <string name="pref_summary_default_content_country">顯示針對此國家的內容：%s</string>
+    <string name="pref_title_default_content_country">預設內容國家</string>
 </resources>

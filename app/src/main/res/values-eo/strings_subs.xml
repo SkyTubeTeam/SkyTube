@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="about">Pri</string>
+    <string name="failed_to_import_subscriptions">Importado de viaj YouTube-aj abonoj fiaskis.</string>
+    <string name="select_none">Elekti Neniun</string>
+    <string name="select_all">Elekti Ĉiujn</string>
+    <string name="subscriptions_to_channels_imported">Abono(j) por %d kanalo(j) importita(j).</string>
+    <string name="import_subscriptions">Importi Abonojn</string>
+    <string name="channel_unsubscribed">Kanalo malabonita</string>
+    <string name="unsubscribed">Malabonita</string>
+    <string name="channel_already_subscribed">Vi jam abonis ĉi tiun kanalon</string>
+    <string name="channel_subscribed">Kanalo abonita</string>
+    <string name="subscribed">Abonita</string>
+    <string name="total_subscribers">%,d abonantoj</string>
+    <string name="unsubscribe">Malaboni</string>
+    <string name="subscribe">Aboni</string>
+    <string name="subscriptions">Abonoj</string>
+</resources>

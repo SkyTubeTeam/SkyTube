@@ -21,4 +21,5 @@
     <string name="search_channel">搜尋頻道</string>
     <string name="could_not_get_channel_detailed">無法下載頻道資訊：%s。</string>
     <string name="close">關閉</string>
+    <string name="trending_in">熱門 (%s)</string>
 </resources>

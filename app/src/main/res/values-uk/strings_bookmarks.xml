@@ -12,6 +12,6 @@
     <string name="video_bookmarked_error">Не вдалося додати до закладок.</string>
     <string name="video_already_bookmarked">Відео вже у закладках</string>
     <string name="video_bookmarked">Додано до закладок</string>
-    <string name="bookmark">Закладка</string>
+    <string name="bookmark">Додати до закладок</string>
     <string name="bookmarks">Закладки</string>
 </resources>

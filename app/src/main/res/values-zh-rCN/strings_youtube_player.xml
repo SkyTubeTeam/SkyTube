@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="resume">继续</string>
+    <string name="should_resume">您希望继续上次的播放吗？</string>
+    <string name="clear">清空</string>
+    <string name="cancel">取消</string>
+    <string name="play">播放</string>
+    <string name="enter_video_url">输入视频URL</string>
+    <string name="hide_replies">隐藏回复</string>
+    <string name="view_replies">查看回复</string>
+    <string name="no_video_comments">此视频无评论或已关闭评论。</string>
+    <string name="error_get_comments_no_network">获取评论需要网络访问。</string>
+    <string name="error_get_comments">获取评论时发生错误。</string>
+    <string name="mark_unwatched">标记为未观看</string>
+    <string name="mark_watched">标记为已观看</string>
+    <string name="url_copied_to_clipboard">URL已复制至剪切板。</string>
+    <string name="copy_url">复制URL</string>
+    <string name="share_via">分享至</string>
+    <string name="share">分享</string>
+    <string name="open_with">用此打开…</string>
+    <string name="open_in_browser">在浏览器中打开</string>
+    <string name="reload_video">重新加载视频</string>
+    <string name="loading_video">加载视频中……</string>
+    <string name="ratings_disabled">评价已禁用</string>
+    <string name="warning_live_video">此刻无法播放直播流。使用另外的应用打开直播流吗？</string>
+    <string name="play_video">播放视频</string>
+    <string name="metered_network_blocked_by_policy">下载已禁止，因为您的设备连接到计费网络。</string>
+    <string name="warning_metered_network_disable">不再询问。</string>
+    <string name="metered_network">计费网络</string>
+    <string name="error_video_parse_error">无法开始播放此视频，原因： <br/> <br/> %s.</string>
+    <string name="error_downloaded_file_is_corrupted">下载的视频似乎 <b>损坏了</b> - 错误信息： <br/> <br/> %s. <br/> <br/> 您想要 <b>删除</b> 此文件么？</string>
+    <string name="error_invalid_url">无效的视频URL：%s</string>
+    <string name="error_get_video_desc">加载视频描述时发生错误。</string>
+    <string name="error_video_streams">加载视频流时发生错误。</string>
+    <string name="error_video_streams_empty">视频 %s 无流。</string>
+    <string name="error_video_play">视频播放错误</string>
+    <string name="error_stream_parse_error">解析错误。</string>
+    <string name="error_stream_decryption_fail">无法加载YouTube服务的解密码。</string>
+    <string name="error_stream_err_unavailable">错误信息不可用。</string>
+    <string name="warning_metered_network_play">您的设备连接到计费网络。为了避免潜在的额外数据使用费用，建议您连接非计费网络。是否仍要播放？</string>
+</resources>

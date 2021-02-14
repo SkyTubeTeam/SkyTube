@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="search_channel">Serĉi kanalon</string>
+    <string name="no">Ne</string>
+    <string name="yes">Jes</string>
+    <string name="loading">Ŝarĝado…</string>
+    <string name="close">Malfermi</string>
+    <string name="playlists">Ludistoj</string>
+    <string name="num_videos">%d filmetoj</string>
+    <string name="videos">Filmetoj</string>
+    <string name="video">Filmeto</string>
+    <string name="most_popular">Plej Popularaj</string>
+    <string name="LIVE">NUNE</string>
+    <string name="search_videos">Serĉi Filmetojn</string>
+    <string name="ok">Bone</string>
+    <string name="error">Eraro</string>
+    <string name="views">%,d spektaĵoj</string>
+</resources>

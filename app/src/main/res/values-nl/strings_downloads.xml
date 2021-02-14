@@ -14,4 +14,5 @@
     <string name="download">Downloaden</string>
     <string name="video_stream_not_found_with_request_resolution">Geen videostream aangetroffen bij de gevraagde resolutie tussen %s en %s</string>
     <string name="warning_metered_network_download">Je apparaat is verbonden met een beperkt netwerk. Om extra kosten te voorkomen, is het advies om te verbinden met een onbeperkt netwerk. Wil je de video tóch downloaden\?</string>
+    <string name="unable_to_delete_file">Het gedownloade bestand \'%s\' kan niet worden verwijderd</string>
 </resources>

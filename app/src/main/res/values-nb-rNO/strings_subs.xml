@@ -25,4 +25,5 @@
     <string name="channel_subscribe_failed">Kunne ikke abonnere på kanal</string>
     <string name="channel_already_subscribed">Du har allerede abonnert på denne kanalen</string>
     <string name="channel_subscribed">Kanalabonnement opprettet</string>
+    <string name="select_sub_file">Velg abonnementsfil</string>
 </resources>
