@@ -118,7 +118,7 @@
     <string name="pref_title_low_views_filter">Nézetek</string>
     <string name="pref_other_filters_category">Egyéb szűrők</string>
     <string name="setting_updated">A beállítás frissítve. Frissítse a videókat.</string>
-    <string name="pref_summary_lang_detection_video_filtering">Észleli a videókban használt nyelveket, és blokkolt mindent, kivéve az előnyben részesített nyelveket. Csak felső kategóriás eszközök esetén.</string>
+    <string name="pref_summary_lang_detection_video_filtering">Észleli a videókban használt nyelveket, és blokkol mindent, kivéve az előnyben részesített nyelveket. Csak felső kategóriás eszközök esetén.</string>
     <string name="pref_title_lang_detection_video_filtering">Nyelvfelismerő videószűrés</string>
     <string name="no_preferred_lang_selected">Nincs előnyben részesített nyelv kiválasztva. A beállítás figyelmen kívül hagyása.</string>
     <string name="channel_unwhitelist_failure">Nem sikerült a megadott csatornák eltávolítása a fehérlistáról…</string>
@@ -170,4 +170,7 @@
     <string name="pref_summary_minimum_res_metered">Forgalmi díjas hálózaton használt minimális felbontás: %s</string>
     <string name="pref_title_minimum_res_metered">Forgalmi díjas hálózaton használt minimális felbontás</string>
     <string name="pref_category_metered_network">Forgalmi Díjas Hálozatok</string>
+    <string name="system_default_country">Az eszköz alapértelmezett</string>
+    <string name="pref_summary_default_content_country">Az erre az országra szánt tartalom megjelenítése: %s</string>
+    <string name="pref_title_default_content_country">Felkapott Videók innen</string>
 </resources>
