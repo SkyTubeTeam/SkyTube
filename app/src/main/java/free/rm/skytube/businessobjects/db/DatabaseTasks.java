@@ -107,8 +107,14 @@ public class DatabaseTasks {
      */
     public static Flowable<YouTubeChannel> getSubscribedChannels(@NonNull Context context) {
         // TODO, add bookmark and downloaded videos channel id too...
-        return Flowable.fromCallable(() -> SubscriptionsDb.getSubscriptionsDb().getSubscribedChannelIds())
-                .flatMap(Flowable::fromIterable)
+        return SubscriptionsDb.getSubscriptionsDb().getSubscribedChannelIdsAsync().flatMapPublisher(channelIds ->
+            getLoadChannelInfo(context, channelIds)
+        );
+    }
+
+    public static Flowable<YouTubeChannel> getLoadChannelInfo(@NonNull Context context, List<String> channelIds) {
+        // TODO, add bookmark and downloaded videos channel id too...
+        return Flowable.fromIterable(channelIds)
                 .flatMapMaybe(channelId -> getChannelInfo(context, channelId, true))
                 // This shouldn't be null, but could happen in rare scenarios where the app is offline
                 // and the info was not previously saved

@@ -299,6 +299,11 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 		}
 	}
 
+	public Single<List<String>> getSubscribedChannelIdsAsync() {
+		return Single.fromCallable(() -> getSubscribedChannelIds())
+				.subscribeOn(Schedulers.io());
+	}
+
 	/**
 	 * Returns a list of channels that the user subscribed to, without accessing the network
 	 *
