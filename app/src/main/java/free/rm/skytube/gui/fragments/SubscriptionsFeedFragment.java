@@ -37,6 +37,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 
@@ -98,6 +99,7 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 	private static final int NOTIFICATION_ID = 1;
 
 	private final CompositeDisposable compositeDisposable = new CompositeDisposable();
+	private MaterialDialog fetchingChannelInfoDialog;
 
 	@Override
 	protected int getLayoutResource() {
@@ -154,7 +156,8 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 
 
 	@Override
-	public void onPause() {
+	public synchronized void onPause() {
+		hideFetchingVideosDialog();
 		super.onPause();
 		getActivity().unregisterReceiver(feedUpdaterReceiver);
 	}
@@ -243,11 +246,20 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 		if (forcedFullRefresh && SkyTubeApp.isConnected(requireContext())) {
 			unsetFlag(FLAG_REFRESH_FEED_FULL);
 			refreshInProgress = true;
-			compositeDisposable.add(DatabaseTasks.getSubscribedChannels(requireContext())
-					.toList()
-					.subscribe(channelsRefreshed -> Log.i("SUB FRAGMENT", "Refreshed " +
-							channelsRefreshed.size())));
-			new RefreshFeedTask(showFetchingVideosDialog, true).executeInParallel();
+			if (showFetchingVideosDialog) {
+				showFetchingVideosDialog();
+			}
+			compositeDisposable.add(SubscriptionsDb.getSubscriptionsDb().getSubscribedChannelIdsAsync()
+					.observeOn(AndroidSchedulers.mainThread())
+					.flatMapCompletable(channelIds ->
+						processChannelIds(channelIds).doOnComplete(() -> {
+							if (showFetchingVideosDialog) {
+								hideFetchingVideosDialog();
+							}
+							Log.i("SUB FRAGMENT", "Refreshed " +
+									channelIds.size());
+						})
+					).subscribe());
 		} else {
 			videoGridAdapter.refresh(true);
 		}
@@ -294,37 +306,32 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 		subscriptionsBackupsManager.displayImportSubscriptionsFromYouTubeDialog();
 	}
 
-
 	@OnClick(R.id.importBackupButton)
 	public void importBackup(View v) {
 		subscriptionsBackupsManager.displayFilePicker();
 	}
-
 
 	@Override
 	public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
 		subscriptionsBackupsManager.onRequestPermissionsResult(requestCode, permissions, grantResults);
 	}
 
-
 	/**
 	 * Set up the UI depending to the total number of channel the user is subscribed to.
 	 *
-	 * @param totalSubbedChannels   Total number of channel the user is subscribed to.
+	 * @param hasChannels   If the user has already subscribed to at least one channel.
 	 */
-	private void setupUiAccordingToNumOfSubbedChannels(int totalSubbedChannels) {
-		if (totalSubbedChannels <= 0) {
-			swipeRefreshLayout.setVisibility(View.GONE);
-			noSubscriptionsText.setVisibility(View.VISIBLE);
-		} else {
+	private void setupUiAccordingToNumOfSubbedChannels(boolean hasChannels) {
+		if (hasChannels) {
 			if (swipeRefreshLayout.getVisibility() != View.VISIBLE) {
 				swipeRefreshLayout.setVisibility(View.VISIBLE);
 				noSubscriptionsText.setVisibility(View.GONE);
 			}
+		} else {
+			swipeRefreshLayout.setVisibility(View.GONE);
+			noSubscriptionsText.setVisibility(View.VISIBLE);
 		}
 	}
-
-
 
 	////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -335,68 +342,39 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 	 * 1.  Cached inside the local database;
 	 * 2.  No in the DB and hence we need to retrieve them from the YouTube servers.
 	 */
-	private class RefreshFeedTask extends AsyncTaskParallel<Void, Void, List<String>> {
+	Completable processChannelIds(List<String> channelIds) {
+		numVideosFetched      = 0;
+		numChannelsFetched    = 0;
+		numChannelsSubscribed = channelIds.size();
 
-		private MaterialDialog  fetchingChannelInfoDialog;
-		private boolean         showDialogs;
-		private boolean 		fullRefresh;
+		boolean hasChannels = numChannelsSubscribed > 0;
+		setupUiAccordingToNumOfSubbedChannels(hasChannels);
+		if (hasChannels) {
+			// get the previously published videos currently cached in the database
+			videoGridAdapter.setVideoCategory(VideoCategory.SUBSCRIPTIONS_FEED_VIDEOS);
 
-
-		private RefreshFeedTask(boolean showFetchingVideosDialog, boolean fullRefresh) {
-			this.showDialogs = showFetchingVideosDialog;
-			this.fullRefresh = fullRefresh;
+			showNotification();
+			return getRefreshTask(channelIds);
+		} else {
+			refreshInProgress = false;
+			return Completable.complete();
 		}
+	}
 
-
-		@Override
-		protected void onPreExecute() {
-			// display the "Fetching channels information …" dialog
-			if (showDialogs) {
-				fetchingChannelInfoDialog = new MaterialDialog.Builder(getActivity())
-						.content(R.string.fetching_subbed_channels_info)
-						.progress(true, 0)
-						.build();
-				fetchingChannelInfoDialog.show();
-			}
+	private synchronized void hideFetchingVideosDialog() {
+		if (fetchingChannelInfoDialog != null) {
+			fetchingChannelInfoDialog.dismiss();
+			fetchingChannelInfoDialog = null;
 		}
+	}
 
-
-		@Override
-		protected List<String> doInBackground(Void... params) {
-			return SubscriptionsDb.getSubscriptionsDb().getSubscribedChannelIds();
-		}
-
-
-		@Override
-		protected void onPostExecute(List<String> totalChannels) {
-			numVideosFetched      = 0;
-			numChannelsFetched    = 0;
-			numChannelsSubscribed = totalChannels.size();
-
-			// hide the "Fetching channels information …" dialog
-			if (showDialogs) {
-				fetchingChannelInfoDialog.dismiss();
-			}
-
-			// setup the user interface
-			setupUiAccordingToNumOfSubbedChannels(numChannelsSubscribed);
-
-			if (numChannelsSubscribed > 0) {
-				// get the previously published videos currently cached in the database
-				videoGridAdapter.setVideoCategory(VideoCategory.SUBSCRIPTIONS_FEED_VIDEOS);
-
-				// get any videos published after the last time the user used the app...
-				if (fullRefresh) {
-					//new GetSubscriptionVideosTask(SubscriptionsFeedFragment.this).executeInParallel();      // refer to #onChannelVideosFetched()
-					compositeDisposable.add(getRefreshTask(totalChannels));
-
-					showNotification();
-				}
-			} else {
-				refreshInProgress = false;
-			}
-		}
-
+	private synchronized void showFetchingVideosDialog() {
+		hideFetchingVideosDialog();
+		fetchingChannelInfoDialog = new MaterialDialog.Builder(getActivity())
+				.content(R.string.fetching_subbed_channels_info)
+				.progress(true, 0)
+				.build();
+		fetchingChannelInfoDialog.show();
 	}
 
 	public void refreshFeedFromCache() {
@@ -405,7 +383,7 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 		}
 	}
 
-	private Disposable getRefreshTask(List<String> channelIds) {
+	private Completable getRefreshTask(List<String> channelIds) {
 		if (NewPipeService.isPreferred() || !YouTubeAPIKey.get().isUserApiKeySet()) {
 			return YouTubeTasks.getBulkSubscriptionVideos(channelIds, this)
 					.delay(500, TimeUnit.MILLISECONDS)
@@ -431,9 +409,9 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 									Toast.makeText(requireContext(), R.string.no_new_videos_found, Toast.LENGTH_LONG).show();
 								}
 							})
-				).subscribe();
+				);
 		} else {
-			return YouTubeTasks.getSubscriptionVideos(this, channelIds).subscribe();
+			return YouTubeTasks.getSubscriptionVideos(this, channelIds).ignoreElement();
 		}
 	}
 }

@@ -46,7 +46,7 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<CardData, GridViewHo
 	private static final String TAG = VideoGridAdapter.class.getSimpleName();
 
 	public interface Callback {
-		void onVideoGridUpdated(int newVideoListSize);
+		void onVideoGridUpdated(boolean hasChannels);
 	}
 
 	/**

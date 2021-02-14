@@ -387,7 +387,7 @@ public class YouTubeTasks {
                     videoGridAdapter.appendList(videosList);
 
                     if (callback != null) {
-                        callback.onVideoGridUpdated(videoGridAdapter.getItemCount());
+                        callback.onVideoGridUpdated(videoGridAdapter.getItemCount() > 0);
                     }
                 })
                 .doOnTerminate(() -> {
