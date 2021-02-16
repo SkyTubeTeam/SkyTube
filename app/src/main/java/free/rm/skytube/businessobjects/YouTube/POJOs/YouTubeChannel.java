@@ -21,6 +21,8 @@ import android.content.Context;
 import android.view.Menu;
 import android.widget.Toast;
 
+import androidx.core.util.Pair;
+
 import com.google.api.services.youtube.model.Channel;
 import com.google.api.services.youtube.model.ChannelBrandingSettings;
 import com.google.api.services.youtube.model.ChannelSnippet;
@@ -298,11 +300,15 @@ public class YouTubeChannel extends CardData implements Serializable {
 	public static Disposable subscribeChannel(final Context context, final Menu menu, final String channelId) {
 		if (channelId != null) {
 			return DatabaseTasks.getChannelInfo(context, channelId, false)
-					.subscribe(youTubeChannel -> {
-						DatabaseResult result = SubscriptionsDb.getSubscriptionsDb().subscribe(youTubeChannel);
-						switch(result) {
+					.observeOn(Schedulers.io())
+					.map(youTubeChannel ->
+						new Pair<>(youTubeChannel, SubscriptionsDb.getSubscriptionsDb().subscribe(youTubeChannel))
+					)
+					.observeOn(AndroidSchedulers.mainThread())
+					.subscribe(youTubeChannelWithResult -> {
+						switch(youTubeChannelWithResult.second) {
 							case SUCCESS: {
-								youTubeChannel.setUserSubscribed(true);
+								youTubeChannelWithResult.first.setUserSubscribed(true);
 								EventBus.getInstance().notifyMainTabChanged(EventBus.SettingChange.SUBSCRIPTION_LIST_CHANGED);
 								SubscriptionsFeedFragment.refreshSubsFeedFromCache();
 								Toast.makeText(context, R.string.channel_subscribed, Toast.LENGTH_LONG).show();
