@@ -1,5 +1,5 @@
 # SkyTube
-**A copylefted libre YouTube player for Android, without ads.**
+**A copylefted libre / open source YouTube player for Android, without ads.**
 
 <a href="#download">![Download APK](https://img.shields.io/github/downloads/ram-on/SkyTube/total.svg?label=SkyTube+Extra+Downloads)</a>
 <a href="https://hosted.weblate.org/engage/skytube/?utm_source=widget"> <img src="https://hosted.weblate.org/widgets/skytube/-/svg-badge.svg" alt="Translate"/> </a>
@@ -82,33 +82,31 @@ You can help us translate this app into your native language by visiting [SkyTub
 ## Screenshots
 ### Phone
 
-.. image:: https://skytube-app.com/assets/img/screenshots/trending.jpg
-   :alt: Trending
-   :target: https://skytube-app.com#features
-   :height: 250px
+<a href="https://skytube-app.com#features">
+<img src="https://skytube-app.com/assets/img/screenshots/trending.jpg" alt="Trending" height="250px"/>
+</a>
 
-.. image:: https://skytube-app.com/assets/img/screenshots/subs.jpg
-   :alt: Subscriptions
-   :target: https://skytube-app.com#features
-   :height: 250px
+<a href="https://skytube-app.com#features">
+<img src="https://skytube-app.com/assets/img/screenshots/subs.jpg" alt="Subscriptions" height="250px"/>
+</a>
 
-.. image:: https://skytube-app.com/assets/img/screenshots/channel.jpg
-   :alt: Browse video
-   :target: https://skytube-app.com#features
-   :height: 250px
+<a href="https://skytube-app.com#features">
+<img src="https://skytube-app.com/assets/img/screenshots/channel.jpg" alt="Browse video" height="250px"/>
+</a>
 
-.. image:: https://skytube-app.com/assets/img/screenshots/play.jpg
-   :alt: Play video
-   :target: https://skytube-app.com#features
-   :height: 250px
+<a href="https://skytube-app.com#features">
+<img src="https://skytube-app.com/assets/img/screenshots/play.jpg" alt="Play video" height="250px"/>
+</a>
 
-.. image:: https://skytube-app.com/assets/img/screenshots/video_blocker.jpg
-   :alt: Video blocker
-   :target: https://skytube-app.com#features
-   :height: 250px
+<a href="https://skytube-app.com#features">
+<img src="https://skytube-app.com/assets/img/screenshots/video_blocker.jpg" alt="Video blocker" height="250px"/>
+</a>
 
 ### Tablet
 ![Browse channel using tablet](https://ram-on.github.io/SkyTube/assets/img/screenshots/channel_tablet.jpg)
+<a href="https://skytube-app.com#features">
+<img src="https://skytube-app.com/assets/img/screenshots/channel_tablet.jpg" alt="Browse channel using tablet" />
+</a>
 
 ## Contribute
 This project was possible with the support and contribution of [numerous volunteers and third-party projects](http://skytube-app.com/credits.html).
@@ -117,10 +115,9 @@ Help improve SkyTube by [translating](https://github.com/SkyTubeTeam/SkyTube/wik
 
 ## License
 
-.. image:: https://www.gnu.org/graphics/gplv3-127x51.png
-   :alt: GNU GPLv3 image
-   :target: https://www.gnu.org/licenses/gpl-3.0.html#language-container
-   :height: 250px
+<a href="https://www.gnu.org/licenses/gpl-3.0.html#language-container">
+<img src="https://www.gnu.org/graphics/gplv3-127x51.png" alt="GNU GPLv3 image" height="250px"/>
+</a>
 
 This project is not affiliated with YouTube™ or any of its partners and/or products.
 YouTube™ and Android™ are registered trademarks of Google Inc.
