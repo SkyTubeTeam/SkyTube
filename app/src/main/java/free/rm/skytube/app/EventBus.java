@@ -17,11 +17,10 @@
 
 package free.rm.skytube.app;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.util.function.Consumer;
 
 import free.rm.skytube.app.utils.WeakList;
+import free.rm.skytube.businessobjects.YouTube.Tasks.GetSubscriptionVideosTaskListener;
 import free.rm.skytube.gui.businessobjects.MainActivityListener;
 import free.rm.skytube.gui.fragments.MainFragment;
 
@@ -35,6 +34,7 @@ public class EventBus {
 
     private WeakList<MainFragment> mainFragments = new WeakList<>();
     private WeakList<MainActivityListener> mainActivityListeners = new WeakList<>();
+    private WeakList<GetSubscriptionVideosTaskListener> subscriptionListeners = new WeakList<GetSubscriptionVideosTaskListener>();
 
     public static synchronized EventBus getInstance() {
         if (instance == null) {
@@ -55,11 +55,17 @@ public class EventBus {
         this.mainFragments.forEach(main -> main.notifyChangeChannelNewVideosStatus(channelId, newVideos));
     }
 
+    public void notifyChannelNewVideos(String channelId, int newVideos) {
+        if (newVideos > 0) {
+            this.mainFragments.forEach(main -> main.notifyChangeChannelNewVideosStatus(channelId, true));
+        }
+    }
+
     public void notifyChannelRemoved(String channelId) {
         this.mainFragments.forEach(main -> main.notifyChannelRemoved(channelId));
     }
 
-    public void addMainActivityListener(MainActivityListener listener) {
+    public void registerMainActivityListener(MainActivityListener listener) {
         this.mainActivityListeners.add(listener);
     }
 
@@ -67,4 +73,23 @@ public class EventBus {
         this.mainActivityListeners.forEach(function);
     }
 
+    public void registerSubscriptionListener(GetSubscriptionVideosTaskListener listener) {
+        this.subscriptionListeners.add(listener);
+    }
+
+    public void unregisterSubscriptionListener(GetSubscriptionVideosTaskListener listener) {
+        this.subscriptionListeners.remove(listener);
+    }
+
+    public void notifyChannelVideoFetchingFinished(boolean changes) {
+        this.subscriptionListeners.forEach(listener -> listener.onChannelVideoFetchFinish(changes));
+    }
+
+    public void notifySubscriptionRefreshFinished() {
+        this.subscriptionListeners.forEach(listener -> listener.onSubscriptionRefreshFinished());
+    }
+
+    public void notifyChannelsFound(boolean hasSubscriptions) {
+        this.subscriptionListeners.forEach(listener -> listener.onChannelsFound(hasSubscriptions));
+    }
 }

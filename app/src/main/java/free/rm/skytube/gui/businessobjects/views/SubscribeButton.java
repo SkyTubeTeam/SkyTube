@@ -25,12 +25,9 @@ import android.widget.RemoteViews;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
 
-import java.util.Collections;
-
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.YouTubeTasks;
-import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
 import free.rm.skytube.businessobjects.db.DatabaseTasks;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 
@@ -44,7 +41,6 @@ public class SubscribeButton extends AppCompatButton implements View.OnClickList
 	private boolean isUserSubscribed = false;
 
 	private YouTubeChannel channel;
-	private boolean fetchChannelVideosOnSubscribe = true;
 	private OnClickListener externalClickListener = null;
 
 	private final CompositeDisposable compositeDisposable = new CompositeDisposable();
@@ -64,14 +60,8 @@ public class SubscribeButton extends AppCompatButton implements View.OnClickList
 		}
 		if(channel != null) {
 			// Only fetch videos for this channel if fetchChannelVideosOnSubscribe is true AND the channel is not subscribed to yet.
-			if (fetchChannelVideosOnSubscribe && !isUserSubscribed) {
-				if (NewPipeService.isPreferred()) {
-					compositeDisposable.add(YouTubeTasks.getBulkSubscriptionVideos(Collections.singletonList(channel.getId()), null)
-							.subscribe());
-				} else {
-					compositeDisposable.add(YouTubeTasks.getChannelVideos(channel.getId(), null, false)
-							.subscribe());
-				}
+			if (!isUserSubscribed) {
+				compositeDisposable.add(YouTubeTasks.refreshSubscribedChannel(channel.getId(), null).subscribe());
 			}
 			compositeDisposable.add(DatabaseTasks.subscribeToChannel(!isUserSubscribed,
 					this, getContext(), channel, true).subscribe());
@@ -91,15 +81,6 @@ public class SubscribeButton extends AppCompatButton implements View.OnClickList
 	public void setChannel(YouTubeChannel channel) {
 		this.channel = channel;
 	}
-
-	public void setFetchChannelVideosOnSubscribe(boolean fetchChannelVideosOnSubscribe) {
-		this.fetchChannelVideosOnSubscribe = fetchChannelVideosOnSubscribe;
-	}
-
-	public boolean isUserSubscribed() {
-		return isUserSubscribed;
-	}
-
 
 	/**
 	 * Set the button's state to subscribe (i.e. once clicked, the user indicates that he wants to

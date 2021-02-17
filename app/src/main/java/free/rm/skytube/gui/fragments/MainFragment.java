@@ -34,6 +34,7 @@ import java.util.Set;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.EventBus;
+import free.rm.skytube.app.FeedUpdateTask;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.app.utils.WeaklyReferencedMap;
 import free.rm.skytube.businessobjects.Logger;
@@ -240,12 +241,15 @@ public class MainFragment extends FragmentEx {
 
 		// when the MainFragment is resumed (e.g. after Preferences is minimized), inform the
 		// current fragment that it is selected.
+		VideosGridFragment selectedFragment = null;
 		if (videosPagerAdapter != null && tabLayout != null) {
 			Logger.d(this, "MAINFRAGMENT RESUMED " + tabLayout.getSelectedTabPosition());
-			videosPagerAdapter.selectTabAtPosition(tabLayout.getSelectedTabPosition());
+			selectedFragment = videosPagerAdapter.selectTabAtPosition(tabLayout.getSelectedTabPosition());
 		}
-//		FragmentActivity activity = getActivity();
-//		subsAdapter.setContext(activity);
+		// If the selectedFragment is not the subscriptionsFeedFragment, try out refreshing the subs in the background
+		if (SkyTubeApp.getSettings().isFullRefreshTimely()) {
+			FeedUpdateTask.getInstance().start(this.getContext());
+		}
 	}
 
 	@Override
@@ -418,11 +422,12 @@ public class MainFragment extends FragmentEx {
 			}
 		}
 
-		public synchronized void selectTabAtPosition(int position) {
+		public synchronized VideosGridFragment selectTabAtPosition(int position) {
 			VideosGridFragment fragment = getFragmentFrom(position, true);
 			if (fragment != null) {
 				fragment.onFragmentSelected();
 			}
+			return fragment;
 		}
 
 		@Override

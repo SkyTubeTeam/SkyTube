@@ -23,5 +23,8 @@ package free.rm.skytube.businessobjects.YouTube.Tasks;
  * is subscribed to.
  */
 public interface GetSubscriptionVideosTaskListener {
-	void onChannelVideosFetched(String channelId, int videosFetched, boolean videosDeleted);
+	void onSubscriptionRefreshStarted();
+	void onSubscriptionRefreshFinished();
+	void onChannelsFound(boolean found);
+	void onChannelVideoFetchFinish(boolean changes);
 }

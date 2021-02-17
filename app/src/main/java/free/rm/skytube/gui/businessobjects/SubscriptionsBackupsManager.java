@@ -33,7 +33,6 @@ import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -48,9 +47,7 @@ import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.db.DatabaseTasks;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
-import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
 import free.rm.skytube.gui.businessobjects.preferences.BackupDatabases;
-import free.rm.skytube.gui.fragments.SubscriptionsFeedFragment;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
@@ -436,7 +433,7 @@ public class SubscriptionsBackupsManager {
 							Toast.LENGTH_SHORT).show();
 
 					// refresh the Feed tab so it shows videos from the newly subscribed channels
-					SubscriptionsFeedFragment.refreshSubsFeedFull();
+					SkyTubeApp.getSettings().setRefreshSubsFeedFull(true);
 
 					// if the user imported the subs channels from the Feed tab/fragment, then we
 					// need to refresh the fragment in order for the fragment to update the feed...

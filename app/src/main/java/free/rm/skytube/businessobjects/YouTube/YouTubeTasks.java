@@ -3,6 +3,7 @@ package free.rm.skytube.businessobjects.YouTube;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+import android.util.Pair;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -11,10 +12,8 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import org.schabi.newpipe.extractor.StreamingService;
 import org.schabi.newpipe.extractor.exceptions.ExtractionException;
-import org.schabi.newpipe.extractor.stream.StreamInfo;
 
 import java.io.IOException;
-import java.math.BigInteger;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,21 +22,22 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 import free.rm.skytube.R;
+import free.rm.skytube.app.EventBus;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.app.Utils;
 import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
+import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPIKey;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubePlaylist;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
-import free.rm.skytube.businessobjects.YouTube.Tasks.GetSubscriptionVideosTaskListener;
 import free.rm.skytube.businessobjects.YouTube.newpipe.ContentId;
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeException;
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
-import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeUtils;
 import free.rm.skytube.businessobjects.YouTube.newpipe.PlaylistPager;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 import free.rm.skytube.businessobjects.interfaces.GetDesiredStreamListener;
@@ -49,7 +49,6 @@ import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Maybe;
 import io.reactivex.rxjava3.core.Scheduler;
 import io.reactivex.rxjava3.core.Single;
-import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import io.reactivex.rxjava3.subjects.CompletableSubject;
 
@@ -63,6 +62,38 @@ public class YouTubeTasks {
     private static final Scheduler scheduler = Schedulers.from(Executors.newFixedThreadPool(4));
 
     private YouTubeTasks() { }
+
+    public static Single<Integer> refreshAllSubscriptions(@Nullable Consumer<List<String>> subscriptionListConsumer, @Nullable Consumer<Integer> newVideosFound) {
+        Single<List<String>>  subscriptionList = SubscriptionsDb.getSubscriptionsDb().getSubscribedChannelIdsAsync();
+        if (subscriptionListConsumer!= null) {
+            subscriptionList = subscriptionList.observeOn(AndroidSchedulers.mainThread())
+                    .doOnSuccess(list -> subscriptionListConsumer.accept(list))
+                    .observeOn(Schedulers.io());
+        }
+        return subscriptionList
+                .flatMap(channelIds -> refreshSubscriptions(channelIds, newVideosFound))
+                .doOnSuccess(changed -> {
+                    Log.i("YouTubeTasks", "refreshAllSubscriptions: " + changed);
+                    SkyTubeApp.getSettings().updateFeedsLastUpdateTime();
+                });
+    }
+
+    public static Single<Integer> refreshSubscribedChannel(String channelId, @Nullable Consumer<Integer> newVideosFound) {
+        if (NewPipeService.isPreferred() || !YouTubeAPIKey.get().isUserApiKeySet()) {
+            return YouTubeTasks.getBulkSubscriptionVideos(Collections.singletonList(channelId), newVideosFound);
+        } else {
+            return YouTubeTasks.getChannelVideos(channelId, null, false, newVideosFound)
+                    .map(items -> items.size());
+        }
+    }
+
+    private static Single<Integer> refreshSubscriptions(@NonNull List<String> channelIds, @Nullable Consumer<Integer> newVideosFound) {
+        if (NewPipeService.isPreferred() || !YouTubeAPIKey.get().isUserApiKeySet()) {
+            return YouTubeTasks.getBulkSubscriptionVideos(channelIds, newVideosFound);
+        } else {
+            return YouTubeTasks.getSubscriptionVideos(channelIds, newVideosFound);
+        }
+    }
 
     /**
      * An asynchronous task that will retrieve YouTube playlists for a specific channel and display
@@ -86,8 +117,7 @@ public class YouTubeTasks {
      * A task that returns the videos of the channels the user has subscribed to. Used to detect if
      * new videos have been published since last time the user used the app.
      */
-    public static Single<Boolean> getBulkSubscriptionVideos(@NonNull List<String> channelIds,
-                                                            @Nullable GetSubscriptionVideosTaskListener listener) {
+    private static Single<Integer> getBulkSubscriptionVideos(@NonNull List<String> channelIds, @Nullable Consumer<Integer> newVideosFound) {
         final SubscriptionsDb subscriptionsDb = SubscriptionsDb.getSubscriptionsDb();
         final AtomicBoolean changed = new AtomicBoolean(false);
         return Flowable.fromIterable(channelIds)
@@ -121,18 +151,14 @@ public class YouTubeTasks {
                                 .subscribeOn(scheduler)
                                 .observeOn(AndroidSchedulers.mainThread())
                                 .doOnSuccess(newYouTubeVideos -> {
-                                    if (listener != null) {
-                                        listener.onChannelVideosFetched(channelId, newYouTubeVideos, false);
+                                    if (newVideosFound != null) {
+                                        newVideosFound.accept(newYouTubeVideos);
                                     }
+                                    EventBus.getInstance().notifyChannelNewVideos(channelId, newYouTubeVideos);
                                 })
                 )
                 .collect(Collectors.summingInt(Integer::intValue))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .map(allVideos -> {
-                    SkyTubeApp.getSettings().updateFeedsLastUpdateTime(System.currentTimeMillis());
-                    return changed.get();
-                });
+                .subscribeOn(Schedulers.io());
     }
 
     private static List<YouTubeVideo> fetchVideos(@NonNull SubscriptionsDb subscriptionsDb,
@@ -162,12 +188,16 @@ public class YouTubeTasks {
     /**
      * Task to asynchronously get videos for a specific channel.
      */
-    public static Single<List<CardData>> getChannelVideos(@NonNull String channelId,
-                                                          @Nullable Long publishedAfter,
-                                                          boolean filterSubscribedVideos) {
-        final GetChannelVideosInterface getChannelVideosInterface = VideoCategory.createChannelVideosFetcher();
+    private static Single<List<YouTubeVideo>> getChannelVideos(@NonNull String channelId,
+                                                            @Nullable Long publishedAfter,
+                                                            boolean filterSubscribedVideos,
+                                                            @Nullable Consumer<Integer> newVideosFound) {
+        if (!YouTubeAPIKey.get().isUserApiKeySet()) {
+            throw new IllegalStateException("Only valid if custom YouTube key is set!");
+        }
         final SubscriptionsDb db = SubscriptionsDb.getSubscriptionsDb();
         return Single.fromCallable(() -> {
+            final GetChannelVideosFull getChannelVideosInterface = new GetChannelVideosFull();
             getChannelVideosInterface.init();
             getChannelVideosInterface.setPublishedAfter(publishedAfter != null
                     ? publishedAfter : ZonedDateTime.now().minusMonths(1).toInstant().toEpochMilli());
@@ -175,24 +205,29 @@ public class YouTubeTasks {
             return getChannelVideosInterface.getNextVideos();
         })
                 .onErrorReturnItem(Collections.emptyList())
-                .doOnSuccess(videos -> {
-                    if (db.isUserSubscribedToChannel(channelId)) {
-                        List<YouTubeVideo> realVideos = new ArrayList<>(videos.size());
-                        for (CardData cd : videos) {
-                            if (cd instanceof YouTubeVideo) {
-                                realVideos.add((YouTubeVideo) cd);
-                            }
+                .map(videos -> {
+                    List<YouTubeVideo> realVideos = new ArrayList<>(videos.size());
+                    for (CardData cd : videos) {
+                        if (cd instanceof YouTubeVideo) {
+                            realVideos.add((YouTubeVideo) cd);
                         }
-                        db.saveVideos(realVideos, channelId);
                     }
+                    db.saveVideos(realVideos, channelId);
+                    return realVideos;
                 })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .doOnSuccess(newYouTubeVideos -> {
+                    if (newVideosFound != null) {
+                        newVideosFound.accept(newYouTubeVideos.size());
+                    }
+                    EventBus.getInstance().notifyChannelNewVideos(channelId, newYouTubeVideos.size());
+                })
                 .doOnError(throwable ->
-                        Toast.makeText(getContext(),
-                                String.format(getContext().getString(R.string.could_not_get_videos),
-                                db.getCachedChannel(channelId).getTitle()),
-                                Toast.LENGTH_LONG).show()
+                    Toast.makeText(getContext(),
+                        String.format(getContext().getString(R.string.could_not_get_videos),
+                        db.getCachedChannel(channelId).getTitle()),
+                        Toast.LENGTH_LONG).show()
                 );
     }
 
@@ -214,8 +249,7 @@ public class YouTubeTasks {
      * A task that returns the videos of channel the user has subscribed too. Used to detect if new
      * videos have been published since last time the user used the app.
      */
-    public static Single<Boolean> getSubscriptionVideos(@NonNull GetSubscriptionVideosTaskListener listener,
-                                                        @Nullable List<String> channelIds) {
+    private static Single<Integer> getSubscriptionVideos(@NonNull List<String> channelIds, @Nullable Consumer<Integer> newVideosFound) {
         /*
          * Get the last time all subscriptions were updated, and only fetch videos that were published after this.
          * Any new channels that have been subscribed to since the last time this refresh was done will have any
@@ -225,28 +259,21 @@ public class YouTubeTasks {
         final Long publishedAfter = SkyTubeApp.getSettings().getFeedsLastUpdateTime();
         final AtomicBoolean changed = new AtomicBoolean(false);
 
-        return Single.fromCallable(() -> {
-            if (channelIds != null) return channelIds;
-            else return SubscriptionsDb.getSubscriptionsDb().getSubscribedChannelIds();
-        })
-                .flatMapPublisher(Flowable::fromIterable)
-                .flatMapSingle(channelId ->
-                        YouTubeTasks.getChannelVideos(channelId, publishedAfter, true)
-                            .doOnSuccess(videos -> {
-                                if (!videos.isEmpty()) {
-                                    changed.compareAndSet(false, true);
-                                }
-                                listener.onChannelVideosFetched(channelId, videos.size(), false);
-                            })
-                            .doOnError(throwable ->
-                                Log.e(TAG, "Interrupt in semaphore.acquire:" + throwable.getMessage(), throwable)
-                            )
+        return Flowable.fromIterable(channelIds)
+            .flatMapSingle(channelId ->
+                YouTubeTasks.getChannelVideos(channelId, publishedAfter, true, newVideosFound)
+                    .doOnSuccess(videos -> {
+                        if (!videos.isEmpty()) {
+                            changed.compareAndSet(false, true);
+                        }
+                        EventBus.getInstance().notifyChannelNewVideos(channelId, videos.size());
+                    })
+                    .doOnError(throwable ->
+                        Log.e(TAG, "Interrupt in semaphore.acquire:" + throwable.getMessage(), throwable)
+                    )
                 )
-                .flatMapCompletable(list -> Completable.complete())
-                .toSingle(changed::get)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnSuccess(isChanged -> SkyTubeApp.getSettings().updateFeedsLastUpdateTime());
+                .collect(Collectors.summingInt(videos -> videos.size()))
+                .subscribeOn(Schedulers.io());
     }
 
     /**

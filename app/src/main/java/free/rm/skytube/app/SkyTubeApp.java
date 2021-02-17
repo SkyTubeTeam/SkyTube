@@ -322,14 +322,6 @@ public class SkyTubeApp extends MultiDexApplication {
 	}
 
 	/**
-	 * Get the stored interval (in milliseconds) to pass to the below method.
-	 */
-	public static void setFeedUpdateInterval() {
-		int feedUpdaterInterval = Integer.parseInt(SkyTubeApp.getPreferenceManager().getString(SkyTubeApp.getStr(R.string.pref_key_feed_notification), "0"));
-		setFeedUpdateInterval(feedUpdaterInterval);
-	}
-
-	/**
 	 * Setup the Feed Updater Service. First, cancel the Alarm that will trigger the next fetch (if there is one), then set the
 	 * Alarm with the passed interval, if it's greater than 0.
 	 * @param interval The number of milliseconds between each time new videos for subscribed channels should be fetched.

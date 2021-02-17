@@ -33,6 +33,7 @@ import free.rm.skytube.app.enums.Policy;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.VideoStream.VideoQuality;
 import free.rm.skytube.businessobjects.YouTube.VideoStream.VideoResolution;
+import free.rm.skytube.gui.fragments.SubscriptionsFeedFragment;
 
 /**
  * Type safe wrapper to access the various preferences.
@@ -41,6 +42,11 @@ public class Settings {
     private final SkyTubeApp app;
     private static final String TUTORIAL_COMPLETED = "YouTubePlayerActivity.TutorialCompleted";
     private static final String LATEST_RELEASE_NOTES_DISPLAYED = "Settings.LATEST_RELEASE_NOTES_DISPLAYED";
+    private static final String FLAG_REFRESH_FEED_FROM_CACHE = "SubscriptionsFeedFragment.FLAG_REFRESH_FEED_FROM_CACHE";
+    private static final String FLAG_REFRESH_FEED_FULL = "SubscriptionsFeedFragment.FLAG_REFRESH_FEED_FULL";
+    /** Refresh the feed (by querying the YT servers) after 3 hours since the last check. */
+    private static final int    REFRESH_TIME_HOURS = 3;
+    private static final long   REFRESH_TIME_IN_MS = REFRESH_TIME_HOURS * (1000L*3600L);
 
     Settings(SkyTubeApp app) {
         this.app = app;
@@ -152,6 +158,10 @@ public class Settings {
         return getSharedPreferences().getBoolean(SkyTubeApp.getStr(R.string.pref_key_disable_search_history), false);
     }
 
+    public int getFeedUpdaterInterval() {
+        return Integer.parseInt(getPreference(R.string.pref_key_feed_notification, "0"));
+    }
+
     public void setWarningMobilePolicy(Policy warnPolicy) {
         setPreference(R.string.pref_key_mobile_network_usage_policy, warnPolicy.name().toLowerCase());
     }
@@ -166,6 +176,43 @@ public class Settings {
 
     public boolean isSwitchVolumeAndBrightness() {
         return getPreference(R.string.pref_key_switch_volume_and_brightness, false);
+    }
+
+    /**
+     * Instruct the {@link SubscriptionsFeedFragment} to refresh the subscriptions feed.
+     *
+     * This might occur due to user subscribing/unsubscribing to a channel.
+     */
+    public void setRefreshSubsFeedFromCache(boolean flag) {
+        setPreference(FLAG_REFRESH_FEED_FROM_CACHE, flag);
+    }
+
+    public boolean isRefreshSubsFeedFromCache() {
+        return getPreference(FLAG_REFRESH_FEED_FROM_CACHE, false);
+    }
+
+    /**
+     * Instruct the {@link SubscriptionsFeedFragment} to refresh the subscriptions feed by retrieving
+     * any newly published videos from the YT servers.
+     *
+     * This might occur due to user just imported the subbed channels from YouTube (XML file).
+     */
+    public void setRefreshSubsFeedFull(boolean flag) {
+        setPreference(FLAG_REFRESH_FEED_FULL, flag);
+    }
+
+    public boolean isRefreshSubsFeedFull() {
+        return getPreference(FLAG_REFRESH_FEED_FULL, false);
+    }
+
+    public boolean isFullRefreshTimely() {
+        // Only do an automatic refresh of subscriptions if it's been more than three hours since the last one was done.
+        Long subscriptionsLastUpdated = getFeedsLastUpdateTime();
+        if (subscriptionsLastUpdated == null) {
+            return true;
+        }
+        long threeHoursAgo = System.currentTimeMillis() - REFRESH_TIME_IN_MS;
+        return subscriptionsLastUpdated <= threeHoursAgo;
     }
 
     /**
