@@ -26,19 +26,23 @@ public class WeakList<X> {
     private List<WeakReference<X>> values = new ArrayList<>();
 
     public void add(X object) {
-        cleanup(null);
+        cleanup(null, null);
         values.add(new WeakReference<>(object));
     }
 
     public void forEach(Consumer<X> consumer) {
-        cleanup(consumer);
+        cleanup(consumer, null);
     }
 
-    private void cleanup(Consumer<X> consumer) {
+    public void remove(X object) {
+        cleanup(null, object);
+    }
+
+    private void cleanup(Consumer<X> consumer, X valueToRemove) {
         for (Iterator<WeakReference<X>> iter = values.iterator(); iter.hasNext(); ) {
             WeakReference<X> ref = iter.next();
             X value = ref.get();
-            if (value == null) {
+            if (value == null || value == valueToRemove) {
                 iter.remove();
             } else {
                 if (consumer != null) {

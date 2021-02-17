@@ -18,7 +18,6 @@
 package free.rm.skytube.businessobjects.YouTube.POJOs;
 
 import android.content.Context;
-import android.view.Menu;
 import android.widget.Toast;
 
 import androidx.core.util.Pair;
@@ -43,10 +42,8 @@ import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.VideoBlocker;
 import free.rm.skytube.businessobjects.db.ChannelFilteringDb;
-import free.rm.skytube.businessobjects.db.DatabaseResult;
 import free.rm.skytube.businessobjects.db.DatabaseTasks;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
-import free.rm.skytube.gui.fragments.SubscriptionsFeedFragment;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.disposables.Disposable;
@@ -310,7 +307,7 @@ public class YouTubeChannel extends CardData implements Serializable {
 							case SUCCESS: {
 								youTubeChannelWithResult.first.setUserSubscribed(true);
 								EventBus.getInstance().notifyMainTabChanged(EventBus.SettingChange.SUBSCRIPTION_LIST_CHANGED);
-								SubscriptionsFeedFragment.refreshSubsFeedFromCache();
+								SkyTubeApp.getSettings().setRefreshSubsFeedFromCache(true);
 								Toast.makeText(context, R.string.channel_subscribed, Toast.LENGTH_LONG).show();
 								break;
 							}

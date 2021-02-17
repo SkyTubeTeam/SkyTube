@@ -11,6 +11,7 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 
 import free.rm.skytube.R;
+import free.rm.skytube.app.EventBus;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetSubscriptionVideosTaskListener;
 import free.rm.skytube.businessobjects.YouTube.YouTubeTasks;
@@ -21,9 +22,8 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable;
  * A Service to automatically refresh the Subscriptions Database for Subscribed Channels. If any new videos have been found,
  * the Service will create a notification.
  */
-public class FeedUpdaterService extends Service implements GetSubscriptionVideosTaskListener {
+public class FeedUpdaterService extends Service {
 	private final CompositeDisposable compositeDisposable = new CompositeDisposable();
-	private int newVideosFetched;
 
 	public static final String NEW_SUBSCRIPTION_VIDEOS_FOUND = "FeedUpdaterService.NEW_SUBSCRIPTION_VIDEOS_FOUND";
 
@@ -41,12 +41,11 @@ public class FeedUpdaterService extends Service implements GetSubscriptionVideos
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		// Need to instantiate the task here since you can only run a task once.
-		int feedUpdaterInterval = Integer.parseInt(SkyTubeApp.getPreferenceManager().getString(SkyTubeApp.getStr(R.string.pref_key_feed_notification), "0"));
-		if(feedUpdaterInterval > 0) {
-			newVideosFetched = 0;
-			compositeDisposable.add(YouTubeTasks.getSubscriptionVideos(this, null)
-					.subscribe(changed -> {
-						if(changed) {
+		int feedUpdaterInterval = SkyTubeApp.getSettings().getFeedUpdaterInterval();
+		if (feedUpdaterInterval > 0) {
+			compositeDisposable.add(YouTubeTasks.refreshAllSubscriptions(null, null)
+					.subscribe(newVideosFetched -> {
+						if (newVideosFetched.intValue() > 0) {
 							Intent clickIntent = new Intent(this, MainActivity.class);
 							clickIntent.setAction(MainActivity.ACTION_VIEW_FEED);
 
@@ -68,14 +67,13 @@ public class FeedUpdaterService extends Service implements GetSubscriptionVideos
 							Intent feedTabIntent = new Intent(NEW_SUBSCRIPTION_VIDEOS_FOUND);
 							sendBroadcast(feedTabIntent);
 						}
+						EventBus.getInstance().notifyChannelsFound(newVideosFetched.intValue() > 0);
+						EventBus.getInstance().notifySubscriptionRefreshFinished();
 					})
 			);
 		}
 		return START_STICKY;
 	}
 
-	@Override
-	public void onChannelVideosFetched(String channelId, int videosFetched, boolean videosDeleted) {
-		newVideosFetched += videosFetched;
-	}
+
 }

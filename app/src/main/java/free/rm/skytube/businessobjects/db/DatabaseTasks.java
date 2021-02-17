@@ -22,7 +22,6 @@ import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.YouTube.VideoBlocker;
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
 import free.rm.skytube.gui.businessobjects.views.SubscribeButton;
-import free.rm.skytube.gui.fragments.SubscriptionsFeedFragment;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Flowable;
@@ -194,7 +193,7 @@ public class DatabaseTasks {
                     if (databaseResult == DatabaseResult.SUCCESS) {
                         // we need to refresh the Feed tab so it shows videos from the newly subscribed (or
                         // unsubscribed) channels
-                        SubscriptionsFeedFragment.refreshSubsFeedFromCache();
+                        SkyTubeApp.getSettings().setRefreshSubsFeedFromCache(true);
 
                         if (subscribeToChannel) {
                             // change the state of the button

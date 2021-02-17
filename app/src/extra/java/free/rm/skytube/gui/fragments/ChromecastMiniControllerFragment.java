@@ -24,6 +24,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import free.rm.skytube.R;
+import free.rm.skytube.app.Settings;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.ChromecastListener;
 import free.rm.skytube.businessobjects.db.PlaybackStatusDb;
@@ -178,10 +179,12 @@ public class ChromecastMiniControllerFragment extends ChromecastBaseControllerFr
 
 				// If the user subscribed to or unsubscribed from the Channel this video belongs to, from the ChromecastController, when the panel collapses, we should
 				// update the Feed tab to reflect the change.
-				if(SubscriptionsFeedFragment.isFlagSet(SubscriptionsFeedFragment.FLAG_REFRESH_FEED_FROM_CACHE)) {
-					SubscriptionsFeedFragment.unsetFlag(SubscriptionsFeedFragment.FLAG_REFRESH_FEED_FROM_CACHE);
-					if(mainActivityListener != null)
+				Settings settings = SkyTubeApp.getSettings();
+				if(settings.isRefreshSubsFeedFromCache()) {
+					settings.setRefreshSubsFeedFromCache(false);
+					if(mainActivityListener != null) {
 						mainActivityListener.refreshSubscriptionsFeedVideos();
+					}
 				}
 			}
 
