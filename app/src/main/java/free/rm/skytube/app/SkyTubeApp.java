@@ -34,6 +34,7 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Looper;
+import android.os.StrictMode;
 import android.os.SystemClock;
 import android.util.Log;
 import android.widget.Toast;
@@ -101,6 +102,21 @@ public class SkyTubeApp extends MultiDexApplication {
 		this.names = new FragmentNames(this);
 		skyTubeApp = this;
 		setupRxJava();
+		if (BuildConfig.DEBUG) {
+			StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
+					.detectDiskReads()
+					.detectDiskWrites()
+					.detectCustomSlowCalls()
+					.detectNetwork()   // or .detectAll() for all detectable problems
+					.penaltyLog()
+					.build());
+			StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
+					.detectLeakedSqlLiteObjects()
+					.detectLeakedClosableObjects()
+					.penaltyLog()
+					.penaltyDeath()
+					.build());
+		}
 		initChannels(this);
 	}
 
