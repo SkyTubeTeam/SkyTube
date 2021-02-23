@@ -356,8 +356,7 @@ public class YouTubeTasks {
     public static Maybe<List<CardData>> getYouTubeVideos(@NonNull GetYouTubeVideos getYouTubeVideos,
                                                          @NonNull VideoGridAdapter videoGridAdapter,
                                                          @Nullable SwipeRefreshLayout swipeRefreshLayout,
-                                                         boolean clearList,
-                                                         @Nullable VideoGridAdapter.Callback callback) {
+                                                         boolean clearList) {
         getYouTubeVideos.resetKey();
         final YouTubeChannel channel = videoGridAdapter.getYouTubeChannel();
         final Context context = videoGridAdapter.getContext();
@@ -413,10 +412,7 @@ public class YouTubeTasks {
                         videoGridAdapter.clearList();
                     }
                     videoGridAdapter.appendList(videosList);
-
-                    if (callback != null) {
-                        callback.onVideoGridUpdated(videoGridAdapter.getItemCount() > 0);
-                    }
+                    videoGridAdapter.notifyVideoGridUpdated();
                 })
                 .doOnTerminate(() -> {
                     if(swipeRefreshLayout != null) {

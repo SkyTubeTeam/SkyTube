@@ -46,7 +46,7 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<CardData, GridViewHo
 	private static final String TAG = VideoGridAdapter.class.getSimpleName();
 
 	public interface Callback {
-		void onVideoGridUpdated(boolean hasChannels);
+		void onVideoGridUpdated(boolean hasItems);
 	}
 
 	/**
@@ -79,6 +79,7 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<CardData, GridViewHo
 
 	/** Set to true if the video adapter is initialized. */
 	private boolean initialized = false;
+    private boolean refreshHappens = false;
 
 	private VideoGridAdapter.Callback videoGridUpdated;
 
@@ -188,15 +189,17 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<CardData, GridViewHo
 	 * @param clearVideosList If set to true, it will clear out any previously loaded videos (found
 	 *                        in this adapter).
 	 */
-	public void refresh(boolean clearVideosList) {
-		if (getYouTubeVideos != null) {
+	public synchronized void refresh(boolean clearVideosList) {
+		if (getYouTubeVideos != null && !refreshHappens) {
+			refreshHappens = true;
 			if (clearVideosList) {
 				getYouTubeVideos.reset();
 			}
 			// now, we consider this as initialized - sometimes 'refresh' can be called before the initializeList is called.
 			initialized = true;
+
 			compositeDisposable.add(YouTubeTasks.getYouTubeVideos(getYouTubeVideos, this,
-					swipeRefreshLayout, clearVideosList, videoGridUpdated).subscribe());
+					swipeRefreshLayout, clearVideosList).subscribe());
 		}
 	}
 
@@ -207,11 +210,21 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<CardData, GridViewHo
 		// if it reached the bottom of the list, then try to get the next page of videos
 		if (position >= getItemCount() - 1) {
 			Log.w(TAG, "BOTTOM REACHED!!!");
-			if(getYouTubeVideos != null)
+			if(getYouTubeVideos != null) {
+				refreshHappens = true;
 				compositeDisposable.add(YouTubeTasks.getYouTubeVideos(getYouTubeVideos, this,
-						swipeRefreshLayout, false, videoGridUpdated).subscribe());
+						swipeRefreshLayout, false).subscribe());
+			}
 		}
 	}
+
+    public synchronized void notifyVideoGridUpdated() {
+        refreshHappens = false;
+        if (videoGridUpdated != null) {
+            int itemCount = getItemCount();
+            videoGridUpdated.onVideoGridUpdated(itemCount > 0);
+        }
+    }
 
 	@Override
 	public void onViewRecycled(@NonNull GridViewHolder holder) {
