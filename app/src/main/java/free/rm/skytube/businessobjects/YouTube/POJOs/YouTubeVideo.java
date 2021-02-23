@@ -34,6 +34,7 @@ import com.google.api.services.youtube.model.VideoSnippet;
 import com.google.api.services.youtube.model.VideoStatistics;
 
 import org.ocpsoft.prettytime.PrettyTime;
+import org.reactivestreams.Subscription;
 import org.schabi.newpipe.extractor.stream.Stream;
 import org.schabi.newpipe.extractor.stream.StreamInfo;
 import org.schabi.newpipe.extractor.stream.VideoStream;
@@ -418,22 +419,24 @@ public class YouTubeVideo extends CardData implements Serializable {
 		return isLiveStream;
 	}
 
-	public boolean bookmarkVideo(Context context) {
-		return bookmarkVideo(context, null);
-	}
+    public Single<Boolean> bookmarkVideo(Context context) {
+        return bookmarkVideo(context, null);
+    }
 
-	public boolean bookmarkVideo(Context context, Menu menu) {
-		DatabaseResult result = BookmarksDb.getBookmarksDb().add(this);
-		Toast.makeText(context,
-				getBookmarkMessage(result),
-				Toast.LENGTH_LONG).show();
+    public Single<Boolean> bookmarkVideo(Context context, Menu menu) {
+        return BookmarksDb.getBookmarksDb().bookmarkAsync(this)
+                .map(result -> {
+                    Toast.makeText(context,
+                            getBookmarkMessage(result),
+                            Toast.LENGTH_LONG).show();
 
-		if (result.isPositive() && menu != null) {
-			menu.findItem(R.id.bookmark_video).setVisible(false);
-			menu.findItem(R.id.unbookmark_video).setVisible(true);
-		}
-		return result.isPositive();
-	}
+                    if (result.isPositive() && menu != null) {
+                        menu.findItem(R.id.bookmark_video).setVisible(false);
+                        menu.findItem(R.id.unbookmark_video).setVisible(true);
+                    }
+                    return result.isPositive();
+        });
+    }
 
 	static int getBookmarkMessage(@NonNull DatabaseResult result) {
 		switch (result) {
@@ -453,17 +456,20 @@ public class YouTubeVideo extends CardData implements Serializable {
 		throw new IllegalStateException("Result "+ result);
 	}
 
-	public void unbookmarkVideo(Context context, Menu menu) {
-		DatabaseResult result = BookmarksDb.getBookmarksDb().remove(getVideoId());
-		Toast.makeText(context,
-				getUnBookmarkMessage(result),
-				Toast.LENGTH_LONG).show();
+    public Single<Boolean> unbookmarkVideo(Context context, Menu menu) {
+        return BookmarksDb.getBookmarksDb().unbookmarkAsync(getVideoId())
+                .map(result -> {
+                    Toast.makeText(context,
+                            getUnBookmarkMessage(result),
+                            Toast.LENGTH_LONG).show();
 
-		if (result.isPositive() && menu != null) {
-			menu.findItem(R.id.bookmark_video).setVisible(true);
-			menu.findItem(R.id.unbookmark_video).setVisible(false);
-		}
-	}
+                    if (result.isPositive() && menu != null) {
+                        menu.findItem(R.id.bookmark_video).setVisible(true);
+                        menu.findItem(R.id.unbookmark_video).setVisible(false);
+                    }
+                    return result.isPositive();
+                });
+    }
 
 	public void shareVideo(Context context) {
 		SkyTubeApp.shareUrl(context, getVideoUrl());

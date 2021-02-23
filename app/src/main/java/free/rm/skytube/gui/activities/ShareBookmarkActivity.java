@@ -21,6 +21,8 @@ import androidx.annotation.StringRes;
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.YouTube.YouTubeTasks;
 import free.rm.skytube.businessobjects.YouTube.newpipe.ContentId;
+import io.reactivex.rxjava3.core.Completable;
+import io.reactivex.rxjava3.core.Maybe;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 
 /**
@@ -33,14 +35,15 @@ public class ShareBookmarkActivity extends ExternalUrlActivity {
     @Override
     void handleVideoContent(ContentId contentId) {
         compositeDisposable.add(YouTubeTasks.getVideoDetails(this, contentId)
-                .subscribe(video -> {
+                .flatMapCompletable(video -> {
                     if (video != null) {
-                        video.bookmarkVideo(free.rm.skytube.gui.activities.ShareBookmarkActivity.this);
+                        return video.bookmarkVideo(free.rm.skytube.gui.activities.ShareBookmarkActivity.this).ignoreElement();
                     } else {
                         invalidUrlError();
                     }
                     finish();
-                }));
+                    return Completable.complete();
+                }).subscribe());
     }
 
     @Override

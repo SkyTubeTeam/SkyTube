@@ -44,6 +44,9 @@ import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.YouTube.newpipe.VideoId;
 import free.rm.skytube.businessobjects.interfaces.OrderableDatabase;
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Single;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 /**
  * A database (DB) that stores user's bookmarked videos.
@@ -123,6 +126,18 @@ public class BookmarksDb extends SQLiteOpenHelperEx implements OrderableDatabase
 			return DatabaseResult.ERROR;
 		}
 	}
+
+    public Single<DatabaseResult> bookmarkAsync(YouTubeVideo video) {
+        return Single.fromSupplier(() -> add(video))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Single<DatabaseResult> unbookmarkAsync(VideoId video) {
+        return Single.fromSupplier(() -> remove(video))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
 
 	/**
 	 * Remove the specified video from the list of bookmarked videos.
