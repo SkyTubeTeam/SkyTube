@@ -156,10 +156,9 @@ public class DatabaseTasks {
      * A task that checks if the passed {@link YouTubeVideo} is marked as watched, to update the passed {@link Menu} accordingly.
      */
     public static Disposable isVideoWatched(@NonNull String videoId, @NonNull Menu menu) {
-        return Single.fromCallable(() -> PlaybackStatusDb.getPlaybackStatusDb().getVideoWatchedStatus(videoId).isFullyWatched())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(videoIsWatched -> {
+        return PlaybackStatusDb.getPlaybackStatusDb().getVideoWatchedStatusAsync(videoId)
+                .subscribe(videoStatus -> {
+                    boolean videoIsWatched = videoStatus != null && videoStatus.isFullyWatched();
                     // if this video has been watched, hide the set watched option and show the set unwatched option.
                     menu.findItem(R.id.mark_watched).setVisible(!videoIsWatched);
                     menu.findItem(R.id.mark_unwatched).setVisible(videoIsWatched);
