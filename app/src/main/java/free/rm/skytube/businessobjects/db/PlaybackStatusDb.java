@@ -78,7 +78,7 @@ public class PlaybackStatusDb extends SQLiteOpenHelperEx {
 	 * @return {@link VideoWatchedStatus} of the passed video, which contains the position (in ms) and whether or not the video
 	 * 					has been (completely) watched.
 	 */
-	public VideoWatchedStatus getVideoWatchedStatus(@NonNull String videoId) {
+	public synchronized VideoWatchedStatus getVideoWatchedStatus(@NonNull String videoId) {
 		if(playbackHistoryMap == null) {
 			Cursor cursor = getReadableDatabase().query(
 							PlaybackStatusTable.TABLE_NAME,
@@ -105,6 +105,12 @@ public class PlaybackStatusDb extends SQLiteOpenHelperEx {
 		}
 		return playbackHistoryMap.get(videoId);
 	}
+
+    public Maybe<VideoWatchedStatus> getVideoWatchedStatusAsync(@NonNull String videoId) {
+        return Maybe.fromCallable(() -> getVideoWatchedStatus(videoId))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
 
 	/**
 	 * Set the position (in ms) of the passed {@link YouTubeVideo}. If the position is less than 5 seconds,

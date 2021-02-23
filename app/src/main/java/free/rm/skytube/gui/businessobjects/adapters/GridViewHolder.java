@@ -221,22 +221,23 @@ public class GridViewHolder extends RecyclerView.ViewHolder implements Serializa
 			thumbsUpPercentageTextView.setVisibility(View.INVISIBLE);
 		}
 
-		if(SkyTubeApp.getPreferenceManager().getBoolean(context.getString(R.string.pref_key_disable_playback_status), false)) {
-			videoPositionProgressBar.setVisibility(View.INVISIBLE);
-		} else {
-			PlaybackStatusDb.VideoWatchedStatus videoWatchedStatus = PlaybackStatusDb.getPlaybackStatusDb().getVideoWatchedStatus(youTubeVideo.getId());
-			if (videoWatchedStatus.isWatched()) {
-				videoPositionProgressBar.setVisibility(View.VISIBLE);
-				videoPositionProgressBar.setMax(youTubeVideo.getDurationInSeconds() * 1000);
-				if (videoWatchedStatus.isFullyWatched()) {
-					videoPositionProgressBar.setProgress(youTubeVideo.getDurationInSeconds() * 1000);
-				} else {
-					videoPositionProgressBar.setProgress((int) videoWatchedStatus.getPosition());
-				}
-			} else {
-				videoPositionProgressBar.setVisibility(View.INVISIBLE);
-			}
-		}
+        if(SkyTubeApp.getSettings().isPlaybackStatusEnabled()) {
+            PlaybackStatusDb.getPlaybackStatusDb().getVideoWatchedStatusAsync(youTubeVideo.getId()).subscribe(videoWatchedStatus -> {
+                if (videoWatchedStatus.isWatched()) {
+                    videoPositionProgressBar.setVisibility(View.VISIBLE);
+                    videoPositionProgressBar.setMax(youTubeVideo.getDurationInSeconds() * 1000);
+                    if (videoWatchedStatus.isFullyWatched()) {
+                        videoPositionProgressBar.setProgress(youTubeVideo.getDurationInSeconds() * 1000);
+                    } else {
+                        videoPositionProgressBar.setProgress((int) videoWatchedStatus.getPosition());
+                    }
+                } else {
+                    videoPositionProgressBar.setVisibility(View.INVISIBLE);
+                }
+            });
+        } else {
+            videoPositionProgressBar.setVisibility(View.INVISIBLE);
+        }
 	}
 
  	private void onOptionsButtonClick(final View view) {
