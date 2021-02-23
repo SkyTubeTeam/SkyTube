@@ -411,20 +411,22 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
      *
      * @return	last visit time, if the update was successful;  -1 otherwise.
      */
-    public long updateLastVisitTime(String channelId) {
-        SQLiteDatabase	db = getWritableDatabase();
-        long			currentTime = System.currentTimeMillis();
+    public Single<Long> updateLastVisitTimeAsync(String channelId) {
+        return Single.fromCallable(() -> {
+            SQLiteDatabase	db = getWritableDatabase();
+            long			currentTime = System.currentTimeMillis();
 
-        ContentValues values = new ContentValues();
-        values.put(SubscriptionsTable.COL_LAST_VISIT_TIME, currentTime);
+            ContentValues values = new ContentValues();
+            values.put(SubscriptionsTable.COL_LAST_VISIT_TIME, currentTime);
 
-        int count = db.update(
+            int count = db.update(
                 SubscriptionsTable.TABLE_NAME,
                 values,
                 SubscriptionsTable.COL_CHANNEL_ID + " = ?",
                 new String[]{channelId});
 
-        return (count > 0 ? currentTime : -1);
+            return (count > 0 ? currentTime : -1);
+        }).subscribeOn(Schedulers.io());
     }
 
     /**
