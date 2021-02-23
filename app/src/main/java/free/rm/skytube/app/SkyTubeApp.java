@@ -53,10 +53,12 @@ import androidx.preference.PreferenceManager;
 import com.google.api.client.googleapis.json.GoogleJsonError;
 import com.google.api.client.googleapis.json.GoogleJsonResponseException;
 
+import org.ocpsoft.prettytime.PrettyTime;
 import org.schabi.newpipe.extractor.exceptions.FoundAdException;
 
 import java.io.IOException;
 import java.net.SocketException;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
@@ -74,9 +76,11 @@ import free.rm.skytube.gui.businessobjects.YouTubePlayer;
 import free.rm.skytube.gui.fragments.ChannelBrowserFragment;
 import free.rm.skytube.gui.fragments.FragmentNames;
 import free.rm.skytube.gui.fragments.PlaylistVideosFragment;
+import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.exceptions.UndeliverableException;
 import io.reactivex.rxjava3.plugins.RxJavaPlugins;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 /**
  * SkyTube application.
@@ -102,6 +106,7 @@ public class SkyTubeApp extends MultiDexApplication {
 		this.names = new FragmentNames(this);
 		skyTubeApp = this;
 		setupRxJava();
+		preloadPrettyTime();
 		if (BuildConfig.DEBUG) {
 			StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
 					.detectDiskReads()
@@ -147,6 +152,12 @@ public class SkyTubeApp extends MultiDexApplication {
 			}
 			Log.e("SkyTubeApp", "Undeliverable exception received, not sure what to do" + e.getMessage(), e);
 		});
+	}
+
+	private static void preloadPrettyTime() {
+		Completable.fromAction(() -> {
+			new PrettyTime().format(LocalDate.of(2021, 2, 23));
+		}).subscribeOn(Schedulers.io()).subscribe();
 	}
 
 	@RequiresApi(api = Build.VERSION_CODES.M)
