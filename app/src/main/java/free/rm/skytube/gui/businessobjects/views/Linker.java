@@ -37,12 +37,9 @@ import java.util.List;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
-import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.YouTubeTasks;
 import free.rm.skytube.businessobjects.YouTube.newpipe.ContentId;
 import free.rm.skytube.businessobjects.db.BookmarksDb;
-import io.reactivex.rxjava3.core.Maybe;
-import io.reactivex.rxjava3.core.Single;
 
 /**
  * A {@link android.widget.TextView} which is able to handle clicks on links within the set text.
@@ -63,7 +60,6 @@ public class Linker {
 	 * @param text
 	 */
 	public static void setTextAndLinkify(TextView textView, String text) {
-		Logger.i(TAG, String.format("setText: %s", text));
 		Spanned spanns = span(text);
 		textView.setText(spanns);
 	}
@@ -102,7 +98,6 @@ public class Linker {
 
 		@Override
 		public void onClick(URLSpan span, boolean longClick) {
-			Logger.i(TAG, String.format("onClick: %s, longClick= %s", span.getURL(), longClick));
 			if (longClick) {
 				longClick(span.getURL());
 			} else {

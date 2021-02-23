@@ -158,9 +158,10 @@ public class SkyTubeApp extends MultiDexApplication {
 
 	public static void uiThread() {
 		if (BuildConfig.DEBUG) {
-			Log.i("SkyTubeApp", "Expected to be UI thread : " + Thread.currentThread().getName() + " [" + Build.VERSION.SDK_INT + ']');
 			if (Build.VERSION.SDK_INT >= 29) {
 				uiThreadImpl();
+			} else {
+				Log.i("SkyTubeApp", "Expected to be UI thread : " + Thread.currentThread().getName() + " [" + Build.VERSION.SDK_INT + ']');
 			}
 		}
 	}
@@ -174,9 +175,10 @@ public class SkyTubeApp extends MultiDexApplication {
 
 	public static void nonUiThread() {
 		if (BuildConfig.DEBUG) {
-			Log.i("SkyTubeApp", "Expected to be non-UI thread : " + Thread.currentThread().getName() + " [" + Build.VERSION.SDK_INT + ']');
 			if (Build.VERSION.SDK_INT >= 29) {
 				nonUiThreadImpl();
+			} else {
+				Log.i("SkyTubeApp", "Expected to be non-UI thread : " + Thread.currentThread().getName() + " [" + Build.VERSION.SDK_INT + ']');
 			}
 		}
 	}

@@ -17,7 +17,6 @@
 
 package free.rm.skytube.gui.businessobjects.adapters;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +28,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import java.io.IOException;
 
 import free.rm.skytube.R;
+import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.businessobjects.YouTube.GetYouTubeVideos;
 import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
@@ -131,7 +131,7 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<CardData, GridViewHo
 			return;
 
 		try {
-			Log.i(TAG, videoCategory.toString());
+			Logger.d(this, "setVideoCategory:" + videoCategory.toString());
 
 			// do not show channel name if the video category == CHANNEL_VIDEOS or PLAYLIST_VIDEOS
 			this.showChannelInfo = !(videoCategory == VideoCategory.CHANNEL_VIDEOS  ||  videoCategory == VideoCategory.PLAYLIST_VIDEOS);
@@ -149,7 +149,7 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<CardData, GridViewHo
 			this.currentVideoCategory = videoCategory;
 
 		} catch (IOException e) {
-			Log.e(TAG, "Could not init " + videoCategory, e);
+			Logger.e(this, "Could not init " + videoCategory, e);
 			Toast.makeText(getContext(),
 							String.format(getContext().getString(R.string.could_not_get_videos), videoCategory.toString()),
 							Toast.LENGTH_LONG).show();
@@ -209,7 +209,7 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<CardData, GridViewHo
 
 		// if it reached the bottom of the list, then try to get the next page of videos
 		if (position >= getItemCount() - 1) {
-			Log.w(TAG, "BOTTOM REACHED!!!");
+			Logger.d(this, "BOTTOM REACHED!!!");
 			if(getYouTubeVideos != null) {
 				refreshHappens = true;
 				compositeDisposable.add(YouTubeTasks.getYouTubeVideos(getYouTubeVideos, this,
