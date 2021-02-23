@@ -40,7 +40,7 @@ public class VideoPagerWithChannel extends VideoPager {
     @Override
     protected YouTubeVideo convert(StreamInfoItem item, String id) {
         NewPipeService.DateInfo date = new NewPipeService.DateInfo(item.getUploadDate());
-        Logger.i(this, "item %s, title=%s at %s", id, item.getName(), date);
+        Logger.d(this, "item %s, title=%s at %s", id, item.getName(), date);
         YouTubeChannel ch = channel != null ? channel : new YouTubeChannel(item.getUploaderUrl(), item.getUploaderName());
         return new YouTubeVideo(id, item.getName(), null, item.getDuration(), ch,
                 item.getViewCount(), date.zonedDateTime, date.exact, NewPipeService.getThumbnailUrl(id));
