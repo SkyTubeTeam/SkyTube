@@ -41,6 +41,8 @@ import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.YouTubeTasks;
 import free.rm.skytube.businessobjects.YouTube.newpipe.ContentId;
 import free.rm.skytube.businessobjects.db.BookmarksDb;
+import io.reactivex.rxjava3.core.Maybe;
+import io.reactivex.rxjava3.core.Single;
 
 /**
  * A {@link android.widget.TextView} which is able to handle clicks on links within the set text.
@@ -141,13 +143,13 @@ public class Linker {
 										break;
 									case 3:
 										YouTubeTasks.getVideoDetails(ctx, content)
-												.blockingSubscribe(video -> {
+												.flatMapSingle(video -> {
 													if(!isBookmarked) {
-														video.bookmarkVideo(ctx);
+														return video.bookmarkVideo(ctx);
 													} else {
-														video.unbookmarkVideo(ctx, null);
+														return video.unbookmarkVideo(ctx, null);
 													}
-												});
+												}).subscribe();
 										break;
 								}
 							});

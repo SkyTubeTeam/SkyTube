@@ -628,11 +628,11 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 				return true;
 
 			case R.id.bookmark_video:
-				youTubeVideo.bookmarkVideo(getContext(), menu);
+				compositeDisposable.add(youTubeVideo.bookmarkVideo(getContext(), menu).subscribe());
 				return true;
 
 			case R.id.unbookmark_video:
-				youTubeVideo.unbookmarkVideo(getContext(), menu);
+				compositeDisposable.add(youTubeVideo.unbookmarkVideo(getContext(), menu).subscribe());
 				return true;
 
 			case R.id.view_thumbnail:

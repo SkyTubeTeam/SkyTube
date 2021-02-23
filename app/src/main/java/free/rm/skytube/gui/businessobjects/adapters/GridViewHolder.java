@@ -336,10 +336,10 @@ public class GridViewHolder extends RecyclerView.ViewHolder implements Serializa
 									.subscribe((success) -> updateViewsData()));
 					return true;
 				case R.id.bookmark_video:
-					youTubeVideo.bookmarkVideo(context, menu);
+					compositeDisposable.add(youTubeVideo.bookmarkVideo(context, menu).subscribe());
 					return true;
 				case R.id.unbookmark_video:
-					youTubeVideo.unbookmarkVideo(context, menu);
+					compositeDisposable.add(youTubeVideo.unbookmarkVideo(context, menu).subscribe());
 					return true;
 				case R.id.view_thumbnail:
 					Intent i = new Intent(context, ThumbnailViewerActivity.class);
