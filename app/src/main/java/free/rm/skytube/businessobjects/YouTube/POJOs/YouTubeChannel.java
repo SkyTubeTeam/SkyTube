@@ -295,7 +295,7 @@ public class YouTubeChannel extends CardData implements Serializable {
 				});
 	}
 
-	public static Disposable subscribeChannel(final Context context, final Menu menu, final String channelId) {
+	public static Disposable subscribeChannel(final Context context, final String channelId) {
 		if (channelId != null) {
 			return DatabaseTasks.getChannelInfo(context, channelId, false)
 					.observeOn(Schedulers.io())

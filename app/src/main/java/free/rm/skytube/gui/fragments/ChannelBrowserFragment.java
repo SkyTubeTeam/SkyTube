@@ -149,7 +149,6 @@ public class ChannelBrowserFragment extends FragmentEx {
 		channelThumbnailImage = fragment.findViewById(R.id.channel_thumbnail_image_view);
 		channelSubscribersTextView = fragment.findViewById(R.id.channel_subs_text_view);
 		channelSubscribeButton = fragment.findViewById(R.id.channel_subscribe_button);
-		channelSubscribeButton.setFetchChannelVideosOnSubscribe(false);
 		channelSubscribeButton.setOnClickListener(v -> {
 			// If we're subscribing to the channel, save the list of videos we have into the channel (to be stored in the database by SubscribeToChannelTask)
 			if(channel != null && !channel.isUserSubscribed()) {
