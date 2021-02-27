@@ -40,7 +40,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 /**
  * A database (DB) that stores user's downloaded videos.
  */
-public class DownloadedVideosDb extends SQLiteOpenHelperEx implements OrderableDatabase {
+public class DownloadedVideosDb extends CardEventEmitterDatabase implements OrderableDatabase {
 	private final static String TAG = "DownloadedVideosDb";
 
 	public static class Status {
@@ -114,17 +114,11 @@ public class DownloadedVideosDb extends SQLiteOpenHelperEx implements OrderableD
 		}
 	}
 
-	public interface DownloadedVideosListener {
-		void onDownloadedVideosUpdated();
-	}
-
 	private static volatile DownloadedVideosDb downloadsDb = null;
 	private static boolean hasUpdated = false;
 
 	private static final int DATABASE_VERSION = 2;
 	private static final String DATABASE_NAME = "videodownloads.db";
-
-	private final Set<DownloadedVideosListener> listeners = new HashSet<>();
 
 	public static synchronized DownloadedVideosDb getVideoDownloadsDb() {
 		if (downloadsDb == null) {
@@ -204,26 +198,32 @@ public class DownloadedVideosDb extends SQLiteOpenHelperEx implements OrderableD
 		return videos;
 	}
 
-	public boolean add(YouTubeVideo video, Uri fileUri, Uri audioUri) {
-		Gson gson = new Gson();
-		ContentValues values = new ContentValues();
-		values.put(DownloadedVideosTable.COL_YOUTUBE_VIDEO_ID, video.getId());
-		values.put(DownloadedVideosTable.COL_YOUTUBE_VIDEO, gson.toJson(video).getBytes());
-		if (fileUri != null) {
-			values.put(DownloadedVideosTable.COL_FILE_URI, fileUri.toString());
-		}
-		if (audioUri != null) {
-			values.put(DownloadedVideosTable.COL_AUDIO_FILE_URI, audioUri.toString());
-		}
+    public Single<Boolean> add(YouTubeVideo video, Uri fileUri, Uri audioUri) {
+        return Single.fromCallable(() -> {
+            Gson gson = new Gson();
+            ContentValues values = new ContentValues();
+            values.put(DownloadedVideosTable.COL_YOUTUBE_VIDEO_ID, video.getId());
+            values.put(DownloadedVideosTable.COL_YOUTUBE_VIDEO, gson.toJson(video).getBytes());
+            if (fileUri != null) {
+                values.put(DownloadedVideosTable.COL_FILE_URI, fileUri.toString());
+            }
+            if (audioUri != null) {
+                values.put(DownloadedVideosTable.COL_AUDIO_FILE_URI, audioUri.toString());
+            }
 
-		int order = getMaximumOrderNumber();
-		order++;
-		values.put(DownloadedVideosTable.COL_ORDER, order);
+            int order = getMaximumOrderNumber();
+            order++;
+            values.put(DownloadedVideosTable.COL_ORDER, order);
 
-		boolean addSuccessful = getWritableDatabase().replace(DownloadedVideosTable.TABLE_NAME, null, values) != -1;
-		onUpdated();
-		return addSuccessful;
-	}
+            return getWritableDatabase().replace(DownloadedVideosTable.TABLE_NAME, null, values) != -1;
+        }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSuccess(success -> {
+                    if (success) {
+                        notifyCardAdded(video);
+                    }
+                });
+    }
 
 	/**
 	 * Remove the filenames of the downloaded video from the database
@@ -239,38 +239,36 @@ public class DownloadedVideosDb extends SQLiteOpenHelperEx implements OrderableD
 		return (rowsDeleted >= 0);
 	}
 
-	/**
-	 * Remove local copy of this video, and delete it from the VideoDownloads DB.
-	 * @return
-	 */
-	public @NonNull Completable removeDownload(Context ctx, VideoId videoId) {
-		return Completable.fromCallable(() -> {
-			SkyTubeApp.nonUiThread();
-			Status status = getVideoFileStatus(videoId);
-			Log.i(TAG, "removeDownload for " + videoId + " -> " + status);
-			if (status != null) {
-				deleteIfExists(status.getLocalAudioFile());
-				deleteIfExists(status.getLocalVideoFile());
-				remove(videoId.getId());
-				final Settings settings = SkyTubeApp.getSettings();
-				if (settings.isDownloadToSeparateFolders()) {
-					removeParentFolderIfEmpty(status, settings.getDownloadParentFolder());
-				}
-			}
-			return status;
-		}).observeOn(AndroidSchedulers.mainThread())
-			.doOnError(exception -> {
-				displayGenericError(ctx, exception);
-			})
-			.onErrorComplete()
-			.subscribeOn(Schedulers.io())
-				.doOnComplete(() -> {
-					SkyTubeApp.uiThread();
-					for (DownloadedVideosListener listener : listeners) {
-						listener.onDownloadedVideosUpdated();
-					}
-				});
-	}
+    /**
+     * Remove local copy of this video, and delete it from the VideoDownloads DB.
+     * @return
+     */
+    public @NonNull Single<Status> removeDownload(Context ctx, VideoId videoId) {
+        return Single.fromCallable(() -> {
+            SkyTubeApp.nonUiThread();
+            Status status = getVideoFileStatus(videoId);
+            Log.i(TAG, "removeDownload for " + videoId + " -> " + status);
+            if (status != null) {
+                deleteIfExists(status.getLocalAudioFile());
+                deleteIfExists(status.getLocalVideoFile());
+                remove(videoId.getId());
+                final Settings settings = SkyTubeApp.getSettings();
+                if (settings.isDownloadToSeparateFolders()) {
+                    removeParentFolderIfEmpty(status, settings.getDownloadParentFolder());
+                }
+            }
+            return status;
+        })
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .doOnSuccess(status -> {
+            SkyTubeApp.uiThread();
+            notifyCardDeleted(videoId);
+        })
+        .doOnError(exception -> {
+            displayGenericError(ctx, exception);
+        });
+    }
 
 	private void removeParentFolderIfEmpty(Status file, File downloadParentFolder) {
 		File parentFile = file.getParentFolder();
@@ -422,31 +420,6 @@ public class DownloadedVideosDb extends SQLiteOpenHelperEx implements OrderableD
 	}
 
 	private synchronized void onUpdated() {
-		hasUpdated = true;
-		if(listeners != null) {
-			for (DownloadedVideosListener listener: listeners) {
-				listener.onDownloadedVideosUpdated();
-			}
-		}
-	}
-
-	/**
-	 * Add a Listener that will be notified when a video is added or removed from the Downloaded Videos. This will
-	 * allow the Video Grid to be redrawn in order to remove the video from display.
-	 *
-	 * @param listener The Listener (which implements DownloadedVideosListener) to add.
-	 */
-	public synchronized void addListener(@NonNull DownloadedVideosListener listener) {
-		this.listeners.add(listener);
-	}
-
-	/**
-	 * Remove the Listener
-	 *
-	 * @param listener The Listener (which implements BookmarksDbListener) to remove.
-	 */
-	public synchronized void removeListener(@NonNull DownloadedVideosListener listener) {
-		this.listeners.remove(listener);
 	}
 
 	/**
@@ -467,10 +440,19 @@ public class DownloadedVideosDb extends SQLiteOpenHelperEx implements OrderableD
 		}
 	}
 
+    /**
+     * @return The total number of bookmarked videos.
+     */
+    public Single<Integer> getTotalCount() {
+        return Single.fromCallable(() ->
+                executeQueryForInteger(DownloadedVideosTable.COUNT_ALL, 0)
+        ).subscribeOn(Schedulers.io());
+    }
+
 	/**
 	 * @return The maximum of the order number - which could be different from the number of downloaded files, in case some of them are deleted.
 	 */
-	public int getMaximumOrderNumber() {
+	private int getMaximumOrderNumber() {
 		Cursor	cursor = getReadableDatabase().rawQuery(DownloadedVideosTable.MAXIMUM_ORDER_QUERY, null);
 		int		totalDownloads = 0;
 
@@ -480,14 +462,6 @@ public class DownloadedVideosDb extends SQLiteOpenHelperEx implements OrderableD
 
 		cursor.close();
 		return totalDownloads;
-	}
-
-	public static boolean isHasUpdated() {
-		return hasUpdated;
-	}
-
-	public static void setHasUpdated(boolean hasUpdated) {
-		DownloadedVideosDb.hasUpdated = hasUpdated;
 	}
 
 	/**

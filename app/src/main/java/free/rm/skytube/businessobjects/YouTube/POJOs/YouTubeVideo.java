@@ -594,24 +594,40 @@ public class YouTubeVideo extends CardData implements Serializable {
 					Toast.LENGTH_LONG).show();
 		}
 
-		@Override
-		public void onFileDownloadCompleted(boolean success, Uri localFileUri) {
-			if (success) {
-				success = DownloadedVideosDb.getVideoDownloadsDb().add(YouTubeVideo.this, localFileUri, null);
-			}
+        @Override
+        public void onFileDownloadCompleted(boolean success, Uri localFileUri) {
+            if (success) {
+                DownloadedVideosDb.getVideoDownloadsDb().add(YouTubeVideo.this, localFileUri, null)
+                    .doOnSuccess(saveSucceeded -> {
+                        showToast(saveSucceeded);
+                    }).doOnError(err -> {
+                        SkyTubeApp.notifyUserOnError(getContext(), err);
+                    }).subscribe();
+            } else {
+                showToast(false);
+            }
+        }
 
-			Toast.makeText(getContext(),
-					String.format(getContext().getString(success ? R.string.video_downloaded : R.string.video_download_stream_error), getTitle()),
-					Toast.LENGTH_LONG).show();
-		}
+        private void showToast(boolean success) {
+            Toast.makeText(getContext(),
+                    String.format(getContext().getString(success ? R.string.video_downloaded : R.string.video_download_stream_error), getTitle()),
+                    Toast.LENGTH_LONG).show();
+        }
 
-		@Override
-		public void onExternalStorageNotAvailable() {
-			Toast.makeText(getContext(),
-					R.string.external_storage_not_available,
-					Toast.LENGTH_LONG).show();
-		}
+        @Override
+        public void onDownloadStartFailed(String downloadName, final RuntimeException runtimeException) {
+            Toast.makeText(getContext(),
+                    String.format(getContext().getString(R.string.download_failed_because), downloadName, runtimeException.getMessage()),
+                    Toast.LENGTH_LONG).show();
+        }
 
-	}
+        @Override
+        public void onExternalStorageNotAvailable() {
+            Toast.makeText(getContext(),
+                    R.string.external_storage_not_available,
+                    Toast.LENGTH_LONG).show();
+        }
+
+    }
 
 }

@@ -33,8 +33,12 @@ import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.businessobjects.YouTube.GetYouTubeVideos;
 import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
+import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.YouTube.YouTubeTasks;
+import free.rm.skytube.businessobjects.YouTube.newpipe.ContentId;
+import free.rm.skytube.businessobjects.YouTube.newpipe.VideoId;
 import free.rm.skytube.businessobjects.db.PlaybackStatusDb;
+import free.rm.skytube.businessobjects.interfaces.CardListener;
 import free.rm.skytube.businessobjects.interfaces.VideoPlayStatusUpdateListener;
 import free.rm.skytube.gui.businessobjects.MainActivityListener;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
@@ -42,7 +46,7 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable;
 /**
  * An adapter that will display videos in a {@link android.widget.GridView}.
  */
-public class VideoGridAdapter extends RecyclerViewAdapterEx<CardData, GridViewHolder> implements VideoPlayStatusUpdateListener {
+public class VideoGridAdapter extends RecyclerViewAdapterEx<CardData, GridViewHolder> implements VideoPlayStatusUpdateListener, CardListener {
 	private static final String TAG = VideoGridAdapter.class.getSimpleName();
 
 	public interface Callback {
@@ -105,6 +109,22 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<CardData, GridViewHo
 	public void setListener(MainActivityListener listener) {
 		this.listener = listener;
 	}
+
+    /**
+     * Will be called once the DB is updated - by a video insertion.
+     */
+    @Override
+    public void onCardAdded(final CardData card) {
+        prepend(card);
+    }
+
+    /**
+     * Will be called once the DB is updated - by a video deletion.
+     */
+    @Override
+    public void onCardDeleted(final ContentId contentId) {
+        remove(card -> contentId.getId().equals(card.getId()));
+    }
 
 	/**
 	 * Set the video category.  Upon set, the adapter will download the videos of the specified
