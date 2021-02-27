@@ -97,7 +97,7 @@ dependencies {
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.1'
 
     // YouTube modules
-    implementation 'com.github.SkyTubeTeam.google-http-java-client:google-http-client-android:1.34.3.1'
+    implementation 'com.github.SkyTubeTeam.google-http-java-client:google-http-client-android:1.39.0.1'
 
     implementation ('com.google.apis:google-api-services-youtube:v3-rev20200423-1.30.9') {
         exclude group: 'com.google.http-client', module:'google-http-client'
