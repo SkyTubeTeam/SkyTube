@@ -139,11 +139,6 @@ public class DownloadedVideosDb extends SQLiteOpenHelperEx implements OrderableD
 	}
 
 	@Override
-	protected void clearDatabaseInstance() {
-
-	}
-
-	@Override
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL(DownloadedVideosTable.getCreateStatement());
 	}

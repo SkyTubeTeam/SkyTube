@@ -52,13 +52,6 @@ public class ChannelFilteringDb extends SQLiteOpenHelperEx {
 		return channelFilteringDb;
 	}
 
-
-	@Override
-	protected void clearDatabaseInstance() {
-		channelFilteringDb = null;
-	}
-
-
 	@Override
 	public void onCreate(SQLiteDatabase sqLiteDatabase) {
 		sqLiteDatabase.execSQL(ChannelListTable.BLACKLIST.getCreateStatement());

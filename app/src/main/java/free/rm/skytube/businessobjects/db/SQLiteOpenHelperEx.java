@@ -49,12 +49,6 @@ public abstract class SQLiteOpenHelperEx extends SQLiteOpenHelper {
 
 
 	/**
-	 * Clears the (singleton) database instance by setting it to null.
-	 */
-	protected abstract void clearDatabaseInstance();
-
-
-	/**
 	 * @return The database (full) path.
 	 */
 	public String getDatabasePath() {

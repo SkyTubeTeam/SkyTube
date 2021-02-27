@@ -47,11 +47,6 @@ public class PlaybackStatusDb extends SQLiteOpenHelperEx {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 	}
 
-	@Override
-	protected void clearDatabaseInstance() {
-
-	}
-
 	public void deleteAllPlaybackHistory() {
 		getWritableDatabase().delete(PlaybackStatusTable.TABLE_NAME, null, null);
 		playbackHistoryMap = null;
