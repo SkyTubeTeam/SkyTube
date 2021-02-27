@@ -117,6 +117,13 @@ public class ThumbnailViewerActivity extends AppCompatActivity {
 		public void onFileDownloadStarted() {
 		}
 
+        @Override
+        public void onDownloadStartFailed(String downloadName, final RuntimeException runtimeException) {
+            Toast.makeText(getContext(),
+                    String.format(getContext().getString(R.string.download_failed_because), downloadName, runtimeException.getMessage()),
+                    Toast.LENGTH_LONG).show();
+        }
+
 		@Override
 		public void onFileDownloadCompleted(boolean success, Uri localFileUri) {
 			Toast.makeText(getContext(),

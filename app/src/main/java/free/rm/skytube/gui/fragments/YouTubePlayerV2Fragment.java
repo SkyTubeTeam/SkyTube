@@ -332,7 +332,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 										compositeDisposable.add(
 											DownloadedVideosDb.getVideoDownloadsDb().removeDownload(ctx, youTubeVideo.getVideoId())
 												.subscribe(
-													() ->  closeActivity(),
+													status ->  closeActivity(),
 													err -> Logger.e(YouTubePlayerV2Fragment.this, "Error:"+err.getMessage(), err) ));
 									} else {
 										closeActivity();

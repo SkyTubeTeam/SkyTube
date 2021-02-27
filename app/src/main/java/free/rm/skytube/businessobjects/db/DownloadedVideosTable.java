@@ -12,6 +12,8 @@ public class DownloadedVideosTable {
 	public static final String COL_ORDER = "Order_Index";
 
 	static final String MAXIMUM_ORDER_QUERY = String.format("SELECT MAX(%s) FROM %s", COL_ORDER, TABLE_NAME);
+	static final String COUNT_ALL = String.format("SELECT COUNT(*) FROM %s", TABLE_NAME);
+
 	static final String PAGED_QUERY = String.format("SELECT %1$s,%2$s FROM %3$s WHERE %2$s > ? ORDER BY %2$s DESC LIMIT ?", COL_YOUTUBE_VIDEO, COL_ORDER, TABLE_NAME);
 
 	private static final String ADD_COLUMN = "ALTER TABLE " + TABLE_NAME + " ADD COLUMN ";

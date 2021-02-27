@@ -142,9 +142,7 @@ public class DatabaseTasks {
      * video.
      */
     public static Disposable isVideoBookmarked(@NonNull String videoId, @NonNull Menu menu) {
-        return Single.fromCallable(() -> BookmarksDb.getBookmarksDb().isBookmarked(videoId))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+        return BookmarksDb.getBookmarksDb().isVideoBookmarked(videoId)
                 .subscribe(videoIsBookmarked -> {
                     // if this video has been bookmarked, hide the bookmark option and show the unbookmark option.
                     menu.findItem(R.id.bookmark_video).setVisible(!videoIsBookmarked);
