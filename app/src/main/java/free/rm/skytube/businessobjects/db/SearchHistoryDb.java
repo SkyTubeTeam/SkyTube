@@ -39,12 +39,6 @@ public class SearchHistoryDb extends SQLiteOpenHelperEx {
 		return searchHistoryDb;
 	}
 
-
-	@Override
-	protected void clearDatabaseInstance() {
-		searchHistoryDb = null;
-	}
-
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL(SearchHistoryTable.getCreateStatement());

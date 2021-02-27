@@ -73,12 +73,6 @@ public class BookmarksDb extends SQLiteOpenHelperEx implements OrderableDatabase
 		return bookmarksDb;
 	}
 
-
-	@Override
-	protected void clearDatabaseInstance() {
-		bookmarksDb = null;
-	}
-
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL(BookmarksTable.getCreateStatement());
