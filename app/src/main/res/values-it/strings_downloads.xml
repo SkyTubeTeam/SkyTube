@@ -12,4 +12,7 @@
     <string name="playing_video_file_missing">Il download per questo video non è stato trovato. Riproduzione da remoto.</string>
     <string name="external_storage_not_available">Impossibile scaricare il file poiché l\'archiviazione esterna non è disponibile.</string>
     <string name="download">Scarica</string>
+    <string name="video_stream_not_found_with_request_resolution">Nessuno stream video trovato per la risoluzione richiesta, compresa tra %s - %s</string>
+    <string name="unable_to_delete_file">Impossibile eliminare il file scaricato: \'%s\'</string>
+    <string name="warning_metered_network_download">Il tuo dispositivo è connesso ad una rete a consumo. Per evitare potenziali costi extra è raccomandato connettersi ad una rete illimitata. Scaricare il video comunque\?</string>
 </resources>

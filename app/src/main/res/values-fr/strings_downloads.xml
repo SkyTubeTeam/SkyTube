@@ -12,4 +12,5 @@
     <string name="playing_video_file_missing">Impossible de lire la vidéo téléchargée. Lecture en ligne.</string>
     <string name="external_storage_not_available">Impossible de télécharger le fichier car le stockage externe n\'est pas disponible.</string>
     <string name="download">Télécharger</string>
+    <string name="unable_to_delete_file">Impossible de supprimer le fichier télécharger : \'%s\'</string>
 </resources>

@@ -8,5 +8,5 @@
     <string name="later">Senere</string>
     <string name="update_failure">Kunne ikke oppgradere programmet.</string>
     <string name="downloading">Laster ned…</string>
-    <string name="release_notes">Endres om %s</string>
+    <string name="release_notes">Endringer i %s</string>
 </resources>
