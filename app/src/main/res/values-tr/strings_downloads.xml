@@ -15,4 +15,5 @@
     <string name="video_stream_not_found_with_request_resolution">%s - %s arasında, istenen çözünürlük için video akışı bulunamadı</string>
     <string name="warning_metered_network_download">Aygıtınız kotalı bir ağa bağlı. Olası ek veri kullanım ücretlerinden kaçınmak için, kotasız bir ağa bağlanmanız önerilir. Video yine de indirilsin mi\?</string>
     <string name="unable_to_delete_file">İndirilen dosya silinemiyor: \'%s\'</string>
+    <string name="download_failed_because">%1$s indirilemedi çünkü: %2$s</string>
 </resources>
