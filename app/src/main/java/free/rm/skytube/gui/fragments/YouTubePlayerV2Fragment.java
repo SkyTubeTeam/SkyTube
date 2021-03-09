@@ -25,14 +25,7 @@ import android.graphics.Rect;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
+import android.view.*;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -1163,4 +1156,8 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 		player.setPlayWhenReady(false);
 	}
 
+	@Override
+	public void play() {
+		player.setPlayWhenReady(true);
+	}
 }

@@ -1002,4 +1002,9 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 	public void pause() {
 		videoView.pause();
 	}
+
+	@Override
+	public void play() {
+		videoView.start();
+	}
 }
