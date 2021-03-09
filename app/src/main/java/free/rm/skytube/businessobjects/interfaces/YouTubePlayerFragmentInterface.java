@@ -26,4 +26,9 @@ public interface YouTubePlayerFragmentInterface {
 	 * Pause the currently playing video.
 	 */
 	void pause();
+
+	/**
+	 * Start playback of current video.
+	 */
+	void play();
 }

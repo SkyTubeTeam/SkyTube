@@ -23,6 +23,7 @@ import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -114,6 +115,18 @@ public class YouTubePlayerActivity extends BaseActivity implements YouTubePlayer
 		return true;
 	}
 
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		switch (keyCode) {
+			case KeyEvent.KEYCODE_MEDIA_PLAY:
+				fragmentListener.play();
+				return true;
+			case KeyEvent.KEYCODE_MEDIA_PAUSE:
+				fragmentListener.pause();
+				return true;
+		}
+		return super.onKeyDown(keyCode, event);
+	}
 
 	/**
 	 * "Installs" the video player fragment.
