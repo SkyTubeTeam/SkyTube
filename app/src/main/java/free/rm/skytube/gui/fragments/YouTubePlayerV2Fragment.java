@@ -163,6 +163,8 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 	private final CompositeDisposable compositeDisposable = new CompositeDisposable();
 	private Unbinder unbinder;
 
+	private boolean videoIsPlaying;
+
     @Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -296,7 +298,9 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 				@Override
 				public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
 					Logger.i(this, ">> onPlayerStateChanged " + playWhenReady + " state=" + playbackState);
-					if (playbackState == Player.STATE_READY && playWhenReady) {
+					videoIsPlaying = playbackState == Player.STATE_READY && playWhenReady;
+
+					if (videoIsPlaying) {
 						preventDeviceSleeping(true);
 						playbackSpeedController.updateMenu();
 					} else {
@@ -1149,6 +1153,11 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 	@Override
 	public int getCurrentVideoPosition() {
 		return (int)player.getCurrentPosition();
+	}
+
+	@Override
+	public boolean isPlaying() {
+		return videoIsPlaying;
 	}
 
 	@Override
