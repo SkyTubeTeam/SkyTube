@@ -124,6 +124,13 @@ public class YouTubePlayerActivity extends BaseActivity implements YouTubePlayer
 			case KeyEvent.KEYCODE_MEDIA_PAUSE:
 				fragmentListener.pause();
 				return true;
+			case KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE:
+				if (fragmentListener.isPlaying()) {
+					fragmentListener.pause();
+				} else {
+					fragmentListener.play();
+				}
+				return true;
 		}
 		return super.onKeyDown(keyCode, event);
 	}

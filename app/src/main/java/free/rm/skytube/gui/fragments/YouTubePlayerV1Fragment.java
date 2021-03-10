@@ -999,6 +999,11 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 	}
 
 	@Override
+	public boolean isPlaying() {
+		return videoView.isPlaying();
+	}
+
+	@Override
 	public void pause() {
 		videoView.pause();
 	}

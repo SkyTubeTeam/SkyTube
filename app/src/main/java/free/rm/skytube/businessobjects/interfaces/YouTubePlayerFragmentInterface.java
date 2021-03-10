@@ -23,6 +23,12 @@ public interface YouTubePlayerFragmentInterface {
 	int getCurrentVideoPosition();
 
 	/**
+	 * Whether the current video is playing.
+	 * @return boolean
+	 */
+	boolean isPlaying();
+
+	/**
 	 * Pause the currently playing video.
 	 */
 	void pause();
