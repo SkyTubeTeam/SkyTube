@@ -35,6 +35,7 @@ import androidx.preference.PreferenceManager;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
+import free.rm.skytube.businessobjects.interfaces.PlaybackStateListener;
 import org.schabi.newpipe.extractor.StreamingService;
 import org.schabi.newpipe.extractor.stream.StreamInfo;
 
@@ -51,7 +52,6 @@ import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.YouTube.YouTubeTasks;
 import free.rm.skytube.businessobjects.YouTube.newpipe.ContentId;
-import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeUtils;
 import free.rm.skytube.businessobjects.db.DatabaseTasks;
 import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
 import free.rm.skytube.businessobjects.db.PlaybackStatusDb;
@@ -134,6 +134,8 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 
 	private static final int MAX_VIDEO_STEP_TIME = 60 * 1000;
 	private static final int MAX_BRIGHTNESS = 100;
+
+	private PlaybackStateListener playbackStateListener;
 
 
 	@Override
@@ -1012,4 +1014,10 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 	public void play() {
 		videoView.start();
 	}
+
+	/**
+	 * no-op, not implemented
+	 */
+	@Override
+	public void setPlaybackStateListener(PlaybackStateListener listener) {}
 }

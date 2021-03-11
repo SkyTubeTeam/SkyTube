@@ -37,4 +37,6 @@ public interface YouTubePlayerFragmentInterface {
 	 * Start playback of current video.
 	 */
 	void play();
+
+	void setPlaybackStateListener(PlaybackStateListener listener);
 }
