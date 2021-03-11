@@ -26,15 +26,14 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
-
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubePlaylist;
 import free.rm.skytube.businessobjects.interfaces.YouTubePlayerActivityListener;
 import free.rm.skytube.businessobjects.interfaces.YouTubePlayerFragmentInterface;
+import free.rm.skytube.gui.businessobjects.MediaSessionHandler;
 import free.rm.skytube.gui.businessobjects.fragments.FragmentEx;
 import free.rm.skytube.gui.fragments.YouTubePlayerTutorialFragment;
 import free.rm.skytube.gui.fragments.YouTubePlayerV1Fragment;
@@ -51,13 +50,14 @@ public class YouTubePlayerActivity extends BaseActivity implements YouTubePlayer
 
 	private FragmentEx videoPlayerFragment;
 	private YouTubePlayerFragmentInterface fragmentListener;
+	private MediaSessionHandler mediaSessionHandler;
 
-	public  static final String YOUTUBE_VIDEO_OBJ  = "YouTubePlayerActivity.video_object";
-
+	public static final String YOUTUBE_VIDEO_OBJ  = "YouTubePlayerActivity.video_object";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		final boolean useDefaultPlayer = useDefaultPlayer();
+		mediaSessionHandler = new MediaSessionHandler(this);
 
 		// if the user wants to use the default player, then ensure that the activity does not
 		// have a toolbar (actionbar) -- this is as the fragment is taking care of the toolbar
@@ -117,6 +117,15 @@ public class YouTubePlayerActivity extends BaseActivity implements YouTubePlayer
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		// media events are handled by MediaSession instead of being passed as keyDown events starting from SDK v21
+		if (Build.VERSION.SDK_INT < 21 && handleMediaKeyDown(keyCode)) {
+			return true;
+		}
+
+		return super.onKeyDown(keyCode, event);
+	}
+
+	public boolean handleMediaKeyDown(int keyCode) {
 		switch (keyCode) {
 			case KeyEvent.KEYCODE_MEDIA_PLAY:
 				fragmentListener.play();
@@ -131,8 +140,9 @@ public class YouTubePlayerActivity extends BaseActivity implements YouTubePlayer
 					fragmentListener.play();
 				}
 				return true;
+			default:
+				return false;
 		}
-		return super.onKeyDown(keyCode, event);
 	}
 
 	/**
@@ -150,6 +160,7 @@ public class YouTubePlayerActivity extends BaseActivity implements YouTubePlayer
 					+ " must implement YouTubePlayerFragmentInterface");
 		}
 
+		mediaSessionHandler.attachToPlayer(fragmentListener);
 		installFragment(videoPlayerFragment);
 	}
 
@@ -172,6 +183,7 @@ public class YouTubePlayerActivity extends BaseActivity implements YouTubePlayer
 	@Override
 	protected void onStart() {
 		super.onStart();
+		mediaSessionHandler.setActive(true);
 
 		// set the video player's orientation as what the user wants
 		String  str = SkyTubeApp.getPreferenceManager().getString(getString(R.string.pref_key_screen_orientation), getString(R.string.pref_screen_auto_value));
@@ -190,6 +202,7 @@ public class YouTubePlayerActivity extends BaseActivity implements YouTubePlayer
 
 	@Override
 	protected void onStop() {
+		mediaSessionHandler.setActive(false);
 		super.onStop();
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
 	}

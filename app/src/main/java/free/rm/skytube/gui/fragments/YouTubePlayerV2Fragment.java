@@ -57,6 +57,7 @@ import com.google.android.exoplayer2.ui.AspectRatioFrameLayout;
 import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 
+import free.rm.skytube.businessobjects.interfaces.PlaybackStateListener;
 import org.schabi.newpipe.extractor.StreamingService;
 import org.schabi.newpipe.extractor.stream.StreamInfo;
 
@@ -164,6 +165,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 	private Unbinder unbinder;
 
 	private boolean videoIsPlaying;
+	private PlaybackStateListener playbackStateListener = null;
 
     @Nullable
 	@Override
@@ -306,6 +308,21 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 					} else {
 						preventDeviceSleeping(false);
 					}
+
+					if (playbackStateListener != null) {
+						boolean videoIsPaused = playbackState == Player.STATE_READY && !playWhenReady;
+						sendPlaybackState(videoIsPlaying, videoIsPaused);
+					}
+				}
+
+				private void sendPlaybackState(boolean isPlaying, boolean isPaused) {
+					if(isPlaying) {
+						playbackStateListener.started();
+					} else if (isPaused) {
+						playbackStateListener.paused();
+					} else {
+						playbackStateListener.ended();
+					}
 				}
 
 				@Override
@@ -313,6 +330,8 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 					Logger.e(this, ":: onPlayerError " + error.getMessage(), error);
 
 					saveVideoPosition();
+
+					playbackStateListener.ended();
 
 					boolean askForDelete = askForDelete(error);
 					String errorMessage = error.getCause().getMessage();
@@ -1168,5 +1187,10 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 	@Override
 	public void play() {
 		player.setPlayWhenReady(true);
+	}
+
+	@Override
+	public void setPlaybackStateListener(PlaybackStateListener listener) {
+		playbackStateListener = listener;
 	}
 }
