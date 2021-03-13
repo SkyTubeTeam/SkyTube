@@ -25,7 +25,14 @@ import android.graphics.Rect;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.*;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -57,7 +64,6 @@ import com.google.android.exoplayer2.ui.AspectRatioFrameLayout;
 import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 
-import free.rm.skytube.businessobjects.interfaces.PlaybackStateListener;
 import org.schabi.newpipe.extractor.StreamingService;
 import org.schabi.newpipe.extractor.stream.StreamInfo;
 
@@ -94,6 +100,7 @@ import free.rm.skytube.gui.businessobjects.adapters.CommentsAdapter;
 import free.rm.skytube.gui.businessobjects.fragments.ImmersiveModeFragment;
 import free.rm.skytube.gui.businessobjects.views.Linker;
 import free.rm.skytube.gui.businessobjects.views.SubscribeButton;
+import free.rm.skytube.businessobjects.interfaces.PlaybackStateListener;
 import hollowsoft.slidingdrawer.SlidingDrawer;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 
