@@ -274,9 +274,9 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 			@Override
 			public boolean onDoubleTap() {
 				if (videoView.isPlaying()) {
-					videoView.pause();
+					pause();
 				} else {
-					videoView.start();
+					play();
 				}
 				return true;
 			}
@@ -542,7 +542,7 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 	public void onPrepared(MediaPlayer mediaPlayer) {
 		loadingVideoView.setVisibility(View.GONE);
 		videoView.seekTo(videoCurrentPosition);
-		videoView.start();
+		play();
 
 		showHud();
 	}
@@ -727,7 +727,7 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 
 			case R.id.menu_open_video_with:
 				compositeDisposable.add(youTubeVideo.playVideoExternally(getContext())
-						.subscribe(status -> videoView.pause()));
+						.subscribe(status -> pause()));
 				return true;
 
 			case R.id.share:
@@ -900,8 +900,7 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 		if (decision == Policy.ALLOW) {
 			// if the video is NOT live
 			if (!youTubeVideo.isLiveStream()) {
-				videoView.pause();
-				videoView.stopPlayback();
+				stopPlayback();
 				loadingVideoView.setVisibility(View.VISIBLE);
 				compositeDisposable.add(
 					DownloadedVideosDb.getVideoDownloadsDb().getDownloadedFileStatus(getContext(), youTubeVideo.getVideoId())
@@ -962,6 +961,10 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 	}
 
 	void videoPlaybackError(String errorMessage) {
+		if (playbackStateListener != null) {
+			playbackStateListener.ended();
+		}
+
 		Context ctx = getContext();
 		if (ctx == null) {
 			Logger.e(YouTubePlayerV1Fragment.this, "Error during getting stream: %s", errorMessage);
@@ -980,8 +983,7 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 	@Override
 	public void videoPlaybackStopped() {
 		int position = videoView.getCurrentPosition();
-		videoView.pause();
-		videoView.stopPlayback();
+		stopPlayback();
 		saveVideoPosition(position);
 	}
 
@@ -1005,19 +1007,38 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 		return videoView.isPlaying();
 	}
 
+	private void stopPlayback() {
+		videoView.pause();
+		videoView.stopPlayback();
+
+		if (playbackStateListener != null) {
+			playbackStateListener.ended();
+		}
+	}
+
 	@Override
 	public void pause() {
 		videoView.pause();
+
+		if (playbackStateListener != null && !videoView.isPlaying()) {
+			playbackStateListener.paused();
+		}
 	}
 
 	@Override
 	public void play() {
 		videoView.start();
+
+		if (playbackStateListener != null && videoView.isPlaying()) {
+			playbackStateListener.started();
+		}
 	}
 
 	/**
 	 * no-op, not implemented
 	 */
 	@Override
-	public void setPlaybackStateListener(PlaybackStateListener listener) {}
+	public void setPlaybackStateListener(PlaybackStateListener listener) {
+		playbackStateListener = listener;
+	}
 }
