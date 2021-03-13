@@ -73,7 +73,7 @@ public final class YoutubePlayerMediaSession {
 
             @Override
             public void ended() {
-                setMediaPlaybackState(PlaybackStateCompat.STATE_STOPPED);
+                setMediaPlaybackState(PlaybackStateCompat.STATE_NONE);
             }
 
             private void setMediaPlaybackState(int state) {
@@ -89,6 +89,10 @@ public final class YoutubePlayerMediaSession {
             }
 
             private long getPlaybackStateActions (int state) {
+                if (state == PlaybackStateCompat.STATE_ERROR || state == PlaybackStateCompat.STATE_NONE) {
+                    return 0;
+                }
+
                 long actions = PlaybackStateCompat.ACTION_PLAY_PAUSE;
 
                 if (state == PlaybackStateCompat.STATE_PLAYING) {
