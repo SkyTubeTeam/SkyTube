@@ -1,6 +1,7 @@
 package free.rm.skytube.gui.businessobjects;
 
 import android.content.Context;
+
 import android.support.v4.media.session.MediaSessionCompat;
 import android.support.v4.media.session.PlaybackStateCompat;
 
@@ -9,51 +10,57 @@ import free.rm.skytube.businessobjects.interfaces.PlaybackStateListener;
 import free.rm.skytube.businessobjects.interfaces.YouTubePlayerFragmentInterface;
 
 
-public final class MediaSessionHandler {
-    private YouTubePlayerFragmentInterface playerFragment;
+public final class YoutubePlayerMediaSession {
     private final MediaSessionCompat mediaSession;
 
-    public MediaSessionHandler(Context context) {
+    public YoutubePlayerMediaSession(Context context) {
         mediaSession = new MediaSessionCompat(context, context.getString(R.string.app_name));
-        setupMediaSession();
-    }
-
-    public void attachToPlayer(YouTubePlayerFragmentInterface playerFragment) {
-        this.playerFragment = playerFragment;
-        PlaybackStateListener playbackStateListener = createPlaybackStateListener();
-        playerFragment.setPlaybackStateListener(playbackStateListener);
     }
 
     public void setActive(boolean active) {
         mediaSession.setActive(active);
     }
 
-    private void setupMediaSession() {
-        MediaSessionCompat.Callback callback = createMediaSessionCallback();
-        mediaSession.setCallback(callback);
+    public void release() {
+        mediaSession.release();
+    }
+
+    public void bindToPlayer(YouTubePlayerFragmentInterface player) {
+        bindPlayerControlCallbacks(player);
+        bindPlayerStateListener(player);
         setActive(true);
     }
 
-    private MediaSessionCompat.Callback createMediaSessionCallback() {
+    private void bindPlayerControlCallbacks(YouTubePlayerFragmentInterface player) {
+        MediaSessionCompat.Callback callback = createMediaSessionCallback(player);
+        mediaSession.setCallback(callback);
+    }
+
+    private void bindPlayerStateListener(YouTubePlayerFragmentInterface player) {
+        PlaybackStateListener playbackStateListener = createPlaybackStateListener(mediaSession);
+        player.setPlaybackStateListener(playbackStateListener);
+    }
+
+    private MediaSessionCompat.Callback createMediaSessionCallback(YouTubePlayerFragmentInterface player) {
         return new MediaSessionCompat.Callback() {
+            private final YouTubePlayerFragmentInterface playerFragment = player;
+
             @Override
             public void onPlay() {
-                if (playerFragment != null) {
-                    playerFragment.play();
-                }
+                playerFragment.play();
             }
 
             @Override
             public void onPause() {
-                if (playerFragment != null) {
-                    playerFragment.pause();
-                }
+                playerFragment.pause();
             }
         };
     }
 
-    private PlaybackStateListener createPlaybackStateListener() {
+    private PlaybackStateListener createPlaybackStateListener(MediaSessionCompat session) {
         return new PlaybackStateListener() {
+            private final MediaSessionCompat mediaSession = session;
+
             @Override
             public void started() {
                 setMediaPlaybackState(PlaybackStateCompat.STATE_PLAYING);
@@ -77,16 +84,20 @@ public final class MediaSessionHandler {
             private PlaybackStateCompat buildPlaybackState(int state) {
                 PlaybackStateCompat.Builder stateBuilder = new PlaybackStateCompat.Builder();
                 stateBuilder.setState(state, PlaybackStateCompat.PLAYBACK_POSITION_UNKNOWN, 0);
-                setPlaybackStateActions(stateBuilder, state);
+                stateBuilder.setActions(getPlaybackStateActions(state));
                 return stateBuilder.build();
             }
 
-            private void setPlaybackStateActions(PlaybackStateCompat.Builder builder, int state) {
+            private long getPlaybackStateActions (int state) {
+                long actions = PlaybackStateCompat.ACTION_PLAY_PAUSE;
+
                 if (state == PlaybackStateCompat.STATE_PLAYING) {
-                    builder.setActions(PlaybackStateCompat.ACTION_PLAY_PAUSE | PlaybackStateCompat.ACTION_PAUSE);
+                    actions |= PlaybackStateCompat.ACTION_PAUSE;
                 } else {
-                    builder.setActions(PlaybackStateCompat.ACTION_PLAY_PAUSE | PlaybackStateCompat.ACTION_PLAY);
+                    actions |= PlaybackStateCompat.ACTION_PLAY;
                 }
+
+                return actions;
             }
         };
     }

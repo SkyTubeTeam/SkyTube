@@ -33,7 +33,7 @@ import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubePlaylist;
 import free.rm.skytube.businessobjects.interfaces.YouTubePlayerActivityListener;
 import free.rm.skytube.businessobjects.interfaces.YouTubePlayerFragmentInterface;
-import free.rm.skytube.gui.businessobjects.MediaSessionHandler;
+import free.rm.skytube.gui.businessobjects.YoutubePlayerMediaSession;
 import free.rm.skytube.gui.businessobjects.fragments.FragmentEx;
 import free.rm.skytube.gui.fragments.YouTubePlayerTutorialFragment;
 import free.rm.skytube.gui.fragments.YouTubePlayerV1Fragment;
@@ -50,14 +50,14 @@ public class YouTubePlayerActivity extends BaseActivity implements YouTubePlayer
 
 	private FragmentEx videoPlayerFragment;
 	private YouTubePlayerFragmentInterface fragmentListener;
-	private MediaSessionHandler mediaSessionHandler;
+	private YoutubePlayerMediaSession mediaSession;
 
 	public static final String YOUTUBE_VIDEO_OBJ  = "YouTubePlayerActivity.video_object";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		final boolean useDefaultPlayer = useDefaultPlayer();
-		mediaSessionHandler = new MediaSessionHandler(this);
+		mediaSession = new YoutubePlayerMediaSession(this);
 
 		// if the user wants to use the default player, then ensure that the activity does not
 		// have a toolbar (actionbar) -- this is as the fragment is taking care of the toolbar
@@ -160,7 +160,7 @@ public class YouTubePlayerActivity extends BaseActivity implements YouTubePlayer
 					+ " must implement YouTubePlayerFragmentInterface");
 		}
 
-		mediaSessionHandler.attachToPlayer(fragmentListener);
+		mediaSession.bindToPlayer(fragmentListener);
 		installFragment(videoPlayerFragment);
 	}
 
@@ -182,8 +182,8 @@ public class YouTubePlayerActivity extends BaseActivity implements YouTubePlayer
 
 	@Override
 	protected void onStart() {
+		mediaSession.setActive(true);
 		super.onStart();
-		mediaSessionHandler.setActive(true);
 
 		// set the video player's orientation as what the user wants
 		String  str = SkyTubeApp.getPreferenceManager().getString(getString(R.string.pref_key_screen_orientation), getString(R.string.pref_screen_auto_value));
@@ -202,7 +202,7 @@ public class YouTubePlayerActivity extends BaseActivity implements YouTubePlayer
 
 	@Override
 	protected void onStop() {
-		mediaSessionHandler.setActive(false);
+		mediaSession.setActive(false);
 		super.onStop();
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
 	}
@@ -227,6 +227,7 @@ public class YouTubePlayerActivity extends BaseActivity implements YouTubePlayer
 		super.onBackPressed();
 	}
 
+	@Override
 	public void onSessionStarting() {
 		fragmentListener.pause();
 	}
@@ -253,6 +254,12 @@ public class YouTubePlayerActivity extends BaseActivity implements YouTubePlayer
 			setResult(RESULT_OK, intent);
 			finish();
 		}
+	}
+
+	@Override
+	public void finish() {
+		mediaSession.release();
+		super.finish();
 	}
 
 	@Override
