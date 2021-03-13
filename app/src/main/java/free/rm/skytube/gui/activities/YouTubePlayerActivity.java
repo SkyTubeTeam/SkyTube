@@ -115,6 +115,7 @@ public class YouTubePlayerActivity extends BaseActivity implements YouTubePlayer
 		return true;
 	}
 
+
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		// media events are handled by MediaSession instead of being passed as keyDown events starting from SDK v21
@@ -125,6 +126,11 @@ public class YouTubePlayerActivity extends BaseActivity implements YouTubePlayer
 		return super.onKeyDown(keyCode, event);
 	}
 
+
+	/**
+	 * Executes appropriate media action for media button key codes.
+	 * @return boolean - whether media action was executed
+	 */
 	public boolean handleMediaKeyDown(int keyCode) {
 		switch (keyCode) {
 			case KeyEvent.KEYCODE_MEDIA_PLAY:
@@ -144,6 +150,7 @@ public class YouTubePlayerActivity extends BaseActivity implements YouTubePlayer
 				return false;
 		}
 	}
+
 
 	/**
 	 * "Installs" the video player fragment.
@@ -256,11 +263,13 @@ public class YouTubePlayerActivity extends BaseActivity implements YouTubePlayer
 		}
 	}
 
+
 	@Override
 	public void finish() {
 		mediaSession.release();
 		super.finish();
 	}
+
 
 	@Override
 	public void onPlaylistClick(YouTubePlaylist playlist) {}

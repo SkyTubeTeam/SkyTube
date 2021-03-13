@@ -1002,10 +1002,12 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 		return videoView.getCurrentPosition();
 	}
 
+
 	@Override
 	public boolean isPlaying() {
 		return videoView.isPlaying();
 	}
+
 
 	private void stopPlayback() {
 		videoView.pause();
@@ -1016,6 +1018,7 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 		}
 	}
 
+
 	@Override
 	public void pause() {
 		videoView.pause();
@@ -1024,6 +1027,7 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 			playbackStateListener.paused();
 		}
 	}
+
 
 	@Override
 	public void play() {
@@ -1034,9 +1038,7 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 		}
 	}
 
-	/**
-	 * no-op, not implemented
-	 */
+
 	@Override
 	public void setPlaybackStateListener(PlaybackStateListener listener) {
 		playbackStateListener = listener;
