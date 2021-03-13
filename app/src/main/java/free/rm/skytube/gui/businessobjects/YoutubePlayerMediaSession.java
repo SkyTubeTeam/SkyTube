@@ -11,7 +11,8 @@ import free.rm.skytube.businessobjects.interfaces.YouTubePlayerFragmentInterface
 
 /**
  * MediaSessionCompat wrapper.
- * manages the mediaSession and controls YoutubePlayerFragmentInterface upon media session events.
+ * manages the mediaSession and controls YoutubePlayerFragmentInterface
+ * upon media session events.
  */
 public final class YoutubePlayerMediaSession {
     private final MediaSessionCompat mediaSession;

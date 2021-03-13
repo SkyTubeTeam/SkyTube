@@ -118,7 +118,8 @@ public class YouTubePlayerActivity extends BaseActivity implements YouTubePlayer
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		// media events are handled by MediaSession instead of being passed as keyDown events starting from SDK v21
+		// media events are handled by MediaSession instead of being passed
+		// as keyDown events starting from SDK v21
 		if (Build.VERSION.SDK_INT < 21 && handleMediaKeyDown(keyCode)) {
 			return true;
 		}
