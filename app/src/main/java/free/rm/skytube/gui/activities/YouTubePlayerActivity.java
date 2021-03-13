@@ -52,14 +52,17 @@ public class YouTubePlayerActivity extends BaseActivity implements YouTubePlayer
 
 	private FragmentEx videoPlayerFragment;
 	private YouTubePlayerFragmentInterface fragmentListener;
-	private YoutubePlayerMediaSession mediaSession;
+	private YoutubePlayerMediaSession mediaSession = null;
 
 	public static final String YOUTUBE_VIDEO_OBJ  = "YouTubePlayerActivity.video_object";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		final boolean useDefaultPlayer = useDefaultPlayer();
-		mediaSession = new YoutubePlayerMediaSession(this);
+		// MediaSession isn't available on SDKs before 21
+		if (Build.VERSION.SDK_INT >= 21) {
+			mediaSession = new YoutubePlayerMediaSession(this);
+		}
 
 		// if the user wants to use the default player, then ensure that the activity does not
 		// have a toolbar (actionbar) -- this is as the fragment is taking care of the toolbar
@@ -170,7 +173,9 @@ public class YouTubePlayerActivity extends BaseActivity implements YouTubePlayer
 					+ " must implement YouTubePlayerFragmentInterface");
 		}
 
-		mediaSession.bindToPlayer(fragmentListener);
+		if (mediaSession != null) {
+			mediaSession.bindToPlayer(fragmentListener);
+		}
 		installFragment(videoPlayerFragment);
 	}
 
@@ -192,7 +197,9 @@ public class YouTubePlayerActivity extends BaseActivity implements YouTubePlayer
 
 	@Override
 	protected void onStart() {
-		mediaSession.setActive(true);
+		if (mediaSession != null) {
+			mediaSession.setActive(true);
+		}
 		super.onStart();
 
 		// set the video player's orientation as what the user wants
@@ -212,7 +219,10 @@ public class YouTubePlayerActivity extends BaseActivity implements YouTubePlayer
 
 	@Override
 	protected void onStop() {
-		mediaSession.setActive(false);
+		if (mediaSession != null) {
+			mediaSession.setActive(false);
+		}
+
 		super.onStop();
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
 	}
@@ -269,7 +279,9 @@ public class YouTubePlayerActivity extends BaseActivity implements YouTubePlayer
 
 	@Override
 	public void finish() {
-		mediaSession.release();
+		if (mediaSession != null) {
+			mediaSession.release();
+		}
 		super.finish();
 	}
 
