@@ -39,6 +39,7 @@ import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.SearchView;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
+import androidx.cursoradapter.widget.CursorAdapter;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -275,47 +276,16 @@ public class MainActivity extends BaseActivity {
 		AutoCompleteTextView autoCompleteTextView = searchView.findViewById(androidx.appcompat.R.id.search_src_text);
 		autoCompleteTextView.setThreshold(0);
 
-		SearchHistoryCursorAdapter searchHistoryCursorAdapter = (SearchHistoryCursorAdapter) searchView.getSuggestionsAdapter();
-		Cursor cursor = SearchHistoryDb.getSearchHistoryDb().getSearchCursor("");
-		if (searchHistoryCursorAdapter == null) {
-			searchHistoryCursorAdapter = new SearchHistoryCursorAdapter(getBaseContext(),
-					R.layout.search_hint,
-					cursor,
-					new String[]{SearchHistoryTable.COL_SEARCH_TEXT},
-					new int[]{android.R.id.text1},
-					0);
-			searchHistoryCursorAdapter.setSearchHistoryClickListener(query -> displaySearchResults(query, searchView));
-		} else {
-			// else just change the cursor...
-			searchHistoryCursorAdapter.changeCursor(cursor);
-		}
-		searchView.setSuggestionsAdapter(searchHistoryCursorAdapter);
+		// ... and change/init the cursor...
+		getSearchHistoryAdapter(searchView).setSearchBarString("");
 
 		// set the query hints to be equal to the previously searched text
 		searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 			@Override
 			public boolean onQueryTextChange(final String newText) {
-				Logger.d(MainActivity.this, "on query text change: %s", newText);
-				// if the user does not want to have the search string saved, then skip the below...
-				if (newText == null || SkyTubeApp.getSettings().isDisableSearchHistory()) {
+				if (newText == null) {
 					return false;
 				}
-
-				Cursor cursor = SearchHistoryDb.getSearchHistoryDb().getSearchCursor(newText);
-
-				// if the adapter has not been created, then create it
-				SearchHistoryCursorAdapter searchHistoryCursorAdapter = new SearchHistoryCursorAdapter(getBaseContext(),
-						R.layout.search_hint,
-						cursor,
-						new String[]{SearchHistoryTable.COL_SEARCH_TEXT},
-						new int[]{android.R.id.text1},
-						0);
-				searchHistoryCursorAdapter.setSearchHistoryClickListener(query -> displaySearchResults(query, searchView));
-				searchView.setSuggestionsAdapter(searchHistoryCursorAdapter);
-
-				// update the current search string
-				searchHistoryCursorAdapter.setSearchBarString(newText);
-
 				return true;
 			}
 
@@ -323,7 +293,7 @@ public class MainActivity extends BaseActivity {
 			public boolean onQueryTextSubmit(String query) {
 				if(!SkyTubeApp.getSettings().isDisableSearchHistory()) {
 					// Save this search string into the Search History Database (for Suggestions)
-					SearchHistoryDb.getSearchHistoryDb().insertSearchText(query);
+					SearchHistoryDb.getSearchHistoryDb().insertSearchText(query).subscribe();
 				}
 
 				displaySearchResults(query, searchView);
@@ -335,6 +305,19 @@ public class MainActivity extends BaseActivity {
 		return true;
 	}
 
+    private synchronized SearchHistoryCursorAdapter getSearchHistoryAdapter(final SearchView searchView) {
+        SearchHistoryCursorAdapter searchHistoryCursorAdapter = (SearchHistoryCursorAdapter) searchView.getSuggestionsAdapter();
+        if (searchHistoryCursorAdapter == null) {
+            searchHistoryCursorAdapter = new SearchHistoryCursorAdapter(getBaseContext(),
+                    R.layout.search_hint,
+                    new String[]{SearchHistoryTable.COL_SEARCH_TEXT},
+                    new int[]{android.R.id.text1},
+                    0);
+            searchHistoryCursorAdapter.setSearchHistoryClickListener(query -> displaySearchResults(query, searchView));
+            searchView.setSuggestionsAdapter(searchHistoryCursorAdapter);
+        }
+        return searchHistoryCursorAdapter;
+    }
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
