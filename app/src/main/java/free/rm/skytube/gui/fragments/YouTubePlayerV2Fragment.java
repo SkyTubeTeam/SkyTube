@@ -318,17 +318,14 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 
 					if (playbackStateListener != null) {
 						boolean videoIsPaused = playbackState == Player.STATE_READY && !playWhenReady;
-						sendPlaybackState(videoIsPlaying, videoIsPaused);
-					}
-				}
 
-				private void sendPlaybackState(boolean isPlaying, boolean isPaused) {
-					if(isPlaying) {
-						playbackStateListener.started();
-					} else if (isPaused) {
-						playbackStateListener.paused();
-					} else {
-						playbackStateListener.ended();
+						if(videoIsPlaying) {
+							playbackStateListener.started();
+						} else if (videoIsPaused) {
+							playbackStateListener.paused();
+						} else {
+							playbackStateListener.ended();
+						}
 					}
 				}
 

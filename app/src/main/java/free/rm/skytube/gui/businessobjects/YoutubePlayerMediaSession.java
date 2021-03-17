@@ -65,6 +65,11 @@ public final class YoutubePlayerMediaSession {
             public void onPause() {
                 playerFragment.pause();
             }
+
+            @Override
+            public void onStop() {
+                playerFragment.pause();
+            }
         };
     }
 
