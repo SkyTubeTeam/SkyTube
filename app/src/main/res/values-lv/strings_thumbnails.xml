@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="thumbnail_download_error">Neizdevās lejupielādēt sīktēlu.</string>
+    <string name="thumbnail_downloaded">Sīktēls lejupielādēts.</string>
+    <string name="view_thumbnail">Skatīt sīktēlu</string>
+    <string name="thumbnail">Sīktēls</string>
+</resources>

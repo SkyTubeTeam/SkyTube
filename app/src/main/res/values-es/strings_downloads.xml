@@ -15,4 +15,5 @@
     <string name="video_stream_not_found_with_request_resolution">No se ha encontrado video para la resolución solicitada, entre %s - %s</string>
     <string name="warning_metered_network_download">Tu dispositivo esta conectado a una red con límite de datos. Para evitar cargos por uso extra de datos, se recomienda conectar a una red sin límite de datos. Descargar el video de todos modos\?</string>
     <string name="unable_to_delete_file">No se puede borrar el archivo descargado: \'%s\'</string>
+    <string name="download_failed_because">No se ha podido descargar %1$s por: %2$s</string>
 </resources>

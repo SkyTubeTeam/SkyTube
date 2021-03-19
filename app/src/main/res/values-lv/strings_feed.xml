@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="notification_channel_feed_title">Jaunumu paziņojumi</string>
+    <string name="feed">Jaunumi</string>
+    <string name="notification_new_videos_found">%d jauni video no abonētajiem kanāliem</string>
+    <string name="import_subscriptions_from_youtube">Ielādēt abonomentus no YouTube</string>
+    <string name="no_subscriptions_text">Jūs neesat abonējuši nevienu kanālu.
+\n
+\nKolīdz būsiet, šeit parādīsies visas abonēto kanālu augšupielādēs, kas veiktas pēdējā mēneša laikā.</string>
+    <string name="no_new_videos_found">Netika atrasti jauni video.</string>
+    <string name="fetched_videos_from_channels">Ielādēti %1$d video no %2$d/%3$d kanāliem.</string>
+    <string name="fetching_subscription_videos">Ielādē video no abonētajiem kanāliem</string>
+    <string name="fetching_subbed_channels_info_error">Notikusi kļūda, lādējot kanāla informāciju.</string>
+    <string name="fetching_subbed_channels_info">Lādē kanāla informāciju…</string>
+    <string name="open_channel">Atvērt kanālu</string>
+    <string name="subscribing_to_channels">Abonē kanālus…</string>
+</resources>

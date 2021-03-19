@@ -15,4 +15,5 @@
     <string name="video_stream_not_found_with_request_resolution">Nema podataka za prijenos videozapisa za traženu razlučivost od %s do %s</string>
     <string name="warning_metered_network_download">Tvoj je uređaj povezan na mrežnu vezu s ograničenjem prometa. Za izbjegavanje dodatne potrošnje prometa, preporučujemo da se povežeš na mrežnu vezu bez ograničenja prometa. Svejedno preuzeti videozapis\?</string>
     <string name="unable_to_delete_file">Nije moguće izbrisati preuzetu datoteku: „%s”</string>
+    <string name="download_failed_because">Neuspjelo preuzimanje od %1$s zbog: %2$s</string>
 </resources>

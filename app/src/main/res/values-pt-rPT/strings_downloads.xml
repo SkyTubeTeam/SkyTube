@@ -15,4 +15,5 @@
     <string name="video_stream_not_found_with_request_resolution">Não foi encontrado um vídeo para a resolução solicitada, entre %s - %s</string>
     <string name="warning_metered_network_download">O seu dispositivo está conectado a uma rede de dados móveis. Para evitar que exceda o seu plano de dados, recomendamos que se conecte a uma rede Wi-fi. Descarregar na mesma\?</string>
     <string name="unable_to_delete_file">Não foi possível remover o ficheiro: \'%s\'</string>
+    <string name="download_failed_because">Não foi possível descarregar %1$s. Motivo: %2$s</string>
 </resources>

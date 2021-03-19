@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="search_channel">Meklēt kanālu</string>
+    <string name="no">Nē</string>
+    <string name="yes">Jā</string>
+    <string name="loading">Ielādē …</string>
+    <string name="trending_in">Tendences (%s)</string>
+    <string name="close">Aizvērt</string>
+    <string name="could_not_get_playlists">Neizdevās ielādēt %s atskaņošanas sarakstus.</string>
+    <string name="playlists">Atskaņošanas saraksti</string>
+    <string name="num_videos">%d video</string>
+    <string name="videos">Video</string>
+    <string name="video">Video</string>
+    <string name="most_popular">Populārākie</string>
+    <string name="LIVE">Gaisā</string>
+    <string name="launch_offical_player_error">Notika kļūda mēģinot palaist oficiālo Google YouTube atskaņotāju. Lūdzu pārliecinieties, ka tas ir uzstādīts jūsu ierīcē!</string>
+    <string name="search_videos">Meklēt Video</string>
+    <string name="ok">OK</string>
+    <string name="error">Kļūda</string>
+    <string name="views">%,d skatījumi</string>
+    <string name="could_not_get_channel_detailed">Neizdevās ielādēt kanāla %s informāciju.</string>
+    <string name="could_not_get_channel">Neizdevās ielādēt kanāla informāciju!</string>
+    <string name="could_not_get_videos">Neizdevās ielādēt %s video.</string>
+</resources>
