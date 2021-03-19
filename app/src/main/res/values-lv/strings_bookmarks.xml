@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="video_bookmarked">Video saglabāts bibliotēkā</string>
+    <string name="video_already_bookmarked">Video jau pastāv bibliotēkā</string>
+    <string name="video_bookmarked_error">Neizdevās saglabāt video bibliotēkā.</string>
+    <string name="unbookmark">Noņemt no bibliotēkas</string>
+    <string name="bookmark_share_invalid_url">Tikai derīgas YouTube saites var tikt pievienotas bibliotēkai.</string>
+    <string name="no_bookmarked_videos_text">Jūs vēl neesat saglabājuši video bibliotēkā.
+\n
+\nKolīdz to izdarīsiet, tie parādīsies šeit.</string>
+    <string name="video_unbookmarked_error">Neizdevās noņemt video no bibliotēkas.</string>
+    <string name="video_was_not_bookmarked">Video netika pievienots bibliotēkai</string>
+    <string name="video_unbookmarked">Video noņemts no bibliotēkas</string>
+    <string name="bookmarks">Bibliotēka</string>
+    <string name="bookmark_share_label">SkyTube Grāmatzīme</string>
+    <string name="bookmark">Grāmatzīme</string>
+</resources>

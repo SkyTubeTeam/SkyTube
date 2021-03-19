@@ -152,4 +152,7 @@
     <string name="pref_youtube_api_key_error">Сталася помилка під час перевірки введеного вами API ключа.</string>
     <string name="pref_summary_youtube_api_key">Введіть власний YouTube Data API ключ. Лишіть поле порожнім, аби використовувати стандартний.</string>
     <string name="pref_summary_switch_volume_and_brightness">Розміщує регулятор звуку вправо, а регулятор яскравості вліво.</string>
+    <string name="pref_summary_default_content_country">Показати вміст, призначений для цієї країни: %s</string>
+    <string name="pref_title_default_content_country">Усталена країна вмісту</string>
+    <string name="system_default_country">Усталена країна системи</string>
 </resources>

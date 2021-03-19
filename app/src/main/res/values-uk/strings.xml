@@ -21,4 +21,5 @@
     <string name="could_not_get_channel_detailed">Не вдалося завантажити інформацію по каналу: %s.</string>
     <string name="could_not_get_channel">Не вдалося завантажити інформацію по каналу!</string>
     <string name="could_not_get_videos">Не вдалося заватнажити %s відео.</string>
+    <string name="trending_in">У тренді (%s)</string>
 </resources>

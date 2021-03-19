@@ -15,4 +15,5 @@
     <string name="playing_video_file_missing">Завантаження для відео не знайдено. Відтворюється віддалено.</string>
     <string name="warning_metered_network_download">Ви споживаєте мобільний трафік. Аби уникнути додаткових витрат, рекомендуємо під\'єднатися до wi-fi. Чи продовжити завантаження відео\?</string>
     <string name="unable_to_delete_file">Не вдалося видалити файл: \'%s\'</string>
+    <string name="download_failed_because">Не вдалося завантажити %1$s, оскільки: %2$s</string>
 </resources>

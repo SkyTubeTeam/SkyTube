@@ -154,4 +154,5 @@
     <string name="pref_video_player_category">视频播放器</string>
     <string name="key_preferences">首选项</string>
     <string name="preferences">首选项</string>
+    <string name="system_default_country">系统默认国家</string>
 </resources>

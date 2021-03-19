@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="no_resolution_specified">Nav</string>
+    <string name="pref_summary_choose_player">Lietojamais video atskaņotājs: %s</string>
+    <string name="pref_title_choose_player">Video atskaņotājs</string>
+    <string name="pref_summary_minimum_res">Izvēlaties minimālo izšķirtspēju: %s</string>
+    <string name="pref_title_minimum_res">Minimālā izšķirtspēja</string>
+    <string name="pref_summary_maximum_res">Izvēlaties maksimālo izšķirtspēju: %s</string>
+    <string name="pref_title_maximum_res">Maksimālā izšķirtspēja</string>
+    <string name="pref_video_player_category">Video atskaņotājs</string>
+    <string name="key_preferences">iestatījumi</string>
+    <string name="preferences">Iestatījumi</string>
+</resources>
