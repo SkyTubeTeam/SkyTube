@@ -104,7 +104,8 @@ dependencies {
         exclude group: 'com.google.http-client', module:'google-http-client-jackson2'
     }
 
-    implementation 'com.github.SkyTubeTeam.NewPipeExtractor:extractor:3d78ff6091e7de984a'
+    implementation 'com.github.SkyTubeTeam.NewPipeExtractor:extractor:a56daee6b991a63332'
+
 
     // other modules
     implementation 'org.ocpsoft.prettytime:prettytime:5.0.0.Final'
