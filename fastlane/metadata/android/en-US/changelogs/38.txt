@@ -1,0 +1,29 @@
+* Rewrite the YouTube AsyncTask implementations as methods that use RxJava - by Isira Seneviratne
+* implementation of play/pause external media controls - by ilmars
+* Fix freezes/slow UI updates with accessing the database in the background - by Zsombor
+* Improve subscription listing with database index - by Zsombor
+* Subscription refresh is not tied to opening up the subscription tab - by Zsombor
+* Implement 'Trending in XYZ' tab, with country selector - by Zsombor
+* Fix errors in downloaded file deletion - by Zsombor
+* Fix layout issues when big fonts are used - by Zsombor
+* Implement tab hiding/showing without app restart - by Zsombor
+* Fix a crash on Android 4.0 - by Zsombor
+* Updated translations for:
+    * Basque and Spanish - by Julio Montero
+    * Catalan - by Alfonso Montero López
+    * Croatian - by Milo Ivir
+    * Dutch - by Heimen Stoffels
+    * Esperanto - by Jakub Fabijan
+    * French - by Thomas Foucher
+    * Japanese - by Takaki Iekura
+    * Indonesian - by Reza Almanda and zmni
+    * Italian - by Silvio Pastore
+    * Latvian - by Darksworm
+    * Hungarian - by Zsombor
+    * Norwegian Bokmål - by Allan Nordhøy
+    * Polish - by Michal L
+    * Portuguese - by Sérgio Marques
+    * Simplified Chinese
+    * Traditional Chinese - by Jeff Huang
+    * Turkish - by Oğuz Ersen
+    * Ukrainian - by Tymofij Lytvynenko
