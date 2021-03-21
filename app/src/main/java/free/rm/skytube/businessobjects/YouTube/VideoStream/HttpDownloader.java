@@ -46,85 +46,90 @@ import javax.net.ssl.HttpsURLConnection;
  */
 public class HttpDownloader extends Downloader {
 
-	/** Mimic the Mozilla user agent */
-	private static final String USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101 Firefox/68.0";
+    /** Mimic the Mozilla user agent */
+    private static final String USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101 Firefox/68.0";
 
-	@Override
-	public Response execute(Request request) throws IOException, ReCaptchaException {
-		final String httpMethod = request.httpMethod();
-		final String url = request.url();
-		final Map<String, List<String>> headers = request.headers();
-		final Localization localization = request.localization();
+    @Override
+    public Response execute(Request request) throws IOException, ReCaptchaException {
+        final String httpMethod = request.httpMethod();
+        final String url = request.url();
+        final Map<String, List<String>> headers = request.headers();
 
-		final HttpsURLConnection connection = (HttpsURLConnection) new URL(url).openConnection();
+        final HttpsURLConnection connection = (HttpsURLConnection) new URL(url).openConnection();
 
-		connection.setConnectTimeout(30 * 1000); // 30s
-		connection.setReadTimeout(30 * 1000); // 30s
-		connection.setRequestMethod(httpMethod);
+        try {
+            connection.setConnectTimeout(30 * 1000); // 30s
+            connection.setReadTimeout(30 * 1000); // 30s
+            connection.setRequestMethod(httpMethod);
 
-		connection.setRequestProperty("User-Agent", USER_AGENT);
-		connection.setRequestProperty("Accept-Language", "en");
+            connection.setRequestProperty("User-Agent", USER_AGENT);
+            connection.setRequestProperty("Accept-Language", "en");
 
-		for (Map.Entry<String, List<String>> pair : headers.entrySet()) {
-			final String headerName = pair.getKey();
-			final List<String> headerValueList = pair.getValue();
+            for (Map.Entry<String, List<String>> pair : headers.entrySet()) {
+                final String headerName = pair.getKey();
+                final List<String> headerValueList = pair.getValue();
 
-			if (headerValueList.size() > 1) {
-				connection.setRequestProperty(headerName, null);
-				for (String headerValue : headerValueList) {
-					connection.addRequestProperty(headerName, headerValue);
-				}
-			} else if (headerValueList.size() == 1) {
-				connection.setRequestProperty(headerName, headerValueList.get(0));
-			}
-		}
+                if (headerValueList.size() > 1) {
+                    connection.setRequestProperty(headerName, null);
+                    for (String headerValue : headerValueList) {
+                        connection.addRequestProperty(headerName, headerValue);
+                    }
+                } else if (headerValueList.size() == 1) {
+                    connection.setRequestProperty(headerName, headerValueList.get(0));
+                }
+            }
 
-		try(OutputStream outputStream = sendOutput(request, connection)) {
+            try (OutputStream outputStream = sendOutput(request, connection)) {
 
-			final String response = readResponse(connection);
+                final String response = readResponse(connection);
 
-			final int responseCode = connection.getResponseCode();
-			final String responseMessage = connection.getResponseMessage();
-			final Map<String, List<String>> responseHeaders = connection.getHeaderFields();
-			final URL latestUrl = connection.getURL();
-			return new Response(responseCode, responseMessage, responseHeaders, response, latestUrl.toString());
-		} catch (Exception e) {
-			/*
-			 * HTTP 429 == Too Many Request
-			 * Receive from Youtube.com = ReCaptcha challenge request
-			 * See : https://github.com/rg3/youtube-dl/issues/5138
-			 */
-			if (connection.getResponseCode() == 429) {
-				throw new ReCaptchaException("reCaptcha Challenge requested", url);
-			}
+                final int responseCode = connection.getResponseCode();
+                final String responseMessage = connection.getResponseMessage();
+                final Map<String, List<String>> responseHeaders = connection.getHeaderFields();
+                final URL latestUrl = connection.getURL();
+                return new Response(responseCode, responseMessage, responseHeaders, response, latestUrl.toString());
+            } catch (Exception e) {
+                /*
+                 * HTTP 429 == Too Many Request
+                 * Receive from Youtube.com = ReCaptcha challenge request
+                 * See : https://github.com/rg3/youtube-dl/issues/5138
+                 */
+                if (connection.getResponseCode() == 429) {
+                    throw new ReCaptchaException("reCaptcha Challenge requested", url);
+                }
 
-			throw new IOException(connection.getResponseCode() + " " + connection.getResponseMessage(), e);
-		}
-	}
+                throw new IOException(connection.getResponseCode() + " " + connection.getResponseMessage(), e);
+            }
+        } finally {
+            if (connection != null) {
+                connection.disconnect();
+            }
+        }
+    }
 
-	private OutputStream sendOutput(Request request, HttpsURLConnection connection) throws IOException {
-		final byte[] dataToSend = request.dataToSend();
-		if (dataToSend != null && dataToSend.length > 0) {
-			connection.setDoOutput(true);
-			connection.setRequestProperty("Content-Length", String.valueOf(dataToSend.length));
-			OutputStream outputStream = connection.getOutputStream();
-			outputStream.write(dataToSend);
-			return outputStream;
-		}
-		return null;
-	}
+    private OutputStream sendOutput(Request request, HttpsURLConnection connection) throws IOException {
+        final byte[] dataToSend = request.dataToSend();
+        if (dataToSend != null && dataToSend.length > 0) {
+            connection.setDoOutput(true);
+            connection.setRequestProperty("Content-Length", String.valueOf(dataToSend.length));
+            OutputStream outputStream = connection.getOutputStream();
+            outputStream.write(dataToSend);
+            return outputStream;
+        }
+        return null;
+    }
 
-	private String readResponse(HttpsURLConnection connection) throws IOException {
-		try (InputStreamReader input = new InputStreamReader(connection.getInputStream())) {
-			final StringBuilder response = new StringBuilder();
+    private String readResponse(HttpsURLConnection connection) throws IOException {
+        try (InputStreamReader input = new InputStreamReader(connection.getInputStream())) {
+            final StringBuilder response = new StringBuilder();
 
-			int readCount;
-			char[] buffer = new char[32 * 1024];
-			while ((readCount = input.read(buffer)) != -1) {
-				response.append(buffer, 0, readCount);
-			}
-			return response.toString();
-		}
-	}
+            int readCount;
+            char[] buffer = new char[32 * 1024];
+            while ((readCount = input.read(buffer)) != -1) {
+                response.append(buffer, 0, readCount);
+            }
+            return response.toString();
+        }
+    }
 
 }
