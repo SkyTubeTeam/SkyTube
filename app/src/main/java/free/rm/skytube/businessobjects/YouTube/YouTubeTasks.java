@@ -140,7 +140,8 @@ public class YouTubeTasks {
                                         details.setChannel(dbChannel);
                                         detailedList.add(details);
                                     } catch (ExtractionException | IOException e) {
-                                        Log.e(TAG, "Error during parsing video page for " + vid.getId() + ",msg:" + e.getMessage(), e);
+                                        String errorMsg = String.format("Error during parsing video page for id=%s, channel: %s - name: '%s' msg:%s", vid.getId(), vid.getSafeChannelId(), vid.getSafeChannelName(), e.getMessage());
+                                        Log.e(TAG, errorMsg, e);
                                     }
                                 }
                                 changed.compareAndSet(false, true);

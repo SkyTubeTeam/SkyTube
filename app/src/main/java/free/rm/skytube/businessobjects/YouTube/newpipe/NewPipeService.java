@@ -67,7 +67,7 @@ public class NewPipeService {
     private static NewPipeService instance;
 
     private final StreamingService streamingService;
-    private final static boolean DEBUG_LOG = false;
+    final static boolean DEBUG_LOG = false;
 
     public NewPipeService(StreamingService streamingService) {
         this.streamingService = streamingService;

@@ -269,6 +269,14 @@ public class YouTubeVideo extends CardData implements Serializable {
 		this.channel = channel;
 	}
 
+    public String getSafeChannelId() {
+        return channel != null ? channel.getId() : null;
+    }
+
+    public String getSafeChannelName() {
+        return channel != null ? channel.getTitle() : null;
+    }
+
 	public String getChannelId() {
 		return channel.getId();
 	}

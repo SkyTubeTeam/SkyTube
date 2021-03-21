@@ -46,7 +46,9 @@ public class VideoPager extends Pager<InfoItem, CardData> {
     @Override
     protected List<CardData> extract(ListExtractor.InfoItemsPage<InfoItem> page) throws NewPipeException {
         List<CardData> result = new ArrayList<>(page.getItems().size());
-        Logger.i(this, "extract from %s, items: %s", page, page.getItems().size());
+        if (NewPipeService.DEBUG_LOG) {
+            Logger.d(this, "extract from %s, items: %s", page, page.getItems().size());
+        }
         int repeatCounter = 0;
         int unexpected = 0;
 
@@ -71,7 +73,9 @@ public class VideoPager extends Pager<InfoItem, CardData> {
                 unexpected ++;
             }
         }
-        Logger.i(this, "From the requested %s, number of duplicates: %s, wrong types: %s", page.getItems().size(), repeatCounter, unexpected);
+        if (NewPipeService.DEBUG_LOG) {
+            Logger.d(this, "From the requested %s, number of duplicates: %s, wrong types: %s", page.getItems().size(), repeatCounter, unexpected);
+        }
         return result;
     }
 
@@ -96,7 +100,9 @@ public class VideoPager extends Pager<InfoItem, CardData> {
 
     protected YouTubeVideo convert(StreamInfoItem item, String id) {
         NewPipeService.DateInfo date = new NewPipeService.DateInfo(item.getUploadDate());
-        Logger.i(this, "item %s, title=%s at %s", id, item.getName(), date);
+        if (NewPipeService.DEBUG_LOG) {
+            Logger.i(this, "item %s, title=%s at %s", id, item.getName(), date);
+        }
         YouTubeChannel ch = new YouTubeChannel(item.getUploaderUrl(), item.getUploaderName());
         return new YouTubeVideo(id, item.getName(), null, item.getDuration(), ch,
                 item.getViewCount(), date.zonedDateTime, date.exact, NewPipeService.getThumbnailUrl(id));
