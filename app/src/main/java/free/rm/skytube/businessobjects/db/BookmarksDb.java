@@ -119,7 +119,6 @@ public class BookmarksDb extends CardEventEmitterDatabase implements OrderableDa
 			long result = getWritableDatabase().insertWithOnConflict(BookmarksTable.TABLE_NAME, null, values, SQLiteDatabase.CONFLICT_IGNORE);
 			Logger.i(this, "Result for adding "+ video+ " IS "+ result);
 			if (result >= 1) {
-				notifyCardAdded(video);
 				return DatabaseResult.SUCCESS;
 			}
 			if (isBookmarked(video.getId())) {
@@ -136,13 +135,23 @@ public class BookmarksDb extends CardEventEmitterDatabase implements OrderableDa
     public Single<DatabaseResult> bookmarkAsync(YouTubeVideo video) {
         return Single.fromSupplier(() -> add(video))
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSuccess(status -> {
+                    if (status == DatabaseResult.SUCCESS) {
+                        notifyCardAdded(video);
+                    }
+                });
     }
 
     public Single<DatabaseResult> unbookmarkAsync(VideoId video) {
         return Single.fromSupplier(() -> remove(video))
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSuccess(status -> {
+                    if (status == DatabaseResult.SUCCESS) {
+                        notifyCardDeleted(video);
+                    }
+                });
     }
 
 	/**
@@ -180,8 +189,6 @@ public class BookmarksDb extends CardEventEmitterDatabase implements OrderableDa
 				}
 
 				cursor.close();
-
-				notifyCardDeleted(video);
 
 				return DatabaseResult.SUCCESS;
 			}
