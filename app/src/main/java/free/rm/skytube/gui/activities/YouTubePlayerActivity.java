@@ -92,15 +92,17 @@ public class YouTubePlayerActivity extends BaseActivity implements YouTubePlayer
 		receiverRegistered = true;
 	}
 
+
 	private boolean receiverRegistered = false;
 	private final BroadcastReceiver playbackPauseReceiver = new BroadcastReceiver() {
 		@Override
 		public void onReceive(Context context, Intent intent) {
-			if(fragmentListener!= null && fragmentListener.isPlaying()) {
+			if (fragmentListener != null && fragmentListener.isPlaying()) {
 				fragmentListener.pause();
 			}
 		}
 	};
+
 
 	/**
 	 * @return True if the user wants to use SkyTube's default video player;  false if the user wants
