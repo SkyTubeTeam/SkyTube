@@ -18,8 +18,12 @@
 package free.rm.skytube.gui.activities;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
+import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -81,8 +85,22 @@ public class YouTubePlayerActivity extends BaseActivity implements YouTubePlayer
 			FragmentEx tutorialFragment = new YouTubePlayerTutorialFragment().setListener(() -> installNewVideoPlayerFragment(useDefaultPlayer));
 			installFragment(tutorialFragment);
 		}
+
+		// when audio is "becoming noisy", the device is switching audio to speaker from headphones
+		IntentFilter filter = new IntentFilter(AudioManager.ACTION_AUDIO_BECOMING_NOISY);
+		registerReceiver(playbackPauseReceiver, filter);
+		receiverRegistered = true;
 	}
 
+	private boolean receiverRegistered = false;
+	private final BroadcastReceiver playbackPauseReceiver = new BroadcastReceiver() {
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			if(fragmentListener!= null && fragmentListener.isPlaying()) {
+				fragmentListener.pause();
+			}
+		}
+	};
 
 	/**
 	 * @return True if the user wants to use SkyTube's default video player;  false if the user wants
@@ -282,6 +300,9 @@ public class YouTubePlayerActivity extends BaseActivity implements YouTubePlayer
 	public void finish() {
 		if (mediaSession != null) {
 			mediaSession.release();
+		}
+		if (receiverRegistered) {
+			unregisterReceiver(playbackPauseReceiver);
 		}
 		super.finish();
 	}
