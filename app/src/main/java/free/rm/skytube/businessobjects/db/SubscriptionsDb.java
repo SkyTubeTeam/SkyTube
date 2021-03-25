@@ -57,7 +57,6 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
  */
 public class SubscriptionsDb extends SQLiteOpenHelperEx {
     private static final String CHANNEL_HAS_NEW_VIDEO_QUERY = String.format("SELECT COUNT(*) FROM %s WHERE %s = ? AND %s > ?", SubscriptionsVideosTable.TABLE_NAME, SubscriptionsVideosTable.COL_CHANNEL_ID, SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_DATE);
-    private static final String VIDEO_DATE_IS_OLDER_THAN_1_MONTH = String.format("%s < DATETIME('now', '-1 month')", SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_DATE);
     private static final String HAS_VIDEO_QUERY = String.format("SELECT COUNT(*) FROM %s WHERE %s = ?", SubscriptionsVideosTable.TABLE_NAME, SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID);
     private static final String GET_VIDEO_IDS_BY_CHANNEL_TO_PUBLISH_TS = String.format("SELECT %s,%s FROM %s WHERE %s = ?",
             SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID, SubscriptionsVideosTable.COL_PUBLISH_TS, SubscriptionsVideosTable.TABLE_NAME, SubscriptionsVideosTable.COL_CHANNEL_ID);
@@ -77,7 +76,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 	private static final String IS_SUBSCRIBED_QUERY = String.format("SELECT EXISTS(SELECT %s FROM %s WHERE %s =?) AS VAL ", SubscriptionsTable.COL_ID, SubscriptionsTable.TABLE_NAME, SubscriptionsTable.COL_CHANNEL_ID);
 	private static volatile SubscriptionsDb subscriptionsDb = null;
 
-    private static final int DATABASE_VERSION = 7;
+    private static final int DATABASE_VERSION = 8;
 
 	private static final String DATABASE_NAME = "subs.db";
 
@@ -141,18 +140,12 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
             db.execSQL(SubscriptionsVideosTable.getIndexOnVideos());
         }
         if (oldVersion <= 7 && newVersion >= 8) {
-            // TODO: CHECK
             db.execSQL(CategoriesTable.getCreateStatement());
-            db.execSQL(SubscriptionsTable.getAddCategoryColumn());
-            db.execSQL(SubscriptionsVideosTable.getAddCategoryColumn());
             new CategoryManagement(db).setupDefaultCategories();
+            SubscriptionsVideosTable.addCategoryColumn(db);
+            SubscriptionsTable.addCategoryColumn(db);
+            SubscriptionsVideosTable.addVideoInformationColumns(db);
         }
-	}
-
-	private static void execSQLUpdates(SQLiteDatabase db, String[] sqlUpdates) {
-		for (String sqlUpdate : sqlUpdates) {
-			db.execSQL(sqlUpdate);
-		}
 	}
 
 	private void setupRetrievalTimestamp(SQLiteDatabase db) {
@@ -208,7 +201,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 		values.put(SubscriptionsTable.COL_DESCRIPTION, channel.getDescription());
 		values.put(SubscriptionsTable.COL_BANNER_URL, channel.getBannerUrl());
 		values.put(SubscriptionsTable.COL_THUMBNAIL_NORMAL_URL, channel.getThumbnailUrl());
-		values.put(SubscriptionsTable.COL_CATEGORY_ID, channel.getCategoryId());
+		values.put(SubscriptionsTable.COL_CATEGORY_ID.name, channel.getCategoryId());
 		values.put(SubscriptionsTable.COL_SUBSCRIBER_COUNT, channel.getSubscriberCount());
 
 		SQLiteDatabase db = getWritableDatabase();
@@ -228,7 +221,6 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 			return DatabaseResult.ERROR;
 		}
 	}
-
 
 	/**
 	 * Removes the given channel from the subscriptions DB.
@@ -256,8 +248,6 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 		return (rowsDeleted >= 0) ? DatabaseResult.SUCCESS : DatabaseResult.NOT_MODIFIED;
 	}
 
-
-
 	public void unsubscribeFromAllChannels() {
 		getWritableDatabase().delete(SubscriptionsVideosTable.TABLE_NAME,null,null);
 		getWritableDatabase().delete(SubscriptionsTable.TABLE_NAME,null,null);
@@ -282,8 +272,8 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
      * @param channelId the id of the channel
      * @return all the video ids for the subscribed channels from the database, mapped to publication times
      */
-    public Map<String, Long> getSubscribedChannelVideosByChannelToTimestamp(String channelId) {
-		SkyTubeApp.nonUiThread();
+    public Map<String, Long> getSubscribedChannelVideosByChannelToTimestamp(String channelId) { 
+        SkyTubeApp.nonUiThread();
         try(Cursor cursor = getReadableDatabase().rawQuery(GET_VIDEO_IDS_BY_CHANNEL_TO_PUBLISH_TS, new String[] { channelId})) {
             Map<String, Long> result = new HashMap<>();
             while(cursor.moveToNext()) {
@@ -291,6 +281,33 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
             }
             return result;
         }
+    }
+
+    public void updateVideo(YouTubeVideo video) {
+        ContentValues values = new ContentValues();
+        if (video.getPublishTimestampExact()) {
+            values.put(SubscriptionsVideosTable.COL_PUBLISH_TS, video.getPublishTimestamp());
+        }
+        if (video.getLikeCountNumber() != null) {
+            values.put(SubscriptionsVideosTable.COL_LIKES.name, video.getLikeCountNumber());
+        }
+        if (video.getDislikeCountNumber() != null) {
+            values.put(SubscriptionsVideosTable.COL_DISLIKES.name, video.getDislikeCountNumber());
+        }
+        if (video.getViewsCountInt() != null) {
+            values.put(SubscriptionsVideosTable.COL_VIEWS.name, video.getViewsCountInt().longValue());
+        }
+        if (video.getTitle() != null) {
+            values.put(SubscriptionsVideosTable.COL_TITLE.name, video.getTitle());
+        }
+        if (video.getDescription() != null) {
+            values.put(SubscriptionsVideosTable.COL_DESCRIPTION.name, video.getDescription());
+        }
+        getWritableDatabase().update(
+                SubscriptionsVideosTable.TABLE_NAME,
+                values,
+                SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID_EQUALS_TO,
+                new String[] { video.getId() });
     }
 
     public int setPublishTimestamp(YouTubeVideo video) {
@@ -448,7 +465,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
             return (count > 0 ? currentTime : -1);
         }).subscribeOn(Schedulers.io());
     }
-
+    
     /**
      * Updates the given channel's last visit time.
      *
@@ -591,44 +608,15 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
         return values;
     }
 
-	/**
-	 * Delete any videos stored in the database (for subscribed channels) that are over a month old.
-	 * @return
-	 */
-	public boolean trimSubscriptionVideos() {
-		int result = getWritableDatabase().delete(SubscriptionsVideosTable.TABLE_NAME, VIDEO_DATE_IS_OLDER_THAN_1_MONTH, null);
-		return result > 0;
-	}
-
-	/**
-	 * Query the database to retrieve all videos for subscribed channels.
-	 * @return
-	 */
-	public List<YouTubeVideo> getSubscriptionVideos() {
-		Cursor	cursor = getReadableDatabase().query(
-							SubscriptionsVideosTable.TABLE_NAME,
-							SubscriptionsVideosTable.ALL_COLUMNS_FOR_EXTRACT,
-							null, null, null, null,
-							SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_DATE + " DESC");
-		return extractVideos(cursor, true);
-	}
-
     /**
      * Query the database to retrieve number of videos for subscribed channels starting from the given video.
      * @return a list of {@link YouTubeVideo}
      */
     public List<YouTubeVideo> getSubscriptionVideoPage(int limit, String videoId, long beforeTimestamp) {
-        return getSubscriptionVideoPage(limit, videoId, beforeTimestamp, SubscriptionsVideosTable.COL_PUBLISH_TS);
-    }
-
-    /**
-     * Query the database to retrieve number of videos for subscribed channels starting from the given video.
-     * @return a list of {@link YouTubeVideo}
-     */
-    private List<YouTubeVideo> getSubscriptionVideoPage(int limit, String videoId, long beforeTimestamp, String sortingColumn) {
         SkyTubeApp.nonUiThread();
 
         final String selection;
+        final String sortingColumn = SubscriptionsVideosTable.COL_PUBLISH_TS;
         final String[] selectionArguments;
         if (videoId != null) {
             selection = "(" + sortingColumn + " < ?) OR (" + sortingColumn + " = ? AND " + SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID + " > ?)";

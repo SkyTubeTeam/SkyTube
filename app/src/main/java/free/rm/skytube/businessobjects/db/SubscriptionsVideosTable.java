@@ -17,6 +17,8 @@
 
 package free.rm.skytube.businessobjects.db;
 
+import android.database.sqlite.SQLiteDatabase;
+
 /**
  * A table that caches metadata about videos published by subbed channels.
  */
@@ -28,7 +30,13 @@ public class SubscriptionsVideosTable {
 	public static final String COL_YOUTUBE_VIDEO_DATE = "YouTube_Video_Date";
 	public static final String COL_RETRIEVAL_TS = "Retrieval_Timestamp";
 	public static final String COL_PUBLISH_TS = "Publish_Timestamp";
-	public static final String COL_CATEGORY_ID = "category_id";
+	public static final Column COL_CATEGORY_ID = new Column("category_id", "INTEGER");
+
+	public static final Column COL_TITLE = new Column("title", "text");
+	public static final Column COL_DESCRIPTION = new Column("description", "text");
+	public static final Column COL_LIKES = new Column("like_count", "integer");
+	public static final Column COL_DISLIKES = new Column("dislike_count", "integer");
+	public static final Column COL_VIEWS = new Column("view_count", "integer");
 
 	public static final String COL_YOUTUBE_VIDEO_ID_EQUALS_TO = SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID + " = ?";
 
@@ -38,24 +46,29 @@ public class SubscriptionsVideosTable {
 			COL_CHANNEL_ID,
 			COL_YOUTUBE_VIDEO_ID,
 			COL_YOUTUBE_VIDEO,
-			COL_CATEGORY_ID,
+			COL_CATEGORY_ID.name,
 			COL_RETRIEVAL_TS,
 			COL_PUBLISH_TS
 	};
 
 	private static final String ADD_COLUMN = "ALTER TABLE " + TABLE_NAME + " ADD COLUMN ";
 
-	public static String getCreateStatement() {
-		return "CREATE TABLE " + TABLE_NAME + " (" +
-						COL_YOUTUBE_VIDEO_ID + " TEXT PRIMARY KEY NOT NULL, " +
-						COL_CHANNEL_ID + " TEXT NOT NULL, " +
-						COL_YOUTUBE_VIDEO + " BLOB, " +
-						COL_YOUTUBE_VIDEO_DATE + " TIMESTAMP DEFAULT (strftime('%s', 'now')), " +
-						COL_CATEGORY_ID         + " INTEGER, " +
-						COL_RETRIEVAL_TS + " INTEGER, " +
-						COL_PUBLISH_TS + " INTEGER " +
-						" )";
-	}
+    public static String getCreateStatement() {
+        return "CREATE TABLE " + TABLE_NAME + " (" +
+                        COL_YOUTUBE_VIDEO_ID + " TEXT PRIMARY KEY NOT NULL, " +
+                        COL_CHANNEL_ID + " TEXT NOT NULL, " +
+                        COL_TITLE.format() +
+                        COL_DESCRIPTION.format() +
+                        COL_LIKES.format() +
+                        COL_DISLIKES.format() +
+                        COL_VIEWS.format() +
+                        COL_YOUTUBE_VIDEO + " BLOB, " +
+                        COL_YOUTUBE_VIDEO_DATE + " TIMESTAMP DEFAULT (strftime('%s', 'now')), " +
+                        COL_CATEGORY_ID.format() +
+                        COL_RETRIEVAL_TS + " INTEGER, " +
+                        COL_PUBLISH_TS + " INTEGER " +
+                        " )";
+    }
 
 	public static String[] getAddTimestampColumns() {
 		return new String[]{
@@ -68,8 +81,15 @@ public class SubscriptionsVideosTable {
         return "CREATE INDEX " + IDX_PUBLISH_TS + " ON " + TABLE_NAME + "(" + COL_PUBLISH_TS + ")";
     }
 
-    public static String getAddCategoryColumn() {
-        return ADD_COLUMN + COL_CATEGORY_ID + " INTEGER";
+    public static void addCategoryColumn(SQLiteDatabase db) {
+        SQLiteOpenHelperEx.addColumn(db, TABLE_NAME, COL_CATEGORY_ID);
     }
 
+    public static void addVideoInformationColumns(SQLiteDatabase db) {
+        SQLiteOpenHelperEx.addColumn(db, TABLE_NAME, COL_TITLE);
+        SQLiteOpenHelperEx.addColumn(db, TABLE_NAME, COL_DESCRIPTION);
+        SQLiteOpenHelperEx.addColumn(db, TABLE_NAME, COL_LIKES);
+        SQLiteOpenHelperEx.addColumn(db, TABLE_NAME, COL_DISLIKES);
+        SQLiteOpenHelperEx.addColumn(db, TABLE_NAME, COL_VIEWS);
+    }
 }

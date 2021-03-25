@@ -20,6 +20,7 @@ package free.rm.skytube.app;
 import java.util.function.Consumer;
 
 import free.rm.skytube.app.utils.WeakList;
+import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetSubscriptionVideosTaskListener;
 import free.rm.skytube.gui.businessobjects.MainActivityListener;
 import free.rm.skytube.gui.fragments.MainFragment;
@@ -35,6 +36,7 @@ public class EventBus {
     private WeakList<MainFragment> mainFragments = new WeakList<>();
     private WeakList<MainActivityListener> mainActivityListeners = new WeakList<>();
     private WeakList<GetSubscriptionVideosTaskListener> subscriptionListeners = new WeakList<GetSubscriptionVideosTaskListener>();
+    private WeakList<Consumer<YouTubeVideo>> videoDetailListeners = new WeakList<>();
 
     public static synchronized EventBus getInstance() {
         if (instance == null) {
@@ -59,6 +61,14 @@ public class EventBus {
         if (newVideos > 0) {
             this.mainFragments.forEach(main -> main.notifyChangeChannelNewVideosStatus(channelId, true));
         }
+    }
+
+    public void notifyVideoDetailFetched(YouTubeVideo video) {
+        this.videoDetailListeners.forEach(listener -> listener.accept(video));
+    }
+
+    public void registerVideoDetailFetcher(Consumer<YouTubeVideo> videoListener) {
+        this.videoDetailListeners.add(videoListener);
     }
 
     public void notifyChannelRemoved(String channelId) {

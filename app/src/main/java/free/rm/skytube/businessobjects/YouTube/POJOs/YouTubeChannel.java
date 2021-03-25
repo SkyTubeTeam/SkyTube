@@ -22,19 +22,12 @@ import android.widget.Toast;
 
 import androidx.core.util.Pair;
 
-import com.google.api.services.youtube.model.Channel;
-import com.google.api.services.youtube.model.ChannelBrandingSettings;
-import com.google.api.services.youtube.model.ChannelSnippet;
-import com.google.api.services.youtube.model.ChannelStatistics;
-import com.google.api.services.youtube.model.ThumbnailDetails;
-
 import org.schabi.newpipe.extractor.exceptions.ParsingException;
 import org.schabi.newpipe.extractor.services.youtube.linkHandler.YoutubeChannelLinkHandlerFactory;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.EventBus;
@@ -63,7 +56,6 @@ public class YouTubeChannel extends CardData implements Serializable {
 	private long    lastCheckTime;
 	private long    lastVideoTime;
 	private Integer categoryId;
-	private boolean	newVideosSinceLastVisit = false;
 	private final List<YouTubeVideo> youTubeVideos = new ArrayList<>();
 
 	public YouTubeChannel() { }
@@ -87,77 +79,6 @@ public class YouTubeChannel extends CardData implements Serializable {
 		this.lastVisitTime = lastVisitTime;
 		this.lastCheckTime = lastCheckTime;
 		this.categoryId = categoryId;
-	}
-
-	/**
-	 * Initialise this object.
-	 *
-	 * @param channel
-	 * @param isUserSubscribed	        if set to true, then it means the user is subscribed to this
-	 *                                  channel;  otherwise it means that we currently do not know
-	 *                                  if the user is subbed or not (hence we need to check).
-	 * @param shouldCheckForNewVideos   if set to true it will check with the database whether new
-	 *                                  videos have been published since last visit.
-	 * @return true if the values are different than the stored data.
-	 */
-	public boolean init(Channel channel, boolean isUserSubscribed, boolean shouldCheckForNewVideos) {
-		boolean ret = parse(channel);
-
-		// if the user has subbed to this channel, then check if videos have been publish since
-		// the last visit to this channel
-		if (this.isUserSubscribed && shouldCheckForNewVideos) {
-			newVideosSinceLastVisit = SubscriptionsDb.getSubscriptionsDb().channelHasNewVideos(this);
-		}
-		return ret;
-	}
-
-
-	/**
-	 * Parses a {@link Channel} and then sets the instance variables accordingly.
-	 *
-	 * @param channel
-	 */
-	private boolean parse(Channel channel) {
-		this.id = channel.getId();
-		boolean ret = false;
-		ChannelSnippet snippet = channel.getSnippet();
-		if (snippet != null) {
-			ret |= Objects.equals(this.title, snippet.getTitle());
-			this.title = snippet.getTitle();
-			ret |= Objects.equals(this.description, snippet.getDescription());
-			this.description = snippet.getDescription();
-
-			ThumbnailDetails thumbnail = snippet.getThumbnails();
-			if (thumbnail != null) {
-				String thmbNormalUrl = snippet.getThumbnails().getDefault().getUrl();
-
-				// YouTube Bug:  channels with no thumbnail/avatar will return a link to the default
-				// thumbnail that does NOT start with "http" or "https", but rather it starts with
-				// "//s.ytimg.com/...".  So in this case, we just add "https:" in front.
-				String thumbnailUrlLowerCase = thmbNormalUrl.toLowerCase();
-				if ( !(thumbnailUrlLowerCase.startsWith("http://")  ||  thumbnailUrlLowerCase.startsWith("https://")) ) {
-					thmbNormalUrl = "https:" + thmbNormalUrl;
-				}
-				ret |= Objects.equals(this.thumbnailUrl, thmbNormalUrl);
-				this.thumbnailUrl = thmbNormalUrl;
-			}
-		}
-
-		ChannelBrandingSettings branding = channel.getBrandingSettings();
-		if (branding != null) {
-			String bannerUrl = SkyTubeApp.isTablet() ? branding.getImage().getBannerTabletHdImageUrl() : branding.getImage().getBannerMobileHdImageUrl();
-			ret |= Objects.equals(this.bannerUrl, bannerUrl);
-			this.bannerUrl = bannerUrl;
-		}
-
-		ChannelStatistics statistics = channel.getStatistics();
-		if (statistics != null) {
-			long count = statistics.getSubscriberCount().longValue();
-			ret |= this.subscriberCount != count;
-			this.subscriberCount = count;
-			this.totalSubscribers = getFormattedSubscribers(statistics.getSubscriberCount().longValue());
-		}
-		return ret;
 	}
 
 	private static String getFormattedSubscribers(long subscriberCount) {
@@ -215,13 +136,6 @@ public class YouTubeChannel extends CardData implements Serializable {
 		this.lastVideoTime = lastVideoTime;
 	}
 
-	public boolean newVideosSinceLastVisit() {
-		return newVideosSinceLastVisit;
-	}
-
-	public void setNewVideosSinceLastVisit(boolean newVideos) {
-		this.newVideosSinceLastVisit = newVideos;
-	}
 
 	public void addYouTubeVideo(YouTubeVideo video) {
 		if(!youTubeVideos.contains(video)) {

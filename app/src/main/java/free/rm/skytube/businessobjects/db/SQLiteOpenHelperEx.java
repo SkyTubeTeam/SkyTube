@@ -20,11 +20,13 @@ package free.rm.skytube.businessobjects.db;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.io.File;
 
 import free.rm.skytube.app.SkyTubeApp;
+import free.rm.skytube.businessobjects.Logger;
 
 /**
  * An extended {@link SQLiteOpenHelper} with extra goodies.
@@ -111,4 +113,28 @@ public abstract class SQLiteOpenHelperEx extends SQLiteOpenHelper {
 		return executeQueryForInteger(db, query, null, defaultValue);
 	}
 
+    /**
+     * Execute the given sql updates, one-by-one. Throws an exception if any of them fails.
+     */
+    public static void execSQLUpdates(SQLiteDatabase db, String[] sqlUpdates) {
+        for (String sqlUpdate : sqlUpdates) {
+            db.execSQL(sqlUpdate);
+        }
+    }
+
+    public static void addColumn(SQLiteDatabase db, String tableName, Column column) {
+        try {
+            db.execSQL("ALTER TABLE " + tableName + " ADD COLUMN " + column.name + " " + column.type);
+        } catch (SQLiteException e) {
+            Logger.e(db, e,"Unable to add %d  %d to table: %d, because: %d", column.name, column.type, tableName, e.getMessage());
+        }
+    }
+
+    public static void addColumn(SQLiteDatabase db, String tableName, String columnName, String columnType) {
+        try {
+            db.execSQL("ALTER TABLE " + tableName + " ADD COLUMN " + columnName + " " + columnType);
+        } catch (SQLiteException e) {
+            Logger.e(db, e,"Unable to add %d  %d to table: %d, because: %d", columnName, columnType, tableName, e.getMessage());
+        }
+    }
 }

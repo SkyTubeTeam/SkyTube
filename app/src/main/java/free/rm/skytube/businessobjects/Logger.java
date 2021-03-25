@@ -42,6 +42,10 @@ public class Logger {
 		Log.e(TAG + obj.getClass().getSimpleName(), format(format, args));
 	}
 
+    public static void e(Object obj, Throwable error, String format, Object ... args) {
+        Log.e(TAG + obj.getClass().getSimpleName(), format(format, args), error);
+    }
+
 	private static String format(String format, Object... args) {
 		return args.length > 0 ? String.format(format, args) : format;
 	}
