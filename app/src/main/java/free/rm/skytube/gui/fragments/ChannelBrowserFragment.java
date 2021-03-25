@@ -290,13 +290,8 @@ public class ChannelBrowserFragment extends FragmentEx {
 				// the user is visiting the channel, so we need to update the last visit time
 				channel.updateLastVisitTime();
 
-				if (channel.newVideosSinceLastVisit()) {
-					// since we are visiting the channel, then we need to disable the new videos notification
-					channel.setNewVideosSinceLastVisit(false);
-					// since this.channel and SubsAdapter's channel are different instances, then we
-					// need to modify both of them [different because of bundle.getSerializable(channel)]
-					EventBus.getInstance().notifyChannelNewVideosStatus(channel.getId(), false);
-				}
+				// since we are visiting the channel, then we need to disable the new videos notification
+				EventBus.getInstance().notifyChannelNewVideosStatus(channel.getId(), false);
 			}
 		}
 	}
