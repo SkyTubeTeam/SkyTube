@@ -24,7 +24,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
@@ -42,14 +41,17 @@ public class PreferencesActivity extends AppCompatActivity implements
         setContentView(R.layout.settings_activity);
         final String fragmentName = getIntent().getStringExtra(START_FRAGMENT);
         if (savedInstanceState == null) {
-            final FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
             final Fragment fragment;
             if (VideoBlockerPreferenceFragment.class.getName().equals(fragmentName)) {
                 fragment = new VideoBlockerPreferenceFragment();
             } else {
                 fragment = new HeaderFragment();
             }
-            transaction.replace(R.id.settings, fragment).commit();
+
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.settings_container, fragment)
+                    .commit();
         } else {
             setTitle(savedInstanceState.getCharSequence(TITLE_TAG));
         }
@@ -92,7 +94,7 @@ public class PreferencesActivity extends AppCompatActivity implements
         fragment.setTargetFragment(caller, 0);
         // Replace the existing Fragment with the new Fragment
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.settings, fragment)
+                .replace(R.id.settings_container, fragment)
                 .addToBackStack(null)
                 .commit();
         setTitle(pref.getTitle());
