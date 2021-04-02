@@ -42,6 +42,7 @@ import org.schabi.newpipe.extractor.stream.VideoStream;
 import java.io.File;
 import java.io.Serializable;
 import java.math.BigInteger;
+import java.time.Clock;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.ZoneId;
@@ -131,11 +132,6 @@ public class YouTubeVideo extends CardData implements Serializable {
 	 */
 	private boolean isLiveStream;
 
-	/**
-	 * Timestamp of the data retrieval.
-	 */
-	private Long retrievalTimestamp;
-
 
 	private Integer categoryId;
 
@@ -152,8 +148,8 @@ public class YouTubeVideo extends CardData implements Serializable {
 		this.title = snippet.getTitle();
 
 		this.channel = new YouTubeChannel(snippet.getChannelId(), snippet.getChannelTitle());
-		setPublishDate(Instant.ofEpochMilli(snippet.getPublishedAt().getValue())
-				.atZone(ZoneId.systemDefault()));
+		setPublishTimestamp(snippet.getPublishedAt().getValue());
+		setPublishTimestampExact(true);
 
 		if (snippet.getThumbnails() != null) {
 			Thumbnail thumbnail = snippet.getThumbnails().getHigh();
@@ -200,7 +196,7 @@ public class YouTubeVideo extends CardData implements Serializable {
 	}
 
         public YouTubeVideo(String id, String title, String description, long durationInSeconds,
-							YouTubeChannel channel, long viewCount, ZonedDateTime publishDate,
+							YouTubeChannel channel, long viewCount, Instant publishDate,
 							boolean publishDateExact, String thumbnailUrl) {
             this.id = id;
             this.title = title;
@@ -210,8 +206,7 @@ public class YouTubeVideo extends CardData implements Serializable {
                 setViewCount(BigInteger.valueOf(viewCount));
             }
             if (publishDate != null) {
-                setPublishTimestamp(publishDate.toInstant().toEpochMilli());
-                this.publishDate = publishDate;
+                setPublishTimestamp(publishDate.toEpochMilli());
             }
             setPublishTimestampExact(publishDateExact);
             this.thumbnailMaxResUrl = thumbnailUrl;
@@ -265,7 +260,7 @@ public class YouTubeVideo extends CardData implements Serializable {
 			isLiveStream = true;
 			duration = getStr(R.string.LIVE);
 			// set publishDate to current (as there is a bug in YouTube API in which live videos's date is incorrect)
-			setPublishDate(ZonedDateTime.now());
+			setPublishTimestamp(Instant.now().toEpochMilli());
 		} else {
 			isLiveStream = false;
 		}
@@ -380,10 +375,6 @@ public class YouTubeVideo extends CardData implements Serializable {
 		return viewsCountInt;
 	}
 
-	public ZonedDateTime getPublishDate() {
-		return publishDate;
-	}
-
 	/*
 	 * Sets the {@link #durationInSeconds}
 	 * @param durationInSeconds The duration in seconds.
@@ -395,16 +386,6 @@ public class YouTubeVideo extends CardData implements Serializable {
 	public void setDurationInSeconds(int durationInSeconds) {
 		this.durationInSeconds = durationInSeconds;
 		this.duration = VideoDuration.toHumanReadableString(durationInSeconds);
-	}
-
-	/**
-	 * Sets the {@link #publishDate}, {@link #publishTimestamp}.
-	 */
-	private void setPublishDate(ZonedDateTime publishDate) {
-		this.publishDate = publishDate;
-		if (this.publishDate != null) {
-			setPublishTimestamp(this.publishDate.toInstant().toEpochMilli());
-		}
 	}
 
 	/**
@@ -507,14 +488,6 @@ public class YouTubeVideo extends CardData implements Serializable {
 			this.setViewCount(BigInteger.valueOf(views));
 		}
 		this.setDescription(NewPipeUtils.filterHtml(streamInfo.getDescription()));
-	}
-
-	public Long getRetrievalTimestamp() {
-		return retrievalTimestamp;
-	}
-
-	public void setRetrievalTimestamp(Long retrievalTimestamp) {
-		this.retrievalTimestamp = retrievalTimestamp;
 	}
 
 	/**
