@@ -106,7 +106,6 @@ public class GetFeaturedVideos extends GetYouTubeVideos {
 			for (Video video : videoList) {
 				try {
 					YouTubeVideo yv = new YouTubeVideo(video);
-					yv.setRetrievalTimestamp(System.currentTimeMillis());
 					youTubeVideoList.add(yv);
 				} catch (Exception ex) {
 					Logger.e(this, "Unable to convert video: " + video + ", error:" + ex.getMessage(), ex);

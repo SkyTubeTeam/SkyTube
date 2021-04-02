@@ -45,6 +45,7 @@ import org.schabi.newpipe.extractor.stream.StreamExtractor;
 import org.schabi.newpipe.extractor.stream.StreamInfo;
 
 import java.io.IOException;
+import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -330,28 +331,27 @@ public class NewPipeService {
 
         YouTubeVideo video = new YouTubeVideo(extractor.getId(), extractor.getName(), NewPipeUtils.filterHtml(extractor.getDescription()),
                 extractor.getLength(), new YouTubeChannel(extractor.getUploaderUrl(), extractor.getUploaderName()),
-                viewCount, uploadDate.zonedDateTime, uploadDate.exact, extractor.getThumbnailUrl());
+                viewCount, uploadDate.instant, uploadDate.exact, extractor.getThumbnailUrl());
         try {
             video.setLikeDislikeCount(extractor.getLikeCount(), extractor.getDislikeCount());
         } catch (ParsingException pe) {
             Logger.e(this, "Unable get like count for " + url.getUrl() + ", created at " + uploadDate + ", error:" + pe.getMessage(), pe);
             video.setLikeDislikeCount(null, null);
         }
-        video.setRetrievalTimestamp(System.currentTimeMillis());
         // Logger.i(this, " -> publishDate is %s, pretty: %s - orig value: %s", video.getPublishDate(),video.getPublishDatePretty(), uploadDate);
         return video;
     }
 
     static class DateInfo {
         boolean exact;
-        ZonedDateTime zonedDateTime;
+        Instant instant;
 
         public DateInfo(DateWrapper uploadDate) {
             if (uploadDate != null) {
-                zonedDateTime = uploadDate.offsetDateTime().atZoneSameInstant(ZoneId.systemDefault());
+                instant = uploadDate.offsetDateTime().toInstant();
                 exact = !uploadDate.isApproximation();
             } else {
-                zonedDateTime = null;
+                instant = null;
                 exact = false;
             }
         }
@@ -362,9 +362,9 @@ public class NewPipeService {
         @Override
         public String toString() {
             try {
-                return "[time= " + dtf.format(zonedDateTime) + ",exact=" + exact + ']';
+                return "[time= " + dtf.format(instant) + ",exact=" + exact + ']';
             } catch (Exception e){
-                return "[incorrect time= " + zonedDateTime + " ,exact=" + exact + ']';
+                return "[incorrect time= " + instant + " ,exact=" + exact + ']';
             }
         }
     }

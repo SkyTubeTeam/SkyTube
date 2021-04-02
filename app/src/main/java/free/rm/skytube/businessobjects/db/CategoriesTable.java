@@ -35,9 +35,9 @@ public class CategoriesTable {
             COL_LABEL
     };
 
-    private static final String ADD_COLUMN = "ALTER TABLE " + TABLE_NAME + " ADD COLUMN ";
-
     static final String MAXIMUM_PRIORITY_QUERY = String.format("SELECT MAX(%s) FROM %s", COL_PRIORITY, TABLE_NAME);
+
+    static final String COUNT_BY_LABEL_QUERY = String.format("SELECT count(%s) FROM %s WHERE %s = ?", COL_ID, TABLE_NAME, COL_LABEL);
 
     public static String getCreateStatement() {
         return "CREATE TABLE " + TABLE_NAME + " (" +

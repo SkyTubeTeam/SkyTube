@@ -95,7 +95,11 @@ public class CategoryManagement {
         }
     }
 
-    Category addNew(String name, boolean builtin) {
+    Category addNew(String name, String icon, boolean builtin) {
+        int count = SQLiteOpenHelperEx.executeQueryForInteger(db, CategoriesTable.COUNT_BY_LABEL_QUERY,  new String[] { name }, 0);
+        if (count > 0) {
+            return null;
+        }
         final int priority = SQLiteOpenHelperEx.executeQueryForInteger(db, CategoriesTable.MAXIMUM_PRIORITY_QUERY, 0) + 1;
 
         ContentValues values = new ContentValues();

@@ -122,19 +122,51 @@ public abstract class SQLiteOpenHelperEx extends SQLiteOpenHelper {
         }
     }
 
-    public static void addColumn(SQLiteDatabase db, String tableName, Column column) {
+    public static void continueOnError(SQLiteDatabase db, String update) {
         try {
-            db.execSQL("ALTER TABLE " + tableName + " ADD COLUMN " + column.name + " " + column.type);
+            db.execSQL(update);
         } catch (SQLiteException e) {
-            Logger.e(db, e,"Unable to add %d  %d to table: %d, because: %d", column.name, column.type, tableName, e.getMessage());
+            Logger.e(db, e,"Unable to execute %s , because: %s", update, e.getMessage());
         }
     }
 
-    public static void addColumn(SQLiteDatabase db, String tableName, String columnName, String columnType) {
+    public static void addColumn(SQLiteDatabase db, String tableName, Column column) {
         try {
-            db.execSQL("ALTER TABLE " + tableName + " ADD COLUMN " + columnName + " " + columnType);
+            db.execSQL("ALTER TABLE " + tableName + " ADD COLUMN " + column.format());
         } catch (SQLiteException e) {
-            Logger.e(db, e,"Unable to add %d  %d to table: %d, because: %d", columnName, columnType, tableName, e.getMessage());
+            Logger.e(db, e,"Unable to add '%s'  '%s' to table: '%s', because: %s", column.name, column.type, tableName, e.getMessage());
         }
     }
+
+    public static void createIndex(SQLiteDatabase db, String indexName, String tableName, Column... columns) {
+        db.execSQL("CREATE INDEX "+indexName+" ON "+tableName + "("+listColumns(true, columns)+")");
+    }
+
+    public static void createTable(SQLiteDatabase db, String tableName, Column... columns) {
+        try {
+            db.execSQL("CREATE TABLE " + tableName + " (" + listColumns(false, columns) + ")");
+        } catch (SQLiteException e) {
+            Logger.e(db, e,"Unable to create table: '%s', because: %s", tableName, e.getMessage());
+            throw e;
+        }
+    }
+
+    private static String listColumns(boolean justNames, final Column[] columns) {
+        boolean first = true;
+        final StringBuilder sql = new StringBuilder();
+        for (Column col : columns) {
+            if (first) {
+                first = false;
+            } else {
+                sql.append(", ");
+            }
+            if (justNames) {
+                sql.append(col.name);
+            } else {
+                sql.append(col.format());
+            }
+        }
+        return sql.toString();
+    }
+
 }

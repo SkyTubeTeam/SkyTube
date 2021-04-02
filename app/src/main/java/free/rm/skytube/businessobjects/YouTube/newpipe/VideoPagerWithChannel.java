@@ -45,7 +45,7 @@ public class VideoPagerWithChannel extends VideoPager {
         }
         YouTubeChannel ch = channel != null ? channel : new YouTubeChannel(item.getUploaderUrl(), item.getUploaderName());
         return new YouTubeVideo(id, item.getName(), null, item.getDuration(), ch,
-                item.getViewCount(), date.zonedDateTime, date.exact, NewPipeService.getThumbnailUrl(id));
+                item.getViewCount(), date.instant, date.exact, NewPipeService.getThumbnailUrl(id));
     }
 
 }
