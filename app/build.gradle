@@ -109,6 +109,7 @@ dependencies {
 
     implementation 'com.github.SkyTubeTeam.NewPipeExtractor:extractor:d761053c45465c3ee3f'
 
+    implementation 'com.github.SkyTubeTeam.components:okhttp-client:0.0.1'
 
     // other modules
     implementation 'org.ocpsoft.prettytime:prettytime:5.0.0.Final'
