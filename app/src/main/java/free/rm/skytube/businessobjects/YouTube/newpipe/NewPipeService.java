@@ -20,6 +20,8 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.github.skytube.components.httpclient.OkHttpDownloader;
+
 import org.schabi.newpipe.extractor.ListExtractor;
 import org.schabi.newpipe.extractor.NewPipe;
 import org.schabi.newpipe.extractor.ServiceList;
@@ -46,8 +48,6 @@ import org.schabi.newpipe.extractor.stream.StreamInfo;
 
 import java.io.IOException;
 import java.time.Instant;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
@@ -57,7 +57,6 @@ import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
-import free.rm.skytube.businessobjects.YouTube.VideoStream.HttpDownloader;
 import free.rm.skytube.businessobjects.YouTube.VideoStream.StreamMetaData;
 
 /**
@@ -409,7 +408,7 @@ public class NewPipeService {
      */
     public static void initNewPipe() {
         if (NewPipe.getDownloader() == null) {
-            NewPipe.init(new HttpDownloader(), Localization.DEFAULT, toContentCountry(SkyTubeApp.getSettings().getPreferredContentCountry()));
+            NewPipe.init(OkHttpDownloader.getInstance(), Localization.DEFAULT, toContentCountry(SkyTubeApp.getSettings().getPreferredContentCountry()));
         }
     }
 
