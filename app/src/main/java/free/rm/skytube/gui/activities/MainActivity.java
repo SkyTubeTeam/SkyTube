@@ -276,8 +276,8 @@ public class MainActivity extends BaseActivity {
 		AutoCompleteTextView autoCompleteTextView = searchView.findViewById(androidx.appcompat.R.id.search_src_text);
 		autoCompleteTextView.setThreshold(0);
 
-		// ... and change/init the cursor...
-		getSearchHistoryAdapter(searchView).setSearchBarString("");
+		// ... and change/init the cursor... but not clear the search area, so the user can modify the previous one.
+		getSearchHistoryAdapter(searchView);
 
 		// set the query hints to be equal to the previously searched text
 		searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
