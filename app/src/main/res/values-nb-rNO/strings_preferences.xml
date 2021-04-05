@@ -39,9 +39,9 @@
 \n
 \nDette programmet er fri programvare: Du kan dele det og/eller endre det i henhold til vilkårene i GNU General Public Lisensen, utgitt av Free Software Foundation (versjon 3).
 \n
-\nDette programmet har kommet deg i hende i håp om at det skal være nyttig, men UTEN NOEN FOR FOR GARANTI; selv under implisitt garanti om SALGBARHET eller FORMÅLSTJENLIGHET FOR NOE SPESIELT FORMÅL. Se GNU General Public Lisensen for flere detaljer.
+\nDette programmet har kommet deg i hende i håp om at det skal være nyttig, men UTEN NOEN FORM FOR GARANTI; selv under implisitt garanti om SALGBARHET eller FORMÅLSTJENLIGHET FOR NOE SPESIELT FORMÅL. Se GNU General Public Lisensen for flere detaljer.
 \n
-\nDu skal ha mottatt en kopi av GNU General Public Lisensen sammen me dette programmet. Hvis ikke, se &lt;https://www.gnu.org/licenses/&gt;</string>
+\nDu skal ha mottatt en kopi av GNU General Public Lisensen sammen med dette programmet. Hvis ikke, se &lt;https://www.gnu.org/licenses/&gt;</string>
     <string name="i_agree">Jeg samtykker</string>
     <string name="pref_other_category">Andre</string>
     <string name="pref_title_default_tab">Forvalgt fane</string>
