@@ -6,7 +6,7 @@
 \nПісля завантаження, вони з\'являться тут.</string>
     <string name="video_downloaded">\'%s\' завантажено.</string>
     <string name="delete_download">Видалити завантаження</string>
-    <string name="video_stream_not_found_with_request_resolution">Відео з розширенням між %s - %s не знайдено</string>
+    <string name="video_stream_not_found_with_request_resolution">Не знайдено відеопотоку для запитуваної роздільної здатності між %1$s та %2$s</string>
     <string name="video_download_stream_error">Не вдалося завантажити \'%s\'.</string>
     <string name="starting_video_download">Завантажується \'%s\'…</string>
     <string name="download_video">Завантажити відео</string>
