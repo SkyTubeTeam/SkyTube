@@ -21,4 +21,5 @@
     <string name="search_channel">Cerca il canale</string>
     <string name="close">Chiudi</string>
     <string name="could_not_get_channel_detailed">Impossibile scaricare le informazioni sul canale: %s.</string>
+    <string name="trending_in">Trending (%s)</string>
 </resources>
