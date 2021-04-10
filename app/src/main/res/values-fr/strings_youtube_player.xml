@@ -11,7 +11,7 @@
     <string name="warning_live_video">Impossible de lire le flux en direct. Ouvrir le flux dans une autre application \?</string>
     <string name="ratings_disabled">Notation désactivée</string>
     <string name="loading_video">Chargement de la vidéo…</string>
-    <string name="open_in_browser">Ouvrir dans un navigateur web</string>
+    <string name="open_in_browser">Ouvrir dans le navigateur web</string>
     <string name="open_with">Ouvrir avec…</string>
     <string name="share">Partager</string>
     <string name="share_via">Partager avec</string>
@@ -24,13 +24,18 @@
     <string name="view_replies">Voir les réponses</string>
     <string name="hide_replies">Cacher les réponses</string>
     <string name="enter_video_url">Coller l\'URL de la vidéo</string>
-    <string name="play">Démarrer</string>
+    <string name="play">Lire</string>
     <string name="cancel">Annuler</string>
     <string name="clear">Effacer</string>
-    <string name="should_resume">Reprendre la vidéo là où vous l\'avez arrêtée \?</string>
+    <string name="should_resume">Reprendre la vidéo là où vous l\'avez arrêtée \?</string>
     <string name="resume">Reprendre la vidéo</string>
     <string name="play_video">Lire la vidéo</string>
     <string name="error_get_comments_no_network">Accès au réseau requis pour récupérer les commentaires.</string>
     <string name="error_video_parse_error">Impossible de lire la vidéo, le message d\'erreur est : <br/><br/> %s.</string>
     <string name="error_downloaded_file_is_corrupted">La vidéo téléchargée a l\'air <b>corrompue</b> – le message d\'erreur : <br/> <br/> %s. <br/> <br/> Voulez-vous <b>supprimer</b> le fichier \?</string>
+    <string name="reload_video">Recharger la vidéo</string>
+    <string name="metered_network_blocked_by_policy">Téléchargement bloqué parce que votre appareil est connecté à un réseau avec compteur.</string>
+    <string name="warning_metered_network_disable">Ne plus demander.</string>
+    <string name="warning_metered_network_play">Votre appareil est connecté à un réseau avec compteur. Pour éviter les éventuels frais supplémentaires liés à l\'utilisation des données, il est recommandé de se connecter à un réseau sans compteur. Lire la vidéo quand même \?</string>
+    <string name="metered_network">Réseau avec compteur</string>
 </resources>
