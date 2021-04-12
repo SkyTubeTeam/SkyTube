@@ -2,7 +2,7 @@
 <resources>
     <string name="notification_new_videos_found">%d video mới từ các kênh đã đăng ký</string>
     <string name="notification_channel_feed_title">Thông báo nguồn dữ liệu</string>
-    <string name="import_subscriptions_from_youtube">Nhập mục đăng ký từ YouTube</string>
+    <string name="import_subscriptions_from_youtube">Nhập đăng ký từ YouTube</string>
     <string name="no_subscriptions_text">Bạn chưa đăng ký kênh nào.
 \n
 \nKhi bạn đã đăng ký, tất cả video được tải lên các kênh bạn đã đăng ký trong vòng tháng trước sẽ hiện lên ở đây.</string>
