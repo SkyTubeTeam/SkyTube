@@ -16,10 +16,10 @@
     <string name="pref_summary_low_views_filter">Lọc ra các video có ít lượt xem: %s</string>
     <string name="pref_title_low_views_filter">Lượt xem</string>
     <string name="pref_other_filters_category">Bộ lọc khác</string>
-    <string name="setting_updated">Đã cập nhật cài đặt. Vui lòng làm mới lại video.</string>
+    <string name="setting_updated">Đã cập nhật cài đặt. Vui lòng làm mới các video.</string>
     <string name="pref_summary_lang_detection_video_filtering">Dò tìm ngôn ngữ được sử dụng trong video và chặn bất cứ thứ gì ở ngoài ngôn ngữ ưu tiên của bạn. Chỉ dành cho các thiết bị tầm cao.</string>
     <string name="pref_title_lang_detection_video_filtering">Lọc video bằng dò tìm ngôn ngữ</string>
-    <string name="preferred_lang_updated">Đã cập nhật ngôn ngữ được ưu tiên. Vui lòng làm mới lại video.</string>
+    <string name="preferred_lang_updated">Đã cập nhật ngôn ngữ được ưu tiên. Vui lòng làm mới các video.</string>
     <string name="no_preferred_lang_selected">Không có ngôn ngữ ưu tiên nào được chọn. Đã bỏ qua cài đặt.</string>
     <string name="pref_summary_preferred_languages">Chọn các ngôn ngữ được ưu tiên của bạn.</string>
     <string name="pref_title_preferred_languages">Ngôn ngữ được ưu tiên</string>
@@ -27,9 +27,9 @@
     <string name="pref_title_preferred_regions">Khu vực được ưu tiên</string>
     <string name="pref_languages_filter_category">Bộ lọc ngôn ngữ &amp; khu vực</string>
     <string name="channel_unwhitelist_failure">Đưa kênh được nhập ra khỏi danh sách trắng thất bại…</string>
-    <string name="channel_unwhitelist_success">Đã cập nhật danh sách trắng các kênh. Vui lòng làm mới lại video.</string>
+    <string name="channel_unwhitelist_success">Đã cập nhật danh sách trắng các kênh. Vui lòng làm mới các video.</string>
     <string name="channel_whitelist_update_failure">Đưa kênh được nhập vào danh sách trắng thất bại…</string>
-    <string name="channel_whitelist_updated">Kênh đã được đưa vào danh sách trắng. Vui lòng làm mới lại video.</string>
+    <string name="channel_whitelist_updated">Kênh đã được đưa vào danh sách trắng. Vui lòng làm mới các video.</string>
     <string name="channel_already_whitelisted">Kênh đã được đưa vào danh sách trắng rồi.</string>
     <string name="please_wait">Vui lòng đợi…</string>
     <string name="block">Chặn</string>
@@ -39,7 +39,7 @@
     <string name="pref_title_channel_whitelist">Danh sách trắng các kênh</string>
     <string name="channel_blacklist_empty">Danh sách đen các kênh đang trống.</string>
     <string name="channel_blacklist_update_failure">Xoá các kênh được nhập khỏi danh sách đen thất bại…</string>
-    <string name="channel_blacklist_updated">Đã cập nhật danh sách đen các kênh. Vui lòng làm mới lại video.</string>
+    <string name="channel_blacklist_updated">Đã cập nhật danh sách đen các kênh. Vui lòng làm mới các video.</string>
     <string name="unblock">Bỏ chặn</string>
     <string name="pref_summary_channel_blacklist">Một danh sách các kênh đã chặn.</string>
     <string name="pref_title_channel_blacklist">Danh sách đen các kênh</string>
@@ -147,4 +147,12 @@
     <string name="pref_video_player_category">Trình phát video</string>
     <string name="key_preferences">cài đặt</string>
     <string name="preferences">Cài đặt</string>
+    <string name="app_license">Bản quyền © 2015-2018 Ramon Mifsud
+\n
+\nChương trình này là phần mềm tự do; bạn có thể phân phát lại nó và/hoặc sửa đổi nó dưới các điều khoản của Giấy phép GNU General Public như được Quỹ Phần mềm Tự do xuất bản (phiên bản 3 của Giấy phép).
+\n
+\nChương trình này được phân phát với hy vọng rằng nó sẽ hữu ích, nhưng KHÔNG CÓ SỰ BẢO ĐẢM; kể cả sự bảo đảm của KHẢ NĂNG BUÔN BÁN hoặc SỰ PHÙ HỢP CHO MỘT MỤC ĐÍCH CỤ THỂ. Hãy xem Giấy phép GNU General Public để biết thêm chi tiết.
+\n
+\nBạn có thể đã nhận một bản sao của Giấy phép GNU General Public cùng với chương trình này. Nếu không, hãy xem &lt;http://www.gnu.org/licenses/&gt;</string>
+    <string name="pref_title_default_content_country">Quốc gia nội dung mặc định</string>
 </resources>
