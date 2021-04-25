@@ -18,6 +18,7 @@
     <string name="num_videos">%d videos</string>
     <string name="playlists">Playlists</string>
     <string name="could_not_get_playlists">Could not get %s playlists.</string>
+    <string name="recaptcha_challenge_requested">YouTube blocks our network requests, You need to solve the reCaptcha challenge!</string>
     <string name="close">Close</string>
     <string name="loading">Loading …</string>
     <string name="yes">Yes</string>
