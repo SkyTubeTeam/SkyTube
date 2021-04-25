@@ -55,6 +55,7 @@ import com.google.api.client.googleapis.json.GoogleJsonResponseException;
 
 import org.ocpsoft.prettytime.PrettyTime;
 import org.schabi.newpipe.extractor.exceptions.FoundAdException;
+import org.schabi.newpipe.extractor.exceptions.ReCaptchaException;
 
 import java.io.IOException;
 import java.net.SocketException;
@@ -91,6 +92,8 @@ public class SkyTubeApp extends MultiDexApplication {
 	private static SkyTubeApp skyTubeApp = null;
 	private Settings settings;
 	private FragmentNames names;
+
+	private static final String TAG = "SkyTubeApp";
 
 	public static final String KEY_SUBSCRIPTIONS_LAST_UPDATED = "SkyTubeApp.KEY_SUBSCRIPTIONS_LAST_UPDATED";
 	public static final String NEW_VIDEOS_NOTIFICATION_CHANNEL = "free.rm.skytube.NEW_VIDEOS_NOTIFICATION_CHANNEL";
@@ -150,7 +153,7 @@ public class SkyTubeApp extends MultiDexApplication {
 						.uncaughtException(Thread.currentThread(), e);
 				return;
 			}
-			Log.e("SkyTubeApp", "Undeliverable exception received, not sure what to do" + e.getMessage(), e);
+			Log.e(TAG, "Undeliverable exception received, not sure what to do" + e.getMessage(), e);
 		});
 	}
 
@@ -172,7 +175,7 @@ public class SkyTubeApp extends MultiDexApplication {
 			if (Build.VERSION.SDK_INT >= 29) {
 				uiThreadImpl();
 			} else {
-				Log.i("SkyTubeApp", "Expected to be UI thread : " + Thread.currentThread().getName() + " [" + Build.VERSION.SDK_INT + ']');
+				Log.i(TAG, "Expected to be UI thread : " + Thread.currentThread().getName() + " [" + Build.VERSION.SDK_INT + ']');
 			}
 		}
 	}
@@ -189,7 +192,7 @@ public class SkyTubeApp extends MultiDexApplication {
 			if (Build.VERSION.SDK_INT >= 29) {
 				nonUiThreadImpl();
 			} else {
-				Log.i("SkyTubeApp", "Expected to be non-UI thread : " + Thread.currentThread().getName() + " [" + Build.VERSION.SDK_INT + ']');
+				Log.i(TAG, "Expected to be non-UI thread : " + Thread.currentThread().getName() + " [" + Build.VERSION.SDK_INT + ']');
 			}
 		}
 	}
@@ -378,6 +381,10 @@ public class SkyTubeApp extends MultiDexApplication {
 		if (throwable == null) {
 			return;
 		}
+        if (throwable instanceof ReCaptchaException) {
+            handleRecaptchaException(ctx, (ReCaptchaException) throwable);
+            return;
+        }
 		final String message;
 		if (throwable instanceof GoogleJsonResponseException) {
 			GoogleJsonResponseException exception = (GoogleJsonResponseException) throwable;
@@ -391,10 +398,20 @@ public class SkyTubeApp extends MultiDexApplication {
 			message = throwable.getMessage();
 		}
 		if (message != null) {
-			Log.e("SkyTubeApp", "Error: "+message);
+			Log.e(TAG, "Error: "+message);
 			Toast.makeText(ctx, message, Toast.LENGTH_LONG).show();
 		}
 	}
+
+    private static void handleRecaptchaException(Context context, ReCaptchaException reCaptchaException) {
+        // remove "pbj=1" parameter from YouYube urls, as it makes the page JSON and not HTML
+        String url = reCaptchaException.getUrl().replace("&pbj=1", "").replace("pbj=1&", "").replace("?pbj=1", "");
+
+        Log.e(TAG, "Error: " + reCaptchaException.getMessage() + " url: " + url, reCaptchaException);
+        Toast.makeText(context, R.string.recaptcha_challenge_requested, Toast.LENGTH_LONG).show();
+        viewInBrowser(url, context);
+        return;
+    }
 
 	public static void shareUrl(@NonNull Context context, String url) {
 		Intent intent = new Intent(android.content.Intent.ACTION_SEND);
@@ -540,7 +557,7 @@ public class SkyTubeApp extends MultiDexApplication {
 			context.startActivity(browserIntent);
 		} catch (ActivityNotFoundException e) {
 			showInvalidUrlToast(context, url);
-			Log.e("SkyTubeApp", "Activity not found for " + url + ", error:" + e.getMessage(), e);
+			Log.e(TAG, "Activity not found for " + url + ", error:" + e.getMessage(), e);
 		}
 	}
 

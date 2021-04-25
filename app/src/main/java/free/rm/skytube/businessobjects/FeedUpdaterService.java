@@ -43,7 +43,7 @@ public class FeedUpdaterService extends Service {
 		// Need to instantiate the task here since you can only run a task once.
 		int feedUpdaterInterval = SkyTubeApp.getSettings().getFeedUpdaterInterval();
 		if (feedUpdaterInterval > 0) {
-			compositeDisposable.add(YouTubeTasks.refreshAllSubscriptions(null, null)
+			compositeDisposable.add(YouTubeTasks.refreshAllSubscriptions(getApplicationContext(),null, null)
 					.subscribe(newVideosFetched -> {
 						if (newVideosFetched.intValue() > 0) {
 							Intent clickIntent = new Intent(this, MainActivity.class);

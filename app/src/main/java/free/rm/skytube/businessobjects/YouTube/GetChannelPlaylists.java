@@ -49,8 +49,6 @@ public class GetChannelPlaylists {
 
 	private YouTubeChannel channel;
 
-	private static final String	TAG = GetChannelPlaylists.class.getSimpleName();
-
 	public void init() throws IOException {
 		playlistList = YouTubeAPI.create().playlists().list("id, snippet, contentDetails");
 		playlistList.setKey(YouTubeAPIKey.get().getYouTubeAPIKey());

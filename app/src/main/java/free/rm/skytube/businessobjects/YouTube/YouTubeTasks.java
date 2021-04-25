@@ -12,6 +12,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import org.schabi.newpipe.extractor.StreamingService;
 import org.schabi.newpipe.extractor.exceptions.ExtractionException;
+import org.schabi.newpipe.extractor.exceptions.ReCaptchaException;
 
 import java.io.IOException;
 import java.time.ZonedDateTime;
@@ -22,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
@@ -63,7 +65,7 @@ public class YouTubeTasks {
 
     private YouTubeTasks() { }
 
-    public static Single<Integer> refreshAllSubscriptions(@Nullable Consumer<List<String>> subscriptionListConsumer, @Nullable Consumer<Integer> newVideosFound) {
+    public static Single<Integer> refreshAllSubscriptions(Context context, @Nullable Consumer<List<String>> subscriptionListConsumer, @Nullable Consumer<Integer> newVideosFound) {
         Single<List<String>>  subscriptionList = SubscriptionsDb.getSubscriptionsDb().getSubscribedChannelIdsAsync();
         if (subscriptionListConsumer!= null) {
             subscriptionList = subscriptionList.observeOn(AndroidSchedulers.mainThread())
@@ -72,6 +74,9 @@ public class YouTubeTasks {
         }
         return subscriptionList
                 .flatMap(channelIds -> refreshSubscriptions(channelIds, newVideosFound))
+                .doOnError(error -> {
+                    SkyTubeApp.notifyUserOnError(context, error);
+                })
                 .doOnSuccess(changed -> {
                     Log.i("YouTubeTasks", "refreshAllSubscriptions: " + changed);
                     SkyTubeApp.getSettings().updateFeedsLastUpdateTime();
@@ -120,10 +125,15 @@ public class YouTubeTasks {
     private static Single<Integer> getBulkSubscriptionVideos(@NonNull List<String> channelIds, @Nullable Consumer<Integer> newVideosFound) {
         final SubscriptionsDb subscriptionsDb = SubscriptionsDb.getSubscriptionsDb();
         final AtomicBoolean changed = new AtomicBoolean(false);
+        final AtomicReference<ReCaptchaException> recaptch = new AtomicReference<>();
         return Flowable.fromIterable(channelIds)
                 .flatMapSingle(channelId ->
                         Single.fromCallable(() -> {
                             SkyTubeApp.nonUiThread();
+                            if (recaptch.get() != null) {
+                                Log.i(TAG, "Re-captcha needed, done for now");
+                                return 0;
+                            }
                             Map<String, Long> alreadyKnownVideos = subscriptionsDb.getSubscribedChannelVideosByChannelToTimestamp(channelId);
                             List<YouTubeVideo> newVideos = fetchVideos(subscriptionsDb, alreadyKnownVideos, channelId);
                             List<YouTubeVideo> detailedList = new ArrayList<>();
@@ -139,6 +149,10 @@ public class YouTubeTasks {
                                         }
                                         details.setChannel(dbChannel);
                                         detailedList.add(details);
+                                    } catch (ReCaptchaException reCaptchaException) {
+                                        recaptch.set(reCaptchaException);
+                                        Log.e(TAG, String.format("ReCaptcha error: %s, open %s to solve", reCaptchaException.getMessage(), reCaptchaException.getUrl()));
+                                        return 0;
                                     } catch (ExtractionException | IOException e) {
                                         String errorMsg = String.format("Error during parsing video page for id=%s, channel: %s - name: '%s' msg:%s", vid.getId(), vid.getSafeChannelId(), vid.getSafeChannelName(), e.getMessage());
                                         Log.e(TAG, errorMsg, e);
@@ -159,7 +173,13 @@ public class YouTubeTasks {
                                 })
                 )
                 .collect(Collectors.summingInt(Integer::intValue))
-                .subscribeOn(Schedulers.io());
+                .map(result -> {
+                    ReCaptchaException reCaptchaException = recaptch.get();
+                    if (reCaptchaException != null) {
+                        throw reCaptchaException;
+                    }
+                    return result;
+                }).subscribeOn(Schedulers.io());
     }
 
     private static List<YouTubeVideo> fetchVideos(@NonNull SubscriptionsDb subscriptionsDb,

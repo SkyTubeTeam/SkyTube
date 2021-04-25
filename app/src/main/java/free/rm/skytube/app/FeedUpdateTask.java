@@ -72,7 +72,7 @@ public class FeedUpdateTask {
         SkyTubeApp.getSettings().setRefreshSubsFeedFull(false);
         refreshInProgress = true;
 
-        compositeDisposable.add(YouTubeTasks.refreshAllSubscriptions(this::processChannelIds,
+        compositeDisposable.add(YouTubeTasks.refreshAllSubscriptions(context, this::processChannelIds,
                 newVideosFound -> {
                     numChannelsFetched++;
                     numVideosFetched += newVideosFound;
