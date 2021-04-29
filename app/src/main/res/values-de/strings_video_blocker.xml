@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="dislikes">%d%% gefällt mir nicht</string>
+    <string name="channel_unwhitelist_error">Kanal konnte nicht aus der weißen Liste entfernt werden.</string>
+    <string name="channel_blacklist_error">Kanal konnte nicht auf die schwarze Liste gesetzt werden.</string>
+    <string name="channel_blacklisted">Kanal auf die schwarze Liste gesetzt. Bitte aktualisieren.</string>
+    <string name="block_channel">Kanal blockieren</string>
+    <string name="configure">Konfigurieren</string>
+    <string name="no_videos_blocked">Es wurden keine Videos blockiert oder herausgefiltert. Möchten Sie die Videoblockierung konfigurieren\?</string>
+    <string name="blocked_videos">Blockierte Videos</string>
+</resources>

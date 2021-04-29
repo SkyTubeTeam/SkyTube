@@ -12,4 +12,8 @@
     <string name="playing_video_file_missing">Die heruntergeladene Video wurde nicht gefunden. Wiedergabe erfolgt über Remot-Vverbingung.</string>
     <string name="external_storage_not_available">Die Datei kann nicht heruntergeladen werden, da der externe Speicher nicht verfügbar ist.</string>
     <string name="download">Herunterladen</string>
+    <string name="video_stream_not_found_with_request_resolution">Für die angeforderte Auflösung zwischen %1$s und %2$s wurde kein Videostream gefunden</string>
+    <string name="download_failed_because">%1$s konnte nicht heruntergeladen werden, weil: %2$s</string>
+    <string name="unable_to_delete_file">Löschen der heruntergeladenen Datei nicht möglich: „%s“</string>
+    <string name="warning_metered_network_download">Dein Gerät ist mit einem gebührenpflichtigen Netzwerk verbunden. Um potenzielle Gebühren zu vermeiden ist es empfohlen, dein Gerät mit einem nicht gebührenpflichtigen Netzwerk zu verbinden. Video trotzdem herunterladen\?</string>
 </resources>

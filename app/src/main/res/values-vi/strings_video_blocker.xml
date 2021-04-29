@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="dislikes">%d%% lượt không thích</string>
+    <string name="channel_unwhitelist_error">Không thể xoá kênh khỏi danh sách trắng.</string>
+    <string name="channel_blacklist_error">Không thể cho kênh vào danh sách đen.</string>
+    <string name="channel_blacklisted">Đã cho kênh vào danh sách đen. Vui lòng làm mới lại.</string>
+    <string name="block_channel">Chặn kênh</string>
+    <string name="configure">Thiết lập</string>
+    <string name="no_videos_blocked">Không có video nào bị chặn hoặc lọc ra. Bạn có muốn thiết lập Trình chặn video không\?</string>
+    <string name="blocked_videos">Video đã chặn</string>
+</resources>

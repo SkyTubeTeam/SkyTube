@@ -29,13 +29,13 @@
     <string name="mark_unwatched">Segna come non visto</string>
     <string name="should_resume">Vuoi riprendere da dove ti sei fermato?</string>
     <string name="resume">Riprendi</string>
-    <string name="play_video">Riproduci video</string>
+    <string name="play_video">Riproduci la video</string>
     <string name="error_get_comments_no_network">L\'accesso alla rete è necessario per raccogliere i commenti.</string>
     <string name="error_video_parse_error">Impossibile avviare la riproduzione del video, il messaggio di errore è: <br/> <br/> %s.</string>
     <string name="error_downloaded_file_is_corrupted">Il video scaricato sembra <b>corrotto</b> – il messaggio di errore è: <br/> <br/> %s. <br/> <br/> Vuoi <b>eliminare</b> il file\?</string>
-    <string name="reload_video">Ricarica Video</string>
-    <string name="warning_metered_network_disable">Non chiedere mai.</string>
-    <string name="metered_network_blocked_by_policy">Download interrotto perchè il tuo dispositivo è connesso ad una rete a consumo.</string>
+    <string name="reload_video">Ricarica la video</string>
+    <string name="warning_metered_network_disable">Non chiedere mai più.</string>
+    <string name="metered_network_blocked_by_policy">Scaricamento interrotto perché il tuo dispositivo è connesso ad una rete a consumo.</string>
     <string name="warning_metered_network_play">Il tuo dispositivo è connesso ad una rete a consumo. Per evitare potenziali costi extra è raccomandato connettersi ad una rete illimitata. Riprodurre il video comunque\?</string>
     <string name="metered_network">Rete a consumo</string>
 </resources>
