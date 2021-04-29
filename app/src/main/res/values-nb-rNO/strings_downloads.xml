@@ -12,7 +12,7 @@
     <string name="playing_video_file_missing">Nedlastningen for denne videoen ble ikke funnet. Spiller av annensteds fra.</string>
     <string name="external_storage_not_available">Kunne ikke laste ned fil som følge av at eksternt lagringsmedium ikke er tilgjengelig.</string>
     <string name="download">Last ned</string>
-    <string name="video_stream_not_found_with_request_resolution">Fant ikke noen videostrøm for forespurt oppløsning, mellom %s - %s</string>
+    <string name="video_stream_not_found_with_request_resolution">Fant ikke noen videostrøm for forespurt oppløsning, mellom %1$s og %2$s</string>
     <string name="warning_metered_network_download">Enheten din er tilkoblet et kvotebasert nettverk. For å unngå ekstra kostnader anbefales det å koble til et nettverk uten kvoter. Last ned video uansett\?</string>
     <string name="unable_to_delete_file">Kunne ikke slette nedlastet fil: «%s»</string>
     <string name="download_failed_because">Kunne ikke laste ned %1$s fordi: %2$s</string>

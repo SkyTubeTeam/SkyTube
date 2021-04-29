@@ -12,7 +12,7 @@
     <string name="playing_video_file_missing">De download voor deze video kan niet worden gevonden. Extern afspelen ingeschakeld.</string>
     <string name="external_storage_not_available">Het bestand kan niet worden gedownload omdat de externe opslag niet beschikbaar is.</string>
     <string name="download">Downloaden</string>
-    <string name="video_stream_not_found_with_request_resolution">Geen videostream aangetroffen bij de gevraagde resolutie tussen %s en %s</string>
+    <string name="video_stream_not_found_with_request_resolution">Geen videostream aangetroffen bij de gevraagde resolutie tussen %1$s en %2$s</string>
     <string name="warning_metered_network_download">Je apparaat is verbonden met een beperkt netwerk. Om extra kosten te voorkomen, is het advies om te verbinden met een onbeperkt netwerk. Wil je de video tóch downloaden\?</string>
     <string name="unable_to_delete_file">Het gedownloade bestand \'%s\' kan niet worden verwijderd</string>
     <string name="download_failed_because">%1$s kan niet worden gedownload. Reden: %2$s</string>

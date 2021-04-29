@@ -12,5 +12,8 @@
     <string name="playing_video_file_missing">Impossible de lire la vidéo téléchargée. Lecture en ligne.</string>
     <string name="external_storage_not_available">Impossible de télécharger le fichier car le stockage externe n\'est pas disponible.</string>
     <string name="download">Télécharger</string>
-    <string name="unable_to_delete_file">Impossible de supprimer le fichier télécharger : \'%s\'</string>
+    <string name="unable_to_delete_file">Impossible de supprimer le fichier télécharger : « %s »</string>
+    <string name="video_stream_not_found_with_request_resolution">Aucun flux vidéo trouvé pour la résolution demandée, entre la résolution %1$s et %2$s</string>
+    <string name="download_failed_because">Impossible de télécharger %1$s car : %2$s</string>
+    <string name="warning_metered_network_download">Votre appareil est connecté à un réseau avec compteur. Pour éviter les éventuels frais supplémentaires liés à l\'utilisation des données, il est recommandé de se connecter à un réseau sans compteur. Télécharger la vidéo quand même \?</string>
 </resources>
