@@ -22,4 +22,6 @@
     <string name="search_channel">Найти канал</string>
     <string name="close">Закрыть</string>
     <string name="could_not_get_channel_detailed">Не удалось загрузить информацию о канале: %s.</string>
+    <string name="recaptcha_challenge_requested">YouTube блокирует сетевые запросы, вам нужно решить проблему с reCaptcha!</string>
+    <string name="trending_in">В тренде (%s)</string>
 </resources>
