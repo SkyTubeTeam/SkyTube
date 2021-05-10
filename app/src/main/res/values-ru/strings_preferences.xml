@@ -148,4 +148,23 @@
     <string name="pref_title_minimum_res">Минимальное разрешение</string>
     <string name="pref_summary_maximum_res">Выберите максимальное разрешение: %s</string>
     <string name="pref_title_maximum_res">Максимальное разрешение</string>
+    <string name="pref_summary_default_content_country">Показывается содержимое предназначенное для этой страны: %s</string>
+    <string name="pref_title_default_content_country">Страна содержимого по умолчанию</string>
+    <string name="pref_key_video_quality_for_downloads_summary">Оптимизировать для: %s</string>
+    <string name="pref_key_video_quality_for_downloads_title">Выбор качества видео для скачивания</string>
+    <string name="pref_key_video_quality_metered_summary">Оптимизировать для: %s</string>
+    <string name="pref_key_video_quality_metered_title">Выбор качества видео при экономии трафика</string>
+    <string name="system_default_country">По умолчанию (Системная)</string>
+    <string name="pref_summary_maximum_res_metered">Выбранное максимальное разрешение видео потоковой передачи через сеть с ограниченным трафиком: %s</string>
+    <string name="pref_key_video_quality_summary">Оптимизировать для: %s</string>
+    <string name="pref_key_video_quality_title">Выбор качества видео</string>
+    <string name="pref_category_download_resolutions">Разрешение видео для скачивания</string>
+    <string name="pref_category_video_resolutions">Разрешение видео</string>
+    <string name="pref_summary_metered_network_usage">Действие при использовании сети с ограниченным трафиком для скачивания/просмотра видео: %s</string>
+    <string name="pref_title_metered_network_usage">Использование ограниченного трафика</string>
+    <string name="pref_title_maximum_res_metered">Максимальное разрешение для сети с ограниченным трафиком</string>
+    <string name="pref_summary_minimum_res_metered">Выбор минимального разрешения при потоковой передаче через сеть с ограниченным трафиком: %s</string>
+    <string name="pref_category_metered_network">Ограниченный трафик</string>
+    <string name="pref_title_minimum_res_metered">Минимальное разрешение для сети с ограниченным трафиком</string>
+    <string name="no_resolution_specified">Нет</string>
 </resources>
