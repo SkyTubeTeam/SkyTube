@@ -15,7 +15,6 @@
 	<string name="import_subscriptions_description">برای وارد کردن اشتراک‌ها از یوتیوب ابتدا به https://www.youtube.com/subscription_manager رفته و روی دکمه «Export Subscriptions» در پایین صفحه کلیک کنید. سپس با کلیک روی «انتخاب پرونده اشتراک‌ها»، پرونده‌ای را که با نام «subscription_manager» خروجی گرفته‌اید را انتخاب کنید.</string>
 	<string name="unsubscribe_from_all_current_sibbed_channels">اشتراک تمام کانال‌های مشترک شده را لغو کن.</string>
 	<string name="subscriptions_to_channels_imported">اشتراک در %d کانال وارد شده.</string>
-	<string name="select_xml_file">انتخاب پرونده اشتراک‌ها</string>
 	<string name="select_all">انتخاب همه</string>
 	<string name="select_none">انتخاب هیچ‌کدام</string>
 	<string name="no_channels_found">هیچ کانال یوتیوبی در پرونده XML بارگذاری شده شما یافت نشد.</string>

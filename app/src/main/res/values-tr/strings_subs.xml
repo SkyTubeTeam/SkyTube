@@ -12,7 +12,6 @@
     <string name="import_subscriptions">Abonelikleri içe aktar</string>
     <string name="import_subscriptions_description">Önce https://takeout.google.com adresini ziyaret ederek aboneliklerinizi YouTube\'dan içe aktarın. \"YouTube ve YouTube Müzik\" dışındaki tüm hizmetlerin seçimini kaldırın ve abonelikler dışında her şeyin seçimini kaldırmak için \"Tüm YouTube verileri dahil\" seçeneğini tıklayın. \"İleri\" ve ardından \"Dışa aktarım oluştur\" seçeneğini tıklayın. Dışa aktarma işlemi tamamlandığında, yeni geldiğiniz web sayfasında görünecek ve indirme bağlantısını içeren bir e-posta alacaksınız. Dosyayı indirin ve ondan subscriptions.json dosyasını çıkarın (/Takeout/YouTube and YouTube Music/subscriptions/ altında bulunur). Ardından, aşağıdaki \"Abonelik Dosyasını Seç\" seçeneğini tıklayarak dışa aktarılan dosyayı seçin.</string>
     <string name="subscriptions_to_channels_imported">%d kanal(lar)ına abonelik içe aktarıldı.</string>
-    <string name="select_xml_file">Abonelikler Dosyasını Seç</string>
     <string name="select_all">Tümünü Seç</string>
     <string name="select_none">Hiçbirini Seçme</string>
     <string name="no_channels_found">Yüklediğiniz dosyada YouTube kanalı bulunamadı.</string>

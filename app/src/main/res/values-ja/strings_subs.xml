@@ -12,7 +12,6 @@
     <string name="import_subscriptions">購読をインポート</string>
     <string name="import_subscriptions_description">まず、https://takeout.google.com にアクセスしてYouTube からサブスクリプションをインポートします。「YouTube と YouTube Music」以外のすべてのサービスの選択を解除し、「YouTubeのすべてのデータが含まれます」をクリックし、登録チャンネル以外のすべての選択を解除します。「次のステップ」をクリックし、「エクスポートを作成」をクリックします。エクスポートが完了すると、開いていたページに表示され、ダウンロードリンクの記載されたメールが届きます。ファイルをダウンロードしてsubscriptions.jsonをそこから展開します( /Takeout/YouTube と YouTube Music/登録チャンネル/ の下にあります )。それから、下部の「サブスクリプションファイルの選択」をクリックして、エクスポートしたファイルを選択します。</string>
     <string name="subscriptions_to_channels_imported">%d チャンネルの購読をインポートしました。</string>
-    <string name="select_xml_file">サブスクリプションファイルの選択</string>
     <string name="select_all">すべて選択</string>
     <string name="select_none">全解除</string>
     <string name="no_channels_found">アップロードしたファイルにはYouTubeチャンネルが見つかりませんでした。</string>

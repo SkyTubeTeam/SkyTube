@@ -12,7 +12,6 @@
     <string name="import_subscriptions">Abonnementen importeren</string>
     <string name="import_subscriptions_description">Ga naar https://www.youtube.com/subscription_manager en klik op \"Abonnementen exporteren\", helemaal onderaan de pagina. Kies dan het geëxporteerde bestand genaamd \"subscription_manager\" door hieronder te drukken op \"Kies subscriptions-bestand\".</string>
     <string name="subscriptions_to_channels_imported">Abonnement op %d kana(a)l(en) geïmporteerd.</string>
-    <string name="select_xml_file">Kies subscriptions-bestand</string>
     <string name="select_all">Alles selecteren</string>
     <string name="select_none">Niks selecteren</string>
     <string name="no_channels_found">Er zijn geen YouTube-kanalen aangetroffen in het gekozen bestand.</string>

@@ -12,7 +12,6 @@
     <string name="import_subscriptions">Importer abonnements</string>
     <string name="import_subscriptions_description">Importez vos abonnements de YouTube en vous rendant d\'abord sur le site https://takeout.google.com. Désélectionnez tous les services sauf \"YouTube et YouTube Music\" et cliquez sur \"Toutes les données YouTube incluses\" pour désélectionner tout sauf les abonnements. Cliquez sur \"Suivant\", puis sur \"Créer l\'exportation\". Une fois l\'exportation terminée, elle s\'affiche sur la page Web sur laquelle vous venez d\'atterrir et vous recevez un courriel contenant un lien de téléchargement. Téléchargez le fichier et extrayez-en le fichier subscriptions.json (situé sous /Takeout/YouTube et YouTube Music/subscriptions/). Ensuite, sélectionnez le fichier exporté en cliquant sur \"Select Subscriptions File\" ci-dessous.</string>
     <string name="subscriptions_to_channels_imported">Abonnements pour %d chaînes importés.</string>
-    <string name="select_xml_file">Sélectionner le fichier d\'abonnements</string>
     <string name="select_all">Tout sélectionner</string>
     <string name="select_none">Tout déselectionner</string>
     <string name="no_channels_found">Aucune chaîne YouTube n\'a été trouvée dans le fichier que vous avez téléversé.</string>
