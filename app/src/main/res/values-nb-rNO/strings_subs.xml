@@ -12,7 +12,6 @@
     <string name="import_subscriptions">Importer abonnementer</string>
     <string name="import_subscriptions_description">Importer dine abonnementer fra YouTube, ved først å besøke https://takeout.google.com. Velg så bort alle tjenester unntatt «YouTube og YouTube Music» og klikk «Alle YouTube-dataene er inkludert» for å velge bort alt annet enn «abonnementer». Klikk «Neste» og velg «Opprett eksport». Når eksporten er fullført vises den på nettsiden du landet på, og du vil motta en e-post med nedlastingslenke. Last ned filen og pakk ut subscriptions.json fra den (som er å finne i /Takeout/YouTube og YouTube Music/subscriptions/). Deretter velger du den utpakkede filen ved å klikke «Velg abonnementsfil» nedenfor.</string>
     <string name="subscriptions_to_channels_imported">Abonnement på %d kanal(er) importert.</string>
-    <string name="select_xml_file">Velg abonnementsfil</string>
     <string name="select_all">Velg alt</string>
     <string name="select_none">Ikke velg noe</string>
     <string name="no_channels_found">Ingen YouTube-kanaler ble funnet i fila du lastet opp.</string>

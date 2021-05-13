@@ -12,7 +12,6 @@
     <string name="import_subscriptions">استيراد الإشتراكات</string>
     <string name="import_subscriptions_description">استيراد الاشتراكات الخاصة بك من يوتيوب، بزيارة https://www.youtube.com/subscription_manager ، والنقر فوق زر \"تصدير الإشتراكات\" في الجزء السفلي. ثم حدد الملف الذي تم تصديره بعنوان \"subscription_manager\" بواسطة النقر فوق \"تحديد ملف الإشتراكات\" أدناه.</string>
     <string name="subscriptions_to_channels_imported">تم أستيراد الاشتراك في قناة %d .</string>
-    <string name="select_xml_file">اختر ملف الإشتراكات</string>
     <string name="select_all">تحديد الكل</string>
     <string name="select_none">لاتحدد شيء</string>
     <string name="no_channels_found">لم يتم العثور على اي قنوات يوتيوب في ملف XML قمت بتحميله.</string>

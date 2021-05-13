@@ -12,7 +12,6 @@
     <string name="import_subscriptions">Feliratkozások importálása</string>
     <string name="import_subscriptions_description">Importálja előfizetéseit a YouTube-ról úgy, hogy először felkeresi https://takeout.google.com -ot. Törölje az összes szolgáltatás kijelölését a \"YouTube és A YouTube Zene\" kivételével, és kattintson a \"Minden YouTube-adatot tartalmazzon\" lehetőségre. Kattintson a \"Tovább\" gombra, majd az \"Exportálás létrehozása\" gombra. Miután az export befejeződött, megjelenik a weboldalon, és kap egy e-mailt egy letöltési linkkel. Töltse le a fájlt, és bontsa ki belőle a file subscriptions.json fájlt (a /Takeout/YouTube és a YouTube Music/subscriptions/ alatt található). Ezután válassza ki az exportált fájlt az alábbi \"Előfizetések kiválasztása\" gombra kattintva.</string>
     <string name="subscriptions_to_channels_imported">%d csatornafeliratkozás került importálásra.</string>
-    <string name="select_xml_file">Válasszon feliratkozásfájlt</string>
     <string name="select_all">Mind kiválasztása</string>
     <string name="select_none">Egyik sem</string>
     <string name="unsubscribe_from_all_current_sibbed_channels">Leiratkozás az összes feliratkozott csatornáról.</string>

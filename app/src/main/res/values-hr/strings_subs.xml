@@ -13,7 +13,6 @@
     <string name="import_subscriptions_description">Uvezi tvoje pretplate s YouTubea. Najprije idi na stranicu https://takeout.google.com. Odznači sve usluge osim „YouTube i YouTube glazba” i pritisni „Uključeni su svi YouTube podaci” za odznačivanje svega osim pretplata. Pritsni „Dalje”, a zatim „Stvori izvoz”. Nakon što izvoz završi, on će se prikazati na sljedećoj web-stranici i dobit ćeš e-poruku s poveznicom za preuzimanje. Preuzmi datoteku i iz nje izdvoji datoteku subscription.json (nalazi se u /Takeout/YouTube i YouTube Music/subscription/). Nakon toga odaberi izvezenu datoteku pritiskom na „Odaberi datoteku pretplata”.</string>
     <string name="unsubscribe_from_all_current_sibbed_channels">Otkaži pretplate za sve tvoje trenutačne pretplaćene kanale.</string>
     <string name="subscriptions_to_channels_imported">Pretplata na %d kanala uvezena.</string>
-    <string name="select_xml_file">Odaberi datoteku pretplata</string>
     <string name="select_all">Odaberi sve</string>
     <string name="select_none">Odaberi ništa</string>
     <string name="no_channels_found">U tvojoj prenesenoj datoteci nije pronađen nijedan YouTube kanal.</string>

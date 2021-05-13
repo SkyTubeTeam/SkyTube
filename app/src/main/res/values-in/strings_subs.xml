@@ -12,7 +12,6 @@
     <string name="import_subscriptions_description">Impor langganan Anda dari YouTube dengan mengunjungi https://takeout.google.com terlebih dahulu. Batalkan pilihan semua layanan kecuali \"YouTube dan YouTube Music\" dan klik \"Semua data YouTube disertakan\" untuk batal memilih semuanya kecuali langganan. Klik \"Berikutnya\" dan kemudian \"Buat ekspor\". Setelah ekspor selesai, akan muncul halaman web dan Anda akan menerima email dengan link unduh. Unduh file dan ekstrak file subscription.json dari itu (terletak di bawah / Takeout / YouTube dan YouTube Music / Subscriptions /). Kemudian, pilih file yang diekspor dengan mengklik \"Pilih File Langganan\" di bawah.</string>
     <string name="unsubscribe_from_all_current_sibbed_channels">Batalkan semua langganan kanal Anda saat ini.</string>
     <string name="subscriptions_to_channels_imported">Langganan dari %d kanal berhasil diimpor.</string>
-    <string name="select_xml_file">Pilih Berkas Subscription</string>
     <string name="select_all">Pilih Semua</string>
     <string name="select_none">Tidak Pilih</string>
     <string name="no_channels_found">Tidak ada channel YouTube yang ditemukan di dalam berkas yang diunggah.</string>

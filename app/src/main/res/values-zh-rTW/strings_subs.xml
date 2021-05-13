@@ -12,7 +12,6 @@
     <string name="import_subscriptions">匯入訂閱</string>
     <string name="unsubscribe_from_all_current_sibbed_channels">取消訂閱您目前所有訂閱的頻道。</string>
     <string name="subscriptions_to_channels_imported">已匯入 %d 個頻道的訂閱。</string>
-    <string name="select_xml_file">選取訂閱檔案</string>
     <string name="select_all">選擇全部</string>
     <string name="select_none">全不選</string>
     <string name="no_channels_found">在您已上傳的檔案中找不到 YouTube 頻道。</string>
