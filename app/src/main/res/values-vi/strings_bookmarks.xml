@@ -2,12 +2,16 @@
 <resources>
     <string name="bookmarks">Dấu trang</string>
     <string name="bookmark">Dấu trang</string>
-    <string name="video_bookmarked">Video đã đánh dấu trang</string>
+    <string name="video_bookmarked">Đã đánh dấu video</string>
     <string name="video_bookmarked_error">Không thể đánh dấu trang video này.</string>
     <string name="unbookmark">Gỡ dấu trang</string>
     <string name="video_unbookmarked">Đã gỡ dấu trang video</string>
     <string name="video_unbookmarked_error">Không thể gỡ dấu trang video.</string>
-    <string name="no_bookmarked_videos_text">Bạn chưa đánh dấu trang video nào. 
+    <string name="no_bookmarked_videos_text">Bạn chưa đánh dấu trang video nào.
 \n
-\nMột khi đánh dấu trang, chúng sẽ hiển lên ở đây.</string>
+\nMột khi đánh dấu trang, chúng sẽ hiện lên ở đây.</string>
+    <string name="video_was_not_bookmarked">Video chưa được đánh dấu</string>
+    <string name="video_already_bookmarked">Video đã được đánh dấu rồi</string>
+    <string name="bookmark_share_invalid_url">Chỉ có các URL YouTube hợp lệ mới có thể được đánh dấu.</string>
+    <string name="bookmark_share_label">Dấu trang SkyTube</string>
 </resources>

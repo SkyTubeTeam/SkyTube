@@ -32,7 +32,10 @@
     <string name="play_video">Проиграть видео</string>
     <string name="error_get_comments_no_network">Доступ к сети необходим для получения комментариев.</string>
     <string name="error_video_parse_error">Невозможно начать воспроизведение видео, сообщение об ошибке: <br/> <br/> %s.</string>
-    <string name="error_downloaded_file_is_corrupted">Загруженное видео выглядит <b>поврежденным</b> - сообщение об ошибке: <br/><br/> %s. <br/><br/> Хотите <b>удалить</b> файл\?</string>
+    <string name="error_downloaded_file_is_corrupted">Загруженное видео выглядит <b>поврежденным</b> - сообщение об ошибке: <br/><br/> %s. <br/><br/> Вы хотите <b>удалить</b> файл\?</string>
     <string name="reload_video">Перезагрузить видео</string>
     <string name="warning_metered_network_disable">Больше не спрашивать.</string>
+    <string name="metered_network_blocked_by_policy">Скачивание заблокировано, поскольку ваше устройство подключено к сети с ограниченным трафиком.</string>
+    <string name="metered_network">Сеть с ограниченным трафиком</string>
+    <string name="warning_metered_network_play">Ваше устройство подключено к сети с ограниченным доступом. Чтобы избежать возможных дополнительных затрат на использование данных, рекомендуется подключиться к сети с неограниченным трафиком. Все равно воспроизводить видео\?</string>
 </resources>

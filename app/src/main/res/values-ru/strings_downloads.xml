@@ -12,5 +12,8 @@
   Как только вы это сделаете, они появятся тут.</string>
     <string name="playing_video_file_missing">Загрузка для этого видео не найдена. Проигрывается удалённо.</string>
     <string name="external_storage_not_available">Нет возможности скачать файл, так как внешний накопитель недоступен.</string>
-    <string name="video_stream_not_found_with_request_resolution">Видеопоток с запрошенным разрешением не найден между %s - %s</string>
+    <string name="video_stream_not_found_with_request_resolution">Не найден видеопоток для запрошенного разрешения между %1$s и %2$s</string>
+    <string name="download_failed_because">Не удалось скачать %1$s из-за: %2$s</string>
+    <string name="unable_to_delete_file">Невозможно удалить скачанный файл: \'%s\'</string>
+    <string name="warning_metered_network_download">Ваше устройство подключено к сети с ограниченным доступом. Чтобы избежать возможных дополнительных затрат на использование данных, рекомендуется подключиться к сети с неограниченным трафиком. Все равно скачать видео\?</string>
 </resources>

@@ -22,4 +22,5 @@
     <string name="close">Kapat</string>
     <string name="could_not_get_channel_detailed">Kanal bilgileri indirilemedi: %s.</string>
     <string name="trending_in">Öne Çıkanlar (%s)</string>
+    <string name="recaptcha_challenge_requested">YouTube ağ isteklerimizi engelliyor, reCaptcha sorusunu çözmeniz gerekiyor!</string>
 </resources>

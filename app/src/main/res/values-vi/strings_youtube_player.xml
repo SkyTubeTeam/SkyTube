@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="warning_metered_network_play">Thiết bị của bạn đang kết nối đến một mạng có trả phí. Để tránh phí sử dụng dữ liệu bổ sung có thể có, chúng tôi khuyên bạn kết nối đến một mạng không trả phí. Vẫn phát video\?</string>
+    <string name="resume">Tiếp tục</string>
+    <string name="should_resume">Bạn có muốn tiếp tục từ chỗ bạn đã dừng không\?</string>
+    <string name="clear">Xoá</string>
+    <string name="cancel">Huỷ</string>
+    <string name="play">Phát</string>
+    <string name="enter_video_url">Nhập URL video</string>
+    <string name="hide_replies">Ẩn trả lời</string>
+    <string name="view_replies">Xem trả lời</string>
+    <string name="no_video_comments">Video này không có bình luận, hoặc đã tắt bình luận.</string>
+    <string name="error_get_comments_no_network">Cần có truy cập internet để lấy bình luận.</string>
+    <string name="error_get_comments">Có lỗi xảy ra khi lấy bình luận.</string>
+    <string name="mark_unwatched">Đánh đấu chưa xem</string>
+    <string name="mark_watched">Đánh dấu đã xem</string>
+    <string name="url_copied_to_clipboard">Đã sao chép URL vào bộ nhớ tạm.</string>
+    <string name="copy_url">Sao chép URL</string>
+    <string name="share_via">Chia sẻ qua</string>
+    <string name="share">Chia sẻ</string>
+    <string name="open_with">Mở bằng…</string>
+    <string name="open_in_browser">Mở trong trình duyệt web</string>
+    <string name="reload_video">Tải lại video</string>
+    <string name="loading_video">Đang tải video…</string>
+    <string name="ratings_disabled">Đã tắt xếp hạng</string>
+    <string name="warning_live_video">Không thể phát luồng truyền trực tiếp vào lúc này. Mở luồng truyền trực tiếp trong một ứng dụng khác\?</string>
+    <string name="play_video">Phát video</string>
+    <string name="metered_network_blocked_by_policy">Tải xuống bị chặn vì thiết bị của bạn đang kết nối đến một mạng có trả phí.</string>
+    <string name="warning_metered_network_disable">Không bao giờ hỏi lại.</string>
+    <string name="metered_network">Mạng có trả phí</string>
+    <string name="error_video_parse_error">Không thể bắt đầu phát video, thông báo lỗi là: <br/> <br/> %s.</string>
+    <string name="error_downloaded_file_is_corrupted">Video đã tải xuống trông có vẻ <b>bị hỏng</b> - thông báo lỗi là: <br/> <br/> %s. <br/> <br/> Bạn có muốn <b>xoá</b> tệp đó không\?</string>
+    <string name="error_invalid_url">URL video không hợp lệ: %s</string>
+    <string name="error_get_video_desc">Có lỗi xảy ra khi lấy mô tả của video.</string>
+    <string name="error_video_streams">Có lỗi xảy ra khi lấy luồng truyền của video.</string>
+    <string name="error_video_streams_empty">Video %s không có luồng truyền nào.</string>
+    <string name="error_video_play">Lỗi khi phát video</string>
+    <string name="error_stream_parse_error">Lỗi khi xử lý.</string>
+    <string name="error_stream_decryption_fail">Không thể tải mã giải mã cho dịch vụ YouTube.</string>
+    <string name="error_stream_err_unavailable">Thông báo lỗi không có sẵn.</string>
+</resources>

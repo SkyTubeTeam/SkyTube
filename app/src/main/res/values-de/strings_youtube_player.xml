@@ -10,9 +10,9 @@
     <string name="error_invalid_url">Ungültige Video URL: %s</string>
     <string name="warning_live_video">Livestreams können derzeit nicht abgespielt werden. Livestream in einer anderen Anwendung abspielen?</string>
     <string name="ratings_disabled">Bewertungen deaktiviert</string>
-    <string name="loading_video">Lade Video…</string>
+    <string name="loading_video">Lade Video …</string>
     <string name="open_in_browser">Im Webbrowser öffnen</string>
-    <string name="open_with">Öffnen mit…</string>
+    <string name="open_with">Öffnen mit …</string>
     <string name="share">Teilen</string>
     <string name="share_via">Teilen mit</string>
     <string name="copy_url">URL kopieren</string>
@@ -33,4 +33,9 @@
     <string name="error_get_comments_no_network">Zum Abrufen von Kommentaren ist Netzwerkzugang erforderlich.</string>
     <string name="error_video_parse_error">Das Video kann nicht abgespielt werden; die Fehlermeldung lautet: <br/> <br/> %s.</string>
     <string name="error_downloaded_file_is_corrupted">Das heruntergeladene Video sieht <b>beschädigt</b> aus – die Fehlermeldung lautet: <br/> <br/> %s. <br/> <br/> Möchten Sie die Datei <b>löschen</b>\?</string>
+    <string name="metered_network_blocked_by_policy">Das Herunterladen wurde blockiert, da dein Gerät mit einem gebührenpflichtigen Netzwerk verbunden ist.</string>
+    <string name="warning_metered_network_disable">Nicht wieder fragen.</string>
+    <string name="warning_metered_network_play">Dein Gerät ist mit einem gebührenpflichtigen Netzwerk verbunden. Um potenzielle Gebühren zu vermeiden ist es empfohlen, dein Gerät mit einem nicht gebührenpflichtigen Netzwerk zu verbinden. Video trotzdem abspielen\?</string>
+    <string name="metered_network">Gebührenpflichtiges Netzwerk</string>
+    <string name="reload_video">Video erneut laden</string>
 </resources>

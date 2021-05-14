@@ -22,4 +22,5 @@
     <string name="could_not_get_channel_detailed">Ezin izan da kanalaren informazioa deskargatu: %s.</string>
     <string name="could_not_get_channel">Ezin izan da kanalaren informazioa deskargatu!</string>
     <string name="trending_in">Joera (%s)</string>
+    <string name="recaptcha_challenge_requested">Youtubek blokeatu ditu gure eskaerak, konpondu behar duzu reCaptcha erronka!</string>
 </resources>
