@@ -22,4 +22,5 @@
     <string name="could_not_get_channel_detailed">Tidak bisa mengunduh informasi channel: %s.</string>
     <string name="close">Tutup</string>
     <string name="trending_in">Trending (%s)</string>
+    <string name="recaptcha_challenge_requested">YouTube memblokir permintaan jaringan kami, Anda harus menyelesaikan tantangan reCaptcha!</string>
 </resources>

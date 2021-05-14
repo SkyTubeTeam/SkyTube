@@ -22,4 +22,5 @@
     <string name="close">Fechar</string>
     <string name="could_not_get_channel_detailed">Não foi possível descarregar as informações do canal: %s.</string>
     <string name="trending_in">Destaque (%s)</string>
+    <string name="recaptcha_challenge_requested">YouTube bloqueia os nossos pedidos de rede, deve resolver o desafio reCaptcha!</string>
 </resources>

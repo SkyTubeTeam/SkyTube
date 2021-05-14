@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="about">Giới thiệu</string>
+    <string name="failed_to_import_subscriptions">Nhập đăng ký YouTube của bạn thất bại.</string>
+    <string name="import_subscriptions_parse_error">Có lỗi xảy ra khi thử xử lý tệp bạn tải lên: %s.</string>
+    <string name="no_new_channels_found">Không tìm thấy kênh YouTube nào mà bạn chưa đăng ký trong tệp bạn tải lên.</string>
+    <string name="no_channels_found">Không tìm thấy kênh YouTube nào trong tệp bạn tải lên.</string>
+    <string name="select_none">Không chọn gì</string>
+    <string name="select_all">Chọn tất cả</string>
+    <string name="select_sub_file">Chọn tệp đăng ký</string>
+    <string name="subscriptions_to_channels_imported">Đã nhập đăng ký %d kênh.</string>
+    <string name="unsubscribe_from_all_current_sibbed_channels">Huỷ đăng ký tất cả các kênh hiện tại đã đăng ký của bạn.</string>
+    <string name="import_subscriptions_description">Nhập đăng ký của bạn từ YouTube bằng cách đi đến https://takeout.google.com trước tiên. Bỏ chọn tất cả dịch vụ trừ \"YouTube và YouTube Music\" và click vào \"Bao gồm tất cả dữ liệu trên YouTube\" để bỏ chọn mọi thứ trừ đăng ký. Click \"Tiếp\" và sau đó là \"Tạo tệp xuất\". Khi việc xuất hoàn thành, nó hiện lên ở trang web bạn vừa đến và bạn sẽ nhận một e-mail có liên kết tải xuống. Tải xuống tệp đó và trích xuất tệp subscriptions.json từ nó (ở /Takeout/YouTube và YouTube Music/subscriptions/). Sau đó, chọn tệp đã xuất bằng cách click \"Chọn tệp đăng ký\" ở dưới.</string>
+    <string name="import_subscriptions">Nhập đăng ký</string>
+    <string name="error_unable_to_subscribe">Không thể (huỷ) đăng ký kênh (id=%s)</string>
+    <string name="error_check_if_user_has_subbed">Không thể kiểm tra xem nguời dùng đã đăng ký kênh hay chưa (id=%s)</string>
+    <string name="error_get_subbed_channels">Có lỗi xảy ra khi lấy các kênh đã đăng ký.</string>
+    <string name="channel_unsubscribed">Đã huỷ đăng ký kênh</string>
+    <string name="unsubscribed">Đã huỷ đăng ký</string>
+    <string name="channel_subscribe_failed">Không thể đăng ký kênh</string>
+    <string name="channel_already_subscribed">Bạn đã đăng ký kênh này rồi</string>
+    <string name="channel_subscribed">Đã đăng ký kênh</string>
+    <string name="subscribed">Đã đăng ký</string>
+    <string name="total_subscribers">%,d người đăng ký</string>
+    <string name="unsubscribe">Huỷ đăng ký</string>
+    <string name="subscribe">Đăng ký</string>
+    <string name="subscriptions">Đăng ký</string>
+</resources>

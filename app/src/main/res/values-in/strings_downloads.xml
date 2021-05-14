@@ -12,7 +12,7 @@
 \nSetelah Anda mengunduhnya, video akan ditampilkan di sini.</string>
     <string name="playing_video_file_missing">Berkas unduhan untuk video ini tidak ditemukan. Memutar secara daring.</string>
     <string name="external_storage_not_available">Tidak bisa mengunduh berkas karena penyimpanan eksternal tidak tersedia.</string>
-    <string name="video_stream_not_found_with_request_resolution">Tidak ada stream video yang ditemukan untuk resolusi yang diminta, antara %s - %s</string>
+    <string name="video_stream_not_found_with_request_resolution">Tidak ada stream video yang ditemukan untuk resolusi yang diminta, antara resolusi %1$s dan %2$s</string>
     <string name="warning_metered_network_download">Perangkat Anda tersambung ke jaringan terukur. Untuk menghindari potensi biaya ekstra penggunaan data, direkomendasikan untuk tersambung ke jaringan tak terbatas. Tetap unduh video\?</string>
     <string name="unable_to_delete_file">Tidak bisa menghapus berkas unduhan: \'%s\'</string>
     <string name="download_failed_because">Tidak bisa mengunduh %1$s karena: %2$s</string>

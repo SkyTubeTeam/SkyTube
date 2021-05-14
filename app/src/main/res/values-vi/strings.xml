@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="search_channel">Tìm kiếm kênh</string>
+    <string name="no">Không</string>
+    <string name="yes">Có</string>
+    <string name="loading">Đang tải …</string>
+    <string name="close">Đóng</string>
+    <string name="could_not_get_playlists">Không thể lấy %s danh sách phát.</string>
+    <string name="playlists">Danh sách phát</string>
+    <string name="num_videos">%d video</string>
+    <string name="videos">Video</string>
+    <string name="video">Video</string>
+    <string name="trending_in">Thịnh hành (%s)</string>
+    <string name="most_popular">Phổ biến nhất</string>
+    <string name="featured">Nổi bật</string>
+    <string name="LIVE">TRỰC TIẾP</string>
+    <string name="launch_offical_player_error">Có lỗi xảy ra khi cố gắng mở trình phát YouTube chính thức từ Google. Hãy chắc chắn nó được cài đặt trên thiết bị của bạn.</string>
+    <string name="search_videos">Tìm kiếm video</string>
+    <string name="ok">OK</string>
+    <string name="error">Lỗi</string>
+    <string name="views">%,d lượt xem</string>
+    <string name="could_not_get_channel_detailed">Không thể tải xuống thông tin kênh: %s.</string>
+    <string name="could_not_get_channel">Không thể tải xuống thông tin kênh!</string>
+    <string name="could_not_get_videos">Không thể lấy %s video.</string>
+</resources>

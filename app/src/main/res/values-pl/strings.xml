@@ -22,4 +22,5 @@
     <string name="search_channel">Szukaj kanału</string>
     <string name="could_not_get_channel_detailed">Nie można pobrać informacji o kanale: %s.</string>
     <string name="trending_in">Najpopularniejsze (%s)</string>
+    <string name="recaptcha_challenge_requested">YouTube blokuje nasze żądania sieciowe, musisz rozwiązać zabezpieczenie reCaptcha!</string>
 </resources>

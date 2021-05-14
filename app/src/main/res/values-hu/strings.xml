@@ -23,4 +23,5 @@
     <string name="search_channel">Csatornák keresése</string>
     <string name="close">Bezárás</string>
     <string name="trending_in">Felkapott (%s)</string>
+    <string name="recaptcha_challenge_requested">A YouTube blokkolja hálózati kéréseinket, meg kell oldania a reCaptcha feladatot!</string>
 </resources>

@@ -22,4 +22,5 @@
     <string name="could_not_get_channel_detailed">無法下載頻道資訊：%s。</string>
     <string name="close">關閉</string>
     <string name="trending_in">熱門 (%s)</string>
+    <string name="recaptcha_challenge_requested">YouTube 封鎖了我們的網路請求，您必須解決 reCaptcha 挑戰！</string>
 </resources>

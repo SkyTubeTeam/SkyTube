@@ -3,15 +3,15 @@
     <string name="bookmarks">Könyvjelzők</string>
     <string name="bookmark">Könyvjelző</string>
     <string name="video_bookmarked">Videó könyvjelzőzve</string>
-    <string name="video_bookmarked_error">Nem sikerült könyvjelzőzni a videót.</string>
+    <string name="video_bookmarked_error">Nem sikerült a könyvjelzők közé felvenni a videót.</string>
     <string name="unbookmark">Könyvjelző törlése</string>
-    <string name="video_unbookmarked">A videó könyvjelzőzése megszüntetve</string>
+    <string name="video_unbookmarked">A könyvjelző törölve lett</string>
     <string name="video_unbookmarked_error">Nem sikerült törölni a könyvjelzőt.</string>
     <string name="no_bookmarked_videos_text">Még nem hozott létre egy könyvjelzőt sem.
 \n
 \nMajd ha megteszi, itt fognak megjelenni.</string>
     <string name="bookmark_share_label">SkyTube könyvjelző</string>
     <string name="bookmark_share_invalid_url">Csak érvényes YouTube URL-t lehet könyvjelzőzni.</string>
-    <string name="video_was_not_bookmarked">A videó nem lett könyvjelzőzve</string>
-    <string name="video_already_bookmarked">A videó már könyvjelzőzve lett</string>
+    <string name="video_was_not_bookmarked">Nem sikerült elmenteni a könyvjelzőt</string>
+    <string name="video_already_bookmarked">A videót már könyvjelzőzte</string>
 </resources>

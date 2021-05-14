@@ -22,4 +22,5 @@
     <string name="could_not_get_channel_detailed">De kanaalinformatie kan niet worden gedownload: %s</string>
     <string name="close">Sluiten</string>
     <string name="trending_in">Populair (%s)</string>
+    <string name="recaptcha_challenge_requested">YouTube blokkeert onze netwerkverzoeken, dus moet je de reCaptcha gebruiken!</string>
 </resources>
