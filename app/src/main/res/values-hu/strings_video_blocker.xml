@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="dislikes">%d%%-os nemtetszés</string>
+    <string name="dislikes">%d százalékos nemtetszés</string>
     <string name="channel_unwhitelist_error">A csatorna nem távolítható el a fehérlistáról.</string>
     <string name="channel_blacklist_error">A csatorna nem tehető feketelistára.</string>
     <string name="channel_blacklisted">Csatorna feketelistára téve. Frissítsen.</string>
