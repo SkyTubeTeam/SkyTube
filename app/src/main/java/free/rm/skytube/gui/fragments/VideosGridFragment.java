@@ -76,6 +76,10 @@ public abstract class VideosGridFragment extends BaseVideosGridFragment {
 		Glide.get(requireContext()).clearMemory();
 	}
 
+    void scrollToTop() {
+        gridviewBinding.gridView.smoothScrollToPosition(0);
+    }
+
 	/**
 	 * @return Returns the category of videos being displayed by this fragment.
 	 */

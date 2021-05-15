@@ -77,9 +77,9 @@ public class ChromecastControllerFragment extends ChromecastBaseControllerFragme
 		}
 		fragmentBinding.duration.setMilliseconds(chromecastPlaybackProgressBar.getMax());
 		if(!media.getMetadata().getImages().isEmpty()) {
-			Picasso.get()
+			Glide.with(getContext())
 							.load(media.getMetadata().getImages().get(0).getUrl().toString())
-							.placeholder(R.drawable.thumbnail_default)
+							.apply(new RequestOptions().placeholder(R.drawable.thumbnail_default))
 							.into(fragmentBinding.videoImage);
 		}
 	}

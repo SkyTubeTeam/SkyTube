@@ -363,7 +363,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 		videoDescriptionBinding.videoDescPublishDate.setText(video.getPublishDatePretty());
 
 		if (video.getDescription() != null) {
-			Linker.setTextAndLinkify(videoDescriptionBinding.videoDescription, video.getDescription());
+			Linker.setTextAndLinkify(videoDescriptionBinding.videoDescDescription, video.getDescription());
 		}
 
 		if (video.isThumbsUpPercentageSet()) {
@@ -463,7 +463,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 									@Override
 									public void onGetDesiredStream(StreamInfo desiredStream, YouTubeVideo video) {
 										// hide the loading video view (progress bar)
-										loadingVideoView.setVisibility(View.GONE);
+										fragmentBinding.loadingVideoView.setVisibility(View.GONE);
 
 										// Play the video.  Check if this fragment is visible before playing the
 										// video.  It might not be visible if the user clicked on the back button
@@ -1121,7 +1121,8 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 	}
 
 	@Override
-	public void setPlaybackStateListener(PlaybackStateListener listener) {
+	public void setPlaybackStateListener(final PlaybackStateListener listener) {
 		playbackStateListener = listener;
 	}
+
 }

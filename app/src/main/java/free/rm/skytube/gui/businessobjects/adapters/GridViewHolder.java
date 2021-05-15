@@ -174,17 +174,17 @@ public class GridViewHolder extends RecyclerView.ViewHolder implements Serializa
 		binding.videoPositionProgressBar.setVisibility(View.GONE);
 	}
 
-	private void updateViewsData(@NonNull YouTubeVideo youTubeVideo) {
-		binding.channelTextView.setText(showChannelInfo ? youTubeVideo.getChannelName() : "");
-		binding.videoDurationTextView.setText(youTubeVideo.getDuration());
-		binding.viewsTextView.setText(youTubeVideo.getViewsCount());
+    private void updateViewsData(@NonNull YouTubeVideo youTubeVideo) {
+        binding.channelTextView.setText(showChannelInfo ? youTubeVideo.getChannelName() : "");
+        binding.videoDurationTextView.setText(youTubeVideo.getDuration());
+        binding.viewsTextView.setText(youTubeVideo.getViewsCount());
 
-		if (youTubeVideo.getThumbsUpPercentageStr() != null) {
-			binding.thumbsUpTextView.setVisibility(View.VISIBLE);
-			binding.thumbsUpTextView.setText(youTubeVideo.getThumbsUpPercentageStr());
-		} else {
-			binding.thumbsUpTextView.setVisibility(View.INVISIBLE);
-		}
+        if (youTubeVideo.getThumbsUpPercentageStr() != null) {
+            binding.thumbsUpTextView.setVisibility(View.VISIBLE);
+            binding.thumbsUpTextView.setText(youTubeVideo.getThumbsUpPercentageStr());
+        } else {
+            binding.thumbsUpTextView.setVisibility(View.INVISIBLE);
+        }
 
         if(SkyTubeApp.getSettings().isPlaybackStatusEnabled()) {
             PlaybackStatusDb.getPlaybackStatusDb().getVideoWatchedStatusAsync(youTubeVideo.getId()).subscribe(videoWatchedStatus -> {
@@ -197,11 +197,11 @@ public class GridViewHolder extends RecyclerView.ViewHolder implements Serializa
                         binding.videoPositionProgressBar.setProgress((int) videoWatchedStatus.getPosition());
                     }
                 } else {
-                    videoPositionProgressBar.setVisibility(View.INVISIBLE);
+                    binding.videoPositionProgressBar.setVisibility(View.INVISIBLE);
                 }
             });
         } else {
-            videoPositionProgressBar.setVisibility(View.INVISIBLE);
+            binding.videoPositionProgressBar.setVisibility(View.INVISIBLE);
         }
     }
 
