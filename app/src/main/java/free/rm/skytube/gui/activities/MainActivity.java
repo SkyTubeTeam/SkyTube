@@ -20,7 +20,6 @@ package free.rm.skytube.gui.activities;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -39,7 +38,6 @@ import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.SearchView;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
-import androidx.cursoradapter.widget.CursorAdapter;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -50,8 +48,6 @@ import com.mikepenz.actionitembadge.library.utils.BadgeStyle;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import free.rm.skytube.R;
 import free.rm.skytube.app.EventBus;
 import free.rm.skytube.app.SkyTubeApp;
@@ -79,7 +75,6 @@ import free.rm.skytube.gui.fragments.SearchVideoGridFragment;
  * the Chromecast specific functionality)
  */
 public class MainActivity extends BaseActivity {
-	@BindView(R.id.fragment_container)
 	protected FrameLayout           fragmentContainer;
 
 	/** Fragment that shows Videos from a specific Playlist */
@@ -125,13 +120,11 @@ public class MainActivity extends BaseActivity {
 		// Delete any missing downloaded videos
 		new DownloadedVideosDb.RemoveMissingVideosTask().executeInParallel();
 
-		setContentView(R.layout.activity_main);
+		setContentView(binding.getRoot());
 
 		// The Extra variant needs to initialize some Fragments that are used for Chromecast control. This is done in onLayoutSet of BaseActivity.
 		// The OSS variant has a no-op version of this method, since it doesn't need to do anything else here.
 		onLayoutSet();
-
-		ButterKnife.bind(this);
 
 		if(fragmentContainer != null) {
 			handleIntent(getIntent());
@@ -582,4 +575,5 @@ public class MainActivity extends BaseActivity {
 			mainFragment.refreshSubscriptionsFeedVideos();
 		}
 	}
+
 }

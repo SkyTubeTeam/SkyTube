@@ -102,15 +102,14 @@ public class ChannelBrowserFragment extends FragmentEx {
 			public void onTabUnselected(TabLayout.Tab tab) {
 			}
 
-			@Override
-			public void onTabReselected(TabLayout.Tab tab) {
-				//When current tab reselected scroll to the top of the video list
-				TabFragment tabFragment = channelPagerAdapter.getItem(tab.getPosition());
-				if (tabFragment instanceof VideosGridFragment) {
-					((VideosGridFragment)tabFragment).gridView.smoothScrollToPosition(0);
-				}
-
-			}
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+                //When current tab reselected scroll to the top of the video list
+                TabFragment tabFragment = channelPagerAdapter.getItem(tab.getPosition());
+                if (tabFragment instanceof VideosGridFragment) {
+                    ((VideosGridFragment)tabFragment).scrollToTop();
+                }
+            }
 		});
 
 		binding.pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {

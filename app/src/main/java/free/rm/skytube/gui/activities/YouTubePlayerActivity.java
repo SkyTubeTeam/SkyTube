@@ -60,6 +60,7 @@ public class YouTubePlayerActivity extends BaseActivity implements YouTubePlayer
 
 	public static final String YOUTUBE_VIDEO_OBJ  = "YouTubePlayerActivity.video_object";
 
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		final boolean useDefaultPlayer = useDefaultPlayer();
@@ -75,7 +76,7 @@ public class YouTubePlayerActivity extends BaseActivity implements YouTubePlayer
 		}
 
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+        setContentView(binding.getRoot());
 
 		// if the tutorial was previously displayed, the just "install" the video player fragment
 		if (SkyTubeApp.getSettings().wasTutorialDisplayedBefore()) {
@@ -310,14 +311,15 @@ public class YouTubePlayerActivity extends BaseActivity implements YouTubePlayer
 	}
 
 
-	@Override
-	public void onPlaylistClick(YouTubePlaylist playlist) {}
+    @Override
+    public void onPlaylistClick(YouTubePlaylist playlist) {}
 
-	/**
-	 * No-op method. Since this class needs to extend BaseActivity, in order to be able to connect to a Chromecast from
-	 * this activity, it needs to implement this method, but doesn't need to do anything, since it doesn't use
-	 * SubscriptionsFeedFragment.
-	 */
-	@Override
-	public void refreshSubscriptionsFeedVideos() {}
+    /**
+     * No-op method. Since this class needs to extend BaseActivity, in order to be able to connect to a Chromecast from
+     * this activity, it needs to implement this method, but doesn't need to do anything, since it doesn't use
+     * SubscriptionsFeedFragment.
+     */
+    @Override
+    public void refreshSubscriptionsFeedVideos() {}
+
 }

@@ -467,7 +467,7 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 		videoDescriptionBinding.videoDescPublishDate.setText(video.getPublishDatePretty());
 
 		if (video.getDescription() != null) {
-			Linker.setTextAndLinkify(videoDescriptionBinding.videoDescription, video.getDescription());
+			Linker.setTextAndLinkify(videoDescriptionBinding.videoDescDescription, video.getDescription());
 		}
 
 		if (video.isThumbsUpPercentageSet()) {
@@ -491,8 +491,8 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 
 	@Override
 	public void onPrepared(MediaPlayer mediaPlayer) {
-		videoDescriptionBinding.loadingVideoView.setVisibility(View.GONE);
-		videoDescriptionBinding.videoView.seekTo(videoCurrentPosition);
+		fragmentBinding.loadingVideoView.setVisibility(View.GONE);
+		fragmentBinding.videoView.seekTo(videoCurrentPosition);
 		play();
 
 		showHud();
@@ -872,7 +872,7 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 										YouTubeTasks.getDesiredStream(youTubeVideo, new GetDesiredStreamListener() {
 											@Override
 											public void onGetDesiredStream(StreamInfo desiredStream, YouTubeVideo youTubeVideo) {
-												Linker.setTextAndLinkify(fragmentBinding.videoDescriptionTextView, youTubeVideo.getDescription());
+												Linker.setTextAndLinkify(videoDescriptionBinding.videoDescDescription, youTubeVideo.getDescription());
 
 												StreamSelectionPolicy selectionPolicy = SkyTubeApp.getSettings().getDesiredVideoResolution(false).withAllowVideoOnly(false);
 												StreamSelectionPolicy.StreamSelection selection = selectionPolicy.select(desiredStream);

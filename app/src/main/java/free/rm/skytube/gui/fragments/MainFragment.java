@@ -265,7 +265,7 @@ public class MainFragment extends FragmentEx {
 		Logger.i(this, "refreshTabs called");
 		switch (settingChange) {
 			case HIDE_TABS: {
-				videosPagerAdapter.updateVisibleTabs(tabLayout);
+				videosPagerAdapter.updateVisibleTabs(fragmentBinding.tabLayout);
 				break;
 			}
 			case CONTENT_COUNTRY: {
