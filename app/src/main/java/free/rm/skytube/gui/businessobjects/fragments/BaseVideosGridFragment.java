@@ -17,6 +17,7 @@
 
 package free.rm.skytube.gui.businessobjects.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +27,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import javax.annotation.Nonnull;
+
+import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.db.PlaybackStatusDb;
 import free.rm.skytube.gui.businessobjects.adapters.VideoGridAdapter;
 import free.rm.skytube.gui.fragments.VideosGridFragment;
@@ -42,25 +46,26 @@ public abstract class BaseVideosGridFragment extends TabFragment implements Swip
 	public BaseVideosGridFragment() {
 	}
 
-	protected void setVideoGridAdapter(VideoGridAdapter adapter) {
-		this.videoGridAdapter = adapter;
-	}
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        Logger.w(this, "onCreateView called - call init(...) from the descendant- with videoGridAdapter=%s swipeRefreshLayout=%s", videoGridAdapter, swipeRefreshLayout);
+        initBase(container.getContext(), videoGridAdapter, swipeRefreshLayout);
+        return null;
+    }
 
-	@Nullable
-	@Override
-	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		if (videoGridAdapter == null) {
-			videoGridAdapter = new VideoGridAdapter();
-		}
-		videoGridAdapter.setContext(container.getContext());
-
-		swipeRefreshLayout.setOnRefreshListener(this);
-
-		if (isFragmentSelected()) {
-			videoGridAdapter.initializeList();
-		}
-		return null;
-	}
+    protected void initBase(@NonNull Context context, VideoGridAdapter videoGridAdapterParam, @Nonnull SwipeRefreshLayout swipeRefreshLayoutParam) {
+        if (videoGridAdapterParam != null) {
+            this.videoGridAdapter = videoGridAdapterParam;
+        } else {
+            this.videoGridAdapter = new VideoGridAdapter();
+        }
+        videoGridAdapter.setContext(context);
+        this.swipeRefreshLayout = swipeRefreshLayoutParam;
+        if (isFragmentSelected()) {
+            videoGridAdapter.initializeList();
+        }
+    }
 
 	@Override
 	public void onRefresh() {

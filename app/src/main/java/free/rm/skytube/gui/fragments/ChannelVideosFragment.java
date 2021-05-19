@@ -44,10 +44,6 @@ public class ChannelVideosFragment extends VideosGridFragment {
 		}
 	}
 
-	public VideoGridAdapter getVideoGridAdapter() {
-		return videoGridAdapter;
-	}
-
 	@Override
 	protected VideoCategory getVideoCategory() {
 		return VideoCategory.CHANNEL_VIDEOS;

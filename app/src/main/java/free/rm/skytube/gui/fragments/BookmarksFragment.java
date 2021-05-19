@@ -17,6 +17,7 @@
 
 package free.rm.skytube.gui.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,24 +42,24 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
  * Fragment that displays bookmarked videos.
  */
 public class BookmarksFragment extends OrderableVideosGridFragment implements CardListener {
-	private FragmentBookmarksBinding binding;
+    private FragmentBookmarksBinding binding;
 
-	public BookmarksFragment() {
-	}
+    public BookmarksFragment() {
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, @Nullable Bundle savedInstanceState) {
-        setVideoGridAdapter(new OrderableVideoGridAdapter(BookmarksDb.getBookmarksDb()));
-        BookmarksDb.getBookmarksDb().registerListener(this);
-        binding = FragmentBookmarksBinding.inflate(inflater, container, false);
-        swipeRefreshLayout = binding.videosGridview.swipeRefreshLayout;
+        initBookmarks(container.getContext(), new OrderableVideoGridAdapter(BookmarksDb.getBookmarksDb()), FragmentBookmarksBinding.inflate(inflater, container, false));
+        return binding.getRoot();
+    }
 
-        View view = super.onCreateView(inflater, container, savedInstanceState);
+    private void initBookmarks(@NonNull Context context, @NonNull OrderableVideoGridAdapter videoGridAdapterParam, @NonNull FragmentBookmarksBinding bindingParam) {
+        this.binding = bindingParam;
+        initOrderableVideos(context, videoGridAdapterParam, bindingParam.videosGridview);
+        BookmarksDb.getBookmarksDb().registerListener(this);
         setListVisible(false);
-        swipeRefreshLayout.setEnabled(false);
 
         populateList();
-        return view;
     }
 
     private void populateList() {
