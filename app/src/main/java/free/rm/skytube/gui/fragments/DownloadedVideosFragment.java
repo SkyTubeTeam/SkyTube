@@ -1,5 +1,6 @@
 package free.rm.skytube.gui.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,21 +25,21 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
  * A fragment that holds videos downloaded by the user.
  */
 public class DownloadedVideosFragment extends OrderableVideosGridFragment implements CardListener {
-	private FragmentDownloadsBinding binding;
+    private FragmentDownloadsBinding binding;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, @Nullable Bundle savedInstanceState) {
-        setVideoGridAdapter(new OrderableVideoGridAdapter(DownloadedVideosDb.getVideoDownloadsDb()));
-		binding = FragmentDownloadsBinding.inflate(inflater, container, false);
-		swipeRefreshLayout = binding.videosGridview.swipeRefreshLayout;
+        initDownloads(container.getContext(), new OrderableVideoGridAdapter(DownloadedVideosDb.getVideoDownloadsDb()), FragmentDownloadsBinding.inflate(inflater, container, false));
+        return binding.getRoot();
+    }
 
-		DownloadedVideosDb.getVideoDownloadsDb().registerListener(this);
-        View view = super.onCreateView(inflater, container, savedInstanceState);
+    private void initDownloads(final Context context, final OrderableVideoGridAdapter videoGridAdapterParam, final FragmentDownloadsBinding bindingParam) {
+        this.binding = bindingParam;
+        initOrderableVideos(context, videoGridAdapterParam, bindingParam.videosGridview);
+        DownloadedVideosDb.getVideoDownloadsDb().registerListener(this);
         setListVisible(false);
-        swipeRefreshLayout.setEnabled(false);
 
         populateList();
-        return binding.getRoot();
     }
 
     @Override
@@ -47,7 +48,6 @@ public class DownloadedVideosFragment extends OrderableVideosGridFragment implem
         binding = null;
         super.onDestroyView();
     }
-
 
 	@Override
 	protected VideoCategory getVideoCategory() {

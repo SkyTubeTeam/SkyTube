@@ -75,19 +75,22 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 		EventBus.getInstance().registerSubscriptionListener(this);
 	}
 
-	@Override
-	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		binding = FragmentSubsFeedBinding.inflate(inflater, container, false);
-		binding.importSubscriptionsButton.setOnClickListener(v -> subscriptionsBackupsManager
-				.displayImportSubscriptionsFromYouTubeDialog());
-		binding.importBackupButton.setOnClickListener(v -> subscriptionsBackupsManager.displayFilePicker());
-		swipeRefreshLayout = binding.videosGridview.swipeRefreshLayout;
-		super.onCreateView(inflater, container, savedInstanceState);
-		videoGridAdapter.setVideoGridUpdated(this::setupUiAccordingToNumOfSubbedChannels);
-		// get the previously published videos currently cached in the database
-		videoGridAdapter.setVideoCategory(VideoCategory.SUBSCRIPTIONS_FEED_VIDEOS);
-		return binding.getRoot();
-	}
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        init(container.getContext(), FragmentSubsFeedBinding.inflate(inflater, container, false));
+        return binding.getRoot();
+    }
+
+    void init(Context context, FragmentSubsFeedBinding bindingParam) {
+        this.binding = bindingParam;
+        initVideos(context, videoGridAdapter, binding.videosGridview);
+        binding.importSubscriptionsButton.setOnClickListener(v -> subscriptionsBackupsManager
+                .displayImportSubscriptionsFromYouTubeDialog());
+        binding.importBackupButton.setOnClickListener(v -> subscriptionsBackupsManager.displayFilePicker());
+        videoGridAdapter.setVideoGridUpdated(this::setupUiAccordingToNumOfSubbedChannels);
+        // get the previously published videos currently cached in the database
+        videoGridAdapter.setVideoCategory(VideoCategory.SUBSCRIPTIONS_FEED_VIDEOS);
+    }
 
 	@Override
 	public void onResume() {
