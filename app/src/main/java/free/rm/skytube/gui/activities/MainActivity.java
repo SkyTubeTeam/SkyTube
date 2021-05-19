@@ -75,7 +75,6 @@ import free.rm.skytube.gui.fragments.SearchVideoGridFragment;
  * the Chromecast specific functionality)
  */
 public class MainActivity extends BaseActivity {
-	protected FrameLayout           fragmentContainer;
 
 	/** Fragment that shows Videos from a specific Playlist */
 	private VideoBlockerPlugin      videoBlockerPlugin;
@@ -126,7 +125,7 @@ public class MainActivity extends BaseActivity {
 		// The OSS variant has a no-op version of this method, since it doesn't need to do anything else here.
 		onLayoutSet();
 
-		if(fragmentContainer != null) {
+		if(binding.fragmentContainer != null) {
 			handleIntent(getIntent());
 		}
 
