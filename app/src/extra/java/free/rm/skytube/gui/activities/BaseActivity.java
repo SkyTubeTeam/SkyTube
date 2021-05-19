@@ -431,18 +431,16 @@ public abstract class BaseActivity extends AppCompatActivity implements MainActi
 		}
 	}
 
-	/**
-	 * When returning to {@link free.rm.skytube.gui.fragments.MainFragment} from a fragment that uses
-	 * CoordinatorLayout, redraw the Sliding Panel. This fixes an apparent bug in CoordinatorLayout that
-	 * causes the panel to be positioned improperly (the bottom half of the panel ends up below the screen)
-	 */
-	@Override
-	public void redrawPanel() {
-		final LinearLayout chromecastControllersContainer = (LinearLayout)findViewById(R.id.chromecastControllersContainer);
-		if(chromecastControllersContainer != null) {
-			chromecastControllersContainer.post(chromecastControllersContainer::requestLayout);
-		}
-	}
+    /**
+     * When returning to {@link free.rm.skytube.gui.fragments.MainFragment} from a fragment that uses
+     * CoordinatorLayout, redraw the Sliding Panel. This fixes an apparent bug in CoordinatorLayout that
+     * causes the panel to be positioned improperly (the bottom half of the panel ends up below the screen)
+     */
+    @Override
+    public void redrawPanel() {
+        final LinearLayout chromecastControllersContainer = binding.chromecastControllersContainer;
+        chromecastControllersContainer.post(binding.chromecastControllersContainer::requestLayout);
+    }
 
     private void showPanel() {
         final SlidingUpPanelLayout slidingLayout = binding.slidingLayout;
