@@ -22,4 +22,5 @@
     <string name="search_channel">Kanal suchen</string>
     <string name="close">Schließen</string>
     <string name="trending_in">Beliebt (%s)</string>
+    <string name="recaptcha_challenge_requested">YouTube blockt unsere Netzwerkanfrage. Du musst das reCaptcha lösen!</string>
 </resources>
