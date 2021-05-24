@@ -127,6 +127,12 @@ public abstract class RecyclerViewAdapterEx<T, HolderType extends RecyclerView.V
 		notifyItemRangeRemoved(0, listSize);
 	}
 
+    protected void notifyItemChanged(T item) {
+        int idx = this.list.indexOf(item);
+        if (idx >= 0) {
+            this.notifyItemChanged(idx);
+        }
+    }
 
 	public Iterator<T> getIterator() {
 		return this.list.iterator();
@@ -143,12 +149,5 @@ public abstract class RecyclerViewAdapterEx<T, HolderType extends RecyclerView.V
 		return list.get(position);
 	}
 
-
-	/**
-	 * @return The list that represents items stored/displayed by this adapter.
-	 */
-	protected List<T> getList() {
-		return list;
-	}
 
 }
