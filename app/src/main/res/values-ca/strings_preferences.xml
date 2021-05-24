@@ -20,4 +20,8 @@
     <string name="pref_video_player_category">Reproductor de vídeo</string>
     <string name="key_preferences">preferències</string>
     <string name="preferences">Preferències</string>
+    <string name="pref_summary_minimum_res_metered">Seleccioneu la resolució mínima quan feu una transmissió mitjançant una xarxa amb límit de dades: %s</string>
+    <string name="pref_title_minimum_res_metered">Resolució mínima per a xarxes amb límit de dades</string>
+    <string name="pref_category_metered_network">Xarxa amb límit de dades</string>
+    <string name="no_resolution_specified">Cap</string>
 </resources>
