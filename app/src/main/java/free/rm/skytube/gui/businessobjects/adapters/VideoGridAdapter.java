@@ -18,7 +18,6 @@
 package free.rm.skytube.gui.businessobjects.adapters;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
@@ -33,10 +32,8 @@ import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.businessobjects.YouTube.GetYouTubeVideos;
 import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
-import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.YouTube.YouTubeTasks;
 import free.rm.skytube.businessobjects.YouTube.newpipe.ContentId;
-import free.rm.skytube.businessobjects.YouTube.newpipe.VideoId;
 import free.rm.skytube.businessobjects.db.PlaybackStatusDb;
 import free.rm.skytube.businessobjects.interfaces.CardListener;
 import free.rm.skytube.businessobjects.interfaces.VideoPlayStatusUpdateListener;
@@ -273,9 +270,13 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<CardData, GridViewHo
 		return currentVideoCategory;
 	}
 
-	@Override
-	public void onVideoStatusUpdated() {
-		notifyDataSetChanged();
-	}
+    @Override
+    public void onVideoStatusUpdated(CardData video) {
+        if (video != null) {
+            notifyItemChanged(video);
+        } else {
+            notifyDataSetChanged();
+        }
+    }
 }
 

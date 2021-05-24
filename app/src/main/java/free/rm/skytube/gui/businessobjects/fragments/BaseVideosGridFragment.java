@@ -92,15 +92,14 @@ public abstract class BaseVideosGridFragment extends TabFragment implements Swip
 
 	@Override
 	public void onDestroyView() {
-		// Logger.d(this, "onDestroyView " + videoGridAdapter);
+		videoGridAdapter.onDestroy();
+		videoGridAdapter = null;
 		swipeRefreshLayout = null;
 		super.onDestroyView();
 	}
 
 	@Override
 	public void onDestroy() {
-		videoGridAdapter.onDestroy();
-		videoGridAdapter = null;
 		super.onDestroy();
 	}
 

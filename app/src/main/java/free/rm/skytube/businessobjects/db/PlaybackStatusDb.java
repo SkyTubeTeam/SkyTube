@@ -11,9 +11,9 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
-import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.Logger;
+import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.interfaces.VideoPlayStatusUpdateListener;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
@@ -51,7 +51,7 @@ public class PlaybackStatusDb extends SQLiteOpenHelperEx {
 		getWritableDatabase().delete(PlaybackStatusTable.TABLE_NAME, null, null);
 		playbackHistoryMap = null;
 		updateCounter++;
-		onUpdated();
+		onUpdated(null);
 	}
 
 	@Override
@@ -134,7 +134,7 @@ public class PlaybackStatusDb extends SQLiteOpenHelperEx {
 						Logger.i(this, "onUpdated " + success);
 
 						if (success) {
-							onUpdated();
+							onUpdated(video);
 						}
 					});
 		} else {
@@ -159,9 +159,9 @@ public class PlaybackStatusDb extends SQLiteOpenHelperEx {
 					.doOnSuccess((success) -> {
 						Logger.i(this, "onUpdated " + success);
 
-						if (success) {
-							onUpdated();
-						}
+                        if (success) {
+                            onUpdated(video);
+                        }
 					});
 		} else {
 			return Maybe.empty();
@@ -191,11 +191,11 @@ public class PlaybackStatusDb extends SQLiteOpenHelperEx {
 		return addSuccessful;
 	}
 
-	private void onUpdated() {
-		for(VideoPlayStatusUpdateListener listener : listeners) {
-			listener.onVideoStatusUpdated();
-		}
-	}
+    private void onUpdated(CardData cardData) {
+        for(VideoPlayStatusUpdateListener listener : listeners) {
+            listener.onVideoStatusUpdated(cardData);
+        }
+    }
 
 	/**
 	 * Class that contains the position and watched status of a video.
