@@ -20,4 +20,14 @@
     <string name="pref_video_player_category">Reproductor de vídeo</string>
     <string name="key_preferences">preferències</string>
     <string name="preferences">Preferències</string>
+    <string name="pref_summary_minimum_res_metered">Seleccioneu la resolució mínima quan feu una transmissió mitjançant una xarxa amb límit de dades: %s</string>
+    <string name="pref_title_minimum_res_metered">Resolució mínima per a xarxes amb límit de dades</string>
+    <string name="pref_category_metered_network">Xarxa amb límit de dades</string>
+    <string name="no_resolution_specified">Cap</string>
+    <string name="databases_backup_success">Còpia de seguretat de les bases de dades a %s</string>
+    <string name="pref_title_backup_dbs">Bases de dades de còpia de seguretat</string>
+    <string name="pref_summary_metered_network_usage">Què cal fer si useu una xarxa amb límit de dades per descarregar/veure vídeos: %s</string>
+    <string name="pref_title_metered_network_usage">Ús de xarxa amb límit de dades</string>
+    <string name="pref_summary_maximum_res_metered">Seleccioneu la resolució màxima quan feu una transmissió mitjançant una xarxa amb límit de dades: %s</string>
+    <string name="pref_title_maximum_res_metered">Resolució màxima per a xarxes amb límit de dades</string>
 </resources>
