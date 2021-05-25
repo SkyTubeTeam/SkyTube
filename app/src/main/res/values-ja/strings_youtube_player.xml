@@ -37,5 +37,5 @@
     <string name="warning_metered_network_play">あなたのデバイスは従量制課金ネットワークに接続されています。余計なデータ使用料を避けるため、定額制課金ネットワークへの接続をおすすめします。それでもビデオを再生しますか？</string>
     <string name="metered_network">従量課金制ネットワーク</string>
     <string name="error_video_parse_error">ビデオを再生できません。エラーメッセージ: <br/><br/>%s。</string>
-    <string name="error_downloaded_file_is_corrupted">ダウンロードしたファイルは<b>破損</b>しているようです。エラーメッセージ: <br/><br/>%s<br/><br/> ファイルを<b>削除</b>しますか？</string>
+    <string name="error_downloaded_file_is_corrupted">ダウンロードしたファイルは<b>破損</b>しているようです。エラーメッセージ: <br/> <br/> %s <br/> <br/> ファイルを<b>削除</b>しますか？</string>
 </resources>
