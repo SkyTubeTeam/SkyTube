@@ -94,7 +94,7 @@ android {
 
 dependencies {
     // Required for local unit tests (JUnit 5 framework)
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.2'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.1'
 
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
@@ -112,10 +112,10 @@ dependencies {
     implementation ('com.github.SkyTubeTeam.components:okhttp-client:0.0.3')
 
     // other modules
-    implementation 'org.ocpsoft.prettytime:prettytime:5.0.0.Final'
+    implementation 'org.ocpsoft.prettytime:prettytime:5.0.1.Final'
     implementation 'com.github.moraisigor:slidingdrawer:1.7.1'
-    implementation 'com.github.bumptech.glide:glide:4.11.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
 
 
     implementation 'com.google.code.gson:gson:2.8.6'
@@ -141,7 +141,7 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.2.0'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.core:core:1.3.2'
-    implementation 'androidx.media:media:1.3.0'
+    implementation 'androidx.media:media:1.3.1'
     implementation 'androidx.preference:preference:1.1.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'androidx.multidex:multidex:2.0.1' // as we have over 65536 methods...
@@ -155,7 +155,7 @@ dependencies {
 
     // proprietary module
     extraImplementation files('libs/YouTubeAndroidPlayerApi.jar')
-    extraImplementation 'com.google.android.gms:play-services-cast-framework:19.0.0'
+    extraImplementation 'com.google.android.gms:play-services-cast-framework:20.0.0'
     extraImplementation 'com.sothree.slidinguppanel:library:3.4.0'
     extraImplementation 'com.github.rahatarmanahmed:circularprogressview:2.5.0'
 }
