@@ -58,4 +58,9 @@
 		app:entryValues="@array/country_codes"
 		app:defaultValue=""/>
 
+	<CheckBoxPreference
+		app:key="@string/pref_key_use_newer_formats"
+		app:title="@string/pref_key_use_newer_formats_title"
+		app:summary="@string/pref_key_use_newer_formats_summary"/>
+
 </PreferenceScreen>

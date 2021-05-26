@@ -18,6 +18,7 @@
 package free.rm.skytube.app;
 
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Environment;
 
 import androidx.annotation.StringRes;
@@ -52,7 +53,6 @@ public class Settings {
         this.app = app;
     }
 
-
     void migrate() {
         SharedPreferences sharedPreferences = getSharedPreferences();
         migrate(sharedPreferences, "pref_preferred_resolution", R.string.pref_key_maximum_res);
@@ -61,6 +61,7 @@ public class Settings {
         setDefault(sharedPreferences, R.string.pref_key_video_quality, VideoQuality.BEST_QUALITY.name());
         setDefault(sharedPreferences, R.string.pref_key_video_quality_for_downloads, VideoQuality.BEST_QUALITY.name());
         setDefault(sharedPreferences, R.string.pref_key_video_quality_on_mobile, VideoQuality.LEAST_BANDWITH.name());
+        setDefault(sharedPreferences, R.string.pref_key_use_newer_formats, Build.VERSION.SDK_INT > 16);
     }
 
     private void migrate(SharedPreferences sharedPreferences, String oldKey, @StringRes int newKey) {
@@ -75,12 +76,18 @@ public class Settings {
         }
     }
 
-    private void setDefault(SharedPreferences sharedPreferences, @StringRes int key, String defaultValue) {
+    private void setDefault(SharedPreferences sharedPreferences, @StringRes int key, Object defaultValue) {
         String keyStr = app.getString(key);
-        String value = sharedPreferences.getString(keyStr, null);
-        if (value == null) {
+        if (!sharedPreferences.contains(keyStr)) {
             final SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putString(keyStr, defaultValue);
+            Logger.i(this, "Set default %s to %s", keyStr, defaultValue);
+            if (defaultValue instanceof String) {
+                editor.putString(keyStr, (String) defaultValue);
+            } else if (defaultValue instanceof Boolean) {
+                editor.putBoolean(keyStr, (Boolean) defaultValue);
+            } else {
+                throw new IllegalArgumentException("Default value is " + defaultValue + " for " + keyStr);
+            }
             editor.commit();
         }
     }
@@ -147,7 +154,9 @@ public class Settings {
         VideoResolution minResolution = VideoResolution.videoResIdToVideoResolution(minResIdValue);
         VideoQuality quality = VideoQuality.valueOf(qualityValue);
 
-        return new StreamSelectionPolicy(!forDownload, maxResolution, minResolution, quality);
+        boolean useNewFormats = prefs.getBoolean(SkyTubeApp.getStr(R.string.pref_key_use_newer_formats), false);
+
+        return new StreamSelectionPolicy(!forDownload && useNewFormats, maxResolution, minResolution, quality);
     }
 
     public StreamSelectionPolicy getDesiredVideoResolution(boolean forDownload) {
