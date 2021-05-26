@@ -36,6 +36,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
+import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubePlaylist;
 import free.rm.skytube.businessobjects.interfaces.YouTubePlayerActivityListener;
 import free.rm.skytube.businessobjects.interfaces.YouTubePlayerFragmentInterface;
@@ -111,7 +112,8 @@ public class YouTubePlayerActivity extends BaseActivity implements YouTubePlayer
 	 */
 	private boolean useDefaultPlayer() {
 		if (Build.VERSION.SDK_INT < 16) {
-			return false;
+			Logger.i(this, "Android version is old, ExoPlayer probably wont work: "+ Build.VERSION.SDK_INT);
+			//return false;
 		}
 		final String defaultPlayerValue = getString(R.string.pref_default_player_value);
 		final String str = SkyTubeApp.getPreferenceManager().getString(getString(R.string.pref_key_choose_player), defaultPlayerValue);

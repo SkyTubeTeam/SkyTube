@@ -208,7 +208,7 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 					youTubeVideo != null ? youTubeVideo.getVideoUrl() : "null",
 					what,
 					extra);
-			Log.e(TAG, msg);
+			Logger.e(TAG, msg);
 			return false;
 		});
 

@@ -572,6 +572,10 @@
     <string name="pref_key_video_quality_metered_summary">Optimize for: %s</string>
     <string name="pref_key_video_quality_for_downloads_title">Video Quality Selection for Downloads</string>
     <string name="pref_key_video_quality_for_downloads_summary">Optimize for: %s</string>
+
+    <string name="pref_key_use_newer_formats" translatable="false">pref_key_use_newer_formats</string>
+    <string name="pref_key_use_newer_formats_title">Try newer Video formats</string>
+    <string name="pref_key_use_newer_formats_summary">Old Android versions do not support every video format, what Youtube provides. Switch off, if you frequently encounters not working video playback, or no sound</string>
     <!--
         VIDEO BLOCKER
     -->
