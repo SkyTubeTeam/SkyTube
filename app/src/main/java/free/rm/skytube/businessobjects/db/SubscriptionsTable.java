@@ -57,7 +57,7 @@ public class SubscriptionsTable {
 				COL_THUMBNAIL_NORMAL_URL+ " TEXT, " +
 				COL_BANNER_URL      	+ " TEXT, " +
 				COL_SUBSCRIBER_COUNT	+ " INTEGER, " +
-				COL_CATEGORY_ID.format() +
+				COL_CATEGORY_ID.format() + ", " +
 				COL_LAST_VISIT_TIME 	+ " TIMESTAMP DEFAULT (strftime('%s', 'now')), " +
 				COL_LAST_CHECK_TIME 	+ " INTEGER " +
 		" )";
