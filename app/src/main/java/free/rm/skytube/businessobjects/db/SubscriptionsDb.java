@@ -99,9 +99,8 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(SubscriptionsTable.getCreateStatement());
-        db.execSQL(SubscriptionsVideosTable.getCreateStatement());
+        SubscriptionsVideosTable.addNewFlatTable(db);
         db.execSQL(LocalChannelTable.getCreateStatement());
-        db.execSQL(SubscriptionsVideosTable.getIndexOnVideos());
         db.execSQL(CategoriesTable.getCreateStatement());
         new CategoryManagement(db).setupDefaultCategories();
     }

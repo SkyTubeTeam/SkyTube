@@ -73,16 +73,16 @@ public class SubscriptionsVideosTable {
         return "CREATE TABLE " + TABLE_NAME + " (" +
                         COL_YOUTUBE_VIDEO_ID + " TEXT PRIMARY KEY NOT NULL, " +
                         COL_CHANNEL_ID + " TEXT NOT NULL, " +
-                        COL_TITLE.format() +
-                        COL_DESCRIPTION.format() +
-                        COL_LIKES.format() +
-                        COL_DISLIKES.format() +
-                        COL_VIEWS.format() +
-                        COL_DURATION.format() +
-                        COL_THUMBNAIL_URL.format() +
+                        COL_TITLE.format() + ',' +
+                        COL_DESCRIPTION.format() + ',' +
+                        COL_LIKES.format() + ',' +
+                        COL_DISLIKES.format() + ',' +
+                        COL_VIEWS.format() + ',' +
+                        COL_DURATION.format() + ',' +
+                        COL_THUMBNAIL_URL.format() + ',' +
                         COL_YOUTUBE_VIDEO + " BLOB, " +
                         COL_YOUTUBE_VIDEO_DATE + " TIMESTAMP DEFAULT (strftime('%s', 'now')), " +
-                        COL_CATEGORY_ID.format() +
+                        COL_CATEGORY_ID.format() + ',' +
                         COL_RETRIEVAL_TS + " INTEGER, " +
                         COL_PUBLISH_TS + " INTEGER " +
                         " )";
