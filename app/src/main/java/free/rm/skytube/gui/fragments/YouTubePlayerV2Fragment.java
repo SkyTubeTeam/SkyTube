@@ -290,7 +290,9 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 
 					saveVideoPosition();
 
-					playbackStateListener.ended();
+                    if (playbackStateListener != null) { 
+                        playbackStateListener.ended();
+                    }
 
 					boolean askForDelete = askForDelete(error);
 					String errorMessage = error.getCause().getMessage();
