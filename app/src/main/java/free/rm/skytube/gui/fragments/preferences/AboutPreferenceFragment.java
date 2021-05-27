@@ -53,7 +53,7 @@ public class AboutPreferenceFragment extends PreferenceFragmentCompat {
 
 		// check for updates option
 		Preference updatesPref = findPreference(getString(R.string.pref_key_updates));
-		if (BuildConfig.FLAVOR.equalsIgnoreCase("oss")) {
+		if (BuildConfig.FLAVOR.equalsIgnoreCase("oss") || BuildConfig.BUILD_TYPE.equalsIgnoreCase("snapshot")) {
 			// remove the updates option if the user is running the OSS flavor...
 			getPreferenceScreen().removePreference(updatesPref);
 		} else {
@@ -96,6 +96,10 @@ public class AboutPreferenceFragment extends PreferenceFragmentCompat {
 
 		if (BuildConfig.FLAVOR.equalsIgnoreCase("extra")) {
 			ver.append(" Extra");
+		}
+
+		if (BuildConfig.BUILD_TYPE.equalsIgnoreCase("snapshot")) {
+			ver.append(" Snapshot");
 		}
 
 		if (BuildConfig.DEBUG) {

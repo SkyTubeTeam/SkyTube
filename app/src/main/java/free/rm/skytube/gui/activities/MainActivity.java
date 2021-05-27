@@ -48,6 +48,7 @@ import com.mikepenz.actionitembadge.library.utils.BadgeStyle;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import free.rm.skytube.BuildConfig;
 import free.rm.skytube.R;
 import free.rm.skytube.app.EventBus;
 import free.rm.skytube.app.SkyTubeApp;
@@ -101,6 +102,7 @@ public class MainActivity extends BaseActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		Logger.i(this, "AppID: %s - flavor: %s buildType: %s version: %s (%s)", BuildConfig.APPLICATION_ID, BuildConfig.FLAVOR, BuildConfig.BUILD_TYPE, BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE);
 
 		// To enable downloading with https on pre-kitkat devices.
 		if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.KITKAT) {
