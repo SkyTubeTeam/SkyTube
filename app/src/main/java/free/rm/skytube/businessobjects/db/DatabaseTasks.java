@@ -4,6 +4,7 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -148,6 +149,19 @@ public class DatabaseTasks {
                     menu.findItem(R.id.bookmark_video).setVisible(!videoIsBookmarked);
                     menu.findItem(R.id.unbookmark_video).setVisible(videoIsBookmarked);
                 });
+    }
+
+    public static void updateDownloadedVideoMenu(@NonNull YouTubeVideo video, @NonNull Menu menu) {
+        final MenuItem downloadVideo = menu.findItem(R.id.download_video);
+        downloadVideo.setVisible(false);
+        if (video != null) {
+            DownloadedVideosDb.getVideoDownloadsDb().isVideoDownloaded(video.getVideoId()).subscribe(isDownloaded -> {
+                SkyTubeApp.uiThread();
+                if (!isDownloaded) {
+                    downloadVideo.setVisible(true);
+                }
+            });
+        }
     }
 
     /**

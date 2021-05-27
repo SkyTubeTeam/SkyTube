@@ -547,17 +547,8 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 	}
 
 	@Override
-	public void onPrepareOptionsMenu(Menu menu) {
-		final MenuItem downloadVideo = menu.findItem(R.id.download_video);
-		downloadVideo.setVisible(false);
-		if (youTubeVideo != null) {
-			DownloadedVideosDb.getVideoDownloadsDb().isVideoDownloaded(youTubeVideo).subscribe(isDownloaded -> {
-				SkyTubeApp.uiThread();
-				if (!isDownloaded) {
-					downloadVideo.setVisible(true);
-				}
-			});
-		}
+	public void onPrepareOptionsMenu(@NonNull Menu menu) {
+		DatabaseTasks.updateDownloadedVideoMenu(youTubeVideo, menu);
 	}
 
 	@Override
