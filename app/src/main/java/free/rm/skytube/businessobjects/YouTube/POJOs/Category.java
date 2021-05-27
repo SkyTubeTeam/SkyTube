@@ -17,15 +17,17 @@
 
 package free.rm.skytube.businessobjects.YouTube.POJOs;
 
+import com.mikepenz.iconics.typeface.library.materialdesigniconic.MaterialDesignIconic;
+
 public class Category {
     private final Long id;
     private final boolean enabled;
     private final boolean builtin;
     private final String label;
-    private final String icon;
+    private final MaterialDesignIconic.Icon icon;
     private final int priority;
 
-    public Category(Long id, boolean enabled, boolean builtin, String label, String icon, int priority) {
+    public Category(Long id, boolean enabled, boolean builtin, String label, MaterialDesignIconic.Icon icon, int priority) {
         this.id = id;
         this.enabled = enabled;
         this.builtin = builtin;
@@ -50,7 +52,7 @@ public class Category {
         return label;
     }
 
-    public String getIcon() {
+    public MaterialDesignIconic.Icon getIcon() {
         return icon;
     }
 
