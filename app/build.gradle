@@ -35,8 +35,14 @@ android {
             buildConfigField "String", "CHROMECAST_APP_ID", "\"39E8D587\""
         }
         debug {
-//            buildConfigField "String", "CHROMECAST_APP_ID", "\"39E8D587\"" // prod
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField "String", "CHROMECAST_APP_ID", "\"29A66E17\"" // dev
+        }
+        snapshot {
+            initWith debug
+            applicationIdSuffix ".snapshot"
+            resValue "string", "app_name", "SkyTube Snapshot"
         }
     }
     flavorDimensions "skytube"
@@ -45,6 +51,7 @@ android {
         oss {
             applicationIdSuffix ".oss"
             resValue "string", "app_name", "SkyTube"
+            resValue "string", "app_flavor", "OSS"
             dimension "skytube"
             buildConfigField 'String[]', 'YOUTUBE_API_KEYS',
                     '{' + // new keys
@@ -61,6 +68,7 @@ android {
         extra {
             applicationIdSuffix ".extra"
             resValue "string", "app_name", "SkyTube Extra"
+            resValue "string", "app_flavor", "Extra"
             dimension "skytube"
         }
     }

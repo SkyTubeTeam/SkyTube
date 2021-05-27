@@ -57,10 +57,15 @@ public class UpdatesChecker {
 	public void checkForUpdates() {
 		updatesAvailable = false;
 		boolean oss = BuildConfig.FLAVOR.equalsIgnoreCase("oss");
+		boolean snapshot = BuildConfig.BUILD_TYPE.equalsIgnoreCase("snapshot");
 
-		if (oss && !fetchReleaseNotes) {
-			// OSS version update checker is the responsibility of FDROID
-			Log.d(TAG, "OSS version - will not be checking for updates.");
+		if ((oss || snapshot) && !fetchReleaseNotes) {
+			if (oss) {
+				// OSS version update checker is the responsibility of FDROID
+				Log.d(TAG, "OSS version - will not be checking for updates.");
+			} else if (snapshot) {
+				Log.d(TAG, "Snapshot version - build by Github - will not be checking for updates.");
+			}
 		} else {
 			try (WebStream webStream = new WebStream(BuildConfig.SKYTUBE_UPDATES_URL)) {
 				String updatesJSONStr = webStream.downloadRemoteTextFile();
