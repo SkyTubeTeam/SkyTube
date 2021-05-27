@@ -137,6 +137,9 @@ dependencies {
         exclude group: 'com.google.guava', module: 'guava'
         exclude group: 'com.intellij', module: 'annotations'
     }
+
+    // We need kotlin stdlib
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.31'
     implementation 'com.mikepenz:actionitembadge:4.0.0@aar'
     implementation 'com.mikepenz:iconics-core:4.0.2@aar'
     implementation 'com.mikepenz:material-design-iconic-typeface:2.2.0.6-kotlin@aar'

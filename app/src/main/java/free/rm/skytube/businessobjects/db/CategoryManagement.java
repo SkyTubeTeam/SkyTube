@@ -26,6 +26,8 @@ import androidx.annotation.StringRes;
 
 import com.mikepenz.iconics.typeface.library.materialdesigniconic.MaterialDesignIconic;
 
+import org.apache.commons.codec.binary.StringUtils;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -41,8 +43,8 @@ public class CategoryManagement {
     private static class KeyLabel {
         @StringRes int key;
         @StringRes int label;
-        String icon;
-        KeyLabel(@StringRes int key, @StringRes int label, String icon) {
+        MaterialDesignIconic.Icon icon;
+        KeyLabel(@StringRes int key, @StringRes int label, MaterialDesignIconic.Icon icon) {
             this.key = key;
             this.label = label;
             this.icon = icon;
@@ -50,12 +52,12 @@ public class CategoryManagement {
     }
 
     private final static List<KeyLabel> CATEGORIES = Arrays.asList (
-            new KeyLabel(R.string.category_games, R.string.category_games_label, MaterialDesignIconic.Icon.gmi_bike.name()),
-            new KeyLabel(R.string.category_music, R.string.category_music_label, MaterialDesignIconic.Icon.gmi_audio.name()),
-            new KeyLabel(R.string.category_news, R.string.category_news_label, MaterialDesignIconic.Icon.gmi_compass.name()),
-            new KeyLabel(R.string.category_tutorials, R.string.category_tutorials_label, MaterialDesignIconic.Icon.gmi_collection_bookmark.name()),
-            new KeyLabel(R.string.category_youtuber, R.string.category_youtuber_label, MaterialDesignIconic.Icon.gmi_youtube_play.name()),
-            new KeyLabel(R.string.category_for_kids, R.string.category_for_kids_label, MaterialDesignIconic.Icon.gmi_cake.name())
+            new KeyLabel(R.string.category_games, R.string.category_games_label, MaterialDesignIconic.Icon.gmi_bike),
+            new KeyLabel(R.string.category_music, R.string.category_music_label, MaterialDesignIconic.Icon.gmi_audio),
+            new KeyLabel(R.string.category_news, R.string.category_news_label, MaterialDesignIconic.Icon.gmi_compass),
+            new KeyLabel(R.string.category_tutorials, R.string.category_tutorials_label, MaterialDesignIconic.Icon.gmi_collection_bookmark),
+            new KeyLabel(R.string.category_youtuber, R.string.category_youtuber_label, MaterialDesignIconic.Icon.gmi_youtube_play),
+            new KeyLabel(R.string.category_for_kids, R.string.category_for_kids_label, MaterialDesignIconic.Icon.gmi_cake)
     );
 
     CategoryManagement(SQLiteDatabase db) {
@@ -89,19 +91,24 @@ public class CategoryManagement {
                 if (builtin) {
                     label = translate(label);
                 }
+                String icon = query.getString(colIcon);
+                MaterialDesignIconic.Icon materialIcon = null;
+                if (icon != null && !icon.trim().isEmpty()) {
+                    materialIcon = MaterialDesignIconic.Icon.valueOf(icon);
+                }
                 result.add(new Category(
                         query.getLong(colId),
                         query.getInt(colEnabled) != 0,
                         builtin,
                         label,
-                        query.getString(colIcon),
+                        materialIcon,
                         query.getInt(colPriority)));
             }
             return result;
         }
     }
 
-    Category addNew(String name, String icon, boolean builtin) {
+    Category addNew(String name, MaterialDesignIconic.Icon icon, boolean builtin) {
         int count = SQLiteOpenHelperEx.executeQueryForInteger(db, CategoriesTable.COUNT_BY_LABEL_QUERY,  new String[] { name }, 0);
         if (count > 0) {
             return null;
@@ -113,7 +120,7 @@ public class CategoryManagement {
         values.put(CategoriesTable.COL_PRIORITY, priority);
         values.put(CategoriesTable.COL_BUILTIN, builtin ? 1 : 0);
         values.put(CategoriesTable.COL_LABEL, name);
-        values.put(CategoriesTable.COL_ICON, icon);
+        values.put(CategoriesTable.COL_ICON, icon.name());
         long id = db.insert(
                 CategoriesTable.TABLE_NAME,
                 null,
