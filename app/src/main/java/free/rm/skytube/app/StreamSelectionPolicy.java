@@ -31,6 +31,8 @@ import java.util.Collection;
 import java.util.List;
 
 import free.rm.skytube.R;
+import free.rm.skytube.BuildConfig;
+import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.VideoStream.VideoQuality;
 import free.rm.skytube.businessobjects.YouTube.VideoStream.VideoResolution;
 
@@ -96,13 +98,27 @@ public class StreamSelectionPolicy {
     }
 
     private AudioStream pickAudio(StreamInfo streamInfo) {
+        if (BuildConfig.DEBUG) {
+            for (AudioStream vs : streamInfo.getAudioStreams()) {
+                Logger.d(this, "AudioStream %s", toHumanReadable(vs));
+            }
+        }
         AudioStream best = null;
         for (AudioStream audioStream : streamInfo.getAudioStreams()) {
             if (isBetter(best, audioStream)) {
+                if (BuildConfig.DEBUG) {
+                    Logger.d(this, "better %s -> %s", toHumanReadable(best), toHumanReadable(audioStream));
+                }
                 best = audioStream;
             }
         }
+        if (BuildConfig.DEBUG) {
+            Logger.d(this, "best %s", toHumanReadable(best));
+        }
         return best;
+    }
+    private static String toHumanReadable(AudioStream as) {
+        return as != null ? "AudioStream("+as.getAverageBitrate()+", "+as.getFormat()+", codec="+as.getCodec()+", q="+as.getQuality()+")": "NULL";
     }
 
     private boolean isBetter(AudioStream best, AudioStream other) {
@@ -134,6 +150,11 @@ public class StreamSelectionPolicy {
             streams = new ArrayList<>(streams);
             streams.addAll(streamInfo.getVideoOnlyStreams());
         }
+        if (BuildConfig.DEBUG) {
+            for (VideoStream vs : streams) {
+                Logger.d(this, "found %s", VideoStreamWithResolution.toHumanReadable(vs));
+            }
+        }
         return pick(streams);
     }
 
@@ -145,16 +166,25 @@ public class StreamSelectionPolicy {
                 switch (videoQuality) {
                     case BEST_QUALITY:
                         if (videoStream.isBetterQualityThan(best)) {
+                            if (BuildConfig.DEBUG) {
+                                Logger.d(this, "better quality %s -> %s", VideoStreamWithResolution.toHumanReadable(best), VideoStreamWithResolution.toHumanReadable(videoStream));
+                            }
                             best = videoStream;
                         }
                         break;
                     case LEAST_BANDWITH:
                         if (videoStream.isLessNetworkUsageThan(best)) {
+                            if (BuildConfig.DEBUG) {
+                                Logger.d(this, "less network %s -> %s", VideoStreamWithResolution.toHumanReadable(best), VideoStreamWithResolution.toHumanReadable(videoStream));
+                            }
                             best = videoStream;
                         }
                         break;
                 }
             }
+        }
+        if (BuildConfig.DEBUG) {
+            Logger.d(this, "best -> %s", VideoStreamWithResolution.toHumanReadable(best));
         }
         return best;
     }
@@ -190,6 +220,18 @@ public class StreamSelectionPolicy {
 
         boolean isLessNetworkUsageThan(VideoStreamWithResolution other) {
             return other == null || resolution.isLessNetworkUsageThan(other.resolution) || (resolution == other.resolution && isSecondBetterFormat(other.videoStream, videoStream));
+        }
+
+        private String toHumanReadable() {
+            return "VideoStream(" + resolution.name() + ", format=" + videoStream.getFormat() + ", codec=" + videoStream.getCodec() + ", quality=" + videoStream.getQuality() + ",videoOnly=" + videoStream.isVideoOnly() + ")";
+        }
+
+        private static String toHumanReadable(VideoStreamWithResolution v) {
+            return v != null ? v.toHumanReadable() : "NULL";
+        }
+
+        private static String toHumanReadable(VideoStream v) {
+            return v != null ? new VideoStreamWithResolution(v).toHumanReadable() : "NULL";
         }
     }
 

@@ -108,6 +108,7 @@ public class DatasourceBuilder {
 
     private void preparePlayer(List<MediaSource> sources) {
         Objects.requireNonNull(sources, "sources");
+        Logger.i(this, "Prepare player with sources: %s - raw: %s", sources.size(), sources);
         if (sources.isEmpty()) {
             return;
         }
