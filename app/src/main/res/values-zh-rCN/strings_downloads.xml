@@ -10,7 +10,7 @@
     <string name="video_download_stream_error">无法下载 “%s”。</string>
     <string name="starting_video_download">正在下载 “%s” ……</string>
     <string name="unable_to_delete_file">无法删除已下载文件：“%s”</string>
-    <string name="video_stream_not_found_with_request_resolution">未找到分辨率在%s和%s之间的视频流</string>
+    <string name="video_stream_not_found_with_request_resolution">未找到分辨率在%1$s和%2$s之间的视频流</string>
     <string name="download_video">下载视频</string>
     <string name="warning_metered_network_download">您的设备连接到计费网络。为了避免潜在的额外数据使用费用，建议您连接非计费网络。是否仍要下载？</string>
     <string name="downloads">下载</string>
