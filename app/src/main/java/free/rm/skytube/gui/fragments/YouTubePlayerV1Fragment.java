@@ -62,9 +62,7 @@ import free.rm.skytube.gui.businessobjects.SkyTubeMaterialDialog;
 import free.rm.skytube.gui.businessobjects.adapters.CommentsAdapter;
 import free.rm.skytube.gui.businessobjects.fragments.ImmersiveModeFragment;
 import free.rm.skytube.gui.businessobjects.views.Linker;
-import free.rm.skytube.gui.businessobjects.views.SubscribeButton;
 import free.rm.skytube.businessobjects.interfaces.PlaybackStateListener;
-import hollowsoft.slidingdrawer.SlidingDrawer;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 
 import static free.rm.skytube.gui.activities.YouTubePlayerActivity.YOUTUBE_VIDEO_OBJ;
@@ -404,7 +402,7 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 		});
 
 		fragmentBinding.commentsDrawer.setOnDrawerOpenListener(() -> {
-			if (commentsAdapter == null) {
+			if (commentsAdapter == null && youTubeVideo != null) {
 				commentsAdapter = new CommentsAdapter(getActivity(), youTubeVideo.getId(),
 						fragmentBinding.commentsExpandableListView, fragmentBinding.commentsProgressBar,
 						fragmentBinding.noVideoCommentsTextView);
@@ -642,13 +640,7 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 
 	@Override
 	public void onPrepareOptionsMenu(@NonNull Menu menu) {
-		menu.findItem(R.id.download_video).setVisible(false);
-		compositeDisposable.add(DownloadedVideosDb.getVideoDownloadsDb().isVideoDownloaded(youTubeVideo)
-				.subscribe(isDownloaded -> {
-					if (!isDownloaded) {
-						menu.findItem(R.id.download_video).setVisible(true);
-					}
-				}));
+		DatabaseTasks.updateDownloadedVideoMenu(youTubeVideo, menu);
 	}
 
 	@Override
