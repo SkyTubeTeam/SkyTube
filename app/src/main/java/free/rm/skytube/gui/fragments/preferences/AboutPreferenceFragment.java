@@ -19,6 +19,7 @@ package free.rm.skytube.gui.fragments.preferences;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -131,14 +132,15 @@ public class AboutPreferenceFragment extends PreferenceFragmentCompat {
 	 * Displays the credits (i.e. contributors).
 	 */
 	private void displayCredits() {
-		final WebView webView = new WebView(getActivity());
+		Context context = getContext();
+		final WebView webView = new WebView(context);
 		webView.setWebChromeClient(new WebChromeClient() {
 			ProgressDialog progressDialog;
 
 			@Override
 			public void onProgressChanged(WebView view, int progress) {
 				if (progressDialog == null) {
-					progressDialog = new ProgressDialog(getActivity());
+					progressDialog = new ProgressDialog(context);
 					progressDialog.show();
 					progressDialog.setMessage(getString(R.string.loading));
 				}
