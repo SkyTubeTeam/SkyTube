@@ -92,6 +92,9 @@ android {
 
         coreLibraryDesugaringEnabled true
     }
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
     packagingOptions {
         exclude "META-INF/*"
     }
