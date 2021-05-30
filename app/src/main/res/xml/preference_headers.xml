@@ -54,6 +54,12 @@
         app:title="@string/pref_other_category" />
 
     <Preference
+        app:fragment="free.rm.skytube.gui.fragments.preferences.ThemePreferenceFragment"
+        app:icon="@drawable/ic_baseline_nights_stay_24"
+        app:key="pref_theme"
+        app:title="@string/pref_night_theme" />
+
+    <Preference
         app:fragment="free.rm.skytube.gui.fragments.preferences.AboutPreferenceFragment"
         app:icon="@drawable/ic_pref_about"
         app:key="pref_about"

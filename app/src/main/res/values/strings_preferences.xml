@@ -80,6 +80,7 @@
     <string name="pref_summary_autocast">Select a Chromecast device to use when using other apps to open videos in SkyTube.</string>
     <string name="pref_network_downloads_category">Network and Downloads</string>
     <string name="pref_about_category">About</string>
+    <string name="pref_night_theme">Night Theme</string>
     <string name="pref_title_website">Website</string>
     <string name="pref_key_website" translatable="false">pref_website</string>
     <string name="pref_title_credits">Credits</string>

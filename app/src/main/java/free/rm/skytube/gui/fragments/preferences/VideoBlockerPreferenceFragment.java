@@ -255,7 +255,7 @@ public class VideoBlockerPreferenceFragment extends PreferenceFragmentCompat {
 			List<MultiSelectListPreferenceItem> languageAvailableList = new ArrayList<>();
 
 			if (BuildConfig.DEBUG  &&  (languagesNames.length != languagesIsoCodes.length)) {
-				throw new AssertionError("languages names array is NOT EQUAL to languages ISO codes array.");
+				throw new AssertionError("languages names array.xml is NOT EQUAL to languages ISO codes array.xml.");
 			}
 
 			for (int i = 0;  i < languagesNames.length;  i++) {
