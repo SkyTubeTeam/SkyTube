@@ -109,7 +109,7 @@ dependencies {
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
 
 /** Kotlin **/
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.31'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
 
 /** AndroidX **/
     implementation 'androidx.appcompat:appcompat:1.2.0'
