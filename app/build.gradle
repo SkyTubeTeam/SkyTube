@@ -8,20 +8,21 @@ android {
     defaultConfig {
         applicationId "free.rm.skytube"
         minSdkVersion 14
+        //noinspection ExpiredTargetSdkVersion
         targetSdkVersion 28
 
         versionName "2.978"    // digits of the *fractional part* shall NOT be > than "9"
         versionCode 38
         // Third party devs:  pls be ethical and change the below keys
         //buildConfigField 'String',   'YOUTUBE_API_KEYS_DEBUG', '"AIzaSyDU-ZZCyOB_kYkiMSZ6ooSipUZRukHU4ik"'
-        buildConfigField 'String',   'YOUTUBE_API_KEYS_DEBUG', '"hidden:A0C0B03EED58193F4CD52DF668495D523A5229C6B66B0ED6282AE09BD8FF08CD5AF9A6B52C214F"'
+        buildConfigField 'String', 'YOUTUBE_API_KEYS_DEBUG', '"hidden:A0C0B03EED58193F4CD52DF668495D523A5229C6B66B0ED6282AE09BD8FF08CD5AF9A6B52C214F"'
         buildConfigField 'String[]', 'YOUTUBE_API_KEYS',
                 '{' +
                         '"hidden:A0C0B03EED581E1E18E900CF3E365C70253320C5D8040BF53818F2EAF4D62AEC6FA7E68F5F2175",' +
                         '"hidden:A0C0B03EED581E277FCC2BD47E75526C06401FB4F66E3EDB2A2BE2B7F9C606896DDEF9875F3804",' +
                         '"hidden:A0C0B03EED58183878F501C639336957395D24B2CC7C2FD43919CB92F682408C4CBEC1C2280F4B"' +
-                '}'
-        buildConfigField 'String', 'SKYTUBE_WEBSITE',         '"https://skytube-app.com"'
+                        '}'
+        buildConfigField 'String', 'SKYTUBE_WEBSITE', '"https://skytube-app.com"'
         buildConfigField 'String', 'SKYTUBE_WEBSITE_CREDITS', '"https://skytube-app.com/credits.html"'
         buildConfigField 'String', 'SKYTUBE_UPDATES_URL', '"https://api.github.com/repos/SkyTubeTeam/SkyTube/releases/latest"'
         buildConfigField 'long', 'BUILD_TIME', String.valueOf(System.currentTimeMillis()) + 'L'
@@ -55,14 +56,14 @@ android {
             dimension "skytube"
             buildConfigField 'String[]', 'YOUTUBE_API_KEYS',
                     '{' + // new keys
-                        '"hidden:A0C0B03EED581E1E18E900CF3E365C70253320C5D8040BF53818F2EAF4D62AEC6FA7E68F5F2175",' +
-                        '"hidden:A0C0B03EED581E277FCC2BD47E75526C06401FB4F66E3EDB2A2BE2B7F9C606896DDEF9875F3804",' +
-                        '"hidden:A0C0B03EED58183878F501C639336957395D24B2CC7C2FD43919CB92F682408C4CBEC1C2280F4B",' +
-                        // old keys, but this can be used with FDroid
-                        '"AIzaSyC27jgPDHkQsQK8TW4ngrQprSCnlMTJ04w",' +
-                        '"AIzaSyCmXsaE6ZW14-1vM5zceWnGWnB73FkY7U4",' +
-                        '"AIzaSyBd3Loyy_XN2tPHPfc1E7EkSkdCqfzTHxg"'  +
-                    '}'
+                            '"hidden:A0C0B03EED581E1E18E900CF3E365C70253320C5D8040BF53818F2EAF4D62AEC6FA7E68F5F2175",' +
+                            '"hidden:A0C0B03EED581E277FCC2BD47E75526C06401FB4F66E3EDB2A2BE2B7F9C606896DDEF9875F3804",' +
+                            '"hidden:A0C0B03EED58183878F501C639336957395D24B2CC7C2FD43919CB92F682408C4CBEC1C2280F4B",' +
+                            // old keys, but this can be used with FDroid
+                            '"AIzaSyC27jgPDHkQsQK8TW4ngrQprSCnlMTJ04w",' +
+                            '"AIzaSyCmXsaE6ZW14-1vM5zceWnGWnB73FkY7U4",' +
+                            '"AIzaSyBd3Loyy_XN2tPHPfc1E7EkSkdCqfzTHxg"' +
+                            '}'
         }
         // 99% Open-source edition:  uses the YouTube Player Jar [i.e. proprietary module - optional usage]
         extra {
@@ -104,72 +105,103 @@ android {
 }
 
 dependencies {
-    // Required for local unit tests (JUnit 5 framework)
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.2'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.1'
-
+/** Desugaring **/
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
+
+/** Kotlin **/
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.31'
+
+/** AndroidX **/
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'androidx.core:core:1.3.2'
+    implementation 'androidx.media:media:1.3.1'
+    implementation 'androidx.multidex:multidex:2.0.1' // as we have over 65536 methods...
+    implementation 'androidx.preference:preference:1.1.1'
+    implementation 'androidx.recyclerview:recyclerview:1.2.0'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+    implementation 'com.google.android.material:material:1.3.0'
+
+/** ExoPlayer **/
+    // Application level media player
+    def exoplayerVersion = '2.9.6'
+    implementation "com.google.android.exoplayer:exoplayer-core:$exoplayerVersion"
+    implementation "com.google.android.exoplayer:exoplayer-ui:$exoplayerVersion"
+
+/** Third-party **/
+
+/**** Frontend (UI-related) ****/
+
+    // Old SlidingDrawer widget component but improved
+    implementation 'com.github.moraisigor:slidingdrawer:1.7.1'
+
+    // Image loading and caching library
+    def glideVersion = '4.12.0'
+    implementation "com.github.bumptech.glide:glide:$glideVersion"
+    annotationProcessor "com.github.bumptech.glide:compiler:$glideVersion"
+
+    // Custom dialogs
+    implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
+
+    // File / folder chooser
+    implementation 'com.github.hedzr:android-file-chooser:v1.2.0-final'
+
+    // Add a badge to an action item
+    implementation 'com.mikepenz:actionitembadge:4.0.0@aar'
+    // Use any icon font or vector as drawable
+    implementation 'com.mikepenz:iconics-core:4.0.2@aar'
+    // Material Design Iconic Font
+    implementation 'com.mikepenz:material-design-iconic-typeface:2.2.0.6-kotlin@aar'
+
+
+/**** Backend logic ****/
+
+    // Social style date / time formatting for Java
+    implementation 'org.ocpsoft.prettytime:prettytime:5.0.1.Final'
+
+    // Convert Java objects into JSON and back
+    implementation 'com.google.code.gson:gson:2.8.6'
 
     // YouTube modules
     implementation 'com.github.SkyTubeTeam.google-http-java-client:google-http-client-android:1.39.0.1'
-
-    implementation ('com.google.apis:google-api-services-youtube:v3-rev20200423-1.30.9') {
-        exclude group: 'com.google.http-client', module:'google-http-client'
-        exclude group: 'com.google.http-client', module:'google-http-client-jackson2'
+    implementation('com.google.apis:google-api-services-youtube:v3-rev20200423-1.30.9') {
+        exclude group: 'com.google.http-client', module: 'google-http-client'
+        exclude group: 'com.google.http-client', module: 'google-http-client-jackson2'
     }
-
     implementation 'com.github.SkyTubeTeam.NewPipeExtractor:extractor:d761053c45465c3ee3f'
+    implementation('com.github.SkyTubeTeam.components:okhttp-client:0.0.3')
 
-    implementation ('com.github.SkyTubeTeam.components:okhttp-client:0.0.3')
-
-    // other modules
-    implementation 'org.ocpsoft.prettytime:prettytime:5.0.1.Final'
-    implementation 'com.github.moraisigor:slidingdrawer:1.7.1'
-    implementation 'com.github.bumptech.glide:glide:4.12.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
-
-
-    implementation 'com.google.code.gson:gson:2.8.6'
-    implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
-
-    implementation 'com.google.android.exoplayer:exoplayer-core:2.9.6'
-    implementation 'com.google.android.exoplayer:exoplayer-ui:2.9.6'
-
+    // Java HTML parser
     implementation 'org.jsoup:jsoup:1.13.1'
-    implementation ('com.optimaize.languagedetector:language-detector:0.6') {
+
+    // Language Detection Library for Java
+    implementation('com.optimaize.languagedetector:language-detector:0.6') {
         exclude group: 'com.google.guava', module: 'guava'
         exclude group: 'com.intellij', module: 'annotations'
     }
 
-    // We need kotlin stdlib
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.31'
-    implementation 'com.mikepenz:actionitembadge:4.0.0@aar'
-    implementation 'com.mikepenz:iconics-core:4.0.2@aar'
-    implementation 'com.mikepenz:material-design-iconic-typeface:2.2.0.6-kotlin@aar'
-
-    implementation 'com.github.hedzr:android-file-chooser:v1.2.0-final'
-
-    // Android support modules
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'com.google.android.material:material:1.3.0'
-    implementation 'androidx.recyclerview:recyclerview:1.2.0'
-    implementation 'androidx.cardview:cardview:1.0.0'
-    implementation 'androidx.core:core:1.3.2'
-    implementation 'androidx.media:media:1.3.1'
-    implementation 'androidx.preference:preference:1.1.1'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-    implementation 'androidx.multidex:multidex:2.0.1' // as we have over 65536 methods...
-    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
-
+    // Reactive extensions for Java VM
     implementation 'com.github.SkyTubeTeam:RxAndroid:3.0.1.SkyTubeTeam'
     implementation 'io.reactivex.rxjava3:rxjava:3.0.12'
 
-    // debugImplementation because LeakCanary should only run in debug builds.
+
+/** Debug **/
+    // debugImplementation because LeakCanary should only run in debug builds
+    // Memory leak detection
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.7'
 
-    // proprietary module
+/** Flavor **/
+    // Proprietary modules
+    // Official YouTube Android Player API
     extraImplementation files('libs/YouTubeAndroidPlayerApi.jar')
     extraImplementation 'com.google.android.gms:play-services-cast-framework:20.0.0'
     extraImplementation 'com.sothree.slidinguppanel:library:3.4.0'
     extraImplementation 'com.github.rahatarmanahmed:circularprogressview:2.5.0'
+
+/** Testing **/
+    // Required for local unit tests (JUnit 5 framework)
+    def junitVersion = '5.7.2'
+    testImplementation "org.junit.jupiter:junit-jupiter-api:$junitVersion"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
 }
