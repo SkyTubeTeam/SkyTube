@@ -161,7 +161,7 @@ dependencies {
     implementation 'org.ocpsoft.prettytime:prettytime:5.0.1.Final'
 
     // Convert Java objects into JSON and back
-    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'com.google.code.gson:gson:2.8.7'
 
     // YouTube modules
     implementation 'com.github.SkyTubeTeam.google-http-java-client:google-http-client-android:1.39.0.1'
@@ -183,7 +183,7 @@ dependencies {
 
     // Reactive extensions for Java VM
     implementation 'com.github.SkyTubeTeam:RxAndroid:3.0.1.SkyTubeTeam'
-    implementation 'io.reactivex.rxjava3:rxjava:3.0.12'
+    implementation 'io.reactivex.rxjava3:rxjava:3.0.13'
 
 
 /** Debug **/
