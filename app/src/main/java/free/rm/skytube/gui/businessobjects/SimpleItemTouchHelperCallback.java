@@ -17,6 +17,7 @@
 
 package free.rm.skytube.gui.businessobjects;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -43,18 +44,19 @@ public class SimpleItemTouchHelperCallback extends ItemTouchHelper.Callback {
 	}
 
 	@Override
-	public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+	public int getMovementFlags(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
 		int dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN | ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT;
 		return makeMovementFlags(dragFlags, 0);
 	}
 
 	@Override
-	public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
-		adapter.onItemMove(viewHolder.getAdapterPosition(), target.getAdapterPosition());
+	public boolean onMove(@NonNull RecyclerView recyclerView,
+						  RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+		adapter.onItemMove(viewHolder.getBindingAdapterPosition(), target.getBindingAdapterPosition());
 		return true;
 	}
 
 	@Override
-	public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+	public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
 	}
 }

@@ -185,7 +185,8 @@ public class MainActivity extends BaseActivity {
 			}
 			getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, mainFragment, MAIN_FRAGMENT_TAG).commit();
 		} else {
-			Logger.i(MainActivity.this, "mainFragment already exists, action:"+action+" fragment:"+mainFragment +", manager:"+mainFragment.getFragmentManager() +", support="+getSupportFragmentManager());
+			Logger.i(MainActivity.this, "mainFragment already exists, action:"+action+ " fragment:"
+					+mainFragment +", manager:"+mainFragment.getParentFragmentManager() +", support="+getSupportFragmentManager());
 		}
 	}
 
@@ -208,8 +209,8 @@ public class MainActivity extends BaseActivity {
 
 	private void putFragment(FragmentManager fragmentManager,  Bundle bundle, @NonNull String key,
 						@NonNull Fragment fragment) {
-		if (fragment.getFragmentManager() != fragmentManager) {
-			Logger.e(MainActivity.this, "Error fragment has a different FragmentManager than expected: Fragment=" + fragment + ", manager=" + fragmentManager + ", Fragment.manager=" + fragment.getFragmentManager() + " for key=" + key);
+		if (fragment.getParentFragmentManager() != fragmentManager) {
+			Logger.e(MainActivity.this, "Error fragment has a different FragmentManager than expected: Fragment=" + fragment + ", manager=" + fragmentManager + ", Fragment.manager=" + fragment.getParentFragmentManager() + " for key=" + key);
 		} else {
 			fragmentManager.putFragment(bundle, key, fragment);
 		}
