@@ -24,7 +24,8 @@
 		app:summary="@string/pref_summary_choose_player"
 		app:entries="@array/pref_video_players"
 		app:entryValues="@array/pref_video_players_values"
-		app:defaultValue="@string/pref_default_player_value"/>
+		app:defaultValue="@string/pref_default_player_value"
+		app:iconSpaceReserved="false" />
 
 	<ListPreference
 		app:key="@string/pref_key_screen_orientation"
@@ -32,23 +33,27 @@
 		app:summary="@string/pref_summary_screen_orientation"
 		app:entries="@array/screen_orientations"
 		app:entryValues="@array/screen_orientations_values"
-		app:defaultValue="@string/pref_screen_auto_value"/>
+		app:defaultValue="@string/pref_screen_auto_value"
+		app:iconSpaceReserved="false" />
 
 	<CheckBoxPreference
 		app:key="@string/pref_key_disable_screen_gestures"
 		app:title="@string/pref_title_disable_screen_gestures"
-		app:summary="@string/pref_summary_disable_screen_gestures"/>
+		app:summary="@string/pref_summary_disable_screen_gestures"
+		app:iconSpaceReserved="false" />
 
 	<CheckBoxPreference
 		app:defaultValue="true"
 		app:key="@string/pref_key_enable_immersive_mode"
 		app:summary="@string/pref_summary_enable_immersive_mode"
-		app:title="@string/pref_title_enable_immersive_mode" />
+		app:title="@string/pref_title_enable_immersive_mode"
+		app:iconSpaceReserved="false" />
 
 	<CheckBoxPreference
 		app:key="@string/pref_key_switch_volume_and_brightness"
 		app:title="@string/pref_title_switch_volume_and_brightness"
-		app:summary="@string/pref_summary_switch_volume_and_brightness"/>
+		app:summary="@string/pref_summary_switch_volume_and_brightness"
+		app:iconSpaceReserved="false" />
 
 	<ListPreference
 		app:key="@string/pref_key_default_content_country"
@@ -56,11 +61,13 @@
 		app:summary="@string/pref_summary_default_content_country"
 		app:entries="@array/country_names"
 		app:entryValues="@array/country_codes"
-		app:defaultValue=""/>
+		app:defaultValue=""
+		app:iconSpaceReserved="false" />
 
 	<CheckBoxPreference
 		app:key="@string/pref_key_use_newer_formats"
 		app:title="@string/pref_key_use_newer_formats_title"
-		app:summary="@string/pref_key_use_newer_formats_summary"/>
+		app:summary="@string/pref_key_use_newer_formats_summary"
+		app:iconSpaceReserved="false" />
 
 </PreferenceScreen>

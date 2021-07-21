@@ -20,36 +20,42 @@
 
 	<ListPreference
 		app:key="@string/pref_key_default_tab_name"
-		app:title="@string/pref_title_default_tab" />
+		app:title="@string/pref_title_default_tab"
+		app:iconSpaceReserved="false" />
 
 	<MultiSelectListPreference
 		app:key="@string/pref_key_hide_tabs"
 		app:title="@string/pref_title_hide_tabs"
 		app:summary="@string/pref_summary_hide_tabs"
-		app:entryValues="@array/tab_list_values" />
+		app:entryValues="@array/tab_list_values"
+		app:iconSpaceReserved="false" />
 
 	<EditTextPreference
 		app:key="@string/pref_youtube_api_key"
 		app:title="@string/pref_title_youtube_api_key"
 		app:summary="@string/pref_summary_youtube_api_key"
-		app:dialogTitle="@string/pref_title_youtube_api_key" />
+		app:dialogTitle="@string/pref_title_youtube_api_key"
+		app:iconSpaceReserved="false" />
 
-	<!--<ListPreference-->
-		<!--app:key="@string/pref_feed_notification_key"-->
-		<!--app:title="@string/pref_title_feed_notification"-->
-		<!--app:entries="@array/feed_notification"-->
-		<!--app:entryValues="@array/feed_notification_values" />-->
+	<!--ListPreference
+		app:key="@string/pref_feed_notification_key"
+		app:title="@string/pref_title_feed_notification"
+		app:entries="@array/feed_notification"
+		app:entryValues="@array/feed_notification_values"
+		app:iconSpaceReserved="false" /-->
 
 	<CheckBoxPreference
 		app:defaultValue="true"
 		app:key="@string/pref_use_default_newpipe_backend"
 		app:summary="@string/pref_summary_use_newpipe_backend"
-		app:title="@string/pref_title_use_newpipe_backend" />
+		app:title="@string/pref_title_use_newpipe_backend"
+		app:iconSpaceReserved="false" />
 
 	<CheckBoxPreference
 		app:defaultValue="false"
 		app:key="@string/pref_key_subscriptions_alphabetical_order"
 		app:title="@string/pref_title_subscriptions_alphabetical_order"
-		app:summary="@string/pref_summary_subscriptions_alphabetical_order"/>
+		app:summary="@string/pref_summary_subscriptions_alphabetical_order"
+		app:iconSpaceReserved="false" />
 
 </PreferenceScreen>

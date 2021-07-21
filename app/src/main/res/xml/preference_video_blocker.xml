@@ -23,11 +23,13 @@
 		app:key="@string/pref_key_enable_video_blocker"
 		app:title="@string/pref_title_enable_video_blocker"
 		app:summary="@string/pref_summary_enable_video_blocker"
-		app:defaultValue="true"/>
+		app:defaultValue="true"
+		app:iconSpaceReserved="false" />
 
 	<PreferenceCategory
 		app:key="channel_filters"
-		app:title="@string/pref_channels_filter_category">
+		app:title="@string/pref_channels_filter_category"
+		app:iconSpaceReserved="false">
 
 		<ListPreference
 			app:key="@string/pref_key_channel_filter_method"
@@ -35,23 +37,30 @@
 			app:summary="@string/pref_summary_channel_filter_method"
 			app:entries="@array/channel_filtering_list"
 			app:entryValues="@array/channel_filtering_values_list"
-			app:defaultValue="@string/channel_blacklisting_filtering"/>
+			app:defaultValue="@string/channel_blacklisting_filtering"
+			app:iconSpaceReserved="false"
+			app:dependency="@string/pref_key_enable_video_blocker" />
 
 	    <Preference
 	        app:key="@string/pref_key_channel_blacklist"
 	        app:title="@string/pref_title_channel_blacklist"
-	        app:summary="@string/pref_summary_channel_blacklist" />
+	        app:summary="@string/pref_summary_channel_blacklist"
+			app:iconSpaceReserved="false"
+			app:dependency="@string/pref_key_enable_video_blocker" />
 
 		<Preference
 			app:key="@string/pref_key_channel_whitelist"
 			app:title="@string/pref_title_channel_whitelist"
-			app:summary="@string/pref_summary_channel_whitelist" />
+			app:summary="@string/pref_summary_channel_whitelist"
+			app:iconSpaceReserved="false"
+			app:dependency="@string/pref_key_enable_video_blocker" />
 
 	</PreferenceCategory>
 
     <PreferenceCategory
 		app:key="languages_filter"
-	    app:title="@string/pref_languages_filter_category">
+	    app:title="@string/pref_languages_filter_category"
+		app:iconSpaceReserved="false">
 
         <ListPreference
             app:key="@string/pref_key_preferred_region"
@@ -59,24 +68,30 @@
             app:summary="@string/pref_summary_preferred_regions"
             app:entries="@array/country_names"
             app:entryValues="@array/country_codes"
-            app:defaultValue=""/>
+            app:defaultValue=""
+			app:iconSpaceReserved="false" />
 
         <Preference
             app:key="@string/pref_key_preferred_languages"
             app:title="@string/pref_title_preferred_languages"
-            app:summary="@string/pref_summary_preferred_languages"/>
+            app:summary="@string/pref_summary_preferred_languages"
+			app:iconSpaceReserved="false"
+			app:dependency="@string/pref_key_enable_video_blocker" />
 
         <CheckBoxPreference
 	        app:key="@string/pref_key_lang_detection_video_filtering"
 	        app:title="@string/pref_title_lang_detection_video_filtering"
 	        app:summary="@string/pref_summary_lang_detection_video_filtering"
-	        app:defaultValue="false"/>
+	        app:defaultValue="false"
+			app:iconSpaceReserved="false"
+			app:dependency="@string/pref_key_enable_video_blocker" />
 
     </PreferenceCategory>
 
 	<PreferenceCategory
 		app:key="other_filters"
-		app:title="@string/pref_other_filters_category">
+		app:title="@string/pref_other_filters_category"
+		app:iconSpaceReserved="false">
 
 		<ListPreference
 			app:key="@string/pref_key_low_views_filter"
@@ -84,7 +99,9 @@
 			app:summary="@string/pref_summary_low_views_filter"
 			app:entries="@array/views_filtering_list"
 			app:entryValues="@array/views_filtering_values_list"
-			app:defaultValue="@string/views_filtering_disabled"/>
+			app:defaultValue="@string/views_filtering_disabled"
+			app:iconSpaceReserved="false"
+			app:dependency="@string/pref_key_enable_video_blocker" />
 
 		<ListPreference
 			app:key="@string/pref_key_dislikes_filter"
@@ -92,7 +109,9 @@
 			app:summary="@string/pref_summary_dislikes_filter"
 			app:entries="@array/dislikes_filtering_list"
 			app:entryValues="@array/dislikes_filtering_values_list"
-			app:defaultValue="@string/dislikes_filtering_disabled"/>
+			app:defaultValue="@string/dislikes_filtering_disabled"
+			app:iconSpaceReserved="false"
+			app:dependency="@string/pref_key_enable_video_blocker" />
 
 	</PreferenceCategory>
 

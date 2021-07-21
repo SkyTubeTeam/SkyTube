@@ -69,9 +69,8 @@ public class VideoBlockerPreferenceFragment extends PreferenceFragmentCompat {
 		final Preference channelWhitelistPreference = findPreference(getString(R.string.pref_key_channel_whitelist));
 
 		// enable/disable the video blocker
-		enablePreferences(isVideoBlockerEnabled(), channelBlacklistPreference, channelWhitelistPreference);
+		initChannelFilteringPreferences(channelBlacklistPreference, channelWhitelistPreference);
 		findPreference(getString(R.string.pref_key_enable_video_blocker)).setOnPreferenceChangeListener((preference, newValue) -> {
-			enablePreferences((boolean) newValue, channelBlacklistPreference, channelWhitelistPreference);
 			Toast.makeText(getActivity(), R.string.setting_updated, Toast.LENGTH_LONG).show();
 			return true;
 		});
@@ -101,41 +100,16 @@ public class VideoBlockerPreferenceFragment extends PreferenceFragmentCompat {
 		findPreference(getString(R.string.pref_key_dislikes_filter)).setOnPreferenceChangeListener(settingUpdatesPreferenceChange);
 	}
 
-
-	/**
-	 * @return True if the user wants to use the video blocker, false otherwise.
-	 */
-	private boolean isVideoBlockerEnabled() {
-		return SkyTubeApp.getPreferenceManager().getBoolean(getString(R.string.pref_key_enable_video_blocker), true);
-	}
-
-	/**
-	 * Enable/Disable the preferences "views" based on whether the video blocker is enabled or not.
-	 *
-	 * @param enableBlocker                 True means video blocker is enabled by the user.
-	 * @param channelBlacklistPreference    {@link Preference} for channel blacklisting.
-	 * @param channelWhitelistPreference    {@link Preference} for channel whitelisting.
-	 */
-	private void enablePreferences(boolean enableBlocker, Preference channelBlacklistPreference, Preference channelWhitelistPreference) {
-		findPreference(getString(R.string.pref_key_channel_filter_method)).setEnabled(enableBlocker);
-		initChannelFilteringPreferences(enableBlocker, channelBlacklistPreference, channelWhitelistPreference);
-		findPreference(getString(R.string.pref_key_preferred_languages)).setEnabled(enableBlocker);
-		findPreference(getString(R.string.pref_key_lang_detection_video_filtering)).setEnabled(enableBlocker);
-		findPreference(getString(R.string.pref_key_low_views_filter)).setEnabled(enableBlocker);
-		findPreference(getString(R.string.pref_key_dislikes_filter)).setEnabled(enableBlocker);
-	}
-
 	/**
 	 * Initialized the channel filtering preference.
 	 *
-	 * @param videoBlockerEnabled           True means video blocker is enabled by the user.
 	 * @param channelBlacklistPreference    {@link Preference} for channel blacklisting.
 	 * @param channelWhitelistPreference    {@link Preference} for channel whitelisting.
 	 */
-	private void initChannelFilteringPreferences(boolean videoBlockerEnabled, Preference channelBlacklistPreference, Preference channelWhitelistPreference) {
+	private void initChannelFilteringPreferences(Preference channelBlacklistPreference, Preference channelWhitelistPreference) {
 		// get the current channel filtering method selected by the user...
 		final String channelFilter = SkyTubeApp.getPreferenceManager().getString(getString(R.string.pref_key_channel_filter_method), getString(R.string.channel_blacklisting_filtering));
-		initChannelFilteringPreferences(videoBlockerEnabled, channelFilter, channelBlacklistPreference, channelWhitelistPreference);
+		initChannelFilteringPreferences(channelFilter, channelBlacklistPreference, channelWhitelistPreference);
 	}
 
 	/**
@@ -146,33 +120,16 @@ public class VideoBlockerPreferenceFragment extends PreferenceFragmentCompat {
 	 * @param channelWhitelistPreference    {@link Preference} for channel whitelisting.
 	 */
 	private void initChannelFilteringPreferences(String channelFilter, Preference channelBlacklistPreference, Preference channelWhitelistPreference) {
-		initChannelFilteringPreferences(isVideoBlockerEnabled(), channelFilter, channelBlacklistPreference, channelWhitelistPreference);
-	}
-
-	/**
-	 * Initialized the channel filtering preference.
-	 *
-	 * @param videoBlockerEnabled           True means video blocker is enabled by the user.
-	 * @param channelFilter                 The current channel filtering method (e.g. "Channel Blacklisting").
-	 * @param channelBlacklistPreference    {@link Preference} for channel blacklisting.
-	 * @param channelWhitelistPreference    {@link Preference} for channel whitelisting.
-	 */
-	private void initChannelFilteringPreferences(boolean videoBlockerEnabled, String channelFilter, Preference channelBlacklistPreference, Preference channelWhitelistPreference) {
-		if (videoBlockerEnabled) {
-			if (channelFilter.equals(getString(R.string.channel_blacklisting_filtering))) {
-				initChannelBlacklistingPreference(channelBlacklistPreference);
-				channelBlacklistPreference.setEnabled(true);
-				channelWhitelistPreference.setEnabled(false);
-			} else if (channelFilter.equals(getString(R.string.channel_whitelisting_filtering))) {
-				initChannelWhitelistingPreference(channelWhitelistPreference);
-				channelBlacklistPreference.setEnabled(false);
-				channelWhitelistPreference.setEnabled(true);
-			} else {
-				Logger.e(this, "Unknown channel filtering preference", channelFilter);
-			}
-		} else {
-			channelBlacklistPreference.setEnabled(false);
+		if (channelFilter.equals(getString(R.string.channel_blacklisting_filtering))) {
+			initChannelBlacklistingPreference(channelBlacklistPreference);
+			channelBlacklistPreference.setEnabled(true);
 			channelWhitelistPreference.setEnabled(false);
+		} else if (channelFilter.equals(getString(R.string.channel_whitelisting_filtering))) {
+			initChannelWhitelistingPreference(channelWhitelistPreference);
+			channelBlacklistPreference.setEnabled(false);
+			channelWhitelistPreference.setEnabled(true);
+		} else {
+			Logger.e(this, "Unknown channel filtering preference", channelFilter);
 		}
 
 		// User has just changed the filtering method and hence there might be a subbed channel

@@ -18,28 +18,33 @@
 
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
 
-	<PreferenceScreen
+	<Preference
 		app:key="@string/pref_key_version"
-		app:title="@string/pref_title_version" />
+		app:title="@string/pref_title_version"
+		app:iconSpaceReserved="false" />
 
-	<PreferenceScreen
+	<Preference
 		app:key="@string/pref_key_updates"
 		app:title="@string/pref_title_updates"
-		app:summary="@string/pref_summary_updates" />
+		app:summary="@string/pref_summary_updates"
+		app:iconSpaceReserved="false" />
 
-	<PreferenceScreen
+	<Preference
 		app:key="@string/pref_key_website"
 		app:title="@string/pref_title_website"
-		app:summary="Skytube Website goes here..." />
+		app:summary="Skytube Website goes here..."
+		app:iconSpaceReserved="false" />
 
-	<PreferenceScreen
+	<Preference
 		app:key="@string/pref_key_credits"
 		app:title="@string/pref_title_credits"
-		app:summary="@string/pref_summary_credits" />
+		app:summary="@string/pref_summary_credits"
+		app:iconSpaceReserved="false" />
 
-	<PreferenceScreen
+	<Preference
 		app:key="@string/pref_key_license"
 		app:title="@string/pref_title_license"
-		app:summary="@string/pref_summary_license" />
+		app:summary="@string/pref_summary_license"
+		app:iconSpaceReserved="false" />
 
 </PreferenceScreen>

@@ -21,16 +21,19 @@
 		app:defaultValue="false"
 		app:key="@string/pref_key_disable_search_history"
 		app:title="@string/pref_title_disable_search_history"
-		app:summary="@string/pref_summary_disable_search_history"/>
+		app:summary="@string/pref_summary_disable_search_history"
+		app:iconSpaceReserved="false" />
 
 	<CheckBoxPreference
 		app:defaultValue="false"
 		app:key="@string/pref_key_disable_playback_status"
 		app:title="@string/pref_title_disable_playback_status"
-		app:summary="@string/pref_summary_disable_playback_status"/>
+		app:summary="@string/pref_summary_disable_playback_status"
+		app:iconSpaceReserved="false" />
 
-	<PreferenceScreen
+	<Preference
 		app:key="@string/pref_key_clear_playback_status"
 		app:title="@string/pref_title_clear_playback_status"
-		app:summary="@string/pref_summary_clear_playback_status"/>
+		app:summary="@string/pref_summary_clear_playback_status"
+		app:iconSpaceReserved="false" />
 </PreferenceScreen>
