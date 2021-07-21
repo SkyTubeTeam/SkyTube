@@ -19,62 +19,71 @@
 
     <PreferenceCategory
         app:key="downloads"
-        app:title="@string/pref_category_downloads">
+        app:title="@string/pref_category_downloads"
+        app:iconSpaceReserved="false">
 
         <CheckBoxPreference
             app:defaultValue="false"
             app:key="@string/pref_key_download_to_separate_directories"
             app:title="@string/pref_title_download_to_separate_directories"
-            app:summary="@string/pref_summary_download_to_separate_directories"/>
+            app:summary="@string/pref_summary_download_to_separate_directories"
+            app:iconSpaceReserved="false" />
 
         <Preference
             app:title="@string/pref_title_video_download_folder"
             app:key="@string/pref_key_video_download_folder"
             app:summary="@string/pref_summary_video_download_folder"
-            />
+            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 
     <PreferenceCategory
         app:key="videoplayer_resolutions"
-        app:title="@string/pref_category_video_resolutions">
+        app:title="@string/pref_category_video_resolutions"
+        app:iconSpaceReserved="false">
 
     <ListPreference
         app:key="@string/pref_key_maximum_res"
         app:title="@string/pref_title_maximum_res"
-        app:summary="@string/pref_summary_maximum_res"/>
+        app:summary="@string/pref_summary_maximum_res"
+        app:iconSpaceReserved="false" />
 
     <ListPreference
         app:key="@string/pref_key_minimum_res"
         app:title="@string/pref_title_minimum_res"
-        app:summary="@string/pref_summary_minimum_res"/>
+        app:summary="@string/pref_summary_minimum_res"
+        app:iconSpaceReserved="false" />
 
     <ListPreference
         app:key="@string/pref_key_video_quality"
         app:title="@string/pref_key_video_quality_title"
-        app:summary="@string/pref_key_video_quality_summary"/>
+        app:summary="@string/pref_key_video_quality_summary"
+        app:iconSpaceReserved="false" />
 
     </PreferenceCategory>
 
 
     <PreferenceCategory
         app:key="download_resolutions"
-        app:title="@string/pref_category_download_resolutions">
+        app:title="@string/pref_category_download_resolutions"
+        app:iconSpaceReserved="false">
 
         <ListPreference
             app:key="@string/pref_key_video_download_maximum_resolution"
             app:title="@string/pref_video_download_maximum_resolution_title"
-            app:summary="@string/pref_video_download_maximum_resolution_summary"/>
+            app:summary="@string/pref_video_download_maximum_resolution_summary"
+            app:iconSpaceReserved="false" />
 
         <ListPreference
             app:key="@string/pref_key_video_download_minimum_resolution"
             app:title="@string/pref_video_download_minimum_resolution_title"
             app:summary="@string/pref_video_download_minimum_resolution_summary"
-            />
+            app:iconSpaceReserved="false" />
 
         <ListPreference
             app:key="@string/pref_key_video_quality_for_downloads"
             app:title="@string/pref_key_video_quality_for_downloads_title"
-            app:summary="@string/pref_key_video_quality_for_downloads_summary"/>
+            app:summary="@string/pref_key_video_quality_for_downloads_summary"
+            app:iconSpaceReserved="false" />
 
     </PreferenceCategory>
 
@@ -83,22 +92,26 @@
     -->
     <PreferenceCategory
         app:key="mobile_network"
-        app:title="@string/pref_category_metered_network">
+        app:title="@string/pref_category_metered_network"
+        app:iconSpaceReserved="false">
 
         <ListPreference
             app:key="@string/pref_key_maximum_res_mobile"
             app:title="@string/pref_title_maximum_res_metered"
-            app:summary="@string/pref_summary_maximum_res_metered"/>
+            app:summary="@string/pref_summary_maximum_res_metered"
+            app:iconSpaceReserved="false" />
 
         <ListPreference
             app:key="@string/pref_key_minimum_res_mobile"
             app:title="@string/pref_title_minimum_res_metered"
-            app:summary="@string/pref_summary_minimum_res_metered"/>
+            app:summary="@string/pref_summary_minimum_res_metered"
+            app:iconSpaceReserved="false" />
 
         <ListPreference
             app:key="@string/pref_key_video_quality_on_mobile"
             app:title="@string/pref_key_video_quality_metered_title"
-            app:summary="@string/pref_key_video_quality_metered_summary"/>
+            app:summary="@string/pref_key_video_quality_metered_summary"
+            app:iconSpaceReserved="false" />
 
         <ListPreference
             app:entries="@array/pref_metered_network_usage"
@@ -106,7 +119,8 @@
             app:defaultValue="@string/pref_metered_network_usage_value_ask"
             app:key="@string/pref_key_mobile_network_usage_policy"
             app:title="@string/pref_title_metered_network_usage"
-            app:summary="@string/pref_summary_metered_network_usage"/>
+            app:summary="@string/pref_summary_metered_network_usage"
+            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 
 </PreferenceScreen>

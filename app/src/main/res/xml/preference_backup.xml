@@ -18,19 +18,22 @@
 
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
 
-	<PreferenceScreen
+	<Preference
 		app:key="@string/pref_key_backup_dbs"
 		app:title="@string/pref_title_backup_dbs"
-		app:summary="@string/pref_summary_backup_dbs"/>
+		app:summary="@string/pref_summary_backup_dbs"
+		app:iconSpaceReserved="false" />
 
-	<PreferenceScreen
+	<Preference
 		app:key="@string/pref_key_import_dbs"
 		app:title="@string/pref_title_import_dbs"
-		app:summary="@string/pref_summary_import_dbs"/>
+		app:summary="@string/pref_summary_import_dbs"
+		app:iconSpaceReserved="false" />
 
-	<PreferenceScreen
+	<Preference
 		app:key="@string/pref_key_import_subs"
 		app:title="@string/pref_title_import_subs"
-		app:summary="@string/pref_summary_import_subs"/>
+		app:summary="@string/pref_summary_import_subs"
+		app:iconSpaceReserved="false" />
 
 </PreferenceScreen>
