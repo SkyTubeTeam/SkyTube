@@ -32,4 +32,10 @@
     <string name="error_video_play">Error de reproducció de vídeo</string>
     <string name="error_stream_decryption_fail">No s\'ha pogut carregar el codi de desxifratge del servei de YouTube.</string>
     <string name="error_stream_err_unavailable">El missatge d\'error no està disponible.</string>
+    <string name="warning_live_video">De moment no es poden reproduir transmissions en directe. Voleu obrir la transmissió en directe en una altra aplicació\?</string>
+    <string name="metered_network_blocked_by_policy">La descàrrega s\'ha bloquejat perquè el dispositiu està connectat a una xarxa amb límit de dades.</string>
+    <string name="warning_metered_network_play">El dispositiu està connectat a una xarxa amb límit de dades. Per evitar possibles càrrecs addicionals per l\'ús de dades, es recomana connectar-se a una xarxa sense límit. Voleu reproduir el vídeo de totes maneres\?</string>
+    <string name="metered_network">Xarxa amb límit de dades</string>
+    <string name="error_downloaded_file_is_corrupted">El vídeo descarregat sembla <b>corrupte</b> - el missatge d\'error és: <br/> <br/> %s. <br/> <br/> Vols <b>eliminar</b> el fitxer\?</string>
+    <string name="error_stream_parse_error">Error d’interpretació.</string>
 </resources>

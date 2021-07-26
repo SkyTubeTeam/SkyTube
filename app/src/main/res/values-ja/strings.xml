@@ -21,4 +21,6 @@
     <string name="search_channel">チャンネル検索</string>
     <string name="close">閉じる</string>
     <string name="could_not_get_channel_detailed">チャンネル情報をダウンロードできませんでした。: %s</string>
+    <string name="recaptcha_challenge_requested">YouTubeがネットワークリクエストをブロックしているため、reCaptchaチャレンジを確認する必要があります！</string>
+    <string name="trending_in">トレンド (%s)</string>
 </resources>

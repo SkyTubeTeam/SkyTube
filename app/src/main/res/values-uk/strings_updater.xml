@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="downloading">Завантаження…</string>
+    <string name="update_failure">Не вдалося оновити застосунок.</string>
+    <string name="later">Пізніше</string>
+    <string name="update">Оновити</string>
+    <string name="release_notes">Зміни у %s</string>
+    <string name="up_to_date_msg">Ваша версія SkyTube найновіша.</string>
+    <string name="up_to_date">Всі оновлення встановлено</string>
+    <string name="update_dialog_msg">Доступна нова версія SkyTube. Буде встановлено версію %s.</string>
+    <string name="update_available">Доступна нова версія</string>
+</resources>

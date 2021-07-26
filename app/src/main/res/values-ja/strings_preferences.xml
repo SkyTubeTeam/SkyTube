@@ -164,4 +164,7 @@
     <string name="pref_title_hide_tabs">タブを隠す</string>
     <string name="pref_summary_autocast">他のアプリからSkyTubeで動画を開く場合に使用するChromecastデバイスを選択します。</string>
     <string name="pref_network_downloads_category">ネットワークとダウンロード</string>
+    <string name="pref_title_default_content_country">デフォルトのコンテンツの国</string>
+    <string name="pref_summary_default_content_country">この国を対象としたコンテンツを表示する: %s</string>
+    <string name="system_default_country">システムデフォルトの国</string>
 </resources>

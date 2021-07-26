@@ -1,2 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="external_storage_not_available">No es pot descarregar el fitxer, ja que l’emmagatzematge extern no està disponible.</string>
+    <string name="playing_video_file_missing">No s\'ha trobat la descàrrega d\'aquest vídeo. Reproduïnt remotament.</string>
+    <string name="no_downloaded_videos_text">Encara no heu baixat cap vídeo.
+\n
+\nUn cop ho feu, apareixeran aquí.</string>
+    <string name="video_downloaded">\'%s\' descarregat.</string>
+    <string name="delete_download">Suprimeix Baixada</string>
+    <string name="video_stream_not_found_with_request_resolution">No s\'ha trobat cap transmissió de vídeo per a la resolució sol·licitada, entre la resolució %1$s i la %2$s</string>
+    <string name="download_failed_because">No s\'ha pogut baixar %1$s perquè: %2$s</string>
+    <string name="video_download_stream_error">No s\'ha pogut descarregar \'%s\'.</string>
+    <string name="starting_video_download">Descarregant \'%s\'…</string>
+    <string name="unable_to_delete_file">No es pot suprimir el fitxer descarregat: \'%s\'</string>
+    <string name="download_video">Descarrega vídeo</string>
+    <string name="warning_metered_network_download">El dispositiu està connectat a una xarxa amb límit de dades. Per evitar possibles càrrecs addicionals per l\'ús de dades, es recomana connectar-se a una xarxa sense límit. Descarregar el vídeo de totes maneres\?</string>
+    <string name="downloads">Descàrregues</string>
+    <string name="download">Descarregar</string>
+</resources>

@@ -6,6 +6,6 @@
     <string name="channel_blacklisted">Canal bloqueado. Por favor recarga.</string>
     <string name="block_channel">Bloquear Canal</string>
     <string name="configure">Configurar</string>
-    <string name="no_videos_blocked">No hay videos bloqueados o filtrados. Quieres configurar el bloqueador de videos\?</string>
-    <string name="blocked_videos">Videos bloqueados</string>
+    <string name="no_videos_blocked">No hay vídeos bloqueados o filtrados. ¿Quieres configurar el bloqueador de vídeos\?</string>
+    <string name="blocked_videos">Vídeos bloqueados</string>
 </resources>

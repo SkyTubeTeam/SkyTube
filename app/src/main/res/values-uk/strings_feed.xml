@@ -9,8 +9,8 @@
     <string name="no_new_videos_found">Не знайдено нових відео.</string>
     <string name="fetched_videos_from_channels">Завантажено %1$d відео з %2$d/%3$d каналів.</string>
     <string name="fetching_subscription_videos">Завантаження відео з підписаних каналів</string>
-    <string name="fetching_subbed_channels_info_error">Сталася помилка під час завантаження інформації про канал.</string>
-    <string name="fetching_subbed_channels_info">Завантаження інформації про канал…</string>
+    <string name="fetching_subbed_channels_info_error">Сталася помилка під час отримання відомостей про канал.</string>
+    <string name="fetching_subbed_channels_info">Завантаження відомостей про канал…</string>
     <string name="open_channel">Відкрити канал</string>
     <string name="subscribing_to_channels">Підписування на канали…</string>
     <string name="feed">Стрічка</string>

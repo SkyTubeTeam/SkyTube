@@ -1,2 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="notification_new_videos_found">%d vídeos nous dels canals subscrits</string>
+    <string name="notification_channel_feed_title">Notificacions De Feeds</string>
+    <string name="import_subscriptions_from_youtube">Importa Subscripcions De YouTube</string>
+    <string name="no_subscriptions_text">No esteu subscrit a cap canal.
+\n
+\nUn cop ho esteu, apareixeran aquí tots els vídeos penjats als vostres canals subscrits durant el darrer mes.</string>
+    <string name="no_new_videos_found">No s\'ha trobat cap vídeo nou.</string>
+    <string name="fetched_videos_from_channels">%1$d vídeos obtinguts de %2$d/%3$d canals.</string>
+    <string name="fetching_subscription_videos">Obtenint vídeos dels canals subscrits</string>
+    <string name="fetching_subbed_channels_info_error">S\'ha produït un error en obtenir la informació dels canals.</string>
+    <string name="fetching_subbed_channels_info">Aconseguint informació dels canals…</string>
+    <string name="open_channel">Obrir Canal</string>
+    <string name="subscribing_to_channels">Subscrivint als canals…</string>
+    <string name="feed">Feed</string>
+</resources>
