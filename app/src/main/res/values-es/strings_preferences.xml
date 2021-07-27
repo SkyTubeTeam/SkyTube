@@ -6,7 +6,7 @@
     <string name="pref_summary_preferred_regions">Selecciona una región preferida.  Esto se utiliza para filtrar vídeos en la categoría de Destacados:  %s</string>
     <string name="pref_title_preferred_languages">Idiomas preferidos</string>
     <string name="pref_summary_preferred_languages">Selecciona tu idioma preferido.</string>
-    <string name="pref_video_player_category">Reproductor de vídeos</string>
+    <string name="pref_video_player_category">Reproductor de vídeo</string>
     <string name="pref_title_backup_dbs">Base de datos de respaldo</string>
     <string name="pref_summary_backup_dbs">Respalde la base de datos de sus suscripciones y marcadores.</string>
     <string name="pref_title_import_dbs">Importar respaldo</string>
@@ -55,7 +55,7 @@
     <string name="pref_title_default_tab">Pestaña por defecto</string>
     <string name="pref_summary_default_tab">Pestaña por defecto cuando abres SkyTube: %s</string>
     <string name="pref_title_screen_orientation">Orientación de pantalla</string>
-    <string name="pref_summary_screen_orientation">Orientación del reproductor de video: %s</string>
+    <string name="pref_summary_screen_orientation">Orientación del reproductor de vídeo: %s</string>
     <string-array name="screen_orientations">
         <item>Automático</item>
         <item>Horizontal</item>
@@ -69,22 +69,22 @@
     <string name="pref_youtube_api_key_default">Reinicie la aplicación para volver a usar la YouTube API Key por defecto.</string>
     <string name="restart">Reiniciar</string>
     <string name="pref_title_feed_notification">Notificación automática de feed</string>
-    <string name="pref_summary_feed_notification">Periodicidad para comprobar videos nuevos de los canales suscritos:: %s</string>
+    <string name="pref_summary_feed_notification">Periodicidad para comprobar vídeos nuevos de los canales suscritos:: %s</string>
     <string-array name="feed_notification">
         <item>Off</item>
         <item>6 Hours</item>
         <item>12 Hours</item>
         <item>24 Hours</item>
     </string-array>
-    <string name="pref_title_choose_player">Reproductor de video</string>
-    <string name="pref_summary_choose_player">Reproductor de video a usar: %s</string>
+    <string name="pref_title_choose_player">Reproductor de vídeo</string>
+    <string name="pref_summary_choose_player">Reproductor de vídeo a usar: %s</string>
     <string name="pref_import_export_category">Importar/Exportar</string>
     <string name="pref_title_subscriptions_alphabetical_order">Ordenar canales alfabéticamente</string>
     <string name="pref_summary_subscriptions_alphabetical_order">Si lo seleccionas, los canales suscritos se ordenarán alfabéticamente.</string>
     <string name="pref_category_downloads">Descargas</string>
-    <string name="pref_title_download_to_separate_directories">Descargar videos en carpetas</string>
-    <string name="pref_summary_download_to_separate_directories">Los videos se descargan en carpetas separadas según el nombre del canal.</string>
-    <string name="pref_video_blocker_category">Bloqueador de videos</string>
+    <string name="pref_title_download_to_separate_directories">Descargar vídeos en carpetas</string>
+    <string name="pref_summary_download_to_separate_directories">Los vídeos se descargan en carpetas separadas según el nombre del canal.</string>
+    <string name="pref_video_blocker_category">Bloqueador de vídeos</string>
     <string name="pref_channels_filter_category">Filtros de canales</string>
     <string name="pref_title_channel_filter_method">Método de filtrar canales</string>
     <string name="pref_summary_channel_filter_method">Seleccionar el método de filtrar canales: %s</string>
@@ -92,7 +92,7 @@
     <string name="pref_title_channel_blacklist">Lista negra de canales</string>
     <string name="pref_summary_channel_blacklist">Una lista de canales bloqueados.</string>
     <string name="unblock">Desbloquear</string>
-    <string name="channel_blacklist_updated">Actualizada lista negra de canales. Por favor refresque los videos.</string>
+    <string name="channel_blacklist_updated">Actualizada lista negra de canales. Por favor refresque los vídeos.</string>
     <string name="channel_blacklist_update_failure">Error al sacar canal(es) de la lista negra…</string>
     <string name="channel_blacklist_empty">La lista negra de canales está vacía.</string>
     <string name="pref_title_channel_whitelist">Lista de canales permitidos</string>
@@ -102,20 +102,20 @@
     <string name="block">Bloquear</string>
     <string name="please_wait">Por favor, espere…</string>
     <string name="channel_already_whitelisted">El canal ya está permitido.</string>
-    <string name="channel_whitelist_updated">Canal permitido. Por favor, refresque los videos.</string>
+    <string name="channel_whitelist_updated">Canal permitido. Por favor, refresque los vídeos.</string>
     <string name="channel_whitelist_update_failure">Fallo al permitir el canal indicado…</string>
-    <string name="channel_unwhitelist_success">Actualizada la lista de canales permitidos. Por favor, refresque videos.</string>
+    <string name="channel_unwhitelist_success">Actualizada la lista de canales permitidos. Por favor, refresque vídeos.</string>
     <string name="channel_unwhitelist_failure">Fallo al quitar de canales permitidos el cana(es) indicado…</string>
     <string name="no_preferred_lang_selected">No hay seleccionado idioma preferido. Se ignora el ajuste.</string>
-    <string name="preferred_lang_updated">Actualizado el idioma preferido. Por favor, refresque los videos.</string>
-    <string name="pref_title_lang_detection_video_filtering">Filtrado de videos por detección de idioma</string>
-    <string name="pref_summary_lang_detection_video_filtering">Detectar el idioma de los videos y bloquearlos si no es igual a tu(s) idioma(s) preferido(s). Sólo para terminales potentes.</string>
-    <string name="setting_updated">Ajuste actualizado. Por favor, refresque los videos.</string>
+    <string name="preferred_lang_updated">Actualizado el idioma preferido. Por favor, refresque los vídeos.</string>
+    <string name="pref_title_lang_detection_video_filtering">Filtrado de vídeos por detección de idioma</string>
+    <string name="pref_summary_lang_detection_video_filtering">Detectar el idioma de los vídeos y bloquearlos si no es igual a tu(s) idioma(s) preferido(s). Sólo para terminales potentes.</string>
+    <string name="setting_updated">Ajuste actualizado. Por favor, refresque los vídeos.</string>
     <string name="pref_other_filters_category">Otros Filtros</string>
     <string name="pref_title_low_views_filter">Visualizaciones</string>
-    <string name="pref_summary_low_views_filter">Filtrar videos con pocas visualizaciones: %s</string>
+    <string name="pref_summary_low_views_filter">Filtrar vídeos con pocas visualizaciones: %s</string>
     <string name="pref_title_dislikes_filter">Nomegustas</string>
-    <string name="pref_summary_dislikes_filter">Filtrar videos con muchos nomegustas: %s</string>
+    <string name="pref_summary_dislikes_filter">Filtrar vídeos con muchos nomegustas: %s</string>
     <string name="pref_privacy_category">Privacidad</string>
     <string name="pref_title_disable_search_history">Desactivar historial de búsquedas</string>
     <string name="pref_summary_disable_search_history">Si lo selecciona, El historial de búsquedas se borrará y no se usará.</string>
@@ -124,11 +124,11 @@
     <string name="pref_summary_disable_playback_status">Si se selecciona, el estado de reproducción se borrarà y no se usará.</string>
     <string name="pref_disable_playback_status_deleted">Estado de reproducción borrado.</string>
     <string name="pref_title_clear_playback_status">Borrar Estado de Reproducción</string>
-    <string name="pref_summary_clear_playback_status">Borrar estado de reproducción para todos los videos.</string>
+    <string name="pref_summary_clear_playback_status">Borrar estado de reproducción para todos los vídeos.</string>
     <string name="pref_playback_status_cleared">Estado de reproducción borrado.</string>
-    <string name="pref_title_disable_screen_gestures">Deshabilitar gestos de video</string>
-    <string name="pref_summary_disable_screen_gestures">Deshabilitar gestos para controlar volumen, brillo y búsqueda adelante/atrás en videos.</string>
-    <string name="pref_summary_enable_video_blocker">Habilitar bloqueador de videos.</string>
+    <string name="pref_title_disable_screen_gestures">Deshabilitar gestos de vídeo</string>
+    <string name="pref_summary_disable_screen_gestures">Deshabilitar gestos para controlar volumen, brillo y búsqueda adelante/atrás en vídeos.</string>
+    <string name="pref_summary_enable_video_blocker">Habilitar bloqueador de vídeos.</string>
     <string name="key_preferences">preferencias</string>
     <string name="pref_summary_video_download_folder">Vídeos descargados en esta carpeta: %s</string>
     <string name="pref_title_video_download_folder">Carpeta descargas de vídeos</string>
@@ -148,24 +148,24 @@
     <string name="pref_title_chromecast_none">Ninguno</string>
     <string name="pref_chromecast_category">Reproductor Chromecast</string>
     <string name="pref_video_continuous_repeat_toggle">Repetición conitnua</string>
-    <string name="pref_video_download_minimum_resolution_summary">Las descargas de video serán al menos en esta resolución: %s</string>
-    <string name="pref_video_download_minimum_resolution_title">Resolución mínima para descarga de video</string>
-    <string name="pref_video_download_maximum_resolution_summary">Las descargas de video serán como mucho de esta resolución: %s</string>
-    <string name="pref_video_download_maximum_resolution_title">Resolución máxima para descarga de video</string>
+    <string name="pref_video_download_minimum_resolution_summary">Las descargas de vídeo serán al menos en esta resolución: %s</string>
+    <string name="pref_video_download_minimum_resolution_title">Resolución mínima para descarga de vídeo</string>
+    <string name="pref_video_download_maximum_resolution_summary">Las descargas de vídeo serán como mucho de esta resolución: %s</string>
+    <string name="pref_video_download_maximum_resolution_title">Resolución máxima para descarga de vídeo</string>
     <string name="pref_summary_minimum_res">Selecciona tu resolución mínima: %s</string>
     <string name="pref_title_minimum_res">Resolución mínima</string>
     <string name="pref_summary_maximum_res">Selecciona tu resolución máxima: %s</string>
     <string name="pref_title_maximum_res">Resolución máxima</string>
     <string name="pref_key_video_quality_for_downloads_summary">Optimizar para: %s</string>
-    <string name="pref_key_video_quality_for_downloads_title">Selección de calidad de video para descargas</string>
+    <string name="pref_key_video_quality_for_downloads_title">Selección de calidad de vídeo para descargas</string>
     <string name="pref_key_video_quality_summary">Optimizar para: %s</string>
-    <string name="pref_key_video_quality_title">Selección de calidad de video</string>
-    <string name="pref_category_download_resolutions">Resolución de video para descargas</string>
-    <string name="pref_category_video_resolutions">Resolución de video</string>
+    <string name="pref_key_video_quality_title">Selección de calidad de vídeo</string>
+    <string name="pref_category_download_resolutions">Resolución de vídeo para descargas</string>
+    <string name="pref_category_video_resolutions">Resolución de vídeo</string>
     <string name="no_resolution_specified">Ninguna</string>
     <string name="pref_key_video_quality_metered_summary">Optimizar para: %s</string>
-    <string name="pref_key_video_quality_metered_title">Calidad de video seleccionada en red con límite de datos</string>
-    <string name="pref_summary_metered_network_usage">Que hacer si esta en uso una red con límite de datos para descargar/ver videos: %s</string>
+    <string name="pref_key_video_quality_metered_title">Calidad de vídeo seleccionada en red con límite de datos</string>
+    <string name="pref_summary_metered_network_usage">Que hacer si esta en uso una red con límite de datos para descargar/ver vídeos: %s</string>
     <string name="pref_title_metered_network_usage">Uso de red con límite de datos</string>
     <string name="pref_summary_maximum_res_metered">Selecciona tu resolución máxima para streaming con una red con limite de datos: %s</string>
     <string name="pref_title_maximum_res_metered">Resolución máxima para red con límite de datos</string>
@@ -175,4 +175,6 @@
     <string name="pref_summary_default_content_country">Mostrar contenido destinado a este país: %s</string>
     <string name="pref_title_default_content_country">Contenido de pais por defecto</string>
     <string name="system_default_country">País predeterminado del sistema</string>
+    <string name="pref_key_use_newer_formats_summary">Las versiones antiguas de Android no soportan todos los formatos de vídeo que hay en Youtube. Desactívalo si tienes problemas con el vídeo o no hay sonido</string>
+    <string name="pref_key_use_newer_formats_title">Intentar nuevos formatos de vídeo</string>
 </resources>

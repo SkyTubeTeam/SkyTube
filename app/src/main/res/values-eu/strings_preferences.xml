@@ -155,4 +155,6 @@
     <string name="pref_summary_default_content_country">Erakuts ezazu edukia herrialde honetarako zuzendua: %s</string>
     <string name="pref_title_default_content_country">Ez-betetzea herrialdea asebete</string>
     <string name="system_default_country">Sistemako Ez-Betetzeko Herrialdea</string>
+    <string name="pref_key_use_newer_formats_summary">Android bertsio zaharrek ez dute bermatzen bideo formato bakoitza, Youtubek eskaintzen duena. Itzali, askotan topo egiten baduzu bideoklip edo soinurik gabe</string>
+    <string name="pref_key_use_newer_formats_title">Bideo formato berriagoak saiatu</string>
 </resources>

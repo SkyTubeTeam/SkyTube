@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="downloads">Downloads</string>
-    <string name="download_video">Download Video</string>
+    <string name="download_video">Descargar vídeo</string>
     <string name="starting_video_download">Descargando \'%s\'…</string>
     <string name="video_download_stream_error">No puedo descargar \'%s\'.</string>
     <string name="delete_download">Delete Download</string>
     <string name="video_downloaded">\'%s\' descargado.</string>
-    <string name="no_downloaded_videos_text">Todavía no has descargado videos.
+    <string name="no_downloaded_videos_text">Todavía no has descargado vídeos.
 \n
 \nCuando lo hagas, aparecerán aquí.</string>
-    <string name="playing_video_file_missing">No encuentro la descarga de este video, Reproduciendo de internet.</string>
+    <string name="playing_video_file_missing">No encuentro la descarga de este vídeo, Reproduciendo de internet.</string>
     <string name="external_storage_not_available">No puedo descargar el video porque el almacenamiento externo no está disponible.</string>
     <string name="download">Descargar</string>
-    <string name="video_stream_not_found_with_request_resolution">No se ha encontrado video para la resolución solicitada, entre la resolución %1$s y %2$s</string>
-    <string name="warning_metered_network_download">Tu dispositivo esta conectado a una red con límite de datos. Para evitar cargos por uso extra de datos, se recomienda conectar a una red sin límite de datos. Descargar el video de todos modos\?</string>
+    <string name="video_stream_not_found_with_request_resolution">No se ha encontrado vídeo para la resolución solicitada, entre la resolución %1$s y %2$s</string>
+    <string name="warning_metered_network_download">Tu dispositivo esta conectado a una red con límite de datos. Para evitar cargos por uso extra de datos, se recomienda conectar a una red sin límite de datos. ¿Descargar el vídeo de todos modos\?</string>
     <string name="unable_to_delete_file">No se puede borrar el archivo descargado: \'%s\'</string>
     <string name="download_failed_because">No se ha podido descargar %1$s por: %2$s</string>
 </resources>

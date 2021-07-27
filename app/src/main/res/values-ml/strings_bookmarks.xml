@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="video_bookmarked_error">"വീഡിയോ  സൂചകയിൽചേർത്തിട്ടില്ല."</string>
+    <string name="no_bookmarked_videos_text">നിങ്ങള് പുതിയ വീഡിയോ ഒന്നും ചേർത്തിട്ടില്ല. നിങ്ങള് അത് ചേർത്താൽ ഇവിടെ കാണിക്കും.</string>
+    <string name="bookmark_share_invalid_url">സാധുവായ ലിങ്കുകള് മാത്രമേ സൂചികയില് ചേർക്കാൻ കഴിയുകയുള്ളൂ.</string>
+    <string name="bookmark_share_label">"സ്കൈട്യൂബ്  സൂചിക"</string>
+    <string name="video_unbookmarked_error">"വീഡിയോ  സൂചകയിൽ  ചേർക്കാൻ കഴിയുന്നില്ല"</string>
+    <string name="video_was_not_bookmarked">"വീഡിയോ  സൂചകയിൽ  ചേർത്തിട്ടില്ല"</string>
+    <string name="video_unbookmarked">"വീഡിയോ  സൂചകയിൽ നിന്നുംനീക്കി"</string>
+    <string name="unbookmark">സൂചകയിൽ നിന്നും നീക്കുക</string>
+    <string name="video_already_bookmarked">"വീഡിയോ ആദ്യം  തന്നെ സൂചകയിൽ ചേർത്തിടുണ്ട്"</string>
+    <string name="video_bookmarked">"വീഡിയോ  സൂചകയിൽ ചേർത്തിടുണ്ട്"</string>
+    <string name="bookmark">സൂചിക</string>
+    <string name="bookmarks">സൂചികകൾ</string>
+</resources>

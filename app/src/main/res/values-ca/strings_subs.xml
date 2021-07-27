@@ -1,2 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="about">Sobre</string>
+    <string name="failed_to_import_subscriptions">No s\'han pogut importar les vostres subscripcions de YouTube.</string>
+    <string name="import_subscriptions_parse_error">S\'ha produït un error en intentar analitzar el fitxer que heu carregat: %s.</string>
+    <string name="no_new_channels_found">No s\'ha trobat cap canal de YouTube al qual encara no esteu subscrit al fitxer que heu carregat.</string>
+    <string name="no_channels_found">No s\'ha trobat cap canal de YouTube al fitxer que heu carregat.</string>
+    <string name="select_none">No seleccionar Cap</string>
+    <string name="select_all">Seleccionar Tot</string>
+    <string name="select_sub_file">Seleccioneu Fitxer de Subscripcions</string>
+    <string name="subscriptions_to_channels_imported">Subscripció a %d canal(s) importada.</string>
+    <string name="unsubscribe_from_all_current_sibbed_channels">Cancel·leu la subscripció de tots els vostres canals actuals subscrits.</string>
+    <string name="import_subscriptions">Importa Subscripcions</string>
+    <string name="error_unable_to_subscribe">No es pot (des)subscriure al canal (id=%s)</string>
+    <string name="error_check_if_user_has_subbed">No es pot comprovar si l\'usuari s\'ha subscrit al canal (id=%s)</string>
+    <string name="error_get_subbed_channels">S\'ha produït un error en obtenir els canals subscrits.</string>
+    <string name="channel_unsubscribed">Canal no subscrit</string>
+    <string name="unsubscribed">No subscrit</string>
+    <string name="channel_subscribe_failed">No es pot subscriure al canal</string>
+    <string name="channel_already_subscribed">Ja esteu subscrit a aquest canal</string>
+    <string name="channel_subscribed">Canal subscrit</string>
+    <string name="subscribed">Subscrit</string>
+    <string name="total_subscribers">%,d subscriptors</string>
+    <string name="unsubscribe">Cancel·la la subscripció</string>
+    <string name="subscribe">Subscriu-te</string>
+    <string name="subscriptions">Subscripcions</string>
+    <string name="import_subscriptions_description">Per importar les vostres subscripcions de YouTube, visiteu primer https://takeout.google.com. Seleccioneu només \"YouTube i YouTube Music\" i feu clic a \"Totes les dades de YouTube incloses\" per desseleccionar-ho tot excepte les subscripcions. Feu clic a \"Següent\" i després a \"Crea exportació\". Un cop finalitzada l\'exportació, apareixerà a la pàgina web i rebreu un correu electrònic amb un enllaç de descàrrega. Descarregueu-lo i traieu-ne el fitxer subscriptions.json (ubicat a /Takeout/YouTube and YouTube Music/subscriptions/). A continuació, seleccioneu el fitxer exportat fent clic a \"Selecciona un fitxer de subscripcions\" a continuació.</string>
+</resources>

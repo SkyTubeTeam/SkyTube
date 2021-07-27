@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="import_subscriptions_description">Імпортуйте підписки з YouTube, спочатку відвідавши https://takeout.google.com. Приберіть позначки з усіх служб, крім «YouTube і YouTube Music», і натисніть «Усі включені дані YouTube», щоб скасувати вибір усіх, крім підписок. Натисніть кнопку «Наступний крок», а потім — «Експортувати дані». Після виконання експорту він з\'явиться на вебсторінці, на яку ви щойно перейшли, і ви отримаєте електронний лист із посиланням для завантаження. Завантажте файл і витягніть з нього файл subscriptions.json (розташований у /Takeout/YouTube і YouTube Music/Підписки/). Потім виберіть експортований файл, натиснувши «Вибрати файл підписки» нижче.</string>
+    <string name="about">Про застосунок</string>
+    <string name="failed_to_import_subscriptions">Не вдалося імпортувати підписки YouTube.</string>
+    <string name="import_subscriptions_parse_error">Сталася помилка під час спроби проаналізувати вивантажений файл: %s.</string>
+    <string name="no_new_channels_found">У вивантаженому файлі не знайдено каналів YouTube, на які ви ще не підписані.</string>
+    <string name="no_channels_found">У вивантаженому вами файлі не знайдено каналів YouTube.</string>
+    <string name="select_none">Нічого не вибирати</string>
+    <string name="select_all">Вибрати все</string>
+    <string name="select_sub_file">Вибирати файл з підписками</string>
+    <string name="subscriptions_to_channels_imported">Підписку на %d каналів імпортовано.</string>
+    <string name="unsubscribe_from_all_current_sibbed_channels">Відписатися від усіх каналів, на які ви підписані.</string>
+    <string name="import_subscriptions">Імпорт підписок</string>
+    <string name="error_unable_to_subscribe">Не вдалося (від)підписатися на канал (id=%s)</string>
+    <string name="error_check_if_user_has_subbed">Не вдалося перевірити, чи підписався користувач на канал (id=%s)</string>
+    <string name="error_get_subbed_channels">Сталася помилка під час отримання каналів з підпискою.</string>
+    <string name="channel_unsubscribed">Ви відписалися від каналу</string>
+    <string name="unsubscribed">Ви підписалися</string>
+    <string name="channel_subscribe_failed">Не вдалося підписатися на канал</string>
+    <string name="channel_already_subscribed">Ви вже підписалися на цей канал</string>
+    <string name="channel_subscribed">Ви підписались на канал</string>
+    <string name="subscribed">Ви підписалися</string>
+    <string name="total_subscribers">%,d підписників</string>
+    <string name="unsubscribe">Відписатися</string>
+    <string name="subscribe">Підписатися</string>
+    <string name="subscriptions">Підписки</string>
+</resources>

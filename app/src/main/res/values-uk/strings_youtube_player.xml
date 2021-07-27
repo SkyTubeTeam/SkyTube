@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="no_video_comments">Це відео або не має коментарів, або їх вимкнено.</string>
+    <string name="error_get_comments_no_network">Для отримання коментарів потрібен доступ до мережі.</string>
+    <string name="warning_live_video">Наразі не можна відтворювати прямі трансляції. Відкрити пряму трансляцію в іншому застосунку\?</string>
+    <string name="metered_network_blocked_by_policy">Завантаження заблоковано, оскільки пристрій під\'єднано до мобільного інтернету.</string>
+    <string name="warning_metered_network_play">Ваш пристрій споживає мобільний трафік. Щоб уникнути додаткових витрат, радимо під\'єднатися до мережі з необмеженим трафіком. Продовжити завантажувати відео\?</string>
+    <string name="metered_network">Мобільна мережа</string>
+    <string name="error_video_parse_error">Не вдалося розпочати відтворення відео, повідомлення про помилку: <br/> <br/> %s.</string>
+    <string name="error_downloaded_file_is_corrupted">Схоже, що завантажене відео <b>пошкоджене</b> - повідомлення про помилку:: <br/> <br/> %s. <br/> <br/> Бажаєте <b>видалити</b> файл\?</string>
+    <string name="open_with">Відкрити у…</string>
+    <string name="resume">Продовжити</string>
+    <string name="should_resume">Продовжити з місця зупинки\?</string>
+    <string name="clear">Очистити</string>
+    <string name="cancel">Скасувати</string>
+    <string name="play">Відтворити</string>
+    <string name="enter_video_url">Введіть URL-адресу відео</string>
+    <string name="hide_replies">Сховати відповіді</string>
+    <string name="view_replies">Переглянути відповіді</string>
+    <string name="error_get_comments">Сталася помилка під час отримання коментарів.</string>
+    <string name="mark_unwatched">Позначити не переглянутим</string>
+    <string name="mark_watched">Позначити переглянутим</string>
+    <string name="url_copied_to_clipboard">URL-адресу скопійовано до буфера обміну.</string>
+    <string name="copy_url">Копіювати URL-адресу</string>
+    <string name="share_via">Поділитися через</string>
+    <string name="share">Поділитися</string>
+    <string name="open_in_browser">Відкрити у переглядачі</string>
+    <string name="reload_video">Перезавантажити відео</string>
+    <string name="loading_video">Завантаження відео…</string>
+    <string name="ratings_disabled">Оцінки вимкнуто</string>
+    <string name="play_video">Відтворити відео</string>
+    <string name="warning_metered_network_disable">Більше не запитувати.</string>
+    <string name="error_invalid_url">Недійсна URL-адреса відео: %s</string>
+    <string name="error_get_video_desc">Під час отримання опису відео сталася помилка.</string>
+    <string name="error_video_streams">Під час отримання потоків відео сталася помилка.</string>
+    <string name="error_video_streams_empty">Відео %s не має потоків.</string>
+    <string name="error_video_play">Помилка відтворення відео</string>
+    <string name="error_stream_parse_error">Помилка отримання.</string>
+    <string name="error_stream_decryption_fail">Не вдалося завантажити код розшифрування для служби YouTube.</string>
+    <string name="error_stream_err_unavailable">Повідомлення про помилку недоступне.</string>
+</resources>
