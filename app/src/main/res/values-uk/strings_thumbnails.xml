@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="thumbnail_download_error">Не вдалося завантажити мініатюру.</string>
+    <string name="thumbnail_downloaded">Мініатюру завантажено.</string>
+    <string name="view_thumbnail">Переглянути мініатюру</string>
+    <string name="thumbnail">Мініатюра</string>
+</resources>

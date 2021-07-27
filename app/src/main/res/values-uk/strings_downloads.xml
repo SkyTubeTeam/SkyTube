@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="external_storage_not_available">Неможливо завантажити файл через брак зовнішнього накопичувача.</string>
+    <string name="external_storage_not_available">Неможливо завантажити файл через відсутність зовнішнього накопичувача.</string>
     <string name="no_downloaded_videos_text">Завантажені відео відсутні.
 \n
 \nПісля завантаження, вони з\'являться тут.</string>
@@ -13,7 +13,7 @@
     <string name="downloads">Завантаження</string>
     <string name="download">Завантажити</string>
     <string name="playing_video_file_missing">Завантаження для відео не знайдено. Відтворюється віддалено.</string>
-    <string name="warning_metered_network_download">Ви споживаєте мобільний трафік. Аби уникнути додаткових витрат, рекомендуємо під\'єднатися до wi-fi. Чи продовжити завантаження відео\?</string>
+    <string name="warning_metered_network_download">Ви споживаєте мобільний трафік. Щоб уникнути додаткових витрат, радимо під\'єднатися до мережі з необмеженим трафіком. Продовжити завантаження відео\?</string>
     <string name="unable_to_delete_file">Не вдалося видалити файл: \'%s\'</string>
     <string name="download_failed_because">Не вдалося завантажити %1$s, оскільки: %2$s</string>
 </resources>

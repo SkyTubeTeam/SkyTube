@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="dislikes">Не подобається %d%% користувачам</string>
+    <string name="channel_unwhitelist_error">Не вдалося вилучити канал із білого списку.</string>
+    <string name="channel_blacklist_error">Не вдалося додати канал до чорного списку.</string>
+    <string name="channel_blacklisted">Канал додано до чорного списку. Оновіть сторінку.</string>
+    <string name="block_channel">Блокувати канал</string>
+    <string name="configure">Налаштувати</string>
+    <string name="no_videos_blocked">Жодне відео не було заблоковано або відфільтровано. Налаштувати блокувальник відео\?</string>
+    <string name="blocked_videos">Заблоковані відео</string>
+</resources>

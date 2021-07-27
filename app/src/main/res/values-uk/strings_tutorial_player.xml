@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="tutorial_slide_6">Двічі торкніться, щоб зупинити або відтворити відео.</string>
+    <string name="tutorial_slide_5">Проведіть пальцем по вертикалі, щоб змінити яскравість.</string>
+    <string name="tutorial_slide_4">Проведіть пальцем по вертикалі, щоб змінити гучність.</string>
+    <string name="tutorial_slide_3">Проведіть пальцем по горизонталі, щоб перемотати вперед або назад.</string>
+    <string name="tutorial_slide_2">Проведіть пальцем угору, щоб переглянути опис відео.</string>
+    <string name="tutorial_slide_1">Проведіть пальцем вліво, щоб переглянути коментарі.</string>
+    <string name="page_counter">%1$d з %2$d</string>
+    <string name="skip">Пропустити</string>
+    <string name="done">Готово</string>
+    <string name="next">"Далі "</string>
+</resources>

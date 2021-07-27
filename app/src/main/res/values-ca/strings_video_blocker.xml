@@ -1,2 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="dislikes">%d%% vots negatius</string>
+    <string name="channel_unwhitelist_error">No s\'ha pogut eliminar el canal de la llista blanca.</string>
+    <string name="channel_blacklist_error">El canal no s\'ha pogut incloure a la llista negra.</string>
+    <string name="channel_blacklisted">Canal a la llista negra. Si us plau, refresca.</string>
+    <string name="block_channel">Bloqueja Canal</string>
+    <string name="configure">Configurar</string>
+    <string name="no_videos_blocked">No s\'ha bloquejat ni filtrat cap vídeo. Voleu configurar el Bloquejador de Vídeos\?</string>
+    <string name="blocked_videos">Vídeos Bloquejats</string>
+</resources>

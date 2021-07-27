@@ -155,4 +155,6 @@
     <string name="pref_summary_default_content_country">Prikaži sadržaj namijenjen za ovu zemlju: %s</string>
     <string name="pref_title_default_content_country">Standardni sadržaj zemlje</string>
     <string name="system_default_country">Standardna zemlja sustava</string>
+    <string name="pref_key_use_newer_formats_summary">Stare verzije Androida ne podržavaju sve video formate koje Youtube nudi. Isključi, ako često naiđeš na nereproducirajuća videa ili videa bez zvuka</string>
+    <string name="pref_key_use_newer_formats_title">Isprobaj novije video formate</string>
 </resources>

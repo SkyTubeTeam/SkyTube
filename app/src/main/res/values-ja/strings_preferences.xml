@@ -164,4 +164,9 @@
     <string name="pref_title_hide_tabs">タブを隠す</string>
     <string name="pref_summary_autocast">他のアプリからSkyTubeで動画を開く場合に使用するChromecastデバイスを選択します。</string>
     <string name="pref_network_downloads_category">ネットワークとダウンロード</string>
+    <string name="pref_title_default_content_country">デフォルトのコンテンツの国</string>
+    <string name="pref_summary_default_content_country">この国を対象としたコンテンツを表示する: %s</string>
+    <string name="system_default_country">システムデフォルトの国</string>
+    <string name="pref_key_use_newer_formats_title">新しいビデオ形式を試す</string>
+    <string name="pref_key_use_newer_formats_summary">古いバージョンのAndroidはYoutubeの提供するどのビデオ形式にも対応していません。映像や音声に問題が頻繁に発生する場合はオフにしてください。</string>
 </resources>

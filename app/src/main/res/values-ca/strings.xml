@@ -1,5 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="could_not_get_channel">No s\'ha pogut baixar la informació del canal.</string>
+    <string name="could_not_get_channel">No s\'ha pogut baixar la informació del canal!</string>
     <string name="could_not_get_videos">No s\'han pogut obtenir %s vídeos.</string>
+    <string name="launch_offical_player_error">S\'ha produït un error en intentar iniciar el reproductor oficial de YouTube de Google. Assegureu-vos que estigui instal·lat al dispositiu.</string>
+    <string name="search_channel">Cercar canal</string>
+    <string name="no">No</string>
+    <string name="yes">Sí</string>
+    <string name="loading">Carregant …</string>
+    <string name="close">Tancar</string>
+    <string name="recaptcha_challenge_requested">YouTube bloqueja les nostres sol·licituds, Heu de resoldre el repte reCaptcha!</string>
+    <string name="could_not_get_playlists">No s\'han pogut obtenir llistes de reproducció %s.</string>
+    <string name="playlists">Llistes de reproducció</string>
+    <string name="num_videos">%d vídeos</string>
+    <string name="videos">Vídeos</string>
+    <string name="video">Vídeo</string>
+    <string name="trending_in">Tendència (%s)</string>
+    <string name="most_popular">El més popular</string>
+    <string name="featured">Destacats</string>
+    <string name="LIVE">DIRECTE</string>
+    <string name="search_videos">Cerca vídeos</string>
+    <string name="ok">D\'acord</string>
+    <string name="error">Error</string>
+    <string name="views">%,d visualitzacions</string>
+    <string name="could_not_get_channel_detailed">No s\'ha pogut descarregar la informació del canal: %s.</string>
 </resources>

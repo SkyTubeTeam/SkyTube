@@ -158,4 +158,6 @@
     <string name="pref_summary_default_content_country">顯示針對此國家的內容：%s</string>
     <string name="pref_title_default_content_country">預設內容國家</string>
     <string name="system_default_country">系統預設國家</string>
+    <string name="pref_key_use_newer_formats_summary">舊版的 Android 並不支援 YouTube 提供的所有視訊格式。如果您經常遇到影片播放無法運作或是沒有聲音的話，請關閉</string>
+    <string name="pref_key_use_newer_formats_title">嘗試更新的視訊格式</string>
 </resources>
