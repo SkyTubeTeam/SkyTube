@@ -104,7 +104,7 @@
     <string name="pref_title_default_tab">默认标签</string>
     <string name="pref_other_category">其他</string>
     <string name="i_agree">我同意</string>
-    <string name="pref_title_license">License</string>
+    <string name="pref_title_license">许可证</string>
     <string name="pref_summary_updates">检查新版本。</string>
     <string name="pref_title_updates">更新</string>
     <string name="pref_title_version">版本</string>
@@ -155,4 +155,6 @@
     <string name="key_preferences">首选项</string>
     <string name="preferences">首选项</string>
     <string name="system_default_country">系统默认国家</string>
+    <string name="pref_key_use_newer_formats_summary">旧的Android版本并不支持Youtube提供的所有视频格式。如果您经常遇到视频无法播放，或没有声音，请关闭它</string>
+    <string name="pref_key_use_newer_formats_title">尝试较新的视频格式</string>
 </resources>
