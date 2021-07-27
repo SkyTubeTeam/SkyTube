@@ -119,7 +119,7 @@ public class Linker {
 			} else {
 				isBookmarked = false;
 			}
-			AlertDialog.Builder builder = new AlertDialog.Builder(ctx)
+			new AlertDialog.Builder(ctx)
 					.setTitle(clickedText)
 					.setItems(items.toArray(new CharSequence[0]),
 							(dialog, which) -> {
@@ -147,8 +147,8 @@ public class Linker {
 												}).subscribe();
 										break;
 								}
-							});
-			builder.create().show();
+							})
+					.show();
 		}
 	}
 

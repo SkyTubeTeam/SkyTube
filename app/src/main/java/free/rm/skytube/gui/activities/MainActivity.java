@@ -28,7 +28,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
-import android.widget.EditText;
 import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
@@ -60,6 +59,7 @@ import free.rm.skytube.businessobjects.YouTube.VideoBlocker;
 import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
 import free.rm.skytube.businessobjects.db.SearchHistoryDb;
 import free.rm.skytube.businessobjects.db.SearchHistoryTable;
+import free.rm.skytube.databinding.DialogEnterVideoUrlBinding;
 import free.rm.skytube.gui.businessobjects.BlockedVideosDialog;
 import free.rm.skytube.gui.businessobjects.adapters.SearchHistoryCursorAdapter;
 import free.rm.skytube.gui.businessobjects.fragments.FragmentEx;
@@ -343,27 +343,31 @@ public class MainActivity extends BaseActivity {
 	 * Display the Enter Video URL dialog.
 	 */
 	private void displayEnterVideoUrlDialog() {
-		final AlertDialog alertDialog = new AlertDialog.Builder(this)
-			.setView(R.layout.dialog_enter_video_url)
-			.setTitle(R.string.enter_video_url)
-			.setPositiveButton(R.string.play, (dialog, which) -> {
-				// get the inputted URL string
-				final String videoUrl = ((EditText)((AlertDialog) dialog).findViewById(R.id.dialog_url_edittext)).getText().toString();
+		final DialogEnterVideoUrlBinding dialogBinding
+				= DialogEnterVideoUrlBinding.inflate(getLayoutInflater());
 
-				// play the video
-				SkyTubeApp.openUrl(MainActivity.this, videoUrl, true);
-			})
-			.setNegativeButton(R.string.cancel, null)
-			.show();
+		new AlertDialog.Builder(this)
+				.setView(dialogBinding.getRoot())
+				.setTitle(R.string.enter_video_url)
+				.setPositiveButton(R.string.play, (dialog, which) -> {
+					// get the inputted URL string
+					final String videoUrl = dialogBinding.dialogUrlEdittext.getText().toString();
+
+					// play the video
+					SkyTubeApp.openUrl(MainActivity.this, videoUrl, true);
+				})
+				.setNegativeButton(R.string.cancel, null)
+				.show();
 
 		// paste whatever there is in the clipboard (hopefully it is a video url)
 		CharSequence charSequence = getClipboardItem();
 		if (charSequence != null) {
-			((EditText) alertDialog.findViewById(R.id.dialog_url_edittext)).setText(charSequence.toString());
+			dialogBinding.dialogUrlEdittext.setText(charSequence.toString());
 		}
 
 		// clear URL edittext button
-		alertDialog.findViewById(R.id.dialog_url_clear_button).setOnClickListener(v -> ((EditText) alertDialog.findViewById(R.id.dialog_url_edittext)).setText(""));
+		dialogBinding.dialogUrlClearButton.setOnClickListener(v ->
+				dialogBinding.dialogUrlEdittext.setText(""));
 	}
 
 
