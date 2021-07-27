@@ -17,11 +17,11 @@
 
 package free.rm.skytube.gui.fragments.preferences;
 
-import android.app.AlertDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.preference.EditTextPreference;
 import androidx.preference.ListPreference;
 import androidx.preference.MultiSelectListPreference;
@@ -135,13 +135,13 @@ public class OthersPreferenceFragment extends BasePreferenceFragment {
 	 * @param messageID Message resource ID.
 	 */
 	private void displayRestartDialog(int messageID, boolean restart) {
-		AlertDialog.Builder b = new AlertDialog.Builder(getActivity())
+		final AlertDialog.Builder b = new AlertDialog.Builder(getActivity())
 				.setMessage(messageID)
 				.setCancelable(false);
 		if (restart) {
 			b.setPositiveButton(R.string.restart, (dialog, which) -> SkyTubeApp.restartApp());
 		} else {
-			b.setPositiveButton(R.string.ok, (dialog, which) -> {});
+			b.setPositiveButton(R.string.ok, null);
 		}
 		b.show();
 	}

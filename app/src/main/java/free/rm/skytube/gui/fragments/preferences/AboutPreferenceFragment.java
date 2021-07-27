@@ -17,7 +17,6 @@
 
 package free.rm.skytube.gui.fragments.preferences;
 
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -27,6 +26,7 @@ import android.util.Log;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 

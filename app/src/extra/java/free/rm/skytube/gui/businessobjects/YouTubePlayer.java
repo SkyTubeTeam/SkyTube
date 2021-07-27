@@ -18,7 +18,6 @@
 package free.rm.skytube.gui.businessobjects;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -26,6 +25,7 @@ import android.net.Uri;
 import android.os.Handler;
 import android.util.Log;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.preference.PreferenceManager;
 
 import free.rm.skytube.R;
@@ -161,7 +161,7 @@ public class YouTubePlayer {
 			new AlertDialog.Builder(context)
 					.setTitle(R.string.error)
 					.setMessage(errorMsg)
-					.setIcon(android.R.drawable.ic_dialog_alert)
+					.setIcon(R.drawable.ic_warning)
 					.setNeutralButton(android.R.string.ok, null)
 					.show();
 		}

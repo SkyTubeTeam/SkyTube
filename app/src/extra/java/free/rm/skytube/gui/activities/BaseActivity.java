@@ -519,8 +519,7 @@ public abstract class BaseActivity extends AppCompatActivity implements MainActi
 										.setMessage(throwable.getMessage())
 										.setTitle(R.string.error_video_play)
 										.setCancelable(false)
-										.setPositiveButton(R.string.ok, (dialog, which) -> {
-										})
+										.setPositiveButton(R.string.ok, null)
 										.show();
 							}
 						}

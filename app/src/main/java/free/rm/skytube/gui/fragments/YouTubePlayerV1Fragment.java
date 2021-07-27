@@ -894,9 +894,8 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 						.setMessage(R.string.warning_live_video)
 						.setTitle(R.string.error_video_play)
 						.setNegativeButton(R.string.cancel, (dialog, which) -> closeActivity())
-						.setPositiveButton(R.string.ok, (dialog, which) -> {
-							youTubeVideo.playVideoExternally(getContext()).subscribe(status -> closeActivity());
-						})
+						.setPositiveButton(R.string.ok, (dialog, which) ->
+								youTubeVideo.playVideoExternally(getContext()).subscribe(status -> closeActivity()))
 						.show();
 			}
 		}
