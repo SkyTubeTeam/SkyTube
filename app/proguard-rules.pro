@@ -23,3 +23,7 @@
 -keep class com.google.api.services.youtube.** { *; }
 
 -keep class * extends androidx.preference.PreferenceFragmentCompat
+
+-dontwarn java.awt.**
+-dontwarn javax.swing.**
+-dontwarn org.slf4j.impl.StaticLoggerBinder
