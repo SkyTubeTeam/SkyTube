@@ -18,8 +18,6 @@
 package free.rm.skytube.app;
 
 import android.app.AlarmManager;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.ActivityNotFoundException;
 import android.content.ClipData;
@@ -43,6 +41,8 @@ import androidx.annotation.ArrayRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.core.app.NotificationChannelCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.core.graphics.ColorUtils;
@@ -125,7 +125,7 @@ public class SkyTubeApp extends MultiDexApplication {
 					.penaltyDeath()
 					.build());
 		}
-		initChannels(this);
+		initChannels();
 	}
 
 	private void setupRxJava() {
@@ -336,20 +336,16 @@ public class SkyTubeApp extends MultiDexApplication {
 
 	/*
 	 * Initialize Notification Channels (for Android OREO)
-	 * @param context
 	 */
-	private void initChannels(@NonNull Context context) {
-		if(Build.VERSION.SDK_INT < 26) {
-			return;
-		}
-		NotificationManager notificationManager = getSystemService(NotificationManager.class);
-
-		CharSequence channelName = context.getString(R.string.notification_channel_feed_title);
-		int importance = NotificationManager.IMPORTANCE_LOW;
-		NotificationChannel notificationChannel = new NotificationChannel(NEW_VIDEOS_NOTIFICATION_CHANNEL, channelName, importance);
-		notificationChannel.enableLights(true);
-		notificationChannel.setLightColor(ColorUtils.compositeColors(0xFFFF0000, 0xFFFF0000));
-		notificationChannel.enableVibration(false);
+	private void initChannels() {
+		final NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+		final NotificationChannelCompat notificationChannel = new NotificationChannelCompat
+				.Builder(NEW_VIDEOS_NOTIFICATION_CHANNEL, NotificationManagerCompat.IMPORTANCE_LOW)
+				.setName(getString(R.string.notification_channel_feed_title))
+				.setLightsEnabled(true)
+				.setLightColor(ColorUtils.compositeColors(0xFFFF0000, 0xFFFF0000))
+				.setVibrationEnabled(true)
+				.build();
 		notificationManager.createNotificationChannel(notificationChannel);
 	}
 
