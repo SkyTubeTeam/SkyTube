@@ -23,6 +23,8 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 
+import androidx.core.view.GestureDetectorCompat;
+
 import free.rm.skytube.app.Settings;
 
 /**
@@ -31,15 +33,15 @@ import free.rm.skytube.app.Settings;
  */
 public abstract class PlayerViewGestureDetector implements View.OnTouchListener {
 
-	private GestureDetector             gestureDetector;
-	private PlayerViewGestureListener   playerViewGestureListener;
-	private Settings 					settings;
+	private final GestureDetectorCompat     gestureDetector;
+	private final PlayerViewGestureListener playerViewGestureListener;
+	private final Settings 					settings;
 
 
 	public PlayerViewGestureDetector(Context context, Settings settings) {
 		this.settings = settings;
 		playerViewGestureListener = new PlayerViewGestureListener();
-		gestureDetector = new GestureDetector(context, playerViewGestureListener);
+		gestureDetector = new GestureDetectorCompat(context, playerViewGestureListener);
 	}
 
 
