@@ -23,18 +23,20 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 
+import androidx.core.view.GestureDetectorCompat;
+
 /**
  * Detects user's swipe motions and taps.
  */
 public abstract class OnSwipeTouchListener implements View.OnTouchListener {
 
-	private final GestureDetector gestureDetector;
+	private final GestureDetectorCompat gestureDetector;
 	private final GestureListener gestureListener;
 
 
 	protected OnSwipeTouchListener(Context context){
 		gestureListener = new GestureListener();
-		gestureDetector = new GestureDetector(context, gestureListener);
+		gestureDetector = new GestureDetectorCompat(context, gestureListener);
 	}
 
 
@@ -195,7 +197,7 @@ public abstract class OnSwipeTouchListener implements View.OnTouchListener {
 
 		private boolean isEventValid(MotionEvent event) {
 			// this gesture just worked on single pointer.
-			return (gestureDetector != null && event.getPointerCount() == 1);
+			return event.getPointerCount() == 1;
 		}
 
 		private void onTouchEvent(MotionEvent event) {
