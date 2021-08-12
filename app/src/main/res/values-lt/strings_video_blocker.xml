@@ -1,2 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="dislikes">%d%% nepatinka</string>
+    <string name="channel_unwhitelist_error">Kanalo nepavyko pašalinti iš baltojo sąrašo.</string>
+    <string name="channel_blacklist_error">Kanalo nepavyko įtraukti į juodąjį sąrašą.</string>
+    <string name="channel_blacklisted">Kanalas įtrauktas į juodąjį sąrašą. Prašome atnaujinti.</string>
+    <string name="block_channel">Blokuoti kanalą</string>
+    <string name="configure">Konfigūruoti</string>
+    <string name="no_videos_blocked">Jokie vaizdo įrašai nebuvo blokuojami ar filtruojami. Ar norite konfigūruoti vaizdo įrašų blokatorių\?</string>
+    <string name="blocked_videos">Užblokuoti vaizdo įrašai</string>
+</resources>
