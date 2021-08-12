@@ -1,2 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="search_channel">Ieškoti kanalų</string>
+    <string name="no">Ne</string>
+    <string name="yes">Taip</string>
+    <string name="loading">Kraunama …</string>
+    <string name="close">Uždaryti</string>
+    <string name="recaptcha_challenge_requested">„YouTube“ blokuoja mūsų tinklo užklausas. Turite išspręsti „reCaptcha“ iššūkį!</string>
+    <string name="could_not_get_playlists">Nepavyko gauti %s grojaraščių.</string>
+    <string name="playlists">Grojaraščiai</string>
+    <string name="num_videos">%d vaizdo įrašai</string>
+    <string name="videos">Vaizdo įrašai</string>
+    <string name="video">Vaizdo įrašas</string>
+    <string name="trending_in">Tendencijos (%s)</string>
+    <string name="most_popular">Populiariausi</string>
+    <string name="featured">Siūloma</string>
+    <string name="LIVE">TIESIOGIAI</string>
+    <string name="launch_offical_player_error">Bandant paleisti oficialų „YouTube“ grotuvą iš „Google“ įvyko klaida. Įsitikinkite, kad jis įdiegtas jūsų prietaise.</string>
+    <string name="search_videos">Ieškoti vaizdo įrašų</string>
+    <string name="ok">Gerai</string>
+    <string name="error">Klaida</string>
+    <string name="views">%,d peržiūrų</string>
+    <string name="could_not_get_channel_detailed">Nepavyko atsisiųsti kanalo informacijos: %s.</string>
+    <string name="could_not_get_channel">Nepavyko atsisiųsti kanalo informacijos!</string>
+    <string name="could_not_get_videos">Nepavyko gauti %s vaizdo įrašų.</string>
+</resources>
