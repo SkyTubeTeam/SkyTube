@@ -1,2 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="databases_import_success">Importuotos duomenų bazės. Iš naujo paleiskite programą, kad pritaikytumėte pakeitimus.</string>
+    <string name="databases_importing">Importuojama…</string>
+    <string name="continue_">Tęsti</string>
+    <string name="databases_import_warning_message">Prenumeratų ir žymių duomenų bazės bus pakeistos pasirinkto atsarginės kopijos failo duomenimis.
+\n
+\nTęsti\?</string>
+    <string name="databases_import_nothing_selected">Nieko nebuvo pasirinkta…</string>
+    <string name="databases_import_select_backup">Pasirinkite atsarginės kopijos failą, kurį norite importuoti</string>
+    <string name="databases_backing_up">Kuriama atsarginė kopija…</string>
+    <string name="pref_summary_import_dbs">Importuokite prenumeratų ir žymų duomenų bazių atsargines kopijas.</string>
+    <string name="pref_title_import_dbs">Importuoti atsarginę kopiją</string>
+    <string name="pref_summary_backup_dbs">Padarykite atsarginę prenumeratų ir žymių duomenų bazių kopiją.</string>
+    <string name="pref_title_backup_dbs">Padaryti duomenų bazės kopiją</string>
+    <string name="pref_import_export_category">Importavimas / eksportavimas</string>
+    <string name="pref_summary_metered_network_usage">Ką daryti, jei vaizdo įrašams atsisiųsti ir (arba) žiūrėti naudojate matuojamąjį tinklą: %s</string>
+    <string name="pref_title_metered_network_usage">Matuojamas tinklo naudojimas</string>
+    <string name="pref_summary_maximum_res_metered">Pasirinkite maksimalią skiriamąją gebą, kai transliuojate per matuojamą tinklą: %s</string>
+    <string name="pref_title_maximum_res_metered">Maksimali matuojamo tinklo skiriamoji geba</string>
+    <string name="pref_summary_minimum_res_metered">Pasirinkite minimalią skiriamąją gebą, kai transliuojate per matuojamą tinklą: %s</string>
+    <string name="pref_title_minimum_res_metered">Minimali matuojamo tinklo skiriamoji geba</string>
+    <string name="pref_category_metered_network">Matuojamas tinklas</string>
+    <string name="no_resolution_specified">Nėra</string>
+    <string name="pref_summary_choose_player">Naudojamas vaizdo grotuvas: %s</string>
+    <string name="pref_title_choose_player">Vaizdo grotuvas</string>
+    <string name="pref_summary_minimum_res">Pasirinkite minimalią skiriamąją gebą: %s</string>
+    <string name="pref_title_minimum_res">Minimali skiriamoji geba</string>
+    <string name="pref_summary_maximum_res">Pasirinkite didžiausią skiriamąją gebą: %s</string>
+    <string name="pref_title_maximum_res">Didžiausia skiriamoji geba</string>
+    <string name="pref_video_player_category">Vaizdo grotuvas</string>
+    <string name="key_preferences">nustatymai</string>
+    <string name="preferences">Nustatymai</string>
+</resources>
