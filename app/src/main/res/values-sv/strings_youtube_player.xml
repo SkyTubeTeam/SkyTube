@@ -33,4 +33,6 @@
     <string name="error_get_comments_no_network">Nätverksåtkomst krävs för att hämta kommentarer.</string>
     <string name="error_video_parse_error">Det går inte att börja spela upp videon, felmeddelandet är: <br/> <br/> %s.</string>
     <string name="error_downloaded_file_is_corrupted">Den nedladdade videon ser <b>skadad</b> ut - felmeddelandet är: <br/> <br/> %s. <br/> <br/> Vill du <b>radera</b> filen\?</string>
+    <string name="reload_video">Ladda om video</string>
+    <string name="warning_metered_network_disable">Fråga aldrig igen.</string>
 </resources>
