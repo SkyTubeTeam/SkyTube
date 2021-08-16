@@ -3,7 +3,7 @@
     <string name="search_channel">Ieškoti kanalų</string>
     <string name="no">Ne</string>
     <string name="yes">Taip</string>
-    <string name="loading">Kraunama …</string>
+    <string name="loading">Įkeliama…</string>
     <string name="close">Uždaryti</string>
     <string name="recaptcha_challenge_requested">„YouTube“ blokuoja mūsų tinklo užklausas. Turite išspręsti „reCaptcha“ iššūkį!</string>
     <string name="could_not_get_playlists">Nepavyko gauti %s grojaraščių.</string>
