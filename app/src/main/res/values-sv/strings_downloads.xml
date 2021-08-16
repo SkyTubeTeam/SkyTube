@@ -12,4 +12,6 @@
 \n
 \nNär du gör det kommer de att dyka upp här.</string>
     <string name="video_downloaded">\'%s\' har hämtats.</string>
+    <string name="download_failed_because">Det gick inte att ladda ner %1$s pga: %2$s</string>
+    <string name="unable_to_delete_file">Det gick inte att ta bort den nedladdade filen: \'%s\'</string>
 </resources>
