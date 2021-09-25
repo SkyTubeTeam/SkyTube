@@ -9,7 +9,7 @@
     <string name="no_new_videos_found">Nie znaleziono żadnych filmów.</string>
     <string name="no_subscriptions_text">Nie subskrybujesz żadnych kanałów.
 \n
-\nGdy już zaczniesz, wszystkie filmy dodane do subskrybowanych kanałów w ciągu ostatniego miesiąca pojawią się tutaj.</string>
+\nGdy już zaczniesz, wszystkie filmy dodane w ciągu ostatniego miesiąca do subskrybowanych kanałów pojawią się tutaj.</string>
     <string name="import_subscriptions_from_youtube">Importuj subskrypcje z YouTube</string>
     <string name="notification_channel_feed_title">Powiadomienia z kanału subskrypcji</string>
     <string name="notification_new_videos_found">%d nowych filmów z subskrybowanych kanałów</string>
