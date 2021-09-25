@@ -8,7 +8,7 @@
     <string name="video_downloaded">\'%s\' pobrane.</string>
     <string name="no_downloaded_videos_text">Nie pobrano jeszcze żadnych filmów.
 \n
-\nGdy to się zmieni, pojawią się tutaj.</string>
+\nPo pobraniu, pojawią się tutaj.</string>
     <string name="playing_video_file_missing">Nie znaleziono pobrania dla tego filmu. Odtwarzanie zdalne.</string>
     <string name="external_storage_not_available">Nie można pobrać pliku, ponieważ zewnętrzna pamięć jest niedostępna.</string>
     <string name="download">Pobierz</string>
