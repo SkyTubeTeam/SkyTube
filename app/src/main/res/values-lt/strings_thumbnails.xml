@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="thumbnail_download_error">Miniatiūros nepavyko atsisiųsti.</string>
+    <string name="thumbnail_downloaded">Miniatiūra atsisiųsta.</string>
+    <string name="view_thumbnail">Peržiūrėti miniatiūrą</string>
+    <string name="thumbnail">Miniatiūros</string>
+</resources>

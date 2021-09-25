@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="downloading">Atsiunčiama…</string>
+    <string name="update_failure">Nepavyko atnaujinti programėlės.</string>
+    <string name="later">Vėliau</string>
+    <string name="update">Atnaujinti</string>
+    <string name="release_notes">Pokyčiai %s</string>
+    <string name="up_to_date_msg">Turite įdiegtą naujausią „SkyTube“ versiją.</string>
+    <string name="up_to_date">Atnaujinimų nėra</string>
+    <string name="update_dialog_msg">Pasirodė nauja \"SkyTube\" versija. Bus įdiegta versija %s.</string>
+    <string name="update_available">Galima nauja versija</string>
+</resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="downloading">Tallennetaan…</string>
+    <string name="update_failure">Ei voida päivittää sovellusta.</string>
+    <string name="later">Myöhemmin</string>
+    <string name="update">Päivitä</string>
+    <string name="release_notes">Muutokset kohteessa %s</string>
+    <string name="up_to_date_msg">Sinulla on asennettuna SkyTuben uusin versio.</string>
+    <string name="up_to_date">Ajan tasalla</string>
+    <string name="update_dialog_msg">Uusi versio SkyTubeen on saataville. Versio %s asennetaan.</string>
+    <string name="update_available">Uusi versio saatavilla</string>
+</resources>

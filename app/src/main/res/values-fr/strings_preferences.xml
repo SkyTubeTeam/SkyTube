@@ -192,4 +192,6 @@
     <string name="pref_title_minimum_res">Résolution minimale</string>
     <string name="pref_summary_maximum_res">Sélectionnez votre résolution maximale : %s</string>
     <string name="pref_title_maximum_res">Résolution maximale</string>
+    <string name="pref_key_use_newer_formats_summary">Les anciennes versions d\'Android ne prennent pas en charge tous les formats vidéo proposés par YouTube. Désactivez cette fonction si vous rencontrez fréquemment des problèmes de lecture vidéo ou d\'absence de son</string>
+    <string name="pref_key_use_newer_formats_title">Essayez des formats vidéo plus récents</string>
 </resources>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="import_subscriptions_description">Tuo tilauksesi YouTubesta vierailemalla https://takeout.google.com. Poista kaikki palvelut paitsi \"YouTube ja YouTube Musiikki\" ja klikkaa \"Kaikki YouTube data sisällytettynä\" poissulkeaksesi kaikki muut paitsi tilaukset. Klikkaa \"Seuraava\" ja sitten \"Luo vienti\". Kun vienti on valmistunut, se näkyy edessäsi olevalla verkkosivulla ja sinä saat sähköpostiisi latauslinkin. Tallenna tiedosto ja pura subscriptions.json -tiedosto (sijainti: /Takeout/YouTube and YouTube Music/subscriptions/). Sen jälkeen valitse vientitiedosto klikkaamalla \"Valitse tilaustiedosto\" alempaa.</string>
+    <string name="about">Tietoa</string>
+    <string name="failed_to_import_subscriptions">YouTube-tilausten tuonti epäonnistui.</string>
+    <string name="import_subscriptions_parse_error">Virhe jäsenneltäessä lataamaasi tiedostoa: %s.</string>
+    <string name="no_new_channels_found">Yhtään YouTube-kanavaa, jota et ole jo tilannut ei löytynyt lataamastasi tiedostosta.</string>
+    <string name="no_channels_found">Yhtään YouTube-kanavaa ei löytynyt lataamastasi tiedostosta.</string>
+    <string name="select_none">Älä valitse mitään</string>
+    <string name="select_all">Valitse kaikki</string>
+    <string name="select_sub_file">Valitse tilausten tiedosto</string>
+    <string name="subscriptions_to_channels_imported">Tilaukset %d kanavaan/kanaviin tuotu.</string>
+    <string name="unsubscribe_from_all_current_sibbed_channels">Poista tilaus kaikista nykyisistä tilaamistasi kanavista.</string>
+    <string name="import_subscriptions">Tuo tilaukset</string>
+    <string name="error_unable_to_subscribe">Ei voida tilata/poistaa tilausta kanavalta (id=%s)</string>
+    <string name="error_check_if_user_has_subbed">Ei voida tarkistaa, onko käyttäjä tilannut kanavaa (id=%s)</string>
+    <string name="error_get_subbed_channels">Virhe noudettaessa tilattuja kanavia.</string>
+    <string name="channel_unsubscribed">Kanavan tilaus poistettu</string>
+    <string name="unsubscribed">Tilaus poistettu</string>
+    <string name="channel_subscribe_failed">Ei voida tilata kanavaa</string>
+    <string name="channel_already_subscribed">Olet jo tilannut kanavan</string>
+    <string name="channel_subscribed">Kanava tilattu</string>
+    <string name="subscribed">Tilattu</string>
+    <string name="total_subscribers">%,d tilaajaa</string>
+    <string name="unsubscribe">Poista tilaus</string>
+    <string name="subscribe">Tilaa</string>
+    <string name="subscriptions">Tilaukset</string>
+</resources>

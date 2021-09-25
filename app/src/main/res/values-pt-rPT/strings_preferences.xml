@@ -167,4 +167,6 @@
     <string name="pref_summary_default_content_country">Mostrar conteúdo idealizado para este país: %s</string>
     <string name="pref_title_default_content_country">País padrão do conteúdo</string>
     <string name="system_default_country">País definido no sistema</string>
+    <string name="pref_key_use_newer_formats_summary">A versões antigas Android não têm suporte a todos os formatos de vídeo que o YouTube disponibiliza. Desative esta opção se ocorrerem erros durante a reprodução.</string>
+    <string name="pref_key_use_newer_formats_title">Experimentar novos formatos</string>
 </resources>
