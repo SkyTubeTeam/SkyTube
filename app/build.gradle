@@ -109,16 +109,16 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
 
 /** AndroidX **/
-    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.appcompat:appcompat:1.3.1'
     implementation 'androidx.cardview:cardview:1.0.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.1'
     implementation 'androidx.core:core:1.6.0'
     implementation 'androidx.media:media:1.3.1'
     implementation 'androidx.multidex:multidex:2.0.1' // as we have over 65536 methods...
     implementation 'androidx.preference:preference:1.1.1'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
-    implementation 'com.google.android.material:material:1.3.0'
+    implementation 'com.google.android.material:material:1.4.0'
 
 /** ExoPlayer **/
     // Application level media player
@@ -166,11 +166,14 @@ dependencies {
         exclude group: 'com.google.http-client', module: 'google-http-client'
         exclude group: 'com.google.http-client', module: 'google-http-client-jackson2'
     }
-    implementation 'com.github.SkyTubeTeam.NewPipeExtractor:extractor:d761053c45465c3ee3f'
-    implementation('com.github.SkyTubeTeam.components:okhttp-client:0.0.3')
+
+    implementation 'com.github.TeamNewPipe:NewPipeExtractor:v0.21.10'
+    implementation ('com.github.SkyTubeTeam.components:okhttp-client:0.0.3') {
+        exclude group: 'com.github.SkyTubeTeam.NewPipeExtractor', module: 'extractor'
+    }
 
     // Java HTML parser
-    implementation 'org.jsoup:jsoup:1.13.1'
+    implementation 'org.jsoup:jsoup:1.14.2'
 
     // Language Detection Library for Java
     implementation('com.optimaize.languagedetector:language-detector:0.6') {

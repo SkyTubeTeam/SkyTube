@@ -441,9 +441,6 @@ public class SkyTubeApp extends MultiDexApplication {
 				showInvalidUrlToast(context, url);
 			}
 			return id;
-		} catch (FoundAdException e) {
-			SkyTubeApp.notifyUserOnError(context, e);
-			return null;
 		} catch (RuntimeException e) {
 			SkyTubeApp.notifyUserOnError(context, e);
 			return null;
