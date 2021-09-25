@@ -45,6 +45,7 @@ import org.schabi.newpipe.extractor.playlist.PlaylistExtractor;
 import org.schabi.newpipe.extractor.search.SearchExtractor;
 import org.schabi.newpipe.extractor.stream.StreamExtractor;
 import org.schabi.newpipe.extractor.stream.StreamInfo;
+import org.schabi.newpipe.extractor.subscription.SubscriptionExtractor;
 
 import java.io.IOException;
 import java.time.Instant;
@@ -90,7 +91,7 @@ public class NewPipeService {
         return parse(streamingService.getStreamLHFactory(), url, StreamingService.LinkType.STREAM);
     }
 
-    public ContentId getContentId(String url) throws FoundAdException {
+    public ContentId getContentId(String url) {
         if (url == null) {
             return null;
         }
@@ -107,13 +108,11 @@ public class NewPipeService {
         return id;
     }
 
-    private ContentId parse(LinkHandlerFactory handlerFactory, String url, StreamingService.LinkType type) throws FoundAdException {
+    private ContentId parse(LinkHandlerFactory handlerFactory, String url, StreamingService.LinkType type) {
         if (handlerFactory != null) {
             try {
                 String id = handlerFactory.getId(url);
                 return new ContentId(id, handlerFactory.getUrl(id), type);
-            } catch (FoundAdException fa) {
-                throw fa;
             } catch (ParsingException pe) {
                 return null;
             }
@@ -403,6 +402,9 @@ public class NewPipeService {
         return instance;
     }
 
+    public SubscriptionExtractor createSubscriptionExtractor() {
+        return streamingService.getSubscriptionExtractor();
+    }
     /**
      * Initialize NewPipe with a custom HttpDownloader.
      */

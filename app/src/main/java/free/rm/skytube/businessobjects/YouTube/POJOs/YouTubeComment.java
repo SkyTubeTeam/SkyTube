@@ -35,6 +35,8 @@ public class YouTubeComment {
 	private Long likeCount;
 	private String thumbnailUrl;
 	private String authorChannelId;
+	private boolean pinned;
+	private boolean heartedByUploader;
 
 	public YouTubeComment(com.google.api.services.youtube.model.Comment comment) {
 		if (comment.getSnippet() != null) {
@@ -50,13 +52,15 @@ public class YouTubeComment {
 		}
 	}
 
-	public YouTubeComment(String authorChannelId, String author, String thumbnailUrl, String comment, String datePublished, Long likeCount) {
+	public YouTubeComment(String authorChannelId, String author, String thumbnailUrl, String comment, String datePublished, long likeCount, boolean pinned, boolean heartedByUploader) {
 		this.author = author;
 		this.comment = comment;
 		this.datePublished = datePublished;
-		this.likeCount = likeCount;
+		this.likeCount = (0 <= likeCount ? Long.valueOf(likeCount) : null);
 		this.thumbnailUrl = thumbnailUrl;
 		this.authorChannelId = authorChannelId;
+		this.pinned = pinned;
+		this.heartedByUploader = heartedByUploader;
 	}
 
 	public String getAuthor() {
@@ -80,4 +84,12 @@ public class YouTubeComment {
 	}
 
 	public String getAuthorChannelId() { return authorChannelId; }
+
+	public boolean isPinned() {
+		return pinned;
+	}
+
+	public boolean isHeartedByUploader() {
+		return heartedByUploader;
+	}
 }

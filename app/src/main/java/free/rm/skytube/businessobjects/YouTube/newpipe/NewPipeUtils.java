@@ -18,14 +18,14 @@ package free.rm.skytube.businessobjects.YouTube.newpipe;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.safety.Whitelist;
+import org.jsoup.safety.Safelist;
 import org.schabi.newpipe.extractor.stream.Description;
 
 public class NewPipeUtils {
     private NewPipeUtils() {}
 
     public static String filterHtml(String content) {
-        return Jsoup.clean(content, "", Whitelist.basic(), new Document.OutputSettings().prettyPrint(false));
+        return Jsoup.clean(content, "", Safelist.basic(), new Document.OutputSettings().prettyPrint(false));
     }
 
     public static String filterHtml(Description description) {
