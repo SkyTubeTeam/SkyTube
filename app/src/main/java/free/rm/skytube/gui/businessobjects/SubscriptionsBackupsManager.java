@@ -28,15 +28,21 @@ import com.google.gson.JsonPrimitive;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.obsez.android.lib.filechooser.ChooserDialog;
 
+import org.schabi.newpipe.extractor.StreamingService;
+import org.schabi.newpipe.extractor.exceptions.ExtractionException;
+import org.schabi.newpipe.extractor.subscription.SubscriptionExtractor;
+import org.schabi.newpipe.extractor.subscription.SubscriptionItem;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -45,6 +51,8 @@ import free.rm.skytube.app.EventBus;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
+import free.rm.skytube.businessobjects.YouTube.newpipe.ContentId;
+import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
 import free.rm.skytube.businessobjects.db.DatabaseTasks;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 import free.rm.skytube.gui.businessobjects.preferences.BackupDatabases;
@@ -141,14 +149,14 @@ public class SubscriptionsBackupsManager {
 						displayImportDbsBackupWarningMsg(file);
 					else {
 						Uri uri = Uri.fromFile(new File(file));
-						parseImportedSubscriptions(uri);
+						parseWithNewPipe(uri);
 					}
 				})
 				.withOnCancelListener(DialogInterface::cancel);
 		if(importDb) {
 			dialog.withFilter(false, false, "skytube");
 		} else {
-			dialog.withFilterRegex(false, false, ".*(json|xml|subscription_manager)$");
+			dialog.withFilterRegex(false, false, ".*(json|xml|subscription_manager|zip|csv)$");
 		}
 		dialog.build().show();
 	}
@@ -229,6 +237,49 @@ public class SubscriptionsBackupsManager {
 		);
 	}
 
+    private void parseWithNewPipe(Uri uri) {
+        SubscriptionExtractor extractor = NewPipeService.get().createSubscriptionExtractor();
+        String extension = getExtension(uri);
+        if (extractor != null) {
+            Log.i(TAG, "Parsing with " + extractor+ " : "+ uri);
+            try (InputStream input = activity.getContentResolver().openInputStream(uri)) {
+                if ("csv".equals(extension) || "json".equals(extension) || "zip".equals(extension)) {
+                    List<SubscriptionItem> items = extractor.fromInputStream(input, extension);
+                    importChannels(items);
+                    return;
+                }
+            } catch (IOException | ExtractionException e) {
+                Log.e(TAG, "Unable to extract subscriptions: " + e.getMessage(), e);
+                SkyTubeApp.notifyUserOnError(activity, e);
+            }
+        }
+        Log.i(TAG, "Parsing with old code : "+ uri.toString());
+        parseImportedSubscriptions(uri);
+    }
+
+    private void importChannels(final List<SubscriptionItem> items) {
+        List<MultiSelectListPreferenceItem> result = new ArrayList();
+        NewPipeService newPipeService = NewPipeService.get();
+        SubscriptionsDb subscriptionsDb = SubscriptionsDb.getSubscriptionsDb();
+        for (SubscriptionItem item : items){
+            String url = item.getUrl();
+            ContentId contentId = newPipeService.getContentId(url);
+            if (contentId != null && contentId.getType() == StreamingService.LinkType.CHANNEL && !subscriptionsDb.isUserSubscribedToChannel(contentId.getId())) {
+                result.add(new MultiSelectListPreferenceItem(contentId.getId(), item.getName()));
+            }
+        }
+        importChannels(result, items.size());
+    }
+
+    String getExtension(Uri uri) {
+        String name = uri.toString().toLowerCase(Locale.ROOT);
+        int lastDot = name.lastIndexOf('.');
+        if (lastDot >= 0) {
+            return name.substring(lastDot);
+        }
+        return "";
+    }
+
 	/**
 	 * Parse the file that the user selected to import subscriptions from. Each channel contained in the file
 	 * that the user is not already subscribed to will appear in a dialog, to allow the user to select individual channels
@@ -249,13 +300,16 @@ public class SubscriptionsBackupsManager {
 
 		// Check the channel list for new channels
 		ArrayList<MultiSelectListPreferenceItem> newChannels = new ArrayList<>();
-		for (MultiSelectListPreferenceItem  channel : channels) {
-			if(channel.id != null && !SubscriptionsDb.getSubscriptionsDb().isUserSubscribedToChannel(channel.id)) {
+		for (MultiSelectListPreferenceItem channel : channels) {
+			if (channel.id != null && !SubscriptionsDb.getSubscriptionsDb().isUserSubscribedToChannel(channel.id)) {
 				newChannels.add(channel);
 			}
 		}
 
+		importChannels(newChannels, channels.size());
+	}
 
+	private void importChannels(List<MultiSelectListPreferenceItem> newChannels, int importSize) {
 		if(newChannels.size() > 0) {
 			// display a dialog which allows the user to select the channels to import
 			new MultiSelectListPreferenceDialog(activity, newChannels)
@@ -281,7 +335,7 @@ public class SubscriptionsBackupsManager {
 					.show();
 		} else {
 			new AlertDialog.Builder(activity)
-					.setMessage(channels.size() > 0 ? R.string.no_new_channels_found : R.string.no_channels_found)
+					.setMessage(importSize > 0 ? R.string.no_new_channels_found : R.string.no_channels_found)
 					.setNeutralButton(R.string.ok, null)
 					.show();
 		}
