@@ -1,15 +1,17 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="bookmarks">نشان‌گذاری‌ها</string>
-
-	<string name="bookmark">نشان‌گذاری</string>
-	<string name="video_bookmarked">ویدئوهای نشان‌گذاری‌شده</string>
-	<string name="video_bookmarked_error">ناتوانی در نشان‌گذاری ویدئو.</string>
-
-	<string name="unbookmark">حذف نشان</string>
-	<string name="video_unbookmarked">نشان‌گذاری ویدئو حذف شد</string>
-	<string name="video_unbookmarked_error">ناتوانی در حذف نشان‌گذاری ویدئو.</string>
-
-	<string name="no_bookmarked_videos_text">تاکنون هیچ ویدئویی را نشان‌گذاری نکرده‌اید.
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="bookmarks">نشان‌گذاری‌ها</string>
+    <string name="bookmark">نشان‌گذاری</string>
+    <string name="video_bookmarked">ویدئوهای نشان‌گذاری‌شده</string>
+    <string name="video_bookmarked_error">ناتوانی در نشان‌گذاری ویدئو.</string>
+    <string name="unbookmark">حذف نشان</string>
+    <string name="video_unbookmarked">نشان‌گذاری ویدئو حذف شد</string>
+    <string name="video_unbookmarked_error">ناتوانی در حذف نشان‌گذاری ویدئو.</string>
+    <string name="no_bookmarked_videos_text">تاکنون هیچ ویدئویی را نشان‌گذاری نکرده‌اید.
 \n
 \nویدئوهای نشان‌گذاری شده اینجا نمایش داده می‌شوند.</string>
+    <string name="bookmark_share_invalid_url">فقط url های youtube می توانند نشانه گذاری شوند</string>
+    <string name="bookmark_share_label">نشانک SkyTube</string>
+    <string name="video_was_not_bookmarked">ویدیو نشانه گذاری نشده است</string>
+    <string name="video_already_bookmarked">ویدیو قبلاً نشانه گذاری شده است</string>
 </resources>

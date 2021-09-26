@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="search_channel">Etsi kanavaa</string>
+    <string name="no">Ei</string>
+    <string name="yes">Kyllä</string>
+    <string name="loading">Ladataan…</string>
+    <string name="close">Sulje</string>
+    <string name="recaptcha_challenge_requested">YouTube näyttää torjuvan verkkopyyntömme. Sinun täytyy ratkaista reCaptcha-haaste!</string>
+    <string name="could_not_get_playlists">Ei voitu ladata %s soittolistaa.</string>
+    <string name="playlists">Soittolistat</string>
+    <string name="num_videos">%d videota</string>
+    <string name="videos">Videot</string>
+    <string name="video">Video</string>
+    <string name="trending_in">Nousussa (%s)</string>
+    <string name="most_popular">Suosituimmat</string>
+    <string name="featured">Näytteillä</string>
+    <string name="LIVE">SUORA</string>
+    <string name="launch_offical_player_error">Virhe avattaessa virallista Googlen YouTube-sovellusta. Varmista, että se on asennettuna laitteellasi.</string>
+    <string name="search_videos">Etsi videoita</string>
+    <string name="ok">OK</string>
+    <string name="error">Virhe</string>
+    <string name="views">%,d näyttökertaa</string>
+    <string name="could_not_get_channel_detailed">Ei voitu ladata kanavan tietoa: %s.</string>
+    <string name="could_not_get_channel">Ei voitu ladata kanavan tietoja!</string>
+    <string name="could_not_get_videos">Ei voitu ladata %s videota.</string>
+</resources>

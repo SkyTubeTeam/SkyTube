@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="external_storage_not_available">Ei voitu tallentaa videota, koska ulkoinen tallennustila ei ole saatavilla.</string>
+    <string name="playing_video_file_missing">Latausta tälle videolle ei löytynyt. Toistetaan etänä.</string>
+    <string name="no_downloaded_videos_text">Et ole tallentanut yhtään videota vielä.
+\n
+\nKun teet niin, videot näytetään täällä.</string>
+    <string name="video_downloaded">\'%s\' ladattu.</string>
+    <string name="delete_download">Poista lataus</string>
+    <string name="video_stream_not_found_with_request_resolution">Yhtään videolähdettä ei löytynyt pyydetylle resoluutiolle, resoluutioiden %1$s ja %2$s välillä</string>
+    <string name="download_failed_because">Ei voitu tallentaa %1$s, koska: %2$s</string>
+    <string name="video_download_stream_error">Ei voitu tallentaa \'%s\'.</string>
+    <string name="starting_video_download">Tallennetaan \'%s\'…</string>
+    <string name="unable_to_delete_file">Ei voida poistaa tallennettua tiedostoa: \'%s\'</string>
+    <string name="download_video">Tallenna video</string>
+    <string name="warning_metered_network_download">Laitteesi on yhdistetty datankulutukseen perustuvaan verkkoon. Välttääksesi mahdollisia ylimääräisiä datankäyttömaksuja, on suositeltavaa, että yhdistät kiinteähintaiseen verkkoon. Ladataanko video silti\?</string>
+    <string name="downloads">Lataukset</string>
+    <string name="download">Tallenna</string>
+</resources>

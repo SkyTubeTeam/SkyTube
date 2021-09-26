@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="thumbnail_download_error">Pienoiskuvaketta ei voitu tallentaa.</string>
+    <string name="thumbnail_downloaded">Pienoiskuvake tallennettu.</string>
+    <string name="view_thumbnail">Katso pienoiskuvaa</string>
+    <string name="thumbnail">Pienoiskuvake</string>
+</resources>

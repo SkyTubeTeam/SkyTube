@@ -155,4 +155,6 @@
     <string name="pref_summary_default_content_country">Tampilkan konten yang ditujukan untuk negara ini: %s</string>
     <string name="pref_title_default_content_country">Lokasi konten</string>
     <string name="system_default_country">Negara Default Sistem</string>
+    <string name="pref_key_use_newer_formats_summary">Versi Android lama tidak mendukung semua format video, yang disediakan oleh YouTube. Nonaktifkan, jika Anda mengalami gangguan pemutaran video atau suara</string>
+    <string name="pref_key_use_newer_formats_title">Coba format Video terbaru</string>
 </resources>

@@ -128,4 +128,24 @@
     <string name="pref_summary_hide_tabs">Välj vilka flikar som inte ska visas. Omstart krävs.</string>
     <string name="pref_network_downloads_category">Nätverk och nedladdningar</string>
     <string name="pref_summary_autocast">Välj en Chromecast-enhet som ska användas när du använder andra appar för att öppna videor i SkyTube.</string>
+    <string name="pref_summary_default_content_country">Visa innehåll avsett för detta land: %s</string>
+    <string name="pref_title_default_content_country">Standard innehållsland</string>
+    <string name="pref_key_use_newer_formats_title">Prova nyare videoformat</string>
+    <string name="pref_key_video_quality_for_downloads_summary">Optimera för: %s</string>
+    <string name="pref_key_video_quality_for_downloads_title">Val av videokvalitet för nedladdningar</string>
+    <string name="pref_key_video_quality_metered_summary">Optimera för: %s</string>
+    <string name="pref_key_video_quality_summary">Optimera för %s</string>
+    <string name="pref_key_video_quality_title">Val av videokvalitet</string>
+    <string name="pref_video_download_minimum_resolution_summary">Nedladdning av video sker åtminstone i denna upplösning: %s</string>
+    <string name="pref_video_download_minimum_resolution_title">Minsta upplösning för nedladdning av video</string>
+    <string name="pref_video_download_maximum_resolution_summary">Hämtning av video sker högst i denna upplösning: %s</string>
+    <string name="pref_video_download_maximum_resolution_title">Maximal upplösning för videonedladdning</string>
+    <string name="pref_category_download_resolutions">Videoupplösning för nedladdning</string>
+    <string name="pref_category_video_resolutions">Videoupplösning</string>
+    <string name="system_default_country">System Standard Land</string>
+    <string name="no_resolution_specified">Ingen</string>
+    <string name="pref_summary_minimum_res">Välj din minsta upplösning: %s</string>
+    <string name="pref_title_minimum_res">Minsta upplösning</string>
+    <string name="pref_summary_maximum_res">Välj din maximala upplösning: %s</string>
+    <string name="pref_title_maximum_res">Maximal upplösning</string>
 </resources>

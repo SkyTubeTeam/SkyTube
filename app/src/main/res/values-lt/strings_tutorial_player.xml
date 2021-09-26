@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="tutorial_slide_6">Dukart bakstelėkite, jei norite pristabdyti arba paleisti vaizdo įrašą.</string>
+    <string name="tutorial_slide_5">Braukite vertikaliai, kad sureguliuotumėte ryškumą.</string>
+    <string name="tutorial_slide_4">Braukite vertikaliai, kad sureguliuotumėte garsumą.</string>
+    <string name="tutorial_slide_3">Braukite horizontaliai, kad peršoktumėte pirmyn arba atgal.</string>
+    <string name="tutorial_slide_2">Braukite aukštyn, kad peržiūrėtumėte vaizdo įrašo aprašymą.</string>
+    <string name="tutorial_slide_1">Norėdami peržiūrėti komentarus, braukite kairėn.</string>
+    <string name="page_counter">%1$d iš %2$d</string>
+    <string name="skip">Praleisti</string>
+    <string name="done">Atlikta</string>
+    <string name="next">"Toliau "</string>
+</resources>
