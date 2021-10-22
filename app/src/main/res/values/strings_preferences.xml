@@ -686,8 +686,8 @@
     <string name="pref_disable_playback_status_deleted">Playback Status deleted.</string>
     <string name="pref_key_clear_playback_status" translatable="false">pref_key_clear_playback_status</string>
     <string name="pref_title_clear_playback_status">Clear Playback Status</string>
-    <string name="pref_summary_clear_playback_status">Clear playback status for all videos.</string>
-    <string name="pref_playback_status_cleared">Playback Status cleared.</string>
+    <string name="pref_summary_clear_playback_status">Clear progression for all videos.</string>
+    <string name="pref_playback_status_cleared">Playback status cleared.</string>
     <string-array name="pref_network_usage" translatable="false">
         <item>LEAST_BANDWITH</item>
         <item>BEST_QUALITY</item>
