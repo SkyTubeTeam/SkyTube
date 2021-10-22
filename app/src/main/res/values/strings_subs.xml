@@ -7,27 +7,27 @@
 
 	<string name="subscribed">Subscribed</string>
 	<string name="channel_subscribed">Channel subscribed</string>
-	<string name="channel_already_subscribed">You are already subscribed to this channel</string>
-	<string name="channel_subscribe_failed">Unable to subscribe to channel</string>
+	<string name="channel_already_subscribed">Already subscribed</string>
+	<string name="channel_subscribe_failed">Could not subscribe to channel</string>
 
 	<string name="unsubscribed">Unsubscribed</string>
 	<string name="channel_unsubscribed">Channel unsubscribed</string>
 
-	<string name="error_get_subbed_channels">An error has occurred while fetching subscribed channels.</string>
-	<string name="error_check_if_user_has_subbed">Unable to check whether user has subscribed to the channel (id=%s)</string>
-	<string name="error_unable_to_subscribe">Unable to (un)subscribe the channel (id=%s)</string>
+	<string name="error_get_subbed_channels">Could not fetch channel subscriptions.</string>
+	<string name="error_check_if_user_has_subbed">Could not check whether you have subscribed to the channel (id=%s)</string>
+	<string name="error_unable_to_subscribe">Could not (un)subscribe from/to channel (id=%s)</string>
 
 	<string name="import_subscriptions">Import Subscriptions</string>
-	<string name="import_subscriptions_description">Import your subscriptions from YouTube by first visiting https://takeout.google.com. Deselect all services except \"YouTube and YouTube Music\" and click \"All YouTube data included\" to deselect everything except subscriptions. Click \"Next\" and then \"Create export\". Once the export is complete, it shows up on the web page you just landed on and you will receive an e-mail with a download link. Download the file and extract the file subscriptions.json from it (located under /Takeout/YouTube and YouTube Music/subscriptions/). Then, select the exported file by clicking \"Select Subscriptions File\" below.</string>
-	<string name="unsubscribe_from_all_current_sibbed_channels">Unsubscribe from all your current subscribed channels.</string>
-	<string name="subscriptions_to_channels_imported">Subscription to %d channel(s) imported.</string>
-	<string name="select_sub_file">Select Subscriptions File</string>
+	<string name="import_subscriptions_description">Deselect everything on https://takeout.google.com except \"YouTube and YouTube Music\" and click \"All YouTube data included\" to only get subscriptions. Click \"Next\" and then \"Create export\". Click to receive an e-mail with a download link. Download the file from your e-mail client and extract it. Import subscriptions.json (in /Takeout/YouTube and YouTube Music/subscriptions/) from it in SkyTube using \"Select Subscription File\" below.</string>
+	<string name="unsubscribe_from_all_current_sibbed_channels">Unsubscribe from all your currently subscribed channels.</string>
+	<string name="subscriptions_to_channels_imported">%d channel(s) imported.</string>
+	<string name="select_sub_file">Select Subscription File</string>
 	<string name="select_all">Select All</string>
 	<string name="select_none">Select None</string>
-	<string name="no_channels_found">No YouTube channels were found in the file you uploaded.</string>
-	<string name="no_new_channels_found">No YouTube channels that you are not already subscribed to were found in the file you uploaded.</string>
-	<string name="import_subscriptions_parse_error">An error was encountered attempting to parse the file you uploaded: %s.</string>
-	<string name="failed_to_import_subscriptions">Failed to import your YouTube subscriptions.</string>
+	<string name="no_channels_found">Could not find any YouTube channels in the file you uploaded.</string>
+	<string name="no_new_channels_found">No YouTube channels you are not already subscribed to were found.</string>
+	<string name="import_subscriptions_parse_error">Could not parse the file you uploaded: %s.</string>
+	<string name="failed_to_import_subscriptions">Could not import your YouTube subscriptions.</string>
 
 	<string name="about">About</string>
 </resources>
