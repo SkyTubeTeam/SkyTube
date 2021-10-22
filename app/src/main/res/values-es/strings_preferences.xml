@@ -175,6 +175,6 @@
     <string name="pref_summary_default_content_country">Mostrar contenido destinado a este país: %s</string>
     <string name="pref_title_default_content_country">Contenido de pais por defecto</string>
     <string name="system_default_country">País predeterminado del sistema</string>
-    <string name="pref_key_use_newer_formats_summary">Las versiones antiguas de Android no soportan todos los formatos de vídeo que hay en Youtube. Desactívalo si tienes problemas con el vídeo o no hay sonido</string>
+    <string name="pref_key_use_newer_formats_summary">Las versiones antiguas de Android no soportan todos los formatos de vídeo que provee Youtube. Desactívalo si a menudo encuentras vídeo que no se reproduce o no hay sonido</string>
     <string name="pref_key_use_newer_formats_title">Intentar nuevos formatos de vídeo</string>
 </resources>

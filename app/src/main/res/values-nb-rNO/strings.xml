@@ -22,4 +22,5 @@
     <string name="search_channel">Kanalsøk</string>
     <string name="close">Lukk</string>
     <string name="trending_in">På vei opp (%s)</string>
+    <string name="recaptcha_challenge_requested">YouTube blokkerer dine nettverksforespørsmler. Du må løse en reCAPTCHA.</string>
 </resources>
