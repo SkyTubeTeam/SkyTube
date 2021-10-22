@@ -2,16 +2,16 @@
 <resources>
 	<string name="download">Download</string>
 	<string name="downloads">Downloads</string>
-	<string name="warning_metered_network_download">Your device is connected to a metered network. To avoid potential extra data usage charges, it is recommended to connect to an unmetered network. Download video anyway?</string>
+	<string name="warning_metered_network_download">Download video on the metered network you are connected to?</string>
 	<string name="download_video">Download Video</string>
-	<string name="unable_to_delete_file">Unable to delete downloaded file: \'%s\'</string>
+	<string name="unable_to_delete_file">Could not delete the downloaded \'%s\' file.</string>
 	<string name="starting_video_download">Downloading \'%s\'…</string>
 	<string name="video_download_stream_error">Could not download \'%s\'.</string>
-	<string name="download_failed_because">Could not download %1$s because: %2$s </string>
-	<string name="video_stream_not_found_with_request_resolution">No video stream found for the requested resolution, between %1$s and %2$s resolution</string>
+	<string name="download_failed_because">Could not download %1$s because %2$s.</string>
+	<string name="video_stream_not_found_with_request_resolution">Could not find any video stream within the requested %1$s-%2$s resolution</string>
 	<string name="delete_download">Delete Download</string>
 	<string name="video_downloaded">\'%s\' downloaded.</string>
-	<string name="no_downloaded_videos_text">You haven\'t downloaded any videos yet.\n\nOnce you do, they will show up here.</string>
-	<string name="playing_video_file_missing">The download for this video was not found. Playing remotely.</string>
-	<string name="external_storage_not_available">Unable to download the file as the external storage is not available.</string>
+	<string name="no_downloaded_videos_text">Download some videos to find them here.</string>
+	<string name="playing_video_file_missing">Playing video remotely since no downloadable file could be found.</string>
+	<string name="external_storage_not_available">Grant access to external to download the file first.</string>
 </resources>
