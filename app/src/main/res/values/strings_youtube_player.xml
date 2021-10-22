@@ -4,7 +4,7 @@
     <string name="error_stream_decryption_fail">Could not load decryption code for the YouTube service.</string>
     <string name="error_stream_parse_error">Parsing error.</string>
     <string name="error_video_play">Video Playback Error</string>
-    <string name="error_video_streams_empty">The \'%s'\ video has no streams.</string>
+    <string name="error_video_streams_empty">The \'%s\' video has no streams.</string>
     <string name="error_video_streams">Could not fetch the any of the video streams.</string>
     <string name="error_get_video_desc">Could not fetch the video description.</string>
     <string name="error_invalid_url">Invalid video URL: %s</string>
