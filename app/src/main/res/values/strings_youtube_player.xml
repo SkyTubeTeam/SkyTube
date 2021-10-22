@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="error_stream_err_unavailable">Error message unavailable.</string>
+    <string name="error_stream_err_unavailable">Unavailable message.</string>
     <string name="error_stream_decryption_fail">Could not load decryption code for the YouTube service.</string>
     <string name="error_stream_parse_error">Parsing error.</string>
     <string name="error_video_play">Video Playback Error</string>
-    <string name="error_video_streams_empty">The video %s has no streams.</string>
-    <string name="error_video_streams">An error has occurred while retrieving video\'s streams.</string>
-    <string name="error_get_video_desc">An error has occurred while retrieving video\'s description.</string>
+    <string name="error_video_streams_empty">The \'%s'\ video has no streams.</string>
+    <string name="error_video_streams">Could not fetch the any of the video streams.</string>
+    <string name="error_get_video_desc">Could not fetch the video description.</string>
     <string name="error_invalid_url">Invalid video URL: %s</string>
-    <string name="error_downloaded_file_is_corrupted">The downloaded video looks &lt;b&gt;corrupted&lt;/b&gt; - the error message is:
+    <string name="error_downloaded_file_is_corrupted">The downloaded video looks &lt;b&gt;corrupted&lt;/b&gt;:
 		&lt;br/&gt;
 		&lt;br/&gt;
 		"%s".
 		&lt;br/&gt;
 		&lt;br/&gt;
-		Do you want to &lt;b&gt;delete&lt;/b&gt; the file?</string>
-    <string name="error_video_parse_error">Unable to start playing the video, the error message is:
+		&lt;b&gt;Delete&lt;/b&gt; the file?</string>
+    <string name="error_video_parse_error">Could not start the video:
 		&lt;br/&gt;
 		&lt;br/&gt;
 		"%s".</string>
     <string name="metered_network">Metered Network</string>
-    <string name="warning_metered_network_play">Your device is connected to a metered network. To avoid potential extra data usage charges, it is recommended to connect to an unmetered network. Play video anyway\?</string>
+    <string name="warning_metered_network_play">Connect to an unmetered network to avoid data usage charges first. Play video anyway\?</string>
     <string name="warning_metered_network_disable">Never ask again.</string>
-    <string name="metered_network_blocked_by_policy">Download blocked because your device is connected to a metered network.</string>
+    <string name="metered_network_blocked_by_policy">Download blocked because your are connected through a metered network.</string>
     <string name="play_video">Play Video</string>
-    <string name="warning_live_video">Cannot play live streams for now. Open live stream in another app?</string>
-    <string name="ratings_disabled">Ratings disabled</string>
+    <string name="warning_live_video">Cannot play live streams for now. Open in another app?</string>
+    <string name="ratings_disabled">Ratings off</string>
     <string name="loading_video">Loading video…</string>
     <string name="reload_video">Reload Video</string>
     <string name="open_in_browser">Open in web browser</string>
     <string name="open_with">Open with…</string>
     <string name="share">Share</string>
-    <string name="share_via">Share via</string>
+    <string name="share_via">Share via…</string>
     <string name="copy_url">Copy URL</string>
     <string name="url_copied_to_clipboard">URL copied to clipboard.</string>
-    <string name="mark_watched">Mark Watched</string>
-    <string name="mark_unwatched">Mark Unwatched</string>
-    <string name="error_get_comments">An error has occurred while getting comments.</string>
-    <string name="error_get_comments_no_network">Network access is needed to fetch comments.</string>
+    <string name="mark_watched">Mark as Watched</string>
+    <string name="mark_unwatched">Mark as Unwatched</string>
+    <string name="error_get_comments">Could not fetch comments.</string>
+    <string name="error_get_comments_no_network">Connect to the Internet to fetch comments first.</string>
     <string name="no_video_comments">This video either has no comments, or they are turned off.</string>
     <string name="view_replies">View replies</string>
     <string name="hide_replies">Hide replies</string>
@@ -45,6 +45,6 @@
     <string name="play">Play</string>
     <string name="cancel">Cancel</string>
     <string name="clear">Clear</string>
-    <string name="should_resume">Do you wish to resume from where you stopped?</string>
+    <string name="should_resume">Continue from where you stopped?</string>
     <string name="resume">Resume</string>
 </resources>
