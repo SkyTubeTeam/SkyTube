@@ -10,8 +10,8 @@
     <string name="video_unbookmarked">Vaizdo įrašas atžymėtas</string>
     <string name="unbookmark">Panaikinti žymą</string>
     <string name="video_bookmarked_error">Nepavyko pridėti vaizdo įrašo prie žymų.</string>
-    <string name="video_already_bookmarked">Vaizdo įrašas jau pažymėtas</string>
-    <string name="video_bookmarked">Vaizdo įrašas pažymėtas</string>
+    <string name="video_already_bookmarked">Jau įtraukta į žymes</string>
+    <string name="video_bookmarked">Pridėta prie žymų</string>
     <string name="bookmark">Pridėti prie žymų</string>
     <string name="bookmarks">Žymos</string>
 </resources>
