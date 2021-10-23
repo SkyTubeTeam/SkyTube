@@ -11,7 +11,7 @@
     <string name="download_failed_because">Nepavyko atsisiųsti %1$s, nes: %2$s</string>
     <string name="video_download_stream_error">Nepavyko atsisiųsti „%s“.</string>
     <string name="starting_video_download">Atsisiunčiamas „%s“…</string>
-    <string name="unable_to_delete_file">Nepavyko ištrinti atsisiųsto failo: „%s“</string>
+    <string name="unable_to_delete_file">Nepavyko ištrinti atsisiųsto failo: „%s“.</string>
     <string name="download_video">Atsisiųsti vaizdo įrašą</string>
     <string name="warning_metered_network_download">Jūsų prietaisas prijungtas prie matuojamo tinklo. Kad išvengtumėte galimų papildomų duomenų naudojimo mokesčių, rekomenduojama prisijungti prie nematuojamo tinklo. Vis tiek atsisiųsti vaizdo įrašą\?</string>
     <string name="downloads">Atsisiuntimai</string>
