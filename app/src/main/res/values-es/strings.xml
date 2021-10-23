@@ -5,8 +5,8 @@
     <string name="error">Error</string>
     <string name="ok">Aceptar</string>
     <string name="search_videos">Buscar vídeos</string>
-    <string name="launch_offical_player_error">Ha ocurrido un error al intentar lanzar el reproductor oficial Youtube de Google. Aseguraté de tenerlo instalado.</string>
-    <string name="LIVE">LIVE</string>
+    <string name="launch_offical_player_error">No se puede lanzar el reproductor oficial de Youtube. Asegurate de que está instalado.</string>
+    <string name="LIVE">Directo</string>
     <string name="featured">Destacados</string>
     <string name="most_popular">Más Populares</string>
     <string name="video">Vídeo</string>
@@ -14,13 +14,13 @@
     <string name="num_videos">%d vídeos</string>
     <string name="playlists">Listas de reproducción</string>
     <string name="could_not_get_playlists">No encuentro %s listas de reproducción.</string>
-    <string name="loading">Cargando …</string>
-    <string name="could_not_get_channel">No puedo descargar información del canal!</string>
+    <string name="loading">Cargando…</string>
+    <string name="could_not_get_channel">No se puede descargar información del canal.</string>
     <string name="yes">Si</string>
     <string name="no">No</string>
     <string name="search_channel">Buscar canal</string>
     <string name="could_not_get_channel_detailed">No se puede descargar info del canal: %s.</string>
     <string name="close">Cerrar</string>
     <string name="trending_in">Tendencia (%s)</string>
-    <string name="recaptcha_challenge_requested">YouTube bloquea nuestras peticiones, Tienes que resolver un reCaptcha!</string>
+    <string name="recaptcha_challenge_requested">YouTube cree que eres un bot por lo que primero debes resolver un reCAPTCHA.</string>
 </resources>
