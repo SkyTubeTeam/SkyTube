@@ -12,15 +12,15 @@
     <string name="video">Відео</string>
     <string name="most_popular">Популярне у світі</string>
     <string name="featured">Популярне</string>
-    <string name="LIVE">НАЖИВО</string>
-    <string name="launch_offical_player_error">Під час запуску офіційного YouTube програвача від Google сталася помилка. Переконайтеся, що програвач встановлено.</string>
+    <string name="LIVE">Наживо</string>
+    <string name="launch_offical_player_error">Не вдалося запустити офіційний програвач YouTube. Переконайтеся, що його встановлено.</string>
     <string name="search_videos">Пошук відео</string>
     <string name="ok">Добре</string>
     <string name="error">Помилка</string>
     <string name="views">%,d переглядів</string>
     <string name="could_not_get_channel_detailed">Не вдалося завантажити інформацію по каналу: %s.</string>
-    <string name="could_not_get_channel">Не вдалося завантажити інформацію по каналу!</string>
-    <string name="could_not_get_videos">Не вдалося заватнажити %s відео.</string>
+    <string name="could_not_get_channel">Не вдалося завантажити інформацію про канал.</string>
+    <string name="could_not_get_videos">Не вдалося завантажити %s відео.</string>
     <string name="trending_in">У тренді (%s)</string>
-    <string name="recaptcha_challenge_requested">YouTube блокує наші мережні запити, вам потрібно розв\'язувати reCaptcha!</string>
+    <string name="recaptcha_challenge_requested">YouTube вважає, що ви бот, тому спочатку ви повинні розв\'язати reCAPTCHA.</string>
 </resources>
