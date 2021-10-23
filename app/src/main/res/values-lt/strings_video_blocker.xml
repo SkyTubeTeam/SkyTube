@@ -5,7 +5,7 @@
     <string name="channel_blacklist_error">Kanalo nepavyko įtraukti į juodąjį sąrašą.</string>
     <string name="channel_blacklisted">Kanalas įtrauktas į juodąjį sąrašą. Prašome atnaujinti.</string>
     <string name="block_channel">Blokuoti kanalą</string>
-    <string name="configure">Konfigūruoti</string>
-    <string name="no_videos_blocked">Jokie vaizdo įrašai nebuvo blokuojami ar filtruojami. Ar norite konfigūruoti vaizdo įrašų blokatorių\?</string>
+    <string name="configure">Nustatyti</string>
+    <string name="no_videos_blocked">Ar norite nustatyti vaizdo įrašų blokatorių, kad jis blokuotų arba filtruotų vaizdo įrašus\?</string>
     <string name="blocked_videos">Užblokuoti vaizdo įrašai</string>
 </resources>
