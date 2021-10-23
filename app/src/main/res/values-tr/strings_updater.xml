@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="update_available">Yeni sürüm mevcut</string>
-    <string name="update_dialog_msg">SkyTube\'ın yeni bir sürümü mevcut. %s sürümü yüklenecek.</string>
+    <string name="update_available">Yeni Sürüm Var</string>
+    <string name="update_dialog_msg">SkyTube\'ın yeni bir sürümü var. %s sürümü kurulacak.</string>
     <string name="up_to_date">Güncel</string>
-    <string name="up_to_date_msg">En son versiyon SkyTube kurulumuna sahipsiniz.</string>
+    <string name="up_to_date_msg">SkyTube\'un en yeni sürümünü kurulu.</string>
     <string name="update">Güncelle</string>
     <string name="later">Sonra</string>
-    <string name="update_failure">App güncelleştirilemiyor.</string>
+    <string name="update_failure">Uygulamanın yeni sürümü kurulamadı.</string>
     <string name="downloading">İndiriliyor…</string>
     <string name="release_notes">%s içindeki değişiklikler</string>
 </resources>
