@@ -4,14 +4,12 @@
     <string name="notification_new_videos_found">%d nauji vaizdo įrašai iš prenumeruojamų kanalų</string>
     <string name="notification_channel_feed_title">Sklaidos kanalo pranešimai</string>
     <string name="import_subscriptions_from_youtube">Importuoti prenumeratas iš „YouTube“</string>
-    <string name="no_subscriptions_text">Nesate užsiprenumeravę jokių kanalų.
-\n
-\nKai būsite, čia bus rodomi visi vaizdo įrašai, įkelti į jūsų prenumeruojamus kanalus per pastarąjį mėnesį.</string>
-    <string name="no_new_videos_found">Naujų vaizdo įrašų nerasta.</string>
+    <string name="no_subscriptions_text">Prenumeruokite kanalus, kad pamatytumėte naujus jų vaizdo įrašus čia.</string>
+    <string name="no_new_videos_found">Naujų vaizdo įrašų nėra.</string>
     <string name="fetched_videos_from_channels">Gauti %1$d vaizdo įrašai iš %2$d/%3$d kanalų.</string>
-    <string name="fetching_subscription_videos">Gaunami vaizdo įrašai iš prenumeruojamų kanalų</string>
-    <string name="fetching_subbed_channels_info_error">Renkant kanalų informaciją įvyko klaida.</string>
-    <string name="fetching_subbed_channels_info">Gaunama kanalų informacija…</string>
+    <string name="fetching_subscription_videos">Gaunami vaizdo įrašai iš prenumeruojamų kanalų…</string>
+    <string name="fetching_subbed_channels_info_error">Nepavyko gauti kanalo informacijos.</string>
+    <string name="fetching_subbed_channels_info">Gaunama kanalo informacija…</string>
     <string name="open_channel">Atidaryti kanalą</string>
     <string name="subscribing_to_channels">Prenumeruojami kanalai…</string>
 </resources>
