@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="dislikes">%d%% 踩</string>
-    <string name="channel_unwhitelist_error">频道无法从白名单移除。</string>
-    <string name="channel_blacklist_error">频道无法加入黑名单。</string>
-    <string name="channel_blacklisted">频道已加入黑名单。请刷新。</string>
+    <string name="channel_unwhitelist_error">无法从白名单中删除频道。</string>
+    <string name="channel_blacklist_error">无法将频道列入黑名单。</string>
+    <string name="channel_blacklisted">刷新以使用新的频道黑名单。</string>
     <string name="block_channel">屏蔽频道</string>
     <string name="configure">配置</string>
-    <string name="no_videos_blocked">没有视频被屏蔽或过滤。您希望配置视频屏蔽么？</string>
+    <string name="no_videos_blocked">您想设置视频拦截器来拦截或过滤掉视频吗？</string>
     <string name="blocked_videos">已屏蔽视频</string>
 </resources>
