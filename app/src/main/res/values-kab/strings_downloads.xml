@@ -9,4 +9,5 @@
     <string name="video_downloaded">\'%s\' yettwasader.</string>
     <string name="no_downloaded_videos_text">Sader kra n tvidyutin ara tafeḍ dagi.</string>
     <string name="unable_to_delete_file">Ur yezmir ara ad yekkes afaylu \'%s\' i d-yettwasadren.</string>
+    <string name="download_failed_because">Ur izmir ara ad yessader %1$s acku %2$s.</string>
 </resources>
