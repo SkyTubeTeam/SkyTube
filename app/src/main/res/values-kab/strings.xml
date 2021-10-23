@@ -11,4 +11,5 @@
     <string name="error">Tuccḍa</string>
     <string name="ok">IH</string>
     <string name="LIVE">SRID</string>
+    <string name="could_not_get_channel_detailed">Ur izmir ara ad yessader talɣut n tezṛart: %s.</string>
 </resources>
