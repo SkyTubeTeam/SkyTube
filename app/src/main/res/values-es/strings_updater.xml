@@ -3,10 +3,10 @@
     <string name="update_available">Disponible nueva versión</string>
     <string name="update_dialog_msg">Hay disponible una nueva versión de Skytube. Se instalará la versión %s.</string>
     <string name="up_to_date">Actualizado</string>
-    <string name="up_to_date_msg">Tienes la versión más reciente de SkyTube instalada.</string>
+    <string name="up_to_date_msg">Tienes la última versión de SkyTube instalada.</string>
     <string name="update">Actualizar</string>
     <string name="later">Recordar luego</string>
-    <string name="update_failure">No se pudo actualizar la aplicación.</string>
+    <string name="update_failure">No se pudo instalar la nueva versión de la aplicación.</string>
     <string name="downloading">Descargando…</string>
     <string name="release_notes">Cambios en %s</string>
 </resources>
