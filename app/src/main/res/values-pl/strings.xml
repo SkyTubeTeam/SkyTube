@@ -5,7 +5,7 @@
     <string name="error">Błąd</string>
     <string name="ok">OK</string>
     <string name="search_videos">Szukaj filmów</string>
-    <string name="launch_offical_player_error">Wystąpił błąd podczas uruchamiania oficjalnego odtwarzacza YouTube od Google. Upewnij się, że jest on zainstalowany na twoim urządzeniu.</string>
+    <string name="launch_offical_player_error">Nie można uruchomić oficjalnego odtwarzacza YouTube. Upewnij się, że jest on zainstalowany.</string>
     <string name="LIVE">Na żywo</string>
     <string name="featured">Polecane</string>
     <string name="most_popular">Popularne</string>
@@ -14,13 +14,13 @@
     <string name="num_videos">%d filmów</string>
     <string name="playlists">Playlisty</string>
     <string name="could_not_get_playlists">Nie można uzyskać %s playlist.</string>
-    <string name="loading">Ładowanie …</string>
-    <string name="could_not_get_channel">Nie można pobrać informacji o kanale!</string>
+    <string name="loading">Ładowanie…</string>
+    <string name="could_not_get_channel">Nie można pobrać informacji o kanale.</string>
     <string name="yes">Tak</string>
     <string name="no">Nie</string>
     <string name="close">Zamknij</string>
     <string name="search_channel">Szukaj kanału</string>
     <string name="could_not_get_channel_detailed">Nie można pobrać informacji o kanale: %s.</string>
     <string name="trending_in">Najpopularniejsze (%s)</string>
-    <string name="recaptcha_challenge_requested">YouTube blokuje nasze żądania sieciowe, musisz rozwiązać zabezpieczenie reCaptcha!</string>
+    <string name="recaptcha_challenge_requested">YouTube myśli, że jesteś botem, więc najpierw musisz rozwiązać reCAPTCHA.</string>
 </resources>
