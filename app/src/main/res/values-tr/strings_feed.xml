@@ -2,14 +2,12 @@
 <resources>
     <string name="feed">Akış</string>
     <string name="subscribing_to_channels">Kanallara abone olunuyor…</string>
-    <string name="fetching_subbed_channels_info">Kanalların bilgileri alınıyor…</string>
-    <string name="fetching_subbed_channels_info_error">Kanalların bilgileri alınırken bir hata oluştu.</string>
-    <string name="fetching_subscription_videos">Abone olunan kanallardan videolar alınıyor</string>
+    <string name="fetching_subbed_channels_info">Kanal bilgileri alınıyor…</string>
+    <string name="fetching_subbed_channels_info_error">Kanal bilgileri alınamadı.</string>
+    <string name="fetching_subscription_videos">Abone olunan kanallardan videolar alınıyor…</string>
     <string name="fetched_videos_from_channels">%1$d video %2$d/%3$d kanaldan alındı.</string>
-    <string name="no_new_videos_found">Yeni video bulunamadı.</string>
-    <string name="no_subscriptions_text">Henüz hiçbir kanala abone olmadınız.
-\n
-\nAbone olduğunuz zaman, son bir ay içinde abone olduğunuz kanallara yüklenen tüm videolar burada görünecektir.</string>
+    <string name="no_new_videos_found">Yeni video yok.</string>
+    <string name="no_subscriptions_text">Burada yeni videolarını görmek için birkaç kanala abone olun.</string>
     <string name="import_subscriptions_from_youtube">YouTube\'dan Abonelikleri içe aktar</string>
     <string name="notification_channel_feed_title">Akış Bildirimleri</string>
     <string name="notification_new_videos_found">Abone olunan kanallardan %d yeni video</string>
