@@ -6,14 +6,12 @@
     <string name="video_download_stream_error">Impossible de télécharger « %s ».</string>
     <string name="delete_download">Supprimer le téléchargement</string>
     <string name="video_downloaded">« %s » téléchargée.</string>
-    <string name="no_downloaded_videos_text">Vous n\'avez pas encore téléchargé de vidéos.
-\n
-\nUne fois que vous l\'aurez fait, elles apparaîtront ici.</string>
-    <string name="playing_video_file_missing">Impossible de lire la vidéo téléchargée. Lecture en ligne.</string>
-    <string name="external_storage_not_available">Impossible de télécharger le fichier car le stockage externe n\'est pas disponible.</string>
+    <string name="no_downloaded_videos_text">Téléchargez des vidéos pour les trouver ici.</string>
+    <string name="playing_video_file_missing">Lecture de la vidéo à distance car aucun fichier téléchargeable n\'a pu être trouvé.</string>
+    <string name="external_storage_not_available">Accordez d\'abord l\'accès à l\'externe pour télécharger le fichier.</string>
     <string name="download">Télécharger</string>
-    <string name="unable_to_delete_file">Impossible de supprimer le fichier télécharger : « %s »</string>
-    <string name="video_stream_not_found_with_request_resolution">Aucun flux vidéo trouvé pour la résolution demandée, entre la résolution %1$s et %2$s</string>
-    <string name="download_failed_because">Impossible de télécharger %1$s car : %2$s</string>
-    <string name="warning_metered_network_download">Votre appareil est connecté à un réseau avec compteur. Pour éviter les éventuels frais supplémentaires liés à l\'utilisation des données, il est recommandé de se connecter à un réseau sans compteur. Télécharger la vidéo quand même \?</string>
+    <string name="unable_to_delete_file">Impossible de supprimer le fichier « %s » téléchargé.</string>
+    <string name="video_stream_not_found_with_request_resolution">Impossible de trouver un flux vidéo dans la résolution demandée %1$s-%2$s</string>
+    <string name="download_failed_because">Impossible de télécharger %1$s car %2$s.</string>
+    <string name="warning_metered_network_download">Télécharger des vidéos sur le réseau à compteur auquel vous êtes connecté·e \?</string>
 </resources>
