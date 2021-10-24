@@ -6,23 +6,23 @@
     <string name="total_subscribers">%,d abonnés</string>
     <string name="subscribed">Abonné</string>
     <string name="unsubscribed">Désabonné</string>
-    <string name="error_get_subbed_channels">Erreur lors de la récupération des abonnements.</string>
-    <string name="error_check_if_user_has_subbed">Impossible de vérifier si l\'utilisateur s\'est abonné à la chaîne (id=%s)</string>
+    <string name="error_get_subbed_channels">Impossible de récupérer les abonnements aux chaînes.</string>
+    <string name="error_check_if_user_has_subbed">Impossible de vérifier si vous êtes abonné·e à la chaîne (id=%s)</string>
     <string name="error_unable_to_subscribe">Impossible de vous désabonner de cette chaîne (id=%s)</string>
     <string name="import_subscriptions">Importer abonnements</string>
-    <string name="import_subscriptions_description">Importez vos abonnements de YouTube en vous rendant d\'abord sur le site https://takeout.google.com. Désélectionnez tous les services sauf \"YouTube et YouTube Music\" et cliquez sur \"Toutes les données YouTube incluses\" pour désélectionner tout sauf les abonnements. Cliquez sur \"Suivant\", puis sur \"Créer l\'exportation\". Une fois l\'exportation terminée, elle s\'affiche sur la page Web sur laquelle vous venez d\'atterrir et vous recevez un courriel contenant un lien de téléchargement. Téléchargez le fichier et extrayez-en le fichier subscriptions.json (situé sous /Takeout/YouTube et YouTube Music/subscriptions/). Ensuite, sélectionnez le fichier exporté en cliquant sur \"Select Subscriptions File\" ci-dessous.</string>
-    <string name="subscriptions_to_channels_imported">Abonnements pour %d chaînes importés.</string>
+    <string name="import_subscriptions_description">Désélectionnez tout sur https://takeout.google.com sauf « YouTube et YouTube Music » et cliquez sur « Toutes les données YouTube incluses » pour obtenir uniquement les abonnements. Cliquez sur « Suivant » et ensuite sur « Créer l\'exportation ». Cliquez pour recevoir un courriel avec un lien de téléchargement. Téléchargez le fichier depuis votre client de messagerie et extrayez-le. Importez les abonnements.json (dans /Takeout/YouTube et YouTube Music/subscriptions/) de celui-ci dans SkyTube en utilisant « Sélectionner le fichier d\'abonnement » ci-dessous.</string>
+    <string name="subscriptions_to_channels_imported">%d chaîne(s) importée(s).</string>
     <string name="select_all">Tout sélectionner</string>
     <string name="select_none">Tout déselectionner</string>
-    <string name="no_channels_found">Aucune chaîne YouTube n\'a été trouvée dans le fichier que vous avez téléversé.</string>
-    <string name="no_new_channels_found">Aucune chaîne YouTube à laquelle vous n\'êtes pas déjà abonné·e n\'a été trouvée dans le fichier que vous avez téléversé.</string>
-    <string name="import_subscriptions_parse_error">Une erreur a été rencontrée lors de la tentative d\'analyse du fichier que vous avez téléversé : %s.</string>
-    <string name="failed_to_import_subscriptions">Échec de l\'import de vos abonnements YouTube.</string>
+    <string name="no_channels_found">Impossible de trouver des chaînes YouTube dans le fichier que vous avez téléversé.</string>
+    <string name="no_new_channels_found">Aucune chaîne YouTube à laquelle vous n\'êtes pas déjà abonné·e n\'a été trouvée.</string>
+    <string name="import_subscriptions_parse_error">Impossible d\'analyser le fichier que vous avez téléversé : %s.</string>
+    <string name="failed_to_import_subscriptions">Impossible d\'importer vos abonnements YouTube.</string>
     <string name="about">À propos</string>
-    <string name="unsubscribe_from_all_current_sibbed_channels">Se désabonner de toutes les chaînes auxquelles vous êtes actuellement abonné.</string>
+    <string name="unsubscribe_from_all_current_sibbed_channels">Se désabonner de toutes les chaînes auxquelles vous êtes actuellement abonné·e.</string>
     <string name="channel_unsubscribed">Désabonné de la chaîne</string>
     <string name="channel_subscribe_failed">Impossible de s\'abonner à la chaîne</string>
-    <string name="channel_already_subscribed">Vous être déjà aboné·e à cette chaîne</string>
+    <string name="channel_already_subscribed">Déjà abonné·e</string>
     <string name="channel_subscribed">Abonné à la chaîne</string>
-    <string name="select_sub_file">Sélectionner le fichier d\'abonnements</string>
+    <string name="select_sub_file">Sélectionner le fichier d\'abonnement</string>
 </resources>
