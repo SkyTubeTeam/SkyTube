@@ -10,7 +10,7 @@
     <string name="fetched_videos_from_channels">Mengambil %1$d video dari %2$d/%3$d kanal.</string>
     <string name="fetching_subscription_videos">Mengambil video dari langganan kanal</string>
     <string name="fetching_subbed_channels_info_error">Telah terjadi kesalahan saat mengambil informasi kanal.</string>
-    <string name="fetching_subbed_channels_info">Mengambil informasi kanal…</string>
+    <string name="fetching_subbed_channels_info">Mengambil info channel…</string>
     <string name="open_channel">Buka Kanal</string>
     <string name="subscribing_to_channels">Berlangganan ke kanal…</string>
     <string name="feed">Umpan</string>
