@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="error_stream_err_unavailable">Pesan galat tidak tersedia.</string>
+    <string name="error_stream_err_unavailable">Pesan tidak tersedia.</string>
     <string name="error_stream_decryption_fail">Tidak bisa memuat kode dekripsi untuk layanan YouTube.</string>
     <string name="error_stream_parse_error">Galat penguraian.</string>
     <string name="error_video_play">Galat Pemutaran Video</string>
     <string name="error_video_streams_empty">Video %s tidak memiliki stream.</string>
-    <string name="error_video_streams">Terjadi kesalahan saat mengambil stream video.</string>
-    <string name="error_get_video_desc">Terjadi kesalahan saat mengambil deskripsi video.</string>
+    <string name="error_video_streams">Tidak bisa mengambil stream video.</string>
+    <string name="error_get_video_desc">Tidak bisa mengambil deskripsi video.</string>
     <string name="error_invalid_url">URL video tidak valid: %s</string>
     <string name="play_video">Putar Video</string>
-    <string name="warning_live_video">Tidak bisa memutar siarang langsung sekarang. Buka siaran langsung di apl lain\?</string>
+    <string name="warning_live_video">Tidak bisa memutar siarang langsung sekarang. Buka di apl lain\?</string>
     <string name="ratings_disabled">Rating dinonaktifkan</string>
     <string name="loading_video">Memuat video…</string>
     <string name="open_in_browser">Buka di peramban web</string>
     <string name="open_with">Buka dengan…</string>
     <string name="share">Bagikan</string>
-    <string name="share_via">Bagikan via</string>
+    <string name="share_via">Bagikan via…</string>
     <string name="copy_url">Salin URL</string>
     <string name="url_copied_to_clipboard">URL disalin ke papan klip.</string>
     <string name="mark_watched">Tandai Ditonton</string>
     <string name="mark_unwatched">Tandai Belum Ditonton</string>
-    <string name="error_get_comments">Terjadi kesalahan saat menampilkan komentar.</string>
+    <string name="error_get_comments">Tidak bisa menampilkan komentar.</string>
     <string name="no_video_comments">Video ini tidak memiliki komentar, atau komentar dimatikan.</string>
     <string name="view_replies">Lihat balasan</string>
     <string name="hide_replies">Sembunyikan balasan</string>
@@ -28,14 +28,14 @@
     <string name="play">Putar</string>
     <string name="cancel">Batal</string>
     <string name="clear">Hapus</string>
-    <string name="should_resume">Apakah Anda ingin melanjutkan dari posisi waktu terakhir video ditonton\?</string>
+    <string name="should_resume">Lanjutkan dari waktu terakhir video ditonton\?</string>
     <string name="resume">Lanjutkan</string>
-    <string name="error_get_comments_no_network">Komentar tidak tersedia tanpa akses jaringan.</string>
-    <string name="error_video_parse_error">Tidak bisa memutar video, pesan galat: <br/> <br/> %s.</string>
-    <string name="error_downloaded_file_is_corrupted">Video yang diunduh sepertinya <b>rusak</b> - pesan galat: <br/> <br/> %s. <br/> <br/> Apakah Anda ingin <b>menghapus</b> berkas tersebut\?</string>
+    <string name="error_get_comments_no_network">Sambungkan ke Internet untuk menampilkan komentar.</string>
+    <string name="error_video_parse_error">Tidak bisa memutar video: <br/> <br/> %s.</string>
+    <string name="error_downloaded_file_is_corrupted">Video yang diunduh sepertinya <b>rusak</b>: <br/> <br/> %s. <br/> <br/> <b>Hapus</b> berkas ini\?</string>
     <string name="reload_video">Muat Ulang Video</string>
-    <string name="metered_network_blocked_by_policy">Unduh diblokir karena perangkat Anda tersambung ke jaringan terukur.</string>
+    <string name="metered_network_blocked_by_policy">Unduh diblokir karena Anda tersambung ke jaringan terukur.</string>
     <string name="warning_metered_network_disable">Jangan tanya lagi.</string>
-    <string name="warning_metered_network_play">Perangkat Anda tersambung ke jaringan terukur. Untuk menghindari potensi biaya ekstra penggunaan data, direkomendasikan untuk tersambung ke jaringan tak terbatas. Tetap putar video\?</string>
+    <string name="warning_metered_network_play">Sambungkan ke jaringan tidak terbatas untuk menghindari biaya ekstra penggunaan data. Tetap putar video\?</string>
     <string name="metered_network">Sambungan Terukur</string>
 </resources>
