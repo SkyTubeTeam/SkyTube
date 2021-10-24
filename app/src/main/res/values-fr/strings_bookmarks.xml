@@ -2,16 +2,14 @@
 <resources>
     <string name="bookmarks">Favoris</string>
     <string name="bookmark">Mémoriser</string>
-    <string name="video_bookmarked">Vidéo ajoutée aux favoris</string>
+    <string name="video_bookmarked">Ajoutée aux favoris</string>
     <string name="video_bookmarked_error">Impossible d\'ajouter la vidéo aux favoris.</string>
     <string name="unbookmark">Enlever</string>
-    <string name="video_unbookmarked">Vidéo enlevée des favoris</string>
-    <string name="video_unbookmarked_error">Impossible d\'enlever la vidéo des favoris.</string>
-    <string name="no_bookmarked_videos_text">Vous n\'avez pas ajouté de vidéos aux favoris.
-\n
-\nUne fois ajoutées, elles s\'afficheront ici.</string>
+    <string name="video_unbookmarked">Retirée des favoris</string>
+    <string name="video_unbookmarked_error">Impossible de retirer la vidéo des favoris.</string>
+    <string name="no_bookmarked_videos_text">Mettez des vidéos en favoris pour les retrouver ici.</string>
     <string name="bookmark_share_invalid_url">Seules les URL YouTube valides peuvent être ajoutées aux favoris.</string>
     <string name="bookmark_share_label">Favoris SkyTube</string>
     <string name="video_was_not_bookmarked">La vidéo n\'a pas été ajoutée aux favoris</string>
-    <string name="video_already_bookmarked">Vidéo déjà dans les favoris</string>
+    <string name="video_already_bookmarked">Déjà dans les favoris</string>
 </resources>
