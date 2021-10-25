@@ -5,8 +5,8 @@
     <string name="error">Fehler</string>
     <string name="ok">OK</string>
     <string name="search_videos">Videos suchen</string>
-    <string name="launch_offical_player_error">Beim Starten des offiziellen YouTube Players von Google ist ein Fehler aufgetreten. Stelle sicher, dass sie auf deinem Gerät installiert ist.</string>
-    <string name="LIVE">LIVE</string>
+    <string name="launch_offical_player_error">Der offizielle YouTube-Player konnte nicht gestartet werden. Stellen Sie sicher, dass er installiert ist.</string>
+    <string name="LIVE">Live</string>
     <string name="featured">Empfohlen</string>
     <string name="most_popular">Beliebt</string>
     <string name="video">Video</string>
@@ -15,12 +15,12 @@
     <string name="playlists">Wiedergabelisten</string>
     <string name="could_not_get_playlists">Wiedergabelisten von %s konnten nicht abgerufen werden.</string>
     <string name="loading">Wird geladen …</string>
-    <string name="could_not_get_channel">Kanalinformationen konnten nicht heruntergeladen werden!</string>
+    <string name="could_not_get_channel">Kanalinformationen konnten nicht heruntergeladen werden.</string>
     <string name="yes">Ja</string>
     <string name="no">Nein</string>
     <string name="could_not_get_channel_detailed">Kanalinformationen von %s konnten nicht heruntergeladen werden.</string>
     <string name="search_channel">Kanal suchen</string>
     <string name="close">Schließen</string>
     <string name="trending_in">Beliebt (%s)</string>
-    <string name="recaptcha_challenge_requested">YouTube blockt unsere Netzwerkanfrage. Du musst das reCaptcha lösen!</string>
+    <string name="recaptcha_challenge_requested">YouTube hält dich für einen Bot, also musst du zuerst ein reCAPTCHA lösen.</string>
 </resources>
