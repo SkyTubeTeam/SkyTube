@@ -2,11 +2,11 @@
 <resources>
     <string name="feed">Feed</string>
     <string name="subscribing_to_channels">Kanäle abonnieren …</string>
-    <string name="fetching_subbed_channels_info">Kanalinformationen abrufen …</string>
-    <string name="fetching_subbed_channels_info_error">Beim Abrufen von Kanalinformationen ist ein Fehler aufgetreten.</string>
-    <string name="fetching_subscription_videos">Videos von abonnierten Kanälen abrufen</string>
+    <string name="fetching_subbed_channels_info">Kanalinformationen abrufen …</string>
+    <string name="fetching_subbed_channels_info_error">Kanalinformationen konnten nicht abgerufen werden.</string>
+    <string name="fetching_subscription_videos">Videos von abonnierten Kanälen abrufen …</string>
     <string name="fetched_videos_from_channels">%1$d Videos von %2$d/%3$d Kanälen abgerufen.</string>
-    <string name="no_new_videos_found">Keine neuen Videos gefunden.</string>
+    <string name="no_new_videos_found">Keine neuen Videos.</string>
     <string name="no_subscriptions_text">Sie haben derzeit keine Kanäle abonniert.
 \n
 \nSobald Sie Abonnements hinzugefügt haben, werden hier alle Videos angezeigt, die innerhalb des letzten Monats auf Ihren abonnierten Kanälen hochgeladen wurden.</string>
