@@ -14,11 +14,11 @@
     <string name="import_subscriptions">Importuoti prenumeratas</string>
     <string name="error_unable_to_subscribe">Nepavyko užsiprenumeruoti arba atsisakyti kanalo (id=%s) prenumeratos</string>
     <string name="error_check_if_user_has_subbed">Nepavyksta patikrinti, ar naudotojas užsiprenumeravo kanalą (id=%s)</string>
-    <string name="error_get_subbed_channels">Gaunant prenumeruojamus kanalus įvyko klaida.</string>
+    <string name="error_get_subbed_channels">Nepavyko gauti kanalų prenumeratų.</string>
     <string name="channel_unsubscribed">Kanalo prenumerata atšaukta</string>
     <string name="unsubscribed">Prenumerata atšaukta</string>
     <string name="channel_subscribe_failed">Nepavyko užsiprenumeruoti kanalo</string>
-    <string name="channel_already_subscribed">Jau esate užsiprenumeravę šį kanalą</string>
+    <string name="channel_already_subscribed">Jau užsiprenumeruota</string>
     <string name="channel_subscribed">Kanalas prenumeruojamas</string>
     <string name="subscribed">Užprenumeruota</string>
     <string name="total_subscribers">%,d prenumeratorių</string>
