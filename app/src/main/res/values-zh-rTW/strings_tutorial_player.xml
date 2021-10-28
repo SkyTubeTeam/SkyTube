@@ -6,8 +6,8 @@
     <string name="done">完成</string>
     <string name="skip">略過</string>
     <string name="page_counter">%2%d 之 %1%d</string>
-    <string name="tutorial_slide_2">往上滑以檢視影片描述。</string>
-    <string name="tutorial_slide_3">水平滑動以向前或向後快轉。</string>
-    <string name="tutorial_slide_4">垂直滑動以調整音量。</string>
-    <string name="tutorial_slide_5">垂直滑動以調整亮度。</string>
+    <string name="tutorial_slide_2">往上滑動以檢視影片描述。</string>
+    <string name="tutorial_slide_3">左右滑動以向前或向後快轉。</string>
+    <string name="tutorial_slide_4">上下滑動以調整音量。</string>
+    <string name="tutorial_slide_5">上下滑動以調整亮度。</string>
 </resources>
