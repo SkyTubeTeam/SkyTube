@@ -6,7 +6,7 @@
     <string name="up_to_date_msg">您已安裝了最新版本的 SkyTube。</string>
     <string name="update">更新</string>
     <string name="later">更後的</string>
-    <string name="update_failure">無法升級應用程式。</string>
+    <string name="update_failure">無法安裝新版本的應用程式。</string>
     <string name="downloading">正在下載…</string>
     <string name="release_notes">在 %s 中變更</string>
 </resources>
