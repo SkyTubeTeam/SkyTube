@@ -2,18 +2,18 @@
 <resources>
     <string name="about">Apie</string>
     <string name="failed_to_import_subscriptions">Nepavyko importuoti „YouTube“ prenumeratų.</string>
-    <string name="import_subscriptions_parse_error">Bandant išanalizuoti jūsų įkeltą failą buvo pastebėta klaida: %s.</string>
-    <string name="no_new_channels_found">Įkeltame faile nerasta jokių „YouTube“ kanalų, kurių dar neprenumeruotumėte.</string>
-    <string name="no_channels_found">Įkeltame faile nerasta „YouTube“ kanalų.</string>
+    <string name="import_subscriptions_parse_error">Nepavyko išanalizuoti failo, kurį įkėlėte: %s.</string>
+    <string name="no_new_channels_found">Nerasta jokių „YouTube“ kanalų, kurių dar nesate užsiprenumeravę.</string>
+    <string name="no_channels_found">Įkeltame faile nepavyko rasti jokių „YouTube“ kanalų.</string>
     <string name="select_none">Nesirinkti nieko</string>
     <string name="select_all">Pasirinkti viską</string>
     <string name="select_sub_file">Pasirinkti prenumeratų failą</string>
-    <string name="subscriptions_to_channels_imported">Importuota %d kanalo (-ų) prenumerata (-os).</string>
-    <string name="unsubscribe_from_all_current_sibbed_channels">Atsisakykite visų šiuo metu prenumeruojamų kanalų.</string>
-    <string name="import_subscriptions_description">Importuokite prenumeratas iš „YouTube“ pirmiausia apsilankydami svetainėje https://takeout.google.com. Panaikinkite visų paslaugų, išskyrus „YouTube“ ir „YouTube Music“, pasirinkimą ir spustelėkite „All YouTube data included“ (įtraukti visus „YouTube“ duomenis), kad panaikintumėte visų paslaugų, išskyrus prenumeratas, pasirinkimą. Spustelėkite „Next\" (toliau) ir tada „Create export“ (pasirinkti eksportavimo failą). Kai eksportas bus baigtas, jis bus rodomas tinklalapyje, kuriame ką tik nusileidote, ir gausite el. laišką su atsisiuntimo nuoroda. Atsisiųskite failą ir iš jo išskleiskite failą „subscriptions.json“ (jis yra adresu /Takeout/YouTube and YouTube Music/subscriptions/). Tada pasirinkite eksportuotą failą spustelėję toliau esantį mygtuką „Select Subscriptions File“ (pasirinkti prenumeratos failą).</string>
+    <string name="subscriptions_to_channels_imported">%d kanalai (-as) importuoti (-as).</string>
+    <string name="unsubscribe_from_all_current_sibbed_channels">Atsisakyti visų šiuo metu prenumeruojamų kanalų prenumeratų.</string>
+    <string name="import_subscriptions_description">Panaikinkite viską, kas yra https://takeout.google.com, išskyrus „YouTube“ ir „YouTube Music“, ir spustelėkite „Visi „YouTube“ duomenys įtraukti“, kad gautumėte tik prenumeratas. Spustelėkite „Kitas“, tada „Sukurti eksportą“. Spustelėkite, kad gautumėte el. laišką su atsisiuntimo nuoroda. Atsisiųskite failą iš savo el. pašto programos ir išskleiskite. Importuokite subscriptions.json (į /Takeout/YouTube ir YouTube Music/subscriptions/) iš jo į SkyTube naudodami toliau pateiktą parinktį „Pasirinkti prenumeratos failą“.</string>
     <string name="import_subscriptions">Importuoti prenumeratas</string>
-    <string name="error_unable_to_subscribe">Nepavyko užsiprenumeruoti arba atsisakyti kanalo (id=%s) prenumeratos</string>
-    <string name="error_check_if_user_has_subbed">Nepavyksta patikrinti, ar naudotojas užsiprenumeravo kanalą (id=%s)</string>
+    <string name="error_unable_to_subscribe">Nepavyko užsiprenumeruoti arba atšaukti kanalo (id=%s) prenumeratos</string>
+    <string name="error_check_if_user_has_subbed">Nepavyko patikrinti, ar užsiprenumeravote kanalą (id=%s)</string>
     <string name="error_get_subbed_channels">Nepavyko gauti kanalų prenumeratų.</string>
     <string name="channel_unsubscribed">Kanalo prenumerata atšaukta</string>
     <string name="unsubscribed">Prenumerata atšaukta</string>
