@@ -3,24 +3,22 @@
     <string name="preferences">Preferensi</string>
     <string name="pref_video_player_category">Pemutar Video</string>
     <string name="pref_title_choose_player">Pemutar Video</string>
-    <string name="pref_summary_choose_player">Pemutar Video yang digunakan: %s</string>
+    <string name="pref_summary_choose_player">Pemutar video yang digunakan: %s</string>
     <string name="pref_import_export_category">Impor/Ekspor</string>
-    <string name="pref_title_backup_dbs">Pencadangan Basis Data</string>
-    <string name="pref_summary_backup_dbs">Cadangkan basis data langganan dan markah Anda.</string>
+    <string name="pref_title_backup_dbs">Pencadangan Basisdata</string>
+    <string name="pref_summary_backup_dbs">Cadangkan langganan dan markah Anda.</string>
     <string name="pref_title_import_dbs">Impor Cadangan</string>
-    <string name="pref_summary_import_dbs">Impor cadangan basis data langganan dan markah Anda.</string>
+    <string name="pref_summary_import_dbs">Impor cadangan langganan dan markah Anda.</string>
     <string name="databases_backing_up">Mencadangkan…</string>
     <string name="databases_backup_success">Basis data dicadangkan ke %s</string>
-    <string name="databases_backup_fail">Gagal mencadangkan basis data Anda.</string>
+    <string name="databases_backup_fail">Gagal mencadangkan basisdata Anda.</string>
     <string name="databases_import_select_backup">Pilih berkas cadangan untuk diimpor</string>
     <string name="databases_import_nothing_selected">Tidak ada yang dipilih…</string>
-    <string name="databases_import_warning_message">Basis data langganan dan markah akan diganti dengan data dari berkas cadangan yang dipilih.
-\n
-\nLanjutkan\?</string>
+    <string name="databases_import_warning_message">Ganti markah dan langganan dengan data dari berkas cadangan yang dipilih\?</string>
     <string name="continue_">Lanjutkan</string>
     <string name="databases_importing">Mengimpor…</string>
-    <string name="databases_import_fail">Gagal mengimpor basis data Anda.</string>
-    <string name="databases_import_success">Basis data diimpor. Mulai ulang apl untuk menerapkan perubahan.</string>
+    <string name="databases_import_fail">Tidak bisa mengimpor basisdata Anda.</string>
+    <string name="databases_import_success">Mulai ulang apl untuk menggunakan markah dan langganan baru.</string>
     <string name="pref_title_import_subs">Impor Langganan Dari YouTube</string>
     <string name="pref_summary_import_subs">Impor langganan Anda dari akun YouTube Anda.</string>
     <string name="subs_import_select_backup">Pilih berkas XML YouTube untuk diimpor</string>
@@ -32,25 +30,25 @@
     <string name="pref_title_updates">Pembaruan</string>
     <string name="pref_summary_updates">Periksa versi terbaru.</string>
     <string name="pref_title_license">Lisensi</string>
-    <string name="pref_summary_license">Lisensi Publik Umum GNU versi 3</string>
-    <string name="i_agree">Saya Setuju</string>
+    <string name="pref_summary_license">GPLv3+</string>
+    <string name="i_agree">Kembali</string>
     <string name="pref_other_category">Lainnya</string>
     <string name="pref_title_default_tab">Tab Baku</string>
-    <string name="pref_summary_default_tab">Tab baku yang ditampilkan saat menjalankan SkyTube: %s</string>
+    <string name="pref_summary_default_tab">Tab yang ditampilkan saat menjalankan SkyTube: %s</string>
     <string name="pref_title_feed_notification">Notifikasi Otomatis Umpan</string>
-    <string name="pref_summary_feed_notification">Seberapa sering memeriksa video baru dari channel yang disubscribe: %s</string>
+    <string name="pref_summary_feed_notification">Seberapa sering memeriksa video baru dari langganan channel: %s</string>
     <string name="pref_title_screen_orientation">Orientasi Layar</string>
     <string name="pref_summary_screen_orientation">Orientasi pemutar video: %s</string>
-    <string name="pref_title_disable_screen_gestures">Nonaktifkan gestur video</string>
+    <string name="pref_title_disable_screen_gestures">Tanpa gestur video</string>
     <string name="pref_summary_disable_screen_gestures">Nonaktifkan gestur untuk mengontrol volume, kecerahan dan tinjauan maju/mundur.</string>
     <string name="pref_title_youtube_api_key">Kunci API YouTube</string>
-    <string name="pref_summary_youtube_api_key">Masukkan Kunci DATA API YouTube Anda sendiri. Kosongkan untuk menggunakan nilai bawaan.</string>
-    <string name="pref_youtube_api_key_error">Terjadi kesalahan saat mencoba memvalidasi Kunci API yang Anda masukkan.</string>
-    <string name="pref_youtube_api_key_custom">Kunci valid. Mulai ulang apl untuk menggunakan kunci API YouTube yang baru.</string>
-    <string name="pref_youtube_api_key_default">Mulai ulang apl untuk beralih ke kunci API YouTube bawaan.</string>
+    <string name="pref_summary_youtube_api_key">Masukkan kunci API YouTube Anda sendiri.</string>
+    <string name="pref_youtube_api_key_error">Tidak bisa memvalidasi Kunci API yang Anda masukkan.</string>
+    <string name="pref_youtube_api_key_custom">Mulai ulang apl untuk menggunakan kunci API YouTube yang baru.</string>
+    <string name="pref_youtube_api_key_default">Mulai ulang apl untuk menggunakan kunci API YouTube bawaan.</string>
     <string name="restart">Mulai Ulang</string>
-    <string name="pref_title_subscriptions_alphabetical_order">Urutkan Channel Menurut Abjad</string>
-    <string name="pref_summary_subscriptions_alphabetical_order">Jika dicentang, channel yang disubscribe akan diurutkan menurut abjad.</string>
+    <string name="pref_title_subscriptions_alphabetical_order">Urutkan Channel A - Z</string>
+    <string name="pref_summary_subscriptions_alphabetical_order">Tampilkan langganan Channel A-B-C….</string>
     <string name="pref_category_downloads">Unduhan</string>
     <string name="pref_title_download_to_separate_directories">Unduh Video ke Dalam Folder</string>
     <string name="pref_summary_download_to_separate_directories">Video akan diunduh ke dalam folder berdasarkan nama channel.</string>
@@ -102,18 +100,18 @@
     <string name="channel_whitelist_update_failure">Gagal memasukkan channel ke daftar putih…</string>
     <string name="channel_unwhitelist_success">Daftar putih channel diperbarui. Silakan segarkan daftar video.</string>
     <string name="channel_unwhitelist_failure">Gagal menghapus channel dari daftar putih…</string>
-    <string name="pref_summary_autocast">Pilih perangkat Chromecast yang akan digunakan saat menggunakan apl lain untuk membuka video di SkyTube.</string>
+    <string name="pref_summary_autocast">Perangkat Chromecast untuk pemutaran saat menggunakan apl video lain di SkyTube.</string>
     <string name="pref_summary_video_download_folder">Video akan diunduh ke dalam folder ini: %s</string>
     <string name="pref_title_video_download_folder">Folder Unduhan Video</string>
     <string name="pref_popup_title_video_download_folder">Pilih Folder</string>
     <string name="pref_summary_use_newpipe_backend">Gunakan API NewPipe untuk mengakses YouTube…</string>
-    <string name="pref_title_use_newpipe_backend">Gunakan backend NewPipe</string>
+    <string name="pref_title_use_newpipe_backend">Back-end NewPipe</string>
     <string name="pref_summary_switch_volume_and_brightness">Kontrol volume di sebelah kanan, dan kecerahan di sebelah kiri.</string>
     <string name="pref_title_switch_volume_and_brightness">Tukar Gestur Volume dan Kecerahan</string>
     <string name="pref_summary_enable_immersive_mode">Sembunyikan bilah navigasi dan bilah status saat pemutaran.</string>
-    <string name="pref_title_enable_immersive_mode">Aktifkan mode imersif</string>
-    <string name="pref_hide_tabs_restart">Mulai ulang app untuk menampilkan pembaruan tab.</string>
-    <string name="pref_summary_hide_tabs">Pilih tab yang akan disembunyikan. Butuh memulai ulang.</string>
+    <string name="pref_title_enable_immersive_mode">Mode imersif</string>
+    <string name="pref_hide_tabs_restart">Mulai ulang apl untuk menggunakan tab ini.</string>
+    <string name="pref_summary_hide_tabs">Pilih tab yang disembunyikan. Butuh memulai ulang.</string>
     <string name="pref_title_hide_tabs">Sembunyikan Tab</string>
     <string name="pref_network_downloads_category">Jaringan dan Unduhan</string>
     <string name="pref_title_autocast">AutoCast</string>
@@ -121,19 +119,19 @@
     <string name="pref_chromecast_category">Chromecast</string>
     <string name="key_preferences">preferensi</string>
     <string name="pref_video_continuous_repeat_toggle">Pengulangan berkelanjutan</string>
-    <string name="app_license">Hak Cipta © 2015-2018 Ramon Mifsud
-\n 
+    <string name="app_license">Hak Cipta © 2015–2018 Ramon Mifsud
+\n
 \nProgram ini adalah perangkat lunak bebas: Anda dapat mendistribusikan ulang dan/atau memodifikasinya di bawah ketentuan Lisensi Publik Umum GNU yang diterbitkan oleh Free Software Foundation (versi 3 dari Lisensi).
-\n 
+\n
 \nProgram ini didistribusikan dengan harapan akan bermanfaat, tetapi TANPA GARANSI APA PUN; bahkan tanpa jaminan tersirat DAGANG atau KECOCOKAN UNTUK TUJUAN TERTENTU. Lihat Lisensi Publik Umum GNU untuk detail lebih lanjut.
-\n 
-\nAnda seharusnya telah menerima salinan Lisensi Publik Umum GNU bersama dengan program ini. Jika tidak, lihat &lt;http://www.gnu.org/licenses/&gt;</string>
+\n
+\nAnda seharusnya telah menerima salinan Lisensi Publik Umum GNU bersama dengan program ini. Jika tidak, lihat &lt;https://www.gnu.org/licenses/&gt;</string>
     <string name="pref_video_download_minimum_resolution_title">Resolusi Minimum Unduhan Video</string>
     <string name="pref_video_download_maximum_resolution_title">Resolusi Maksimum Unduhan Video</string>
-    <string name="pref_summary_minimum_res">Pilih resolusi minimum Anda: %s</string>
-    <string name="pref_title_minimum_res">Resolusi Minimum</string>
-    <string name="pref_summary_maximum_res">Pilih resolusi maksimum Anda: %s</string>
-    <string name="pref_title_maximum_res">Resolusi Maksimum</string>
+    <string name="pref_summary_minimum_res">Pilih resolusi terendah: %s</string>
+    <string name="pref_title_minimum_res">Resolusi Terendah</string>
+    <string name="pref_summary_maximum_res">Pilih resolusi tertinggi: %s</string>
+    <string name="pref_title_maximum_res">Resolusi Tertinggi</string>
     <string name="pref_key_video_quality_for_downloads_summary">Optimal untuk: %s</string>
     <string name="pref_key_video_quality_for_downloads_title">Pilihan Kualitas Video untuk Unduhan</string>
     <string name="pref_key_video_quality_metered_summary">Optimal untuk: %s</string>
@@ -142,19 +140,19 @@
     <string name="pref_key_video_quality_title">Pilihan Kualitas Video</string>
     <string name="pref_video_download_minimum_resolution_summary">Video diunduh minimal pada resolusi ini: %s</string>
     <string name="pref_video_download_maximum_resolution_summary">Video diunduh maksimal pada resolusi ini: %s</string>
-    <string name="pref_category_download_resolutions">Resolusi Video Unduh</string>
+    <string name="pref_category_download_resolutions">Resolusi unduhan video</string>
     <string name="pref_category_video_resolutions">Resolusi Video</string>
-    <string name="pref_summary_metered_network_usage">Apa yang ingin Anda lakukan jika Anda menggunakan jaringan terukur untuk mengunduh/menonton video: %s</string>
+    <string name="pref_summary_metered_network_usage">Apa yang ingin dilakukan jika menggunakan jaringan terukur untuk mengunduh/menonton video: %s</string>
     <string name="pref_title_metered_network_usage">Penggunaan Jaringan Terukur</string>
     <string name="pref_summary_maximum_res_metered">Pilih resolusi maksimum saat streaming melalui jaringan terukur: %s</string>
-    <string name="pref_title_maximum_res_metered">Resolusi Maksimum untuk jaringan terukur</string>
-    <string name="pref_summary_minimum_res_metered">Pilih resolusi minimum saat streaming melalui jaringan terukur: %s</string>
-    <string name="pref_title_minimum_res_metered">Resolusi Minimum untuk jaringan terukur</string>
+    <string name="pref_title_maximum_res_metered">Resolusi tertinggi untuk jaringan terukur</string>
+    <string name="pref_summary_minimum_res_metered">Pilih resolusi terendah saat streaming melalui jaringan terukur: %s</string>
+    <string name="pref_title_minimum_res_metered">Resolusi terendah untuk jaringan terukur</string>
     <string name="pref_category_metered_network">Jaringan Terukur</string>
     <string name="no_resolution_specified">Nihil</string>
     <string name="pref_summary_default_content_country">Tampilkan konten yang ditujukan untuk negara ini: %s</string>
     <string name="pref_title_default_content_country">Lokasi konten</string>
-    <string name="system_default_country">Negara Default Sistem</string>
+    <string name="system_default_country">Sistem</string>
     <string name="pref_key_use_newer_formats_summary">Versi Android lama tidak mendukung semua format video, yang disediakan oleh YouTube. Nonaktifkan, jika Anda mengalami gangguan pemutaran video atau suara</string>
     <string name="pref_key_use_newer_formats_title">Coba format Video terbaru</string>
 </resources>
