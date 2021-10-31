@@ -6,14 +6,12 @@
     <string name="video_download_stream_error">Nie można pobrać \'%s\'.</string>
     <string name="delete_download">Usuń pobrany film</string>
     <string name="video_downloaded">\'%s\' pobrane.</string>
-    <string name="no_downloaded_videos_text">Nie pobrano jeszcze żadnych filmów.
-\n
-\nPo pobraniu, pojawią się tutaj.</string>
-    <string name="playing_video_file_missing">Nie znaleziono pobrania dla tego filmu. Odtwarzanie zdalne.</string>
-    <string name="external_storage_not_available">Nie można pobrać pliku, ponieważ zewnętrzna pamięć jest niedostępna.</string>
+    <string name="no_downloaded_videos_text">Pobierz jakieś filmy, aby je znaleźć tutaj.</string>
+    <string name="playing_video_file_missing">Zdalne odtwarzanie wideo, ponieważ nie znaleziono pliku do pobrania.</string>
+    <string name="external_storage_not_available">Najpierw udziel dostępu do pamięci zewnętrznej, aby pobrać plik.</string>
     <string name="download">Pobierz</string>
-    <string name="video_stream_not_found_with_request_resolution">Nie znaleziono strumienia wideo dla żądanej rozdzielczości, pomiędzy rozdzielczościami %1$s i %2$s</string>
-    <string name="warning_metered_network_download">Urządzenie jest połączone z siecią taryfową. Aby uniknąć potencjalnych dodatkowych opłat za użycie danych, zaleca się połączenie z siecią bez limitu danych. Czy mimo to pobrać film\?</string>
-    <string name="unable_to_delete_file">Nie udało się usunąć pobranego pliku: \'%s\'</string>
-    <string name="download_failed_because">Nie można pobrać %1$s ponieważ: %2$s</string>
+    <string name="video_stream_not_found_with_request_resolution">Nie znaleziono żadnego strumienia wideo w żądanej rozdzielczości %1$s-%2$s</string>
+    <string name="warning_metered_network_download">Pobrać wideo w sieci taryfowej, z którą jesteś połączony\?</string>
+    <string name="unable_to_delete_file">Nie można usunąć pobranego pliku \'%s\'.</string>
+    <string name="download_failed_because">Nie można pobrać %1$s ponieważ %2$s.</string>
 </resources>
