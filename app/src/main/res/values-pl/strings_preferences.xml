@@ -7,7 +7,7 @@
     <string name="pref_title_preferred_languages">Preferowane języki</string>
     <string name="pref_summary_preferred_languages">Wybierz preferowane języki.</string>
     <string name="pref_video_player_category">Odtwarzacz wideo</string>
-    <string name="pref_title_backup_dbs">Kopia zapasowa bazy danych</string>
+    <string name="pref_title_backup_dbs">Kopia zapasowa baz danych</string>
     <string name="pref_summary_backup_dbs">Wykonaj kopię zapasową swoich subskrypcji i zakładek.</string>
     <string name="pref_title_import_dbs">Importuj kopię zapasową</string>
     <string name="pref_summary_import_dbs">Zaimportuj swoje subskrypcje i zakładki z kopii zapasowej.</string>
@@ -16,9 +16,7 @@
     <string name="databases_backup_fail">Nie udało się utworzyć kopii zapasowej.</string>
     <string name="databases_import_select_backup">Wybierz plik kopii zapasowej do zaimportowania</string>
     <string name="databases_import_nothing_selected">Nic nie wybrano…</string>
-    <string name="databases_import_warning_message">Subskrypcje i zakładki będą zastąpione tymi z wybranego pliku kopii zapasowej.
-\n
-\nKontynuować?</string>
+    <string name="databases_import_warning_message">Zastąpić zakładki i subskrypcje tymi z wybranego pliku kopii zapasowej\?</string>
     <string name="continue_">Kontynuuj</string>
     <string name="databases_importing">Importowanie…</string>
     <string name="databases_import_fail">Nie udało się zaimportować kopii zapasowej.</string>
@@ -33,25 +31,19 @@
     <string name="pref_title_version">Wersja</string>
     <string name="pref_title_updates">Aktualizacje</string>
     <string name="pref_summary_updates">Sprawdź aktualizacje.</string>
-    <string name="pref_title_license">Licencja</string>
-    <string name="pref_summary_license">Powszechna Licencja Publiczna GNU 3</string>
-    <string name="app_license">Copyright © 2015-2018  Ramon Mifsud\n
-
-				\nThis program is free software: you can redistribute it and/or modify
-				it under the terms of the GNU General Public License as published by
-				the Free Software Foundation (version 3 of the License).\n
-
-				\nThis program is distributed in the hope that it will be useful,
-				but WITHOUT ANY WARRANTY; without even the implied warranty of
-				MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-				GNU General Public License for more details.\n
-
-				\nYou should have received a copy of the GNU General Public License
-				along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;</string>
-    <string name="i_agree">Zgadzam się</string>
+    <string name="pref_title_license">Licencja Copylefted Libre</string>
+    <string name="pref_summary_license">GPLv3+</string>
+    <string name="app_license">Copyright © 2015–2018 Ramon Mifsud
+\n
+\nThis program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation (version 3 of the License).
+\n
+\nThis program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+\n
+\nYou should have received a copy of the GNU General Public License along with this program. If not, see &lt;http://www.gnu.org/licenses/&gt;</string>
+    <string name="i_agree">Wstecz</string>
     <string name="pref_other_category">Inne</string>
     <string name="pref_title_default_tab">Domyślna karta</string>
-    <string name="pref_summary_default_tab">Domyślna karta do pokazania po uruchomieniu SkyTube: %s</string>
+    <string name="pref_summary_default_tab">Karta do wyświetlenia po uruchomieniu SkyTube: %s</string>
     <string name="pref_title_screen_orientation">Orientacja ekranu</string>
     <string name="pref_summary_screen_orientation">Orientacja odtwarzacza wideo: %s</string>
     <string-array name="screen_orientations">
@@ -60,7 +52,7 @@
         <item>Portrait</item>
         <item>Sensor urządzenia</item>
     </string-array>
-    <string name="pref_title_youtube_api_key">Klucz YouTube API</string>
+    <string name="pref_title_youtube_api_key">Klucz API YouTube</string>
     <string name="pref_summary_youtube_api_key">Wprowadź swój własny klucz YouTube Data API. Pozostaw pusty, aby używać domyślnego.</string>
     <string name="pref_youtube_api_key_error">Wystąpił błąd podczas próby sprawdzenia klucza API.</string>
     <string name="pref_youtube_api_key_custom">Klucz jest poprawny.  Zrestartuj aplikację, aby użyć nowego klucza API.</string>
@@ -104,7 +96,7 @@
     <string name="please_wait">Proszę czekać…</string>
     <string name="channel_already_whitelisted">Kanał został już dodany do białej listy.</string>
     <string name="channel_whitelist_updated">Kanał na białej liście. Odśwież filmy.</string>
-    <string name="channel_whitelist_update_failure">Nie udało się dodać białej listy do danego kanału…</string>
+    <string name="channel_whitelist_update_failure">Nie udało się dodać danego kanału do białej listy.</string>
     <string name="channel_unwhitelist_success">Zaktualizowano białą listę kanałów. Odśwież filmy.</string>
     <string name="channel_unwhitelist_failure">Nie udało się wprowadzić na białą listę podanych kanałów …</string>
     <string name="no_preferred_lang_selected">Nie wybrano żadnego preferowanego języka. Ustawienie ignorowane.</string>
@@ -128,8 +120,8 @@
     <string name="pref_summary_disable_screen_gestures">Wyłącz gesty do kontrolowania głośności, jasności i przewijania filmów do przodu/tyłu.</string>
     <string name="pref_summary_enable_video_blocker">Włącz blokowanie wideo.</string>
     <string name="pref_title_use_newpipe_backend">Korzystaj z infrastruktury NewPipe</string>
-    <string name="pref_title_enable_immersive_mode">Włącz tryb immersyjny</string>
-    <string name="pref_summary_hide_tabs">Wybierz, które karty nie mają być wyświetlane. Wymagane jest ponowne uruchomienie.</string>
+    <string name="pref_title_enable_immersive_mode">Tryb immersyjny</string>
+    <string name="pref_summary_hide_tabs">Wybierz, które karty mają nie być wyświetlane. Wymagane jest ponowne uruchomienie.</string>
     <string name="pref_summary_autocast">Wybierz urządzenie Chromecast, którego chcesz używać podczas otwierania filmów w SkyTube za pomocą innych aplikacji.</string>
     <string name="pref_title_chromecast_none">Brak</string>
     <string name="pref_summary_use_newpipe_backend">Używaj interfejsu API NewPipe, aby uzyskać dostęp do YouTube…</string>
@@ -137,7 +129,7 @@
     <string name="pref_title_switch_volume_and_brightness">Przełącz gesty głośności i jasności</string>
     <string name="pref_summary_enable_immersive_mode">Ukryj paski nawigacji i stanu podczas odtwarzania.</string>
     <string name="pref_video_continuous_repeat_toggle">Ciągłe powtarzanie</string>
-    <string name="pref_hide_tabs_restart">Uruchom ponownie aplikację, aby wyświetlić zaktualizowane karty.</string>
+    <string name="pref_hide_tabs_restart">Uruchom ponownie aplikację, aby korzystać z tych kart.</string>
     <string name="pref_title_autocast">AutoCast</string>
     <string name="pref_summary_video_download_folder">Filmy są pobierane do tego folderu: %s</string>
     <string name="pref_title_video_download_folder">Folder pobierania filmów</string>
@@ -150,17 +142,17 @@
     <string name="pref_video_download_minimum_resolution_summary">Pliki wideo będą pobierane co najmniej w tej rozdzielczości: %s</string>
     <string name="pref_video_download_minimum_resolution_title">Minimalna rozdzielczość pobierania wideo</string>
     <string name="pref_video_download_maximum_resolution_title">Maksymalna rozdzielczość pobierania wideo</string>
-    <string name="pref_summary_minimum_res">Wybierz minimalną rozdzielczość: %s</string>
-    <string name="pref_summary_maximum_res">Wybierz maksymalną rozdzielczość: %s</string>
-    <string name="pref_title_minimum_res">Minimalna rozdzielczość</string>
-    <string name="pref_title_maximum_res">Maksymalna rozdzielczość</string>
-    <string name="pref_title_minimum_res_metered">Minimalna rozdzielczość podczas korzystania z sieci taryfowej</string>
+    <string name="pref_summary_minimum_res">Wybierz najniższą rozdzielczość: %s</string>
+    <string name="pref_summary_maximum_res">Wybierz najwyższą rozdzielczość: %s</string>
+    <string name="pref_title_minimum_res">Najniższa rozdzielczość</string>
+    <string name="pref_title_maximum_res">Najwyższa rozdzielczość</string>
+    <string name="pref_title_minimum_res_metered">Najniższa rozdzielczość podczas korzystania z sieci taryfowej</string>
     <string name="pref_category_metered_network">Sieć taryfowa</string>
     <string name="no_resolution_specified">Brak</string>
-    <string name="pref_summary_minimum_res_metered">Wybierz minimalną rozdzielczość podczas przesyłania strumieniowego za pośrednictwem sieci taryfowej: %s</string>
+    <string name="pref_summary_minimum_res_metered">Wybierz najniższą rozdzielczość podczas przesyłania strumieniowego za pośrednictwem sieci taryfowej: %s</string>
     <string name="pref_summary_maximum_res_metered">Wybierz maksymalną rozdzielczość podczas przesyłania strumieniowego za pośrednictwem sieci taryfowej: %s</string>
-    <string name="pref_title_maximum_res_metered">Rozdzielczość maksymalna podczas korzystania z sieci taryfowej</string>
-    <string name="pref_summary_metered_network_usage">Co ma zrobić program, jeśli używasz sieci taryfowej do pobierania/oglądania filmów: %s</string>
+    <string name="pref_title_maximum_res_metered">Najwyższa rozdzielczość podczas korzystania z sieci taryfowej</string>
+    <string name="pref_summary_metered_network_usage">Co zrobić, gdy do pobierania/oglądania filmów używasz sieci taryfowej: %s</string>
     <string name="pref_title_metered_network_usage">Użycie sieci taryfowej</string>
     <string name="pref_key_video_quality_for_downloads_summary">Optymalizacja pod kątem: %s</string>
     <string name="pref_key_video_quality_for_downloads_title">Wybór jakości wideo dla pobieranych plików</string>
@@ -174,5 +166,5 @@
     <string name="pref_title_default_content_country">Domyślny kraj treści</string>
     <string name="system_default_country">Kraj domyślny systemu</string>
     <string name="pref_key_use_newer_formats_title">Wypróbuj nowsze formaty wideo</string>
-    <string name="pref_key_use_newer_formats_summary">Starsze wersje systemu Android nie obsługują każdego formatu wideo, które oferuje YouTube. Wyłącz je, jeżeli często napotykasz niedziałające odtwarzanie wideo lub brak dźwięku</string>
+    <string name="pref_key_use_newer_formats_summary">Dźwięk i obraz mogą ucierpieć w starszych wersjach systemu Android bez wsparcia.</string>
 </resources>
