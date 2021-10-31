@@ -6,7 +6,7 @@
     <string name="up_to_date_msg">Masz zainstalowaną najnowszą wersję SkyTube.</string>
     <string name="update">Aktualizuj</string>
     <string name="later">Później</string>
-    <string name="update_failure">Nie można zaktualizować aplikacji.</string>
+    <string name="update_failure">Nie udało się zainstalować nowszej wersji aplikacji.</string>
     <string name="downloading">Pobieranie…</string>
     <string name="release_notes">Zmiany w wersji %s</string>
 </resources>
