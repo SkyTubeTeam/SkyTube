@@ -1,7 +1,7 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="thumbnail">Miniaturka</string>
-	<string name="view_thumbnail">Pokaż miniaturkę</string>
-	<string name="thumbnail_downloaded">Pobrano miniaturkę.</string>
-	<string name="thumbnail_download_error">Nie można było pobrać miniaturki.</string>
+    <string name="thumbnail">Miniaturka</string>
+    <string name="view_thumbnail">Pokaż miniaturkę</string>
+    <string name="thumbnail_downloaded">Pobrano.</string>
+    <string name="thumbnail_download_error">Nie udało się pobrać miniaturki.</string>
 </resources>
