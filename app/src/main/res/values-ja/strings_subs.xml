@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="subscriptions">購読</string>
-    <string name="subscribe">購読</string>
-    <string name="unsubscribe">購読解除</string>
-    <string name="total_subscribers">%,d 購読者数</string>
-    <string name="subscribed">購読済</string>
-    <string name="unsubscribed">購読解除済</string>
-    <string name="error_get_subbed_channels">購読しているチャンネルを取得中にエラーが発生しました。</string>
-    <string name="error_check_if_user_has_subbed">ユーザーがチャンネルを購読しているかどうかを確認できません (id=%s)</string>
-    <string name="error_unable_to_subscribe">チャネルを購読 (解除) できません (id=%s)</string>
-    <string name="import_subscriptions">購読をインポート</string>
-    <string name="import_subscriptions_description">まず、https://takeout.google.com にアクセスしてYouTube からサブスクリプションをインポートします。「YouTube と YouTube Music」以外のすべてのサービスの選択を解除し、「YouTubeのすべてのデータが含まれます」をクリックし、登録チャンネル以外のすべての選択を解除します。「次のステップ」をクリックし、「エクスポートを作成」をクリックします。エクスポートが完了すると、開いていたページに表示され、ダウンロードリンクの記載されたメールが届きます。ファイルをダウンロードしてsubscriptions.jsonをそこから展開します( /Takeout/YouTube と YouTube Music/登録チャンネル/ の下にあります )。それから、下部の「サブスクリプションファイルの選択」をクリックして、エクスポートしたファイルを選択します。</string>
-    <string name="subscriptions_to_channels_imported">%d チャンネルの購読をインポートしました。</string>
+    <string name="subscriptions">サブスクリプション</string>
+    <string name="subscribe">サブスクライブ</string>
+    <string name="unsubscribe">サブスクリプション解除</string>
+    <string name="total_subscribers">%,d サブスクライバー</string>
+    <string name="subscribed">サブスクライブ済</string>
+    <string name="unsubscribed">サブスクリプション解除済</string>
+    <string name="error_get_subbed_channels">チャンネルのサブスクリプションを取得中できませんでした。</string>
+    <string name="error_check_if_user_has_subbed">チャンネルをサブスクライブしているか確認できませんでした (id=%s)</string>
+    <string name="error_unable_to_subscribe">チャネルをサブスクライブ (または解除) できませんでした (id=%s)</string>
+    <string name="import_subscriptions">サブスクリプションをインポート</string>
+    <string name="import_subscriptions_description">https://takeout.google.com 上で「YouTube と YouTube Music」以外のすべての選択を解除し、「YouTubeのすべてのデータが含まれます」をクリックして、登録チャンネルだけを取得します。「次のステップ」をクリックし、「エクスポートを作成」をクリックします。クリックすると、ダウンロードリンクの記載されたメールが届きます。メールクライアントからファイルをダウンロードし、展開します。subscriptions.json ( /Takeout/YouTube と YouTube Music/登録チャンネル/ の中)を、下部の「サブスクリプションファイルの選択」からSkyTubeにインポートします。</string>
+    <string name="subscriptions_to_channels_imported">%d チャンネルをインポートしました。</string>
     <string name="select_all">すべて選択</string>
     <string name="select_none">全解除</string>
     <string name="no_channels_found">アップロードしたファイルにはYouTubeチャンネルが見つかりませんでした。</string>
-    <string name="no_new_channels_found">アップロードしたファイルにはまだ購読していないYouTubeチャンネルが見つかりませんでした。</string>
-    <string name="import_subscriptions_parse_error">アップロードしたファイルを解析しようとしてエラーが発生しました: %s。</string>
+    <string name="no_new_channels_found">まだサブスクライブしていないYouTubeチャンネルは見つかりませんでした。</string>
+    <string name="import_subscriptions_parse_error">アップロードしたファイルを解析できませんでした: %s。</string>
     <string name="failed_to_import_subscriptions">YouTube サブスクリプションをインポートできませんでした。</string>
     <string name="about">アプリについて</string>
-    <string name="unsubscribe_from_all_current_sibbed_channels">現在購読しているチャンネルをすべて購読解除します。</string>
+    <string name="unsubscribe_from_all_current_sibbed_channels">現在サブスクライブしているチャンネルをすべてサブスクリプション解除します。</string>
     <string name="select_sub_file">サブスクリプションファイルの選択</string>
-    <string name="channel_unsubscribed">チャンネル購読解除済み</string>
-    <string name="channel_subscribe_failed">チャンネル購読不可</string>
-    <string name="channel_already_subscribed">すでにこのチャンネルを購読しています</string>
-    <string name="channel_subscribed">チャンネル購読済み</string>
+    <string name="channel_unsubscribed">チャンネルサブスクリプション解除済み</string>
+    <string name="channel_subscribe_failed">チャンネルをサブスクライブできませんでした</string>
+    <string name="channel_already_subscribed">サブスクライブ済みです</string>
+    <string name="channel_subscribed">チャンネルをサブスクライブ済み</string>
 </resources>
