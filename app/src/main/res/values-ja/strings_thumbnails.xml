@@ -1,7 +1,7 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="thumbnail">サムネイル</string>
-	<string name="view_thumbnail">サムネイルを表示</string>
-	<string name="thumbnail_downloaded">サムネイルをダウンロードしました。</string>
-	<string name="thumbnail_download_error">サムネイルをダウンロードできませんでした。</string>
+    <string name="thumbnail">サムネイル</string>
+    <string name="view_thumbnail">サムネイルを表示</string>
+    <string name="thumbnail_downloaded">ダウンロードしました。</string>
+    <string name="thumbnail_download_error">サムネイルをダウンロードできませんでした。</string>
 </resources>
