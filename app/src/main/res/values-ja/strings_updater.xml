@@ -6,7 +6,7 @@
     <string name="up_to_date_msg">SkyTube の最新バージョンがインストールされています。</string>
     <string name="update">アップデート</string>
     <string name="later">後で</string>
-    <string name="update_failure">アプリをアップグレードできませんでした。</string>
+    <string name="update_failure">新しいバージョンのアプリをインストールできませんでした。</string>
     <string name="downloading">ダウンロードしています…</string>
     <string name="release_notes">%sの変更点</string>
 </resources>
