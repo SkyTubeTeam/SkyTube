@@ -7,7 +7,7 @@
     <string name="skip">スキップ</string>
     <string name="page_counter">%1$d/%2$d</string>
     <string name="tutorial_slide_2">上にスワイプするとビデオを購読します。</string>
-    <string name="tutorial_slide_3">水平方向にスワイプするとビデオを巻戻しまたは早送りします。</string>
-    <string name="tutorial_slide_4">垂直方向にスワイプすると音量を調整します。</string>
-    <string name="tutorial_slide_5">垂直方向にスワイプすると明るさを調整します。</string>
+    <string name="tutorial_slide_3">左右にスワイプするとビデオを巻戻しまたは早送りします。</string>
+    <string name="tutorial_slide_4">上下にスワイプすると音量を調整します。</string>
+    <string name="tutorial_slide_5">上下にスワイプすると明るさを調整します。</string>
 </resources>
