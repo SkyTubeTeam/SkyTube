@@ -2,16 +2,14 @@
 <resources>
     <string name="bookmarks">Markah</string>
     <string name="bookmark">Markah</string>
-    <string name="video_bookmarked">Video telah ditandai</string>
+    <string name="video_bookmarked">Ditandai</string>
     <string name="video_bookmarked_error">Tidak bisa menandai video.</string>
     <string name="unbookmark">Hapus markah</string>
-    <string name="video_unbookmarked">Markah video telah dihapus</string>
+    <string name="video_unbookmarked">Markah dihapus</string>
     <string name="video_unbookmarked_error">Tidak bisa menghapus markah video.</string>
-    <string name="no_bookmarked_videos_text">Anda belum menandai video apapun. 
-\n 
-\nSetelah Anda tandai, video akan muncul disini.</string>
+    <string name="no_bookmarked_videos_text">Markah video akan muncul disini.</string>
     <string name="bookmark_share_invalid_url">Hanya URL YouTube yang valid yang bisa ditandai.</string>
     <string name="bookmark_share_label">Markah SkyTube</string>
     <string name="video_was_not_bookmarked">Video belum ditandai</string>
-    <string name="video_already_bookmarked">Video telah ditandai</string>
+    <string name="video_already_bookmarked">Telah ditandai</string>
 </resources>

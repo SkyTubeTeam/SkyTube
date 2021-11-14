@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="error_stream_err_unavailable">Ulac izen.</string>
+    <string name="error_stream_parse_error">Tuccḍa deg tesleḍt.</string>
+    <string name="error_invalid_url">URL n tvidyut d arameɣtu: %s</string>
+    <string name="error_video_play">Tuccḍa deg tɣuri n tvidyut</string>
+    <string name="error_video_parse_error">Tegguma ad tebdu tvidyut: <br/> <br/> %s.</string>
+</resources>

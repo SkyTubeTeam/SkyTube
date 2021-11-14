@@ -7,13 +7,11 @@
     <string name="video_download_stream_error">Tidak bisa mengunduh \'%s\'.</string>
     <string name="delete_download">Hapus Unduhan</string>
     <string name="video_downloaded">\'%s\' diunduh.</string>
-    <string name="no_downloaded_videos_text">Anda belum mengunduh video apapun.
-\n
-\nSetelah Anda mengunduhnya, video akan ditampilkan di sini.</string>
-    <string name="playing_video_file_missing">Berkas unduhan untuk video ini tidak ditemukan. Memutar secara daring.</string>
-    <string name="external_storage_not_available">Tidak bisa mengunduh berkas karena penyimpanan eksternal tidak tersedia.</string>
-    <string name="video_stream_not_found_with_request_resolution">Tidak ada stream video yang ditemukan untuk resolusi yang diminta, antara resolusi %1$s dan %2$s</string>
+    <string name="no_downloaded_videos_text">Video unduhan akan ditampilkan di sini.</string>
+    <string name="playing_video_file_missing">Memutar secara daring karena tidak ada video unduhan yang ditemukan.</string>
+    <string name="external_storage_not_available">Izinkan akses ke penyimpanan terlebih dahulu sebelum mengunduh video.</string>
+    <string name="video_stream_not_found_with_request_resolution">Tidak ada stream video yang ditemukan untuk resolusi %1$s-%2$s</string>
     <string name="warning_metered_network_download">Perangkat Anda tersambung ke jaringan terukur. Untuk menghindari potensi biaya ekstra penggunaan data, direkomendasikan untuk tersambung ke jaringan tak terbatas. Tetap unduh video\?</string>
-    <string name="unable_to_delete_file">Tidak bisa menghapus berkas unduhan: \'%s\'</string>
-    <string name="download_failed_because">Tidak bisa mengunduh %1$s karena: %2$s</string>
+    <string name="unable_to_delete_file">Tidak bisa menghapus berkas unduhan \'%s\'.</string>
+    <string name="download_failed_because">Tidak bisa mengunduh %1$s karena %2$s.</string>
 </resources>

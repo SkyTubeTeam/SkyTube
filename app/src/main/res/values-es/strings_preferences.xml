@@ -1,59 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="preferences">Preferencias</string>
-    <string name="pref_languages_filter_category">Idiomas y Filtro de Regiones</string>
+    <string name="pref_languages_filter_category">Filtros de Idioma y Region</string>
     <string name="pref_title_preferred_regions">Región preferida</string>
-    <string name="pref_summary_preferred_regions">Selecciona una región preferida.  Esto se utiliza para filtrar vídeos en la categoría de Destacados:  %s</string>
+    <string name="pref_summary_preferred_regions">Selecciona una región para ver vídeo de \"Destacados\": %s</string>
     <string name="pref_title_preferred_languages">Idiomas preferidos</string>
     <string name="pref_summary_preferred_languages">Selecciona tu idioma preferido.</string>
     <string name="pref_video_player_category">Reproductor de vídeo</string>
-    <string name="pref_title_backup_dbs">Base de datos de respaldo</string>
-    <string name="pref_summary_backup_dbs">Respalde la base de datos de sus suscripciones y marcadores.</string>
+    <string name="pref_title_backup_dbs">Bases de datos de respaldo</string>
+    <string name="pref_summary_backup_dbs">Salvar tus favoritos y suscripciones.</string>
     <string name="pref_title_import_dbs">Importar respaldo</string>
-    <string name="pref_summary_import_dbs">Importe la base de datos de la copia de seguridad de sus subscripciones y marcadores.</string>
+    <string name="pref_summary_import_dbs">Importar backup de tus favoritos y subscripciones.</string>
     <string name="databases_backing_up">Respaldando…</string>
     <string name="databases_backup_success">Base de datos respaldada a %s</string>
-    <string name="databases_backup_fail">Error al respaldar su base de datos.</string>
+    <string name="databases_backup_fail">No se puede respaldar su base de datos.</string>
     <string name="databases_import_select_backup">Seleccione el archivo de respaldo a importar</string>
     <string name="databases_import_nothing_selected">No ha seleccionado nada…</string>
-    <string name="databases_import_warning_message">La base de datos de las suscripciones y marcadores será reemplazada con los datos del archivo de respaldo seleccionado.
-\n
-\n¿Continuar?</string>
+    <string name="databases_import_warning_message">¿Reemplazar favoritos y subscripciones con los datos seleccionados en el archivo de backup\?</string>
     <string name="continue_">Continuar</string>
     <string name="databases_importing">Importando…</string>
-    <string name="databases_import_fail">Error al importar su base de datos.</string>
-    <string name="databases_import_success">Base de datos importada. Reinicie la app para aplicar los cambios.</string>
+    <string name="databases_import_fail">No se puede importar tus bases de datos.</string>
+    <string name="databases_import_success">Reinicie la app para usar los nuevos favoritos y susbcripciones.</string>
     <string name="pref_title_import_subs">Importar subscripciones desde YouTube</string>
     <string name="pref_summary_import_subs"> Importa tus suscripciones desde tu cuenta de YouTube.</string>
     <string name="subs_import_select_backup">Seleccione el archivo XML de YouTube a importar</string>
     <string name="pref_about_category">Acerca de</string>
     <string name="pref_title_website">Sitio web</string>
     <string name="pref_title_credits">Créditos</string>
-    <string name="pref_summary_credits">Personas y proyectos que hacen posible esta aplicación.</string>
+    <string name="pref_summary_credits">Grandes personas y proyectos libres bajo esta app.</string>
     <string name="pref_title_version">Versión</string>
     <string name="pref_title_updates">Actualizaciones</string>
     <string name="pref_summary_updates">Comprobar nuevas versiones.</string>
-    <string name="pref_title_license">Licencia</string>
-    <string name="pref_summary_license">Licencia pública general GNU versión 3</string>
-    <string name="app_license">
-		Copyright © 2015-2018  Ramon Mifsud\n
-
-		\nThis program is free software: you can redistribute it and/or modify
-		it under the terms of the GNU General Public License as published by
-		the Free Software Foundation (version 3 of the License).\n
-
-		\nThis program is distributed in the hope that it will be useful,
-		but WITHOUT ANY WARRANTY; without even the implied warranty of
-		MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-		GNU General Public License for more details.\n
-
-		\nYou should have received a copy of the GNU General Public License
-		along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;
-	</string>
-    <string name="i_agree">Acepto</string>
+    <string name="pref_title_license">Licencia Copyleft Libre</string>
+    <string name="pref_summary_license">GPLv3 plus</string>
+    <string name="app_license">Copyright © 2015–2018 Ramon Mifsud
+\n
+\nThis program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation (version 3 of the License).
+\n
+\nThis program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+\n
+\nYou should have received a copy of the GNU General Public License along with this program. If not, see &lt;http://www.gnu.org/licenses/&gt;</string>
+    <string name="i_agree">Volver</string>
     <string name="pref_other_category">Otros</string>
     <string name="pref_title_default_tab">Pestaña por defecto</string>
-    <string name="pref_summary_default_tab">Pestaña por defecto cuando abres SkyTube: %s</string>
+    <string name="pref_summary_default_tab">Pestaña cuando abres SkyTube: %s</string>
     <string name="pref_title_screen_orientation">Orientación de pantalla</string>
     <string name="pref_summary_screen_orientation">Orientación del reproductor de vídeo: %s</string>
     <string-array name="screen_orientations">
@@ -62,14 +52,14 @@
         <item>Vertical</item>
         <item>Sensor del dispositivo</item>
     </string-array>
-    <string name="pref_title_youtube_api_key">Clave del API de YouTube</string>
-    <string name="pref_summary_youtube_api_key">Introduzca su propia clave de la librería de datos de YouTube. Deje en blanco para usar una por defecto.</string>
-    <string name="pref_youtube_api_key_error">Ocurrió un error al intentar validar la YouTube API Key que ha introducido.</string>
-    <string name="pref_youtube_api_key_custom">La clave es valida. Reinicie la aplicación para usar la nueva YouTube API Key.</string>
-    <string name="pref_youtube_api_key_default">Reinicie la aplicación para volver a usar la YouTube API Key por defecto.</string>
+    <string name="pref_title_youtube_api_key">API Key de YouTube</string>
+    <string name="pref_summary_youtube_api_key">Introduce una API Key personal de YouTube para usar en su lugar.</string>
+    <string name="pref_youtube_api_key_error">No se pudo validar la API Key que has introducido.</string>
+    <string name="pref_youtube_api_key_custom">Reinicie la app para usar la nueva API Key de YouTube .</string>
+    <string name="pref_youtube_api_key_default">Reinicie la aplicación para usar la YouTube API Key por defecto en su lugar.</string>
     <string name="restart">Reiniciar</string>
     <string name="pref_title_feed_notification">Notificación automática de feed</string>
-    <string name="pref_summary_feed_notification">Periodicidad para comprobar vídeos nuevos de los canales suscritos:: %s</string>
+    <string name="pref_summary_feed_notification">Cada cuanto buscar nuevos vídeos de los canales suscritos:: %s</string>
     <string-array name="feed_notification">
         <item>Off</item>
         <item>6 Hours</item>
@@ -77,104 +67,104 @@
         <item>24 Hours</item>
     </string-array>
     <string name="pref_title_choose_player">Reproductor de vídeo</string>
-    <string name="pref_summary_choose_player">Reproductor de vídeo a usar: %s</string>
+    <string name="pref_summary_choose_player">Reproductor de vídeo para usar: %s</string>
     <string name="pref_import_export_category">Importar/Exportar</string>
-    <string name="pref_title_subscriptions_alphabetical_order">Ordenar canales alfabéticamente</string>
-    <string name="pref_summary_subscriptions_alphabetical_order">Si lo seleccionas, los canales suscritos se ordenarán alfabéticamente.</string>
+    <string name="pref_title_subscriptions_alphabetical_order">Ordenar canales A-Z</string>
+    <string name="pref_summary_subscriptions_alphabetical_order">Listar canales suscritos A-B-C...</string>
     <string name="pref_category_downloads">Descargas</string>
-    <string name="pref_title_download_to_separate_directories">Descargar vídeos en carpetas</string>
-    <string name="pref_summary_download_to_separate_directories">Los vídeos se descargan en carpetas separadas según el nombre del canal.</string>
+    <string name="pref_title_download_to_separate_directories">Carpeta descargas de vídeos</string>
+    <string name="pref_summary_download_to_separate_directories">Descargar vídeos en carpetas separadas según el nombre del canal.</string>
     <string name="pref_video_blocker_category">Bloqueador de vídeos</string>
-    <string name="pref_channels_filter_category">Filtros de canales</string>
+    <string name="pref_channels_filter_category">Filtros de canal</string>
     <string name="pref_title_channel_filter_method">Método de filtrar canales</string>
-    <string name="pref_summary_channel_filter_method">Seleccionar el método de filtrar canales: %s</string>
+    <string name="pref_summary_channel_filter_method">Seleccionar método de filtrar canales: %s</string>
     <string name="disabled">Desactivado</string>
     <string name="pref_title_channel_blacklist">Lista negra de canales</string>
     <string name="pref_summary_channel_blacklist">Una lista de canales bloqueados.</string>
     <string name="unblock">Desbloquear</string>
-    <string name="channel_blacklist_updated">Actualizada lista negra de canales. Por favor refresque los vídeos.</string>
-    <string name="channel_blacklist_update_failure">Error al sacar canal(es) de la lista negra…</string>
-    <string name="channel_blacklist_empty">La lista negra de canales está vacía.</string>
+    <string name="channel_blacklist_updated">Refresque los vídeos para actualizar la nueva lista negra de canales.</string>
+    <string name="channel_blacklist_update_failure">No se pueden quitar canal(es) de la lista negra…</string>
+    <string name="channel_blacklist_empty">La lista negra está vacía.</string>
     <string name="pref_title_channel_whitelist">Lista de canales permitidos</string>
-    <string name="pref_summary_channel_whitelist">Un listado de los canales permitidos.</string>
-    <string name="input_channel_url">URL del canal que se va a permitir:</string>
+    <string name="pref_summary_channel_whitelist">Lista de canales permitidos.</string>
+    <string name="input_channel_url">URLs de canal que se van a permitir:</string>
     <string name="add">Añadir</string>
     <string name="block">Bloquear</string>
     <string name="please_wait">Por favor, espere…</string>
     <string name="channel_already_whitelisted">El canal ya está permitido.</string>
-    <string name="channel_whitelist_updated">Canal permitido. Por favor, refresque los vídeos.</string>
-    <string name="channel_whitelist_update_failure">Fallo al permitir el canal indicado…</string>
-    <string name="channel_unwhitelist_success">Actualizada la lista de canales permitidos. Por favor, refresque vídeos.</string>
+    <string name="channel_whitelist_updated">Refresque los vídeos para usar la nueva lista de canales permitidos.</string>
+    <string name="channel_whitelist_update_failure">No se puede permitir el canal indicado.</string>
+    <string name="channel_unwhitelist_success">Refresque los vídeos para usar la nueva lista de canales permitidos.</string>
     <string name="channel_unwhitelist_failure">Fallo al quitar de canales permitidos el cana(es) indicado…</string>
-    <string name="no_preferred_lang_selected">No hay seleccionado idioma preferido. Se ignora el ajuste.</string>
-    <string name="preferred_lang_updated">Actualizado el idioma preferido. Por favor, refresque los vídeos.</string>
-    <string name="pref_title_lang_detection_video_filtering">Filtrado de vídeos por detección de idioma</string>
-    <string name="pref_summary_lang_detection_video_filtering">Detectar el idioma de los vídeos y bloquearlos si no es igual a tu(s) idioma(s) preferido(s). Sólo para terminales potentes.</string>
-    <string name="setting_updated">Ajuste actualizado. Por favor, refresque los vídeos.</string>
+    <string name="no_preferred_lang_selected">No hay idioma preferido seleccionado.</string>
+    <string name="preferred_lang_updated">Refresque los vídeos para usar el nuevo idioma.</string>
+    <string name="pref_title_lang_detection_video_filtering">Filtrado de idioma del vídeo</string>
+    <string name="pref_summary_lang_detection_video_filtering">Usa un montón de recursos para detectar el idioma del vídeo y bloquear los idiomas no preferidos.</string>
+    <string name="setting_updated">Refresque los vídeos para usar los nuevos ajustes.</string>
     <string name="pref_other_filters_category">Otros Filtros</string>
     <string name="pref_title_low_views_filter">Visualizaciones</string>
     <string name="pref_summary_low_views_filter">Filtrar vídeos con pocas visualizaciones: %s</string>
     <string name="pref_title_dislikes_filter">Nomegustas</string>
     <string name="pref_summary_dislikes_filter">Filtrar vídeos con muchos nomegustas: %s</string>
     <string name="pref_privacy_category">Privacidad</string>
-    <string name="pref_title_disable_search_history">Desactivar historial de búsquedas</string>
-    <string name="pref_summary_disable_search_history">Si lo selecciona, El historial de búsquedas se borrará y no se usará.</string>
+    <string name="pref_title_disable_search_history">No hay historial de búsquedas</string>
+    <string name="pref_summary_disable_search_history">Limpia y desactiva el historial de búsquedas.</string>
     <string name="pref_disable_search_history_deleted">Historial de búsquedas borrado.</string>
-    <string name="pref_title_disable_playback_status">Desactivar estado de reproducción</string>
-    <string name="pref_summary_disable_playback_status">Si se selecciona, el estado de reproducción se borrarà y no se usará.</string>
+    <string name="pref_title_disable_playback_status">Sin estado de reproducción</string>
+    <string name="pref_summary_disable_playback_status">Desactivar estado de reproducción.</string>
     <string name="pref_disable_playback_status_deleted">Estado de reproducción borrado.</string>
     <string name="pref_title_clear_playback_status">Borrar Estado de Reproducción</string>
-    <string name="pref_summary_clear_playback_status">Borrar estado de reproducción para todos los vídeos.</string>
-    <string name="pref_playback_status_cleared">Estado de reproducción borrado.</string>
-    <string name="pref_title_disable_screen_gestures">Deshabilitar gestos de vídeo</string>
+    <string name="pref_summary_clear_playback_status">Borrar progresión para todos los vídeos.</string>
+    <string name="pref_playback_status_cleared">Borrado estado de reproducción .</string>
+    <string name="pref_title_disable_screen_gestures">No gestos de vídeo</string>
     <string name="pref_summary_disable_screen_gestures">Deshabilitar gestos para controlar volumen, brillo y búsqueda adelante/atrás en vídeos.</string>
-    <string name="pref_summary_enable_video_blocker">Habilitar bloqueador de vídeos.</string>
+    <string name="pref_summary_enable_video_blocker">Bloqueador de vídeos.</string>
     <string name="key_preferences">preferencias</string>
-    <string name="pref_summary_video_download_folder">Vídeos descargados en esta carpeta: %s</string>
+    <string name="pref_summary_video_download_folder">Vídeos descargados a: %s</string>
     <string name="pref_title_video_download_folder">Carpeta descargas de vídeos</string>
     <string name="pref_popup_title_video_download_folder">Selecciona carpeta</string>
     <string name="pref_summary_use_newpipe_backend">Usar la nueva API para acceder a YouTube…</string>
-    <string name="pref_title_use_newpipe_backend">Usar la nueva infraestructura del cliente de YouTube</string>
+    <string name="pref_title_use_newpipe_backend">Nueva infraestructura del cliente de YouTube</string>
     <string name="pref_summary_switch_volume_and_brightness">Pone el control de volumen en la derecha y el brillo en la izquierda.</string>
     <string name="pref_title_switch_volume_and_brightness">Gestos para cambio de volumen y brillo</string>
     <string name="pref_summary_enable_immersive_mode">Ocultar barras de estado y navegación al reproducir.</string>
-    <string name="pref_title_enable_immersive_mode">Activar modo inmersivo</string>
-    <string name="pref_hide_tabs_restart">Reiniciar app para actualizar las pestañas.</string>
-    <string name="pref_summary_hide_tabs">Elegir que pestañas no se mostrarán. Necesita reinicio.</string>
+    <string name="pref_title_enable_immersive_mode">Modo inmersivo</string>
+    <string name="pref_hide_tabs_restart">Reiniciar app para usar estas pestañas.</string>
+    <string name="pref_summary_hide_tabs">Elegir pestañas para no mostrar. Necesita reinicio.</string>
     <string name="pref_title_hide_tabs">Ocultar pestañas</string>
     <string name="pref_network_downloads_category">Redes y Descargas</string>
-    <string name="pref_summary_autocast">Selecciona un reproductor Chromecast para usar cuando uses otras apps para abrir vídeos en SkyTube.</string>
+    <string name="pref_summary_autocast">Reproductor Chromecast para reproducción al usar otras apps de vídeo en SkyTube.</string>
     <string name="pref_title_autocast">Guardado automático</string>
     <string name="pref_title_chromecast_none">Ninguno</string>
     <string name="pref_chromecast_category">Reproductor Chromecast</string>
     <string name="pref_video_continuous_repeat_toggle">Repetición conitnua</string>
-    <string name="pref_video_download_minimum_resolution_summary">Las descargas de vídeo serán al menos en esta resolución: %s</string>
-    <string name="pref_video_download_minimum_resolution_title">Resolución mínima para descarga de vídeo</string>
-    <string name="pref_video_download_maximum_resolution_summary">Las descargas de vídeo serán como mucho de esta resolución: %s</string>
-    <string name="pref_video_download_maximum_resolution_title">Resolución máxima para descarga de vídeo</string>
-    <string name="pref_summary_minimum_res">Selecciona tu resolución mínima: %s</string>
-    <string name="pref_title_minimum_res">Resolución mínima</string>
-    <string name="pref_summary_maximum_res">Selecciona tu resolución máxima: %s</string>
-    <string name="pref_title_maximum_res">Resolución máxima</string>
+    <string name="pref_video_download_minimum_resolution_summary">Las descargas de vídeo serán al menos: %s</string>
+    <string name="pref_video_download_minimum_resolution_title">Resolución más baja para descarga de vídeo</string>
+    <string name="pref_video_download_maximum_resolution_summary">Las descargas de vídeo serán como máximo: %s</string>
+    <string name="pref_video_download_maximum_resolution_title">Resolución más alta para descarga de vídeo</string>
+    <string name="pref_summary_minimum_res">Selecciona tu resolución más baja: %s</string>
+    <string name="pref_title_minimum_res">Resolución más baja</string>
+    <string name="pref_summary_maximum_res">Selecciona resolución más alta: %s</string>
+    <string name="pref_title_maximum_res">Resolución más alta</string>
     <string name="pref_key_video_quality_for_downloads_summary">Optimizar para: %s</string>
     <string name="pref_key_video_quality_for_downloads_title">Selección de calidad de vídeo para descargas</string>
     <string name="pref_key_video_quality_summary">Optimizar para: %s</string>
     <string name="pref_key_video_quality_title">Selección de calidad de vídeo</string>
-    <string name="pref_category_download_resolutions">Resolución de vídeo para descargas</string>
+    <string name="pref_category_download_resolutions">Resolución de vídeo de descargas</string>
     <string name="pref_category_video_resolutions">Resolución de vídeo</string>
     <string name="no_resolution_specified">Ninguna</string>
     <string name="pref_key_video_quality_metered_summary">Optimizar para: %s</string>
     <string name="pref_key_video_quality_metered_title">Calidad de vídeo seleccionada en red con límite de datos</string>
-    <string name="pref_summary_metered_network_usage">Que hacer si esta en uso una red con límite de datos para descargar/ver vídeos: %s</string>
+    <string name="pref_summary_metered_network_usage">Que hacer si estás usando una red con límite de datos para descargar/ver vídeos: %s</string>
     <string name="pref_title_metered_network_usage">Uso de red con límite de datos</string>
     <string name="pref_summary_maximum_res_metered">Selecciona tu resolución máxima para streaming con una red con limite de datos: %s</string>
-    <string name="pref_title_maximum_res_metered">Resolución máxima para red con límite de datos</string>
-    <string name="pref_summary_minimum_res_metered">Selecciona tu resolución mínima para streaming con una red que tiene límite de datos: %s</string>
-    <string name="pref_title_minimum_res_metered">Resolución mínima para red con límite de datos</string>
+    <string name="pref_title_maximum_res_metered">Resolución más alta para red con límite de datos</string>
+    <string name="pref_summary_minimum_res_metered">Selecciona tu resolución más baja para vídeo en directo con una red que tiene límite de datos: %s</string>
+    <string name="pref_title_minimum_res_metered">Resolución más baja para red con límite de datos</string>
     <string name="pref_category_metered_network">Red con límite de datos</string>
     <string name="pref_summary_default_content_country">Mostrar contenido destinado a este país: %s</string>
     <string name="pref_title_default_content_country">Contenido de pais por defecto</string>
-    <string name="system_default_country">País predeterminado del sistema</string>
-    <string name="pref_key_use_newer_formats_summary">Las versiones antiguas de Android no soportan todos los formatos de vídeo que hay en Youtube. Desactívalo si tienes problemas con el vídeo o no hay sonido</string>
+    <string name="system_default_country">Sistema</string>
+    <string name="pref_key_use_newer_formats_summary">El sonido y el vídeo pueden sufrir en versiones antiguas de Android sin soporte.</string>
     <string name="pref_key_use_newer_formats_title">Intentar nuevos formatos de vídeo</string>
 </resources>

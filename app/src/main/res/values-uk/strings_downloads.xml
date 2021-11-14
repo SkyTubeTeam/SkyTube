@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="external_storage_not_available">Неможливо завантажити файл через відсутність зовнішнього накопичувача.</string>
-    <string name="no_downloaded_videos_text">Завантажені відео відсутні.
-\n
-\nПісля завантаження, вони з\'являться тут.</string>
+    <string name="external_storage_not_available">Надайте доступ до зовнішнього, щоб спочатку завантажити файл.</string>
+    <string name="no_downloaded_videos_text">Завантажити кілька відео, щоб вони з\'явилися тут.</string>
     <string name="video_downloaded">\'%s\' завантажено.</string>
     <string name="delete_download">Видалити завантаження</string>
-    <string name="video_stream_not_found_with_request_resolution">Не знайдено відеопотоку для запитуваної роздільної здатності між %1$s та %2$s</string>
-    <string name="video_download_stream_error">Не вдалося завантажити \'%s\'.</string>
-    <string name="starting_video_download">Завантажується \'%s\'…</string>
+    <string name="video_stream_not_found_with_request_resolution">Не вдалося знайти відеопотік у запитаній роздільній здатності %1$s-%2$s</string>
+    <string name="video_download_stream_error">Не вдалося завантажити «%s».</string>
+    <string name="starting_video_download">Завантажується «%s»…</string>
     <string name="download_video">Завантажити відео</string>
     <string name="downloads">Завантаження</string>
     <string name="download">Завантажити</string>
-    <string name="playing_video_file_missing">Завантаження для відео не знайдено. Відтворюється віддалено.</string>
-    <string name="warning_metered_network_download">Ви споживаєте мобільний трафік. Щоб уникнути додаткових витрат, радимо під\'єднатися до мережі з необмеженим трафіком. Продовжити завантаження відео\?</string>
-    <string name="unable_to_delete_file">Не вдалося видалити файл: \'%s\'</string>
-    <string name="download_failed_because">Не вдалося завантажити %1$s, оскільки: %2$s</string>
+    <string name="playing_video_file_missing">Відтворення відео віддалено, оскільки не вдалося знайти завантажуваний файл.</string>
+    <string name="warning_metered_network_download">Завантажити відео через мобільну мережу, до якої ви під\'єднані\?</string>
+    <string name="unable_to_delete_file">Не вдалося видалити завантажити файл «%s».</string>
+    <string name="download_failed_because">Не вдалося завантажити %1$s, оскільки %2$s.</string>
 </resources>

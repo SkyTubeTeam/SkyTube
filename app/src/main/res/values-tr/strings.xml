@@ -5,9 +5,9 @@
     <string name="error">Hata</string>
     <string name="ok">Tamam</string>
     <string name="search_videos">Video Ara</string>
-    <string name="launch_offical_player_error">Google\'ın resmi YouTube oynatıcısını başlatmaya çalışırken bir hata oluştu. Aygıtınızda kurulu olduğundan emin olun.</string>
-    <string name="LIVE">CANLI</string>
-    <string name="featured">Önerilenler</string>
+    <string name="launch_offical_player_error">Resmi YouTube oynatıcısı başlatılamadı. Kurulu olduğundan emin olun.</string>
+    <string name="LIVE">Canlı</string>
+    <string name="featured">Öne Çıkanlar</string>
     <string name="most_popular">En Popülerler</string>
     <string name="video">Video</string>
     <string name="videos">Videolar</string>
@@ -15,12 +15,12 @@
     <string name="playlists">Oynatma Listeleri</string>
     <string name="could_not_get_playlists">%s oynatma listesi alınamadı.</string>
     <string name="loading">Yükleniyor…</string>
-    <string name="could_not_get_channel">Kanal bilgisi indirilemedi!</string>
+    <string name="could_not_get_channel">Kanal bilgileri indirilemedi.</string>
     <string name="yes">Evet</string>
     <string name="no">Hayır</string>
     <string name="search_channel">Kanal ara</string>
     <string name="close">Kapat</string>
     <string name="could_not_get_channel_detailed">Kanal bilgileri indirilemedi: %s.</string>
     <string name="trending_in">Öne Çıkanlar (%s)</string>
-    <string name="recaptcha_challenge_requested">YouTube ağ isteklerimizi engelliyor, reCaptcha sorusunu çözmeniz gerekiyor!</string>
+    <string name="recaptcha_challenge_requested">YouTube sizin bir bot olduğunuzu düşünüyor, bu yüzden önce bir reCAPTCHA çözmelisiniz.</string>
 </resources>

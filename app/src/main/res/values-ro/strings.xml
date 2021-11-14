@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="could_not_get_videos">Nu s-au putut obține %s videoclipuri.</string>
+    <string name="could_not_get_channel">Nu s-au putut descărca informațiile despre canal.</string>
+    <string name="could_not_get_channel_detailed">Nu s-au putut descărca informațiile despre canal: %s.</string>
+    <string name="views">%,d vizualizări</string>
+    <string name="error">Eroare</string>
+    <string name="ok">OK</string>
+    <string name="search_videos">Căutare videoclipuri</string>
+    <string name="launch_offical_player_error">Nu s-a putut lansa playerul oficial YouTube. Asigurați-vă că este instalat.</string>
+    <string name="featured">Recomandate</string>
+    <string name="most_popular">Cele mai populare</string>
+    <string name="trending_in">Tendințe (%s)</string>
+    <string name="video">Video</string>
+    <string name="videos">Videoclipuri</string>
+    <string name="num_videos">%d videoclipuri</string>
+    <string name="playlists">Liste de redare</string>
+    <string name="recaptcha_challenge_requested">YouTube crede că ești un robot, așa că trebuie să rezolvi mai întâi un reCAPTCHA.</string>
+    <string name="close">Închideți</string>
+    <string name="loading">Se încarcă…</string>
+    <string name="yes">Da</string>
+    <string name="no">Nu</string>
+    <string name="search_channel">Caută canal</string>
+    <string name="could_not_get_playlists">Nu s-au putut obține %s liste de redare.</string>
+    <string name="LIVE">În direct</string>
+</resources>

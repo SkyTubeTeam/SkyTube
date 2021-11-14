@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="downloading">Atsiunčiama…</string>
-    <string name="update_failure">Nepavyko atnaujinti programėlės.</string>
+    <string name="update_failure">Nepavyko įdiegti naujausios programėlės versijos.</string>
     <string name="later">Vėliau</string>
     <string name="update">Atnaujinti</string>
     <string name="release_notes">Pokyčiai %s</string>

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="could_not_get_videos">Tidak bisa mengambil %s video.</string>
-    <string name="could_not_get_channel">Tidak bisa mengunduh informasi channel!</string>
+    <string name="could_not_get_channel">Tidak bisa mengunduh info channel.</string>
     <string name="views">%,d ditonton</string>
     <string name="error">Galat</string>
     <string name="ok">OKE</string>
     <string name="search_videos">Cari Video</string>
-    <string name="launch_offical_player_error">Terjadi kesalahan saat mencoba meluncurkan pemutar YouTube resmi dari Google. Pastikan apl terpasang di perangkat Anda.</string>
-    <string name="LIVE">LANGSUNG</string>
+    <string name="launch_offical_player_error">Tidak bisa membuka pemutar YouTube resmi. Pastikan sudah terpasang.</string>
+    <string name="LIVE">Langsung</string>
     <string name="featured">Unggulan</string>
     <string name="most_popular">Terpopuler</string>
     <string name="video">Video</string>
@@ -15,12 +15,12 @@
     <string name="num_videos">%d video</string>
     <string name="playlists">Daftar Putar</string>
     <string name="could_not_get_playlists">Tidak bisa mengambil %s daftar putar.</string>
-    <string name="loading">Memuat …</string>
+    <string name="loading">Memuat…</string>
     <string name="yes">Ya</string>
     <string name="no">Tidak</string>
     <string name="search_channel">Cari channel</string>
     <string name="could_not_get_channel_detailed">Tidak bisa mengunduh informasi channel: %s.</string>
     <string name="close">Tutup</string>
     <string name="trending_in">Trending (%s)</string>
-    <string name="recaptcha_challenge_requested">YouTube memblokir permintaan jaringan kami, Anda harus menyelesaikan tantangan reCaptcha!</string>
+    <string name="recaptcha_challenge_requested">YouTube mengira Anda adalah bot, selesaikan reCAPTCHA terlebih dahulu.</string>
 </resources>

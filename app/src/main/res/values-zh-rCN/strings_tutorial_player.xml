@@ -2,7 +2,7 @@
 <resources>
     <string name="tutorial_slide_5">上下划动调整亮度。</string>
     <string name="tutorial_slide_4">上下划动调整音量。</string>
-    <string name="tutorial_slide_3">水平划动前进或后退。</string>
+    <string name="tutorial_slide_3">左右划动前进或后退。</string>
     <string name="tutorial_slide_2">上划查看视频简介。</string>
     <string name="tutorial_slide_6">双击暂停或者播放。</string>
     <string name="tutorial_slide_1">左划查看评论。</string>

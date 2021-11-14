@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="about">关于</string>
-    <string name="failed_to_import_subscriptions">导入订阅失败。</string>
-    <string name="import_subscriptions_parse_error">尝试解析文件“%s”时发生错误。</string>
-    <string name="no_new_channels_found">你上传的文件内没有未订阅的YouTube频道。</string>
-    <string name="no_channels_found">你上传的文件内没有YouTube频道。</string>
+    <string name="failed_to_import_subscriptions">无法导入您的 YouTube 订阅。</string>
+    <string name="import_subscriptions_parse_error">无法解析您上传的文件：%s。</string>
+    <string name="no_new_channels_found">未找到您尚未订阅的 YouTube 频道。</string>
+    <string name="no_channels_found">在您上传的文件中找不到任何 YouTube 频道。</string>
     <string name="select_none">不选择</string>
     <string name="select_all">选择全部</string>
     <string name="select_sub_file">选择订阅文件</string>
-    <string name="subscriptions_to_channels_imported">导入了%d个频道的订阅。</string>
-    <string name="unsubscribe_from_all_current_sibbed_channels">已取消所有频道订阅。</string>
-    <string name="import_subscriptions_description">导入订阅，首先访问https://takeout.google.com，选择\"YouTube and YouTube Music\"，然后根据向导创建导出。成功导出后通常会收到包含下载链接的邮件。下载文件，并从中提取出文件“ subscriptions.json”，然后使用下面的“选择订阅文件”进行导入。文件“subscriptions.json”的路径通常在/Takeout/YouTube和YouTube Music/subscriptions。</string>
+    <string name="subscriptions_to_channels_imported">导入了%d个频道。</string>
+    <string name="unsubscribe_from_all_current_sibbed_channels">取消订阅您当前订阅的所有频道。</string>
+    <string name="import_subscriptions_description">取消选择 https://takeout.google.com 上除“YouTube 和 YouTube 音乐”之外的所有内容，然后单击“包含的所有 YouTube 数据”以仅获取订阅。 单击“下一步”，然后单击“创建导出”。 单击以接收带下载链接的电子邮件。 从您的电子邮件客户端下载文件并将其解压缩。 使用下面的“选择订阅文件”从 SkyTube 中导入 subscriptions.json（在 /Takeout/YouTube 和 YouTube Music/subscriptions/ 中）。</string>
     <string name="import_subscriptions">导入订阅</string>
     <string name="error_unable_to_subscribe">无法订阅或退订频道（id=%s）</string>
-    <string name="error_check_if_user_has_subbed">无法检查用户是否订阅了频道（id=%s）</string>
-    <string name="error_get_subbed_channels">获取订阅频道时发生了错误。</string>
+    <string name="error_check_if_user_has_subbed">无法检查您是否订阅了频道（id=%s）</string>
+    <string name="error_get_subbed_channels">无法获取频道订阅。</string>
     <string name="channel_unsubscribed">频道已取消订阅</string>
     <string name="unsubscribed">已取消订阅</string>
     <string name="channel_subscribe_failed">无法订阅频道</string>

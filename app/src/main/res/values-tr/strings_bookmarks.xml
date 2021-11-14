@@ -2,16 +2,14 @@
 <resources>
     <string name="bookmarks">Yer imleri</string>
     <string name="bookmark">Yer imi</string>
-    <string name="video_bookmarked">Video yer imlerine eklendi</string>
+    <string name="video_bookmarked">Yer imlerine eklendi</string>
     <string name="video_bookmarked_error">Video yer imlerine eklenemedi.</string>
     <string name="unbookmark">Yer imlerinden kaldır</string>
-    <string name="video_unbookmarked">Video yer imlerinden kaldırıldı</string>
-    <string name="video_unbookmarked_error">Bu video yer imlerinden kaldırılamadı.</string>
-    <string name="no_bookmarked_videos_text">Henüz yer imlerine video eklemediniz.
-\n
-\nEklediğiniz zaman burada görünecekler.</string>
+    <string name="video_unbookmarked">Yer imlerinden kaldırıldı</string>
+    <string name="video_unbookmarked_error">Video yer imlerinden kaldırılamadı.</string>
+    <string name="no_bookmarked_videos_text">Burada bulmak için yer imlerine birkaç video ekleyin.</string>
     <string name="bookmark_share_invalid_url">Sadece geçerli YouTube URL\'leri yer imlerine eklenebilir.</string>
     <string name="bookmark_share_label">SkyTube Yer İmi</string>
     <string name="video_was_not_bookmarked">Video yer imlerine eklenmedi</string>
-    <string name="video_already_bookmarked">Video zaten yer imlerine eklenmiş</string>
+    <string name="video_already_bookmarked">Zaten yer imlerine eklendi</string>
 </resources>

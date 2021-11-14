@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="video">Tavidyut</string>
+    <string name="videos">Tividyutin</string>
+    <string name="views">%,d n tmuɣliwin</string>
+    <string name="num_videos">Tividyutin %d</string>
+    <string name="playlists">Tabdert n tɣuri</string>
+    <string name="close">Mdel</string>
+    <string name="search_videos">Nadi tividyutin</string>
+    <string name="could_not_get_videos">Ur yizmir ara ad yawi tividyutin %s.</string>
+    <string name="error">Tuccḍa</string>
+    <string name="ok">IH</string>
+    <string name="LIVE">SRID</string>
+    <string name="could_not_get_channel_detailed">Ur izmir ara ad yessader talɣut n tezṛart: %s.</string>
+</resources>

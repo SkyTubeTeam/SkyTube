@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="download">Sader</string>
+    <string name="downloads">Isadaren</string>
+    <string name="download_video">Sader tavidyut</string>
+    <string name="starting_video_download">Asader\'%s\'…</string>
+    <string name="video_download_stream_error">Yegguma ad d-yader \'%s\'.</string>
+    <string name="delete_download">Kkes asader</string>
+    <string name="video_downloaded">\'%s\' yettwasader.</string>
+    <string name="no_downloaded_videos_text">Sader kra n tvidyutin ara tafeḍ dagi.</string>
+    <string name="unable_to_delete_file">Ur yezmir ara ad yekkes afaylu \'%s\' i d-yettwasadren.</string>
+    <string name="download_failed_because">Ur izmir ara ad yessader %1$s acku %2$s.</string>
+</resources>

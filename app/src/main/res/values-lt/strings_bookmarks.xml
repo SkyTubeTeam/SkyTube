@@ -2,16 +2,14 @@
 <resources>
     <string name="bookmark_share_invalid_url">Žymėti galima tik galiojančius „YouTube“ URL adresus.</string>
     <string name="bookmark_share_label">SkyTube žyma</string>
-    <string name="no_bookmarked_videos_text">Dar nesate įtraukę į žymes jokių vaizdo įrašų.
-\n
-\nKai tai padarysite, jie bus rodomi čia.</string>
-    <string name="video_unbookmarked_error">Nepavyko panaikinti vaizdo įrašo žymos.</string>
-    <string name="video_was_not_bookmarked">Vaizdo įrašas nebuvo pažymėtas</string>
-    <string name="video_unbookmarked">Vaizdo įrašas atžymėtas</string>
+    <string name="no_bookmarked_videos_text">Pažymėkite keletą vaizdo įrašų, kad juos rastumėte čia.</string>
+    <string name="video_unbookmarked_error">Nepavyko pašalinti vaizdo įrašo žymos.</string>
+    <string name="video_was_not_bookmarked">Vaizdo įrašas nebuvo pridėtas prie žymų</string>
+    <string name="video_unbookmarked">Žyma pašalinta</string>
     <string name="unbookmark">Panaikinti žymą</string>
     <string name="video_bookmarked_error">Nepavyko pridėti vaizdo įrašo prie žymų.</string>
-    <string name="video_already_bookmarked">Vaizdo įrašas jau pažymėtas</string>
-    <string name="video_bookmarked">Vaizdo įrašas pažymėtas</string>
+    <string name="video_already_bookmarked">Jau įtraukta į žymes</string>
+    <string name="video_bookmarked">Pridėta prie žymų</string>
     <string name="bookmark">Pridėti prie žymų</string>
     <string name="bookmarks">Žymos</string>
 </resources>

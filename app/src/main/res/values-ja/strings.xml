@@ -5,7 +5,7 @@
     <string name="error">エラー</string>
     <string name="ok">OK</string>
     <string name="search_videos">ビデオを検索</string>
-    <string name="launch_offical_player_error">Google から公式の YouTube プレーヤーを起動しようとしたときにエラーが発生しました。お使いのデバイスにインストールされていることを確認してください。</string>
+    <string name="launch_offical_player_error">公式の YouTube プレーヤーを起動できませんでした。インストールされているか確認してください。</string>
     <string name="LIVE">ライブ</string>
     <string name="featured">おすすめ</string>
     <string name="most_popular">最も人気</string>
@@ -14,13 +14,13 @@
     <string name="num_videos">%d ビデオ</string>
     <string name="playlists">プレイリスト</string>
     <string name="could_not_get_playlists">%s のプレイリストを取得できませんでした。</string>
-    <string name="loading">読み込み中 …</string>
-    <string name="could_not_get_channel">チャネル情報をダウンロードできませんでした!</string>
+    <string name="loading">読み込み中…</string>
+    <string name="could_not_get_channel">チャンネル情報をダウンロードできませんでした。</string>
     <string name="yes">はい</string>
     <string name="no">いいえ</string>
     <string name="search_channel">チャンネル検索</string>
     <string name="close">閉じる</string>
     <string name="could_not_get_channel_detailed">チャンネル情報をダウンロードできませんでした。: %s</string>
-    <string name="recaptcha_challenge_requested">YouTubeがネットワークリクエストをブロックしているため、reCaptchaチャレンジを確認する必要があります！</string>
+    <string name="recaptcha_challenge_requested">YouTube があなたをロボットだと思っています。reCAPTHCA を解いてください。</string>
     <string name="trending_in">トレンド (%s)</string>
 </resources>

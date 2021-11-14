@@ -2,15 +2,13 @@
 <resources>
     <string name="bookmark_share_invalid_url">До закладок можна додати лише URL-адреси YouTube.</string>
     <string name="bookmark_share_label">Закладки SkyTube</string>
-    <string name="no_bookmarked_videos_text">Відео у закладках відсутні.
-\n
-\nВони тут з\'являться після додавання.</string>
-    <string name="video_unbookmarked_error">Не вдалося прибрати з закладок.</string>
-    <string name="video_was_not_bookmarked">Не додано до закладок</string>
+    <string name="no_bookmarked_videos_text">Додані у закладки відео з\'являться тут.</string>
+    <string name="video_unbookmarked_error">Не вдалося вилучити відео з закладок.</string>
+    <string name="video_was_not_bookmarked">Відео не додано до закладок</string>
     <string name="unbookmark">Прибрати з закладок</string>
-    <string name="video_unbookmarked">Прибрано з закладок</string>
+    <string name="video_unbookmarked">Закладку вилучено</string>
     <string name="video_bookmarked_error">Не вдалося додати до закладок.</string>
-    <string name="video_already_bookmarked">Відео вже у закладках</string>
+    <string name="video_already_bookmarked">Уже у закладках</string>
     <string name="video_bookmarked">Додано до закладок</string>
     <string name="bookmark">Додати до закладок</string>
     <string name="bookmarks">Закладки</string>

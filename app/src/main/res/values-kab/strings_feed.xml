@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="feed">Asuddem</string>
+    <string name="subscribing_to_channels">Amulteɣ ɣer yibuda…</string>
+    <string name="no_new_videos_found">Ulac tividyutin timaynutin.</string>
+    <string name="import_subscriptions_from_youtube">Kter imultaɣen seg Youtube</string>
+    <string name="notification_new_videos_found">%d n tvidyutin timaynutin seg yibuda n umulteɣ</string>
+    <string name="fetched_videos_from_channels">Sεu %1$d n tvidyutin seg %2$d/%3$dn yibuda.</string>
+    <string name="open_channel">Ldi abadu</string>
+    <string name="fetching_subbed_channels_info">Tiririt n telɣut n ubadu…</string>
+    <string name="fetching_subbed_channels_info_error">Tegguma ad d-tettwarr telɣut n ubadu.</string>
+    <string name="fetching_subscription_videos">Tiririt n tvidyutin seg yibuda n umulteɣ…</string>
+    <string name="no_subscriptions_text">Multeɣ ɣer kra n yibuda i wakken ad twaliḍ tividyutin timaynutin seg-sen dagi.</string>
+    <string name="notification_channel_feed_title">Ilɣa n usuddem</string>
+</resources>

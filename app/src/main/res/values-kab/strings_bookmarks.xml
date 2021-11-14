@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="bookmarks">Inuraf</string>
+    <string name="bookmark">Cfu</string>
+    <string name="video_bookmarked">Tavidyut tettwarna ɣer yinuraf</string>
+    <string name="video_already_bookmarked">Tividyutin yellan yakan deg yinuraf</string>
+    <string name="video_bookmarked_error">Ur izmir ara ad yernu tavidyut ɣer yinuraf.</string>
+    <string name="unbookmark">Kkes</string>
+    <string name="video_unbookmarked">Tividyutin yettwakksen seg yinuraf</string>
+    <string name="video_was_not_bookmarked">Tavidyut ur tettwarna ara ɣer yinuraf</string>
+    <string name="video_unbookmarked_error">Ur izmir ara ad yekkes tavidyut seg yinuraf</string>
+</resources>

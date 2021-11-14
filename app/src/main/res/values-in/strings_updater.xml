@@ -6,7 +6,7 @@
     <string name="up_to_date_msg">Versi SkyTube Anda sudah yang paling baru.</string>
     <string name="update">Perbarui</string>
     <string name="later">Nanti</string>
-    <string name="update_failure">Tidak bisa memperbarui apl.</string>
+    <string name="update_failure">Tidak bisa memasang versi baru dari aplikasi.</string>
     <string name="downloading">Mengunduh…</string>
     <string name="release_notes">Pembaruan versi %s</string>
 </resources>

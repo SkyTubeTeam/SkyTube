@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="resume">Tęsti</string>
-    <string name="should_resume">Ar norite tęsti nuo tos vietos, kur sustojote\?</string>
+    <string name="should_resume">Tęsti nuo tos vietos, kur sustojote\?</string>
     <string name="clear">Išvalyti</string>
     <string name="cancel">Atšaukti</string>
     <string name="play">Paleisti</string>
@@ -9,33 +9,33 @@
     <string name="hide_replies">Paslėpti atsakymus</string>
     <string name="view_replies">Peržiūrėti atsakymus</string>
     <string name="no_video_comments">Šis vaizdo įrašas neturi komentarų arba jie yra išjungti.</string>
-    <string name="error_get_comments_no_network">Norint gauti komentarus, reikalinga prieiga prie tinklo.</string>
-    <string name="error_get_comments">Gaunant komentarus įvyko klaida.</string>
+    <string name="error_get_comments_no_network">Pirmiausia prisijunkite prie interneto, kad gautumėte komentarus.</string>
+    <string name="error_get_comments">Nepavyko gauti komentarų.</string>
     <string name="mark_unwatched">Pažymėti kaip nežiūrėtą</string>
     <string name="mark_watched">Pažymėti kaip peržiūrėtą</string>
     <string name="url_copied_to_clipboard">URL nukopijuotas į iškarpinę.</string>
     <string name="copy_url">Kopijuoti URL</string>
-    <string name="share_via">Dalintis per</string>
+    <string name="share_via">Bendrinti per…</string>
     <string name="share">Dalintis</string>
     <string name="open_with">Atidaryti naudojant…</string>
     <string name="open_in_browser">Atidaryti žiniatinklio naršyklėje</string>
     <string name="reload_video">Iš naujo įkelti vaizdo įrašą</string>
     <string name="loading_video">Įkeliamas vaizdo įrašas…</string>
     <string name="ratings_disabled">Įvertinimai išjungti</string>
-    <string name="warning_live_video">Kol kas nėra galimybės paleisti tiesioginių transliacijų. Atidarykite tiesioginę transliaciją kitoje programoje\?</string>
+    <string name="warning_live_video">Šiuo metu negalima leisti tiesioginių srautų. Atidaryti kitoje programėlėje\?</string>
     <string name="play_video">Leisti vaizdo įrašą</string>
-    <string name="metered_network_blocked_by_policy">Atsisiuntimas užblokuotas, nes jūsų prietaisas prijungtas prie matuojamo tinklo.</string>
+    <string name="metered_network_blocked_by_policy">Atsisiuntimas užblokuotas, nes esate prisijungę per matuojamąjį tinklą.</string>
     <string name="warning_metered_network_disable">Daugiau niekada neklausti.</string>
-    <string name="warning_metered_network_play">Jūsų prietaisas prijungtas prie matuojamo tinklo. Kad išvengtumėte galimų papildomų duomenų naudojimo mokesčių, rekomenduojama prisijungti prie nematuojamo tinklo. Ar vis tiek paleisti vaizdo įrašą\?</string>
+    <string name="warning_metered_network_play">Pirmiausia prisijunkite prie nematuojamo tinklo, kad išvengtumėte duomenų naudojimo mokesčių. Ar vis tiek paleisti vaizdo įrašą\?</string>
     <string name="metered_network">Matuojamas tinklas</string>
-    <string name="error_video_parse_error">Nepavyksta paleisti vaizdo įrašo, klaidos pranešimas: <br/> <br/> %s.</string>
-    <string name="error_downloaded_file_is_corrupted">Atsisiųstas vaizdo įrašas atrodo <b>sugadintas</b> - klaidos pranešimas yra: <br/> <br/> %s. <br/> <br/> Ar norite <b>ištrinti </b> failą\?</string>
+    <string name="error_video_parse_error">Nepavyko paleisti vaizdo įrašo: <br/> <br/> %s.</string>
+    <string name="error_downloaded_file_is_corrupted">Atsisiųstas vaizdo įrašas atrodo <b> sugadintas </b>: <br/> <br/> %s. <br/> <br/> <b>Ištrinti</b> failą\?</string>
     <string name="error_invalid_url">Netinkamas vaizdo įrašo URL: %s</string>
-    <string name="error_get_video_desc">Gaunant vaizdo įrašo aprašymą įvyko klaida.</string>
-    <string name="error_video_streams">Gaunant vaizdo įrašo srautus įvyko klaida.</string>
-    <string name="error_video_streams_empty">Vaizdo įrašas %s neturi srautų.</string>
+    <string name="error_get_video_desc">Nepavyko gauti vaizdo įrašo aprašymo.</string>
+    <string name="error_video_streams">Nepavyko gauti nė vieno vaizdo įrašo srauto.</string>
+    <string name="error_video_streams_empty">Vaizdo įrašas „%s“ neturi srautų.</string>
     <string name="error_video_play">Vaizdo įrašo atkūrimo klaida</string>
     <string name="error_stream_parse_error">Analizės klaida.</string>
     <string name="error_stream_decryption_fail">Nepavyko įkelti „YouTube“ paslaugos dešifravimo kodo.</string>
-    <string name="error_stream_err_unavailable">Klaidos pranešimas nepasiekiamas.</string>
+    <string name="error_stream_err_unavailable">Pranešimas nepasiekiamas.</string>
 </resources>
