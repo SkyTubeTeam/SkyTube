@@ -49,7 +49,7 @@ public class GetChannelPlaylists {
 
 	private YouTubeChannel channel;
 
-	public void init() throws IOException {
+	public GetChannelPlaylists() throws IOException {
 		playlistList = YouTubeAPI.create().playlists().list("id, snippet, contentDetails");
 		playlistList.setKey(YouTubeAPIKey.get().getYouTubeAPIKey());
 		playlistList.setFields("items(id, snippet/title, snippet/description, snippet/thumbnails, snippet/publishedAt, contentDetails/itemCount)," +

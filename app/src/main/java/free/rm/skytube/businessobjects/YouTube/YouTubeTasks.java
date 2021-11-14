@@ -3,7 +3,6 @@ package free.rm.skytube.businessobjects.YouTube;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
-import android.util.Pair;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -104,9 +103,10 @@ public class YouTubeTasks {
      * An asynchronous task that will retrieve YouTube playlists for a specific channel and display
      * them in the supplied adapter.
      */
-    public static Single<List<YouTubePlaylist>> getChannelPlaylists(@NonNull GetChannelPlaylists getChannelPlaylists,
-                                                                    @NonNull PlaylistsGridAdapter playlistsGridAdapter,
-                                                                    boolean shouldReset) {
+    public static Maybe<List<YouTubePlaylist>> getChannelPlaylists(@NonNull Context ctx,
+                                                                   @NonNull GetChannelPlaylists getChannelPlaylists,
+                                                                   @NonNull PlaylistsGridAdapter playlistsGridAdapter,
+                                                                   boolean shouldReset) {
         if (shouldReset) {
             getChannelPlaylists.reset();
             playlistsGridAdapter.clearList();
@@ -114,8 +114,12 @@ public class YouTubeTasks {
         return Single.fromCallable(getChannelPlaylists::getNextPlaylists)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnError(throwable -> Log.e(TAG, "Error:" + throwable.getLocalizedMessage(), throwable))
-                .doOnSuccess(playlistsGridAdapter::appendList);
+                .doOnError(throwable -> {
+                    Log.e(TAG, "Error:" + throwable.getLocalizedMessage(), throwable);
+                    SkyTubeApp.notifyUserOnError(ctx, throwable);
+                })
+                .doOnSuccess(playlistsGridAdapter::appendList)
+                .onErrorComplete();
     }
 
     /**
