@@ -1,0 +1,35 @@
+* Pause video playback when headphones disconnected - by ilmars
+* Use the more modern view bindings to construct the UI components - by Isira Seneviratne
+* Code cleanups and bug fixes - by TacoTheDank
+* Adding, new snapshot builds to Github.
+* Add config option to switch on/off the newer format support, and enable DefaultPlayer even on API 14
+* Subscription import updated to support current YouTube format.
+* Bug fixes and code cleanups
+* Updated English labels - by Allan Nordhøy
+* Updated translations for:
+    * Basque - by Julio Montero
+    * Catalan - by Xean
+    * Croatian - by Milo Ivir
+    * Dutch - by Heimen Stoffels
+    * Finnish - by Kaantaja
+    * French - by J. Lavoie
+    * German - by Florian Holeczek and J. Lavoie
+    * Indonesian - by zmni
+    * Italian - by J. Lavoie and Silvio Pastore
+    * Japanese - by Takaki Iekura
+    * Kabyle - Muḥend Belqasem, R_SACI and Selyan Sliman Amiri
+    * Lithuanian - by Gediminas Murauskas and g
+    * Malayalam - by mobilestemp
+    * Norwegian Bokmål - by Allan Nordhøy
+    * Persian - by roj
+    * Polish - by Michal L
+    * Portuguese - by Sérgio Marques and ssantos
+    * Romanian - by Igor Sorocean
+    * Russian - by Axus Wizix, Nikita Epifanov and Sedative
+    * Simplified Chinese - by Eric and ohsorry
+    * Spanish - by Julio Montero and MS-PC
+    * Swedish - by Swedish
+    * Traditional Chinese - by Jeff Huang
+    * Turkish - by Oğuz Ersen
+    * Ukrainian - by Ihor Hordiichuk and Tymofij Lytvynenko
+    * Vietnamese - by bruh
