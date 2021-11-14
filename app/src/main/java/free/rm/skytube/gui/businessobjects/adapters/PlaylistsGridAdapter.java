@@ -71,7 +71,7 @@ public class PlaylistsGridAdapter extends RecyclerViewAdapterEx<YouTubePlaylist,
 		if (position >= getItemCount() - 1) {
 			Log.w(TAG, "BOTTOM REACHED!!!");
 			if(getChannelPlaylists != null)
-				compositeDisposable.add(YouTubeTasks.getChannelPlaylists(getChannelPlaylists, this, false)
+				compositeDisposable.add(YouTubeTasks.getChannelPlaylists(getContext(), getChannelPlaylists, this, false)
 						.subscribe());
 		}
 	}
@@ -84,9 +84,8 @@ public class PlaylistsGridAdapter extends RecyclerViewAdapterEx<YouTubePlaylist,
 		try {
 			clearList();
 			getChannelPlaylists = new GetChannelPlaylists();
-			getChannelPlaylists.init();
 			getChannelPlaylists.setYouTubeChannel(youTubeChannel);
-			compositeDisposable.add(YouTubeTasks.getChannelPlaylists(getChannelPlaylists, this, false)
+			compositeDisposable.add(YouTubeTasks.getChannelPlaylists(getContext(), getChannelPlaylists, this, false)
 					.subscribe());
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -98,7 +97,7 @@ public class PlaylistsGridAdapter extends RecyclerViewAdapterEx<YouTubePlaylist,
 
 	public void refresh(@NonNull Consumer<List<YouTubePlaylist>> onFinished) {
 		if(getChannelPlaylists != null)
-			compositeDisposable.add(YouTubeTasks.getChannelPlaylists(getChannelPlaylists, this, false)
+			compositeDisposable.add(YouTubeTasks.getChannelPlaylists(getContext(), getChannelPlaylists, this, false)
 					.subscribe(onFinished));
 	}
 }
