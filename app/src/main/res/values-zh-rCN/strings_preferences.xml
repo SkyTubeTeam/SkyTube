@@ -76,7 +76,7 @@
     <string name="pref_category_download_resolutions">下载视频的分辨率</string>
     <string name="pref_category_video_resolutions">视频分辨率</string>
     <string name="pref_category_downloads">下载</string>
-    <string name="pref_summary_subscriptions_alphabetical_order">按照字母顺序排列订阅频道….</string>
+    <string name="pref_summary_subscriptions_alphabetical_order">按照字母顺序排列已订阅频道。</string>
     <string name="pref_title_subscriptions_alphabetical_order">按 A - Z 进行频道排序</string>
     <string name="restart">重启</string>
     <string name="pref_summary_use_newpipe_backend">正在使用NewPipe API访问Youtube……</string>
@@ -103,7 +103,7 @@
     <string name="pref_summary_default_tab">启动 SkyTube 时显示的默认标签：%s</string>
     <string name="pref_title_default_tab">默认标签</string>
     <string name="pref_other_category">其他</string>
-    <string name="i_agree">返回</string>
+    <string name="i_agree">我同意</string>
     <string name="pref_title_license">Copyleft 自由许可证</string>
     <string name="pref_summary_updates">检查新版本。</string>
     <string name="pref_title_updates">更新</string>
