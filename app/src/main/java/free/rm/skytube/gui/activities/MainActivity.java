@@ -428,7 +428,12 @@ public class MainActivity extends BaseActivity {
 	}
 
 	private void switchToFragment(FragmentEx fragment, boolean addToBackStack, String tag) {
-		FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+		FragmentManager manager = getSupportFragmentManager();
+		if (manager.isDestroyed()) {
+			Logger.e(this,"FragmentManager is destroyed, unable to add "+fragment);
+			return;
+		}
+		FragmentTransaction transaction = manager.beginTransaction();
 
 		transaction.replace(R.id.fragment_container, fragment, tag);
 		if(addToBackStack) {
