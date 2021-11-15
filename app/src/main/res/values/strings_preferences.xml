@@ -108,7 +108,7 @@
 		\nYou should have received a copy of the GNU General Public License
 		along with this program. If not, see &lt;https://www.gnu.org/licenses/&gt;
 	</string>
-    <string name="i_agree">Back</string>
+    <string name="i_agree">I Agree</string>
     <!-- extracted from  YouTube.com > 3 dot menu > Language -->
     <string-array name="languages_names" translatable="false">
         <item>Afrikaans</item>
@@ -544,8 +544,8 @@
     <string name="pref_summary_use_newpipe_backend">Use the NewPipe API to access YouTube…</string>
     <string name="restart">Restart</string>
     <string name="pref_key_subscriptions_alphabetical_order" translatable="false">pref_key_subscriptions_alphabetical_order</string>
-    <string name="pref_title_subscriptions_alphabetical_order">Sort Channels A - Z</string>
-    <string name="pref_summary_subscriptions_alphabetical_order">Lists subscribed Channels A-B-C….</string>
+    <string name="pref_title_subscriptions_alphabetical_order">Sort Channels Alphabetically</string>
+    <string name="pref_summary_subscriptions_alphabetical_order">Lists subscribed Channels alphabetically.</string>
     <string name="pref_key_brightness_level" translatable="false">pref_key_brightness_level</string>
     <string name="pref_category_downloads">Downloads</string>
     <string name="pref_category_video_resolutions">Video Resolution</string>
