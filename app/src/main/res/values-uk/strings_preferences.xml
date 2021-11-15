@@ -43,14 +43,14 @@
     <string name="continue_">Продовжити</string>
     <string name="databases_backup_success">Резервні копії збережені до %s</string>
     <string name="databases_backing_up">Зберігається резервна копія…</string>
-    <string name="pref_title_subscriptions_alphabetical_order">Сортувати канали А - Я</string>
+    <string name="pref_title_subscriptions_alphabetical_order">Сортувати канали за абеткою</string>
     <string name="restart">Перезапустити</string>
     <string name="pref_summary_hide_tabs">Оберіть, які вкладки не показувати. Потрібен перезапуск.</string>
     <string name="pref_title_hide_tabs">Сховати вкладки</string>
     <string name="pref_summary_default_tab">Вкладка для показу після увімкнення SkyTube: %s</string>
     <string name="pref_title_default_tab">Стандартна вкладка</string>
     <string name="pref_other_category">Інше</string>
-    <string name="i_agree">Назад</string>
+    <string name="i_agree">Погоджуюся</string>
     <string name="app_license">Авторське право © 2015–2018 Ramon Mifsud
 \n
 \nЦя програма є вільним програмним забезпеченням: ви можете розповсюджувати її та/або змінювати на умовах Загальної публічної ліцензії GNU, опублікованої Фондом вільного програмного забезпечення (версія 3 Ліцензії).
@@ -144,7 +144,7 @@
     <string name="pref_video_download_minimum_resolution_title">Найнижча роздільність завантаженого відео</string>
     <string name="pref_video_download_maximum_resolution_title">Найвища роздільність відео для завантаження</string>
     <string name="pref_summary_video_download_folder">Відео завантажено у «%s»</string>
-    <string name="pref_summary_subscriptions_alphabetical_order">Списки каналів, на які ви підписані A-Б-В….</string>
+    <string name="pref_summary_subscriptions_alphabetical_order">Показ каналів, на які ви підписані, за абеткою.</string>
     <string name="pref_youtube_api_key_default">Перезапустіть застосунок, щоб використовувати типовий ключ API YouTube.</string>
     <string name="pref_youtube_api_key_custom">Перезапустіть застосунок, щоб користуватися новим YouTube API ключем.</string>
     <string name="pref_youtube_api_key_error">Не вдалося перевірити введений ключ API.</string>
