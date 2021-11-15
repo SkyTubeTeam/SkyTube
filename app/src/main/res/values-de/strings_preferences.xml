@@ -69,7 +69,7 @@
         <item>24 Hours</item>
     </string-array>
     <string name="pref_title_choose_player">Videoplayer</string>
-    <string name="pref_summary_choose_player">Zu verwendender Videoplayer: %s</string>
+    <string name="pref_summary_choose_player">Video-Player zu verwenden: %s</string>
     <string name="pref_title_subscriptions_alphabetical_order">Kanäle alphabetisch sortieren</string>
     <string name="pref_summary_subscriptions_alphabetical_order">Wenn aktiviert ist, werden abonnierte Kanäle alphabetisch sortiert.</string>
     <string name="pref_video_blocker_category">Video-Blocker</string>
@@ -160,13 +160,13 @@
     <string name="pref_summary_maximum_res_metered">Wählen die maximale Auflösung beim Streaming über ein gebührenpflichtiges Netzwerk: %s</string>
     <string name="pref_title_maximum_res_metered">Maximale Auflösung für gebührenpflichtige Netzwerke</string>
     <string name="pref_summary_minimum_res_metered">Wähle die Mindestauflösung beim Streaming über ein gebührenpflichtiges Netzwerk: %s</string>
-    <string name="pref_title_minimum_res_metered">Minimale Auflösung für gebührenpflichtige Netzwerke</string>
+    <string name="pref_title_minimum_res_metered">Geringste Auflösung für Messnetz</string>
     <string name="pref_category_metered_network">Gebührenpflichtiges Netzwerk</string>
     <string name="no_resolution_specified">Keine</string>
-    <string name="pref_summary_minimum_res">Wähle die minimale Auflösung: %s</string>
-    <string name="pref_title_minimum_res">Minimale Auflösung</string>
-    <string name="pref_summary_maximum_res">Wähle die maximale Auflösung: %s</string>
-    <string name="pref_title_maximum_res">Maximale Auflösung</string>
+    <string name="pref_summary_minimum_res">Wählen Sie die niedrigste Auflösung: %s</string>
+    <string name="pref_title_minimum_res">Niedrigste Auflösung</string>
+    <string name="pref_summary_maximum_res">Wählen Sie die höchste Auflösung: %s</string>
+    <string name="pref_title_maximum_res">Höchste Auflösung</string>
     <string name="pref_key_use_newer_formats_summary">Alte Android-Versionen unterstützen nicht jedes von YouTube bereitgestellte Videoformat. Deaktivieren, falls es beim Abspielen regelmäßig zu Problemen mit Video oder Ton kommt</string>
     <string name="pref_key_use_newer_formats_title">Verwende neuere Videoformate</string>
 </resources>
