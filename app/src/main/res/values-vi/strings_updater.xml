@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="downloading">Đang tải xuống…</string>
-    <string name="update_failure">Không thể nâng cấp ứng dụng.</string>
+    <string name="update_failure">Không thể cài đặt phiên bản mới của ứng dụng.</string>
     <string name="later">Để sau</string>
     <string name="update">Cập nhật</string>
     <string name="release_notes">Các thay đổi trong %s</string>
