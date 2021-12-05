@@ -91,7 +91,7 @@
     <string name="please_wait">Bitte warten …</string>
     <string name="channel_already_whitelisted">Kanal befindet sich bereits auf der Positivliste.</string>
     <string name="channel_whitelist_updated">Kanal auf die Positivliste gesetzt. Bitte Videos aktualisieren.</string>
-    <string name="channel_whitelist_update_failure">Der angegebene Kanal konnte nicht in die Positivliste eingetragen werden …</string>
+    <string name="channel_whitelist_update_failure">Der angegebene Kanal konnte nicht in die Positivliste eingetragen werden.</string>
     <string name="channel_unwhitelist_success">Kanal-Positivliste aktualisiert. Bitte Videos aktualisieren.</string>
     <string name="channel_unwhitelist_failure">Das Austragen der angegebenen Kanäle aus der Positvliste fehlgeschlagen …</string>
     <string name="no_preferred_lang_selected">Keine bevorzugte Sprache ausgewählt. Einstellung ignoriert.</string>
