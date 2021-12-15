@@ -61,7 +61,7 @@ Android 4.0 (Ice Cream Sandwich) or later. For techies, that means an API level 
 
 _* powered by a closed-source, third-party library._
 
-## Features
+## Why SkyTube?
 * Copylefted libre software.
 * Gratis.
 * Innovative design.
