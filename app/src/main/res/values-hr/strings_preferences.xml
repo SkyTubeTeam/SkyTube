@@ -6,21 +6,19 @@
     <string name="pref_summary_choose_player">Video player koji će se koristiti: %s</string>
     <string name="pref_import_export_category">Uvoz/Izvoz</string>
     <string name="pref_title_backup_dbs">Izradi sigurnosnu kopiju</string>
-    <string name="pref_summary_backup_dbs">Izradi sigurnosnu kopiju pretplata i oznaka.</string>
+    <string name="pref_summary_backup_dbs">Izradi sigurnosnu kopiju tvojih oznaka i pretplata.</string>
     <string name="pref_title_import_dbs">Uvezi sigurnosnu kopiju</string>
-    <string name="pref_summary_import_dbs">Uvezi sigurnosnu kopiju tvojih pretplata i oznaka.</string>
+    <string name="pref_summary_import_dbs">Uvezi sigurnosnu kopiju tvojih oznaka i pretplata.</string>
     <string name="databases_backing_up">Izrada sigurnosne kopije …</string>
     <string name="databases_backup_success">Sigurnosna kopija izrađena na %s</string>
-    <string name="databases_backup_fail">Neuspjela izrada sigurnosne kopije.</string>
+    <string name="databases_backup_fail">Nije bilo moguće izraditi sigurnosne kopije tvojih baza podataka.</string>
     <string name="databases_import_select_backup">Odaberi sigurnosnu kopiju za uvoz</string>
     <string name="databases_import_nothing_selected">Ništa nije odabrano …</string>
-    <string name="databases_import_warning_message">Pretplate i oznake će se zamijeniti s podacima iz sigurnosne kopije. 
-\n 
-\nNastaviti\?</string>
+    <string name="databases_import_warning_message">Zamijeniti oznake i pretplate s podacima iz odabrane datoteke sigurnosne kopije\?</string>
     <string name="continue_">Nastavi</string>
     <string name="databases_importing">Uvoz …</string>
-    <string name="databases_import_fail">Neuspio uvoz podataka.</string>
-    <string name="databases_import_success">Podaci su uvezeni. Ponovo pokreni program kako bi se promjene primijenile.</string>
+    <string name="databases_import_fail">Nije bilo moguće uvesti tvoje baze podataka.</string>
+    <string name="databases_import_success">Za korištenje novih oznaka i pretplata, ponovo pokreni program.</string>
     <string name="pref_title_import_subs">Uvezi pretplate s YouTubea</string>
     <string name="pref_summary_import_subs">Uvezi pretplate s tvog YouTube računa.</string>
     <string name="subs_import_select_backup">Odaberi YouTube XML datoteku za uvoz</string>
@@ -31,12 +29,12 @@
     <string name="pref_title_version">Verzija</string>
     <string name="pref_title_updates">Nadogradnje</string>
     <string name="pref_summary_updates">Provjeri ima li novih verzija.</string>
-    <string name="pref_title_license">Licenca</string>
-    <string name="pref_summary_license">GNU opća javna licenca verzija 3</string>
+    <string name="pref_title_license">Copylefted Libre licenca</string>
+    <string name="pref_summary_license">GPLv3+</string>
     <string name="i_agree">Prihvaćam</string>
     <string name="pref_other_category">Ostalo</string>
     <string name="pref_title_default_tab">Zadana kartica</string>
-    <string name="pref_summary_default_tab">Standardna kartica koja se prikazuje pri pokretanju SkyTubea: %s</string>
+    <string name="pref_summary_default_tab">Kartica koja se prikazuje pri pokretanju SkyTubea: %s</string>
     <string name="pref_summary_feed_notification">Učestalost provjere za novim videozapisima s pretplaćenih kanala: %s</string>
     <string name="pref_title_screen_orientation">Položaj ekrana</string>
     <string name="pref_summary_screen_orientation">Položaj video playera: %s</string>
@@ -111,7 +109,7 @@
     <string name="pref_summary_enable_video_blocker">Aktiviraj blokiranje videozapisa.</string>
     <string name="pref_video_continuous_repeat_toggle">Stalno ponavljanje</string>
     <string name="pref_hide_tabs_restart">Za prikaz aktualiziranih kartica ponovo pokreni program.</string>
-    <string name="pref_summary_hide_tabs">Odaberi kartice koje se ne smiju prikazivati. Moraš ponovo pokrenuti program.</string>
+    <string name="pref_summary_hide_tabs">Odaberi da se kartice ne prikazuju. Moraš ponovo pokrenuti program.</string>
     <string name="pref_summary_autocast">Odaberi jedan Chromecast uređaj koji želiš koristiti, kad koristiš druge programe za otvaranje videozapisa na SkyTubeu.</string>
     <string name="pref_title_video_download_folder">Mapa za preuzimanje videozapisa</string>
     <string name="pref_summary_video_download_folder">Videozapisi se preuzimaju u ovu mapu: %s</string>
@@ -143,7 +141,7 @@
     <string name="pref_summary_minimum_res_metered">Odaberi najmanje razlučenje za prijenos putem mrežne veze s ograničenjem prometa: %s</string>
     <string name="pref_title_minimum_res_metered">Najmanje razlučenje za mrežne veze s ograničenjem prometa</string>
     <string name="pref_key_video_quality_metered_title">Biranje kvalitete videozapisa za mrežnu vezu s ograničenjem prometa</string>
-    <string name="pref_summary_metered_network_usage">Što činiti ako koristiš mrežnu vezu s ograničenjem prometa za preuzimanje/gledanje videa: %s</string>
+    <string name="pref_summary_metered_network_usage">Što činiti ako se koristi mrežna veza s ograničenjem prometa za preuzimanje/gledanje videa: %s</string>
     <string name="pref_title_metered_network_usage">Upotreba mrežne veze s ograničenjem prometa</string>
     <string name="pref_category_metered_network">Mrežna veza s ograničenjem prometa</string>
     <string name="pref_key_video_quality_for_downloads_summary">Optimiraj za: %s</string>
@@ -154,7 +152,7 @@
     <string name="no_resolution_specified">Ništa</string>
     <string name="pref_summary_default_content_country">Prikaži sadržaj namijenjen za ovu zemlju: %s</string>
     <string name="pref_title_default_content_country">Standardni sadržaj zemlje</string>
-    <string name="system_default_country">Standardna zemlja sustava</string>
+    <string name="system_default_country">Sustav</string>
     <string name="pref_key_use_newer_formats_summary">Stare verzije Androida ne podržavaju sve video formate koje Youtube nudi. Isključi, ako često naiđeš na nereproducirajuća videa ili videa bez zvuka</string>
     <string name="pref_key_use_newer_formats_title">Isprobaj novije video formate</string>
 </resources>
