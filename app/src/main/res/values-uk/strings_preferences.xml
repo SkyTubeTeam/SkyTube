@@ -3,7 +3,7 @@
     <string name="pref_video_player_category">Відеопрогравач</string>
     <string name="key_preferences">налаштування</string>
     <string name="preferences">Налаштування</string>
-    <string name="pref_title_video_download_folder">Теки для завантаження відео</string>
+    <string name="pref_title_video_download_folder">Тека для завантаження відео</string>
     <string name="pref_popup_title_video_download_folder">Обрати теку</string>
     <string name="pref_summary_download_to_separate_directories">Зберігає відео в теках на основі назви каналу.</string>
     <string name="pref_title_download_to_separate_directories">Завантаження теки каналів</string>
@@ -18,7 +18,7 @@
     <string name="pref_title_enable_immersive_mode">Режим занурення</string>
     <string name="pref_video_continuous_repeat_toggle">Безперервне повторення</string>
     <string name="pref_summary_disable_screen_gestures">Вимкнути жести керування гучністю, яскравістю та перемотуванням відео.</string>
-    <string name="pref_title_disable_screen_gestures">Немає відеожестів</string>
+    <string name="pref_title_disable_screen_gestures">Без відеожестів</string>
     <string name="pref_summary_screen_orientation">Положення відеопрогравача: %s</string>
     <string name="pref_title_screen_orientation">Положення екрана</string>
     <string name="pref_summary_feed_notification">Як часто перевіряти наявність нових відео на підписаних каналах: %s</string>
@@ -86,13 +86,13 @@
     <string name="pref_summary_maximum_res">Оберіть найвищу роздільність: %s</string>
     <string name="pref_title_maximum_res">Найвища роздільність</string>
     <string name="pref_playback_status_cleared">Стан відтворення очищено.</string>
-    <string name="pref_summary_clear_playback_status">Чіткий поступ для всіх відео.</string>
+    <string name="pref_summary_clear_playback_status">Очистити стан відтворення для всіх відео.</string>
     <string name="pref_title_clear_playback_status">Очищення стану відтворення</string>
     <string name="pref_disable_playback_status_deleted">Стан відтворення видалено.</string>
     <string name="pref_summary_disable_playback_status">Вимикає стан відтворення.</string>
-    <string name="pref_title_disable_playback_status">Немає стану відтворення</string>
+    <string name="pref_title_disable_playback_status">Без стану відтворення</string>
     <string name="pref_disable_search_history_deleted">Пошукова історія видалена.</string>
-    <string name="pref_summary_disable_search_history">Очищає та вимикає історію пошуку.</string>
+    <string name="pref_summary_disable_search_history">Очищує та вимикає історію пошуку.</string>
     <string name="pref_title_disable_search_history">Немає історії пошуку</string>
     <string name="pref_privacy_category">Приватність</string>
     <string name="pref_summary_low_views_filter">Фільтрувати відео з малою кількістю переглядів: %s</string>
