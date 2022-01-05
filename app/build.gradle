@@ -161,7 +161,8 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.8'
 
     // YouTube modules
-    implementation 'com.github.SkyTubeTeam.google-http-java-client:google-http-client-android:1.39.0.1'
+    implementation 'com.github.SkyTubeTeam.google-http-java-client:google-http-client-android:e726c5718d'
+
     implementation('com.google.apis:google-api-services-youtube:v3-rev20200423-1.30.9') {
         exclude group: 'com.google.http-client', module: 'google-http-client'
         exclude group: 'com.google.http-client', module: 'google-http-client-jackson2'
