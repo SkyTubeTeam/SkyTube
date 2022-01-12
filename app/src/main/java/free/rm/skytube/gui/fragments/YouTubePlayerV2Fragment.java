@@ -726,12 +726,16 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 				switch (visibility) {
 					case View.VISIBLE : {
 						showNavigationBar();
-						fragmentBinding.playerView.getOverlayFrameLayout().setVisibility(View.VISIBLE);
+						if (fragmentBinding != null) {
+							fragmentBinding.playerView.getOverlayFrameLayout().setVisibility(View.VISIBLE);
+						}
 						break;
 					}
 					case View.GONE: {
 						hideNavigationBar();
-						fragmentBinding.playerView.getOverlayFrameLayout().setVisibility(View.GONE);
+						if (fragmentBinding != null) {
+							fragmentBinding.playerView.getOverlayFrameLayout().setVisibility(View.GONE);
+						}
 						break;
 					}
 				}
