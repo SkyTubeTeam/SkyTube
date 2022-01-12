@@ -88,10 +88,7 @@ public class YouTubePlayerActivity extends BaseActivity implements YouTubePlayer
 			installFragment(tutorialFragment);
 		}
 
-		// when audio is "becoming noisy", the device is switching audio to speaker from headphones
-		IntentFilter filter = new IntentFilter(AudioManager.ACTION_AUDIO_BECOMING_NOISY);
-		registerReceiver(playbackPauseReceiver, filter);
-		receiverRegistered = true;
+		registerPlaybackPauseReceiver(true);
 	}
 
 
@@ -105,6 +102,18 @@ public class YouTubePlayerActivity extends BaseActivity implements YouTubePlayer
 		}
 	};
 
+	private synchronized void registerPlaybackPauseReceiver(boolean register) {
+		if (register != receiverRegistered) {
+			if (register) {
+				// when audio is "becoming noisy", the device is switching audio to speaker from headphones
+				IntentFilter filter = new IntentFilter(AudioManager.ACTION_AUDIO_BECOMING_NOISY);
+				registerReceiver(playbackPauseReceiver, filter);
+			} else {
+				unregisterReceiver(playbackPauseReceiver);
+			}
+			this.receiverRegistered = register;
+		}
+	}
 
 	/**
 	 * @return True if the user wants to use SkyTube's default video player;  false if the user wants
@@ -306,9 +315,7 @@ public class YouTubePlayerActivity extends BaseActivity implements YouTubePlayer
 		if (mediaSession != null) {
 			mediaSession.release();
 		}
-		if (receiverRegistered) {
-			unregisterReceiver(playbackPauseReceiver);
-		}
+		registerPlaybackPauseReceiver(false);
 		super.finish();
 	}
 
