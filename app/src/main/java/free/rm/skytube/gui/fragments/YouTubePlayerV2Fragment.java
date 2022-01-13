@@ -33,6 +33,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -367,24 +368,30 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 		if (video.getDescription() != null) {
 			Linker.setTextAndLinkify(videoDescriptionBinding.videoDescDescription, video.getDescription());
 		}
+		final boolean hasLikes = video.getLikeCountNumber() != null;
+		setTextAndVisibility(videoDescriptionBinding.videoDescLikes, hasLikes, video.getLikeCount());
+		final boolean hasDislikes = video.getDislikeCountNumber() != null;
+		setTextAndVisibility(videoDescriptionBinding.videoDescDislikes, hasDislikes, video.getDislikeCount());
+		setValueAndVisibility(videoDescriptionBinding.videoDescLikesBar, video.isThumbsUpPercentageSet(), video.getThumbsUpPercentage());
+		setVisibility(videoDescriptionBinding.videoDescRatingsDisabled, !hasLikes && !hasDislikes);
+	}
 
-		if (video.isThumbsUpPercentageSet()) {
-			videoDescriptionBinding.videoDescLikes.setText(video.getLikeCount());
-			videoDescriptionBinding.videoDescDislikes.setText(video.getDislikeCount());
-			videoDescriptionBinding.videoDescLikesBar.setProgress(video.getThumbsUpPercentage());
-
-			videoDescriptionBinding.videoDescRatingsDisabled.setVisibility(View.GONE);
-
-			videoDescriptionBinding.videoDescLikes.setVisibility(View.VISIBLE);
-			videoDescriptionBinding.videoDescDislikes.setVisibility(View.VISIBLE);
-			videoDescriptionBinding.videoDescLikesBar.setVisibility(View.VISIBLE);
-
-		} else {
-			videoDescriptionBinding.videoDescLikes.setVisibility(View.GONE);
-			videoDescriptionBinding.videoDescDislikes.setVisibility(View.GONE);
-			videoDescriptionBinding.videoDescLikesBar.setVisibility(View.GONE);
-			videoDescriptionBinding.videoDescRatingsDisabled.setVisibility(View.VISIBLE);
+	private void setTextAndVisibility(TextView view, boolean visible, String text) {
+		setVisibility(view, visible);
+		if (visible) {
+			view.setText(text);
 		}
+	}
+
+	private void setValueAndVisibility(ProgressBar view, boolean visible, int percentage) {
+		setVisibility(view, visible);
+		if (visible) {
+			view.setProgress(percentage);
+		}
+	}
+
+	private void setVisibility(View view, boolean visible) {
+		view.setVisibility(visible ? View.VISIBLE : View.GONE);
 	}
 
 	/**

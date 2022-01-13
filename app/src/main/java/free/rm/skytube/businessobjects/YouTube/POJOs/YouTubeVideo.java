@@ -231,12 +231,15 @@ public class YouTubeVideo extends CardData implements Serializable {
 	public void setLikeDislikeCount(Long likedCountInt, Long dislikedCountInt) {
 		this.thumbsUpPercentage = -1;
 
+		final Long likes = filterNegative(likedCountInt);
+		final Long dislikes = filterNegative(dislikedCountInt);
+
 		// some videos do not allow users to like/dislike them:  hence likedCountInt / dislikedCountInt
 		// might be null in those cases
-		if (likedCountInt != null && dislikedCountInt != null) {
+		if (likes != null && dislikes != null) {
 
-			long likedCount = likedCountInt;
-			long dislikedCount = dislikedCountInt;
+			long likedCount = likes;
+			long dislikedCount = dislikes;
 			long totalVoteCount = likedCount + dislikedCount;	// liked and disliked counts
 
 			if (totalVoteCount != 0) {
@@ -244,8 +247,15 @@ public class YouTubeVideo extends CardData implements Serializable {
 
 			}
 		}
-		this.likeCountNumber = likedCountInt;
-		this.dislikeCountNumber = dislikedCountInt;
+		this.likeCountNumber = likes;
+		this.dislikeCountNumber = dislikes;
+	}
+
+	private static Long filterNegative(Long value) {
+		if (value != null && value.longValue() < 0) {
+			return null;
+		}
+		return value;
 	}
 
 	/**
