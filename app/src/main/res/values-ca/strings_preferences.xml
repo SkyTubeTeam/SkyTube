@@ -155,4 +155,5 @@
     <string name="pref_summary_import_subs">Importeu les vostres subscripcions des del vostre compte de YouTube.</string>
     <string name="pref_title_import_subs">Importa subscripcions de YouTube</string>
     <string name="databases_import_success">Bases de dades importades. Reinicieu l\'aplicació per aplicar canvis.</string>
+    <string name="pref_key_use_newer_formats_title">Proveu formats de vídeo més nous</string>
 </resources>
