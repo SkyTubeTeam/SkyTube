@@ -1,0 +1,17 @@
+* Update NewPipeExtractor to fix recent Youtube changes - by Chris Bellew
+* Fix a couple of crashes
+* Dependency updates
+* Updated translations for:
+    * Catalan - by DFC
+    * Croatian - by Milo Ivir
+    * Finnish - by Ricky Tigg
+    * French - by J. Lavoie
+    * German - by J. Lavoie and Sascha Werth
+    * Japan - by Takaki Iekura
+    * Portugal - by ssantos
+    * Spanish - by Julio Montero
+    * Simplified Chinese - by Eric
+    * Tamil - by Pugal Krishnan
+    * Turkish - by Oğuz Ersen
+    * Ukrainian - by Ihor Hordiichuk
+    * Vietnamese - by bruh
