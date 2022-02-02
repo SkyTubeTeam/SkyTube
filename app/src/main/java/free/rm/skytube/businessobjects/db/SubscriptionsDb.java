@@ -178,7 +178,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 
                 // convert JSON into YouTubeVideo
                 YouTubeVideo video = gson.fromJson(videoJson, YouTubeVideo.class);
-                ContentValues values = convertToContentValues(video);
+                ContentValues values = convertToContentValues(video, null);
                 long rowId = db.insert(SubscriptionsVideosTable.TABLE_NAME_V2, null, values);
                 if (rowId > 0) {
                     success ++;
@@ -324,7 +324,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
     }
 
     public void updateVideo(YouTubeVideo video) {
-        ContentValues values = convertToContentValues(video);
+        ContentValues values = convertToContentValues(video, null);
         getWritableDatabase().update(
                 SubscriptionsVideosTable.TABLE_NAME_V2,
                 values,
@@ -332,9 +332,9 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
                 new String[] { video.getId() });
     }
 
-    private ContentValues convertToContentValues(final YouTubeVideo video) {
+    private ContentValues convertToContentValues(final YouTubeVideo video, String channelId) {
         ContentValues values = new ContentValues();
-        values.put(SubscriptionsVideosTable.COL_CHANNEL_ID_V2.name, video.getChannelId());
+        values.put(SubscriptionsVideosTable.COL_CHANNEL_ID_V2.name, channelId != null ? channelId : video.getChannelId());
         values.put(SubscriptionsVideosTable.COL_CHANNEL_TITLE.name, video.getSafeChannelName());
         values.put(SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID_V2.name, video.getId());
         values.put(SubscriptionsVideosTable.COL_CATEGORY_ID.name, video.getCategoryId());
@@ -627,7 +627,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 
     private ContentValues createContentValues(YouTubeVideo video, String channelId) {
 		channelId = Utils.removeChannelIdPrefix(channelId);
-        ContentValues values = convertToContentValues(video);
+        ContentValues values = convertToContentValues(video, channelId);
         values.put(SubscriptionsVideosTable.COL_CHANNEL_ID, channelId);
         values.put(SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID, video.getId());
         // values.put(SubscriptionsVideosTable.COL_YOUTUBE_VIDEO, gson.toJson(video).getBytes());
