@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="bookmark">புக்மார்க்கு</string>
+    <string name="video_already_bookmarked">ஏற்கனவே புக்மார்க் செய்யப்பட்டுள்ளது</string>
+    <string name="bookmarks">புக்மார்க்குகள்</string>
+    <string name="unbookmark">புக்மார்க்கை நீக்கவும்</string>
+    <string name="video_unbookmarked">புக்மார்க் அகற்றப்பட்டது</string>
+    <string name="video_was_not_bookmarked">வீடியோ புக்மார்க் செய்யப்படவில்லை</string>
+    <string name="video_unbookmarked_error">வீடியோ புக்மார்க்கை அகற்ற முடியவில்லை.</string>
+    <string name="no_bookmarked_videos_text">சில வீடியோக்களை இங்கே கண்டு பிடிக்க புக்மார்க் செய்யவும்.</string>
+    <string name="bookmark_share_label">SkyTube புக்மார்க்</string>
+    <string name="bookmark_share_invalid_url">சரியான YouTube URL-களை மட்டுமே புக்மார்க் செய்ய முடியும்.</string>
+    <string name="video_bookmarked">புக்மார்க் செய்யப்பட்டது</string>
+    <string name="video_bookmarked_error">வீடியோவை புக்மார்க் செய்ய முடியவில்லை.</string>
+</resources>

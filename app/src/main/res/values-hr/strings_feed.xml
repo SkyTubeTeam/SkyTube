@@ -3,10 +3,10 @@
     <string name="feed">Feed</string>
     <string name="subscribing_to_channels">Pretplaćivanje na kanale …</string>
     <string name="fetching_subbed_channels_info">Dohvaćanje podataka kanala …</string>
-    <string name="fetching_subbed_channels_info_error">Došlo je do greške prilikom dohvaćanja podataka kanala.</string>
-    <string name="fetching_subscription_videos">Dohvaćanje videozapisa s pretplaćenih kanala</string>
-    <string name="fetched_videos_from_channels">Dohvaćeno %1$d videozapisa s %2$d/%3$d kanala.</string>
-    <string name="no_new_videos_found">Nema novih videozapisa.</string>
+    <string name="fetching_subbed_channels_info_error">Nije bilo moguće dohvatiti podatke kanala.</string>
+    <string name="fetching_subscription_videos">Dohvaćanje videa iz pretplaćenih kanala …</string>
+    <string name="fetched_videos_from_channels">Dohvaćeno %1$d videa s %2$d/%3$d kanala.</string>
+    <string name="no_new_videos_found">Nema novih videa.</string>
     <string name="no_subscriptions_text">Nisi pretplaćen na nijedan kanal. 
 \n 
 \nKad se pretplatiš, svi preneseni videozapisi na pretplaćenim kanalima pojavit će se ovdje.</string>

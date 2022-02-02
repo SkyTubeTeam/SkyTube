@@ -6,7 +6,7 @@
     <string name="up_to_date_msg">Imaš najnoviju verziju SkyTube-a.</string>
     <string name="update">Nadogradi</string>
     <string name="later">Kasnije</string>
-    <string name="update_failure">Nije moguće nadograditi program.</string>
+    <string name="update_failure">Nije moguće instalirati novu verziju programa.</string>
     <string name="downloading">Preuzimanje …</string>
     <string name="release_notes">Promjene u %s</string>
 </resources>
