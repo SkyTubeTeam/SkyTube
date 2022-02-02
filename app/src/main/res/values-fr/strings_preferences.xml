@@ -121,8 +121,8 @@
     <string name="pref_youtube_api_key_custom">Redémarrez l\'application pour utiliser la nouvelle clé API YouTube.</string>
     <string name="pref_youtube_api_key_default">Redémarrez l\'application pour utiliser la clé API YouTube par défaut.</string>
     <string name="restart">Redémarrer</string>
-    <string name="pref_title_subscriptions_alphabetical_order">Trier les chaînes de A à Z</string>
-    <string name="pref_summary_subscriptions_alphabetical_order">Liste des abonnements A-B-C…</string>
+    <string name="pref_title_subscriptions_alphabetical_order">Trier les chaînes par ordre alphabétique</string>
+    <string name="pref_summary_subscriptions_alphabetical_order">Liste des chaînes souscrites par ordre alphabétique.</string>
     <string name="pref_about_category">À propos</string>
     <string name="pref_title_website">Site internet</string>
     <string name="pref_title_credits">Crédits</string>
@@ -139,7 +139,7 @@
 \nCe programme est distribué dans l\'espoir qu\'il sera utile, mais SANS AUCUNE GARANTIE ; sans même la garantie implicite de COMMERCIALISATION ou d\'ADÉQUATION À UN USAGE PARTICULIER. Voir la licence publique générale GNU pour plus de détails.
 \n
 \nVous devriez avoir reçu une copie de la licence publique générale GNU avec ce programme. Si ce n\'est pas le cas, consultez &lt;https://www.gnu.org/licenses/&gt;</string>
-    <string name="i_agree">Retour</string>
+    <string name="i_agree">Je suis d\'accord</string>
     <string name="pref_category_downloads">Téléchargements</string>
     <string name="pref_title_download_to_separate_directories">Téléchargements de dossiers de chaînes</string>
     <string name="pref_title_disable_screen_gestures">Aucun geste vidéo</string>

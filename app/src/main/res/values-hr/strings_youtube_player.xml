@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="error_stream_err_unavailable">Greška, poruka nije dostupna.</string>
+    <string name="error_stream_err_unavailable">Nedostupna poruka.</string>
     <string name="error_stream_decryption_fail">Nije bilo moguće učitati kod za dešifriranje za YouTube uslugu.</string>
     <string name="error_stream_parse_error">Greška prilikom analizaranja.</string>
     <string name="error_video_play">Greška prilikom pokretanja videozapisa</string>
-    <string name="error_video_streams_empty">Videozapis %s nema podataka za prijenos.</string>
-    <string name="error_video_streams">Došlo je do greške prilikom dobavljanja podataka za prijenos videozapisa.</string>
-    <string name="error_get_video_desc">Došlo je do greške prilikom dobavljanja opisa videozapisa.</string>
+    <string name="error_video_streams_empty">Video „%s” nema podataka za prijenos.</string>
+    <string name="error_video_streams">Nije bilo moguće dohvatiti podatke prijenosa videa.</string>
+    <string name="error_get_video_desc">Nije bilo moguće dohvatiti opis videa.</string>
     <string name="error_invalid_url">Neispravan URL videozapisa: %s</string>
-    <string name="warning_live_video">Trenutačno nije moguće pokrenuti prijenos uživo. Otvoriti prijenos uživo u jednom drugom programu\?</string>
-    <string name="ratings_disabled">Ocjene su deaktivirane</string>
+    <string name="warning_live_video">Trenutačno nije moguće pokrenuti prijenos uživo. Otvoriti prijenos u jednom drugom programu\?</string>
+    <string name="ratings_disabled">Ocjene isključene</string>
     <string name="loading_video">Učitavanje videozapisa …</string>
     <string name="open_in_browser">Otvori u web pregledniku</string>
     <string name="open_with">Otvori s …</string>
     <string name="share">Dijeli</string>
-    <string name="share_via">Dijeli preko</string>
+    <string name="share_via">Dijeli putem …</string>
     <string name="copy_url">Kopiraj URL</string>
     <string name="url_copied_to_clipboard">URL je kopiran u međuspremnik.</string>
-    <string name="mark_watched">Označi kao praćeno</string>
-    <string name="mark_unwatched">Označi kao ne praćeno</string>
-    <string name="error_get_comments">Došlo je do greške prilikom dohvaćanja komentara.</string>
+    <string name="mark_watched">Označi kao pogledano</string>
+    <string name="mark_unwatched">Označi kao ne pogledano</string>
+    <string name="error_get_comments">Nije bilo moguće dohvatiti komentare.</string>
     <string name="no_video_comments">Ovaj videozapis nema komentara ili su komentari deaktivirani.</string>
     <string name="view_replies">Prikaži odgovore</string>
     <string name="hide_replies">Sakrij odgovore</string>
@@ -27,15 +27,15 @@
     <string name="play">Pokreni</string>
     <string name="cancel">Odustani</string>
     <string name="clear">Izbriši</string>
-    <string name="should_resume">Želiš li nastaviti s mjesta na kojem si prestao/la\?</string>
+    <string name="should_resume">Nastaviti s mjesta na kojem si prekinuo/la\?</string>
     <string name="resume">Nastavi</string>
     <string name="play_video">Pokreni videozapis</string>
-    <string name="error_downloaded_file_is_corrupted">Čini se da je preuzeti videozapis &lt;b&gt;oštećen&lt;/b&gt; – poruka greške: &lt;br/&gt; &lt;br/&gt; %s. &lt;br/&gt; &lt;br/&gt; Želiš li &lt;b&gt;izbrisati&lt;/b&gt; datoteku\?</string>
-    <string name="error_video_parse_error">Nije moguće pokrenuti videozapis, poruka greške: &lt;br/&gt; &lt;br/&gt; %s.</string>
-    <string name="error_get_comments_no_network">Za dohvaćanje komentara potreban je pristup mreži.</string>
+    <string name="error_downloaded_file_is_corrupted">Čini se da je preuzeti video <b>oštećen</b>: <br/> <br/> %s. <br/> <br/> <b>Izbrisati</b> datoteku\?</string>
+    <string name="error_video_parse_error">Nije bilo moguće pokrenuti video: <br/> <br/> %s.</string>
+    <string name="error_get_comments_no_network">Za dohvaćanje komentara najprije se spoji na internet.</string>
     <string name="reload_video">Ponovo učitaj videozapis</string>
-    <string name="metered_network_blocked_by_policy">Preuzimanje je blokirano jer je tvoj uređaj povezan na mrežnu vezu s ograničenjem prometa.</string>
+    <string name="metered_network_blocked_by_policy">Preuzimanje je blokirano jer si povezan/a na mrežnu vezu s ograničenjem prometa.</string>
     <string name="warning_metered_network_disable">Ne pitaj više.</string>
-    <string name="warning_metered_network_play">Tvoj je uređaj povezan na mrežnu vezu s ograničenjem prometa. Za izbjegavanje dodatne potrošnje prometa, preporučujemo da se povežeš na mrežnu vezu bez ograničenja prometa. Svejedno pokrenuti videozapis\?</string>
+    <string name="warning_metered_network_play">Poveži se s mrežom bez mjerenja prometa za izbjegavanje troškova korištenja podataka. Svejedno reproducirati video\?</string>
     <string name="metered_network">Mrežna veza s ograničenjem prometa</string>
 </resources>

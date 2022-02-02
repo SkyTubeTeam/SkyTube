@@ -6,23 +6,23 @@
     <string name="total_subscribers">%,d pretplatnici</string>
     <string name="subscribed">Pretplaćen</string>
     <string name="unsubscribed">Otkazana pretplata</string>
-    <string name="error_get_subbed_channels">Došlo je do greške prilikom dobavljanja pretplaćenih kanala.</string>
-    <string name="error_check_if_user_has_subbed">Nije moguće provjeriti je li se korisnik pretplatio na kanal (id=%s)</string>
-    <string name="error_unable_to_subscribe">Nije moguće pretplatiti se/otkazati pretplatu na kanal (id=%s)</string>
+    <string name="error_get_subbed_channels">Nije bilo moguće dohvatiti pretplate na kanal.</string>
+    <string name="error_check_if_user_has_subbed">Nije bilo moguće provjeriti jesi li se pretplatio/la na kanal (id=%s)</string>
+    <string name="error_unable_to_subscribe">Nije bilo moguće pretplatiti se na kanal/otkazati pretplatu na kanal (id=%s)</string>
     <string name="import_subscriptions">Uvoz pretplatnika</string>
     <string name="import_subscriptions_description">Uvezi tvoje pretplate s YouTubea. Najprije idi na stranicu https://takeout.google.com. Odznači sve usluge osim „YouTube i YouTube glazba” i pritisni „Uključeni su svi YouTube podaci” za odznačivanje svega osim pretplata. Pritsni „Dalje”, a zatim „Stvori izvoz”. Nakon što izvoz završi, on će se prikazati na sljedećoj web-stranici i dobit ćeš e-poruku s poveznicom za preuzimanje. Preuzmi datoteku i iz nje izdvoji datoteku subscription.json (nalazi se u /Takeout/YouTube i YouTube Music/subscription/). Nakon toga odaberi izvezenu datoteku pritiskom na „Odaberi datoteku pretplata”.</string>
     <string name="unsubscribe_from_all_current_sibbed_channels">Otkaži pretplate za sve tvoje trenutačne pretplaćene kanale.</string>
-    <string name="subscriptions_to_channels_imported">Pretplata na %d kanala uvezena.</string>
+    <string name="subscriptions_to_channels_imported">%d kanal(a) uvezeno.</string>
     <string name="select_all">Odaberi sve</string>
     <string name="select_none">Odaberi ništa</string>
     <string name="no_channels_found">U tvojoj prenesenoj datoteci nije pronađen nijedan YouTube kanal.</string>
-    <string name="no_new_channels_found">U tvojoj prenesenoj datoteci nije pronađen nijedan YouTube kanal na koji nisi već pretplaćen/a.</string>
-    <string name="import_subscriptions_parse_error">Došlo je do greške prilikom pokušaja analiziranja tvoje prenesene datoteke: %s.</string>
-    <string name="failed_to_import_subscriptions">Neuspio uvoz tvojih pretplata na YouTube-u.</string>
+    <string name="no_new_channels_found">Nije pronađen nijedan YouTube kanal na koji nisi već pretplaćen/a.</string>
+    <string name="import_subscriptions_parse_error">Nije bilo moguće obraditi tvoju prenesenu datoteku: %s.</string>
+    <string name="failed_to_import_subscriptions">Nije bilo moguće uvesti tvoje YouTube pretplate.</string>
     <string name="about">Informacije</string>
     <string name="channel_subscribed">Pretplaćen kanal</string>
     <string name="channel_unsubscribed">Otkazana pretplata na kanal</string>
-    <string name="channel_subscribe_failed">Nije moguće pretplatiti se na kanal</string>
-    <string name="channel_already_subscribed">Već imaš pretplatu na ovaj kanal</string>
-    <string name="select_sub_file">Odaberi datoteku pretplata</string>
+    <string name="channel_subscribe_failed">Nije bilo moguće pretplatiti se na kanal</string>
+    <string name="channel_already_subscribed">Pretplata već postoji</string>
+    <string name="select_sub_file">Odaberi datoteku pretplate</string>
 </resources>

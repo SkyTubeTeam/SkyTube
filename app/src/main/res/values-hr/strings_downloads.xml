@@ -7,13 +7,11 @@
     <string name="video_download_stream_error">Nije moguće preuzeti „%s”.</string>
     <string name="delete_download">Izbriši preuzimanje</string>
     <string name="video_downloaded">„%s” preuzeto.</string>
-    <string name="no_downloaded_videos_text">Nijedan videozapis nije preuzet.
-\n
-\nKad se preuzmu, pojavit će se ovdje.</string>
-    <string name="playing_video_file_missing">Preuzimanje ovog videozapisa nije nađeno. Pokreće se izravno s mreže.</string>
-    <string name="external_storage_not_available">Nije moguće preuzeti datoteku, jer vanjsko spremište nije dostupno.</string>
-    <string name="video_stream_not_found_with_request_resolution">Nema podataka za prijenos videozapisa za zatraženo razlučenje između %1$s i %2$s</string>
-    <string name="warning_metered_network_download">Tvoj je uređaj povezan na mrežnu vezu s ograničenjem prometa. Za izbjegavanje dodatne potrošnje prometa, preporučujemo da se povežeš na mrežnu vezu bez ograničenja prometa. Svejedno preuzeti videozapis\?</string>
-    <string name="unable_to_delete_file">Nije moguće izbrisati preuzetu datoteku: „%s”</string>
-    <string name="download_failed_because">Neuspjelo preuzimanje od %1$s zbog: %2$s</string>
+    <string name="no_downloaded_videos_text">Preuzmi neke videozapise da bi se ovdje pronašli.</string>
+    <string name="playing_video_file_missing">Reprodukcija videozapisa na daljinu jer nije pronađena nijedna datoteka za preuzimanje.</string>
+    <string name="external_storage_not_available">Odobri pristup vanjskom uređaju kako bi se datoteka naprije preuzela.</string>
+    <string name="video_stream_not_found_with_request_resolution">Nema video prijenosa za zatraženo razlučenje između %1$s i %2$s</string>
+    <string name="warning_metered_network_download">Preuzeti videozapis putem povezane mreže s ograničenim prometom\?</string>
+    <string name="unable_to_delete_file">Nije bilo moguće izbrisati preuzetu datoteku „%s”.</string>
+    <string name="download_failed_because">Nije bilo moguće preuzeti %1$s zbog %2$s.</string>
 </resources>

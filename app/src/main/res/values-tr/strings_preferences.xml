@@ -40,7 +40,7 @@
 \nBu program faydalı olması umuduyla, ancak HİÇBİR GARANTİ OLMAKSIZIN; hatta imayla dahi TİCARİ ELVERİŞLİLİK ya da BELİRGİN BİR AMACA UYGUNLUK garantisi olmaksızın dağıtılmaktadır. Daha fazla ayrıntı için GNU Genel Kamu Lisansına bakın.
 \n
 \nBu programla birlikte GNU Genel Kamu Lisansının bir koyasını almış olmalısınız. Eğer almadıysanız lütfen &lt;https://www.gnu.org/licenses/&gt; sayfasına bakın</string>
-    <string name="i_agree">Geri</string>
+    <string name="i_agree">Kabul Ediyorum</string>
     <string name="pref_other_category">Diğerleri</string>
     <string name="pref_title_default_tab">Öntanımlı Sekme</string>
     <string name="pref_summary_default_tab">SkyTube başlatıldığında gösterilecek sekme: %s</string>
@@ -68,8 +68,8 @@
     <string name="restart">Yeniden Başlat</string>
     <string name="pref_title_choose_player">Video Oynatıcı</string>
     <string name="pref_summary_choose_player">Kullanılacak video oynatıcı: %s</string>
-    <string name="pref_title_subscriptions_alphabetical_order">Kanalları A\'dan Z\'ye Sırala</string>
-    <string name="pref_summary_subscriptions_alphabetical_order">Abone olunan kanalları A-B-C... sırasında listeler.</string>
+    <string name="pref_title_subscriptions_alphabetical_order">Kanalları Alfabetik Olarak Sırala</string>
+    <string name="pref_summary_subscriptions_alphabetical_order">Abone olunan kanalları alfabetik olarak listeler.</string>
     <string name="pref_video_blocker_category">Video Engelleyici</string>
     <string name="pref_channels_filter_category">Kanal Filtreleri</string>
     <string name="pref_title_channel_filter_method">Kanal Filtre Yöntemi</string>

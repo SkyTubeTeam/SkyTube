@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="dislikes">%d%% alapeukkua</string>
+    <string name="dislikes">%d %% alapeukkua</string>
     <string name="channel_unwhitelist_error">Kanavaa ei voitu poistaa sallittujen listalta.</string>
     <string name="channel_blacklist_error">Kanavaa ei voitu estää.</string>
     <string name="channel_blacklisted">Kanava estetty. Päivitäthän sivun.</string>

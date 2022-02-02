@@ -40,7 +40,7 @@
 \nこのプログラムは有用であることを願って頒布されますが、*全くの無保証*です。商業可能性の保証や特定目的への適合性は、言外に示されたものも含め、全く存在しません。詳しくはGNU 一般公衆利用許諾書をご覧くださ い。
 \n
 \nあなたはこのプログラムと共に、GNU 一般公衆利用許諾書のコピーを一部 受け取っているはずです。もし受け取っていなければ、&lt;https://www.gnu.org/licenses/&gt; をご覧ください。</string>
-    <string name="i_agree">戻る</string>
+    <string name="i_agree">同意する</string>
     <string name="pref_other_category">その他</string>
     <string name="pref_title_default_tab">デフォルトタブ</string>
     <string name="pref_summary_default_tab">SkyTube を起動したときに表示するタブ: %s</string>

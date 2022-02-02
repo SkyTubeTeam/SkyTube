@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="could_not_get_videos">Nije bilo moguće dobiti %s videozapisa.</string>
-    <string name="could_not_get_channel">Nije bilo moguće preuzeti podatke kanala!</string>
+    <string name="could_not_get_channel">Nije bilo moguće preuzeti podatke kanala.</string>
     <string name="views">%,d pregleda</string>
     <string name="error">Greška</string>
     <string name="ok">U redu</string>
     <string name="search_videos">Pretraži videozapise</string>
-    <string name="launch_offical_player_error">Došlo je do greške prilikom pokretanja službenog YouTube playera s Googlea. Provjeri, je li instaliran na tvom uređaju.</string>
-    <string name="LIVE">UŽIVO</string>
+    <string name="launch_offical_player_error">Nije bilo moguće pokrenuti službeni YouTube player. Provjeri, je li instaliran.</string>
+    <string name="LIVE">Uživo</string>
     <string name="featured">Istaknuti</string>
     <string name="most_popular">Najpopularniji</string>
     <string name="video">Video</string>
@@ -22,5 +22,5 @@
     <string name="close">Zatvori</string>
     <string name="could_not_get_channel_detailed">Nije bilo moguće preuzeti podatke kanala: %s.</string>
     <string name="trending_in">U trendu (%s)</string>
-    <string name="recaptcha_challenge_requested">YouTube blokira naše mrežne zahtjeve. Moraš riješiti reCaptcha izazov!</string>
+    <string name="recaptcha_challenge_requested">YouTube misli da si bot uređaj, stoga moraš najprije riješiti reCAPTCHA.</string>
 </resources>
