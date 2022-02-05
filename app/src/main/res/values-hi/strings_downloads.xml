@@ -1,2 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="download">डाउनलोड</string>
+    <string name="downloads">डाउनलोड</string>
+    <string name="download_video">वीडियो डाउनलोड करें</string>
+    <string name="video_download_stream_error">\'%s\' डाउनलोड नही कर पा रहा है</string>
+</resources>
