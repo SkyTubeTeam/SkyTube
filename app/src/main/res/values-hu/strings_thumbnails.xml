@@ -2,6 +2,6 @@
 <resources>
     <string name="thumbnail">Bélyegkép</string>
     <string name="thumbnail_download_error">A bélyegképet nem lehet letölteni.</string>
-    <string name="thumbnail_downloaded">Bélyegkép letöltve.</string>
+    <string name="thumbnail_downloaded">Letöltve.</string>
     <string name="view_thumbnail">Bélyegkép megtekintése</string>
 </resources>
