@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="error_stream_err_unavailable">Hibaüzenet nem érhető el.</string>
+    <string name="error_stream_err_unavailable">Nem érhető el üzenet.</string>
     <string name="error_stream_decryption_fail">A YouTube szolgáltatáshoz tartozó dekódoló kód betöltése sikertelen.</string>
     <string name="error_stream_parse_error">Feldolgozási hiba.</string>
     <string name="error_video_play">Videólejátszási hiba</string>
-    <string name="error_video_streams_empty">A(z) %s videóhoz nem található adatfolyam.</string>
-    <string name="error_video_streams">Hiba történt a videó adatfolyamainak lekérésekor.</string>
-    <string name="error_get_video_desc">Hiba történt a videóleírás lekérésekor.</string>
+    <string name="error_video_streams_empty">A(z) \'%s\' videóhoz nem található adatfolyam.</string>
+    <string name="error_video_streams">Nem sikerült lekérni egyik videó folyamot sem.</string>
+    <string name="error_get_video_desc">Nem sikerült lekérni a videó leírását.</string>
     <string name="error_invalid_url">Érvénytelen videó URL: %s</string>
     <string name="play_video">Videólejátszás</string>
     <string name="warning_live_video">Az élő közvetítések lejátszása egyelőre nem lehetséges. Megnyitja egy másik alkalmazásban\?</string>
-    <string name="ratings_disabled">Értékelések letiltva</string>
+    <string name="ratings_disabled">Értékelések kikapcsolva</string>
     <string name="loading_video">Videó betöltése…</string>
     <string name="open_in_browser">Megnyitás böngészőben</string>
     <string name="open_with">Megnyitás ezzel…</string>
     <string name="share">Megosztás</string>
-    <string name="share_via">Megosztás ezzel</string>
+    <string name="share_via">Megosztás ezzel…</string>
     <string name="copy_url">Az URL másolása</string>
     <string name="url_copied_to_clipboard">Az URL a vágólapra másolva.</string>
     <string name="mark_watched">Megjelölés megnézettként</string>
     <string name="mark_unwatched">Megjelölés nem megnézettként</string>
-    <string name="error_get_comments">Hiba történt a hozzászólások lekérésekor.</string>
-    <string name="error_get_comments_no_network">A hozzászólások lekéréséhez hálózati elérés szükséges.</string>
+    <string name="error_get_comments">Nem sikerült lekérni a hozzászólásokat.</string>
+    <string name="error_get_comments_no_network">Csatkakozzon az internetre a hozzászólások lekéréséhez.</string>
     <string name="no_video_comments">A videó alatt nincsenek hozzászólások, vagy le vannak tiltva.</string>
     <string name="view_replies">Válaszok megtekintése</string>
     <string name="hide_replies">Válaszok elrejtése</string>
@@ -29,13 +29,13 @@
     <string name="play">Lejátszás</string>
     <string name="cancel">Mégse</string>
     <string name="clear">Törlés</string>
-    <string name="should_resume">Ott akarja folytatni, ahol abbahagyta\?</string>
+    <string name="should_resume">Ott folytatja, ahol abbahagyta\?</string>
     <string name="resume">Folytatás</string>
-    <string name="error_video_parse_error">A videó lejátszása nem indítható el, a hibaüzenet: <br/><br/> %s.</string>
-    <string name="error_downloaded_file_is_corrupted">A letöltött videófájl <b>sérültnek</b> tűnik – a hibaüzenet: <br/><br/>%s. <br/><br/> Le akarja <b>törölni</b> a fájlt\?</string>
+    <string name="error_video_parse_error">Nem sikerült elindítani a videót: <br/><br/> %s.</string>
+    <string name="error_downloaded_file_is_corrupted">A letöltött videó <b>sérültnek</b> tűnik : <br/><br/> %s. <br/><br/> <b>Törli</b> a fájlt\?</string>
     <string name="reload_video">Videó Újra Töltése</string>
-    <string name="warning_metered_network_play">Az eszköze forgalmi díjas kapcsolatot használ. Hogy elkerülje az extra adatforgalommal járó költségeket, javasolt forgalmi díj mentes hálózat használata. Ennek ellenére lejátszaná a videót\\\?</string>
+    <string name="warning_metered_network_play">Először csatlakozzon egy nem mért hálózathoz, hogy elkerülje az adathasználati díjakat. Mégis lejátssza a videót\?</string>
     <string name="metered_network">Forgalmi Díjas Hálózatok</string>
-    <string name="metered_network_blocked_by_policy">Letöltés blokkolva, mert az eszköze forgalmi díjas hálózathoz csatlakozik.</string>
+    <string name="metered_network_blocked_by_policy">A letöltés tiltva van, mert forgalmi díjas hálózathoz csatlakozik.</string>
     <string name="warning_metered_network_disable">Ne kérdezze újra.</string>
 </resources>
