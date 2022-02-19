@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="download_video">வீடியோவைப் பதிவிறக்கவும்</string>
+    <string name="download_video">காணொளியை பதிவிறக்கவும்</string>
     <string name="unable_to_delete_file">பதிவிறக்கம் செய்யப்பட்ட \'%s\' கோப்பை நீக்க முடியவில்லை.</string>
     <string name="download">பதிவிறக்கம்</string>
     <string name="downloads">பதிவிறக்கங்கள்</string>
@@ -8,4 +8,10 @@
     <string name="starting_video_download">\'%s\' பதிவிறக்குகிறது…</string>
     <string name="video_download_stream_error">\'%s\' ஐப் பதிவிறக்க முடியவில்லை.</string>
     <string name="download_failed_because">%2$s என்பதால் %1$sஐப் பதிவிறக்க முடியவில்லை.</string>
+    <string name="playing_video_file_missing">பதிவிறக்கப்பட்ட காணொளி இல்லாத காரணத்தால் இணையத்திலிருந்து காணொளியை ஓட்டப்படுகிறது.</string>
+    <string name="video_stream_not_found_with_request_resolution">கோரிட்ட %1$s-%2$s தெளிவுத்திறன் அளவிற்குள் காணொளி ஓட்டம் கிடைக்கவில்லை</string>
+    <string name="external_storage_not_available">இக்கோப்பை பதிவிறக்கம் செய்ய சேமிப்புக்கு அனுமதி வழங்கவும்.</string>
+    <string name="video_downloaded">\'%s\' பதிவிறக்கப்பட்டது.</string>
+    <string name="delete_download">பதிவிறக்கத்தை நீக்கவும்</string>
+    <string name="no_downloaded_videos_text">இங்கே காணொளிகளைக் காண பதிவிறக்கம் செய்யவும்.</string>
 </resources>
