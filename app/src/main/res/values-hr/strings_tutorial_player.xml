@@ -9,5 +9,5 @@
     <string name="tutorial_slide_3">Povuci ← → za kretanje prema naprijed ili natrag.</string>
     <string name="tutorial_slide_4">Povuci ↑ ↓ za prilagođavanje glasnoće.</string>
     <string name="tutorial_slide_5">Povuci ↑ ↓ za podešavanje svjetline.</string>
-    <string name="tutorial_slide_6">Dodirni dvaput za pauziranje ili pokretanje videozapisa.</string>
+    <string name="tutorial_slide_6">Dodirni dvaput za zaustavljanje ili pokretanje videa.</string>
 </resources>
