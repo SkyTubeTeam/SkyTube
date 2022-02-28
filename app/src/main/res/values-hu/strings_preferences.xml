@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="preferences">Beállítások</string>
-    <string name="key_preferences">beállítások</string>
+    <string name="preferences">Előnyben részesítés</string>
+    <string name="key_preferences">előnyben részesítés</string>
     <string name="pref_video_player_category">Videólejátszó</string>
     <string name="pref_title_choose_player">Videólejátszó</string>
     <string name="pref_summary_choose_player">A használandó videólejátszó: %s</string>
@@ -36,7 +36,7 @@
     <string name="pref_title_updates">Frissítések</string>
     <string name="pref_summary_updates">Frissítések ellenőrzése.</string>
     <string name="pref_title_license">Copylefted Libre Licensz</string>
-    <string name="pref_summary_license">GPLv3+</string>
+    <string name="pref_summary_license">GPL v3+</string>
     <string name="i_agree">Elfogadom</string>
     <!-- extracted from  YouTube.com > 3 dot menu > Language -->
     <!-- extracted from:  https://developers.google.com/youtube/v3/docs/i18nLanguages/list -->
