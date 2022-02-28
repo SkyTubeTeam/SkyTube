@@ -4,14 +4,14 @@
     <string name="downloads">Letöltések</string>
     <string name="download_video">Videó letöltése</string>
     <string name="starting_video_download">\'%s\' letöltése…</string>
-    <string name="video_download_stream_error">Nem sikerült letölteni: \'%s\'.</string>
+    <string name="video_download_stream_error">Nem sikerült letölteni \'%s\'.</string>
     <string name="delete_download">Letöltés törlése</string>
     <string name="video_downloaded">\'%s\' letöltve.</string>
     <string name="no_downloaded_videos_text">Töltsön le néhány videót, hogy megtalálja őket itt.</string>
     <string name="playing_video_file_missing">Lejátszás közvetlenül a hálózatról, mivel nem található letölthető fájl.</string>
     <string name="external_storage_not_available">A fájl letöltéséhez biztosítson hozzáférést a külső tárolóhoz.</string>
     <string name="video_stream_not_found_with_request_resolution">Nem található videó a kért %1$s és %2$s felbontás között</string>
-    <string name="warning_metered_network_download">Töltse le a videót a mért hálózatról, amelyhez csatlakozik\?</string>
-    <string name="unable_to_delete_file">Nem lehet törölni a(z) \'%s\' letöltött fájlt</string>
-    <string name="download_failed_because">Nem sikerült letölteni a(z) %1$s-t mert %2$s</string>
+    <string name="warning_metered_network_download">Letölti a videót a mért hálózatról, amelyhez csatlakozik\?</string>
+    <string name="unable_to_delete_file">Nem lehet törölni a(z) \'%s\' letöltött fájlt .</string>
+    <string name="download_failed_because">Nem sikerült letölteni a(z) %1$s-t mert %2$s .</string>
 </resources>
