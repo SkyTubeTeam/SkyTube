@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="update_available">有新版本可用</string>
-    <string name="update_dialog_msg">有新版本的 SkyTube 可用。版本 %s 將被安裝。</string>
+    <string name="update_dialog_msg">有新版本的 SkyTube 可用。將安裝 %s 版。</string>
     <string name="up_to_date">已是最新</string>
     <string name="up_to_date_msg">您已安裝了最新版本的 SkyTube。</string>
     <string name="update">更新</string>
-    <string name="later">更後的</string>
+    <string name="later">之後再說</string>
     <string name="update_failure">無法安裝新版本的應用程式。</string>
     <string name="downloading">正在下載…</string>
-    <string name="release_notes">在 %s 中變更</string>
+    <string name="release_notes">%s 中的變更</string>
 </resources>
