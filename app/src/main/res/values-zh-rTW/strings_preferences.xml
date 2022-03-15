@@ -135,10 +135,10 @@
     <string name="pref_video_download_minimum_resolution_title">最小影片下載解析度</string>
     <string name="pref_video_download_maximum_resolution_summary">影片下載的最大解析度為：%s</string>
     <string name="pref_video_download_maximum_resolution_title">最大影片下載解析度</string>
-    <string name="pref_summary_minimum_res">選取您的最小解析度：%s</string>
-    <string name="pref_title_minimum_res">最小解析度</string>
-    <string name="pref_summary_maximum_res">選取您的最大解析度：%s</string>
-    <string name="pref_title_maximum_res">最大解析度</string>
+    <string name="pref_summary_minimum_res">選取最低解析度：%s</string>
+    <string name="pref_title_minimum_res">最低解析度</string>
+    <string name="pref_summary_maximum_res">選取最高解析度：%s</string>
+    <string name="pref_title_maximum_res">最高解析度</string>
     <string name="pref_key_video_quality_for_downloads_summary">最佳化為：%s</string>
     <string name="pref_key_video_quality_for_downloads_title">下載時的影片品質選取</string>
     <string name="pref_key_video_quality_metered_summary">最佳化為：%s</string>
