@@ -9,7 +9,7 @@
     <string name="error_get_video_desc">無法擷取影片說明。</string>
     <string name="error_invalid_url">無效的影片網址：%s</string>
     <string name="warning_live_video">目前無法播放直播串流。要用別的應用程式開啟嗎？</string>
-    <string name="ratings_disabled">停用評等</string>
+    <string name="ratings_disabled">評價已關閉</string>
     <string name="loading_video">正在載入影片…</string>
     <string name="open_in_browser">在網頁瀏覽器中開啟</string>
     <string name="open_with">開啟用…</string>
