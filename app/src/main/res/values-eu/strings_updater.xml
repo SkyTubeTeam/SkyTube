@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="downloading">Deskargatzen…</string>
-    <string name="update_failure">Ezin da aplikazioa eguneratzea.</string>
+    <string name="update_failure">Ezin izan da aplikazioaren bertsio berria instalatu.</string>
     <string name="later">Geroago</string>
     <string name="update">Eguneratze</string>
     <string name="release_notes">%s -ren aldaketak</string>
-    <string name="up_to_date_msg">SkyTuberen azken bertsioa duzu.</string>
+    <string name="up_to_date_msg">SkyTube-ren bertsio berriena instalatuta daukazu.</string>
     <string name="up_to_date">Eguneratua</string>
     <string name="update_dialog_msg">SkyTuberen bertsio berria eskuragarri dago. Bertsio %s jarriko da.</string>
     <string name="update_available">Bertsio berria eskuragarri</string>
