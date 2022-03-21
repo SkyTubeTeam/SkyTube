@@ -9,5 +9,5 @@
     <string name="page_counter">%2$d 的 %1$d</string>
     <string name="skip">跳过</string>
     <string name="done">完成</string>
-    <string name="next">"下一个 "</string>
+    <string name="next">下一个</string>
 </resources>
