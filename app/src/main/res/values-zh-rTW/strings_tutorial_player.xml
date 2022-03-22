@@ -2,7 +2,7 @@
 <resources>
     <string name="tutorial_slide_1">向左滑即可檢視留言。</string>
     <string name="tutorial_slide_6">點兩下即可暫停／播放影片。</string>
-    <string name="next">"下一個 "</string>
+    <string name="next">下一個</string>
     <string name="done">完成</string>
     <string name="skip">略過</string>
     <string name="page_counter">%2$d 之 %1$d</string>
