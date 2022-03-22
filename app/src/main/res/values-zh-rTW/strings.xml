@@ -2,7 +2,7 @@
 <resources>
     <string name="could_not_get_videos">無法取得 %s 影片。</string>
     <string name="could_not_get_channel">無法下載頻道資訊。</string>
-    <string name="views">%,d 檢視</string>
+    <string name="views">%,d 次觀看</string>
     <string name="error">錯誤</string>
     <string name="ok">確定</string>
     <string name="search_videos">搜尋影片</string>
