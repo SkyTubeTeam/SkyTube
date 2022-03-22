@@ -3,7 +3,7 @@
     <string name="preferences">偏好設定</string>
     <string name="pref_languages_filter_category">語言和區域過濾</string>
     <string name="pref_title_preferred_regions">偏好的區域</string>
-    <string name="pref_summary_preferred_regions">選擇偏好的區域。這用在「特選」影片類別中篩選出影片：%s</string>
+    <string name="pref_summary_preferred_regions">選擇用於取得「特選」影片的區域：%s</string>
     <string name="pref_title_preferred_languages">偏好的語言</string>
     <string name="pref_video_player_category">影片播放器</string>
     <string name="pref_title_choose_player">影片播放器</string>
@@ -29,17 +29,17 @@
     <string name="pref_about_category">關於</string>
     <string name="pref_title_website">網站</string>
     <string name="pref_title_credits">致謝</string>
-    <string name="pref_summary_credits">使此應用程式成為可行的人員和專案。</string>
+    <string name="pref_summary_credits">本 app 背後的重要人物及自由專案。</string>
     <string name="pref_title_version">版本</string>
     <string name="pref_title_updates">更新</string>
     <string name="pref_summary_updates">檢查新版本。</string>
     <string name="pref_title_license">著作傳式自由使用條款</string>
     <string name="pref_summary_license">GPLv3+</string>
-    <string name="app_license">版權所有©2015-2018 Ramon Mifsud
+    <string name="app_license">版權所有 © 2015–2018 Ramon Mifsud
 \n
-\n這個程式是自由軟體：您可以根據自由軟體基金會之法定發佈(授權條款第三版)，在 GNU 通用公共授權條款下，您可以重新發佈和修改它。
+\n這個程式是自由軟體：您可以在自由軟體基金會發佈的 GNU 通用公共授權條款（授權條款第三版）的規範下，重新發佈和修改它。
 \n
-\n 本程式發佈是希望它有用處，但不負任何擔保；不論是明確的，還是隱含的，都不提供任何類型的擔保。請參閱 GNU 通用公共授權條款獲取更多細節。
+\n本程式發佈是希望它有用處，但不負任何擔保；不論是明確的，還是隱含的，都不提供任何類型的擔保。細節請參閱 GNU 通用公共授權條款。
 \n
 \n您應該已經連同這個程式收到一份 GNU 通用公共授權條款的副本。如果沒有，請參閱 &lt;http://www.gnu.org/licenses/&gt;</string>
     <string name="i_agree">我同意</string>
@@ -84,8 +84,8 @@
     <string name="pref_title_clear_playback_status">清除播放狀況資料</string>
     <string name="pref_summary_clear_playback_status">清除所有影片的播放進度。</string>
     <string name="pref_playback_status_cleared">播放狀況資料已清除。</string>
-    <string name="pref_title_channel_filter_method">頻道篩選方法</string>
-    <string name="pref_summary_channel_filter_method">選擇頻道篩選時方法：%s</string>
+    <string name="pref_title_channel_filter_method">頻道過濾方法</string>
+    <string name="pref_summary_channel_filter_method">選擇頻道過濾方法：%s</string>
     <string name="disabled">已停用</string>
     <string name="pref_title_channel_whitelist">頻道白名單</string>
     <string name="pref_summary_channel_whitelist">允許的頻道清單。</string>
@@ -125,13 +125,13 @@
     <string name="pref_summary_hide_tabs">選擇不要顯示的分頁。必須重新啟動。</string>
     <string name="pref_title_hide_tabs">隱藏分頁</string>
     <string name="pref_network_downloads_category">網路與下載</string>
-    <string name="pref_summary_autocast">選取在使用其他應用程式在 SkyTube 中打開影片時要使用的 Chromecast 裝置。</string>
+    <string name="pref_summary_autocast">在 SkyTube 中使用其他影片 app 時用於播放的 Chromecast 裝置。</string>
     <string name="pref_title_chromecast_none">無</string>
     <string name="key_preferences">偏好設定</string>
     <string name="pref_video_continuous_repeat_toggle">循環播放</string>
-    <string name="pref_video_download_minimum_resolution_summary">影片下載的最小解析度為：%s</string>
+    <string name="pref_video_download_minimum_resolution_summary">最小將下載 %s 的影片</string>
     <string name="pref_video_download_minimum_resolution_title">最低影片下載解析度</string>
-    <string name="pref_video_download_maximum_resolution_summary">影片下載的最大解析度為：%s</string>
+    <string name="pref_video_download_maximum_resolution_summary">最大將下載 %s 的影片</string>
     <string name="pref_video_download_maximum_resolution_title">最高影片下載解析度</string>
     <string name="pref_summary_minimum_res">選取最低解析度：%s</string>
     <string name="pref_title_minimum_res">最低解析度</string>
@@ -149,7 +149,7 @@
     <string name="pref_title_metered_network_usage">計量網路使用方法</string>
     <string name="pref_summary_maximum_res_metered">選取當您透過計量網路觀看串流時的最高解析度：%s</string>
     <string name="pref_title_maximum_res_metered">計量網路的最高解析度</string>
-    <string name="pref_summary_minimum_res_metered">選取當您透過計量網路觀看串流時的最低解析度：%s</string>
+    <string name="pref_summary_minimum_res_metered">選取透過計量付費網路（即非吃到飽方案）串流時的最低解析度：%s</string>
     <string name="pref_title_minimum_res_metered">計量網路的最低解析度</string>
     <string name="pref_category_metered_network">計量網路</string>
     <string name="no_resolution_specified">無</string>
