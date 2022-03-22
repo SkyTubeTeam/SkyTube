@@ -14,7 +14,7 @@
     <string name="open_in_browser">在網頁瀏覽器中開啟</string>
     <string name="open_with">開啟用…</string>
     <string name="share">分享</string>
-    <string name="share_via">分享透過</string>
+    <string name="share_via">透過……分享</string>
     <string name="copy_url">複製網址</string>
     <string name="url_copied_to_clipboard">網址複製到剪貼簿。</string>
     <string name="error_get_comments">無法擷取留言。</string>
@@ -34,8 +34,8 @@
     <string name="error_video_parse_error">無法開始影片：<br/> <br/> %s。</string>
     <string name="error_downloaded_file_is_corrupted">下載完的影片看似<b>已損毀</b>： <br/> <br/> %s。 <br/> <br/> 要<b>刪除</b>檔案嗎？</string>
     <string name="reload_video">重新載入影片</string>
-    <string name="metered_network_blocked_by_policy">因為您的裝置已連線至計量網路，所以下載被封鎖。</string>
+    <string name="metered_network_blocked_by_policy">已阻止下載，因為您正連線至計量付費網路（即非吃到飽方案）。</string>
     <string name="warning_metered_network_disable">不要再問。</string>
-    <string name="warning_metered_network_play">您的裝置已連線至計量網路。為了避免額外的資料使用費，建議連線至未計量的網路。仍要播放嗎？</string>
+    <string name="warning_metered_network_play">為避免流量使用費，請先連線至非計量付費網路（即吃到飽方案）。還是您仍要播放影片？</string>
     <string name="metered_network">計量網路</string>
 </resources>
