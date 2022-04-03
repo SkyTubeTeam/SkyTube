@@ -629,7 +629,7 @@
     <string name="pref_title_lang_detection_video_filtering">Video-language Filter</string>
     <string name="pref_key_lang_detection_video_filtering" translatable="false">pref_key_block_videos_lang_detection</string>
     <string name="pref_summary_lang_detection_video_filtering">Use a lot of resources to detect video language and block non-preferred language(s).</string>
-    <string name="setting_updated">Refresh videos to use the new settting.</string>
+    <string name="setting_updated">Refresh videos to use the new setting.</string>
     <string name="pref_other_filters_category">Other Filters</string>
     <string name="pref_title_low_views_filter">Views</string>
     <string name="pref_key_low_views_filter" translatable="false">pref_key_low_views_filter</string>
@@ -699,4 +699,43 @@
     <string name="pref_key_default_content_country" translatable="false">pref_key_default_content_country</string>
     <string name="pref_title_default_content_country">Default content country</string>
     <string name="pref_summary_default_content_country">Show content intended for this country: %s</string>
+
+    <!--
+        SPONSORBLOCK
+    -->
+    <string name="pref_sponsorblock_category">SponsorBlock</string>
+    <string name="pref_general">General</string>
+    <string name="pref_details">Details</string>
+    <string name="pref_title_enable_sponsorblock">Enable SponsorBlock</string>
+    <string name="pref_summary_enable_sponsorblock">Automatically skip video segments that are dedicated to sponsors, interaction reminders and many more</string>
+    <string name="pref_title_sponsorblock_category_list">Skip Segments</string>
+    <string name="pref_summary_sponsorblock_category_list">Choose which categories to skip</string>
+    <string name="pref_title_credit_sponsorblock">Credits</string>
+    <string name="pref_summary_credit_sponsorblock">Uses SponsorBlock data from https://sponsor.ajay.app</string>
+    <string-array name="sponsorblock_filtering_list" translatable="false">
+        <item>@string/sponsorblock_category_sponsor</item>
+        <item>@string/sponsorblock_category_selfpromo</item>
+        <item>@string/sponsorblock_category_interaction</item>
+        <item>@string/sponsorblock_category_music_offtopic</item>
+        <item>@string/sponsorblock_category_intro</item>
+        <item>@string/sponsorblock_category_outro</item>
+        <item>@string/sponsorblock_category_preview</item>
+        <item>@string/sponsorblock_category_filler</item>
+    </string-array>
+    <string-array name="sponsorblock_filtering_list_values" translatable="false">
+        <item>sponsor</item>
+        <item>selfpromo</item>
+        <item>interaction</item>
+        <item>music_offtopic</item>
+        <item>intro</item>
+        <item>outro</item>
+        <item>preview</item>
+        <item>filler</item>
+    </string-array>
+    <string-array name="sponsorblock_filtering_list_default_values" translatable="false">
+        <item>sponsor</item>
+        <item>selfpromo</item>
+        <item>interaction</item>
+        <item>music_offtopic</item>
+    </string-array>
 </resources>

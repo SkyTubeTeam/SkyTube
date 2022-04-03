@@ -75,19 +75,40 @@
 		<TextView
 			android:id="@id/exo_position"
 			style="@style/VideoPlayerSeekBarTetView"
-			android:text="0:01"/>
+			android:text="0:01"
+			android:layout_weight="1"/>
 
-		<com.google.android.exoplayer2.ui.DefaultTimeBar
-			android:id="@id/exo_progress"
+		<LinearLayout
+			android:id="@+id/exo_timeline_inner"
 			android:layout_width="0dp"
-			android:layout_height="wrap_content"
-			android:layout_weight="1"
-			app:played_color="@color/video_player_v2_seek_bar"/>
+			android:layout_height="26dp"
+			android:gravity="center_horizontal"
+			android:orientation="vertical"
+			android:layout_weight="20">
+
+			<com.google.android.exoplayer2.ui.DefaultTimeBar
+				android:id="@id/exo_progress"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				app:played_color="@color/video_player_v2_seek_bar"/>
+
+			<free.rm.skytube.businessobjects.Sponsorblock.SBTimeBarView
+				android:id="@+id/exo_sponsorblock_progress"
+				android:layout_width="match_parent"
+				android:layout_height="4dp"
+				android:layout_marginTop="-15dp"
+				android:layout_marginStart="8dp"
+				android:layout_marginLeft="8dp"
+				android:layout_marginEnd="8dp"
+				android:layout_marginRight="8dp"/>
+
+		</LinearLayout>
 
 		<TextView
 			android:id="@id/exo_duration"
 			style="@style/VideoPlayerSeekBarTetView"
-			android:text="19:00"/>
+			android:text="19:00"
+			android:layout_weight="1"/>
 
 	</LinearLayout>
 

@@ -30,6 +30,12 @@
         app:title="@string/pref_video_blocker_category" />
 
     <Preference
+        app:fragment="free.rm.skytube.gui.fragments.preferences.SponsorblockPreferenceFragment"
+        app:icon="@drawable/ic_money_off"
+        app:key="pref_sponsorblock"
+        app:title="@string/pref_sponsorblock_category" />
+
+    <Preference
         app:fragment="free.rm.skytube.gui.fragments.preferences.BackupPreferenceFragment"
         app:icon="@drawable/ic_pref_backup"
         app:key="pref_import_export"
