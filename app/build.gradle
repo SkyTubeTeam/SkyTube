@@ -36,8 +36,7 @@ android {
             buildConfigField "String", "CHROMECAST_APP_ID", "\"39E8D587\""
         }
         debug {
-            minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            minifyEnabled false
             buildConfigField "String", "CHROMECAST_APP_ID", "\"29A66E17\"" // dev
         }
         snapshot {

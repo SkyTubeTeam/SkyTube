@@ -18,6 +18,17 @@
 	<color name="dialog_row_0">#F0F0F0</color>
 	<color name="dialog_row_1">@color/dialog_backgound</color>
 
+	<!--
+		Sponsorblock, contains transparency
+	-->
+	<color name="sponsorblock_category_sponsor">#B300d400</color>
+	<color name="sponsorblock_category_selfpromo">#B3ffff00</color>
+	<color name="sponsorblock_category_interaction">#B3cc00ff</color>
+	<color name="sponsorblock_category_music_offtopic">#B3ff9900</color>
+	<color name="sponsorblock_category_intro">#B300ffff</color>
+	<color name="sponsorblock_category_outro">#B30202ed</color>
+	<color name="sponsorblock_category_preview">#B3008fd6</color>
+	<color name="sponsorblock_category_filler">#B37300FF</color>
 
 	<!--
 		Subs Drawer Colours
