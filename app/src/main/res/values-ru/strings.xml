@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="could_not_get_videos">Загрузить видео %s не удаётся.</string>
-    <string name="could_not_get_channel">Не удалось загрузить информацию о канале!</string>
+    <string name="could_not_get_channel">Не удалось загрузить информацию о канале.</string>
     <string name="views">%,d просмотров</string>
     <string name="error">Ошибка</string>
     <string name="ok">ОК</string>
