@@ -88,10 +88,6 @@ You can help us translate this app into your native language by visiting [SkyTub
 </a>
 
 <a href="https://skytube-app.com#features">
-<img src="https://skytube-app.com/assets/img/screenshots/subs.jpg" alt="Subscriptions" height="250px"/>
-</a>
-
-<a href="https://skytube-app.com#features">
 <img src="https://skytube-app.com/assets/img/screenshots/channel.jpg" alt="Browse video" height="250px"/>
 </a>
 
@@ -100,7 +96,11 @@ You can help us translate this app into your native language by visiting [SkyTub
 </a>
 
 <a href="https://skytube-app.com#features">
-<img src="https://raw.githubusercontent.com/JamesCullum/SkyTube/master/screenshots/sb_skipped.png" alt="SponsorBlock" width="250px"/>
+<img src="https://skytube-app.com/assets/img/screenshots/subs.jpg" alt="Subscriptions" height="250px"/>
+</a>
+
+<a href="https://skytube-app.com#features">
+<img src="https://raw.githubusercontent.com/JamesCullum/SkyTube/master/screenshots/sb_skipped.png" alt="SponsorBlock" width="450px"/>
 </a>
 
 ### Tablet
