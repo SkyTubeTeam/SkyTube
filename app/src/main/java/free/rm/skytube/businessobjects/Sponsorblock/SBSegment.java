@@ -1,7 +1,5 @@
 package free.rm.skytube.businessobjects.Sponsorblock;
 
-import android.util.Log;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,5 +27,15 @@ public class SBSegment {
 
     public double getEndPos() {
         return endPos;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("SBSegment{");
+        sb.append("category='").append(category).append('\'');
+        sb.append(", startPos=").append(startPos);
+        sb.append(", endPos=").append(endPos);
+        sb.append('}');
+        return sb.toString();
     }
 }

@@ -4,7 +4,9 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -14,8 +16,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Arrays;
-import java.util.HashSet;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 import free.rm.skytube.BuildConfig;
@@ -29,6 +32,36 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 public class SBTasks {
     private static final String TAG = SBTasks.class.getSimpleName();
 
+    public static class LabelAndColor{
+        public final @ColorRes int color;
+        public final @StringRes int label;
+        LabelAndColor(@ColorRes int color, @StringRes int label) {
+            this.color = color;
+            this.label = label;
+        }
+    }
+    private static final Map<String, LabelAndColor> categoryMapping;
+    static {
+        Map<String, LabelAndColor> colors = new HashMap();
+        colors.put("sponsor", new LabelAndColor(R.color.sponsorblock_category_sponsor, R.string.sponsorblock_category_sponsor));
+        colors.put("selfpromo", new LabelAndColor(R.color.sponsorblock_category_selfpromo, R.string.sponsorblock_category_selfpromo));
+        colors.put("interaction", new LabelAndColor(R.color.sponsorblock_category_interaction, R.string.sponsorblock_category_interaction));
+        colors.put("music_offtopic", new LabelAndColor(R.color.sponsorblock_category_music_offtopic, R.string.sponsorblock_category_music_offtopic));
+        colors.put("intro", new LabelAndColor(R.color.sponsorblock_category_intro, R.string.sponsorblock_category_intro));
+        colors.put("outro", new LabelAndColor(R.color.sponsorblock_category_outro, R.string.sponsorblock_category_outro));
+        colors.put("preview", new LabelAndColor(R.color.sponsorblock_category_preview, R.string.sponsorblock_category_preview));
+        colors.put("filler", new LabelAndColor(R.color.sponsorblock_category_filler, R.string.sponsorblock_category_filler));
+        categoryMapping = Collections.unmodifiableMap(colors);
+    }
+
+    public static LabelAndColor getLabelAndColor(String category) {
+        return categoryMapping.get(category);
+    }
+
+    public static Iterable<Map.Entry<String, LabelAndColor>> getAllCategories() {
+        return categoryMapping.entrySet();
+    }
+
     /**
      * A task that retrieves information from the Sponsorblock API about a youtube video
      *
@@ -37,7 +70,7 @@ public class SBTasks {
     public static Maybe<SBVideoInfo> retrieveSponsorblockSegments(@NonNull Context context, @NonNull VideoId videoId) {
         return Maybe.fromCallable(() -> {
             Set<String> filterList = SkyTubeApp.getSettings().getSponsorblockCategories();
-            if(filterList.size() == 0) return new SBVideoInfo(); // enabled but all options turned off probably means "turned off but didn't know how to disable"
+            if(filterList.size() == 0) return null; // enabled but all options turned off probably means "turned off but didn't know how to disable"
 
             StringBuilder query = new StringBuilder("[");
             for(String filterCategory : filterList) {
@@ -56,7 +89,7 @@ public class SBTasks {
                 // FileNotFoundException = 404, which the API triggers both if the API call is invalid or no segment was found
                 // Hence we just assume that it's usually due to no segment (errors confuse users), and give a log for developers
                 Log.w(TAG, "Failed retrieving Sponsorblock info: ", e);
-                return new SBVideoInfo();
+                return null;
             }
         })
                 .observeOn(AndroidSchedulers.mainThread())

@@ -68,7 +68,6 @@ import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import org.schabi.newpipe.extractor.StreamingService;
 import org.schabi.newpipe.extractor.stream.StreamInfo;
 
-import java.lang.reflect.Field;
 import java.util.Locale;
 
 import free.rm.skytube.R;
@@ -106,6 +105,7 @@ import free.rm.skytube.gui.businessobjects.adapters.CommentsAdapter;
 import free.rm.skytube.gui.businessobjects.fragments.ImmersiveModeFragment;
 import free.rm.skytube.gui.businessobjects.views.Linker;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import io.reactivex.rxjava3.internal.functions.Functions;
 
 /**
  * A fragment that holds a standalone YouTube player (version 2).
@@ -137,7 +137,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
     private boolean videoIsPlaying;
     private PlaybackStateListener playbackStateListener = null;
 
-    SBVideoInfo SBVideoInfo = new SBVideoInfo();
+    private SBVideoInfo sponsorBlockVideoInfo;
 
     @Nullable
     @Override
@@ -385,36 +385,38 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
         setTextAndVisibility(videoDescriptionBinding.videoDescDislikes, hasDislikes, video.getDislikeCount());
         setValueAndVisibility(videoDescriptionBinding.videoDescLikesBar, video.isThumbsUpPercentageSet(), video.getThumbsUpPercentage());
         setVisibility(videoDescriptionBinding.videoDescRatingsDisabled, !hasLikes && !hasDislikes);
+        initSponsorBlock();
+    }
 
-        if (SBVideoInfo.isLoaded()) {
+    private void setupSponsorBlockVideoInfo(SBVideoInfo sponsorBlockVideoInfo) {
+        this.sponsorBlockVideoInfo = sponsorBlockVideoInfo;
+        initSponsorBlock();
+    }
+
+    private void initSponsorBlock() {
+        if (sponsorBlockVideoInfo != null) {
             Log.d(TAG, "SBInfo has loaded");
             Handler handler = new Handler(Looper.getMainLooper());
-            for (SBSegment segment : SBVideoInfo.getSegments()) {
-                long startPosMs = Double.valueOf(segment.getStartPos() * 1000).longValue();
-
+            for (SBSegment segment : sponsorBlockVideoInfo.getSegments()) {
+                long startPosMs = Math.round(segment.getStartPos() * 1000);
                 player.createMessage((messageType, payload) -> {
                     SBSegment payloadSegment = (SBSegment) payload;
 
-                    handler.post(new Runnable() {
-                        public void run() {
-                            String rawCategory = payloadSegment.getCategory();
-                            String categoryLabel = rawCategory;
+                    handler.post(() -> {
+                        SBTasks.LabelAndColor labelAndColor = SBTasks.getLabelAndColor(payloadSegment.getCategory());
 
-                            try {
-                                Field resourceField = R.string.class.getDeclaredField("sponsorblock_category_" + rawCategory);
-                                int resourceId = resourceField.getInt(resourceField);
-                                categoryLabel = getString(resourceId);
-                            } catch (Exception e) {
-                                Log.w(TAG, "Could not access string field for sponsorblock category: " + rawCategory);
-                            }
-
+                        if (labelAndColor != null) {
+                            String categoryLabel = getString(labelAndColor.label);
                             Toast.makeText(getContext(),
                                     getString(R.string.sponsorblock_skipped, categoryLabel),
                                     Toast.LENGTH_SHORT).show();
+                        } else {
+                            Log.w(TAG, "Unknown sponsorBlock category: "+ payloadSegment.getCategory());
                         }
                     });
 
-                    player.seekTo(Double.valueOf(payloadSegment.getEndPos() * 1000).longValue());
+                    long pos = Math.round(payloadSegment.getEndPos() * 1000);
+                    player.seekTo(pos);
                 })
                         .setHandler(handler)
                         .setPosition(startPosMs)
@@ -424,7 +426,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
             }
 
             SBTimeBarView sbView = (SBTimeBarView) fragmentBinding.getRoot().findViewById(R.id.exo_sponsorblock_progress);
-            sbView.setSegments(SBVideoInfo);
+            sbView.setSegments(sponsorBlockVideoInfo);
         } else {
             Log.d(TAG, "SBInfo not loaded yet");
         }
@@ -735,8 +737,11 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
             compositeDisposable.add(
                     SBTasks.retrieveSponsorblockSegments(requireContext(), youTubeVideo.getVideoId())
                             .subscribe(segments -> {
-                                Log.d(TAG, "Received SB Info " + segments.isLoaded() + " with " + segments.getSegments().size() + " segments for duration of " + segments.getVideoDuration());
-                                SBVideoInfo = segments;
+                                Log.d(TAG, "Received SB Info with " + segments.getSegments().size() + " segments for duration of " + segments.getVideoDuration());
+                                setupSponsorBlockVideoInfo(segments);
+                            }, Functions.ON_ERROR_MISSING, () -> {
+                                Log.d(TAG, "No SB info received for "+youTubeVideo.getVideoId());
+                                setupSponsorBlockVideoInfo(null);
                             })
             );
         }
