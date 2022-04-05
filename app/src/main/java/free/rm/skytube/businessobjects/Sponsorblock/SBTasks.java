@@ -36,8 +36,7 @@ public class SBTasks {
      */
     public static Maybe<SBVideoInfo> retrieveSponsorblockSegments(@NonNull Context context, @NonNull VideoId videoId) {
         return Maybe.fromCallable(() -> {
-            String[] defaultFilterList = SkyTubeApp.getStringArray(R.array.sponsorblock_filtering_list_default_values);
-            Set<String> filterList = SkyTubeApp.getPreferenceManager().getStringSet("pref_key_sponsorblock_category_list", new HashSet<String>(Arrays.asList(defaultFilterList)));
+            Set<String> filterList = SkyTubeApp.getSettings().getSponsorblockCategories();
             if(filterList.size() == 0) return new SBVideoInfo(); // enabled but all options turned off probably means "turned off but didn't know how to disable"
 
             StringBuilder query = new StringBuilder("[");

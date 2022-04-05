@@ -731,7 +731,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
                 youTubeVideo.getChannelId())
         );
 
-        if (SkyTubeApp.getPreferenceManager().getBoolean("pref_key_enable_sponsorblock", false)) {
+        if (SkyTubeApp.getSettings().isSponsorblockEnabled()) {
             compositeDisposable.add(
                     SBTasks.retrieveSponsorblockSegments(requireContext(), youTubeVideo.getVideoId())
                             .subscribe(segments -> {
