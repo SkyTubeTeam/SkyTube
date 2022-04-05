@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="dislikes">%d%% Desatsegin</string>
-    <string name="channel_unwhitelist_error">Ezin da zuri zerrendatik kanala kentzea.</string>
-    <string name="channel_blacklist_error">Ezin da kanala beltz zerrendan ipintzea.</string>
-    <string name="channel_blacklisted">Kanala beltz zerrendan. Mesedez kargatu berriro.</string>
+    <string name="channel_unwhitelist_error">Ezin izan da kendu kanala zerrenda zuritik.</string>
+    <string name="channel_blacklist_error">Ezin izan da kanala zerrenda beltzean.</string>
+    <string name="channel_blacklisted">Freskatu kanalen zerrenda beltza erabiltzeko.</string>
     <string name="block_channel">Blokeatu kanala</string>
-    <string name="configure">Konfiguratu</string>
-    <string name="no_videos_blocked">Ez zuten bideo bat ere blokeatu edoiragazi. Bideo blokeatzilea konfiguratu nahi duzu\?</string>
+    <string name="configure">Konfigurazioa</string>
+    <string name="no_videos_blocked">Bideo-blokeatzailea konfiguratu nahi duzu bideoak blokeatzeko edo iragazteko\?</string>
     <string name="blocked_videos">Bideo blokeatuta</string>
 </resources>

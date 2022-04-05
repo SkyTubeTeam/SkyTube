@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="bookmarks">Záložky</string>
+    <string name="bookmark">Záložka</string>
+    <string name="video_bookmarked">Uloženo do záložek</string>
+    <string name="video_already_bookmarked">Již uloženo</string>
+    <string name="video_bookmarked_error">Video nemohlo být uloženo do záložek.</string>
+    <string name="unbookmark">Odebrat ze záložek</string>
+    <string name="video_unbookmarked">Záložka odebrána</string>
+    <string name="video_was_not_bookmarked">Toto video nebylo uloženo do záložek</string>
+    <string name="video_unbookmarked_error">Nebylo možné odebrat záložku.</string>
+    <string name="no_bookmarked_videos_text">Videa která si přidáte do záložek se objeví tady.</string>
+    <string name="bookmark_share_label">Záložka SkyTube</string>
+    <string name="bookmark_share_invalid_url">Pouze platná adresa URL YouTube se dá uložit do záložek.</string>
+</resources>

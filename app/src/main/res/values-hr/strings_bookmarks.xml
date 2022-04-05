@@ -3,13 +3,13 @@
     <string name="bookmarks">Oznake</string>
     <string name="bookmark">Označi</string>
     <string name="video_bookmarked">Označen</string>
-    <string name="video_bookmarked_error">Nije moguće označiti videozapis.</string>
+    <string name="video_bookmarked_error">Nije bilo moguće označiti video.</string>
     <string name="unbookmark">Odznači</string>
     <string name="video_unbookmarked">Oznaka uklonjena</string>
-    <string name="video_unbookmarked_error">Nije bilo moguće ukloniti oznaku videozapisa.</string>
-    <string name="no_bookmarked_videos_text">Označi neke videozapise kako bi se ovdje mogli pronaći.</string>
+    <string name="video_unbookmarked_error">Nije bilo moguće ukloniti oznaku videa.</string>
+    <string name="no_bookmarked_videos_text">Označi videa kako bi se ovdje mogli pronaći.</string>
     <string name="bookmark_share_invalid_url">Označiti se mogu samo ispravni YouTube URL-ovi.</string>
     <string name="bookmark_share_label">SkyTube oznaka</string>
-    <string name="video_was_not_bookmarked">Videozapis nije bio označen</string>
+    <string name="video_was_not_bookmarked">Video nije bio označen</string>
     <string name="video_already_bookmarked">Već označen</string>
 </resources>

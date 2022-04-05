@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="preferences">Preferințe</string>
+    <string name="pref_summary_maximum_res">Selectați cea mai mare rezoluție: %s</string>
+    <string name="pref_title_maximum_res">Cea mai înaltă rezoluție</string>
+    <string name="pref_title_minimum_res">Cea mai mică rezoluție</string>
+    <string name="key_preferences">preferințe</string>
+    <string name="pref_video_player_category">Player video</string>
+    <string name="pref_summary_minimum_res">Selectați cea mai mică rezoluție: %s</string>
+    <string name="pref_title_choose_player">Player video</string>
+    <string name="pref_category_metered_network">Rețea contorizată</string>
+    <string name="pref_title_minimum_res_metered">Cea mai mică rezoluție pentru rețeaua contorizată</string>
+    <string name="pref_summary_choose_player">Player video de utilizat: %s</string>
+    <string name="no_resolution_specified">Niciunul</string>
+</resources>

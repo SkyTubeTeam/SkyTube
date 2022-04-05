@@ -7,9 +7,9 @@
     <string name="fetching_subscription_videos">正從訂閱的頻道取得影片……</string>
     <string name="fetched_videos_from_channels">已從 %2$d/%3$d 頻道取得了 %1$d 影片。</string>
     <string name="no_new_videos_found">沒有新影片。</string>
-    <string name="no_subscriptions_text">訂閱一些頻道以在此檢視來自它們的新影片。</string>
-    <string name="import_subscriptions_from_youtube">從 YouTube 匯入訂閱</string>
+    <string name="no_subscriptions_text">訂閱頻道即可在此檢視他們的新影片。</string>
+    <string name="import_subscriptions_from_youtube">從 YouTube 匯入訂閱內容</string>
     <string name="notification_channel_feed_title">摘要通知</string>
-    <string name="notification_new_videos_found">%d 個來自訂閱頻道的新影片</string>
+    <string name="notification_new_videos_found">%d 部來自訂閱頻道的新影片</string>
     <string name="open_channel">開啟頻道</string>
 </resources>

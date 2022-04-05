@@ -2,7 +2,7 @@
 <resources>
     <string name="tutorial_slide_1">左にスワイプするとコメントを表示します。</string>
     <string name="tutorial_slide_6">ダブルタップするとビデオを一時停止または再生します。</string>
-    <string name="next">"次へ "</string>
+    <string name="next">次へ</string>
     <string name="done">完了</string>
     <string name="skip">スキップ</string>
     <string name="page_counter">%1$d/%2$d</string>

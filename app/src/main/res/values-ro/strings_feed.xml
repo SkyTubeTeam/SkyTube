@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="feed">Ce este nou</string>
+    <string name="open_channel">Deschide canalul</string>
+    <string name="fetching_subbed_channels_info">Se preiau informații despre canal…</string>
+    <string name="fetching_subbed_channels_info_error">Nu s-au putut prelua informațiile despre canal.</string>
+    <string name="subscribing_to_channels">Abonare la canale…</string>
+    <string name="fetching_subscription_videos">Se preiau videoclipuri de pe canalele abonate…</string>
+    <string name="fetched_videos_from_channels">Au fost obținute %1$d videoclipuri de pe %2$d/%3$d canale.</string>
+    <string name="no_new_videos_found">Nu există videoclipuri noi.</string>
+    <string name="no_subscriptions_text">Abonează-te la unele canale pentru a vedea videoclipuri noi de la ele aici.</string>
+    <string name="import_subscriptions_from_youtube">Importă abonamente de pe YouTube</string>
+    <string name="notification_channel_feed_title">Notificări Feed</string>
+    <string name="notification_new_videos_found">%d videoclipuri noi de la canalele abonate</string>
 </resources>

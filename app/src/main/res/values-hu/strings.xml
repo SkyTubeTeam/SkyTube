@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="could_not_get_videos">Nem lehet elérni a(z) %s videót.</string>
-    <string name="could_not_get_channel">Nem lehet letölteni a csatornainformációkat!</string>
+    <string name="could_not_get_channel">Nem lehet letölteni a csatornainformációkat.</string>
     <string name="could_not_get_channel_detailed">Nem lehet letölteni a csatornainformációkat: „%s”.</string>
     <string name="views">%,d megtekintés</string>
     <string name="error">Hiba</string>
     <string name="ok">Rendben</string>
     <string name="search_videos">Videók keresése</string>
-    <string name="launch_offical_player_error">Hiba történt a hivatalos YouTube lejátszó betöltésekor. Ellenőrizze, hogy telepítve van-e az eszközén.</string>
-    <string name="LIVE">ÉLŐ</string>
+    <string name="launch_offical_player_error">Hiba történt a hivatalos YouTube lejátszó betöltésekor. Ellenőrizze, hogy telepítve van-e.</string>
+    <string name="LIVE">Élő</string>
     <string name="featured">Kiemelt</string>
     <string name="most_popular">Legnépszerűbb</string>
     <string name="video">Videó</string>
@@ -16,12 +16,12 @@
     <string name="num_videos">%d videó</string>
     <string name="playlists">Lejátszási listák</string>
     <string name="could_not_get_playlists">Nem lehet elérni a(z) %s lejátszási listát.</string>
-    <string name="loading">Betöltés …</string>
+    <string name="loading">Betöltés…</string>
     <string name="yes">Igen</string>
     <string name="no">Nem</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="search_channel">Csatornák keresése</string>
     <string name="close">Bezárás</string>
     <string name="trending_in">Felkapott (%s)</string>
-    <string name="recaptcha_challenge_requested">A YouTube blokkolja hálózati kéréseinket, meg kell oldania a reCaptcha feladatot!</string>
+    <string name="recaptcha_challenge_requested">A YouTube azt hiszi, hogy Ön egy bot, ezért először meg kell oldania a reCAPTCHA-t.</string>
 </resources>

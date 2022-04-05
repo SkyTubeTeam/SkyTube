@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="could_not_get_videos">ไม่สามารถเปิดวิดีโอ %s ได้</string>
+    <string name="could_not_get_channel_detailed">ไม่สามารถโหลดข้อมูลของช่องนี้ได้: %s</string>
+    <string name="views">%,d วิว</string>
+    <string name="search_videos">ค้นหาวิดีโอ</string>
+    <string name="LIVE">ไลฟ์</string>
+    <string name="featured">ที่แนะนำ</string>
+    <string name="most_popular">ที่นิยม</string>
+    <string name="trending_in">เทรนด์ (%s)</string>
+    <string name="video">วิดีโอ</string>
+    <string name="error">ข้อผิดพลาด</string>
+    <string name="videos">วิดีโอ</string>
+    <string name="num_videos">%d คลิปวิดีโอ</string>
+    <string name="could_not_get_playlists">ไม่สามารถโหลดเพลย์ลิสต์ %s ได้</string>
+    <string name="close">ปิด</string>
+    <string name="loading">กำลังโหลด…</string>
+    <string name="yes">ใช่</string>
+    <string name="no">ไม่</string>
+    <string name="search_channel">ค้นหาช่อง</string>
+    <string name="could_not_get_channel">ไม่สามารถโหลดข้อมูลของช่องนี้ได้</string>
+    <string name="launch_offical_player_error">ไม่สามารถเปิดเพลยเยอร์ของ YouTube ได้ กรุณาติดตั้งก่อน</string>
+    <string name="playlists">เพลย์ลิสต์</string>
+    <string name="recaptcha_challenge_requested">YouTube คิดไม่คัณไม่ใช่มนุษย์ คุณต้องทำ reCAPTCHA ก่อน</string>
+    <string name="ok">ตกลง</string>
+</resources>

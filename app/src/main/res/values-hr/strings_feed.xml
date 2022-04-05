@@ -7,11 +7,9 @@
     <string name="fetching_subscription_videos">Dohvaćanje videa iz pretplaćenih kanala …</string>
     <string name="fetched_videos_from_channels">Dohvaćeno %1$d videa s %2$d/%3$d kanala.</string>
     <string name="no_new_videos_found">Nema novih videa.</string>
-    <string name="no_subscriptions_text">Nisi pretplaćen na nijedan kanal. 
-\n 
-\nKad se pretplatiš, svi preneseni videozapisi na pretplaćenim kanalima pojavit će se ovdje.</string>
+    <string name="no_subscriptions_text">Pretplati se na neke kanale za prikaz njihovih svježih videa ovdje.</string>
     <string name="import_subscriptions_from_youtube">Uvoz pretplata sa YouTube</string>
     <string name="notification_channel_feed_title">Feed obavijesti</string>
-    <string name="notification_new_videos_found">%d novih videozapisa s pretplaćenih kanala</string>
+    <string name="notification_new_videos_found">%d novih videa s pretplaćenih kanala</string>
     <string name="open_channel">Otvori kanal</string>
 </resources>

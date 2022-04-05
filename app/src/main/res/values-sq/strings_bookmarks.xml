@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="bookmarks">Faqerojtës</string>
+    <string name="bookmark">Faqerojtës</string>
+    <string name="no_bookmarked_videos_text">Faqeruani ca video, që t’i gjeni këtu.</string>
+    <string name="bookmark_share_label">Faqerojtës SkyTube</string>
+    <string name="bookmark_share_invalid_url">Mund të faqeruhen vetëm URL YouTube të vlefshme.</string>
+    <string name="video_bookmarked">E faqerojtur</string>
+    <string name="video_already_bookmarked">Faqeruajtur tashmë</string>
+    <string name="video_bookmarked_error">S’u faqeruajt dot videoja.</string>
+    <string name="unbookmark">Hiqi faqerojtësin</string>
+    <string name="video_unbookmarked">U hoq faqerojtës</string>
+    <string name="video_was_not_bookmarked">Videoja s’u faqeruajt</string>
+    <string name="video_unbookmarked_error">S’u hoq dot faqerojtës videoje.</string>
+</resources>

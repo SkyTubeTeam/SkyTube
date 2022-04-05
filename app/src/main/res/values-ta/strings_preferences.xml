@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="pref_video_player_category">காணொளி ஓட்டி</string>
+    <string name="pref_title_maximum_res">அதிகபட்ச தெளிவுத்திறன்</string>
+    <string name="pref_summary_maximum_res">அதிகபட்ச தெளிவுத்திறனை தேர்ந்தெடுக்கவும்: %s</string>
+    <string name="pref_title_minimum_res">மிகக் குறைந்த தெளிவுத்திறன்</string>
+    <string name="no_resolution_specified">எதுவும் இல்லை</string>
+</resources>

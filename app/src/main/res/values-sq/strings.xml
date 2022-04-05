@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="could_not_get_videos">S’u morën dot %s video.</string>
+    <string name="could_not_get_channel">S’u shkarkuan dot hollësi kanali.</string>
+    <string name="could_not_get_channel_detailed">S’u shkarkuan dot hollësi kanali: %s.</string>
+    <string name="views">%,d parje</string>
+    <string name="error">Gabim</string>
+    <string name="ok">OK</string>
+    <string name="search_videos">Kërkoni Për Video</string>
+    <string name="launch_offical_player_error">S’u nis dot lojtësi zyrtar YouTube. Sigurohuni se është i instaluar.</string>
+    <string name="search_channel">Kërkoni kanal</string>
+    <string name="LIVE">Drejtpërsëdrejti</string>
+    <string name="featured">Të zgjedhura</string>
+    <string name="most_popular">Më Populloret</string>
+    <string name="trending_in">Në modë (%s)</string>
+    <string name="video">Video</string>
+    <string name="videos">Video</string>
+    <string name="num_videos">%d video</string>
+    <string name="playlists">Luajlista</string>
+    <string name="could_not_get_playlists">S’u morën dot %s luajlista.</string>
+    <string name="recaptcha_challenge_requested">YouTube-i mendon se jeni robot, ndaj duhet së pari të zgjidhni një reCAPTCHA.</string>
+    <string name="close">Mbylle</string>
+    <string name="loading">Po ngarkohet…</string>
+    <string name="yes">Po</string>
+    <string name="no">Jo</string>
+</resources>
