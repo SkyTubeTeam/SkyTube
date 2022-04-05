@@ -25,7 +25,9 @@ import androidx.annotation.StringRes;
 import androidx.preference.PreferenceManager;
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
 
@@ -100,6 +102,17 @@ public class Settings {
      */
     public String getStr(int stringResId) {
         return app.getString(stringResId);
+    }
+
+    public Set<String> getSponsorblockCategories() {
+        String[] defaultFilterList = SkyTubeApp.getStringArray(R.array.sponsorblock_filtering_list_default_values);
+        Set<String> filterList = SkyTubeApp.getPreferenceManager().getStringSet("pref_key_sponsorblock_category_list", new HashSet<String>(Arrays.asList(defaultFilterList)));
+
+        return filterList;
+    }
+
+    public boolean isSponsorblockEnabled() {
+        return SkyTubeApp.getPreferenceManager().getBoolean("pref_key_enable_sponsorblock", false);
     }
 
     public boolean isDownloadToSeparateFolders() {

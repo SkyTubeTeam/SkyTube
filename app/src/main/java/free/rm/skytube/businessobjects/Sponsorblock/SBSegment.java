@@ -7,9 +7,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class SBSegment {
-    protected String category;
-    protected double startPos;
-    protected double endPos;
+    private final String category;
+    private final double startPos;
+    private final double endPos;
 
     public SBSegment(JSONObject jsonSegment) throws JSONException {
         category = jsonSegment.getString("category");
