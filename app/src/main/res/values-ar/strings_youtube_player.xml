@@ -8,7 +8,7 @@
     <string name="error_video_streams">حدث خطأ أثناء استرداد مجموعات بث الفيديو.</string>
     <string name="error_get_video_desc">حدث خطا اثناء استرداد وصف الفيديو.</string>
     <string name="error_invalid_url">رابط الفيديو غير صالح: %s</string>
-    <string name="warning_live_video">لا يمكن تشغيل الفيديو في الوقت الراهن . افتح في تطبيق آخر؟</string>
+    <string name="warning_live_video">لا يمكن عرض البث المباشر في الوقت الحالي. هل تود عرضه في تطبيق آخر؟</string>
     <string name="ratings_disabled">تم تعطيل التقييمات</string>
     <string name="loading_video">جارٍ تحميل الفيديو…</string>
     <string name="open_in_browser">فتح في متصفح الويب</string>
@@ -25,9 +25,17 @@
     <string name="play">تشغيل</string>
     <string name="cancel">إلغاء</string>
     <string name="clear">تنظيف</string>
-    <string name="play_video">تشغيل الفيديو</string>
+    <string name="play_video">عرض الفيديو</string>
     <string name="mark_watched">تعليمه كفيديو تمت مشاهدته</string>
     <string name="mark_unwatched">تعليمه كفيديو لم تتم مشاهدته</string>
     <string name="should_resume">هل ترغب في الإستئناف من حيث توقفت؟</string>
     <string name="resume">إستئناف</string>
+    <string name="reload_video">إعادة تحميل الفيديو</string>
+    <string name="warning_metered_network_disable">لا تسألني مرة أخرى.</string>
+    <string name="metered_network">شبكة مقيدة</string>
+    <string name="metered_network_blocked_by_policy">تم حظر التنزيل لأنك متصل عبر شبكة محدودة.</string>
+    <string name="warning_metered_network_play">اتصل بشبكة غير مقيَّدة أولاً، لتجنب دفع رسوم استخدام البيانات. هل تريد عرض الفيديو على أي حال؟</string>
+    <string name="error_video_parse_error">تعذر بدء الفيديو: <br/> <br/> %s.</string>
+    <string name="error_downloaded_file_is_corrupted">يبدو الفيديو الذي تم تنزيله <b>تالفًا</b>: <br/><br/>%s. <br/><br/><b>حذف</b> الملف؟</string>
+    <string name="error_get_comments_no_network">لجلب التعليقات، عليك الإتصال بالإنترنت أولاً.</string>
 </resources>
