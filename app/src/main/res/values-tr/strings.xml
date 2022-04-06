@@ -23,4 +23,5 @@
     <string name="could_not_get_channel_detailed">Kanal bilgileri indirilemedi: %s.</string>
     <string name="trending_in">Öne Çıkanlar (%s)</string>
     <string name="recaptcha_challenge_requested">YouTube sizin bir bot olduğunuzu düşünüyor, bu yüzden önce bir reCAPTCHA çözmelisiniz.</string>
+    <string name="could_not_get_sponsorblock">Sponsorblock bilgisi alınamadı: %s.</string>
 </resources>
