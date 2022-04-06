@@ -38,4 +38,13 @@
     <string name="error_stream_decryption_fail">无法加载YouTube服务的解密码。</string>
     <string name="error_stream_err_unavailable">消息不可用。</string>
     <string name="warning_metered_network_play">首先连接到未计量的网络以避免数据使用开销。是否仍要播放？</string>
+    <string name="sponsorblock_category_music_offtopic">非音乐部分</string>
+    <string name="sponsorblock_category_intro">前言/幕间休息</string>
+    <string name="sponsorblock_category_preview">预览/摘要</string>
+    <string name="sponsorblock_category_selfpromo">自我推广</string>
+    <string name="sponsorblock_skipped">跳过的片段：%s</string>
+    <string name="sponsorblock_category_sponsor">赞助者</string>
+    <string name="sponsorblock_category_interaction">互动提醒</string>
+    <string name="sponsorblock_category_outro">结尾卡片/致谢</string>
+    <string name="sponsorblock_category_filler">过滤器</string>
 </resources>
