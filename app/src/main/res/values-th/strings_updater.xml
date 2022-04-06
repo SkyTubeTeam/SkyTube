@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="update_available">มีอัพเดทใหม่</string>
+    <string name="update_dialog_msg">มีอัพเดทใหม่ จะติดตั้งเวอร์ชั่น %s</string>
+    <string name="up_to_date">เป็นเวอร์ชั่นล่าสุดอยู่แล้ว</string>
+    <string name="up_to_date_msg">เครื่องนี้ได้ติดตั้งเวอร์ชั่นล่าสุดของ SkyTube อยู่แล้ว</string>
+    <string name="release_notes">การเปลี่ยนแปลง %s</string>
+    <string name="update">อัพเดท</string>
+    <string name="later">ไม่ใช่ตอนนี้</string>
+    <string name="update_failure">ไม่สามารถติดตั้งเวอร์ชั่นใหม่</string>
+    <string name="downloading">กำลังดาวน์โหลด…</string>
+</resources>

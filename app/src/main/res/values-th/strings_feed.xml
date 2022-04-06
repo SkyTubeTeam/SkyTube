@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="feed">ฟีด</string>
+    <string name="subscribing_to_channels">กำลังติดตามช่อง…</string>
+    <string name="open_channel">เปิดช่อง</string>
+    <string name="fetching_subbed_channels_info">กำลังดึงข้อมูลของช่อง…</string>
+    <string name="fetching_subbed_channels_info_error">ไม่สามารถดึงข้อมูลของช่องได้</string>
+    <string name="fetching_subscription_videos">กำลังดึงข้อมูลของวิดีโอจากช่องที่ติดตามอยู่…</string>
+    <string name="fetched_videos_from_channels">ได้โหลด %1$d วิดีโอจาก %2$d/%3$d ช่อง</string>
+    <string name="no_new_videos_found">ไม่มีวิดีโอใหม่</string>
+    <string name="no_subscriptions_text">ติดตามช่องจะได้ดูวิดีโอใหม่ของช่องได้ที่นี่</string>
+    <string name="import_subscriptions_from_youtube">นำเข้ารายการติดตามจาก YouTube</string>
+    <string name="notification_channel_feed_title">แจ้งเตื่อนฟีด</string>
+    <string name="notification_new_videos_found">%d วิดีโอใหม่จากช่องที่ติดตามไว้</string>
+</resources>

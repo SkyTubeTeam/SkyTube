@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="could_not_get_videos">Nije bilo moguće dobiti %s videozapisa.</string>
+    <string name="could_not_get_videos">Nije bilo moguće dobiti %s videa.</string>
     <string name="could_not_get_channel">Nije bilo moguće preuzeti podatke kanala.</string>
     <string name="views">%,d pregleda</string>
     <string name="error">Greška</string>
     <string name="ok">U redu</string>
-    <string name="search_videos">Pretraži videozapise</string>
+    <string name="search_videos">Pretraži videa</string>
     <string name="launch_offical_player_error">Nije bilo moguće pokrenuti službeni YouTube player. Provjeri, je li instaliran.</string>
     <string name="LIVE">Uživo</string>
     <string name="featured">Istaknuti</string>
     <string name="most_popular">Najpopularniji</string>
     <string name="video">Video</string>
-    <string name="videos">Videozapisi</string>
-    <string name="num_videos">%d videozapisa</string>
+    <string name="videos">Videa</string>
+    <string name="num_videos">%d videa</string>
     <string name="playlists">Playliste</string>
     <string name="could_not_get_playlists">Nije bilo moguće dobiti %s playliste.</string>
     <string name="loading">Učitavanje …</string>

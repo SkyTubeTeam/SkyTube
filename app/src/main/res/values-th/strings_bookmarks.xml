@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="bookmarks">ที่คั่นหน้า</string>
+    <string name="bookmark">ที่คั่นหน้า</string>
+    <string name="video_bookmarked_error">ไม่สามารถเก็บเป็นที่คั่นหน้าได้</string>
+    <string name="unbookmark">ลบที่คั่นหน้า</string>
+    <string name="video_unbookmarked">ลบที่คั่นหน้าแล้ว</string>
+    <string name="video_was_not_bookmarked">คลิปวิดีโอนี้ยังไม่ได้เก็บในที่คั่นหน้า</string>
+    <string name="video_bookmarked">เก็บเป็นที่คั่นหน้าไว้แล้ว</string>
+    <string name="video_already_bookmarked">เก็บเป็นที่คั่นหน้าไว้แล้ว</string>
+    <string name="video_unbookmarked_error">ไม่สามารถลบที่คั่นหน้าได้</string>
+    <string name="no_bookmarked_videos_text">เก็บวิดีโอเป็นที่คั่นหน้าเพ่อค้นหาได้ที่นี่</string>
+    <string name="bookmark_share_label">ที่คั่นหน้าของ SkyTube</string>
+    <string name="bookmark_share_invalid_url">URL ของ YouTube ที่ถูกต้องเท่านั้นถึงจะเก็บเป็นที่คี่นหน้าได้</string>
+</resources>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="error_stream_err_unavailable">ไม่สามารถโหลดข้อความได้</string>
+    <string name="error_stream_decryption_fail">ไม่สามารถถอดรหัสของบริการ YouTube ได้</string>
+    <string name="error_video_play">ข้อผิดพลาดในการเล่นวิดีโอ</string>
+    <string name="error_video_streams_empty">วิดีโอ %s ไม่มีสตรีม</string>
+    <string name="error_video_streams">ไม่สามารถดึงสตรีมวิดีโอได้</string>
+    <string name="error_get_video_desc">ไม่สามารถดึงคำอธิบายวิดีโอได้</string>
+    <string name="error_invalid_url">ที่อยู่ URL วิดีโอไม่ถูกต้อง: %s</string>
+    <string name="error_downloaded_file_is_corrupted">ไฟล์วิดีโอที่โหลดมาเกิด<b>ความเสียหาย</b>: <br/> <br/> %s. <br/> <br/> อยาก<b>ลบ</b> ไฟล์นี้ไหม\?</string>
+    <string name="error_video_parse_error">ไม่สามารถเริ่มเล่นวิดีโอนี้ได้: <br/> <br/> %s</string>
+    <string name="warning_metered_network_disable">อย่าถามอีก</string>
+    <string name="metered_network_blocked_by_policy">หยุดการดาวน์โหลดเพราะคุณกำลังใช้เน็ตที่จำกัดความจุเน็ตอยู่</string>
+    <string name="play_video">เล่ยวิดีโอ</string>
+    <string name="warning_live_video">ไม่สามารถเล่นสตรีมไลฟ์ตอนนี้ได้ ต้องการเปิดในแอพอื่นหรือไม่\?</string>
+    <string name="ratings_disabled">เรตติ้งถูกปิดการใช้งาน</string>
+    <string name="loading_video">กำลังโหลดวิดีโอ…</string>
+    <string name="reload_video">โหลดวิดีโอนี้ใหม่</string>
+    <string name="open_in_browser">เปิดในเว็บเบราว์เซอร์</string>
+    <string name="open_with">เปิดด้วยแอพ…</string>
+    <string name="share">แชร์</string>
+    <string name="share_via">แชร์ใน…</string>
+    <string name="copy_url">คัดลอก URL</string>
+    <string name="url_copied_to_clipboard">คัดลอก URL ไปยังคลิปบอร์ดแล้ว</string>
+    <string name="warning_metered_network_play">เชื่อมต่อเน็ตไม่อั้นความจุเพ่อเลี่ยงปัญหาค่าบิลสูง หรืออยากเล่นวิดีโอตอนนี้เลย\?</string>
+</resources>

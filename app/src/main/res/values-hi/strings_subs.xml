@@ -1,2 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="subscribe">सदस्यता लें</string>
+    <string name="unsubscribe">सदस्यता वापस लें</string>
+    <string name="total_subscribers">%,d सदस्य</string>
+    <string name="subscribed">सदस्यता ली</string>
+    <string name="channel_subscribe_failed">सदस्यता नही ले पा रहा है</string>
+    <string name="channel_already_subscribed">पहले से ही सदस्यता ली हुई</string>
+</resources>

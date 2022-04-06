@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="feed">Prurje</string>
+    <string name="subscribing_to_channels">Po kryhet pajtim në kanale…</string>
+    <string name="open_channel">Hap Kanalin</string>
+    <string name="fetching_subbed_channels_info">Po sillen hollësi kanali…</string>
+    <string name="fetching_subbed_channels_info_error">S’u prunë dot hollësi kanali.</string>
+    <string name="fetching_subscription_videos">Po sillen video prej kanalesh ku jeni pajtuar…</string>
+    <string name="fetched_videos_from_channels">U morën %1$d video prej %2$d/%3$d kanalesh.</string>
+    <string name="notification_channel_feed_title">NJoftime Prurjeje</string>
+    <string name="no_new_videos_found">S’ka video të reja.</string>
+    <string name="no_subscriptions_text">Pajtohuni te ca kanale, që të shihni këtu video prej tyre.</string>
+    <string name="import_subscriptions_from_youtube">Importoni Pajtime Nga YouTube-i</string>
+    <string name="notification_new_videos_found">%d video të reja prej kanalesh ku jeni pajtuar</string>
+</resources>

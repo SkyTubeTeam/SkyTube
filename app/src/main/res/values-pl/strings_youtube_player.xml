@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="error_stream_err_unavailable">Treść błędu niedostępna.</string>
+    <string name="error_stream_err_unavailable">Komunikat niedostępny.</string>
     <string name="error_stream_decryption_fail">Nie można załadować kodu deszyfrowania do serwisu YouTube.</string>
     <string name="error_stream_parse_error">Błąd analizowania.</string>
     <string name="error_video_play">Błąd odtwarzania</string>
@@ -26,7 +26,7 @@
     <string name="cancel">Anuluj</string>
     <string name="clear">Wyczyść</string>
     <string name="mark_watched">Oznacz jako obejrzane</string>
-    <string name="should_resume">Czy chcesz wrócić do miejsca, w którym zatrzymałeś odtwarzanie\?</string>
+    <string name="should_resume">Kontynuować od miejsca, w którym zatrzymałeś odtwarzanie\?</string>
     <string name="play_video">Odtwórz wideo</string>
     <string name="mark_unwatched">Oznacz jako nieobejrzane</string>
     <string name="resume">Wznów</string>

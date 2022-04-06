@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="blocked_videos">Blokirani videozapisi</string>
-    <string name="no_videos_blocked">Želiš li konfigurirati bloker za blokiranje ili filtriranje videozapisa\?</string>
+    <string name="blocked_videos">Blokirana videa</string>
+    <string name="no_videos_blocked">Želiš li konfigurirati bloker za blokiranje ili filtriranje videa\?</string>
     <string name="configure">Konfiguriraj</string>
     <string name="block_channel">Blokiraj kanal</string>
     <string name="channel_blacklisted">Osvježi prikaz za korištenje novog popisa nepoželjnih.</string>

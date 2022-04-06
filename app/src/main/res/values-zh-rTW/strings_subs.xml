@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="subscriptions">訂閱</string>
+    <string name="subscriptions">訂閱內容</string>
     <string name="subscribe">訂閱</string>
     <string name="unsubscribe">取消訂閱</string>
-    <string name="total_subscribers">%,d 訂閱者</string>
+    <string name="total_subscribers">%,d 位訂閱者</string>
     <string name="subscribed">已訂閱</string>
     <string name="unsubscribed">已取消訂閱</string>
-    <string name="error_get_subbed_channels">正在取得訂閱頻道時發生錯誤。</string>
-    <string name="error_check_if_user_has_subbed">無法檢查使用者是否已訂閱了頻道 (id=%s)</string>
-    <string name="error_unable_to_subscribe">無法(取消)訂閱頻道 (id=%s)</string>
-    <string name="import_subscriptions">匯入訂閱</string>
-    <string name="unsubscribe_from_all_current_sibbed_channels">取消訂閱您目前所有訂閱的頻道。</string>
-    <string name="subscriptions_to_channels_imported">已匯入 %d 個頻道的訂閱。</string>
+    <string name="error_get_subbed_channels">無法擷取頻道的訂閱內容。</string>
+    <string name="error_check_if_user_has_subbed">無法檢查您是否已訂閱頻道 (id=%s)</string>
+    <string name="error_unable_to_subscribe">無法（取消）訂閱頻道 (id=%s)</string>
+    <string name="import_subscriptions">匯入訂閱內容</string>
+    <string name="unsubscribe_from_all_current_sibbed_channels">取消訂閱所有您目前訂閱的頻道。</string>
+    <string name="subscriptions_to_channels_imported">已匯入 %d 個頻道。</string>
     <string name="select_all">選擇全部</string>
     <string name="select_none">全不選</string>
-    <string name="no_channels_found">在您已上傳的檔案中找不到 YouTube 頻道。</string>
-    <string name="failed_to_import_subscriptions">無法匯入您的 YouTube 訂閱。</string>
+    <string name="no_channels_found">在您上傳的檔案中找不到 YouTube 頻道。</string>
+    <string name="failed_to_import_subscriptions">無法匯入您的 YouTube 訂閱內容。</string>
     <string name="about">關於</string>
-    <string name="import_subscriptions_description">要從 YouTube 匯入訂閱，請先造訪 https://takeout.google.com。取消選取除了「YouTube 與 YouTube 音樂」以外的所有服務，然後點擊「包含所有 YouTube 資料」以取消選取除了訂閱以外的所有東西。點擊「下一步」，然後「建立匯出」。一旦匯出完成，它會顯示在您剛剛造訪的網頁上，也會收到有下載連結的電子郵件。下載檔案然後從其中解開並找出 subscriptions.json（位於 /Takeout/YouTube 與 YouTube Music/subscriptions/）。然後透過點擊下方的「選取訂閱檔案」選取匯出的檔案。</string>
-    <string name="no_new_channels_found">在您上傳的檔案中沒有發現任何您已經訂閱的 YouTube 頻道。</string>
-    <string name="import_subscriptions_parse_error">嘗試解析您上傳的檔案時遇到錯誤：%s。</string>
+    <string name="import_subscriptions_description">取消選擇 https://takeout.google.com 上的所有項目，只留下「YouTube 和 YouTube Music」，再點「包含所有 YouTube 資料」，只選「訂閱內容」。點「下一步」，再點「建立匯出作業」。按下之後就會收到內含下載連結的電子郵件。下載該檔案並解壓縮。按下方的「選取訂閱內容檔案」，將 subscriptions.json（位於 /Takeout/YouTube and YouTube Music/subscriptions/）匯入 SkyTube。</string>
+    <string name="no_new_channels_found">未發現您沒有訂閱的 YouTube 頻道。</string>
+    <string name="import_subscriptions_parse_error">無法解析您上傳的檔案：%s。</string>
     <string name="channel_unsubscribed">已取消訂閱頻道</string>
     <string name="channel_subscribe_failed">無法訂閱頻道</string>
-    <string name="channel_already_subscribed">您已訂閱此頻道</string>
+    <string name="channel_already_subscribed">已訂閱</string>
     <string name="channel_subscribed">已訂閱頻道</string>
-    <string name="select_sub_file">選取訂閱檔案</string>
+    <string name="select_sub_file">選取訂閱內容檔案</string>
 </resources>

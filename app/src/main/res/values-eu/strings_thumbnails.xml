@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="thumbnail_download_error">Ezin zuen miniatura deskargatu.</string>
-    <string name="thumbnail_downloaded">Miniatura deskargatua.</string>
+    <string name="thumbnail_download_error">Ezin da miniatura deskargatu.</string>
+    <string name="thumbnail_downloaded">Deskargatua.</string>
     <string name="view_thumbnail">Ikusi miniaturak</string>
     <string name="thumbnail">Miniatura</string>
 </resources>

@@ -2,10 +2,10 @@
 <resources>
     <string name="could_not_get_videos">無法取得 %s 影片。</string>
     <string name="could_not_get_channel">無法下載頻道資訊。</string>
-    <string name="views">%,d 檢視</string>
+    <string name="views">%,d 次觀看</string>
     <string name="error">錯誤</string>
     <string name="ok">確定</string>
-    <string name="search_videos">搜尋影</string>
+    <string name="search_videos">搜尋影片</string>
     <string name="launch_offical_player_error">無法啟動官方 YouTube 播放程式。請確保其已安裝。</string>
     <string name="LIVE">直播</string>
     <string name="featured">特選</string>
@@ -22,5 +22,5 @@
     <string name="could_not_get_channel_detailed">無法下載頻道資訊：%s。</string>
     <string name="close">關閉</string>
     <string name="trending_in">熱門 (%s)</string>
-    <string name="recaptcha_challenge_requested">YouTube 覺得您是機器人，因此您必須解決 reCAPTCHA。</string>
+    <string name="recaptcha_challenge_requested">YouTube 覺得您是機器人，因此您必須先解開 reCAPTCHA 的問題。</string>
 </resources>

@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="import_subscriptions_description">Inportatu zure harpidetzak Youtubetik https://takeout.google.com sartzen. Aukeratzea kendu zerbitzu guztiak, Youtube eta Youtube Musikak izan ezik. Eta klik egin \"Youtuben datu guztiak sartuta\". Klik egin \"hurrengo\" eta gero \"esportazioa sortu\". Esportazioa amaitu ondoren, lurreratu berri duzun web orrian agertzen da eta mezu bat jasoko duzu deskarga egiteko. Deskargatu fitxategia eta atera fitxategia bertatik ( /Takeout/Youtube eta Youtube Music/Subscriptions /). Gero, aukeratu esportatutako artxiboa behean \"aukeratu harpidetzez fitxeroa\" klikatuz.</string>
+    <string name="import_subscriptions_description">Deshautatu https://takeout.google.com-en dena \"YouTube eta YouTube Music\" izan ezik eta sakatu \"YouTube datu guztiak barne\" harpidetzak soilik lortzeko. Egin klik \"Hurrengoa\" eta gero \"Sortu esportazioa\". Egin klik deskargatzeko esteka duen mezu elektroniko bat jasotzeko. Deskargatu fitxategia zure posta-bezerotik eta atera ezazu. Inportatu subscriptions.json (/Takeout/YouTube eta YouTube Music/subscriptions/-n) bertatik SkyTube-n beheko \"Hautatu harpidetza-fitxategia\" erabiliz.</string>
     <string name="about">Zertaz</string>
-    <string name="failed_to_import_subscriptions">Ez dut zure Youtube harpidetza inportatu.</string>
-    <string name="import_subscriptions_parse_error">Akats bat aurkitu dute zuk igo duzun artxiboa arintzen saiatzean: %s.</string>
-    <string name="no_new_channels_found">Ez dago YouTubeko kanalik zu harpidetuta ez zaudenik igo duzun fitxategian.</string>
-    <string name="no_channels_found">YouTubeko kanalik ez da aurkitu igo duzun fitxategian.</string>
+    <string name="failed_to_import_subscriptions">Ezin izan dira inportatu zure YouTube-ko harpidetzak.</string>
+    <string name="import_subscriptions_parse_error">Ezin izan da kargatu duzun fitxategia analizatu: %s.</string>
+    <string name="no_new_channels_found">Ez da harpidetuta ez zauden YouTube kanalik aurkitu.</string>
+    <string name="no_channels_found">Ezin izan da YouTube kanalik aurkitu kargatu duzun fitxategian.</string>
     <string name="select_none">Ez ezazu ezer aukeratu</string>
     <string name="select_all">Dena aukeratu</string>
-    <string name="select_sub_file">Aukeratu harpidetzez fitxeroa</string>
-    <string name="subscriptions_to_channels_imported">Harpidetza %d kanalerako(ak) inportatua.</string>
-    <string name="unsubscribe_from_all_current_sibbed_channels">Harpidetza kendu zure harpidetua kanal guztietatik.</string>
+    <string name="select_sub_file">Hautatu HarpidetzaFitxategia</string>
+    <string name="subscriptions_to_channels_imported">Harpidetza %d kanalerako inportatua(ak).</string>
+    <string name="unsubscribe_from_all_current_sibbed_channels">Kendu harpidetza unean harpidetutako kanal guztietatik.</string>
     <string name="import_subscriptions">Inportatu harpidetzeak</string>
-    <string name="error_unable_to_subscribe">Ezin da kanala (ez) harpidetzea (id = %s)</string>
-    <string name="error_check_if_user_has_subbed">Ezin egiaztatu erabiltzaileak kanalera harpidetu ote duen (id = %s)</string>
-    <string name="error_get_subbed_channels">Akats bat gertatu da harpidetutako kanalak jasotzean.</string>
+    <string name="error_unable_to_subscribe">Ezin da kanala (ez) harpidetu (id = %s)</string>
+    <string name="error_check_if_user_has_subbed">Ezin izan da egiaztatu kanal (id = %s)-era harpidetu zaren ala ez</string>
+    <string name="error_get_subbed_channels">Ezin izan dira eskuratu kanaleko harpidetzak.</string>
     <string name="channel_unsubscribed">Kanala ez dago harpidetuta</string>
     <string name="unsubscribed">Harpidetu gabe</string>
-    <string name="channel_subscribe_failed">Ezin da kanal honetara harpidetzea</string>
-    <string name="channel_already_subscribed">Bazaude kanal honetara harpidetuta</string>
+    <string name="channel_subscribe_failed">Ezin izan da kanalera harpidetu</string>
+    <string name="channel_already_subscribed">Badago harpidetuta</string>
     <string name="channel_subscribed">Kanala harpidetuta</string>
     <string name="subscribed">Harpidetuta</string>
     <string name="total_subscribers">%,d harpidedunak</string>

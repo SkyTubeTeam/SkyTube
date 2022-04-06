@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="subscriptions">การติดตาม</string>
+    <string name="subscribe">ติดตาม</string>
+    <string name="unsubscribe">เลิกติดตาม</string>
+    <string name="total_subscribers">%,d ผู้ติดตาม</string>
+    <string name="subscribed">ติดตามแล้ว</string>
+    <string name="channel_subscribed">ติดตามช่องแล้ว</string>
+</resources>

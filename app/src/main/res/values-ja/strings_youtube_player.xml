@@ -14,7 +14,7 @@
     <string name="open_in_browser">Web ブラウザーで開く</string>
     <string name="open_with">開く…</string>
     <string name="share">共有</string>
-    <string name="share_via">共有する</string>
+    <string name="share_via">共有する…</string>
     <string name="copy_url">URL をコピー</string>
     <string name="url_copied_to_clipboard">URL をクリップボードにコピーしました。</string>
     <string name="error_get_comments">コメントを取得できませんでした。</string>
