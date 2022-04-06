@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ SkyTube
+  ~ Copyright (C) 2017-2018  Ramon Mifsud
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation (version 3 of the License).
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto">
+
+	<PreferenceCategory
+		app:key="pref_key_general_sponsorblock"
+		app:title="@string/pref_general"
+		app:iconSpaceReserved="false">
+
+		<CheckBoxPreference
+			app:key="pref_key_enable_sponsorblock"
+			app:title="@string/pref_title_enable_sponsorblock"
+			app:summary="@string/pref_summary_enable_sponsorblock"
+			app:defaultValue="false"
+			app:iconSpaceReserved="false" />
+
+		<Preference
+			android:key="pref_key_sponsorblock_credit"
+			android:title="@string/pref_title_credit_sponsorblock"
+			android:summary="@string/pref_summary_credit_sponsorblock"
+			app:iconSpaceReserved="false"/>
+
+	</PreferenceCategory>
+
+	<PreferenceCategory
+		app:key="pref_key_details_sponsorblock"
+		app:title="@string/pref_details"
+		app:iconSpaceReserved="false">
+
+		<MultiSelectListPreference
+			app:key="pref_key_sponsorblock_category_list"
+			app:title="@string/pref_title_sponsorblock_category_list"
+			app:summary="@string/pref_summary_sponsorblock_category_list"
+			app:entries="@array/sponsorblock_filtering_list"
+			app:entryValues="@array/sponsorblock_filtering_list_values"
+			app:defaultValue="@array/sponsorblock_filtering_list_default_values"
+			app:iconSpaceReserved="false"
+			app:dependency="pref_key_enable_sponsorblock" />
+
+	</PreferenceCategory>
+
+</PreferenceScreen>
