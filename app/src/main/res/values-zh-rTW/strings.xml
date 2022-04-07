@@ -23,4 +23,5 @@
     <string name="close">關閉</string>
     <string name="trending_in">熱門 (%s)</string>
     <string name="recaptcha_challenge_requested">YouTube 覺得您是機器人，因此您必須先解開 reCAPTCHA 的問題。</string>
+    <string name="could_not_get_sponsorblock">無法擷取封鎖贊助者資訊：%s。</string>
 </resources>
