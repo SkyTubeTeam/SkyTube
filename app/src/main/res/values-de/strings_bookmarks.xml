@@ -2,16 +2,16 @@
 <resources>
     <string name="bookmarks">Lesezeichen</string>
     <string name="bookmark">Lesezeichen</string>
-    <string name="video_bookmarked">Video als Lesezeichen gespeichert</string>
+    <string name="video_bookmarked">Als Lesezeichen gespeichert</string>
     <string name="video_bookmarked_error">Das Video konnte nicht als Lesezeichen gespeichert werden.</string>
     <string name="unbookmark">Lesezeichen entfernen</string>
-    <string name="video_unbookmarked">Lesezeichen für Video entfernt</string>
+    <string name="video_unbookmarked">Lesezeichen entfernt</string>
     <string name="video_unbookmarked_error">Lesezeichen für Video konnte nicht entfernt werden.</string>
     <string name="no_bookmarked_videos_text">Sie haben noch keine Videos als Lesezeichen gespeichert.
 \n
 \nSobald das erledigt ist, werden sie hier angezeigt.</string>
     <string name="bookmark_share_invalid_url">Nur gültige YouTube-URLs können als Lesezeichen gespeichert werden.</string>
     <string name="bookmark_share_label">SkyTube-Lesezeichen</string>
-    <string name="video_was_not_bookmarked">Video wurde nicht als Lesezeichen gespeichert</string>
-    <string name="video_already_bookmarked">Video bereits als Lesezeichen gespeichert</string>
+    <string name="video_was_not_bookmarked">Das Video wurde nicht als Lesezeichen gespeichert</string>
+    <string name="video_already_bookmarked">Bereits als Lesezeichen gespeichert</string>
 </resources>
