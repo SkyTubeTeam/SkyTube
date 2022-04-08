@@ -8,12 +8,12 @@
     <string name="pref_summary_preferred_languages">Wählen Sie Ihre bevorzugten Sprachen.</string>
     <string name="pref_video_player_category">Videoplayer</string>
     <string name="pref_title_backup_dbs">Datenbanken sichern</string>
-    <string name="pref_summary_backup_dbs">Sicheren Sie Ihre Abo- und Lesezeichen-Datenbanken.</string>
+    <string name="pref_summary_backup_dbs">Abonnements und Lesezeichen sichern.</string>
     <string name="pref_title_import_dbs">Sicherung importieren</string>
-    <string name="pref_summary_import_dbs">Abo- und Lesezeichen-Datenbanken importieren.</string>
+    <string name="pref_summary_import_dbs">Abonnements und Lesezeichen importieren.</string>
     <string name="databases_backing_up">Sicherung wird ausgeführt …</string>
     <string name="databases_backup_success">Datenbanken gesichert nach %s</string>
-    <string name="databases_backup_fail">Fehler beim Sichern der Datenbanken.</string>
+    <string name="databases_backup_fail">Datenbanken konnten nicht gesichert werden.</string>
     <string name="databases_import_select_backup">Sicherungsdatei zum Importieren auswählen</string>
     <string name="databases_import_nothing_selected">Es wurde nichts ausgewählt …</string>
     <string name="databases_import_warning_message">Die Abonnement- und Lesezeichendatenbanken werden durch die Daten in der ausgewählten Sicherungsdatei ersetzt.
@@ -158,8 +158,8 @@
     <string name="pref_summary_metered_network_usage">Was zu tun, wenn ein gebührenpflichtiges Netzwerk zum Herunterladen/Anschauen von Videos verwendet wird: %s</string>
     <string name="pref_title_metered_network_usage">Benutzung eines gebührenpflichtigen Netzwerkes</string>
     <string name="pref_summary_maximum_res_metered">Wählen die maximale Auflösung beim Streaming über ein gebührenpflichtiges Netzwerk: %s</string>
-    <string name="pref_title_maximum_res_metered">Maximale Auflösung für gebührenpflichtige Netzwerke</string>
-    <string name="pref_summary_minimum_res_metered">Wähle die Mindestauflösung beim Streaming über ein gebührenpflichtiges Netzwerk: %s</string>
+    <string name="pref_title_maximum_res_metered">Höchste Auflösung für gebührenpflichtige Netzwerke</string>
+    <string name="pref_summary_minimum_res_metered">Wähle niedrigste Auflösung, wenn über ein gebührenpflichtiges Netzwerk gestreamt wird: %s</string>
     <string name="pref_title_minimum_res_metered">Geringste Auflösung für Messnetz</string>
     <string name="pref_category_metered_network">Gebührenpflichtiges Netzwerk</string>
     <string name="no_resolution_specified">Keine</string>
