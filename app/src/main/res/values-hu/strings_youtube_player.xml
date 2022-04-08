@@ -44,4 +44,5 @@
     <string name="sponsorblock_category_intro">Intro/szünet</string>
     <string name="sponsorblock_category_music_offtopic">Nem zenei szakasz</string>
     <string name="sponsorblock_category_selfpromo">Önpromóció</string>
+    <string name="sponsorblock_category_preview">Előzetes</string>
 </resources>
