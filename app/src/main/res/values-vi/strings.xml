@@ -23,4 +23,5 @@
     <string name="could_not_get_channel">Không thể tải xuống thông tin kênh.</string>
     <string name="could_not_get_videos">Không thể lấy %s video.</string>
     <string name="recaptcha_challenge_requested">YouTube nghĩ là bạn là rô bốt, nên trước tiên là bạn phải giải reCAPTCHA.</string>
+    <string name="could_not_get_sponsorblock">Không thể lấy thông tin SponsorBlock: %s.</string>
 </resources>
