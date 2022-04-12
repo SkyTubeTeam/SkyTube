@@ -1,7 +1,7 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="thumbnail">Miniatyrbilde</string>
-	<string name="view_thumbnail">Vis miniatyrbilde</string>
-	<string name="thumbnail_downloaded">Miniatyrbilde nedlastet.</string>
-	<string name="thumbnail_download_error">Miniatyrbildet kunne ikke lastes ned.</string>
+    <string name="thumbnail">Miniatyrbilde</string>
+    <string name="view_thumbnail">Vis miniatyrbilde</string>
+    <string name="thumbnail_downloaded">Nedlastet.</string>
+    <string name="thumbnail_download_error">Kunne ikke laste ned miniatyrbildet.</string>
 </resources>
