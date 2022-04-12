@@ -5,7 +5,7 @@
     <string name="blocked_videos">Blokkerte videoer</string>
     <string name="dislikes">%d%% mislikninger</string>
     <string name="no_videos_blocked">Ingen videoer ble blokkert eller filtrert ut. Ønsker du å sette opp videoblokkereren\?</string>
-    <string name="channel_blacklisted">Kanal svartelistet. Gjenoppfrisk.</string>
+    <string name="channel_blacklisted">Gjennoppfrisk for å bruke den nye kanalsvartelisten.</string>
     <string name="channel_unwhitelist_error">Kanalen kunne ikke fjernes fra hvitlisten.</string>
     <string name="block_channel">Blokker kanal</string>
 </resources>
