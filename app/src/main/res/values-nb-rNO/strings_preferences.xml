@@ -154,7 +154,7 @@
     <string name="pref_summary_minimum_res">Velg din minimumsoppløsning: %s</string>
     <string name="pref_title_minimum_res">Minimumsoppløsning</string>
     <string name="pref_summary_maximum_res">Velg din maksimale oppløsning: %s</string>
-    <string name="pref_title_maximum_res">Maksimal oppløsning</string>
+    <string name="pref_title_maximum_res">Høyeste oppløsning</string>
     <string name="pref_key_video_quality_metered_summary">Optimaliser for: %s</string>
     <string name="pref_key_video_quality_metered_title">Videokvalitetsvalg på kvotebasert nett</string>
     <string name="pref_summary_metered_network_usage">Foretagende for bruk av kvotebasert nettverk ved nedlasting/visning av videoer: %s</string>
@@ -169,4 +169,9 @@
     <string name="system_default_country">Systemforvalgsland</string>
     <string name="pref_key_use_newer_formats_title">Prøv nyere videoformater</string>
     <string name="pref_key_use_newer_formats_summary">Gamle Android-versjoner støtter ikke alle videoformater som YouTube tilbyr. Skru dette av hvis du hyppig har problemer med avspilling, eller ingen lyd.</string>
+    <string name="pref_general">Generelt</string>
+    <string name="pref_details">Detaljer</string>
+    <string name="pref_title_sponsorblock_category_list">Hopp over segmenter</string>
+    <string name="pref_title_credit_sponsorblock">Bidragsytere</string>
+    <string name="pref_summary_credit_sponsorblock">Bruker SponsorBlock-data fra https://sponsor.ajay.app</string>
 </resources>
