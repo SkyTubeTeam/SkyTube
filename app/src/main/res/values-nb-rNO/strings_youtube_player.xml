@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="error_stream_err_unavailable">Feilmelding utilgjengelig.</string>
+    <string name="error_stream_err_unavailable">Utilgjengelig melding.</string>
     <string name="error_stream_decryption_fail">Kunne ikke laste inn dekrypteringskode for YouTube-tjeneste.</string>
     <string name="error_stream_parse_error">Tolkningsfeil.</string>
     <string name="error_video_play">Videoavspillingsfeil</string>
@@ -38,4 +38,7 @@
     <string name="warning_metered_network_disable">Aldri spør igjen.</string>
     <string name="warning_metered_network_play">Enheten din er tilkoblet et kvotebasert nettverk. For å unngå unødige kostnader for databruk anbefales det å koble til et ubegrenset nettverk. Spill av video uansett\?</string>
     <string name="metered_network">Kvotebasert nettverk</string>
+    <string name="sponsorblock_category_sponsor">Sponsor</string>
+    <string name="sponsorblock_category_selfpromo">Selv-promotering</string>
+    <string name="sponsorblock_category_interaction">Interaksjonspåminnelse</string>
 </resources>
