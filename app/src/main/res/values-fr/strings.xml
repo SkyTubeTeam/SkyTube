@@ -23,5 +23,5 @@
     <string name="could_not_get_channel_detailed">Impossible de télécharger les infos de la chaîne : %s.</string>
     <string name="trending_in">Tendances (%s)</string>
     <string name="recaptcha_challenge_requested">YouTube croit que vous êtes un robot, vous devez donc d\'abord résoudre un reCAPTCHA.</string>
-    <string name="could_not_get_sponsorblock">Impossible de récupérer les informations du sponsor : %s.</string>
+    <string name="could_not_get_sponsorblock">Impossible de récupérer les informations SponsorBlock : %s.</string>
 </resources>
