@@ -38,4 +38,11 @@
     <string name="metered_network">Forgalmi Díjas Hálózatok</string>
     <string name="metered_network_blocked_by_policy">A letöltés tiltva van, mert forgalmi díjas hálózathoz csatlakozik.</string>
     <string name="warning_metered_network_disable">Ne kérdezze újra.</string>
+    <string name="sponsorblock_category_interaction">Interakció emlékeztető</string>
+    <string name="sponsorblock_skipped">Átugrott szakasz: %s</string>
+    <string name="sponsorblock_category_sponsor">Szponzor</string>
+    <string name="sponsorblock_category_intro">Intro/szünet</string>
+    <string name="sponsorblock_category_music_offtopic">Nem zenei szakasz</string>
+    <string name="sponsorblock_category_selfpromo">Önpromóció</string>
+    <string name="sponsorblock_category_preview">Előzetes</string>
 </resources>

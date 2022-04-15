@@ -38,4 +38,13 @@
     <string name="warning_metered_network_disable">Ne plus demander.</string>
     <string name="warning_metered_network_play">Connectez-vous à un réseau non mesuré pour éviter les frais d\'utilisation des données en premier lieu. Lire quand même la vidéo \?</string>
     <string name="metered_network">Réseau avec compteur</string>
+    <string name="sponsorblock_category_interaction">Rappel d\'interaction</string>
+    <string name="sponsorblock_category_music_offtopic">Section non musicale</string>
+    <string name="sponsorblock_skipped">Segment sauté : %s</string>
+    <string name="sponsorblock_category_selfpromo">Autopromotion</string>
+    <string name="sponsorblock_category_sponsor">Sponsor</string>
+    <string name="sponsorblock_category_outro">Cartes de fin/crédits</string>
+    <string name="sponsorblock_category_intro">Intro/Intermission</string>
+    <string name="sponsorblock_category_preview">Aperçu/Récapitulatif</string>
+    <string name="sponsorblock_category_filler">Remplissage</string>
 </resources>

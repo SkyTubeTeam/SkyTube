@@ -38,4 +38,13 @@
     <string name="error_stream_parse_error">Помилка отримання.</string>
     <string name="error_stream_decryption_fail">Не вдалося завантажити код розшифрування для служби YouTube.</string>
     <string name="error_stream_err_unavailable">Повідомлення недоступне.</string>
+    <string name="sponsorblock_category_intro">Вступ/Антракт</string>
+    <string name="sponsorblock_category_selfpromo">Просування</string>
+    <string name="sponsorblock_category_interaction">Нагадування про взаємодію</string>
+    <string name="sponsorblock_category_music_offtopic">Немузичний розділ</string>
+    <string name="sponsorblock_skipped">Пропущений сегмент: %s</string>
+    <string name="sponsorblock_category_outro">Кінцеві картки/Кредити</string>
+    <string name="sponsorblock_category_filler">Заповнювач</string>
+    <string name="sponsorblock_category_sponsor">Спонсор</string>
+    <string name="sponsorblock_category_preview">Попередній перегляд/Підсумок</string>
 </resources>

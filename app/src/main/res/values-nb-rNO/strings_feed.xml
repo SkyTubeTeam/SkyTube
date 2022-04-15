@@ -11,7 +11,7 @@
     <string name="notification_channel_feed_title">Kilde-merknader</string>
     <string name="notification_new_videos_found">%d nye videoer fra abonnerte kanaler</string>
     <string name="subscribing_to_channels">Abonnerer på kanaler…</string>
-    <string name="fetching_subbed_channels_info">Henter kanalinformasjon…</string>
-    <string name="fetching_subbed_channels_info_error">En feil har inntruffet under innhenting av kanalinformasjon.</string>
+    <string name="fetching_subbed_channels_info">Henter kanalinfo…</string>
+    <string name="fetching_subbed_channels_info_error">Kunne ikke hente kanalinfo.</string>
     <string name="open_channel">Åpne kanal</string>
 </resources>

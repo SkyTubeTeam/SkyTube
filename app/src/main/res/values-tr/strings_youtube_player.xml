@@ -38,4 +38,13 @@
     <string name="warning_metered_network_disable">Bir daha asla sorma.</string>
     <string name="warning_metered_network_play">Önce veri kullanım ücretlerinden kaçınmak için kotasız bir ağa bağlanın. Yine de video oynatılsın mı\?</string>
     <string name="metered_network">Kotalı Ağ</string>
+    <string name="sponsorblock_category_music_offtopic">Müzik Dışı Bölüm</string>
+    <string name="sponsorblock_category_intro">Giriş/Ara</string>
+    <string name="sponsorblock_category_outro">Bitiş/Emeği Geçenler</string>
+    <string name="sponsorblock_category_preview">Ön İzleme/Özet</string>
+    <string name="sponsorblock_category_interaction">Etkileşim Hatırlatıcısı</string>
+    <string name="sponsorblock_category_filler">Dolgu</string>
+    <string name="sponsorblock_skipped">Atlanan bölüm: %s</string>
+    <string name="sponsorblock_category_sponsor">Sponsor</string>
+    <string name="sponsorblock_category_selfpromo">Kendini Tanıtma</string>
 </resources>

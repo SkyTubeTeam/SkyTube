@@ -3,7 +3,7 @@
     <string name="could_not_get_videos">Could not get %s videos.</string>
     <string name="could_not_get_channel">Could not download channel info.</string>
     <string name="could_not_get_channel_detailed">Could not download channel info: %s.</string>
-    <string name="could_not_get_sponsorblock">Could not retrieve sponsorblock info: %s.</string>
+    <string name="could_not_get_sponsorblock">Could not retrieve SponsorBlock info: %s.</string>
     <string name="views">%,d views</string>
     <string name="error">Error</string>
     <string name="ok">OK</string>

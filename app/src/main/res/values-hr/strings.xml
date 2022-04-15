@@ -23,4 +23,5 @@
     <string name="could_not_get_channel_detailed">Nije bilo moguće preuzeti podatke kanala: %s.</string>
     <string name="trending_in">U trendu (%s)</string>
     <string name="recaptcha_challenge_requested">YouTube misli da si bot uređaj, stoga moraš najprije riješiti reCAPTCHA.</string>
+    <string name="could_not_get_sponsorblock">Nije bilo moguće dohvatiti informacije o blokiranju sponzora: %s.</string>
 </resources>

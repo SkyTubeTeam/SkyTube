@@ -23,4 +23,5 @@
     <string name="could_not_get_videos">Не вдалося завантажити %s відео.</string>
     <string name="trending_in">Найпопулярніші (%s)</string>
     <string name="recaptcha_challenge_requested">YouTube вважає, що ви бот, тому спочатку ви повинні розв\'язати reCAPTCHA.</string>
+    <string name="could_not_get_sponsorblock">Не вдалося отримати дані про SponsorBlock: %s.</string>
 </resources>

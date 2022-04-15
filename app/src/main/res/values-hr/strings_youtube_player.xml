@@ -38,4 +38,13 @@
     <string name="warning_metered_network_disable">Ne pitaj više.</string>
     <string name="warning_metered_network_play">Poveži se s mrežom bez ograničenja prometa za izbjegavanje troškova korištenja podataka. Svejedno reproducirati video\?</string>
     <string name="metered_network">Mrežna veza s ograničenjem prometa</string>
+    <string name="sponsorblock_category_music_offtopic">Ne-glazbeni odjeljak</string>
+    <string name="sponsorblock_skipped">Preskočeni segment: %s</string>
+    <string name="sponsorblock_category_selfpromo">Samopromocija</string>
+    <string name="sponsorblock_category_intro">Uvod/Intermisija</string>
+    <string name="sponsorblock_category_sponsor">Sponzor</string>
+    <string name="sponsorblock_category_interaction">Podsjetnik za interakciju</string>
+    <string name="sponsorblock_category_preview">Pregled/Sažetak</string>
+    <string name="sponsorblock_category_outro">Završne kartice/Zasluge</string>
+    <string name="sponsorblock_category_filler">Dodatni materijal</string>
 </resources>

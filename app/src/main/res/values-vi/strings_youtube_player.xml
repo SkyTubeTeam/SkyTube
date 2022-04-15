@@ -38,4 +38,13 @@
     <string name="error_stream_parse_error">Lỗi khi xử lý.</string>
     <string name="error_stream_decryption_fail">Không thể tải mã giải mã cho dịch vụ YouTube.</string>
     <string name="error_stream_err_unavailable">Thông báo không có sẵn.</string>
+    <string name="sponsorblock_skipped">Đã bỏ qua phần: %s</string>
+    <string name="sponsorblock_category_sponsor">Nhà tài trợ</string>
+    <string name="sponsorblock_category_selfpromo">Quảng cáo bản thân</string>
+    <string name="sponsorblock_category_interaction">Lời nhắc tương tác</string>
+    <string name="sponsorblock_category_music_offtopic">Phần không phải âm nhạc</string>
+    <string name="sponsorblock_category_intro">Intro/Giải lao</string>
+    <string name="sponsorblock_category_outro">Thẻ đoạn kết/Ghi công</string>
+    <string name="sponsorblock_category_preview">Xem trước/Tóm tắt lại</string>
+    <string name="sponsorblock_category_filler">Nội dung lấp đầy</string>
 </resources>

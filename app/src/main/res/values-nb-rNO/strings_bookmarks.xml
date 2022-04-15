@@ -2,7 +2,7 @@
 <resources>
     <string name="bookmarks">Bokmerker</string>
     <string name="bookmark">Bokmerk</string>
-    <string name="video_bookmarked">Video bokmerket</string>
+    <string name="video_bookmarked">Bokmerket</string>
     <string name="video_bookmarked_error">Kunne ikke bokmerke videoen.</string>
     <string name="unbookmark">Fjern bokmerke</string>
     <string name="video_unbookmarked">Bokmerke fjernet fra video</string>
@@ -13,5 +13,5 @@
     <string name="bookmark_share_invalid_url">Kun gyldige YouTube-nettadresser kan bokmerkes.</string>
     <string name="bookmark_share_label">SkyTube-bokmerke</string>
     <string name="video_was_not_bookmarked">Video ble ikke bokmerket</string>
-    <string name="video_already_bookmarked">Video allerede bokmerket</string>
+    <string name="video_already_bookmarked">Allerede bokmerket</string>
 </resources>

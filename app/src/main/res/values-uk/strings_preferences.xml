@@ -155,4 +155,13 @@
     <string name="system_default_country">Система</string>
     <string name="pref_key_use_newer_formats_summary">Звук і відео можуть постраждати на старих версіях Android без підтримки.</string>
     <string name="pref_key_use_newer_formats_title">Спробуйте новіші формати відео</string>
+    <string name="pref_general">Загальні</string>
+    <string name="pref_title_enable_sponsorblock">Увімкнути SponsorBlock</string>
+    <string name="pref_title_sponsorblock_category_list">Пропустити сегменти</string>
+    <string name="pref_title_credit_sponsorblock">Кредити</string>
+    <string name="pref_summary_credit_sponsorblock">Використовує дані SponsorBlock із https://sponsor.ajay.app</string>
+    <string name="pref_sponsorblock_category">SponsorBlock</string>
+    <string name="pref_details">Подробиці</string>
+    <string name="pref_summary_enable_sponsorblock">Автоматичне пропускання сегментів відео, які присвячені спонсорам, нагадуванням про взаємодію та багато іншого</string>
+    <string name="pref_summary_sponsorblock_category_list">Виберіть категорії, які слід пропускати</string>
 </resources>
