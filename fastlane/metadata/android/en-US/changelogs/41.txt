@@ -1,0 +1,25 @@
+* Add Sponsorblock support by James Cullum
+* Update NewPipeExtractor to fix recent Youtube changes
+* Updated translations for:
+    * Albanian - Besnik Bleta
+    * Arabic - Khalid Qasim
+    * Basque - Julio Montero
+    * Croatian - Milo Ivir
+    * Czech - Jáchym Řezáč
+    * Dutch - Jon Bedet
+    * French - J. Lavoie
+    * German - 3ole
+    * Hindi - Tan
+    * Hungarian - Szia Tomi
+    * Italian - Tommaso Giutna
+    * Norwegian - Allan Nordhøy
+    * Polish - Michal L
+    * Romanian - Igor Sorocean
+    * Russian - lk2322
+    * Simplified Chinese - Eric
+    * Sinhala - Kaveesha
+    * Tamil - Bharath
+    * Thai - Sim WC
+    * Traditional Chinese - Jeff Huang and zica
+    * Turkish - Oğuz Ersen
+    * Ukrainian - Ihor Hordiichuk
