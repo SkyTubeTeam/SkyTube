@@ -472,8 +472,12 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
                         .send();
             }
 
-            SBTimeBarView sbView = (SBTimeBarView) fragmentBinding.getRoot().findViewById(R.id.exo_sponsorblock_progress);
-            sbView.setSegments(sponsorBlockVideoInfo);
+            SBTimeBarView sbView = fragmentBinding.getRoot().findViewById(R.id.exo_sponsorblock_progress);
+            if (sbView != null) {
+                sbView.setSegments(sponsorBlockVideoInfo);
+            } else {
+                Log.e(TAG, "SBView not found!");
+            }
         } else {
             Log.d(TAG, "SBInfo not loaded yet");
         }
