@@ -38,4 +38,13 @@
     <string name="warning_metered_network_disable">No volver a preguntar.</string>
     <string name="warning_metered_network_play">Primero conecta a una red sin límite de datos para evitar cargos por uso. ¿Reproducir el vídeo de todos modos\?</string>
     <string name="metered_network">Red con límite de datos</string>
+    <string name="sponsorblock_category_intro">Introducción/Intermedio</string>
+    <string name="sponsorblock_skipped">Segmentos saltados: %s</string>
+    <string name="sponsorblock_category_sponsor">Patrocinador</string>
+    <string name="sponsorblock_category_selfpromo">Auto promoción</string>
+    <string name="sponsorblock_category_interaction">Recordatorio de interacción</string>
+    <string name="sponsorblock_category_music_offtopic">Sección no musical</string>
+    <string name="sponsorblock_category_outro">Endcards/Créditos</string>
+    <string name="sponsorblock_category_preview">Vista previa/Resumen</string>
+    <string name="sponsorblock_category_filler">Relleno</string>
 </resources>
