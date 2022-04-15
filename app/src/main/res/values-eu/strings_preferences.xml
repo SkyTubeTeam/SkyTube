@@ -155,4 +155,13 @@
     <string name="system_default_country">Sistema</string>
     <string name="pref_key_use_newer_formats_summary">Soinuak eta bideoak jasan ditzakete Android bertsio zaharretan laguntzarik gabe.</string>
     <string name="pref_key_use_newer_formats_title">Bideo formato berriagoak saiatu</string>
+    <string name="pref_sponsorblock_category">Babesleak</string>
+    <string name="pref_general">Orokorra</string>
+    <string name="pref_details">Xehetasunak</string>
+    <string name="pref_title_enable_sponsorblock">Gaitu babesleak</string>
+    <string name="pref_title_sponsorblock_category_list">Saltatu segmentuak</string>
+    <string name="pref_summary_sponsorblock_category_list">Aukeratu zein kategoria saltatu</string>
+    <string name="pref_summary_enable_sponsorblock">Saltatu automatikoki babesleei, interakzio-abisuei eta beste askori eskainitako bideo-segmentuak</string>
+    <string name="pref_title_credit_sponsorblock">Kredituak</string>
+    <string name="pref_summary_credit_sponsorblock">https://sponsor.ajay.app-ko Babesle datuak erabiltzen ditu</string>
 </resources>
