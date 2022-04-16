@@ -7,9 +7,7 @@
     <string name="unbookmark">Lesezeichen entfernen</string>
     <string name="video_unbookmarked">Lesezeichen entfernt</string>
     <string name="video_unbookmarked_error">Lesezeichen für Video konnte nicht entfernt werden.</string>
-    <string name="no_bookmarked_videos_text">Sie haben noch keine Videos als Lesezeichen gespeichert.
-\n
-\nSobald das erledigt ist, werden sie hier angezeigt.</string>
+    <string name="no_bookmarked_videos_text">Speichern Sie Videos als Lesezeichen, um Sie hier zu finden.</string>
     <string name="bookmark_share_invalid_url">Nur gültige YouTube-URLs können als Lesezeichen gespeichert werden.</string>
     <string name="bookmark_share_label">SkyTube-Lesezeichen</string>
     <string name="video_was_not_bookmarked">Das Video wurde nicht als Lesezeichen gespeichert</string>
