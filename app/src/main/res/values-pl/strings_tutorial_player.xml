@@ -2,7 +2,7 @@
 <resources>
     <string name="tutorial_slide_1">Przesuń ←, aby wyświetlić komentarze.</string>
     <string name="tutorial_slide_6">Naciśnij dwukrotnie, aby wstrzymać lub odtworzyć wideo.</string>
-    <string name="next">"Następny "</string>
+    <string name="next">Następny</string>
     <string name="done">Gotowe</string>
     <string name="skip">Pomiń</string>
     <string name="page_counter">%1$d z %2$d</string>
