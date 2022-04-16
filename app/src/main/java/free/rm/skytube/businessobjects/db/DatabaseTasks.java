@@ -247,10 +247,9 @@ public class DatabaseTasks {
     /**
      * A task that unsubscribes the user from all the channels at once.
      */
-    public static Disposable unsubscribeFromAllChannels() {
-        return Completable.fromAction(() -> SubscriptionsDb.getSubscriptionsDb().unsubscribeFromAllChannels())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe();
+    public static Completable completableUnsubscribeFromAllChannels() {
+        return Completable.fromAction(() ->
+                SubscriptionsDb.getSubscriptionsDb().unsubscribeFromAllChannels())
+                .subscribeOn(Schedulers.io());
     }
 }
