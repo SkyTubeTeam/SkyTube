@@ -23,4 +23,5 @@
     <string name="close">Schließen</string>
     <string name="trending_in">Beliebt (%s)</string>
     <string name="recaptcha_challenge_requested">YouTube hält dich für einen Bot, also musst du zuerst ein reCAPTCHA lösen.</string>
+    <string name="could_not_get_sponsorblock">Konnte SponsorBlock-Info nicht abrufen: %s.</string>
 </resources>
