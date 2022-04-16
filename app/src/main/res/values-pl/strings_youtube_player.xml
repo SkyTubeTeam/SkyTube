@@ -38,4 +38,13 @@
     <string name="metered_network_blocked_by_policy">Pobieranie zablokowane, ponieważ jesteś połączony z siecią taryfową.</string>
     <string name="reload_video">Załaduj ponownie wideo</string>
     <string name="warning_metered_network_disable">Nigdy więcej nie pytaj.</string>
+    <string name="sponsorblock_skipped">Pominięto fragment: %s</string>
+    <string name="sponsorblock_category_sponsor">Sponsor</string>
+    <string name="sponsorblock_category_selfpromo">Promocja własna</string>
+    <string name="sponsorblock_category_interaction">Przypomnienie o interakcji</string>
+    <string name="sponsorblock_category_music_offtopic">Sekcja niemuzyczna</string>
+    <string name="sponsorblock_category_intro">Wstęp/Przerwa</string>
+    <string name="sponsorblock_category_outro">Napisy końcowe</string>
+    <string name="sponsorblock_category_preview">Zapowiedź/Podsumowanie</string>
+    <string name="sponsorblock_category_filler">Wypełniacz</string>
 </resources>
