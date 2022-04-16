@@ -174,4 +174,8 @@
     <string name="pref_title_sponsorblock_category_list">Hopp over segmenter</string>
     <string name="pref_title_credit_sponsorblock">Bidragsytere</string>
     <string name="pref_summary_credit_sponsorblock">Bruker SponsorBlock-data fra https://sponsor.ajay.app</string>
+    <string name="pref_sponsorblock_category">SponsorBlock</string>
+    <string name="pref_title_enable_sponsorblock">Skru på SponsorBlock</string>
+    <string name="pref_summary_sponsorblock_category_list">Velg kategorier å hoppe over</string>
+    <string name="pref_summary_enable_sponsorblock">Hoppover segmenter dedikert til sponsorer, interaksjonspåminnelser, med mer, automatisk.</string>
 </resources>
