@@ -16,7 +16,7 @@
     <string name="LIVE">直播</string>
     <string name="launch_offical_player_error">无法启动官方 YouTube 播放器。 确保其已安装。</string>
     <string name="search_videos">搜索视频</string>
-    <string name="ok">好</string>
+    <string name="ok">确定</string>
     <string name="error">错误</string>
     <string name="views">%,d 观看数</string>
     <string name="could_not_get_channel_detailed">无法加载频道信息：%s。</string>
