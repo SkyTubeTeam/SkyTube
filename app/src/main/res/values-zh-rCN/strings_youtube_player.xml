@@ -17,7 +17,7 @@
     <string name="copy_url">复制URL</string>
     <string name="share_via">分享方式…</string>
     <string name="share">分享</string>
-    <string name="open_with">用此打开…</string>
+    <string name="open_with">打开方式…</string>
     <string name="open_in_browser">在浏览器中打开</string>
     <string name="reload_video">重新加载视频</string>
     <string name="loading_video">加载视频中……</string>
