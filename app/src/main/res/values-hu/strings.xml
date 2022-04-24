@@ -2,7 +2,7 @@
 <resources>
     <string name="could_not_get_videos">Nem lehet elérni a(z) %s videót.</string>
     <string name="could_not_get_channel">Nem lehet letölteni a csatornainformációkat.</string>
-    <string name="could_not_get_channel_detailed">Nem lehet letölteni a csatornainformációkat: „%s”.</string>
+    <string name="could_not_get_channel_detailed">Nem lehet letölteni a csatornainformációkat: %s.</string>
     <string name="views">%,d megtekintés</string>
     <string name="error">Hiba</string>
     <string name="ok">Rendben</string>
@@ -23,6 +23,6 @@
     <string name="search_channel">Csatornák keresése</string>
     <string name="close">Bezárás</string>
     <string name="trending_in">Felkapott (%s)</string>
-    <string name="recaptcha_challenge_requested">A YouTube azt hiszi, hogy Ön egy bot, ezért először meg kell oldania a reCAPTCHA-t.</string>
+    <string name="recaptcha_challenge_requested">A YouTube azt hiszi, hogy ön egy Bot, ezért először meg kell oldania a reCAPTCHA-t.</string>
     <string name="could_not_get_sponsorblock">Nem sikerült lekérni a SzponzorBlokk adatait: %s.</string>
 </resources>
