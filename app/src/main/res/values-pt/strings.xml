@@ -5,7 +5,7 @@
     <string name="yes">Sim</string>
     <string name="loading">A carregar…</string>
     <string name="close">Fechar</string>
-    <string name="recaptcha_challenge_requested">O YouTube bloqueou os nossos pedidos. Tem que resolver o desafio reCaptcha!</string>
+    <string name="recaptcha_challenge_requested">O YouTube acha que você é um bot, então você deve resolver um reCAPTCHA primeiro.</string>
     <string name="could_not_get_playlists">Não foi possível obter %s listas de reprodução.</string>
     <string name="playlists">Listas de reprodução</string>
     <string name="num_videos">%d vídeos</string>
@@ -15,7 +15,7 @@
     <string name="most_popular">Mais popular</string>
     <string name="featured">Destaques</string>
     <string name="LIVE">Ao vivo</string>
-    <string name="launch_offical_player_error">Ocorreu um erro ao iniciar a aplicação oficial YouTube. Certifique-se de que a aplicação está instalada no dispositivo.</string>
+    <string name="launch_offical_player_error">Não foi possível iniciar o reprodutor oficial do YouTube. Certifique-se de que está instalado.</string>
     <string name="search_videos">Pesquisar vídeos</string>
     <string name="ok">OK</string>
     <string name="error">Erro</string>
@@ -23,4 +23,5 @@
     <string name="could_not_get_channel_detailed">Não foi possível descarregar as informações do canal: %s.</string>
     <string name="could_not_get_channel">Não foi possível carregar as informações do canal.</string>
     <string name="could_not_get_videos">Não foi possível carregar %s vídeos.</string>
+    <string name="could_not_get_sponsorblock">Não foi possível recuperar informações do SponsorBlock: %s.</string>
 </resources>
