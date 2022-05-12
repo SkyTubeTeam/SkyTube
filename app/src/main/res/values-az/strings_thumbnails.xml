@@ -1,2 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="thumbnail">Miniatür</string>
+    <string name="view_thumbnail">Miniatürə baxın</string>
+    <string name="thumbnail_downloaded">Endirildi.</string>
+    <string name="thumbnail_download_error">Miniatürü endirmək mümkün olmadı.</string>
+</resources>
