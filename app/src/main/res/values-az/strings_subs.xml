@@ -1,2 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="unsubscribe">Abunəlikdən çıxın</string>
+    <string name="subscriptions">Abunəliklər</string>
+    <string name="total_subscribers">%,d abunəçi</string>
+    <string name="channel_subscribed">Kanala abunə olundu</string>
+    <string name="channel_already_subscribed">Artıq abunə olub</string>
+    <string name="channel_subscribe_failed">Kanala abunə olmaq alınmadı</string>
+    <string name="channel_unsubscribed">Kanal abunəliyindən çıxıldı</string>
+    <string name="error_get_subbed_channels">Kanal abunəliklərini əldə etmək mümkün olmadı.</string>
+    <string name="error_check_if_user_has_subbed">Kanala abunə olub-olmadığınızı yoxlamaq mümkün olmadı (id=%s)</string>
+    <string name="error_unable_to_subscribe">"Kanala abunə olmaq,kanal abunəliyindən çıxmaq  alınmadı (id=%s)"</string>
+    <string name="import_subscriptions">Abunəlikləri idxal edin</string>
+    <string name="unsubscribe_from_all_current_sibbed_channels">Hazırda abunə olduğunuz bütün kanalların abunəliyini ləğv edin.</string>
+    <string name="subscriptions_to_channels_imported">%d kanal idxal edildi.</string>
+    <string name="subscribe">Abunə olun</string>
+    <string name="unsubscribed">Abunəlikdən çıxıldı</string>
+    <string name="subscribed">Abunə olundu</string>
+    <string name="import_subscriptions_description">https://takeout.google.com saytında \"YouTube və YouTube Music\" istisna olmaqla, hər şey seçimini ləğv edin.\"Bütün YouTube datası daxildir\" üzərinə klikləyin və yalnız abunəlikləri seçin \"Növbəti\" və sonra \"İxrac yarat\" düyməsini basın. Yükləmə linki olan e-poçtu almaq üçün klikləyin. Faylı e-poçt müştərinizdən yükləyin və çıxarın. Subscriptions.json faylını (/Takeout/YouTube və YouTube Music/subscriptions/-da) aşağıda \"Abunəlik Faylını Seç\"dən istifadə edərək SkyTube-da idxal edin.</string>
+    <string name="select_sub_file">Abunəlik Faylını seçin</string>
+    <string name="select_all">Hamısını seçin</string>
+    <string name="about">Haqqında</string>
+    <string name="select_none">Heç birini seçmə</string>
+    <string name="no_channels_found">Yüklədiyiniz faylda heç bir YouTube kanalı tapmaq mümkün olmadı.</string>
+    <string name="no_new_channels_found">Hələ ki, abunə olmadığınız heç bir YouTube kanalı tapılmadı.</string>
+    <string name="import_subscriptions_parse_error">Yüklədiyiniz faylı təhlil etmək mümkün olmadı: %s.</string>
+    <string name="failed_to_import_subscriptions">YouTube abunəliklərinizi idxal etmək mümkün olmadı.</string>
+</resources>
