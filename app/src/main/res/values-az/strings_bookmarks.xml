@@ -1,2 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="bookmarks">Əlfəcinlər</string>
+    <string name="bookmark">Əlfəcin</string>
+    <string name="video_unbookmarked_error">Videonu əlfəcindən silmək mümkün olmadı.</string>
+    <string name="no_bookmarked_videos_text">Burada tapmaq üçün əlfəcinə bir neçə video əlavə edin.</string>
+    <string name="bookmark_share_label">SkyTube Əlfəcinlər</string>
+    <string name="bookmark_share_invalid_url">Yalnız etibarlı YouTube URL-ləri əlfəcinlənə bilər.</string>
+    <string name="video_bookmarked">Əlfəcinləndi</string>
+    <string name="video_already_bookmarked">Artıq əlfəcinlənib</string>
+    <string name="video_bookmarked_error">Videonu əlfəcinləmək mümkün olmadı.</string>
+    <string name="unbookmark">Əlfəcinləri silin</string>
+    <string name="video_unbookmarked">Əlfəcinlər silindi</string>
+    <string name="video_was_not_bookmarked">Video əlfəcinlənmədi</string>
+</resources>
