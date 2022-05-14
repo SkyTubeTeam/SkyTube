@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="could_not_get_videos">%s Videos konnten nicht abgerufen werden</string>
+    <string name="could_not_get_videos">%s Videos konnten nicht abgerufen werden.</string>
     <string name="views">%,d Aufrufe</string>
     <string name="error">Fehler</string>
     <string name="ok">OK</string>
@@ -23,5 +23,5 @@
     <string name="close">Schließen</string>
     <string name="trending_in">Beliebt (%s)</string>
     <string name="recaptcha_challenge_requested">YouTube hält dich für einen Bot, also musst du zuerst ein reCAPTCHA lösen.</string>
-    <string name="could_not_get_sponsorblock">Konnte SponsorBlock-Info nicht abrufen: %s.</string>
+    <string name="could_not_get_sponsorblock">Folgende SponsorBlock-Information konnte nicht abgerufen werden: %s.</string>
 </resources>
