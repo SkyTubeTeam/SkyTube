@@ -11,7 +11,7 @@
     <string name="external_storage_not_available">Permetti l\'accesso all\'archiviazione per scaricare il file.</string>
     <string name="download">Scarica</string>
     <string name="video_stream_not_found_with_request_resolution">Nessun flusso video trovato per la risoluzione richiesta tra %1$s e %2$s</string>
-    <string name="unable_to_delete_file">Impossibile eliminare il file scaricato: «%s»</string>
+    <string name="unable_to_delete_file">Impossibile eliminare il file scaricato: «%s».</string>
     <string name="warning_metered_network_download">Sei connesso a una rete a consumo. Vuoi scaricare comunque il video\?</string>
     <string name="download_failed_because">Impossibile scaricare %1$s perché %2$s.</string>
 </resources>
