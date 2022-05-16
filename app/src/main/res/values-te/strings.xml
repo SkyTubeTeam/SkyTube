@@ -1,2 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="could_not_get_channel_detailed">ఛానెల్ సమాచారాన్ని డౌన్‌లోడ్ చేయడం సాధ్యపడలేదు: %s.</string>
+    <string name="could_not_get_videos">%s వీడియోలను పొందడం సాధ్యపడలేదు.</string>
+    <string name="could_not_get_channel">ఛానెల్ సమాచారాన్ని డౌన్‌లోడ్ చేయడం సాధ్యపడలేదు.</string>
+</resources>
