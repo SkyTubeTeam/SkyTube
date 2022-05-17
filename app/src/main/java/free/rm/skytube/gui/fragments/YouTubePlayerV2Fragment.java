@@ -381,8 +381,8 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
         }
         final boolean hasLikes = video.getLikeCountNumber() != null;
         setTextAndVisibility(videoDescriptionBinding.videoDescLikes, hasLikes, video.getLikeCount());
-        final boolean hasDislikes = video.getDislikeCountNumber() != null;
-        setTextAndVisibility(videoDescriptionBinding.videoDescDislikes, hasDislikes, video.getDislikeCount());
+        final boolean hasDislikes = video.getDislikeCount() != 0;
+        setTextAndVisibility(videoDescriptionBinding.videoDescDislikes, hasDislikes, String.valueOf(video.getDislikeCount()));
         setValueAndVisibility(videoDescriptionBinding.videoDescLikesBar, video.isThumbsUpPercentageSet(), video.getThumbsUpPercentage());
         setVisibility(videoDescriptionBinding.videoDescRatingsDisabled, !hasLikes && !hasDislikes);
         initSponsorBlock();
