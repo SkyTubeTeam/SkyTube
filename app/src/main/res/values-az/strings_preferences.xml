@@ -15,4 +15,12 @@
     <string name="pref_summary_minimum_res_metered">Ölçülmüş şəbəkə vasitəsilə yayım zamanı ən aşağı rezolyusiyanı seçin: %s</string>
     <string name="pref_title_maximum_res_metered">Ölçülmüş şəbəkə üçün ən yüksək qətnamə</string>
     <string name="pref_summary_maximum_res_metered">Ölçülmüş şəbəkə vasitəsilə yayım zamanı maksimum rezolyusiyanı seçin: %s</string>
+    <string name="pref_summary_import_dbs">Əlfəcinlərinizi və abunəliklərinizin ehtiyat nüsxəsini idxal edin.</string>
+    <string name="pref_title_metered_network_usage">Ölçülmüş Şəbəkə İstifadəsi</string>
+    <string name="pref_summary_metered_network_usage">Videoları endirmək/izləmək üçün ölçülmüş şəbəkədən istifadə edirsinizsə nə etməli: %s</string>
+    <string name="pref_import_export_category">İdxal/ixrac</string>
+    <string name="pref_title_backup_dbs">Məlumat bazasının ehtiyat nüsxəsini çıxarın</string>
+    <string name="pref_summary_backup_dbs">Əlfəcinlərinizin və abunəliklərinizin ehtiyat nüsxəsini çıxarın.</string>
+    <string name="pref_title_import_dbs">Yedəkləməni idxal edin</string>
+    <string name="databases_backing_up">Yedəklənir…</string>
 </resources>
