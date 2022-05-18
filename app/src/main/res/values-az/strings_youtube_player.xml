@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="error_stream_err_unavailable">Əlçatmaz mesaj.</string>
+    <string name="error_video_streams">Video axınının heç birini əldə etmək mümkün olmadı.</string>
+    <string name="error_stream_decryption_fail">YouTube xidməti üçün deşifrə kodunu yükləmək mümkün olmadı.</string>
+    <string name="error_stream_parse_error">Təhlil xətası.</string>
+    <string name="error_video_play">Video Oynatma Xətası</string>
+    <string name="error_video_streams_empty">\'%s\' videosunun yayımı yoxdur.</string>
 </resources>
