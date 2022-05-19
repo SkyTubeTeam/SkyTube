@@ -38,4 +38,10 @@
     <string name="warning_metered_network_disable">不要再問。</string>
     <string name="warning_metered_network_play">為避免流量使用費，請先連線至非計量付費網路（即吃到飽方案）。還是您仍要播放影片？</string>
     <string name="metered_network">計量網路</string>
+    <string name="sponsorblock_skipped">已跳過的片段：%s</string>
+    <string name="sponsorblock_category_sponsor">贊助商</string>
+    <string name="sponsorblock_category_interaction">互動（如訂閱、小鈴鐺）提醒</string>
+    <string name="sponsorblock_category_music_offtopic">非音樂部分</string>
+    <string name="sponsorblock_category_outro">片尾卡／製作人員／感謝名單</string>
+    <string name="sponsorblock_category_preview">預覽／回顧</string>
 </resources>

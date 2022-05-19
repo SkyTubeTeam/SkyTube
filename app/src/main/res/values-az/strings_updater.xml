@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="update_available">Yeni Versiya Mövcuddur</string>
+    <string name="update_dialog_msg">SkyTube-un yeni versiyası mövcuddur. %s versiyası quraşdırılacaq.</string>
+    <string name="up_to_date">Güncəl</string>
+    <string name="up_to_date_msg">Sizdə SkyTube-un ən yeni versiyası quraşdırılıb.</string>
+    <string name="release_notes">%s-də dəyişikliklər</string>
+    <string name="update">Yeniləyin</string>
+    <string name="later">Daha sonra</string>
+    <string name="update_failure">Proqramın yeni versiyasını quraşdırmaq mümkün olmadı.</string>
+    <string name="downloading">Endirilir…</string>
+</resources>

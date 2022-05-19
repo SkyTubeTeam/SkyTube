@@ -23,4 +23,5 @@
     <string name="could_not_get_channel">Ezin izan da kanalaren informazioa deskargatu.</string>
     <string name="trending_in">Joera (%s)</string>
     <string name="recaptcha_challenge_requested">YouTube-k bot bat zarela uste du, beraz, lehenik reCAPTCHA bat konpondu behar duzu.</string>
+    <string name="could_not_get_sponsorblock">Ezin izan da Babesleak informazioa berreskuratu: %s.</string>
 </resources>

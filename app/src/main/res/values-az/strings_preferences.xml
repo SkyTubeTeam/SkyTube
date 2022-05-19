@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="key_preferences">üstünlüklər</string>
+    <string name="pref_title_maximum_res">Ən yüksək qətnamə</string>
+    <string name="pref_summary_maximum_res">Ən yüksək rezolyusiyanı seçin: %s</string>
+    <string name="pref_title_minimum_res">Ən Aşağı Rezolyusiya</string>
+    <string name="pref_summary_minimum_res">Ən aşağı rezolyusiyanı seçin: %s</string>
+    <string name="pref_title_choose_player">Video pleyer</string>
+    <string name="pref_summary_choose_player">İstifadə ediləcək video pleyer: %s</string>
+    <string name="no_resolution_specified">Heç biri</string>
+    <string name="pref_title_minimum_res_metered">Ölçülmüş şəbəkə üçün ən aşağı qətnamə</string>
+    <string name="preferences">Üstünlüklər</string>
+    <string name="pref_video_player_category">Video pleyer</string>
+    <string name="pref_category_metered_network">Ölçülmüş Şəbəkə</string>
+    <string name="pref_summary_minimum_res_metered">Ölçülmüş şəbəkə vasitəsilə yayım zamanı ən aşağı rezolyusiyanı seçin: %s</string>
+    <string name="pref_title_maximum_res_metered">Ölçülmüş şəbəkə üçün ən yüksək qətnamə</string>
+    <string name="pref_summary_maximum_res_metered">Ölçülmüş şəbəkə vasitəsilə yayım zamanı maksimum rezolyusiyanı seçin: %s</string>
+</resources>

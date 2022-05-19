@@ -5,7 +5,7 @@
     <string name="error_stream_parse_error">Feldolgozási hiba.</string>
     <string name="error_video_play">Videólejátszási hiba</string>
     <string name="error_video_streams_empty">A(z) \'%s\' videóhoz nem található adatfolyam.</string>
-    <string name="error_video_streams">Nem sikerült lekérni egyik videó folyamot sem.</string>
+    <string name="error_video_streams">Nem sikerült betölteni egyik videó folyamot sem.</string>
     <string name="error_get_video_desc">Nem sikerült lekérni a videó leírását.</string>
     <string name="error_invalid_url">Érvénytelen videó URL: %s</string>
     <string name="play_video">Videólejátszás</string>
@@ -41,8 +41,10 @@
     <string name="sponsorblock_category_interaction">Interakció emlékeztető</string>
     <string name="sponsorblock_skipped">Átugrott szakasz: %s</string>
     <string name="sponsorblock_category_sponsor">Szponzor</string>
-    <string name="sponsorblock_category_intro">Intro/szünet</string>
+    <string name="sponsorblock_category_intro">Bevezető/Szünet</string>
     <string name="sponsorblock_category_music_offtopic">Nem zenei szakasz</string>
     <string name="sponsorblock_category_selfpromo">Önpromóció</string>
-    <string name="sponsorblock_category_preview">Előzetes</string>
+    <string name="sponsorblock_category_preview">Előzetes/Összefoglaló</string>
+    <string name="sponsorblock_category_outro">Bezáró/Elismerések</string>
+    <string name="sponsorblock_category_filler">Töltelék</string>
 </resources>

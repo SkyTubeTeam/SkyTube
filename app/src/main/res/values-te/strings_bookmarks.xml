@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="video_was_not_bookmarked">వీడియో బుక్‌మార్క్ చేయబడలేదు</string>
+    <string name="video_unbookmarked_error">వీడియో బుక్‌మార్క్‌ని తీసివేయడం సాధ్యపడలేదు.</string>
+    <string name="video_already_bookmarked">ఇప్పటికే బుక్‌మార్క్ చేయబడింది</string>
+    <string name="bookmark">బుక్‌మార్క్</string>
+    <string name="video_bookmarked">బుక్‌మార్క్ చేయబడింది</string>
+    <string name="bookmarks">బుక్‌మార్క్‌లు</string>
+    <string name="video_bookmarked_error">వీడియోను బుక్‌మార్క్ చేయడం సాధ్యపడలేదు.</string>
+    <string name="unbookmark">బుక్‌మార్క్‌ని తీసివేయండి</string>
+    <string name="video_unbookmarked">బుక్‌మార్క్ తీసివేయబడింది</string>
+    <string name="no_bookmarked_videos_text">కొన్ని వీడియోలను ఇక్కడ కనుగొనడానికి వాటిని బుక్‌మార్క్ చేయండి.</string>
+    <string name="bookmark_share_label">స్కైట్యూబ్ బుక్‌మార్క్</string>
+    <string name="bookmark_share_invalid_url">చెల్లుబాటు అయ్యే YouTube URLలు మాత్రమే బుక్‌మార్క్ చేయబడతాయి.</string>
+</resources>

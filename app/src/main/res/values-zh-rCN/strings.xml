@@ -16,12 +16,12 @@
     <string name="LIVE">直播</string>
     <string name="launch_offical_player_error">无法启动官方 YouTube 播放器。 确保其已安装。</string>
     <string name="search_videos">搜索视频</string>
-    <string name="ok">好</string>
+    <string name="ok">确定</string>
     <string name="error">错误</string>
     <string name="views">%,d 观看数</string>
     <string name="could_not_get_channel_detailed">无法加载频道信息：%s。</string>
     <string name="could_not_get_channel">无法下载频道信息。</string>
     <string name="could_not_get_videos">无法获取 %s 视频。</string>
     <string name="recaptcha_challenge_requested">YouTube 认为您是机器人，因此您必须先解决 reCAPTCHA。</string>
-    <string name="could_not_get_sponsorblock">无法获取 sponsorblock 信息：%s。</string>
+    <string name="could_not_get_sponsorblock">无法获取 SponsorBlock 信息：%s。</string>
 </resources>
