@@ -7,9 +7,7 @@
     <string name="fetching_subscription_videos">Videos von abonnierten Kanälen abrufen …</string>
     <string name="fetched_videos_from_channels">%1$d Videos von %2$d/%3$d Kanälen abgerufen.</string>
     <string name="no_new_videos_found">Keine neuen Videos.</string>
-    <string name="no_subscriptions_text">Sie haben derzeit keine Kanäle abonniert.
-\n
-\nSobald Sie Abonnements hinzugefügt haben, werden hier alle Videos angezeigt, die innerhalb des letzten Monats auf Ihren abonnierten Kanälen hochgeladen wurden.</string>
+    <string name="no_subscriptions_text">Abonnieren Sie Kanäle, um ein paar neue Videos zu sehen, die innerhalb des letzten Monats auf Ihren abonnierten Kanälen hochgeladen wurden.</string>
     <string name="import_subscriptions_from_youtube">Abonnements von YouTube importieren</string>
     <string name="notification_channel_feed_title">Feed-Benachrichtigungen</string>
     <string name="notification_new_videos_found">%d neue Videos auf abonnierten Kanälen</string>

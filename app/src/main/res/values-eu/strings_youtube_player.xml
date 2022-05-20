@@ -38,4 +38,13 @@
     <string name="warning_metered_network_disable">Ez galdetu berriro.</string>
     <string name="warning_metered_network_play">Konektatu neurgailurik gabeko sare batera lehenik eta behin datuak erabiltzeagatiko kostuak ekiditeko. Bideoa erreproduzitu nahi duzu\?</string>
     <string name="metered_network">Datu-mugatua sarea</string>
+    <string name="sponsorblock_skipped">Saltatutako segmentua: %s</string>
+    <string name="sponsorblock_category_sponsor">Babeslea</string>
+    <string name="sponsorblock_category_selfpromo">Autopromozioa</string>
+    <string name="sponsorblock_category_interaction">Elkarreraginaren abisua</string>
+    <string name="sponsorblock_category_music_offtopic">Musikarik gabe atala</string>
+    <string name="sponsorblock_category_intro">Sarrera/Atsedenaldia</string>
+    <string name="sponsorblock_category_outro">Amaierako txartelak/kredituak</string>
+    <string name="sponsorblock_category_preview">Aurrebista/Berrikira</string>
+    <string name="sponsorblock_category_filler">Betegarria</string>
 </resources>

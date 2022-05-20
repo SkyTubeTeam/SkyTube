@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="blocked_videos">Bloklanmış Videolar</string>
+    <string name="no_videos_blocked">Videoları bloklamaq və ya filtrləmək üçün video bloker qurmaq istəyirsiniz\?</string>
+    <string name="configure">Qurmaq</string>
+    <string name="block_channel">Kanalı bloklayın</string>
+    <string name="channel_blacklisted">Yeni kanalın qara siyahısından istifadə etmək üçün yeniləyin.</string>
+    <string name="channel_blacklist_error">Kanalı qara siyahıya salmaq mümkün olmadı.</string>
+    <string name="channel_unwhitelist_error">Kanalı ağ siyahıdan silmək mümkün olmadı.</string>
+    <string name="dislikes">%d%% bəyənmədi</string>
+</resources>

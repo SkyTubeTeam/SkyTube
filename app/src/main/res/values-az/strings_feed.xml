@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="subscribing_to_channels">Kanallara abunə olunur…</string>
+    <string name="open_channel">Kanalı açın</string>
+    <string name="fetching_subbed_channels_info">Kanal məlumatı alınır…</string>
+    <string name="fetching_subbed_channels_info_error">Kanal məlumatını əldə etmək mümkün olmadı.</string>
+    <string name="fetching_subscription_videos">Abunə olunmuş kanallardan videolar alınır…</string>
+    <string name="fetched_videos_from_channels">%1$d video %2$d/%3$d kanaldan alındı.</string>
+    <string name="no_new_videos_found">Yeni video yoxdur.</string>
+    <string name="no_subscriptions_text">Yeni videoları burada görmək üçün bir neçə kanala abunə olun.</string>
+    <string name="import_subscriptions_from_youtube">Abunəlikləri YouTube-dan idxal edin</string>
+    <string name="notification_channel_feed_title">Lent Bildirişləri</string>
+    <string name="notification_new_videos_found">Abunə edilmiş kanallardan %d yeni video</string>
+    <string name="feed">Lent</string>
+</resources>

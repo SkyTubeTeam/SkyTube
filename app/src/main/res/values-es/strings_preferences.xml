@@ -100,7 +100,7 @@
     <string name="preferred_lang_updated">Refresque los vídeos para usar el nuevo idioma.</string>
     <string name="pref_title_lang_detection_video_filtering">Filtrado de idioma del vídeo</string>
     <string name="pref_summary_lang_detection_video_filtering">Usa un montón de recursos para detectar el idioma del vídeo y bloquear los idiomas no preferidos.</string>
-    <string name="setting_updated">Refresque los vídeos para usar los nuevos ajustes.</string>
+    <string name="setting_updated">Refresque los vídeos para usar el nuevo ajuste.</string>
     <string name="pref_other_filters_category">Otros Filtros</string>
     <string name="pref_title_low_views_filter">Visualizaciones</string>
     <string name="pref_summary_low_views_filter">Filtrar vídeos con pocas visualizaciones: %s</string>
@@ -167,4 +167,13 @@
     <string name="system_default_country">Sistema</string>
     <string name="pref_key_use_newer_formats_summary">El sonido y el vídeo pueden sufrir en versiones antiguas de Android sin soporte.</string>
     <string name="pref_key_use_newer_formats_title">Intentar nuevos formatos de vídeo</string>
+    <string name="pref_summary_enable_sponsorblock">Omita automáticamente segmentos de video dedicados a patrocinadores, recordatorios de interacción y más</string>
+    <string name="pref_sponsorblock_category">Patrocinadores</string>
+    <string name="pref_general">General</string>
+    <string name="pref_details">Detalles</string>
+    <string name="pref_title_enable_sponsorblock">Permitir Patrocinadores</string>
+    <string name="pref_title_sponsorblock_category_list">Saltar segmentos</string>
+    <string name="pref_summary_sponsorblock_category_list">Elegir categorías para saltar</string>
+    <string name="pref_title_credit_sponsorblock">Créditos</string>
+    <string name="pref_summary_credit_sponsorblock">Usar patrocinadores de https://sponsor.ajay.app</string>
 </resources>

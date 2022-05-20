@@ -158,4 +158,13 @@
     <string name="system_default_country">系統</string>
     <string name="pref_key_use_newer_formats_summary">若使用已不支援的舊版 Android，聲音或影像可能無法順利播放。</string>
     <string name="pref_key_use_newer_formats_title">試使用較新的視訊格式</string>
+    <string name="pref_sponsorblock_category">SponsorBlock（封鎖贊助商）</string>
+    <string name="pref_title_sponsorblock_category_list">跳過片段</string>
+    <string name="pref_summary_sponsorblock_category_list">選取要跳過的類別</string>
+    <string name="pref_title_credit_sponsorblock">製作人員／感謝名單</string>
+    <string name="pref_summary_credit_sponsorblock">使用 https://sponsor.ajay.app 的 SponsorBlock（封鎖贊助商）資料</string>
+    <string name="pref_title_enable_sponsorblock">啟用 SponsorBlock（封鎖贊助商）</string>
+    <string name="pref_general">一般</string>
+    <string name="pref_details">詳情</string>
+    <string name="pref_summary_enable_sponsorblock">自動跳過關於贊助商或互動（如訂閱、小鈴鐺）提醒等影片片段</string>
 </resources>

@@ -41,4 +41,10 @@
     <string name="sponsorblock_category_sponsor">Sponsor</string>
     <string name="sponsorblock_category_selfpromo">Selv-promotering</string>
     <string name="sponsorblock_category_interaction">Interaksjonspåminnelse</string>
+    <string name="sponsorblock_skipped">Hoppet over segment: %s</string>
+    <string name="sponsorblock_category_music_offtopic">Del uten musikk</string>
+    <string name="sponsorblock_category_intro">Intro/innledning</string>
+    <string name="sponsorblock_category_outro">Sluttsats/rulletekst</string>
+    <string name="sponsorblock_category_preview">Forhåndsvisning/tilbakeblikk</string>
+    <string name="sponsorblock_category_filler">Fyllstoff</string>
 </resources>

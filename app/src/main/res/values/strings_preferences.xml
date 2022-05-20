@@ -579,7 +579,6 @@
     <string name="pref_key_video_quality_metered_summary">Optimize for: %s</string>
     <string name="pref_key_video_quality_for_downloads_title">Video Quality Selection for Downloads</string>
     <string name="pref_key_video_quality_for_downloads_summary">Optimize for: %s</string>
-
     <string name="pref_key_use_newer_formats" translatable="false">pref_key_use_newer_formats</string>
     <string name="pref_key_use_newer_formats_title">Try newer Video formats</string>
     <string name="pref_key_use_newer_formats_summary">Sound and video may suffer on old Android versions without support.</string>
@@ -706,7 +705,6 @@
     <string name="pref_key_default_content_country" translatable="false">pref_key_default_content_country</string>
     <string name="pref_title_default_content_country">Default content country</string>
     <string name="pref_summary_default_content_country">Show content intended for this country: %s</string>
-
     <!--
         SPONSORBLOCK
     -->
@@ -714,9 +712,9 @@
     <string name="pref_general">General</string>
     <string name="pref_details">Details</string>
     <string name="pref_title_enable_sponsorblock">Enable SponsorBlock</string>
-    <string name="pref_summary_enable_sponsorblock">Automatically skip video segments that are dedicated to sponsors, interaction reminders and many more</string>
+    <string name="pref_summary_enable_sponsorblock">Auto-skip video segments dedicated to sponsors, interaction reminders and more</string>
     <string name="pref_title_sponsorblock_category_list">Skip Segments</string>
-    <string name="pref_summary_sponsorblock_category_list">Choose which categories to skip</string>
+    <string name="pref_summary_sponsorblock_category_list">Choose categories to skip</string>
     <string name="pref_title_credit_sponsorblock">Credits</string>
     <string name="pref_summary_credit_sponsorblock">Uses SponsorBlock data from https://sponsor.ajay.app</string>
     <string-array name="sponsorblock_filtering_list" translatable="false">

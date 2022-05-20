@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="preferences">Einstellungen</string>
-    <string name="pref_languages_filter_category">Sprachen- &amp; Regionen-Filter</string>
+    <string name="pref_languages_filter_category">Sprach- &amp; Regionfilter</string>
     <string name="pref_title_preferred_regions">Bevorzugte Region</string>
-    <string name="pref_summary_preferred_regions">Bevorzugte Region auswählen. Diese wird verwendet, um Videos in der Kategorie „Empfohlene Videos” herauszufiltern: %s</string>
+    <string name="pref_summary_preferred_regions">Region auswählen, woher die \"Empfohlen\" Videos kommen: %s</string>
     <string name="pref_title_preferred_languages">Bevorzugte Sprache(n)</string>
     <string name="pref_summary_preferred_languages">Wählen Sie Ihre bevorzugten Sprachen.</string>
     <string name="pref_video_player_category">Videoplayer</string>
@@ -16,38 +16,36 @@
     <string name="databases_backup_fail">Datenbanken konnten nicht gesichert werden.</string>
     <string name="databases_import_select_backup">Sicherungsdatei zum Importieren auswählen</string>
     <string name="databases_import_nothing_selected">Es wurde nichts ausgewählt …</string>
-    <string name="databases_import_warning_message">Die Abonnement- und Lesezeichendatenbanken werden durch die Daten in der ausgewählten Sicherungsdatei ersetzt.
-\n
-\nFortfahren?</string>
+    <string name="databases_import_warning_message">Sollen die Abonnements und Lesezeichen durch die Daten in der ausgewählten Sicherungsdatei ersetzt werden\?</string>
     <string name="continue_">Fortfahren</string>
     <string name="databases_importing">Importieren …</string>
-    <string name="databases_import_fail">Fehler beim Importieren der Datenbanken.</string>
-    <string name="databases_import_success">Die Datenbanken wurden erfolgreich importiert. Starten Sie die App neu, um die Änderungen zu übernehmen.</string>
+    <string name="databases_import_fail">Konnte die Datenbanken nicht importieren.</string>
+    <string name="databases_import_success">Starten Sie die App neu, um neue Lesezeichen und Abonnements anzuwenden.</string>
     <string name="pref_title_import_subs">Abos von YouTube importieren</string>
     <string name="pref_summary_import_subs">Importieren Sie Ihre Abos aus Ihrem YouTube-Konto.</string>
     <string name="subs_import_select_backup">YouTube XML-Datei zum Importieren auswählen</string>
     <string name="pref_about_category">Über</string>
     <string name="pref_title_website">Webseite</string>
     <string name="pref_title_credits">Mitwirkende</string>
-    <string name="pref_summary_credits">Menschen und Projekte, die diese App möglich gemacht haben.</string>
+    <string name="pref_summary_credits">Großartige Menschen und frei abrufbare Projekte hinter dieser App.</string>
     <string name="pref_title_version">Version</string>
     <string name="pref_title_updates">Aktualisierungen</string>
     <string name="pref_summary_updates">Nach neuen Versionen suchen.</string>
-    <string name="pref_title_license">Lizenz</string>
-    <string name="pref_summary_license">GNU General Public License Version 3</string>
-    <string name="app_license">Copyright © 2015-2018 Ramon Mifsud
-\n 
+    <string name="pref_title_license">Copylefted (freie) Lizenz</string>
+    <string name="pref_summary_license">GPLv3+</string>
+    <string name="app_license">Copyright © 2015–2018 Ramon Mifsud
+\n
 \nDieses Programm ist freie Software. Sie können es unter den Bedingungen der GNU General Public License, wie von der Free Software Foundation veröffentlicht (Version 3 der Lizenz), weitergeben und/oder modifizieren.
-\n 
+\n
 \nDie Veröffentlichung dieses Programms erfolgt in der Hoffnung, daß es Ihnen von Nutzen sein wird, aber OHNE IRGENDEINE GARANTIE, sogar ohne die implizite Garantie der MARKTREIFE oder der VERWENDBARKEIT FÜR EINEN BESTIMMTEN ZWECK. Details finden Sie in der GNU General Public License.
-\n 
-\nSie sollten ein Exemplar der GNU General Public License zusammen mit diesem Programm erhalten haben. Falls nicht, siehe &lt;http://www.gnu.org/licenses/&gt;</string>
-    <string name="i_agree">Zustimmen</string>
+\n
+\nSie sollten ein Exemplar der GNU General Public License zusammen mit diesem Programm erhalten haben. Falls nicht, siehe &lt;https://www.gnu.org/licenses/&gt;</string>
+    <string name="i_agree">Ich stimme zu</string>
     <string name="pref_other_category">Weitere</string>
     <string name="pref_title_default_tab">Standard-Tab</string>
-    <string name="pref_summary_default_tab">Standard-Tab, welcher beim Start von SkyTube angezeigt werden soll: %s</string>
+    <string name="pref_summary_default_tab">Tab, welcher beim Start von SkyTube angezeigt werden soll: %s</string>
     <string name="pref_title_screen_orientation">Bildschirmausrichtung</string>
-    <string name="pref_summary_screen_orientation">Ausrichtung des Videoplayers: %s</string>
+    <string name="pref_summary_screen_orientation">Videoplayerausrichtung: %s</string>
     <string-array name="screen_orientations">
         <item>Automatisch</item>
         <item>Querformat</item>
@@ -55,13 +53,13 @@
         <item>Gerätesensor</item>
     </string-array>
     <string name="pref_title_youtube_api_key">YouTube-API-Schlüssel</string>
-    <string name="pref_summary_youtube_api_key">Geben Sie Ihren eigenen YouTube Data API-Schlüssel ein. Lassen Sie das Feld leer, um die Standardeinstellung zu verwenden.</string>
-    <string name="pref_youtube_api_key_error">Beim Versuch, den eingegebenen API Key zu validieren, ist ein Fehler aufgetreten.</string>
-    <string name="pref_youtube_api_key_custom">Der Key is gültig. Starten Sie die App neu, um den neuen YouTube API-Key zu verwenden.</string>
-    <string name="pref_youtube_api_key_default">App neu starten, um zum Standard YouTube API-Key zurück zu wechseln.</string>
+    <string name="pref_summary_youtube_api_key">Geben Sie einen eigenen API-Schlüssel ein, welcher anstatt verwendet werden soll.</string>
+    <string name="pref_youtube_api_key_error">Konnte den eingegebenen API Key nicht validieren.</string>
+    <string name="pref_youtube_api_key_custom">Starten Sie die App neu, um den neuen YouTube API-Schlüssel zu verwenden.</string>
+    <string name="pref_youtube_api_key_default">App neu starten, um den Standard YouTube API-Schlüssel zu benutzen.</string>
     <string name="restart">Neu starten</string>
     <string name="pref_title_feed_notification">Automatische Feedbenachrichtigung</string>
-    <string name="pref_summary_feed_notification">Häufigkeit der Suche nach neuen Videos in abonnierten Kanälen: %s</string>
+    <string name="pref_summary_feed_notification">Wie oft nach neuen Videos in abonnierten Kanälen gesucht werden soll: %s</string>
     <string-array name="feed_notification">
         <item>Off</item>
         <item>6 Hours</item>
@@ -71,7 +69,7 @@
     <string name="pref_title_choose_player">Videoplayer</string>
     <string name="pref_summary_choose_player">Video-Player zu verwenden: %s</string>
     <string name="pref_title_subscriptions_alphabetical_order">Kanäle alphabetisch sortieren</string>
-    <string name="pref_summary_subscriptions_alphabetical_order">Wenn aktiviert ist, werden abonnierte Kanäle alphabetisch sortiert.</string>
+    <string name="pref_summary_subscriptions_alphabetical_order">Sortiert abonnierte Kanäle alphabetisch.</string>
     <string name="pref_video_blocker_category">Video-Blocker</string>
     <string name="pref_channels_filter_category">Kanalfilter</string>
     <string name="pref_title_channel_filter_method">Kanalfilter-Methode</string>
@@ -80,62 +78,62 @@
     <string name="pref_title_channel_blacklist">Kanal-Negativliste</string>
     <string name="pref_summary_channel_blacklist">Eine Liste der gesperrten Kanäle.</string>
     <string name="unblock">Entsperren</string>
-    <string name="channel_blacklist_updated">Kanal-Negativliste aktualisiert. Bitte Videos aktualisieren.</string>
-    <string name="channel_blacklist_update_failure">Der angegebenen Kanal konnten nicht aus der Negativliste entfernt werden …</string>
-    <string name="channel_blacklist_empty">Kanal-Negativliste ist leer.</string>
+    <string name="channel_blacklist_updated">Bitte Videos aktualisieren, um Kanal-Negativliste anzuwenden.</string>
+    <string name="channel_blacklist_update_failure">Konnte den/die angegebenen Kanal/Kanäle nicht aus der Negativliste entfernen…</string>
+    <string name="channel_blacklist_empty">Die Negativliste ist leer.</string>
     <string name="pref_title_channel_whitelist">Kanal-Positivliste</string>
-    <string name="pref_summary_channel_whitelist">Eine Liste der Kanäle auf der Positivliste.</string>
-    <string name="input_channel_url">URL des Kanals, der auf die Positivliste gesetzt werden soll:</string>
+    <string name="pref_summary_channel_whitelist">Eine Liste der Kanäle, welche erlaubt sind.</string>
+    <string name="input_channel_url">Kanalurls, die auf die Positivliste gesetzt werden soll:</string>
     <string name="add">Hinzufügen</string>
     <string name="block">Sperren</string>
     <string name="please_wait">Bitte warten …</string>
     <string name="channel_already_whitelisted">Kanal befindet sich bereits auf der Positivliste.</string>
-    <string name="channel_whitelist_updated">Kanal auf die Positivliste gesetzt. Bitte Videos aktualisieren.</string>
+    <string name="channel_whitelist_updated">Bitte Videos aktualisieren, um die neue Kanal-Positivliste zu benutzen.</string>
     <string name="channel_whitelist_update_failure">Der angegebene Kanal konnte nicht in die Positivliste eingetragen werden.</string>
-    <string name="channel_unwhitelist_success">Kanal-Positivliste aktualisiert. Bitte Videos aktualisieren.</string>
+    <string name="channel_unwhitelist_success">Bitte Videos aktualisieren, um die neue Kanal-Positivliste zu benutzen.</string>
     <string name="channel_unwhitelist_failure">Das Austragen der angegebenen Kanäle aus der Positvliste fehlgeschlagen …</string>
-    <string name="no_preferred_lang_selected">Keine bevorzugte Sprache ausgewählt. Einstellung ignoriert.</string>
-    <string name="preferred_lang_updated">Bevorzugte Sprache aktualisiert. Bitte aktualisieren Sie die Videos.</string>
-    <string name="pref_title_lang_detection_video_filtering">Videos entsprechen der erkannten Sprache filtern</string>
-    <string name="pref_summary_lang_detection_video_filtering">In Videos verwendete Sprachen erkennen und alles blockieren, was außerhalb Ihrer bevorzugten Sprache(n) liegt. Nur für Spitzenklasse-Geräte.</string>
-    <string name="setting_updated">Einstellung aktualisiert. Bitte aktualisieren Sie die Videos.</string>
+    <string name="no_preferred_lang_selected">Keine bevorzugte Sprache ausgewählt.</string>
+    <string name="preferred_lang_updated">Bitte aktualisieren Sie die Videos, um die neue Sprache anzuwenden.</string>
+    <string name="pref_title_lang_detection_video_filtering">Videosprachfilter</string>
+    <string name="pref_summary_lang_detection_video_filtering">Benutz viele Ressourcen, um die Sprache des Videos zu erkennen und nicht-bevorzugte Sprache(n) herauszufiltern.</string>
+    <string name="setting_updated">Bitte aktualisieren Sie die Videos, um die Einstellung anzuwenden.</string>
     <string name="pref_other_filters_category">Weitere Filter</string>
     <string name="pref_title_low_views_filter">Angesehen</string>
     <string name="pref_summary_low_views_filter">Videos mit geringen Aufrufen herausfiltern: %s</string>
     <string name="pref_title_dislikes_filter">Gefällt nicht</string>
     <string name="pref_summary_dislikes_filter">Videos mit vielen negativen Bewertungen herausfiltern: %s</string>
     <string name="pref_privacy_category">Datenschutz</string>
-    <string name="pref_title_disable_search_history">Suchverlauf deaktivieren</string>
-    <string name="pref_summary_disable_search_history">Wenn diese Option aktiviert ist, wird der Suchverlauf gelöscht und nicht verwendet.</string>
+    <string name="pref_title_disable_search_history">Kein Suchverlauf</string>
+    <string name="pref_summary_disable_search_history">Suchverlauf wird gelöscht und abgeschaltet.</string>
     <string name="pref_disable_search_history_deleted">Suchverlauf gelöscht.</string>
-    <string name="pref_title_disable_playback_status">Wiedergabestatus deaktivieren</string>
-    <string name="pref_summary_disable_playback_status">Wenn diese Option aktiviert ist, wird der Wiedergabestatus gelöscht und nicht verwendet.</string>
+    <string name="pref_title_disable_playback_status">Kein Wiedergabestatus</string>
+    <string name="pref_summary_disable_playback_status">Schalte Wiedergabestatus ab.</string>
     <string name="pref_disable_playback_status_deleted">Wiedergabestatus gelöscht.</string>
     <string name="pref_title_clear_playback_status">Wiedergabestatus leeren</string>
-    <string name="pref_summary_clear_playback_status">Wiedergabestatus für alle Videos löschen</string>
+    <string name="pref_summary_clear_playback_status">Fortschritt für alle Videos löschen.</string>
     <string name="pref_playback_status_cleared">Wiedergabestatus gelöscht.</string>
     <string name="pref_import_export_category">Importieren/Exportieren</string>
-    <string name="pref_title_disable_screen_gestures">Videogesten deaktivieren</string>
-    <string name="pref_summary_disable_screen_gestures">Gesten deaktivieren, die die Lautstärke und Helligkeit steuern und um in Videos vorwärts/rückwärts zu suchen.</string>
+    <string name="pref_title_disable_screen_gestures">Keine Videogesten</string>
+    <string name="pref_summary_disable_screen_gestures">Gesten deaktivieren, um die Lautstärke und Helligkeit zu steuern und um in Videos vorwärts/rückwärts zu suchen.</string>
     <string name="pref_category_downloads">Heruntergeladene Dateien</string>
-    <string name="pref_title_download_to_separate_directories">Videos in Ordner herunterladen</string>
-    <string name="pref_summary_download_to_separate_directories">Videos werden in Ordner nach Kanalnamen heruntergeladen.</string>
-    <string name="pref_summary_enable_video_blocker">Videoblocker aktivieren.</string>
-    <string name="pref_summary_video_download_folder">Videos werden in diesen Ordner heruntergeladen: %s</string>
+    <string name="pref_title_download_to_separate_directories">Separate Kanalordner Downloads</string>
+    <string name="pref_summary_download_to_separate_directories">Videos werden in Ordnern nach Kanalnamen gespeichert.</string>
+    <string name="pref_summary_enable_video_blocker">Videoblocker.</string>
+    <string name="pref_summary_video_download_folder">Videos werden heruntergeladen nach %s</string>
     <string name="pref_title_video_download_folder">Video-Herunterladen-Ordner</string>
     <string name="pref_popup_title_video_download_folder">Wählen Sie einen Ordner</string>
     <string name="pref_summary_use_newpipe_backend">NewPipe-API verwenden, um auf YouTube zuzugreifen…</string>
-    <string name="pref_title_use_newpipe_backend">NewPipe-Backend verwenden</string>
+    <string name="pref_title_use_newpipe_backend">NewPipe-Backend</string>
     <string name="pref_summary_switch_volume_and_brightness">Stellt den Lautstärkeregler auf der rechten Seite und die Helligkeit auf der linken Seite.</string>
     <string name="pref_title_switch_volume_and_brightness">Geste zum Umschalten von Lautstärke und Helligkeit</string>
     <string name="pref_summary_enable_immersive_mode">Navigationsleiste und Statusleiste während der Wiedergabe ausblenden.</string>
-    <string name="pref_title_enable_immersive_mode">Immersionsmodus aktivieren</string>
+    <string name="pref_title_enable_immersive_mode">Immersionsmodus</string>
     <string name="pref_video_continuous_repeat_toggle">Kontinuierliche Wiederholung</string>
-    <string name="pref_hide_tabs_restart">Starten Sie die App neu, um aktualisierte Registerkarten anzuzeigen.</string>
-    <string name="pref_summary_hide_tabs">Wählen Sie, welche Registerkarten nicht angezeigt werden sollen. Neustart erforderlich.</string>
+    <string name="pref_hide_tabs_restart">Starten Sie die App neu, um diese Registerkarten anzuzeigen.</string>
+    <string name="pref_summary_hide_tabs">Wählen Sie Registerkarten, die nicht angezeigt werden sollen. Neustart erforderlich.</string>
     <string name="pref_title_hide_tabs">Registerkarten ausblenden</string>
     <string name="pref_network_downloads_category">Netzwerk und Downloads</string>
-    <string name="pref_summary_autocast">Wählen Sie ein Chromecast-Gerät aus, das verwendet werden soll, wenn andere Apps zum Öffnen von Videos in SkyTube verwendet werden.</string>
+    <string name="pref_summary_autocast">Das Chromecast-Gerät, wenn andere Apps zum Öffnen von Videos in SkyTube verwendet werden.</string>
     <string name="pref_title_autocast">AutoCast</string>
     <string name="pref_title_chromecast_none">Keine</string>
     <string name="pref_chromecast_category">Chromecast</string>
@@ -148,13 +146,13 @@
     <string name="pref_key_video_quality_metered_title">Auswahl der Videoqualität bei gebührenpflichtigen Netzwerken</string>
     <string name="pref_key_video_quality_summary">Optimieren für: %s</string>
     <string name="pref_key_video_quality_title">Auswahl der Videoqualität</string>
-    <string name="pref_video_download_minimum_resolution_summary">Das Herunterladen von Videos wird mindestens in dieser Auflösung erfolgen: %s</string>
-    <string name="pref_video_download_minimum_resolution_title">Minimale Videoauflösung fürs Herunterladen</string>
-    <string name="pref_video_download_maximum_resolution_summary">Das Herunterladen von Videos wird maximal in dieser Auflösung erfolgen: %s</string>
-    <string name="pref_video_download_maximum_resolution_title">Maximale Videoauflösung fürs Herunterladen</string>
+    <string name="pref_video_download_minimum_resolution_summary">Heruntergeladene Videos sind mindestens %s</string>
+    <string name="pref_video_download_minimum_resolution_title">Niedrigste Videoauflösung fürs Herunterladen</string>
+    <string name="pref_video_download_maximum_resolution_summary">Heruntergeladene Videos sind maximal %s</string>
+    <string name="pref_video_download_maximum_resolution_title">Höchste Videoauflösung fürs Herunterladen</string>
     <string name="pref_category_download_resolutions">Videoauflösung fürs Herunterladen</string>
     <string name="pref_category_video_resolutions">Videoauflösung</string>
-    <string name="system_default_country">Standard-Land des Systems</string>
+    <string name="system_default_country">System</string>
     <string name="pref_summary_metered_network_usage">Was zu tun, wenn ein gebührenpflichtiges Netzwerk zum Herunterladen/Anschauen von Videos verwendet wird: %s</string>
     <string name="pref_title_metered_network_usage">Benutzung eines gebührenpflichtigen Netzwerkes</string>
     <string name="pref_summary_maximum_res_metered">Wählen die maximale Auflösung beim Streaming über ein gebührenpflichtiges Netzwerk: %s</string>
@@ -167,6 +165,15 @@
     <string name="pref_title_minimum_res">Niedrigste Auflösung</string>
     <string name="pref_summary_maximum_res">Wählen Sie die höchste Auflösung: %s</string>
     <string name="pref_title_maximum_res">Höchste Auflösung</string>
-    <string name="pref_key_use_newer_formats_summary">Alte Android-Versionen unterstützen nicht jedes von YouTube bereitgestellte Videoformat. Deaktivieren, falls es beim Abspielen regelmäßig zu Problemen mit Video oder Ton kommt</string>
+    <string name="pref_key_use_newer_formats_summary">Ton und Video könnte unter alten Androidversionen ohne Unterstützung leiden.</string>
     <string name="pref_key_use_newer_formats_title">Verwende neuere Videoformate</string>
+    <string name="pref_summary_sponsorblock_category_list">Wählen Sie Kategorien zum Überspringen aus</string>
+    <string name="pref_summary_enable_sponsorblock">Auto-Überspringen von Videosegmenten, welche gesponsored und/oder Interaktionerinnerungen sind und viele weitere</string>
+    <string name="pref_sponsorblock_category">SponsorBlock</string>
+    <string name="pref_general">Generell</string>
+    <string name="pref_details">Details</string>
+    <string name="pref_title_enable_sponsorblock">Aktiviere SponsorBlock</string>
+    <string name="pref_title_sponsorblock_category_list">Überspringt Segmente</string>
+    <string name="pref_title_credit_sponsorblock">Credits</string>
+    <string name="pref_summary_credit_sponsorblock">Benutzt SponsorBlock-Daten von https://sponsor.ajay.app</string>
 </resources>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="preferences">Előnyben részesítés</string>
-    <string name="key_preferences">előnyben részesítés</string>
+    <string name="preferences">Beállítások</string>
+    <string name="key_preferences">beállítások</string>
     <string name="pref_video_player_category">Videólejátszó</string>
     <string name="pref_title_choose_player">Videólejátszó</string>
     <string name="pref_summary_choose_player">A használandó videólejátszó: %s</string>
@@ -173,4 +173,13 @@
     <string name="pref_title_default_content_country">A tartalom alapértelmezett országa</string>
     <string name="pref_key_use_newer_formats_title">Próbáljon ki újabb videóformátumokat</string>
     <string name="pref_key_use_newer_formats_summary">A hang és a kép a régi Android verziókon nem támogatott.</string>
+    <string name="pref_sponsorblock_category">SzponzorBlokk</string>
+    <string name="pref_general">Általános</string>
+    <string name="pref_details">Részletek</string>
+    <string name="pref_title_enable_sponsorblock">SzponzorBlokk engedélyezése</string>
+    <string name="pref_title_sponsorblock_category_list">Szegmensek kihagyása</string>
+    <string name="pref_title_credit_sponsorblock">Elismerések</string>
+    <string name="pref_summary_credit_sponsorblock">A https://sponsor.ajay.app SzponzorBlokk adatait használja</string>
+    <string name="pref_summary_sponsorblock_category_list">Válassza ki, mely kategóriákat szeretné kihagyni</string>
+    <string name="pref_summary_enable_sponsorblock">Automatikusan kihagyja a szponzorokat, interakciós emlékeztetőket és más egyéb töltelék részeket</string>
 </resources>

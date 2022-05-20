@@ -23,4 +23,5 @@
     <string name="close">Cerrar</string>
     <string name="trending_in">Tendencia (%s)</string>
     <string name="recaptcha_challenge_requested">YouTube cree que eres un bot por lo que primero debes resolver un reCAPTCHA.</string>
+    <string name="could_not_get_sponsorblock">No se pudo recuperar la información de Patrocinadores: %s.</string>
 </resources>
