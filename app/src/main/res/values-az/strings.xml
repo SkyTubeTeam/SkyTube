@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="could_not_get_videos">%s videonu qəbul etmək olmadı</string>
+    <string name="could_not_get_videos">%s videonu qəbul etmək olmadı.</string>
     <string name="could_not_get_channel_detailed">Kanal məlumatını endirmək mümkün olmadı: %s.</string>
     <string name="could_not_get_sponsorblock">SponsorBlock məlumatını əldə etmək mümkün olmadı: %s.</string>
     <string name="views">%,d baxış</string>
     <string name="error">Xəta</string>
-    <string name="ok">OK</string>
-    <string name="search_videos">Videoları axtarın</string>
+    <string name="ok">Oldu</string>
+    <string name="search_videos">Videoları Axtarın</string>
     <string name="LIVE">Canlı</string>
     <string name="featured">Seçilmiş</string>
-    <string name="most_popular">Ən Məşhurlar</string>
+    <string name="most_popular">Ən Populyar</string>
     <string name="trending_in">Trendlər (%s)</string>
     <string name="video">Video</string>
     <string name="videos">Videolar</string>
