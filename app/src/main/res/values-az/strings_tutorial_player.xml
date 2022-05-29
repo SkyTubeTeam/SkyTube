@@ -2,12 +2,12 @@
 <resources>
     <string name="next">Növbəti</string>
     <string name="done">Təsdiqlə</string>
-    <string name="skip">Keç</string>
+    <string name="skip">Ötürün</string>
     <string name="page_counter">%2$d-dan %1$d</string>
     <string name="tutorial_slide_1">Şərhlərə baxmaq üçün ← sürüşdürün.</string>
-    <string name="tutorial_slide_2">Videonun təsvirinə baxmaq üçün ↑ sürüşdürün.</string>
+    <string name="tutorial_slide_2">Videonun açıqlamasına baxmaq üçün ↑ sürüşdürün.</string>
     <string name="tutorial_slide_3">İrəli və ya geri getmək üçün ← → sürüşdürün.</string>
     <string name="tutorial_slide_4">Səsi tənzimləmək üçün ↑ ↓ sürüşdürün.</string>
     <string name="tutorial_slide_5">Parlaqlığı tənzimləmək üçün ↑ ↓ sürüşdürün.</string>
-    <string name="tutorial_slide_6">Videonu dayandırmaq və ya oynamaq üçün iki dəfə klikləyin.</string>
+    <string name="tutorial_slide_6">Videonu dayandırmaq və ya oynatmaq üçün iki dəfə klikləyin.</string>
 </resources>
