@@ -14,7 +14,7 @@
     <string name="video">Video</string>
     <string name="videos">Videolar</string>
     <string name="playlists">Pleylistlər</string>
-    <string name="could_not_get_playlists">%s pleylisti əldə etmək mümkün olmadı.</string>
+    <string name="could_not_get_playlists">%s pleylistini əldə etmək mümkün olmadı.</string>
     <string name="recaptcha_challenge_requested">YouTube sizi bot hesab edir, ona görə də əvvəlcə reCAPTCHA-nı həll etməlisiniz.</string>
     <string name="close">Bağla</string>
     <string name="loading">Yüklənir…</string>
