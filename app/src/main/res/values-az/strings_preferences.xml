@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="key_preferences">üstünlüklər</string>
+    <string name="key_preferences">seçimlər</string>
     <string name="pref_title_maximum_res">Ən Yüksək Keyfiyyət</string>
     <string name="pref_summary_maximum_res">Ən yüksək keyfiyyəti seçin: %s</string>
     <string name="pref_title_minimum_res">Ən Aşağı Keyfiyyət</string>
@@ -9,7 +9,7 @@
     <string name="pref_summary_choose_player">İstifadə ediləcək video pleyer: %s</string>
     <string name="no_resolution_specified">Heç biri</string>
     <string name="pref_title_minimum_res_metered">Ölçülmüş şəbəkə üçün ən aşağı keyfiyyət</string>
-    <string name="preferences">Üstünlüklər</string>
+    <string name="preferences">Seçimlər</string>
     <string name="pref_video_player_category">Video Pleyer</string>
     <string name="pref_category_metered_network">Ölçülmüş Şəbəkə</string>
     <string name="pref_summary_minimum_res_metered">Ölçülmüş şəbəkə vasitəsilə yayım zamanı ən aşağı keyfiyyəti seçin: %s</string>
