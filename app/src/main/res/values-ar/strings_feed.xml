@@ -13,4 +13,5 @@
     <string name="import_subscriptions_from_youtube">استيراد الاشتراكات من YouTube</string>
     <string name="notification_channel_feed_title">خدمة الإشعارات</string>
     <string name="notification_new_videos_found">%d فيدوهات جديدة من القنوات المشترك فيها</string>
+    <string name="open_channel">قناة مفتوحة</string>
 </resources>
