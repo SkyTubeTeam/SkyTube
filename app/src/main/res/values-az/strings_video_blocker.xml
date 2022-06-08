@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="blocked_videos">Bloklanmış Videolar</string>
-    <string name="no_videos_blocked">Videoları bloklamaq və ya filtrləmək üçün video bloker qurmaq istəyirsiniz\?</string>
+    <string name="no_videos_blocked">Videoları bloklamaq və ya filtrləmək üçün video blokeri qurmaq istəyirsiniz\?</string>
     <string name="configure">Qurun</string>
     <string name="block_channel">Kanalı Bloklayın</string>
     <string name="channel_blacklisted">Yeni kanal qara siyahısını istifadə etmək üçün yeniləyin.</string>
