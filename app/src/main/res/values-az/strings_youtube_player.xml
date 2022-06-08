@@ -6,7 +6,7 @@
     <string name="error_stream_parse_error">Təhlil xətası.</string>
     <string name="error_video_play">Video Oynatma Xətası</string>
     <string name="error_video_streams_empty">\'%s\' videosunun yayımı yoxdur.</string>
-    <string name="share_via">..Vasitəsilə paylaş…</string>
+    <string name="share_via">..Vasitəsilə paylaşın…</string>
     <string name="error_get_comments">Şərhləri əldə etmək mümkün olmadı.</string>
     <string name="no_video_comments">Bu videoda ya şərh yoxdur, ya da şərhlər söndürülüb.</string>
     <string name="sponsorblock_category_interaction">İnteraksiya Xatırladıcı</string>
@@ -30,7 +30,7 @@
     <string name="url_copied_to_clipboard">URL mübadilə buferinə kopyalandı.</string>
     <string name="mark_watched">Baxılmış kimi qeyd edin</string>
     <string name="mark_unwatched">Baxılmamış kimi qeyd edin</string>
-    <string name="error_get_comments_no_network">Şərhləri əldə etmək üçün əvvəlcə İnternetə qoşulun.</string>
+    <string name="error_get_comments_no_network">Şərhləri əldə etmək üçün əvvəlcə internetə qoşulun.</string>
     <string name="view_replies">Cavabları görün</string>
     <string name="hide_replies">Cavabları gizlədin</string>
     <string name="enter_video_url">Video URL\'si daxil edin</string>
@@ -41,10 +41,10 @@
     <string name="resume">Davam etdirin</string>
     <string name="sponsorblock_skipped">Ötürülmüş seqment: %s</string>
     <string name="sponsorblock_category_sponsor">Sponsor</string>
-    <string name="sponsorblock_category_selfpromo">Öz Reklamı</string>
+    <string name="sponsorblock_category_selfpromo">Özünü Reklam</string>
     <string name="sponsorblock_category_music_offtopic">Musiqi Olmayan Bölmə</string>
     <string name="sponsorblock_category_intro">Giriş / Fasilə</string>
-    <string name="sponsorblock_category_outro">Bitiş Kartları/İştirakçılar</string>
+    <string name="sponsorblock_category_outro">Bitiş Kartları/Kanal Nişanı</string>
     <string name="sponsorblock_category_preview">Önizləmə/Anons</string>
     <string name="sponsorblock_category_filler">Doldurucu məzmun</string>
 </resources>
