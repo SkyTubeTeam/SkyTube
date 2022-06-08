@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="unsubscribe">Abunəlikdən çıxın</string>
+    <string name="unsubscribe">Abunəlikdən Çıxın</string>
     <string name="subscriptions">Abunəliklər</string>
     <string name="total_subscribers">%,d abunəçi</string>
     <string name="channel_subscribed">Kanala abunə olundu</string>
-    <string name="channel_already_subscribed">Artıq abunə olub</string>
+    <string name="channel_already_subscribed">Artıq abunə olunub</string>
     <string name="channel_subscribe_failed">Kanala abunə olmaq alınmadı</string>
     <string name="channel_unsubscribed">Kanal abunəliyindən çıxıldı</string>
     <string name="error_get_subbed_channels">Kanal abunəliklərini əldə etmək mümkün olmadı.</string>
@@ -14,8 +14,8 @@
     <string name="unsubscribe_from_all_current_sibbed_channels">Hazırda abunə olduğunuz bütün kanalların abunəliyini ləğv edin.</string>
     <string name="subscriptions_to_channels_imported">%d kanal idxal edildi.</string>
     <string name="subscribe">Abunə Olun</string>
-    <string name="unsubscribed">Abunəlikdən çıxıldı</string>
-    <string name="subscribed">Abunə olundu</string>
+    <string name="unsubscribed">Abunəlikdən Çıxıldı</string>
+    <string name="subscribed">Abunə Olundu</string>
     <string name="import_subscriptions_description">Https://takeout.google.com saytında \"YouTube və YouTube Music\" istisna olmaqla, hər şey seçimini ləğv edin.\"Bütün YouTube datası daxildir\" üzərinə klikləyin və yalnız abunəlikləri seçin \"Növbəti\" və sonra \"İxrac yarat\" düyməsini basın. Yükləmə linki olan e-poçtu almaq üçün klikləyin. Faylı e-poçt müştərinizdən yükləyin və çıxarın. Subscriptions.json faylını (/Takeout/YouTube və YouTube Music/subscriptions/-da) aşağıda \"Abunəlik Faylını Seç\"dən istifadə edərək SkyTube-da idxal edin.</string>
     <string name="select_sub_file">Abunəlik Faylını Seçin</string>
     <string name="select_all">Hamısını Seçin</string>
