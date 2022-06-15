@@ -389,15 +389,27 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
             Linker.setTextAndLinkify(videoDescriptionBinding.videoDescDescription, video.getDescription());
         }
 
-        final boolean hasLikes = video.getLikeCountNumber() != null;
-        setTextAndVisibility(videoDescriptionBinding.videoDescLikes, hasLikes, video.getLikeCount());
-        final boolean hasDislikes = video.getDislikeCount() != 0;
-        setTextAndVisibility(videoDescriptionBinding.videoDescDislikes, hasDislikes, String.valueOf(video.getDislikeCount()));
-        setValueAndVisibility(videoDescriptionBinding.videoDescLikesBar, video.isThumbsUpPercentageSet(), video.getThumbsUpPercentage());
-        setVisibility(videoDescriptionBinding.videoDescRatingsDisabled, !hasLikes && !hasDislikes);
+        setupLikeCounters(video);
 
         if (SkyTubeApp.getSettings().isSponsorblockEnabled()) {
             initSponsorBlock();
+        }
+    }
+
+    private void setupLikeCounters(YouTubeVideo video) {
+        final boolean hasLikes = video.getLikeCountNumber() != null;
+        setTextAndVisibility(videoDescriptionBinding.videoDescLikes, hasLikes, video.getLikeCount());
+        final boolean hasDislikes = video.getDislikeCountNumber() != null;
+        setTextAndVisibility(videoDescriptionBinding.videoDescDislikes, hasDislikes, video.getDislikeCount());
+        setValueAndVisibility(videoDescriptionBinding.videoDescLikesBar, video.isThumbsUpPercentageSet(), video.getThumbsUpPercentage());
+        setVisibility(videoDescriptionBinding.videoDescRatingsDisabled, !hasLikes && !hasDislikes);
+        if (!hasDislikes) {
+            YouTubeTasks.getDislikeCountFromApi(video.getId()).subscribe(dislikeCount -> {
+                video.setLikeDislikeCount(video.getLikeCountNumber(), dislikeCount);
+                final boolean hasDislikesFresh = video.getDislikeCountNumber() != null;
+                setTextAndVisibility(videoDescriptionBinding.videoDescDislikes, hasDislikesFresh, video.getDislikeCount());
+                setVisibility(videoDescriptionBinding.videoDescRatingsDisabled, !hasLikes && !hasDislikesFresh);
+            });
         }
     }
 

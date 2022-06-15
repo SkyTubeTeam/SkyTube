@@ -17,6 +17,8 @@
 
 package free.rm.skytube.app;
 
+import static free.rm.skytube.app.SkyTubeApp.getContext;
+
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Environment;
@@ -113,6 +115,10 @@ public class Settings {
 
     public boolean isSponsorblockEnabled() {
         return SkyTubeApp.getPreferenceManager().getBoolean("pref_key_enable_sponsorblock", false);
+    }
+
+    public boolean isUseDislikeApi() {
+        return getPreference(R.string.pref_key_use_dislike_api, false);
     }
 
     public boolean isDownloadToSeparateFolders() {
