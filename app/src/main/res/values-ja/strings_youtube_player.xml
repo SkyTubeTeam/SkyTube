@@ -36,6 +36,15 @@
     <string name="warning_metered_network_disable">今後、表示しない。</string>
     <string name="warning_metered_network_play">高額なデータ使用料を避けるため、まず定額制課金ネットワークへ接続してください。とにかくビデオを再生しますか？</string>
     <string name="metered_network">従量課金制ネットワーク</string>
-    <string name="error_video_parse_error">ビデオを再生できません。: <br/><br/>%s</string>
+    <string name="error_video_parse_error">ビデオを再生できませんでした︰<br/><br/>%s。</string>
     <string name="error_downloaded_file_is_corrupted">ダウンロードしたファイルは<b>破損</b>しているようです。: <br/> <br/> %s <br/> <br/> ファイルを<b>削除</b>しますか？</string>
+    <string name="sponsorblock_skipped">セグメントがスキップされました︰%s</string>
+    <string name="sponsorblock_category_sponsor">スポンサー</string>
+    <string name="sponsorblock_category_selfpromo">セルフプロモーション</string>
+    <string name="sponsorblock_category_interaction">行動を促すメッセージ</string>
+    <string name="sponsorblock_category_music_offtopic">音楽以外のセクション</string>
+    <string name="sponsorblock_category_intro">イントロアニメーション/インターミッション</string>
+    <string name="sponsorblock_category_outro">エンドカード/クレジット</string>
+    <string name="sponsorblock_category_preview">予告/前回の粗筋</string>
+    <string name="sponsorblock_category_filler">無駄な脱線/冗談</string>
 </resources>
