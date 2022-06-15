@@ -160,8 +160,10 @@
     <string name="pref_details">Xehetasunak</string>
     <string name="pref_title_enable_sponsorblock">Gaitu babesleak</string>
     <string name="pref_title_sponsorblock_category_list">Saltatu segmentuak</string>
-    <string name="pref_summary_sponsorblock_category_list">Aukeratu zein kategoria saltatu</string>
-    <string name="pref_summary_enable_sponsorblock">Saltatu automatikoki babesleei, interakzio-abisuei eta beste askori eskainitako bideo-segmentuak</string>
+    <string name="pref_summary_sponsorblock_category_list">Aukeratu saltatzeko kategoriak</string>
+    <string name="pref_summary_enable_sponsorblock">Saltatu automatikoki babesleei, interakzioen abisuei eta gehiago eskainitako bideo-segmentuak</string>
     <string name="pref_title_credit_sponsorblock">Kredituak</string>
     <string name="pref_summary_credit_sponsorblock">https://sponsor.ajay.app-ko Babesle datuak erabiltzen ditu</string>
+    <string name="pref_title_use_dislike_api">Itzuli gustatzen ez zaion kontagailua</string>
+    <string name="pref_summary_use_dislike_api">Itzuli gustatzen ez zaien kontagailua returnyoutubedislike.com erabiliz</string>
 </resources>
