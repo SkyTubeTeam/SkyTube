@@ -369,6 +369,12 @@ public class YouTubeTasks {
                 });
     }
 
+    public static Maybe<Long> getDislikeCountFromApi(@NonNull String videoId) {
+        return Maybe.fromCallable(() -> NewPipeService.get().getDislikeCountFromApi(videoId))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
     /**
      * An asynchronous task that will retrieve YouTube videos and display them in the supplied Adapter.
      *
@@ -376,7 +382,6 @@ public class YouTubeTasks {
      * @param videoGridAdapter The grid adapter the videos will be added to.
      * @param swipeRefreshLayout The layout which shows animation about the refresh process.
      * @param clearList Clear the list before adding new values to it.
-     * @param callback To notify the updated {@link VideoGridAdapter}
      */
     public static Maybe<List<CardData>> getYouTubeVideos(@NonNull GetYouTubeVideos getYouTubeVideos,
                                                          @NonNull VideoGridAdapter videoGridAdapter,

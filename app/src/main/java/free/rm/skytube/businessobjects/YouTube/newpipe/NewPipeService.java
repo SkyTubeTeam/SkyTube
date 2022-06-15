@@ -22,15 +22,18 @@ import androidx.annotation.NonNull;
 
 import com.github.skytube.components.httpclient.OkHttpDownloader;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.schabi.newpipe.extractor.ListExtractor;
 import org.schabi.newpipe.extractor.NewPipe;
 import org.schabi.newpipe.extractor.ServiceList;
 import org.schabi.newpipe.extractor.StreamingService;
 import org.schabi.newpipe.extractor.channel.ChannelExtractor;
 import org.schabi.newpipe.extractor.comments.CommentsExtractor;
+import org.schabi.newpipe.extractor.downloader.Response;
 import org.schabi.newpipe.extractor.exceptions.ExtractionException;
-import org.schabi.newpipe.extractor.exceptions.FoundAdException;
 import org.schabi.newpipe.extractor.exceptions.ParsingException;
+import org.schabi.newpipe.extractor.exceptions.ReCaptchaException;
 import org.schabi.newpipe.extractor.feed.FeedExtractor;
 import org.schabi.newpipe.extractor.kiosk.KioskExtractor;
 import org.schabi.newpipe.extractor.kiosk.KioskList;
@@ -54,11 +57,14 @@ import java.util.List;
 import java.util.Objects;
 
 import free.rm.skytube.R;
+import free.rm.skytube.app.Settings;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.YouTube.VideoStream.StreamMetaData;
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Maybe;
 
 /**
  * Service to interact with remote video services, using the NewPipeExtractor backend.
@@ -68,10 +74,12 @@ public class NewPipeService {
     private static NewPipeService instance;
 
     private final StreamingService streamingService;
+    private final Settings settings;
     final static boolean DEBUG_LOG = false;
 
-    public NewPipeService(StreamingService streamingService) {
+    public NewPipeService(StreamingService streamingService, Settings settings) {
         this.streamingService = streamingService;
+        this.settings = settings;
     }
 
     /**
@@ -79,7 +87,7 @@ public class NewPipeService {
      *
      * @return The {@link StreamInfo}.
      */
-    public StreamInfo getStreamInfoByUrl(String videoUrl) throws IOException, ExtractionException {
+    private StreamInfo getStreamInfoByUrl(String videoUrl) throws IOException, ExtractionException {
         // actual extraction
         return StreamInfo.getInfo(streamingService, videoUrl);
     }
@@ -272,7 +280,7 @@ public class NewPipeService {
     }
 
     private ChannelExtractor getChannelExtractor(String channelId)
-            throws ParsingException, ExtractionException, IOException {
+            throws ExtractionException, IOException {
         // Extract from it
         ChannelExtractor channelExtractor = streamingService
                 .getChannelExtractor(getListLinkHandler(Objects.requireNonNull(channelId, "channelId")));
@@ -331,13 +339,51 @@ public class NewPipeService {
                 extractor.getLength(), new YouTubeChannel(extractor.getUploaderUrl(), extractor.getUploaderName()),
                 viewCount, uploadDate.instant, uploadDate.exact, extractor.getThumbnailUrl());
         try {
-            video.setLikeDislikeCount(extractor.getLikeCount(), extractor.getDislikeCount());
+            video.setLikeDislikeCount(extractor.getLikeCount(), getDislikeCount(extractor, videoId));
         } catch (ParsingException pe) {
             Logger.e(this, "Unable get like count for " + url.getUrl() + ", created at " + uploadDate + ", error:" + pe.getMessage(), pe);
             video.setLikeDislikeCount(null, null);
         }
-        // Logger.i(this, " -> publishDate is %s, pretty: %s - orig value: %s", video.getPublishDate(),video.getPublishDatePretty(), uploadDate);
         return video;
+    }
+
+    private Long getDislikeCount(StreamExtractor extractor, String id) {
+        try {
+            long dislikeCount = extractor.getDislikeCount();
+            if (dislikeCount >= 0) {
+                return dislikeCount;
+            }
+        } catch (ParsingException e) {
+            Logger.e(this, "Unable get dislike count for " + extractor.getLinkHandler().getUrl() + ", error:" + e.getMessage(), e);
+        }
+        return getDislikeCountFromApi(id);
+    }
+
+    public Long getDislikeCountFromApi(String videoId)  {
+        if (settings.isUseDislikeApi()) {
+            // send the request
+            String url = "https://returnyoutubedislikeapi.com/votes?videoId=" + videoId;
+            try {
+                Logger.i(this, "fetching dislike count for "+ url);
+                OkHttpDownloader downloader = OkHttpDownloader.getInstance();
+                Response response = downloader.get(url);
+                // get the response
+                int responseCode = response.responseCode();
+                if (responseCode != 200) {
+                    Logger.e(this, "ResponseCode " + responseCode + " for " + url);
+                    return null;
+                }
+
+                JSONObject jsonObject = new JSONObject(response.responseBody());
+                Logger.i(this, "for "+ url +" -> "+jsonObject);
+                return jsonObject.getLong("dislikes");
+            } catch (IOException | JSONException | ReCaptchaException e) {
+                Logger.e(this, "getDislikeCount: error: " + e.getMessage() + " for url:" + url, e);
+            }
+        } else {
+            Logger.i(this, "Like fetching disabled for " + videoId);
+        }
+        return null;
     }
 
     static class DateInfo {
@@ -396,7 +442,7 @@ public class NewPipeService {
 
     public synchronized static NewPipeService get() {
         if (instance == null) {
-            instance = new NewPipeService(ServiceList.YouTube);
+            instance = new NewPipeService(ServiceList.YouTube, SkyTubeApp.getSettings());
             initNewPipe();
         }
         return instance;
