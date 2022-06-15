@@ -121,11 +121,11 @@
 				android:visibility="gone"/>
 
 			<ExpandableListView
-			                    android:id="@+id/commentsExpandableListView"
-			                    android:layout_width="match_parent"
-			                    android:layout_height="match_parent"
-			                    android:layout_alignParentTop="true"
-			                    android:groupIndicator="@null"/>
+				android:id="@+id/commentsExpandableListView"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:layout_alignParentTop="true"
+				android:groupIndicator="@null" />
 
 			<ProgressBar
 				android:id="@+id/comments_progress_bar"

@@ -19,6 +19,7 @@ package free.rm.skytube.gui.fragments.preferences;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
@@ -26,6 +27,7 @@ import androidx.preference.EditTextPreference;
 import androidx.preference.ListPreference;
 import androidx.preference.MultiSelectListPreference;
 import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceManager;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -117,7 +119,7 @@ public class OthersPreferenceFragment extends BasePreferenceFragment {
 				}
 			} else if (key.equals(getString(R.string.pref_key_subscriptions_alphabetical_order))) {
 				EventBus.getInstance().notifyMainTabChanged(EventBus.SettingChange.SUBSCRIPTION_LIST_CHANGED);
-			}/*else if (key.equals(getString(R.string.pref_feed_notification_key))) {
+			} /*else if (key.equals(getString(R.string.pref_feed_notification_key))) {
 				ListPreference feedNotificationPref = (ListPreference) findPreference(key);
 				feedNotificationPref.setSummary(String.format(getString(R.string.pref_summary_feed_notification), feedNotificationPref.getEntry()));
 

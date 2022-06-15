@@ -20,28 +20,39 @@ package free.rm.skytube.businessobjects.YouTube.POJOs;
 import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Environment;
+import android.util.Log;
 import android.view.Menu;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.FileProvider;
+import androidx.preference.PreferenceManager;
 
 import com.google.api.services.youtube.model.Thumbnail;
 import com.google.api.services.youtube.model.Video;
 import com.google.api.services.youtube.model.VideoSnippet;
 import com.google.api.services.youtube.model.VideoStatistics;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.ocpsoft.prettytime.PrettyTime;
 import org.reactivestreams.Subscription;
 import org.schabi.newpipe.extractor.stream.Stream;
 import org.schabi.newpipe.extractor.stream.StreamInfo;
 import org.schabi.newpipe.extractor.stream.VideoStream;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.math.BigInteger;
+import java.net.HttpURLConnection;
+import java.net.ProtocolException;
+import java.net.URL;
 import java.time.Clock;
 import java.time.Duration;
 import java.time.Instant;
@@ -63,15 +74,20 @@ import free.rm.skytube.businessobjects.db.BookmarksDb;
 import free.rm.skytube.businessobjects.db.DatabaseResult;
 import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
 import free.rm.skytube.businessobjects.interfaces.GetDesiredStreamListener;
+import free.rm.skytube.gui.activities.YouTubePlayerActivity;
+import free.rm.skytube.gui.fragments.YouTubePlayerV2Fragment;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Maybe;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.subjects.CompletableSubject;
+import kotlin.text.UStringsKt;
+
 
 import static free.rm.skytube.app.SkyTubeApp.getContext;
 import static free.rm.skytube.app.SkyTubeApp.getStr;
+import android.content.Context;
 
 /**
  * Represents a YouTube video.
@@ -346,12 +362,7 @@ public class YouTubeVideo extends CardData implements Serializable {
 	 * @return The total number of 'dislikes'.  Can return <b>null</b> if the video does not allow the
 	 * users to like/dislike it.  Refer to {@link #isThumbsUpPercentageSet}.
 	 */
-	public String getDislikeCount() {
-		if (dislikeCountNumber != null) {
-			return String.format(Locale.getDefault(), "%,d", dislikeCountNumber);
-		}
-		return null;
-	}
+
 
 	/**
 	 * @return The total number of 'dislikes'.  Can return <b>null</b> for videos serialized with only a 'string' like count.
@@ -629,6 +640,41 @@ public class YouTubeVideo extends CardData implements Serializable {
                     Toast.LENGTH_LONG).show();
         }
 
+
+
     }
+
+    public int getDislikeCount()  {
+
+		if (PreferenceManager.getDefaultSharedPreferences(getContext()).getBoolean("pref_key_use_dislike_api", false)) {
+			try {
+
+				URL url = new URL("https://returnyoutubedislikeapi.com/votes?videoId=" + getVideoId().getId());
+				HttpURLConnection con = (HttpURLConnection) url.openConnection();
+
+				con.setRequestMethod("GET");
+				con.setRequestProperty("User-Agent", "Mozilla/5.0");
+				//send the request
+				con.connect();
+				//get the response
+				int responseCode = con.getResponseCode();
+
+				BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+				String inputLine;
+				StringBuffer response = new StringBuffer();
+				while ((inputLine = in.readLine()) != null) {
+					response.append(inputLine);
+				}
+				in.close();
+				JSONObject jsonObject = new JSONObject(response.toString());
+				return jsonObject.getInt("dislikes");
+
+			} catch (IOException | JSONException e) {
+				Log.e("GetDislikeCount", "getDislikeCount: error", e);
+			}
+		}
+
+		return 0;
+	}
 
 }

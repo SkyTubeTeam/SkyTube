@@ -16,7 +16,8 @@
   ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto">
 
 	<ListPreference
 		app:key="@string/pref_key_default_tab_name"
@@ -57,5 +58,13 @@
 		app:title="@string/pref_title_subscriptions_alphabetical_order"
 		app:summary="@string/pref_summary_subscriptions_alphabetical_order"
 		app:iconSpaceReserved="false" />
+	<CheckBoxPreference
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		app:defaultValue="false"
+		app:iconSpaceReserved="false"
+		app:key="@string/pref_key_use_dislike_api"
+		app:summary="@string/pref_summary_use_dislike_api"
+		app:title="@string/pref_title_use_dislike_api" />
 
 </PreferenceScreen>

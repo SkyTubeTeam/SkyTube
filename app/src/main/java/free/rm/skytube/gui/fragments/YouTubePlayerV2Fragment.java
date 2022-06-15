@@ -38,6 +38,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,6 +50,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.media.AudioManagerCompat;
+import androidx.preference.EditTextPreference;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -69,6 +72,7 @@ import org.schabi.newpipe.extractor.StreamingService;
 import org.schabi.newpipe.extractor.stream.StreamInfo;
 
 import java.util.Locale;
+import java.util.Objects;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.Settings;
@@ -379,10 +383,13 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
         if (video.getDescription() != null) {
             Linker.setTextAndLinkify(videoDescriptionBinding.videoDescDescription, video.getDescription());
         }
+
+
+
         final boolean hasLikes = video.getLikeCountNumber() != null;
         setTextAndVisibility(videoDescriptionBinding.videoDescLikes, hasLikes, video.getLikeCount());
-        final boolean hasDislikes = video.getDislikeCountNumber() != null;
-        setTextAndVisibility(videoDescriptionBinding.videoDescDislikes, hasDislikes, video.getDislikeCount());
+        final boolean hasDislikes = video.getDislikeCount() != 0;
+        setTextAndVisibility(videoDescriptionBinding.videoDescDislikes, hasDislikes, String.valueOf(video.getDislikeCount()));
         setValueAndVisibility(videoDescriptionBinding.videoDescLikesBar, video.isThumbsUpPercentageSet(), video.getThumbsUpPercentage());
         setVisibility(videoDescriptionBinding.videoDescRatingsDisabled, !hasLikes && !hasDislikes);
         initSponsorBlock();
