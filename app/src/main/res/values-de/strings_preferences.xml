@@ -176,4 +176,6 @@
     <string name="pref_title_sponsorblock_category_list">Überspringt Segmente</string>
     <string name="pref_title_credit_sponsorblock">Credits</string>
     <string name="pref_summary_credit_sponsorblock">Benutzt SponsorBlock-Daten von https://sponsor.ajay.app</string>
+    <string name="pref_summary_use_dislike_api">\"Mag ich nicht\" zurückbringen mit returnyoutubedislike.com</string>
+    <string name="pref_title_use_dislike_api">\"Mag ich nicht\"-Zurückbringer</string>
 </resources>
