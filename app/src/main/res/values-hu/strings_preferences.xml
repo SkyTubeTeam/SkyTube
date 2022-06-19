@@ -182,4 +182,6 @@
     <string name="pref_summary_credit_sponsorblock">A https://sponsor.ajay.app SzponzorBlokk adatait használja</string>
     <string name="pref_summary_sponsorblock_category_list">Válassza ki, mely kategóriákat szeretné kihagyni</string>
     <string name="pref_summary_enable_sponsorblock">Automatikusan kihagyja a szponzorokat, interakciós emlékeztetőket és más egyéb töltelék részeket</string>
+    <string name="pref_summary_use_dislike_api">Nemtetszés-számláló visszaállítása a returnyoutubedislike.com használatával</string>
+    <string name="pref_title_use_dislike_api">Nemtetszés-számláló visszaállítása</string>
 </resources>
