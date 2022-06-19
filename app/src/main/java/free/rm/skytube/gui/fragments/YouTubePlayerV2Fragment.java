@@ -38,8 +38,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -50,7 +48,6 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.media.AudioManagerCompat;
-import androidx.preference.EditTextPreference;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -72,7 +69,6 @@ import org.schabi.newpipe.extractor.StreamingService;
 import org.schabi.newpipe.extractor.stream.StreamInfo;
 
 import java.util.Locale;
-import java.util.Objects;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.Settings;
@@ -82,9 +78,9 @@ import free.rm.skytube.app.Utils;
 import free.rm.skytube.app.enums.Policy;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.Sponsorblock.SBSegment;
-import free.rm.skytube.businessobjects.Sponsorblock.SBVideoInfo;
 import free.rm.skytube.businessobjects.Sponsorblock.SBTasks;
 import free.rm.skytube.businessobjects.Sponsorblock.SBTimeBarView;
+import free.rm.skytube.businessobjects.Sponsorblock.SBVideoInfo;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.YouTube.YouTubeTasks;
@@ -384,47 +380,44 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
             Linker.setTextAndLinkify(videoDescriptionBinding.videoDescDescription, video.getDescription());
         }
 
-
-
         final boolean hasLikes = video.getLikeCountNumber() != null;
         setTextAndVisibility(videoDescriptionBinding.videoDescLikes, hasLikes, video.getLikeCount());
         final boolean hasDislikes = video.getDislikeCount() != 0;
         setTextAndVisibility(videoDescriptionBinding.videoDescDislikes, hasDislikes, String.valueOf(video.getDislikeCount()));
         setValueAndVisibility(videoDescriptionBinding.videoDescLikesBar, video.isThumbsUpPercentageSet(), video.getThumbsUpPercentage());
         setVisibility(videoDescriptionBinding.videoDescRatingsDisabled, !hasLikes && !hasDislikes);
-        initSponsorBlock();
-    }
 
-    private void setupSponsorBlockVideoInfo(SBVideoInfo sponsorBlockVideoInfo) {
-        this.sponsorBlockVideoInfo = sponsorBlockVideoInfo;
-        initSponsorBlock();
+        if (SkyTubeApp.getSettings().isSponsorblockEnabled()) {
+            initSponsorBlock();
+        }
     }
 
     private void initSponsorBlock() {
+        SBVideoInfo sponsorBlockVideoInfo = youTubeVideo.getSponsorBlockVideoInfo();
         if (sponsorBlockVideoInfo != null) {
             Log.d(TAG, "SBInfo has loaded");
             Handler handler = new Handler(Looper.getMainLooper());
             for (SBSegment segment : sponsorBlockVideoInfo.getSegments()) {
                 long startPosMs = Math.round(segment.getStartPos() * 1000);
                 player.createMessage((messageType, payload) -> {
-                    SBSegment payloadSegment = (SBSegment) payload;
+                            SBSegment payloadSegment = (SBSegment) payload;
 
-                    handler.post(() -> {
-                        SBTasks.LabelAndColor labelAndColor = SBTasks.getLabelAndColor(payloadSegment.getCategory());
+                            handler.post(() -> {
+                                SBTasks.LabelAndColor labelAndColor = SBTasks.getLabelAndColor(payloadSegment.getCategory());
 
-                        if (labelAndColor != null) {
-                            String categoryLabel = getString(labelAndColor.label);
-                            Toast.makeText(getContext(),
-                                    getString(R.string.sponsorblock_skipped, categoryLabel),
-                                    Toast.LENGTH_SHORT).show();
-                        } else {
-                            Log.w(TAG, "Unknown sponsorBlock category: "+ payloadSegment.getCategory());
-                        }
-                    });
+                                if (labelAndColor != null) {
+                                    String categoryLabel = getString(labelAndColor.label);
+                                    Toast.makeText(getContext(),
+                                            getString(R.string.sponsorblock_skipped, categoryLabel),
+                                            Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Log.w(TAG, "Unknown sponsorBlock category: " + payloadSegment.getCategory());
+                                }
+                            });
 
-                    long pos = Math.round(payloadSegment.getEndPos() * 1000);
-                    player.seekTo(pos);
-                })
+                            long pos = Math.round(payloadSegment.getEndPos() * 1000);
+                            player.seekTo(pos);
+                        })
                         .setHandler(handler)
                         .setPosition(startPosMs)
                         .setPayload(segment)
@@ -516,10 +509,15 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
                                         return;
                                     }
                                     if (downloadStatus.getUri() != null) {
+                                        youTubeVideo = DownloadedVideosDb.getVideoDownloadsDb().getDownloadedVideo(youTubeVideo.getId());
+
                                         fragmentBinding.loadingVideoView.setVisibility(View.GONE);
                                         Logger.i(this, ">> PLAYING LOCALLY: %s", downloadStatus.getUri());
                                         playVideo(downloadStatus.getUri(), downloadStatus.getAudioUri(), null);
 
+                                        if (SkyTubeApp.getSettings().isSponsorblockEnabled()) {
+                                            initSponsorBlock();
+                                        }
                                         // get the video statistics
                                         compositeDisposable.add(YouTubeTasks.getVideoDetails(ctx, youTubeVideo.getVideoId())
                                                 .subscribe(video -> {
@@ -742,13 +740,13 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 
         if (SkyTubeApp.getSettings().isSponsorblockEnabled()) {
             compositeDisposable.add(
-                    SBTasks.retrieveSponsorblockSegments(requireContext(), youTubeVideo.getVideoId())
+                    SBTasks.retrieveSponsorblockSegmentsCtx(requireContext(), youTubeVideo.getVideoId())
                             .subscribe(segments -> {
                                 Log.d(TAG, "Received SB Info with " + segments.getSegments().size() + " segments for duration of " + segments.getVideoDuration());
-                                setupSponsorBlockVideoInfo(segments);
+                                youTubeVideo.setSponsorBlockVideoInfo(segments);
+                                initSponsorBlock();
                             }, Functions.ON_ERROR_MISSING, () -> {
-                                Log.d(TAG, "No SB info received for "+youTubeVideo.getVideoId());
-                                setupSponsorBlockVideoInfo(null);
+                                Log.d(TAG, "No SB info received for " + youTubeVideo.getVideoId());
                             })
             );
         }

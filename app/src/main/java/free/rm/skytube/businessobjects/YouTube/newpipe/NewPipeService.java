@@ -29,7 +29,6 @@ import org.schabi.newpipe.extractor.StreamingService;
 import org.schabi.newpipe.extractor.channel.ChannelExtractor;
 import org.schabi.newpipe.extractor.comments.CommentsExtractor;
 import org.schabi.newpipe.extractor.exceptions.ExtractionException;
-import org.schabi.newpipe.extractor.exceptions.FoundAdException;
 import org.schabi.newpipe.extractor.exceptions.ParsingException;
 import org.schabi.newpipe.extractor.feed.FeedExtractor;
 import org.schabi.newpipe.extractor.kiosk.KioskExtractor;
@@ -132,6 +131,7 @@ public class NewPipeService {
 
     /**
      * Return the most recent videos for the given channel
+     *
      * @param channelId the id of the channel
      * @return list of recent {@link YouTubeVideo}.
      * @throws ExtractionException
@@ -147,6 +147,7 @@ public class NewPipeService {
 
     /**
      * Return the most recent videos for the given channel from a dedicated feed (with a {@link FeedExtractor}).
+     *
      * @param channelId the id of the channel
      * @return list of recent {@link YouTubeVideo}, or null, if there is no feed.
      * @throws ExtractionException
@@ -161,12 +162,13 @@ public class NewPipeService {
             return null;
         }
         feedExtractor.fetchPage();
-        return new VideoPagerWithChannel(streamingService, (ListExtractor)feedExtractor, createInternalChannelFromFeed(feedExtractor)).getNextPageAsVideos();
+        return new VideoPagerWithChannel(streamingService, (ListExtractor) feedExtractor, createInternalChannelFromFeed(feedExtractor)).getNextPageAsVideos();
     }
 
     /**
      * Return the most recent videos for the given channel, either from a dedicated feed (with a {@link FeedExtractor} or from
      * the generic {@link ChannelExtractor}.
+     *
      * @param channelId the id of the channel
      * @return list of recent {@link YouTubeVideo}.
      * @throws ExtractionException
@@ -181,7 +183,7 @@ public class NewPipeService {
                 return videos;
             }
         } catch (IOException | ExtractionException | RuntimeException | NewPipeException e) {
-            Logger.e(this, "Unable to get videos from a feed " + channelId + " : "+ e.getMessage(), e);
+            Logger.e(this, "Unable to get videos from a feed " + channelId + " : " + e.getMessage(), e);
         }
         return getChannelVideos(channelId);
     }
@@ -231,6 +233,7 @@ public class NewPipeService {
 
     /**
      * Return detailed information for a channel from it's id.
+     *
      * @param channelId
      * @return the {@link YouTubeChannel}, with a list of recent videos.
      * @throws ExtractionException
@@ -243,7 +246,7 @@ public class NewPipeService {
         try {
             channel.getYouTubeVideos().addAll(pager.getNextPageAsVideos());
         } catch (NewPipeException e) {
-            Logger.e(this, "Unable to retrieve videos for "+channelId+", error: "+e.getMessage(), e);
+            Logger.e(this, "Unable to retrieve videos for " + channelId + ", error: " + e.getMessage(), e);
         }
         return channel;
     }
@@ -265,8 +268,8 @@ public class NewPipeService {
     private long getSubscriberCount(ChannelExtractor extractor) {
         try {
             return extractor.getSubscriberCount();
-        } catch (NullPointerException | ParsingException  npe) {
-            Logger.e(this, "Unable to get subscriber count for " + extractor.getLinkHandler().getUrl() + " : "+ npe.getMessage(), npe);
+        } catch (NullPointerException | ParsingException npe) {
+            Logger.e(this, "Unable to get subscriber count for " + extractor.getLinkHandler().getUrl() + " : " + npe.getMessage(), npe);
             return -1L;
         }
     }
@@ -305,6 +308,7 @@ public class NewPipeService {
 
     /**
      * Return detailed information about a video from it's id.
+     *
      * @param videoId the id of the video.
      * @return a {@link YouTubeVideo}
      * @throws ExtractionException
@@ -322,8 +326,8 @@ public class NewPipeService {
         long viewCount;
         try {
             viewCount = extractor.getViewCount();
-        } catch (NumberFormatException|ParsingException e) {
-            Logger.e(this, "Unable to get view count for " + url.getUrl()+", error: "+e.getMessage(), e);
+        } catch (NumberFormatException | ParsingException e) {
+            Logger.e(this, "Unable to get view count for " + url.getUrl() + ", error: " + e.getMessage(), e);
             viewCount = 0;
         }
 
@@ -336,6 +340,7 @@ public class NewPipeService {
             Logger.e(this, "Unable get like count for " + url.getUrl() + ", created at " + uploadDate + ", error:" + pe.getMessage(), pe);
             video.setLikeDislikeCount(null, null);
         }
+
         // Logger.i(this, " -> publishDate is %s, pretty: %s - orig value: %s", video.getPublishDate(),video.getPublishDatePretty(), uploadDate);
         return video;
     }
@@ -361,7 +366,7 @@ public class NewPipeService {
         public String toString() {
             try {
                 return "[time= " + dtf.format(instant) + ",exact=" + exact + ']';
-            } catch (Exception e){
+            } catch (Exception e) {
                 return "[incorrect time= " + instant + " ,exact=" + exact + ']';
             }
         }
@@ -371,7 +376,6 @@ public class NewPipeService {
         // Logger.d(NewPipeService.class, "getThumbnailUrl  %s", id);
         return "https://i.ytimg.com/vi/" + id + "/hqdefault.jpg";
     }
-
 
     public VideoPager getSearchResult(String query) throws NewPipeException {
         SkyTubeApp.nonUiThread();
@@ -387,8 +391,8 @@ public class NewPipeService {
     /**
      * Given video ID it will return the video's page URL.
      *
-     * @param videoId       The ID of the video.
-     * @throws ParsingException 
+     * @param videoId The ID of the video.
+     * @throws ParsingException
      */
     private String getVideoUrl(String videoId) throws ParsingException {
         return streamingService.getStreamLHFactory().getUrl(videoId);
@@ -405,6 +409,7 @@ public class NewPipeService {
     public SubscriptionExtractor createSubscriptionExtractor() {
         return streamingService.getSubscriptionExtractor();
     }
+
     /**
      * Initialize NewPipe with a custom HttpDownloader.
      */
@@ -414,7 +419,7 @@ public class NewPipeService {
         }
     }
 
-    private static ContentCountry toContentCountry(String countryCode){
+    private static ContentCountry toContentCountry(String countryCode) {
         if (countryCode == null || countryCode.isEmpty()) {
             return ContentCountry.DEFAULT;
         } else {
