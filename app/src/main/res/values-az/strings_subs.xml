@@ -16,7 +16,7 @@
     <string name="subscribe">Abunə olun</string>
     <string name="unsubscribed">Abunəlikdən çıxıldı</string>
     <string name="subscribed">Abunə olundu</string>
-    <string name="import_subscriptions_description">https://takeout.google.com saytında \"YouTube və YouTube Music\" istisna olmaqla, hər şey seçimini ləğv edin.\"Bütün YouTube datası daxildir\" üzərinə klikləyin və yalnız abunəlikləri seçin \"Növbəti\" və sonra \"İxrac yarat\" düyməsini basın. Yükləmə linki olan e-poçtu almaq üçün klikləyin. Faylı e-poçt müştərinizdən yükləyin və çıxarın. subscriptions.csv faylını (/Takeout/YouTube və YouTube Music/subscriptions/-da) aşağıda \"Abunəlik Faylını Seç\"dən istifadə edərək SkyTube-da idxal edin.</string>
+    <string name="import_subscriptions_description">https://takeout.google.com saytında \"YouTube və YouTube Music\" istisna olmaqla, hər şey seçimini ləğv edin.\"Bütün YouTube datası daxildir\" üzərinə klikləyin və yalnız abunəlikləri seçin \"Növbəti\" və sonra \"İxrac yarat\" düyməsini basın. Yükləmə linki olan e-poçtu almaq üçün klikləyin. Faylı e-poçt müştərinizdən yükləyin və çıxarın. Subscriptions.csv faylını (/Takeout/YouTube və YouTube Music/subscriptions/-da) aşağıda \"Abunəlik Faylını Seç\"dən istifadə edərək SkyTube-da idxal edin.</string>
     <string name="select_sub_file">Abunəlik Faylını seçin</string>
     <string name="select_all">Hamısını seçin</string>
     <string name="about">Haqqında</string>
