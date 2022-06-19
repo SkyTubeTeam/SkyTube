@@ -17,10 +17,12 @@
 
 package free.rm.skytube.businessobjects.YouTube.POJOs;
 
+import static free.rm.skytube.app.SkyTubeApp.getContext;
+import static free.rm.skytube.app.SkyTubeApp.getStr;
+
 import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
@@ -39,7 +41,6 @@ import com.google.api.services.youtube.model.VideoStatistics;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.ocpsoft.prettytime.PrettyTime;
-import org.reactivestreams.Subscription;
 import org.schabi.newpipe.extractor.stream.Stream;
 import org.schabi.newpipe.extractor.stream.StreamInfo;
 import org.schabi.newpipe.extractor.stream.VideoStream;
@@ -51,12 +52,9 @@ import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.net.HttpURLConnection;
-import java.net.ProtocolException;
 import java.net.URL;
-import java.time.Clock;
 import java.time.Duration;
 import java.time.Instant;
-import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Locale;
 
@@ -67,6 +65,7 @@ import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.app.StreamSelectionPolicy;
 import free.rm.skytube.businessobjects.FileDownloader;
 import free.rm.skytube.businessobjects.Logger;
+import free.rm.skytube.businessobjects.Sponsorblock.SBVideoInfo;
 import free.rm.skytube.businessobjects.YouTube.YouTubeTasks;
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeUtils;
 import free.rm.skytube.businessobjects.YouTube.newpipe.VideoId;
@@ -74,231 +73,228 @@ import free.rm.skytube.businessobjects.db.BookmarksDb;
 import free.rm.skytube.businessobjects.db.DatabaseResult;
 import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
 import free.rm.skytube.businessobjects.interfaces.GetDesiredStreamListener;
-import free.rm.skytube.gui.activities.YouTubePlayerActivity;
-import free.rm.skytube.gui.fragments.YouTubePlayerV2Fragment;
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Completable;
-import io.reactivex.rxjava3.core.Maybe;
 import io.reactivex.rxjava3.core.Single;
-import io.reactivex.rxjava3.disposables.Disposable;
-import io.reactivex.rxjava3.subjects.CompletableSubject;
-import kotlin.text.UStringsKt;
-
-
-import static free.rm.skytube.app.SkyTubeApp.getContext;
-import static free.rm.skytube.app.SkyTubeApp.getStr;
-import android.content.Context;
 
 /**
  * Represents a YouTube video.
  */
 public class YouTubeVideo extends CardData implements Serializable {
 
-	/**
-	 * Channel (only id and name are set).
-	 */
-	private YouTubeChannel channel;
+    /**
+     * Channel (only id and name are set).
+     */
+    private YouTubeChannel channel;
 
-	/**
-	 * The total number of 'likes'.
-	 */
-	private Long likeCountNumber;
-
-
-	/**
-	 * The total number of 'dislikes'.
-	 */
-	private Long dislikeCountNumber;
-
-	/**
-	 * The percentage of people that thumbs-up this video.
-	 */
-	private int thumbsUpPercentage;
-	/**
-	 * Video duration string (e.g. "5:15").
-	 */
-	private String duration;
-	/**
-	 *  Video duration in seconds
-	 */
-	private int durationInSeconds = -1;
-	/**
-	 * Total views count.  This can be <b>null</b> if the video does not allow the user to
-	 * like/dislike it.  Format:  "<number> Views"
-	 */
-	private String viewsCount;
-	/**
-	 * Total views count.
-	 */
-	private BigInteger viewsCountInt;
-	/**
-	 * The date/time of when this video was published.
-	 */
-	private transient ZonedDateTime publishDate;
-	/**
-	 * Thumbnail URL (maximum resolution).
-	 */
-	private String thumbnailMaxResUrl;
-	/**
-	 * The language of this video.  (This tends to be ISO 639-1).
-	 */
-	private String language;
-	/**
-	 * Set to true if the video is a current live stream.
-	 */
-	private boolean isLiveStream;
+    /**
+     * The total number of 'likes'.
+     */
+    private Long likeCountNumber;
 
 
-	private Integer categoryId;
+    /**
+     * The total number of 'dislikes'.
+     */
+    private Long dislikeCountNumber;
 
-	/**
-	 * Constructor.
-	 */
-	public YouTubeVideo(Video video) throws IllegalArgumentException {
-		this.id = video.getId();
+    /**
+     * The percentage of people that thumbs-up this video.
+     */
+    private int thumbsUpPercentage;
+    /**
+     * Video duration string (e.g. "5:15").
+     */
+    private String duration;
+    /**
+     * Video duration in seconds
+     */
+    private int durationInSeconds = -1;
+    /**
+     * Total views count.  This can be <b>null</b> if the video does not allow the user to
+     * like/dislike it.  Format:  "<number> Views"
+     */
+    private String viewsCount;
+    /**
+     * Total views count.
+     */
+    private BigInteger viewsCountInt;
+    /**
+     * The date/time of when this video was published.
+     */
+    private transient ZonedDateTime publishDate;
+    /**
+     * Thumbnail URL (maximum resolution).
+     */
+    private String thumbnailMaxResUrl;
+    /**
+     * The language of this video.  (This tends to be ISO 639-1).
+     */
+    private String language;
+    /**
+     * Set to true if the video is a current live stream.
+     */
+    private boolean isLiveStream;
 
-		VideoSnippet snippet = video.getSnippet();
-		if (snippet == null) {
-			throw new IllegalArgumentException("Missing snippet in "+video);
-		}
-		this.title = snippet.getTitle();
+    private SBVideoInfo sponsorBlockVideoInfo;
 
-		this.channel = new YouTubeChannel(snippet.getChannelId(), snippet.getChannelTitle());
-		setPublishTimestamp(snippet.getPublishedAt().getValue());
-		setPublishTimestampExact(true);
+    private Integer categoryId;
 
-		if (snippet.getThumbnails() != null) {
-			Thumbnail thumbnail = snippet.getThumbnails().getHigh();
-			if (thumbnail != null) {
-				this.thumbnailUrl = thumbnail.getUrl();
-			}
+    /**
+     * Constructor.
+     */
+    public YouTubeVideo(Video video) throws IllegalArgumentException {
+        this.id = video.getId();
 
-			thumbnail = snippet.getThumbnails().getMaxres();
-			if (thumbnail != null) {
-				this.thumbnailMaxResUrl = thumbnail.getUrl();
-			}
-		}
+        VideoSnippet snippet = video.getSnippet();
+        if (snippet == null) {
+            throw new IllegalArgumentException("Missing snippet in " + video);
+        }
+        this.title = snippet.getTitle();
 
-		this.language = snippet.getDefaultAudioLanguage() != null ? snippet.getDefaultAudioLanguage()
-				: (snippet.getDefaultLanguage());
+        this.channel = new YouTubeChannel(snippet.getChannelId(), snippet.getChannelTitle());
+        setPublishTimestamp(snippet.getPublishedAt().getValue());
+        setPublishTimestampExact(true);
 
-		this.description = snippet.getDescription();
-
-		if (video.getContentDetails() != null) {
-			setDuration(video.getContentDetails().getDuration());
-			setIsLiveStream();
-			setDurationInSeconds(video.getContentDetails().getDuration());
-		}
-
-		VideoStatistics statistics = video.getStatistics();
-		if (statistics != null) {
-			setLikeDislikeCount(statistics.getLikeCount() != null ? statistics.getLikeCount().longValue() : null, statistics.getDislikeCount() != null ? statistics.getDislikeCount().longValue() : null);
-
-			setViewCount(statistics.getViewCount());
-		}
-	}
-
-	public void setCategoryId(Integer categoryId) {
-		this.categoryId = categoryId;
-	}
-
-	public Integer getCategoryId() {
-		return categoryId;
-	}
-
-	public void setViewCount(BigInteger viewsCountInt) {
-		this.viewsCountInt = viewsCountInt;
-		this.viewsCount = String.format(getStr(R.string.views), viewsCountInt);
-	}
-
-        public YouTubeVideo(String id, String title, String description, long durationInSeconds,
-							YouTubeChannel channel, long viewCount, Instant publishDate,
-							boolean publishDateExact, String thumbnailUrl) {
-            this.id = id;
-            this.title = title;
-            this.description = description;
-            setDurationInSeconds((int) durationInSeconds);
-            if (viewCount >= 0) {
-                setViewCount(BigInteger.valueOf(viewCount));
+        if (snippet.getThumbnails() != null) {
+            Thumbnail thumbnail = snippet.getThumbnails().getHigh();
+            if (thumbnail != null) {
+                this.thumbnailUrl = thumbnail.getUrl();
             }
-            if (publishDate != null) {
-                setPublishTimestamp(publishDate.toEpochMilli());
+
+            thumbnail = snippet.getThumbnails().getMaxres();
+            if (thumbnail != null) {
+                this.thumbnailMaxResUrl = thumbnail.getUrl();
             }
-            setPublishTimestampExact(publishDateExact);
-            this.thumbnailMaxResUrl = thumbnailUrl;
-            this.thumbnailUrl = thumbnailUrl;
-            this.channel = channel;
-            this.thumbsUpPercentage = -1;
         }
 
+        this.language = snippet.getDefaultAudioLanguage() != null ? snippet.getDefaultAudioLanguage()
+                : (snippet.getDefaultLanguage());
 
-        public VideoId getVideoId() {
-            // TODO: this should be created by the NewPipe backend
-            return new VideoId(id, getVideoUrl());
+        this.description = snippet.getDescription();
+
+        if (video.getContentDetails() != null) {
+            setDuration(video.getContentDetails().getDuration());
+            setIsLiveStream();
+            setDurationInSeconds(video.getContentDetails().getDuration());
         }
 
-	/**
-	 * Sets the {@link #thumbsUpPercentage}, i.e. the percentage of people that thumbs-up this video
-	 * (format:  "<percentage>%").
-	 *
-	 * @param likedCountInt	Total number of "likes".
-	 * @param dislikedCountInt Total number of "dislikes".
-	 */
-	public void setLikeDislikeCount(Long likedCountInt, Long dislikedCountInt) {
-		this.thumbsUpPercentage = -1;
+        VideoStatistics statistics = video.getStatistics();
+        if (statistics != null) {
+            setLikeDislikeCount(statistics.getLikeCount() != null ? statistics.getLikeCount().longValue() : null, statistics.getDislikeCount() != null ? statistics.getDislikeCount().longValue() : null);
 
-		final Long likes = filterNegative(likedCountInt);
-		final Long dislikes = filterNegative(dislikedCountInt);
+            setViewCount(statistics.getViewCount());
+        }
+    }
 
-		// some videos do not allow users to like/dislike them:  hence likedCountInt / dislikedCountInt
-		// might be null in those cases
-		if (likes != null && dislikes != null) {
+    public void setCategoryId(Integer categoryId) {
+        this.categoryId = categoryId;
+    }
 
-			long likedCount = likes;
-			long dislikedCount = dislikes;
-			long totalVoteCount = likedCount + dislikedCount;	// liked and disliked counts
+    public Integer getCategoryId() {
+        return categoryId;
+    }
 
-			if (totalVoteCount != 0) {
-				this.thumbsUpPercentage = (int) Math.round((double)likedCount*100/totalVoteCount);
+    public void setViewCount(BigInteger viewsCountInt) {
+        this.viewsCountInt = viewsCountInt;
+        this.viewsCount = String.format(getStr(R.string.views), viewsCountInt);
+    }
 
-			}
-		}
-		this.likeCountNumber = likes;
-		this.dislikeCountNumber = dislikes;
-	}
+    public YouTubeVideo(String id, String title, String description, long durationInSeconds,
+                        YouTubeChannel channel, long viewCount, Instant publishDate,
+                        boolean publishDateExact, String thumbnailUrl) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
 
-	private static Long filterNegative(Long value) {
-		if (value != null && value.longValue() < 0) {
-			return null;
-		}
-		return value;
-	}
+        setDurationInSeconds((int) durationInSeconds);
+        if (viewCount >= 0) {
+            setViewCount(BigInteger.valueOf(viewCount));
+        }
+        if (publishDate != null) {
+            setPublishTimestamp(publishDate.toEpochMilli());
+        }
+        setPublishTimestampExact(publishDateExact);
+        this.thumbnailMaxResUrl = thumbnailUrl;
+        this.thumbnailUrl = thumbnailUrl;
+        this.channel = channel;
+        this.thumbsUpPercentage = -1;
+    }
 
-	/**
-	 * Using {@link #duration} it detects if the video/stream is live or not.
-	 * <p>
-	 * <p>If it is live, then it will change {@link #duration} to "LIVE" and modify {@link #publishDate}
-	 * to current time (which will appear as "moments ago" when using {@link PrettyTime}).</p>
-	 */
-	private void setIsLiveStream() {
-		// is live stream?
-		if (duration.equals("0:00")) {
-			isLiveStream = true;
-			duration = getStr(R.string.LIVE);
-			// set publishDate to current (as there is a bug in YouTube API in which live videos's date is incorrect)
-			setPublishTimestamp(Instant.now().toEpochMilli());
-		} else {
-			isLiveStream = false;
-		}
-	}
+    public VideoId getVideoId() {
+        // TODO: this should be created by the NewPipe backend
+        return new VideoId(id, getVideoUrl());
+    }
 
-	public YouTubeChannel getChannel() {
-		return channel;
-	}
+    public void setSponsorBlockVideoInfo(SBVideoInfo sponsorBlockVideoInfo) {
+        this.sponsorBlockVideoInfo = sponsorBlockVideoInfo;
+    }
 
-	public void setChannel(YouTubeChannel channel) {
-		this.channel = channel;
-	}
+    public SBVideoInfo getSponsorBlockVideoInfo() {
+        return sponsorBlockVideoInfo;
+    }
+
+    /**
+     * Sets the {@link #thumbsUpPercentage}, i.e. the percentage of people that thumbs-up this video
+     * (format:  "<percentage>%").
+     *
+     * @param likedCountInt    Total number of "likes".
+     * @param dislikedCountInt Total number of "dislikes".
+     */
+    public void setLikeDislikeCount(Long likedCountInt, Long dislikedCountInt) {
+        this.thumbsUpPercentage = -1;
+
+        final Long likes = filterNegative(likedCountInt);
+        final Long dislikes = filterNegative(dislikedCountInt);
+
+        // some videos do not allow users to like/dislike them:  hence likedCountInt / dislikedCountInt
+        // might be null in those cases
+        if (likes != null && dislikes != null) {
+
+            long likedCount = likes;
+            long dislikedCount = dislikes;
+            long totalVoteCount = likedCount + dislikedCount;    // liked and disliked counts
+
+            if (totalVoteCount != 0) {
+                this.thumbsUpPercentage = (int) Math.round((double) likedCount * 100 / totalVoteCount);
+
+            }
+        }
+        this.likeCountNumber = likes;
+        this.dislikeCountNumber = dislikes;
+    }
+
+    private static Long filterNegative(Long value) {
+        if (value != null && value.longValue() < 0) {
+            return null;
+        }
+        return value;
+    }
+
+    /**
+     * Using {@link #duration} it detects if the video/stream is live or not.
+     * <p>
+     * <p>If it is live, then it will change {@link #duration} to "LIVE" and modify {@link #publishDate}
+     * to current time (which will appear as "moments ago" when using {@link PrettyTime}).</p>
+     */
+    private void setIsLiveStream() {
+        // is live stream?
+        if (duration.equals("0:00")) {
+            isLiveStream = true;
+            duration = getStr(R.string.LIVE);
+            // set publishDate to current (as there is a bug in YouTube API in which live videos's date is incorrect)
+            setPublishTimestamp(Instant.now().toEpochMilli());
+        } else {
+            isLiveStream = false;
+        }
+    }
+
+    public YouTubeChannel getChannel() {
+        return channel;
+    }
+
+    public void setChannel(YouTubeChannel channel) {
+        this.channel = channel;
+    }
 
     public String getSafeChannelId() {
         return channel != null ? channel.getId() : null;
@@ -308,136 +304,137 @@ public class YouTubeVideo extends CardData implements Serializable {
         return channel != null ? channel.getTitle() : null;
     }
 
-	public String getChannelId() {
-		return channel.getId();
-	}
+    public String getChannelId() {
+        return channel.getId();
+    }
 
-	public String getChannelName() {
-		return channel.getTitle();
-	}
+    public String getChannelName() {
+        return channel.getTitle();
+    }
 
-	/**
-	 * @return True if the video allows the users to like/dislike it.
-	 */
-	public boolean isThumbsUpPercentageSet() {
-		return (thumbsUpPercentage >= 0);
-	}
+    /**
+     * @return True if the video allows the users to like/dislike it.
+     */
+    public boolean isThumbsUpPercentageSet() {
+        return (thumbsUpPercentage >= 0);
+    }
 
-	/**
-	 * @return The thumbs up percentage (as an integer).  Can return <b>-1</b> if the video does not
-	 * allow the users to like/dislike it.  Refer to {@link #isThumbsUpPercentageSet}.
-	 */
-	public int getThumbsUpPercentage() {
-		return thumbsUpPercentage;
-	}
+    /**
+     * @return The thumbs up percentage (as an integer).  Can return <b>-1</b> if the video does not
+     * allow the users to like/dislike it.  Refer to {@link #isThumbsUpPercentageSet}.
+     */
+    public int getThumbsUpPercentage() {
+        return thumbsUpPercentage;
+    }
 
-	/**
-	 * @return The thumbs up percentage (format:  "«percentage»%").  Can return <b>null</b> if the
-	 * video does not allow the users to like/dislike it.  Refer to {@link #isThumbsUpPercentageSet}.
-	 */
-	public String getThumbsUpPercentageStr() {
-		// round the liked percentage to 0 decimal places and convert it to string
-		return thumbsUpPercentage >= 0 ? thumbsUpPercentage + "%" : null;
-	}
+    /**
+     * @return The thumbs up percentage (format:  "«percentage»%").  Can return <b>null</b> if the
+     * video does not allow the users to like/dislike it.  Refer to {@link #isThumbsUpPercentageSet}.
+     */
+    public String getThumbsUpPercentageStr() {
+        // round the liked percentage to 0 decimal places and convert it to string
+        return thumbsUpPercentage >= 0 ? thumbsUpPercentage + "%" : null;
+    }
 
-	/**
-	 * @return The total number of 'likes'.  Can return <b>null</b> if the video does not allow the
-	 * users to like/dislike it.  Refer to {@link #isThumbsUpPercentageSet}.
-	 */
-	public String getLikeCount() {
-		if (likeCountNumber != null) {
-			return String.format(Locale.getDefault(), "%,d", likeCountNumber);
-		}
-		return null;
-	}
+    /**
+     * @return The total number of 'likes'.  Can return <b>null</b> if the video does not allow the
+     * users to like/dislike it.  Refer to {@link #isThumbsUpPercentageSet}.
+     */
+    public String getLikeCount() {
+        if (likeCountNumber != null) {
+            return String.format(Locale.getDefault(), "%,d", likeCountNumber);
+        }
+        return null;
+    }
 
-	/**
-	 * @return The total number of 'likes'.  Can return <b>null</b> for videos serialized with only a 'string' like count.
-	 */
-	public Long getLikeCountNumber() {
-		return likeCountNumber;
-	}
+    /**
+     * @return The total number of 'likes'.  Can return <b>null</b> for videos serialized with only a 'string' like count.
+     */
+    public Long getLikeCountNumber() {
+        return likeCountNumber;
+    }
 
-	/**
-	 * @return The total number of 'dislikes'.  Can return <b>null</b> if the video does not allow the
-	 * users to like/dislike it.  Refer to {@link #isThumbsUpPercentageSet}.
-	 */
+    /**
+     * @return The total number of 'dislikes'.  Can return <b>null</b> if the video does not allow the
+     * users to like/dislike it.  Refer to {@link #isThumbsUpPercentageSet}.
+     */
 
 
-	/**
-	 * @return The total number of 'dislikes'.  Can return <b>null</b> for videos serialized with only a 'string' like count.
-	 */
-	public Long getDislikeCountNumber() {
-		return dislikeCountNumber;
-	}
+    /**
+     * @return The total number of 'dislikes'.  Can return <b>null</b> for videos serialized with only a 'string' like count.
+     */
+    public Long getDislikeCountNumber() {
+        return dislikeCountNumber;
+    }
 
-	public String getDuration() {
-		return duration;
-	}
+    public String getDuration() {
+        return duration;
+    }
 
-	public int getDurationInSeconds() {
-		return durationInSeconds;
-	}
+    public int getDurationInSeconds() {
+        return durationInSeconds;
+    }
 
-	/**
-	 * Sets the {@link #duration} by converts ISO 8601 duration to human readable string.
-	 *
-	 * @param duration ISO 8601 duration.
-	 */
-	private void setDuration(String duration) {
-		this.duration = VideoDuration.toHumanReadableString(duration);
-	}
+    /**
+     * Sets the {@link #duration} by converts ISO 8601 duration to human readable string.
+     *
+     * @param duration ISO 8601 duration.
+     */
+    private void setDuration(String duration) {
+        this.duration = VideoDuration.toHumanReadableString(duration);
+    }
 
-	public String getViewsCount() {
-		return viewsCount;
-	}
+    public String getViewsCount() {
+        return viewsCount;
+    }
 
-	public BigInteger getViewsCountInt() {
-		return viewsCountInt;
-	}
+    public BigInteger getViewsCountInt() {
+        return viewsCountInt;
+    }
 
-	/*
-	 * Sets the {@link #durationInSeconds}
-	 * @param durationInSeconds The duration in seconds.
-	 */
-	public void setDurationInSeconds(String durationInSeconds) {
-		this.durationInSeconds = (int) Duration.parse(durationInSeconds).toMillis() / 1000;
-	}
+    /*
+     * Sets the {@link #durationInSeconds}
+     * @param durationInSeconds The duration in seconds.
+     */
+    public void setDurationInSeconds(String durationInSeconds) {
+        this.durationInSeconds = (int) Duration.parse(durationInSeconds).toMillis() / 1000;
+    }
 
-	public void setDurationInSeconds(int durationInSeconds) {
-		this.durationInSeconds = durationInSeconds;
-		this.duration = VideoDuration.toHumanReadableString(durationInSeconds);
-	}
+    public void setDurationInSeconds(int durationInSeconds) {
+        this.durationInSeconds = durationInSeconds;
+        this.duration = VideoDuration.toHumanReadableString(durationInSeconds);
+    }
 
-	/**
-	 * Update the {@link #publishTimestamp} from {@link #publishDate} if the former is not set, just the later.
-	 * Useful when deserialized from json.
-	 * @return self.
-	 */
-	public YouTubeVideo updatePublishTimestampFromDate() {
-		if (this.publishTimestamp == null) {
-			if (this.publishDate != null) {
-				setPublishTimestamp(this.publishDate.toInstant().toEpochMilli());
-			}
-		}
-		return this;
-	}
+    /**
+     * Update the {@link #publishTimestamp} from {@link #publishDate} if the former is not set, just the later.
+     * Useful when deserialized from json.
+     *
+     * @return self.
+     */
+    public YouTubeVideo updatePublishTimestampFromDate() {
+        if (this.publishTimestamp == null) {
+            if (this.publishDate != null) {
+                setPublishTimestamp(this.publishDate.toInstant().toEpochMilli());
+            }
+        }
+        return this;
+    }
 
-	public String getThumbnailMaxResUrl() {
-		return thumbnailMaxResUrl;
-	}
+    public String getThumbnailMaxResUrl() {
+        return thumbnailMaxResUrl;
+    }
 
-	public String getVideoUrl() {
-		return String.format("https://youtu.be/%s", id);
-	}
+    public String getVideoUrl() {
+        return String.format("https://youtu.be/%s", id);
+    }
 
-	public String getLanguage() {
-		return language;
-	}
+    public String getLanguage() {
+        return language;
+    }
 
-	public boolean isLiveStream() {
-		return isLiveStream;
-	}
+    public boolean isLiveStream() {
+        return isLiveStream;
+    }
 
     public Single<Boolean> bookmarkVideo(Context context) {
         return bookmarkVideo(context, null);
@@ -455,26 +452,32 @@ public class YouTubeVideo extends CardData implements Serializable {
                         menu.findItem(R.id.unbookmark_video).setVisible(true);
                     }
                     return result.isPositive();
-        });
+                });
     }
 
-	static int getBookmarkMessage(@NonNull DatabaseResult result) {
-		switch (result) {
-			case ERROR: return R.string.video_bookmarked_error;
-			case NOT_MODIFIED: return R.string.video_already_bookmarked;
-			case SUCCESS: return R.string.video_bookmarked;
-		}
-		throw new IllegalStateException("Result "+ result);
-	}
+    static int getBookmarkMessage(@NonNull DatabaseResult result) {
+        switch (result) {
+            case ERROR:
+                return R.string.video_bookmarked_error;
+            case NOT_MODIFIED:
+                return R.string.video_already_bookmarked;
+            case SUCCESS:
+                return R.string.video_bookmarked;
+        }
+        throw new IllegalStateException("Result " + result);
+    }
 
-	static int getUnBookmarkMessage(@NonNull DatabaseResult result) {
-		switch (result) {
-			case ERROR: return R.string.video_unbookmarked_error;
-			case NOT_MODIFIED: return R.string.video_was_not_bookmarked;
-			case SUCCESS: return R.string.video_unbookmarked;
-		}
-		throw new IllegalStateException("Result "+ result);
-	}
+    static int getUnBookmarkMessage(@NonNull DatabaseResult result) {
+        switch (result) {
+            case ERROR:
+                return R.string.video_unbookmarked_error;
+            case NOT_MODIFIED:
+                return R.string.video_was_not_bookmarked;
+            case SUCCESS:
+                return R.string.video_unbookmarked;
+        }
+        throw new IllegalStateException("Result " + result);
+    }
 
     public Single<Boolean> unbookmarkVideo(Context context, Menu menu) {
         return BookmarksDb.getBookmarksDb().unbookmarkAsync(getVideoId())
@@ -491,130 +494,130 @@ public class YouTubeVideo extends CardData implements Serializable {
                 });
     }
 
-	public void shareVideo(Context context) {
-		SkyTubeApp.shareUrl(context, getVideoUrl());
-	}
+    public void shareVideo(Context context) {
+        SkyTubeApp.shareUrl(context, getVideoUrl());
+    }
 
-	public void copyUrl(Context context) {
-		SkyTubeApp.copyUrl(context, "Video URL", getVideoUrl());
-	}
+    public void copyUrl(Context context) {
+        SkyTubeApp.copyUrl(context, "Video URL", getVideoUrl());
+    }
 
-	public void updateFromStreamInfo(StreamInfo streamInfo) {
-		final long like = streamInfo.getLikeCount();
-		final long dislike = streamInfo.getDislikeCount();
-		this.setLikeDislikeCount(like >= 0 ? like : null, dislike >= 0 ? dislike : null);
+    public void updateFromStreamInfo(StreamInfo streamInfo) {
+        final long like = streamInfo.getLikeCount();
+        final long dislike = streamInfo.getDislikeCount();
+        this.setLikeDislikeCount(like >= 0 ? like : null, dislike >= 0 ? dislike : null);
 
-		final long views = streamInfo.getViewCount();
-		if (views >= 0) {
-			this.setViewCount(BigInteger.valueOf(views));
-		}
-		this.setDescription(NewPipeUtils.filterHtml(streamInfo.getDescription()));
-	}
+        final long views = streamInfo.getViewCount();
+        if (views >= 0) {
+            this.setViewCount(BigInteger.valueOf(views));
+        }
+        this.setDescription(NewPipeUtils.filterHtml(streamInfo.getDescription()));
+    }
 
-	/**
-	 * Downloads this video.
-	 *
-	 * @return The download task.
-	 * @param context Context
-	 */
-	public Completable downloadVideo(final Context context) {
-		return DownloadedVideosDb.getVideoDownloadsDb().isVideoDownloaded(YouTubeVideo.this.getVideoId())
-				.flatMapCompletable((downloadedVideo) -> {
-			if (downloadedVideo) {
-				return Completable.complete();
-			} else {
-				return YouTubeTasks.getDesiredStream(this, new GetDesiredStreamListener() {
-					@Override
-					public void onGetDesiredStream(StreamInfo streamInfo, YouTubeVideo video) {
+    /**
+     * Downloads this video.
+     *
+     * @param context Context
+     * @return The download task.
+     */
+    public Completable downloadVideo(final Context context) {
+        return DownloadedVideosDb.getVideoDownloadsDb().isVideoDownloaded(YouTubeVideo.this.getVideoId())
+                .flatMapCompletable((downloadedVideo) -> {
+                    if (downloadedVideo) {
+                        return Completable.complete();
+                    } else {
+                        return YouTubeTasks.getDesiredStream(this, new GetDesiredStreamListener() {
+                            @Override
+                            public void onGetDesiredStream(StreamInfo streamInfo, YouTubeVideo video) {
 
-						final Settings settings = SkyTubeApp.getSettings();
-						StreamSelectionPolicy selectionPolicy = settings.getDesiredVideoResolution(true);
-						StreamSelectionPolicy.StreamSelection streamSelection = selectionPolicy.select(streamInfo);
-						if (streamSelection != null) {
-							VideoStream videoStream = streamSelection.getVideoStream();
-							// download the video
-							downloadTheVideo(videoStream, settings);
-						} else {
-							Toast.makeText(context, selectionPolicy.getErrorMessage(context), Toast.LENGTH_LONG).show();
-						}
-					}
+                                final Settings settings = SkyTubeApp.getSettings();
+                                StreamSelectionPolicy selectionPolicy = settings.getDesiredVideoResolution(true);
+                                StreamSelectionPolicy.StreamSelection streamSelection = selectionPolicy.select(streamInfo);
+                                if (streamSelection != null) {
+                                    VideoStream videoStream = streamSelection.getVideoStream();
+                                    // download the video
+                                    downloadTheVideo(videoStream, settings);
+                                } else {
+                                    Toast.makeText(context, selectionPolicy.getErrorMessage(context), Toast.LENGTH_LONG).show();
+                                }
+                            }
 
-					private void downloadTheVideo(Stream stream, Settings settings) {
-						new VideoDownloader()
-								.setRemoteFileUrl(stream.getUrl())
-								.setDirType(Environment.DIRECTORY_MOVIES)
-								.setTitle(getTitle())
-								.setDescription(getStr(R.string.video) + " ― " + getChannelName())
-								.setOutputFileName(getId() + " - " + getTitle())
-								.setOutputDirectoryName(getChannelName())
-								.setParentDirectory(settings.getDownloadParentFolder())
-								.setOutputFileExtension(stream.getFormat().suffix)
-								.setAllowedOverRoaming(false)
-								.setAllowedNetworkTypesFlags(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE)
-								.displayPermissionsActivity(context);
-					}
+                            private void downloadTheVideo(Stream stream, Settings settings) {
+                                new VideoDownloader()
+                                        .setRemoteFileUrl(stream.getUrl())
+                                        .setDirType(Environment.DIRECTORY_MOVIES)
+                                        .setTitle(getTitle())
+                                        .setDescription(getStr(R.string.video) + " ― " + getChannelName())
+                                        .setOutputFileName(getId() + " - " + getTitle())
+                                        .setOutputDirectoryName(getChannelName())
+                                        .setParentDirectory(settings.getDownloadParentFolder())
+                                        .setOutputFileExtension(stream.getFormat().suffix)
+                                        .setAllowedOverRoaming(false)
+                                        .setAllowedNetworkTypesFlags(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE)
+                                        .displayPermissionsActivity(context);
+                            }
 
-					@Override
-					public void onGetDesiredStreamError(Throwable throwable) {
-						Logger.e(YouTubeVideo.this, "Stream error: " + throwable.getMessage(), throwable);
-						Context context = getContext();
-						Toast.makeText(context,
-								String.format(context.getString(R.string.video_download_stream_error), getTitle()),
-								Toast.LENGTH_LONG).show();
-					}
-				});
-			}
-		});
-	}
+                            @Override
+                            public void onGetDesiredStreamError(Throwable throwable) {
+                                Logger.e(YouTubeVideo.this, "Stream error: " + throwable.getMessage(), throwable);
+                                Context context = getContext();
+                                Toast.makeText(context,
+                                        String.format(context.getString(R.string.video_download_stream_error), getTitle()),
+                                        Toast.LENGTH_LONG).show();
+                            }
+                        });
+                    }
+                });
+    }
 
-	/**
-	 * Play the video using an external app
-	 */
-	public Single<DownloadedVideosDb.Status> playVideoExternally(Context context) {
-		return DownloadedVideosDb.getVideoDownloadsDb().getDownloadedFileStatus(context, getVideoId()).map(fileStatus -> {
-			if (fileStatus.getLocalVideoFile() != null) {
-				Uri uri;
-				File file = fileStatus.getLocalVideoFile();
-				try {
-					uri = FileProvider.getUriForFile(context, BuildConfig.APPLICATION_ID + ".provider", file);
-				} catch (Exception e) {
-					Logger.e(YouTubeVideo.this, "Error accessing path: " + file + ", message:" + e.getMessage(), e);
-					uri = fileStatus.getUri();
-				}
-				Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-				intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-				context.startActivity(intent);
-			} else {
-				Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getVideoUrl()));
-				context.startActivity(browserIntent);
-			}
-			return fileStatus;
-		});
-	}
+    /**
+     * Play the video using an external app
+     */
+    public Single<DownloadedVideosDb.Status> playVideoExternally(Context context) {
+        return DownloadedVideosDb.getVideoDownloadsDb().getDownloadedFileStatus(context, getVideoId()).map(fileStatus -> {
+            if (fileStatus.getLocalVideoFile() != null) {
+                Uri uri;
+                File file = fileStatus.getLocalVideoFile();
+                try {
+                    uri = FileProvider.getUriForFile(context, BuildConfig.APPLICATION_ID + ".provider", file);
+                } catch (Exception e) {
+                    Logger.e(YouTubeVideo.this, "Error accessing path: " + file + ", message:" + e.getMessage(), e);
+                    uri = fileStatus.getUri();
+                }
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                context.startActivity(intent);
+            } else {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getVideoUrl()));
+                context.startActivity(browserIntent);
+            }
+            return fileStatus;
+        });
+    }
 
-	////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////
 
-	/**
-	 * Downloads a YouTube video.
-	 */
-	private class VideoDownloader extends FileDownloader implements Serializable {
+    /**
+     * Downloads a YouTube video.
+     */
+    private class VideoDownloader extends FileDownloader implements Serializable {
 
-		@Override
-		public void onFileDownloadStarted() {
-			Toast.makeText(getContext(),
-					String.format(getContext().getString(R.string.starting_video_download), getTitle()),
-					Toast.LENGTH_LONG).show();
-		}
+        @Override
+        public void onFileDownloadStarted() {
+            Toast.makeText(getContext(),
+                    String.format(getContext().getString(R.string.starting_video_download), getTitle()),
+                    Toast.LENGTH_LONG).show();
+        }
 
         @Override
         public void onFileDownloadCompleted(boolean success, Uri localFileUri) {
             if (success) {
                 DownloadedVideosDb.getVideoDownloadsDb().add(YouTubeVideo.this, localFileUri, null)
-                    .doOnSuccess(saveSucceeded -> {
-                        showToast(saveSucceeded);
-                    }).doOnError(err -> {
-                        SkyTubeApp.notifyUserOnError(getContext(), err);
-                    }).subscribe();
+                        .doOnSuccess(saveSucceeded -> {
+                            showToast(saveSucceeded);
+                        }).doOnError(err -> {
+                            SkyTubeApp.notifyUserOnError(getContext(), err);
+                        }).subscribe();
             } else {
                 showToast(false);
             }
@@ -641,40 +644,39 @@ public class YouTubeVideo extends CardData implements Serializable {
         }
 
 
-
     }
 
-    public int getDislikeCount()  {
+    public int getDislikeCount() {
 
-		if (PreferenceManager.getDefaultSharedPreferences(getContext()).getBoolean("pref_key_use_dislike_api", false)) {
-			try {
+        if (PreferenceManager.getDefaultSharedPreferences(getContext()).getBoolean("pref_key_use_dislike_api", false)) {
+            try {
 
-				URL url = new URL("https://returnyoutubedislikeapi.com/votes?videoId=" + getVideoId().getId());
-				HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                URL url = new URL("https://returnyoutubedislikeapi.com/votes?videoId=" + getVideoId().getId());
+                HttpURLConnection con = (HttpURLConnection) url.openConnection();
 
-				con.setRequestMethod("GET");
-				con.setRequestProperty("User-Agent", "Mozilla/5.0");
-				//send the request
-				con.connect();
-				//get the response
-				int responseCode = con.getResponseCode();
+                con.setRequestMethod("GET");
+                con.setRequestProperty("User-Agent", "Mozilla/5.0");
+                //send the request
+                con.connect();
+                //get the response
+                int responseCode = con.getResponseCode();
 
-				BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-				String inputLine;
-				StringBuffer response = new StringBuffer();
-				while ((inputLine = in.readLine()) != null) {
-					response.append(inputLine);
-				}
-				in.close();
-				JSONObject jsonObject = new JSONObject(response.toString());
-				return jsonObject.getInt("dislikes");
+                BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+                String inputLine;
+                StringBuffer response = new StringBuffer();
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+                in.close();
+                JSONObject jsonObject = new JSONObject(response.toString());
+                return jsonObject.getInt("dislikes");
 
-			} catch (IOException | JSONException e) {
-				Log.e("GetDislikeCount", "getDislikeCount: error", e);
-			}
-		}
+            } catch (IOException | JSONException e) {
+                Log.e("GetDislikeCount", "getDislikeCount: error", e);
+            }
+        }
 
-		return 0;
-	}
+        return 0;
+    }
 
 }
