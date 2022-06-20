@@ -79,10 +79,6 @@ android {
         }
     }
     // Ignore missing translations
-    lintOptions {
-        checkReleaseBuilds false
-        abortOnError false
-    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -93,10 +89,19 @@ android {
         unitTests.returnDefaultValues = true
     }
     packagingOptions {
-        exclude "META-INF/*"
+        jniLibs {
+            excludes += ['META-INF/*']
+        }
+        resources {
+            excludes += ['META-INF/*']
+        }
     }
     buildFeatures {
         viewBinding true
+    }
+    lint {
+        abortOnError false
+        checkReleaseBuilds false
     }
 }
 
