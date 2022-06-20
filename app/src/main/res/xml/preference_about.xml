@@ -16,7 +16,8 @@
   ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto">
 
 	<Preference
 		app:key="@string/pref_key_version"
@@ -41,6 +42,14 @@
 		app:summary="@string/pref_summary_credits"
 		app:iconSpaceReserved="false" />
 
+	<Preference
+		android:id="@+id/preference"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		app:iconSpaceReserved="false"
+		app:key="@string/pref_key_open_issue"
+		app:summary="@string/pref_summary_open_issue"
+		app:title="@string/pref_title_open_issue" />
 	<Preference
 		app:key="@string/pref_key_license"
 		app:title="@string/pref_title_license"
