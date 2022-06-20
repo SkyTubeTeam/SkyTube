@@ -85,11 +85,9 @@
     <string name="pref_title_credits">Credits</string>
     <string name="pref_key_credits" translatable="false">pref_credits</string>
     <string name="pref_summary_credits">Great people and libre projects behind this app.</string>
-
     <string name="pref_title_open_issue">Open an issue</string>
     <string name="pref_key_open_issue" translatable="false">pref_key_open_issue</string>
     <string name="pref_summary_open_issue">Suggest an idea or report a bug.</string>
-
     <string name="pref_title_version">Version</string>
     <string name="pref_key_version" translatable="false">pref_version</string>
     <string name="pref_title_updates">Updates</string>
