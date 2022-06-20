@@ -395,7 +395,16 @@ public class SkyTubeApp extends MultiDexApplication {
 		}
 		if (message != null) {
 			Log.e(TAG, "Error: "+message);
-			Toast.makeText(ctx, message, Toast.LENGTH_LONG).show();
+
+			String toastText = message;
+			if(message.contains("resolve host")) {
+				toastText = "No internet connection available";
+			}
+			if(message.contains("JavaScript player")) {
+				return; // Error from Player when watching downloaded videos offline
+			}
+
+			Toast.makeText(ctx, toastText, Toast.LENGTH_LONG).show();
 		}
 	}
 

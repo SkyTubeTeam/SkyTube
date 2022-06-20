@@ -509,15 +509,15 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
                                         return;
                                     }
                                     if (downloadStatus.getUri() != null) {
-                                        youTubeVideo = DownloadedVideosDb.getVideoDownloadsDb().getDownloadedVideo(youTubeVideo.getId());
-
                                         fragmentBinding.loadingVideoView.setVisibility(View.GONE);
                                         Logger.i(this, ">> PLAYING LOCALLY: %s", downloadStatus.getUri());
                                         playVideo(downloadStatus.getUri(), downloadStatus.getAudioUri(), null);
 
-                                        if (SkyTubeApp.getSettings().isSponsorblockEnabled()) {
+                                        if (SkyTubeApp.getSettings().isSponsorblockEnabled() && youTubeVideo != null && youTubeVideo.getSponsorBlockVideoInfo() == null) {
+                                            youTubeVideo.setSponsorBlockVideoInfo(DownloadedVideosDb.getVideoDownloadsDb().getDownloadedVideoSponsorblock(youTubeVideo.getId()));
                                             initSponsorBlock();
                                         }
+
                                         // get the video statistics
                                         compositeDisposable.add(YouTubeTasks.getVideoDetails(ctx, youTubeVideo.getVideoId())
                                                 .subscribe(video -> {
