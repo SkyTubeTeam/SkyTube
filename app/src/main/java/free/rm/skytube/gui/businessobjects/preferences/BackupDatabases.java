@@ -72,7 +72,8 @@ public class BackupDatabases {
 			R.string.pref_key_video_download_minimum_resolution,
 			R.string.pref_key_video_download_maximum_resolution,
 			R.string.pref_key_video_quality_for_downloads,
-			R.string.pref_key_hide_tabs
+			R.string.pref_key_hide_tabs,
+			R.string.pref_key_playback_speed
 	};
 
 	/**
@@ -139,7 +140,7 @@ public class BackupDatabases {
 		ChannelFilteringDb  channelFilteringDb = ChannelFilteringDb.getChannelFilteringDb();
 		SearchHistoryDb     searchHistoryDb = SearchHistoryDb.getSearchHistoryDb();
 
-        File                databasesDirectory = subscriptionsDb.getDatabaseDirectory();
+		File                databasesDirectory = subscriptionsDb.getDatabaseDirectory();
 
 		// close the databases
 		subscriptionsDb.close();
@@ -148,9 +149,9 @@ public class BackupDatabases {
 		channelFilteringDb.close();
 		searchHistoryDb.close();
 
-        // extract the databases from the backup zip file
-        ZipFile databasesZip = new ZipFile(new File(backupFilePath));
-        Map<String, ZipFile.JsonFile> result = databasesZip.unzip(databasesDirectory);
+		// extract the databases from the backup zip file
+		ZipFile databasesZip = new ZipFile(new File(backupFilePath));
+		Map<String, ZipFile.JsonFile> result = databasesZip.unzip(databasesDirectory);
 		loadPreferencesFromJson(result);
 	}
 

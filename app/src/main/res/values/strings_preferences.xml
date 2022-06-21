@@ -585,6 +585,46 @@
     <string name="pref_key_use_newer_formats" translatable="false">pref_key_use_newer_formats</string>
     <string name="pref_key_use_newer_formats_title">Try newer Video formats</string>
     <string name="pref_key_use_newer_formats_summary">Sound and video may suffer on old Android versions without support.</string>
+    <string name="pref_key_playback_speed" translatable="false">pref_key_playback_speed</string>
+    <string name="pref_title_playback_speed">Default playback speed</string>
+    <string name="pref_summary_playback_speed">Default playback speed:  %s</string>
+    <string-array name="playback_speeds">
+        <item>0.6x</item>
+        <item>0.8x</item>
+        <item>1.0x</item>
+        <item>1.2x</item>
+        <item>1.4x</item>
+        <item>1.6x</item>
+        <item>1.8x</item>
+        <item>2.0x</item>
+        <item>2.5x</item>
+        <item>3.0x</item>
+        <item>3.5x</item>
+        <item>4.0x</item>
+        <item>4.5x</item>
+        <item>5.0x</item>
+        <item>5.5x</item>
+        <item>6.0x</item>
+    </string-array>
+    <string-array name="playback_speeds_values" translatable="false">
+        <item>0.6</item>
+        <item>0.8</item>
+        <item>1.0</item>
+        <item>1.2</item>
+        <item>1.4</item>
+        <item>1.6</item>
+        <item>1.8</item>
+        <item>2.0</item>
+        <item>2.5</item>
+        <item>3.0</item>
+        <item>3.5</item>
+        <item>4.0</item>
+        <item>4.5</item>
+        <item>5.0</item>
+        <item>5.5</item>
+        <item>6.0</item>
+    </string-array>
+
     <!--
         VIDEO BLOCKER
     -->

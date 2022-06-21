@@ -16,7 +16,8 @@
   ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:android="http://schemas.android.com/apk/res/android">
 
 	<ListPreference
 		app:key="@string/pref_key_choose_player"
@@ -69,5 +70,15 @@
 		app:title="@string/pref_key_use_newer_formats_title"
 		app:summary="@string/pref_key_use_newer_formats_summary"
 		app:iconSpaceReserved="false" />
+	<ListPreference
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		app:entries="@array/playback_speeds"
+		app:entryValues="@array/playback_speeds_values"
+		android:defaultValue="2"
+		app:iconSpaceReserved="false"
+		app:key="@string/pref_key_playback_speed"
+		app:summary="@string/pref_summary_playback_speed"
+		app:title="@string/pref_title_playback_speed" />
 
 </PreferenceScreen>

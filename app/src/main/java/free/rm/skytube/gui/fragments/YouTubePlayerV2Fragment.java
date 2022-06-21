@@ -51,6 +51,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.media.AudioManagerCompat;
 import androidx.preference.EditTextPreference;
+import androidx.preference.PreferenceManager;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -263,6 +264,10 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
         this.playbackSpeedController = new PlaybackSpeedController(getContext(),
                 playbackSpeedTextView, player);
 
+        //set playback speed
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this.getContext());
+        float playbackSpeed = Float.parseFloat(sp.getString("pref_key_playback_speed", "1.0"));
+        playbackSpeedController.setPlaybackSpeed(playbackSpeed);
         Linker.configure(videoDescriptionBinding.videoDescDescription);
     }
 
