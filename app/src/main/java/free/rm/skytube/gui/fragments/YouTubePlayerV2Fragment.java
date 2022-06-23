@@ -393,7 +393,6 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
     }
 
     private void initSponsorBlock() {
-        SBVideoInfo sponsorBlockVideoInfo = youTubeVideo.getSponsorBlockVideoInfo();
         if (sponsorBlockVideoInfo != null) {
             Log.d(TAG, "SBInfo has loaded");
             Handler handler = new Handler(Looper.getMainLooper());
@@ -513,8 +512,8 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
                                         Logger.i(this, ">> PLAYING LOCALLY: %s", downloadStatus.getUri());
                                         playVideo(downloadStatus.getUri(), downloadStatus.getAudioUri(), null);
 
-                                        if (SkyTubeApp.getSettings().isSponsorblockEnabled() && youTubeVideo != null && youTubeVideo.getSponsorBlockVideoInfo() == null) {
-                                            youTubeVideo.setSponsorBlockVideoInfo(DownloadedVideosDb.getVideoDownloadsDb().getDownloadedVideoSponsorblock(youTubeVideo.getId()));
+                                        if (SkyTubeApp.getSettings().isSponsorblockEnabled() && sponsorBlockVideoInfo == null) {
+                                            sponsorBlockVideoInfo = DownloadedVideosDb.getVideoDownloadsDb().getDownloadedVideoSponsorblock(youTubeVideo.getId());
                                             initSponsorBlock();
                                         }
 
@@ -743,7 +742,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
                     SBTasks.retrieveSponsorblockSegmentsCtx(requireContext(), youTubeVideo.getVideoId())
                             .subscribe(segments -> {
                                 Log.d(TAG, "Received SB Info with " + segments.getSegments().size() + " segments for duration of " + segments.getVideoDuration());
-                                youTubeVideo.setSponsorBlockVideoInfo(segments);
+                                sponsorBlockVideoInfo = segments;
                                 initSponsorBlock();
                             }, Functions.ON_ERROR_MISSING, () -> {
                                 Log.d(TAG, "No SB info received for " + youTubeVideo.getVideoId());
