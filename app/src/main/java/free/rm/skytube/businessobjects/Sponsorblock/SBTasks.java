@@ -82,6 +82,7 @@ public class SBTasks {
     public static SBVideoInfo retrieveSponsorblockSegmentsBk(@NonNull VideoId videoId) {
         Set<String> filterList = SkyTubeApp.getSettings().getSponsorblockCategories();
         if(filterList.size() == 0) return null; // enabled but all options turned off probably means "turned off but didn't know how to disable"
+        SkyTubeApp.nonUiThread();
 
         StringBuilder query = new StringBuilder("[");
         for(String filterCategory : filterList) {
