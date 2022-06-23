@@ -166,4 +166,6 @@
     <string name="pref_title_sponsorblock_category_list">Seqmentləri Ötürün</string>
     <string name="pref_summary_use_dislike_api">Returnyoutubedislike.com istifadə edərək bəyənməmə sayğacını qaytarın</string>
     <string name="pref_title_use_dislike_api">Bəyənməmə sayğacını qaytarın</string>
+    <string name="pref_title_open_issue">Problem açın</string>
+    <string name="pref_summary_open_issue">Bir idea təklif edin və ya səhv barədə məlumat verin.</string>
 </resources>
