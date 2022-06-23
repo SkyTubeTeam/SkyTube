@@ -178,4 +178,6 @@
     <string name="pref_summary_enable_sponsorblock">Sponsorlara, etkileşim hatırlatıcılarına ve daha fazlasına ayrılmış video bölümlerini otomatik atlayın</string>
     <string name="pref_title_use_dislike_api">Beğenmeme sayacını geri getir</string>
     <string name="pref_summary_use_dislike_api">returnyoutubedislike.com kullanarak beğenmeme sayacını geri getirin</string>
+    <string name="pref_title_open_issue">Sorun aç</string>
+    <string name="pref_summary_open_issue">Bir fikir önerin veya bir hatayı bildirin.</string>
 </resources>
