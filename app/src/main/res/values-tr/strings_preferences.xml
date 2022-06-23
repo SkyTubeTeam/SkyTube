@@ -176,4 +176,6 @@
     <string name="pref_sponsorblock_category">SponsorBlock</string>
     <string name="pref_general">Genel</string>
     <string name="pref_summary_enable_sponsorblock">Sponsorlara, etkileşim hatırlatıcılarına ve daha fazlasına ayrılmış video bölümlerini otomatik atlayın</string>
+    <string name="pref_title_use_dislike_api">Beğenmeme sayacını geri getir</string>
+    <string name="pref_summary_use_dislike_api">returnyoutubedislike.com kullanarak beğenmeme sayacını geri getirin</string>
 </resources>

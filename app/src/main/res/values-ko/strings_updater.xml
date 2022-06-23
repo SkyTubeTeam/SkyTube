@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="update_dialog_msg">새로운 버전의 SkyTube가 있습니다. 버전 %s 가 설치 됩니다.</string>
+    <string name="up_to_date_msg">이미 가장 최근 버전의 SkyTube가 설치되어 있습니다.</string>
+    <string name="release_notes">%s의 변경점</string>
+    <string name="update">업데이트</string>
+    <string name="later">나중에</string>
+    <string name="update_failure">새로운 버전의 앱이 설치되어 있지 않습니다.</string>
+    <string name="downloading">다운로드 중</string>
+    <string name="update_available">새로운 버전이 있습니다.</string>
+</resources>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="error">오류</string>
+    <string name="ok">확인</string>
+    <string name="search_videos">동영상 검색</string>
+    <string name="LIVE">라이브</string>
+    <string name="close">닫기</string>
+    <string name="yes">네</string>
+    <string name="no">아니요</string>
+    <string name="search_channel">채널 검색</string>
+    <string name="recaptcha_challenge_requested">YouTube가 봇으로 생각하고 있습니다. 그러므로 reCAPTCHA를 먼저 풀어야 합니다.</string>
+    <string name="loading">불러오는중</string>
+    <string name="num_videos">%d 동영상</string>
+    <string name="playlists">재생목록</string>
+</resources>
