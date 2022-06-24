@@ -167,4 +167,6 @@
     <string name="pref_general">一般</string>
     <string name="pref_details">詳情</string>
     <string name="pref_summary_enable_sponsorblock">自動跳過關於贊助商或互動（如訂閱、小鈴鐺）提醒等影片片段</string>
+    <string name="pref_title_open_issue">展開議題</string>
+    <string name="pref_summary_open_issue">提出建議或回報 bug。</string>
 </resources>
