@@ -11,7 +11,7 @@
     <string name="playing_video_file_missing">Memutar secara daring karena tidak ada video unduhan yang ditemukan.</string>
     <string name="external_storage_not_available">Izinkan akses ke penyimpanan terlebih dahulu sebelum mengunduh video.</string>
     <string name="video_stream_not_found_with_request_resolution">Tidak ada stream video yang ditemukan untuk resolusi %1$s-%2$s</string>
-    <string name="warning_metered_network_download">Perangkat Anda tersambung ke jaringan terukur. Untuk menghindari potensi biaya ekstra penggunaan data, direkomendasikan untuk tersambung ke jaringan tak terbatas. Tetap unduh video\?</string>
+    <string name="warning_metered_network_download">Mengunduh video pada jaringan terukur yang terhubung dengan Anda\?</string>
     <string name="unable_to_delete_file">Tidak bisa menghapus berkas unduhan \'%s\'.</string>
     <string name="download_failed_because">Tidak bisa mengunduh %1$s karena %2$s.</string>
 </resources>

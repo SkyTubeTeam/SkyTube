@@ -164,4 +164,8 @@
     <string name="pref_details">Подробиці</string>
     <string name="pref_summary_enable_sponsorblock">Автопропуск сегментів відео, присвячених спонсорам, нагадуванням про взаємодію тощо</string>
     <string name="pref_summary_sponsorblock_category_list">Виберіть категорії для пропуску</string>
+    <string name="pref_title_use_dislike_api">Лічильник позначок «не подобається»</string>
+    <string name="pref_summary_use_dislike_api">Лічильник позначок «не подобається» за допомогою returnyoutubedislike.com</string>
+    <string name="pref_title_open_issue">Написати звернення</string>
+    <string name="pref_summary_open_issue">Запропонувати ідею або повідомити про ваду.</string>
 </resources>

@@ -3,4 +3,25 @@
     <string name="could_not_get_channel_detailed">ఛానెల్ సమాచారాన్ని డౌన్‌లోడ్ చేయడం సాధ్యపడలేదు: %s.</string>
     <string name="could_not_get_videos">%s వీడియోలను పొందడం సాధ్యపడలేదు.</string>
     <string name="could_not_get_channel">ఛానెల్ సమాచారాన్ని డౌన్‌లోడ్ చేయడం సాధ్యపడలేదు.</string>
+    <string name="could_not_get_sponsorblock">స్పాన్సర్‌బ్లాక్ సమాచారాన్ని తిరిగి పొందడం సాధ్యం కాలేదు: %s.</string>
+    <string name="views">%,d వీక్షణలు</string>
+    <string name="error">పొరపాటు</string>
+    <string name="ok">అలాగే</string>
+    <string name="search_videos">వీడియోలను వెతకండి,ఇక్కడ వీడియోలను శోధించండి</string>
+    <string name="launch_offical_player_error">అధికారిక YouTube ప్లేయర్‌ని ప్రారంభించడం సాధ్యపడలేదు. ఇది ఇన్‌స్టాల్ చేయబడిందని నిర్ధారించుకోండి.</string>
+    <string name="LIVE">ప్రత్యక్షం</string>
+    <string name="featured">ఫీచార్</string>
+    <string name="most_popular">అత్యంత ప్రజాదరణ</string>
+    <string name="trending_in">ట్రెండింగ్‌(%s)</string>
+    <string name="video">వీడియో</string>
+    <string name="videos">వీడియోలు</string>
+    <string name="num_videos">%d వీడియోలు</string>
+    <string name="playlists">ప్లేజాబితాలు</string>
+    <string name="could_not_get_playlists">%s ప్లేజాబితాలను పొందడం సాధ్యపడలేదు.</string>
+    <string name="close">ముయ్యి</string>
+    <string name="yes">అవును</string>
+    <string name="recaptcha_challenge_requested">మీరు మనిషి కాదు ఏమో అని YouTube మిమల్ని భావిస్తోంది, కాబట్టి మీరు ముందుగా reCAPTCHAని పరిష్కరించాలి.</string>
+    <string name="loading">లోడ్ అవుతోంది దయచేసి ఆగండి…</string>
+    <string name="no">వద్దు,కాదు</string>
+    <string name="search_channel">ఛానెల్‌ని శోధించండి</string>
 </resources>
