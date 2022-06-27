@@ -159,24 +159,25 @@ public class DownloadedVideosDb extends CardEventEmitterDatabase implements Orde
     }
 
     public SBVideoInfo getDownloadedVideoSponsorblock(String videoId) {
-        Cursor cursor = getReadableDatabase().query(
+        SkyTubeApp.nonUiThread();
+        try (Cursor cursor = getReadableDatabase().query(
                 DownloadedVideosTable.TABLE_NAME,
                 new String[]{DownloadedVideosTable.COL_SB},
                 DownloadedVideosTable.COL_YOUTUBE_VIDEO_ID + " = ?",
-                new String[]{videoId}, null, null, null);
+                new String[]{videoId}, null, null, null)) {
 
-        SBVideoInfo result = null;
-        if (cursor.moveToNext()) {
-            Gson gson = new Gson();
-            do {
-                final byte[] sbBlob = cursor.getBlob(cursor.getColumnIndex(DownloadedVideosTable.COL_SB));
-                final String sbJson = new String(sbBlob);
-                result = gson.fromJson(sbJson, SBVideoInfo.class);
-            } while (cursor.moveToNext());
+            SBVideoInfo result = null;
+            if (cursor.moveToNext()) {
+                Gson gson = new Gson();
+                do {
+                    final byte[] sbBlob = cursor.getBlob(cursor.getColumnIndex(DownloadedVideosTable.COL_SB));
+                    final String sbJson = new String(sbBlob);
+                    result = gson.fromJson(sbJson, SBVideoInfo.class);
+                } while (cursor.moveToNext());
+            }
+
+            return result;
         }
-        cursor.close();
-
-        return result;
     }
 
     /**
@@ -185,41 +186,40 @@ public class DownloadedVideosDb extends CardEventEmitterDatabase implements Orde
      * @return List of Videos
      */
     private List<YouTubeVideo> getDownloadedVideos(String ordering) {
-        Cursor cursor = getReadableDatabase().query(
+        try (Cursor cursor = getReadableDatabase().query(
                 DownloadedVideosTable.TABLE_NAME,
                 new String[]{DownloadedVideosTable.COL_YOUTUBE_VIDEO, DownloadedVideosTable.COL_FILE_URI},
                 null,
-                null, null, null, ordering);
-        List<YouTubeVideo> videos = new ArrayList<>();
+                null, null, null, ordering)) {
+            List<YouTubeVideo> videos = new ArrayList<>();
 
-        if (cursor.moveToNext()) {
-            Gson gson = new Gson();
-            do {
-                final byte[] blob = cursor.getBlob(cursor.getColumnIndex(DownloadedVideosTable.COL_YOUTUBE_VIDEO));
-                final String videoJson = new String(blob);
+            if (cursor.moveToNext()) {
+                Gson gson = new Gson();
+                do {
+                    final byte[] blob = cursor.getBlob(cursor.getColumnIndex(DownloadedVideosTable.COL_YOUTUBE_VIDEO));
+                    final String videoJson = new String(blob);
 
-                // convert JSON into YouTubeVideo
-                YouTubeVideo video = gson.fromJson(videoJson, YouTubeVideo.class).updatePublishTimestampFromDate();
+                    // convert JSON into YouTubeVideo
+                    YouTubeVideo video = gson.fromJson(videoJson, YouTubeVideo.class).updatePublishTimestampFromDate();
 
-                // due to upgrade to YouTubeVideo (by changing channel{Id,Name} to YouTubeChannel)
-                // from version 2.82 to 2.90
-                if (video.getChannel() == null) {
-                    try {
-                        JSONObject videoJsonObj = new JSONObject(videoJson);
-                        final String channelId = videoJsonObj.get("channelId").toString();
-                        final String channelName = videoJsonObj.get("channelName").toString();
-                        video.setChannel(new YouTubeChannel(channelId, channelName));
-                    } catch (JSONException e) {
-                        Logger.e(this, "Error occurred while extracting channel{Id,Name} from JSON", e);
+                    // due to upgrade to YouTubeVideo (by changing channel{Id,Name} to YouTubeChannel)
+                    // from version 2.82 to 2.90
+                    if (video.getChannel() == null) {
+                        try {
+                            JSONObject videoJsonObj = new JSONObject(videoJson);
+                            final String channelId = videoJsonObj.get("channelId").toString();
+                            final String channelName = videoJsonObj.get("channelName").toString();
+                            video.setChannel(new YouTubeChannel(channelId, channelName));
+                        } catch (JSONException e) {
+                            Logger.e(this, "Error occurred while extracting channel{Id,Name} from JSON", e);
+                        }
                     }
-                }
-                video.forceRefreshPublishDatePretty();
-                videos.add(video);
-            } while (cursor.moveToNext());
+                    video.forceRefreshPublishDatePretty();
+                    videos.add(video);
+                } while (cursor.moveToNext());
+            }
+            return videos;
         }
-        cursor.close();
-
-        return videos;
     }
 
     public Single<Boolean> add(YouTubeVideo video, Uri fileUri, Uri audioUri) {
@@ -341,19 +341,19 @@ public class DownloadedVideosDb extends CardEventEmitterDatabase implements Orde
     public Single<Boolean> isVideoDownloaded(VideoId video) {
         return Single.fromCallable(() -> {
                     SkyTubeApp.nonUiThread();
-                    Cursor cursor = getReadableDatabase().query(
+                    try (Cursor cursor = getReadableDatabase().query(
                             DownloadedVideosTable.TABLE_NAME,
                             new String[]{DownloadedVideosTable.COL_FILE_URI},
                             DownloadedVideosTable.COL_YOUTUBE_VIDEO_ID + " = ?",
-                            new String[]{video.getId()}, null, null, null);
+                            new String[]{video.getId()}, null, null, null)) {
 
-                    boolean isDownloaded = false;
-                    if (cursor.moveToNext()) {
-                        String uri = cursor.getString(cursor.getColumnIndex(DownloadedVideosTable.COL_FILE_URI));
-                        isDownloaded = uri != null;
+                        boolean isDownloaded = false;
+                        if (cursor.moveToNext()) {
+                            String uri = cursor.getString(cursor.getColumnIndex(DownloadedVideosTable.COL_FILE_URI));
+                            isDownloaded = uri != null;
+                        }
+                        return isDownloaded;
                     }
-                    cursor.close();
-                    return isDownloaded;
                 })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
@@ -489,15 +489,15 @@ public class DownloadedVideosDb extends CardEventEmitterDatabase implements Orde
      * @return The maximum of the order number - which could be different from the number of downloaded files, in case some of them are deleted.
      */
     private int getMaximumOrderNumber() {
-        Cursor cursor = getReadableDatabase().rawQuery(DownloadedVideosTable.MAXIMUM_ORDER_QUERY, null);
-        int totalDownloads = 0;
+        try (Cursor cursor = getReadableDatabase().rawQuery(DownloadedVideosTable.MAXIMUM_ORDER_QUERY, null)) {
+            int totalDownloads = 0;
 
-        if (cursor.moveToFirst()) {
-            totalDownloads = cursor.getInt(0);
+            if (cursor.moveToFirst()) {
+                totalDownloads = cursor.getInt(0);
+            }
+
+            return totalDownloads;
         }
-
-        cursor.close();
-        return totalDownloads;
     }
 
     /**
@@ -506,24 +506,24 @@ public class DownloadedVideosDb extends CardEventEmitterDatabase implements Orde
     public static class RemoveMissingVideosTask extends AsyncTaskParallel<Void, Void, Void> {
         @Override
         protected Void doInBackground(Void... voids) {
-            Cursor cursor = getVideoDownloadsDb().getReadableDatabase().query(
+            try (Cursor cursor = getVideoDownloadsDb().getReadableDatabase().query(
                     DownloadedVideosTable.TABLE_NAME,
                     new String[]{DownloadedVideosTable.COL_YOUTUBE_VIDEO_ID, DownloadedVideosTable.COL_FILE_URI},
                     null,
-                    null, null, null, null);
+                    null, null, null, null)) {
 
-            if (cursor.moveToNext()) {
-                do {
-                    String videoId = cursor.getString(cursor.getColumnIndex(DownloadedVideosTable.COL_YOUTUBE_VIDEO_ID));
-                    Uri uri = Uri.parse(cursor.getString(cursor.getColumnIndex(DownloadedVideosTable.COL_FILE_URI)));
-                    File file = new File(uri.getPath());
-                    if (!file.exists()) {
-                        getVideoDownloadsDb().remove(videoId);
-                    }
-                } while (cursor.moveToNext());
+                if (cursor.moveToNext()) {
+                    do {
+                        String videoId = cursor.getString(cursor.getColumnIndex(DownloadedVideosTable.COL_YOUTUBE_VIDEO_ID));
+                        Uri uri = Uri.parse(cursor.getString(cursor.getColumnIndex(DownloadedVideosTable.COL_FILE_URI)));
+                        File file = new File(uri.getPath());
+                        if (!file.exists()) {
+                            getVideoDownloadsDb().remove(videoId);
+                        }
+                    } while (cursor.moveToNext());
+                }
+                return null;
             }
-            cursor.close();
-            return null;
         }
     }
 
