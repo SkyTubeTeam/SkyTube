@@ -35,6 +35,6 @@ public class DownloadedVideosTable {
 	}
 
 	public static String getAddSponsorBlockColumn() {
-		return ADD_COLUMN + COL_AUDIO_FILE_URI + " BLOB";
+		return ADD_COLUMN + COL_SB + " BLOB";
 	}
 }
