@@ -164,4 +164,8 @@
     <string name="pref_title_credit_sponsorblock">致谢</string>
     <string name="pref_summary_credit_sponsorblock">使用来自 https://sponsor.ajay.app 的数据</string>
     <string name="pref_sponsorblock_category">SponsorBlock</string>
+    <string name="pref_title_use_dislike_api">重新显示“踩”数量</string>
+    <string name="pref_summary_use_dislike_api">使用 returnyoutubedislike.com 重新显示“踩”数量</string>
+    <string name="pref_title_open_issue">新开一张工单</string>
+    <string name="pref_summary_open_issue">提出建议或报告缺陷。</string>
 </resources>

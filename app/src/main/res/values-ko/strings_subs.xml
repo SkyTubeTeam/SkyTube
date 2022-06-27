@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="subscriptions">구독자 목록</string>
+    <string name="subscribe">구독</string>
+    <string name="unsubscribe">구독 취소</string>
+    <string name="total_subscribers">%,d 구독자 수</string>
+    <string name="subscribed">구독중</string>
+</resources>

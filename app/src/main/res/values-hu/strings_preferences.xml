@@ -35,7 +35,7 @@
     <string name="pref_title_version">Verzió</string>
     <string name="pref_title_updates">Frissítések</string>
     <string name="pref_summary_updates">Frissítések ellenőrzése.</string>
-    <string name="pref_title_license">Copylefted Libre Licensz</string>
+    <string name="pref_title_license">Copylefted Libre Licenc</string>
     <string name="pref_summary_license">GPL v3+</string>
     <string name="i_agree">Elfogadom</string>
     <!-- extracted from  YouTube.com > 3 dot menu > Language -->
@@ -93,11 +93,11 @@
     <string name="pref_summary_import_subs">Feliratkozások importálása az ön YouTube fiókjából.</string>
     <string name="app_license">Copyright © 2015-2018 Ramon Mifsud
 \n
-\nEz a program szabad szoftver: terjesztheti és/vagy módosíthatja a Free Software Foundation által kiadott GNU General Public License feltételei alapján (a licenc 3-as verziója szerint).
+\nEz a program szabad szoftver: terjesztheti és/vagy módosíthatja a Free Software Foundation által kiadott GNU GPL feltételei alapján (a licenc 3-as verziója szerint).
 \n
-\nEzt a programot annak reményében terjesztjük, hogy hasznos lesz, de mindenféle GARANCIA NÉLKÜL, legyen az kifejezett vagy beleértett, beleértve, de nem kizárólagosan a FORGALOMBA HOZHATÓSÁGRA vagy ALKALMAZHATÓSÁGRA vonatkozó garanciákat. Lásd a GNU General Public License tartalmát a részletekért.
+\nEzt a programot annak reményében terjesztjük, hogy hasznos lesz, de mindenféle GARANCIA NÉLKÜL, legyen az kifejezett vagy beleértett, beleértve, de nem kizárólagosan a FORGALOMBA HOZHATÓSÁGRA vagy ALKALMAZHATÓSÁGRA vonatkozó garanciákat. Lásd a GNU GPL tartalmát a részletekért.
 \n
-\nA programmal együtt meg kellett kapnia a GNU General Public License egy példányát. Ha mégsem, lásd &lt;https://www.gnu.org/licenses/&gt;</string>
+\nA programmal együtt meg kellett kapnia a GNU GPLegy példányát. Ha mégsem, lásd &lt;https://www.gnu.org/licenses/&gt;</string>
     <string name="preferred_lang_updated">Frissítse a videókat az új nyelv használatához.</string>
     <string name="channel_already_whitelisted">A csatorna már szerepel a fehérlistán.</string>
     <string name="pref_playback_status_cleared">Lejátszási állapot törölve.</string>
@@ -182,4 +182,8 @@
     <string name="pref_summary_credit_sponsorblock">A https://sponsor.ajay.app SzponzorBlokk adatait használja</string>
     <string name="pref_summary_sponsorblock_category_list">Válassza ki, mely kategóriákat szeretné kihagyni</string>
     <string name="pref_summary_enable_sponsorblock">Automatikusan kihagyja a szponzorokat, interakciós emlékeztetőket és más egyéb töltelék részeket</string>
+    <string name="pref_summary_use_dislike_api">Nemtetszés-számláló visszaállítása a returnyoutubedislike.com használatával</string>
+    <string name="pref_title_use_dislike_api">Nemtetszés-számláló visszaállítása</string>
+    <string name="pref_summary_open_issue">Javasoljon egy ötletet, vagy jelentsen be egy hibát.</string>
+    <string name="pref_title_open_issue">Egy probléma megnyitása</string>
 </resources>
