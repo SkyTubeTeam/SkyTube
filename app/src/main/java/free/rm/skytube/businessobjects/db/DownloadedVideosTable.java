@@ -9,6 +9,7 @@ public class DownloadedVideosTable {
 	public static final String COL_YOUTUBE_VIDEO = "YouTube_Video";
 	public static final String COL_FILE_URI = "File_URI";
 	public static final String COL_AUDIO_FILE_URI = "Audio_URI";
+	public static final String COL_SB = "SponsorBlock";
 	public static final String COL_ORDER = "Order_Index";
 
 	static final String MAXIMUM_ORDER_QUERY = String.format("SELECT MAX(%s) FROM %s", COL_ORDER, TABLE_NAME);
@@ -24,11 +25,16 @@ public class DownloadedVideosTable {
 						COL_YOUTUBE_VIDEO + " BLOB, " +
 						COL_FILE_URI + " TEXT, " +
 						COL_AUDIO_FILE_URI + " TEXT, " +
+						COL_SB + " BLOB, " +
 						COL_ORDER + " INTEGER " +
 						" )";
 	}
 
 	public static String getAddAudioUriColumn() {
 		return ADD_COLUMN + COL_AUDIO_FILE_URI + " TEXT";
+	}
+
+	public static String getAddSponsorBlockColumn() {
+		return ADD_COLUMN + COL_SB + " BLOB";
 	}
 }

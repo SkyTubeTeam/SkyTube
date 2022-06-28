@@ -67,31 +67,8 @@ public class SBTasks {
      *
      * @param videoId The ID of the youtube video to watch
      */
-    public static Maybe<SBVideoInfo> retrieveSponsorblockSegments(@NonNull Context context, @NonNull VideoId videoId) {
-        return Maybe.fromCallable(() -> {
-            Set<String> filterList = SkyTubeApp.getSettings().getSponsorblockCategories();
-            if(filterList.size() == 0) return null; // enabled but all options turned off probably means "turned off but didn't know how to disable"
-
-            StringBuilder query = new StringBuilder("[");
-            for(String filterCategory : filterList) {
-                query.append("%22" + filterCategory + "%22,");
-            }
-            query.setLength(query.length() - 1); // remove last comma
-            query.append("]");
-
-            String apiUrl = "https://sponsor.ajay.app/api/skipSegments?videoID=" + videoId.getId() + "&categories=" + query;
-            Log.d(TAG, "ApiUrl: " + apiUrl);
-
-            try {
-                JSONArray sponsorblockInfo = getHTTPJSONArray(apiUrl);
-                return new SBVideoInfo(sponsorblockInfo);
-            } catch(Exception e) {
-                // FileNotFoundException = 404, which the API triggers both if the API call is invalid or no segment was found
-                // Hence we just assume that it's usually due to no segment (errors confuse users), and give a log for developers
-                Log.w(TAG, "Failed retrieving Sponsorblock info: ", e);
-                return null;
-            }
-        })
+    public static Maybe<SBVideoInfo> retrieveSponsorblockSegmentsCtx(@NonNull Context context, @NonNull VideoId videoId) {
+        return Maybe.fromCallable(() -> retrieveSponsorblockSegmentsBk(videoId))
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnError(throwable -> {
                     Log.e(TAG, "Error: " + throwable.getMessage(), throwable);
@@ -100,6 +77,32 @@ public class SBTasks {
                     Toast.makeText(context, toastMsg, Toast.LENGTH_LONG).show();
                 })
                 .subscribeOn(Schedulers.io());
+    }
+
+    public static SBVideoInfo retrieveSponsorblockSegmentsBk(@NonNull VideoId videoId) {
+        Set<String> filterList = SkyTubeApp.getSettings().getSponsorblockCategories();
+        if(filterList.size() == 0) return null; // enabled but all options turned off probably means "turned off but didn't know how to disable"
+        SkyTubeApp.nonUiThread();
+
+        StringBuilder query = new StringBuilder("[");
+        for(String filterCategory : filterList) {
+            query.append("%22" + filterCategory + "%22,");
+        }
+        query.setLength(query.length() - 1); // remove last comma
+        query.append("]");
+
+        String apiUrl = "https://sponsor.ajay.app/api/skipSegments?videoID=" + videoId.getId() + "&categories=" + query;
+        Log.d(TAG, "ApiUrl: " + apiUrl);
+
+        try {
+            JSONArray sponsorblockInfo = getHTTPJSONArray(apiUrl);
+            return new SBVideoInfo(sponsorblockInfo);
+        } catch(Exception e) {
+            // FileNotFoundException = 404, which the API triggers both if the API call is invalid or no segment was found
+            // Hence we just assume that it's usually due to no segment (errors confuse users), and give a log for developers
+            Log.w(TAG, "Failed retrieving Sponsorblock info: ", e);
+            return null;
+        }
     }
 
     public static JSONArray getHTTPJSONArray(String urlString) throws IOException, JSONException {

@@ -35,7 +35,7 @@
     <string name="pref_summary_license">GPLv3+</string>
     <string name="app_license">Copyright © 2015-2018 Ramon Mifsud
 \n
-\n このプログラムはフリーソフトウェアです。あなたはこれを、フリーソフトウェア財団によって発行されたGNU 一般公衆利用許諾書(バージョン3か、 それ以降のバージョンのうちどれか)が定める条件の下で再頒布または改変することができます。
+\nこのプログラムはフリーソフトウェアです。あなたはこれを、フリーソフトウェア財団によって発行されたGNU 一般公衆利用許諾書(バージョン3か、 それ以降のバージョンのうちどれか)が定める条件の下で再頒布または改変することができます。
 \n
 \nこのプログラムは有用であることを願って頒布されますが、*全くの無保証*です。商業可能性の保証や特定目的への適合性は、言外に示されたものも含め、全く存在しません。詳しくはGNU 一般公衆利用許諾書をご覧くださ い。
 \n
@@ -101,7 +101,7 @@
     <string name="channel_whitelist_update_failure">指定されたチャンネルを許可リストに登録できませんでした。</string>
     <string name="channel_unwhitelist_success">ビデオを再読み込みして新しいチャンネル許可リストを使用してください。</string>
     <string name="channel_unwhitelist_failure">指定されたチャンネルをホワイトリストから削除できませんでした…</string>
-    <string name="setting_updated">ビデオを再読み込みして新しい設定を使用してください。</string>
+    <string name="setting_updated">新しい設定を有効にするにはビデオを再読み込みしてください。</string>
     <string name="pref_other_filters_category">その他のフィルター</string>
     <string name="pref_title_low_views_filter">再生数</string>
     <string name="pref_summary_low_views_filter">再生数が少ない動画を除外する: %s</string>
@@ -167,4 +167,13 @@
     <string name="system_default_country">システム</string>
     <string name="pref_key_use_newer_formats_title">新しいビデオ形式を試す</string>
     <string name="pref_key_use_newer_formats_summary">サポート外の古いバージョンのAndroidでは映像や音声に問題が発生することがあります。</string>
+    <string name="pref_sponsorblock_category">スポンサーブロック</string>
+    <string name="pref_details">詳細</string>
+    <string name="pref_title_enable_sponsorblock">スポンサーブロックを有効</string>
+    <string name="pref_summary_enable_sponsorblock">スポンサー、行動を促すメッセージなどを自動スキップします</string>
+    <string name="pref_title_sponsorblock_category_list">スキップするセグメント</string>
+    <string name="pref_general">一般</string>
+    <string name="pref_summary_sponsorblock_category_list">スキップするカテゴリを選択</string>
+    <string name="pref_title_credit_sponsorblock">クレジット</string>
+    <string name="pref_summary_credit_sponsorblock">https://sponsor.ajay.appからのスポンサーブロック情報が使用されています</string>
 </resources>

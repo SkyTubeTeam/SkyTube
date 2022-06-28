@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="downloads">التنزيلات</string>
-	<string name="download_video">تنزيل الفيديو</string>
-	<string name="starting_video_download">جار التنزيل \'%s\'…</string>
-	<string name="video_download_stream_error">لايمكن التنزيل \'%s\'.</string>
-	<string name="delete_download">حذف التنزيل</string>
-	<string name="video_downloaded">\'%s\' تم تنزيلها.</string>
-	<string name="no_downloaded_videos_text">لم تقم بتنزيل أي مقاطع فيديو حتى الآن.
+    <string name="downloads">التنزيلات</string>
+    <string name="download_video">تنزيل الفيديو</string>
+    <string name="starting_video_download">جار التنزيل \'%s\'…</string>
+    <string name="video_download_stream_error">لايمكن التنزيل \'%s\'.</string>
+    <string name="delete_download">حذف التنزيل</string>
+    <string name="video_downloaded">\'%s\' تم تنزيلها.</string>
+    <string name="no_downloaded_videos_text">لم تقم بتنزيل أي مقاطع فيديو حتى الآن.
 \n
 \nبمجرد القيام بذالك ، سوف تظهر هنا.</string>
-	<string name="playing_video_file_missing">لم يتم العثور على الملف الذي تم تحميله. يتم تشغيل الفديو عن بعد.</string>
-	<string name="external_storage_not_available">غير قادر على تحميل الملف ذاكرة التخزين الخارجية غير متوفرة.</string>
+    <string name="playing_video_file_missing">لم يتم العثور على الملف الذي تم تحميله. يتم تشغيل الفديو عن بعد.</string>
+    <string name="external_storage_not_available">غير قادر على تحميل الملف ذاكرة التخزين الخارجية غير متوفرة.</string>
     <string name="download">تنزيل</string>
+    <string name="warning_metered_network_download">جهازك متصل بشبكة بيانات خاصة. لتجنب رسوم بيانات اضافية، ينصح بالاتصال بشبكة غير محدودة البيانات. أترغب بتنزيل الفيديو بأية حال؟</string>
 </resources>
