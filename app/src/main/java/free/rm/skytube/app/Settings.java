@@ -66,6 +66,7 @@ public class Settings {
         setDefault(sharedPreferences, R.string.pref_key_video_quality_for_downloads, VideoQuality.BEST_QUALITY.name());
         setDefault(sharedPreferences, R.string.pref_key_video_quality_on_mobile, VideoQuality.LEAST_BANDWITH.name());
         setDefault(sharedPreferences, R.string.pref_key_use_newer_formats, Build.VERSION.SDK_INT > 16);
+        setDefault(sharedPreferences, R.string.pref_key_playback_speed, "1.0");
     }
 
     private void migrate(SharedPreferences sharedPreferences, String oldKey, @StringRes int newKey) {
@@ -352,7 +353,11 @@ public class Settings {
         setPreference(LATEST_RELEASE_NOTES_DISPLAYED, newValue);
     }
 
-    public String getDefaultPlaybackSpeed() {
-        return getSharedPreferences().getString("pref_key_playback_speed", "1.0");
+    public float getDefaultPlaybackSpeed() {
+        try {
+            return Float.parseFloat(getPreference(R.string.pref_key_playback_speed, "1.0"));
+        } catch (NumberFormatException nfe) {
+            return 1.0F;
+        }
     }
 }

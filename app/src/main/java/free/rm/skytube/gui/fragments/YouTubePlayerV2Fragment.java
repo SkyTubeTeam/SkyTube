@@ -265,7 +265,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
                 playbackSpeedTextView, player);
 
         //set playback speed
-        float playbackSpeed = Float.parseFloat(SkyTubeApp.getSettings().getDefaultPlaybackSpeed());
+        float playbackSpeed = SkyTubeApp.getSettings().getDefaultPlaybackSpeed();
         playbackSpeedController.setPlaybackSpeed(playbackSpeed);
 
         Linker.configure(videoDescriptionBinding.videoDescDescription);
