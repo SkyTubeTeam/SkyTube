@@ -345,4 +345,8 @@ public class Settings {
     public void setDisplayedReleaseNoteTag(String newValue) {
         setPreference(LATEST_RELEASE_NOTES_DISPLAYED, newValue);
     }
+
+    public String getDefaultPlaybackSpeed() {
+        return getSharedPreferences().getString("pref_key_playback_speed", "1.0");
+    }
 }
