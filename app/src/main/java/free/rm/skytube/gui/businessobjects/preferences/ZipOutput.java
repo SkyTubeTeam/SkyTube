@@ -62,6 +62,8 @@ public class ZipOutput implements Closeable {
                 outputZipStream.write(buffer, 0, count);
             }
             outputZipStream.flush();
+        } catch (FileNotFoundException fileNotFoundException) {
+            Log.e(TAG, "File doesn't exist, so we can't add it: " + path);
         }
 
         Log.d(TAG, "Added: " + path);
