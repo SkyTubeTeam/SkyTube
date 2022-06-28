@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="feed">피드</string>
+    <string name="fetched_videos_from_channels">%2$d/%3$d 채널에서 %1$d개의 영상을 가져왔습니다.</string>
+    <string name="no_new_videos_found">새로운 영상이 없습니다.</string>
+    <string name="notification_channel_feed_title">피드 알림</string>
+    <string name="import_subscriptions_from_youtube">Youtube에서 구독 정보를 가져오기</string>
+    <string name="subscribing_to_channels">채널을 구독하고 있습니다…</string>
+    <string name="open_channel">채널 열기</string>
+    <string name="fetching_subbed_channels_info_error">채널 정보를 가져올 수 없습니다.</string>
+    <string name="fetching_subbed_channels_info">채널 정보를 가져오고 있습니다…</string>
+    <string name="fetching_subscription_videos">구독중인 채널의 영상을 가져오고 있습니다…</string>
+</resources>

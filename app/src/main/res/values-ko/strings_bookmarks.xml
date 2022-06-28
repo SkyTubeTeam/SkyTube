@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="video_bookmarked">즐겨찾기에 추가됨</string>
+    <string name="video_already_bookmarked">이미 즐겨찾기에 등록되어 있습니다.</string>
+    <string name="bookmarks">즐겨찾기</string>
+    <string name="video_bookmarked_error">즐겨찾기에 추가할 수 없습니다.</string>
+</resources>

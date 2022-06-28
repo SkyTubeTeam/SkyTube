@@ -29,7 +29,7 @@
     <string name="play">Lejátszás</string>
     <string name="cancel">Mégse</string>
     <string name="clear">Törlés</string>
-    <string name="should_resume">Ott folytatja, ahol abbahagyta\?</string>
+    <string name="should_resume">Ott folytatja ahol abbahagyta\?</string>
     <string name="resume">Folytatás</string>
     <string name="error_video_parse_error">Nem sikerült elindítani a videót: <br/><br/> %s.</string>
     <string name="error_downloaded_file_is_corrupted">A letöltött videó <b>sérültnek</b> tűnik : <br/><br/> %s. <br/><br/> <b>Törli</b> a fájlt\?</string>
