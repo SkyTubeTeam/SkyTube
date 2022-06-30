@@ -2,7 +2,7 @@
 <resources>
     <string name="dislikes">Не подобається %d%% користувачам</string>
     <string name="channel_unwhitelist_error">Не вдалося вилучити канал із білого списку.</string>
-    <string name="channel_blacklist_error">Не вдалося включити канал у чорний список.</string>
+    <string name="channel_blacklist_error">Не вдалося долучити канал у чорний список.</string>
     <string name="channel_blacklisted">Оновіть, щоб використовувати новий чорний список каналів.</string>
     <string name="block_channel">Блокувати канал</string>
     <string name="configure">Налаштувати</string>
