@@ -178,4 +178,6 @@
     <string name="pref_summary_credit_sponsorblock">Benutzt SponsorBlock-Daten von https://sponsor.ajay.app</string>
     <string name="pref_summary_use_dislike_api">\"Mag ich nicht\" zurückbringen mit returnyoutubedislike.com</string>
     <string name="pref_title_use_dislike_api">\"Mag ich nicht\"-Zurückbringer</string>
+    <string name="pref_title_open_issue">Fehler melden</string>
+    <string name="pref_summary_open_issue">Verbesserungsvorschlag oder Fehler melden.</string>
 </resources>
