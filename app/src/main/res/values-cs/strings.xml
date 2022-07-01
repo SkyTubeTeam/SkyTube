@@ -1,2 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="could_not_get_videos">Nelze získat %s videa.</string>
+    <string name="could_not_get_channel">Nelze stáhnout informace o kanálu.</string>
+    <string name="views">%,d zobrazení</string>
+    <string name="error">Chyba</string>
+    <string name="yes">Ano</string>
+    <string name="no">Ne</string>
+    <string name="search_channel">Vyhledat kanál</string>
+</resources>
