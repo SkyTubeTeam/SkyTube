@@ -10,7 +10,7 @@
     <string name="error_check_if_user_has_subbed">Nije bilo moguće provjeriti jesi li se pretplatio/la na kanal (id=%s)</string>
     <string name="error_unable_to_subscribe">Nije bilo moguće pretplatiti se na kanal/otkazati pretplatu na kanal (id=%s)</string>
     <string name="import_subscriptions">Uvoz pretplatnika</string>
-    <string name="import_subscriptions_description">Odznači sve na stranici https://takeout.google.com, osim „YouTube i YouTube glazba” i pritisni „Uključeni su svi YouTube podaci” za dobivanje samo pretplata. Pritsni „Dalje”, a zatim „Stvori izvoz”. Pritisni i dobit ćeš e-poruku s poveznicom za preuzimanje. Preuzmi datoteku iz tvog e-mail klijenta i raspakiraj je. Uvezi datoteku subscription.json (nalazi se u /Takeout/YouTube i YouTube Music/subscription/) u SkyTube koristeći gumb „Odaberi datoteku pretplata”.</string>
+    <string name="import_subscriptions_description">Odznači sve na stranici https://takeout.google.com, osim „YouTube i YouTube glazba” i pritisni „Uključeni su svi YouTube podaci” za dobivanje samo pretplata. Pritsni „Dalje”, a zatim „Stvori izvoz”. Pritisni i dobit ćeš e-poruku s poveznicom za preuzimanje. Preuzmi datoteku iz tvog e-mail klijenta. Odaberi tu ZIP datoteku ili je raspakiraj i odaberi sadržanu datoteku subscriptions.csv ili subscription.json (u /Takeout/YouTube i YouTube Music/subscription/) koristeći gumb „Odaberi datoteku pretplata”.</string>
     <string name="unsubscribe_from_all_current_sibbed_channels">Otkaži pretplate za sve tvoje trenutačne pretplaćene kanale.</string>
     <string name="subscriptions_to_channels_imported">%d kanal(a) uvezeno.</string>
     <string name="select_all">Odaberi sve</string>
