@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="error_stream_err_unavailable">Mensagem de erro não disponível.</string>
+    <string name="error_stream_err_unavailable">Mensagem indisponível.</string>
     <string name="error_stream_decryption_fail">Não foi possível carregar o código de desencriptação para o serviço YouTube.</string>
     <string name="error_stream_parse_error">Erro ao processar.</string>
     <string name="error_video_play">Erro de reprodução</string>
