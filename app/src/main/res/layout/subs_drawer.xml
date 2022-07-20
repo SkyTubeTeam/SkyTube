@@ -54,7 +54,7 @@
 		android:layout_below="@+id/subs_drawer_recycler_view"
 		android:layout_marginTop="-51dp"
 		android:background="#00FFFFFF"
-		android:drawableLeft="@drawable/quantum_ic_bigtop_updates_white_24"
+		android:drawableLeft="@drawable/ic_live_youtube"
 		android:drawablePadding="10dip"
 		android:gravity="left|center_vertical"
 		android:text="@string/subs_drawer_live_videos_button_title"
