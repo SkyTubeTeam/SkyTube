@@ -62,9 +62,6 @@ import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
-import free.rm.skytube.businessobjects.YouTube.VideoStream.StreamMetaData;
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.core.Maybe;
 
 /**
  * Service to interact with remote video services, using the NewPipeExtractor backend.
@@ -132,7 +129,7 @@ public class NewPipeService {
      * Returns a list of video/stream meta-data that is supported by this app for this video ID.
      *
      * @param videoId the id of the video.
-     * @return List of {@link StreamMetaData}.
+     * @return List of {@link StreamInfo}.
      */
     public StreamInfo getStreamInfoByVideoId(String videoId) throws ExtractionException, IOException {
         return getStreamInfoByUrl(getVideoUrl(videoId));
