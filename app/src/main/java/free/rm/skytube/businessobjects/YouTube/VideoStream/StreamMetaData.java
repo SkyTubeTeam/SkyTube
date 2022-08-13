@@ -37,7 +37,7 @@ public class StreamMetaData {
 
 
 	public StreamMetaData(VideoStream videoStream) {
-		setUri(videoStream.url);
+		setUri(videoStream.getContent());
 		this.format = videoStream.getFormat();
 		this.resolution = VideoResolution.resolutionToVideoResolution(videoStream.resolution);
 	}
