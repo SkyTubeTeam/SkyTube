@@ -176,4 +176,8 @@
     <string name="pref_summary_sponsorblock_category_list">Wybierz kategorie do pomijania</string>
     <string name="pref_title_sponsorblock_category_list">Pomijaj fragmenty</string>
     <string name="pref_summary_credit_sponsorblock">Korzysta z danych SponsorBlock z https://sponsor.ajay.app</string>
+    <string name="pref_title_open_issue">Otwórz zgłoszenie</string>
+    <string name="pref_summary_open_issue">Zaproponuj pomysł lub zgłoś błąd.</string>
+    <string name="pref_title_use_dislike_api">Przywróć licznik łapek w dół</string>
+    <string name="pref_summary_use_dislike_api">Przywróć licznik łapek w dół za pomocą returnyoutubedislike.com</string>
 </resources>

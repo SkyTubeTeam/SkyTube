@@ -10,7 +10,7 @@
     <string name="error_check_if_user_has_subbed">Kanala abone olup olmadığınız denetlenemedi (id=%s)</string>
     <string name="error_unable_to_subscribe">Kanala abone olunamadı/kanal aboneliğinden çıkılamadı (id=%s)</string>
     <string name="import_subscriptions">Abonelikleri içe aktar</string>
-    <string name="import_subscriptions_description">Yalnızca abonelikleri almak için https://takeout.google.com adresinde \"YouTube ve YouTube Music\" dışındaki her şeyin seçimini kaldırın ve \"Tüm YouTube verileri dahil\" düğmesine tıklayın. \"İleri\" ve ardından \"Dışa aktarma oluştur\" düğmesine tıklayın. İndirme bağlantısı içeren bir e-posta almak için tıklayın. Dosyayı e-posta istemcinizden indirin ve çıkarın. Aşağıdaki \"Abonelik Dosyasını Seç\" seçeneğini kullanarak subscriptions.json dosyasını (/Takeout/YouTube and YouTube Music/subscriptions/ konumunda) SkyTube\'dan içe aktarın.</string>
+    <string name="import_subscriptions_description">Yalnızca abonelikleri almak için https://takeout.google.com adresinde \"YouTube ve YouTube Music\" dışındaki her şeyin seçimini kaldırın ve \"Tüm YouTube verileri dahil\" düğmesine tıklayın. \"İleri\" ve ardından \"Dışa aktarma oluştur\" düğmesine tıklayın. İndirme bağlantısı içeren bir e-posta almak için tıklayın. Dosyayı e-posta istemcinizden indirin. Bu ZIP dosyasını seçin veya çıkarın ve aşağıdaki \"Abonelik Dosyası Seç\" seçeneğini kullanarak içinde bulunan subscriptions.csv veya subscriptions.json dosyasını (/Takeout/YouTube ve YouTube Music/subscriptions/ içinde) seçin.</string>
     <string name="subscriptions_to_channels_imported">%d kanal içe aktarıldı.</string>
     <string name="select_all">Tümünü Seç</string>
     <string name="select_none">Hiçbirini Seçme</string>

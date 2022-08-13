@@ -10,7 +10,7 @@
     <string name="select_sub_file">选择订阅文件</string>
     <string name="subscriptions_to_channels_imported">导入了%d个频道。</string>
     <string name="unsubscribe_from_all_current_sibbed_channels">取消订阅您当前订阅的所有频道。</string>
-    <string name="import_subscriptions_description">取消选择 https://takeout.google.com 上除“YouTube 和 YouTube 音乐”之外的所有内容，然后单击“包含的所有 YouTube 数据”以仅获取订阅。 单击“下一步”，然后单击“创建导出”。 单击以接收带下载链接的电子邮件。 从您的电子邮件客户端下载文件并将其解压缩。 使用下面的“选择订阅文件”从 SkyTube 中导入 subscriptions.json（在 /Takeout/YouTube 和 YouTube Music/subscriptions/ 中）。</string>
+    <string name="import_subscriptions_description">取消选择 https://takeout.google.com 上除“YouTube 和 YouTube 音乐”之外的所有内容，然后单击“包含的所有 YouTube 数据”以仅获取订阅。 单击“下一步”，然后单击“创建导出”。 单击以接收带下载链接的电子邮件。 从您的电子邮件客户端下载文件。选择此 ZIP 文件或将其解压缩并通过下面的“选择订阅文件”选择包含于括号内文件夹的 subscriptions.csv 或 subscriptions.json（/Takeout/YouTube 和 YouTube Music/subscriptions/ ）。</string>
     <string name="import_subscriptions">导入订阅</string>
     <string name="error_unable_to_subscribe">无法订阅或退订频道（id=%s）</string>
     <string name="error_check_if_user_has_subbed">无法检查您是否订阅了频道（id=%s）</string>

@@ -10,7 +10,7 @@
     <string name="error_check_if_user_has_subbed">Nie można sprawdzić, czy użytkownik zasubskrybował kanał (id=%s)</string>
     <string name="error_unable_to_subscribe">Nie można (od)subskrybować kanału (id=%s)</string>
     <string name="import_subscriptions">Importuj subskrypcje</string>
-    <string name="import_subscriptions_description">Odznacz wszystkie opcje na stronie https://takeout.google.com poza \"YouTube i Youtube Music\", następnie kliknij \"Wybrałeś wszystkie dane z Youtube\", aby uzyskać tylko subskrypcje. Kliknij \"Dalej\", a następnie \"Utwórz eksport\". Kliknij, aby otrzymać wiadomość e-mail z linkiem do pobrania. Pobierz archiwum i wyodrębnij je. Zaimportuj z niego plik subskrypcje.json (z /Takeout/YouTube i Youtube Music/subskrypcje/) do SkyTube, korzystając z opcji \"Wybierz plik subskrypcji\" poniżej.</string>
+    <string name="import_subscriptions_description">Do uzyskania tylko samych subskrypcji odznacz wszystkie opcje na stronie https://takeout.google.com poza \"YouTube i Youtube Music\", a następnie kliknij \"Wybrałeś wszystkie dane z Youtube\". Kliknij \"Dalej\", a następnie \"Utwórz eksport\". Kliknij, aby otrzymać wiadomość e-mail z linkiem do pobrania. Pobierz archiwum. Wybierz ten plik ZIP lub rozpakuj go i wybierz zawarty wewnątrz plik subskrybcje.csv lub subskrypcje.json (w /Takeout/YouTube i Youtube Music/subskrypcje/) korzystając z opcji \"Wybierz plik subskrypcji\" poniżej.</string>
     <string name="subscriptions_to_channels_imported">Zaimportowano %d kanał(y).</string>
     <string name="select_all">Wybierz wszystko</string>
     <string name="select_none">Wybierz żadne</string>

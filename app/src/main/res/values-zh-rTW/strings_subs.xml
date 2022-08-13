@@ -17,7 +17,7 @@
     <string name="no_channels_found">在您上傳的檔案中找不到 YouTube 頻道。</string>
     <string name="failed_to_import_subscriptions">無法匯入您的 YouTube 訂閱內容。</string>
     <string name="about">關於</string>
-    <string name="import_subscriptions_description">取消選擇 https://takeout.google.com 上的所有項目，只留下「YouTube 和 YouTube Music」，再點「包含所有 YouTube 資料」，只選「訂閱內容」。點「下一步」，再點「建立匯出作業」。按下之後就會收到內含下載連結的電子郵件。下載該檔案並解壓縮。按下方的「選取訂閱內容檔案」，將 subscriptions.json（位於 /Takeout/YouTube and YouTube Music/subscriptions/）匯入 SkyTube。</string>
+    <string name="import_subscriptions_description">取消選擇 https://takeout.google.com 上的所有項目，只留下「YouTube 和 YouTube Music」，再點「包含所有 YouTube 資料」，只選「訂閱內容」。點「下一步」，再點「建立匯出作業」。按下之後就會收到內含下載連結的電子郵件。下載該檔案後，按下方的「選取訂閱內容檔案」，選取該 ZIP檔、或是（解壓縮後再選取）其內含的 subscriptions.csv 或 subscriptions.json（位於 /Takeout/YouTube and YouTube Music/subscriptions/）。</string>
     <string name="no_new_channels_found">未發現您沒有訂閱的 YouTube 頻道。</string>
     <string name="import_subscriptions_parse_error">無法解析您上傳的檔案：%s。</string>
     <string name="channel_unsubscribed">已取消訂閱頻道</string>
