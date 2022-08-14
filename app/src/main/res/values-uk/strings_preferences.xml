@@ -168,4 +168,6 @@
     <string name="pref_summary_use_dislike_api">Лічильник позначок «не подобається» за допомогою returnyoutubedislike.com</string>
     <string name="pref_title_open_issue">Написати звернення</string>
     <string name="pref_summary_open_issue">Запропонувати ідею або повідомити про ваду.</string>
+    <string name="pref_title_playback_speed">Типова швидкість відтворення</string>
+    <string name="pref_summary_playback_speed">Типова швидкість відтворення: %s</string>
 </resources>
