@@ -1,0 +1,31 @@
+* Add dislike counter using returnyoutubedislike.com API by András Sebők
+* Implement fetching Sponsorblock information for downloaded videos by JamesCullum
+* Update NewPipeExtractor to fix recent Youtube changes
+* Hide the Featured tab by default, as this is only available with the old API
+* Fix subscription import.
+* Updated translations for:
+    * Arabic - Amr Khaled Hassan
+    * Azerbaijani - Corc, Nizami, ReVanced
+    * Basque - Julio Montero
+    * Croatian - Milo Ivir
+    * Chinese (Simplified) - Eric, JY3
+    * Chinese (Traditional) - zica
+    * Czech - DaveJeNej
+    * French - J. Lavoie
+    * German - James Cullum, RandomModderJDK
+    * Indonesian - Reza Almanda
+    * Italian - Marco Torti, Luca De Falco
+    * Japanese - kazats
+    * Korean - sinSetaKokoro
+    * Latvian - Tranzistors
+    * Hungarian - Szia Tomi, Zsombor
+    * Norwegian Bokmål - Allan Nordhøy
+    * Polish - Michal L
+    * Portuguese - Felipe
+    * Portuguese (Brazil) - Bruno Antunes, David Braz
+    * Portuguese (Portugal) - Sérgio Marques
+    * Russian - Sergey Arkhipov
+    * Spanish - Julio Montero
+    * Telugu - Abhinav Datta, V. Sai Prakash
+    * Turkish - Oğuz Ersen
+    * Ukrainian - Artem, Ihor Hordiichuk
