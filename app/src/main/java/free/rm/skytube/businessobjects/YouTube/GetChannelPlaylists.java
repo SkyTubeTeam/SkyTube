@@ -38,7 +38,7 @@ import free.rm.skytube.gui.businessobjects.adapters.PlaylistsGridAdapter;
  * Returns a list of YouTube playlists for a specific channel.
  *
  * <p>Do not run this directly, but rather use
- * {@link YouTubeTasks#getChannelPlaylists(GetChannelPlaylists, PlaylistsGridAdapter, boolean)}.</p>
+ * {@link YouTubeTasks#getChannelPlaylists(android.content.Context, GetChannelPlaylists, PlaylistsGridAdapter, boolean)}.</p>
  */
 public class GetChannelPlaylists {
 	protected YouTube.Playlists.List playlistList = null;
