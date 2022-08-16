@@ -36,7 +36,7 @@ import free.rm.skytube.gui.businessobjects.adapters.VideoGridAdapter;
  * Returns a list of YouTube videos.
  *
  * <p>Do not run this directly, but rather use {@link YouTubeTasks#getYouTubeVideos(GetYouTubeVideos,
- * VideoGridAdapter, SwipeRefreshLayout, boolean, VideoGridAdapter.Callback)}.</p>
+ * VideoGridAdapter, SwipeRefreshLayout, boolean)}.</p>
  */
 public abstract class GetYouTubeVideos {
 	protected String nextPageToken = null;
