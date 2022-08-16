@@ -24,6 +24,7 @@ import java.util.Set;
 import free.rm.skytube.BuildConfig;
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
+import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
 import free.rm.skytube.businessobjects.YouTube.newpipe.VideoId;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Maybe;
@@ -95,7 +96,7 @@ public class SBTasks {
         Log.d(TAG, "ApiUrl: " + apiUrl);
 
         try {
-            JSONArray sponsorblockInfo = getHTTPJSONArray(apiUrl);
+            JSONArray sponsorblockInfo = NewPipeService.getHttpDownloader().getJSONArray(apiUrl);
             return new SBVideoInfo(sponsorblockInfo);
         } catch(Exception e) {
             // FileNotFoundException = 404, which the API triggers both if the API call is invalid or no segment was found
@@ -105,29 +106,4 @@ public class SBTasks {
         }
     }
 
-    public static JSONArray getHTTPJSONArray(String urlString) throws IOException, JSONException {
-        return new JSONArray(getHTTP(urlString));
-    }
-
-    public static String getHTTP(String urlString) throws IOException {
-        URL url = new URL(urlString);
-        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-        urlConnection.setRequestMethod("GET");
-        urlConnection.setRequestProperty("User-Agent", "SkyTube-Android-" + BuildConfig.VERSION_CODE);
-        urlConnection.setRequestProperty("Accept", "*/*");
-        urlConnection.setReadTimeout(10000);
-        urlConnection.setConnectTimeout(15000);
-        urlConnection.connect();
-
-        BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-        StringBuilder sb = new StringBuilder();
-
-        String line;
-        while ((line = br.readLine()) != null) {
-            sb.append(line + "\n");
-        }
-        br.close();
-
-        return sb.toString();
-    }
 }

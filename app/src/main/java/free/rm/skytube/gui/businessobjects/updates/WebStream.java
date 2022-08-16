@@ -50,30 +50,6 @@ public class WebStream implements Closeable {
 		}
 	}
 
-	public WebStream(String remoteFileUrl) throws Exception {
-		this(new URL(remoteFileUrl));
-	}
-
-	/**
-	 * Downloads the remote Text File.
-	 *
-	 * @return The downloaded text file as a String.
-	 * @throws IOException
-	 */
-	public String downloadRemoteTextFile() throws IOException {
-		try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(stream))) {
-			StringBuilder htmlBuilder = new StringBuilder();
-			String line;
-
-			while ((line = bufferedReader.readLine()) != null) {
-				htmlBuilder.append(line);
-				htmlBuilder.append('\n');
-			}
-
-			return htmlBuilder.toString();
-		}
-	}
-
 	/**
 	 * Closes the {@link WebStream}.
 	 */
