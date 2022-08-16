@@ -87,7 +87,7 @@ public enum VideoCategory {
 			case SUBSCRIPTIONS_FEED_VIDEOS: return new GetSubscriptionsVideosFromDb();
 			case BOOKMARKS_VIDEOS: return new GetBookmarksVideos();
 			case MIXED_PLAYLIST_VIDEOS:
-			case PLAYLIST_VIDEOS: return new NewPipePlaylistVideos();// new GetPlaylistVideos();
+			case PLAYLIST_VIDEOS: return new NewPipePlaylistVideos();
 			case DOWNLOADED_VIDEOS: return new GetDownloadedVideos();
 		}
 		// this will notify the developer that he forgot to edit this method when a new type is added
