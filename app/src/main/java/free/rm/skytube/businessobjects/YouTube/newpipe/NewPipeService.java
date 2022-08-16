@@ -56,6 +56,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
 
+import free.rm.skytube.BuildConfig;
 import free.rm.skytube.R;
 import free.rm.skytube.app.Settings;
 import free.rm.skytube.app.SkyTubeApp;
@@ -439,8 +440,8 @@ public class NewPipeService {
 
     public synchronized static NewPipeService get() {
         if (instance == null) {
+            getHttpDownloader();
             instance = new NewPipeService(ServiceList.YouTube, SkyTubeApp.getSettings());
-            initNewPipe();
         }
         return instance;
     }
@@ -451,10 +452,13 @@ public class NewPipeService {
     /**
      * Initialize NewPipe with a custom HttpDownloader.
      */
-    public static void initNewPipe() {
+    public static OkHttpDownloader getHttpDownloader() {
+        OkHttpDownloader downloader = OkHttpDownloader.getInstance();
+        downloader.setApiUserAgent("SkyTube-Android-" + BuildConfig.VERSION_CODE);
         if (NewPipe.getDownloader() == null) {
-            NewPipe.init(OkHttpDownloader.getInstance(), Localization.DEFAULT, toContentCountry(SkyTubeApp.getSettings().getPreferredContentCountry()));
+            NewPipe.init(downloader, Localization.DEFAULT, toContentCountry(SkyTubeApp.getSettings().getPreferredContentCountry()));
         }
+        return downloader;
     }
 
     private static ContentCountry toContentCountry(String countryCode){
@@ -466,7 +470,7 @@ public class NewPipeService {
     }
 
     public static void setCountry(String countryCodeStr) {
-        initNewPipe();
+        getHttpDownloader();
         final ContentCountry contentCountry = toContentCountry(countryCodeStr);
         Log.i("NewPipeService", "set preferred content country to " + contentCountry);
         NewPipe.setPreferredContentCountry(contentCountry);
