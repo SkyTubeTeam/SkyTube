@@ -265,11 +265,6 @@ public class ChannelBrowserFragment extends FragmentEx {
 			// if the user has subscribed to this channel, then change the state of the
 			// subscribe button
 			binding.channelSubscribeButton.setChannel(channel);
-			if (channel.isUserSubscribed()) {
-				binding.channelSubscribeButton.setUnsubscribeState();
-			} else {
-				binding.channelSubscribeButton.setSubscribeState();
-			}
 
 			if (channel.isUserSubscribed()) {
 				// the user is visiting the channel, so we need to update the last visit time

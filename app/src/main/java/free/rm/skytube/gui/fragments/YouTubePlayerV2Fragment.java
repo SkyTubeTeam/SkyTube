@@ -747,15 +747,9 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
                                         .load(youTubeChannel.getThumbnailUrl())
                                         .apply(new RequestOptions().placeholder(R.drawable.channel_thumbnail_default))
                                         .into(videoDescriptionBinding.videoDescChannelThumbnailImageView);
+
                             }
                         })
-        );
-
-        // check if the user has subscribed to a channel... if he has, then change the state of
-        // the subscribe button
-        compositeDisposable.add(DatabaseTasks.checkIfUserSubbedToChannel(
-                videoDescriptionBinding.videoDescSubscribeButton,
-                youTubeVideo.getChannelId())
         );
 
         if (SkyTubeApp.getSettings().isSponsorblockEnabled()) {

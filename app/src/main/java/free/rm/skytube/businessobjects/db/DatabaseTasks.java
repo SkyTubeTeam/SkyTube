@@ -40,29 +40,6 @@ public class DatabaseTasks {
     private DatabaseTasks() {}
 
     /**
-     * A task that checks if a user is subscribed to a particular YouTube channel.
-     *
-     * @param subscribeButton	The subscribe button that the user has just clicked.
-     * @param channelId			The channel ID the user wants to subscribe to / unsubscribe from.
-     */
-    public static Disposable checkIfUserSubbedToChannel(@NonNull SubscribeButton subscribeButton,
-                                                        @NonNull String channelId) {
-        return SubscriptionsDb.getSubscriptionsDb().getUserSubscribedToChannel(channelId)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(isUserSubbed -> {
-                    if (isUserSubbed) {
-                        subscribeButton.setUnsubscribeState();
-                    } else {
-                        subscribeButton.setSubscribeState();
-                    }
-                }, throwable -> {
-                    Log.e(TAG, "Unable to check if user has subscribed to channel id=" + channelId, throwable);
-                    String err = String.format(SkyTubeApp.getStr(R.string.error_check_if_user_has_subbed), channelId);
-                    Toast.makeText(subscribeButton.getContext(), err, Toast.LENGTH_LONG).show();
-                });
-    }
-
-    /**
      * Task to retrieve channel information - from the local cache, or from the remote service if the
      * value is old or doesn't exist.
      */
@@ -209,7 +186,7 @@ public class DatabaseTasks {
                         if (subscribeToChannel) {
                             // change the state of the button
                             if (subscribeButton != null)
-                                subscribeButton.setUnsubscribeState();
+                                subscribeButton.setSubscribedState(true);
                             // Also change the subscription state of the channel
                             channel.setUserSubscribed(true);
 
@@ -222,7 +199,7 @@ public class DatabaseTasks {
                         } else {
                             // change the state of the button
                             if (subscribeButton != null)
-                                subscribeButton.setSubscribeState();
+                                subscribeButton.setSubscribedState(false);
                             // Also change the subscription state of the channel
                             channel.setUserSubscribed(false);
 
