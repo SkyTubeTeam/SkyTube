@@ -107,10 +107,6 @@ public class ChromecastControllerFragment extends ChromecastBaseControllerFragme
 		compositeDisposable.add(
 				DatabaseTasks.getChannelInfo(requireContext(), video.getChannelId(), false)
 						.subscribe(youTubeChannel -> {
-							if (youTubeChannel.isUserSubscribed())
-								videoDescriptionBinding.videoDescSubscribeButton.setUnsubscribeState();
-							else
-								videoDescriptionBinding.videoDescSubscribeButton.setSubscribeState();
 							videoDescriptionBinding.videoDescSubscribeButton.setChannel(youTubeChannel);
 
 							Glide.with(requireContext())
