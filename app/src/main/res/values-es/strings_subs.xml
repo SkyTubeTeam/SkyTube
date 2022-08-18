@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="subscriptions">Subscripciones</string>
-    <string name="subscribe">Subscribirse</string>
-    <string name="unsubscribe">Desubscribirse</string>
-    <string name="total_subscribers">%,d subscriptores</string>
-    <string name="subscribed">Subscrito</string>
-    <string name="unsubscribed">Desubscrito</string>
-    <string name="error_get_subbed_channels">No se puede recuperar los canales subscritos.</string>
-    <string name="error_check_if_user_has_subbed">No se puede comprobar si estás subscrito al canal (id=%s)</string>
-    <string name="error_unable_to_subscribe">No se pudo desubscribir al canal (id=%s)</string>
-    <string name="import_subscriptions">Importar subscripciones</string>
-    <string name="import_subscriptions_description">Deseleccione todo en https://takeout.google.com excepto \"YouTube y YouTube Music\" y haga clic en el botón \"Se han incluido todos los datos de Youtube\" para importar sólo las subscripciones. Haga click en \"Siguiente\"y después en \"Crear exportación\". Haz click para recibir un email con un enlace de descarga. Descarga el archivo desde tu cliente de email y extraeló. Importa subscriptions.json de el (se encuentra en /Takeout/YouTube y YouTube Music/subscriptions/). Entonces, selecciona el fichero exportado haciendo click en \"Selecciona fichero de subscripciones\" de más abajo.</string>
-    <string name="subscriptions_to_channels_imported">Importados %d canal(es).</string>
+    <string name="subscriptions">Suscripciones</string>
+    <string name="subscribe">Suscribirse</string>
+    <string name="unsubscribe">Desuscribirse</string>
+    <string name="total_subscribers">%,d suscriptores</string>
+    <string name="subscribed">Suscrito</string>
+    <string name="unsubscribed">Desuscrito</string>
+    <string name="error_get_subbed_channels">No se puede recuperar los canales suscritos.</string>
+    <string name="error_check_if_user_has_subbed">No se puede comprobar si estás suscrito al canal (id=%s)</string>
+    <string name="error_unable_to_subscribe">No se pudo desuscribir al canal (id=%s)</string>
+    <string name="import_subscriptions">Importar suscripciones</string>
+    <string name="import_subscriptions_description">Deseleccione todo en https://takeout.google.com excepto \"YouTube y YouTube Music\" y haga clic en el botón \"Se han incluido todos los datos de Youtube\" para importar sólo las suscripciones. Haga click en \"Siguiente\"y después en \"Crear exportación\". Haz click para recibir un email con un enlace de descarga. Descarga el archivo desde tu cliente de email o extraelo. Selecciona el archivo ZIP o descomprimir y seleccionar suscripciones.csv o suscripciones.json contenida dentro de (se encuentra en /Sacar/YouTube y YouTube Música/Suscripciones/). Usando \"Selecciona fichero de suscripciones\" de más abajo.</string>
+    <string name="subscriptions_to_channels_imported">%d canal(es) importados.</string>
     <string name="select_all">Seleccionar todo</string>
     <string name="select_none">Quitar selección</string>
     <string name="no_channels_found">No encontramos canales en el archivo que ha subido.</string>
-    <string name="no_new_channels_found">No se encontraron canales de YouTube a los que estés subscrito.</string>
+    <string name="no_new_channels_found">No se encontraron canales de YouTube a los que estés suscrito.</string>
     <string name="import_subscriptions_parse_error">No se puede analizar el archivo que ha subido: %s.</string>
-    <string name="failed_to_import_subscriptions">No se pueden importar sus subscripciones de YouTube.</string>
+    <string name="failed_to_import_subscriptions">No se pueden importar sus suscripciones de YouTube.</string>
     <string name="about">Acerca de</string>
-    <string name="unsubscribe_from_all_current_sibbed_channels">Desubscribir de todos los canales subscritos actualmente .</string>
-    <string name="channel_subscribe_failed">No se pudo subscribir al canal</string>
-    <string name="channel_already_subscribed">Subscrito ya</string>
-    <string name="channel_subscribed">Subscrito al canal</string>
-    <string name="channel_unsubscribed">No subscrito al canal</string>
-    <string name="select_sub_file">Selecciona fichero de subscripción</string>
+    <string name="unsubscribe_from_all_current_sibbed_channels">Desuscribir de todos los canales suscritos actualmente .</string>
+    <string name="channel_subscribe_failed">No se pudo suscribir al canal</string>
+    <string name="channel_already_subscribed">Suscrito ya</string>
+    <string name="channel_subscribed">Suscrito al canal</string>
+    <string name="channel_unsubscribed">No suscrito al canal</string>
+    <string name="select_sub_file">Selecciona fichero de suscripción</string>
 </resources>
