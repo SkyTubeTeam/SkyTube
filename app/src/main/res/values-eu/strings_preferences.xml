@@ -166,4 +166,8 @@
     <string name="pref_summary_credit_sponsorblock">https://sponsor.ajay.app-ko Babesle datuak erabiltzen ditu</string>
     <string name="pref_title_use_dislike_api">Itzuli gustatzen ez zaion kontagailua</string>
     <string name="pref_summary_use_dislike_api">Itzuli gustatzen ez zaien kontagailua returnyoutubedislike.com erabiliz</string>
+    <string name="pref_title_open_issue">Arazo bat ireki</string>
+    <string name="pref_summary_open_issue">Ideia bat iradoki edo zomorro baten berri eman.</string>
+    <string name="pref_title_playback_speed">Erreprodukzio-abiadura lehenetsia</string>
+    <string name="pref_summary_playback_speed">Erreprodukzio-abiadura lehenetsia: %s</string>
 </resources>
