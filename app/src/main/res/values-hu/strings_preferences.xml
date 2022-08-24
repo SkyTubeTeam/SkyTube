@@ -186,4 +186,6 @@
     <string name="pref_title_use_dislike_api">Nemtetszés-számláló visszaállítása</string>
     <string name="pref_summary_open_issue">Javasoljon egy ötletet, vagy jelentsen be egy hibát.</string>
     <string name="pref_title_open_issue">Egy probléma megnyitása</string>
+    <string name="pref_title_playback_speed">Alapértelmezett lejátszási sebesség</string>
+    <string name="pref_summary_playback_speed">Alapértelmezett lejátszási sebesség: %s</string>
 </resources>

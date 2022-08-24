@@ -103,7 +103,7 @@
     <string name="preferred_lang_updated">Odśwież filmy, aby używać nowego języka.</string>
     <string name="pref_title_lang_detection_video_filtering">Filtrowanie języka filmów</string>
     <string name="pref_summary_lang_detection_video_filtering">Wykorzystuje dużej ilości zasobów do wykrywania języka wideo i blokowania języka(ów), które nie są preferowane.</string>
-    <string name="setting_updated">Odśwież filmy, aby używać nowych ustawień.</string>
+    <string name="setting_updated">Aby zastosować nowe ustawienia, odśwież filmy.</string>
     <string name="pref_other_filters_category">Inne filtry</string>
     <string name="pref_title_low_views_filter">Wyświetlenia</string>
     <string name="pref_summary_low_views_filter">Odfiltruj filmy o niskiej liczbie wyświetleń: %s</string>
@@ -180,4 +180,6 @@
     <string name="pref_summary_open_issue">Zaproponuj pomysł lub zgłoś błąd.</string>
     <string name="pref_title_use_dislike_api">Przywróć licznik łapek w dół</string>
     <string name="pref_summary_use_dislike_api">Przywróć licznik łapek w dół za pomocą returnyoutubedislike.com</string>
+    <string name="pref_title_playback_speed">Domyślna prędkość odtwarzania</string>
+    <string name="pref_summary_playback_speed">Domyślna prędkość odtwarzania: %s</string>
 </resources>

@@ -169,4 +169,8 @@
     <string name="pref_summary_enable_sponsorblock">自動跳過關於贊助商或互動（如訂閱、小鈴鐺）提醒等影片片段</string>
     <string name="pref_title_open_issue">展開議題</string>
     <string name="pref_summary_open_issue">提出建議或回報 bug。</string>
+    <string name="pref_summary_use_dislike_api">使用 returnyoutubedislike.com 取回不喜歡計數器</string>
+    <string name="pref_title_use_dislike_api">取回不喜歡計數器</string>
+    <string name="pref_summary_playback_speed">預設播放速度：%s</string>
+    <string name="pref_title_playback_speed">預設播放速度</string>
 </resources>
