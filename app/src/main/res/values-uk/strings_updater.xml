@@ -9,4 +9,5 @@
     <string name="up_to_date">Всі оновлення встановлено</string>
     <string name="update_dialog_msg">Доступна нова версія SkyTube. Буде встановлено версію %s.</string>
     <string name="update_available">Доступна нова версія</string>
+    <string name="android_too_old">На жаль, ваш Android застарий для оновлення. Вам потрібно вручну встановити «SkyTube Legacy»!</string>
 </resources>
