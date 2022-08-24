@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="import_subscriptions_description">Deshautatu https://takeout.google.com-en dena \"YouTube eta YouTube Music\" izan ezik eta sakatu \"YouTube datu guztiak barne\" harpidetzak soilik lortzeko. Egin klik \"Hurrengoa\" eta gero \"Sortu esportazioa\". Egin klik deskargatzeko esteka duen mezu elektroniko bat jasotzeko. Deskargatu fitxategia zure posta-bezerotik eta atera ezazu. Inportatu subscriptions.json (/Takeout/YouTube eta YouTube Music/subscriptions/-n) bertatik SkyTube-n beheko \"Hautatu harpidetza-fitxategia\" erabiliz.</string>
+    <string name="import_subscriptions_description">Kendu dena https://takeout.google.com webgunean, \"YouTube and YouTube Music\" izan ezik, eta egin klik \"YouTubeko datu guztiak barne\" harpidetzak lortzeko. Egin klik \"Hurrengoa\" eta gero \"Esportazioa sortu\". Klik egin deskargatzeko esteka duen mezu elektroniko bat jasotzeko. Jaitsi fitxategia zure posta elektronikoko bezerotik. Aukeratu ZIP fitxategi hau edo atera eta hautatu harpidetzak, csv edo harpidetzak, barruan (in/Takeout/YouTube eta YouTube Music/harpidetzak /) \"Harpidetza fitxategia hautatu\" erabiliz.</string>
     <string name="about">Zertaz</string>
     <string name="failed_to_import_subscriptions">Ezin izan dira inportatu zure YouTube-ko harpidetzak.</string>
     <string name="import_subscriptions_parse_error">Ezin izan da kargatu duzun fitxategia analizatu: %s.</string>
