@@ -1,0 +1,13 @@
+* Fix broken Youtube video loading
+* Minor cleanups, and preparations for raising the required Android level. Old Androids will be supported through 'SkyTube Legacy'
+* Updated translations for:
+    * Azerbaijani - Nizami Semidov
+    * Basque - Julio Montero
+    * Chinese (Simplified) - Eric
+    * Chinese (Traditional) - Jeff Huang
+    * Croatian - Milo Ivir
+    * Hungarian - Szia Tomi
+    * Spanish - Alfredo Cruz
+    * Polish - Michal L
+    * Turkish - Oğuz Ersen
+    * Ukrainian - Ihor Hordiichuk
