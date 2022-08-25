@@ -47,7 +47,8 @@
 More features will be added in the near future.
 
 ## Requirements
-Android 4.0 (Ice Cream Sandwich) or later. For techies, that means an API level of 14 or greater.
+Android 4.4 (KitKat) or later. For techies, that means an API level of 19 or greater.
+If you have older Android device - however, at least 4.0, you should try [SkyTube Legacy](https://github.com/SkyTubeTeam/SkyTubeLegacy/).
 
 ## Download
 | Feature          | SkyTube Extra                      | SkyTube  |
