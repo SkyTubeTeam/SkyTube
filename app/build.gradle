@@ -7,7 +7,7 @@ android {
 
     defaultConfig {
         applicationId "free.rm.skytube"
-        minSdkVersion 14
+        minSdkVersion 19
         //noinspection ExpiredTargetSdkVersion
         targetSdkVersion 28
 
