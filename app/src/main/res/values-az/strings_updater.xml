@@ -9,4 +9,5 @@
     <string name="later">Daha sonra</string>
     <string name="update_failure">Tətbiqin yeni versiyasını quraşdırmaq mümkün olmadı.</string>
     <string name="downloading">Endirilir…</string>
+    <string name="android_too_old">Təəssüf ki, Androidiniz yeniləmək üçün çox köhnədir. Siz \"SkyTube Legacy\" tətbiqini əl ilə quraşdırmalısınız!</string>
 </resources>
