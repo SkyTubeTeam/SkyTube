@@ -24,6 +24,7 @@ android {
                         '}'
         buildConfigField 'String', 'SKYTUBE_WEBSITE', '"https://skytube-app.com"'
         buildConfigField 'String', 'SKYTUBE_WEBSITE_CREDITS', '"https://skytube-app.com/credits.html"'
+        buildConfigField 'String', 'SKYTUBE_ISSUES_URL', '"https://github.com/SkyTubeTeam/SkyTube/issues/new/choose"'
         buildConfigField 'String', 'SKYTUBE_UPDATES_URL', '"https://api.github.com/repos/SkyTubeTeam/SkyTube/releases/latest"'
         buildConfigField 'long', 'BUILD_TIME', String.valueOf(System.currentTimeMillis()) + 'L'
         vectorDrawables.useSupportLibrary true
