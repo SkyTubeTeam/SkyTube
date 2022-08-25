@@ -1,3 +1,18 @@
+v2.983 - 2022-08-25
+        * Fix broken Youtube video loading
+        * Minor cleanups, and preparations for raising the required Android level. Old Androids will be supported through 'SkyTube Legacy'
+        * Updated translations for:
+            * Azerbaijani - Nizami Semidov
+            * Basque - Julio Montero
+            * Chinese (Simplified) - Eric
+            * Chinese (Traditional) - Jeff Huang
+            * Croatian - Milo Ivir
+            * Hungarian - Szia Tomi
+            * Spanish - Alfredo Cruz
+            * Polish - Michal L
+            * Turkish - Oğuz Ersen
+            * Ukrainian - Ihor Hordiichuk
+
 v2.982 - 2022-08-14
         * Add dislike counter using returnyoutubedislike.com API by András Sebők
         * Implement fetching Sponsorblock information for downloaded videos by JamesCullum
