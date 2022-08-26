@@ -1,4 +1,7 @@
 v2.983 - 2022-08-25
+        * Fix running on Android 4.4
+
+v2.983 - 2022-08-25
         * Fix broken Youtube video loading
         * Minor cleanups, and preparations for raising the required Android level. Old Androids will be supported through 'SkyTube Legacy'
         * Updated translations for:

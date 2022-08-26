@@ -11,8 +11,8 @@ android {
         //noinspection ExpiredTargetSdkVersion
         targetSdkVersion 28
 
-        versionName "2.983"    // digits of the *fractional part* shall NOT be > than "9"
-        versionCode 43
+        versionName "2.984"    // digits of the *fractional part* shall NOT be > than "9"
+        versionCode 44
         // Third party devs:  pls be ethical and change the below keys
         //buildConfigField 'String',   'YOUTUBE_API_KEYS_DEBUG', '"AIzaSyDU-ZZCyOB_kYkiMSZ6ooSipUZRukHU4ik"'
         buildConfigField 'String', 'YOUTUBE_API_KEYS_DEBUG', '"hidden:A0C0B03EED58193F4CD52DF668495D523A5229C6B66B0ED6282AE09BD8FF08CD5AF9A6B52C214F"'
