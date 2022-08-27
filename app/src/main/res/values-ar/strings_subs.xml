@@ -7,7 +7,7 @@
     <string name="subscribed">مشترك</string>
     <string name="unsubscribed">إلغاء الاشتراك</string>
     <string name="error_get_subbed_channels">حدث خطأ أثناء جلب القنوات المشتركة.</string>
-    <string name="error_check_if_user_has_subbed">"غير قادر علي التحقق مما إذا كان المستخدم قد اشترك في القناة  (id=%s)"</string>
+    <string name="error_check_if_user_has_subbed">غير قادر على التحقق مما إذا كان المستخدم قد اشترك في القناة أم لا (id=%s)</string>
     <string name="error_unable_to_subscribe">لايمكن إلغاء الإشتراك من عنوان (id=%s) القنوات</string>
     <string name="import_subscriptions">استيراد الإشتراكات</string>
     <string name="import_subscriptions_description">استيراد الاشتراكات الخاصة بك من يوتيوب، بزيارة https://www.youtube.com/subscription_manager ، والنقر فوق زر \"تصدير الإشتراكات\" في الجزء السفلي. ثم حدد الملف الذي تم تصديره بعنوان \"subscription_manager\" بواسطة النقر فوق \"تحديد ملف الإشتراكات\" أدناه.</string>
