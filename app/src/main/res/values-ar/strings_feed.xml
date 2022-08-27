@@ -4,12 +4,10 @@
     <string name="subscribing_to_channels">الاشتراك في القنوات…</string>
     <string name="fetching_subbed_channels_info">جلب معلومات القنوات …</string>
     <string name="fetching_subbed_channels_info_error">حدث خطأ أثناء جلب معلومات القنوات .</string>
-    <string name="fetching_subscription_videos">جلب مقاطع الفيديو الجديدة</string>
-    <string name="fetched_videos_from_channels">تم جلب %1$d من مقاطع الفيديو من %2$d/%3$d من القنوات..</string>
+    <string name="fetching_subscription_videos">جلب مقاطع الفيديو الجديدة من الاشتراكات…</string>
+    <string name="fetched_videos_from_channels">تم جلب %1$d مقطع فيديو من %2$d/%3$d من القنوات..</string>
     <string name="no_new_videos_found">لم يتم العثور على مقاطع فيديو جديدة.</string>
-    <string name="no_subscriptions_text">أنت لم تقم بالإشتراك في أي قنوات. 
-\n 
-\nبعد أن تشترك، ستظهر جميع مقاطع الفيديو التي تم تحميلها إلى القنوات التي اشتركت فيها خلال الشهر الماضي هنا.</string>
+    <string name="no_subscriptions_text">إشترك في بعض القنوات حتى تحصل على قائمة فيديوهات جديدة منها هنا.</string>
     <string name="import_subscriptions_from_youtube">استيراد الاشتراكات من YouTube</string>
     <string name="notification_channel_feed_title">خدمة الإشعارات</string>
     <string name="notification_new_videos_found">%d فيدوهات جديدة من القنوات المشترك فيها</string>
