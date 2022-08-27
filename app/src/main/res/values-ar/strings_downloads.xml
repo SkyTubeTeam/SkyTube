@@ -6,9 +6,7 @@
     <string name="video_download_stream_error">لايمكن التنزيل \'%s\'.</string>
     <string name="delete_download">حذف التنزيل</string>
     <string name="video_downloaded">\'%s\' تم تنزيلها.</string>
-    <string name="no_downloaded_videos_text">لم تقم بتنزيل أي مقاطع فيديو حتى الآن.
-\n
-\nبمجرد القيام بذالك ، سوف تظهر هنا.</string>
+    <string name="no_downloaded_videos_text">قم بتنزيل بعض الفيديوهات لتجدها هنا.</string>
     <string name="playing_video_file_missing">لم يتم العثور على الملف الذي تم تحميله. يتم تشغيل الفديو عن بعد.</string>
     <string name="external_storage_not_available">غير قادر على تحميل الملف ذاكرة التخزين الخارجية غير متوفرة.</string>
     <string name="download">تنزيل</string>
