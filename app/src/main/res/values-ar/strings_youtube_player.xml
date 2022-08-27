@@ -14,7 +14,7 @@
     <string name="open_in_browser">فتح في متصفح الويب</string>
     <string name="open_with">فتح بواسطة…</string>
     <string name="share">مشاركة</string>
-    <string name="share_via">مشاركة عبر</string>
+    <string name="share_via">مشاركة عبر…</string>
     <string name="copy_url">نسخ الرابط</string>
     <string name="url_copied_to_clipboard">تم نسخ الرابط الى الحافظة.</string>
     <string name="error_get_comments">حدث خطا اثناء الحصول علي التعليقات.</string>
