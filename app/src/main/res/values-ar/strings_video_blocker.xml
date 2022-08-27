@@ -7,5 +7,5 @@
     <string name="channel_blacklisted">تم وضع القناة في القائمة السوداء. الرجاء التحديث.</string>
     <string name="channel_blacklist_error">تعذر وضع القناة القائمة السوداء.</string>
     <string name="channel_unwhitelist_error">تعذر إزالة القناة من القائمة البيضاء.</string>
-    <string name="dislikes">% d%% عدم الإعجاب</string>
+    <string name="dislikes">%d%% عدم الإعجاب</string>
 </resources>
