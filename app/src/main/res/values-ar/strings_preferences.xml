@@ -16,7 +16,7 @@
     <string name="databases_backup_fail">فشل النسخ الاحتياطي لقواعد البيانات الخاصة بك.</string>
     <string name="databases_import_select_backup">حدد ملف النسخ الاحتياطي للاستيراد</string>
     <string name="databases_import_nothing_selected">لم يتم تحديد أي شيء …</string>
-    <string name="databases_import_warning_message">سيتم استبدال قواعد بيانات الاشتراكات والقوائم المرجعية مع بيانات ملف النسخ الاحتياطي المحدد. 
+    <string name="databases_import_warning_message">سيتم استبدال قواعد بيانات الاشتراكات والقوائم المرجعية بالبيانات التي في ملف النسخ الاحتياطي المحدد.
 \nاستمرار؟</string>
     <string name="continue_">استمرار</string>
     <string name="databases_importing">جارٍ الاستيراد…</string>
@@ -33,7 +33,7 @@
     <string name="pref_title_updates">التحديثات</string>
     <string name="pref_summary_updates">التحقق من توفر إصدار جديد.</string>
     <string name="pref_title_license">الرخصة</string>
-    <string name="pref_summary_license">"رخصة GNU  العامة الاصدار 3"</string>
+    <string name="pref_summary_license">رخصة GPL العامة الاصدار 3</string>
     <string name="app_license">حقوق الطبع والنشر © 2015-2018 Ramon Mifsud 
 \n 
 \nهذا البرنامج هو برمجية حرة: يمكنك أعاده توزيعها و/أو تعديلها ببموجب شروط رخصه جنو العامة كما نشرتها مؤسسه البرمجيات الحرة (الإصدار 3 من الترخيص). 
@@ -105,11 +105,11 @@
     <string name="input_channel_url">عنوان URL للقناة التي ستكون في اللائحة البيضاء:</string>
     <string name="channel_already_whitelisted">القناة بالفعل في اللائحة البيضاء.</string>
     <string name="channel_whitelist_updated">تم تحديث القنوات في القائمة البيضاء .يرجى تحديث الفيديو.</string>
-    <string name="channel_whitelist_update_failure">فشل نقل القناة للقائمة البيضاء …</string>
+    <string name="channel_whitelist_update_failure">فشل نقل القناة للقائمة البيضاء.</string>
     <string name="channel_unwhitelist_success">تم تحديث القائمة البيضاء للقناة. الرجاء تحديث فائمة الإشتراكات.</string>
     <string name="channel_unwhitelist_failure">فشل نقل القناة من القائمة البيضاء …</string>
     <string name="no_preferred_lang_selected">لم يتم أختيار لغات مفضلة. سيتم تجاهل الإعداد.</string>
-    <string name="preferred_lang_updated">"تم تحديث اللغات المفضلة.  الرجاء تحديث قائمة الإشتراكات."</string>
+    <string name="preferred_lang_updated">حدث قائمة الفيديوهات لاستخدام اللغة الجديدة.</string>
     <string name="pref_title_lang_detection_video_filtering">الكشف عن الغة و فلاتر الفيديو</string>
     <string name="pref_summary_lang_detection_video_filtering">نستخدم الذكاء الإصطناعي للكشف عن اللغات المستخدمة في الفيديوهات ومنعها إذا كانت لغتهم لاتطابق اللغات المفضلة التي قمت بإختيارها . وينبغي تمكين هذا الخيار فقط على الأجهزة القوية.</string>
     <string name="setting_updated">تم تحديث الإعداد. الرجاء تحديث قائمة الإشتراكات.</string>
