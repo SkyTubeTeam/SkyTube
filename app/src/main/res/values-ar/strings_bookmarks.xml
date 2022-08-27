@@ -7,7 +7,5 @@
     <string name="unbookmark">إلغاء الاشاره المرجعية</string>
     <string name="video_unbookmarked">تم إلغاء وضع علامة على الفيديو</string>
     <string name="video_unbookmarked_error">تعذر إلغاء وضع علامة على الفيديو.</string>
-    <string name="no_bookmarked_videos_text">لم تقم بوضع إشارة مرجعية على أية مقاطع فيديو حتى الآن.
-\n
-\nبمجرد القيام بذلك، سوف تظهر هنا.</string>
+    <string name="no_bookmarked_videos_text">ضع إشارة مرجعية على بعض الفيديوهات لتجدها هنا.</string>
 </resources>
