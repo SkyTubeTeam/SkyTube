@@ -15,8 +15,8 @@
     <string name="playlists">قوائم التشغيل</string>
     <string name="could_not_get_playlists">لايمكن الحصول على %s قوائم التشغيل.</string>
     <string name="loading">جارٍ التحميل…</string>
-    <string name="could_not_get_channel">لا يمكن تحميل معلومات القناة!</string>
+    <string name="could_not_get_channel">لا يمكن الحصول على معلومات القناة!</string>
     <string name="yes">نعم</string>
     <string name="no">لا</string>
-    <string name="could_not_get_channel_detailed">تعذر تنزيل معلومات القناة</string>
+    <string name="could_not_get_channel_detailed">تعذر تنزيل معلومات القناة : %s.</string>
 </resources>
