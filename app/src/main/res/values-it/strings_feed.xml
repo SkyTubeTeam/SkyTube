@@ -4,9 +4,9 @@
     <string name="subscribing_to_channels">Iscrizione ai canali in corso…</string>
     <string name="fetching_subbed_channels_info">Recupero informazioni canali…</string>
     <string name="fetching_subbed_channels_info_error">Si è verificato un errore durante il recupero delle informazioni.</string>
-    <string name="fetching_subscription_videos">Recupero video dalle tue iscrizioni</string>
+    <string name="fetching_subscription_videos">Recupero dei video dalle tue iscrizioni…</string>
     <string name="fetched_videos_from_channels">Recuperati %1$d video da %2$d/%3$d canali.</string>
-    <string name="no_new_videos_found">Nessun nuovo video trovato.</string>
+    <string name="no_new_videos_found">Nessun nuovo video.</string>
     <string name="no_subscriptions_text">Non sei iscritto ad alcun canale.
 \n
 \nQuando sottoscrivi un canale, tutti i video caricati nell\'ultimo mese verranno visualizzati qui.</string>
