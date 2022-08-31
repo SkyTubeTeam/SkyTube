@@ -165,4 +165,9 @@
     <string name="pref_summary_sponsorblock_category_list">Odaberi kategorije koje želiš preskočiti</string>
     <string name="pref_general">Opće</string>
     <string name="pref_summary_open_issue">Predloži ideju ili prijavi grešku.</string>
+    <string name="pref_title_open_issue">Prijavi problem</string>
+    <string name="pref_title_use_dislike_api">Vrati brojač nesviđanja</string>
+    <string name="pref_summary_use_dislike_api">Vrati brojač nesviđanja koristeći returnyoutubedislike.com</string>
+    <string name="pref_title_playback_speed">Standardna brzina reprodukcije</string>
+    <string name="pref_summary_playback_speed">Standardna brzina reprodukcije: %s</string>
 </resources>

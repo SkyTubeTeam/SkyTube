@@ -56,15 +56,13 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
 
+import free.rm.skytube.BuildConfig;
 import free.rm.skytube.R;
 import free.rm.skytube.app.Settings;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
-import free.rm.skytube.businessobjects.YouTube.VideoStream.StreamMetaData;
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.core.Maybe;
 
 /**
  * Service to interact with remote video services, using the NewPipeExtractor backend.
@@ -132,7 +130,7 @@ public class NewPipeService {
      * Returns a list of video/stream meta-data that is supported by this app for this video ID.
      *
      * @param videoId the id of the video.
-     * @return List of {@link StreamMetaData}.
+     * @return List of {@link StreamInfo}.
      */
     public StreamInfo getStreamInfoByVideoId(String videoId) throws ExtractionException, IOException {
         return getStreamInfoByUrl(getVideoUrl(videoId));
@@ -442,8 +440,8 @@ public class NewPipeService {
 
     public synchronized static NewPipeService get() {
         if (instance == null) {
+            getHttpDownloader();
             instance = new NewPipeService(ServiceList.YouTube, SkyTubeApp.getSettings());
-            initNewPipe();
         }
         return instance;
     }
@@ -454,10 +452,13 @@ public class NewPipeService {
     /**
      * Initialize NewPipe with a custom HttpDownloader.
      */
-    public static void initNewPipe() {
+    public static OkHttpDownloader getHttpDownloader() {
+        OkHttpDownloader downloader = OkHttpDownloader.getInstance();
+        downloader.setApiUserAgent("SkyTube-Android-" + BuildConfig.VERSION_CODE);
         if (NewPipe.getDownloader() == null) {
-            NewPipe.init(OkHttpDownloader.getInstance(), Localization.DEFAULT, toContentCountry(SkyTubeApp.getSettings().getPreferredContentCountry()));
+            NewPipe.init(downloader, Localization.DEFAULT, toContentCountry(SkyTubeApp.getSettings().getPreferredContentCountry()));
         }
+        return downloader;
     }
 
     private static ContentCountry toContentCountry(String countryCode){
@@ -469,7 +470,7 @@ public class NewPipeService {
     }
 
     public static void setCountry(String countryCodeStr) {
-        initNewPipe();
+        getHttpDownloader();
         final ContentCountry contentCountry = toContentCountry(countryCodeStr);
         Log.i("NewPipeService", "set preferred content country to " + contentCountry);
         NewPipe.setPreferredContentCountry(contentCountry);

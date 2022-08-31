@@ -330,6 +330,12 @@ public class YouTubeTasks {
                                                       @NonNull ContentId content) {
         return Maybe.fromCallable(() -> NewPipeService.get().getDetails(content.getId()))
                 .subscribeOn(Schedulers.io())
+                .map(video -> {
+                    Log.i(TAG, "Update video :" + video.getTitle() +
+                            " - like:" + video.getLikeCountNumber() + " dislike:" + video.getDislikeCountNumber() + " view : "+video.getViewsCountInt());
+                    SubscriptionsDb.getSubscriptionsDb().updateVideo(video);
+                    return video;
+                })
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnError(throwable -> {
                     Log.e(TAG, "Unable to get video details, where id=" + content, throwable);
@@ -360,6 +366,7 @@ public class YouTubeTasks {
                 .onErrorComplete()
                 .map(streamInfo -> {
                     youTubeVideo.updateFromStreamInfo(streamInfo);
+                    SubscriptionsDb.getSubscriptionsDb().updateVideo(youTubeVideo);
                     return streamInfo;
                 })
                 .observeOn(AndroidSchedulers.mainThread())

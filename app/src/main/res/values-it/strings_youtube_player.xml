@@ -38,4 +38,10 @@
     <string name="metered_network_blocked_by_policy">Scaricamento interrotto perché il tuo dispositivo è connesso ad una rete a consumo.</string>
     <string name="warning_metered_network_play">Il tuo dispositivo è connesso ad una rete a consumo. Per evitare potenziali costi extra è raccomandato connettersi ad una rete illimitata. Riprodurre il video comunque\?</string>
     <string name="metered_network">Rete a consumo</string>
+    <string name="sponsorblock_skipped">Segmento saltato</string>
+    <string name="sponsorblock_category_sponsor">Sponsor</string>
+    <string name="sponsorblock_category_selfpromo">Autopromozione</string>
+    <string name="sponsorblock_category_interaction">Avviso di interazione</string>
+    <string name="sponsorblock_category_music_offtopic">Sezione non musicale</string>
+    <string name="sponsorblock_category_intro">Introduzione</string>
 </resources>

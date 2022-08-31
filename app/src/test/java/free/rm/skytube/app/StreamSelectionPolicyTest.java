@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.schabi.newpipe.extractor.MediaFormat;
+import org.schabi.newpipe.extractor.stream.DeliveryMethod;
 import org.schabi.newpipe.extractor.stream.StreamInfo;
 import org.schabi.newpipe.extractor.stream.StreamType;
 import org.schabi.newpipe.extractor.stream.VideoStream;
@@ -76,7 +77,15 @@ public class StreamSelectionPolicyTest {
     private StreamInfo createStreams(MediaFormat... mediaFormats) {
         List<VideoStream> streams = new ArrayList<>();
         for (MediaFormat mediaFormat : mediaFormats) {
-            streams.add(new VideoStream("url/" + mediaFormat, mediaFormat, "1080P"));
+            streams.add(
+                new VideoStream.Builder()
+                    .setId("id-"+mediaFormat.hashCode())
+                        .setContent("url/" + mediaFormat, true)
+                        .setMediaFormat(mediaFormat)
+                        .setResolution("1080P")
+                        .setDeliveryMethod(DeliveryMethod.PROGRESSIVE_HTTP)
+                        .setIsVideoOnly(false)
+                        .build());
         }
         return createStreams(streams);
     }
@@ -84,7 +93,15 @@ public class StreamSelectionPolicyTest {
     private StreamInfo createStreams(String... resolutions) {
         List<VideoStream> streams = new ArrayList<>();
         for (String resolution : resolutions) {
-            streams.add(new VideoStream("url/" + resolution, MediaFormat.WEBM, resolution));
+            streams.add(
+                new VideoStream.Builder()
+                    .setId("id-"+resolution.hashCode())
+                    .setContent("url/" + resolution, true)
+                    .setMediaFormat(MediaFormat.WEBM)
+                    .setResolution(resolution)
+                    .setIsVideoOnly(false)
+                    .setDeliveryMethod(DeliveryMethod.DASH)
+                    .build());
         }
         return createStreams(streams);
     }

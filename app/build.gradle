@@ -7,12 +7,12 @@ android {
 
     defaultConfig {
         applicationId "free.rm.skytube"
-        minSdkVersion 14
+        minSdkVersion 19
         //noinspection ExpiredTargetSdkVersion
         targetSdkVersion 28
 
-        versionName "2.981"    // digits of the *fractional part* shall NOT be > than "9"
-        versionCode 41
+        versionName "2.984"    // digits of the *fractional part* shall NOT be > than "9"
+        versionCode 44
         // Third party devs:  pls be ethical and change the below keys
         //buildConfigField 'String',   'YOUTUBE_API_KEYS_DEBUG', '"AIzaSyDU-ZZCyOB_kYkiMSZ6ooSipUZRukHU4ik"'
         buildConfigField 'String', 'YOUTUBE_API_KEYS_DEBUG', '"hidden:A0C0B03EED58193F4CD52DF668495D523A5229C6B66B0ED6282AE09BD8FF08CD5AF9A6B52C214F"'
@@ -24,6 +24,7 @@ android {
                         '}'
         buildConfigField 'String', 'SKYTUBE_WEBSITE', '"https://skytube-app.com"'
         buildConfigField 'String', 'SKYTUBE_WEBSITE_CREDITS', '"https://skytube-app.com/credits.html"'
+        buildConfigField 'String', 'SKYTUBE_ISSUES_URL', '"https://github.com/SkyTubeTeam/SkyTube/issues/new/choose"'
         buildConfigField 'String', 'SKYTUBE_UPDATES_URL', '"https://api.github.com/repos/SkyTubeTeam/SkyTube/releases/latest"'
         buildConfigField 'long', 'BUILD_TIME', String.valueOf(System.currentTimeMillis()) + 'L'
         vectorDrawables.useSupportLibrary true
@@ -172,14 +173,14 @@ dependencies {
         exclude group: 'com.google.http-client', module: 'google-http-client-jackson2'
     }
 
-    implementation 'com.github.SkyTubeTeam.NewPipeExtractor:NewPipeExtractor:v0.22.0.1-SNAPSHOT'
+    implementation 'com.github.SkyTubeTeam.NewPipeExtractor:NewPipeExtractor:skytube-2022-08-25'
 
-    implementation ('com.github.SkyTubeTeam.components:okhttp-client:0.0.3') {
+    implementation ('com.github.SkyTubeTeam.components:okhttp-client:v0.0.5') {
         exclude group: 'com.github.SkyTubeTeam.NewPipeExtractor', module: 'extractor'
     }
 
     // Java HTML parser
-    implementation 'org.jsoup:jsoup:1.14.2'
+    implementation "org.jsoup:jsoup:1.15.3"
 
     // Language Detection Library for Java
     implementation('com.optimaize.languagedetector:language-detector:0.6') {

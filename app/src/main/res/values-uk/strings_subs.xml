@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="import_subscriptions_description">Приберіть вибір з усіх https://takeout.google.com, окрім «YouTube і YouTube Music», і натисніть «Усі включені дані YouTube», щоб отримати лише підписки. Натисніть кнопку «Далі», а потім «Створити експорт». Клацніть, щоб отримати повідомлення електронною поштою з посиланням для завантаження. Завантажте файл зі свого поштового клієнта та видобудьте його. Імпортуйте subscriptions.json (у /Takeout/YouTube and YouTube Music/subscriptions/) з нього в SkyTube за допомогою «Виберіть файл підписки» внизу.</string>
+    <string name="import_subscriptions_description">Приберіть вибір з усіх https://takeout.google.com, окрім «YouTube і YouTube Music», і натисніть «Усі включені дані YouTube», щоб отримати лише підписки. Натисніть кнопку «Далі», а потім «Створити експорт». Клацніть, щоб отримати повідомлення електронною поштою з посиланням для завантаження. Виберіть цей ZIP-файл або видобудьте його та виберіть subscriptions.csv або subscriptions.json, що містяться (в /Takeout/YouTube and YouTube Music/subscriptions/) натиснувши «Виберіть файл підписки» внизу.</string>
     <string name="about">Про застосунок</string>
     <string name="failed_to_import_subscriptions">Не вдалося імпортувати підписки YouTube.</string>
     <string name="import_subscriptions_parse_error">Не вдалося проаналізувати вивантажений файл: %s.</string>

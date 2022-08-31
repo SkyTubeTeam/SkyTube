@@ -90,7 +90,7 @@ public class AboutPreferenceFragment extends PreferenceFragmentCompat {
 
 		Preference openIssuePref = findPreference(getString(R.string.pref_key_open_issue));
 		openIssuePref.setOnPreferenceClickListener(preference -> {
-			startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/SkyTubeTeam/SkyTube/issues/new/choose")));
+			startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(BuildConfig.SKYTUBE_ISSUES_URL)));
 			return true;
 		});
 	}

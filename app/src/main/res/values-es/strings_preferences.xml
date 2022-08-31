@@ -178,4 +178,8 @@
     <string name="pref_summary_credit_sponsorblock">Usar patrocinadores de https://sponsor.ajay.app</string>
     <string name="pref_title_use_dislike_api">Devolver contador de disgustas</string>
     <string name="pref_summary_use_dislike_api">Devolver contador de disgustas usando returnyoutubedislike.com</string>
+    <string name="pref_summary_playback_speed">Velocidad de reproducción predeterminada: %s</string>
+    <string name="pref_title_playback_speed">Velocidad de reproducción predeterminada</string>
+    <string name="pref_title_open_issue">Reportar un problema</string>
+    <string name="pref_summary_open_issue">Sugerir una idea o reportar un bug.</string>
 </resources>

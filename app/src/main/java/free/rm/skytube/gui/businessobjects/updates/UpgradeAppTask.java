@@ -90,7 +90,6 @@ public class UpgradeAppTask extends AsyncTaskParallel<Void, Integer, Pair<File, 
 		return new Pair<>(apkFile, exception);
 	}
 
-
 	/**
 	 * Delete old (previously-downloaded) APK files.
 	 */
@@ -109,7 +108,6 @@ public class UpgradeAppTask extends AsyncTaskParallel<Void, Integer, Pair<File, 
 			}
 		}
 	}
-
 
 	/**
 	 * Download the remote APK file and return an instance of {@link File}.

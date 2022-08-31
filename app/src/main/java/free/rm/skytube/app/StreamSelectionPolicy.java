@@ -58,7 +58,7 @@ public class StreamSelectionPolicy {
     public StreamSelection select(StreamInfo streamInfo) {
         VideoStreamWithResolution videoStreamWithResolution = pickVideo(streamInfo);
         if (videoStreamWithResolution != null) {
-            if (videoStreamWithResolution.videoStream.isVideoOnly) {
+            if (videoStreamWithResolution.videoStream.isVideoOnly()) {
                 AudioStream audioStream = pickAudio(streamInfo);
                 if (audioStream != null) {
                     return new StreamSelection(videoStreamWithResolution.videoStream, videoStreamWithResolution.resolution, audioStream);
@@ -119,7 +119,7 @@ public class StreamSelectionPolicy {
     }
 
     private static String toHumanReadable(AudioStream as) {
-        return as != null ? "AudioStream(" + as.getAverageBitrate() + ", " + as.getFormat() + ", codec=" + as.getCodec() + ", q=" + as.getQuality() + ")" : "NULL";
+        return as != null ? "AudioStream(" + as.getAverageBitrate() + ", " + as.getFormat() + ", codec=" + as.getCodec() + ", q=" + as.getQuality() + ", isUrl=" + as.isUrl() + ",delivery=" + as.getDeliveryMethod() + ")" : "NULL";
     }
 
     private boolean isBetter(AudioStream best, AudioStream other) {
@@ -226,7 +226,13 @@ public class StreamSelectionPolicy {
         }
 
         private String toHumanReadable() {
-            return "VideoStream(" + resolution.name() + ", format=" + videoStream.getFormat() + ", codec=" + videoStream.getCodec() + ", quality=" + videoStream.getQuality() + ",videoOnly=" + videoStream.isVideoOnly() + ")";
+            return "VideoStream(" + resolution.name() +
+                    ", format=" + videoStream.getFormat() +
+                    ", codec=" + videoStream.getCodec() +
+                    ", quality=" + videoStream.getQuality() +
+                    ",videoOnly=" + videoStream.isVideoOnly() +
+                    ",isUrl=" + videoStream.isUrl() +
+                    ",delivery=" + videoStream.getDeliveryMethod() + ")";
         }
 
         private static String toHumanReadable(VideoStreamWithResolution v) {
@@ -254,11 +260,11 @@ public class StreamSelectionPolicy {
         }
 
         public Uri getVideoStreamUri() {
-            return Uri.parse(videoStream.getUrl());
+            return videoStream.isUrl() ? Uri.parse(videoStream.getContent()) : null;
         }
 
         public Uri getAudioStreamUri() {
-            return audioStream != null && audioStream.url != null ? Uri.parse(audioStream.getUrl()) : null;
+            return audioStream != null && audioStream.isUrl() ? Uri.parse(audioStream.getContent()) : null;
         }
 
         public VideoResolution getResolution() {

@@ -80,25 +80,22 @@ public class SubscribeButton extends AppCompatButton implements View.OnClickList
 
 	public void setChannel(YouTubeChannel channel) {
 		this.channel = channel;
+		if (channel != null) {
+			setSubscribedState(channel.isUserSubscribed());
+		}
 	}
 
 	/**
-	 * Set the button's state to subscribe (i.e. once clicked, the user indicates that he wants to
-	 * subscribe).
-	 */
-	public void setSubscribeState() {
-		setText(R.string.subscribe);
-		isUserSubscribed = false;	// the user is currently NOT subscribed
-	}
-
-
-	/**
-	 * Set the button's state to unsubscribe (i.e. once clicked, the user indicates that he wants to
+	 * Set the button's state to subscribe or unsubscribe (i.e. once clicked, the user indicates that he wants to
 	 * unsubscribe).
 	 */
-	public void setUnsubscribeState() {
-		setText(R.string.unsubscribe);
-		isUserSubscribed = true;
+	public void setSubscribedState(boolean subscribed) {
+		if (subscribed) {
+			setText(R.string.unsubscribe);
+			isUserSubscribed = true;
+		} else {
+			setText(R.string.subscribe);
+			isUserSubscribed = false;	// the user is currently NOT subscribed, so they could subscribe
+		}
 	}
-
 }

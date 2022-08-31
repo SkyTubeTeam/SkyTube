@@ -168,4 +168,6 @@
     <string name="pref_summary_use_dislike_api">使用 returnyoutubedislike.com 重新显示“踩”数量</string>
     <string name="pref_title_open_issue">新开一张工单</string>
     <string name="pref_summary_open_issue">提出建议或报告缺陷。</string>
+    <string name="pref_title_playback_speed">默认播放速度</string>
+    <string name="pref_summary_playback_speed">默认播放速度：%s</string>
 </resources>

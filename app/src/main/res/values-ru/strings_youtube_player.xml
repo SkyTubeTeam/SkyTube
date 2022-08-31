@@ -38,4 +38,8 @@
     <string name="metered_network_blocked_by_policy">Скачивание заблокировано, поскольку ваше устройство подключено к сети с ограниченным трафиком.</string>
     <string name="metered_network">Сеть с ограниченным трафиком</string>
     <string name="warning_metered_network_play">Ваше устройство подключено к сети с ограниченным доступом. Чтобы избежать возможных дополнительных затрат на использование данных, рекомендуется подключиться к сети с неограниченным трафиком. Все равно воспроизводить видео\?</string>
+    <string name="sponsorblock_skipped">Пропущен сегмент: %s</string>
+    <string name="sponsorblock_category_sponsor">Спонсор</string>
+    <string name="sponsorblock_category_selfpromo">Самореклама</string>
+    <string name="sponsorblock_category_outro">Титры</string>
 </resources>

@@ -23,4 +23,5 @@
     <string name="could_not_get_channel_detailed">Impossibile scaricare le informazioni sul canale: %s.</string>
     <string name="trending_in">Tendenza (%s)</string>
     <string name="recaptcha_challenge_requested">YouTube blocca le nostre richieste di rete, devi risolvere la sfida reCaptcha!</string>
+    <string name="could_not_get_sponsorblock">Non disponibile</string>
 </resources>

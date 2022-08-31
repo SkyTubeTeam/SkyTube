@@ -435,11 +435,6 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 								.into(videoDescriptionBinding.videoDescChannelThumbnailImageView);
 					}
 				}));
-
-		// check if the user has subscribed to a channel... if he has, then change the state of
-		// the subscribe button
-		compositeDisposable.add(DatabaseTasks.checkIfUserSubbedToChannel(videoDescriptionBinding
-				.videoDescSubscribeButton, youTubeVideo.getChannelId()));
 	}
 
 	/**

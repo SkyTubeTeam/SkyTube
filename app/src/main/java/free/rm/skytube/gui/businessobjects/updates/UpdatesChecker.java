@@ -28,6 +28,7 @@ import java.net.URL;
 import java.util.Objects;
 
 import free.rm.skytube.BuildConfig;
+import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
 
 /**
  * Checks for app updates.
@@ -67,10 +68,9 @@ public class UpdatesChecker {
 				Log.d(TAG, "Snapshot version - build by Github - will not be checking for updates.");
 			}
 		} else {
-			try (WebStream webStream = new WebStream(BuildConfig.SKYTUBE_UPDATES_URL)) {
-				String updatesJSONStr = webStream.downloadRemoteTextFile();
+			try {
+				JSONObject json = NewPipeService.getHttpDownloader().getJSONObject(BuildConfig.SKYTUBE_UPDATES_URL);
 
-				JSONObject json = new JSONObject(updatesJSONStr);
 				latestApkVersion = getLatestVersionNumber(json);
 				releaseNotes = getReleaseNotes(json);
 
@@ -145,7 +145,4 @@ public class UpdatesChecker {
 		}
 		return null;
 	}
-
-
-
 }
