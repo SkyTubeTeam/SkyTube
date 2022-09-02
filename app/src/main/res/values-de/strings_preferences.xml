@@ -180,4 +180,6 @@
     <string name="pref_title_use_dislike_api">\"Mag ich nicht\"-Zurückbringer</string>
     <string name="pref_title_open_issue">Fehler melden</string>
     <string name="pref_summary_open_issue">Verbesserungsvorschlag oder Fehler melden.</string>
+    <string name="pref_summary_playback_speed">Standard-Wiedergabegeschwindigkeit: %s</string>
+    <string name="pref_title_playback_speed">Standard-Wiedergabegeschwindigkeit</string>
 </resources>
