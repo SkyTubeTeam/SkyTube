@@ -5,7 +5,7 @@
     <string name="error">Errore</string>
     <string name="ok">OK</string>
     <string name="search_videos">Cerca video</string>
-    <string name="launch_offical_player_error">Si è verificato un errore tentando di eseguire il player ufficiale di YouTube di Google. Assicurati che sia installato sul tuo dispositivo.</string>
+    <string name="launch_offical_player_error">Impossibile avviare il player ufficiale di YouTube. Assicurati che sia installato.</string>
     <string name="LIVE">In diretta</string>
     <string name="featured">In primo piano</string>
     <string name="most_popular">Più popolari</string>
