@@ -6,7 +6,7 @@
     <string name="ok">OK</string>
     <string name="search_videos">Cerca video</string>
     <string name="launch_offical_player_error">Si è verificato un errore tentando di eseguire il player ufficiale di YouTube di Google. Assicurati che sia installato sul tuo dispositivo.</string>
-    <string name="LIVE">IN DIRETTA</string>
+    <string name="LIVE">In diretta</string>
     <string name="featured">In primo piano</string>
     <string name="most_popular">Più popolari</string>
     <string name="video">Video</string>
@@ -14,14 +14,14 @@
     <string name="num_videos">%d video</string>
     <string name="playlists">Playlist</string>
     <string name="could_not_get_playlists">Impossibile caricare %s playlist.</string>
-    <string name="loading">Caricamento …</string>
-    <string name="could_not_get_channel">Impossibile scaricare le informazioni del canale!</string>
+    <string name="loading">Caricamento…</string>
+    <string name="could_not_get_channel">Impossibile scaricare le informazioni sul canale.</string>
     <string name="yes">Sì</string>
     <string name="no">No</string>
     <string name="search_channel">Cerca il canale</string>
     <string name="close">Chiudi</string>
     <string name="could_not_get_channel_detailed">Impossibile scaricare le informazioni sul canale: %s.</string>
     <string name="trending_in">Tendenza (%s)</string>
-    <string name="recaptcha_challenge_requested">YouTube blocca le nostre richieste di rete, devi risolvere la sfida reCaptcha!</string>
-    <string name="could_not_get_sponsorblock">Non disponibile</string>
+    <string name="recaptcha_challenge_requested">YouTube sospetta che tu sia un bot, quindi dovei prima risolvere un reCAPTCHA.</string>
+    <string name="could_not_get_sponsorblock">Impossibile recuperare le informazioni di SponsorBlock: %s.</string>
 </resources>
