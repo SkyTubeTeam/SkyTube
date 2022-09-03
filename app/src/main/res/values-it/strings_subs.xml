@@ -6,7 +6,7 @@
     <string name="total_subscribers">%,d iscritti</string>
     <string name="subscribed">Iscritto</string>
     <string name="unsubscribed">Non iscritto</string>
-    <string name="error_get_subbed_channels">Si è verificato un errore durante il recupero dei canali sottoscritti.</string>
+    <string name="error_get_subbed_channels">Impossibile recuperare le iscrizioni ai canali.</string>
     <string name="error_check_if_user_has_subbed">Impossibile verificare se l\'utente sia iscritto al canale (id=%s)</string>
     <string name="error_unable_to_subscribe">Impossibile annullare l\'iscrizione al canale (id=%s)</string>
     <string name="import_subscriptions">Importa iscrizioni</string>
@@ -22,7 +22,7 @@
     <string name="unsubscribe_from_all_current_sibbed_channels">Annulla l\'iscrizione da tutti i canali a cui sei attualmente iscritto.</string>
     <string name="channel_unsubscribed">Iscrizione canale annullata</string>
     <string name="channel_subscribe_failed">Impossibile iscriversi al canale</string>
-    <string name="channel_already_subscribed">Sei già iscritto/a a questo canale</string>
+    <string name="channel_already_subscribed">Già iscritto</string>
     <string name="channel_subscribed">Iscritto al canale</string>
     <string name="select_sub_file">Seleziona il file abbonamenti</string>
 </resources>
