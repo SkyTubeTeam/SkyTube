@@ -7,17 +7,17 @@
     <string name="subscribed">Iscritto</string>
     <string name="unsubscribed">Non iscritto</string>
     <string name="error_get_subbed_channels">Impossibile recuperare le iscrizioni ai canali.</string>
-    <string name="error_check_if_user_has_subbed">Impossibile verificare se l\'utente sia iscritto al canale (id=%s)</string>
-    <string name="error_unable_to_subscribe">Impossibile annullare l\'iscrizione al canale (id=%s)</string>
+    <string name="error_check_if_user_has_subbed">Impossibile verificare se sei iscritto al canale (id=%s)</string>
+    <string name="error_unable_to_subscribe">Impossibile (dis)iscriversi al canale (id=%s)</string>
     <string name="import_subscriptions">Importa iscrizioni</string>
-    <string name="import_subscriptions_description">Importa le tue sottoscrizioni da YouTube visitando prima https://takeout.google.com. Deseleziona tutti i servizi tranne «YouTube e YouTube Music» e clicca su «Tutti i dati di YouTube inclusi» per deselezionare tutto tranne gli abbonamenti. Clicca su «Avanti» e poi su «Crea un\'esportazione». Una volta che l\'esportazione è completa, viene visualizzata sulla pagina web su cui sei appena atterrato e riceverai un\'e-mail con un collegamento per lo scaricamento. Scarica il file ed estrai il file subscriptions.json da esso (che si trova sotto /Takeout/YouTube and YouTube Music/subscriptions/). Poi, seleziona il file esportato cliccando su «Seleziona il file abbonamenti» qui sotto.</string>
-    <string name="subscriptions_to_channels_imported">Iscrizione a %d canali importata.</string>
+    <string name="import_subscriptions_description">Visita https://takeout.google.com, deseleziona tutti i servizi tranne «YouTube e YouTube Music» e clicca su «Tutti i dati di YouTube inclusi» per selezionare solo gli abbonamenti. Clicca su «Avanti» e poi su «Crea un\'esportazione». Una volta che l\'esportazione è completa, viene visualizzata sulla pagina web su cui sei appena atterrato e riceverai un\'e-mail con un collegamento per lo scaricamento. Scarica il file ZIP ed estrai il file subscriptions.csv o subscriptions.json da esso (situato sotto /Takeout/YouTube and YouTube Music/subscriptions/). Poi, seleziona il file esportato cliccando su «Seleziona il file abbonamenti» qui sotto.</string>
+    <string name="subscriptions_to_channels_imported">Importati %d canali.</string>
     <string name="select_all">Seleziona tutto</string>
     <string name="select_none">Deseleziona tutto</string>
     <string name="no_channels_found">Non è stato trovato alcun canale YouTube nel file che hai caricato.</string>
-    <string name="no_new_channels_found">Non è stato trovato alcun canale Youtube a cui tu non sia già iscritto nel file che hai caricato.</string>
-    <string name="import_subscriptions_parse_error">Si è verificato un errore nel tentativo di analizzare il file che hai caricato: %s.</string>
-    <string name="failed_to_import_subscriptions">Importazione delle tue iscrizioni YouTube fallita.</string>
+    <string name="no_new_channels_found">Non è stato trovato alcun canale Youtube a cui tu non sia già iscritto.</string>
+    <string name="import_subscriptions_parse_error">Impossibile analizzare il file che hai caricato: %s.</string>
+    <string name="failed_to_import_subscriptions">Impossibile importare le iscrizioni a YouTube.</string>
     <string name="about">Informazioni</string>
     <string name="unsubscribe_from_all_current_sibbed_channels">Annulla l\'iscrizione da tutti i canali a cui sei attualmente iscritto.</string>
     <string name="channel_unsubscribed">Iscrizione canale annullata</string>
