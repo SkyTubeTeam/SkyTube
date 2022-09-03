@@ -16,9 +16,7 @@
     <string name="databases_backup_fail">Backup dei tuoi database fallito.</string>
     <string name="databases_import_select_backup">Seleziona un file di backup da importare</string>
     <string name="databases_import_nothing_selected">Non è stato selezionato nulla…</string>
-    <string name="databases_import_warning_message">Le banche dati delle iscrizioni e dei segnalibri saranno rimpiazzati con i dati del file di backup selezionato. 
-\n 
-\nContinuare\?</string>
+    <string name="databases_import_warning_message">Sostituire i segnalibri e le iscrizioni con i dati del file di backup selezionato\?</string>
     <string name="continue_">Continua</string>
     <string name="databases_importing">Importazione in corso…</string>
     <string name="databases_import_fail">Importazione dei tuoi database fallita.</string>
@@ -105,7 +103,7 @@
     <string name="please_wait">Attendere prego…</string>
     <string name="channel_already_whitelisted">Canale già in lista bianca.</string>
     <string name="channel_whitelist_updated">Canale aggiunto in lista bianca. Ricarica i video.</string>
-    <string name="channel_whitelist_update_failure">Aggiunta in lista bianca del canale fallita…</string>
+    <string name="channel_whitelist_update_failure">Impossibile inserire nella whitelist il canale indicato.</string>
     <string name="channel_unwhitelist_success">Lista bianca dei canali aggiornata. Ricarica i video.</string>
     <string name="channel_unwhitelist_failure">Rimozione dei canali dalla lista bianca fallita…</string>
     <string name="preferred_lang_updated">Lingua preferita aggiornata. Ricarica i video.</string>
@@ -175,6 +173,6 @@
     <string name="pref_title_minimum_res">Risoluzione minima</string>
     <string name="pref_summary_maximum_res">Seleziona la tua risoluzione massima: %s</string>
     <string name="pref_title_maximum_res">Risoluzione massima</string>
-    <string name="pref_key_use_newer_formats_summary">Le vecchie versioni di Android non supportano tutti i formati video che YouTube fornisce. Spegni, se la riproduzione di video non funziona, o se non c\'è suono</string>
+    <string name="pref_key_use_newer_formats_summary">L\'audio e il video potrebbero avere problemi sulle vecchie versioni di Android non più supportate.</string>
     <string name="pref_key_use_newer_formats_title">Prova i formati video più recenti</string>
 </resources>
