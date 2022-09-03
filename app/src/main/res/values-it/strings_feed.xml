@@ -2,14 +2,12 @@
 <resources>
     <string name="feed">Flusso</string>
     <string name="subscribing_to_channels">Iscrizione ai canali in corso…</string>
-    <string name="fetching_subbed_channels_info">Recupero informazioni canali…</string>
-    <string name="fetching_subbed_channels_info_error">Si è verificato un errore durante il recupero delle informazioni.</string>
+    <string name="fetching_subbed_channels_info">Recupero delle informazioni sui canali…</string>
+    <string name="fetching_subbed_channels_info_error">Impossibile recuperare le informazioni sui canali.</string>
     <string name="fetching_subscription_videos">Recupero dei video dalle tue iscrizioni…</string>
     <string name="fetched_videos_from_channels">Recuperati %1$d video da %2$d/%3$d canali.</string>
     <string name="no_new_videos_found">Nessun nuovo video.</string>
-    <string name="no_subscriptions_text">Non sei iscritto ad alcun canale.
-\n
-\nQuando sottoscrivi un canale, tutti i video caricati nell\'ultimo mese verranno visualizzati qui.</string>
+    <string name="no_subscriptions_text">Iscriviti ad alcuni canali per vedere i loro nuovi video qui.</string>
     <string name="import_subscriptions_from_youtube">Importa iscrizioni da YouTube</string>
     <string name="notification_channel_feed_title">Notifiche di flusso</string>
     <string name="notification_new_videos_found">%d nuovi video dalle iscrizioni</string>
