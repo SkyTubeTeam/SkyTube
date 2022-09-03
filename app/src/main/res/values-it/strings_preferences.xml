@@ -7,47 +7,39 @@
     <string name="pref_title_preferred_languages">Lingua preferita(e)</string>
     <string name="pref_summary_preferred_languages">Seleziona le tue lingue preferite.</string>
     <string name="pref_video_player_category">Riproduttore video</string>
-    <string name="pref_title_backup_dbs">Fai backup delle banche dati</string>
-    <string name="pref_summary_backup_dbs">Effettua il backup dei database delle iscrizioni e dei segnalibri.</string>
+    <string name="pref_title_backup_dbs">Backup dei database</string>
+    <string name="pref_summary_backup_dbs">Backup dei segnalibri e delle iscrizioni.</string>
     <string name="pref_title_import_dbs">Importa backup</string>
-    <string name="pref_summary_import_dbs">Importa il backup dei database delle iscrizioni e dei segnalibri.</string>
+    <string name="pref_summary_import_dbs">Importa il backup dei database dei segnalibri e delle iscrizioni.</string>
     <string name="databases_backing_up">Backup in corso…</string>
     <string name="databases_backup_success">Database salvati in %s</string>
-    <string name="databases_backup_fail">Backup dei tuoi database fallito.</string>
+    <string name="databases_backup_fail">Impossibile eseguire il backup dei database.</string>
     <string name="databases_import_select_backup">Seleziona un file di backup da importare</string>
     <string name="databases_import_nothing_selected">Non è stato selezionato nulla…</string>
     <string name="databases_import_warning_message">Sostituire i segnalibri e le iscrizioni con i dati del file di backup selezionato\?</string>
     <string name="continue_">Continua</string>
     <string name="databases_importing">Importazione in corso…</string>
-    <string name="databases_import_fail">Importazione dei tuoi database fallita.</string>
-    <string name="databases_import_success">Database importati. Riavvia l\'app per applicare le modifiche.</string>
+    <string name="databases_import_fail">Impossibile importare i database.</string>
+    <string name="databases_import_success">Riavvia l\'app per utilizzare i nuovi segnalibri e le nuove iscrizioni.</string>
     <string name="pref_title_import_subs">Importa iscrizioni da YouTube</string>
     <string name="pref_summary_import_subs">Importa le iscrizioni dal tuo account di Youtube.</string>
     <string name="subs_import_select_backup">Seleziona un file XML di YouTube da importare</string>
     <string name="pref_about_category">Informazioni</string>
     <string name="pref_title_website">Sito web</string>
     <string name="pref_title_credits">Riconoscimenti</string>
-    <string name="pref_summary_credits">Persone e progetti che hanno reso possibile questa app.</string>
+    <string name="pref_summary_credits">Persone e progetti liberi eccezionali dietro questa applicazione.</string>
     <string name="pref_title_version">Versione</string>
     <string name="pref_title_updates">Aggiornamenti</string>
     <string name="pref_summary_updates">Controlla aggiornamenti.</string>
     <string name="pref_title_license">Licenza</string>
-    <string name="pref_summary_license">GNU General Public License versione 3</string>
-    <string name="app_license">
-		Copyright © 2015-2018  Ramon Mifsud\n
-
-		\nThis program is free software: you can redistribute it and/or modify
-		it under the terms of the GNU General Public License as published by
-		the Free Software Foundation (version 3 of the License).\n
-
-		\nThis program is distributed in the hope that it will be useful,
-		but WITHOUT ANY WARRANTY; without even the implied warranty of
-		MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-		GNU General Public License for more details.\n
-
-		\nYou should have received a copy of the GNU General Public License
-		along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;
-	</string>
+    <string name="pref_summary_license">GPLv3+</string>
+    <string name="app_license">Copyright © 2015–2018 Ramon Mifsud
+\n
+\nThis program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation (version 3 of the License).
+\n
+\nThis program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+\n
+\nYou should have received a copy of the GNU General Public License along with this program. If not, see &lt;https://www.gnu.org/licenses/&gt;</string>
     <string name="i_agree">Sono d\'accordo</string>
     <string name="pref_other_category">Altro</string>
     <string name="pref_title_default_tab">Scheda predefinita</string>
@@ -103,7 +95,7 @@
     <string name="please_wait">Attendere prego…</string>
     <string name="channel_already_whitelisted">Canale già in lista bianca.</string>
     <string name="channel_whitelist_updated">Canale aggiunto in lista bianca. Ricarica i video.</string>
-    <string name="channel_whitelist_update_failure">Impossibile inserire nella whitelist il canale indicato.</string>
+    <string name="channel_whitelist_update_failure">Impossibile inserire nella lista bianca il canale indicato.</string>
     <string name="channel_unwhitelist_success">Lista bianca dei canali aggiornata. Ricarica i video.</string>
     <string name="channel_unwhitelist_failure">Rimozione dei canali dalla lista bianca fallita…</string>
     <string name="preferred_lang_updated">Lingua preferita aggiornata. Ricarica i video.</string>
@@ -141,7 +133,7 @@
     <string name="pref_summary_hide_tabs">Scegli quali schede non devono essere mostrate. Riavvio richiesto.</string>
     <string name="pref_title_hide_tabs">Nascondi le schede</string>
     <string name="pref_network_downloads_category">Rete e scaricamenti</string>
-    <string name="pref_summary_autocast">Seleziona un dispositivo Chromecast da utilizzare quando si utilizzano altre applicazioni per aprire i video in SkyTube.</string>
+    <string name="pref_summary_autocast">Dispositivo Chromecast per la riproduzione quando si utilizzano altre applicazioni per aprire i video in SkyTube.</string>
     <string name="pref_title_autocast">AutoCast</string>
     <string name="pref_title_chromecast_none">Nessuno</string>
     <string name="pref_chromecast_category">Chromecast</string>
@@ -169,10 +161,12 @@
     <string name="pref_summary_minimum_res_metered">Seleziona la tua risoluzione minima quando lo flusso avviene tramite una rete a consumo: %s</string>
     <string name="pref_title_minimum_res_metered">Risoluzione minima per la rete a consumo</string>
     <string name="no_resolution_specified">Nessuna</string>
-    <string name="pref_summary_minimum_res">Seleziona la tua risoluzione minima: %s</string>
+    <string name="pref_summary_minimum_res">Seleziona la risoluzione minima: %s</string>
     <string name="pref_title_minimum_res">Risoluzione minima</string>
-    <string name="pref_summary_maximum_res">Seleziona la tua risoluzione massima: %s</string>
+    <string name="pref_summary_maximum_res">Seleziona la risoluzione massima: %s</string>
     <string name="pref_title_maximum_res">Risoluzione massima</string>
     <string name="pref_key_use_newer_formats_summary">L\'audio e il video potrebbero avere problemi sulle vecchie versioni di Android non più supportate.</string>
     <string name="pref_key_use_newer_formats_title">Prova i formati video più recenti</string>
+    <string name="pref_title_enable_sponsorblock">Attiva SponsorBlock</string>
+    <string name="pref_sponsorblock_category">SponsorBlock</string>
 </resources>
