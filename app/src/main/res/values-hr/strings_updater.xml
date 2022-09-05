@@ -9,4 +9,5 @@
     <string name="update_failure">Nije moguće instalirati novu verziju programa.</string>
     <string name="downloading">Preuzimanje …</string>
     <string name="release_notes">Promjene u %s</string>
+    <string name="android_too_old">Nažalost, tvoj je Android prestar za aktualiziranje. Moraš ručno instalirati „SkyTube Legacy”!</string>
 </resources>
