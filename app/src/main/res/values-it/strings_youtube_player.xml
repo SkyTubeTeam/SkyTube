@@ -44,4 +44,7 @@
     <string name="sponsorblock_category_interaction">Avviso di interazione</string>
     <string name="sponsorblock_category_music_offtopic">Sezione non musicale</string>
     <string name="sponsorblock_category_intro">Introduzione</string>
+    <string name="sponsorblock_category_outro">Conclusioni/Titoli di Coda</string>
+    <string name="sponsorblock_category_filler">Filler</string>
+    <string name="sponsorblock_category_preview">Anteprima/Riepilogo</string>
 </resources>
