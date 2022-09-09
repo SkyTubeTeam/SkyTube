@@ -31,7 +31,7 @@
     <string name="pref_title_version">Versione</string>
     <string name="pref_title_updates">Aggiornamenti</string>
     <string name="pref_summary_updates">Controlla aggiornamenti.</string>
-    <string name="pref_title_license">Licenza</string>
+    <string name="pref_title_license">Licenza Copyleft Libera</string>
     <string name="pref_summary_license">GPLv3+</string>
     <string name="app_license">Copyright © 2015–2018 Ramon Mifsud
 \n
