@@ -122,7 +122,7 @@
     <string name="pref_title_use_newpipe_backend">NewPipe back-end</string>
     <string name="pref_title_enable_immersive_mode">Tryb immersyjny</string>
     <string name="pref_summary_hide_tabs">Wybierz, które karty mają nie być wyświetlane. Wymagane jest ponowne uruchomienie.</string>
-    <string name="pref_summary_autocast">Urządzenie Chromecast do odtwarzania w SkyTube za pomocą innych aplikacji.</string>
+    <string name="pref_summary_autocast">Urządzenie Chromecast do odtwarzania innych aplikacji w SkyTube .</string>
     <string name="pref_title_chromecast_none">Brak</string>
     <string name="pref_summary_use_newpipe_backend">Używaj interfejsu API NewPipe, aby uzyskać dostęp do YouTube…</string>
     <string name="pref_summary_switch_volume_and_brightness">Umieszcza regulację głośności po prawej, a jasności po lewej stronie.</string>
