@@ -179,4 +179,5 @@
     <string name="pref_title_sponsorblock_category_list">Salta Segmenti</string>
     <string name="pref_summary_sponsorblock_category_list">Scegli le categorie da saltare</string>
     <string name="pref_title_credit_sponsorblock">Titoli di Coda</string>
+    <string name="pref_title_open_issue">Segnala problema</string>
 </resources>
