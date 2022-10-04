@@ -14,7 +14,7 @@
     <string name="open_in_browser">在網頁瀏覽器中開啟</string>
     <string name="open_with">開啟用…</string>
     <string name="share">分享</string>
-    <string name="share_via">透過……分享</string>
+    <string name="share_via">透過......分享</string>
     <string name="copy_url">複製網址</string>
     <string name="url_copied_to_clipboard">網址複製到剪貼簿。</string>
     <string name="error_get_comments">無法擷取留言。</string>
@@ -44,4 +44,7 @@
     <string name="sponsorblock_category_music_offtopic">非音樂部分</string>
     <string name="sponsorblock_category_outro">片尾卡／製作人員／感謝名單</string>
     <string name="sponsorblock_category_preview">預覽／回顧</string>
+    <string name="sponsorblock_category_selfpromo">自我宣傳</string>
+    <string name="sponsorblock_category_intro">片頭</string>
+    <string name="sponsorblock_category_filler">過濾器</string>
 </resources>
