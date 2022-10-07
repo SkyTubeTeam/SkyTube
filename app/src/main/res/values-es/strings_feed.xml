@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="feed">Feed</string>
-    <string name="subscribing_to_channels">Suscribiendo a los canales…</string>
-    <string name="fetching_subbed_channels_info">Consiguiendo info de los canales…</string>
-    <string name="fetching_subbed_channels_info_error">No se puede conseguir la información de los canales.</string>
-    <string name="fetching_subscription_videos">Consiguiendo vídeos de los canales suscritos…</string>
-    <string name="fetched_videos_from_channels">Obtenidos %1$d vídeos de %2$d/%3$d canales.</string>
-    <string name="no_new_videos_found">No hay vídeos nuevos.</string>
-    <string name="no_subscriptions_text">Subscríbete a algunos canales para ver nuevos vídeos desde aquí.</string>
-    <string name="import_subscriptions_from_youtube">Importar suscripciones desde YouTube</string>
+    <string name="subscribing_to_channels">Suscribiéndote a los canales…</string>
+    <string name="fetching_subbed_channels_info">Obteniendo información del canal…</string>
+    <string name="fetching_subbed_channels_info_error">No se pudo obtener la información del canal.</string>
+    <string name="fetching_subscription_videos">Obteniendo videos de canales suscritos…</string>
+    <string name="fetched_videos_from_channels">Obtuve %1$d videos de %2$d/%3$d canales.</string>
+    <string name="no_new_videos_found">Sin videos nuevos.</string>
+    <string name="no_subscriptions_text">Suscríbete a algunos canales para ver los videos nuevos de estos aquí.</string>
+    <string name="import_subscriptions_from_youtube">Importar suscripciones de YouTube</string>
     <string name="notification_channel_feed_title">Notificaciones feed</string>
-    <string name="notification_new_videos_found">%d vídeos nuevos de los canales suscritos</string>
+    <string name="notification_new_videos_found">%d nuevos vídeos de los canales suscritos</string>
     <string name="open_channel">Abrir Canal</string>
 </resources>
