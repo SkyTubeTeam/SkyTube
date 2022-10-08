@@ -1,2 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="download">Descargar</string>
+    <string name="downloads">Descargas</string>
+    <string name="warning_metered_network_download">Queres descargalo vídeo na rede medida á que estás conectado\?</string>
+    <string name="download_video">Descargar Video</string>
+    <string name="unable_to_delete_file">Non se puido eliminar o ficheiro \'%s\' descargado.</string>
+    <string name="starting_video_download">Descargando \'%s\'…</string>
+    <string name="video_download_stream_error">Non se puido descargar \'%s\'.</string>
+    <string name="download_failed_because">Non se puido descargar %1$s porque %2$s.</string>
+    <string name="video_stream_not_found_with_request_resolution">Non se puido atopar ningún fluxo de vídeo dentro da resolución solicitada entre %1$s-%2$s</string>
+    <string name="delete_download">Eliminala descarga</string>
+    <string name="video_downloaded">\'%s\' descargado.</string>
+    <string name="no_downloaded_videos_text">Descarga algúns vídeos para atopalos aquí.</string>
+    <string name="playing_video_file_missing">Reproducindo vídeo de forma remota xa que non se puido atopar ningún ficheiro descargable.</string>
+    <string name="external_storage_not_available">Concede acceso o almaceamento externo para descargalo ficheiro primeiro.</string>
+</resources>
