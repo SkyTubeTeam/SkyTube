@@ -1,2 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="video_unbookmarked_error">Non se puido eliminar o marcador de vídeo.</string>
+    <string name="no_bookmarked_videos_text">Marca algúns vídeos para atopalos aquí.</string>
+    <string name="bookmark_share_label">Marcador de SkyTube</string>
+    <string name="bookmark_share_invalid_url">Só se pode marcar un URL de YouTube válido.</string>
+    <string name="bookmarks">Marcadores</string>
+    <string name="bookmark">Marcador</string>
+    <string name="video_bookmarked">Marcado como favorito</string>
+    <string name="video_already_bookmarked">Xa marcado como favorito</string>
+    <string name="video_bookmarked_error">Non se puido marcalo vídeo.</string>
+    <string name="unbookmark">Eliminar o marcador</string>
+    <string name="video_unbookmarked">Eliminouse o marcador</string>
+    <string name="video_was_not_bookmarked">O vídeo non foi marcado como favorito</string>
+</resources>
