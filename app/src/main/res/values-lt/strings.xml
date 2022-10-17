@@ -23,4 +23,5 @@
     <string name="could_not_get_channel_detailed">Nepavyko atsisiųsti kanalo informacijos: %s.</string>
     <string name="could_not_get_channel">Nepavyko atsisiųsti kanalo informacijos.</string>
     <string name="could_not_get_videos">Nepavyko gauti %s vaizdo įrašų.</string>
+    <string name="could_not_get_sponsorblock">Nepavyko gauti SponsorBlock informacijos: %s.</string>
 </resources>
