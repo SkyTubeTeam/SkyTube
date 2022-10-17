@@ -9,4 +9,5 @@
     <string name="up_to_date">Atnaujinimų nėra</string>
     <string name="update_dialog_msg">Pasirodė nauja \"SkyTube\" versija. Bus įdiegta versija %s.</string>
     <string name="update_available">Galima nauja versija</string>
+    <string name="android_too_old">Deja, jūsų „Android“ per senas, kad būtų galima atnaujinti. Turite rankiniu būdu įdiegti „SkyTube Legacy“!</string>
 </resources>
