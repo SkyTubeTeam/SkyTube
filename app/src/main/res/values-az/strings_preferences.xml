@@ -5,12 +5,12 @@
     <string name="pref_summary_maximum_res">Ən yüksək keyfiyyəti seçin: %s</string>
     <string name="pref_title_minimum_res">Ən Aşağı Keyfiyyət</string>
     <string name="pref_summary_minimum_res">Ən aşağı keyfiyyəti seçin: %s</string>
-    <string name="pref_title_choose_player">Video Pleyer</string>
-    <string name="pref_summary_choose_player">İstifadə ediləcək video pleyer: %s</string>
+    <string name="pref_title_choose_player">Video Oynadıcı</string>
+    <string name="pref_summary_choose_player">İstifadə ediləcək video oynadıcı: %s</string>
     <string name="no_resolution_specified">Heç biri</string>
     <string name="pref_title_minimum_res_metered">Ölçülmüş şəbəkə üçün ən aşağı keyfiyyət</string>
     <string name="preferences">Seçimlər</string>
-    <string name="pref_video_player_category">Video Pleyer</string>
+    <string name="pref_video_player_category">Video Oynadıcı</string>
     <string name="pref_category_metered_network">Ölçülmüş Şəbəkə</string>
     <string name="pref_summary_minimum_res_metered">Ölçülmüş şəbəkə vasitəsilə yayım zamanı ən aşağı keyfiyyəti seçin: %s</string>
     <string name="pref_title_maximum_res_metered">Ölçülmüş şəbəkə üçün ən yüksək keyfiyyət</string>
@@ -22,7 +22,7 @@
     <string name="pref_title_backup_dbs">Məlumat bazasının ehtiyat nüsxəsini çıxarın</string>
     <string name="pref_summary_backup_dbs">Əlfəcinlərinizin və abunəliklərinizin ehtiyat nüsxəsini çıxarın.</string>
     <string name="pref_title_import_dbs">Nüsxələməni İdxal edin</string>
-    <string name="databases_backing_up">Yedəklənir…</string>
+    <string name="databases_backing_up">Nüsxələnir…</string>
     <string name="subs_import_select_backup">İdxal etmək üçün YouTube XML faylını seçin</string>
     <string name="system_default_country">Sistem</string>
     <string name="pref_summary_hide_tabs">Göstərilməyəcək tabları seçin. Yenidən başlatma tələb olunur.</string>
@@ -33,7 +33,7 @@
 \n
 \nBu tətbiq faydalı olacağı ümidi ilə yayılır, lakin heç bir ZƏMANƏT OLMADAN; hətta SATIŞA QARŞILIQ və ya XÜSUSİ MƏQSƏD ÜÇÜN UYĞUNLUQ üçün nəzərdə tutulan zəmanət olmadan. Ətraflı məlumat üçün GNU Ümumi İctimai Lisenziyasına baxın.
 \n
-\nSiz bu tətbiqlə birlikdə GNU Ümumi İctimai Lisenziyasının surətini almalı idiniz. Yoxdursa, baxın&lt;https://www.gnu.org/licenses/&gt;</string>
+\nSiz bu tətbiqlə birlikdə GNU Ümumi İctimai Lisenziyasının surətini almalıydınız. Yoxdursa, baxın&lt;https://www.gnu.org/licenses/&gt;</string>
     <string name="pref_youtube_api_key_error">Daxil etdiyiniz API Açarını doğrulamaq mümkün olmadı.</string>
     <string name="pref_summary_subscriptions_alphabetical_order">Abunə olunmuş Kanalları əlifba sırası ilə sıralayır.</string>
     <string name="pref_category_download_resolutions">Endirmələr üçün video keyfiyyəti</string>
