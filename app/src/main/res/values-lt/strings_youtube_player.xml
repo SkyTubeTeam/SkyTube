@@ -38,4 +38,11 @@
     <string name="error_stream_parse_error">Analizės klaida.</string>
     <string name="error_stream_decryption_fail">Nepavyko įkelti „YouTube“ paslaugos dešifravimo kodo.</string>
     <string name="error_stream_err_unavailable">Pranešimas nepasiekiamas.</string>
+    <string name="sponsorblock_skipped">Praleistas segmentas: %s</string>
+    <string name="sponsorblock_category_sponsor">Rėmėjas</string>
+    <string name="sponsorblock_category_selfpromo">Savireklama</string>
+    <string name="sponsorblock_category_interaction">Sąveikos priminimas</string>
+    <string name="sponsorblock_category_music_offtopic">Su muzika nesusijusi dalis</string>
+    <string name="sponsorblock_category_intro">Įžanga / pertrauka</string>
+    <string name="sponsorblock_category_filler">Užpildas</string>
 </resources>
