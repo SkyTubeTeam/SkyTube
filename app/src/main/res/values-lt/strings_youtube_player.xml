@@ -45,4 +45,6 @@
     <string name="sponsorblock_category_music_offtopic">Su muzika nesusijusi dalis</string>
     <string name="sponsorblock_category_intro">Įžanga / pertrauka</string>
     <string name="sponsorblock_category_filler">Užpildas</string>
+    <string name="sponsorblock_category_outro">Praleisti pabaigos užsklandas/padėkas</string>
+    <string name="sponsorblock_category_preview">Peržiūra / apibendrinimas</string>
 </resources>
