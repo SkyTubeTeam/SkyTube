@@ -1,33 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="databases_import_success">Importuotos duomenų bazės. Iš naujo paleiskite programą, kad pritaikytumėte pakeitimus.</string>
+    <string name="databases_import_success">Iš naujo paleiskite programėlę, kad galėtumėte naudoti naujas žymes ir prenumeratas.</string>
     <string name="databases_importing">Importuojama…</string>
     <string name="continue_">Tęsti</string>
-    <string name="databases_import_warning_message">Prenumeratų ir žymių duomenų bazės bus pakeistos pasirinkto atsarginės kopijos failo duomenimis.
-\n
-\nTęsti\?</string>
+    <string name="databases_import_warning_message">Pakeisti žymes ir prenumeratas pasirinkto atsarginės kopijos failo duomenimis\?</string>
     <string name="databases_import_nothing_selected">Nieko nebuvo pasirinkta…</string>
     <string name="databases_import_select_backup">Pasirinkite atsarginės kopijos failą, kurį norite importuoti</string>
     <string name="databases_backing_up">Kuriama atsarginė kopija…</string>
-    <string name="pref_summary_import_dbs">Importuokite prenumeratų ir žymų duomenų bazių atsargines kopijas.</string>
+    <string name="pref_summary_import_dbs">Importuokite žymių ir prenumeratų atsarginę kopiją.</string>
     <string name="pref_title_import_dbs">Importuoti atsarginę kopiją</string>
-    <string name="pref_summary_backup_dbs">Padarykite atsarginę prenumeratų ir žymių duomenų bazių kopiją.</string>
-    <string name="pref_title_backup_dbs">Padaryti duomenų bazių kopiją</string>
+    <string name="pref_summary_backup_dbs">Kurkite atsargines žymių ir prenumeratų kopijas.</string>
+    <string name="pref_title_backup_dbs">Daryti duomenų bazių kopiją</string>
     <string name="pref_import_export_category">Importavimas/Eksportavimas</string>
-    <string name="pref_summary_metered_network_usage">Ką daryti, jei vaizdo įrašams atsisiųsti ir (arba) žiūrėti naudojate matuojamąjį tinklą: %s</string>
+    <string name="pref_summary_metered_network_usage">Ką daryti, jei vaizdo įrašams atsisiųsti ir (arba) žiūrėti naudojamas matuojamasis tinklas: %s</string>
     <string name="pref_title_metered_network_usage">Matuojamo tinklo naudojimas</string>
     <string name="pref_summary_maximum_res_metered">Pasirinkite maksimalią raišką, kai žiūrite naudojant matuojamą tinklą: %s</string>
-    <string name="pref_title_maximum_res_metered">Maksimali matuojamo tinklo raiška</string>
-    <string name="pref_summary_minimum_res_metered">Pasirinkite minimalią raišką, kai žiūrite naudojant matuojamą tinklą: %s</string>
-    <string name="pref_title_minimum_res_metered">Minimali matuojamo tinklo raiška</string>
+    <string name="pref_title_maximum_res_metered">Mažiausia matuojamo tinklo raiška</string>
+    <string name="pref_summary_minimum_res_metered">Pasirinkite mažiausia raišką, kai žiūrite naudojant matuojamą tinklą: %s</string>
+    <string name="pref_title_minimum_res_metered">Mažiausia matuojamo tinklo raiška</string>
     <string name="pref_category_metered_network">Matuojamas tinklas</string>
     <string name="no_resolution_specified">Nėra</string>
-    <string name="pref_summary_choose_player">Naudojamas vaizdo grotuvas: %s</string>
+    <string name="pref_summary_choose_player">Naudoti vaizdo įrašų grotuvą: %s</string>
     <string name="pref_title_choose_player">Vaizdo grotuvas</string>
-    <string name="pref_summary_minimum_res">Pasirinkite minimalią raišką: %s</string>
-    <string name="pref_title_minimum_res">Minimali raiška</string>
-    <string name="pref_summary_maximum_res">Pasirinkite didžiausią raišką: %s</string>
-    <string name="pref_title_maximum_res">Didžiausia raiška</string>
+    <string name="pref_summary_minimum_res">Pasirinkite mažiausią raišką: %s</string>
+    <string name="pref_title_minimum_res">Mažiausia raiška</string>
+    <string name="pref_summary_maximum_res">Pasirinkite aukščiausią raišką: %s</string>
+    <string name="pref_title_maximum_res">Aukščiausia raiška</string>
     <string name="pref_video_player_category">Vaizdo grotuvas</string>
     <string name="key_preferences">nustatymai</string>
     <string name="preferences">Nustatymai</string>
@@ -135,7 +133,7 @@
     <string name="pref_title_default_tab">Numatytasis skirtukas</string>
     <string name="pref_other_category">Kita</string>
     <string name="system_default_country">Sistemos</string>
-    <string name="i_agree">Atgal</string>
+    <string name="i_agree">Aš sutinku</string>
     <string name="app_license">Autorinės teisės © 2015-2018 Ramon Mifsud
 \n
 \nŠi programėlė yra laisvoji programinė įranga: ją galima platinti ir (arba) modifikuoti pagal GNU General Public licenciją, kurią paskelbė Laisvosios programinės įrangos fondas, sąlygas (3 licencijos versija).
@@ -143,7 +141,7 @@
 \nŠi programėlė platinama tikintis, kad ji bus naudinga, tačiau BE JOKIŲ GARANTIJŲ; net be numanomų garantijų, PREKYBINGUMO ar TINKAMUMO KONKREČIAM TIKSLUI. Daugiau informacijos rasite GNU General Public licencijoje.
 \n
 \nKartu su šia programėle turėjote gauti GNU General Public licencijos kopiją. Jei ne, žr. &lt;http://www.gnu.org/licenses/&gt;</string>
-    <string name="pref_summary_license">GNU General Public License 3 versija</string>
+    <string name="pref_summary_license">GPLv3+</string>
     <string name="pref_title_license">Licencija</string>
     <string name="pref_summary_updates">Patikrinti, ar yra naujų versijų.</string>
     <string name="pref_title_updates">Atnaujinimai</string>
@@ -151,10 +149,14 @@
     <string name="pref_title_website">Interneto svetainė</string>
     <string name="pref_about_category">Apie</string>
     <string name="pref_network_downloads_category">Tinklas ir atsisiuntimai</string>
-    <string name="pref_summary_autocast">Pasirinkite „Chromecast“ įrenginį, kurį naudosite, kai naudojate kitas programas, norėdami atidaryti vaizdo įrašus „SkyTube“.</string>
+    <string name="pref_summary_autocast">„Chromecast“ įrenginys, skirtas atkurti naudojant kitas „SkyTube“ vaizdo įrašų programėles.</string>
     <string name="pref_title_autocast">„AutoCast“</string>
     <string name="pref_title_chromecast_none">Nėra</string>
     <string name="pref_chromecast_category">„Chromecast“</string>
     <string name="subs_import_select_backup">Pasirinkite „YouTube“ XML failą importavimui</string>
     <string name="pref_summary_import_subs">Importuokite prenumeratas iš jūsų „YouTube“ paskyros.</string>
+    <string name="pref_sponsorblock_category">SponsorBlock</string>
+    <string name="pref_general">Bendrieji</string>
+    <string name="pref_title_enable_sponsorblock">Įjungti SponsorBlock</string>
+    <string name="pref_details">Išsami informacija</string>
 </resources>
