@@ -104,7 +104,7 @@
     <string name="pref_video_continuous_repeat_toggle">Nepertraukiamas kartojimas</string>
     <string name="pref_summary_disable_screen_gestures">Išjunkite garsumo, ryškumo ir vaizdo įrašų peržiūros pirmyn / atgal valdymą gestais.</string>
     <string name="pref_title_disable_screen_gestures">Išjungti vaizdo įrašų gestus</string>
-    <string name="pref_summary_credits">Žmonės ir projektai, kurių dėka atsirado ši programėlė.</string>
+    <string name="pref_summary_credits">Puikūs žmonės ir libre projektai, esantys už šios programėlės.</string>
     <string name="pref_title_credits">Padėkos</string>
     <string name="databases_backup_fail">Nepavyko sukurti atsarginės duomenų bazių kopijos.</string>
     <string name="databases_backup_success">Duomenų bazių atsarginės kopijos padarytos iki %s</string>
@@ -127,14 +127,14 @@
     <string name="pref_summary_feed_notification">Kaip dažnai tikrinti, ar prenumeruojamuose kanaluose yra naujų vaizdo įrašų: %s</string>
     <string name="pref_title_feed_notification">Sklaidos kanalo automatinis pranešimas</string>
     <string name="pref_hide_tabs_restart">Iš naujo paleiskite programėlę, kad būtų rodomi atnaujinti skirtukai.</string>
-    <string name="pref_summary_hide_tabs">Pasirinkite, kurie skirtukai neturėtų būti rodomi. Reikalingas paleidimas iš naujo.</string>
+    <string name="pref_summary_hide_tabs">Pasirinkite skirtukus, kurie nebus rodomi. Reikalingas paleidimas iš naujo.</string>
     <string name="pref_title_hide_tabs">Slėpti skirtukus</string>
-    <string name="pref_summary_default_tab">Numatytasis skirtukas, rodomas paleidus „SkyTube“: %s</string>
+    <string name="pref_summary_default_tab">Skirtukas, rodomas paleidus „SkyTube“: %s</string>
     <string name="pref_title_default_tab">Numatytasis skirtukas</string>
     <string name="pref_other_category">Kita</string>
     <string name="system_default_country">Sistemos</string>
     <string name="i_agree">Aš sutinku</string>
-    <string name="app_license">Autorinės teisės © 2015-2018 Ramon Mifsud
+    <string name="app_license">Autorinės teisės © 2015–2018 Ramon Mifsud
 \n
 \nŠi programėlė yra laisvoji programinė įranga: ją galima platinti ir (arba) modifikuoti pagal GNU General Public licenciją, kurią paskelbė Laisvosios programinės įrangos fondas, sąlygas (3 licencijos versija).
 \n
@@ -142,7 +142,7 @@
 \n
 \nKartu su šia programėle turėjote gauti GNU General Public licencijos kopiją. Jei ne, žr. &lt;http://www.gnu.org/licenses/&gt;</string>
     <string name="pref_summary_license">GPLv3+</string>
-    <string name="pref_title_license">Licencija</string>
+    <string name="pref_title_license">Copylefted libre licencija</string>
     <string name="pref_summary_updates">Patikrinti, ar yra naujų versijų.</string>
     <string name="pref_title_updates">Atnaujinimai</string>
     <string name="pref_title_version">Versija</string>
@@ -159,4 +159,9 @@
     <string name="pref_general">Bendrieji</string>
     <string name="pref_title_enable_sponsorblock">Įjungti SponsorBlock</string>
     <string name="pref_details">Išsami informacija</string>
+    <string name="pref_summary_enable_sponsorblock">Automatiškai praleidžiami rėmėjams skirti vaizdo įrašų segmentai, sąveikos priminimai ir kt.</string>
+    <string name="pref_title_sponsorblock_category_list">Praleisti segmentus</string>
+    <string name="pref_summary_sponsorblock_category_list">Pasirinkite kategorijas, kurias norite praleisti</string>
+    <string name="pref_title_credit_sponsorblock">Padėkos</string>
+    <string name="pref_summary_credit_sponsorblock">Naudoja SponsorBlock duomenis iš https://sponsor.ajay.app</string>
 </resources>
