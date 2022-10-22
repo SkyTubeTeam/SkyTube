@@ -549,13 +549,10 @@
     <string name="pref_key_subscriptions_alphabetical_order" translatable="false">pref_key_subscriptions_alphabetical_order</string>
     <string name="pref_title_subscriptions_alphabetical_order">Sort Channels Alphabetically</string>
     <string name="pref_summary_subscriptions_alphabetical_order">Lists subscribed Channels alphabetically.</string>
-
     <string name="pref_key_use_dislike_api" translatable="false">pref_key_use_dislike_api</string>
     <string name="pref_title_use_dislike_api">Return dislike counter</string>
     <string name="pref_summary_use_dislike_api">Return dislike counter using returnyoutubedislike.com</string>
     <bool name="pref_use_dislike_api">false</bool>
-
-
     <string name="pref_key_brightness_level" translatable="false">pref_key_brightness_level</string>
     <string name="pref_category_downloads">Downloads</string>
     <string name="pref_category_video_resolutions">Video Resolution</string>
@@ -624,7 +621,6 @@
         <item>5.5</item>
         <item>6.0</item>
     </string-array>
-
     <!--
         VIDEO BLOCKER
     -->
