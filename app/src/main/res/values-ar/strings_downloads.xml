@@ -7,8 +7,11 @@
     <string name="delete_download">حذف التنزيل</string>
     <string name="video_downloaded">\'%s\' تم تنزيلها.</string>
     <string name="no_downloaded_videos_text">قم بتنزيل بعض الفيديوهات لتجدها هنا.</string>
-    <string name="playing_video_file_missing">لم يتم العثور على الملف الذي تم تحميله. يتم تشغيل الفديو عن بعد.</string>
-    <string name="external_storage_not_available">غير قادر على تحميل الملف ذاكرة التخزين الخارجية غير متوفرة.</string>
+    <string name="playing_video_file_missing">تشغيل الفيديو عن بُعد نظرًا لعدم العثور على ملف قابل للتنزيل.</string>
+    <string name="external_storage_not_available">امنح حق الوصول إلى الملفات الخارجية لتنزيل الملف أولاً.</string>
     <string name="download">تنزيل</string>
     <string name="warning_metered_network_download">جهازك متصل بشبكة بيانات خاصة. لتجنب رسوم بيانات اضافية، ينصح بالاتصال بشبكة غير محدودة البيانات. أترغب بتنزيل الفيديو بأية حال؟</string>
+    <string name="unable_to_delete_file">تعذر حذف الملف الذي تم تنزيله\'%s\' ملف.</string>
+    <string name="download_failed_because">تعذر تنزيل%1$s بسبب %2$s.</string>
+    <string name="video_stream_not_found_with_request_resolution">تعذر العثور على أي دفق فيديو ضمن %1$s-%2$s الدقة المطلوبة</string>
 </resources>
