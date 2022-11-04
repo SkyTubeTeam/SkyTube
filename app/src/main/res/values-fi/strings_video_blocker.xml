@@ -3,9 +3,9 @@
     <string name="dislikes">%d %% alapeukkua</string>
     <string name="channel_unwhitelist_error">Kanavaa ei voitu poistaa sallittujen listalta.</string>
     <string name="channel_blacklist_error">Kanavaa ei voitu estää.</string>
-    <string name="channel_blacklisted">Kanava estetty. Päivitäthän sivun.</string>
+    <string name="channel_blacklisted">Päivitä sivu käyttääksesi uutta kanavien estolistaa.</string>
     <string name="block_channel">Estä kanava</string>
-    <string name="configure">Säädä</string>
-    <string name="no_videos_blocked">Yhtään videota ei estetty tai suodatettu pois. Haluatko säätää asetukset Video Blockeriin\?</string>
+    <string name="configure">Määritä</string>
+    <string name="no_videos_blocked">Yhtään videota ei estetty tai suodatettu pois. Haluatko määrittää asetukset Video Blockeriin\?</string>
     <string name="blocked_videos">Estetyt videot</string>
 </resources>
