@@ -1,53 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="preferences">الخيارات</string>
-    <string name="pref_languages_filter_category">فلاتر اللغات والمناطق</string>
+    <string name="pref_languages_filter_category">مرشحات اللغة والمنطقة</string>
     <string name="pref_title_preferred_regions">المنطقة المفضلة</string>
-    <string name="pref_summary_preferred_regions">حدد منطقة مفضلة. يتم استخدام ذلك لتصفية مقاطع الفيديو في فئة مقاطع الفيديو \"المميزة\". %s</string>
-    <string name="pref_title_preferred_languages">اللغات المفضلة</string>
-    <string name="pref_summary_preferred_languages">حدد لغاتك المفضلة .</string>
+    <string name="pref_summary_preferred_regions">حدد المنطقة التي تريد الحصول على فيديو \"مميز\" منها: %s</string>
+    <string name="pref_title_preferred_languages">اللغة المفضلة(s)</string>
+    <string name="pref_summary_preferred_languages">حدد اللغات المفضلة لديك.</string>
     <string name="pref_video_player_category">مشغل الفيديو</string>
     <string name="pref_title_backup_dbs">تصدير نسخة احتياطية لقواعد البيانات</string>
-    <string name="pref_summary_backup_dbs">الاحتفاظ بنسخة احتياطية من قواعد البيانات للاشتراكات و الإشارات المرجعية.</string>
+    <string name="pref_summary_backup_dbs">قم بعمل نسخة احتياطية من الإشارات المرجعية والاشتراكات الخاصة بك.</string>
     <string name="pref_title_import_dbs">استيراد نسخة احتياطية</string>
-    <string name="pref_summary_import_dbs">استيراد النسخة الاحتياطية وقاعدة بيانات الإشتراكات الخاصة بك.</string>
+    <string name="pref_summary_import_dbs">استيراد الإشارات المرجعية والاشتراكات الاحتياطية.</string>
     <string name="databases_backing_up">نسخة إحتياطية…</string>
     <string name="databases_backup_success">حفظ قواعد البيانات احتياطيا في %s</string>
-    <string name="databases_backup_fail">فشل النسخ الاحتياطي لقواعد البيانات الخاصة بك.</string>
+    <string name="databases_backup_fail">تعذر نسخ قواعد البيانات احتياطيًا.</string>
     <string name="databases_import_select_backup">حدد ملف النسخ الاحتياطي للاستيراد</string>
     <string name="databases_import_nothing_selected">لم يتم تحديد أي شيء …</string>
-    <string name="databases_import_warning_message">سيتم استبدال قواعد بيانات الاشتراكات والقوائم المرجعية بالبيانات التي في ملف النسخ الاحتياطي المحدد.
-\nاستمرار؟</string>
+    <string name="databases_import_warning_message">هل تريد استبدال الإشارات المرجعية والاشتراكات بالبيانات الموجودة في ملف النسخ الاحتياطي المحدد؟</string>
     <string name="continue_">استمرار</string>
     <string name="databases_importing">جارٍ الاستيراد…</string>
-    <string name="databases_import_fail">فشل استيراد قواعد البيانات.</string>
-    <string name="databases_import_success">تم استيراد قواعد البيانات . أعد تشغيل التطبيق لتفعيل التغييرات.</string>
+    <string name="databases_import_fail">تعذر استيراد قواعد البيانات الخاصة بك.</string>
+    <string name="databases_import_success">أعد تشغيل التطبيق لاستخدام الإشارات المرجعية والاشتراكات الجديدة.</string>
     <string name="pref_title_import_subs">استيراد الاشتراكات من YouTube</string>
     <string name="pref_summary_import_subs">استيراد اشتراكاتك من حسابك في YouTube .</string>
     <string name="subs_import_select_backup">حدد ملف xml الخاص بـ YouTube للاستيراد</string>
     <string name="pref_about_category">حول</string>
     <string name="pref_title_website">الموقع</string>
     <string name="pref_title_credits">تبرع</string>
-    <string name="pref_summary_credits">الناس والمشاريع التي جعلت هذا التطبيق ممكنا.</string>
+    <string name="pref_summary_credits">أناس عظماء ومشاريع حرة وراء هذا التطبيق.</string>
     <string name="pref_title_version">الاصدار</string>
     <string name="pref_title_updates">التحديثات</string>
     <string name="pref_summary_updates">التحقق من توفر إصدار جديد.</string>
-    <string name="pref_title_license">الرخصة</string>
+    <string name="pref_title_license">رخصة حرة متروكة الحقوق</string>
     <string name="pref_summary_license">رخصة GPL العامة الاصدار 3</string>
-    <string name="app_license">حقوق الطبع والنشر © 2015-2018 Ramon Mifsud 
-\n 
-\nهذا البرنامج هو برمجية حرة: يمكنك أعاده توزيعها و/أو تعديلها ببموجب شروط رخصه جنو العامة كما نشرتها مؤسسه البرمجيات الحرة (الإصدار 3 من الترخيص). 
-\n 
-\nيتم توزيع هذا البرنامج على أمل أن يكون مفيدا، ولكن من دون أي ضمان. دون حتى الضمان الضمني للتسويق أو الملاءمة لغرض معين. راجع رخصة جنو العمومية للحصول على مزيد من التفاصيل. 
-\n 
-\nيجب ان تكون قد استلمت نسخه من رخصه جنو العامة مع هذا البرنامج. إذا لم يكن كذلك ، راجع 
-\n &lt;http://www.gnu.org/licenses/&gt;</string>
-    <string name="i_agree">اوافق</string>
+    <string name="app_license">حقوق النشر © 2015–2018 Ramon Mifsud
+\n
+\nهذا البرنامج هو برنامج مجاني: يمكنك إعادة توزيعه و / أو تعديله بموجب شروط رخصة جنو العمومية كما نشرتها مؤسسة البرمجيات الحرة (الإصدار 3 من الترخيص).
+\n
+\nيتم توزيع هذا البرنامج على أمل أن يكون مفيدًا ، ولكن بدون أي ضمان ؛ حتى بدون الضمان الضمني لقابلية التسويق أو الملاءمة لغرض معين. انظر رخصة جنو العمومية لمزيد من التفاصيل.
+\n
+\nيجب أن تكون قد تلقيت نسخة من رخصة جنو العمومية مع هذا البرنامج. إذا لم يكن كذلك ، راجع &lt;https://www.gnu.org/licenses/&gt;</string>
+    <string name="i_agree">أنا موافق</string>
     <string name="pref_other_category">اخرى</string>
     <string name="pref_title_default_tab">التبويب الافتراضي</string>
-    <string name="pref_summary_default_tab">علامة التبويب الافتراضية التي تظهر عند تشغيل التطبيق : %s</string>
+    <string name="pref_summary_default_tab">علامة التبويب التي تظهر عند تشغيل التطبيق: %s</string>
     <string name="pref_title_screen_orientation">اتجاه الشاشة</string>
-    <string name="pref_summary_screen_orientation">مشغل الفديو المستخدم : %s</string>
+    <string name="pref_summary_screen_orientation">اتجاه مشغل الفيديو: %s</string>
     <string-array name="screen_orientations">
         <item>تلقائي</item>
         <item>مناظر</item>
@@ -55,13 +53,13 @@
         <item>جهاز استشعار</item>
     </string-array>
     <string name="pref_title_youtube_api_key">YouTube API مفتاح</string>
-    <string name="pref_summary_youtube_api_key">ادخل مفتاح API الخاص ببيانات YouTube. اتركه فارغه لاستخدام الاعداد الافتراضي .</string>
-    <string name="pref_youtube_api_key_error">حدث خطا اثناء محاولة التحقق من صحة مفتاح API الذي أدخلته.</string>
-    <string name="pref_youtube_api_key_custom">لمفتاح صالح. أعاده تشغيل التطبيق لاستخدام المفتاح الجديد API YouTube.</string>
-    <string name="pref_youtube_api_key_default">أعاده تشغيل التطبيق للتبديل العودة إلى الافتراضي يوتيوب API الرئيسية.</string>
+    <string name="pref_summary_youtube_api_key">أدخل مفتاح YouTube API الشخصي لاستخدامه بدلاً من ذلك.</string>
+    <string name="pref_youtube_api_key_error">تعذر التحقق من صحة مفتاح API الذي أدخلته.</string>
+    <string name="pref_youtube_api_key_custom">أعد تشغيل التطبيق لاستخدام مفتاح YouTube API الجديد.</string>
+    <string name="pref_youtube_api_key_default">أعد تشغيل التطبيق لاستخدام مفتاح YouTube API الافتراضي بدلاً من ذلك.</string>
     <string name="restart">إعادة تشغيل</string>
     <string name="pref_title_feed_notification">تنبيهات الإشتراكات التلقائية</string>
-    <string name="pref_summary_feed_notification">تحديد الفترة الزمنية التي سيتم البحث عن الفيديوهات الجديدة من القنوات: %s</string>
+    <string name="pref_summary_feed_notification">كم مرة تبحث عن مقاطع فيديو جديدة من القنوات المشتركة: %s</string>
     <string-array name="feed_notification">
         <item>Off</item>
         <item>6 Hours</item>
@@ -69,63 +67,119 @@
         <item>24 Hours</item>
     </string-array>
     <string name="pref_title_choose_player">مشغل الفيديو</string>
-    <string name="pref_summary_choose_player">مشغل الفديو المستخدم : %s</string>
+    <string name="pref_summary_choose_player">مشغل الفيديو المراد استخدامه: %s</string>
     <string name="pref_import_export_category">استيراد/تصدير</string>
-    <string name="pref_title_disable_screen_gestures">تعطيل إيماءات الفيديو</string>
+    <string name="pref_title_disable_screen_gestures">لا توجد إيماءات فيديو</string>
     <string name="pref_summary_disable_screen_gestures">إيقاف إيماءات التحكم بحجم والسطوع والتقديم إلى الأمام / الخلف في الفيديو.</string>
-    <string name="pref_title_subscriptions_alphabetical_order">ترتيب القنوات ابجديا</string>
-    <string name="pref_summary_subscriptions_alphabetical_order">إذا تم تفعيله سوف يتم فرز القنوات بالترتيب الابجدي.</string>
-    <string name="pref_category_downloads">التنزيلات</string>
-    <string name="pref_title_download_to_separate_directories">تحميل ملفات الفيديو في مجلدات</string>
-    <string name="pref_summary_download_to_separate_directories">يتم تحميل الفيديوهات إلى مجلدات باسم القناة.</string>
-    <string name="pref_video_blocker_category">حجب الفديوهات</string>
-    <string name="pref_summary_enable_video_blocker">تفعيل حجب الفديوهات.</string>
-    <string name="pref_channels_filter_category">فلاتر القنوات</string>
-    <string name="pref_title_channel_filter_method">طريقة فلترة القناة</string>
-    <string name="pref_summary_channel_filter_method">قم بتحديد أسلوب فلترة القناة: %s</string>
-    <string name="disabled">تم تعطيله</string>
-    <string name="pref_title_channel_blacklist">القنوات في القائمة السوداء</string>
+    <string name="pref_title_subscriptions_alphabetical_order">فرز القنوات أبجديا</string>
+    <string name="pref_summary_subscriptions_alphabetical_order">يسرد القنوات المشتركة أبجديًا.</string>
+    <string name="pref_category_downloads">التحميلات</string>
+    <string name="pref_title_download_to_separate_directories">تحميل مجلد القناة</string>
+    <string name="pref_summary_download_to_separate_directories">يحفظ مقاطع الفيديو في مجلدات استنادًا إلى اسم القناة.</string>
+    <string name="pref_video_blocker_category">أداة حظر الفيديو</string>
+    <string name="pref_summary_enable_video_blocker">مانع الفيديو.</string>
+    <string name="pref_channels_filter_category">تصفية القناة</string>
+    <string name="pref_title_channel_filter_method">أسلوب تصفية القناة</string>
+    <string name="pref_summary_channel_filter_method">حدد طريقة تصفية القناة: %s</string>
+    <string name="disabled">تعطيل</string>
+    <string name="pref_title_channel_blacklist">القائمة السوداء للقناة</string>
     <string name="pref_summary_channel_blacklist">قائمة القنوات المحظورة.</string>
-    <string name="unblock">إلغاء الحظر</string>
-    <string name="channel_blacklist_updated">تم تحديث القنوات في القائمة السوداء .يرجى تحديث الفيديو.</string>
-    <string name="channel_blacklist_empty">قائمة القنوات السوداء فارغة.</string>
-    <string name="pref_summary_channel_whitelist">قائمة قنوات اللائحة البيضاء.</string>
-    <string name="add">إضافة</string>
-    <string name="block">حجب</string>
-    <string name="please_wait">الرجاء الانتظار…</string>
-    <string name="pref_other_filters_category">الفلاتر الأخرى</string>
-    <string name="pref_title_low_views_filter">مشاهدة</string>
+    <string name="unblock">رفع الحظر</string>
+    <string name="channel_blacklist_updated">قم بتحديث مقاطع الفيديو لتطبيق القائمة السوداء للقناة الجديدة.</string>
+    <string name="channel_blacklist_empty">القائمة السوداء فارغة.</string>
+    <string name="pref_summary_channel_whitelist">قائمة القنوات المسموح بها.</string>
+    <string name="add">أضف</string>
+    <string name="block">منع</string>
+    <string name="please_wait">أرجو الإنتظار…</string>
+    <string name="pref_other_filters_category">مرشحات أخرى</string>
+    <string name="pref_title_low_views_filter">المشاهدات</string>
     <string name="pref_title_dislikes_filter">عدم الإعجاب</string>
     <string name="pref_privacy_category">الخصوصية</string>
-    <string name="pref_title_disable_search_history">تعطيل سجل البحث</string>
+    <string name="pref_title_disable_search_history">لا يوجد سجل بحث</string>
     <string name="pref_disable_search_history_deleted">تم حذف سجل البحث.</string>
-    <string name="pref_disable_playback_status_deleted">حذف حالة التشغيل.</string>
-    <string name="channel_blacklist_update_failure">فشل إزالة القناة (القنوات) من القائمة السوداء…</string>
-    <string name="pref_title_channel_whitelist">القنوات في القائمة البيضاء</string>
-    <string name="input_channel_url">عنوان URL للقناة التي ستكون في اللائحة البيضاء:</string>
-    <string name="channel_already_whitelisted">القناة بالفعل في اللائحة البيضاء.</string>
-    <string name="channel_whitelist_updated">تم تحديث القنوات في القائمة البيضاء .يرجى تحديث الفيديو.</string>
-    <string name="channel_whitelist_update_failure">فشل نقل القناة للقائمة البيضاء.</string>
-    <string name="channel_unwhitelist_success">تم تحديث القائمة البيضاء للقناة. الرجاء تحديث فائمة الإشتراكات.</string>
-    <string name="channel_unwhitelist_failure">فشل نقل القناة من القائمة البيضاء …</string>
-    <string name="no_preferred_lang_selected">لم يتم أختيار لغات مفضلة. سيتم تجاهل الإعداد.</string>
-    <string name="preferred_lang_updated">حدث قائمة الفيديوهات لاستخدام اللغة الجديدة.</string>
-    <string name="pref_title_lang_detection_video_filtering">الكشف عن الغة و فلاتر الفيديو</string>
-    <string name="pref_summary_lang_detection_video_filtering">نستخدم الذكاء الإصطناعي للكشف عن اللغات المستخدمة في الفيديوهات ومنعها إذا كانت لغتهم لاتطابق اللغات المفضلة التي قمت بإختيارها . وينبغي تمكين هذا الخيار فقط على الأجهزة القوية.</string>
-    <string name="setting_updated">تم تحديث الإعداد. الرجاء تحديث قائمة الإشتراكات.</string>
-    <string name="pref_summary_low_views_filter">تصفية الفيديوهات ذات معدل مشاهدة منخفض: %s</string>
-    <string name="pref_summary_dislikes_filter">تصفية ملفات الفيديو التي تحتوي على معدلات عدم الإعجاب المرتفعة : %s</string>
-    <string name="pref_summary_disable_search_history">إذا تم تفعيله ، سيتم مسح محفوظات البحث ولن يتم استخدامها.</string>
-    <string name="pref_title_disable_playback_status">تعطيل حالة وضع التشغيل</string>
-    <string name="pref_summary_disable_playback_status">إذا تم تفعيله ، سيتم مسح حالة التشغيل ولن يتم إستخدامها.</string>
+    <string name="pref_disable_playback_status_deleted">تم حذف حالة التشغيل.</string>
+    <string name="channel_blacklist_update_failure">تعذر إزالة القناة(s) المحددة من القائمة السوداء …</string>
+    <string name="pref_title_channel_whitelist">القائمة البيضاء للقناة</string>
+    <string name="input_channel_url">عناوين URL للقنوات المطلوب إضافتها إلى القائمة البيضاء:</string>
+    <string name="channel_already_whitelisted">القناة مدرجة في القائمة البيضاء بالفعل.</string>
+    <string name="channel_whitelist_updated">قم بتحديث مقاطع الفيديو لاستخدام القائمة البيضاء الجديدة للقناة.</string>
+    <string name="channel_whitelist_update_failure">تعذر وضع القناة المحددة في القائمة البيضاء.</string>
+    <string name="channel_unwhitelist_success">قم بتحديث مقاطع الفيديو لاستخدام القائمة البيضاء الجديدة للقناة.</string>
+    <string name="channel_unwhitelist_failure">فشل في إلغاء القائمة البيضاء للقناة المحددة(s)…</string>
+    <string name="no_preferred_lang_selected">لم يتم اختيار لغة مفضلة.</string>
+    <string name="preferred_lang_updated">قم بتحديث مقاطع الفيديو لاستخدام اللغة الجديدة.</string>
+    <string name="pref_title_lang_detection_video_filtering">مرشح لغة-الفيديو</string>
+    <string name="pref_summary_lang_detection_video_filtering">استخدم الكثير من الموارد لاكتشاف لغة الفيديو وحظر اللغة غير المفضلة(s).</string>
+    <string name="setting_updated">قم بتحديث مقاطع الفيديو لاستخدام الإعداد الجديد.</string>
+    <string name="pref_summary_low_views_filter">تصفية مقاطع الفيديو ذات المشاهدات المنخفضة: %s</string>
+    <string name="pref_summary_dislikes_filter">تصفية مقاطع الفيديو ذات إبداءات عدم الإعجاب العالية: %s</string>
+    <string name="pref_summary_disable_search_history">مسح وإيقاف سجل البحث.</string>
+    <string name="pref_title_disable_playback_status">لا يوجد حالة تشغيل</string>
+    <string name="pref_summary_disable_playback_status">اغلاق حالة التشغيل.</string>
     <string name="pref_title_clear_playback_status">مسح حالة التشغيل</string>
-    <string name="pref_summary_clear_playback_status">مسح حالة التشغيل لجميع ملفات الفيديو.</string>
+    <string name="pref_summary_clear_playback_status">مسح تقدم جميع مقاطع الفيديو.</string>
     <string name="pref_playback_status_cleared">تم مسح حالة التشغيل.</string>
     <string name="pref_category_metered_network">شبكة ذات بيانات محدودة</string>
     <string name="no_resolution_specified">لا شيء</string>
-    <string name="pref_summary_minimum_res">اختر أقل دقه: %s</string>
-    <string name="pref_summary_maximum_res">اختر أعلى دقه: %s</string>
-    <string name="pref_title_maximum_res">أعلى دقه</string>
-    <string name="pref_title_minimum_res">أقل دقه</string>
+    <string name="pref_summary_minimum_res">حدد أقل دقة: %s</string>
+    <string name="pref_summary_maximum_res">حدد أعلى دقة: %s</string>
+    <string name="pref_title_maximum_res">أعلى دقة</string>
+    <string name="pref_title_minimum_res">أقل دقة</string>
     <string name="key_preferences">التفضيلات</string>
+    <string name="pref_title_hide_tabs">إخفاء علامات التبويب</string>
+    <string name="pref_title_enable_immersive_mode">الوضع الغامر</string>
+    <string name="pref_category_video_resolutions">دقة الفيديو</string>
+    <string name="pref_title_video_download_folder">مجلد تنزيل الفيديو</string>
+    <string name="pref_title_autocast">الإرسال التلقائي</string>
+    <string name="pref_title_minimum_res_metered">أقل دقة للشبكة التي تم قياسها</string>
+    <string name="pref_key_video_quality_metered_summary">تحسين ل: %s</string>
+    <string name="pref_details">تفاصيل</string>
+    <string name="pref_title_open_issue">افتح إصدار</string>
+    <string name="pref_summary_open_issue">اقترح فكرة أو أبلغ عن خطأ.</string>
+    <string name="system_default_country">النظام</string>
+    <string name="pref_video_continuous_repeat_toggle">التكرار المستمر</string>
+    <string name="pref_summary_use_newpipe_backend">استخدم NewPipe API للوصول إلى YouTube …</string>
+    <string name="pref_title_use_dislike_api">رجوع الى عداد عدم الاعجاب</string>
+    <string name="pref_summary_use_dislike_api">رجوع الى عداد عدم الاعجاب باستخدام returnyoutubedislike.com</string>
+    <string name="pref_popup_title_video_download_folder">اختر المجلد</string>
+    <string name="pref_video_download_minimum_resolution_summary">ستكون تنزيلات الفيديو على الأقل %s</string>
+    <string name="pref_key_video_quality_metered_title">تحديد جودة الفيديو على المقياس</string>
+    <string name="pref_key_video_quality_for_downloads_title">تحديد جودة الفيديو للتنزيلات</string>
+    <string name="pref_key_video_quality_for_downloads_summary">تحسين ل: %s</string>
+    <string name="pref_key_video_quality_title">اختيار جودة الفيديو</string>
+    <string name="pref_key_video_quality_summary">تحسين ل: %s</string>
+    <string name="pref_key_use_newer_formats_title">جرب تنسيقات فيديو أحدث</string>
+    <string name="pref_summary_minimum_res_metered">حدد أقل دقة عند البث عبر شبكة محدودة: %s</string>
+    <string name="pref_title_maximum_res_metered">أعلى دقة للشبكة المقننة</string>
+    <string name="pref_category_download_resolutions">دقة الفيديو للتنزيل</string>
+    <string name="pref_video_download_maximum_resolution_summary">ستكون تنزيلات الفيديو على الأكثر %s</string>
+    <string name="pref_video_download_minimum_resolution_title">أقل دقة لتنزيل الفيديو</string>
+    <string name="pref_video_download_maximum_resolution_title">أعلى دقة تنزيل الفيديو</string>
+    <string name="pref_summary_autocast">جهاز الكروم كاست للتشغيل عند استخدام تطبيقات الفيديو الأخرى في SkyTube.</string>
+    <string name="pref_summary_switch_volume_and_brightness">يضع التحكم في مستوى الصوت على اليمين والسطوع على اليسار.</string>
+    <string name="pref_chromecast_category">الكروم كاست</string>
+    <string name="pref_summary_video_download_folder">تم تنزيل مقاطع الفيديو إلى %s</string>
+    <string name="pref_title_use_newpipe_backend">النهاية-الخلفية NewPipe</string>
+    <string name="pref_title_switch_volume_and_brightness">تبديل الصوت وإيماءة السطوع</string>
+    <string name="pref_summary_enable_immersive_mode">إخفاء شريط التنقل وشريط الحالة أثناء التشغيل.</string>
+    <string name="pref_summary_hide_tabs">اختر علامات التبويب لعدم إظهارها. مطلوب إعادة التشغيل.</string>
+    <string name="pref_hide_tabs_restart">أعد تشغيل التطبيق باستخدام علامات التبويب هذه.</string>
+    <string name="pref_network_downloads_category">الشبكة والتنزيلات</string>
+    <string name="pref_title_chromecast_none">لا شيء</string>
+    <string name="pref_title_default_content_country">بلد المحتوى الافتراضي</string>
+    <string name="pref_sponsorblock_category">منع الراعي</string>
+    <string name="pref_general">عام</string>
+    <string name="pref_title_playback_speed">سرعة التشغيل الافتراضية</string>
+    <string name="pref_summary_playback_speed">سرعة التشغيل الافتراضية: %s</string>
+    <string name="pref_summary_default_content_country">عرض المحتوى المخصص لهذا البلد: %s</string>
+    <string name="pref_title_enable_sponsorblock">تفعيل حجب الراعي</string>
+    <string name="pref_summary_sponsorblock_category_list">اختر الفئات لتخطيها</string>
+    <string name="pref_title_credit_sponsorblock">الاعتمادات</string>
+    <string name="pref_summary_credit_sponsorblock">يستخدم بيانات الراعي من https://sponsor.ajay.app</string>
+    <string name="pref_summary_maximum_res_metered">حدد الدقة القصوى عند البث عبر شبكة محدودة: %s</string>
+    <string name="pref_title_metered_network_usage">استخدام الشبكة المقننة</string>
+    <string name="pref_summary_metered_network_usage">اذا تفعل إذا كنت تستخدم شبكة مقننة لتنزيل / مشاهدة مقاطع الفيديو: %s</string>
+    <string name="pref_key_use_newer_formats_summary">قد يتأثر الصوت والفيديو في إصدارات أندرويد القديمة دون دعم.</string>
+    <string name="pref_summary_enable_sponsorblock">تخطي مقاطع الفيديو تلقائيًا المخصصة للرعاة وتذكيرات التفاعل والمزيد</string>
+    <string name="pref_title_sponsorblock_category_list">تخطي الشرائح</string>
 </resources>
