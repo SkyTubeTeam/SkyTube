@@ -4,10 +4,10 @@
     <string name="done">إنتهى</string>
     <string name="skip">تخطي</string>
     <string name="page_counter">%1$d من%2$d</string>
-    <string name="tutorial_slide_1">اسحب من اليسار لعرض التعليقات.</string>
-    <string name="tutorial_slide_2">اسحب للأعلى لعرض وصف الفيديو.</string>
-    <string name="tutorial_slide_3">اسحب أفقياً لتقديم إلى الأمام أو إلى الخلف.</string>
-    <string name="tutorial_slide_4">اسحب عمودياً لضبط مستوى الصوت.</string>
-    <string name="tutorial_slide_5">اسحب عمودياً لضبط السطوع.</string>
+    <string name="tutorial_slide_1">مرر ← لعرض التعليقات.</string>
+    <string name="tutorial_slide_2">اسحب ↑ للأعلى لعرض وصف الفيديو.</string>
+    <string name="tutorial_slide_3">مرر ← ← أفقياً لتقديم إلى الأمام أو إلى الخلف.</string>
+    <string name="tutorial_slide_4">اسحب ↑ ↓ لضبط مستوى الصوت.</string>
+    <string name="tutorial_slide_5">اسحب ↑ ↓ لضبط السطوع.</string>
     <string name="tutorial_slide_6">نقرتين لإيقاف او تشغيل الفيديو.</string>
 </resources>
