@@ -3,9 +3,11 @@
     <string name="update_available">يتوفر إصدار جديد</string>
     <string name="update_dialog_msg">يتوفر إصدار جديد لـ SkyTube. سيتم تحديث التطبيق إلى الإصدار %s.</string>
     <string name="up_to_date">تم تحديثه</string>
-    <string name="up_to_date_msg">لديك أحدث نسخه من SkyTube مثبتة.</string>
+    <string name="up_to_date_msg">لديك أحدث إصدار من SkyTube مثبتًا.</string>
     <string name="update">تحديث</string>
     <string name="later">لاحقاً</string>
-    <string name="update_failure">غير قادر على تحديث التطبيق.</string>
+    <string name="update_failure">تعذر تثبيت الإصدار الجديد من التطبيق.</string>
     <string name="downloading">جارٍ التحميل…</string>
+    <string name="release_notes">التغييرات في %s</string>
+    <string name="android_too_old">لسوء الحظ ، نظام أندرويد الخاص بك قديم جدًا ولا يمكن تحديثه. تحتاج إلى تثبيت \"SkyTube Legacy\" يدويًا!</string>
 </resources>

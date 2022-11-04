@@ -9,4 +9,5 @@
     <string name="update_failure">Uygulamanın yeni sürümü kurulamadı.</string>
     <string name="downloading">İndiriliyor…</string>
     <string name="release_notes">%s içindeki değişiklikler</string>
+    <string name="android_too_old">Android sürümünüz güncelleme için çok eski. Elle \'SkyTube Legacy\' kurmanız gerekiyor!</string>
 </resources>

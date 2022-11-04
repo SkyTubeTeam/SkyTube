@@ -34,9 +34,9 @@
     <string name="view_replies">Cavabları görün</string>
     <string name="hide_replies">Cavabları gizlədin</string>
     <string name="enter_video_url">Video URL\'si daxil edin</string>
-    <string name="play">Oynadın</string>
+    <string name="play">Oynat</string>
     <string name="cancel">İmtina</string>
-    <string name="clear">Təmizləyin</string>
+    <string name="clear">Təmizlə</string>
     <string name="should_resume">Dayandırılmış hissədən davam edilsin\?</string>
     <string name="resume">Davam etdirin</string>
     <string name="sponsorblock_skipped">Ötürülmüş seqment: %s</string>

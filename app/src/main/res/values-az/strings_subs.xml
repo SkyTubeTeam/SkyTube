@@ -17,8 +17,8 @@
     <string name="unsubscribed">Abunəlikdən Çıxıldı</string>
     <string name="subscribed">Abunə Olundu</string>
     <string name="import_subscriptions_description">Https://takeout.google.com saytında \"YouTube və YouTube Music\" istisna olmaqla, hər şey seçimini ləğv edin.\"Bütün YouTube datası daxildir\" üzərinə klikləyin və yalnız abunəlikləri seçin \"Növbəti\" və sonra \"İxrac yarat\" düyməsini basın. Yükləmə linki olan e-poçtu almaq üçün klikləyin.Faylı e-poçt müştərinizdən yükləyin. Bu ZIP faylı seçin və ya çıxarın və aşağıda \"Abunəlik Faylı Seçin\"dən istifadə edərək (/Takeout/YouTube və YouTube Music/subscriptions/-da) olan subscriptions.csv və ya subscriptions.json seçin.</string>
-    <string name="select_sub_file">Abunəlik Faylını Seçin</string>
-    <string name="select_all">Hamısını Seçin</string>
+    <string name="select_sub_file">Abunəlik Faylını Seç</string>
+    <string name="select_all">Hamısını Seç</string>
     <string name="about">Haqqında</string>
     <string name="select_none">Heç birini Seçmə</string>
     <string name="no_channels_found">Yüklədiyiniz faylda heç bir YouTube kanalı tapmaq mümkün olmadı.</string>

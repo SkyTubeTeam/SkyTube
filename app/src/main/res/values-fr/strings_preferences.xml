@@ -205,4 +205,6 @@
     <string name="pref_summary_enable_sponsorblock">Ignorer automatiquement les segments vidéo dédiés aux sponsors, rappels d\'interaction et plus encore</string>
     <string name="pref_title_open_issue">Signaler un problème</string>
     <string name="pref_summary_open_issue">Suggérez une idée ou signalez un erreur.</string>
+    <string name="pref_title_playback_speed">Vitesse de lecture par défaut</string>
+    <string name="pref_summary_playback_speed">Vitesse de lecture par défaut : %s</string>
 </resources>

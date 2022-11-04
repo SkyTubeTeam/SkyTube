@@ -10,7 +10,7 @@
     <string name="LIVE">Canlı</string>
     <string name="featured">Seçilmiş</string>
     <string name="most_popular">Ən Populyar</string>
-    <string name="trending_in">Populyar (%s)</string>
+    <string name="trending_in">Trenddə olan (%s)</string>
     <string name="video">Video</string>
     <string name="videos">Videolar</string>
     <string name="playlists">Pleylistlər</string>
@@ -21,7 +21,7 @@
     <string name="no">Xeyr</string>
     <string name="search_channel">Kanal axtarın</string>
     <string name="could_not_get_channel">Kanal məlumatını endirmək mümkün olmadı.</string>
-    <string name="launch_offical_player_error">Rəsmi YouTube pleyerini işə salmaq mümkün olmadı. Quraşdırıldığından əmin olun.</string>
+    <string name="launch_offical_player_error">Rəsmi YouTube oynadıcını işə salmaq mümkün olmadı. Quraşdırıldığından əmin olun.</string>
     <string name="yes">Bəli</string>
     <string name="num_videos">%d video</string>
 </resources>

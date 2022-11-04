@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="bookmarks">Marcadores de favoritos</string>
-    <string name="bookmark">Marcado como favorito</string>
-    <string name="video_bookmarked">Marcado como favorito</string>
-    <string name="video_bookmarked_error">Este vídeo no se puede marcar.</string>
+    <string name="bookmarks">Marcadores</string>
+    <string name="bookmark">Marcar</string>
+    <string name="video_bookmarked">Marcado</string>
+    <string name="video_bookmarked_error">No se pudo marcar el video.</string>
     <string name="unbookmark">Desmarcar</string>
-    <string name="video_unbookmarked">Desmarcado como favorito</string>
-    <string name="video_unbookmarked_error">No se puede desmarcar como favorito.</string>
-    <string name="no_bookmarked_videos_text">Marca como favorito algún vídeo para encontrarlo aquí.</string>
-    <string name="bookmark_share_invalid_url">Sólo se pueden marcar como favoritas URL válidas de YouTube.</string>
-    <string name="bookmark_share_label">Marcadores de Skytube</string>
-    <string name="video_was_not_bookmarked">El vídeo no estaba marcado ya como favorito</string>
-    <string name="video_already_bookmarked">Marcado ya como favorito</string>
+    <string name="video_unbookmarked">Marcador eliminado</string>
+    <string name="video_unbookmarked_error">No se pudo eliminar el marcador del video.</string>
+    <string name="no_bookmarked_videos_text">Marque algunos videos para encontrarlos aquí.</string>
+    <string name="bookmark_share_invalid_url">Solo se puede marcar una URL de YouTube válida.</string>
+    <string name="bookmark_share_label">Marcador SkyTube</string>
+    <string name="video_was_not_bookmarked">El video no fue marcado</string>
+    <string name="video_already_bookmarked">Ya marcado</string>
 </resources>
