@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="error_stream_err_unavailable">رسالة الخطا غير متوفرة.</string>
+    <string name="error_stream_err_unavailable">رسالة غير متوفرة.</string>
     <string name="error_stream_decryption_fail">تعذر تحميل رمز فك التشفير لخدمه YouTube.</string>
     <string name="error_stream_parse_error">خطا في التحليل.</string>
     <string name="error_video_play">خطا في تشغيل الفيديو</string>
-    <string name="error_video_streams_empty">لايحتوي الفيديو %s على بث.</string>
-    <string name="error_video_streams">حدث خطأ أثناء استرداد مجموعات بث الفيديو.</string>
-    <string name="error_get_video_desc">حدث خطا اثناء استرداد وصف الفيديو.</string>
+    <string name="error_video_streams_empty">الفيديو\'%s\' لايحتوي على بث.</string>
+    <string name="error_video_streams">تعذر جلب أي من مجموعات بث الفيديو.</string>
+    <string name="error_get_video_desc">تعذر جلب وصف الفيديو.</string>
     <string name="error_invalid_url">رابط الفيديو غير صالح: %s</string>
     <string name="warning_live_video">لا يمكن عرض البث المباشر في الوقت الحالي. هل تود عرضه في تطبيق آخر؟</string>
-    <string name="ratings_disabled">تم تعطيل التقييمات</string>
+    <string name="ratings_disabled">إيقاف التقييمات</string>
     <string name="loading_video">جارٍ تحميل الفيديو…</string>
     <string name="open_in_browser">فتح في متصفح الويب</string>
     <string name="open_with">فتح بواسطة…</string>
@@ -17,8 +17,8 @@
     <string name="share_via">مشاركة عبر…</string>
     <string name="copy_url">نسخ الرابط</string>
     <string name="url_copied_to_clipboard">تم نسخ الرابط الى الحافظة.</string>
-    <string name="error_get_comments">حدث خطا اثناء الحصول علي التعليقات.</string>
-    <string name="no_video_comments">لا يحتوي هذا الفيديو علي تعليقات أو التعليقات معطله.</string>
+    <string name="error_get_comments">تعذر جلب التعليقات.</string>
+    <string name="no_video_comments">هذا الفيديو إما لا يحتوي على تعليقات ، أو التعليقات معطله.</string>
     <string name="view_replies">عرض الردود</string>
     <string name="hide_replies">إخفاء الردود</string>
     <string name="enter_video_url">ادخل رابط الفيديو</string>
@@ -26,9 +26,9 @@
     <string name="cancel">إلغاء</string>
     <string name="clear">تنظيف</string>
     <string name="play_video">عرض الفيديو</string>
-    <string name="mark_watched">تعليمه كفيديو تمت مشاهدته</string>
-    <string name="mark_unwatched">تعليمه كفيديو لم تتم مشاهدته</string>
-    <string name="should_resume">هل ترغب في الإستئناف من حيث توقفت؟</string>
+    <string name="mark_watched">وضع علامة على أنها تمت مشاهدته</string>
+    <string name="mark_unwatched">وضع علامة على أنه لم تتم مشاهدته</string>
+    <string name="should_resume">استمر من حيث توقفت؟</string>
     <string name="resume">إستئناف</string>
     <string name="reload_video">إعادة تحميل الفيديو</string>
     <string name="warning_metered_network_disable">لا تسألني مرة أخرى.</string>
@@ -37,5 +37,14 @@
     <string name="warning_metered_network_play">اتصل بشبكة غير مقيَّدة أولاً، لتجنب دفع رسوم استخدام البيانات. هل تريد عرض الفيديو على أي حال؟</string>
     <string name="error_video_parse_error">تعذر بدء الفيديو: <br/> <br/> %s.</string>
     <string name="error_downloaded_file_is_corrupted">يبدو الفيديو الذي تم تنزيله <b>تالفًا</b>: <br/><br/>%s. <br/><br/><b>حذف</b> الملف؟</string>
-    <string name="error_get_comments_no_network">لجلب التعليقات، عليك الإتصال بالإنترنت أولاً.</string>
+    <string name="error_get_comments_no_network">اتصل بالإنترنت لجلب التعليقات أولاً.</string>
+    <string name="sponsorblock_category_sponsor">راعي</string>
+    <string name="sponsorblock_skipped">المقطع تم تخطيه: %s</string>
+    <string name="sponsorblock_category_selfpromo">الترويج الذاتي</string>
+    <string name="sponsorblock_category_interaction">تذكير التفاعل</string>
+    <string name="sponsorblock_category_music_offtopic">لا- قسم موسيقى</string>
+    <string name="sponsorblock_category_intro">مقدمة / استراحة</string>
+    <string name="sponsorblock_category_outro">بطاقات النهاية / الاعتمادات</string>
+    <string name="sponsorblock_category_preview">معاينة / خلاصة</string>
+    <string name="sponsorblock_category_filler">حشو</string>
 </resources>
