@@ -31,7 +31,7 @@
     <string name="warning_metered_network_play">Laitteesi on yhdistetty datan kulutukseen perustuvaan verkkoon. Välttääksesi ylimääräisiä datamaksuja, on suositeltavaa yhdistää kiinteähintaiseen verkkoon. Haluatko silti toistaa videon\?</string>
     <string name="metered_network">Datan käyttöön perustuva yhteys</string>
     <string name="error_video_parse_error">Ei voida aloittaa videon toistoa, virheilmoitus on: <br/> <br/> %s.</string>
-    <string name="error_downloaded_file_is_corrupted">Ladattu video näyttää <b>korruptoituneelta</b> - virheilmoitus on: <br/> <br/> %s. <br/> <br/> Haluatko <b>poistaa</b> tiedoston\?</string>
+    <string name="error_downloaded_file_is_corrupted">Ladattu video näyttää <b>vahingoittuneelta</b> - virheilmoitus on: <br/> <br/> %s. <br/> <br/> Haluatko <b>poistaa</b> tiedoston\?</string>
     <string name="error_invalid_url">Virheellinen videon URL: %s</string>
     <string name="error_get_video_desc">Virhe ladattaessa videon kuvausta.</string>
     <string name="error_video_play">Virhe videon toistossa</string>
