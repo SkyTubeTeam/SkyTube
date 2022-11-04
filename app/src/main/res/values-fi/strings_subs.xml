@@ -17,7 +17,7 @@
     <string name="error_get_subbed_channels">Virhe noudettaessa tilattuja kanavia.</string>
     <string name="channel_unsubscribed">Kanavan tilaus poistettu</string>
     <string name="unsubscribed">Tilaus poistettu</string>
-    <string name="channel_subscribe_failed">Ei voida tilata kanavaa</string>
+    <string name="channel_subscribe_failed">Kanavaa ei voida tilata</string>
     <string name="channel_already_subscribed">Olet jo tilannut kanavan</string>
     <string name="channel_subscribed">Kanava tilattu</string>
     <string name="subscribed">Tilattu</string>
