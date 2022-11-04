@@ -1,22 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="could_not_get_videos">تعذر الحصول على %s من مقاطع الفيديو.</string>
-    <string name="views">%,d المشاهدات</string>
+    <string name="could_not_get_videos">تعذر الحصول على%s مقاطع الفيديو.</string>
+    <string name="views">%,d مشاهدات</string>
     <string name="error">خطأ</string>
-    <string name="ok">حسنا</string>
-    <string name="search_videos">البحث في مقاطع الفيديو</string>
-    <string name="launch_offical_player_error">حدث خطا اثناء محاولة تشغيل مشغل YouTube الرسمي. تاكد من ان التطبيق الرسمي لـ Google في YouTube مثبت علي الجهاز.</string>
+    <string name="ok">موافق</string>
+    <string name="search_videos">البحث عن مقاطع الفيديو</string>
+    <string name="launch_offical_player_error">تعذر تشغيل مشغل YouTube الرسمي. تأكد من تثبيته.</string>
     <string name="LIVE">مباشر</string>
-    <string name="featured">الموصى بها</string>
-    <string name="most_popular">الأكثر شعبية</string>
-    <string name="video">الفيديو</string>
-    <string name="videos">الفيديوهات</string>
-    <string name="num_videos">%d الفيديوهات</string>
+    <string name="featured">متميز</string>
+    <string name="most_popular">الأكثر شهرة</string>
+    <string name="video">فيديو</string>
+    <string name="videos">أشرطة فيديو</string>
+    <string name="num_videos">%d مقاطع فيديو</string>
     <string name="playlists">قوائم التشغيل</string>
-    <string name="could_not_get_playlists">لايمكن الحصول على %s قوائم التشغيل.</string>
-    <string name="loading">جارٍ التحميل…</string>
-    <string name="could_not_get_channel">لا يمكن الحصول على معلومات القناة!</string>
+    <string name="could_not_get_playlists">تعذر الحصول على %s قوائم التشغيل.</string>
+    <string name="loading">جار التحميل…</string>
+    <string name="could_not_get_channel">تعذر تنزيل معلومات القناة.</string>
     <string name="yes">نعم</string>
     <string name="no">لا</string>
-    <string name="could_not_get_channel_detailed">تعذر تنزيل معلومات القناة : %s.</string>
+    <string name="could_not_get_channel_detailed">لا يمكن تحميل معلومات القناة: %s.</string>
+    <string name="trending_in">شائع (%s)</string>
+    <string name="close">إغلاق</string>
+    <string name="search_channel">بحث قناة</string>
+    <string name="recaptcha_challenge_requested">يعتقد YouTube أنك روبوت ، لذا يجب عليك حل reCAPTCHA أولاً.</string>
+    <string name="could_not_get_sponsorblock">تعذر استرداد معلومات الجهة الراعية: %s.</string>
 </resources>
