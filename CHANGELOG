@@ -1,4 +1,7 @@
-v2.983 - 2022-08-25
+v2.985 - 2022-11-04
+        * Newest NewPipeExtractor to fix Youtube parsing
+
+v2.984 - 2022-08-25
         * Fix running on Android 4.4
 
 v2.983 - 2022-08-25
