@@ -2,11 +2,11 @@
 <resources>
     <string name="feed">الإشتراكات</string>
     <string name="subscribing_to_channels">الاشتراك في القنوات…</string>
-    <string name="fetching_subbed_channels_info">جلب معلومات القنوات …</string>
-    <string name="fetching_subbed_channels_info_error">حدث خطأ أثناء جلب معلومات القنوات .</string>
+    <string name="fetching_subbed_channels_info">جارٍ إحضار معلومات القناة …</string>
+    <string name="fetching_subbed_channels_info_error">تعذر جلب معلومات القناة.</string>
     <string name="fetching_subscription_videos">جلب مقاطع الفيديو الجديدة من الاشتراكات…</string>
-    <string name="fetched_videos_from_channels">تم جلب %1$d مقطع فيديو من %2$d/%3$d من القنوات..</string>
-    <string name="no_new_videos_found">لم يتم العثور على مقاطع فيديو جديدة.</string>
+    <string name="fetched_videos_from_channels">حصلت %1$d مقاطع فيديو من %2$d/%3$d القنوات.</string>
+    <string name="no_new_videos_found">لا توجد مقاطع فيديو جديدة.</string>
     <string name="no_subscriptions_text">إشترك في بعض القنوات حتى تحصل على قائمة فيديوهات جديدة منها هنا.</string>
     <string name="import_subscriptions_from_youtube">استيراد الاشتراكات من YouTube</string>
     <string name="notification_channel_feed_title">خدمة الإشعارات</string>
