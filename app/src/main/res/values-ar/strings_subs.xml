@@ -6,18 +6,23 @@
     <string name="total_subscribers">%,d مشترك</string>
     <string name="subscribed">مشترك</string>
     <string name="unsubscribed">إلغاء الاشتراك</string>
-    <string name="error_get_subbed_channels">حدث خطأ أثناء جلب القنوات المشتركة.</string>
+    <string name="error_get_subbed_channels">تعذر جلب اشتراكات القناة.</string>
     <string name="error_check_if_user_has_subbed">غير قادر على التحقق مما إذا كان المستخدم قد اشترك في القناة أم لا (id=%s)</string>
-    <string name="error_unable_to_subscribe">لايمكن إلغاء الإشتراك من عنوان (id=%s) القنوات</string>
+    <string name="error_unable_to_subscribe">(un)تعذر الاشتراك من// للقناة (id=%s)</string>
     <string name="import_subscriptions">استيراد الإشتراكات</string>
-    <string name="import_subscriptions_description">استيراد الاشتراكات الخاصة بك من يوتيوب، بزيارة https://www.youtube.com/subscription_manager ، والنقر فوق زر \"تصدير الإشتراكات\" في الجزء السفلي. ثم حدد الملف الذي تم تصديره بعنوان \"subscription_manager\" بواسطة النقر فوق \"تحديد ملف الإشتراكات\" أدناه.</string>
-    <string name="subscriptions_to_channels_imported">تم أستيراد الاشتراك في قناة %d .</string>
+    <string name="import_subscriptions_description">قم بإلغاء تحديد كل شيء على https://takeout.google.com باستثناء \"YouTube و YouTube Music\" وانقر على \"جميع بيانات YouTube المضمنة\" للحصول على الاشتراكات فقط. انقر فوق \"التالي\" ثم \"إنشاء تصدير\". انقر لتلقي بريد إلكتروني به ارتباط تنزيل. قم بتنزيل الملف من عميل البريد الإلكتروني الخاص بك. حدد ملف ZIP هذا أو استخرجه وحدد subscriptions.csv أو subscriptions.json الموجود في (in / Takeout / YouTube و YouTube Music / Subscriptions /) باستخدام \"تحديد ملف الاشتراك\" أدناه.</string>
+    <string name="subscriptions_to_channels_imported">%d قناة(s) مستوردة.</string>
     <string name="select_all">تحديد الكل</string>
     <string name="select_none">لاتحدد شيء</string>
-    <string name="no_channels_found">لم يتم العثور على اي قنوات يوتيوب في ملف XML قمت بتحميله.</string>
-    <string name="no_new_channels_found">لم تم العثور على اي قنوات يوتيوب غير التي انت مشترك فيها بالفعل في ملف XML الذي قمت بتحميله.</string>
-    <string name="import_subscriptions_parse_error">تمت مصادفة خطأ أثناء محاولة تحليل ملف XML الذي قمت بتحميله: %s.</string>
-    <string name="failed_to_import_subscriptions">فشل استيراد اشتراكات اليوتيوب.</string>
+    <string name="no_channels_found">تعذر العثور على أي قنوات YouTube في الملف الذي قمت بتحميله.</string>
+    <string name="no_new_channels_found">لم يتم العثور على قنوات YouTube التي لم تشترك فيها بالفعل.</string>
+    <string name="import_subscriptions_parse_error">تعذر تحليل الملف الذي قمت بتحميله: %s.</string>
+    <string name="failed_to_import_subscriptions">تعذر استيراد اشتراكات YouTube الخاصة بك.</string>
     <string name="about">حول</string>
-    <string name="unsubscribe_from_all_current_sibbed_channels">إلغاء الاشتراك من جميع القنوات المشترك فيها حاليا.</string>
+    <string name="unsubscribe_from_all_current_sibbed_channels">إلغاء الاشتراك من جميع القنوات التي تشترك فيها حاليًا.</string>
+    <string name="channel_subscribed">تم الاشتراك بالقناة</string>
+    <string name="select_sub_file">حدد ملف الاشتراك</string>
+    <string name="channel_already_subscribed">انت مشترك في هذه القناة</string>
+    <string name="channel_subscribe_failed">غير قادر على الاشتراك بالقناة</string>
+    <string name="channel_unsubscribed">يلغى الاشتراك بالقناة</string>
 </resources>
