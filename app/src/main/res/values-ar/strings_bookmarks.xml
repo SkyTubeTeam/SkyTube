@@ -2,10 +2,14 @@
 <resources>
     <string name="bookmarks">الاشارات المرجعية</string>
     <string name="bookmark">اشارة مرجعية</string>
-    <string name="video_bookmarked">تم وضع إشارة مرجعية على الفيديو</string>
+    <string name="video_bookmarked">إشارة مرجعية</string>
     <string name="video_bookmarked_error">تعذر وضع إشارة على الفيديو.</string>
     <string name="unbookmark">إلغاء الاشاره المرجعية</string>
-    <string name="video_unbookmarked">تم إلغاء وضع علامة على الفيديو</string>
-    <string name="video_unbookmarked_error">تعذر إلغاء وضع علامة على الفيديو.</string>
+    <string name="video_unbookmarked">تمت إزالة الإشارة المرجعية</string>
+    <string name="video_unbookmarked_error">لا يمكن إزالة إشارة الفيديو.</string>
     <string name="no_bookmarked_videos_text">ضع إشارة مرجعية على بعض الفيديوهات لتجدها هنا.</string>
+    <string name="bookmark_share_invalid_url">يمكن وضع إشارة مرجعية على عناوين URL الصالحة على YouTube فقط.</string>
+    <string name="bookmark_share_label">إشارة مرجعية SkyTube</string>
+    <string name="video_was_not_bookmarked">لم يتم وضع إشارة مرجعية على الفيديو</string>
+    <string name="video_already_bookmarked">تم وضع إشارة مرجعية بالفعل</string>
 </resources>
