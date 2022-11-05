@@ -129,7 +129,7 @@
     <string name="pref_summary_enable_immersive_mode">Nascondi la barra di navigazione e la barra di stato durante la riproduzione.</string>
     <string name="pref_title_enable_immersive_mode">Modalità immersiva</string>
     <string name="pref_video_continuous_repeat_toggle">Ripetizione continua</string>
-    <string name="pref_hide_tabs_restart">Riavvia l\'applicazione per mostrare le schede aggiornate.</string>
+    <string name="pref_hide_tabs_restart">Riavvia l\'app, usa queste schede.</string>
     <string name="pref_summary_hide_tabs">Scegli le schede da non mostrare. Riavvio richiesto.</string>
     <string name="pref_title_hide_tabs">Nascondi le schede</string>
     <string name="pref_network_downloads_category">Rete e scaricamenti</string>
@@ -180,4 +180,6 @@
     <string name="pref_summary_sponsorblock_category_list">Scegli le categorie da saltare</string>
     <string name="pref_title_credit_sponsorblock">Titoli di Coda</string>
     <string name="pref_title_open_issue">Segnala problema</string>
+    <string name="pref_general">Generale</string>
+    <string name="pref_details">Dettagli</string>
 </resources>
