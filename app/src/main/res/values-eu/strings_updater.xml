@@ -9,4 +9,5 @@
     <string name="up_to_date">Eguneratua</string>
     <string name="update_dialog_msg">SkyTuberen bertsio berria eskuragarri dago. Bertsio %s jarriko da.</string>
     <string name="update_available">Bertsio berria eskuragarri</string>
+    <string name="android_too_old">Zoritxarrez, zure Android zaharregia da eguneratzeko. Eskuz instalatu behar duzu \"SkyTube Legacy\"!</string>
 </resources>

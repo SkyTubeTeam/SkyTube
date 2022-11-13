@@ -9,4 +9,5 @@
     <string name="up_to_date">已是最新</string>
     <string name="update_dialog_msg">新版本的SkyTube可用。版本 %s 将被安装。</string>
     <string name="update_available">有新版本可用</string>
+    <string name="android_too_old">不幸的是，你的 Android 设备太旧，无法更新。 你需要手动安装“SkyTube Legacy”！</string>
 </resources>

@@ -21,6 +21,7 @@
     <string name="error">Virhe</string>
     <string name="views">%,d näyttökertaa</string>
     <string name="could_not_get_channel_detailed">Ei voitu ladata kanavan tietoa: %s.</string>
-    <string name="could_not_get_channel">Ei voitu ladata kanavan tietoja!</string>
+    <string name="could_not_get_channel">Kanavan tietoja ei voitu ladata!</string>
     <string name="could_not_get_videos">Ei voitu ladata %s videota.</string>
+    <string name="could_not_get_sponsorblock">Sponsorieston tietoja ei voitu hakea: %s.</string>
 </resources>

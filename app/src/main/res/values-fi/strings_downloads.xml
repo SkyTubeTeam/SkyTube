@@ -8,10 +8,10 @@
     <string name="video_downloaded">\'%s\' ladattu.</string>
     <string name="delete_download">Poista lataus</string>
     <string name="video_stream_not_found_with_request_resolution">Yhtään videolähdettä ei löytynyt pyydetylle resoluutiolle, resoluutioiden %1$s ja %2$s välillä</string>
-    <string name="download_failed_because">Ei voitu tallentaa %1$s, koska: %2$s</string>
+    <string name="download_failed_because">Ei voitu tallentaa %1$s, koska %2$s.</string>
     <string name="video_download_stream_error">Ei voitu tallentaa \'%s\'.</string>
     <string name="starting_video_download">Tallennetaan \'%s\'…</string>
-    <string name="unable_to_delete_file">Ei voida poistaa tallennettua tiedostoa: \'%s\'</string>
+    <string name="unable_to_delete_file">Tallennettua tiedostoa ei voida poistaa: \'%s\'</string>
     <string name="download_video">Tallenna video</string>
     <string name="warning_metered_network_download">Laitteesi on yhdistetty datankulutukseen perustuvaan verkkoon. Välttääksesi mahdollisia ylimääräisiä datankäyttömaksuja, on suositeltavaa, että yhdistät kiinteähintaiseen verkkoon. Ladataanko video silti\?</string>
     <string name="downloads">Lataukset</string>

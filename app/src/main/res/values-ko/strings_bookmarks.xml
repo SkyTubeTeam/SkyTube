@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="video_bookmarked">즐겨찾기에 추가됨</string>
-    <string name="video_already_bookmarked">이미 즐겨찾기에 등록되어 있습니다.</string>
+    <string name="video_already_bookmarked">이미 즐겨찾기에 등록되어 있습니다</string>
     <string name="bookmarks">즐겨찾기</string>
     <string name="video_bookmarked_error">즐겨찾기에 추가할 수 없습니다.</string>
+    <string name="unbookmark">즐겨찾기 제거</string>
+    <string name="video_unbookmarked">즐겨찾기에 제거됨</string>
+    <string name="video_was_not_bookmarked">이 영상은 즐겨찾기 되어있지 않습니다</string>
+    <string name="bookmark">즐겨찾기</string>
+    <string name="bookmark_share_label">SkyTube 즐겨찾기</string>
+    <string name="bookmark_share_invalid_url">유효한 유튜브 URL만 즐겨찾기 할 수 있습니다.</string>
+    <string name="video_unbookmarked_error">즐겨찾기에 제거할 수 없습니다.</string>
+    <string name="no_bookmarked_videos_text">여기서 찾으려면 일부 동영상을 즐겨찾기에 추가하십시오.</string>
 </resources>

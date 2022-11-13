@@ -25,13 +25,13 @@
     <string name="pref_about_category">Tentang</string>
     <string name="pref_title_website">Situs Web</string>
     <string name="pref_title_credits">Kredit</string>
-    <string name="pref_summary_credits">Pengembang dan proyek yang membuat apl ini bisa terwujud.</string>
+    <string name="pref_summary_credits">Orang-orang hebat dan proyek gratis di balik aplikasi ini.</string>
     <string name="pref_title_version">Versi</string>
     <string name="pref_title_updates">Pembaruan</string>
     <string name="pref_summary_updates">Periksa versi terbaru.</string>
     <string name="pref_title_license">Lisensi</string>
     <string name="pref_summary_license">GPLv3+</string>
-    <string name="i_agree">Kembali</string>
+    <string name="i_agree">Saya Setuju.</string>
     <string name="pref_other_category">Lainnya</string>
     <string name="pref_title_default_tab">Tab Baku</string>
     <string name="pref_summary_default_tab">Tab yang ditampilkan saat menjalankan SkyTube: %s</string>
@@ -48,9 +48,9 @@
     <string name="pref_youtube_api_key_default">Mulai ulang apl untuk menggunakan kunci API YouTube bawaan.</string>
     <string name="restart">Mulai Ulang</string>
     <string name="pref_title_subscriptions_alphabetical_order">Urutkan Channel A - Z</string>
-    <string name="pref_summary_subscriptions_alphabetical_order">Tampilkan langganan Channel A-B-C….</string>
+    <string name="pref_summary_subscriptions_alphabetical_order">Tampilkan langganan Channel Menurut Abjad.</string>
     <string name="pref_category_downloads">Unduhan</string>
-    <string name="pref_title_download_to_separate_directories">Unduh Video ke Dalam Folder</string>
+    <string name="pref_title_download_to_separate_directories">Folder Download Channel</string>
     <string name="pref_summary_download_to_separate_directories">Video akan diunduh ke dalam folder berdasarkan nama channel.</string>
     <string name="pref_video_blocker_category">Pemblokir Video</string>
     <string name="pref_summary_enable_video_blocker">Aktifkan pemblokir video.</string>
@@ -155,4 +155,8 @@
     <string name="system_default_country">Sistem</string>
     <string name="pref_key_use_newer_formats_summary">Versi Android lama tidak mendukung semua format video, yang disediakan oleh YouTube. Nonaktifkan, jika Anda mengalami gangguan pemutaran video atau suara</string>
     <string name="pref_key_use_newer_formats_title">Coba format Video terbaru</string>
+    <string name="pref_title_open_issue">Buka sebuah masalah</string>
+    <string name="pref_summary_open_issue">menyarankan sebuah ide atau lapor sebuah bug.</string>
+    <string name="pref_title_use_dislike_api">Kembalikan kounter dislike</string>
+    <string name="pref_summary_use_dislike_api">Kembalikan kounter dislike menggunkanan returnyoutubedislike.com</string>
 </resources>

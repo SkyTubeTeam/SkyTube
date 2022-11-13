@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="tutorial_slide_6">Doppio tocco per mettere in pausa o avviare un video.</string>
-    <string name="next">"Successivo "</string>
+    <string name="next">Successivo</string>
     <string name="done">Fatto</string>
     <string name="skip">Salta</string>
     <string name="page_counter">%1$d di %2$d</string>
-    <string name="tutorial_slide_1">Scorri verso sinistra per vedere i commenti.</string>
-    <string name="tutorial_slide_2">Scorri verso l\'alto per vedere la descrizione del video.</string>
-    <string name="tutorial_slide_3">Scorri orizzontalmente per la ricerca in avanti o indietro.</string>
-    <string name="tutorial_slide_4">Scorri verticalmente per regolare il volume.</string>
-    <string name="tutorial_slide_5">Scorri verticalmente per regolare la luminosità.</string>
+    <string name="tutorial_slide_1">Scorri a ← per vedere i commenti.</string>
+    <string name="tutorial_slide_2">Scorri in ↑ per vedere la descrizione del video.</string>
+    <string name="tutorial_slide_3">Scorri in ← → per la ricerca in avanti o indietro.</string>
+    <string name="tutorial_slide_4">Scorri in ↑ ↓ per regolare il volume.</string>
+    <string name="tutorial_slide_5">Scorri in ↑ ↓ per regolare la luminosità.</string>
 </resources>

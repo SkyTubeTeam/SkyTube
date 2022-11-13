@@ -5,13 +5,13 @@
     <string name="download_video">Videonu Endirin</string>
     <string name="warning_metered_network_download">Qoşulduğunuz ölçülmüş şəbəkədə video endirilsin\?</string>
     <string name="unable_to_delete_file">Endirilmiş \"%s\" faylını silmək mümkün olmadı.</string>
-    <string name="starting_video_download">Endirilir \'%s\'…</string>
-    <string name="video_download_stream_error">\'%s\' endirmək mümkün olmadı.</string>
+    <string name="starting_video_download">\'%s\' endirilir…</string>
+    <string name="video_download_stream_error">\'%s\' endirilənmədi.</string>
     <string name="download_failed_because">%1$s endirilə bilmədi, çünki %2$s.</string>
     <string name="video_stream_not_found_with_request_resolution">Tələb olunan %1$s-%2$s keyfiyyətdə heç bir video axını tapmaq mümkün olmadı</string>
     <string name="delete_download">Endirməni Silin</string>
     <string name="video_downloaded">\'%s\' endirildi.</string>
     <string name="no_downloaded_videos_text">Burada tapmaq üçün bir neçə video endirin.</string>
-    <string name="playing_video_file_missing">Endirilə bilən fayl tapılmadığından video uzaqdan oynadılır.</string>
+    <string name="playing_video_file_missing">Endirilə bilən fayl tapılmadığından ancaq video oynadılır.</string>
     <string name="external_storage_not_available">Faylı endirmək üçün əvvəlcə xaricə giriş icazəsi verin.</string>
 </resources>

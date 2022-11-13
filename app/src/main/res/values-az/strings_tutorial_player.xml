@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="next">Növbəti</string>
-    <string name="done">Təsdiqləyin</string>
+    <string name="done">Təsdiqlə</string>
     <string name="skip">Ötürün</string>
     <string name="page_counter">%2$d / %1$d</string>
     <string name="tutorial_slide_1">Şərhlərə baxmaq üçün ← sürüşdürün.</string>

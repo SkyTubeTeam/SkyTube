@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="subscribing_to_channels">Kanallara abunə olunur…</string>
-    <string name="open_channel">Kanalı Açın</string>
+    <string name="open_channel">Kanalı Aç</string>
     <string name="fetching_subbed_channels_info">Kanal məlumatı alınır…</string>
     <string name="fetching_subbed_channels_info_error">Kanal məlumatını əldə etmək mümkün olmadı.</string>
     <string name="fetching_subscription_videos">Abunə olunmuş kanallardan videolar alınır…</string>

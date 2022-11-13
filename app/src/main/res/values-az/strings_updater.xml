@@ -2,11 +2,12 @@
 <resources>
     <string name="update_available">Yeni Versiya Mövcuddur</string>
     <string name="update_dialog_msg">SkyTube\'un yeni versiyası mövcuddur. %s versiyası quraşdırılacaq.</string>
-    <string name="up_to_date">Yenilənib</string>
+    <string name="up_to_date">Güncəldir 😆</string>
     <string name="up_to_date_msg">Sizdə SkyTube\'un ən yeni versiyası quraşdırılıb.</string>
     <string name="release_notes">%s-də Dəyişikliklər</string>
     <string name="update">Yeniləyin</string>
     <string name="later">Daha sonra</string>
     <string name="update_failure">Tətbiqin yeni versiyasını quraşdırmaq mümkün olmadı.</string>
     <string name="downloading">Endirilir…</string>
+    <string name="android_too_old">Təəssüf ki, Androidiniz yeniləmək üçün çox köhnədir. Siz \"SkyTube Legacy\" tətbiqini əl ilə quraşdırmalısınız!</string>
 </resources>

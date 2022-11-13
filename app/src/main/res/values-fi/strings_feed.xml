@@ -7,8 +7,8 @@
 \n
 \nKun teet niin, tilaamiesi kanavien uudet videot viimeisen kuukauden ajalta näytetään täällä.</string>
     <string name="no_new_videos_found">Uusia videoita ei löytynyt.</string>
-    <string name="fetched_videos_from_channels">Noudettu %1$d video(ta) %2$d/%3$d kanavalta.</string>
-    <string name="fetching_subscription_videos">Videoiden nouto tilatuilta kanavilta</string>
+    <string name="fetched_videos_from_channels">Haettu %1$d video(ta) %2$d/%3$d kanavalta.</string>
+    <string name="fetching_subscription_videos">Haetaan videoita tilatuilta kanavilta…</string>
     <string name="fetching_subbed_channels_info_error">Virhe kanavan tietojen lataamisessa.</string>
     <string name="fetching_subbed_channels_info">Kerätään kanavan tietoja…</string>
     <string name="open_channel">Avaa kanava</string>

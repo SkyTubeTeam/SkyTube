@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="downloading">Tallennetaan…</string>
-    <string name="update_failure">Ei voida päivittää sovellusta.</string>
+    <string name="update_failure">Sovelluksen uutta versiota ei voitu asentaa.</string>
     <string name="later">Myöhemmin</string>
     <string name="update">Päivitä</string>
     <string name="release_notes">Muutokset kohteessa %s</string>
