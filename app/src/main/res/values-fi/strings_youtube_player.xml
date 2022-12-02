@@ -38,4 +38,11 @@
     <string name="error_stream_parse_error">Jäsennysvirhe.</string>
     <string name="error_stream_decryption_fail">Ei voitu ladata kryptauksen purkukoodia YouTube-palvelua varten.</string>
     <string name="error_stream_err_unavailable">Virheilmoitus ei ole saatavilla.</string>
+    <string name="sponsorblock_skipped">Ohitettu osuus: %s</string>
+    <string name="sponsorblock_category_sponsor">Sponsori</string>
+    <string name="sponsorblock_category_selfpromo">Itsensä mainostaminen</string>
+    <string name="sponsorblock_category_interaction">Muistutus Vuorovaikutuksesta</string>
+    <string name="sponsorblock_category_music_offtopic">Hiljainen Kohta</string>
+    <string name="sponsorblock_category_intro">Intro/Tauko</string>
+    <string name="sponsorblock_category_outro">Lopputekstit</string>
 </resources>
