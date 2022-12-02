@@ -3,10 +3,8 @@
     <string name="notification_new_videos_found">%d uutta videota tilatuilta kanavilta</string>
     <string name="notification_channel_feed_title">Syöteilmoitukset</string>
     <string name="import_subscriptions_from_youtube">Tuo tilaukset YouTubesta</string>
-    <string name="no_subscriptions_text">Et ole tilannut yhtään kanavaa.
-\n
-\nKun teet niin, tilaamiesi kanavien uudet videot viimeisen kuukauden ajalta näytetään täällä.</string>
-    <string name="no_new_videos_found">Uusia videoita ei löytynyt.</string>
+    <string name="no_subscriptions_text">Tilaa kanavia nähdäksesi niiden tuoreita videoita täällä.</string>
+    <string name="no_new_videos_found">Ei uusia videoita.</string>
     <string name="fetched_videos_from_channels">Haettu %1$d video(ta) %2$d/%3$d kanavalta.</string>
     <string name="fetching_subscription_videos">Haetaan videoita tilatuilta kanavilta…</string>
     <string name="fetching_subbed_channels_info_error">Virhe kanavan tietojen lataamisessa.</string>
