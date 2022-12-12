@@ -96,6 +96,15 @@ public abstract class Pager<I extends InfoItem, O> implements PagerBackend<O> {
         }
     }
 
+    public List<O> getPageAndProcess(Page page) throws NewPipeException {
+        try {
+            return process(channelExtractor.getPage(page));
+        } catch (IOException| ExtractionException| RuntimeException e) {
+            throw new NewPipeException("Error:" + e.getMessage() +
+                    (page != null ? " (page=" + page.getUrl() + ",ids=" + page.getIds() + ")" : ""), e);
+        }
+    }
+
     @Override
     public List<O> getSafeNextPage() {
         try {
@@ -107,13 +116,13 @@ public abstract class Pager<I extends InfoItem, O> implements PagerBackend<O> {
         }
     }
 
-    protected List<O> process(ListExtractor.InfoItemsPage<I> page) throws NewPipeException {
+    protected List<O> process(ListExtractor.InfoItemsPage<I> page) throws NewPipeException, ExtractionException {
         nextPage = page.getNextPage();
         hasNextPage = page.hasNextPage();
         return extract(page);
     }
 
 
-    protected abstract List<O> extract(InfoItemsPage<I> page) throws NewPipeException;
+    protected abstract List<O> extract(InfoItemsPage<I> page) throws NewPipeException, ExtractionException ;
 
 }

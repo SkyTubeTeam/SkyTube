@@ -39,6 +39,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.BaseExpandableListAdapter;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -131,7 +132,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 
     private Menu menu = null;
 
-    private CommentsAdapter commentsAdapter = null;
+    private BaseExpandableListAdapter commentsAdapter = null;
     private YouTubePlayerActivityListener listener = null;
     private PlayerViewGestureHandler playerViewGestureHandler;
 
@@ -256,9 +257,9 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
         });
         fragmentBinding.commentsDrawer.setOnDrawerOpenListener(() -> {
             if (commentsAdapter == null) {
-                commentsAdapter = new CommentsAdapter(getActivity(), youTubeVideo.getId(),
+                commentsAdapter = CommentsAdapter.createAdapter(getActivity(), youTubeVideo.getId(),
                         fragmentBinding.commentsExpandableListView, fragmentBinding.commentsProgressBar,
-                        fragmentBinding.noVideoCommentsTextView);
+                        fragmentBinding.noVideoCommentsTextView, fragmentBinding.videoCommentsAreDisabled);
             }
         });
         this.playbackSpeedController = new PlaybackSpeedController(getContext(),

@@ -64,6 +64,18 @@
 				android:text="21"
 				app:drawableLeftCompat="@drawable/ic_thumb_up"
 				app:drawableStartCompat="@drawable/ic_thumb_up" />
+
+			<ImageView
+				android:id="@+id/pinned_view"
+				style="@style/CommentInfoTextView"
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent" />
+
+			<ImageView
+				android:id="@+id/hearted_view"
+				style="@style/CommentInfoTextView"
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent" />
 		</LinearLayout>
 
 		<TextView

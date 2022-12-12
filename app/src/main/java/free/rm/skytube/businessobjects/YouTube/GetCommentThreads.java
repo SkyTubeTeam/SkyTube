@@ -27,15 +27,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeCommentThread;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPI;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPIKey;
-import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeCommentThread;
-import free.rm.skytube.businessobjects.YouTube.newpipe.PagerBackend;
 
 /**
  * Queries the YouTube service and gets the comments of a video.
  */
-public class GetCommentThreads implements PagerBackend<YouTubeCommentThread> {
+public class GetCommentThreads {
 
 	private final String	videoId;
 	private String	nextPageToken = null;
@@ -46,6 +45,7 @@ public class GetCommentThreads implements PagerBackend<YouTubeCommentThread> {
 	private static final Long	MAX_RESULTS = 20L;
 	private static final String	TAG = GetCommentThreads.class.getSimpleName();
 
+	private List<YouTubeCommentThread> fetchedThreads = new ArrayList<>();
 
 	public GetCommentThreads(String videoId) throws IOException {
 		this.videoId = videoId;
@@ -66,13 +66,11 @@ public class GetCommentThreads implements PagerBackend<YouTubeCommentThread> {
 	 *
 	 * @return	A list/page of {@link YouTubeCommentThread}.
 	 */
-	@Override
 	public List<YouTubeCommentThread> getSafeNextPage() {
 		lastException = null;
-		List<YouTubeCommentThread> commentThreadList = new ArrayList<>();
 
 		if (noMoreCommentPages  ||  commentsList == null) {
-			commentThreadList = null;
+			return null;
 		} else {
 			try {
 				// set the page token/id to retrieve
@@ -82,29 +80,32 @@ public class GetCommentThreads implements PagerBackend<YouTubeCommentThread> {
 				CommentThreadListResponse response = commentsList.execute();
 				List<CommentThread> videoComments = response.getItems();
 
+				List<YouTubeCommentThread> commentThreadList = new ArrayList<>(videoComments.size());
+
 				// convert the comments from CommentThread to YouTubeCommentThread
 				if (!videoComments.isEmpty()) {
 					for (CommentThread thread : videoComments) {
 						commentThreadList.add(new YouTubeCommentThread(thread));
 					}
+					fetchedThreads.addAll(commentThreadList);
 				}
 
 				// set the next page token
 				nextPageToken = response.getNextPageToken();
 
 				// if nextPageToken is null, it means that there are no more comments
-				if (nextPageToken == null)
+				if (nextPageToken == null) {
 					noMoreCommentPages = true;
+				}
+				return commentThreadList;
 			} catch (IOException ex) {
 				lastException = ex;
 				Log.e(TAG, "An error has occurred while retrieving comments for video with id=" + videoId + ", key="+ commentsList.getKey()+", error="+ ex.getMessage(), ex);
+				return null;
 			}
 		}
-
-		return commentThreadList;
 	}
 
-	@Override
 	public IOException getLastException() {
 		return lastException;
 	}
