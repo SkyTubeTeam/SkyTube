@@ -120,6 +120,18 @@
 				style="@style/NoCommentsMsgTextView"
 				android:visibility="gone"/>
 
+			<TextView
+				android:id="@+id/video_comments_are_disabled"
+				android:layout_centerInParent="true"
+				android:gravity="center"
+				android:paddingTop="17dp"
+				android:paddingBottom="17dp"
+				android:paddingLeft="7dp"
+				android:paddingRight="7dp"
+				android:text="@string/video_comments_are_disabled"
+				style="@style/NoCommentsMsgTextView"
+				android:visibility="gone"/>
+
 			<ExpandableListView
 				android:id="@+id/commentsExpandableListView"
 				android:layout_width="match_parent"

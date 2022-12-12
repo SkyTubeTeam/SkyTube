@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.BaseExpandableListAdapter;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -96,7 +97,7 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 	private int videoCurrentPosition = 0;
 	private MediaControllerEx mediaController = null;
 
-	private CommentsAdapter	commentsAdapter = null;
+	private BaseExpandableListAdapter commentsAdapter = null;
 
 	private Menu menu = null;
 	private YouTubePlayerActivityListener listener = null;
@@ -403,9 +404,9 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 
 		fragmentBinding.commentsDrawer.setOnDrawerOpenListener(() -> {
 			if (commentsAdapter == null && youTubeVideo != null) {
-				commentsAdapter = new CommentsAdapter(getActivity(), youTubeVideo.getId(),
+				commentsAdapter = CommentsAdapter.createAdapter(getActivity(), youTubeVideo.getId(),
 						fragmentBinding.commentsExpandableListView, fragmentBinding.commentsProgressBar,
-						fragmentBinding.noVideoCommentsTextView);
+						fragmentBinding.noVideoCommentsTextView, fragmentBinding.videoCommentsAreDisabled);
 			}
 		});
 

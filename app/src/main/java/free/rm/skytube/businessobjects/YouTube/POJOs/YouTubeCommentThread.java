@@ -29,53 +29,48 @@ import java.util.List;
  */
 public class YouTubeCommentThread {
 
-	/** Top-level comment. */
-	private YouTubeComment			comment;
-	/** Replies. */
-	private List<YouTubeComment>	repliesList = new ArrayList<>();
+    /** Top-level comment. */
+    private YouTubeComment			comment;
+    /** Replies. */
+    private List<YouTubeComment>	repliesList = new ArrayList<>();
 
-	public YouTubeCommentThread(CommentThread commentThread) {
-		if (isCommentThreadOkay(commentThread)) {
-			this.comment = new YouTubeComment(commentThread.getSnippet().getTopLevelComment());
+    public YouTubeCommentThread(CommentThread commentThread) {
+        if (isCommentThreadOkay(commentThread)) {
+            this.comment = new YouTubeComment(commentThread.getSnippet().getTopLevelComment());
 
-			if (hasAnyReplies(commentThread)) {
-				List<Comment> commentRepliesList = commentThread.getReplies().getComments();
-				Collections.reverse(commentRepliesList);	// reverse as the newest comments are put at the front of the list -- so we need to invert it
+            if (hasAnyReplies(commentThread)) {
+                List<Comment> commentRepliesList = commentThread.getReplies().getComments();
+                Collections.reverse(commentRepliesList);	// reverse as the newest comments are put at the front of the list -- so we need to invert it
 
-				for (Comment comment : commentRepliesList) {
-					repliesList.add(new YouTubeComment(comment));
-				}
-			}
-		}
+                for (Comment comment : commentRepliesList) {
+                    repliesList.add(new YouTubeComment(comment));
+                }
+            }
+        }
 
-	}
+    }
 
-	public YouTubeCommentThread(YouTubeComment comment) {
-		this.comment = comment;
-	}
-
-	private boolean isCommentThreadOkay(CommentThread commentThread) {
-		return (commentThread.getSnippet() != null
-				&& commentThread.getSnippet().getTopLevelComment() != null);
-	}
+    private boolean isCommentThreadOkay(CommentThread commentThread) {
+        return (commentThread.getSnippet() != null
+                && commentThread.getSnippet().getTopLevelComment() != null);
+    }
 
 
-	private boolean hasAnyReplies(CommentThread commentThread) {
-		return (commentThread.getReplies() != null
-				&& commentThread.getReplies().size() > 0);
-	}
+    private boolean hasAnyReplies(CommentThread commentThread) {
+        return (commentThread.getReplies() != null
+                && commentThread.getReplies().size() > 0);
+    }
 
+    public List<YouTubeComment> getRepliesList() {
+        return repliesList;
+    }
 
-	public YouTubeComment getTopLevelComment() {
-		return comment;
-	}
+    public YouTubeComment getTopLevelComment() {
+        return comment;
+    }
 
-	public List<YouTubeComment> getRepliesList() {
-		return repliesList;
-	}
-
-	public int getTotalReplies() {
-		return repliesList.size();
-	}
+    public int getTotalReplies() {
+        return repliesList.size();
+    }
 
 }

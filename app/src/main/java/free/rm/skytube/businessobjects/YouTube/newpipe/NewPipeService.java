@@ -230,7 +230,7 @@ public class NewPipeService {
             final ListLinkHandler linkHandler = streamingService.getCommentsLHFactory().fromId(videoId);
             final CommentsExtractor commentsExtractor = streamingService.getCommentsExtractor(linkHandler);
             return new CommentPager(streamingService, commentsExtractor);
-        } catch (ExtractionException | RuntimeException e) {
+        } catch (ExtractionException | RuntimeException | IOException e) {
             throw new NewPipeException("Getting comments for " + videoId + " fails:" + e.getMessage(), e);
         }
     }

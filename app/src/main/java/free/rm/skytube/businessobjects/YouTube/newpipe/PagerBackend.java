@@ -22,5 +22,4 @@ public interface PagerBackend<I> {
     Exception getLastException();
 
     List<I> getSafeNextPage();
-
 }

@@ -18,6 +18,7 @@
 package free.rm.skytube.gui.businessobjects.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,228 +26,331 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.mikepenz.iconics.IconicsColor;
+import com.mikepenz.iconics.IconicsDrawable;
+import com.mikepenz.iconics.IconicsSize;
+import com.mikepenz.iconics.typeface.library.materialdesigniconic.MaterialDesignIconic;
+
+import org.schabi.newpipe.extractor.comments.CommentsInfoItem;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
-import free.rm.skytube.businessobjects.YouTube.GetCommentThreads;
-import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeComment;
-import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeCommentThread;
+import free.rm.skytube.businessobjects.AsyncTaskParallel;
+import free.rm.skytube.businessobjects.YouTube.newpipe.CommentPager;
+import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeException;
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
-import free.rm.skytube.businessobjects.YouTube.newpipe.PagerBackend;
 import free.rm.skytube.databinding.CommentBinding;
+import free.rm.skytube.gui.businessobjects.views.Linker;
 
 /**
  * An adapter that will display comments in an {@link ExpandableListView}.
  */
 public class CommentsAdapter extends BaseExpandableListAdapter {
 
-	private PagerBackend<YouTubeCommentThread> commentThreadPager;
-	private List<YouTubeCommentThread>	commentThreadsList = new ArrayList<>();
-	private GetCommentsTask				getCommentsTask = null;
-	private ExpandableListView			expandableListView;
-	private View						commentsProgressBar;
-	private View						noVideoCommentsView;
-	private LayoutInflater				layoutInflater;
-	private Context 					context;
+    private CommentPager commentThreadPager;
+    private GetCommentsTask getCommentsTask = null;
+    private ExpandableListView expandableListView;
+    private View commentsProgressBar;
+    private View noVideoCommentsView;
+    private View disabledCommentsView;
+    private LayoutInflater layoutInflater;
+    private Context context;
+    private IconicsDrawable heartedIcon;
+    private IconicsDrawable pinnedIcon;
 
-	private static final String TAG = CommentsAdapter.class.getSimpleName();
+    private Map<String, List<CommentsInfoItem>> replyMap = new HashMap<>();
+
+    private static final String TAG = CommentsAdapter.class.getSimpleName();
+
+    public CommentsAdapter(Context context, String videoId, ExpandableListView expandableListView, View commentsProgressBar, View noVideoCommentsView, View disabledCommentsView) {
+        this.context = context;
+        this.heartedIcon = new IconicsDrawable(context)
+                .icon(MaterialDesignIconic.Icon.gmi_favorite)
+                .color(IconicsColor.colorInt(Color.RED))
+                .size(IconicsSize.TOOLBAR_ICON_SIZE)
+				.padding(IconicsSize.TOOLBAR_ICON_PADDING);
+        this.pinnedIcon = new IconicsDrawable(context)
+                .icon(MaterialDesignIconic.Icon.gmi_pin)
+                .color(IconicsColor.colorInt(Color.RED))
+                .size(IconicsSize.TOOLBAR_ICON_SIZE)
+				.padding(IconicsSize.TOOLBAR_ICON_PADDING);
+        Log.i(TAG, "heartedIcon: " + heartedIcon + ", pads: " + IconicsSize.TOOLBAR_ICON_PADDING);
+        try {
+            this.commentThreadPager = NewPipeService.get().getCommentPager(videoId);
+            this.expandableListView = expandableListView;
+            this.expandableListView.setAdapter(this);
+            this.expandableListView.setOnGroupClickListener((parent, v, groupPosition, id) -> true);
+            this.commentsProgressBar = commentsProgressBar;
+            this.noVideoCommentsView = noVideoCommentsView;
+            this.disabledCommentsView = disabledCommentsView;
+            this.layoutInflater = LayoutInflater.from(expandableListView.getContext());
+            this.getCommentsTask = new GetCommentsTask();
+            this.getCommentsTask.execute();
+        } catch (Exception e) {
+            Log.e(TAG, "fetching comments failed for  " + videoId + " - " + e.getMessage(), e);
+            SkyTubeApp.notifyUserOnError(context, e);
+        }
+    }
+
+    @Override
+    public int getGroupCount() {
+        return commentThreadPager != null ? commentThreadPager.getCommentCount() : 0;
+    }
+
+    /**
+     * @param groupPosition the position of the group for which the children
+     *                      count should be returned
+     * @return the number of replies, which are already loaded
+     */
+    @Override
+    public int getChildrenCount(int groupPosition) {
+        if (commentThreadPager != null) {
+            CommentsInfoItem comment = commentThreadPager.getComment(groupPosition);
+            if (comment != null && comment.getReplyCount() > 0) {
+                return (replyMap.get(comment.getCommentId()) != null) ? comment.getReplyCount() : 0;
+            }
+        }
+        return 0;
+    }
+
+    @Override
+    public Object getGroup(int groupPosition) {
+        return commentThreadPager != null ? commentThreadPager.allThreads().get(groupPosition) : 0;
+    }
+
+    @Override
+    public Object getChild(int groupPosition, int childPosition) {
+        return getComment(groupPosition, childPosition);
+    }
+
+    @Override
+    public long getGroupId(int groupPosition) {
+        return groupPosition;
+    }
+
+    @Override
+    public long getChildId(int groupPosition, int childPosition) {
+        return (groupPosition * 1024) + childPosition;
+    }
+
+    @Override
+    public boolean hasStableIds() {
+        return true;
+    }
+
+    @Override
+    public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
+        Log.i(TAG, "getGroupView " + groupPosition + " " + isExpanded + ", view=" + convertView + ", parent=" + parent);
+        CommentsInfoItem comment = commentThreadPager.getComment(groupPosition);
+        final CommentViewHolder viewHolder = getCommentViewHolder(convertView, parent);
+        viewHolder.updateInfo(comment, true, groupPosition);
+
+        // if it reached the bottom of the list, then try to get the next page of videos
+        if (groupPosition == getGroupCount() - 1) {
+            synchronized (this) {
+                if (this.getCommentsTask == null) {
+                    Log.w(TAG, "Getting next page of comments...");
+                    this.getCommentsTask = new GetCommentsTask();
+                    this.getCommentsTask.execute();
+                }
+            }
+        }
+        if (isExpanded) {
+            ensureRepliesLoaded(comment);
+        }
+        return viewHolder.getView();
+    }
+
+    private synchronized void ensureRepliesLoaded(CommentsInfoItem comment) {
+        if (replyMap.get(comment.getCommentId()) == null) {
+            new GetReplies().executeInParallel(comment);
+        }
+    }
+
+    @Override
+    public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+        Log.i(TAG, "getChildView " + groupPosition + " " + childPosition + " lastChild=" + isLastChild + ", view=" + convertView + ", parent=" + parent);
+        CommentsInfoItem comment = getComment(groupPosition, childPosition);
+        final CommentViewHolder viewHolder = getCommentViewHolder(convertView, parent);
+        if (comment != null) {
+            viewHolder.updateInfo(comment, false, groupPosition);
+        }
+
+        return viewHolder.getView();
+    }
+
+    private CommentsInfoItem getComment(int idx, int childIdx) {
+        CommentsInfoItem parent = commentThreadPager.getComment(idx);
+        if (parent == null) {
+            return null;
+        }
+        List<CommentsInfoItem> replies = replyMap.get(parent.getCommentId());
+        return replies != null && 0 <= childIdx && childIdx < replies.size() ? replies.get(childIdx) : null;
+    }
 
 
-	public CommentsAdapter(Context context, String videoId, ExpandableListView expandableListView, View commentsProgressBar, View noVideoCommentsView) {
-		this.context = context;
-		this.expandableListView = expandableListView;
-		this.expandableListView.setAdapter(this);
-		this.expandableListView.setOnGroupClickListener((parent, v, groupPosition, id) -> true);
-		this.commentsProgressBar = commentsProgressBar;
-		this.noVideoCommentsView = noVideoCommentsView;
-		this.layoutInflater = LayoutInflater.from(expandableListView.getContext());
-		try {
-			this.commentThreadPager = NewPipeService.isPreferred() ? NewPipeService.get().getCommentPager(videoId) : new GetCommentThreads(videoId);
-			this.getCommentsTask = new GetCommentsTask();
-			this.getCommentsTask.execute();
-		} catch (Exception e) {
-			SkyTubeApp.notifyUserOnError(context, e);
-		}
-	}
+    @Override
+    public boolean isChildSelectable(int groupPosition, int childPosition) {
+        return false;
+    }
 
-	@Override
-	public int getGroupCount() {
-		return commentThreadsList.size();
-	}
+    private @NonNull CommentViewHolder getCommentViewHolder(View convertView, ViewGroup parent) {
+        if (convertView != null) {
+            Object tag = convertView.getTag();
+            if (tag instanceof CommentViewHolder) {
+                return (CommentViewHolder) tag;
+            }
+        }
+        final View row = layoutInflater.inflate(R.layout.comment, parent, false);
+        final CommentViewHolder viewHolder = new CommentViewHolder(CommentBinding.bind(row));
+        row.setTag(viewHolder);
+        return viewHolder;
+    }
 
-	@Override
-	public int getChildrenCount(int groupPosition) {
-		return commentThreadsList.get(groupPosition).getTotalReplies();
-	}
+    ////////////
 
-	@Override
-	public Object getGroup(int groupPosition) {
-		return commentThreadsList.get(groupPosition);
-	}
+    private class CommentViewHolder {
+        private final CommentBinding binding;
 
-	@Override
-	public Object getChild(int groupPosition, int childPosition) {
-		return commentThreadsList.get(groupPosition).getRepliesList().get(childPosition);
-	}
+        protected CommentViewHolder(CommentBinding binding) {
+            this.binding = binding;
+        }
 
-	@Override
-	public long getGroupId(int groupPosition) {
-		return groupPosition;
-	}
+        public View getView() {
+            return binding.getRoot();
+        }
 
-	@Override
-	public long getChildId(int groupPosition, int childPosition) {
-		return (groupPosition * 1024) + childPosition;
-	}
+        protected void updateInfo(final CommentsInfoItem comment, boolean isTopLevelComment, final int groupPosition) {
+            binding.heartedView.setImageDrawable(heartedIcon);
+            binding.pinnedView.setImageDrawable(pinnedIcon);
+            binding.heartedView.setVisibility(comment.isHeartedByUploader() ? View.VISIBLE : View.GONE);
+            binding.pinnedView.setVisibility(comment.isPinned() ? View.VISIBLE : View.GONE);
+            binding.commentPaddingView.setVisibility(isTopLevelComment ? View.GONE : View.VISIBLE);
+            binding.authorTextView.setText(comment.getUploaderName());
+            Linker.setTextAndLinkify(binding.commentTextView, comment.getCommentText().getContent());
+            binding.commentDateTextView.setText(comment.getTextualUploadDate());
+            binding.commentUpvotesTextView.setText(String.valueOf(comment.getLikeCount()));
+            Glide.with(context)
+                    .load(comment.getThumbnailUrl())
+                    .apply(new RequestOptions().placeholder(R.drawable.channel_thumbnail_default))
+                    .into(binding.commentThumbnailImageView);
 
-	@Override
-	public boolean hasStableIds() {
-		return true;
-	}
+            binding.commentThumbnailImageView.setOnClickListener(view -> {
+                if (comment.getUploaderUrl() != null) {
+                    SkyTubeApp.launchChannel(comment.getUploaderUrl(), context);
+                }
+            });
 
-	@Override
-	public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-		return getParentOrChildView(true, groupPosition, 0 /*ignore this*/, convertView, parent);
-	}
+            // change the width dimensions depending on whether the comment is a top level or a child
+            ViewGroup.LayoutParams lp = binding.commentThumbnailImageView.getLayoutParams();
+            lp.width = (int) SkyTubeApp.getDimension(isTopLevelComment ? R.dimen.top_level_comment_thumbnail_width : R.dimen.child_comment_thumbnail_width);
 
-	@Override
-	public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-		return getParentOrChildView(false, groupPosition, childPosition, convertView, parent);
-	}
+            if (isTopLevelComment && comment.getReplyCount() > 0) {
+                binding.viewAllRepliesTextView.setVisibility(View.VISIBLE);
 
-	@Override
-	public boolean isChildSelectable(int groupPosition, int childPosition) {
-		return false;
-	}
+                // on click, hide/show the comment replies
+                binding.getRoot().setOnClickListener(viewReplies -> {
+                    if (expandableListView.isGroupExpanded(groupPosition)) {
+                        binding.viewAllRepliesTextView.setText(R.string.view_replies);
+                        expandableListView.collapseGroup(groupPosition);
+                    } else {
+                        binding.viewAllRepliesTextView.setText(R.string.hide_replies);
+                        expandableListView.expandGroup(groupPosition);
+                    }
+                });
+            } else {
+                binding.viewAllRepliesTextView.setVisibility(View.GONE);
+            }
+        }
+    }
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////
 
-	private View getParentOrChildView(boolean getParentView, int groupPosition, int childPosition, View convertView, ViewGroup parent) {
-		View row;
-		CommentViewHolder viewHolder;
+    private class GetReplies extends AsyncTaskParallel<CommentsInfoItem, Void, List<String>> {
 
-		if (convertView == null) {
-			row = layoutInflater.inflate(R.layout.comment, parent, false);
-			viewHolder = new CommentViewHolder(CommentBinding.bind(row));
-			row.setTag(viewHolder);
-		} else {
-			row = convertView;
-			viewHolder = (CommentViewHolder) row.getTag();
-		}
+        @Override
+        protected List<String> doInBackground(CommentsInfoItem... repliesFor) {
+            List<String> ids = new ArrayList<>(repliesFor.length);
+            for (CommentsInfoItem item : repliesFor) {
+                try {
+                    List<CommentsInfoItem> replies = commentThreadPager.getPageAndProcess(item.getReplies());
+                    replyMap.put(item.getCommentId(), replies);
+                    ids.add(item.getCommentId());
+                } catch (NewPipeException e) {
+                    lastException = e;
+                    Log.e(TAG, "Unable to get replies " + item + " -> " + e.getMessage(), e);
+                }
+            }
+            return ids;
+        }
 
-		if (viewHolder != null) {
-			YouTubeComment comment;
+        @Override
+        protected void onPostExecute(List<String> commentsInfoItems) {
+            if (!commentsInfoItems.isEmpty()) {
+                CommentsAdapter.this.notifyDataSetChanged();
+            }
+            super.onPostExecute(commentsInfoItems);
+        }
 
-			if (getParentView)
-				comment = ((YouTubeCommentThread)getGroup(groupPosition)).getTopLevelComment();
-			else
-				comment = (YouTubeComment)getChild(groupPosition, childPosition);
+        @Override
+        protected void showErrorToUi() {
+            if (lastException != null) {
+                Toast.makeText(CommentsAdapter.this.context, lastException.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        }
+    }
 
-			viewHolder.updateInfo(comment, getParentView, groupPosition);
-		}
+    private class GetCommentsTask extends AsyncTask<Void, Void, List<CommentsInfoItem>> {
 
-		// if it reached the bottom of the list, then try to get the next page of videos
-		if (getParentView  &&  groupPosition == getGroupCount() - 1) {
-			synchronized (this) {
-				if (this.getCommentsTask == null) {
-					Log.w(TAG, "Getting next page of comments...");
-					this.getCommentsTask = new GetCommentsTask();
-					this.getCommentsTask.execute();
-				}
-			}
-		}
+        @Override
+        protected void onPreExecute() {
+            commentsProgressBar.setVisibility(View.VISIBLE);
+            noVideoCommentsView.setVisibility(View.GONE);
+        }
 
-		return row;
-	}
+        @Override
+        protected List<CommentsInfoItem> doInBackground(Void... params) {
+            return commentThreadPager.getSafeNextPage();
+        }
 
+        @Override
+        protected void onPostExecute(List<CommentsInfoItem> newComments) {
+            SkyTubeApp.notifyUserOnError(expandableListView.getContext(), commentThreadPager.getLastException());
 
-	////////////
-
-	private class CommentViewHolder {
-		private final CommentBinding binding;
-
-		protected CommentViewHolder(CommentBinding binding) {
-			this.binding = binding;
-		}
-
-		protected void updateInfo(final YouTubeComment comment, boolean isTopLevelComment, final int groupPosition) {
-			binding.commentPaddingView.setVisibility(isTopLevelComment ? View.GONE : View.VISIBLE);
-			binding.authorTextView.setText(comment.getAuthor());
-			binding.commentTextView.setText(comment.getComment());
-			binding.commentDateTextView.setText(comment.getDatePublished());
-			binding.commentUpvotesTextView.setText(String.valueOf(comment.getLikeCount()));
-			Glide.with(context)
-					.load(comment.getThumbnailUrl())
-					.apply(new RequestOptions().placeholder(R.drawable.channel_thumbnail_default))
-					.into(binding.commentThumbnailImageView);
-
-			binding.commentThumbnailImageView.setOnClickListener(view -> {
-				if(comment.getAuthorChannelId() != null) {
-					SkyTubeApp.launchChannel(comment.getAuthorChannelId(), context);
-				}
-			});
-
-			// change the width dimensions depending on whether the comment is a top level or a child
-			ViewGroup.LayoutParams lp = binding.commentThumbnailImageView.getLayoutParams();
-			lp.width = (int) SkyTubeApp.getDimension(isTopLevelComment  ?  R.dimen.top_level_comment_thumbnail_width  :  R.dimen.child_comment_thumbnail_width);
-
-			if (isTopLevelComment  &&  getChildrenCount(groupPosition) > 0) {
-				binding.viewAllRepliesTextView.setVisibility(View.VISIBLE);
-
-				// on click, hide/show the comment replies
-				binding.getRoot().setOnClickListener(viewReplies -> {
-					if (expandableListView.isGroupExpanded(groupPosition)) {
-						binding.viewAllRepliesTextView.setText(R.string.view_replies);
-						expandableListView.collapseGroup(groupPosition);
-					} else {
-						binding.viewAllRepliesTextView.setText(R.string.hide_replies);
-						expandableListView.expandGroup(groupPosition);
-					}
-				});
-			} else {
-				binding.viewAllRepliesTextView.setVisibility(View.GONE);
-			}
-		}
-	}
-
-	////////////////////////////////////////////////////////////////////////////////////////////////
-
-	private class GetCommentsTask extends AsyncTask<Void, Void, List<YouTubeCommentThread>> {
-
-		@Override
-		protected void onPreExecute() {
-			commentsProgressBar.setVisibility(View.VISIBLE);
-			noVideoCommentsView.setVisibility(View.GONE);
-		}
-
-		@Override
-		protected  List<YouTubeCommentThread> doInBackground(Void... params) {
-			return commentThreadPager.getSafeNextPage();
-		}
-
-		@Override
-		protected void onPostExecute(List<YouTubeCommentThread> newComments) {
-			SkyTubeApp.notifyUserOnError(expandableListView.getContext(), commentThreadPager.getLastException());
-
-			if (newComments != null) {
-				if (newComments.size() > 0) {
-					CommentsAdapter.this.commentThreadsList.addAll(newComments);
-					CommentsAdapter.this.notifyDataSetChanged();
-				}
-				if (commentThreadsList.isEmpty()) {
+            if (newComments != null) {
+                if (newComments.size() > 0) {
+                    CommentsAdapter.this.notifyDataSetChanged();
+                }
+                if (commentThreadPager.isCommentsDisabled() && disabledCommentsView != null) {
+                    disabledCommentsView.setVisibility(View.VISIBLE);
+                } else if (commentThreadPager.getCommentCount() == 0) {
                     noVideoCommentsView.setVisibility(View.VISIBLE);
                 }
-			}
+            }
 
-			commentsProgressBar.setVisibility(View.GONE);
-			getCommentsTask = null;
-		}
+            commentsProgressBar.setVisibility(View.GONE);
+            getCommentsTask = null;
+        }
 
-	}
+    }
 
+
+    public static BaseExpandableListAdapter createAdapter(Context context, String videoId, ExpandableListView expandableListView, View commentsProgressBar, View noVideoCommentsView, View disabledCommentsView) {
+        if (NewPipeService.isPreferred()) {
+            return new CommentsAdapter(context, videoId, expandableListView, commentsProgressBar, noVideoCommentsView, disabledCommentsView);
+        } else {
+            return new LegacyCommentsAdapter(context, videoId, expandableListView, commentsProgressBar, noVideoCommentsView);
+        }
+    }
 }
