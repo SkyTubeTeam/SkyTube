@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="download">डाउनलोड</string>
-    <string name="downloads">डाउनलोड</string>
+    <string name="downloads">डाउनलोडस</string>
     <string name="download_video">वीडियो डाउनलोड करें</string>
-    <string name="video_download_stream_error">\'%s\' डाउनलोड नही कर पा रहा है</string>
+    <string name="video_download_stream_error">\'%s\' डाउनलोड नही कर पाया।</string>
+    <string name="delete_download">डाउनलोड हटाएं</string>
+    <string name="warning_metered_network_download">आप मीटर्ड नेटवर्क से जुड़े हैं, उस पर वीडियो डाउनलोड करें\?</string>
+    <string name="starting_video_download">\'%s\' डाउनलोड हो रहा है…</string>
+    <string name="video_downloaded">\'%s\' डाउनलोड किया गया।</string>
+    <string name="no_downloaded_videos_text">यहां खोजने के लिए कुछ वीडियो डाउनलोड करें।</string>
+    <string name="playing_video_file_missing">वीडियो दूरस्थ रूप से चलाया जा रहा है क्योंकि कोई डाउनलोड करने योग्य फ़ाइल नहीं मिली।</string>
+    <string name="external_storage_not_available">फ़ाइल को पहले डाउनलोड करने के लिए बाहरी ऐक्सेस दें।</string>
+    <string name="unable_to_delete_file">डाउनलोड की गई \'%s\' फ़ाइल मिटाई नहीं जा सकी।</string>
+    <string name="video_stream_not_found_with_request_resolution">अनुरोधित %1$s-%2$s रिज़ॉल्यूशन के भीतर कोई वीडियो स्ट्रीम नहीं मिल सका</string>
+    <string name="download_failed_because">%1$s को डाउनलोड नहीं किया जा सका क्योंकि %2$s।</string>
 </resources>
