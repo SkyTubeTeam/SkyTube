@@ -1,2 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="subscribing_to_channels">चैनलों की सदस्यता ली जा रही है…</string>
+    <string name="open_channel">चैनल खोलें</string>
+    <string name="fetching_subbed_channels_info">चैनल की जानकारी लाई जा रही है…</string>
+    <string name="fetching_subbed_channels_info_error">चैनल की जानकारी नहीं लाई जा सकी।</string>
+    <string name="fetching_subscription_videos">सब्स्क्राइब किए गए चैनलों से वीडियो लाए जा रहे हैं…</string>
+    <string name="fetched_videos_from_channels">%2$d/%3$d चैनलों से %1$d वीडियो प्राप्त हुए।</string>
+    <string name="no_new_videos_found">कोई नया वीडियो नहीं।</string>
+    <string name="no_subscriptions_text">चैनलों के नए वीडियो यहां देखने के लिए उन्हें सब्सक्राइब करें।</string>
+    <string name="import_subscriptions_from_youtube">YouTube से सब्सक्रिप्शन आयात करें</string>
+    <string name="notification_channel_feed_title">फ़ीड सूचनाएं</string>
+    <string name="feed">फ़ीड</string>
+    <string name="notification_new_videos_found">सब्स्क्राइब्ड चैनलों से %d नए वीडियो</string>
+</resources>
