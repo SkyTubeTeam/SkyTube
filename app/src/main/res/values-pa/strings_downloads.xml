@@ -1,2 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="downloads">ਡਾਊਨਲੋਡਸ</string>
+    <string name="download">ਡਾਊਨਲੋਡ</string>
+    <string name="warning_metered_network_download">ਮੀਟਰ ਕੀਤੇ ਨੈੱਟਵਰਕ \'ਤੇ ਵੀਡੀਓ ਡਾਊਨਲੋਡ ਕਰਨਾ ਹੈ ਜਿਸ ਨਾਲ ਤੁਸੀਂ ਕਨੈਕਟ ਹੋ\?</string>
+    <string name="download_video">ਵੀਡੀਓ ਡਾਊਨਲੋਡ ਕਰੋ</string>
+    <string name="unable_to_delete_file">ਡਾਊਨਲੋਡ ਕੀਤੀ \'%s\' ਫ਼ਾਈਲ ਨੂੰ ਮਿਟਾਇਆ ਨਹੀਂ ਜਾ ਸਕਿਆ।</string>
+    <string name="starting_video_download">\'%s\' ਨੂੰ ਡਾਊਨਲੋਡ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ…</string>
+    <string name="video_download_stream_error">\'%s\' ਨੂੰ ਡਾਊਨਲੋਡ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਿਆ।</string>
+    <string name="download_failed_because">%1$s ਨੂੰ ਡਾਊਨਲੋਡ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਿਆ ਕਿਉਂਕਿ %2$s।</string>
+    <string name="video_stream_not_found_with_request_resolution">ਬੇਨਤੀ ਕੀਤੇ ਗਏ %1$s-%2$s ਰੈਜ਼ੋਲਿਊਸ਼ਨ ਦੇ ਅੰਦਰ ਕੋਈ ਵੀ ਵੀਡੀਓ ਸਟ੍ਰੀਮ ਨਹੀਂ ਲੱਭ ਸਕਿਆ</string>
+    <string name="delete_download">ਡਾਊਨਲੋਡ ਮਿਟਾਓ</string>
+    <string name="video_downloaded">\'%s\' ਡਾਊਨਲੋਡ ਕੀਤਾ।</string>
+    <string name="no_downloaded_videos_text">ਇੱਥੇ ਲੱਭਣ ਲਈ ਕੁਝ ਵੀਡੀਓ ਡਾਊਨਲੋਡ ਕਰੋ।</string>
+    <string name="playing_video_file_missing">ਵੀਡੀਓ ਨੂੰ ਰਿਮੋਟਲੀ ਚੱਲ ਰਿਹਾ ਹੈ ਕਿਉਂਕਿ ਕੋਈ ਡਾਊਨਲੋਡ ਕਰਨ ਯੋਗ ਫ਼ਾਈਲ ਨਹੀਂ ਲੱਭੀ ਜਾ ਸਕੀ।</string>
+    <string name="external_storage_not_available">ਪਹਿਲਾਂ ਫ਼ਾਈਲ ਨੂੰ ਡਾਊਨਲੋਡ ਕਰਨ ਲਈ ਬਾਹਰੀ ਪਹੁੰਚ ਦਿਓ।</string>
+</resources>
