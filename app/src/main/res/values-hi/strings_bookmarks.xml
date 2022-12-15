@@ -1,2 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="bookmarks">बुकमार्कस</string>
+    <string name="bookmark">बुकमार्क</string>
+    <string name="video_bookmarked">बुकमार्क किए</string>
+    <string name="video_already_bookmarked">पहले से ही बुकमार्क किया हुआ</string>
+    <string name="video_bookmarked_error">वीडियो को बुकमार्क नहीं किया जा सका.</string>
+    <string name="unbookmark">अनबुकमार्क</string>
+    <string name="video_unbookmarked">बुकमार्क हटा दिया गया</string>
+    <string name="video_was_not_bookmarked">वीडियो को बुकमार्क नहीं किया गया</string>
+    <string name="video_unbookmarked_error">वीडियो बुकमार्क नहीं हटाया जा सका।</string>
+    <string name="no_bookmarked_videos_text">यहां खोजने के लिए कुछ वीडियो को बुकमार्क करें।</string>
+    <string name="bookmark_share_label">स्काईट्यूब बुकमार्क</string>
+    <string name="bookmark_share_invalid_url">केवल मान्य YouTube URL को ही बुकमार्क किया जा सकता है।</string>
+</resources>
