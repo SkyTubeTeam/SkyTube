@@ -1,2 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="bookmarks">ਬੁੱਕਮਾਰਕਸ</string>
+    <string name="bookmark">ਬੁੱਕਮਾਰਕ</string>
+    <string name="video_bookmarked">ਬੁੱਕਮਾਰਕ ਹਨ</string>
+    <string name="video_already_bookmarked">ਪਹਿਲਾਂ ਹੀ ਬੁੱਕਮਾਰਕ ਕੀਤਾ ਹੋਇਆ ਹੈ</string>
+    <string name="video_bookmarked_error">ਵੀਡੀਓ ਨੂੰ ਬੁੱਕਮਾਰਕ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਿਆ।</string>
+    <string name="unbookmark">ਅਣਬੁੱਕਮਾਰਕ</string>
+    <string name="video_unbookmarked">ਬੁੱਕਮਾਰਕ ਹਟਾਇਆ ਗਿਆ</string>
+    <string name="video_was_not_bookmarked">ਵੀਡੀਓ ਬੁੱਕਮਾਰਕ ਨਹੀਂ ਕੀਤਾ ਗਿਆ</string>
+    <string name="video_unbookmarked_error">ਵੀਡੀਓ ਬੁੱਕਮਾਰਕ ਨੂੰ ਹਟਾਇਆ ਨਹੀਂ ਜਾ ਸਕਿਆ।</string>
+    <string name="no_bookmarked_videos_text">ਇੱਥੇ ਵੇਖਣ ਲਈ ਕੁਝ ਵੀਡੀਓ ਬੁੱਕਮਾਰਕ ਕਰੋ।</string>
+    <string name="bookmark_share_label">ਸਕਾਈਟਿਊਬ ਬੁੱਕਮਾਰਕ</string>
+    <string name="bookmark_share_invalid_url">ਸਿਰਫ਼ ਵੈਧ YouTube URL ਨੂੰ ਹੀ ਬੁੱਕਮਾਰਕ ਕੀਤਾ ਜਾ ਸਕਦਾ ਹੈ।</string>
+</resources>
