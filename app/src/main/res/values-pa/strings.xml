@@ -1,2 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="could_not_get_videos">%s ਵੀਡੀਓ ਪ੍ਰਾਪਤ ਨਹੀਂ ਕੀਤੇ ਜਾ ਸਕੇ।</string>
+    <string name="could_not_get_channel">ਚੈਨਲ ਜਾਣਕਾਰੀ ਨੂੰ ਡਾਊਨਲੋਡ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਿਆ।</string>
+    <string name="could_not_get_channel_detailed">ਚੈਨਲ ਜਾਣਕਾਰੀ ਨੂੰ ਡਾਊਨਲੋਡ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਿਆ: %s।</string>
+    <string name="could_not_get_sponsorblock">ਸਪਾਂਸਰਬਲਾਕ ਜਾਣਕਾਰੀ ਨੂੰ ਪ੍ਰਾਪਤ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਿਆ: %s।</string>
+    <string name="views">%,d ਵਿਯੂਜ਼</string>
+    <string name="error">ਤਰੁੱਟੀ</string>
+    <string name="close">ਬੰਦ ਕਰੋ</string>
+    <string name="ok">ਠੀਕ ਹੈ</string>
+    <string name="search_videos">ਵੀਡੀਓ ਖੋਜੋ</string>
+    <string name="launch_offical_player_error">ਅਧਿਕਾਰਤ YouTube ਪਲੇਅਰ ਨੂੰ ਲਾਂਚ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਿਆ। ਇਹ ਯਕੀਨੀ ਬਣਾਓ ਕਿ ਇਹ ਸਥਾਪਿਤ ਹੈ.</string>
+    <string name="LIVE">ਲਾਈਵ</string>
+    <string name="featured">ਫੀਚਰਡ</string>
+    <string name="most_popular">ਸਭ ਤੋਂ ਮਸ਼ਹੂਰ</string>
+    <string name="trending_in">ਪ੍ਰਚਲਿਤ (%s)</string>
+    <string name="video">ਵੀਡੀਓ</string>
+    <string name="videos">ਵੀਡੀਓਜ਼</string>
+    <string name="num_videos">%d ਵੀਡੀਓ</string>
+    <string name="playlists">ਪਲੇਲਿਸਟਾਂ</string>
+    <string name="could_not_get_playlists">%s ਪਲੇਲਿਸਟਾਂ ਪ੍ਰਾਪਤ ਨਹੀਂ ਕੀਤੀਆਂ ਜਾ ਸਕੀਆਂ।</string>
+    <string name="recaptcha_challenge_requested">YouTube ਸੋਚਦਾ ਹੈ ਕਿ ਤੁਸੀਂ ਇੱਕ ਬੋਟ ਹੋ, ਇਸ ਲਈ ਤੁਹਾਨੂੰ ਪਹਿਲਾਂ ਇੱਕ reCAPTCHA ਹੱਲ ਕਰਨਾ ਚਾਹੀਦਾ ਹੈ।</string>
+    <string name="loading">ਲੋਡ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ…</string>
+    <string name="no">ਨਹੀਂ</string>
+    <string name="yes">ਹਾਂ</string>
+    <string name="search_channel">ਚੈਨਲ ਖੋਜੋ</string>
+</resources>
