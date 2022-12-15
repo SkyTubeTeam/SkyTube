@@ -1,2 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="could_not_get_videos">%s वीडियो प्राप्त नहीं कर सका।</string>
+    <string name="could_not_get_channel">चैनल की जानकारी डाउनलोड नहीं की जा सकी.</string>
+    <string name="could_not_get_channel_detailed">चैनल की जानकारी डाउनलोड नहीं कर सका: %s.</string>
+    <string name="could_not_get_sponsorblock">स्पॉन्सरब्लॉक जानकारी प्राप्त नहीं कर सका: %s.</string>
+    <string name="views">%,d व्यूज़</string>
+    <string name="error">ख़ामी</string>
+    <string name="ok">ठीक है</string>
+    <string name="search_videos">वीडियो खोजें</string>
+    <string name="search_channel">चैनल खोजें</string>
+    <string name="LIVE">लाईव</string>
+    <string name="featured">फीचर्ड</string>
+    <string name="most_popular">सबसे लोकप्रिय</string>
+    <string name="trending_in">रुझान में (%s)</string>
+    <string name="video">वीडियो</string>
+    <string name="videos">वीडियोज़</string>
+    <string name="num_videos">%d वीडियो</string>
+    <string name="playlists">प्लेलिस्टें</string>
+    <string name="close">बंद करें</string>
+    <string name="loading">लोड हो रहा है…</string>
+    <string name="yes">हाँ</string>
+    <string name="no">नहीं</string>
+    <string name="launch_offical_player_error">आधिकारिक YouTube प्लेयर लॉन्च नहीं किया जा सका। स्थापित करना सुनिश्चित करें।</string>
+    <string name="could_not_get_playlists">%s प्लेलिस्टें प्राप्त नहीं कर सका।</string>
+    <string name="recaptcha_challenge_requested">YouTube सोचता है कि आप एक बॉट हैं, इसलिए आपको पहले एक reCAPTCHA को हल करना होगा।</string>
+</resources>
