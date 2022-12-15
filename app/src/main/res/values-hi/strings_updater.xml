@@ -1,2 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="update_available">नया संस्करण उपलब्ध है</string>
+    <string name="update_dialog_msg">स्काईट्यूब का एक नया संस्करण उपलब्ध है। संस्करण %s स्थापित किया जाएगा।</string>
+    <string name="up_to_date">आधुनिक है</string>
+    <string name="up_to_date_msg">आपके पास स्काईट्यूब का नवीनतम संस्करण स्थापित है।</string>
+    <string name="release_notes">%s में परिवर्तन</string>
+    <string name="update">अपडेट</string>
+    <string name="later">बाद में</string>
+    <string name="update_failure">ऐप्लिकेशन का नया वर्शन इंस्टॉल नहीं किया जा सका.</string>
+    <string name="downloading">डाउनलोड हो रहा है…</string>
+    <string name="android_too_old">दुर्भाग्य से, आपका Android अपडेट करने के लिए बहुत पुराना है। आपको मैन्युअल रूप से \'स्काईट्यूब लीगेसी\' स्थापित करने की आवश्यकता है!</string>
+</resources>
