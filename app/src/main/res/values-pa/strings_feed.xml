@@ -1,2 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="feed">ਫੀਡ</string>
+    <string name="subscribing_to_channels">ਚੈਨਲਾਂ ਨੂੰ ਸਬਸਕ੍ਰਾਈਬ ਕਰ ਰਿਹਾ…</string>
+    <string name="open_channel">ਚੈਨਲ ਖੋਲ੍ਹੋ</string>
+    <string name="fetching_subbed_channels_info">ਚੈਨਲ ਜਾਣਕਾਰੀ ਪ੍ਰਾਪਤ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ…</string>
+    <string name="fetching_subbed_channels_info_error">ਚੈਨਲ ਜਾਣਕਾਰੀ ਪ੍ਰਾਪਤ ਨਹੀਂ ਕੀਤੀ ਜਾ ਸਕੀ।</string>
+    <string name="fetching_subscription_videos">ਸਬਸਕ੍ਰਾਈਬ ਕੀਤੇ ਚੈਨਲਾਂ ਤੋਂ ਵੀਡੀਓ ਪ੍ਰਾਪਤ ਕਰ ਰਿਹਾ ਹੈ…</string>
+    <string name="fetched_videos_from_channels">%2$d/%3$d ਚੈਨਲਾਂ ਤੋਂ %1$d ਵੀਡੀਓ ਪ੍ਰਾਪਤ ਕੀਤੇ।</string>
+    <string name="no_new_videos_found">ਕੋਈ ਨਵਾਂ ਵੀਡੀਓ ਨਹੀਂ।</string>
+    <string name="no_subscriptions_text">ਇੱਥੇ ਉਹਨਾਂ ਤੋਂ ਤਾਜ਼ਾ ਵੀਡੀਓ ਵੇਖਣ ਲਈ ਕੁਝ ਚੈਨਲਾਂ ਨੂੰ ਸਬਸਕ੍ਰਾਈਬ ਕਰੋ।</string>
+    <string name="import_subscriptions_from_youtube">YouTube ਤੋਂ ਸਬਸਕ੍ਰਿਪਸ਼ਨ ਆਯਾਤ ਕਰੋ</string>
+    <string name="notification_channel_feed_title">ਫੀਡ ਸੂਚਨਾਵਾਂ</string>
+    <string name="notification_new_videos_found">ਸਬਸਕ੍ਰਾਈਬ ਕੀਤੇ ਚੈਨਲਾਂ ਤੋਂ %d ਨਵੇਂ ਵੀਡੀਓ</string>
+</resources>
