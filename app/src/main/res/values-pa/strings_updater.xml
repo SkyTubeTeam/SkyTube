@@ -1,2 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="update_available">ਨਵਾਂ ਸੰਸਕਰਣ ਉਪਲੱਬਧ</string>
+    <string name="up_to_date">ਆਧੁਨਿਕ ਹੈ</string>
+    <string name="up_to_date_msg">ਤੁਹਾਡੇ ਕੋਲ ਸਕਾਈਟਿਊਬ ਦਾ ਸਭ ਤੋਂ ਨਵਾਂ ਸੰਸਕਰਣ ਸਥਾਪਤ ਹੈ।</string>
+    <string name="release_notes">%s ਵਿੱਚ ਬਦਲਾਅ</string>
+    <string name="update">ਅੱਪਡੇਟ ਕਰੋ</string>
+    <string name="later">ਬਾਅਦ ਵਿੱਚ</string>
+    <string name="update_dialog_msg">ਸਕਾਈਟਿਊਬ ਦਾ ਨਵਾਂ ਸੰਸਕਰਣ ਉਪਲਬਧ ਹੈ। ਸੰਸਕਰਣ %s ਇੰਸਟਾਲ ਕੀਤਾ ਜਾਵੇਗਾ।</string>
+    <string name="update_failure">ਐਪ ਦਾ ਨਵਾਂ ਸੰਸਕਰਣ ਸਥਾਪਤ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਿਆ।</string>
+    <string name="android_too_old">ਬਦਕਿਸਮਤੀ ਨਾਲ, ਤੁਹਾਡਾ Android ਅੱਪਡੇਟ ਕਰਨ ਲਈ ਬਹੁਤ ਪੁਰਾਣਾ ਹੈ। ਤੁਹਾਨੂੰ \'SkyTube Legacy\' ਨੂੰ ਹੱਥੀਂ ਸਥਾਪਤ ਕਰਨ ਦੀ ਲੋੜ ਹੈ!</string>
+    <string name="downloading">ਡਾਊਨਲੋਡ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ…</string>
+</resources>
