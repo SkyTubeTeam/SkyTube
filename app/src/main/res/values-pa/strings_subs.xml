@@ -1,2 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="subscribe">ਸਬਸਕ੍ਰਾਈਬ ਕਰੋ</string>
+    <string name="unsubscribe">ਅਨਸਬਸਕ੍ਰਾਈਬ ਕਰੋ</string>
+    <string name="subscribed">ਸਬਸਕ੍ਰਾਈਬ ਕੀਤਾ</string>
+    <string name="channel_subscribed">ਚੈਨਲ ਸਬਸਕ੍ਰਾਈਬ ਕੀਤਾ</string>
+    <string name="channel_subscribe_failed">ਚੈਨਲ ਨੂੰ ਸਬਸਕ੍ਰਾਈਬ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਿਆ</string>
+    <string name="unsubscribed">ਅਨਸਬਸਕ੍ਰਾਈਬ ਕੀਤਾ</string>
+    <string name="channel_unsubscribed">ਚੈਨਲ ਅਨਸਬਸਕ੍ਰਾਈਬ ਕੀਤਾ</string>
+    <string name="error_get_subbed_channels">ਚੈਨਲ ਸਬਸਕ੍ਰਿਪਸ਼ਨਾਂ ਪ੍ਰਾਪਤ ਨਹੀਂ ਕੀਤੀਆਂ ਜਾ ਸਕੀਆਂ।</string>
+    <string name="error_check_if_user_has_subbed">ਜਾਂਚ ਨਹੀਂ ਕੀਤੀ ਜਾ ਸਕੀ ਕਿ ਕੀ ਤੁਸੀਂ ਚੈਨਲ ਦੀ ਸਬਸਕ੍ਰਿਪਸ਼ਨ ਲਈ ਹੈ (id=%s)</string>
+    <string name="import_subscriptions">ਸਬਸਕ੍ਰਿਪਸ਼ਨਾਂ ਆਯਾਤ ਕਰੋ</string>
+    <string name="unsubscribe_from_all_current_sibbed_channels">ਤੁਹਾਡੇ ਸਾਰੇ ਵਰਤਮਾਨ ਸਬਸਕ੍ਰਾਈਬ ਕੀਤੇ ਚੈਨਲਾਂ ਤੋਂ ਸਬਸਕ੍ਰਿਪਸ਼ਨ ਹਟਾਓ।</string>
+    <string name="subscriptions_to_channels_imported">%d ਚੈਨਲ ਆਯਾਤ ਕੀਤੇ ਗਏ।</string>
+    <string name="select_sub_file">ਸਬਸਕ੍ਰਿਪਸ਼ਨ ਫਾਈਲ ਚੁਣੋ</string>
+    <string name="select_all">ਸਾਰਿਆ ਨੂੰ ਚੁਣੋ</string>
+    <string name="select_none">ਕੋਈ ਨਾਂ ਚੁਣੋ</string>
+    <string name="no_channels_found">ਤੁਹਾਡੇ ਵੱਲੋਂ ਅੱਪਲੋਡ ਕੀਤੀ ਫ਼ਾਈਲ ਵਿੱਚ ਕੋਈ ਵੀ YouTube ਚੈਨਲ ਨਹੀਂ ਲੱਭ ਸਕਿਆ।</string>
+    <string name="no_new_channels_found">ਕੋਈ ਵੀ YouTube ਚੈਨਲ ਨਹੀਂ ਮਿਲਿਆ ਜਿਸ ਦੀ ਤੁਸੀਂ ਪਹਿਲਾਂ ਤੋਂ ਸਬਸਕ੍ਰਿਪਸ਼ਨ ਨਹੀਂ ਲਈ।</string>
+    <string name="import_subscriptions_parse_error">ਤੁਹਾਡੇ ਵੱਲੋਂ ਅੱਪਲੋਡ ਕੀਤੀ ਗਈ ਫ਼ਾਈਲ ਨੂੰ ਪਾਰਸ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਿਆ: %s।</string>
+    <string name="about">ਦੇ ਬਾਰੇ</string>
+    <string name="failed_to_import_subscriptions">ਤੁਹਾਡੀਆਂ YouTube ਸਬਸਕ੍ਰਿਪਸ਼ਨਾਂ ਨੂੰ ਆਯਾਤ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਿਆ।</string>
+    <string name="subscriptions">ਸਬਸਕ੍ਰਿਪਸ਼ਨਜ਼</string>
+    <string name="total_subscribers">%,d ਸਬਸਕ੍ਰਾਈਬਰ</string>
+    <string name="channel_already_subscribed">ਪਹਿਲਾਂ ਹੀ ਸਬਸਕ੍ਰਾਈਬ ਕੀਤਾ ਹੋਇਆ</string>
+    <string name="import_subscriptions_description">https://takeout.google.com \'ਤੇ \"YouTube ਅਤੇ YouTube Music\" ਨੂੰ ਛੱਡ ਕੇ ਹਰ ਚੀਜ਼ ਨੂੰ ਅਣਚੁਣਿਆ ਕਰੋ ਅਤੇ ਸਿਰਫ਼ ਸਬਸਕ੍ਰਿਪਸ਼ਨਾਂ ਪ੍ਰਾਪਤ ਕਰਨ ਲਈ \"ਸਾਰਾ YouTube ਡਾਟਾ ਸ਼ਾਮਲ\" \'ਤੇ ਕਲਿੱਕ ਕਰੋ। \"ਅੱਗੇ\" ਅਤੇ ਫਿਰ \"ਨਿਰਯਾਤ ਬਣਾਓ\" \'ਤੇ ਕਲਿੱਕ ਕਰੋ। ਡਾਊਨਲੋਡ ਲਿੰਕ ਦੇ ਨਾਲ ਇੱਕ ਈ-ਮੇਲ ਪ੍ਰਾਪਤ ਕਰਨ ਲਈ ਕਲਿੱਕ ਕਰੋ। ਆਪਣੇ ਈ-ਮੇਲ ਕਲਾਇੰਟ ਤੋਂ ਫਾਈਲ ਡਾਊਨਲੋਡ ਕਰੋ। ਇਸ ZIP ਫਾਈਲ ਨੂੰ ਚੁਣੋ ਜਾਂ ਇਸਨੂੰ ਐਕਸਟਰੈਕਟ ਕਰੋ ਅਤੇ ਹੇਠਾਂ \"ਸਬਸਕ੍ਰਿਪਸ਼ਨ ਫਾਈਲ ਚੁਣੋ\" ਦੀ ਵਰਤੋਂ ਕਰਕੇ (/Takeout/YouTube ਅਤੇ YouTube Music/subscriptions/ ਵਿੱਚ) ਵਿੱਚ ਮੌਜੂਦ subscriptions.csv ਜਾਂ subscriptions.json ਨੂੰ ਚੁਣੋ।</string>
+    <string name="error_unable_to_subscribe">ਚੈਨਲ (id=%s) ਤੋਂ/ਨੂੰ (ਅਨ) ਸਬਸਕ੍ਰਾਈਬ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਿਆ</string>
+</resources>
