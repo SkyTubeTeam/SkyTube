@@ -1,2 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="key_preferences">ਤਰਜੀਹਾਂ</string>
+    <string name="pref_title_maximum_res">ਉੱਚਤਮ ਰੈਜ਼ੋਲਿਊਸ਼ਨ</string>
+    <string name="pref_title_minimum_res">ਸਭ ਤੋਂ ਘੱਟ ਰੈਜ਼ੋਲਿਊਸ਼ਨ</string>
+    <string name="pref_title_choose_player">ਵੀਡੀਓ ਪਲੇਅਰ</string>
+    <string name="pref_video_player_category">ਵੀਡੀਓ ਪਲੇਅਰ</string>
+    <string name="preferences">ਤਰਜੀਹਾਂ</string>
+    <string name="pref_summary_maximum_res">ਉੱਚਤਮ ਰੈਜ਼ੋਲਿਊਸ਼ਨ ਚੁਣੋ: %s</string>
+    <string name="pref_summary_minimum_res">ਸਭ ਤੋਂ ਘੱਟ ਰੈਜ਼ੋਲਿਊਸ਼ਨ ਚੁਣੋ: %s</string>
+</resources>
