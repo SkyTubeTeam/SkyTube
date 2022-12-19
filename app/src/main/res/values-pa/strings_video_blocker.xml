@@ -1,2 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="blocked_videos">ਬਲੌਕ ਕੀਤੇ ਵੀਡੀਓ</string>
+    <string name="no_videos_blocked">ਕੀ ਤੁਸੀਂ ਵੀਡੀਓ ਨੂੰ ਬਲੌਕ ਕਰਨ ਜਾਂ ਫਿਲਟਰ ਕਰਨ ਲਈ ਵੀਡੀਓ ਬਲੌਕਰ ਸੈਟ ਅਪ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ\?</string>
+    <string name="configure">ਸਥਾਪਨਾ ਕਰਨਾ</string>
+    <string name="block_channel">ਚੈਨਲ ਨੂੰ ਬਲਾਕ ਕਰੋ</string>
+    <string name="channel_blacklisted">ਨਵੀਂ ਚੈਨਲ ਬਲੈਕਲਿਸਟ ਦੀ ਵਰਤੋਂ ਕਰਨ ਲਈ ਤਾਜ਼ਾ ਕਰੋ।</string>
+    <string name="channel_blacklist_error">ਚੈਨਲ ਨੂੰ ਬਲੈਕਲਿਸਟ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਿਆ।</string>
+    <string name="channel_unwhitelist_error">ਚੈਨਲ ਨੂੰ ਵ੍ਹਾਈਟਲਿਸਟ ਵਿੱਚੋਂ ਹਟਾਇਆ ਨਹੀਂ ਜਾ ਸਕਿਆ।</string>
+    <string name="dislikes">%d%% ਨਾਪਸੰਦ</string>
+</resources>
