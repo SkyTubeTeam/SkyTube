@@ -8,4 +8,11 @@
     <string name="preferences">ਤਰਜੀਹਾਂ</string>
     <string name="pref_summary_maximum_res">ਉੱਚਤਮ ਰੈਜ਼ੋਲਿਊਸ਼ਨ ਚੁਣੋ: %s</string>
     <string name="pref_summary_minimum_res">ਸਭ ਤੋਂ ਘੱਟ ਰੈਜ਼ੋਲਿਊਸ਼ਨ ਚੁਣੋ: %s</string>
+    <string name="pref_import_export_category">ਆਯਾਤ/ਨਿਰਯਾਤ</string>
+    <string name="no_resolution_specified">ਕੋਈ ਨਹੀਂ</string>
+    <string name="pref_category_metered_network">ਮੀਟਰਡ ਨੈੱਟਵਰਕ</string>
+    <string name="pref_title_minimum_res_metered">ਮੀਟਰਡ ਨੈੱਟਵਰਕ ਲਈ ਸਭ ਤੋਂ ਘੱਟ ਰੈਜ਼ੋਲਿਊਸ਼ਨ</string>
+    <string name="pref_summary_choose_player">ਵਰਤਣ ਲਈ ਵੀਡੀਓ ਪਲੇਅਰ: %s</string>
+    <string name="pref_summary_metered_network_usage">ਜੇਕਰ ਵੀਡੀਓ ਡਾਊਨਲੋਡ ਕਰਨ/ਦੇਖਣ ਲਈ ਮੀਟਰਡ ਨੈੱਟਵਰਕ ਦੀ ਵਰਤੋਂ ਕਰ ਰਹੇ ਹੋ ਤਾਂ ਕੀ ਕਰਨਾ ਹੈ: %s</string>
+    <string name="pref_title_backup_dbs">ਬੈਕਅੱਪ ਡਾਟਾਬੇਸ</string>
 </resources>
