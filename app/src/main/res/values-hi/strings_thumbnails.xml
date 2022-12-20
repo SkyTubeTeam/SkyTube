@@ -1,2 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="thumbnail_download_error">थंबनेल डाउनलोड नहीं किया जा सका.</string>
+    <string name="thumbnail">थंमनेल</string>
+    <string name="view_thumbnail">थंमनेल देखें</string>
+    <string name="thumbnail_downloaded">डाउनलोड किया गया।</string>
+</resources>
