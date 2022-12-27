@@ -1,2 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="subscriptions">Pajtime</string>
+    <string name="subscribe">Pajtomë</string>
+    <string name="channel_already_subscribed">I pajtuar tashmë</string>
+    <string name="unsubscribe">Shpajtohuni</string>
+    <string name="total_subscribers">%,d pajtimtarë</string>
+    <string name="subscribed">U pajtuat</string>
+    <string name="channel_subscribed">Pajtuar te kanali</string>
+    <string name="channel_subscribe_failed">S’u bë dot pajtimi te kanali</string>
+    <string name="unsubscribed">I shpajtuar</string>
+    <string name="channel_unsubscribed">Shpajtuar nga kanali</string>
+    <string name="error_get_subbed_channels">S’u prunë dot pajtime kanali.</string>
+    <string name="error_check_if_user_has_subbed">S’u kontrollua dot nëse jeni i pajtuar te kanali (id=%s)</string>
+    <string name="error_unable_to_subscribe">S’u bë dot (sh)pajtimi nga/te kanali (id=%s)</string>
+    <string name="import_subscriptions">Importo Pajtime</string>
+    <string name="import_subscriptions_description">Që të merrni vetëm pajtimet, hiqni përzgjedhjen nga gjithçka te https://takeout.google.com, hiq “YouTube dhe YouTube Music” dhe klikoni mbi “Përfshirë krejt të dhënat YouTube”. Klikoni mbi “Pasuesi” dhe mandej mbi “Krijo eksportim”. Klikojeni që të merrni një email me një lidhje shkarkimi. Shkarkoni kartelën që nga klienti juaj email. Përzgjidhni këtë kartelë ZIP, ose përftojeni dhe përzgjidhni subscriptions.csv, ose subscriptions.json që përmbahet brenda (te /Takeout/YouTube dhe YouTube Music/subscriptions/) duke përdorur “Përzgjidhni Kartelë Pajtimesh” më poshtë.</string>
+    <string name="unsubscribe_from_all_current_sibbed_channels">Shpajtohuni prej krejt kanaleve aktualisht të pajtuar.</string>
+    <string name="subscriptions_to_channels_imported">U importua %d kanal(e).</string>
+    <string name="select_sub_file">Përzgjidhni Kartelë Pajtimi</string>
+    <string name="select_all">Përzgjidhi Krejt</string>
+    <string name="select_none">Mos Përzgjidh Gjë</string>
+    <string name="no_channels_found">Te kartela që ngarkuat s’u gjet dot ndonjë kanal.</string>
+    <string name="no_new_channels_found">S’u gjetën kanale YouTube te të cilët jeni tashmë të pajtuar.</string>
+    <string name="import_subscriptions_parse_error">S’u përtyp dot kartela që ngarkuat: %s.</string>
+    <string name="failed_to_import_subscriptions">S’u importuan dot pajtimet tuaja YouTube.</string>
+    <string name="about">Mbi</string>
+</resources>
