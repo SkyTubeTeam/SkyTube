@@ -1,2 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="blocked_videos">Video të Bllokuara</string>
+    <string name="no_videos_blocked">Doni të ujdisni një bllokues videosh për të bllokuar apo filtruar video\?</string>
+    <string name="configure">Ujdiseni</string>
+    <string name="block_channel">Bllokoje Kanalin</string>
+    <string name="channel_blacklisted">Rifreskojeni, që të shihni listën e re të kanaleve të bllokuar.</string>
+    <string name="channel_blacklist_error">S’u shtua dot kanali në listë bllokimesh.</string>
+    <string name="channel_unwhitelist_error">S’u hoq dot kanal nga listë të lejuarish.</string>
+    <string name="dislikes">%d%% mospëlqime</string>
+</resources>
