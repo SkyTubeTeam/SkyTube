@@ -1,2 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="view_thumbnail">Shihni Miniaturë</string>
+    <string name="thumbnail_downloaded">U shkarkua.</string>
+    <string name="thumbnail">Miniaturë</string>
+    <string name="thumbnail_download_error">S’u shkarkua dot miniatura.</string>
+</resources>
