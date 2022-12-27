@@ -9,4 +9,5 @@
     <string name="update_failure">Kunne ikke oppgradere programmet.</string>
     <string name="downloading">Laster ned…</string>
     <string name="release_notes">Endringer i %s</string>
+    <string name="android_too_old">Android-versjonen din er for gammel. Du må installere «SkyTube Legacy» manuelt.</string>
 </resources>
