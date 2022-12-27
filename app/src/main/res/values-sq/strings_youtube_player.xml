@@ -1,2 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="enter_video_url">Jepni URL videoje</string>
+    <string name="play">Luaje</string>
+    <string name="cancel">Anuloje</string>
+    <string name="clear">Spastroje</string>
+    <string name="should_resume">Të vazhdohet ku e ndalët\?</string>
+    <string name="resume">Rimerre</string>
+    <string name="sponsorblock_skipped">U anashkalua segment: %s</string>
+    <string name="sponsorblock_category_sponsor">Sponsor</string>
+    <string name="error_stream_err_unavailable">Mesazh jo i passhëm.</string>
+    <string name="error_stream_decryption_fail">S’u ngarkua dot kod shfshehtëzimi për shërbimin YouTube.</string>
+    <string name="error_stream_parse_error">Gabim përtypjeje.</string>
+    <string name="error_video_play">Gabim Luajtjeje Videoje</string>
+    <string name="error_video_streams_empty">Videoja “%s” s’ka rrjedha.</string>
+    <string name="error_video_streams">S’u pru dot ndonjë nga rrjedhat e videos.</string>
+    <string name="error_get_video_desc">S’u soll dot përshkrim videoje.</string>
+    <string name="error_invalid_url">URL videoje e pavlefshme: %s</string>
+    <string name="error_downloaded_file_is_corrupted">Videoja e shkarkuar duhet e <b>dëmtuar</b>: <br/> <br/> %s. <br/> <br/> <b>Të fshihet</b> kartela\?</string>
+    <string name="error_video_parse_error">S’u fillua dot videoja: <br/> <br/> %s.</string>
+    <string name="metered_network">Rrjet Me Kuota</string>
+    <string name="warning_metered_network_play">Së pari lidhuni me një rrjet pa kuota, për të shmangur pagesa përdorimi të dhënash. Të lihet videoja, sido që të jetë\?</string>
+    <string name="warning_metered_network_disable">Mos ripyet më kurrë.</string>
+    <string name="metered_network_blocked_by_policy">Shkarkimi u bllokua, ngaqë jeni lidhur përmes një rrjeti me kuota.</string>
+    <string name="play_video">Luaje Videon</string>
+    <string name="warning_live_video">S’mund të luhen rrjedha të drejtpërdrejta tani. Të hapen në një tjetër aplikacion\?</string>
+    <string name="ratings_disabled">Vlerësimet mbyllur</string>
+    <string name="loading_video">Po ngarkohet videoja…</string>
+    <string name="reload_video">Ringarkoje Videon</string>
+    <string name="open_in_browser">Hape në shfletues</string>
+    <string name="open_with">Hape me…</string>
+    <string name="share">Ndarje Me të Tjerët</string>
+    <string name="share_via">Ndajeni me të tjerë përmes…</string>
+    <string name="copy_url">Kopjoji URL-në</string>
+    <string name="url_copied_to_clipboard">URL-ja u kopjua në të papastër.</string>
+    <string name="mark_watched">Vëri shenjë si e Parë</string>
+    <string name="mark_unwatched">Vëri shenjë si Jo e Parë</string>
+    <string name="error_get_comments">S’u sollën dot komente.</string>
+    <string name="error_get_comments_no_network">Që të sillen komentet, së pari lidhuni në Internet.</string>
+    <string name="no_video_comments">Kjo video ose s’ka komente, ose ata janë çaktivizuar.</string>
+    <string name="view_replies">Shihni përgjigjet</string>
+    <string name="hide_replies">Fshihi përgjigjet</string>
+    <string name="sponsorblock_category_selfpromo">Promocion i Vetes</string>
+    <string name="sponsorblock_category_interaction">Kujtues Ndërveprimesh</string>
+    <string name="sponsorblock_category_music_offtopic">Pjesë Jomuzikore</string>
+    <string name="sponsorblock_category_intro">Hyrje</string>
+    <string name="sponsorblock_category_filler">Mbushës</string>
+</resources>
