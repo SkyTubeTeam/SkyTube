@@ -1,2 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="next">Pasuesi</string>
+    <string name="done">U bë</string>
+    <string name="skip">Anashkaloje</string>
+    <string name="page_counter">%1$d nga %2$d</string>
+    <string name="tutorial_slide_1">Fërkojeni për majtas që të shihni komente.</string>
+    <string name="tutorial_slide_2">Fërkojeni për sipër që të shihni përshkrimin e videos.</string>
+    <string name="tutorial_slide_4">Fërkojeni për sipër ose poshtë që të ndryshoni volumin.</string>
+    <string name="tutorial_slide_5">Fërkojeni për sipër ose poshtë që të përimtoni ndriçimin.</string>
+    <string name="tutorial_slide_6">Që të ndalni ose luani një video, prekeni dyfish.</string>
+    <string name="tutorial_slide_3">Fërkojeni për majtas ose për djathtas për ta shtyrë luajtjen e videos përpara ose pas.</string>
+</resources>
