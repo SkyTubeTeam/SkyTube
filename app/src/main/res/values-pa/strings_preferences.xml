@@ -15,4 +15,19 @@
     <string name="pref_summary_choose_player">ਵਰਤਣ ਲਈ ਵੀਡੀਓ ਪਲੇਅਰ: %s</string>
     <string name="pref_summary_metered_network_usage">ਜੇਕਰ ਵੀਡੀਓ ਡਾਊਨਲੋਡ ਕਰਨ/ਦੇਖਣ ਲਈ ਮੀਟਰਡ ਨੈੱਟਵਰਕ ਦੀ ਵਰਤੋਂ ਕਰ ਰਹੇ ਹੋ ਤਾਂ ਕੀ ਕਰਨਾ ਹੈ: %s</string>
     <string name="pref_title_backup_dbs">ਬੈਕਅੱਪ ਡਾਟਾਬੇਸ</string>
+    <string name="pref_title_maximum_res_metered">ਮੀਟਰਡ ਨੈੱਟਵਰਕ ਲਈ ਉੱਚਤਮ ਰੈਜ਼ੋਲਿਊਸ਼ਨ</string>
+    <string name="pref_title_metered_network_usage">ਮੀਟਰਡ ਨੈੱਟਵਰਕ ਵਰਤੋਂ</string>
+    <string name="pref_title_import_dbs">ਬੈਕਅੱਪ ਆਯਾਤ ਕਰੋ</string>
+    <string name="databases_backing_up">ਬੈਕਅੱਪ ਲਿਆ ਜਾ ਰਿਹਾ ਹੈ…</string>
+    <string name="databases_backup_success">ਡਾਟਾਬੇਸ ਦਾ %s ਤੱਕ ਬੈਕਅੱਪ ਲਿਆ ਗਿਆ</string>
+    <string name="databases_backup_fail">ਤੁਹਾਡੇ ਡੇਟਾਬੇਸ ਦਾ ਬੈਕਅੱਪ ਨਹੀਂ ਲਿਆ ਜਾ ਸਕਿਆ।</string>
+    <string name="databases_import_nothing_selected">ਕੁਝ ਨਹੀਂ ਚੁਣਿਆ ਗਿਆ…</string>
+    <string name="continue_">ਜਾਰੀ ਰੱਖੋ</string>
+    <string name="databases_importing">ਆਯਾਤ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ…</string>
+    <string name="pref_summary_minimum_res_metered">ਇੱਕ ਮੀਟਰਡ ਨੈੱਟਵਰਕ ਰਾਹੀਂ ਸਟ੍ਰੀਮਿੰਗ ਕਰਦੇ ਸਮੇਂ ਸਭ ਤੋਂ ਘੱਟ ਰੈਜ਼ੋਲਿਊਸ਼ਨ ਚੁਣੋ: %s</string>
+    <string name="pref_summary_maximum_res_metered">ਇੱਕ ਮੀਟਰਡ ਨੈੱਟਵਰਕ ਰਾਹੀਂ ਸਟ੍ਰੀਮ ਕਰਨ ਵੇਲੇ ਆਪਣਾ ਅਧਿਕਤਮ ਰੈਜ਼ੋਲਿਊਸ਼ਨ ਚੁਣੋ: %s</string>
+    <string name="pref_summary_backup_dbs">ਆਪਣੇ ਬੁੱਕਮਾਰਕਸ ਅਤੇ ਸਬਸਕ੍ਰਿਪਸ਼ਨਾਂ ਦਾ ਬੈਕਅੱਪ ਲਓ।</string>
+    <string name="pref_summary_import_dbs">ਆਪਣੇ ਬੁੱਕਮਾਰਕਸ ਅਤੇ ਸਬਸਕ੍ਰਿਪਸ਼ਨ ਬੈਕਅੱਪ ਨੂੰ ਆਯਾਤ ਕਰੋ।</string>
+    <string name="databases_import_select_backup">ਆਯਾਤ ਕਰਨ ਲਈ ਬੈਕਅੱਪ ਫਾਈਲ ਚੁਣੋ</string>
+    <string name="databases_import_warning_message">ਬੁੱਕਮਾਰਕਸ ਅਤੇ ਸਬਸਕ੍ਰਿਪਸ਼ਨਾਂ ਨੂੰ ਚੁਣੀ ਗਈ ਬੈਕਅੱਪ ਫਾਈਲ ਵਿੱਚ ਡੇਟਾ ਨਾਲ ਬਦਲਣਾ ਹੈ\?</string>
 </resources>
