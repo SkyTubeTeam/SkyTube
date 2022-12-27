@@ -1,2 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="downloads">Shkarkime</string>
+    <string name="warning_metered_network_download">Të shkarkohet videoja që prej rrjetit me kuota ku jeni lidhur\?</string>
+    <string name="download_video">Shkarkoje Videon</string>
+    <string name="unable_to_delete_file">S’u fshi dot kartela e shkarkuar “%s”.</string>
+    <string name="starting_video_download">Po shkarkohet “%s”…</string>
+    <string name="video_download_stream_error">S’u shkarkua dot “%s”.</string>
+    <string name="download_failed_because">S’u shkarkua dot %1$s, sepse %2$s.</string>
+    <string name="video_stream_not_found_with_request_resolution">S’u gjet dot ndonjë rrjedhë video brenda qartësisë %1$s-%2$s së kërkuar</string>
+    <string name="delete_download">Fshije Shkarkimin</string>
+    <string name="video_downloaded">“%s” u shkarkua.</string>
+    <string name="no_downloaded_videos_text">Shkarkoni ca video, që t’i gjeni këtu.</string>
+    <string name="playing_video_file_missing">Videoja po luhet së largëti, ngaqë s’u gjet kartelë e shkarkuar.</string>
+    <string name="external_storage_not_available">Që të shkarkohet kartela, së pari akordoni hyrje te depo e jashtme.</string>
+    <string name="download">Shkarkim</string>
+</resources>
