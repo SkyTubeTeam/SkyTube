@@ -98,7 +98,7 @@
     <string name="channel_blacklist_empty">Lista e bllokimeve është e zbrazët.</string>
     <string name="pref_title_channel_whitelist">Listë lejimesh Kanalesh</string>
     <string name="pref_summary_channel_whitelist">Listë kanalesh të lejuar.</string>
-    <string name="add">Shto</string>
+    <string name="add">Shtoni</string>
     <string name="channel_already_whitelisted">Kanal tashmë në listë lejimesh.</string>
     <string name="channel_whitelist_update_failure">S’u kalua dot në listë lejimesh kanali i dhënë.</string>
     <string name="pref_languages_filter_category">Filtra Gjuhësh dhe Rajonesh</string>
@@ -122,4 +122,48 @@
     <string name="pref_title_credit_sponsorblock">Kredite</string>
     <string name="pref_summary_credit_sponsorblock">Përdoren të dhëna SponsorBlock nga https://sponsor.ajay.app</string>
     <string name="pref_summary_disable_playback_status">Çaktivizo gjendje luajtjeje.</string>
+    <string name="pref_summary_minimum_res_metered">Kur transmetohet përmes një rrjeti me kuota, përzgjidh qartësinë më të vogël: %s</string>
+    <string name="pref_summary_metered_network_usage">Ç’të bëhet, nëse për shkarkim/parje videosh përdoret një rrjet me kuota: %s</string>
+    <string name="databases_import_warning_message">Të zëvendësohen faqerojtësit dhe pajtimet me të dhënat në kartelën e përzgjedhur kopjeruajtje\?</string>
+    <string name="databases_import_success">Rinisni aplikacionin që të përdoren faqerojtësit dhe pajtimet e reja.</string>
+    <string name="pref_summary_autocast">Pajisje Chromecast për luajtje, kur në SkyTube përdoren aplikacione të tjerë videosh.</string>
+    <string name="pref_summary_default_tab">Skedë për shfaqje kur niset SkyTube-i: %s</string>
+    <string name="pref_summary_disable_screen_gestures">Çaktivizo gjeste për kontroll volumi, ndriçimi dhe shtyrje përpara/prapa në video.</string>
+    <string name="pref_summary_enable_immersive_mode">Gjatë luajtjes, fshihe shtyllën e lëvizjeve dhe shtyllën e gjendjes.</string>
+    <string name="pref_title_switch_volume_and_brightness">Këmbe Gjeste Volumi dhe Ndriçimi</string>
+    <string name="pref_summary_switch_volume_and_brightness">E vendos kontrollin e volumit djathtas dhe të ndriçimit majtas.</string>
+    <string name="pref_summary_youtube_api_key">Jepni një kyç personal API YouTube-i.</string>
+    <string name="pref_youtube_api_key_custom">Që të përdoret kyçi i ri API YouTube-i, rinisni aplikacionin.</string>
+    <string name="pref_youtube_api_key_default">Që të përdoret kyçi parazgjedhje API YouTube-i, rinisni aplikacionin.</string>
+    <string name="pref_title_use_newpipe_backend">NewPipe si mekanizëm</string>
+    <string name="pref_title_download_to_separate_directories">Shkarkime Në Dosje Kanalesh</string>
+    <string name="pref_summary_download_to_separate_directories">I ruan videot në dosje bazuar në emrin e kanalit.</string>
+    <string name="input_channel_url">URL kanalesh për t’u vënë në listë lejimesh:</string>
+    <string name="pref_summary_use_dislike_api">Rikthe numërator mospëlqimesh duke përdorur returnyoutubedislike.com</string>
+    <string name="pref_title_use_dislike_api">Rikthe numërator mospëlqimesh</string>
+    <string name="channel_blacklist_updated">Rifreskoni videot që të aplikohet lista e re e bllokimeve të kanaleve.</string>
+    <string name="channel_blacklist_update_failure">S’u hoq dot kanali(et) i dhënë nga lista e bllokimeve…</string>
+    <string name="pref_title_channel_blacklist">Listë Bllokimesh Kanalesh</string>
+    <string name="channel_whitelist_updated">Rifreskoni videot që të përdoret lista e re e lejimeve të kanaleve.</string>
+    <string name="channel_unwhitelist_success">Rifreskoni videot që të aplikohet lista e re e lejimeve të kanaleve.</string>
+    <string name="channel_unwhitelist_failure">S’u arrit të hiqej nga listë lejimesh kanali(et) i dhënë…</string>
+    <string name="pref_summary_preferred_regions">Përzgjidh prej cilit rajon të merret video “E zgjedhur”: %s</string>
+    <string name="preferred_lang_updated">Që të përdoret gjuha e re, rifreskoni videot.</string>
+    <string name="pref_summary_lang_detection_video_filtering">Përdor plot burime për të pikasur gjuhën e videos dhe blloko gjuhë(t) jo të parapëlqyer.</string>
+    <string name="pref_summary_low_views_filter">Lër jashtë video me parje të pakta: %s</string>
+    <string name="pref_disable_playback_status_deleted">Gjendja e Luajtjes u fshi.</string>
+    <string name="pref_title_enable_sponsorblock">Aktivizo SponsorBlock</string>
+    <string name="pref_summary_enable_sponsorblock">Anashkalo vetvetiu segmente video që lidhen me sponsorë, kujtues ndërveprimesh, etj</string>
+    <string name="pref_summary_maximum_res_metered">Përzgjidhni qartësinë maksimum për ju për transmetim përmes një rrjeti me kuota: %s</string>
+    <string name="app_license">Të drejta kopjimi © 2015–2018 Ramon Mifsud
+\n
+\nKy program është software i lirë: mund ta rishpërndani dhe/ose ndryshoni sipas kushteve të licencës GNU General Public, siç botohet ajo nga Free Software Foundation (versioni 3 i Licencës).
+\n
+\nKy program jepet me shpresën se do të jetë i dobishëm, por PA NDONJË GARANCI; madje as edhe garancinë e nënkuptuar të TREGTUESHMËRISË, apo TË TË QENIT I PËRSHTATSHËM PËR NJË QËLLIM TË CAKTUAR. Për më tepër hollësi, shihni GNU General Public License.
+\n
+\nDuhet të keni marrë një kopje të licencës GNU General Public License tok me këtë program. Nëse jo, shihni &lt;https://www.gnu.org/licenses/&gt;</string>
+    <string name="pref_summary_use_newpipe_backend">Për përdorim të YouTube-it përdor API-n NewPipe…</string>
+    <string name="pref_key_use_newer_formats_summary">Në versione të vjetër, të pambuluar të Android-it, cilësia e zërit dhe videos mund të ketë probleme.</string>
+    <string name="setting_updated">Që të përdoret rregullimi i ri, rifreskoni videot.</string>
+    <string name="pref_playback_status_cleared">Gjendja e luajtjes u spastrua.</string>
 </resources>
