@@ -30,4 +30,47 @@
     <string name="pref_summary_import_dbs">ਆਪਣੇ ਬੁੱਕਮਾਰਕਸ ਅਤੇ ਸਬਸਕ੍ਰਿਪਸ਼ਨ ਬੈਕਅੱਪ ਨੂੰ ਆਯਾਤ ਕਰੋ।</string>
     <string name="databases_import_select_backup">ਆਯਾਤ ਕਰਨ ਲਈ ਬੈਕਅੱਪ ਫਾਈਲ ਚੁਣੋ</string>
     <string name="databases_import_warning_message">ਬੁੱਕਮਾਰਕਸ ਅਤੇ ਸਬਸਕ੍ਰਿਪਸ਼ਨਾਂ ਨੂੰ ਚੁਣੀ ਗਈ ਬੈਕਅੱਪ ਫਾਈਲ ਵਿੱਚ ਡੇਟਾ ਨਾਲ ਬਦਲਣਾ ਹੈ\?</string>
+    <string name="databases_import_fail">ਤੁਹਾਡੇ ਡੇਟਾਬੇਸ ਨੂੰ ਆਯਾਤ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਿਆ।</string>
+    <string name="pref_title_import_subs">YouTube ਤੋਂ ਸਬਸਕ੍ਰਿਪਸ਼ਨਾਂ ਆਯਾਤ ਕਰੋ</string>
+    <string name="pref_summary_import_subs">ਆਪਣੇ ਯੂਟਿਊਬ ਖਾਤੇ ਤੋਂ ਆਪਣੀਆਂ ਸਬਸਕ੍ਰਿਪਸ਼ਨਾਂ ਨੂੰ ਆਯਾਤ ਕਰੋ।</string>
+    <string name="pref_chromecast_category">ਕਰੋਮਕਾਸਟ</string>
+    <string name="pref_title_chromecast_none">ਕੋਈ ਵੀ ਨਹੀਂ</string>
+    <string name="pref_network_downloads_category">ਨੈੱਟਵਰਕ ਅਤੇ ਡਾਊਨਲੋਡ</string>
+    <string name="pref_about_category">ਦੇ ਬਾਰੇ</string>
+    <string name="pref_title_website">ਵੈੱਬਸਾਈਟ</string>
+    <string name="pref_title_credits">ਕ੍ਰੈਡਿਟਸ</string>
+    <string name="pref_summary_credits">ਇਸ ਐਪ ਦੇ ਪਿੱਛੇ ਚੰਗੇ ਲੋਕ ਅਤੇ ਲੀਬਰ ਪ੍ਰੋਜੈਕਟਸ।</string>
+    <string name="pref_title_open_issue">ਕੋਈ ਮੁੱਦਾ ਖੋਲ੍ਹੋ</string>
+    <string name="pref_summary_open_issue">ਕੋਈ ਵਿਚਾਰ ਸੁਝਾਓ ਜਾਂ ਬੱਗ ਦੀ ਰਿਪੋਰਟ ਕਰੋ।</string>
+    <string name="pref_title_version">ਸੰਸਕਰਣ</string>
+    <string name="pref_title_updates">ਅੱਪਡੇਟ</string>
+    <string name="pref_summary_updates">ਨਵੇਂ ਸੰਸਕਰਣਾਂ ਦੀ ਜਾਂਚ ਕਰੋ।</string>
+    <string name="pref_title_license">ਕਾਪੀਲਿਫਟ ਲਿਬਰੇ ਲਾਇਸੈਂਸ</string>
+    <string name="pref_summary_license">ਜੀਪੀਐਲ ਵੀ3+</string>
+    <string name="i_agree">ਮੈਂ ਸਹਿਮਤ ਹਾਂ l</string>
+    <string name="pref_other_category">ਹੋਰ</string>
+    <string name="pref_title_default_tab">ਡੀਫ਼ਾਲਟ ਟੈਬ</string>
+    <string name="pref_summary_default_tab">ਸਕਾਈਟਿਊਬ ਲਾਂਚ ਹੋਣ \'ਤੇ ਦਿਖਾਉਣ ਲਈ ਟੈਬ: %s</string>
+    <string name="pref_title_hide_tabs">ਟੈਬਾਂ ਲੁਕਾਓ</string>
+    <string name="pref_hide_tabs_restart">ਐਪ ਨੂੰ ਮੁੜ ਚਾਲੂ ਕਰੋ \'ਤੇ ਇਹਨਾਂ ਟੈਬਾਂ ਦੀ ਵਰਤੋਂ ਕਰੋ ।</string>
+    <string name="pref_title_feed_notification">ਫੀਡ ਆਟੋ ਸੂਚਨਾ</string>
+    <string name="pref_title_disable_screen_gestures">ਕੋਈ ਵੀਡੀਓ ਸੰਕੇਤ ਨਹੀਂ</string>
+    <string name="pref_video_continuous_repeat_toggle">ਲਗਾਤਾਰ ਦੁਹਰਾਓ</string>
+    <string name="databases_import_success">ਨਵੇਂ ਬੁੱਕਮਾਰਕਸ ਅਤੇ ਸਬਸਕ੍ਰਿਪਸ਼ਨਾਂ ਦੀ ਵਰਤੋਂ ਕਰਨ ਲਈ ਐਪ ਨੂੰ ਦੁਬਾਰਾ ਚਲਾਓ।</string>
+    <string name="subs_import_select_backup">ਆਯਾਤ ਕਰਨ ਲਈ YouTube XML ਫਾਈਲ ਚੁਣੋ</string>
+    <string name="pref_title_autocast">ਆਟੋਕਾਸਟ</string>
+    <string name="pref_summary_autocast">SkyTube ਵਿੱਚ ਹੋਰ ਵੀਡੀਓ ਐਪਾਂ ਦੀ ਵਰਤੋਂ ਕਰਦੇ ਸਮੇਂ ਪਲੇਬੈਕ ਲਈ Chromecast ਡੀਵਾਈਸ।</string>
+    <string name="app_license">ਕਾਪੀਰਾਈਟ © 2015–2018 ਰੈਮਨ ਮਿਫਸੂਦ ਇਹ ਪ੍ਰੋਗਰਾਮ ਮੁਫਤ ਸਾਫਟਵੇਅਰ ਹੈ:
+\n
+\n ਤੁਸੀਂ ਇਸਨੂੰ ਦੁਬਾਰਾ ਵੰਡ ਸਕਦੇ ਹੋ ਅਤੇ/ਜਾਂ ਇਸਨੂੰ GNU ਜਨਰਲ ਪਬਲਿਕ ਲਾਈਸੈਂਸ ਦੀਆਂ ਸ਼ਰਤਾਂ ਦੇ ਤਹਿਤ ਸੋਧ ਸਕਦੇ ਹੋ ਜਿਵੇਂ ਕਿ ਮੁਫਤ ਸਾਫਟਵੇਅਰ ਫਾਊਂਡੇਸ਼ਨ (ਲਾਈਸੈਂਸ ਦਾ ਸੰਸਕਰਣ 3) ਦੁਆਰਾ ਪ੍ਰਕਾਸ਼ਿਤ ਕੀਤਾ ਗਿਆ ਹੈ।
+\n
+\nਇਹ ਪ੍ਰੋਗਰਾਮ ਇਸ ਉਮੀਦ ਵਿੱਚ ਵੰਡਿਆ ਗਿਆ ਹੈ ਕਿ ਇਹ ਲਾਭਦਾਇਕ ਹੋਵੇਗਾ, ਪਰ ਬਿਨਾਂ ਕਿਸੇ ਵਾਰੰਟੀ ਦੇ; ਕਿਸੇ ਖਾਸ ਮਕਸਦ ਲਈ ਵਪਾਰਕਤਾ ਜਾਂ ਫਿਟਨੈਸ ਦੀ ਅਪ੍ਰਤੱਖ ਵਾਰੰਟੀ ਤੋਂ ਬਿਨਾਂ। ਹੋਰ ਵੇਰਵਿਆਂ ਲਈ GNU ਜਨਰਲ ਪਬਲਿਕ ਲਾਇਸੈਂਸ ਵੇਖੋ। 
+\n
+\nਤੁਹਾਨੂੰ ਇਸ ਪ੍ਰੋਗਰਾਮ ਦੇ ਨਾਲ GNU ਜਨਰਲ ਪਬਲਿਕ ਲਾਇਸੈਂਸ ਦੀ ਇੱਕ ਕਾਪੀ ਪ੍ਰਾਪਤ ਹੋਣੀ ਚਾਹੀਦੀ ਹੈ। ਜੇਕਰ ਨਹੀਂ, ਤਾਂ &lt;https://www.gnu.org/licenses/&gt; ਦੇਖੋ</string>
+    <string name="system_default_country">ਸਿਸਟਮ</string>
+    <string name="pref_summary_hide_tabs">ਨਾ ਦਿਖਾਉਣ ਲਈ ਟੈਬਾਂ ਚੁਣੋ। ਮੁੜ-ਚਾਲੂ ਕਰਨ ਦੀ ਲੋੜ ਹੈ।</string>
+    <string name="pref_summary_feed_notification">ਸਬਸਕ੍ਰਾਈਬ ਕੀਤੇ ਚੈਨਲਾਂ ਤੋਂ ਨਵੇਂ ਵੀਡੀਓਜ਼ ਨੂੰ ਕਿੰਨੀ ਵਾਰ ਲੱਭਣਾ ਹੈ: %s</string>
+    <string name="pref_summary_screen_orientation">ਵੀਡੀਓ ਪਲੇਅਰ ਓਰੀਐਂਟੇਸ਼ਨ: %s</string>
+    <string name="pref_title_screen_orientation">ਸਕ੍ਰੀਨ ਓਰੀਐਂਟੇਸ਼ਨ</string>
+    <string name="pref_summary_disable_screen_gestures">ਅਵਾਜ਼, ਚਮਕ ਅਤੇ ਵੀਡੀਓਜ਼ ਵਿੱਚ ਅੱਗੇ/ਪਿੱਛੇ ਦੀ ਭਾਲ ਕਰਨ ਲਈ ਸੰਕੇਤਾਂ ਨੂੰ ਬੰਦ ਕਰੋ।</string>
 </resources>
