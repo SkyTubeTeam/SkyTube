@@ -1,2 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="next">आगे</string>
+    <string name="done">पूर्ण</string>
+    <string name="skip">छोडें</string>
+    <string name="page_counter">%2$d में से %1$d</string>
+    <string name="tutorial_slide_1">टिप्पणियाँ देखने के लिए ← स्वाइप करें।</string>
+    <string name="tutorial_slide_2">वीडियो का विवरण देखने के लिए ↑ स्वाइप करें।</string>
+    <string name="tutorial_slide_3">स्वाइप ← → आगे या पीछे खोजने के लिए।</string>
+    <string name="tutorial_slide_4">अवाज समायोजित करने के लिए ↑ ↓ स्वाइप करें।</string>
+    <string name="tutorial_slide_5">चमक समायोजित करने के लिए ↑ ↓ स्वाइप करें।</string>
+    <string name="tutorial_slide_6">वीडियो को रोकने या चलाने के लिए डबल टैप करें।</string>
+</resources>
