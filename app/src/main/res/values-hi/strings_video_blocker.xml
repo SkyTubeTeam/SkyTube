@@ -1,2 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="blocked_videos">ब्लॉक वीडियो</string>
+    <string name="no_videos_blocked">क्या आप वीडियो ब्लॉकर को वीडियो को ब्लॉक या फ़िल्टर करने के लिए सेट अप करना चाहते हैं\?</string>
+    <string name="configure">सेटअप</string>
+    <string name="block_channel">चैनल ब्लॉक करें</string>
+    <string name="channel_blacklisted">नए चैनल ब्लैकलिस्ट का उपयोग करने के लिए रीफ्रेश करें।</string>
+    <string name="channel_blacklist_error">चैनल को ब्लैकलिस्ट नहीं किया जा सका।</string>
+    <string name="channel_unwhitelist_error">चैनल को वाइटलिस्ट से नहीं निकाला जा सका।</string>
+    <string name="dislikes">%d%% नापसंद</string>
+</resources>
