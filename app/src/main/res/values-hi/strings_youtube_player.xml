@@ -1,2 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="metered_network_blocked_by_policy">डाउनलोड ब्लॉक कर दिया गया है क्योंकि आप एक मीटर्ड नेटवर्क के माध्यम से जुड़े हुए हैं।</string>
+    <string name="mark_watched">देखा गया चिह्नित करें</string>
+    <string name="open_in_browser">वेब ब्राउजर में खोलें</string>
+    <string name="share_via">के माध्यम से साझा करें…</string>
+    <string name="error_get_comments">टिप्पणियां प्राप्त नहीं की जा सकीं।</string>
+    <string name="no_video_comments">इस वीडियो में या तो कोई टिप्पणी नहीं है, या इसे बंद कर दिया गया है।</string>
+    <string name="should_resume">जहां रुके थे वहां से जारी रखें\?</string>
+    <string name="sponsorblock_category_filler">भरनेवाला</string>
+    <string name="sponsorblock_category_interaction">इंटरेक्शन रिमाइंडर</string>
+    <string name="error_stream_err_unavailable">अनुपलब्ध संदेश।</string>
+    <string name="error_stream_decryption_fail">YouTube सेवा के लिए डिक्रिप्शन कोड लोड नहीं किया जा सका।</string>
+    <string name="error_stream_parse_error">पार्स करने में त्रुटि।</string>
+    <string name="error_video_play">वीडियो प्लेबैक त्रुटि</string>
+    <string name="error_video_streams_empty">\'%s\' वीडियो में कोई स्ट्रीम नहीं है।</string>
+    <string name="error_video_streams">किसी भी वीडियो स्ट्रीम को प्राप्त नहीं किया जा सका।</string>
+    <string name="error_get_video_desc">वीडियो विवरण नहीं लाया जा सका.</string>
+    <string name="error_invalid_url">अमान्य वीडियो यूआरएल: %s</string>
+    <string name="error_downloaded_file_is_corrupted">डाउनलोड किया गया वीडियो <b>दूषित</b> दिखता है: <br/> <br/> %s। <br/> <br/> <b>हटाएं</b> फ़ाइल\?</string>
+    <string name="error_video_parse_error">वीडियो प्रारंभ नहीं किया जा सका: <br/> <br/> %s.</string>
+    <string name="metered_network">मीटर्ड नेटवर्क</string>
+    <string name="warning_metered_network_play">पहले डेटा उपयोग शुल्क से बचने के लिए किसी अनमीटर्ड नेटवर्क से कनेक्ट करें। फिर भी वीडियो चलाएं\?</string>
+    <string name="warning_metered_network_disable">फिर कभी मत पूछो।</string>
+    <string name="play_video">वीडियो चलाएं</string>
+    <string name="warning_live_video">फ़िलहाल लाइव स्ट्रीम नहीं चला सकते. किसी दूसरे ऐप्लिकेशन में खोलें\?</string>
+    <string name="ratings_disabled">रेटिंग बंद</string>
+    <string name="loading_video">वीडियो लोड हो रहा है…</string>
+    <string name="reload_video">वीडियो पुनः लोड करें</string>
+    <string name="open_with">के साथ खोलें…</string>
+    <string name="share">साझा करें</string>
+    <string name="url_copied_to_clipboard">URL को क्लिपबोर्ड पर कॉपी किया गया।</string>
+    <string name="copy_url">URL कॉपी करें</string>
+    <string name="mark_unwatched">नहीं देखा हुआ चिह्नित करें</string>
+    <string name="error_get_comments_no_network">पहले टिप्पणियां प्राप्त करने के लिए इंटरनेट से कनेक्ट करें।</string>
+    <string name="hide_replies">जवाब छुपाएं</string>
+    <string name="view_replies">जवाब देखें</string>
+    <string name="enter_video_url">वीडियो URL दर्ज करें</string>
+    <string name="play">चलाएं</string>
+    <string name="cancel">रद्द करें</string>
+    <string name="clear">साफ़ करें</string>
+    <string name="resume">फिर चलाए</string>
+    <string name="sponsorblock_skipped">स्किप किए सेग्मेंट: %s</string>
+    <string name="sponsorblock_category_sponsor">स्पॉन्सर</string>
+    <string name="sponsorblock_category_selfpromo">स्वयं प्रचार</string>
+    <string name="sponsorblock_category_music_offtopic">गैर-संगीत अनुभाग</string>
+    <string name="sponsorblock_category_intro">परिचय/मध्यांतर</string>
+    <string name="sponsorblock_category_outro">एंडकार्ड/क्रेडिट</string>
+    <string name="sponsorblock_category_preview">पूर्वावलोकन/रिकैप</string>
+</resources>
