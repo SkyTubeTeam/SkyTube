@@ -1,2 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="error_video_streams">ⴰⵣⴳⴰⵍ ⴳ ⵡⴰⵡⴰⴹ ⵖⵔ ⵜⴳⵔⵓⵎⵎⴰⵡⵉⵏ ⵏ ⵓⵣⵓⵣⵣⵔ ⵏ ⵓⴼⵉⴷⵢⵓ.</string>
+    <string name="copy_url">ⵙⵙⵏⵖⵍ URL</string>
+    <string name="error_stream_err_unavailable">ⵜⴰⴱⵔⴰⵜ ⴰⴷ ⵓⵔ ⵜⵍⵍⵉ.</string>
+    <string name="error_stream_decryption_fail">ⵉⵍⵍⴰ ⵓⵣⴳⴰⵍ ⴳ ⵡⴰⴳⴰⵎ ⵏ ⵉⵏⵉⴳⵍ ⵏ ⵓⵔⴰⵏⵜⴰⵍ ⵉ ⵜⵏⴰⴼⵓⵜ ⵏ YouTube.</string>
+    <string name="error_video_play">ⵜⴰⵣⴳⵍⵜ ⴳ ⵓⵙⵡⵓⵔⵉ ⵏ ⵓⴼⵉⴷⵢⵓ</string>
+    <string name="error_stream_parse_error">ⵜⴰⵣⴳⵍⵜ ⴳ ⵓⵙⴼⵙⵉ.</string>
+    <string name="error_video_streams_empty">ⴰⴼⵉⴷⵢⵓ ⵏ \'%s\' ⵓⵔ ⴷⵉⴳⵙ ⴰⵣⵓⵣⵣⵔ.</string>
+    <string name="error_get_video_desc">ⴰⵣⴳⴰⵍ ⴳ ⵡⴰⵡⴰⴹ ⵖⵔ ⵓⴳⵍⴰⵎ ⵏ ⵓⴼⵉⴷⵢⵓ.</string>
+    <string name="error_invalid_url">URL ⵏ ⵓⴼⵉⴷⵢⵓ ⵓⵔ ⵉⵎⵙⴰⵙⴰ: %s</string>
+    <string name="error_downloaded_file_is_corrupted">ⵉⴹⵀⵕ ⴷ ⵓⴼⵉⴷⵢⵓ ⵏⵏⴰ ⵉⵜⵜⵡⴰⴳⵎⵏ <b> ⴷ ⵉⵎⵉⵛⴽⵉ </b>: <br/> <br/> %s. <br/> <br/> <b> ⴽⴽⵙ </b> ⴰⴼⴰⵢⵍⵓ\?</string>
+    <string name="error_video_parse_error">ⴰⵣⴳⴰⵍ ⴳ ⵓⵙⵏⵜⵉ ⵏ ⵓⴼⵉⴷⵢⵓ: <br/> <br/> %s.</string>
+    <string name="play_video">ⵕⵥⵎ ⴰⴼⵉⴷⵢⵓ</string>
+    <string name="loading_video">ⴰⴽⵜⵓⵔ ⵏ ⵓⴼⵉⴷⵢⵓ…</string>
+    <string name="metered_network">ⴰⵥⵟⵟⴰ ⴰⵏⴽⵔⵓⴼ</string>
+    <string name="reload_video">ⴰⵍⵙ ⴰⴳⴰⵎ ⵏ ⵓⴼⵉⴷⵢⵓ</string>
+    <string name="open_in_browser">ⴽⵛⵎ ⵙ ⵓⵎⵙⵙⴰⵔⴰ ⵏ web</string>
+    <string name="warning_metered_network_disable">ⴰⴷ ⵓⵔ ⵉⵢⵉ ⵜⵙⵇⵙⴰ ⴷⴰⵖ.</string>
+    <string name="ratings_disabled">ⵙⴱⴷⴷ ⴰⵣⵎⵎⴻⵎ</string>
+    <string name="open_with">ⵕⵥⵎ ⵙ…</string>
+    <string name="share">ⴱⴹⵓ</string>
+    <string name="share_via">ⴱⴹⵓ ⵙ…</string>
+    <string name="url_copied_to_clipboard">ⵉⵜⵜⵓⵙⵙⵏⵖⵍ URL ⴳ ⵜⵣⵣⵏⴱⵉⵍⵜ.</string>
+    <string name="play">ⵕⵥⵎ</string>
+    <string name="cancel">ⵙⵙⵔ</string>
+    <string name="clear">ⴽⴽⵙ</string>
+</resources>
