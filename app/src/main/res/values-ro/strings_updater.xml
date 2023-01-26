@@ -1,2 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="update_available">Versiune nouă disponibilă</string>
+    <string name="update_dialog_msg">Este disponibilă o nouă versiune SkyTube. Versiunea %s va fi instalată.</string>
+    <string name="up_to_date">Actualizat</string>
+    <string name="up_to_date_msg">Este instalată cea mai nouă versiune SkyTube.</string>
+    <string name="release_notes">Modificări în %s</string>
+    <string name="update">Actualizare</string>
+    <string name="later">Mai târziu</string>
+    <string name="update_failure">Nu s-a putut instala noua versiune a aplicației.</string>
+    <string name="downloading">Se descarcă…</string>
+    <string name="android_too_old">Din păcate, versiunea Android este prea veche pentru a actualiza. Trebuie să instalezi manual \"SkyTube Legacy\"!</string>
+</resources>
