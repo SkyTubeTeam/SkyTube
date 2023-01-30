@@ -61,6 +61,7 @@ import free.rm.skytube.businessobjects.db.SearchHistoryDb;
 import free.rm.skytube.businessobjects.db.SearchHistoryTable;
 import free.rm.skytube.databinding.DialogEnterVideoUrlBinding;
 import free.rm.skytube.gui.businessobjects.BlockedVideosDialog;
+import free.rm.skytube.gui.businessobjects.CleanerDialog;
 import free.rm.skytube.gui.businessobjects.adapters.SearchHistoryCursorAdapter;
 import free.rm.skytube.gui.businessobjects.fragments.FragmentEx;
 import free.rm.skytube.gui.businessobjects.updates.UpdatesCheckerTask;
@@ -326,6 +327,9 @@ public class MainActivity extends BaseActivity {
 				return true;
 			case R.id.menu_enter_video_url:
 				displayEnterVideoUrlDialog();
+				return true;
+			case R.id.menu_clean_downloads:
+				new CleanerDialog(this).show();
 				return true;
 			case android.R.id.home:
 				Fragment mainFragment = getMainFragment();

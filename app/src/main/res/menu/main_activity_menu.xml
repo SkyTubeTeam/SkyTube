@@ -21,6 +21,10 @@
 		  android:title="@string/enter_video_url"
 		  app:showAsAction="never"/>
 
+	<item android:id="@+id/menu_clean_downloads"
+		android:title="@string/cleaner"
+		app:showAsAction="never"/>
+
 	<item android:id="@+id/menu_preferences"
 		  android:title="@string/preferences"
 		  app:showAsAction="never"/>
