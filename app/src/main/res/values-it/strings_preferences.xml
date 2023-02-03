@@ -114,7 +114,7 @@
     <string name="pref_summary_clear_playback_status">Cancella lo stato di progressione per tutti i video.</string>
     <string name="pref_playback_status_cleared">Stato di riproduzione cancellato.</string>
     <string name="pref_category_downloads">Scaricamenti</string>
-    <string name="pref_title_download_to_separate_directories">Scarica i video in cartelle</string>
+    <string name="pref_title_download_to_separate_directories">Cartella download canale</string>
     <string name="pref_summary_download_to_separate_directories">Salva i video in cartelle in base al nome del canale.</string>
     <string name="pref_title_disable_screen_gestures">Disattivazione gesti</string>
     <string name="pref_summary_disable_screen_gestures">Disattiva i gesti sullo schermo per volume, luminosità e l\'avanti/indietro dei video.</string>
