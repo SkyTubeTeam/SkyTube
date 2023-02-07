@@ -4,8 +4,8 @@
     <string name="tutorial_slide_5">Pyyhkäise ylös tai alas säätääksesi kirkkautta.</string>
     <string name="tutorial_slide_4">Pyyhkäise ylös tai alas säätääksesi äänenvoimakkuutta.</string>
     <string name="tutorial_slide_3">Pyyhkäise oikealle tai vasemmalle kelataksesi eteen- tai taaksepäin.</string>
-    <string name="tutorial_slide_2">Pyyhkäise ylös nähdäksesi videon kuvauksen.</string>
-    <string name="tutorial_slide_1">Pyyhkäise vasemmalle nähdäksesi kommentit.</string>
+    <string name="tutorial_slide_2">Pyyhkäise ↑ nähdäksesi videon kuvauksen.</string>
+    <string name="tutorial_slide_1">Pyyhkäise ← nähdäksesi kommentit.</string>
     <string name="page_counter">%1$d / %2$d:sta</string>
     <string name="skip">Ohita</string>
     <string name="done">Valmis</string>

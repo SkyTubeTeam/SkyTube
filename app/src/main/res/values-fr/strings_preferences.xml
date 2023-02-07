@@ -183,9 +183,9 @@
     <string name="pref_summary_metered_network_usage">Que faire si on utilise un réseau avec compteur pour télécharger/regarder des vidéos : %s</string>
     <string name="pref_title_metered_network_usage">Utilisation du réseau avec compteur</string>
     <string name="pref_summary_maximum_res_metered">Sélectionnez votre résolution maximale lors de la diffusion en continu via un réseau avec compteur : %s</string>
-    <string name="pref_title_maximum_res_metered">Résolution la plus élevée pour un réseau de compteurs</string>
+    <string name="pref_title_maximum_res_metered">Résolution la plus élevée pour les réseaux avec compteurs</string>
     <string name="pref_summary_minimum_res_metered">Sélectionnez la résolution la plus basse lors de la diffusion en continu via un réseau à compteur : %s</string>
-    <string name="pref_title_minimum_res_metered">Résolution la plus basse pour le réseau de compteurs</string>
+    <string name="pref_title_minimum_res_metered">Résolution la plus basse pour les réseaux avec compteurs</string>
     <string name="pref_category_metered_network">Réseau avec compteur</string>
     <string name="no_resolution_specified">Aucune</string>
     <string name="pref_summary_minimum_res">Sélectionnez la résolution la plus basse : %s</string>

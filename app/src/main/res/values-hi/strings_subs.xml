@@ -4,6 +4,25 @@
     <string name="unsubscribe">सदस्यता वापस लें</string>
     <string name="total_subscribers">%,d सदस्य</string>
     <string name="subscribed">सदस्यता ली</string>
-    <string name="channel_subscribe_failed">सदस्यता नही ले पा रहा है</string>
+    <string name="channel_subscribe_failed">चैनल को सब्सक्राइब नहीं कर सका</string>
     <string name="channel_already_subscribed">पहले से ही सदस्यता ली हुई</string>
+    <string name="subscriptions">सब्सक्रिप्शनस</string>
+    <string name="unsubscribed">अनसब्सक्राइब किया</string>
+    <string name="channel_unsubscribed">चैनल अनसब्सक्राइब किया</string>
+    <string name="import_subscriptions">सब्सक्रिप्शनस आयात करें</string>
+    <string name="select_none">किसी का चयन न करें</string>
+    <string name="about">के बारे में</string>
+    <string name="channel_subscribed">चैनल सब्सक्राइब किया</string>
+    <string name="error_unable_to_subscribe">चैनल (id=%s) से/की सब्सक्रिप्शन नहीं ले सका (अन)</string>
+    <string name="import_subscriptions_description">\"YouTube और YouTube Music\" को छोड़कर https://takeout.google.com पर सब कुछ अचयनित करें और केवल सब्सक्रिप्शन प्राप्त करने के लिए \"सभी YouTube डेटा शामिल\" पर क्लिक करें। \"अगला\" पर क्लिक करें और फिर \"निर्यात बनाएँ\"। डाउनलोड लिंक के साथ ई-मेल प्राप्त करने के लिए क्लिक करें। अपने ई-मेल क्लाइंट से फ़ाइल डाउनलोड करें। इस ज़िप फ़ाइल का चयन करें या इसे निकालें और नीचे \"चयनित सदस्यता फ़ाइल\" का उपयोग करके (/टेकआउट/यूट्यूब और YouTube संगीत/सदस्यता/) के भीतर शामिल सब्सक्रिप्शन.सीएसवी या सब्सक्रिप्शन.जॉन का चयन करें।</string>
+    <string name="select_all">सबका चयन करें</string>
+    <string name="error_get_subbed_channels">चैनल सब्सक्रिप्शनस प्राप्त नहीं की जा सकीं।</string>
+    <string name="error_check_if_user_has_subbed">यह जांच नहीं सका कि आपने चैनल की सब्सक्रिप्शन ली है या नहीं (id=%s)</string>
+    <string name="unsubscribe_from_all_current_sibbed_channels">अपने वर्तमान में सब्सक्राइब किए गए सभी चैनलों से सदस्यता समाप्त करें।</string>
+    <string name="subscriptions_to_channels_imported">%d चैनल आयात किए गए।</string>
+    <string name="select_sub_file">सब्सक्रिप्शन फ़ाइल का चयन करें</string>
+    <string name="no_channels_found">आपके द्वारा अपलोड की गई फ़ाइल में कोई YouTube चैनल नहीं मिला।</string>
+    <string name="no_new_channels_found">ऐसा कोई YouTube चैनल नहीं मिला जिसके आप पहले से सदस्य न हों.</string>
+    <string name="import_subscriptions_parse_error">आपके द्वारा अपलोड की गई फ़ाइल को पार्स नहीं किया जा सका: %s.</string>
+    <string name="failed_to_import_subscriptions">आपकी YouTube सदस्यताएं आयात नहीं की जा सकीं।</string>
 </resources>

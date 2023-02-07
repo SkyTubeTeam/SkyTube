@@ -180,4 +180,6 @@
     <string name="pref_summary_open_issue">Foreslå en idé eller innrapporter en feil.</string>
     <string name="pref_title_use_dislike_api">Vis nedovertommel igjen</string>
     <string name="pref_summary_use_dislike_api">Få tilbake negative vurderinger ved bruk av returnyoutubedislike.com</string>
+    <string name="pref_summary_playback_speed">Forvalgt avspillingshastighet: %s</string>
+    <string name="pref_title_playback_speed">Forvalgt avspillingshastighet</string>
 </resources>

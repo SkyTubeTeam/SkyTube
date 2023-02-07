@@ -164,4 +164,5 @@
     <string name="pref_summary_sponsorblock_category_list">Chọn thể loại để bỏ qua</string>
     <string name="pref_title_credit_sponsorblock">Ghi công</string>
     <string name="pref_summary_credit_sponsorblock">Sử dụng dữ liệu SponsorBlock từ https://sponsor.ajay.app</string>
+    <string name="pref_summary_open_issue">Gợi ý ý tưởng hoặc báo cáo lỗi.</string>
 </resources>

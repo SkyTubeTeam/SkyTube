@@ -36,7 +36,7 @@
     <string name="reload_video">Recharger la vidéo</string>
     <string name="metered_network_blocked_by_policy">Le téléchargement est bloqué parce que vous êtes connecté·e via un réseau à compteur.</string>
     <string name="warning_metered_network_disable">Ne plus demander.</string>
-    <string name="warning_metered_network_play">Connectez-vous à un réseau non mesuré pour éviter les frais d\'utilisation des données en premier lieu. Lire quand même la vidéo \?</string>
+    <string name="warning_metered_network_play">Connectez-vous d\'abord à un réseau sans compteur pour éviter les frais d\'utilisation des données. Lire quand même la vidéo \?</string>
     <string name="metered_network">Réseau avec compteur</string>
     <string name="sponsorblock_category_interaction">Rappel d\'interaction</string>
     <string name="sponsorblock_category_music_offtopic">Section non musicale</string>

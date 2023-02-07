@@ -6,7 +6,7 @@
 \n
 \nTämä ohjelmisto on levitetty siinä toivossa, että se olisi hyödyllinen, mutta TAKUITA EI MYÖNNETÄ; ei edes oletettua takuuta MARKKINAKELPOISUUDESTA tai KELPOISUUDESTA JOHONKIN TARKOITUKSEEN. Katso tarkemmin GNU General Public License lisätietoja varten.
 \n
-\nSinulla tulisi olla kopio GNU General Public -lisenssistä tämän ohjelman mukana. Jos ei, katso &lt;http://www.gnu.org/licenses/&gt;</string>
+\nSinulla tulisi olla kopio GNU General Public -lisenssistä tämän ohjelman mukana. Jos ei, katso &lt;https://www.gnu.org/licenses/&gt;</string>
     <string name="pref_title_switch_volume_and_brightness">Muuta äänenvoimakkuuden ja kirkkauden elettä</string>
     <string name="pref_summary_disable_screen_gestures">Poista käytöstä eleet, joilla ohjataan äänenvoimakkuutta, kirkkautta ja pikakelaamista.</string>
     <string name="pref_summary_default_content_country">Näytä sisältöä, joka on tarkoitettu tähän maahan: %s</string>
@@ -98,32 +98,32 @@
     <string name="pref_title_screen_orientation">Näytön asento</string>
     <string name="pref_summary_feed_notification">Kuinka usein tarkistetaan, onko tilatuilta kanavilta tullut uusia videoita: %s</string>
     <string name="pref_title_feed_notification">Syötteen automaattiset ilmoitukset</string>
-    <string name="pref_hide_tabs_restart">Uudelleenkäynnistä sovellus näyttääksesi päivitetyt välilehdet.</string>
+    <string name="pref_hide_tabs_restart">Uudelleenkäynnistä sovellus käyttääksesi pävitettyjä välilehtiä.</string>
     <string name="pref_summary_hide_tabs">Valitse, mitä välilehtiä ei näytetä. Uudelleenkäynnistys vaaditaan.</string>
     <string name="pref_title_hide_tabs">Piilota välilehdet</string>
-    <string name="pref_summary_default_tab">Oletusvälilehti, joka näytetään SkyTuben käynnistyessä: %s</string>
+    <string name="pref_summary_default_tab">Välilehti, joka näytetään SkyTuben käynnistyessä: %s</string>
     <string name="pref_title_default_tab">Oletusvälilehti</string>
     <string name="pref_other_category">Muut</string>
-    <string name="system_default_country">Järjestelmän oletusmaa</string>
+    <string name="system_default_country">Järjestelmä</string>
     <string name="i_agree">Hyväksyn</string>
-    <string name="pref_summary_license">GNU General Public License version 3</string>
-    <string name="pref_title_license">Lisenssi</string>
+    <string name="pref_summary_license">GPLv3+</string>
+    <string name="pref_title_license">Kuluttajanoikeudellinen Libre Lisenssi</string>
     <string name="pref_summary_updates">Tarkista uudet versiot.</string>
     <string name="pref_title_updates">Päivitykset</string>
     <string name="pref_title_version">Versio</string>
-    <string name="pref_summary_credits">Ihmiset ja projekti, jotka tekivät tämän sovelluksen mahdolliseksi.</string>
+    <string name="pref_summary_credits">Hienot ihmiset ja projektit, jotka tekivät tämän sovelluksen mahdolliseksi.</string>
     <string name="pref_title_credits">Kiitokset</string>
     <string name="pref_title_website">Verkkosivu</string>
     <string name="pref_about_category">Tietoa</string>
     <string name="pref_network_downloads_category">Verkko ja lataukset</string>
-    <string name="pref_summary_autocast">Valitse Chromecast-laite, jota käytetään, kun muita sovelluksia käytetään videoiden avaamiseen SkyTubessa.</string>
+    <string name="pref_summary_autocast">Chromecast-laite, jota käytetään, kun muita sovelluksia käytetään videoiden avaamiseen SkyTubessa.</string>
     <string name="pref_title_autocast">AutoCast</string>
     <string name="pref_title_chromecast_none">Ei mitään</string>
     <string name="pref_chromecast_category">Chromecast</string>
     <string name="subs_import_select_backup">Valitse tuotava YouTube XML-tiedosto</string>
     <string name="pref_summary_import_subs">Tuo tilaukset YouTube-tililtäsi.</string>
     <string name="pref_title_import_subs">Tuo tilaukset YouTubesta</string>
-    <string name="databases_import_success">Tietokannat tuotu onnistuneesti. Uudelleenkäynnistä sovellus, jotta muutokset tulevat voimaan.</string>
+    <string name="databases_import_success">Uudelleenkäynnistä sovellus saadaksesi uudet kirjanmerkit ja tilaukset käyttöösi.</string>
     <string name="databases_import_fail">Tietokantojen tuonti epäonnistui.</string>
     <string name="databases_importing">Tuodaan…</string>
     <string name="continue_">Jatka</string>
@@ -143,18 +143,32 @@
     <string name="pref_summary_metered_network_usage">Mitä tehdään, jos käytetään kulutukseen perustuvaa verkkoa samalla, kun tallennetaan/katsotaan videoita: %s</string>
     <string name="pref_title_metered_network_usage">Kulutukseen perustuvan verkon käyttö</string>
     <string name="pref_summary_maximum_res_metered">Valitse maksimiresoluutio, kun suoratoistetaan kulutukseen perustuvassa verkossa: %s</string>
-    <string name="pref_title_maximum_res_metered">Maksimiresoluutio kulutukseen perustuvassa verkossa</string>
-    <string name="pref_summary_minimum_res_metered">Valitse minimiresoluutio, kun suoratoistetaan kulutukseen pohjautuvassa verkossa: %s</string>
-    <string name="pref_title_minimum_res_metered">Minimiresoluutio kulutukseen perustuvassa verkossa</string>
+    <string name="pref_title_maximum_res_metered">Korkein resoluutio kulutukseen perustuvassa verkossa</string>
+    <string name="pref_summary_minimum_res_metered">Valitse matalin resoluutio, kun suoratoistetaan kulutukseen pohjautuvassa verkossa: %s</string>
+    <string name="pref_title_minimum_res_metered">Alin resoluutio kulutukseen perustuvassa verkossa</string>
     <string name="pref_category_metered_network">Kulutukseen perustuva verkko</string>
     <string name="no_resolution_specified">Ei mitään</string>
-    <string name="pref_summary_choose_player">Videotoistin, jota käytetään: %s</string>
+    <string name="pref_summary_choose_player">Käytettävä videotoistin: %s</string>
     <string name="pref_title_choose_player">Videotoistin</string>
-    <string name="pref_summary_minimum_res">Valitse minimiresoluutio: %s</string>
-    <string name="pref_title_minimum_res">Minimiresoluutio</string>
-    <string name="pref_summary_maximum_res">Valitse maksimiresoluutio: %s</string>
-    <string name="pref_title_maximum_res">Maksimiresoluutio</string>
+    <string name="pref_summary_minimum_res">Valitse matalin resoluutio: %s</string>
+    <string name="pref_title_minimum_res">Matalin resoluutio</string>
+    <string name="pref_summary_maximum_res">Valitse korkein resoluutio: %s</string>
+    <string name="pref_title_maximum_res">Korkein resoluutio</string>
     <string name="pref_video_player_category">Videotoistin</string>
     <string name="key_preferences">asetukset</string>
     <string name="preferences">Asetukset</string>
+    <string name="pref_sponsorblock_category">SponsorBlock</string>
+    <string name="pref_general">Yleinen</string>
+    <string name="pref_title_credit_sponsorblock">Lopputekstit</string>
+    <string name="pref_summary_open_issue">Ehdota ideaa tai raportoi ongelma.</string>
+    <string name="pref_title_open_issue">Avaa ongelmaraportti</string>
+    <string name="pref_summary_use_dislike_api">Palauta en tykkää -laskuri käyttämällä returnyoutubedislike.com</string>
+    <string name="pref_title_use_dislike_api">Palauta en tykkää -laskuri</string>
+    <string name="pref_title_sponsorblock_category_list">Ohita osuuksia</string>
+    <string name="pref_summary_sponsorblock_category_list">Valitse ohitettavat kategoriat</string>
+    <string name="pref_summary_credit_sponsorblock">Käyttää SponsorBlock-dataa osoitteesta https://sponsor.ajay.app</string>
+    <string name="pref_title_enable_sponsorblock">Ota SponsorBlock käyttöön</string>
+    <string name="pref_title_playback_speed">Toistonopeuden oletus</string>
+    <string name="pref_details">Lisätiedot</string>
+    <string name="pref_summary_enable_sponsorblock">Ohita automaattisesti sponsori-, vuorovaikutus- ja muut muistutukset</string>
 </resources>
