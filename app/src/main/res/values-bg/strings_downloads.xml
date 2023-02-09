@@ -2,4 +2,16 @@
 <resources>
     <string name="downloads">Изтегляния</string>
     <string name="download">Изтегляне</string>
+    <string name="external_storage_not_available">Предоставете достъп на външен, за да изтеглите първо файла.</string>
+    <string name="download_video">Изтегляне на видео</string>
+    <string name="download_failed_because">Не може да се изтегли%1$sзащото%2$s.</string>
+    <string name="delete_download">Изтриване на изтеглянето</string>
+    <string name="unable_to_delete_file">Не можах да изтрия изтегления\'%s\' файл.</string>
+    <string name="starting_video_download">Изтегля се \'%s\'…</string>
+    <string name="video_downloaded">\'%s\' изтеглено.</string>
+    <string name="no_downloaded_videos_text">Изтеглете няколко видеоклипа, за да ги намерите тук.</string>
+    <string name="playing_video_file_missing">Видео се възпроизвежда дистанционно, тъй като не може да бъде намерен файл за изтегляне.</string>
+    <string name="warning_metered_network_download">Изтегляне на видео в мрежата с измерване, към която сте свързани\?</string>
+    <string name="video_download_stream_error">Не може да се изтегли \'%s\'.</string>
+    <string name="video_stream_not_found_with_request_resolution">Не можах да намеря нито един видео поток в заявенот%1$s-%2$sрезолюция</string>
 </resources>
