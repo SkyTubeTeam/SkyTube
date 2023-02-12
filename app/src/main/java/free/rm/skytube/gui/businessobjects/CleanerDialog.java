@@ -79,7 +79,6 @@ public class CleanerDialog extends SkyTubeMaterialDialog {
                     AtomicLong removedB = new AtomicLong();
                     // Maybe rewrite this with reactivex, so that it's parallel
                     DownloadedVideosDb.getVideoDownloadsDb().getDownloadedVideos().stream()
-                            .filter((video) -> DownloadedVideosDb.getVideoDownloadsDb().isVideoDownloaded(video.getVideoId()).blockingGet()) // Filter only downloaded videos
                             .filter((video) -> PlaybackStatusDb.getPlaybackStatusDb().getVideoWatchedStatus(video.getId()).isFullyWatched()) // Filter only watched videos
                             .forEach((video) -> {
                                 DownloadedVideosDb.Status status = DownloadedVideosDb.getVideoDownloadsDb().getDownloadedFileStatus(context, video.getVideoId()).blockingGet();
@@ -111,7 +110,6 @@ public class CleanerDialog extends SkyTubeMaterialDialog {
                     AtomicLong removedB = new AtomicLong();
                     // Maybe rewrite this with reactivex, so that it's parallel
                     BookmarksDb.getBookmarksDb().getBookmarkedVideos(BookmarksDb.getBookmarksDb().getTotalBookmarkCount().blockingGet(), null).first.stream()
-                            .filter((video) -> BookmarksDb.getBookmarksDb().isBookmarked(video.getId())) // Filter only bookmarked videos
                             .filter((video) -> PlaybackStatusDb.getPlaybackStatusDb().getVideoWatchedStatus(video.getId()).isFullyWatched()) // Filter only watched videos
                             .forEach((video) -> {
                                 // Try to remove bookmark
