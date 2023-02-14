@@ -23,4 +23,5 @@
     <string name="search_channel">Caută canal</string>
     <string name="could_not_get_playlists">Nu s-au putut obține %s liste de redare.</string>
     <string name="LIVE">În direct</string>
+    <string name="could_not_get_sponsorblock">Nu a putut prelua informații despre SponsorBlock: %s.</string>
 </resources>
