@@ -46,11 +46,13 @@ public class DownloadedVideosDb extends CardEventEmitterDatabase implements Orde
         final Uri uri;
         final Uri audioUri;
         final boolean disappeared;
+        final VideoId videoId;
 
-        public Status(Uri uri, Uri audioUri, boolean disappeared) {
+        public Status(VideoId videoId,Uri uri, Uri audioUri, boolean disappeared) {
             this.uri = uri;
             this.audioUri = audioUri;
             this.disappeared = disappeared;
+            this.videoId = videoId;
         }
 
         public Uri getUri() {
@@ -99,6 +101,10 @@ public class DownloadedVideosDb extends CardEventEmitterDatabase implements Orde
             sb.append(", disapeared=").append(disappeared);
             sb.append('}');
             return sb.toString();
+        }
+
+        public VideoId getVideoId() {
+            return videoId;
         }
     }
 
@@ -156,6 +162,31 @@ public class DownloadedVideosDb extends CardEventEmitterDatabase implements Orde
     public List<YouTubeVideo> getDownloadedVideos() {
         SkyTubeApp.nonUiThread();
         return getDownloadedVideos(DownloadedVideosTable.COL_ORDER + " DESC");
+    }
+
+    /**
+     * Get the list Statuses of Videos that have been downloaded.
+     *
+     * @return List of Status
+     */
+    public List<Status> getDownloadedVideosStatuses() {
+        try (Cursor cursor = getReadableDatabase().query(
+                DownloadedVideosTable.TABLE_NAME,
+                new String[]{DownloadedVideosTable.COL_YOUTUBE_VIDEO, DownloadedVideosTable.COL_FILE_URI, DownloadedVideosTable.COL_AUDIO_FILE_URI},
+                null,
+                null, null, null, null)) {
+            List<Status> statuses = new ArrayList<>();
+
+            while (cursor.moveToNext()) {
+                String id = cursor.getString(cursor.getColumnIndex(DownloadedVideosTable.COL_YOUTUBE_VIDEO_ID));
+                String url = String.format("https://youtu.be/%s", id);
+                statuses.add(new Status(new VideoId(id, url),
+                        getUri(cursor, cursor.getColumnIndex(DownloadedVideosTable.COL_FILE_URI)),
+                        getUri(cursor, cursor.getColumnIndex(DownloadedVideosTable.COL_AUDIO_FILE_URI)),
+                        false));
+            }
+            return statuses;
+        }
     }
 
     public SBVideoInfo getDownloadedVideoSponsorblock(String videoId) {
@@ -367,7 +398,7 @@ public class DownloadedVideosDb extends CardEventEmitterDatabase implements Orde
                 new String[]{videoId.getId()}, null, null, null)) {
 
             if (cursor.moveToNext()) {
-                return new Status(
+                return new Status(videoId,
                         getUri(cursor, cursor.getColumnIndex(DownloadedVideosTable.COL_FILE_URI)),
                         getUri(cursor, cursor.getColumnIndex(DownloadedVideosTable.COL_AUDIO_FILE_URI)),
                         false);
@@ -401,7 +432,7 @@ public class DownloadedVideosDb extends CardEventEmitterDatabase implements Orde
                             if (!localVideo.exists()) {
                                 deleteIfExists(downloadStatus.getLocalAudioFile());
                                 remove(videoId.getId());
-                                return new Status(null, null, true);
+                                return new Status(videoId, null, null, true);
                             }
                         }
                         File localAudio = downloadStatus.getLocalAudioFile();
@@ -409,12 +440,12 @@ public class DownloadedVideosDb extends CardEventEmitterDatabase implements Orde
                             if (!localAudio.exists()) {
                                 deleteIfExists(downloadStatus.getLocalVideoFile());
                                 remove(videoId.getId());
-                                return new Status(null, null, true);
+                                return new Status(videoId, null, null, true);
                             }
                         }
                         return downloadStatus;
                     }
-                    return new Status(null, null, false);
+                    return new Status(videoId, null, null, false);
                 }).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
@@ -429,7 +460,7 @@ public class DownloadedVideosDb extends CardEventEmitterDatabase implements Orde
     Single<Status> getDownloadedFileStatus(Context context, @NonNull VideoId videoId) {
         return getVideoFileUriAndValidate(videoId).onErrorReturn(error -> {
             displayGenericError(context, error);
-            return new Status(null, null, true);
+            return new Status(videoId, null, null, true);
         });
     }
 
