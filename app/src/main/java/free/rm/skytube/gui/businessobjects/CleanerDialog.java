@@ -52,11 +52,11 @@ public class CleanerDialog extends SkyTubeMaterialDialog {
             AtomicInteger removedVideosCnt = new AtomicInteger();
             AtomicLong removedMB = new AtomicLong();
             compositeDisposable.add(Single.merge(tasks).doFinally(() -> Toast.makeText(context, String.format(
-                    SkyTubeApp.getStr(R.string.cleaner_toast_finish), removedVideosCnt, removedMB), Toast.LENGTH_LONG).show())
+                            SkyTubeApp.getStr(R.string.cleaner_toast_finish), removedVideosCnt, removedMB), Toast.LENGTH_LONG).show())
                     .subscribe(pair -> {
                         removedVideosCnt.addAndGet(pair.first);
                         removedMB.addAndGet(pair.second);
-            }));
+                    }));
 
 
         });
@@ -70,7 +70,6 @@ public class CleanerDialog extends SkyTubeMaterialDialog {
      * Cleans watched Videos, that are downloaded by the user
      *
      * @param context The Context for executing database actions and showing Toasts
-     * @return
      */
     private Single<Pair<Integer,Long>> cleanWatchedDownloads(@NonNull Context context) {
         return Single.fromCallable(() -> {
@@ -78,12 +77,11 @@ public class CleanerDialog extends SkyTubeMaterialDialog {
                     AtomicInteger removedVideosCnt = new AtomicInteger();
                     AtomicLong removedB = new AtomicLong();
                     // Maybe rewrite this with reactivex, so that it's parallel
-                    DownloadedVideosDb.getVideoDownloadsDb().getDownloadedVideos().stream()
-                            .filter((video) -> PlaybackStatusDb.getPlaybackStatusDb().getVideoWatchedStatus(video.getId()).isFullyWatched()) // Filter only watched videos
-                            .forEach((video) -> {
-                                DownloadedVideosDb.Status status = DownloadedVideosDb.getVideoDownloadsDb().getDownloadedFileStatus(context, video.getVideoId()).blockingGet();
+                    DownloadedVideosDb.getVideoDownloadsDb().getDownloadedVideosStatuses().stream()
+                            .filter((status) -> PlaybackStatusDb.getPlaybackStatusDb().getVideoWatchedStatus(status.getVideoId().getId()).isFullyWatched()) // Filter only watched videos
+                            .forEach((status) -> {
                                 // Try to remove download
-                                DownloadedVideosDb.getVideoDownloadsDb().removeDownload(context, video.getVideoId()).subscribe();
+                                DownloadedVideosDb.getVideoDownloadsDb().removeDownload(context, status.getVideoId()).subscribe();
                                 // Stats
                                 removedVideosCnt.getAndIncrement();
                                 removedB.addAndGet(status.getLocalVideoFile().length());
