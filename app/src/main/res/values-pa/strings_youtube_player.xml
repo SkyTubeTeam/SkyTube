@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="error_stream_err_unavailable">ਨਾ- ਉਪਲੱਬਧ ਸੁਨੇਹਾ ।</string>
+    <string name="error_stream_parse_error">ਵਿਆਖਿਆ ਤਰੁੱਟੀ।</string>
+    <string name="error_stream_decryption_fail">YouTube ਸੇਵਾ ਲਈ ਡੀਕ੍ਰਿਪਸ਼ਨ ਕੋਡ ਲੋਡ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਿਆ।</string>
+    <string name="error_video_streams">ਕਿਸੇ ਵੀ ਵੀਡੀਓ ਸਟ੍ਰੀਮ ਨੂੰ ਪ੍ਰਾਪਤ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਿਆ।</string>
+    <string name="error_video_play">ਵੀਡੀਓ ਪਲੇਬੈਕ ਤਰੁੱਟੀ</string>
+    <string name="error_video_streams_empty">\'%s\' ਵੀਡੀਓ ਦੀ ਕੋਈ ਸਟ੍ਰੀਮ ਨਹੀਂ ਹੈ।</string>
 </resources>
