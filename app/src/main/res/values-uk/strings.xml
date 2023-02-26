@@ -30,4 +30,5 @@
     <string name="cleaner_watched_downloads">Вилучити переглянуті завантаження</string>
     <string name="cleaner_explanation">Очищуйте додані до закладок/завантажені відео. Використовуйте такі параметри фільтрів:</string>
     <string name="cleaner_watched_bookmarks">Вилучити переглянуті закладки</string>
+    <string name="video_comments_are_disabled">Коментарі до відео вимкнено</string>
 </resources>
