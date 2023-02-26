@@ -88,7 +88,6 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
                 .color(IconicsColor.colorInt(Color.RED))
                 .size(IconicsSize.TOOLBAR_ICON_SIZE)
 				.padding(IconicsSize.TOOLBAR_ICON_PADDING);
-        Log.i(TAG, "heartedIcon: " + heartedIcon + ", pads: " + IconicsSize.TOOLBAR_ICON_PADDING);
         try {
             this.commentThreadPager = NewPipeService.get().getCommentPager(videoId);
             this.expandableListView = expandableListView;
@@ -154,7 +153,7 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-        Log.i(TAG, "getGroupView " + groupPosition + " " + isExpanded + ", view=" + convertView + ", parent=" + parent);
+        Log.d(TAG, "getGroupView " + groupPosition + " " + isExpanded + ", view=" + convertView + ", parent=" + parent);
         CommentsInfoItem comment = commentThreadPager.getComment(groupPosition);
         final CommentViewHolder viewHolder = getCommentViewHolder(convertView, parent);
         if (comment != null) {
@@ -185,7 +184,7 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        Log.i(TAG, "getChildView " + groupPosition + " " + childPosition + " lastChild=" + isLastChild + ", view=" + convertView + ", parent=" + parent);
+        Log.d(TAG, "getChildView " + groupPosition + " " + childPosition + " lastChild=" + isLastChild + ", view=" + convertView + ", parent=" + parent);
         CommentsInfoItem comment = getComment(groupPosition, childPosition);
         final CommentViewHolder viewHolder = getCommentViewHolder(convertView, parent);
         if (comment != null) {
