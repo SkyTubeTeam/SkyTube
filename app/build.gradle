@@ -174,7 +174,8 @@ dependencies {
         exclude group: 'com.google.http-client', module: 'google-http-client-jackson2'
     }
 
-    implementation 'com.github.SkyTubeTeam.NewPipeExtractor:NewPipeExtractor:skytube-2022-11-04'
+    // implementation 'com.github.SkyTubeTeam.NewPipeExtractor:NewPipeExtractor:818745b7e4'
+    implementation 'com.github.TeamNewPipe.NewPipeExtractor:NewPipeExtractor:v0.22.5'
 
     implementation ('com.github.SkyTubeTeam.components:okhttp-client:0.0.5') {
         exclude group: 'com.github.SkyTubeTeam.NewPipeExtractor', module: 'extractor'
