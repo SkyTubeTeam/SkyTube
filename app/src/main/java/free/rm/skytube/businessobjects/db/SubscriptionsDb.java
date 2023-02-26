@@ -619,9 +619,13 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 
 		SQLiteDatabase db = getWritableDatabase();
 		for (YouTubeVideo video : videos) {
-			if (video.getPublishTimestamp() != null) {
-				ContentValues values = createContentValues(video, channelId);
-				db.insert(SubscriptionsVideosTable.TABLE_NAME_V2, null, values);
+			try {
+				if (video.getPublishTimestamp() != null) {
+					ContentValues values = createContentValues(video, channelId);
+					db.insert(SubscriptionsVideosTable.TABLE_NAME_V2, null, values);
+				}
+			} catch (Exception e) {
+				Logger.e(this, e, "Error inserting "+ videos + " - "+e.getMessage());
 			}
 		}
 	}
