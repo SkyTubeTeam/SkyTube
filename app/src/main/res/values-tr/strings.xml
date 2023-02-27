@@ -30,4 +30,5 @@
     <string name="cleaner">Temizleyici</string>
     <string name="cleaner_explanation">Yer imlerine eklenen/indirilen videoları temizleyin. Şu filtre seçeneklerini kullanın:</string>
     <string name="cleaner_watched_bookmarks">İzlenen yer imlerini kaldır</string>
+    <string name="video_comments_are_disabled">Video yorumları devre dışı bırakıldı</string>
 </resources>
