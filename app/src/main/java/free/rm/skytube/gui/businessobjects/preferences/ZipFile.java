@@ -19,14 +19,13 @@ package free.rm.skytube.gui.businessobjects.preferences;
 
 import android.util.Log;
 
-import org.apache.commons.codec.Charsets;
-
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.zip.ZipEntry;
@@ -84,7 +83,7 @@ public class ZipFile {
 							copyStream(zipInputStream, sw);
 							result.put(
 									zipEntry.getName().toLowerCase(),
-									new JsonFile(zipEntry.getName(), new String(sw.toByteArray(), Charsets.UTF_8)));
+									new JsonFile(zipEntry.getName(), new String(sw.toByteArray(), StandardCharsets.UTF_8)));
 						}
 					} else {
 						FileOutputStream fout = new FileOutputStream(new File(extractionDirectory, zipEntry.getName()));
