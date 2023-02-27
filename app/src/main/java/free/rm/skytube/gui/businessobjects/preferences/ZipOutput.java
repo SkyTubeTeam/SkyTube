@@ -18,8 +18,6 @@ package free.rm.skytube.gui.businessobjects.preferences;
 
 import android.util.Log;
 
-import org.apache.commons.codec.Charsets;
-
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.Closeable;
@@ -28,7 +26,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -72,8 +70,7 @@ public class ZipOutput implements Closeable {
     public void addContent(String name, String content) throws IOException {
         ZipEntry entry = new ZipEntry(name);
         outputZipStream.putNextEntry(entry);
-        // TODO: After Android 4.4, we can use StandardCharsets
-        outputZipStream.write(content.getBytes(Charsets.UTF_8));
+        outputZipStream.write(content.getBytes(StandardCharsets.UTF_8));
 
         Log.d(TAG, "Added: " + name);
     }
