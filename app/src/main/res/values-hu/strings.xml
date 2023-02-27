@@ -25,4 +25,10 @@
     <string name="trending_in">Felkapott (%s)</string>
     <string name="recaptcha_challenge_requested">A YouTube azt hiszi, hogy ön egy Bot, ezért először meg kell oldania a reCAPTCHA-t.</string>
     <string name="could_not_get_sponsorblock">Nem sikerült lekérni a SzponzorBlokk adatait: %s.</string>
+    <string name="cleaner">Tisztító</string>
+    <string name="cleaner_confirm">Tisztít</string>
+    <string name="cleaner_watched_downloads">Megtekintett letöltések eltávolítása</string>
+    <string name="cleaner_watched_bookmarks">Megtekintett könyvjelzők eltávolítása</string>
+    <string name="cleaner_explanation">Tisztítsa meg a könyvjelzőzött/letöltött videókat. Használja a következő szűrőbeállításokat:</string>
+    <string name="cleaner_toast_finish">Tisztító: törölve %s videó, felszabadítva %s MB</string>
 </resources>

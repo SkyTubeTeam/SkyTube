@@ -24,4 +24,10 @@
     <string name="trending_in">Tendencia (%s)</string>
     <string name="recaptcha_challenge_requested">YouTube cree que eres un bot por lo que primero debes resolver un reCAPTCHA.</string>
     <string name="could_not_get_sponsorblock">No se pudo recuperar la información de Patrocinadores: %s.</string>
+    <string name="cleaner">Limpiador</string>
+    <string name="cleaner_explanation">Limpia los vídeos favoritos/descargados. Utilice las siguientes opciones de filtro:</string>
+    <string name="cleaner_confirm">Limpiar</string>
+    <string name="cleaner_toast_finish">El limpiador ha limpiado %s Vídeo(s), ocupando: %sMB</string>
+    <string name="cleaner_watched_downloads">Eliminar descargas vistas</string>
+    <string name="cleaner_watched_bookmarks">Eliminar favoritos vistos</string>
 </resources>
