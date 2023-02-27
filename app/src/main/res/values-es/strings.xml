@@ -30,4 +30,5 @@
     <string name="cleaner_toast_finish">El limpiador ha limpiado %s Vídeo(s), ocupando: %sMB</string>
     <string name="cleaner_watched_downloads">Eliminar descargas vistas</string>
     <string name="cleaner_watched_bookmarks">Eliminar favoritos vistos</string>
+    <string name="video_comments_are_disabled">Los comentarios en los vídeo están desactivados</string>
 </resources>
