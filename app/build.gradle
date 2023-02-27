@@ -2,8 +2,8 @@ apply plugin: 'com.android.application'
 apply plugin: "de.mannodermaus.android-junit5"
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion '30.0.3'
+    compileSdkVersion 33
+    buildToolsVersion '33.0.2'
     namespace 'free.rm.skytube'
 
     defaultConfig {
@@ -109,7 +109,7 @@ android {
 
 dependencies {
 /** Desugaring **/
-    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.0.2'
 
 /** Kotlin **/
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
