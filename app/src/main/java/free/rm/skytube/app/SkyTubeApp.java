@@ -54,7 +54,6 @@ import com.google.api.client.googleapis.json.GoogleJsonError;
 import com.google.api.client.googleapis.json.GoogleJsonResponseException;
 
 import org.ocpsoft.prettytime.PrettyTime;
-import org.schabi.newpipe.extractor.exceptions.FoundAdException;
 import org.schabi.newpipe.extractor.exceptions.ReCaptchaException;
 
 import java.io.IOException;
@@ -78,7 +77,6 @@ import free.rm.skytube.gui.fragments.ChannelBrowserFragment;
 import free.rm.skytube.gui.fragments.FragmentNames;
 import free.rm.skytube.gui.fragments.PlaylistVideosFragment;
 import io.reactivex.rxjava3.core.Completable;
-import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.exceptions.UndeliverableException;
 import io.reactivex.rxjava3.plugins.RxJavaPlugins;
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -98,8 +96,6 @@ public class SkyTubeApp extends MultiDexApplication {
 	public static final String KEY_SUBSCRIPTIONS_LAST_UPDATED = "SkyTubeApp.KEY_SUBSCRIPTIONS_LAST_UPDATED";
 	public static final String NEW_VIDEOS_NOTIFICATION_CHANNEL = "free.rm.skytube.NEW_VIDEOS_NOTIFICATION_CHANNEL";
 	public static final int NEW_VIDEOS_NOTIFICATION_CHANNEL_ID = 1;
-
-	private static final CompositeDisposable COMPOSITE_DISPOSABLE = new CompositeDisposable();
 
 	@Override
 	public void onCreate() {
@@ -158,9 +154,9 @@ public class SkyTubeApp extends MultiDexApplication {
 	}
 
 	private static void preloadPrettyTime() {
-		Completable.fromAction(() -> {
-			new PrettyTime().format(LocalDate.of(2021, 2, 23));
-		}).subscribeOn(Schedulers.io()).subscribe();
+		Completable.fromAction(() -> new PrettyTime().format(LocalDate.of(2021, 2, 23)))
+				.subscribeOn(Schedulers.io())
+				.subscribe();
 	}
 
 	@RequiresApi(api = Build.VERSION_CODES.M)
@@ -195,12 +191,6 @@ public class SkyTubeApp extends MultiDexApplication {
 				Log.i(TAG, "Expected to be non-UI thread : " + Thread.currentThread().getName() + " [" + Build.VERSION.SDK_INT + ']');
 			}
 		}
-	}
-
-	@Override
-	public void onTerminate() {
-		COMPOSITE_DISPOSABLE.clear();
-		super.onTerminate();
 	}
 
 	/**
@@ -494,7 +484,7 @@ public class SkyTubeApp extends MultiDexApplication {
 		}
 		switch (content.getType()) {
 			case STREAM: {
-				COMPOSITE_DISPOSABLE.add(YouTubePlayer.launch(content, ctx));
+				YouTubePlayer.launch(content, ctx);
 				break;
 			}
 			case CHANNEL: {
@@ -502,8 +492,8 @@ public class SkyTubeApp extends MultiDexApplication {
 				break;
 			}
 			case PLAYLIST: {
-				COMPOSITE_DISPOSABLE.add(YouTubeTasks.getPlaylist(ctx, content.getId())
-						.subscribe(playlist -> launchPlaylist(playlist, ctx)));
+				YouTubeTasks.getPlaylist(ctx, content.getId())
+						.subscribe(playlist -> launchPlaylist(playlist, ctx));
 				break;
 			}
 			default:
@@ -520,8 +510,8 @@ public class SkyTubeApp extends MultiDexApplication {
 	 */
 	public static void launchChannel(String channelId, Context context) {
 		if (channelId != null) {
-			COMPOSITE_DISPOSABLE.add(DatabaseTasks.getChannelInfo(context, channelId, true)
-					.subscribe(youTubeChannel -> launchChannel(youTubeChannel, context)));
+			DatabaseTasks.getChannelInfo(context, channelId, true)
+					.subscribe(youTubeChannel -> launchChannel(youTubeChannel, context));
 		}
 	}
 
