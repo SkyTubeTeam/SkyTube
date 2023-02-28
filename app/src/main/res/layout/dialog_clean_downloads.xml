@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:orientation="vertical">
@@ -11,7 +10,7 @@
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:text="@string/cleaner_explanation"
-		android:textColor="#000000"
+		android:textColor="@color/dialog_content_text"
 		android:textDirection="firstStrong"
 		android:textIsSelectable="false"
 		android:textSize="16sp" />
@@ -23,6 +22,7 @@
 		android:checked="true"
 		android:layout_marginTop="4dp"
 		android:minHeight="48dp"
+		android:textColor="@color/dialog_content_text"
 		android:text="@string/cleaner_watched_downloads"/>
 
 	<CheckBox
@@ -31,6 +31,7 @@
 		android:layout_height="wrap_content"
 		android:checked="true"
 		android:minHeight="48dp"
+		android:textColor="@color/dialog_content_text"
 		android:text="@string/cleaner_watched_bookmarks" />
 
 </LinearLayout>
