@@ -1,6 +1,7 @@
 package free.rm.skytube.gui.businessobjects;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.widget.CheckBox;
 import android.widget.Toast;
 
@@ -19,6 +20,7 @@ import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.db.BookmarksDb;
 import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
 import free.rm.skytube.businessobjects.db.PlaybackStatusDb;
+import free.rm.skytube.databinding.DialogCleanDownloadsBinding;
 import free.rm.skytube.gui.activities.MainActivity;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Single;
@@ -35,19 +37,22 @@ public class CleanerDialog extends SkyTubeMaterialDialog {
     public CleanerDialog(@NonNull MainActivity context) {
         super(context);
 
+        final DialogCleanDownloadsBinding binding = DialogCleanDownloadsBinding.inflate(LayoutInflater.from(context));
         title(R.string.cleaner);
         // Set Layout for Dialog
-        customView(R.layout.dialog_clean_downloads,true);
-
-
+        customView(binding.getRoot(),true);
 
         positiveText(R.string.cleaner_confirm);
         onPositive((dialog, action) -> {
-            boolean cleanWatchedDownloads = ((CheckBox)dialog.findViewById(R.id.clean_watched_downloads)).isChecked();
-            boolean cleanWatchedBookmarks = ((CheckBox)dialog.findViewById(R.id.clean_watched_bookmarks)).isChecked();
+            boolean cleanWatchedDownloads = binding.cleanWatchedDownloads.isChecked();
+            boolean cleanWatchedBookmarks = binding.cleanWatchedBookmarks.isChecked();
             List<Single<Pair<Integer,Long>>> tasks = new ArrayList<>();
-            if (cleanWatchedDownloads) tasks.add(cleanWatchedDownloads(context));
-            if (cleanWatchedBookmarks) tasks.add(cleanWatchedBookmarks(context));
+            if (cleanWatchedDownloads) {
+                tasks.add(cleanWatchedDownloads(context));
+            }
+            if (cleanWatchedBookmarks) {
+                tasks.add(cleanWatchedBookmarks(context));
+            }
             // MainFragment#refreshTabs
             AtomicInteger removedVideosCnt = new AtomicInteger();
             AtomicLong removedMB = new AtomicLong();
