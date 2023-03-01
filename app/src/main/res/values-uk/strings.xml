@@ -26,7 +26,7 @@
     <string name="could_not_get_sponsorblock">Не вдалося отримати дані про SponsorBlock: %s.</string>
     <string name="cleaner">Очищувач</string>
     <string name="cleaner_confirm">Очистити</string>
-    <string name="cleaner_toast_finish">Очищувач очистив %s відео, що займають: %sМБ</string>
+    <string name="cleaner_toast_finish">Очищувач вилучив %s відео. Звільнено %s МБ.</string>
     <string name="cleaner_watched_downloads">Вилучити переглянуті завантаження</string>
     <string name="cleaner_explanation">Очищуйте додані до закладок/завантажені відео. Використовуйте такі параметри фільтрів:</string>
     <string name="cleaner_watched_bookmarks">Вилучити переглянуті закладки</string>
