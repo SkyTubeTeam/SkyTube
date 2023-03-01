@@ -27,8 +27,8 @@
     <string name="cleaner">Limpiador</string>
     <string name="cleaner_explanation">Limpia los vídeos favoritos/descargados. Utilice las siguientes opciones de filtro:</string>
     <string name="cleaner_confirm">Limpiar</string>
-    <string name="cleaner_toast_finish">El limpiador ha limpiado %s Vídeo(s), ocupando: %sMB</string>
-    <string name="cleaner_watched_downloads">Eliminar descargas vistas</string>
+    <string name="cleaner_toast_finish">El limpiador ha limpiado %s vídeo(s). %s MB ahora libres.</string>
+    <string name="cleaner_watched_downloads">Eliminar las descargas ya vistas</string>
     <string name="cleaner_watched_bookmarks">Eliminar favoritos vistos</string>
-    <string name="video_comments_are_disabled">Los comentarios en los vídeo están desactivados</string>
+    <string name="video_comments_are_disabled">Comentarios en video desactivados</string>
 </resources>
