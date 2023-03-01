@@ -24,4 +24,8 @@ public final class VideoId extends ContentId {
     public VideoId(String id, String canonicalUrl) {
         super(id, canonicalUrl, StreamingService.LinkType.STREAM);
     }
+
+    public static VideoId create(String id) {
+        return new VideoId(id, String.format("https://youtu.be/%s", id));
+    }
 }

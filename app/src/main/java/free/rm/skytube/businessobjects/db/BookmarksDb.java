@@ -226,6 +226,7 @@ public class BookmarksDb extends CardEventEmitterDatabase implements OrderableDa
 	 * @return True if it has been bookmarked, false if not.
 	 */
 	public boolean isBookmarked(String videoId) {
+		SkyTubeApp.nonUiThread();
 		return executeQueryForInteger(BookmarksTable.IS_BOOKMARKED_QUERY, new String[]{videoId}, 0) > 0;
 	}
 
@@ -242,6 +243,7 @@ public class BookmarksDb extends CardEventEmitterDatabase implements OrderableDa
 	 * @return The maximum of the order number - which could be different from the number of bookmarked videos, in case some of them are deleted.
 	 */
 	public int getMaximumOrderNumber() {
+		SkyTubeApp.nonUiThread();
 		return executeQueryForInteger(BookmarksTable.MAXIMUM_ORDER_QUERY, 0);
 	}
 
@@ -254,6 +256,7 @@ public class BookmarksDb extends CardEventEmitterDatabase implements OrderableDa
 	public @NonNull Pair<List<YouTubeVideo>, Integer> getBookmarkedVideos(int limit, Integer maxOrderLimit) {
         //Logger.i(this, "getBookmarkedVideos " + limit + ',' + maxOrderLimit +
         //        " - " + (maxOrderLimit != null ? BookmarksTable.PAGED_QUERY : BookmarksTable.PAGED_QUERY_UNBOUNDED));
+		SkyTubeApp.nonUiThread();
 
         SQLiteDatabase db = getReadableDatabase();
         Cursor	cursor = maxOrderLimit != null ?
@@ -305,5 +308,24 @@ public class BookmarksDb extends CardEventEmitterDatabase implements OrderableDa
 		cursor.close();
 		return Pair.create(videos, minOrder);
 	}
+
+	/**
+	 *
+	 * @return all the bookmarked video's id.
+	 */
+	public @NonNull Set<VideoId> getAllBookmarkedVideoIds() {
+		SkyTubeApp.nonUiThread();
+
+		SQLiteDatabase db = getReadableDatabase();
+		Set<VideoId> results = new HashSet<>();
+		try (Cursor	cursor = db.rawQuery(BookmarksTable.QUERY_ALL_IDS, new String[0] )) {
+			while(cursor.moveToNext()) {
+				String id = cursor.getString(0);
+				results.add(VideoId.create(id));
+			}
+		}
+		return results;
+	}
+
 
 }
