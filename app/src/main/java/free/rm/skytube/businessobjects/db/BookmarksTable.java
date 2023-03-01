@@ -31,6 +31,7 @@ public class BookmarksTable {
 	static final String MAXIMUM_ORDER_QUERY = String.format("SELECT MAX(%s) FROM %s", COL_ORDER, TABLE_NAME);
 	static final String PAGED_QUERY = String.format("SELECT %1$s,%2$s FROM %3$s WHERE %2$s < ? ORDER BY %2$s DESC LIMIT ?", COL_YOUTUBE_VIDEO, COL_ORDER, TABLE_NAME);
 	static final String PAGED_QUERY_UNBOUNDED = String.format("SELECT %1$s,%2$s FROM %3$s ORDER BY %2$s DESC LIMIT ?", COL_YOUTUBE_VIDEO, COL_ORDER, TABLE_NAME);
+	static final String QUERY_ALL_IDS = String.format("SELECT %1$s FROM %2$s", COL_YOUTUBE_VIDEO_ID, TABLE_NAME);
 	static final String IS_BOOKMARKED_QUERY = String.format("SELECT 1 FROM %s WHERE %s =?", TABLE_NAME, COL_YOUTUBE_VIDEO_ID);
 
 

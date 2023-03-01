@@ -81,6 +81,11 @@ public class DownloadedVideosDb extends CardEventEmitterDatabase implements Orde
             return localFile != null ? localFile.getParentFile() : null;
         }
 
+        public long getLocalSize() {
+            File video = getLocalVideoFile();
+            File audio = getLocalAudioFile();
+            return (video != null ? video.length() : 0) + (audio != null ? audio.length() : 0);
+        }
         public Uri getAudioUri() {
             return audioUri;
         }
@@ -170,17 +175,18 @@ public class DownloadedVideosDb extends CardEventEmitterDatabase implements Orde
      * @return List of Status
      */
     public List<Status> getDownloadedVideosStatuses() {
+        SkyTubeApp.nonUiThread();
+
         try (Cursor cursor = getReadableDatabase().query(
                 DownloadedVideosTable.TABLE_NAME,
-                new String[]{DownloadedVideosTable.COL_YOUTUBE_VIDEO, DownloadedVideosTable.COL_FILE_URI, DownloadedVideosTable.COL_AUDIO_FILE_URI},
+                new String[]{DownloadedVideosTable.COL_YOUTUBE_VIDEO_ID, DownloadedVideosTable.COL_FILE_URI, DownloadedVideosTable.COL_AUDIO_FILE_URI},
                 null,
                 null, null, null, null)) {
             List<Status> statuses = new ArrayList<>();
 
             while (cursor.moveToNext()) {
                 String id = cursor.getString(cursor.getColumnIndex(DownloadedVideosTable.COL_YOUTUBE_VIDEO_ID));
-                String url = String.format("https://youtu.be/%s", id);
-                statuses.add(new Status(new VideoId(id, url),
+                statuses.add(new Status(VideoId.create(id),
                         getUri(cursor, cursor.getColumnIndex(DownloadedVideosTable.COL_FILE_URI)),
                         getUri(cursor, cursor.getColumnIndex(DownloadedVideosTable.COL_AUDIO_FILE_URI)),
                         false));
