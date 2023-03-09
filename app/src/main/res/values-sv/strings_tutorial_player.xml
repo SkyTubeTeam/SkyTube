@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="page_counter">%1$d av %2$d</string>
-    <string name="next">"Nästa "</string>
-    <string name="tutorial_slide_3">Svep vågrätt för att söka framåt eller bakåt.</string>
-    <string name="tutorial_slide_5">Svep lodrätt för att justera ljusstyrkan.</string>
+    <string name="next">Nästa</string>
+    <string name="tutorial_slide_3">Svep ← → för att söka framåt eller bakåt.</string>
+    <string name="tutorial_slide_5">Svep ↑ ↓ för att justera ljusstyrkan.</string>
     <string name="skip">Hoppa över</string>
-    <string name="tutorial_slide_2">Svep uppåt för att visa videons beskrivning.</string>
+    <string name="tutorial_slide_2">Svep ↑ för att visa videons beskrivning.</string>
     <string name="tutorial_slide_6">Dubbeltryck för att pausa eller spela upp en video.</string>
-    <string name="tutorial_slide_4">Svep lodrätt för att justera volymen.</string>
-    <string name="tutorial_slide_1">Svep åt vänster för att visa kommentarer.</string>
+    <string name="tutorial_slide_4">Svep ↑ ↓ för att justera volymen.</string>
+    <string name="tutorial_slide_1">Svep ← för att visa kommentarer.</string>
     <string name="done">Klar</string>
 </resources>
