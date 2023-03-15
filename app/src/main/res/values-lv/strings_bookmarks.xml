@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="video_bookmarked">Video ir pievienota grāmatzīme</string>
-    <string name="video_already_bookmarked">Video jau ir ar grāmatzīmi</string>
-    <string name="video_bookmarked_error">Neizdevās pie video pievienot grāmatzīmi.</string>
+    <string name="video_bookmarked">Video pievienots grāmatzīmes sadaļā</string>
+    <string name="video_already_bookmarked">Video jau pievienots grāmatzīmes sadaļai</string>
+    <string name="video_bookmarked_error">Video nevarēja pievienot grāmatzīmes sadaļai.</string>
     <string name="unbookmark">Noņemt grāmatzīmi</string>
-    <string name="bookmark_share_invalid_url">Tikai derīgas YouTube saites var tikt pievienotas bibliotēkai.</string>
-    <string name="no_bookmarked_videos_text">Jūs vēl neesat saglabājuši video bibliotēkā.
-\n
-\nKolīdz to izdarīsiet, tie parādīsies šeit.</string>
-    <string name="video_unbookmarked_error">Neizdevās noņemt video no bibliotēkas.</string>
-    <string name="video_was_not_bookmarked">Video netika pievienots bibliotēkai</string>
-    <string name="video_unbookmarked">Video noņemts no bibliotēkas</string>
+    <string name="bookmark_share_invalid_url">Tikai derīgas YouTube saites var tikt pievienotas grāmatzīmes sadaļai.</string>
+    <string name="no_bookmarked_videos_text">Pievienojiet dažus video grāmatzīmēm, lai tos atrastu šeit.</string>
+    <string name="video_unbookmarked_error">Video nevarēja noņemt no grāmatzīmes sadaļas.</string>
+    <string name="video_was_not_bookmarked">Video netika pievienots grāmatzīmes sadaļai</string>
+    <string name="video_unbookmarked">Video noņemts no grāmatzīmes sadaļas</string>
     <string name="bookmarks">Grāmatzīmes</string>
     <string name="bookmark_share_label">SkyTube Grāmatzīme</string>
     <string name="bookmark">Grāmatzīme</string>
