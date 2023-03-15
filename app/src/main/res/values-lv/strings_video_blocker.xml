@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="dislikes">%d%% nepatīk</string>
-    <string name="channel_unwhitelist_error">Kanālu neizdevās noņemt no atļauto kanālu saraksta.</string>
-    <string name="channel_blacklist_error">Kanālu neizdevās bloķēt.</string>
-    <string name="channel_blacklisted">Kanāls bloķēts. Lūdzu atjaunojiet lapu.</string>
+    <string name="dislikes">nepatīk %d%% cilvēkiem</string>
+    <string name="channel_unwhitelist_error">Kanālu nevarēja noņemt no atļauto kanālu saraksta.</string>
+    <string name="channel_blacklist_error">Kanālu nevarēja iekļaut melnajā sarakstā.</string>
+    <string name="channel_blacklisted">Atsvaidziniet, lai izmantotu jauno kanālu melno sarakstu.</string>
     <string name="block_channel">Bloķēt kanālu</string>
-    <string name="configure">Uzstādīt</string>
+    <string name="configure">Iestatīt</string>
     <string name="no_videos_blocked">Vai vēlaties iestatīt video bloķētāju, lai bloķētu vai filtrētu video\?</string>
     <string name="blocked_videos">Bloķētie video</string>
 </resources>
