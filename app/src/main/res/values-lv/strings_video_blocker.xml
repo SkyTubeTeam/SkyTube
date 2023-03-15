@@ -6,6 +6,6 @@
     <string name="channel_blacklisted">Kanāls bloķēts. Lūdzu atjaunojiet lapu.</string>
     <string name="block_channel">Bloķēt kanālu</string>
     <string name="configure">Uzstādīt</string>
-    <string name="no_videos_blocked">Neviens video netika bloķēts vai atfiltrēts. Vai vēlaties uzstādīt video bloķētāju\?</string>
+    <string name="no_videos_blocked">Vai vēlaties iestatīt video bloķētāju, lai bloķētu vai filtrētu video\?</string>
     <string name="blocked_videos">Bloķētie video</string>
 </resources>
