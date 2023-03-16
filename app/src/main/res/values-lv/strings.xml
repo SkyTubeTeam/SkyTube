@@ -18,7 +18,7 @@
     <string name="ok">OK</string>
     <string name="error">Kļūda</string>
     <string name="views">%,d skatījumi</string>
-    <string name="could_not_get_channel_detailed">Neizdevās ielādēt kanāla %s informāciju.</string>
+    <string name="could_not_get_channel_detailed">Neizdevās ielādēt kanāla informāciju: %s.</string>
     <string name="could_not_get_channel">Neizdevās ielādēt kanāla informāciju.</string>
     <string name="could_not_get_videos">Neizdevās ielādēt %s video.</string>
 </resources>
