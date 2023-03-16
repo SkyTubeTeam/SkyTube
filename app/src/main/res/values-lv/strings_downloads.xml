@@ -1,2 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="download">Lejupielādēt</string>
+    <string name="downloads">Lejupielādes</string>
+    <string name="download_video">Lejupielādēt video</string>
+    <string name="unable_to_delete_file">Nevarēja izdzēst lejupielādēto \'%s\' failu.</string>
+    <string name="starting_video_download">Lejupielādē \'%s\'…</string>
+    <string name="video_download_stream_error">Nevarēja lejupielādēt \'%s\'.</string>
+    <string name="download_failed_because">Nevarēja lejupielādēt %1$s, jo %2$s.</string>
+    <string name="video_stream_not_found_with_request_resolution">Nevarēja atrast video izvēlētajā %1$s-%2$s izšķirtspējā</string>
+    <string name="warning_metered_network_download">Vai vēlaties lejupielādēt video, izmantojot pašreizējo maksas savienojumu\?</string>
+</resources>
