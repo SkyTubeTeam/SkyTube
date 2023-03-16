@@ -9,4 +9,9 @@
     <string name="download_failed_because">Nevarēja lejupielādēt %1$s, jo %2$s.</string>
     <string name="video_stream_not_found_with_request_resolution">Nevarēja atrast video izvēlētajā %1$s-%2$s izšķirtspējā</string>
     <string name="warning_metered_network_download">Vai vēlaties lejupielādēt video, izmantojot pašreizējo maksas savienojumu\?</string>
+    <string name="delete_download">Dzēst lejupielādi</string>
+    <string name="video_downloaded">\'%s\' ir lejupielādēts.</string>
+    <string name="no_downloaded_videos_text">Lejupielādējiet pāris video, lai tos atrastu šeit.</string>
+    <string name="playing_video_file_missing">Atskaņo video no servera, jo netika atrasts neviens lejupielādēts fails.</string>
+    <string name="external_storage_not_available">Atļaut piekļuvi ārējai krātuvei, lai varētu lejupielādētu failu.</string>
 </resources>
