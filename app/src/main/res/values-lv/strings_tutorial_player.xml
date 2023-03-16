@@ -1,2 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="page_counter">%1$d no %2$d</string>
+    <string name="tutorial_slide_3">Velciet ← →, lai patīt video uz priekšu vai atpakaļ.</string>
+    <string name="tutorial_slide_4">Velciet ↑ ↓, lai regulēt skaļumu.</string>
+    <string name="tutorial_slide_1">Velciet ←, lai skatīt komentārus.</string>
+    <string name="tutorial_slide_5">Velciet ↑ ↓, lai pielāgot apgaismojumu.</string>
+    <string name="tutorial_slide_6">Veiciet dubultskārienu, lai apturētu vai atsāktu video atskaņošanu.</string>
+    <string name="next">Nākamā</string>
+    <string name="done">Gatavs</string>
+    <string name="skip">Izlaist</string>
+    <string name="tutorial_slide_2">Velciet ↑, lai skatīt video aprakstu.</string>
+</resources>
