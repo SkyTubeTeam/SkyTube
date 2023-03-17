@@ -1,2 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="error_stream_err_unavailable">Ziņojums nav pieejams.</string>
+    <string name="error_stream_parse_error">Parsēšanas kļūda.</string>
+    <string name="error_video_play">Video atskaņošanas kļūda</string>
+    <string name="error_video_streams_empty">\'%s\' video nav straumēšanas datu.</string>
+    <string name="error_video_streams">Neizdevās iegūt nevienu video straumi.</string>
+    <string name="error_get_video_desc">Neizdevās iegūt video aprakstu.</string>
+    <string name="error_invalid_url">Nederīga video saite: %s</string>
+    <string name="metered_network">Maksas tīkls (Ierobežots trafiks)</string>
+    <string name="warning_metered_network_play">Lai izvairītos no papildus izmaksām par datu izmantošanu, izveidojiet savienojumu ar bezmaksas tīklu. Jeb tomēr atskaņot video\?</string>
+    <string name="warning_metered_network_disable">Nekad vairs nejautāt.</string>
+    <string name="play_video">Atskaņot video</string>
+    <string name="warning_live_video">Pašlaik nevar atskaņot tiešraides. Vai atvērt citā lietotnē\?</string>
+    <string name="ratings_disabled">Vērtējumi atslēgti</string>
+    <string name="error_stream_decryption_fail">Neizdevās ielādēt YouTube pakalpojuma atšifrēšanas kodu.</string>
+    <string name="error_downloaded_file_is_corrupted">Lejupielādētais video izskatās <b>bojāts</b>: <br/> <br/> %s. <br/> <br/> <b>Vai izdzēst</b> failu\?</string>
+    <string name="error_video_parse_error">Neizdevās palaist videoklipu: <br/> <br/> %s.</string>
+</resources>
