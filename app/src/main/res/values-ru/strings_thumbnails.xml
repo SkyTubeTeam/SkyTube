@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="thumbnail">Ярлык</string>
-	<string name="view_thumbnail">Посмотреть ярлык</string>
-	<string name="thumbnail_downloaded">Ярлык загружен.</string>
-	<string name="thumbnail_download_error">Ярлык не может быть загружен.</string>
+    <string name="thumbnail">Превью</string>
+    <string name="view_thumbnail">Посмотреть превью</string>
+    <string name="thumbnail_downloaded">Превью загружено.</string>
+    <string name="thumbnail_download_error">Невозможно скачать превью.</string>
 </resources>
