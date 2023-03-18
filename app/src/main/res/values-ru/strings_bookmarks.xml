@@ -2,16 +2,14 @@
 <resources>
     <string name="bookmarks">Закладки</string>
     <string name="bookmark">Добавить закладку</string>
-    <string name="video_bookmarked">Видео отмечено закладкой</string>
+    <string name="video_bookmarked">Сохранено в закладках</string>
     <string name="video_bookmarked_error">Отметить видео закладкой не получается.</string>
     <string name="unbookmark">Удалить закладку</string>
-    <string name="video_unbookmarked">Видео больше не отмечено закладкой</string>
-    <string name="video_unbookmarked_error">Удалить закладку не получается.</string>
-    <string name="no_bookmarked_videos_text">Вы не отметили закладкой ни один ролик. \n
-   \n
-  Отмеченные видео появляются в этом списке.</string>
+    <string name="video_unbookmarked">Закладка удалена</string>
+    <string name="video_unbookmarked_error">Невозможно удалить закладку.</string>
+    <string name="no_bookmarked_videos_text">Нет закладок. Добавьте видео в закладки и они появятся здесь.</string>
     <string name="bookmark_share_label">Дополнительные закладки SkyTube</string>
     <string name="bookmark_share_invalid_url">Только действительные URL YouTube могут быть добавлены в закладки.</string>
     <string name="video_was_not_bookmarked">Видео не было добавлено в закладки</string>
-    <string name="video_already_bookmarked">Видео уже добавлено в закладки</string>
+    <string name="video_already_bookmarked">Уже в закладках</string>
 </resources>
