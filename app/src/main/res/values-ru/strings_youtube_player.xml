@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="error_stream_err_unavailable">Не получается прочесть сообщение об ошибке.</string>
+    <string name="error_stream_err_unavailable">Неизвестная ошибка</string>
     <string name="error_stream_decryption_fail">Не получается загрузить код расшифровки для сервиса YouTube.</string>
     <string name="error_stream_parse_error">Ошибка чтения.</string>
     <string name="error_video_play">Ошибка воспроизведения видео</string>
