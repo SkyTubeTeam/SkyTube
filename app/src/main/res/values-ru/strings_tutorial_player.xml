@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="next">Дальше</string>
+    <string name="next">Далее</string>
     <string name="done">Готово</string>
     <string name="skip">Пропустить</string>
     <string name="page_counter">%1$d из %2$d</string>
