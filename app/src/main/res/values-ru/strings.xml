@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="could_not_get_videos">Загрузить видео %s не удаётся.</string>
+    <string name="could_not_get_videos">Не удалось загрузить %s видео.</string>
     <string name="could_not_get_channel">Не удалось загрузить информацию о канале.</string>
     <string name="views">%,d просмотров</string>
     <string name="error">Ошибка</string>
@@ -22,6 +22,11 @@
     <string name="search_channel">Найти канал</string>
     <string name="close">Закрыть</string>
     <string name="could_not_get_channel_detailed">Не удалось загрузить информацию о канале: %s.</string>
-    <string name="recaptcha_challenge_requested">YouTube блокирует сетевые запросы, вам нужно решить проблему с reCaptcha!</string>
+    <string name="recaptcha_challenge_requested">YouTube думает, что вы бот, поэтому вам сначала необходимо решить reCAPTCHA.</string>
     <string name="trending_in">В тренде (%s)</string>
+    <string name="cleaner_explanation">Очистить видео в закладках/загрузках. Использовать следующие настройки фильтра:</string>
+    <string name="cleaner_confirm">Очистить</string>
+    <string name="cleaner_watched_downloads">Удалить просмотренные загрузки</string>
+    <string name="cleaner_watched_bookmarks">Удалить просмотренные закладки</string>
+    <string name="video_comments_are_disabled">Комментарии видео отключены</string>
 </resources>
