@@ -21,7 +21,7 @@
     <string name="error">Erro</string>
     <string name="views">%,d visualizações</string>
     <string name="could_not_get_channel_detailed">Não foi possível descarregar as informações do canal: %s.</string>
-    <string name="could_not_get_channel">Não foi possível carregar as informações do canal.</string>
+    <string name="could_not_get_channel">Não foi possível descarregar as informações do canal.</string>
     <string name="could_not_get_videos">Não foi possível carregar %s vídeos.</string>
     <string name="could_not_get_sponsorblock">Não foi possível recuperar informações do SponsorBlock: %s.</string>
 </resources>
