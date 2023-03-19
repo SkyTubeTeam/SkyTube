@@ -24,4 +24,8 @@
     <string name="trending_in">Trending (%s)</string>
     <string name="recaptcha_challenge_requested">YouTube mengira Anda adalah bot, selesaikan reCAPTCHA terlebih dahulu.</string>
     <string name="could_not_get_sponsorblock">Tidak dapat mengambil info SponsorBlock: %s.</string>
+    <string name="cleaner">pembersih</string>
+    <string name="cleaner_explanation">Bersihkan video yang di-bookmark/diunduh. Gunakan opsi filter berikut:</string>
+    <string name="cleaner_confirm">Membersihkan</string>
+    <string name="cleaner_toast_finish">Pembersih menghapus %s video. %s MB sekarang gratis.</string>
 </resources>
