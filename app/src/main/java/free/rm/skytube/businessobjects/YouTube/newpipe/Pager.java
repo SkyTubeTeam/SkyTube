@@ -122,6 +122,12 @@ public abstract class Pager<I extends InfoItem, O> implements PagerBackend<O> {
         return extract(page);
     }
 
+    /**
+     * Information about the next page
+     */
+    public Page getNextPageInfo() {
+        return nextPage;
+    }
 
     protected abstract List<O> extract(InfoItemsPage<I> page) throws NewPipeException, ExtractionException ;
 
