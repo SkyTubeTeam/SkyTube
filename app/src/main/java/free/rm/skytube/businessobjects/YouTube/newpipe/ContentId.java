@@ -47,6 +47,10 @@ public class ContentId {
         return type;
     }
 
+    public boolean isSameContent(ContentId contentId) {
+        return id.equals(contentId.id) && type == contentId.type;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
