@@ -78,7 +78,7 @@ public class Linker {
 	}
 
 	private static Spanned spanText(String text) {
-		SpannableStringBuilder spanner = new SpannableStringBuilder(text);
+		SpannableStringBuilder spanner = new SpannableStringBuilder(text.replaceAll("&nbsp;", " "));
 		LinkifyCompat.addLinks(spanner, Linkify.WEB_URLS);
 		return spanner;
 	}
