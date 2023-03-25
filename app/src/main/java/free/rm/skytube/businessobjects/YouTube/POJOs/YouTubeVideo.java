@@ -211,7 +211,7 @@ public class YouTubeVideo extends CardData implements Serializable {
 
         public VideoId getVideoId() {
             // TODO: this should be created by the NewPipe backend
-            return new VideoId(id, getVideoUrl());
+            return new VideoId(id, getVideoUrl(), null);
         }
 
 	/**
