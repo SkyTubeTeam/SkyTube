@@ -154,7 +154,9 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
         Log.i(TAG, "getGroupView " + groupPosition + " " + isExpanded + ", view=" + convertView + ", parent=" + parent);
         CommentsInfoItem comment = commentThreadPager.getComment(groupPosition);
         final CommentViewHolder viewHolder = getCommentViewHolder(convertView, parent);
-        viewHolder.updateInfo(comment, true, groupPosition);
+        if (comment != null) {
+            viewHolder.updateInfo(comment, true, groupPosition);
+        }
 
         // if it reached the bottom of the list, then try to get the next page of videos
         if (groupPosition == getGroupCount() - 1) {
@@ -173,7 +175,7 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
     }
 
     private synchronized void ensureRepliesLoaded(CommentsInfoItem comment) {
-        if (replyMap.get(comment.getCommentId()) == null) {
+        if (replyMap.get(comment.getCommentId()) == null && comment.getReplies() != null) {
             new GetReplies().executeInParallel(comment);
         }
     }
@@ -238,6 +240,7 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
             binding.pinnedView.setVisibility(comment.isPinned() ? View.VISIBLE : View.GONE);
             binding.commentPaddingView.setVisibility(isTopLevelComment ? View.GONE : View.VISIBLE);
             binding.authorTextView.setText(comment.getUploaderName());
+            Linker.configure(binding.commentTextView);
             Linker.setTextAndLinkify(binding.commentTextView, comment.getCommentText().getContent());
             binding.commentDateTextView.setText(comment.getTextualUploadDate());
             binding.commentUpvotesTextView.setText(String.valueOf(comment.getLikeCount()));
@@ -286,6 +289,11 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
                 try {
                     List<CommentsInfoItem> replies = commentThreadPager.getPageAndProcess(item.getReplies());
                     replyMap.put(item.getCommentId(), replies);
+                    if (commentThreadPager.isHasNextPage()) {
+                        item.setReplies(commentThreadPager.getNextPageInfo());
+                    } else {
+                        item.setReplies(null);
+                    }
                     ids.add(item.getCommentId());
                 } catch (NewPipeException e) {
                     lastException = e;
