@@ -404,13 +404,13 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 
 		fragmentBinding.commentsDrawer.setOnDrawerOpenListener(() -> {
 			if (commentsAdapter == null && youTubeVideo != null) {
-				commentsAdapter = CommentsAdapter.createAdapter(getActivity(), youTubeVideo.getId(),
+				commentsAdapter = CommentsAdapter.createAdapter(getActivity(), null, youTubeVideo.getId(),
 						fragmentBinding.commentsExpandableListView, fragmentBinding.commentsProgressBar,
 						fragmentBinding.noVideoCommentsTextView, fragmentBinding.videoCommentsAreDisabled);
 			}
 		});
 
-		Linker.configure(videoDescriptionBinding.videoDescDescription);
+		Linker.configure(videoDescriptionBinding.videoDescDescription, null);
 	}
 
 	@Override

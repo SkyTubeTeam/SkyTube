@@ -69,12 +69,15 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
     private IconicsDrawable heartedIcon;
     private IconicsDrawable pinnedIcon;
 
+    private Linker.CurrentActivity currentActivity;
+
     private Map<String, List<CommentsInfoItem>> replyMap = new HashMap<>();
 
     private static final String TAG = CommentsAdapter.class.getSimpleName();
 
-    public CommentsAdapter(Context context, String videoId, ExpandableListView expandableListView, View commentsProgressBar, View noVideoCommentsView, View disabledCommentsView) {
+    public CommentsAdapter(Context context, Linker.CurrentActivity currentActivity, String videoId, ExpandableListView expandableListView, View commentsProgressBar, View noVideoCommentsView, View disabledCommentsView) {
         this.context = context;
+        this.currentActivity = currentActivity;
         this.heartedIcon = new IconicsDrawable(context)
                 .icon(MaterialDesignIconic.Icon.gmi_favorite)
                 .color(IconicsColor.colorInt(Color.RED))
@@ -240,7 +243,7 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
             binding.pinnedView.setVisibility(comment.isPinned() ? View.VISIBLE : View.GONE);
             binding.commentPaddingView.setVisibility(isTopLevelComment ? View.GONE : View.VISIBLE);
             binding.authorTextView.setText(comment.getUploaderName());
-            Linker.configure(binding.commentTextView);
+            Linker.configure(binding.commentTextView, currentActivity);
             Linker.setTextAndLinkify(binding.commentTextView, comment.getCommentText().getContent());
             binding.commentDateTextView.setText(comment.getTextualUploadDate());
             binding.commentUpvotesTextView.setText(String.valueOf(comment.getLikeCount()));
@@ -353,10 +356,9 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
 
     }
 
-
-    public static BaseExpandableListAdapter createAdapter(Context context, String videoId, ExpandableListView expandableListView, View commentsProgressBar, View noVideoCommentsView, View disabledCommentsView) {
+    public static BaseExpandableListAdapter createAdapter(Context context, Linker.CurrentActivity currentActivity, String videoId, ExpandableListView expandableListView, View commentsProgressBar, View noVideoCommentsView, View disabledCommentsView) {
         if (NewPipeService.isPreferred()) {
-            return new CommentsAdapter(context, videoId, expandableListView, commentsProgressBar, noVideoCommentsView, disabledCommentsView);
+            return new CommentsAdapter(context, currentActivity, videoId, expandableListView, commentsProgressBar, noVideoCommentsView, disabledCommentsView);
         } else {
             return new LegacyCommentsAdapter(context, videoId, expandableListView, commentsProgressBar, noVideoCommentsView);
         }
