@@ -24,10 +24,10 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="search_channel">Search channel</string>
-    <string name="cleaner">Cleaner</string>
+    <string name="cleaner">Watched Video Cleaner</string>
     <string name="cleaner_explanation">Clean up bookmarked/downloaded videos. Use the following filter options:</string>
     <string name="cleaner_confirm">Clean</string>
-    <string name="cleaner_toast_finish">Cleaner cleared %s Video(s), taking up: %sMB</string>
+    <string name="cleaner_toast_finish">We have removed %s video(s) from the bookmarks, and deleted %sMB of downloaded videos</string>
     <string name="cleaner_watched_downloads">Remove watched Downloads</string>
     <string name="cleaner_watched_bookmarks">Remove watched Bookmarks</string>
     <string name="video_comments_are_disabled">Video comments are disabled</string>
