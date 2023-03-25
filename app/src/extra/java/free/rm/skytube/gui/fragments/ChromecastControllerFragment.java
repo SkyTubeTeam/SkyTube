@@ -54,7 +54,7 @@ public class ChromecastControllerFragment extends ChromecastBaseControllerFragme
 		getContext().getTheme().resolveAttribute(R.attr.colorPrimary, typedValue, true);
 		videoDescriptionBinding.videoDescLinearlayout.setBackgroundResource(typedValue.resourceId);
 
-		Linker.configure(videoDescriptionBinding.videoDescDescription);
+		Linker.configure(videoDescriptionBinding.videoDescDescription, null);
 
 		fragmentBinding.chromecastPlaybackProgressBar.setOnSeekBarChangeListener(this);
 		if(savedInstanceState != null) {

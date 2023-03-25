@@ -50,18 +50,24 @@ public class Linker {
 
 	private final static String TAG = Linker.class.getSimpleName();
 
-	public static void configure(TextView textView) {
-		textView.setAutoLinkMask(0);
-		textView.setMovementMethod(new TouchableMovementMethod(new LinkListener(textView.getContext())));
+	public interface CurrentActivity {
+
+		boolean canNavigateTo(ContentId contentId);
 	}
+
+	public static void configure(TextView textView, CurrentActivity currentActivity) {
+		textView.setAutoLinkMask(0);
+		textView.setMovementMethod(new TouchableMovementMethod(new LinkListener(textView.getContext(), currentActivity)));
+	}
+
 	/**
 	 * Sets the text to be displayed and ensure that any links (in the text) are clickable.
 	 *
 	 * @param text
 	 */
 	public static void setTextAndLinkify(TextView textView, String text) {
-		Spanned spanns = span(text);
-		textView.setText(spanns);
+		final Spanned spans = span(text);
+		textView.setText(spans);
 	}
 
 	private static Spanned span(String text) {
@@ -92,22 +98,29 @@ public class Linker {
 	 */
 	static class LinkListener implements TouchableMovementMethod.URLSpanClickListener {
 		private final Context ctx;
-		LinkListener(Context ctx) {
+		private final CurrentActivity currentActivity;
+		LinkListener(Context ctx, CurrentActivity currentActivity) {
 			this.ctx = ctx;
+			this.currentActivity = currentActivity;
 		}
 
 		@Override
 		public void onClick(URLSpan span, boolean longClick) {
+			String clickedText = span.getURL();
+			ContentId content = SkyTubeApp.parseUrl(ctx, clickedText, false);
 			if (longClick) {
-				longClick(span.getURL());
+				longClick(clickedText, content);
 			} else {
-				SkyTubeApp.openUrl(ctx, span.getURL(), true);
+				if (currentActivity != null && content != null && currentActivity.canNavigateTo(content)) {
+					return;
+				} else {
+					SkyTubeApp.openUrl(ctx, clickedText, true);
+				}
 			}
 		}
 
-		private void longClick(String clickedText) {
+		private void longClick(String clickedText, ContentId content) {
 			List<String> items = new ArrayList<>(Arrays.asList(ctx.getString(R.string.open_in_browser), ctx.getString(R.string.copy_url), ctx.getString(R.string.share_via)));
-			ContentId content = SkyTubeApp.parseUrl(ctx, clickedText, false);
 			final boolean isBookmarked;
 			if(content != null && content.getType() == StreamingService.LinkType.STREAM) {
 				isBookmarked = BookmarksDb.getBookmarksDb().isBookmarked(content.getId());
