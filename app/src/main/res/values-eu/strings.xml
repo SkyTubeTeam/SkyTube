@@ -24,11 +24,11 @@
     <string name="trending_in">Joera (%s)</string>
     <string name="recaptcha_challenge_requested">YouTube-k bot bat zarela uste du, beraz, lehenik reCAPTCHA bat konpondu behar duzu.</string>
     <string name="could_not_get_sponsorblock">Ezin izan da Babesleak informazioa berreskuratu: %s.</string>
-    <string name="cleaner">Garbitzailea</string>
+    <string name="cleaner">Bideo ikusia garbitzaile</string>
     <string name="cleaner_explanation">Garbitu laster-markak/deskargatutako bideoak. Erabili iragazki aukera hauek:</string>
     <string name="cleaner_confirm">Garbitu</string>
-    <string name="cleaner_watched_downloads">Kendu ikusitako Deskargak</string>
+    <string name="cleaner_watched_downloads">Kendu ikusitako deskargak</string>
     <string name="cleaner_watched_bookmarks">Kendu ikusitako laster-markak</string>
-    <string name="cleaner_toast_finish">Garbitzaileak %s bideoak garbitu ditu, eta: %sMB hartzen ditu</string>
-    <string name="video_comments_are_disabled">Bideo-iruzkinak desgaituta daude</string>
+    <string name="cleaner_toast_finish">%s bideoa(k) kendu d(iy)ugu marketatik, eta deskargatutako bideoen %sMB ezabatu d(it)ugu</string>
+    <string name="video_comments_are_disabled">Bideo-iruzkinak desgaituta</string>
 </resources>
