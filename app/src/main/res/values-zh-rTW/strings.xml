@@ -24,4 +24,11 @@
     <string name="trending_in">熱門 (%s)</string>
     <string name="recaptcha_challenge_requested">YouTube 覺得您是機器人，因此您必須先解開 reCAPTCHA 的問題。</string>
     <string name="could_not_get_sponsorblock">無法擷取 SponsorBlock（封鎖贊助商）資訊：%s。</string>
+    <string name="cleaner">清理器</string>
+    <string name="cleaner_explanation">清理已加至書籤／已下載的影片。使用下列選項篩選：</string>
+    <string name="cleaner_confirm">清理</string>
+    <string name="video_comments_are_disabled">已關閉影片留言</string>
+    <string name="cleaner_watched_bookmarks">移除看過的書籤</string>
+    <string name="cleaner_toast_finish">清理器清除了 %s 部影片。清出了 %s MB。</string>
+    <string name="cleaner_watched_downloads">移除看過的下載</string>
 </resources>

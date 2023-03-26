@@ -1,2 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="update_available">Ir pieejama jauna versija</string>
+    <string name="up_to_date">Svaigākie atjauninājumi ir uzstādīti</string>
+    <string name="up_to_date_msg">Svaigākā SkyTube versija jau uzstādīta.</string>
+    <string name="release_notes">Izmaiņas %s</string>
+    <string name="update">Atjaunināt</string>
+    <string name="later">Vēlāk</string>
+    <string name="downloading">Lejupielādē…</string>
+    <string name="update_dialog_msg">Ir pieejama svaigāka SkyTube versija. Tiks uzstādīta %s versija.</string>
+    <string name="update_failure">Nevarēja uzstādīt svaigāko lietotnes versiju.</string>
+    <string name="android_too_old">Diemžēl jūsu Android versija ir novecojusi, lai varētu uzstādīt svaigāko versiju. Jums jāuzstāda \'SkyTube Legacy\'!</string>
+</resources>

@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="bookmarks">Favoritos</string>
+    <string name="video_unbookmarked">Favorito removido</string>
+    <string name="bookmark">Favorito</string>
+    <string name="video_bookmarked">Favoritado</string>
+    <string name="video_already_bookmarked">Já favoritado</string>
+    <string name="video_bookmarked_error">Não foi possível favoritar o vídeo.</string>
+    <string name="unbookmark">Desfavoritar</string>
+    <string name="video_was_not_bookmarked">O vídeo não foi favoritado</string>
+    <string name="video_unbookmarked_error">Não foi possível remover o vídeo favoritado.</string>
+    <string name="no_bookmarked_videos_text">Favorite alguns vídeos para encontrá-los aqui.</string>
+    <string name="bookmark_share_label">Favoritos SkyTube</string>
+    <string name="bookmark_share_invalid_url">Somente URLs válidos do YouTube podem ser favoritados.</string>
 </resources>

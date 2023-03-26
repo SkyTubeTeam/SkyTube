@@ -24,4 +24,11 @@
     <string name="trending_in">På vei opp (%s)</string>
     <string name="recaptcha_challenge_requested">YouTube blokkerer dine nettverksforespørsmler. Du må løse en reCAPTCHA.</string>
     <string name="could_not_get_sponsorblock">Kunne ikke hente SponsorBlock-info: %s.</string>
+    <string name="cleaner">Renser</string>
+    <string name="cleaner_explanation">Rens opp bokmerkede/nedlastede videoer. Bruk følgende filteralternativer:</string>
+    <string name="cleaner_watched_bookmarks">Fjern sette bokmerker</string>
+    <string name="cleaner_watched_downloads">Fjern sette nedlastinger</string>
+    <string name="cleaner_toast_finish">Renseren fjernet %s video(er). %s MB frigjort.</string>
+    <string name="video_comments_are_disabled">Videokommentarer avskrudd</string>
+    <string name="cleaner_confirm">Rens</string>
 </resources>

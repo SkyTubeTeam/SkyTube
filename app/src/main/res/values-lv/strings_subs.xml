@@ -1,2 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="channel_unsubscribed">Kanāla abonements pārtraukts</string>
+    <string name="subscriptions">Abonementi</string>
+    <string name="subscribe">Abonēt</string>
+    <string name="unsubscribe">Pārtraukt abonementu</string>
+    <string name="total_subscribers">%,d abonenti</string>
+    <string name="subscribed">Abonēts</string>
+    <string name="channel_subscribed">Kanāls abonēts</string>
+    <string name="channel_already_subscribed">Jau ir abonēts</string>
+    <string name="channel_subscribe_failed">Neizdevās abonēt kanālu</string>
+    <string name="unsubscribed">Abonements pārtraukts</string>
+    <string name="error_unable_to_subscribe">Neizdevās (pārtraukt) abonēt (id=%s) kanālu</string>
+    <string name="error_get_subbed_channels">Neizdevās iegūt kanālu abonementus.</string>
+    <string name="error_check_if_user_has_subbed">Neizdevās pārbaudīt, vai esat abonējis (id=%s) kanālu</string>
+    <string name="import_subscriptions">Abonementu importēšana</string>
+    <string name="failed_to_import_subscriptions">Neizdevās importēt YouTube abonementus.</string>
+    <string name="unsubscribe_from_all_current_sibbed_channels">Atrakstīties no visiem abonētajiem kanāliem.</string>
+    <string name="subscriptions_to_channels_imported">%d kanāls(-i) importēts(-i).</string>
+    <string name="select_sub_file">Atlasiet failu</string>
+    <string name="select_all">Atlasīt visu</string>
+    <string name="select_none">Atlasīt nevienu</string>
+    <string name="no_channels_found">Izvelētajā failā neizdevās atrast nevienu YouTube kanālu.</string>
+    <string name="no_new_channels_found">Netika atrasts jebkāds YouTube kanāls, kuru jūs jau neesat abonējis.</string>
+    <string name="import_subscriptions_parse_error">Neizdevās parsēt atlasīto failu: %s.</string>
+    <string name="about">Detalizētāka informācija</string>
+    <string name="import_subscriptions_description">Atķeksējiet tikai \"YouTube and YouTube Music\" https://takeout.google.com vietnē un noklikšķiniet uz \"All YouTube data included\". Atķeksējiet tikai \"subscriptions\". Tālāk nospiediet \"Next step\". Izvēlieties \"Send download link via email\" eksportēšanas parametru un nospiediet uz \"Create export\". Lejupielādējiet saņemto failu no e-pasta. Atlasiet šo ZIP failu jeb atarhivējiet to un atlasiet subscriptions.csv vai subscriptions.json, kas atrodas mapē /Takeout/YouTube and YouTube Music/subscriptions, izmantojot \"Atlasiet failu\" zemāk.</string>
+</resources>

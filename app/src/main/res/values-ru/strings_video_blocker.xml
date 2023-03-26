@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="blocked_videos">Заблокированные видео</string>
-    <string name="no_videos_blocked">Заблокированных или выбранных для этого видео не нашлось. Хотите настроить Видео блокер?</string>
+    <string name="no_videos_blocked">Нет заблокированных видео. Хотите настроить видео-блокер\?</string>
     <string name="configure">Настроить</string>
     <string name="block_channel">Заблокировать канал</string>
     <string name="channel_blacklisted">Канал добавлен в чёрный список. Пожалуйста, обновите страницу.</string>

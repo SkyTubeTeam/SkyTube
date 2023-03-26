@@ -24,4 +24,11 @@
     <string name="yes">Po</string>
     <string name="no">Jo</string>
     <string name="could_not_get_sponsorblock">S’u morën dot hollësi për SponsorBlock: %s.</string>
+    <string name="cleaner_toast_finish">Pastruesi pastroi %s video(s). %s MB të lira tanimë.</string>
+    <string name="cleaner_watched_downloads">Hiqi shkarkimet e para</string>
+    <string name="cleaner">Pastrues</string>
+    <string name="cleaner_explanation">Pastroni video të faqeruajtura/të shkarkuara. Përdorni mundësitë vijuese për filtrim:</string>
+    <string name="cleaner_confirm">Pastroji</string>
+    <string name="video_comments_are_disabled">Komentet për videon të çaktivizuara</string>
+    <string name="cleaner_watched_bookmarks">Hiqi faqerojtësit e parë</string>
 </resources>
