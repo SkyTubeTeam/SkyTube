@@ -8,4 +8,5 @@
     <string name="configure">Налаштувати</string>
     <string name="no_videos_blocked">Ви хочете налаштувати блокувальник відео для блокування або фільтрів відео\?</string>
     <string name="blocked_videos">Заблоковані відео</string>
+    <string name="add_to_permitted">Дозволити канал</string>
 </resources>
