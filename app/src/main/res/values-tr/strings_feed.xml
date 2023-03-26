@@ -12,4 +12,5 @@
     <string name="notification_channel_feed_title">Akış Bildirimleri</string>
     <string name="notification_new_videos_found">Abone olunan kanallardan %d yeni video</string>
     <string name="open_channel">Kanalı Aç</string>
+    <string name="channel_related">Kanal...</string>
 </resources>
