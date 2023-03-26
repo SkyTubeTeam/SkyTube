@@ -59,7 +59,7 @@
 		VIDEO BLOCKER
 	-->
     <string name="pref_video_blocker_category">Videóblokkoló</string>
-    <string name="pref_title_channel_blacklist">Csatorna feketelista</string>
+    <string name="pref_title_channel_blacklist">Csatorna-tiltólista</string>
     <string name="add">Hozzáadás</string>
     <string name="block">Blokkolás</string>
     <string name="pref_languages_filter_category">Nyelv és régió szűrők</string>
@@ -99,7 +99,7 @@
 \n
 \nA programmal együtt meg kellett kapnia a GNU GPL egy példányát. Ha mégsem, lásd &lt;https://www.gnu.org/licenses/&gt;</string>
     <string name="preferred_lang_updated">Frissítse a videókat az új nyelv használatához.</string>
-    <string name="channel_already_whitelisted">A csatorna már szerepel a fehérlistán.</string>
+    <string name="channel_already_whitelisted">A csatorna már hozzá van adva az engedélyezési listához.</string>
     <string name="pref_playback_status_cleared">Lejátszási állapot törölve.</string>
     <string name="pref_summary_clear_playback_status">Lejátszási állapot törlése az összes videóhoz.</string>
     <string name="pref_title_clear_playback_status">Lejátszási állapot törlése</string>
@@ -119,23 +119,23 @@
     <string name="pref_summary_lang_detection_video_filtering">Használjon sok erőforrást a videó nyelvének észleléséhez és a nem kívánt nyelv(ek) blokkolásához.</string>
     <string name="pref_title_lang_detection_video_filtering">Videó nyelvi szűrő</string>
     <string name="no_preferred_lang_selected">Nincs előnyben részesített nyelv kiválasztva.</string>
-    <string name="channel_unwhitelist_failure">Nem sikerült a megadott csatornák eltávolítása a fehérlistáról…</string>
-    <string name="channel_unwhitelist_success">Frissítse a videókat az új csatorna fehérlista használatához.</string>
-    <string name="channel_whitelist_update_failure">Nem sikerült fehérlistára tenni a megadott csatornát.</string>
-    <string name="channel_whitelist_updated">Frissítse a videókat az új csatorna fehérlista használatához.</string>
+    <string name="channel_unwhitelist_failure">Nem sikerült a megadott csatorna eltávolítása a csatornaengedélyezési listáról</string>
+    <string name="channel_unwhitelist_success">Frissítse a videókat az új csatornaengedélyezési lista használatához.</string>
+    <string name="channel_whitelist_update_failure">Nem sikerült hozzáadni az engedélyezési listához az adott csatornát.</string>
+    <string name="channel_whitelist_updated">Frissítse a videókat az új csatornaengedélyezési lista használatához.</string>
     <string name="please_wait">Kérem várjon…</string>
-    <string name="input_channel_url">Csatorna URL címek az engedélyezőlistára:</string>
+    <string name="input_channel_url">Engedélyezendő csatorna URL-ek:</string>
     <string name="pref_summary_channel_whitelist">Az engedélyezett csatornák listája.</string>
-    <string name="pref_title_channel_whitelist">Csatorna fehérlista</string>
-    <string name="channel_blacklist_empty">A feketelista üres.</string>
-    <string name="channel_blacklist_update_failure">Nem sikerült a megadott csatornák eltávolítása a feketelistáról…</string>
-    <string name="channel_blacklist_updated">Frissítse a videókat az új csatorna feketelista alkalmazásához.</string>
+    <string name="pref_title_channel_whitelist">Csatornaengedélyezési lista</string>
+    <string name="channel_blacklist_empty">A tiltólista üres.</string>
+    <string name="channel_blacklist_update_failure">Nem sikerült a megadott csatornák eltávolítása a tiltólistáról…</string>
+    <string name="channel_blacklist_updated">Frissítse a videókat az új csatorna-tiltólista alkalmazásához.</string>
     <string name="unblock">Blokkolás feloldása</string>
     <string name="pref_summary_channel_blacklist">A blokkolt csatornák listája.</string>
     <string name="disabled">Letiltva</string>
-    <string name="pref_summary_channel_filter_method">Válassza ki a csatorna szűrési módszert: %s</string>
-    <string name="pref_title_channel_filter_method">Csatorna szűrő módszer</string>
-    <string name="pref_channels_filter_category">Csatorna szűrők</string>
+    <string name="pref_summary_channel_filter_method">Válassza ki a csatornaszűrési módszert: %s</string>
+    <string name="pref_title_channel_filter_method">Csatornaszűrő módszer</string>
+    <string name="pref_channels_filter_category">Csatornaszűrők</string>
     <string name="pref_summary_enable_video_blocker">Videoblokkoló.</string>
     <string name="pref_title_enable_immersive_mode">Teljes képernyős mód</string>
     <string name="pref_video_continuous_repeat_toggle">Folyamatos ismétlés</string>
@@ -153,7 +153,7 @@
     <string name="pref_summary_maximum_res">Válassza ki a legnagyobb videófelbontást: %s</string>
     <string name="pref_title_maximum_res">Legnagyobb Felbontás</string>
     <string name="pref_key_video_quality_for_downloads_summary">Optimalizálás %s -ra</string>
-    <string name="pref_key_video_quality_for_downloads_title">Letöltött Videó Minőségének Kiválasztása</string>
+    <string name="pref_key_video_quality_for_downloads_title">Videók letöltési minőségének kiválasztása</string>
     <string name="pref_key_video_quality_summary">Optimalizálás %s -ra</string>
     <string name="pref_key_video_quality_title">Videó minőség kiválasztása</string>
     <string name="pref_category_download_resolutions">Letöltött videók felbontása</string>
