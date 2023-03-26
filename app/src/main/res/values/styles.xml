@@ -36,6 +36,7 @@
 
 	<style name="BlockedVideoTextView" parent="AppTheme">
 		<item name="android:padding">7dp</item>
+		<item name="android:textColor">@color/dialog_content_text</item>
 	</style>
 
 

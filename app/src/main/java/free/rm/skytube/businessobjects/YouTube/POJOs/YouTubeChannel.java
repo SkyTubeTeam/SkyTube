@@ -167,27 +167,68 @@ public class YouTubeChannel extends CardData implements Serializable {
 		return SubscriptionsDb.getSubscriptionsDb().getUserSubscribedToChannel(getId())
 				.flatMap(isSubscribed -> DatabaseTasks.subscribeToChannel(false,
 						null, SkyTubeApp.getContext(), this, false))
-				.map(result -> VideoBlocker.isChannelBlacklistEnabled())
-				.flatMap(isEnabled -> {
-					if (isEnabled) {
-						return blacklistChannel(displayToastMessage);
+				.map(result -> SkyTubeApp.getSettings().isChannelDenyListEnabled())
+				.flatMap(isDenyListEnabled -> {
+					if (isDenyListEnabled) {
+						return dennyChannel(displayToastMessage);
 					} else {
-						return unwhitelistChannel(displayToastMessage);
+						return removeAllowedChannel(displayToastMessage);
 					}
 				})
 				.observeOn(AndroidSchedulers.mainThread());
 	}
 
 	/**
-	 * Blacklist the channel.
+	 * Block a channel.  This operation depends on what filtering method was enabled by the user:
+	 * i.e. either channel blacklisting or whitelisting.
+	 */
+	public Single<Boolean> unblockChannel() {
+		return unblockChannel(true);
+	}
+
+	public Single<Boolean> unblockChannel(boolean displayToastMessage) {
+		return Single.fromCallable(() -> SkyTubeApp.getSettings().isChannelDenyListEnabled())
+				.flatMap(isDenyListEnabled -> {
+					if (isDenyListEnabled) {
+						return removeDeniedChannel(displayToastMessage);
+					} else {
+						return allowChannel(displayToastMessage);
+					}
+				})
+				.observeOn(AndroidSchedulers.mainThread());
+	}
+
+	/**
+	 * Denny the channel.
 	 *
 	 * @param displayToastMessage   Set to true to display toast message when the operation is carried
 	 *                              out.
 	 *
 	 * @return True if successful.
 	 */
-	private Single<Boolean> blacklistChannel(boolean displayToastMessage) {
-		return Single.fromCallable(() -> ChannelFilteringDb.getChannelFilteringDb().blacklist(id, title))
+	private Single<Boolean> dennyChannel(boolean displayToastMessage) {
+		return Single.fromCallable(() -> ChannelFilteringDb.getChannelFilteringDb().denyChannel(id, title))
+				.subscribeOn(Schedulers.io())
+				.observeOn(AndroidSchedulers.mainThread())
+				.doOnSuccess(success -> {
+					if (displayToastMessage) {
+						Toast.makeText(SkyTubeApp.getContext(),
+								success ? R.string.channel_blacklisted : R.string.channel_blacklist_error,
+								Toast.LENGTH_LONG).show();
+					}
+				});
+	}
+
+	/**
+	 * Denny the channel.
+	 *
+	 * @param displayToastMessage   Set to true to display toast message when the operation is carried
+	 *                              out.
+	 *
+	 * @return True if successful.
+	 */
+	private Single<Boolean> allowChannel(boolean displayToastMessage) {
+		return Single.fromCallable(() -> ChannelFilteringDb.getChannelFilteringDb().allowChannel(id, title))
 				.subscribeOn(Schedulers.io())
 				.observeOn(AndroidSchedulers.mainThread())
 				.doOnSuccess(success -> {
@@ -207,14 +248,35 @@ public class YouTubeChannel extends CardData implements Serializable {
 	 *
 	 * @return True if successful.
 	 */
-	private Single<Boolean> unwhitelistChannel(boolean displayToastMessage) {
-		return Single.fromCallable(() -> ChannelFilteringDb.getChannelFilteringDb().unwhitelist(id))
+	private Single<Boolean> removeAllowedChannel(boolean displayToastMessage) {
+		return Single.fromCallable(() -> ChannelFilteringDb.getChannelFilteringDb().removeAllowList(id))
 				.subscribeOn(Schedulers.io())
 				.observeOn(AndroidSchedulers.mainThread())
 				.doOnSuccess(success -> {
 					if (displayToastMessage) {
 						Toast.makeText(SkyTubeApp.getContext(),
 								success ? R.string.channel_unwhitelist_success : R.string.channel_unwhitelist_error,
+								Toast.LENGTH_LONG).show();
+					}
+				});
+	}
+
+	/**
+	 * Remove channel from the deny list.
+	 *
+	 * @param displayToastMessage   Set to true to display toast message when the operation is carried
+	 *                              out.
+	 *
+	 * @return True if successful.
+	 */
+	private Single<Boolean> removeDeniedChannel(boolean displayToastMessage) {
+		return Single.fromCallable(() -> ChannelFilteringDb.getChannelFilteringDb().removeDenyList(id))
+				.subscribeOn(Schedulers.io())
+				.observeOn(AndroidSchedulers.mainThread())
+				.doOnSuccess(success -> {
+					if (displayToastMessage) {
+						Toast.makeText(SkyTubeApp.getContext(),
+								success ? R.string.channel_blacklist_updated : R.string.channel_blacklist_update_failure,
 								Toast.LENGTH_LONG).show();
 					}
 				});

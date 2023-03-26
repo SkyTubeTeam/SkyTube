@@ -23,6 +23,21 @@
 		android:id="@+id/delete_download"
 		android:title="@string/delete_download"
 		android:visible="false"/>
+	<item android:id="@+id/channel_related" android:title="@string/channel_related">
+		<menu>
+			<item
+				android:id="@+id/open_channel" android:visible="false"
+				android:title="@string/open_channel"/>
+			<item
+				android:id="@+id/subscribe_channel" android:visible="false"
+				android:title="@string/subscribe"/>
+			<item
+				android:id="@+id/block_channel"
+				android:title="@string/block_channel"/>
+			<item android:id="@+id/unblock_channel"
+				android:title="@string/add_to_permitted" />
+		</menu>
+	</item>
     <item
         android:id="@+id/view_thumbnail"
         android:title="@string/view_thumbnail"/>
@@ -33,7 +48,4 @@
 		android:id="@+id/mark_unwatched"
 		android:title="@string/mark_unwatched"
 		android:visible="false"/>
-    <item
-        android:id="@+id/block_channel"
-        android:title="@string/block_channel"/>
 </menu>

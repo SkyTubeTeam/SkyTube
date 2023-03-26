@@ -17,7 +17,7 @@
 
 package free.rm.skytube.app;
 
-import static free.rm.skytube.app.SkyTubeApp.getContext;
+import static free.rm.skytube.app.SkyTubeApp.getStr;
 
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -204,6 +204,19 @@ public class Settings {
 
     public boolean isDisableGestures() {
         return getPreference(R.string.pref_key_disable_screen_gestures, false);
+    }
+
+    public boolean isEnableVideoBlocker() {
+        return getPreference(R.string.pref_key_enable_video_blocker, true);
+    }
+
+    /**
+     * @return True if channel deny list is enabled;  false if channel allow list is enabled.
+     */
+    public boolean isChannelDenyListEnabled() {
+        final String defValue = getStr(R.string.channel_blacklisting_filtering);
+        final String channelFilter = getPreference(R.string.pref_key_channel_filter_method, defValue);
+        return channelFilter.equals(defValue);
     }
 
     public void setDisableGestures(boolean disableGestures) {

@@ -38,6 +38,7 @@ import java.util.List;
 import java.util.Set;
 
 import free.rm.skytube.R;
+import free.rm.skytube.app.Settings;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
@@ -58,6 +59,11 @@ public class VideoBlocker {
 	/** Default preferred language(s) -- by default, no language shall be filtered out. */
 	private static final Set<String> defaultPrefLanguages = new HashSet<>(SkyTubeApp.getStringArrayAsList(R.array.languages_iso639_codes));
 
+	private Settings settings;
+
+	public VideoBlocker() {
+		settings = SkyTubeApp.getSettings();
+	}
 
 	/**
 	 * Sets the {@link VideoBlockerListener}.
@@ -81,9 +87,9 @@ public class VideoBlocker {
 		}
 
 		List<CardData>      filteredVideosList    = new ArrayList<>();
-		final boolean       isChannelBlacklistEnabled = isChannelBlacklistEnabled();
-		final List<String>  blacklistedChannelIds = isChannelBlacklistEnabled  ? ChannelFilteringDb.getChannelFilteringDb().getBlacklistedChannelsIdsList() : null;
-		final List<String>  whitelistedChannelIds = !isChannelBlacklistEnabled ? ChannelFilteringDb.getChannelFilteringDb().getWhitelistedChannelsIdsList() : null;
+		final boolean       isChannelBlacklistEnabled = settings.isChannelDenyListEnabled();
+		final List<String>  blacklistedChannelIds = isChannelBlacklistEnabled  ? ChannelFilteringDb.getChannelFilteringDb().getDeniedChannelsIdsList() : null;
+		final List<String>  whitelistedChannelIds = !isChannelBlacklistEnabled ? ChannelFilteringDb.getChannelFilteringDb().getAllowedChannelsIdsList() : null;
 		// set of user's preferred ISO 639 language codes (regex)
 		final Set<String>   preferredLanguages    = SkyTubeApp.getPreferenceManager().getStringSet(getStr(R.string.pref_key_preferred_languages), defaultPrefLanguages);
 		final BigInteger    minimumVideoViews     = getViewsFilteringValue();
@@ -108,14 +114,12 @@ public class VideoBlocker {
 		return filteredVideosList;
 	}
 
-
 	/**
 	 * @return True if the user wants to use the video blocker, false otherwise.
 	 */
 	private boolean isVideoBlockerEnabled() {
-		return SkyTubeApp.getPreferenceManager().getBoolean(getStr(R.string.pref_key_enable_video_blocker), true);
+		return SkyTubeApp.getSettings().isEnableVideoBlocker();
 	}
-
 
 	/**
 	 * Filter channels base on constraints set by the user.  Used by the SubsAdapter and hence the
@@ -127,12 +131,12 @@ public class VideoBlocker {
 	 */
 	public List<ChannelView> filterChannels(List<ChannelView> channels) {
 		List<ChannelView>       filteredChannels    = new ArrayList<>();
-		final boolean           isChannelBlacklistEnabled = isChannelBlacklistEnabled();
+		final boolean           isChannelBlacklistEnabled = settings.isChannelDenyListEnabled();
 		if (!isChannelBlacklistEnabled) {
 			return channels;
 		}
-		final List<String>      blacklistedChannelIds = isChannelBlacklistEnabled  ? ChannelFilteringDb.getChannelFilteringDb().getBlacklistedChannelsIdsList() : null;
-		final List<String>      whitelistedChannelIds = !isChannelBlacklistEnabled ? ChannelFilteringDb.getChannelFilteringDb().getWhitelistedChannelsIdsList() : null;
+		final List<String>      blacklistedChannelIds = isChannelBlacklistEnabled  ? ChannelFilteringDb.getChannelFilteringDb().getDeniedChannelsIdsList() : null;
+		final List<String>      whitelistedChannelIds = !isChannelBlacklistEnabled ? ChannelFilteringDb.getChannelFilteringDb().getAllowedChannelsIdsList() : null;
 
 		for (ChannelView channel : channels) {
 			if ( !(isChannelBlacklistEnabled ? filterByBlacklistedChannels(channel.getId(), blacklistedChannelIds)
@@ -160,16 +164,6 @@ public class VideoBlocker {
 			videoBlockerListener.onVideoBlocked(new BlockedVideo(video, filteringType, reason));
 		}
 	}
-
-
-	/**
-	 * @return True if channel blacklisting is enabled;  false if channel whitelisting is enabled.
-	 */
-	public static boolean isChannelBlacklistEnabled() {
-		final String channelFilter = SkyTubeApp.getPreferenceManager().getString(getStr(R.string.pref_key_channel_filter_method), getStr(R.string.channel_blacklisting_filtering));
-		return channelFilter.equals(getStr(R.string.channel_blacklisting_filtering));
-	}
-
 
 	/**
 	 * Filter the video for blacklisted channels.
