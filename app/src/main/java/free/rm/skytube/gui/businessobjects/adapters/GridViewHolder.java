@@ -259,7 +259,7 @@ public class GridViewHolder extends RecyclerView.ViewHolder implements Serializa
 		compositeDisposable.add(DatabaseTasks.isVideoBookmarked(youTubeVideo.getId(), menu));
 
 		// If playback history is not disabled, see if this video has been watched. Otherwise, hide the "mark watched" & "mark unwatched" options from the menu.
-		if (!SkyTubeApp.getSettings().isPlaybackStatusEnabled()) {
+		if (SkyTubeApp.getSettings().isPlaybackStatusEnabled()) {
 			compositeDisposable.add(DatabaseTasks.isVideoWatched(youTubeVideo.getId(), menu));
 		} else {
 			menu.findItem(R.id.mark_watched).setVisible(false);
