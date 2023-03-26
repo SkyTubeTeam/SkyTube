@@ -143,7 +143,7 @@ public class VideoBlockerPreferenceFragment extends PreferenceFragmentCompat {
 	 */
 	private void initChannelBlacklistingPreference(final Preference channelBlacklistPreference) {
 		channelBlacklistPreference.setOnPreferenceClickListener(preference -> {
-			new BlacklistChannelsDialog(getActivity()).show();
+			new DenyChannelsDialog(getActivity()).show();
 			return true;
 		});
 	}
@@ -153,7 +153,7 @@ public class VideoBlockerPreferenceFragment extends PreferenceFragmentCompat {
 	 */
 	private void initChannelWhitelistingPreference(final Preference channelWhitelistPreference) {
 		channelWhitelistPreference.setOnPreferenceClickListener(preference -> {
-			new WhitelistChannelsDialog(getActivity()).show();
+			new AllowChannelsDialog(getActivity()).show();
 			return true;
 		});
 	}
@@ -242,14 +242,14 @@ public class VideoBlockerPreferenceFragment extends PreferenceFragmentCompat {
 	//////////////////////////
 
 	/**
-	 * Display a dialog which allows the user to select his preferred language(s).
+	 * Display a dialog which allows the user to select his denied channels.
 	 */
-	private class BlacklistChannelsDialog extends MultiSelectListPreferenceDialog {
-		public BlacklistChannelsDialog(@NonNull Context context) {
+	private class DenyChannelsDialog extends MultiSelectListPreferenceDialog {
+		public DenyChannelsDialog(@NonNull Context context) {
 			super(context);
 
 			// set the items of this list as the blacklisted channels
-			setItems(ChannelFilteringDb.getChannelFilteringDb().getBlacklistedChannels());
+			setItems(ChannelFilteringDb.getChannelFilteringDb().getDeniedChannels());
 
 			title(R.string.pref_title_channel_blacklist);
 			positiveText(R.string.unblock);
@@ -258,7 +258,7 @@ public class VideoBlockerPreferenceFragment extends PreferenceFragmentCompat {
 
 				if (channels != null  &&  !channels.isEmpty()) {
 					// remove the selected channels from the blacklist
-					final boolean success = ChannelFilteringDb.getChannelFilteringDb().unblacklist(channels);
+					final boolean success = ChannelFilteringDb.getChannelFilteringDb().removeDenyList(channels);
 
 					Toast.makeText(getActivity(),
 							success ? R.string.channel_blacklist_updated : R.string.channel_blacklist_update_failure,
@@ -276,13 +276,13 @@ public class VideoBlockerPreferenceFragment extends PreferenceFragmentCompat {
 	/**
 	 * Display a dialog which allows the user to whitelist channels.
 	 */
-	private class WhitelistChannelsDialog extends MultiSelectListPreferenceDialog implements OnGetChannelInfoListener {
+	private class AllowChannelsDialog extends MultiSelectListPreferenceDialog implements OnGetChannelInfoListener {
 
-		public WhitelistChannelsDialog(@NonNull Context context) {
+		public AllowChannelsDialog(@NonNull Context context) {
 			super(context);
 
 			// set the items of this list as the whitelisted channels
-			setItems(ChannelFilteringDb.getChannelFilteringDb().getWhitelistedChannels());
+			setItems(ChannelFilteringDb.getChannelFilteringDb().getAllowedChannels());
 
 			// when the "Add" button is clicked, do not close this dialog...
 			autoDismiss(false);
@@ -329,7 +329,7 @@ public class VideoBlockerPreferenceFragment extends PreferenceFragmentCompat {
 					.content(R.string.input_channel_url)
 					.positiveText(R.string.add)
 					.inputType(InputType.TYPE_TEXT_VARIATION_URI)
-					.input("https://www.youtube.com/channel/xxxxxxxxx", null, false, (dialog, channelUrl) -> new GetChannelIdFromUrlTask(channelUrl.toString(), WhitelistChannelsDialog.this).executeInParallel())
+					.input("https://www.youtube.com/channel/xxxxxxxxx", null, false, (dialog, channelUrl) -> new GetChannelIdFromUrlTask(channelUrl.toString(), AllowChannelsDialog.this).executeInParallel())
 					.show();
 		}
 
@@ -341,7 +341,7 @@ public class VideoBlockerPreferenceFragment extends PreferenceFragmentCompat {
 					Toast.makeText(getActivity(), R.string.channel_already_whitelisted, Toast.LENGTH_LONG).show();
 				} else {
 					// save the whitelisted channel in the database
-					final boolean success = ChannelFilteringDb.getChannelFilteringDb().whitelist(channel.id, channel.text);
+					final boolean success = ChannelFilteringDb.getChannelFilteringDb().allowChannel(channel.id, channel.text);
 
 					Toast.makeText(getActivity(),
 							success ? R.string.channel_whitelist_updated : R.string.channel_whitelist_update_failure,

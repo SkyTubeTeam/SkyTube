@@ -4,6 +4,7 @@
 	<string name="no_videos_blocked">Do you want to set up the video blocker to block or filter out videos?</string>
 	<string name="configure">Set up</string>
 	<string name="block_channel">Block Channel</string>
+	<string name="add_to_permitted">Permit Channel</string>
 	<string name="channel_blacklisted">Refresh to use the new channel blacklist.</string>
 	<string name="channel_blacklist_error">Could not blacklist channel.</string>
 	<string name="channel_unwhitelist_error">Could not remove channel from whitelist.</string>

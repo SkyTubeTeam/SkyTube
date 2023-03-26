@@ -715,6 +715,9 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
             case R.id.block_channel:
                 compositeDisposable.add(youTubeChannel.blockChannel().subscribe());
                 return true;
+            case R.id.unblock_channel:
+                compositeDisposable.add(youTubeChannel.unblockChannel().subscribe());
+                return true;
             case R.id.disable_gestures:
                 boolean disableGestures = !item.isChecked();
                 item.setChecked(disableGestures);

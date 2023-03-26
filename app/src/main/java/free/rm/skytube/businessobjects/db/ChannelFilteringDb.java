@@ -70,34 +70,45 @@ public class ChannelFilteringDb extends SQLiteOpenHelperEx {
 	//
 
 	/**
-	 * Blacklist a channel.
+	 * Add the channel to the deny list.
 	 *
 	 * @param channelId     Channel ID.
 	 * @param channelName   Channel name.
 	 *
 	 * @return  True if successful.
 	 */
-	public boolean blacklist(String channelId, String channelName) {
+	public boolean denyChannel(String channelId, String channelName) {
 		return addChannel(ChannelListTable.BLACKLIST, channelId, channelName);
 	}
 
 
 	/**
-	 * Unblacklist the given channels.
+	 * Remove the given channels from the deny list.
 	 *
-	 * @param channels  Channels to unblacklist.
+	 * @param channels  Channels to remove from the deny list.
 	 *
 	 * @return  True if successful.
 	 */
-	public boolean unblacklist(final List<MultiSelectListPreferenceItem> channels) {
+	public boolean removeDenyList(final List<MultiSelectListPreferenceItem> channels) {
 		return removeChannels(ChannelListTable.BLACKLIST, channels);
+	}
+
+	/**
+	 * Remove the given channel from the deny list.
+	 *
+	 * @param channelId Channel ID.
+	 *
+	 * @return  True if successful.
+	 */
+	public boolean removeDenyList(final String channelId) {
+		return removeChannels(ChannelListTable.BLACKLIST, channelId);
 	}
 
 
 	/**
 	 * @return List of blacklisted channels.
 	 */
-	public List<MultiSelectListPreferenceItem> getBlacklistedChannels() {
+	public List<MultiSelectListPreferenceItem> getDeniedChannels() {
 		return getChannels(ChannelListTable.BLACKLIST);
 	}
 
@@ -105,10 +116,9 @@ public class ChannelFilteringDb extends SQLiteOpenHelperEx {
 	/**
 	 * @return List of blacklisted channel IDs.
 	 */
-	public List<String> getBlacklistedChannelsIdsList() {
+	public List<String> getDeniedChannelsIdsList() {
 		return getChannelsIdsList(ChannelListTable.BLACKLIST);
 	}
-
 
 
 	////////////////////////////////////////////////////////////////////////////////////////////////
@@ -117,42 +127,42 @@ public class ChannelFilteringDb extends SQLiteOpenHelperEx {
 	//
 
 	/**
-	 * Whitelist a channel.
+	 * Add channel to the allowed list.
 	 *
 	 * @param channelId     Channel ID.
 	 * @param channelName   Channel name.
 	 *
 	 * @return  True if successful.
 	 */
-	public boolean whitelist(String channelId, String channelName) {
+	public boolean allowChannel(String channelId, String channelName) {
 		return addChannel(ChannelListTable.WHITELIST, channelId, channelName);
 	}
 
 
 	/**
-	 * Unwhitelist the given channel.
+	 * Remove the given channel from the allow list.
 	 *
 	 * @param channelId Channel ID.
 	 *
 	 * @return  True if successful.
 	 */
-	public boolean unwhitelist(final String channelId) {
+	public boolean removeAllowList(final String channelId) {
 		return removeChannels(ChannelListTable.WHITELIST, channelId);
 	}
 
 
 	/**
-	 * @return List of whitelisted channels.
+	 * @return List of allowed channels.
 	 */
-	public List<MultiSelectListPreferenceItem> getWhitelistedChannels() {
+	public List<MultiSelectListPreferenceItem> getAllowedChannels() {
 		return getChannels(ChannelListTable.WHITELIST);
 	}
 
 
 	/**
-	 * @return List of whitelisted channel IDs.
+	 * @return List of allowed channel IDs.
 	 */
-	public List<String> getWhitelistedChannelsIdsList() {
+	public List<String> getAllowedChannelsIdsList() {
 		return getChannelsIdsList(ChannelListTable.WHITELIST);
 	}
 
@@ -225,27 +235,22 @@ public class ChannelFilteringDb extends SQLiteOpenHelperEx {
 	 * @return List of blacklisted/whitelisted channels.
 	 */
 	private List<MultiSelectListPreferenceItem> getChannels(ChannelListTable channelListTable) {
-		List<MultiSelectListPreferenceItem> whitelistedChannels = new ArrayList<>();
-		String                              channelId;
-		String                              channelName;
-		Cursor                              cursor;
+		List<MultiSelectListPreferenceItem> result = new ArrayList<>();
 
-		cursor = getReadableDatabase().query(
-				channelListTable.getTableName(),
-				new String[]{ChannelListTable.COL_CHANNEL_ID, ChannelListTable.COL_CHANNEL_NAME},
-				null, null,
-				null, null, null);
+		try (Cursor cursor = getReadableDatabase().query(
+			channelListTable.getTableName(),
+			new String[]{ChannelListTable.COL_CHANNEL_ID, ChannelListTable.COL_CHANNEL_NAME},
+			null, null,
+			null, null, null)) {
 
-		if (cursor.moveToFirst()) {
-			do {
-				channelId = cursor.getString(0);
-				channelName = cursor.getString(1);
-				whitelistedChannels.add(new MultiSelectListPreferenceItem(channelId, channelName, false));
-			} while (cursor.moveToNext());
+			while (cursor.moveToNext()) {
+				String channelId = cursor.getString(0);
+				String channelName = cursor.getString(1);
+				result.add(new MultiSelectListPreferenceItem(channelId, channelName, false));
+			}
 		}
-		cursor.close();
 
-		return whitelistedChannels;
+		return result;
 	}
 
 
@@ -255,25 +260,19 @@ public class ChannelFilteringDb extends SQLiteOpenHelperEx {
 	 * @return List of blacklisted/whitelisted channel IDs.
 	 */
 	private List<String> getChannelsIdsList(ChannelListTable channelListTable) {
-		List<String>    whitelistedChannels = new ArrayList<>();
-		String          channelId;
-		Cursor          cursor;
+		List<String>    result = new ArrayList<>();
 
-		cursor = getReadableDatabase().query(
+		try (Cursor cursor = getReadableDatabase().query(
 				channelListTable.getTableName(),
 				new String[]{ChannelListTable.COL_CHANNEL_ID},
 				null, null,
-				null, null, null);
-
-		if (cursor.moveToFirst()) {
-			do {
-				channelId = cursor.getString(0);
-				whitelistedChannels.add(channelId);
-			} while (cursor.moveToNext());
+				null, null, null)) {
+			while (cursor.moveToNext()) {
+				result.add(cursor.getString(0));
+			}
 		}
-		cursor.close();
 
-		return whitelistedChannels;
+		return result;
 	}
 
 }

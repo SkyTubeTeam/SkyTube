@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="feed">Feed</string>
+	<string name="channel_related" >Channel...</string>
 
 	<string name="subscribing_to_channels">Subscribing to channels…</string>
 	<string name="open_channel">Open Channel</string>

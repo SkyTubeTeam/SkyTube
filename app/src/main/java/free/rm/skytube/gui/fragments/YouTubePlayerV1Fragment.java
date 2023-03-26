@@ -699,8 +699,11 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 				}
 				return true;
 
-            case R.id.block_channel:
-	            compositeDisposable.add(youTubeChannel.blockChannel().subscribe());
+			case R.id.block_channel:
+				compositeDisposable.add(youTubeChannel.blockChannel().subscribe());
+				return true;
+			case R.id.unblock_channel:
+				compositeDisposable.add(youTubeChannel.unblockChannel().subscribe());
 				return true;
 			default:
 				return super.onOptionsItemSelected(item);

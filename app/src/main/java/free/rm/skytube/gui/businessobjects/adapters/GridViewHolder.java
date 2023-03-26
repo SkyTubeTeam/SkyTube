@@ -234,6 +234,9 @@ public class GridViewHolder extends RecyclerView.ViewHolder implements Serializa
 				case R.id.block_channel:
 					compositeDisposable.add(channel.blockChannel().subscribe());
 					return true;
+				case R.id.unblock_channel:
+					compositeDisposable.add(channel.unblockChannel().subscribe());
+					return true;
 			}
 			return false;
 		});
@@ -256,7 +259,7 @@ public class GridViewHolder extends RecyclerView.ViewHolder implements Serializa
 		compositeDisposable.add(DatabaseTasks.isVideoBookmarked(youTubeVideo.getId(), menu));
 
 		// If playback history is not disabled, see if this video has been watched. Otherwise, hide the "mark watched" & "mark unwatched" options from the menu.
-		if(!SkyTubeApp.getPreferenceManager().getBoolean(context.getString(R.string.pref_key_disable_playback_status), false)) {
+		if (!SkyTubeApp.getSettings().isPlaybackStatusEnabled()) {
 			compositeDisposable.add(DatabaseTasks.isVideoWatched(youTubeVideo.getId(), menu));
 		} else {
 			menu.findItem(R.id.mark_watched).setVisible(false);
@@ -275,10 +278,12 @@ public class GridViewHolder extends RecyclerView.ViewHolder implements Serializa
 				menu.findItem(R.id.download_video).setVisible(online);
 			}
 		}));
-		if(SkyTubeApp.getPreferenceManager().getBoolean(context.getString(R.string.pref_key_enable_video_blocker), true)) {
+		if (SkyTubeApp.getSettings().isEnableVideoBlocker()) {
 			menu.findItem(R.id.block_channel).setVisible(true);
+			menu.findItem(R.id.unblock_channel).setVisible(true);
 		} else {
 			menu.findItem(R.id.block_channel).setVisible(false);
+			menu.findItem(R.id.unblock_channel).setVisible(false);
 		}
 		popupMenu.setOnMenuItemClickListener(item -> {
 			switch(item.getItemId()) {
@@ -326,6 +331,9 @@ public class GridViewHolder extends RecyclerView.ViewHolder implements Serializa
 					return true;
 				case R.id.block_channel:
 					compositeDisposable.add(youTubeVideo.getChannel().blockChannel().subscribe());
+					return true;
+				case R.id.unblock_channel:
+					compositeDisposable.add(youTubeVideo.getChannel().unblockChannel().subscribe());
 					return true;
 			}
 			return false;

@@ -634,8 +634,8 @@
     <string name="pref_summary_channel_filter_method">Select channel filtering method:  %s</string>
     <string name="disabled">Disabled</string>
     <string-array name="channel_filtering_list">
-        <item>Blacklisting</item>
-        <item>Whitelisting</item>
+        <item>Channel Deny List</item>
+        <item>Channel Allow List</item>
     </string-array>
     <string name="channel_blacklisting_filtering" translatable="false">channel_blacklisting_filtering</string>
     <string name="channel_whitelisting_filtering" translatable="false">channel_whitelisting_filtering</string>
@@ -644,24 +644,24 @@
         <item>@string/channel_whitelisting_filtering</item>
     </string-array>
     <string name="pref_key_channel_blacklist" translatable="false">pref_key_channel_blacklist</string>
-    <string name="pref_title_channel_blacklist">Channel Blacklist</string>
+    <string name="pref_title_channel_blacklist">Channel Deny List</string>
     <string name="pref_summary_channel_blacklist">A list of blocked channels.</string>
     <string name="unblock">Unblock</string>
-    <string name="channel_blacklist_updated">Refresh videos to apply the new channel blacklist.</string>
-    <string name="channel_blacklist_update_failure">Could not remove the given channel(s) from the blacklist…</string>
-    <string name="channel_blacklist_empty">The blacklist is empty.</string>
+    <string name="channel_blacklist_updated">Refresh videos to apply the new channel deny list.</string>
+    <string name="channel_blacklist_update_failure">Could not remove the given channel(s) from the deny list…</string>
+    <string name="channel_blacklist_empty">The deny list is empty.</string>
     <string name="pref_key_channel_whitelist" translatable="false">pref_key_channel_whitelist</string>
-    <string name="pref_title_channel_whitelist">Channel Whitelist</string>
+    <string name="pref_title_channel_whitelist">Channel Allow List</string>
     <string name="pref_summary_channel_whitelist">A list of allowed channels.</string>
-    <string name="input_channel_url">Channel URLs to whitelist:</string>
+    <string name="input_channel_url">Channel URLs to allow:</string>
     <string name="add">Add</string>
     <string name="block">Block</string>
     <string name="please_wait">Please wait…</string>
-    <string name="channel_already_whitelisted">Channel already whitelisted.</string>
-    <string name="channel_whitelist_updated">Refresh videos to use the new channel whitelist.</string>
-    <string name="channel_whitelist_update_failure">Could not whitelist the given channel.</string>
-    <string name="channel_unwhitelist_success">Refresh videos to use the new channel whitelist.</string>
-    <string name="channel_unwhitelist_failure">Failed to unwhitelist the given channel(s)…</string>
+    <string name="channel_already_whitelisted">Channel already added to the allowed list.</string>
+    <string name="channel_whitelist_updated">Refresh videos to use the new channel allowed list.</string>
+    <string name="channel_whitelist_update_failure">Could not add to the allowed list the given channel.</string>
+    <string name="channel_unwhitelist_success">Refresh videos to use the new allowed channel list.</string>
+    <string name="channel_unwhitelist_failure">Failed to remove from the given channel(s) from the allowed channels list</string>
     <string name="pref_languages_filter_category">Language and Region Filters</string>
     <string name="pref_title_preferred_regions">Preferred Region</string>
     <string name="pref_key_preferred_region" translatable="false">pref_key_preferred_region</string>

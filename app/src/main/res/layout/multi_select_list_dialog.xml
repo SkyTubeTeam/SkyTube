@@ -26,7 +26,6 @@
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:button="@null"
-		android:focusable="false"
-		android:drawableRight="?android:attr/listChoiceIndicatorMultiple"/>
+		android:focusable="false" />
 
 </LinearLayout>
