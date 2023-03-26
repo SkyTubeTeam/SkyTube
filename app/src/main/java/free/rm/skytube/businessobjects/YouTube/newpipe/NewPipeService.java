@@ -49,8 +49,11 @@ import org.schabi.newpipe.extractor.search.SearchExtractor;
 import org.schabi.newpipe.extractor.stream.StreamExtractor;
 import org.schabi.newpipe.extractor.stream.StreamInfo;
 import org.schabi.newpipe.extractor.subscription.SubscriptionExtractor;
+import org.schabi.newpipe.extractor.utils.Utils;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.time.Instant;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -118,10 +121,26 @@ public class NewPipeService {
         if (handlerFactory != null) {
             try {
                 String id = handlerFactory.getId(url);
-                return new ContentId(id, handlerFactory.getUrl(id), type);
+                String canonicalUrl = handlerFactory.getUrl(id);
+                if (type == StreamingService.LinkType.STREAM) {
+                    return new VideoId(id, canonicalUrl, parseTimeStamp(url));
+                } else {
+                    return new ContentId(id, handlerFactory.getUrl(id), type);
+                }
             } catch (ParsingException pe) {
                 return null;
             }
+        }
+        return null;
+    }
+
+    private Integer parseTimeStamp(String url) {
+        try {
+            String time = Utils.getQueryValue(new URL(url), "t");
+            if (time != null) {
+                return Integer.parseInt(time);
+            }
+        } catch (MalformedURLException|NumberFormatException e) {
         }
         return null;
     }

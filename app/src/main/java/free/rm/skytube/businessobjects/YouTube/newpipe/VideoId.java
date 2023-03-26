@@ -20,12 +20,27 @@ package free.rm.skytube.businessobjects.YouTube.newpipe;
 import org.schabi.newpipe.extractor.StreamingService;
 
 public final class VideoId extends ContentId {
+    final Integer timestamp;
 
-    public VideoId(String id, String canonicalUrl) {
+    public VideoId(String id, String canonicalUrl, Integer timestamp) {
         super(id, canonicalUrl, StreamingService.LinkType.STREAM);
+        this.timestamp = timestamp;
+    }
+
+    public Integer getTimestamp() {
+        return timestamp;
+    }
+
+    @Override
+    public String toString() {
+        return "VideoId{" +
+                "id='" + id + '\'' +
+                ", canonicalUrl='" + canonicalUrl + '\'' +
+                ", timestamp=" + timestamp +
+                '}';
     }
 
     public static VideoId create(String id) {
-        return new VideoId(id, String.format("https://youtu.be/%s", id));
+        return new VideoId(id, String.format("https://youtu.be/%s", id), null);
     }
 }

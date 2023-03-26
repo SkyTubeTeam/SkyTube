@@ -69,12 +69,15 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
     private IconicsDrawable heartedIcon;
     private IconicsDrawable pinnedIcon;
 
+    private Linker.CurrentActivity currentActivity;
+
     private Map<String, List<CommentsInfoItem>> replyMap = new HashMap<>();
 
     private static final String TAG = CommentsAdapter.class.getSimpleName();
 
-    public CommentsAdapter(Context context, String videoId, ExpandableListView expandableListView, View commentsProgressBar, View noVideoCommentsView, View disabledCommentsView) {
+    public CommentsAdapter(Context context, Linker.CurrentActivity currentActivity, String videoId, ExpandableListView expandableListView, View commentsProgressBar, View noVideoCommentsView, View disabledCommentsView) {
         this.context = context;
+        this.currentActivity = currentActivity;
         this.heartedIcon = new IconicsDrawable(context)
                 .icon(MaterialDesignIconic.Icon.gmi_favorite)
                 .color(IconicsColor.colorInt(Color.RED))
@@ -85,7 +88,6 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
                 .color(IconicsColor.colorInt(Color.RED))
                 .size(IconicsSize.TOOLBAR_ICON_SIZE)
 				.padding(IconicsSize.TOOLBAR_ICON_PADDING);
-        Log.i(TAG, "heartedIcon: " + heartedIcon + ", pads: " + IconicsSize.TOOLBAR_ICON_PADDING);
         try {
             this.commentThreadPager = NewPipeService.get().getCommentPager(videoId);
             this.expandableListView = expandableListView;
@@ -151,10 +153,12 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-        Log.i(TAG, "getGroupView " + groupPosition + " " + isExpanded + ", view=" + convertView + ", parent=" + parent);
+        Log.d(TAG, "getGroupView " + groupPosition + " " + isExpanded + ", view=" + convertView + ", parent=" + parent);
         CommentsInfoItem comment = commentThreadPager.getComment(groupPosition);
         final CommentViewHolder viewHolder = getCommentViewHolder(convertView, parent);
-        viewHolder.updateInfo(comment, true, groupPosition);
+        if (comment != null) {
+            viewHolder.updateInfo(comment, true, groupPosition);
+        }
 
         // if it reached the bottom of the list, then try to get the next page of videos
         if (groupPosition == getGroupCount() - 1) {
@@ -173,14 +177,14 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
     }
 
     private synchronized void ensureRepliesLoaded(CommentsInfoItem comment) {
-        if (replyMap.get(comment.getCommentId()) == null) {
+        if (replyMap.get(comment.getCommentId()) == null && comment.getReplies() != null) {
             new GetReplies().executeInParallel(comment);
         }
     }
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        Log.i(TAG, "getChildView " + groupPosition + " " + childPosition + " lastChild=" + isLastChild + ", view=" + convertView + ", parent=" + parent);
+        Log.d(TAG, "getChildView " + groupPosition + " " + childPosition + " lastChild=" + isLastChild + ", view=" + convertView + ", parent=" + parent);
         CommentsInfoItem comment = getComment(groupPosition, childPosition);
         final CommentViewHolder viewHolder = getCommentViewHolder(convertView, parent);
         if (comment != null) {
@@ -238,6 +242,7 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
             binding.pinnedView.setVisibility(comment.isPinned() ? View.VISIBLE : View.GONE);
             binding.commentPaddingView.setVisibility(isTopLevelComment ? View.GONE : View.VISIBLE);
             binding.authorTextView.setText(comment.getUploaderName());
+            Linker.configure(binding.commentTextView, currentActivity);
             Linker.setTextAndLinkify(binding.commentTextView, comment.getCommentText().getContent());
             binding.commentDateTextView.setText(comment.getTextualUploadDate());
             binding.commentUpvotesTextView.setText(String.valueOf(comment.getLikeCount()));
@@ -286,6 +291,11 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
                 try {
                     List<CommentsInfoItem> replies = commentThreadPager.getPageAndProcess(item.getReplies());
                     replyMap.put(item.getCommentId(), replies);
+                    if (commentThreadPager.isHasNextPage()) {
+                        item.setReplies(commentThreadPager.getNextPageInfo());
+                    } else {
+                        item.setReplies(null);
+                    }
                     ids.add(item.getCommentId());
                 } catch (NewPipeException e) {
                     lastException = e;
@@ -345,10 +355,9 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
 
     }
 
-
-    public static BaseExpandableListAdapter createAdapter(Context context, String videoId, ExpandableListView expandableListView, View commentsProgressBar, View noVideoCommentsView, View disabledCommentsView) {
+    public static BaseExpandableListAdapter createAdapter(Context context, Linker.CurrentActivity currentActivity, String videoId, ExpandableListView expandableListView, View commentsProgressBar, View noVideoCommentsView, View disabledCommentsView) {
         if (NewPipeService.isPreferred()) {
-            return new CommentsAdapter(context, videoId, expandableListView, commentsProgressBar, noVideoCommentsView, disabledCommentsView);
+            return new CommentsAdapter(context, currentActivity, videoId, expandableListView, commentsProgressBar, noVideoCommentsView, disabledCommentsView);
         } else {
             return new LegacyCommentsAdapter(context, videoId, expandableListView, commentsProgressBar, noVideoCommentsView);
         }
