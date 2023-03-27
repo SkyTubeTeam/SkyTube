@@ -9,5 +9,5 @@
     <string name="later">Később</string>
     <string name="update_failure">Nem sikerült telepíteni az alkalmazás új verzióját.</string>
     <string name="downloading">Letöltés…</string>
-    <string name="android_too_old">Sajnos az Android verziója túl régi a frissítéshez. Kézzel kell telepítenie a \'SkyTube Legacy\' programot!</string>
+    <string name="android_too_old">Sajnos az Android verziója túl régi a frissítéshez. Kézzel kell telepítenie a „SkyTube Legacy” programot!</string>
 </resources>
