@@ -8,4 +8,5 @@
     <string name="configure">Ajustes</string>
     <string name="no_videos_blocked">¿Quieres configurar el bloqueador para filtrar o bloquear vídeos\?</string>
     <string name="blocked_videos">Vídeos bloqueados</string>
+    <string name="add_to_permitted">Permiso del Canal</string>
 </resources>

@@ -67,7 +67,7 @@
     <string name="channel_whitelist_updated">Osvježi videa za korištenje novog popisa odobernih kanala.</string>
     <string name="channel_whitelist_update_failure">Nije bilo moguće staviti zadani kanal u popis odobrenih.</string>
     <string name="channel_unwhitelist_success">Osvježi videa za korištenje novog popisa odobrenih kanala.</string>
-    <string name="channel_unwhitelist_failure">Neuspjelo uklanjanje odobrenja navedenih kanala …</string>
+    <string name="channel_unwhitelist_failure">Neuspjelo uklanjanje iz zadanih kanala iz popisa odobrenih kanala</string>
     <string name="pref_languages_filter_category">Filtri za jezike i područje</string>
     <string name="pref_title_preferred_regions">Preferirano područje</string>
     <string name="pref_summary_preferred_regions">Odaberi područje za dohvaćanje „Istaknutih” videa iz: %s</string>

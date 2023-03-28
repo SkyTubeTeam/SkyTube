@@ -12,4 +12,5 @@
     <string name="notification_channel_feed_title">Feed obavijesti</string>
     <string name="notification_new_videos_found">%d novih videa s pretplaćenih kanala</string>
     <string name="open_channel">Otvori kanal</string>
+    <string name="channel_related">Kanal …</string>
 </resources>

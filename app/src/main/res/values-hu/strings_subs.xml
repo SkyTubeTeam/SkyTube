@@ -10,7 +10,7 @@
     <string name="error_check_if_user_has_subbed">Nem sikerült ellenőrizni, hogy feliratkozott-e a csatornára (id=%s)</string>
     <string name="error_unable_to_subscribe">Nem sikerült fel/leiratkozni a csatornára (id=%s)</string>
     <string name="import_subscriptions">Feliratkozások importálása</string>
-    <string name="import_subscriptions_description">Törölje az összes szolgáltatás kijelölését a https://takeout.google.com -on, a \"YouTube és A YouTube Zene\" kivételével, és kattintson a \"Minden YouTube adatot tartalmazzon\" lehetőségre. Kattintson a \"Tovább\" gombra, majd az \"Exportálás létrehozása\" gombra. Kattintson az e-mailt szeretne kapni a letöltési linkkel gombra. Töltse le a fájlt. Válassza ki ezt a ZIP-fájlt, vagy bontsa ki és válassza ki a subscriptions.csv vagy a subscriptions.json fájlt (a /Takeout/YouTube és a YouTube Music/subscriptions/ mappa tartalmazza), a \"Feliratkozási fájl kiválasztása\" gombra kattintva.</string>
+    <string name="import_subscriptions_description">Törölje az összes szolgáltatás kijelölését a https://takeout.google.com -on, a „YouTube és A YouTube Zene” kivételével, és kattintson a „Minden YouTube adatot tartalmazzon” lehetőségre. Kattintson a „Tovább” gombra, majd az „Exportálás létrehozása” gombra. Kattintson az e-mailt szeretne kapni a letöltési linkkel gombra. Töltse le a fájlt. Válassza ki ezt a ZIP-fájlt, vagy bontsa ki és válassza ki a subscriptions.csv vagy a subscriptions.json fájlt (a /Takeout/YouTube és a YouTube Music/subscriptions/ mappa tartalmazza), a „Feliratkozási fájl kiválasztása” gombra kattintva.</string>
     <string name="subscriptions_to_channels_imported">%d csatorna került importálásra.</string>
     <string name="select_all">Mind kiválasztása</string>
     <string name="select_none">Egyik sem</string>
@@ -19,7 +19,7 @@
     <string name="failed_to_import_subscriptions">Nem sikerült importálni a YouTube feliratkozásait.</string>
     <string name="import_subscriptions_parse_error">Nem sikerült elemezni a feltöltött fájlt: %s.</string>
     <string name="no_channels_found">Nem található YouTube csatorna a feltöltött fájlban.</string>
-    <string name="no_new_channels_found">Nem található olyan YouTube-csatorna, amelyre még nem iratkozott fel.</string>
+    <string name="no_new_channels_found">Nem található olyan YouTube csatorna amelyre még nem iratkozott fel.</string>
     <string name="channel_unsubscribed">Leiratkozott a csatornáról</string>
     <string name="channel_subscribe_failed">Nem sikerült feliratkozni a csatornára</string>
     <string name="channel_already_subscribed">Már feliratkozott</string>

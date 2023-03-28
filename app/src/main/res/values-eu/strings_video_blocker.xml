@@ -8,4 +8,5 @@
     <string name="configure">Konfigurazioa</string>
     <string name="no_videos_blocked">Bideo-blokeatzailea konfiguratu nahi duzu bideoak blokeatzeko edo iragazteko\?</string>
     <string name="blocked_videos">Bideo blokeatuta</string>
+    <string name="add_to_permitted">Baimenen kanala</string>
 </resources>

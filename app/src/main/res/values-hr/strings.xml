@@ -24,4 +24,11 @@
     <string name="trending_in">U trendu (%s)</string>
     <string name="recaptcha_challenge_requested">YouTube misli da si bot uređaj, stoga moraš najprije riješiti reCAPTCHA.</string>
     <string name="could_not_get_sponsorblock">Nije bilo moguće dohvatiti informacije o blokiranju sponzora: %s.</string>
+    <string name="cleaner_explanation">Izbriši označena/preuzeta videa. Koristi sljedeće opcije filtra:</string>
+    <string name="cleaner_confirm">Izbriši</string>
+    <string name="cleaner_watched_downloads">Ukloni gledana preuzimanja</string>
+    <string name="cleaner_watched_bookmarks">Ukloni gledane zabilješke</string>
+    <string name="cleaner_toast_finish">Uklonili smo %s video/a iz bilježaka i izbrisali smo %s MB preuzetih videa</string>
+    <string name="cleaner">Brisanje gledanih videa</string>
+    <string name="video_comments_are_disabled">Komentari za video isključeni</string>
 </resources>

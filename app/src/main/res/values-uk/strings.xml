@@ -24,9 +24,9 @@
     <string name="trending_in">Найпопулярніші (%s)</string>
     <string name="recaptcha_challenge_requested">YouTube вважає, що ви бот, тому спочатку ви повинні розв\'язати reCAPTCHA.</string>
     <string name="could_not_get_sponsorblock">Не вдалося отримати дані про SponsorBlock: %s.</string>
-    <string name="cleaner">Очищувач</string>
+    <string name="cleaner">Очищувач переглянутих відео</string>
     <string name="cleaner_confirm">Очистити</string>
-    <string name="cleaner_toast_finish">Очищувач вилучив %s відео. Звільнено %s МБ.</string>
+    <string name="cleaner_toast_finish">Ми вилучили %s відео з закладок, а також видалили %sМБ завантажених відео</string>
     <string name="cleaner_watched_downloads">Вилучити переглянуті завантаження</string>
     <string name="cleaner_explanation">Очищуйте додані до закладок/завантажені відео. Використовуйте такі параметри фільтрів:</string>
     <string name="cleaner_watched_bookmarks">Вилучити переглянуті закладки</string>
