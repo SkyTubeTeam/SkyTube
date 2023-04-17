@@ -69,7 +69,7 @@
         <item>24 Hours</item>
     </string-array>
     <string name="pref_title_choose_player">Видео плеер</string>
-    <string name="pref_summary_choose_player">Будет использоваться этот видео плеер: %s</string>
+    <string name="pref_summary_choose_player">Используемый видеоплеер: %s</string>
     <string name="pref_title_disable_search_history">Отключить историю поиска</string>
     <string name="pref_summary_disable_search_history">Если включено, история поиска будет очищена и не будет использоваться.</string>
     <string name="pref_disable_search_history_deleted">История поиска удалена.</string>
@@ -145,9 +145,9 @@
     <string name="pref_video_download_minimum_resolution_title">Минимальное разрешение загрузки видео</string>
     <string name="pref_video_download_maximum_resolution_title">Максимальное разрешение загрузки видео</string>
     <string name="pref_summary_minimum_res">Выберите минимальное разрешение: %s</string>
-    <string name="pref_title_minimum_res">Минимальное разрешение</string>
+    <string name="pref_title_minimum_res">Минимальное Разрешение</string>
     <string name="pref_summary_maximum_res">Выберите максимальное разрешение: %s</string>
-    <string name="pref_title_maximum_res">Максимальное разрешение</string>
+    <string name="pref_title_maximum_res">Максимальное Разрешение</string>
     <string name="pref_summary_default_content_country">Показывается содержимое предназначенное для этой страны: %s</string>
     <string name="pref_title_default_content_country">Страна содержимого по умолчанию</string>
     <string name="pref_key_video_quality_for_downloads_summary">Оптимизировать для: %s</string>
