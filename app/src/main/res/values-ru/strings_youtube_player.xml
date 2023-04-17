@@ -4,7 +4,7 @@
     <string name="error_stream_decryption_fail">Не получается загрузить код расшифровки для сервиса YouTube.</string>
     <string name="error_stream_parse_error">Ошибка чтения.</string>
     <string name="error_video_play">Ошибка воспроизведения видео</string>
-    <string name="error_video_streams_empty">Видео %s не транслируют.</string>
+    <string name="error_video_streams_empty">Видео \'%s\' не транслируют.</string>
     <string name="error_video_streams">Ошибка во время загрузки трансляции видео.</string>
     <string name="error_get_video_desc">Ошибка во время загрузки описания видео.</string>
     <string name="error_invalid_url">Неверная ссылка на видео: %s</string>
