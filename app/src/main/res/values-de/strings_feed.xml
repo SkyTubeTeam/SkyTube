@@ -12,4 +12,5 @@
     <string name="notification_channel_feed_title">Feed-Benachrichtigungen</string>
     <string name="notification_new_videos_found">%d neue Videos auf abonnierten Kanälen</string>
     <string name="open_channel">Kanal öffnen</string>
+    <string name="channel_related">Kanal ...</string>
 </resources>
