@@ -14,4 +14,5 @@
     <string name="notification_channel_feed_title">Уведомления ленты</string>
     <string name="notification_new_videos_found">%d новых видео от подписанных каналов</string>
     <string name="open_channel">Открыть канал</string>
+    <string name="channel_related">Канал...</string>
 </resources>
