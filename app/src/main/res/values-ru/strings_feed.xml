@@ -3,9 +3,9 @@
     <string name="feed">Что нового</string>
     <string name="subscribing_to_channels">Подписка на каналы…</string>
     <string name="fetching_subbed_channels_info">Получение информации о каналах…</string>
-    <string name="fetching_subbed_channels_info_error">Произошла ошибка при загрузке информации о каналах.</string>
-    <string name="fetching_subscription_videos">Загрузка видео из подписанных каналов</string>
-    <string name="fetched_videos_from_channels">Загружено %1$d видео из %2$d/%3$d каналов.</string>
+    <string name="fetching_subbed_channels_info_error">Не удалось получить информацию о канале.</string>
+    <string name="fetching_subscription_videos">Загрузка видео из подписанных каналов…</string>
+    <string name="fetched_videos_from_channels">Получено %1$d видео из %2$d/%3$d каналов.</string>
     <string name="no_new_videos_found">Новых видео нет.</string>
     <string name="no_subscriptions_text">Вы не подписаны ни на какие каналы. \n
    \n
