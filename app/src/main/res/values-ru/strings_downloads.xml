@@ -2,7 +2,7 @@
 <resources>
     <string name="download">Загрузка</string>
     <string name="downloads">Загрузки</string>
-    <string name="download_video">Скачать видео</string>
+    <string name="download_video">Скачать Видео</string>
     <string name="starting_video_download">Загрузка \'%s\'…</string>
     <string name="video_download_stream_error">Не удалось скачать \'%s\'.</string>
     <string name="delete_download">Удалить загрузку</string>
