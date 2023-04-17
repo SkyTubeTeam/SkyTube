@@ -5,7 +5,8 @@
     <string name="configure">Настроить</string>
     <string name="block_channel">Заблокировать канал</string>
     <string name="channel_blacklisted">Канал добавлен в чёрный список. Пожалуйста, обновите страницу.</string>
-    <string name="channel_blacklist_error">Этот канал нельзя добавить в чёрный список.</string>
-    <string name="channel_unwhitelist_error">Этот канал нельзя удалить из белого списка.</string>
+    <string name="channel_blacklist_error">Не удалось занести канал в черный список.</string>
+    <string name="channel_unwhitelist_error">Не удалось удалить канал из белого списка.</string>
     <string name="dislikes">не понравилось %d%% пользователям</string>
+    <string name="add_to_permitted">Разблокировать Канал</string>
 </resources>
