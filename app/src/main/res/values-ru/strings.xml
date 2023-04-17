@@ -6,7 +6,7 @@
     <string name="error">Ошибка</string>
     <string name="ok">ОК</string>
     <string name="search_videos">Поиск видео</string>
-    <string name="launch_offical_player_error">Не получается запустить официальное приложение YouTube. Проверьте, что оно установлено на вашем устройстве.</string>
+    <string name="launch_offical_player_error">Не удалось запустить официальный проигрыватель YouTube. Убедитесь, что он установлен.</string>
     <string name="LIVE">Прямой эфир</string>
     <string name="featured">Избранные</string>
     <string name="most_popular">Популярные</string>
