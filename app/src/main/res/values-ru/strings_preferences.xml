@@ -146,7 +146,7 @@
     <string name="pref_video_download_maximum_resolution_title">Максимальное разрешение загрузки видео</string>
     <string name="pref_summary_minimum_res">Выберите минимальное разрешение: %s</string>
     <string name="pref_title_minimum_res">Минимальное Разрешение</string>
-    <string name="pref_summary_maximum_res">Выберите максимальное разрешение: %s</string>
+    <string name="pref_summary_maximum_res">Выберите высшее разрешение: %s</string>
     <string name="pref_title_maximum_res">Максимальное Разрешение</string>
     <string name="pref_summary_default_content_country">Показывается содержимое предназначенное для этой страны: %s</string>
     <string name="pref_title_default_content_country">Страна содержимого по умолчанию</string>
