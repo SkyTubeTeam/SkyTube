@@ -29,4 +29,5 @@
     <string name="cleaner_watched_downloads">Удалить просмотренные загрузки</string>
     <string name="cleaner_watched_bookmarks">Удалить просмотренные закладки</string>
     <string name="video_comments_are_disabled">Комментарии видео отключены</string>
+    <string name="could_not_get_sponsorblock">Не удалось получить информацию от SponsorBlock: %s.</string>
 </resources>
