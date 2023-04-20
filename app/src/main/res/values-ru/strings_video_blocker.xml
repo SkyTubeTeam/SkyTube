@@ -4,7 +4,7 @@
     <string name="no_videos_blocked">Нет заблокированных видео. Хотите настроить видео-блокер\?</string>
     <string name="configure">Настроить</string>
     <string name="block_channel">Заблокировать канал</string>
-    <string name="channel_blacklisted">Канал добавлен в чёрный список. Пожалуйста, обновите страницу.</string>
+    <string name="channel_blacklisted">Обновите, чтобы использовать новый чёрный список каналов.</string>
     <string name="channel_blacklist_error">Не удалось занести канал в черный список.</string>
     <string name="channel_unwhitelist_error">Не удалось удалить канал из белого списка.</string>
     <string name="dislikes">не понравилось %d%% пользователям</string>
