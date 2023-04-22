@@ -8,4 +8,5 @@
     <string name="channel_blacklist_error">Kanal kara listeye alınamadı.</string>
     <string name="channel_unwhitelist_error">Kanal beyaz listeden kaldırılamadı.</string>
     <string name="dislikes">%%%d beğenmeme</string>
+    <string name="add_to_permitted">Kanala İzin Ver</string>
 </resources>

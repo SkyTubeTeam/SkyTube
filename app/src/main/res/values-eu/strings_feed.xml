@@ -12,4 +12,5 @@
     <string name="open_channel">Kanal irekia</string>
     <string name="subscribing_to_channels">Kanaletarako harpidatzen…</string>
     <string name="feed">Web-jario</string>
+    <string name="channel_related">Kanala...</string>
 </resources>

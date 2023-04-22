@@ -12,4 +12,5 @@
     <string name="open_channel">Відкрити канал</string>
     <string name="subscribing_to_channels">Підписування на канали…</string>
     <string name="feed">Стрічка</string>
+    <string name="channel_related">Канал...</string>
 </resources>

@@ -24,4 +24,8 @@
     <string name="trending_in">Najpopularniejsze (%s)</string>
     <string name="recaptcha_challenge_requested">YouTube myśli, że jesteś botem, więc najpierw musisz rozwiązać reCAPTCHA.</string>
     <string name="could_not_get_sponsorblock">Nie można pobrać informacji SponsorBlock: %s.</string>
+    <string name="cleaner">Czyszczenie Obejrzanych Filmów</string>
+    <string name="cleaner_watched_downloads">Usuń obejrzane pobrane</string>
+    <string name="cleaner_watched_bookmarks">Usuń obejrzane zakładki</string>
+    <string name="video_comments_are_disabled">Komentarze do filmu są wyłączone</string>
 </resources>

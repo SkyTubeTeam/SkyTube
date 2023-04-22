@@ -7,9 +7,10 @@
     <string name="fetching_subscription_videos">Videók lekérése a feliratkozott csatornákról…</string>
     <string name="fetched_videos_from_channels">Kapott %1$d videót a %2$d/%3$d csatornáról.</string>
     <string name="no_new_videos_found">Nincs új videó.</string>
-    <string name="import_subscriptions_from_youtube">Feliratkozások betöltése YouTube-ról</string>
-    <string name="notification_channel_feed_title">Videófolyam-értesítések</string>
+    <string name="import_subscriptions_from_youtube">Feliratkozások betöltése a YouTube-ról</string>
+    <string name="notification_channel_feed_title">Hírfolyam értesítések</string>
     <string name="notification_new_videos_found">%d új videó a feliratkozott csatornákról</string>
     <string name="no_subscriptions_text">Iratkozz fel néhány csatornára, hogy itt megnézhesd a friss videóikat.</string>
     <string name="open_channel">Csatorna megnyitása</string>
+    <string name="channel_related">Csatorna...</string>
 </resources>

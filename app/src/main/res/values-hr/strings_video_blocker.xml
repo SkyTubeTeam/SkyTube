@@ -8,4 +8,5 @@
     <string name="channel_blacklist_error">Kanal nije moguće ukloniti s popisa nepoželjnih.</string>
     <string name="channel_unwhitelist_error">Kanal nije moguće ukloniti s odobrenog popisa.</string>
     <string name="dislikes">%d%% ne sviđanja</string>
+    <string name="add_to_permitted">Dozvoli kanal</string>
 </resources>

@@ -12,4 +12,5 @@
     <string name="notification_channel_feed_title">Notificaciones de los canales</string>
     <string name="notification_new_videos_found">%d nuevos vídeos de los canales suscritos</string>
     <string name="open_channel">Abrir Canal</string>
+    <string name="channel_related">Canal...</string>
 </resources>

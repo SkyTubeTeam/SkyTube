@@ -26,8 +26,8 @@
     <string name="could_not_get_sponsorblock">SponsorBlock bilgisi alınamadı: %s.</string>
     <string name="cleaner_watched_downloads">İzlenen indirmeleri kaldır</string>
     <string name="cleaner_confirm">Temizle</string>
-    <string name="cleaner_toast_finish">Temizleyici %s videoyu temizledi. %s MB artık boş.</string>
-    <string name="cleaner">Temizleyici</string>
+    <string name="cleaner_toast_finish">Yer imlerinden %s videoyu kaldırdık ve %sMB boyutunda indirilen videoları sildik</string>
+    <string name="cleaner">İzlenen Video Temizleyici</string>
     <string name="cleaner_explanation">Yer imlerine eklenen/indirilen videoları temizleyin. Şu filtre seçeneklerini kullanın:</string>
     <string name="cleaner_watched_bookmarks">İzlenen yer imlerini kaldır</string>
     <string name="video_comments_are_disabled">Video yorumları kapalı</string>
