@@ -39,27 +39,25 @@ public class CommentPager extends Pager<CommentsInfoItem, CommentsInfoItem> {
     CommentPager(StreamingService streamingService, CommentsExtractor commentsExtractor) throws ExtractionException, IOException {
         super(streamingService, commentsExtractor);
         this.commentsExtractor = commentsExtractor;
+    }
 
+    @Override
+    protected List<CommentsInfoItem> process(ListExtractor.InfoItemsPage<CommentsInfoItem> page) throws NewPipeException, ExtractionException {
+        this.commentCount = commentsExtractor.getCommentsCount();
+        this.disabledComments = commentsExtractor.isCommentsDisabled();
+        List<CommentsInfoItem> result = super.process(page);
+        allComments.addAll(result);
+        return new ArrayList<>(result);
     }
 
     @Override
     protected List<CommentsInfoItem> extract(ListExtractor.InfoItemsPage<CommentsInfoItem> page) throws ExtractionException {
-        this.commentCount = commentsExtractor.getCommentsCount();
-        this.disabledComments = commentsExtractor.isCommentsDisabled();
-        List<CommentsInfoItem> result = new ArrayList<>(page.getItems().size());
-        result.addAll(page.getItems());
-        allComments.addAll(page.getItems());
-        return result;
-    }
-
-    public List<CommentsInfoItem> allThreads() {
-        return allComments;
+        return page.getItems();
     }
 
     public CommentsInfoItem getComment(int idx) {
         return 0 <= idx && idx < allComments.size() ? allComments.get(idx) : null;
     }
-
 
     public boolean isCommentsDisabled() {
         return disabledComments != null ? disabledComments : false;
@@ -69,10 +67,4 @@ public class CommentPager extends Pager<CommentsInfoItem, CommentsInfoItem> {
         return commentCount != null ? commentCount.intValue() : -1;
     }
 
-    public int getReplyCount(int index) {
-        if (0 <= index && index < allComments.size()) {
-            return allComments.get(index).getReplyCount();
-        }
-        return 0;
-    }
 }
