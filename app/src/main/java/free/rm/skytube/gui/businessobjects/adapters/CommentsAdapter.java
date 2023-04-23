@@ -41,8 +41,10 @@ import org.schabi.newpipe.extractor.comments.CommentsInfoItem;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
@@ -72,6 +74,7 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
     private Linker.CurrentActivity currentActivity;
 
     private Map<String, List<CommentsInfoItem>> replyMap = new HashMap<>();
+    private Set<String> currentlyFetching = new HashSet<>();
 
     private static final String TAG = CommentsAdapter.class.getSimpleName();
 
@@ -128,7 +131,7 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
 
     @Override
     public Object getGroup(int groupPosition) {
-        return commentThreadPager != null ? commentThreadPager.allThreads().get(groupPosition) : 0;
+        return commentThreadPager != null ? commentThreadPager.getComment(groupPosition) : 0;
     }
 
     @Override
@@ -153,7 +156,6 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-        Log.d(TAG, "getGroupView " + groupPosition + " " + isExpanded + ", view=" + convertView + ", parent=" + parent);
         CommentsInfoItem comment = commentThreadPager.getComment(groupPosition);
         final CommentViewHolder viewHolder = getCommentViewHolder(convertView, parent);
         if (comment != null) {
@@ -182,9 +184,18 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
         }
     }
 
+    private synchronized void addReplies(CommentsInfoItem comment, List<CommentsInfoItem> newReplies) {
+        List<CommentsInfoItem> replies = replyMap.get(comment.getCommentId());
+        if (replies == null) {
+            replies = new ArrayList<>();
+            replyMap.put(comment.getCommentId(), replies);
+        }
+        replies.addAll(newReplies);
+    }
+
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        Log.d(TAG, "getChildView " + groupPosition + " " + childPosition + " lastChild=" + isLastChild + ", view=" + convertView + ", parent=" + parent);
+        Log.d(TAG, "getChildView " + groupPosition + " " + childPosition + " lastChild=" + isLastChild);
         CommentsInfoItem comment = getComment(groupPosition, childPosition);
         final CommentViewHolder viewHolder = getCommentViewHolder(convertView, parent);
         if (comment != null) {
@@ -194,15 +205,36 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
         return viewHolder.getView();
     }
 
-    private CommentsInfoItem getComment(int idx, int childIdx) {
+    private synchronized CommentsInfoItem getComment(int idx, int childIdx) {
         CommentsInfoItem parent = commentThreadPager.getComment(idx);
         if (parent == null) {
             return null;
         }
         List<CommentsInfoItem> replies = replyMap.get(parent.getCommentId());
-        return replies != null && 0 <= childIdx && childIdx < replies.size() ? replies.get(childIdx) : null;
+        if (replies != null && 0 <= childIdx) {
+            int currentReplyListSize = replies.size();
+            if (currentReplyListSize < parent.getReplyCount() && currentReplyListSize - 5 <= childIdx) {
+                synchronized (currentlyFetching) {
+                    if (parent.getReplies() != null && currentlyFetching.add(parent.getCommentId())) {
+                        Log.i(TAG, String.format("Fetching more replies for %s - currentReplyListSize: %s, childIdx: %s - %s", parent.getCommentId(), currentReplyListSize, childIdx, parent.getReplyCount()));
+                        new GetReplies().executeInParallel(parent);
+                    } else {
+                        Log.i(TAG, String.format("No reply fetch for %s - currentReplyListSize: %s, childIdx: %s", parent.getCommentId(), currentReplyListSize, childIdx));
+                    }
+                }
+            }
+            if (childIdx < currentReplyListSize) {
+                return replies.get(childIdx);
+            }
+        }
+        return null;
     }
 
+    protected void removeFromCurrentlyFetching(CommentsInfoItem item) {
+        synchronized (currentlyFetching) {
+            currentlyFetching.remove(item.getCommentId());
+        }
+    }
 
     @Override
     public boolean isChildSelectable(int groupPosition, int childPosition) {
@@ -289,8 +321,8 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
             List<String> ids = new ArrayList<>(repliesFor.length);
             for (CommentsInfoItem item : repliesFor) {
                 try {
-                    List<CommentsInfoItem> replies = commentThreadPager.getPageAndProcess(item.getReplies());
-                    replyMap.put(item.getCommentId(), replies);
+                    List<CommentsInfoItem> replies = commentThreadPager.getPageAndExtract(item.getReplies());
+                    addReplies(item, replies);
                     if (commentThreadPager.isHasNextPage()) {
                         item.setReplies(commentThreadPager.getNextPageInfo());
                     } else {
@@ -300,6 +332,8 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
                 } catch (NewPipeException e) {
                     lastException = e;
                     Log.e(TAG, "Unable to get replies " + item + " -> " + e.getMessage(), e);
+                } finally {
+                    removeFromCurrentlyFetching(item);
                 }
             }
             return ids;
