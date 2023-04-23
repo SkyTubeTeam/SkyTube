@@ -1,2 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="ok">ଠିକ୍ ଅଛି</string>
+    <string name="video">ଵିଡ଼ିଓ</string>
+    <string name="videos">ଵିଡ଼ିଓ</string>
+    <string name="LIVE">ସିଧାପ୍ରସରଣ</string>
+    <string name="num_videos">%dଟି ଵିଡ଼ିଓ</string>
+    <string name="playlists">ଚାଳନାତାଲିକା</string>
+    <string name="yes">ହଁ</string>
+    <string name="no">ନାହିଁ</string>
+    <string name="error">ତ୍ରୁଟି</string>
+    <string name="search_videos">ଵିଡ଼ିଓ ସନ୍ଧାନ</string>
+</resources>
