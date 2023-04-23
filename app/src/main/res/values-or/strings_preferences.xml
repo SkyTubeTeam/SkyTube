@@ -1,2 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="pref_title_choose_player">ଵିଡ଼ିଓ ଚାଳକ</string>
+    <string name="pref_video_player_category">ଵିଡ଼ିଓ ଚାଳକ</string>
+    <string name="pref_import_export_category">ଆମଦାନୀ/ରପ୍ତାନି</string>
+</resources>
