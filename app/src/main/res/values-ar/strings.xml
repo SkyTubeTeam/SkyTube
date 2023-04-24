@@ -22,6 +22,13 @@
     <string name="trending_in">شائع (%s)</string>
     <string name="close">إغلاق</string>
     <string name="search_channel">بحث قناة</string>
-    <string name="recaptcha_challenge_requested">يعتقد YouTube أنك روبوت ، لذا يجب عليك حل reCAPTCHA أولاً.</string>
+    <string name="recaptcha_challenge_requested">يعتقد يوتيوب أنك روبوت ، لذا يجب عليك حل reCAPTCHA أولاً.</string>
     <string name="could_not_get_sponsorblock">تعذر استرداد معلومات الجهة الراعية: %s.</string>
+    <string name="cleaner">شاهد الفيديو الأنظف</string>
+    <string name="cleaner_confirm">ينظف</string>
+    <string name="cleaner_toast_finish">قمنا بإزالة %s فيديو(s) من الإشارات المرجعية ، والمحذوفة %sميغا بايت من مقاطع الفيديو التي تم تنزيلها</string>
+    <string name="cleaner_watched_bookmarks">إزالة الإشارات المرجعية التي تمت مشاهدتها</string>
+    <string name="cleaner_explanation">تنظيف مقاطع الفيديو المرجعية / التي تم تنزيلها. استخدم خيارات التصفية التالية:</string>
+    <string name="cleaner_watched_downloads">قم بإزالة التنزيلات التي تمت مراقبتها</string>
+    <string name="video_comments_are_disabled">تعليقات الفيديو مغلقة</string>
 </resources>
