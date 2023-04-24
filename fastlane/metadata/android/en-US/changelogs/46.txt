@@ -1,0 +1,40 @@
+* Implementing a 'Watched Video Cleaner' to quickly remove watched videos from the Bookmarks and Downloaded videos - by randommodder
+* Showing comment replies, displaying 'pinned' and 'hearted-by-uploader'
+* Implementing video navigation through links which points to a specific second in the video works from the comments and from the video description.
+* Fixes in the Video blocker, better naming for allow/deny channel list, organize the channel related menuitems better.
+* Make AndroidTV compatible - at least it will be displayed among the apps.
+* Updated translations for:
+    * Albanian - Besnik Bleta
+    * Arabic - Ahmed Badeeb and thami simo
+    * Azerbaijani - Nizami and ReVanced
+    * Basque - Julio Montero
+    * Berber - ⵣⵓⵀⵉⵔ ⴰⵎⴰⵣⵉⵖ زهير أمازيغ
+    * Bulgarian - Radoslav Vasilev Vasilev and Ивайло Пантелеев Пушков
+    * Catalan - Marc Gállego Asín
+    * Chinese (Simplified) - Eric
+    * Chinese (Traditional) - WongWong123 and zica
+    * Croatian - Milo Ivir
+    * Dutch - Cereal-Killer-X
+    * Finnish - Jani Kinnunen and Sami Sudenpentu
+    * French - J. Lavoie and syl
+    * Galician - gallegonovato 
+    * German - Ettore Atalan and RandomModderJDK
+    * Hindi - RSoulwin and ShareASmile
+    * Hungarian - Szia Tomi
+    * Indonesian - Devon saragih and myisyanz
+    * Italian - Massimo Pissarello and atilluF
+    * Korean - museekee
+    * Latvian - Coool
+    * Lithuanian - Gediminas Murauskas
+    * Norwegian Bokmål - Allan Nordhøy
+    * Odia - Subham Jena
+    * Polish - Bartek200219 and Karol Górecki
+    * Portuguese - ssantos
+    * Punjabi - ShareASmile
+    * Romanian - Igor Sorocean
+    * Russian - Experience!, Gleb, jooblex and Дмитрий «Артанис»
+    * Spanish - Eduardo Malaspina and gallegonovato 
+    * Swedish - Deaquay
+    * Turkish - Oğuz Ersen
+    * Ukrainian - Ihor Hordiichuk
+    * Vietnamese - NathanPham19 and Son Tran
