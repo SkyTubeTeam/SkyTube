@@ -28,7 +28,7 @@
     <string name="cleaner">Cleaner</string>
     <string name="cleaner_confirm">Säubern</string>
     <string name="cleaner_watched_downloads">Entferne angesehene Downloads</string>
-    <string name="cleaner_toast_finish">Cleaner hat %s Video(s) entfernt. Jetzt sind %s MB wieder frei.</string>
+    <string name="cleaner_toast_finish">Cleaner hat %s Video(s) entfernt. Jetzt sind %s MB wieder frei</string>
     <string name="cleaner_watched_bookmarks">Entferne angesehene, mit Lesezeichen markierte, Videos</string>
     <string name="video_comments_are_disabled">Kommentare sind deaktiviert</string>
 </resources>
