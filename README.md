@@ -83,23 +83,23 @@ You can help us translate this app into your native language by visiting [SkyTub
 ## Screenshots
 ### Phone
 
-<a href="https://skytube-app.com#features">
-<img src="screenshots/trending.jpg" alt="Trending" height="250px"/>
+<a href="screenshots/trending.jpg">
+<img src="screenshots/trending.jpg" alt="Trending" width="140px"/>
 </a>
 
-<a href="https://skytube-app.com#features">
-<img src="screenshots/channel.jpg" alt="Browse video" height="250px"/>
+<a href="screenshots/channel.jpg">
+<img src="screenshots/channel.jpg" alt="Browse video" width="444px"/>
 </a>
 
-<a href="https://skytube-app.com#features">
-<img src="screenshots/play.jpg" alt="Play video" height="250px"/>
+<a href="screenshots/play.jpg">
+<img src="screenshots/play.jpg" alt="Play video" width="444px"/>
 </a>
 
-<a href="https://skytube-app.com#features">
-<img src="screenshots/subs.jpg" alt="Subscriptions" height="250px"/>
+<a href="screenshots/subs.jpg">
+<img src="screenshots/subs.jpg" alt="Subscriptions" width="140px"/>
 </a>
 
-<a href="https://skytube-app.com#features">
+<a href="screenshots/sb_skipped.png">
 <img src="screenshots/sb_skipped.png" alt="SponsorBlock" width="450px"/>
 </a>
 
