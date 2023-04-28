@@ -48,6 +48,7 @@ import free.rm.skytube.gui.activities.ThumbnailViewerActivity;
 import free.rm.skytube.gui.businessobjects.MainActivityListener;
 import free.rm.skytube.gui.businessobjects.MobileNetworkWarningDialog;
 import free.rm.skytube.gui.businessobjects.YouTubePlayer;
+import free.rm.skytube.gui.businessobjects.views.ChannelActionHandler;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 
@@ -63,6 +64,7 @@ public class GridViewHolder extends RecyclerView.ViewHolder implements Serializa
 
 	private final transient VideoCellBinding binding;
 	private final transient CompositeDisposable compositeDisposable;
+	private final transient ChannelActionHandler actionHandler;
 
 	/**
 	 * Constructor.
@@ -80,6 +82,7 @@ public class GridViewHolder extends RecyclerView.ViewHolder implements Serializa
 		this.mainActivityListener = listener;
 		this.showChannelInfo = showChannelInfo;
 		compositeDisposable = new CompositeDisposable();
+		actionHandler = new ChannelActionHandler(compositeDisposable);
 
 		binding.thumbnailImageView.setOnClickListener(thumbnailView -> {
 			if (currentCard instanceof YouTubeVideo) {
@@ -218,24 +221,15 @@ public class GridViewHolder extends RecyclerView.ViewHolder implements Serializa
 		Menu menu = popupMenu.getMenu();
 		updateSubscribeMenuItem(channel.getId(), menu);
 		popupMenu.setOnMenuItemClickListener(item -> {
+			if (actionHandler.handleChannelActions(context, channel, item.getItemId())) {
+				return true;
+			}
 			switch (item.getItemId()) {
 				case R.id.share:
 					SkyTubeApp.shareUrl(context, channel.getChannelUrl());
 					return true;
 				case R.id.copyurl:
 					SkyTubeApp.copyUrl(context, "Channel URL", channel.getChannelUrl());
-					return true;
-				case R.id.subscribe_channel:
-					compositeDisposable.add(YouTubeChannel.subscribeChannel(context, channel.getId()));
-					return true;
-				case R.id.open_channel:
-					SkyTubeApp.launchChannel(channel.getId(), context);
-					return true;
-				case R.id.block_channel:
-					compositeDisposable.add(channel.blockChannel().subscribe());
-					return true;
-				case R.id.unblock_channel:
-					compositeDisposable.add(channel.unblockChannel().subscribe());
 					return true;
 			}
 			return false;
@@ -290,6 +284,9 @@ public class GridViewHolder extends RecyclerView.ViewHolder implements Serializa
 			updateSubscribeMenuItem(youTubeVideo.getChannelId(), menu);
 		}
 		popupMenu.setOnMenuItemClickListener(item -> {
+			if (actionHandler.handleChannelActions(context, youTubeVideo.getChannel(), item.getItemId())) {
+				return true;
+			}
 			switch(item.getItemId()) {
 				case R.id.menu_open_video_with:
 					compositeDisposable.add(youTubeVideo.playVideoExternally(context).subscribe());
@@ -332,18 +329,6 @@ public class GridViewHolder extends RecyclerView.ViewHolder implements Serializa
 					if (decision == Policy.ALLOW) {
 						youTubeVideo.downloadVideo(context).subscribe();
 					}
-					return true;
-				case R.id.subscribe_channel:
-					YouTubeChannel.subscribeChannel(context, youTubeVideo.getChannelId());
-					return true;
-				case R.id.open_channel:
-					SkyTubeApp.launchChannel(youTubeVideo.getChannelId(), context);
-					return true;
-				case R.id.block_channel:
-					compositeDisposable.add(youTubeVideo.getChannel().blockChannel().subscribe());
-					return true;
-				case R.id.unblock_channel:
-					compositeDisposable.add(youTubeVideo.getChannel().unblockChannel().subscribe());
 					return true;
 			}
 			return false;

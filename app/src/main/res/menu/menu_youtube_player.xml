@@ -56,14 +56,6 @@
 	  android:title="@string/view_thumbnail"
 	  app:showAsAction="never"/>
 
-	<item android:id="@+id/open_channel"
-		android:visible="false"
-		android:title="@string/open_channel"/>
-
-	<item android:id="@+id/subscribe_channel"
-		android:visible="false"
-		android:title="@string/subscribe"/>
-
 	<item
 		android:id="@+id/disable_gestures"
 		android:checkable="true"
