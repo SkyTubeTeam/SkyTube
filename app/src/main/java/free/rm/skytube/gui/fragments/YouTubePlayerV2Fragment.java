@@ -110,6 +110,7 @@ import free.rm.skytube.gui.businessobjects.ResumeVideoTask;
 import free.rm.skytube.gui.businessobjects.SkyTubeMaterialDialog;
 import free.rm.skytube.gui.businessobjects.adapters.CommentsAdapter;
 import free.rm.skytube.gui.businessobjects.fragments.ImmersiveModeFragment;
+import free.rm.skytube.gui.businessobjects.views.ChannelActionHandler;
 import free.rm.skytube.gui.businessobjects.views.Linker;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.internal.functions.Functions;
@@ -141,7 +142,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
     private PlaybackSpeedController playbackSpeedController;
 
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();
-
+    private final ChannelActionHandler actionHandler = new ChannelActionHandler(compositeDisposable);
     private boolean videoIsPlaying;
     private PlaybackStateListener playbackStateListener = null;
 
@@ -699,6 +700,10 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Context context = getContext();
+        if (actionHandler.handleChannelActions(context, youTubeChannel, item.getItemId())) {
+            return true;
+        }
         switch (item.getItemId()) {
             case R.id.menu_reload_video:
                 player.seekToDefaultPosition();
@@ -706,24 +711,24 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 
             case R.id.menu_open_video_with:
                 player.setPlayWhenReady(false);
-                compositeDisposable.add(youTubeVideo.playVideoExternally(getContext()).subscribe());
+                compositeDisposable.add(youTubeVideo.playVideoExternally(context).subscribe());
                 return true;
 
             case R.id.share:
                 player.setPlayWhenReady(false);
-                youTubeVideo.shareVideo(getContext());
+                youTubeVideo.shareVideo(context);
                 return true;
 
             case R.id.copyurl:
-                youTubeVideo.copyUrl(getContext());
+                youTubeVideo.copyUrl(context);
                 return true;
 
             case R.id.bookmark_video:
-                compositeDisposable.add(youTubeVideo.bookmarkVideo(getContext(), menu).subscribe());
+                compositeDisposable.add(youTubeVideo.bookmarkVideo(context, menu).subscribe());
                 return true;
 
             case R.id.unbookmark_video:
-                compositeDisposable.add(youTubeVideo.unbookmarkVideo(getContext(), menu).subscribe());
+                compositeDisposable.add(youTubeVideo.unbookmarkVideo(context, menu).subscribe());
                 return true;
 
             case R.id.view_thumbnail:
@@ -733,19 +738,12 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
                 return true;
 
             case R.id.download_video:
-                final Policy decision = new MobileNetworkWarningDialog(getContext())
+                final Policy decision = new MobileNetworkWarningDialog(context)
                         .showDownloadWarning(youTubeVideo);
 
                 if (decision == Policy.ALLOW) {
-                    youTubeVideo.downloadVideo(getContext()).subscribe();
+                    youTubeVideo.downloadVideo(context).subscribe();
                 }
-                return true;
-
-            case R.id.block_channel:
-                compositeDisposable.add(youTubeChannel.blockChannel().subscribe());
-                return true;
-            case R.id.unblock_channel:
-                compositeDisposable.add(youTubeChannel.unblockChannel().subscribe());
                 return true;
             case R.id.disable_gestures:
                 boolean disableGestures = !item.isChecked();

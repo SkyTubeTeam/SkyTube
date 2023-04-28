@@ -62,6 +62,7 @@ import free.rm.skytube.gui.businessobjects.ResumeVideoTask;
 import free.rm.skytube.gui.businessobjects.SkyTubeMaterialDialog;
 import free.rm.skytube.gui.businessobjects.adapters.CommentsAdapter;
 import free.rm.skytube.gui.businessobjects.fragments.ImmersiveModeFragment;
+import free.rm.skytube.gui.businessobjects.views.ChannelActionHandler;
 import free.rm.skytube.gui.businessobjects.views.Linker;
 import free.rm.skytube.businessobjects.interfaces.PlaybackStateListener;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
@@ -110,6 +111,7 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 	private int startVideoTime = -1;
 
 	private final CompositeDisposable compositeDisposable = new CompositeDisposable();
+	private final ChannelActionHandler actionHandler = new ChannelActionHandler(compositeDisposable);
 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -666,6 +668,9 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
+		if (actionHandler.handleChannelActions(getContext(), youTubeChannel, item.getItemId())) {
+			return true;
+		}
 		switch (item.getItemId()) {
 			case R.id.menu_reload_video:
 				loadVideo();
@@ -706,21 +711,6 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 					youTubeVideo.downloadVideo(getContext()).subscribe();
 				}
 				return true;
-
-			case R.id.block_channel:
-				compositeDisposable.add(youTubeChannel.blockChannel().subscribe());
-				return true;
-			case R.id.unblock_channel:
-				compositeDisposable.add(youTubeChannel.unblockChannel().subscribe());
-				return true;
-			case R.id.subscribe_channel:
-				YouTubeChannel.subscribeChannel(getContext(), youTubeVideo.getChannelId());
-				return true;
-
-			case R.id.open_channel:
-				SkyTubeApp.launchChannel(youTubeVideo.getChannelId(), getContext());
-				return true;
-
 			default:
 				return super.onOptionsItemSelected(item);
 		}
