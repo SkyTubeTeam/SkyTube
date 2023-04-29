@@ -6,7 +6,7 @@
     <string name="error">Erro</string>
     <string name="ok">OK</string>
     <string name="search_videos">Procurar Vídeos</string>
-    <string name="launch_offical_player_error">Não foi possível iniciar o tocador oficial do Youtube pelo Google. Tenha certeza que ele está instalado.</string>
+    <string name="launch_offical_player_error">Não foi possível iniciar o player oficial do YouTube. Verifique se ele está instalado.</string>
     <string name="LIVE">Ao Vivo</string>
     <string name="featured">Destaque</string>
     <string name="most_popular">Mais Populares</string>
@@ -24,7 +24,7 @@
     <string name="could_not_get_sponsorblock">Não foi possível recuperar as informações do SponsorBlock: %s.</string>
     <string name="recaptcha_challenge_requested">O YouTube acha que você é um robô, então você precisa resolver um reCAPTCHA primeiro.</string>
     <string name="trending_in">Popular (%s)</string>
-    <string name="cleaner">Limpador de Vídeo assistido</string>
+    <string name="cleaner">Limpador de Vídeo Assistido</string>
     <string name="cleaner_confirm">Limpar</string>
     <string name="cleaner_explanation">Limpe os favoritos/vídeos baixados. Use as seguintes opções de filtro:</string>
     <string name="cleaner_toast_finish">Removemos %s vídeo(s) dos favoritos e excluímos %sMB de vídeos baixados</string>
