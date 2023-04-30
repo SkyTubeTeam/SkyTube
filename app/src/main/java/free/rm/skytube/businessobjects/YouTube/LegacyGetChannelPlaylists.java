@@ -33,14 +33,13 @@ import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubePlaylist;
 import free.rm.skytube.gui.businessobjects.adapters.PlaylistsGridAdapter;
 
-
 /**
  * Returns a list of YouTube playlists for a specific channel.
  *
  * <p>Do not run this directly, but rather use
- * {@link YouTubeTasks#getChannelPlaylists(android.content.Context, GetChannelPlaylists, PlaylistsGridAdapter, boolean)}.</p>
+ * {@link YouTubeTasks#getChannelPlaylists(android.content.Context, YouTubeTasks.ChannelPlaylistFetcher, PlaylistsGridAdapter, boolean)}.</p>
  */
-public class GetChannelPlaylists {
+public class LegacyGetChannelPlaylists implements YouTubeTasks.ChannelPlaylistFetcher {
 	protected YouTube.Playlists.List playlistList = null;
 	protected static final Long	MAX_RESULTS = 45L;
 
@@ -49,27 +48,39 @@ public class GetChannelPlaylists {
 
 	private YouTubeChannel channel;
 
-	public GetChannelPlaylists() throws IOException {
+	private void initApi() throws IOException {
 		playlistList = YouTubeAPI.create().playlists().list("id, snippet, contentDetails");
 		playlistList.setKey(YouTubeAPIKey.get().getYouTubeAPIKey());
 		playlistList.setFields("items(id, snippet/title, snippet/description, snippet/thumbnails, snippet/publishedAt, contentDetails/itemCount)," +
 						"nextPageToken");
 		playlistList.setMaxResults(MAX_RESULTS);
-		nextPageToken = null;
 	}
 
-	public void setYouTubeChannel(YouTubeChannel channel) {
+	public LegacyGetChannelPlaylists(YouTubeChannel channel) {
+		setChannel(channel);
+	}
+	protected synchronized void setChannel(YouTubeChannel channel) {
 		this.channel = channel;
-		if (playlistList != null)
+		if (playlistList != null) {
 			playlistList.setChannelId(channel.getId());
+		}
 	}
 
-	public List<YouTubePlaylist> getNextPlaylists() throws IOException {
+	@Override
+	public YouTubeChannel getChannel() {
+		return channel;
+	}
+
+	@Override
+	public synchronized List<YouTubePlaylist> getNextPlaylists() throws IOException {
 
 		SkyTubeApp.nonUiThread();
 
+		if (playlistList == null) {
+			initApi();
+			playlistList.setChannelId(channel.getId());
+		}
 		if (!noMorePlaylistPages()) {
-			List<Playlist> playlistList = null;
 			// set the page token/id to retrieve
 			this.playlistList.setPageToken(nextPageToken);
 
@@ -77,7 +88,7 @@ public class GetChannelPlaylists {
 			PlaylistListResponse listResponse = this.playlistList.execute();
 
 			// get playlists
-			playlistList = listResponse.getItems();
+			List<Playlist> playlistList = listResponse.getItems();
 
 			// set the next page token
 			nextPageToken = listResponse.getNextPageToken();
@@ -91,7 +102,7 @@ public class GetChannelPlaylists {
 
 	}
 
-	public boolean noMorePlaylistPages() {
+	private boolean noMorePlaylistPages() {
 		return noMorePlaylistPages;
 	}
 
@@ -112,6 +123,8 @@ public class GetChannelPlaylists {
 	/**
 	 * Reset the fetching of playlists. This will be called when a swipe to refresh is done.
 	 */
+
+	@Override
 	public void reset() {
 		nextPageToken = null;
 		noMorePlaylistPages = false;

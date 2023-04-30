@@ -115,15 +115,18 @@ public class VideoPager extends Pager<InfoItem, CardData> {
 
     private CardData convert(ChannelInfoItem channelInfoItem) {
         String url = channelInfoItem.getUrl();
-        String id = null;
-        try {
-            id = channelLinkHandler.getId(url);
-        } catch (ParsingException p) {
-            Logger.e(this, "Unable to parse channel url "+url, p);
-            id = url;
-        }
+        String id = getId(url);
         return new YouTubeChannel(id, channelInfoItem.getName(), channelInfoItem.getDescription(), channelInfoItem.getThumbnailUrl(), null,
                 channelInfoItem.getSubscriberCount(), false, -1, System.currentTimeMillis(), null);
+    }
+
+    private String getId(String url) {
+        try {
+            return channelLinkHandler.getId(url);
+        } catch (ParsingException p) {
+            Logger.e(this, "Unable to parse channel url "+ url, p);
+            return url;
+        }
     }
 
 }
