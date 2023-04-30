@@ -40,7 +40,7 @@ import free.rm.skytube.businessobjects.Logger;
  */
 public abstract class Pager<I extends InfoItem, O> implements PagerBackend<O> {
     private final StreamingService streamingService;
-    private final ListExtractor<I> channelExtractor;
+    private final ListExtractor<? extends I> channelExtractor;
     private Page nextPage;
     private boolean hasNextPage = true;
     private Exception lastException;
@@ -48,7 +48,7 @@ public abstract class Pager<I extends InfoItem, O> implements PagerBackend<O> {
     protected final ListLinkHandlerFactory playlistLinkHandler;
     protected final LinkHandlerFactory channelLinkHandler;
 
-    Pager(StreamingService streamingService, ListExtractor<I> channelExtractor) {
+    Pager(StreamingService streamingService, ListExtractor<? extends I> channelExtractor) {
         this.streamingService = streamingService;
         this.channelExtractor = channelExtractor;
         this.streamLinkHandler = streamingService.getStreamLHFactory();
@@ -119,7 +119,7 @@ public abstract class Pager<I extends InfoItem, O> implements PagerBackend<O> {
     /**
      * Process the page, and update the pager with the content, if the Pager needs to keep state
      */
-    protected List<O> process(ListExtractor.InfoItemsPage<I> page) throws NewPipeException, ExtractionException {
+    protected List<O> process(ListExtractor.InfoItemsPage<? extends I> page) throws NewPipeException, ExtractionException {
         nextPage = page.getNextPage();
         hasNextPage = page.hasNextPage();
         return extract(page);
@@ -132,6 +132,6 @@ public abstract class Pager<I extends InfoItem, O> implements PagerBackend<O> {
         return nextPage;
     }
 
-    protected abstract List<O> extract(InfoItemsPage<I> page) throws NewPipeException, ExtractionException ;
+    protected abstract List<O> extract(InfoItemsPage<? extends I> page) throws NewPipeException, ExtractionException ;
 
 }

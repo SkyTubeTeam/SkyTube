@@ -28,7 +28,7 @@ import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 public class VideoPagerWithChannel extends VideoPager {
     private final YouTubeChannel channel;
 
-    public VideoPagerWithChannel(StreamingService streamingService, ListExtractor<InfoItem> channelExtractor, YouTubeChannel channel) {
+    public VideoPagerWithChannel(StreamingService streamingService, ListExtractor<? extends InfoItem> channelExtractor, YouTubeChannel channel) {
         super(streamingService, channelExtractor);
         this.channel = channel;
     }

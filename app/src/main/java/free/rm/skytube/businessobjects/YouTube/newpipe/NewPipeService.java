@@ -186,7 +186,7 @@ public class NewPipeService {
             return null;
         }
         feedExtractor.fetchPage();
-        return new VideoPagerWithChannel(streamingService, (ListExtractor)feedExtractor, createInternalChannelFromFeed(feedExtractor)).getNextPageAsVideos();
+        return new VideoPagerWithChannel(streamingService, feedExtractor, createInternalChannelFromFeed(feedExtractor)).getNextPageAsVideos();
     }
 
     /**

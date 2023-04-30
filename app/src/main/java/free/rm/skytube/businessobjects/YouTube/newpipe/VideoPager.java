@@ -39,12 +39,12 @@ import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 public class VideoPager extends Pager<InfoItem, CardData> {
     private final Set<String> seenVideos = new HashSet<>();
 
-    public VideoPager(StreamingService streamingService, ListExtractor<InfoItem> channelExtractor) {
+    public VideoPager(StreamingService streamingService, ListExtractor<? extends InfoItem> channelExtractor) {
         super(streamingService, channelExtractor);
     }
 
     @Override
-    protected List<CardData> extract(ListExtractor.InfoItemsPage<InfoItem> page) throws NewPipeException {
+    protected List<CardData> extract(ListExtractor.InfoItemsPage<? extends InfoItem> page) throws NewPipeException {
         List<CardData> result = new ArrayList<>(page.getItems().size());
         if (NewPipeService.DEBUG_LOG) {
             Logger.d(this, "extract from %s, items: %s", page, page.getItems().size());

@@ -17,15 +17,13 @@
 
 package free.rm.skytube.businessobjects.YouTube;
 
-import org.schabi.newpipe.extractor.stream.StreamInfoItem;
-
 import java.util.Objects;
 
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeException;
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
 import free.rm.skytube.businessobjects.YouTube.newpipe.VideoPager;
 
-public class NewPipePlaylistVideos extends NewPipeVideos<StreamInfoItem>  {
+public class NewPipePlaylistVideos extends NewPipeVideos {
 
     private String playlistId;
 
