@@ -32,8 +32,7 @@ import free.rm.skytube.businessobjects.db.BookmarksDb;
  * Get user's bookmarked videos.
  */
 public class GetBookmarksVideos extends GetYouTubeVideos {
-
-    Integer minOrder;
+    private Integer minOrder;
 
     @Override
     public void init() {
@@ -62,6 +61,5 @@ public class GetBookmarksVideos extends GetYouTubeVideos {
 
         return null;
     }
-
 
 }
