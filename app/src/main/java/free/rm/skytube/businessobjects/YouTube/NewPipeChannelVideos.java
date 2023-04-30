@@ -25,24 +25,13 @@ import free.rm.skytube.businessobjects.YouTube.newpipe.VideoPager;
 /**
  * Adapter class to get list of videos from a channel.
  */
-public class NewPipeChannelVideos extends NewPipeVideos implements GetChannelVideosInterface {
+public class NewPipeChannelVideos extends NewPipeVideos {
 
     private String channelId;
 
-    @Override
-    public void setChannelQuery(String channelId, boolean filterSubscribedVideos) {
-        this.channelId = Objects.requireNonNull(channelId, "channelId missing");
-    }
-
     // Important, this is called from the channel tab
-    @Override
     public void setQuery(String query) {
         this.channelId = Objects.requireNonNull(query, "query missing");
-    }
-
-    @Override
-    public void setPublishedAfter(long timeInMs) {
-
     }
 
     @Override
