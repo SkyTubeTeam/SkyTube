@@ -38,6 +38,7 @@ import free.rm.skytube.databinding.VideoCellBinding;
 import free.rm.skytube.gui.businessobjects.PlaylistClickListener;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.functions.Consumer;
+import io.reactivex.rxjava3.internal.functions.Functions;
 
 /**
  * An adapter that will display playlists in a {@link android.widget.GridView}.
@@ -70,9 +71,7 @@ public class PlaylistsGridAdapter extends RecyclerViewAdapterEx<YouTubePlaylist,
 		// if it reached the bottom of the list, then try to get the next page of videos
 		if (position >= getItemCount() - 1) {
 			Log.w(TAG, "BOTTOM REACHED!!!");
-			if(getChannelPlaylists != null)
-				compositeDisposable.add(YouTubeTasks.getChannelPlaylists(getContext(), getChannelPlaylists, this, false)
-						.subscribe());
+			refresh(Functions.emptyConsumer());
 		}
 	}
 
@@ -85,8 +84,7 @@ public class PlaylistsGridAdapter extends RecyclerViewAdapterEx<YouTubePlaylist,
 			clearList();
 			getChannelPlaylists = new GetChannelPlaylists();
 			getChannelPlaylists.setYouTubeChannel(youTubeChannel);
-			compositeDisposable.add(YouTubeTasks.getChannelPlaylists(getContext(), getChannelPlaylists, this, false)
-					.subscribe());
+			refresh(Functions.emptyConsumer());
 		} catch (IOException e) {
 			e.printStackTrace();
 			Toast.makeText(getContext(),
