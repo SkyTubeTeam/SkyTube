@@ -62,6 +62,11 @@ public class YouTubeTasks {
     private static final String TAG = YouTubeTasks.class.getSimpleName();
     private static final Scheduler scheduler = Schedulers.from(Executors.newFixedThreadPool(4));
 
+    public interface ChannelPlaylistFetcher {
+        void reset();
+        YouTubeChannel getChannel();
+        List<YouTubePlaylist> getNextPlaylists() throws IOException, ExtractionException, NewPipeException;
+    }
     private YouTubeTasks() { }
 
     public static Single<Integer> refreshAllSubscriptions(Context context, @Nullable Consumer<List<String>> subscriptionListConsumer, @Nullable Consumer<Integer> newVideosFound) {
@@ -104,14 +109,14 @@ public class YouTubeTasks {
      * them in the supplied adapter.
      */
     public static Maybe<List<YouTubePlaylist>> getChannelPlaylists(@NonNull Context ctx,
-                                                                   @NonNull GetChannelPlaylists getChannelPlaylists,
+                                                                   @NonNull ChannelPlaylistFetcher channelPlaylistFetcher,
                                                                    @NonNull PlaylistsGridAdapter playlistsGridAdapter,
                                                                    boolean shouldReset) {
         if (shouldReset) {
-            getChannelPlaylists.reset();
+            channelPlaylistFetcher.reset();
             playlistsGridAdapter.clearList();
         }
-        return Single.fromCallable(getChannelPlaylists::getNextPlaylists)
+        return Single.fromCallable(channelPlaylistFetcher::getNextPlaylists)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnError(throwable -> {

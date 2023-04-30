@@ -45,6 +45,7 @@ import org.schabi.newpipe.extractor.localization.ContentCountry;
 import org.schabi.newpipe.extractor.localization.DateWrapper;
 import org.schabi.newpipe.extractor.localization.Localization;
 import org.schabi.newpipe.extractor.playlist.PlaylistExtractor;
+import org.schabi.newpipe.extractor.playlist.PlaylistInfoItem;
 import org.schabi.newpipe.extractor.search.SearchExtractor;
 import org.schabi.newpipe.extractor.stream.StreamExtractor;
 import org.schabi.newpipe.extractor.stream.StreamInfo;
@@ -78,6 +79,15 @@ public class NewPipeService {
     private final Settings settings;
     final static boolean DEBUG_LOG = false;
 
+    static class ChannelWithExtractor {
+        final YouTubeChannel channel;
+        final ChannelExtractor extractor;
+
+        ChannelWithExtractor(YouTubeChannel channel, ChannelExtractor extractor) {
+            this.channel = channel;
+            this.extractor = extractor;
+        }
+    }
     public NewPipeService(StreamingService streamingService, Settings settings) {
         this.streamingService = streamingService;
         this.settings = settings;
@@ -230,6 +240,17 @@ public class NewPipeService {
             return new VideoPagerWithChannel(streamingService, (ListExtractor) channelExtractor, channel);
         } catch (ExtractionException | IOException | RuntimeException e) {
             throw new NewPipeException("Getting videos for " + channelId + " fails:" + e.getMessage(), e);
+        }
+    }
+
+    public ChannelWithExtractor getChannelWithExtractor(String channelId) throws NewPipeException {
+        try {
+            ChannelExtractor channelExtractor = getChannelExtractor(channelId);
+
+            YouTubeChannel channel = createInternalChannel(channelExtractor);
+            return new ChannelWithExtractor(channel, channelExtractor);
+        } catch (ExtractionException | IOException | RuntimeException e) {
+            throw new NewPipeException("Getting playlists for " + channelId + " fails:" + e.getMessage(), e);
         }
     }
 

@@ -175,7 +175,8 @@ dependencies {
     }
 
     // implementation 'com.github.SkyTubeTeam.NewPipeExtractor:NewPipeExtractor:818745b7e4'
-    implementation 'com.github.TeamNewPipe.NewPipeExtractor:NewPipeExtractor:v0.22.6'
+    // implementation 'com.github.TeamNewPipe.NewPipeExtractor:NewPipeExtractor:v0.22.6'
+    implementation 'com.github.gzsombor.NewPipeExtractor:NewPipeExtractor:ad72319feb'
 
     implementation ('com.github.SkyTubeTeam.components:okhttp-client:0.0.5') {
         exclude group: 'com.github.SkyTubeTeam.NewPipeExtractor', module: 'extractor'

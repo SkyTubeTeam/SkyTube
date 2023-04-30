@@ -12,8 +12,12 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.VideoCategory;
+import free.rm.skytube.businessobjects.YouTube.LegacyGetChannelPlaylists;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubePlaylist;
+import free.rm.skytube.businessobjects.YouTube.YouTubeTasks;
+import free.rm.skytube.businessobjects.YouTube.newpipe.GetPlaylistsForChannel;
+import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
 import free.rm.skytube.gui.businessobjects.MainActivityListener;
 import free.rm.skytube.gui.businessobjects.PlaylistClickListener;
 import free.rm.skytube.gui.businessobjects.adapters.PlaylistsGridAdapter;
@@ -40,11 +44,19 @@ public class ChannelPlaylistsFragment extends VideosGridFragment implements Play
 
 		YouTubeChannel channel = (YouTubeChannel) requireArguments()
 				.getSerializable(ChannelBrowserFragment.CHANNEL_OBJ);
-		playlistsGridAdapter.setYouTubeChannel(channel);
+		playlistsGridAdapter.setFetcher(createFetcher(channel));
 
 		gridviewBinding.gridView.setAdapter(playlistsGridAdapter);
 
 		return view;
+	}
+
+	private YouTubeTasks.ChannelPlaylistFetcher createFetcher(YouTubeChannel channel) {
+		if (NewPipeService.isPreferred()) {
+			return new GetPlaylistsForChannel(channel);
+		} else {
+			return new LegacyGetChannelPlaylists(channel);
+		}
 	}
 
 	@Override

@@ -42,6 +42,7 @@ import free.rm.skytube.app.EventBus;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
+import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.db.DatabaseTasks;
 import free.rm.skytube.databinding.FragmentChannelBrowserBinding;
 import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
