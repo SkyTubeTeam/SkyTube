@@ -23,8 +23,8 @@ android {
                         '"hidden:A0C0B03EED581E277FCC2BD47E75526C06401FB4F66E3EDB2A2BE2B7F9C606896DDEF9875F3804",' +
                         '"hidden:A0C0B03EED58183878F501C639336957395D24B2CC7C2FD43919CB92F682408C4CBEC1C2280F4B"' +
                         '}'
-        buildConfigField 'String', 'SKYTUBE_WEBSITE', '"https://skytube-app.com"'
-        buildConfigField 'String', 'SKYTUBE_WEBSITE_CREDITS', '"https://skytube-app.com/credits.html"'
+        buildConfigField 'String', 'SKYTUBE_WEBSITE', '"https://github.com/SkyTubeTeam/SkyTube"'
+        buildConfigField 'String', 'SKYTUBE_WEBSITE_CREDITS', '"https://raw.githubusercontent.com/SkyTubeTeam/SkyTube/master/contributors.txt"'
         buildConfigField 'String', 'SKYTUBE_ISSUES_URL', '"https://github.com/SkyTubeTeam/SkyTube/issues/new/choose"'
         buildConfigField 'String', 'SKYTUBE_UPDATES_URL', '"https://api.github.com/repos/SkyTubeTeam/SkyTube/releases/latest"'
         buildConfigField 'long', 'BUILD_TIME', String.valueOf(System.currentTimeMillis()) + 'L'
