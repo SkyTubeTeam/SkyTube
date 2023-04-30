@@ -42,8 +42,6 @@ import free.rm.skytube.app.EventBus;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
-import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannelInterface;
-import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.db.DatabaseTasks;
 import free.rm.skytube.databinding.FragmentChannelBrowserBinding;
 import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
@@ -278,28 +276,6 @@ public class ChannelBrowserFragment extends FragmentEx {
 
 
 	////////////////////////////////////////////////////////////////////////////////////////////////
-
-	/**
-	 * A task that given a channel ID it will try to initialize and return {@link YouTubeChannel}.
-	 */
-	private class ProcessChannel implements YouTubeChannelInterface {
-
-
-
-		@Override
-		public void onGetYouTubeChannel(YouTubeChannel youTubeChannel) {
-			if (youTubeChannel == null) {
-				return;
-			}
-			// In the event this fragment is passed a channel id and not a channel object, set the
-			// channel the subscribe button is for since there wasn't a channel object to set when
-			// the button was created.
-			channel = youTubeChannel;
-			initViews();
-		}
-	}
-
-
 	private class ChannelPagerAdapter extends FragmentPagerAdapter {
 		/** List of fragments that will be displayed as tabs. */
 		private final List<TabFragment> channelBrowserFragmentList = new ArrayList<>();
