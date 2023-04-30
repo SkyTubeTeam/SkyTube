@@ -224,7 +224,7 @@ public class YouTubeVideo extends CardData implements Serializable {
 	public void setLikeDislikeCount(Long likedCountInt, Long dislikedCountInt) {
 		this.thumbsUpPercentage = -1;
 
-		Logger.i(this, "setLikeDislikeCount "+likedCountInt+" "+dislikedCountInt +" -> "+likeCountNumber+" "+dislikeCountNumber);
+		// Logger.d(this, "setLikeDislikeCount "+likedCountInt+" "+dislikedCountInt +" -> "+likeCountNumber+" "+dislikeCountNumber);
 		final Long likes = filterNegative(likedCountInt);
 		final Long dislikes = filterNegative(dislikedCountInt);
 
