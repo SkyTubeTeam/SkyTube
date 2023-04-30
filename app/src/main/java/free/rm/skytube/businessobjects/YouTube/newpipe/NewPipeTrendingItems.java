@@ -17,11 +17,9 @@
 
 package free.rm.skytube.businessobjects.YouTube.newpipe;
 
-import org.schabi.newpipe.extractor.InfoItem;
-
 import free.rm.skytube.businessobjects.YouTube.NewPipeVideos;
 
-public class NewPipeTrendingItems extends NewPipeVideos<InfoItem> {
+public class NewPipeTrendingItems extends NewPipeVideos {
 
     @Override
     protected VideoPager createNewPager() throws NewPipeException {

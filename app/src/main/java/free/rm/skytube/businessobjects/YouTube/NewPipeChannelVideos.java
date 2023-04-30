@@ -16,8 +16,6 @@
  */
  package free.rm.skytube.businessobjects.YouTube;
 
-import org.schabi.newpipe.extractor.stream.StreamInfoItem;
-
 import java.util.Objects;
 
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeException;
@@ -27,7 +25,7 @@ import free.rm.skytube.businessobjects.YouTube.newpipe.VideoPager;
 /**
  * Adapter class to get list of videos from a channel.
  */
-public class NewPipeChannelVideos extends NewPipeVideos<StreamInfoItem> implements GetChannelVideosInterface {
+public class NewPipeChannelVideos extends NewPipeVideos implements GetChannelVideosInterface {
 
     private String channelId;
 

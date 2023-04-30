@@ -42,7 +42,7 @@ public class CommentPager extends Pager<CommentsInfoItem, CommentsInfoItem> {
     }
 
     @Override
-    protected List<CommentsInfoItem> process(ListExtractor.InfoItemsPage<CommentsInfoItem> page) throws NewPipeException, ExtractionException {
+    protected List<CommentsInfoItem> process(ListExtractor.InfoItemsPage<? extends CommentsInfoItem> page) throws NewPipeException, ExtractionException {
         this.commentCount = commentsExtractor.getCommentsCount();
         this.disabledComments = commentsExtractor.isCommentsDisabled();
         List<CommentsInfoItem> result = super.process(page);
@@ -51,8 +51,8 @@ public class CommentPager extends Pager<CommentsInfoItem, CommentsInfoItem> {
     }
 
     @Override
-    protected List<CommentsInfoItem> extract(ListExtractor.InfoItemsPage<CommentsInfoItem> page) throws ExtractionException {
-        return page.getItems();
+    protected List<CommentsInfoItem> extract(ListExtractor.InfoItemsPage<? extends CommentsInfoItem> page) throws ExtractionException {
+        return (List<CommentsInfoItem>) page.getItems();
     }
 
     public CommentsInfoItem getComment(int idx) {

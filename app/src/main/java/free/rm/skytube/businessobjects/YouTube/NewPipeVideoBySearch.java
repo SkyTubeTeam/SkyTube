@@ -16,13 +16,11 @@
  */
 package free.rm.skytube.businessobjects.YouTube;
 
-import org.schabi.newpipe.extractor.InfoItem;
-
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeException;
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
 import free.rm.skytube.businessobjects.YouTube.newpipe.VideoPager;
 
-public class NewPipeVideoBySearch extends NewPipeVideos<InfoItem> {
+public class NewPipeVideoBySearch extends NewPipeVideos {
 
     private String query;
 
