@@ -22,8 +22,11 @@ import com.google.api.services.youtube.YouTube;
 import com.google.api.services.youtube.model.SearchListResponse;
 import com.google.api.services.youtube.model.SearchResult;
 
+import org.schabi.newpipe.extractor.exceptions.ExtractionException;
+
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -32,6 +35,7 @@ import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPI;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPIKey;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
+import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 
 /**
@@ -152,12 +156,71 @@ public class GetChannelVideosFull extends GetYouTubeVideos {
 		}
 	}
 
-	@Override
-	protected List<CardData> getVideoListFromIds(List<String> videoIds) throws IOException {
+	private List<CardData> getVideoListFromIds(List<String> videoIds) throws IOException {
 		if (videoIds != null && !videoIds.isEmpty() && channelId != null && filterSubscribedVideos) {
 			final Set<String> videosByChannel = SubscriptionsDb.getSubscriptionsDb().getSubscribedChannelVideosByChannel(channelId);
 			videoIds.removeAll(videosByChannel);
 		}
-		return super.getVideoListFromIds(videoIds);
+		return impGetVideoListFromIds(videoIds);
 	}
+
+	/**
+	 * <p>Hence, we need to submit the video IDs to YouTube to retrieve more information about the
+	 * given video list.</p>
+	 *
+	 * @param videoIds Search results
+	 * @return List of {@link YouTubeVideo}s.
+	 * @throws IOException
+	 */
+	private List<CardData> impGetVideoListFromIds(List<String> videoIds) throws IOException {
+		if (videoIds == null || videoIds.isEmpty()) {
+			return Collections.emptyList();
+		}
+		return getVideoListFromIdsWithAPI(videoIds);
+	}
+
+	private List<CardData> getWithNewPipe(List<String> videoIds) {
+		NewPipeService newPipe = NewPipeService.get();
+		List<CardData> result = new ArrayList<>(videoIds.size());
+		for (String id : videoIds) {
+			try {
+				result.add(newPipe.getDetails(id));
+			} catch (ExtractionException | IOException e) {
+				Logger.e(this, "Unable to fetch "+id+", error:"+ e.getMessage(), e);
+			}
+		}
+		return result;
+	}
+
+	private List<CardData> getVideoListFromIdsWithAPI(List<String> videoIds) throws IOException {
+		final StringBuilder videoIdsStr = new StringBuilder();
+		try {
+
+			// append the video IDs into a strings (CSV)
+			for (String id : videoIds) {
+				videoIdsStr.append(id);
+				videoIdsStr.append(',');
+			}
+
+			if (videoIdsStr.length() > 0) {
+				videoIdsStr.setLength(videoIdsStr.length() - 1);
+			}
+			// get video details by supplying the videos IDs
+			GetVideosDetailsByIDs getVideo = new GetVideosDetailsByIDs();
+			getVideo.init(videoIdsStr.toString());
+			Logger.i(this, "getVideoList light from %s id, video ids: %s", videoIds.size(), videoIdsStr);
+
+			List<CardData> cards = getVideo.getNextVideos();
+			if (cards == null || cards.isEmpty()) {
+				Logger.e(this, "Unable to fetch with API, use Newpipe,ids="+videoIdsStr);
+				return getWithNewPipe(videoIds);
+			}
+			return cards;
+		} catch (IOException e) {
+			Logger.e(this, "Unable to fetch with API, revert to newpipe:"+e.getMessage()+",ids="+videoIdsStr, e);
+			setLastException(e);
+			return getWithNewPipe(videoIds);
+		}
+	}
+
 }
