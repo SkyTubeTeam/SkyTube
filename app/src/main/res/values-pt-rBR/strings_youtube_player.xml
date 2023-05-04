@@ -1,2 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="error_stream_err_unavailable">Mensagem indisponível.</string>
+    <string name="error_stream_decryption_fail">Não foi possível carregar o código de descriptografia para o serviço do YouTube.</string>
+    <string name="error_stream_parse_error">Erro de análise.</string>
+    <string name="error_video_play">Erro de reprodução de vídeo</string>
+    <string name="error_video_streams">Não foi possível obter nenhum dos fluxos de vídeo.</string>
+    <string name="error_get_video_desc">Não foi possível obter a descrição do vídeo.</string>
+    <string name="error_invalid_url">URL de vídeo inválido: %s</string>
+    <string name="error_video_streams_empty">O vídeo \'%s\' não tem fluxos.</string>
+    <string name="error_downloaded_file_is_corrupted">O vídeo baixado parece <b>corrompido</b>: <br/> <br/> %s . <br/> <br/> <b>Excluir</b> o arquivo\?</string>
+    <string name="error_video_parse_error">Não foi possível iniciar o vídeo: <br/> <br/> %s.</string>
+    <string name="metered_network_blocked_by_policy">Download bloqueado porque você está conectado através de uma rede limitada.</string>
+    <string name="metered_network">Rede Limitada</string>
+    <string name="warning_metered_network_disable">Nunca perguntar novamente.</string>
+    <string name="play_video">Reproduzir vídeo</string>
+    <string name="ratings_disabled">Classificações desligadas</string>
+    <string name="loading_video">Carregando vídeo…</string>
+    <string name="reload_video">Recarregar vídeo</string>
+    <string name="open_in_browser">Abrir no navegador da web</string>
+    <string name="open_with">Abrir com…</string>
+    <string name="share">Compartilhar</string>
+    <string name="share_via">Compartilhar via…</string>
+    <string name="copy_url">Copiar URL</string>
+    <string name="mark_watched">Marcar como Assistido</string>
+    <string name="url_copied_to_clipboard">URL copiada para área de transferência.</string>
+    <string name="error_get_comments">Não foi possível obter comentários.</string>
+    <string name="error_get_comments_no_network">Conecte-se à Internet para obter comentários primeiro.</string>
+    <string name="view_replies">Ver respostas</string>
+    <string name="mark_unwatched">Marcar como Não-Assistido</string>
+    <string name="no_video_comments">Este vídeo não tem comentários, ou eles estão desligados.</string>
+    <string name="hide_replies">Ocultar respostas</string>
+    <string name="enter_video_url">Inserir URL do Vídeo</string>
+    <string name="play">Reproduzir</string>
+    <string name="cancel">Cancelar</string>
+    <string name="clear">Limpar</string>
+    <string name="should_resume">Continuar de onde você parou\?</string>
+    <string name="sponsorblock_skipped">Pular segmento: %s</string>
+    <string name="resume">Continuar</string>
+    <string name="sponsorblock_category_sponsor">Patrocinador</string>
+    <string name="sponsorblock_category_interaction">Lembrete de Interação</string>
+    <string name="sponsorblock_category_music_offtopic">Seção Não-Musical</string>
+    <string name="sponsorblock_category_intro">Introdução/Intermissão</string>
+    <string name="sponsorblock_category_outro">Cartões finais/Créditos</string>
+    <string name="sponsorblock_category_filler">Enchimento</string>
+    <string name="sponsorblock_category_selfpromo">Auto-Promoção</string>
+    <string name="sponsorblock_category_preview">Prévia/Recapitular</string>
+    <string name="warning_metered_network_play">Conecte-se a uma rede ilimitada para evitar cobranças de uso de dados primeiro. Reproduzir vídeo mesmo assim\?</string>
+    <string name="warning_live_video">Não é possível reproduzir transmissões ao vivo por enquanto. Abrir em outro aplicativo\?</string>
+</resources>
