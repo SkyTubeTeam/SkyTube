@@ -8,4 +8,5 @@
     <string name="channel_blacklist_error">Impossible de mettre la chaîne sur liste noire.</string>
     <string name="channel_unwhitelist_error">Impossible de retirer la chaîne de la liste blanche.</string>
     <string name="dislikes">%d%% je n\'aime pas</string>
+    <string name="add_to_permitted">Autoriser la chaîne</string>
 </resources>
