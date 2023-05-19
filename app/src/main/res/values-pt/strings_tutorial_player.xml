@@ -1,2 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="done">Feito</string>
+    <string name="page_counter">%1$d de %2$d</string>
+    <string name="tutorial_slide_3">Deslize para a esquerda ou para a direita para retroceder ou avançar o vídeo.</string>
+    <string name="tutorial_slide_4">Deslize para cima ou para baixo para ajustar o volume.</string>
+    <string name="tutorial_slide_5">Deslize para cima ou para baixo para ajustar o brilho.</string>
+    <string name="next">Próximo</string>
+    <string name="skip">Pular</string>
+    <string name="tutorial_slide_1">Deslize para a esquerda para vizualizar os comentários.</string>
+    <string name="tutorial_slide_2">Deslize para cima para vizualizar a descrição do video.</string>
+    <string name="tutorial_slide_6">Toque duas vezes para pausar ou reproduzir o vídeo.</string>
+</resources>
