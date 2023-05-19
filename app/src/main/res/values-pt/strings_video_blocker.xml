@@ -2,10 +2,11 @@
 <resources>
     <string name="blocked_videos">Vídeos bloqueados</string>
     <string name="no_videos_blocked">Deseja configurar o bloqueador de vídeo para bloquear ou filtrar os vídeos\?</string>
-    <string name="configure">Configurar</string>
+    <string name="configure">Configurações</string>
     <string name="block_channel">Bloquear canal</string>
     <string name="channel_blacklisted">Atualize para usar a nova lista negra dos canais.</string>
     <string name="channel_blacklist_error">Não foi possível colocar o canal na lista negra.</string>
     <string name="channel_unwhitelist_error">Não foi possível remover o canal da lista branca.</string>
     <string name="dislikes">%d%% \"Não gosto\"</string>
+    <string name="add_to_permitted">Permitir Canal</string>
 </resources>
