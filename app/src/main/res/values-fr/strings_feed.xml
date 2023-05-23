@@ -12,4 +12,5 @@
     <string name="notification_channel_feed_title">Notifications de flux</string>
     <string name="notification_new_videos_found">%d nouvelles vidéos provenant des abonnements</string>
     <string name="open_channel">Ouvrir la chaîne</string>
+    <string name="channel_related">Chaîne...</string>
 </resources>
