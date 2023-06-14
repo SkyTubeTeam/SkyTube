@@ -22,7 +22,7 @@
     <string name="about">Подробнее</string>
     <string name="channel_unsubscribed">Подписка на канал отменена</string>
     <string name="channel_subscribe_failed">Не удалось подписаться на канал</string>
-    <string name="channel_already_subscribed">Вы уже подписаны на этот канал</string>
+    <string name="channel_already_subscribed">Вы уже подписаны</string>
     <string name="channel_subscribed">Вы подписались на канал</string>
     <string name="select_sub_file">Выбор файла подписки</string>
 </resources>
