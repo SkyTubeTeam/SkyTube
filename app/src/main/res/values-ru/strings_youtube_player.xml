@@ -8,7 +8,7 @@
     <string name="error_video_streams">Невозможно загрузить трансляцию.</string>
     <string name="error_get_video_desc">Не удалось получить описание видео.</string>
     <string name="error_invalid_url">Неверная ссылка на видео: %s</string>
-    <string name="warning_live_video">Не получается воспроизвести прямой эфир. Открыть прямой эфир в другом приложении\?</string>
+    <string name="warning_live_video">Не получается воспроизводить прямые трансляции. Открыть в другом приложении\?</string>
     <string name="ratings_disabled">Рейтинг отключен</string>
     <string name="loading_video">Загрузка видео выполняется…</string>
     <string name="open_in_browser">Открыть в веб-браузере</string>
