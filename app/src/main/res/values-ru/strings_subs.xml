@@ -10,14 +10,14 @@
     <string name="error_check_if_user_has_subbed">Не удалось проверить, подписаны ли вы на канал (id=%s)</string>
     <string name="error_unable_to_subscribe">Не удалось (от/под)писаться на канал (id=%s)</string>
     <string name="import_subscriptions">Импортировать подписки</string>
-    <string name="import_subscriptions_description">Чтобы импортировать подписки из YouTube, надо перейти по ссылке https://www.youtube.com/subscription_manager и выбрать кнопку \"Экспортировать подписки\" в самом низу. На выходе получится файл подписок с именем \"управление подписками\", который потом можно будет указать при выборе файла для импорта (\"Выберите файл подписок\").</string>
+    <string name="import_subscriptions_description">Чтобы загрузить подписки, на https://takeout.google.com выберете только \"YouTube и YouTube Music\", кликните \"Выбраны все данные YouTube\", выберете только \"подписки\". Нажмите \"Далее\", \"Создать экспорт\". Из скачанного ZIP файла извлеките subscriptions.csv или subscriptions.json и укажите этот файл при импорте (\"Выберите файл подписок\").</string>
     <string name="unsubscribe_from_all_current_sibbed_channels">Отписаться от всех подписанных каналов.</string>
-    <string name="subscriptions_to_channels_imported">Импортированы подписки на %d каналов.</string>
+    <string name="subscriptions_to_channels_imported">Импортированы %d каналов.</string>
     <string name="select_all">Выбрать все</string>
     <string name="select_none">Ничего не выбирать</string>
     <string name="no_channels_found">В загруженном вами файле нет каналов YouTube.</string>
-    <string name="no_new_channels_found">Вы уже подписаны на все каналы YouTube, которые перечислены в загруженном файле.</string>
-    <string name="import_subscriptions_parse_error">Произошла ошибка при попытке синтаксического анализа загруженного вами файла: %s.</string>
+    <string name="no_new_channels_found">Вы уже подписаны на все каналы YouTube из этого файла.</string>
+    <string name="import_subscriptions_parse_error">Невозможно разобрать загруженный файл: %s.</string>
     <string name="failed_to_import_subscriptions">Не получается импортировать подписки YouTube.</string>
     <string name="about">Подробнее</string>
     <string name="channel_unsubscribed">Подписка на канал отменена</string>
