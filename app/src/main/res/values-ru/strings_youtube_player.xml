@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="error_stream_err_unavailable">Неизвестная ошибка</string>
+    <string name="error_stream_err_unavailable">Сообщение недоступно.</string>
     <string name="error_stream_decryption_fail">Не получается загрузить код расшифровки для сервиса YouTube.</string>
     <string name="error_stream_parse_error">Ошибка чтения.</string>
     <string name="error_video_play">Ошибка воспроизведения видео</string>
     <string name="error_video_streams_empty">Видео \'%s\' не транслируют.</string>
-    <string name="error_video_streams">Ошибка во время загрузки трансляции видео.</string>
+    <string name="error_video_streams">Невозможно загрузить трансляцию.</string>
     <string name="error_get_video_desc">Не удалось получить описание видео.</string>
     <string name="error_invalid_url">Неверная ссылка на видео: %s</string>
     <string name="warning_live_video">Пока что не удается воспроизводить прямые трансляции. Открыть в другом приложении\?</string>
@@ -14,10 +14,10 @@
     <string name="open_in_browser">Открыть в веб-браузере</string>
     <string name="open_with">Открыть с помощью…</string>
     <string name="share">Поделиться</string>
-    <string name="share_via">Поделиться с помощью</string>
+    <string name="share_via">Поделиться с помощью…</string>
     <string name="copy_url">Скопировать ссылку</string>
     <string name="url_copied_to_clipboard">Ссылка скопирована в буфер обмена.</string>
-    <string name="error_get_comments">Ошибка во время загрузки комментариев к видео.</string>
+    <string name="error_get_comments">Не удалось загрузить комментарии.</string>
     <string name="no_video_comments">К этому видео либо нет комментариев, либо они отключены.</string>
     <string name="view_replies">Посмотреть ответы</string>
     <string name="hide_replies">Скрыть ответы</string>
@@ -27,12 +27,12 @@
     <string name="clear">Очистить</string>
     <string name="mark_watched">Пометить просмотренным</string>
     <string name="mark_unwatched">Пометить непросмотренным</string>
-    <string name="should_resume">Вы хотите начать с того места, где вы остановились?</string>
+    <string name="should_resume">Продолжить с места остановки\?</string>
     <string name="resume">Возобновить</string>
     <string name="play_video">Проиграть видео</string>
-    <string name="error_get_comments_no_network">Доступ к сети необходим для получения комментариев.</string>
+    <string name="error_get_comments_no_network">Подключитесь к сети для получения комментариев.</string>
     <string name="error_video_parse_error">Не удалось запустить видео: <br/> <br/> %s.</string>
-    <string name="error_downloaded_file_is_corrupted">Загруженное видео выглядит <b>поврежденным</b> - сообщение об ошибке: <br/><br/> %s. <br/><br/> Вы хотите <b>удалить</b> файл\?</string>
+    <string name="error_downloaded_file_is_corrupted">Загруженное видео выглядит <b>поврежденным</b>: <br/><br/> %s. <br/><br/><b>Удалить</b> файл\?</string>
     <string name="reload_video">Перезагрузить видео</string>
     <string name="warning_metered_network_disable">Больше не спрашивать.</string>
     <string name="metered_network_blocked_by_policy">Загрузка заблокирована, потому что вы подключены к сети с ограниченными трафиком.</string>
@@ -42,4 +42,5 @@
     <string name="sponsorblock_category_sponsor">Спонсор</string>
     <string name="sponsorblock_category_selfpromo">Самореклама</string>
     <string name="sponsorblock_category_outro">Титры</string>
+    <string name="sponsorblock_category_music_offtopic">Не-музыка</string>
 </resources>
