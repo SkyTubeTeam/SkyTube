@@ -208,6 +208,9 @@ public class DownloadedVideosDb extends CardEventEmitterDatabase implements Orde
                 Gson gson = new Gson();
                 do {
                     final byte[] sbBlob = cursor.getBlob(cursor.getColumnIndex(DownloadedVideosTable.COL_SB));
+                    if (sbBlob == null) {
+                        return null;
+                    }
                     final String sbJson = new String(sbBlob);
                     result = gson.fromJson(sbJson, SBVideoInfo.class);
                 } while (cursor.moveToNext());

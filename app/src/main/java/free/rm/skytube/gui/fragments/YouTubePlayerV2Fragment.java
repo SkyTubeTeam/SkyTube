@@ -424,6 +424,21 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
         }
     }
 
+    /**
+     * Retrieve the sponsorBlock information, either from the internal downloaded videos table, or from the network.
+     */
+    private void retrieveSponsorBlockIfPossible() {
+        if (SkyTubeApp.getSettings().isSponsorblockEnabled()) {
+            if (sponsorBlockVideoInfo == null) {
+                sponsorBlockVideoInfo = DownloadedVideosDb.getVideoDownloadsDb().getDownloadedVideoSponsorblock(youTubeVideo.getId());
+                if (sponsorBlockVideoInfo == null) {
+                    sponsorBlockVideoInfo = SBTasks.retrieveSponsorblockSegmentsBk(youTubeVideo.getVideoId());
+                }
+                initSponsorBlock();
+            }
+        }
+    }
+
     private void initSponsorBlock() {
         if (sponsorBlockVideoInfo != null) {
             Log.d(TAG, "SBInfo has loaded");
@@ -544,10 +559,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
                                         Logger.i(this, ">> PLAYING LOCALLY: %s", downloadStatus.getUri());
                                         playVideo(downloadStatus.getUri(), downloadStatus.getAudioUri(), null);
 
-                                        if (SkyTubeApp.getSettings().isSponsorblockEnabled() && sponsorBlockVideoInfo == null) {
-                                            sponsorBlockVideoInfo = DownloadedVideosDb.getVideoDownloadsDb().getDownloadedVideoSponsorblock(youTubeVideo.getId());
-                                            initSponsorBlock();
-                                        }
+                                        retrieveSponsorBlockIfPossible();
 
                                         // get the video statistics
                                         compositeDisposable.add(YouTubeTasks.getVideoDetails(ctx, youTubeVideo.getVideoId())
