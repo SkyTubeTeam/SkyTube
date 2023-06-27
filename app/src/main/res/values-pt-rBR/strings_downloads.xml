@@ -1,2 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="downloads">Downloads</string>
+    <string name="download">Download</string>
+    <string name="external_storage_not_available">Permita acesso ao armazenamento externo para baixar o arquivo primeiro.</string>
+    <string name="download_video">Baixar Vídeo</string>
+</resources>
