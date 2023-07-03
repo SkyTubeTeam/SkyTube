@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="preferences">Impostazioni</string>
-    <string name="pref_languages_filter_category">Filtri per lingua e paese</string>
-    <string name="pref_title_preferred_regions">Paese preferito</string>
-    <string name="pref_summary_preferred_regions">Seleziona da quale Paese ottenere i video \"In primo piano\": %s</string>
-    <string name="pref_title_preferred_languages">Lingua preferita(e)</string>
+    <string name="preferences">Preferenze</string>
+    <string name="pref_languages_filter_category">Filtri per lingua e regione</string>
+    <string name="pref_title_preferred_regions">Regione preferita</string>
+    <string name="pref_summary_preferred_regions">Seleziona da quale regione ottenere il video \"In primo piano\": %s</string>
+    <string name="pref_title_preferred_languages">Lingua/e preferita/e</string>
     <string name="pref_summary_preferred_languages">Seleziona le tue lingue preferite.</string>
-    <string name="pref_video_player_category">Riproduttore video</string>
+    <string name="pref_video_player_category">Lettore video</string>
     <string name="pref_title_backup_dbs">Backup dei database</string>
     <string name="pref_summary_backup_dbs">Backup dei segnalibri e delle iscrizioni.</string>
     <string name="pref_title_import_dbs">Importa backup</string>
-    <string name="pref_summary_import_dbs">Importa il backup dei database dei segnalibri e delle iscrizioni.</string>
+    <string name="pref_summary_import_dbs">Importa il backup dei segnalibri e delle iscrizioni.</string>
     <string name="databases_backing_up">Backup in corso…</string>
-    <string name="databases_backup_success">Database salvati in %s</string>
+    <string name="databases_backup_success">Backup dei database su %s</string>
     <string name="databases_backup_fail">Impossibile eseguire il backup dei database.</string>
-    <string name="databases_import_select_backup">Seleziona un file di backup da importare</string>
+    <string name="databases_import_select_backup">Seleziona il file di backup da importare</string>
     <string name="databases_import_nothing_selected">Non è stato selezionato nulla…</string>
     <string name="databases_import_warning_message">Sostituire i segnalibri e le iscrizioni con i dati del file di backup selezionato\?</string>
     <string name="continue_">Continua</string>
@@ -23,29 +23,29 @@
     <string name="databases_import_success">Riavvia l\'app per utilizzare i nuovi segnalibri e le nuove iscrizioni.</string>
     <string name="pref_title_import_subs">Importa iscrizioni da YouTube</string>
     <string name="pref_summary_import_subs">Importa le iscrizioni dal tuo account di Youtube.</string>
-    <string name="subs_import_select_backup">Seleziona un file XML di YouTube da importare</string>
-    <string name="pref_about_category">Informazioni</string>
+    <string name="subs_import_select_backup">Seleziona il file XML di YouTube da importare</string>
+    <string name="pref_about_category">Informazioni su</string>
     <string name="pref_title_website">Sito web</string>
     <string name="pref_title_credits">Riconoscimenti</string>
-    <string name="pref_summary_credits">Persone e progetti liberi eccezionali dietro questa applicazione.</string>
+    <string name="pref_summary_credits">Grandi persone e progetti liberi dietro questa app.</string>
     <string name="pref_title_version">Versione</string>
     <string name="pref_title_updates">Aggiornamenti</string>
-    <string name="pref_summary_updates">Controlla aggiornamenti.</string>
-    <string name="pref_title_license">Licenza Copyleft Libera</string>
+    <string name="pref_summary_updates">Controlla le nuove versioni.</string>
+    <string name="pref_title_license">Licenza libera con copyleft</string>
     <string name="pref_summary_license">GPLv3+</string>
     <string name="app_license">Copyright © 2015–2018 Ramon Mifsud
 \n
-\nThis program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation (version 3 of the License).
+\nQuesto programma è software libero: è possibile ridistribuirlo e/o modificarlo secondo i termini della GNU General Public License pubblicata dalla Free Software Foundation (versione 3 della Licenza).
 \n
-\nThis program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+\nQuesto programma è distribuito nella speranza che possa essere utile, ma SENZA ALCUNA GARANZIA; senza nemmeno la garanzia implicita di COMMERCIABILITÀ o IDONEITÀ PER UNO SCOPO PARTICOLARE. Vedi la GNU General Public License per maggiori dettagli.
 \n
-\nYou should have received a copy of the GNU General Public License along with this program. If not, see &lt;https://www.gnu.org/licenses/&gt;</string>
+\nDovresti aver ricevuto una copia della GNU General Public License insieme a questo programma. In caso contrario, vai su &lt;https://www.gnu.org/licenses/&gt;</string>
     <string name="i_agree">Accetto</string>
-    <string name="pref_other_category">Altro</string>
+    <string name="pref_other_category">Altri</string>
     <string name="pref_title_default_tab">Scheda predefinita</string>
-    <string name="pref_summary_default_tab">Scheda da visualizzare quando SkyTube viene avviato: %s</string>
+    <string name="pref_summary_default_tab">Scheda da visualizzare quando avvii SkyTube: %s</string>
     <string name="pref_title_screen_orientation">Orientamento schermo</string>
-    <string name="pref_summary_screen_orientation">Orientamento riproduttore video: %s</string>
+    <string name="pref_summary_screen_orientation">Orientamento del lettore video: %s</string>
     <string-array name="screen_orientations">
         <item>Automatic</item>
         <item>Landscape</item>
@@ -53,53 +53,53 @@
         <item>Device sensor</item>
     </string-array>
     <string name="pref_title_youtube_api_key">Chiave API di YouTube</string>
-    <string name="pref_summary_youtube_api_key">Inserisci la chiave API personale di YouTube da utilizzare.</string>
+    <string name="pref_summary_youtube_api_key">Inserisci invece una chiave API YouTube personale da utilizzare.</string>
     <string name="pref_youtube_api_key_error">Impossibile convalidare la chiave API inserita.</string>
     <string name="pref_youtube_api_key_custom">Riavvia l\'app per utilizzare la nuova chiave API di YouTube.</string>
-    <string name="pref_youtube_api_key_default">Riavvia l\'app per usare la chiave API predefinita di YouTube.</string>
+    <string name="pref_youtube_api_key_default">Riavvia l\'app per utilizzare invece la chiave API di YouTube predefinita.</string>
     <string name="restart">Riavvia</string>
-    <string name="pref_title_feed_notification">Auto-notifica dei feed</string>
-    <string name="pref_summary_feed_notification">Quanto spesso controllare nuovi video dai canali sottoscritti: %s</string>
+    <string name="pref_title_feed_notification">Notifica automatica dei feed</string>
+    <string name="pref_summary_feed_notification">Quanto spesso cercare nuovi video dai canali a cui sei iscritto: %s</string>
     <string-array name="feed_notification">
         <item>Off</item>
         <item>6 Hours</item>
         <item>12 Hours</item>
         <item>24 Hours</item>
     </string-array>
-    <string name="pref_title_choose_player">Riproduttore video</string>
-    <string name="pref_summary_choose_player">Riproduttore video da usare: %s</string>
+    <string name="pref_title_choose_player">Lettore video</string>
+    <string name="pref_summary_choose_player">Lettore video da utilizzare: %s</string>
     <string name="pref_title_disable_search_history">Nessuna cronologia delle ricerche</string>
     <string name="pref_summary_disable_search_history">Cancella e disattiva la cronologia delle ricerche.</string>
-    <string name="pref_disable_search_history_deleted">Cronologia di ricerca cancellata.</string>
-    <string name="pref_title_subscriptions_alphabetical_order">Ordina Canali Alfabeticamente</string>
+    <string name="pref_disable_search_history_deleted">Cronologia di ricerca eliminata.</string>
+    <string name="pref_title_subscriptions_alphabetical_order">Ordina i canali in ordine alfabetico</string>
     <string name="unblock">Sblocca</string>
-    <string name="pref_channels_filter_category">Filtri Canali</string>
+    <string name="pref_channels_filter_category">Filtri canali</string>
     <string name="no_preferred_lang_selected">Nessuna lingua preferita selezionata.</string>
     <string name="pref_other_filters_category">Altri filtri</string>
     <string name="pref_import_export_category">Importa/Esporta</string>
-    <string name="pref_summary_subscriptions_alphabetical_order">Elenca i Canali iscritti in ordine alfabetico.</string>
-    <string name="pref_video_blocker_category">Blocco dei video</string>
-    <string name="pref_title_channel_filter_method">Metodo di filtraggio canali</string>
-    <string name="pref_summary_channel_filter_method">Seleziona il metodo di filtraggio dei canali: %s</string>
-    <string name="disabled">Disattivato</string>
-    <string name="pref_title_channel_blacklist">Elenco canali negati</string>
-    <string name="pref_summary_channel_blacklist">Una lista di canali bloccati.</string>
-    <string name="channel_blacklist_updated">Aggiorna i video per applicare il nuovo elenco di canali rifiutati.</string>
-    <string name="channel_blacklist_update_failure">Impossibile rimuovere i canali indicati dall\'elenco negato…</string>
-    <string name="channel_blacklist_empty">L\'elenco degli elementi non consentiti è vuoto.</string>
+    <string name="pref_summary_subscriptions_alphabetical_order">Elenca i canali sottoscritti in ordine alfabetico.</string>
+    <string name="pref_video_blocker_category">Blocco video</string>
+    <string name="pref_title_channel_filter_method">Metodo per filtrare i canali</string>
+    <string name="pref_summary_channel_filter_method">Seleziona il metodo per filtrare i canali: %s</string>
+    <string name="disabled">Disabilitato</string>
+    <string name="pref_title_channel_blacklist">Elenco canali non consentiti</string>
+    <string name="pref_summary_channel_blacklist">Una lista di canali la cui visione non è permessa.</string>
+    <string name="channel_blacklist_updated">Aggiorna i video per applicare il nuovo elenco di canali non consentiti.</string>
+    <string name="channel_blacklist_update_failure">Impossibile rimuovere i canali indicati dall\'elenco non consentiti…</string>
+    <string name="channel_blacklist_empty">L\'elenco dei non consentiti è vuoto.</string>
     <string name="pref_title_channel_whitelist">Elenco canali consentiti</string>
-    <string name="pref_summary_channel_whitelist">Una lista di canali permessi.</string>
+    <string name="pref_summary_channel_whitelist">Una lista di canali la cui visione è permessa.</string>
     <string name="input_channel_url">URL dei canali da consentire:</string>
     <string name="add">Aggiungi</string>
     <string name="block">Blocca</string>
     <string name="please_wait">Attendere prego…</string>
-    <string name="channel_already_whitelisted">Canale già aggiunto all\'elenco consentito.</string>
+    <string name="channel_already_whitelisted">Canale già aggiunto all\'elenco consentiti.</string>
     <string name="channel_whitelist_updated">Aggiorna i video per utilizzare il nuovo elenco di canali consentiti.</string>
-    <string name="channel_whitelist_update_failure">Impossibile aggiungere all\'elenco consentito il canale specificato.</string>
+    <string name="channel_whitelist_update_failure">Impossibile aggiungere all\'elenco consentiti il canale specificato.</string>
     <string name="channel_unwhitelist_success">Aggiorna i video per utilizzare il nuovo elenco di canali consentiti.</string>
     <string name="channel_unwhitelist_failure">Impossibile rimuovere i canali indicati dall\'elenco dei canali consentiti.</string>
     <string name="preferred_lang_updated">Ricarica i video per usare la nuova lingua.</string>
-    <string name="pref_title_lang_detection_video_filtering">Filtro lingua dei video</string>
+    <string name="pref_title_lang_detection_video_filtering">Filtro lingua video</string>
     <string name="pref_summary_lang_detection_video_filtering">Utilizza molte risorse per rilevare la lingua del video e bloccare le lingue non preferite.</string>
     <string name="setting_updated">Ricarica i video per usare la nuova impostazione.</string>
     <string name="pref_title_low_views_filter">Visualizzazioni</string>
@@ -109,65 +109,65 @@
     <string name="pref_privacy_category">Privacy</string>
     <string name="pref_title_disable_playback_status">Nessuno stato di riproduzione</string>
     <string name="pref_summary_disable_playback_status">Disattiva lo stato di riproduzione.</string>
-    <string name="pref_disable_playback_status_deleted">Stato di riproduzione cancellato.</string>
+    <string name="pref_disable_playback_status_deleted">Stato di riproduzione eliminato.</string>
     <string name="pref_title_clear_playback_status">Cancella stato di riproduzione</string>
-    <string name="pref_summary_clear_playback_status">Cancella lo stato di progressione per tutti i video.</string>
+    <string name="pref_summary_clear_playback_status">Cancella lo stato di avanzamento per tutti i video.</string>
     <string name="pref_playback_status_cleared">Stato di riproduzione cancellato.</string>
-    <string name="pref_category_downloads">Scaricamenti</string>
-    <string name="pref_title_download_to_separate_directories">Cartella download canale</string>
+    <string name="pref_category_downloads">Download</string>
+    <string name="pref_title_download_to_separate_directories">Cartella di download del canale</string>
     <string name="pref_summary_download_to_separate_directories">Salva i video in cartelle in base al nome del canale.</string>
-    <string name="pref_title_disable_screen_gestures">Disattivazione gesti</string>
-    <string name="pref_summary_disable_screen_gestures">Disattiva i gesti sullo schermo per volume, luminosità e l\'avanti/indietro dei video.</string>
-    <string name="pref_summary_enable_video_blocker">Blocco dei video.</string>
+    <string name="pref_title_disable_screen_gestures">Nessun gesto video</string>
+    <string name="pref_summary_disable_screen_gestures">Disattiva i gesti per controllare il volume, la luminosità e la ricerca avanti/indietro nei video.</string>
+    <string name="pref_summary_enable_video_blocker">Blocco video.</string>
     <string name="pref_summary_video_download_folder">I video vengono scaricati in: %s</string>
-    <string name="pref_title_video_download_folder">Cartella di scaricamento video</string>
+    <string name="pref_title_video_download_folder">Cartella di download dei video</string>
     <string name="pref_popup_title_video_download_folder">Scegli una cartella</string>
     <string name="pref_summary_use_newpipe_backend">Usa l\'API NewPipe per accedere a YouTube…</string>
     <string name="pref_title_use_newpipe_backend">Back-end NewPipe</string>
     <string name="pref_summary_switch_volume_and_brightness">Posiziona il controllo del volume a destra e la luminosità a sinistra.</string>
-    <string name="pref_title_switch_volume_and_brightness">Gesto di cambiamento di volume e di luminosità</string>
+    <string name="pref_title_switch_volume_and_brightness">Gesto di cambiamento volume e luminosità</string>
     <string name="pref_summary_enable_immersive_mode">Nascondi la barra di navigazione e la barra di stato durante la riproduzione.</string>
     <string name="pref_title_enable_immersive_mode">Modalità immersiva</string>
     <string name="pref_video_continuous_repeat_toggle">Ripetizione continua</string>
-    <string name="pref_hide_tabs_restart">Riavvia l\'app, usa queste schede.</string>
+    <string name="pref_hide_tabs_restart">Riavvia l\'app utilizzando queste schede.</string>
     <string name="pref_summary_hide_tabs">Scegli le schede da non mostrare. Riavvio richiesto.</string>
     <string name="pref_title_hide_tabs">Nascondi le schede</string>
-    <string name="pref_network_downloads_category">Rete e scaricamenti</string>
-    <string name="pref_summary_autocast">Dispositivo Chromecast per la riproduzione quando si utilizzano altre applicazioni per aprire i video in SkyTube.</string>
+    <string name="pref_network_downloads_category">Rete e download</string>
+    <string name="pref_summary_autocast">Dispositivo Chromecast per la riproduzione quando si utilizzano altre app video in SkyTube.</string>
     <string name="pref_title_autocast">AutoCast</string>
     <string name="pref_title_chromecast_none">Nessuno</string>
     <string name="pref_chromecast_category">Chromecast</string>
     <string name="key_preferences">preferenze</string>
     <string name="pref_category_metered_network">Connessione a consumo</string>
-    <string name="pref_summary_default_content_country">Mostra il contenuto destinato a questo paese: %s</string>
-    <string name="pref_title_default_content_country">Paese di contenuto predefinito</string>
+    <string name="pref_summary_default_content_country">Mostra contenuti destinati a questo paese: %s</string>
+    <string name="pref_title_default_content_country">Paese predefinito per i contenuti</string>
     <string name="pref_key_video_quality_for_downloads_summary">Ottimizza per: %s</string>
-    <string name="pref_key_video_quality_for_downloads_title">Selezione della qualità video per gli scaricamenti</string>
+    <string name="pref_key_video_quality_for_downloads_title">Selezione della qualità video per i download</string>
     <string name="pref_key_video_quality_metered_summary">Ottimizza per: %s</string>
     <string name="pref_key_video_quality_metered_title">Selezione della qualità video su rete a consumo</string>
     <string name="pref_key_video_quality_summary">Ottimizza per: %s</string>
     <string name="pref_key_video_quality_title">Selezione della qualità video</string>
-    <string name="pref_video_download_minimum_resolution_summary">I video scaricati saranno almeno in: %s</string>
-    <string name="pref_video_download_minimum_resolution_title">Risoluzione Minima Scaricamento Video</string>
-    <string name="pref_video_download_maximum_resolution_summary">I video scaricati saranno al massimo in %s</string>
-    <string name="pref_video_download_maximum_resolution_title">Risoluzione Massima Scaricamento Video</string>
-    <string name="pref_category_download_resolutions">Risoluzione video per lo scaricamento</string>
+    <string name="pref_video_download_minimum_resolution_summary">I video scaricati saranno minimo %s</string>
+    <string name="pref_video_download_minimum_resolution_title">Risoluzione più bassa per i download dei video</string>
+    <string name="pref_video_download_maximum_resolution_summary">I video scaricati saranno massimo %s</string>
+    <string name="pref_video_download_maximum_resolution_title">Risoluzione più alta per i download dei video</string>
+    <string name="pref_category_download_resolutions">Risoluzione video per i download</string>
     <string name="pref_category_video_resolutions">Risoluzione video</string>
     <string name="system_default_country">Sistema</string>
-    <string name="pref_summary_metered_network_usage">Cosa fare se stai usando una rete a consumo per scaricare/guardare video: %s</string>
-    <string name="pref_title_metered_network_usage">Uso della rete a consumo</string>
-    <string name="pref_summary_maximum_res_metered">Seleziona la tua risoluzione massima quando il flusso avviene tramite una rete a consumo: %s</string>
-    <string name="pref_title_maximum_res_metered">Risoluzione massima per la rete a consumo</string>
-    <string name="pref_summary_minimum_res_metered">Seleziona la tua risoluzione minima quando lo flusso avviene tramite una rete a consumo: %s</string>
+    <string name="pref_summary_metered_network_usage">Cosa fare se si utilizza una rete a consumo per scaricare/guardare video: %s</string>
+    <string name="pref_title_metered_network_usage">Utilizzo della rete a consumo</string>
+    <string name="pref_summary_maximum_res_metered">Seleziona la risoluzione più alta durante lo streaming tramite una rete a consumo: %s</string>
+    <string name="pref_title_maximum_res_metered">Risoluzione più alta per la rete a consumo</string>
+    <string name="pref_summary_minimum_res_metered">Seleziona la risoluzione più bassa durante lo streaming tramite una rete a consumo: %s</string>
     <string name="pref_title_minimum_res_metered">Risoluzione minima per la rete a consumo</string>
-    <string name="no_resolution_specified">Nessuna</string>
-    <string name="pref_summary_minimum_res">Seleziona la risoluzione minima: %s</string>
-    <string name="pref_title_minimum_res">Risoluzione minima</string>
-    <string name="pref_summary_maximum_res">Seleziona la risoluzione massima: %s</string>
-    <string name="pref_title_maximum_res">Risoluzione massima</string>
-    <string name="pref_key_use_newer_formats_summary">L\'audio e il video potrebbero avere problemi sulle vecchie versioni di Android non più supportate.</string>
+    <string name="no_resolution_specified">Nessuno</string>
+    <string name="pref_summary_minimum_res">Seleziona la risoluzione più bassa: %s</string>
+    <string name="pref_title_minimum_res">Risoluzione più bassa</string>
+    <string name="pref_summary_maximum_res">Seleziona la risoluzione più alta: %s</string>
+    <string name="pref_title_maximum_res">Risoluzione più alta</string>
+    <string name="pref_key_use_newer_formats_summary">L\'audio e il video potrebbero risentirne nelle vecchie versioni di Android senza supporto.</string>
     <string name="pref_key_use_newer_formats_title">Prova i formati video più recenti</string>
-    <string name="pref_title_enable_sponsorblock">Attiva SponsorBlock</string>
+    <string name="pref_title_enable_sponsorblock">Abilita SponsorBlock</string>
     <string name="pref_sponsorblock_category">SponsorBlock</string>
     <string name="pref_summary_open_issue">Suggerisci un\'idea o segnala un bug.</string>
     <string name="pref_title_use_dislike_api">Mostra il numero di \"Non mi piace\"</string>
@@ -176,9 +176,9 @@
     <string name="pref_summary_playback_speed">Velocità di riproduzione predefinita: %s</string>
     <string name="pref_summary_credit_sponsorblock">Utilizza i dati di SponsorBlock da https://sponsor.ajay.app</string>
     <string name="pref_summary_enable_sponsorblock">Salta automaticamente i segmenti video dedicati agli sponsor, promemoria d\'interazione e altro ancora</string>
-    <string name="pref_title_sponsorblock_category_list">Salta Segmenti</string>
+    <string name="pref_title_sponsorblock_category_list">Salta segmenti</string>
     <string name="pref_summary_sponsorblock_category_list">Scegli le categorie da saltare</string>
-    <string name="pref_title_credit_sponsorblock">Titoli di Coda</string>
+    <string name="pref_title_credit_sponsorblock">Riconoscimenti</string>
     <string name="pref_title_open_issue">Segnala problema</string>
     <string name="pref_general">Generale</string>
     <string name="pref_details">Dettagli</string>
