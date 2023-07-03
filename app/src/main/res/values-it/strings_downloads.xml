@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="downloads">Scaricamenti</string>
+    <string name="downloads">Download</string>
     <string name="download_video">Scarica video</string>
-    <string name="starting_video_download">Scaricamento di «%s»…</string>
-    <string name="video_download_stream_error">Impossibile scaricare «%s».</string>
-    <string name="delete_download">Elimina il download</string>
-    <string name="video_downloaded">«%s» scaricato.</string>
-    <string name="no_downloaded_videos_text">I video saranno visualizzati qui quando li avrai scaricati.</string>
-    <string name="playing_video_file_missing">Il download per questo video non è stato trovato. Riproduzione da remoto.</string>
-    <string name="external_storage_not_available">Permetti l\'accesso all\'archiviazione per scaricare il file.</string>
-    <string name="download">Scarica</string>
-    <string name="video_stream_not_found_with_request_resolution">Nessun flusso video trovato per la risoluzione richiesta tra %1$s e %2$s</string>
-    <string name="unable_to_delete_file">Impossibile eliminare il file scaricato: «%s».</string>
-    <string name="warning_metered_network_download">Sei connesso a una rete a consumo. Vuoi scaricare comunque il video\?</string>
+    <string name="starting_video_download">Download di \'%s\'…</string>
+    <string name="video_download_stream_error">Impossibile scaricare \'%s\'.</string>
+    <string name="delete_download">Elimina download</string>
+    <string name="video_downloaded">\'%s\' scaricato.</string>
+    <string name="no_downloaded_videos_text">Scarica alcuni video per trovarli qui.</string>
+    <string name="playing_video_file_missing">Riproduzione di video in remoto poiché non è stato possibile trovare alcun file scaricabile.</string>
+    <string name="external_storage_not_available">Concedi l\'accesso alla memoria esterna prima di scaricare il file.</string>
+    <string name="download">Download</string>
+    <string name="video_stream_not_found_with_request_resolution">Impossibile trovare un flusso video con la risoluzione richiesta %1$s-%2$s</string>
+    <string name="unable_to_delete_file">Impossibile eliminare il file scaricato0 \'%s\'.</string>
+    <string name="warning_metered_network_download">Scaricare video sulla rete a consumo a cui sei connesso\?</string>
     <string name="download_failed_because">Impossibile scaricare %1$s perché %2$s.</string>
 </resources>
