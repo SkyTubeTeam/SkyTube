@@ -10,19 +10,19 @@
     <string name="error_check_if_user_has_subbed">Impossibile verificare se sei iscritto al canale (id=%s)</string>
     <string name="error_unable_to_subscribe">Impossibile (dis)iscriversi al canale (id=%s)</string>
     <string name="import_subscriptions">Importa iscrizioni</string>
-    <string name="import_subscriptions_description">Visita https://takeout.google.com, deseleziona tutti i servizi tranne «YouTube e YouTube Music» e clicca su «Tutti i dati di YouTube inclusi» per selezionare solo gli abbonamenti. Clicca su «Avanti» e poi su «Crea un\'esportazione». Una volta che l\'esportazione è completa, viene visualizzata sulla pagina web su cui sei appena atterrato e riceverai un\'e-mail con un collegamento per lo scaricamento. Scarica il file ZIP ed estrai il file subscriptions.csv o subscriptions.json da esso (situato sotto /Takeout/YouTube and YouTube Music/subscriptions/). Poi, seleziona il file esportato cliccando su «Seleziona il file abbonamenti» qui sotto.</string>
+    <string name="import_subscriptions_description">Deseleziona tutto su https://takeout.google.com tranne \"YouTube e YouTube Music\" e fai clic su \"Tutti i dati di YouTube inclusi\" per ottenere solo le iscrizioni. Fai clic su \"Avanti\" e quindi su \"Crea esportazione\". Fai clic per ricevere un\'e-mail con un collegamento per il download. Scarica il file dal tuo client di posta elettronica. Seleziona questo file ZIP o estrailo e seleziona subscriptions.csv o subscriptions.json contenuto all\'interno (in /Takeout/YouTube e YouTube Music/subscriptions/) utilizzando \"Seleziona file iscrizione\" di seguito.</string>
     <string name="subscriptions_to_channels_imported">Importati %d canali.</string>
     <string name="select_all">Seleziona tutto</string>
     <string name="select_none">Deseleziona tutto</string>
-    <string name="no_channels_found">Non è stato trovato alcun canale YouTube nel file che hai caricato.</string>
+    <string name="no_channels_found">Impossibile trovare canali YouTube nel file che hai caricato.</string>
     <string name="no_new_channels_found">Non è stato trovato alcun canale Youtube a cui tu non sia già iscritto.</string>
     <string name="import_subscriptions_parse_error">Impossibile analizzare il file che hai caricato: %s.</string>
     <string name="failed_to_import_subscriptions">Impossibile importare le iscrizioni a YouTube.</string>
-    <string name="about">Informazioni</string>
+    <string name="about">Informazioni su</string>
     <string name="unsubscribe_from_all_current_sibbed_channels">Annulla l\'iscrizione da tutti i canali a cui sei attualmente iscritto.</string>
     <string name="channel_unsubscribed">Iscrizione canale annullata</string>
     <string name="channel_subscribe_failed">Impossibile iscriversi al canale</string>
     <string name="channel_already_subscribed">Già iscritto</string>
     <string name="channel_subscribed">Iscritto al canale</string>
-    <string name="select_sub_file">Seleziona il file abbonamenti</string>
+    <string name="select_sub_file">Seleziona il file iscrizioni</string>
 </resources>
