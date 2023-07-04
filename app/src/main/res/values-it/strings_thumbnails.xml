@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="thumbnail">Anteprima</string>
-    <string name="view_thumbnail">Visualizza anteprima</string>
+    <string name="thumbnail">Miniatura</string>
+    <string name="view_thumbnail">Visualizza miniatura</string>
     <string name="thumbnail_downloaded">Scaricata.</string>
-    <string name="thumbnail_download_error">Impossibile scaricare l\'anteprima.</string>
+    <string name="thumbnail_download_error">Impossibile scaricare la miniatura.</string>
 </resources>
