@@ -2,8 +2,8 @@
 <resources>
     <string name="error_stream_err_unavailable">Messaggio non disponibile.</string>
     <string name="error_stream_decryption_fail">Impossibile caricare il codice di decrittazione per il servizio YouTube.</string>
-    <string name="error_stream_parse_error">Errore durante l\'analisi.</string>
-    <string name="error_video_play">Errore durante la riproduzione</string>
+    <string name="error_stream_parse_error">Errore di analisi.</string>
+    <string name="error_video_play">Errore di riproduzione video</string>
     <string name="error_video_streams_empty">Il video \'%s\' non ha flussi.</string>
     <string name="error_video_streams">Impossibile recuperare i flussi video.</string>
     <string name="error_get_video_desc">Impossibile recuperare la descrizione del video.</string>
@@ -14,7 +14,7 @@
     <string name="open_in_browser">Apri nel browser web</string>
     <string name="open_with">Apri con…</string>
     <string name="share">Condividi</string>
-    <string name="share_via">Condividere tramite…</string>
+    <string name="share_via">Condividi tramite…</string>
     <string name="copy_url">Copia URL</string>
     <string name="url_copied_to_clipboard">URL copiato negli appunti.</string>
     <string name="error_get_comments">Impossibile recuperare i commenti.</string>
@@ -29,22 +29,22 @@
     <string name="mark_unwatched">Segna come Non visto</string>
     <string name="should_resume">Riprendere da dove ti sei fermato\?</string>
     <string name="resume">Riprendi</string>
-    <string name="play_video">Riproduci la video</string>
-    <string name="error_get_comments_no_network">Connettiti a Internet per recuperare i commenti.</string>
-    <string name="error_video_parse_error">Impossibile avviare la riproduzione del video: <br/> <br/> %s.</string>
-    <string name="error_downloaded_file_is_corrupted">Il video scaricato sembra <b>corrotto</b>: <br/> <br/> %s. <br/> <br/> Vuoi <b>eliminare</b> il file\?</string>
-    <string name="reload_video">Ricarica la video</string>
+    <string name="play_video">Riproduci video</string>
+    <string name="error_get_comments_no_network">Connettiti prima a Internet per recuperare i commenti.</string>
+    <string name="error_video_parse_error">Impossibile riprodurre il video: <br/> <br/> %s.</string>
+    <string name="error_downloaded_file_is_corrupted">Il video scaricato sembra <b>corrotto</b>: <br/> <br/> %s. <br/> <br/> <b>Eliminare</b> il file\?</string>
+    <string name="reload_video">Ricarica video</string>
     <string name="warning_metered_network_disable">Non chiedere mai più.</string>
     <string name="metered_network_blocked_by_policy">Scaricamento interrotto perché sei connesso tramite una rete a consumo.</string>
-    <string name="warning_metered_network_play">Connettiti prima a una rete illimitata per evitare addebiti per l\'utilizzo dei dati. Riprodurre comunque il video\?</string>
+    <string name="warning_metered_network_play">Connettiti prima a una rete illimitata per evitare addebiti per l\'utilizzo dei dati. Riproduco comunque il video\?</string>
     <string name="metered_network">Rete a consumo</string>
     <string name="sponsorblock_skipped">Segmento saltato: %s</string>
     <string name="sponsorblock_category_sponsor">Sponsor</string>
     <string name="sponsorblock_category_selfpromo">Autopromozione</string>
-    <string name="sponsorblock_category_interaction">Avviso di interazione</string>
+    <string name="sponsorblock_category_interaction">Promemoria di interazione</string>
     <string name="sponsorblock_category_music_offtopic">Sezione non musicale</string>
     <string name="sponsorblock_category_intro">Introduzione</string>
-    <string name="sponsorblock_category_outro">Conclusioni/Titoli di Coda</string>
-    <string name="sponsorblock_category_filler">Filler</string>
+    <string name="sponsorblock_category_outro">Titoli di coda/Riconoscimenti</string>
+    <string name="sponsorblock_category_filler">Riempimento</string>
     <string name="sponsorblock_category_preview">Anteprima/Riepilogo</string>
 </resources>
