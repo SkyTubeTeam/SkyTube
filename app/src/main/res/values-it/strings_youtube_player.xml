@@ -8,7 +8,7 @@
     <string name="error_video_streams">Impossibile recuperare i flussi video.</string>
     <string name="error_get_video_desc">Impossibile recuperare la descrizione del video.</string>
     <string name="error_invalid_url">URL video non valido: %s</string>
-    <string name="warning_live_video">Al momento non è possibile riprodurre video in diretta. Aprirlo in un\'altra app\?</string>
+    <string name="warning_live_video">Per ora è impossibile riprodurre video dal vivo. Aprire in un\'altra app\?</string>
     <string name="ratings_disabled">Valutazioni disattivate</string>
     <string name="loading_video">Caricamento video…</string>
     <string name="open_in_browser">Apri nel browser web</string>
@@ -25,8 +25,8 @@
     <string name="play">Riproduci</string>
     <string name="cancel">Annulla</string>
     <string name="clear">Cancella</string>
-    <string name="mark_watched">Segna come Guardato</string>
-    <string name="mark_unwatched">Segna come Non Guardato</string>
+    <string name="mark_watched">Segna come Visto</string>
+    <string name="mark_unwatched">Segna come Non visto</string>
     <string name="should_resume">Riprendere da dove ti sei fermato\?</string>
     <string name="resume">Riprendi</string>
     <string name="play_video">Riproduci la video</string>
