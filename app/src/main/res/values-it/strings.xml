@@ -5,8 +5,8 @@
     <string name="error">Errore</string>
     <string name="ok">OK</string>
     <string name="search_videos">Cerca video</string>
-    <string name="launch_offical_player_error">Impossibile avviare il player ufficiale di YouTube. Assicurati che sia installato.</string>
-    <string name="LIVE">In diretta</string>
+    <string name="launch_offical_player_error">Impossibile avviare il lettore ufficiale di YouTube. Assicurati che sia installato.</string>
+    <string name="LIVE">Dal vivo</string>
     <string name="featured">In primo piano</string>
     <string name="most_popular">Più popolari</string>
     <string name="video">Video</string>
@@ -18,10 +18,17 @@
     <string name="could_not_get_channel">Impossibile scaricare le informazioni sul canale.</string>
     <string name="yes">Sì</string>
     <string name="no">No</string>
-    <string name="search_channel">Cerca il canale</string>
+    <string name="search_channel">Cerca canale</string>
     <string name="close">Chiudi</string>
     <string name="could_not_get_channel_detailed">Impossibile scaricare le informazioni sul canale: %s.</string>
     <string name="trending_in">Tendenza (%s)</string>
-    <string name="recaptcha_challenge_requested">YouTube sospetta che tu sia un bot, quindi dovei prima risolvere un reCAPTCHA.</string>
+    <string name="recaptcha_challenge_requested">YouTube pensa che tu sia un bot, quindi devi prima risolvere un reCAPTCHA.</string>
     <string name="could_not_get_sponsorblock">Impossibile recuperare le informazioni di SponsorBlock: %s.</string>
+    <string name="cleaner">Pulisci video già visti</string>
+    <string name="cleaner_explanation">Pulisci i video aggiunti ai preferiti/scaricati. Utilizza le seguenti opzioni di filtro:</string>
+    <string name="cleaner_confirm">Pulisci</string>
+    <string name="cleaner_toast_finish">Abbiamo rimosso %s video dai segnalibri ed eliminato %sMB di video scaricati</string>
+    <string name="cleaner_watched_downloads">Rimuovi i download già visti</string>
+    <string name="cleaner_watched_bookmarks">Rimuovi i segnalibri già visti</string>
+    <string name="video_comments_are_disabled">Commenti video disattivati</string>
 </resources>
