@@ -88,6 +88,12 @@ public class NewPipeService {
             this.extractor = extractor;
         }
     }
+
+    @FunctionalInterface
+    interface ParserCall<X> {
+        X get() throws ParsingException;
+    }
+
     public NewPipeService(StreamingService streamingService, Settings settings) {
         this.streamingService = streamingService;
         this.settings = settings;
@@ -300,20 +306,25 @@ public class NewPipeService {
     }
 
     private YouTubeChannel createInternalChannel(ChannelExtractor extractor) throws ParsingException {
-        return new YouTubeChannel(extractor.getId(), extractor.getName(), NewPipeUtils.filterHtml(extractor.getDescription()),
-                extractor.getAvatarUrl(), extractor.getBannerUrl(), getSubscriberCount(extractor), false, 0, System.currentTimeMillis(), null);
+        return new YouTubeChannel(
+                extractor.getId(),
+                extractor.getName(),
+                NewPipeUtils.filterHtml(extractor.getDescription()),
+                callParser(() -> extractor.getAvatarUrl(), null),
+                callParser(() -> extractor.getBannerUrl(), null),
+                callParser(() -> extractor.getSubscriberCount(), -1L),
+                false,
+                0,
+                System.currentTimeMillis(),
+                null);
     }
 
-    /**
-     * @param extractor
-     * @return the subscriber count, or -1 if it's not available.
-     */
-    private long getSubscriberCount(ChannelExtractor extractor) {
+    private <X> X callParser(ParserCall<X> parser, X defaultValue) {
         try {
-            return extractor.getSubscriberCount();
-        } catch (NullPointerException | ParsingException  npe) {
-            Logger.e(this, "Unable to get subscriber count for " + extractor.getLinkHandler().getUrl() + " : "+ npe.getMessage(), npe);
-            return -1L;
+            return parser.get();
+        } catch (NullPointerException | ParsingException e) {
+            Logger.e(this, "Unable to parse: " + parser + ", error: " + e.getMessage(), e);
+            return defaultValue;
         }
     }
 
