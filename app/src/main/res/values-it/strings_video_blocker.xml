@@ -6,7 +6,7 @@
     <string name="block_channel">Blocca canale</string>
     <string name="channel_blacklisted">Aggiorna per utilizzare la nuova blacklist dei canali.</string>
     <string name="channel_blacklist_error">Impossibile inserire il canale nella blacklist.</string>
-    <string name="channel_unwhitelist_error">Impossibile rimuovere il canale dalla lista bianca.</string>
+    <string name="channel_unwhitelist_error">Impossibile rimuovere il canale dalla whitelist.</string>
     <string name="dislikes">%d%% non mi piace</string>
     <string name="add_to_permitted">Consenti canale</string>
 </resources>
