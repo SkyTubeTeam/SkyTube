@@ -140,7 +140,7 @@ dependencies {
     implementation 'com.github.moraisigor:slidingdrawer:1.7.1'
 
     // Image loading and caching library
-    def glideVersion = '4.12.0'
+    def glideVersion = '4.15.0'
     implementation "com.github.bumptech.glide:glide:$glideVersion"
     annotationProcessor "com.github.bumptech.glide:compiler:$glideVersion"
 
@@ -164,7 +164,7 @@ dependencies {
     implementation 'org.ocpsoft.prettytime:prettytime:5.0.1.Final'
 
     // Convert Java objects into JSON and back
-    implementation 'com.google.code.gson:gson:2.8.8'
+    implementation 'com.google.code.gson:gson:2.10.1'
 
     // YouTube modules
     implementation 'com.github.SkyTubeTeam.google-http-java-client:google-http-client-android:e726c5718d'
@@ -178,12 +178,12 @@ dependencies {
     // implementation 'com.github.TeamNewPipe.NewPipeExtractor:NewPipeExtractor:v0.22.6'
     implementation 'com.github.gzsombor.NewPipeExtractor:NewPipeExtractor:ad72319feb'
 
-    implementation ('com.github.SkyTubeTeam.components:okhttp-client:0.0.5') {
+    implementation ('com.github.SkyTubeTeam.components:okhttp-client:0.0.7') {
         exclude group: 'com.github.SkyTubeTeam.NewPipeExtractor', module: 'extractor'
     }
 
     // Java HTML parser
-    implementation "org.jsoup:jsoup:1.15.3"
+    implementation "org.jsoup:jsoup:1.15.4"
 
     // Language Detection Library for Java
     implementation('com.optimaize.languagedetector:language-detector:0.6') {
@@ -193,13 +193,14 @@ dependencies {
 
     // Reactive extensions for Java VM
     implementation 'com.github.SkyTubeTeam:RxAndroid:3.0.1.SkyTubeTeam'
+    // RxJava 3.1 needs API 21
     implementation 'io.reactivex.rxjava3:rxjava:3.0.13'
 
 
 /** Debug **/
     // debugImplementation because LeakCanary should only run in debug builds
     // Memory leak detection
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.7'
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.10'
 
 /** Flavor **/
     // Proprietary modules
@@ -211,7 +212,7 @@ dependencies {
 
 /** Testing **/
     // Required for local unit tests (JUnit 5 framework)
-    def junitVersion = '5.7.2'
+    def junitVersion = '5.9.2'
     testImplementation "org.junit.jupiter:junit-jupiter-api:$junitVersion"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
 }
