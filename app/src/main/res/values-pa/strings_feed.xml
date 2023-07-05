@@ -12,4 +12,5 @@
     <string name="import_subscriptions_from_youtube">YouTube ਤੋਂ ਸਬਸਕ੍ਰਿਪਸ਼ਨ ਆਯਾਤ ਕਰੋ</string>
     <string name="notification_channel_feed_title">ਫੀਡ ਸੂਚਨਾਵਾਂ</string>
     <string name="notification_new_videos_found">ਸਬਸਕ੍ਰਾਈਬ ਕੀਤੇ ਚੈਨਲਾਂ ਤੋਂ %d ਨਵੇਂ ਵੀਡੀਓ</string>
+    <string name="channel_related">ਚੈਨਲ...</string>
 </resources>
