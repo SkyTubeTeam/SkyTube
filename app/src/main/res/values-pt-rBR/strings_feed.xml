@@ -1,2 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="open_channel">Abrir canal</string>
+    <string name="subscribing_to_channels">Inscrevendo nos canais…</string>
+    <string name="fetching_subbed_channels_info_error">Não consegui obter informações do canal.</string>
+    <string name="fetched_videos_from_channels">Obteve vídeos %1$d dos canais %2$d/%3$d.</string>
+    <string name="no_new_videos_found">Não há vídeos novos.</string>
+    <string name="no_subscriptions_text">Inscreva-se em alguns canais para ver novos vídeos deles aqui.</string>
+    <string name="import_subscriptions_from_youtube">Importar assinaturas do YouTube</string>
+    <string name="notification_channel_feed_title">Feed de Notificações</string>
+    <string name="notification_new_videos_found">%d novos vídeos de canais inscritos</string>
+    <string name="channel_related">Canal...</string>
+    <string name="feed">Feed</string>
+    <string name="fetching_subscription_videos">Obtenção de vídeos de canais inscritos…</string>
+</resources>
