@@ -1,4 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="error_stream_err_unavailable">Mensagem indisponível.</string>
+    <string name="share">Compartilhe</string>
+    <string name="error_stream_decryption_fail">Não foi possível carregar descrição dos Servidores do Youtube.</string>
+    <string name="warning_metered_network_disable">Nunca pergunte novamente.</string>
+    <string name="metered_network">Rede de dados limitada</string>
+    <string name="metered_network_blocked_by_policy">Download bloqueado porque seus dados são de uma rede limitada.</string>
+    <string name="error_video_play">Erro ao reproduzir o Video</string>
+    <string name="play_video">Reproduzir Video</string>
+    <string name="warning_live_video">Não podemos reproduzir essa live agora. abrir em outro app\?</string>
+    <string name="open_with">abrir com…</string>
+    <string name="reload_video">Recarregar Video</string>
+    <string name="open_in_browser">abrir no navegador</string>
+    <string name="copy_url">Copiar URL</string>
+    <string name="url_copied_to_clipboard">URL copiada para área de Transferência.</string>
+    <string name="mark_watched">Marcar como assistido</string>
+    <string name="share_via">Compartilhar via…</string>
+    <string name="mark_unwatched">Marcar como não assistido</string>
+    <string name="enter_video_url">insira a URL do Video</string>
+    <string name="play">Reproduzir</string>
+    <string name="clear">Limpar</string>
+    <string name="resume">Retornar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="should_resume">Continuar de onde você parou\?</string>
+    <string name="sponsorblock_category_interaction">Lembrete de Interação</string>
+    <string name="sponsorblock_category_music_offtopic">Trecho sem música / Historinha</string>
+    <string name="sponsorblock_category_outro">Cartão de finalização / Créditos Finais</string>
+    <string name="sponsorblock_category_preview">Resumo / Recapitalização</string>
+    <string name="sponsorblock_category_filler">Enrolação</string>
 </resources>
