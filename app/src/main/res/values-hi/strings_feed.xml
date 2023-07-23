@@ -12,4 +12,5 @@
     <string name="notification_channel_feed_title">फ़ीड सूचनाएं</string>
     <string name="feed">फ़ीड</string>
     <string name="notification_new_videos_found">सब्स्क्राइब्ड चैनलों से %d नए वीडियो</string>
+    <string name="channel_related">चैनल..।</string>
 </resources>
