@@ -8,4 +8,5 @@
     <string name="channel_blacklist_error">ਚੈਨਲ ਨੂੰ ਬਲੈਕਲਿਸਟ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਿਆ।</string>
     <string name="channel_unwhitelist_error">ਚੈਨਲ ਨੂੰ ਵ੍ਹਾਈਟਲਿਸਟ ਵਿੱਚੋਂ ਹਟਾਇਆ ਨਹੀਂ ਜਾ ਸਕਿਆ।</string>
     <string name="dislikes">%d%% ਨਾਪਸੰਦ</string>
+    <string name="add_to_permitted">ਚੈਨਲ ਦੀ ਇਜਾਜ਼ਤ ਦਿਓ</string>
 </resources>
