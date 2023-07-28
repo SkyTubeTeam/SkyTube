@@ -23,12 +23,12 @@
     <string name="could_not_get_channel_detailed">Não foi possível baixar informações do canal: %s.</string>
     <string name="could_not_get_sponsorblock">Não foi possível recuperar as informações do SponsorBlock: %s.</string>
     <string name="recaptcha_challenge_requested">O YouTube acha que você é um robô, então você precisa resolver um reCAPTCHA primeiro.</string>
-    <string name="trending_in">Popular (%s)</string>
+    <string name="trending_in">Tendência (%s)</string>
     <string name="cleaner">Limpador de Vídeo Assistido</string>
     <string name="cleaner_confirm">Limpar</string>
     <string name="cleaner_explanation">Limpe os favoritos/vídeos baixados. Use as seguintes opções de filtro:</string>
     <string name="cleaner_toast_finish">Removemos %s vídeo(s) dos favoritos e excluímos %sMB de vídeos baixados</string>
     <string name="cleaner_watched_bookmarks">Remover favoritos assistidos</string>
     <string name="cleaner_watched_downloads">Remover vídeos baixados assistidos</string>
-    <string name="video_comments_are_disabled">Comentários do vídeo desligado</string>
+    <string name="video_comments_are_disabled">Comentários de vídeo desligado</string>
 </resources>
