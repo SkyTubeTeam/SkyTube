@@ -2,11 +2,11 @@
 <resources>
     <string name="import_subscriptions_description">Desmarque tudo em https://takeout.google.com, exceto \"YouTube e YouTube Music\", e clique em \"All YouTube data included\" para obter apenas as assinaturas. Clique em \"Next\" (Avançar) e, em seguida, em \"Create export\" (Criar exportação). Clique para receber um e-mail com um link de download. Baixe o arquivo em seu cliente de e-mail. Selecione esse arquivo ZIP ou extraia-o e selecione subscriptions.csv ou subscriptions.json contido nele (em /Takeout/YouTube e YouTube Music/subscriptions/) usando \"Select Subscription File\" (Selecionar arquivo de assinatura) abaixo.</string>
     <string name="subscriptions">Inscrições</string>
-    <string name="subscribe">Inscrito</string>
+    <string name="subscribe">Inscrever-se</string>
     <string name="unsubscribe">Desinscrever</string>
     <string name="total_subscribers">%,d Inscritos</string>
-    <string name="subscribed">Inscrever</string>
-    <string name="channel_subscribed">Canais inscrito</string>
+    <string name="subscribed">Inscrito</string>
+    <string name="channel_subscribed">Canal inscrito</string>
     <string name="channel_subscribe_failed">Não foi possível se inscrever no canal</string>
     <string name="unsubscribed">Desinscrever</string>
     <string name="error_get_subbed_channels">Não foi possível buscar assinaturas de canal.</string>
@@ -23,5 +23,5 @@
     <string name="import_subscriptions_parse_error">Não poderia analisar o arquivo que você enviou: %s.</string>
     <string name="failed_to_import_subscriptions">Não foi possível importar suas assinaturas do YouTube.</string>
     <string name="about">Sobre</string>
-    <string name="channel_already_subscribed">Já sou assinante</string>
+    <string name="channel_already_subscribed">Já sou inscrito</string>
 </resources>
