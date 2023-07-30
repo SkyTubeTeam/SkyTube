@@ -8,4 +8,7 @@
     <string name="pref_title_choose_player">Escolha um player de Video</string>
     <string name="pref_title_metered_network_usage">Uso de dados limitados</string>
     <string name="pref_import_export_category">Importar / Exportar</string>
+    <string name="preferences">Configurações</string>
+    <string name="key_preferences">Preferencias</string>
+    <string name="no_resolution_specified">Nenhuma resolução especificada</string>
 </resources>
