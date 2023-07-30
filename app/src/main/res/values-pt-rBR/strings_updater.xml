@@ -1,2 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="update_available">Nova versão disponível</string>
+    <string name="update">Atualizar</string>
+    <string name="downloading">Baixando…</string>
+    <string name="android_too_old">Sinto muito, seu Android é muito antigo para usar essa versão. Você precisa instalar manualmente o \"SkyTube Legado\"!</string>
+    <string name="update_dialog_msg">Uma nova versão de SkyTube está disponível. Versão %s está instalada.</string>
+    <string name="later">Depois</string>
+    <string name="release_notes">Notas da Versão %s</string>
+    <string name="up_to_date_msg">Você tem a última versão de SkyTube instalada.</string>
+    <string name="update_failure">Não consegui instalar a nova versão deste Aplicativo.</string>
+    <string name="up_to_date">Baixando dados</string>
+</resources>
