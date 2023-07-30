@@ -1,2 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="tutorial_slide_3">Deslize ← → para ir para frente ou para trás no video.</string>
+    <string name="tutorial_slide_5">Deslize ↑ ↓ para ajudar o brilho.</string>
+    <string name="tutorial_slide_6">Dois toques para pausar ou tocar um video.</string>
+    <string name="tutorial_slide_1">Deslize ← para ver comentários.</string>
+    <string name="skip">Pular</string>
+    <string name="done">Concluir</string>
+    <string name="tutorial_slide_2">Deslize ↑ para visualizar a descrição do video.</string>
+    <string name="next">Proximo</string>
+    <string name="page_counter">%1$d de %2$d</string>
+    <string name="tutorial_slide_4">Deslize ↑ ↓para ajudar o volume.</string>
+</resources>
