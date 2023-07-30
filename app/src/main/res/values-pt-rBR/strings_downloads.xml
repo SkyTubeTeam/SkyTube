@@ -4,4 +4,7 @@
     <string name="download">Download</string>
     <string name="external_storage_not_available">Permita acesso ao armazenamento externo para baixar o arquivo primeiro.</string>
     <string name="download_video">Baixar Vídeo</string>
+    <string name="warning_metered_network_download">Deseja baixa mesmo em uma rede limitada\?</string>
+    <string name="delete_download">Apagar Download</string>
+    <string name="video_downloaded">\'%s\' baixados.</string>
 </resources>
