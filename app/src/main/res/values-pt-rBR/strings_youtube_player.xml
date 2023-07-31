@@ -4,7 +4,7 @@
     <string name="error_stream_decryption_fail">Não foi possível carregar o código de descriptografia para o serviço do YouTube.</string>
     <string name="error_stream_parse_error">Erro de análise.</string>
     <string name="error_video_play">Erro de reprodução de vídeo</string>
-    <string name="error_video_streams">Não foi possível obter nenhum dos fluxos de vídeo.</string>
+    <string name="error_video_streams">Não foi possível obter nenhum dos fluxo de vídeo.</string>
     <string name="error_get_video_desc">Não foi possível obter a descrição do vídeo.</string>
     <string name="error_invalid_url">URL de vídeo inválido: %s</string>
     <string name="error_video_streams_empty">O vídeo \'%s\' não tem fluxos.</string>
