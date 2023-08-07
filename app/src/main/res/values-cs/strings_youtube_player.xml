@@ -1,2 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="error_invalid_url">Chybná adresa videa: %s</string>
+    <string name="metered_network">Zpoplatněné připojení</string>
+    <string name="warning_metered_network_disable">Příště se již neptat.</string>
+    <string name="metered_network_blocked_by_policy">Stahování blokováno protože jste připojeni přes zpoplatněné připojení.</string>
+    <string name="play_video">Přehrát video</string>
+    <string name="warning_live_video">Momentálně nelze přehrát živé přenosy. Otevřít v jiné aplikaci\?</string>
+    <string name="ratings_disabled">Hodnocení vypnuto</string>
+    <string name="loading_video">Načítání videa…</string>
+    <string name="reload_video">Znovu načíst video</string>
+    <string name="open_in_browser">Otevřít ve webovém prohlížeči</string>
+    <string name="open_with">Otevřít v…</string>
+    <string name="share">Sdílet</string>
+    <string name="share_via">Sdílet ve…</string>
+    <string name="copy_url">Kopírovat URL adresu</string>
+    <string name="url_copied_to_clipboard">URL adresa zkopírována do schránky.</string>
+    <string name="mark_unwatched">Označit jako nepřehrané</string>
+    <string name="error_get_comments">Nelze načíst komentáře.</string>
+    <string name="no_video_comments">Toto video nemá žádné komentáře nebo nejsou povoleny.</string>
+    <string name="view_replies">Zobrazit odpovědi</string>
+    <string name="enter_video_url">Vložte URL adresu videa</string>
+    <string name="play">Přehrát</string>
+    <string name="clear">Vymaž</string>
+    <string name="resume">Obnovit</string>
+    <string name="sponsorblock_skipped">Přeskočený segment: %s</string>
+    <string name="sponsorblock_category_sponsor">Sponsor</string>
+    <string name="sponsorblock_category_selfpromo">Vlastní propagace</string>
+    <string name="sponsorblock_category_music_offtopic">Nehudební sekce</string>
+    <string name="sponsorblock_category_outro">Outro/titulky</string>
+    <string name="sponsorblock_category_preview">Náhled/rekapitulace</string>
+    <string name="sponsorblock_category_filler">Výplň</string>
+    <string name="error_video_streams_empty">Stream videa \'%s\' neni dostupný.</string>
+    <string name="error_stream_err_unavailable">Nedostupná zpráva.</string>
+    <string name="error_stream_decryption_fail">Nepodařilo se načíst dekódovací kód pro služby YouTube.</string>
+    <string name="error_stream_parse_error">Chyba zpracování.</string>
+    <string name="error_video_play">Chyba přehrávání videa</string>
+    <string name="error_video_streams">Nepodařilo se načíst žádný z video streamu.</string>
+    <string name="error_get_video_desc">Nepodařilo se načíst popis videa.</string>
+    <string name="error_downloaded_file_is_corrupted">Stažené video vypadá <b>poskozeno</b>: <br/> <br/> %s. <br/> <br/> <b>Smazat</b> soubor\?</string>
+    <string name="hide_replies">Skrýt odpovědi</string>
+    <string name="cancel">Zrušit</string>
+    <string name="should_resume">Pokračovat od bodu, kde jste skončili\?</string>
+    <string name="sponsorblock_category_intro">Intro/přestávka</string>
+    <string name="error_video_parse_error">Nelze spustit video: <br/> <br/> %s.</string>
+    <string name="warning_metered_network_play">Připojte se k nezpoplatněné sítí aby jste se vyhnuli poplatkům za data. Chcete přesto přehrát video\?</string>
+    <string name="mark_watched">Označit jako přehrané</string>
+    <string name="error_get_comments_no_network">Připojte se k internetu aby bylo možné načíst komentáře.</string>
+</resources>
