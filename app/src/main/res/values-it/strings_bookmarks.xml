@@ -3,12 +3,12 @@
     <string name="bookmarks">Segnalibri</string>
     <string name="bookmark">Segnalibro</string>
     <string name="video_bookmarked">Aggiunto ai segnalibri</string>
-    <string name="video_bookmarked_error">Impossibile aggiungere segnalibro.</string>
+    <string name="video_bookmarked_error">Impossibile aggiungere il video ai segnalibri.</string>
     <string name="unbookmark">Elimina segnalibro</string>
-    <string name="video_unbookmarked">Segnalibro eliminato</string>
-    <string name="video_unbookmarked_error">Impossibile eliminare il segnalibro.</string>
-    <string name="no_bookmarked_videos_text">I segnalibri verranno visualizzati qui quando saranno aggiunti.</string>
-    <string name="bookmark_share_invalid_url">Solo gli URL di YouTube validi possono essere aggiunti ai segnalibri.</string>
+    <string name="video_unbookmarked">Segnalibro rimosso</string>
+    <string name="video_unbookmarked_error">Impossibile rimuovere il segnalibro video.</string>
+    <string name="no_bookmarked_videos_text">Aggiungi alcuni video ai segnalibri per trovarli qui.</string>
+    <string name="bookmark_share_invalid_url">Solo gli URL validi di YouTube possono essere aggiunti ai segnalibri.</string>
     <string name="bookmark_share_label">Segnalibro SkyTube</string>
     <string name="video_was_not_bookmarked">Il video non è stato aggiunto ai segnalibri</string>
     <string name="video_already_bookmarked">Già aggiunto ai segnalibri</string>

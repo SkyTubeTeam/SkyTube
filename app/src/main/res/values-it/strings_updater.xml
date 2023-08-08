@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="update_available">Nuova versione disponibile</string>
-    <string name="update_dialog_msg">È disponibile una nuova versione di SkyTube. La versione %s verrà installata.</string>
+    <string name="update_dialog_msg">È disponibile una nuova versione di SkyTube. Verrà installata la versione %s.</string>
     <string name="up_to_date">Aggiornato</string>
-    <string name="up_to_date_msg">L\'ultima versione di SkyTube è già installata.</string>
+    <string name="up_to_date_msg">Hai installato la versione più recente di SkyTube.</string>
     <string name="update">Aggiorna</string>
     <string name="later">Più tardi</string>
     <string name="update_failure">Impossibile installare la nuova versione dell\'app.</string>
     <string name="downloading">Scaricamento…</string>
     <string name="release_notes">Modifiche in %s</string>
-    <string name="android_too_old">Purtroppo la tua versione di Android è troppo vecchia per l\'aggiornamento. Devi installare manualmente \"SkyTube Legacy\"!</string>
+    <string name="android_too_old">Sfortunatamente, la tua versione di Android è troppo vecchia per essere aggiornata. Devi installare manualmente \"SkyTube Legacy\"!</string>
 </resources>

@@ -8,4 +8,5 @@
     <string name="configure">Einrichten</string>
     <string name="no_videos_blocked">Möchten Sie den Videblocker einrichten, um Videos zu blocken oder herauszufiltern\?</string>
     <string name="blocked_videos">Blockierte Videos</string>
+    <string name="add_to_permitted">Kanal erlauben</string>
 </resources>
