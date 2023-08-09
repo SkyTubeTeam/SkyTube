@@ -10,7 +10,7 @@
     <string name="error_check_if_user_has_subbed">チャンネルをサブスクライブしているか確認できませんでした (id=%s)</string>
     <string name="error_unable_to_subscribe">チャネルをサブスクライブ (または解除) できませんでした (id=%s)</string>
     <string name="import_subscriptions">サブスクリプションをインポート</string>
-    <string name="import_subscriptions_description">https://takeout.google.com 上で「YouTube と YouTube Music」以外のすべての選択を解除し、「YouTubeのすべてのデータが含まれます」をクリックして、登録チャンネルだけを取得します。「次のステップ」をクリックし、「エクスポートを作成」をクリックします。クリックすると、ダウンロードリンクの記載されたメールが届きます。メールクライアントからファイルをダウンロードし、展開します。subscriptions.json ( /Takeout/YouTube と YouTube Music/登録チャンネル/ の中)を、下部の「サブスクリプションファイルの選択」からSkyTubeにインポートします。</string>
+    <string name="import_subscriptions_description">https://takeout.google.com 上で「YouTube と YouTube Music」以外のすべての選択を解除し、「YouTubeのすべてのデータが含まれます」をクリックして、登録チャンネルだけを取得します。「次のステップ」をクリックし、「エクスポートを作成」をクリックします。クリックすると、ダウンロードリンクの記載されたメールが届きます。メールクライアントからファイルをダウンロードします。そのzipファイル、または展開して出てくる subscriptions.csv 、または subscriptions.json ( /Takeout/YouTube と YouTube Music/登録チャンネル/ の中 )を、下部の「サブスクリプションファイルの選択」から選択します。</string>
     <string name="subscriptions_to_channels_imported">%d チャンネルをインポートしました。</string>
     <string name="select_all">すべて選択</string>
     <string name="select_none">全解除</string>
