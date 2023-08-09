@@ -9,4 +9,5 @@
     <string name="update_failure">新しいバージョンのアプリをインストールできませんでした。</string>
     <string name="downloading">ダウンロードしています…</string>
     <string name="release_notes">%sの変更点</string>
+    <string name="android_too_old">残念ながら、あなたの Android が古すぎて更新できません。手動で SkyTube Legacy をインストールする必要があります！</string>
 </resources>
