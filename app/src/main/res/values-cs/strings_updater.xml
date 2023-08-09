@@ -1,2 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="up_to_date">Aktuální</string>
+    <string name="release_notes">Změny ve verzi %s</string>
+    <string name="later">Později</string>
+    <string name="update_failure">Nepodařilo se nainstalovat novou verzi aplikace.</string>
+    <string name="downloading">Stahuji…</string>
+    <string name="android_too_old">Bohužel vaše verze Androidu je příliš stará pro aktualizaci aplikace. Budete muset ručně nainstalovat variantu \'SkyTube Legacy\'!</string>
+    <string name="update_dialog_msg">Je dostupná nová verze SkyTube %s, která bude instalována.</string>
+    <string name="up_to_date_msg">Máte nainstalovanou nejnovější verzi SkyTube.</string>
+    <string name="update">Aktualizovat</string>
+    <string name="update_available">Je dostupná nová verze</string>
+</resources>
