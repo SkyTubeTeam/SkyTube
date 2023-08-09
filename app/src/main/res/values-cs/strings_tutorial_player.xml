@@ -1,2 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="next">Další</string>
+    <string name="done">Hotovo</string>
+    <string name="skip">Přeskočit</string>
+    <string name="page_counter">%1$d z %2$d</string>
+    <string name="tutorial_slide_1">Posuňte ← aby jste viděli komentáře.</string>
+    <string name="tutorial_slide_2">Posuňte ↑ aby jste viděli popis videa.</string>
+    <string name="tutorial_slide_3">Posuňte ← → pro přeskakování vpřed či vzad.</string>
+    <string name="tutorial_slide_4">Posuňte ↑ ↓ pro změnu hlasitosti.</string>
+    <string name="tutorial_slide_5">Posuňte ↑ ↓ pro změnu jasu.</string>
+    <string name="tutorial_slide_6">Dvakrát poklepejte pro pozastavení či přehrávání videa.</string>
+</resources>
