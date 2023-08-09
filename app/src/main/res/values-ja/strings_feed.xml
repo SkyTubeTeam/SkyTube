@@ -12,4 +12,5 @@
     <string name="notification_channel_feed_title">フィードの通知</string>
     <string name="notification_new_videos_found">登録チャンネルから %d 本の新しいビデオ</string>
     <string name="open_channel">チャンネルを開く</string>
+    <string name="channel_related">チャンネル…</string>
 </resources>
