@@ -1,2 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="configure">Nastavit</string>
+    <string name="dislikes">%d%% neoblíbeno</string>
+    <string name="channel_unwhitelist_error">Nepodařilo se kanál odstranit ze seznamu povolených.</string>
+    <string name="add_to_permitted">Povolit kanál</string>
+    <string name="blocked_videos">Blokována videa</string>
+    <string name="block_channel">Blokovat kanal</string>
+    <string name="no_videos_blocked">Chcete nastavit blokování videí pro blokování či filtrování videí\?</string>
+    <string name="channel_blacklisted">Obnovit pro použití nového seznamu blokovaných kanálů.</string>
+    <string name="channel_blacklist_error">Kanál se nepodařilo zablokovat.</string>
+</resources>
