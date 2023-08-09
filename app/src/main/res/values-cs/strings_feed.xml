@@ -1,2 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="feed">Doporučení</string>
+    <string name="import_subscriptions_from_youtube">Importovat odběry z YouTube</string>
+    <string name="channel_related">Kanál...</string>
+    <string name="subscribing_to_channels">Přihlašují k odběru kanálu…</string>
+    <string name="open_channel">Otevřít kanál</string>
+    <string name="fetching_subbed_channels_info">Získávám informace o kanálu…</string>
+    <string name="fetching_subbed_channels_info_error">Nepodařilo se získat informace o kanálu.</string>
+    <string name="fetching_subscription_videos">Získávám videa z odebíraných kanálu…</string>
+    <string name="fetched_videos_from_channels">Nalezeno %1$d videí ze%2$d/%3$d kanálu.</string>
+    <string name="no_new_videos_found">Žádná nová videa.</string>
+    <string name="no_subscriptions_text">Přihlaste se k odběru nějakých kanálů aby jste zde viděli jejich čerstvá videa.</string>
+    <string name="notification_channel_feed_title">Upozornění na doporučená</string>
+    <string name="notification_new_videos_found">%d nových videí z odebíraných kanálu</string>
+</resources>
