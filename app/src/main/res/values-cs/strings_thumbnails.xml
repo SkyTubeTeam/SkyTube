@@ -1,2 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="thumbnail">Náhled</string>
+    <string name="view_thumbnail">Ukázat náhled</string>
+    <string name="thumbnail_downloaded">Staženo.</string>
+    <string name="thumbnail_download_error">Nepodařilo se stáhnout náhled.</string>
+</resources>
