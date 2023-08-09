@@ -162,4 +162,12 @@
     <string name="pref_summary_dislikes_filter">Skrýt videa s vysokou neoblíbenosti: %s</string>
     <string name="pref_summary_disable_playback_status">Vypne zobrazení stavu přehrávání.</string>
     <string name="pref_title_clear_playback_status">Vymazat stav přehrávání</string>
+    <string name="pref_title_license">Copylefted Libre Licence</string>
+    <string name="pref_title_feed_notification">Automatická upozornění doporučení</string>
+    <string name="pref_title_enable_immersive_mode">imerzivní režim</string>
+    <string name="pref_title_use_newpipe_backend">NewPipe back-end</string>
+    <string name="pref_title_credit_sponsorblock">Závěrečné titulky</string>
+    <string name="pref_summary_metered_network_usage">Co dělat pokud je při sledování/stahování videí používáno placené připojení: %s</string>
+    <string name="pref_title_autocast">AutoCast</string>
+    <string name="pref_summary_enable_sponsorblock">Automatické přeskakování reklamních segmentů, interaktivních připomínek a další</string>
 </resources>
