@@ -24,4 +24,11 @@
     <string name="could_not_get_channel">Não foi possível descarregar as informações do canal.</string>
     <string name="could_not_get_videos">Não foi possível carregar %s vídeos.</string>
     <string name="could_not_get_sponsorblock">Não foi possível recuperar informações do SponsorBlock: %s.</string>
+    <string name="cleaner">Limpador de Videos Assistidos</string>
+    <string name="cleaner_explanation">"Limpe vídeos marcados/baixados.  Use as seguintes opções de filtro:"</string>
+    <string name="cleaner_confirm">Limpar</string>
+    <string name="cleaner_watched_downloads">Remover downloads assistidos</string>
+    <string name="cleaner_watched_bookmarks">Remover favoritos assistidos</string>
+    <string name="video_comments_are_disabled">Comentários do vídeo desativados</string>
+    <string name="cleaner_toast_finish">Removemos %s vídeo(s) dos favoritos e excluímos %sMB de vídeos baixados</string>
 </resources>

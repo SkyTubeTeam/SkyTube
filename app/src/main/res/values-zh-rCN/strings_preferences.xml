@@ -35,7 +35,7 @@
     <string name="pref_title_preferred_languages">首选语言</string>
     <string name="pref_title_preferred_regions">首先区域</string>
     <string name="pref_languages_filter_category">语言和区域过滤器</string>
-    <string name="channel_unwhitelist_failure">频道移除白名单失败……</string>
+    <string name="channel_unwhitelist_failure">未能从频道白名单列表中移除给定的一个或多个频道</string>
     <string name="channel_whitelist_updated">刷新视频以使用新的频道白名单。</string>
     <string name="channel_unwhitelist_success">刷新视频以使用新的频道白名单。</string>
     <string name="channel_whitelist_update_failure">无法将给定频道列入白名单。</string>

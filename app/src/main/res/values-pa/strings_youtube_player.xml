@@ -24,7 +24,7 @@
     <string name="open_with">ਨਾਲ ਖੋਲੋ…</string>
     <string name="share">ਸਾਝਾਂ ਕਰੋ</string>
     <string name="url_copied_to_clipboard">URL ਕਲਿੱਪਬੋਰਡ ਤੇ ਕਾਪੀ ਹੋਈ।</string>
-    <string name="share_via">Share via…</string>
+    <string name="share_via">ਸ਼ੇਅਰ ਵਾਇਆ…</string>
     <string name="error_get_comments_no_network">ਟਿੱਪਣੀਆਂ ਪ੍ਰਾਪਤ ਕਰਨ ਲਈ ਪਹਿਲਾਂ ਇੰਟਰਨੈਟ ਨਾਲ ਜੁੜੋ।</string>
     <string name="copy_url">URL ਕਾਪੀ ਕਰੋ</string>
     <string name="mark_watched">ਦੇਖਿਆ ਮਾਰਕ ਕਰੋ</string>
@@ -36,4 +36,15 @@
     <string name="error_get_comments">ਟਿੱਪਣੀਆਂ ਪ੍ਰਾਪਤ ਨਹੀਂ ਕੀਤੀਆਂ ਜਾ ਸਕੀਆਂ।</string>
     <string name="enter_video_url">ਵੀਡੀਓ URL ਦਾਖਲ ਕਰੋ</string>
     <string name="cancel">ਰੱਦ ਕਰੋ</string>
+    <string name="resume">ਮੁੜ- ਸ਼ੁਰੂ ਕਰੋ</string>
+    <string name="sponsorblock_skipped">ਛੱਡਿਆ ਸੈਗਮੈਂਟ: %s</string>
+    <string name="sponsorblock_category_intro">ਜਾਣ-ਪਛਾਣ/ਇੰਟਰਮਿਸ਼ਨ</string>
+    <string name="sponsorblock_category_selfpromo">ਸਵੈ-ਪ੍ਰਚਾਰ</string>
+    <string name="sponsorblock_category_music_offtopic">ਗ਼ੈਰ-ਸੰਗੀਤ ਸੈਕਸ਼ਨ</string>
+    <string name="sponsorblock_category_preview">ਝਲਕ/ ਰੀਕੈਪ</string>
+    <string name="sponsorblock_category_filler">ਭਰਨ ਵਾਲਾ</string>
+    <string name="sponsorblock_category_sponsor">ਸਪਾਂਸਰ</string>
+    <string name="sponsorblock_category_interaction">ਇੰਟਰੈਕਸ਼ਨ ਰਿਮਾਈਂਡਰ</string>
+    <string name="sponsorblock_category_outro">ਇੰਡਕਾਰਡ/ਕ੍ਰੈਡਿਟ</string>
+    <string name="should_resume">ਓਥੋਂ ਜਾਰੀ ਰੱਖਣਾ ਹੈ ਜਿੱਥੋਂ ਤੁਸੀਂ ਰੁਕੇ ਸੀ\?</string>
 </resources>

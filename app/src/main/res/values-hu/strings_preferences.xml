@@ -120,7 +120,7 @@
     <string name="pref_title_lang_detection_video_filtering">Videó nyelvi szűrő</string>
     <string name="no_preferred_lang_selected">Nincs előnyben részesített nyelv kiválasztva.</string>
     <string name="channel_unwhitelist_failure">Nem sikerült a megadott csatorna eltávolítása a csatornaengedélyezési listáról</string>
-    <string name="channel_unwhitelist_success">Frissítse a videókat az új csatornaengedélyezési lista használatához.</string>
+    <string name="channel_unwhitelist_success">Frissítse a videókat az új engedélyezett csatornalista használatához.</string>
     <string name="channel_whitelist_update_failure">Nem sikerült hozzáadni az engedélyezési listához az adott csatornát.</string>
     <string name="channel_whitelist_updated">Frissítse a videókat az új csatornaengedélyezési lista használatához.</string>
     <string name="please_wait">Kérem várjon…</string>

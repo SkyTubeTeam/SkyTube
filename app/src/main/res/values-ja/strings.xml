@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="could_not_get_videos">%s のビデオを取得できませんでした。</string>
-    <string name="views">%,d ビュー</string>
+    <string name="views">%,d 回再生</string>
     <string name="error">エラー</string>
     <string name="ok">OK</string>
     <string name="search_videos">ビデオを検索</string>
@@ -23,4 +23,12 @@
     <string name="could_not_get_channel_detailed">チャンネル情報をダウンロードできませんでした。: %s</string>
     <string name="recaptcha_challenge_requested">YouTube があなたをロボットだと思っています。reCAPTHCA を解いてください。</string>
     <string name="trending_in">トレンド (%s)</string>
+    <string name="could_not_get_sponsorblock">スポンサーブロック情報を取得できませんでした。: %s</string>
+    <string name="cleaner">視聴済みビデオクリーナー</string>
+    <string name="cleaner_explanation">ブックマーク済み・ダウンロード済みの動画を削除します。以下のフィルタオプションを使用してください。</string>
+    <string name="cleaner_confirm">削除</string>
+    <string name="cleaner_toast_finish">%s 本の動画をブックマークから削除し、%s MB のダウンロード済み動画を削除しました</string>
+    <string name="cleaner_watched_bookmarks">視聴済みのブックマークを削除</string>
+    <string name="cleaner_watched_downloads">視聴済みのダウンロード動画を削除</string>
+    <string name="video_comments_are_disabled">動画コメントオフ</string>
 </resources>

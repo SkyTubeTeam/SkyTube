@@ -7,13 +7,11 @@
     <string name="video_download_stream_error">Не удалось скачать \'%s\'.</string>
     <string name="delete_download">Удалить загрузку</string>
     <string name="video_downloaded">\'%s\' загружено.</string>
-    <string name="no_downloaded_videos_text">Нет скачанных видео.
-\n
-\n Как только вы скачаете какие либо видео, они появятся здесь.</string>
-    <string name="playing_video_file_missing">Видео загружено с сервера, поскольку скачанный файл не найден.</string>
-    <string name="external_storage_not_available">Предоставьте доступ к внешнему накопителю для загрузки.</string>
-    <string name="video_stream_not_found_with_request_resolution">Не найден видеопоток для запрошенного разрешения между %1$s и %2$s</string>
-    <string name="download_failed_because">Не удалось скачать %1$s из-за: %2$s.</string>
-    <string name="unable_to_delete_file">Невозможно удалить скачанный файл: \'%s\'</string>
-    <string name="warning_metered_network_download">Ваше устройство подключено к лимитированной сети. Для избежания доп. затрат, рекомендуется подключиться к безлимитной сети. Вы уверены что хотите скачать видео\?</string>
+    <string name="no_downloaded_videos_text">Загрузите видео, что бы найти их здесь.</string>
+    <string name="playing_video_file_missing">Видео проигрывается удаленно, так как загруженный файл невозможно найти.</string>
+    <string name="external_storage_not_available">Предоставьте доступ к внешнему хранилищу перед тем как скачать файл.</string>
+    <string name="video_stream_not_found_with_request_resolution">Не найден видеопоток для запрошенного разрешения %1$s-%2$s</string>
+    <string name="download_failed_because">Не удалось скачать %1$s из-за %2$s.</string>
+    <string name="unable_to_delete_file">Невозможно удалить загруженный файл:\'%s\'</string>
+    <string name="warning_metered_network_download">Скачать видео из сети с ограниченным доступом\?</string>
 </resources>

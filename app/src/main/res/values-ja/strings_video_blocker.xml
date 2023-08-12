@@ -8,4 +8,5 @@
     <string name="channel_unwhitelist_error">チャンネルをホワイトリストから削除できませんでした。</string>
     <string name="channel_blacklist_error">チャンネルをブロックできませんでした。</string>
     <string name="channel_blacklisted">チャンネルの新しいブロックリストを使用するには更新してください。</string>
+    <string name="add_to_permitted">チャンネルを許可</string>
 </resources>
