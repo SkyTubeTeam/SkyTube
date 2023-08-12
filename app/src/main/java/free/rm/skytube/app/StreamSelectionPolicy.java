@@ -165,7 +165,7 @@ public class StreamSelectionPolicy {
         VideoStreamWithResolution best = null;
         for (VideoStream stream : streams) {
             VideoStreamWithResolution videoStream = new VideoStreamWithResolution(stream);
-            if (isAllowed(videoStream.resolution) && isAllowedVideoFormat(videoStream.videoStream.getFormat())) {
+            if (isAllowed(videoStream.resolution) && isAllowedVideoFormat(videoStream.videoStream.getFormat()) && stream.isUrl()) {
                 switch (videoQuality) {
                     case BEST_QUALITY:
                         if (videoStream.isBetterQualityThan(best)) {
