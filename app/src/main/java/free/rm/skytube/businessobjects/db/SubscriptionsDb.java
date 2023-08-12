@@ -38,6 +38,7 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -425,7 +426,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 							cursor.getString(colDescription), cursor.getString(colThumbnail),
 							cursor.getString(colBanner), cursor.getLong(colSubscribers), true, cursor.getLong(colLastVisit),
 							cursor.getLong(colLastCheck),
-							categoryId));
+							categoryId, Collections.emptyList()));
 				} while (cursor.moveToNext());
 			}
 			return subsChannels;
@@ -464,7 +465,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 						cursor.getString(colDescription), cursor.getString(colThumbnail),
 						cursor.getString(colBanner), cursor.getLong(colSubscribers), true,
 						cursor.getLong(colLastVisit), cursor.getLong(colLastCheck),
-						categoryId);
+						categoryId, Collections.emptyList());
 
 			}
 
@@ -767,7 +768,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 				String banner = cursor.getString(cursor.getColumnIndexOrThrow(LocalChannelTable.COL_BANNER_URL));
 				long subscriberCount = cursor.getLong(cursor.getColumnIndexOrThrow(LocalChannelTable.COL_SUBSCRIBER_COUNT));
 				long lastCheckTs = cursor.getLong(cursor.getColumnIndexOrThrow(LocalChannelTable.COL_LAST_CHECK_TS));
-				return new YouTubeChannel(channelId, title, description, thumbnail, banner, subscriberCount, false, -1, lastCheckTs, null);
+				return new YouTubeChannel(channelId, title, description, thumbnail, banner, subscriberCount, false, -1, lastCheckTs, null, Collections.emptyList());
 			}
 		}
 		return null;

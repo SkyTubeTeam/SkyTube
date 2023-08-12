@@ -27,6 +27,7 @@ import org.schabi.newpipe.extractor.services.youtube.linkHandler.YoutubeChannelL
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import free.rm.skytube.R;
@@ -57,17 +58,21 @@ public class YouTubeChannel extends CardData implements Serializable {
 	private long    lastVideoTime;
 	private Integer categoryId;
 	private final List<YouTubeVideo> youTubeVideos = new ArrayList<>();
+	private final List<String> tags;
 
-	public YouTubeChannel() { }
+	public YouTubeChannel() {
+		tags = Collections.emptyList();
+	}
 
 	public YouTubeChannel(String id, String title) {
+		this();
 		this.id = id;
 		this.title = title;
 	}
 
 	public YouTubeChannel(String id, String title, String description, String thumbnailUrl,
 						  String bannerUrl, long subscriberCount, boolean isUserSubscribed, long lastVisitTime, long lastCheckTime,
-						  Integer categoryId) {
+						  Integer categoryId, List<String> tags) {
 		this.id = id;
 		this.title = title;
 		this.description = description;
@@ -79,6 +84,7 @@ public class YouTubeChannel extends CardData implements Serializable {
 		this.lastVisitTime = lastVisitTime;
 		this.lastCheckTime = lastCheckTime;
 		this.categoryId = categoryId;
+		this.tags = tags;
 	}
 
 	private static String getFormattedSubscribers(long subscriberCount) {
@@ -132,10 +138,9 @@ public class YouTubeChannel extends CardData implements Serializable {
 		return lastVideoTime;
 	}
 
-	public void setLastVideoTime(long lastVideoTime) {
-		this.lastVideoTime = lastVideoTime;
+	public List<String> getTags() {
+		return tags;
 	}
-
 
 	public void addYouTubeVideo(YouTubeVideo video) {
 		if(!youTubeVideos.contains(video)) {

@@ -26,6 +26,7 @@ import org.schabi.newpipe.extractor.playlist.PlaylistInfoItem;
 import org.schabi.newpipe.extractor.stream.StreamInfoItem;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -117,7 +118,7 @@ public class VideoPager extends Pager<InfoItem, CardData> {
         String url = channelInfoItem.getUrl();
         String id = getId(url);
         return new YouTubeChannel(id, channelInfoItem.getName(), channelInfoItem.getDescription(), channelInfoItem.getThumbnailUrl(), null,
-                channelInfoItem.getSubscriberCount(), false, -1, System.currentTimeMillis(), null);
+                channelInfoItem.getSubscriberCount(), false, -1, System.currentTimeMillis(), null, Collections.emptyList());
     }
 
     private String getId(String url) {
