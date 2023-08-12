@@ -18,8 +18,11 @@ package free.rm.skytube.businessobjects.YouTube.newpipe;
 
 import android.util.Log;
 
+import org.schabi.newpipe.extractor.InfoItem;
 import org.schabi.newpipe.extractor.ListExtractor;
 import org.schabi.newpipe.extractor.Page;
+import org.schabi.newpipe.extractor.channel.tabs.ChannelTabExtractor;
+import org.schabi.newpipe.extractor.channel.tabs.ChannelTabs;
 import org.schabi.newpipe.extractor.exceptions.ExtractionException;
 import org.schabi.newpipe.extractor.exceptions.ParsingException;
 import org.schabi.newpipe.extractor.playlist.PlaylistInfoItem;
@@ -37,26 +40,26 @@ import free.rm.skytube.businessobjects.YouTube.YouTubeTasks;
 public class GetPlaylistsForChannel implements YouTubeTasks.ChannelPlaylistFetcher {
     static class Paging {
         private final YouTubeChannel channel;
-        private final ListExtractor<PlaylistInfoItem> extractor;
+        private final ChannelTabExtractor extractor;
         private Page nextPage;
         private boolean firstPage = false;
-        Paging(YouTubeChannel channel, ListExtractor<PlaylistInfoItem> extractor) {
+        Paging(YouTubeChannel channel, ChannelTabExtractor extractor) {
             this.channel = channel;
             this.extractor = extractor;
         }
 
-        private synchronized List<PlaylistInfoItem> getNextPage() throws ExtractionException, IOException {
+        private synchronized List<InfoItem> getNextPage() throws ExtractionException, IOException {
             extractor.fetchPage();
             if (firstPage) {
                 if (Page.isValid(nextPage)) {
-                    ListExtractor.InfoItemsPage<PlaylistInfoItem> res = extractor.getPage(nextPage);
+                    ListExtractor.InfoItemsPage<InfoItem> res = extractor.getPage(nextPage);
                     nextPage = res.getNextPage();
                     return res.getItems();
                 } else {
                     return Collections.emptyList();
                 }
             } else {
-                ListExtractor.InfoItemsPage<PlaylistInfoItem> res = extractor.getInitialPage();
+                ListExtractor.InfoItemsPage<InfoItem> res = extractor.getInitialPage();
                 firstPage = true;
                 nextPage = res.getNextPage();
                 return res.getItems();
@@ -64,8 +67,10 @@ public class GetPlaylistsForChannel implements YouTubeTasks.ChannelPlaylistFetch
         }
 
         private List<YouTubePlaylist> getNextPlaylists() throws ExtractionException, IOException {
-            List<PlaylistInfoItem> infoItems = getNextPage();
-            return infoItems.stream().map(item ->
+            List<InfoItem> infoItems = getNextPage();
+            return infoItems.stream()
+                    .filter(PlaylistInfoItem.class::isInstance)
+                    .map(PlaylistInfoItem.class::cast).map(item ->
                     new YouTubePlaylist(item.getUrl(), item.getName(), "", null, item.getStreamCount(), item.getThumbnailUrl(),
                             channel)
             ).collect(Collectors.toList());
@@ -98,7 +103,7 @@ public class GetPlaylistsForChannel implements YouTubeTasks.ChannelPlaylistFetch
         SkyTubeApp.nonUiThread();
         if (paging == null) {
             NewPipeService.ChannelWithExtractor cwe = NewPipeService.get().getChannelWithExtractor(channel.getId());
-            paging = new Paging(cwe.channel, cwe.extractor.getPlaylists());
+            paging = new Paging(cwe.channel, cwe.findPlaylistTab());
         }
         return paging;
     }
