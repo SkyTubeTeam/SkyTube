@@ -20,29 +20,45 @@
 		style="@style/SubsTextView"/>
 
 	<androidx.appcompat.widget.SearchView
+		android:id="@+id/subs_search_view"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:padding="5dp"
 		android:layout_below="@id/subs_drawer_title"
-		android:id="@+id/subs_search_view"
-		app:iconifiedByDefault="false"
 		android:actionViewClass="androidx.appcompat.widget.SearchView"
+		android:padding="5dp"
 		app:closeIcon="@android:drawable/ic_menu_close_clear_cancel"
+		app:iconifiedByDefault="false"
 		app:queryHint="@string/search_channel" />
 
 	<androidx.recyclerview.widget.RecyclerView
 		android:id="@+id/subs_drawer_recycler_view"
 		android:layout_width="match_parent"
-		android:layout_height="match_parent"
+		android:layout_height="695dp"
 		android:layout_below="@+id/subs_search_view"
+		android:layout_alignParentBottom="true"
+		android:layout_marginBottom="47dp"
 		android:choiceMode="singleChoice"
 		android:divider="@android:color/transparent"
-		android:dividerHeight="0dp"/>
+		android:dividerHeight="0dp" />
 
 	<ProgressBar
 		android:id="@+id/subs_drawer_progress_bar"
 		android:layout_centerInParent="true"
 		android:visibility="invisible"
 		style="@style/LoadingProgressBar"/>
+
+	<Button
+		android:id="@+id/subs_drawer_live_videos_button"
+		android:layout_width="match_parent"
+		android:layout_height="51dp"
+		android:layout_below="@+id/subs_drawer_recycler_view"
+		android:layout_marginTop="-51dp"
+		android:background="#00FFFFFF"
+		android:drawableLeft="@drawable/ic_live_youtube"
+		android:drawablePadding="10dip"
+		android:gravity="left|center_vertical"
+		android:text="@string/subs_drawer_live_videos_button_title"
+		android:textAllCaps="false"
+		android:textColor="#FFFFFF" />
 
 </RelativeLayout>
