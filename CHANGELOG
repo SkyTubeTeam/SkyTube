@@ -1,3 +1,25 @@
+v2.987 - 2023-08-15
+        * Fix 'unable to download videos' error, due to recent Youtube changes
+        * Fix error because of missing channel banner/avatar
+        * Fix crash happening, when SponsorBlock was not enabled when video was downloaded, however enabled later
+        * Fix missing context menu items.
+        * Refactor to use the latest NewPipe playlist fecthing code
+        * update style of screenshots - Tomoya Kuroda
+        * Updated translations for:
+           * Czech - Woyta, Not Fill
+           * Chinese (Simplified) - Eric
+           * French - Ninjdai
+           * German - RandomModderJDK
+           * Hindi - ShareASmile
+           * Hungarian - Szia Tomi
+           * Italian - Massimo Pissarello
+           * Japanese - Takaki IEKURA
+           * Polish - Michal L
+           * Portugeese (Brazil) - gkubya, Yuri Argolo, Flavio F. M, Carlos Luiz
+           * Portugeese - SACAMOTO SEIJI
+           * Punjabi - ShareASmile
+           * Russian - Alexey Esaulenko, jooblex
+
 v2.986 - 2023-04-24
         * Implementing a 'Watched Video Cleaner' to quickly remove watched videos from the Bookmarks and Downloaded videos - by randommodder
         * Showing comment replies, displaying 'pinned' and 'hearted-by-uploader'
