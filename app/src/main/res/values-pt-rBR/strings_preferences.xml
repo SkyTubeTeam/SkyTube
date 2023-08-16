@@ -11,4 +11,5 @@
     <string name="preferences">Configurações</string>
     <string name="key_preferences">Preferências</string>
     <string name="no_resolution_specified">Nenhuma resolução especificada</string>
+    <string name="continue_">Continuar</string>
 </resources>
