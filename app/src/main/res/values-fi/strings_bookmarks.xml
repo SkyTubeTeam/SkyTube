@@ -2,16 +2,14 @@
 <resources>
     <string name="bookmark_share_invalid_url">Vain kelvolliset YouTube-osoitteet voidaan lisätä kirjanmerkkeihin.</string>
     <string name="bookmark_share_label">SkyTube Kirjanmerkki</string>
-    <string name="no_bookmarked_videos_text">Et ole lisännyt vielä yhtään videota kirjanmerkkeihin.
-\n
-\nKun teet niin, videot näkyvät täällä.</string>
-    <string name="video_unbookmarked_error">Videota ei voitu poistaa kirjanmerkeistä.</string>
+    <string name="no_bookmarked_videos_text">Kirjanmerkkeihin lisätyt videot löytyvät täältä.</string>
+    <string name="video_unbookmarked_error">Videon poistaminen kirjanmerkeistä epäonnistui.</string>
     <string name="video_was_not_bookmarked">Videota ei lisätty kirjanmerkkeihin</string>
-    <string name="video_unbookmarked">Video poistettu kirjanmerkeistä</string>
+    <string name="video_unbookmarked">Kirjanmerkki poistettu</string>
     <string name="unbookmark">Poista kirjanmerkeistä</string>
     <string name="video_bookmarked_error">Videota ei voitu lisätä kirjanmerkkeihin.</string>
     <string name="video_already_bookmarked">Video on jo kirjanmerkeissä</string>
-    <string name="video_bookmarked">Video lisätty kirjanmerkkeihin</string>
+    <string name="video_bookmarked">Video on lisätty kirjanmerkkeihin</string>
     <string name="bookmark">Lisää kirjanmerkiksi</string>
     <string name="bookmarks">Kirjanmerkit</string>
 </resources>
