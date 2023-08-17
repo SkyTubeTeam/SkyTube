@@ -8,4 +8,5 @@
     <string name="configure">Määritä</string>
     <string name="no_videos_blocked">Yhtään videota ei estetty tai suodatettu pois. Haluatko määrittää asetukset Video Blockeriin\?</string>
     <string name="blocked_videos">Estetyt videot</string>
+    <string name="add_to_permitted">Salli kanava</string>
 </resources>
