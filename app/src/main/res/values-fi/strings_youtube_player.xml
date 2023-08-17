@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="error_video_streams">Virhe ladattaessa videon lähteitä.</string>
-    <string name="error_video_streams_empty">Videolle \'%s\' ei ole lähteitä.</string>
+    <string name="error_video_streams">Videolähteiden noutaminen epäonnistui.</string>
+    <string name="error_video_streams_empty">Videolla \'%s\' ei ole lähteitä.</string>
     <string name="resume">Jatka</string>
     <string name="should_resume">Haluatko jatkaa siitä, mihin jäit\?</string>
     <string name="clear">Tyhjennä</string>
@@ -26,14 +26,14 @@
     <string name="ratings_disabled">Arvostelut pois käytöstä</string>
     <string name="warning_live_video">Ei voida toistaa suoratoistoa nyt. Avataanko suoratoisto toisessa sovelluksessa\?</string>
     <string name="play_video">Toista video</string>
-    <string name="metered_network_blocked_by_policy">Lataus estetty, koska laitteesi on yhdistettynä kulutukseen perustuvaan verkkoon.</string>
+    <string name="metered_network_blocked_by_policy">Videon lataaminen estettiin, koska laitteesi on yhdistetty kulutukseen perustuvaan verkkoon.</string>
     <string name="warning_metered_network_disable">Älä kysy koskaan uudelleen.</string>
-    <string name="warning_metered_network_play">Laitteesi on yhdistetty datan kulutukseen perustuvaan verkkoon. Välttääksesi ylimääräisiä datamaksuja, on suositeltavaa yhdistää kiinteähintaiseen verkkoon. Haluatko silti toistaa videon\?</string>
+    <string name="warning_metered_network_play">Käytössä olevan verkkoyhteyden vaihtaminen rajoittamattomaan tai kiinteähintaiseen yhteyteen on suositeltavaa. Haluatko silti jatkaa videon toistoa\?</string>
     <string name="metered_network">Datan käyttöön perustuva yhteys</string>
-    <string name="error_video_parse_error">Ei voida aloittaa videon toistoa, virheilmoitus on: <br/> <br/> %s.</string>
+    <string name="error_video_parse_error">Videon toistaminen epäonnistui: <br/> <br/> %s.</string>
     <string name="error_downloaded_file_is_corrupted">Ladattu video näyttää <b>vahingoittuneelta</b> - virheilmoitus on: <br/> <br/> %s. <br/> <br/> Haluatko <b>poistaa</b> tiedoston\?</string>
     <string name="error_invalid_url">Virheellinen videon URL: %s</string>
-    <string name="error_get_video_desc">Virhe ladattaessa videon kuvausta.</string>
+    <string name="error_get_video_desc">Videokuvauksen noutaminen epäonnistui.</string>
     <string name="error_video_play">Virhe videon toistossa</string>
     <string name="error_stream_parse_error">Jäsennysvirhe.</string>
     <string name="error_stream_decryption_fail">Ei voitu ladata kryptauksen purkukoodia YouTube-palvelua varten.</string>
