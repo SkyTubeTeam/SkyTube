@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="error_video_streams">Virhe ladattaessa videon lähteitä.</string>
-    <string name="error_video_streams_empty">Videossa %s ei ole lähteitä.</string>
+    <string name="error_video_streams_empty">Videolle \'%s\' ei ole lähteitä.</string>
     <string name="resume">Jatka</string>
     <string name="should_resume">Haluatko jatkaa siitä, mihin jäit\?</string>
     <string name="clear">Tyhjennä</string>
