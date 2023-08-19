@@ -28,4 +28,5 @@
     <string name="cleaner_watched_downloads">Usuń obejrzane pobrane</string>
     <string name="cleaner_watched_bookmarks">Usuń obejrzane zakładki</string>
     <string name="video_comments_are_disabled">Komentarze do filmu są wyłączone</string>
+    <string name="cleaner_explanation">Wyczyść pobrane/zapisane do zakladek filmy. Użyj poniższych filtrów:</string>
 </resources>
