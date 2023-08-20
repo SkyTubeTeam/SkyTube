@@ -44,7 +44,7 @@
     <string name="pref_title_screen_orientation">Orientação de tela</string>
     <string name="pref_summary_screen_orientation">Orientação do player de vídeo:%s</string>
     <string name="pref_title_disable_screen_gestures">Sem gestos no vídeo</string>
-    <string name="pref_summary_disable_screen_gestures"></string>
+    <string name="pref_summary_disable_screen_gestures"/>
     <string name="pref_title_default_tab">Guia padrão</string>
     <string name="pref_hide_tabs_restart">Reinicie o SkyTube para usar essas guias.</string>
     <string name="pref_video_continuous_repeat_toggle">Repetição continua</string>
@@ -52,8 +52,9 @@
     <string name="pref_category_video_resolutions">Resolução de video</string>
     <string name="pref_category_downloads">Downloads</string>
     <string name="pref_summary_enable_immersive_mode">Esconder a Barra de navegação e a barra de Status durante a exibir do conteúdo.</string>
-    <string name="pref_title_switch_volume_and_brightness"></string>
+    <string name="pref_title_switch_volume_and_brightness"/>
     <string name="pref_title_youtube_api_key">Chave da Api do YouTube</string>
     <string name="pref_category_download_resolutions">resolução de vídeos para Downloads</string>
     <string name="restart">Reiniciar</string>
+    <string name="pref_title_backup_dbs">Servidor de Copia de segurança</string>
 </resources>
