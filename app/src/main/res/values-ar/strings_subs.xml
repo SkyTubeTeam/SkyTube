@@ -2,10 +2,10 @@
 <resources>
     <string name="subscriptions">الاشتراكات</string>
     <string name="subscribe">اشتراك</string>
-    <string name="unsubscribe">إلغاء الاشتراك</string>
+    <string name="unsubscribe">إلغاء الإشتراك</string>
     <string name="total_subscribers">%,d مشترك</string>
     <string name="subscribed">مشترك</string>
-    <string name="unsubscribed">إلغاء الاشتراك</string>
+    <string name="unsubscribed">غير مشترك</string>
     <string name="error_get_subbed_channels">تعذر جلب اشتراكات القناة.</string>
     <string name="error_check_if_user_has_subbed">غير قادر على التحقق مما إذا كان المستخدم قد اشترك في القناة أم لا (id=%s)</string>
     <string name="error_unable_to_subscribe">(un)تعذر الاشتراك من// للقناة (id=%s)</string>
