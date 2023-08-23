@@ -57,4 +57,24 @@
     <string name="pref_category_download_resolutions">resolução de vídeos para Downloads</string>
     <string name="restart">Reiniciar</string>
     <string name="pref_title_backup_dbs">Servidor de Copia de segurança</string>
+    <string name="pref_summary_credit_sponsorblock">Usar os dados de SponsorBlock de https://sponsor.ajay.app</string>
+    <string name="pref_privacy_category">Privacidade</string>
+    <string name="pref_title_disable_search_history">Sem histórico de pesquisa</string>
+    <string name="pref_summary_disable_search_history">Limpar de desativa o histórico de pesquisa.</string>
+    <string name="pref_title_disable_playback_status">Sem lista de marcadores de visualizados</string>
+    <string name="pref_title_clear_playback_status">Limpar marcadores de visualizados</string>
+    <string name="pref_summary_disable_playback_status">Desligar marcadores de visualizados.</string>
+    <string name="pref_disable_playback_status_deleted">Marcadores de visualizados apagado.</string>
+    <string name="pref_summary_clear_playback_status">Limpa o progresso de todos os videos.</string>
+    <string name="pref_disable_search_history_deleted">Histórico de pesquisa deletado</string>
+    <string name="pref_playback_status_cleared">Marcadores de visualizados limpos.</string>
+    <string name="pref_title_default_content_country">Região padrão do conteúdo</string>
+    <string name="pref_sponsorblock_category"></string>
+    <string name="pref_general">Geral</string>
+    <string name="pref_details">Detalhes</string>
+    <string name="pref_title_enable_sponsorblock">Habilitar SponsorBlock</string>
+    <string name="pref_summary_enable_sponsorblock">Pule automaticamente segmentos dedicados para propagandas, lembretes de interação e mais</string>
+    <string name="pref_title_sponsorblock_category_list">Pular segmentos</string>
+    <string name="pref_summary_sponsorblock_category_list">Escolha as categorias para pular</string>
+    <string name="pref_title_credit_sponsorblock">Créditos</string>
 </resources>
