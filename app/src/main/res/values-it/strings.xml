@@ -27,8 +27,8 @@
     <string name="cleaner">Pulisci video già visti</string>
     <string name="cleaner_explanation">Pulisci i video aggiunti ai preferiti/scaricati. Utilizza le seguenti opzioni di filtro:</string>
     <string name="cleaner_confirm">Pulisci</string>
-    <string name="cleaner_toast_finish">Abbiamo rimosso %s video dai segnalibri ed eliminato %sMB di video scaricati</string>
-    <string name="cleaner_watched_downloads">Rimuovi i download già visti</string>
+    <string name="cleaner_toast_finish">Abbiamo rimosso %s video dai segnalibri ed eliminato %s MB di video scaricati</string>
+    <string name="cleaner_watched_downloads">Rimuovi gli scaricamenti già visti</string>
     <string name="cleaner_watched_bookmarks">Rimuovi i segnalibri già visti</string>
     <string name="video_comments_are_disabled">Commenti video disattivati</string>
 </resources>
