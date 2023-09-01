@@ -207,4 +207,5 @@
     <string name="pref_summary_open_issue">Suggérez une idée ou signalez un erreur.</string>
     <string name="pref_title_playback_speed">Vitesse de lecture par défaut</string>
     <string name="pref_summary_playback_speed">Vitesse de lecture par défaut : %s</string>
+    <string name="pref_title_use_dislike_api">Compteur des Je n\'aime pas</string>
 </resources>
