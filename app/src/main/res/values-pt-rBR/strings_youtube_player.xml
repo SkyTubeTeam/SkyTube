@@ -39,9 +39,9 @@
     <string name="resume">Continuar</string>
     <string name="sponsorblock_category_sponsor">Patrocinador</string>
     <string name="sponsorblock_category_interaction">Lembrete de Interação</string>
-    <string name="sponsorblock_category_music_offtopic">Seção Não-Musical</string>
+    <string name="sponsorblock_category_music_offtopic">Musica: seção sem musica</string>
     <string name="sponsorblock_category_intro">Introdução/Intermissão</string>
-    <string name="sponsorblock_category_outro">Cartões finais/Créditos</string>
+    <string name="sponsorblock_category_outro">Finalizações/Créditos finais</string>
     <string name="sponsorblock_category_filler">Enchimento</string>
     <string name="sponsorblock_category_selfpromo">Auto-Promoção</string>
     <string name="sponsorblock_category_preview">Prévia/Recapitular</string>
