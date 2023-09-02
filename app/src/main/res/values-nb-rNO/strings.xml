@@ -6,14 +6,14 @@
     <string name="ok">OK</string>
     <string name="search_videos">Søk i videoer</string>
     <string name="launch_offical_player_error">En feil oppsto under igangsetting av den offisielle YouTube-avspilleren fra Google. Forsikre deg om at det er installert på din enhet.</string>
-    <string name="LIVE">SANNTIDSVISNING</string>
+    <string name="LIVE">DIREKTE</string>
     <string name="featured">Framhevet</string>
     <string name="most_popular">Mest populært</string>
     <string name="videos">Videoer</string>
     <string name="num_videos">%d videoer</string>
     <string name="playlists">Spillelister</string>
     <string name="could_not_get_playlists">Kunne ikke hente %s spillelister.</string>
-    <string name="loading">Laster…</string>
+    <string name="loading">Laster …</string>
     <string name="video">Video</string>
     <string name="could_not_get_channel">Kunne ikke laste ned kanalinfo.</string>
     <string name="yes">Ja</string>
@@ -24,7 +24,7 @@
     <string name="trending_in">På vei opp (%s)</string>
     <string name="recaptcha_challenge_requested">YouTube blokkerer dine nettverksforespørsmler. Du må løse en reCAPTCHA.</string>
     <string name="could_not_get_sponsorblock">Kunne ikke hente SponsorBlock-info: %s.</string>
-    <string name="cleaner">Renser</string>
+    <string name="cleaner">Renser for sette videoer</string>
     <string name="cleaner_explanation">Rens opp bokmerkede/nedlastede videoer. Bruk følgende filteralternativer:</string>
     <string name="cleaner_watched_bookmarks">Fjern sette bokmerker</string>
     <string name="cleaner_watched_downloads">Fjern sette nedlastinger</string>
