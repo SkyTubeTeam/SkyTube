@@ -22,4 +22,5 @@
     <string name="close">Stäng</string>
     <string name="could_not_get_channel_detailed">Det gick inte att ladda ner kanalinformation: %s.</string>
     <string name="trending_in">Populärt (%s)</string>
+    <string name="video_comments_are_disabled">Videokommentarer avslagen</string>
 </resources>
