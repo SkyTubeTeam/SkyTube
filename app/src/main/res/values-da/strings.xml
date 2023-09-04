@@ -1,4 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="views">%,d visninger</string>
+    <string name="could_not_get_channel">Kunne ikke laste ned kanalinfo.</string>
+    <string name="could_not_get_channel_detailed">Kunne ikke laste ned kanalinfo: %s.</string>
+    <string name="error">Feil</string>
+    <string name="could_not_get_sponsorblock">Kunne ikke hente SponsorBlock-info: %s.</string>
+    <string name="ok">OK</string>
+    <string name="launch_offical_player_error">Kunne ikke starte officiel YouTube-afspiller. Sørg for at den er installeret.</string>
+    <string name="search_videos">Søg i videoer</string>
+    <string name="could_not_get_videos">Kunne ikke hente %s videoer.</string>
+    <string name="LIVE">Direkte</string>
+    <string name="could_not_get_playlists">Kunne ikke hente %s spillelister.</string>
+    <string name="most_popular">Mest populært</string>
+    <string name="trending_in">På vej op (%s)</string>
+    <string name="video">Video</string>
+    <string name="cleaner_watched_bookmarks">Fjern bogmærker for sætte videoer</string>
+    <string name="video_comments_are_disabled">Videokommentarer afslået</string>
+    <string name="recaptcha_challenge_requested">YouTube tror du er en robot. Løs en reCAPTCHA først.</string>
+    <string name="cleaner">Renser for sætte videoer</string>
+    <string name="cleaner_explanation">Rens op bogmærkede/nedlastede videoer. Brug følgende filtervalg:</string>
+    <string name="cleaner_toast_finish">%d video(er) fjernet fra bogmærker, og slettet %s MB nedlastede videoer.</string>
+    <string name="cleaner_watched_downloads">Fjern nedlastninger som er færdigspillet.</string>
+    <string name="videos">Videoer</string>
+    <string name="num_videos">%d videoer</string>
+    <string name="playlists">Spillelister</string>
+    <string name="close">Luk</string>
+    <string name="loading">Laster ind …</string>
+    <string name="yes">Ja</string>
+    <string name="no">Nei</string>
+    <string name="search_channel">Søg i kanal</string>
+    <string name="featured">Fremhævet</string>
+    <string name="cleaner_confirm">Tøm</string>
 </resources>
