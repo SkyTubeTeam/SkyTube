@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="subscriptions">구독자 목록</string>
+    <string name="subscriptions">구독</string>
     <string name="subscribe">구독</string>
     <string name="unsubscribe">구독 취소</string>
     <string name="total_subscribers">구독자 %,d명</string>
@@ -24,4 +24,5 @@
     <string name="import_subscriptions_parse_error">업로드 한 파일을 파싱할 수 없습니다 : %s.</string>
     <string name="failed_to_import_subscriptions">구독자 목록을 가져올 수 없습니다.</string>
     <string name="about">정보</string>
+    <string name="import_subscriptions_description">https://takeout.google.com 에 접속한 뒤, \"YouTube 및 YouTube Music\" 를 제외한 모든 항목을 체크 해제합니다.그리고 \"모든 YouTube 데이터 포함됨\"을 클릭하여 \"구독정보\"만 체크하고 나머지는 모두 해제합니다. 다음 단계를 누르고 \"내보내기 생성\"을 누릅니다. (당신의 G메일 계정에 \'Google 테이크아웃\'이 보낸 \'Google 데이터 다운로드 가능\'이라는 제목의 이메일이 와 있을 것입니다.) 메일을 열고, \"파일 다운로드\"를 클릭합니다. \'내보내기 관리\' 페이지로 이동하였다면 다시 \'다운로드\'를 클릭합니다. 아래에 \'구독 파일 선택\'을 클릭하여, 이 압축 파일을 선택하거나 혹은 압축 파일의 압축을 해제하고 (Takeout/YouTube 및 YouTube Music/구독정보)에 있는 구독정보.csv 혹은 구독정보.json 파일을 선택합니다.</string>
 </resources>
