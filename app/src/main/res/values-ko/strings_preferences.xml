@@ -62,7 +62,7 @@
     <string name="pref_summary_disable_search_history">검색 기록을 비우고 사용중지합니다.</string>
     <string name="pref_disable_search_history_deleted">검색 기록 삭제됨.</string>
     <string name="pref_sponsorblock_category">SponsorBlock</string>
-    <string name="pref_general"></string>
+    <string name="pref_general"/>
     <string name="pref_title_credit_sponsorblock">크레딧</string>
     <string name="pref_summary_credit_sponsorblock">https://sponsor.ajay.app의 SponsorBlock 데이터를 사용합니다</string>
     <string name="pref_chromecast_category">Chromecast</string>
@@ -81,4 +81,6 @@
     <string name="pref_video_download_maximum_resolution_title">동영상 다운로드 시 최고 해상도</string>
     <string name="pref_title_lang_detection_video_filtering">동영상 언어 필터</string>
     <string name="pref_title_low_views_filter">조회수</string>
+    <string name="preferences">설정</string>
+    <string name="key_preferences">설정</string>
 </resources>
