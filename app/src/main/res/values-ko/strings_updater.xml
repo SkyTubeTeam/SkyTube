@@ -7,5 +7,5 @@
     <string name="later">나중에</string>
     <string name="update_failure">새로운 버전의 앱이 설치되어 있지 않습니다.</string>
     <string name="downloading">다운로드 중</string>
-    <string name="update_available">새로운 버전이 있습니다.</string>
+    <string name="update_available">새로운 버전이 있습니다</string>
 </resources>
