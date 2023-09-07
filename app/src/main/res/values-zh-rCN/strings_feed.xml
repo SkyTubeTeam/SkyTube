@@ -12,4 +12,5 @@
     <string name="open_channel">打开频道</string>
     <string name="feed">订阅</string>
     <string name="subscribing_to_channels">正在订阅频道……</string>
+    <string name="channel_related">频道...</string>
 </resources>
