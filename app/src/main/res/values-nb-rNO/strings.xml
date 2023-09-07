@@ -5,7 +5,7 @@
     <string name="error">Feil</string>
     <string name="ok">OK</string>
     <string name="search_videos">Søk i videoer</string>
-    <string name="launch_offical_player_error">En feil oppsto under igangsetting av den offisielle YouTube-avspilleren fra Google. Forsikre deg om at det er installert på din enhet.</string>
+    <string name="launch_offical_player_error">Kunne ikke igangsetting av den offisielle YouTube-avspilleren. Forsikre deg om at det er installert.</string>
     <string name="LIVE">DIREKTE</string>
     <string name="featured">Framhevet</string>
     <string name="most_popular">Mest populært</string>
