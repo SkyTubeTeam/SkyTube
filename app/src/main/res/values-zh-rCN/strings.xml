@@ -24,4 +24,11 @@
     <string name="could_not_get_videos">无法获取 %s 视频。</string>
     <string name="recaptcha_challenge_requested">YouTube 认为您是机器人，因此您必须先解决 reCAPTCHA。</string>
     <string name="could_not_get_sponsorblock">无法获取 SponsorBlock 信息：%s。</string>
+    <string name="cleaner_confirm">清理</string>
+    <string name="cleaner_watched_bookmarks">移除已观看的书签</string>
+    <string name="video_comments_are_disabled">视频评论已关闭</string>
+    <string name="cleaner">已观看视频清理器</string>
+    <string name="cleaner_explanation">清理书签/已下载的视频。使用以下筛选选项：</string>
+    <string name="cleaner_watched_downloads">移除已观看的下载</string>
+    <string name="cleaner_toast_finish">我们已从书签中移除了%s个视频，并删除了%sMB已下载视频</string>
 </resources>
