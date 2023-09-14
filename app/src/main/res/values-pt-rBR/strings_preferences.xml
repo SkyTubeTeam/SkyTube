@@ -66,7 +66,7 @@
     <string name="pref_summary_disable_playback_status">Desligar marcadores de visualizados.</string>
     <string name="pref_disable_playback_status_deleted">Marcadores de visualizados apagado.</string>
     <string name="pref_summary_clear_playback_status">Limpa o progresso de todos os videos.</string>
-    <string name="pref_disable_search_history_deleted">Histórico de pesquisa deletado</string>
+    <string name="pref_disable_search_history_deleted">Histórico de pesquisa deletado.</string>
     <string name="pref_playback_status_cleared">Marcadores de visualizados limpos.</string>
     <string name="pref_title_default_content_country">Região padrão do conteúdo</string>
     <string name="pref_sponsorblock_category"/>
