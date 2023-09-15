@@ -122,7 +122,7 @@
     <string name="pref_title_lang_detection_video_filtering">Filtro de idioma de vídeo</string>
     <string name="preferred_lang_updated">Atualize os vídeos para usar o novo idioma.</string>
     <string name="setting_updated">Atualize os vídeos para usar a nova configuração.</string>
-    <string name="pref_title_dislikes_filter"/>
+    <string name="pref_title_dislikes_filter">Descurtidas</string>
     <string name="databases_backup_fail">Não pude enviar seus dado para o banco de dados.</string>
     <string name="pref_summary_backup_dbs">Faça uma copia dos seus favoritos e inscrições.</string>
     <string name="databases_import_nothing_selected">Nada foi selecionado…</string>
