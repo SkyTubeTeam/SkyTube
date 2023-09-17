@@ -4,10 +4,10 @@
     <string name="error_stream_decryption_fail">Não foi possível carregar o código de descriptografia para o serviço do YouTube.</string>
     <string name="error_stream_parse_error">Erro de análise.</string>
     <string name="error_video_play">Erro de reprodução de vídeo</string>
-    <string name="error_video_streams">Não foi possível obter nenhum dos fluxo de vídeo.</string>
+    <string name="error_video_streams">Não foi possível obter nenhuma transmissão de vídeo.</string>
     <string name="error_get_video_desc">Não foi possível obter a descrição do vídeo.</string>
     <string name="error_invalid_url">URL de vídeo inválido: %s</string>
-    <string name="error_video_streams_empty">O vídeo \'%s\' não tem fluxos.</string>
+    <string name="error_video_streams_empty">Não há transmissão do vídeo \'%s\' .</string>
     <string name="error_downloaded_file_is_corrupted">O vídeo baixado parece <b>corrompido</b>: <br/> <br/> %s . <br/> <br/> <b>Excluir</b> o arquivo\?</string>
     <string name="error_video_parse_error">Não foi possível iniciar o vídeo: <br/> <br/> %s.</string>
     <string name="metered_network_blocked_by_policy">Download bloqueado porque você está conectado através de uma rede limitada.</string>
