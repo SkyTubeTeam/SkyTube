@@ -16,11 +16,11 @@
     <string name="error_check_if_user_has_subbed">Не вдалося перевірити, чи підписалися ви на канал (id=%s)</string>
     <string name="error_get_subbed_channels">Не вдалося отримати підписки на канали.</string>
     <string name="channel_unsubscribed">Ви відписалися від каналу</string>
-    <string name="unsubscribed">Ви підписалися</string>
+    <string name="unsubscribed">Відписались</string>
     <string name="channel_subscribe_failed">Не вдалося підписатися на канал</string>
     <string name="channel_already_subscribed">Ви вже підписалися</string>
     <string name="channel_subscribed">Ви підписались на канал</string>
-    <string name="subscribed">Ви підписалися</string>
+    <string name="subscribed">Підписані</string>
     <string name="total_subscribers">%,d підписників</string>
     <string name="unsubscribe">Відписатися</string>
     <string name="subscribe">Підписатися</string>
