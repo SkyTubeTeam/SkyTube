@@ -3,8 +3,8 @@
     <string name="pref_video_player_category">Player de Vídeo</string>
     <string name="pref_title_maximum_res">Resolução Máxima</string>
     <string name="pref_summary_maximum_res">Selecione a resolução Máxima : %s</string>
-    <string name="pref_title_minimum_res">Menor Resolução</string>
-    <string name="pref_summary_minimum_res">Selecionar a Menor resolução: %s</string>
+    <string name="pref_title_minimum_res">Resolução Mínima</string>
+    <string name="pref_summary_minimum_res">Selecionar a resolução Mínima: %s</string>
     <string name="pref_title_choose_player">Escolha um player de Video</string>
     <string name="pref_title_metered_network_usage">Uso de dados limitados</string>
     <string name="pref_import_export_category">Importar / Exportar</string>
@@ -36,7 +36,7 @@
     <string name="pref_popup_title_video_download_folder">Escolha um Diretório</string>
     <string name="pref_title_subscriptions_alphabetical_order">Organiza os r os Canais Alfabeticamente</string>
     <string name="system_default_country">Sistema</string>
-    <string name="pref_summary_minimum_res_metered">Selecione uma resolução mínima para quando estive streaming via dados moveis: %s</string>
+    <string name="pref_summary_minimum_res_metered">Selecione a resolução mínima quando estiver vendo streaming via dados moveis: %s</string>
     <string name="pref_other_category">Outros</string>
     <string name="pref_summary_default_tab">Qual guia deseja mostrar quando SkyTube abrir \? %s</string>
     <string name="pref_title_hide_tabs">Esconder abas</string>
