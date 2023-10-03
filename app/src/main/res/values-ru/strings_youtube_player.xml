@@ -43,4 +43,8 @@
     <string name="sponsorblock_category_selfpromo">Самореклама</string>
     <string name="sponsorblock_category_outro">Титры</string>
     <string name="sponsorblock_category_music_offtopic">Не-музыка</string>
+    <string name="sponsorblock_category_preview">Краткое содержание</string>
+    <string name="sponsorblock_category_intro">Интро</string>
+    <string name="sponsorblock_category_filler">Оффтоп</string>
+    <string name="sponsorblock_category_interaction">Напоминание о взаимодействии</string>
 </resources>
