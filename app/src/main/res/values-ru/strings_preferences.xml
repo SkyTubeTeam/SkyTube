@@ -31,7 +31,7 @@
     <string name="pref_title_version">Версия</string>
     <string name="pref_title_updates">Обновления</string>
     <string name="pref_summary_updates">Проверить обновления.</string>
-    <string name="pref_title_license">Лицензия</string>
+    <string name="pref_title_license">Свободная Копилефт Лицензия</string>
     <string name="pref_summary_license">GPLv3+</string>
     <string name="app_license">Авторские права принадлежат Рамону Мифсуду © 2015–2018
 \n
@@ -97,7 +97,7 @@
     <string name="channel_unwhitelist_failure">Не удалось убрать выбранный(е) канал(ы) из белого списка</string>
     <string name="no_preferred_lang_selected">Предпочтительный язык не выбран.</string>
     <string name="preferred_lang_updated">Обновите видео для использования нового языка.</string>
-    <string name="pref_title_lang_detection_video_filtering">Автоматическая фильтрация</string>
+    <string name="pref_title_lang_detection_video_filtering">Фильтр по языку</string>
     <string name="pref_summary_lang_detection_video_filtering">Определить языки, используемых в видео, и заблокировать все, что вам не нравится (использует много ресурсов).</string>
     <string name="setting_updated">Настройка обновлена. Пожалуйста, обновите видео.</string>
     <string name="pref_other_filters_category">Остальные фильтры</string>
@@ -110,7 +110,7 @@
     <string name="pref_summary_disable_playback_status">Отключить статус воспроизведения.</string>
     <string name="pref_disable_playback_status_deleted">Состояние воспроизведения удалено.</string>
     <string name="pref_title_clear_playback_status">Очистить статус воспроизведения</string>
-    <string name="pref_summary_clear_playback_status">Очистить статус воспроизведения для всех видео.</string>
+    <string name="pref_summary_clear_playback_status">Отчистить просмотр на всех видео.</string>
     <string name="pref_playback_status_cleared">Состояние воспроизведения очищено.</string>
     <string name="pref_import_export_category">Импорт/Экспорт файлов</string>
     <string name="pref_category_downloads">Загрузки</string>
@@ -175,4 +175,9 @@
     <string name="pref_summary_use_dislike_api">Вернуть счётчик дизлайков returnyoutubedislike.com</string>
     <string name="pref_summary_playback_speed">Стандартная скорость воспроизведения: %s</string>
     <string name="pref_title_playback_speed">Стандарная скорость воспроизведения</string>
+    <string name="pref_title_sponsorblock_category_list">Пропустить фрагменты</string>
+    <string name="pref_summary_credit_sponsorblock">Используются данные SponsorBlock с https://sponsor.ajay.app</string>
+    <string name="pref_title_enable_sponsorblock">Включить SponsorBlock</string>
+    <string name="pref_summary_sponsorblock_category_list">Выбрать категории для пропуска</string>
+    <string name="pref_sponsorblock_category">SponsorBlock</string>
 </resources>
