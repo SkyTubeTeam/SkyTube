@@ -27,7 +27,7 @@
     <string name="cleaner">Limpador de Vídeo Assistido</string>
     <string name="cleaner_confirm">Confirmar limpeza</string>
     <string name="cleaner_explanation">Limpe os favoritos/vídeos baixados. Use as seguintes opções de filtro:</string>
-    <string name="cleaner_toast_finish">Removemos %s vídeo(s) dos favoritos e excluímos %sMB de vídeos baixados</string>
+    <string name="cleaner_toast_finish">Removemos %s vídeo(s) dos favoritos e apagamos %sMB de vídeos baixados</string>
     <string name="cleaner_watched_bookmarks">Remover favoritos assistidos</string>
     <string name="cleaner_watched_downloads">Remover vídeos baixados assistidos</string>
     <string name="video_comments_are_disabled">Comentários de vídeo desligado</string>
