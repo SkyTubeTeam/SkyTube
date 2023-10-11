@@ -2,44 +2,44 @@
 <resources>
     <string name="pref_video_player_category">Player de Vídeo</string>
     <string name="pref_title_maximum_res">Resolução Máxima</string>
-    <string name="pref_summary_maximum_res">Selecione a resolução Máxima : %s</string>
+    <string name="pref_summary_maximum_res">Selecionar a resolução Máxima : %s</string>
     <string name="pref_title_minimum_res">Resolução Mínima</string>
     <string name="pref_summary_minimum_res">Selecionar a resolução Mínima: %s</string>
     <string name="pref_title_choose_player">Escolha um player de Video</string>
-    <string name="pref_title_metered_network_usage">Uso de dados limitados</string>
+    <string name="pref_title_metered_network_usage">Utilização de Dados Móveis</string>
     <string name="pref_import_export_category">Importar / Exportar</string>
     <string name="preferences">Configurações</string>
-    <string name="key_preferences">Preferências</string>
+    <string name="key_preferences">configurações</string>
     <string name="no_resolution_specified">Nenhuma resolução especificada</string>
     <string name="continue_">Continuar</string>
     <string name="pref_category_metered_network">Dados moveis</string>
     <string name="pref_summary_choose_player">Escolha um player de vídeo : %s</string>
-    <string name="pref_title_minimum_res_metered">Resolução mínima ao usa dados moveis</string>
-    <string name="pref_title_maximum_res_metered">Maior resolução para dados moveis</string>
-    <string name="pref_summary_maximum_res_metered">Selecione sua máxima resolução para quando estiver streamando via redes moveis:%s</string>
-    <string name="pref_summary_metered_network_usage">O que faço se usar seus dados moveis para baixar /assistir vídeos:%s</string>
-    <string name="pref_title_import_dbs">Importar copia de segurança</string>
-    <string name="pref_summary_import_dbs">importar seus favoritos e inscrições da copia de segurança.</string>
-    <string name="databases_backing_up">Copiando seus dados para o servidor…</string>
-    <string name="databases_backup_success">Copia de segurança agora está foi carregada para %s com sucesso</string>
+    <string name="pref_title_minimum_res_metered">Resolução mínima para rede de dados moveis</string>
+    <string name="pref_title_maximum_res_metered">Resolução máxima para rede de dados moveis</string>
+    <string name="pref_summary_maximum_res_metered">Selecione a resolução máxima para streaming via rede de dados moveis: %s</string>
+    <string name="pref_summary_metered_network_usage">O que se deve fazer quando estiver á utilizar a rede de dados moveis para baixar/assistir vídeos: %s</string>
+    <string name="pref_title_import_dbs">Importar backup</string>
+    <string name="pref_summary_import_dbs">Importa seus favoritos e inscrições do backup.</string>
+    <string name="databases_backing_up">Criando backup…</string>
+    <string name="databases_backup_success">Backup do Banco de Dados agora está feito para %s com sucesso</string>
     <string name="databases_importing">Importando…</string>
     <string name="subs_import_select_backup">Selecione o arquivo YouTube XML para importar</string>
     <string name="pref_title_chromecast_none">Nenhum</string>
     <string name="pref_about_category">Sobre</string>
-    <string name="pref_network_downloads_category">Internet e downloads</string>
+    <string name="pref_network_downloads_category">Redes e Downloads</string>
     <string name="pref_title_website">Website</string>
     <string name="pref_title_credits">Créditos</string>
     <string name="pref_title_version">Versão</string>
-    <string name="pref_summary_updates">Verifique por novas atualizações.</string>
+    <string name="pref_summary_updates">Verificar por novas versões.</string>
     <string name="pref_summary_use_dislike_api">Retorne o contador de deslike usando returnyoutubedislike.com</string>
     <string name="pref_title_use_dislike_api">Contador de descurtidas novamente</string>
     <string name="pref_popup_title_video_download_folder">Escolha um Diretório</string>
     <string name="pref_title_subscriptions_alphabetical_order">Organiza os r os Canais Alfabeticamente</string>
     <string name="system_default_country">Sistema</string>
-    <string name="pref_summary_minimum_res_metered">Selecione a resolução mínima quando estiver vendo streaming via dados moveis: %s</string>
+    <string name="pref_summary_minimum_res_metered">Selecione a resolução mínima para streaming via rede de dados moveis: %s</string>
     <string name="pref_other_category">Outros</string>
-    <string name="pref_summary_default_tab">Qual guia deseja mostrar quando SkyTube abrir \? %s</string>
-    <string name="pref_title_hide_tabs">Esconder abas</string>
+    <string name="pref_summary_default_tab">Qual aba deseja mostrar assim que o SkyTube iniciar\?: %s</string>
+    <string name="pref_title_hide_tabs">Ocultar abas</string>
     <string name="pref_title_feed_notification">Feed de Notificação Automatico</string>
     <string name="pref_title_screen_orientation">Orientação de tela</string>
     <string name="pref_summary_screen_orientation">Orientação do player de vídeo:%s</string>
@@ -56,7 +56,7 @@
     <string name="pref_title_youtube_api_key">Chave de API do YouTube</string>
     <string name="pref_category_download_resolutions">Resolução de vídeos para Downloads</string>
     <string name="restart">Reiniciar</string>
-    <string name="pref_title_backup_dbs">Servidor de Copia de segurança</string>
+    <string name="pref_title_backup_dbs">Backup de Bancos de Dados</string>
     <string name="pref_summary_credit_sponsorblock">Usar os dados de SponsorBlock de https://sponsor.ajay.app</string>
     <string name="pref_privacy_category">Privacidade</string>
     <string name="pref_title_disable_search_history">Sem histórico de pesquisa</string>
@@ -69,7 +69,7 @@
     <string name="pref_disable_search_history_deleted">Histórico de pesquisa deletado.</string>
     <string name="pref_playback_status_cleared">Marcadores de visualizados limpos.</string>
     <string name="pref_title_default_content_country">Região padrão do conteúdo</string>
-    <string name="pref_sponsorblock_category"/>
+    <string name="pref_sponsorblock_category">Sponsorblock</string>
     <string name="pref_general">Geral</string>
     <string name="pref_details">Detalhes</string>
     <string name="pref_title_enable_sponsorblock">Habilitar SponsorBlock</string>
@@ -80,12 +80,12 @@
     <string name="databases_import_select_backup">Selecione o arquivo de backup para importar</string>
     <string name="databases_import_warning_message">Substituir marcadores e assinaturas pelos dados do arquivo de backup selecionado\?</string>
     <string name="pref_title_autocast">AutoCast</string>
-    <string name="pref_summary_credits">Maravilhosas pessoas e projetos livres por trás de Skytube.</string>
+    <string name="pref_summary_credits">Pessoas excelentes e projetos livres por trás desse aplicativo.</string>
     <string name="pref_title_open_issue">Abra um problema</string>
-    <string name="pref_title_updates">Mudanças</string>
-    <string name="pref_summary_open_issue">Sugira uma ideia ou reporte um bug.</string>
+    <string name="pref_title_updates">Atualizações</string>
+    <string name="pref_summary_open_issue">Sugira uma idéia ou reporte um erro.</string>
     <string name="pref_title_license">Licença livre - Copyleft</string>
-    <string name="pref_summary_license">GPLv3+</string>
+    <string name="pref_summary_license">LPGv3+ (Licença Pública Geral GNU - versão 3)</string>
     <string name="pref_summary_subscriptions_alphabetical_order">Lista os canais inscritos em ordem alfabética.</string>
     <string name="pref_title_download_to_separate_directories">Pastas de downloads por canal</string>
     <string name="pref_summary_download_to_separate_directories">Salvar videos em pastas com nomes baseados nos nomes dos canais.</string>
@@ -123,8 +123,8 @@
     <string name="preferred_lang_updated">Atualize os vídeos para usar o novo idioma.</string>
     <string name="setting_updated">Atualize os vídeos para usar a nova configuração.</string>
     <string name="pref_title_dislikes_filter">Descurtidas</string>
-    <string name="databases_backup_fail">Não pude enviar seus dado para o banco de dados.</string>
-    <string name="pref_summary_backup_dbs">Faça uma copia dos seus favoritos e inscrições.</string>
+    <string name="databases_backup_fail">Não foi possível fazer o backup do banco de dados.</string>
+    <string name="pref_summary_backup_dbs">Criar backup de seus favoritos e inscrições.</string>
     <string name="databases_import_nothing_selected">Nada foi selecionado…</string>
     <string name="databases_import_fail">Não conseguimos importar seus dados.</string>
     <string name="pref_youtube_api_key_default">Reinicie o aplicativo para o usar API padrão do YouTube.</string>
@@ -156,13 +156,13 @@
     <string name="pref_chromecast_category">Configuração Chromecast</string>
     <string name="app_license">Copyright © 2015–2018 Ramon Mifsud
 \n
-\nEsse programa é um software livre: você pode redistribui-lo e/ou modifica seguindo os termos da GNU General Public License -(Licença Pública Geral publicado pela Free software Foundation (Versão 3 da Licença).
+\nEsse programa é um software livre: você pode redistribuí-lo e/ou modificá-lo seguindo os termos da GNU General Public License (Licença Pública Geral GNU - versão 3 da Licença) publicado pela Free software Foundation.
 \n
 \nEste programa é distribuído na esperança de que seja útil, mas SEM QUALQUER GARANTIA; mesmo sem a garantia implícita de COMERCIALIZAÇÃO ou ADEQUAÇÃO A UM DETERMINADO FIM. Veja a Licença Pública Geral GNU para mais detalhes.
 \n
 \nVocê deverá ter recebido uma cópia da Licença Pública Geral GNU junto com este programa. Caso contrário, consulte &lt;https://www.gnu.org/licenses/&gt;</string>
     <string name="i_agree">Eu concordo</string>
-    <string name="pref_summary_hide_tabs">Escolher separador para não mostrar. reinicializarão requerida.</string>
+    <string name="pref_summary_hide_tabs">Escolher abas para não mostrar. Exige reiniciar.</string>
     <string name="pref_summary_feed_notification">Com que frequência procurar novos vídeos de canais inscritos: %s</string>
     <string name="pref_summary_switch_volume_and_brightness">Coloca o controle de volume à direita e o brilho à esquerda.</string>
     <string name="pref_summary_youtube_api_key">Insira uma chave pessoal da API do YouTube para usar.</string>
