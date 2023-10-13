@@ -1,2 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="downloading">Сваляне…</string>
+    <string name="update_failure">Най-новата версия на приложението не може да бъде инсталирана.</string>
+    <string name="up_to_date">Използвате последната версия</string>
+    <string name="android_too_old">За съжаление, Вашата версия на Андроид е твърде стара. Трябва да инсталирате ръчно „SkyTube Legacy“!</string>
+    <string name="update">Обновяване</string>
+    <string name="update_available">Налична е нова версия</string>
+    <string name="up_to_date_msg">Инсталираната версия на SkyTube е най-новата.</string>
+    <string name="release_notes">Промени в %s</string>
+    <string name="update_dialog_msg">Налична е нова версия на SkyTube. Ще бъде инсталиране версия %s.</string>
+    <string name="later">По-късно</string>
+</resources>
