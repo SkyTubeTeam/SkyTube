@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="bookmarks">Отметки</string>
-    <string name="bookmark">Отметка</string>
-    <string name="video_bookmarked">Добавена отметка</string>
-    <string name="video_already_bookmarked">Вече е отбелязано с отметка</string>
-    <string name="video_bookmarked_error">Видеото не можа да се постави като отметка.</string>
-    <string name="unbookmark">Премахване на отметката</string>
+    <string name="bookmark">Добавяне в отметките</string>
+    <string name="video_bookmarked">Добавено в отметките</string>
+    <string name="video_already_bookmarked">Вече е добавено в отметките</string>
+    <string name="video_bookmarked_error">Видеото не може да бъде добавено в отметките.</string>
+    <string name="unbookmark">Премахване от отметките</string>
     <string name="video_unbookmarked">Отметката е премахната</string>
-    <string name="video_was_not_bookmarked">Видеото не е отбелязано с отметка</string>
-    <string name="video_unbookmarked_error">Неуспешно премахване на отметка за видео.</string>
-    <string name="no_bookmarked_videos_text">Отбележете някои видеоклипове, за да ги намерите тук.</string>
-    <string name="bookmark_share_label">SkyTube отметка</string>
-    <string name="bookmark_share_invalid_url">Само валидни URL адреси в YouTube могат да се маркират с отметки.</string>
+    <string name="video_was_not_bookmarked">Видеото не беше добавено в отметките</string>
+    <string name="video_unbookmarked_error">Видеото не може да бъде премахнато от отметките.</string>
+    <string name="no_bookmarked_videos_text">Когато добавяте видеа в отметките си, ще ги виждате тук.</string>
+    <string name="bookmark_share_label">Отметка на SkyTube</string>
+    <string name="bookmark_share_invalid_url">Само правилни адреси към видеа в YouTube могат да бъдат добавяни в отметките.</string>
 </resources>
