@@ -1,2 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="thumbnail">Миниатюрно изображение</string>
+    <string name="view_thumbnail">Преглед на миниатюрното изображение</string>
+    <string name="thumbnail_download_error">Миниатюрното изображение не може да бъде свалено.</string>
+    <string name="thumbnail_downloaded">Свалено.</string>
+</resources>
