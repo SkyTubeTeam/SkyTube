@@ -8,4 +8,5 @@
     <string name="channel_blacklisted">Gjennoppfrisk for å bruke den nye kanalsvartelisten.</string>
     <string name="channel_unwhitelist_error">Kanalen kunne ikke fjernes fra hvitlisten.</string>
     <string name="block_channel">Blokker kanal</string>
+    <string name="add_to_permitted">Tillat kanal</string>
 </resources>
