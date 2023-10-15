@@ -64,4 +64,79 @@
     <string name="pref_title_credits">Екип</string>
     <string name="pref_title_open_issue">Докладване на проблем</string>
     <string name="pref_youtube_api_key_custom">Рестартирайте приложението, за да влезе в сила ползването на новия ключ за ППИ.</string>
+    <string name="pref_summary_default_content_country">Да се показва съдържание предназначено за тази страна: %s</string>
+    <string name="pref_category_video_resolutions">Резолюция на видеата</string>
+    <string name="channel_blacklist_updated">Опреснете каналите, за да се приложи новият списък с блокирани канали.</string>
+    <string name="pref_key_video_quality_summary">Оптимизиране за: %s</string>
+    <string name="pref_key_video_quality_for_downloads_title">Избор на качество на видеото за свалянията</string>
+    <string name="pref_title_choose_player">Видео плейър</string>
+    <string name="pref_title_sponsorblock_category_list">Пропускане на части</string>
+    <string name="pref_title_preferred_languages">Предпочитан език</string>
+    <string name="pref_summary_playback_speed">Скорост на възпроизвеждане по подразбиране: %s</string>
+    <string name="pref_summary_use_dislike_api">Връщане на броя нехаресвания чрез returnyoutubedislike.com</string>
+    <string name="pref_summary_lang_detection_video_filtering">Използва много ресурси за определяне на езика във видеата, и съответно за блокиране на онези, които не са на предпочитаните от Вас езици.</string>
+    <string name="pref_summary_preferred_languages">Изберете предпочитаните си езици.</string>
+    <string name="pref_summary_dislikes_filter">Да не се показват видеа с голям брой нехаресвания: %s</string>
+    <string name="pref_key_use_newer_formats_summary">По-старите версии на Андроид не поддържат всички формати за звук и видео.</string>
+    <string name="channel_already_whitelisted">Каналът вече е добавен в списъка с разрешени.</string>
+    <string name="pref_title_dislikes_filter">Нехаресвания</string>
+    <string name="pref_title_license">Свободен лиценз тип „Копилефт“</string>
+    <string name="pref_languages_filter_category">Филтри за език и регион</string>
+    <string name="pref_title_low_views_filter">Гледания</string>
+    <string name="pref_title_playback_speed">Скорост на възпроизвеждане по подразбиране</string>
+    <string name="pref_summary_channel_whitelist">Списък с разрешени канали.</string>
+    <string name="pref_title_preferred_regions">Предпочитан регион</string>
+    <string name="pref_summary_channel_blacklist">Списък с блокирани канали.</string>
+    <string name="pref_channels_filter_category">Филтриране на каналите</string>
+    <string name="pref_summary_credit_sponsorblock">Използва данни за блокиране на спонсорите от https://sponsor.ajay.app</string>
+    <string name="block">Блокиране</string>
+    <string name="channel_whitelist_updated">Опреснете видеата, за да започне използването на новия списък с разрешени канали.</string>
+    <string name="channel_unwhitelist_success">Опреснете видеата, за да започне ползването на новия списък с разрешени канали.</string>
+    <string name="pref_category_download_resolutions">Резолюция на видеата при сваляне</string>
+    <string name="pref_details">Подробности</string>
+    <string name="pref_summary_choose_player">Кой видео плейър да се ползва: %s</string>
+    <string name="channel_whitelist_update_failure">Посоченият канал не може да бъде добавен в списъка с разрешени канали.</string>
+    <string name="pref_summary_switch_volume_and_brightness">Поставя управлението на звука вдясно, а на яркостта – вляво.</string>
+    <string name="pref_title_lang_detection_video_filtering">Филтриране на видеата според езика им</string>
+    <string name="pref_summary_subscriptions_alphabetical_order">Показване на каналите, за които имате абонамент, в азбучен ред.</string>
+    <string name="pref_title_enable_sponsorblock">Включване на блокирането на спонсорите</string>
+    <string name="channel_unwhitelist_failure">Посоченият канал (или канали) не може да бъде премахнат от списъка с разрешени канали</string>
+    <string name="pref_summary_channel_filter_method">Избран метод за филтриране на каналите: %s</string>
+    <string name="setting_updated">Опреснете видеата, за да влезе в сила новата настройка.</string>
+    <string name="pref_title_disable_search_history">Няма история на търсенията</string>
+    <string name="pref_privacy_category">Поверителност</string>
+    <string name="restart">Рестартиране</string>
+    <string name="pref_summary_preferred_regions">Изберете от кой регион искате да виждате препоръчани видеа: %s</string>
+    <string name="pref_title_subscriptions_alphabetical_order">Подреждане на каналите в азбучен ред</string>
+    <string name="pref_key_video_quality_for_downloads_summary">Оптимизиране за: %s</string>
+    <string name="pref_title_channel_filter_method">Метод за филтриране на каналите</string>
+    <string name="pref_key_video_quality_metered_title">Избор за качеството на видеото при ограничен трафик</string>
+    <string name="pref_general">Общи</string>
+    <string name="pref_summary_sponsorblock_category_list">Изберете които категории да се пропускат</string>
+    <string name="pref_disable_search_history_deleted">Историята на търсенията е изтрита.</string>
+    <string name="please_wait">Моля, изчакайте…</string>
+    <string name="pref_title_credit_sponsorblock">Надписи</string>
+    <string name="pref_category_downloads">Сваляния</string>
+    <string name="pref_sponsorblock_category">Блокиране на спонсорите</string>
+    <string name="pref_other_filters_category">Други филтри</string>
+    <string name="pref_title_default_content_country">Страна за съдържанието по подразбиране</string>
+    <string name="disabled">Изключено</string>
+    <string name="pref_summary_disable_search_history">Изтрива и изключва историята на търсенията.</string>
+    <string name="pref_key_video_quality_title">Избор на качество за видеото</string>
+    <string name="preferred_lang_updated">Опреснете видеата, за да започне ползването на предпочитания език.</string>
+    <string name="no_preferred_lang_selected">Няма избран предпочитан език.</string>
+    <string name="app_license">Авторските права принадлежат на Рамон Мифсуд © 2015–2018
+\n
+\nТази програма е свободен софтуер: можете да я разпространявате и/или променяте спазвайки условията на Общия публичен лиценз на ГНУ публикуван от Фондацията за свободен софтуер (версия 3 на лиценза).
+\n
+\nТази програма се разпространява с надеждата, че ще бъде полезна, но БЕЗ НИКАКВИ ГАРАНЦИИ, дори без подразбиращата се гаранция за ТЪРГОВСКА ЦЕННОСТ или ГОДНОСТ ЗА ОПРЕДЕЛЕНА ЦЕЛ. Разгледайте Общия публичен лиценз на ГНУ за повече информация.
+\n
+\nТрябва да сте получили копие на Общия публичен лиценз на ГНУ с програмата. Ако не сте, посетете &lt;https://www.gnu.org/licenses/&gt;</string>
+    <string name="pref_key_video_quality_metered_summary">Оптимизиране за: %s</string>
+    <string name="unblock">Деблокиране</string>
+    <string name="input_channel_url">Адреси на каналите, които да бъдат разрешени:</string>
+    <string name="pref_title_use_dislike_api">Връщане на броя нехаресвания</string>
+    <string name="add">Добавяне</string>
+    <string name="pref_summary_enable_sponsorblock">Автоматично пропускане на частите от видеата, представящи спонсорите, насочващи зрителя към действия и още</string>
+    <string name="pref_summary_low_views_filter">Да не се показват видеа с малко гледания: %s</string>
 </resources>
