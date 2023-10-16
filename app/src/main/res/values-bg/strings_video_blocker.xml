@@ -1,2 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="configure">Настройване</string>
+    <string name="channel_blacklist_error">Каналът не може да бъде добавен в черния списък.</string>
+    <string name="blocked_videos">Блокирани видеа</string>
+    <string name="dislikes">%d%% нехаресвания</string>
+    <string name="no_videos_blocked">Искате ли да настроите блокирането на видеа, така че да се блокират или филтрират видеата\?</string>
+    <string name="channel_blacklisted">Опреснете, за да влезе в сила новият черен списък за каналите.</string>
+    <string name="add_to_permitted">Разрешаване на канала</string>
+    <string name="channel_unwhitelist_error">Каналът не може да бъде премахнат от белия списък.</string>
+    <string name="block_channel">Блокиране на канала</string>
+</resources>
