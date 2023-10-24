@@ -1,2 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="subscribe">Абониране</string>
+    <string name="import_subscriptions_description">Премахнете всички отметки на уеб сайта https://takeout.google.com , така че да остане само „YouTube и YouTube Music“ и натиснете „Включени са всички данни от YouTube“, за да вземете само абонаментите. Натиснете „Следваща стъпка“ и след това „Създаване на експортиране“. Изберете, че искате да получите е-писмо с връзка за сваляне. Свалете файла. Изберете този файл ZIP или го разархивирайте и изберете файла „subscriptions.csv“ или „subscriptions.json“, който трябва да се намира вътре (в /Takeout/YouTube and YouTube Music/subscriptions/) чрез бутона „Избиране на файл с абонаменти“ по-долу.</string>
+    <string name="no_new_channels_found">Не бяха намерени канали от YouTube, за които все още да нямате абонамент.</string>
+    <string name="channel_unsubscribed">Отписахте се от канала</string>
+    <string name="error_check_if_user_has_subbed">Не е възможно да се извърши проверка дали имате абонамент за канала (id=%s)</string>
+    <string name="subscribed">Имате абонамент</string>
+    <string name="total_subscribers">%,d абонати</string>
+    <string name="error_unable_to_subscribe">Не е възможно да се абонирате/отпишете за/от канала (id=%s)</string>
+    <string name="no_channels_found">Във файла, който качихте, няма канали от YouTube.</string>
+    <string name="channel_already_subscribed">Вече имате абонамент</string>
+    <string name="error_get_subbed_channels">Абонаментите за канали не могат да бъдат получени.</string>
+    <string name="select_all">Избиране на всички</string>
+    <string name="channel_subscribed">Имате абонамент за този канал</string>
+    <string name="unsubscribed">Отписахте се</string>
+    <string name="about">Относно</string>
+    <string name="unsubscribe_from_all_current_sibbed_channels">Отписване от всички канали, за които в момента имате абонамент.</string>
+    <string name="select_none">Изчистване на избраното</string>
+    <string name="failed_to_import_subscriptions">Вашите абонаментите от YouTube не могат да бъдат внесени.</string>
+    <string name="subscriptions_to_channels_imported">Внесени канали: %d.</string>
+    <string name="subscriptions">Абонаменти</string>
+    <string name="import_subscriptions_parse_error">Файлът, който качихте, не може да бъде прочетен: %s.</string>
+    <string name="import_subscriptions">Внасяне на абонаментите</string>
+    <string name="channel_subscribe_failed">Абонирането за канала е невъзможно</string>
+    <string name="select_sub_file">Избиране на файл с абонаменти</string>
+    <string name="unsubscribe">Отписване</string>
+</resources>
