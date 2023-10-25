@@ -1,2 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="subscribing_to_channels">Абониране за каналите…</string>
+    <string name="channel_related">Канал…</string>
+    <string name="import_subscriptions_from_youtube">Внасяне на абонаментите от YouTube</string>
+    <string name="no_new_videos_found">Няма нови видеа.</string>
+    <string name="no_subscriptions_text">Когато се абонирате за канали, ще виждате новите видеа от тях тук.</string>
+    <string name="fetching_subbed_channels_info_error">Информацията за канала не може да бъде получена.</string>
+    <string name="notification_new_videos_found">%d нови видеа от каналите, за които имате абонамент</string>
+    <string name="feed">Новите неща</string>
+    <string name="notification_channel_feed_title">Известия за новите неща</string>
+    <string name="fetching_subscription_videos">Получаване на видеата от каналите, за които имате абонамент…</string>
+    <string name="open_channel">Отваряне на канала</string>
+    <string name="fetching_subbed_channels_info">Получаване на информация за канала…</string>
+    <string name="fetched_videos_from_channels">Получени са %1$d видеа от %2$d/%3$d канала.</string>
+</resources>
