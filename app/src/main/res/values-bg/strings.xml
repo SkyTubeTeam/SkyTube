@@ -1,2 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="most_popular">Най-популярни</string>
+    <string name="search_videos">Търсене на видеа</string>
+    <string name="close">Затваряне</string>
+    <string name="cleaner_confirm">Изчистване</string>
+    <string name="num_videos">%d видеа</string>
+    <string name="no">Не</string>
+    <string name="featured">Препоръчани</string>
+    <string name="playlists">Списък за изпълнение</string>
+    <string name="videos">Видеа</string>
+    <string name="cleaner_watched_bookmarks">Премахване на гледаните видеа от отметките</string>
+    <string name="search_channel">Търсене на канал</string>
+    <string name="trending_in">Набиращи популярност (%s)</string>
+    <string name="yes">Да</string>
+    <string name="could_not_get_videos">Не могат да бъдат получени видеата на %s.</string>
+    <string name="could_not_get_channel">Информацията за канала не може да бъде свалена.</string>
+    <string name="ok">Добре</string>
+    <string name="could_not_get_playlists">Не могат да бъдат получени %s списъка за изпълнение.</string>
+    <string name="LIVE">На живо</string>
+    <string name="video_comments_are_disabled">Коментарите към видеото са заключени</string>
+    <string name="views">%,d гледания</string>
+    <string name="cleaner">Изчистване на гледаните видеа</string>
+    <string name="cleaner_explanation">Изчистване на отметнати/свалени видеа. Използвайте следните настройки за филтриране:</string>
+    <string name="cleaner_watched_downloads">Премахване на гледаните свалени видеа</string>
+    <string name="could_not_get_channel_detailed">Информацията за канала не може да бъде свалена: %s.</string>
+    <string name="launch_offical_player_error">Официалният плейър на YouTube не може да бъде стартиран. Уверете се, че е инсталиран.</string>
+    <string name="error">Грешка</string>
+    <string name="video">Видео</string>
+    <string name="loading">Зареждане…</string>
+    <string name="recaptcha_challenge_requested">YouTube смята, че може да сте бот, така че трябва да решите задачата reCAPTCHA.</string>
+    <string name="could_not_get_sponsorblock">Информацията за блокиране на спонсорите не може да бъде получена: %s.</string>
+    <string name="cleaner_toast_finish">Премахнати видеа от отметките: %s, изтрити свалени видеа: %sМБ</string>
+</resources>
