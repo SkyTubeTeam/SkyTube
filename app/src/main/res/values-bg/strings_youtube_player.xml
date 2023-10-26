@@ -1,2 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="reload_video">Презареждане на видеото</string>
+    <string name="mark_watched">Отбелязване като гледано</string>
+    <string name="sponsorblock_category_preview">Преглед/резюме</string>
+    <string name="error_stream_decryption_fail">Кодът за дешифриране на услугата на YouTube не може да бъде зареден.</string>
+    <string name="sponsorblock_category_outro">Заключителни карти/надписи</string>
+    <string name="copy_url">Копиране на адреса</string>
+    <string name="mark_unwatched">Отбелязване като негледано</string>
+    <string name="error_get_comments">Коментарите не могат да бъдат получени.</string>
+    <string name="clear">Изчистване</string>
+    <string name="error_video_parse_error">Видеото не може да бъде пуснато: <br/> <br/> %s.</string>
+    <string name="sponsorblock_skipped">Пропусната част: %s</string>
+    <string name="sponsorblock_category_intro">Шапка/преход</string>
+    <string name="share_via">Споделяне чрез…</string>
+    <string name="metered_network">Мрежа с ограничен трафик</string>
+    <string name="resume">Продължаване</string>
+    <string name="metered_network_blocked_by_policy">Свалянето е забранено, тъй като връзката с Интернет е през мрежа с ограничен трафик.</string>
+    <string name="should_resume">Искате ли да продължите от там, където прекъснахте\?</string>
+    <string name="sponsorblock_category_filler">Пълнеж</string>
+    <string name="warning_live_video">Излъчванията на живо в момента не могат да бъдат пускани. Отваряне с друго приложение\?</string>
+    <string name="ratings_disabled">Оценките са изключени</string>
+    <string name="warning_metered_network_play">Първо се свържете с мрежа, която не е с ограничен трафик, за да избегнете допълнителни такси. Искате ли видеото да се пусне въпреки това\?</string>
+    <string name="error_get_comments_no_network">Свържете с Интернет, за да могат да бъдат получени коментарите.</string>
+    <string name="play_video">Пускане на видеото</string>
+    <string name="open_in_browser">Отваряне в уеб браузър</string>
+    <string name="error_stream_parse_error">Грешка при анализа.</string>
+    <string name="open_with">Отваряне с…</string>
+    <string name="loading_video">Зареждане на видеото…</string>
+    <string name="sponsorblock_category_music_offtopic">Немузикална част</string>
+    <string name="error_stream_err_unavailable">Съобщението е недостъпно.</string>
+    <string name="cancel">Отказ</string>
+    <string name="error_video_streams">Никой от видео потоците не може да бъде получен.</string>
+    <string name="sponsorblock_category_selfpromo">Самореклама</string>
+    <string name="view_replies">Показване на отговорите</string>
+    <string name="enter_video_url">Въведете адрес на видео</string>
+    <string name="hide_replies">Скриване на отговорите</string>
+    <string name="sponsorblock_category_interaction">Насочване към действие</string>
+    <string name="url_copied_to_clipboard">Адресът е копиран в буфера.</string>
+    <string name="play">Пускане</string>
+    <string name="error_video_streams_empty">Видеото „%s“ няма никакви потоци.</string>
+    <string name="error_video_play">Грешка при възпроизвеждането на видео</string>
+    <string name="sponsorblock_category_sponsor">Спонсор</string>
+    <string name="error_invalid_url">Грешен адрес на видео: %s</string>
+    <string name="share">Споделяне</string>
+    <string name="warning_metered_network_disable">Повече не ме питайте.</string>
+    <string name="error_get_video_desc">Описанието на видеото не може да бъде получено.</string>
+    <string name="no_video_comments">Към видеото или няма коментари, или те са изключени.</string>
+    <string name="error_downloaded_file_is_corrupted">Сваленото видео изглежда <b>повредено</b>: <br/> <br/> %s. <br/> <br/> Искате ли да <b>изтриете</b> файла\?</string>
+</resources>
