@@ -103,7 +103,7 @@
     <string name="pref_playback_status_cleared">Lejátszási állapot törölve.</string>
     <string name="pref_summary_clear_playback_status">Lejátszási állapot törlése az összes videóhoz.</string>
     <string name="pref_title_clear_playback_status">Lejátszási állapot törlése</string>
-    <string name="pref_disable_playback_status_deleted">Lejátszási állapot törölve.</string>
+    <string name="pref_disable_playback_status_deleted">A lejátszási állapot törölve.</string>
     <string name="pref_summary_disable_playback_status">Kikapcsolja a lejátszási állapotot.</string>
     <string name="pref_title_disable_playback_status">Lejátszási állapot tiltása</string>
     <string name="pref_disable_search_history_deleted">Keresési előzmények törölve.</string>
