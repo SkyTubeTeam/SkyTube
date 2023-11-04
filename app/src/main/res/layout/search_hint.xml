@@ -23,7 +23,7 @@
 			  android:layout_weight="1"
 			  android:background="@android:color/transparent"
 			  android:gravity="center_vertical"
-			  android:minHeight="?android:attr/listPreferredItemHeightSmall"
+			  android:minHeight="48dp"
 			  android:paddingLeft="15dp"
 			  android:paddingRight="15dp"
 			  android:textAppearance="?android:attr/textAppearanceListItemSmall"
