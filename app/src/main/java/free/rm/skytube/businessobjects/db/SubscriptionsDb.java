@@ -374,7 +374,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
                 new String[] { video.getId() });
     }
 
-	public List<String> getSubscribedChannelIds() {
+	private List<String> getSubscribedChannelIds() {
 		SkyTubeApp.nonUiThread();
 		try (Cursor cursor = getReadableDatabase().rawQuery("SELECT "+SubscriptionsTable.COL_CHANNEL_ID + " FROM "+SubscriptionsTable.TABLE_NAME,null)) {
 			List<String> result = new ArrayList<>();
