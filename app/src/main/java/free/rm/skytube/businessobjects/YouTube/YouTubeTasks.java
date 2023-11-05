@@ -134,12 +134,12 @@ public class YouTubeTasks {
     private static Single<Integer> getBulkSubscriptionVideos(@NonNull List<String> channelIds, @Nullable Consumer<Integer> newVideosFound) {
         final SubscriptionsDb subscriptionsDb = SubscriptionsDb.getSubscriptionsDb();
         final AtomicBoolean changed = new AtomicBoolean(false);
-        final AtomicReference<ReCaptchaException> recaptch = new AtomicReference<>();
+        final AtomicReference<ReCaptchaException> recaptcha = new AtomicReference<>();
         return Flowable.fromIterable(channelIds)
                 .flatMapSingle(channelId ->
                         Single.fromCallable(() -> {
                             SkyTubeApp.nonUiThread();
-                            if (recaptch.get() != null) {
+                            if (recaptcha.get() != null) {
                                 Log.i(TAG, "Re-captcha needed, done for now");
                                 return 0;
                             }
@@ -159,7 +159,7 @@ public class YouTubeTasks {
                                         details.setChannel(dbChannel);
                                         detailedList.add(details);
                                     } catch (ReCaptchaException reCaptchaException) {
-                                        recaptch.set(reCaptchaException);
+                                        recaptcha.set(reCaptchaException);
                                         Log.e(TAG, String.format("ReCaptcha error: %s, open %s to solve", reCaptchaException.getMessage(), reCaptchaException.getUrl()));
                                         return 0;
                                     } catch (ExtractionException | IOException e) {
@@ -183,7 +183,7 @@ public class YouTubeTasks {
                 )
                 .collect(Collectors.summingInt(Integer::intValue))
                 .map(result -> {
-                    ReCaptchaException reCaptchaException = recaptch.get();
+                    ReCaptchaException reCaptchaException = recaptcha.get();
                     if (reCaptchaException != null) {
                         throw reCaptchaException;
                     }
