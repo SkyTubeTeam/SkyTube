@@ -156,6 +156,10 @@ public class SkyTubeApp extends MultiDexApplication {
 	private static void preloadPrettyTime() {
 		Completable.fromAction(() -> new PrettyTime().format(LocalDate.of(2021, 2, 23)))
 				.subscribeOn(Schedulers.io())
+				.onErrorReturn(exc -> {
+					Log.e(TAG, "Unable to initialize PrettyTime, because: " + exc.getMessage(), exc);
+					return "";
+				})
 				.subscribe();
 	}
 
