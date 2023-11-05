@@ -78,22 +78,6 @@ public class DatabaseTasks {
                 .subscribeOn(Schedulers.io());
     }
 
-    /**
-     * Gets a flow of channels (from the DB) that the user is subscribed to and then
-     * tries to refresh it from the network.
-     */
-    public static Flowable<YouTubeChannel> getLoadChannelInfo(@NonNull Context context, List<String> channelIds) {
-        // TODO, add bookmark and downloaded videos channel id too...
-        return Flowable.fromIterable(channelIds)
-                .flatMapMaybe(channelId -> getChannelInfo(context, channelId, true))
-                // This shouldn't be null, but could happen in rare scenarios where the app is offline
-                // and the info was not previously saved
-                .filter(Objects::nonNull)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnError(throwable -> Log.e(TAG, "An error has occurred while refreshing channels", throwable));
-    }
-
     public static Single<List<ChannelView>> getSubscribedChannelView(@Nullable View progressBar,
                                                                      @Nullable String searchText) {
         final boolean sortChannelsAlphabetically = SkyTubeApp.getPreferenceManager()
