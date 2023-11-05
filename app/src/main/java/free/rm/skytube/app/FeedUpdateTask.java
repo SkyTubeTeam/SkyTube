@@ -16,8 +16,6 @@
  */
 package free.rm.skytube.app;
 
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -25,12 +23,11 @@ import android.os.Build;
 import android.util.Log;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
+import androidx.core.app.NotificationChannelCompat;
 import androidx.core.app.NotificationCompat;
-import androidx.core.content.ContextCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import java.util.List;
-import java.util.function.Consumer;
 
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.YouTube.YouTubeTasks;
@@ -39,6 +36,7 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable;
 
 public class FeedUpdateTask {
     private static final String NOTIFICATION_CHANNEL_NAME = "SkyTube";
+    private static final String TAG = "SkyTubeApp";
     private static final String NOTIFICATION_CHANNEL_ID = "subscriptionChecking";
     private static final int NOTIFICATION_ID = 1;
 
@@ -66,6 +64,7 @@ public class FeedUpdateTask {
         if (refreshInProgress) {
             return false;
         }
+        createNotificationChannel(context);
         if (!SkyTubeApp.isConnected(context)) {
             return false;
         }
@@ -81,7 +80,7 @@ public class FeedUpdateTask {
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSuccess(newVideos -> {
                     SkyTubeApp.uiThread();
-                    Log.i("SkyTubeApp", "Found new videos: " + newVideos);
+                    Log.i(TAG, "Found new videos: " + newVideos);
                     EventBus.getInstance().notifyChannelVideoFetchingFinished(newVideos > 0);
                     if (newVideos > 0) {
                         Toast.makeText(context,
@@ -94,15 +93,14 @@ public class FeedUpdateTask {
                 .doOnTerminate(() -> {
                     refreshInProgress = false;
 
-                    ContextCompat.getSystemService(context, NotificationManager.class)
-                            .cancel(NOTIFICATION_ID);
+                    NotificationManagerCompat.from(context).cancel(NOTIFICATION_ID);
 
                     EventBus.getInstance().notifySubscriptionRefreshFinished();
                 }).subscribe());
         return true;
     }
 
-    synchronized void processChannelIds(List<String> channelIds) {
+    private synchronized void processChannelIds(List<String> channelIds) {
         SkyTubeApp.uiThread();
         numVideosFetched      = 0;
         numChannelsFetched    = 0;
@@ -118,26 +116,36 @@ public class FeedUpdateTask {
         }
     }
 
+    private void createNotificationChannel(Context context) {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is not in the Support Library.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            Log.i(TAG, "Create notification channel: "+NOTIFICATION_CHANNEL_ID);
+            final NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
+            final NotificationChannelCompat channel = new NotificationChannelCompat.Builder(NOTIFICATION_CHANNEL_ID, NotificationManagerCompat.IMPORTANCE_DEFAULT)
+                    .setName(NOTIFICATION_CHANNEL_NAME)
+                    .setSound(null, null)
+                    .build();
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
+
     private void showNotification() {
         final Context context = SkyTubeApp.getContext();
-        final NotificationManager notificationManager = ContextCompat.getSystemService(context,
-                NotificationManager.class);
+        final NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
         final NotificationCompat.Builder builder = new NotificationCompat.Builder(context, NOTIFICATION_CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_notification_icon)
                 .setContentTitle(context.getString(R.string.fetching_subscription_videos))
                 .setContentText(String.format(context.getString(R.string.fetched_videos_from_channels),
                         numVideosFetched, numChannelsFetched, numChannelsSubscribed));
 
+
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+            Log.e(TAG, "Pending intent call?");
             PendingIntent pendingIntent = PendingIntent.getActivity(context,
                     1, new Intent(), PendingIntent.FLAG_UPDATE_CURRENT);
             builder.setPriority(NotificationCompat.FLAG_ONGOING_EVENT)
                     .setContentIntent(pendingIntent);
-        } else {
-            final NotificationChannel channel = new NotificationChannel(NOTIFICATION_CHANNEL_ID,
-                    NOTIFICATION_CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH);
-            channel.setSound(null,null);
-            notificationManager.createNotificationChannel(channel);
         }
 
         // Issue the notification.
