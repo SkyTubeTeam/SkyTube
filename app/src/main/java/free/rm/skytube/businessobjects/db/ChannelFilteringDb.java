@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import free.rm.skytube.app.SkyTubeApp;
+import free.rm.skytube.businessobjects.YouTube.newpipe.ChannelId;
 import free.rm.skytube.gui.businessobjects.MultiSelectListPreferenceItem;
 
 /**
@@ -116,7 +117,7 @@ public class ChannelFilteringDb extends SQLiteOpenHelperEx {
 	/**
 	 * @return List of blacklisted channel IDs.
 	 */
-	public List<String> getDeniedChannelsIdsList() {
+	public List<ChannelId> getDeniedChannelsIdsList() {
 		return getChannelsIdsList(ChannelListTable.BLACKLIST);
 	}
 
@@ -162,7 +163,7 @@ public class ChannelFilteringDb extends SQLiteOpenHelperEx {
 	/**
 	 * @return List of allowed channel IDs.
 	 */
-	public List<String> getAllowedChannelsIdsList() {
+	public List<ChannelId> getAllowedChannelsIdsList() {
 		return getChannelsIdsList(ChannelListTable.WHITELIST);
 	}
 
@@ -259,8 +260,8 @@ public class ChannelFilteringDb extends SQLiteOpenHelperEx {
 	 *
 	 * @return List of blacklisted/whitelisted channel IDs.
 	 */
-	private List<String> getChannelsIdsList(ChannelListTable channelListTable) {
-		List<String>    result = new ArrayList<>();
+	private List<ChannelId> getChannelsIdsList(ChannelListTable channelListTable) {
+		List<ChannelId>    result = new ArrayList<>();
 
 		try (Cursor cursor = getReadableDatabase().query(
 				channelListTable.getTableName(),
@@ -268,7 +269,7 @@ public class ChannelFilteringDb extends SQLiteOpenHelperEx {
 				null, null,
 				null, null, null)) {
 			while (cursor.moveToNext()) {
-				result.add(cursor.getString(0));
+				result.add(new ChannelId(cursor.getString(0)));
 			}
 		}
 

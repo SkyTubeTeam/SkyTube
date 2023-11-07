@@ -21,6 +21,7 @@ import free.rm.skytube.businessobjects.YouTube.POJOs.ChannelView;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.YouTube.VideoBlocker;
+import free.rm.skytube.businessobjects.YouTube.newpipe.ChannelId;
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
 import free.rm.skytube.gui.businessobjects.views.SubscribeButton;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
@@ -44,7 +45,7 @@ public class DatabaseTasks {
      * value is old or doesn't exist.
      */
     public static Maybe<YouTubeChannel> getChannelInfo(@NonNull Context context,
-                                                       @NonNull String channelId,
+                                                       @NonNull ChannelId channelId,
                                                        boolean staleAcceptable) {
         return Maybe.fromCallable(() -> {
             final SubscriptionsDb db = SubscriptionsDb.getSubscriptionsDb();
@@ -188,7 +189,7 @@ public class DatabaseTasks {
                             channel.setUserSubscribed(false);
 
                             // remove the channel from the channels subscriptions list/drawer
-                            EventBus.getInstance().notifyChannelRemoved(channel.getId());
+                            EventBus.getInstance().notifyChannelRemoved(channel.getChannelId());
 
                             if (displayToastMessage) {
                                 Toast.makeText(context, R.string.unsubscribed, Toast.LENGTH_LONG).show();

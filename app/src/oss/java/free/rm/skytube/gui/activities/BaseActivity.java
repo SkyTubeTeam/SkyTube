@@ -23,6 +23,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
+import free.rm.skytube.businessobjects.YouTube.newpipe.ChannelId;
 import free.rm.skytube.databinding.ActivityMainBinding;
 import free.rm.skytube.gui.businessobjects.MainActivityListener;
 
@@ -37,7 +38,7 @@ public abstract class BaseActivity extends AppCompatActivity implements MainActi
 	protected void onOptionsMenuCreated(Menu menu) {}
 	public void onLayoutSet() {}
 	@Override
-	public void onChannelClick(String channelId) {}
+	public void onChannelClick(ChannelId channelId) {}
 	public void redrawPanel() {}
 	protected boolean isLocalPlayer() {
 		return false;

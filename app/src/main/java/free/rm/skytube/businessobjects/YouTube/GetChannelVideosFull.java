@@ -35,6 +35,7 @@ import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPI;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPIKey;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
+import free.rm.skytube.businessobjects.YouTube.newpipe.ChannelId;
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 
@@ -47,7 +48,7 @@ import free.rm.skytube.businessobjects.db.SubscriptionsDb;
  */
 public class GetChannelVideosFull extends GetYouTubeVideos {
 
-	private String channelId;
+	private ChannelId channelId;
 	private boolean filterSubscribedVideos;
 
 	private YouTube.Search.List videosList = null;
@@ -137,17 +138,17 @@ public class GetChannelVideosFull extends GetYouTubeVideos {
 	 * @param channelId	Channel ID.
 	 * @param filterSubscribedVideos to filter out the subscribed videos.
 	 */
-	public void setChannelQuery(String channelId, boolean filterSubscribedVideos) {
+	public void setChannelQuery(ChannelId channelId, boolean filterSubscribedVideos) {
 		this.channelId = channelId;
 		this.filterSubscribedVideos = filterSubscribedVideos;
 		if (videosList != null) {
-			videosList.setChannelId(channelId);
+			videosList.setChannelId(channelId.getRawId());
 		}
 	}
 
 	@Override
 	public void setQuery(String query) {
-		setChannelQuery(query, false);
+		setChannelQuery(new ChannelId(query), false);
 	}
 
 	public void setPublishedAfter(long timeInMs) {

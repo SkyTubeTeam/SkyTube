@@ -49,6 +49,7 @@ import java.util.Set;
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
+import free.rm.skytube.businessobjects.YouTube.newpipe.ChannelId;
 import free.rm.skytube.businessobjects.YouTube.newpipe.CommentPager;
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeException;
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
@@ -285,7 +286,7 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
 
             binding.commentThumbnailImageView.setOnClickListener(view -> {
                 if (comment.getUploaderUrl() != null) {
-                    SkyTubeApp.launchChannel(comment.getUploaderUrl(), context);
+                    SkyTubeApp.launchChannel(new ChannelId(comment.getUploaderUrl()), context);
                 }
             });
 

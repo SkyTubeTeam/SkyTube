@@ -19,6 +19,7 @@ package free.rm.skytube.gui.businessobjects;
 
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubePlaylist;
+import free.rm.skytube.businessobjects.YouTube.newpipe.ChannelId;
 
 /**
  * This methods will be called when the user clicks on the view whose aim is to open the ChannelBrowser.
@@ -30,7 +31,7 @@ public interface MainActivityListener {
 	 *
 	 * @param channelId The ID of the Channel
 	 */
-	void onChannelClick(String channelId);
+	void onChannelClick(ChannelId channelId);
 
 	/**
 	 * Called when a playlist is clicked on

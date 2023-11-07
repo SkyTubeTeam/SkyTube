@@ -36,6 +36,7 @@ import java.util.Set;
 import free.rm.skytube.R;
 import free.rm.skytube.app.EventBus;
 import free.rm.skytube.businessobjects.YouTube.POJOs.ChannelView;
+import free.rm.skytube.businessobjects.YouTube.newpipe.ChannelId;
 import free.rm.skytube.businessobjects.db.DatabaseTasks;
 import free.rm.skytube.databinding.SubChannelBinding;
 import free.rm.skytube.gui.businessobjects.MainActivityListener;
@@ -65,11 +66,11 @@ public class SubsAdapter extends RecyclerViewAdapterEx<ChannelView, SubsAdapter.
 	 *
 	 * @param channelId Channel to remove.
 	 */
-	public void removeChannel(String channelId) {
+	public void removeChannel(ChannelId channelId) {
 		int size = getItemCount();
 
 		for (int i = 0; i < size; i++) {
-			if (get(i).getId().equalsIgnoreCase(channelId)) {
+			if (get(i).getId().equals(channelId)) {
 				remove(i);
 				return;
 			}
@@ -86,7 +87,7 @@ public class SubsAdapter extends RecyclerViewAdapterEx<ChannelView, SubsAdapter.
 	 *                  visit;  false = no new videos)
 	 * @return True if the operations have been successful; false otherwise.
 	 */
-	public boolean changeChannelNewVideosStatus(String channelId, boolean newVideos) {
+	public boolean changeChannelNewVideosStatus(ChannelId channelId, boolean newVideos) {
 		ChannelView channel;
 		int position = 0;
 
@@ -160,7 +161,7 @@ public class SubsAdapter extends RecyclerViewAdapterEx<ChannelView, SubsAdapter.
 			super(binding.getRoot());
 			this.binding = binding;
 			binding.getRoot().setOnClickListener(v -> {
-				String channelId = channel.getId();
+				ChannelId channelId = channel.getId();
 				EventBus.getInstance().notifyMainActivities(listener -> {
 					listener.onChannelClick(channelId);
 				});

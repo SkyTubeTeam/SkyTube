@@ -16,20 +16,22 @@
  */
 package free.rm.skytube.businessobjects.YouTube.POJOs;
 
+import free.rm.skytube.businessobjects.YouTube.newpipe.ChannelId;
+
 public class ChannelView {
-    private final String id;
+    private final ChannelId id;
     private final String title;
     private final String thumbnailUrl;
     private boolean newVideosSinceLastVisit;
 
-    public ChannelView(String id, String title, String thumbnailUrl, boolean newVideosSinceLastVisit) {
+    public ChannelView(ChannelId id, String title, String thumbnailUrl, boolean newVideosSinceLastVisit) {
         this.id = id;
         this.title = title;
         this.thumbnailUrl = thumbnailUrl;
         this.newVideosSinceLastVisit = newVideosSinceLastVisit;
     }
 
-    public String getId() {
+    public ChannelId getId() {
         return id;
     }
 

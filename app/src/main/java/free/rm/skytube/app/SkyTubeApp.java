@@ -68,6 +68,7 @@ import free.rm.skytube.businessobjects.FeedUpdaterReceiver;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubePlaylist;
 import free.rm.skytube.businessobjects.YouTube.YouTubeTasks;
+import free.rm.skytube.businessobjects.YouTube.newpipe.ChannelId;
 import free.rm.skytube.businessobjects.YouTube.newpipe.ContentId;
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
 import free.rm.skytube.businessobjects.db.DatabaseTasks;
@@ -492,7 +493,7 @@ public class SkyTubeApp extends MultiDexApplication {
 				break;
 			}
 			case CHANNEL: {
-				SkyTubeApp.launchChannel(content.getId(), ctx);
+				SkyTubeApp.launchChannel(new ChannelId(content.getId()), ctx);
 				break;
 			}
 			case PLAYLIST: {
@@ -512,7 +513,7 @@ public class SkyTubeApp extends MultiDexApplication {
 	 *
 	 * @param channelId the channel to be displayed.
 	 */
-	public static void launchChannel(String channelId, Context context) {
+	public static void launchChannel(ChannelId channelId, Context context) {
 		if (channelId != null) {
 			DatabaseTasks.getChannelInfo(context, channelId, true)
 					.subscribe(youTubeChannel -> launchChannel(youTubeChannel, context));

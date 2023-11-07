@@ -22,6 +22,7 @@ import java.util.function.Consumer;
 import free.rm.skytube.app.utils.WeakList;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetSubscriptionVideosTaskListener;
+import free.rm.skytube.businessobjects.YouTube.newpipe.ChannelId;
 import free.rm.skytube.gui.businessobjects.MainActivityListener;
 import free.rm.skytube.gui.fragments.MainFragment;
 
@@ -53,11 +54,11 @@ public class EventBus {
         this.mainFragments.forEach(main -> main.refreshTabs(settingChange));
     }
 
-    public void notifyChannelNewVideosStatus(String channelId, boolean newVideos) {
+    public void notifyChannelNewVideosStatus(ChannelId channelId, boolean newVideos) {
         this.mainFragments.forEach(main -> main.notifyChangeChannelNewVideosStatus(channelId, newVideos));
     }
 
-    public void notifyChannelNewVideos(String channelId, int newVideos) {
+    public void notifyChannelNewVideos(ChannelId channelId, int newVideos) {
         if (newVideos > 0) {
             this.mainFragments.forEach(main -> main.notifyChangeChannelNewVideosStatus(channelId, true));
         }
@@ -71,7 +72,7 @@ public class EventBus {
         this.videoDetailListeners.add(videoListener);
     }
 
-    public void notifyChannelRemoved(String channelId) {
+    public void notifyChannelRemoved(ChannelId channelId) {
         this.mainFragments.forEach(main -> main.notifyChannelRemoved(channelId));
     }
 

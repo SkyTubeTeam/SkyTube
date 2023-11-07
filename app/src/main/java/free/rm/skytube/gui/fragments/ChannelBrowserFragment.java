@@ -43,9 +43,9 @@ import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
+import free.rm.skytube.businessobjects.YouTube.newpipe.ChannelId;
 import free.rm.skytube.businessobjects.db.DatabaseTasks;
 import free.rm.skytube.databinding.FragmentChannelBrowserBinding;
-import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
 import free.rm.skytube.gui.businessobjects.fragments.FragmentEx;
 import free.rm.skytube.gui.businessobjects.fragments.TabFragment;
 import io.reactivex.rxjava3.disposables.Disposable;
@@ -62,7 +62,7 @@ import io.reactivex.rxjava3.disposables.Disposable;
 public class ChannelBrowserFragment extends FragmentEx {
 
 	private YouTubeChannel		channel;
-	private String 				channelId;
+	private ChannelId channelId;
 
 	public static final String FRAGMENT_CHANNEL_VIDEOS = "ChannelBrowserFragment.FRAGMENT_CHANNEL_VIDEOS";
 	public static final String FRAGMENT_CHANNEL_PLAYLISTS = "ChannelBrowserFragment.FRAGMENT_CHANNEL_PLAYLISTS";
@@ -160,20 +160,28 @@ public class ChannelBrowserFragment extends FragmentEx {
 		super.onDestroy();
 	}
 
+	public void setChannel(YouTubeChannel channel) {
+		this.channel = channel;
+		if (channel != null) {
+			this.channelId = channel.getChannelId();
+		} else {
+			this.channelId = null;
+		}
+	}
+
 	private void getChannelParameters() {
 		// we need to create a YouTubeChannel object:  this can be done by either:
 		//   (1) the YouTubeChannel object is passed to this Fragment
 		//   (2) passing the channel ID... a task is then created to create a YouTubeChannel
 		//       instance using the given channel ID
 		final Bundle bundle = getArguments();
-		final String oldChannelId = this.channelId;
+		final ChannelId oldChannelId = this.channelId;
 
 		Logger.i(ChannelBrowserFragment.this, "getChannelParameters " + bundle);
 		if (bundle != null  &&  bundle.getSerializable(CHANNEL_OBJ) != null) {
-			this.channel = (YouTubeChannel) bundle.getSerializable(CHANNEL_OBJ);
-			channelId = channel.getId();
+			setChannel((YouTubeChannel) bundle.getSerializable(CHANNEL_OBJ));
 		} else {
-			channelId = bundle.getString(CHANNEL_ID);
+			channelId = new ChannelId(bundle.getString(CHANNEL_ID));
 			if (!Objects.equals(oldChannelId, channelId)) {
 				this.channel = null;
 			}
@@ -200,7 +208,7 @@ public class ChannelBrowserFragment extends FragmentEx {
 	@Override
 	public synchronized void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
-		outState.putString(CHANNEL_ID, channelId);
+		outState.putString(CHANNEL_ID, channelId.getRawId());
 		// if channel is not null, the ChannelPagerAdapter is initialized, with all the sub-fragments
 		if (channel != null) {
 			outState.putSerializable(CHANNEL_OBJ, channel);
@@ -270,7 +278,7 @@ public class ChannelBrowserFragment extends FragmentEx {
 				channel.updateLastVisitTime();
 
 				// since we are visiting the channel, then we need to disable the new videos notification
-				EventBus.getInstance().notifyChannelNewVideosStatus(channel.getId(), false);
+				EventBus.getInstance().notifyChannelNewVideosStatus(channel.getChannelId(), false);
 			}
 		}
 	}

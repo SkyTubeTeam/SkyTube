@@ -51,6 +51,7 @@ import free.rm.skytube.app.EventBus;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
+import free.rm.skytube.businessobjects.YouTube.newpipe.ChannelId;
 import free.rm.skytube.businessobjects.YouTube.newpipe.ContentId;
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
 import free.rm.skytube.businessobjects.db.DatabaseTasks;
@@ -284,7 +285,7 @@ public class SubscriptionsBackupsManager {
         for (SubscriptionItem item : items){
             String url = item.getUrl();
             ContentId contentId = newPipeService.getContentId(url);
-            if (contentId != null && contentId.getType() == StreamingService.LinkType.CHANNEL && !subscriptionsDb.isUserSubscribedToChannel(contentId.getId())) {
+            if (contentId != null && contentId.getType() == StreamingService.LinkType.CHANNEL && !subscriptionsDb.isUserSubscribedToChannel(new ChannelId(contentId.getId()))) {
                 result.add(new MultiSelectListPreferenceItem(contentId.getId(), item.getName()));
             }
         }
@@ -322,7 +323,7 @@ public class SubscriptionsBackupsManager {
         // Check the channel list for new channels
         ArrayList<MultiSelectListPreferenceItem> newChannels = new ArrayList<>();
         for (MultiSelectListPreferenceItem channel : channels) {
-            if (channel.id != null && !SubscriptionsDb.getSubscriptionsDb().isUserSubscribedToChannel(channel.id)) {
+            if (channel.id != null && !SubscriptionsDb.getSubscriptionsDb().isUserSubscribedToChannel(new ChannelId(channel.id))) {
                 newChannels.add(channel);
             }
         }

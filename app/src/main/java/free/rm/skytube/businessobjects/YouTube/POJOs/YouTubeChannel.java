@@ -35,6 +35,7 @@ import free.rm.skytube.app.EventBus;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.VideoBlocker;
+import free.rm.skytube.businessobjects.YouTube.newpipe.ChannelId;
 import free.rm.skytube.businessobjects.db.ChannelFilteringDb;
 import free.rm.skytube.businessobjects.db.DatabaseTasks;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
@@ -91,6 +92,9 @@ public class YouTubeChannel extends CardData implements Serializable {
 		return String.format(SkyTubeApp.getStr(R.string.total_subscribers),subscriberCount);
 	}
 
+	public ChannelId getChannelId() {
+		return new ChannelId(id);
+	}
 	public String getBannerUrl() {
 		return bannerUrl;
 	}
@@ -169,7 +173,7 @@ public class YouTubeChannel extends CardData implements Serializable {
 	 *                            out.
 	 */
 	public Single<Boolean> blockChannel(boolean displayToastMessage) {
-		return SubscriptionsDb.getSubscriptionsDb().getUserSubscribedToChannel(getId())
+		return SubscriptionsDb.getSubscriptionsDb().getUserSubscribedToChannel(getChannelId())
 				.flatMap(isSubscribed -> DatabaseTasks.subscribeToChannel(false,
 						null, SkyTubeApp.getContext(), this, false))
 				.map(result -> SkyTubeApp.getSettings().isChannelDenyListEnabled())
@@ -287,7 +291,7 @@ public class YouTubeChannel extends CardData implements Serializable {
 				});
 	}
 
-	public static Disposable subscribeChannel(final Context context, final String channelId) {
+	public static Disposable subscribeChannel(final Context context, final ChannelId channelId) {
 		if (channelId != null) {
 			return DatabaseTasks.getChannelInfo(context, channelId, false)
 					.observeOn(Schedulers.io())

@@ -33,10 +33,10 @@ public class ChannelActionHandler {
     public boolean handleChannelActions(Context context, YouTubeChannel channel, int itemId) {
         switch (itemId) {
             case R.id.subscribe_channel:
-                compositeDisposable.add(YouTubeChannel.subscribeChannel(context, channel.getId()));
+                compositeDisposable.add(YouTubeChannel.subscribeChannel(context, channel.getChannelId()));
                 return true;
             case R.id.open_channel:
-                SkyTubeApp.launchChannel(channel.getId(), context);
+                SkyTubeApp.launchChannel(channel.getChannelId(), context);
                 return true;
             case R.id.block_channel:
                 compositeDisposable.add(channel.blockChannel().subscribe());
