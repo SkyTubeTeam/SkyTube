@@ -54,10 +54,10 @@ public abstract class VideosGridFragment extends BaseVideosGridFragment {
     }
 
     protected void initVideos(@NonNull Context context, VideoGridAdapter videoGridAdapterParam, @NonNull VideosGridviewBinding gridviewBindingParam) {
-        initBase(context, videoGridAdapterParam, gridviewBindingParam.swipeRefreshLayout);
+        initBase(context, videoGridAdapterParam);
         this.gridviewBinding = gridviewBindingParam;
         // setup the video grid view
-        videoGridAdapter.setSwipeRefreshLayout(swipeRefreshLayout);
+        videoGridAdapter.setSwipeRefreshLayout(gridviewBindingParam.swipeRefreshLayout);
 
         VideoCategory category = getVideoCategory();
         if (category != null)

@@ -66,7 +66,7 @@ public class BookmarksFragment extends OrderableVideosGridFragment implements Ca
         BookmarksDb.getBookmarksDb().getTotalBookmarkCount()
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSuccess(numberOfBookmarks -> {
-                    if (numberOfBookmarks > 0 && swipeRefreshLayout != null) {
+                    if (numberOfBookmarks > 0 && gridviewBinding.swipeRefreshLayout != null) {
                         setListVisible(true);
                         // swipeRefreshLayout.setRefreshing(true);
                     }
@@ -117,10 +117,10 @@ public class BookmarksFragment extends OrderableVideosGridFragment implements Ca
 
     private void setListVisible(boolean visible) {
         if (visible) {
-            swipeRefreshLayout.setVisibility(View.VISIBLE);
+            gridviewBinding.swipeRefreshLayout.setVisibility(View.VISIBLE);
             binding.noBookmarkedVideosText.setVisibility(View.GONE);
         } else {
-            swipeRefreshLayout.setVisibility(View.GONE);
+            gridviewBinding.swipeRefreshLayout.setVisibility(View.GONE);
             binding.noBookmarkedVideosText.setVisibility(View.VISIBLE);
         }
     }
