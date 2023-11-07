@@ -41,27 +41,24 @@ public abstract class BaseVideosGridFragment extends TabFragment implements Swip
 	protected VideoGridAdapter videoGridAdapter;
 	private int updateCount = 0;
 
-	protected SwipeRefreshLayout swipeRefreshLayout;
-
 	public BaseVideosGridFragment() {
 	}
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        Logger.w(this, "onCreateView called - call init(...) from the descendant- with videoGridAdapter=%s swipeRefreshLayout=%s", videoGridAdapter, swipeRefreshLayout);
-        initBase(container.getContext(), videoGridAdapter, swipeRefreshLayout);
+        Logger.w(this, "onCreateView called - call init(...) from the descendant- with videoGridAdapter=%s", videoGridAdapter);
+        initBase(container.getContext(), videoGridAdapter);
         return null;
     }
 
-    protected void initBase(@NonNull Context context, VideoGridAdapter videoGridAdapterParam, @Nonnull SwipeRefreshLayout swipeRefreshLayoutParam) {
+    protected void initBase(@NonNull Context context, VideoGridAdapter videoGridAdapterParam) {
         if (videoGridAdapterParam != null) {
             this.videoGridAdapter = videoGridAdapterParam;
         } else {
             this.videoGridAdapter = new VideoGridAdapter();
         }
         videoGridAdapter.setContext(context);
-        this.swipeRefreshLayout = swipeRefreshLayoutParam;
         if (isFragmentSelected()) {
             videoGridAdapter.initializeList();
         }
@@ -94,7 +91,6 @@ public abstract class BaseVideosGridFragment extends TabFragment implements Swip
 	public void onDestroyView() {
 		videoGridAdapter.onDestroy();
 		videoGridAdapter = null;
-		swipeRefreshLayout = null;
 		super.onDestroyView();
 	}
 

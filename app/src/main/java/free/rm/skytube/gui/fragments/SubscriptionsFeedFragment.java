@@ -28,6 +28,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 
@@ -81,7 +82,7 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
         return binding.getRoot();
     }
 
-    void init(Context context, FragmentSubsFeedBinding bindingParam) {
+    private void init(Context context, FragmentSubsFeedBinding bindingParam) {
         this.binding = bindingParam;
         initVideos(context, videoGridAdapter, binding.videosGridview);
         binding.importSubscriptionsButton.setOnClickListener(v -> subscriptionsBackupsManager
@@ -90,6 +91,7 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
         videoGridAdapter.setVideoGridUpdated(this::setupUiAccordingToNumOfSubbedChannels);
         // get the previously published videos currently cached in the database
         videoGridAdapter.setVideoCategory(VideoCategory.SUBSCRIPTIONS_FEED_VIDEOS);
+		binding.videosGridview.swipeRefreshLayout.setOnRefreshListener(this);
     }
 
 	@Override
@@ -137,7 +139,7 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 
 	@Override
 	public void onRefresh() {
-		startRefreshTask(true, true);
+		startRefreshTask(false, true);
 	}
 
 
@@ -163,8 +165,8 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 
 	@Override
 	public void onSubscriptionRefreshStarted() {
-		if (swipeRefreshLayout != null) {
-			swipeRefreshLayout.setRefreshing(true);
+		if (gridviewBinding.swipeRefreshLayout != null) {
+			gridviewBinding.swipeRefreshLayout.setRefreshing(true);
 		}
 	}
 
@@ -176,8 +178,8 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 	@Override
 	public void onSubscriptionRefreshFinished() {
 		// Remove the progress bar(s)
-		if (swipeRefreshLayout != null) {
-			swipeRefreshLayout.setRefreshing(false);
+		if (gridviewBinding.swipeRefreshLayout != null) {
+			gridviewBinding.swipeRefreshLayout.setRefreshing(false);
 		}
 		hideFetchingVideosDialog();
 	}
@@ -221,6 +223,7 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 	 * @param hasChannels   If the user has already subscribed to at least one channel.
 	 */
 	private void setupUiAccordingToNumOfSubbedChannels(boolean hasChannels) {
+		final SwipeRefreshLayout swipeRefreshLayout = gridviewBinding.swipeRefreshLayout;
 		if (hasChannels) {
 			if (swipeRefreshLayout.getVisibility() != View.VISIBLE) {
 				swipeRefreshLayout.setVisibility(View.VISIBLE);

@@ -34,7 +34,6 @@ public class ChannelPlaylistsFragment extends VideosGridFragment implements Play
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View view = super.onCreateView(inflater, container, savedInstanceState);
 
-		swipeRefreshLayout.setOnRefreshListener(this);
 
 		if (playlistsGridAdapter == null) {
 			playlistsGridAdapter = new PlaylistsGridAdapter(getActivity(), this);
@@ -45,6 +44,8 @@ public class ChannelPlaylistsFragment extends VideosGridFragment implements Play
 		YouTubeChannel channel = (YouTubeChannel) requireArguments()
 				.getSerializable(ChannelBrowserFragment.CHANNEL_OBJ);
 		playlistsGridAdapter.setFetcher(createFetcher(channel));
+
+		gridviewBinding.swipeRefreshLayout.setOnRefreshListener(this);
 
 		gridviewBinding.gridView.setAdapter(playlistsGridAdapter);
 
@@ -82,7 +83,7 @@ public class ChannelPlaylistsFragment extends VideosGridFragment implements Play
 
 	@Override
 	public void onRefresh() {
-		playlistsGridAdapter.refresh(youTubePlaylists -> swipeRefreshLayout.setRefreshing(false));
+		playlistsGridAdapter.refresh(youTubePlaylists -> gridviewBinding.swipeRefreshLayout.setRefreshing(false));
 	}
 
 	@Override

@@ -88,7 +88,7 @@ public class DownloadedVideosFragment extends OrderableVideosGridFragment implem
         DownloadedVideosDb.getVideoDownloadsDb().getTotalCount()
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSuccess(numberOfBookmarks -> {
-                    if (numberOfBookmarks > 0 && swipeRefreshLayout != null) {
+                    if (numberOfBookmarks > 0 && gridviewBinding.swipeRefreshLayout != null) {
                         setListVisible(true);
                         // swipeRefreshLayout.setRefreshing(true);
                     }
@@ -98,10 +98,10 @@ public class DownloadedVideosFragment extends OrderableVideosGridFragment implem
 
     private void setListVisible(boolean visible) {
         if (visible) {
-            swipeRefreshLayout.setVisibility(View.VISIBLE);
+            gridviewBinding.swipeRefreshLayout.setVisibility(View.VISIBLE);
             binding.noDownloadedVideosText.setVisibility(View.GONE);
         } else {
-            swipeRefreshLayout.setVisibility(View.GONE);
+            gridviewBinding.swipeRefreshLayout.setVisibility(View.GONE);
             binding.noDownloadedVideosText.setVisibility(View.VISIBLE);
         }
     }

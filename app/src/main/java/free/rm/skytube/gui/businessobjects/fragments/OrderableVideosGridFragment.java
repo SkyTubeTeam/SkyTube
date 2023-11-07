@@ -24,7 +24,7 @@ public abstract class OrderableVideosGridFragment extends VideosGridFragment {
 
     protected void initOrderableVideos(@NonNull Context context, @NonNull OrderableVideoGridAdapter videoGridAdapterParam, @NonNull VideosGridviewBinding gridviewBindingParam) {
         initVideos(context, videoGridAdapterParam, gridviewBindingParam);
-        swipeRefreshLayout.setEnabled(false);
+        gridviewBindingParam.swipeRefreshLayout.setEnabled(false);
 
         ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(videoGridAdapterParam);
         ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
