@@ -77,7 +77,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 	private static final String IS_SUBSCRIBED_QUERY = String.format("SELECT EXISTS(SELECT %s FROM %s WHERE %s =?) AS VAL ", SubscriptionsTable.COL_ID, SubscriptionsTable.TABLE_NAME, SubscriptionsTable.COL_CHANNEL_ID);
 	private static volatile SubscriptionsDb subscriptionsDb = null;
 
-    private static final int DATABASE_VERSION = 9;
+    private static final int DATABASE_VERSION = 10;
 
 	private static final String DATABASE_NAME = "subs.db";
 
@@ -108,18 +108,19 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		// Version 2 of the database introduces the SubscriptionsVideosTable, which stores videos found in each subscribed channel
-		if(oldVersion == 1 && newVersion >= 2) {
-			db.execSQL(SubscriptionsVideosTable.getCreateStatement());
-		}
-        if (oldVersion <= 2 && newVersion >= 3) {
+        VersionUpgrade upgrade = new VersionUpgrade(oldVersion, newVersion);
+        // Version 2 of the database introduces the SubscriptionsVideosTable, which stores videos found in each subscribed channel
+        if (upgrade.executeStep(2)) {
+            db.execSQL(SubscriptionsVideosTable.getCreateStatement());
+        }
+        if (upgrade.executeStep(3)) {
             execSQLUpdates(db, SubscriptionsTable.getAddColumns());
         }
-        if (oldVersion <= 3 && newVersion >= 4) {
+        if (upgrade.executeStep(4)) {
             execSQLUpdates(db, SubscriptionsVideosTable.getAddTimestampColumns());
             setupRetrievalTimestamp(db);
         }
-        if (oldVersion <= 4 && newVersion >= 5) {
+        if (upgrade.executeStep(5)) {
             execSQLUpdates(db, SubscriptionsTable.getLastCheckTimeColumn());
 			db.execSQL(LocalChannelTable.getCreateStatement());
 			try {
@@ -136,19 +137,26 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 				Logger.e(this, "Unable to load subscribed channels to populate cache:" + ex.getMessage(), ex);
 			}
 		}
-        if (oldVersion <= 6 && newVersion >= 7) {
+        if (upgrade.executeStep(7)) {
             db.execSQL(SubscriptionsVideosTable.getIndexOnVideos());
         }
-        if (oldVersion <= 7 && newVersion >= 8) {
+        if (upgrade.executeStep(8)) {
             continueOnError(db, CategoriesTable.getCreateStatement());
             new CategoryManagement(db).setupDefaultCategories();
             SubscriptionsTable.addCategoryColumn(db);
         }
-        if (oldVersion <= 8 && newVersion >= 9) {
+        if (upgrade.executeStep(9)) {
             SubscriptionsVideosTable.addNewFlatTable(db);
             migrateFromJsonColumn(db);
         }
-//        migrateFromJsonColumn(db);
+        if (upgrade.executeStep(10)) {
+            fixChannelIds(db);
+        }
+    }
+
+    private void fixChannelIds(final SQLiteDatabase db) {
+        Logger.w(this, "Fixing channel_id in the subscription_videos table");
+        db.execSQL("update subscription_videos set channel_id = substr(channel_id, 33) where channel_id like \"https://www.youtube.com/channel/%\"");
     }
 
     private void migrateFromJsonColumn(final SQLiteDatabase db) {
@@ -179,7 +187,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 
                 // convert JSON into YouTubeVideo
                 YouTubeVideo video = gson.fromJson(videoJson, YouTubeVideo.class);
-                ContentValues values = convertToContentValues(video, null);
+                ContentValues values = convertToContentValues(video);
                 long rowId = db.insert(SubscriptionsVideosTable.TABLE_NAME_V2, null, values);
                 if (rowId > 0) {
                     success ++;
@@ -325,7 +333,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
     }
 
     public void updateVideo(YouTubeVideo video) {
-        ContentValues values = convertToContentValues(video, null);
+        ContentValues values = convertToContentValues(video);
         getWritableDatabase().update(
                 SubscriptionsVideosTable.TABLE_NAME_V2,
                 values,
@@ -333,9 +341,10 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
                 new String[] { video.getId() });
     }
 
-    private ContentValues convertToContentValues(final YouTubeVideo video, String channelId) {
+    private ContentValues convertToContentValues(final YouTubeVideo video) {
         ContentValues values = new ContentValues();
-        values.put(SubscriptionsVideosTable.COL_CHANNEL_ID_V2.name, channelId != null ? channelId : video.getChannelId());
+        String channelId = Utils.removeChannelIdPrefix(video.getChannelId());
+        values.put(SubscriptionsVideosTable.COL_CHANNEL_ID_V2.name, channelId);
         values.put(SubscriptionsVideosTable.COL_CHANNEL_TITLE.name, video.getSafeChannelName());
         values.put(SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID_V2.name, video.getId());
         values.put(SubscriptionsVideosTable.COL_CATEGORY_ID.name, video.getCategoryId());
@@ -362,8 +371,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
         }
         return values;
     }
-
-	public int setPublishTimestamp(YouTubeVideo video) {
+    public int setPublishTimestamp(YouTubeVideo video) {
         ContentValues values = new ContentValues();
         values.put(SubscriptionsVideosTable.COL_PUBLISH_TIME.name, video.getPublishTimestamp());
 
@@ -610,32 +618,29 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 		}
 	}
 
-	/**
-	 * Insert videos into the subscription video table.
-	 * @param videos
-	 */
-	public void insertVideosForChannel(List<YouTubeVideo> videos, String channelId) {
-		SkyTubeApp.nonUiThread();
+    /**
+     * Insert videos into the subscription video table.
+     * @param videos
+     */
+    public void insertVideosForChannel(List<YouTubeVideo> videos, String channelId) {
+        SkyTubeApp.nonUiThread();
 
-		SQLiteDatabase db = getWritableDatabase();
-		for (YouTubeVideo video : videos) {
-			try {
-				if (video.getPublishTimestamp() != null) {
-					ContentValues values = createContentValues(video, channelId);
-					db.insert(SubscriptionsVideosTable.TABLE_NAME_V2, null, values);
-				}
-			} catch (Exception e) {
-				Logger.e(this, e, "Error inserting "+ videos + " - "+e.getMessage());
-			}
-		}
-	}
+        SQLiteDatabase db = getWritableDatabase();
+        for (YouTubeVideo video : videos) {
+            try {
+                if (video.getPublishTimestamp() != null) {
+                    ContentValues values = createContentValues(video, channelId);
+                    db.insert(SubscriptionsVideosTable.TABLE_NAME_V2, null, values);
+                }
+            } catch (Exception e) {
+                Logger.e(this, e, "Error inserting "+ videos + " - "+e.getMessage());
+            }
+        }
+    }
 
     private ContentValues createContentValues(YouTubeVideo video, String channelId) {
-		channelId = Utils.removeChannelIdPrefix(channelId);
-        ContentValues values = convertToContentValues(video, channelId);
-        values.put(SubscriptionsVideosTable.COL_CHANNEL_ID, channelId);
+        ContentValues values = convertToContentValues(video);
         values.put(SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID, video.getId());
-        // values.put(SubscriptionsVideosTable.COL_YOUTUBE_VIDEO, gson.toJson(video).getBytes());
         final long publishInstant = video.getPublishTimestamp();
         values.put(SubscriptionsVideosTable.COL_PUBLISH_TIME.name, publishInstant);
         values.put(SubscriptionsVideosTable.COL_CATEGORY_ID.name, video.getCategoryId());
