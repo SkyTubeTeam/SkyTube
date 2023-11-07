@@ -28,6 +28,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.core.content.FileProvider;
 
+import com.google.api.services.youtube.model.Channel;
 import com.google.api.services.youtube.model.Thumbnail;
 import com.google.api.services.youtube.model.Video;
 import com.google.api.services.youtube.model.VideoSnippet;
@@ -54,6 +55,7 @@ import free.rm.skytube.app.StreamSelectionPolicy;
 import free.rm.skytube.businessobjects.FileDownloader;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.YouTubeTasks;
+import free.rm.skytube.businessobjects.YouTube.newpipe.ChannelId;
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeUtils;
 import free.rm.skytube.businessobjects.YouTube.newpipe.VideoId;
 import free.rm.skytube.businessobjects.db.BookmarksDb;
@@ -279,15 +281,15 @@ public class YouTubeVideo extends CardData implements Serializable {
 	}
 
     public String getSafeChannelId() {
-        return channel != null ? channel.getId() : null;
+        return channel != null ? channel.getChannelId().getRawId() : null;
     }
 
     public String getSafeChannelName() {
         return channel != null ? channel.getTitle() : null;
     }
 
-	public String getChannelId() {
-		return channel.getId();
+	public ChannelId getChannelId() {
+		return channel.getChannelId();
 	}
 
 	public String getChannelName() {

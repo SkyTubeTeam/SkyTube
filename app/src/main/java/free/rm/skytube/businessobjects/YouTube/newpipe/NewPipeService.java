@@ -244,18 +244,18 @@ public class NewPipeService {
      * @throws ExtractionException
      * @throws IOException
      */
-    public List<YouTubeVideo> getVideosFromFeedOrFromChannel(String channelId) throws NewPipeException {
+    public List<YouTubeVideo> getVideosFromFeedOrFromChannel(ChannelId channelId) throws NewPipeException {
         try {
             SkyTubeApp.nonUiThread();
 
-            List<YouTubeVideo> videos = getFeedVideos(channelId);
+            List<YouTubeVideo> videos = getFeedVideos(channelId.getRawId());
             if (videos != null) {
                 return videos;
             }
         } catch (IOException | ExtractionException | RuntimeException | NewPipeException e) {
             Logger.e(this, "Unable to get videos from a feed " + channelId + " : "+ e.getMessage(), e);
         }
-        return getChannelVideos(channelId);
+        return getChannelVideos(channelId.getRawId());
     }
 
     public VideoPager getTrending() throws NewPipeException {
@@ -317,8 +317,8 @@ public class NewPipeService {
      * @throws ExtractionException
      * @throws IOException
      */
-    public YouTubeChannel getChannelDetails(String channelId) throws NewPipeException {
-        VideoPagerWithChannel pager = getChannelPager(Objects.requireNonNull(channelId, "channelId"));
+    public YouTubeChannel getChannelDetails(ChannelId channelId) throws NewPipeException {
+        VideoPagerWithChannel pager = getChannelPager(Objects.requireNonNull(channelId, "channelId").getRawId());
         // get the channel, and add all the videos from the first page
         YouTubeChannel channel = pager.getChannel();
         try {

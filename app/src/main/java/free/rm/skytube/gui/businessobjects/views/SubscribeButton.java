@@ -61,7 +61,7 @@ public class SubscribeButton extends AppCompatButton implements View.OnClickList
 		if(channel != null) {
 			// Only fetch videos for this channel if fetchChannelVideosOnSubscribe is true AND the channel is not subscribed to yet.
 			if (!isUserSubscribed) {
-				compositeDisposable.add(YouTubeTasks.refreshSubscribedChannel(channel.getId(), null).subscribe());
+				compositeDisposable.add(YouTubeTasks.refreshSubscribedChannel(channel.getChannelId(), null).subscribe());
 			}
 			compositeDisposable.add(DatabaseTasks.subscribeToChannel(!isUserSubscribed,
 					this, getContext(), channel, true).subscribe());

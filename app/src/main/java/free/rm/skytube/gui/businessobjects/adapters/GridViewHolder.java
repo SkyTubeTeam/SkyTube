@@ -39,6 +39,7 @@ import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubePlaylist;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
+import free.rm.skytube.businessobjects.YouTube.newpipe.ChannelId;
 import free.rm.skytube.businessobjects.db.DatabaseTasks;
 import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
 import free.rm.skytube.businessobjects.db.PlaybackStatusDb;
@@ -90,7 +91,7 @@ public class GridViewHolder extends RecyclerView.ViewHolder implements Serializa
 			} else if (currentCard instanceof YouTubePlaylist) {
 				mainActivityListener.onPlaylistClick((YouTubePlaylist) currentCard);
 			} else if (currentCard instanceof YouTubeChannel) {
-				mainActivityListener.onChannelClick( ((YouTubeChannel) currentCard).getId());
+				mainActivityListener.onChannelClick(((YouTubeChannel) currentCard).getChannelId());
 			}
 		});
 
@@ -219,7 +220,7 @@ public class GridViewHolder extends RecyclerView.ViewHolder implements Serializa
 	private void onOptionsButtonClick(final View view, YouTubeChannel channel) {
 		final PopupMenu popupMenu = createPopup(R.menu.channel_options_menu, view);
 		Menu menu = popupMenu.getMenu();
-		updateSubscribeMenuItem(channel.getId(), menu);
+		updateSubscribeMenuItem(channel.getChannelId(), menu);
 		popupMenu.setOnMenuItemClickListener(item -> {
 			if (actionHandler.handleChannelActions(context, channel, item.getItemId())) {
 				return true;
@@ -237,7 +238,7 @@ public class GridViewHolder extends RecyclerView.ViewHolder implements Serializa
 		popupMenu.show();
 	}
 
-	private void updateSubscribeMenuItem(String channelId, Menu menu) {
+	private void updateSubscribeMenuItem(ChannelId channelId, Menu menu) {
 		compositeDisposable.add(SubscriptionsDb.getSubscriptionsDb().getUserSubscribedToChannel(channelId)
 				.observeOn(AndroidSchedulers.mainThread())
 				.subscribe((subscribed) -> {

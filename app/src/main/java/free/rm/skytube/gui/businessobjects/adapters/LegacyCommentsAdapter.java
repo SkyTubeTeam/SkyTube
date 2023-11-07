@@ -37,6 +37,7 @@ import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.YouTube.GetCommentThreads;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeCommentThread;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeComment;
+import free.rm.skytube.businessobjects.YouTube.newpipe.ChannelId;
 import free.rm.skytube.databinding.CommentBinding;
 
 /**
@@ -184,7 +185,7 @@ public class LegacyCommentsAdapter extends BaseExpandableListAdapter {
 
             binding.commentThumbnailImageView.setOnClickListener(view -> {
                 if (comment.getAuthorChannelId() != null) {
-                    SkyTubeApp.launchChannel(comment.getAuthorChannelId(), context);
+                    SkyTubeApp.launchChannel(new ChannelId(comment.getAuthorChannelId()), context);
                 }
             });
 

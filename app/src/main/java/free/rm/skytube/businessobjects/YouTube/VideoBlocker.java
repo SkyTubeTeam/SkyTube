@@ -44,6 +44,7 @@ import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
 import free.rm.skytube.businessobjects.YouTube.POJOs.ChannelView;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
+import free.rm.skytube.businessobjects.YouTube.newpipe.ChannelId;
 import free.rm.skytube.businessobjects.db.ChannelFilteringDb;
 
 import static free.rm.skytube.app.SkyTubeApp.getStr;
@@ -88,8 +89,8 @@ public class VideoBlocker {
 
 		List<CardData>      filteredVideosList    = new ArrayList<>();
 		final boolean       isChannelBlacklistEnabled = settings.isChannelDenyListEnabled();
-		final List<String>  blacklistedChannelIds = isChannelBlacklistEnabled  ? ChannelFilteringDb.getChannelFilteringDb().getDeniedChannelsIdsList() : null;
-		final List<String>  whitelistedChannelIds = !isChannelBlacklistEnabled ? ChannelFilteringDb.getChannelFilteringDb().getAllowedChannelsIdsList() : null;
+		final List<ChannelId>  blacklistedChannelIds = isChannelBlacklistEnabled  ? ChannelFilteringDb.getChannelFilteringDb().getDeniedChannelsIdsList() : null;
+		final List<ChannelId>  whitelistedChannelIds = !isChannelBlacklistEnabled ? ChannelFilteringDb.getChannelFilteringDb().getAllowedChannelsIdsList() : null;
 		// set of user's preferred ISO 639 language codes (regex)
 		final Set<String>   preferredLanguages    = SkyTubeApp.getPreferenceManager().getStringSet(getStr(R.string.pref_key_preferred_languages), defaultPrefLanguages);
 		final BigInteger    minimumVideoViews     = getViewsFilteringValue();
@@ -135,8 +136,8 @@ public class VideoBlocker {
 		if (!isChannelBlacklistEnabled) {
 			return channels;
 		}
-		final List<String>      blacklistedChannelIds = isChannelBlacklistEnabled  ? ChannelFilteringDb.getChannelFilteringDb().getDeniedChannelsIdsList() : null;
-		final List<String>      whitelistedChannelIds = !isChannelBlacklistEnabled ? ChannelFilteringDb.getChannelFilteringDb().getAllowedChannelsIdsList() : null;
+		final List<ChannelId>      blacklistedChannelIds = isChannelBlacklistEnabled  ? ChannelFilteringDb.getChannelFilteringDb().getDeniedChannelsIdsList() : null;
+		final List<ChannelId>      whitelistedChannelIds = !isChannelBlacklistEnabled ? ChannelFilteringDb.getChannelFilteringDb().getAllowedChannelsIdsList() : null;
 
 		for (ChannelView channel : channels) {
 			if ( !(isChannelBlacklistEnabled ? filterByBlacklistedChannels(channel.getId(), blacklistedChannelIds)
@@ -173,8 +174,8 @@ public class VideoBlocker {
 	 *
 	 * @return True if the video is to be filtered; false otherwise.
 	 */
-	private boolean filterByBlacklistedChannels(YouTubeVideo video, List<String> blacklistedChannelIds) {
-		if (filterByBlacklistedChannels(video.getChannel().getId(), blacklistedChannelIds)) {
+	private boolean filterByBlacklistedChannels(YouTubeVideo video, List<ChannelId> blacklistedChannelIds) {
+		if (filterByBlacklistedChannels(video.getChannelId(), blacklistedChannelIds)) {
 			log(video, FilterType.CHANNEL_BLACKLIST, video.getChannelName());
 			return true;
 		} else {
@@ -191,7 +192,7 @@ public class VideoBlocker {
 	 *
 	 * @return True if the channel is to be filtered; false otherwise.
 	 */
-	private boolean filterByBlacklistedChannels(String channelId, List<String> blacklistedChannelIds) {
+	private boolean filterByBlacklistedChannels(ChannelId channelId, List<ChannelId> blacklistedChannelIds) {
 		return blacklistedChannelIds.contains(channelId);
 	}
 
@@ -204,8 +205,8 @@ public class VideoBlocker {
 	 *
 	 * @return True if the video is to be filtered; false otherwise.
 	 */
-	private boolean filterByWhitelistedChannels(YouTubeVideo video, List<String> whitelistedChannelIds) {
-		if (filterByWhitelistedChannels(video.getChannel().getId(), whitelistedChannelIds)) {
+	private boolean filterByWhitelistedChannels(YouTubeVideo video, List<ChannelId> whitelistedChannelIds) {
+		if (filterByWhitelistedChannels(video.getChannelId(), whitelistedChannelIds)) {
 			log(video, FilterType.CHANNEL_WHITELIST, video.getChannelName());
 			return true;
 		} else {
@@ -222,7 +223,7 @@ public class VideoBlocker {
 	 *
 	 * @return True if the channel is to be filtered; false otherwise.
 	 */
-	private boolean filterByWhitelistedChannels(String channelId, List<String> whitelistedChannelIds) {
+	private boolean filterByWhitelistedChannels(ChannelId channelId, List<ChannelId> whitelistedChannelIds) {
 		return !whitelistedChannelIds.contains(channelId);
 	}
 

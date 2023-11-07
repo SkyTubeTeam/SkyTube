@@ -35,6 +35,7 @@ import free.rm.skytube.app.FeedUpdateTask;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.app.utils.WeaklyReferencedMap;
 import free.rm.skytube.businessobjects.Logger;
+import free.rm.skytube.businessobjects.YouTube.newpipe.ChannelId;
 import free.rm.skytube.databinding.FragmentMainBinding;
 import free.rm.skytube.databinding.SubsDrawerBinding;
 import free.rm.skytube.gui.activities.BaseActivity;
@@ -281,11 +282,11 @@ public class MainFragment extends FragmentEx {
 		}
 	}
 
-	public void notifyChangeChannelNewVideosStatus(String channelId, boolean newVideos) {
+	public void notifyChangeChannelNewVideosStatus(ChannelId channelId, boolean newVideos) {
 		subsAdapter.changeChannelNewVideosStatus(channelId, newVideos);
 	}
 
-	public void notifyChannelRemoved(String channelId) {
+	public void notifyChannelRemoved(ChannelId channelId) {
 		subsAdapter.removeChannel(channelId);
 	}
 

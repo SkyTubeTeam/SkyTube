@@ -36,6 +36,7 @@ import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPIKey;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubePlaylist;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
+import free.rm.skytube.businessobjects.YouTube.newpipe.ChannelId;
 import free.rm.skytube.businessobjects.YouTube.newpipe.ContentId;
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeException;
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
@@ -69,8 +70,8 @@ public class YouTubeTasks {
     }
     private YouTubeTasks() { }
 
-    public static Single<Integer> refreshAllSubscriptions(Context context, @Nullable Consumer<List<String>> subscriptionListConsumer, @Nullable Consumer<Integer> newVideosFound) {
-        Single<List<String>>  subscriptionList = SubscriptionsDb.getSubscriptionsDb().getSubscribedChannelIdsAsync();
+    public static Single<Integer> refreshAllSubscriptions(Context context, @Nullable Consumer<List<ChannelId>> subscriptionListConsumer, @Nullable Consumer<Integer> newVideosFound) {
+        Single<List<ChannelId>>  subscriptionList = SubscriptionsDb.getSubscriptionsDb().getSubscribedChannelIdsAsync();
         if (subscriptionListConsumer!= null) {
             subscriptionList = subscriptionList.observeOn(AndroidSchedulers.mainThread())
                     .doOnSuccess(list -> subscriptionListConsumer.accept(list))
@@ -87,7 +88,7 @@ public class YouTubeTasks {
                 });
     }
 
-    public static Single<Integer> refreshSubscribedChannel(String channelId, @Nullable Consumer<Integer> newVideosFound) {
+    public static Single<Integer> refreshSubscribedChannel(ChannelId channelId, @Nullable Consumer<Integer> newVideosFound) {
         if (NewPipeService.isPreferred() || !YouTubeAPIKey.get().isUserApiKeySet()) {
             return YouTubeTasks.getBulkSubscriptionVideos(Collections.singletonList(channelId), newVideosFound);
         } else {
@@ -96,7 +97,7 @@ public class YouTubeTasks {
         }
     }
 
-    private static Single<Integer> refreshSubscriptions(@NonNull List<String> channelIds, @Nullable Consumer<Integer> newVideosFound) {
+    private static Single<Integer> refreshSubscriptions(@NonNull List<ChannelId> channelIds, @Nullable Consumer<Integer> newVideosFound) {
         if (NewPipeService.isPreferred() || !YouTubeAPIKey.get().isUserApiKeySet()) {
             return YouTubeTasks.getBulkSubscriptionVideos(channelIds, newVideosFound);
         } else {
@@ -131,7 +132,7 @@ public class YouTubeTasks {
      * A task that returns the videos of the channels the user has subscribed to. Used to detect if
      * new videos have been published since last time the user used the app.
      */
-    private static Single<Integer> getBulkSubscriptionVideos(@NonNull List<String> channelIds, @Nullable Consumer<Integer> newVideosFound) {
+    private static Single<Integer> getBulkSubscriptionVideos(@NonNull List<ChannelId> channelIds, @Nullable Consumer<Integer> newVideosFound) {
         final SubscriptionsDb subscriptionsDb = SubscriptionsDb.getSubscriptionsDb();
         final AtomicBoolean changed = new AtomicBoolean(false);
         final AtomicReference<ReCaptchaException> recaptcha = new AtomicReference<>();
@@ -193,7 +194,7 @@ public class YouTubeTasks {
 
     private static List<YouTubeVideo> fetchVideos(@NonNull SubscriptionsDb subscriptionsDb,
                                                   @NonNull Map<String, Long> alreadyKnownVideos,
-                                                  @NonNull String channelId) {
+                                                  @NonNull ChannelId channelId) {
         try {
             List<YouTubeVideo> videos = NewPipeService.get().getVideosFromFeedOrFromChannel(channelId);
             // If we found a video which is already added to the db, no need to check the videos after,
@@ -218,7 +219,7 @@ public class YouTubeTasks {
     /**
      * Task to asynchronously get videos for a specific channel.
      */
-    private static Single<List<YouTubeVideo>> getChannelVideos(@NonNull String channelId,
+    private static Single<List<YouTubeVideo>> getChannelVideos(@NonNull ChannelId channelId,
                                                             @Nullable Long publishedAfter,
                                                             boolean filterSubscribedVideos,
                                                             @Nullable Consumer<Integer> newVideosFound) {
@@ -279,7 +280,7 @@ public class YouTubeTasks {
      * A task that returns the videos of channel the user has subscribed too. Used to detect if new
      * videos have been published since last time the user used the app.
      */
-    private static Single<Integer> getSubscriptionVideos(@NonNull List<String> channelIds, @Nullable Consumer<Integer> newVideosFound) {
+    private static Single<Integer> getSubscriptionVideos(@NonNull List<ChannelId> channelIds, @Nullable Consumer<Integer> newVideosFound) {
         /*
          * Get the last time all subscriptions were updated, and only fetch videos that were published after this.
          * Any new channels that have been subscribed to since the last time this refresh was done will have any
@@ -436,7 +437,7 @@ public class YouTubeTasks {
                             channel.addYouTubeVideo((YouTubeVideo) video);
                         }
                     }
-                    SubscriptionsDb.getSubscriptionsDb().saveChannelVideos(channel.getYouTubeVideos(), channel.getId());
+                    SubscriptionsDb.getSubscriptionsDb().saveChannelVideos(channel.getYouTubeVideos(), channel.getChannelId());
                 }
             }
 

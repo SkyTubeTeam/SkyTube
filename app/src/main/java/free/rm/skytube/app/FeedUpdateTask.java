@@ -31,6 +31,7 @@ import java.util.List;
 
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.YouTube.YouTubeTasks;
+import free.rm.skytube.businessobjects.YouTube.newpipe.ChannelId;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 
@@ -100,7 +101,7 @@ public class FeedUpdateTask {
         return true;
     }
 
-    private synchronized void processChannelIds(List<String> channelIds) {
+    private synchronized void processChannelIds(List<ChannelId> channelIds) {
         SkyTubeApp.uiThread();
         numVideosFetched      = 0;
         numChannelsFetched    = 0;

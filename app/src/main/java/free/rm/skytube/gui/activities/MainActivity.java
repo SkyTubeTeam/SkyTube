@@ -56,6 +56,7 @@ import free.rm.skytube.businessobjects.TLSSocketFactory;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubePlaylist;
 import free.rm.skytube.businessobjects.YouTube.VideoBlocker;
+import free.rm.skytube.businessobjects.YouTube.newpipe.ChannelId;
 import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
 import free.rm.skytube.businessobjects.db.SearchHistoryDb;
 import free.rm.skytube.businessobjects.db.SearchHistoryTable;
@@ -454,9 +455,9 @@ public class MainActivity extends BaseActivity {
 	}
 
 	@Override
-	public void onChannelClick(String channelId) {
+	public void onChannelClick(ChannelId channelId) {
 		Bundle args = new Bundle();
-		args.putString(ChannelBrowserFragment.CHANNEL_ID, channelId);
+		args.putString(ChannelBrowserFragment.CHANNEL_ID, channelId.getRawId());
 		switchToChannelBrowserFragment(args, true);
 	}
 
