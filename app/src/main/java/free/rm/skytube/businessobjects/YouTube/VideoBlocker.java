@@ -60,7 +60,7 @@ public class VideoBlocker {
 	/** Default preferred language(s) -- by default, no language shall be filtered out. */
 	private static final Set<String> defaultPrefLanguages = new HashSet<>(SkyTubeApp.getStringArrayAsList(R.array.languages_iso639_codes));
 
-	private Settings settings;
+	private final Settings settings;
 
 	public VideoBlocker() {
 		settings = SkyTubeApp.getSettings();
@@ -119,7 +119,7 @@ public class VideoBlocker {
 	 * @return True if the user wants to use the video blocker, false otherwise.
 	 */
 	private boolean isVideoBlockerEnabled() {
-		return SkyTubeApp.getSettings().isEnableVideoBlocker();
+		return settings.isEnableVideoBlocker();
 	}
 
 	/**
@@ -448,9 +448,9 @@ public class VideoBlocker {
 	 */
 	public static class BlockedVideo implements Serializable {
 
-		private YouTubeVideo    video;
-		private FilterType      filteringType;
-		private String          reason;
+		private final YouTubeVideo    video;
+		private final FilterType      filteringType;
+		private final String          reason;
 
 
 		BlockedVideo(YouTubeVideo video, FilterType filteringType, String reason) {
@@ -496,8 +496,8 @@ public class VideoBlocker {
 	private static class LanguageDetectionSingleton {
 
 		private static LanguageDetectionSingleton languageDetectionSingleton = null;
-		private TextObjectFactory textObjectFactory;
-		private LanguageDetector  languageDetector;
+		private final TextObjectFactory textObjectFactory;
+		private final LanguageDetector  languageDetector;
 
 
 		private LanguageDetectionSingleton() throws IOException {

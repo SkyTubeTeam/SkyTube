@@ -210,7 +210,7 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<CardData, GridViewHo
 	 * @param clearVideosList If set to true, it will clear out any previously loaded videos (found
 	 *                        in this adapter).
 	 */
-	public synchronized void refresh(boolean clearVideosList) {
+	public final synchronized void refresh(boolean clearVideosList) {
 		if (getYouTubeVideos != null && !refreshHappens) {
 			refreshHappens = true;
 			if (clearVideosList) {

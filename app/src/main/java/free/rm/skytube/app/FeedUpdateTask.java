@@ -65,10 +65,10 @@ public class FeedUpdateTask {
         if (refreshInProgress) {
             return false;
         }
-        createNotificationChannel(context);
         if (!SkyTubeApp.isConnected(context)) {
             return false;
         }
+        createNotificationChannel(context);
         SkyTubeApp.getSettings().setRefreshSubsFeedFull(false);
         refreshInProgress = true;
 
