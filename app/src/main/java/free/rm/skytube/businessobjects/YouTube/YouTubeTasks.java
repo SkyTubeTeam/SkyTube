@@ -408,19 +408,20 @@ public class YouTubeTasks {
         if (swipeRefreshLayout != null) {
             swipeRefreshLayout.setRefreshing(true);
         }
+        final boolean subscriptionFeedVideos = videoGridAdapter.getCurrentVideoCategory() == VideoCategory.SUBSCRIPTIONS_FEED_VIDEOS;
 
         return Maybe.fromCallable(() -> {
             // get videos from YouTube or the database.
-            List<CardData> videosList;
+            final List<CardData> videosList;
 
-            if (clearList && videoGridAdapter.getCurrentVideoCategory() == VideoCategory.SUBSCRIPTIONS_FEED_VIDEOS) {
+            if (clearList && subscriptionFeedVideos) {
                 final int currentSize = videoGridAdapter.getItemCount();
                 List<CardData> result = new ArrayList<>(currentSize);
                 boolean hasNew;
                 do {
-                    videosList = getYouTubeVideos.getNextVideos();
-                    hasNew = !videosList.isEmpty();
-                    result.addAll(videosList);
+                    final List<CardData> nextVideos = getYouTubeVideos.getNextVideos();
+                    hasNew = !nextVideos.isEmpty();
+                    result.addAll(nextVideos);
                 } while(result.size() < currentSize && hasNew);
                 videosList = result;
             } else {
@@ -429,12 +430,16 @@ public class YouTubeTasks {
 
             if (videosList != null) {
                 // filter videos
+                final List<CardData> filteredVideos;
                 if (videoGridAdapter.getCurrentVideoCategory().isVideoFilteringEnabled()) {
-                    videosList = new VideoBlocker().filter(videosList);
+                    filteredVideos = new VideoBlocker().filter(videosList);
+                } else {
+                    filteredVideos = videosList;
                 }
 
+                // This is not used for subscriptionFeedVideos
                 if (channel != null && channel.isUserSubscribed()) {
-                    for (CardData video : videosList) {
+                    for (CardData video : filteredVideos) {
                         if (video instanceof YouTubeVideo) {
                             channel.addYouTubeVideo((YouTubeVideo) video);
                         }
@@ -443,9 +448,11 @@ public class YouTubeTasks {
                     PersistentChannel persistentChannel = db.getCachedChannel(channel.getChannelId());
                     db.saveChannelVideos(channel.getYouTubeVideos(), persistentChannel, false);
                 }
+                return filteredVideos;
+            } else {
+                return Collections.<CardData>emptyList();
             }
 
-            return videosList;
         })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

@@ -30,15 +30,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.afollestad.materialdialogs.MaterialDialog;
-
-
 import free.rm.skytube.R;
 import free.rm.skytube.app.EventBus;
 import free.rm.skytube.app.FeedUpdateTask;
 import free.rm.skytube.app.Settings;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.FeedUpdaterService;
+import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetSubscriptionVideosTaskListener;
 import free.rm.skytube.databinding.FragmentSubsFeedBinding;
@@ -65,7 +63,6 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
     private FragmentSubsFeedBinding binding;
 
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();
-    private MaterialDialog fetchingChannelInfoDialog;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -101,22 +98,15 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 
         // setup the UI and refresh the feed (if applicable)
         Settings settings = SkyTubeApp.getSettings();
-        startRefreshTask(isFragmentSelected(), settings.isFullRefreshTimely() || settings.isRefreshSubsFeedFull());
-
-        // this will detect whether we have previous instructed the app (via refreshSubsFeedFromCache())
-        // to refresh the subs feed
-        if (settings.isRefreshSubsFeedFromCache()) {
-            // unset the flag
-            settings.setRefreshSubsFeedFromCache(false);
-
-            // refresh the subs feed by reading from the cache (i.e. local DB)
-            refreshFeedFromCache();
+        if (settings.isFullRefreshTimely() || settings.isRefreshSubsFeedFull()) {
+            startRefreshTask();
         }
+
+        refreshFeedFromCache();
     }
 
     @Override
     public synchronized void onPause() {
-        hideFetchingVideosDialog();
         super.onPause();
         requireActivity().unregisterReceiver(feedUpdaterReceiver);
     }
@@ -138,28 +128,11 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 
     @Override
     public void onRefresh() {
-        startRefreshTask(false, true);
+        startRefreshTask();
     }
 
-
-    private synchronized void startRefreshTask(boolean isShowFetchingVideosDialog, boolean forcedFullRefresh) {
-        FeedUpdateTask fut = FeedUpdateTask.getInstance();
-        if (fut.isRefreshInProgress()) {
-            if (isShowFetchingVideosDialog) {
-                showFetchingVideosDialog();
-            }
-            return;
-        }
-        if (forcedFullRefresh && SkyTubeApp.isConnected(requireContext())) {
-            if (isShowFetchingVideosDialog) {
-                showFetchingVideosDialog();
-            }
-
-            fut.start(requireContext());
-
-        } else {
-            videoGridAdapter.refresh(true);
-        }
+    private synchronized void startRefreshTask() {
+        FeedUpdateTask.getInstance().start(requireContext());
     }
 
     @Override
@@ -180,7 +153,6 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
         if (gridviewBinding != null && gridviewBinding.swipeRefreshLayout != null) {
             gridviewBinding.swipeRefreshLayout.setRefreshing(false);
         }
-        hideFetchingVideosDialog();
     }
 
     @Override
@@ -232,22 +204,6 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
             swipeRefreshLayout.setVisibility(View.GONE);
             binding.noSubscriptionsText.setVisibility(View.VISIBLE);
         }
-    }
-
-    private synchronized void hideFetchingVideosDialog() {
-        if (fetchingChannelInfoDialog != null) {
-            fetchingChannelInfoDialog.dismiss();
-            fetchingChannelInfoDialog = null;
-        }
-    }
-
-    private synchronized void showFetchingVideosDialog() {
-        hideFetchingVideosDialog();
-        fetchingChannelInfoDialog = new MaterialDialog.Builder(getActivity())
-                .content(R.string.fetching_subbed_channels_info)
-                .progress(true, 0)
-                .build();
-        fetchingChannelInfoDialog.show();
     }
 
     public void refreshFeedFromCache() {
