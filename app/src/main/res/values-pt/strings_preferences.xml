@@ -1,2 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="preferences">Preferências</string>
+    <string name="key_preferences">preferências</string>
+    <string name="pref_video_player_category">Reprodutor de Vídeo</string>
+</resources>
