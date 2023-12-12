@@ -8,4 +8,5 @@
     <string name="configure">Thiết lập</string>
     <string name="no_videos_blocked">Bạn có muốn thiết lập trình chặn video để chặn hoặc lọc video không\?</string>
     <string name="blocked_videos">Video đã chặn</string>
+    <string name="add_to_permitted">Cho phép kênh</string>
 </resources>
