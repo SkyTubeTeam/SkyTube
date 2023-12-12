@@ -24,4 +24,8 @@
     <string name="could_not_get_videos">Không thể lấy %s video.</string>
     <string name="recaptcha_challenge_requested">YouTube nghĩ là bạn là rô bốt, nên trước tiên là bạn phải giải reCAPTCHA.</string>
     <string name="could_not_get_sponsorblock">Không thể lấy thông tin SponsorBlock: %s.</string>
+    <string name="cleaner_confirm">Dọn</string>
+    <string name="video_comments_are_disabled">Bình luận đang tắt</string>
+    <string name="cleaner">Công cụ dọn video đã xem</string>
+    <string name="cleaner_toast_finish">Đã dọn %s video khỏi dấu trang, và đã xóa %sMB video tải xuống</string>
 </resources>
