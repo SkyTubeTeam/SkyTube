@@ -24,4 +24,11 @@
     <string name="could_not_get_channel">Nepavyko atsisiųsti kanalo informacijos.</string>
     <string name="could_not_get_videos">Nepavyko gauti %s vaizdo įrašų.</string>
     <string name="could_not_get_sponsorblock">Nepavyko gauti SponsorBlock informacijos: %s.</string>
+    <string name="cleaner_confirm">Išvalyti</string>
+    <string name="cleaner_watched_bookmarks">Išvalyti peržiūrėtas žymas</string>
+    <string name="video_comments_are_disabled">Išjungti vaizdo įrašų komentarai</string>
+    <string name="cleaner">Peržiūrėtų vaizdo įrašų valymas</string>
+    <string name="cleaner_explanation">Išvalyti žymas / atsisiųstus video įrašus. Naudoti šiuos filtrus:</string>
+    <string name="cleaner_watched_downloads">Išvalyti peržiūrėtus video įrašus</string>
+    <string name="cleaner_toast_finish">Pašalinti %s vaizdo įrašas(ai) iš žymų ir atlaisvinta %sMB vietos</string>
 </resources>
