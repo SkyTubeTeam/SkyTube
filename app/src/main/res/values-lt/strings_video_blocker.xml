@@ -8,4 +8,5 @@
     <string name="configure">Nustatyti</string>
     <string name="no_videos_blocked">Ar norite nustatyti vaizdo įrašų blokatorių, kad jis blokuotų arba filtruotų vaizdo įrašus\?</string>
     <string name="blocked_videos">Užblokuoti vaizdo įrašai</string>
+    <string name="add_to_permitted">Leisti kanalą</string>
 </resources>
