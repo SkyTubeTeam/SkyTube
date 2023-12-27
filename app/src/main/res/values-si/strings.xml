@@ -18,9 +18,9 @@
     <string name="recaptcha_challenge_requested">යූටියුබ් ඔබ ව්‍යාපෘති රොබෝවකු යැයි සිතයි, එබැවින් ඔබ පළමුව පරිගණක සහ මිනිසුන් වෙන්කර හඳුනාගත හැකි පරීක්ෂණය විසඳිය යුතුය.</string>
     <string name="could_not_get_videos">වීඩියෝ %s ලබා ගත නොහැක.</string>
     <string name="could_not_get_channel_detailed">නාලිකාවේ තොරතුරු බාගැනීමට නොහැකි විය: %s.</string>
-    <string name="videos">වීඩියෝ දර්ශන</string>
+    <string name="videos">වීඩියෝ</string>
     <string name="video">වීඩියෝව</string>
     <string name="trending_in">නැඟී එන (%s)</string>
     <string name="num_videos">%d වීඩියෝ දර්ශන</string>
-    <string name="playlists">තෝරාගත් සංගීත ලැයිස්තු</string>
+    <string name="playlists">සංගීත ලැයිස්තු</string>
 </resources>
