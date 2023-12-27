@@ -1,2 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="downloading">බාගත කරමින්…</string>
+    <string name="update_failure">යෙදුමේ නව අනුවාදය ස්ථාපනය කළ නොහැකි විය.</string>
+    <string name="up_to_date">යාවත්කාලීන ය</string>
+    <string name="android_too_old">අවාසනාවකට, ඔබගේ Android යාවත්කාලීන කිරීමට පැරණි වැඩිය. ඔබ \'SkyTube Legacy\' අතින් ස්ථාපනය කිරීමට අවශ්‍යයි!</string>
+    <string name="update">යාවත්කාලීන කරන්න</string>
+    <string name="update_available">නව අනුවාදයක් ඇත</string>
+    <string name="up_to_date_msg">ඔබ SkyTube හි නවතම අනුවාදය ස්ථාපනය කර ඇත.</string>
+    <string name="release_notes">%s හි වෙනස්කම්</string>
+    <string name="update_dialog_msg">SkyTube හි නව අනුවාදයක් තිබේ. %s අනුවාදය ස්ථාපනය වනු ඇත.</string>
+    <string name="later">පසුව</string>
+</resources>
