@@ -13,9 +13,9 @@
     <string name="close">වසන්න</string>
     <string name="could_not_get_playlists">තෝරාගත් සංගීත කොටස් ලැයිස්තු %s ලබා ගැනීමට නොහැකි විය.</string>
     <string name="could_not_get_channel">නාලිකාවේ තොරතුරු බාගැනීමට නොහැකි විය.</string>
-    <string name="launch_offical_player_error">නිල යූටියුබ් යෙදුම දියත් කිරීමට නොහැකි විය. එය ස්ථාපනය කර ඇති බවට සහතික වන්න.</string>
+    <string name="launch_offical_player_error">නිල YouTube යෙදුම දියත් කිරීමට නොහැකි විය. එය ස්ථාපනය කර ඇති බවට සහතික වන්න.</string>
     <string name="loading">පූරණය වෙමින්…</string>
-    <string name="recaptcha_challenge_requested">යූටියුබ් ඔබ ව්‍යාපෘති රොබෝවකු යැයි සිතයි, එබැවින් ඔබ පළමුව පරිගණක සහ මිනිසුන් වෙන්කර හඳුනාගත හැකි පරීක්ෂණය විසඳිය යුතුය.</string>
+    <string name="recaptcha_challenge_requested">YouTube ඔබ රොබෝවකු යැයි සිතයි, එබැවින් ඔබ පළමුව පරිගණක සහ මිනිසුන් වෙන්කර හඳුනාගත හැකි පරීක්ෂණය විසඳිය යුතුය.</string>
     <string name="could_not_get_videos">වීඩියෝ %s ලබා ගත නොහැක.</string>
     <string name="could_not_get_channel_detailed">නාලිකාවේ තොරතුරු බාගැනීමට නොහැකි විය: %s.</string>
     <string name="videos">වීඩියෝ</string>
@@ -23,4 +23,12 @@
     <string name="trending_in">නැඟී එන (%s)</string>
     <string name="num_videos">%d වීඩියෝ දර්ශන</string>
     <string name="playlists">සංගීත ලැයිස්තු</string>
+    <string name="cleaner_confirm">පිරිසිදු කරන්න</string>
+    <string name="cleaner_watched_bookmarks">නැරඹූ පිටුසන් ඉවත් කරන්න</string>
+    <string name="video_comments_are_disabled">වීඩියෝ අදහස් අක්‍රියයි</string>
+    <string name="cleaner">නැරඹු වීඩියෝ පිරිසිදු කරන්නා</string>
+    <string name="cleaner_explanation">පිටුසන්/බාගත් වීඩියෝ පිරිසිදු කරන්න. පහත පෙරහන් විකල්ප භාවිතා කරන්න:</string>
+    <string name="cleaner_watched_downloads">නැරඹූ බාගැනීම් ඉවත් කරන්න</string>
+    <string name="could_not_get_sponsorblock">SponsorBlock තොරතුරු ලබා ගැනීමට නොහැකි විය: %s.</string>
+    <string name="cleaner_toast_finish">අපි පිටුසන් වලින් වීඩියෝ %s ඉවත් කර, බාගත කළ වීඩියෝ %sMB මකා ඇත</string>
 </resources>
