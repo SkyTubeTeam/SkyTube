@@ -1,2 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="continue_">කරගෙන යන්න</string>
+    <string name="databases_backing_up">උපස්ථ කරමින්…</string>
+    <string name="pref_title_choose_player">විඩීයෝ වාදකය</string>
+    <string name="databases_backup_fail">ඔබගේ දත්ත සමුදායන් උපස්ථ කිරීමට නොහැකි විය.</string>
+    <string name="pref_title_chromecast_none">කිසිවක් නැත</string>
+    <string name="pref_import_export_category">ආයාත/නිර්යාත</string>
+    <string name="databases_import_select_backup">ආයාත කිරීමට උපස්ථ ගොනුව තෝරන්න</string>
+    <string name="pref_summary_maximum_res">ඉහළම විභේදනය තෝරන්න: %s</string>
+    <string name="pref_title_minimum_res">අඩුම විභේදනය</string>
+    <string name="pref_summary_minimum_res_metered">මනුගත ජාලයක් හරහා වාදනය කරන විට අඩුම විභේදනය තෝරන්න: %s</string>
+    <string name="pref_summary_import_dbs">ඔබගේ පිටුසන් සහ දායකත්ව උපස්ථය ආයාත කරන්න.</string>
+    <string name="pref_title_import_dbs">උපස්ථ ආයාත කරන්න</string>
+    <string name="databases_import_nothing_selected">කිසිවක් තෝරාගෙන නැත…</string>
+    <string name="pref_category_metered_network">මනුගත (සීමිත) ජාලය</string>
+    <string name="pref_chromecast_category">ක්‍රෝම්කාස්ට් (Chromecast)</string>
+    <string name="databases_import_fail">ඔබගේ දත්ත සමුදායන් ආයාත කිරීමට නොහැකි විය.</string>
+    <string name="preferences">සැකසුම්</string>
+    <string name="pref_summary_choose_player">භාවිත කිරීමට වීඩියෝ වාදකය: %s</string>
+    <string name="pref_title_import_subs">YouTube වෙතින් දායකත්වයන් ආයාත කරන්න</string>
+    <string name="databases_import_success">නව පිටුසන් සහ දායකත්වයන් භාවිතා කිරීමට යෙදුම නැවත ආරම්භ කරන්න.</string>
+    <string name="pref_title_backup_dbs">දත්ත සමුදායන් උපස්ථ කරන්න</string>
+    <string name="pref_title_metered_network_usage">මනුගත ජාල භාවිතය</string>
+    <string name="pref_summary_backup_dbs">ඔබගේ පිටුසන් සහ දායකත්වයන් උපස්ථ කරන්න.</string>
+    <string name="databases_backup_success">දත්ත සමුදායන් %s දක්වා උපස්ථ කර ඇත</string>
+    <string name="subs_import_select_backup">ආයාත කිරීමට YouTube XML ගොනුව තෝරන්න</string>
+    <string name="pref_summary_minimum_res">අඩුම විභේදනය තෝරන්න: %s</string>
+    <string name="no_resolution_specified">කිසිවක් නැත</string>
+    <string name="pref_summary_metered_network_usage">වීඩියෝ බාගත කිරීම/ නැරඹීම සඳහා මනුගත ජාලයක් භාවිතා කරන්නේ නම් කුමක් කළ යුතුද: %s</string>
+    <string name="pref_title_maximum_res_metered">මනුගත ජාලය සඳහා ඉහළම විභේදනය</string>
+    <string name="databases_importing">ආයාත කරමින්…</string>
+    <string name="pref_title_autocast">AutoCast</string>
+    <string name="key_preferences">ප්‍රධාන සැකසුම්</string>
+    <string name="pref_summary_import_subs">ඔබගේ YouTube ගිණුමෙන් ඔබගේ දායකත්වයන් ආයාත කරන්න.</string>
+    <string name="databases_import_warning_message">තෝරාගත් උපස්ථ ගොනුවේ ඇති දත්ත සමඟ පිටුසන් සහ දායකත්ව ප්‍රතිස්ථාපනය කරන්නද?</string>
+    <string name="pref_title_maximum_res">ඉහළම විභේදනය</string>
+    <string name="pref_title_minimum_res_metered">මනුගත ජාලය සඳහා අඩුම විභේදනය</string>
+    <string name="pref_summary_maximum_res_metered">මනුගත ජාලයක් හරහා වාදනය කරන විට ඔබේ උපරිම විභේදනය තෝරන්න: %s</string>
+    <string name="pref_video_player_category">විඩීයෝ වාදකයේ සැකසුම්</string>
+</resources>
