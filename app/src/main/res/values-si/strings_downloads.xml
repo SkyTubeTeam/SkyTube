@@ -2,11 +2,11 @@
 <resources>
     <string name="download">බාගත කිරීම</string>
     <string name="download_failed_because">%2$s නිසා %1$s බාගැනීමට නොහැකි විය.</string>
-    <string name="warning_metered_network_download">ඔබ සම්බන්ධ වී ඇති මීටර ජාලයෙන් වීඩියෝව බාගන්නද?</string>
+    <string name="warning_metered_network_download">ඔබ සම්බන්ධ වී ඇති මනුගත ජාලයෙන් වීඩියෝව බාගන්නද?</string>
     <string name="download_video">වීඩියෝව බාගන්න</string>
     <string name="video_download_stream_error">\'%s\' බාගැනීමට නොහැකි විය.</string>
     <string name="downloads">බාගත කිරීම්</string>
-    <string name="external_storage_not_available">ගොනුව බාගැනීමට පළමුව බාහිර වෙත ප්‍රවේශය ලබා දෙන්න.</string>
+    <string name="external_storage_not_available">ගොනුව බාගැනීමට පළමුව බාහිර ගබඞාව ප්‍රවේශය ලබා දෙන්න.</string>
     <string name="starting_video_download">\'%s\' බාගත කරමින්…</string>
     <string name="delete_download">බාගත කිරීම මකන්න</string>
     <string name="video_stream_not_found_with_request_resolution">ඉල්ලූ %1$s-%2$s විභේදනය තුළ කිසිදු වීඩියෝ ප්‍රවාහයක් සොයා ගැනීමට නොහැකි විය</string>
