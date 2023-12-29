@@ -3,7 +3,7 @@
     <string name="video_already_bookmarked">දැනටමත් පිටුසන් කර ඇත</string>
     <string name="bookmark_share_label">SkyTube පිටුසන</string>
     <string name="video_bookmarked">පිටුසන් කරන ලදි</string>
-    <string name="bookmark_share_invalid_url">පිටු සලකුණු කළ හැක්කේ වලංගු යූටියුබ් සබැඳි පමණි.</string>
+    <string name="bookmark_share_invalid_url">පිටු සලකුණු කළ හැක්කේ වලංගු YouTube සබැඳි පමණි.</string>
     <string name="no_bookmarked_videos_text">ඇතැම් වීඩියෝ මෙහි සොයා ගැනීමට ඒවා පිටුසන් කරන්න.</string>
     <string name="video_unbookmarked">පිටුසන ඉවත්කරන ලදි</string>
     <string name="bookmark">පිටුසන</string>
