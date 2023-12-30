@@ -38,4 +38,41 @@
     <string name="pref_title_minimum_res_metered">මනුගත ජාලය සඳහා අඩුම විභේදනය</string>
     <string name="pref_summary_maximum_res_metered">මනුගත ජාලයක් හරහා වාදනය කරන විට ඔබේ උපරිම විභේදනය තෝරන්න: %s</string>
     <string name="pref_video_player_category">විඩීයෝ වාදකයේ සැකසුම්</string>
+    <string name="pref_summary_disable_screen_gestures">වීඩියෝවල ශබ්දය, දීප්තිය සහ ඉදිරියට/පසුපසට සෙවීම පාලනය කරන අභිනයන් ක්‍රියාවිරහිත කරන්න.</string>
+    <string name="pref_about_category">විස්තර</string>
+    <string name="pref_title_website">වෙබ් අඩවිය</string>
+    <string name="pref_network_downloads_category">ජාලය සහ බාගැනීම්</string>
+    <string name="pref_summary_screen_orientation">වීඩියෝ වාදක දිශානතිය: %s</string>
+    <string name="pref_title_screen_orientation">තිර දිශානතිය</string>
+    <string name="pref_summary_open_issue">අදහසක් යෝජනා කරන්න හෝ දෝෂයක් වාර්තා කරන්න.</string>
+    <string name="i_agree">මම එකඟ වෙමි</string>
+    <string name="pref_title_license">Copylefted Libre බලපත්‍රය</string>
+    <string name="pref_title_disable_screen_gestures">වීඩියෝ අභිනයන් නැත</string>
+    <string name="pref_summary_enable_immersive_mode">වාදනය අතරතුර සංචාලන තීරුව සහ තත්ව තීරුව සඟවන්න.</string>
+    <string name="pref_other_category">අනෙක්</string>
+    <string name="pref_summary_license">GPLv3+ (GNU පොදු මහජන බලපත්‍රය - 3 වන අනුවාදය)</string>
+    <string name="pref_title_version">අනුවාදය</string>
+    <string name="system_default_country">පද්ධතිය</string>
+    <string name="pref_title_updates">යාවත්කාලීන කිරීම්</string>
+    <string name="pref_summary_updates">නව අනුවාද සඳහා පරීක්ෂා කරන්න.</string>
+    <string name="pref_summary_feed_notification">දායක වූ නාලිකාවලින් කොපමණ වාරයක් නව වීඩියෝ සොයන්නද: %s</string>
+    <string name="pref_title_default_tab">පෙරනිමි ටැබ්</string>
+    <string name="pref_title_feed_notification">ස්වයංක්‍රීය සංග්‍රහ විස්තර දැනුම්දීම</string>
+    <string name="pref_hide_tabs_restart">මෙම ටැබ් භාවිතා කිරීමට යෙදුම නැවත ආරම්භ කරන්න.</string>
+    <string name="pref_title_hide_tabs">ටැබ් සඟවන්න</string>
+    <string name="pref_summary_autocast">SkyTube හි වෙනත් වීඩියෝ යෙදුම් භාවිතා කරන විට වාදනය සඳහා Chromecast උපාංගය.</string>
+    <string name="app_license">ප්‍රකාශන හිමිකම © 2015–2018 Ramon Mifsud
+\n
+\nමෙම වැඩසටහන නිදහස් මෘදුකාංගයකි: නිදහස් මෘදුකාංග පදනම (බලපත්‍රයේ 3 වැනි අනුවාදය) විසින් ප්‍රකාශයට පත් කරන ලද GNU සාමාන්‍ය මහජන බලපත්‍රයේ නියමයන් යටතේ ඔබට එය නැවත බෙදා හැරීමට සහ/හෝ වෙනස් කිරීමට හැකිය.
+\n
+\nමෙම මෘදුකාංගය බෙදා හරිනු ලබන්නේ එය ප්‍රයෝජනවත් වනු ඇතැයි යන බලාපොරොත්තුවෙන්, නමුත් කිසිදු වගකීමක් නොමැතිව; විශේෂිත අරමුණක් සඳහා වෙළඳ හැකියාව හෝ යෝග්‍යතාවය පිළිබඳ ඇඟවුම් වගකීමක් පවා නොමැතිව වේ. වැඩි විස්තර සඳහා GNU General Public License බලන්න.
+\n
+\nමෙම මෘදුකාංගය සමඟ ඔබට GNU සාමාන්‍ය මහජන බලපත්‍රයේ පිටපතක් ලැබී තිබිය යුතුය. එසේ නොවේ නම්, &lt;https://www.gnu.org/licenses/&gt; බලන්න</string>
+    <string name="pref_title_enable_immersive_mode">Immersive ආකාරය</string>
+    <string name="pref_summary_credits">මෙම යෙදුම පිටුපස වූ විශිෂ්ට පුද්ගලයින් සහ නිදහස් ව්‍යාපෘති.</string>
+    <string name="pref_summary_default_tab">SkyTube දියත් කරන විට පෙන්විය යුතු ටැබ්: %s</string>
+    <string name="pref_summary_hide_tabs">නොපෙන්විය යුතු ටැබ් තෝරන්න. නැවත යෙදුම ආරම්භ කිරීම අවශ්‍යයි.</string>
+    <string name="pref_video_continuous_repeat_toggle">අඛණ්ඩ පුනරාවර්තනය</string>
+    <string name="pref_title_credits">ස්තුතිය</string>
+    <string name="pref_title_open_issue">ගැටලුවක් විවෘත කරන්න</string>
 </resources>
