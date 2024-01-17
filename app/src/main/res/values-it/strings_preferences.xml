@@ -20,7 +20,7 @@
     <string name="continue_">Continua</string>
     <string name="databases_importing">Importazione in corso…</string>
     <string name="databases_import_fail">Impossibile importare i database.</string>
-    <string name="databases_import_success">Riavvia l\'app per utilizzare i nuovi segnalibri e le nuove iscrizioni.</string>
+    <string name="databases_import_success">Riavvia l\'app per usare i nuovi segnalibri e le nuove iscrizioni.</string>
     <string name="pref_title_import_subs">Importa iscrizioni da YouTube</string>
     <string name="pref_summary_import_subs">Importa le iscrizioni dal tuo account di Youtube.</string>
     <string name="subs_import_select_backup">Seleziona il file XML di YouTube da importare</string>
@@ -53,10 +53,10 @@
         <item>Device sensor</item>
     </string-array>
     <string name="pref_title_youtube_api_key">Chiave API di YouTube</string>
-    <string name="pref_summary_youtube_api_key">Inserisci invece una chiave API YouTube personale da utilizzare.</string>
+    <string name="pref_summary_youtube_api_key">Inserisci invece una chiave API YouTube personale da usare.</string>
     <string name="pref_youtube_api_key_error">Impossibile convalidare la chiave API inserita.</string>
-    <string name="pref_youtube_api_key_custom">Riavvia l\'app per utilizzare la nuova chiave API di YouTube.</string>
-    <string name="pref_youtube_api_key_default">Riavvia l\'app per utilizzare invece la chiave API di YouTube predefinita.</string>
+    <string name="pref_youtube_api_key_custom">Riavvia l\'app per usare la nuova chiave API di YouTube.</string>
+    <string name="pref_youtube_api_key_default">Riavvia l\'app per usare invece la chiave API di YouTube predefinita.</string>
     <string name="restart">Riavvia</string>
     <string name="pref_title_feed_notification">Notifica automatica dei feed</string>
     <string name="pref_summary_feed_notification">Quanto spesso cercare nuovi video dai canali a cui sei iscritto: %s</string>
@@ -67,7 +67,7 @@
         <item>24 Hours</item>
     </string-array>
     <string name="pref_title_choose_player">Lettore video</string>
-    <string name="pref_summary_choose_player">Lettore video da utilizzare: %s</string>
+    <string name="pref_summary_choose_player">Lettore video da usare: %s</string>
     <string name="pref_title_disable_search_history">Nessuna cronologia delle ricerche</string>
     <string name="pref_summary_disable_search_history">Cancella e disattiva la cronologia delle ricerche.</string>
     <string name="pref_disable_search_history_deleted">Cronologia di ricerca eliminata.</string>
@@ -94,13 +94,13 @@
     <string name="block">Blocca</string>
     <string name="please_wait">Attendere prego…</string>
     <string name="channel_already_whitelisted">Canale già aggiunto all\'elenco consentiti.</string>
-    <string name="channel_whitelist_updated">Aggiorna i video per utilizzare il nuovo elenco di canali consentiti.</string>
+    <string name="channel_whitelist_updated">Aggiorna i video per usare il nuovo elenco di canali consentiti.</string>
     <string name="channel_whitelist_update_failure">Impossibile aggiungere all\'elenco consentiti il canale specificato.</string>
-    <string name="channel_unwhitelist_success">Aggiorna i video per utilizzare il nuovo elenco di canali consentiti.</string>
+    <string name="channel_unwhitelist_success">Aggiorna i video per usare il nuovo elenco di canali consentiti.</string>
     <string name="channel_unwhitelist_failure">Impossibile rimuovere i canali indicati dall\'elenco dei canali consentiti.</string>
     <string name="preferred_lang_updated">Ricarica i video per usare la nuova lingua.</string>
     <string name="pref_title_lang_detection_video_filtering">Filtro lingua video</string>
-    <string name="pref_summary_lang_detection_video_filtering">Utilizza molte risorse per rilevare la lingua del video e bloccare le lingue non preferite.</string>
+    <string name="pref_summary_lang_detection_video_filtering">Usa molte risorse per rilevare la lingua del video e bloccare le lingue non preferite.</string>
     <string name="setting_updated">Ricarica i video per usare la nuova impostazione.</string>
     <string name="pref_title_low_views_filter">Visualizzazioni</string>
     <string name="pref_summary_low_views_filter">Filtra i video con poche visualizzazioni: %s</string>
@@ -129,11 +129,11 @@
     <string name="pref_summary_enable_immersive_mode">Nascondi la barra di navigazione e la barra di stato durante la riproduzione.</string>
     <string name="pref_title_enable_immersive_mode">Modalità immersiva</string>
     <string name="pref_video_continuous_repeat_toggle">Ripetizione continua</string>
-    <string name="pref_hide_tabs_restart">Riavvia l\'app utilizzando queste schede.</string>
+    <string name="pref_hide_tabs_restart">Riavvia l\'app usando queste schede.</string>
     <string name="pref_summary_hide_tabs">Scegli le schede da non mostrare. Riavvio richiesto.</string>
     <string name="pref_title_hide_tabs">Nascondi le schede</string>
     <string name="pref_network_downloads_category">Rete e download</string>
-    <string name="pref_summary_autocast">Dispositivo Chromecast per la riproduzione quando si utilizzano altre app video in SkyTube.</string>
+    <string name="pref_summary_autocast">Dispositivo Chromecast per la riproduzione quando si usano altre app video in SkyTube.</string>
     <string name="pref_title_autocast">AutoCast</string>
     <string name="pref_title_chromecast_none">Nessuno</string>
     <string name="pref_chromecast_category">Chromecast</string>
@@ -154,8 +154,8 @@
     <string name="pref_category_download_resolutions">Risoluzione video per i download</string>
     <string name="pref_category_video_resolutions">Risoluzione video</string>
     <string name="system_default_country">Sistema</string>
-    <string name="pref_summary_metered_network_usage">Cosa fare se si utilizza una rete a consumo per scaricare/guardare video: %s</string>
-    <string name="pref_title_metered_network_usage">Utilizzo della rete a consumo</string>
+    <string name="pref_summary_metered_network_usage">Cosa fare se si usa una rete a consumo per scaricare/guardare video: %s</string>
+    <string name="pref_title_metered_network_usage">Uso della rete a consumo</string>
     <string name="pref_summary_maximum_res_metered">Seleziona la risoluzione più alta durante lo streaming tramite una rete a consumo: %s</string>
     <string name="pref_title_maximum_res_metered">Risoluzione più alta per la rete a consumo</string>
     <string name="pref_summary_minimum_res_metered">Seleziona la risoluzione più bassa durante lo streaming tramite una rete a consumo: %s</string>
@@ -174,7 +174,7 @@
     <string name="pref_summary_use_dislike_api">Mostra il numero di \"Non mi piace\" da returnyoutubedislike.com</string>
     <string name="pref_title_playback_speed">Velocità di riproduzione predefinita</string>
     <string name="pref_summary_playback_speed">Velocità di riproduzione predefinita: %s</string>
-    <string name="pref_summary_credit_sponsorblock">Utilizza i dati di SponsorBlock da https://sponsor.ajay.app</string>
+    <string name="pref_summary_credit_sponsorblock">Usa i dati di SponsorBlock da https://sponsor.ajay.app</string>
     <string name="pref_summary_enable_sponsorblock">Salta automaticamente i segmenti video dedicati agli sponsor, promemoria d\'interazione e altro ancora</string>
     <string name="pref_title_sponsorblock_category_list">Salta segmenti</string>
     <string name="pref_summary_sponsorblock_category_list">Scegli le categorie da saltare</string>
