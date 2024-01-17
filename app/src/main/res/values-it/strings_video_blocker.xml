@@ -4,7 +4,7 @@
     <string name="no_videos_blocked">Vuoi configurare il blocco dei video per bloccare o filtrare i video\?</string>
     <string name="configure">Configura</string>
     <string name="block_channel">Blocca canale</string>
-    <string name="channel_blacklisted">Aggiorna per utilizzare la nuova blacklist dei canali.</string>
+    <string name="channel_blacklisted">Aggiorna per usare la nuova blacklist dei canali.</string>
     <string name="channel_blacklist_error">Impossibile inserire il canale nella blacklist.</string>
     <string name="channel_unwhitelist_error">Impossibile rimuovere il canale dalla whitelist.</string>
     <string name="dislikes">%d%% non mi piace</string>
