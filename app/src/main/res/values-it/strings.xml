@@ -25,7 +25,7 @@
     <string name="recaptcha_challenge_requested">YouTube pensa che tu sia un bot, quindi devi prima risolvere un reCAPTCHA.</string>
     <string name="could_not_get_sponsorblock">Impossibile recuperare le informazioni di SponsorBlock: %s.</string>
     <string name="cleaner">Pulisci video già visti</string>
-    <string name="cleaner_explanation">Pulisci i video aggiunti ai preferiti/scaricati. Utilizza le seguenti opzioni di filtro:</string>
+    <string name="cleaner_explanation">Pulisci i video aggiunti ai preferiti/scaricati. Usa le seguenti opzioni di filtro:</string>
     <string name="cleaner_confirm">Pulisci</string>
     <string name="cleaner_toast_finish">Abbiamo rimosso %s video dai segnalibri ed eliminato %s MB di video scaricati</string>
     <string name="cleaner_watched_downloads">Rimuovi gli scaricamenti già visti</string>
