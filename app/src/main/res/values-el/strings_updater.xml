@@ -1,2 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="update_dialog_msg">Μια νέα εκδοχή του SkyTube είναι διαθέσιμη. Η εκδοχή %s θα εγκατασταθεί.</string>
+    <string name="up_to_date">Ενημερωμένο</string>
+    <string name="update_available">Νέα έκδοση διαθέσιμη</string>
+    <string name="android_too_old">Δυστυχώς, η έκδοση του Android σας είναι πολύ παλιά για να ενημερωθεί η εφαρμογή. Πρέπει να εγκαταστήσετε μόνος/η σας το \'SkyTube Legacy\'!</string>
+    <string name="up_to_date_msg">Έχετε εγκαταστήσει τη νεότερη έκδοση του SkyTube.</string>
+    <string name="release_notes">Αλλαγές στο %s</string>
+    <string name="update_failure">Αποτυχία εγκατάστασης της νέας έκδοσης της εφαρμογής.</string>
+    <string name="downloading">Γίνεται λήψη…</string>
+    <string name="update">Ενημέρωση</string>
+    <string name="later">Αργότερα</string>
+</resources>
