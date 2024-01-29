@@ -1,2 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="pref_video_player_category">Πρόγραμα αναπαραγωγής</string>
+    <string name="pref_title_maximum_res">Υψηλότερη ανάλυση</string>
+    <string name="pref_category_metered_network">Σύνδεση ογκοχρέωσης δεδομένων</string>
+    <string name="pref_title_minimum_res_metered">Ελάχιστη ανάλυση για σύνδεση ογκομέτρησης δεδομένων</string>
+    <string name="pref_summary_minimum_res_metered">Επιλέξτε ελάχιστη ανάλυση για αναπαραγωγή σε σύνδεση ογκομέτρησης δεδομένων: %s</string>
+    <string name="pref_title_maximum_res_metered">Μέγιστη ανάλυση για σύνδεση ογκομέτρησης δεδομένων</string>
+    <string name="pref_title_metered_network_usage">Χρήση συνδεσης ογκοχρέωσης δεδομένων</string>
+    <string name="pref_summary_metered_network_usage">Τι να γίνεται αν παρακολουθείτε ή λαμβάνετε βίντεο μέσω σύνδεσης ογκοχρέωσης δεδομένων: %s</string>
+    <string name="pref_import_export_category">Εισαγωγή/Εξαγωγή</string>
+    <string name="pref_title_backup_dbs">Αντίγραφο ασφαλέιας βάσεων δεδομένων</string>
+    <string name="pref_summary_backup_dbs">Δημιουργείστε αντίγραφο ασφαλείας των σελιδοδείκτων και των συνδρομών σας.</string>
+    <string name="pref_title_import_dbs">Εισαγωγή αντιγράφου ασφαλείας</string>
+    <string name="pref_summary_import_dbs">Εισάγαγετε αντίγραφο ασφαλείας των σελιδοδείκτων και των συνδρομών σας.</string>
+    <string name="preferences">Προτιμήσεις</string>
+    <string name="key_preferences">προτιμήσεις</string>
+    <string name="pref_summary_maximum_res">Επιλέξτε την υψηλότερη ανάλυση: %s</string>
+    <string name="pref_title_minimum_res">Ελάχιστη ανάλυση</string>
+    <string name="pref_title_choose_player">Πρόγραμμα αναπαραγωγής</string>
+    <string name="no_resolution_specified">Κανένα</string>
+    <string name="pref_summary_minimum_res">Επιλέξτε την ελάχιστη ανάλυση: %s</string>
+    <string name="pref_summary_choose_player">Χρήση του προγράμματος αναπαραγωγής: %s</string>
+    <string name="pref_summary_maximum_res_metered">Επιλέξτε μέγιστη ανάλυση για αναπαραγωγή σε σύνδεση ογκομέτρησης δεδομένων: %s</string>
+</resources>
