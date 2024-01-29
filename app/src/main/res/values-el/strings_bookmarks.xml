@@ -1,2 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="bookmarks">Σελιδοδείκτες</string>
+    <string name="bookmark">Προσθήκη στους σελιδοδείκτες</string>
+    <string name="video_already_bookmarked">Το βίντεο έχει ήδη προστεθεί στους σελιδοδείκτες</string>
+    <string name="unbookmark">Αφαίρεση απο τους σελιδοδείκτες</string>
+    <string name="video_was_not_bookmarked">Το βίντεο δεν απθηκεύτηκε στους σελιδοδείκτες</string>
+    <string name="video_unbookmarked_error">Αποτυχία αφαίρεσης του βίντεο από τους σελιδοδείκτες.</string>
+    <string name="no_bookmarked_videos_text">Προσθέστε μερικά βίντεο στους σελιδοδείκτες για να τα βρείτε εδώ.</string>
+    <string name="bookmark_share_label">Σελιδοδείκτης SkyTube</string>
+    <string name="bookmark_share_invalid_url">Μόνο έγκυροι σύνδεσμοι του YouTube μπορούν να προστεθούν στους σελιδοδείκτες.</string>
+    <string name="video_unbookmarked">Το βίντεο αφαιρέθηκε απο τους σελιδοδείκτες</string>
+    <string name="video_bookmarked">Το βίντεο προστέθηκε στους σελιδοδείκτες</string>
+    <string name="video_bookmarked_error">Αποτυχία προσθήκης του βίντεο στους σελιδοδείκτες.</string>
+</resources>
