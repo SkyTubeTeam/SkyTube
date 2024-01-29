@@ -1,2 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="could_not_get_videos">Αποτυχία λήψης %s βίντεο.</string>
+    <string name="could_not_get_channel">Αποτυχία λήψης των πληροφοριών του καναλιού.</string>
+    <string name="could_not_get_channel_detailed">Αποτυχία λήψης των πληροφοριών του καναλιού: %s.</string>
+    <string name="could_not_get_sponsorblock">Αποτυχία λήψης των πληροφοριών του SponsorBlock: %s.</string>
+    <string name="error">Σφάλμα</string>
+    <string name="ok">Εντάξει</string>
+    <string name="search_videos">Αναζήτηση βίντεο</string>
+    <string name="launch_offical_player_error">Αποτυχία εκκίνησης του επίσημου προγράμματος αναπαραγωγής YouTube. Βεβαιωθείτε οτι είναι εγκατεστημένο.</string>
+    <string name="LIVE">Ζωντανή μετάδοση</string>
+    <string name="featured">Προτεινόμενα</string>
+    <string name="most_popular">Πιο δημοφιλή</string>
+    <string name="trending_in">Τάσεις (%s)</string>
+    <string name="video">Βίντεο</string>
+    <string name="videos">Βίντεο</string>
+    <string name="num_videos">%d βίντεο</string>
+    <string name="playlists">Λίστες αναπαραγωγής</string>
+    <string name="could_not_get_playlists">Αποτυχία λήψης %s λιστών αναπαραγωγής.</string>
+    <string name="recaptcha_challenge_requested">Το YouTube πιστεύει ότι είστε ρομπότ, οπότε πρέπει να λύσετε ενα reCAPTCHA πρωτού συνεχίσετε.</string>
+    <string name="close">Κλείσιμο</string>
+    <string name="loading">Φορτώνει…</string>
+    <string name="yes">Ναι</string>
+    <string name="search_channel">Αναζήτηση καναλιού</string>
+    <string name="cleaner">Εκκαθαρίση των βίντεο που έχετε παρακολουθήσει</string>
+    <string name="cleaner_confirm">Εκκαθάριση</string>
+    <string name="cleaner_toast_finish">Αφαιρέσαμε %s βίντεο από τους σελιδοδείκτες, και διαγράψαμε %sMB αποθηκευμένων βίντεο στη συσκευή σας</string>
+    <string name="cleaner_watched_downloads">Αφαίρεση λήψεων που έχετε παρακολουθήσει</string>
+    <string name="video_comments_are_disabled">Τα σχόλια στο βίντεο είναι απενεργοποιημένα</string>
+    <string name="views">%,d προβολές</string>
+    <string name="cleaner_watched_bookmarks">Αφαίρεση σελιδοδεικτών που έχετε παρακολουθήσει</string>
+    <string name="no">Όχι</string>
+    <string name="cleaner_explanation">Εκκαθαρίστε αποθηκευμένα βίντεο στους σελιδοδείκτες ή στη συσκευή σας. Χρησιμοποιείστε τις ακόλουθες επιλογές φίλτρων:</string>
+</resources>
