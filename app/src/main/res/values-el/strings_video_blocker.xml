@@ -1,2 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="blocked_videos">Αποκλεισμένα βίντεο</string>
+    <string name="no_videos_blocked">Θέλετε να ρυθμίσετε τον αποκλειστή βίντεο για να αποκλείσετε ή να φιλτράρετε βίντεο;</string>
+    <string name="configure">Ρύθμιση</string>
+    <string name="block_channel">Αποκλεισμός του καναλιού</string>
+    <string name="add_to_permitted">Προσθήκη στα αποδεχτά κανάλια</string>
+    <string name="channel_blacklisted">Ανανεώστε ώστε να χρησιμοποιήσετε τη νέα λίστα αποκλεισμένων καναλιών.</string>
+    <string name="channel_blacklist_error">Αποτυχία αποκλεισμού του καναλιού.</string>
+    <string name="channel_unwhitelist_error">Αποτυχία αφαίρεσης του καναλιού απο τη λίστα αποδεχτών καναλιών.</string>
+    <string name="dislikes">%d%% \"Δε μου αρέσει\"</string>
+</resources>
