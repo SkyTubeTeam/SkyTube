@@ -1,2 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="subscriptions">Συνδρομές</string>
+    <string name="subscribe">Εγγραφείτε</string>
+    <string name="unsubscribe">Απεγγραφείτε</string>
+    <string name="total_subscribers">%,d συνδρομητές</string>
+    <string name="subscribed">Εγγραφήκατε</string>
+    <string name="channel_subscribed">Εγγραφήκατε στο κανάλι</string>
+    <string name="channel_already_subscribed">Έχετε ήδη εγγραφεί στο κανάλι</string>
+    <string name="channel_subscribe_failed">Αποτυχία εγγραφής στο κανάλι</string>
+    <string name="unsubscribed">Απεγγραφήκατε</string>
+    <string name="channel_unsubscribed">Απεγγραφήκατε απο το κανάλι</string>
+    <string name="error_get_subbed_channels">Αποτυχία λήψης της λίστας συνδρομών καναλιών.</string>
+    <string name="error_check_if_user_has_subbed">Αποτυχία ελέγχου της εγγραφής σας στο καναλι (id=%s)</string>
+    <string name="error_unable_to_subscribe">Αποτυχία (απ)εγγραφής από το/στο κανάλι (id=%s)</string>
+    <string name="import_subscriptions">Εισαγωγή συνδρομών</string>
+    <string name="unsubscribe_from_all_current_sibbed_channels">Απεγγραφείτε απο όλα τα κανάλια που είστε τωρα εγγεγραμένος/η.</string>
+    <string name="subscriptions_to_channels_imported">%d κανάλι(α) εισήχθησαν.</string>
+    <string name="select_sub_file">Επιλέξτε αρχείο συνδρομών</string>
+    <string name="select_all">Επιλογή όλων</string>
+    <string name="select_none">Επιλογή κανενός</string>
+    <string name="no_channels_found">Αποτυχία εύρεσης καναλιών YouTube στο αρχείο που ανεβάσατε.</string>
+    <string name="no_new_channels_found">Δε βρέθηκε κανένα κανάλι YouTube στο οποίο δεν ήσασταν ήδη εγγεγραμμένος/η.</string>
+    <string name="import_subscriptions_parse_error">Αποτυχία ανάλυσης του αρχείου που ανεβάσατε: %s.</string>
+    <string name="failed_to_import_subscriptions">Αποτυχία εισαγωγής των συνδρομών YouTube.</string>
+    <string name="about">Σχετικά</string>
+    <string name="import_subscriptions_description">Αφαιρέστε όλες τις επιλογές στη σελίδα https://takeout.google.com εκτός από \"YouTube and YouTube Music\" και κάντε κλικ στην επιλογή \"All YouTube data included\" για να λάβετε μόνο τις συνδρομές σας. Κάντε κλικ στο \"Next\" και μετά στο \"Create export\". Κάντε κλικ στην επιλογή να λάβετε mail με ενα συνδεσμο λήψης. Κατεβάστε το αρχείο απο το mail που θα λάβετε. Επιλέξτε αυτο το αρχείο ZIP ή κάντε το εξαγωγλη και επιλέξτε το αρχείο subscriptions.csv ή subscriptions.json που περιέχονται (στο /Takeout/YouTube και στο YouTube Music/subscriptions/) χρησιμοποιώντας την επιλογή \"Επιλέξτε αρχείο συνδρομών\" από κάτω.</string>
+</resources>
