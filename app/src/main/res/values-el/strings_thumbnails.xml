@@ -1,2 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="thumbnail">Μικρογραφία</string>
+    <string name="view_thumbnail">Προβολή μικρογραφίας</string>
+    <string name="thumbnail_downloaded">Αποθηκεύτηκε.</string>
+    <string name="thumbnail_download_error">Αποτυχία λήψης της μικρογραφίας.</string>
+</resources>
