@@ -1,2 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="download">Λήψη</string>
+    <string name="downloads">Λήψεις</string>
+    <string name="warning_metered_network_download">Λήψη του βίντεο στη σύνδεση ογκοχρέωσης δεδομένων που είστε συνδεδεμένος;</string>
+    <string name="download_video">Λήψη βίντεο</string>
+    <string name="unable_to_delete_file">Αποτυχία διαγραφής του ληφθέντος αρχείου \'%s \'.</string>
+    <string name="starting_video_download">Ληψη του \'%s\'…</string>
+    <string name="video_download_stream_error">Αποτυχία λήψης του \'%s\'.</string>
+    <string name="download_failed_because">Αποτυχία λήψης του %1$s επειδή %2$s.</string>
+    <string name="video_stream_not_found_with_request_resolution">Αποτυχία εύρεσης ροής βίντεο στη ζητούμενη ανάλυση %1$s-%2$s</string>
+    <string name="delete_download">Διαγραφή λήψης</string>
+    <string name="video_downloaded">\'%s\' ελήφθη.</string>
+    <string name="no_downloaded_videos_text">Κάντε λήψη μερικών βίντεο για να τα βρείτε εδώ.</string>
+    <string name="playing_video_file_missing">Αναπαραγωγή βίντεο από το δίκτυο λόγω αδυναμίας εύρεσης ληφθέντος αρχείου.</string>
+    <string name="external_storage_not_available">Παραχωρίστε πρώτα άδεια διαχείρησης του αποθηκευτικού χώρου για να κάνετε λήψη του αρχείου.</string>
+</resources>
