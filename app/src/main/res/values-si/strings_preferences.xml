@@ -75,4 +75,12 @@
     <string name="pref_video_continuous_repeat_toggle">අඛණ්ඩ පුනරාවර්තනය</string>
     <string name="pref_title_credits">ස්තුතිය</string>
     <string name="pref_title_open_issue">ගැටලුවක් විවෘත කරන්න</string>
+    <string name="pref_title_switch_volume_and_brightness">ශබ්දය සහ දීප්තිය අභිනය මාරු කරන්න</string>
+    <string name="pref_summary_switch_volume_and_brightness">ශබ්ද පාලනය දකුණු පසින් ද දීප්තිය වම් පසින් ද තබයි.</string>
+    <string name="pref_title_youtube_api_key">YouTube API යතුර</string>
+    <string name="pref_summary_youtube_api_key">ඒ වෙනුවට භාවිත කිරීමට පුද්ගලික YouTube API යතුරක් ඇතුළු කරන්න.</string>
+    <string name="pref_youtube_api_key_error">ඔබ ඇතුළු කළ API යතුර වලංගු කිරීමට නොහැකි විය.</string>
+    <string name="pref_youtube_api_key_custom">නව YouTube API යතුර භාවිත කිරීමට යෙදුම නැවත ආරම්භ කරන්න.</string>
+    <string name="pref_youtube_api_key_default">ඒ වෙනුවට පෙරනිමි YouTube API යතුර භාවිත කිරීමට යෙදුම නැවත ආරම්භ කරන්න.</string>
+    <string name="pref_title_use_newpipe_backend">NewPipe back-end</string>
 </resources>
