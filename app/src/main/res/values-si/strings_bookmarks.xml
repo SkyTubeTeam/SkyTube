@@ -2,14 +2,14 @@
 <resources>
     <string name="video_already_bookmarked">දැනටමත් පිටුසන් කර ඇත</string>
     <string name="bookmark_share_label">SkyTube පිටුසන</string>
-    <string name="video_bookmarked">පිටුසන් කරන ලදි</string>
-    <string name="bookmark_share_invalid_url">පිටු සලකුණු කළ හැක්කේ වලංගු YouTube සබැඳි පමණි.</string>
-    <string name="no_bookmarked_videos_text">ඇතැම් වීඩියෝ මෙහි සොයා ගැනීමට ඒවා පිටුසන් කරන්න.</string>
-    <string name="video_unbookmarked">පිටුසන ඉවත්කරන ලදි</string>
+    <string name="video_bookmarked">පිටුසන් කෙරිණි</string>
+    <string name="bookmark_share_invalid_url">වලංගු යූටියුබ් සබැඳි සඳහා පමණක් පිටුසන් තැබීමට හැකිය.</string>
+    <string name="no_bookmarked_videos_text">මෙහි සොයා ගැනීමට දෘශ්‍යක කිහිපයකට පිටුසන් තබන්න.</string>
+    <string name="video_unbookmarked">පිටුසන ඉවත් කෙරිණි</string>
     <string name="bookmark">පිටුසන</string>
-    <string name="video_unbookmarked_error">වීඩියෝ පිටුසන ඉවත්කිරීමට නොහැකි විය.</string>
-    <string name="unbookmark">පිටුසන ඉවත්කිරීම</string>
-    <string name="video_was_not_bookmarked">වීඩියෝව පිටුසන් කර නොමැත</string>
-    <string name="video_bookmarked_error">වීඩියෝව පිටුසන් කළ නොහැකි විය.</string>
+    <string name="video_unbookmarked_error">දෘශ්‍යකයේ පිටුසන ඉවත් කිරීමට නොහැකි විය.</string>
+    <string name="unbookmark">පිටුසන ඉවතලන්න</string>
+    <string name="video_was_not_bookmarked">දෘශ්‍යකය පිටුසන් කර නැත</string>
+    <string name="video_bookmarked_error">දෘශ්‍යකය පිටුසන් කිරීමට නොහැකි විය.</string>
     <string name="bookmarks">පිටුසන්</string>
 </resources>
