@@ -2,15 +2,15 @@
 <resources>
     <string name="subscribing_to_channels">නාලිකා වලට දායක වෙමින්…</string>
     <string name="channel_related">නාලිකාව...</string>
-    <string name="import_subscriptions_from_youtube">YouTube වෙතින් දායකත්වයන් ආයාත කරන්න</string>
-    <string name="no_new_videos_found">නව වීඩියෝ නොමැත.</string>
-    <string name="no_subscriptions_text">නාලිකාවල නව වීඩියෝ මෙතැනින් බැලීමට ඒවාට දායක වන්න.</string>
-    <string name="fetching_subbed_channels_info_error">නාලිකා තොරතුරු ලබා ගැනීමට නොහැකි විය.</string>
-    <string name="notification_new_videos_found">දායක වූ නාලිකා වලින් නව වීඩියෝ %d</string>
-    <string name="feed">මුල් පිටුව</string>
+    <string name="import_subscriptions_from_youtube">යූටියුබ් වෙතින් දායකත්ව ආයාත කරන්න</string>
+    <string name="no_new_videos_found">නව දෘශ්‍යක නැත.</string>
+    <string name="no_subscriptions_text">නාලිකාවල නව දෘශ්‍යක මෙතැනින් බැලීමට ඒවාට දායක වන්න.</string>
+    <string name="fetching_subbed_channels_info_error">නාලිකාවල තොරතුරු ලබා ගැනීමට නොහැකි විය.</string>
+    <string name="notification_new_videos_found">දායක වූ නාලිකා වලින් නව දෘශ්‍යක %d</string>
+    <string name="feed">සංග්‍රහය</string>
     <string name="notification_channel_feed_title">සංග්‍රහ දැනුම්දීම්</string>
-    <string name="fetching_subscription_videos">දායක වූ නාලිකා වලින් වීඩියෝ ලබා ගනිමින්…</string>
-    <string name="open_channel">නාලිකාව විවෘත කරන්න</string>
-    <string name="fetching_subbed_channels_info">නාලිකා තොරතුරු ලබා ගනිමින්…</string>
-    <string name="fetched_videos_from_channels">නාලිකා %2$d/%3$d කින් වීඩියෝ %1$dක් ලැබුණි.</string>
+    <string name="fetching_subscription_videos">දායක වූ නාලිකා වලින් දෘශ්‍යක ලබා ගැනෙමින්…</string>
+    <string name="open_channel">නාලිකාව අරින්න</string>
+    <string name="fetching_subbed_channels_info">නාලිකාවල තොරතුරු ලබා ගැනෙමින්…</string>
+    <string name="fetched_videos_from_channels">නාලිකා %2$d/%3$d කින් දෘශ්‍යක %1$d ක් ලැබුණි.</string>
 </resources>
