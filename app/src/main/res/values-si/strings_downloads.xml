@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="download">බාගත කිරීම</string>
+    <string name="download">බාගන්න</string>
     <string name="download_failed_because">%2$s නිසා %1$s බාගැනීමට නොහැකි විය.</string>
-    <string name="warning_metered_network_download">ඔබ සම්බන්ධ වී ඇති මනුගත ජාලයෙන් වීඩියෝව බාගන්නද?</string>
-    <string name="download_video">වීඩියෝව බාගන්න</string>
+    <string name="warning_metered_network_download">ඔබ සම්බන්ධ වී සිටින මනුගත ජාලයෙන් දෘශ්‍යකය බාගන්නද?</string>
+    <string name="download_video">දෘශ්‍යකය බාගන්න</string>
     <string name="video_download_stream_error">\'%s\' බාගැනීමට නොහැකි විය.</string>
-    <string name="downloads">බාගත කිරීම්</string>
-    <string name="external_storage_not_available">ගොනුව බාගැනීමට පළමුව බාහිර ගබඞාව ප්‍රවේශය ලබා දෙන්න.</string>
-    <string name="starting_video_download">\'%s\' බාගත කරමින්…</string>
-    <string name="delete_download">බාගත කිරීම මකන්න</string>
-    <string name="video_stream_not_found_with_request_resolution">ඉල්ලූ %1$s-%2$s විභේදනය තුළ කිසිදු වීඩියෝ ප්‍රවාහයක් සොයා ගැනීමට නොහැකි විය</string>
-    <string name="playing_video_file_missing">බාගත කළ හැකි ගොනුවක් සොයාගත නොහැකි වූ බැවින් දුරස්ථව වීඩියෝ වාදනය කරමින්.</string>
+    <string name="downloads">බාගැනීම්</string>
+    <string name="external_storage_not_available">ගොනුව බාගැනීමට පළමුව බාහිර ආචයනයට ප්‍රවේශය ලබා දෙන්න.</string>
+    <string name="starting_video_download">\'%s\' බාගැනෙමින්…</string>
+    <string name="delete_download">බාගැනීම මකන්න</string>
+    <string name="video_stream_not_found_with_request_resolution">ඉල්ලූ %1$s-%2$s විභේදනය සහිත දෘශ්‍ය ප්‍රචාර කිසිවක් හමු නොවිණි</string>
+    <string name="playing_video_file_missing">බාගැනීමට හැකි ගොනුවක් හමු නොවූ බැවින් දුරස්ථව දෘශ්‍යකය වාදනය වෙමින්.</string>
     <string name="unable_to_delete_file">බාගත කළ \'%s\' ගොනුව මැකීමට නොහැකි විය.</string>
-    <string name="no_downloaded_videos_text">මෙහි විඩීයෝ සොයා ගැනීමට එම වීඩියෝ කිහිපයක් බාගන්න.</string>
-    <string name="video_downloaded">\'%s\' බාගත කර ඇත.</string>
+    <string name="no_downloaded_videos_text">මෙහි දෘශ්‍යක දිස් වීමට කිහිපයක් බාගන්න.</string>
+    <string name="video_downloaded">\'%s\' බාගත වී ඇත.</string>
 </resources>
