@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="subscribe">දායක වන්න</string>
-    <string name="import_subscriptions_description">https://takeout.google.com හි \"YouTube සහ YouTube Music\" හැර අන් සියල්ල තෝරා නොගෙන දායකත්වයන් පමණක් ලබා ගැනීමට \"සියලු YouTube දත්ත ඇතුළත්\" ක්ලික් කරන්න. \"ඊළඟ\" ක්ලික් කර \"නිර්යාත කරන්න\" ක්ලික් කරන්න. බාගත කිරීමේ සබැඳියක් සහිත විද්‍යුත් තැපෑලක් ලබා ගැනීමට ක්ලික් කරන්න. ඔබගේ විද්‍යුත් තැපැල් සේවාදායකයාගෙන් ගොනුව බාගන්න. මෙම ZIP ගොනුව තෝරන්න හෝ එය උපුටා ගෙන පහත \"ග්‍රාහකත්ව ගොනුව තෝරන්න\" භාවිතයෙන් (/Takeout/YouTube සහ YouTube Music/subscriptions/ තුළ) අඩංගු subscriptions.csv හෝ subscriptions.json තෝරන්න.</string>
-    <string name="no_new_channels_found">ඔබ දැනටමත් දායක වී නොමැති YouTube නාලිකා කිසිවක් හමු නොවීය.</string>
+    <string name="import_subscriptions_description">https://takeout.google.com හි \"යූටියුබ් සහ යූටියුබ් මියුසික්\" හැර අන් සියල්ල තෝරා නොගෙන දායකත්ව පමණක් ගැනීමට \"සියලු යූටියුබ් දත්ත ඇතුළත්\" ඔබන්න. \"ඊළඟ\" ඔබා \"නිර්යාත කරන්න\" ඔබන්න. බාගැනීමේ සබැඳියක් සහිත වි-තැපෑලක් ලැබීමට ඔබන්න. ඔබගේ වි-තැපැල් අනුග්‍රාහකයෙන් ගොනුව බාගන්න. මෙම ZIP ගොනුව තෝරන්න හෝ එය දිගහැර පහත \"දායකත්ව ගොනුව තෝරන්න\" භාවිතයෙන් (/Takeout/YouTube සහ YouTube Music/subscriptions/ තුළ) අඩංගු subscriptions.csv හෝ subscriptions.json තෝරන්න.</string>
+    <string name="no_new_channels_found">ඔබ දැනටමත් දායක වී නැති යූටියුබ් නාලිකා කිසිවක් හමු නොවිණි.</string>
     <string name="channel_unsubscribed">නාලිකාවට දායක නොවීය</string>
-    <string name="error_check_if_user_has_subbed">ඔබ නාලිකාවට දායක වී ඇත්දැයි පරීක්ෂා කළ නොහැක (id=%s)</string>
+    <string name="error_check_if_user_has_subbed">ඔබ නාලිකාවට දායක වී ඇත්දැයි පරීක්ෂා කිරීමට නොහැකිය (id=%s)</string>
     <string name="subscribed">දායක විය</string>
     <string name="total_subscribers">ග්‍රාහකයින් %,d</string>
-    <string name="error_unable_to_subscribe">නාලිකාව වෙන්/ වෙත දායක (නො)වීමට නොහැකි විය (id=%s)</string>
-    <string name="no_channels_found">ඔබ උඩුගත කළ ගොනුවේ කිසිදු YouTube නාලිකාවක් සොයා ගැනීමට නොහැකි විය.</string>
+    <string name="error_unable_to_subscribe">නාලිකාව වෙතින්/වෙත දායක (නො)වීමට නොහැකි විය (id=%s)</string>
+    <string name="no_channels_found">ඔබ උඩුගත කළ ගොනුවේ යූටියුබ් නාලිකා හමු නොවිණි.</string>
     <string name="channel_already_subscribed">දැනටමත් දායක වී ඇත</string>
     <string name="error_get_subbed_channels">නාලිකා දායකත්වයන් ලබා ගැනීමට නොහැකි විය.</string>
     <string name="select_all">සියල්ල තෝරන්න</string>
     <string name="channel_subscribed">නාලිකාවට දායක විය</string>
     <string name="unsubscribed">දායක නොවීය</string>
-    <string name="about">විස්තර</string>
+    <string name="about">පිළිබඳව</string>
     <string name="unsubscribe_from_all_current_sibbed_channels">ඔබ දැනට දායක වී ඇති සියලුම නාලිකා වලින් ඉවත් වන්න.</string>
-    <string name="select_none">කිසිවක් නැත තෝරන්න</string>
-    <string name="failed_to_import_subscriptions">ඔබගේ YouTube දායකත්වයන් ආයාත කිරීමට නොහැකි විය.</string>
-    <string name="subscriptions_to_channels_imported">නාලිකා %dක් ආනයනය කරන ලදී.</string>
+    <string name="select_none">කිසිවක් නොතෝරන්න</string>
+    <string name="failed_to_import_subscriptions">ඔබගේ යූටියුබ් දායකත්ව ආයාත කිරීමට නොහැකි විය.</string>
+    <string name="subscriptions_to_channels_imported">නාලිකා %d ක් ආයාත කෙරිණි.</string>
     <string name="subscriptions">දායකත්ව</string>
-    <string name="import_subscriptions_parse_error">ඔබ උඩුගත කළ ගොනුව විවෘත කළ නොහැක: %s.</string>
-    <string name="import_subscriptions">දායකත්වයන් ආයාත කරන්න</string>
+    <string name="import_subscriptions_parse_error">ඔබ උඩුගත කළ ගොනුව විග්‍රහයට නොහැකිය: %s.</string>
+    <string name="import_subscriptions">දායකත්ව ආයාත කරන්න</string>
     <string name="channel_subscribe_failed">නාලිකාවට දායක වීමට නොහැකි විය</string>
     <string name="select_sub_file">දායක ගොනුව තෝරන්න</string>
     <string name="unsubscribe">දායක නොවන්න</string>
