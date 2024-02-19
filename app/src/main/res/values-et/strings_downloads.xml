@@ -1,2 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="download">Laadi alla</string>
+    <string name="downloads">Allalaadimised</string>
+    <string name="download_video">Laadi video alla</string>
+    <string name="unable_to_delete_file">„%s“ - allalaaditud faili eemaldamine ei õnnestunud.</string>
+    <string name="starting_video_download">Laadin alla „%s“…</string>
+    <string name="video_download_stream_error">„%s“ allalaadimine ei õnnestunud.</string>
+    <string name="download_failed_because">%1$s allalaadimine ei õnnestunud, põhjuseks on %2$s.</string>
+    <string name="delete_download">Kustuta allalaaditud fail</string>
+    <string name="video_downloaded">„%s“ on alla laaditud.</string>
+    <string name="no_downloaded_videos_text">Kui soovid siin sisu leida, siis laadi alla mõni video.</string>
+    <string name="playing_video_file_missing">Kuna allalaaditavat sisu ei leidunud, siis esitan videot voogesitusena.</string>
+    <string name="external_storage_not_available">Enne allalaadimist , esmalt anna luba välise andmekandja kasutamiseks.</string>
+    <string name="warning_metered_network_download">Sa kasutad võrguühendust, kus on mahupõhine teenustasu. Kas soovid jätkata allalaadimisega?</string>
+    <string name="video_stream_not_found_with_request_resolution">Ei õnnestunud leida soovitud %1$s-%2$s tüüpi videovoogu</string>
+</resources>
