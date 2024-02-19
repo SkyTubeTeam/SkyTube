@@ -1,2 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="bookmark_share_invalid_url">Ainult korrektsetele YouTube url\'idele on võimalik järjehoidjat lisada.</string>
+    <string name="bookmark">Järjehoidja</string>
+    <string name="video_already_bookmarked">Video on juba lisatud järjehoidjaks</string>
+    <string name="unbookmark">Eemalda järjehoidjate seast</string>
+    <string name="video_unbookmarked">Järjehoidja on eemaldatud</string>
+    <string name="no_bookmarked_videos_text">Kui tahad siit sisu leida, siis lisa mõned järjehoidjad.</string>
+    <string name="bookmark_share_label">SkyTube järjehoidja</string>
+    <string name="bookmarks">Järjehoidjad</string>
+    <string name="video_bookmarked">Lisatud järjehoidjaks</string>
+    <string name="video_bookmarked_error">Video lisamine järjehoidjate hulka ei õnnestunud.</string>
+    <string name="video_was_not_bookmarked">Videot pole lisatud järjehoidjaks</string>
+    <string name="video_unbookmarked_error">Video järjehoidja eemaldamine ei õnnestunud.</string>
+</resources>
