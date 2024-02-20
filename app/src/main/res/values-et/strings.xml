@@ -1,2 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="could_not_get_videos">%s video laadimine ei õnnestunud.</string>
+    <string name="could_not_get_channel">Kanali teabe laadimine ei õnnestunud.</string>
+    <string name="ok">Sobib</string>
+    <string name="could_not_get_playlists">%s esitusloendi laadimine ei õnnestunud.</string>
+    <string name="recaptcha_challenge_requested">YouTube arvab, et sa oled robot ning palun esmalt lahenda reCAPTCHA robitilõks.</string>
+    <string name="close">Sulge</string>
+    <string name="search_channel">Otsi kanalit</string>
+    <string name="cleaner">Vaadatud videote logi tühjendaja</string>
+    <string name="cleaner_explanation">Kustuta allalaaditud ja/või järjehoidjaks märgitud videod. Selleks võid kasutada neid valikuid:</string>
+    <string name="cleaner_toast_finish">Eemaldasime %s video(t) järjehoidjate hulgast ja kustutasime %s MB jagu allalaaditud videosid</string>
+    <string name="cleaner_watched_downloads">Eemalda allalaaditud ja vaadatud videod</string>
+    <string name="cleaner_watched_bookmarks">Eemalda järjehoidjate hulgast vaadatud videod</string>
+    <string name="video_comments_are_disabled">Video kommentaarid on välja lülitatud</string>
+    <string name="could_not_get_channel_detailed">Kanali teabe laadimine ei õnnestunud: %s.</string>
+    <string name="search_videos">Otsi videosid</string>
+    <string name="could_not_get_sponsorblock">SponsorBlocki teabe laadimine ei õnnestunud: %s.</string>
+    <string name="views">%,d vaatamist</string>
+    <string name="error">Viga</string>
+    <string name="launch_offical_player_error">Ametliku YouTube\'i meediamängija käivitamine ei õnnestunud. Palun kontrolli, et ta on paigaldatud.</string>
+    <string name="featured">Esiletõstetud</string>
+    <string name="LIVE">Otseeeter</string>
+    <string name="most_popular">Populaarseimad</string>
+    <string name="trending_in">Populaarsust koguvad videod (%s)</string>
+    <string name="video">Video</string>
+    <string name="videos">Videod</string>
+    <string name="num_videos">%d videot</string>
+    <string name="playlists">Esitusloendid</string>
+    <string name="cleaner_confirm">Kustuta</string>
+    <string name="loading">Laadime andmeid…</string>
+    <string name="no">Ei</string>
+    <string name="yes">Jah</string>
+</resources>
