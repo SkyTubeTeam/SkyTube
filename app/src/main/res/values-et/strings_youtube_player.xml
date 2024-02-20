@@ -1,2 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="error_stream_err_unavailable">Sõnum pole saadaval.</string>
+    <string name="error_stream_decryption_fail">Youtube\'i teenuse dekrüptimiskoodi ei õnnestunud laadida.</string>
+    <string name="error_stream_parse_error">Viga parsimisel.</string>
+    <string name="error_video_play">Viga video esitamisel</string>
+    <string name="error_video_streams_empty">„%s“ videol pole meediavoogusid.</string>
+    <string name="error_get_video_desc">Video kirjelduse laadimine ei õnnestunud.</string>
+    <string name="error_invalid_url">Vigane video url: %s</string>
+    <string name="error_video_streams">Mite ühegi videovoo laadimine ei õnnestunud.</string>
+</resources>
