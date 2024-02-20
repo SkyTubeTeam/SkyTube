@@ -1,2 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="thumbnail">Pisipilt</string>
+    <string name="view_thumbnail">Vaata pisipilti</string>
+    <string name="thumbnail_downloaded">Pisipilt on allalaaditud.</string>
+    <string name="thumbnail_download_error">Pisipildi allalaadimine ei õnnestunud.</string>
+</resources>
