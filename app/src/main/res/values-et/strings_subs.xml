@@ -1,2 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="subscriptions">Tellimused</string>
+    <string name="subscribe">Telli</string>
+    <string name="unsubscribe">Loobu tellimusest</string>
+    <string name="total_subscribers">%,d tellijat</string>
+    <string name="subscribed">Tellitud</string>
+    <string name="channel_subscribed">Kanal on tellitud</string>
+    <string name="channel_already_subscribed">Oled kanali juba tellinud</string>
+    <string name="channel_subscribe_failed">Kanali tellimine ei õnnestunud</string>
+    <string name="unsubscribed">Oled tellimusest loobunud</string>
+    <string name="channel_unsubscribed">Oled kanali tellimusest loobunud</string>
+    <string name="error_get_subbed_channels">Tellitud kanalite laadimine ei õnnestunud.</string>
+    <string name="error_check_if_user_has_subbed">Ei õnnestunud tuvastada, kas sa oled selle kanali tellinud (id=%s)</string>
+    <string name="import_subscriptions">Impordi tellimused</string>
+    <string name="import_subscriptions_description">Tellimuste loendi koostamiseks eemalda https://takeout.google.com lehel kõik valikud peale „YouTube and YouTube Music“ ning klõpsi „All YouTube data included“. Seejärel klõpsi „Next“ ja „Create export“. Vali eelistus, et soovid saada allalaadimise linki e-posti teel. Ava oma e-posti klient, otsi asjakohane kiri ning kasutades seal leiduvat linki, laadi ekspordifail alla. Vali allalaaditud zip-fail ning paki ta lahti. Siin alljärgnevas leiduva „Vali tellimuste fail“ jaoks on sul vaja kas subscriptions.csv või subscriptions.json faili (mille leiad lahtipakitud failipuust /Takeout/YouTube või YouTube Music/subscriptions/ kaustadest).</string>
+    <string name="unsubscribe_from_all_current_sibbed_channels">Loobu kõikidest seni kasutusel olevatest kanalite tellimustest.</string>
+    <string name="subscriptions_to_channels_imported">%d kanal(it) on imporditud.</string>
+    <string name="select_sub_file">Vali tellimuste fail</string>
+    <string name="select_all">Vali kõik</string>
+    <string name="select_none">Ära vali midagi</string>
+    <string name="no_channels_found">Sinu poolt näidatud failis polnud mitte ühtegi YouTube\'i kanalit.</string>
+    <string name="no_new_channels_found">Ei leidunud ühtegi YouTube\'i kanalit, mida sa juba poleks tellinud.</string>
+    <string name="failed_to_import_subscriptions">Sinu YouTube\'i tellimuste import ei õnnestunud.</string>
+    <string name="about">Teave</string>
+    <string name="error_unable_to_subscribe">Kanali tellimine või sellest loobumine ei õnnestunud (id=%s)</string>
+    <string name="import_subscriptions_parse_error">Sinu poolt üleslaaditud faili töötlemine ei õnnestunud: %s.</string>
+</resources>
