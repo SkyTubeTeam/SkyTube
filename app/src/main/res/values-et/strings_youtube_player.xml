@@ -8,4 +8,6 @@
     <string name="error_get_video_desc">Video kirjelduse laadimine ei õnnestunud.</string>
     <string name="error_invalid_url">Vigane video url: %s</string>
     <string name="error_video_streams">Mite ühegi videovoo laadimine ei õnnestunud.</string>
+    <string name="error_downloaded_file_is_corrupted">Allalaaditud video tundub olema <b>vigane</b> ning veateade on:<br/><br/>%s<br/><br/><b>Kas kustutame</b> selle faili?</string>
+    <string name="error_video_parse_error">Video esitamine ei õnnestu: <br/> <br/> %s.</string>
 </resources>
