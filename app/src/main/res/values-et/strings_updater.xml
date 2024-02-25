@@ -1,2 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="update_available">Saadaval on uus versioon</string>
+    <string name="update_dialog_msg">Uus SkyTube\'i versioon on saadaval. Järgnevaga paigaldame versiooni %s.</string>
+    <string name="up_to_date">Kasutusel on viimane versioon</string>
+    <string name="up_to_date_msg">Sinu seadmesse on paigaldatud kõige uuem SkyTube\'i versioon.</string>
+    <string name="release_notes">Muudatused versioonis %s</string>
+    <string name="update">Uuenda</string>
+    <string name="later">Hiljem</string>
+    <string name="update_failure">Rakenduse uue versiooni paigaldamine ei õnnestunud.</string>
+    <string name="downloading">Laadime alla…</string>
+    <string name="android_too_old">Kahjuks sinu nutiseadme Android on liiga vana. Alternatiivina võid käsitsi paigaldada vanemale Androidile mõeldud „SkyTube Legacy“!</string>
+</resources>
