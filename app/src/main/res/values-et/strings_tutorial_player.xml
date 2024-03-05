@@ -1,2 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="next">Edasi</string>
+    <string name="done">Valmis</string>
+    <string name="skip">Jäta vahele</string>
+    <string name="page_counter">%1$d / %2$d</string>
+    <string name="tutorial_slide_1">Kommetaride vaatamiseks viipa ←.</string>
+    <string name="tutorial_slide_2">Video kirjelduse vaatamiseks viipa ↑.</string>
+    <string name="tutorial_slide_3">Video edasi või tagasi kerimiseks viipa ← →.</string>
+    <string name="tutorial_slide_4">Helivaljuse muutmiseks viipa ↑ ↓.</string>
+    <string name="tutorial_slide_5">Heleduse muutmiseks viipa ↑ ↓.</string>
+    <string name="tutorial_slide_6">Topeltpuudutusega peatad video esitamise või jätkad seda.</string>
+</resources>
