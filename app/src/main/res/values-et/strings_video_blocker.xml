@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="blocked_videos">Blokeeritud videod</string>
+    <string name="no_videos_blocked">Kas sa soovid sisu blokeerimiseks või filtreerimiseks üles sättida videote blokeerija?</string>
+    <string name="block_channel">Blokeeri kanalit</string>
+    <string name="channel_blacklist_error">Kanali blokeerimine ei õnnestunud.</string>
+    <string name="channel_unwhitelist_error">Kanali eemaldamine lubatud kanalite loendist ei õnnestunud.</string>
+    <string name="dislikes">%d%% „Ei meeldi“ märget</string>
+    <string name="configure">Seadista</string>
+    <string name="add_to_permitted">Luba kanal</string>
+    <string name="channel_blacklisted">Uue kanalite blokeerimisloendi kasutamiseks laadi vaade uuesti.</string>
 </resources>
