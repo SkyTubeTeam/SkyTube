@@ -10,4 +10,7 @@
     <string name="error_video_streams">Mite ühegi videovoo laadimine ei õnnestunud.</string>
     <string name="error_downloaded_file_is_corrupted">Allalaaditud video tundub olema <b>vigane</b> ning veateade on:<br/><br/>%s<br/><br/><b>Kas kustutame</b> selle faili?</string>
     <string name="error_video_parse_error">Video esitamine ei õnnestu: <br/> <br/> %s.</string>
+    <string name="metered_network">Mahupõhine andmeühendus</string>
+    <string name="warning_metered_network_play">Vältimaks lisakulusid kasuta pigem piiramatu andmemahuga võrguühendust. Kas ikkagi soovid videot esitada?</string>
+    <string name="warning_metered_network_disable">Ära mitte kunagi küsi seda uuesti.</string>
 </resources>
