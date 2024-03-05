@@ -1,2 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="feed">Meediavoog</string>
+    <string name="channel_related">Kanal...</string>
+    <string name="subscribing_to_channels">Tellime kanaleid…</string>
+    <string name="open_channel">Ava kanal</string>
+    <string name="fetching_subbed_channels_info">Laadime kanalite teavet…</string>
+    <string name="fetching_subbed_channels_info_error">Kanali info laadimine ei õnnestunud.</string>
+    <string name="fetching_subscription_videos">Laadime tellitud kanalitest videosid…</string>
+    <string name="fetched_videos_from_channels">Laadisime %1$d videot %2$d/%3$d kanalist.</string>
+    <string name="no_subscriptions_text">Kui soovid siin näha mõnda uut videot, siis telli paar kanalit.</string>
+    <string name="import_subscriptions_from_youtube">Impordi tellimused YouTube\'ist</string>
+    <string name="notification_channel_feed_title">Meediavoo teavitused</string>
+    <string name="notification_new_videos_found">Tellitud kanalites leidub %d uut videot</string>
+    <string name="no_new_videos_found">Uusi videoid ei leidu.</string>
+</resources>
