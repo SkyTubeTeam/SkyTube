@@ -1,2 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="preferences">Eelistused</string>
+    <string name="key_preferences">eelistused</string>
+    <string name="pref_video_player_category">Videomängija</string>
+    <string name="pref_title_maximum_res">Parim resolutsioon</string>
+    <string name="pref_summary_maximum_res">Vali parim resolutsioon: %s</string>
+    <string name="pref_title_minimum_res">Kõige kehvem resolutsioon</string>
+    <string name="pref_summary_minimum_res">Vali kõige kehvem resolutsioon: %s</string>
+    <string name="pref_summary_choose_player">Kasutatav videomängija: %s</string>
+    <string name="no_resolution_specified">Määratlemata</string>
+    <string name="pref_category_metered_network">Mahupõhine andmeühendus</string>
+    <string name="pref_title_maximum_res_metered">Kõige parem resolutsioon mahupõhise andmeühenduse jaoks</string>
+    <string name="pref_summary_maximum_res_metered">Vali kõige parem resolutsioon voogedastuseks mahupõhise andmeühenduse jaoks: %s</string>
+    <string name="pref_title_metered_network_usage">Mahupõhise andmeühenduse kasutus</string>
+    <string name="pref_title_choose_player">Videomängija</string>
+    <string name="pref_title_minimum_res_metered">Kõige kehvem resolutsioon mahupõhise andmeühenduse jaoks</string>
+    <string name="pref_summary_minimum_res_metered">Vali kõige kehvem resolutsioon voogedastuseks mahupõhise andmeühenduse jaoks: %s</string>
+</resources>
