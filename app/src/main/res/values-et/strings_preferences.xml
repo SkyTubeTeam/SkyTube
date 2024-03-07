@@ -16,4 +16,69 @@
     <string name="pref_title_choose_player">Videomängija</string>
     <string name="pref_title_minimum_res_metered">Kõige kehvem resolutsioon mahupõhise andmeühenduse jaoks</string>
     <string name="pref_summary_minimum_res_metered">Vali kõige kehvem resolutsioon voogedastuseks mahupõhise andmeühenduse jaoks: %s</string>
+    <string name="pref_summary_metered_network_usage">Mida sa soovid teha, kui laadid alla või vaatad videoid mahuarvestuse põhise internetiühendusega: %s</string>
+    <string name="pref_import_export_category">Import/Eksport</string>
+    <string name="pref_summary_import_dbs">Impordi oma järjehoidjate ja tellimuste varukoopia.</string>
+    <string name="databases_backing_up">Teeme varukoopiat…</string>
+    <string name="databases_backup_success">Andmebaasid on varundatud siia: %s</string>
+    <string name="databases_backup_fail">Andmebaasidest varukoopia tegemine ei õnnestunud.</string>
+    <string name="pref_title_import_subs">Impordi tellimused YouTube\'ist</string>
+    <string name="pref_summary_import_subs">Impordi oma kasutajakontolt oma YouTube\'i tellimused.</string>
+    <string name="databases_import_select_backup">Importimiseks vali varukoopa fail</string>
+    <string name="databases_import_nothing_selected">Mitte midagi ei olnud valitud…</string>
+    <string name="databases_import_warning_message">Kas soovid asendada järjehoidjad ja tellimused varukoopiast?</string>
+    <string name="continue_">Jätka</string>
+    <string name="databases_importing">Impordime…</string>
+    <string name="databases_import_fail">Sinu andmebaaside importimine ei õnnestunud.</string>
+    <string name="databases_import_success">Kui soovid uued järjehoidjad ja tellimused kasutusele võtta, siis käivita rakendus uuesti.</string>
+    <string name="subs_import_select_backup">Importimiseks vali YouTube\'is loodud xml-fail</string>
+    <string name="pref_chromecast_category">Chromecast</string>
+    <string name="pref_title_chromecast_none">Puudub</string>
+    <string name="pref_title_autocast">AutoCast</string>
+    <string name="pref_summary_autocast">Chromecast\'i laadne seade meedia esitamiseks, kui SkyTube\'is on kasutusel teised videorakendused.</string>
+    <string name="pref_network_downloads_category">Võrk ja allalaadimised</string>
+    <string name="pref_about_category">Teave</string>
+    <string name="pref_title_website">Veebisait</string>
+    <string name="pref_title_credits">Tänuavaldused</string>
+    <string name="pref_title_open_issue">Alusta veateate koostamist</string>
+    <string name="pref_summary_updates">Kontrolli, kas leidub uusi versioone.</string>
+    <string name="pref_title_license">Vaba tarkvara litsents (Copylefted Libre License)</string>
+    <string name="pref_summary_license">GPLv3+</string>
+    <string name="i_agree">Olen nõus</string>
+    <string name="pref_other_category">Muud</string>
+    <string name="system_default_country">Süsteemi määratud</string>
+    <string name="pref_title_default_tab">Vaikimisi vaade</string>
+    <string name="pref_summary_default_tab">Missugust vahekaarti näitame SkyTube\'i käivitamisel: %s</string>
+    <string name="pref_summary_hide_tabs">Vali vahelehed, mida sa ei soovi näha. Seadistuse jõustamiseks palun käivita rakendus uuesti.</string>
+    <string name="pref_title_clear_playback_status">Kustuta meedia esitamise olekud</string>
+    <string name="pref_disable_playback_status_deleted">Meedia esitamise olekud on kustutatud.</string>
+    <string name="pref_title_sponsorblock_category_list">Jäta segmendid vahele</string>
+    <string name="pref_title_enable_sponsorblock">Võta SponsorBlock kasutusele</string>
+    <string name="pref_sponsorblock_category">SponsorBlock</string>
+    <string name="pref_general">Üldist</string>
+    <string name="pref_details">Üksikasjad</string>
+    <string name="pref_summary_default_content_country">Näita sisu, mis on mõeldud sellele riigile: %s</string>
+    <string name="pref_title_default_content_country">Vaikimisi eelistatav riik sisu kuvamisel</string>
+    <string name="pref_playback_status_cleared">Meedia esitamise olekud on kustutatud.</string>
+    <string name="pref_summary_clear_playback_status">Kustuta kõikide videote esitamise katkestamisel meeldejäetud esitusajad.</string>
+    <string name="pref_title_credit_sponsorblock">Lõputiitrid</string>
+    <string name="pref_summary_sponsorblock_category_list">Vali vahelejäetavad katergooriad</string>
+    <string name="pref_summary_credit_sponsorblock">SponsorBlock\'i andmete allikas: https://sponsor.ajay.app</string>
+    <string name="pref_summary_credits">Suurepärased inimesed ja vaba tarkvara põhised rakendused, mis on teinud meie rakenduse loomise võimalikuks.</string>
+    <string name="pref_title_version">Versioon</string>
+    <string name="pref_summary_open_issue">Paku välja mõni uus idee või teata veast.</string>
+    <string name="pref_title_updates">Uuendused</string>
+    <string name="pref_summary_enable_sponsorblock">Jäta automaatselt vahele lõigud, milles on reklaami, teavitusi ja muud sulle mitteolulist</string>
+    <string name="pref_title_backup_dbs">Tee andmebaasidest varukoopiad</string>
+    <string name="pref_summary_backup_dbs">Tee varukoopia järjehoidjatest ja tellimustest.</string>
+    <string name="pref_title_import_dbs">Impordi varukoopia</string>
+    <string name="app_license">Autoriõigused © 2015–2018 Ramon Mifsud
+\n
+\nSee programm on vaba tarkvara: saad seda levitada ja/või muuta vastavalt GNU Üldise Avaliku Litsentsi tingimustele, mille on avaldanud Vaba Tarkvara Sihtasutus (litsentsi versioon 3).
+\n
+\nSeda programmi levitatakse lootuses, et see on kasulik, kuid ilma igasuguse garantiita; isegi ilma tuleneva ÄRIKS KASUTATAVUSETA või SOBIVUSETA KONKREETSE EESMÄRGI SAAVUTAMISEKS. Lisateavet leiad GNU üldisest avaliku litsentsi täistekstist.
+\n
+\nSa oleksid pidanud saama koopia GNU Üldisest Avalikust Litsentsist koos selle tarkvaraga. Kui ei, vaata &lt;https://www.gnu.org/licenses/&gt;</string>
+    <string name="pref_title_hide_tabs">Peida vahelehed</string>
+    <string name="pref_hide_tabs_restart">Nende vahekaartide kasutamiseks palun käivita rakendus uuesti.</string>
 </resources>
