@@ -69,7 +69,7 @@
     <string name="pref_disable_search_history_deleted">Histórico de pesquisa deletado.</string>
     <string name="pref_playback_status_cleared">Marcadores de visualizados limpos.</string>
     <string name="pref_title_default_content_country">Região padrão do conteúdo</string>
-    <string name="pref_sponsorblock_category">Sponsorblock</string>
+    <string name="pref_sponsorblock_category">SponsorBlock</string>
     <string name="pref_general">Geral</string>
     <string name="pref_details">Detalhes</string>
     <string name="pref_title_enable_sponsorblock">Habilitar SponsorBlock</string>
