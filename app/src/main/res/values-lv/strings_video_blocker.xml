@@ -8,4 +8,5 @@
     <string name="configure">Iestatīt</string>
     <string name="no_videos_blocked">Vai vēlaties iestatīt video bloķētāju, lai bloķētu vai filtrētu video\?</string>
     <string name="blocked_videos">Bloķētie video</string>
+    <string name="add_to_permitted">Atļaujas Kanāls</string>
 </resources>
