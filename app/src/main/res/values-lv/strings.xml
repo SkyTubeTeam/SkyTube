@@ -22,10 +22,10 @@
     <string name="could_not_get_channel">Neizdevās ielādēt kanāla informāciju.</string>
     <string name="could_not_get_videos">Neizdevās ielādēt %s video.</string>
     <string name="could_not_get_sponsorblock">Neizdevās iegūt SponsorBlock informāciju: %s.</string>
-    <string name="cleaner">Tīrītājs</string>
+    <string name="cleaner">Noskatīto video tīrītājs</string>
     <string name="cleaner_explanation">Tīrīt grāmatzīmēs atzīmētos/lejupielādētos video. Izmantot sekojošas filtra opcijas:</string>
     <string name="cleaner_confirm">Tīrīt</string>
-    <string name="cleaner_toast_finish">Tīrītājs aizvāca %s video. Atbrīvoti %s MB.</string>
+    <string name="cleaner_toast_finish">Tīrītājs aizvāca %s video no grāmatzīmēm, un izdzēsa %sMB lejupielādēto video</string>
     <string name="cleaner_watched_downloads">Tīrīt skatītos lejupielādētos video</string>
     <string name="cleaner_watched_bookmarks">Tīrīt skatītos grāmatzīmēs atzīmētos video</string>
     <string name="featured">Ieteiktie</string>
