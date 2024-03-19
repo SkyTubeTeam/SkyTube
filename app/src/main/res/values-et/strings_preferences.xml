@@ -81,4 +81,11 @@
 \nSa oleksid pidanud saama koopia GNU Üldisest Avalikust Litsentsist koos selle tarkvaraga. Kui ei, vaata &lt;https://www.gnu.org/licenses/&gt;</string>
     <string name="pref_title_hide_tabs">Peida vahelehed</string>
     <string name="pref_hide_tabs_restart">Nende vahekaartide kasutamiseks palun käivita rakendus uuesti.</string>
+    <string name="pref_summary_disable_screen_gestures">Ära kasuta viipamist helivaljuse ja ereduse juhtimiseks ning video edasi/tagasi kerimiseks.</string>
+    <string name="pref_title_feed_notification">Meediavoo automaatne teavitus</string>
+    <string name="pref_summary_feed_notification">Mis ajavahemiku järel peaksime tellitud kanalitest uusi videoid kontrollima: %s</string>
+    <string name="pref_title_screen_orientation">Ekraani paigutus</string>
+    <string name="pref_summary_screen_orientation">Meediaesitaja ekraanipaigutus: %s</string>
+    <string name="pref_title_disable_screen_gestures">Video juhtimisel ära kasuta viipamist</string>
+    <string name="pref_video_continuous_repeat_toggle">Pidev taasesitus</string>
 </resources>
