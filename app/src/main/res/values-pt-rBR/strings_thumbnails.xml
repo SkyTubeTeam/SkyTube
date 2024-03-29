@@ -1,2 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="thumbnail">Miniatura</string>
+    <string name="view_thumbnail">Ver miniatura</string>
+    <string name="thumbnail_downloaded">Download concluído.</string>
+    <string name="thumbnail_download_error">Não foi possível baixar a miniatura.</string>
+</resources>
