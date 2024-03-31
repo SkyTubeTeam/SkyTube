@@ -180,4 +180,6 @@
     <string name="pref_title_enable_sponsorblock">Включить SponsorBlock</string>
     <string name="pref_summary_sponsorblock_category_list">Выбрать категории для пропуска</string>
     <string name="pref_sponsorblock_category">SponsorBlock</string>
+    <string name="pref_details">Детали</string>
+    <string name="pref_summary_enable_sponsorblock">Автоматически пропускать фрагменты видео, посвященные спонсорам, напоминаниям о взаимодействии и т. д.</string>
 </resources>
