@@ -26,12 +26,12 @@
         <item>Blacklister les chaînes</item>
         <item>Whitelister les chaînes</item>
     </string-array>
-    <string name="pref_title_channel_blacklist">Chaînes sur liste noire</string>
+    <string name="pref_title_channel_blacklist">Liste de Chaînes Bloquée</string>
     <string name="pref_summary_channel_blacklist">Une liste des chaînes bloquées.</string>
     <string name="unblock">Débloquer</string>
-    <string name="channel_blacklist_updated">Actualisez les vidéos pour appliquer la nouvelle liste noire des chaînes.</string>
-    <string name="channel_blacklist_update_failure">Impossible de supprimer les(s) chaîne(s) de la liste noire…</string>
-    <string name="channel_blacklist_empty">La liste noire est vide.</string>
+    <string name="channel_blacklist_updated">Actualisez les vidéos pour appliquer la nouvelle liste bloquée de chaînes.</string>
+    <string name="channel_blacklist_update_failure">Impossible de supprimer les(s) chaîne(s) de la liste bloquée…</string>
+    <string name="channel_blacklist_empty">La liste bloquée est vide.</string>
     <string name="pref_title_channel_whitelist">Liste blanche des chaînes</string>
     <string name="pref_summary_channel_whitelist">Liste des chaînes autorisées.</string>
     <string name="input_channel_url">URL des chaînes à mettre sur une liste blanche :</string>
@@ -208,4 +208,5 @@
     <string name="pref_title_playback_speed">Vitesse de lecture par défaut</string>
     <string name="pref_summary_playback_speed">Vitesse de lecture par défaut : %s</string>
     <string name="pref_title_use_dislike_api">Compteur des Je n\'aime pas</string>
+    <string name="pref_summary_use_dislike_api">Réactiver le compteur de Je n\'aime pas en utilisant returnyoutubedislike.com</string>
 </resources>
