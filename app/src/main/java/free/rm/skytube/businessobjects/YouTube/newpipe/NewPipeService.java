@@ -339,8 +339,8 @@ public class NewPipeService {
                 extractor.getId(),
                 extractor.getName(),
                 NewPipeUtils.filterHtml(extractor.getDescription()),
-                callParser(() -> extractor.getAvatarUrl(), null),
-                callParser(() -> extractor.getBannerUrl(), null),
+                callParser(() -> NewPipeUtils.getThumbnailUrl(extractor.getAvatars()), null),
+                callParser(() -> NewPipeUtils.getThumbnailUrl(extractor.getBanners()), null),
                 callParser(() -> extractor.getSubscriberCount(), -1L),
                 false,
                 0,
@@ -422,7 +422,7 @@ public class NewPipeService {
 
         YouTubeVideo video = new YouTubeVideo(extractor.getId(), extractor.getName(), NewPipeUtils.filterHtml(extractor.getDescription()),
                 extractor.getLength(), new YouTubeChannel(extractor.getUploaderUrl(), extractor.getUploaderName()),
-                viewCount, uploadDate.instant, uploadDate.exact, extractor.getThumbnailUrl());
+                viewCount, uploadDate.instant, uploadDate.exact, NewPipeUtils.getThumbnailUrl(extractor.getThumbnails()));
         try {
             video.setLikeDislikeCount(extractor.getLikeCount(), getDislikeCount(extractor, videoId));
         } catch (ParsingException pe) {

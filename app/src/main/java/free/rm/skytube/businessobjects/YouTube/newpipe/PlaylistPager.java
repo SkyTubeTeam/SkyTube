@@ -49,7 +49,7 @@ public class PlaylistPager extends VideoPager {
                         "" /* description */,
                         null /* publishDate */,
                         playlistExtractor.getStreamCount(),
-                        playlistExtractor.getThumbnailUrl(),
+                        NewPipeUtils.getThumbnailUrl(playlistExtractor.getThumbnails()),
                         new YouTubeChannel(channelId, playlistExtractor.getUploaderName())
                 );
             } catch (ParsingException e) {

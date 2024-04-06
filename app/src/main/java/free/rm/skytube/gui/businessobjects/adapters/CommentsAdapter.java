@@ -54,6 +54,7 @@ import free.rm.skytube.businessobjects.YouTube.newpipe.ChannelId;
 import free.rm.skytube.businessobjects.YouTube.newpipe.CommentPager;
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeException;
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
+import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeUtils;
 import free.rm.skytube.databinding.CommentBinding;
 import free.rm.skytube.gui.businessobjects.views.Linker;
 
@@ -281,7 +282,7 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
             binding.commentDateTextView.setText(comment.getTextualUploadDate());
             binding.commentUpvotesTextView.setText(String.valueOf(comment.getLikeCount()));
             Glide.with(context)
-                    .load(comment.getThumbnailUrl())
+                    .load(NewPipeUtils.getThumbnailUrl(comment))
                     .apply(new RequestOptions().placeholder(R.drawable.channel_thumbnail_default))
                     .into(binding.commentThumbnailImageView);
 
