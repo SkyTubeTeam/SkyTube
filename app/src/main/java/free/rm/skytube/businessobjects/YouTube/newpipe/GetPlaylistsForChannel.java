@@ -71,7 +71,7 @@ public class GetPlaylistsForChannel implements YouTubeTasks.ChannelPlaylistFetch
             return infoItems.stream()
                     .filter(PlaylistInfoItem.class::isInstance)
                     .map(PlaylistInfoItem.class::cast).map(item ->
-                    new YouTubePlaylist(item.getUrl(), item.getName(), "", null, item.getStreamCount(), item.getThumbnailUrl(),
+                    new YouTubePlaylist(item.getUrl(), item.getName(), "", null, item.getStreamCount(), NewPipeUtils.getThumbnailUrl(item),
                             channel)
             ).collect(Collectors.toList());
         }

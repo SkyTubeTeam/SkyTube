@@ -16,10 +16,18 @@
  */
 package free.rm.skytube.businessobjects.YouTube.newpipe;
 
+import androidx.annotation.Nullable;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.safety.Safelist;
+import org.schabi.newpipe.extractor.Image;
+import org.schabi.newpipe.extractor.InfoItem;
+import org.schabi.newpipe.extractor.comments.CommentsInfoItem;
 import org.schabi.newpipe.extractor.stream.Description;
+
+import java.util.Comparator;
+import java.util.List;
 
 public class NewPipeUtils {
     private NewPipeUtils() {}
@@ -38,4 +46,13 @@ public class NewPipeUtils {
         return result;
     }
 
+    @Nullable
+    public static String getThumbnailUrl(List<Image> images) {
+        return images.stream().max(Comparator.comparing(Image::getWidth)).map(Image::getUrl).orElse(null);
+    }
+
+    @Nullable
+    public static String getThumbnailUrl(InfoItem comment) {
+        return getThumbnailUrl(comment.getThumbnails());
+    }
 }
