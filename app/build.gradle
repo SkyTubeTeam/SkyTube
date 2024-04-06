@@ -183,7 +183,7 @@ dependencies {
     }
 
     // Java HTML parser
-    implementation "org.jsoup:jsoup:1.15.4"
+    implementation "org.jsoup:jsoup:1.17.2"
 
     // Language Detection Library for Java
     implementation('com.optimaize.languagedetector:language-detector:0.6') {
