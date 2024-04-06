@@ -10,7 +10,7 @@
     <string name="select_sub_file">Chọn tệp đăng ký</string>
     <string name="subscriptions_to_channels_imported">Đã nhập %d kênh.</string>
     <string name="unsubscribe_from_all_current_sibbed_channels">Huỷ đăng ký tất cả các kênh hiện tại đã đăng ký của bạn.</string>
-    <string name="import_subscriptions_description">Nhập đăng ký của bạn từ YouTube bằng cách đi đến https://takeout.google.com trước tiên. Bỏ chọn tất cả dịch vụ trừ \"YouTube và YouTube Music\" và click vào \"Bao gồm tất cả dữ liệu trên YouTube\" để bỏ chọn mọi thứ trừ đăng ký. Click \"Tiếp\" và sau đó là \"Tạo tệp xuất\". Khi việc xuất hoàn thành, nó hiện lên ở trang web bạn vừa đến và bạn sẽ nhận một e-mail có liên kết tải xuống. Tải xuống tệp đó và trích xuất tệp subscriptions.json từ nó (ở /Takeout/YouTube và YouTube Music/subscriptions/). Sau đó, chọn tệp đã xuất bằng cách click \"Chọn tệp đăng ký\" ở dưới.</string>
+    <string name="import_subscriptions_description">Bỏ chọn mọi thứ trên https://takeout.google.com ngoại trừ \"YouTube và YouTube Music\" và nhấp vào \"Bao gồm tất cả dữ liệu YouTube\" để chỉ nhận đăng ký. Nhấp vào \"Tiếp theo\" và sau đó \"Tạo xuất\". Bấm vào để nhận e-mail có liên kết tải xuống. Tải xuống tập tin từ ứng dụng khách e-mail của bạn. Chọn tệp ZIP này hoặc giải nén nó và chọn subscribes.csv hoặc subscribes.json có trong (trong /Takeout/YouTube và YouTube Music/subscriptions/) bằng cách sử dụng \"Chọn tệp đăng ký\" bên dưới.</string>
     <string name="import_subscriptions">Nhập đăng ký</string>
     <string name="error_unable_to_subscribe">Không thể (huỷ) đăng ký kênh (id=%s)</string>
     <string name="error_check_if_user_has_subbed">Không thể kiểm tra xem bạn đã đăng ký kênh hay chưa (id=%s)</string>
