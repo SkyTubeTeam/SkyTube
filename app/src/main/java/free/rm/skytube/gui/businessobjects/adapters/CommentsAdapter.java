@@ -38,6 +38,7 @@ import com.mikepenz.iconics.IconicsSize;
 import com.mikepenz.iconics.typeface.library.materialdesigniconic.MaterialDesignIconic;
 
 import org.schabi.newpipe.extractor.comments.CommentsInfoItem;
+import org.schabi.newpipe.extractor.stream.Description;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -276,7 +277,7 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
             binding.commentPaddingView.setVisibility(isTopLevelComment ? View.GONE : View.VISIBLE);
             binding.authorTextView.setText(comment.getUploaderName());
             Linker.configure(binding.commentTextView, currentActivity);
-            Linker.setTextAndLinkify(binding.commentTextView, comment.getCommentText().getContent());
+            Linker.setTextAndLinkify(binding.commentTextView, getCommentText(comment));
             binding.commentDateTextView.setText(comment.getTextualUploadDate());
             binding.commentUpvotesTextView.setText(String.valueOf(comment.getLikeCount()));
             Glide.with(context)
@@ -311,6 +312,11 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
                 binding.viewAllRepliesTextView.setVisibility(View.GONE);
             }
         }
+    }
+
+    private static String getCommentText(CommentsInfoItem infoItem) {
+        Description description = infoItem.getCommentText();
+        return description != null ? description.getContent() : "";
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
