@@ -12,4 +12,5 @@
     <string name="open_channel">Mở kênh</string>
     <string name="subscribing_to_channels">Đang đăng ký các kênh…</string>
     <string name="feed">Nguồn dữ liệu</string>
+    <string name="channel_related">Kênh...</string>
 </resources>
