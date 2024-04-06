@@ -28,4 +28,7 @@
     <string name="video_comments_are_disabled">Bình luận đang tắt</string>
     <string name="cleaner">Công cụ dọn video đã xem</string>
     <string name="cleaner_toast_finish">Đã dọn %s video khỏi dấu trang, và đã xóa %sMB video tải xuống</string>
+    <string name="cleaner_explanation">Xóa các video được đánh dấu/tải xuống. Sử dụng các tùy chọn bộ lọc sau:</string>
+    <string name="cleaner_watched_downloads">Xóa các tải xuống đã xem</string>
+    <string name="cleaner_watched_bookmarks">Xóa dấu trang đã xem</string>
 </resources>
