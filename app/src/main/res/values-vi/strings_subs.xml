@@ -8,8 +8,8 @@
     <string name="select_none">Không chọn gì</string>
     <string name="select_all">Chọn tất cả</string>
     <string name="select_sub_file">Chọn tệp đăng ký</string>
-    <string name="subscriptions_to_channels_imported">Đã nhập %d kênh.</string>
-    <string name="unsubscribe_from_all_current_sibbed_channels">Huỷ đăng ký tất cả các kênh hiện tại đã đăng ký của bạn.</string>
+    <string name="subscriptions_to_channels_imported">Đã nhập %d kênh</string>
+    <string name="unsubscribe_from_all_current_sibbed_channels">Huỷ đăng ký tất cả các kênh hiện tại đã đăng ký của bạn</string>
     <string name="import_subscriptions_description">Bỏ chọn mọi thứ trên https://takeout.google.com ngoại trừ \"YouTube và YouTube Music\" và nhấp vào \"Bao gồm tất cả dữ liệu YouTube\" để chỉ nhận đăng ký. Nhấp vào \"Tiếp theo\" và sau đó \"Tạo xuất\". Bấm vào để nhận e-mail có liên kết tải xuống. Tải xuống tập tin từ ứng dụng khách e-mail của bạn. Chọn tệp ZIP này hoặc giải nén nó và chọn subscribes.csv hoặc subscribes.json có trong (trong /Takeout/YouTube và YouTube Music/subscriptions/) bằng cách sử dụng \"Chọn tệp đăng ký\" bên dưới.</string>
     <string name="import_subscriptions">Nhập đăng ký</string>
     <string name="error_unable_to_subscribe">Không thể (huỷ) đăng ký kênh (id=%s)</string>
