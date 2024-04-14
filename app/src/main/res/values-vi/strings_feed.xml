@@ -4,10 +4,10 @@
     <string name="notification_channel_feed_title">Thông báo nguồn dữ liệu</string>
     <string name="import_subscriptions_from_youtube">Nhập đăng ký từ YouTube</string>
     <string name="no_subscriptions_text">Đăng ký một số kênh để thấy các video mới từ các kênh đó ở đây.</string>
-    <string name="no_new_videos_found">Không có video mới.</string>
+    <string name="no_new_videos_found">Không có video mới</string>
     <string name="fetched_videos_from_channels">Đã lấy %1$d video từ %2$d/%3$d kênh.</string>
     <string name="fetching_subscription_videos">Đang lấy các video từ các kênh đã đăng ký…</string>
-    <string name="fetching_subbed_channels_info_error">Không thể lấy thông tin kênh.</string>
+    <string name="fetching_subbed_channels_info_error">Không thể lấy thông tin kênh</string>
     <string name="fetching_subbed_channels_info">Đang lấy thông tin kênh…</string>
     <string name="open_channel">Mở kênh</string>
     <string name="subscribing_to_channels">Đang đăng ký các kênh…</string>
