@@ -3,15 +3,15 @@
     <string name="downloads">Tải xuống</string>
     <string name="download_video">Tải xuống Video</string>
     <string name="starting_video_download">Đang tải xuống \'%s\'…</string>
-    <string name="video_download_stream_error">Không thể tải xuống \'%s\'.</string>
+    <string name="video_download_stream_error">Không thể tải xuống \'%s\'</string>
     <string name="delete_download">Xóa Tải xuống</string>
-    <string name="video_downloaded">\'%s\' đã tải xuống.</string>
-    <string name="no_downloaded_videos_text">Tải xuống một số video để tìm chúng ở đây.</string>
-    <string name="playing_video_file_missing">Đang phát video trên mạng vì không tìm thấy tệp có thể tải xuống.</string>
-    <string name="external_storage_not_available">Trước tiên, hãy cấp quyền truy cập bộ nhớ ngoài để tải tệp xuống.</string>
+    <string name="video_downloaded">\'%s\' đã tải xuống</string>
+    <string name="no_downloaded_videos_text">Tải xuống một số video để tìm chúng ở đây</string>
+    <string name="playing_video_file_missing">Đang phát video trên mạng vì không tìm thấy tệp có thể tải xuống</string>
+    <string name="external_storage_not_available">Trước tiên, hãy cấp quyền truy cập bộ nhớ ngoài để tải tệp xuống</string>
     <string name="download">Tải về</string>
     <string name="video_stream_not_found_with_request_resolution">Không tìm thấy luồng phát video nào giữa độ phân giải %1$s-%2$s được yêu cầu</string>
-    <string name="download_failed_because">Không thể tải xuống %1$s bởi vì %2$s.</string>
-    <string name="unable_to_delete_file">Không thể xoá tệp \'%s\' đã tải xuống.</string>
+    <string name="download_failed_because">Không thể tải xuống %1$s bởi vì %2$s</string>
+    <string name="unable_to_delete_file">Không thể xoá tệp \'%s\' đã tải xuống</string>
     <string name="warning_metered_network_download">Tải xuống video bằng mạng có trả phí mà bạn đang kết nối đến\?</string>
 </resources>
