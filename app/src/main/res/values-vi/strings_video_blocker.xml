@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="dislikes">%d%% lượt không thích</string>
-    <string name="channel_unwhitelist_error">Không thể huỷ cho phép kênh.</string>
-    <string name="channel_blacklist_error">Không thể chặn kênh.</string>
-    <string name="channel_blacklisted">Hãy làm mới lại để sử dụng danh sách chặn kênh mới.</string>
+    <string name="channel_unwhitelist_error">Không thể huỷ cho phép kênh</string>
+    <string name="channel_blacklist_error">Không thể chặn kênh</string>
+    <string name="channel_blacklisted">Hãy làm mới lại để sử dụng danh sách chặn kênh mới</string>
     <string name="block_channel">Chặn kênh</string>
     <string name="configure">Thiết lập</string>
     <string name="no_videos_blocked">Bạn có muốn thiết lập trình chặn video để chặn hoặc lọc video không\?</string>
