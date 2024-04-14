@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="tutorial_slide_6">Nhấn đúp để tạm dừng hoặc phát một video.</string>
-    <string name="tutorial_slide_5">Vuốt ↑ ↓ để điều chỉnh độ sáng.</string>
-    <string name="tutorial_slide_4">Vuốt ↑ ↓ để điều chỉnh âm lượng.</string>
-    <string name="tutorial_slide_3">Vuốt ← → để tua đi hoặc tua lại.</string>
-    <string name="tutorial_slide_2">Vuốt ↑ để xem mô tả của video.</string>
-    <string name="tutorial_slide_1">Vuốt ← để xem bình luận.</string>
+    <string name="tutorial_slide_6">Nhấn đúp để tạm dừng hoặc phát một video</string>
+    <string name="tutorial_slide_5">Vuốt ↑ ↓ để điều chỉnh độ sáng</string>
+    <string name="tutorial_slide_4">Vuốt ↑ ↓ để điều chỉnh âm lượng</string>
+    <string name="tutorial_slide_3">Vuốt ← → để tua đi hoặc tua lại</string>
+    <string name="tutorial_slide_2">Vuốt ↑ để xem mô tả của video</string>
+    <string name="tutorial_slide_1">Vuốt ← để xem bình luận</string>
     <string name="page_counter">%1$d trong số %2$d</string>
     <string name="skip">Bỏ qua</string>
     <string name="done">Xong</string>
