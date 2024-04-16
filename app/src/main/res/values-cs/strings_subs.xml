@@ -7,13 +7,13 @@
     <string name="subscriptions_to_channels_imported">%d kanálů importovano.</string>
     <string name="subscribed">Odebíráno</string>
     <string name="channel_subscribed">Kanál odebírán</string>
-    <string name="channel_already_subscribed">Již odebíráš</string>
+    <string name="channel_already_subscribed">Již odebíráno</string>
     <string name="channel_subscribe_failed">Nepodařilo se přihlásit k odběru</string>
-    <string name="error_unable_to_subscribe">Nepodařilo se odhlásit od kanalu (id=%s)</string>
+    <string name="error_unable_to_subscribe">Nelze se odhlásit nebo přihlásit odběr kanálu (id=%s)</string>
     <string name="unsubscribed">Odběr zrušen</string>
     <string name="select_sub_file">Zvolit ze souboru odběrů</string>
     <string name="channel_unsubscribed">Odběr kanálu zrušen</string>
-    <string name="error_check_if_user_has_subbed">Nepodařilo se zkontrolovat zda již existuje odběr kanálu (id=%s)</string>
+    <string name="error_check_if_user_has_subbed">Nepodařilo se zkontrolovat, zda jste se přihlásili k odběru kanálu (id=%s)</string>
     <string name="import_subscriptions">Importovat odběry</string>
     <string name="unsubscribe_from_all_current_sibbed_channels">Zrušit odběry u všech odebraných kanálů.</string>
     <string name="select_all">Vybrat vše</string>
