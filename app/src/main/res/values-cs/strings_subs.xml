@@ -24,5 +24,5 @@
     <string name="error_get_subbed_channels">Nepodařilo se načíst odběry kanálů.</string>
     <string name="import_subscriptions_description">Na stránce https://takeout.google.com zrušte výběr všech položek kromě \"YouTube a YouTube Music\" a klikněte na \"All YouTube data included\", abyste získali pouze odběry. Klikněte na \"Next\" a poté na \"Create export\". Kliknutím obdržíte e-mail s odkazem ke stažení. Stáhněte soubor z e-mailového klienta. Vyberte tento soubor ZIP nebo jej rozbalte a vyberte soubor subscriptions.csv nebo subscriptions.json, který je v něm obsažen (v /Takeout/YouTube and YouTube Music/subscriptions/), pomocí níže uvedeného tlačítka \"Select Subscription File\".</string>
     <string name="no_new_channels_found">Žádné YouTube kanály, které jsou již odebírány nebyly nenalezeny.</string>
-    <string name="about">O aplikaci</string>
+    <string name="about">O funkci</string>
 </resources>
