@@ -46,5 +46,5 @@
     <string name="warning_metered_network_play">Připojte se k nezpoplatněné sítí aby jste se vyhnuli poplatkům za data. Chcete přesto přehrát video\?</string>
     <string name="mark_watched">Označit jako přehrané</string>
     <string name="error_get_comments_no_network">Připojte se k internetu aby bylo možné načíst komentáře.</string>
-    <string name="sponsorblock_category_interaction">Interaktivní připomínky</string>
+    <string name="sponsorblock_category_interaction">Připomínka interakce</string>
 </resources>
