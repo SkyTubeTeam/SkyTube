@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="pref_video_player_category">Video Přehrávač</string>
+    <string name="pref_video_player_category">Videopřehrávač</string>
     <string name="pref_title_maximum_res">Nejvyšší Rozlišení</string>
-    <string name="pref_summary_choose_player">Použitý video přehrávač: %s</string>
+    <string name="pref_summary_choose_player">Použitý videopřehrávač: %s</string>
     <string name="no_resolution_specified">Nezvoleno</string>
     <string name="pref_summary_import_dbs">Importuje zálohy vašich záložek a odběrů.</string>
     <string name="databases_backup_fail">Nepodařilo se zálohovat vaše databáze.</string>
@@ -16,35 +16,35 @@
     <string name="pref_title_version">Verze</string>
     <string name="pref_summary_license">GPLv3+</string>
     <string name="system_default_country">Oblast</string>
-    <string name="pref_summary_screen_orientation">Natočení video přehrávače: %s</string>
+    <string name="pref_summary_screen_orientation">Otočení videopřehrávače: %s</string>
     <string name="pref_video_continuous_repeat_toggle">Nekonečné opakování</string>
     <string name="pref_title_youtube_api_key">Klíč YouTube API</string>
     <string name="pref_youtube_api_key_error">Nepodařilo se ověřit vložený API klíč.</string>
     <string name="pref_summary_youtube_api_key">Vložte YouTube API klíč, účtu, který chcete použít.</string>
     <string name="pref_title_subscriptions_alphabetical_order">Třídit kanály abecedně</string>
-    <string name="pref_summary_subscriptions_alphabetical_order">Seznam odebraných kanálu seřazený abecedně.</string>
+    <string name="pref_summary_subscriptions_alphabetical_order">Seznam odebraných kanálů seřazený abecedně.</string>
     <string name="pref_summary_playback_speed">Výchozí rychlost přehrávání: %s</string>
-    <string name="pref_video_blocker_category">Video blokovač</string>
-    <string name="pref_summary_enable_video_blocker">Video blokovač.</string>
+    <string name="pref_video_blocker_category">Blokátor videí</string>
+    <string name="pref_summary_enable_video_blocker">Blokátor videí.</string>
     <string name="pref_channels_filter_category">Filtry kanálů</string>
-    <string name="pref_title_channel_filter_method">Metoda filtrování kanálu</string>
+    <string name="pref_title_channel_filter_method">Metoda filtrování kanálů</string>
     <string name="pref_summary_channel_filter_method">Zvolená metoda filtrování kanálů: %s</string>
     <string name="disabled">Vypnuto</string>
     <string name="pref_summary_channel_blacklist">Seznam blokovaných kanálů.</string>
     <string name="unblock">Odblokovat</string>
-    <string name="pref_summary_channel_whitelist">Seznam povolených kanálu.</string>
+    <string name="pref_summary_channel_whitelist">Seznam povolených kanálů.</string>
     <string name="add">Přidat</string>
     <string name="block">Zablokovat</string>
     <string name="please_wait">Prosím čekejte…</string>
     <string name="channel_already_whitelisted">Kanál již byl přidán na seznam povolených kanálů.</string>
-    <string name="channel_unwhitelist_success">Obnovte video pro použití nového seznamu povolených kanálu.</string>
+    <string name="channel_unwhitelist_success">Obnovte videa pro použití nového seznamu povolených kanálů.</string>
     <string name="pref_languages_filter_category">Jazyk a místní nastavení</string>
     <string name="pref_title_preferred_languages">Preferované jazyky</string>
     <string name="no_preferred_lang_selected">Není zvolen žádný preferovaný jazyk.</string>
     <string name="preferred_lang_updated">Obnovte video pro použití nového jazyku.</string>
-    <string name="pref_summary_sponsorblock_category_list">Zvolte kategorii k přeskočení</string>
-    <string name="pref_summary_credit_sponsorblock">Používá data o reklamních segmentech z webu https://sponsor.ajay.app</string>
-    <string name="pref_title_choose_player">Video Přehrávač</string>
+    <string name="pref_summary_sponsorblock_category_list">Zvolte kategorie k přeskočení</string>
+    <string name="pref_summary_credit_sponsorblock">Používá data ze služby SponsorBlock ze serveru https://sponsor.ajay.app</string>
+    <string name="pref_title_choose_player">Videopřehrávač</string>
     <string name="pref_title_minimum_res">Nejnižší Rozlišení</string>
     <string name="preferences">Nastavení</string>
     <string name="pref_summary_maximum_res">Zvolit nejvyšší rozlišení: %s</string>
@@ -80,22 +80,22 @@
     <string name="pref_summary_enable_immersive_mode">Skryje navigační a informační panel během přehrávání.</string>
     <string name="pref_summary_switch_volume_and_brightness">Umístí ovládání hlasitosti vpravo a jasu nalevo.</string>
     <string name="pref_title_switch_volume_and_brightness">Prohodit gesta hlasitosti a jasu</string>
-    <string name="pref_title_channel_whitelist">Seznam povolených kanálu</string>
-    <string name="channel_blacklist_empty">Seznam blokovaných kanálu je prázdný.</string>
-    <string name="input_channel_url">URL adresa kanálu k povolení:</string>
-    <string name="channel_whitelist_updated">Obnovte video pro použití nového seznamu povolených kanálu.</string>
-    <string name="channel_whitelist_update_failure">Nepodařilo se přidat kanál do seznamu povolených kanálu.</string>
-    <string name="channel_unwhitelist_failure">Nepodařilo se odstranit kanál(y) že seznamu povolených kanálu</string>
+    <string name="pref_title_channel_whitelist">Seznam povolených kanálů</string>
+    <string name="channel_blacklist_empty">Seznam blokovaných kanálů je prázdný.</string>
+    <string name="input_channel_url">Adresy URL kanálů k povolení:</string>
+    <string name="channel_whitelist_updated">Obnovte videa pro použití nového seznamu povolených kanálů.</string>
+    <string name="channel_whitelist_update_failure">Nepodařilo se přidat kanál do seznamu povolených kanálů.</string>
+    <string name="channel_unwhitelist_failure">Nepodařilo se odstranit kanál(y) že seznamu povolených kanálů</string>
     <string name="pref_summary_preferred_regions">Zvolte oblast ze které budou načítána \"Doporučená\" videa: %s</string>
     <string name="pref_title_preferred_regions">Preferovaná oblast</string>
     <string name="pref_summary_preferred_languages">Zvolte vámi preferované jazyky.</string>
     <string name="pref_title_lang_detection_video_filtering">Filtrování videí podle jazyku</string>
-    <string name="pref_title_enable_sponsorblock">Povolit reklamní segmenty</string>
-    <string name="pref_title_sponsorblock_category_list">Přeskočit segmenty</string>
+    <string name="pref_title_enable_sponsorblock">Povolit SponsorBlock</string>
+    <string name="pref_title_sponsorblock_category_list">Segmenty k přeskočení</string>
     <string name="pref_import_export_category">Import/Export</string>
     <string name="pref_title_backup_dbs">Záloha databázi</string>
     <string name="pref_summary_backup_dbs">Zálohuje vaše záložky a odběry.</string>
-    <string name="pref_summary_feed_notification">Jak často hledat nová videa z odebíraných kanálu: %s</string>
+    <string name="pref_summary_feed_notification">Jak často hledat nová videa z odebíraných kanálů: %s</string>
     <string name="pref_youtube_api_key_custom">Restartujte aplikaci pro použití nového YouTube API klíče.</string>
     <string name="pref_summary_use_newpipe_backend">Použije NewPipe API pro přístup k YouTube…</string>
     <string name="restart">Restart</string>
@@ -120,11 +120,11 @@
     <string name="pref_summary_autocast">Zařízení Chromecast pro přehrávání během používání jiné video aplikace ve SkyTube.</string>
     <string name="app_license">Copyright © 2015–2018 Ramon Mifsud
 \n
-\nTento program je volný software:Můžete jej šířít i modifikovat pod podmínkami GNU General Public Licence publikované Free Software Foundation (verze 3 licence).
+\nTento program je svobodný software: můžete jej šířít a/nebo modifikovat pod podmínkami GNU General Public Licence publikované nadací Free Software Foundation (verze 3 licence).
 \n
-\nTento program je šířen s vírou, že bude prospěšný, ale BEZ JAKÉKOLIV ZÁRUKY; dokonce bez záruky PRODEJNOSTI či SPLNĚNÍ SPECIFICKÝCH ÚČELŮ. Podívejte se na GNU General Public Licenci pro více podrobností.
+\nTento program je šířen s vírou, že bude užitečný, ale BEZ JAKÉKOLIV ZÁRUKY; dokonce bez záruky PRODEJNOSTI či SPLNĚNÍ SPECIFICKÝCH ÚČELŮ. Pro více informací viz GNU General Public License.
 \n
-\nSpolečně s programem by jste měli získat kopii GNU General Public Licence. Pokud ne, navštivte &lt;https://www.gnu.org/licenses/&gt;</string>
+\nSpolečně s programem byste měli získat kopii GNU General Public Licence. Pokud ne, navštivte &lt;https://www.gnu.org/licenses/&gt;</string>
     <string name="pref_video_download_minimum_resolution_title">Nejnižší rozlišení videa pro stahování</string>
     <string name="pref_key_video_quality_metered_summary">Optimalizovat pro: %s</string>
     <string name="pref_video_download_minimum_resolution_summary">Stahovaná videa budou alespoň %s</string>
@@ -148,7 +148,7 @@
     <string name="pref_disable_playback_status_deleted">Stav přehrávání vymazán.</string>
     <string name="pref_summary_clear_playback_status">Vymazat stav přehrávání pro všechna videa.</string>
     <string name="pref_playback_status_cleared">Stav přehrávání vymazán.</string>
-    <string name="pref_sponsorblock_category">Reklamní blok</string>
+    <string name="pref_sponsorblock_category">SponsorBlock</string>
     <string name="pref_general">Všeobecné</string>
     <string name="pref_details">Podrobnosti</string>
     <string name="pref_video_download_maximum_resolution_summary">Stažená videa budou maximálně %s</string>
@@ -165,7 +165,7 @@
     <string name="pref_title_license">Copylefted Libre Licence</string>
     <string name="pref_title_feed_notification">Automatická upozornění doporučení</string>
     <string name="pref_title_enable_immersive_mode">imerzivní režim</string>
-    <string name="pref_title_use_newpipe_backend">NewPipe back-end</string>
+    <string name="pref_title_use_newpipe_backend">Back-end NewPipe</string>
     <string name="pref_title_credit_sponsorblock">Závěrečné titulky</string>
     <string name="pref_summary_metered_network_usage">Co dělat pokud je při sledování/stahování videí používáno placené připojení: %s</string>
     <string name="pref_title_autocast">AutoCast</string>
