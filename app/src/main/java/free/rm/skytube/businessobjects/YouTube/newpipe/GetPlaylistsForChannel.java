@@ -18,6 +18,8 @@ package free.rm.skytube.businessobjects.YouTube.newpipe;
 
 import android.util.Log;
 
+import androidx.annotation.Nullable;
+
 import org.schabi.newpipe.extractor.InfoItem;
 import org.schabi.newpipe.extractor.ListExtractor;
 import org.schabi.newpipe.extractor.Page;
@@ -40,7 +42,7 @@ import free.rm.skytube.businessobjects.YouTube.YouTubeTasks;
 public class GetPlaylistsForChannel implements YouTubeTasks.ChannelPlaylistFetcher {
     static class Paging {
         private final YouTubeChannel channel;
-        private final ChannelTabExtractor extractor;
+        @Nullable private final ChannelTabExtractor extractor;
         private Page nextPage;
         private boolean firstPage = false;
         Paging(YouTubeChannel channel, ChannelTabExtractor extractor) {
@@ -49,6 +51,9 @@ public class GetPlaylistsForChannel implements YouTubeTasks.ChannelPlaylistFetch
         }
 
         private synchronized List<InfoItem> getNextPage() throws ExtractionException, IOException {
+            if (extractor == null) {
+                return Collections.emptyList();
+            }
             extractor.fetchPage();
             if (firstPage) {
                 if (Page.isValid(nextPage)) {
