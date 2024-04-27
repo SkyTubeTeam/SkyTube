@@ -32,7 +32,6 @@ import java.util.List;
 
 import free.rm.skytube.businessobjects.Logger;
 
-
 /**
  * Class to parse a channel screen for searching for videos and returning as pages with {@link #getNextPage()} }.
  *
@@ -55,7 +54,6 @@ public abstract class Pager<I extends InfoItem, O> implements PagerBackend<O> {
         this.playlistLinkHandler = streamingService.getPlaylistLHFactory();
         this.channelLinkHandler = streamingService.getChannelLHFactory();
     }
-
 
     StreamingService getStreamingService() {
         return streamingService;
@@ -80,7 +78,7 @@ public abstract class Pager<I extends InfoItem, O> implements PagerBackend<O> {
      * @throws ExtractionException
      */
     public List<O> getNextPage() throws NewPipeException {
-        if (!hasNextPage) {
+        if (!hasNextPage || channelExtractor == null) {
             return Collections.emptyList();
         }
         try {

@@ -32,7 +32,10 @@ import java.util.List;
 public class NewPipeUtils {
     private NewPipeUtils() {}
 
-    public static String filterHtml(String content) {
+    public static String filterHtml(@Nullable String content) {
+        if (content == null) {
+            return "";
+        }
         return Jsoup.clean(content, "", Safelist.basic(), new Document.OutputSettings().prettyPrint(false));
     }
 
