@@ -3,13 +3,13 @@
     <string name="bookmarks">Dấu trang</string>
     <string name="bookmark">Dấu trang</string>
     <string name="video_bookmarked">Đã đánh dấu</string>
-    <string name="video_bookmarked_error">Không thể đánh dấu trang video này.</string>
+    <string name="video_bookmarked_error">Không thể đánh dấu trang video này</string>
     <string name="unbookmark">Gỡ dấu trang</string>
-    <string name="video_unbookmarked">Đã gỡ dấu</string>
-    <string name="video_unbookmarked_error">Không thể gỡ dấu video.</string>
-    <string name="no_bookmarked_videos_text">Đánh dấu một số video để tìm chúng ở đây.</string>
+    <string name="video_unbookmarked">Đã xóa dấu trang</string>
+    <string name="video_unbookmarked_error">Không thể xóa dấu trang video</string>
+    <string name="no_bookmarked_videos_text">Đánh dấu một số video để tìm chúng ở đây</string>
     <string name="video_was_not_bookmarked">Video chưa được đánh dấu</string>
-    <string name="video_already_bookmarked">Đã đánh dấu rồi</string>
-    <string name="bookmark_share_invalid_url">Chỉ có các URL YouTube hợp lệ mới có thể được đánh dấu.</string>
+    <string name="video_already_bookmarked">Đã đánh dấu có sẵn</string>
+    <string name="bookmark_share_invalid_url">Chỉ có các URL YouTube hợp lệ mới có thể được đánh dấu</string>
     <string name="bookmark_share_label">Dấu trang SkyTube</string>
 </resources>

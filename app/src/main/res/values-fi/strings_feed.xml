@@ -12,4 +12,5 @@
     <string name="open_channel">Avaa kanava</string>
     <string name="subscribing_to_channels">Tilataan kanavia…</string>
     <string name="feed">Syöte</string>
+    <string name="channel_related">Kanava...</string>
 </resources>

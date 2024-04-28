@@ -8,4 +8,5 @@
     <string name="channel_blacklist_error">無法將頻道列入黑名單。</string>
     <string name="channel_unwhitelist_error">無法從白名單中移除頻道。</string>
     <string name="dislikes">%d%% 不喜歡</string>
+    <string name="add_to_permitted">允許頻道</string>
 </resources>

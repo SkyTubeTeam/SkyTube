@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="feed">Hírfolyam</string>
+    <string name="feed">Médiafolyam</string>
     <string name="subscribing_to_channels">Feliratkozás a csatornákra…</string>
     <string name="fetching_subbed_channels_info">Csatornaadatok lekérése…</string>
     <string name="fetching_subbed_channels_info_error">Nem sikerült lekérni a csatornaadatokat.</string>

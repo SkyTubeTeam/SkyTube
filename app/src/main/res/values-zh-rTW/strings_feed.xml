@@ -12,4 +12,5 @@
     <string name="notification_channel_feed_title">摘要通知</string>
     <string name="notification_new_videos_found">%d 部來自訂閱頻道的新影片</string>
     <string name="open_channel">開啟頻道</string>
+    <string name="channel_related">頻道……</string>
 </resources>

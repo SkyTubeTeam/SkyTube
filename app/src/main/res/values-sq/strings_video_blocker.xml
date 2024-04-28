@@ -8,4 +8,5 @@
     <string name="channel_blacklist_error">S’u shtua dot kanali në listë bllokimesh.</string>
     <string name="channel_unwhitelist_error">S’u hoq dot kanal nga listë të lejuarish.</string>
     <string name="dislikes">%d%% mospëlqime</string>
+    <string name="add_to_permitted">Lejojeni Kanalin</string>
 </resources>

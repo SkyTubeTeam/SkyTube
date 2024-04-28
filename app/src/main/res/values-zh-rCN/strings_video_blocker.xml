@@ -8,4 +8,5 @@
     <string name="configure">配置</string>
     <string name="no_videos_blocked">您想设置视频拦截器来拦截或过滤掉视频吗？</string>
     <string name="blocked_videos">已屏蔽视频</string>
+    <string name="add_to_permitted">允许频道</string>
 </resources>

@@ -7,9 +7,9 @@
     <string name="fetching_subscription_videos">Загрузка видео из подписанных каналов…</string>
     <string name="fetched_videos_from_channels">Получено %1$d видео из %2$d/%3$d каналов.</string>
     <string name="no_new_videos_found">Новых видео нет.</string>
-    <string name="no_subscriptions_text">Вы не подписаны ни на какие каналы. \n
-   \n
-  В этом списке появляются ролики, которые добавили на каналы из вашей подписки в течение месяца.</string>
+    <string name="no_subscriptions_text">Вы не подписаны ни на какие каналы.
+\n
+\nВ этом списке появляются ролики, которые добавили на каналы из вашей подписки в течение месяца.</string>
     <string name="import_subscriptions_from_youtube">Импортировать подписки из YouTube</string>
     <string name="notification_channel_feed_title">Уведомления ленты</string>
     <string name="notification_new_videos_found">%d новых видео от подписанных каналов</string>

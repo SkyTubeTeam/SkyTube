@@ -12,9 +12,9 @@
     <string name="subscriptions_to_channels_imported">Tilaukset %d kanavaan/kanaviin tuotu.</string>
     <string name="unsubscribe_from_all_current_sibbed_channels">Poista tilaus kaikista nykyisistä tilaamistasi kanavista.</string>
     <string name="import_subscriptions">Tuo tilaukset</string>
-    <string name="error_unable_to_subscribe">Ei voida tilata/poistaa tilausta kanavalta (id=%s)</string>
-    <string name="error_check_if_user_has_subbed">Ei voida tarkistaa, onko käyttäjä tilannut kanavaa (id=%s)</string>
-    <string name="error_get_subbed_channels">Virhe noudettaessa tilattuja kanavia.</string>
+    <string name="error_unable_to_subscribe">Kanavatilauksen (id=%s) poistaminen/lisääminen epäonnistui</string>
+    <string name="error_check_if_user_has_subbed">Kanavatilauksen nykyisen tilan tarkastaminen epäonnistui (id=%s)</string>
+    <string name="error_get_subbed_channels">Tilattujen kanavien noutaminen epäonnistui.</string>
     <string name="channel_unsubscribed">Kanavan tilaus poistettu</string>
     <string name="unsubscribed">Tilaus poistettu</string>
     <string name="channel_subscribe_failed">Kanavaa ei voida tilata</string>

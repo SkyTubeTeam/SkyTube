@@ -25,7 +25,7 @@
     <string name="recaptcha_challenge_requested">YouTube hält dich für einen Bot, also musst du zuerst ein reCAPTCHA lösen.</string>
     <string name="could_not_get_sponsorblock">Folgende SponsorBlock-Information konnte nicht abgerufen werden: %s.</string>
     <string name="cleaner_explanation">Säubere Lesezeichen/Downloads. Benutze die folgenden Filteroptionen:</string>
-    <string name="cleaner">Cleaner</string>
+    <string name="cleaner">Reiniger der schon gesehenen Videos</string>
     <string name="cleaner_confirm">Säubern</string>
     <string name="cleaner_watched_downloads">Entferne angesehene Downloads</string>
     <string name="cleaner_toast_finish">Cleaner hat %s Video(s) entfernt. Jetzt sind %s MB wieder frei</string>

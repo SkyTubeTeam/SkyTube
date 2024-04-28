@@ -24,4 +24,11 @@
     <string name="trending_in">Tendances (%s)</string>
     <string name="recaptcha_challenge_requested">YouTube croit que vous êtes un robot, vous devez donc d\'abord résoudre un reCAPTCHA.</string>
     <string name="could_not_get_sponsorblock">Impossible de récupérer les informations SponsorBlock : %s.</string>
+    <string name="cleaner">Nettoyeur des vidéos vues</string>
+    <string name="cleaner_explanation">Nettoyez des vidéos en marque-page ou téléchargées. Utilisez les options de filtre suivantes :</string>
+    <string name="cleaner_confirm">Nettoyer</string>
+    <string name="cleaner_watched_downloads">Retirer les téléchargements regardés</string>
+    <string name="cleaner_watched_bookmarks">Retirer les marque-pages regardés</string>
+    <string name="video_comments_are_disabled">Commentaires vidéo désactivés</string>
+    <string name="cleaner_toast_finish">Nous avons supprimé %s vidéo(s) des marque-pages, et supprimé %s Mo des vidéos téléchargées</string>
 </resources>

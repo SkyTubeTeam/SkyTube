@@ -12,4 +12,5 @@
     <string name="fetching_subbed_channels_info">Gaunama kanalo informacija…</string>
     <string name="open_channel">Atidaryti kanalą</string>
     <string name="subscribing_to_channels">Prenumeruojami kanalai…</string>
+    <string name="channel_related">Kanalas...</string>
 </resources>

@@ -1,132 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources><string name="preferences">تنظیمات</string>
-
-	<string name="pref_video_player_category">پخش‌کننده ویدئو</string>
-
-	<string name="pref_title_choose_player">پخش‌کننده ویدئو</string>
-	<string name="pref_summary_choose_player">پخش‌کننده ویدئوی مورد استفاده: %s</string>
-	<string name="pref_import_export_category">وارد/صادر کردن</string>
-	<string name="pref_title_backup_dbs">پشتیبان‌گیری از پایگاه‌های داده</string>
-	<string name="pref_summary_backup_dbs">از پایگاه داده اشتراک‌ها و نشان‌گذاری‌های خود نسخه پشتیبان تهیه کنید.</string>
-	<string name="pref_title_import_dbs">وارد کردن نسخه پشتیبان</string>
-	<string name="pref_summary_import_dbs">نسخه پشتیبان پایگاه داده اشتراک‌ها و نشان‌گذاری‌های خود را وارد کنید.</string>
-	<string name="databases_backing_up">تهیه نسخه پشتیبان…</string>
-	<string name="databases_backup_success">"نسخه پشتیبان پایگاه‌های داده روی %s  ذخیره شد"</string>
-	<string name="databases_backup_fail">ناتوانی در تهیه نسخه پشتیبان از پایگاه‌های داده شما.</string>
-	<string name="databases_import_select_backup">انتخاب نسخه پشتیبان برای وارد کرد</string>
-	<string name="databases_import_nothing_selected">چیزی انتخاب نشده بود…</string>
-	<string name="databases_import_warning_message">پایگاه‌های داده اشتراک‌ها و نشان‌گذاری‌ها با داده‌های نسخه پشتیبان انتخاب‌شده، جایگزین خواهند شد.
+<resources>
+    <string name="preferences">تنظیمات</string>
+    <string name="pref_video_player_category">پخش‌کننده ویدئو</string>
+    <string name="pref_title_choose_player">پخش‌کننده ویدئو</string>
+    <string name="pref_summary_choose_player">پخش‌کننده ویدئوی مورد استفاده: %s</string>
+    <string name="pref_import_export_category">وارد/صادر کردن</string>
+    <string name="pref_title_backup_dbs">پشتیبان‌گیری از پایگاه‌های داده</string>
+    <string name="pref_summary_backup_dbs">از پایگاه داده اشتراک‌ها و نشان‌گذاری‌های خود نسخه پشتیبان تهیه کنید.</string>
+    <string name="pref_title_import_dbs">وارد کردن نسخه پشتیبان</string>
+    <string name="pref_summary_import_dbs">نسخه پشتیبان پایگاه داده اشتراک‌ها و نشان‌گذاری‌های خود را وارد کنید.</string>
+    <string name="databases_backing_up">تهیه نسخه پشتیبان…</string>
+    <string name="databases_backup_success">"نسخه پشتیبان پایگاه‌های داده روی %s  ذخیره شد"</string>
+    <string name="databases_backup_fail">ناتوانی در تهیه نسخه پشتیبان از پایگاه‌های داده شما.</string>
+    <string name="databases_import_select_backup">انتخاب نسخه پشتیبان برای وارد کرد</string>
+    <string name="databases_import_nothing_selected">چیزی انتخاب نشده بود…</string>
+    <string name="databases_import_warning_message">پایگاه‌های داده اشتراک‌ها و نشان‌گذاری‌ها با داده‌های نسخه پشتیبان انتخاب‌شده، جایگزین خواهند شد.
 \n
 \nادامه می‌دهید؟</string>
-	<string name="continue_">ادامه</string>
-	<string name="databases_importing">در حال وارد کردن…</string>
-	<string name="databases_import_fail">ناتوانی در وارد کردن پایگاه‌های داده شما.</string>
-	<string name="databases_import_success">پایگاه‌های داده وارد شدند. برنامه را از ابتدا راه‌اندازی کنید تا تغییرات اعمال شوند.</string>
-
-	<string name="pref_title_import_subs">وارد کردن اشتراک‌ها از یوتیوب</string>
-	<string name="pref_summary_import_subs">اشتراک‌های خود را از حساب یوتیوب‌تان وارد کنید.</string>
-	<string name="subs_import_select_backup">انتخاب پرونده XML یوتیوب برای وارد کردن</string>
-
-	<string name="pref_about_category">درباره</string>
-	<string name="pref_title_website">وب‌سایت</string>
-	<string name="pref_title_credits">مشارکت‌کنندگان</string>
-	<string name="pref_summary_credits">افراد و پروژه‌هایی که در به وجود آمدن این برنامه نقش داشته‌اند.</string>
-	<string name="pref_title_version">نسخه</string>
-	<string name="pref_title_updates">به‌روزرسانی‌ها</string>
-	<string name="pref_summary_updates">بررسی وجود نسخه جدید.</string>
-	<string name="pref_title_license">مجوز</string>
-	<string name="pref_summary_license">مجوز عمومی همگانی GPL نسخه ۳</string>
-	<string name="app_license">Copyright © 2015-2018 Ramon Mifsud
+    <string name="continue_">ادامه</string>
+    <string name="databases_importing">در حال وارد کردن…</string>
+    <string name="databases_import_fail">ناتوانی در وارد کردن پایگاه‌های داده شما.</string>
+    <string name="databases_import_success">پایگاه‌های داده وارد شدند. برنامه را از ابتدا راه‌اندازی کنید تا تغییرات اعمال شوند.</string>
+    <string name="pref_title_import_subs">وارد کردن اشتراک‌ها از یوتیوب</string>
+    <string name="pref_summary_import_subs">اشتراک‌های خود را از حساب یوتیوب‌تان وارد کنید.</string>
+    <string name="subs_import_select_backup">انتخاب پرونده XML یوتیوب برای وارد کردن</string>
+    <string name="pref_about_category">درباره</string>
+    <string name="pref_title_website">وب‌سایت</string>
+    <string name="pref_title_credits">مشارکت‌کنندگان</string>
+    <string name="pref_summary_credits">افراد و پروژه‌هایی که در به وجود آمدن این برنامه نقش داشته‌اند.</string>
+    <string name="pref_title_version">نسخه</string>
+    <string name="pref_title_updates">به‌روزرسانی‌ها</string>
+    <string name="pref_summary_updates">بررسی وجود نسخه جدید.</string>
+    <string name="pref_title_license">مجوز</string>
+    <string name="pref_summary_license">مجوز عمومی همگانی GPL نسخه ۳</string>
+    <string name="app_license">Copyright © 2015-2018 Ramon Mifsud
 \n 
 \nاین برنامه، یک نرم‌افزار آزاد است: شما می‌توانید آن را تحت نسخه ۳ «مجوز عمومی همگانی گنو » (GPL v3) که توسط «بنیاد نرم‌افزار آزاد» منتشر شده است، بازتوزیع و یا ویرایش کنید.
 \n 
 \nاین برنامه به این امید منتشر شده است که بدون هیچ تضمینی، مفید واقع شود. برای اطلاعات بیشتر می‌توانید به «مجوز عمومی همگانی گنو» یا GPL مراجعه کنید.
 \n 
 \nشما بایستی نسخه‌ای از این مجوز را همراه با این برنامه دریافت کرده باشید. در غیر این صورت، این صفحه را ببینید: &lt;http://www.gnu.org/licenses&gt;</string>
-	<string name="i_agree">موافقم</string>
-
-
-	<string name="pref_other_category">دیگر تنظیمات</string>
-	<string name="pref_title_default_tab">زبانه پیش‌فرض</string>
-	<string name="pref_summary_default_tab">زبانه پیش‌فرض وقتی SkyTube اجرا می‌شود: %s</string>
-	<string name="pref_title_feed_notification">اعلان خودکار خوراک</string>
-	<string name="pref_summary_feed_notification">تناوب بررسی وجود ویدئوی جدید در کانال‌های مشترک شده: %s</string>
-	<string name="pref_title_screen_orientation">جهت صفحه نمایش</string>
-	<string name="pref_summary_screen_orientation">جهت پخش‌کننده ویدئو: %s</string>
-	<string name="pref_title_disable_screen_gestures">غیرفعال کردن gestureهای ویدئو</string>
-	<string name="pref_summary_disable_screen_gestures">خاموش کردن gesture مربوط به تغییر حجم صدا، روشنایی و عقب یا جلو راندن ویدئو.</string>
-
-	<string name="pref_title_youtube_api_key">کلید API یوتیوب</string>
-	<string name="pref_summary_youtube_api_key">کلید API داده یوتیوب خود را وارد کنید. برای استفاده از API پیش‌فرض، خالی رها کنید.</string>
-	<string name="pref_youtube_api_key_error">خطایی حین اعتبارسنجی کلید API وارد شده شما رخ داد.</string>
-	<string name="pref_youtube_api_key_custom">کلید معتبر است. برای استفاده از کلید API جدید، برنامه را از اول اجرا کنید.</string>
-	<string name="pref_youtube_api_key_default">برای استفاده از کلید API یوتیوب پیش‌فرض، برنامه را از اول راه‌اندازی کنید.</string>
-
-	<string name="restart">راه‌اندازی دوباره</string>
-	<string name="pref_title_subscriptions_alphabetical_order">مرتب‌سازی کانال‌ها بر اساس الفبا</string>
-	<string name="pref_summary_subscriptions_alphabetical_order">اگر انتخاب شده باشد، کانال‌های مشترک شده به صورت الفبایی مرتب می‌شوند.</string>
-	<string name="pref_category_downloads">بارگیری‌ها</string>
-	<string name="pref_title_download_to_separate_directories">بارگیری ویدئوها در پوشه‌ها</string>
-	<string name="pref_summary_download_to_separate_directories">ویدئوها بر اساس نام کانال، در پوشه‌ها بارگیری می‌شوند.</string>
-
-	<string name="pref_video_blocker_category">مسدودساز ویدئو
+    <string name="i_agree">موافقم</string>
+    <string name="pref_other_category">دیگر تنظیمات</string>
+    <string name="pref_title_default_tab">زبانه پیش‌فرض</string>
+    <string name="pref_summary_default_tab">زبانه پیش‌فرض وقتی SkyTube اجرا می‌شود: %s</string>
+    <string name="pref_title_feed_notification">اعلان خودکار خوراک</string>
+    <string name="pref_summary_feed_notification">تناوب بررسی وجود ویدئوی جدید در کانال‌های مشترک شده: %s</string>
+    <string name="pref_title_screen_orientation">جهت صفحه نمایش</string>
+    <string name="pref_summary_screen_orientation">جهت پخش‌کننده ویدئو: %s</string>
+    <string name="pref_title_disable_screen_gestures">غیرفعال کردن gestureهای ویدئو</string>
+    <string name="pref_summary_disable_screen_gestures">خاموش کردن gesture مربوط به تغییر حجم صدا، روشنایی و عقب یا جلو راندن ویدئو.</string>
+    <string name="pref_title_youtube_api_key">کلید API یوتیوب</string>
+    <string name="pref_summary_youtube_api_key">کلید API داده یوتیوب خود را وارد کنید. برای استفاده از API پیش‌فرض، خالی رها کنید.</string>
+    <string name="pref_youtube_api_key_error">خطایی حین اعتبارسنجی کلید API وارد شده شما رخ داد.</string>
+    <string name="pref_youtube_api_key_custom">کلید معتبر است. برای استفاده از کلید API جدید، برنامه را از اول اجرا کنید.</string>
+    <string name="pref_youtube_api_key_default">برای استفاده از کلید API یوتیوب پیش‌فرض، برنامه را از اول راه‌اندازی کنید.</string>
+    <string name="restart">راه‌اندازی دوباره</string>
+    <string name="pref_title_subscriptions_alphabetical_order">مرتب‌سازی کانال‌ها بر اساس الفبا</string>
+    <string name="pref_summary_subscriptions_alphabetical_order">اگر انتخاب شده باشد، کانال‌های مشترک شده به صورت الفبایی مرتب می‌شوند.</string>
+    <string name="pref_category_downloads">بارگیری‌ها</string>
+    <string name="pref_title_download_to_separate_directories">بارگیری ویدئوها در پوشه‌ها</string>
+    <string name="pref_summary_download_to_separate_directories">ویدئوها بر اساس نام کانال، در پوشه‌ها بارگیری می‌شوند.</string>
+    <string name="pref_video_blocker_category">مسدودساز ویدئو
 \n</string>
-	<string name="pref_channels_filter_category">فیلتر کانال‌ها</string>
-
-	<string name="pref_title_channel_filter_method">روش فیلتر کانال</string>
-	<string name="pref_summary_channel_filter_method">انتخاب روش فیلتر کردن کانال: %s</string>
-	<string name="disabled">غیرفعال</string>
-	<string name="pref_title_channel_blacklist">فهرست سیاه کانال</string>
-	<string name="pref_summary_channel_blacklist">فهرستی از کانال‌های مسدودشده.</string>
-	<string name="unblock">رفع مسدودسازی</string>
-	<string name="channel_blacklist_updated">فهرست سیاه کانال‌ها به‌روز شد. لطفا ویدئوها را تازه‌سازی کنید.</string>
-	<string name="channel_blacklist_update_failure">ناتوانی در حذف کانال مورد نظر از فهرست سیاه…</string>
-	<string name="channel_blacklist_empty">فهرست سیاه کانال، خالی است.</string>
-
-	<string name="pref_title_channel_whitelist">فهرست سفید کانال</string>
-	<string name="pref_summary_channel_whitelist">سیاهه‌ای از کانال‌هایی موجود در فهرست سفید.</string>
-	<string name="input_channel_url">نشانی URL کانال برای درج در فهرست سفید:</string>
-	<string name="add">افزودن</string>
-	<string name="block">مسدودسازی</string>
-	<string name="please_wait">صبر کنید…</string>
-	<string name="channel_already_whitelisted">این کانال از قبل در فهرست سفید بوده است.</string>
-	<string name="channel_whitelist_updated">کانال در فهرست سفید قرار گرفت. ویدئوها را تازه‌سازی کنید.</string>
-	<string name="channel_whitelist_update_failure">ناتوانی در وارد کردن کانال مورد نظر در فهرست سفید…</string>
-	<string name="channel_unwhitelist_success">فهرست سفید کانال، به‌روز شد. ویدئوها را تازه‌سازی کنید.</string>
-	<string name="channel_unwhitelist_failure">ناتوانی در حذف کانال(های) مورد نظر از فهرست سفید…</string>
-
-	<string name="pref_languages_filter_category">فیلتر منطقه‌ای و زبانی</string>
-	<string name="pref_title_preferred_regions">منطقه مورد نظر</string>
-	<string name="pref_summary_preferred_regions">منطقه مورد نظر را انتخاب کنید. این منطقه برای گزینش «ویدئوهای شاخص» استفاده می‌شود: %s</string>
-
-	<string name="pref_title_preferred_languages">زبان(های) مورد نظر</string>
-	<string name="pref_summary_preferred_languages">زبان‌های مورد نظرتان را انتخاب کنید.</string>
-	<string name="no_preferred_lang_selected">گزینه‌ای به عنوان زبان مورد نظر انتخاب نشده است. تنظیمات نادیده گرفته خواهند شد.</string>
-	<string name="preferred_lang_updated">زبان مورد نظر، به‌روز شد. ویدئوها را تازه‌سازی کنید.</string>
-
-	<string name="pref_title_lang_detection_video_filtering">فیلتر ویدئوها بر اساس تشخیص زبان</string>
-	<string name="pref_summary_lang_detection_video_filtering">از هوش مصنوعی جهت تشخیص زبان استفاده شده در ویدئو و مسدود سازی آن در صورتی که در فهرست زبان‌(های) مورد نظر شما نباشد استفاده کنید. این قابلیت تنها باید روی دستگاه‌های قوی فعال شود.</string>
-	<string name="setting_updated">تنظیمات به‌روز شد. ویدئوها را تازه‌سازی کنید.</string>
-
-	<string name="pref_other_filters_category">فیلترهای دیگر</string>
-	<string name="pref_title_low_views_filter">نمایش‌ها</string>
-	<string name="pref_summary_low_views_filter">فیلترکردن ویدئوهایی با تعداد نمایش کمتر از: %s</string>
-	<string name="pref_title_dislikes_filter">نپسندیده‌ها</string>
-	<string name="pref_summary_dislikes_filter">فیلتر کردن ویدئوها با نپسندیدن‌های زیاد: %s</string>
-	<string name="pref_privacy_category">حریم شخصی</string>
-	<string name="pref_title_disable_search_history">غیرفعال‌سازی تاریخچه جستجو</string>
-	<string name="pref_summary_disable_search_history">اگر انتخاب شده باشد، تاریخچه جستجو پاک شده و دیگر مورد استفاده قرار نمی‌گیرد.</string>
-	<string name="pref_disable_search_history_deleted">تاریخچه جستجو پاک شد.</string>
-
-	<string name="pref_title_disable_playback_status">غیرفعال‌سازی وضعیت پخش</string>
-	<string name="pref_summary_disable_playback_status">اگر انتخاب شده باشد، وضعیت پخش پاک شده و دیگر مورد استفاده قرار نمی‌گیرد.</string>
-	<string name="pref_disable_playback_status_deleted">وضعیت پخش پاک شد.</string>
-
-	<string name="pref_title_clear_playback_status">پاک کردن وضعیت پخش</string>
-	<string name="pref_summary_clear_playback_status">پاک کردن وضعیت پخش همه ویدئو‌ها.</string>
-	<string name="pref_playback_status_cleared">وضعیت پخش پاک شد.</string>
-
-<string name="pref_summary_enable_video_blocker">فعال کردن مسدودساز ویدئو.</string>
-
-
-	</resources>
+    <string name="pref_channels_filter_category">فیلتر کانال‌ها</string>
+    <string name="pref_title_channel_filter_method">روش فیلتر کانال</string>
+    <string name="pref_summary_channel_filter_method">انتخاب روش فیلتر کردن کانال: %s</string>
+    <string name="disabled">غیرفعال</string>
+    <string name="pref_title_channel_blacklist">فهرست سیاه کانال</string>
+    <string name="pref_summary_channel_blacklist">فهرستی از کانال‌های مسدودشده.</string>
+    <string name="unblock">رفع مسدودسازی</string>
+    <string name="channel_blacklist_updated">فهرست سیاه کانال‌ها به‌روز شد. لطفا ویدئوها را تازه‌سازی کنید.</string>
+    <string name="channel_blacklist_update_failure">ناتوانی در حذف کانال مورد نظر از فهرست سیاه…</string>
+    <string name="channel_blacklist_empty">فهرست سیاه کانال، خالی است.</string>
+    <string name="pref_title_channel_whitelist">فهرست سفید کانال</string>
+    <string name="pref_summary_channel_whitelist">سیاهه‌ای از کانال‌هایی موجود در فهرست سفید.</string>
+    <string name="input_channel_url">نشانی URL کانال برای درج در فهرست سفید:</string>
+    <string name="add">افزودن</string>
+    <string name="block">مسدودسازی</string>
+    <string name="please_wait">صبر کنید…</string>
+    <string name="channel_already_whitelisted">این کانال از قبل در فهرست سفید بوده است.</string>
+    <string name="channel_whitelist_updated">کانال در فهرست سفید قرار گرفت. ویدئوها را تازه‌سازی کنید.</string>
+    <string name="channel_whitelist_update_failure">ناتوانی در وارد کردن کانال مورد نظر در فهرست سفید…</string>
+    <string name="channel_unwhitelist_success">فهرست سفید کانال، به‌روز شد. ویدئوها را تازه‌سازی کنید.</string>
+    <string name="channel_unwhitelist_failure">ناتوانی در حذف کانال(های) مورد نظر از فهرست سفید…</string>
+    <string name="pref_languages_filter_category">فیلتر منطقه‌ای و زبانی</string>
+    <string name="pref_title_preferred_regions">منطقه مورد نظر</string>
+    <string name="pref_summary_preferred_regions">منطقه مورد نظر را انتخاب کنید. این منطقه برای گزینش «ویدئوهای شاخص» استفاده می‌شود: %s</string>
+    <string name="pref_title_preferred_languages">زبان(های) مورد نظر</string>
+    <string name="pref_summary_preferred_languages">زبان‌های مورد نظرتان را انتخاب کنید.</string>
+    <string name="no_preferred_lang_selected">گزینه‌ای به عنوان زبان مورد نظر انتخاب نشده است. تنظیمات نادیده گرفته خواهند شد.</string>
+    <string name="preferred_lang_updated">زبان مورد نظر، به‌روز شد. ویدئوها را تازه‌سازی کنید.</string>
+    <string name="pref_title_lang_detection_video_filtering">فیلتر ویدئوها بر اساس تشخیص زبان</string>
+    <string name="pref_summary_lang_detection_video_filtering">از هوش مصنوعی جهت تشخیص زبان استفاده شده در ویدئو و مسدود سازی آن در صورتی که در فهرست زبان‌(های) مورد نظر شما نباشد استفاده کنید. این قابلیت تنها باید روی دستگاه‌های قوی فعال شود.</string>
+    <string name="setting_updated">تنظیمات به‌روز شد. ویدئوها را تازه‌سازی کنید.</string>
+    <string name="pref_other_filters_category">فیلترهای دیگر</string>
+    <string name="pref_title_low_views_filter">نمایش‌ها</string>
+    <string name="pref_summary_low_views_filter">فیلترکردن ویدئوهایی با تعداد نمایش کمتر از: %s</string>
+    <string name="pref_title_dislikes_filter">نپسندیده‌ها</string>
+    <string name="pref_summary_dislikes_filter">فیلتر کردن ویدئوها با نپسندیدن‌های زیاد: %s</string>
+    <string name="pref_privacy_category">حریم شخصی</string>
+    <string name="pref_title_disable_search_history">غیرفعال‌سازی تاریخچه جستجو</string>
+    <string name="pref_summary_disable_search_history">اگر انتخاب شده باشد، تاریخچه جستجو پاک شده و دیگر مورد استفاده قرار نمی‌گیرد.</string>
+    <string name="pref_disable_search_history_deleted">تاریخچه جستجو پاک شد.</string>
+    <string name="pref_title_disable_playback_status">غیرفعال‌سازی وضعیت پخش</string>
+    <string name="pref_summary_disable_playback_status">اگر انتخاب شده باشد، وضعیت پخش پاک شده و دیگر مورد استفاده قرار نمی‌گیرد.</string>
+    <string name="pref_disable_playback_status_deleted">وضعیت پخش پاک شد.</string>
+    <string name="pref_title_clear_playback_status">پاک کردن وضعیت پخش</string>
+    <string name="pref_summary_clear_playback_status">پاک کردن وضعیت پخش همه ویدئو‌ها.</string>
+    <string name="pref_playback_status_cleared">وضعیت پخش پاک شد.</string>
+    <string name="pref_summary_enable_video_blocker">فعال کردن مسدودساز ویدئو.</string>
+    <string name="key_preferences">تنظیمات</string>
+</resources>

@@ -36,7 +36,7 @@
     <string name="reload_video">Ricarica video</string>
     <string name="warning_metered_network_disable">Non chiedere mai più.</string>
     <string name="metered_network_blocked_by_policy">Scaricamento interrotto perché sei connesso tramite una rete a consumo.</string>
-    <string name="warning_metered_network_play">Connettiti prima a una rete illimitata per evitare addebiti per l\'utilizzo dei dati. Riproduco comunque il video\?</string>
+    <string name="warning_metered_network_play">Connettiti prima a una rete illimitata per evitare addebiti per l\'uso dei dati. Riproduco comunque il video?</string>
     <string name="metered_network">Rete a consumo</string>
     <string name="sponsorblock_skipped">Segmento saltato: %s</string>
     <string name="sponsorblock_category_sponsor">Sponsor</string>

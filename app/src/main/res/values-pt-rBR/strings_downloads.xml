@@ -12,6 +12,6 @@
     <string name="video_stream_not_found_with_request_resolution">Não pude encontrar os dados do video com a resolução %1$s-%2$s solicitada</string>
     <string name="download_failed_because">Não pode ser baixado %1$s por que %2$s.</string>
     <string name="no_downloaded_videos_text">Alguns videos baixados podem ser encontrados aqui.</string>
-    <string name="playing_video_file_missing">Video tocando remotamente não pode ser baixado porquê o arquivo para transferência não pode ser encontrado.</string>
+    <string name="playing_video_file_missing">Vídeo tocando remotamente não pode ser baixado porquê o arquivo para transferência não pode ser encontrado.</string>
     <string name="starting_video_download">baixando \'%s\'…</string>
 </resources>

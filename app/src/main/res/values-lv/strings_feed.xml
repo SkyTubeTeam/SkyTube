@@ -12,4 +12,5 @@
     <string name="fetching_subbed_channels_info">Lādē kanāla informāciju…</string>
     <string name="open_channel">Atvērt kanālu</string>
     <string name="subscribing_to_channels">Abonē kanālus…</string>
+    <string name="channel_related">Kanāls...</string>
 </resources>

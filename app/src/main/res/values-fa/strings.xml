@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="could_not_get_videos">ناتوانی در دریافت %s ویدئو.</string>
-    <string name="could_not_get_channel">ناتوانی در دریافت اطلاعات کانال!</string>
+    <string name="could_not_get_channel">عدم امکان در دانلود اطلاعات</string>
     <string name="views">%,d نمایش</string>
     <string name="error">خطا</string>
     <string name="ok">تایید</string>

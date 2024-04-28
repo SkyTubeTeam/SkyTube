@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="import_subscriptions_description">Desmarque tudo em https://takeout.google.com, exceto \"YouTube e YouTube Music\", e clique em \"Todos dados do YouTube incluído\" para obter apenas as inscrições . Clique em \"Próximo\" e em seguida, em \"Create export\" (Criar exportação). Clique para receber um e-mail com um link de download. Baixe o arquivo em seu cliente de e-mail. Selecione esse arquivo ZIP ou extraia-o e selecione subscriptions.csv ou subscriptions.json contido nele (em /Takeout/YouTube e YouTube Music/subscriptions/) usando \"Select Subscription File\" (Selecionar arquivo de assinatura) abaixo.</string>
+    <string name="import_subscriptions_description">Desmarque tudo em https://takeout.google.com, exceto \"YouTube e YouTube Music\", e clique em \"Todos dados do YouTube incluído\" para obter apenas as inscrições . Clique em \"next\" (Próximo) e em seguida, em \"Create export\" (Criar exportação). Clique para receber um e-mail com um link de download. Baixe o arquivo do seu e-mail. Selecione esse arquivo ZIP ou extraia-o e selecione subscriptions.csv ou subscriptions.json contido nele (em /Takeout/YouTube e YouTube Music/subscriptions/) usando \"Select Subscription File\" (Selecionar arquivo de inscrições) abaixo.</string>
     <string name="subscriptions">Inscrições</string>
     <string name="subscribe">Inscrever-se</string>
     <string name="unsubscribe">Desinscrever</string>
@@ -8,19 +8,19 @@
     <string name="subscribed">Inscrito</string>
     <string name="channel_subscribed">Canal inscrito</string>
     <string name="channel_subscribe_failed">Não foi possível se inscrever no canal</string>
-    <string name="unsubscribed">Desinscrever</string>
+    <string name="unsubscribed">Desinscreveu</string>
     <string name="error_get_subbed_channels">Não foi possível buscar inscrições do canal.</string>
     <string name="error_check_if_user_has_subbed">Não foi possível verificar se você se inscreveu no canal (id=%s)</string>
     <string name="error_unable_to_subscribe">Não foi possível (cancelar) a inscrição de/no canal (id=%s)</string>
     <string name="import_subscriptions">Importar Inscrições</string>
-    <string name="unsubscribe_from_all_current_sibbed_channels">Cancele a assinatura de todos os seus canais atualmente inscritos.</string>
-    <string name="subscriptions_to_channels_imported">%d canal(is) importado(s).</string>
-    <string name="select_sub_file">Selecione o arquivo de assinatura</string>
+    <string name="unsubscribe_from_all_current_sibbed_channels">Desinscreva de todos os seus canais atualmente inscritos.</string>
+    <string name="subscriptions_to_channels_imported">%d canal (is) importado(s).</string>
+    <string name="select_sub_file">Selecione o arquivo de Inscrições</string>
     <string name="select_all">Selecionar tudo</string>
     <string name="select_none">Selecionar nenhum</string>
     <string name="no_channels_found">Não foi possível encontrar nenhum canal do YouTube no arquivo que você enviou.</string>
-    <string name="no_new_channels_found">Nenhum canal do YouTube em que você ainda não está inscrito foi encontrado.</string>
-    <string name="import_subscriptions_parse_error">Não poderia analisar o arquivo que você enviou: %s.</string>
+    <string name="no_new_channels_found">Nenhum canal do YouTube em que você não está inscrito foi encontrado.</string>
+    <string name="import_subscriptions_parse_error">Não foi possível analisar o arquivo que você enviou: %s.</string>
     <string name="failed_to_import_subscriptions">Não foi possível importar suas assinaturas do YouTube.</string>
     <string name="about">Sobre</string>
     <string name="channel_already_subscribed">Já sou inscrito</string>

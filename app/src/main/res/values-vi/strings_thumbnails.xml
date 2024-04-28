@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="thumbnail_download_error">Không thể tải xuống hình thu nhỏ.</string>
-    <string name="thumbnail_downloaded">Đã tải xuống.</string>
+    <string name="thumbnail_download_error">Không thể tải xuống hình thu nhỏ</string>
+    <string name="thumbnail_downloaded">Đã tải xuống</string>
     <string name="view_thumbnail">Xem hình thu nhỏ</string>
     <string name="thumbnail">Hình thu nhỏ</string>
 </resources>

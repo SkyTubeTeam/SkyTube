@@ -8,4 +8,5 @@
     <string name="channel_blacklist_error">Nie udało się umieścić kanału na czarnej liście.</string>
     <string name="channel_unwhitelist_error">Nie udało się usunąć kanału z białej listy.</string>
     <string name="dislikes">%d%% nie lubi</string>
+    <string name="add_to_permitted">Zezwól dla kanału</string>
 </resources>

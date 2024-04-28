@@ -12,4 +12,5 @@
     <string name="no_subscriptions_text">Pajtohuni te ca kanale, që të shihni këtu video prej tyre.</string>
     <string name="import_subscriptions_from_youtube">Importoni Pajtime Nga YouTube-i</string>
     <string name="notification_new_videos_found">%d video të reja prej kanalesh ku jeni pajtuar</string>
+    <string name="channel_related">Kanal…</string>
 </resources>

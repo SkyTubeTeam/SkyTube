@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="downloading">Đang tải xuống…</string>
-    <string name="update_failure">Không thể cài đặt phiên bản mới của ứng dụng.</string>
+    <string name="update_failure">Không thể cài đặt phiên bản mới của ứng dụng</string>
     <string name="later">Để sau</string>
     <string name="update">Cập nhật</string>
     <string name="release_notes">Các thay đổi trong %s</string>
-    <string name="up_to_date_msg">Bạn đã cài đặt phiên bản mới nhất của SkyTube.</string>
+    <string name="up_to_date_msg">Bạn đã cài đặt phiên bản mới nhất của SkyTube</string>
     <string name="up_to_date">Đã cập nhật</string>
-    <string name="update_dialog_msg">Có phiên bản mới của SkyTube. Phiên bản %s sẽ được cài đặt.</string>
+    <string name="update_dialog_msg">Có phiên bản mới của SkyTube. Phiên bản %s sẽ được cài đặt</string>
     <string name="update_available">Có phiên bản mới</string>
     <string name="android_too_old">Rất tiếc, Android của bạn đã quá cũ để cập nhật. Bạn cần cài \'SkyTube Legacy\' thủ công!</string>
 </resources>

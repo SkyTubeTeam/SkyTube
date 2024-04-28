@@ -14,4 +14,5 @@
     <string name="fetching_subbed_channels_info">Henter kanalinfo…</string>
     <string name="fetching_subbed_channels_info_error">Kunne ikke hente kanalinfo.</string>
     <string name="open_channel">Åpne kanal</string>
+    <string name="channel_related">Kanal …</string>
 </resources>

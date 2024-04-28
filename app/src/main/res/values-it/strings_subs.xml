@@ -10,7 +10,7 @@
     <string name="error_check_if_user_has_subbed">Impossibile verificare se sei iscritto al canale (id=%s)</string>
     <string name="error_unable_to_subscribe">Impossibile (dis)iscriversi al canale (id=%s)</string>
     <string name="import_subscriptions">Importa iscrizioni</string>
-    <string name="import_subscriptions_description">Deseleziona tutto su https://takeout.google.com tranne \"YouTube e YouTube Music\" e fai clic su \"Tutti i dati di YouTube inclusi\" per ottenere solo le iscrizioni. Fai clic su \"Avanti\" e quindi su \"Crea esportazione\". Fai clic per ricevere un\'e-mail con un collegamento per il download. Scarica il file dal tuo client di posta elettronica. Seleziona questo file ZIP o estrailo e seleziona subscriptions.csv o subscriptions.json contenuto all\'interno (in /Takeout/YouTube e YouTube Music/subscriptions/) utilizzando \"Seleziona file iscrizione\" di seguito.</string>
+    <string name="import_subscriptions_description">Deseleziona tutto su https://takeout.google.com tranne \"YouTube e YouTube Music\" e fai clic su \"Tutti i dati di YouTube inclusi\" per ottenere solo le iscrizioni. Fai clic su \"Avanti\" e quindi su \"Crea esportazione\". Fai clic per ricevere un\'e-mail con un collegamento per il download. Scarica il file dal tuo client di posta elettronica. Seleziona questo file ZIP o estrailo e seleziona subscriptions.csv o subscriptions.json contenuto all\'interno (in /Takeout/YouTube e YouTube Music/subscriptions/) usando \"Seleziona file iscrizione\" di seguito.</string>
     <string name="subscriptions_to_channels_imported">Importati %d canali.</string>
     <string name="select_all">Seleziona tutto</string>
     <string name="select_none">Deseleziona tutto</string>

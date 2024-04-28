@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="could_not_get_videos">Nelze získat %s videa.</string>
-    <string name="could_not_get_channel">Nelze stáhnout informace o kanálu.</string>
+    <string name="could_not_get_videos">Nepodařilo se načíst %s videí.</string>
+    <string name="could_not_get_channel">Nepodařilo se stáhnout informace o kanálu.</string>
     <string name="views">%,d shlédnutí</string>
     <string name="error">Chyba</string>
     <string name="yes">Ano</string>
     <string name="no">Ne</string>
     <string name="search_channel">Vyhledat kanál</string>
     <string name="cleaner_toast_finish">Odstranili jsme %s videí ze záložek a smazali %sMB stažených videí</string>
-    <string name="cleaner">Čistič shlédnutých videí</string>
+    <string name="cleaner">Čistič zhlédnutých videí</string>
     <string name="cleaner_explanation">Vyčistí uložená/stažená videa podle následujících filtrů:</string>
     <string name="cleaner_confirm">Vyčistit</string>
     <string name="cleaner_watched_downloads">Odstranit shlednuta stažená videa</string>
@@ -16,13 +16,13 @@
     <string name="could_not_get_channel_detailed">Nepodařilo se stáhnout informace o kanálu: %s.</string>
     <string name="num_videos">%d videii</string>
     <string name="playlists">Playlisty</string>
-    <string name="could_not_get_sponsorblock">Nepodařilo se získat informace o reklamním bloku: %s.</string>
+    <string name="could_not_get_sponsorblock">Nepodařilo se získat informace ze služby SponsorBlock: %s.</string>
     <string name="ok">OK</string>
-    <string name="search_videos">Vyhledat Videa</string>
-    <string name="launch_offical_player_error">Nepodařilo se spustit oficiální YouTube přehrávač. Ujistěte se, že je nainstalován.</string>
+    <string name="search_videos">Hledat videa</string>
+    <string name="launch_offical_player_error">Nepodařilo se spustit oficiální přehrávač YouTube. Ujistěte se, že je nainstalován.</string>
     <string name="LIVE">Živě</string>
     <string name="most_popular">Nejpopulárnější</string>
-    <string name="trending_in">Právě frčí (%s)</string>
+    <string name="trending_in">Trendy (%s)</string>
     <string name="video">Video</string>
     <string name="videos">Videa</string>
     <string name="could_not_get_playlists">Nelze načíst %s playlistů.</string>
