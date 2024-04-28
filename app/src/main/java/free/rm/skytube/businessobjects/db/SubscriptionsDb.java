@@ -28,14 +28,10 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializer;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.IOException;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -279,18 +275,18 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 	 *
 	 * @return True if the operation was successful; false otherwise.
 	 */
-	public DatabaseResult unsubscribe(String channelId) {
+	public DatabaseResult unsubscribe(ChannelId channelId) {
 		SkyTubeApp.nonUiThread();
 
 		// delete any feed videos pertaining to this channel
 		getWritableDatabase().delete(SubscriptionsVideosTable.TABLE_NAME_V2,
 				SubscriptionsVideosTable.COL_CHANNEL_ID + " = ?",
-				new String[]{channelId});
+				new String[]{channelId.getRawId()});
 
 		// remove this channel from the subscriptions DB
 		int rowsDeleted = getWritableDatabase().delete(SubscriptionsTable.TABLE_NAME,
 				SubscriptionsTable.COL_CHANNEL_ID + " = ?",
-				new String[]{channelId});
+				new String[]{channelId.getRawId()});
 
 		// Need to make sure when we come back to MainActivity, that we refresh the Feed tab so it hides videos from the newly unsubscribed
 		SkyTubeApp.getSettings().setRefreshSubsFeedFromCache(true);

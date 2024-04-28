@@ -220,32 +220,11 @@ public class GridViewHolder extends RecyclerView.ViewHolder implements Serializa
 	private void onOptionsButtonClick(final View view, YouTubeChannel channel) {
 		final PopupMenu popupMenu = createPopup(R.menu.channel_options_menu, view);
 		Menu menu = popupMenu.getMenu();
-		updateSubscribeMenuItem(channel.getChannelId(), menu);
-		popupMenu.setOnMenuItemClickListener(item -> {
-			if (actionHandler.handleChannelActions(context, channel, item.getItemId())) {
-				return true;
-			}
-			switch (item.getItemId()) {
-				case R.id.share:
-					SkyTubeApp.shareUrl(context, channel.getChannelUrl());
-					return true;
-				case R.id.copyurl:
-					SkyTubeApp.copyUrl(context, "Channel URL", channel.getChannelUrl());
-					return true;
-			}
-			return false;
-		});
+		actionHandler.updateSubscribeMenuItem(channel.getChannelId(), menu);
+		popupMenu.setOnMenuItemClickListener(item ->
+			actionHandler.handleChannelActions(context, channel, item.getItemId())
+		);
 		popupMenu.show();
-	}
-
-	private void updateSubscribeMenuItem(ChannelId channelId, Menu menu) {
-		compositeDisposable.add(SubscriptionsDb.getSubscriptionsDb().getUserSubscribedToChannel(channelId)
-				.observeOn(AndroidSchedulers.mainThread())
-				.subscribe((subscribed) -> {
-					if (!subscribed) {
-						menu.findItem(R.id.subscribe_channel).setVisible(true);
-					}
-				}));
 	}
 
 	private void onOptionsButtonClick(final View view, YouTubeVideo youTubeVideo) {
@@ -273,17 +252,10 @@ public class GridViewHolder extends RecyclerView.ViewHolder implements Serializa
 				menu.findItem(R.id.download_video).setVisible(online);
 			}
 		}));
-		if (SkyTubeApp.getSettings().isEnableVideoBlocker()) {
-			menu.findItem(R.id.block_channel).setVisible(true);
-			menu.findItem(R.id.unblock_channel).setVisible(true);
-		} else {
-			menu.findItem(R.id.block_channel).setVisible(false);
-			menu.findItem(R.id.unblock_channel).setVisible(false);
-		}
-		if (youTubeVideo.getChannelId() != null) {
-			menu.findItem(R.id.open_channel).setVisible(true);
-			updateSubscribeMenuItem(youTubeVideo.getChannelId(), menu);
-		}
+
+		actionHandler.updateBlockingMenuItem(menu);
+		actionHandler.updateSubscribeMenuItem(youTubeVideo.getChannelId(), menu);
+
 		popupMenu.setOnMenuItemClickListener(item -> {
 			if (actionHandler.handleChannelActions(context, youTubeVideo.getChannel(), item.getItemId())) {
 				return true;

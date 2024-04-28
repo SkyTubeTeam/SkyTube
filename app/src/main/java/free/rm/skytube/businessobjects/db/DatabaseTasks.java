@@ -157,7 +157,7 @@ public class DatabaseTasks {
             if (subscribeToChannel) {
                 return SubscriptionsDb.getSubscriptionsDb().subscribe(channel);
             } else {
-                return SubscriptionsDb.getSubscriptionsDb().unsubscribe(channel.getId());
+                return SubscriptionsDb.getSubscriptionsDb().unsubscribe(channel.getChannelId());
             }
         })
                 .subscribeOn(Schedulers.io())
