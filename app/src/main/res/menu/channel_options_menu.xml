@@ -13,6 +13,9 @@
         android:id="@+id/subscribe_channel" android:visible="false"
         android:title="@string/subscribe"/>
     <item
+        android:id="@+id/unsubscribe_channel" android:visible="false"
+        android:title="@string/unsubscribe"/>
+    <item
         android:id="@+id/block_channel"
         android:title="@string/block_channel"/>
     <item

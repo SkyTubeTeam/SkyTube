@@ -42,4 +42,9 @@ public class ChannelId {
     public int hashCode() {
         return Objects.hash(id);
     }
+
+    @Override
+    public String toString() {
+        return "ChannelId{'" + id + '\'' + '}';
+    }
 }

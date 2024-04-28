@@ -23,7 +23,6 @@ import org.jsoup.nodes.Document;
 import org.jsoup.safety.Safelist;
 import org.schabi.newpipe.extractor.Image;
 import org.schabi.newpipe.extractor.InfoItem;
-import org.schabi.newpipe.extractor.comments.CommentsInfoItem;
 import org.schabi.newpipe.extractor.stream.Description;
 
 import java.util.Comparator;
