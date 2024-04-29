@@ -19,6 +19,7 @@ package free.rm.skytube.businessobjects;
 
 import android.util.Log;
 
+import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.YouTube.GetBookmarksVideos;
 import free.rm.skytube.businessobjects.YouTube.GetChannelVideosFull;
 import free.rm.skytube.businessobjects.YouTube.GetDownloadedVideos;
@@ -28,7 +29,6 @@ import free.rm.skytube.businessobjects.YouTube.NewPipeChannelVideos;
 import free.rm.skytube.businessobjects.YouTube.NewPipePlaylistVideos;
 import free.rm.skytube.businessobjects.YouTube.NewPipeVideoBySearch;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPIKey;
-import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeTrendingItems;
 import free.rm.skytube.businessobjects.db.Tasks.GetSubscriptionsVideosFromDb;
 
@@ -104,7 +104,7 @@ public enum VideoCategory {
 	 * {@link NewPipeChannelVideos}.</p>
 	 */
 	public static GetYouTubeVideos createChannelVideosFetcher() {
-		if (NewPipeService.isPreferred()) {
+		if (SkyTubeApp.getSettings().isUseNewPipe()) {
 			return new NewPipeChannelVideos();
 		}
 		if (YouTubeAPIKey.get().isUserApiKeySet()) {

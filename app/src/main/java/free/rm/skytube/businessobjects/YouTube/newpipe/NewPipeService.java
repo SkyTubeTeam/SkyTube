@@ -62,7 +62,6 @@ import java.util.List;
 import java.util.Objects;
 
 import free.rm.skytube.BuildConfig;
-import free.rm.skytube.R;
 import free.rm.skytube.app.Settings;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.Logger;
@@ -561,12 +560,5 @@ public class NewPipeService {
         final ContentCountry contentCountry = toContentCountry(countryCodeStr);
         Log.i("NewPipeService", "set preferred content country to " + contentCountry);
         NewPipe.setPreferredContentCountry(contentCountry);
-    }
-
-    /**
-     * @return true, if it's the preferred backend API
-     */
-    public static boolean isPreferred() {
-        return SkyTubeApp.getPreferenceManager().getBoolean(SkyTubeApp.getStr(R.string.pref_use_default_newpipe_backend), true);
     }
 }

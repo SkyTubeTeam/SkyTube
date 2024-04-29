@@ -19,15 +19,13 @@ package free.rm.skytube.gui.fragments.preferences;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.preference.CheckBoxPreference;
 import androidx.preference.EditTextPreference;
 import androidx.preference.ListPreference;
 import androidx.preference.MultiSelectListPreference;
-import androidx.preference.PreferenceFragmentCompat;
-import androidx.preference.PreferenceManager;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -80,11 +78,7 @@ public class OthersPreferenceFragment extends BasePreferenceFragment {
 		MultiSelectListPreference hiddenTabsPref = findPreference(getString(R.string.pref_key_hide_tabs));
 		hiddenTabsPref.setEntries(tabListLabels);
 
-//		ListPreference feedNotificationPref = (ListPreference) findPreference(getString(R.string.pref_feed_notification_key));
-//		if(feedNotificationPref.getValue() == null) {
-//			feedNotificationPref.setValueIndex(0);
-//		}
-//		feedNotificationPref.setSummary(String.format(getString(R.string.pref_summary_feed_notification), feedNotificationPref.getEntry()));
+		setNewPipeBackendFlags(YouTubeAPIKey.get().isUserApiKeySet(), SkyTubeApp.getSettings().isUseNewPipe());
 	}
 
 	@Override
@@ -104,6 +98,7 @@ public class OthersPreferenceFragment extends BasePreferenceFragment {
 				EditTextPreference    youtubeAPIKeyPref = (EditTextPreference) findPreference(getString(R.string.pref_youtube_api_key));
 				String                youtubeAPIKey     = youtubeAPIKeyPref.getText();
 
+
 				if (youtubeAPIKey != null) {
 					youtubeAPIKey = youtubeAPIKey.trim();
 
@@ -112,24 +107,20 @@ public class OthersPreferenceFragment extends BasePreferenceFragment {
 						new ValidateYouTubeAPIKeyTask(youtubeAPIKey).executeInParallel();
 					}
 					else {
-						// inform the user that we are going to use the default YouTube API key and
-						// that we need to restart the app
-						displayRestartDialog(R.string.pref_youtube_api_key_default,false);
+						setNewPipeBackendFlags(false, true);
 					}
 				}
 			} else if (key.equals(getString(R.string.pref_key_subscriptions_alphabetical_order))) {
 				EventBus.getInstance().notifyMainTabChanged(EventBus.SettingChange.SUBSCRIPTION_LIST_CHANGED);
-			} /*else if (key.equals(getString(R.string.pref_feed_notification_key))) {
-				ListPreference feedNotificationPref = (ListPreference) findPreference(key);
-				feedNotificationPref.setSummary(String.format(getString(R.string.pref_summary_feed_notification), feedNotificationPref.getEntry()));
-
-				int interval = Integer.parseInt(feedNotificationPref.getValue());
-
-				SkyTubeApp.setFeedUpdateInterval(interval);
-			}*/
+			}
 		}
 	}
 
+	private void setNewPipeBackendFlags(boolean enabled, boolean checked) {
+		CheckBoxPreference newPipeBackend = findPreference(getString(R.string.pref_use_default_newpipe_backend));
+		newPipeBackend.setEnabled(enabled);
+		newPipeBackend.setChecked(checked);
+	}
 	/**
 	 * Display a dialog with message <code>messageID</code> and force the user to restart the app by
 	 * tapping on the restart button.
@@ -177,15 +168,19 @@ public class OthersPreferenceFragment extends BasePreferenceFragment {
 			if (!isKeyValid) {
 				// if the validation failed, reset the preference to null
 				((EditTextPreference) findPreference(getString(R.string.pref_youtube_api_key))).setText(null);
+				setNewPipeBackendFlags(false, true);
+
 			} else {
 				YouTubeAPIKey key = YouTubeAPIKey.reset();
 				if (key.isUserApiKeySet()) {
 					// if the key is valid, then inform the user that the custom API key is valid and
 					// that he needs to restart the app in order to use it
+					setNewPipeBackendFlags(true, false);
 
 					displayRestartDialog(R.string.pref_youtube_api_key_custom, false);
 				} else {
-					displayRestartDialog(R.string.pref_youtube_api_key_default, false);
+					setNewPipeBackendFlags(true, true);
+//					displayRestartDialog(R.string.pref_youtube_api_key_default, false);
 				}
 			}
 

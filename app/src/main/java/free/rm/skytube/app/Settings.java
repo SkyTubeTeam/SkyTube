@@ -17,8 +17,6 @@
 
 package free.rm.skytube.app;
 
-import static free.rm.skytube.app.SkyTubeApp.getStr;
-
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Environment;
@@ -371,6 +369,13 @@ public class Settings {
 
     public void setDisplayedReleaseNoteTag(String newValue) {
         setPreference(LATEST_RELEASE_NOTES_DISPLAYED, newValue);
+    }
+
+    /**
+     * @return true, if NewPipe is the preferred backend API
+     */
+    public boolean isUseNewPipe() {
+        return getPreference(R.string.pref_use_default_newpipe_backend, true);
     }
 
     public float getDefaultPlaybackSpeed() {

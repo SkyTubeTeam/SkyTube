@@ -71,7 +71,6 @@ public class YouTubeAPIKey {
 		if (youTubeAPIKey == null) {
 			youTubeAPIKey = new YouTubeAPIKey();
 		}
-
 		return youTubeAPIKey;
 	}
 
@@ -92,13 +91,20 @@ public class YouTubeAPIKey {
 			if (BuildConfig.DEBUG) {
 				return debugKey;
 			} else {
-				// else we are going to choose one of the defaults keys at random
-				int i = random.nextInt(apiKeys.length);
-				return apiKeys[i];
+				if (apiKeys.length > 0) {
+					// else we are going to choose one of the defaults keys at random
+					int i = random.nextInt(apiKeys.length);
+					return apiKeys[i];
+				} else {
+					return null;
+				}
 			}
 		}
 	}
 
+	public boolean isAnyKeyValid() {
+		return isUserApiKeySet() || apiKeys.length > 0;
+	}
 
 	/**
 	 * @return True if the user has set his own YouTube API key (via the
@@ -107,7 +113,6 @@ public class YouTubeAPIKey {
 	public boolean isUserApiKeySet() {
 		return (userAPIKey != null);
 	}
-
 
 	/**
 	 * @return User's YouTube API key (if set).  If the user did not set a key, then it will return null.
