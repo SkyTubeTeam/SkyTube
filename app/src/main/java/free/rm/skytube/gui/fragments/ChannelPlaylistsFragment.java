@@ -53,7 +53,7 @@ public class ChannelPlaylistsFragment extends VideosGridFragment implements Play
 	}
 
 	private YouTubeTasks.ChannelPlaylistFetcher createFetcher(YouTubeChannel channel) {
-		if (NewPipeService.isPreferred()) {
+		if (SkyTubeApp.getSettings().isUseNewPipe()) {
 			return new GetPlaylistsForChannel(channel);
 		} else {
 			return new LegacyGetChannelPlaylists(channel);

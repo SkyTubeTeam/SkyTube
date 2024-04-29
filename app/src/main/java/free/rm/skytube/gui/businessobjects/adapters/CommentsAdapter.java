@@ -398,7 +398,7 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
     }
 
     public static BaseExpandableListAdapter createAdapter(Context context, Linker.CurrentActivity currentActivity, String videoId, ExpandableListView expandableListView, View commentsProgressBar, View noVideoCommentsView, View disabledCommentsView) {
-        if (NewPipeService.isPreferred()) {
+        if (SkyTubeApp.getSettings().isUseNewPipe()) {
             return new CommentsAdapter(context, currentActivity, videoId, expandableListView, commentsProgressBar, noVideoCommentsView, disabledCommentsView);
         } else {
             return new LegacyCommentsAdapter(context, videoId, expandableListView, commentsProgressBar, noVideoCommentsView);
