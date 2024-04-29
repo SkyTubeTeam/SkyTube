@@ -1,0 +1,30 @@
+* Fix couple of bugs around subscribing and unsubscribing
+* Fix crash in comment parsing
+* Add USA as a locale for getting the trending videos.
+* Handle Youtube channel urls that starts with @
+* Updating to the latest NewPipeExtractor
+* Updated translations for:
+    * Albanian - Besnik Bleta
+    * Arabic - thami simo
+    * Bulgarian - Любомир Василев
+    * Chinese (Simplified) - Nriver
+    * Chinese (Traditional) - Jeff Huang
+    * Czech - Fjuro, Woyta
+    * Estonian - Priit Jõerüüt
+    * Finnish - JiPRA
+    * French - J. Lavoie, aleksej0R
+    * Greek - luckris25
+    * Hungarian - Szia Tomi
+    * Italian - Massimo Pissarello
+    * Korean - 이상혁
+    * Latvian - Arta Ridere
+    * Lithuanian - Marius Zrelskis
+    * Norwegian Bokmål - Allan Nordhøy
+    * Persian - parsa shirvani
+    * Polish - Bartek200219, Michal L
+    * Portuguese (Brazil) - Carlos Luiz, Flavio F. M, Jose Delvani, Mr. Fakezay
+    * Portuguese - Lucas Ribeiro
+    * Russian - Alexey Amanov
+    * Sinhala - DuninduH, HelaBasa Group, KGdr8
+    * Ukrainian - Ihor Hordiichuk
+    * Vietnamese - Fiezt Marshall, Tấn Lực Trương
