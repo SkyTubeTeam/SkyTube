@@ -197,7 +197,7 @@ dependencies {
 
 /** Testing **/
     // Required for local unit tests (JUnit 5 framework)
-    def junitVersion = '5.9.2'
+    def junitVersion = '5.10.2'
     testImplementation "org.junit.jupiter:junit-jupiter-api:$junitVersion"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
 }
