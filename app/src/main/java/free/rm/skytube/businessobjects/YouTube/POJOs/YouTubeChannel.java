@@ -33,6 +33,7 @@ import java.util.List;
 import free.rm.skytube.R;
 import free.rm.skytube.app.EventBus;
 import free.rm.skytube.app.SkyTubeApp;
+import free.rm.skytube.app.Utils;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.VideoBlocker;
 import free.rm.skytube.businessobjects.YouTube.newpipe.ChannelId;
@@ -325,11 +326,6 @@ public class YouTubeChannel extends CardData implements Serializable {
 	}
 
 	public String getChannelUrl() {
-		try {
-			return YoutubeChannelLinkHandlerFactory.getInstance().getUrl(getId());
-		} catch (ParsingException p) {
-			Logger.e(this, "getChannel URL for " + getId() + ", error:" + p.getMessage(), p);
-			return id;
-		}
+		return getChannelId().toURL();
 	}
 }
