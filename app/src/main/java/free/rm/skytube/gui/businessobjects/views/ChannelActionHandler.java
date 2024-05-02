@@ -56,10 +56,10 @@ public class ChannelActionHandler {
             case R.id.unblock_channel:
                 compositeDisposable.add(channel.unblockChannel().subscribe());
                 return true;
-            case R.id.share:
+            case R.id.share_channel:
                 SkyTubeApp.shareUrl(context, channel.getChannelUrl());
                 return true;
-            case R.id.copyurl:
+            case R.id.channel_copyurl:
                 SkyTubeApp.copyUrl(context, "Channel URL", channel.getChannelUrl());
                 return true;
 

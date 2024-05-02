@@ -47,4 +47,8 @@ public class ChannelId {
     public String toString() {
         return "ChannelId{'" + id + '\'' + '}';
     }
+
+    public String toURL() {
+        return String.format("https://www.youtube.com/channel/%s", id);
+    }
 }
