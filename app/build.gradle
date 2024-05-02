@@ -130,7 +130,7 @@ dependencies {
     annotationProcessor "com.github.bumptech.glide:compiler:$glideVersion"
 
     // Custom dialogs
-    implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
+    implementation 'com.afollestad.material-dialogs:core:3.3.0'
 
     // File / folder chooser
     implementation 'com.github.hedzr:android-file-chooser:v1.2.0-final'
