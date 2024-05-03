@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="select_sub_file">Selecione o ficheiro</string>
+    <string name="select_all">Marcar todos</string>
+    <string name="select_none">Desmarcar todos</string>
+    <string name="subscribe">Subscrever</string>
+    <string name="total_subscribers">%,d subscritores</string>
+    <string name="channel_subscribed">Subscreveu o canal</string>
+    <string name="channel_subscribe_failed">Não foi possível subscrever o canal</string>
+    <string name="channel_unsubscribed">Subscrição cancelada</string>
+    <string name="error_check_if_user_has_subbed">Não foi possível verificar se você subscreveu o canal (id: %s)</string>
+    <string name="error_unable_to_subscribe">Não foi possível subscrever ou cancelar a subscrição (id: %s)</string>
+    <string name="import_subscriptions">Importar subscrições</string>
+    <string name="subscriptions_to_channels_imported">%d canal/canais importados.</string>
+    <string name="no_channels_found">Não foram encontrados canais do YouTube no ficheiro carregado.</string>
+    <string name="import_subscriptions_parse_error">Não foi possível processar o ficheiro carregado: %s.</string>
+    <string name="about">Acerca</string>
+    <string name="subscriptions">Subscrições</string>
+    <string name="unsubscribe">Cancelar subscrição</string>
+    <string name="subscribed">Subscrito</string>
+    <string name="channel_already_subscribed">Já está subscrito</string>
+    <string name="unsubscribed">Cancelada</string>
+    <string name="error_get_subbed_channels">Não foi possível obter as subscrições.</string>
+    <string name="unsubscribe_from_all_current_sibbed_channels">Cancelar subscrição em todos os canais subscritos.</string>
+    <string name="no_new_channels_found">Não foram encontrados canais do YouTube que não estejam já subscritos.</string>
+    <string name="failed_to_import_subscriptions">Não foi possível importar as subscrições.</string>
+</resources>

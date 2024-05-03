@@ -2,12 +2,12 @@
 <resources>
     <string name="error_stream_err_unavailable">Mensagem indisponível.</string>
     <string name="share">Compartilhe</string>
-    <string name="error_stream_decryption_fail">Não foi possível carregar descrição dos Servidores do Youtube.</string>
-    <string name="warning_metered_network_disable">Nunca pergunte novamente.</string>
-    <string name="metered_network">Rede de dados limitada</string>
-    <string name="metered_network_blocked_by_policy">Download bloqueado porque seus dados são de uma rede limitada.</string>
-    <string name="error_video_play">Erro ao reproduzir o Video</string>
-    <string name="play_video">Reproduzir Video</string>
+    <string name="error_stream_decryption_fail">Não foi possível carregar o código do serviço Youtube.</string>
+    <string name="warning_metered_network_disable">Não perguntar novamente.</string>
+    <string name="metered_network">Rede limitada</string>
+    <string name="metered_network_blocked_by_policy">A descarga foi bloqueada porque a ligação é efetuada através de uma rede limitada.</string>
+    <string name="error_video_play">Erro de reprodução</string>
+    <string name="play_video">Reproduzir vídeo</string>
     <string name="warning_live_video">Não podemos reproduzir essa live agora. abrir em outro app\?</string>
     <string name="open_with">abrir com…</string>
     <string name="reload_video">Recarregar Video</string>
@@ -28,4 +28,12 @@
     <string name="sponsorblock_category_outro">Cartão de finalização / Créditos Finais</string>
     <string name="sponsorblock_category_preview">Resumo / Recapitalização</string>
     <string name="sponsorblock_category_filler">Enrolação</string>
+    <string name="error_downloaded_file_is_corrupted">Parece que o ficheiro descarregado está <b>danificado</b>: <br/> <br/> %s. <br/> <br/> <b>Eliminar</b>\?</string>
+    <string name="error_stream_parse_error">Erro no processo.</string>
+    <string name="error_video_streams_empty">O vídeo \'%s\' não tem fluxos.</string>
+    <string name="error_video_streams">Não foi possível obter os fluxos do vídeo.</string>
+    <string name="error_get_video_desc">Não foi possível obter a descrição do vídeo.</string>
+    <string name="error_invalid_url">URL inválido: %s</string>
+    <string name="error_video_parse_error">Não foi possível iniciar o vídeo:<br/><br/>%s.</string>
+    <string name="warning_metered_network_play">Ligue-se a uma rede sem limites para impedir a utilização de dados móveis. Reproduzir mesmo assim?</string>
 </resources>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="up_to_date">Está atualizado</string>
+    <string name="up_to_date_msg">A versão mais recente está instalada.</string>
+    <string name="release_notes">Alterações da v %s</string>
+    <string name="update">Atualizar</string>
+    <string name="later">Depois</string>
+    <string name="update_failure">Não foi possível instalar a atualização.</string>
+    <string name="downloading">A descarregar…</string>
+    <string name="android_too_old">Infelizmente, a sua versão Android é muita antiga. Tem que instalar a versão \'Legacy\'!</string>
+    <string name="update_available">Nova versão disponível</string>
+    <string name="update_dialog_msg">Está disponível uma nova versão de Skytube. A versão %s será instalada.</string>
+</resources>

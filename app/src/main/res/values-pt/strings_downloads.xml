@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="downloads">Descargas</string>
+    <string name="download_video">Descarregar vídeo</string>
+    <string name="unable_to_delete_file">Não foi possível eliminar o vídeo descarregado: %s.</string>
+    <string name="video_download_stream_error">Não foi possível descarregar\'%s\'.</string>
+    <string name="download_failed_because">Não foi possível descarregar %1$s. Motivo: %2$s.</string>
+    <string name="video_downloaded">\'%s\' descarregado.</string>
+    <string name="no_downloaded_videos_text">Descarregue alguns vídeos para os encontrar aqui.</string>
+    <string name="playing_video_file_missing">O vídeo será reproduzido porque não foi encontrado um ficheiro para descarregar.</string>
+    <string name="download">Descarregar</string>
+    <string name="warning_metered_network_download">A ligação de rede atual é limitada. Deseja descarregar o vídeo?</string>
+    <string name="starting_video_download">A descarregar \'%s\'…</string>
+    <string name="video_stream_not_found_with_request_resolution">Não foi possível encontrar um fluxo de vídeo com a resolução especificada: %1$sx%2$s</string>
+    <string name="delete_download">Eliminar descarga</string>
+    <string name="external_storage_not_available">Conceda acesso ao armazenamento para poder descarregar o vídeo.</string>
+</resources>
