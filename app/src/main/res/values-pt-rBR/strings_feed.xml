@@ -2,7 +2,7 @@
 <resources>
     <string name="open_channel">Abrir canal</string>
     <string name="subscribing_to_channels">Inscrevendo nos canais…</string>
-    <string name="fetching_subbed_channels_info_error">Não consegui carrega as informações do canal.</string>
+    <string name="fetching_subbed_channels_info_error">Não foi possível obter as informações do canal.</string>
     <string name="fetched_videos_from_channels">Obteve vídeos %1$d dos canais %2$d/%3$d.</string>
     <string name="no_new_videos_found">Não há vídeos novos.</string>
     <string name="no_subscriptions_text">Inscreva-se em alguns canais para ver novos vídeos deles aqui.</string>
