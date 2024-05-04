@@ -191,24 +191,12 @@
                 <data android:scheme="http" />
                 <data android:scheme="https" />
                 <data android:host="invidio.us" />
-                <data android:host="dev.invidio.us" />
-                <data android:host="www.invidio.us" />
-                <data android:host="redirect.invidious.io" />
-                <data android:host="invidious.snopyta.org" />
-                <data android:host="yewtu.be" />
-                <data android:host="tube.connect.cafe" />
-                <data android:host="invidious.zapashcanon.fr" />
-                <data android:host="invidious.kavin.rocks" />
-                <data android:host="invidious.tube" />
                 <data android:host="invidious.site" />
-                <data android:host="invidious.xyz" />
-                <data android:host="vid.mint.lgbt" />
-                <data android:host="invidiou.site" />
+                <data android:host="redirect.invidious.io" />
+                <data android:host="yewtu.be" />
+                <data android:host="invidious.zapashcanon.fr" />
                 <data android:host="invidious.fdn.fr" />
-                <data android:host="invidious.048596.xyz" />
-                <data android:host="invidious.zee.li" />
                 <data android:host="vid.puffyan.us" />
-                <data android:host="ytprivate.com" />
                 <data android:pathPrefix="/" />
             </intent-filter>
         </activity> <!-- Version < 3.0. DeX Mode and Screen Mirroring support -->
