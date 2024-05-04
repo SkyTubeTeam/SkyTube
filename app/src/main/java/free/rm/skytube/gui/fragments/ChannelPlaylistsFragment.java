@@ -26,73 +26,72 @@ import free.rm.skytube.gui.businessobjects.adapters.PlaylistsGridAdapter;
  * A fragment that displays the Playlists belonging to a Channel
  */
 public class ChannelPlaylistsFragment extends VideosGridFragment implements PlaylistClickListener, SwipeRefreshLayout.OnRefreshListener {
-	private PlaylistsGridAdapter    playlistsGridAdapter;
-	private MainActivityListener    mainActivityListener;
+    private PlaylistsGridAdapter    playlistsGridAdapter;
+    private MainActivityListener    mainActivityListener;
 
-	@Nullable
-	@Override
-	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		View view = super.onCreateView(inflater, container, savedInstanceState);
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = super.onCreateView(inflater, container, savedInstanceState);
 
 
-		if (playlistsGridAdapter == null) {
-			playlistsGridAdapter = new PlaylistsGridAdapter(getActivity(), this);
-		} else {
-			playlistsGridAdapter.setContext(getActivity());
-		}
+        if (playlistsGridAdapter == null) {
+            playlistsGridAdapter = new PlaylistsGridAdapter(getActivity(), this);
+        } else {
+            playlistsGridAdapter.setContext(getActivity());
+        }
 
-		YouTubeChannel channel = (YouTubeChannel) requireArguments()
-				.getSerializable(ChannelBrowserFragment.CHANNEL_OBJ);
-		playlistsGridAdapter.setFetcher(createFetcher(channel));
+        YouTubeChannel channel = (YouTubeChannel) requireArguments()
+                .getSerializable(ChannelBrowserFragment.CHANNEL_OBJ);
+        playlistsGridAdapter.setFetcher(createFetcher(channel));
 
-		gridviewBinding.swipeRefreshLayout.setOnRefreshListener(this);
+        gridviewBinding.gridView.setAdapter(playlistsGridAdapter);
 
-		gridviewBinding.gridView.setAdapter(playlistsGridAdapter);
+        return view;
+    }
 
-		return view;
-	}
+    private YouTubeTasks.ChannelPlaylistFetcher createFetcher(YouTubeChannel channel) {
+        if (SkyTubeApp.getSettings().isUseNewPipe()) {
+            return new GetPlaylistsForChannel(channel);
+        } else {
+            return new LegacyGetChannelPlaylists(channel);
+        }
+    }
 
-	private YouTubeTasks.ChannelPlaylistFetcher createFetcher(YouTubeChannel channel) {
-		if (SkyTubeApp.getSettings().isUseNewPipe()) {
-			return new GetPlaylistsForChannel(channel);
-		} else {
-			return new LegacyGetChannelPlaylists(channel);
-		}
-	}
+    @Override
+    public void onDestroy() {
+        playlistsGridAdapter.clearBackgroundTasks();
+        super.onDestroy();
+    }
 
-	@Override
-	public void onDestroy() {
-		playlistsGridAdapter.clearBackgroundTasks();
-		super.onDestroy();
-	}
+    @Override
+    public String getFragmentName() {
+        return SkyTubeApp.getStr(R.string.playlists);
+    }
 
-	@Override
-	public String getFragmentName() {
-		return SkyTubeApp.getStr(R.string.playlists);
-	}
+    @Override
+    public void onClickPlaylist(YouTubePlaylist playlist) {
+        if(mainActivityListener != null) {
+            mainActivityListener.onPlaylistClick(playlist);
+        }
+    }
 
-	@Override
-	public void onClickPlaylist(YouTubePlaylist playlist) {
-		if(mainActivityListener != null)
-			mainActivityListener.onPlaylistClick(playlist);
-	}
+    public void setMainActivityListener(MainActivityListener mainActivityListener) {
+        this.mainActivityListener = mainActivityListener;
+    }
 
-	public void setMainActivityListener(MainActivityListener mainActivityListener) {
-		this.mainActivityListener = mainActivityListener;
-	}
+    @Override
+    public void onRefresh() {
+        playlistsGridAdapter.refresh(youTubePlaylists -> gridviewBinding.swipeRefreshLayout.setRefreshing(false));
+    }
 
-	@Override
-	public void onRefresh() {
-		playlistsGridAdapter.refresh(youTubePlaylists -> gridviewBinding.swipeRefreshLayout.setRefreshing(false));
-	}
+    @Override
+    protected VideoCategory getVideoCategory() {
+        return null;
+    }
 
-	@Override
-	protected VideoCategory getVideoCategory() {
-		return null;
-	}
-
-	@Override
-	public int getPriority() {
-		return 6;
-	}
+    @Override
+    public int getPriority() {
+        return 6;
+    }
 }
