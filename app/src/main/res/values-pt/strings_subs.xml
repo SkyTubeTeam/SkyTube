@@ -8,7 +8,7 @@
     <string name="channel_subscribed">Subscreveu o canal</string>
     <string name="channel_subscribe_failed">Não foi possível subscrever o canal</string>
     <string name="channel_unsubscribed">Subscrição cancelada</string>
-    <string name="error_check_if_user_has_subbed">Não foi possível verificar se você subscreveu o canal (id: %s)</string>
+    <string name="error_check_if_user_has_subbed">Não foi possível verificar se o canal foi subscrito (id: %s)</string>
     <string name="error_unable_to_subscribe">Não foi possível subscrever ou cancelar a subscrição (id: %s)</string>
     <string name="import_subscriptions">Importar subscrições</string>
     <string name="subscriptions_to_channels_imported">%d canal/canais importados.</string>
