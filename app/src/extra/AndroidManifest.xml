@@ -53,10 +53,14 @@
 				<data android:host="youtube.com"/>
 				<data android:host="m.youtube.com"/>
 				<data android:host="www.youtube.com"/>
+				<data android:host="music.youtube.com" />
 				<!-- video prefix -->
 				<data android:pathPrefix="/v/"/>
 				<data android:pathPrefix="/embed/"/>
 				<data android:pathPrefix="/watch"/>
+				<data android:pathPrefix="/shorts/" />
+				<data android:pathPrefix="/live/" />
+				<data android:pathPrefix="/podcasts/" />
 				<data android:pathPrefix="/attribution_link"/>
 				<!-- channel prefix -->
 				<data android:pathPrefix="/channel/"/>
