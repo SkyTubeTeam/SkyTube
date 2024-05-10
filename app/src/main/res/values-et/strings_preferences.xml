@@ -114,4 +114,15 @@
     <string name="pref_video_download_minimum_resolution_summary">Allalaaditavate videote väikseim resolutsioon on %s</string>
     <string name="pref_key_video_quality_title">Videokvaliteedi valik</string>
     <string name="pref_key_video_quality_summary">Optimeeri mõõtudele: %s</string>
+    <string name="pref_key_video_quality_metered_title">Videokvaliteedi valik mahupiiranguga võrkudes</string>
+    <string name="pref_key_video_quality_metered_summary">Optimeeri mõõtudele: %s</string>
+    <string name="pref_key_video_quality_for_downloads_title">Videokvaliteedi valik allalaadimiseks</string>
+    <string name="pref_key_video_quality_for_downloads_summary">Optimeeri mõõtudele: %s</string>
+    <string name="pref_key_use_newer_formats_title">Proovi moodsamaid videovorminguid</string>
+    <string name="pref_key_use_newer_formats_summary">Kui vanemas Androidi seadmes puudub piisav raudvaraline tugi, siis heli- ja pildikvaliteet võivad jääda puudulikuks.</string>
+    <string name="pref_title_playback_speed">Vaikimisi taasesituse kiirus</string>
+    <string name="pref_summary_playback_speed">Vaikimisi taasesituse kiirus: %s</string>
+    <string name="pref_video_blocker_category">Videote blokeerija</string>
+    <string name="pref_summary_enable_video_blocker">Videote blokeerija.</string>
+    <string name="pref_channels_filter_category">Kanalite filtrid</string>
 </resources>
