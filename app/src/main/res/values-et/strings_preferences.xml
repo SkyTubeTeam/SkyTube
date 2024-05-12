@@ -125,4 +125,6 @@
     <string name="pref_video_blocker_category">Videote blokeerija</string>
     <string name="pref_summary_enable_video_blocker">Videote blokeerija.</string>
     <string name="pref_channels_filter_category">Kanalite filtrid</string>
+    <string name="pref_title_enable_immersive_mode">Puhas videovaade</string>
+    <string name="pref_summary_enable_immersive_mode">Peida meedia esituse ajal navigatsiooniriba ja olekuriba.</string>
 </resources>
