@@ -1,2 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="error_stream_decryption_fail">Nepodarilo sa načítať dešifrovací kód pre službu YouTube.</string>
+    <string name="error_video_play">Chyba pri prehrávaní videa</string>
+    <string name="error_video_streams">Nepodarilo sa načítať žiadny zo streamov videa.</string>
+    <string name="error_video_streams_empty">Video \'%s\' nemá žiadne streamy.</string>
+    <string name="error_get_video_desc">Nepodarilo sa načítať popis videa.</string>
+    <string name="error_invalid_url">Neplatná URL adresa videa: %s</string>
+    <string name="metered_network">Meraná sieť</string>
+    <string name="error_stream_parse_error">Chyba pri spracovaní.</string>
+</resources>
