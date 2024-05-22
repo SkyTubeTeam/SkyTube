@@ -1,2 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="preferences">Predvoľby</string>
+    <string name="key_preferences">predvoľby</string>
+    <string name="pref_video_player_category">Video prehrávač</string>
+    <string name="pref_title_maximum_res">Najvyššie rozlíšenie</string>
+    <string name="pref_summary_maximum_res">Vyberte najvyššie rozlíšenie: %s</string>
+    <string name="pref_summary_minimum_res">Vyberte najnižšie rozlíšenie: %s</string>
+    <string name="pref_title_minimum_res_metered">Najnižšie rozlíšenie pre meranú sieť</string>
+    <string name="pref_title_minimum_res">Najnižšie rozlíšenie</string>
+    <string name="pref_title_choose_player">Video prehrávač</string>
+    <string name="pref_category_metered_network">Meraná sieť</string>
+    <string name="pref_summary_choose_player">Použitý video prehrávač: %s</string>
+    <string name="pref_summary_minimum_res_metered">Vybertenajnižšie rozlíšenie pri streamovaní cez meranú sieť: %s</string>
+</resources>
