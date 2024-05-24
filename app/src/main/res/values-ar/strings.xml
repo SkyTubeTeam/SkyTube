@@ -26,7 +26,7 @@
     <string name="could_not_get_sponsorblock">تعذر استرداد معلومات الجهة الراعية: %s.</string>
     <string name="cleaner">شاهد الفيديو الأنظف</string>
     <string name="cleaner_confirm">ينظف</string>
-    <string name="cleaner_toast_finish">قمنا بإزالة %s فيديو(s) من الإشارات المرجعية ، والمحذوفة %sميغا بايت من مقاطع الفيديو التي تم تنزيلها</string>
+    <string name="cleaner_toast_finish">لقد قمنا بإزالة %1$s من مقاطع الفيديو من الإشارات المرجعية، وحذفنا %2$dMB من مقاطع الفيديو التي تم تنزيلها</string>
     <string name="cleaner_watched_bookmarks">إزالة الإشارات المرجعية التي تمت مشاهدتها</string>
     <string name="cleaner_explanation">تنظيف مقاطع الفيديو المرجعية / التي تم تنزيلها. استخدم خيارات التصفية التالية:</string>
     <string name="cleaner_watched_downloads">قم بإزالة التنزيلات التي تمت مراقبتها</string>
