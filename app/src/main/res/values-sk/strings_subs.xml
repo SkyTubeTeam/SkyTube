@@ -1,2 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="subscribe">Odoberať</string>
+    <string name="unsubscribe">Zrušiť odber</string>
+    <string name="total_subscribers">%,d odberateľov</string>
+    <string name="subscribed">Odoberané</string>
+    <string name="unsubscribed">Odber zrušený</string>
+    <string name="channel_unsubscribed">Odber kanála zrušený</string>
+    <string name="subscriptions">Odbery</string>
+    <string name="select_all">Vybrať všetky</string>
+    <string name="error_get_subbed_channels">Nepodarilo sa načítať odbery kanálov.</string>
+    <string name="error_check_if_user_has_subbed">Nepodarilo sa skontrolovať, či ste sa prihlásili na odber kanála (id=%s)</string>
+    <string name="error_unable_to_subscribe">Nepodarilo sa prihlásiť alebo odhlásiť odber kanála (id=%s)</string>
+    <string name="unsubscribe_from_all_current_sibbed_channels">Zrušiť odber všetkých aktuálne odoberaných kanálov.</string>
+    <string name="subscriptions_to_channels_imported">Počet importovaných kanálov: %d.</string>
+    <string name="select_none">Zrušiť výber</string>
+    <string name="about">O aplikácii</string>
+    <string name="select_sub_file">Vybrať súbor s odbermi</string>
+    <string name="no_new_channels_found">Nenašli sa žiadne kanály YouTube, na ktorých odber ešte nie ste.prihlásení.</string>
+    <string name="import_subscriptions_parse_error">Nepodarilo sa spracovať súbor, ktorý ste nahrali: %s.</string>
+    <string name="channel_already_subscribed">Už odoberané</string>
+    <string name="import_subscriptions">Importovať odbery</string>
+    <string name="failed_to_import_subscriptions">Nepodarilo sa importovať vaše odbery YouTube.</string>
+    <string name="import_subscriptions_description">Na stránke https://takeout.google.com zrušte výber všetkého okrem položky \"YouTube a YouTube Music\" a kliknite na položku \"All YouTube data included\", aby ste získali iba odbery. Kliknite na \"Next\" (Ďalej) a potom na \"Create export\" (Vytvoriť export). Kliknutím dostanete e-mail s odkazom na stiahnutie. Stiahnite si súbor z e-mailového klienta. Vyberte tento súbor ZIP alebo ho rozbaľte a vyberte súbor subscriptions.csv alebo subscriptions.json, ktorý sa v ňom nachádza (v adresári /Takeout/YouTube and YouTube Music/subscriptions/), pomocou funkcie \"Select Subscription File\" (Vybrať súbor s odbermi) uvedenej nižšie.</string>
+    <string name="channel_subscribed">Kanál odoberaný</string>
+    <string name="channel_subscribe_failed">Nepodarilo sa prihlásiť na odber kanála</string>
+    <string name="no_channels_found">Nepodarilo sa nájsť žiadne kanály YouTube v súbore, ktorý ste nahrali.</string>
+</resources>
