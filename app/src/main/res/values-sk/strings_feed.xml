@@ -2,4 +2,15 @@
 <resources>
     <string name="import_subscriptions_from_youtube">Importovať odbery z YouTube</string>
     <string name="no_new_videos_found">Žiadne nové videá.</string>
+    <string name="channel_related">Kanál...</string>
+    <string name="subscribing_to_channels">Odber kanálov…</string>
+    <string name="open_channel">Otvoriť kanál</string>
+    <string name="fetching_subbed_channels_info">Načítavajú sa informácie o kanáli…</string>
+    <string name="fetching_subbed_channels_info_error">Nepodarilo sa načítať informácie o kanáli.</string>
+    <string name="fetching_subscription_videos">Načítavajú sa videá z odoberaných kanálov…</string>
+    <string name="fetched_videos_from_channels">Nájdené videá: %1$d z %2$d/%3$d kanálov.</string>
+    <string name="no_subscriptions_text">Prihláste sa na odber kanálov, aby ste tu mohli vidieť ich najnovšie videá.</string>
+    <string name="notification_channel_feed_title">Oznámenia informačného kanála</string>
+    <string name="notification_new_videos_found">Nové videá z odoberaných kanálov: %d</string>
+    <string name="feed">Informačný kanál</string>
 </resources>
