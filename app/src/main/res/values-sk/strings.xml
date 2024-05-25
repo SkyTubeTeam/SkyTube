@@ -1,2 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="could_not_get_sponsorblock">Nepodarilo sa získať informácie SponsorBlock: %s.</string>
+    <string name="views">Zobrazení: %,d</string>
+    <string name="error">Chyba</string>
+    <string name="ok">OK</string>
+    <string name="search_videos">Hľadať video</string>
+    <string name="LIVE">Naživo</string>
+    <string name="featured">Odporúčané</string>
+    <string name="most_popular">Najpopulárnejšie</string>
+    <string name="trending_in">Trendy (%s)</string>
+    <string name="videos">Videá</string>
+    <string name="num_videos">Videí: %d</string>
+    <string name="playlists">Playlisty</string>
+    <string name="could_not_get_playlists">Nepodarilo sa načítať playlisty: %s.</string>
+    <string name="close">Zavrieť</string>
+    <string name="yes">Áno</string>
+    <string name="cleaner_explanation">Vyčistite videá zo záložiek/stiahnutých. Použite nasledujúce možnosti filtrovania:</string>
+    <string name="cleaner_confirm">Vyčistiť</string>
+    <string name="cleaner_toast_finish">Odstránili sme videá (počet: %1$s) zo záložiek a odstránili sme %2$dMB stiahnutých videí</string>
+    <string name="cleaner_watched_downloads">Odstrániť pozerané stiahnuté videá</string>
+    <string name="cleaner_watched_bookmarks">Odstrániť pozerané záložky videí</string>
+    <string name="video_comments_are_disabled">Komentáre sú vypnuté</string>
+    <string name="could_not_get_videos">Nepodarilo sa načítať videá: %s.</string>
+    <string name="recaptcha_challenge_requested">YouTube si myslí, že ste bot, preto musíte najprv vyriešiť reCAPTCHA.</string>
+    <string name="launch_offical_player_error">Nepodarilo sa spustiť oficiálny prehrávač YouTube. Uistite sa, že je nainštalovaný.</string>
+    <string name="video">Video</string>
+    <string name="loading">Načíta sa…</string>
+    <string name="no">Nie</string>
+    <string name="could_not_get_channel">Nepodarilo sa stiahnuť informácie o kanáli.</string>
+    <string name="could_not_get_channel_detailed">Nepodarilo sa stiahnuť informácie o kanáli: %s.</string>
+    <string name="search_channel">Hľadať kanál</string>
+    <string name="cleaner">Čistič pozeraných videí</string>
+</resources>
