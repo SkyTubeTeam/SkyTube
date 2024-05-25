@@ -12,4 +12,26 @@
     <string name="pref_category_metered_network">Meraná sieť</string>
     <string name="pref_summary_choose_player">Použitý video prehrávač: %s</string>
     <string name="pref_summary_minimum_res_metered">Vybertenajnižšie rozlíšenie pri streamovaní cez meranú sieť: %s</string>
+    <string name="no_resolution_specified">Nevybrané</string>
+    <string name="pref_summary_maximum_res_metered">Vyberte maximálne rozlíšenie pri streamovaní cez meranú sieť: %s</string>
+    <string name="pref_title_metered_network_usage">Využitie meranej siete</string>
+    <string name="pref_import_export_category">Import/Export</string>
+    <string name="pref_title_backup_dbs">Zálohovať databázy</string>
+    <string name="pref_title_import_dbs">Importovať zálohu</string>
+    <string name="pref_summary_backup_dbs">Zálohuje vaše záložky a odbery.</string>
+    <string name="pref_summary_import_dbs">Importuje vašu zálohu záložiek a odberov.</string>
+    <string name="databases_backup_success">Databázy zálohované do %s</string>
+    <string name="databases_backup_fail">Nepodarilo sa zálohovať vaše databázy.</string>
+    <string name="databases_import_select_backup">Vyberte súbor zálohy, ktorý chcete importovať</string>
+    <string name="databases_import_nothing_selected">Nič nebolo vybrané…</string>
+    <string name="continue_">Pokračovať</string>
+    <string name="databases_importing">Importuje sa…</string>
+    <string name="pref_title_import_subs">Importovať odbery z YouTube</string>
+    <string name="pref_summary_import_subs">Importuje vaše odbery z konta YouTube.</string>
+    <string name="pref_title_maximum_res_metered">Najvyššie rozlíšenie pre meranú sieť</string>
+    <string name="pref_summary_metered_network_usage">Čo robiť, ak na sťahovanie/sledovanie videí používate meranú sieť: %s</string>
+    <string name="databases_backing_up">Zálohuje sa…</string>
+    <string name="databases_import_warning_message">Nahradiť záložky a odbery údajmi vo vybranom záložnom súbore?</string>
+    <string name="databases_import_fail">Nepodarilo sa importovať vaše databázy.</string>
+    <string name="databases_import_success">Na používanie nových záložiek a odberov reštartujte aplikáciu.</string>
 </resources>
