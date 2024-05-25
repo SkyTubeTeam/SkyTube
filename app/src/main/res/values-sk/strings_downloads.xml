@@ -1,2 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="starting_video_download">Sťahuje sa \'%s\'…</string>
+    <string name="video_download_stream_error">Nepodarilo sa stiahnuť \'%s\'.</string>
+    <string name="download_failed_because">Nepodarilo sa stiahnuť %1$s, pretože %2$s.</string>
+    <string name="video_stream_not_found_with_request_resolution">Nepodarilo sa nájsť žiadny video stream v požadovanom rozlíšení %1$s-%2$s</string>
+    <string name="no_downloaded_videos_text">Stiahnuté videá nájdete tu.</string>
+    <string name="external_storage_not_available">Najprv povoľte prístup k externému úložisku.</string>
+    <string name="warning_metered_network_download">Stiahnuť video v meranej sieti, ku ktorej ste pripojení?</string>
+    <string name="download_video">Stiahnuť video</string>
+    <string name="unable_to_delete_file">Stiahnutý súbor \'%s\' sa nepodarilo odstrániť.</string>
+    <string name="video_downloaded">Stiahnuté: \'%s\'.</string>
+</resources>
