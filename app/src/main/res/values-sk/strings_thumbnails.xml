@@ -1,2 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="thumbnail">Miniatúra</string>
+    <string name="view_thumbnail">Zobraziť miniatúru</string>
+    <string name="thumbnail_downloaded">Stiahnuté.</string>
+    <string name="thumbnail_download_error">Miniatúru sa nepodarilo stiahnuť.</string>
+</resources>
