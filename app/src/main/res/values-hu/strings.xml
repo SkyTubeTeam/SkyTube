@@ -23,7 +23,7 @@
     <string name="search_channel">Csatornák keresése</string>
     <string name="close">Bezárás</string>
     <string name="trending_in">Felkapott (%s)</string>
-    <string name="recaptcha_challenge_requested">A YouTube azt hiszi, hogy ön egy Bot, ezért először meg kell oldania a reCAPTCHA-t.</string>
+    <string name="recaptcha_challenge_requested">A YouTube azt hiszi, hogy ön egy Bot, ezért először meg kell oldania a reCAPTCHA feladatot.</string>
     <string name="could_not_get_sponsorblock">Nem sikerült lekérni a szponzorblokk adatait: %s.</string>
     <string name="cleaner">Megnézett videók tisztítása</string>
     <string name="cleaner_confirm">Tisztít</string>
