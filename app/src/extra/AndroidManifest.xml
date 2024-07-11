@@ -1,8 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:tools="http://schemas.android.com/tools">
 
-	<uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>       <!-- Android Pie now requires this permission to run a foreground service. Chromecast support uses this. See https://developer.android.com/guide/components/services#Foreground -->
+	<uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+	<!-- Android Pie now requires this permission to run a foreground service. Chromecast support uses this. See https://developer.android.com/guide/components/services#Foreground -->
+
 	<!-- for AndroidTV compatibility -->
 	<uses-feature android:name="android.software.leanback"
 		android:required="false" />
