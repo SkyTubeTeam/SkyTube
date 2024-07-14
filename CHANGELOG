@@ -1,3 +1,12 @@
+v2.989 - 2024-07-14
+        * Fix video/channel sharing
+        * Update NewPipeExtractor to fix recent Youtube site changes.
+        * Clean up non-existent HookTube and Invidious sites by drogga
+        * Updated translations for:
+                * Albanian, Arabic, Czech, Chinese (Simplified), Chinese (Traditional), Croatian, Estonian, French, German, Italian, Hungarian, Polish, Portuguese, Portuguese (Brazil), Slovak, Spanish, Turkish, Ukrainian
+        * Translators:
+                * Besnik Bleta, Eryk Michalak, Fjuro, Flavio F. M, Ihor Hordiichuk, J. Lavoie, Jeff Huang, Massimo Pissarello, Milan, Milo Ivir, Oğuz Ersen, Priit Jõerüüt, Rex_sa, Samylo199, Sergio Marques, Szia Tomi, gallegonovato, 大王叫我来巡山
+
 v2.988 - 2024-04-29
         * Fix couple of bugs around subscribing and unsubscribing
         * Fix crashes around comment parsing
