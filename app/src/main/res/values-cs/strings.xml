@@ -7,7 +7,7 @@
     <string name="yes">Ano</string>
     <string name="no">Ne</string>
     <string name="search_channel">Vyhledat kanál</string>
-    <string name="cleaner_toast_finish">Odstranili jsme %s videí ze záložek a smazali %sMB stažených videí</string>
+    <string name="cleaner_toast_finish">Odstranili jsme %1$s videí ze záložek a smazali %2$d MB stažených videí</string>
     <string name="cleaner">Čistič zhlédnutých videí</string>
     <string name="cleaner_explanation">Vyčistí uložená/stažená videa podle následujících filtrů:</string>
     <string name="cleaner_confirm">Vyčistit</string>

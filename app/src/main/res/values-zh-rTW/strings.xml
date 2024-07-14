@@ -29,6 +29,6 @@
     <string name="cleaner_confirm">清理</string>
     <string name="video_comments_are_disabled">已關閉影片留言</string>
     <string name="cleaner_watched_bookmarks">移除看過的書籤</string>
-    <string name="cleaner_toast_finish">我們從書籤移除了 %s 部影片，並刪除了 %sMB 的已下載影片</string>
+    <string name="cleaner_toast_finish">我們從書籤移除了 %1$s 部影片，並刪除了 %2$dMB 的已下載影片</string>
     <string name="cleaner_watched_downloads">移除看過的下載</string>
 </resources>

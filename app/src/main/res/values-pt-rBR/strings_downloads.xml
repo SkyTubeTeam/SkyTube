@@ -2,16 +2,16 @@
 <resources>
     <string name="downloads">Downloads</string>
     <string name="download">Download</string>
-    <string name="external_storage_not_available">Permita acesso ao armazenamento externo para baixar o arquivo primeiro.</string>
+    <string name="external_storage_not_available">Conceder acesso ao armazenamento externo para baixar o arquivo primeiro.</string>
     <string name="download_video">Baixar Vídeo</string>
-    <string name="warning_metered_network_download">Deseja baixa mesmo em uma rede limitada\?</string>
+    <string name="warning_metered_network_download">Baixar vídeo na rede limitada à qual você está conectado?</string>
     <string name="delete_download">Apagar Download</string>
     <string name="video_downloaded">\'%s\' baixados.</string>
-    <string name="unable_to_delete_file">Não poderei deletar o arquivo \'%s\' baixado.</string>
-    <string name="video_download_stream_error">Não foi possível baixa \'%s\'.</string>
-    <string name="video_stream_not_found_with_request_resolution">Não pude encontrar os dados do video com a resolução %1$s-%2$s solicitada</string>
+    <string name="unable_to_delete_file">Não foi possível apagar o arquivo \'%s\' baixado.</string>
+    <string name="video_download_stream_error">Não foi possível baixar \'%s\'.</string>
+    <string name="video_stream_not_found_with_request_resolution">Não foi possível encontrar nenhum stream de vídeo na resolução %1$s-%2$s solicitada</string>
     <string name="download_failed_because">Não pode ser baixado %1$s por que %2$s.</string>
-    <string name="no_downloaded_videos_text">Alguns videos baixados podem ser encontrados aqui.</string>
-    <string name="playing_video_file_missing">Vídeo tocando remotamente não pode ser baixado porquê o arquivo para transferência não pode ser encontrado.</string>
-    <string name="starting_video_download">baixando \'%s\'…</string>
+    <string name="no_downloaded_videos_text">Baixe alguns vídeos para encontrá-los aqui.</string>
+    <string name="playing_video_file_missing">Reproduzindo vídeo remotamente, pois não foi encontrado nenhum arquivo para download.</string>
+    <string name="starting_video_download">Baixando \'%s\'…</string>
 </resources>

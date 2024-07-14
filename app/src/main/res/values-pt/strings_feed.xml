@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="feed">Feed</string>
+    <string name="fetching_subscription_videos">A obter vídeos dos canais subscritos…</string>
+    <string name="fetched_videos_from_channels">Encontrados %1$d vídeos de %2$d/%3$d canais.</string>
+    <string name="import_subscriptions_from_youtube">Importar subscrições do YouTube</string>
+    <string name="fetching_subbed_channels_info">A obter informações do canal…</string>
+    <string name="fetching_subbed_channels_info_error">Não foi possível obter as informações do canal.</string>
+    <string name="no_subscriptions_text">Subscreva alguns canais para mostrar aqui os vídeos.</string>
+    <string name="no_new_videos_found">Não existem novos vídeos.</string>
+    <string name="notification_channel_feed_title">Notificações</string>
+    <string name="notification_new_videos_found">%d novos vídeos nos canais subscritos</string>
+    <string name="channel_related">Canal...</string>
+    <string name="subscribing_to_channels">A subscrever o canal…</string>
+    <string name="open_channel">Abrir canal</string>
+</resources>

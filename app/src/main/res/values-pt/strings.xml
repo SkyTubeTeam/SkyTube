@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="search_channel">Pesquisar canal</string>
+    <string name="search_channel">Procurar canal</string>
     <string name="no">Não</string>
     <string name="yes">Sim</string>
     <string name="loading">A carregar…</string>
     <string name="close">Fechar</string>
-    <string name="recaptcha_challenge_requested">O YouTube acha que você é um bot, então você deve resolver um reCAPTCHA primeiro.</string>
+    <string name="recaptcha_challenge_requested">O YouTube acha que você é um bot e, por esse motivo, deve resolver o reCAPTCHA.</string>
     <string name="could_not_get_playlists">Não foi possível obter %s listas de reprodução.</string>
     <string name="playlists">Listas de reprodução</string>
     <string name="num_videos">%d vídeos</string>
@@ -14,21 +14,21 @@
     <string name="trending_in">Tendências (%s)</string>
     <string name="most_popular">Mais popular</string>
     <string name="featured">Destaques</string>
-    <string name="LIVE">Ao vivo</string>
-    <string name="launch_offical_player_error">Não foi possível iniciar o reprodutor oficial do YouTube. Certifique-se de que está instalado.</string>
-    <string name="search_videos">Pesquisar vídeos</string>
+    <string name="LIVE">Em direto</string>
+    <string name="launch_offical_player_error">Não foi possível iniciar a aplicação YouTube. Certifique-se de que está instalada.</string>
+    <string name="search_videos">Procurar vídeos</string>
     <string name="ok">OK</string>
     <string name="error">Erro</string>
     <string name="views">%,d visualizações</string>
     <string name="could_not_get_channel_detailed">Não foi possível descarregar as informações do canal: %s.</string>
     <string name="could_not_get_channel">Não foi possível descarregar as informações do canal.</string>
-    <string name="could_not_get_videos">Não foi possível carregar %s vídeos.</string>
-    <string name="could_not_get_sponsorblock">Não foi possível recuperar informações do SponsorBlock: %s.</string>
-    <string name="cleaner">Limpador de Videos Assistidos</string>
-    <string name="cleaner_explanation">"Limpe vídeos marcados/baixados.  Use as seguintes opções de filtro:"</string>
+    <string name="could_not_get_videos">Não foi possível obter %s vídeos.</string>
+    <string name="could_not_get_sponsorblock">Não foi possível obter as informações SponsorBlock: %s.</string>
+    <string name="cleaner">Limpeza de vídeos</string>
+    <string name="cleaner_explanation">Limpe vídeos favorito/descarregados. Use as seguintes opções de filtro:</string>
     <string name="cleaner_confirm">Limpar</string>
-    <string name="cleaner_watched_downloads">Remover downloads assistidos</string>
-    <string name="cleaner_watched_bookmarks">Remover favoritos assistidos</string>
-    <string name="video_comments_are_disabled">Comentários do vídeo desativados</string>
-    <string name="cleaner_toast_finish">Removemos %s vídeo(s) dos favoritos e excluímos %sMB de vídeos baixados</string>
+    <string name="cleaner_watched_downloads">Remover descargas de vídeos já vistos</string>
+    <string name="cleaner_watched_bookmarks">Remover favoritos já vistos</string>
+    <string name="video_comments_are_disabled">Comentários desativados</string>
+    <string name="cleaner_toast_finish">Removeu %s vídeo(s) dos favoritos e eliminou %s MB de vídeos descarregados</string>
 </resources>

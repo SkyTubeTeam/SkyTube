@@ -2,6 +2,6 @@
 <resources>
     <string name="thumbnail">Miniatura</string>
     <string name="view_thumbnail">Ver miniatura</string>
-    <string name="thumbnail_downloaded">Baixado.</string>
-    <string name="thumbnail_download_error">Não foi possível baixar a miniatura.</string>
+    <string name="thumbnail_downloaded">Descarregadas.</string>
+    <string name="thumbnail_download_error">Não foi possível descarregar a miniatura.</string>
 </resources>

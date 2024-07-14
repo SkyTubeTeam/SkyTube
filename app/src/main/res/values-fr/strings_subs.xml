@@ -10,7 +10,7 @@
     <string name="error_check_if_user_has_subbed">Impossible de vérifier si vous êtes abonné·e à la chaîne (id=%s)</string>
     <string name="error_unable_to_subscribe">Impossible de vous désabonner de cette chaîne (id=%s)</string>
     <string name="import_subscriptions">Importer abonnements</string>
-    <string name="import_subscriptions_description">Désélectionnez tout sur https://takeout.google.com sauf « YouTube et YouTube Music » et cliquez sur « Toutes les données YouTube incluses » pour obtenir uniquement les abonnements. Cliquez sur « Suivant » et ensuite sur « Créer l\'exportation ». Cliquez pour recevoir un courriel avec un lien de téléchargement. Téléchargez le fichier depuis votre client de messagerie et extrayez-le. Importez les abonnements.json (dans /Takeout/YouTube et YouTube Music/subscriptions/) de celui-ci dans SkyTube en utilisant « Sélectionner le fichier d\'abonnement » ci-dessous.</string>
+    <string name="import_subscriptions_description">Désélectionnez tout sur https://takeout.google.com sauf « YouTube et YouTube Music » et cliquez sur « Toutes les données YouTube sont incluses » pour obtenir que les abonnements. Cliquez sur « Suivant » et ensuite sur « Créer une exportation ». Cliquez pour recevoir un e-mail avec un lien de téléchargement. Téléchargez le fichier ZIP depuis votre client de messagerie et extrayez-le. Importez subscriptions.json (dans /Takeout/YouTube et YouTube Music/subscriptions/) de celui-ci dans SkyTube en utilisant « Sélectionner le fichier d\'abonnement » ci-dessous.</string>
     <string name="subscriptions_to_channels_imported">%d chaîne(s) importée(s).</string>
     <string name="select_all">Tout sélectionner</string>
     <string name="select_none">Tout déselectionner</string>

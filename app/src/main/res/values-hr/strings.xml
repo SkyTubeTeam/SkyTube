@@ -28,7 +28,7 @@
     <string name="cleaner_confirm">Izbriši</string>
     <string name="cleaner_watched_downloads">Ukloni gledana preuzimanja</string>
     <string name="cleaner_watched_bookmarks">Ukloni gledane zabilješke</string>
-    <string name="cleaner_toast_finish">Uklonili smo %s video/a iz bilježaka i izbrisali smo %s MB preuzetih videa</string>
+    <string name="cleaner_toast_finish">Uklonili smo %1$s video/a iz bilježaka i izbrisali smo %2$d MB preuzetih videa</string>
     <string name="cleaner">Brisanje gledanih videa</string>
     <string name="video_comments_are_disabled">Komentari za video isključeni</string>
 </resources>
