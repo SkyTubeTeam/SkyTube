@@ -1,0 +1,52 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version_number:
+        description: 'Version Number'
+        required: true
+        default: 'v2.988'
+        type: string
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - uses: gradle/actions/wrapper-validation@v3
+
+    - name: set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: 17
+        distribution: "adopt"
+
+    - name: Cache Gradle packages
+      uses: actions/cache@v4
+      with:
+        path: ~/.gradle/caches
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
+        restore-keys: ${{ runner.os }}-gradle
+
+    - name: Setup Keystore
+      id: setup_keystore
+      uses: timheuer/base64-to-file@v1.2
+      with:
+        fileName: 'release.keystore'
+        encodedString: ${{ secrets.SIGNING_KEY }}
+
+    - name: sha256sum
+      run: sha256sum ${{steps.setup_keystore.outputs.filePath}}
+
+    - name: Build with Gradle
+      run: ./gradlew assembleRelease -Pandroid.injected.signing.store.file=${{steps.setup_keystore.outputs.filePath}} -Pandroid.injected.signing.store.password=${{secrets.KEY_STORE_PASSWORD}} -Pandroid.injected.signing.key.alias=${{secrets.ALIAS}} -Pandroid.injected.signing.key.password=${{secrets.KEY_PASSWORD}}
+
+    - name: Create Github Release
+      uses: ncipollo/release-action@v1
+      with:
+        artifacts: "app/build/outputs/apk/oss/release/SkyTube-Oss-*.apk,app/build/outputs/apk/extra/release/SkyTube-Extra-*.apk"
+        draft: "true"
+        name: "Version ${{ inputs.version_number }}"
+        tag: ${{ inputs.version_number}}
