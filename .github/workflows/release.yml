@@ -6,7 +6,7 @@ on:
       version_number:
         description: 'Version Number'
         required: true
-        default: 'v2.988'
+        default: '2.989'
         type: string
 
 jobs:
@@ -49,4 +49,4 @@ jobs:
         artifacts: "app/build/outputs/apk/oss/release/SkyTube-Oss-*.apk,app/build/outputs/apk/extra/release/SkyTube-Extra-*.apk"
         draft: "true"
         name: "Version ${{ inputs.version_number }}"
-        tag: ${{ inputs.version_number}}
+        tag: "v${{ inputs.version_number}}"
