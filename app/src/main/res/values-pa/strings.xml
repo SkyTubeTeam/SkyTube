@@ -9,7 +9,7 @@
     <string name="close">ਬੰਦ ਕਰੋ</string>
     <string name="ok">ਠੀਕ ਹੈ</string>
     <string name="search_videos">ਵੀਡੀਓ ਖੋਜੋ</string>
-    <string name="launch_offical_player_error">ਅਧਿਕਾਰਤ YouTube ਪਲੇਅਰ ਨੂੰ ਲਾਂਚ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਿਆ। ਇਹ ਯਕੀਨੀ ਬਣਾਓ ਕਿ ਇਹ ਸਥਾਪਿਤ ਹੈ.</string>
+    <string name="launch_offical_player_error">ਅਧਿਕਾਰਤ YouTube ਪਲੇਅਰ ਨੂੰ ਲਾਂਚ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਿਆ। ਇਹ ਯਕੀਨੀ ਬਣਾਓ ਕਿ ਇਹ ਸਥਾਪਿਤ ਹੈ।</string>
     <string name="LIVE">ਲਾਈਵ</string>
     <string name="featured">ਫੀਚਰਡ</string>
     <string name="most_popular">ਸਭ ਤੋਂ ਮਸ਼ਹੂਰ</string>
@@ -30,5 +30,5 @@
     <string name="video_comments_are_disabled">ਵੀਡੀਓ ਟਿੱਪਣੀਆਂ ਬੰਦ ਹਨ</string>
     <string name="cleaner_explanation">ਬੁੱਕਮਾਰਕ ਕੀਤੀਆਂ/ਡਾਊਨਲੋਡ ਕੀਤੀਆਂ ਵੀਡੀਓਜ਼ ਨੂੰ ਸਾਫ਼ ਕਰੋ। ਹੇਠਾਂ ਦਿੱਤੇ ਫਿਲਟਰ ਵਿਕਲਪਾਂ ਦੀ ਵਰਤੋਂ ਕਰੋ:</string>
     <string name="cleaner_watched_bookmarks">ਵੇਖੇ ਗਏ ਬੁੱਕਮਾਰਕ ਹਟਾਓ</string>
-    <string name="cleaner_toast_finish">ਅਸੀਂ ਬੁੱਕਮਾਰਕਾਂ ਤੋਂ %s ਵੀਡੀਓ(ਵਾਂ) ਹਟਾ ਦਿੱਤੀਆਂ ਹਨ, ਅਤੇ ਡਾਊਨਲੋਡ ਕੀਤੀਆਂ ਵੀਡੀਓਜ਼ ਵਿੱਚੋਂ %sMB ਨੂੰ ਮਿਟਾ ਦਿੱਤਾ ਹੈ</string>
+    <string name="cleaner_toast_finish">ਅਸੀਂ ਬੁੱਕਮਾਰਕਾਂ ਤੋਂ %1$s ਵੀਡੀਓ(ਵਾਂ) ਹਟਾ ਦਿੱਤੀਆਂ ਹਨ, ਅਤੇ ਡਾਊਨਲੋਡ ਕੀਤੀਆਂ ਵੀਡੀਓਜ਼ ਵਿੱਚੋਂ %2$dMB ਨੂੰ ਮਿਟਾ ਦਿੱਤਾ ਹੈ</string>
 </resources>
