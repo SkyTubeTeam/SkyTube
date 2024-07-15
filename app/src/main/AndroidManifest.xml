@@ -54,6 +54,7 @@
         <activity
             android:name=".gui.activities.PreferencesActivity"
             android:label="@string/preferences"
+            android:exported="true"
             android:parentActivityName=".gui.activities.MainActivity"
             tools:targetApi="jelly_bean">
             <meta-data
