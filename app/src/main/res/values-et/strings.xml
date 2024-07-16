@@ -9,7 +9,7 @@
     <string name="search_channel">Otsi kanalit</string>
     <string name="cleaner">Vaadatud videote logi tühjendaja</string>
     <string name="cleaner_explanation">Kustuta allalaaditud ja/või järjehoidjaks märgitud videod. Selleks võid kasutada neid valikuid:</string>
-    <string name="cleaner_toast_finish">Eemaldasime %1$s video(t) järjehoidjate hulgast ja kustutasime %2$d MB jagu allalaaditud videosid</string>
+    <string name="cleaner_toast_finish">Eemaldasime %1$s video(t) järjehoidjate hulgast ja kustutasime %2$s MB jagu allalaaditud videosid</string>
     <string name="cleaner_watched_downloads">Eemalda allalaaditud ja vaadatud videod</string>
     <string name="cleaner_watched_bookmarks">Eemalda järjehoidjate hulgast vaadatud videod</string>
     <string name="video_comments_are_disabled">Video kommentaarid on välja lülitatud</string>
