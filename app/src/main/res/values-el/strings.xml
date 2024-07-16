@@ -24,7 +24,7 @@
     <string name="search_channel">Αναζήτηση καναλιού</string>
     <string name="cleaner">Εκκαθαρίση των βίντεο που έχετε παρακολουθήσει</string>
     <string name="cleaner_confirm">Εκκαθάριση</string>
-    <string name="cleaner_toast_finish">Αφαιρέσαμε %s βίντεο από τους σελιδοδείκτες, και διαγράψαμε %sMB αποθηκευμένων βίντεο στη συσκευή σας</string>
+    <string name="cleaner_toast_finish">Αφαιρέσαμε %1$s βίντεο από τους σελιδοδείκτες, και διαγράψαμε %2$s MB αποθηκευμένων βίντεο στη συσκευή σας</string>
     <string name="cleaner_watched_downloads">Αφαίρεση λήψεων που έχετε παρακολουθήσει</string>
     <string name="video_comments_are_disabled">Τα σχόλια στο βίντεο είναι απενεργοποιημένα</string>
     <string name="views">%,d προβολές</string>
