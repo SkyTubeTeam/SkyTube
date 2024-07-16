@@ -29,6 +29,6 @@
     <string name="cleaner_confirm">Garbitu</string>
     <string name="cleaner_watched_downloads">Kendu ikusitako deskargak</string>
     <string name="cleaner_watched_bookmarks">Kendu ikusitako laster-markak</string>
-    <string name="cleaner_toast_finish">%s bideoa(k) kendu d(iy)ugu marketatik, eta deskargatutako bideoen %sMB ezabatu d(it)ugu</string>
+    <string name="cleaner_toast_finish">%1$s bideoa(k) kendu d(iy)ugu marketatik, eta deskargatutako bideoen %2$s MB ezabatu d(it)ugu</string>
     <string name="video_comments_are_disabled">Bideo-iruzkinak desgaituta</string>
 </resources>
