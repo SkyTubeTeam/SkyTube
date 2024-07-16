@@ -30,5 +30,5 @@
     <string name="cleaner_watched_downloads">Retirer les téléchargements regardés</string>
     <string name="cleaner_watched_bookmarks">Retirer les marque-pages regardés</string>
     <string name="video_comments_are_disabled">Commentaires vidéo désactivés</string>
-    <string name="cleaner_toast_finish">Nous avons supprimé %1$s vidéo(s) des marque-pages, et supprimé %2$d Mo des vidéos téléchargées</string>
+    <string name="cleaner_toast_finish">Nous avons supprimé %1$s vidéo(s) des marque-pages, et supprimé %2$s Mo des vidéos téléchargées</string>
 </resources>
