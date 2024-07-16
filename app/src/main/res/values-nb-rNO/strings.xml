@@ -28,7 +28,7 @@
     <string name="cleaner_explanation">Rens opp bokmerkede/nedlastede videoer. Bruk følgende filteralternativer:</string>
     <string name="cleaner_watched_bookmarks">Fjern sette bokmerker</string>
     <string name="cleaner_watched_downloads">Fjern sette nedlastinger</string>
-    <string name="cleaner_toast_finish">Renseren fjernet %s video(er). %s MB frigjort.</string>
+    <string name="cleaner_toast_finish">Renseren fjernet %1$s video(er). %2$s MB frigjort.</string>
     <string name="video_comments_are_disabled">Videokommentarer avskrudd</string>
     <string name="cleaner_confirm">Rens</string>
 </resources>
