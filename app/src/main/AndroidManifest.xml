@@ -4,7 +4,6 @@
 
     <uses-permission android:name="android.permission.INTERNET" /> <!-- Mandatory permission -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- [Optional]  Used for database backups and to download videos/thumbnails -->
-    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" /> <!-- [Optional]  Only used by SkyTube Extra flavor to update the app -->
     <!-- <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/> -->
     <!-- [Optional]  If enabled via the preferences, the app will periodically check for new videos published by the subscribed channels -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
