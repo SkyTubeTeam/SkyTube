@@ -23,6 +23,10 @@ import android.database.sqlite.SQLiteDatabase;
  * A table that caches metadata about videos published by subbed channels.
  */
 public class SubscriptionsVideosTable {
+    /**
+     * @deprecated This table is not used anymore
+     */
+    @Deprecated
     public static final String TABLE_NAME = "SubsVideos";
     public static final String COL_CHANNEL_ID = "Channel_Id";
     public static final String COL_YOUTUBE_VIDEO_ID = "YouTube_Video_Id";
@@ -86,6 +90,10 @@ public class SubscriptionsVideosTable {
                         COL_RETRIEVAL_TS + " INTEGER, " +
                         COL_PUBLISH_TS + " INTEGER " +
                         " )";
+    }
+
+    static String getDropTableStatement() {
+        return "DROP TABLE "  + TABLE_NAME;
     }
 
 	public static String[] getAddTimestampColumns() {

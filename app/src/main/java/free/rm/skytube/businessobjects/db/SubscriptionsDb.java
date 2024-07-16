@@ -74,7 +74,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 	private static final String IS_SUBSCRIBED_QUERY = String.format("SELECT EXISTS(SELECT %s FROM %s WHERE %s =?) AS VAL ", SubscriptionsTable.COL_ID, SubscriptionsTable.TABLE_NAME, SubscriptionsTable.COL_CHANNEL_ID);
 	private static volatile SubscriptionsDb subscriptionsDb = null;
 
-    private static final int DATABASE_VERSION = 10;
+    private static final int DATABASE_VERSION = 11;
 
 	private static final String DATABASE_NAME = "subs.db";
 
@@ -149,6 +149,14 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
         if (upgrade.executeStep(10)) {
             fixChannelIds(db);
         }
+        if (upgrade.executeStep(11)) {
+            dropOldSubsVideosTable(db);
+        }
+    }
+
+    private void dropOldSubsVideosTable(final SQLiteDatabase db) {
+        Logger.w(this, "Dropping old Subs table");
+        continueOnError(db, SubscriptionsVideosTable.getDropTableStatement());
     }
 
     private void fixChannelIds(final SQLiteDatabase db) {
