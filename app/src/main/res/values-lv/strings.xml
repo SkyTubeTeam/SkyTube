@@ -25,7 +25,7 @@
     <string name="cleaner">Noskatīto video tīrītājs</string>
     <string name="cleaner_explanation">Tīrīt grāmatzīmēs atzīmētos/lejupielādētos video. Izmantot sekojošas filtra opcijas:</string>
     <string name="cleaner_confirm">Tīrīt</string>
-    <string name="cleaner_toast_finish">Tīrītājs aizvāca %s video no grāmatzīmēm, un izdzēsa %sMB lejupielādēto video</string>
+    <string name="cleaner_toast_finish">Tīrītājs aizvāca %1$s video no grāmatzīmēm, un izdzēsa %2$s MB lejupielādēto video</string>
     <string name="cleaner_watched_downloads">Tīrīt skatītos lejupielādētos video</string>
     <string name="cleaner_watched_bookmarks">Tīrīt skatītos grāmatzīmēs atzīmētos video</string>
     <string name="featured">Ieteiktie</string>
