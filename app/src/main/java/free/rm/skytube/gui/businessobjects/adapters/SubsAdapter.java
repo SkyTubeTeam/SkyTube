@@ -142,7 +142,7 @@ public class SubsAdapter extends RecyclerViewAdapterEx<ChannelView, SubsAdapter.
 	}
 
 	private void executeQuery(String searchText, View progressBar) {
-		compositeDisposable.add(DatabaseTasks.getSubscribedChannelView(progressBar, searchText)
+		compositeDisposable.add(DatabaseTasks.getSubscribedChannelView(getContext(), progressBar, searchText)
 				.subscribe(this::appendList));
 	}
 

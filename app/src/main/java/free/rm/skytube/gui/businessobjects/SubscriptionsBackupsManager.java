@@ -41,6 +41,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.regex.Matcher;
@@ -50,14 +51,19 @@ import free.rm.skytube.R;
 import free.rm.skytube.app.EventBus;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.Logger;
+import free.rm.skytube.businessobjects.YouTube.POJOs.PersistentChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
+import free.rm.skytube.businessobjects.YouTube.YouTubeTasks;
 import free.rm.skytube.businessobjects.YouTube.newpipe.ChannelId;
 import free.rm.skytube.businessobjects.YouTube.newpipe.ContentId;
+import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeException;
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
+import free.rm.skytube.businessobjects.db.DatabaseResult;
 import free.rm.skytube.businessobjects.db.DatabaseTasks;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 import free.rm.skytube.gui.businessobjects.preferences.BackupDatabases;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Maybe;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -493,11 +499,22 @@ public class SubscriptionsBackupsManager {
         }).subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(Schedulers.io())
                 .map(dialog -> {
-                    for (MultiSelectListPreferenceItem channel : channels) {
-                        SubscriptionsDb.getSubscriptionsDb().subscribe(new YouTubeChannel(channel.id, channel.text));
+                    SubscriptionsDb db = SubscriptionsDb.getSubscriptionsDb();
+                    int success = 0;
+                    for (MultiSelectListPreferenceItem selectedItem : channels) {
+                        try {
+                            ChannelId channelId = new ChannelId(selectedItem.id);
+                            PersistentChannel channelInfo = DatabaseTasks.getChannelOrRefresh(activity, channelId, true);
+                            if (!channelInfo.isSubscribed()) {
+                                db.subscribe(channelInfo, Collections.emptyList());
+                                success += 1;
+                            }
+                        } catch (NewPipeException newPipeException) {
+                            Log.e(TAG, "Error: " + newPipeException.getMessage(), newPipeException);
+                        }
                     }
 
-                    return new Object[] { dialog, channels.size() };
+                    return new Object[] { dialog, success };
                 })
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(inputs -> {

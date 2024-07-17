@@ -60,6 +60,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Stream;
 
 import free.rm.skytube.BuildConfig;
 import free.rm.skytube.app.Settings;
@@ -322,7 +323,10 @@ public class NewPipeService {
         // get the channel, and add all the videos from the first page
         YouTubeChannel channel = pager.getChannel();
         try {
-            channel.getYouTubeVideos().addAll(pager.getNextPageAsVideos());
+            List<YouTubeVideo> videos = pager.getNextPageAsVideos();
+            channel.getYouTubeVideos().addAll(videos);
+            long lastPublish = videos.stream().mapToLong(YouTubeVideo::getPublishTimestamp).max().orElse(0);
+            channel.setLastVideoTime(lastPublish);
         } catch (NewPipeException e) {
             Logger.e(this, "Unable to retrieve videos for "+channelId+", error: "+e.getMessage(), e);
         }

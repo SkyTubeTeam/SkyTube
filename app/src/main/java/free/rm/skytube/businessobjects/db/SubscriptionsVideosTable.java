@@ -49,6 +49,8 @@ public class SubscriptionsVideosTable {
     public static final Column COL_DURATION = new Column("duration", "integer", "not null default 0");
     public static final Column COL_PUBLISH_TIME = new Column("publish_time", "integer", "not null default 0");
     public static final Column COL_THUMBNAIL_URL = new Column("thumbnail_url", "text");
+    public static final Column COL_SUBS_ID = new Column("subs_id", "integer");
+    public static final Column COL_CHANNEL_PK = new Column("channel_pk", "integer");
 
 	public static final String COL_YOUTUBE_VIDEO_ID_EQUALS_TO = SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID + " = ?";
 
@@ -109,6 +111,8 @@ public class SubscriptionsVideosTable {
 
     public static void addNewFlatTable(SQLiteDatabase db) {
         SQLiteOpenHelperEx.createTable(db, TABLE_NAME_V2,
+                COL_CHANNEL_PK,
+                COL_SUBS_ID,
                 COL_CHANNEL_ID_V2,
                 COL_YOUTUBE_VIDEO_ID_V2,
                 COL_CATEGORY_ID,
@@ -125,4 +129,13 @@ public class SubscriptionsVideosTable {
                 );
         SQLiteOpenHelperEx.createIndex(db, IDX_PUBLISH_TS_V2, TABLE_NAME_V2, COL_CATEGORY_ID);
     }
+
+    static void addSubsIdColumn(SQLiteDatabase db) {
+        SQLiteOpenHelperEx.addColumn(db, TABLE_NAME_V2, COL_SUBS_ID);
+    }
+
+    static void addChannelPkColumn(SQLiteDatabase db) {
+        SQLiteOpenHelperEx.addColumn(db, TABLE_NAME_V2, COL_CHANNEL_PK);
+    }
+
 }

@@ -45,7 +45,7 @@ public class ChannelActionHandler {
                 return true;
             case R.id.unsubscribe_channel:
                 compositeDisposable.add(DatabaseTasks.subscribeToChannel(false,
-                        null, context, channel, true).subscribe());
+                        null, context, channel.getChannelId(), true).subscribe());
                 return true;
             case R.id.open_channel:
                 SkyTubeApp.launchChannel(channel.getChannelId(), context);

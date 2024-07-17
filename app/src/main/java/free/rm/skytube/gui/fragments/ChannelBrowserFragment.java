@@ -143,7 +143,7 @@ public class ChannelBrowserFragment extends FragmentEx implements ChannelSubscri
 			if (userSubscribed != null && channel != null) {
 				startAnimation(view);
 				disposable.add(
-					DatabaseTasks.subscribeToChannel(!userSubscribed, ChannelBrowserFragment.this, getContext(), channel, true).subscribe(result -> {
+					DatabaseTasks.subscribeToChannel(!userSubscribed, ChannelBrowserFragment.this, getContext(), channelId, true).subscribe(result -> {
 						ViewCompat.animate(view).setDuration(200);
 						view.setRotation(0);
 					})
@@ -224,7 +224,7 @@ public class ChannelBrowserFragment extends FragmentEx implements ChannelSubscri
 					// In the event this fragment is passed a channel id and not a channel object, set the
 					// channel the subscribe button is for since there wasn't a channel object to set when
 					// the button was created.
-					channel = youTubeChannel;
+					channel = youTubeChannel.channel();
 					initViews();
 				}));
 		} else {

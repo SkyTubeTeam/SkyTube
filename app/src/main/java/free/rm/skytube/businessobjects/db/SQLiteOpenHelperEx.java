@@ -113,6 +113,15 @@ public abstract class SQLiteOpenHelperEx extends SQLiteOpenHelper {
 		return executeQueryForInteger(db, query, null, defaultValue);
 	}
 
+    public Long getOptionalLong(Cursor cursor, String columnName) {
+        int columnIndex = cursor.getColumnIndexOrThrow(columnName);
+        return cursor.isNull(columnIndex) ? null : cursor.getLong(columnIndex);
+    }
+
+    public Long getLong(Cursor cursor, String columnName) {
+        return cursor.getLong(cursor.getColumnIndexOrThrow(columnName));
+    }
+
     /**
      * Execute the given sql updates, one-by-one. Throws an exception if any of them fails.
      */

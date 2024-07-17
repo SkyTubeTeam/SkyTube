@@ -428,7 +428,7 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 		// get Channel info (e.g. avatar...etc) task
 		compositeDisposable.add(DatabaseTasks.getChannelInfo(requireContext(), youTubeVideo.getChannelId(), false)
 				.subscribe(youTubeChannel1 -> {
-					youTubeChannel = youTubeChannel1;
+					youTubeChannel = youTubeChannel1.channel();
 
 					videoDescriptionBinding.videoDescSubscribeButton.setChannel(youTubeChannel);
 					if (youTubeChannel != null) {
