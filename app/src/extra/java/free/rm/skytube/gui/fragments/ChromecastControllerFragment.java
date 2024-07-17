@@ -17,6 +17,7 @@ import com.google.android.gms.cast.MediaStatus;
 import com.google.android.gms.cast.framework.media.RemoteMediaClient;
 
 import free.rm.skytube.R;
+import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.db.DatabaseTasks;
 import free.rm.skytube.databinding.FragmentChromecastControllerBinding;
 import free.rm.skytube.databinding.VideoDescriptionBinding;
@@ -106,8 +107,9 @@ public class ChromecastControllerFragment extends ChromecastBaseControllerFragme
 
 		compositeDisposable.add(
 				DatabaseTasks.getChannelInfo(requireContext(), video.getChannelId(), false)
-						.subscribe(youTubeChannel -> {
-							videoDescriptionBinding.videoDescSubscribeButton.setChannel(youTubeChannel);
+						.subscribe(subscribedChannel -> {
+                            YouTubeChannel youTubeChannel = subscribedChannel.channel();
+                            videoDescriptionBinding.videoDescSubscribeButton.setChannel(youTubeChannel);
 
 							Glide.with(requireContext())
 									.load(youTubeChannel.getThumbnailUrl())

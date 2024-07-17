@@ -64,7 +64,7 @@ public class SubscribeButton extends AppCompatButton implements View.OnClickList
 				compositeDisposable.add(YouTubeTasks.refreshSubscribedChannel(channel.getChannelId(), null).subscribe());
 			}
 			compositeDisposable.add(DatabaseTasks.subscribeToChannel(!isUserSubscribed,
-					this, getContext(), channel, true).subscribe());
+					this, getContext(), channel.getChannelId(), true).subscribe());
 		}
 	}
 

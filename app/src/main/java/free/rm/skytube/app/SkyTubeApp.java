@@ -516,7 +516,7 @@ public class SkyTubeApp extends MultiDexApplication {
 	public static void launchChannel(ChannelId channelId, Context context) {
 		if (channelId != null) {
 			DatabaseTasks.getChannelInfo(context, channelId, true)
-					.subscribe(youTubeChannel -> launchChannel(youTubeChannel, context));
+					.subscribe(youTubeChannel -> launchChannel(youTubeChannel.channel(), context));
 		}
 	}
 

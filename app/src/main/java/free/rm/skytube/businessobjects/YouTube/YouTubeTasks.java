@@ -32,6 +32,7 @@ import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.app.Utils;
 import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
+import free.rm.skytube.businessobjects.YouTube.POJOs.PersistentChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPIKey;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubePlaylist;
@@ -148,7 +149,7 @@ public class YouTubeTasks {
                             List<YouTubeVideo> newVideos = fetchVideos(subscriptionsDb, alreadyKnownVideos, channelId);
                             List<YouTubeVideo> detailedList = new ArrayList<>();
                             if (!newVideos.isEmpty()) {
-                                YouTubeChannel dbChannel = subscriptionsDb.getCachedSubscribedChannel(channelId);
+                                PersistentChannel dbChannel = subscriptionsDb.getCachedChannel(channelId);
                                 for (YouTubeVideo vid : newVideos) {
                                     YouTubeVideo details;
                                     try {
@@ -157,7 +158,7 @@ public class YouTubeTasks {
                                             details.setPublishTimestamp(vid.getPublishTimestamp());
                                             details.setPublishTimestampExact(vid.getPublishTimestampExact());
                                         }
-                                        details.setChannel(dbChannel);
+                                        details.setChannel(dbChannel.channel());
                                         detailedList.add(details);
                                     } catch (ReCaptchaException reCaptchaException) {
                                         recaptcha.set(reCaptchaException);
@@ -169,7 +170,7 @@ public class YouTubeTasks {
                                     }
                                 }
                                 changed.compareAndSet(false, true);
-                                subscriptionsDb.insertVideosForChannel(detailedList, channelId);
+                                subscriptionsDb.insertVideosForChannel(detailedList, dbChannel);
                             }
                             return detailedList.size();
                         })
@@ -243,7 +244,8 @@ public class YouTubeTasks {
                             realVideos.add((YouTubeVideo) cd);
                         }
                     }
-                    db.saveVideos(realVideos, channelId);
+                    PersistentChannel channel = db.getCachedChannel(channelId);
+                    db.saveChannelVideos(realVideos, channel, true);
                     return realVideos;
                 })
                 .subscribeOn(Schedulers.io())
@@ -257,7 +259,7 @@ public class YouTubeTasks {
                 .doOnError(throwable ->
                     Toast.makeText(getContext(),
                         String.format(getContext().getString(R.string.could_not_get_videos),
-                        db.getCachedChannel(channelId).getTitle()),
+                        db.getCachedChannel(channelId).channel().getTitle()),
                         Toast.LENGTH_LONG).show()
                 );
     }
@@ -437,7 +439,9 @@ public class YouTubeTasks {
                             channel.addYouTubeVideo((YouTubeVideo) video);
                         }
                     }
-                    SubscriptionsDb.getSubscriptionsDb().saveChannelVideos(channel.getYouTubeVideos(), channel.getChannelId());
+                    SubscriptionsDb db = SubscriptionsDb.getSubscriptionsDb();
+                    PersistentChannel persistentChannel = db.getCachedChannel(channel.getChannelId());
+                    db.saveChannelVideos(channel.getYouTubeVideos(), persistentChannel, false);
                 }
             }
 

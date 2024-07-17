@@ -143,6 +143,10 @@ public class YouTubeChannel extends CardData implements Serializable {
 		return lastVideoTime;
 	}
 
+    public void setLastVideoTime(long lastVideoTime) {
+        this.lastVideoTime = lastVideoTime;
+    }
+
 	public List<String> getTags() {
 		return tags;
 	}
@@ -174,12 +178,10 @@ public class YouTubeChannel extends CardData implements Serializable {
 	 *                            out.
 	 */
 	public Single<Boolean> blockChannel(boolean displayToastMessage) {
-		return SubscriptionsDb.getSubscriptionsDb().getUserSubscribedToChannel(getChannelId())
-				.flatMap(isSubscribed -> DatabaseTasks.subscribeToChannel(false,
-						null, SkyTubeApp.getContext(), this, false))
-				.map(result -> SkyTubeApp.getSettings().isChannelDenyListEnabled())
-				.flatMap(isDenyListEnabled -> {
-					if (isDenyListEnabled) {
+		return DatabaseTasks.subscribeToChannel(false,
+						null, SkyTubeApp.getContext(), getChannelId(), false)
+				.flatMap(result -> {
+					if (SkyTubeApp.getSettings().isChannelDenyListEnabled()) {
 						return dennyChannel(displayToastMessage);
 					} else {
 						return removeAllowedChannel(displayToastMessage);
@@ -196,17 +198,9 @@ public class YouTubeChannel extends CardData implements Serializable {
 		return unblockChannel(true);
 	}
 
-	public Single<Boolean> unblockChannel(boolean displayToastMessage) {
-		return Single.fromCallable(() -> SkyTubeApp.getSettings().isChannelDenyListEnabled())
-				.flatMap(isDenyListEnabled -> {
-					if (isDenyListEnabled) {
-						return removeDeniedChannel(displayToastMessage);
-					} else {
-						return allowChannel(displayToastMessage);
-					}
-				})
-				.observeOn(AndroidSchedulers.mainThread());
-	}
+    public Single<Boolean> unblockChannel(boolean displayToastMessage) {
+        return (SkyTubeApp.getSettings().isChannelDenyListEnabled() ? removeDeniedChannel(displayToastMessage) : allowChannel(displayToastMessage)).observeOn(AndroidSchedulers.mainThread());
+    }
 
 	/**
 	 * Denny the channel.
@@ -296,14 +290,14 @@ public class YouTubeChannel extends CardData implements Serializable {
 		if (channelId != null) {
 			return DatabaseTasks.getChannelInfo(context, channelId, false)
 					.observeOn(Schedulers.io())
-					.map(youTubeChannel ->
-						new Pair<>(youTubeChannel, SubscriptionsDb.getSubscriptionsDb().subscribe(youTubeChannel))
+					.map(persistentChannel ->
+						new Pair<>(persistentChannel, SubscriptionsDb.getSubscriptionsDb().subscribe(persistentChannel, Collections.emptyList()))
 					)
 					.observeOn(AndroidSchedulers.mainThread())
 					.subscribe(youTubeChannelWithResult -> {
 						switch(youTubeChannelWithResult.second) {
 							case SUCCESS: {
-								youTubeChannelWithResult.first.setUserSubscribed(true);
+								youTubeChannelWithResult.first.channel.setUserSubscribed(true);
 								EventBus.getInstance().notifyMainTabChanged(EventBus.SettingChange.SUBSCRIPTION_LIST_CHANGED);
 								SkyTubeApp.getSettings().setRefreshSubsFeedFromCache(true);
 								Toast.makeText(context, R.string.channel_subscribed, Toast.LENGTH_LONG).show();

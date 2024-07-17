@@ -784,7 +784,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
         compositeDisposable.add(
                 DatabaseTasks.getChannelInfo(requireContext(), youTubeVideo.getChannelId(), false)
                         .subscribe(youTubeChannel1 -> {
-                            youTubeChannel = youTubeChannel1;
+                            youTubeChannel = youTubeChannel1.channel();
 
                             videoDescriptionBinding.videoDescSubscribeButton.setChannel(youTubeChannel);
                             if (youTubeChannel != null) {

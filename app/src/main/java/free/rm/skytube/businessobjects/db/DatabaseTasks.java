@@ -10,24 +10,25 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.util.Pair;
 
+import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.EventBus;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.YouTube.POJOs.ChannelView;
+import free.rm.skytube.businessobjects.YouTube.POJOs.PersistentChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.YouTube.VideoBlocker;
 import free.rm.skytube.businessobjects.YouTube.newpipe.ChannelId;
+import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeException;
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
 import free.rm.skytube.gui.businessobjects.views.ChannelSubscriber;
-import free.rm.skytube.gui.businessobjects.views.SubscribeButton;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Completable;
-import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Maybe;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.disposables.Disposable;
@@ -45,29 +46,10 @@ public class DatabaseTasks {
      * Task to retrieve channel information - from the local cache, or from the remote service if the
      * value is old or doesn't exist.
      */
-    public static Maybe<YouTubeChannel> getChannelInfo(@NonNull Context context,
-                                                       @NonNull ChannelId channelId,
-                                                       boolean staleAcceptable) {
-        return Maybe.fromCallable(() -> {
-            final SubscriptionsDb db = SubscriptionsDb.getSubscriptionsDb();
-            YouTubeChannel channel = db.getCachedChannel(channelId);
-            final boolean needsRefresh;
-            if (channel == null || TextUtils.isEmpty(channel.getTitle())) {
-                needsRefresh = true;
-            } else if (staleAcceptable) {
-                needsRefresh = false;
-            } else {
-                needsRefresh = channel.getLastCheckTime() < System.currentTimeMillis() - (24 * 60 * 60 * 1000L);
-            }
-            if (needsRefresh && SkyTubeApp.isConnected(context)) {
-                channel = NewPipeService.get().getChannelDetails(channelId);
-                db.cacheChannel(channel);
-            }
-            if (channel != null) {
-                channel.setUserSubscribed(db.isUserSubscribedToChannel(channelId));
-            }
-            return channel;
-        })
+    public static Maybe<PersistentChannel> getChannelInfo(@NonNull Context context,
+                                                          @NonNull ChannelId channelId,
+                                                          boolean staleAcceptable) {
+        return Maybe.fromCallable(() -> getChannelOrRefresh(context, channelId, staleAcceptable))
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnError(throwable -> {
                     Log.e(TAG, "Error: " + throwable.getMessage(), throwable);
@@ -80,7 +62,30 @@ public class DatabaseTasks {
                 .subscribeOn(Schedulers.io());
     }
 
-    public static Single<List<ChannelView>> getSubscribedChannelView(@Nullable View progressBar,
+    /**
+     * Returns the cached information about the channel, or tries to retrieve it from the network.
+     */
+    public static PersistentChannel getChannelOrRefresh(Context context, ChannelId channelId, boolean staleAcceptable) throws NewPipeException {
+        SkyTubeApp.nonUiThread();
+
+        final SubscriptionsDb db = SubscriptionsDb.getSubscriptionsDb();
+        PersistentChannel persistentChannel = db.getCachedChannel(channelId);
+        final boolean needsRefresh;
+        if (persistentChannel == null || TextUtils.isEmpty(persistentChannel.channel().getTitle())) {
+            needsRefresh = true;
+        } else if (staleAcceptable) {
+            needsRefresh = false;
+        } else {
+            needsRefresh = persistentChannel.channel().getLastCheckTime() < System.currentTimeMillis() - (24 * 60 * 60 * 1000L);
+        }
+        if (needsRefresh && SkyTubeApp.isConnected(context)) {
+            YouTubeChannel freshChannel = NewPipeService.get().getChannelDetails(channelId);
+            return db.cacheChannel(persistentChannel, freshChannel);
+        }
+        return persistentChannel;
+    }
+
+    public static Single<List<ChannelView>> getSubscribedChannelView(Context context, @Nullable View progressBar,
                                                                      @Nullable String searchText) {
         final boolean sortChannelsAlphabetically = SkyTubeApp.getPreferenceManager()
                 .getBoolean(SkyTubeApp.getStr(R.string.pref_key_subscriptions_alphabetical_order), false);
@@ -97,6 +102,11 @@ public class DatabaseTasks {
                     if (progressBar != null) {
                         progressBar.setVisibility(View.INVISIBLE);
                     }
+                }).onErrorReturn(error -> {
+                    Log.e(TAG, "Error: " + error.getMessage(), error);
+                    String msg = context.getString(R.string.could_not_get_channel_detailed, error.getMessage());
+                    Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
+                    return Collections.emptyList();
                 });
     }
 
@@ -146,25 +156,25 @@ public class DatabaseTasks {
      * @param subscribeToChannel  Whether the channel should be subscribed to.
      * @param subscribeButton	  The subscribe button that the user has just clicked.
      * @param context             The context to be used to show the toast, if necessary.
-     * @param channel			  The channel the user wants to subscribe / unsubscribe.
+     * @param channelId			  The channel id the user wants to subscribe / unsubscribe.
      * @param displayToastMessage Whether or not a toast should be shown.
      */
-    public static Single<DatabaseResult> subscribeToChannel(boolean subscribeToChannel,
+    public static Single<Pair<PersistentChannel, DatabaseResult>> subscribeToChannel(boolean subscribeToChannel,
                                                             @Nullable ChannelSubscriber subscribeButton,
                                                             @NonNull Context context,
-                                                            @NonNull YouTubeChannel channel,
+                                                            @NonNull ChannelId channelId,
                                                             boolean displayToastMessage) {
         return Single.fromCallable(() -> {
-            if (subscribeToChannel) {
-                return SubscriptionsDb.getSubscriptionsDb().subscribe(channel);
-            } else {
-                return SubscriptionsDb.getSubscriptionsDb().unsubscribe(channel.getChannelId());
-            }
+            PersistentChannel channel = DatabaseTasks.getChannelOrRefresh(context, channelId, true);
+            SubscriptionsDb db = SubscriptionsDb.getSubscriptionsDb();
+            DatabaseResult result = subscribeToChannel ? db.subscribe(channel, Collections.emptyList()) : db.unsubscribe(channel);
+            return Pair.create(channel, result);
         })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnSuccess(databaseResult -> {
-                    if (databaseResult == DatabaseResult.SUCCESS) {
+                .doOnSuccess(databaseResultPair -> {
+                    YouTubeChannel channel = databaseResultPair.first.channel();
+                    if (databaseResultPair.second == DatabaseResult.SUCCESS) {
                         // we need to refresh the Feed tab so it shows videos from the newly subscribed (or
                         // unsubscribed) channels
                         SkyTubeApp.getSettings().setRefreshSubsFeedFromCache(true);
@@ -196,7 +206,7 @@ public class DatabaseTasks {
                                 Toast.makeText(context, R.string.unsubscribed, Toast.LENGTH_LONG).show();
                             }
                         }
-                    } else if (databaseResult == DatabaseResult.NOT_MODIFIED) {
+                    } else if (databaseResultPair.second == DatabaseResult.NOT_MODIFIED) {
                         if (subscribeToChannel) {
                             Toast.makeText(context, R.string.channel_already_subscribed, Toast.LENGTH_LONG).show();
                         }
