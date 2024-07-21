@@ -260,7 +260,7 @@ public class ChannelBrowserFragment extends FragmentEx {
 			if (channel.getSubscriberCount() >= 0) {
 				binding.channelSubsTextView.setText(channel.getTotalSubscribers());
 			} else {
-				Logger.i(this, "Channel subscriber count for {} is {}", channel.getTitle(), channel.getSubscriberCount());
+				Logger.i(this, "Channel subscriber count for %s is %s", channel.getTitle(), channel.getSubscriberCount());
 				binding.channelSubsTextView.setVisibility(View.GONE);
 			}
 
