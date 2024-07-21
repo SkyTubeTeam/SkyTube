@@ -317,6 +317,7 @@ public class NewPipeService {
      * @throws IOException
      */
     public YouTubeChannel getChannelDetails(ChannelId channelId) throws NewPipeException {
+        Logger.i(this, "Fetching channel details for " + channelId);
         VideoPagerWithChannel pager = getChannelPager(Objects.requireNonNull(channelId, "channelId").getRawId());
         // get the channel, and add all the videos from the first page
         YouTubeChannel channel = pager.getChannel();
