@@ -159,9 +159,9 @@ dependencies {
         exclude group: 'com.google.http-client', module: 'google-http-client-jackson2'
     }
 
-    // implementation 'com.github.SkyTubeTeam.NewPipeExtractor:NewPipeExtractor:9dbe2907d13e5fcba0efa4a89a2717b4d412d210'
+    // implementation 'com.github.SkyTubeTeam.NewPipeExtractor:NewPipeExtractor:ed6a3bd8bf09ab6dfe252f2a924c8ed1fb94ef8f'
     // implementation 'com.github.TeamNewPipe.NewPipeExtractor:NewPipeExtractor:v0.22.6'
-    implementation 'com.github.SkyTubeTeam.NewPipeExtractor:NewPipeExtractor:skytube-2024-07-13'
+    implementation 'com.github.SkyTubeTeam.NewPipeExtractor:NewPipeExtractor:skytube-2024-07-24'
 
     implementation ('com.github.SkyTubeTeam.components:okhttp-client:0.0.7') {
         exclude group: 'com.github.SkyTubeTeam.NewPipeExtractor', module: 'extractor'
