@@ -17,7 +17,7 @@
     <string name="pref_summary_maximum_res_metered">Ölçülmüş şəbəkə vasitəsilə yayım zamanı maksimum keyfiyyəti seçin: %s</string>
     <string name="pref_summary_import_dbs">Əlfəcinlərinizin və abunəliklərinizin ehtiyat nüsxəsini idxal edin.</string>
     <string name="pref_title_metered_network_usage">Ölçülmüş Şəbəkə İstifadəsi</string>
-    <string name="pref_summary_metered_network_usage">Videoları endirmək/izləmək üçün ölçülmüş şəbəkədən istifadə edirsinizsə nə etməli: %s</string>
+    <string name="pref_summary_metered_network_usage">Videoları endirmək/izləmək üçün ölçülmüş şəbəkə istifadə edirsinizsə nə etməli: %s</string>
     <string name="pref_import_export_category">İdxal/İxrac</string>
     <string name="pref_title_backup_dbs">Məlumat bazasının ehtiyat nüsxəsini çıxarın</string>
     <string name="pref_summary_backup_dbs">Əlfəcinlərinizin və abunəliklərinizin ehtiyat nüsxəsini çıxarın.</string>
@@ -25,7 +25,7 @@
     <string name="databases_backing_up">Nüsxələnir…</string>
     <string name="subs_import_select_backup">İdxal etmək üçün YouTube XML faylını seçin</string>
     <string name="system_default_country">Sistem</string>
-    <string name="pref_summary_hide_tabs">Göstərilməyəcək tabları seçin. Yenidən başlatma tələb olunur.</string>
+    <string name="pref_summary_hide_tabs">Göstərilməyəcək panelləri seçin. Yenidən başlatma tələb olunur.</string>
     <string name="pref_summary_autocast">SkyTube\'da digər video tətbiqlərini istifadə edərkən oynatmaq üçün istifadə ediləcək Chromecast cihazı.</string>
     <string name="app_license">Müəlliflik Hüququ © 2015–2018 Ramon Mifsud
 \n
@@ -33,25 +33,25 @@
 \n
 \nBu tətbiq faydalı olacağı ümidi ilə yayılır, lakin heç bir ZƏMANƏT OLMADAN; hətta SATIŞA QARŞILIQ və ya XÜSUSİ MƏQSƏD ÜÇÜN UYĞUNLUQ üçün nəzərdə tutulan zəmanət olmadan. Ətraflı məlumat üçün GNU Ümumi İctimai Lisenziyasına baxın.
 \n
-\nSiz bu tətbiqlə birlikdə GNU Ümumi İctimai Lisenziyasının surətini almalıydınız. Yoxdursa, baxın&lt;https://www.gnu.org/licenses/&gt;</string>
-    <string name="pref_youtube_api_key_error">Daxil etdiyiniz API Açarını doğrulamaq mümkün olmadı.</string>
+\nSiz bu tətbiqlə yanaşı GNU Ümumi İctimai Lisenziyasının surətini almalıydınız. Yoxdursa, baxın&lt;https://www.gnu.org/licenses/&gt;</string>
+    <string name="pref_youtube_api_key_error">Daxil etdiyiniz API Açarını təsdiqləmək mümkün olmadı.</string>
     <string name="pref_summary_subscriptions_alphabetical_order">Abunə olunmuş Kanalları əlifba sırası ilə sıralayır.</string>
     <string name="pref_category_download_resolutions">Endirmələr üçün video keyfiyyəti</string>
     <string name="pref_video_download_minimum_resolution_title">Ən Aşağı Video Endirmə Keyfiyyəti</string>
     <string name="pref_summary_enable_sponsorblock">Sponsorlara, qarşılıqlı əlaqə xatırlatmalarına və daha çox şeyə həsr olunmuş video seqmentlərini avtomatik ötür</string>
     <string name="pref_key_video_quality_title">Video Keyfiyyəti Seçimi</string>
     <string name="pref_key_video_quality_metered_summary">Bunun üçün optimallaşdırın: %s</string>
-    <string name="pref_key_use_newer_formats_summary">Artıq dəstəklənməyən köhnə Android versiyalarında səs və video problemi yarana bilər.</string>
-    <string name="pref_summary_enable_video_blocker">Video bloker.</string>
+    <string name="pref_key_use_newer_formats_summary">Dəstəklənməyən köhnə Android versiyalarında səs və video problemi yarana bilər.</string>
+    <string name="pref_summary_enable_video_blocker">Video Əngəlləyici.</string>
     <string name="pref_channels_filter_category">Kanal Filtrləri</string>
-    <string name="pref_title_channel_whitelist">Kanal Ağ Siyahısı</string>
+    <string name="pref_title_channel_whitelist">Kanal İcazə Siyahısı</string>
     <string name="channel_already_whitelisted">Kanal artıq ağ siyahıya salınıb.</string>
     <string name="channel_whitelist_updated">Yeni kanal ağ siyahısını istifadə etmək üçün videoları yeniləyin.</string>
     <string name="pref_summary_low_views_filter">Az baxışlı videoları filtrləyin: %s</string>
     <string name="pref_summary_disable_search_history">Axtarış tarixçəsini təmizləyir və söndürür.</string>
-    <string name="pref_title_default_content_country">Defolt məzmun ölkəsi</string>
+    <string name="pref_title_default_content_country">İlkin məzmun ölkəsi</string>
     <string name="pref_general">Ümumi</string>
-    <string name="databases_backup_fail">Məlumatlar bazanızın ehtiyat nüsxəsini çıxarmaq mümkün olmadı.</string>
+    <string name="databases_backup_fail">Məlumat bazanızın ehtiyat nüsxəsini çıxarmaq mümkün olmadı.</string>
     <string name="databases_backup_success">Məlumatlar bazanız %s sahəsinə nüsxələndi</string>
     <string name="databases_import_select_backup">İdxal etmək üçün nüsxə faylını seçin</string>
     <string name="databases_import_nothing_selected">Heç nə seçilməyib…</string>
@@ -77,25 +77,25 @@
     <string name="pref_summary_license">GPLv3+</string>
     <string name="i_agree">Razıyam</string>
     <string name="pref_other_category">Digərləri</string>
-    <string name="pref_title_default_tab">Defolt Tab</string>
-    <string name="pref_summary_default_tab">SkyTube işə salındıqda göstəriləcək tab: %s</string>
-    <string name="pref_title_hide_tabs">Tabları Gizlədin</string>
-    <string name="pref_hide_tabs_restart">Bu tabları istifadə etmək üçün tətbiqi yenidən başladın.</string>
+    <string name="pref_title_default_tab">Standart Səhifə</string>
+    <string name="pref_summary_default_tab">SkyTube işə salındıqda göstəriləcək panel: %s</string>
+    <string name="pref_title_hide_tabs">Panelləri Gizlədin</string>
+    <string name="pref_hide_tabs_restart">Bu panellərin istifadəsi üçün tətbiqi yenidən başlat.</string>
     <string name="pref_title_feed_notification">Avtomatik Axın Bildirişi</string>
     <string name="pref_summary_feed_notification">Abunə olunmuş kanallardan yeni videoları hansı sıxlıqla almaq lazımdır: %s</string>
-    <string name="pref_title_screen_orientation">Ekran Orientasiyası</string>
-    <string name="pref_summary_screen_orientation">Video oynadıcı orientasiyası: %s</string>
+    <string name="pref_title_screen_orientation">Ekran Səmti</string>
+    <string name="pref_summary_screen_orientation">Video oynadıcı istiqaməti: %s</string>
     <string name="pref_title_disable_screen_gestures">Video jestləri yoxdur</string>
     <string name="pref_summary_disable_screen_gestures">Videolarda səs səviyyəsini, parlaqlığı və irəli/geri axtarış etmək üçün jestləri söndürün.</string>
     <string name="pref_video_continuous_repeat_toggle">Davamlı təkrarlama</string>
     <string name="pref_title_enable_immersive_mode">Tam ekran rejimi</string>
     <string name="pref_summary_enable_immersive_mode">Oynatma zamanı naviqasiya panelini və status panelini gizlədin.</string>
     <string name="pref_title_switch_volume_and_brightness">Səs və Parlaqlıq Jestini Dəyişdirin</string>
-    <string name="pref_summary_switch_volume_and_brightness">Səs səviyyəsinə nəzarəti sağda, parlaqlığı isə solda yerləşdirir.</string>
+    <string name="pref_summary_switch_volume_and_brightness">Səs səviyyəsi nəzarətin sağda, parlaqlığı isə solda yerləşdirir.</string>
     <string name="pref_title_youtube_api_key">YouTube API açarı</string>
     <string name="pref_summary_youtube_api_key">Əvəzində istifadə etmək üçün şəxsi YouTube API açarı daxil edin.</string>
-    <string name="pref_youtube_api_key_custom">Yeni YouTube API açarından istifadə etmək üçün tətbiqi yenidən başladın.</string>
-    <string name="pref_youtube_api_key_default">Bunun əvəzinə defolt YouTube API açarından istifadə etmək üçün tətbiqi yenidən başladın.</string>
+    <string name="pref_youtube_api_key_custom">Yeni YouTube API açarın istifadə etmək üçün tətbiqi yenidən başlat.</string>
+    <string name="pref_youtube_api_key_default">Əvəzində ilkin YouTube API açarın istifadə etmək üçün tətbiqi yenidən başlat.</string>
     <string name="pref_title_use_newpipe_backend">NewPipe arxa ucu</string>
     <string name="pref_summary_use_newpipe_backend">YouTube-a daxil olmaq üçün NewPipe API\'sini istifadə edin…</string>
     <string name="restart">Yenidən Başladın</string>
@@ -115,7 +115,7 @@
     <string name="pref_key_video_quality_for_downloads_title">Endirmələr üçün Video Keyfiyyət Seçimi</string>
     <string name="pref_key_video_quality_for_downloads_summary">Bunun üçün optimallaşdırın: %s</string>
     <string name="pref_key_use_newer_formats_title">Daha yeni Video formatlarını sınayın</string>
-    <string name="pref_video_blocker_category">Video Bloker</string>
+    <string name="pref_video_blocker_category">Video Əngəlləyici</string>
     <string name="pref_title_channel_filter_method">Kanal Filtri Üsulu</string>
     <string name="pref_summary_channel_filter_method">Kanal filtrləmə üsulunu seçin: %s</string>
     <string name="disabled">Qeyri-aktiv</string>
@@ -126,15 +126,15 @@
     <string name="channel_blacklist_update_failure">Verilmiş kanalları qara siyahıdan silmək mümkün olmadı…</string>
     <string name="channel_blacklist_empty">Qara siyahı boşdur.</string>
     <string name="pref_summary_channel_whitelist">İcazə verilən kanalların siyahısı.</string>
-    <string name="input_channel_url">Ağ siyahıya daxil ediləcək kanal URL\'ləri:</string>
+    <string name="input_channel_url">İcazə üçün kanal URL\'ləri:</string>
     <string name="add">Əlavə Edin</string>
     <string name="block">Blokla</string>
     <string name="please_wait">Zəhmət olmasa, gözləyin…</string>
     <string name="channel_whitelist_update_failure">Verilmiş kanalı ağ siyahıya salmaq mümkün olmadı.</string>
     <string name="channel_unwhitelist_success">Yeni kanal ağ siyahısını istifadə etmək üçün videoları yeniləyin.</string>
-    <string name="channel_unwhitelist_failure">Verilmiş kanal(lar)ı ağ siyahıdan çıxarmaq alınmadı…</string>
-    <string name="pref_languages_filter_category">Dil və Region Filtrləri</string>
-    <string name="pref_title_preferred_regions">Üstünlük Verilən Region</string>
+    <string name="channel_unwhitelist_failure">Verilmiş kanal(lar)ı ağ siyahıdan silmək alınmadı</string>
+    <string name="pref_languages_filter_category">Dil və Bölgə Filtrləri</string>
+    <string name="pref_title_preferred_regions">Üstünlük Verilən Bölgə</string>
     <string name="pref_summary_preferred_regions">\"Seçilmiş\" videonu əldə etmək üçün hansı bölgədən istifadə ediləcəyini seçin: %s</string>
     <string name="pref_title_preferred_languages">Üstünlük Verilən Dil(lər)</string>
     <string name="pref_summary_preferred_languages">Üstünlük verdiyiniz dilləri seçin.</string>
@@ -167,7 +167,7 @@
     <string name="pref_summary_use_dislike_api">Returnyoutubedislike.com istifadə edərək bəyənməmə sayğacını qaytarın</string>
     <string name="pref_title_use_dislike_api">Bəyənməmə sayğacını qaytarın</string>
     <string name="pref_title_open_issue">Problem açın</string>
-    <string name="pref_summary_open_issue">Bir idea təklif edin və ya səhv barədə məlumat verin.</string>
-    <string name="pref_title_playback_speed">Defolt oynatma sürəti</string>
-    <string name="pref_summary_playback_speed">Defolt oynatma sürəti: %s</string>
+    <string name="pref_summary_open_issue">Bir idea təklif edin və ya səhv bildirin.</string>
+    <string name="pref_title_playback_speed">İlkin oynatma sürəti</string>
+    <string name="pref_summary_playback_speed">İlkin oynatma sürəti: %s</string>
 </resources>
