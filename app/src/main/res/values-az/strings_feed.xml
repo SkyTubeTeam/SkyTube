@@ -12,4 +12,5 @@
     <string name="notification_channel_feed_title">Axın Bildirişləri</string>
     <string name="notification_new_videos_found">Abunə olunmuş kanallardan %d yeni video</string>
     <string name="feed">Axın</string>
+    <string name="channel_related">Kanal...</string>
 </resources>
