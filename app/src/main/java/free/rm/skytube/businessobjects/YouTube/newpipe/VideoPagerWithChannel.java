@@ -21,9 +21,13 @@ import org.schabi.newpipe.extractor.ListExtractor;
 import org.schabi.newpipe.extractor.StreamingService;
 import org.schabi.newpipe.extractor.stream.StreamInfoItem;
 
+import java.util.List;
+
 import free.rm.skytube.businessobjects.Logger;
+import free.rm.skytube.businessobjects.YouTube.POJOs.PersistentChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
+import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 
 public class VideoPagerWithChannel extends VideoPager {
     private final YouTubeChannel channel;
@@ -46,6 +50,18 @@ public class VideoPagerWithChannel extends VideoPager {
         YouTubeChannel ch = channel != null ? channel : new YouTubeChannel(item.getUploaderUrl(), item.getUploaderName());
         return new YouTubeVideo(id, item.getName(), null, item.getDuration(), ch,
                 item.getViewCount(), date.instant, date.exact, NewPipeService.getThumbnailUrl(id));
+    }
+
+    /**
+     * Fetch the first page of videos from the channel, and update the subscription database with the
+     * fresh data.
+     */
+    public PersistentChannel getNextPageAsVideosAndUpdateChannel(PersistentChannel persistentChannel) throws NewPipeException {
+        List<YouTubeVideo> videos = getNextPageAsVideos();
+        channel.getYouTubeVideos().addAll(videos);
+        long lastPublish = videos.stream().mapToLong(YouTubeVideo::getPublishTimestamp).max().orElse(0);
+        channel.setLastVideoTime(lastPublish);
+        return SubscriptionsDb.getSubscriptionsDb().cacheChannel(persistentChannel, channel);
     }
 
 }

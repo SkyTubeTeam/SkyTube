@@ -75,6 +75,8 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
     private static final String GET_ALL_SUBSCRIBED_CHANNEL_ID = "SELECT "+SubscriptionsTable.COL_CHANNEL_ID + " FROM "+SubscriptionsTable.TABLE_NAME;
 	private static final String IS_SUBSCRIBED_QUERY = String.format("SELECT EXISTS(SELECT %s FROM %s WHERE %s =?) AS VAL ", SubscriptionsTable.COL_ID, SubscriptionsTable.TABLE_NAME, SubscriptionsTable.COL_CHANNEL_ID);
 
+    private static final String GET_PK_FROM_CHANNEL_ID = "SELECT " + SubscriptionsTable.COL_ID + " FROM " + SubscriptionsTable.TABLE_NAME + " WHERE " + SubscriptionsTable.COL_CHANNEL_ID + " = ?";
+
 	private static volatile SubscriptionsDb subscriptionsDb = null;
 
     private static final int DATABASE_VERSION = 15;
@@ -305,13 +307,6 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 
 		ContentValues values = new ContentValues();
 		values.put(SubscriptionsTable.COL_CHANNEL_ID, channelId.getRawId());
-//		values.put(SubscriptionsTable.COL_LAST_VISIT_TIME, channel.getLastVisitTime());
-//		values.put(SubscriptionsTable.COL_TITLE, channel.getTitle());
-//		values.put(SubscriptionsTable.COL_DESCRIPTION, channel.getDescription());
-//		values.put(SubscriptionsTable.COL_BANNER_URL, channel.getBannerUrl());
-//		values.put(SubscriptionsTable.COL_THUMBNAIL_NORMAL_URL, channel.getThumbnailUrl());
-//		values.put(SubscriptionsTable.COL_CATEGORY_ID.name, channel.getCategoryId());
-//		values.put(SubscriptionsTable.COL_SUBSCRIBER_COUNT, channel.getSubscriberCount());
 
 		SQLiteDatabase db = getWritableDatabase();
 		try {
@@ -342,15 +337,15 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 	public DatabaseResult unsubscribe(PersistentChannel channel) {
 		SkyTubeApp.nonUiThread();
 
-		// delete any feed videos pertaining to this channel
-		getWritableDatabase().delete(SubscriptionsVideosTable.TABLE_NAME_V2,
-				SubscriptionsVideosTable.COL_SUBS_ID.name + " = ?",
-				new String[]{String.valueOf(channel.channelPk())});
+        // delete any feed videos pertaining to this channel
+        getWritableDatabase().delete(SubscriptionsVideosTable.TABLE_NAME_V2,
+                SubscriptionsVideosTable.COL_SUBS_ID.name + " = ?",
+                toArray(channel.channelPk()));
 
-		// remove this channel from the subscriptions DB
-		int rowsDeleted = getWritableDatabase().delete(SubscriptionsTable.TABLE_NAME,
-				SubscriptionsTable.COL_CHANNEL_ID + " = ?",
-				new String[]{channel.channel().getId()});
+        // remove this channel from the subscriptions DB
+        int rowsDeleted = getWritableDatabase().delete(SubscriptionsTable.TABLE_NAME,
+                SubscriptionsTable.COL_CHANNEL_ID + " = ?",
+                toArray(channel.channel().getId()));
 
 		// Need to make sure when we come back to MainActivity, that we refresh the Feed tab so it hides videos from the newly unsubscribed
 		SkyTubeApp.getSettings().setRefreshSubsFeedFromCache(true);
@@ -369,7 +364,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 	 */
 	public Set<String> getSubscribedChannelVideosByChannel(ChannelId channelId) {
 		SkyTubeApp.nonUiThread();
-		try(Cursor cursor = getReadableDatabase().rawQuery(GET_VIDEO_IDS_BY_CHANNEL, new String[] { channelId.getRawId()})) {
+        try (Cursor cursor = getReadableDatabase().rawQuery(GET_VIDEO_IDS_BY_CHANNEL, toArrayParam(channelId))) {
 			Set<String> result = new HashSet<>();
 			while(cursor.moveToNext()) {
 				result.add(cursor.getString(0));
@@ -384,7 +379,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
      */
     public Map<String, Long> getSubscribedChannelVideosByChannelToTimestamp(ChannelId channelId) {
         SkyTubeApp.nonUiThread();
-        try(Cursor cursor = getReadableDatabase().rawQuery(GET_VIDEO_IDS_BY_CHANNEL_TO_PUBLISH_TS, new String[] { channelId.getRawId()})) {
+        try(Cursor cursor = getReadableDatabase().rawQuery(GET_VIDEO_IDS_BY_CHANNEL_TO_PUBLISH_TS, toArrayParam(channelId))) {
             Map<String, Long> result = new HashMap<>();
             while(cursor.moveToNext()) {
                 result.put(cursor.getString(0), cursor.getLong(1));
@@ -517,9 +512,8 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 	public boolean isUserSubscribedToChannel(ChannelId channelId) {
 		SkyTubeApp.nonUiThread();
 
-		return executeQueryForInteger(IS_SUBSCRIBED_QUERY, new String[]{channelId.getRawId()}, 0) > 0;
+		return executeQueryForInteger(IS_SUBSCRIBED_QUERY, toArrayParam(channelId), 0) > 0;
 	}
-
 
 	public Single<Boolean> getUserSubscribedToChannel(ChannelId channelId) {
 		return Single.fromCallable(() -> isUserSubscribedToChannel(channelId)).subscribeOn(Schedulers.io());
@@ -532,7 +526,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
      *
      * @return	last visit time, if the update was successful;  -1 otherwise.
      */
-    public Single<Long> updateLastVisitTimeAsync(String channelId) {
+    public Single<Long> updateLastVisitTimeAsync(ChannelId channelId) {
         return Single.fromCallable(() -> {
             SQLiteDatabase	db = getWritableDatabase();
             long			currentTime = System.currentTimeMillis();
@@ -544,7 +538,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
                 SubscriptionsTable.TABLE_NAME,
                 values,
                 SubscriptionsTable.COL_CHANNEL_ID + " = ?",
-                new String[]{channelId});
+                toArrayParam(channelId));
 
             return (count > 0 ? currentTime : -1);
         }).subscribeOn(Schedulers.io());
@@ -606,26 +600,6 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
         }
         SubscriptionsTable.updateLastVideoFetchTimestamps(db, persistentChannel);
         LocalChannelTable.updateLatestVideoTimestamp(db, persistentChannel, latestPublishTimestamp);
-    }
-
-    /**
-     * Insert videos into the subscription video table.
-     * @param videos
-     */
-    public void insertVideosForChannel(List<YouTubeVideo> videos, PersistentChannel channel) {
-        SkyTubeApp.nonUiThread();
-
-        SQLiteDatabase db = getWritableDatabase();
-        for (YouTubeVideo video : videos) {
-            try {
-                if (video.getPublishTimestamp() != null) {
-                    ContentValues values = createContentValues(video, channel);
-                    db.insert(SubscriptionsVideosTable.TABLE_NAME_V2, null, values);
-                }
-            } catch (Exception e) {
-                Logger.e(this, e, "Error inserting "+ videos + " - "+e.getMessage());
-            }
-        }
     }
 
     private ContentValues createContentValues(YouTubeVideo video, PersistentChannel persistentChannel) {
@@ -736,10 +710,10 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 	 */
 	public PersistentChannel getCachedChannel(ChannelId channelId) {
         SkyTubeApp.nonUiThread();
-		try (Cursor cursor = getReadableDatabase().rawQuery(
+        try (Cursor cursor = getReadableDatabase().rawQuery(
                 "select s._id subs_id, c.* from  Channel c left outer Join Subs s on c.Channel_Id = s.Channel_Id where c.Channel_Id = ?",
-				 new String[] { channelId.getRawId() })) {
-			if (cursor.moveToNext()) {
+                toArrayParam(channelId))) {
+            if (cursor.moveToNext()) {
                 Long subscriptionPk = getOptionalLong(cursor, "subs_id");
                 Long channelPk = getLong(cursor, LocalChannelTable.COL_ID.name);
 
@@ -769,7 +743,48 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
         return cacheChannel(db, persistentChannel, channel);
     }
 
+    private String[] toArray(Object obj) {
+        return new String[] { String.valueOf(obj)};
+    }
+
+    private String[] toArrayParam(ChannelId channelId) {
+        return new String[] { channelId.getRawId() };
+    }
+
+    private Long getChannelPk(SQLiteDatabase db, ChannelId channelId){
+        try (Cursor cursor = db.rawQuery(GET_PK_FROM_CHANNEL_ID, toArrayParam(channelId))) {
+            if (cursor.moveToNext()) {
+                return cursor.getLong(0);
+            }
+        }
+        return null;
+    }
+
     private PersistentChannel cacheChannel(SQLiteDatabase db, @Nullable PersistentChannel persistentChannel, YouTubeChannel channel) {
+        ContentValues values = toContentValues(channel);
+
+        Long channelPk = persistentChannel != null ? persistentChannel.channelPk() : getChannelPk(db, channel.getChannelId());
+        Long subPk = persistentChannel != null ? persistentChannel.subscriptionPk() : null;
+
+        // If there is a persistentChannel info, we already have the channel in the db
+        if (channelPk != null) {
+            // Try to update it ...
+            int count = db.update(
+                    LocalChannelTable.TABLE_NAME,
+                    values,
+                    LocalChannelTable.COL_ID.name + " = ?",
+                    toArray(channelPk));
+            if (count != 1) {
+                throw new IllegalStateException("Unable to update channel " + channel + ", with pk= " + channelPk);
+            }
+            return new PersistentChannel(channel, channelPk, subPk);
+        }
+        values.put(LocalChannelTable.COL_CHANNEL_ID, channel.getChannelId().getRawId());
+        long newPk = db.insert(LocalChannelTable.TABLE_NAME, null, values);
+        return new PersistentChannel(channel, newPk, subPk);
+    }
+
+    private static ContentValues toContentValues(YouTubeChannel channel) {
         ContentValues values = new ContentValues();
         values.put(LocalChannelTable.COL_TITLE, channel.getTitle());
         if (!Utils.isEmpty(channel.getDescription())) {
@@ -784,31 +799,16 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
         if (channel.getSubscriberCount() > 0) {
             values.put(LocalChannelTable.COL_SUBSCRIBER_COUNT, channel.getSubscriberCount());
         }
-		if(channel.getLastVideoTime() > 0) {
-			values.put(LocalChannelTable.COL_LAST_VIDEO_TS, channel.getLastVideoTime());
-		}
-		if (channel.getLastCheckTime() > 0) {
-			values.put(LocalChannelTable.COL_LAST_CHECK_TS, channel.getLastCheckTime());
-		}
-
-        // If there is a persistentChannel info, we already have the channel in the db
-        if (persistentChannel != null) {
-            // Try to update it ...
-            int count = db.update(
-                    LocalChannelTable.TABLE_NAME,
-                    values,
-                    LocalChannelTable.COL_ID.name + " = ?",
-                    new String[]{ String.valueOf(persistentChannel.channelPk())});
-            if (count > 0) {
-                return persistentChannel.with(channel);
-            }
+        if(channel.getLastVideoTime() > 0) {
+            values.put(LocalChannelTable.COL_LAST_VIDEO_TS, channel.getLastVideoTime());
         }
-        values.put(LocalChannelTable.COL_CHANNEL_ID, channel.getId());
-        long newPk = db.insert(LocalChannelTable.TABLE_NAME, null, values);
-        return new PersistentChannel(channel, newPk, null);
+        if (channel.getLastCheckTime() > 0) {
+            values.put(LocalChannelTable.COL_LAST_CHECK_TS, channel.getLastCheckTime());
+        }
+        return values;
     }
 
-	public List<ChannelView> getSubscribedChannelsByText(String searchText, boolean sortChannelsAlphabetically) {
+    public List<ChannelView> getSubscribedChannelsByText(String searchText, boolean sortChannelsAlphabetically) {
 		List<ChannelView> result = new ArrayList<>();
 		try (Cursor cursor = createSubscriptionCursor(searchText, sortChannelsAlphabetically)) {
 			final int channelId = cursor.getColumnIndexOrThrow(SubscriptionsTable.COL_CHANNEL_ID);
