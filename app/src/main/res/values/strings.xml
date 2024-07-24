@@ -27,7 +27,7 @@
     <string name="cleaner">Watched Video Cleaner</string>
     <string name="cleaner_explanation">Clean up bookmarked/downloaded videos. Use the following filter options:</string>
     <string name="cleaner_confirm">Clean</string>
-    <string name="cleaner_toast_finish">We have removed %1$s video(s) from the bookmarks, and deleted %2$s MB of downloaded videos</string>
+    <string name="cleaner_toast_finish">We have removed %1$s video(s) from the bookmarks, and deleted %2$s MB of downloaded videos.</string>
     <string name="cleaner_watched_downloads">Remove watched downloads</string>
     <string name="cleaner_watched_bookmarks">Remove watched bookmarks</string>
     <string name="video_comments_are_disabled">Video comments off</string>

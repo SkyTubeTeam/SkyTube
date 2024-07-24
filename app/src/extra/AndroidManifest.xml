@@ -1,8 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:tools="http://schemas.android.com/tools">
 
-	<uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>       <!-- Android Pie now requires this permission to run a foreground service. Chromecast support uses this. See https://developer.android.com/guide/components/services#Foreground -->
+	<uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+	<!-- Android Pie now requires this permission to run a foreground service. Chromecast support uses this. See https://developer.android.com/guide/components/services#Foreground -->
+	<uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" /> <!-- [Optional]  Only used by SkyTube Extra flavor to update the app -->
+
 	<!-- for AndroidTV compatibility -->
 	<uses-feature android:name="android.software.leanback"
 		android:required="false" />
@@ -53,10 +57,14 @@
 				<data android:host="youtube.com"/>
 				<data android:host="m.youtube.com"/>
 				<data android:host="www.youtube.com"/>
+				<data android:host="music.youtube.com" />
 				<!-- video prefix -->
 				<data android:pathPrefix="/v/"/>
 				<data android:pathPrefix="/embed/"/>
 				<data android:pathPrefix="/watch"/>
+				<data android:pathPrefix="/shorts/" />
+				<data android:pathPrefix="/live/" />
+				<data android:pathPrefix="/podcasts/" />
 				<data android:pathPrefix="/attribution_link"/>
 				<!-- channel prefix -->
 				<data android:pathPrefix="/channel/"/>
@@ -104,28 +112,6 @@
 				<data android:scheme="vnd.youtube.launch"/>
 			</intent-filter>
 
-			<!-- Hooktube filter -->
-			<intent-filter>
-				<action android:name="android.intent.action.VIEW"/>
-				<action android:name="android.media.action.MEDIA_PLAY_FROM_SEARCH"/>
-				<action android:name="android.nfc.action.NDEF_DISCOVERED"/>
-
-				<category android:name="android.intent.category.DEFAULT"/>
-				<category android:name="android.intent.category.BROWSABLE"/>
-
-				<data android:scheme="http"/>
-				<data android:scheme="https"/>
-				<data android:host="hooktube.com"/>
-				<data android:host="*.hooktube.com"/>
-				<!-- video prefix -->
-				<data android:pathPrefix="/v/"/>
-				<data android:pathPrefix="/embed/"/>
-				<data android:pathPrefix="/watch"/>
-				<!-- channel prefix -->
-				<data android:pathPrefix="/channel/"/>
-				<data android:pathPrefix="/user/"/>
-			</intent-filter>
-
 			<!-- Invidious filter -->
 			<intent-filter>
 				<action android:name="android.intent.action.VIEW"/>
@@ -138,20 +124,6 @@
 				<data android:scheme="http"/>
 				<data android:scheme="https"/>
 				<data android:host="invidio.us"/>
-				<data android:host="dev.invidio.us"/>
-				<data android:host="www.invidio.us"/>
-				<data android:host="invidious.snopyta.org"/>
-				<data android:host="de.invidious.snopyta.org"/>
-				<data android:host="fi.invidious.snopyta.org"/>
-				<data android:host="vid.wxzm.sx"/>
-				<data android:host="invidious.kabi.tk"/>
-				<data android:host="invidiou.sh"/>
-				<data android:host="www.invidiou.sh"/>
-				<data android:host="no.invidiou.sh"/>
-				<data android:host="invidious.enkirton.net"/>
-				<data android:host="tube.poal.co"/>
-				<data android:host="invidious.13ad.de"/>
-				<data android:host="yt.elukerio.org"/>
 				<!-- video prefix -->
 				<data android:pathPrefix="/embed/"/>
 				<data android:pathPrefix="/watch"/>

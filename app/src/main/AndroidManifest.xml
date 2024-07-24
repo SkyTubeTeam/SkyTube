@@ -4,7 +4,6 @@
 
     <uses-permission android:name="android.permission.INTERNET" /> <!-- Mandatory permission -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- [Optional]  Used for database backups and to download videos/thumbnails -->
-    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" /> <!-- [Optional]  Only used by SkyTube Extra flavor to update the app -->
     <!-- <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/> -->
     <!-- [Optional]  If enabled via the preferences, the app will periodically check for new videos published by the subscribed channels -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -54,6 +53,7 @@
         <activity
             android:name=".gui.activities.PreferencesActivity"
             android:label="@string/preferences"
+            android:exported="true"
             android:parentActivityName=".gui.activities.MainActivity"
             tools:targetApi="jelly_bean">
             <meta-data
@@ -106,10 +106,14 @@
                 <data android:host="youtube.com" />
                 <data android:host="m.youtube.com" />
                 <data android:host="www.youtube.com" />
+                <data android:host="music.youtube.com" />
                 <!-- video prefix -->
                 <data android:pathPrefix="/v/" />
                 <data android:pathPrefix="/embed/" />
                 <data android:pathPrefix="/watch" />
+                <data android:pathPrefix="/shorts/" />
+                <data android:pathPrefix="/live/" />
+                <data android:pathPrefix="/podcasts/" />
                 <data android:pathPrefix="/attribution_link" />
                 <!-- channel prefix -->
                 <data android:pathPrefix="/channel/" />
@@ -157,28 +161,6 @@
                 <data android:scheme="vnd.youtube.launch" />
             </intent-filter>
 
-            <!-- Hooktube filter -->
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <action android:name="android.media.action.MEDIA_PLAY_FROM_SEARCH" />
-                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data android:scheme="http" />
-                <data android:scheme="https" />
-                <data android:host="hooktube.com" />
-                <data android:host="*.hooktube.com" />
-                <!-- video prefix -->
-                <data android:pathPrefix="/v/" />
-                <data android:pathPrefix="/embed/" />
-                <data android:pathPrefix="/watch" />
-                <!-- channel prefix -->
-                <data android:pathPrefix="/channel/" />
-                <data android:pathPrefix="/user/" />
-            </intent-filter>
-
             <!-- Invidious filter -->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -191,24 +173,12 @@
                 <data android:scheme="http" />
                 <data android:scheme="https" />
                 <data android:host="invidio.us" />
-                <data android:host="dev.invidio.us" />
-                <data android:host="www.invidio.us" />
-                <data android:host="redirect.invidious.io" />
-                <data android:host="invidious.snopyta.org" />
-                <data android:host="yewtu.be" />
-                <data android:host="tube.connect.cafe" />
-                <data android:host="invidious.zapashcanon.fr" />
-                <data android:host="invidious.kavin.rocks" />
-                <data android:host="invidious.tube" />
                 <data android:host="invidious.site" />
-                <data android:host="invidious.xyz" />
-                <data android:host="vid.mint.lgbt" />
-                <data android:host="invidiou.site" />
+                <data android:host="redirect.invidious.io" />
+                <data android:host="yewtu.be" />
+                <data android:host="invidious.zapashcanon.fr" />
                 <data android:host="invidious.fdn.fr" />
-                <data android:host="invidious.048596.xyz" />
-                <data android:host="invidious.zee.li" />
                 <data android:host="vid.puffyan.us" />
-                <data android:host="ytprivate.com" />
                 <data android:pathPrefix="/" />
             </intent-filter>
         </activity> <!-- Version < 3.0. DeX Mode and Screen Mirroring support -->
