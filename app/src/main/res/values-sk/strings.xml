@@ -17,7 +17,7 @@
     <string name="yes">Áno</string>
     <string name="cleaner_explanation">Vyčistite videá zo záložiek/stiahnutých. Použite nasledujúce možnosti filtrovania:</string>
     <string name="cleaner_confirm">Vyčistiť</string>
-    <string name="cleaner_toast_finish">Odstránili sme videá (počet: %1$s) zo záložiek a odstránili sme %2$dMB stiahnutých videí</string>
+    <string name="cleaner_toast_finish">Odstránili sme videá (počet: %1$s) zo záložiek a odstránili sme %2$s MB stiahnutých videí</string>
     <string name="cleaner_watched_downloads">Odstrániť pozerané stiahnuté videá</string>
     <string name="cleaner_watched_bookmarks">Odstrániť pozerané záložky videí</string>
     <string name="video_comments_are_disabled">Komentáre sú vypnuté</string>

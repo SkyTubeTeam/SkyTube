@@ -30,5 +30,5 @@
     <string name="cleaner">Peržiūrėtų vaizdo įrašų valymas</string>
     <string name="cleaner_explanation">Išvalyti žymas / atsisiųstus video įrašus. Naudoti šiuos filtrus:</string>
     <string name="cleaner_watched_downloads">Išvalyti peržiūrėtus video įrašus</string>
-    <string name="cleaner_toast_finish">Pašalinti %s vaizdo įrašas(ai) iš žymų ir atlaisvinta %sMB vietos</string>
+    <string name="cleaner_toast_finish">Pašalinti %1$s vaizdo įrašas(ai) iš žymų ir atlaisvinta %2$s MB vietos</string>
 </resources>

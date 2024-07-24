@@ -30,5 +30,5 @@
     <string name="cleaner">已观看视频清理器</string>
     <string name="cleaner_explanation">清理书签/已下载的视频。使用以下筛选选项：</string>
     <string name="cleaner_watched_downloads">移除已观看的下载</string>
-    <string name="cleaner_toast_finish">我们已从书签中移除了 %1$s 个视频，并删除了%2$dMB已下载视频</string>
+    <string name="cleaner_toast_finish">我们已从书签中移除了 %1$s 个视频，并删除了%2$s MB已下载视频</string>
 </resources>

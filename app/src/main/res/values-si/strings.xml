@@ -30,5 +30,5 @@
     <string name="cleaner_explanation">පිටුසන්/බාගත් වීඩියෝ පිරිසිදු කරන්න. පහත පෙරහන් විකල්ප භාවිතා කරන්න:</string>
     <string name="cleaner_watched_downloads">නැරඹූ බාගැනීම් ඉවත් කරන්න</string>
     <string name="could_not_get_sponsorblock">SponsorBlock තොරතුරු ලබා ගැනීමට නොහැකි විය: %s.</string>
-    <string name="cleaner_toast_finish">අපි පිටුසන් වලින් වීඩියෝ %s ඉවත් කර, බාගත කළ වීඩියෝ %sMB මකා ඇත</string>
+    <string name="cleaner_toast_finish">අපි පිටුසන් වලින් වීඩියෝ %1$s ඉවත් කර, බාගත කළ වීඩියෝ %2$sMB මකා ඇත</string>
 </resources>
