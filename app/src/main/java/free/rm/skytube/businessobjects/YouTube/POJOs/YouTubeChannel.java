@@ -127,7 +127,7 @@ public class YouTubeChannel extends CardData implements Serializable {
 	}
 
     public Disposable updateLastVisitTime() {
-        return SubscriptionsDb.getSubscriptionsDb().updateLastVisitTimeAsync(id).subscribe(timestamp -> {
+        return SubscriptionsDb.getSubscriptionsDb().updateLastVisitTimeAsync(getChannelId()).subscribe(timestamp -> {
             lastVisitTime = timestamp;
             if (lastVisitTime < 0) {
                 Logger.e(YouTubeChannel.this, "Unable to update channel's last visit time.  ChannelID=" + id);

@@ -79,8 +79,7 @@ public class DatabaseTasks {
             needsRefresh = persistentChannel.channel().getLastCheckTime() < System.currentTimeMillis() - (24 * 60 * 60 * 1000L);
         }
         if (needsRefresh && SkyTubeApp.isConnected(context)) {
-            YouTubeChannel freshChannel = NewPipeService.get().getChannelDetails(channelId);
-            return db.cacheChannel(persistentChannel, freshChannel);
+            return NewPipeService.get().getChannelDetails(persistentChannel);
         }
         return persistentChannel;
     }

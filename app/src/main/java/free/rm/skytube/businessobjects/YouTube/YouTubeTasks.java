@@ -170,7 +170,7 @@ public class YouTubeTasks {
                                     }
                                 }
                                 changed.compareAndSet(false, true);
-                                subscriptionsDb.insertVideosForChannel(detailedList, dbChannel);
+                                subscriptionsDb.saveChannelVideos(detailedList, dbChannel, true);
                             }
                             return detailedList.size();
                         })

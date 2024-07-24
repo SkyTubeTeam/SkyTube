@@ -16,15 +16,12 @@
  */
 package free.rm.skytube.businessobjects.YouTube.newpipe;
 
-import android.util.Log;
-
 import androidx.annotation.Nullable;
 
 import org.schabi.newpipe.extractor.InfoItem;
 import org.schabi.newpipe.extractor.ListExtractor;
 import org.schabi.newpipe.extractor.Page;
 import org.schabi.newpipe.extractor.channel.tabs.ChannelTabExtractor;
-import org.schabi.newpipe.extractor.channel.tabs.ChannelTabs;
 import org.schabi.newpipe.extractor.exceptions.ExtractionException;
 import org.schabi.newpipe.extractor.exceptions.ParsingException;
 import org.schabi.newpipe.extractor.playlist.PlaylistInfoItem;

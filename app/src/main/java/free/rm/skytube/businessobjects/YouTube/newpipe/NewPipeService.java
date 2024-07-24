@@ -60,12 +60,12 @@ import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Stream;
 
 import free.rm.skytube.BuildConfig;
 import free.rm.skytube.app.Settings;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.Logger;
+import free.rm.skytube.businessobjects.YouTube.POJOs.PersistentChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 
@@ -212,7 +212,7 @@ public class NewPipeService {
     private List<YouTubeVideo> getChannelVideos(String channelId) throws NewPipeException {
         SkyTubeApp.nonUiThread();
         VideoPagerWithChannel pager = getChannelPager(channelId);
-        List<YouTubeVideo> result = pager.getNextPageAsVideos();
+        List<YouTubeVideo> result = pager.getNextPageAsVideosAndUpdateChannel(null).channel().getYouTubeVideos();
         Logger.i(this, "getChannelVideos for %s(%s)  -> %s videos", pager.getChannel().getTitle(), channelId, result.size());
         return result;
     }
@@ -271,6 +271,7 @@ public class NewPipeService {
 
     public VideoPagerWithChannel getChannelPager(String channelId) throws NewPipeException {
         try {
+            Logger.e(this, "fetching channel info: "+ channelId);
             ChannelWithExtractor channelExtractor = getChannelWithExtractor(channelId);
             return new VideoPagerWithChannel(streamingService, channelExtractor.findVideosTab(), channelExtractor.channel);
         } catch (ParsingException | RuntimeException e) {
@@ -311,26 +312,24 @@ public class NewPipeService {
     }
 
     /**
-     * Return detailed information for a channel from it's id.
-     * @param channelId
+     * Return detailed, fresh information for a channel from it's id.
+     * @param persistentChannel
      * @return the {@link YouTubeChannel}, with a list of recent videos.
      * @throws ExtractionException
      * @throws IOException
      */
-    public YouTubeChannel getChannelDetails(ChannelId channelId) throws NewPipeException {
+    public PersistentChannel getChannelDetails(PersistentChannel persistentChannel) throws NewPipeException {
+        ChannelId channelId = Objects.requireNonNull(persistentChannel.channel().getChannelId(), "channelId");
         Logger.i(this, "Fetching channel details for " + channelId);
-        VideoPagerWithChannel pager = getChannelPager(Objects.requireNonNull(channelId, "channelId").getRawId());
+        VideoPagerWithChannel pager = getChannelPager(channelId.getRawId());
         // get the channel, and add all the videos from the first page
         YouTubeChannel channel = pager.getChannel();
         try {
-            List<YouTubeVideo> videos = pager.getNextPageAsVideos();
-            channel.getYouTubeVideos().addAll(videos);
-            long lastPublish = videos.stream().mapToLong(YouTubeVideo::getPublishTimestamp).max().orElse(0);
-            channel.setLastVideoTime(lastPublish);
+            return pager.getNextPageAsVideosAndUpdateChannel(persistentChannel);
         } catch (NewPipeException e) {
             Logger.e(this, "Unable to retrieve videos for "+channelId+", error: "+e.getMessage(), e);
+            throw e;
         }
-        return channel;
     }
 
     private YouTubeChannel createInternalChannelFromFeed(FeedExtractor extractor) throws ParsingException {
