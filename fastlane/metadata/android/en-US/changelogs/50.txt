@@ -1,0 +1,4 @@
+* Update NewPipeExtractor to fix recent Youtube site changes.
+* Remove unnecessary app-install right from the OSS version
+* Delete old, unused table from the subscribiption database
+* Update translations to fix a wrong format character
