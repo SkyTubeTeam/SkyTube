@@ -13,7 +13,8 @@ android {
         targetSdkVersion 28
 
         versionName "2.990"    // digits of the *fractional part* shall NOT be > than "9"
-        versionCode 50
+        versionCode buildNumber.toInteger()
+
         // Third party devs:  pls be ethical and change the below keys
         buildConfigField 'String', 'YOUTUBE_API_KEYS_DEBUG', '""'
         buildConfigField 'String[]', 'YOUTUBE_API_KEYS', '{}'
@@ -200,4 +201,23 @@ dependencies {
     def junitVersion = '5.10.2'
     testImplementation "org.junit.jupiter:junit-jupiter-api:$junitVersion"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
+}
+
+task fastlaneCheck {
+    group "Verification"
+    description 'Tasks which validates the fastlane requirements'
+    doLast {
+        var path = file("./../fastlane/metadata/android/en-US/changelogs/${buildNumber}.txt")
+        assert path.exists()
+        assert path.length() <= 500
+        println("Fastlane check successful for $buildNumber - file exists and smaller than 500 bytes")
+    }
+}
+
+tasks.whenTaskAdded {
+     theTask -> {
+        if (theTask.name.startsWith('assemble')) {
+            theTask.dependsOn(fastlaneCheck)
+        }
+    }
 }
