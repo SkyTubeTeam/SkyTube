@@ -1,3 +1,9 @@
+v2.990 - 2024-07-25
+        * Update NewPipeExtractor to fix recent Youtube site changes.
+        * Remove unnecessary app-install right from the OSS version
+        * Delete old, unused table from the subscribiption database
+        * Update translations to fix a wrong format character
+
 v2.989 - 2024-07-14
         * Fix video/channel sharing
         * Update NewPipeExtractor to fix recent Youtube site changes.
