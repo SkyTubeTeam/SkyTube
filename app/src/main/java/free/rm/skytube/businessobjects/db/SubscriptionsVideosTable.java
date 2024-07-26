@@ -56,10 +56,10 @@ public class SubscriptionsVideosTable {
 
 	private static final String IDX_PUBLISH_TS = "IDX_SubsVideo_Publish";
     private static final String IDX_PUBLISH_TS_V2 = "IDX_subscription_videos_Publish";
+    private static final String IDX_PUBLISH_TIMESTAMP = "IDX_subscription_videos_PublishTime";
 
     static final String[] ALL_COLUMNS_FOR_EXTRACT = new String[] {
             COL_CHANNEL_ID_V2.name,
-            COL_CHANNEL_TITLE.name,
             COL_YOUTUBE_VIDEO_ID_V2.name,
             COL_CATEGORY_ID.name,
             COL_TITLE.name,
@@ -72,6 +72,17 @@ public class SubscriptionsVideosTable {
             COL_PUBLISH_TIME.name,
             COL_PUBLISH_TIME_EXACT.name,
     };
+
+    static final String BASE_QUERY;
+    static {
+        StringBuilder s = new StringBuilder("select c.Title channel_title");
+        for (String col : ALL_COLUMNS_FOR_EXTRACT) {
+            s.append(",s.").append(col);
+        }
+        s.append(" from subscription_videos s left join Channel c on s.channel_pk = c._id ");
+        BASE_QUERY = s.toString();
+    }
+
 
     private static final String ADD_COLUMN = "ALTER TABLE " + TABLE_NAME + " ADD COLUMN ";
 
@@ -138,4 +149,7 @@ public class SubscriptionsVideosTable {
         SQLiteOpenHelperEx.addColumn(db, TABLE_NAME_V2, COL_CHANNEL_PK);
     }
 
+    static void addPublishTimeIndex(SQLiteDatabase db) {
+        SQLiteOpenHelperEx.createIndex(db, IDX_PUBLISH_TIMESTAMP, TABLE_NAME_V2, COL_PUBLISH_TIME);
+    }
 }

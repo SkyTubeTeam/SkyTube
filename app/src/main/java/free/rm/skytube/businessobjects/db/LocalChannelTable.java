@@ -37,7 +37,7 @@ public class LocalChannelTable {
 
     static final String GET_ID_AND_CHANNEL_ID = String.format("SELECT %s, %s FROM %s", LocalChannelTable.COL_ID.name, LocalChannelTable.COL_CHANNEL_ID, LocalChannelTable.TABLE_NAME);
 
-    public static final String[] ALL_COLUMNS = new String[]{
+    private static final String[] ALL_COLUMNS = new String[]{
             LocalChannelTable.COL_CHANNEL_ID,
             LocalChannelTable.COL_TITLE,
             LocalChannelTable.COL_DESCRIPTION,
@@ -62,11 +62,9 @@ public class LocalChannelTable {
     }
 
     public static final void addIdColumn(SQLiteDatabase db) {
-        db.execSQL("ALTER TABLE " + TABLE_NAME + " RENAME TO old_" + TABLE_NAME);
-        db.execSQL(getCreateStatement(true));
-        String allRowNames = Joiner.on(',').join(ALL_COLUMNS);
-        db.execSQL("insert into " + TABLE_NAME + " (_id," + allRowNames + ") select rowid," + allRowNames + " from old_" + TABLE_NAME);
-        db.execSQL("DROP TABLE old_" + TABLE_NAME);
+        final String allRowNames = Joiner.on(',').join(ALL_COLUMNS);
+        SQLiteOpenHelperEx.updateTableSchema(db, TABLE_NAME, getCreateStatement(true),
+                "insert into " + TABLE_NAME + " (_id," + allRowNames + ") select rowid," + allRowNames);
     }
 
     public static void updateLatestVideoTimestamp(SQLiteDatabase db, PersistentChannel persistentChannel, long latestPublishTimestamp) {

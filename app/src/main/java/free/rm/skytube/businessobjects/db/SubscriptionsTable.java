@@ -72,11 +72,9 @@ public class SubscriptionsTable {
     }
 
     public static void cleanupTable(SQLiteDatabase db) {
-        db.execSQL("ALTER TABLE " + TABLE_NAME + " RENAME TO old_" + TABLE_NAME);
-        db.execSQL(getCreateStatement());
-        db.execSQL("insert into " + TABLE_NAME + " (_id," + COL_CHANNEL_ID + "," + COL_CATEGORY_ID.name + "," + COL_LAST_VISIT_TIME + "," + COL_LAST_VIDEO_FETCH +
-                ") select _id," + COL_CHANNEL_ID + "," + COL_CATEGORY_ID.name + "," + COL_LAST_VISIT_TIME + "," + COL_LAST_CHECK_TIME + " from old_" + TABLE_NAME);
-        db.execSQL("DROP TABLE old_" + TABLE_NAME);
+        SQLiteOpenHelperEx.updateTableSchema(db, TABLE_NAME, getCreateStatement(),
+                "insert into " + TABLE_NAME + " (_id," + COL_CHANNEL_ID + "," + COL_CATEGORY_ID.name + "," + COL_LAST_VISIT_TIME + "," + COL_LAST_VIDEO_FETCH +
+                ") select _id," + COL_CHANNEL_ID + "," + COL_CATEGORY_ID.name + "," + COL_LAST_VISIT_TIME + "," + COL_LAST_CHECK_TIME );
     }
 
     public static void updateLastVideoFetchTimestamps(SQLiteDatabase db, PersistentChannel persistentChannel) {
