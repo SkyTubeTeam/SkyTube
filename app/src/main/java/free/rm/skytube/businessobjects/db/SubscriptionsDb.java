@@ -79,7 +79,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 
 	private static volatile SubscriptionsDb subscriptionsDb = null;
 
-    private static final int DATABASE_VERSION = 15;
+    private static final int DATABASE_VERSION = 16;
 
     private static final String DATABASE_NAME = "subs.db";
 
@@ -99,6 +99,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(SubscriptionsTable.getCreateStatement());
         SubscriptionsVideosTable.addNewFlatTable(db);
+        SubscriptionsVideosTable.addPublishTimeIndex(db);
         db.execSQL(LocalChannelTable.getCreateStatement(true));
         db.execSQL(CategoriesTable.getCreateStatement());
         new CategoryManagement(db).setupDefaultCategories();
@@ -164,6 +165,9 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
         }
         if (upgrade.executeStep(15)) {
             SubscriptionsTable.cleanupTable(db);
+        }
+        if (upgrade.executeStep(16)) {
+            SubscriptionsVideosTable.addPublishTimeIndex(db);
         }
     }
 
@@ -623,20 +627,19 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
         final String sortingColumn = SubscriptionsVideosTable.COL_PUBLISH_TIME.name;
         final String[] selectionArguments;
         if (videoId != null) {
-            selection = "(" + sortingColumn + " < ?) OR (" + sortingColumn + " = ? AND " + SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID + " > ?)";
+            selection = "WHERE (" + sortingColumn + " < ?) OR (" + sortingColumn + " = ? AND " + SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID + " > ?)";
             String formatted = String.valueOf(beforeTimestamp);
             selectionArguments = new String[]{ formatted, formatted, videoId };
         } else {
-            selection = null;
+            selection = "";
             selectionArguments = null;
         }
-        Cursor	cursor = getReadableDatabase().query(
-            SubscriptionsVideosTable.TABLE_NAME_V2,
-            SubscriptionsVideosTable.ALL_COLUMNS_FOR_EXTRACT,
-            selection, selectionArguments, null, null,
-                sortingColumn + " DESC, " + SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID + " ASC",
-            String.valueOf(limit));
-        return extractVideos(cursor, true);
+        final String sorting = " ORDER BY " + sortingColumn + " DESC, " + SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID + " ASC limit "+ limit;
+        String query = SubscriptionsVideosTable.BASE_QUERY + selection + sorting;
+        try (Stopwatch s = new Stopwatch("getVideos " + query + ",limit=" + limit + ", beforeTimestamp=" + beforeTimestamp+" videoid="+videoId)) {
+            Cursor cursor = getReadableDatabase().rawQuery(query, selectionArguments);
+            return extractVideos(cursor, true);
+        }
     }
 
     /**

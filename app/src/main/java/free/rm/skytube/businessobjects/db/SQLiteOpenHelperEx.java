@@ -23,7 +23,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.google.common.base.Joiner;
+
 import java.io.File;
+import java.util.function.Supplier;
 
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.Logger;
@@ -158,6 +161,13 @@ public abstract class SQLiteOpenHelperEx extends SQLiteOpenHelper {
             Logger.e(db, e,"Unable to create table: '%s', because: %s", tableName, e.getMessage());
             throw e;
         }
+    }
+
+    public static void updateTableSchema(SQLiteDatabase db, String tableName, String newTableCreateStatement, String migration) {
+        db.execSQL("ALTER TABLE " + tableName + " RENAME TO old_" + tableName);
+        db.execSQL(newTableCreateStatement);
+        db.execSQL(migration + " from old_" + tableName);
+        db.execSQL("DROP TABLE old_" + tableName);
     }
 
     private static String listColumns(boolean justNames, final Column[] columns) {
