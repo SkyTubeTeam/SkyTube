@@ -139,7 +139,9 @@
 \n
 \nஇந்த நிரல் பயனுள்ளதாக இருக்கும் என்ற நம்பிக்கையில் விநியோகிக்கப்படுகிறது, ஆனால் எந்த உத்தரவாதமும் இல்லாமல்; ஒரு குறிப்பிட்ட நோக்கத்திற்கான வணிகத்தன்மை அல்லது தகுதி என்ற மறைமுக உத்தரவாதம் கூட இல்லாமல். See the GNU General Public License for more details.
 \n
-\nஇந்த நிரலுடன் சேர்த்து நீங்கள் GNU General Public License பிரதி ஒன்றைப் பெற்றிருக்க வேண்டும். இல்லையென்றால், &lt;https://www.gnu.org/licenses/&gt; பார்க்கவும்</string>
+\nஇந்த நிரலுடன் சேர்த்து நீங்கள் GNU General Public License பிரதி ஒன்றைப் பெற்றிருக்க வேண்டும். இல்லையென்றால், 
+\n
+\n&lt;https://www.gnu.org/licenses/&gt; பார்க்கவும்</string>
     <string name="pref_summary_updates">புதிய பதிப்புகளைச் சரிபார்க்கவும்.</string>
     <string name="pref_title_license">Copylefted Libre உரிமம்</string>
     <string name="pref_title_enable_immersive_mode">அதிவேக பயன்முறை</string>
