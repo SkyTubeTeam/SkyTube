@@ -1,2 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="cleaner_watched_bookmarks">பார்த்த புக்மார்க்குகளை அகற்று</string>
+    <string name="could_not_get_videos">%s வீடியோக்களைப் பெற முடியவில்லை.</string>
+    <string name="could_not_get_channel">சேனல் தகவலைப் பதிவிறக்க முடியவில்லை.</string>
+    <string name="could_not_get_channel_detailed">சேனல் தகவலைப் பதிவிறக்க முடியவில்லை: %s.</string>
+    <string name="could_not_get_sponsorblock">SponsorBlock தகவலை மீட்டெடுக்க முடியவில்லை: %s.</string>
+    <string name="views">%,d பார்வைகள்</string>
+    <string name="error">பிழை</string>
+    <string name="ok">சரி</string>
+    <string name="search_videos">வீடியோக்களைத் தேடுங்கள்</string>
+    <string name="LIVE">நேரலை</string>
+    <string name="featured">கட்டுரைகள்</string>
+    <string name="most_popular">மிகவும் பிரபலமான</string>
+    <string name="trending_in">பிரபலமாகும் (%s)</string>
+    <string name="video">வீடியோ</string>
+    <string name="videos">வீடியோக்கள்</string>
+    <string name="num_videos">%d வீடியோக்கள்</string>
+    <string name="playlists">பிளேலிஸ்ட்கள்</string>
+    <string name="close">மூடு</string>
+    <string name="loading">ஏற்றுகிறது…</string>
+    <string name="could_not_get_playlists">%s இசைப்பட்டியல்களைப் பெற இயலவில்லை.</string>
+    <string name="recaptcha_challenge_requested">நீங்கள் ஒரு போட் என்று YouTube நினைக்கிறது, எனவே நீங்கள் முதலில் ஒரு reCAPTCHA ஐ தீர்க்க வேண்டும்.</string>
+    <string name="yes">ஆம்</string>
+    <string name="no">இல்லை</string>
+    <string name="search_channel">சேனலைத் தேடுங்கள்</string>
+    <string name="cleaner">வீடியோ கிளீனர் பார்த்தேன்</string>
+    <string name="cleaner_explanation">புக்மார்க் செய்யப்பட்ட / பதிவிறக்கம் செய்யப்பட்ட வீடியோக்களை சுத்தம் செய்யவும். பின்வரும் வடிகட்டி விருப்பங்களைப் பயன்படுத்தவும்:</string>
+    <string name="cleaner_confirm">முழுதும்</string>
+    <string name="cleaner_toast_finish">நாங்கள் %1$s வீடியோ(களை) புத்தகக்குறிகளில் இருந்து அகற்றிவிட்டோம், மேலும் பதிவிறக்கிய வீடியோக்களின் %2$s MB ஐ நீக்கிவிட்டோம்</string>
+    <string name="cleaner_watched_downloads">பார்த்த பதிவிறக்கங்களை அகற்று</string>
+    <string name="video_comments_are_disabled">வீடியோ கமெண்ட்ஸ் ஆஃப்</string>
+    <string name="launch_offical_player_error">அதிகாரப்பூர்வ YouTube பிளேயரைத் தொடங்க முடியவில்லை. அது நிறுவப்பட்டுள்ளதா என்பதை உறுதிப்படுத்தவும்.</string>
+</resources>
