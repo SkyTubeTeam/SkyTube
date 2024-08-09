@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.github.skytube.components.utils.SQLiteHelper;
 import com.google.gson.Gson;
 
 import org.json.JSONException;
@@ -521,7 +522,7 @@ public class DownloadedVideosDb extends CardEventEmitterDatabase implements Orde
      */
     public Single<Integer> getTotalCount() {
         return Single.fromCallable(() ->
-                executeQueryForInteger(DownloadedVideosTable.COUNT_ALL, 0)
+                SQLiteHelper.executeQueryForInteger(getReadableDatabase(), DownloadedVideosTable.COUNT_ALL, 0)
         ).subscribeOn(Schedulers.io());
     }
 

@@ -164,9 +164,11 @@ dependencies {
     // implementation 'com.github.TeamNewPipe.NewPipeExtractor:NewPipeExtractor:v0.22.6'
     implementation 'com.github.SkyTubeTeam.NewPipeExtractor:NewPipeExtractor:skytube-2024-07-24'
 
-    implementation ('com.github.SkyTubeTeam.components:okhttp-client:0.0.7') {
+    def skytubeComponents = '0.0.9'
+    implementation ("com.github.SkyTubeTeam.components:okhttp-client:$skytubeComponents") {
         exclude group: 'com.github.SkyTubeTeam.NewPipeExtractor', module: 'extractor'
     }
+    implementation "com.github.SkyTubeTeam.components:android-utils:$skytubeComponents"
 
     // Java HTML parser
     implementation "org.jsoup:jsoup:1.17.2"

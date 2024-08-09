@@ -19,6 +19,8 @@ package free.rm.skytube.businessobjects.db;
 
 import android.database.sqlite.SQLiteDatabase;
 
+import com.github.skytube.components.utils.Column;
+import com.github.skytube.components.utils.SQLiteHelper;
 import com.google.common.base.Joiner;
 
 import free.rm.skytube.businessobjects.YouTube.POJOs.PersistentChannel;
@@ -35,7 +37,7 @@ public class LocalChannelTable {
     public static final String COL_SUBSCRIBER_COUNT = "Subscriber_Count";
     public static final Column COL_ID = new Column("_id", "integer", " primary key");
 
-    static final String GET_ID_AND_CHANNEL_ID = String.format("SELECT %s, %s FROM %s", LocalChannelTable.COL_ID.name, LocalChannelTable.COL_CHANNEL_ID, LocalChannelTable.TABLE_NAME);
+    static final String GET_ID_AND_CHANNEL_ID = String.format("SELECT %s, %s FROM %s", LocalChannelTable.COL_ID.name(), LocalChannelTable.COL_CHANNEL_ID, LocalChannelTable.TABLE_NAME);
 
     private static final String[] ALL_COLUMNS = new String[]{
             LocalChannelTable.COL_CHANNEL_ID,
@@ -63,12 +65,12 @@ public class LocalChannelTable {
 
     public static final void addIdColumn(SQLiteDatabase db) {
         final String allRowNames = Joiner.on(',').join(ALL_COLUMNS);
-        SQLiteOpenHelperEx.updateTableSchema(db, TABLE_NAME, getCreateStatement(true),
+        SQLiteHelper.updateTableSchema(db, TABLE_NAME, getCreateStatement(true),
                 "insert into " + TABLE_NAME + " (_id," + allRowNames + ") select rowid," + allRowNames);
     }
 
     public static void updateLatestVideoTimestamp(SQLiteDatabase db, PersistentChannel persistentChannel, long latestPublishTimestamp) {
-        db.execSQL("update " + TABLE_NAME + " set " + COL_LAST_VIDEO_TS + " = max(?, coalesce(" + COL_LAST_VIDEO_TS + ",0)) where " + COL_ID.name + " = ?", new Object[]{
+        db.execSQL("update " + TABLE_NAME + " set " + COL_LAST_VIDEO_TS + " = max(?, coalesce(" + COL_LAST_VIDEO_TS + ",0)) where " + COL_ID.name() + " = ?", new Object[]{
                 latestPublishTimestamp, persistentChannel.subscriptionPk()});
     }
 }

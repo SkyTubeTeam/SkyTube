@@ -24,9 +24,8 @@ import android.database.sqlite.SQLiteDatabase;
 
 import androidx.annotation.StringRes;
 
+import com.github.skytube.components.utils.SQLiteHelper;
 import com.mikepenz.iconics.typeface.library.materialdesigniconic.MaterialDesignIconic;
-
-import org.apache.commons.codec.binary.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -109,11 +108,11 @@ public class CategoryManagement {
     }
 
     Category addNew(String name, MaterialDesignIconic.Icon icon, boolean builtin) {
-        int count = SQLiteOpenHelperEx.executeQueryForInteger(db, CategoriesTable.COUNT_BY_LABEL_QUERY,  new String[] { name }, 0);
+        int count = SQLiteHelper.executeQueryForInteger(db, CategoriesTable.COUNT_BY_LABEL_QUERY,  new String[] { name }, 0);
         if (count > 0) {
             return null;
         }
-        final int priority = SQLiteOpenHelperEx.executeQueryForInteger(db, CategoriesTable.MAXIMUM_PRIORITY_QUERY, 0) + 1;
+        final int priority = SQLiteHelper.executeQueryForInteger(db, CategoriesTable.MAXIMUM_PRIORITY_QUERY, 0) + 1;
 
         ContentValues values = new ContentValues();
         values.put(CategoriesTable.COL_ENABLED, 1);

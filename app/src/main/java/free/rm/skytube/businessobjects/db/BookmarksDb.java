@@ -22,11 +22,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.view.Menu;
 
 import androidx.annotation.NonNull;
 import androidx.core.util.Pair;
 
+import com.github.skytube.components.utils.SQLiteHelper;
 import com.google.gson.Gson;
 
 import org.json.JSONException;
@@ -39,17 +39,14 @@ import java.util.Set;
 
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.app.Utils;
-import free.rm.skytube.app.utils.WeakList;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.YouTube.newpipe.VideoId;
-import free.rm.skytube.businessobjects.interfaces.CardListener;
 import free.rm.skytube.businessobjects.interfaces.OrderableDatabase;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Single;
-import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 /**
@@ -227,7 +224,7 @@ public class BookmarksDb extends CardEventEmitterDatabase implements OrderableDa
 	 */
 	public boolean isBookmarked(String videoId) {
 		SkyTubeApp.nonUiThread();
-		return executeQueryForInteger(BookmarksTable.IS_BOOKMARKED_QUERY, new String[]{videoId}, 0) > 0;
+		return SQLiteHelper.executeQueryForInteger(getReadableDatabase(), BookmarksTable.IS_BOOKMARKED_QUERY, new String[]{videoId}, 0) > 0;
 	}
 
     /**
@@ -235,7 +232,7 @@ public class BookmarksDb extends CardEventEmitterDatabase implements OrderableDa
      */
     public Single<Integer> getTotalBookmarkCount() {
         return Single.fromCallable(() ->
-            executeQueryForInteger(BookmarksTable.COUNT_ALL_BOOKMARKS, 0)
+                SQLiteHelper.executeQueryForInteger(getReadableDatabase(), BookmarksTable.COUNT_ALL_BOOKMARKS, 0)
         ).subscribeOn(Schedulers.io());
     }
 
@@ -244,7 +241,7 @@ public class BookmarksDb extends CardEventEmitterDatabase implements OrderableDa
 	 */
 	public int getMaximumOrderNumber() {
 		SkyTubeApp.nonUiThread();
-		return executeQueryForInteger(BookmarksTable.MAXIMUM_ORDER_QUERY, 0);
+		return SQLiteHelper.executeQueryForInteger(getReadableDatabase(), BookmarksTable.MAXIMUM_ORDER_QUERY, 0);
 	}
 
 

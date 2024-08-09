@@ -19,6 +19,9 @@ package free.rm.skytube.businessobjects.db;
 
 import android.database.sqlite.SQLiteDatabase;
 
+import com.github.skytube.components.utils.Column;
+import com.github.skytube.components.utils.SQLiteHelper;
+
 import free.rm.skytube.businessobjects.YouTube.POJOs.PersistentChannel;
 
 /**
@@ -64,7 +67,7 @@ public class SubscriptionsTable {
     }
 
     public static void addCategoryColumn(SQLiteDatabase db) {
-        SQLiteOpenHelperEx.addColumn(db, TABLE_NAME, COL_CATEGORY_ID);
+        SQLiteHelper.addColumn(db, TABLE_NAME, COL_CATEGORY_ID);
     }
 
     public static String[] getLastCheckTimeColumn() {
@@ -72,9 +75,9 @@ public class SubscriptionsTable {
     }
 
     public static void cleanupTable(SQLiteDatabase db) {
-        SQLiteOpenHelperEx.updateTableSchema(db, TABLE_NAME, getCreateStatement(),
-                "insert into " + TABLE_NAME + " (_id," + COL_CHANNEL_ID + "," + COL_CATEGORY_ID.name + "," + COL_LAST_VISIT_TIME + "," + COL_LAST_VIDEO_FETCH +
-                ") select _id," + COL_CHANNEL_ID + "," + COL_CATEGORY_ID.name + "," + COL_LAST_VISIT_TIME + "," + COL_LAST_CHECK_TIME );
+        SQLiteHelper.updateTableSchema(db, TABLE_NAME, getCreateStatement(),
+                "insert into " + TABLE_NAME + " (_id," + COL_CHANNEL_ID + "," + COL_CATEGORY_ID.name() + "," + COL_LAST_VISIT_TIME + "," + COL_LAST_VIDEO_FETCH +
+                ") select _id," + COL_CHANNEL_ID + "," + COL_CATEGORY_ID.name() + "," + COL_LAST_VISIT_TIME + "," + COL_LAST_CHECK_TIME );
     }
 
     public static void updateLastVideoFetchTimestamps(SQLiteDatabase db, PersistentChannel persistentChannel) {
