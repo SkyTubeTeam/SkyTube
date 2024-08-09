@@ -1,2 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="LIVE">ജീവിക്കുക</string>
+    <string name="close">അടയ്ക്കുക</string>
+    <string name="yes">അതെ</string>
+    <string name="no">ഇല്ല</string>
+    <string name="search_channel">ചാനൽ തിരയുക</string>
+    <string name="cleaner_confirm">വൃത്തിയാക്കുക</string>
+    <string name="views">%,d കാഴ്‌ചകൾ</string>
+    <string name="error">പിശക്</string>
+    <string name="ok">ശരി</string>
+    <string name="search_videos">വീഡിയോകൾ തിരയുക</string>
+    <string name="featured">ഫീച്ചർ ചെയ്തു</string>
+    <string name="most_popular">ഏറ്റവും ജനപ്രിയമായത്</string>
+    <string name="trending_in">ട്രെൻഡിംഗ് (%s)</string>
+    <string name="video">വീഡിയോ</string>
+    <string name="videos">വീഡിയോകൾ</string>
+    <string name="num_videos">%d വീഡിയോകൾ</string>
+    <string name="could_not_get_playlists">%s പ്ലേലിസ്റ്റുകൾ നേടാനായില്ല.</string>
+    <string name="could_not_get_channel">ചാനൽ വിവരങ്ങൾ ഡൗൺലോഡ് ചെയ്യാനായില്ല.</string>
+    <string name="could_not_get_videos">%s വീഡിയോകൾ നേടാനായില്ല.</string>
+    <string name="could_not_get_channel_detailed">ചാനൽ വിവരം ഡൗൺലോഡ് ചെയ്യാൻ കഴിഞ്ഞില്ല: %s.</string>
+    <string name="could_not_get_sponsorblock">SponsorBlock വിവരം വീണ്ടെടുക്കാൻ കഴിഞ്ഞില്ല: %s.</string>
+    <string name="launch_offical_player_error">ഔദ്യോഗിക YouTube പ്ലെയർ സമാരംഭിക്കാനായില്ല. ഇൻസ്റ്റാൾ ചെയ്തിട്ടുണ്ടെന്ന് ഉറപ്പാക്കുക.</string>
+    <string name="playlists">പ്ലേലിസ്റ്റുകൾ</string>
+    <string name="recaptcha_challenge_requested">നിങ്ങളൊരു ബോട്ടാണെന്ന് YouTube കരുതുന്നു, അതിനാൽ നിങ്ങൾ ആദ്യം ഒരു reCAPTCHA പരിഹരിക്കണം.</string>
+    <string name="loading">ലോഡ് ചെയ്യുന്നു…</string>
+    <string name="cleaner_explanation">ബുക്ക്‌മാർക്ക് ചെയ്‌ത/ഡൗൺലോഡ് ചെയ്‌ത വീഡിയോകൾ വൃത്തിയാക്കുക. ഇനിപ്പറയുന്ന ഫിൽട്ടർ ഓപ്ഷനുകൾ ഉപയോഗിക്കുക:</string>
+    <string name="cleaner">വീഡിയോ ക്ലീനർ കണ്ടു</string>
+    <string name="cleaner_watched_downloads">കണ്ട ഡൗൺലോഡുകൾ നീക്കം ചെയ്യുക</string>
+    <string name="cleaner_toast_finish">ഞങ്ങൾ ബുക്ക്‌മാർക്കുകളിൽ നിന്ന് %1$s വീഡിയോ(കൾ) നീക്കം ചെയ്യുകയും ഡൗൺലോഡ് ചെയ്‌ത വീഡിയോകളുടെ %2$s MB ഇല്ലാതാക്കുകയും ചെയ്‌തു</string>
+</resources>
