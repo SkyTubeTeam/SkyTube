@@ -19,7 +19,8 @@ package free.rm.skytube.businessobjects.db;
 
 import android.database.sqlite.SQLiteDatabase;
 
-import com.google.common.base.Joiner;
+import com.github.skytube.components.utils.Column;
+import com.github.skytube.components.utils.SQLiteHelper;
 
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -64,18 +65,18 @@ public class SubscriptionsVideosTable {
     private static final String IDX_PUBLISH_TIMESTAMP = "IDX_subscription_videos_PublishTime";
 
     static final String[] ALL_COLUMNS_FOR_EXTRACT = new String[] {
-            COL_CHANNEL_ID_V2.name,
-            COL_YOUTUBE_VIDEO_ID_V2.name,
-            COL_CATEGORY_ID.name,
-            COL_TITLE.name,
-            COL_DESCRIPTION.name,
-            COL_THUMBNAIL_URL.name,
-            COL_LIKES.name,
-            COL_DISLIKES.name,
-            COL_VIEWS.name,
-            COL_DURATION.name,
-            COL_PUBLISH_TIME.name,
-            COL_PUBLISH_TIME_EXACT.name,
+            COL_CHANNEL_ID_V2.name(),
+            COL_YOUTUBE_VIDEO_ID_V2.name(),
+            COL_CATEGORY_ID.name(),
+            COL_TITLE.name(),
+            COL_DESCRIPTION.name(),
+            COL_THUMBNAIL_URL.name(),
+            COL_LIKES.name(),
+            COL_DISLIKES.name(),
+            COL_VIEWS.name(),
+            COL_DURATION.name(),
+            COL_PUBLISH_TIME.name(),
+            COL_PUBLISH_TIME_EXACT.name(),
     };
 
     static final String BASE_QUERY;
@@ -145,16 +146,16 @@ public class SubscriptionsVideosTable {
     }
 
     public static void addNewFlatTable(SQLiteDatabase db, boolean withChannelTitle) {
-        db.execSQL(SQLiteOpenHelperEx.getCreateTableCommand(TABLE_NAME_V2, getAllColumns(withChannelTitle)));
-        SQLiteOpenHelperEx.createIndex(db, IDX_PUBLISH_TS_V2, TABLE_NAME_V2, COL_CATEGORY_ID);
+        db.execSQL(SQLiteHelper.getCreateTableCommand(TABLE_NAME_V2, getAllColumns(withChannelTitle)));
+        SQLiteHelper.createIndex(db, IDX_PUBLISH_TS_V2, TABLE_NAME_V2, COL_CATEGORY_ID);
     }
 
     static void addSubsIdColumn(SQLiteDatabase db) {
-        SQLiteOpenHelperEx.addColumn(db, TABLE_NAME_V2, COL_SUBS_ID);
+        SQLiteHelper.addColumn(db, TABLE_NAME_V2, COL_SUBS_ID);
     }
 
     static void addChannelPkColumn(SQLiteDatabase db) {
-        SQLiteOpenHelperEx.addColumn(db, TABLE_NAME_V2, COL_CHANNEL_PK);
+        SQLiteHelper.addColumn(db, TABLE_NAME_V2, COL_CHANNEL_PK);
     }
 
     static void removeChannelTitle(SQLiteDatabase db) {
@@ -162,13 +163,13 @@ public class SubscriptionsVideosTable {
 
         String columnList = Stream.of(allColumns).filter(it -> it != null).map(Column::name).collect(Collectors.joining(","));
 
-        SQLiteOpenHelperEx.updateTableSchema(db, TABLE_NAME_V2, SQLiteOpenHelperEx.getCreateTableCommand(TABLE_NAME_V2, allColumns),
+        SQLiteHelper.updateTableSchema(db, TABLE_NAME_V2, SQLiteHelper.getCreateTableCommand(TABLE_NAME_V2, allColumns),
                 "insert into " + TABLE_NAME_V2 + " (" + columnList +
                         ") select " + columnList
         );
     }
 
     static void addPublishTimeIndex(SQLiteDatabase db) {
-        SQLiteOpenHelperEx.createIndex(db, IDX_PUBLISH_TIMESTAMP, TABLE_NAME_V2, COL_PUBLISH_TIME);
+        SQLiteHelper.createIndex(db, IDX_PUBLISH_TIMESTAMP, TABLE_NAME_V2, COL_PUBLISH_TIME);
     }
 }
