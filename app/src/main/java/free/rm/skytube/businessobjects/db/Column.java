@@ -2,7 +2,7 @@ package free.rm.skytube.businessobjects.db;
 
 import android.database.Cursor;
 
-class Column {
+final class Column {
 
     final String name;
     final String type;
@@ -23,6 +23,9 @@ class Column {
         return name + ' ' + type + (modifier != null ? " "+ modifier : "");
     }
 
+    public String name() {
+        return name;
+    }
     public int getColumn(Cursor cursor) {
         return cursor.getColumnIndex(name);
     }
