@@ -344,11 +344,11 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 	 */
 	public DatabaseResult unsubscribe(PersistentChannel channel) {
 		SkyTubeApp.nonUiThread();
-
+        Logger.i(this, "unsubscribing subs_id= %s, channel_id = %s, channel_pk = %s", channel.subscriptionPk(), channel.channel().getChannelId(), channel.channelPk());
         // delete any feed videos pertaining to this channel
         getWritableDatabase().delete(SubscriptionsVideosTable.TABLE_NAME_V2,
                 SubscriptionsVideosTable.COL_SUBS_ID.name() + " = ?",
-                toArray(channel.channelPk()));
+                toArray(channel.subscriptionPk()));
 
         // remove this channel from the subscriptions DB
         int rowsDeleted = getWritableDatabase().delete(SubscriptionsTable.TABLE_NAME,

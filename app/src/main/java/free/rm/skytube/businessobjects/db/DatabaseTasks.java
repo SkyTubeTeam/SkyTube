@@ -166,7 +166,12 @@ public class DatabaseTasks {
         return Single.fromCallable(() -> {
             PersistentChannel channel = DatabaseTasks.getChannelOrRefresh(context, channelId, true);
             SubscriptionsDb db = SubscriptionsDb.getSubscriptionsDb();
-            DatabaseResult result = subscribeToChannel ? db.subscribe(channel, Collections.emptyList()) : db.unsubscribe(channel);
+            final DatabaseResult result;
+            if (subscribeToChannel) {
+                result = db.subscribe(channel, channel.channel().getYouTubeVideos());
+            } else {
+                result = db.unsubscribe(channel);
+            }
             return Pair.create(channel, result);
         })
                 .subscribeOn(Schedulers.io())

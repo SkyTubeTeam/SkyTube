@@ -286,39 +286,6 @@ public class YouTubeChannel extends CardData implements Serializable {
 				});
 	}
 
-	public static Disposable subscribeChannel(final Context context, final ChannelId channelId) {
-		if (channelId != null) {
-			return DatabaseTasks.getChannelInfo(context, channelId, false)
-					.observeOn(Schedulers.io())
-					.map(persistentChannel ->
-						new Pair<>(persistentChannel, SubscriptionsDb.getSubscriptionsDb().subscribe(persistentChannel, Collections.emptyList()))
-					)
-					.observeOn(AndroidSchedulers.mainThread())
-					.subscribe(youTubeChannelWithResult -> {
-						switch(youTubeChannelWithResult.second) {
-							case SUCCESS: {
-								youTubeChannelWithResult.first.channel.setUserSubscribed(true);
-								EventBus.getInstance().notifyMainTabChanged(EventBus.SettingChange.SUBSCRIPTION_LIST_CHANGED);
-								SkyTubeApp.getSettings().setRefreshSubsFeedFromCache(true);
-								Toast.makeText(context, R.string.channel_subscribed, Toast.LENGTH_LONG).show();
-								break;
-							}
-							case NOT_MODIFIED: {
-								Toast.makeText(context, R.string.channel_already_subscribed, Toast.LENGTH_LONG).show();
-								break;
-							}
-							default: {
-								Toast.makeText(context, R.string.channel_subscribe_failed, Toast.LENGTH_LONG).show();
-								break;
-							}
-						}
-					});
-		} else {
-			Toast.makeText(context, "Channel is not specified", Toast.LENGTH_LONG).show();
-			return Disposable.empty();
-		}
-	}
-
 	public String getChannelUrl() {
 		return getChannelId().toURL();
 	}
