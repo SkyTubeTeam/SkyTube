@@ -322,7 +322,6 @@ public class NewPipeService {
         Logger.i(this, "Fetching channel details for " + channelId);
         VideoPagerWithChannel pager = getChannelPager(channelId.getRawId());
         // get the channel, and add all the videos from the first page
-        YouTubeChannel channel = pager.getChannel();
         try {
             return pager.getNextPageAsVideosAndUpdateChannel(persistentChannel);
         } catch (NewPipeException e) {

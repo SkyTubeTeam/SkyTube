@@ -89,15 +89,6 @@ public class YouTubeTasks {
                 });
     }
 
-    public static Single<Integer> refreshSubscribedChannel(ChannelId channelId, @Nullable Consumer<Integer> newVideosFound) {
-        if (SkyTubeApp.getSettings().isUseNewPipe() || !YouTubeAPIKey.get().isUserApiKeySet()) {
-            return YouTubeTasks.getBulkSubscriptionVideos(Collections.singletonList(channelId), newVideosFound);
-        } else {
-            return YouTubeTasks.getChannelVideos(channelId, null, false, newVideosFound)
-                    .map(items -> items.size());
-        }
-    }
-
     private static Single<Integer> refreshSubscriptions(@NonNull List<ChannelId> channelIds, @Nullable Consumer<Integer> newVideosFound) {
         if (SkyTubeApp.getSettings().isUseNewPipe() || !YouTubeAPIKey.get().isUserApiKeySet()) {
             return YouTubeTasks.getBulkSubscriptionVideos(channelIds, newVideosFound);

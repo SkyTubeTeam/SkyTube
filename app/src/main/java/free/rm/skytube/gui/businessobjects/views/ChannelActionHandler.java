@@ -41,7 +41,7 @@ public class ChannelActionHandler {
     public boolean handleChannelActions(Context context, YouTubeChannel channel, int itemId) {
         switch (itemId) {
             case R.id.subscribe_channel:
-                compositeDisposable.add(YouTubeChannel.subscribeChannel(context, channel.getChannelId()));
+                compositeDisposable.add(DatabaseTasks.subscribeToChannel(true, null, context, channel.getChannelId(), true).subscribe());
                 return true;
             case R.id.unsubscribe_channel:
                 compositeDisposable.add(DatabaseTasks.subscribeToChannel(false,
