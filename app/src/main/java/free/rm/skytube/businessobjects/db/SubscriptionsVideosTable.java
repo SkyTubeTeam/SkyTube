@@ -19,6 +19,11 @@ package free.rm.skytube.businessobjects.db;
 
 import android.database.sqlite.SQLiteDatabase;
 
+import com.google.common.base.Joiner;
+
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 /**
  * A table that caches metadata about videos published by subbed channels.
  */
@@ -119,15 +124,14 @@ public class SubscriptionsVideosTable {
     public static String getIndexOnVideos() {
         return "CREATE INDEX " + IDX_PUBLISH_TS + " ON " + TABLE_NAME + "(" + COL_PUBLISH_TS + ")";
     }
-
-    public static void addNewFlatTable(SQLiteDatabase db) {
-        SQLiteOpenHelperEx.createTable(db, TABLE_NAME_V2,
+    private static Column[] getAllColumns(boolean withChannelTitle) {
+        return new Column[] {
                 COL_CHANNEL_PK,
                 COL_SUBS_ID,
                 COL_CHANNEL_ID_V2,
                 COL_YOUTUBE_VIDEO_ID_V2,
                 COL_CATEGORY_ID,
-                COL_CHANNEL_TITLE,
+                withChannelTitle ? COL_CHANNEL_TITLE : null,
                 COL_TITLE,
                 COL_DESCRIPTION,
                 COL_THUMBNAIL_URL,
@@ -137,7 +141,11 @@ public class SubscriptionsVideosTable {
                 COL_DURATION,
                 COL_PUBLISH_TIME,
                 COL_PUBLISH_TIME_EXACT
-                );
+        };
+    }
+
+    public static void addNewFlatTable(SQLiteDatabase db, boolean withChannelTitle) {
+        db.execSQL(SQLiteOpenHelperEx.getCreateTableCommand(TABLE_NAME_V2, getAllColumns(withChannelTitle)));
         SQLiteOpenHelperEx.createIndex(db, IDX_PUBLISH_TS_V2, TABLE_NAME_V2, COL_CATEGORY_ID);
     }
 
@@ -147,6 +155,17 @@ public class SubscriptionsVideosTable {
 
     static void addChannelPkColumn(SQLiteDatabase db) {
         SQLiteOpenHelperEx.addColumn(db, TABLE_NAME_V2, COL_CHANNEL_PK);
+    }
+
+    static void removeChannelTitle(SQLiteDatabase db) {
+        final Column[] allColumns = getAllColumns(false);
+
+        String columnList = Stream.of(allColumns).filter(it -> it != null).map(Column::name).collect(Collectors.joining(","));
+
+        SQLiteOpenHelperEx.updateTableSchema(db, TABLE_NAME_V2, SQLiteOpenHelperEx.getCreateTableCommand(TABLE_NAME_V2, allColumns),
+                "insert into " + TABLE_NAME_V2 + " (" + columnList +
+                        ") select " + columnList
+        );
     }
 
     static void addPublishTimeIndex(SQLiteDatabase db) {

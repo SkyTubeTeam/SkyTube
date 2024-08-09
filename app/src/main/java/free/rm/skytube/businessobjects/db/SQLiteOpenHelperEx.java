@@ -23,10 +23,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.google.common.base.Joiner;
-
 import java.io.File;
-import java.util.function.Supplier;
 
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.Logger;
@@ -154,9 +151,13 @@ public abstract class SQLiteOpenHelperEx extends SQLiteOpenHelper {
         db.execSQL("CREATE INDEX "+indexName+" ON "+tableName + "("+listColumns(true, columns)+")");
     }
 
+    public static String getCreateTableCommand(String tableName, Column... columns) {
+        return "CREATE TABLE " + tableName + " (" + listColumns(false, columns) + ")";
+    }
+
     public static void createTable(SQLiteDatabase db, String tableName, Column... columns) {
         try {
-            db.execSQL("CREATE TABLE " + tableName + " (" + listColumns(false, columns) + ")");
+            db.execSQL(getCreateTableCommand(tableName, columns));
         } catch (SQLiteException e) {
             Logger.e(db, e,"Unable to create table: '%s', because: %s", tableName, e.getMessage());
             throw e;
@@ -174,6 +175,9 @@ public abstract class SQLiteOpenHelperEx extends SQLiteOpenHelper {
         boolean first = true;
         final StringBuilder sql = new StringBuilder();
         for (Column col : columns) {
+            if (col == null) {
+                continue;
+            }
             if (first) {
                 first = false;
             } else {

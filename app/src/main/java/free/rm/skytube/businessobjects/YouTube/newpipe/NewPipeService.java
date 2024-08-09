@@ -318,8 +318,7 @@ public class NewPipeService {
      * @throws ExtractionException
      * @throws IOException
      */
-    public PersistentChannel getChannelDetails(PersistentChannel persistentChannel) throws NewPipeException {
-        ChannelId channelId = Objects.requireNonNull(persistentChannel.channel().getChannelId(), "channelId");
+    public PersistentChannel getChannelDetails(ChannelId channelId, PersistentChannel persistentChannel) throws NewPipeException {
         Logger.i(this, "Fetching channel details for " + channelId);
         VideoPagerWithChannel pager = getChannelPager(channelId.getRawId());
         // get the channel, and add all the videos from the first page

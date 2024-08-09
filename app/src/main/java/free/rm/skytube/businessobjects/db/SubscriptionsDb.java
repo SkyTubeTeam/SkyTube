@@ -42,7 +42,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-import javax.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.app.Utils;
@@ -79,7 +79,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 
 	private static volatile SubscriptionsDb subscriptionsDb = null;
 
-    private static final int DATABASE_VERSION = 16;
+    private static final int DATABASE_VERSION = 17;
 
     private static final String DATABASE_NAME = "subs.db";
 
@@ -98,7 +98,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(SubscriptionsTable.getCreateStatement());
-        SubscriptionsVideosTable.addNewFlatTable(db);
+        SubscriptionsVideosTable.addNewFlatTable(db, false);
         SubscriptionsVideosTable.addPublishTimeIndex(db);
         db.execSQL(LocalChannelTable.getCreateStatement(true));
         db.execSQL(CategoriesTable.getCreateStatement());
@@ -145,7 +145,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
             SubscriptionsTable.addCategoryColumn(db);
         }
         if (upgrade.executeStep(9)) {
-            SubscriptionsVideosTable.addNewFlatTable(db);
+            SubscriptionsVideosTable.addNewFlatTable(db, true);
             migrateFromJsonColumn(db);
         }
         if (upgrade.executeStep(10)) {
@@ -166,7 +166,9 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
         if (upgrade.executeStep(15)) {
             SubscriptionsTable.cleanupTable(db);
         }
-        if (upgrade.executeStep(16)) {
+        if (upgrade.executeStep(17)) {
+            Logger.w(this, "Remove channel title from subscription_videos table");
+            SubscriptionsVideosTable.removeChannelTitle(db);
             SubscriptionsVideosTable.addPublishTimeIndex(db);
         }
     }
@@ -410,7 +412,6 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
             values.put(SubscriptionsVideosTable.COL_CHANNEL_PK.name, persistentChannel.channelPk());
         }
 
-        values.put(SubscriptionsVideosTable.COL_CHANNEL_TITLE.name, video.getSafeChannelName());
         values.put(SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID_V2.name, video.getId());
         values.put(SubscriptionsVideosTable.COL_CATEGORY_ID.name, video.getCategoryId());
         values.put(SubscriptionsVideosTable.COL_PUBLISH_TIME_EXACT.name, video.getPublishTimestampExact());
@@ -754,7 +755,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
         return new String[] { channelId.getRawId() };
     }
 
-    private Long getChannelPk(SQLiteDatabase db, ChannelId channelId){
+    private @Nullable Long getChannelPk(SQLiteDatabase db, ChannelId channelId){
         try (Cursor cursor = db.rawQuery(GET_PK_FROM_CHANNEL_ID, toArrayParam(channelId))) {
             if (cursor.moveToNext()) {
                 return cursor.getLong(0);
@@ -766,7 +767,12 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
     private PersistentChannel cacheChannel(SQLiteDatabase db, @Nullable PersistentChannel persistentChannel, YouTubeChannel channel) {
         ContentValues values = toContentValues(channel);
 
-        Long channelPk = persistentChannel != null ? persistentChannel.channelPk() : getChannelPk(db, channel.getChannelId());
+        final Long channelPk;
+        if (persistentChannel != null) {
+            channelPk = persistentChannel.channelPk();
+        } else {
+            channelPk = getChannelPk(db, channel.getChannelId());
+        }
         Long subPk = persistentChannel != null ? persistentChannel.subscriptionPk() : null;
 
         // If there is a persistentChannel info, we already have the channel in the db

@@ -16,6 +16,8 @@
  */
 package free.rm.skytube.businessobjects.YouTube.newpipe;
 
+import androidx.annotation.Nullable;
+
 import org.schabi.newpipe.extractor.InfoItem;
 import org.schabi.newpipe.extractor.ListExtractor;
 import org.schabi.newpipe.extractor.StreamingService;
@@ -56,7 +58,7 @@ public class VideoPagerWithChannel extends VideoPager {
      * Fetch the first page of videos from the channel, and update the subscription database with the
      * fresh data.
      */
-    public PersistentChannel getNextPageAsVideosAndUpdateChannel(PersistentChannel persistentChannel) throws NewPipeException {
+    public PersistentChannel getNextPageAsVideosAndUpdateChannel(@Nullable PersistentChannel persistentChannel) throws NewPipeException {
         List<YouTubeVideo> videos = getNextPageAsVideos();
         channel.getYouTubeVideos().addAll(videos);
         long lastPublish = videos.stream().mapToLong(YouTubeVideo::getPublishTimestamp).max().orElse(0);
