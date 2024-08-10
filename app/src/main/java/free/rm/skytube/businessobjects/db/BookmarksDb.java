@@ -167,29 +167,26 @@ public class BookmarksDb extends CardEventEmitterDatabase implements OrderableDa
 			if (rowsDeleted > 0) {
 				// Since we've removed a video, we will need to update the order column for all the videos.
 				int order = 1;
-				Cursor cursor = getReadableDatabase().query(
+				try (Cursor cursor = getReadableDatabase().query(
 						BookmarksTable.TABLE_NAME,
 						new String[]{BookmarksTable.COL_YOUTUBE_VIDEO, BookmarksTable.COL_ORDER},
 						null,
-						null, null, null, BookmarksTable.COL_ORDER + " ASC");
-				if (cursor.moveToNext()) {
-					Gson gson = new Gson();
-					do {
-						byte[] blob = cursor.getBlob(cursor.getColumnIndex(BookmarksTable.COL_YOUTUBE_VIDEO));
-						YouTubeVideo uvideo = gson.fromJson(new String(blob), YouTubeVideo.class).updatePublishTimestampFromDate();
-						ContentValues contentValues = new ContentValues();
-						contentValues.put(BookmarksTable.COL_ORDER, order++);
+						null, null, null, BookmarksTable.COL_ORDER + " ASC")) {
+                    int blobCol = cursor.getColumnIndexOrThrow(BookmarksTable.COL_YOUTUBE_VIDEO);
+                    Gson gson = new Gson();
+                    while (cursor.moveToNext()) {
+                        byte[] blob = cursor.getBlob(blobCol);
+                        YouTubeVideo uvideo = gson.fromJson(new String(blob), YouTubeVideo.class).updatePublishTimestampFromDate();
+                        ContentValues contentValues = new ContentValues();
+                        contentValues.put(BookmarksTable.COL_ORDER, order++);
 
-						getWritableDatabase().update(BookmarksTable.TABLE_NAME, contentValues, BookmarksTable.COL_YOUTUBE_VIDEO_ID + " = ?",
-								new String[]{uvideo.getId()});
-					} while (cursor.moveToNext());
-				}
-
-				cursor.close();
-
-				return DatabaseResult.SUCCESS;
-			}
-				return DatabaseResult.NOT_MODIFIED;
+                        getWritableDatabase().update(BookmarksTable.TABLE_NAME, contentValues, BookmarksTable.COL_YOUTUBE_VIDEO_ID + " = ?",
+                                new String[]{uvideo.getId()});
+                    }
+                }
+                return DatabaseResult.SUCCESS;
+            }
+            return DatabaseResult.NOT_MODIFIED;
 		} catch (SQLException e) {
 			Logger.e(this, "Database error: " + e.getMessage(), e);
 			return DatabaseResult.ERROR;

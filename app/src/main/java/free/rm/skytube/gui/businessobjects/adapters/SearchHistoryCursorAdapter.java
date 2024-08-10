@@ -61,7 +61,7 @@ public class SearchHistoryCursorAdapter extends SimpleCursorAdapter {
 
     @Override
     public CharSequence convertToString(Cursor cursor) {
-        int indexColumnSuggestion = cursor.getColumnIndex(SearchHistoryTable.COL_SEARCH_TEXT);
+        int indexColumnSuggestion = cursor.getColumnIndexOrThrow(SearchHistoryTable.COL_SEARCH_TEXT);
         return cursor.getString(indexColumnSuggestion);
     }
 
