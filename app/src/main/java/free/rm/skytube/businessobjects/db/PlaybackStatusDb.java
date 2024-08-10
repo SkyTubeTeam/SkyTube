@@ -75,22 +75,23 @@ public class PlaybackStatusDb extends SQLiteOpenHelperEx {
 	 */
 	public synchronized VideoWatchedStatus getVideoWatchedStatus(@NonNull String videoId) {
 		if(playbackHistoryMap == null) {
-			Cursor cursor = getReadableDatabase().query(
-							PlaybackStatusTable.TABLE_NAME,
-							new String[]{PlaybackStatusTable.COL_YOUTUBE_VIDEO_ID, PlaybackStatusTable.COL_YOUTUBE_VIDEO_POSITION, PlaybackStatusTable.COL_YOUTUBE_VIDEO_WATCHED},
-							null,
-							null, null, null, null);
-			playbackHistoryMap = new HashMap<>();
-			if(cursor.moveToFirst()) {
-				do {
-					String video_id = cursor.getString(cursor.getColumnIndex(PlaybackStatusTable.COL_YOUTUBE_VIDEO_ID));
-					int position = cursor.getInt(cursor.getColumnIndex(PlaybackStatusTable.COL_YOUTUBE_VIDEO_POSITION));
-					int finished = cursor.getInt(cursor.getColumnIndex(PlaybackStatusTable.COL_YOUTUBE_VIDEO_WATCHED));
-					VideoWatchedStatus status = new VideoWatchedStatus(position, finished == 1);
-					playbackHistoryMap.put(video_id, status);
-				} while (cursor.moveToNext());
-			}
-			cursor.close();
+            try (Cursor cursor = getReadableDatabase().query(
+                    PlaybackStatusTable.TABLE_NAME,
+                    new String[]{PlaybackStatusTable.COL_YOUTUBE_VIDEO_ID, PlaybackStatusTable.COL_YOUTUBE_VIDEO_POSITION, PlaybackStatusTable.COL_YOUTUBE_VIDEO_WATCHED},
+                    null,
+                    null, null, null, null)) {
+                playbackHistoryMap = new HashMap<>();
+                final int videoIdIdx = cursor.getColumnIndexOrThrow(PlaybackStatusTable.COL_YOUTUBE_VIDEO_ID);
+                final int positionIdx = cursor.getColumnIndexOrThrow(PlaybackStatusTable.COL_YOUTUBE_VIDEO_POSITION);
+                final int finishedIdx = cursor.getColumnIndexOrThrow(PlaybackStatusTable.COL_YOUTUBE_VIDEO_WATCHED);
+                while (cursor.moveToNext()) {
+                    String video_id = cursor.getString(videoIdIdx);
+                    int position = cursor.getInt(positionIdx);
+                    int finished = cursor.getInt(finishedIdx);
+                    VideoWatchedStatus status = new VideoWatchedStatus(position, finished == 1);
+                    playbackHistoryMap.put(video_id, status);
+                }
+            }
 		}
 		if(playbackHistoryMap.get(videoId) == null) {
 			// Requested video has no entry in the database, so create one in the Map. No need to create it in the Database yet - if needed,

@@ -59,32 +59,37 @@ public class SearchHistoryDb extends SQLiteOpenHelperEx {
         // grab all the values from the database, recreate it with the new column, and add the search terms back in.
         // The current timestamp will be used.
 		if(oldVersion == 1 && newVersion == 2) {
-			Cursor cursor = db.query(SearchHistoryTable.TABLE_NAME,
+			try (Cursor cursor = db.query(SearchHistoryTable.TABLE_NAME,
 					new String[] {SearchHistoryTable.COL_SEARCH_ID, SearchHistoryTable.COL_SEARCH_TEXT},
 					null,
 					null,
 					null,
 					null,
-					SearchHistoryTable.COL_SEARCH_ID + " ASC");
-			List<Map<Integer, String>> history = new ArrayList<>();
-			if(cursor.moveToFirst()) {
-				do {
-					int id = cursor.getInt(cursor.getColumnIndex(SearchHistoryTable.COL_SEARCH_ID));
-					String text = cursor.getString(cursor.getColumnIndex(SearchHistoryTable.COL_SEARCH_TEXT));
-					history.add(new HashMap<Integer, String>(){{put(id, text); }});
-				} while (cursor.moveToNext());
-				db.execSQL("DROP TABLE " + SearchHistoryTable.TABLE_NAME);
-				onCreate(db);
-				for(Map<Integer, String> entry : history) {
-					for(Map.Entry<Integer, String> e : entry.entrySet()) {
-						String text = e.getValue();
-						ContentValues values = new ContentValues();
-						values.put(SearchHistoryTable.COL_SEARCH_ID, e.getKey());
-						values.put(SearchHistoryTable.COL_SEARCH_TEXT, text);
-						db.insert(SearchHistoryTable.TABLE_NAME, null, values);
-					}
-				}
-			}
+					SearchHistoryTable.COL_SEARCH_ID + " ASC")) {
+                List<Map<Integer, String>> history = new ArrayList<>();
+                if (cursor.moveToFirst()) {
+                    final int searchIdIdx = cursor.getColumnIndexOrThrow(SearchHistoryTable.COL_SEARCH_ID);
+                    final int searchTxtIdx = cursor.getColumnIndexOrThrow(SearchHistoryTable.COL_SEARCH_TEXT);
+                    do {
+                        int id = cursor.getInt(searchIdIdx);
+                        String text = cursor.getString(searchTxtIdx);
+                        history.add(new HashMap<Integer, String>() {{
+                            put(id, text);
+                        }});
+                    } while (cursor.moveToNext());
+                    db.execSQL("DROP TABLE " + SearchHistoryTable.TABLE_NAME);
+                    onCreate(db);
+                    for (Map<Integer, String> entry : history) {
+                        for (Map.Entry<Integer, String> e : entry.entrySet()) {
+                            String text = e.getValue();
+                            ContentValues values = new ContentValues();
+                            values.put(SearchHistoryTable.COL_SEARCH_ID, e.getKey());
+                            values.put(SearchHistoryTable.COL_SEARCH_TEXT, text);
+                            db.insert(SearchHistoryTable.TABLE_NAME, null, values);
+                        }
+                    }
+                }
+            }
 		}
 	}
 

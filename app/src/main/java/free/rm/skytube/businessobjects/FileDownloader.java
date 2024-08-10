@@ -201,13 +201,12 @@ public abstract class FileDownloader implements Serializable, PermissionsActivit
 				.query(new DownloadManager.Query().setFilterById(downloadId));
 
 		if (cursor != null  &&  cursor.moveToFirst()) {
-			final int columnIndex = cursor.getColumnIndex(DownloadManager.COLUMN_STATUS);
-			downloadSuccessful = (cursor.getInt(columnIndex) == DownloadManager.STATUS_SUCCESSFUL);
+			downloadSuccessful = (cursor.getInt(cursor.getColumnIndexOrThrow(DownloadManager.COLUMN_STATUS)) == DownloadManager.STATUS_SUCCESSFUL);
 
 			if (downloadSuccessful) {
-				downloadedFileUri = Uri.parse(cursor.getString(cursor.getColumnIndex(DownloadManager.COLUMN_LOCAL_URI)));
+				downloadedFileUri = Uri.parse(cursor.getString(cursor.getColumnIndexOrThrow(DownloadManager.COLUMN_LOCAL_URI)));
 			} else {
-				final int columnReason = cursor.getColumnIndex(DownloadManager.COLUMN_REASON);
+				final int columnReason = cursor.getColumnIndexOrThrow(DownloadManager.COLUMN_REASON);
 				final int reason = cursor.getInt(columnReason);
 
 				// output why the download has failed...
