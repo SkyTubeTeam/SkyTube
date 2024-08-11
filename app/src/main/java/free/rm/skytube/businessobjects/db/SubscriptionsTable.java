@@ -41,6 +41,7 @@ public class SubscriptionsTable {
     private static final String COL_SUBSCRIBER_COUNT = "Subscriber_Count";
     public static final Column COL_CATEGORY_ID = new Column("category_id", "INTEGER");
     public static final String COL_LAST_VIDEO_FETCH = "last_video_fetch_time";
+    public static final Column COL_CHANNEL_PK = new Column("channel_pk", "integer");
 
     private static final String ADD_COLUMN = "ALTER TABLE " + TABLE_NAME + " ADD COLUMN ";
 
@@ -50,6 +51,7 @@ public class SubscriptionsTable {
         return "CREATE TABLE " + TABLE_NAME + " (" +
                 COL_ID + " INTEGER PRIMARY KEY ASC, " +
                 COL_CHANNEL_ID + " TEXT UNIQUE NOT NULL, " +
+                COL_CHANNEL_PK.format() + ", " +
                 COL_CATEGORY_ID.format() + ", " +
                 COL_LAST_VISIT_TIME + " TIMESTAMP DEFAULT (strftime('%s', 'now')), " +
                 COL_LAST_VIDEO_FETCH + " INTEGER " +
@@ -85,5 +87,12 @@ public class SubscriptionsTable {
             db.execSQL("update " + TABLE_NAME + " set " + COL_LAST_VIDEO_FETCH + " = ? where " + COL_ID + " = ?", new Object[] {
                     System.currentTimeMillis(), persistentChannel.subscriptionPk() });
         }
+    }
+
+    public static void addChannelIdColumn(SQLiteDatabase db) {
+        SQLiteHelper.addColumn(db, TABLE_NAME, COL_CHANNEL_PK);
+        db.execSQL("update " + TABLE_NAME +
+                " set " + COL_CHANNEL_PK.name() +
+                    " = (select " + LocalChannelTable.COL_ID.name() + " from " + LocalChannelTable.TABLE_NAME + " c where c." + LocalChannelTable.COL_CHANNEL_ID_name + " = " + TABLE_NAME + '.' + COL_CHANNEL_ID + ")");
     }
 }
