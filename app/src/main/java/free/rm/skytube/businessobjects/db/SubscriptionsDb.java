@@ -70,7 +70,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
     private static final String FIND_EMPTY_RETRIEVAL_TS = String.format("SELECT %s,%s FROM %s WHERE %s IS NULL",
 			SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID, SubscriptionsVideosTable.COL_YOUTUBE_VIDEO, SubscriptionsVideosTable.TABLE_NAME, SubscriptionsVideosTable.COL_RETRIEVAL_TS);
 
-    private static final String SUBSCRIBED_CHANNEL_INFO = "SELECT c.Channel_Id,c.Title,c.Thumbnail_Normal_Url,s.Last_Visit_Time,(select max(publish_time) from subscription_videos videos where videos.Channel_Id = s.Channel_Id) as latest_video_ts FROM Subs s,Channel c where s.Channel_Id = c.Channel_Id ";
+    private static final String SUBSCRIBED_CHANNEL_INFO = "SELECT c.Channel_Id,c.Title,c.Thumbnail_Normal_Url,s.Last_Visit_Time,c.Last_Video_TS as latest_video_ts FROM Subs s,Channel c where s.channel_pk = c._Id ";
 	private static final String SUBSCRIBED_CHANNEL_INFO_ORDER_BY = " ORDER BY LOWER(" + LocalChannelTable.COL_TITLE + ") ASC";
 	private static final String SUBSCRIBED_CHANNEL_LIMIT_BY_TITLE = " and LOWER(c." +LocalChannelTable.COL_TITLE + ") like ?";
 
@@ -81,7 +81,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 
 	private static volatile SubscriptionsDb subscriptionsDb = null;
 
-    private static final int DATABASE_VERSION = 17;
+    private static final int DATABASE_VERSION = 18;
 
     private static final String DATABASE_NAME = "subs.db";
 
@@ -103,6 +103,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
         SubscriptionsVideosTable.addNewFlatTable(db, false);
         SubscriptionsVideosTable.addPublishTimeIndex(db);
         db.execSQL(LocalChannelTable.getCreateStatement(true));
+        LocalChannelTable.addChannelIdIndex(db);
         db.execSQL(CategoriesTable.getCreateStatement());
         new CategoryManagement(db).setupDefaultCategories();
     }
@@ -172,6 +173,12 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
             Logger.w(this, "Remove channel title from subscription_videos table");
             SubscriptionsVideosTable.removeChannelTitle(db);
             SubscriptionsVideosTable.addPublishTimeIndex(db);
+        }
+        if (upgrade.executeStep(18)) {
+            Logger.w(this, "Optimize Channel table");
+            LocalChannelTable.addChannelIdIndex(db);
+            SubscriptionsTable.addChannelIdColumn(db);
+            LocalChannelTable.addStateColumn(db);
         }
     }
 
@@ -300,7 +307,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 		SkyTubeApp.nonUiThread();
 		saveChannelVideos(videos, persistentChannel, false);
 
-		return saveSubscription(persistentChannel.channel().getChannelId());
+		return saveSubscription(persistentChannel.channelPk(), persistentChannel.channel().getChannelId());
 	}
 
 	/**
@@ -310,11 +317,12 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 	 *
 	 * @return True if the operation was successful; false otherwise.
 	 */
-	private DatabaseResult saveSubscription(ChannelId channelId) {
+	private DatabaseResult saveSubscription(long channelPk, ChannelId channelId) {
 		SkyTubeApp.nonUiThread();
 
 		ContentValues values = new ContentValues();
 		values.put(SubscriptionsTable.COL_CHANNEL_ID, channelId.getRawId());
+        values.put(SubscriptionsTable.COL_CHANNEL_PK.name(), channelPk);
 
 		SQLiteDatabase db = getWritableDatabase();
 		try {
@@ -481,7 +489,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 			List<YouTubeChannel> subsChannels = new ArrayList<>();
 
 			if (cursor.moveToNext()) {
-				final int colChannelIdNum = cursor.getColumnIndexOrThrow(LocalChannelTable.COL_CHANNEL_ID);
+				final int colChannelIdNum = cursor.getColumnIndexOrThrow(LocalChannelTable.COL_CHANNEL_ID.name());
 				final int colTitle = cursor.getColumnIndexOrThrow(LocalChannelTable.COL_TITLE);
 				final int colDescription = cursor.getColumnIndexOrThrow(LocalChannelTable.COL_DESCRIPTION);
 				final int colBanner = cursor.getColumnIndexOrThrow(LocalChannelTable.COL_BANNER_URL);
@@ -790,7 +798,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
             }
             return new PersistentChannel(channel, channelPk, subPk);
         }
-        values.put(LocalChannelTable.COL_CHANNEL_ID, channel.getChannelId().getRawId());
+        values.put(LocalChannelTable.COL_CHANNEL_ID.name(), channel.getChannelId().getRawId());
         long newPk = db.insert(LocalChannelTable.TABLE_NAME, null, values);
         return new PersistentChannel(channel, newPk, subPk);
     }
@@ -821,7 +829,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 
     public List<ChannelView> getSubscribedChannelsByText(String searchText, boolean sortChannelsAlphabetically) {
 		List<ChannelView> result = new ArrayList<>();
-		try (Cursor cursor = createSubscriptionCursor(searchText, sortChannelsAlphabetically)) {
+		try (Cursor cursor = createSubscriptionCursor(searchText, sortChannelsAlphabetically); Stopwatch s = new Stopwatch("search for "+searchText)) {
 			final int channelId = cursor.getColumnIndexOrThrow(SubscriptionsTable.COL_CHANNEL_ID);
 			final int title = cursor.getColumnIndexOrThrow(LocalChannelTable.COL_TITLE);
 			final int thumbnail = cursor.getColumnIndexOrThrow(LocalChannelTable.COL_THUMBNAIL_NORMAL_URL);
