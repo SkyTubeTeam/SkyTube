@@ -5,8 +5,8 @@
 		<item name="colorPrimary">@color/colorAccent</item>
 		<item name="colorPrimaryDark">@color/colorPrimaryDark</item>
 		<item name="colorAccent">@color/colorAccent</item>
+        <item name="colorSecondary">@color/colorAccent</item>
 
-<!--		<item name="actionBarPopupTheme">@style/ThemeOverlay.AppCompat</item>-->
 		<item name="android:popupMenuStyle">@style/PopupMenu</item>
 		<item name="popupMenuStyle">@style/PopupMenu</item>
 
@@ -31,6 +31,8 @@
         <item name="tabIndicatorHeight">3dp</item>
         <item name="tabMaxWidth">0dp</item>
     </style>
+
+    <style name="RegularTextStyle" parent="@style/TextAppearance.AppCompat.Small"></style>
 
     <!-- *************************************************************************************** -->
 	<!--
@@ -62,7 +64,7 @@
 	<style name="GridTextView" parent="AppTheme">
 		<item name="android:layout_width">match_parent</item>
 		<item name="android:layout_height">wrap_content</item>
-		<item name="android:textAppearance">@style/TextAppearance.AppCompat.Small</item>
+		<item name="android:textAppearance">@style/RegularTextStyle</item>
 		<item name="android:textColor">@color/video_cell_text_main</item>
 	</style>
 
@@ -75,20 +77,20 @@
 		<item name="android:padding">2dp</item>
 		<item name="android:background">#BA111517</item>
 		<item name="android:singleLine">true</item>
-		<item name="android:textAppearance">@style/TextAppearance.AppCompat.Small</item>
+        <item name="android:textAppearance">@style/RegularTextStyle</item>
 	</style>
 
 	<style name="GridDetailsTextView" parent="GridTextView">
 		<item name="android:textColor">@color/video_cell_text_details</item>
 		<item name="android:singleLine">true</item>
-		<item name="android:textAppearance">@style/TextAppearance.AppCompat.Small</item>
+        <item name="android:textAppearance">@style/RegularTextStyle</item>
 	</style>
 
 	<style name="PopupMenu" parent="@android:style/Widget.PopupMenu">
 		<item name="android:popupBackground">@color/popup_menu</item>
 	</style>
 
-	<style name="VideoOptionsTextAppearanceLarge" parent="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Large">
+	<style name="VideoOptionsTextAppearanceLarge" parent="@style/TextAppearance.AppCompat.Widget.PopupMenu.Large">
 		<item name="android:textColor">@color/video_cell_text_main</item>
 	</style>
 
@@ -106,14 +108,12 @@
 		<item name="android:layout_width">wrap_content</item>
 		<item name="android:layout_height">wrap_content</item>
 		<item name="android:textColor">@color/subs_text</item>
-<!--		<item name="android:textAppearance">@style/TextAppearance.AppCompat.Small</item>-->
 	</style>
 
 	<style name="SubscribeButton" parent="AppTheme">
 		<item name="android:layout_width">wrap_content</item>
 		<item name="android:layout_height">wrap_content</item>
 		<item name="android:textColor">@color/subs_text</item>
-<!--		<item name="android:textAppearance">@style/TextAppearance.AppCompat.Small</item>-->
 		<item name="android:minHeight">0dp</item>
 		<item name="android:minWidth">0dp</item>
 		<item name="android:padding">3dp</item>
@@ -143,7 +143,7 @@
 		<item name="android:layout_width">wrap_content</item>
 		<item name="android:layout_height">wrap_content</item>
 		<item name="android:textColor">@color/video_player_drawer_text</item>
-		<item name="android:textAppearance">@style/TextAppearance.AppCompat.Small</item>
+        <item name="android:textAppearance">@style/RegularTextStyle</item>
 	</style>
 
 	<!-- Comments -->
@@ -151,7 +151,7 @@
 		<item name="android:layout_width">wrap_content</item>
 		<item name="android:layout_height">wrap_content</item>
 		<item name="android:textColor">@color/comment_text</item>
-		<item name="android:textAppearance">@style/TextAppearance.AppCompat.Small</item>
+        <item name="android:textAppearance">@style/RegularTextStyle</item>
 	</style>
 
 	<style name="CommentInfoTextView" parent="CommentTextView">
@@ -177,7 +177,7 @@
 		<item name="android:paddingLeft">8dp</item>
 		<item name="android:paddingRight">8dp</item>
 		<item name="android:textColor">#FFBEBEBE</item>
-		<item name="android:textAppearance">@style/TextAppearance.AppCompat.Small</item>
+        <item name="android:textAppearance">@style/RegularTextStyle</item>
 		<item name="android:textStyle">bold</item>
 	</style>
 
@@ -214,7 +214,6 @@
 	</style>
 
 
-
 	<!-- *************************************************************************************** -->
 	<!--
 	 	Channel Browser
@@ -226,12 +225,12 @@
 		<item name="android:textColor">@color/channel_subs</item>
 		<item name="android:background">@color/channel_subscribers_bkg</item>
 		<item name="android:singleLine">true</item>
-		<item name="android:textAppearance">@style/TextAppearance.AppCompat.Small</item>
+        <item name="android:textAppearance">@style/RegularTextStyle</item>
 	</style>
 
 	<style name="ChannelAboutTextView" parent="AppTheme">
 		<item name="android:textColor">@color/channel_about</item>
-		<item name="android:textAppearance">@style/TextAppearance.AppCompat.Small</item>
+        <item name="android:textAppearance">@style/RegularTextStyle</item>
 	</style>
 
 	<style name="PlaylistTitleTextView" parent="ChannelSubsTextView">
@@ -247,7 +246,7 @@
 	 	Subscriptions Feed Tab
 	-->
 
-	<style name="NoSubscriptionsFeedMsgTextView" parent="AppTheme">
+	<style name="NoItemFoundMsgTextView" parent="AppTheme">
 		<item name="android:layout_width">match_parent</item>
 		<item name="android:layout_height">wrap_content</item>
 		<item name="android:gravity">center</item>
@@ -255,7 +254,7 @@
 		<item name="android:layout_marginLeft">20dp</item>
 		<item name="android:layout_marginRight">20dp</item>
 		<item name="android:textColor">@color/feed_message_text</item>
-		<item name="android:textAppearance">@style/TextAppearance.AppCompat.Small</item>
+        <item name="android:textAppearance">@style/RegularTextStyle</item>
 	</style>
 
 	<style name="ImportSubscriptionsButton" parent="AppTheme">
@@ -265,23 +264,6 @@
 		<item name="android:layout_marginTop">20dp</item>
 	</style>
 
-
-	<!-- *************************************************************************************** -->
-	<!--
-	 	Bookmarks Tab
-	-->
-
-	<style name="NoBookmarksMsgTextView" parent="NoSubscriptionsFeedMsgTextView">
-	</style>
-
-
-	<!-- *************************************************************************************** -->
-	<!--
-	 	Downloads Tab
-	-->
-
-	<style name="NoDownloadsMsgTextView" parent="NoSubscriptionsFeedMsgTextView">
-	</style>
 
 
 	<!-- *************************************************************************************** -->
