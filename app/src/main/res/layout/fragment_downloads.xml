@@ -14,6 +14,6 @@
 		android:id="@+id/noDownloadedVideosText"
 		android:visibility="gone"
 		android:text="@string/no_downloaded_videos_text"
-		style="@style/NoDownloadsMsgTextView"/>
+		style="@style/NoItemFoundMsgTextView"/>
 
 </FrameLayout>

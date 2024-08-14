@@ -18,7 +18,7 @@
 		android:background="@color/grid_view_background">
 		<TextView
 			android:text="@string/no_subscriptions_text"
-			style="@style/NoSubscriptionsFeedMsgTextView"/>
+			style="@style/NoItemFoundMsgTextView"/>
 
 		<Button
 			android:id="@+id/importSubscriptionsButton"
