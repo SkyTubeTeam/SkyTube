@@ -164,7 +164,7 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
 
     @Override
     public void onSubscriptionRefreshStarted() {
-        if (gridviewBinding.swipeRefreshLayout != null) {
+        if (gridviewBinding != null && gridviewBinding.swipeRefreshLayout != null) {
             gridviewBinding.swipeRefreshLayout.setRefreshing(true);
         }
     }
@@ -177,7 +177,7 @@ public class SubscriptionsFeedFragment extends VideosGridFragment implements Get
     @Override
     public void onSubscriptionRefreshFinished() {
         // Remove the progress bar(s)
-        if (gridviewBinding.swipeRefreshLayout != null) {
+        if (gridviewBinding != null && gridviewBinding.swipeRefreshLayout != null) {
             gridviewBinding.swipeRefreshLayout.setRefreshing(false);
         }
         hideFetchingVideosDialog();
