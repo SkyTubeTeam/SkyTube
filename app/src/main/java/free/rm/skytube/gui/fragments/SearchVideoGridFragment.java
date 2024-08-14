@@ -34,6 +34,7 @@ import androidx.appcompat.widget.SearchView;
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.databinding.FragmentSearchBinding;
+import free.rm.skytube.databinding.SearchActionbarBinding;
 import free.rm.skytube.gui.businessobjects.adapters.VideoGridAdapter;
 
 /**
@@ -46,6 +47,8 @@ public class SearchVideoGridFragment extends VideosGridFragment {
 	private String searchQuery = "";
 	/** Edit searched query through long press on search query**/
 	private SearchView editSearchView;
+    private SearchActionbarBinding searchActionbar;
+    private MenuItem   searchMenuItem;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,6 +61,8 @@ public class SearchVideoGridFragment extends VideosGridFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // inflate the layout for this fragment
+        searchActionbar = SearchActionbarBinding.inflate(inflater);
+
         FragmentSearchBinding binding = FragmentSearchBinding.inflate(inflater, container, false);
         initSearch(container.getContext(), videoGridAdapter, binding);
 
@@ -68,17 +73,21 @@ public class SearchVideoGridFragment extends VideosGridFragment {
         initVideos(context, videoGridAdapterParam, binding.videosGridview);
         // setup the toolbar/actionbar
         setSupportActionBar(binding.toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        // set the action bar's title
         ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null)
-            actionBar.setTitle(searchQuery);
+        actionBar.setCustomView(searchActionbar.getRoot());
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayShowCustomEnabled(true);
+        actionBar.setDisplayShowTitleEnabled(false);
+
+        searchActionbar.actionbarTitle.setText(searchQuery);
+        // make searched query editable on touching the textView
+        searchActionbar.actionbarTitle.setOnClickListener(click -> {
+            showSearchArea(true);
+        });
 
         //makes searched query editable on long press
         binding.toolbar.setOnLongClickListener(view1 -> {
-            editSearchView.setIconified(false);
-            editSearchView.setQuery(searchQuery,false);
+            showSearchArea(true);
             return false;
         });
         // the app will call onCreateOptionsMenu() for when the user wants to search
@@ -88,9 +97,25 @@ public class SearchVideoGridFragment extends VideosGridFragment {
         videoGridAdapter.initializeList();
     }
 
+    private void showSearchArea(boolean visible) {
+        getSupportActionBar().setDisplayShowCustomEnabled(!visible);
+        if (visible) {
+            searchMenuItem.expandActionView();
+        }
+    }
+
+    private void updateSearchView(boolean visible) {
+        if (visible) {
+            editSearchView.onActionViewExpanded();
+            editSearchView.setQuery(searchQuery, false);
+        } else {
+            editSearchView.setIconified(true);
+        }
+    }
+
 	@Override
 	public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-		MenuItem   searchMenuItem = menu.findItem(R.id.menu_search);
+		searchMenuItem = menu.findItem(R.id.menu_search);
 		SearchView searchView = (SearchView) searchMenuItem.getActionView();
 		editSearchView = searchView;
 		// will be called when the user clicks on the actionbar's search icon
@@ -98,18 +123,17 @@ public class SearchVideoGridFragment extends VideosGridFragment {
 			@Override
 			public boolean onMenuItemActionExpand(MenuItem item) {
 				// if the user has previously search, then copy the query into the search view
-				if (searchQuery != null  &&  !searchQuery.isEmpty()) {
-					searchView.onActionViewExpanded();
-					searchView.setQuery(searchQuery, false);
-				}
-
+                if (searchQuery != null  &&  !searchQuery.isEmpty()) {
+                    updateSearchView(true);
+                }
 				// now expand the search view
 				return true;
 			}
 
 			@Override
 			public boolean onMenuItemActionCollapse(MenuItem item) {
-				return true;
+                showSearchArea(false);
+                return true;
 			}
 		});
 	}
