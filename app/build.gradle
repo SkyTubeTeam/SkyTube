@@ -101,10 +101,10 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
 
 /** AndroidX **/
-    implementation 'androidx.appcompat:appcompat:1.3.1'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.1'
-    implementation 'androidx.core:core:1.6.0'
+    implementation 'androidx.core:core:1.9.0'
     implementation 'androidx.media:media:1.3.1'
     implementation 'androidx.multidex:multidex:2.0.1' // as we have over 65536 methods...
     implementation 'androidx.preference:preference:1.1.1'
