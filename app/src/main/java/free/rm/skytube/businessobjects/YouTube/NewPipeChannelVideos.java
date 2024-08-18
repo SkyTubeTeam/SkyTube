@@ -18,6 +18,7 @@
 
 import java.util.Objects;
 
+import free.rm.skytube.businessobjects.YouTube.newpipe.ChannelId;
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeException;
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
 import free.rm.skytube.businessobjects.YouTube.newpipe.VideoPager;
@@ -27,11 +28,11 @@ import free.rm.skytube.businessobjects.YouTube.newpipe.VideoPager;
  */
 public class NewPipeChannelVideos extends NewPipeVideos {
 
-    private String channelId;
+    private ChannelId channelId;
 
     // Important, this is called from the channel tab
     public void setQuery(String query) {
-        this.channelId = Objects.requireNonNull(query, "query missing");
+        this.channelId = new ChannelId(query);
     }
 
     @Override

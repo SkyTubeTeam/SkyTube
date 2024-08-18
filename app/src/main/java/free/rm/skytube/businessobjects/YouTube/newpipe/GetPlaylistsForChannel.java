@@ -104,7 +104,7 @@ public class GetPlaylistsForChannel implements YouTubeTasks.ChannelPlaylistFetch
     private synchronized Paging getPaging() throws NewPipeException, ParsingException {
         SkyTubeApp.nonUiThread();
         if (paging == null) {
-            NewPipeService.ChannelWithExtractor cwe = NewPipeService.get().getChannelWithExtractor(channel.getId());
+            NewPipeService.ChannelWithExtractor cwe = NewPipeService.get().getChannelWithExtractor(channel.getChannelId());
             paging = new Paging(cwe.channel, cwe.findPlaylistTab());
         }
         return paging;

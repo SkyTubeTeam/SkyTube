@@ -29,9 +29,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
-import java.util.HashSet;
 import java.util.Iterator;
-import java.util.Set;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.EventBus;
@@ -39,7 +37,6 @@ import free.rm.skytube.businessobjects.YouTube.POJOs.ChannelView;
 import free.rm.skytube.businessobjects.YouTube.newpipe.ChannelId;
 import free.rm.skytube.businessobjects.db.DatabaseTasks;
 import free.rm.skytube.databinding.SubChannelBinding;
-import free.rm.skytube.gui.businessobjects.MainActivityListener;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 
 /**
@@ -174,7 +171,22 @@ public class SubsAdapter extends RecyclerViewAdapterEx<ChannelView, SubsAdapter.
 					.apply(new RequestOptions().placeholder(R.drawable.channel_thumbnail_default))
 					.into(binding.subChannelThumbnailImageView);
 
-			binding.subChannelNameTextView.setText(channel.getTitle());
+            final String prefix;
+            switch (channel.status()) {
+                case ACCOUNT_TERMINATED: {
+                    prefix = itemView.getContext().getString(R.string.status_account_terminated);
+                    break;
+                }
+                case NOT_EXISTS: {
+                    prefix = itemView.getContext().getString(R.string.status_not_exists);
+                    break;
+                }
+                default: {
+                    prefix = "";
+                    break;
+                }
+            }
+			binding.subChannelNameTextView.setText(prefix + channel.getTitle());
 			binding.subChannelNewVideosNotification.setVisibility(channel.isNewVideosSinceLastVisit() ? View.VISIBLE : View.INVISIBLE);
 			this.channel = channel;
 		}
