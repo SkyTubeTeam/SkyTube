@@ -82,6 +82,12 @@ public class SubscriptionsTable {
                 ") select _id," + COL_CHANNEL_ID + "," + COL_CATEGORY_ID.name() + "," + COL_LAST_VISIT_TIME + "," + COL_LAST_CHECK_TIME );
     }
 
+    /**
+     * Updates the given channel's last fetch time with the current timestamp.
+     *
+     * @param persistentChannel	The channel
+     *
+     */
     public static void updateLastVideoFetchTimestamps(SQLiteDatabase db, PersistentChannel persistentChannel) {
         if (persistentChannel.isSubscribed()) {
             db.execSQL("update " + TABLE_NAME + " set " + COL_LAST_VIDEO_FETCH + " = ? where " + COL_ID + " = ?", new Object[] {

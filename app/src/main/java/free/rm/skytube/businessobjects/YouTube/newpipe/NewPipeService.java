@@ -209,7 +209,7 @@ public class NewPipeService {
      * @throws ExtractionException
      * @throws IOException
      */
-    private List<YouTubeVideo> getChannelVideos(String channelId) throws NewPipeException {
+    private List<YouTubeVideo> getChannelVideos(ChannelId channelId) throws NewPipeException {
         SkyTubeApp.nonUiThread();
         VideoPagerWithChannel pager = getChannelPager(channelId);
         List<YouTubeVideo> result = pager.getNextPageAsVideosAndUpdateChannel(null).channel().getYouTubeVideos();
@@ -255,7 +255,7 @@ public class NewPipeService {
         } catch (IOException | ExtractionException | RuntimeException | NewPipeException e) {
             Logger.e(this, "Unable to get videos from a feed " + channelId + " : "+ e.getMessage(), e);
         }
-        return getChannelVideos(channelId.getRawId());
+        return getChannelVideos(channelId);
     }
 
     public VideoPager getTrending() throws NewPipeException {
@@ -269,7 +269,7 @@ public class NewPipeService {
         }
     }
 
-    public VideoPagerWithChannel getChannelPager(String channelId) throws NewPipeException {
+    public VideoPagerWithChannel getChannelPager(ChannelId channelId) throws NewPipeException {
         try {
             Logger.e(this, "fetching channel info: "+ channelId);
             ChannelWithExtractor channelExtractor = getChannelWithExtractor(channelId);
@@ -279,7 +279,7 @@ public class NewPipeService {
         }
     }
 
-    public ChannelWithExtractor getChannelWithExtractor(String channelId) throws NewPipeException {
+    public ChannelWithExtractor getChannelWithExtractor(ChannelId channelId) throws NewPipeException {
         try {
             ChannelExtractor channelExtractor = getChannelExtractor(channelId);
 
@@ -320,7 +320,7 @@ public class NewPipeService {
      */
     public PersistentChannel getChannelDetails(ChannelId channelId, PersistentChannel persistentChannel) throws NewPipeException {
         Logger.i(this, "Fetching channel details for " + channelId);
-        VideoPagerWithChannel pager = getChannelPager(channelId.getRawId());
+        VideoPagerWithChannel pager = getChannelPager(channelId);
         // get the channel, and add all the videos from the first page
         try {
             return pager.getNextPageAsVideosAndUpdateChannel(persistentChannel);
@@ -359,11 +359,11 @@ public class NewPipeService {
         }
     }
 
-    private ChannelExtractor getChannelExtractor(String channelId)
+    private ChannelExtractor getChannelExtractor(ChannelId channelId)
             throws ExtractionException, IOException {
         // Extract from it
         ChannelExtractor channelExtractor = streamingService
-                .getChannelExtractor(getListLinkHandler(Objects.requireNonNull(channelId, "channelId")));
+                .getChannelExtractor(getListLinkHandler(Objects.requireNonNull(channelId, "channelId").getRawId()));
         channelExtractor.fetchPage();
         return channelExtractor;
     }

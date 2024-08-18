@@ -26,6 +26,7 @@ import free.rm.skytube.businessobjects.YouTube.VideoBlocker;
 import free.rm.skytube.businessobjects.YouTube.newpipe.ChannelId;
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeException;
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
+import free.rm.skytube.businessobjects.model.Status;
 import free.rm.skytube.gui.businessobjects.views.ChannelSubscriber;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Completable;
@@ -79,7 +80,15 @@ public class DatabaseTasks {
             needsRefresh = persistentChannel.channel().getLastCheckTime() < System.currentTimeMillis() - (24 * 60 * 60 * 1000L);
         }
         if (needsRefresh && SkyTubeApp.isConnected(context)) {
-            return NewPipeService.get().getChannelDetails(channelId, persistentChannel);
+            try {
+                return NewPipeService.get().getChannelDetails(channelId, persistentChannel);
+            } catch (NewPipeException newPipeException) {
+                if (persistentChannel != null && persistentChannel.status() != Status.OK) {
+                    Log.e(TAG, "Channel is blocked/terminated - and kept that way: "+ persistentChannel+", message:"+newPipeException.getMessage());
+                    return persistentChannel;
+                }
+                throw newPipeException;
+            }
         }
         return persistentChannel;
     }

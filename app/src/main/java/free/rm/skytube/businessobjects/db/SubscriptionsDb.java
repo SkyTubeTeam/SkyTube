@@ -44,6 +44,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import free.rm.skytube.app.SkyTubeApp;
@@ -54,6 +55,7 @@ import free.rm.skytube.businessobjects.YouTube.POJOs.PersistentChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.YouTube.newpipe.ChannelId;
+import free.rm.skytube.businessobjects.model.Status;
 import io.reactivex.rxjava3.core.Maybe;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -70,11 +72,11 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
     private static final String FIND_EMPTY_RETRIEVAL_TS = String.format("SELECT %s,%s FROM %s WHERE %s IS NULL",
 			SubscriptionsVideosTable.COL_YOUTUBE_VIDEO_ID, SubscriptionsVideosTable.COL_YOUTUBE_VIDEO, SubscriptionsVideosTable.TABLE_NAME, SubscriptionsVideosTable.COL_RETRIEVAL_TS);
 
-    private static final String SUBSCRIBED_CHANNEL_INFO = "SELECT c.Channel_Id,c.Title,c.Thumbnail_Normal_Url,s.Last_Visit_Time,c.Last_Video_TS as latest_video_ts FROM Subs s,Channel c where s.channel_pk = c._Id ";
+    private static final String SUBSCRIBED_CHANNEL_INFO = "SELECT c.Channel_Id,c.Title,c.Thumbnail_Normal_Url,s.Last_Visit_Time,c.Last_Video_TS as latest_video_ts,c.state FROM Subs s,Channel c where s.channel_pk = c._Id ";
 	private static final String SUBSCRIBED_CHANNEL_INFO_ORDER_BY = " ORDER BY LOWER(" + LocalChannelTable.COL_TITLE + ") ASC";
 	private static final String SUBSCRIBED_CHANNEL_LIMIT_BY_TITLE = " and LOWER(c." +LocalChannelTable.COL_TITLE + ") like ?";
 
-    private static final String GET_ALL_SUBSCRIBED_CHANNEL_ID = "SELECT "+SubscriptionsTable.COL_CHANNEL_ID + " FROM "+SubscriptionsTable.TABLE_NAME;
+    private static final String GET_ALL_SUBSCRIBED_CHANNEL_ID = "SELECT s." + SubscriptionsTable.COL_CHANNEL_ID + " FROM " + SubscriptionsTable.TABLE_NAME + " s, " + LocalChannelTable.TABLE_NAME + " c where s.channel_pk = c._Id and c." + LocalChannelTable.COL_STATE.name() + " = 0";
 	private static final String IS_SUBSCRIBED_QUERY = String.format("SELECT EXISTS(SELECT %s FROM %s WHERE %s =?) AS VAL ", SubscriptionsTable.COL_ID, SubscriptionsTable.TABLE_NAME, SubscriptionsTable.COL_CHANNEL_ID);
 
     private static final String GET_PK_FROM_CHANNEL_ID = "SELECT " + SubscriptionsTable.COL_ID + " FROM " + SubscriptionsTable.TABLE_NAME + " WHERE " + SubscriptionsTable.COL_CHANNEL_ID + " = ?";
@@ -307,7 +309,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 		SkyTubeApp.nonUiThread();
 		saveChannelVideos(videos, persistentChannel, false);
 
-		return saveSubscription(persistentChannel.channelPk(), persistentChannel.channel().getChannelId());
+		return saveSubscription(persistentChannel.channelPk(), persistentChannel.getChannelId());
 	}
 
 	/**
@@ -352,7 +354,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 	 */
 	public DatabaseResult unsubscribe(PersistentChannel channel) {
 		SkyTubeApp.nonUiThread();
-        Logger.i(this, "unsubscribing subs_id= %s, channel_id = %s, channel_pk = %s", channel.subscriptionPk(), channel.channel().getChannelId(), channel.channelPk());
+        Logger.i(this, "unsubscribing subs_id= %s, channel_id = %s, channel_pk = %s", channel.subscriptionPk(), channel.getChannelId(), channel.channelPk());
         // delete any feed videos pertaining to this channel
         getWritableDatabase().delete(SubscriptionsVideosTable.TABLE_NAME_V2,
                 SubscriptionsVideosTable.COL_SUBS_ID.name() + " = ?",
@@ -416,7 +418,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
     private ContentValues convertToContentValues(final YouTubeVideo video, @Nullable PersistentChannel persistentChannel) {
         ContentValues values = new ContentValues();
         if (persistentChannel != null) {
-            ChannelId chId = persistentChannel.channel().getChannelId();
+            ChannelId chId = persistentChannel.getChannelId();
             values.put(SubscriptionsVideosTable.COL_CHANNEL_ID_V2.name(), chId.getRawId());
             values.put(SubscriptionsVideosTable.COL_SUBS_ID.name(), persistentChannel.subscriptionPk());
             values.put(SubscriptionsVideosTable.COL_CHANNEL_PK.name(), persistentChannel.channelPk());
@@ -447,6 +449,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
         }
         return values;
     }
+
     public int setPublishTimestamp(YouTubeVideo video) {
         ContentValues values = new ContentValues();
         values.put(SubscriptionsVideosTable.COL_PUBLISH_TIME.name(), video.getPublishTimestamp());
@@ -474,7 +477,19 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 				.subscribeOn(Schedulers.io());
 	}
 
-	/**
+    public void setChannelState(@NonNull PersistentChannel channel, @NonNull Status status) {
+        Logger.i(this, "Set channel %s pk=%s, id=%s state to %s", channel.channel().getTitle(), channel.channelPk(), channel.getChannelId(), status);
+        SkyTubeApp.nonUiThread();
+        LocalChannelTable.updateChannelStatus(getWritableDatabase(), channel.getChannelId(), status);
+    }
+
+    public void setChannelState(@NonNull ChannelId channelId, @NonNull Status status) {
+        Logger.i(this, "Set channel id=%s state to %s", channelId, status);
+        SkyTubeApp.nonUiThread();
+        LocalChannelTable.updateChannelStatus(getWritableDatabase(), channelId, status);
+    }
+
+    /**
 	 * Returns a list of channels that the user subscribed to, without accessing the network
 	 *
 	 *
@@ -559,29 +574,6 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
         }).subscribeOn(Schedulers.io());
     }
     
-    /**
-     * Updates the given channel's last visit time.
-     *
-     * @param channelId	Channel ID
-     *
-     * @return	last visit time, if the update was successful;  -1 otherwise.
-     */
-    public long updateLastVideoFetch(ChannelId channelId) {
-        SQLiteDatabase	db = getWritableDatabase();
-        long			currentTime = System.currentTimeMillis();
-
-        ContentValues values = new ContentValues();
-        values.put(SubscriptionsTable.COL_LAST_VIDEO_FETCH, currentTime);
-
-        int count = db.update(
-                SubscriptionsTable.TABLE_NAME,
-                values,
-                SubscriptionsTable.COL_CHANNEL_ID + " = ?",
-                new String[]{channelId.getRawId()});
-
-        return (count > 0 ? currentTime : -1);
-    }
-
     private boolean hasVideo(YouTubeVideo video) {
         return SQLiteHelper.executeQueryForInteger(getReadableDatabase(), HAS_VIDEO_QUERY, new String[]{video.getId()}, 0) > 0;
     }
@@ -737,10 +729,11 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 				String banner = cursor.getString(cursor.getColumnIndexOrThrow(LocalChannelTable.COL_BANNER_URL));
                 long subscriberCount = SQLiteHelper.getLong(cursor, LocalChannelTable.COL_SUBSCRIBER_COUNT);
                 long lastCheckTs = SQLiteHelper.getLong(cursor, LocalChannelTable.COL_LAST_CHECK_TS);
+                Status statusCode = getStatusCode(cursor);
                 // TODO: use
                 Long lastVideoTs = SQLiteHelper.getOptionalLong(cursor, LocalChannelTable.COL_LAST_VIDEO_TS);
                 YouTubeChannel channel = new YouTubeChannel(channelId.getRawId(), title, description, thumbnail, banner, subscriberCount, subscriptionPk != null, -1, lastCheckTs, null, Collections.emptyList());
-                return new PersistentChannel(channel, channelPk, subscriptionPk);
+                return new PersistentChannel(channel, channelPk, subscriptionPk, statusCode);
             }
 		}
 		return null;
@@ -755,6 +748,10 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
     public PersistentChannel cacheChannel(@Nullable PersistentChannel persistentChannel, YouTubeChannel channel) {
         SQLiteDatabase db = getWritableDatabase();
         return cacheChannel(db, persistentChannel, channel);
+    }
+
+    private Status getStatusCode(Cursor cursor) {
+        return Status.lookup(SQLiteHelper.getLong(cursor, LocalChannelTable.COL_STATE.name()));
     }
 
     private String[] toArray(Object obj) {
@@ -778,10 +775,13 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
         ContentValues values = toContentValues(channel);
 
         final Long channelPk;
+        final Status status;
         if (persistentChannel != null) {
             channelPk = persistentChannel.channelPk();
+            status = persistentChannel.status();
         } else {
             channelPk = getChannelPk(db, channel.getChannelId());
+            status = Status.OK;
         }
         Long subPk = persistentChannel != null ? persistentChannel.subscriptionPk() : null;
 
@@ -796,11 +796,11 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
             if (count != 1) {
                 throw new IllegalStateException("Unable to update channel " + channel + ", with pk= " + channelPk);
             }
-            return new PersistentChannel(channel, channelPk, subPk);
+            return new PersistentChannel(channel, channelPk, subPk, status);
         }
         values.put(LocalChannelTable.COL_CHANNEL_ID.name(), channel.getChannelId().getRawId());
         long newPk = db.insert(LocalChannelTable.TABLE_NAME, null, values);
-        return new PersistentChannel(channel, newPk, subPk);
+        return new PersistentChannel(channel, newPk, subPk, status);
     }
 
     private static ContentValues toContentValues(YouTubeChannel channel) {
@@ -835,11 +835,13 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 			final int thumbnail = cursor.getColumnIndexOrThrow(LocalChannelTable.COL_THUMBNAIL_NORMAL_URL);
 			final int colLastVisit = cursor.getColumnIndexOrThrow(SubscriptionsTable.COL_LAST_VISIT_TIME);
 			final int colLatestVideoTs = cursor.getColumnIndexOrThrow("latest_video_ts");
+            final int colStatus = cursor.getColumnIndexOrThrow(LocalChannelTable.COL_STATE.name());
 			while(cursor.moveToNext()) {
 				Long lastVisit = cursor.getLong(colLastVisit);
 				Long latestVideoTs = cursor.getLong(colLatestVideoTs);
 				boolean hasNew = (latestVideoTs != null && (lastVisit == null || latestVideoTs > lastVisit));
-				result.add(new ChannelView(new ChannelId(cursor.getString(channelId)), cursor.getString(title), cursor.getString(thumbnail), hasNew));
+                Status status = Status.lookup(cursor.getInt(colStatus));
+				result.add(new ChannelView(new ChannelId(cursor.getString(channelId)), cursor.getString(title), cursor.getString(thumbnail), hasNew, status));
 			}
 			return result;
 		}

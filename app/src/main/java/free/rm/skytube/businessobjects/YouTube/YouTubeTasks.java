@@ -10,6 +10,8 @@ import androidx.annotation.Nullable;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import org.schabi.newpipe.extractor.StreamingService;
+import org.schabi.newpipe.extractor.exceptions.AccountTerminatedException;
+import org.schabi.newpipe.extractor.exceptions.ContentNotAvailableException;
 import org.schabi.newpipe.extractor.exceptions.ExtractionException;
 import org.schabi.newpipe.extractor.exceptions.ReCaptchaException;
 
@@ -42,8 +44,10 @@ import free.rm.skytube.businessobjects.YouTube.newpipe.ContentId;
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeException;
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
 import free.rm.skytube.businessobjects.YouTube.newpipe.PlaylistPager;
+import free.rm.skytube.businessobjects.db.LocalChannelTable;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 import free.rm.skytube.businessobjects.interfaces.GetDesiredStreamListener;
+import free.rm.skytube.businessobjects.model.Status;
 import free.rm.skytube.gui.businessobjects.adapters.PlaylistsGridAdapter;
 import free.rm.skytube.gui.businessobjects.adapters.VideoGridAdapter;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
@@ -203,8 +207,20 @@ public class YouTubeTasks {
             });
             return videos;
         } catch (NewPipeException e) {
-            Log.e(TAG, "Error during fetching channel page for " + channelId + ",msg:" + e.getMessage(), e);
+            handleNewPipeException(channelId, e);
             return Collections.emptyList();
+        }
+    }
+
+    private static void handleNewPipeException(@NonNull ChannelId channelId, @NonNull NewPipeException e) {
+        if (e.getCause() instanceof AccountTerminatedException) {
+            Log.e(TAG, "Account terminated for "+ channelId +" error: "+e.getMessage(), e);
+            SubscriptionsDb.getSubscriptionsDb().setChannelState(channelId, Status.ACCOUNT_TERMINATED);
+        } else if (e.getCause() instanceof ContentNotAvailableException) {
+            Log.e(TAG, "Channel doesn't exists "+ channelId +" error: "+e.getMessage(), e);
+            SubscriptionsDb.getSubscriptionsDb().setChannelState(channelId, Status.NOT_EXISTS);
+        } else {
+            Log.e(TAG, "Error during fetching channel page for " + channelId + ",msg:" + e.getMessage(), e);
         }
     }
 

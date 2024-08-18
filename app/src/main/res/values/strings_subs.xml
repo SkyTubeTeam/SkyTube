@@ -30,4 +30,7 @@
 	<string name="failed_to_import_subscriptions">Could not import your YouTube subscriptions.</string>
 
 	<string name="about">About</string>
+    <string name="status_not_exists">[Deleted] </string>
+    <string name="status_account_terminated">[Terminated] </string>
+
 </resources>

@@ -16,19 +16,34 @@
  */
 package free.rm.skytube.businessobjects.YouTube.POJOs;
 
+import java.util.Objects;
+
+import free.rm.skytube.businessobjects.YouTube.newpipe.ChannelId;
+import free.rm.skytube.businessobjects.model.Status;
+
 public final class PersistentChannel {
     final YouTubeChannel channel;
     final long channelPk;
     final Long subscriptionPk;
+    final Status status;
 
-    public PersistentChannel(YouTubeChannel channel, long channelPk, Long subscriptionPk) {
-        this.channel = channel;
+    public PersistentChannel(YouTubeChannel channel, long channelPk, Long subscriptionPk, Status status) {
+        this.channel = Objects.requireNonNull(channel, "channel");
         this.channelPk = channelPk;
         this.subscriptionPk = subscriptionPk;
+        this.status = status;
     }
 
     public YouTubeChannel channel() {
         return channel;
+    }
+
+    public Status status() {
+        return status;
+    }
+
+    public ChannelId getChannelId() {
+        return channel.getChannelId();
     }
 
     public long channelPk() {
@@ -45,10 +60,10 @@ public final class PersistentChannel {
 
     public PersistentChannel with(YouTubeChannel newInstance) {
         newInstance.setUserSubscribed(isSubscribed());
-        return new PersistentChannel(newInstance, channelPk, subscriptionPk);
+        return new PersistentChannel(newInstance, channelPk, subscriptionPk, status);
     }
 
     public PersistentChannel withSubscriptionPk(Long newSubscriptionPk) {
-        return new PersistentChannel(channel, channelPk, newSubscriptionPk);
+        return new PersistentChannel(channel, channelPk, newSubscriptionPk, status);
     }
 }

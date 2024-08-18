@@ -19,13 +19,18 @@ package free.rm.skytube.businessobjects.db;
 
 import android.database.sqlite.SQLiteDatabase;
 
+import androidx.annotation.NonNull;
+
 import com.github.skytube.components.utils.Column;
 import com.github.skytube.components.utils.SQLiteHelper;
 import com.google.common.base.Joiner;
 
 import free.rm.skytube.businessobjects.YouTube.POJOs.PersistentChannel;
+import free.rm.skytube.businessobjects.YouTube.newpipe.ChannelId;
+import free.rm.skytube.businessobjects.model.Status;
 
 public class LocalChannelTable {
+
     public static final String TABLE_NAME = "Channel";
     public static final String COL_CHANNEL_ID_name = "Channel_Id";
     public static final String COL_LAST_VIDEO_TS = "Last_Video_TS";
@@ -75,6 +80,11 @@ public class LocalChannelTable {
     public static void updateLatestVideoTimestamp(SQLiteDatabase db, PersistentChannel persistentChannel, long latestPublishTimestamp) {
         db.execSQL("update " + TABLE_NAME + " set " + COL_LAST_VIDEO_TS + " = max(?, coalesce(" + COL_LAST_VIDEO_TS + ",0)) where " + COL_ID.name() + " = ?", new Object[]{
                 latestPublishTimestamp, persistentChannel.subscriptionPk()});
+    }
+
+    public static void updateChannelStatus(SQLiteDatabase db, @NonNull ChannelId channelId, @NonNull Status status) {
+        db.execSQL("update " + TABLE_NAME + " set " + COL_STATE.name() + " = ? where " + COL_CHANNEL_ID.name() + " = ?",
+                new Object[] { status.code, channelId.getRawId() });
     }
 
     public static void addChannelIdIndex(SQLiteDatabase db) {

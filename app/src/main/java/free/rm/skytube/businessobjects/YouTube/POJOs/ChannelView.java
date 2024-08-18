@@ -17,18 +17,21 @@
 package free.rm.skytube.businessobjects.YouTube.POJOs;
 
 import free.rm.skytube.businessobjects.YouTube.newpipe.ChannelId;
+import free.rm.skytube.businessobjects.model.Status;
 
 public class ChannelView {
     private final ChannelId id;
     private final String title;
     private final String thumbnailUrl;
     private boolean newVideosSinceLastVisit;
+    private final Status status;
 
-    public ChannelView(ChannelId id, String title, String thumbnailUrl, boolean newVideosSinceLastVisit) {
+    public ChannelView(ChannelId id, String title, String thumbnailUrl, boolean newVideosSinceLastVisit, Status status) {
         this.id = id;
         this.title = title;
         this.thumbnailUrl = thumbnailUrl;
         this.newVideosSinceLastVisit = newVideosSinceLastVisit;
+        this.status = status;
     }
 
     public ChannelId getId() {
@@ -45,6 +48,10 @@ public class ChannelView {
 
     public boolean isNewVideosSinceLastVisit() {
         return newVideosSinceLastVisit;
+    }
+
+    public Status status() {
+        return status;
     }
 
     public void setNewVideosSinceLastVisit(boolean newVideosSinceLastVisit) {
