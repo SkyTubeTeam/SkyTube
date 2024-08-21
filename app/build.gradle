@@ -123,7 +123,7 @@ dependencies {
 /**** Frontend (UI-related) ****/
 
     // Old SlidingDrawer widget component but improved
-    implementation 'com.github.moraisigor:slidingdrawer:1.7.1'
+    implementation 'com.github.SkyTubeTeam:SlidingDrawer:1.7.1'
 
     // Image loading and caching library
     def glideVersion = '4.15.0'

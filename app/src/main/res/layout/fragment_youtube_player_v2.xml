@@ -57,7 +57,7 @@
 	<!--
 		VIDEO DESCRIPTION / INFO
 	-->
-	<hollowsoft.slidingdrawer.SlidingDrawer
+	<com.github.skytubeteam.slidingdrawer.SlidingDrawer
 		android:id="@+id/des_drawer"
 		android:layout_width="match_parent"
 		android:layout_height="@dimen/description_drawer_height"
@@ -80,13 +80,13 @@
 			android:padding="16dp"
 			android:gravity="left"
 			layout="@layout/video_description" />
-	</hollowsoft.slidingdrawer.SlidingDrawer>
+	</com.github.skytubeteam.slidingdrawer.SlidingDrawer>
 
 
 	<!--
 		COMMENTS
 	-->
-	<hollowsoft.slidingdrawer.SlidingDrawer
+	<com.github.skytubeteam.slidingdrawer.SlidingDrawer
 		android:id="@+id/comments_drawer"
 		android:layout_width="@dimen/comments_drawer_width"
 		android:layout_height="match_parent"
@@ -144,7 +144,7 @@
 				android:layout_centerInParent="true"
 				style="@style/LoadingProgressBar"/>
 		</RelativeLayout>
-	</hollowsoft.slidingdrawer.SlidingDrawer>
+	</com.github.skytubeteam.slidingdrawer.SlidingDrawer>
 
 
 </FrameLayout>
