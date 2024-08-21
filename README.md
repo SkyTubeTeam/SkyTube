@@ -117,3 +117,8 @@ Help improve SkyTube by [translating](https://github.com/SkyTubeTeam/SkyTube/wik
 
 This project is not affiliated with YouTube™ or any of its partners and/or products.
 YouTube™ and Android™ are registered trademarks of Google Inc.
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=SkyTubeTeam/SkyTube&type=Date)](https://star-history.com/#SkyTubeTeam/SkyTube&Date)
+
