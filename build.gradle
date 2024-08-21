@@ -5,7 +5,6 @@ buildscript {
     ext.buildNumber = 50
     repositories {
         google()
-        jcenter()
         mavenCentral()
         maven { url "https://jitpack.io" } // for lib extractor
     }
@@ -22,7 +21,6 @@ buildscript {
 allprojects {
     repositories {
         google()
-        jcenter()
         mavenCentral()
         maven { url "https://jitpack.io" } // for lib extractor
     }
