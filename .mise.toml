@@ -1,0 +1,3 @@
+[tools]
+java = "temurin-17"
+gradle = "8.10"
