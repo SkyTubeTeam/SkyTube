@@ -477,12 +477,6 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 				.subscribeOn(Schedulers.io());
 	}
 
-    public void setChannelState(@NonNull PersistentChannel channel, @NonNull Status status) {
-        Logger.i(this, "Set channel %s pk=%s, id=%s state to %s", channel.channel().getTitle(), channel.channelPk(), channel.getChannelId(), status);
-        SkyTubeApp.nonUiThread();
-        LocalChannelTable.updateChannelStatus(getWritableDatabase(), channel.getChannelId(), status);
-    }
-
     public void setChannelState(@NonNull ChannelId channelId, @NonNull Status status) {
         Logger.i(this, "Set channel id=%s state to %s", channelId, status);
         SkyTubeApp.nonUiThread();
