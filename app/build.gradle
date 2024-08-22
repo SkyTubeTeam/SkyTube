@@ -86,6 +86,7 @@ android {
     }
     buildFeatures {
         viewBinding true
+        buildConfig true
     }
     lint {
         abortOnError false
