@@ -50,11 +50,6 @@ public class ChromecastControllerFragment extends ChromecastBaseControllerFragme
 		stopButton = fragmentBinding.stopButton;
 		bufferingSpinner = fragmentBinding.bufferingSpinner;
 
-		// Set the background color of the video description layout since by default it doesn't match the background color of the Chromecast controller
-		TypedValue typedValue = new TypedValue();
-		getContext().getTheme().resolveAttribute(R.attr.colorPrimary, typedValue, true);
-		videoDescriptionBinding.videoDescLinearlayout.setBackgroundResource(typedValue.resourceId);
-
 		Linker.configure(videoDescriptionBinding.videoDescDescription, null);
 
 		fragmentBinding.chromecastPlaybackProgressBar.setOnSeekBarChangeListener(this);

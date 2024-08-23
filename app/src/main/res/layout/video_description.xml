@@ -4,20 +4,23 @@
 	android:layout_width="match_parent"
 			android:layout_height="match_parent"
 			android:background="@color/video_player_drawer_background">
-	<LinearLayout android:layout_width="match_parent"
-				  android:layout_height="match_parent"
-				  android:id="@+id/video_desc_linearlayout"
-				  android:orientation="vertical"
-				  android:padding="16dp">
+
+	<LinearLayout
+		android:id="@+id/video_desc_linearlayout"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:background="@color/colorPrimary"
+		android:orientation="vertical"
+		android:padding="16dp">
 
 		<TextView
 			android:id="@+id/video_desc_title"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:paddingBottom="10dp"
-			android:textColor="@color/video_player_drawer_text"
+			android:text="Title Goes Here!"
 			android:textAppearance="@android:style/TextAppearance.Large"
-			android:text="Title Goes Here!"/>
+			android:textColor="@color/video_player_drawer_text" />
 
 
 		<LinearLayout
@@ -59,14 +62,14 @@
 					<TextView
 						android:id="@+id/video_desc_channel"
 						style="@style/VideoDescTextView"
-						android:text="Channel Name"/>
+						android:text="Channel Name" />
 
 					<!-- SUB BUTTON -->
 					<free.rm.skytube.gui.businessobjects.views.SubscribeButton
 						android:id="@+id/video_desc_subscribe_button"
 						style="@style/SubscribeButton"
 						android:layout_below="@id/video_desc_channel"
-						android:text="Unsubscribe"/>
+						android:text="Unsubscribe" />
 				</LinearLayout>
 
 			</RelativeLayout>
@@ -78,20 +81,20 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_weight="1"
-				android:paddingLeft="30dp"
-				android:paddingStart="30dp">
+				android:paddingStart="30dp"
+				android:paddingLeft="30dp">
 
 				<TextView
 					android:id="@+id/video_desc_views"
 					style="@style/VideoDescTextView"
-					android:text="17,000,000 views"/>
+					android:text="17,000,000 views" />
 
 				<ProgressBar
 					android:id="@+id/video_desc_likes_bar"
 					style="?android:attr/progressBarStyleHorizontal"
 					android:layout_width="160dp"
 					android:layout_height="wrap_content"
-					android:layout_below="@id/video_desc_views"/>
+					android:layout_below="@id/video_desc_views" />
 
 				<TextView
 					android:id="@+id/video_desc_likes"
@@ -120,7 +123,7 @@
 					style="@style/VideoDescTextView"
 					android:layout_below="@id/video_desc_likes_bar"
 					android:text="@string/ratings_disabled"
-					android:visibility="gone"/>
+					android:visibility="gone" />
 			</RelativeLayout>
 
 		</LinearLayout>
@@ -128,17 +131,17 @@
 
 		<TextView
 			android:id="@+id/video_desc_publish_date"
-			android:paddingTop="10dp"
 			style="@style/VideoDescTextView"
-			android:text="7 days ago"/>
+			android:paddingTop="10dp"
+			android:text="7 days ago" />
 
 
 		<TextView
 			android:id="@+id/video_desc_description"
-			android:paddingTop="10dp"
-			android:autoLink="web"
 			style="@style/VideoDescTextView"
-			android:text="Video description here."/>
+			android:autoLink="web"
+			android:paddingTop="10dp"
+			android:text="Video description here." />
 
 	</LinearLayout>
 </ScrollView>
