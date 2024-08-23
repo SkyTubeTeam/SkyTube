@@ -427,10 +427,10 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 	private void getVideoInfoTasks() {
 		// get Channel info (e.g. avatar...etc) task
 		compositeDisposable.add(DatabaseTasks.getChannelInfo(requireContext(), youTubeVideo.getChannelId(), false)
-				.subscribe(youTubeChannel1 -> {
-					youTubeChannel = youTubeChannel1.channel();
+				.subscribe(persistentChannel -> {
+					youTubeChannel = persistentChannel.channel();
 
-					videoDescriptionBinding.videoDescSubscribeButton.setChannel(youTubeChannel);
+					videoDescriptionBinding.videoDescSubscribeButton.setChannelInfo(persistentChannel);
 					if (youTubeChannel != null) {
 						Glide.with(requireContext())
 								.load(youTubeChannel.getThumbnailUrl())

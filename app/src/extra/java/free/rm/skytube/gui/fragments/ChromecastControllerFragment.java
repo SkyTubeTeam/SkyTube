@@ -104,7 +104,7 @@ public class ChromecastControllerFragment extends ChromecastBaseControllerFragme
 				DatabaseTasks.getChannelInfo(requireContext(), video.getChannelId(), false)
 						.subscribe(subscribedChannel -> {
                             YouTubeChannel youTubeChannel = subscribedChannel.channel();
-                            videoDescriptionBinding.videoDescSubscribeButton.setChannel(youTubeChannel);
+                            videoDescriptionBinding.videoDescSubscribeButton.setChannelInfo(subscribedChannel);
 
 							Glide.with(requireContext())
 									.load(youTubeChannel.getThumbnailUrl())
