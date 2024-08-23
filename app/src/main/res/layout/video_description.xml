@@ -67,9 +67,13 @@
 					<!-- SUB BUTTON -->
 					<free.rm.skytube.gui.businessobjects.views.SubscribeButton
 						android:id="@+id/video_desc_subscribe_button"
-						style="@style/SubscribeButton"
 						android:layout_below="@id/video_desc_channel"
-						android:text="Unsubscribe" />
+						android:text="Unsubscribe"
+						android:layout_height="wrap_content"
+						android:layout_width="wrap_content"
+						android:padding="3dp"
+						android:textAppearance="@style/RegularTextStyle"
+						/>
 				</LinearLayout>
 
 			</RelativeLayout>

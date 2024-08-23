@@ -40,9 +40,6 @@
 	<drawable name="sub_channel">@android:color/transparent</drawable>
 	<color name="subs_text">@color/brightText</color>
 
-	<drawable name="subscribe_button">@color/skytube_theme_colour</drawable>
-	<drawable name="subscribe_button_pressed">#ff8e44</drawable>
-
 
 	<!--
 		Video (Grid) Cells

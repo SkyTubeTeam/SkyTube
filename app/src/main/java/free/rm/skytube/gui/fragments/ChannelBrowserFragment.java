@@ -188,8 +188,7 @@ public class ChannelBrowserFragment extends FragmentEx implements ChannelSubscri
 		}
 	}
 
-	@Override
-	public void setChannel(YouTubeChannel channel) {
+	private void setChannel(YouTubeChannel channel) {
 		this.channel = channel;
 		if (channel != null) {
 			this.channelId = channel.getChannelId();

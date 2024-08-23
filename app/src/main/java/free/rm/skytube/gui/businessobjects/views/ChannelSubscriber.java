@@ -16,9 +16,7 @@
  */
 package free.rm.skytube.gui.businessobjects.views;
 
-import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 
 public interface ChannelSubscriber {
     void setSubscribedState(boolean subscribed);
-    void setChannel(YouTubeChannel channel);
 }

@@ -22,12 +22,14 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.RemoteViews;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatButton;
+
+import com.google.android.material.button.MaterialButton;
 
 import free.rm.skytube.R;
-import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
-import free.rm.skytube.businessobjects.YouTube.YouTubeTasks;
+import free.rm.skytube.businessobjects.YouTube.POJOs.PersistentChannel;
+import free.rm.skytube.businessobjects.YouTube.newpipe.ChannelId;
 import free.rm.skytube.businessobjects.db.DatabaseTasks;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 
@@ -35,12 +37,12 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable;
  * The (channel) subscribe button.
  */
 @RemoteViews.RemoteView
-public class SubscribeButton extends AppCompatButton implements View.OnClickListener, ChannelSubscriber {
+public class SubscribeButton extends MaterialButton implements View.OnClickListener, ChannelSubscriber {
 
 	/** Is user subscribed to a channel? */
 	private boolean isUserSubscribed = false;
 
-	private YouTubeChannel channel;
+	private ChannelId channelId;
 	private OnClickListener externalClickListener = null;
 
 	private final CompositeDisposable compositeDisposable = new CompositeDisposable();
@@ -58,9 +60,9 @@ public class SubscribeButton extends AppCompatButton implements View.OnClickList
 		if(externalClickListener != null) {
 			externalClickListener.onClick(SubscribeButton.this);
 		}
-		if(channel != null) {
+		if(channelId != null) {
 			compositeDisposable.add(DatabaseTasks.subscribeToChannel(!isUserSubscribed,
-					this, getContext(), channel.getChannelId(), true).subscribe());
+					this, getContext(), channelId, true).subscribe());
 		}
 	}
 
@@ -74,12 +76,9 @@ public class SubscribeButton extends AppCompatButton implements View.OnClickList
 		compositeDisposable.clear();
 	}
 
-	@Override
-	public void setChannel(YouTubeChannel channel) {
-		this.channel = channel;
-		if (channel != null) {
-			setSubscribedState(channel.isUserSubscribed());
-		}
+	public void setChannelInfo(@NonNull PersistentChannel persistentChannel) {
+		this.channelId = persistentChannel.getChannelId();
+		setSubscribedState(persistentChannel.isSubscribed());
 	}
 
 	/**

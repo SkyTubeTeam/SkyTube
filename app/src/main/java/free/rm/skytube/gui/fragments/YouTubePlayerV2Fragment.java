@@ -82,6 +82,7 @@ import free.rm.skytube.businessobjects.Sponsorblock.SBSegment;
 import free.rm.skytube.businessobjects.Sponsorblock.SBTasks;
 import free.rm.skytube.businessobjects.Sponsorblock.SBTimeBarView;
 import free.rm.skytube.businessobjects.Sponsorblock.SBVideoInfo;
+import free.rm.skytube.businessobjects.YouTube.POJOs.PersistentChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.YouTube.YouTubeTasks;
@@ -122,7 +123,6 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 
     private FragmentYoutubePlayerV2Binding fragmentBinding;
     private VideoDescriptionBinding videoDescriptionBinding;
-    private TextView playbackSpeedTextView;
 
     private SimpleExoPlayer player;
     private long playerInitialPosition = 0;
@@ -153,21 +153,9 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
         // inflate the layout for this fragment
         fragmentBinding = FragmentYoutubePlayerV2Binding.inflate(inflater, container, false);
         videoDescriptionBinding = fragmentBinding.desContent;
-        playbackSpeedTextView = fragmentBinding.getRoot().findViewById(R.id.playbackSpeed);
 
         // indicate that this fragment has an action bar menu
         setHasOptionsMenu(true);
-
-//		final View decorView = getActivity().getWindow().getDecorView();
-//		decorView.setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener() {
-//			@Override
-//			public void onSystemUiVisibilityChange(int visibility) {
-//				hideNavigationBar();
-//			}
-//		});
-
-        ///if (savedInstanceState != null)
-        ///	videoCurrentPosition = savedInstanceState.getInt(VIDEO_CURRENT_POSITION, 0);
 
         if (youTubeVideo == null) {
             // initialise the views
@@ -190,6 +178,10 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
         }
 
         return fragmentBinding.getRoot();
+    }
+
+    private TextView getPlaybackSpeedTextView() {
+        return fragmentBinding.getRoot().findViewById(R.id.playbackSpeed);
     }
 
     private void openVideo(ContentId contentId) {
@@ -269,7 +261,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
             }
         });
         this.playbackSpeedController = new PlaybackSpeedController(getContext(),
-                playbackSpeedTextView, player);
+                getPlaybackSpeedTextView(), player);
 
         //set playback speed
         float playbackSpeed = SkyTubeApp.getSettings().getDefaultPlaybackSpeed();
@@ -778,10 +770,10 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
         // get Channel info (e.g. avatar...etc) task
         compositeDisposable.add(
                 DatabaseTasks.getChannelInfo(requireContext(), youTubeVideo.getChannelId(), false)
-                        .subscribe(youTubeChannel1 -> {
-                            youTubeChannel = youTubeChannel1.channel();
+                        .subscribe(newPersistentChannel -> {
+                            youTubeChannel = newPersistentChannel.channel();
+                            videoDescriptionBinding.videoDescSubscribeButton.setChannelInfo(newPersistentChannel);
 
-                            videoDescriptionBinding.videoDescSubscribeButton.setChannel(youTubeChannel);
                             if (youTubeChannel != null) {
                                 Glide.with(requireContext())
                                         .load(youTubeChannel.getThumbnailUrl())
