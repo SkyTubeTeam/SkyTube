@@ -156,4 +156,8 @@
     <string name="pref_title_import_subs">Importa subscripcions de YouTube</string>
     <string name="databases_import_success">Bases de dades importades. Reinicieu l\'aplicació per aplicar canvis.</string>
     <string name="pref_key_use_newer_formats_title">Proveu formats de vídeo més nous</string>
+    <string name="pref_title_playback_speed">Velocitat de reproducció predeterminada</string>
+    <string name="pref_details">Detalls</string>
+    <string name="pref_title_credit_sponsorblock">Reconeixement</string>
+    <string name="pref_summary_playback_speed">Velocitat de reproducció predeterminada: %s</string>
 </resources>
