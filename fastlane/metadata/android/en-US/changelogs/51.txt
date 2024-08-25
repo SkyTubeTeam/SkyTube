@@ -1,0 +1,10 @@
+* Optimize internal database, make it faster and smaller.
+* Make subscription feed appear (nearly) instantly and do the slow network fetches in the background.
+* Use Material themed subscribe button.
+* Search query text is clickable on the result.
+* Fix broken compilation due to JCenter disapearance
+* Show deleted/blocked channels differently, and allow to unsubscribe from them.
+* Updated translations for:
+  * Catalan, Malayalam, Tamil
+* Translators:
+  * ek387587, Rohan Kishore, Onebyone
