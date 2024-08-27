@@ -746,6 +746,11 @@
     <string name="pref_key_default_content_country" translatable="false">pref_key_default_content_country</string>
     <string name="pref_title_default_content_country">Default content country</string>
     <string name="pref_summary_default_content_country">Show content intended for this country: %s</string>
+
+    <string name="pref_key_app_language" translatable="false">pref_key_app_language</string>
+    <string name="pref_title_app_language">Application Language</string>
+    <string name="pref_summary_app_language">The language used for all the labels in the application</string>
+
     <!--
         SPONSORBLOCK
     -->

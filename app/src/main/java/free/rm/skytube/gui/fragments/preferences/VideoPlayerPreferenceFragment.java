@@ -18,13 +18,26 @@
 package free.rm.skytube.gui.fragments.preferences;
 
 import android.content.SharedPreferences;
+import android.content.res.XmlResourceParser;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.os.LocaleListCompat;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
+import com.google.common.base.Joiner;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
+import java.util.stream.Collectors;
 
 import free.rm.skytube.BuildConfig;
 import free.rm.skytube.R;
@@ -44,7 +57,7 @@ public class VideoPlayerPreferenceFragment extends BasePreferenceFragment {
 		// if we are running an OSS version, then remove the last option (i.e. the "official" player
 		// option)
 		if (BuildConfig.FLAVOR.equals("oss")) {
-			final ListPreference    videoPlayersListPref = (ListPreference) getPreferenceManager().findPreference(getString(R.string.pref_key_choose_player));
+			final ListPreference    videoPlayersListPref = getPreferenceManager().findPreference(getString(R.string.pref_key_choose_player));
 			final CharSequence[]    videoPlayersList = videoPlayersListPref.getEntries();
 			CharSequence[]          modifiedVideoPlayersList = Arrays.copyOf(videoPlayersList, videoPlayersList.length - 1);
 
@@ -58,6 +71,43 @@ public class VideoPlayerPreferenceFragment extends BasePreferenceFragment {
 		});
 
 		configureCountrySelector();
+		configureLanguageSelector();
+	}
+
+	private List<String> getLanguages() {
+		List<String> result = new ArrayList<>();
+		try {
+			XmlResourceParser xpp = getResources().getXml(R.xml._generated_res_locale_config);
+			while (xpp.getEventType() != XmlPullParser.END_DOCUMENT) {
+				if (xpp.getEventType() == XmlPullParser.START_TAG) {
+					if ("locale".equals(xpp.getName()) && xpp.getAttributeCount() > 0 && "name".equals(xpp.getAttributeName(0))) {
+						result.add(xpp.getAttributeValue(0));
+					}
+				}
+				xpp.next();
+			}
+			Logger.i(this, "Language list:"+result);
+		} catch(XmlPullParserException|IOException e) {
+			Logger.e(this, "Unable to parse locale config: "+e.getMessage(), e);
+		}
+		return result;
+	}
+
+	private void configureLanguageSelector() {
+		ListPreference languageSelector = findPreference(getString(R.string.pref_key_app_language));
+
+		List<String> languages = getLanguages();
+		LocaleListCompat localeList = LocaleListCompat.forLanguageTags(Joiner.on(",").join(languages));
+		int size = localeList.size();
+		String[] localeCodes = new String[size];
+		String[] localeNames = new String[size];
+		for (int i = 0;i<size;i++) {
+			Locale locale = localeList.get(i);
+			localeNames[i] = locale.getDisplayName();
+			localeCodes[i] = locale.getLanguage();
+		}
+		languageSelector.setEntries(localeNames);
+		languageSelector.setEntryValues(localeCodes);
 	}
 
 	private void configureCountrySelector() {
@@ -78,6 +128,11 @@ public class VideoPlayerPreferenceFragment extends BasePreferenceFragment {
 			String newCountry = sharedPreferences.getString(key, null);
 			NewPipeService.setCountry(newCountry);
 			EventBus.getInstance().notifyMainTabChanged(EventBus.SettingChange.CONTENT_COUNTRY);
+		}
+		if (getString(R.string.pref_key_app_language).equals(key)) {
+			String newLanguage = sharedPreferences.getString(key, null);
+			LocaleListCompat appLocale = LocaleListCompat.forLanguageTags(newLanguage);
+			AppCompatDelegate.setApplicationLocales(appLocale);
 		}
 	}
 }

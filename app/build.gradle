@@ -88,6 +88,9 @@ android {
         viewBinding true
         buildConfig true
     }
+    androidResources {
+        generateLocaleConfig true
+    }
     lint {
         abortOnError false
         checkReleaseBuilds false
