@@ -63,6 +63,7 @@ public class VideoPagerWithChannel extends VideoPager {
         channel.getYouTubeVideos().addAll(videos);
         long lastPublish = videos.stream().mapToLong(YouTubeVideo::getPublishTimestamp).max().orElse(0);
         channel.setLastVideoTime(lastPublish);
+        channel.setUserSubscribed(persistentChannel != null ? persistentChannel.isSubscribed() : false);
         return SubscriptionsDb.getSubscriptionsDb().cacheChannel(persistentChannel, channel);
     }
 
