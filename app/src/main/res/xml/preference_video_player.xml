@@ -64,6 +64,12 @@
 		app:entryValues="@array/country_codes"
 		app:defaultValue=""
 		app:iconSpaceReserved="false" />
+	<ListPreference
+		app:key="@string/pref_key_app_language"
+		app:title="@string/pref_title_app_language"
+		app:summary="@string/pref_summary_app_language"
+		app:defaultValue=""
+		app:iconSpaceReserved="false"/>
 
 	<CheckBoxPreference
 		app:key="@string/pref_key_use_newer_formats"
