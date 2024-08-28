@@ -25,4 +25,6 @@
     <string name="channel_already_subscribed">Már feliratkozott</string>
     <string name="channel_subscribed">Feliratkozott a csatornára</string>
     <string name="select_sub_file">Feliratkozást tartalmazó fájl kiválasztása</string>
+    <string name="status_not_exists">[Törölt]</string>
+    <string name="status_account_terminated">[Felfüggesztett]</string>
 </resources>
