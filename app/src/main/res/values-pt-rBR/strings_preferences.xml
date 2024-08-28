@@ -169,5 +169,7 @@
     <string name="pref_youtube_api_key_error">Não foi possível validar a chave de API inserida.</string>
     <string name="pref_youtube_api_key_custom">Reinicie o aplicativo para usar a nova chave de API do YouTube.</string>
     <string name="pref_summary_use_newpipe_backend">Usar API do NewPipe para o acesso do YouTube…</string>
-    <string name="pref_title_use_newpipe_backend">NewPipe back-end</string>
+    <string name="pref_title_use_newpipe_backend">Back-end do NewPipe</string>
+    <string name="pref_title_app_language">Idioma do aplicativo</string>
+    <string name="pref_summary_app_language">Idioma usado para todos os textos no aplicativo</string>
 </resources>
