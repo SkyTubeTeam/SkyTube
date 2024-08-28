@@ -182,4 +182,6 @@
     <string name="pref_key_use_newer_formats_summary">قد يتأثر الصوت والفيديو في إصدارات أندرويد القديمة دون دعم.</string>
     <string name="pref_summary_enable_sponsorblock">تخطي مقاطع الفيديو تلقائيًا المخصصة للرعاة وتذكيرات التفاعل والمزيد</string>
     <string name="pref_title_sponsorblock_category_list">تخطي الشرائح</string>
+    <string name="pref_title_app_language">لغة التطبيق</string>
+    <string name="pref_summary_app_language">اللغة المستخدمة لجميع التسميات في التطبيق</string>
 </resources>
