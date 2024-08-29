@@ -16,4 +16,6 @@
 
 	<string name="notification_channel_feed_title">Feed Notifications</string>
 	<string name="notification_new_videos_found">%d new videos from subscribed channels</string>
+
+	<string name="subs_drawer_live_videos_button_title">Live videos</string>
 </resources>

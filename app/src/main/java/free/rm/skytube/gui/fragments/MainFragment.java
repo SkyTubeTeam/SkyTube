@@ -7,6 +7,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
@@ -24,6 +25,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.android.material.tabs.TabLayout;
 
+import org.schabi.newpipe.extractor.StreamingService;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -38,8 +41,11 @@ import free.rm.skytube.businessobjects.YouTube.newpipe.ChannelId;
 import free.rm.skytube.databinding.FragmentMainBinding;
 import free.rm.skytube.databinding.SubsDrawerBinding;
 import free.rm.skytube.gui.activities.BaseActivity;
+import free.rm.skytube.gui.activities.MainActivity;
 import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
 import free.rm.skytube.gui.businessobjects.fragments.FragmentEx;
+
+import free.rm.skytube.businessobjects.YouTube.newpipe.ContentId;
 
 public class MainFragment extends FragmentEx {
 	// Constants for saving the state of this Fragment's child Fragments
@@ -196,6 +202,17 @@ public class MainFragment extends FragmentEx {
 
 		EventBus.getInstance().registerMainFragment(this);
 
+		Button LiveVideosButton = subsDrawerBinding.getRoot().findViewById(R.id.subs_drawer_live_videos_button);
+		LiveVideosButton.setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				ContentId LiveContentId =  new ContentId("PLU12uITxBEPGn2Q5CBlWv_79kXGShiVIf", "https://www.youtube.com/playlist?list=PLU12uITxBEPGn2Q5CBlWv_79kXGShiVIf", StreamingService.LinkType.PLAYLIST);
+				SkyTubeApp.openContent(getContext(), LiveContentId);
+			}
+		});
+
 		return fragmentBinding.getRoot();
 	}
 
@@ -248,7 +265,6 @@ public class MainFragment extends FragmentEx {
 		super.onPause();
 //		subsAdapter.setContext(null);
 	}
-
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Pass the event to ActionBarDrawerToggle, if it returns true, then it has handled the app
