@@ -25,4 +25,6 @@
     <string name="unsubscribe">Відписатися</string>
     <string name="subscribe">Підписатися</string>
     <string name="subscriptions">Підписки</string>
+    <string name="status_account_terminated">[Припинено]</string>
+    <string name="status_not_exists">[Видалено]</string>
 </resources>
