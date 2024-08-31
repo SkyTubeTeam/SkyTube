@@ -6,19 +6,19 @@
     <string name="pref_summary_choose_player">Video player koji će se koristiti: %s</string>
     <string name="pref_import_export_category">Uvoz/Izvoz</string>
     <string name="pref_title_backup_dbs">Izradi sigurnosnu kopiju</string>
-    <string name="pref_summary_backup_dbs">Izradi sigurnosnu kopiju tvojih oznaka i pretplata.</string>
+    <string name="pref_summary_backup_dbs">Spremi sigurnosnu kopiju tvojih zabilješki i pretplata.</string>
     <string name="pref_title_import_dbs">Uvezi sigurnosnu kopiju</string>
-    <string name="pref_summary_import_dbs">Uvezi sigurnosnu kopiju tvojih oznaka i pretplata.</string>
+    <string name="pref_summary_import_dbs">Uvezi sigurnosne kopije tvojih zabilješki i pretplata.</string>
     <string name="databases_backing_up">Izrada sigurnosne kopije …</string>
     <string name="databases_backup_success">Sigurnosna kopija izrađena na %s</string>
     <string name="databases_backup_fail">Nije bilo moguće izraditi sigurnosne kopije tvojih baza podataka.</string>
     <string name="databases_import_select_backup">Odaberi sigurnosnu kopiju za uvoz</string>
     <string name="databases_import_nothing_selected">Ništa nije odabrano …</string>
-    <string name="databases_import_warning_message">Zamijeniti oznake i pretplate s podacima iz odabrane datoteke sigurnosne kopije\?</string>
+    <string name="databases_import_warning_message">Zamijeniti zabilješke i pretplate s podacima iz odabrane datoteke sigurnosne kopije?</string>
     <string name="continue_">Nastavi</string>
     <string name="databases_importing">Uvoz …</string>
     <string name="databases_import_fail">Nije bilo moguće uvesti tvoje baze podataka.</string>
-    <string name="databases_import_success">Za korištenje novih oznaka i pretplata, ponovo pokreni program.</string>
+    <string name="databases_import_success">Za korištenje novih zabilješki i pretplata ponovo pokreni program.</string>
     <string name="pref_title_import_subs">Uvezi pretplate s YouTubea</string>
     <string name="pref_summary_import_subs">Uvezi pretplate s tvog YouTube računa.</string>
     <string name="subs_import_select_backup">Odaberi YouTube XML datoteku za uvoz</string>
@@ -170,4 +170,6 @@
     <string name="pref_summary_use_dislike_api">Vrati brojač nesviđanja koristeći returnyoutubedislike.com</string>
     <string name="pref_title_playback_speed">Standardna brzina reprodukcije</string>
     <string name="pref_summary_playback_speed">Standardna brzina reprodukcije: %s</string>
+    <string name="pref_title_app_language">Jezik aplikacije</string>
+    <string name="pref_summary_app_language">Korištni jezik za sve oznake u aplikaciji</string>
 </resources>
