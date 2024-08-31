@@ -25,4 +25,6 @@
     <string name="channel_subscribe_failed">Nije bilo moguće pretplatiti se na kanal</string>
     <string name="channel_already_subscribed">Pretplata već postoji</string>
     <string name="select_sub_file">Odaberi datoteku pretplate</string>
+    <string name="status_not_exists">[Izbrisano]</string>
+    <string name="status_account_terminated">[Prekinuto]</string>
 </resources>
