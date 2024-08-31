@@ -25,4 +25,6 @@
     <string name="about">Teave</string>
     <string name="error_unable_to_subscribe">Kanali tellimine või sellest loobumine ei õnnestunud (id=%s)</string>
     <string name="import_subscriptions_parse_error">Sinu poolt üleslaaditud faili töötlemine ei õnnestunud: %s.</string>
+    <string name="status_not_exists">[Kustutatud]</string>
+    <string name="status_account_terminated">[Lõpetatud]</string>
 </resources>
