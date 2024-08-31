@@ -25,4 +25,6 @@
     <string name="channel_subscribed">Suscrito al canal</string>
     <string name="channel_unsubscribed">No suscrito al canal</string>
     <string name="select_sub_file">Selecciona fichero de suscripción</string>
+    <string name="status_not_exists">[Eliminado]</string>
+    <string name="status_account_terminated">[Finalizado]</string>
 </resources>
