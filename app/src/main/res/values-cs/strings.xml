@@ -7,12 +7,12 @@
     <string name="yes">Ano</string>
     <string name="no">Ne</string>
     <string name="search_channel">Vyhledat kanál</string>
-    <string name="cleaner_toast_finish">Odstranili jsme %1$s videí ze záložek a smazali %2$s MB stažených videí</string>
+    <string name="cleaner_toast_finish">Odstranili jsme %1$s videí ze záložek a smazali %2$s MB stažených videí.</string>
     <string name="cleaner">Čistič zhlédnutých videí</string>
     <string name="cleaner_explanation">Vyčistí uložená/stažená videa podle následujících filtrů:</string>
     <string name="cleaner_confirm">Vyčistit</string>
-    <string name="cleaner_watched_downloads">Odstranit shlednuta stažená videa</string>
-    <string name="cleaner_watched_bookmarks">Odstranit shlednute záložky videí</string>
+    <string name="cleaner_watched_downloads">Odstranit shlédnutá stažená videa</string>
+    <string name="cleaner_watched_bookmarks">Odstranit shlédnuté záložky videí</string>
     <string name="could_not_get_channel_detailed">Nepodařilo se stáhnout informace o kanálu: %s.</string>
     <string name="num_videos">%d videii</string>
     <string name="playlists">Playlisty</string>
