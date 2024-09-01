@@ -10,4 +10,8 @@
     <string name="download_video">Stiahnuť video</string>
     <string name="unable_to_delete_file">Stiahnutý súbor \'%s\' sa nepodarilo odstrániť.</string>
     <string name="video_downloaded">Stiahnuté: \'%s\'.</string>
+    <string name="downloads">Sťahovania</string>
+    <string name="delete_download">Odstrániť stiahnutie</string>
+    <string name="download">Stiahnuť</string>
+    <string name="playing_video_file_missing">Video sa prehráva online, pretože sa nepodarilo nájsť žiadny súbor na stiahnutie.</string>
 </resources>
