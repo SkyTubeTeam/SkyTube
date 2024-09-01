@@ -170,4 +170,6 @@
     <string name="pref_summary_metered_network_usage">Co dělat pokud je při sledování/stahování videí používáno placené připojení: %s</string>
     <string name="pref_title_autocast">AutoCast</string>
     <string name="pref_summary_enable_sponsorblock">Automatické přeskakování reklamních segmentů, interaktivních připomínek a další</string>
+    <string name="pref_title_app_language">Jazyk aplikace</string>
+    <string name="pref_summary_app_language">Jazyk použitý pro všechny popisky v aplikaci</string>
 </resources>
