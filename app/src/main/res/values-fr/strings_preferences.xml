@@ -209,4 +209,6 @@
     <string name="pref_summary_playback_speed">Vitesse de lecture par défaut : %s</string>
     <string name="pref_title_use_dislike_api">Compteur des Je n\'aime pas</string>
     <string name="pref_summary_use_dislike_api">Réactiver le compteur de Je n\'aime pas en utilisant returnyoutubedislike.com</string>
+    <string name="pref_title_app_language">Language de l\'application</string>
+    <string name="pref_summary_app_language">La langue utilisée pour toutes les étiquettes de l\'application</string>
 </resources>
