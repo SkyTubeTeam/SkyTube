@@ -25,4 +25,6 @@
     <string name="channel_already_subscribed">Déjà abonné·e</string>
     <string name="channel_subscribed">Abonné à la chaîne</string>
     <string name="select_sub_file">Sélectionner le fichier d\'abonnement</string>
+    <string name="status_not_exists">[Supprimé]</string>
+    <string name="status_account_terminated">[Clôturé]</string>
 </resources>
