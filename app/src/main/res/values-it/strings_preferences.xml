@@ -182,4 +182,6 @@
     <string name="pref_title_open_issue">Segnala problema</string>
     <string name="pref_general">Generale</string>
     <string name="pref_details">Dettagli</string>
+    <string name="pref_title_app_language">Lingua dell\'applicazione</string>
+    <string name="pref_summary_app_language">La lingua usata per tutte le etichette nell\'applicazione</string>
 </resources>
