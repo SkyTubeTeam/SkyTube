@@ -170,4 +170,6 @@
     <string name="pref_summary_sponsorblock_category_list">Escolha as categorias</string>
     <string name="pref_title_credit_sponsorblock">Créditos</string>
     <string name="pref_summary_credit_sponsorblock">Utilizar dados SponsorBlock de https://sponsor.ajay.app</string>
+    <string name="pref_title_app_language">Idioma da aplicação</string>
+    <string name="pref_summary_app_language">A língua utilizada para todas as etiquetas na aplicação</string>
 </resources>
