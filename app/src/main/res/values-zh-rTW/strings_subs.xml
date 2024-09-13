@@ -25,4 +25,6 @@
     <string name="channel_already_subscribed">已訂閱</string>
     <string name="channel_subscribed">已訂閱頻道</string>
     <string name="select_sub_file">選取訂閱內容檔案</string>
+    <string name="status_not_exists">[已刪除]</string>
+    <string name="status_account_terminated">[已終止]</string>
 </resources>
