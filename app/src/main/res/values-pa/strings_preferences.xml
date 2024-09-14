@@ -104,15 +104,15 @@
     <string name="unblock">ਅਨਬਲੌਕ ਕਰੋ</string>
     <string name="channel_blacklist_updated">ਨਵੀਂ ਚੈਨਲ ਡਿਨਾਈ ਲਿਸਟ ਨੂੰ ਲਾਗੂ ਕਰਨ ਲਈ ਵੀਡੀਓ ਨੂੰ ਤਾਜ਼ਾ ਕਰੋ।</string>
     <string name="channel_blacklist_empty">ਡਿਨਾਈ ਲਿਸਟ ਖ਼ਾਲੀ ਹੈ।</string>
-    <string name="pref_summary_channel_whitelist">ਮਨਜ਼ੂਰ ਚੈਨਲਾਂ ਦੀ ਸੂਚੀ।</string>
+    <string name="pref_summary_channel_whitelist">ਸਵੀਕ੍ਰਿਤ ਚੈਨਲਾਂ ਦੀ ਸੂਚੀ।</string>
     <string name="input_channel_url">ਅਲਾਓ ਲਿਸਟ ਲਈ ਚੈਨਲ URLs:</string>
     <string name="add">ਸ਼ਾਮਲ ਕਰੋ</string>
     <string name="block">ਬਲੌਕ ਕਰੋ</string>
     <string name="please_wait">ਕ੍ਰਿਪਾ ਕਰਕੇ ਉਡੀਕ ਕਰੋ…</string>
-    <string name="channel_whitelist_updated">ਨਵੀਂ ਚੈਨਲ ਅਲਾਓ ਲਿਸਟ ਦੀ ਵਰਤੋਂ ਕਰਨ ਲਈ ਵੀਡੀਓਜ਼ ਨੂੰ ਤਾਜ਼ਾ ਕਰੋ।</string>
-    <string name="channel_whitelist_update_failure">ਦਿੱਤੇ ਚੈਨਲ ਨੂੰ ਅਲਾਓ ਲਿਸਟ ਵਿੱਚ ਸ਼ਾਮਿਲ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਿਆ।</string>
-    <string name="channel_unwhitelist_success">ਨਵੇਂ ਅਲਾਓ ਕੀਤੇ ਚੈਨਲ ਦੀ ਵਰਤੋਂ ਕਰਨ ਲਈ ਵੀਡੀਓਜ਼ ਨੂੰ ਤਾਜ਼ਾ ਕਰੋ।</string>
-    <string name="channel_unwhitelist_failure">ਦਿੱਤੇ ਗਏ ਚੈਨਲ(ਲਾਂ) ਨੂੰ ਅਲਾਓ ਲਿਸਟ ਵਿੱਚੋਂ ਬਾਹਰ ਕੱਢਣ ਵਿੱਚ ਅਸਫਲ…</string>
+    <string name="channel_whitelist_updated">ਨਵੀਂ ਸਵੀਕ੍ਰਿਤ ਚੈਨਲ ਲਿਸਟ ਦੀ ਵਰਤੋਂ ਕਰਨ ਲਈ ਵੀਡੀਓਜ਼ ਨੂੰ ਤਾਜ਼ਾ ਕਰੋ।</string>
+    <string name="channel_whitelist_update_failure">ਦਿੱਤੇ ਚੈਨਲ ਨੂੰ ਸਵੀਕ੍ਰਿਤ ਚੈਨਲ ਲਿਸਟ ਵਿੱਚ ਸ਼ਾਮਿਲ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਿਆ।</string>
+    <string name="channel_unwhitelist_success">ਨਵੇਂ ਸਵੀਕ੍ਰਿਤ ਕੀਤੇ ਚੈਨਲ ਦੀ ਵਰਤੋਂ ਕਰਨ ਲਈ ਵੀਡੀਓਜ਼ ਨੂੰ ਤਾਜ਼ਾ ਕਰੋ।</string>
+    <string name="channel_unwhitelist_failure">ਦਿੱਤੇ ਗਏ ਚੈਨਲ(ਲਾਂ) ਨੂੰ ਸਵੀਕ੍ਰਿਤ ਚੈਨਲ ਲਿਸਟ ਵਿੱਚੋਂ ਬਾਹਰ ਕੱਢਣ ਵਿੱਚ ਅਸਫਲ</string>
     <string name="pref_languages_filter_category">ਭਾਸ਼ਾ ਅਤੇ ਖੇਤਰ ਫਿਲਟਰ</string>
     <string name="pref_title_preferred_regions">ਤਰਜੀਹੀ ਖੇਤਰ</string>
     <string name="pref_summary_preferred_regions">ਚੁਣੋ ਕਿ ਕਿਸ ਖੇਤਰ ਤੋਂ \"ਫੀਚਰਡ\" ਵੀਡੀਓ ਪ੍ਰਾਪਤ ਕਰਨਾ ਹੈ: %s</string>
@@ -159,7 +159,7 @@
     <string name="pref_key_video_quality_metered_title">ਮੀਟਰਡ \'ਤੇ ਵੀਡੀਓ ਗੁਣਵੱਤਾ ਚੋਣ</string>
     <string name="pref_key_video_quality_for_downloads_title">ਡਾਊਨਲੋਡ ਲਈ ਵੀਡੀਓ ਗੁਣਵੱਤਾ ਚੋਣ</string>
     <string name="pref_channels_filter_category">ਚੈਨਲ ਫਿਲਟਰ</string>
-    <string name="channel_already_whitelisted">ਚੈਨਲ ਪਹਿਲਾਂ ਹੀ ਅਲਾਓ ਲਿਸਟ ਵਿੱਚ ਪਾਇਆ ਹੋਇਆ ਹੈ।</string>
+    <string name="channel_already_whitelisted">ਚੈਨਲ ਪਹਿਲਾਂ ਹੀ ਸਵੀਕ੍ਰਿਤ ਚੈਨਲ ਲਿਸਟ ਵਿੱਚ ਪਾਇਆ ਹੋਇਆ ਹੈ।</string>
     <string name="channel_blacklist_update_failure">ਦਿੱਤੇ ਗਏ ਚੈਨਲ(ਲਾਂ) ਨੂੰ ਡਿਨਾਈ ਲਿਸਟ ਵਿੱਚੋਂ ਹਟਾਇਆ ਨਹੀਂ ਜਾ ਸਕਿਆ…</string>
     <string name="pref_title_channel_whitelist">ਚੈਨਲ ਅਲਾਓ ਲਿਸਟ</string>
     <string name="no_preferred_lang_selected">ਕੋਈ ਤਰਜੀਹੀ ਭਾਸ਼ਾ ਨਹੀਂ ਚੁਣੀ ਗਈ।</string>
@@ -170,4 +170,6 @@
     <string name="pref_summary_clear_playback_status">ਸਾਰੀਆਂ ਵੀਡੀਓਜ਼ ਲਈ ਪ੍ਰਗਤੀ ਸਾਫ਼ ਕਰੋ।</string>
     <string name="pref_playback_status_cleared">ਪਲੇਬੈਕ ਸਥਿਤੀ ਕਲੀਅਰ ਕੀਤੀ ਗਈ।</string>
     <string name="pref_summary_default_content_country">ਇਸ ਦੇਸ਼ ਲਈ ਤਿਆਰ ਸਮੱਗਰੀ ਦਿਖਾਓ: %s</string>
+    <string name="pref_title_app_language">ਐਪ ਦੀ ਭਾਸ਼ਾ</string>
+    <string name="pref_summary_app_language">ਐਪ ਦੇ ਸਾਰੇ ਲੇਬਲਾਂ ਲਈ ਵਰਤੀ ਜਾਣ ਵਾਲੀ ਭਾਸ਼ਾ</string>
 </resources>
