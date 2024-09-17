@@ -25,4 +25,6 @@
     <string name="no_new_channels_found">ऐसा कोई YouTube चैनल नहीं मिला जिसके आप पहले से सदस्य न हों.</string>
     <string name="import_subscriptions_parse_error">आपके द्वारा अपलोड की गई फ़ाइल को पार्स नहीं किया जा सका: %s.</string>
     <string name="failed_to_import_subscriptions">आपकी YouTube सदस्यताएं आयात नहीं की जा सकीं।</string>
+    <string name="status_not_exists">[डिलीटड]</string>
+    <string name="status_account_terminated">[टर्मीनेटड]</string>
 </resources>
