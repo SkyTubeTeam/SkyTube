@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="channel_unwhitelist_error">Não foi possível remover o canal da lista de permissões.</string>
-    <string name="channel_blacklist_error">Não foi possível colocar o canal na lista de bloqueio.</string>
-    <string name="channel_blacklisted">Canal na lista de bloqueio. Por favor recarregue.</string>
+    <string name="channel_blacklist_error">Não foi possível bloquear o canal.</string>
+    <string name="channel_blacklisted">Atualizar para usar a nova lista de bloqueio dos canais.</string>
     <string name="dislikes">%d%% \'não gosto\'</string>
     <string name="block_channel">Bloquear canal</string>
     <string name="configure">Configurar</string>
     <string name="no_videos_blocked">Deseja configurar o bloqueador para bloquear ou filtrar os vídeos\?</string>
     <string name="blocked_videos">Vídeos bloqueados</string>
+    <string name="add_to_permitted">Permitir canal</string>
 </resources>
