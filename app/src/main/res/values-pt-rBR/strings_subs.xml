@@ -25,4 +25,6 @@
     <string name="about">Sobre</string>
     <string name="channel_already_subscribed">Já sou inscrito</string>
     <string name="channel_unsubscribed">Canal desinscrito</string>
+    <string name="status_not_exists">[Excluído]</string>
+    <string name="status_account_terminated">[Terminado]</string>
 </resources>
