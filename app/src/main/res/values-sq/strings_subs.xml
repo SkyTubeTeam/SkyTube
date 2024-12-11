@@ -25,4 +25,6 @@
     <string name="import_subscriptions_parse_error">S’u përtyp dot kartela që ngarkuat: %s.</string>
     <string name="failed_to_import_subscriptions">S’u importuan dot pajtimet tuaja YouTube.</string>
     <string name="about">Mbi</string>
+    <string name="status_account_terminated">[Përfunduar]</string>
+    <string name="status_not_exists">[Fshirë]</string>
 </resources>
