@@ -91,7 +91,7 @@
     <string name="channel_whitelist_updated">Bitte Videos aktualisieren, um die neue Kanal-Zulassungsliste zu benutzen.</string>
     <string name="channel_whitelist_update_failure">Der angegebene Kanal konnte nicht in die Zulassungsliste eingetragen werden.</string>
     <string name="channel_unwhitelist_success">Bitte Videos aktualisieren, um die neue Kanal-Zulassungsliste zu benutzen.</string>
-    <string name="channel_unwhitelist_failure">Das Austragen des/der angegebenen Kanals/Kanäle aus der Zulassungsliste ist fehlgeschlagen …</string>
+    <string name="channel_unwhitelist_failure">Der angegebene Kanal/die angegebenen Kanäle konnten nicht aus der Liste der erlaubten Kanäle entfernt werden</string>
     <string name="no_preferred_lang_selected">Keine bevorzugte Sprache ausgewählt.</string>
     <string name="preferred_lang_updated">Bitte aktualisieren Sie die Videos, um die neue Sprache anzuwenden.</string>
     <string name="pref_title_lang_detection_video_filtering">Videosprachfilter</string>
@@ -182,4 +182,6 @@
     <string name="pref_summary_open_issue">Verbesserungsvorschlag oder Fehler melden.</string>
     <string name="pref_summary_playback_speed">Standard-Wiedergabegeschwindigkeit: %s</string>
     <string name="pref_title_playback_speed">Standard-Wiedergabegeschwindigkeit</string>
+    <string name="pref_summary_app_language">Die für alle Bezeichnungen in der Anwendung verwendete Sprache</string>
+    <string name="pref_title_app_language">Anwendungssprache</string>
 </resources>
