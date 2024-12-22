@@ -28,7 +28,7 @@
     <string name="cleaner">Reiniger der schon gesehenen Videos</string>
     <string name="cleaner_confirm">Säubern</string>
     <string name="cleaner_watched_downloads">Entferne angesehene Downloads</string>
-    <string name="cleaner_toast_finish">Cleaner hat %1$s Video(s) entfernt. Jetzt sind %2$s MB wieder frei</string>
+    <string name="cleaner_toast_finish">Wir haben %1$s Video(s) aus den Lesezeichen entfernt und %2$s MB an heruntergeladenen Videos gelöscht.</string>
     <string name="cleaner_watched_bookmarks">Entferne angesehene, mit Lesezeichen markierte, Videos</string>
     <string name="video_comments_are_disabled">Kommentare sind deaktiviert</string>
 </resources>
