@@ -1,2 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="error_stream_decryption_fail">Δεν μπορεί να φορτωθεί o κωδικός αποκρυπτογράφησης από την υπηρεσία YouTube.</string>
+    <string name="warning_metered_network_play">Συνδεθείτε πρώτα σε ένα δίκτυο απεριορίστων δεδομένων για να αποφεύγετε τυχόν χρεώσεις δεδομένων. Συνέχεια με την αναπαραγωγή του βίντεο ούτος ή άλλος;</string>
+    <string name="enter_video_url">Εισαγωγή Διεύθυνσης URL Bίντεο</string>
+    <string name="error_get_comments_no_network">Συνδεθείτε με το Internet πρώτα για την ανάκτηση σχολίων.</string>
+    <string name="sponsorblock_skipped">Παράλειψη προωθούμενου τμήματος: %s</string>
+    <string name="error_downloaded_file_is_corrupted">Το βίντεο που έχει ληφθεί φαίνεται να είναι <b> κατεστραμμένο </b>:<br/><br/>%s. <br/><br/><b> Διαγραφή του </b> αρχείου;</string>
+    <string name="url_copied_to_clipboard">Ο σύνδεσμος URL αντιγράφηκε στο πρόχειρο.</string>
+    <string name="error_get_video_desc">Δεν μπόρεσε να φορτωθεί η περιγραφή του βίντεο.</string>
+    <string name="reload_video">Επαναφόρτωση βίντεο</string>
+    <string name="sponsorblock_category_music_offtopic">Τμήμα Χωρίς Μουσική</string>
+    <string name="error_stream_err_unavailable">Μη Διαθέσιμο.</string>
+    <string name="error_stream_parse_error">Σφάλμα ανάλυσης δεδομένων.</string>
+    <string name="error_video_play">Σφάλμα Αναπαραγωγής Βίντεο</string>
+    <string name="error_video_streams_empty">Δεν υπάρχουν διαθέσιμες ροές για το \'%s\' βίντεο.</string>
+    <string name="error_video_streams">Δεν μπόρεσε να φορτωθεί καμία ροή βίντεο.</string>
+    <string name="error_invalid_url">Σφάλμα διεύθυνσης βίντεο URL: %s</string>
+    <string name="error_video_parse_error">Δεν μπόρεσε να ξεκινήσει η αναπαραγωγή του βίντεο: <br/><br/>%s.</string>
+    <string name="metered_network">Σύνδεση Ογκοχρέωσης</string>
+    <string name="warning_metered_network_disable">Να μην ερωτηθώ ξανά.</string>
+    <string name="metered_network_blocked_by_policy">Η λήψη έχει μπλοκαριστεί γιατί έχετε συνδεθεί μέσω μιας σύνδεσης ογκοχρέωσης.</string>
+    <string name="play_video">Αναπαραγωγή Βίντεο</string>
+    <string name="warning_live_video">Δεν μπορεί να γίνει αναπαραγωγή βίντεο συνεχής ροής προς το παρόν. Θέλετε να ανοίξει με μια διαφορετική εφαρμογή;</string>
+    <string name="ratings_disabled">Βαθμολογίες απενεργοποιημένες</string>
+    <string name="loading_video">Φόρτωση βίντεο…</string>
+    <string name="open_in_browser">Άνοιγμα στον περιηγητή ιστού</string>
+    <string name="open_with">Άνοιγμα με…</string>
+    <string name="share">Κοινοποίηση</string>
+    <string name="share_via">Κοινοποίηση με…</string>
+    <string name="copy_url">Αντιγραφή συνδέσμου URL</string>
+    <string name="mark_watched">Σημείωση ως προβεβλημένο</string>
+    <string name="mark_unwatched">Σημείωση ως μη προβεβλημένο</string>
+    <string name="error_get_comments">Δεν ήταν δυνατή η ανάκτηση των σχολίων.</string>
+    <string name="no_video_comments">Αυτό το βίντεο είτε δεν έχει σχόλια, είτε αυτά είναι απενεργοποιημένα.</string>
+    <string name="view_replies">Προβολή απαντήσεων</string>
+    <string name="hide_replies">Απόκρυψη απαντήσεων</string>
+    <string name="play">Αναπαραγωγή</string>
+    <string name="cancel">Ακύρωση</string>
+    <string name="clear">Καθαρισμός</string>
+    <string name="should_resume">Συνεχίσετε από εκεί που σταματήσατε;</string>
+    <string name="resume">Συνέχιση</string>
+    <string name="sponsorblock_category_sponsor">Χορηγός</string>
+    <string name="sponsorblock_category_selfpromo">Αυτοπροβολή</string>
+    <string name="sponsorblock_category_interaction">Υπενθύμιση Aλληλεπίδρασης</string>
+    <string name="sponsorblock_category_intro">Εισαγωγή / Διάλειμμα</string>
+    <string name="sponsorblock_category_outro">Τίτλοι τέλους / Συντελεστές</string>
+    <string name="sponsorblock_category_preview">Προεπισκόπηση / Σύνοψη</string>
+    <string name="sponsorblock_category_filler">Συμπλήρωμα κενού</string>
+</resources>
