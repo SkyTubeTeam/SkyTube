@@ -1,2 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="no_subscriptions_text">Εγγραφείτε σε μερικά κανάλια για να δείτε νέα βίντεο από αυτά εδώ.</string>
+    <string name="fetching_subbed_channels_info_error">Δεν μπορέσαν να φορτωθούν οι πληροφορίες καναλιού.</string>
+    <string name="notification_channel_feed_title">Ειδοποιήσεις Ροής</string>
+    <string name="notification_new_videos_found">%d νέα βίντεο από κανάλια που έχετε κάνει εγγραφή</string>
+    <string name="feed">Ροή</string>
+    <string name="channel_related">Κανάλι...</string>
+    <string name="subscribing_to_channels">Εγγραφή στα κανάλια…</string>
+    <string name="open_channel">Άνοιγμα Καναλιού</string>
+    <string name="fetching_subbed_channels_info">Λήψη πληροφοριών καναλιού…</string>
+    <string name="fetching_subscription_videos">Λήψη δεδομένων βίντεο από τα κανάλια που εχτέ εγγραφεί…</string>
+    <string name="fetched_videos_from_channels">Βρέθηκαν %1$d βίντεο από %2$d / %3$d κανάλια.</string>
+    <string name="no_new_videos_found">Δεν υπάρχουν νέα βίντεο.</string>
+    <string name="import_subscriptions_from_youtube">Εισαγωγή συνδρομών καναλιών από το YouTube</string>
+</resources>
