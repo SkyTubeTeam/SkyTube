@@ -25,4 +25,6 @@
     <string name="failed_to_import_subscriptions">Αποτυχία εισαγωγής των συνδρομών YouTube.</string>
     <string name="about">Σχετικά</string>
     <string name="import_subscriptions_description">Αφαιρέστε όλες τις επιλογές στη σελίδα https://takeout.google.com εκτός από \"YouTube and YouTube Music\" και κάντε κλικ στην επιλογή \"All YouTube data included\" για να λάβετε μόνο τις συνδρομές σας. Κάντε κλικ στο \"Next\" και μετά στο \"Create export\". Κάντε κλικ στην επιλογή να λάβετε mail με ενα συνδεσμο λήψης. Κατεβάστε το αρχείο απο το mail που θα λάβετε. Επιλέξτε αυτο το αρχείο ZIP ή κάντε το εξαγωγλη και επιλέξτε το αρχείο subscriptions.csv ή subscriptions.json που περιέχονται (στο /Takeout/YouTube και στο YouTube Music/subscriptions/) χρησιμοποιώντας την επιλογή \"Επιλέξτε αρχείο συνδρομών\" από κάτω.</string>
+    <string name="status_not_exists">[Διαγεγραμμένο]</string>
+    <string name="status_account_terminated">[Τερματίστηκε]</string>
 </resources>
