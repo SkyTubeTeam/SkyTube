@@ -25,4 +25,6 @@
     <string name="channel_already_subscribed">Già iscritto</string>
     <string name="channel_subscribed">Iscritto al canale</string>
     <string name="select_sub_file">Seleziona il file iscrizioni</string>
+    <string name="status_not_exists">[Eliminato]</string>
+    <string name="status_account_terminated">[Terminato]</string>
 </resources>

@@ -170,4 +170,6 @@
     <string name="pref_disable_search_history_deleted">Otsingute ajalugu on kustutatud.</string>
     <string name="pref_title_disable_playback_status">Ära salvesta videote taasesituse olekuid</string>
     <string name="pref_summary_disable_playback_status">Selle eelistusega väldid videote taasesituse olekute salvestamise.</string>
+    <string name="pref_title_app_language">Rakenduse keel</string>
+    <string name="pref_summary_app_language">Keel, mida kasutatakse kõikide rakenduse tekstide ja siltide kuvamiseks</string>
 </resources>

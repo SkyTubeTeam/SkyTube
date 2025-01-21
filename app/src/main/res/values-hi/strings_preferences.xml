@@ -166,4 +166,6 @@
     <string name="pref_summary_maximum_res">उच्चतम रेजोल्यूशन चुनें: %s</string>
     <string name="pref_title_minimum_res_metered">मीटर्ड नेटवर्क के लिए सबसे कम रेजोल्यूशन</string>
     <string name="no_resolution_specified">कोई भी नहीं</string>
+    <string name="pref_title_app_language">ऐप की भाषा</string>
+    <string name="pref_summary_app_language">एप्लिकेशन में सभी लेबल के लिए उपयोग की जाने वाली भाषा</string>
 </resources>

@@ -25,4 +25,6 @@
     <string name="channel_already_subscribed">Zaten abone oldunuz</string>
     <string name="channel_subscribed">Kanala abone olundu</string>
     <string name="select_sub_file">Abonelik Dosyasını Seç</string>
+    <string name="status_not_exists">[Silindi]</string>
+    <string name="status_account_terminated">[Sonlandırıldı]</string>
 </resources>

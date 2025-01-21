@@ -25,4 +25,6 @@
     <string name="channel_already_subscribed">ਪਹਿਲਾਂ ਹੀ ਸਬਸਕ੍ਰਾਈਬ ਕੀਤਾ ਹੋਇਆ</string>
     <string name="import_subscriptions_description">https://takeout.google.com \'ਤੇ \"YouTube ਅਤੇ YouTube Music\" ਨੂੰ ਛੱਡ ਕੇ ਹਰ ਚੀਜ਼ ਨੂੰ ਅਣਚੁਣਿਆ ਕਰੋ ਅਤੇ ਸਿਰਫ਼ ਸਬਸਕ੍ਰਿਪਸ਼ਨਾਂ ਪ੍ਰਾਪਤ ਕਰਨ ਲਈ \"ਸਾਰਾ YouTube ਡਾਟਾ ਸ਼ਾਮਲ\" \'ਤੇ ਕਲਿੱਕ ਕਰੋ। \"ਅੱਗੇ\" ਅਤੇ ਫਿਰ \"ਨਿਰਯਾਤ ਬਣਾਓ\" \'ਤੇ ਕਲਿੱਕ ਕਰੋ। ਡਾਊਨਲੋਡ ਲਿੰਕ ਦੇ ਨਾਲ ਇੱਕ ਈ-ਮੇਲ ਪ੍ਰਾਪਤ ਕਰਨ ਲਈ ਕਲਿੱਕ ਕਰੋ। ਆਪਣੇ ਈ-ਮੇਲ ਕਲਾਇੰਟ ਤੋਂ ਫਾਈਲ ਡਾਊਨਲੋਡ ਕਰੋ। ਇਸ ZIP ਫਾਈਲ ਨੂੰ ਚੁਣੋ ਜਾਂ ਇਸਨੂੰ ਐਕਸਟਰੈਕਟ ਕਰੋ ਅਤੇ ਹੇਠਾਂ \"ਸਬਸਕ੍ਰਿਪਸ਼ਨ ਫਾਈਲ ਚੁਣੋ\" ਦੀ ਵਰਤੋਂ ਕਰਕੇ (/Takeout/YouTube ਅਤੇ YouTube Music/subscriptions/ ਵਿੱਚ) ਵਿੱਚ ਮੌਜੂਦ subscriptions.csv ਜਾਂ subscriptions.json ਨੂੰ ਚੁਣੋ।</string>
     <string name="error_unable_to_subscribe">ਚੈਨਲ (id=%s) ਤੋਂ/ਨੂੰ (ਅਨ) ਸਬਸਕ੍ਰਾਈਬ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਿਆ</string>
+    <string name="status_not_exists">[ਡਿਲੀਟ ਕੀਤੇ]</string>
+    <string name="status_account_terminated">[ਟਰਮੀਨੇਟ ਕੀਤੇ]</string>
 </resources>

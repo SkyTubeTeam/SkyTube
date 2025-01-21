@@ -25,4 +25,6 @@
     <string name="channel_already_subscribed">Bereits abonniert</string>
     <string name="channel_subscribed">Kanal abonniert</string>
     <string name="select_sub_file">Abonnementdatei auswählen</string>
+    <string name="status_not_exists">[Gelöscht]</string>
+    <string name="status_account_terminated">[Beendet]</string>
 </resources>

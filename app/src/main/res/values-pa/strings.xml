@@ -30,5 +30,5 @@
     <string name="video_comments_are_disabled">ਵੀਡੀਓ ਟਿੱਪਣੀਆਂ ਬੰਦ ਹਨ</string>
     <string name="cleaner_explanation">ਬੁੱਕਮਾਰਕ ਕੀਤੀਆਂ/ਡਾਊਨਲੋਡ ਕੀਤੀਆਂ ਵੀਡੀਓਜ਼ ਨੂੰ ਸਾਫ਼ ਕਰੋ। ਹੇਠਾਂ ਦਿੱਤੇ ਫਿਲਟਰ ਵਿਕਲਪਾਂ ਦੀ ਵਰਤੋਂ ਕਰੋ:</string>
     <string name="cleaner_watched_bookmarks">ਵੇਖੇ ਗਏ ਬੁੱਕਮਾਰਕ ਹਟਾਓ</string>
-    <string name="cleaner_toast_finish">ਅਸੀਂ ਬੁੱਕਮਾਰਕਾਂ ਤੋਂ %1$s ਵੀਡੀਓ(ਵਾਂ) ਹਟਾ ਦਿੱਤੀਆਂ ਹਨ, ਅਤੇ ਡਾਊਨਲੋਡ ਕੀਤੀਆਂ ਵੀਡੀਓਜ਼ ਵਿੱਚੋਂ %2$s MB ਨੂੰ ਮਿਟਾ ਦਿੱਤਾ ਹੈ</string>
+    <string name="cleaner_toast_finish">ਅਸੀਂ ਬੁੱਕਮਾਰਕਾਂ ਤੋਂ %1$s ਵੀਡੀਓ ਹਟਾ ਦਿੱਤੀਆਂ ਹਨ, ਅਤੇ ਡਾਊਨਲੋਡ ਕੀਤੀਆਂ ਵੀਡੀਓਜ਼ ਵਿੱਚੋਂ %2$s MB ਨੂੰ ਮਿਟਾ ਦਿੱਤਾ ਹੈ।</string>
 </resources>

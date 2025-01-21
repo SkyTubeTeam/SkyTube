@@ -25,4 +25,6 @@
     <string name="channel_subscribed">Kanál odoberaný</string>
     <string name="channel_subscribe_failed">Nepodarilo sa prihlásiť na odber kanála</string>
     <string name="no_channels_found">Nepodarilo sa nájsť žiadne kanály YouTube v súbore, ktorý ste nahrali.</string>
+    <string name="status_not_exists">[Odstránené]</string>
+    <string name="status_account_terminated">[Ukončený]</string>
 </resources>

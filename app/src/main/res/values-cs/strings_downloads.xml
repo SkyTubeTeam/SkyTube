@@ -10,7 +10,7 @@
     <string name="no_downloaded_videos_text">Zde naleznete stažená videa.</string>
     <string name="playing_video_file_missing">Přehrávám video online jelikož se nepodařilo najít soubor ke stažení.</string>
     <string name="external_storage_not_available">Před stažením povolte přístup k externímu úložišti.</string>
-    <string name="download">Stahnout</string>
+    <string name="download">Stáhnout</string>
     <string name="downloads">Stahování</string>
     <string name="warning_metered_network_download">Stáhnout video na placeném připojení které právě používáte\?</string>
     <string name="starting_video_download">Stahuji \'%s\'…</string>

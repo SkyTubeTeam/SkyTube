@@ -182,4 +182,6 @@
     <string name="pref_title_playback_speed">Velocidad de reproducción predeterminada</string>
     <string name="pref_title_open_issue">Reportar un problema</string>
     <string name="pref_summary_open_issue">Sugerir una idea o reportar un bug.</string>
+    <string name="pref_title_app_language">Idioma de la aplicación</string>
+    <string name="pref_summary_app_language">El idioma utilizado para todas las etiquetas de la aplicación</string>
 </resources>

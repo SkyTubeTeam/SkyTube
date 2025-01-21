@@ -25,4 +25,6 @@
     <string name="channel_already_subscribed">انت مشترك في هذه القناة</string>
     <string name="channel_subscribe_failed">غير قادر على الاشتراك بالقناة</string>
     <string name="channel_unsubscribed">يلغى الاشتراك بالقناة</string>
+    <string name="status_not_exists">[حذفت]</string>
+    <string name="status_account_terminated">‍[تم حذفه]</string>
 </resources>
