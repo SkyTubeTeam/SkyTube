@@ -1,0 +1,6 @@
+* NewPipeExtractor update
+* Application language selector
+* Updated language translations by:
+ * Besnik Bleta, Ettore Atalan, Flavio F. M, Ihor Hordiichuk, Jeff Huang, Jose Delvani, Massimo Pissarello, Milan,
+ * Milo Ivir, Oğuz Ersen, Priit Jõerüüt, Rex_sa, Ricky Tigg, Samylol99, ShareASmile, Stamatis Mamougas, gallegonovato
+ * ssantos, 大王叫我来巡山

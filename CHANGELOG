@@ -1,3 +1,15 @@
+v2.992 - 2025-01-22
+        * Use latest NewPipeExtractor
+        * Add ability to set the application language internally.
+        * Updated translations for:
+                * Albanian, Arabic, Chinese (Simplified), Chinese (Traditional), Croatian, Czech, Estonian, French, Finnish, German,
+                * Greek, Hindi, Hungarian, Italian, Portuguese (Brazil), Portuguese (Portugal), Punjabi, Slovak, Spanish, Turkish,
+                * Ukrainian.
+        * Translators:
+                * Besnik Bleta, Ettore Atalan, Flavio F. M, Ihor Hordiichuk, Jeff Huang, Jose Delvani, Massimo Pissarello, Milan,
+                * Milo Ivir, Oğuz Ersen, Priit Jõerüüt, Rex_sa, Ricky Tigg, Samylol99, ShareASmile, Stamatis Mamougas, gallegonovato
+                * ssantos, 大王叫我来巡山
+
 v2.991 - 2024-08-25
         * Optimize internal database, make it faster and smaller.
         * Make subscription feed appear (nearly) instantly and do the slow network fetches in the background.
