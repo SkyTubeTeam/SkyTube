@@ -12,7 +12,7 @@ android {
         //noinspection ExpiredTargetSdkVersion
         targetSdkVersion 28
 
-        versionName "2.992"    // digits of the *fractional part* shall NOT be > than "9"
+        versionName "2.993"    // digits of the *fractional part* shall NOT be > than "9"
         versionCode buildNumber.toInteger()
 
         // Third party devs:  pls be ethical and change the below keys
@@ -164,9 +164,9 @@ dependencies {
         exclude group: 'com.google.http-client', module: 'google-http-client-jackson2'
     }
 
-    // implementation 'com.github.SkyTubeTeam.NewPipeExtractor:NewPipeExtractor:ed6a3bd8bf09ab6dfe252f2a924c8ed1fb94ef8f'
+    // implementation 'com.github.SkyTubeTeam.NewPipeExtractor:NewPipeExtractor:3be6a7b2b3b0bf4'
     // implementation 'com.github.TeamNewPipe.NewPipeExtractor:NewPipeExtractor:v0.22.6'
-    implementation 'com.github.SkyTubeTeam.NewPipeExtractor:NewPipeExtractor:skytube-2025-01-22'
+    implementation 'com.github.SkyTubeTeam.NewPipeExtractor:NewPipeExtractor:skytube-2025-01-23-android19'
 
     def skytubeComponents = '0.0.9'
     implementation ("com.github.SkyTubeTeam.components:okhttp-client:$skytubeComponents") {
