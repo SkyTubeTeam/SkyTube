@@ -13,7 +13,7 @@ android {
         targetSdkVersion 28
 
         versionName "2.993"    // digits of the *fractional part* shall NOT be > than "9"
-        versionCode buildNumber.toInteger()
+        versionCode 53
 
         // Third party devs:  pls be ethical and change the below keys
         buildConfigField 'String', 'YOUTUBE_API_KEYS_DEBUG', '""'
@@ -209,21 +209,24 @@ dependencies {
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
 }
 
-task fastlaneCheck {
-    group "Verification"
-    description 'Tasks which validates the fastlane requirements'
-    doLast {
-        var path = file("./../fastlane/metadata/android/en-US/changelogs/${buildNumber}.txt")
-        assert path.exists()
-        assert path.length() <= 500
-        println("Fastlane check successful for $buildNumber - file exists and smaller than 500 bytes")
-    }
-}
+afterEvaluate {
 
-tasks.whenTaskAdded {
-     theTask -> {
-        if (theTask.name.startsWith('assemble')) {
-            theTask.dependsOn(fastlaneCheck)
+    task fastlaneCheck {
+        group "Verification"
+        description 'Tasks which validates the fastlane requirements'
+        doLast {
+            var buildNumber = android.defaultConfig.versionCode
+            var path = file("./../fastlane/metadata/android/en-US/changelogs/${buildNumber}.txt")
+            assert path.exists()
+            assert path.length() <= 500
+            println("Fastlane check successful for $buildNumber - file exists and smaller than 500 bytes")
         }
     }
+
+    // Find all tasks whose names end with 'assemble' and make them depend on fastlaneCheck
+    tasks.matching { it.name.toLowerCase().startsWith('assemble') }.all { Task task ->
+        task.finalizedBy(fastlaneCheck)
+    }
+
 }
+

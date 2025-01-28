@@ -2,7 +2,6 @@
 
 buildscript {
     ext.kotlinVersion = '1.6.21'
-    ext.buildNumber = 53
     repositories {
         google()
         mavenCentral()
