@@ -1,0 +1,1 @@
+* Fixing the F-Droid build.

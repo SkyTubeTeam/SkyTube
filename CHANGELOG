@@ -1,3 +1,6 @@
+v2.994 - 2025-01-28
+        * Fixing the F-Droid build.
+
 v2.993 - 2025-01-23
         * Fixing a rushed update that caused lot's of problems due to newer Android API usage.
 
