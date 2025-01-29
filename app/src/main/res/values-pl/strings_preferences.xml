@@ -182,4 +182,6 @@
     <string name="pref_summary_use_dislike_api">Przywróć licznik łapek w dół za pomocą returnyoutubedislike.com</string>
     <string name="pref_title_playback_speed">Domyślna prędkość odtwarzania</string>
     <string name="pref_summary_playback_speed">Domyślna prędkość odtwarzania: %s</string>
+    <string name="pref_summary_app_language">Język używany dla wszystkich etykiet w aplikacji</string>
+    <string name="pref_title_app_language">Język aplikacji</string>
 </resources>
