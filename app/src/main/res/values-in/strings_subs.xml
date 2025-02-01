@@ -25,4 +25,6 @@
     <string name="channel_already_subscribed">Sudah berlangganan</string>
     <string name="channel_subscribed">Berlangganan kanal</string>
     <string name="select_sub_file">Pilih File Langganan</string>
+    <string name="status_account_terminated">[Dihentikan]</string>
+    <string name="status_not_exists">[Terhapus]</string>
 </resources>
