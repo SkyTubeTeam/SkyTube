@@ -157,7 +157,7 @@
     <string name="preferences">Asetukset</string>
     <string name="pref_sponsorblock_category">SponsorBlock</string>
     <string name="pref_general">Yleinen</string>
-    <string name="pref_title_credit_sponsorblock">Lopputekstit</string>
+    <string name="pref_title_credit_sponsorblock">Kiitettävää</string>
     <string name="pref_summary_open_issue">Ehdota ideaa tai raportoi ongelma.</string>
     <string name="pref_title_open_issue">Avaa ongelmaraportti</string>
     <string name="pref_summary_use_dislike_api">Palauta en tykkää -laskuri käyttämällä returnyoutubedislike.com</string>
