@@ -44,7 +44,7 @@
     <string name="sponsorblock_category_interaction">Muistutus Vuorovaikutuksesta</string>
     <string name="sponsorblock_category_music_offtopic">Hiljainen Kohta</string>
     <string name="sponsorblock_category_intro">Intro/Tauko</string>
-    <string name="sponsorblock_category_outro">Lopputekstit</string>
+    <string name="sponsorblock_category_outro">Loppukortit/Kiitettävää</string>
     <string name="sponsorblock_category_preview">Esikatselu/Kertaus</string>
     <string name="sponsorblock_category_filler">Täyteaine</string>
 </resources>
