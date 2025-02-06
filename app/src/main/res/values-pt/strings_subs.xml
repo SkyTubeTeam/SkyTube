@@ -24,4 +24,6 @@
     <string name="unsubscribe_from_all_current_sibbed_channels">Cancelar subscrição em todos os canais subscritos.</string>
     <string name="no_new_channels_found">Não foram encontrados canais do YouTube que não estejam já subscritos.</string>
     <string name="failed_to_import_subscriptions">Não foi possível importar as subscrições.</string>
+    <string name="status_not_exists">[Apagado]</string>
+    <string name="status_account_terminated">[Terminado]</string>
 </resources>
