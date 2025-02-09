@@ -88,12 +88,12 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
                 .icon(MaterialDesignIconic.Icon.gmi_favorite)
                 .color(IconicsColor.colorInt(Color.RED))
                 .size(IconicsSize.TOOLBAR_ICON_SIZE)
-				.padding(IconicsSize.TOOLBAR_ICON_PADDING);
+                .padding(IconicsSize.TOOLBAR_ICON_PADDING);
         this.pinnedIcon = new IconicsDrawable(context)
                 .icon(MaterialDesignIconic.Icon.gmi_pin)
                 .color(IconicsColor.colorInt(Color.RED))
                 .size(IconicsSize.TOOLBAR_ICON_SIZE)
-				.padding(IconicsSize.TOOLBAR_ICON_PADDING);
+                .padding(IconicsSize.TOOLBAR_ICON_PADDING);
         try {
             this.commentThreadPager = NewPipeService.get().getCommentPager(videoId);
             this.expandableListView = expandableListView;
@@ -126,7 +126,8 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
         if (commentThreadPager != null) {
             CommentsInfoItem comment = commentThreadPager.getComment(groupPosition);
             if (comment != null && comment.getReplyCount() > 0) {
-                return (replyMap.get(comment.getCommentId()) != null) ? comment.getReplyCount() : 0;
+                List<CommentsInfoItem> replies = replyMap.get(comment.getCommentId());
+                return replies != null ? replies.size() : 0;
             }
         }
         return 0;
