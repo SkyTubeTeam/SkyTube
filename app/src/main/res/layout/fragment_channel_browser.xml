@@ -101,15 +101,16 @@
 
 	</com.google.android.material.appbar.AppBarLayout>
 
-	<com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-		android:id="@+id/channel_subscribe_button"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_margin="8dp"
-		android:visibility="invisible"
-		android:text="@string/subscribe"
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/channel_subscribe_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:layout_marginRight="8dp"
+        android:visibility="visible"
+        android:text="@string/subscribe"
 
-		app:layout_anchor="@id/app_bar_layout"
-		app:layout_anchorGravity="top|right|end" />
+        app:layout_anchor="@id/app_bar_layout"
+        app:layout_anchorGravity="top|right|end" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
