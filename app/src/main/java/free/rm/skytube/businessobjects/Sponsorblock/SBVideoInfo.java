@@ -11,6 +11,10 @@ public class SBVideoInfo {
     private final double videoDuration;
     private final List<SBSegment> segments = new ArrayList<SBSegment>();
 
+    public SBVideoInfo(double videoDuration) {
+        this.videoDuration = videoDuration;
+    }
+
     public SBVideoInfo(JSONArray sponsorblockInfo) throws JSONException {
         double firstDuration = 0;
         for (int i = 0; i < sponsorblockInfo.length(); i++) {
@@ -31,5 +35,13 @@ public class SBVideoInfo {
 
     public List<SBSegment> getSegments() {
         return segments;
+    }
+
+    @Override
+    public String toString() {
+        return "SBVideoInfo{" +
+                "videoDuration=" + videoDuration +
+                ", segments=" + segments +
+                '}';
     }
 }

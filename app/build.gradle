@@ -155,6 +155,7 @@ dependencies {
 
     // Convert Java objects into JSON and back
     implementation 'com.google.code.gson:gson:2.10.1'
+    implementation "com.github.TeamNewPipe:nanojson:1d9e1aea9049fc9f85e68b43ba39fe7be1c1f751"
 
     // YouTube modules
     implementation 'com.github.SkyTubeTeam.google-http-java-client:google-http-client-android:e726c5718d'
@@ -206,6 +207,7 @@ dependencies {
     // Required for local unit tests (JUnit 5 framework)
     def junitVersion = '5.10.2'
     testImplementation "org.junit.jupiter:junit-jupiter-api:$junitVersion"
+    testImplementation "org.junit.jupiter:junit-jupiter-params:$junitVersion"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
 }
 

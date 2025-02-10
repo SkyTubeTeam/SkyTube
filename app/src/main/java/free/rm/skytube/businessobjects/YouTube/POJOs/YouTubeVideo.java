@@ -102,14 +102,9 @@ public class YouTubeVideo extends CardData implements Serializable {
 	 */
 	private int durationInSeconds = -1;
 	/**
-	 * Total views count.  This can be <b>null</b> if the video does not allow the user to
-	 * like/dislike it.  Format:  "<number> Views"
-	 */
-	private String viewsCount;
-	/**
 	 * Total views count.
 	 */
-	private BigInteger viewsCountInt;
+	private Long viewsCountInt;
 	/**
 	 * The date/time of when this video was published.
 	 */
@@ -173,7 +168,7 @@ public class YouTubeVideo extends CardData implements Serializable {
 		if (statistics != null) {
 			setLikeDislikeCount(statistics.getLikeCount() != null ? statistics.getLikeCount().longValue() : null, statistics.getDislikeCount() != null ? statistics.getDislikeCount().longValue() : null);
 
-			setViewCount(statistics.getViewCount());
+			setViewCount(statistics.getViewCount().longValue());
 		}
 	}
 
@@ -185,9 +180,8 @@ public class YouTubeVideo extends CardData implements Serializable {
 		return categoryId;
 	}
 
-	public void setViewCount(BigInteger viewsCountInt) {
+	public void setViewCount(Long viewsCountInt) {
 		this.viewsCountInt = viewsCountInt;
-		this.viewsCount = String.format(getStr(R.string.views), viewsCountInt);
 	}
 
         public YouTubeVideo(String id, String title, String description, long durationInSeconds,
@@ -198,7 +192,7 @@ public class YouTubeVideo extends CardData implements Serializable {
             this.description = description;
             setDurationInSeconds((int) durationInSeconds);
             if (viewCount >= 0) {
-                setViewCount(BigInteger.valueOf(viewCount));
+                setViewCount(viewCount);
             }
             if (publishDate != null) {
                 setPublishTimestamp(publishDate.toEpochMilli());
@@ -374,10 +368,10 @@ public class YouTubeVideo extends CardData implements Serializable {
 	}
 
 	public String getViewsCount() {
-		return viewsCount;
+		return viewsCountInt != null ? String.format(getStr(R.string.views), viewsCountInt) : null;
 	}
 
-	public BigInteger getViewsCountInt() {
+	public Long getViewsCountInt() {
 		return viewsCountInt;
 	}
 
@@ -491,7 +485,7 @@ public class YouTubeVideo extends CardData implements Serializable {
 
 		final Long views = filterNegative(streamInfo.getViewCount());
 		if (views != null) {
-			this.setViewCount(BigInteger.valueOf(views));
+			this.setViewCount(views);
 		}
 		this.setDescription(NewPipeUtils.filterHtml(streamInfo.getDescription()));
 	}

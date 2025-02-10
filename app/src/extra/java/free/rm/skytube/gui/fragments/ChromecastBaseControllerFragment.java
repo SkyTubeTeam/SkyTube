@@ -13,9 +13,8 @@ import androidx.annotation.Nullable;
 import com.google.android.gms.cast.MediaInfo;
 import com.google.android.gms.cast.MediaStatus;
 import com.google.android.gms.cast.framework.media.RemoteMediaClient;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
+import free.rm.skytube.businessobjects.JsonSerializer;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.gui.activities.BaseActivity;
 import free.rm.skytube.gui.businessobjects.MainActivityListener;
@@ -42,6 +41,7 @@ public abstract class ChromecastBaseControllerFragment extends FragmentEx {
 	protected boolean isSeeking = false;
 
 	protected YouTubeVideo video;
+    protected final JsonSerializer jsonSerializer = new JsonSerializer();
 
 	protected MainActivityListener mainActivityListener;
 
@@ -109,8 +109,7 @@ public abstract class ChromecastBaseControllerFragment extends FragmentEx {
 		currentPlayingMedia = media;
 		currentPlayerState = remoteMediaClient.getPlayerState();
 
-		Gson gson = new Gson();
-		this.video = gson.fromJson(currentPlayingMedia.getMetadata().getString(BaseActivity.KEY_VIDEO), new TypeToken<YouTubeVideo>(){}.getType());
+		this.video = jsonSerializer.fromPersistedVideoJson(currentPlayingMedia.getMetadata().getString(BaseActivity.KEY_VIDEO));
 
 		if(currentPlayerState != MediaStatus.PLAYER_STATE_IDLE) {
 			updateButtons();

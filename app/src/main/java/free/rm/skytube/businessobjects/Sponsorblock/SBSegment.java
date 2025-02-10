@@ -9,6 +9,12 @@ public class SBSegment {
     private final double startPos;
     private final double endPos;
 
+    public SBSegment(String category, double startPos, double endPos) {
+        this.category = category;
+        this.startPos = startPos;
+        this.endPos = endPos;
+    }
+
     public SBSegment(JSONObject jsonSegment) throws JSONException {
         category = jsonSegment.getString("category");
 
