@@ -42,8 +42,7 @@ public class UpdatesChecker {
 	private final String	currentVersionNumber;
 	private boolean updatesAvailable;
 
-	private static String TAG = UpdatesChecker.class.getSimpleName();
-
+	private final static String TAG = UpdatesChecker.class.getSimpleName();
 
 	UpdatesChecker(boolean fetchReleaseNotes, String	currentVersionNumber) {
 		this.fetchReleaseNotes = fetchReleaseNotes;

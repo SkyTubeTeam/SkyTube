@@ -27,10 +27,6 @@ import androidx.annotation.NonNull;
 import androidx.core.util.Pair;
 
 import com.github.skytube.components.utils.SQLiteHelper;
-import com.google.gson.Gson;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -39,9 +35,9 @@ import java.util.Set;
 
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.app.Utils;
+import free.rm.skytube.businessobjects.JsonSerializer;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
-import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.YouTube.newpipe.VideoId;
 import free.rm.skytube.businessobjects.interfaces.OrderableDatabase;
@@ -57,6 +53,7 @@ public class BookmarksDb extends CardEventEmitterDatabase implements OrderableDa
 
 	private static final int DATABASE_VERSION = 1;
 	private static final String DATABASE_NAME = "bookmarks.db";
+    private final JsonSerializer jsonSerializer = new JsonSerializer();
 
 	private BookmarksDb(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -103,10 +100,9 @@ public class BookmarksDb extends CardEventEmitterDatabase implements OrderableDa
          * @return True if the video was successfully saved/bookmarked to the DB.
          */
     private DatabaseResult add(YouTubeVideo video) {
-		Gson gson = new Gson();
 		ContentValues values = new ContentValues();
 		values.put(BookmarksTable.COL_YOUTUBE_VIDEO_ID, video.getId());
-		values.put(BookmarksTable.COL_YOUTUBE_VIDEO, gson.toJson(video).getBytes());
+		values.put(BookmarksTable.COL_YOUTUBE_VIDEO, jsonSerializer.toPersistedVideoJson(video).getBytes());
 
 		int order = getMaximumOrderNumber();
 		order++;
@@ -173,10 +169,9 @@ public class BookmarksDb extends CardEventEmitterDatabase implements OrderableDa
 						null,
 						null, null, null, BookmarksTable.COL_ORDER + " ASC")) {
                     int blobCol = cursor.getColumnIndexOrThrow(BookmarksTable.COL_YOUTUBE_VIDEO);
-                    Gson gson = new Gson();
                     while (cursor.moveToNext()) {
                         byte[] blob = cursor.getBlob(blobCol);
-                        YouTubeVideo uvideo = gson.fromJson(new String(blob), YouTubeVideo.class).updatePublishTimestampFromDate();
+                        YouTubeVideo uvideo = jsonSerializer.fromPersistedVideoJson(blob).updatePublishTimestampFromDate();
                         ContentValues contentValues = new ContentValues();
                         contentValues.put(BookmarksTable.COL_ORDER, order++);
 
@@ -261,7 +256,6 @@ public class BookmarksDb extends CardEventEmitterDatabase implements OrderableDa
 
 		List<YouTubeVideo> videos = new ArrayList<>();
 
-		final Gson gson = new Gson();
 		Integer minOrder = null;
 		if(cursor.moveToNext()) {
 			final int colOrder = cursor.getColumnIndex(BookmarksTable.COL_ORDER);
@@ -272,28 +266,9 @@ public class BookmarksDb extends CardEventEmitterDatabase implements OrderableDa
 
                 minOrder = Utils.min(currentOrder, minOrder);
 
-				final String videoJson = new String(blob);
-
 				// convert JSON into YouTubeVideo
-				YouTubeVideo video = gson.fromJson(videoJson, YouTubeVideo.class).updatePublishTimestampFromDate();
+				YouTubeVideo video = jsonSerializer.fromPersistedVideoJson(blob);
 
-                // Logger.i(this, "Order "+cursor.getInt(colOrder)+ ", id="+video.getId()+","+video.getTitle());
-
-                // due to upgrade to YouTubeVideo (by changing channel{Id,Name} to YouTubeChannel)
-				// from version 2.82 to 2.90
-				if (video.getChannel() == null) {
-					try {
-						JSONObject videoJsonObj = new JSONObject(videoJson);
-						final String channelId   = videoJsonObj.get("channelId").toString();
-						final String channelName = videoJsonObj.get("channelName").toString();
-						video.setChannel(new YouTubeChannel(channelId, channelName));
-					} catch (JSONException e) {
-						Logger.e(this, "Error occurred while extracting channel{Id,Name} from JSON", e);
-					}
-				}
-
-				// regenerate the video's PublishDatePretty (e.g. 5 hours ago)
-				//video.forceRefreshPublishDatePretty();
 				// add the video to the list
 				videos.add(video);
 			} while(cursor.moveToNext());
@@ -320,6 +295,5 @@ public class BookmarksDb extends CardEventEmitterDatabase implements OrderableDa
 		}
 		return results;
 	}
-
 
 }

@@ -11,10 +11,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import com.github.skytube.components.utils.SQLiteHelper;
-import com.google.gson.Gson;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -25,11 +21,11 @@ import free.rm.skytube.R;
 import free.rm.skytube.app.Settings;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
+import free.rm.skytube.businessobjects.JsonSerializer;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.Sponsorblock.SBTasks;
 import free.rm.skytube.businessobjects.Sponsorblock.SBVideoInfo;
 import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
-import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.YouTube.newpipe.VideoId;
 import free.rm.skytube.businessobjects.interfaces.OrderableDatabase;
@@ -133,6 +129,8 @@ public class DownloadedVideosDb extends CardEventEmitterDatabase implements Orde
     private static final int DATABASE_VERSION = 3;
     private static final String DATABASE_NAME = "videodownloads.db";
 
+    private final JsonSerializer jsonSerializer = new JsonSerializer();
+
     public static synchronized DownloadedVideosDb getVideoDownloadsDb() {
         if (downloadsDb == null) {
             downloadsDb = new DownloadedVideosDb(SkyTubeApp.getContext());
@@ -206,14 +204,12 @@ public class DownloadedVideosDb extends CardEventEmitterDatabase implements Orde
 
             SBVideoInfo result = null;
             if (cursor.moveToNext()) {
-                Gson gson = new Gson();
                 do {
                     final byte[] sbBlob = cursor.getBlob(cursor.getColumnIndex(DownloadedVideosTable.COL_SB));
                     if (sbBlob == null) {
                         return null;
                     }
-                    final String sbJson = new String(sbBlob);
-                    result = gson.fromJson(sbJson, SBVideoInfo.class);
+                    result = jsonSerializer.fromSponsorBlockJson(new String(sbBlob));
                 } while (cursor.moveToNext());
             }
 
@@ -235,27 +231,12 @@ public class DownloadedVideosDb extends CardEventEmitterDatabase implements Orde
             List<YouTubeVideo> videos = new ArrayList<>();
 
             if (cursor.moveToNext()) {
-                Gson gson = new Gson();
                 do {
                     final byte[] blob = cursor.getBlob(cursor.getColumnIndex(DownloadedVideosTable.COL_YOUTUBE_VIDEO));
-                    final String videoJson = new String(blob);
 
                     // convert JSON into YouTubeVideo
-                    YouTubeVideo video = gson.fromJson(videoJson, YouTubeVideo.class).updatePublishTimestampFromDate();
+                    YouTubeVideo video = jsonSerializer.fromPersistedVideoJson(blob);
 
-                    // due to upgrade to YouTubeVideo (by changing channel{Id,Name} to YouTubeChannel)
-                    // from version 2.82 to 2.90
-                    if (video.getChannel() == null) {
-                        try {
-                            JSONObject videoJsonObj = new JSONObject(videoJson);
-                            final String channelId = videoJsonObj.get("channelId").toString();
-                            final String channelName = videoJsonObj.get("channelName").toString();
-                            video.setChannel(new YouTubeChannel(channelId, channelName));
-                        } catch (JSONException e) {
-                            Logger.e(this, "Error occurred while extracting channel{Id,Name} from JSON", e);
-                        }
-                    }
-                    video.forceRefreshPublishDatePretty();
                     videos.add(video);
                 } while (cursor.moveToNext());
             }
@@ -266,10 +247,9 @@ public class DownloadedVideosDb extends CardEventEmitterDatabase implements Orde
     public Single<Boolean> add(YouTubeVideo video, Uri fileUri, Uri audioUri) {
         return Single.fromCallable(() -> {
 
-                    Gson gson = new Gson();
                     ContentValues values = new ContentValues();
                     values.put(DownloadedVideosTable.COL_YOUTUBE_VIDEO_ID, video.getId());
-                    values.put(DownloadedVideosTable.COL_YOUTUBE_VIDEO, gson.toJson(video).getBytes());
+                    values.put(DownloadedVideosTable.COL_YOUTUBE_VIDEO, jsonSerializer.toPersistedVideoJson(video).getBytes());
                     if (fileUri != null) {
                         values.put(DownloadedVideosTable.COL_FILE_URI, fileUri.toString());
                     }
@@ -278,7 +258,7 @@ public class DownloadedVideosDb extends CardEventEmitterDatabase implements Orde
                     }
                     if (SkyTubeApp.getSettings().isSponsorblockEnabled()) {
                         SBVideoInfo sbInfo = SBTasks.retrieveSponsorblockSegmentsBk(video.getVideoId());
-                        values.put(DownloadedVideosTable.COL_SB, gson.toJson(sbInfo).getBytes());
+                        values.put(DownloadedVideosTable.COL_SB, jsonSerializer.toPersistedSponsorBlockJson(sbInfo).getBytes());
                     }
 
                     int order = getMaximumOrderNumber();
