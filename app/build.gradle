@@ -170,7 +170,7 @@ dependencies {
     // implementation 'com.github.TeamNewPipe.NewPipeExtractor:NewPipeExtractor:v0.22.6'
     implementation 'com.github.SkyTubeTeam.NewPipeExtractor:NewPipeExtractor:skytube-2025-02-09'
 
-    def skytubeComponents = '0.0.9'
+    def skytubeComponents = '0.0.10'
     implementation ("com.github.SkyTubeTeam.components:okhttp-client:$skytubeComponents") {
         exclude group: 'com.github.SkyTubeTeam.NewPipeExtractor', module: 'extractor'
     }

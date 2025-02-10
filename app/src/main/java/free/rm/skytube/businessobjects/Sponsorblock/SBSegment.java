@@ -1,8 +1,7 @@
 package free.rm.skytube.businessobjects.Sponsorblock;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.grack.nanojson.JsonArray;
+import com.grack.nanojson.JsonObject;
 
 public class SBSegment {
     private final String category;
@@ -15,10 +14,10 @@ public class SBSegment {
         this.endPos = endPos;
     }
 
-    public SBSegment(JSONObject jsonSegment) throws JSONException {
+    public SBSegment(JsonObject jsonSegment) {
         category = jsonSegment.getString("category");
 
-        JSONArray segmentTimes = jsonSegment.getJSONArray("segment");
+        JsonArray segmentTimes = jsonSegment.getArray("segment");
         startPos = segmentTimes.getDouble(0);
         endPos = segmentTimes.getDouble(1);
     }
