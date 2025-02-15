@@ -1,0 +1,4 @@
+* Fixing comment replies
+* Use latest NewPipeExtractor
+* Json handling improvement
+* Fix subscribe button positioning
