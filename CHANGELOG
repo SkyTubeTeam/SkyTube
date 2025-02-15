@@ -1,3 +1,9 @@
+v2.995 - 2025-02-15
+        * Fixing comment replies
+        * Use latest NewPipeExtractor
+        * Json handling improvement
+        * Fix subscribe button positioning
+
 v2.994 - 2025-01-28
         * Fixing the F-Droid build.
 
