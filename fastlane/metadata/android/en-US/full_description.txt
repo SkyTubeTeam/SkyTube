@@ -1,19 +1,22 @@
 SkyTube is a YouTube player that allows you to:
-* block unwanted videos (including channel blacklisting/whitelisting, language filtering, low view video blocking, high dislikes video blocking... etc.),
-* video swipe controls (including volume, brightness, comments and video description controls),
-* bookmark videos,
-* import subscriptions from YouTube,
-* play channels' playlists,
-* download videos,
-* view and download video thumbnails
-* explore Trending and Most Popular videos,
-* browse YouTube channels,
-* play YouTube videos,
-* view video comments,
-* search videos, music and channels,
-* channel subscription & non-intrusive notifications,
-* subscriptions feed
+<ul>
+<li>play YouTube videos</li>
+<li>download videos</li>
+<li>browse YouTube channels</li>
+<li>search videos, music and channels</li>
+<li>watch channels' playlists</li>
+<li>view video comments</li>
+<li>video swipe controls (volume, brightness, comments and description)</li>
+<li>bookmark videos</li>
+<li>import subscriptions from YouTube</li>
+<li>channel subscription with non-intrusive notifications</li>
+<li>subscriptions feed</li>
+<li>view and download video thumbnails</li>
+<li>explore Trending and Most Popular videos</li>
+</ul>
 
-... all at the tip of your fingers.
+In addition, SkyTube is equipped with a robust blocking attribute that allows you to avoid unwanted videos; channel blacklisting/whitelisting, filtering, low views, high dislikes, etc.
+
+All of this at the tips of your fingers!
 
 More features will be added in the near future.
