@@ -1,1 +1,1 @@
-~An AD-Free and Open Source YouTube Client~
+An ad-free and open-source YouTube client.
