@@ -1,2 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="error_video_play">வீடியோ பிளேபேக் பிழை</string>
+    <string name="error_video_streams_empty">\'%s\' வீடியோவில் நீரோடைகள் இல்லை.</string>
+    <string name="error_video_streams">எந்த வீடியோ ச்ட்ரீம்களையும் பெற முடியவில்லை.</string>
+    <string name="warning_metered_network_play">தரவு பயன்பாட்டு கட்டணங்களைத் தவிர்க்க முதலில் அளவிடப்படாத பிணையத்துடன் இணைக்கவும். எப்படியும் வீடியோ விளையாடலாமா?</string>
+    <string name="ratings_disabled">மதிப்பீடுகள் முடக்கப்படுகின்றன</string>
+    <string name="mark_unwatched">குறிக்கப்படாத எனக் குறிக்கவும்</string>
+    <string name="error_get_comments">கருத்துகளைப் பெற முடியவில்லை.</string>
+    <string name="error_get_comments_no_network">முதலில் கருத்துகளைப் பெற இணையத்துடன் இணைக்கவும்.</string>
+    <string name="no_video_comments">இந்த வீடியோவுக்கு எந்தக் கருத்தும் இல்லை, அல்லது அவை அணைக்கப்படுகின்றன.</string>
+    <string name="hide_replies">பதில்களை மறைக்கவும்</string>
+    <string name="should_resume">நீங்கள் நிறுத்திய இடத்திலிருந்து தொடரவா?</string>
+    <string name="sponsorblock_category_interaction">தொடர்பு நினைவூட்டல்</string>
+    <string name="error_stream_err_unavailable">கிடைக்காத செய்தி.</string>
+    <string name="error_stream_decryption_fail">YouTube சேவைக்கான மறைகுறியாக்கக் குறியீட்டை ஏற்ற முடியவில்லை.</string>
+    <string name="error_stream_parse_error">பாகுபடுத்தும் பிழை.</string>
+    <string name="error_get_video_desc">வீடியோ விளக்கத்தைப் பெற முடியவில்லை.</string>
+    <string name="error_video_parse_error">வீடியோவைத் தொடங்க முடியவில்லை: <br/> <br/> %s.</string>
+    <string name="error_invalid_url">தவறான வீடியோ URL: %s</string>
+    <string name="error_downloaded_file_is_corrupted">பதிவிறக்கம் செய்யப்பட்ட வீடியோ <b> சிதைந்த </b>: <br/> <br/> %s. <br/> <br/> <b> நீக்கு </b> கோப்பு?</string>
+    <string name="metered_network">மீட்டர் பிணையம்</string>
+    <string name="warning_metered_network_disable">மீண்டும் ஒருபோதும் கேட்க வேண்டாம்.</string>
+    <string name="metered_network_blocked_by_policy">மீட்டமைக்கப்பட்ட பிணையம் மூலம் நீங்கள் இணைக்கப்பட்டுள்ளதால் தடுக்கப்பட்ட பதிவிறக்க.</string>
+    <string name="play_video">வீடியோ விளையாடுங்கள்</string>
+    <string name="warning_live_video">இப்போது நேரடி நீரோடைகளை விளையாட முடியாது. மற்றொரு பயன்பாட்டில் திறக்கவா?</string>
+    <string name="loading_video">வீடியோவை ஏற்றுகிறது…</string>
+    <string name="reload_video">வீடியோவை மீண்டும் ஏற்றவும்</string>
+    <string name="open_in_browser">வலை உலாவியில் திறக்கவும்</string>
+    <string name="open_with">உடன் திறந்திருக்கும்…</string>
+    <string name="share">பங்கு</string>
+    <string name="share_via">வழியாக பகிரவும்…</string>
+    <string name="copy_url">முகவரி ஐ நகலெடுக்கவும்</string>
+    <string name="url_copied_to_clipboard">முகவரி இடைநிலைப்பலகைக்கு நகலெடுக்கப்பட்டது.</string>
+    <string name="mark_watched">பார்த்தபடி குறி</string>
+    <string name="view_replies">பதில்களைக் காண்க</string>
+    <string name="enter_video_url">வீடியோ முகவரி ஐ உள்ளிடவும்</string>
+    <string name="play">விளையாடுங்கள்</string>
+    <string name="cancel">ரத்துசெய்</string>
+    <string name="clear">தெளிவான</string>
+    <string name="resume">மீண்டும் தொடங்குங்கள்</string>
+    <string name="sponsorblock_skipped">தவிர்க்கப்பட்ட பிரிவு: %s</string>
+    <string name="sponsorblock_category_sponsor">ஒப்புரவாளர்</string>
+    <string name="sponsorblock_category_selfpromo">தன்வய ஊக்குவிப்பு</string>
+    <string name="sponsorblock_category_outro">எண்ட்கார்டுகள்/வரவு</string>
+    <string name="sponsorblock_category_music_offtopic">இசை அல்லாத பிரிவு</string>
+    <string name="sponsorblock_category_intro">அறிமுகம்/இடைவெளி</string>
+    <string name="sponsorblock_category_preview">முன்னோட்டம்/மறுபரிசீலனை</string>
+    <string name="sponsorblock_category_filler">தடி</string>
+</resources>
