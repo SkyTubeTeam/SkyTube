@@ -1,2 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="view_thumbnail">சிறுபடத்தைக் காண்க</string>
+    <string name="thumbnail_downloaded">பதிவிறக்கம்.</string>
+    <string name="thumbnail">சிறுபடம்</string>
+    <string name="thumbnail_download_error">சிறுபடத்தை பதிவிறக்கம் செய்ய முடியவில்லை.</string>
+</resources>
