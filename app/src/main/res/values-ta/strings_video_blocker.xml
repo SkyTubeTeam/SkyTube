@@ -1,2 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="no_videos_blocked">வீடியோக்களைத் தடுக்க அல்லது வடிகட்ட வீடியோ தடுப்பாளரை அமைக்க விரும்புகிறீர்களா?</string>
+    <string name="add_to_permitted">சேனலை இசைவு</string>
+    <string name="dislikes">%d %% விருப்பு வெறுப்புகள்</string>
+    <string name="blocked_videos">தடுக்கப்பட்ட வீடியோக்கள்</string>
+    <string name="configure">அமைக்கவும்</string>
+    <string name="block_channel">தொகுதி சேனல்</string>
+    <string name="channel_blacklisted">புதிய சேனல் தடுப்புப்பட்டியலைப் பயன்படுத்த புதுப்பிக்கவும்.</string>
+    <string name="channel_blacklist_error">சேனலை பிளாக்லிச்ட் செய்ய முடியவில்லை.</string>
+    <string name="channel_unwhitelist_error">அனுமதிப்பட்டியிடமிருந்து சேனலை அகற்ற முடியவில்லை.</string>
+</resources>
