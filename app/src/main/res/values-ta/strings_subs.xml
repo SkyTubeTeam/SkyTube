@@ -1,2 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="channel_unsubscribed">சேனல் குழுவிலகப்பட்டது</string>
+    <string name="channel_subscribed">சேனல் சந்தா</string>
+    <string name="channel_already_subscribed">ஏற்கனவே குழுசேர்ந்தது</string>
+    <string name="channel_subscribe_failed">சேனலுக்கு குழுசேர முடியவில்லை</string>
+    <string name="unsubscribed">குழுவிலகப்பட்டது</string>
+    <string name="error_get_subbed_channels">சேனல் சந்தாக்களைப் பெற முடியவில்லை.</string>
+    <string name="error_check_if_user_has_subbed">நீங்கள் சேனலுக்கு சந்தா செலுத்தியுள்ளீர்களா என்பதை சரிபார்க்க முடியவில்லை (ஐடி =%s)</string>
+    <string name="error_unable_to_subscribe">சேனலுக்கு (ஐடி =%s) (ஐ.நா) குழுசேர முடியவில்லை</string>
+    <string name="import_subscriptions">சந்தாக்களை இறக்குமதி செய்யுங்கள்</string>
+    <string name="subscriptions">சந்தாக்கள்</string>
+    <string name="subscribe">குழுசேர்</string>
+    <string name="unsubscribe">குழுவிலகவும்</string>
+    <string name="total_subscribers">%, டி சந்தாதாரர்கள்</string>
+    <string name="subscribed">சந்தா</string>
+    <string name="select_all">அனைத்தையும் தெரிவுசெய்</string>
+    <string name="select_none">எதுவுமில்லை என்பதைத் தேர்ந்தெடுக்கவும்</string>
+    <string name="no_channels_found">நீங்கள் பதிவேற்றிய கோப்பில் எந்த YouTube சேனல்களையும் கண்டுபிடிக்க முடியவில்லை.</string>
+    <string name="no_new_channels_found">நீங்கள் ஏற்கனவே சந்தா செலுத்தாத YouTube சேனல்கள் எதுவும் காணப்படவில்லை.</string>
+    <string name="import_subscriptions_parse_error">நீங்கள் பதிவேற்றிய கோப்பை அலச முடியவில்லை: %s.</string>
+    <string name="failed_to_import_subscriptions">உங்கள் YouTube சந்தாக்களை இறக்குமதி செய்ய முடியவில்லை.</string>
+    <string name="about">பற்றி</string>
+    <string name="status_not_exists">[நீக்கப்பட்டது]</string>
+    <string name="status_account_terminated">[நிறுத்தப்பட்டது]</string>
+    <string name="import_subscriptions_description">\"YouTube மற்றும் YouTube Music\" ஐத் தவிர https://takeout.google.com இல் உள்ள அனைத்தையும் தேர்வுசெய்து, சந்தாக்களைப் பெற மட்டுமே \"அனைத்து யூடியூப் தரவுகளும் சேர்க்கப்பட்டுள்ள அனைத்து யூடியூப் தரவுகளும்\" என்பதைக் சொடுக்கு செய்க. \"அடுத்து\" என்பதைக் சொடுக்கு செய்து, பின்னர் \"ஏற்றுமதியை உருவாக்கு\". பதிவிறக்க இணைப்பைக் கொண்ட மின்னஞ்சலைப் பெற சொடுக்கு செய்க. உங்கள் மின்னஞ்சல் கிளையண்டிலிருந்து கோப்பைப் பதிவிறக்கவும். இந்த சிப் கோப்பைத் தேர்ந்தெடுத்து அல்லது அதைப் பிரித்தெடுத்து சந்தாக்களைத் தேர்ந்தெடுக்கவும். சி.எச்.வி அல்லது சந்தாக்கள்.</string>
+    <string name="unsubscribe_from_all_current_sibbed_channels">நீங்கள் தற்போது சந்தா செலுத்திய அனைத்து சேனல்களிலிருந்தும் குழுவிலகவும்.</string>
+    <string name="subscriptions_to_channels_imported">%d சேனல் (கள்) இறக்குமதி செய்யப்பட்டது.</string>
+    <string name="select_sub_file">சந்தா கோப்பைத் தேர்ந்தெடுக்கவும்</string>
+</resources>
