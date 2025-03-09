@@ -15,7 +15,7 @@ SkyTube is a YouTube player that allows you to:
 <li>explore Trending and Most Popular videos</li>
 </ul>
 
-In addition, SkyTube is equipped with a robust blocking attribute that allows you to avoid unwanted videos; channel blacklisting/whitelisting, filtering, low views, high dislikes, etc.
+In addition, SkyTube is equipped with a robust blocking attribute that allows you to avoid unwanted videos, with capabilities such as channel blacklisting/whitelisting, filtering, exclusions for low views and high dislikes, etc.
 
 All of this at the tips of your fingers!
 
