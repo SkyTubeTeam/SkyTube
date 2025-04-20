@@ -12,7 +12,7 @@
     <string name="subscriptions">சந்தாக்கள்</string>
     <string name="subscribe">குழுசேர்</string>
     <string name="unsubscribe">குழுவிலகவும்</string>
-    <string name="total_subscribers">%, டி சந்தாதாரர்கள்</string>
+    <string name="total_subscribers">%,d சந்தாதாரர்கள்</string>
     <string name="subscribed">சந்தா</string>
     <string name="select_all">அனைத்தையும் தெரிவுசெய்</string>
     <string name="select_none">எதுவுமில்லை என்பதைத் தேர்ந்தெடுக்கவும்</string>
