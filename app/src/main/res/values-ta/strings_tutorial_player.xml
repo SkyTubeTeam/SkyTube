@@ -2,7 +2,7 @@
 <resources>
     <string name="tutorial_slide_1">கருத்துகளைக் காண ச்வைப்.</string>
     <string name="tutorial_slide_4">அளவை சரிசெய்ய Sw காட்டு show.</string>
-    <string name="tutorial_slide_5">பிரகாசத்தை சரிசெய்ய Sw காட்டு காட்டு show.</string>
+    <string name="tutorial_slide_5">ஒளியை சரிசெய்ய ↑ ↓ தேய்.</string>
     <string name="tutorial_slide_6">இடைநிறுத்த அல்லது வீடியோவை இயக்க இருமுறை தட்டவும்.</string>
     <string name="next">அடுத்தது</string>
     <string name="done">முடிந்தது</string>
