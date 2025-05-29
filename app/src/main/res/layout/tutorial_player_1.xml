@@ -7,6 +7,7 @@
 
 	<TextView
 		android:text="@string/tutorial_slide_1"
+		android:textColor="#26ab9e"
 		app:layout_constraintBottom_toBottomOf="parent"
 		app:layout_constraintEnd_toStartOf="@+id/view"
 		app:layout_constraintStart_toStartOf="parent"
