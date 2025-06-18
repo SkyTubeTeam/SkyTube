@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.IBinder;
 
 import androidx.core.app.NotificationCompat;
+import androidx.core.app.PendingIntentCompat;
 import androidx.core.content.ContextCompat;
 
 import free.rm.skytube.R;
@@ -49,7 +50,7 @@ public class FeedUpdaterService extends Service {
 							Intent clickIntent = new Intent(this, MainActivity.class);
 							clickIntent.setAction(MainActivity.ACTION_VIEW_FEED);
 
-							PendingIntent clickPendingIntent = PendingIntent.getActivity(this, 0, clickIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+							PendingIntent clickPendingIntent = PendingIntentCompat.getActivity(this, 0, clickIntent, PendingIntent.FLAG_UPDATE_CURRENT, false);
 
 							Notification notification = new NotificationCompat.Builder(this, SkyTubeApp.NEW_VIDEOS_NOTIFICATION_CHANNEL)
 									.setSmallIcon(R.drawable.ic_notification_icon)
