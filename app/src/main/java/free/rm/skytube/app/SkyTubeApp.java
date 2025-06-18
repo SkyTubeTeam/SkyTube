@@ -43,6 +43,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationChannelCompat;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.core.app.PendingIntentCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.core.graphics.ColorUtils;
@@ -351,7 +352,7 @@ public class SkyTubeApp extends MultiDexApplication {
 	 */
 	public static void setFeedUpdateInterval(int interval) {
 		Intent alarm = new Intent(getContext(), FeedUpdaterReceiver.class);
-		PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), 0, alarm, PendingIntent.FLAG_CANCEL_CURRENT);
+		PendingIntent pendingIntent = PendingIntentCompat.getBroadcast(getContext(), 0, alarm, PendingIntent.FLAG_CANCEL_CURRENT, false);
 		AlarmManager alarmManager = ContextCompat.getSystemService(getContext(), AlarmManager.class);
 
 		// Feed Auto Updater has been cancelled. If the selected interval is greater than 0, set the new alarm to call FeedUpdaterService

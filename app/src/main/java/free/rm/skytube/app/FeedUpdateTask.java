@@ -26,6 +26,7 @@ import android.widget.Toast;
 import androidx.core.app.NotificationChannelCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.core.app.PendingIntentCompat;
 
 import java.util.List;
 
@@ -143,8 +144,8 @@ public class FeedUpdateTask {
 
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
             Log.e(TAG, "Pending intent call?");
-            PendingIntent pendingIntent = PendingIntent.getActivity(context,
-                    1, new Intent(), PendingIntent.FLAG_UPDATE_CURRENT);
+            PendingIntent pendingIntent = PendingIntentCompat.getActivity(context,
+                    1, new Intent(), PendingIntent.FLAG_UPDATE_CURRENT, false);
             builder.setPriority(NotificationCompat.FLAG_ONGOING_EVENT)
                     .setContentIntent(pendingIntent);
         }
