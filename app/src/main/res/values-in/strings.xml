@@ -28,4 +28,7 @@
     <string name="cleaner_explanation">Bersihkan video yang di-bookmark/diunduh. Gunakan opsi filter berikut:</string>
     <string name="cleaner_confirm">Membersihkan</string>
     <string name="cleaner_toast_finish">Pembersih menghapus %1$s video. %2$s MB sekarang gratis.</string>
+    <string name="cleaner_watched_bookmarks">Membersihkan bookmark yang ditonton</string>
+    <string name="cleaner_watched_downloads">Membersihkan unduhan yang ditonton</string>
+    <string name="video_comments_are_disabled">Komentar dimatikan</string>
 </resources>

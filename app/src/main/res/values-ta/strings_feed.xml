@@ -1,2 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="notification_channel_feed_title">அறிவிப்புகளுக்கு உணவளிக்கவும்</string>
+    <string name="notification_new_videos_found">சந்தா சேனல்களிலிருந்து %d புதிய வீடியோக்கள்</string>
+    <string name="feed">தீவனம்</string>
+    <string name="channel_related">சேனல் ...</string>
+    <string name="subscribing_to_channels">சேனல்களுக்கு குழுசேர்…</string>
+    <string name="open_channel">திறந்த சேனல்</string>
+    <string name="fetching_subbed_channels_info">சேனல் தகவலைப் பெறுதல்…</string>
+    <string name="fetching_subscription_videos">சந்தா சேனல்களிலிருந்து வீடியோக்களைப் பெறுதல்…</string>
+    <string name="fetched_videos_from_channels">%2$d/ %3$d சேனல்களிலிருந்து %1$d வீடியோக்கள் கிடைத்தன.</string>
+    <string name="no_new_videos_found">புதிய வீடியோக்கள் இல்லை.</string>
+    <string name="no_subscriptions_text">அவர்களிடமிருந்து புதிய வீடியோக்களைக் காண சில சேனல்களுக்கு குழுசேரவும்.</string>
+    <string name="import_subscriptions_from_youtube">YouTube இலிருந்து சந்தாக்களை இறக்குமதி செய்யுங்கள்</string>
+    <string name="fetching_subbed_channels_info_error">சேனல் தகவலைப் பெற முடியவில்லை.</string>
+</resources>

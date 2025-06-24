@@ -8,4 +8,5 @@
     <string name="channel_blacklist_error">Tidak bisa memblokir channel.</string>
     <string name="channel_unwhitelist_error">Tidak bisa menghapus channel dari daftar putih.</string>
     <string name="dislikes">%d%% tidak suka</string>
+    <string name="add_to_permitted">Izin Saluran</string>
 </resources>

@@ -25,4 +25,6 @@
     <string name="channel_subscribe_failed">Абонирането за канала е невъзможно</string>
     <string name="select_sub_file">Избиране на файл с абонаменти</string>
     <string name="unsubscribe">Отписване</string>
+    <string name="status_account_terminated">[Прекратено]</string>
+    <string name="status_not_exists">[Изтрито]</string>
 </resources>

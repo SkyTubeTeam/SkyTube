@@ -1,2 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="update_dialog_msg">ச்கை டியூப்பின் புதிய பதிப்பு கிடைக்கிறது. பதிப்பு %s நிறுவப்படும்.</string>
+    <string name="update_available">புதிய பதிப்பு கிடைக்கிறது</string>
+    <string name="up_to_date">புதுப்பித்த நிலையில்</string>
+    <string name="up_to_date_msg">ச்கை டியூப்பின் புதிய பதிப்பு நிறுவப்பட்டுள்ளது.</string>
+    <string name="later">பின்னர்</string>
+    <string name="release_notes">%s இல் மாற்றங்கள்</string>
+    <string name="update">புதுப்பிப்பு</string>
+    <string name="update_failure">பயன்பாட்டின் புதிய பதிப்பை நிறுவ முடியவில்லை.</string>
+    <string name="downloading">பதிவிறக்கம்…</string>
+    <string name="android_too_old">துரதிர்ச்டவசமாக, உங்கள் ஆண்ட்ராய்டு புதுப்பிக்க மிகவும் பழையது. நீங்கள் \'ச்கை டியூப் லெகசி\' கைமுறையாக நிறுவ வேண்டும்!</string>
+</resources>

@@ -12,4 +12,5 @@
     <string name="open_channel">Buka Kanal</string>
     <string name="subscribing_to_channels">Berlangganan ke kanal…</string>
     <string name="feed">Umpan</string>
+    <string name="channel_related">Saluran...</string>
 </resources>

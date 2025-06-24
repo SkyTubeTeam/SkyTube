@@ -25,4 +25,6 @@
     <string name="channel_subscribe_failed">チャンネルをサブスクライブできませんでした</string>
     <string name="channel_already_subscribed">サブスクライブ済みです</string>
     <string name="channel_subscribed">チャンネルをサブスクライブ済み</string>
+    <string name="status_account_terminated">[停止済み]</string>
+    <string name="status_not_exists">[削除済み]</string>
 </resources>
