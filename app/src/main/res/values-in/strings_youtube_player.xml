@@ -38,4 +38,5 @@
     <string name="warning_metered_network_disable">Jangan tanya lagi.</string>
     <string name="warning_metered_network_play">Sambungkan ke jaringan tidak terbatas untuk menghindari biaya ekstra penggunaan data. Tetap putar video\?</string>
     <string name="metered_network">Sambungan Terukur</string>
+    <string name="sponsorblock_category_sponsor">Sponsor</string>
 </resources>

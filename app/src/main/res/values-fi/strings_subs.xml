@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="import_subscriptions_description">Tuo tilauksesi YouTubesta vierailemalla https://takeout.google.com. Poista kaikki palvelut paitsi \"YouTube ja YouTube Musiikki\" ja klikkaa \"Kaikki YouTube data sisällytettynä\" poissulkeaksesi kaikki muut paitsi tilaukset. Klikkaa \"Seuraava\" ja sitten \"Luo vienti\". Kun vienti on valmistunut, se näkyy edessäsi olevalla verkkosivulla ja sinä saat sähköpostiisi latauslinkin. Tallenna tiedosto ja pura subscriptions.json -tiedosto (sijainti: /Takeout/YouTube and YouTube Music/subscriptions/). Sen jälkeen valitse vientitiedosto klikkaamalla \"Valitse tilaustiedosto\" alempaa.</string>
+    <string name="import_subscriptions_description">Poista valinnat kaikista osoitteesta https://takeout.google.com paitsi \"YouTube ja YouTube Music\" ja napsauta \"Kaikki YouTube-tiedot mukaan\", saadaksesi vain tilaukset. Napsauta \"Seuraava\" ja sitten \"Luo vienti\". Napsauta saadaksesi sähköpostin, jossa on latauslinkki. Lataa tiedosto sähköpostiohjelmastasi. Valitse tämä ZIP-tiedosto tai pura se ja valitse subscriptions.csv- tai subscriptions.json-tiedosto (kansiossa /Takeout/YouTube ja YouTube Music/subscriptions/) käyttämällä alla olevaa \"Valitse tilaustiedosto\" -kohtaa.</string>
     <string name="about">Tietoa</string>
-    <string name="failed_to_import_subscriptions">YouTube-tilausten tuonti epäonnistui.</string>
-    <string name="import_subscriptions_parse_error">Virhe jäsenneltäessä lataamaasi tiedostoa: %s.</string>
-    <string name="no_new_channels_found">Yhtään YouTube-kanavaa, jota et ole jo tilannut ei löytynyt lataamastasi tiedostosta.</string>
-    <string name="no_channels_found">Yhtään YouTube-kanavaa ei löytynyt lataamastasi tiedostosta.</string>
+    <string name="failed_to_import_subscriptions">YouTube-tilauksiasi ei voitu tuoda.</string>
+    <string name="import_subscriptions_parse_error">Uloslataamaasi tiedostoa ei voitu jäsentää: %s.</string>
+    <string name="no_new_channels_found">Yhtään YouTube-kanavia, joita et ole vielä tilannut, ei löytynyt.</string>
+    <string name="no_channels_found">Uloslataamastasi tiedostosta ei löytynyt yhtään YouTube-kanavaa.</string>
     <string name="select_none">Älä valitse mitään</string>
     <string name="select_all">Valitse kaikki</string>
-    <string name="select_sub_file">Valitse tilausten tiedosto</string>
-    <string name="subscriptions_to_channels_imported">Tilaukset %d kanavaan/kanaviin tuotu.</string>
+    <string name="select_sub_file">Valitse tilauksen tiedosto</string>
+    <string name="subscriptions_to_channels_imported">%d kanava(a) tuotu.</string>
     <string name="unsubscribe_from_all_current_sibbed_channels">Poista tilaus kaikista nykyisistä tilaamistasi kanavista.</string>
     <string name="import_subscriptions">Tuo tilaukset</string>
     <string name="error_unable_to_subscribe">Kanavatilauksen (id=%s) poistaminen/lisääminen epäonnistui</string>
     <string name="error_check_if_user_has_subbed">Kanavatilauksen nykyisen tilan tarkastaminen epäonnistui (id=%s)</string>
-    <string name="error_get_subbed_channels">Tilattujen kanavien noutaminen epäonnistui.</string>
+    <string name="error_get_subbed_channels">Kanavatilauksia ei voitu noutaa.</string>
     <string name="channel_unsubscribed">Kanavan tilaus poistettu</string>
     <string name="unsubscribed">Tilaus poistettu</string>
     <string name="channel_subscribe_failed">Kanavaa ei voida tilata</string>
@@ -25,4 +25,6 @@
     <string name="unsubscribe">Poista tilaus</string>
     <string name="subscribe">Tilaa</string>
     <string name="subscriptions">Tilaukset</string>
+    <string name="status_not_exists">[Poistettu]</string>
+    <string name="status_account_terminated">[Lopetettu]</string>
 </resources>

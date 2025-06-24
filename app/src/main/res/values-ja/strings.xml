@@ -27,7 +27,7 @@
     <string name="cleaner">視聴済みビデオクリーナー</string>
     <string name="cleaner_explanation">ブックマーク済み・ダウンロード済みの動画を削除します。以下のフィルタオプションを使用してください。</string>
     <string name="cleaner_confirm">削除</string>
-    <string name="cleaner_toast_finish">%1$s 本の動画をブックマークから削除し、%2$s MB のダウンロード済み動画を削除しました</string>
+    <string name="cleaner_toast_finish">%1$s 本の動画をブックマークから削除し、%2$s MB のダウンロード済み動画を削除しました。</string>
     <string name="cleaner_watched_bookmarks">視聴済みのブックマークを削除</string>
     <string name="cleaner_watched_downloads">視聴済みのダウンロード動画を削除</string>
     <string name="video_comments_are_disabled">動画コメントオフ</string>

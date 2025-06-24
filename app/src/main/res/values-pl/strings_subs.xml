@@ -25,4 +25,6 @@
     <string name="channel_already_subscribed">Już zasubskrybowane</string>
     <string name="channel_subscribed">Kanał został zasubskrybowany</string>
     <string name="select_sub_file">Wybierz plik subskrypcji</string>
+    <string name="status_account_terminated">[Zakończony]</string>
+    <string name="status_not_exists">[Usunięte]</string>
 </resources>

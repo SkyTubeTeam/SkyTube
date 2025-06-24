@@ -170,4 +170,6 @@
     <string name="pref_title_feed_notification">Автоматични известия за новите неща</string>
     <string name="pref_title_enable_immersive_mode">Режим на потапяне</string>
     <string name="pref_title_switch_volume_and_brightness">Жест за превключване на силата на звука и яркостта</string>
+    <string name="pref_title_app_language">Език на приложението</string>
+    <string name="pref_summary_app_language">Езикът, който да се ползва за всички текстове в приложението</string>
 </resources>
