@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="feed">フィード</string>
+    <string name="feed">新着動画</string>
     <string name="subscribing_to_channels">チャンネルを購読しています…</string>
     <string name="fetching_subbed_channels_info">チャンネル情報を取得中…</string>
     <string name="fetching_subbed_channels_info_error">チャンネル情報を取得できませんでした。</string>
-    <string name="fetching_subscription_videos">登録チャンネルからビデオを取得しています…</string>
-    <string name="fetched_videos_from_channels">%2$d/%3$d チャンネルから %1$d のビデオを取得しました。</string>
-    <string name="no_new_videos_found">新しいビデオはありません。</string>
-    <string name="no_subscriptions_text">最新のビデオを表示するにはチャンネル登録をしてください。</string>
-    <string name="import_subscriptions_from_youtube">YouTube からサブスクリプションをインポート</string>
-    <string name="notification_channel_feed_title">フィードの通知</string>
-    <string name="notification_new_videos_found">登録チャンネルから %d 本の新しいビデオ</string>
+    <string name="fetching_subscription_videos">登録チャンネルから動画を取得中…</string>
+    <string name="fetched_videos_from_channels">%2$d/%3$d チャンネルから %1$d 本の動画を取得しました。</string>
+    <string name="no_new_videos_found">新しい動画はありません。</string>
+    <string name="no_subscriptions_text">新着動画を表示するにはチャンネル登録してください。</string>
+    <string name="import_subscriptions_from_youtube">YouTube から登録チャンネルをインポート</string>
+    <string name="notification_channel_feed_title">新着動画の通知</string>
+    <string name="notification_new_videos_found">登録チャンネルから %d 本の新着動画</string>
     <string name="open_channel">チャンネルを開く</string>
     <string name="channel_related">チャンネル…</string>
 </resources>
