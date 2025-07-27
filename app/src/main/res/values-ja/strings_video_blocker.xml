@@ -3,8 +3,8 @@
     <string name="dislikes">%d%% 低評価</string>
     <string name="block_channel">チャンネルをブロック</string>
     <string name="configure">設定</string>
-    <string name="no_videos_blocked">ブロックやフィルターのためにビデオブロッカーを設定しますか？</string>
-    <string name="blocked_videos">ブロックされたビデオ</string>
+    <string name="no_videos_blocked">ブロックやフィルターのために動画ブロッカーを設定しますか？</string>
+    <string name="blocked_videos">ブロックされた動画</string>
     <string name="channel_unwhitelist_error">チャンネルをホワイトリストから削除できませんでした。</string>
     <string name="channel_blacklist_error">チャンネルをブロックできませんでした。</string>
     <string name="channel_blacklisted">チャンネルの新しいブロックリストを使用するには更新してください。</string>
