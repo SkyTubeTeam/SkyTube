@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="tutorial_slide_1">左にスワイプするとコメントを表示します。</string>
-    <string name="tutorial_slide_6">ダブルタップするとビデオを一時停止または再生します。</string>
+    <string name="tutorial_slide_1">左にスワイプし、コメントを表示。</string>
+    <string name="tutorial_slide_6">ダブルタップで、動画を一時停止/再生。</string>
     <string name="next">次へ</string>
     <string name="done">完了</string>
     <string name="skip">スキップ</string>
     <string name="page_counter">%1$d/%2$d</string>
-    <string name="tutorial_slide_2">上にスワイプするとビデオを購読します。</string>
-    <string name="tutorial_slide_3">左右にスワイプするとビデオを巻戻しまたは早送りします。</string>
-    <string name="tutorial_slide_4">上下にスワイプすると音量を調整します。</string>
-    <string name="tutorial_slide_5">上下にスワイプすると明るさを調整します。</string>
+    <string name="tutorial_slide_2">上にスワイプし、動画の説明を表示。</string>
+    <string name="tutorial_slide_3">左右にスワイプし、動画を巻戻し、早送り。</string>
+    <string name="tutorial_slide_4">上下にスワイプし、音量を調整。</string>
+    <string name="tutorial_slide_5">上下にスワイプし、明るさを調整。</string>
 </resources>
