@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="downloads">ダウンロード</string>
-    <string name="download_video">ビデオをダウンロード</string>
-    <string name="starting_video_download">\'%s\' をダウンロード中…</string>
-    <string name="video_download_stream_error">\'%s\' をダウンロードできません。</string>
+    <string name="download_video">動画をダウンロード</string>
+    <string name="starting_video_download">ダウンロード中 %s …</string>
+    <string name="video_download_stream_error">ダウンロードできません %s。</string>
     <string name="delete_download">ダウンロードを削除</string>
-    <string name="video_downloaded">\'%s\' をダウンロードしました。</string>
-    <string name="no_downloaded_videos_text">ビデオをダウンロードするとここに表示されます。</string>
-    <string name="playing_video_file_missing">ダウンロード可能なファイルが見つからなかったため、ビデオをリモート再生しています。</string>
+    <string name="video_downloaded">%s をダウンロードしました。</string>
+    <string name="no_downloaded_videos_text">動画をダウンロードするとここに表示されます。</string>
+    <string name="playing_video_file_missing">ダウンロード可能なファイルが見つからなかったため、動画をリモート再生しています。</string>
     <string name="external_storage_not_available">ファイルをダウンロードするために、まず外部へのアクセスを許可してください。</string>
     <string name="download">ダウンロード</string>
-    <string name="warning_metered_network_download">現在接続中の従量制課金ネットワークでビデオをダウンロードしますか？</string>
-    <string name="video_stream_not_found_with_request_resolution">指定された解像度(%1$s ～ %2$s)のビデオストリームは見つかりませんでした</string>
+    <string name="warning_metered_network_download">現在接続中の従量制課金ネットワークで動画をダウンロードしますか？</string>
+    <string name="video_stream_not_found_with_request_resolution">指定された解像度 (%1$s ～ %2$s) の動画ストリームはありませんでした</string>
     <string name="unable_to_delete_file">ダウンロード済みファイル \'%s\' を削除できませんでした。</string>
     <string name="download_failed_because">%2$s のため %1$s をダウンロードできませんでした。</string>
 </resources>
