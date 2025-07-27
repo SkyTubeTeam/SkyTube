@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="could_not_get_videos">%s のビデオを取得できませんでした。</string>
+    <string name="could_not_get_videos">%s の動画を取得できませんでした。</string>
     <string name="views">%,d 回再生</string>
     <string name="error">エラー</string>
     <string name="ok">OK</string>
-    <string name="search_videos">ビデオを検索</string>
+    <string name="search_videos">動画を検索</string>
     <string name="launch_offical_player_error">公式の YouTube プレーヤーを起動できませんでした。インストールされているか確認してください。</string>
     <string name="LIVE">ライブ</string>
     <string name="featured">おすすめ</string>
     <string name="most_popular">最も人気</string>
-    <string name="video">ビデオ</string>
-    <string name="videos">ビデオ</string>
-    <string name="num_videos">%d ビデオ</string>
-    <string name="playlists">プレイリスト</string>
-    <string name="could_not_get_playlists">%s のプレイリストを取得できませんでした。</string>
+    <string name="video">動画</string>
+    <string name="videos">動画</string>
+    <string name="num_videos">%d 本の動画</string>
+    <string name="playlists">再生リスト</string>
+    <string name="could_not_get_playlists">%s の再生リストを取得できませんでした。</string>
     <string name="loading">読み込み中…</string>
     <string name="could_not_get_channel">チャンネル情報をダウンロードできませんでした。</string>
     <string name="yes">はい</string>
@@ -22,9 +22,9 @@
     <string name="close">閉じる</string>
     <string name="could_not_get_channel_detailed">チャンネル情報をダウンロードできませんでした。: %s</string>
     <string name="recaptcha_challenge_requested">YouTube があなたをロボットだと思っています。reCAPTHCA を解いてください。</string>
-    <string name="trending_in">トレンド (%s)</string>
+    <string name="trending_in">急上昇 (%s)</string>
     <string name="could_not_get_sponsorblock">スポンサーブロック情報を取得できませんでした。: %s</string>
-    <string name="cleaner">視聴済みビデオクリーナー</string>
+    <string name="cleaner">視聴済み動画クリーナー</string>
     <string name="cleaner_explanation">ブックマーク済み・ダウンロード済みの動画を削除します。以下のフィルタオプションを使用してください。</string>
     <string name="cleaner_confirm">削除</string>
     <string name="cleaner_toast_finish">%1$s 本の動画をブックマークから削除し、%2$s MB のダウンロード済み動画を削除しました。</string>
