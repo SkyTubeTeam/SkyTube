@@ -28,6 +28,7 @@ import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.newpipe.ChannelId;
 import free.rm.skytube.businessobjects.db.DatabaseTasks;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
+import free.rm.skytube.gui.businessobjects.PinUtils;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 
@@ -51,10 +52,22 @@ public class ChannelActionHandler {
                 SkyTubeApp.launchChannel(channel.getChannelId(), context);
                 return true;
             case R.id.block_channel:
-                compositeDisposable.add(channel.blockChannel().subscribe());
+                if (PinUtils.isPinSet(context)) {
+                    PinUtils.promptForPin(context,
+                        () -> compositeDisposable.add(channel.blockChannel().subscribe()),
+                        null);
+                } else {
+                    compositeDisposable.add(channel.blockChannel().subscribe());
+                }
                 return true;
             case R.id.unblock_channel:
-                compositeDisposable.add(channel.unblockChannel().subscribe());
+                if (PinUtils.isPinSet(context)) {
+                    PinUtils.promptForPin(context,
+                        () -> compositeDisposable.add(channel.unblockChannel().subscribe()),
+                        null);
+                } else {
+                    compositeDisposable.add(channel.unblockChannel().subscribe());
+                }
                 return true;
             case R.id.share_channel:
                 SkyTubeApp.shareUrl(context, channel.getChannelUrl());
@@ -62,7 +75,6 @@ public class ChannelActionHandler {
             case R.id.channel_copyurl:
                 SkyTubeApp.copyUrl(context, "Channel URL", channel.getChannelUrl());
                 return true;
-
         }
         return false;
     }

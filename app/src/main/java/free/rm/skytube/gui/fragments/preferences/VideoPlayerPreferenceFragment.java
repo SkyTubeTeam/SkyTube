@@ -50,7 +50,7 @@ import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
  */
 public class VideoPlayerPreferenceFragment extends BasePreferenceFragment {
 	@Override
-	public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+	protected void showPreferencesInternal(String rootKey) {
 		addPreferencesFromResource(R.xml.preference_video_player);
 
 		// if we are running an OSS version, then remove the last option (i.e. the "official" player

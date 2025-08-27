@@ -30,7 +30,7 @@ import free.rm.skytube.businessobjects.db.SearchHistoryDb;
 
 public class PrivacyPreferenceFragment extends BasePreferenceFragment {
 	@Override
-	public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+	protected void showPreferencesInternal(String rootKey) {
 		addPreferencesFromResource(R.xml.preference_privacy);
 
 		Preference clearPlaybackStatus = findPreference(getString(R.string.pref_key_clear_playback_status));

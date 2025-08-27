@@ -18,6 +18,12 @@
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <Preference
+        app:fragment="free.rm.skytube.gui.fragments.preferences.SecurityPreferenceFragment"
+        app:icon="@drawable/ic_pref_privacy"
+        app:key="pref_security"
+        app:title="@string/pref_security_category" />
+
+    <Preference
         app:fragment="free.rm.skytube.gui.fragments.preferences.VideoPlayerPreferenceFragment"
         app:icon="@drawable/ic_pref_video_player"
         app:key="pref_video_player"

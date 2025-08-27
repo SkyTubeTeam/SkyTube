@@ -46,7 +46,7 @@ public class OthersPreferenceFragment extends BasePreferenceFragment {
 	ListPreference defaultTabPref;
 
 	@Override
-	public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+	protected void showPreferencesInternal(String rootKey) {
 		addPreferencesFromResource(R.xml.preference_others);
 
 		// Default tab
