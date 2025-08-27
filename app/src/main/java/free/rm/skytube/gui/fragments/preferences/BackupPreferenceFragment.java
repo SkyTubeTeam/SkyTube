@@ -30,11 +30,15 @@ import free.rm.skytube.gui.businessobjects.SubscriptionsBackupsManager;
 /**
  * Preference fragment for backup related settings.
  */
-public class BackupPreferenceFragment extends PreferenceFragmentCompat {
+public class BackupPreferenceFragment extends BasePreferenceFragment {
+	@Override
+	public void onSharedPreferenceChanged(android.content.SharedPreferences sharedPreferences, String key) {
+		// No-op
+	}
 	private SubscriptionsBackupsManager subscriptionsBackupsManager;
 
 	@Override
-	public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+	protected void showPreferencesInternal(String rootKey) {
 		addPreferencesFromResource(R.xml.preference_backup);
 
 		subscriptionsBackupsManager = new SubscriptionsBackupsManager(getActivity(), this);

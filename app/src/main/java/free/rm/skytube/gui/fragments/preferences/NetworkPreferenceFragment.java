@@ -13,9 +13,13 @@ import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.YouTube.VideoStream.VideoQuality;
 import free.rm.skytube.businessobjects.YouTube.VideoStream.VideoResolution;
 
-public class NetworkPreferenceFragment extends PreferenceFragmentCompat {
+public class NetworkPreferenceFragment extends BasePreferenceFragment {
     @Override
-    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+    public void onSharedPreferenceChanged(android.content.SharedPreferences sharedPreferences, String key) {
+        // No-op
+    }
+    @Override
+    protected void showPreferencesInternal(String rootKey) {
         addPreferencesFromResource(R.xml.preference_downloads);
 
         final Preference folderChooser = findPreference(getString(R.string.pref_key_video_download_folder));
