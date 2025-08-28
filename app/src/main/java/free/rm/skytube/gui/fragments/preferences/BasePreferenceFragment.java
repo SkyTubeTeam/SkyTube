@@ -29,7 +29,7 @@ abstract class BasePreferenceFragment extends PreferenceFragmentCompat implement
         if (free.rm.skytube.gui.businessobjects.PinUtils.isPinSet(getContext())) {
             free.rm.skytube.gui.businessobjects.PinUtils.promptForPin(getContext(),
                 () -> showPreferencesInternal(rootKey),
-                () -> requireActivity().onBackPressed());
+                () -> requireActivity().getOnBackPressedDispatcher().onBackPressed());
         } else {
             showPreferencesInternal(rootKey);
         }
