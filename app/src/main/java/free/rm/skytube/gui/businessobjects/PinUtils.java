@@ -20,13 +20,13 @@ public class PinUtils {
             .title(R.string.pref_title_enter_security_pin)
             .content(R.string.pref_summary_enter_security_pin)
             .inputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD)
-            .input(context.getString(R.string.pref_title_enter_security_pin), "", false, (dialog, input) -> {
+            .input("", "", false, (dialog, input) -> {
                 SharedPreferences pref = SkyTubeApp.getPreferenceManager();
                 String pin = pref.getString(context.getString(R.string.pref_key_security_pin), "");
                 if (input != null && input.toString().equals(pin)) {
                     onSuccess.run();
                 } else {
-                    Toast.makeText(context, R.string.error, Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, R.string.incorrect_pin, Toast.LENGTH_LONG).show();
                     if (onFailure != null) onFailure.run();
                 }
             })
