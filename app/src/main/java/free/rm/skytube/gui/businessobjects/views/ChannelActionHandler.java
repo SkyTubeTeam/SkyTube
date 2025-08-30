@@ -52,7 +52,7 @@ public class ChannelActionHandler {
                 SkyTubeApp.launchChannel(channel.getChannelId(), context);
                 return true;
             case R.id.block_channel:
-                if (PinUtils.isPinSet(context)) {
+                if (SkyTubeApp.getSettings().isPinSet()) {
                     PinUtils.promptForPin(context,
                         () -> compositeDisposable.add(channel.blockChannel().subscribe()),
                         null);
@@ -61,7 +61,7 @@ public class ChannelActionHandler {
                 }
                 return true;
             case R.id.unblock_channel:
-                if (PinUtils.isPinSet(context)) {
+                if (SkyTubeApp.getSettings().isPinSet()) {
                     PinUtils.promptForPin(context,
                         () -> compositeDisposable.add(channel.unblockChannel().subscribe()),
                         null);

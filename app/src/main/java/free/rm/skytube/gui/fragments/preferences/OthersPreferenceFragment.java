@@ -18,7 +18,6 @@
 package free.rm.skytube.gui.fragments.preferences;
 
 import android.content.SharedPreferences;
-import android.os.Bundle;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
@@ -86,7 +85,7 @@ public class OthersPreferenceFragment extends BasePreferenceFragment {
 		if(key != null) {
 			if (key.equals(getString(R.string.pref_key_default_tab_name))) {
 				// If the user changed the Default Tab Preference, update the summary to show the new default tab
-				ListPreference defaultTabPref = (ListPreference) findPreference(key);
+				ListPreference defaultTabPref = findPreference(key);
 				defaultTabPref.setSummary(String.format(getString(R.string.pref_summary_default_tab), defaultTabPref.getEntry()));
 			} else if (key.equals(getString(R.string.pref_key_hide_tabs))) {
 				//
@@ -95,7 +94,7 @@ public class OthersPreferenceFragment extends BasePreferenceFragment {
 				// displayRestartDialog(R.string.pref_hide_tabs_restart, true);
 			} else if (key.equals(getString(R.string.pref_youtube_api_key))) {
 				// Validate the entered API Key when saved (and not empty), with a simple call to get the most popular video
-				EditTextPreference    youtubeAPIKeyPref = (EditTextPreference) findPreference(getString(R.string.pref_youtube_api_key));
+				EditTextPreference    youtubeAPIKeyPref = findPreference(getString(R.string.pref_youtube_api_key));
 				String                youtubeAPIKey     = youtubeAPIKeyPref.getText();
 
 
