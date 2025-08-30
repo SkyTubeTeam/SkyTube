@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="update_available">新しいバージョンが利用可能です</string>
-    <string name="update_dialog_msg">SkyTube の新しいバージョンが利用できます。バージョン %s がインストールされます。</string>
+    <string name="update_available">最新版が利用可能です</string>
+    <string name="update_dialog_msg">SkyTube の最新版あり。バージョン %s がインストールされます。</string>
     <string name="up_to_date">最新版</string>
-    <string name="up_to_date_msg">SkyTube の最新バージョンがインストールされています。</string>
+    <string name="up_to_date_msg">SkyTube の最新版がインストールされています。</string>
     <string name="update">アップデート</string>
     <string name="later">後で</string>
     <string name="update_failure">新しいバージョンのアプリをインストールできませんでした。</string>

@@ -35,7 +35,7 @@
     <string name="pref_title_version">Verzió</string>
     <string name="pref_title_updates">Frissítések</string>
     <string name="pref_summary_updates">Frissítések ellenőrzése.</string>
-    <string name="pref_title_license">Copylefted Libre Licenc</string>
+    <string name="pref_title_license">Nyíltforrású Szabad Licenc</string>
     <string name="pref_summary_license">GPL v3+</string>
     <string name="i_agree">Elfogadom</string>
     <!-- extracted from  YouTube.com > 3 dot menu > Language -->
@@ -185,7 +185,7 @@
     <string name="pref_summary_use_dislike_api">Nemtetszés-számláló visszaállítása a returnyoutubedislike.com használatával</string>
     <string name="pref_title_use_dislike_api">Nemtetszés-számláló visszaállítása</string>
     <string name="pref_summary_open_issue">Javasoljon egy ötletet, vagy jelentsen be egy hibát.</string>
-    <string name="pref_title_open_issue">Egy probléma megnyitása</string>
+    <string name="pref_title_open_issue">Egy probléma felvetése</string>
     <string name="pref_title_playback_speed">Alapértelmezett lejátszási sebesség</string>
     <string name="pref_summary_playback_speed">Alapértelmezett lejátszási sebesség: %s</string>
     <string name="pref_title_app_language">Alkalmazás nyelve</string>
