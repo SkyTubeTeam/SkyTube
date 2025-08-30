@@ -1,0 +1,1 @@
+* Fixing the rushed update that caused lot's of problems due to newer Android API usage.

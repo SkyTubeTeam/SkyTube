@@ -49,7 +49,7 @@ public class SkyTubeMaterialDialog extends MaterialDialog.Builder {
 
 	public SkyTubeMaterialDialog onNegativeOrCancel(@NonNull DialogInterface.OnCancelListener callback) {
 		// No need to do anything on negativeCallback - because the cancelListener will be called in this case.
-		this.onNegativeCallback = null;
+        this.onNegativeCallback = null;
 		this.cancelListener = callback;
 		return this;
 	}

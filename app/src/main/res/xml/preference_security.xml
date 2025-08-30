@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+        app:key="security"
+        app:title="@string/pref_security_category"
+        app:iconSpaceReserved="false">
+
+        <EditTextPreference
+            app:key="@string/pref_key_security_pin"
+            app:title="@string/pref_title_set_security_pin"
+            app:summary="@string/pref_summary_set_security_pin"
+            app:iconSpaceReserved="false"
+            android:inputType="numberPassword" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

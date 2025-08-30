@@ -50,7 +50,6 @@ import com.google.android.gms.cast.framework.media.RemoteMediaClient;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.images.WebImage;
-import com.google.gson.Gson;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
 import org.schabi.newpipe.extractor.stream.StreamInfo;
@@ -60,6 +59,7 @@ import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.app.StreamSelectionPolicy;
 import free.rm.skytube.businessobjects.ChromecastListener;
+import free.rm.skytube.businessobjects.JsonSerializer;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.YouTube.YouTubeTasks;
 import free.rm.skytube.businessobjects.YouTube.newpipe.ChannelId;
@@ -99,6 +99,7 @@ public abstract class BaseActivity extends AppCompatActivity implements MainActi
 	private Intent notificationClickIntent;
 
     protected ActivityMainBinding binding;
+    protected final JsonSerializer jsonSerializer = new JsonSerializer();
 
 	private final CompositeDisposable compositeDisposable = new CompositeDisposable();
 
@@ -481,11 +482,10 @@ public abstract class BaseActivity extends AppCompatActivity implements MainActi
 						public void onGetDesiredStream(StreamInfo desiredStream, YouTubeVideo video) {
 							if(mCastSession == null)
 								return;
-							Gson gson = new Gson();
 							final RemoteMediaClient remoteMediaClient = mCastSession.getRemoteMediaClient();
 							MediaMetadata metadata = new MediaMetadata(MediaMetadata.MEDIA_TYPE_GENERIC);
 							metadata.putInt(KEY_POSITION, position);
-							metadata.putString(KEY_VIDEO, gson.toJson(video));
+							metadata.putString(KEY_VIDEO, jsonSerializer.toPersistedVideoJson(video));
 
 							metadata.addImage(new WebImage(Uri.parse(video.getThumbnailUrl())));
 

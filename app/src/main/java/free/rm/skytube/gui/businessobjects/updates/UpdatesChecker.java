@@ -19,9 +19,8 @@ package free.rm.skytube.gui.businessobjects.updates;
 
 import android.util.Log;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.grack.nanojson.JsonArray;
+import com.grack.nanojson.JsonObject;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -42,8 +41,7 @@ public class UpdatesChecker {
 	private final String	currentVersionNumber;
 	private boolean updatesAvailable;
 
-	private static String TAG = UpdatesChecker.class.getSimpleName();
-
+	private final static String TAG = UpdatesChecker.class.getSimpleName();
 
 	UpdatesChecker(boolean fetchReleaseNotes, String	currentVersionNumber) {
 		this.fetchReleaseNotes = fetchReleaseNotes;
@@ -69,7 +67,7 @@ public class UpdatesChecker {
 			}
 		} else {
 			try {
-				JSONObject json = NewPipeService.getHttpDownloader().getJSONObject(BuildConfig.SKYTUBE_UPDATES_URL);
+				JsonObject json = NewPipeService.getHttpDownloader().getJSONObject(BuildConfig.SKYTUBE_UPDATES_URL);
 
 				latestApkVersion = getLatestVersionNumber(json);
 				releaseNotes = getReleaseNotes(json);
@@ -114,14 +112,13 @@ public class UpdatesChecker {
 	 *
 	 * @param json
 	 * @return
-	 * @throws JSONException
 	 */
-	private String getLatestVersionNumber(JSONObject json) throws JSONException {
+	private String getLatestVersionNumber(JsonObject json) {
 		return json.getString("tag_name").substring(1);
 	}
 
 
-	private String getReleaseNotes(JSONObject json) throws JSONException {
+	private String getReleaseNotes(JsonObject json) {
 		return json.getString("body");
 	}
 
@@ -132,10 +129,10 @@ public class UpdatesChecker {
 	 * @return
 	 * @throws JSONException
 	 */
-	private URL getLatestApkUrl(JSONObject json) throws JSONException, MalformedURLException {
-		JSONArray assets = json.getJSONArray("assets");
-		for (int i=0; i < assets.length();i ++) {
-			JSONObject asset = assets.getJSONObject(i);
+	private URL getLatestApkUrl(JsonObject json) throws MalformedURLException {
+		JsonArray assets = json.getArray("assets");
+		for (int i=0; i < assets.size();i ++) {
+            JsonObject asset = assets.getObject(i);
 			String name = asset.getString("name");
 			if (name != null) {
 				if (name.toLowerCase().startsWith("skytube-" + BuildConfig.FLAVOR + "-")) {

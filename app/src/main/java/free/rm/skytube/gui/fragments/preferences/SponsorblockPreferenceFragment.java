@@ -30,9 +30,13 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable;
 /**
  * Sponsorblock preference.
  */
-public class SponsorblockPreferenceFragment extends PreferenceFragmentCompat {
+public class SponsorblockPreferenceFragment extends BasePreferenceFragment {
 	@Override
-	public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+	public void onSharedPreferenceChanged(android.content.SharedPreferences sharedPreferences, String key) {
+		// No-op
+	}
+	@Override
+	protected void showPreferencesInternal(String rootKey) {
 		addPreferencesFromResource(R.xml.preference_sponsorblock);
 
 		findPreference("pref_key_enable_sponsorblock").setOnPreferenceChangeListener((preference, newValue) -> {

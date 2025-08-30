@@ -58,11 +58,16 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 /**
  * Video blocker preference.
  */
-public class VideoBlockerPreferenceFragment extends PreferenceFragmentCompat {
+public class VideoBlockerPreferenceFragment extends BasePreferenceFragment {
 	private final CompositeDisposable compositeDisposable = new CompositeDisposable();
 
 	@Override
-	public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+	public void onSharedPreferenceChanged(android.content.SharedPreferences sharedPreferences, String key) {
+		// No-op
+	}
+
+	@Override
+	protected void showPreferencesInternal(String rootKey) {
 		addPreferencesFromResource(R.xml.preference_video_blocker);
 
 		final Preference channelBlacklistPreference = findPreference(getString(R.string.pref_key_channel_blacklist));

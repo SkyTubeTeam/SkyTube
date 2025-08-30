@@ -12,8 +12,8 @@ android {
         //noinspection ExpiredTargetSdkVersion
         targetSdkVersion 28
 
-        versionName "2.991"    // digits of the *fractional part* shall NOT be > than "9"
-        versionCode buildNumber.toInteger()
+        versionName "2.995"    // digits of the *fractional part* shall NOT be > than "9"
+        versionCode 55
 
         // Third party devs:  pls be ethical and change the below keys
         buildConfigField 'String', 'YOUTUBE_API_KEYS_DEBUG', '""'
@@ -109,12 +109,13 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.1'
     implementation 'androidx.core:core:1.9.0'
-    implementation 'androidx.media:media:1.3.1'
+    implementation 'androidx.media:media:1.7.0'
+
     implementation 'androidx.multidex:multidex:2.0.1' // as we have over 65536 methods...
     implementation 'androidx.preference:preference:1.1.1'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
-    implementation 'com.google.android.material:material:1.11.0'
+    implementation 'com.google.android.material:material:1.12.0'
 
 /** ExoPlayer **/
     // Application level media player
@@ -155,6 +156,7 @@ dependencies {
 
     // Convert Java objects into JSON and back
     implementation 'com.google.code.gson:gson:2.10.1'
+    implementation "com.github.TeamNewPipe:nanojson:1d9e1aea9049fc9f85e68b43ba39fe7be1c1f751"
 
     // YouTube modules
     implementation 'com.github.SkyTubeTeam.google-http-java-client:google-http-client-android:e726c5718d'
@@ -164,11 +166,11 @@ dependencies {
         exclude group: 'com.google.http-client', module: 'google-http-client-jackson2'
     }
 
-    // implementation 'com.github.SkyTubeTeam.NewPipeExtractor:NewPipeExtractor:ed6a3bd8bf09ab6dfe252f2a924c8ed1fb94ef8f'
+    // implementation 'com.github.SkyTubeTeam.NewPipeExtractor:NewPipeExtractor:1704cfcfc5ed85c'
     // implementation 'com.github.TeamNewPipe.NewPipeExtractor:NewPipeExtractor:v0.22.6'
-    implementation 'com.github.SkyTubeTeam.NewPipeExtractor:NewPipeExtractor:skytube-2024-07-24'
+    implementation 'com.github.SkyTubeTeam.NewPipeExtractor:NewPipeExtractor:skytube-2025-02-09'
 
-    def skytubeComponents = '0.0.9'
+    def skytubeComponents = '0.0.10'
     implementation ("com.github.SkyTubeTeam.components:okhttp-client:$skytubeComponents") {
         exclude group: 'com.github.SkyTubeTeam.NewPipeExtractor', module: 'extractor'
     }
@@ -206,24 +208,28 @@ dependencies {
     // Required for local unit tests (JUnit 5 framework)
     def junitVersion = '5.10.2'
     testImplementation "org.junit.jupiter:junit-jupiter-api:$junitVersion"
+    testImplementation "org.junit.jupiter:junit-jupiter-params:$junitVersion"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
 }
 
-task fastlaneCheck {
-    group "Verification"
-    description 'Tasks which validates the fastlane requirements'
-    doLast {
-        var path = file("./../fastlane/metadata/android/en-US/changelogs/${buildNumber}.txt")
-        assert path.exists()
-        assert path.length() <= 500
-        println("Fastlane check successful for $buildNumber - file exists and smaller than 500 bytes")
-    }
-}
+afterEvaluate {
 
-tasks.whenTaskAdded {
-     theTask -> {
-        if (theTask.name.startsWith('assemble')) {
-            theTask.dependsOn(fastlaneCheck)
+    task fastlaneCheck {
+        group "Verification"
+        description 'Tasks which validates the fastlane requirements'
+        doLast {
+            var buildNumber = android.defaultConfig.versionCode
+            var path = file("./../fastlane/metadata/android/en-US/changelogs/${buildNumber}.txt")
+            assert path.exists()
+            assert path.length() <= 500
+            println("Fastlane check successful for $buildNumber - file exists and smaller than 500 bytes")
         }
     }
+
+    // Find all tasks whose names end with 'assemble' and make them depend on fastlaneCheck
+    tasks.matching { it.name.toLowerCase().startsWith('assemble') }.all { Task task ->
+        task.finalizedBy(fastlaneCheck)
+    }
+
 }
+

@@ -8,6 +8,8 @@ import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 
+import com.grack.nanojson.JsonArray;
+
 import org.json.JSONArray;
 import java.util.Collections;
 import java.util.HashMap;
@@ -88,7 +90,7 @@ public class SBTasks {
         Log.d(TAG, "ApiUrl: " + apiUrl);
 
         try {
-            JSONArray sponsorblockInfo = NewPipeService.getHttpDownloader().getJSONArray(apiUrl);
+            JsonArray sponsorblockInfo = NewPipeService.getHttpDownloader().getJSONArray(apiUrl);
             return new SBVideoInfo(sponsorblockInfo);
         } catch(Exception e) {
             // FileNotFoundException = 404, which the API triggers both if the API call is invalid or no segment was found

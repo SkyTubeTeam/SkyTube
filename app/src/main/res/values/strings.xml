@@ -31,4 +31,5 @@
     <string name="cleaner_watched_downloads">Remove watched downloads</string>
     <string name="cleaner_watched_bookmarks">Remove watched bookmarks</string>
     <string name="video_comments_are_disabled">Video comments off</string>
+    <string name="incorrect_pin">Incorrect PIN</string>
 </resources>

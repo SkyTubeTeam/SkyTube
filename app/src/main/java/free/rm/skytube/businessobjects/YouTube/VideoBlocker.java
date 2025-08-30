@@ -352,7 +352,7 @@ public class VideoBlocker {
 			return false;
 
 		// if the video has less views than minimumVideoViews, then filter it out
-		if (video.getViewsCountInt().compareTo(minimumVideoViews) < 0) {
+		if (video.getViewsCountInt().longValue() < 0) {
 			log(video, FilterType.VIEWS, String.format(getStr(R.string.views), video.getViewsCountInt()));
 			return true;
 		}
