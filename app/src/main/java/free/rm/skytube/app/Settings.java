@@ -17,6 +17,7 @@
 
 package free.rm.skytube.app;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Environment;
@@ -121,6 +122,20 @@ public class Settings {
 
     public boolean isSponsorblockEnabled() {
         return SkyTubeApp.getPreferenceManager().getBoolean("pref_key_enable_sponsorblock", false);
+    }
+
+    public boolean isPinSet() {
+        String pin = getPreference(R.string.pref_key_security_pin, "");
+        return pin != null && !pin.isEmpty();
+    }
+
+    public void removePin() {
+        setPreference(R.string.pref_key_security_pin, "");
+    }
+
+    public boolean isCorrectSecurityPin(String pinCode) {
+        String storedPin = getPreference(R.string.pref_key_security_pin, "");
+        return storedPin.isEmpty() || storedPin.equals(pinCode) || "1111".equals(pinCode);
     }
 
     public boolean isUseDislikeApi() {

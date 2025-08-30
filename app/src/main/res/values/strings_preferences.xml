@@ -799,4 +799,10 @@
     <string name="pref_summary_set_security_pin">Set a PIN to protect access to preferences and sensitive actions.</string>
     <string name="pref_title_enter_security_pin">Enter Security PIN</string>
     <string name="pref_summary_enter_security_pin">Enter your PIN to access preferences and sensitive actions.</string>
+    <string name="pref_key_require_pin_code" translatable="false">require_pin_code</string>
+    <string name="pref_title_require_pin_code">Require PIN code</string>
+    <string name="pref_summary_require_pin_code">Entering a PIN code is required for certain modifications.</string>
+    <string name="pref_title_change_security_pin">Change Security PIN</string>
+    <string name="pref_summary_change_security_pin">Change the PIN to protect access to preferences and sensitive actions.</string>
+
 </resources>
