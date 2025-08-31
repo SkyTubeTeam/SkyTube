@@ -156,7 +156,7 @@ dependencies {
 
     // Convert Java objects into JSON and back
     implementation 'com.google.code.gson:gson:2.10.1'
-    implementation "com.github.TeamNewPipe:nanojson:1d9e1aea9049fc9f85e68b43ba39fe7be1c1f751"
+    implementation "com.github.TeamNewPipe:nanojson:e9d656ddb49a412a5a0a5d5ef20ca7ef09549996"
 
     // YouTube modules
     implementation 'com.github.SkyTubeTeam.google-http-java-client:google-http-client-android:e726c5718d'
@@ -166,9 +166,9 @@ dependencies {
         exclude group: 'com.google.http-client', module: 'google-http-client-jackson2'
     }
 
-    // implementation 'com.github.SkyTubeTeam.NewPipeExtractor:NewPipeExtractor:1704cfcfc5ed85c'
+    implementation 'com.github.SkyTubeTeam.NewPipeExtractor:NewPipeExtractor:0c8e500efd'
     // implementation 'com.github.TeamNewPipe.NewPipeExtractor:NewPipeExtractor:v0.22.6'
-    implementation 'com.github.SkyTubeTeam.NewPipeExtractor:NewPipeExtractor:skytube-2025-08-31'
+    // implementation 'com.github.SkyTubeTeam.NewPipeExtractor:NewPipeExtractor:skytube-2025-08-32'
 
     def skytubeComponents = '0.0.10'
     implementation ("com.github.SkyTubeTeam.components:okhttp-client:$skytubeComponents") {
