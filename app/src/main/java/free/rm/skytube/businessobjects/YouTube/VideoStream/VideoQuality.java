@@ -21,7 +21,7 @@ import androidx.preference.ListPreference;
 import free.rm.skytube.R;
 
 public enum VideoQuality {
-    LEAST_BANDWITH, BEST_QUALITY;
+    LEAST_BANDWIDTH, BEST_QUALITY;
 
     /**
      * Configures the given preference to list all video resolution.

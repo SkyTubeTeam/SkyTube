@@ -127,7 +127,7 @@ public class StreamSelectionPolicy {
             return true;
         }
         switch (videoQuality) {
-            case LEAST_BANDWITH:
+            case LEAST_BANDWIDTH:
                 return other.getAverageBitrate() < best.getAverageBitrate();
             case BEST_QUALITY:
                 return best.getAverageBitrate() < other.getAverageBitrate();
@@ -175,7 +175,7 @@ public class StreamSelectionPolicy {
                             best = videoStream;
                         }
                         break;
-                    case LEAST_BANDWITH:
+                    case LEAST_BANDWIDTH:
                         if (videoStream.isLessNetworkUsageThan(best)) {
                             if (BuildConfig.DEBUG) {
                                 Logger.d(this, "less network %s -> %s", VideoStreamWithResolution.toHumanReadable(best), VideoStreamWithResolution.toHumanReadable(videoStream));

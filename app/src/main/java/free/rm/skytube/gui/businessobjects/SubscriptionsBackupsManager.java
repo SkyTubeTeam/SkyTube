@@ -76,7 +76,7 @@ public class SubscriptionsBackupsManager {
     private static final int EXT_STORAGE_PERM_CODE_IMPORT = 1951;
     private static final int IMPORT_SUBSCRIPTIONS_READ_CODE = 42;
     private static final String TAG = SubscriptionsBackupsManager.class.getSimpleName();
-    private boolean isUnsubsribeAllChecked = false;
+    private boolean isUnsubscribeAllChecked = false;
 
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();
 
@@ -348,7 +348,7 @@ public class SubscriptionsBackupsManager {
                         }
 
                         // if the user checked the "Unsubscribe to all subscribed channels" checkbox
-                        if (isUnsubsribeAllChecked) {
+                        if (isUnsubscribeAllChecked) {
                             compositeDisposable.add(DatabaseTasks.completableUnsubscribeFromAllChannels().andThen(
                                     subscribeToImportedChannels(channelsToSubscribeTo)
                             ).subscribe());
@@ -468,7 +468,7 @@ public class SubscriptionsBackupsManager {
                 .title(R.string.import_subscriptions)
                 .content(msg)
                 .positiveText(R.string.select_sub_file)
-                .checkBoxPromptRes(R.string.unsubscribe_from_all_current_sibbed_channels, false, (compoundButton, b) -> isUnsubsribeAllChecked = true)
+                .checkBoxPromptRes(R.string.unsubscribe_from_all_current_sibbed_channels, false, (compoundButton, b) -> isUnsubscribeAllChecked = true)
                 .onPositive((dialog, which) -> displayFilePicker(false))
                 .build()
                 .show();

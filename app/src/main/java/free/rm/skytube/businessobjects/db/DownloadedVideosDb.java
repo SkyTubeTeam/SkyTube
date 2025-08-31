@@ -100,7 +100,7 @@ public class DownloadedVideosDb extends CardEventEmitterDatabase implements Orde
             if (audioUri != null) {
                 sb.append(", audioUri=").append(audioUri);
             }
-            sb.append(", disapeared=").append(disappeared);
+            sb.append(", disappeared=").append(disappeared);
             sb.append('}');
             return sb.toString();
         }
