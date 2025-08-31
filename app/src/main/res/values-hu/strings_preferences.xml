@@ -190,4 +190,6 @@
     <string name="pref_summary_playback_speed">Alapértelmezett lejátszási sebesség: %s</string>
     <string name="pref_title_app_language">Alkalmazás nyelve</string>
     <string name="pref_summary_app_language">Ez a nyelv lesz használva mindegyik feliratnál</string>
+    <string name="pref_security_category">Biztonsági beállítások</string>
+    <string name="pref_title_set_security_pin">PIN kód beállítása</string>
 </resources>
