@@ -135,7 +135,7 @@ public class Settings {
 
     public boolean isCorrectSecurityPin(String pinCode) {
         String storedPin = getPreference(R.string.pref_key_security_pin, "");
-        return storedPin.isEmpty() || storedPin.equals(pinCode) || "1111".equals(pinCode);
+        return storedPin.isEmpty() || storedPin.equals(pinCode);
     }
 
     public boolean isUseDislikeApi() {
