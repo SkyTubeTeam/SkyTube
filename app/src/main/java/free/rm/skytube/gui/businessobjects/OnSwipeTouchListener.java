@@ -132,7 +132,7 @@ public abstract class OnSwipeTouchListener implements View.OnTouchListener {
 
 
 	/**
-	 * In touch listener we don't know the rect of the view. This method should be overrided and should return actual view rect (because rect changes when orientation changes).
+	 * In touch listener we don't know the rect of the view. This method should be overridden and should return actual view rect (because rect changes when orientation changes).
 	 *
 	 */
 	public abstract Rect viewRect();

@@ -29,7 +29,7 @@ public class StreamSelectionPolicyTest {
 
     @Test
     void testLeastNetworkUsageSelection() {
-        StreamSelectionPolicy policy = new StreamSelectionPolicy(false, VideoResolution.RES_1080P, VideoResolution.RES_480P, VideoQuality.LEAST_BANDWITH);
+        StreamSelectionPolicy policy = new StreamSelectionPolicy(false, VideoResolution.RES_1080P, VideoResolution.RES_480P, VideoQuality.LEAST_BANDWIDTH);
         test(policy, "480P", "144P", "480P", "720P", "1080P", "1440P");
         test(policy, "480P", "480P", "720P", "1080P");
         test(policy, "720P", "720P", "1080P");
@@ -47,7 +47,7 @@ public class StreamSelectionPolicyTest {
 
     @Test
     void testBetterFormatSelectionForLeastBandwith() {
-        StreamSelectionPolicy policy = new StreamSelectionPolicy(false, VideoResolution.RES_1080P, VideoResolution.RES_480P, VideoQuality.LEAST_BANDWITH);
+        StreamSelectionPolicy policy = new StreamSelectionPolicy(false, VideoResolution.RES_1080P, VideoResolution.RES_480P, VideoQuality.LEAST_BANDWIDTH);
 
         test(policy, MediaFormat.MPEG_4, MediaFormat.v3GPP, MediaFormat.MPEG_4);
         test(policy, MediaFormat.WEBM, MediaFormat.v3GPP, MediaFormat.WEBM, MediaFormat.MPEG_4);

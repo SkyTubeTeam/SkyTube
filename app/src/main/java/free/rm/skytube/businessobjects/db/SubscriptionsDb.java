@@ -734,9 +734,9 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 	}
 
     /**
-     * Save channel informations in the database from the Object.
+     * Save channel information in the database from the Object.
      *
-     * @param channel which contains all the recent informations.
+     * @param channel which contains all the recent information.
      * @return true, if the channel was inside the database.
      */
     public PersistentChannel cacheChannel(@Nullable PersistentChannel persistentChannel, YouTubeChannel channel) {

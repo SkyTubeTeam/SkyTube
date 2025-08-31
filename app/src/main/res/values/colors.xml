@@ -12,13 +12,13 @@
 		Material Dialog Colors
 	-->
 	<color name="dialog_title">#000</color>
-	<color name="dialog_backgound">@color/brightText</color>
+	<color name="dialog_background">@color/brightText</color>
 	<color name="dialog_content_text">#000</color>
 	<color name="dialog_positive_text">@color/colorAccent</color>
 	<color name="dialog_negative_text">@color/colorAccent</color>
 	<color name="dialog_neutral_text">@color/colorAccent</color>
 	<color name="dialog_row_0">#F0F0F0</color>
-	<color name="dialog_row_1">@color/dialog_backgound</color>
+	<color name="dialog_row_1">@color/dialog_background</color>
 
 	<!--
 		Sponsorblock, contains transparency
