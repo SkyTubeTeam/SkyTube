@@ -28,7 +28,7 @@ jobs:
     - name: Run Tests
       run: ./gradlew testOssDebugUnitTest
     - name: Build with Gradle
-      run: ./gradlew assembleSnapshot
+      run: ./gradlew assemble
     - name: Upload Artifacts - OSS version
       uses: actions/upload-artifact@v4
       with:
