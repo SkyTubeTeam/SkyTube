@@ -174,5 +174,14 @@
     <string name="pref_summary_playback_speed">預設播放速度：%s</string>
     <string name="pref_title_playback_speed">預設播放速度</string>
     <string name="pref_title_app_language">應用程式語言</string>
-    <string name="pref_summary_app_language">應用程式中所有標籤使用的語言</string>
+    <string name="pref_summary_app_language">應用程式中所有標籤使用的語言：%s</string>
+    <string name="pref_security_category">安全</string>
+    <string name="pref_title_set_security_pin">設定安全 PIN 碼</string>
+    <string name="pref_summary_set_security_pin">設定 PIN 碼保護對偏好設定與敏感動作的存取權。</string>
+    <string name="pref_title_enter_security_pin">輸入安全 PIN 碼</string>
+    <string name="pref_summary_enter_security_pin">輸入您的 PIN 碼以存取偏好設定與敏感動作。</string>
+    <string name="pref_title_require_pin_code">需要 PIN 碼</string>
+    <string name="pref_summary_require_pin_code">進行某些修改時，必須輸入 PIN 碼。</string>
+    <string name="pref_title_change_security_pin">變更安全 PIN 碼</string>
+    <string name="pref_summary_change_security_pin">變更 PIN 碼以保護設定選項與敏感操作的存取權。</string>
 </resources>
