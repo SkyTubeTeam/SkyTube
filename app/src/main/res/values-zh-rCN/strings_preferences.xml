@@ -171,5 +171,14 @@
     <string name="pref_title_playback_speed">默认播放速度</string>
     <string name="pref_summary_playback_speed">默认播放速度：%s</string>
     <string name="pref_title_app_language">程序语言</string>
-    <string name="pref_summary_app_language">用于程序中所有标签的语言</string>
+    <string name="pref_summary_app_language">用于程序中所有标签的语言：%s</string>
+    <string name="pref_security_category">安全性</string>
+    <string name="pref_title_set_security_pin">设置安全 PIN 码</string>
+    <string name="pref_summary_set_security_pin">设置 PIN 码保护对首选项和敏感操作的访问。</string>
+    <string name="pref_title_enter_security_pin">输入安全 PIN 码</string>
+    <string name="pref_summary_enter_security_pin">输入 PIN 码访问首选项和敏感操作。</string>
+    <string name="pref_title_require_pin_code">需要 PIN 码</string>
+    <string name="pref_summary_require_pin_code">某些修改需要输入 PIN 码。</string>
+    <string name="pref_title_change_security_pin">更改安全 PIN 码</string>
+    <string name="pref_summary_change_security_pin">更改 PIN 码保护对首选项和敏感操作的访问。</string>
 </resources>
