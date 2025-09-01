@@ -170,4 +170,15 @@
     <string name="pref_summary_open_issue">Ideia bat iradoki edo zomorro baten berri eman.</string>
     <string name="pref_title_playback_speed">Erreprodukzio-abiadura lehenetsia</string>
     <string name="pref_summary_playback_speed">Erreprodukzio-abiadura lehenetsia: %s</string>
+    <string name="pref_summary_change_security_pin">Aldatu PINa, lehentasunetarako eta ekintza sentikorretarako sarbidea babesteko.</string>
+    <string name="pref_title_app_language">Aplikazioaren hizkuntza</string>
+    <string name="pref_summary_app_language">Hizkuntza erabilita, aplikazioaren etiketa guztietan: %s</string>
+    <string name="pref_security_category">Segurtasuna</string>
+    <string name="pref_title_set_security_pin">Ezarri segurtasun-PINa</string>
+    <string name="pref_summary_set_security_pin">Ezarri PIN bat hobespenetarako eta ekintza sentikorretarako sarbidea babesteko.</string>
+    <string name="pref_title_enter_security_pin">Sartu segurtasun-PINa</string>
+    <string name="pref_summary_enter_security_pin">Sartu zure PINa lehenespenetara eta ekintza sentikorretara sartzeko.</string>
+    <string name="pref_title_require_pin_code">PIN kodea behar duzu</string>
+    <string name="pref_summary_require_pin_code">PIN kode bat sartzea beharrezkoa da aldaketa jakin batzuetarako.</string>
+    <string name="pref_title_change_security_pin">Aldatu segurtasun-PINa</string>
 </resources>
