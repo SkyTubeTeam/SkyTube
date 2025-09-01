@@ -31,4 +31,5 @@
     <string name="cleaner_watched_bookmarks">移除看過的書籤</string>
     <string name="cleaner_toast_finish">我們從書籤移除了 %1$s 部影片，並刪除了 %2$s MB 的已下載影片。</string>
     <string name="cleaner_watched_downloads">移除看過的下載</string>
+    <string name="incorrect_pin">PIN 碼不正確</string>
 </resources>
