@@ -174,4 +174,11 @@
     <string name="pref_summary_app_language">Keel, mida kasutatakse kõikide rakenduse siltide kuvamiseks: %s</string>
     <string name="pref_security_category">Turvalisus</string>
     <string name="pref_title_set_security_pin">Lisa turva-PIN</string>
+    <string name="pref_summary_set_security_pin">Takistamaks ligipääsu eelistustele ja delikaatsetele tegevustele seadista PIN-kood.</string>
+    <string name="pref_title_enter_security_pin">Sisesta PIN-kood turvalisuse jaoks</string>
+    <string name="pref_summary_enter_security_pin">Ligipääsuks eelistustele ja delikaatsetele tegevustele sisesta oma PIN-kood.</string>
+    <string name="pref_title_require_pin_code">Eelda PIN-koodi sisestamist</string>
+    <string name="pref_summary_require_pin_code">PIN-koodi sisestamine on mõnede muudatuste jaoks vajalik.</string>
+    <string name="pref_title_change_security_pin">Muuda PIN-koodi turvalisuse jaoks</string>
+    <string name="pref_summary_change_security_pin">Muuda ligipääsuks eelistustele ja delikaatsetele tegevustele kasutatavat PIN-koodi.</string>
 </resources>
