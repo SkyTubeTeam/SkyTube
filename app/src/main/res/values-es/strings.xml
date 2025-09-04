@@ -13,7 +13,7 @@
     <string name="videos">Vídeos</string>
     <string name="num_videos">%d vídeos</string>
     <string name="playlists">Listas de reproducción</string>
-    <string name="could_not_get_playlists">No encuentro %s listas de reproducción.</string>
+    <string name="could_not_get_playlists">No se encontraron listas de reproducción de %s.</string>
     <string name="loading">Cargando…</string>
     <string name="could_not_get_channel">No se puede descargar información del canal.</string>
     <string name="yes">Si</string>
@@ -31,4 +31,5 @@
     <string name="cleaner_watched_downloads">Eliminar las descargas ya vistas</string>
     <string name="cleaner_watched_bookmarks">Eliminar favoritos vistos</string>
     <string name="video_comments_are_disabled">Comentarios en video desactivados</string>
+    <string name="incorrect_pin">PIN Incorrecto</string>
 </resources>
