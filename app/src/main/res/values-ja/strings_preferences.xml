@@ -188,4 +188,9 @@
     <string name="pref_summary_change_security_pin">PINを変更してあなたの機密情報や設定を守ります。</string>
     <string name="pref_security_category">セキュリティー</string>
     <string name="pref_title_set_security_pin">セキュリティーPINの設定</string>
+    <string name="pref_title_enter_security_pin">セキュリティ用のPINを入力</string>
+    <string name="pref_summary_set_security_pin">設定や重要な操作を保護するためPINを設定する。</string>
+    <string name="pref_summary_enter_security_pin">設定や重要な操作をするにはPINを入力してください。</string>
+    <string name="pref_title_require_pin_code">PINコードが必要</string>
+    <string name="pref_summary_require_pin_code">特定の変更には、PINコードの入力が必要です。</string>
 </resources>
