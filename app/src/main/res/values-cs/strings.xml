@@ -31,4 +31,5 @@
     <string name="loading">Načítám…</string>
     <string name="featured">Doporučená</string>
     <string name="video_comments_are_disabled">Komentáře videí vypnuté</string>
+    <string name="incorrect_pin">Nesprávny PIN</string>
 </resources>
