@@ -12,4 +12,5 @@
     <string name="import_subscriptions_from_youtube">Importă abonamente de pe YouTube</string>
     <string name="notification_channel_feed_title">Notificări Feed</string>
     <string name="notification_new_videos_found">%d videoclipuri noi de la canalele abonate</string>
+    <string name="channel_related">Canal...</string>
 </resources>
