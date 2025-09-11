@@ -12,4 +12,12 @@
     <string name="pref_title_minimum_res_metered">Cea mai mică rezoluție pentru rețeaua contorizată</string>
     <string name="pref_summary_choose_player">Player video de utilizat: %s</string>
     <string name="no_resolution_specified">Niciunul</string>
+    <string name="pref_summary_minimum_res_metered">Alegeți cea mai mică rezoluție atunci când folosiți datele mobile: %s</string>
+    <string name="pref_title_maximum_res_metered">Cea mai mare rezoluție folosind datele mobile</string>
+    <string name="pref_summary_maximum_res_metered">Alegeți-vă rezoluția maximă, atunci când folosiți datele mobile: %s</string>
+    <string name="pref_title_metered_network_usage">Utilizarea datelor mobile</string>
+    <string name="pref_summary_metered_network_usage">Cum să procedăm cu descărcarea/ vizualizarea videoclipurilor utilizând datele mobile: %s</string>
+    <string name="pref_import_export_category">Importă/Exportă</string>
+    <string name="pref_summary_backup_dbs">Fă o copie a videoclipurilor salvate și a canalelor la care sunteți abonat.</string>
+    <string name="pref_title_import_dbs">Importă Copie de Rezervă</string>
 </resources>
