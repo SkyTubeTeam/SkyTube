@@ -31,4 +31,5 @@
     <string name="cleaner_explanation">تنظيف مقاطع الفيديو المرجعية / التي تم تنزيلها. استخدم خيارات التصفية التالية:</string>
     <string name="cleaner_watched_downloads">قم بإزالة التنزيلات التي تمت مراقبتها</string>
     <string name="video_comments_are_disabled">تعليقات الفيديو مغلقة</string>
+    <string name="incorrect_pin">رمز غير صحيح</string>
 </resources>
