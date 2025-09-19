@@ -31,4 +31,5 @@
     <string name="cleaner_watched_downloads">Rimuovi gli scaricamenti già visti</string>
     <string name="cleaner_watched_bookmarks">Rimuovi i segnalibri già visti</string>
     <string name="video_comments_are_disabled">Commenti video disattivati</string>
+    <string name="incorrect_pin">PIN errato</string>
 </resources>
