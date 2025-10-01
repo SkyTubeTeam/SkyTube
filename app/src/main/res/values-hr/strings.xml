@@ -31,4 +31,5 @@
     <string name="cleaner_toast_finish">Uklonili smo %1$s video/a iz zabilješki i izbrisali smo %2$s MB preuzetih videa.</string>
     <string name="cleaner">Brisanje gledanih videa</string>
     <string name="video_comments_are_disabled">Komentari za video isključeni</string>
+    <string name="incorrect_pin">Neispravan PIN</string>
 </resources>
