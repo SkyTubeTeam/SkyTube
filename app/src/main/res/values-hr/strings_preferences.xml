@@ -171,5 +171,14 @@
     <string name="pref_title_playback_speed">Standardna brzina reprodukcije</string>
     <string name="pref_summary_playback_speed">Standardna brzina reprodukcije: %s</string>
     <string name="pref_title_app_language">Jezik aplikacije</string>
-    <string name="pref_summary_app_language">Korištni jezik za sve oznake u aplikaciji</string>
+    <string name="pref_summary_app_language">Korištni jezik za sve oznake u aplikaciji: %s</string>
+    <string name="pref_security_category">Sigurnost</string>
+    <string name="pref_title_set_security_pin">Postavi sigurnosni PIN</string>
+    <string name="pref_summary_set_security_pin">Postavi PIN za zaštitu pristupa postavkama i osjetljivim radnjama.</string>
+    <string name="pref_title_enter_security_pin">Unesi sigurnosni PIN</string>
+    <string name="pref_summary_enter_security_pin">Unesi svoj PIN za pristup postavkama i osjetljivim radnjama.</string>
+    <string name="pref_title_require_pin_code">Zahtijevaj PIN kod</string>
+    <string name="pref_summary_require_pin_code">Za određene promjene je potreban unos PIN koda.</string>
+    <string name="pref_title_change_security_pin">Promijeni sigurnosni PIN</string>
+    <string name="pref_summary_change_security_pin">Promijeni PIN za zaštitu pristupa postavkama i osjetljivim radnjama.</string>
 </resources>
