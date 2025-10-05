@@ -167,5 +167,14 @@
     <string name="setting_updated">Që të përdoret rregullimi i ri, rifreskoni videot.</string>
     <string name="pref_playback_status_cleared">Gjendja e luajtjes u spastrua.</string>
     <string name="pref_title_app_language">Gjuhë Aplikacioni</string>
-    <string name="pref_summary_app_language">Gjuha e përdorur për krejt etiketat te aplikacioni</string>
+    <string name="pref_summary_app_language">Gjuha e përdorur për krejt etiketat te aplikacioni: %s</string>
+    <string name="pref_security_category">Siguri</string>
+    <string name="pref_title_set_security_pin">Caktoni PIN Sigurie</string>
+    <string name="pref_summary_set_security_pin">Caktoni një PIN për të mbrojtur hyrjen te parapëlqimeve dhe veprimet me spec.</string>
+    <string name="pref_title_enter_security_pin">Jepni PIN Sigurie</string>
+    <string name="pref_summary_enter_security_pin">Që të hyni te parapëlqimet dhe veprimet me spec, jepni PIN-in tuaj.</string>
+    <string name="pref_title_require_pin_code">Kërko doemos kod PIN</string>
+    <string name="pref_summary_require_pin_code">Dhënia e një kodi PIN është e domosdoshme për disa nga ndryshimet.</string>
+    <string name="pref_title_change_security_pin">Ndryshoni PIN Sigurie</string>
+    <string name="pref_summary_change_security_pin">Që të hyni te parapëlqimet dhe veprimet me spec, ndryshoni PIN-in tuaj.</string>
 </resources>
