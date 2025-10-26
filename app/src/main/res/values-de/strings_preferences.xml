@@ -182,6 +182,15 @@
     <string name="pref_summary_open_issue">Verbesserungsvorschlag oder Fehler melden.</string>
     <string name="pref_summary_playback_speed">Standard-Wiedergabegeschwindigkeit: %s</string>
     <string name="pref_title_playback_speed">Standard-Wiedergabegeschwindigkeit</string>
-    <string name="pref_summary_app_language">Die für alle Bezeichnungen in der Anwendung verwendete Sprache</string>
+    <string name="pref_summary_app_language">Die für alle Bezeichnungen in der Anwendung verwendete Sprache: %s</string>
     <string name="pref_title_app_language">Anwendungssprache</string>
+    <string name="pref_security_category">Sicherheit</string>
+    <string name="pref_title_set_security_pin">Sicherheits-PIN festlegen</string>
+    <string name="pref_summary_set_security_pin">Legen Sie eine PIN fest, um den Zugriff auf Einstellungen und sensible Aktionen zu schützen.</string>
+    <string name="pref_title_enter_security_pin">Sicherheits-PIN eingeben</string>
+    <string name="pref_summary_enter_security_pin">Geben Sie Ihre PIN ein, um auf Einstellungen und sensible Aktionen zuzugreifen.</string>
+    <string name="pref_title_require_pin_code">PIN-Code erforderlich</string>
+    <string name="pref_summary_require_pin_code">Für bestimmte Änderungen ist die Eingabe eines PIN-Codes erforderlich.</string>
+    <string name="pref_title_change_security_pin">Sicherheits-PIN ändern</string>
+    <string name="pref_summary_change_security_pin">Ändern Sie die PIN, um den Zugriff auf Einstellungen und sensible Aktionen zu schützen.</string>
 </resources>
