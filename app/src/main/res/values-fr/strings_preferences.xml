@@ -195,7 +195,7 @@
     <string name="pref_key_use_newer_formats_summary">La qualité du son et de la vidéo peut être diminuée sur les anciennes versions d\'Android sans prise en charge.</string>
     <string name="pref_key_use_newer_formats_title">Essayez des formats vidéo plus récents</string>
     <string name="pref_general">Général</string>
-    <string name="pref_sponsorblock_category">Sponsorblock</string>
+    <string name="pref_sponsorblock_category">SponsorBlock</string>
     <string name="pref_title_credit_sponsorblock">Crédits</string>
     <string name="pref_summary_credit_sponsorblock">Utilise les données SponsorBlock de https://sponsor.ajay.app</string>
     <string name="pref_title_sponsorblock_category_list">Sauter des segments</string>
@@ -209,7 +209,7 @@
     <string name="pref_summary_playback_speed">Vitesse de lecture par défaut : %s</string>
     <string name="pref_title_use_dislike_api">Compteur des Je n\'aime pas</string>
     <string name="pref_summary_use_dislike_api">Réactiver le compteur de Je n\'aime pas en utilisant returnyoutubedislike.com</string>
-    <string name="pref_title_app_language">Language de l\'application</string>
+    <string name="pref_title_app_language">Langue de l\'application</string>
     <string name="pref_summary_app_language">La langue utilisée pour toutes les étiquettes de l\'application : %s</string>
     <string name="pref_security_category">Sécurité</string>
     <string name="pref_title_set_security_pin">Définir le code PIN de sécurité</string>
