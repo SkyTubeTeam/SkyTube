@@ -31,4 +31,5 @@
     <string name="cleaner_watched_bookmarks">Αφαίρεση σελιδοδεικτών που έχετε παρακολουθήσει</string>
     <string name="no">Όχι</string>
     <string name="cleaner_explanation">Εκκαθαρίστε αποθηκευμένα βίντεο στους σελιδοδείκτες ή στη συσκευή σας. Χρησιμοποιείστε τις ακόλουθες επιλογές φίλτρων:</string>
+    <string name="incorrect_pin">Λανθασμένο PIN</string>
 </resources>
