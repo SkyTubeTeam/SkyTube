@@ -1,3 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="thumbnail">תמונה ממוזערת</string>
+    <string name="view_thumbnail">הצגת תמונה ממוזערת</string>
+    <string name="thumbnail_downloaded">ירדה.</string>
+    <string name="thumbnail_download_error">לא ניתן להוריד את התמונה הממוזערת.</string>
 </resources>
