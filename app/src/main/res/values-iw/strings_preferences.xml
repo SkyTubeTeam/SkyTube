@@ -11,4 +11,6 @@
     <string name="pref_title_minimum_res">הרזולוציה הנמוכה ביותר</string>
     <string name="pref_security_category">אבטחה</string>
     <string name="pref_title_sponsorblock_category_list">דילוג על קטעים</string>
+    <string name="pref_summary_sponsorblock_category_list">בחירת קטגוריות לדילוג</string>
+    <string name="pref_title_credit_sponsorblock">תודות</string>
 </resources>
