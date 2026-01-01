@@ -1,3 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="blocked_videos">סרטונים חסומים</string>
+    <string name="no_videos_blocked">להגדיר את חוסם הסרטונים כדי לחסום או לסנן סרטונים?</string>
+    <string name="configure">הגדרה</string>
+    <string name="block_channel">חסימת ערוץ</string>
+    <string name="add_to_permitted">הרשאת ערוץ</string>
+    <string name="channel_unwhitelist_error">לא ניתן להסיר ערוץ מרשימת ההיתר.</string>
+    <string name="channel_blacklist_error">לא ניתן להוסיף ערוץ לרשימת חסימה.</string>
 </resources>
