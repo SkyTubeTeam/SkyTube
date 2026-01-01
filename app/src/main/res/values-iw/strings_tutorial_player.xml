@@ -1,3 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="next">הבא</string>
+    <string name="done">בוצע</string>
+    <string name="skip">דילוג</string>
+    <string name="page_counter">%1$d מתוך %2$d</string>
+    <string name="tutorial_slide_1">החלקה → תציג הערות.</string>
+    <string name="tutorial_slide_2">החלקה ↑ תציג את תיאור הסרטון.</string>
+    <string name="tutorial_slide_3">החלקה → ← תחתור קדימה או אחורה.</string>
+    <string name="tutorial_slide_5">החלקה ↑ ↓ תכוון את הבהירות.</string>
+    <string name="tutorial_slide_4">החלקה ↑ ↓ תכוון את עוצמת השמע.</string>
 </resources>
