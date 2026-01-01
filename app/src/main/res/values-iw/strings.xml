@@ -1,3 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="could_not_get_videos">לא ניתן לקבל סרטוני %s.</string>
+    <string name="could_not_get_channel">לא ניתן להוריד את פרטי הערוץ.</string>
+    <string name="could_not_get_channel_detailed">לא ניתן להוריד את פרטי הערוץ: %s.</string>
+    <string name="could_not_get_sponsorblock">לא ניתן למשוך פרטי SponsorBlock (חסימת חסויות): %s.</string>
+    <string name="views">%,d צפיות</string>
+    <string name="error">שגיאה</string>
+    <string name="search_videos">חיפוש סרטונים</string>
+    <string name="ok">אישור</string>
 </resources>
