@@ -1,3 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="download">הורדה</string>
+    <string name="downloads">הורדות</string>
+    <string name="warning_metered_network_download">להוריד סרטון ברשת המוגבלת שדרכה מתבצע החיבור?</string>
+    <string name="download_video">הורדת סרטון</string>
+    <string name="unable_to_delete_file">לא ניתן להוריד את הקובץ ‚%s’ שירד.</string>
+    <string name="starting_video_download">‚%s’ בהורדה…</string>
+    <string name="video_download_stream_error">לא ניתן להוריד את ‚%s’.</string>
+    <string name="download_failed_because">לא ניתן להוריד את %1$s עקב %2$s.</string>
 </resources>
