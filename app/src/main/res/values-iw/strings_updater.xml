@@ -1,3 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="update_available">יש גרסה חדשה</string>
+    <string name="update_dialog_msg">יש גרסה חדשה של SkyTube. גרסה %s תותקן.</string>
+    <string name="up_to_date">עדכני</string>
+    <string name="up_to_date_msg">הגרסה המותקנת של SkyTube היא העדכנית ביותר.</string>
+    <string name="release_notes">שינויים ב־%s</string>
+    <string name="update">עדכון</string>
+    <string name="update_failure">לא ניתן להתקין את הגרסה החדשה של היישומון.</string>
+    <string name="later">מאוחר יותר</string>
 </resources>
