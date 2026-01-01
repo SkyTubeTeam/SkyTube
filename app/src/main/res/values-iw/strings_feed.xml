@@ -1,3 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="feed">ערוץ</string>
+    <string name="channel_related">ערוץ…</string>
+    <string name="subscribing_to_channels">הרשמה לערוצים…</string>
+    <string name="open_channel">פתיחת ערוץ</string>
+    <string name="fetching_subbed_channels_info">פרטי הערוץ מתקבלים…</string>
+    <string name="fetching_subbed_channels_info_error">לא ניתן למשוך את פרטי הערוץ.</string>
+    <string name="fetching_subscription_videos">הסרטונים נשלפים מהערוצים שנרשמת אליהם…</string>
 </resources>
