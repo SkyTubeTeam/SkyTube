@@ -8,4 +8,5 @@
     <string name="update">עדכון</string>
     <string name="update_failure">לא ניתן להתקין את הגרסה החדשה של היישומון.</string>
     <string name="later">מאוחר יותר</string>
+    <string name="downloading">בהורדה…</string>
 </resources>
