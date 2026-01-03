@@ -18,4 +18,11 @@
     <string name="pref_title_enable_sponsorblock">הפעלת SponsorBlock (חסימת חסויות)</string>
     <string name="pref_summary_app_language">השפה של כל התוויות ביישומון: %s</string>
     <string name="pref_sponsorblock_category">SponsorBlock (חסימת חסויות)</string>
+    <string name="pref_summary_minimum_res">בחירת הרזולוציה הנמוכה ביותר: %s</string>
+    <string name="pref_disable_search_history_deleted">היסטוריית החיפוש נמחקה.</string>
+    <string name="pref_title_disable_playback_status">אין מצב נגינה</string>
+    <string name="pref_summary_disable_playback_status">כיבוי מצב נגינה.</string>
+    <string name="pref_disable_playback_status_deleted">מצב נגינה נמחק.</string>
+    <string name="pref_title_clear_playback_status">מחיקת מצב נגינה</string>
+    <string name="pref_title_dislikes_filter">לא אהבו</string>
 </resources>
