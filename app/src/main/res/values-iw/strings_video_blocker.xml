@@ -8,4 +8,5 @@
     <string name="channel_unwhitelist_error">לא ניתן להסיר ערוץ מרשימת ההיתר.</string>
     <string name="channel_blacklist_error">לא ניתן להוסיף ערוץ לרשימת חסימה.</string>
     <string name="channel_blacklisted">ריענון יגרום לשימוש ברשימת החסימה החדשה.</string>
+    <string name="dislikes">%d%% סימנו שלא אהבו</string>
 </resources>
