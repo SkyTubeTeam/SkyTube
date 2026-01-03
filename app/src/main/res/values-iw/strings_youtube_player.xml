@@ -8,4 +8,5 @@
     <string name="error_video_streams">לא ניתן למשוך אף אחד מתזרימי הווידאו.</string>
     <string name="error_get_video_desc">לא ניתן למשוך את תיאור הסרטון.</string>
     <string name="error_invalid_url">כתובת הסרטון שגויה: %s</string>
+    <string name="error_downloaded_file_is_corrupted">הסרטון שירד נראה <b>פגום</b>: <br/> <br/> %s. <br/> <br/> <b>למחוק</b> את הקובץ?</string>
 </resources>
