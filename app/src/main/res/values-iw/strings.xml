@@ -8,4 +8,5 @@
     <string name="error">שגיאה</string>
     <string name="search_videos">חיפוש סרטונים</string>
     <string name="ok">אישור</string>
+    <string name="launch_offical_player_error">לא ניתן לטעון את נגן ה־YouTube הרשמי. נא לוודא שהוא מותקן.</string>
 </resources>
