@@ -28,7 +28,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CommentPager extends Pager<CommentsInfoItem, CommentsInfoItem> {
+public class CommentPager extends Pager<CommentsInfoItem, CommentsInfoItem> implements CommentPagerInterface {
 
     private Boolean disabledComments;
     private final List<CommentsInfoItem> allComments = new ArrayList<>();
@@ -65,6 +65,16 @@ public class CommentPager extends Pager<CommentsInfoItem, CommentsInfoItem> {
 
     public int getCommentCount() {
         return commentCount != null ? commentCount.intValue() : -1;
+    }
+
+    /**
+     * Returns the number of comments that have actually been loaded so far.
+     * This is different from getCommentCount() which returns the total number of comments available.
+     *
+     * @return the number of loaded comments
+     */
+    public int getLoadedCount() {
+        return allComments.size();
     }
 
 }
