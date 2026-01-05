@@ -29,6 +29,7 @@ import android.widget.ExpandableListView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -45,13 +46,14 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.AsyncTaskParallel;
 import free.rm.skytube.businessobjects.YouTube.newpipe.ChannelId;
-import free.rm.skytube.businessobjects.YouTube.newpipe.CommentPager;
+import free.rm.skytube.businessobjects.YouTube.newpipe.CommentPagerInterface;
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeException;
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeUtils;
@@ -63,57 +65,61 @@ import free.rm.skytube.gui.businessobjects.views.Linker;
  */
 public class CommentsAdapter extends BaseExpandableListAdapter {
 
-    private CommentPager commentThreadPager;
+    private final CommentPagerInterface commentThreadPager;
     private GetCommentsTask getCommentsTask = null;
-    private ExpandableListView expandableListView;
-    private View commentsProgressBar;
-    private View noVideoCommentsView;
-    private View disabledCommentsView;
-    private LayoutInflater layoutInflater;
-    private Context context;
-    private IconicsDrawable heartedIcon;
-    private IconicsDrawable pinnedIcon;
+    private final ExpandableListView expandableListView;
+    private final View commentsProgressBar;
+    private final View noVideoCommentsView;
+    private final View disabledCommentsView;
+    private final LayoutInflater layoutInflater;
+    private final Context context;
+    private final IconicsDrawable heartedIcon;
+    private final IconicsDrawable pinnedIcon;
 
-    private Linker.CurrentActivity currentActivity;
+    private final Linker.CurrentActivity currentActivity;
 
-    private Map<String, List<CommentsInfoItem>> replyMap = new HashMap<>();
-    private Set<String> currentlyFetching = new HashSet<>();
+    private final Map<String, List<CommentsInfoItem>> replyMap = new HashMap<>();
+    private final Set<String> currentlyFetching = new HashSet<>();
 
     private static final String TAG = CommentsAdapter.class.getSimpleName();
 
-    public CommentsAdapter(Context context, Linker.CurrentActivity currentActivity, String videoId, ExpandableListView expandableListView, View commentsProgressBar, View noVideoCommentsView, View disabledCommentsView) {
+    protected CommentsAdapter(Context context, Linker.CurrentActivity currentActivity, @NonNull CommentPagerInterface commentPager,
+                              ExpandableListView expandableListView, View commentsProgressBar, View noVideoCommentsView,
+                              View disabledCommentsView, LayoutInflater layoutInflater,
+                              IconicsDrawable heartedIcon, IconicsDrawable pinnedIcon) {
         this.context = context;
         this.currentActivity = currentActivity;
-        this.heartedIcon = new IconicsDrawable(context)
-                .icon(MaterialDesignIconic.Icon.gmi_favorite)
-                .color(IconicsColor.colorInt(Color.RED))
-                .size(IconicsSize.TOOLBAR_ICON_SIZE)
-                .padding(IconicsSize.TOOLBAR_ICON_PADDING);
-        this.pinnedIcon = new IconicsDrawable(context)
-                .icon(MaterialDesignIconic.Icon.gmi_pin)
-                .color(IconicsColor.colorInt(Color.RED))
-                .size(IconicsSize.TOOLBAR_ICON_SIZE)
-                .padding(IconicsSize.TOOLBAR_ICON_PADDING);
-        try {
-            this.commentThreadPager = NewPipeService.get().getCommentPager(videoId);
-            this.expandableListView = expandableListView;
-            this.expandableListView.setAdapter(this);
-            this.expandableListView.setOnGroupClickListener((parent, v, groupPosition, id) -> true);
-            this.commentsProgressBar = commentsProgressBar;
-            this.noVideoCommentsView = noVideoCommentsView;
-            this.disabledCommentsView = disabledCommentsView;
-            this.layoutInflater = LayoutInflater.from(expandableListView.getContext());
-            this.getCommentsTask = new GetCommentsTask();
-            this.getCommentsTask.execute();
-        } catch (Exception e) {
-            Log.e(TAG, "fetching comments failed for  " + videoId + " - " + e.getMessage(), e);
-            SkyTubeApp.notifyUserOnError(context, e);
+        this.commentThreadPager = Objects.requireNonNull(commentPager, "commentPager");
+        this.expandableListView = expandableListView;
+        this.commentsProgressBar = commentsProgressBar;
+        this.noVideoCommentsView = noVideoCommentsView;
+        this.disabledCommentsView = disabledCommentsView;
+        this.layoutInflater = layoutInflater;
+        this.heartedIcon = heartedIcon;
+        this.pinnedIcon = pinnedIcon;
+
+        // Initialize UI components
+        this.expandableListView.setAdapter(this);
+        this.expandableListView.setOnGroupClickListener((parent, v, groupPosition, id) -> true);
+    }
+
+    /**
+     * Initiate fetching of the comments if not already tried.
+     */
+    synchronized void fetchComments() {
+        if (getCommentsTask == null) {
+            Log.w(TAG, "Getting next page of comments...");
+            getCommentsTask = new GetCommentsTask();
+            getCommentsTask.execute();
         }
     }
 
     @Override
     public int getGroupCount() {
-        return commentThreadPager != null ? commentThreadPager.getCommentCount() : 0;
+        // Return the number of comments that have actually been loaded, not the total
+        // count. This prevents the adapter from trying to display positions that
+        // haven't been loaded yet
+        return commentThreadPager.getLoadedCount();
     }
 
     /**
@@ -123,19 +129,17 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
      */
     @Override
     public int getChildrenCount(int groupPosition) {
-        if (commentThreadPager != null) {
-            CommentsInfoItem comment = commentThreadPager.getComment(groupPosition);
-            if (comment != null && comment.getReplyCount() > 0) {
-                List<CommentsInfoItem> replies = replyMap.get(comment.getCommentId());
-                return replies != null ? replies.size() : 0;
-            }
+        CommentsInfoItem comment = commentThreadPager.getComment(groupPosition);
+        if (comment != null && comment.getReplyCount() > 0) {
+            List<CommentsInfoItem> replies = replyMap.get(comment.getCommentId());
+            return replies != null ? replies.size() : 0;
         }
         return 0;
     }
 
     @Override
     public Object getGroup(int groupPosition) {
-        return commentThreadPager != null ? commentThreadPager.getComment(groupPosition) : 0;
+        return commentThreadPager.getComment(groupPosition);
     }
 
     @Override
@@ -166,29 +170,32 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
             viewHolder.updateInfo(comment, true, groupPosition);
         }
 
-        // if it reached the bottom of the list, then try to get the next page of videos
-        if (groupPosition == getGroupCount() - 1) {
-            synchronized (this) {
-                if (this.getCommentsTask == null) {
-                    Log.w(TAG, "Getting next page of comments...");
-                    this.getCommentsTask = new GetCommentsTask();
-                    this.getCommentsTask.execute();
-                }
-            }
+        // if it reached near the bottom of the list, then try to get the next page of
+        // videos
+        // Trigger when we're within 5 positions of the end to ensure smooth loading
+        if (groupPosition >= getGroupCount() - 5) {
+            fetchComments();
         }
-        if (isExpanded) {
+        if (isExpanded && comment != null) {
             ensureRepliesLoaded(comment);
         }
         return viewHolder.getView();
     }
 
-    private synchronized void ensureRepliesLoaded(CommentsInfoItem comment) {
+    private synchronized void ensureRepliesLoaded(@NonNull CommentsInfoItem comment) {
         if (replyMap.get(comment.getCommentId()) == null && comment.getReplies() != null) {
             new GetReplies().executeInParallel(comment);
         }
     }
 
-    private synchronized void addReplies(CommentsInfoItem comment, List<CommentsInfoItem> newReplies) {
+    /**
+     * Adds replies to the reply map for a given comment.
+     * Made protected for testing purposes.
+     *
+     * @param comment    The parent comment
+     * @param newReplies The new replies to add
+     */
+    protected synchronized void addReplies(@NonNull CommentsInfoItem comment, @NonNull List<CommentsInfoItem> newReplies) {
         List<CommentsInfoItem> replies = replyMap.get(comment.getCommentId());
         if (replies == null) {
             replies = new ArrayList<>();
@@ -198,7 +205,8 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+    public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView,
+                             ViewGroup parent) {
         Log.d(TAG, "getChildView " + groupPosition + " " + childPosition + " lastChild=" + isLastChild);
         CommentsInfoItem comment = getComment(groupPosition, childPosition);
         final CommentViewHolder viewHolder = getCommentViewHolder(convertView, parent);
@@ -217,13 +225,20 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
         List<CommentsInfoItem> replies = replyMap.get(parent.getCommentId());
         if (replies != null && 0 <= childIdx) {
             int currentReplyListSize = replies.size();
-            if (currentReplyListSize < parent.getReplyCount() && currentReplyListSize - 5 <= childIdx) {
+            // Only fetch more replies if we're near the end of the current list AND we
+            // haven't already fetched all replies
+            if (currentReplyListSize < parent.getReplyCount() && childIdx >= currentReplyListSize - 5
+                    && childIdx < currentReplyListSize) {
                 synchronized (currentlyFetching) {
                     if (parent.getReplies() != null && currentlyFetching.add(parent.getCommentId())) {
-                        Log.i(TAG, String.format("Fetching more replies for %s - currentReplyListSize: %s, childIdx: %s - %s", parent.getCommentId(), currentReplyListSize, childIdx, parent.getReplyCount()));
+                        Log.i(TAG,
+                                String.format(
+                                        "Fetching more replies for %s - currentReplyListSize: %s, childIdx: %s - %s",
+                                        parent.getCommentId(), currentReplyListSize, childIdx, parent.getReplyCount()));
                         new GetReplies().executeInParallel(parent);
                     } else {
-                        Log.i(TAG, String.format("No reply fetch for %s - currentReplyListSize: %s, childIdx: %s", parent.getCommentId(), currentReplyListSize, childIdx));
+                        Log.i(TAG, String.format("No reply fetch for %s - currentReplyListSize: %s, childIdx: %s",
+                                parent.getCommentId(), currentReplyListSize, childIdx));
                     }
                 }
             }
@@ -293,9 +308,11 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
                 }
             });
 
-            // change the width dimensions depending on whether the comment is a top level or a child
+            // change the width dimensions depending on whether the comment is a top level
+            // or a child
             ViewGroup.LayoutParams lp = binding.commentThumbnailImageView.getLayoutParams();
-            lp.width = (int) SkyTubeApp.getDimension(isTopLevelComment ? R.dimen.top_level_comment_thumbnail_width : R.dimen.child_comment_thumbnail_width);
+            lp.width = (int) SkyTubeApp.getDimension(isTopLevelComment ? R.dimen.top_level_comment_thumbnail_width
+                    : R.dimen.child_comment_thumbnail_width);
 
             if (isTopLevelComment && comment.getReplyCount() > 0) {
                 binding.viewAllRepliesTextView.setVisibility(View.VISIBLE);
@@ -398,11 +415,43 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
 
     }
 
-    public static BaseExpandableListAdapter createAdapter(Context context, Linker.CurrentActivity currentActivity, String videoId, ExpandableListView expandableListView, View commentsProgressBar, View noVideoCommentsView, View disabledCommentsView) {
+    /**
+     * Creates an adapter for the given video ID.
+     * This is the main factory method for production use.
+     */
+    public static @Nullable BaseExpandableListAdapter createAdapter(Context context, Linker.CurrentActivity currentActivity,
+                                                                    String videoId, ExpandableListView expandableListView, View commentsProgressBar, View noVideoCommentsView,
+                                                                    View disabledCommentsView) {
         if (SkyTubeApp.getSettings().isUseNewPipe()) {
-            return new CommentsAdapter(context, currentActivity, videoId, expandableListView, commentsProgressBar, noVideoCommentsView, disabledCommentsView);
+            try {
+                CommentPagerInterface commentPager = NewPipeService.get().getCommentPager(videoId);
+                LayoutInflater layoutInflater = LayoutInflater.from(expandableListView.getContext());
+
+                // Create icons for production use
+                IconicsDrawable heartedIcon = new IconicsDrawable(context)
+                        .icon(MaterialDesignIconic.Icon.gmi_favorite)
+                        .color(IconicsColor.colorInt(Color.RED))
+                        .size(IconicsSize.TOOLBAR_ICON_SIZE)
+                        .padding(IconicsSize.TOOLBAR_ICON_PADDING);
+                IconicsDrawable pinnedIcon = new IconicsDrawable(context)
+                        .icon(MaterialDesignIconic.Icon.gmi_pin)
+                        .color(IconicsColor.colorInt(Color.RED))
+                        .size(IconicsSize.TOOLBAR_ICON_SIZE)
+                        .padding(IconicsSize.TOOLBAR_ICON_PADDING);
+
+                CommentsAdapter commentsAdapter = new CommentsAdapter(context, currentActivity, commentPager, expandableListView,
+                        commentsProgressBar, noVideoCommentsView, disabledCommentsView, layoutInflater, heartedIcon,
+                        pinnedIcon);
+                commentsAdapter.fetchComments();
+                return commentsAdapter;
+            } catch (Exception e) {
+                Log.e(TAG, "Failed to create CommentsAdapter: " + e.getMessage(), e);
+                SkyTubeApp.notifyUserOnError(context, e);
+                return null;
+            }
         } else {
-            return new LegacyCommentsAdapter(context, videoId, expandableListView, commentsProgressBar, noVideoCommentsView);
+            return new LegacyCommentsAdapter(context, videoId, expandableListView, commentsProgressBar,
+                    noVideoCommentsView);
         }
     }
 }

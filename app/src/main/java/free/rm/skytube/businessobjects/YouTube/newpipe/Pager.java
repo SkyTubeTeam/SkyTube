@@ -62,6 +62,7 @@ public abstract class Pager<I extends InfoItem, O> implements PagerBackend<O> {
     /**
      * @return true, if there could be more videos available in the next page.
      */
+    @Override
     public boolean isHasNextPage() {
         return hasNextPage;
     }
@@ -94,7 +95,8 @@ public abstract class Pager<I extends InfoItem, O> implements PagerBackend<O> {
         }
     }
 
-    public List<O> getPageAndExtract(Page page)  throws NewPipeException{
+    @Override
+    public List<O> getPageAndExtract(Page page) throws NewPipeException {
         try {
             return extract(channelExtractor.getPage(page));
         } catch (IOException| ExtractionException| RuntimeException e) {
@@ -126,6 +128,7 @@ public abstract class Pager<I extends InfoItem, O> implements PagerBackend<O> {
     /**
      * Information about the next page
      */
+    @Override
     public Page getNextPageInfo() {
         return nextPage;
     }
