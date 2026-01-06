@@ -9,4 +9,7 @@
     <string name="channel_already_subscribed">כבר נרשמת</string>
     <string name="channel_subscribe_failed">לא ניתן להירשם לערוץ</string>
     <string name="unsubscribed">בוטל המינוי</string>
+    <string name="channel_unsubscribed">ביטלת רישום לערוץ</string>
+    <string name="error_get_subbed_channels">לא ניתן למשוך מינויים לערוצים.</string>
+    <string name="import_subscriptions">ייבוא מינויים</string>
 </resources>
