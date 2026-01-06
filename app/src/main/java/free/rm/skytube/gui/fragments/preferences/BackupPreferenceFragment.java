@@ -67,18 +67,24 @@ public class BackupPreferenceFragment extends BasePreferenceFragment {
 
 	@Override
 	public void onDestroy() {
-		subscriptionsBackupsManager.clearBackgroundTasks();
+		if (subscriptionsBackupsManager != null) {
+			subscriptionsBackupsManager.clearBackgroundTasks();
+		}
 		super.onDestroy();
 	}
 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		subscriptionsBackupsManager.onActivityResult(requestCode, resultCode, data);
+		if (subscriptionsBackupsManager != null) {
+			subscriptionsBackupsManager.onActivityResult(requestCode, resultCode, data);
+		}
 	}
 
 	@Override
 	public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-		subscriptionsBackupsManager.onRequestPermissionsResult(requestCode, permissions, grantResults);
+		if (subscriptionsBackupsManager != null) {
+			subscriptionsBackupsManager.onRequestPermissionsResult(requestCode, permissions, grantResults);
+		}
 	}
 }
