@@ -146,9 +146,8 @@ public class YouTubeTasks {
                             if (!newVideos.isEmpty()) {
                                 PersistentChannel dbChannel = subscriptionsDb.getCachedChannel(channelId);
                                 for (YouTubeVideo vid : newVideos) {
-                                    YouTubeVideo details;
                                     try {
-                                        details = NewPipeService.get().getDetails(vid.getId());
+                                        final YouTubeVideo details = NewPipeService.get().getDetails(vid.getId());
                                         if (vid.getPublishTimestampExact()) {
                                             details.setPublishTimestamp(vid.getPublishTimestamp());
                                             details.setPublishTimestampExact(vid.getPublishTimestampExact());
