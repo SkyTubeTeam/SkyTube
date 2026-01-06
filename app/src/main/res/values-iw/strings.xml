@@ -9,4 +9,11 @@
     <string name="search_videos">חיפוש סרטונים</string>
     <string name="ok">אישור</string>
     <string name="launch_offical_player_error">לא ניתן לטעון את נגן ה־YouTube הרשמי. נא לוודא שהוא מותקן.</string>
+    <string name="LIVE">שידור חי</string>
+    <string name="featured">נבחרים</string>
+    <string name="most_popular">הפופולריים ביותר</string>
+    <string name="video">וידאו</string>
+    <string name="videos">סרטונים</string>
+    <string name="num_videos">%d סרטונים</string>
+    <string name="playlists">רשימות נגינה</string>
 </resources>
