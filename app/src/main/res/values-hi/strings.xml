@@ -31,4 +31,5 @@
     <string name="cleaner_watched_downloads">देखे गए डाउनलोड हटाएं</string>
     <string name="cleaner_watched_bookmarks">देखे गए बुकमार्क हटाएं</string>
     <string name="video_comments_are_disabled">वीडियो टिप्पणियां बंद हैं</string>
+    <string name="incorrect_pin">गलत पिन</string>
 </resources>

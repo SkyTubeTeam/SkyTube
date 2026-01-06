@@ -12,6 +12,6 @@
     <string name="external_storage_not_available">A fájl letöltéséhez biztosítson hozzáférést a külső tárolóhoz.</string>
     <string name="video_stream_not_found_with_request_resolution">Nem található videó a kért %1$s és %2$s felbontás között</string>
     <string name="warning_metered_network_download">Letölti a videót a mért hálózatról, amelyhez csatlakozik\?</string>
-    <string name="unable_to_delete_file">Nem lehet törölni a(z) \'%s\' letöltött fájlt .</string>
+    <string name="unable_to_delete_file">Nem lehet törölni a(z) \'%s\' letöltött fájlt.</string>
     <string name="download_failed_because">Nem sikerült letölteni a(z) %1$s-t mert %2$s .</string>
 </resources>

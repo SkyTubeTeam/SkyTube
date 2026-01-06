@@ -146,7 +146,7 @@
     <string name="pref_title_channel_blacklist">Listë Hedhjeje Poshtë Kanalesh</string>
     <string name="channel_whitelist_updated">Që të përdoret lista e re e lejimeve të kanaleve, rifreskoni videot.</string>
     <string name="channel_unwhitelist_success">Që të përdoret lista e re e kanaleve të lejuar, rifreskoni videot.</string>
-    <string name="channel_unwhitelist_failure">S’u arrit të hiqej nga listë të lejuarish kanali(et) i dhënë…</string>
+    <string name="channel_unwhitelist_failure">S’u arrit të hiqej nga listë të lejuarish nga kanali(et) i dhënë</string>
     <string name="pref_summary_preferred_regions">Përzgjidh prej cilit rajon të merret video “E zgjedhur”: %s</string>
     <string name="preferred_lang_updated">Që të përdoret gjuha e re, rifreskoni videot.</string>
     <string name="pref_summary_lang_detection_video_filtering">Përdor plot burime për të pikasur gjuhën e videos dhe blloko gjuhë(t) jo të parapëlqyer.</string>
@@ -167,5 +167,14 @@
     <string name="setting_updated">Që të përdoret rregullimi i ri, rifreskoni videot.</string>
     <string name="pref_playback_status_cleared">Gjendja e luajtjes u spastrua.</string>
     <string name="pref_title_app_language">Gjuhë Aplikacioni</string>
-    <string name="pref_summary_app_language">Gjuha e përdorur për krejt etiketat te aplikacioni</string>
+    <string name="pref_summary_app_language">Gjuha e përdorur për krejt etiketat te aplikacioni: %s</string>
+    <string name="pref_security_category">Siguri</string>
+    <string name="pref_title_set_security_pin">Caktoni PIN Sigurie</string>
+    <string name="pref_summary_set_security_pin">Caktoni një PIN për të mbrojtur hyrjen te parapëlqimeve dhe veprimet me spec.</string>
+    <string name="pref_title_enter_security_pin">Jepni PIN Sigurie</string>
+    <string name="pref_summary_enter_security_pin">Që të hyni te parapëlqimet dhe veprimet me spec, jepni PIN-in tuaj.</string>
+    <string name="pref_title_require_pin_code">Kërko doemos kod PIN</string>
+    <string name="pref_summary_require_pin_code">Dhënia e një kodi PIN është e domosdoshme për disa nga ndryshimet.</string>
+    <string name="pref_title_change_security_pin">Ndryshoni PIN Sigurie</string>
+    <string name="pref_summary_change_security_pin">Që të hyni te parapëlqimet dhe veprimet me spec, ndryshoni PIN-in tuaj.</string>
 </resources>

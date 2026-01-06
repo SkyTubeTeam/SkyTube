@@ -152,11 +152,11 @@
     <string name="pref_details">Podrobnosti</string>
     <string name="pref_title_enable_sponsorblock">Povoliť SponsorBlock</string>
     <string name="pref_summary_sponsorblock_category_list">Vyberte kategórie, ktoré chcete preskočiť</string>
-    <string name="pref_title_credit_sponsorblock">Titulky</string>
+    <string name="pref_title_credit_sponsorblock">Príspevky</string>
     <string name="pref_summary_lang_detection_video_filtering">Použije veľa zdrojov na detekciu jazyka videa a blokovanie nepreferovaného jazyka (jazykov).</string>
     <string name="pref_playback_status_cleared">Stav prehrávania bol vymazaný.</string>
     <string name="pref_title_app_language">Jazyk aplikácie</string>
-    <string name="pref_summary_app_language">Použitý jazyk pre všetky štítky v aplikácii</string>
+    <string name="pref_summary_app_language">Používaný jazyk pre všetky štítky v aplikácii: %s</string>
     <string name="pref_summary_credit_sponsorblock">Použije údaje SponsorBlock zo stránky https://sponsor.ajay.app</string>
     <string name="pref_disable_search_history_deleted">História vyhľadávania odstránená.</string>
     <string name="pref_disable_playback_status_deleted">Stav prehrávania odstránený.</string>
@@ -172,4 +172,13 @@
     <string name="pref_privacy_category">Súkromie</string>
     <string name="pref_title_disable_search_history">Žiadna história vyhľadávania</string>
     <string name="pref_title_clear_playback_status">Vymazať stav prehrávania</string>
+    <string name="pref_security_category">Ochrana</string>
+    <string name="pref_title_set_security_pin">Nastaviť bezpečnostný kód PIN</string>
+    <string name="pref_summary_set_security_pin">Nastavte kód PIN na ochranu prístupu k predvoľbám a citlivým akciám.</string>
+    <string name="pref_title_enter_security_pin">Zadajte bezpečnostný kód PIN</string>
+    <string name="pref_summary_enter_security_pin">Zadaním kódu PIN získate prístup k predvoľbám a citlivým akciám.</string>
+    <string name="pref_title_require_pin_code">Požadovať kód PIN</string>
+    <string name="pref_summary_require_pin_code">Pri určitých úpravách sa vyžaduje zadanie kódu PIN.</string>
+    <string name="pref_title_change_security_pin">Zmeniť bezpečnostný kód PIN</string>
+    <string name="pref_summary_change_security_pin">Zmenou kódu PIN ochránite prístup k predvoľbám a citlivým činnostiam.</string>
 </resources>

@@ -1,2 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="error_stream_err_unavailable">사용할 수 없는 메세지 입니다.</string>
+    <string name="error_stream_decryption_fail">YouTube 서비스에 대한 복호화 코드를 로드할 수 없습니다.</string>
+    <string name="error_video_play">비디오 플레이어 오류</string>
+    <string name="error_video_streams">비디오 스트림을 불러올수 없습니다.</string>
+    <string name="error_invalid_url">%s 링크는 유효하지 않은 비디오 링크 입니다</string>
+</resources>

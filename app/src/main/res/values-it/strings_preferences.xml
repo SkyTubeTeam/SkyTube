@@ -183,5 +183,14 @@
     <string name="pref_general">Generale</string>
     <string name="pref_details">Dettagli</string>
     <string name="pref_title_app_language">Lingua dell\'applicazione</string>
-    <string name="pref_summary_app_language">La lingua usata per tutte le etichette nell\'applicazione</string>
+    <string name="pref_summary_app_language">La lingua usata per tutte le etichette nell\'applicazione: %s</string>
+    <string name="pref_security_category">Sicurezza</string>
+    <string name="pref_title_set_security_pin">Imposta PIN di sicurezza</string>
+    <string name="pref_summary_set_security_pin">Imposta un PIN per proteggere l\'accesso alle preferenze e alle azioni sensibili.</string>
+    <string name="pref_title_enter_security_pin">Inserisci PIN di sicurezza</string>
+    <string name="pref_summary_enter_security_pin">Inserisci il tuo PIN per accedere alle preferenze e alle azioni sensibili.</string>
+    <string name="pref_title_require_pin_code">Richiedi codice PIN</string>
+    <string name="pref_summary_require_pin_code">Per alcune modifiche è necessario inserire un codice PIN.</string>
+    <string name="pref_title_change_security_pin">Cambia PIN di sicurezza</string>
+    <string name="pref_summary_change_security_pin">Modifica il PIN per proteggere l\'accesso alle preferenze e alle azioni sensibili.</string>
 </resources>

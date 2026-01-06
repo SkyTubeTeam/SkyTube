@@ -209,6 +209,15 @@
     <string name="pref_summary_playback_speed">Vitesse de lecture par défaut : %s</string>
     <string name="pref_title_use_dislike_api">Compteur des Je n\'aime pas</string>
     <string name="pref_summary_use_dislike_api">Réactiver le compteur de Je n\'aime pas en utilisant returnyoutubedislike.com</string>
-    <string name="pref_title_app_language">Language de l\'application</string>
-    <string name="pref_summary_app_language">La langue utilisée pour toutes les étiquettes de l\'application</string>
+    <string name="pref_title_app_language">Langue de l\'application</string>
+    <string name="pref_summary_app_language">La langue utilisée pour toutes les étiquettes de l\'application : %s</string>
+    <string name="pref_security_category">Sécurité</string>
+    <string name="pref_title_set_security_pin">Définir le code PIN de sécurité</string>
+    <string name="pref_summary_set_security_pin">Définir un code PIN pour protégér l\'accès au préférences et les actions sensitives.</string>
+    <string name="pref_title_enter_security_pin">Entrer le code PIN de sécurité</string>
+    <string name="pref_summary_enter_security_pin">Entrer votre code PIN pour accéder à vos préférences et les actions sensitives.</string>
+    <string name="pref_title_require_pin_code">Demande un code PIN</string>
+    <string name="pref_summary_require_pin_code">Entrer un code PIN est demandé pour certaines modifications.</string>
+    <string name="pref_title_change_security_pin">Changer le code PIN de sécurité</string>
+    <string name="pref_summary_change_security_pin">Changer le code PIN pour protéger l\'accès aux préférence et les actions sensitives.</string>
 </resources>

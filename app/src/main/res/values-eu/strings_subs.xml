@@ -25,4 +25,6 @@
     <string name="unsubscribe">Harpidetza kendu</string>
     <string name="subscribe">Harpidetu</string>
     <string name="subscriptions">Harpidetzak</string>
+    <string name="status_not_exists">[Ezabatua]</string>
+    <string name="status_account_terminated">[Amaitua]</string>
 </resources>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="preferences">העדפות</string>
+    <string name="key_preferences">העדפות</string>
+    <string name="pref_video_player_category">נגן וידאו</string>
+    <string name="pref_title_maximum_res">הרגולציה הגבוהה ביותר</string>
+    <string name="pref_title_change_security_pin">החלפת קוד אבטחה אישי</string>
+    <string name="pref_summary_change_security_pin">אפשר לשנות את הקוד האישי כדי להגן על הגישה להעדפות ולפעולות רגישות.</string>
+    <string name="pref_title_set_security_pin">הגדרת קוד אבטחה אישי</string>
+    <string name="pref_summary_maximum_res">בחירת הרזולוציה הגבוהה ביותר: %s</string>
+    <string name="pref_title_minimum_res">הרזולוציה הנמוכה ביותר</string>
+    <string name="pref_security_category">אבטחה</string>
+    <string name="pref_title_sponsorblock_category_list">דילוג על קטעים</string>
+    <string name="pref_summary_sponsorblock_category_list">בחירת קטגוריות לדילוג</string>
+    <string name="pref_title_credit_sponsorblock">תודות</string>
+    <string name="pref_general">כללי</string>
+    <string name="pref_details">פרטים</string>
+    <string name="pref_title_enable_sponsorblock">הפעלת SponsorBlock (חסימת חסויות)</string>
+    <string name="pref_summary_app_language">השפה של כל התוויות ביישומון: %s</string>
+    <string name="pref_sponsorblock_category">SponsorBlock (חסימת חסויות)</string>
+    <string name="pref_summary_minimum_res">בחירת הרזולוציה הנמוכה ביותר: %s</string>
+    <string name="pref_disable_search_history_deleted">היסטוריית החיפוש נמחקה.</string>
+    <string name="pref_title_disable_playback_status">אין מצב נגינה</string>
+    <string name="pref_summary_disable_playback_status">כיבוי מצב נגינה.</string>
+    <string name="pref_disable_playback_status_deleted">מצב נגינה נמחק.</string>
+    <string name="pref_title_clear_playback_status">מחיקת מצב נגינה</string>
+    <string name="pref_title_dislikes_filter">לא אהבו</string>
+</resources>

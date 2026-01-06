@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="bookmarks">סימניות</string>
+    <string name="bookmark">סימנייה</string>
+    <string name="video_bookmarked">בסימניות</string>
+    <string name="video_already_bookmarked">כבר בסימניות</string>
+    <string name="video_bookmarked_error">לא ניתן להוסיף את הסרטון לסימניות.</string>
+    <string name="unbookmark">הסרת סימנייה</string>
+    <string name="video_unbookmarked">הסימנייה הוסרה</string>
+    <string name="video_unbookmarked_error">לא ניתן להסיר סימניית סרטון.</string>
+    <string name="video_was_not_bookmarked">הסרטון הזה לא נוסף לסימניות</string>
+</resources>

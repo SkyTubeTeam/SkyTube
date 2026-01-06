@@ -171,5 +171,14 @@
     <string name="pref_title_enable_immersive_mode">Режим на потапяне</string>
     <string name="pref_title_switch_volume_and_brightness">Жест за превключване на силата на звука и яркостта</string>
     <string name="pref_title_app_language">Език на приложението</string>
-    <string name="pref_summary_app_language">Езикът, който да се ползва за всички текстове в приложението</string>
+    <string name="pref_summary_app_language">Езикът, който да се ползва за всички текстове в приложението: %s</string>
+    <string name="pref_security_category">Сигурност</string>
+    <string name="pref_title_set_security_pin">Задаване на ПИН за сигурност</string>
+    <string name="pref_summary_set_security_pin">Задайте ПИН код, за да защитите достъпа до своите настройки и лични действия.</string>
+    <string name="pref_title_enter_security_pin">Въвеждане на ПИН за сигурност</string>
+    <string name="pref_summary_enter_security_pin">Въведете ПИН код, за да получите достъп до своите настройки и лични действия.</string>
+    <string name="pref_title_require_pin_code">Изискване на ПИН код</string>
+    <string name="pref_summary_require_pin_code">Въвеждането на ПИН код е задължително за извършване на определени промени.</string>
+    <string name="pref_title_change_security_pin">Промяна на ПИН кода за сигурност</string>
+    <string name="pref_summary_change_security_pin">Сменете своя ПИН код, за да защитите достъпа до своите настройки и лични действия.</string>
 </resources>

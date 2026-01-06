@@ -31,4 +31,5 @@
     <string name="recaptcha_challenge_requested">YouTube смята, че може да сте бот, така че трябва да решите задачата reCAPTCHA.</string>
     <string name="could_not_get_sponsorblock">Информацията за блокиране на спонсорите не може да бъде получена: %s.</string>
     <string name="cleaner_toast_finish">Премахнати видеа от отметките: %1$s, изтрити свалени видеа: %2$s МБ.</string>
+    <string name="incorrect_pin">Грешен PIN</string>
 </resources>

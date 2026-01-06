@@ -31,4 +31,5 @@
     <string name="cleaner_confirm">Pastroji</string>
     <string name="video_comments_are_disabled">Komentet për videon të çaktivizuara</string>
     <string name="cleaner_watched_bookmarks">Hiqi faqerojtësit e parë</string>
+    <string name="incorrect_pin">PIN i pasaktë</string>
 </resources>

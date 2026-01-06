@@ -171,5 +171,14 @@
     <string name="pref_playback_status_cleared">ਪਲੇਬੈਕ ਸਥਿਤੀ ਕਲੀਅਰ ਕੀਤੀ ਗਈ।</string>
     <string name="pref_summary_default_content_country">ਇਸ ਦੇਸ਼ ਲਈ ਤਿਆਰ ਸਮੱਗਰੀ ਦਿਖਾਓ: %s</string>
     <string name="pref_title_app_language">ਐਪ ਦੀ ਭਾਸ਼ਾ</string>
-    <string name="pref_summary_app_language">ਐਪ ਦੇ ਸਾਰੇ ਲੇਬਲਾਂ ਲਈ ਵਰਤੀ ਜਾਣ ਵਾਲੀ ਭਾਸ਼ਾ</string>
+    <string name="pref_summary_app_language">ਐਪ ਦੇ ਸਾਰੇ ਲੇਬਲਾਂ ਲਈ ਵਰਤੀ ਜਾਣ ਵਾਲੀ ਭਾਸ਼ਾ: %s</string>
+    <string name="pref_security_category">ਸੁਰੱਖਿਆ</string>
+    <string name="pref_title_set_security_pin">ਸੁਰੱਖਿਆ ਪਿੰਨ ਸੈੱਟ ਕਰੋ</string>
+    <string name="pref_summary_set_security_pin">ਤਰਜੀਹਾਂ ਅਤੇ ਸੰਵੇਦਨਸ਼ੀਲ ਕਾਰਵਾਈਆਂ ਤੱਕ ਪਹੁੰਚ ਦੀ ਰੱਖਿਆ ਲਈ ਇੱਕ ਪਿੰਨ ਸੈੱਟ ਕਰੋ।</string>
+    <string name="pref_title_enter_security_pin">ਸੁਰੱਖਿਆ ਪਿੰਨ ਦਰਜ ਕਰੋ</string>
+    <string name="pref_summary_enter_security_pin">ਤਰਜੀਹਾਂ ਅਤੇ ਸੰਵੇਦਨਸ਼ੀਲ ਕਾਰਵਾਈਆਂ ਤੱਕ ਪਹੁੰਚ ਕਰਨ ਲਈ ਆਪਣਾ ਪਿੰਨ ਦਰਜ ਕਰੋ।</string>
+    <string name="pref_title_require_pin_code">ਪਿੰਨ ਕੋਡ ਲੋੜੀਂਦਾ ਹੈ</string>
+    <string name="pref_summary_require_pin_code">ਕੁਝ ਸੋਧਾਂ ਲਈ ਪਿੰਨ ਕੋਡ ਦਰਜ ਕਰਨਾ ਜ਼ਰੂਰੀ ਹੈ।</string>
+    <string name="pref_title_change_security_pin">ਸੁਰੱਖਿਆ ਪਿੰਨ ਬਦਲੋ</string>
+    <string name="pref_summary_change_security_pin">ਤਰਜੀਹਾਂ ਅਤੇ ਸੰਵੇਦਨਸ਼ੀਲ ਕਾਰਵਾਈਆਂ ਤੱਕ ਪਹੁੰਚ ਦੀ ਰੱਖਿਆ ਲਈ ਪਿੰਨ ਬਦਲੋ।</string>
 </resources>

@@ -171,5 +171,14 @@
     <string name="pref_title_autocast">AutoCast</string>
     <string name="pref_summary_enable_sponsorblock">Automatické přeskakování reklamních segmentů, interaktivních připomínek a další</string>
     <string name="pref_title_app_language">Jazyk aplikace</string>
-    <string name="pref_summary_app_language">Jazyk použitý pro všechny popisky v aplikaci</string>
+    <string name="pref_summary_app_language">Jazyk použitý pro všechny popisky v aplikaci: %s</string>
+    <string name="pref_security_category">Ochrana</string>
+    <string name="pref_title_set_security_pin">Nastavení bezpečnostního kódu PIN</string>
+    <string name="pref_summary_set_security_pin">Nastavením kódu PIN ochráníte přístup k předvolbám a citlivým akcím.</string>
+    <string name="pref_title_enter_security_pin">Zadejte bezpečnostní kód PIN</string>
+    <string name="pref_summary_enter_security_pin">Zadáním vašeho kódu PIN získáte přístup k předvolbám a citlivým akcím.</string>
+    <string name="pref_title_require_pin_code">Vyžadování kódu PIN</string>
+    <string name="pref_summary_require_pin_code">Pro určité úpravy je nutné zadat kód PIN.</string>
+    <string name="pref_title_change_security_pin">Změna bezpečnostního kódu PIN</string>
+    <string name="pref_summary_change_security_pin">Změnou kódu PIN ochráníte přístup k předvolbám a citlivým akcím.</string>
 </resources>

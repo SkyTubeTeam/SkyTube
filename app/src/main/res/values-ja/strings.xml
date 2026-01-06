@@ -31,4 +31,5 @@
     <string name="cleaner_watched_bookmarks">視聴済みのブックマークを削除</string>
     <string name="cleaner_watched_downloads">視聴済みのダウンロード動画を削除</string>
     <string name="video_comments_are_disabled">動画コメントオフ</string>
+    <string name="incorrect_pin">PIN が正しくない</string>
 </resources>

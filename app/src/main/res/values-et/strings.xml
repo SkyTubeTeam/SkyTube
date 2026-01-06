@@ -31,4 +31,5 @@
     <string name="loading">Laadime andmeid…</string>
     <string name="no">Ei</string>
     <string name="yes">Jah</string>
+    <string name="incorrect_pin">Vigane PIN-kood</string>
 </resources>

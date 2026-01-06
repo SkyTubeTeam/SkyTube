@@ -31,4 +31,5 @@
     <string name="could_not_get_channel_detailed">Nepodarilo sa stiahnuť informácie o kanáli: %s.</string>
     <string name="search_channel">Hľadať kanál</string>
     <string name="cleaner">Čistič pozeraných videí</string>
+    <string name="incorrect_pin">Nesprávny PIN</string>
 </resources>

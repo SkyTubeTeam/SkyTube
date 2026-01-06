@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="subscriptions">מינויים</string>
+    <string name="subscribe">רישום</string>
+    <string name="unsubscribe">ביטול מינוי</string>
+    <string name="total_subscribers">%,d מנויים</string>
+    <string name="subscribed">נרשמת</string>
+    <string name="channel_subscribed">נרשמת לערוץ</string>
+    <string name="channel_already_subscribed">כבר נרשמת</string>
+    <string name="channel_subscribe_failed">לא ניתן להירשם לערוץ</string>
+    <string name="unsubscribed">בוטל המינוי</string>
+</resources>

@@ -167,5 +167,14 @@
     <string name="pref_title_minimum_res_metered">मीटर्ड नेटवर्क के लिए सबसे कम रेजोल्यूशन</string>
     <string name="no_resolution_specified">कोई भी नहीं</string>
     <string name="pref_title_app_language">ऐप की भाषा</string>
-    <string name="pref_summary_app_language">एप्लिकेशन में सभी लेबल के लिए उपयोग की जाने वाली भाषा</string>
+    <string name="pref_summary_app_language">एप्लिकेशन में सभी लेबल के लिए उपयोग की जाने वाली भाषा: %s</string>
+    <string name="pref_security_category">सुरक्षा</string>
+    <string name="pref_title_set_security_pin">सुरक्षा पिन सेट करें</string>
+    <string name="pref_summary_set_security_pin">प्रेफरेंस और सेंसिटिव एक्शन के एक्सेस को प्रोटेक्ट करने के लिए PIN सेट करें।</string>
+    <string name="pref_title_enter_security_pin">सुरक्षा पिन दर्ज करें</string>
+    <string name="pref_summary_enter_security_pin">प्रेफरेंस और सेंसिटिव एक्शन को एक्सेस करने के लिए अपना PIN डालें।</string>
+    <string name="pref_title_require_pin_code">पिन कोड की आवश्यकता है</string>
+    <string name="pref_summary_require_pin_code">Entering a PIN code is required for certain modifications।</string>
+    <string name="pref_title_change_security_pin">सुरक्षा पिन बदलें</string>
+    <string name="pref_summary_change_security_pin">प्रेफरेंस और सेंसिटिव एक्शन तक एक्सेस को सुरक्षित रखने के लिए PIN बदलें।</string>
 </resources>
