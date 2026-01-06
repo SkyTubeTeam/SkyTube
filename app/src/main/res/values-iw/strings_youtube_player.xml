@@ -9,4 +9,7 @@
     <string name="error_get_video_desc">לא ניתן למשוך את תיאור הסרטון.</string>
     <string name="error_invalid_url">כתובת הסרטון שגויה: %s</string>
     <string name="error_downloaded_file_is_corrupted">הסרטון שירד נראה <b>פגום</b>: <br/> <br/> %s. <br/> <br/> <b>למחוק</b> את הקובץ?</string>
+    <string name="error_video_parse_error">לא ניתן להפעיל את הסרטון: <br/> <br/> %s.</string>
+    <string name="play_video">נגינת סרטון</string>
+    <string name="ratings_disabled">הדירוגים כבויים</string>
 </resources>
