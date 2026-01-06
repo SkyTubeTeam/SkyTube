@@ -9,4 +9,6 @@
     <string name="video_download_stream_error">לא ניתן להוריד את ‚%s’.</string>
     <string name="download_failed_because">לא ניתן להוריד את %1$s עקב %2$s.</string>
     <string name="video_stream_not_found_with_request_resolution">לא ניתן למצוא תזרימי וידאו כלשהם ברזולוציה המבוקשת %1$s-%2$s</string>
+    <string name="delete_download">מחיקת הודעה</string>
+    <string name="video_downloaded">‚%s’ ירד.</string>
 </resources>
