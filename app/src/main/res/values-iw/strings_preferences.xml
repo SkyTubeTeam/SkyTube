@@ -25,4 +25,12 @@
     <string name="pref_disable_playback_status_deleted">מצב נגינה נמחק.</string>
     <string name="pref_title_clear_playback_status">מחיקת מצב נגינה</string>
     <string name="pref_title_dislikes_filter">לא אהבו</string>
+    <string name="pref_summary_clear_playback_status">מחיקת נקודת הנגינה מכל הסרטונים.</string>
+    <string name="pref_playback_status_cleared">מצב הנגינה נמחק.</string>
+    <string name="pref_title_default_content_country">מדינת התוכן כברירת מחדל</string>
+    <string name="pref_summary_default_content_country">להציג תוכן שמיועד למדינה הזאת: %s</string>
+    <string name="pref_title_app_language">שפת היישום</string>
+    <string name="pref_title_choose_player">נגן וידאו</string>
+    <string name="pref_summary_choose_player">נגן וידאו לשימוש: %s</string>
+    <string name="no_resolution_specified">ללא</string>
 </resources>
