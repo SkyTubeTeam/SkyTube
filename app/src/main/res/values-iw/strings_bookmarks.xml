@@ -9,4 +9,7 @@
     <string name="video_unbookmarked">הסימנייה הוסרה</string>
     <string name="video_unbookmarked_error">לא ניתן להסיר סימניית סרטון.</string>
     <string name="video_was_not_bookmarked">הסרטון הזה לא נוסף לסימניות</string>
+    <string name="no_bookmarked_videos_text">אפשר להוסיף סרטונים כלשהם לסימניות כדי למצוא אותם כאן.</string>
+    <string name="bookmark_share_label">סימנייה של SkyTube</string>
+    <string name="bookmark_share_invalid_url">אפשר להוסיף לסימניות רק כתובות תקפות של YouTube.</string>
 </resources>
