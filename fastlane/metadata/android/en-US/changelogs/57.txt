@@ -1,0 +1,7 @@
+* Fix comment and reply loading
+* Fix a crash in the backup preference page
+* Translators:
+  * Besnik Bleta,Charlie Izzy, Ettore Atalan, Ihor Hordiichuk,Jeff Huang,Julio Montero,Kosei Taguchi,
+  * Massimo Pissarello, Milan, Milo Ivir, Nicolas Radu, Oğuz Ersen, Petrov, Priit Jõerüüt, Rex_sa, Samylol99,
+  * ShareASmile, Stefanos Stefanidis, Szia Tomi, Vishnu Kalapala, Yaron Shahrabani, kd1211A, maboroshin,
+  * ssantos, syl, whistlingwoods, Любомир Василев, 大王叫我来巡山
