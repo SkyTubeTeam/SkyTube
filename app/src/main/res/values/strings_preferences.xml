@@ -736,7 +736,7 @@
     <string name="pref_summary_clear_playback_status">Clear progression for all videos.</string>
     <string name="pref_playback_status_cleared">Playback status cleared.</string>
     <string-array name="pref_network_usage" translatable="false">
-        <item>LEAST_BANDWITH</item>
+        <item>LEAST_BANDWIDTH</item>
         <item>BEST_QUALITY</item>
     </string-array>
     <string-array name="pref_network_usage_display">

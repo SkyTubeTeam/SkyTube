@@ -62,8 +62,4 @@ public final class PersistentChannel {
         newInstance.setUserSubscribed(isSubscribed());
         return new PersistentChannel(newInstance, channelPk, subscriptionPk, status);
     }
-
-    public PersistentChannel withSubscriptionPk(Long newSubscriptionPk) {
-        return new PersistentChannel(channel, channelPk, newSubscriptionPk, status);
-    }
 }

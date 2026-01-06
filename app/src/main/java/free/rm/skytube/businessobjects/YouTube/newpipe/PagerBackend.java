@@ -16,10 +16,21 @@
  */
 package free.rm.skytube.businessobjects.YouTube.newpipe;
 
+import org.schabi.newpipe.extractor.Page;
+
 import java.util.List;
 
 public interface PagerBackend<I> {
     Exception getLastException();
 
     List<I> getSafeNextPage();
+
+    List<I> getPageAndExtract(Page page) throws NewPipeException;
+
+    boolean isHasNextPage();
+
+    /**
+     * Information about the next page
+     */
+    Page getNextPageInfo();
 }

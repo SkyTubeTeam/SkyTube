@@ -64,7 +64,7 @@ public class Settings {
         migrate(sharedPreferences, "pref_key_video_preferred_resolution", R.string.pref_key_video_download_maximum_resolution);
         setDefault(sharedPreferences, R.string.pref_key_video_quality, VideoQuality.BEST_QUALITY.name());
         setDefault(sharedPreferences, R.string.pref_key_video_quality_for_downloads, VideoQuality.BEST_QUALITY.name());
-        setDefault(sharedPreferences, R.string.pref_key_video_quality_on_mobile, VideoQuality.LEAST_BANDWITH.name());
+        setDefault(sharedPreferences, R.string.pref_key_video_quality_on_mobile, VideoQuality.LEAST_BANDWIDTH.name());
         setDefault(sharedPreferences, R.string.pref_key_use_newer_formats, Build.VERSION.SDK_INT > 16);
         setDefault(sharedPreferences, R.string.pref_key_playback_speed, "1.0");
         Set<String> defaultTabs = new HashSet<>();
@@ -135,7 +135,7 @@ public class Settings {
 
     public boolean isCorrectSecurityPin(String pinCode) {
         String storedPin = getPreference(R.string.pref_key_security_pin, "");
-        return storedPin.isEmpty() || storedPin.equals(pinCode) || "1111".equals(pinCode);
+        return storedPin.isEmpty() || storedPin.equals(pinCode);
     }
 
     public boolean isUseDislikeApi() {
@@ -192,7 +192,13 @@ public class Settings {
         }
         VideoResolution maxResolution = VideoResolution.videoResIdToVideoResolution(maxResIdValue);
         VideoResolution minResolution = VideoResolution.videoResIdToVideoResolution(minResIdValue);
-        VideoQuality quality = VideoQuality.valueOf(qualityValue);
+        final VideoQuality quality;
+        // Fixing an old typo
+        if ("LEAST_BANDWITH".equals(qualityValue)) {
+            quality = VideoQuality.LEAST_BANDWIDTH;;
+        } else {
+            quality = VideoQuality.valueOf(qualityValue);
+        }
 
         boolean useNewFormats = prefs.getBoolean(SkyTubeApp.getStr(R.string.pref_key_use_newer_formats), false);
 

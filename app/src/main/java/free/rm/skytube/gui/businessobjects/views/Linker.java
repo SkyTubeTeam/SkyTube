@@ -25,6 +25,7 @@ import android.text.style.URLSpan;
 import android.text.util.Linkify;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.text.HtmlCompat;
 import androidx.core.text.util.LinkifyCompat;
@@ -84,9 +85,13 @@ public class Linker {
 	}
 
 	private static Spanned spanText(String text) {
-		SpannableStringBuilder spanner = new SpannableStringBuilder(text.replaceAll("&nbsp;", " "));
+		SpannableStringBuilder spanner = new SpannableStringBuilder(cleanup(text));
 		LinkifyCompat.addLinks(spanner, Linkify.WEB_URLS);
 		return spanner;
+	}
+
+	protected static @NonNull String cleanup(String text) {
+		return text.replaceAll("&nbsp;", " ").replaceAll("&quot;", "\"").replaceAll("&apos;", "'");
 	}
 
 	/**
