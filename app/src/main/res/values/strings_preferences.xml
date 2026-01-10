@@ -70,6 +70,22 @@
     <string name="pref_key_import_subs" translatable="false">pref_key_import_subs</string>
     <string name="pref_title_import_subs">Import Subscriptions From YouTube</string>
     <string name="pref_summary_import_subs">Import your subscriptions from your YouTube account.</string>
+    <string name="pref_key_export_subs_opml" translatable="false">pref_key_export_subs_opml</string>
+    <string name="pref_title_export_subs_opml">Export Subscriptions to OPML</string>
+    <string name="pref_summary_export_subs_opml">Export your subscriptions to an OPML file.</string>
+    <string name="subscriptions_exporting_opml">Exporting subscriptions to OPML…</string>
+    <string name="subscriptions_export_opml_success">Subscriptions exported successfully as "%s"</string>
+    <string name="subscriptions_export_opml_fail">Could not export subscriptions to OPML.</string>
+    <string name="opml_export_unknown_filename">Unknown Filename</string>
+    <string name="opml_export_title">Export Subscriptions to OPML</string>
+    <string name="opml_export_message">Choose a filename for your OPML export:</string>
+    <string name="opml_export_confirm">Export</string>
+    <string name="opml_export_cancel">Cancel</string>
+    <string name="opml_directory_title">Choose Export Location</string>
+    <string name="opml_directory_message">Select directory for OPML export:</string>
+    <string name="opml_directory_use_default">Use Default (Downloads)</string>
+    <string name="opml_directory_select">Select Directory</string>
+    <string name="opml_export_location">Export Location: %s</string>
     <string name="subs_import_select_backup">Select YouTube XML file to import</string>
     <string name="pref_chromecast_category">Chromecast</string>
     <string name="pref_key_chromecast_category" translatable="false">chromecast_category</string>

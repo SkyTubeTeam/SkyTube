@@ -522,6 +522,18 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 		}
 	}
 
+	/**
+	 * Returns a list of channels that the user subscribed to, without accessing the network
+	 *
+	 * @return A list of channels that the user subscribed to.
+	 * @throws IOException
+	 */
+	public List<YouTubeChannel> getSubscribedChannels() throws IOException {
+		SkyTubeApp.nonUiThread();
+		SQLiteDatabase db = getReadableDatabase();
+		return getSubscribedChannels(db);
+	}
+
 	private Integer getInteger(Cursor cursor, int colCategoryId) {
 		return (colCategoryId < 0 || cursor.isNull(colCategoryId)) ? null : cursor.getInt(colCategoryId);
 	}
@@ -697,10 +709,6 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
             Logger.e(this, "Found videos without channel: {}", invalidIds);
         }
         return videos;
-    }
-
-    public Maybe<PersistentChannel> getChannel(ChannelId channelId) {
-        return Maybe.fromCallable(() -> getCachedChannel(channelId));
     }
 
 	/**

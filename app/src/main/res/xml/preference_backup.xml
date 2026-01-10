@@ -36,4 +36,10 @@
 		app:summary="@string/pref_summary_import_subs"
 		app:iconSpaceReserved="false" />
 
+	<Preference
+		app:key="@string/pref_key_export_subs_opml"
+		app:title="@string/pref_title_export_subs_opml"
+		app:summary="@string/pref_summary_export_subs_opml"
+		app:iconSpaceReserved="false" />
+
 </PreferenceScreen>
