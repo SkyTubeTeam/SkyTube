@@ -83,7 +83,7 @@ public class OpmlExporterTest {
     public void testGenerateOpmlCorrect() throws ParserConfigurationException, IOException, SAXException {
         String opmlContent = OpmlExporter.generateOpmlContent(testChannels);
 
-        isOpmlIsValidXml(opmlContent, 3);
+        assertOpmlIsValidXml(opmlContent, 3);
 
         // Test that outline elements have correct structure
         Assertions.assertTrue(opmlContent.contains("type=\"rss\""),
@@ -146,7 +146,7 @@ public class OpmlExporterTest {
     public void testEmptyChannelList() throws ParserConfigurationException, IOException, SAXException {
         List<YouTubeChannel> emptyList = new ArrayList<>();
         String opmlContent = OpmlExporter.generateOpmlContent(emptyList);
-        isOpmlIsValidXml(opmlContent, 0);
+        assertOpmlIsValidXml(opmlContent, 0);
         
         // Should still generate valid OPML structure even with no channels
         Assertions.assertTrue(opmlContent.startsWith("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"),
@@ -162,14 +162,14 @@ public class OpmlExporterTest {
         List<YouTubeChannel> channelsWithNull = List.of(new MockYouTubeChannel("UC123", null));
 
         String opmlContent = OpmlExporter.generateOpmlContent(channelsWithNull);
-        isOpmlIsValidXml(opmlContent, 1);
+        assertOpmlIsValidXml(opmlContent, 1);
 
         // Should use "" for null titles
         Assertions.assertTrue(opmlContent.contains("text=\"\""),
                             "Should use empty string for null channel titles");
     }
 
-    private void isOpmlIsValidXml(String opmlContent, int numberOfChannels) throws ParserConfigurationException, IOException, SAXException {
+    private void assertOpmlIsValidXml(String opmlContent, int numberOfChannels) throws ParserConfigurationException, IOException, SAXException {
         // Validate that the generated OPML is valid XML
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
