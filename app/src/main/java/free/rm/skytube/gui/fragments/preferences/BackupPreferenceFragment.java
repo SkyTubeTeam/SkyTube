@@ -17,12 +17,8 @@
 
 package free.rm.skytube.gui.fragments.preferences;
 
-import android.content.Intent;
-import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceFragmentCompat;
 
 import free.rm.skytube.R;
 import free.rm.skytube.gui.businessobjects.SubscriptionsBackupsManager;
@@ -63,6 +59,13 @@ public class BackupPreferenceFragment extends BasePreferenceFragment {
 			subscriptionsBackupsManager.displayImportSubscriptionsFromYouTubeDialog();
 			return true;
 		});
+
+		// export to OPML
+		Preference exportOpmlPref = findPreference(getString(R.string.pref_key_export_subs_opml));
+		exportOpmlPref.setOnPreferenceClickListener(preference -> {
+			subscriptionsBackupsManager.exportSubscriptionsToOpml();
+			return true;
+		});
 	}
 
 	@Override
@@ -71,14 +74,6 @@ public class BackupPreferenceFragment extends BasePreferenceFragment {
 			subscriptionsBackupsManager.clearBackgroundTasks();
 		}
 		super.onDestroy();
-	}
-
-	@Override
-	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		super.onActivityResult(requestCode, resultCode, data);
-		if (subscriptionsBackupsManager != null) {
-			subscriptionsBackupsManager.onActivityResult(requestCode, resultCode, data);
-		}
 	}
 
 	@Override
