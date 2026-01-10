@@ -11,7 +11,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.OpenableColumns;
-import android.system.Os;
 import android.text.SpannableString;
 import android.text.util.Linkify;
 import android.util.Log;
