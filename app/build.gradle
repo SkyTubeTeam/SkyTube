@@ -215,6 +215,9 @@ dependencies {
 
     testImplementation("org.mockito:mockito-core:$mockitoVersion")
     testImplementation("org.mockito:mockito-junit-jupiter:$mockitoVersion")
+    
+    // XML Pull Parser for unit tests (needed for OPML parsing)
+    testImplementation "xpp3:xpp3:1.1.4c"
 }
 
 afterEvaluate {

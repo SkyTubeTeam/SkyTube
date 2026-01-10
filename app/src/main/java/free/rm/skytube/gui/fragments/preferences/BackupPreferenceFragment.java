@@ -66,6 +66,13 @@ public class BackupPreferenceFragment extends BasePreferenceFragment {
 			subscriptionsBackupsManager.exportSubscriptionsToOpml();
 			return true;
 		});
+
+		// import from OPML
+		Preference importOpmlPref = findPreference(getString(R.string.pref_key_import_subs_opml));
+		importOpmlPref.setOnPreferenceClickListener(preference -> {
+			subscriptionsBackupsManager.launchOpmlImportFilePicker();
+			return true;
+		});
 	}
 
 	@Override

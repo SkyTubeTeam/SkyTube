@@ -20,8 +20,6 @@ package free.rm.skytube.businessobjects.opml;
 import android.content.Context;
 import android.net.Uri;
 
-import android.util.Log;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -31,7 +29,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 

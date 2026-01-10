@@ -12,6 +12,8 @@ import android.os.Build;
 import android.os.Environment;
 import android.provider.OpenableColumns;
 import android.text.SpannableString;
+
+import free.rm.skytube.businessobjects.opml.OpmlParser;
 import android.text.util.Linkify;
 import android.util.Log;
 import android.widget.EditText;
@@ -19,6 +21,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
@@ -43,9 +47,7 @@ import org.schabi.newpipe.extractor.StreamingService;
 import org.schabi.newpipe.extractor.exceptions.ExtractionException;
 import org.schabi.newpipe.extractor.subscription.SubscriptionExtractor;
 import org.schabi.newpipe.extractor.subscription.SubscriptionItem;
-import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
-import org.xmlpull.v1.XmlPullParserFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -54,8 +56,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.function.Consumer;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.EventBus;
@@ -87,6 +88,8 @@ public class SubscriptionsBackupsManager {
     private static final int EXT_STORAGE_PERM_CODE_IMPORT = 1951;
     private static final int EXPORT_OPML_PERM_CODE = 1952;
     private static final int IMPORT_SUBSCRIPTIONS_READ_CODE = 42;
+    private static final int IMPORT_OPML_READ_CODE = 43;
+    private static final int IMPORT_OPML_PERM_CODE = 1954;
     private static final String OPML_MIMETYPE = "text/x-opml";
     private static final String TAG = SubscriptionsBackupsManager.class.getSimpleName();
     private boolean isUnsubscribeAllChecked = false;
@@ -94,39 +97,48 @@ public class SubscriptionsBackupsManager {
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();
     private final ActivityResultLauncher<Intent> opmlExportLauncher;
     private final ActivityResultLauncher<Intent> importSubscriptionsLauncher;
+    private final ActivityResultLauncher<Intent> opmlImportLauncher;
 
     public SubscriptionsBackupsManager(Activity activity, Fragment fragment) {
         this.activity = activity;
         this.fragment = fragment;
         opmlExportLauncher = fragment.registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
-            result -> {
-                if (result.getResultCode() == Activity.RESULT_OK) {
-                    Intent data = result.getData();
-                    if (data != null && data.getData() != null) {
-                        Uri outputUri = data.getData();
-                        exportSubscriptionsToOpmlWithSaf(outputUri);
-                    }
-                }
-            }
+            new UriReceivedCallback(this::exportSubscriptionsToOpmlWithSaf)
         );
 
         importSubscriptionsLauncher = fragment.registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
-            result -> {
-                if (result.getResultCode() == Activity.RESULT_OK) {
-                    Intent data = result.getData();
-                    if (data != null && data.getData() != null) {
-                        Uri uri = data.getData();
-                        parseImportedSubscriptions(uri);
-                    }
-                }
-            }
+            new UriReceivedCallback(this::importFromYoutubeSubscriptions)
+        );
+
+        opmlImportLauncher = fragment.registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new UriReceivedCallback(this::importOpmlFile)
         );
     }
 
+    private static class UriReceivedCallback implements ActivityResultCallback<ActivityResult> {
+        private final Consumer<Uri> uriConsumer;
+
+        private UriReceivedCallback(Consumer<Uri> uriConsumer) {
+            this.uriConsumer = uriConsumer;
+        }
+
+        @Override
+        public void onActivityResult(ActivityResult result) {
+            if (result.getResultCode() == Activity.RESULT_OK) {
+                Intent data = result.getData();
+                if (data != null && data.getData() != null) {
+                    Uri uri = data.getData();
+                    uriConsumer.accept(uri);
+                }
+            }
+        }
+    }
+
     private static class Result {
-        private final  List<MultiSelectListPreferenceItem> newChannels;
+        private final List<MultiSelectListPreferenceItem> newChannels;
         private final boolean noChannelFound;
 
         private Result(final List<MultiSelectListPreferenceItem> newChannels, final boolean noChannelFound) {
@@ -193,7 +205,7 @@ public class SubscriptionsBackupsManager {
         intent.addCategory(Intent.CATEGORY_OPENABLE);
         intent.setType(OPML_MIMETYPE);
         intent.putExtra(Intent.EXTRA_TITLE, OpmlExporter.getDefaultExportFileName());
-        
+
         try {
             if (opmlExportLauncher != null) {
                 opmlExportLauncher.launch(intent);
@@ -423,6 +435,71 @@ public class SubscriptionsBackupsManager {
     }
 
     /**
+     * Launch file picker specifically for OPML files.
+     */
+    public void launchOpmlImportFilePicker() {
+        if (hasAccessToExtStorage(IMPORT_OPML_READ_CODE)) {
+            Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+            intent.addCategory(Intent.CATEGORY_OPENABLE);
+            intent.setType(OPML_MIMETYPE);
+            String[] mimeTypes = {"text/x-opml", "text/xml", "application/xml"};
+            intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
+            intent.putExtra(Intent.EXTRA_TITLE, activity.getString(R.string.opml_file_picker_title));
+
+            try {
+                if (opmlImportLauncher != null) {
+                    opmlImportLauncher.launch(intent);
+                } else {
+                    Toast.makeText(activity, R.string.failed_to_import_subscriptions, Toast.LENGTH_SHORT).show();
+                }
+            } catch (ActivityNotFoundException e) {
+                Toast.makeText(activity, R.string.failed_to_import_subscriptions, Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    /**
+     * Parse OPML file with proper threading - IO operations on background thread,
+     * UI operations on main thread.
+     *
+     * @param uri The URI pointing to the OPML file
+     */
+    private void importOpmlFile(Uri uri) {
+        compositeDisposable.add(
+            Single.fromCallable(() -> {
+                // Parse the OPML file (IO operation)
+                List<MultiSelectListPreferenceItem> foundChannels = parseOpmlFile(uri);
+
+                // Filter for new channels (database operations)
+                ArrayList<MultiSelectListPreferenceItem> newChannels = filterOutSubscribedChannels(foundChannels);
+
+                return new Result(newChannels, foundChannels.isEmpty());
+            })
+            .subscribeOn(Schedulers.io())                    // Run parsing on IO thread
+            .observeOn(AndroidSchedulers.mainThread())       // Switch to UI thread for result
+            .subscribe(
+                this::showNewChannelImportDialog,
+                error -> {
+                    // Handle errors on UI thread
+                    Logger.e(this, "Failed to import OPML file: " + error.getMessage(), error);
+                    Toast.makeText(activity, R.string.failed_to_import_subscriptions, Toast.LENGTH_SHORT).show();
+                }
+            )
+        );
+    }
+
+    @NonNull
+    private static ArrayList<MultiSelectListPreferenceItem> filterOutSubscribedChannels(List<MultiSelectListPreferenceItem> channels) {
+        ArrayList<MultiSelectListPreferenceItem> newChannels = new ArrayList<>();
+        for (MultiSelectListPreferenceItem channel : channels) {
+            if (channel.id != null && !SubscriptionsDb.getSubscriptionsDb().isUserSubscribedToChannel(new ChannelId(channel.id))) {
+                newChannels.add(channel);
+            }
+        }
+        return newChannels;
+    }
+
+    /**
      * Check if the app has access to the external storage.  If not, ask the user whether he wants
      * to give us access...
      *
@@ -471,64 +548,58 @@ public class SubscriptionsBackupsManager {
         Toast.makeText(activity, R.string.databases_importing, Toast.LENGTH_SHORT).show();
 
         compositeDisposable.add(
-                Single.fromCallable(() -> {
-                    BackupDatabases backupDatabases = new BackupDatabases();
-                    backupDatabases.importBackupDb(backupFilePath);
-                    return true;
-                })
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .onErrorReturn(throwable -> {
-                            Log.e(TAG, "Unable to import the databases...", throwable);
-                            return false;
-                        })
-                        .subscribe(successfulImport -> {
-                            // We need to force the app to refresh the subscriptions feed when the app is
-                            // restarted (irrespective to when the feeds were last refreshed -- which could be
-                            // during the last 5 mins).  This is as we are loading new databases...
-                            SkyTubeApp.getSettings().updateFeedsLastUpdateTime(null);
+            Single.fromCallable(() -> {
+                BackupDatabases backupDatabases = new BackupDatabases();
+                backupDatabases.importBackupDb(backupFilePath);
+                return true;
+            })
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .onErrorReturn(throwable -> {
+                Log.e(TAG, "Unable to import the databases...", throwable);
+                return false;
+            })
+            .subscribe(successfulImport -> {
+                // We need to force the app to refresh the subscriptions feed when the app is
+                // restarted (irrespective to when the feeds were last refreshed -- which could be
+                // during the last 5 mins).  This is as we are loading new databases...
+                SkyTubeApp.getSettings().updateFeedsLastUpdateTime(null);
 
-                            // ask the user to restart the app
-                            new AlertDialog.Builder(activity)
-                                    .setCancelable(false)
-                                    .setMessage(successfulImport ? R.string.databases_import_success : R.string.databases_import_fail)
-                                    .setNeutralButton(R.string.restart, (dialog, which) -> SkyTubeApp.restartApp())
-                                    .show();
-                        })
+                // ask the user to restart the app
+                new AlertDialog.Builder(activity)
+                        .setCancelable(false)
+                        .setMessage(successfulImport ? R.string.databases_import_success : R.string.databases_import_fail)
+                        .setNeutralButton(R.string.restart, (dialog, which) -> SkyTubeApp.restartApp())
+                        .show();
+            })
         );
     }
 
     private void parseWithNewPipe(Uri uri) {
-        parseWithNewPipeBackground(uri)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(result -> {
-                    importChannels(result.newChannels, result.noChannelFound);
-                });
-    }
-
-    private Single<Result> parseWithNewPipeBackground(Uri uri) {
-        return Single.fromCallable(() -> {
-            SubscriptionExtractor extractor = NewPipeService.get().createSubscriptionExtractor();
-            String extension = getExtension(uri);
-            if (extractor != null && extension != null) {
-                Log.i(TAG, "Parsing with " + extractor + " : " + uri);
-                try (InputStream input = activity.getContentResolver().openInputStream(uri)) {
-                    if ("csv".equals(extension) || "json".equals(extension) || "zip".equals(extension)) {
-                        List<SubscriptionItem> items = extractor.fromInputStream(input, extension);
-                        return importChannels(items);
+        compositeDisposable.add(Single.fromCallable(() -> {
+                SubscriptionExtractor extractor = NewPipeService.get().createSubscriptionExtractor();
+                String extension = getExtension(uri);
+                if (extractor != null && extension != null) {
+                    Log.i(TAG, "Parsing with " + extractor + " : " + uri);
+                    try (InputStream input = activity.getContentResolver().openInputStream(uri)) {
+                        if ("csv".equals(extension) || "json".equals(extension) || "zip".equals(extension)) {
+                            List<SubscriptionItem> items = extractor.fromInputStream(input, extension);
+                            return filterForUnsubscribedChannels(items);
+                        }
+                    } catch (IOException | ExtractionException e) {
+                        Log.e(TAG, "Unable to extract subscriptions: " + e.getMessage(), e);
+                        SkyTubeApp.notifyUserOnError(activity, e);
                     }
-                } catch (IOException | ExtractionException e) {
-                    Log.e(TAG, "Unable to extract subscriptions: " + e.getMessage(), e);
-                    SkyTubeApp.notifyUserOnError(activity, e);
                 }
-            }
-            Log.i(TAG, "Parsing with old code : "+ uri.toString());
-            return parseImportedSubscriptions(uri);
-        });
+                Log.i(TAG, "Parsing with old code : "+ uri.toString());
+                return parseImportedSubscriptions(uri);
+            })
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(this::showNewChannelImportDialog));
     }
 
-    private Result importChannels(final List<SubscriptionItem> items) {
+    private Result filterForUnsubscribedChannels(final List<SubscriptionItem> items) {
         List<MultiSelectListPreferenceItem> result = new ArrayList();
         NewPipeService newPipeService = NewPipeService.get();
         SubscriptionsDb subscriptionsDb = SubscriptionsDb.getSubscriptionsDb();
@@ -551,6 +622,14 @@ public class SubscriptionsBackupsManager {
         return "";
     }
 
+    private void importFromYoutubeSubscriptions(Uri uri) {
+        compositeDisposable.add(Single.fromCallable(() ->
+            parseImportedSubscriptions(uri)
+        ).subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(this::showNewChannelImportDialog));
+    }
+
     /**
      * Parse the file that the user selected to import subscriptions from. Each channel contained in the file
      * that the user is not already subscribed to will appear in a dialog, to allow the user to select individual channels
@@ -561,38 +640,38 @@ public class SubscriptionsBackupsManager {
      * @return
      */
     private Result parseImportedSubscriptions(Uri uri) {
-        ArrayList<MultiSelectListPreferenceItem> channels;
-        String uriString = uri.toString();
-        int lastIndexOf = uriString.lastIndexOf(".");
-        if (lastIndexOf > 0 && uriString.substring(lastIndexOf).equalsIgnoreCase("xml")) {
-            channels = parseChannelsXML(uri);
+        SkyTubeApp.nonUiThread();
+
+        String uriString = uri.toString().toLowerCase();
+
+        final List<MultiSelectListPreferenceItem> channels;
+        if (uriString.endsWith(".opml") || uriString.endsWith(".xml")) {
+            channels = parseOpmlFile(uri);
         } else {
             channels = parseChannelsJson(uri);
         }
 
         // Check the channel list for new channels
-        ArrayList<MultiSelectListPreferenceItem> newChannels = new ArrayList<>();
-        for (MultiSelectListPreferenceItem channel : channels) {
-            if (channel.id != null && !SubscriptionsDb.getSubscriptionsDb().isUserSubscribedToChannel(new ChannelId(channel.id))) {
-                newChannels.add(channel);
-            }
-        }
+        ArrayList<MultiSelectListPreferenceItem> newChannels = filterOutSubscribedChannels(channels);
 
         return new Result(newChannels, channels.isEmpty());
     }
 
-    private void importChannels(List<MultiSelectListPreferenceItem> newChannels, boolean noChannelFound) {
-        if(newChannels.size() > 0) {
+    private void showNewChannelImportDialog(Result result) {
+        SkyTubeApp.uiThread();
+
+        if(result.newChannels.size() > 0) {
             // display a dialog which allows the user to select the channels to import
-            new MultiSelectListPreferenceDialog(activity, newChannels)
+            new MultiSelectListPreferenceDialog(activity, result.newChannels)
                     .title(R.string.import_subscriptions)
                     .positiveText(R.string.import_subscriptions)
                     .onPositive((dialog, which) -> {
 
                         List<MultiSelectListPreferenceItem> channelsToSubscribeTo = new ArrayList<>();
-                        for(MultiSelectListPreferenceItem channel: newChannels) {
-                            if(channel.isChecked)
+                        for(MultiSelectListPreferenceItem channel: result.newChannels) {
+                            if (channel.isChecked) {
                                 channelsToSubscribeTo.add(channel);
+                            }
                         }
 
                         // if the user checked the "Unsubscribe to all subscribed channels" checkbox
@@ -610,7 +689,7 @@ public class SubscriptionsBackupsManager {
                     .show();
         } else {
             new AlertDialog.Builder(activity)
-                    .setMessage(noChannelFound ? R.string.no_channels_found : R.string.no_new_channels_found)
+                    .setMessage(result.noChannelFound ? R.string.no_channels_found : R.string.no_new_channels_found)
                     .setNeutralButton(R.string.ok, null)
                     .show();
         }
@@ -623,6 +702,8 @@ public class SubscriptionsBackupsManager {
      * @return The channels found in the given file
      */
     private ArrayList<MultiSelectListPreferenceItem> parseChannelsJson(Uri uri) {
+        SkyTubeApp.nonUiThread();
+
         JsonArray jsonArray;
         final ArrayList<MultiSelectListPreferenceItem> channels = new ArrayList<>();
 
@@ -655,53 +736,28 @@ public class SubscriptionsBackupsManager {
     }
 
     /**
-     * Parse the XML file that the user selected to import subscriptions from.
+     * Parse OPML file to import subscriptions using the new OPML parser.
      *
-     * @param uri The URI pointing to the XML file containing YouTube Channels to subscribe to
-     * @return The channels found in the given file
+     * @param uri The URI pointing to the OPML file containing YouTube Channels to subscribe to
+     * @return The channels found in the given OPML file
      */
-    private ArrayList<MultiSelectListPreferenceItem> parseChannelsXML(Uri uri) {
-        final ArrayList<MultiSelectListPreferenceItem> channels = new ArrayList<>();
-        Pattern channelPattern = Pattern.compile(".*channel_id=([^&]+)");
-        Matcher matcher;
-
+    private List<MultiSelectListPreferenceItem> parseOpmlFile(Uri uri) {
+        final List<MultiSelectListPreferenceItem> channels = new ArrayList<>();
+        
         try {
-            XmlPullParserFactory xmlFactoryObject = XmlPullParserFactory.newInstance();
-            XmlPullParser parser = xmlFactoryObject.newPullParser();
-            parser.setInput(activity.getContentResolver().openInputStream(uri), null);
-            int event = parser.getEventType();
-            // If channels are found in the XML file but they are all already subscribed to, alert the user with a different
-            // message than if no channels were found at all.
-            while (event != XmlPullParser.END_DOCUMENT) {
-                String name = parser.getName();
-                switch (event) {
-                    case XmlPullParser.START_TAG:
-                        break;
-
-                    case XmlPullParser.END_TAG:
-                        if (name.equals("outline")) {
-                            String xmlUrl = parser.getAttributeValue(null, "xmlUrl");
-                            if (xmlUrl != null) {
-                                matcher = channelPattern.matcher(xmlUrl);
-                                if (matcher.matches()) {
-                                    String channelId = matcher.group(1);
-                                    String channelName = parser.getAttributeValue(null, "title");
-                                    channels.add(new MultiSelectListPreferenceItem(channelId, channelName));
-                                }
-
-                            }
-                        }
-                        break;
-
+            try (InputStream inputStream = activity.getContentResolver().openInputStream(uri)) {
+                if (inputStream != null) {
+                    List<OpmlParser.ParsedChannel> parsedChannels = OpmlParser.parseOpml(inputStream);
+                    
+                    for (OpmlParser.ParsedChannel parsedChannel : parsedChannels) {
+                        channels.add(new MultiSelectListPreferenceItem(
+                                parsedChannel.getChannelId(), 
+                                parsedChannel.getTitle()));
+                    }
                 }
-                event = parser.next();
             }
-        } catch (IOException e) {
+        } catch (IOException|XmlPullParserException e) {
             Logger.e(this, "An error occurred while reading the file", e);
-            Toast.makeText(activity, String.format(activity.getString(R.string.import_subscriptions_parse_error), e.getMessage()), Toast.LENGTH_LONG).show();
-        } catch (XmlPullParserException e) {
-            Logger.e(this, "An error occurred while attempting to parse the XML file uploaded", e);
-            Toast.makeText(activity, String.format(activity.getString(R.string.import_subscriptions_parse_error), e.getMessage()), Toast.LENGTH_LONG).show();
         }
         return channels;
     }
@@ -815,6 +871,16 @@ public class SubscriptionsBackupsManager {
             else {
                 // permission not been granted by user
                 Toast.makeText(activity, R.string.subscriptions_export_opml_fail, Toast.LENGTH_LONG).show();
+            }
+        }
+        else if (requestCode == IMPORT_OPML_PERM_CODE)
+        {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                launchOpmlImportFilePicker();
+            }
+            else {
+                // permission not been granted by user
+                Toast.makeText(activity, R.string.failed_to_import_subscriptions, Toast.LENGTH_LONG).show();
             }
         }
     }

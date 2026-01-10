@@ -73,6 +73,10 @@
     <string name="pref_key_export_subs_opml" translatable="false">pref_key_export_subs_opml</string>
     <string name="pref_title_export_subs_opml">Export Subscriptions to OPML</string>
     <string name="pref_summary_export_subs_opml">Export your subscriptions to an OPML file.</string>
+    <string name="pref_key_import_subs_opml" translatable="false">pref_key_import_subs_opml</string>
+    <string name="pref_title_import_subs_opml">Import Subscriptions from OPML</string>
+    <string name="pref_summary_import_subs_opml">Import your subscriptions from an OPML file.</string>
+    <string name="opml_file_picker_title">Select OPML File</string>
     <string name="subscriptions_exporting_opml">Exporting subscriptions to OPML…</string>
     <string name="subscriptions_export_opml_success">Subscriptions exported successfully as "%s"</string>
     <string name="subscriptions_export_opml_fail">Could not export subscriptions to OPML.</string>

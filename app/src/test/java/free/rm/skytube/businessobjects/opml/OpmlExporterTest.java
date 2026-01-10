@@ -51,9 +51,9 @@ public class OpmlExporterTest {
             this.title = title;
         }
     }
-    
+
     private List<YouTubeChannel> testChannels;
-    
+
     @BeforeEach
     public void setUp() {
         testChannels = new ArrayList<>();
@@ -61,22 +61,22 @@ public class OpmlExporterTest {
         testChannels.add(new MockYouTubeChannel("UC_abc-def_ghi", "Test & Channel 2"));
         testChannels.add(new MockYouTubeChannel("UC123", "Channel <with> tags"));
     }
-    
+
     @Test
     public void testDefaultExportFileName() {
         String fileName = OpmlExporter.getDefaultExportFileName();
-        
-        Assertions.assertTrue(fileName.startsWith("skytube_subscriptions_"), 
-                            "File name should start with skytube_subscriptions_");
-        Assertions.assertTrue(fileName.endsWith(".opml"), 
-                            "File name should end with .opml");
-        Assertions.assertTrue(fileName.length() > "skytube_subscriptions_.opml".length(), 
-                            "File name should contain datetime");
-        
+
+        Assertions.assertTrue(fileName.startsWith("skytube_subscriptions_"),
+                "File name should start with skytube_subscriptions_");
+        Assertions.assertTrue(fileName.endsWith(".opml"),
+                "File name should end with .opml");
+        Assertions.assertTrue(fileName.length() > "skytube_subscriptions_.opml".length(),
+                "File name should contain datetime");
+
         // Verify ISO datetime format (yyyy-MM-dd_HH-mm-ss)
         String datetimePart = fileName.replace("skytube_subscriptions_", "").replace(".opml", "");
-        Assertions.assertTrue(datetimePart.matches("\\d{4}-\\d{2}-\\d{2}_\\d{2}-\\d{2}-\\d{2}"), 
-                            "File name should contain ISO datetime format (yyyy-MM-dd_HH-mm-ss)");
+        Assertions.assertTrue(datetimePart.matches("\\d{4}-\\d{2}-\\d{2}_\\d{2}-\\d{2}-\\d{2}"),
+                "File name should contain ISO datetime format (yyyy-MM-dd_HH-mm-ss)");
     }
 
     @Test
@@ -95,14 +95,14 @@ public class OpmlExporterTest {
 
         // Test that all channels are included
         Assertions.assertTrue(opmlContent.contains("Test Channel 1"),
-                            "OPML should contain first channel title");
+                "OPML should contain first channel title");
         Assertions.assertTrue(opmlContent.contains("UC1234567890"),
-                            "OPML should contain first channel ID");
-        
+                "OPML should contain first channel ID");
+
         Assertions.assertTrue(opmlContent.contains("Test &amp; Channel 2"),
-                            "OPML should contain second channel title");
+                "OPML should contain second channel title");
         Assertions.assertTrue(opmlContent.contains("UC_abc-def_ghi"),
-                            "OPML should contain second channel ID");
+                "OPML should contain second channel ID");
 
         Assertions.assertTrue(opmlContent.contains("Channel &lt;with&gt; tags"),
                 "Angle brackets should be escaped as &lt; and &gt;");
@@ -113,18 +113,18 @@ public class OpmlExporterTest {
         // Test valid channel IDs
         Assertions.assertEquals("UC1234567890", OpmlExporter.filterXmlSafeChannelId("UC1234567890"));
         Assertions.assertEquals("UC_abc-def_ghi", OpmlExporter.filterXmlSafeChannelId("UC_abc-def_ghi"));
-        
+
         // Test filtering of unsafe characters
         Assertions.assertEquals("UC123", OpmlExporter.filterXmlSafeChannelId("UC123!@#$%"));
         Assertions.assertEquals("UC_abc", OpmlExporter.filterXmlSafeChannelId("UC_abc<>?"));
         Assertions.assertEquals("UC", OpmlExporter.filterXmlSafeChannelId("UC!@#$%^&*()"));
-        
+
         // Test null and empty
         Assertions.assertEquals("", OpmlExporter.filterXmlSafeChannelId(null));
         Assertions.assertEquals("", OpmlExporter.filterXmlSafeChannelId(""));
         Assertions.assertEquals("", OpmlExporter.filterXmlSafeChannelId("   "));
     }
-    
+
     @Test
     public void testXmlEscapingFunction() {
         // Test basic escaping
@@ -132,31 +132,58 @@ public class OpmlExporterTest {
         Assertions.assertEquals("test &lt;test&gt;", OpmlExporter.escapeXml("test <test>"));
         Assertions.assertEquals("test &quot;test&quot;", OpmlExporter.escapeXml("test \"test\""));
         Assertions.assertEquals("test &apos;test&apos;", OpmlExporter.escapeXml("test 'test'"));
-        
+
         // Test combined escaping
-        Assertions.assertEquals("test &amp; &lt;test&gt; &quot;test&quot; &apos;test&apos;", 
-                            OpmlExporter.escapeXml("test & <test> \"test\" 'test'"));
-        
+        Assertions.assertEquals("test &amp; &lt;test&gt; &quot;test&quot; &apos;test&apos;",
+                OpmlExporter.escapeXml("test & <test> \"test\" 'test'"));
+
         // Test null and empty
         Assertions.assertEquals("", OpmlExporter.escapeXml(null));
         Assertions.assertEquals("", OpmlExporter.escapeXml(""));
     }
-    
+
     @Test
     public void testEmptyChannelList() throws ParserConfigurationException, IOException, SAXException {
         List<YouTubeChannel> emptyList = new ArrayList<>();
         String opmlContent = OpmlExporter.generateOpmlContent(emptyList);
         assertOpmlIsValidXml(opmlContent, 0);
-        
+
         // Should still generate valid OPML structure even with no channels
         Assertions.assertTrue(opmlContent.startsWith("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"),
-                            "OPML should start with XML declaration even when empty");
+                "OPML should start with XML declaration even when empty");
         Assertions.assertTrue(opmlContent.contains("<opml version=\"1.0\">"),
-                            "OPML should contain OPML version even when empty");
+                "OPML should contain OPML version even when empty");
         Assertions.assertTrue(opmlContent.endsWith("  </body>\n</opml>"),
-                            "OPML should end with proper closing tags even when empty");
+                "OPML should end with proper closing tags even when empty");
     }
-    
+
+    @Test
+    public void testGeneratedOpmlCanBeParsedBack() throws Exception {
+        // Generate OPML from test channels
+        String opmlContent = OpmlExporter.generateOpmlContent(testChannels);
+
+        // Parse the generated OPML back using OpmlParser
+        List<OpmlParser.ParsedChannel> parsedChannels = OpmlParser.parseOpml(opmlContent);
+
+        Assertions.assertEquals(testChannels.size(), parsedChannels.size(),
+                "Should be able to parse back the same number of channels");
+
+        for (int i = 0; i < testChannels.size(); i++) {
+            YouTubeChannel originalChannel = testChannels.get(i);
+            OpmlParser.ParsedChannel parsedChannel = parsedChannels.get(i);
+
+            Assertions.assertEquals(originalChannel.getId(), parsedChannel.getChannelId(),
+                    "Channel ID should be preserved for channel " + i);
+
+            String expectedTitle = originalChannel.getTitle();
+            Assertions.assertEquals(expectedTitle, parsedChannel.getTitle(),
+                    "Channel title should be preserved for channel " + i);
+
+            Assertions.assertTrue(parsedChannel.getSourceUrl().contains(originalChannel.getId()),
+                    "Source URL should contain the channel ID for channel " + i);
+        }
+    }
+
     @Test
     public void testChannelWithNullTitle() throws ParserConfigurationException, IOException, SAXException {
         List<YouTubeChannel> channelsWithNull = List.of(new MockYouTubeChannel("UC123", null));
@@ -166,39 +193,39 @@ public class OpmlExporterTest {
 
         // Should use "" for null titles
         Assertions.assertTrue(opmlContent.contains("text=\"\""),
-                            "Should use empty string for null channel titles");
+                "Should use empty string for null channel titles");
     }
 
     private void assertOpmlIsValidXml(String opmlContent, int numberOfChannels) throws ParserConfigurationException, IOException, SAXException {
         // Validate that the generated OPML is valid XML
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
-        
+
         // Parse the OPML content as XML
         Document document = builder.parse(new InputSource(new StringReader(opmlContent)));
-        
+
         // Verify basic structure
         Assertions.assertNotNull(document, "OPML content should be valid XML");
         Assertions.assertEquals("opml", document.getDocumentElement().getNodeName(), "Root element should be 'opml'");
         Assertions.assertEquals("1.0", document.getDocumentElement().getAttribute("version"), "OPML version should be 1.0");
-        
+
         // Verify head section
         NodeList headElements = document.getElementsByTagName("head");
         Assertions.assertEquals(1, headElements.getLength(), "Should have exactly one head element");
-        
+
         // Verify title in head
         NodeList titleElements = document.getElementsByTagName("title");
         Assertions.assertEquals(1, titleElements.getLength(), "Should have exactly one title element");
         Assertions.assertEquals("SkyTube Subscriptions Export", titleElements.item(0).getTextContent(), "Title should be 'SkyTube Subscriptions Export'");
-        
+
         // Verify body section
         NodeList bodyElements = document.getElementsByTagName("body");
         Assertions.assertEquals(1, bodyElements.getLength(), "Should have exactly one body element");
-        
+
         // Verify outline elements
         NodeList outlineElements = document.getElementsByTagName("outline");
         Assertions.assertEquals(numberOfChannels, outlineElements.getLength(), "Should have one outline elements for each channel");
-        
+
         // Verify each outline has required attributes
         for (int i = 0; i < outlineElements.getLength(); i++) {
             Element outline = (Element) outlineElements.item(i);

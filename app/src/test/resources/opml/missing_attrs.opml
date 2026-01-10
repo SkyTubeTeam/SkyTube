@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<opml version="1.0">
+  <body>
+    <outline text="Subscriptions">
+      <outline type="rss" text="Channel with missing URL"/>
+      <outline type="rss" xmlUrl="https://www.youtube.com/feeds/videos.xml?channel_id=UC333333333"/>
+    </outline>
+  </body>
+</opml>

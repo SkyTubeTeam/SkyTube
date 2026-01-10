@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<opml version="1.0">
+  <body>
+    <outline text="Subscriptions">
+      <outline type="folder" text="Folder">
+        <outline type="rss" text="Actual Channel" 
+                 xmlUrl="https://www.youtube.com/feeds/videos.xml?channel_id=UC222222222"/>
+      </outline>
+    </outline>
+  </body>
+</opml>
