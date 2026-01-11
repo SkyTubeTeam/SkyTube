@@ -181,4 +181,19 @@
     <string name="pref_summary_require_pin_code">某些修改需要输入 PIN 码。</string>
     <string name="pref_title_change_security_pin">更改安全 PIN 码</string>
     <string name="pref_summary_change_security_pin">更改 PIN 码保护对首选项和敏感操作的访问。</string>
+    <string name="pref_title_export_subs_opml">导出订阅到 OPML</string>
+    <string name="pref_summary_export_subs_opml">导出订阅到 OPML 文件。</string>
+    <string name="subscriptions_exporting_opml">正导出订阅到 OPML…</string>
+    <string name="subscriptions_export_opml_success">成功导出订阅为 %s</string>
+    <string name="subscriptions_export_opml_fail">Wl无法导出订阅到 OPML。</string>
+    <string name="opml_export_unknown_filename">未知文件名</string>
+    <string name="opml_export_title">导出订阅到 OPML</string>
+    <string name="opml_export_message">选择 OPML 导出文件名：</string>
+    <string name="opml_export_confirm">导出</string>
+    <string name="opml_export_cancel">取消</string>
+    <string name="opml_directory_title">选择导出位置</string>
+    <string name="opml_directory_message">选择 OPML 导出目录：</string>
+    <string name="opml_directory_use_default">使用默认（下载）</string>
+    <string name="opml_directory_select">选择目录</string>
+    <string name="opml_export_location">导出位置：%s</string>
 </resources>
