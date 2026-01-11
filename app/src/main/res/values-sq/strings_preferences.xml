@@ -177,4 +177,19 @@
     <string name="pref_summary_require_pin_code">Dhënia e një kodi PIN është e domosdoshme për disa nga ndryshimet.</string>
     <string name="pref_title_change_security_pin">Ndryshoni PIN Sigurie</string>
     <string name="pref_summary_change_security_pin">Që të hyni te parapëlqimet dhe veprimet me spec, ndryshoni PIN-in tuaj.</string>
+    <string name="pref_title_export_subs_opml">Eksportojini Pajtimet si OPML</string>
+    <string name="pref_summary_export_subs_opml">Eksportojini pajtimet tuaja si një kartelë OPML.</string>
+    <string name="subscriptions_exporting_opml">Po eksportohen pajtime si OPML…</string>
+    <string name="subscriptions_export_opml_success">Pajtimet u eksportuan me sukses si %s</string>
+    <string name="subscriptions_export_opml_fail">S’u eksportuan dot pajtime si OPML.</string>
+    <string name="opml_export_unknown_filename">Emër i Panjohur Kartele</string>
+    <string name="opml_export_title">Eksporto Pajtimet si OPML</string>
+    <string name="opml_export_message">Zgjidhni një emër kartele për eksportimin tuaj OPML:</string>
+    <string name="opml_export_confirm">Eksportoji</string>
+    <string name="opml_export_cancel">Anuloje</string>
+    <string name="opml_directory_title">Zgjidhni Vendndodhje Eksportimi</string>
+    <string name="opml_directory_message">Përzgjidhni drejtori për eksportimin OPML:</string>
+    <string name="opml_directory_use_default">Përdor Parazgjedhjen (Shkarkime)</string>
+    <string name="opml_directory_select">Përzgjidhni Drejtori</string>
+    <string name="opml_export_location">Vendndodhje Eksportimi: %s</string>
 </resources>
