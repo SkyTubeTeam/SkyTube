@@ -193,4 +193,19 @@
     <string name="pref_summary_require_pin_code">Bazı değişiklikler için PIN kodu girilmesi gerekir.</string>
     <string name="pref_title_change_security_pin">Güvenlik PIN\'ini Değiştir</string>
     <string name="pref_summary_change_security_pin">Tercihler ve hassas işlemlerin erişimini korumak için PIN kodunu değiştirin.</string>
+    <string name="pref_title_export_subs_opml">Abonelikleri OPML Olarak Dışa Aktar</string>
+    <string name="pref_summary_export_subs_opml">Aboneliklerinizi bir OPML dosyasına aktarın.</string>
+    <string name="subscriptions_exporting_opml">Abonelikler OPML olarak dışa aktarıyor…</string>
+    <string name="subscriptions_export_opml_success">Abonelikler %s olarak başarıyla dışa aktarıldı</string>
+    <string name="subscriptions_export_opml_fail">Abonelikler OPML olarak dışa aktarılamadı.</string>
+    <string name="opml_export_unknown_filename">Bilinmeyen Dosya Adı</string>
+    <string name="opml_export_title">Abonelikleri OPML Olarak Dışa Aktar</string>
+    <string name="opml_export_message">OPML dışa aktarımı için bir dosya adı seçin:</string>
+    <string name="opml_export_confirm">Dışa Aktar</string>
+    <string name="opml_export_cancel">İptal</string>
+    <string name="opml_directory_title">Dışa Aktarım Konumunu Seç</string>
+    <string name="opml_directory_message">OPML dışa aktarımı için dizin seçin:</string>
+    <string name="opml_directory_use_default">Öntanımlıyı Kullan (İndirilenler)</string>
+    <string name="opml_directory_select">Dizin Seç</string>
+    <string name="opml_export_location">Dışa Aktarım Konumu: %s</string>
 </resources>
