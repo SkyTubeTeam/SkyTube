@@ -27,7 +27,7 @@
     <string name="continue_">Pokračovať</string>
     <string name="databases_importing">Importuje sa…</string>
     <string name="pref_title_import_subs">Importovať odbery z YouTube</string>
-    <string name="pref_summary_import_subs">Importuje vaše odbery z konta YouTube.</string>
+    <string name="pref_summary_import_subs">Importujte svoje odbery z konta YouTube.</string>
     <string name="pref_title_maximum_res_metered">Najvyššie rozlíšenie pre meranú sieť</string>
     <string name="pref_summary_metered_network_usage">Čo robiť, ak na sťahovanie/sledovanie videí používate meranú sieť: %s</string>
     <string name="databases_backing_up">Zálohuje sa…</string>
@@ -98,7 +98,7 @@
     <string name="pref_video_download_minimum_resolution_title">Najnižšie rozlíšenie sťahovaného videa</string>
     <string name="pref_video_download_minimum_resolution_summary">Sťahované videá budú najmenej %s</string>
     <string name="pref_key_video_quality_title">Výber kvality videa</string>
-    <string name="pref_key_video_quality_for_downloads_title">Výber kvalty sťahovaného videa</string>
+    <string name="pref_key_video_quality_for_downloads_title">Výber kvality sťahovaného videa</string>
     <string name="pref_key_video_quality_metered_title">Výber kvality videa v meranej sieti</string>
     <string name="pref_key_use_newer_formats_title">Skúsiť novšie formáty videa</string>
     <string name="pref_key_use_newer_formats_summary">Na starších verziách systému Android bez podpory nemusia zvuk a video fungovať.</string>
@@ -181,4 +181,19 @@
     <string name="pref_summary_require_pin_code">Pri určitých úpravách sa vyžaduje zadanie kódu PIN.</string>
     <string name="pref_title_change_security_pin">Zmeniť bezpečnostný kód PIN</string>
     <string name="pref_summary_change_security_pin">Zmenou kódu PIN ochránite prístup k predvoľbám a citlivým činnostiam.</string>
+    <string name="pref_title_export_subs_opml">Export odberov do OPML</string>
+    <string name="pref_summary_export_subs_opml">Exportujte svoje odbery do súboru OPML.</string>
+    <string name="subscriptions_exporting_opml">Exportovanie odberov do OPML…</string>
+    <string name="subscriptions_export_opml_success">Odbery boli úspešne exportované ako %s</string>
+    <string name="subscriptions_export_opml_fail">Odbery sa nepodarilo exportovať do OPML.</string>
+    <string name="opml_export_unknown_filename">Neznámy názov súboru</string>
+    <string name="opml_export_title">Exportovať odbery do OPML</string>
+    <string name="opml_export_message">Vyberte názov súboru pre export OPML:</string>
+    <string name="opml_export_confirm">Exportovať</string>
+    <string name="opml_export_cancel">Zrušiť</string>
+    <string name="opml_directory_title">Výber umiestnenia exportu</string>
+    <string name="opml_directory_message">Vyberte adresár pre export OPML:</string>
+    <string name="opml_directory_use_default">Použiť predvolené (Stiahnuté)</string>
+    <string name="opml_directory_select">Vybrať adresár</string>
+    <string name="opml_export_location">Umiestnenie exportu: %s</string>
 </resources>
