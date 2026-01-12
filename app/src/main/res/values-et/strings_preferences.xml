@@ -181,4 +181,19 @@
     <string name="pref_summary_require_pin_code">PIN-koodi sisestamine on mõnede muudatuste jaoks vajalik.</string>
     <string name="pref_title_change_security_pin">Muuda PIN-koodi turvalisuse jaoks</string>
     <string name="pref_summary_change_security_pin">Muuda ligipääsuks eelistustele ja delikaatsetele tegevustele kasutatavat PIN-koodi.</string>
+    <string name="pref_title_export_subs_opml">Ekspordi tellimused OPML-faili</string>
+    <string name="pref_summary_export_subs_opml">Ekspordi oma tellimused OPML-faili.</string>
+    <string name="subscriptions_exporting_opml">Ekspordin tellimusi OPML-faili…</string>
+    <string name="subscriptions_export_opml_success">Tellimuste eksport %s faili õnnestus</string>
+    <string name="subscriptions_export_opml_fail">Tellimuste eksport OPML-faili ei õnnestunud.</string>
+    <string name="opml_export_unknown_filename">Tundmatu failinimi</string>
+    <string name="opml_export_title">Ekspordi tellimused OPML-faili</string>
+    <string name="opml_export_message">Sisesta failinimi eksportimiseks OPML-vormingusse:</string>
+    <string name="opml_export_confirm">Ekspordi</string>
+    <string name="opml_export_cancel">Katkesta</string>
+    <string name="opml_directory_title">Vali ekspordifaili asukoht</string>
+    <string name="opml_directory_message">Vali kaust, kuhu soovid OPML-faili lisada:</string>
+    <string name="opml_directory_use_default">Kasuta vaikimisi valikud (Allalaadimised)</string>
+    <string name="opml_directory_select">Vali kaust</string>
+    <string name="opml_export_location">Eksportimise kaust: %s</string>
 </resources>
