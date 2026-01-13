@@ -113,7 +113,7 @@ dependencies {
 
     implementation 'androidx.multidex:multidex:2.0.1' // as we have over 65536 methods...
     implementation 'androidx.preference:preference:1.1.1'
-    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+    implementation 'androidx.recyclerview:recyclerview:1.4.0'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
     implementation 'com.google.android.material:material:1.12.0'
 
