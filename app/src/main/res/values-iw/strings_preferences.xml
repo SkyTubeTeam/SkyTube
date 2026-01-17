@@ -40,4 +40,12 @@
     <string name="pref_title_import_dbs">ייבוא גיבוי</string>
     <string name="pref_summary_import_dbs">ייבוא גיבוי הסימניות והמינויים שלך.</string>
     <string name="databases_backing_up">מתבצע גיבוי…</string>
+    <string name="databases_backup_success">מסדי הנתונים גובו אל %s</string>
+    <string name="databases_backup_fail">לא ניתן לגבות את מסדי הנתונים שלך.</string>
+    <string name="databases_import_select_backup">בחירת קובץ גיבוי לייבוא</string>
+    <string name="databases_import_nothing_selected">לא נבחר כלום…</string>
+    <string name="databases_import_warning_message">להחליף את הסימניות והמינויים בנתונים מקובץ הגיבוי הנבחר?</string>
+    <string name="continue_">המשך</string>
+    <string name="databases_importing">מתבצע ייבוא…</string>
+    <string name="databases_import_fail">לא ניתן לייבא את מסדי הנתונים שלך.</string>
 </resources>
