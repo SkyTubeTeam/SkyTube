@@ -16,4 +16,10 @@
     <string name="videos">סרטונים</string>
     <string name="num_videos">%d סרטונים</string>
     <string name="playlists">רשימות נגינה</string>
+    <string name="cleaner">מנקה סרטונים שנצפו</string>
+    <string name="cleaner_confirm">ניקוי</string>
+    <string name="cleaner_watched_downloads">הסרת הורדות שנצפו</string>
+    <string name="cleaner_watched_bookmarks">הסרת סימניות שנצפו</string>
+    <string name="video_comments_are_disabled">תגובות סרטון כבויות</string>
+    <string name="incorrect_pin">קוד אישי שגוי</string>
 </resources>
