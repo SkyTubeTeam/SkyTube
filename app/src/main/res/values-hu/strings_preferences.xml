@@ -149,9 +149,9 @@
     <string name="pref_video_download_maximum_resolution_summary">A videók letöltése legfeljebb %s lesz</string>
     <string name="pref_video_download_maximum_resolution_title">Letöltéseknél használt legnagyobb felbontás</string>
     <string name="pref_summary_minimum_res">Válassza ki a legkisebb felbontást: %s</string>
-    <string name="pref_title_minimum_res">Legkisebb Felbontás</string>
+    <string name="pref_title_minimum_res">Legkisebb felbontás</string>
     <string name="pref_summary_maximum_res">Válassza ki a legnagyobb videófelbontást: %s</string>
-    <string name="pref_title_maximum_res">Legnagyobb Felbontás</string>
+    <string name="pref_title_maximum_res">Legnagyobb felbontás</string>
     <string name="pref_key_video_quality_for_downloads_summary">Optimalizálás %s -ra</string>
     <string name="pref_key_video_quality_for_downloads_title">Videók letöltési minőségének kiválasztása</string>
     <string name="pref_key_video_quality_summary">Optimalizálás %s -ra</string>
@@ -167,7 +167,7 @@
     <string name="pref_title_maximum_res_metered">Forgalmi díjas hálózaton használt legnagyobb felbontás</string>
     <string name="pref_summary_minimum_res_metered">Forgalmi díjas hálózaton használt legkisebb felbontás: %s</string>
     <string name="pref_title_minimum_res_metered">Forgalmi díjas hálózaton használt legkisebb felbontás</string>
-    <string name="pref_category_metered_network">Mért Hálózat</string>
+    <string name="pref_category_metered_network">Forgalmi díjas hálózat</string>
     <string name="system_default_country">Rendszer</string>
     <string name="pref_summary_default_content_country">Ennek az országnak szánt tartalmak megjelenítése: %s</string>
     <string name="pref_title_default_content_country">A tartalom alapértelmezett országa</string>
@@ -199,4 +199,19 @@
     <string name="pref_summary_require_pin_code">Bizonyos módosításokhoz PIN-kód megadása szükséges.</string>
     <string name="pref_title_change_security_pin">Biztonsági PIN-kód módosítása</string>
     <string name="pref_summary_change_security_pin">PIN-kód módosítása a beállításokhoz és az érzékeny műveletekhez való hozzáférés védelme érdekében.</string>
+    <string name="pref_title_export_subs_opml">Feliratkozások exportálása OPML formátumba</string>
+    <string name="pref_summary_export_subs_opml">Exportálja a feliratkozásait egy OPML fájlba.</string>
+    <string name="subscriptions_exporting_opml">Feliratkozások OPML formátumba exportálása…</string>
+    <string name="subscriptions_export_opml_success">A feliratkozások sikeresen exportálva lettek: %s</string>
+    <string name="subscriptions_export_opml_fail">Nem sikerült OPML formátumba exportálni a feliratkozásokat.</string>
+    <string name="opml_export_unknown_filename">Ismeretlen fájlnév</string>
+    <string name="opml_export_title">Feliratkozások exportálása OPML formátumba</string>
+    <string name="opml_export_message">Válasszon fájlnevet az OPML formátumba exportáláshoz:</string>
+    <string name="opml_export_confirm">Exportálás</string>
+    <string name="opml_export_cancel">Mégsem</string>
+    <string name="opml_directory_title">Az exportálás helyének kiválasztása</string>
+    <string name="opml_directory_message">Válassza ki az OPML formátumba exportálás könyvtárát:</string>
+    <string name="opml_directory_use_default">Alapértelmezett használata (Letöltések)</string>
+    <string name="opml_directory_select">Könyvtár kiválasztása</string>
+    <string name="opml_export_location">Az exportálás helye: %s</string>
 </resources>
