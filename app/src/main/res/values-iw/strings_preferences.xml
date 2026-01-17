@@ -33,4 +33,11 @@
     <string name="pref_title_choose_player">נגן וידאו</string>
     <string name="pref_summary_choose_player">נגן וידאו לשימוש: %s</string>
     <string name="no_resolution_specified">ללא</string>
+    <string name="pref_title_metered_network_usage">שימוש ברשת מדודה</string>
+    <string name="pref_import_export_category">ייבוא/ייצוא</string>
+    <string name="pref_title_backup_dbs">גיבוי מסדי נתונים</string>
+    <string name="pref_summary_backup_dbs">גיבוי הסימניות והמינויים שלך.</string>
+    <string name="pref_title_import_dbs">ייבוא גיבוי</string>
+    <string name="pref_summary_import_dbs">ייבוא גיבוי הסימניות והמינויים שלך.</string>
+    <string name="databases_backing_up">מתבצע גיבוי…</string>
 </resources>
