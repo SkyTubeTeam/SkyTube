@@ -15,4 +15,5 @@
     <string name="about">על אודות</string>
     <string name="status_not_exists">[נמחק]</string>
     <string name="status_account_terminated">[הושמד]</string>
+    <string name="error_check_if_user_has_subbed">לא ניתן לבדוק האם נרשמת לערוץ (id=%s)</string>
 </resources>
