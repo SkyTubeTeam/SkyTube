@@ -12,4 +12,17 @@
     <string name="error_video_parse_error">לא ניתן להפעיל את הסרטון: <br/> <br/> %s.</string>
     <string name="play_video">נגינת סרטון</string>
     <string name="ratings_disabled">הדירוגים כבויים</string>
+    <string name="url_copied_to_clipboard">הכתובת הועתקה ללוח הגזירים.</string>
+    <string name="mark_watched">סימון כנצפה</string>
+    <string name="mark_unwatched">סימון כלא נצפה</string>
+    <string name="error_get_comments">לא ניתן למשוך תגובות.</string>
+    <string name="error_get_comments_no_network">כדי למשוך תגובות יש להתחבר לאינטרנט תחילה.</string>
+    <string name="no_video_comments">או שלסרטון הזה אין תגובות או שהן הושבתו.</string>
+    <string name="view_replies">הצגת תשובות</string>
+    <string name="hide_replies">הסתרת תשובות</string>
+    <string name="enter_video_url">מילוי כתובת סרטון</string>
+    <string name="play">נגינה</string>
+    <string name="cancel">ביטול</string>
+    <string name="clear">פינוי</string>
+    <string name="should_resume">להמשיך מאיפה שעצרת?</string>
 </resources>
