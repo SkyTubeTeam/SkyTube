@@ -11,4 +11,5 @@
     <string name="video_stream_not_found_with_request_resolution">לא ניתן למצוא תזרימי וידאו כלשהם ברזולוציה המבוקשת %1$s-%2$s</string>
     <string name="delete_download">מחיקת הודעה</string>
     <string name="video_downloaded">‚%s’ ירד.</string>
+    <string name="no_downloaded_videos_text">יש להוריד כל מיני סרטונים כדי למצוא אותם כאן.</string>
 </resources>
