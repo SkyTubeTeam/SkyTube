@@ -25,4 +25,13 @@
     <string name="cancel">ביטול</string>
     <string name="clear">פינוי</string>
     <string name="should_resume">להמשיך מאיפה שעצרת?</string>
+    <string name="resume">להמשיך</string>
+    <string name="sponsorblock_category_sponsor">חסות</string>
+    <string name="sponsorblock_category_selfpromo">קידום עצמי</string>
+    <string name="sponsorblock_category_interaction">תזכורת הרשמה</string>
+    <string name="sponsorblock_category_music_offtopic">קטע לא מוזיקלי</string>
+    <string name="sponsorblock_category_intro">הקדמה/פתיח</string>
+    <string name="sponsorblock_category_outro">תודות סיום/קרדיטים</string>
+    <string name="metered_network">רשת מדודה</string>
+    <string name="warning_metered_network_play">כדאי להתחבר לרשת לא מדודה כדי להימנע מחיובים על צריכת נתונים. לנגן את הסרטון בכל זאת?</string>
 </resources>
