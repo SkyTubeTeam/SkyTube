@@ -12,4 +12,7 @@
     <string name="channel_unsubscribed">ביטלת רישום לערוץ</string>
     <string name="error_get_subbed_channels">לא ניתן למשוך מינויים לערוצים.</string>
     <string name="import_subscriptions">ייבוא מינויים</string>
+    <string name="about">על אודות</string>
+    <string name="status_not_exists">[נמחק]</string>
+    <string name="status_account_terminated">[הושמד]</string>
 </resources>
