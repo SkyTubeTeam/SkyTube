@@ -16,4 +16,11 @@
     <string name="status_not_exists">[נמחק]</string>
     <string name="status_account_terminated">[הושמד]</string>
     <string name="error_check_if_user_has_subbed">לא ניתן לבדוק האם נרשמת לערוץ (id=%s)</string>
+    <string name="select_sub_file">בחירת קובץ מינוי</string>
+    <string name="select_all">בחירה בהכול</string>
+    <string name="select_none">לא לבחור כלום</string>
+    <string name="no_channels_found">לא נמצאו ערוצי YouTube כלשהם בקובץ שהעלית.</string>
+    <string name="no_new_channels_found">לא נמצאו ערוצי YouTube שלא נרשמת אליהם כבר.</string>
+    <string name="import_subscriptions_parse_error">לא ניתן לפענח את הקובץ שהעלית: %s.</string>
+    <string name="failed_to_import_subscriptions">לא ניתן לייבא את המינויים שלך מ־YouTube.</string>
 </resources>
