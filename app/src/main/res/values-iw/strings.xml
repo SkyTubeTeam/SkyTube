@@ -22,4 +22,11 @@
     <string name="cleaner_watched_bookmarks">הסרת סימניות שנצפו</string>
     <string name="video_comments_are_disabled">תגובות סרטון כבויות</string>
     <string name="incorrect_pin">קוד אישי שגוי</string>
+    <string name="trending_in">מובילים (%s)</string>
+    <string name="could_not_get_playlists">לא ניתן למשוך %s רשימות נגינה.</string>
+    <string name="close">סגירה</string>
+    <string name="loading">בטעינה…</string>
+    <string name="yes">כן</string>
+    <string name="no">לא</string>
+    <string name="search_channel">חיפוש ערוץ</string>
 </resources>
