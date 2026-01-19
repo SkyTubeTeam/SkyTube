@@ -48,4 +48,6 @@
     <string name="continue_">המשך</string>
     <string name="databases_importing">מתבצע ייבוא…</string>
     <string name="databases_import_fail">לא ניתן לייבא את מסדי הנתונים שלך.</string>
+    <string name="pref_category_metered_network">רשת מדודה</string>
+    <string name="pref_title_minimum_res_metered">הרזולוציה הנמוכה ביותר לרשת מדודה</string>
 </resources>
