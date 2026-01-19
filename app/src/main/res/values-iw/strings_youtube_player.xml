@@ -34,4 +34,13 @@
     <string name="sponsorblock_category_outro">תודות סיום/קרדיטים</string>
     <string name="metered_network">רשת מדודה</string>
     <string name="warning_metered_network_play">כדאי להתחבר לרשת לא מדודה כדי להימנע מחיובים על צריכת נתונים. לנגן את הסרטון בכל זאת?</string>
+    <string name="warning_metered_network_disable">לא לשאול עוד לעולם.</string>
+    <string name="loading_video">הסרטון נטען…</string>
+    <string name="reload_video">ריענון סרטון</string>
+    <string name="open_in_browser">פתיחה בדפדפן</string>
+    <string name="open_with">פתיחה עם…</string>
+    <string name="share">שיתוף</string>
+    <string name="share_via">שיתוף דרך…</string>
+    <string name="copy_url">העתקת כתובת</string>
+    <string name="sponsorblock_skipped">מקטע שנפסח: %s</string>
 </resources>
