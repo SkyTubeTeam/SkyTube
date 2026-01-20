@@ -9,4 +9,5 @@
     <string name="downloading">다운로드 중…</string>
     <string name="update_available">새로운 버전이 있습니다</string>
     <string name="up_to_date">최신 버전 입니다</string>
+    <string name="android_too_old">현재 사용 중인 안드로이드 버전은 업데이트하기에 너무 오래되었습니다. 수동으로 \'SkyTube Legacy\'를 설치하여야 합니다!</string>
 </resources>
