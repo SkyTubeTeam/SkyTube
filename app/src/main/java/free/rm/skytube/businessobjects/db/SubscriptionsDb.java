@@ -79,7 +79,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
     private static final String GET_ALL_SUBSCRIBED_CHANNEL_ID = "SELECT s." + SubscriptionsTable.COL_CHANNEL_ID + " FROM " + SubscriptionsTable.TABLE_NAME + " s, " + LocalChannelTable.TABLE_NAME + " c where s.channel_pk = c._Id and c." + LocalChannelTable.COL_STATE.name() + " = 0";
 	private static final String IS_SUBSCRIBED_QUERY = String.format("SELECT EXISTS(SELECT %s FROM %s WHERE %s =?) AS VAL ", SubscriptionsTable.COL_ID, SubscriptionsTable.TABLE_NAME, SubscriptionsTable.COL_CHANNEL_ID);
 
-    private static final String GET_PK_FROM_CHANNEL_ID = "SELECT " + SubscriptionsTable.COL_ID + " FROM " + SubscriptionsTable.TABLE_NAME + " WHERE " + SubscriptionsTable.COL_CHANNEL_ID + " = ?";
+    private static final String GET_PK_FROM_CHANNEL_ID = "SELECT " + LocalChannelTable.COL_ID.name() + " FROM " + LocalChannelTable.TABLE_NAME + " WHERE " + LocalChannelTable.COL_CHANNEL_ID.name() + " = ?";
 
 	private static volatile SubscriptionsDb subscriptionsDb = null;
 
@@ -493,7 +493,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 	private List<YouTubeChannel> getSubscribedChannels(SQLiteDatabase db) throws IOException {
 		SkyTubeApp.nonUiThread();
 
-		try (Cursor cursor = db.rawQuery("select s._id subs_id, s.category_id, s.Last_Visit_Time, c.* from Subs s join Channel c on s.Channel_Id = c.Channel_Id", null)) {
+		try (Cursor cursor = db.rawQuery("select s._id subs_id, s.category_id, s.Last_Visit_Time, c.* from Subs s join Channel c on s.channel_pk = c._Id", null)) {
 
 			List<YouTubeChannel> subsChannels = new ArrayList<>();
 
@@ -719,7 +719,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 	public PersistentChannel getCachedChannel(ChannelId channelId) {
         SkyTubeApp.nonUiThread();
         try (Cursor cursor = getReadableDatabase().rawQuery(
-                "select s._id subs_id, c.* from  Channel c left outer Join Subs s on c.Channel_Id = s.Channel_Id where c.Channel_Id = ?",
+                "select s._id subs_id, c.* from  Channel c left outer Join Subs s on s.channel_pk = c._Id where c.Channel_Id = ?",
                 toArrayParam(channelId))) {
             if (cursor.moveToNext()) {
                 Long subscriptionPk = SQLiteHelper.getOptionalLong(cursor, "subs_id");
