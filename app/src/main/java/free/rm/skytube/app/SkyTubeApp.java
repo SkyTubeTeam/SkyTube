@@ -369,40 +369,44 @@ public class SkyTubeApp extends MultiDexApplication {
 		return settings;
 	}
 
-	public static void notifyUserOnError(@NonNull Context ctx, @Nullable Throwable throwable) {
-		if (throwable == null) {
-			return;
-		}
+    public static void notifyUserOnError(@NonNull Context ctx, @Nullable Throwable throwable) {
+        if (throwable == null) {
+            return;
+        }
         if (throwable instanceof ReCaptchaException) {
             handleRecaptchaException(ctx, (ReCaptchaException) throwable);
             return;
         }
-		final String message;
-		if (throwable instanceof GoogleJsonResponseException) {
-			GoogleJsonResponseException exception = (GoogleJsonResponseException) throwable;
-			List<GoogleJsonError.ErrorInfo> errors = exception.getDetails().getErrors();
-			if (errors != null && !errors.isEmpty()) {
-				message =  "Server error:" + errors.get(0).getMessage()+ ", reason: "+ errors.get(0).getReason();
-			} else {
-				message = exception.getDetails().getMessage();
-			}
-		} else {
-			message = throwable.getMessage();
-		}
-		if (message != null) {
-			Log.e(TAG, "Error: "+message);
+        final String message = getMessage(throwable);
+        if (message != null) {
+            Log.e(TAG, "Error: " + message);
 
-			String toastText = message;
-			if(message.contains("resolve host")) {
-				toastText = "No internet connection available";
-			}
-			if(message.contains("JavaScript player")) {
-				return; // Error from Player when watching downloaded videos offline
-			}
+            String toastText = message;
+            if (message.contains("resolve host")) {
+                toastText = "No internet connection available";
+            }
+            if (message.contains("JavaScript player")) {
+                return; // Error from Player when watching downloaded videos offline
+            }
 
-			Toast.makeText(ctx, toastText, Toast.LENGTH_LONG).show();
-		}
-	}
+            Toast.makeText(ctx, toastText, Toast.LENGTH_LONG).show();
+        }
+    }
+
+    @Nullable
+    private static String getMessage(@NonNull Throwable throwable) {
+        if (throwable instanceof GoogleJsonResponseException) {
+            GoogleJsonResponseException exception = (GoogleJsonResponseException) throwable;
+            List<GoogleJsonError.ErrorInfo> errors = exception.getDetails().getErrors();
+            if (errors != null && !errors.isEmpty()) {
+                return  "Server error:" + errors.get(0).getMessage()+ ", reason: "+ errors.get(0).getReason();
+            } else {
+                return exception.getDetails().getMessage();
+            }
+        } else {
+            return throwable.getMessage();
+        }
+    }
 
     private static void handleRecaptchaException(Context context, ReCaptchaException reCaptchaException) {
         // remove "pbj=1" parameter from YouYube urls, as it makes the page JSON and not HTML
