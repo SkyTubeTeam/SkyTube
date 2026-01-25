@@ -75,6 +75,7 @@ import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 public class NewPipeService {
     // TODO: remove this singleton
     private static NewPipeService instance;
+    private final static boolean VERBOSE_DISLIKE_COUNT_LOG = false;
 
     private final StreamingService streamingService;
     private final Settings settings;
@@ -464,7 +465,11 @@ public class NewPipeService {
                 Logger.i(this, "for "+ url +" -> "+jsonObject);
                 return jsonObject.getLong("dislikes");
             } catch (IOException | JSONException | ReCaptchaException e) {
-                Logger.e(this, "getDislikeCount: error: " + e.getMessage() + " for url:" + url, e);
+                if (VERBOSE_DISLIKE_COUNT_LOG) {
+                    Logger.e(this, "getDislikeCount: error: " + e.getMessage() + " for url:" + url, e);
+                } else {
+                    Logger.i(this, "getDislikeCount: error: " + e.getMessage() + " for url:" + url);
+                }
             }
         } else {
             Logger.i(this, "Like fetching disabled for " + videoId);
