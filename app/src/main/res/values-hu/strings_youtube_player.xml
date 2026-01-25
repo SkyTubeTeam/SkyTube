@@ -21,7 +21,7 @@
     <string name="mark_watched">Megjelölés megnézettként</string>
     <string name="mark_unwatched">Megjelölés nem megnézettként</string>
     <string name="error_get_comments">Nem sikerült lekérni a hozzászólásokat.</string>
-    <string name="error_get_comments_no_network">Csatkakozzon az internetre a hozzászólások lekéréséhez.</string>
+    <string name="error_get_comments_no_network">Csatlakozzon az internetre a hozzászólások lekéréséhez.</string>
     <string name="no_video_comments">A videó alatt nincsenek hozzászólások, vagy le vannak tiltva.</string>
     <string name="view_replies">Válaszok megtekintése</string>
     <string name="hide_replies">Válaszok elrejtése</string>
