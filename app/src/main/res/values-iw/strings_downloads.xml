@@ -12,4 +12,6 @@
     <string name="delete_download">מחיקת הודעה</string>
     <string name="video_downloaded">‚%s’ ירד.</string>
     <string name="no_downloaded_videos_text">יש להוריד כל מיני סרטונים כדי למצוא אותם כאן.</string>
+    <string name="playing_video_file_missing">הסרטון מתנגן מרחוק מאחר שלא ניתן למצוא קובץ להורדה.</string>
+    <string name="external_storage_not_available">יש להעניק גישה להוריד את הקובץ תחילה.</string>
 </resources>
