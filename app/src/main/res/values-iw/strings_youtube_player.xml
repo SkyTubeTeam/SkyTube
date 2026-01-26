@@ -43,4 +43,6 @@
     <string name="share_via">שיתוף דרך…</string>
     <string name="copy_url">העתקת כתובת</string>
     <string name="sponsorblock_skipped">מקטע שנפסח: %s</string>
+    <string name="metered_network_blocked_by_policy">ההורדה נחסמה כיוון שהתחברת דרך רשת מדודה.</string>
+    <string name="warning_live_video">לא ניתן לנגן תזרימים חיים כרגע. לפתוח ביישומון אחר?</string>
 </resources>
