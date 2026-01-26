@@ -23,11 +23,12 @@ import org.xmlpull.v1.XmlPullParserFactory;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import javax.annotation.Nullable;
 
 /**
  * OPML parser for importing YouTube subscriptions from OPML files.
@@ -129,9 +130,10 @@ public class OpmlParser {
     /**
      * Parses an outline tag and extracts channel information if it's a YouTube channel.
      *
-     * @return
+     * @param parser the XML pull parser positioned at a start tag
+     * @return a parsed channel or null
      */
-    private static ParsedChannel parseOutlineTag(XmlPullParser parser) {
+    private static @Nullable ParsedChannel parseOutlineTag(XmlPullParser parser) {
         String xmlUrl = parser.getAttributeValue(null, "xmlUrl");
         String htmlUrl = parser.getAttributeValue(null, "htmlUrl");
         String title = parser.getAttributeValue(null, "text"); // Use "text" attribute, not "title"
@@ -213,6 +215,7 @@ public class OpmlParser {
      * @throws XmlPullParserException If there's an error parsing the XML
      */
     public static List<ParsedChannel> parseOpml(String opmlString) throws IOException, XmlPullParserException {
+        // Using "UTF-8" is intentional, so we can keep the same code in SkytubeLegacy too.
         try (InputStream inputStream = new ByteArrayInputStream(opmlString.getBytes("UTF-8"))) {
             return parseOpml(inputStream);
         }

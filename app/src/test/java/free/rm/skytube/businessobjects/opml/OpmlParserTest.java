@@ -166,36 +166,6 @@ class OpmlParserTest {
     }
 
     @Test
-    void testOpmlFileExtensionDetection() {
-        // Test that .opml files are correctly identified
-        String[] opmlFiles = {
-            "subscriptions.opml",
-            "export.OPML",  // Case insensitive
-            "backup.opml",
-            "test.opml.xml" // Should still be detected as OPML first
-        };
-
-        String[] nonOpmlFiles = {
-            "subscriptions.xml",
-            "export.json",
-            "backup.txt",
-            "subscriptions.opml.backup" // Doesn't end with .opml
-        };
-
-        for (String filename : opmlFiles) {
-            if (filename.toLowerCase().endsWith(".opml")) {
-                assertTrue(filename.toLowerCase().endsWith(".opml"),
-                          filename + " should be detected as OPML");
-            }
-        }
-
-        for (String filename : nonOpmlFiles) {
-            assertFalse(filename.toLowerCase().endsWith(".opml"),
-                       filename + " should NOT be detected as OPML");
-        }
-    }
-
-    @Test
     void testOpmlStructureConsistency() throws Exception {
         // Test that all OPML files have consistent structure
         String basicContent = readResourceFile("basic.opml");
