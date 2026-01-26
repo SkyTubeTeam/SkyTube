@@ -12,4 +12,5 @@
     <string name="no_subscriptions_text">לאחר הרשמה לערוצים כלשהם הסרטונים החדשים שבהם יופיעו כאן.</string>
     <string name="import_subscriptions_from_youtube">ייבוא מינויים מ־YouTube</string>
     <string name="notification_new_videos_found">%d סרטונים חדשים מערוצים שנרשמת אליהם</string>
+    <string name="notification_channel_feed_title">התראות ערוץ</string>
 </resources>
