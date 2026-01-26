@@ -20,7 +20,11 @@
     <string name="select_all">בחירה בהכול</string>
     <string name="select_none">לא לבחור כלום</string>
     <string name="no_channels_found">לא נמצאו ערוצי YouTube כלשהם בקובץ שהעלית.</string>
-    <string name="no_new_channels_found">לא נמצאו ערוצי YouTube שלא נרשמת אליהם כבר.</string>
+    <string name="no_new_channels_found">לא הצלחנו למצוא ערוצי YouTube כלשהם שלא כבר נרשמת אליהם קודם.</string>
     <string name="import_subscriptions_parse_error">לא ניתן לפענח את הקובץ שהעלית: %s.</string>
     <string name="failed_to_import_subscriptions">לא ניתן לייבא את המינויים שלך מ־YouTube.</string>
+    <string name="error_unable_to_subscribe">לא ניתן להירשם או לבטל רישום מ/אל הערוץ (id=%s)</string>
+    <string name="subscriptions_to_channels_imported">יובאו %d ערוצים או ערוץ אחד.</string>
+    <string name="import_subscriptions_description">יש לבטל את כל הסימונים ב־https://takeout.google.com למעט „YouTube ו־YouTube Music” וללחוץ על „All YouTube data included” כדי לקבל את המינויים בלבד. יש ללחוץ על „Next” ואז על „Create export”. יש ללחוץ כדי לקבל הודעה בדוא״ל עם קישור להורדה. יש להוריד את הקובץ מתוכנית הדוא״ל שלך. לבחור את קובץ ה־ZIP הזה או לחלץ אותו ולבחור ב־subscriptions.csv או ב־subscriptions.json שבתוכו (תחת ‎‎/Takeout/YouTube and YouTube Music/subscriptions/) דרך „בחירת קובץ מינוי” להלן.</string>
+    <string name="unsubscribe_from_all_current_sibbed_channels">בוטל המינוי מכל הערוצים שנרשמת אליהם.</string>
 </resources>
