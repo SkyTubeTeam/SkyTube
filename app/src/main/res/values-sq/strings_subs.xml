@@ -21,7 +21,7 @@
     <string name="select_all">Përzgjidhi Krejt</string>
     <string name="select_none">Mos Përzgjidh Gjë</string>
     <string name="no_channels_found">Te kartela që ngarkuat s’u gjet dot ndonjë kanal.</string>
-    <string name="no_new_channels_found">S’u gjetën kanale YouTube te të cilët jeni tashmë të pajtuar.</string>
+    <string name="no_new_channels_found">S’gjetëm ndonjë kanal YouTube te të cilët s’jeni tashmë të pajtuar.</string>
     <string name="import_subscriptions_parse_error">S’u përtyp dot kartela që ngarkuat: %s.</string>
     <string name="failed_to_import_subscriptions">S’u importuan dot pajtimet tuaja YouTube.</string>
     <string name="about">Mbi</string>
