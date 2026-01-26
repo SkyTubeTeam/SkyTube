@@ -196,4 +196,7 @@
     <string name="opml_directory_use_default">Kasuta vaikimisi valikud (Allalaadimised)</string>
     <string name="opml_directory_select">Vali kaust</string>
     <string name="opml_export_location">Eksportimise kaust: %s</string>
+    <string name="pref_title_import_subs_opml">Impordi tellimused OPML-failist</string>
+    <string name="pref_summary_import_subs_opml">Impordi oma tellimused OPML-failist.</string>
+    <string name="opml_file_picker_title">Vali OPML-fail</string>
 </resources>
