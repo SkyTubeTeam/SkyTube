@@ -25,7 +25,7 @@
 	<string name="select_all">Select All</string>
 	<string name="select_none">Select None</string>
 	<string name="no_channels_found">Could not find any YouTube channels in the file you uploaded.</string>
-	<string name="no_new_channels_found">No YouTube channels you are not already subscribed to were found.</string>
+	<string name="no_new_channels_found">We couldn\'t find any YouTube channels that you aren\'t already subscribed to.</string>
 	<string name="import_subscriptions_parse_error">Could not parse the file you uploaded: %s.</string>
 	<string name="failed_to_import_subscriptions">Could not import your YouTube subscriptions.</string>
 

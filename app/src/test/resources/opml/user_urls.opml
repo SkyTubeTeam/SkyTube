@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<opml version="1.0">
+  <body>
+    <outline text="Subscriptions">
+      <outline type="rss" text="User Channel" 
+               htmlUrl="https://www.youtube.com/user/TestUser"/>
+      <outline type="rss" text="Custom Channel" 
+               htmlUrl="https://www.youtube.com/c/TestChannel"/>
+    </outline>
+  </body>
+</opml>
