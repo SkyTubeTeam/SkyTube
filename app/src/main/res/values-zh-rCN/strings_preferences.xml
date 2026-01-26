@@ -196,4 +196,7 @@
     <string name="opml_directory_use_default">使用默认（下载）</string>
     <string name="opml_directory_select">选择目录</string>
     <string name="opml_export_location">导出位置：%s</string>
+    <string name="pref_title_import_subs_opml">从 OPML 导入订阅</string>
+    <string name="pref_summary_import_subs_opml">从 OPML 文件导入订阅。</string>
+    <string name="opml_file_picker_title">选择 OPML 文件</string>
 </resources>
