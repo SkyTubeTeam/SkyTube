@@ -208,4 +208,7 @@
     <string name="opml_directory_use_default">Öntanımlıyı Kullan (İndirilenler)</string>
     <string name="opml_directory_select">Dizin Seç</string>
     <string name="opml_export_location">Dışa Aktarım Konumu: %s</string>
+    <string name="pref_title_import_subs_opml">Abonelikleri OPML Dosyasından İçe Aktar</string>
+    <string name="pref_summary_import_subs_opml">Aboneliklerinizi bir OPML dosyasından içe aktarın.</string>
+    <string name="opml_file_picker_title">OPML Dosyası Seç</string>
 </resources>
