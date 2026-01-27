@@ -25,4 +25,6 @@
     <string name="unsubscribe">Huỷ đăng ký</string>
     <string name="subscribe">Đăng ký</string>
     <string name="subscriptions">Đăng ký</string>
+    <string name="status_not_exists">[Đã xóa]</string>
+    <string name="status_account_terminated">[Bị vô hiệu hóa]</string>
 </resources>
