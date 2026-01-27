@@ -25,6 +25,7 @@ import org.schabi.newpipe.extractor.playlist.PlaylistExtractor;
 
 import java.util.List;
 
+import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubePlaylist;
@@ -42,7 +43,7 @@ public class PlaylistPager extends VideoPager {
         if (playlist == null) {
             try {
                 String uploaderUrl = playlistExtractor.getUploaderUrl();
-                String channelId = uploaderUrl != null ? getStreamingService().getChannelLHFactory().fromUrl(uploaderUrl).getId() : null;
+                String channelId = uploaderUrl != null && !uploaderUrl.isEmpty() ? getStreamingService().getChannelLHFactory().fromUrl(uploaderUrl).getId() : null;
                 playlist = new YouTubePlaylist(
                         playlistExtractor.getId(),
                         playlistExtractor.getName(),
@@ -53,7 +54,7 @@ public class PlaylistPager extends VideoPager {
                         new YouTubeChannel(channelId, playlistExtractor.getUploaderName())
                 );
             } catch (ParsingException e) {
-                e.printStackTrace();
+                Logger.e(this, "Unable to parse: " + e.getMessage(), e);
             }
         }
         return super.extract(page);
