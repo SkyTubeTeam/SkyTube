@@ -590,6 +590,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 
                                                             @Override
                                                             public void onGetDesiredStreamError(Throwable throwable) {
+                                                                Logger.e(YouTubePlayerV2Fragment.this, "Error during getting desired stream:" + throwable, throwable);
                                                                 if (throwable != null) {
                                                                     videoPlaybackError(throwable.getMessage());
                                                                 }

@@ -376,14 +376,14 @@ public class YouTubeTasks {
                                                     @NonNull GetDesiredStreamListener listener) {
         return Single.fromCallable(() -> NewPipeService.get().getStreamInfoByVideoId(youTubeVideo.getId()))
                 .subscribeOn(Schedulers.io())
-                .doOnError(listener::onGetDesiredStreamError)
-                .onErrorComplete()
                 .map(streamInfo -> {
                     youTubeVideo.updateFromStreamInfo(streamInfo);
                     SubscriptionsDb.getSubscriptionsDb().updateVideo(youTubeVideo);
                     return streamInfo;
                 })
                 .observeOn(AndroidSchedulers.mainThread())
+                .doOnError(listener::onGetDesiredStreamError)
+                .onErrorComplete()
                 .flatMapCompletable(streamInfo -> {
                     listener.onGetDesiredStream(streamInfo, youTubeVideo);
                     return CompletableSubject.create();
