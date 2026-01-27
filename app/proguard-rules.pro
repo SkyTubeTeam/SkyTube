@@ -34,3 +34,7 @@
 -dontwarn java.beans.IntrospectionException
 -dontwarn java.beans.Introspector
 -dontwarn java.beans.PropertyDescriptor
+
+# jsoup re2j warnings
+-dontwarn com.google.re2j.Matcher
+-dontwarn com.google.re2j.Pattern
