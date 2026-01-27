@@ -31,4 +31,5 @@
     <string name="cleaner_explanation">Xóa các video được đánh dấu/tải xuống. Sử dụng các tùy chọn bộ lọc sau:</string>
     <string name="cleaner_watched_downloads">Xóa các tải xuống đã xem</string>
     <string name="cleaner_watched_bookmarks">Xóa dấu trang đã xem</string>
+    <string name="incorrect_pin">Sai mã PIN</string>
 </resources>
