@@ -45,4 +45,6 @@
     <string name="sponsorblock_skipped">מקטע שנפסח: %s</string>
     <string name="metered_network_blocked_by_policy">ההורדה נחסמה כיוון שהתחברת דרך רשת מדודה.</string>
     <string name="warning_live_video">לא ניתן לנגן תזרימים חיים כרגע. לפתוח ביישומון אחר?</string>
+    <string name="sponsorblock_category_preview">הקדמה/סיכום</string>
+    <string name="sponsorblock_category_filler">מילוי מקום</string>
 </resources>
