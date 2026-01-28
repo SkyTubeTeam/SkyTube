@@ -200,7 +200,10 @@ public class NewPipeService {
      * @return List of {@link StreamInfo}.
      */
     public StreamInfo getStreamInfoByVideoId(String videoId) throws ExtractionException, IOException {
-        return getStreamInfoByUrl(getVideoUrl(videoId));
+        SkyTubeApp.nonUiThread();
+        LinkHandler linkHandler = streamingService.getStreamLHFactory().fromId(videoId);
+        StreamExtractor streamExtractor = streamingService.getStreamExtractor(linkHandler);
+        return StreamInfo.getInfo(streamExtractor);
     }
 
     /**
@@ -519,16 +522,6 @@ public class NewPipeService {
         } catch (ExtractionException | IOException | RuntimeException e) {
             throw new NewPipeException("Getting search result for " + query + " fails:" + e.getMessage(), e);
         }
-    }
-
-    /**
-     * Given video ID it will return the video's page URL.
-     *
-     * @param videoId       The ID of the video.
-     * @throws ParsingException 
-     */
-    private String getVideoUrl(String videoId) throws ParsingException {
-        return streamingService.getStreamLHFactory().getUrl(videoId);
     }
 
     public synchronized static NewPipeService get() {
