@@ -3,7 +3,7 @@
     <string name="about">Giới thiệu</string>
     <string name="failed_to_import_subscriptions">Không thể nhập đăng ký YouTube của bạn.</string>
     <string name="import_subscriptions_parse_error">Không thể xử lý tệp bạn tải lên: %s.</string>
-    <string name="no_new_channels_found">Không tìm thấy kênh YouTube nào mà bạn chưa đăng ký.</string>
+    <string name="no_new_channels_found">Không thể tìm thấy kênh YouTube nào mà bạn chưa đăng ký.</string>
     <string name="no_channels_found">Không tìm thấy kênh YouTube nào trong tệp bạn tải lên.</string>
     <string name="select_none">Không chọn gì</string>
     <string name="select_all">Chọn tất cả</string>
