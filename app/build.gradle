@@ -167,7 +167,7 @@ dependencies {
     }
 
     // implementation 'com.github.SkyTubeTeam.NewPipeExtractor:NewPipeExtractor:0c8e500efd'
-    implementation 'com.github.SkyTubeTeam:NewPipeExtractor:skytube-2026-01-27'
+    implementation 'com.github.SkyTubeTeam:NewPipeExtractor:skytube-2026-01-28'
 
     def skytubeComponents = '0.0.10'
     implementation ("com.github.SkyTubeTeam.components:okhttp-client:$skytubeComponents") {
