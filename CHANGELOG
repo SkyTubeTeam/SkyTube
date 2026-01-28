@@ -1,3 +1,10 @@
+v2.998 - 2026-01-28
+        * Fix video loading / downloading etc caused by Youtube API changes.
+        * Implement OPML import / export support.
+        * Translators:
+                * Anonymous,Besnik Bleta,bruh,Ettore Atalan,GMP,idkhow2name,Milan,Milo Ivir,Oğuz Ersen,Priit Jõerüüt,
+                * Szia Tomi,TXRdev Archive,Yaron Shahrabani,Любомир Василев,大王叫我来巡山
+
 v2.997 - 2026-01-06
         * Fix comment and reply loading.
         * Fix a crash in the backup preference page.
