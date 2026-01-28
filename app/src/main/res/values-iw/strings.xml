@@ -9,4 +9,25 @@
     <string name="search_videos">חיפוש סרטונים</string>
     <string name="ok">אישור</string>
     <string name="launch_offical_player_error">לא ניתן לטעון את נגן ה־YouTube הרשמי. נא לוודא שהוא מותקן.</string>
+    <string name="LIVE">שידור חי</string>
+    <string name="featured">נבחרים</string>
+    <string name="most_popular">הפופולריים ביותר</string>
+    <string name="video">וידאו</string>
+    <string name="videos">סרטונים</string>
+    <string name="num_videos">%d סרטונים</string>
+    <string name="playlists">רשימות נגינה</string>
+    <string name="cleaner">מנקה סרטונים שנצפו</string>
+    <string name="cleaner_confirm">ניקוי</string>
+    <string name="cleaner_watched_downloads">הסרת הורדות שנצפו</string>
+    <string name="cleaner_watched_bookmarks">הסרת סימניות שנצפו</string>
+    <string name="video_comments_are_disabled">תגובות סרטון כבויות</string>
+    <string name="incorrect_pin">קוד אישי שגוי</string>
+    <string name="trending_in">מובילים (%s)</string>
+    <string name="could_not_get_playlists">לא ניתן למשוך %s רשימות נגינה.</string>
+    <string name="close">סגירה</string>
+    <string name="loading">בטעינה…</string>
+    <string name="yes">כן</string>
+    <string name="no">לא</string>
+    <string name="search_channel">חיפוש ערוץ</string>
+    <string name="cleaner_toast_finish">הסרנו %1$s סרטונים מהסימניות ומחקנו %2$s מ״ב של סרטונים שירדו.</string>
 </resources>

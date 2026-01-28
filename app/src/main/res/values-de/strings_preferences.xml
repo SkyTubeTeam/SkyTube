@@ -193,4 +193,14 @@
     <string name="pref_summary_require_pin_code">Für bestimmte Änderungen ist die Eingabe eines PIN-Codes erforderlich.</string>
     <string name="pref_title_change_security_pin">Sicherheits-PIN ändern</string>
     <string name="pref_summary_change_security_pin">Ändern Sie die PIN, um den Zugriff auf Einstellungen und sensible Aktionen zu schützen.</string>
+    <string name="opml_export_location">Ort exportieren: %s</string>
+    <string name="pref_title_export_subs_opml">Abonnements nach OPML exportieren</string>
+    <string name="subscriptions_export_opml_success">Abonnements erfolgreich als %s exportiert</string>
+    <string name="opml_export_unknown_filename">Unbekannter Dateiname</string>
+    <string name="opml_export_title">Abonnements nach OPML exportieren</string>
+    <string name="opml_export_confirm">Exportieren</string>
+    <string name="opml_export_cancel">Abbrechen</string>
+    <string name="opml_directory_title">Speicherort für Export auswählen</string>
+    <string name="opml_directory_message">Verzeichnis für OPML-Export auswählen:</string>
+    <string name="opml_directory_select">Verzeichnis auswählen</string>
 </resources>

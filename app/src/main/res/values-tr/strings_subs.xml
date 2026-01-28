@@ -15,7 +15,7 @@
     <string name="select_all">Tümünü Seç</string>
     <string name="select_none">Hiçbirini Seçme</string>
     <string name="no_channels_found">Yüklediğiniz dosyada herhangi bir YouTube kanalı bulunamadı.</string>
-    <string name="no_new_channels_found">Henüz abone olmadığınız hiçbir YouTube kanalı bulunamadı.</string>
+    <string name="no_new_channels_found">Henüz abone olmadığınız herhangi bir YouTube kanalı bulamadık.</string>
     <string name="import_subscriptions_parse_error">Yüklediğiniz dosya ayrıştırılamadı: %s.</string>
     <string name="failed_to_import_subscriptions">YouTube abonelikleriniz içe aktarılamadı.</string>
     <string name="about">Hakkında</string>

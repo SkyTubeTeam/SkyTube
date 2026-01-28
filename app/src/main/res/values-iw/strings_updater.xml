@@ -9,4 +9,5 @@
     <string name="update_failure">לא ניתן להתקין את הגרסה החדשה של היישומון.</string>
     <string name="later">מאוחר יותר</string>
     <string name="downloading">בהורדה…</string>
+    <string name="android_too_old">לרוע המזל, ה־Android שלך ישן מדי מכדי לעדכן. יש להתקין את ‚SkyTube Legacy’ ידנית!</string>
 </resources>

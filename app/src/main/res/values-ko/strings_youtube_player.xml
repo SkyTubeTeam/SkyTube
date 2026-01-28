@@ -5,4 +5,7 @@
     <string name="error_video_play">비디오 플레이어 오류</string>
     <string name="error_video_streams">비디오 스트림을 불러올수 없습니다.</string>
     <string name="error_invalid_url">%s 링크는 유효하지 않은 비디오 링크 입니다</string>
+    <string name="error_stream_parse_error">파싱 오류.</string>
+    <string name="error_video_streams_empty">\'%s\'동영상에 ­스트림이 없습니다.</string>
+    <string name="error_get_video_desc">동영상 설명을 가져올 수 없습니다.</string>
 </resources>
