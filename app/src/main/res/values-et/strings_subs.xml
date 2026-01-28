@@ -20,7 +20,7 @@
     <string name="select_all">Vali kõik</string>
     <string name="select_none">Ära vali midagi</string>
     <string name="no_channels_found">Sinu poolt näidatud failis polnud mitte ühtegi YouTube\'i kanalit.</string>
-    <string name="no_new_channels_found">Ei leidunud ühtegi YouTube\'i kanalit, mida sa juba poleks tellinud.</string>
+    <string name="no_new_channels_found">Me ei suutnud leida ühtegi YouTube\'i kanalit, mida sa juba poleks tellinud.</string>
     <string name="failed_to_import_subscriptions">Sinu YouTube\'i tellimuste import ei õnnestunud.</string>
     <string name="about">Teave</string>
     <string name="error_unable_to_subscribe">Kanali tellimine või sellest loobumine ei õnnestunud (id=%s)</string>

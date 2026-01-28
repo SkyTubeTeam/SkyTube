@@ -19,7 +19,7 @@
     <string name="failed_to_import_subscriptions">Nem sikerült importálni a YouTube feliratkozásait.</string>
     <string name="import_subscriptions_parse_error">Nem sikerült elemezni a feltöltött fájlt: %s.</string>
     <string name="no_channels_found">Nem található YouTube csatorna a feltöltött fájlban.</string>
-    <string name="no_new_channels_found">Nem található olyan YouTube csatorna amelyre még nem iratkozott fel.</string>
+    <string name="no_new_channels_found">Nem találtunk olyan YouTube-csatornát, amelyre még nem iratkozott fel.</string>
     <string name="channel_unsubscribed">Leiratkozott a csatornáról</string>
     <string name="channel_subscribe_failed">Nem sikerült feliratkozni a csatornára</string>
     <string name="channel_already_subscribed">Már feliratkozott</string>

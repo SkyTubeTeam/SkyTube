@@ -181,4 +181,19 @@
     <string name="pref_summary_require_pin_code">Za određene promjene je potreban unos PIN koda.</string>
     <string name="pref_title_change_security_pin">Promijeni sigurnosni PIN</string>
     <string name="pref_summary_change_security_pin">Promijeni PIN za zaštitu pristupa postavkama i osjetljivim radnjama.</string>
+    <string name="pref_title_export_subs_opml">Izvezi pretplate u OPML</string>
+    <string name="opml_export_title">Izvezi pretplate u OPML</string>
+    <string name="pref_summary_export_subs_opml">Izvezi svoje pretplate u OPML datoteku.</string>
+    <string name="subscriptions_exporting_opml">Izvoz pretplata u OPML …</string>
+    <string name="subscriptions_export_opml_success">Pretplate su uspješno izvezene kao %s</string>
+    <string name="subscriptions_export_opml_fail">Nije bilo moguće izvesti pretplate u OPML.</string>
+    <string name="opml_export_unknown_filename">Nepoznato ime datoteke</string>
+    <string name="opml_export_message">Odaberi ime datoteke za OPML izvoz:</string>
+    <string name="opml_export_confirm">Izvezi</string>
+    <string name="opml_export_cancel">Odustani</string>
+    <string name="opml_directory_title">Odaberi mjesto izvoza</string>
+    <string name="opml_directory_message">Odaberi direktorij za OPML izvoz:</string>
+    <string name="opml_directory_use_default">Koristi standardno (Preuzimanja)</string>
+    <string name="opml_directory_select">Odaberi direktorij</string>
+    <string name="opml_export_location">Mjesto izvoza: %s</string>
 </resources>

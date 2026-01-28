@@ -181,4 +181,19 @@
     <string name="pref_summary_require_pin_code">Pro určité úpravy je nutné zadat kód PIN.</string>
     <string name="pref_title_change_security_pin">Změna bezpečnostního kódu PIN</string>
     <string name="pref_summary_change_security_pin">Změnou kódu PIN ochráníte přístup k předvolbám a citlivým akcím.</string>
+    <string name="pref_title_export_subs_opml">Export odběrů do OPML</string>
+    <string name="pref_summary_export_subs_opml">Exportujte své odběry do souboru OPML.</string>
+    <string name="subscriptions_exporting_opml">Exportování odběrů do OPML…</string>
+    <string name="subscriptions_export_opml_success">Odběry byly úspěšně exportovány jako %s</string>
+    <string name="subscriptions_export_opml_fail">Odběry nebylo možné exportovat do OPML.</string>
+    <string name="opml_export_unknown_filename">Neznámý název souboru</string>
+    <string name="opml_export_title">Exportovat odběry do OPML</string>
+    <string name="opml_export_message">Vyberte název souboru pro export OPML:</string>
+    <string name="opml_export_confirm">Exportovat</string>
+    <string name="opml_export_cancel">Zrušit</string>
+    <string name="opml_directory_title">Vyberte umístění exportu</string>
+    <string name="opml_directory_message">Vyberte adresář pro export OPML:</string>
+    <string name="opml_directory_use_default">Použít výchozí (Stažené)</string>
+    <string name="opml_directory_select">Vybrat adresář</string>
+    <string name="opml_export_location">Umístění exportu: %s</string>
 </resources>
