@@ -220,4 +220,22 @@
     <string name="pref_summary_require_pin_code">Entrer un code PIN est demandé pour certaines modifications.</string>
     <string name="pref_title_change_security_pin">Changer le code PIN de sécurité</string>
     <string name="pref_summary_change_security_pin">Changer le code PIN pour protéger l\'accès aux préférence et les actions sensitives.</string>
+    <string name="pref_title_export_subs_opml">Export des Abonnements en OPML</string>
+    <string name="pref_summary_export_subs_opml">Exporter vos abonnements vers un fichier OPML.</string>
+    <string name="pref_title_import_subs_opml">Importer des Abonnements depuis OPML</string>
+    <string name="pref_summary_import_subs_opml">Importer vos abonnements depuis un fichier OPML.</string>
+    <string name="opml_file_picker_title">Sélectionner un fichier OPML</string>
+    <string name="subscriptions_exporting_opml">Export des abonnements en OPML…</string>
+    <string name="subscriptions_export_opml_success">Abonnements exportés avec succès vers %s</string>
+    <string name="subscriptions_export_opml_fail">Impossible d\'exporter les abonnements en OPML.</string>
+    <string name="opml_export_unknown_filename">Nom de fichier inconnu</string>
+    <string name="opml_export_title">Export des Abonnements en OPML</string>
+    <string name="opml_export_message">Choisissez un nom de fichier pour votre export OPML :</string>
+    <string name="opml_export_confirm">Export</string>
+    <string name="opml_export_cancel">Annuler</string>
+    <string name="opml_directory_title">Choisir l\'emplacement de l\'export</string>
+    <string name="opml_directory_message">Sélection du dossier pour l\'export OPML :</string>
+    <string name="opml_directory_use_default">Utiliser par Défaut (Downloads)</string>
+    <string name="opml_directory_select">Sélection Dossier</string>
+    <string name="opml_export_location">Emplacement de l\'Export : %s</string>
 </resources>
