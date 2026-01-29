@@ -168,4 +168,21 @@
     <string name="pref_summary_preferred_languages">נא לבחור את השפות המועדפות עליך.</string>
     <string name="pref_title_preferred_languages">שפות מועדפות</string>
     <string name="pref_summary_preferred_regions">נא לבחור מאיזה אזור לקבל סרטונים „מומלצים”: %s</string>
+    <string name="pref_title_preferred_regions">אזור מועדף</string>
+    <string name="pref_languages_filter_category">מסנני שפה ואזור</string>
+    <string name="pref_title_channel_blacklist">רשימת ערוצים חסומים</string>
+    <string name="channel_unwhitelist_success">יש לרענן את הסרטונים כדי להשתמש ברשימת הערוצים המורשים החדשה.</string>
+    <string name="pref_video_download_minimum_resolution_title">רזולוציית הורדת הווידאו הנמוכה ביותר</string>
+    <string name="pref_video_download_minimum_resolution_summary">הורדות הווידאו יהיו לפחות %s</string>
+    <string name="pref_key_use_newer_formats_title">לנסות תסדירי וידאו חדשים יותר</string>
+    <string name="pref_key_use_newer_formats_summary">וידאו ושמע עלולים לסבול בגרסאות ישנות של Android שאינן נתמכות.</string>
+    <string name="pref_title_playback_speed">מהירות נגינה כברירת מחדל</string>
+    <string name="pref_summary_playback_speed">מהירות נגינה כברירת מחדל: %s</string>
+    <string name="pref_video_blocker_category">חוסם וידאו</string>
+    <string name="pref_summary_enable_video_blocker">חוסם וידאו.</string>
+    <string name="pref_channels_filter_category">מסנני ערוצים</string>
+    <string name="pref_title_channel_filter_method">שיטת סינון ערוצים</string>
+    <string name="pref_summary_channel_filter_method">בחירת שיטת סינון ערוצים: %s</string>
+    <string name="disabled">כבויה</string>
+    <string name="app_license">כל הזכויות שמורות © 2015–‏2018 לרמון מספוד\n \nהתוכנית הזאת מסופקת במסגרת תוכנה חופשית: אפשר להפיץ אותה מחדש ו/או שלנות אותה בכפוף לתנאי הרישיון הציבורי הכללי של גנו כפי שפורסם על ידי המוסד לתוכנה חופשית (גרסה 3 של הרישיון). \n\nהתוכנית הזאת מופצת בתקווה שתביא תועלת אך ללא שום אחריות, אפילו לא אחריות מרומזת בנוגע לשימוש מסחרי או התאמה למטרה מסוימת. אפשר לעיין ברישיון הציבורי הכללי של גנו למידע נוסף.\n\nלתוכנית הזאת אמור היה מצורף עותק של הרישיון הציבורי הכללי של גנו. אם לא, כדאי לגשת אל &lt;https://www.gnu.org/licenses/&gt;</string>
 </resources>
