@@ -14,4 +14,5 @@
     <string name="open_channel">Obrir Canal</string>
     <string name="subscribing_to_channels">Subscrivint als canals…</string>
     <string name="feed">Feed</string>
+    <string name="channel_related">Canal...</string>
 </resources>
