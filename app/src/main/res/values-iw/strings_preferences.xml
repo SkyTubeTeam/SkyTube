@@ -185,4 +185,10 @@
     <string name="pref_summary_channel_filter_method">בחירת שיטת סינון ערוצים: %s</string>
     <string name="disabled">כבויה</string>
     <string name="app_license">כל הזכויות שמורות © 2015–‏2018 לרמון מספוד\n \nהתוכנית הזאת מסופקת במסגרת תוכנה חופשית: אפשר להפיץ אותה מחדש ו/או שלנות אותה בכפוף לתנאי הרישיון הציבורי הכללי של גנו כפי שפורסם על ידי המוסד לתוכנה חופשית (גרסה 3 של הרישיון). \n\nהתוכנית הזאת מופצת בתקווה שתביא תועלת אך ללא שום אחריות, אפילו לא אחריות מרומזת בנוגע לשימוש מסחרי או התאמה למטרה מסוימת. אפשר לעיין ברישיון הציבורי הכללי של גנו למידע נוסף.\n\nלתוכנית הזאת אמור היה מצורף עותק של הרישיון הציבורי הכללי של גנו. אם לא, כדאי לגשת אל &lt;https://www.gnu.org/licenses/&gt;</string>
+    <string name="pref_title_use_dislike_api">החזרת מונה דחייה (דיסלייק)</string>
+    <string name="pref_summary_use_dislike_api">החזרת מונה דחייה (דיסלייק) באמצעות returnyoutubedislike.com</string>
+    <string name="pref_video_download_maximum_resolution_title">רזולוציית הורדת הווידאו הגבוהה ביותר</string>
+    <string name="pref_video_download_maximum_resolution_summary">הורדות הווידאו תהיינה %s לכל היותר</string>
+    <string name="channel_blacklist_update_failure">לא ניתן להסיר את הערוצים הנבחרים מרשימת החסימה…</string>
+    <string name="channel_whitelist_updated">יש לרענן את הסרטונים כדי להשתמש ברשימת הערוצים המורשים החדשה.</string>
 </resources>
