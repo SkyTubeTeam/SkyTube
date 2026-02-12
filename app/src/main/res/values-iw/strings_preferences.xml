@@ -191,4 +191,6 @@
     <string name="pref_video_download_maximum_resolution_summary">הורדות הווידאו תהיינה %s לכל היותר</string>
     <string name="channel_blacklist_update_failure">לא ניתן להסיר את הערוצים הנבחרים מרשימת החסימה…</string>
     <string name="channel_whitelist_updated">יש לרענן את הסרטונים כדי להשתמש ברשימת הערוצים המורשים החדשה.</string>
+    <string name="channel_whitelist_update_failure">לא ניתן להוסיף את הערוץ שסופק לרשימת ההיתר.</string>
+    <string name="channel_unwhitelist_failure">הסרת הערוצים שסופקו מרשימת הערוצים המורשים נכשלה</string>
 </resources>
