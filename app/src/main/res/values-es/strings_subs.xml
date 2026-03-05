@@ -20,7 +20,7 @@
     <string name="failed_to_import_subscriptions">No se pueden importar sus suscripciones de YouTube.</string>
     <string name="about">Acerca de</string>
     <string name="unsubscribe_from_all_current_sibbed_channels">Desuscribir de todos los canales suscritos actualmente .</string>
-    <string name="channel_subscribe_failed">No se pudo suscribir al canal</string>
+    <string name="channel_subscribe_failed">No se pudo subscribir al canal</string>
     <string name="channel_already_subscribed">Suscrito ya</string>
     <string name="channel_subscribed">Suscrito al canal</string>
     <string name="channel_unsubscribed">No suscrito al canal</string>
