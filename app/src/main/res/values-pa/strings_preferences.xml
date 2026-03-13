@@ -181,4 +181,22 @@
     <string name="pref_summary_require_pin_code">ਕੁਝ ਸੋਧਾਂ ਲਈ ਪਿੰਨ ਕੋਡ ਦਰਜ ਕਰਨਾ ਜ਼ਰੂਰੀ ਹੈ।</string>
     <string name="pref_title_change_security_pin">ਸੁਰੱਖਿਆ ਪਿੰਨ ਬਦਲੋ</string>
     <string name="pref_summary_change_security_pin">ਤਰਜੀਹਾਂ ਅਤੇ ਸੰਵੇਦਨਸ਼ੀਲ ਕਾਰਵਾਈਆਂ ਤੱਕ ਪਹੁੰਚ ਦੀ ਰੱਖਿਆ ਲਈ ਪਿੰਨ ਬਦਲੋ।</string>
+    <string name="pref_title_export_subs_opml">OPML ਵਿੱਚ ਸਬਸਕ੍ਰਿਪਸ਼ਨਾਂ ਨਿਰਯਾਤ ਕਰੋ</string>
+    <string name="pref_summary_export_subs_opml">ਆਪਣੀਆਂ ਸਬਸਕ੍ਰਿਪਸ਼ਨਾਂ ਨੂੰ ਇੱਕ OPML ਫਾਈਲ ਵਿੱਚ ਨਿਰਯਾਤ ਕਰੋ।</string>
+    <string name="pref_title_import_subs_opml">OPML ਤੋਂ ਸਬਸਕ੍ਰਿਪਸ਼ਨਾਂ ਆਯਾਤ ਕਰੋ</string>
+    <string name="pref_summary_import_subs_opml">ਇੱਕ OPML ਫਾਈਲ ਤੋਂ ਆਪਣੀਆਂ ਸਬਸਕ੍ਰਿਪਸ਼ਨਾਂ ਆਯਾਤ ਕਰੋ।</string>
+    <string name="opml_file_picker_title">OPML ਫਾਈਲ ਚੁਣੋ</string>
+    <string name="subscriptions_exporting_opml">OPML ਵਿੱਚ ਸਬਸਕ੍ਰਿਪਸ਼ਨਾਂ ਨਿਰਯਾਤ ਕੀਤੀਆਂ ਜਾ ਰਹੀਆਂ ਹਨ…</string>
+    <string name="subscriptions_export_opml_success">ਸਬਸਕ੍ਰਿਪਸ਼ਨਾਂ ਨੂੰ %s ਵਜੋਂ ਸਫਲਤਾਪੂਰਵਕ ਨਿਰਯਾਤ ਕੀਤਾ ਗਿਆ</string>
+    <string name="subscriptions_export_opml_fail">OPML ਵਿੱਚ ਸਬਸਕ੍ਰਿਪਸ਼ਨਾਂ ਨਿਰਯਾਤ ਨਹੀਂ ਕੀਤੀਆਂ ਜਾ ਸਕੀਆਂ।</string>
+    <string name="opml_export_unknown_filename">ਅਗਿਆਤ ਫਾਈਲ ਨਾਮ</string>
+    <string name="opml_export_title">OPML ਵਿੱਚ ਸਬਸਕ੍ਰਿਪਸ਼ਨਾਂ ਨਿਰਯਾਤ ਕਰੋ</string>
+    <string name="opml_export_message">ਆਪਣੇ OPML ਨਿਰਯਾਤ ਲਈ ਇੱਕ ਫਾਈਲ ਨਾਮ ਚੁਣੋ:</string>
+    <string name="opml_export_confirm">ਨਿਰਯਾਤ ਕਰੋ</string>
+    <string name="opml_export_cancel">ਰੱਦ ਕਰੋ</string>
+    <string name="opml_directory_title">ਨਿਰਯਾਤ ਸਥਾਨ ਚੁਣੋ</string>
+    <string name="opml_directory_message">OPML ਨਿਰਯਾਤ ਲਈ ਡਾਇਰੈਕਟਰੀ ਚੁਣੋ:</string>
+    <string name="opml_directory_use_default">ਡਿਫ਼ਾਲਟ (ਡਾਊਨਲੋਡ) ਵਰਤੋ</string>
+    <string name="opml_directory_select">ਡਾਇਰੈਕਟਰੀ ਚੁਣੋ</string>
+    <string name="opml_export_location">ਨਿਰਯਾਤ ਸਥਾਨ: %s</string>
 </resources>
