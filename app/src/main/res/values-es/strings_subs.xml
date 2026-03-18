@@ -15,7 +15,7 @@
     <string name="select_all">Seleccionar todo</string>
     <string name="select_none">Quitar selección</string>
     <string name="no_channels_found">No encontramos canales en el archivo que ha subido.</string>
-    <string name="no_new_channels_found">No se encontraron canales de YouTube a los que estés suscrito.</string>
+    <string name="no_new_channels_found">No se encontraron canales de YouTube a los que no estés suscrito.</string>
     <string name="import_subscriptions_parse_error">No se puede analizar el archivo que ha subido: %s.</string>
     <string name="failed_to_import_subscriptions">No se pueden importar sus suscripciones de YouTube.</string>
     <string name="about">Acerca de</string>
