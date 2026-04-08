@@ -203,4 +203,5 @@
     <string name="opml_directory_title">Speicherort für Export auswählen</string>
     <string name="opml_directory_message">Verzeichnis für OPML-Export auswählen:</string>
     <string name="opml_directory_select">Verzeichnis auswählen</string>
+    <string name="opml_file_picker_title">OPML-Datei auswählen</string>
 </resources>
