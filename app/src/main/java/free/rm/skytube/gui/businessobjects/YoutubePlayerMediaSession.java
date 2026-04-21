@@ -17,21 +17,17 @@ import free.rm.skytube.businessobjects.interfaces.YouTubePlayerFragmentInterface
 public final class YoutubePlayerMediaSession {
     private final MediaSessionCompat mediaSession;
 
-
     public YoutubePlayerMediaSession(Context context) {
         mediaSession = new MediaSessionCompat(context, context.getString(R.string.app_name));
     }
-
 
     public void setActive(boolean active) {
         mediaSession.setActive(active);
     }
 
-
     public void release() {
         mediaSession.release();
     }
-
 
     public void bindToPlayer(YouTubePlayerFragmentInterface player) {
         bindPlayerControlCallbacks(player);
@@ -39,18 +35,15 @@ public final class YoutubePlayerMediaSession {
         setActive(true);
     }
 
-
     private void bindPlayerControlCallbacks(YouTubePlayerFragmentInterface player) {
         MediaSessionCompat.Callback callback = createMediaSessionCallback(player);
         mediaSession.setCallback(callback);
     }
 
-
     private void bindPlayerStateListener(YouTubePlayerFragmentInterface player) {
         PlaybackStateListener playbackStateListener = createPlaybackStateListener(mediaSession);
         player.setPlaybackStateListener(playbackStateListener);
     }
-
 
     private MediaSessionCompat.Callback createMediaSessionCallback(YouTubePlayerFragmentInterface player) {
         return new MediaSessionCompat.Callback() {

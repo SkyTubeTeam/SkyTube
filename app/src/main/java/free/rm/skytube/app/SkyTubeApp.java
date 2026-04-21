@@ -209,6 +209,17 @@ public class SkyTubeApp extends MultiDexApplication {
 		return skyTubeApp.getString(stringResId);
 	}
 
+	/**
+	 * Returns a localised string formatted with the given arguments.
+	 *
+	 * @param stringResId String resource ID (e.g. R.string.my_string)
+	 * @param formatArgs  Arguments referenced by the format string
+	 * @return Localised string, from the strings XML file.
+	 */
+	public static String getStr(int stringResId, Object... formatArgs) {
+		return skyTubeApp.getString(stringResId, formatArgs);
+	}
+
 
 	/**
 	 * Given a string array resource ID, it returns an array of strings.

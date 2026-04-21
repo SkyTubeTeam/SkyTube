@@ -32,6 +32,7 @@ import com.google.android.exoplayer2.source.dash.manifest.DashManifest;
 import com.google.android.exoplayer2.source.dash.manifest.DashManifestParser;
 import com.google.android.exoplayer2.source.smoothstreaming.manifest.SsManifest;
 import com.google.android.exoplayer2.source.smoothstreaming.manifest.SsManifestParser;
+import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 
 import org.schabi.newpipe.extractor.MediaFormat;
@@ -53,55 +54,117 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import free.rm.skytube.app.StreamSelectionPolicy;
 import free.rm.skytube.businessobjects.Logger;
 
 public class DatasourceBuilder {
     private final ExoPlayer player;
+    private final DefaultTrackSelector trackSelector;
 
     private final PlayerDataSource playerDataSource;
     private final SingleSampleMediaSource.Factory singleSampleSourceFactory;
 
-    public DatasourceBuilder(Context context, ExoPlayer player) {
+    public DatasourceBuilder(Context context, ExoPlayer player, DefaultTrackSelector trackSelector) {
         this.player = player;
+        this.trackSelector = Objects.requireNonNull(trackSelector, "trackSelector");
         DefaultBandwidthMeter bandwidthMeter = new DefaultBandwidthMeter.Builder(context).build();
         playerDataSource = new PlayerDataSource(context, bandwidthMeter);
         singleSampleSourceFactory = playerDataSource.getSingleSampleMediaSourceFactory();
     }
 
-    public void play(StreamSelectionPolicy.StreamSelection selection, @Nullable StreamInfo streamInfo) {
+    public TrackSelectionManager play(StreamSelectionPolicy.StreamSelection selection,
+                                      @Nullable StreamInfo streamInfo) {
         Objects.requireNonNull(selection, "selection");
         final String cacheKey = streamInfo != null ? streamInfo.getId() : null;
         final List<MediaSource> sources = new ArrayList<>();
+        final List<AudioStream> audioStreams;
 
         if (selection.isHls()) {
             sources.add(buildHlsMediaSource(selection.getHlsUrl(), streamInfo, cacheKey));
+            audioStreams = addAudioSources(sources, null, streamInfo, cacheKey);
         } else {
             sources.add(buildMediaSource(selection.getVideoStream(), streamInfo, cacheKey));
-            if (selection.getAudioStream() != null) {
-                sources.add(buildMediaSource(selection.getAudioStream(), streamInfo, cacheKey));
-            }
+            audioStreams = addAudioSources(sources, selection.getAudioStream(), streamInfo, cacheKey);
         }
-        if (streamInfo != null) {
-            addSubtitles(sources, streamInfo);
-        }
+        final List<SubtitlesStream> subtitles = addSubtitles(sources, streamInfo);
         preparePlayer(sources);
+        return buildTrackSelectionManager(streamInfo, audioStreams, subtitles);
     }
 
-    public void play(Uri videoUri, @Nullable Uri audioUri, @Nullable StreamInfo streamInfo) {
+    /**
+     * Adds every playable audio stream as a separate media source and returns the streams that
+     * were actually added. Those streams are the source of truth for the audio options exposed by
+     * {@link TrackSelectionManager}.
+     */
+    private List<AudioStream> addAudioSources(List<MediaSource> sources, AudioStream selectedAudio,
+                                              @Nullable StreamInfo streamInfo, @Nullable String cacheKey) {
+        final Set<String> addedStreams = new LinkedHashSet<>();
+        final List<AudioStream> result = new ArrayList<>();
+
+        if (streamInfo != null && streamInfo.getAudioStreams() != null) {
+            for (AudioStream audioStream : streamInfo.getAudioStreams()) {
+                if (!isPlayable(audioStream) || !addedStreams.add(audioStreamKey(audioStream))) {
+                    continue;
+                }
+                if (addAudioSource(sources, audioStream, streamInfo, cacheKey)) {
+                    result.add(audioStream);
+                }
+            }
+        }
+
+        if (result.isEmpty() && isPlayable(selectedAudio)
+                && addedStreams.add(audioStreamKey(selectedAudio))) {
+            if (addAudioSource(sources, selectedAudio, streamInfo, cacheKey)) {
+                result.add(selectedAudio);
+            }
+        }
+        Logger.i(this, "Added %d playable audio sources (policy selected: %s)", result.size(),
+                audioStreamKey(selectedAudio));
+        return result;
+    }
+
+    private boolean addAudioSource(List<MediaSource> sources, AudioStream audioStream,
+                                   @Nullable StreamInfo streamInfo, @Nullable String cacheKey) {
+        try {
+            sources.add(buildMediaSource(audioStream, streamInfo, cacheKey));
+            return true;
+        } catch (RuntimeException e) {
+            Logger.w(this, "Could not add audio stream %s: %s", audioStreamKey(audioStream), e.getMessage());
+            return false;
+        }
+    }
+
+    private static boolean isPlayable(AudioStream audioStream) {
+        return audioStream != null && audioStream.isUrl()
+                && audioStream.getContent() != null && !audioStream.getContent().isEmpty();
+    }
+
+    private static String audioStreamKey(AudioStream audioStream) {
+        if (audioStream == null) {
+            return "null";
+        }
+        return audioStream.getContent() + "|" + audioStream.getFormatId();
+    }
+
+    public TrackSelectionManager play(Uri videoUri, @Nullable Uri audioUri, @Nullable StreamInfo streamInfo) {
         Objects.requireNonNull(videoUri, "videoUri is required");
         final List<MediaSource> sources = new ArrayList<>();
         sources.add(createLocalSource(videoUri));
         if (audioUri != null) {
             sources.add(createLocalSource(audioUri));
         }
-        if (streamInfo != null) {
-            addSubtitles(sources, streamInfo);
-        }
+        final List<SubtitlesStream> subtitles = addSubtitles(sources, streamInfo);
         preparePlayer(sources);
+        // Local files never expose alternative audio tracks, so the manager is intentionally
+        // bare-bone on the audio side even when the caller supplies subtitle metadata.
+        return new TrackSelectionManager(trackSelector, Collections.emptyList(),
+                buildSubtitleTracks(subtitles));
     }
 
     private MediaSource createLocalSource(Uri uri) {
@@ -258,13 +321,14 @@ public class DatasourceBuilder {
                 .createMediaSource(manifest, mediaItem(stream.getContent(), cacheKey));
     }
 
-    private void addSubtitles(List<MediaSource> sources, StreamInfo streamInfo) {
-        final List<SubtitlesStream> subtitles = streamInfo.getSubtitles();
-        if (subtitles == null) {
-            return;
+    private List<SubtitlesStream> addSubtitles(List<MediaSource> sources,
+                                               @Nullable StreamInfo streamInfo) {
+        final List<SubtitlesStream> added = new ArrayList<>();
+        if (streamInfo == null || streamInfo.getSubtitles() == null) {
+            return added;
         }
-        for (SubtitlesStream subtitle : subtitles) {
-            if (!subtitle.isUrl()) {
+        for (SubtitlesStream subtitle : streamInfo.getSubtitles()) {
+            if (!subtitle.isUrl() || subtitle.getLocale() == null) {
                 continue;
             }
             final MediaFormat format = subtitle.getFormat();
@@ -281,7 +345,63 @@ public class DatasourceBuilder {
                             .setLanguage(subtitle.getLocale().getLanguage())
                             .build();
             sources.add(singleSampleSourceFactory.createMediaSource(configuration, C.TIME_UNSET));
+            added.add(subtitle);
         }
+        return added;
+    }
+
+    /**
+     * Builds a manager entirely from the metadata of the streams that were just prepared, instead
+     * of making the manager discover tracks from the player after the fact.
+     */
+    private TrackSelectionManager buildTrackSelectionManager(@Nullable StreamInfo streamInfo,
+                                                             List<AudioStream> audioStreams,
+                                                             List<SubtitlesStream> subtitles) {
+        return new TrackSelectionManager(trackSelector, buildAudioTracks(streamInfo, audioStreams),
+                buildSubtitleTracks(subtitles));
+    }
+
+    private List<TrackSelectionManager.AudioTrackInfo> buildAudioTracks(@Nullable StreamInfo streamInfo,
+                                                  List<AudioStream> audioStreams) {
+        if (audioStreams.isEmpty()) {
+            return Collections.emptyList();
+        }
+        final Set<String> translatedLanguages =
+                TrackSelectionManager.findAutoTranslatedAudioLanguages(streamInfo);
+        final List<TrackSelectionManager.AudioTrackInfo> tracks = new ArrayList<>();
+        for (AudioStream audioStream : audioStreams) {
+            final String language = TrackSelectionManager.normalizeLanguage(audioLanguage(audioStream));
+            final boolean translated = translatedLanguages.contains(language);
+            final int bitrate = audioStream.getAverageBitrate() > 0
+                    ? audioStream.getAverageBitrate() : TrackSelectionManager.NO_BITRATE;
+            tracks.add(new TrackSelectionManager.AudioTrackInfo(language,
+                    TrackSelectionManager.getLanguageDisplayName(language, translated),
+                    bitrate, translated));
+        }
+        return tracks;
+    }
+
+    private static String audioLanguage(AudioStream audioStream) {
+        if (audioStream.getAudioLocale() != null) {
+            return audioStream.getAudioLocale().getLanguage();
+        }
+        final ItagItem itagItem = audioStream.getItagItem();
+        return itagItem != null && itagItem.getAudioLocale() != null
+                ? itagItem.getAudioLocale().getLanguage() : null;
+    }
+
+    private List<TrackSelectionManager.SubtitleTrackInfo> buildSubtitleTracks(List<SubtitlesStream> subtitles) {
+        if (subtitles.isEmpty()) {
+            return Collections.emptyList();
+        }
+        final List<TrackSelectionManager.SubtitleTrackInfo> tracks = new ArrayList<>();
+        for (SubtitlesStream subtitle : subtitles) {
+            final String language =
+                    TrackSelectionManager.normalizeLanguage(subtitle.getLocale().getLanguage());
+            tracks.add(new TrackSelectionManager.SubtitleTrackInfo(language,
+                    TrackSelectionManager.getLanguageDisplayName(language)));
+        }
+        return tracks;
     }
 
     private MediaItem mediaItem(@Nullable String url, @Nullable String cacheKey) {
