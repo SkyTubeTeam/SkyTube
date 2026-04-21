@@ -105,7 +105,7 @@ public class StreamSelectionPolicy {
         }
         AudioStream best = null;
         for (AudioStream audioStream : streamInfo.getAudioStreams()) {
-            if (isBetter(best, audioStream)) {
+            if (isOriginalAudio(audioStream) && isBetter(best, audioStream)) {
                 if (BuildConfig.DEBUG) {
                     Logger.d(this, "better %s -> %s", toHumanReadable(best), toHumanReadable(audioStream));
                 }
@@ -120,6 +120,12 @@ public class StreamSelectionPolicy {
 
     private static String toHumanReadable(AudioStream as) {
         return as != null ? "AudioStream(" + as.getAverageBitrate() + ", " + as.getFormat() + ", codec=" + as.getCodec() + ", q=" + as.getQuality() + ", isUrl=" + as.isUrl() + ",delivery=" + as.getDeliveryMethod() + ")" : "NULL";
+    }
+
+    private static boolean isOriginalAudio(AudioStream audioStream) {
+        AudioTrackType trackType = audioStream.getAudioTrackType();
+        // Accept streams with ORIGINAL type, or with null type (unknown/legacy)
+        return trackType == null || trackType == AudioTrackType.ORIGINAL;
     }
 
     private boolean isBetter(AudioStream best, AudioStream other) {
