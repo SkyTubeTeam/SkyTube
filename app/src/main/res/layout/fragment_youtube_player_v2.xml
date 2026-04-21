@@ -18,6 +18,56 @@
 		app:player_layout_id="@layout/exo_simple_player_view"
 		tools:context="com.example.ramon.exoplayertest.MainActivity" />
 
+	<!-- Audio language selector (top left of description drawer) -->
+	<TextView
+		android:id="@+id/audioLanguageSelector"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="top|start"
+		android:layout_marginStart="16dp"
+		android:layout_marginTop="70dp"
+		android:background="#99000000"
+		android:clickable="true"
+		android:focusable="true"
+		android:padding="8dp"
+		android:text="@string/audio_language_selector_label"
+		android:textColor="@android:color/white"
+		android:textSize="14sp"
+		android:visibility="gone" />
+
+	<!-- Audio quality selector (below the language selector) -->
+	<TextView
+		android:id="@+id/audioQualitySelector"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="top|start"
+		android:layout_marginStart="16dp"
+		android:layout_marginTop="110dp"
+		android:background="#99000000"
+		android:clickable="true"
+		android:focusable="true"
+		android:padding="8dp"
+		android:text="@string/audio_quality_selector_label"
+		android:textColor="@android:color/white"
+		android:textSize="14sp"
+		android:visibility="gone" />
+
+	<!-- Subtitle Selector (below audio) -->
+	<TextView
+		android:id="@+id/subtitleSelector"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="top|start"
+		android:layout_marginStart="16dp"
+		android:layout_marginTop="150dp"
+		android:background="#99000000"
+		android:clickable="true"
+		android:focusable="true"
+		android:padding="8dp"
+		android:text="@string/subtitle_selector_label"
+		android:textColor="@android:color/white"
+		android:textSize="14sp"
+		android:visibility="gone" />
 
 	<!-- Progress bar that will be displayed before a video is loaded -->
 	<ProgressBar

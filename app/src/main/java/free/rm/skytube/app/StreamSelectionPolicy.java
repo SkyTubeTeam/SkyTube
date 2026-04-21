@@ -48,23 +48,32 @@ public class StreamSelectionPolicy {
     private final VideoResolution minResolution;
     private final VideoQuality videoQuality;
     private final boolean allowHlsFallback;
+    private final String preferredAudioLanguage;
 
     public StreamSelectionPolicy(boolean allowVideoOnly, VideoResolution maxResolution, VideoResolution minResolution, VideoQuality videoQuality) {
-        this(allowVideoOnly, maxResolution, minResolution, videoQuality, false);
+        this(allowVideoOnly, maxResolution, minResolution, videoQuality, false, null);
+    }
+
+    public StreamSelectionPolicy(boolean allowVideoOnly, VideoResolution maxResolution,
+                                 VideoResolution minResolution, VideoQuality videoQuality,
+                                 String preferredAudioLanguage) {
+        this(allowVideoOnly, maxResolution, minResolution, videoQuality, false, preferredAudioLanguage);
     }
 
     private StreamSelectionPolicy(boolean allowVideoOnly, VideoResolution maxResolution,
                                   VideoResolution minResolution, VideoQuality videoQuality,
-                                  boolean allowHlsFallback) {
+                                  boolean allowHlsFallback, String preferredAudioLanguage) {
         this.allowVideoOnly = allowVideoOnly;
         this.maxResolution = maxResolution != VideoResolution.RES_UNKNOWN ? maxResolution : null;
         this.minResolution = minResolution != VideoResolution.RES_UNKNOWN ? minResolution : null;
         this.videoQuality = videoQuality;
         this.allowHlsFallback = allowHlsFallback;
+        this.preferredAudioLanguage = preferredAudioLanguage;
     }
 
     public StreamSelectionPolicy withAllowVideoOnly(boolean newValue) {
-        return new StreamSelectionPolicy(newValue, maxResolution, minResolution, videoQuality, allowHlsFallback);
+        return new StreamSelectionPolicy(newValue, maxResolution, minResolution, videoQuality,
+                allowHlsFallback, preferredAudioLanguage);
     }
 
     /**
@@ -79,7 +88,8 @@ public class StreamSelectionPolicy {
      * @return a new {@code StreamSelectionPolicy}
      */
     public StreamSelectionPolicy withHlsFallback(boolean newValue) {
-        return new StreamSelectionPolicy(allowVideoOnly, maxResolution, minResolution, videoQuality, newValue);
+        return new StreamSelectionPolicy(allowVideoOnly, maxResolution, minResolution, videoQuality,
+                newValue, preferredAudioLanguage);
     }
 
     /**
@@ -90,7 +100,24 @@ public class StreamSelectionPolicy {
      * @return a new {@code StreamSelectionPolicy} restricted to {@code res}
      */
     public StreamSelectionPolicy withResolution(VideoResolution res) {
-        return new StreamSelectionPolicy(allowVideoOnly, res, res, videoQuality, allowHlsFallback);
+        return new StreamSelectionPolicy(allowVideoOnly, res, res, videoQuality,
+                allowHlsFallback, preferredAudioLanguage);
+    }
+
+    /**
+     * Returns a new policy that prefers the given audio language when an audio stream has to be
+     * picked for a video-only stream.
+     *
+     * @param newPreferredAudioLanguage language code (for example {@code "en"}), or {@code null}
+     * @return a new {@code StreamSelectionPolicy}
+     */
+    public StreamSelectionPolicy withLanguage(String newPreferredAudioLanguage) {
+        return new StreamSelectionPolicy(allowVideoOnly, maxResolution, minResolution, videoQuality,
+                allowHlsFallback, newPreferredAudioLanguage);
+    }
+
+    public String getPreferredAudioLanguage() {
+        return preferredAudioLanguage;
     }
 
     public StreamSelection select(StreamInfo streamInfo) {
@@ -130,6 +157,7 @@ public class StreamSelectionPolicy {
         }
         sb.append(", videoQuality=").append(videoQuality);
         sb.append(", allowHlsFallback=").append(allowHlsFallback);
+        sb.append(", preferredAudioLanguage=").append(preferredAudioLanguage);
         sb.append('}');
         return sb.toString();
     }
@@ -147,14 +175,30 @@ public class StreamSelectionPolicy {
     }
 
     private AudioStream pickAudio(StreamInfo streamInfo) {
+        final List<AudioStream> audioStreams = streamInfo.getAudioStreams();
+        if (audioStreams == null || audioStreams.isEmpty()) {
+            return null;
+        }
         if (BuildConfig.DEBUG) {
-            for (AudioStream vs : streamInfo.getAudioStreams()) {
+            for (AudioStream vs : audioStreams) {
                 Logger.d(this, "AudioStream %s", toHumanReadable(vs));
             }
         }
+
+        // An explicitly selected language always wins over the "original" stream.
+        if (preferredAudioLanguage != null) {
+            AudioStream preferred = findAudioByLanguage(audioStreams, preferredAudioLanguage);
+            if (preferred != null) {
+                if (BuildConfig.DEBUG) {
+                    Logger.d(this, "preferred audio %s", toHumanReadable(preferred));
+                }
+                return preferred;
+            }
+        }
+
         AudioStream best = null;
-        for (AudioStream audioStream : streamInfo.getAudioStreams()) {
-            if (isOriginalAudio(audioStream) && isBetter(best, audioStream)) {
+        for (AudioStream audioStream : audioStreams) {
+            if (audioStream != null && isOriginalAudio(audioStream) && isBetter(best, audioStream)) {
                 if (BuildConfig.DEBUG) {
                     Logger.d(this, "better %s -> %s", toHumanReadable(best), toHumanReadable(audioStream));
                 }
@@ -167,8 +211,22 @@ public class StreamSelectionPolicy {
         return best;
     }
 
+    private AudioStream findAudioByLanguage(List<AudioStream> audioStreams, String languageCode) {
+        AudioStream bestMatch = null;
+        for (AudioStream audioStream : audioStreams) {
+            if (audioStream == null || audioStream.getAudioLocale() == null) {
+                continue;
+            }
+            String lang = audioStream.getAudioLocale().getLanguage();
+            if (lang != null && lang.equalsIgnoreCase(languageCode) && isBetter(bestMatch, audioStream)) {
+                bestMatch = audioStream;
+            }
+        }
+        return bestMatch;
+    }
+
     private static String toHumanReadable(AudioStream as) {
-        return as != null ? "AudioStream(" + as.getAverageBitrate() + ", " + as.getFormat() + ", codec=" + as.getCodec() + ", q=" + as.getQuality() + ", isUrl=" + as.isUrl() + ",delivery=" + as.getDeliveryMethod() + ")" : "NULL";
+        return as != null ? "AudioStream(" + as.getAverageBitrate() + ", " + as.getFormat() + ", codec=" + as.getCodec() + ", q=" + as.getQuality() + ", isUrl=" + as.isUrl() + ",delivery=" + as.getDeliveryMethod() + ",type=" + as.getAudioTrackType() + ",loc=" + as.getAudioLocale() + ")" : "NULL";
     }
 
     private static boolean isOriginalAudio(AudioStream audioStream) {

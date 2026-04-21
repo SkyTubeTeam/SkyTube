@@ -143,7 +143,7 @@ public class FeedUpdateTask {
 
 
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
-            Log.e(TAG, "Pending intent call?");
+            Log.e(TAG, "Pending intent call: SDK=" + Build.VERSION.SDK_INT + " < Build.VERSION_CODES.O[" + Build.VERSION_CODES.O + "]");
             PendingIntent pendingIntent = PendingIntentCompat.getActivity(context,
                     1, new Intent(), PendingIntent.FLAG_UPDATE_CURRENT, false);
             builder.setPriority(NotificationCompat.FLAG_ONGOING_EVENT)

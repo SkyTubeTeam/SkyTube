@@ -228,7 +228,9 @@ public class Settings {
         boolean useNewFormats = prefs.getBoolean(SkyTubeApp.getStr(R.string.pref_key_use_newer_formats), false);
 
         // Downloads can also use the video-only streams (the audio is fetched as a separate file).
-        return new StreamSelectionPolicy(useNewFormats, maxResolution, minResolution, quality);
+        // Playback additionally honours the audio language selected by the user.
+        return new StreamSelectionPolicy(!forDownload && useNewFormats, maxResolution, minResolution, quality,
+                forDownload ? null : getPreferredAudioTrack());
     }
 
     public StreamSelectionPolicy getDesiredVideoResolution(boolean forDownload) {
@@ -386,6 +388,12 @@ public class Settings {
         editor.apply();
     }
 
+    private void setPreference(String preferenceName, int value) {
+        final SharedPreferences.Editor editor = getSharedPreferences().edit();
+        editor.putInt(preferenceName, value);
+        editor.apply();
+    }
+
     private void setPreference(@StringRes int resId, String value) {
         setPreference(getStr(resId), value);
     }
@@ -394,12 +402,20 @@ public class Settings {
         return getSharedPreferences().getString(SkyTubeApp.getStr(resId), defaultValue);
     }
 
+    private String getPreference(String preference, String defaultValue) {
+        return getSharedPreferences().getString(preference, defaultValue);
+    }
+
     private boolean getPreference(@StringRes int resId, boolean defaultValue) {
         return getSharedPreferences().getBoolean(SkyTubeApp.getStr(resId), defaultValue);
     }
 
     private boolean getPreference(String preference, boolean defaultValue) {
         return getSharedPreferences().getBoolean(preference, defaultValue);
+    }
+
+    private int getPreference(String preference, int defaultValue) {
+        return getSharedPreferences().getInt(preference, defaultValue);
     }
 
     private Set<String> getPreference(@StringRes int resId, Set<String> defaultValue) {
@@ -431,5 +447,52 @@ public class Settings {
         } catch (NumberFormatException nfe) {
             return 1.0F;
         }
+    }
+
+    // Track preference keys
+    private static final String PREF_KEY_PREFERRED_AUDIO_TRACK = "preferred_audio_track";
+    private static final String PREF_KEY_PREFERRED_AUDIO_QUALITY = "preferred_audio_quality";
+    private static final String PREF_KEY_PREFERRED_SUBTITLE_TRACK = "preferred_subtitle_track";
+    private static final String PREF_KEY_PREFERRED_SUBTITLE_ENABLED = "preferred_subtitle_enabled";
+
+    /**
+     * @return the preferred audio language code (for example "en"), or null if not set
+     */
+    public String getPreferredAudioTrack() {
+        return getPreference(PREF_KEY_PREFERRED_AUDIO_TRACK, null);
+    }
+
+    public void setPreferredAudioTrack(String languageCode) {
+        setPreference(PREF_KEY_PREFERRED_AUDIO_TRACK, languageCode);
+    }
+
+    /**
+     * @return the preferred audio bitrate in bits per second, or 0 if not set
+     */
+    public int getPreferredAudioQuality() {
+        return getPreference(PREF_KEY_PREFERRED_AUDIO_QUALITY, 0);
+    }
+
+    public void setPreferredAudioQuality(int bitrate) {
+        setPreference(PREF_KEY_PREFERRED_AUDIO_QUALITY, bitrate);
+    }
+
+    /**
+     * @return the preferred subtitle language code (for example "en"), or null if not set
+     */
+    public String getPreferredSubtitleTrack() {
+        return getPreference(PREF_KEY_PREFERRED_SUBTITLE_TRACK, null);
+    }
+
+    public void setPreferredSubtitleTrack(String languageCode) {
+        setPreference(PREF_KEY_PREFERRED_SUBTITLE_TRACK, languageCode);
+    }
+
+    public boolean getPreferredSubtitleEnabled() {
+        return getPreference(PREF_KEY_PREFERRED_SUBTITLE_ENABLED, false);
+    }
+
+    public void setPreferredSubtitleEnabled(boolean enabled) {
+        setPreference(PREF_KEY_PREFERRED_SUBTITLE_ENABLED, enabled);
     }
 }

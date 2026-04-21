@@ -32,4 +32,23 @@
     <string name="cleaner_watched_bookmarks">Remove watched bookmarks</string>
     <string name="video_comments_are_disabled">Video comments off</string>
     <string name="incorrect_pin">Incorrect PIN</string>
+    <string name="track_selection">Audio/Subtitles</string>
+    <string name="no_tracks_available">No tracks available</string>
+    <string name="track_off">Off</string>
+    <string name="audio_tab">Audio</string>
+    <string name="subtitles_tab">Subtitles</string>
+
+    <!-- Track selector labels -->
+    <string name="audio_language_selector_label">Audio language</string>
+    <string name="audio_quality_selector_label">Audio quality</string>
+    <string name="audio_language_unknown">Unknown language</string>
+    <string name="audio_language_translated_pattern">%1$s (Translated)</string>
+    <string name="audio_quality_unknown">Default quality</string>
+    <string name="audio_quality_bitrate_bps">%1$d bps</string>
+    <string name="audio_quality_bitrate_kbps">%1$d kbps</string>
+    <string name="subtitle_selector_label">Subtitles</string>
+    <string name="no_audio_tracks">No alternative audio tracks</string>
+    <string name="no_audio_qualities">No audio qualities available</string>
+    <string name="no_subtitle_tracks">No subtitles available</string>
+    <string name="no_track_manager">No track manager</string>
 </resources>

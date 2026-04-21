@@ -3,6 +3,8 @@ package free.rm.skytube.app;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.schabi.newpipe.extractor.MediaFormat;
+import org.schabi.newpipe.extractor.stream.AudioStream;
+import org.schabi.newpipe.extractor.stream.AudioTrackType;
 import org.schabi.newpipe.extractor.stream.DeliveryMethod;
 import org.schabi.newpipe.extractor.stream.StreamInfo;
 import org.schabi.newpipe.extractor.stream.StreamType;
@@ -12,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 import free.rm.skytube.businessobjects.YouTube.VideoStream.VideoQuality;
 import free.rm.skytube.businessobjects.YouTube.VideoStream.VideoResolution;
@@ -124,6 +127,29 @@ public class StreamSelectionPolicyTest {
         Assertions.assertEquals(
                 Arrays.asList(VideoResolution.RES_2160P, VideoResolution.RES_1080P),
                 policy.getAvailableResolutions(streamInfo));
+    }
+
+    @Test
+    void testPreferredAudioLanguageIsPickedForVideoOnlyStream() {
+        AudioStream originalEnglish = audioStream("original", Locale.ENGLISH, 128000,
+                AudioTrackType.ORIGINAL);
+        AudioStream dubbedGerman = audioStream("german", Locale.GERMAN, 64000,
+                AudioTrackType.DUBBED);
+        StreamInfo streamInfo = streamInfo(
+                Collections.emptyList(),
+                Collections.singletonList(videoStream("720P", MediaFormat.WEBM, true, true)));
+        streamInfo.setAudioStreams(Arrays.asList(originalEnglish, dubbedGerman));
+
+        StreamSelectionPolicy.StreamSelection preferred =
+                policy(true).withLanguage("de").select(streamInfo);
+        Assertions.assertNotNull(preferred);
+        Assertions.assertEquals("url/german", preferred.getAudioStream().getContent(),
+                "The preferred language should be played instead of the original track");
+
+        StreamSelectionPolicy.StreamSelection fallback = policy(true).select(streamInfo);
+        Assertions.assertNotNull(fallback);
+        Assertions.assertEquals("url/original", fallback.getAudioStream().getContent(),
+                "Without a preference the original audio should be used");
     }
 
     @Test
@@ -283,6 +309,19 @@ public class StreamSelectionPolicyTest {
         streamInfo.setVideoStreams(videoStreams);
         streamInfo.setVideoOnlyStreams(videoOnlyStreams);
         return streamInfo;
+    }
+
+    private static AudioStream audioStream(String id, Locale locale, int bitrate,
+                                           AudioTrackType trackType) {
+        return new AudioStream.Builder()
+                .setId(id)
+                .setContent("url/" + id, true)
+                .setMediaFormat(MediaFormat.MPEG_4)
+                .setDeliveryMethod(DeliveryMethod.DASH)
+                .setAverageBitrate(bitrate)
+                .setAudioTrackType(trackType)
+                .setAudioLocale(locale)
+                .build();
     }
 
     private static VideoStream videoStream(String resolution, MediaFormat format, boolean isUrl) {

@@ -62,6 +62,7 @@
 				drawer:layout_constraintTop_toTopOf="parent"
 				tools:text="1.0x" />
 
+
 		</androidx.constraintlayout.widget.ConstraintLayout>
 
 	</FrameLayout>

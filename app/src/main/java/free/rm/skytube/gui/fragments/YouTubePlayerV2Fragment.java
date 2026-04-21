@@ -60,6 +60,7 @@ import com.google.android.exoplayer2.DefaultRenderersFactory;
 import com.google.android.exoplayer2.PlaybackException;
 import com.google.android.exoplayer2.Player;
 import com.google.android.exoplayer2.SimpleExoPlayer;
+import com.google.android.exoplayer2.Tracks;
 import com.google.android.exoplayer2.source.UnrecognizedInputFormatException;
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
 import com.google.android.exoplayer2.ui.AspectRatioFrameLayout;
@@ -103,10 +104,14 @@ import free.rm.skytube.databinding.VideoDescriptionBinding;
 import free.rm.skytube.gui.activities.ThumbnailViewerActivity;
 import free.rm.skytube.gui.businessobjects.DatasourceBuilder;
 import free.rm.skytube.gui.businessobjects.MobileNetworkWarningDialog;
+import free.rm.skytube.gui.businessobjects.AudioLanguageSelector;
+import free.rm.skytube.gui.businessobjects.AudioQualitySelector;
 import free.rm.skytube.gui.businessobjects.PlaybackSpeedController;
 import free.rm.skytube.gui.businessobjects.PlayerViewGestureDetector;
 import free.rm.skytube.gui.businessobjects.ResumeVideoTask;
 import free.rm.skytube.gui.businessobjects.SkyTubeMaterialDialog;
+import free.rm.skytube.gui.businessobjects.SubtitleTrackSelector;
+import free.rm.skytube.gui.businessobjects.TrackSelectionManager;
 import free.rm.skytube.gui.businessobjects.adapters.CommentsAdapter;
 import free.rm.skytube.gui.businessobjects.fragments.ImmersiveModeFragment;
 import free.rm.skytube.gui.businessobjects.views.ChannelActionHandler;
@@ -130,8 +135,13 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
     private VideoDescriptionBinding videoDescriptionBinding;
 
     private SimpleExoPlayer player;
+    private DefaultTrackSelector trackSelector;
     private long playerInitialPosition = 0;
     private DatasourceBuilder datasourceBuilder;
+    private TrackSelectionManager trackSelectionManager;
+    private AudioLanguageSelector audioLanguageSelector;
+    private AudioQualitySelector audioQualitySelector;
+    private SubtitleTrackSelector subtitleTrackSelector;
 
     private StreamInfo currentStreamInfo;
     private VideoResolution currentResolution;
@@ -192,6 +202,36 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 
     private TextView getPlaybackSpeedTextView() {
         return fragmentBinding.getRoot().findViewById(R.id.playbackSpeed);
+    }
+
+    private TrackSelectionManager getTrackSelectionManager() {
+        return trackSelectionManager;
+    }
+
+    private synchronized AudioLanguageSelector getAudioLanguageSelector() {
+        if (audioLanguageSelector == null) {
+            audioLanguageSelector = new AudioLanguageSelector(requireContext(),
+                    fragmentBinding.getRoot().findViewById(R.id.audioLanguageSelector),
+                    getTrackSelectionManager(), this::refreshTrackSelectorMenus);
+        }
+        return audioLanguageSelector;
+    }
+
+    private synchronized AudioQualitySelector getAudioQualitySelector() {
+        if (audioQualitySelector == null) {
+            audioQualitySelector = new AudioQualitySelector(requireContext(),
+                    fragmentBinding.getRoot().findViewById(R.id.audioQualitySelector),
+                    getTrackSelectionManager());
+        }
+        return audioQualitySelector;
+    }
+
+    private synchronized SubtitleTrackSelector getSubtitleTrackSelector() {
+        if (subtitleTrackSelector == null) {
+            subtitleTrackSelector = new SubtitleTrackSelector(requireContext(),
+                    fragmentBinding.getRoot().findViewById(R.id.subtitleSelector), getTrackSelectionManager());
+        }
+        return subtitleTrackSelector;
     }
 
     private void openVideo(ContentId contentId) {
@@ -291,7 +331,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
         if (fragmentBinding.playerView.getPlayer() == null) {
             if (player == null) {
                 player = createExoPlayer();
-                datasourceBuilder = new DatasourceBuilder(getContext(), player);
+                datasourceBuilder = new DatasourceBuilder(getContext(), player, getTrackSelector());
             } else {
                 Logger.i(this, ">> found already existing player, re-using it, to avoid duplicate usage");
             }
@@ -304,6 +344,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
                     if (videoIsPlaying) {
                         preventDeviceSleeping(true);
                         playbackSpeedController.updateMenu();
+                        refreshTrackSelectorMenus();
                     } else {
                         preventDeviceSleeping(false);
                     }
@@ -319,6 +360,11 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
                             playbackStateListener.ended();
                         }
                     }
+                }
+
+                @Override
+                public void onTracksChanged(@NonNull Tracks tracks) {
+                    refreshTrackSelectorMenus();
                 }
 
                 @Override
@@ -370,14 +416,20 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
         }
     }
 
+    private synchronized DefaultTrackSelector getTrackSelector() {
+        if (trackSelector == null) {
+            trackSelector = new DefaultTrackSelector(requireContext());
+        }
+        return trackSelector;
+    }
+
     private SimpleExoPlayer createExoPlayer() {
         Context context = getContext();
         DefaultBandwidthMeter bandwidthMeter = new DefaultBandwidthMeter.Builder(context).build();
-        DefaultTrackSelector trackSelector = new DefaultTrackSelector(context);
         DefaultRenderersFactory defaultRenderersFactory = new DefaultRenderersFactory(context);
 
         return new SimpleExoPlayer.Builder(context, defaultRenderersFactory)
-                .setTrackSelector(trackSelector)
+                .setTrackSelector(getTrackSelector())
                 .setLoadControl(new DefaultLoadControl())
                 .setBandwidthMeter(bandwidthMeter)
                 .build();
@@ -604,11 +656,10 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
                                                                     StreamSelectionPolicy.StreamSelection selection = selectionPolicy.select(desiredStream);
                                                                     if (selection != null) {
                                                                         Logger.i(YouTubePlayerV2Fragment.this, ">> PLAYING: %s, audio: %s", selection.getVideoStreamUri(), selection.getAudioStreamUri());
+                                                                        playingDownloadedVideo = false;
                                                                         playVideo(selection, desiredStream);
                                                                         setupInfoDisplay(video);
 
-                                                                        playingDownloadedVideo = false;
-                                                                        currentStreamInfo = desiredStream;
                                                                         currentResolution = selection.getResolution();
 
                                                                         // Because the stream info arrives asynchronously, Android must be forced to
@@ -677,10 +728,12 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
      */
     private void playVideo(Uri videoUri, @Nullable Uri audioUri, @Nullable StreamInfo streamInfo) {
         try {
-            datasourceBuilder.play(videoUri, audioUri, streamInfo);
+            currentStreamInfo = streamInfo;
+            trackSelectionManager = datasourceBuilder.play(videoUri, audioUri, streamInfo);
             if (playerInitialPosition > 0) {
                 player.seekTo(playerInitialPosition);
             }
+            refreshTrackSelectorMenus();
         } catch (RuntimeException e) {
             Logger.e(this, "Error preparing local video: " + e.getMessage(), e);
             videoPlaybackError(e.getMessage());
@@ -689,13 +742,69 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 
     private void playVideo(StreamSelectionPolicy.StreamSelection selection, @Nullable StreamInfo streamInfo) {
         try {
-            datasourceBuilder.play(selection, streamInfo);
+            currentStreamInfo = streamInfo;
+            trackSelectionManager = datasourceBuilder.play(selection, streamInfo);
             if (playerInitialPosition > 0) {
                 player.seekTo(playerInitialPosition);
             }
+            refreshTrackSelectorMenus();
         } catch (RuntimeException e) {
             Logger.e(this, "Error preparing video: " + e.getMessage(), e);
             videoPlaybackError(e.getMessage());
+        }
+    }
+
+    private void refreshTrackSelectorMenus() {
+        if (fragmentBinding == null) {
+            return;
+        }
+        final TrackSelectionManager manager = getTrackSelectionManager();
+        if (manager != null) {
+            // A new playback creates a new manager; keep any already created selectors in sync.
+            if (audioLanguageSelector != null) {
+                audioLanguageSelector.setTrackSelectionManager(manager);
+            }
+            if (audioQualitySelector != null) {
+                audioQualitySelector.setTrackSelectionManager(manager);
+            }
+            if (subtitleTrackSelector != null) {
+                subtitleTrackSelector.setTrackSelectionManager(manager);
+            }
+        }
+        updateTrackSelectorVisibility();
+        if (manager == null) {
+            return;
+        }
+        getAudioLanguageSelector().updateMenu();
+        getAudioQualitySelector().updateMenu();
+        getSubtitleTrackSelector().updateMenu();
+    }
+
+    /**
+     * Local files have no {@link StreamInfo}, so their manager is bare-bone and cannot offer
+     * alternative audio tracks. Subtitle options come from the same manager built from the
+     * stream metadata.
+     */
+    private void updateTrackSelectorVisibility() {
+        if (fragmentBinding == null) {
+            return;
+        }
+        final TrackSelectionManager manager = getTrackSelectionManager();
+        final boolean audioSelectorsVisible = manager != null
+                && currentStreamInfo != null
+                && !playingDownloadedVideo
+                && !manager.getAvailableAudioLanguages().isEmpty();
+        final boolean subtitleSelectorVisible = manager != null
+                && !manager.getAvailableSubtitleTracks().isEmpty();
+        setTrackSelectorVisible(R.id.audioLanguageSelector, audioSelectorsVisible);
+        setTrackSelectorVisible(R.id.audioQualitySelector, audioSelectorsVisible);
+        setTrackSelectorVisible(R.id.subtitleSelector, subtitleSelectorVisible);
+    }
+
+    private void setTrackSelectorVisible(int viewId, boolean visible) {
+        final View view = fragmentBinding.getRoot().findViewById(viewId);
+        if (view != null) {
+            view.setVisibility(visible ? View.VISIBLE : View.GONE);
         }
     }
 
@@ -722,10 +831,11 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
         long position = player.getCurrentPosition();
         boolean wasPlaying = player.getPlayWhenReady();
         try {
-            datasourceBuilder.play(sel, currentStreamInfo);
+            trackSelectionManager = datasourceBuilder.play(sel, currentStreamInfo);
             player.seekTo(position);
             player.setPlayWhenReady(wasPlaying);
             currentResolution = sel.getResolution();
+            refreshTrackSelectorMenus();
         } catch (RuntimeException e) {
             Logger.e(this, "Error switching quality: " + e.getMessage(), e);
             videoPlaybackError(e.getMessage());
