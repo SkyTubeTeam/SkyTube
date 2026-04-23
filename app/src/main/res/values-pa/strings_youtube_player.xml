@@ -8,7 +8,7 @@
     <string name="error_video_streams_empty">\'%s\' ਵੀਡੀਓ ਦੀ ਕੋਈ ਸਟ੍ਰੀਮ ਨਹੀਂ ਹੈ।</string>
     <string name="error_get_video_desc">ਵੀਡੀਓ ਵਰਣਨ ਪ੍ਰਾਪਤ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਿਆ।</string>
     <string name="error_invalid_url">ਅਵੈਧ ਵੀਡੀਓ URL: %s</string>
-    <string name="error_downloaded_file_is_corrupted">ਡਾਊਨਲੋਡ ਕੀਤਾ ਵੀਡੀਓ <b>ਖਰਾਬ</b> ਜਾਪਦਾ ਹੈ: <br/> <br/> %s। <br/> <br/> ਕੀ ਫਾਈਲ <b>ਨੂੰ ਮਿਟਾਉਣਾ ਹੈ</b>\?</string>
+    <string name="error_downloaded_file_is_corrupted">ਡਾਊਨਲੋਡ ਕੀਤਾ ਵੀਡੀਓ &lt;b&gt;ਖਰਾਬ&lt;/b&gt; ਜਾਪਦਾ ਹੈ: &lt;br/&gt; &lt;br/&gt; %s। &lt;br/&gt; &lt;br/&gt; ਕੀ ਫ਼ਾਈਲ ਨੂੰ &lt;b&gt;ਮਿਟਾਉਣਾ ਹੈ&lt;/b&gt;?</string>
     <string name="error_video_parse_error">ਵੀਡੀਓ ਸ਼ੁਰੂ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਿਆ: <br/> <br/> %s।</string>
     <string name="metered_network">ਮੀਟਰਡ ਨੈੱਟਵਰਕ</string>
     <string name="warning_metered_network_play">ਪਹਿਲਾਂ ਡਾਟਾ ਵਰਤੋਂ ਖਰਚਿਆਂ ਤੋਂ ਬਚਣ ਲਈ ਇੱਕ ਅਣਮੀਟਰਡ ਨੈੱਟਵਰਕ ਨਾਲ ਕਨੈਕਟ ਕਰੋ। ਕੀ ਫਿਰ ਵੀ ਵੀਡੀਓ ਚਲਾਓ\?</string>
