@@ -22,7 +22,7 @@
     <string name="subscriptions_to_channels_imported">%d चैनल आयात किए गए।</string>
     <string name="select_sub_file">सब्सक्रिप्शन फ़ाइल का चयन करें</string>
     <string name="no_channels_found">आपके द्वारा अपलोड की गई फ़ाइल में कोई YouTube चैनल नहीं मिला।</string>
-    <string name="no_new_channels_found">ऐसा कोई YouTube चैनल नहीं मिला जिसके आप पहले से सदस्य न हों.</string>
+    <string name="no_new_channels_found">ऐसा कोई YouTube चैनल नहीं मिला जिसके आप पहले से सदस्य न हों।</string>
     <string name="import_subscriptions_parse_error">आपके द्वारा अपलोड की गई फ़ाइल को पार्स नहीं किया जा सका: %s.</string>
     <string name="failed_to_import_subscriptions">आपकी YouTube सदस्यताएं आयात नहीं की जा सकीं।</string>
     <string name="status_not_exists">[डिलीटड]</string>
