@@ -196,4 +196,7 @@
     <string name="opml_directory_use_default">Koristi standardno (Preuzimanja)</string>
     <string name="opml_directory_select">Odaberi direktorij</string>
     <string name="opml_export_location">Mjesto izvoza: %s</string>
+    <string name="pref_title_import_subs_opml">Uvezi pretplate iz OPML-a</string>
+    <string name="pref_summary_import_subs_opml">Uvezi svoje pretplate iz jedne OPML datoteke.</string>
+    <string name="opml_file_picker_title">Odaberi OPML datoteku</string>
 </resources>
