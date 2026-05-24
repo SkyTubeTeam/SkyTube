@@ -170,4 +170,7 @@
     <string name="pref_title_clear_playback_status">Notīrīt atskaņošanas statusu</string>
     <string name="pref_title_default_content_country">Noklusējuma satura valsts</string>
     <string name="pref_summary_sponsorblock_category_list">Izvēlieties kategorijas, kuras izlaist</string>
+    <string name="pref_title_export_subs_opml">Izgūt abonementus OPML datnē</string>
+    <string name="pref_summary_export_subs_opml">Saglabāt savus abonementus OPML formāta datnē.</string>
+    <string name="pref_title_import_subs_opml">Ievietot abonementus no OPML datnes</string>
 </resources>

@@ -184,4 +184,22 @@
     <string name="pref_summary_require_pin_code">進行某些修改時，必須輸入 PIN 碼。</string>
     <string name="pref_title_change_security_pin">變更安全 PIN 碼</string>
     <string name="pref_summary_change_security_pin">變更 PIN 碼以保護設定選項與敏感操作的存取權。</string>
+    <string name="pref_title_export_subs_opml">將訂閱匯出至 OPML</string>
+    <string name="pref_summary_export_subs_opml">將您的訂閱匯出至 OPML 檔案。</string>
+    <string name="pref_title_import_subs_opml">從 OPML 匯入訂閱</string>
+    <string name="pref_summary_import_subs_opml">從 OPML 檔案匯入您的訂閱。</string>
+    <string name="opml_file_picker_title">選取 OPML 檔案</string>
+    <string name="subscriptions_exporting_opml">正在匯出訂閱為 OPML……</string>
+    <string name="subscriptions_export_opml_success">訂閱已成功匯出為 %s</string>
+    <string name="subscriptions_export_opml_fail">無法將訂閱匯出為 OPML。</string>
+    <string name="opml_export_unknown_filename">未知的檔案名稱</string>
+    <string name="opml_export_title">匯出訂閱至 OPML</string>
+    <string name="opml_export_message">為您的 OPML 匯出選擇檔案名稱：</string>
+    <string name="opml_export_confirm">匯出</string>
+    <string name="opml_export_cancel">取消</string>
+    <string name="opml_directory_title">選擇匯出位置</string>
+    <string name="opml_directory_message">選取 OPML 匯出目錄：</string>
+    <string name="opml_directory_use_default">使用預設值（下載）</string>
+    <string name="opml_directory_select">選取目錄</string>
+    <string name="opml_export_location">匯出位置：%s</string>
 </resources>

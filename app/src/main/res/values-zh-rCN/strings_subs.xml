@@ -3,7 +3,7 @@
     <string name="about">关于</string>
     <string name="failed_to_import_subscriptions">无法导入您的 YouTube 订阅。</string>
     <string name="import_subscriptions_parse_error">无法解析您上传的文件：%s。</string>
-    <string name="no_new_channels_found">未找到您尚未订阅的 YouTube 频道。</string>
+    <string name="no_new_channels_found">找不到您尚未订阅的 YouTube 频道。</string>
     <string name="no_channels_found">在您上传的文件中找不到任何 YouTube 频道。</string>
     <string name="select_none">不选择</string>
     <string name="select_all">选择全部</string>
@@ -25,4 +25,6 @@
     <string name="unsubscribe">取消订阅</string>
     <string name="subscribe">订阅</string>
     <string name="subscriptions">订阅</string>
+    <string name="status_not_exists">[已删除]</string>
+    <string name="status_account_terminated">[已终止]</string>
 </resources>

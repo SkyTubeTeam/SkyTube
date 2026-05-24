@@ -23,4 +23,5 @@
     <string name="error">Error</string>
     <string name="views">%,d visualitzacions</string>
     <string name="could_not_get_channel_detailed">No s\'ha pogut descarregar la informació del canal: %s.</string>
+    <string name="could_not_get_sponsorblock">No s\'ha pogut recuperar la informació de SponsorBlock: %s.</string>
 </resources>

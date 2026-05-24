@@ -16,7 +16,7 @@
     <string name="select_all">Odaberi sve</string>
     <string name="select_none">Odaberi ništa</string>
     <string name="no_channels_found">U tvojoj prenesenoj datoteci nije pronađen nijedan YouTube kanal.</string>
-    <string name="no_new_channels_found">Nije pronađen nijedan YouTube kanal na koji nisi već pretplaćen/a.</string>
+    <string name="no_new_channels_found">Nismo pronašli nijedan YouTube kanal na koji nisi već pretplaćen/a.</string>
     <string name="import_subscriptions_parse_error">Nije bilo moguće obraditi tvoju prenesenu datoteku: %s.</string>
     <string name="failed_to_import_subscriptions">Nije bilo moguće uvesti tvoje YouTube pretplate.</string>
     <string name="about">Informacije</string>

@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_license">कॉपीराइट © 2015–2018 रेमन मिफसूद यह कार्यक्रम मुफ़्त सॉफ़्टवेयर है: आप इसे फ़्री सॉफ़्टवेयर फ़ाउंडेशन (लाइसेंस का संस्करण 3) द्वारा प्रकाशित GNU जनरल पब्लिक लाइसेंस की शर्तों के तहत पुनर्वितरित और/या संशोधित कर सकते हैं। यह कार्यक्रम इस उम्मीद में वितरित किया गया है कि यह उपयोगी होगा, लेकिन बिना किसी वारंटी के; व्यापारिकता या किसी विशेष उद्देश्य के लिए उपयुक्तता की निहित वारंटी के बिना भी। अधिक विवरण के लिए जीएनयू जनरल पब्लिक लाइसेंस देखें।
-\n
-\nआपको इस प्रोग्राम के साथ जीएनयू जनरल पब्लिक लाइसेंस की एक प्रति प्राप्त होनी चाहिए। यदि नहीं, तो &lt;https://www.gnu.org/licenses/&gt; देखें</string>
+    <string name="app_license">कॉपीराइट © 2015–2018 Ramon Mifsud\n\nयह प्रोग्राम एक फ़्री सॉफ़्टवेयर है: आप इसे फ़्री सॉफ़्टवेयर फ़ाउंडेशन द्वारा प्रकाशित GNU General Public License (लाइसेंस का वर्शन 3) की शर्तों के तहत फिर से बाँट सकते हैं और/या उसमें बदलाव कर सकते हैं।\n\nयह प्रोग्राम इस उम्मीद के साथ बाँटा जाता है कि यह उपयोगी होगा, लेकिन बिना किसी वारंटी के; यहाँ तक कि MERCHANTABILITY या किसी खास मकसद के लिए FITNESS की निहित वारंटी के बिना भी। ज़्यादा जानकारी के लिए GNU General Public License देखें।\n\nआपको इस प्रोग्राम के साथ GNU General Public License की एक कॉपी मिली होगी। अगर नहीं मिली है, तो &lt;https://www.gnu.org/licenses/&gt; देखें</string>
     <string name="pref_title_maximum_res_metered">मीटर्ड नेटवर्क के लिए उच्चतम रेजोल्यूशन</string>
     <string name="pref_summary_maximum_res_metered">मीटर्ड नेटवर्क के माध्यम से स्ट्रीमिंग करते समय अपना अधिकतम रेजोल्यूशन चुनें: %s</string>
     <string name="databases_import_nothing_selected">कुछ भी नहीं चुना गया था …</string>
@@ -177,4 +175,22 @@
     <string name="pref_summary_require_pin_code">Entering a PIN code is required for certain modifications।</string>
     <string name="pref_title_change_security_pin">सुरक्षा पिन बदलें</string>
     <string name="pref_summary_change_security_pin">प्रेफरेंस और सेंसिटिव एक्शन तक एक्सेस को सुरक्षित रखने के लिए PIN बदलें।</string>
+    <string name="pref_title_export_subs_opml">सब्सक्रिप्शन OPML में निर्यात करें</string>
+    <string name="pref_summary_export_subs_opml">अपनी सब्सक्रिप्शन को एक OPML फ़ाइल में एक्सपोर्ट करें।</string>
+    <string name="pref_title_import_subs_opml">OPML से सब्सक्रिप्शन इंपोर्ट करें</string>
+    <string name="pref_summary_import_subs_opml">अपनी सब्सक्रिप्शन OPML फ़ाइल से इंपोर्ट करें।</string>
+    <string name="opml_file_picker_title">OPML फ़ाइल चुनें</string>
+    <string name="subscriptions_exporting_opml">सब्सक्रिप्शनों को OPML में एक्सपोर्ट किया जा रहा है…</string>
+    <string name="subscriptions_export_opml_success">सब्सक्रिप्शन %s के रूप में सफलतापूर्वक एक्सपोर्ट हो गए</string>
+    <string name="subscriptions_export_opml_fail">OPML में सब्सक्रिप्शन एक्सपोर्ट नहीं किया जा सका।</string>
+    <string name="opml_export_unknown_filename">अज्ञात फ़ाइल नाम</string>
+    <string name="opml_export_title">सदस्यताएँ OPML में निर्यात करें</string>
+    <string name="opml_export_message">अपने OPML एक्सपोर्ट के लिए एक फ़ाइल नाम चुनें:</string>
+    <string name="opml_export_confirm">निर्यात करें</string>
+    <string name="opml_export_cancel">रद्द करें</string>
+    <string name="opml_directory_title">एक्सपोर्ट करने की जगह चुनें</string>
+    <string name="opml_directory_message">OPML एक्सपोर्ट के लिए डायरेक्टरी चुनें:</string>
+    <string name="opml_directory_use_default">डिफ़ॉल्ट (डाउनलोड) का उपयोग करें</string>
+    <string name="opml_directory_select">डायरेक्टरी चुनें</string>
+    <string name="opml_export_location">एक्सपोर्ट लोकेशन: %s</string>
 </resources>
