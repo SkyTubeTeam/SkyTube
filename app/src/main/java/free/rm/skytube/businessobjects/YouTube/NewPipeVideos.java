@@ -44,7 +44,7 @@ public abstract class NewPipeVideos extends GetYouTubeVideos {
             try {
                 pager = createNewPager();
             } catch (Exception e) {
-                Logger.e(this, "An error has occurred while getting videos:" + e.getMessage(), e);
+                Logger.e(this, "An error has occurred while creating pager:" + e.getMessage(), e);
                 setLastException(e);
                 return Collections.emptyList();
             }
