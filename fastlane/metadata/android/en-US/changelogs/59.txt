@@ -1,0 +1,6 @@
+* Discard AI Dubbed audio tracks by Iván Álvarez López
+* Fix channel opening broken by Youtube API changes
+* Translators:
+  * AlphaHighOx, Cabdi Waaxid Siciid, DuninduH, Ettore Atalan, Jeff Huang, Julien BRONDINO,
+  * Massimo Pissarello, MaxGremory, Milan, Milo Ivir, Paco Men Zarbien, Yaron Shahrabani,
+  * ialNavy, mackavelue-design, ssantos, whistlingwoods, ℂ𝕠𝕠𝕠𝕝, 大王叫我来巡山
