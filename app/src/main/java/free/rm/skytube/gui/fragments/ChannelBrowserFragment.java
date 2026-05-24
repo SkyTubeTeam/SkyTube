@@ -37,12 +37,14 @@ import com.google.android.material.tabs.TabLayout;
 import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.iconics.typeface.library.materialdesigniconic.MaterialDesignIconic;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.EventBus;
+import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.newpipe.ChannelId;
@@ -146,7 +148,7 @@ public class ChannelBrowserFragment extends FragmentEx implements ChannelSubscri
 					DatabaseTasks.subscribeToChannel(!userSubscribed, ChannelBrowserFragment.this, getContext(), channelId, true).subscribe(result -> {
 						ViewCompat.animate(view).setDuration(200);
 						view.setRotation(0);
-					})
+					}, error -> Logger.e(this, error, "Error toggling subscription for %s", channelId))
 				);
 			}
 		});
@@ -218,6 +220,9 @@ public class ChannelBrowserFragment extends FragmentEx implements ChannelSubscri
 			disposable.add(DatabaseTasks.getChannelInfo(requireContext(), channelId, false)
 				.subscribe(youTubeChannel -> {
 					if (youTubeChannel == null) {
+						Logger.e(this, "Channel info is null for channelId=%s", channelId);
+						SkyTubeApp.notifyUserOnError(requireContext(),
+							new IOException("Unable to load channel info"));
 						return;
 					}
 					// In the event this fragment is passed a channel id and not a channel object, set the
@@ -225,7 +230,7 @@ public class ChannelBrowserFragment extends FragmentEx implements ChannelSubscri
 					// the button was created.
 					channel = youTubeChannel.channel();
 					initViews();
-				}));
+				}, error -> Logger.e(this, error, "Error fetching channel info for %s", channelId)));
 		} else {
 			initViews();
 		}
