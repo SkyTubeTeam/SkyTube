@@ -24,11 +24,12 @@
     <string name="trending_in">Trending (%s)</string>
     <string name="recaptcha_challenge_requested">YouTube mengira Anda adalah bot, selesaikan reCAPTCHA terlebih dahulu.</string>
     <string name="could_not_get_sponsorblock">Tidak dapat mengambil info SponsorBlock: %s.</string>
-    <string name="cleaner">pembersih</string>
+    <string name="cleaner">pembersih video yang di tonton</string>
     <string name="cleaner_explanation">Bersihkan video yang di-bookmark/diunduh. Gunakan opsi filter berikut:</string>
     <string name="cleaner_confirm">Membersihkan</string>
-    <string name="cleaner_toast_finish">Pembersih menghapus %1$s video. %2$s MB sekarang gratis.</string>
+    <string name="cleaner_toast_finish">Kami telah menghapus %1$s video dari bookmark, dan menghapus %2$s MB video yang telah diunduh.</string>
     <string name="cleaner_watched_bookmarks">Membersihkan bookmark yang ditonton</string>
-    <string name="cleaner_watched_downloads">Membersihkan unduhan yang ditonton</string>
-    <string name="video_comments_are_disabled">Komentar dimatikan</string>
+    <string name="cleaner_watched_downloads">Menghapus unduhan yang ditonton</string>
+    <string name="video_comments_are_disabled">Komentar video dimatikan</string>
+    <string name="incorrect_pin">PIN salah</string>
 </resources>
