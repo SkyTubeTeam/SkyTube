@@ -1,3 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="preferences">Doorbidyada</string>
+    <string name="key_preferences">doorbidyada</string>
+    <string name="pref_video_player_category">Qalabka Fiidiyowga</string>
+    <string name="pref_title_maximum_res">Tayada Ugu Sareysa</string>
+    <string name="pref_summary_maximum_res">Xullo tayada ugu sarreeya: %s</string>
+    <string name="pref_title_minimum_res">Tayada ugu hooseeya</string>
+    <string name="pref_summary_minimum_res">Xilli tayada ugu hooseeya:%s</string>
+    <string name="pref_title_choose_player">Qalabka Fiidiyowga</string>
+    <string name="pref_summary_choose_player">Qalabka fiidiyowga ee la isticmaalayo: %s</string>
+    <string name="no_resolution_specified">Waxba</string>
+    <string name="pref_import_export_category">Soo dejinta/dhoofinta</string>
 </resources>
