@@ -5,7 +5,7 @@
     <string name="import_subscriptions_from_youtube">Impor Langganan Dari YouTube</string>
     <string name="no_subscriptions_text">Berlangganan ke beberapa saluran untuk melihat video baru dari mereka di sini.</string>
     <string name="no_new_videos_found">Tidak ada video baru.</string>
-    <string name="fetched_videos_from_channels">Ada %1$d video dari %2$d/%3$d saluran.</string>
+    <string name="fetched_videos_from_channels">Ditemukan%1$d video dari %2$d/%3$d saluran.</string>
     <string name="fetching_subscription_videos">Mengambil video dari saluran berlangganan…</string>
     <string name="fetching_subbed_channels_info_error">Tidak dapat mengambil info saluran.</string>
     <string name="fetching_subbed_channels_info">Mengambil info channel…</string>
