@@ -93,7 +93,7 @@
     <string name="unblock">Ta bort blockering</string>
     <string name="pref_summary_credits">Personer och projekt som gjorde den här appen möjlig.</string>
     <string name="pref_summary_default_tab">Flik som visas när SkyTube startar: %s</string>
-    <string name="databases_import_warning_message">Databaserna för prenumerationer och bokmärken ersätts med innehållet i den valda säkerhetskopian. Fortsätt?</string>
+    <string name="databases_import_warning_message">Databaserna för prenumerationer och bokmärken ersätts med innehållet i den valda säkerhetskopian.\n\nFortsätt?</string>
     <string name="input_channel_url">URL till kanalen som ska läggas till i tillåtelselistan:</string>
     <string name="pref_video_player_category">Videospelare</string>
     <string name="add">Lägg till</string>
