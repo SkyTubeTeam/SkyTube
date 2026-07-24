@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="subscribe">Prenumerera</string>
-    <string name="import_subscriptions_description">Importera dina YouTube-prenumerationer genom att först öppna https://takeout.google.com. Avmarkera alla tjänster utom YouTube and YouTube Music. Klicka på All YouTube data included och avmarkera allt utom subscriptions. Klicka sedan på Next och Create export. När exporten är klar visas den på sidan och du får ett e-postmeddelande med en nedladdningslänk. Ladda ned filen och extrahera subscriptions.json, som finns i /Takeout/YouTube and YouTube Music/subscriptions/. Välj därefter filen genom att trycka på Välj prenumerationsfil nedan.</string>
+    <string name="import_subscriptions_description">Importera dina YouTube-prenumerationer genom att först öppna https://takeout.google.com. Avmarkera alla tjänster utom ”YouTube och YouTube Music”. Klicka på ”Alla YouTube-data ingår” och avmarkera allt utom ”Prenumerationer”. Klicka sedan på ”Nästa” och ”Skapa export”. När exporten är klar visas den på sidan och du får ett e-postmeddelande med en nedladdningslänk. Ladda ned filen och extrahera subscriptions.json, som finns i /Takeout/YouTube and YouTube Music/subscriptions/. Välj därefter filen genom att trycka på ”Välj prenumerationsfil” nedan.</string>
     <string name="no_new_channels_found">Inga YouTube-kanaler som du inte redan prenumererar på hittades i den fil som du laddade upp.</string>
     <string name="error_check_if_user_has_subbed">Det gick inte att kontrollera kanalens prenumerationsstatus (id=%s).</string>
     <string name="subscribed">Prenumererar</string>
