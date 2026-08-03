@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="subscribe">Prenumerera</string>
-    <string name="import_subscriptions_description">Importera dina YouTube-prenumerationer genom att först öppna https://takeout.google.com. Avmarkera alla tjänster utom ”YouTube och YouTube Music”. Klicka på ”Alla YouTube-data ingår” och avmarkera allt utom ”Prenumerationer”. Klicka sedan på ”Nästa” och ”Skapa export”. När exporten är klar visas den på sidan och du får ett e-postmeddelande med en nedladdningslänk. Ladda ned filen och extrahera subscriptions.json, som finns i /Takeout/YouTube and YouTube Music/subscriptions/. Välj därefter filen genom att trycka på ”Välj prenumerationsfil” nedan.</string>
-    <string name="no_new_channels_found">Inga YouTube-kanaler som du inte redan prenumererar på hittades i den fil som du laddade upp.</string>
-    <string name="error_check_if_user_has_subbed">Det gick inte att kontrollera kanalens prenumerationsstatus (id=%s).</string>
+    <string name="import_subscriptions_description">Importera dina YouTube-prenumerationer genom att först öppna https://takeout.google.com. Avmarkera alla tjänster utom ”YouTube och YouTube Music”. Klicka på ”Alla YouTube-data ingår” och avmarkera allt utom ”Prenumerationer”. Klicka sedan på ”Nästa” och ”Skapa export”. När exporten är klar visas den på sidan och du får en nedladdningslänk via e-post. Ladda ned arkivet och extrahera filen subscriptions.json från /Takeout/YouTube and YouTube Music/subscriptions/. Tryck sedan på ”Välj prenumerationsfil” nedan och välj filen.</string>
+    <string name="no_new_channels_found">Filen innehöll inga nya YouTube-kanaler som du inte redan prenumererar på.</string>
+    <string name="error_check_if_user_has_subbed">Det gick inte att kontrollera kanalens prenumerationsstatus (ID=%s).</string>
     <string name="subscribed">Prenumererar</string>
     <string name="total_subscribers">%,d prenumeranter</string>
-    <string name="error_unable_to_subscribe">Det gick inte att ändra kanalens prenumerationsstatus (id=%s).</string>
+    <string name="error_unable_to_subscribe">Det gick inte att ändra kanalens prenumerationsstatus (ID=%s).</string>
     <string name="no_channels_found">Inga YouTube-kanaler hittades i den fil som du laddade upp.</string>
     <string name="error_get_subbed_channels">Ett fel uppstod när de prenumererade kanalerna skulle hämtas.</string>
     <string name="select_all">Välj alla</string>
-    <string name="unsubscribed">Prenumerationen har avslutats</string>
+    <string name="unsubscribed">Prenumererar inte</string>
     <string name="about">Om</string>
-    <string name="unsubscribe_from_all_current_sibbed_channels">Avsluta alla aktuella kanalprenumerationer.</string>
+    <string name="unsubscribe_from_all_current_sibbed_channels">Avsluta alla befintliga kanalprenumerationer</string>
     <string name="select_none">Avmarkera alla</string>
     <string name="failed_to_import_subscriptions">Det gick inte att importera dina YouTube-prenumerationer.</string>
     <string name="select_sub_file">Välj prenumerationsfil</string>
-    <string name="subscriptions_to_channels_imported">Antal importerade kanalprenumerationer: %d.</string>
+    <string name="subscriptions_to_channels_imported">%d kanalprenumerationer har importerats.</string>
     <string name="subscriptions">Prenumerationer</string>
-    <string name="import_subscriptions_parse_error">Ett fel uppstod när den valda filen skulle tolkas: %s.</string>
+    <string name="import_subscriptions_parse_error">Det gick inte att tolka den valda filen: %s.</string>
     <string name="import_subscriptions">Importera prenumerationer</string>
     <string name="unsubscribe">Avsluta prenumerationen</string>
-    <string name="channel_unsubscribed">Prenumerationen har avslutats</string>
-    <string name="channel_subscribe_failed">Det gick inte att prenumerera på kanalen</string>
-    <string name="channel_already_subscribed">Du prenumererar redan på den här kanalen</string>
-    <string name="channel_subscribed">Du prenumererar nu på kanalen</string>
+    <string name="channel_unsubscribed">Du prenumererar inte längre på kanalen.</string>
+    <string name="channel_subscribe_failed">Det gick inte att prenumerera på kanalen.</string>
+    <string name="channel_already_subscribed">Du prenumererar redan på den här kanalen.</string>
+    <string name="channel_subscribed">Du prenumererar nu på kanalen.</string>
 </resources>
