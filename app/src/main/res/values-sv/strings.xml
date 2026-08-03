@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="most_popular">Populärast</string>
+    <string name="most_popular">Mest populära</string>
     <string name="search_videos">Sök efter videor</string>
     <string name="num_videos">%d videor</string>
     <string name="no">Nej</string>
@@ -22,5 +22,5 @@
     <string name="close">Stäng</string>
     <string name="could_not_get_channel_detailed">Det gick inte att hämta kanalinformation: %s.</string>
     <string name="trending_in">Populärt i %s</string>
-    <string name="video_comments_are_disabled">Kommentarer är inaktiverade för videon</string>
+    <string name="video_comments_are_disabled">Kommentarer är inaktiverade för den här videon.</string>
 </resources>
