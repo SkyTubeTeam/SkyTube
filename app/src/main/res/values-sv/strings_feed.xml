@@ -5,7 +5,7 @@
     <string name="no_new_videos_found">Inga nya videor hittades.</string>
     <string name="no_subscriptions_text">Du prenumererar inte på några kanaler.\n\nNär du börjar prenumerera visas videor som har laddats upp till kanalerna under den senaste månaden.</string>
     <string name="fetching_subbed_channels_info_error">Ett fel uppstod när kanalinformationen skulle hämtas.</string>
-    <string name="notification_new_videos_found">Nya videor från prenumererade kanaler: %d</string>
+    <string name="notification_new_videos_found">%d nya videor från prenumererade kanaler</string>
     <string name="feed">Flöde</string>
     <string name="notification_channel_feed_title">Flödesaviseringar</string>
     <string name="fetching_subscription_videos">Hämtar videor från prenumererade kanaler…</string>
