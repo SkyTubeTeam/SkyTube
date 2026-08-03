@@ -4,12 +4,12 @@
     <string name="video_download_stream_error">Det gick inte att ladda ned ”%s”.</string>
     <string name="downloads">Nedladdningar</string>
     <string name="download">Ladda ned</string>
-    <string name="external_storage_not_available">Det går inte att hämta filen eftersom den externa lagringen inte är tillgänglig.</string>
+    <string name="external_storage_not_available">Det går inte att ladda ned filen eftersom den externa lagringen inte är tillgänglig.</string>
     <string name="starting_video_download">Laddar ned ”%s”…</string>
     <string name="delete_download">Ta bort nedladdning</string>
     <string name="playing_video_file_missing">Den nedladdade videofilen hittades inte. Videon spelas upp via nätverket.</string>
     <string name="no_downloaded_videos_text">Du har inte laddat ned några videor ännu.\n\nNär du gör det visas de här.</string>
     <string name="video_downloaded">”%s” har laddats ned.</string>
-    <string name="download_failed_because">Det gick inte att ladda ned %1$s på grund av: %2$s</string>
-    <string name="unable_to_delete_file">Det gick inte att ta bort den nedladdade filen: ”%s”</string>
+    <string name="download_failed_because">Det gick inte att ladda ned %1$s: %2$s</string>
+    <string name="unable_to_delete_file">Det gick inte att ta bort den nedladdade filen: ”%s”.</string>
 </resources>
