@@ -3,9 +3,9 @@
     <string name="configure">Konfigurera</string>
     <string name="channel_blacklist_error">Kanalen kunde inte läggas till i blockeringslistan.</string>
     <string name="blocked_videos">Blockerade videor</string>
-    <string name="dislikes">Ogilla-markeringar: %d%%</string>
-    <string name="no_videos_blocked">Vill du konfigurera videoblockeraren för att blockera eller filtrera videor?</string>
-    <string name="channel_blacklisted">Uppdatera videorna för att använda den nya blockeringslistan.</string>
+    <string name="dislikes">Andel ogilla-markeringar: %d%%</string>
+    <string name="no_videos_blocked">Inga videor har blockerats. Vill du konfigurera videoblockeraren för att blockera eller filtrera videor?</string>
+    <string name="channel_blacklisted">Kanalen har lagts till i blockeringslistan. Uppdatera videorna för att tillämpa ändringen.</string>
     <string name="channel_unwhitelist_error">Kanalen kunde inte tas bort från tillåtelselistan.</string>
     <string name="block_channel">Blockera kanal</string>
 </resources>
