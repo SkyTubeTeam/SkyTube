@@ -2,30 +2,30 @@
 <resources>
     <string name="mark_watched">Markera som sedd</string>
     <string name="error_stream_decryption_fail">Det gick inte att läsa in dekrypteringskoden för YouTube-tjänsten.</string>
-    <string name="copy_url">Kopiera URL</string>
-    <string name="mark_unwatched">Markera som inte sedd</string>
+    <string name="copy_url">Kopiera URL:en</string>
+    <string name="mark_unwatched">Markera som osedd</string>
     <string name="error_get_comments">Ett fel uppstod när kommentarer skulle hämtas.</string>
     <string name="clear">Rensa</string>
     <string name="share_via">Dela via</string>
     <string name="resume">Fortsätt</string>
     <string name="should_resume">Vill du fortsätta där du slutade?</string>
     <string name="warning_live_video">Liveströmmar kan inte spelas upp för tillfället. Vill du öppna liveströmmen i en annan app?</string>
-    <string name="ratings_disabled">Betygsfunktionen är inaktiverad</string>
+    <string name="ratings_disabled">Betyg är inaktiverade</string>
     <string name="play_video">Spela upp video</string>
     <string name="open_in_browser">Öppna i webbläsaren</string>
     <string name="error_stream_parse_error">Det gick inte att tolka videoströmmen.</string>
     <string name="open_with">Öppna med…</string>
-    <string name="loading_video">Laddar video…</string>
-    <string name="error_stream_err_unavailable">Felmeddelandet är inte tillgängligt.</string>
+    <string name="loading_video">Läser in video…</string>
+    <string name="error_stream_err_unavailable">Inget felmeddelande är tillgängligt.</string>
     <string name="cancel">Avbryt</string>
     <string name="error_video_streams">Ett fel uppstod när videoströmmarna skulle hämtas.</string>
     <string name="view_replies">Visa svar</string>
     <string name="enter_video_url">Ange videons URL</string>
     <string name="hide_replies">Dölj svar</string>
     <string name="url_copied_to_clipboard">URL:en har kopierats till urklipp.</string>
-    <string name="play">Spela</string>
+    <string name="play">Spela upp</string>
     <string name="error_video_streams_empty">Videon %s saknar tillgängliga strömmar.</string>
-    <string name="error_video_play">Fel vid videouppspelning</string>
+    <string name="error_video_play">Fel vid uppspelning av video</string>
     <string name="error_invalid_url">Ogiltig video-URL: %s</string>
     <string name="share">Dela</string>
     <string name="error_get_video_desc">Ett fel uppstod när videobeskrivningen skulle hämtas.</string>
@@ -34,5 +34,5 @@
     <string name="error_video_parse_error">Videon kunde inte spelas upp. Felmeddelande: &lt;br/&gt; &lt;br/&gt; %s.</string>
     <string name="error_downloaded_file_is_corrupted">Den nedladdade videofilen verkar vara &lt;b&gt;skadad&lt;/b&gt;. Felmeddelande: &lt;br/&gt; &lt;br/&gt; %s. &lt;br/&gt; &lt;br/&gt; Vill du &lt;b&gt;ta bort&lt;/b&gt; filen?</string>
     <string name="reload_video">Ladda om video</string>
-    <string name="warning_metered_network_disable">Fråga inte igen.</string>
+    <string name="warning_metered_network_disable">Fråga inte igen</string>
 </resources>
