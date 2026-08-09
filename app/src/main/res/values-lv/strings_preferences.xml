@@ -140,7 +140,7 @@
     <string name="pref_summary_disable_playback_status">Izslēdz atskaņošanas statusu.</string>
     <string name="pref_summary_clear_playback_status">Attīrīt progresēšanu visiem videoklipiem.</string>
     <string name="pref_playback_status_cleared">Atskaņošanas statuss notīrīts.</string>
-    <string name="pref_general">Vispārēji</string>
+    <string name="pref_general">Vispārīgie</string>
     <string name="pref_details">Detaļas</string>
     <string name="pref_title_enable_sponsorblock">Iespējot SponsorBlock</string>
     <string name="pref_title_sponsorblock_category_list">Izlaist segmentus</string>

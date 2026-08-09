@@ -2,8 +2,8 @@
 <resources>
     <string name="error_stream_err_unavailable">Pesan tidak tersedia.</string>
     <string name="error_stream_decryption_fail">Tidak bisa memuat kode dekripsi untuk layanan YouTube.</string>
-    <string name="error_stream_parse_error">Galat penguraian.</string>
-    <string name="error_video_play">Galat Pemutaran Video</string>
+    <string name="error_stream_parse_error">Kesalahan penguraian.</string>
+    <string name="error_video_play">Kesalahan Pemutaran Video</string>
     <string name="error_video_streams_empty">Video %s tidak memiliki stream.</string>
     <string name="error_video_streams">Tidak bisa mengambil stream video.</string>
     <string name="error_get_video_desc">Tidak bisa mengambil deskripsi video.</string>
@@ -39,4 +39,12 @@
     <string name="warning_metered_network_play">Sambungkan ke jaringan tidak terbatas untuk menghindari biaya ekstra penggunaan data. Tetap putar video\?</string>
     <string name="metered_network">Sambungan Terukur</string>
     <string name="sponsorblock_category_sponsor">Sponsor</string>
+    <string name="sponsorblock_skipped">Segmen dilewati: %s</string>
+    <string name="sponsorblock_category_interaction">Pengingat Interaksi</string>
+    <string name="sponsorblock_category_music_offtopic">Bagian Tanpa Musik</string>
+    <string name="sponsorblock_category_intro">Pendahuluan/Istirahat</string>
+    <string name="sponsorblock_category_outro">Kartu akhir/Kredit</string>
+    <string name="sponsorblock_category_preview">Pratinjau/Ringkasan</string>
+    <string name="sponsorblock_category_filler">Pengisi</string>
+    <string name="sponsorblock_category_selfpromo">Promosi sendiri</string>
 </resources>

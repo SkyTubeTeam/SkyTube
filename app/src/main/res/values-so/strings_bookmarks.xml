@@ -1,3 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="bookmarks">Calaamadaynta</string>
+    <string name="bookmark">Calaamadee</string>
+    <string name="video_bookmarked">La calaamadeeyay</string>
+    <string name="video_already_bookmarked">Horey ayaa loo calaamadeeyay</string>
+    <string name="video_bookmarked_error">La ma calaamadayn karo fiidiyowga.</string>
+    <string name="unbookmark">Ka saar calaamadaynta</string>
+    <string name="video_unbookmarked">Calaamadaynta waa la tirtiray</string>
+    <string name="video_was_not_bookmarked">Muuqaalka lama calaamadin</string>
+    <string name="video_unbookmarked_error">Kama saari karo calaamadaynta fiidiyowga.</string>
+    <string name="no_bookmarked_videos_text">Calaamadee fiidiyowyada qaarkood si aad halkan uga hesho.</string>
+    <string name="bookmark_share_label">Calaamadaynta SkyTube</string>
+    <string name="bookmark_share_invalid_url">Kaliya URL-yada YouTube ee saxda ah ayaa la calaamadeyn karaa.</string>
 </resources>

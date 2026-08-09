@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="feed">ఫీడ్</string>
-    <string name="subscribing_to_channels">చానెల్ కి సబ్స్క్రైబ్</string>
+    <string name="subscribing_to_channels">చానెల్ కి సబ్స్క్రైబ్…</string>
+    <string name="channel_related">ఛానెల్...</string>
+    <string name="open_channel">ఓపెన్ ఛానెల్</string>
+    <string name="fetching_subbed_channels_info">ఛానెల్ సమాచారాన్ని పొందుతున్నాము…</string>
+    <string name="fetching_subbed_channels_info_error">ఛానెల్ సమాచారాన్ని పొందలేకపోయాము.</string>
+    <string name="fetching_subscription_videos">సబ్స్క్రయిబ్ చేసిన ఛానెళ్ల నుండి వీడియోలను పొందుతున్నాము…</string>
+    <string name="fetched_videos_from_channels">%2$d/%3$d ఛానెల్‌ల నుండి %1$d వీడియోలు వచ్చాయి.</string>
+    <string name="no_new_videos_found">కొత్త వీడియోలు లేవు.</string>
+    <string name="no_subscriptions_text">వారి నుండి తాజా వీడియోలను చూడటానికి కొన్ని ఛానెల్‌లకు ఇక్కడ సబ్‌స్క్రయిబ్ చేసుకోండి.</string>
+    <string name="import_subscriptions_from_youtube">YouTube నుండి సబ్‌స్క్రిప్షన్‌లను దిగుమతి చేసుకోండి</string>
+    <string name="notification_channel_feed_title">ఫీడ్ నోటిఫికేషన్లు</string>
+    <string name="notification_new_videos_found">సబ్‌స్క్రైబ్ చేసిన ఛానెల్‌ల %d నుండి కొత్త వీడియోలు</string>
 </resources>
