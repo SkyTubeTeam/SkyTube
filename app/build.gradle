@@ -138,6 +138,9 @@ dependencies {
     // Custom dialogs
     implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
 
+    // F-Droid warning dialog (developer verification deprecation notice)
+    implementation 'com.github.woheller69:FreeDroidWarn:V1.+'
+
     // File / folder chooser
     implementation 'com.github.hedzr:android-file-chooser:v1.2.0-final'
 
