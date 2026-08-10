@@ -73,12 +73,17 @@ public class BlockedVideosDialog extends SkyTubeMaterialDialog {
 
 		positiveText(R.string.configure);
 		onPositive((dialog, which) -> {
-			// display the PreferenceActivity where the Videos Blocker tab is selected/opened
-			// by default
-			final Intent i = new Intent(context, PreferencesActivity.class);
-			i.putExtra(PreferencesActivity.START_FRAGMENT, VideoBlockerPreferenceFragment.class.getName());
-			context.startActivity(i);
+			showVideoBlockerPreferenceFragment(context);
 		});
+	}
+
+	/**
+	 * display the PreferenceActivity where the Videos Blocker tab is selected/opened by default
+	 */
+	public static void showVideoBlockerPreferenceFragment(@NonNull final Context context) {
+		final Intent i = new Intent(context, PreferencesActivity.class);
+		i.putExtra(PreferencesActivity.START_FRAGMENT, VideoBlockerPreferenceFragment.class.getName());
+		context.startActivity(i);
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////

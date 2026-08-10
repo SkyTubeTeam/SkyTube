@@ -20,7 +20,6 @@ import android.content.SharedPreferences;
 
 import androidx.preference.PreferenceFragmentCompat;
 
-import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.gui.businessobjects.PinUtils;
 
 /**
@@ -29,13 +28,9 @@ import free.rm.skytube.gui.businessobjects.PinUtils;
 abstract class BasePreferenceFragment extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener {
     @Override
     public void onCreatePreferences(android.os.Bundle savedInstanceState, String rootKey) {
-        if (SkyTubeApp.getSettings().isPinSet()) {
-            PinUtils.promptForPin(getContext(),
-                () -> showPreferencesInternal(rootKey),
-                () -> requireActivity().getOnBackPressedDispatcher().onBackPressed());
-        } else {
-            showPreferencesInternal(rootKey);
-        }
+        PinUtils.checkPinRequired(getContext(),
+            () -> showPreferencesInternal(rootKey),
+            () -> requireActivity().getOnBackPressedDispatcher().onBackPressed());
     }
 
     protected abstract void showPreferencesInternal(String rootKey);

@@ -63,6 +63,7 @@ import free.rm.skytube.businessobjects.db.SearchHistoryTable;
 import free.rm.skytube.databinding.DialogEnterVideoUrlBinding;
 import free.rm.skytube.gui.businessobjects.BlockedVideosDialog;
 import free.rm.skytube.gui.businessobjects.CleanerDialog;
+import free.rm.skytube.gui.businessobjects.PinUtils;
 import free.rm.skytube.gui.businessobjects.adapters.SearchHistoryCursorAdapter;
 import free.rm.skytube.gui.businessobjects.fragments.FragmentEx;
 import free.rm.skytube.gui.businessobjects.updates.UpdatesCheckerTask;
@@ -70,6 +71,7 @@ import free.rm.skytube.gui.fragments.ChannelBrowserFragment;
 import free.rm.skytube.gui.fragments.MainFragment;
 import free.rm.skytube.gui.fragments.PlaylistVideosFragment;
 import free.rm.skytube.gui.fragments.SearchVideoGridFragment;
+import free.rm.skytube.gui.fragments.preferences.VideoBlockerPreferenceFragment;
 import org.woheller69.freeDroidWarn.FreeDroidWarn;
 
 /**
@@ -564,7 +566,12 @@ public class MainActivity extends BaseActivity {
 
 
 		void onMenuBlockerIconClicked() {
-			new BlockedVideosDialog(activity, this, blockedVideos).show();
+			if (blockedVideos.isEmpty()) {
+				BlockedVideosDialog.showVideoBlockerPreferenceFragment(activity);
+			} else {
+				PinUtils.checkPinRequired(activity,
+					() -> new BlockedVideosDialog(activity, this, blockedVideos).show());
+			}
 		}
 
 
