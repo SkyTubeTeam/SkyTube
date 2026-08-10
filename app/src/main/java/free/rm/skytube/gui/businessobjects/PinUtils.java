@@ -21,11 +21,29 @@ import android.content.Context;
 import android.text.InputType;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 
 public class PinUtils {
-    public static void promptForPin(Context context, Runnable onSuccess, Runnable onFailure) {
+    public static void checkPinRequired(Context context, Runnable onSuccess, @Nullable Runnable onFailure, boolean pinEnabledForThis) {
+        if (SkyTubeApp.getSettings().isPinSet() && pinEnabledForThis) {
+            promptForPin(context, onSuccess, onFailure);
+        } else {
+            onSuccess.run();
+        }
+    }
+
+    public static void checkPinRequired(Context context, Runnable onSuccess, @Nullable Runnable onFailure) {
+        checkPinRequired(context, onSuccess, onFailure, true);
+    }
+
+    public static void checkPinRequired(Context context, Runnable onSuccess) {
+        checkPinRequired(context, onSuccess, null);
+    }
+
+    private static void promptForPin(Context context, Runnable onSuccess, @Nullable Runnable onFailure) {
         new SkyTubeMaterialDialog(context)
             .title(R.string.pref_title_enter_security_pin)
             .content(R.string.pref_summary_enter_security_pin)

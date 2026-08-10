@@ -55,26 +55,14 @@ public class ChannelActionHandler {
                 SkyTubeApp.launchChannel(channel.getChannelId(), context);
                 return true;
             case R.id.block_channel:
-                if (SkyTubeApp.getSettings().isPinSet()) {
-                    PinUtils.promptForPin(context,
-                        () -> compositeDisposable.add(channel.blockChannel()
-                            .subscribe(result -> {}, error -> Logger.e(this, error, "Error blocking channel %s", channel.getChannelId()))),
-                        null);
-                } else {
-                    compositeDisposable.add(channel.blockChannel()
-                        .subscribe(result -> {}, error -> Logger.e(this, error, "Error blocking channel %s", channel.getChannelId())));
-                }
+                PinUtils.checkPinRequired(context,
+                    () -> compositeDisposable.add(channel.blockChannel()
+                        .subscribe(result -> {}, error -> Logger.e(this, error, "Error blocking channel %s", channel.getChannelId()))));
                 return true;
             case R.id.unblock_channel:
-                if (SkyTubeApp.getSettings().isPinSet()) {
-                    PinUtils.promptForPin(context,
-                        () -> compositeDisposable.add(channel.unblockChannel()
-                            .subscribe(result -> {}, error -> Logger.e(this, error, "Error unblocking channel %s", channel.getChannelId()))),
-                        null);
-                } else {
-                    compositeDisposable.add(channel.unblockChannel()
-                        .subscribe(result -> {}, error -> Logger.e(this, error, "Error unblocking channel %s", channel.getChannelId())));
-                }
+                PinUtils.checkPinRequired(context,
+                    () -> compositeDisposable.add(channel.unblockChannel()
+                        .subscribe(result -> {}, error -> Logger.e(this, error, "Error unblocking channel %s", channel.getChannelId()))));
                 return true;
             case R.id.share_channel:
                 SkyTubeApp.shareUrl(context, channel.getChannelUrl());
