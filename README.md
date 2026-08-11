@@ -120,5 +120,5 @@ YouTube™ and Android™ are registered trademarks of Google Inc.
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=SkyTubeTeam/SkyTube&type=Date)](https://star-history.com/#SkyTubeTeam/SkyTube&Date)
+[![Star History Chart](https://star-history.dera.page/svg?repos=SkyTubeTeam/SkyTube&type=Date)](https://star-history.dera.page/#SkyTubeTeam/SkyTube&Date)
 
