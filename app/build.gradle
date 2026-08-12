@@ -136,7 +136,7 @@ dependencies {
     annotationProcessor "com.github.bumptech.glide:compiler:$glideVersion"
 
     // Custom dialogs
-    implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
+    implementation 'com.afollestad.material-dialogs:core:3.3.0'
 
     // F-Droid warning dialog (developer verification deprecation notice)
     implementation 'com.github.woheller69:FreeDroidWarn:V1.+'
