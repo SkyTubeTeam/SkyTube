@@ -119,7 +119,7 @@ dependencies {
 
 /** ExoPlayer **/
     // Application level media player
-    def exoplayerVersion = 'r2.9.6'
+    def exoplayerVersion = 'r2.19.1'
     implementation "com.github.google.ExoPlayer:exoplayer-core:$exoplayerVersion"
     implementation "com.github.google.ExoPlayer:exoplayer-ui:$exoplayerVersion"
 
