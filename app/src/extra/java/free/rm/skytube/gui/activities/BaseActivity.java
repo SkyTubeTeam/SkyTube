@@ -95,6 +95,7 @@ public abstract class BaseActivity extends AppCompatActivity implements MainActi
 	private ChromecastControllerFragment chromecastControllerFragment;
 
 	private MediaRouter mediaRouter;
+	private MediaRouter.Callback mediaRouterCallback;
 	private Intent externalPlayIntent;
 	private Intent notificationClickIntent;
 
@@ -131,7 +132,7 @@ public abstract class BaseActivity extends AppCompatActivity implements MainActi
 			mediaRouter = MediaRouter.getInstance(getApplicationContext());
 			MediaRouteSelector mediaRouteSelector = new MediaRouteSelector.Builder()
 					.addControlCategory(CastMediaControlIntent.categoryForCast(BuildConfig.CHROMECAST_APP_ID)).build();
-			mediaRouter.addCallback(mediaRouteSelector, new MediaRouter.Callback() {
+			mediaRouterCallback = new MediaRouter.Callback() {
 				private void onRouteAddedOrChanged(MediaRouter.RouteInfo route) {
 					SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(BaseActivity.this);
 					String defaultChromecastId = sharedPref.getString(getString(R.string.pref_key_autocast), getString(R.string.pref_title_chromecast_none));
@@ -155,7 +156,8 @@ public abstract class BaseActivity extends AppCompatActivity implements MainActi
 				@Override
 				public void onRouteRemoved(MediaRouter router, MediaRouter.RouteInfo route) {
 				}
-			});
+			};
+			mediaRouter.addCallback(mediaRouteSelector, mediaRouterCallback);
 			handleExternalPlayOnChromecast(getIntent());
 		} else {
 			final SharedPreferences preferences = SkyTubeApp.getPreferenceManager();
@@ -179,6 +181,10 @@ public abstract class BaseActivity extends AppCompatActivity implements MainActi
 
 	@Override
 	protected void onDestroy() {
+		if (mediaRouter != null && mediaRouterCallback != null) {
+			mediaRouter.removeCallback(mediaRouterCallback);
+			mediaRouterCallback = null;
+		}
 		compositeDisposable.clear();
 		super.onDestroy();
 	}
