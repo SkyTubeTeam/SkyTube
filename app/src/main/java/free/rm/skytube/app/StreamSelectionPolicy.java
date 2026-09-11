@@ -56,6 +56,17 @@ public class StreamSelectionPolicy {
         return new StreamSelectionPolicy(newValue, maxResolution, minResolution, videoQuality);
     }
 
+    /**
+     * Returns a new policy that forces selection of the given
+     * {@link VideoResolution} by setting both min and max resolution to {@code res}.
+     *
+     * @param res the exact resolution to enforce during stream selection
+     * @return a new {@code StreamSelectionPolicy} restricted to {@code res}
+     */
+    public StreamSelectionPolicy withResolution(VideoResolution res) {
+        return new StreamSelectionPolicy(allowVideoOnly, res, res, videoQuality);
+    }
+
     public StreamSelection select(StreamInfo streamInfo) {
         VideoStreamWithResolution videoStreamWithResolution = pickVideo(streamInfo);
         if (videoStreamWithResolution != null) {
