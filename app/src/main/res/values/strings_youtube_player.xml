@@ -28,6 +28,7 @@
     <string name="ratings_disabled">Ratings off</string>
     <string name="loading_video">Loading video…</string>
     <string name="reload_video">Reload Video</string>
+    <string name="video_quality">Video Quality</string>
     <string name="open_in_browser">Open in web browser</string>
     <string name="open_with">Open with…</string>
     <string name="share">Share</string>
