@@ -670,12 +670,9 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
     /**
      * Switches playback to the given {@link VideoResolution} by selecting the
      * corresponding video/audio streams from the current {@link StreamInfo} and
-     * restarting playback with the new URIs.
+     * restarting playback with the new URIs. Also updates {@code currentResolution}.
      *
-     * Updates {@code currentResolution}, refreshes the Quality submenu, and
-     * preserves player state where possible.
-     *
-     * @param newRes the resolution the user selected from the Quality submenu
+     * @param resolution the resolution the user selected from the Quality submenu
      */
     private void switchQuality(VideoResolution resolution) {
         if (currentStreamInfo == null || resolution == currentResolution) return;
@@ -765,9 +762,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
         }
 
         if (item.getGroupId() == QUALITY_GROUP_ID) {
-            // Dynamic submenu items of Video Quality selector get runtime-assigned ids,
-            // so they can't be `switch` cases checking the group id first is how you
-            // route them before the static-id switch handles the rest.
+            // Dynamic submenu ids are runtime-assigned, so route by group
             switchQuality(availableResolutions.get(item.getItemId()));
             return true;
         }
