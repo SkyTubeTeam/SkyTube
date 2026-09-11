@@ -68,8 +68,8 @@ android {
     }
     // Ignore missing translations
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
 
         coreLibraryDesugaringEnabled true
     }
@@ -170,7 +170,7 @@ dependencies {
     }
 
     // implementation 'com.github.SkyTubeTeam.NewPipeExtractor:NewPipeExtractor:0c8e500efd'
-    implementation 'com.github.SkyTubeTeam:NewPipeExtractor:skytube-2026-05-24'
+    implementation 'com.github.SkyTubeTeam:NewPipeExtractor:skytube-2026-09-12'
 
     def skytubeComponents = '0.0.10'
     implementation ("com.github.SkyTubeTeam.components:okhttp-client:$skytubeComponents") {
