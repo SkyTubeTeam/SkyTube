@@ -30,4 +30,6 @@
     <string name="no">לא</string>
     <string name="search_channel">חיפוש ערוץ</string>
     <string name="cleaner_toast_finish">הסרנו %1$s סרטונים מהסימניות ומחקנו %2$s מ״ב של סרטונים שירדו.</string>
+    <string name="recaptcha_challenge_requested">YouTube חושב שהוא מתקשר עם רובוט, לכן צריך לפתור את חידת ה־reCAPTCHA הזאת קודם.</string>
+    <string name="cleaner_explanation">פינוי סרטונים שנוספו לסימניות/ירדו. להשתמש באפשרויות הסינון הבאות:</string>
 </resources>

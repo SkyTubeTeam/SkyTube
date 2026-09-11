@@ -32,6 +32,7 @@ import free.rm.skytube.R;
 import free.rm.skytube.app.EventBus;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.app.Utils;
+import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
 import free.rm.skytube.businessobjects.YouTube.POJOs.PersistentChannel;
@@ -242,7 +243,10 @@ public class YouTubeTasks {
             getChannelVideosInterface.setChannelQuery(channelId, filterSubscribedVideos);
             return getChannelVideosInterface.getNextVideos();
         })
-                .onErrorReturnItem(Collections.emptyList())
+                .onErrorReturn(err -> {
+                    Log.e(TAG, "Error getting channel informations: " + channelId, err);
+                    return Collections.emptyList();
+                })
                 .map(videos -> {
                     List<YouTubeVideo> realVideos = new ArrayList<>(videos.size());
                     for (CardData cd : videos) {
@@ -463,10 +467,15 @@ public class YouTubeTasks {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnError(error -> {
+                    Log.e(TAG, "Error getting YouTube videos: " + error.getMessage(), error);
                     SkyTubeApp.notifyUserOnError(context, error);
                 })
                 .doOnSuccess(videosList -> {
                     SkyTubeApp.notifyUserOnError(context, getYouTubeVideos.getLastException());
+
+                    if (videosList.isEmpty()) {
+                        Log.w(TAG, "getYouTubeVideos returned empty list for category=" + videoGridAdapter.getCurrentVideoCategory());
+                    }
 
                     if (clearList) {
                         videoGridAdapter.clearList();

@@ -32,7 +32,7 @@
     <string name="play_video">Reproducir vídeo</string>
     <string name="error_get_comments_no_network">Conectar a internet para recibir los comentarios primero.</string>
     <string name="error_video_parse_error">No se puede empezar el vídeo: <br/><br/>%s.</string>
-    <string name="error_downloaded_file_is_corrupted">El vídeo descargado parece <b>corrupto</b> -: <br/><br/> %s<br/><br/> <b>¿Borrar el archivo </b> \?</string>
+    <string name="error_downloaded_file_is_corrupted">El video descargado parece <b>corrupto</b> -: <br/><br/> %s. <br/> <br/> ¿<b>Borrar</b> el archivo ?</string>
     <string name="reload_video">Recargar vídeo</string>
     <string name="metered_network_blocked_by_policy">Descarga bloqueada porque estas conectado a una red con límite de datos.</string>
     <string name="warning_metered_network_disable">No volver a preguntar.</string>

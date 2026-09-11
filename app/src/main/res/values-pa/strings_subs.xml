@@ -16,7 +16,7 @@
     <string name="select_all">ਸਾਰਿਆ ਨੂੰ ਚੁਣੋ</string>
     <string name="select_none">ਕੋਈ ਨਾਂ ਚੁਣੋ</string>
     <string name="no_channels_found">ਤੁਹਾਡੇ ਵੱਲੋਂ ਅੱਪਲੋਡ ਕੀਤੀ ਫ਼ਾਈਲ ਵਿੱਚ ਕੋਈ ਵੀ YouTube ਚੈਨਲ ਨਹੀਂ ਲੱਭ ਸਕਿਆ।</string>
-    <string name="no_new_channels_found">ਕੋਈ ਵੀ YouTube ਚੈਨਲ ਨਹੀਂ ਮਿਲਿਆ ਜਿਸ ਦੀ ਤੁਸੀਂ ਪਹਿਲਾਂ ਤੋਂ ਸਬਸਕ੍ਰਿਪਸ਼ਨ ਨਹੀਂ ਲਈ।</string>
+    <string name="no_new_channels_found">ਕੋਈ ਵੀ ਅਜਿਹਾ YouTube ਚੈਨਲ ਨਹੀਂ ਮਿਲਿਆ ਜਿਸਦੀ ਤੁਸੀਂ ਪਹਿਲਾਂ ਤੋਂ ਸਬਸਕ੍ਰਿਪਸ਼ਨ ਨਾ ਲਈ ਹੋਵੇ।</string>
     <string name="import_subscriptions_parse_error">ਤੁਹਾਡੇ ਵੱਲੋਂ ਅੱਪਲੋਡ ਕੀਤੀ ਗਈ ਫ਼ਾਈਲ ਨੂੰ ਪਾਰਸ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਿਆ: %s।</string>
     <string name="about">ਦੇ ਬਾਰੇ</string>
     <string name="failed_to_import_subscriptions">ਤੁਹਾਡੀਆਂ YouTube ਸਬਸਕ੍ਰਿਪਸ਼ਨਾਂ ਨੂੰ ਆਯਾਤ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਿਆ।</string>

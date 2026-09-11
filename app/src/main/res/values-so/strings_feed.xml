@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="feed">Taxane</string>
+    <string name="channel_related">Kannaal...</string>
+    <string name="subscribing_to_channels">Rukumanaya kannalo…</string>
+    <string name="open_channel">Gal kannaal-ka</string>
+    <string name="fetching_subbed_channels_info">Dalbanaya xogta kannaal-ka…</string>
+    <string name="fetching_subbed_channels_info_error">Lama dalbi kari xogta kannaal-ka.</string>
+    <string name="fetching_subscription_videos">Ka dalbanaya muuqaalo kannaalada aad rukumatay…</string>
+    <string name="fetched_videos_from_channels">La helay %1$d fiidiyowyo ka yimid kanaalada %2$d/%3$d.</string>
+    <string name="no_new_videos_found">Ma jiraan fiidiyowyo cusub.</string>
+    <string name="import_subscriptions_from_youtube">Ka soo dejiso rukumada YouTube</string>
+    <string name="notification_channel_feed_title">Ogeysiisyada taxanaha</string>
+    <string name="notification_new_videos_found">%d fiidiyowyo cusub oo ka yimid kanaalada aad rukumatay</string>
+</resources>

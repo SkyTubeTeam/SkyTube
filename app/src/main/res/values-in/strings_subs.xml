@@ -9,13 +9,13 @@
     <string name="error_get_subbed_channels">Tidak dapat mengambil langganan saluran.</string>
     <string name="error_check_if_user_has_subbed">Tidak dapat memeriksa apakah Anda telah berlangganan saluran (id=%s)</string>
     <string name="import_subscriptions">Impor Langganan</string>
-    <string name="import_subscriptions_description">Hapus semua yang ada di https://takeout.google.com kecuali \"YouTube dan YouTube Music\" dan klik \"Semua data YouTube disertakan\" hanya untuk mendapatkan langganan. Klik \"Berikutnya\" dan kemudian \"Buat ekspor\". Klik untuk menerima email dengan tautan unduhan. Unduh file dari klien email Anda dan ekstrak. Impor subscriptions.json (di /Takeout/YouTube dan YouTube Music/subscriptions/) dari file tersebut di SkyTube menggunakan \"Pilih File Langganan\" di bawah ini.</string>
+    <string name="import_subscriptions_description">Hapus semua yang ada di https://takeout.google.com kecuali \"YouTube dan YouTube Music\" dan klik \"Semua data YouTube yang disertakan\" hanya untuk mendapatkan langganan. Klik \"Berikutnya\" dan kemudian \"Buat ekspor\". Klik untuk menerima email dengan tautan unduhan. Unduh file dari klien email Anda dan ekstrak. Impor subscriptions.json (di /Takeout/YouTube dan YouTube Music/subscriptions/) dari file tersebut di SkyTube menggunakan \"Pilih File Langganan\" di bawah ini.</string>
     <string name="unsubscribe_from_all_current_sibbed_channels">Berhenti berlangganan dari semua saluran langganan Anda saat ini.</string>
     <string name="subscriptions_to_channels_imported">%d channel yang diimpor.</string>
     <string name="select_all">Pilih Semua</string>
     <string name="select_none">Tidak Pilih</string>
     <string name="no_channels_found">Tidak dapat menemukan saluran YouTube apa pun dalam file yang Anda unggah.</string>
-    <string name="no_new_channels_found">Tidak ditemukan saluran YouTube yang belum Anda langgani.</string>
+    <string name="no_new_channels_found">Kami tidak menemukan saluran YouTube apa pun yang belum Anda ikuti.</string>
     <string name="import_subscriptions_parse_error">Tidak dapat mengurai file yang Anda unggah: %s.</string>
     <string name="failed_to_import_subscriptions">Tidak dapat mengimpor langganan YouTube Anda.</string>
     <string name="about">Tentang</string>

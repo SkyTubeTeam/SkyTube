@@ -63,6 +63,7 @@ import free.rm.skytube.businessobjects.db.SearchHistoryTable;
 import free.rm.skytube.databinding.DialogEnterVideoUrlBinding;
 import free.rm.skytube.gui.businessobjects.BlockedVideosDialog;
 import free.rm.skytube.gui.businessobjects.CleanerDialog;
+import free.rm.skytube.gui.businessobjects.PinUtils;
 import free.rm.skytube.gui.businessobjects.adapters.SearchHistoryCursorAdapter;
 import free.rm.skytube.gui.businessobjects.fragments.FragmentEx;
 import free.rm.skytube.gui.businessobjects.updates.UpdatesCheckerTask;
@@ -70,6 +71,8 @@ import free.rm.skytube.gui.fragments.ChannelBrowserFragment;
 import free.rm.skytube.gui.fragments.MainFragment;
 import free.rm.skytube.gui.fragments.PlaylistVideosFragment;
 import free.rm.skytube.gui.fragments.SearchVideoGridFragment;
+import free.rm.skytube.gui.fragments.preferences.VideoBlockerPreferenceFragment;
+import org.woheller69.freeDroidWarn.FreeDroidWarn;
 
 /**
  * Main activity (launcher).  This activity holds {@link free.rm.skytube.gui.fragments.VideosGridFragment}.
@@ -105,6 +108,10 @@ public class MainActivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Logger.i(this, "AppID: %s - flavor: %s buildType: %s version: %s (%s)", BuildConfig.APPLICATION_ID, BuildConfig.FLAVOR, BuildConfig.BUILD_TYPE, BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE);
+
+		// Warn the user that this app will no longer work on certified Android devices once
+		// Google's developer verification is enforced (see https://keepandroidopen.org).
+		FreeDroidWarn.showWarningOnUpgrade(this, BuildConfig.VERSION_CODE);
 
 		// To enable downloading with https on pre-kitkat devices.
 		if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.KITKAT) {
@@ -559,7 +566,12 @@ public class MainActivity extends BaseActivity {
 
 
 		void onMenuBlockerIconClicked() {
-			new BlockedVideosDialog(activity, this, blockedVideos).show();
+			if (blockedVideos.isEmpty()) {
+				BlockedVideosDialog.showVideoBlockerPreferenceFragment(activity);
+			} else {
+				PinUtils.checkPinRequired(activity,
+					() -> new BlockedVideosDialog(activity, this, blockedVideos).show());
+			}
 		}
 
 

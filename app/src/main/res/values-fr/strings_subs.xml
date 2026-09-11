@@ -15,7 +15,7 @@
     <string name="select_all">Tout sélectionner</string>
     <string name="select_none">Tout déselectionner</string>
     <string name="no_channels_found">Impossible de trouver des chaînes YouTube dans le fichier que vous avez téléversé.</string>
-    <string name="no_new_channels_found">Aucune chaîne YouTube à laquelle vous n\'êtes pas déjà abonné·e n\'a été trouvée.</string>
+    <string name="no_new_channels_found">Nous ne pouvons trouver aucune chaîne YouTube à laquelle vous êtes déjà abonné.</string>
     <string name="import_subscriptions_parse_error">Impossible d\'analyser le fichier que vous avez téléversé : %s.</string>
     <string name="failed_to_import_subscriptions">Impossible d\'importer vos abonnements YouTube.</string>
     <string name="about">À propos</string>

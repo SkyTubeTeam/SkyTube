@@ -80,6 +80,9 @@ public abstract class Pager<I extends InfoItem, O> implements PagerBackend<O> {
      */
     public List<O> getNextPage() throws NewPipeException {
         if (!hasNextPage || channelExtractor == null) {
+            if (channelExtractor == null) {
+                Logger.e(this, "channelExtractor is null, returning empty list");
+            }
             return Collections.emptyList();
         }
         try {

@@ -15,12 +15,12 @@
     <string name="select_all">Seleccionar todo</string>
     <string name="select_none">Quitar selección</string>
     <string name="no_channels_found">No encontramos canales en el archivo que ha subido.</string>
-    <string name="no_new_channels_found">No se encontraron canales de YouTube a los que estés suscrito.</string>
+    <string name="no_new_channels_found">No se encontraron canales de YouTube a los que no estés suscrito.</string>
     <string name="import_subscriptions_parse_error">No se puede analizar el archivo que ha subido: %s.</string>
     <string name="failed_to_import_subscriptions">No se pueden importar sus suscripciones de YouTube.</string>
     <string name="about">Acerca de</string>
     <string name="unsubscribe_from_all_current_sibbed_channels">Desuscribir de todos los canales suscritos actualmente .</string>
-    <string name="channel_subscribe_failed">No se pudo suscribir al canal</string>
+    <string name="channel_subscribe_failed">No se pudo subscribir al canal</string>
     <string name="channel_already_subscribed">Suscrito ya</string>
     <string name="channel_subscribed">Suscrito al canal</string>
     <string name="channel_unsubscribed">No suscrito al canal</string>

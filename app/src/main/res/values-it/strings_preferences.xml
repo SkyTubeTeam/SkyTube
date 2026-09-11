@@ -193,4 +193,22 @@
     <string name="pref_summary_require_pin_code">Per alcune modifiche è necessario inserire un codice PIN.</string>
     <string name="pref_title_change_security_pin">Cambia PIN di sicurezza</string>
     <string name="pref_summary_change_security_pin">Modifica il PIN per proteggere l\'accesso alle preferenze e alle azioni sensibili.</string>
+    <string name="pref_title_export_subs_opml">Esporta iscrizioni in OPML</string>
+    <string name="pref_summary_export_subs_opml">Esporta le tue iscrizioni in un file OPML.</string>
+    <string name="pref_title_import_subs_opml">Importa iscrizioni da OPML</string>
+    <string name="pref_summary_import_subs_opml">Importa le tue iscrizioni da un file OPML.</string>
+    <string name="subscriptions_exporting_opml">Esportazione delle iscrizioni in OPML…</string>
+    <string name="subscriptions_export_opml_success">Iscrizioni esportate correttamente come %s</string>
+    <string name="subscriptions_export_opml_fail">Impossibile esportare le iscrizioni in OPML.</string>
+    <string name="opml_export_title">Esporta iscrizioni in OPML</string>
+    <string name="opml_file_picker_title">Seleziona file OPML</string>
+    <string name="opml_export_unknown_filename">Nome file sconosciuto</string>
+    <string name="opml_export_message">Scegli un nome file per l\'esportazione OPML:</string>
+    <string name="opml_export_confirm">Esporta</string>
+    <string name="opml_export_cancel">Annulla</string>
+    <string name="opml_directory_title">Scegli posizione di esportazione</string>
+    <string name="opml_directory_message">Seleziona la directory per l\'esportazione OPML:</string>
+    <string name="opml_directory_use_default">Usa predefinito (download)</string>
+    <string name="opml_directory_select">Seleziona directory</string>
+    <string name="opml_export_location">Posizione di esportazione: %s</string>
 </resources>

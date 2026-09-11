@@ -143,10 +143,9 @@ public class DatabaseTasks {
     public static Disposable isVideoBookmarked(@NonNull String videoId, @NonNull Menu menu) {
         return BookmarksDb.getBookmarksDb().isVideoBookmarked(videoId)
                 .subscribe(videoIsBookmarked -> {
-                    // if this video has been bookmarked, hide the bookmark option and show the unbookmark option.
                     menu.findItem(R.id.bookmark_video).setVisible(!videoIsBookmarked);
                     menu.findItem(R.id.unbookmark_video).setVisible(videoIsBookmarked);
-                });
+                }, error -> Log.e(TAG, "Error checking bookmark status for " + videoId, error));
     }
 
     public static void updateDownloadedVideoMenu(@NonNull YouTubeVideo video, @NonNull Menu menu) {
@@ -158,7 +157,7 @@ public class DatabaseTasks {
                 if (!isDownloaded) {
                     downloadVideo.setVisible(true);
                 }
-            });
+            }, error -> Log.e(TAG, "Error checking download status for " + video, error));
         }
     }
 
@@ -169,10 +168,9 @@ public class DatabaseTasks {
         return PlaybackStatusDb.getPlaybackStatusDb().getVideoWatchedStatusAsync(videoId)
                 .subscribe(videoStatus -> {
                     boolean videoIsWatched = videoStatus != null && videoStatus.isFullyWatched();
-                    // if this video has been watched, hide the set watched option and show the set unwatched option.
                     menu.findItem(R.id.mark_watched).setVisible(!videoIsWatched);
                     menu.findItem(R.id.mark_unwatched).setVisible(videoIsWatched);
-                });
+                }, error -> Log.e(TAG, "Error checking watched status for " + videoId, error));
     }
 
     /**

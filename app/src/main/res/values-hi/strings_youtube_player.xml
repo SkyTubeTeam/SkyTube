@@ -17,7 +17,7 @@
     <string name="error_video_streams">किसी भी वीडियो स्ट्रीम को प्राप्त नहीं किया जा सका।</string>
     <string name="error_get_video_desc">वीडियो विवरण नहीं लाया जा सका.</string>
     <string name="error_invalid_url">अमान्य वीडियो यूआरएल: %s</string>
-    <string name="error_downloaded_file_is_corrupted">डाउनलोड किया गया वीडियो <b>दूषित</b> दिखता है: <br/> <br/> %s। <br/> <br/> <b>हटाएं</b> फ़ाइल\?</string>
+    <string name="error_downloaded_file_is_corrupted">डाउनलोड किया गया वीडियो &lt;b&gt;खराब&lt;/b&gt; लग रहा है: &lt;br/&gt; &lt;br/&gt; %s।&lt;br/&gt; &lt;br/&gt; फ़ाइल &lt;b&gt;मिटा दें&lt;/b&gt;?</string>
     <string name="error_video_parse_error">वीडियो प्रारंभ नहीं किया जा सका: <br/> <br/> %s.</string>
     <string name="metered_network">मीटर्ड नेटवर्क</string>
     <string name="warning_metered_network_play">पहले डेटा उपयोग शुल्क से बचने के लिए किसी अनमीटर्ड नेटवर्क से कनेक्ट करें। फिर भी वीडियो चलाएं\?</string>

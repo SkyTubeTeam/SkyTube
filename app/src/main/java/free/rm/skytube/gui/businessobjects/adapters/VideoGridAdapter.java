@@ -219,8 +219,9 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<CardData, GridViewHo
 			// now, we consider this as initialized - sometimes 'refresh' can be called before the initializeList is called.
 			initialized = true;
 
-			compositeDisposable.add(YouTubeTasks.getYouTubeVideos(getYouTubeVideos, this,
-					swipeRefreshLayout, clearVideosList).subscribe());
+		compositeDisposable.add(YouTubeTasks.getYouTubeVideos(getYouTubeVideos, this,
+				swipeRefreshLayout, clearVideosList)
+				.subscribe(videos -> {}, error -> Logger.e(this, error, "Error refreshing videos")));
 		}
 	}
 
@@ -234,7 +235,8 @@ public class VideoGridAdapter extends RecyclerViewAdapterEx<CardData, GridViewHo
 			if(getYouTubeVideos != null) {
 				refreshHappens = true;
 				compositeDisposable.add(YouTubeTasks.getYouTubeVideos(getYouTubeVideos, this,
-						swipeRefreshLayout, false).subscribe());
+						swipeRefreshLayout, false)
+						.subscribe(videos -> {}, error -> Logger.e(this, error, "Error loading more videos")));
 			}
 		}
 	}

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="download">Soo dejiso</string>
+    <string name="downloads">Soo dejinta</string>
+    <string name="download_video">Soo dejiso Fiidiyowga</string>
+    <string name="unable_to_delete_file">Lama tirtiri karo faylka \'%s\' ee la soo dejiyay.</string>
+    <string name="starting_video_download">Soo dejinaya \'%s\'…</string>
+    <string name="video_download_stream_error">La ma soo dejisan karo\'%s\'.</string>
+    <string name="download_failed_because">Lama soo dejisan karo %1$s sababtoo ah %2$s.</string>
+    <string name="video_stream_not_found_with_request_resolution">Ma aanan helin wax muuqaal ah oo leh tayada %1$s-%2$s ee la codsaday</string>
+    <string name="delete_download">Tirtir Soo dejinta</string>
+    <string name="video_downloaded">\'%s\' waa la soo dejiyay.</string>
+    <string name="no_downloaded_videos_text">Soo dejiso fiidiyowyo qaar si aad halkan uga hesho.</string>
+    <string name="external_storage_not_available">U oggolow dibadda si logo soo dejiyo marka hore faylka.</string>
+</resources>

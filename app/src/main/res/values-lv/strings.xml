@@ -31,4 +31,5 @@
     <string name="featured">Ieteiktie</string>
     <string name="recaptcha_challenge_requested">YouTube uzskata, ka jūs esat robots, tāpēc jums jāatrisina reCAPTCHA.</string>
     <string name="video_comments_are_disabled">Nav atļauts komentēt video</string>
+    <string name="incorrect_pin">Nepareizs PIN kods</string>
 </resources>

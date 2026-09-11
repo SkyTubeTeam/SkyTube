@@ -15,7 +15,7 @@
     <string name="select_all">Seleziona tutto</string>
     <string name="select_none">Deseleziona tutto</string>
     <string name="no_channels_found">Impossibile trovare canali YouTube nel file che hai caricato.</string>
-    <string name="no_new_channels_found">Non è stato trovato alcun canale Youtube a cui tu non sia già iscritto.</string>
+    <string name="no_new_channels_found">Non è stato trovato alcun canale YouTube a cui non sei già iscritto.</string>
     <string name="import_subscriptions_parse_error">Impossibile analizzare il file che hai caricato: %s.</string>
     <string name="failed_to_import_subscriptions">Impossibile importare le iscrizioni a YouTube.</string>
     <string name="about">Informazioni su</string>

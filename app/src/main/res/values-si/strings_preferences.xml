@@ -55,7 +55,7 @@
     <string name="system_default_country">පද්ධතිය</string>
     <string name="pref_title_updates">යාවත්කාලීන කිරීම්</string>
     <string name="pref_summary_updates">නව අනුවාද සඳහා පරීක්ෂා කරන්න.</string>
-    <string name="pref_summary_feed_notification">දායක වූ නාලිකාවලින් කොපමණ වාරයක් නව වීඩියෝ සොයන්නද: %s</string>
+    <string name="pref_summary_feed_notification">දායක වූ චැනල්වලින් කොපමණ වාරයක් නව වීඩියෝ සොයන්නද: %s</string>
     <string name="pref_title_default_tab">පෙරනිමි ටැබ්</string>
     <string name="pref_title_feed_notification">ස්වයංක්‍රීය සංග්‍රහ විස්තර දැනුම්දීම</string>
     <string name="pref_hide_tabs_restart">මෙම ටැබ් භාවිතා කිරීමට යෙදුම නැවත ආරම්භ කරන්න.</string>
@@ -83,4 +83,19 @@
     <string name="pref_youtube_api_key_custom">නව YouTube API යතුර භාවිත කිරීමට යෙදුම නැවත ආරම්භ කරන්න.</string>
     <string name="pref_youtube_api_key_default">ඒ වෙනුවට පෙරනිමි YouTube API යතුර භාවිත කිරීමට යෙදුම නැවත ආරම්භ කරන්න.</string>
     <string name="pref_title_use_newpipe_backend">NewPipe back-end</string>
+    <string name="pref_summary_use_newpipe_backend">YouTube වෙත ප්‍රවේශ වීමට NewPipe API භාවිතා කරන්න…</string>
+    <string name="restart">යළි අරඹන්න</string>
+    <string name="pref_title_subscriptions_alphabetical_order">චැනල් අකාරාදී පිළිවෙලට ලැයිස්තු කරන්න</string>
+    <string name="pref_summary_subscriptions_alphabetical_order">subscribed චැනල් අකාරාදී පිළිවෙලට ලැයිස්තුගත කරන්න.</string>
+    <string name="pref_title_use_dislike_api">Return dislike කවුන්ටරය</string>
+    <string name="pref_category_downloads">බාගැනීම්</string>
+    <string name="pref_category_download_resolutions">බාගැනීම් සඳහා වීඩියෝ විභේදනය</string>
+    <string name="pref_title_download_to_separate_directories">චැනල් ෆෝල්ඩර බාගැනීම්</string>
+    <string name="pref_summary_download_to_separate_directories">චැනල් නම අනුව ෆෝල්ඩර් වලට සේව් කරන්න.</string>
+    <string name="pref_popup_title_video_download_folder">ෆෝල්ඩරය තෝරන්න</string>
+    <string name="pref_title_video_download_folder">වීඩියෝ බාගැනීම් ෆෝල්ඩරය</string>
+    <string name="pref_summary_video_download_folder">වීඩියෝ %s වෙත ඩවුන්ලෝඩ් වේ</string>
+    <string name="pref_channels_filter_category">චැනල් තේරීම්</string>
+    <string name="pref_title_channel_filter_method">චැනල් තේරීම් ක්‍රමය</string>
+    <string name="pref_summary_channel_filter_method">චැනල් තේරීම් කරන ක්‍රමය තෝරන්න: %s</string>
 </resources>

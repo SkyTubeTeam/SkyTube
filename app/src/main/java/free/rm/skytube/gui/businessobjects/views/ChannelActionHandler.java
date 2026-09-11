@@ -24,6 +24,7 @@ import androidx.annotation.Nullable;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
+import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.newpipe.ChannelId;
 import free.rm.skytube.businessobjects.db.DatabaseTasks;
@@ -42,32 +43,26 @@ public class ChannelActionHandler {
     public boolean handleChannelActions(Context context, YouTubeChannel channel, int itemId) {
         switch (itemId) {
             case R.id.subscribe_channel:
-                compositeDisposable.add(DatabaseTasks.subscribeToChannel(true, null, context, channel.getChannelId(), true).subscribe());
+                compositeDisposable.add(DatabaseTasks.subscribeToChannel(true, null, context, channel.getChannelId(), true)
+                    .subscribe(result -> {}, error -> Logger.e(this, error, "Error subscribing to channel %s", channel.getChannelId())));
                 return true;
             case R.id.unsubscribe_channel:
                 compositeDisposable.add(DatabaseTasks.subscribeToChannel(false,
-                        null, context, channel.getChannelId(), true).subscribe());
+                        null, context, channel.getChannelId(), true)
+                    .subscribe(result -> {}, error -> Logger.e(this, error, "Error unsubscribing from channel %s", channel.getChannelId())));
                 return true;
             case R.id.open_channel:
                 SkyTubeApp.launchChannel(channel.getChannelId(), context);
                 return true;
             case R.id.block_channel:
-                if (SkyTubeApp.getSettings().isPinSet()) {
-                    PinUtils.promptForPin(context,
-                        () -> compositeDisposable.add(channel.blockChannel().subscribe()),
-                        null);
-                } else {
-                    compositeDisposable.add(channel.blockChannel().subscribe());
-                }
+                PinUtils.checkPinRequired(context,
+                    () -> compositeDisposable.add(channel.blockChannel()
+                        .subscribe(result -> {}, error -> Logger.e(this, error, "Error blocking channel %s", channel.getChannelId()))));
                 return true;
             case R.id.unblock_channel:
-                if (SkyTubeApp.getSettings().isPinSet()) {
-                    PinUtils.promptForPin(context,
-                        () -> compositeDisposable.add(channel.unblockChannel().subscribe()),
-                        null);
-                } else {
-                    compositeDisposable.add(channel.unblockChannel().subscribe());
-                }
+                PinUtils.checkPinRequired(context,
+                    () -> compositeDisposable.add(channel.unblockChannel()
+                        .subscribe(result -> {}, error -> Logger.e(this, error, "Error unblocking channel %s", channel.getChannelId()))));
                 return true;
             case R.id.share_channel:
                 SkyTubeApp.shareUrl(context, channel.getChannelUrl());
@@ -84,10 +79,10 @@ public class ChannelActionHandler {
         if (channelId != null) {
             compositeDisposable.add(SubscriptionsDb.getSubscriptionsDb().getUserSubscribedToChannel(channelId)
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe((subscribed) -> {
+                    .subscribe(subscribed -> {
                         setVisible(menu, R.id.subscribe_channel, !subscribed);
                         setVisible(menu, R.id.unsubscribe_channel, subscribed);
-                    }));
+                    }, error -> Logger.e(this, error, "Error getting subscription status for %s", channelId)));
         }
     }
 

@@ -12,8 +12,8 @@ android {
         //noinspection ExpiredTargetSdkVersion
         targetSdkVersion 28
 
-        versionName "2.998"    // digits of the *fractional part* shall NOT be > than "9"
-        versionCode 58
+        versionName "2.999"    // digits of the *fractional part* shall NOT be > than "9"
+        versionCode 59
 
         // Third party devs:  pls be ethical and change the below keys
         buildConfigField 'String', 'YOUTUBE_API_KEYS_DEBUG', '""'
@@ -138,6 +138,9 @@ dependencies {
     // Custom dialogs
     implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
 
+    // F-Droid warning dialog (developer verification deprecation notice)
+    implementation 'com.github.woheller69:FreeDroidWarn:V1.+'
+
     // File / folder chooser
     implementation 'com.github.hedzr:android-file-chooser:v1.2.0-final'
 
@@ -167,7 +170,7 @@ dependencies {
     }
 
     // implementation 'com.github.SkyTubeTeam.NewPipeExtractor:NewPipeExtractor:0c8e500efd'
-    implementation 'com.github.SkyTubeTeam:NewPipeExtractor:skytube-2026-01-28'
+    implementation 'com.github.SkyTubeTeam:NewPipeExtractor:skytube-2026-05-24'
 
     def skytubeComponents = '0.0.10'
     implementation ("com.github.SkyTubeTeam.components:okhttp-client:$skytubeComponents") {
