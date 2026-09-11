@@ -128,6 +128,9 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
     private long playerInitialPosition = 0;
     private DatasourceBuilder datasourceBuilder;
 
+    private StreamInfo currentStreamInfo;
+    private VideoResolution currentResolution;
+
     private Menu menu = null;
 
     private BaseExpandableListAdapter commentsAdapter = null;
@@ -582,6 +585,13 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
                                                                         Logger.i(YouTubePlayerV2Fragment.this, ">> PLAYING: %s, audio: %s", uri, selection.getAudioStreamUri());
                                                                         playVideo(uri, selection.getAudioStreamUri(), desiredStream);
                                                                         setupInfoDisplay(video);
+
+                                                                        currentStreamInfo = desiredStream;
+                                                                        currentResolution = selection.getResolution();
+
+                                                                        // Because the stream info arrives asynchronously, Android must be forced to
+                                                                        // re-run `onPrepareOptionsMenu` to populate the Quality submenu with it.
+                                                                        requireActivity().invalidateOptionsMenu();
                                                                     } else {
                                                                         videoPlaybackError(selectionPolicy.getErrorMessage(getContext()));
                                                                     }
