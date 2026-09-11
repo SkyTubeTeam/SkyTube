@@ -34,6 +34,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -69,6 +70,8 @@ import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import org.schabi.newpipe.extractor.StreamingService;
 import org.schabi.newpipe.extractor.stream.StreamInfo;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Locale;
 
 import free.rm.skytube.R;
@@ -95,6 +98,7 @@ import free.rm.skytube.businessobjects.interfaces.GetDesiredStreamListener;
 import free.rm.skytube.businessobjects.interfaces.PlaybackStateListener;
 import free.rm.skytube.businessobjects.interfaces.YouTubePlayerActivityListener;
 import free.rm.skytube.businessobjects.interfaces.YouTubePlayerFragmentInterface;
+import free.rm.skytube.businessobjects.YouTube.VideoStream.VideoResolution;
 import free.rm.skytube.databinding.FragmentYoutubePlayerV2Binding;
 import free.rm.skytube.databinding.VideoDescriptionBinding;
 import free.rm.skytube.gui.activities.ThumbnailViewerActivity;
@@ -117,6 +121,8 @@ import io.reactivex.rxjava3.internal.functions.Functions;
 @RequiresApi(api = 14)
 public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements YouTubePlayerFragmentInterface, Linker.CurrentActivity {
     private static final String TAG = YouTubePlayerV2Fragment.class.getSimpleName();
+    private static final int QUALITY_GROUP_ID = 1000;
+
     private YouTubeVideo youTubeVideo = null;
     private VideoId videoId;
     private YouTubeChannel youTubeChannel = null;
@@ -132,6 +138,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
     private VideoResolution currentResolution;
 
     private Menu menu = null;
+    private List<VideoResolution> availableResolutions = Collections.emptyList();
 
     private BaseExpandableListAdapter commentsAdapter = null;
     private YouTubePlayerActivityListener listener = null;
@@ -718,6 +725,8 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
             qualityItem.setVisible(false);
         } else {
             qualityItem.setVisible(true);
+            StreamSelectionPolicy policy =
+                SkyTubeApp.getSettings().getDesiredVideoResolution(false).withAllowVideoOnly(true);
             List<VideoResolution> res = policy.getAvailableResolutions(currentStreamInfo);
             for (int i = 0; i < res.size(); i++) {
                 String resolution = res.get(i).toString(); // e.g. "720p"
@@ -726,6 +735,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
                 mi.setChecked(res.get(i) == currentResolution);
             }
             sub.setGroupCheckable(QUALITY_GROUP_ID, true, true); // radio behaviour
+            availableResolutions = res;
         }
     }
 
