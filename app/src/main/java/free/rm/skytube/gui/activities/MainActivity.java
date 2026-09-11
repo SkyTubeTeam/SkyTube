@@ -393,17 +393,25 @@ public class MainActivity extends BaseActivity {
 				.setNegativeButton(R.string.cancel, null)
 				.show();
 
-		// paste whatever there is in the clipboard (hopefully it is a video url)
-		CharSequence charSequence = getClipboardItem();
-		if (charSequence != null) {
-			dialogBinding.dialogUrlEdittext.setText(charSequence.toString());
-		}
+		dialogBinding.dialogUrlEdittext.setText(getNonEmptyClipboardText());
 
 		// clear URL edittext button
 		dialogBinding.dialogUrlClearButton.setOnClickListener(v ->
 				dialogBinding.dialogUrlEdittext.setText(""));
 	}
 
+    private String getNonEmptyClipboardText() {
+        // paste whatever there is in the clipboard (hopefully it is a video url)
+        CharSequence charSequence = getClipboardItem();
+        Logger.i(this, "On the clipboard there was: '%s", charSequence);
+        if (charSequence != null) {
+            String trimmed = charSequence.toString().trim();
+            if (!trimmed.isEmpty()) {
+                return trimmed;
+            }
+        }
+        return "https://youtu.be/";
+    }
 
 	/**
 	 * Return the last item stored in the clipboard.
