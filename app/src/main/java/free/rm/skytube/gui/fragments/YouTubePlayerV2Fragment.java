@@ -724,6 +724,15 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
         if (actionHandler.handleChannelActions(context, youTubeChannel, item.getItemId())) {
             return true;
         }
+
+        if (item.getGroupId() == QUALITY_GROUP_ID) {
+            // Dynamic submenu items of Video Quality selector get runtime-assigned ids,
+            // so they can't be `switch` cases checking the group id first is how you
+            // route them before the static-id switch handles the rest.
+            switchQuality(availableResolutions.get(item.getItemId()));
+            return true;
+        }
+
         switch (item.getItemId()) {
             case R.id.menu_reload_video:
                 player.seekToDefaultPosition();
