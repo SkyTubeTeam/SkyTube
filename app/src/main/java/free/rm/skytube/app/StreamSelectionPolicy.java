@@ -168,6 +168,32 @@ public class StreamSelectionPolicy {
         return pick(streams);
     }
 
+    /**
+     * Returns all valid video resolutions offered by the given {@link StreamInfo}.
+     * Includes DASH video‑only streams when {@code allowVideoOnly} is enabled.
+     * Filters out unsupported formats and non‑URL streams, then returns a
+     * deduplicated, highest‑to‑lowest list of {@link VideoResolution}.
+     * 
+     * @param streamInfo the full stream descriptor for the currently loaded video; must not be null
+     * @return a sorted list (highest first) of all valid {@link VideoResolution} values offered
+     *         by the video; never {@code null}, but may be empty if no playable streams exist
+     */
+    public List<VideoResolution> getAvailableResolutions(StreamInfo streamInfo) {
+        Set<VideoResolution> found = EnumSet.noneOf(VideoResolution.class);
+        List<VideoStream> streams = new ArrayList<>(streamInfo.getVideoStreams());
+        if (allowVideoOnly) {
+            streams.addAll(streamInfo.getVideoOnlyStreams());
+        }
+        for (VideoStream s : streams) {
+            if (!s.isUrl() || !isAllowedVideoFormat(s.getFormat())) continue;
+            VideoResolution r = VideoResolution.resolutionToVideoResolution(s.getResolution());
+            if (r != VideoResolution.RES_UNKNOWN) found.add(r);
+        }
+        List<VideoResolution> list = new ArrayList<>(found);
+        Collections.sort(list, Collections.reverseOrder()); // highest first
+        return list;
+    }
+
     private VideoStreamWithResolution pick(Collection<VideoStream> streams) {
         VideoStreamWithResolution best = null;
         for (VideoStream stream : streams) {
