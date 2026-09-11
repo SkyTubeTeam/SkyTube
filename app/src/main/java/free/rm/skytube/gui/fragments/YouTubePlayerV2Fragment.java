@@ -680,6 +680,24 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
                 openChannel.setVisible(false);
             }
         }
+
+        MenuItem qualityItem = menu.findItem(R.id.video_quality);
+        SubMenu sub = qualityItem.getSubMenu();
+        sub.removeGroup(QUALITY_GROUP_ID);
+        if (currentStreamInfo == null) {
+            // local playback / live stream / not loaded yet
+            qualityItem.setVisible(false);
+        } else {
+            qualityItem.setVisible(true);
+            List<VideoResolution> res = policy.getAvailableResolutions(currentStreamInfo);
+            for (int i = 0; i < res.size(); i++) {
+                String resolution = res.get(i).toString(); // e.g. "720p"
+                MenuItem mi = sub.add(QUALITY_GROUP_ID, i, i, resolution);
+                mi.setCheckable(true);
+                mi.setChecked(res.get(i) == currentResolution);
+            }
+            sub.setGroupCheckable(QUALITY_GROUP_ID, true, true); // radio behaviour
+        }
     }
 
     @Override
