@@ -335,7 +335,7 @@ public class CommentsAdapter extends BaseExpandableListAdapter {
 
     private static String getCommentText(CommentsInfoItem infoItem) {
         Description description = infoItem.getCommentText();
-        return description != null ? description.getContent() : "";
+        return description != null ? description.content() : "";
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////

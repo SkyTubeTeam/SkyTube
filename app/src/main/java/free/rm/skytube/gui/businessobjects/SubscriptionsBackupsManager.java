@@ -604,10 +604,10 @@ public class SubscriptionsBackupsManager {
         NewPipeService newPipeService = NewPipeService.get();
         SubscriptionsDb subscriptionsDb = SubscriptionsDb.getSubscriptionsDb();
         for (SubscriptionItem item : items){
-            String url = item.getUrl();
+            String url = item.url();
             ContentId contentId = newPipeService.getContentId(url);
             if (contentId != null && contentId.getType() == StreamingService.LinkType.CHANNEL && !subscriptionsDb.isUserSubscribedToChannel(new ChannelId(contentId.getId()))) {
-                result.add(new MultiSelectListPreferenceItem(contentId.getId(), item.getName()));
+                result.add(new MultiSelectListPreferenceItem(contentId.getId(), item.name()));
             }
         }
         return new Result(result, items.isEmpty());

@@ -40,10 +40,10 @@ public class NewPipeUtils {
 
     public static String filterHtml(Description description) {
         String result;
-        if (description.getType() == Description.HTML) {
-            result = filterHtml(description.getContent());
+        if (description.type() == Description.Type.HTML) {
+            result = filterHtml(description.content());
         } else {
-            result = description.getContent();
+            result = description.content();
         }
         return result;
     }
