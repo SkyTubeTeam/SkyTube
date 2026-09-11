@@ -660,6 +660,35 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
         }
     }
 
+    /**
+     * Switches playback to the given {@link VideoResolution} by selecting the
+     * corresponding video/audio streams from the current {@link StreamInfo} and
+     * restarting playback with the new URIs.
+     *
+     * Updates {@code currentResolution}, refreshes the Quality submenu, and
+     * preserves player state where possible.
+     *
+     * @param newRes the resolution the user selected from the Quality submenu
+     */
+    private void switchQuality(VideoResolution resolution) {
+        if (currentStreamInfo == null || resolution == currentResolution) return;
+        StreamSelectionPolicy policy = SkyTubeApp.getSettings()
+                .getDesiredVideoResolution(false)
+                .withAllowVideoOnly(true)
+                .withResolution(resolution);
+        StreamSelectionPolicy.StreamSelection sel = policy.select(currentStreamInfo);
+        if (sel == null) {
+            Toast.makeText(getContext(), policy.getErrorMessage(getContext()), Toast.LENGTH_LONG).show();
+            return;
+        }
+        long position = player.getCurrentPosition();
+        boolean wasPlaying = player.getPlayWhenReady();
+        datasourceBuilder.play(sel.getVideoStreamUri(), sel.getAudioStreamUri(), currentStreamInfo);
+        player.seekTo(position);
+        player.setPlayWhenReady(wasPlaying);
+        currentResolution = sel.getResolution();
+    }
+
     @Override
     public void onPrepareOptionsMenu(@NonNull Menu menu) {
         DatabaseTasks.updateDownloadedVideoMenu(youTubeVideo, menu);
