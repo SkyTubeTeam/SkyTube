@@ -811,6 +811,12 @@
     </string-array>
 
     <!--
+        PRIVACY CONTROL CHECK (STARTUP DIALOG)
+    -->
+    <string name="privacy_control_title">Privacy features</string>
+    <string name="privacy_control_message">SkyTube provides these privacy-enhancing features. Use the switches below to enable or disable them.</string>
+
+    <!--
         SECURITY
     -->
     <string name="pref_security_category">Security</string>
