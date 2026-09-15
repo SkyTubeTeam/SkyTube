@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			  android:orientation="vertical"
+			  android:layout_width="match_parent"
+			  android:layout_height="wrap_content"
+			  android:paddingLeft="?dialogPreferredPadding"
+			  android:paddingRight="?dialogPreferredPadding">
+
+	<TextView
+		android:id="@+id/privacy_control_message"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginBottom="8dp"
+		android:text="@string/privacy_control_message"
+		android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+	<LinearLayout
+		android:id="@+id/privacy_control_sb_row"
+		android:orientation="horizontal"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginBottom="8dp"
+		android:gravity="center_vertical">
+
+		<LinearLayout
+			android:orientation="vertical"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1">
+
+			<TextView
+				android:id="@+id/privacy_control_sb_title"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="@string/pref_sponsorblock_category"
+				android:textAppearance="?android:attr/textAppearanceMedium"
+				android:textStyle="bold"/>
+
+			<TextView
+				android:id="@+id/privacy_control_sb_summary"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="@string/pref_summary_enable_sponsorblock"
+				android:textAppearance="?android:attr/textAppearanceSmall"/>
+		</LinearLayout>
+
+		<com.google.android.material.switchmaterial.SwitchMaterial
+			android:id="@+id/privacy_control_sb_switch"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="16dp"
+			android:contentDescription="@string/pref_sponsorblock_category"/>
+	</LinearLayout>
+
+	<LinearLayout
+		android:id="@+id/privacy_control_ryd_row"
+		android:orientation="horizontal"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:gravity="center_vertical">
+
+		<LinearLayout
+			android:orientation="vertical"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1">
+
+			<TextView
+				android:id="@+id/privacy_control_ryd_title"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="@string/pref_title_use_dislike_api"
+				android:textAppearance="?android:attr/textAppearanceMedium"
+				android:textStyle="bold"/>
+
+			<TextView
+				android:id="@+id/privacy_control_ryd_summary"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="@string/pref_summary_use_dislike_api"
+				android:textAppearance="?android:attr/textAppearanceSmall"/>
+		</LinearLayout>
+
+		<com.google.android.material.switchmaterial.SwitchMaterial
+			android:id="@+id/privacy_control_ryd_switch"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="16dp"
+			android:contentDescription="@string/pref_title_use_dislike_api"/>
+	</LinearLayout>
+
+</LinearLayout>
