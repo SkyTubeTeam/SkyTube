@@ -211,4 +211,6 @@
     <string name="pref_title_import_subs_opml">Abonelikleri OPML Dosyasından İçe Aktar</string>
     <string name="pref_summary_import_subs_opml">Aboneliklerinizi bir OPML dosyasından içe aktarın.</string>
     <string name="opml_file_picker_title">OPML Dosyası Seç</string>
+    <string name="privacy_control_title">Gizlilik özellikleri</string>
+    <string name="privacy_control_message">SkyTube, gizliliği artıran bu özellikleri sunar. Etkinleştirmek veya devre dışı bırakmak için aşağıdaki seçenekleri kullanın.</string>
 </resources>
