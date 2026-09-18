@@ -199,4 +199,6 @@
     <string name="pref_title_import_subs_opml">Impordi tellimused OPML-failist</string>
     <string name="pref_summary_import_subs_opml">Impordi oma tellimused OPML-failist.</string>
     <string name="opml_file_picker_title">Vali OPML-fail</string>
+    <string name="privacy_control_title">Privaatsusega seotud funktsionaalsused</string>
+    <string name="privacy_control_message">SkyTube on lisanud need privaatsust tõhustavad funktsionaalsused. Alljärgnevas saad neid sisse/välja lülitada.</string>
 </resources>
