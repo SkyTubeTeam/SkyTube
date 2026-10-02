@@ -70,7 +70,7 @@ public class UpdatesCheckerTask extends AsyncTaskParallel<Void, Void, UpdatesChe
 	@Override
 	protected void onPostExecute(final UpdatesChecker updatesChecker) {
 		// if there is an update available...
-		if (updatesChecker != null && updatesChecker.isUpdateAvailable() && updatesChecker.getLatestApkUrl() != null) {
+		if (updatesChecker != null && updatesChecker.isUpdateAvailable()) {
 			if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
 				// inform the user, that there is an update, but their OS is too old..
 				Toast.makeText(context, context.getString(R.string.android_too_old), Toast.LENGTH_LONG).show();
@@ -78,18 +78,36 @@ public class UpdatesCheckerTask extends AsyncTaskParallel<Void, Void, UpdatesChe
 				// ask the user whether he wants to update or not
 				new AlertDialog.Builder(context)
 						.setTitle(R.string.update_available)
-						.setMessage(String.format(context.getString(R.string.update_dialog_msg), updatesChecker.getLatestApkVersion()))
-						.setPositiveButton(R.string.update, (dialog, which) -> new UpgradeAppTask(updatesChecker.getLatestApkUrl(), context).executeInParallel())
+						.setMessage(String.format(context.getString(
+								updatesChecker.getLatestApkUrl() != null ?
+								R.string.update_dialog_msg :
+								R.string.update_available_fdroid),
+							updatesChecker.getLatestApkVersion()))
+						.setPositiveButton(
+								updatesChecker.getLatestApkUrl() != null ?
+								R.string.update : 
+								R.string.update_open_fdroid,
+								(dialog, which) -> {
+									if (updatesChecker.getLatestApkUrl() != null) {
+										new UpgradeAppTask(updatesChecker.getLatestApkUrl(), context).executeInParallel();
+									} else {
+										new OpenFDroidTask(context).executeInParallel();
+									}
+								})
 						.setNegativeButton(R.string.later, null)
 						.show();
 			}
 		} else if (displayUpToDateMessage) {
-			// inform the user that there is no update available (app is up-to-date)
-			new AlertDialog.Builder(context)
-					.setTitle(R.string.up_to_date)
-					.setMessage(R.string.up_to_date_msg)
-					.setNeutralButton(R.string.ok, null)
-					.show();
+            if (updatesChecker.getFailure() != null) {
+                Toast.makeText(context, context.getString(R.string.unable_to_check_for_updates, updatesChecker.getFailure().getMessage()), Toast.LENGTH_LONG).show();
+            } else {
+                // inform the user that there is no update available (app is up-to-date)
+                new AlertDialog.Builder(context)
+                        .setTitle(R.string.up_to_date)
+                        .setMessage(R.string.up_to_date_msg)
+                        .setNeutralButton(R.string.ok, null)
+                        .show();
+            }
 		} else if (showReleaseNotes && updatesChecker.getReleaseNotes() != null) {
 			new AlertDialog.Builder(context)
 					.setTitle(String.format(context.getString(R.string.release_notes), updatesChecker.getLatestApkVersion()))
@@ -107,6 +125,10 @@ public class UpdatesCheckerTask extends AsyncTaskParallel<Void, Void, UpdatesChe
 		String currentAppVersionStr = BuildConfig.VERSION_NAME;
 
 		if (BuildConfig.FLAVOR.equalsIgnoreCase("extra")) {
+			String[] ver = BuildConfig.VERSION_NAME.split("\\s+");
+			currentAppVersionStr = ver[0];
+		} else if (BuildConfig.FLAVOR.equalsIgnoreCase("oss")) {
+			// For OSS builds, extract just the version number without any suffix
 			String[] ver = BuildConfig.VERSION_NAME.split("\\s+");
 			currentAppVersionStr = ver[0];
 		}

@@ -51,7 +51,7 @@
     <string name="sponsorblock_category_sponsor">Sponsor</string>
     <string name="sponsorblock_category_selfpromo">Self Promotion</string>
     <string name="sponsorblock_category_interaction">Interaction Reminder</string>
-    <string name="sponsorblock_category_music_offtopic">Non-Music Section</string>
+    <string name="sponsorblock_category_music_offtopic">Non-music section</string>
     <string name="sponsorblock_category_intro">Intro/Intermission</string>
     <string name="sponsorblock_category_outro">Endcards/Credits</string>
     <string name="sponsorblock_category_preview">Preview/Recap</string>

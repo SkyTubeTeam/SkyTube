@@ -436,7 +436,7 @@ public class NewPipeService {
         try {
             video.setLikeDislikeCount(extractor.getLikeCount(), getDislikeCount(extractor, videoId));
         } catch (ParsingException pe) {
-            Logger.e(this, "Unable get like count for " + url.getUrl() + ", created at " + uploadDate + ", error:" + pe.getMessage(), pe);
+            Logger.i(this, "Unable get like count for " + url.getUrl() + ", created at " + uploadDate + ", error:" + pe.getMessage());
             video.setLikeDislikeCount(null, null);
         }
         return video;

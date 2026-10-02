@@ -25,4 +25,6 @@
     <string name="channel_already_subscribed">Вы уже подписаны</string>
     <string name="channel_subscribed">Вы подписались на канал</string>
     <string name="select_sub_file">Выбор файла подписки</string>
+    <string name="status_not_exists">[Удалено создателем]</string>
+    <string name="status_account_terminated">[Удалено по решению YouTube]</string>
 </resources>

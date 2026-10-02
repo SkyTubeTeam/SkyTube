@@ -90,7 +90,7 @@
     <string name="pref_title_preferred_regions">Preferovaná oblast</string>
     <string name="pref_summary_preferred_languages">Zvolte vámi preferované jazyky.</string>
     <string name="pref_title_lang_detection_video_filtering">Filtrování videí podle jazyku</string>
-    <string name="pref_title_enable_sponsorblock">Povolit SponsorBlock</string>
+    <string name="pref_title_enable_sponsorblock">Zapnout SponsorBlock</string>
     <string name="pref_title_sponsorblock_category_list">Segmenty k přeskočení</string>
     <string name="pref_import_export_category">Import/Export</string>
     <string name="pref_title_backup_dbs">Záloha databázi</string>

@@ -150,7 +150,7 @@
     <string name="pref_summary_enable_sponsorblock">Automaticky preskočí segmenty videa venovaných sponzorom, pripomenutiam interakcie a ďalšie</string>
     <string name="pref_general">Všeobecné</string>
     <string name="pref_details">Podrobnosti</string>
-    <string name="pref_title_enable_sponsorblock">Povoliť SponsorBlock</string>
+    <string name="pref_title_enable_sponsorblock">Zapnúť SponsorBlock</string>
     <string name="pref_summary_sponsorblock_category_list">Vyberte kategórie, ktoré chcete preskočiť</string>
     <string name="pref_title_credit_sponsorblock">Príspevky</string>
     <string name="pref_summary_lang_detection_video_filtering">Použije veľa zdrojov na detekciu jazyka videa a blokovanie nepreferovaného jazyka (jazykov).</string>

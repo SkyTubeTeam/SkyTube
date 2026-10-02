@@ -10,4 +10,9 @@
     <string name="update_failure">Nem sikerült telepíteni az alkalmazás új verzióját.</string>
     <string name="downloading">Letöltés…</string>
     <string name="android_too_old">Sajnos az Android verziója túl régi a frissítéshez. Kézzel kell telepítenie a „SkyTube Legacy” programot!</string>
+    <string name="unable_to_check_for_updates">Nem sikerült ellenőrizni, hogy léteznek -e frissítések: %s</string>
+    <string name="update_available_fdroid">Új verzió elérhető a SkyTube-ból. %s elérhető az F-Droid-on.</string>
+    <string name="update_open_fdroid">F-Droid megnyitása</string>
+    <string name="fdroid_web_page_opened">F-Droid megnyitása a böngészőben, kérlek telepítsd a frissítést innen.</string>
+    <string name="fdroid_open_failed">Nem sikerült megnyitni az F-Droid-ot. Kérlek telepítsd az f-droid.org oldalról és próbálkozz újra.</string>
 </resources>

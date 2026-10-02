@@ -9,5 +9,10 @@
 	<string name="later">Later</string>
 	<string name="update_failure">Could not install the new version of the app.</string>
 	<string name="downloading">Downloading…</string>
+    <string name="unable_to_check_for_updates">Unable to check for updates: %s</string>
 	<string name="android_too_old">Unfortunately, your Android is too old to update. You need to manually install \'SkyTube Legacy\'!</string>
+	<string name="update_available_fdroid">A new version of SkyTube is available. Version %s is available on F-Droid.</string>
+	<string name="update_open_fdroid">Open F-Droid</string>
+	<string name="fdroid_web_page_opened">Opening F-Droid website in your browser. Please install the update from there.</string>
+	<string name="fdroid_open_failed">Unable to open F-Droid. Please install it from f-droid.org and try again.</string>
 </resources>

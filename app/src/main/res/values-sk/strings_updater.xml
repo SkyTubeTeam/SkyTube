@@ -10,4 +10,9 @@
     <string name="up_to_date_msg">Máte nainštalovanú najnovšiu verziu SkyTube.</string>
     <string name="update_failure">Nepodarilo sa nainštalovať novú verziu aplikácie.</string>
     <string name="android_too_old">Váš systém Android je príliš starý na aktualizáciu aplikácie. Musíte si ručne nainštalovať \'SkyTube Legacy\'!</string>
+    <string name="unable_to_check_for_updates">Nepodarilo sa skontrolovať aktualizácie: %s</string>
+    <string name="update_available_fdroid">K dispozícii je nová verzia SkyTube. Verzia %s je dostupná na F-Droid.</string>
+    <string name="update_open_fdroid">Otvoriť F-Droid</string>
+    <string name="fdroid_web_page_opened">Otvára sa webová stránka F-Droid vo vašom prehliadači. Prosím, aktualizáciu si nainštalujte odtiaľ.</string>
+    <string name="fdroid_open_failed">Nepodarilo sa otvoriť F-Droid. Nainštalujte ho z f-droid.org a skúste to znova.</string>
 </resources>

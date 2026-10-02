@@ -1,2 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="preferences">การตั้งค่า</string>
+    <string name="key_preferences">การตั้งค่า</string>
+    <string name="pref_video_player_category">ตัวเล่นวิดีโอ</string>
+    <string name="pref_title_maximum_res">คุณภาพสูงสุด</string>
+    <string name="pref_summary_maximum_res">เลือกคุณภาพสูงสุด: %s</string>
+    <string name="pref_title_minimum_res">คุณภาพต่ำสุด</string>
+    <string name="pref_summary_minimum_res">เลือกคุณภาพต่ำสุด: %s</string>
+    <string name="pref_title_choose_player">ตัวเล่นวิดีโอ</string>
+    <string name="pref_summary_choose_player">ตัวเล่นวิดีโอที่ใช้: %s</string>
+    <string name="no_resolution_specified">ไม่มี</string>
+    <string name="pref_import_export_category">นำเข้า/ส่งออก</string>
+    <string name="pref_title_import_dbs">นำเข้าการกู้คืน</string>
+</resources>

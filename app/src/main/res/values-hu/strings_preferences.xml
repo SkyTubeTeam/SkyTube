@@ -176,7 +176,7 @@
     <string name="pref_sponsorblock_category">SzponzorBlokk</string>
     <string name="pref_general">Általános</string>
     <string name="pref_details">Részletek</string>
-    <string name="pref_title_enable_sponsorblock">SzponzorBlokk engedélyezése</string>
+    <string name="pref_title_enable_sponsorblock">SzponzorBlokk bekapcsolása</string>
     <string name="pref_title_sponsorblock_category_list">Szegmensek kihagyása</string>
     <string name="pref_title_credit_sponsorblock">Elismerések</string>
     <string name="pref_summary_credit_sponsorblock">A https://sponsor.ajay.app SzponzorBlokk adatait használja</string>
