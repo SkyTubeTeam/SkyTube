@@ -766,18 +766,16 @@
     <string name="pref_key_default_content_country" translatable="false">pref_key_default_content_country</string>
     <string name="pref_title_default_content_country">Default content country</string>
     <string name="pref_summary_default_content_country">Show content intended for this country: %s</string>
-
     <string name="pref_key_app_language" translatable="false">pref_key_app_language</string>
     <string name="pref_title_app_language">Application Language</string>
     <string name="pref_summary_app_language">The language used for all the labels in the application: %s</string>
-
     <!--
         SPONSORBLOCK
     -->
     <string name="pref_sponsorblock_category">SponsorBlock</string>
     <string name="pref_general">General</string>
     <string name="pref_details">Details</string>
-    <string name="pref_title_enable_sponsorblock">Enable SponsorBlock</string>
+    <string name="pref_title_enable_sponsorblock">Turn on SponsorBlock</string>
     <string name="pref_summary_enable_sponsorblock">Auto-skip video segments dedicated to sponsors, interaction reminders and more</string>
     <string name="pref_title_sponsorblock_category_list">Skip Segments</string>
     <string name="pref_summary_sponsorblock_category_list">Choose categories to skip</string>
@@ -809,6 +807,11 @@
         <item>interaction</item>
         <item>music_offtopic</item>
     </string-array>
+    <!--
+        PRIVACY CONTROL CHECK (STARTUP DIALOG)
+    -->
+    <string name="privacy_control_title">Privacy features</string>
+    <string name="privacy_control_message">SkyTube provides these privacy-enhancing features. Use the switches below to enable or disable them.</string>
 
     <!--
         SECURITY
@@ -824,5 +827,4 @@
     <string name="pref_summary_require_pin_code">Entering a PIN code is required for certain modifications.</string>
     <string name="pref_title_change_security_pin">Change Security PIN</string>
     <string name="pref_summary_change_security_pin">Change the PIN to protect access to preferences and sensitive actions.</string>
-
 </resources>

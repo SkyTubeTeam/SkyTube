@@ -172,4 +172,13 @@
     <string name="pref_title_use_newpipe_backend">Back-end do NewPipe</string>
     <string name="pref_title_app_language">Idioma do aplicativo</string>
     <string name="pref_summary_app_language">Idioma usado para todos os textos no aplicativo</string>
+    <string name="pref_summary_export_subs_opml">Exportar suas assinaturas para OPML.</string>
+    <string name="pref_title_import_subs_opml">Importar assinaturas do OPML</string>
+    <string name="pref_summary_import_subs_opml">Importe suas assinaturas a partir de um arquivo OPML.</string>
+    <string name="opml_file_picker_title">Selecionar arquivo OPML</string>
+    <string name="subscriptions_exporting_opml">Exportando assinaturas para OPML…</string>
+    <string name="subscriptions_export_opml_success">As assinaturas foram exportadas com sucesso como %s</string>
+    <string name="pref_title_export_subs_opml">Exportar assinaturas para OPML</string>
+    <string name="subscriptions_export_opml_fail">Não foi possível exportar as assinaturas para OPML.</string>
+    <string name="opml_export_unknown_filename">Formato desconhecido</string>
 </resources>

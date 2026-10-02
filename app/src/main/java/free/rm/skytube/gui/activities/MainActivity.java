@@ -50,6 +50,7 @@ import java.util.ArrayList;
 import free.rm.skytube.BuildConfig;
 import free.rm.skytube.R;
 import free.rm.skytube.app.EventBus;
+import free.rm.skytube.app.Settings;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.TLSSocketFactory;
@@ -64,6 +65,7 @@ import free.rm.skytube.databinding.DialogEnterVideoUrlBinding;
 import free.rm.skytube.gui.businessobjects.BlockedVideosDialog;
 import free.rm.skytube.gui.businessobjects.CleanerDialog;
 import free.rm.skytube.gui.businessobjects.PinUtils;
+import free.rm.skytube.gui.businessobjects.PrivacyControlDialog;
 import free.rm.skytube.gui.businessobjects.adapters.SearchHistoryCursorAdapter;
 import free.rm.skytube.gui.businessobjects.fragments.FragmentEx;
 import free.rm.skytube.gui.businessobjects.updates.UpdatesCheckerTask;
@@ -132,6 +134,10 @@ public class MainActivity extends BaseActivity {
 
 		setContentView(binding.getRoot());
 
+		// Show the privacy control dialog once (i.e. the dialog that offers to enable/disable
+		// the SponsorBlock and Return YouTube Dislike features), if it was never run before.
+		showPrivacyControlCheckIfNeeded();
+
 		// The Extra variant needs to initialize some Fragments that are used for Chromecast control. This is done in onLayoutSet of BaseActivity.
 		// The OSS variant has a no-op version of this method, since it doesn't need to do anything else here.
 		onLayoutSet();
@@ -156,6 +162,22 @@ public class MainActivity extends BaseActivity {
 		setIntent(intent);
 		Logger.i(MainActivity.this, "---> "+getIntent());
 		handleIntent(intent);
+	}
+
+	/**
+	 * Show the privacy control dialog (offering to enable/disable the SponsorBlock and Return
+	 * YouTube Dislike features) on app startup, but only once ever and only if at least one of
+	 * those features is currently disabled.
+	 */
+	private void showPrivacyControlCheckIfNeeded() {
+		final Settings settings = SkyTubeApp.getSettings();
+		if (settings.wasPrivacyControlCheckDone()) {
+			return;
+		}
+		settings.setPrivacyControlCheckDone();
+		if (!settings.isSponsorblockEnabled() || !settings.isUseDislikeApi()) {
+			new PrivacyControlDialog(this).show();
+		}
 	}
 
 	@Override

@@ -162,7 +162,7 @@
     <string name="pref_title_clear_playback_status">Εκκαθάριση Κατάστασης Αναπαραγωγής</string>
     <string name="pref_summary_clear_playback_status">Εκκαθάρισε την πρόοδο για όλα τα βίντεο.</string>
     <string name="pref_playback_status_cleared">Η κατάσταση αναπαραγωγής εκκαθαρίστηκε.</string>
-    <string name="pref_title_autocast"></string>
+    <string name="pref_title_autocast"/>
     <string name="pref_title_license">Ελεύθερη άδεια Copyleft</string>
     <string name="pref_summary_license">GPLv3+ (Γενική Άδεια Χρήσης GNU, έκδοση 3 ή νεότερη)</string>
     <string name="unblock">Ξεμπλόκαρε</string>

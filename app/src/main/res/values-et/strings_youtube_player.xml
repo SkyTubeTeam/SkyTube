@@ -8,7 +8,7 @@
     <string name="error_get_video_desc">Video kirjelduse laadimine ei õnnestunud.</string>
     <string name="error_invalid_url">Vigane video url: %s</string>
     <string name="error_video_streams">Mite ühegi videovoo laadimine ei õnnestunud.</string>
-    <string name="error_downloaded_file_is_corrupted">Allalaaditud video tundub olema <b>vigane</b> ning veateade on:<br/><br/>%s<br/><br/><b>Kas kustutame</b> selle faili?</string>
+    <string name="error_downloaded_file_is_corrupted">Allalaaditud video tundub olema &lt;b&gt;vigane&lt;/b&gt; ning veateade on:&lt;br/&gt; &lt;br/&gt; %s. &lt;br/&gt; &lt;br/&gt; &lt;b&gt;Kas kustutame&lt;/b&gt; selle faili?</string>
     <string name="error_video_parse_error">Video esitamine ei õnnestu: <br/> <br/> %s.</string>
     <string name="metered_network">Mahupõhine andmeühendus</string>
     <string name="warning_metered_network_play">Vältimaks lisakulusid kasuta pigem piiramatu andmemahuga võrguühendust. Kas ikkagi soovid videot esitada?</string>
@@ -42,7 +42,7 @@
     <string name="sponsorblock_category_sponsor">Sponsor</string>
     <string name="sponsorblock_category_selfpromo">Enesereklaam</string>
     <string name="sponsorblock_category_interaction">Suhtluse meeldetuletus</string>
-    <string name="sponsorblock_category_music_offtopic">Vaikne lõik</string>
+    <string name="sponsorblock_category_music_offtopic">Ilma muusikata lõik</string>
     <string name="sponsorblock_category_intro">Sissejuhatus või vahelõik</string>
     <string name="sponsorblock_category_outro">Lõputiitrid</string>
     <string name="sponsorblock_category_preview">Ülevaade või kordus</string>

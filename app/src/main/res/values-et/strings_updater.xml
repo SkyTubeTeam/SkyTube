@@ -10,4 +10,9 @@
     <string name="update_failure">Rakenduse uue versiooni paigaldamine ei õnnestunud.</string>
     <string name="downloading">Laadime alla…</string>
     <string name="android_too_old">Kahjuks sinu nutiseadme Android on liiga vana. Alternatiivina võid käsitsi paigaldada vanemale Androidile mõeldud „SkyTube Legacy“!</string>
+    <string name="unable_to_check_for_updates">Uuenduste kontrollimine ei õnnestunud: %s</string>
+    <string name="update_available_fdroid">Uus SkyTube\'i versioon on saadaval. Versioon %s leidub F-Droidis.</string>
+    <string name="update_open_fdroid">Ava F-Droid</string>
+    <string name="fdroid_web_page_opened">Avan F-Droidi veebisaidi sinu veebibrauseris. Palun jätka paigaldamist sealt.</string>
+    <string name="fdroid_open_failed">F-Droidi avamine ei õnnestunud. Palun paigalda ta f-droid.org saidist ja proovi siis uuesti.</string>
 </resources>

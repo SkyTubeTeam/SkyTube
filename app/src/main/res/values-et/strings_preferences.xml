@@ -53,7 +53,7 @@
     <string name="pref_title_clear_playback_status">Kustuta meedia esitamise olekud</string>
     <string name="pref_disable_playback_status_deleted">Meedia esitamise olekud on kustutatud.</string>
     <string name="pref_title_sponsorblock_category_list">Jäta segmendid vahele</string>
-    <string name="pref_title_enable_sponsorblock">Võta SponsorBlock kasutusele</string>
+    <string name="pref_title_enable_sponsorblock">Lülita SponsorBlock sisse</string>
     <string name="pref_sponsorblock_category">SponsorBlock</string>
     <string name="pref_general">Üldist</string>
     <string name="pref_details">Üksikasjad</string>

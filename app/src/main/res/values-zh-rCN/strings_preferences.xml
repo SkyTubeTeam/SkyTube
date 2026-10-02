@@ -157,7 +157,7 @@
     <string name="pref_key_use_newer_formats_title">尝试较新的视频格式</string>
     <string name="pref_general">常规</string>
     <string name="pref_details">详情</string>
-    <string name="pref_title_enable_sponsorblock">启用 SponsorBlock</string>
+    <string name="pref_title_enable_sponsorblock">打开 SponsorBlock</string>
     <string name="pref_summary_enable_sponsorblock">自动跳过专门针对赞助商、互动提醒等的视频片段</string>
     <string name="pref_title_sponsorblock_category_list">跳过片段</string>
     <string name="pref_summary_sponsorblock_category_list">选择要跳过的分类</string>

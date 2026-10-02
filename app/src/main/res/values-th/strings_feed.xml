@@ -12,4 +12,5 @@
     <string name="import_subscriptions_from_youtube">นำเข้ารายการติดตามจาก YouTube</string>
     <string name="notification_channel_feed_title">แจ้งเตื่อนฟีด</string>
     <string name="notification_new_videos_found">%d วิดีโอใหม่จากช่องที่ติดตามไว้</string>
+    <string name="channel_related">ช่อง...</string>
 </resources>

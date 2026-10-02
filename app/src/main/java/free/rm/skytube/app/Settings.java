@@ -47,6 +47,8 @@ public class Settings {
     private final SkyTubeApp app;
     private static final String TUTORIAL_COMPLETED = "YouTubePlayerActivity.TutorialCompleted";
     private static final String LATEST_RELEASE_NOTES_DISPLAYED = "Settings.LATEST_RELEASE_NOTES_DISPLAYED";
+    private static final String PRIVACY_CONTROL_CHECK_DONE = "Settings.PRIVACY_CONTROL_CHECK_DONE";
+    private static final String KEY_ENABLE_SPONSORBLOCK = "pref_key_enable_sponsorblock";
     private static final String FLAG_REFRESH_FEED_FROM_CACHE = "SubscriptionsFeedFragment.FLAG_REFRESH_FEED_FROM_CACHE";
     private static final String FLAG_REFRESH_FEED_FULL = "SubscriptionsFeedFragment.FLAG_REFRESH_FEED_FULL";
     /** Refresh the feed (by querying the YT servers) after 3 hours since the last check. */
@@ -121,7 +123,26 @@ public class Settings {
     }
 
     public boolean isSponsorblockEnabled() {
-        return SkyTubeApp.getPreferenceManager().getBoolean("pref_key_enable_sponsorblock", false);
+        return SkyTubeApp.getPreferenceManager().getBoolean(KEY_ENABLE_SPONSORBLOCK, false);
+    }
+
+    public void setSponsorblockEnabled(boolean enabled) {
+        setPreference(KEY_ENABLE_SPONSORBLOCK, enabled);
+    }
+
+    /**
+     * @return True if the privacy control check (i.e. the dialog offering to enable SponsorBlock
+     * and the Return YouTube Dislike counter) has already been run in the past.
+     */
+    public boolean wasPrivacyControlCheckDone() {
+        return getPreference(PRIVACY_CONTROL_CHECK_DONE, false);
+    }
+
+    /**
+     * Marks the privacy control check as done, so it will never be run again.
+     */
+    public void setPrivacyControlCheckDone() {
+        setPreference(PRIVACY_CONTROL_CHECK_DONE, true);
     }
 
     public boolean isPinSet() {
@@ -140,6 +161,10 @@ public class Settings {
 
     public boolean isUseDislikeApi() {
         return getPreference(R.string.pref_key_use_dislike_api, false);
+    }
+
+    public void setUseDislikeApi(boolean enabled) {
+        setPreference(R.string.pref_key_use_dislike_api, enabled);
     }
 
     public boolean isDownloadToSeparateFolders() {

@@ -20,4 +20,11 @@
     <string name="pref_import_export_category">Importă/Exportă</string>
     <string name="pref_summary_backup_dbs">Fă o copie a videoclipurilor salvate și a canalelor la care sunteți abonat.</string>
     <string name="pref_title_import_dbs">Importă Copie de Rezervă</string>
+    <string name="pref_title_backup_dbs">Faceți BackUp la bazele de date</string>
+    <string name="pref_summary_import_dbs">Importați copia de rezervă cu abonamente și salvări</string>
+    <string name="databases_backing_up">Sa face un Back Up…</string>
+    <string name="databases_import_select_backup">Selectează un fișier de backup să importezi</string>
+    <string name="databases_import_nothing_selected">Nimic nu a fost selectat…</string>
+    <string name="databases_backup_success">Bazele de date sunt într-o copie de rezervă la %s</string>
+    <string name="databases_backup_fail">Nu s-a putut face copia de rezervă a bazelor de date.</string>
 </resources>

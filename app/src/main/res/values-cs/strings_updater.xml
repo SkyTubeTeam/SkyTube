@@ -10,4 +10,9 @@
     <string name="up_to_date_msg">Máte nainstalovanou nejnovější verzi SkyTube.</string>
     <string name="update">Aktualizovat</string>
     <string name="update_available">Je dostupná nová verze</string>
+    <string name="unable_to_check_for_updates">Nepodařilo se zkontrolovat aktualizace: %s</string>
+    <string name="update_available_fdroid">Je k dispozici nová verze SkyTube. Verze %s je dostupná na F-Droid.</string>
+    <string name="update_open_fdroid">Otevřít F-Droid</string>
+    <string name="fdroid_web_page_opened">Otevírá se webová stránka F-Droid ve vašem prohlížeči. Prosím, aktualizaci si nainstalujte odtud.</string>
+    <string name="fdroid_open_failed">Nepodařilo se otevřít F-Droid. Prosím, nainstalujte ho z f-droid.org a zkuste to znovu.</string>
 </resources>

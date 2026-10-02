@@ -10,4 +10,9 @@
     <string name="downloading">İndiriliyor…</string>
     <string name="release_notes">%s içindeki değişiklikler</string>
     <string name="android_too_old">Android sürümünüz güncelleme için çok eski. Elle \'SkyTube Legacy\' kurmanız gerekiyor!</string>
+    <string name="unable_to_check_for_updates">Güncellemeler denetlenemiyor: %s</string>
+    <string name="update_available_fdroid">Yeni bir SkyTube sürümü var. %s sürümü F-Droid\'de kullanımda.</string>
+    <string name="update_open_fdroid">F-Droid\'i Aç</string>
+    <string name="fdroid_web_page_opened">F-Droid web sitesi tarayıcınızda açılıyor. Lütfen güncellemeyi oradan kurun.</string>
+    <string name="fdroid_open_failed">F-Droid açılamıyor. Lütfen f-droid.org adresinden kurun ve tekrar deneyin.</string>
 </resources>
