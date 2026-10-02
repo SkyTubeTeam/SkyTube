@@ -36,6 +36,12 @@
 		android:title="@string/download"
 		app:showAsAction="never"/>
 
+	<item android:id="@+id/video_quality"
+		android:title="@string/video_quality"
+		app:showAsAction="never">
+		<menu/>   <!-- filled in at runtime -->
+	</item>
+
 	<item android:id="@+id/channel_related" android:title="@string/channel_related">
 		<menu>
 			<item android:id="@+id/open_channel"
