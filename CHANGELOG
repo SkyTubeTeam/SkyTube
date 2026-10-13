@@ -1,3 +1,19 @@
+v3.000 - 2026-10-20
+        * Add a Quality selector to switch video resolution during playback by ialNavy
+        * Implement separate audio downloading.
+        * Add ability to require a PIN code for blocked videos.
+        * Add an update checker and a warning dialog for F-Droid builds.
+        * Notify about privacy settings more eagerly.
+        * Fix OPML import when the file has a wildcard mimetype.
+        * Update NewPipeExtractor to fix recent Youtube changes.
+        * Fix a memory leak related to MediaRouter/Chromecast by Iván Álvarez López
+        * Translators:
+                * Abhinav Datta, Allan Nordhøy, AlphaHighOx, Arif Budiman, Cabdi Waaxid Siciid, Diogo0587,
+                * DuninduH, Ettore Atalan, Georg Engelmann, ical_lubis, Jeff Huang, Jonatan Nyberg,
+                * Julien BRONDINO, KuroisKitsune, Laur, mackavelue-design, Massimo Pissarello, MaxGremory,
+                * Milan, Milo Ivir, Mona Lisa, Oğuz Ersen, Paco Men Zarbien, Priit Jõerüüt, ssantos,
+                * vityatii, whistlingwoods, Yaron Shahrabani, Zsombor, ℂ𝕠𝕠𝕠𝕝, 大王叫我来巡山
+
 v2.999 - 2026-05-24
         * Discard AI Dubbed audio tracks by Iván Álvarez López
         * Fix channel opening broken by Youtube API changes

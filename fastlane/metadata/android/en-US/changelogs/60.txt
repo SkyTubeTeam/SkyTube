@@ -1,0 +1,7 @@
+* Add Quality selector for video resolution
+* Implement separate audio downloading
+* Add PIN code for blocked videos
+* Add F-Droid update checker and warning dialog
+* Fix OPML import
+* Updated translations: sq, ar, az, eu, bg, ca, zh-CN, zh-TW, hr, cs, nl, et, fr, de, el, he,
+  hi, hu, id, it, lv, lt, pl, pt, pt-BR, pt-PT, pa, ro, ru, si, sk, so, es, sv, ta, te, th, tr, uk, vi
