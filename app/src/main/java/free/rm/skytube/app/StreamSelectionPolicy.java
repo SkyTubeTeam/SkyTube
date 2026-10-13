@@ -169,11 +169,7 @@ public class StreamSelectionPolicy {
     }
 
     private VideoStreamWithResolution pickVideo(StreamInfo streamInfo) {
-        List<VideoStream> streams = streamInfo.getVideoStreams();
-        if (allowVideoOnly) {
-            streams = new ArrayList<>(streams);
-            streams.addAll(streamInfo.getVideoOnlyStreams());
-        }
+        List<VideoStream> streams = collectVideoStreams(streamInfo);
         if (BuildConfig.DEBUG) {
             for (VideoStream vs : streams) {
                 Logger.d(this, "found %s", VideoStreamWithResolution.toHumanReadable(vs));
@@ -183,29 +179,43 @@ public class StreamSelectionPolicy {
     }
 
     /**
+     * Collects all candidate video streams for the given {@link StreamInfo}.
+     */
+    private List<VideoStream> collectVideoStreams(StreamInfo streamInfo) {
+        if (!allowVideoOnly) {
+            return streamInfo.getVideoStreams();
+        }
+        List<VideoStream> streams = new ArrayList<>(streamInfo.getVideoStreams());
+        streams.addAll(streamInfo.getVideoOnlyStreams());
+        return streams;
+    }
+
+    /**
      * Returns all valid video resolutions offered by the given {@link StreamInfo}.
-     * Includes DASH video‑only streams when {@code allowVideoOnly} is enabled.
-     * Filters out unsupported formats and non‑URL streams, then returns a
+     * Filters out unsupported formats and returns a
      * deduplicated, highest‑to‑lowest list of {@link VideoResolution}.
-     * 
+     *
      * @param streamInfo the full stream descriptor for the currently loaded video; must not be null
      * @return a sorted list (highest first) of all valid {@link VideoResolution} values offered
      *         by the video; never {@code null}, but may be empty if no playable streams exist
      */
     public List<VideoResolution> getAvailableResolutions(StreamInfo streamInfo) {
         Set<VideoResolution> found = EnumSet.noneOf(VideoResolution.class);
-        List<VideoStream> streams = new ArrayList<>(streamInfo.getVideoStreams());
-        if (allowVideoOnly) {
-            streams.addAll(streamInfo.getVideoOnlyStreams());
+        for (VideoStream stream : collectVideoStreams(streamInfo)) {
+            if (isUsable(stream)) {
+                VideoResolution resolution = VideoResolution.resolutionToVideoResolution(stream.getResolution());
+                if (resolution != VideoResolution.RES_UNKNOWN) {
+                    found.add(resolution);
+                }
+            }
         }
-        for (VideoStream s : streams) {
-            if (!s.isUrl() || !isAllowedVideoFormat(s.getFormat())) continue;
-            VideoResolution r = VideoResolution.resolutionToVideoResolution(s.getResolution());
-            if (r != VideoResolution.RES_UNKNOWN) found.add(r);
-        }
-        List<VideoResolution> list = new ArrayList<>(found);
-        Collections.sort(list, Collections.reverseOrder()); // highest first
-        return list;
+        List<VideoResolution> resolutions = new ArrayList<>(found);
+        Collections.sort(resolutions, Collections.reverseOrder()); // highest first
+        return resolutions;
+    }
+
+    private boolean isUsable(VideoStream stream) {
+        return stream.isUrl() && isAllowedVideoFormat(stream.getFormat());
     }
 
     private VideoStreamWithResolution pick(Collection<VideoStream> streams) {

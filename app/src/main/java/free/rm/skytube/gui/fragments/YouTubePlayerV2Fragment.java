@@ -136,6 +136,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 
     private StreamInfo currentStreamInfo;
     private VideoResolution currentResolution;
+    private boolean playingDownloadedVideo;
 
     private Menu menu = null;
     private List<VideoResolution> availableResolutions = Collections.emptyList();
@@ -559,6 +560,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
                                     if (downloadStatus.getUri() != null) {
                                         fragmentBinding.loadingVideoView.setVisibility(View.GONE);
                                         Logger.i(this, ">> PLAYING LOCALLY: %s", downloadStatus.getUri());
+                                        playingDownloadedVideo = true;
                                         playVideo(downloadStatus.getUri(), downloadStatus.getAudioUri(), null);
 
                                         retrieveSponsorBlockIfPossible();
@@ -593,6 +595,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
                                                                         playVideo(uri, selection.getAudioStreamUri(), desiredStream);
                                                                         setupInfoDisplay(video);
 
+                                                                        playingDownloadedVideo = false;
                                                                         currentStreamInfo = desiredStream;
                                                                         currentResolution = selection.getResolution();
 
@@ -675,7 +678,9 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
      * @param resolution the resolution the user selected from the Quality submenu
      */
     private void switchQuality(VideoResolution resolution) {
-        if (currentStreamInfo == null || resolution == currentResolution) return;
+        if (currentStreamInfo == null || playingDownloadedVideo || resolution == currentResolution) {
+            return;
+        }
         StreamSelectionPolicy policy = SkyTubeApp.getSettings()
                 .getDesiredVideoResolution(false)
                 .withAllowVideoOnly(true)
@@ -717,8 +722,8 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
         MenuItem qualityItem = menu.findItem(R.id.video_quality);
         SubMenu sub = qualityItem.getSubMenu();
         sub.removeGroup(QUALITY_GROUP_ID);
-        if (currentStreamInfo == null) {
-            // local playback / live stream / not loaded yet
+        if (currentStreamInfo == null || playingDownloadedVideo) {
+            // downloaded/local playback / live stream / not loaded yet
             qualityItem.setVisible(false);
         } else {
             qualityItem.setVisible(true);
