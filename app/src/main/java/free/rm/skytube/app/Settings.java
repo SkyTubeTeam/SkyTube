@@ -227,7 +227,8 @@ public class Settings {
 
         boolean useNewFormats = prefs.getBoolean(SkyTubeApp.getStr(R.string.pref_key_use_newer_formats), false);
 
-        return new StreamSelectionPolicy(!forDownload && useNewFormats, maxResolution, minResolution, quality);
+        // Downloads can also use the video-only streams (the audio is fetched as a separate file).
+        return new StreamSelectionPolicy(useNewFormats, maxResolution, minResolution, quality);
     }
 
     public StreamSelectionPolicy getDesiredVideoResolution(boolean forDownload) {
