@@ -1,7 +1,6 @@
 package free.rm.skytube.app;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.schabi.newpipe.extractor.MediaFormat;
 import org.schabi.newpipe.extractor.stream.DeliveryMethod;
@@ -11,6 +10,7 @@ import org.schabi.newpipe.extractor.stream.VideoStream;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import free.rm.skytube.businessobjects.YouTube.VideoStream.VideoQuality;
@@ -52,6 +52,76 @@ public class StreamSelectionPolicyTest {
         test(policy, MediaFormat.MPEG_4, MediaFormat.v3GPP, MediaFormat.MPEG_4);
         test(policy, MediaFormat.WEBM, MediaFormat.v3GPP, MediaFormat.WEBM, MediaFormat.MPEG_4);
         test(policy, MediaFormat.MPEG_4, MediaFormat.VTT, MediaFormat.MPEG_4);
+    }
+
+    @Test
+    void testGetAvailableResolutionsOfEmptyStreamInfo() {
+        StreamSelectionPolicy policy = policy(false);
+
+        Assertions.assertTrue(policy.getAvailableResolutions(streamInfo()).isEmpty());
+    }
+
+    @Test
+    void testGetAvailableResolutionsAreDeduplicatedAndSortedHighestFirst() {
+        StreamSelectionPolicy policy = policy(false);
+        StreamInfo streamInfo = streamInfo(
+                videoStream("720P", MediaFormat.WEBM, true),
+                videoStream("1080P", MediaFormat.WEBM, true),
+                videoStream("480P", MediaFormat.WEBM, true),
+                videoStream("720P", MediaFormat.MPEG_4, true));
+
+        Assertions.assertEquals(
+                Arrays.asList(VideoResolution.RES_1080P, VideoResolution.RES_720P, VideoResolution.RES_480P),
+                policy.getAvailableResolutions(streamInfo));
+    }
+
+    @Test
+    void testGetAvailableResolutionsSkipsUnsupportedFormats() {
+        StreamSelectionPolicy policy = policy(false);
+        StreamInfo streamInfo = streamInfo(
+                videoStream("1080P", MediaFormat.WEBM, true),
+                videoStream("720P", MediaFormat.VTT, true));
+
+        Assertions.assertEquals(
+                Collections.singletonList(VideoResolution.RES_1080P),
+                policy.getAvailableResolutions(streamInfo));
+    }
+
+    @Test
+    void testGetAvailableResolutionsSkipsNonUrlAndUnknownResolutions() {
+        StreamSelectionPolicy policy = policy(false);
+        StreamInfo streamInfo = streamInfo(
+                videoStream("1080P", MediaFormat.WEBM, true),
+                videoStream("720P", MediaFormat.WEBM, false),
+                videoStream("999P", MediaFormat.WEBM, true));
+
+        Assertions.assertEquals(
+                Collections.singletonList(VideoResolution.RES_1080P),
+                policy.getAvailableResolutions(streamInfo));
+    }
+
+    @Test
+    void testGetAvailableResolutionsExcludesVideoOnlyWhenNotAllowed() {
+        StreamSelectionPolicy policy = policy(false);
+        StreamInfo streamInfo = streamInfo(
+                Collections.singletonList(videoStream("1080P", MediaFormat.WEBM, true)),
+                Collections.singletonList(videoStream("2160P", MediaFormat.WEBM, true, true)));
+
+        Assertions.assertEquals(
+                Collections.singletonList(VideoResolution.RES_1080P),
+                policy.getAvailableResolutions(streamInfo));
+    }
+
+    @Test
+    void testGetAvailableResolutionsIncludesVideoOnlyWhenAllowed() {
+        StreamSelectionPolicy policy = policy(true);
+        StreamInfo streamInfo = streamInfo(
+                Collections.singletonList(videoStream("1080P", MediaFormat.WEBM, true)),
+                Collections.singletonList(videoStream("2160P", MediaFormat.WEBM, true, true)));
+
+        Assertions.assertEquals(
+                Arrays.asList(VideoResolution.RES_2160P, VideoResolution.RES_1080P),
+                policy.getAvailableResolutions(streamInfo));
     }
 
     private void test(StreamSelectionPolicy policy, String expectedResolution, String... resolutions) {
@@ -114,5 +184,35 @@ public class StreamSelectionPolicyTest {
 
     private StreamInfo createStreamInfo() {
         return new StreamInfo(0, "url", "originalUrl", StreamType.VIDEO_STREAM, "id", "name", -1);
+    }
+
+    private static StreamSelectionPolicy policy(boolean allowVideoOnly) {
+        return new StreamSelectionPolicy(allowVideoOnly, VideoResolution.RES_UNKNOWN, VideoResolution.RES_UNKNOWN, VideoQuality.BEST_QUALITY);
+    }
+
+    private StreamInfo streamInfo(VideoStream... videoStreams) {
+        return streamInfo(Arrays.asList(videoStreams), Collections.emptyList());
+    }
+
+    private StreamInfo streamInfo(List<VideoStream> videoStreams, List<VideoStream> videoOnlyStreams) {
+        StreamInfo streamInfo = createStreamInfo();
+        streamInfo.setVideoStreams(videoStreams);
+        streamInfo.setVideoOnlyStreams(videoOnlyStreams);
+        return streamInfo;
+    }
+
+    private static VideoStream videoStream(String resolution, MediaFormat format, boolean isUrl) {
+        return videoStream(resolution, format, isUrl, false);
+    }
+
+    private static VideoStream videoStream(String resolution, MediaFormat format, boolean isUrl, boolean videoOnly) {
+        return new VideoStream.Builder()
+                .setId("id-" + resolution + "-" + format + "-" + isUrl + "-" + videoOnly)
+                .setContent("url/" + resolution, isUrl)
+                .setMediaFormat(format)
+                .setResolution(resolution)
+                .setDeliveryMethod(DeliveryMethod.DASH)
+                .setIsVideoOnly(videoOnly)
+                .build();
     }
 }
