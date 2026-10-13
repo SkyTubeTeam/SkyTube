@@ -26,6 +26,7 @@ import android.view.Menu;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.content.FileProvider;
 
 import com.google.api.services.youtube.model.Channel;
@@ -35,7 +36,7 @@ import com.google.api.services.youtube.model.VideoSnippet;
 import com.google.api.services.youtube.model.VideoStatistics;
 
 import org.ocpsoft.prettytime.PrettyTime;
-import org.schabi.newpipe.extractor.stream.Stream;
+import org.schabi.newpipe.extractor.stream.AudioStream;
 import org.schabi.newpipe.extractor.stream.StreamInfo;
 import org.schabi.newpipe.extractor.stream.VideoStream;
 
@@ -508,26 +509,35 @@ public class YouTubeVideo extends CardData implements Serializable {
 
 						final Settings settings = SkyTubeApp.getSettings();
 						StreamSelectionPolicy selectionPolicy = settings.getDesiredVideoResolution(true);
-						StreamSelectionPolicy.StreamSelection streamSelection = selectionPolicy.select(streamInfo);
+						// Prefer a muxed (progressive) stream, so the download is a single file;
+						// fall back to a video-only stream with a separate audio file.
+						StreamSelectionPolicy.StreamSelection streamSelection =
+								selectionPolicy.withAllowVideoOnly(false).select(streamInfo);
+						if (streamSelection == null) {
+							streamSelection = selectionPolicy.select(streamInfo);
+						}
 						if (streamSelection != null) {
-							VideoStream videoStream = streamSelection.getVideoStream();
-							// download the video
-							downloadTheVideo(videoStream, settings);
+							// download the video (and the audio separately when it is not muxed)
+							downloadTheVideo(streamSelection, settings);
 						} else {
 							Toast.makeText(context, selectionPolicy.getErrorMessage(context), Toast.LENGTH_LONG).show();
 						}
 					}
 
-					private void downloadTheVideo(Stream stream, Settings settings) {
-						new VideoDownloader()
-								.setRemoteFileUrl(stream.getUrl())
+					private void downloadTheVideo(StreamSelectionPolicy.StreamSelection streamSelection, Settings settings) {
+						final VideoStream videoStream = streamSelection.getVideoStream();
+						final AudioStream audioStream = streamSelection.getAudioStream();
+						final String audioUrl = audioStream != null && audioStream.isUrl() ? audioStream.getUrl() : null;
+						final String audioExtension = audioStream != null ? audioStream.getFormat().suffix : null;
+						new VideoDownloader(audioUrl, audioExtension)
+								.setRemoteFileUrl(videoStream.getUrl())
 								.setDirType(Environment.DIRECTORY_MOVIES)
 								.setTitle(getTitle())
 								.setDescription(getStr(R.string.video) + " ― " + getChannelName())
 								.setOutputFileName(getId() + " - " + getTitle())
 								.setOutputDirectoryName(getChannelName())
 								.setParentDirectory(settings.getDownloadParentFolder())
-								.setOutputFileExtension(stream.getFormat().suffix)
+								.setOutputFileExtension(videoStream.getFormat().suffix)
 								.setAllowedOverRoaming(false)
 								.setAllowedNetworkTypesFlags(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE)
 								.displayPermissionsActivity(context);
@@ -574,9 +584,18 @@ public class YouTubeVideo extends CardData implements Serializable {
 	////////////////////////////////////////////////////////////////////////////////////////////////
 
 	/**
-	 * Downloads a YouTube video.
+	 * Downloads the video file, and - when the video stream is not muxed - the audio file as well.
 	 */
 	private class VideoDownloader extends FileDownloader implements Serializable {
+		/** The URL of the audio stream to download separately, or null when the video is muxed. */
+		private final String audioUrl;
+		/** The file extension of the audio stream, or null when the video is muxed. */
+		private final String audioExtension;
+
+		VideoDownloader(@Nullable String audioUrl, @Nullable String audioExtension) {
+			this.audioUrl = audioUrl;
+			this.audioExtension = audioExtension;
+		}
 
 		@Override
 		public void onFileDownloadStarted() {
@@ -585,40 +604,118 @@ public class YouTubeVideo extends CardData implements Serializable {
 					Toast.LENGTH_LONG).show();
 		}
 
-        @Override
-        public void onFileDownloadCompleted(boolean success, Uri localFileUri) {
-            if (success) {
-                DownloadedVideosDb.getVideoDownloadsDb().add(YouTubeVideo.this, localFileUri, null)
-                    .doOnSuccess(saveSucceeded -> {
-                        showToast(saveSucceeded);
-                    }).doOnError(err -> {
-                        SkyTubeApp.notifyUserOnError(getContext(), err);
-                    }).subscribe();
-            } else {
-                showToast(false);
-            }
-        }
+		@Override
+		public void onFileDownloadCompleted(boolean success, Uri localFileUri) {
+			if (!success) {
+				showToast(false);
+			} else if (audioUrl != null) {
+				downloadAudio(localFileUri);
+			} else {
+				saveDownload(localFileUri, null);
+			}
+		}
 
-        private void showToast(boolean success) {
-            Toast.makeText(getContext(),
-                    String.format(getContext().getString(success ? R.string.video_downloaded : R.string.video_download_stream_error), getTitle()),
-                    Toast.LENGTH_LONG).show();
-        }
+		/**
+		 * Once the video is downloaded, fetch its audio separately.  When the audio download
+		 * finishes, both files are registered in the downloads database.
+		 */
+		private void downloadAudio(Uri videoUri) {
+			new AudioDownloader(videoUri)
+					.setRemoteFileUrl(audioUrl)
+					.setDirType(Environment.DIRECTORY_MOVIES)
+					.setTitle(getTitle())
+					.setDescription(getStr(R.string.audio) + " ― " + getChannelName())
+					.setOutputFileName(getId() + " - " + getTitle() + " - audio")
+					.setOutputDirectoryName(getChannelName())
+					.setParentDirectory(SkyTubeApp.getSettings().getDownloadParentFolder())
+					.setOutputFileExtension(audioExtension)
+					.setAllowedOverRoaming(false)
+					.setAllowedNetworkTypesFlags(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE)
+					.onExternalStoragePermissionsGranted();
+		}
 
-        @Override
-        public void onDownloadStartFailed(String downloadName, final RuntimeException runtimeException) {
-            Toast.makeText(getContext(),
-                    String.format(getContext().getString(R.string.download_failed_because), downloadName, runtimeException.getMessage()),
-                    Toast.LENGTH_LONG).show();
-        }
+		@Override
+		public void onDownloadStartFailed(String downloadName, final RuntimeException runtimeException) {
+			showDownloadStartFailed(downloadName, runtimeException);
+		}
 
-        @Override
-        public void onExternalStorageNotAvailable() {
-            Toast.makeText(getContext(),
-                    R.string.external_storage_not_available,
-                    Toast.LENGTH_LONG).show();
-        }
+		@Override
+		public void onExternalStorageNotAvailable() {
+			showExternalStorageNotAvailable();
+		}
+	}
 
-    }
+	/**
+	 * Downloads the audio stream that belongs to a video-only download.
+	 */
+	private class AudioDownloader extends FileDownloader {
+		/** The Uri of the already downloaded video file. */
+		private final Uri videoUri;
+
+		AudioDownloader(Uri videoUri) {
+			this.videoUri = videoUri;
+		}
+
+		@Override
+		public void onFileDownloadStarted() {
+			Toast.makeText(getContext(),
+					String.format(getContext().getString(R.string.starting_audio_download), getTitle()),
+					Toast.LENGTH_LONG).show();
+		}
+
+		@Override
+		public void onFileDownloadCompleted(boolean success, Uri localFileUri) {
+			if (success) {
+				saveDownload(videoUri, localFileUri);
+			} else {
+				// a video file without its audio is not usable, remove the already downloaded part
+				deleteQuietly(videoUri);
+				showToast(false);
+			}
+		}
+
+		@Override
+		public void onDownloadStartFailed(String downloadName, final RuntimeException runtimeException) {
+			deleteQuietly(videoUri);
+			showDownloadStartFailed(downloadName, runtimeException);
+		}
+
+		@Override
+		public void onExternalStorageNotAvailable() {
+			showExternalStorageNotAvailable();
+		}
+	}
+
+	private void saveDownload(Uri videoUri, @Nullable Uri audioUri) {
+		DownloadedVideosDb.getVideoDownloadsDb().add(YouTubeVideo.this, videoUri, audioUri)
+				.doOnSuccess(this::showToast)
+				.doOnError(err -> SkyTubeApp.notifyUserOnError(getContext(), err))
+				.subscribe();
+	}
+
+	private void showToast(boolean success) {
+		Toast.makeText(getContext(),
+				String.format(getContext().getString(success ? R.string.video_downloaded : R.string.video_download_stream_error), getTitle()),
+				Toast.LENGTH_LONG).show();
+	}
+
+	private void showDownloadStartFailed(String downloadName, RuntimeException runtimeException) {
+		Toast.makeText(getContext(),
+				String.format(getContext().getString(R.string.download_failed_because), downloadName, runtimeException.getMessage()),
+				Toast.LENGTH_LONG).show();
+	}
+
+	private void showExternalStorageNotAvailable() {
+		Toast.makeText(getContext(), R.string.external_storage_not_available, Toast.LENGTH_LONG).show();
+	}
+
+	private void deleteQuietly(@Nullable Uri fileUri) {
+		if (fileUri != null && fileUri.getPath() != null) {
+			File file = new File(fileUri.getPath());
+			if (file.exists() && !file.delete()) {
+				Logger.w(this, "Could not delete incomplete download: %s", file);
+			}
+		}
+	}
 
 }
