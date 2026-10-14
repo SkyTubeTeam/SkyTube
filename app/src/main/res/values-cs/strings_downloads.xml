@@ -14,4 +14,6 @@
     <string name="downloads">Stahování</string>
     <string name="warning_metered_network_download">Stáhnout video na placeném připojení které právě používáte\?</string>
     <string name="starting_video_download">Stahuji \'%s\'…</string>
+    <string name="starting_audio_download">Stahování zvuku z „%s“…</string>
+    <string name="audio">Zvuk</string>
 </resources>
