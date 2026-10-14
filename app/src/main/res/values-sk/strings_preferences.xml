@@ -199,4 +199,6 @@
     <string name="pref_title_import_subs_opml">Import odberov z OPML</string>
     <string name="pref_summary_import_subs_opml">Importujte svoje odbery zo súboru OPML.</string>
     <string name="opml_file_picker_title">Výber súboru OPML</string>
+    <string name="privacy_control_title">Funkcie na ochranu súkromia</string>
+    <string name="privacy_control_message">SkyTube poskytuje tieto funkcie na zvýšenie ochrany súkromia. Pomocou prepínačov nižšie ich môžete zapnúť alebo vypnúť.</string>
 </resources>
