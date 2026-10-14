@@ -14,4 +14,6 @@
     <string name="delete_download">Odstrániť stiahnutie</string>
     <string name="download">Stiahnuť</string>
     <string name="playing_video_file_missing">Video sa prehráva online, pretože sa nepodarilo nájsť žiadny súbor na stiahnutie.</string>
+    <string name="starting_audio_download">Sťahovanie zvuku z „%s“…</string>
+    <string name="audio">Zvuk</string>
 </resources>
