@@ -14,4 +14,5 @@
     <string name="download_failed_because">%1$s konnte nicht heruntergeladen werden, weil %2$s.</string>
     <string name="unable_to_delete_file">Konnte die heruntergeladene ‘%s‘ Datei nicht löschen.</string>
     <string name="warning_metered_network_download">Möchten Sie das Video mit ihrer derzeitgen gebührenpflichtigen Verbindung herunterladen\?</string>
+    <string name="audio">Audio</string>
 </resources>

@@ -47,4 +47,5 @@
     <string name="mark_watched">Označit jako přehrané</string>
     <string name="error_get_comments_no_network">Připojte se k internetu aby bylo možné načíst komentáře.</string>
     <string name="sponsorblock_category_interaction">Připomínka interakce</string>
+    <string name="video_quality">Kvalita videa</string>
 </resources>

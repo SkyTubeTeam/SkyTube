@@ -14,7 +14,7 @@
     <string name="sponsorblock_category_intro">Шапка/преход</string>
     <string name="share_via">Споделяне чрез…</string>
     <string name="metered_network">Мрежа с ограничен трафик</string>
-    <string name="resume">Продължаване</string>
+    <string name="resume">Възобновяване</string>
     <string name="metered_network_blocked_by_policy">Свалянето е забранено, тъй като връзката с Интернет е през мрежа с ограничен трафик.</string>
     <string name="should_resume">Искате ли да продължите от там, където прекъснахте\?</string>
     <string name="sponsorblock_category_filler">Пълнеж</string>
@@ -47,4 +47,5 @@
     <string name="error_get_video_desc">Описанието на видеото не може да бъде получено.</string>
     <string name="no_video_comments">Към видеото или няма коментари, или те са изключени.</string>
     <string name="error_downloaded_file_is_corrupted">Сваленото видео изглежда <b>повредено</b>: <br/> <br/> %s. <br/> <br/> Искате ли да <b>изтриете</b> файла\?</string>
+    <string name="video_quality">Качество на видеото</string>
 </resources>

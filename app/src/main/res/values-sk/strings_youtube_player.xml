@@ -47,4 +47,5 @@
     <string name="enter_video_url">Vložiť URL adresu videa</string>
     <string name="error_get_comments">Komentáre sa nepodarilo načítať.</string>
     <string name="no_video_comments">Toto video nemá žiadne komentáre, alebo sú vypnuté.</string>
+    <string name="video_quality">Kvalita videa</string>
 </resources>

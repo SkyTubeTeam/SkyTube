@@ -196,4 +196,9 @@
     <string name="opml_directory_use_default">Използване на стандартното местоположения (папката за сваляния)</string>
     <string name="opml_directory_select">Изберете папка</string>
     <string name="opml_export_location">Местоположение за изнасяне: %s</string>
+    <string name="pref_title_import_subs_opml">Внасяне на абонаментите от OPML</string>
+    <string name="pref_summary_import_subs_opml">Внесете абонаментите си от файл OPML.</string>
+    <string name="opml_file_picker_title">Избиране на файл OPML</string>
+    <string name="privacy_control_title">Функционалности свързани с поверителността</string>
+    <string name="privacy_control_message">SkyTube предоставя тези функционалности подобряващи защитата на личните данни. Можете да ги включите или изключите по-долу.</string>
 </resources>

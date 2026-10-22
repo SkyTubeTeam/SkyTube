@@ -14,4 +14,6 @@
     <string name="external_storage_not_available">Enne allalaadimist , esmalt anna luba välise andmekandja kasutamiseks.</string>
     <string name="warning_metered_network_download">Sa kasutad võrguühendust, kus on mahupõhine teenustasu. Kas soovid jätkata allalaadimisega?</string>
     <string name="video_stream_not_found_with_request_resolution">Ei õnnestunud leida soovitud %1$s-%2$s tüüpi videovoogu</string>
+    <string name="starting_audio_download">Laadin alla „%s“ faili heliriba…</string>
+    <string name="audio">Heliriba</string>
 </resources>

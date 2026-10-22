@@ -10,4 +10,9 @@
     <string name="release_notes">Промени в %s</string>
     <string name="update_dialog_msg">Налична е нова версия на SkyTube. Ще бъде инсталиране версия %s.</string>
     <string name="later">По-късно</string>
+    <string name="unable_to_check_for_updates">Не може да се направи проверка за обновления: %s</string>
+    <string name="update_available_fdroid">Има нова версия на SkyTube. Версия %s е налична в F-Droid.</string>
+    <string name="update_open_fdroid">Отваряне на F-Droid</string>
+    <string name="fdroid_web_page_opened">Отваряне на уеб сайта на F-Droid в браузъра. Моля, инсталирайте обновлението от там.</string>
+    <string name="fdroid_open_failed">F-Droid не може да се отвори. Моля, инсталирайте от f-droid.org и опитайте отново.</string>
 </resources>
