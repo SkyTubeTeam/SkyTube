@@ -7,6 +7,10 @@
     <!-- <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/> -->
     <!-- [Optional]  If enabled via the preferences, the app will periodically check for new videos published by the subscribed channels -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <!-- for AndroidTV compatibility -->
     <uses-feature android:name="android.software.leanback"
@@ -197,6 +201,10 @@
                 android:name="autoStoreLocales"
                 android:value="true" />
         </service>
+        <service
+            android:name=".businessobjects.download.DownloadService"
+            android:exported="false"
+            android:foregroundServiceType="dataSync" />
     </application>
 
 </manifest>
