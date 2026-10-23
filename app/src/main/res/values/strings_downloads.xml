@@ -16,4 +16,11 @@
 	<string name="no_downloaded_videos_text">Download some videos to find them here.</string>
 	<string name="playing_video_file_missing">Playing video remotely since no downloadable file could be found.</string>
 	<string name="external_storage_not_available">Grant access to external to download the file first.</string>
+	<string name="download_notification_channel_name">Downloads</string>
+	<string name="download_notification_channel_description">Shows the progress of file downloads</string>
+	<string name="download_notification_progress_aggregate">%1$s / %2$s (%3$d%%)</string>
+	<string name="download_notification_downloaded">%1$s downloaded</string>
+	<string name="download_notification_waiting">Waiting to start…</string>
+	<string name="download_notification_complete">Download complete</string>
+	<string name="download_notification_failed">Download failed</string>
 </resources>

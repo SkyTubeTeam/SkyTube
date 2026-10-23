@@ -17,29 +17,32 @@
 
 package free.rm.skytube.businessobjects;
 
-import android.app.DownloadManager;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.Environment;
 import android.webkit.MimeTypeMap;
 
-import androidx.core.content.ContextCompat;
+import androidx.annotation.Nullable;
 
 import java.io.File;
 import java.io.Serializable;
 import java.util.regex.Pattern;
 
 import free.rm.skytube.app.SkyTubeApp;
+import free.rm.skytube.businessobjects.download.DownloadManager;
+import free.rm.skytube.businessobjects.download.DownloadMission;
+import free.rm.skytube.businessobjects.download.DownloadService;
 import free.rm.skytube.gui.activities.PermissionsActivity;
 
 import static free.rm.skytube.app.SkyTubeApp.getContext;
 
 /**
- * Downloads remote files by using Android's {@link DownloadManager}.
+ * Downloads remote files by using the download engine ported from NewPipe.
+ *
+ * <p>The engine downloads the file in multiple ranges in parallel, supports
+ * resuming interrupted downloads and reports its progress through a
+ * foreground service.</p>
  */
 public abstract class FileDownloader implements Serializable, PermissionsActivity.PermissionsTask {
 
@@ -62,8 +65,19 @@ public abstract class FileDownloader implements Serializable, PermissionsActivit
 	 *  This is ignored if allowedOverRoaming is set to true. */
 	private Integer allowedNetworkTypesFlags = null;
 
-	private long    downloadId;
-	private transient BroadcastReceiver onComplete;
+	/** Identifier of the logical download that this file belongs to. */
+	private String notificationGroupId = null;
+	/** Human readable title shared by all files of the same download. */
+	private String notificationGroupTitle = null;
+	/** Number of files that make up the logical download. */
+	private int notificationGroupSize = 0;
+
+	/** Number of parallel connections used by the download engine. */
+	private int threadCount = 3;
+
+	private transient DownloadService.MissionCompletionListener completionListener;
+	/** The destination file of the last started download, or null before the first start. */
+	private transient File downloadDestinationFile = null;
 
 	private Pattern invalidCharacters = Pattern.compile("[^\\w\\d]+");
 
@@ -88,64 +102,142 @@ public abstract class FileDownloader implements Serializable, PermissionsActivit
 	/**
 	 * Download the remote file.
 	 *
-	 * <p>Android's DownloadManager will be used to download the image on our behalf.</p>
+	 * <p>The multi-threaded download engine ported from NewPipe is used to
+	 * download the file on our behalf.</p>
 	 */
 	private void download() {
 		// check if the mandatory variables were set -- if not halt the program.
 		checkIfVariablesWereSet();
 
+		Uri     remoteFileUri = Uri.parse(remoteFileUrl);
+		String  downloadFileName = getCompleteFileName(remoteFileUri);
+		FileInformation fileInformation = new FileInformation(downloadFileName, parentDirectory, dirType);
+		final File downloadDestinationFile = fileInformation.getFile();
+
+		Logger.w(this, "Downloading video %s into %s -> %s", outputFileName, outputDirectoryName, downloadDestinationFile.getAbsolutePath());
+
+		this.downloadDestinationFile = downloadDestinationFile;
+
 		// if the external storage is not available then halt the download operation
 		if (!isExternalStorageAvailable()) {
+			reportTask(false);
 			onExternalStorageNotAvailable();
 			return;
 		}
 
-		Uri     remoteFileUri = Uri.parse(remoteFileUrl);
-		String  downloadFileName = getCompleteFileName(remoteFileUri);
-		FileInformation fileInformation = new FileInformation(downloadFileName, parentDirectory, dirType);
-		String fullDownloadFileName = fileInformation.getFullDownloadFileName();
-		final File downloadDestinationFile = fileInformation.getFile();
-
-
-		Logger.w(this, "Downloading video %s into %s -> %s", outputFileName, outputDirectoryName, downloadDestinationFile.getAbsolutePath());
-		if (downloadDestinationFile.exists()) {
+		// A file is only complete if there is no pending mission for it: a
+		// partially downloaded file must be resumed instead of being treated
+		// as already downloaded.
+		if (downloadDestinationFile.exists()
+				&& !DownloadManager.hasPendingMission(getContext(), downloadDestinationFile)) {
+			// let the aggregate notification know that this file is done,
+			// even though the download engine never worked on it
+			reportTask(true);
 			onFileDownloadCompleted(true, Uri.parse(downloadDestinationFile.toURI().toString()));
 			return;
 		}
 
-		DownloadManager.Request request = new DownloadManager.Request(remoteFileUri)
-				.setAllowedOverRoaming(allowedOverRoaming)
-				.setTitle(title)
-				.setDescription(description)
-				.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+		DownloadMission mission = createMission(downloadDestinationFile);
 
-		String videoDir = SkyTubeApp.getSettings().getDownloadFolder(null);
-		if(videoDir != null) {
-			request.setDestinationUri(Uri.fromFile(new File(videoDir, fullDownloadFileName)));
-		} else {
-			request.setDestinationInExternalPublicDir(dirType, fullDownloadFileName);
+		completionListener = new DownloadService.MissionCompletionListener() {
+			@Override
+			public void onCompleted(DownloadMission completedMission) {
+				onFileDownloadCompleted(true,
+						Uri.parse(completedMission.targetFile.toURI().toString()));
+			}
+
+			@Override
+			public void onFailed(DownloadMission failedMission, Exception error) {
+				RuntimeException runtimeException = error instanceof RuntimeException
+						? (RuntimeException) error
+						: new RuntimeException(error);
+				onDownloadStartFailed(title, runtimeException);
+			}
+		};
+
+		// start downloading
+		try {
+			DownloadService.startDownload(getContext(), mission, completionListener);
+			onFileDownloadStarted();
+		} catch (RuntimeException re) {
+			Logger.e(this, "Download failed:" + re.getMessage(), re);
+			reportTask(false);
+			onDownloadStartFailed(title, re);
 		}
+	}
 
-		if (!allowedOverRoaming) {
-			request.setAllowedNetworkTypes(allowedNetworkTypesFlags);
+	private DownloadMission createMission(File downloadDestinationFile) {
+		DownloadMission mission = new DownloadMission(
+				new String[]{remoteFileUrl}, downloadDestinationFile);
+		mission.title = title;
+		mission.kind = getKind();
+		mission.notificationGroupId = notificationGroupId;
+		mission.notificationGroupTitle = notificationGroupTitle;
+		mission.notificationGroupSize = notificationGroupSize;
+		mission.threadCount = threadCount;
+		mission.allowedOverRoaming = allowedOverRoaming != null ? allowedOverRoaming : true;
+		mission.allowedNetworkTypes = allowedNetworkTypesFlags != null
+				? allowedNetworkTypesFlags
+				: (android.app.DownloadManager.Request.NETWORK_WIFI
+						| android.app.DownloadManager.Request.NETWORK_MOBILE);
+		return mission;
+	}
+
+	/**
+	 * Reports the outcome of this task to the download service, so the
+	 * aggregate notification of the related download can reach its final
+	 * state.  The completion listeners are not involved.
+	 */
+	private void reportTask(boolean finished) {
+		if (downloadDestinationFile == null) {
+			return;
 		}
+		DownloadService.reportTaskResult(getContext(), createMission(downloadDestinationFile), finished);
+	}
 
-		// onComplete.onReceive() will be executed once the file is downloaded
-		getContext().registerReceiver(onComplete, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
+	/**
+	 * The destination file of the last started download, or null before the
+	 * first start.
+	 */
+	@Nullable
+	public File getDownloadDestinationFile() {
+		return downloadDestinationFile;
+	}
 
-        // start downloading
-        try {
-            downloadId = ContextCompat.getSystemService(getContext(), DownloadManager.class).enqueue(request);
-            onFileDownloadStarted();
-        } catch (RuntimeException re) {
-            Logger.e(this, "Download failed:"+re.getMessage(), re);
-            onDownloadStartFailed(title, re);
-        }
+	/**
+	 * Deletes the downloaded (or partially downloaded) file of this
+	 * downloader.  The completion listeners of the related download are not
+	 * involved.
+	 */
+	public void deleteDownloadedFile() {
+		if (downloadDestinationFile == null) {
+			return;
+		}
+		File partFile = new File(downloadDestinationFile.getAbsolutePath() + ".part");
+		boolean deleted = true;
+		if (partFile.exists() && !partFile.delete()) {
+			deleted = false;
+		}
+		if (downloadDestinationFile.exists() && !downloadDestinationFile.delete()) {
+			deleted = false;
+		}
+		if (!deleted) {
+			Logger.w(this, "Could not delete downloaded file: %s", downloadDestinationFile);
+		}
+	}
+
+	private char getKind() {
+		if (Environment.DIRECTORY_MOVIES.equals(dirType)) {
+			return 'v';
+		} else if (Environment.DIRECTORY_PICTURES.equals(dirType)) {
+			return 's';
+		}
+		return '?';
 	}
 
 
 	/**
-	 * Will check if the mandatory instance variables have been set.
+	 * Will check if the mandatory instance variables were set.
 	 */
 	private void checkIfVariablesWereSet() {
 		if (remoteFileUrl == null  ||  dirType == null  ||  title == null
@@ -153,21 +245,6 @@ public abstract class FileDownloader implements Serializable, PermissionsActivit
 				|| (!allowedOverRoaming &&  allowedNetworkTypesFlags == null)) {
 			throw new IllegalStateException("One of the parameters was not set for the FileDownloader");
 		}
-
-		onComplete = new BroadcastReceiver() {
-			public void onReceive(Context context, Intent intent) {
-				String action = intent.getAction();
-
-				if (DownloadManager.ACTION_DOWNLOAD_COMPLETE.equals(action)) {
-					long referenceId = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
-
-					// check the referenceId for this download
-					if (referenceId == downloadId) {
-						fileDownloadStatus();
-					}
-				}
-			}
-		};
 	}
 
 
@@ -188,38 +265,6 @@ public abstract class FileDownloader implements Serializable, PermissionsActivit
 	private String getCompleteFileName(Uri remoteFileUri) {
 		String fileExt = (outputFileExtension != null)  ?  outputFileExtension  :   MimeTypeMap.getFileExtensionFromUrl(remoteFileUri.toString());
 		return outputFileName + "." + fileExt;
-	}
-
-
-	/**
-	 * Notify the user whether the download was successful or not.
-	 */
-	private void fileDownloadStatus() {
-		boolean downloadSuccessful = false;
-		Uri downloadedFileUri  = null;
-		Cursor cursor = ContextCompat.getSystemService(getContext(), DownloadManager.class)
-				.query(new DownloadManager.Query().setFilterById(downloadId));
-
-		if (cursor != null  &&  cursor.moveToFirst()) {
-			downloadSuccessful = (cursor.getInt(cursor.getColumnIndexOrThrow(DownloadManager.COLUMN_STATUS)) == DownloadManager.STATUS_SUCCESSFUL);
-
-			if (downloadSuccessful) {
-				downloadedFileUri = Uri.parse(cursor.getString(cursor.getColumnIndexOrThrow(DownloadManager.COLUMN_LOCAL_URI)));
-			} else {
-				final int columnReason = cursor.getColumnIndexOrThrow(DownloadManager.COLUMN_REASON);
-				final int reason = cursor.getInt(columnReason);
-
-				// output why the download has failed...
-				Logger.e(this, "Download failed.  Reason=%s", reason);
-			}
-
-			cursor.close();
-		}
-
-		getContext().unregisterReceiver(onComplete);
-
-		// file download is now completed
-		onFileDownloadCompleted(downloadSuccessful, downloadedFileUri);
 	}
 
 
@@ -273,7 +318,7 @@ public abstract class FileDownloader implements Serializable, PermissionsActivit
 	/**
 	 * Set the parent directory.
 	 *
-	 * @param parentDirectory    E.g. "/storage/emulated/0/videos"
+	 * @param parentDirectory   E.g. "/storage/emulated/0/videos"
 	 */
 	public FileDownloader setParentDirectory(File parentDirectory) {
 		this.parentDirectory = parentDirectory;
@@ -304,6 +349,45 @@ public abstract class FileDownloader implements Serializable, PermissionsActivit
 		return this;
 	}
 
+	/**
+	 * Associates this file with a logical download that may consist of
+	 * several files, so the service can show one aggregate notification.
+	 *
+	 * @param groupId unique identifier of the logical download
+	 * @param title   title shown in the aggregate notification
+	 * @param size    number of files that make up the logical download
+	 */
+	public FileDownloader setNotificationGroup(String groupId, String title, int size) {
+		this.notificationGroupId = groupId;
+		this.notificationGroupTitle = title;
+		this.notificationGroupSize = Math.max(0, size);
+		return this;
+	}
+
+	/**
+	 * Associates this file with an already started logical download (see
+	 * {@link #setNotificationGroup(String, String, int)}).  Used for the
+	 * members of a group that are started after the first one.
+	 *
+	 * @param groupId unique identifier of the logical download
+	 * @param size    number of files that make up the logical download
+	 */
+	public FileDownloader setNotificationGroup(String groupId, int size) {
+		this.notificationGroupId = groupId;
+		this.notificationGroupSize = Math.max(0, size);
+		return this;
+	}
+
+	/**
+	 * Set the number of parallel connections used by the download engine.
+	 *
+	 * @param threadCount E.g. 1 for a single connection, 3 for the default
+	 */
+	public FileDownloader setThreadCount(int threadCount) {
+		this.threadCount = Math.max(1, threadCount);
+		return this;
+	}
+
 	////////////////////////////////////////////////////////////////////////////////////////////////
 
 	/**
@@ -317,8 +401,8 @@ public abstract class FileDownloader implements Serializable, PermissionsActivit
     public abstract void onDownloadStartFailed(String downloadName, RuntimeException runtimeException);
 
 	/**
-	 * Method called when the Android's DownloadManager has finished working on the given remote
-	 * file.
+	 * Method called when the download engine has finished working on the given
+	 * remote file.
 	 *
 	 * @param success       True if the remote file was downloaded successfully.
 	 * @param localFileUri  If success == true, then this will hold the Uri of the downloaded file.
@@ -333,15 +417,21 @@ public abstract class FileDownloader implements Serializable, PermissionsActivit
 	public abstract void onExternalStorageNotAvailable();
 
 	private class FileInformation {
-		private final String fullDownloadFileName;
 		private final File file;
 
 		public FileInformation(String downloadFileName,
 				File parentDirectory, String dirType) {
 			// if there's already a local file for this video for some reason, then do not redownload the
 			// file and halt
-			final File externalStorageDir = Environment.getExternalStoragePublicDirectory(dirType);
-			File parentDir = parentDirectory != null ? parentDirectory : externalStorageDir;
+			File parentDir;
+			if (parentDirectory != null) {
+				parentDir = parentDirectory;
+			} else {
+				File externalStorageDir = Environment.getExternalStoragePublicDirectory(dirType);
+				parentDir = externalStorageDir != null
+						? externalStorageDir
+						: new File(System.getProperty("user.dir"), dirType);
+			}
 			boolean toDirectories = SkyTubeApp.getSettings().isDownloadToSeparateFolders();
 
 			if (toDirectories && outputDirectoryName != null && !outputDirectoryName.isEmpty()) {
@@ -349,15 +439,8 @@ public abstract class FileDownloader implements Serializable, PermissionsActivit
 				if (!parentDir.exists()) {
 					parentDir.mkdirs();
 				}
-				fullDownloadFileName = outputDirectoryName + '/' + downloadFileName;
-			} else {
-				fullDownloadFileName = downloadFileName;
 			}
 			file = new File(parentDir, downloadFileName);
-		}
-
-		public String getFullDownloadFileName() {
-			return fullDownloadFileName;
 		}
 
 		public File getFile() {
