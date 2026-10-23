@@ -47,6 +47,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.media.AudioManagerCompat;
@@ -56,14 +57,11 @@ import com.bumptech.glide.request.RequestOptions;
 import com.google.android.exoplayer2.C;
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.DefaultRenderersFactory;
-import com.google.android.exoplayer2.ExoPlaybackException;
-import com.google.android.exoplayer2.ExoPlayerFactory;
+import com.google.android.exoplayer2.PlaybackException;
 import com.google.android.exoplayer2.Player;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.source.UnrecognizedInputFormatException;
-import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection;
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
-import com.google.android.exoplayer2.trackselection.TrackSelection;
 import com.google.android.exoplayer2.ui.AspectRatioFrameLayout;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 
@@ -246,9 +244,16 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
     private void initViews() {
         // setup the toolbar / actionbar
         Toolbar toolbar = fragmentBinding.getRoot().findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        if (toolbar != null) {
+            setSupportActionBar(toolbar);
+            ActionBar actionBar = getSupportActionBar();
+            if (actionBar != null) {
+                actionBar.setDisplayHomeAsUpEnabled(true);
+                actionBar.setDisplayShowHomeEnabled(true);
+            }
+        } else {
+            Logger.e(this, "Toolbar not found in the player layout");
+        }
 
         // setup the player
         playerViewGestureHandler.initView();
@@ -290,7 +295,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
             } else {
                 Logger.i(this, ">> found already existing player, re-using it, to avoid duplicate usage");
             }
-            player.addListener(new Player.EventListener() {
+            player.addListener(new Player.Listener() {
                 @Override
                 public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
                     Logger.i(this, ">> onPlayerStateChanged " + playWhenReady + " state=" + playbackState);
@@ -317,7 +322,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
                 }
 
                 @Override
-                public void onPlayerError(ExoPlaybackException error) {
+                public void onPlayerError(PlaybackException error) {
                     Logger.e(this, ":: onPlayerError " + error.getMessage(), error);
 
                     saveVideoPosition();
@@ -327,7 +332,8 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
                     }
 
                     boolean askForDelete = askForDelete(error);
-                    String errorMessage = error.getCause().getMessage();
+                    Throwable cause = error.getCause();
+                    String errorMessage = cause != null ? cause.getMessage() : error.getMessage();
                     Context ctx = YouTubePlayerV2Fragment.this.getContext();
                     new SkyTubeMaterialDialog(ctx)
                             .onNegativeOrCancel(dialog -> closeActivity())
@@ -349,7 +355,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
                             }).show();
                 }
 
-                private boolean askForDelete(ExoPlaybackException error) {
+                private boolean askForDelete(PlaybackException error) {
                     Throwable cause = error.getCause();
                     if (cause instanceof UnrecognizedInputFormatException) {
                         UnrecognizedInputFormatException uie = (UnrecognizedInputFormatException) cause;
@@ -365,14 +371,16 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
     }
 
     private SimpleExoPlayer createExoPlayer() {
-        DefaultBandwidthMeter bandwidthMeter = new DefaultBandwidthMeter();
-
-        TrackSelection.Factory videoTrackSelectionFactory = new AdaptiveTrackSelection.Factory();
-        DefaultTrackSelector trackSelector = new DefaultTrackSelector(videoTrackSelectionFactory);
         Context context = getContext();
+        DefaultBandwidthMeter bandwidthMeter = new DefaultBandwidthMeter.Builder(context).build();
+        DefaultTrackSelector trackSelector = new DefaultTrackSelector(context);
         DefaultRenderersFactory defaultRenderersFactory = new DefaultRenderersFactory(context);
 
-        return ExoPlayerFactory.newSimpleInstance(getContext(), defaultRenderersFactory, trackSelector, new DefaultLoadControl(), null, bandwidthMeter);
+        return new SimpleExoPlayer.Builder(context, defaultRenderersFactory)
+                .setTrackSelector(trackSelector)
+                .setLoadControl(new DefaultLoadControl())
+                .setBandwidthMeter(bandwidthMeter)
+                .build();
     }
 
 
@@ -390,7 +398,10 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
     }
 
     private void setupInfoDisplay(YouTubeVideo video) {
-        getSupportActionBar().setTitle(video.getTitle());
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle(video.getTitle());
+        }
         videoDescriptionBinding.videoDescTitle.setText(video.getTitle());
         videoDescriptionBinding.videoDescChannel.setText(video.getChannelName());
         videoDescriptionBinding.videoDescViews.setText(video.getViewsCount());
@@ -591,9 +602,8 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
                                                                     StreamSelectionPolicy selectionPolicy = SkyTubeApp.getSettings().getDesiredVideoResolution(false);
                                                                     StreamSelectionPolicy.StreamSelection selection = selectionPolicy.select(desiredStream);
                                                                     if (selection != null) {
-                                                                        Uri uri = selection.getVideoStreamUri();
-                                                                        Logger.i(YouTubePlayerV2Fragment.this, ">> PLAYING: %s, audio: %s", uri, selection.getAudioStreamUri());
-                                                                        playVideo(uri, selection.getAudioStreamUri(), desiredStream);
+                                                                        Logger.i(YouTubePlayerV2Fragment.this, ">> PLAYING: %s, audio: %s", selection.getVideoStreamUri(), selection.getAudioStreamUri());
+                                                                        playVideo(selection, desiredStream);
                                                                         setupInfoDisplay(video);
 
                                                                         playingDownloadedVideo = false;
@@ -665,9 +675,26 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
      * @param streamInfo Additional information about the stream.
      */
     private void playVideo(Uri videoUri, @Nullable Uri audioUri, @Nullable StreamInfo streamInfo) {
-        datasourceBuilder.play(videoUri, audioUri, streamInfo);
-        if (playerInitialPosition > 0) {
-            player.seekTo(playerInitialPosition);
+        try {
+            datasourceBuilder.play(videoUri, audioUri, streamInfo);
+            if (playerInitialPosition > 0) {
+                player.seekTo(playerInitialPosition);
+            }
+        } catch (RuntimeException e) {
+            Logger.e(this, "Error preparing local video: " + e.getMessage(), e);
+            videoPlaybackError(e.getMessage());
+        }
+    }
+
+    private void playVideo(StreamSelectionPolicy.StreamSelection selection, @Nullable StreamInfo streamInfo) {
+        try {
+            datasourceBuilder.play(selection, streamInfo);
+            if (playerInitialPosition > 0) {
+                player.seekTo(playerInitialPosition);
+            }
+        } catch (RuntimeException e) {
+            Logger.e(this, "Error preparing video: " + e.getMessage(), e);
+            videoPlaybackError(e.getMessage());
         }
     }
 
@@ -693,10 +720,15 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
         }
         long position = player.getCurrentPosition();
         boolean wasPlaying = player.getPlayWhenReady();
-        datasourceBuilder.play(sel.getVideoStreamUri(), sel.getAudioStreamUri(), currentStreamInfo);
-        player.seekTo(position);
-        player.setPlayWhenReady(wasPlaying);
-        currentResolution = sel.getResolution();
+        try {
+            datasourceBuilder.play(sel, currentStreamInfo);
+            player.seekTo(position);
+            player.setPlayWhenReady(wasPlaying);
+            currentResolution = sel.getResolution();
+        } catch (RuntimeException e) {
+            Logger.e(this, "Error switching quality: " + e.getMessage(), e);
+            videoPlaybackError(e.getMessage());
+        }
     }
 
     @Override

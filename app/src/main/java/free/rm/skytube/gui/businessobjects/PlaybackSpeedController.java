@@ -66,7 +66,7 @@ public class PlaybackSpeedController implements PopupMenu.OnMenuItemClickListene
     }
 
     public boolean getPlaybackSkipSilence() {
-        return getPlaybackParameters().skipSilence;
+        return player.getSkipSilenceEnabled();
     }
 
     public void setPlaybackSpeed(float speed) {
@@ -80,7 +80,8 @@ public class PlaybackSpeedController implements PopupMenu.OnMenuItemClickListene
     }
 
     public void setPlaybackParameters(float speed, float pitch, boolean skipSilence) {
-        player.setPlaybackParameters(new PlaybackParameters(speed, pitch, skipSilence));
+        player.setPlaybackParameters(new PlaybackParameters(speed, pitch));
+        player.setSkipSilenceEnabled(skipSilence);
     }
 
     @Override

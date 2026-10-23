@@ -119,9 +119,13 @@ dependencies {
 
 /** ExoPlayer **/
     // Application level media player
-    def exoplayerVersion = 'r2.9.6'
-    implementation "com.github.google.ExoPlayer:exoplayer-core:$exoplayerVersion"
-    implementation "com.github.google.ExoPlayer:exoplayer-ui:$exoplayerVersion"
+    def exoplayerVersion = '2.19.1'
+    implementation "com.google.android.exoplayer:exoplayer-core:$exoplayerVersion"
+    implementation "com.google.android.exoplayer:exoplayer-ui:$exoplayerVersion"
+    implementation "com.google.android.exoplayer:exoplayer-dash:$exoplayerVersion"
+    implementation "com.google.android.exoplayer:exoplayer-hls:$exoplayerVersion"
+    implementation "com.google.android.exoplayer:exoplayer-smoothstreaming:$exoplayerVersion"
+    implementation "com.google.android.exoplayer:exoplayer-database:$exoplayerVersion"
 
 /** Third-party **/
 
