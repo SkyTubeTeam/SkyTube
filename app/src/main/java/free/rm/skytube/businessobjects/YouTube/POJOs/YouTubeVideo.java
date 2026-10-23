@@ -553,9 +553,11 @@ public class YouTubeVideo extends CardData implements Serializable {
 					public void onGetDesiredStreamError(Throwable throwable) {
 						Logger.e(YouTubeVideo.this, "Stream error: " + throwable.getMessage(), throwable);
 						Context context = getContext();
-						Toast.makeText(context,
-								String.format(context.getString(R.string.video_download_stream_error), getTitle()),
-								Toast.LENGTH_LONG).show();
+						final String reason = NewPipeUtils.getUserFriendlyErrorMessage(context, throwable);
+						final String message = reason != null
+								? context.getString(R.string.download_failed_because, getTitle(), reason)
+								: context.getString(R.string.video_download_stream_error, getTitle());
+						Toast.makeText(context, message, Toast.LENGTH_LONG).show();
 					}
 				});
 			}

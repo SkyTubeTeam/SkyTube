@@ -16,6 +16,9 @@
  */
 package free.rm.skytube.businessobjects.YouTube.newpipe;
 
+import android.content.Context;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import org.jsoup.Jsoup;
@@ -23,10 +26,14 @@ import org.jsoup.nodes.Document;
 import org.jsoup.safety.Safelist;
 import org.schabi.newpipe.extractor.Image;
 import org.schabi.newpipe.extractor.InfoItem;
+import org.schabi.newpipe.extractor.exceptions.ReCaptchaException;
 import org.schabi.newpipe.extractor.stream.Description;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
+
+import free.rm.skytube.R;
 
 public class NewPipeUtils {
     private NewPipeUtils() {}
@@ -56,5 +63,33 @@ public class NewPipeUtils {
     @Nullable
     public static String getThumbnailUrl(InfoItem comment) {
         return getThumbnailUrl(comment.getThumbnails());
+    }
+
+    /**
+     * Translates extractor failures into messages that explain what the user can do.
+     *
+     * @param context   used to resolve the localized message
+     * @param throwable the failure raised while extracting the stream
+     * @return a user-facing explanation, or {@code null} when the failure has no message
+     */
+    @Nullable
+    public static String getUserFriendlyErrorMessage(@NonNull Context context,
+                                                     @Nullable Throwable throwable) {
+        if (throwable == null) {
+            return null;
+        }
+        if (throwable instanceof ReCaptchaException) {
+            return context.getString(R.string.error_video_captcha_required);
+        }
+
+        final String message = throwable.getMessage();
+        if (message != null && message.contains("LOGIN_REQUIRED")) {
+            final String lowerCaseMessage = message.toLowerCase(Locale.ROOT);
+            if (lowerCaseMessage.contains("age")) {
+                return context.getString(R.string.error_video_age_restricted);
+            }
+            return context.getString(R.string.error_video_login_required);
+        }
+        return message;
     }
 }

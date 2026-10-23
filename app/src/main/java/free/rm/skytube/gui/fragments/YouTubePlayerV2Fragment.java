@@ -90,6 +90,7 @@ import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.YouTube.YouTubeTasks;
 import free.rm.skytube.businessobjects.YouTube.newpipe.ContentId;
+import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeUtils;
 import free.rm.skytube.businessobjects.YouTube.newpipe.VideoId;
 import free.rm.skytube.businessobjects.db.DatabaseTasks;
 import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
@@ -612,7 +613,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
                                                             public void onGetDesiredStreamError(Throwable throwable) {
                                                                 Logger.e(YouTubePlayerV2Fragment.this, "Error during getting desired stream:" + throwable, throwable);
                                                                 if (throwable != null) {
-                                                                    videoPlaybackError(throwable.getMessage());
+                                                                    videoPlaybackError(NewPipeUtils.getUserFriendlyErrorMessage(getContext(), throwable));
                                                                 }
                                                             }
                                                         }).subscribe());

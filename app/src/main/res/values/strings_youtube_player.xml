@@ -6,6 +6,9 @@
     <string name="error_video_play">Video Playback Error</string>
     <string name="error_video_streams_empty">The \'%s\' video has no streams.</string>
     <string name="error_video_streams">Could not fetch the any of the video streams.</string>
+    <string name="error_video_age_restricted">this video is age-restricted and YouTube requires signing in, which SkyTube does not support</string>
+    <string name="error_video_login_required">YouTube requires signing in for this video, which SkyTube does not support</string>
+    <string name="error_video_captcha_required">YouTube requires a captcha verification, which SkyTube cannot complete</string>
     <string name="error_get_video_desc">Could not fetch the video description.</string>
     <string name="error_invalid_url">Invalid video URL: %s</string>
     <string name="error_downloaded_file_is_corrupted">The downloaded video looks &lt;b&gt;corrupted&lt;/b&gt;:
