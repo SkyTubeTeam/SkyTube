@@ -73,7 +73,7 @@ public final class DownloadUtils {
         }
     }
 
-    public static void writeToFile(@NonNull File file, @NonNull Serializable serializable) {
+    static void writeToFile(@NonNull File file, @NonNull Serializable serializable) {
         try (ObjectOutputStream objectOutputStream =
                      new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(file)))) {
             objectOutputStream.writeObject(serializable);
@@ -84,7 +84,7 @@ public final class DownloadUtils {
 
     @Nullable
     @SuppressWarnings("unchecked")
-    public static <T> T readFromFile(@Nullable File file) {
+    static <T> T readFromFile(@Nullable File file) {
         if (file == null || !file.isFile()) {
             return null;
         }
@@ -99,7 +99,7 @@ public final class DownloadUtils {
     }
 
     @Nullable
-    public static String getFileExt(String url) {
+    static String getFileExt(String url) {
         int index;
         if ((index = url.indexOf("?")) > -1) {
             url = url.substring(0, index);
@@ -124,7 +124,7 @@ public final class DownloadUtils {
     }
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
-    public static boolean mkdir(File dir, boolean allDirs) {
+    static boolean mkdir(File dir, boolean allDirs) {
         if (dir.exists()) {
             return true;
         }
@@ -138,7 +138,7 @@ public final class DownloadUtils {
         return dir.exists();
     }
 
-    public static long getContentLength(HttpURLConnection connection) {
+    static long getContentLength(HttpURLConnection connection) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             return connection.getContentLengthLong();
         }
@@ -154,7 +154,7 @@ public final class DownloadUtils {
      * Get the content length of the entire file even if the HTTP response is
      * partial (response code 206).
      */
-    public static long getTotalContentLength(HttpURLConnection connection) {
+    static long getTotalContentLength(HttpURLConnection connection) {
         try {
             if (connection.getResponseCode() == 206) {
                 final String rangeStr = connection.getHeaderField("Content-Range");
@@ -173,12 +173,12 @@ public final class DownloadUtils {
      * Using the target path guarantees that two attempts to download the same
      * file share the same resume state.
      */
-    public static File getMetadataFile(File pendingDir, File targetFile) {
+    static File getMetadataFile(File pendingDir, File targetFile) {
         UUID uuid = UUID.nameUUIDFromBytes(targetFile.getAbsolutePath().getBytes(UTF_8));
         return new File(pendingDir, uuid.toString() + ".meta");
     }
 
-    public static void deleteQuietly(@Nullable File file) {
+    static void deleteQuietly(@Nullable File file) {
         if (file != null && file.exists() && !file.delete()) {
             Logger.w(DownloadUtils.class, "Could not delete file: %s", file);
         }
@@ -187,7 +187,7 @@ public final class DownloadUtils {
     /**
      * Renames the completed temporary file to its final name.
      */
-    public static boolean moveCompletedFile(@NonNull File source, @NonNull File target) {
+    static boolean moveCompletedFile(@NonNull File source, @NonNull File target) {
         if (!source.isFile()) {
             return false;
         }

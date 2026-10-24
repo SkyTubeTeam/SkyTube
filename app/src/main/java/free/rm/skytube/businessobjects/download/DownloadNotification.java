@@ -19,6 +19,7 @@ package free.rm.skytube.businessobjects.download;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -42,11 +43,11 @@ public final class DownloadNotification {
     private final Map<String, Group> groups = new HashMap<>();
     private boolean failed;
 
-    public void addMission(@NonNull DownloadMission mission) {
+    void addMission(@NonNull DownloadMission mission) {
         registerTask(mission);
     }
 
-    public void markFinished(@NonNull DownloadMission mission) {
+    void markFinished(@NonNull DownloadMission mission) {
         registerTask(mission);
         Group group = groupFor(mission);
         if (group.finishedIds.add(mission.id)) {
@@ -54,7 +55,7 @@ public final class DownloadNotification {
         }
     }
 
-    public void markFailed(@NonNull DownloadMission mission) {
+    synchronized void markFailed(@NonNull DownloadMission mission) {
         registerTask(mission);
         Group group = groupFor(mission);
         if (group.failedIds.add(mission.id)) {
@@ -63,7 +64,7 @@ public final class DownloadNotification {
         }
     }
 
-    public void removeMission(@NonNull DownloadMission mission) {
+    synchronized void removeMission(@NonNull DownloadMission mission) {
         if (tasks.remove(mission.id) == null) {
             return;
         }
@@ -89,7 +90,8 @@ public final class DownloadNotification {
         }
     }
 
-    public void markAllFailed() {
+    @VisibleForTesting
+    void markAllFailed() {
         failed = true;
         for (Group group : groups.values()) {
             group.failed = true;
@@ -102,7 +104,7 @@ public final class DownloadNotification {
      * any more (e.g. the process was restarted and one file of a pair is no
      * longer tracked) and the files that are on disk are considered usable.
      */
-    public void markGroupComplete(@NonNull String groupId) {
+    synchronized void markGroupComplete(@NonNull String groupId) {
         Group group = groups.get(groupId);
         if (group != null && !group.failed) {
             group.complete = true;
@@ -114,7 +116,7 @@ public final class DownloadNotification {
      * aggregate notification, e.g. after the final notification of the
      * group was posted.
      */
-    public void removeGroup(@NonNull String groupId) {
+    synchronized void removeGroup(@NonNull String groupId) {
         Group group = groups.remove(groupId);
         if (group == null) {
             return;
@@ -126,17 +128,19 @@ public final class DownloadNotification {
         }
     }
 
-    public void clear() {
+    synchronized void clear() {
         tasks.clear();
         groups.clear();
         failed = false;
     }
 
-    public boolean isEmpty() {
+    @VisibleForTesting
+    synchronized boolean isEmpty() {
         return groups.isEmpty();
     }
 
-    public boolean isTerminal() {
+    @VisibleForTesting
+    synchronized boolean isTerminal() {
         if (groups.isEmpty()) {
             return false;
         }
@@ -148,7 +152,8 @@ public final class DownloadNotification {
         return true;
     }
 
-    public boolean isComplete() {
+    @VisibleForTesting
+    synchronized boolean isComplete() {
         if (groups.isEmpty() || failed) {
             return false;
         }
@@ -160,11 +165,12 @@ public final class DownloadNotification {
         return true;
     }
 
-    public boolean hasFailure() {
+    @VisibleForTesting
+    boolean hasFailure() {
         return failed;
     }
 
-    public boolean hasIncompleteGroups() {
+    synchronized boolean hasIncompleteGroups() {
         for (Group group : groups.values()) {
             if (!group.isTerminal()) {
                 return true;
@@ -174,14 +180,14 @@ public final class DownloadNotification {
     }
 
     @Nullable
-    public String getTitle() {
+    synchronized String getTitle() {
         if (groups.size() != 1) {
             return null;
         }
         return groups.values().iterator().next().title;
     }
 
-    public long totalDone() {
+    synchronized long totalDone() {
         long total = 0;
         for (DownloadMission mission : tasks.values()) {
             total += Math.max(0, mission.done);
@@ -189,7 +195,7 @@ public final class DownloadNotification {
         return total;
     }
 
-    public long totalLength() {
+    synchronized long totalLength() {
         long total = 0;
         for (DownloadMission mission : tasks.values()) {
             total += Math.max(0, mission.getLength());
@@ -197,7 +203,7 @@ public final class DownloadNotification {
         return total;
     }
 
-    public int expectedTasks() {
+    synchronized int expectedTasks() {
         int total = 0;
         for (Group group : groups.values()) {
             total += group.expected;
@@ -205,18 +211,19 @@ public final class DownloadNotification {
         return total;
     }
 
-    public int seenTasks() {
+    @VisibleForTesting
+    synchronized int seenTasks() {
         return tasks.size();
     }
 
-    public boolean hasFullLength() {
+    synchronized boolean hasFullLength() {
         int expected = expectedTasks();
         return expected > 0
                 && knownLengthTaskCount() == expected
                 && totalLength() > 0;
     }
 
-    public int getProgress() {
+    synchronized int getProgress() {
         if (!hasFullLength()) {
             return -1;
         }
@@ -239,22 +246,22 @@ public final class DownloadNotification {
 
     /** All the missions currently tracked by the aggregate notification. */
     @NonNull
-    public List<DownloadMission> getMissions() {
+    synchronized List<DownloadMission> getMissions() {
         return new ArrayList<>(tasks.values());
     }
 
     /** A snapshot of the groups, safe to iterate while mutating. */
     @NonNull
-    public List<Group> getGroups() {
+    synchronized List<Group> getGroups() {
         return new ArrayList<>(groups.values());
     }
 
     @Nullable
-    public Group getGroup(@NonNull String groupId) {
+    synchronized Group getGroup(@NonNull String groupId) {
         return groups.get(groupId);
     }
 
-    private void registerTask(@NonNull DownloadMission mission) {
+    synchronized private void registerTask(@NonNull DownloadMission mission) {
         if (tasks.get(mission.id) == null) {
             tasks.put(mission.id, mission);
         }
@@ -336,24 +343,24 @@ public final class DownloadNotification {
             this.id = id;
         }
 
-        public boolean isTerminal() {
+        boolean isTerminal() {
             return complete || failed;
         }
 
-        public boolean isComplete() {
+        boolean isComplete() {
             return complete;
         }
 
-        public boolean isFailed() {
+        boolean isFailed() {
             return failed;
         }
 
         @NonNull
-        public String getTitle() {
+        String getTitle() {
             return title;
         }
 
-        public int getExpected() {
+        int getExpected() {
             return expected;
         }
 

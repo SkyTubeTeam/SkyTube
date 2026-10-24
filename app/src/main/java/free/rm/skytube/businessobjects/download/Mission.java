@@ -75,9 +75,6 @@ public abstract class Mission implements Serializable {
         return true;
     }
 
-    /** Indicates if this mission was deleted whatever is stored. */
-    public transient boolean deleted = false;
-
     @NonNull
     @Override
     public String toString() {
