@@ -100,7 +100,7 @@ public class DownloadManager {
             }
 
             if (mission.isFinished()
-                    || (mission.targetFile != null && mission.targetFile.exists()
+                    || (mission.getTargetFile() != null && mission.getTargetFile().exists()
                             && !mission.getPartFile().exists())) {
                 DownloadUtils.deleteQuietly(metadata);
                 return false;
@@ -147,48 +147,48 @@ public class DownloadManager {
      * target file.
      */
     synchronized void startMission(@NonNull DownloadMission mission) {
-        DownloadMission existing = findPendingByTarget(mission.targetFile);
+        DownloadMission existing = findPendingByTarget(mission.getTargetFile());
         if (existing == null) {
-            existing = loadPendingFromMetadata(mission.targetFile);
+            existing = loadPendingFromMetadata(mission.getTargetFile());
         }
 
         if (existing != null) {
             // Use the freshly extracted URL, in case the previous one expired.
-            boolean reset = existing.urls == null || existing.urls.length != mission.urls.length;
+            boolean reset = existing.getUrls() == null || existing.getUrls().length != mission.getUrls().length;
             // A mission that already finished (or that the engine considers
             // finished) cannot be restarted as is: forget its progress so it
             // can be downloaded from the beginning.
             reset = reset || existing.isFinished();
             if (reset) {
-                existing.urls = mission.urls;
-                existing.offsets = new long[mission.urls.length];
+                existing.setUrls(mission.getUrls());
+                existing.setOffsets(new long[mission.getUrls().length]);
                 existing.resetState(true, false, DownloadMission.ERROR_NOTHING);
             } else {
-                existing.urls = mission.urls;
+                existing.setUrls(mission.getUrls());
             }
-            existing.title = mission.title;
-            if (mission.notificationGroupId != null) {
-                existing.notificationGroupId = mission.notificationGroupId;
+            existing.setTitle(mission.getTitle());
+            if (mission.getNotificationGroupId() != null) {
+                existing.setNotificationGroupId(mission.getNotificationGroupId());
             }
-            if (mission.notificationGroupTitle != null) {
-                existing.notificationGroupTitle = mission.notificationGroupTitle;
+            if (mission.getNotificationGroupTitle() != null) {
+                existing.setNotificationGroupTitle(mission.getNotificationGroupTitle());
             }
-            if (mission.notificationGroupSize > 0) {
-                existing.notificationGroupSize = mission.notificationGroupSize;
+            if (mission.getNotificationGroupSize() > 0) {
+                existing.setNotificationGroupSize(mission.getNotificationGroupSize());
             }
-            existing.threadCount = mission.threadCount;
-            existing.kind = mission.kind;
-            existing.allowedOverRoaming = mission.allowedOverRoaming;
-            existing.allowedNetworkTypes = mission.allowedNetworkTypes;
-            if (mission.nearLength > 0) {
-                existing.nearLength = mission.nearLength;
+            existing.setThreadCount(mission.getThreadCount());
+            existing.setKind(mission.getKind());
+            existing.setAllowedOverRoaming(mission.getAllowedOverRoaming());
+            existing.setAllowedNetworkTypes(mission.getAllowedNetworkTypes());
+            if (mission.getNearLength() > 0) {
+                existing.setNearLength(mission.getNearLength());
             }
-            existing.maxRetry = maxRetry;
-            existing.handler = handlerFactory;
+            existing.setMaxRetry(maxRetry);
+            existing.setHandler(handlerFactory);
             existing.setListener(missionListener);
-            existing.enqueued = true;
+            existing.setEnqueued(true);
 
-            if (!existing.running && canDownloadInCurrentNetwork(existing)) {
+            if (!existing.getRunning() && canDownloadInCurrentNetwork(existing)) {
                 existing.start();
             } else {
                 existing.writeThisToFile();
@@ -196,17 +196,17 @@ public class DownloadManager {
             return;
         }
 
-        mission.timestamp = System.currentTimeMillis();
-        mission.maxRetry = maxRetry;
-        mission.handler = handlerFactory;
+        mission.setTimestamp(System.currentTimeMillis());
+        mission.setMaxRetry(maxRetry);
+        mission.setHandler(handlerFactory);
         mission.setListener(missionListener);
 
-        File metadata = DownloadUtils.getMetadataFile(pendingMissionsDir, mission.targetFile);
+        File metadata = DownloadUtils.getMetadataFile(pendingMissionsDir, mission.getTargetFile());
         if (!DownloadUtils.mkdir(metadata.getParentFile(), true)) {
             mission.notifyError(DownloadMission.ERROR_PATH_CREATION, null);
             return;
         }
-        mission.metadata = metadata;
+        mission.setMetadata(metadata);
 
         missionsPending.add(mission);
 
@@ -243,13 +243,13 @@ public class DownloadManager {
      * finished or cannot be used anymore
      */
     private boolean prepareLoadedMission(@NonNull DownloadMission mission, @NonNull File metadata) {
-        if (mission.targetFile == null) {
+        if (mission.getTargetFile() == null) {
             DownloadUtils.deleteQuietly(metadata);
             return false;
         }
 
         File partFile = mission.getPartFile();
-        if (!partFile.exists() && mission.targetFile.exists()) {
+        if (!partFile.exists() && mission.getTargetFile().exists()) {
             // The file was completed, but the metadata was not removed (e.g.
             // the process died right after the rename).
             DownloadUtils.deleteQuietly(metadata);
@@ -266,10 +266,10 @@ public class DownloadManager {
             mission.resetState(true, false, DownloadMission.ERROR_PROGRESS_LOST);
         }
 
-        mission.threads = new Thread[0];
-        mission.metadata = metadata;
-        mission.maxRetry = maxRetry;
-        mission.handler = handlerFactory;
+        mission.setThreads(new Thread[0]);
+        mission.setMetadata(metadata);
+        mission.setMaxRetry(maxRetry);
+        mission.setHandler(handlerFactory);
         mission.setListener(missionListener);
 
         return true;
@@ -278,7 +278,7 @@ public class DownloadManager {
     @Nullable
     private DownloadMission findPendingByTarget(@NonNull File targetFile) {
         for (DownloadMission mission : missionsPending) {
-            if (mission.targetFile != null && mission.targetFile.equals(targetFile)) {
+            if (mission.getTargetFile() != null && mission.getTargetFile().equals(targetFile)) {
                 return mission;
             }
         }
@@ -286,14 +286,14 @@ public class DownloadManager {
     }
 
     void resumeMission(@NonNull DownloadMission mission) {
-        if (!mission.running && canDownloadInCurrentNetwork(mission)) {
-            mission.enqueued = true;
+        if (!mission.getRunning() && canDownloadInCurrentNetwork(mission)) {
+            mission.setEnqueued(true);
             mission.start();
         }
     }
 
     void pauseMission(@NonNull DownloadMission mission) {
-        if (mission.running) {
+        if (mission.getRunning()) {
             mission.setEnqueued(false);
             mission.pause();
         }
@@ -326,7 +326,7 @@ public class DownloadManager {
     synchronized int getRunningMissionsCount() {
         int count = 0;
         for (DownloadMission mission : missionsPending) {
-            if (mission.running && !mission.isFinished()) {
+            if (mission.getRunning() && !mission.isFinished()) {
                 count++;
             }
         }
@@ -335,8 +335,8 @@ public class DownloadManager {
 
     synchronized void pauseAllMissions(boolean force) {
         for (DownloadMission mission : missionsPending) {
-            if (!mission.running || mission.isFinished()) {
-                if (mission.metadata != null) {
+            if (!mission.getRunning() || mission.isFinished()) {
+                if (mission.getMetadata() != null) {
                     mission.writeThisToFile();
                 }
                 continue;
@@ -344,8 +344,8 @@ public class DownloadManager {
 
             if (force) {
                 // avoid waiting for threads
-                mission.init = null;
-                mission.threads = new Thread[0];
+                mission.setInit(null);
+                mission.setThreads(new Thread[0]);
             }
 
             mission.pause();
@@ -354,7 +354,7 @@ public class DownloadManager {
 
     synchronized void startAllMissions() {
         for (DownloadMission mission : missionsPending) {
-            if (mission.running || mission.isCorrupt() || !mission.enqueued) {
+            if (mission.getRunning() || mission.isCorrupt() || !mission.getEnqueued()) {
                 continue;
             }
             if (canDownloadInCurrentNetwork(mission)) {
@@ -375,9 +375,9 @@ public class DownloadManager {
 
             boolean allowed = canDownloadInCurrentNetwork(mission);
 
-            if (mission.running && !allowed) {
+            if (mission.getRunning() && !allowed) {
                 mission.pause();
-            } else if (!mission.running && mission.enqueued && allowed) {
+            } else if (!mission.getRunning() && mission.getEnqueued() && allowed) {
                 mission.start();
             }
         }
@@ -388,7 +388,7 @@ public class DownloadManager {
      * change, false if the user has to start it again.
      */
     boolean canRetry(@NonNull DownloadMission mission) {
-        switch (mission.errCode) {
+        switch (mission.getErrCode()) {
             case DownloadMission.ERROR_SSL_EXCEPTION:
             case DownloadMission.ERROR_UNKNOWN_HOST:
             case DownloadMission.ERROR_CONNECT_HOST:
@@ -414,17 +414,17 @@ public class DownloadManager {
             return false;
         }
 
-        if (info.isRoaming() && !mission.allowedOverRoaming) {
+        if (info.isRoaming() && !mission.getAllowedOverRoaming()) {
             return false;
         }
 
         int type = info.getType();
         if (type == ConnectivityManager.TYPE_WIFI
-                && (mission.allowedNetworkTypes & Request.NETWORK_WIFI) == 0) {
+                && (mission.getAllowedNetworkTypes() & Request.NETWORK_WIFI) == 0) {
             return false;
         }
         if (type == ConnectivityManager.TYPE_MOBILE
-                && (mission.allowedNetworkTypes & Request.NETWORK_MOBILE) == 0) {
+                && (mission.getAllowedNetworkTypes() & Request.NETWORK_MOBILE) == 0) {
             return false;
         }
 
@@ -434,7 +434,7 @@ public class DownloadManager {
     synchronized void updateMaximumAttempts(int maxRetry) {
         this.maxRetry = maxRetry;
         for (DownloadMission mission : missionsPending) {
-            mission.maxRetry = maxRetry;
+            mission.setMaxRetry(maxRetry);
         }
     }
 

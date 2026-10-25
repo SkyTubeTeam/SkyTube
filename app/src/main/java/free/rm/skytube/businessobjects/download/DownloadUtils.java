@@ -132,66 +132,67 @@ public final class DownloadUtils {
 
     private static void writeMission(DataOutputStream out, DownloadMission mission) throws IOException {
         // Mission
-        writeString(out, mission.id);
-        writeString(out, mission.source);
-        out.writeLong(mission.length);
-        out.writeLong(mission.timestamp);
-        out.writeChar(mission.kind);
-        writeString(out, mission.targetFile == null ? null : mission.targetFile.getPath());
+        writeString(out, mission.getId());
+        writeString(out, mission.getSource());
+        out.writeLong(mission.getLength());
+        out.writeLong(mission.getTimestamp());
+        out.writeChar(mission.getKind());
+        writeString(out, mission.getTargetFile() == null ? null : mission.getTargetFile().getPath());
 
         // DownloadMission
-        writeStringArray(out, mission.urls);
-        out.writeLong(mission.done);
-        out.writeBoolean(mission.unknownLength);
-        writeLongArray(out, mission.offsets);
-        out.writeInt(mission.current);
-        out.writeLong(mission.nearLength);
-        writeIntArray(out, mission.blocks);
-        out.writeLong(mission.fallbackResumeOffset);
-        out.writeInt(mission.threadCount);
-        writeString(out, mission.title);
-        writeString(out, mission.notificationGroupId);
-        writeString(out, mission.notificationGroupTitle);
-        out.writeInt(mission.notificationGroupSize);
-        out.writeBoolean(mission.allowedOverRoaming);
-        out.writeInt(mission.allowedNetworkTypes);
-        out.writeBoolean(mission.enqueued);
+        writeStringArray(out, mission.getUrls());
+        out.writeLong(mission.getDone());
+        out.writeBoolean(mission.getUnknownLength());
+        writeLongArray(out, mission.getOffsets());
+        out.writeInt(mission.getCurrent());
+        out.writeLong(mission.getNearLength());
+        writeIntArray(out, mission.getBlocks());
+        out.writeLong(mission.getFallbackResumeOffset());
+        out.writeInt(mission.getThreadCount());
+        writeString(out, mission.getTitle());
+        writeString(out, mission.getNotificationGroupId());
+        writeString(out, mission.getNotificationGroupTitle());
+        out.writeInt(mission.getNotificationGroupSize());
+        out.writeBoolean(mission.getAllowedOverRoaming());
+        out.writeInt(mission.getAllowedNetworkTypes());
+        out.writeBoolean(mission.getEnqueued());
         // only the error code is persisted: errObject is runtime-only state
-        out.writeInt(mission.errCode);
+        out.writeInt(mission.getErrCode());
     }
 
     private static DownloadMission readMission(DataInputStream in) throws IOException {
-        DownloadMission mission = new DownloadMission();
-
         // Mission
-        mission.id = readString(in);
-        mission.source = readString(in);
-        mission.length = in.readLong();
-        mission.timestamp = in.readLong();
-        mission.kind = in.readChar();
+        String id = readString(in);
+        String source = readString(in);
+        long length = in.readLong();
+        long timestamp = in.readLong();
+        char kind = in.readChar();
         String targetPath = readString(in);
-        mission.targetFile = targetPath == null ? null : new File(targetPath);
+        File targetFile = targetPath == null ? null : new File(targetPath);
 
         // DownloadMission
-        mission.urls = readStringArray(in);
-        mission.done = in.readLong();
-        mission.unknownLength = in.readBoolean();
-        mission.offsets = readLongArray(in);
-        mission.current = in.readInt();
-        mission.nearLength = in.readLong();
-        mission.blocks = readIntArray(in);
-        mission.fallbackResumeOffset = in.readLong();
-        mission.threadCount = in.readInt();
-        mission.title = readString(in);
-        mission.notificationGroupId = readString(in);
-        mission.notificationGroupTitle = readString(in);
-        mission.notificationGroupSize = in.readInt();
-        mission.allowedOverRoaming = in.readBoolean();
-        mission.allowedNetworkTypes = in.readInt();
-        mission.enqueued = in.readBoolean();
-        mission.errCode = in.readInt();
+        String[] urls = readStringArray(in);
+        long done = in.readLong();
+        boolean unknownLength = in.readBoolean();
+        long[] offsets = readLongArray(in);
+        int current = in.readInt();
+        long nearLength = in.readLong();
+        int[] blocks = readIntArray(in);
+        long fallbackResumeOffset = in.readLong();
+        int threadCount = in.readInt();
+        String title = readString(in);
+        String notificationGroupId = readString(in);
+        String notificationGroupTitle = readString(in);
+        int notificationGroupSize = in.readInt();
+        boolean allowedOverRoaming = in.readBoolean();
+        int allowedNetworkTypes = in.readInt();
+        boolean enqueued = in.readBoolean();
+        int errCode = in.readInt();
 
-        return mission;
+        return new DownloadMission(id, source, length, timestamp, kind, targetFile, urls, done,
+                unknownLength, offsets, current, nearLength, blocks, fallbackResumeOffset,
+                threadCount, title, notificationGroupId, notificationGroupTitle,
+                notificationGroupSize, allowedOverRoaming, allowedNetworkTypes, enqueued, errCode);
     }
 
     /**

@@ -130,8 +130,8 @@ public class DownloadService extends Service implements Handler.Callback {
     public static void startDownload(@NonNull Context context,
                                      @NonNull DownloadMission mission,
                                      @Nullable MissionCompletionListener listener) {
-        if (listener != null && mission.targetFile != null) {
-            completionListeners.put(mission.targetFile.getAbsolutePath(), listener);
+        if (listener != null && mission.getTargetFile() != null) {
+            completionListeners.put(mission.getTargetFile().getAbsolutePath(), listener);
         }
 
         Intent intent = new Intent(context, DownloadService.class)
@@ -145,8 +145,8 @@ public class DownloadService extends Service implements Handler.Callback {
                 ContextCompat.startForegroundService(context, intent);
             }
         } catch (RuntimeException e) {
-            if (mission.targetFile != null) {
-                completionListeners.remove(mission.targetFile.getAbsolutePath());
+            if (mission.getTargetFile() != null) {
+                completionListeners.remove(mission.getTargetFile().getAbsolutePath());
             }
             throw e;
         }
@@ -305,7 +305,7 @@ public class DownloadService extends Service implements Handler.Callback {
         if (manager != null) {
             manager.pauseAllMissions(true);
             for (DownloadMission mission : manager.getPendingMissions()) {
-                mission.handler = null;
+                mission.setHandler(null);
                 mission.setListener(null);
             }
             manager = null;
@@ -380,10 +380,10 @@ public class DownloadService extends Service implements Handler.Callback {
      */
     private void markFinishedOnDisk() {
         for (DownloadMission mission : notification.getMissions()) {
-            if (mission.targetFile == null || mission.getPartFile().exists()) {
+            if (mission.getTargetFile() == null || mission.getPartFile().exists()) {
                 continue;
             }
-            if (mission.targetFile.exists()) {
+            if (mission.getTargetFile().exists()) {
                 notification.markFinished(mission);
             }
         }
@@ -464,8 +464,8 @@ public class DownloadService extends Service implements Handler.Callback {
      */
     private boolean hasActiveMissionsFor(@NonNull String groupId) {
         for (DownloadMission mission : manager.getPendingMissions()) {
-            if (groupId.equals(mission.notificationGroupId)
-                    && (mission.running || mission.enqueued)) {
+            if (groupId.equals(mission.getNotificationGroupId())
+                    && (mission.getRunning() || mission.getEnqueued())) {
                 return true;
             }
         }
@@ -502,13 +502,13 @@ public class DownloadService extends Service implements Handler.Callback {
                 break;
             case MESSAGE_ERROR:
                 if (manager.canRetry(mission)) {
-                    mission.enqueued = true;
+                    mission.setEnqueued(true);
                     handler.postDelayed(() -> manager.resumeMission(mission), 2000);
                 } else {
                     notification.markFailed(mission);
-                    notifyCompletionListener(mission, mission.errObject != null
-                            ? mission.errObject
-                            : new RuntimeException("Download failed with error code " + mission.errCode));
+                    notifyCompletionListener(mission, mission.getErrObject() != null
+                            ? mission.getErrObject()
+                            : new RuntimeException("Download failed with error code " + mission.getErrCode()));
                     manager.removePending(mission);
                 }
                 break;
@@ -573,12 +573,12 @@ public class DownloadService extends Service implements Handler.Callback {
     }
 
     private void notifyCompletionListener(@NonNull DownloadMission mission, @Nullable Exception error) {
-        if (mission.targetFile == null) {
+        if (mission.getTargetFile() == null) {
             return;
         }
 
         MissionCompletionListener listener =
-                completionListeners.remove(mission.targetFile.getAbsolutePath());
+                completionListeners.remove(mission.getTargetFile().getAbsolutePath());
         if (listener == null) {
             return;
         }
@@ -592,8 +592,7 @@ public class DownloadService extends Service implements Handler.Callback {
 
     private void createNotificationChannel() {
         Context appContext = getApplicationContext();
-        NotificationChannelCompat channel = new NotificationChannelCompat
-                .Builder(NOTIFICATION_CHANNEL, NotificationManagerCompat.IMPORTANCE_LOW)
+        NotificationChannelCompat channel = new NotificationChannelCompat.Builder(NOTIFICATION_CHANNEL, NotificationManagerCompat.IMPORTANCE_LOW)
                 .setName(appContext.getString(R.string.download_notification_channel_name))
                 .setDescription(appContext.getString(R.string.download_notification_channel_description))
                 .build();

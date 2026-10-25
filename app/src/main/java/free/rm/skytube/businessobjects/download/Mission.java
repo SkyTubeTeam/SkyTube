@@ -33,31 +33,85 @@ public abstract class Mission implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /** Unique id of this mission (also used to route completion callbacks). */
-    public String id = UUID.randomUUID().toString();
+    private String id;
 
     /** Source url of the resource. */
-    public String source;
+    private String source;
 
     /** Length of the current resource. */
-    public long length;
+    private long length;
 
     /** Creation timestamp (also used to order missions). */
-    public long timestamp;
+    private long timestamp;
 
     /** Pre-defined content type: 'v' video, 'a' audio, 's' subtitle, '?' other. */
-    public char kind = '?';
+    private char kind;
 
     /** The final downloaded file. */
-    public File targetFile;
+    private File targetFile;
+
+    protected Mission() {
+        this.id = UUID.randomUUID().toString();
+        this.kind = '?';
+    }
+
+    protected Mission(String id, String source, long length, long timestamp, char kind, File targetFile) {
+        this.id = id != null ? id : UUID.randomUUID().toString();
+        this.source = source;
+        this.length = length;
+        this.timestamp = timestamp;
+        this.kind = kind;
+        this.targetFile = targetFile;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
+    }
+
+    public long getLength() {
+        return length;
+    }
+
+    public void setLength(long length) {
+        this.length = length;
+    }
 
     public long getTimestamp() {
         return timestamp;
     }
 
-    /**
-     * The file that is being written while the download is in progress. Once
-     * the download finishes it is renamed to {@link #targetFile}.
-     */
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public char getKind() {
+        return kind;
+    }
+
+    public void setKind(char kind) {
+        this.kind = kind;
+    }
+
+    public File getTargetFile() {
+        return targetFile;
+    }
+
+    public void setTargetFile(File targetFile) {
+        this.targetFile = targetFile;
+    }
+
     @NonNull
     public File getPartFile() {
         File parent = targetFile.getParentFile();

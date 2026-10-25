@@ -70,14 +70,14 @@ public class DownloadRunnableFallback extends Thread {
     @Override
     public void run() {
         boolean done;
-        long start = mMission.fallbackResumeOffset;
+        long start = mMission.getFallbackResumeOffset();
 
-        if (!mMission.unknownLength && start > 0) {
+        if (!mMission.getUnknownLength() && start > 0) {
             Logger.i(TAG, "Resuming a single-thread download at " + start);
         }
 
         try {
-            long rangeStart = (mMission.unknownLength || start < 1) ? -1 : start;
+            long rangeStart = (mMission.getUnknownLength() || start < 1) ? -1 : start;
 
             int mId = 1;
             mConn = mMission.openConnection(false, rangeStart, -1);
@@ -98,25 +98,25 @@ public class DownloadRunnableFallback extends Thread {
             }
 
             // secondary check for the file length
-            if (!mMission.unknownLength) {
-                mMission.unknownLength = DownloadUtils.getContentLength(mConn) == -1;
+            if (!mMission.getUnknownLength()) {
+                mMission.setUnknownLength(DownloadUtils.getContentLength(mConn) == -1);
             }
 
-            if (mMission.unknownLength || mConn.getResponseCode() == 200) {
+            if (mMission.getUnknownLength() || mConn.getResponseCode() == 200) {
                 // restart amount of bytes downloaded
-                mMission.done = mMission.offsets[mMission.current] - mMission.offsets[0];
+                mMission.setDone(mMission.getOffsets()[mMission.getCurrent()] - mMission.getOffsets()[0]);
                 start = 0; // reset position to avoid writing at wrong offset
             }
 
             mF = new FileStream(mMission.getPartFile());
-            mF.seek(mMission.offsets[mMission.current] + start);
+            mF.seek(mMission.getOffsets()[mMission.getCurrent()] + start);
 
             mIs = mConn.getInputStream();
 
             byte[] buf = new byte[DownloadMission.BUFFER_SIZE];
             int len = 0;
 
-            while (mMission.running && (len = mIs.read(buf, 0, buf.length)) != -1) {
+            while (mMission.getRunning() && (len = mIs.read(buf, 0, buf.length)) != -1) {
                 mF.write(buf, 0, len);
                 start += len;
                 mMission.notifyProgress(len);
@@ -130,19 +130,19 @@ public class DownloadRunnableFallback extends Thread {
         } catch (Exception e) {
             dispose();
 
-            mMission.fallbackResumeOffset = start;
+            mMission.setFallbackResumeOffset(start);
 
-            if (!mMission.running || e instanceof ClosedByInterruptException) {
+            if (!mMission.getRunning() || e instanceof ClosedByInterruptException) {
                 return;
             }
 
             if (e instanceof HttpError
-                    && ((HttpError) e).statusCode == DownloadMission.ERROR_HTTP_FORBIDDEN) {
+                    && ((HttpError) e).getStatusCode() == DownloadMission.ERROR_HTTP_FORBIDDEN) {
                 mMission.notifyError(DownloadMission.ERROR_HTTP_FORBIDDEN, (HttpError) e);
                 return;
             }
 
-            if (mRetryCount++ >= mMission.maxRetry) {
+            if (mRetryCount++ >= mMission.getMaxRetry()) {
                 mMission.notifyError(e);
                 return;
             }
@@ -156,7 +156,7 @@ public class DownloadRunnableFallback extends Thread {
         if (done) {
             mMission.notifyFinished();
         } else {
-            mMission.fallbackResumeOffset = start;
+            mMission.setFallbackResumeOffset(start);
         }
     }
 

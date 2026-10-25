@@ -48,7 +48,7 @@ public class DownloadRunnable extends Thread {
 
     private void releaseBlock(Block block, long remain) {
         // set the block offset to -1 if it is completed
-        mMission.releaseBlock(block.position, remain < 0 ? -1 : block.done);
+        mMission.releaseBlock(block.getPosition(), remain < 0 ? -1 : block.getDone());
     }
 
     @Override
@@ -65,7 +65,7 @@ public class DownloadRunnable extends Thread {
             return;
         }
 
-        while (mMission.running && mMission.errCode == DownloadMission.ERROR_NOTHING) {
+        while (mMission.getRunning() && mMission.getErrCode() == DownloadMission.ERROR_NOTHING) {
             if (!retry) {
                 block = mMission.acquireBlock();
             }
@@ -75,13 +75,13 @@ public class DownloadRunnable extends Thread {
                 break;
             }
 
-            long start = (long) block.position * DownloadMission.BLOCK_SIZE;
+            long start = (long) block.getPosition() * DownloadMission.BLOCK_SIZE;
             long end = start + DownloadMission.BLOCK_SIZE - 1;
 
-            start += block.done;
+            start += block.getDone();
 
-            if (end >= mMission.length) {
-                end = mMission.length - 1;
+            if (end >= mMission.getLength()) {
+                end = mMission.getLength() - 1;
             }
 
             try {
@@ -90,10 +90,10 @@ public class DownloadRunnable extends Thread {
 
                 // check if the download can be resumed
                 if (mConn.getResponseCode() == 416) {
-                    if (block.done > 0) {
-                        // try again from the start (of the block)
-                        mMission.notifyProgress(-block.done);
-                        block.done = 0;
+                    if (block.getDone() > 0) {
+                        // try again from the start (of the block);
+                        mMission.notifyProgress(-block.getDone());
+                        block.setDone(0);
                         retry = true;
                         mConn.disconnect();
                         continue;
@@ -111,7 +111,7 @@ public class DownloadRunnable extends Thread {
                     break;
                 }
 
-                f.seek(mMission.offsets[mMission.current] + start);
+                f.seek(mMission.getOffsets()[mMission.getCurrent()] + start);
 
                 try (InputStream is = mConn.getInputStream()) {
                     byte[] buf = new byte[DownloadMission.BUFFER_SIZE];
@@ -119,25 +119,25 @@ public class DownloadRunnable extends Thread {
 
                     // use always start <= end
                     // fixes a deadlock because in some videos, youtube is sending one byte alone
-                    while (start <= end && mMission.running
+                    while (start <= end && mMission.getRunning()
                             && (len = is.read(buf, 0, buf.length)) != -1) {
                         f.write(buf, 0, len);
                         start += len;
-                        block.done += len;
+                        block.setDone(block.getDone() + len);
                         mMission.notifyProgress(len);
                     }
                 }
 
-                if (mMission.running) {
-                    Logger.d(TAG, mId + ":position " + block.position + " stopped " + start + "/" + end);
+                if (mMission.getRunning()) {
+                    Logger.d(TAG, mId + ":position " + block.getPosition() + " stopped " + start + "/" + end);
                 }
             } catch (Exception e) {
-                if (!mMission.running || e instanceof ClosedByInterruptException) {
+                if (!mMission.getRunning() || e instanceof ClosedByInterruptException) {
                     break;
                 }
 
                 if (e instanceof HttpError
-                        && ((HttpError) e).statusCode == DownloadMission.ERROR_HTTP_FORBIDDEN) {
+                        && ((HttpError) e).getStatusCode() == DownloadMission.ERROR_HTTP_FORBIDDEN) {
                     // The YouTube stream url has expired.
                     f.close();
 
@@ -148,7 +148,7 @@ public class DownloadRunnable extends Thread {
                     return;
                 }
 
-                if (retryCount++ >= mMission.maxRetry) {
+                if (retryCount++ >= mMission.getMaxRetry()) {
                     mMission.notifyError(e);
                     break;
                 }
@@ -165,7 +165,7 @@ public class DownloadRunnable extends Thread {
 
         Logger.d(TAG, "thread " + mId + " exited from main download loop");
 
-        if (mMission.errCode == DownloadMission.ERROR_NOTHING && mMission.running) {
+        if (mMission.getErrCode() == DownloadMission.ERROR_NOTHING && mMission.getRunning()) {
             mMission.notifyFinished();
         }
     }

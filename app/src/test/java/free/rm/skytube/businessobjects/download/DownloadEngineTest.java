@@ -64,32 +64,32 @@ public class DownloadEngineTest {
         File target = new File(tempDir, "video.mp4");
         DownloadMission mission = new DownloadMission(
                 new String[]{"https://example.com/video.mp4"}, target);
-        mission.title = "Test video";
-        mission.notificationGroupId = "group-1";
-        mission.notificationGroupTitle = "Group title";
-        mission.notificationGroupSize = 2;
-        mission.length = 1024;
-        mission.done = 512;
+        mission.setTitle("Test video");
+        mission.setNotificationGroupId("group-1");
+        mission.setNotificationGroupTitle("Group title");
+        mission.setNotificationGroupSize(2);
+        mission.setLength(1024);
+        mission.setDone(512);
 
         File metadata = new File(tempDir, "mission.meta");
         DownloadUtils.writeToFile(metadata, mission);
 
         DownloadMission restored = DownloadUtils.readFromFile(metadata);
 
-        assertEquals(mission.id, restored.id);
-        assertEquals(target, restored.targetFile);
-        assertEquals("Test video", restored.title);
-        assertEquals("group-1", restored.notificationGroupId);
-        assertEquals("Group title", restored.notificationGroupTitle);
-        assertEquals(2, restored.notificationGroupSize);
-        assertEquals(1024, restored.length);
-        assertEquals(512, restored.done);
-        assertEquals("https://example.com/video.mp4", restored.urls[0]);
-        assertNotNull(restored.threads);
-        assertEquals(0, restored.threads.length);
-        assertNull(restored.init);
-        assertEquals(3, restored.maxRetry);
-        assertFalse(restored.running);
+        assertEquals(mission.getId(), restored.getId());
+        assertEquals(target, restored.getTargetFile());
+        assertEquals("Test video", restored.getTitle());
+        assertEquals("group-1", restored.getNotificationGroupId());
+        assertEquals("Group title", restored.getNotificationGroupTitle());
+        assertEquals(2, restored.getNotificationGroupSize());
+        assertEquals(1024, restored.getLength());
+        assertEquals(512, restored.getDone());
+        assertEquals("https://example.com/video.mp4", restored.getUrls()[0]);
+        assertNotNull(restored.getThreads());
+        assertEquals(0, restored.getThreads().length);
+        assertNull(restored.getInit());
+        assertEquals(3, restored.getMaxRetry());
+        assertFalse(restored.getRunning());
     }
 
     @Test
@@ -97,8 +97,8 @@ public class DownloadEngineTest {
         File target = new File(tempDir, "video.mp4");
         DownloadMission mission = new DownloadMission(new String[]{"https://example.com"}, target);
 
-        mission.length = 1000;
-        mission.done = 250;
+        mission.setLength(1000);
+        mission.setDone(250);
 
         assertEquals(25, mission.getProgress());
         assertEquals(new File(tempDir, "video.mp4.part"), mission.getPartFile());
@@ -109,8 +109,8 @@ public class DownloadEngineTest {
         File target = new File(tempDir, "video.mp4");
         DownloadMission mission = new DownloadMission(new String[]{"https://example.com"}, target);
 
-        mission.nearLength = 2000;
-        mission.done = 500;
+        mission.setNearLength(2000);
+        mission.setDone(500);
 
         assertEquals(25, mission.getProgress());
     }
@@ -154,7 +154,7 @@ public class DownloadEngineTest {
             File target = new File(tempDir, "file.bin");
             String url = "http://127.0.0.1:" + server.getPort() + "/file.bin";
             DownloadMission mission = new DownloadMission(new String[]{url}, target);
-            mission.threadCount = 3;
+            mission.setThreadCount(3);
 
             mission.start();
 
@@ -166,7 +166,7 @@ public class DownloadEngineTest {
             assertTrue(target.isFile(), "The download did not finish in time");
             assertArrayEquals(content, Files.readAllBytes(target.toPath()));
             assertFalse(new File(tempDir, "file.bin.part").exists());
-            assertEquals(content.length, mission.done);
+            assertEquals(content.length, mission.getDone());
         }
     }
 
@@ -181,7 +181,7 @@ public class DownloadEngineTest {
             File target = new File(tempDir, "fallback.bin");
             String url = "http://127.0.0.1:" + server.getPort() + "/file.bin";
             DownloadMission mission = new DownloadMission(new String[]{url}, target);
-            mission.threadCount = 3;
+            mission.setThreadCount(3);
 
             mission.start();
 
@@ -202,14 +202,14 @@ public class DownloadEngineTest {
         File audioTarget = new File(tempDir, "audio.webm");
         DownloadMission video = new DownloadMission(
                 new String[]{"https://example.com/video"}, videoTarget);
-        video.notificationGroupId = "group-1";
-        video.notificationGroupTitle = "Video";
-        video.notificationGroupSize = 2;
+        video.setNotificationGroupId("group-1");
+        video.setNotificationGroupTitle("Video");
+        video.setNotificationGroupSize(2);
         DownloadMission audio = new DownloadMission(
                 new String[]{"https://example.com/audio"}, audioTarget);
-        audio.notificationGroupId = "group-1";
-        audio.notificationGroupTitle = "Video";
-        audio.notificationGroupSize = 2;
+        audio.setNotificationGroupId("group-1");
+        audio.setNotificationGroupTitle("Video");
+        audio.setNotificationGroupSize(2);
 
         DownloadNotification notification = new DownloadNotification();
         notification.addMission(video);
@@ -220,27 +220,27 @@ public class DownloadEngineTest {
         assertFalse(notification.hasFullLength());
         assertEquals(-1, notification.getProgress());
 
-        video.length = 1000;
-        video.done = 500;
+        video.setLength(1000);
+        video.setDone(500);
         notification.addMission(video);
         assertEquals(500, notification.totalDone());
         assertEquals(1000, notification.totalLength());
         assertFalse(notification.hasFullLength());
 
-        video.done = 1000;
+        video.setDone(1000);
         notification.markFinished(video);
         assertFalse(notification.isComplete());
         assertFalse(notification.isTerminal());
 
-        audio.length = 1000;
-        audio.done = 250;
+        audio.setLength(1000);
+        audio.setDone(250);
         notification.addMission(audio);
         assertEquals(1250, notification.totalDone());
         assertEquals(2000, notification.totalLength());
         assertTrue(notification.hasFullLength());
         assertEquals(62, notification.getProgress());
 
-        audio.done = 1000;
+        audio.setDone(1000);
         notification.markFinished(audio);
         assertTrue(notification.isComplete());
         assertTrue(notification.isTerminal());
@@ -253,14 +253,14 @@ public class DownloadEngineTest {
         File target = new File(tempDir, "video.mp4");
         DownloadMission mission = new DownloadMission(
                 new String[]{"https://example.com/video"}, target);
-        mission.notificationGroupId = "group-1";
-        mission.notificationGroupTitle = "Video";
-        mission.notificationGroupSize = 1;
+        mission.setNotificationGroupId("group-1");
+        mission.setNotificationGroupTitle("Video");
+        mission.setNotificationGroupSize(1);
 
         DownloadNotification notification = new DownloadNotification();
         notification.addMission(mission);
-        mission.length = 100;
-        mission.done = 10;
+        mission.setLength(100);
+        mission.setDone(10);
         notification.markFailed(mission);
 
         assertTrue(notification.hasFailure());
@@ -281,19 +281,19 @@ public class DownloadEngineTest {
 
         DownloadMission first = new DownloadMission(
                 new String[]{"https://example.com/first"}, new File(tempDir, "first.mp4"));
-        first.notificationGroupId = "group-1";
-        first.notificationGroupTitle = "First";
-        first.notificationGroupSize = 1;
-        first.length = 100;
-        first.done = 50;
+        first.setNotificationGroupId("group-1");
+        first.setNotificationGroupTitle("First");
+        first.setNotificationGroupSize(1);
+        first.setLength(100);
+        first.setDone(50);
 
         DownloadMission second = new DownloadMission(
                 new String[]{"https://example.com/second"}, new File(tempDir, "second.mp4"));
-        second.notificationGroupId = "group-2";
-        second.notificationGroupTitle = "Second";
-        second.notificationGroupSize = 1;
-        second.length = 100;
-        second.done = 25;
+        second.setNotificationGroupId("group-2");
+        second.setNotificationGroupTitle("Second");
+        second.setNotificationGroupSize(1);
+        second.setLength(100);
+        second.setDone(25);
 
         notification.addMission(first);
         notification.addMission(second);
@@ -315,20 +315,20 @@ public class DownloadEngineTest {
         File audioTarget = new File(tempDir, "audio.webm");
         DownloadMission video = new DownloadMission(
                 new String[]{"https://example.com/video"}, videoTarget);
-        video.notificationGroupId = "group-1";
-        video.notificationGroupTitle = "Video";
-        video.notificationGroupSize = 2;
+        video.setNotificationGroupId("group-1");
+        video.setNotificationGroupTitle("Video");
+        video.setNotificationGroupSize(2);
         DownloadMission audio = new DownloadMission(
                 new String[]{"https://example.com/audio"}, audioTarget);
-        audio.notificationGroupId = "group-1";
-        audio.notificationGroupTitle = "Video";
-        audio.notificationGroupSize = 2;
+        audio.setNotificationGroupId("group-1");
+        audio.setNotificationGroupTitle("Video");
+        audio.setNotificationGroupSize(2);
 
         DownloadNotification notification = new DownloadNotification();
         notification.addMission(video);
 
-        video.length = 1000;
-        video.done = 1000;
+        video.setLength(1000);
+        video.setDone(1000);
         notification.markFinished(video);
 
         // the group is not complete as long as the second task did not finish
@@ -337,14 +337,14 @@ public class DownloadEngineTest {
         assertTrue(notification.hasIncompleteGroups());
 
         // the same must hold when the group size is re-reported by a late task
-        audio.length = 1000;
-        audio.done = 100;
+        audio.setLength(1000);
+        audio.setDone(100);
         notification.addMission(audio);
         assertFalse(notification.isComplete());
         assertFalse(notification.isTerminal());
         assertTrue(notification.hasIncompleteGroups());
 
-        audio.done = 1000;
+        audio.setDone(1000);
         notification.markFinished(audio);
         assertTrue(notification.isComplete());
         assertTrue(notification.isTerminal());
@@ -357,27 +357,27 @@ public class DownloadEngineTest {
         File audioTarget = new File(tempDir, "audio.webm");
         DownloadMission video = new DownloadMission(
                 new String[]{"https://example.com/video"}, videoTarget);
-        video.notificationGroupId = "group-1";
-        video.notificationGroupTitle = "Video";
-        video.notificationGroupSize = 2;
+        video.setNotificationGroupId("group-1");
+        video.setNotificationGroupTitle("Video");
+        video.setNotificationGroupSize(2);
         DownloadMission audio = new DownloadMission(
                 new String[]{"https://example.com/audio"}, audioTarget);
-        audio.notificationGroupId = "group-1";
-        audio.notificationGroupTitle = "Video";
-        audio.notificationGroupSize = 2;
+        audio.setNotificationGroupId("group-1");
+        audio.setNotificationGroupTitle("Video");
+        audio.setNotificationGroupSize(2);
 
         DownloadNotification notification = new DownloadNotification();
         notification.addMission(video);
 
-        video.length = 1000;
-        video.done = 10;
+        video.setLength(1000);
+        video.setDone(10);
         notification.markFailed(video);
         assertTrue(notification.hasFailure());
         assertTrue(notification.isTerminal());
 
         // a later task must not flip the failed group back to "complete"
-        audio.length = 1000;
-        audio.done = 100;
+        audio.setLength(1000);
+        audio.setDone(100);
         notification.addMission(audio);
         assertTrue(notification.hasFailure());
         assertTrue(notification.isTerminal());
@@ -390,14 +390,14 @@ public class DownloadEngineTest {
         File audioTarget = new File(tempDir, "audio.webm");
         DownloadMission video = new DownloadMission(
                 new String[]{"https://example.com/video"}, videoTarget);
-        video.notificationGroupId = "group-1";
-        video.notificationGroupTitle = "Video";
-        video.notificationGroupSize = 2;
+        video.setNotificationGroupId("group-1");
+        video.setNotificationGroupTitle("Video");
+        video.setNotificationGroupSize(2);
 
         DownloadNotification notification = new DownloadNotification();
         notification.addMission(video);
-        video.length = 1000;
-        video.done = 1000;
+        video.setLength(1000);
+        video.setDone(1000);
         notification.markFinished(video);
 
         // the audio file of the pair is no longer tracked (e.g. the process
@@ -411,12 +411,12 @@ public class DownloadEngineTest {
         // a failed group must not be flipped to complete
         DownloadMission failed = new DownloadMission(
                 new String[]{"https://example.com/faulty"}, new File(tempDir, "faulty.mp4"));
-        failed.notificationGroupId = "group-2";
-        failed.notificationGroupTitle = "Faulty";
-        failed.notificationGroupSize = 1;
+        failed.setNotificationGroupId("group-2");
+        failed.setNotificationGroupTitle("Faulty");
+        failed.setNotificationGroupSize(1);
         notification.addMission(failed);
-        failed.length = 100;
-        failed.done = 10;
+        failed.setLength(100);
+        failed.setDone(10);
         notification.markFailed(failed);
         notification.markGroupComplete("group-2");
         DownloadNotification.Group group = notification.getGroup("group-2");
@@ -432,30 +432,30 @@ public class DownloadEngineTest {
         File audioTarget = new File(tempDir, "audio.webm");
         DownloadMission video = new DownloadMission(
                 new String[]{"https://example.com/video"}, videoTarget);
-        video.notificationGroupId = "group-1";
-        video.notificationGroupTitle = "Video";
-        video.notificationGroupSize = 2;
+        video.setNotificationGroupId("group-1");
+        video.setNotificationGroupTitle("Video");
+        video.setNotificationGroupSize(2);
         DownloadMission audio = new DownloadMission(
                 new String[]{"https://example.com/audio"}, audioTarget);
-        audio.notificationGroupId = "group-1";
-        audio.notificationGroupTitle = "Video";
-        audio.notificationGroupSize = 2;
+        audio.setNotificationGroupId("group-1");
+        audio.setNotificationGroupTitle("Video");
+        audio.setNotificationGroupSize(2);
         DownloadMission other = new DownloadMission(
                 new String[]{"https://example.com/other"}, new File(tempDir, "other.mp4"));
-        other.notificationGroupId = "group-2";
-        other.notificationGroupTitle = "Other";
-        other.notificationGroupSize = 1;
+        other.setNotificationGroupId("group-2");
+        other.setNotificationGroupTitle("Other");
+        other.setNotificationGroupSize(1);
 
         DownloadNotification notification = new DownloadNotification();
         notification.addMission(video);
         notification.addMission(audio);
         notification.addMission(other);
-        video.length = 1000;
-        video.done = 1000;
-        audio.length = 1000;
-        audio.done = 1000;
-        other.length = 400;
-        other.done = 0;
+        video.setLength(1000);
+        video.setDone(1000);
+        audio.setLength(1000);
+        audio.setDone(1000);
+        other.setLength(400);
+        other.setDone(0);
         notification.markFinished(video);
         notification.markFinished(audio);
 
@@ -492,14 +492,14 @@ public class DownloadEngineTest {
         DownloadNotification notification = new DownloadNotification();
         notification.addMission(mission);
 
-        mission.length = 100;
-        mission.done = 100;
+        mission.setLength(100);
+        mission.setDone(100);
         notification.markFinished(mission);
 
         assertTrue(notification.isComplete());
         assertTrue(notification.isTerminal());
         assertEquals(1, notification.getGroups().size());
-        assertEquals(mission.id, notification.getGroups().get(0).id);
+        assertEquals(mission.getId(), notification.getGroups().get(0).id);
     }
 
     /**
