@@ -28,14 +28,11 @@ public class FinishedMission extends Mission {
     private static final long serialVersionUID = 1L;
 
     public FinishedMission() {
+        super();
     }
 
     public FinishedMission(@NonNull DownloadMission mission) {
-        id = mission.id;
-        source = mission.source;
-        length = mission.length;
-        timestamp = mission.timestamp;
-        kind = mission.kind;
-        targetFile = mission.targetFile;
+        super(mission.getId(), mission.getSource(), mission.getLength(), mission.getTimestamp(),
+                mission.getKind(), mission.getTargetFile());
     }
 }

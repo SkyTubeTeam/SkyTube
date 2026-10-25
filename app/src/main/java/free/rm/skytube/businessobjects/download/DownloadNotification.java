@@ -50,7 +50,7 @@ public final class DownloadNotification {
     void markFinished(@NonNull DownloadMission mission) {
         registerTask(mission);
         Group group = groupFor(mission);
-        if (group.finishedIds.add(mission.id)) {
+        if (group.finishedIds.add(mission.getId())) {
             group.complete = group.finishedIds.size() >= group.expected;
         }
     }
@@ -58,22 +58,22 @@ public final class DownloadNotification {
     synchronized void markFailed(@NonNull DownloadMission mission) {
         registerTask(mission);
         Group group = groupFor(mission);
-        if (group.failedIds.add(mission.id)) {
+        if (group.failedIds.add(mission.getId())) {
             group.failed = true;
             failed = true;
         }
     }
 
     synchronized void removeMission(@NonNull DownloadMission mission) {
-        if (tasks.remove(mission.id) == null) {
+        if (tasks.remove(mission.getId()) == null) {
             return;
         }
 
         Group group = groups.get(groupKey(mission));
         if (group != null) {
-            boolean finished = group.finishedIds.remove(mission.id);
-            boolean failedTask = group.failedIds.remove(mission.id);
-            group.seenIds.remove(mission.id);
+            boolean finished = group.finishedIds.remove(mission.getId());
+            boolean failedTask = group.failedIds.remove(mission.getId());
+            group.seenIds.remove(mission.getId());
             if (!finished && !failedTask) {
                 group.expected = Math.max(1, group.expected - 1);
             }
@@ -190,7 +190,7 @@ public final class DownloadNotification {
     synchronized long totalDone() {
         long total = 0;
         for (DownloadMission mission : tasks.values()) {
-            total += Math.max(0, mission.done);
+            total += Math.max(0, mission.getDone());
         }
         return total;
     }
@@ -262,10 +262,10 @@ public final class DownloadNotification {
     }
 
     synchronized private void registerTask(@NonNull DownloadMission mission) {
-        if (tasks.get(mission.id) == null) {
-            tasks.put(mission.id, mission);
+        if (tasks.get(mission.getId()) == null) {
+            tasks.put(mission.getId(), mission);
         }
-        groupFor(mission).seenIds.add(mission.id);
+        groupFor(mission).seenIds.add(mission.getId());
     }
 
     @NonNull
@@ -274,22 +274,22 @@ public final class DownloadNotification {
         Group group = groups.get(groupId);
         if (group == null) {
             group = new Group(groupId);
-            group.expected = mission.notificationGroupSize > 0
-                    ? mission.notificationGroupSize
+            group.expected = mission.getNotificationGroupSize() > 0
+                    ? mission.getNotificationGroupSize()
                     : 1;
             group.title = titleFor(mission);
             groups.put(groupId, group);
             return group;
         }
 
-        if (mission.notificationGroupSize > 0
-                && group.expected < mission.notificationGroupSize) {
-            group.expected = mission.notificationGroupSize;
+        if (mission.getNotificationGroupSize() > 0
+                && group.expected < mission.getNotificationGroupSize()) {
+            group.expected = mission.getNotificationGroupSize();
             if (!group.failed) {
                 group.complete = group.finishedIds.size() >= group.expected;
             }
         }
-        String title = mission.notificationGroupTitle;
+        String title = mission.getNotificationGroupTitle();
         if (title != null && !title.trim().isEmpty()) {
             group.title = title;
         }
@@ -308,21 +308,21 @@ public final class DownloadNotification {
 
     @NonNull
     private static String groupKey(@NonNull DownloadMission mission) {
-        return mission.notificationGroupId != null
-                ? mission.notificationGroupId
-                : mission.id;
+        return mission.getNotificationGroupId() != null
+                ? mission.getNotificationGroupId()
+                : mission.getId();
     }
 
     @NonNull
     private static String titleFor(@NonNull DownloadMission mission) {
-        if (mission.notificationGroupTitle != null
-                && !mission.notificationGroupTitle.trim().isEmpty()) {
-            return mission.notificationGroupTitle;
+        if (mission.getNotificationGroupTitle() != null
+                && !mission.getNotificationGroupTitle().trim().isEmpty()) {
+            return mission.getNotificationGroupTitle();
         }
-        if (mission.title != null && !mission.title.trim().isEmpty()) {
-            return mission.title;
+        if (mission.getTitle() != null && !mission.getTitle().trim().isEmpty()) {
+            return mission.getTitle();
         }
-        return mission.targetFile != null ? mission.targetFile.getName() : "";
+        return mission.getTargetFile() != null ? mission.getTargetFile().getName() : "";
     }
 
     /**

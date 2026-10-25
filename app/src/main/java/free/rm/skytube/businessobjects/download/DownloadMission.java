@@ -37,6 +37,7 @@ import java.net.URL;
 import java.net.UnknownHostException;
 import java.nio.channels.ClosedByInterruptException;
 import java.util.Objects;
+import java.util.UUID;
 
 import javax.net.ssl.SSLException;
 
@@ -74,82 +75,79 @@ public class DownloadMission extends Mission {
     static final int ERROR_HTTP_FORBIDDEN = 403;
 
     /** The urls of the file(s) to download. */
-    public String[] urls;
+    private String[] urls;
 
     /** Number of bytes downloaded and written. */
-    public volatile long done;
+    private volatile long done;
 
     /** Indicates a file generated dynamically on the web server. */
-    public boolean unknownLength;
+    private boolean unknownLength;
 
     /** Offset in the file where the data should be written. */
-    public long[] offsets;
+    private long[] offsets;
 
     /** The current resource to download, {@code urls[current]} and {@code offsets[current]}. */
-    public int current;
+    private int current;
 
     /** Metadata where the mission state is saved. */
-    public transient File metadata;
+    private transient File metadata;
 
     /** Maximum attempts. */
-    public transient int maxRetry = 3;
+    private transient int maxRetry;
 
     /** Approximated final length, this represents the sum of all resources sizes. */
-    public long nearLength;
+    private long nearLength;
 
     /**
      * Download blocks, the size is a multiple of {@link #BLOCK_SIZE}. Every
      * entry (block) holds an offset used to resume the download. A block offset
      * can be -1 if the block was downloaded successfully.
      */
-    int[] blocks;
+    private int[] blocks;
 
     /** Download/File resume offset in fallback mode. */
-    volatile long fallbackResumeOffset;
+    private volatile long fallbackResumeOffset;
 
     /** Maximum number of download threads running, chosen by the user. */
-    public int threadCount = 3;
+    private int threadCount;
 
     /** Human readable title used by notifications. */
-    public String title;
+    private String title;
 
     /**
      * Identifier of the logical download that this mission belongs to.
      * Missions that share an identifier are aggregated in one notification.
      */
-    public String notificationGroupId;
+    private String notificationGroupId;
 
     /** Human readable title shared by all missions of the same notification group. */
-    public String notificationGroupTitle;
+    private String notificationGroupTitle;
 
     /** Number of missions that make up the notification group. */
-    public int notificationGroupSize;
+    private int notificationGroupSize;
 
     /** Whether the download may continue while the device is roaming. */
-    public boolean allowedOverRoaming = true;
+    private boolean allowedOverRoaming;
 
     /** Network types allowed by the caller (DownloadManager.Request.NETWORK_*). */
-    public int allowedNetworkTypes =
-            DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE;
+    private int allowedNetworkTypes;
 
     private transient int finishCount;
-    public transient volatile boolean running;
-    public boolean enqueued;
+    private transient volatile boolean running;
+    private boolean enqueued;
 
-    public int errCode = ERROR_NOTHING;
-    public Exception errObject = null;
+    private int errCode;
+    private Exception errObject;
 
-    public transient HandlerThreadFactory handler;
+    private transient HandlerThreadFactory handler;
     private transient boolean[] blockAcquired;
 
     private transient long writingToFileNext;
     private transient volatile boolean writingToFile;
 
-    final Object LOCK = new Lock();
-
     @NonNull
-    public transient Thread[] threads = new Thread[0];
-    public transient Thread init = null;
+    private transient Thread[] threads;
+    private transient Thread init;
 
     private transient Listener listener;
 
@@ -160,16 +158,72 @@ public class DownloadMission extends Mission {
         this.urls = urls;
         this.offsets = new long[urls.length];
         this.enqueued = true;
-        this.targetFile = Objects.requireNonNull(targetFile, "targetFile");
-        this.timestamp = System.currentTimeMillis();
+        setTargetFile(Objects.requireNonNull(targetFile, "targetFile"));
+        setTimestamp(System.currentTimeMillis());
+        setId(UUID.randomUUID().toString());
+        setKind('?');
+        this.maxRetry = 3;
+        this.threadCount = 3;
+        this.allowedOverRoaming = true;
+        this.allowedNetworkTypes =
+                DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE;
+        this.errCode = ERROR_NOTHING;
+        this.threads = new Thread[0];
+        this.running = false;
     }
 
     /**
-     * Creates an empty mission whose persisted state is filled in by the
-     * binary metadata reader ({@link DownloadUtils#readFromFile(File)}).  The
-     * transient runtime state is left at its default value.
+     * Convenience constructor used by {@link free.rm.skytube.businessobjects.FileDownloader}
+     * so that a mission is fully initialized at creation time instead of being
+     * configured through setters afterwards.
      */
-    DownloadMission() {
+    public DownloadMission(String[] urls, File targetFile, String title, char kind,
+                          String notificationGroupId, String notificationGroupTitle,
+                          int notificationGroupSize, int threadCount,
+                          boolean allowedOverRoaming, int allowedNetworkTypes) {
+        this(urls, targetFile);
+        this.title = title;
+        setKind(kind);
+        this.notificationGroupId = notificationGroupId;
+        this.notificationGroupTitle = notificationGroupTitle;
+        this.notificationGroupSize = notificationGroupSize;
+        this.threadCount = threadCount;
+        this.allowedOverRoaming = allowedOverRoaming;
+        this.allowedNetworkTypes = allowedNetworkTypes;
+    }
+
+    /**
+     * Creates a mission whose state is fully supplied (used when restoring a
+     * persisted mission from its binary metadata file).
+     */
+    public DownloadMission(String id, String source, long length, long timestamp, char kind,
+                           File targetFile, String[] urls, long done, boolean unknownLength,
+                           long[] offsets, int current, long nearLength, int[] blocks,
+                           long fallbackResumeOffset, int threadCount, String title,
+                           String notificationGroupId, String notificationGroupTitle,
+                           int notificationGroupSize, boolean allowedOverRoaming,
+                           int allowedNetworkTypes, boolean enqueued, int errCode) {
+        super(id, source, length, timestamp, kind, targetFile);
+        this.urls = urls;
+        this.done = done;
+        this.unknownLength = unknownLength;
+        this.offsets = offsets;
+        this.current = current;
+        this.nearLength = nearLength;
+        this.blocks = blocks;
+        this.fallbackResumeOffset = fallbackResumeOffset;
+        this.threadCount = threadCount;
+        this.title = title;
+        this.notificationGroupId = notificationGroupId;
+        this.notificationGroupTitle = notificationGroupTitle;
+        this.notificationGroupSize = notificationGroupSize;
+        this.allowedOverRoaming = allowedOverRoaming;
+        this.allowedNetworkTypes = allowedNetworkTypes;
+        this.enqueued = enqueued;
+        this.errCode = errCode;
+        this.maxRetry = 3;
+        this.threads = new Thread[0];
+        this.running = false;
     }
 
     /**
@@ -197,9 +251,225 @@ public class DownloadMission extends Mission {
         this.listener = listener;
     }
 
-    @Nullable
-    public Listener getListener() {
-        return listener;
+    // Getters and setters
+
+    public String[] getUrls() {
+        return urls;
+    }
+
+    public void setUrls(String[] urls) {
+        this.urls = urls;
+    }
+
+    public long getDone() {
+        return done;
+    }
+
+    public void setDone(long done) {
+        this.done = done;
+    }
+
+    public boolean isUnknownLength() {
+        return unknownLength;
+    }
+
+    public boolean getUnknownLength() {
+        return unknownLength;
+    }
+
+    public void setUnknownLength(boolean unknownLength) {
+        this.unknownLength = unknownLength;
+    }
+
+    public long[] getOffsets() {
+        return offsets;
+    }
+
+    public void setOffsets(long[] offsets) {
+        this.offsets = offsets;
+    }
+
+    public int getCurrent() {
+        return current;
+    }
+
+    public void setCurrent(int current) {
+        this.current = current;
+    }
+
+    public File getMetadata() {
+        return metadata;
+    }
+
+    public void setMetadata(File metadata) {
+        this.metadata = metadata;
+    }
+
+    public int getMaxRetry() {
+        return maxRetry;
+    }
+
+    public void setMaxRetry(int maxRetry) {
+        this.maxRetry = maxRetry;
+    }
+
+    public long getNearLength() {
+        return nearLength;
+    }
+
+    public void setNearLength(long nearLength) {
+        this.nearLength = nearLength;
+    }
+
+    public int[] getBlocks() {
+        return blocks;
+    }
+
+    public void setBlocks(int[] blocks) {
+        this.blocks = blocks;
+    }
+
+    public long getFallbackResumeOffset() {
+        return fallbackResumeOffset;
+    }
+
+    public void setFallbackResumeOffset(long fallbackResumeOffset) {
+        this.fallbackResumeOffset = fallbackResumeOffset;
+    }
+
+    public int getThreadCount() {
+        return threadCount;
+    }
+
+    public void setThreadCount(int threadCount) {
+        this.threadCount = threadCount;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getNotificationGroupId() {
+        return notificationGroupId;
+    }
+
+    public void setNotificationGroupId(String notificationGroupId) {
+        this.notificationGroupId = notificationGroupId;
+    }
+
+    public String getNotificationGroupTitle() {
+        return notificationGroupTitle;
+    }
+
+    public void setNotificationGroupTitle(String notificationGroupTitle) {
+        this.notificationGroupTitle = notificationGroupTitle;
+    }
+
+    public int getNotificationGroupSize() {
+        return notificationGroupSize;
+    }
+
+    public void setNotificationGroupSize(int notificationGroupSize) {
+        this.notificationGroupSize = notificationGroupSize;
+    }
+
+    public boolean isAllowedOverRoaming() {
+        return allowedOverRoaming;
+    }
+
+    public boolean getAllowedOverRoaming() {
+        return allowedOverRoaming;
+    }
+
+    public void setAllowedOverRoaming(boolean allowedOverRoaming) {
+        this.allowedOverRoaming = allowedOverRoaming;
+    }
+
+    public int getAllowedNetworkTypes() {
+        return allowedNetworkTypes;
+    }
+
+    public void setAllowedNetworkTypes(int allowedNetworkTypes) {
+        this.allowedNetworkTypes = allowedNetworkTypes;
+    }
+
+    public boolean isRunning() {
+        return running;
+    }
+
+    public boolean getRunning() {
+        return running;
+    }
+
+    public void setRunning(boolean running) {
+        this.running = running;
+    }
+
+    public boolean isEnqueued() {
+        return enqueued;
+    }
+
+    public boolean getEnqueued() {
+        return enqueued;
+    }
+
+    public void setEnqueued(boolean enqueued) {
+        this.enqueued = enqueued;
+        writeThisToFileAsync();
+    }
+
+    // Note: original setEnqueued writes file; keep override? This setter already writes. But internal calls setEnqueued(true) in constructor? no.
+
+    public int getErrCode() {
+        return errCode;
+    }
+
+    public void setErrCode(int errCode) {
+        this.errCode = errCode;
+    }
+
+    public Exception getErrObject() {
+        return errObject;
+    }
+
+    public void setErrObject(Exception errObject) {
+        this.errObject = errObject;
+    }
+
+    public HandlerThreadFactory getHandler() {
+        return handler;
+    }
+
+    public void setHandler(HandlerThreadFactory handler) {
+        this.handler = handler;
+    }
+
+    public Thread[] getThreads() {
+        return threads;
+    }
+
+    public void setThreads(Thread[] threads) {
+        this.threads = threads;
+    }
+
+    public Thread getInit() {
+        return init;
+    }
+
+    public void setInit(Thread init) {
+        this.init = init;
+    }
+
+    public boolean[] getBlockAcquired() {
+        return blockAcquired;
+    }
+
+    public void setBlockAcquired(boolean[] blockAcquired) {
+        this.blockAcquired = blockAcquired;
     }
 
     /**
@@ -209,7 +479,7 @@ public class DownloadMission extends Mission {
      */
     @Nullable
     Block acquireBlock() {
-        synchronized (LOCK) {
+        synchronized (this) {
             for (int i = 0; i < blockAcquired.length; i++) {
                 if (!blockAcquired[i] && blocks[i] >= 0) {
                     Block block = new Block();
@@ -232,7 +502,7 @@ public class DownloadMission extends Mission {
      * @param done     amount of bytes downloaded
      */
     void releaseBlock(int position, int done) {
-        synchronized (LOCK) {
+        synchronized (this) {
             blockAcquired[position] = false;
             blocks[position] = done;
         }
@@ -300,7 +570,7 @@ public class DownloadMission extends Mission {
 
     synchronized void notifyProgress(long deltaLen) {
         if (unknownLength) {
-            length += deltaLen; // Update length before proceeding
+            setLength(super.getLength() + deltaLen); // Update length before proceeding
         }
 
         done += deltaLen;
@@ -328,7 +598,7 @@ public class DownloadMission extends Mission {
         } else if (err instanceof SSLException) {
             notifyError(ERROR_SSL_EXCEPTION, null);
         } else if (err instanceof HttpError) {
-            notifyError(((HttpError) err).statusCode, null);
+            notifyError(((HttpError) err).getStatusCode(), null);
         } else if (err instanceof ConnectException) {
             notifyError(ERROR_CONNECT_HOST, null);
         } else if (err instanceof UnknownHostException) {
@@ -361,8 +631,8 @@ public class DownloadMission extends Mission {
             } else if (message != null && message.contains("ENOSPC")) {
                 code = ERROR_INSUFFICIENT_STORAGE;
                 err = null;
-            } else if (targetFile == null || targetFile.getParentFile() == null
-                    || !targetFile.getParentFile().canWrite()) {
+            } else if (getTargetFile() == null || getTargetFile().getParentFile() == null
+                    || !getTargetFile().getParentFile().canWrite()) {
                 code = ERROR_FILE_CREATION;
                 err = null;
             }
@@ -402,7 +672,7 @@ public class DownloadMission extends Mission {
             current++;
             if (current < urls.length) {
                 // prepare next sub-mission
-                offsets[current] = offsets[current - 1] + length;
+                offsets[current] = offsets[current - 1] + super.getLength();
                 initializer();
                 return;
             }
@@ -413,8 +683,8 @@ public class DownloadMission extends Mission {
         enqueued = false;
         running = false;
 
-        if (!DownloadUtils.moveCompletedFile(getPartFile(), targetFile)) {
-            notifyError(ERROR_FILE_CREATION, new IOException("Cannot move the downloaded file to " + targetFile));
+        if (!DownloadUtils.moveCompletedFile(getPartFile(), getTargetFile())) {
+            notifyError(ERROR_FILE_CREATION, new IOException("Cannot move the downloaded file to " + getTargetFile()));
             return;
         }
 
@@ -498,7 +768,7 @@ public class DownloadMission extends Mission {
 
         if (init != null && init.isAlive()) {
             init.interrupt();
-            synchronized (LOCK) {
+            synchronized (this) {
                 resetState(false, true, ERROR_NOTHING);
             }
             return;
@@ -533,7 +803,7 @@ public class DownloadMission extends Mission {
      * @param persistChanges {@code true} to commit changes to the metadata file
      */
     public void resetState(boolean rollback, boolean persistChanges, int errorCode) {
-        length = 0;
+        setLength(0);
         current = 0;
         finishCount = 0;
         errCode = errorCode;
@@ -566,7 +836,7 @@ public class DownloadMission extends Mission {
      * Write this {@link DownloadMission} to the metadata file.
      */
     void writeThisToFile() {
-        synchronized (LOCK) {
+        synchronized (this) {
             if (metadata == null) {
                 return;
             }
@@ -586,7 +856,7 @@ public class DownloadMission extends Mission {
         // renamed to its final name; a missing target file means the
         // completion was lost (e.g. the process died) and the mission can be
         // restarted
-        return targetFile != null && targetFile.exists();
+        return getTargetFile() != null && getTargetFile().exists();
     }
 
     /**
@@ -600,11 +870,11 @@ public class DownloadMission extends Mission {
      * Gets the approximated final length of the file.
      */
     public long getLength() {
-        if (length <= 0) {
+        if (super.getLength() <= 0) {
             return nearLength;
         }
 
-        long calculated = offsets[current < offsets.length ? current : (offsets.length - 1)] + length;
+        long calculated = offsets[current < offsets.length ? current : (offsets.length - 1)] + super.getLength();
         calculated -= offsets[0];
 
         return Math.max(calculated, nearLength);
@@ -629,21 +899,13 @@ public class DownloadMission extends Mission {
     }
 
     /**
-     * Set this mission state on the queue.
-     */
-    public void setEnqueued(boolean queue) {
-        enqueued = queue;
-        writeThisToFileAsync();
-    }
-
-    /**
      * @return true if the backing storage is invalid and cannot be used.
      */
     public boolean hasInvalidStorage() {
-        if (targetFile == null || targetFile.getParentFile() == null) {
+        if (getTargetFile() == null || getTargetFile().getParentFile() == null) {
             return true;
         }
-        File parent = targetFile.getParentFile();
+        File parent = getTargetFile().getParentFile();
         if (!DownloadUtils.mkdir(parent, true)) {
             return true;
         }
@@ -661,7 +923,7 @@ public class DownloadMission extends Mission {
     }
 
     private boolean deleteThisFromFile() {
-        synchronized (LOCK) {
+        synchronized (this) {
             if (metadata == null) {
                 return true;
             }
@@ -677,7 +939,7 @@ public class DownloadMission extends Mission {
 
     private Thread runAsync(int id, Thread who) {
         if (who.getName().startsWith("Thread-")) {
-            who.setName(String.format("%s[%s] %s", TAG, id, targetFile.getName()));
+            who.setName(String.format("%s[%s] %s", TAG, id, getTargetFile().getName()));
         }
 
         who.start();
@@ -734,10 +996,14 @@ public class DownloadMission extends Mission {
     }
 
     static class HttpError extends Exception {
-        final int statusCode;
+        private final int statusCode;
 
         HttpError(int statusCode) {
             this.statusCode = statusCode;
+        }
+
+        public int getStatusCode() {
+            return statusCode;
         }
 
         @Override
@@ -747,12 +1013,24 @@ public class DownloadMission extends Mission {
     }
 
     public static class Block {
-        public int position;
-        public int done;
-    }
+        private int position;
+        private int done;
 
-    private static class Lock implements Serializable {
-        // java.lang.Object cannot be used because it is not serializable
+        public int getPosition() {
+            return position;
+        }
+
+        public void setPosition(int position) {
+            this.position = position;
+        }
+
+        public int getDone() {
+            return done;
+        }
+
+        public void setDone(int done) {
+            this.done = done;
+        }
     }
 
     /**

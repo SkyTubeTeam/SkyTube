@@ -143,7 +143,7 @@ public abstract class FileDownloader implements Serializable, PermissionsActivit
 			@Override
 			public void onCompleted(DownloadMission completedMission) {
 				onFileDownloadCompleted(true,
-						Uri.parse(completedMission.targetFile.toURI().toString()));
+						Uri.parse(completedMission.getTargetFile().toURI().toString()));
 			}
 
 			@Override
@@ -167,20 +167,14 @@ public abstract class FileDownloader implements Serializable, PermissionsActivit
 	}
 
 	private DownloadMission createMission(File downloadDestinationFile) {
-		DownloadMission mission = new DownloadMission(
-				new String[]{remoteFileUrl}, downloadDestinationFile);
-		mission.title = title;
-		mission.kind = getKind();
-		mission.notificationGroupId = notificationGroupId;
-		mission.notificationGroupTitle = notificationGroupTitle;
-		mission.notificationGroupSize = notificationGroupSize;
-		mission.threadCount = threadCount;
-		mission.allowedOverRoaming = allowedOverRoaming != null ? allowedOverRoaming : true;
-		mission.allowedNetworkTypes = allowedNetworkTypesFlags != null
-				? allowedNetworkTypesFlags
-				: (android.app.DownloadManager.Request.NETWORK_WIFI
-						| android.app.DownloadManager.Request.NETWORK_MOBILE);
-		return mission;
+		return new DownloadMission(
+				new String[]{remoteFileUrl}, downloadDestinationFile, title, getKind(),
+				notificationGroupId, notificationGroupTitle, notificationGroupSize,
+				threadCount, allowedOverRoaming != null ? allowedOverRoaming : true,
+				allowedNetworkTypesFlags != null
+						? allowedNetworkTypesFlags
+						: (android.app.DownloadManager.Request.NETWORK_WIFI
+								| android.app.DownloadManager.Request.NETWORK_MOBILE));
 	}
 
 	/**
