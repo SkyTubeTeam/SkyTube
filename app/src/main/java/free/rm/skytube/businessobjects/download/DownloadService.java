@@ -184,16 +184,24 @@ public class DownloadService extends Service implements Handler.Callback {
         super.onCreate();
 
         handler = new Handler(Looper.getMainLooper(), this);
-        notificationManager = ContextCompat.getSystemService(this, NotificationManager.class);
+        notificationManager = ContextCompat.getSystemService(getApplicationContext(), NotificationManager.class);
 
         createNotificationChannel();
 
         manager = new DownloadManager(this,
-                (what, mission) -> handler.obtainMessage(what, mission).sendToTarget(),
+                (what, mission) -> {
+                    Handler currentHandler = handler;
+                    if (currentHandler != null) {
+                        currentHandler.obtainMessage(what, mission).sendToTarget();
+                    }
+                },
                 new DownloadMission.Listener() {
                     @Override
                     public void onProgress(DownloadMission mission) {
-                        handler.obtainMessage(MESSAGE_PROGRESS, mission).sendToTarget();
+                        Handler currentHandler = handler;
+                        if (currentHandler != null) {
+                            currentHandler.obtainMessage(MESSAGE_PROGRESS, mission).sendToTarget();
+                        }
                     }
 
                     @Override
@@ -286,19 +294,42 @@ public class DownloadService extends Service implements Handler.Callback {
             // already unregistered
         }
 
-        for (Runnable check : groupStallChecks.values()) {
-            handler.removeCallbacks(check);
+        if (handler != null) {
+            for (Runnable check : groupStallChecks.values()) {
+                handler.removeCallbacks(check);
+            }
+            handler.removeCallbacksAndMessages(null);
         }
         groupStallChecks.clear();
 
         if (manager != null) {
             manager.pauseAllMissions(true);
+            for (DownloadMission mission : manager.getPendingMissions()) {
+                mission.handler = null;
+                mission.setListener(null);
+            }
+            manager = null;
+        }
+
+        if (notification != null) {
+            notification.clear();
+            notification = null;
         }
 
         releaseLocks();
+        wakeLock = null;
+        wifiLock = null;
+        notificationManager = null;
+
         ServiceCompat.stopForeground(this, ServiceCompat.STOP_FOREGROUND_REMOVE);
         foreground = false;
         serviceRunning = false;
+
+        // Drop any completion listeners that are still registered: the
+        // service is going away and will not be able to report their outcome.
+        completionListeners.clear();
+
+        handler = null;
 
         super.onDestroy();
     }
@@ -373,13 +404,14 @@ public class DownloadService extends Service implements Handler.Callback {
             }
             notifiedGroups.add(group.id);
 
+            Context appContext = getApplicationContext();
             String title = group.getTitle().trim().isEmpty()
-                    ? getString(R.string.downloads)
+                    ? appContext.getString(R.string.downloads)
                     : group.getTitle();
-            Notification groupNotification = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL)
+            Notification groupNotification = new NotificationCompat.Builder(appContext, NOTIFICATION_CHANNEL)
                     .setSmallIcon(R.drawable.ic_notification_icon)
                     .setContentTitle(title)
-                    .setContentText(getString(group.isFailed()
+                    .setContentText(appContext.getString(group.isFailed()
                             ? R.string.download_notification_failed
                             : R.string.download_notification_complete))
                     .setAutoCancel(true)
@@ -398,6 +430,9 @@ public class DownloadService extends Service implements Handler.Callback {
      * notification does not stay "in progress" forever.
      */
     private void scheduleGroupStallChecks() {
+        if (handler == null) {
+            return;
+        }
         for (DownloadNotification.Group group : notification.getGroups()) {
             if (group.isTerminal()
                     || hasActiveMissionsFor(group.id)
@@ -445,6 +480,10 @@ public class DownloadService extends Service implements Handler.Callback {
 
     @Override
     public boolean handleMessage(@NonNull Message msg) {
+        if (msg.obj == null) {
+            syncState();
+            return true;
+        }
         DownloadMission mission = (DownloadMission) msg.obj;
 
         switch (msg.what) {
@@ -499,7 +538,7 @@ public class DownloadService extends Service implements Handler.Callback {
     private void acquireLocks() {
         if (wakeLock == null) {
             PowerManager powerManager =
-                    (PowerManager) getSystemService(Context.POWER_SERVICE);
+                    (PowerManager) getApplicationContext().getSystemService(Context.POWER_SERVICE);
             if (powerManager != null) {
                 wakeLock = powerManager.newWakeLock(
                         PowerManager.PARTIAL_WAKE_LOCK, TAG + ":download");
@@ -552,13 +591,14 @@ public class DownloadService extends Service implements Handler.Callback {
     }
 
     private void createNotificationChannel() {
+        Context appContext = getApplicationContext();
         NotificationChannelCompat channel = new NotificationChannelCompat
                 .Builder(NOTIFICATION_CHANNEL, NotificationManagerCompat.IMPORTANCE_LOW)
-                .setName(getString(R.string.download_notification_channel_name))
-                .setDescription(getString(R.string.download_notification_channel_description))
+                .setName(appContext.getString(R.string.download_notification_channel_name))
+                .setDescription(appContext.getString(R.string.download_notification_channel_description))
                 .build();
 
-        NotificationManagerCompat.from(this).createNotificationChannel(channel);
+        NotificationManagerCompat.from(appContext).createNotificationChannel(channel);
     }
 
     private void updateForegroundState(boolean state) {
@@ -594,27 +634,28 @@ public class DownloadService extends Service implements Handler.Callback {
 
     @NonNull
     private Notification buildNotification() {
+        Context appContext = getApplicationContext();
         String title = notification.getTitle();
         if (title == null || title.trim().isEmpty()) {
-            title = getString(R.string.downloads);
+            title = appContext.getString(R.string.downloads);
         }
 
         int progress = notification.getProgress();
         String text;
         if (progress >= 0) {
-            text = getString(R.string.download_notification_progress_aggregate,
+            text = appContext.getString(R.string.download_notification_progress_aggregate,
                     DownloadUtils.formatBytes(notification.totalDone()),
                     DownloadUtils.formatBytes(notification.totalLength()),
                     progress);
         } else if (notification.totalDone() > 0) {
-            text = getString(R.string.download_notification_downloaded,
+            text = appContext.getString(R.string.download_notification_downloaded,
                     DownloadUtils.formatBytes(notification.totalDone()));
         } else {
-            text = getString(R.string.download_notification_waiting);
+            text = appContext.getString(R.string.download_notification_waiting);
         }
 
         NotificationCompat.Builder builder =
-                new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL)
+                new NotificationCompat.Builder(appContext, NOTIFICATION_CHANNEL)
                         .setSmallIcon(R.drawable.ic_notification_icon)
                         .setContentTitle(title)
                         .setContentText(text)
