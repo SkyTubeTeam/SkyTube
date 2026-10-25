@@ -36,90 +36,90 @@ import free.rm.skytube.businessobjects.download.DownloadMission.HttpError;
 public class DownloadRunnableFallback extends Thread {
     private static final String TAG = "DLRunnableFallback";
 
-    private final DownloadMission mMission;
+    private final DownloadMission downloadMission;
 
-    private int mRetryCount = 0;
-    private InputStream mIs;
-    private FileStream mF;
-    private HttpURLConnection mConn;
+    private int retryCount = 0;
+    private InputStream inputStream;
+    private FileStream fileStream;
+    private HttpURLConnection urlConnection;
 
     DownloadRunnableFallback(@NonNull DownloadMission mission) {
-        mMission = mission;
+        downloadMission = mission;
     }
 
     private void dispose() {
         try {
             try {
-                if (mIs != null) {
-                    mIs.close();
+                if (inputStream != null) {
+                    inputStream.close();
                 }
             } finally {
-                if (mConn != null) {
-                    mConn.disconnect();
+                if (urlConnection != null) {
+                    urlConnection.disconnect();
                 }
             }
         } catch (IOException e) {
             // nothing to do
         }
 
-        if (mF != null) {
-            mF.close();
+        if (fileStream != null) {
+            fileStream.close();
         }
     }
 
     @Override
     public void run() {
         boolean done;
-        long start = mMission.getFallbackResumeOffset();
+        long start = downloadMission.getFallbackResumeOffset();
 
-        if (!mMission.getUnknownLength() && start > 0) {
+        if (!downloadMission.getUnknownLength() && start > 0) {
             Logger.i(TAG, "Resuming a single-thread download at " + start);
         }
 
         try {
-            long rangeStart = (mMission.getUnknownLength() || start < 1) ? -1 : start;
+            long rangeStart = (downloadMission.getUnknownLength() || start < 1) ? -1 : start;
 
             int mId = 1;
-            mConn = mMission.openConnection(false, rangeStart, -1);
+            urlConnection = downloadMission.openConnection(false, rangeStart, -1);
 
-            if (mRetryCount == 0 && rangeStart == -1) {
+            if (retryCount == 0 && rangeStart == -1) {
                 // workaround: bypass android connection pool
-                mConn.setRequestProperty("Range", "bytes=0-");
+                urlConnection.setRequestProperty("Range", "bytes=0-");
             }
 
-            mMission.establishConnection(mId, mConn);
+            downloadMission.establishConnection(mId, urlConnection);
 
             // check if the download can be resumed
-            if (mConn.getResponseCode() == 416 && start > 0) {
-                mMission.notifyProgress(-start);
+            if (urlConnection.getResponseCode() == 416 && start > 0) {
+                downloadMission.notifyProgress(-start);
                 start = 0;
-                mRetryCount--;
+                retryCount--;
                 throw new HttpError(416);
             }
 
             // secondary check for the file length
-            if (!mMission.getUnknownLength()) {
-                mMission.setUnknownLength(DownloadUtils.getContentLength(mConn) == -1);
+            if (!downloadMission.getUnknownLength()) {
+                downloadMission.setUnknownLength(DownloadUtils.getContentLength(urlConnection) == -1);
             }
 
-            if (mMission.getUnknownLength() || mConn.getResponseCode() == 200) {
+            if (downloadMission.getUnknownLength() || urlConnection.getResponseCode() == 200) {
                 // restart amount of bytes downloaded
-                mMission.setDone(mMission.getOffsets()[mMission.getCurrent()] - mMission.getOffsets()[0]);
+                downloadMission.setDone(downloadMission.getOffsets()[downloadMission.getCurrent()] - downloadMission.getOffsets()[0]);
                 start = 0; // reset position to avoid writing at wrong offset
             }
 
-            mF = new FileStream(mMission.getPartFile());
-            mF.seek(mMission.getOffsets()[mMission.getCurrent()] + start);
+            fileStream = new FileStream(downloadMission.getPartFile());
+            fileStream.seek(downloadMission.getOffsets()[downloadMission.getCurrent()] + start);
 
-            mIs = mConn.getInputStream();
+            inputStream = urlConnection.getInputStream();
 
             byte[] buf = new byte[DownloadMission.BUFFER_SIZE];
             int len = 0;
 
-            while (mMission.getRunning() && (len = mIs.read(buf, 0, buf.length)) != -1) {
-                mF.write(buf, 0, len);
+            while (downloadMission.getRunning() && (len = inputStream.read(buf, 0, buf.length)) != -1) {
+                fileStream.write(buf, 0, len);
                 start += len;
-                mMission.notifyProgress(len);
+                downloadMission.notifyProgress(len);
             }
 
             dispose();
@@ -130,20 +130,20 @@ public class DownloadRunnableFallback extends Thread {
         } catch (Exception e) {
             dispose();
 
-            mMission.setFallbackResumeOffset(start);
+            downloadMission.setFallbackResumeOffset(start);
 
-            if (!mMission.getRunning() || e instanceof ClosedByInterruptException) {
+            if (!downloadMission.getRunning() || e instanceof ClosedByInterruptException) {
                 return;
             }
 
             if (e instanceof HttpError
                     && ((HttpError) e).getStatusCode() == DownloadMission.ERROR_HTTP_FORBIDDEN) {
-                mMission.notifyError(DownloadMission.ERROR_HTTP_FORBIDDEN, (HttpError) e);
+                downloadMission.notifyError(DownloadMission.ERROR_HTTP_FORBIDDEN, (HttpError) e);
                 return;
             }
 
-            if (mRetryCount++ >= mMission.getMaxRetry()) {
-                mMission.notifyError(e);
+            if (retryCount++ >= downloadMission.getMaxRetry()) {
+                downloadMission.notifyError(e);
                 return;
             }
 
@@ -154,9 +154,9 @@ public class DownloadRunnableFallback extends Thread {
         }
 
         if (done) {
-            mMission.notifyFinished();
+            downloadMission.notifyFinished();
         } else {
-            mMission.setFallbackResumeOffset(start);
+            downloadMission.setFallbackResumeOffset(start);
         }
     }
 
@@ -164,9 +164,9 @@ public class DownloadRunnableFallback extends Thread {
     public void interrupt() {
         super.interrupt();
 
-        if (mConn != null) {
+        if (urlConnection != null) {
             try {
-                mConn.disconnect();
+                urlConnection.disconnect();
             } catch (Exception e) {
                 // nothing to do
             }
