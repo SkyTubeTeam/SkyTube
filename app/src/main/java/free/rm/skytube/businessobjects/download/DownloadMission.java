@@ -18,6 +18,7 @@
 package free.rm.skytube.businessobjects.download;
 
 import android.app.DownloadManager;
+import android.os.Build;
 import android.system.ErrnoException;
 import android.system.OsConstants;
 
@@ -618,7 +619,8 @@ public class DownloadMission extends Mission {
 
     public synchronized void notifyError(int code, Exception err) {
         Logger.e(TAG, "notifyError() code = " + code, err);
-        if (err != null && err.getCause() instanceof ErrnoException) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP
+                && err != null && err.getCause() instanceof ErrnoException) {
             int errno = ((ErrnoException) err.getCause()).errno;
             if (errno == OsConstants.ENOSPC) {
                 code = ERROR_INSUFFICIENT_STORAGE;
