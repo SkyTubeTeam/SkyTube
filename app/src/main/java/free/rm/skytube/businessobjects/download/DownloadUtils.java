@@ -24,13 +24,12 @@ import androidx.annotation.Nullable;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.nio.charset.Charset;
 import java.util.Locale;
@@ -57,6 +56,12 @@ public final class DownloadUtils {
 
     private static final Charset UTF_8 = Charset.forName("UTF-8");
 
+    /** Magic number ("SKYT") that identifies a binary mission metadata file. */
+    private static final int MISSION_MAGIC = 0x534B5954;
+
+    /** Version of the binary mission metadata format. */
+    private static final int MISSION_VERSION = 1;
+
     private DownloadUtils() {
     }
 
@@ -73,29 +78,226 @@ public final class DownloadUtils {
         }
     }
 
-    static void writeToFile(@NonNull File file, @NonNull Serializable serializable) {
-        try (ObjectOutputStream objectOutputStream =
-                     new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(file)))) {
-            objectOutputStream.writeObject(serializable);
+    /**
+     * Persists the resumable state of the given mission to {@code file}.
+     *
+     * <p>The mission is written with a compact binary format instead of Java
+     * object serialization.  Only the fields needed to resume a download are
+     * stored; the transient runtime state (threads, listeners, handler, ...) is
+     * recreated when the mission is read back.</p>
+     */
+    static void writeToFile(@NonNull File file, @NonNull DownloadMission mission) {
+        try (DataOutputStream out = new DataOutputStream(
+                new BufferedOutputStream(new FileOutputStream(file)))) {
+            out.writeInt(MISSION_MAGIC);
+            out.writeInt(MISSION_VERSION);
+            writeMission(out, mission);
         } catch (Exception e) {
             Logger.e(DownloadUtils.class, "Unable to persist download metadata", e);
         }
     }
 
+    /**
+     * Reads a mission previously stored by
+     * {@link #writeToFile(File, DownloadMission)}.
+     *
+     * @return the restored mission, or {@code null} if the file is missing, has
+     *         an unknown format, or cannot be read
+     */
     @Nullable
-    @SuppressWarnings("unchecked")
-    static <T> T readFromFile(@Nullable File file) {
+    static DownloadMission readFromFile(@Nullable File file) {
         if (file == null || !file.isFile()) {
             return null;
         }
 
-        try (ObjectInputStream objectInputStream =
-                     new ObjectInputStream(new BufferedInputStream(new FileInputStream(file)))) {
-            return (T) objectInputStream.readObject();
+        try (DataInputStream in = new DataInputStream(
+                new BufferedInputStream(new FileInputStream(file)))) {
+            if (in.readInt() != MISSION_MAGIC) {
+                Logger.e(DownloadUtils.class, "Not a mission metadata file: %s", file);
+                return null;
+            }
+
+            int version = in.readInt();
+            if (version != MISSION_VERSION) {
+                Logger.e(DownloadUtils.class, "Unsupported mission metadata version: %d", version);
+                return null;
+            }
+
+            return readMission(in);
         } catch (Exception e) {
-            Logger.e(DownloadUtils.class, "Failed to deserialize the download metadata", e);
+            Logger.e(DownloadUtils.class, "Failed to read the download metadata", e);
             return null;
         }
+    }
+
+    private static void writeMission(DataOutputStream out, DownloadMission mission) throws IOException {
+        // Mission
+        writeString(out, mission.id);
+        writeString(out, mission.source);
+        out.writeLong(mission.length);
+        out.writeLong(mission.timestamp);
+        out.writeChar(mission.kind);
+        writeString(out, mission.targetFile == null ? null : mission.targetFile.getPath());
+
+        // DownloadMission
+        writeStringArray(out, mission.urls);
+        out.writeLong(mission.done);
+        out.writeBoolean(mission.unknownLength);
+        writeLongArray(out, mission.offsets);
+        out.writeInt(mission.current);
+        out.writeLong(mission.nearLength);
+        writeIntArray(out, mission.blocks);
+        out.writeLong(mission.fallbackResumeOffset);
+        out.writeInt(mission.threadCount);
+        writeString(out, mission.title);
+        writeString(out, mission.notificationGroupId);
+        writeString(out, mission.notificationGroupTitle);
+        out.writeInt(mission.notificationGroupSize);
+        out.writeBoolean(mission.allowedOverRoaming);
+        out.writeInt(mission.allowedNetworkTypes);
+        out.writeBoolean(mission.enqueued);
+        // only the error code is persisted: errObject is runtime-only state
+        out.writeInt(mission.errCode);
+    }
+
+    private static DownloadMission readMission(DataInputStream in) throws IOException {
+        DownloadMission mission = new DownloadMission();
+
+        // Mission
+        mission.id = readString(in);
+        mission.source = readString(in);
+        mission.length = in.readLong();
+        mission.timestamp = in.readLong();
+        mission.kind = in.readChar();
+        String targetPath = readString(in);
+        mission.targetFile = targetPath == null ? null : new File(targetPath);
+
+        // DownloadMission
+        mission.urls = readStringArray(in);
+        mission.done = in.readLong();
+        mission.unknownLength = in.readBoolean();
+        mission.offsets = readLongArray(in);
+        mission.current = in.readInt();
+        mission.nearLength = in.readLong();
+        mission.blocks = readIntArray(in);
+        mission.fallbackResumeOffset = in.readLong();
+        mission.threadCount = in.readInt();
+        mission.title = readString(in);
+        mission.notificationGroupId = readString(in);
+        mission.notificationGroupTitle = readString(in);
+        mission.notificationGroupSize = in.readInt();
+        mission.allowedOverRoaming = in.readBoolean();
+        mission.allowedNetworkTypes = in.readInt();
+        mission.enqueued = in.readBoolean();
+        mission.errCode = in.readInt();
+
+        return mission;
+    }
+
+    /**
+     * Writes a nullable string: a negative length denotes {@code null}, causing
+     * the value to be encoded as UTF-8 bytes so it is not limited by the
+     * 64&nbsp;KiB cap of {@link DataOutputStream#writeUTF(String)}.
+     */
+    private static void writeString(DataOutputStream out, @Nullable String value) throws IOException {
+        if (value == null) {
+            out.writeInt(-1);
+            return;
+        }
+
+        byte[] bytes = value.getBytes(UTF_8);
+        out.writeInt(bytes.length);
+        out.write(bytes);
+    }
+
+    @Nullable
+    private static String readString(DataInputStream in) throws IOException {
+        int length = in.readInt();
+        if (length < 0) {
+            return null;
+        }
+
+        byte[] bytes = new byte[length];
+        in.readFully(bytes);
+        return new String(bytes, UTF_8);
+    }
+
+    private static void writeStringArray(DataOutputStream out, @Nullable String[] values) throws IOException {
+        if (values == null) {
+            out.writeInt(-1);
+            return;
+        }
+
+        out.writeInt(values.length);
+        for (String value : values) {
+            writeString(out, value);
+        }
+    }
+
+    @Nullable
+    private static String[] readStringArray(DataInputStream in) throws IOException {
+        int length = in.readInt();
+        if (length < 0) {
+            return null;
+        }
+
+        String[] values = new String[length];
+        for (int i = 0; i < length; i++) {
+            values[i] = readString(in);
+        }
+        return values;
+    }
+
+    private static void writeLongArray(DataOutputStream out, @Nullable long[] values) throws IOException {
+        if (values == null) {
+            out.writeInt(-1);
+            return;
+        }
+
+        out.writeInt(values.length);
+        for (long value : values) {
+            out.writeLong(value);
+        }
+    }
+
+    @Nullable
+    private static long[] readLongArray(DataInputStream in) throws IOException {
+        int length = in.readInt();
+        if (length < 0) {
+            return null;
+        }
+
+        long[] values = new long[length];
+        for (int i = 0; i < length; i++) {
+            values[i] = in.readLong();
+        }
+        return values;
+    }
+
+    private static void writeIntArray(DataOutputStream out, @Nullable int[] values) throws IOException {
+        if (values == null) {
+            out.writeInt(-1);
+            return;
+        }
+
+        out.writeInt(values.length);
+        for (int value : values) {
+            out.writeInt(value);
+        }
+    }
+
+    @Nullable
+    private static int[] readIntArray(DataInputStream in) throws IOException {
+        int length = in.readInt();
+        if (length < 0) {
+            return null;
+        }
+
+        int[] values = new int[length];
+        for (int i = 0; i < length; i++) {
+            values[i] = in.readInt();
+        }
+        return values;
     }
 
     @Nullable
