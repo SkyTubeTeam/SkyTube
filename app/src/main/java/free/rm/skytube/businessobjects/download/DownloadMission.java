@@ -165,9 +165,19 @@ public class DownloadMission extends Mission {
     }
 
     /**
-     * Restores the transient runtime state that is not written to the
-     * metadata file. Without this, fields such as {@link #threads} remain
-     * {@code null} after deserialization and crash the mission on resume.
+     * Creates an empty mission whose persisted state is filled in by the
+     * binary metadata reader ({@link DownloadUtils#readFromFile(File)}).  The
+     * transient runtime state is left at its default value.
+     */
+    DownloadMission() {
+    }
+
+    /**
+     * Restores the transient runtime state that is not carried through Java
+     * serialization.  This is used when a mission is handed to the download
+     * service through an {@link android.content.Intent}; without it, fields
+     * such as {@link #threads} remain {@code null} and crash the mission on
+     * resume.
      */
     private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
         in.defaultReadObject();
