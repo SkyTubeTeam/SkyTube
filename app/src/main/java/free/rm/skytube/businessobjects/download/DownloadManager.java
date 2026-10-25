@@ -166,23 +166,7 @@ public class DownloadManager {
             } else {
                 existing.setUrls(mission.getUrls());
             }
-            existing.setTitle(mission.getTitle());
-            if (mission.getNotificationGroupId() != null) {
-                existing.setNotificationGroupId(mission.getNotificationGroupId());
-            }
-            if (mission.getNotificationGroupTitle() != null) {
-                existing.setNotificationGroupTitle(mission.getNotificationGroupTitle());
-            }
-            if (mission.getNotificationGroupSize() > 0) {
-                existing.setNotificationGroupSize(mission.getNotificationGroupSize());
-            }
-            existing.setThreadCount(mission.getThreadCount());
-            existing.setKind(mission.getKind());
-            existing.setAllowedOverRoaming(mission.getAllowedOverRoaming());
-            existing.setAllowedNetworkTypes(mission.getAllowedNetworkTypes());
-            if (mission.getNearLength() > 0) {
-                existing.setNearLength(mission.getNearLength());
-            }
+            existing.updateFrom(mission);
             existing.setMaxRetry(maxRetry);
             existing.setHandler(handlerFactory);
             existing.setListener(missionListener);
@@ -266,7 +250,7 @@ public class DownloadManager {
             mission.resetState(true, false, DownloadMission.ERROR_PROGRESS_LOST);
         }
 
-        mission.setThreads(new Thread[0]);
+        mission.resetThreads();
         mission.setMetadata(metadata);
         mission.setMaxRetry(maxRetry);
         mission.setHandler(handlerFactory);
@@ -345,7 +329,7 @@ public class DownloadManager {
             if (force) {
                 // avoid waiting for threads
                 mission.setInit(null);
-                mission.setThreads(new Thread[0]);
+                mission.resetThreads();
             }
 
             mission.pause();

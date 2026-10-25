@@ -27,15 +27,12 @@ import androidx.annotation.Nullable;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InterruptedIOException;
 import java.io.ObjectInputStream;
-import java.io.Serializable;
 import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.UnknownHostException;
-import java.nio.channels.ClosedByInterruptException;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -269,10 +266,6 @@ public class DownloadMission extends Mission {
         this.done = done;
     }
 
-    public boolean isUnknownLength() {
-        return unknownLength;
-    }
-
     public boolean getUnknownLength() {
         return unknownLength;
     }
@@ -291,10 +284,6 @@ public class DownloadMission extends Mission {
 
     public int getCurrent() {
         return current;
-    }
-
-    public void setCurrent(int current) {
-        this.current = current;
     }
 
     public File getMetadata() {
@@ -422,6 +411,31 @@ public class DownloadMission extends Mission {
         writeThisToFileAsync();
     }
 
+    /**
+     * Copies the caller-supplied configuration from {@code other} onto this
+     * mission, so that an already tracked mission can pick up a fresh request
+     * without exposing every individual setter to the caller.
+     */
+    public void updateFrom(DownloadMission other) {
+        setTitle(other.getTitle());
+        if (other.getNotificationGroupId() != null) {
+            setNotificationGroupId(other.getNotificationGroupId());
+        }
+        if (other.getNotificationGroupTitle() != null) {
+            setNotificationGroupTitle(other.getNotificationGroupTitle());
+        }
+        if (other.getNotificationGroupSize() > 0) {
+            setNotificationGroupSize(other.getNotificationGroupSize());
+        }
+        setThreadCount(other.getThreadCount());
+        setKind(other.getKind());
+        setAllowedOverRoaming(other.getAllowedOverRoaming());
+        setAllowedNetworkTypes(other.getAllowedNetworkTypes());
+        if (other.getNearLength() > 0) {
+            setNearLength(other.getNearLength());
+        }
+    }
+
     // Note: original setEnqueued writes file; keep override? This setter already writes. But internal calls setEnqueued(true) in constructor? no.
 
     public int getErrCode() {
@@ -452,8 +466,8 @@ public class DownloadMission extends Mission {
         return threads;
     }
 
-    public void setThreads(Thread[] threads) {
-        this.threads = threads;
+    public void resetThreads() {
+        this.threads = new Thread[0];
     }
 
     public Thread getInit() {
@@ -462,14 +476,6 @@ public class DownloadMission extends Mission {
 
     public void setInit(Thread init) {
         this.init = init;
-    }
-
-    public boolean[] getBlockAcquired() {
-        return blockAcquired;
-    }
-
-    public void setBlockAcquired(boolean[] blockAcquired) {
-        this.blockAcquired = blockAcquired;
     }
 
     /**
