@@ -126,6 +126,26 @@ public class YouTubeChannel extends CardData implements Serializable {
 		isUserSubscribed = userSubscribed;
 	}
 
+	public void setBannerUrl(String bannerUrl) {
+		this.bannerUrl = bannerUrl;
+	}
+
+	public void setSubscriberCount(long subscriberCount) {
+		this.subscriberCount = subscriberCount;
+	}
+
+	public void setLastVisitTime(long lastVisitTime) {
+		this.lastVisitTime = lastVisitTime;
+	}
+
+	public void setLastCheckTime(long lastCheckTime) {
+		this.lastCheckTime = lastCheckTime;
+	}
+
+	public void setTotalSubscribers(String totalSubscribers) {
+		this.totalSubscribers = totalSubscribers;
+	}
+
     public Disposable updateLastVisitTime() {
         return SubscriptionsDb.getSubscriptionsDb().updateLastVisitTimeAsync(getChannelId()).subscribe(timestamp -> {
             lastVisitTime = timestamp;
