@@ -146,6 +146,7 @@ public class DownloadMission extends Mission {
     @NonNull
     private transient Thread[] threads;
     private transient Thread init;
+    private transient DownloadInitializer initRunnable;
 
     private transient Listener listener;
 
@@ -242,6 +243,7 @@ public class DownloadMission extends Mission {
         writingToFile = false;
         threads = new Thread[0];
         init = null;
+        initRunnable = null;
         listener = null;
     }
 
@@ -443,20 +445,8 @@ public class DownloadMission extends Mission {
         return errCode;
     }
 
-    public void setErrCode(int errCode) {
-        this.errCode = errCode;
-    }
-
     public Exception getErrObject() {
         return errObject;
-    }
-
-    public void setErrObject(Exception errObject) {
-        this.errObject = errObject;
-    }
-
-    public HandlerThreadFactory getHandler() {
-        return handler;
     }
 
     public void setHandler(HandlerThreadFactory handler) {
@@ -489,10 +479,7 @@ public class DownloadMission extends Mission {
         synchronized (this) {
             for (int i = 0; i < blockAcquired.length; i++) {
                 if (!blockAcquired[i] && blocks[i] >= 0) {
-                    Block block = new Block();
-                    block.position = i;
-                    block.done = blocks[i];
-
+                    Block block = new Block(i, blocks[i]);
                     blockAcquired[i] = true;
                     return block;
                 }
@@ -737,6 +724,7 @@ public class DownloadMission extends Mission {
         }
 
         init = null;
+        initRunnable = null;
         finishCount = 0;
         blockAcquired = new boolean[blocks.length];
 
@@ -775,6 +763,9 @@ public class DownloadMission extends Mission {
         notify(DownloadService.MESSAGE_PAUSED);
 
         if (init != null && init.isAlive()) {
+            if (initRunnable != null) {
+                initRunnable.interrupt();
+            }
             init.interrupt();
             synchronized (this) {
                 resetState(false, true, ERROR_NOTHING);
@@ -783,6 +774,7 @@ public class DownloadMission extends Mission {
         }
 
         init = null;
+        initRunnable = null;
         pauseThreads();
     }
 
@@ -833,7 +825,9 @@ public class DownloadMission extends Mission {
     }
 
     private void initializer() {
-        init = runAsync(DownloadInitializer.mId, new DownloadInitializer(this));
+        DownloadInitializer runnable = new DownloadInitializer(this);
+        initRunnable = runnable;
+        init = runAsync(DownloadInitializer.mId, runnable);
     }
 
     private void writeThisToFileAsync() {
@@ -941,17 +935,10 @@ public class DownloadMission extends Mission {
         }
     }
 
-    private Thread runAsync(int id, Runnable who) {
-        return runAsync(id, new Thread(who));
-    }
-
-    private Thread runAsync(int id, Thread who) {
-        if (who.getName().startsWith("Thread-")) {
-            who.setName(String.format("%s[%s] %s", TAG, id, getTargetFile().getName()));
-        }
-
+    private Thread runAsync(int id, Runnable runnable) {
+        String safeName = getTargetFile().getName().replaceAll("[^\\x20-\\x7E]", "");
+        Thread who = new Thread(runnable, safeName + '[' + id +']');
         who.start();
-
         return who;
     }
 
@@ -965,6 +952,9 @@ public class DownloadMission extends Mission {
         final Thread currentThread = Thread.currentThread();
 
         if (init != null && init != currentThread && init.isAlive()) {
+            if (initRunnable != null) {
+                initRunnable.interrupt();
+            }
             init.interrupt();
 
             if (millis > 0) {
@@ -1021,15 +1011,16 @@ public class DownloadMission extends Mission {
     }
 
     public static class Block {
-        private int position;
+        private final int position;
         private int done;
+
+        Block(int position, int done) {
+            this.position = position;
+            this.done = done;
+        }
 
         public int getPosition() {
             return position;
-        }
-
-        public void setPosition(int position) {
-            this.position = position;
         }
 
         public int getDone() {

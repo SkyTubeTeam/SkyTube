@@ -33,22 +33,22 @@ import free.rm.skytube.businessobjects.download.DownloadMission.HttpError;
  *
  * <p>Ported from NewPipe's {@code us.shandian.giga.get.DownloadRunnable}.</p>
  */
-public class DownloadRunnable extends Thread {
+public class DownloadRunnable implements Runnable {
     private static final String TAG = "DownloadRunnable";
 
-    private final DownloadMission mMission;
+    private final DownloadMission downloadMission;
     private final int mId;
 
-    private HttpURLConnection mConn;
+    private HttpURLConnection urlConnection;
 
     DownloadRunnable(DownloadMission mission, int id) {
-        mMission = Objects.requireNonNull(mission);
+        downloadMission = Objects.requireNonNull(mission);
         mId = id;
     }
 
     private void releaseBlock(Block block, long remain) {
         // set the block offset to -1 if it is completed
-        mMission.releaseBlock(block.getPosition(), remain < 0 ? -1 : block.getDone());
+        downloadMission.releaseBlock(block.getPosition(), remain < 0 ? -1 : block.getDone());
     }
 
     @Override
@@ -59,15 +59,15 @@ public class DownloadRunnable extends Thread {
         FileStream f;
 
         try {
-            f = new FileStream(mMission.getPartFile());
+            f = new FileStream(downloadMission.getPartFile());
         } catch (IOException e) {
-            mMission.notifyError(e); // this never should happen
+            downloadMission.notifyError(e); // this never should happen
             return;
         }
 
-        while (mMission.getRunning() && mMission.getErrCode() == DownloadMission.ERROR_NOTHING) {
+        while (downloadMission.getRunning() && downloadMission.getErrCode() == DownloadMission.ERROR_NOTHING) {
             if (!retry) {
-                block = mMission.acquireBlock();
+                block = downloadMission.acquireBlock();
             }
 
             if (block == null) {
@@ -80,22 +80,22 @@ public class DownloadRunnable extends Thread {
 
             start += block.getDone();
 
-            if (end >= mMission.getLength()) {
-                end = mMission.getLength() - 1;
+            if (end >= downloadMission.getLength()) {
+                end = downloadMission.getLength() - 1;
             }
 
             try {
-                mConn = mMission.openConnection(false, start, end);
-                mMission.establishConnection(mId, mConn);
+                urlConnection = downloadMission.openConnection(false, start, end);
+                downloadMission.establishConnection(mId, urlConnection);
 
                 // check if the download can be resumed
-                if (mConn.getResponseCode() == 416) {
+                if (urlConnection.getResponseCode() == 416) {
                     if (block.getDone() > 0) {
                         // try again from the start (of the block);
-                        mMission.notifyProgress(-block.getDone());
+                        downloadMission.notifyProgress(-block.getDone());
                         block.setDone(0);
                         retry = true;
-                        mConn.disconnect();
+                        urlConnection.disconnect();
                         continue;
                     }
 
@@ -105,34 +105,34 @@ public class DownloadRunnable extends Thread {
                 retry = false;
 
                 // The server may be ignoring the range request
-                if (mConn.getResponseCode() != 206) {
-                    Logger.e(TAG, mId + ":Unsupported " + mConn.getResponseCode());
-                    mMission.notifyError(new HttpError(mConn.getResponseCode()));
+                if (urlConnection.getResponseCode() != 206) {
+                    Logger.e(TAG, mId + ":Unsupported " + urlConnection.getResponseCode());
+                    downloadMission.notifyError(new HttpError(urlConnection.getResponseCode()));
                     break;
                 }
 
-                f.seek(mMission.getOffsets()[mMission.getCurrent()] + start);
+                f.seek(downloadMission.getOffsets()[downloadMission.getCurrent()] + start);
 
-                try (InputStream is = mConn.getInputStream()) {
+                try (InputStream is = urlConnection.getInputStream()) {
                     byte[] buf = new byte[DownloadMission.BUFFER_SIZE];
                     int len;
 
                     // use always start <= end
                     // fixes a deadlock because in some videos, youtube is sending one byte alone
-                    while (start <= end && mMission.getRunning()
+                    while (start <= end && downloadMission.getRunning()
                             && (len = is.read(buf, 0, buf.length)) != -1) {
                         f.write(buf, 0, len);
                         start += len;
                         block.setDone(block.getDone() + len);
-                        mMission.notifyProgress(len);
+                        downloadMission.notifyProgress(len);
                     }
                 }
 
-                if (mMission.getRunning()) {
+                if (downloadMission.getRunning()) {
                     Logger.d(TAG, mId + ":position " + block.getPosition() + " stopped " + start + "/" + end);
                 }
             } catch (Exception e) {
-                if (!mMission.getRunning() || e instanceof ClosedByInterruptException) {
+                if (!downloadMission.getRunning() || e instanceof ClosedByInterruptException) {
                     break;
                 }
 
@@ -143,13 +143,13 @@ public class DownloadRunnable extends Thread {
 
                     if (mId == 1) {
                         // only the first thread will execute the recovery procedure
-                        mMission.notifyError(DownloadMission.ERROR_HTTP_FORBIDDEN, (HttpError) e);
+                        downloadMission.notifyError(DownloadMission.ERROR_HTTP_FORBIDDEN, (HttpError) e);
                     }
                     return;
                 }
 
-                if (retryCount++ >= mMission.getMaxRetry()) {
-                    mMission.notifyError(e);
+                if (retryCount++ >= downloadMission.getMaxRetry()) {
+                    downloadMission.notifyError(e);
                     break;
                 }
 
@@ -165,21 +165,8 @@ public class DownloadRunnable extends Thread {
 
         Logger.d(TAG, "thread " + mId + " exited from main download loop");
 
-        if (mMission.getErrCode() == DownloadMission.ERROR_NOTHING && mMission.getRunning()) {
-            mMission.notifyFinished();
-        }
-    }
-
-    @Override
-    public void interrupt() {
-        super.interrupt();
-
-        try {
-            if (mConn != null) {
-                mConn.disconnect();
-            }
-        } catch (Exception e) {
-            // nothing to do
+        if (downloadMission.getErrCode() == DownloadMission.ERROR_NOTHING && downloadMission.getRunning()) {
+            downloadMission.notifyFinished();
         }
     }
 }

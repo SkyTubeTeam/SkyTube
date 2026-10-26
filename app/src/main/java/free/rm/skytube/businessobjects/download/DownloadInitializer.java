@@ -32,22 +32,22 @@ import free.rm.skytube.businessobjects.Logger;
  *
  * <p>Ported from NewPipe's {@code us.shandian.giga.get.DownloadInitializer}.</p>
  */
-public class DownloadInitializer extends Thread {
+public class DownloadInitializer implements Runnable {
     private static final String TAG = "DownloadInitializer";
     static final int mId = 0;
 
-    private final DownloadMission mMission;
-    private HttpURLConnection mConn;
+    private final DownloadMission downloadMission;
+    private HttpURLConnection urlConnection;
 
     DownloadInitializer(@NonNull DownloadMission mission) {
-        mMission = mission;
-        mConn = null;
+        downloadMission = mission;
+        urlConnection = null;
     }
 
     private void dispose() {
         try {
-            if (mConn != null) {
-                mConn.getInputStream().close();
+            if (urlConnection != null) {
+                urlConnection.getInputStream().close();
             }
         } catch (Exception e) {
             // nothing to do
@@ -56,8 +56,8 @@ public class DownloadInitializer extends Thread {
 
     @Override
     public void run() {
-        if (mMission.getCurrent() > 0) {
-            mMission.resetState(false, true, DownloadMission.ERROR_NOTHING);
+        if (downloadMission.getCurrent() > 0) {
+            downloadMission.resetState(false, true, DownloadMission.ERROR_NOTHING);
         }
 
         int retryCount = 0;
@@ -65,24 +65,24 @@ public class DownloadInitializer extends Thread {
 
         while (true) {
             try {
-                if (mMission.getBlocks() == null && mMission.getCurrent() == 0) {
+                if (downloadMission.getBlocks() == null && downloadMission.getCurrent() == 0) {
                     // calculate the whole size of the mission
-                    mMission.setDone(0);
+                    downloadMission.setDone(0);
                     long finalLength = 0;
 
-                    for (int i = 0; i < mMission.getUrls().length && mMission.getRunning(); i++) {
-                        mConn = mMission.openConnection(mMission.getUrls()[i], true, 0, 0);
-                        mMission.establishConnection(mId, mConn);
+                    for (int i = 0; i < downloadMission.getUrls().length && downloadMission.getRunning(); i++) {
+                        urlConnection = downloadMission.openConnection(downloadMission.getUrls()[i], true, 0, 0);
+                        downloadMission.establishConnection(mId, urlConnection);
                         dispose();
 
                         if (Thread.interrupted()) {
                             return;
                         }
-                        long length = DownloadUtils.getTotalContentLength(mConn);
+                        long length = DownloadUtils.getTotalContentLength(urlConnection);
 
                         if (i == 0) {
-                            httpCode = mConn.getResponseCode();
-                            mMission.setLength(length);
+                            httpCode = urlConnection.getResponseCode();
+                            downloadMission.setLength(length);
                         }
 
                         if (length > 0) {
@@ -90,114 +90,114 @@ public class DownloadInitializer extends Thread {
                         }
                     }
 
-                    mMission.setNearLength(finalLength);
+                    downloadMission.setNearLength(finalLength);
                 } else {
                     // ask for the current resource length
-                    mConn = mMission.openConnection(true, 0, 0);
-                    mMission.establishConnection(mId, mConn);
+                    urlConnection = downloadMission.openConnection(true, 0, 0);
+                    downloadMission.establishConnection(mId, urlConnection);
                     dispose();
 
-                    if (!mMission.getRunning() || Thread.interrupted()) {
+                    if (!downloadMission.getRunning() || Thread.interrupted()) {
                         return;
                     }
 
-                    httpCode = mConn.getResponseCode();
-                    mMission.setLength(DownloadUtils.getTotalContentLength(mConn));
+                    httpCode = urlConnection.getResponseCode();
+                    downloadMission.setLength(DownloadUtils.getTotalContentLength(urlConnection));
                 }
 
-                if (mMission.getLength() == 0 || httpCode == 204) {
-                    mMission.notifyError(DownloadMission.ERROR_HTTP_NO_CONTENT, null);
+                if (downloadMission.getLength() == 0 || httpCode == 204) {
+                    downloadMission.notifyError(DownloadMission.ERROR_HTTP_NO_CONTENT, null);
                     return;
                 }
 
                 // check for dynamically generated content
-                if (mMission.getLength() == -1 && mConn.getResponseCode() == 200) {
-                    mMission.setBlocks(new int[0]);
-                    mMission.setLength(0);
-                    mMission.setUnknownLength(true);
+                if (downloadMission.getLength() == -1 && urlConnection.getResponseCode() == 200) {
+                    downloadMission.setBlocks(new int[0]);
+                    downloadMission.setLength(0);
+                    downloadMission.setUnknownLength(true);
 
                     Logger.d(TAG, "falling back (unknown length)");
                 } else {
                     // Open again, this time checking for range request support
-                    long rangeStart = Math.max(0, mMission.getLength() - 10);
-                    mConn = mMission.openConnection(true, rangeStart, mMission.getLength());
-                    mMission.establishConnection(mId, mConn);
+                    long rangeStart = Math.max(0, downloadMission.getLength() - 10);
+                    urlConnection = downloadMission.openConnection(true, rangeStart, downloadMission.getLength());
+                    downloadMission.establishConnection(mId, urlConnection);
                     dispose();
 
-                    if (!mMission.getRunning() || Thread.interrupted()) {
+                    if (!downloadMission.getRunning() || Thread.interrupted()) {
                         return;
                     }
 
-                    synchronized (mMission) {
-                        if (mConn.getResponseCode() == 206) {
-                            if (mMission.getThreadCount() > 1) {
-                                int count = (int) (mMission.getLength() / DownloadMission.BLOCK_SIZE);
-                                if ((count * DownloadMission.BLOCK_SIZE) < mMission.getLength()) {
+                    synchronized (downloadMission) {
+                        if (urlConnection.getResponseCode() == 206) {
+                            if (downloadMission.getThreadCount() > 1) {
+                                int count = (int) (downloadMission.getLength() / DownloadMission.BLOCK_SIZE);
+                                if ((count * DownloadMission.BLOCK_SIZE) < downloadMission.getLength()) {
                                     count++;
                                 }
 
-                                mMission.setBlocks(new int[count]);
+                                downloadMission.setBlocks(new int[count]);
                             } else {
                                 // if one thread is required don't calculate blocks, it is useless
-                                mMission.setBlocks(new int[0]);
-                                mMission.setUnknownLength(false);
+                                downloadMission.setBlocks(new int[0]);
+                                downloadMission.setUnknownLength(false);
                             }
 
-                            Logger.d(TAG, "http response code = " + mConn.getResponseCode());
+                            Logger.d(TAG, "http response code = " + urlConnection.getResponseCode());
                         } else {
                             // Fallback to single thread
-                            mMission.setBlocks(new int[0]);
-                            mMission.setUnknownLength(false);
+                            downloadMission.setBlocks(new int[0]);
+                            downloadMission.setUnknownLength(false);
 
-                            Logger.d(TAG, "falling back due http response code = " + mConn.getResponseCode());
+                            Logger.d(TAG, "falling back due http response code = " + urlConnection.getResponseCode());
                         }
                     }
 
-                    if (!mMission.getRunning() || Thread.interrupted()) {
+                    if (!downloadMission.getRunning() || Thread.interrupted()) {
                         return;
                     }
                 }
 
-                File partFile = mMission.getPartFile();
+                File partFile = downloadMission.getPartFile();
                 DownloadUtils.mkdir(partFile.getParentFile(), true);
 
                 try (FileStream fs = new FileStream(partFile)) {
-                    long desiredLength = mMission.getOffsets()[mMission.getCurrent()] + mMission.getLength();
+                    long desiredLength = downloadMission.getOffsets()[downloadMission.getCurrent()] + downloadMission.getLength();
                     if (desiredLength > 0) {
                         fs.setLength(desiredLength);
                     }
-                    fs.seek(mMission.getOffsets()[mMission.getCurrent()]);
+                    fs.seek(downloadMission.getOffsets()[downloadMission.getCurrent()]);
                 }
 
-                if (!mMission.getRunning() || Thread.interrupted()) {
+                if (!downloadMission.getRunning() || Thread.interrupted()) {
                     return;
                 }
 
-                mMission.setRunning(false);
+                downloadMission.setRunning(false);
                 break;
             } catch (InterruptedIOException | ClosedByInterruptException e) {
                 return;
             } catch (Exception e) {
-                if (!mMission.getRunning() || super.isInterrupted()) {
+                if (!downloadMission.getRunning() || Thread.currentThread().isInterrupted()) {
                     return;
                 }
 
                 if (e instanceof DownloadMission.HttpError
                         && ((DownloadMission.HttpError) e).getStatusCode() == DownloadMission.ERROR_HTTP_FORBIDDEN) {
                     // The YouTube stream url has expired.
-                    mMission.notifyError(DownloadMission.ERROR_HTTP_FORBIDDEN, (DownloadMission.HttpError) e);
+                    downloadMission.notifyError(DownloadMission.ERROR_HTTP_FORBIDDEN, (DownloadMission.HttpError) e);
                     return;
                 }
 
                 if (e instanceof IOException && e.getMessage() != null
                         && e.getMessage().contains("Permission denied")) {
-                    mMission.notifyError(DownloadMission.ERROR_PERMISSION_DENIED, e);
+                    downloadMission.notifyError(DownloadMission.ERROR_PERMISSION_DENIED, e);
                     return;
                 }
 
-                if (retryCount++ > mMission.getMaxRetry()) {
+                if (retryCount++ > downloadMission.getMaxRetry()) {
                     Logger.e(TAG, "initializer failed", e);
-                    mMission.notifyError(e);
+                    downloadMission.notifyError(e);
                     return;
                 }
 
@@ -207,17 +207,15 @@ public class DownloadInitializer extends Thread {
 
         // Do not restart the mission if it was paused while the initializer
         // was finishing.
-        if (isInterrupted()) {
+        if (Thread.currentThread().isInterrupted()) {
             return;
         }
 
-        mMission.start();
+        downloadMission.start();
     }
 
-    @Override
     public void interrupt() {
-        super.interrupt();
-        if (mConn != null) {
+        if (urlConnection != null) {
             dispose();
         }
     }

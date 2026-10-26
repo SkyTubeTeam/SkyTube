@@ -33,7 +33,7 @@ import free.rm.skytube.businessobjects.download.DownloadMission.HttpError;
  *
  * <p>Ported from NewPipe's {@code us.shandian.giga.get.DownloadRunnableFallback}.</p>
  */
-public class DownloadRunnableFallback extends Thread {
+public class DownloadRunnableFallback implements Runnable {
     private static final String TAG = "DLRunnableFallback";
 
     private final DownloadMission downloadMission;
@@ -157,19 +157,6 @@ public class DownloadRunnableFallback extends Thread {
             downloadMission.notifyFinished();
         } else {
             downloadMission.setFallbackResumeOffset(start);
-        }
-    }
-
-    @Override
-    public void interrupt() {
-        super.interrupt();
-
-        if (urlConnection != null) {
-            try {
-                urlConnection.disconnect();
-            } catch (Exception e) {
-                // nothing to do
-            }
         }
     }
 }
