@@ -21,7 +21,9 @@ import android.content.SharedPreferences;
 import android.os.Environment;
 import android.util.Log;
 
-import com.google.gson.Gson;
+import com.grack.nanojson.JsonParser;
+import com.grack.nanojson.JsonParserException;
+import com.grack.nanojson.JsonWriter;
 
 import java.io.File;
 import java.io.IOException;
@@ -91,7 +93,6 @@ public class BackupDatabases {
 
 		final File          backupPath = new File(EXPORT_DIR, generateFileName());
 
-		Gson gson = new Gson();
 
 		// close the databases
 		subscriptionsDb.close();
@@ -108,7 +109,7 @@ public class BackupDatabases {
 			databasesZip.addFile(channelFilteringDb.getDatabasePath());
 			databasesZip.addFile(searchHistoryDb.getDatabasePath());
 
-			databasesZip.addContent(PREFERENCES_JSON, gson.toJson(getImportantKeys()));
+			databasesZip.addContent(PREFERENCES_JSON, JsonWriter.string(getImportantKeys()));
 		}
 		return backupPath.getPath();
 	}
@@ -158,7 +159,12 @@ public class BackupDatabases {
 	private void loadPreferencesFromJson(Map<String, ZipFile.JsonFile> result) {
 		ZipFile.JsonFile jsonFile = result.get(PREFERENCES_JSON);
 		if (jsonFile != null) {
-			Map<String, Object> preferences = new Gson().fromJson(jsonFile.content, Map.class);
+			Map<String, Object> preferences;
+		try {
+			preferences = JsonParser.object().from(jsonFile.content);
+		} catch (JsonParserException e) {
+			throw new RuntimeException(e);
+		}
 
 			SharedPreferences allPreferences = SkyTubeApp.getPreferenceManager();
 			SharedPreferences.Editor editor = allPreferences.edit();
