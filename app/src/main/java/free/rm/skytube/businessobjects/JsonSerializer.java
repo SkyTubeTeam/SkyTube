@@ -17,11 +17,11 @@
 
 package free.rm.skytube.businessobjects;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.grack.nanojson.JsonArray;
+import com.grack.nanojson.JsonObject;
+import com.grack.nanojson.JsonParser;
+import com.grack.nanojson.JsonParserException;
+import com.grack.nanojson.JsonWriter;
 
 import free.rm.skytube.businessobjects.Sponsorblock.SBSegment;
 import free.rm.skytube.businessobjects.Sponsorblock.SBVideoInfo;
@@ -29,84 +29,95 @@ import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 
 public class JsonSerializer {
-    private final Gson gson = new Gson();
 
     public YouTubeVideo fromPersistedVideoJson(String videoJson) {
         if (videoJson == null) {
             return null;
         }
-        JsonElement element = JsonParser.parseString(videoJson);
-        if (element.isJsonNull()) {
+        String trimmed = videoJson.trim();
+        if (trimmed.equals("null")) {
             return null;
         }
-        JsonObject obj = element.getAsJsonObject();
+        try {
+            JsonObject obj = JsonParser.object().from(trimmed);
+            return fromJsonObject(obj);
+        } catch (JsonParserException e) {
+            return null;
+        }
+    }
 
+    private YouTubeVideo fromJsonObject(JsonObject obj) {
         YouTubeVideo video = new YouTubeVideo();
 
         // channel handling (current format)
-        if (obj.has("channel") && !obj.get("channel").isJsonNull()) {
-            video.setChannel(fromJsonObjectChannel(obj.getAsJsonObject("channel")));
+        if (obj.has("channel") && !obj.isNull("channel")) {
+            video.setChannel(fromJsonObjectChannel(obj.getObject("channel")));
         } else if (obj.has("channelId") || obj.has("channelName")) {
             // archaic format (version 2.82 -> 2.90)
-            String channelId = getStringOrNull(obj, "channelId");
-            String channelName = getStringOrNull(obj, "channelName");
+            String channelId = obj.has("channelId") && !obj.isNull("channelId") ? obj.getString("channelId") : null;
+            String channelName = obj.has("channelName") && !obj.isNull("channelName") ? obj.getString("channelName") : null;
             if (channelId != null && channelName != null) {
                 video.setChannel(new YouTubeChannel(channelId, channelName));
             }
         }
 
-        Long likeCount = getLongOrNull(obj, "likeCountNumber");
-        Long dislikeCount = getLongOrNull(obj, "dislikeCountNumber");
-        if (likeCount != null || dislikeCount != null) {
-            video.setLikeDislikeCount(likeCount, dislikeCount);
+        if (obj.has("likeCountNumber") && !obj.isNull("likeCountNumber")) {
+            Long like = obj.getLong("likeCountNumber");
+            Long dislike = null;
+            if (obj.has("dislikeCountNumber") && !obj.isNull("dislikeCountNumber")) {
+                dislike = obj.getLong("dislikeCountNumber");
+            }
+            video.setLikeDislikeCount(like, dislike);
+        } else if (obj.has("dislikeCountNumber") && !obj.isNull("dislikeCountNumber")) {
+            video.setLikeDislikeCount(null, obj.getLong("dislikeCountNumber"));
         }
 
-        if (obj.has("thumbsUpPercentage") && !obj.get("thumbsUpPercentage").isJsonNull()) {
-            video.setThumbsUpPercentage(obj.get("thumbsUpPercentage").getAsInt());
+        if (obj.has("thumbsUpPercentage") && !obj.isNull("thumbsUpPercentage")) {
+            video.setThumbsUpPercentage(obj.getInt("thumbsUpPercentage"));
         }
 
-        if (obj.has("durationInSeconds") && !obj.get("durationInSeconds").isJsonNull()) {
-            video.setDurationInSeconds(obj.get("durationInSeconds").getAsInt());
+        if (obj.has("durationInSeconds") && !obj.isNull("durationInSeconds")) {
+            video.setDurationInSeconds(obj.getInt("durationInSeconds"));
         }
 
-        if (obj.has("viewsCountInt") && !obj.get("viewsCountInt").isJsonNull()) {
-            video.setViewCount(getLongOrNull(obj, "viewsCountInt"));
+        if (obj.has("viewsCountInt") && !obj.isNull("viewsCountInt")) {
+            video.setViewCount(obj.getLong("viewsCountInt"));
         }
 
-        if (obj.has("thumbnailMaxResUrl") && !obj.get("thumbnailMaxResUrl").isJsonNull()) {
-            video.setThumbnailMaxResUrl(obj.get("thumbnailMaxResUrl").getAsString());
+        if (obj.has("thumbnailMaxResUrl") && !obj.isNull("thumbnailMaxResUrl")) {
+            video.setThumbnailMaxResUrl(obj.getString("thumbnailMaxResUrl"));
         }
 
-        if (obj.has("language") && !obj.get("language").isJsonNull()) {
-            video.setLanguage(obj.get("language").getAsString());
+        if (obj.has("language") && !obj.isNull("language")) {
+            video.setLanguage(obj.getString("language"));
         }
 
-        if (obj.has("isLiveStream") && !obj.get("isLiveStream").isJsonNull()) {
-            video.setLiveStream(obj.get("isLiveStream").getAsBoolean());
+        if (obj.has("isLiveStream") && !obj.isNull("isLiveStream")) {
+            video.setLiveStream(obj.getBoolean("isLiveStream"));
         }
 
-        if (obj.has("categoryId") && !obj.get("categoryId").isJsonNull()) {
-            video.setCategoryId(obj.get("categoryId").getAsInt());
+        if (obj.has("categoryId") && !obj.isNull("categoryId")) {
+            video.setCategoryId(obj.getInt("categoryId"));
         }
 
         // CardData fields
-        if (obj.has("id") && !obj.get("id").isJsonNull()) {
-            video.setId(obj.get("id").getAsString());
+        if (obj.has("id") && !obj.isNull("id")) {
+            video.setId(obj.getString("id"));
         }
-        if (obj.has("title") && !obj.get("title").isJsonNull()) {
-            video.setTitle(obj.get("title").getAsString());
+        if (obj.has("title") && !obj.isNull("title")) {
+            video.setTitle(obj.getString("title"));
         }
-        if (obj.has("description") && !obj.get("description").isJsonNull()) {
-            video.setDescription(obj.get("description").getAsString());
+        if (obj.has("description") && !obj.isNull("description")) {
+            video.setDescription(obj.getString("description"));
         }
-        if (obj.has("publishTimestamp") && !obj.get("publishTimestamp").isJsonNull()) {
-            video.setPublishTimestamp(getLongOrNull(obj, "publishTimestamp"));
+        if (obj.has("publishTimestamp") && !obj.isNull("publishTimestamp")) {
+            video.setPublishTimestamp(obj.getLong("publishTimestamp"));
         }
-        if (obj.has("publishTimestampExact") && !obj.get("publishTimestampExact").isJsonNull()) {
-            video.setPublishTimestampExact(obj.get("publishTimestampExact").getAsBoolean());
+        if (obj.has("publishTimestampExact") && !obj.isNull("publishTimestampExact")) {
+            video.setPublishTimestampExact(obj.getBoolean("publishTimestampExact"));
         }
-        if (obj.has("thumbnailUrl") && !obj.get("thumbnailUrl").isJsonNull()) {
-            video.setThumbnailUrl(obj.get("thumbnailUrl").getAsString());
+        if (obj.has("thumbnailUrl") && !obj.isNull("thumbnailUrl")) {
+            video.setThumbnailUrl(obj.getString("thumbnailUrl"));
         }
 
         video.updatePublishTimestampFromDate();
@@ -125,53 +136,53 @@ public class JsonSerializer {
         if (video == null) {
             return "null";
         }
-        return gson.toJson(toVideoJsonObject(video));
+        return JsonWriter.string(toVideoJsonObject(video));
     }
 
     private JsonObject toVideoJsonObject(YouTubeVideo video) {
         JsonObject o = new JsonObject();
         if (video.getChannel() != null) {
-            o.add("channel", toChannelJsonObject(video.getChannel()));
+            o.put("channel", toChannelJsonObject(video.getChannel()));
         }
         if (video.getLikeCountNumber() != null) {
-            o.addProperty("likeCountNumber", video.getLikeCountNumber());
+            o.put("likeCountNumber", video.getLikeCountNumber());
         }
         if (video.getDislikeCountNumber() != null) {
-            o.addProperty("dislikeCountNumber", video.getDislikeCountNumber());
+            o.put("dislikeCountNumber", video.getDislikeCountNumber());
         }
-        o.addProperty("thumbsUpPercentage", video.getThumbsUpPercentage());
+        o.put("thumbsUpPercentage", video.getThumbsUpPercentage());
         if (video.getDuration() != null) {
-            o.addProperty("duration", video.getDuration());
+            o.put("duration", video.getDuration());
         }
-        o.addProperty("durationInSeconds", video.getDurationInSeconds());
+        o.put("durationInSeconds", video.getDurationInSeconds());
         if (video.getViewsCountInt() != null) {
-            o.addProperty("viewsCountInt", video.getViewsCountInt());
+            o.put("viewsCountInt", video.getViewsCountInt());
         }
         if (video.getThumbnailMaxResUrl() != null) {
-            o.addProperty("thumbnailMaxResUrl", video.getThumbnailMaxResUrl());
+            o.put("thumbnailMaxResUrl", video.getThumbnailMaxResUrl());
         }
         if (video.getLanguage() != null) {
-            o.addProperty("language", video.getLanguage());
+            o.put("language", video.getLanguage());
         }
-        o.addProperty("isLiveStream", video.isLiveStream());
+        o.put("isLiveStream", video.isLiveStream());
         if (video.getCategoryId() != null) {
-            o.addProperty("categoryId", video.getCategoryId());
+            o.put("categoryId", video.getCategoryId());
         }
         if (video.getId() != null) {
-            o.addProperty("id", video.getId());
+            o.put("id", video.getId());
         }
         if (video.getTitle() != null) {
-            o.addProperty("title", video.getTitle());
+            o.put("title", video.getTitle());
         }
         if (video.getDescription() != null) {
-            o.addProperty("description", video.getDescription());
+            o.put("description", video.getDescription());
         }
         if (video.getPublishTimestamp() != null) {
-            o.addProperty("publishTimestamp", video.getPublishTimestamp());
+            o.put("publishTimestamp", video.getPublishTimestamp());
         }
-        o.addProperty("publishTimestampExact", video.getPublishTimestampExact());
+        o.put("publishTimestampExact", video.getPublishTimestampExact());
         if (video.getThumbnailUrl() != null) {
-            o.addProperty("thumbnailUrl", video.getThumbnailUrl());
+            o.put("thumbnailUrl", video.getThumbnailUrl());
         }
         return o;
     }
@@ -179,107 +190,113 @@ public class JsonSerializer {
     private JsonObject toChannelJsonObject(YouTubeChannel channel) {
         JsonObject o = new JsonObject();
         if (channel.getBannerUrl() != null) {
-            o.addProperty("bannerUrl", channel.getBannerUrl());
+            o.put("bannerUrl", channel.getBannerUrl());
         }
         if (channel.getTotalSubscribers() != null) {
-            o.addProperty("totalSubscribers", channel.getTotalSubscribers());
+            o.put("totalSubscribers", channel.getTotalSubscribers());
         }
-        o.addProperty("subscriberCount", channel.getSubscriberCount());
-        o.addProperty("isUserSubscribed", channel.isUserSubscribed());
-        o.addProperty("lastVisitTime", channel.getLastVisitTime());
-        o.addProperty("lastCheckTime", channel.getLastCheckTime());
-        o.addProperty("lastVideoTime", channel.getLastVideoTime());
+        o.put("subscriberCount", channel.getSubscriberCount());
+        o.put("isUserSubscribed", channel.isUserSubscribed());
+        o.put("lastVisitTime", channel.getLastVisitTime());
+        o.put("lastCheckTime", channel.getLastCheckTime());
+        o.put("lastVideoTime", channel.getLastVideoTime());
         if (channel.getCategoryId() != null) {
-            o.addProperty("categoryId", channel.getCategoryId());
+            o.put("categoryId", channel.getCategoryId());
         }
         JsonArray videos = new JsonArray();
         for (YouTubeVideo v : channel.getYouTubeVideos()) {
             videos.add(toVideoJsonObject(v));
         }
-        o.add("youTubeVideos", videos);
+        o.put("youTubeVideos", videos);
         JsonArray tags = new JsonArray();
         for (String t : channel.getTags()) {
             tags.add(t);
         }
-        o.add("tags", tags);
+        o.put("tags", tags);
         if (channel.getId() != null) {
-            o.addProperty("id", channel.getId());
+            o.put("id", channel.getId());
         }
         if (channel.getTitle() != null) {
-            o.addProperty("title", channel.getTitle());
+            o.put("title", channel.getTitle());
         }
         if (channel.getDescription() != null) {
-            o.addProperty("description", channel.getDescription());
+            o.put("description", channel.getDescription());
         }
         if (channel.getPublishTimestamp() != null) {
-            o.addProperty("publishTimestamp", channel.getPublishTimestamp());
+            o.put("publishTimestamp", channel.getPublishTimestamp());
         }
-        o.addProperty("publishTimestampExact", channel.getPublishTimestampExact());
+        o.put("publishTimestampExact", channel.getPublishTimestampExact());
         if (channel.getThumbnailUrl() != null) {
-            o.addProperty("thumbnailUrl", channel.getThumbnailUrl());
+            o.put("thumbnailUrl", channel.getThumbnailUrl());
         }
         return o;
     }
 
     private YouTubeChannel fromJsonObjectChannel(JsonObject obj) {
         YouTubeChannel channel = new YouTubeChannel();
-        if (obj.has("bannerUrl") && !obj.get("bannerUrl").isJsonNull()) {
-            channel.setBannerUrl(obj.get("bannerUrl").getAsString());
+        if (obj.has("bannerUrl") && !obj.isNull("bannerUrl")) {
+            channel.setBannerUrl(obj.getString("bannerUrl"));
         }
-        if (obj.has("totalSubscribers") && !obj.get("totalSubscribers").isJsonNull()) {
-            channel.setTotalSubscribers(obj.get("totalSubscribers").getAsString());
+        if (obj.has("totalSubscribers") && !obj.isNull("totalSubscribers")) {
+            channel.setTotalSubscribers(obj.getString("totalSubscribers"));
         }
-        if (obj.has("subscriberCount") && !obj.get("subscriberCount").isJsonNull()) {
-            channel.setSubscriberCount(obj.get("subscriberCount").getAsLong());
+        if (obj.has("subscriberCount") && !obj.isNull("subscriberCount")) {
+            channel.setSubscriberCount(obj.getLong("subscriberCount"));
         }
-        if (obj.has("isUserSubscribed") && !obj.get("isUserSubscribed").isJsonNull()) {
-            channel.setUserSubscribed(obj.get("isUserSubscribed").getAsBoolean());
+        if (obj.has("isUserSubscribed") && !obj.isNull("isUserSubscribed")) {
+            channel.setUserSubscribed(obj.getBoolean("isUserSubscribed"));
         }
-        if (obj.has("lastVisitTime") && !obj.get("lastVisitTime").isJsonNull()) {
-            channel.setLastVisitTime(obj.get("lastVisitTime").getAsLong());
+        if (obj.has("lastVisitTime") && !obj.isNull("lastVisitTime")) {
+            channel.setLastVisitTime(obj.getLong("lastVisitTime"));
         }
-        if (obj.has("lastCheckTime") && !obj.get("lastCheckTime").isJsonNull()) {
-            channel.setLastCheckTime(obj.get("lastCheckTime").getAsLong());
+        if (obj.has("lastCheckTime") && !obj.isNull("lastCheckTime")) {
+            channel.setLastCheckTime(obj.getLong("lastCheckTime"));
         }
-        if (obj.has("lastVideoTime") && !obj.get("lastVideoTime").isJsonNull()) {
-            channel.setLastVideoTime(obj.get("lastVideoTime").getAsLong());
+        if (obj.has("lastVideoTime") && !obj.isNull("lastVideoTime")) {
+            channel.setLastVideoTime(obj.getLong("lastVideoTime"));
         }
-        if (obj.has("categoryId") && !obj.get("categoryId").isJsonNull()) {
-            channel.setCategoryId(obj.get("categoryId").getAsInt());
+        if (obj.has("categoryId") && !obj.isNull("categoryId")) {
+            channel.setCategoryId(obj.getInt("categoryId"));
         }
-        if (obj.has("youTubeVideos") && obj.get("youTubeVideos").isJsonArray()) {
+        if (obj.has("youTubeVideos") && !obj.isNull("youTubeVideos")) {
             channel.getYouTubeVideos().clear();
-            for (JsonElement e : obj.getAsJsonArray("youTubeVideos")) {
-                if (e.isJsonObject()) {
-                    channel.getYouTubeVideos().add(fromPersistedVideoJson(e.toString()));
+            JsonArray arr = obj.getArray("youTubeVideos");
+            if (arr != null) {
+                for (Object e : arr) {
+                    if (e instanceof JsonObject) {
+                        channel.getYouTubeVideos().add(fromJsonObject((JsonObject) e));
+                    }
                 }
             }
         }
-        if (obj.has("tags") && obj.get("tags").isJsonArray()) {
+        if (obj.has("tags") && !obj.isNull("tags")) {
             channel.getTags().clear();
-            for (JsonElement e : obj.getAsJsonArray("tags")) {
-                if (!e.isJsonNull()) {
-                    channel.getTags().add(e.getAsString());
+            JsonArray arr = obj.getArray("tags");
+            if (arr != null) {
+                for (Object e : arr) {
+                    if (e != null) {
+                        channel.getTags().add(String.valueOf(e));
+                    }
                 }
             }
         }
-        if (obj.has("id") && !obj.get("id").isJsonNull()) {
-            channel.setId(obj.get("id").getAsString());
+        if (obj.has("id") && !obj.isNull("id")) {
+            channel.setId(obj.getString("id"));
         }
-        if (obj.has("title") && !obj.get("title").isJsonNull()) {
-            channel.setTitle(obj.get("title").getAsString());
+        if (obj.has("title") && !obj.isNull("title")) {
+            channel.setTitle(obj.getString("title"));
         }
-        if (obj.has("description") && !obj.get("description").isJsonNull()) {
-            channel.setDescription(obj.get("description").getAsString());
+        if (obj.has("description") && !obj.isNull("description")) {
+            channel.setDescription(obj.getString("description"));
         }
-        if (obj.has("publishTimestamp") && !obj.get("publishTimestamp").isJsonNull()) {
-            channel.setPublishTimestamp(getLongOrNull(obj, "publishTimestamp"));
+        if (obj.has("publishTimestamp") && !obj.isNull("publishTimestamp")) {
+            channel.setPublishTimestamp(obj.getLong("publishTimestamp"));
         }
-        if (obj.has("publishTimestampExact") && !obj.get("publishTimestampExact").isJsonNull()) {
-            channel.setPublishTimestampExact(obj.get("publishTimestampExact").getAsBoolean());
+        if (obj.has("publishTimestampExact") && !obj.isNull("publishTimestampExact")) {
+            channel.setPublishTimestampExact(obj.getBoolean("publishTimestampExact"));
         }
-        if (obj.has("thumbnailUrl") && !obj.get("thumbnailUrl").isJsonNull()) {
-            channel.setThumbnailUrl(obj.get("thumbnailUrl").getAsString());
+        if (obj.has("thumbnailUrl") && !obj.isNull("thumbnailUrl")) {
+            channel.setThumbnailUrl(obj.getString("thumbnailUrl"));
         }
         return channel;
     }
@@ -289,61 +306,51 @@ public class JsonSerializer {
             return "null";
         }
         JsonObject root = new JsonObject();
-        root.addProperty("videoDuration", sbVideoInfo.getVideoDuration());
+        root.put("videoDuration", sbVideoInfo.getVideoDuration());
         JsonArray segments = new JsonArray();
         for (SBSegment seg : sbVideoInfo.getSegments()) {
             JsonObject so = new JsonObject();
-            so.addProperty("category", seg.getCategory());
-            so.addProperty("startPos", seg.getStartPos());
-            so.addProperty("endPos", seg.getEndPos());
+            so.put("category", seg.getCategory());
+            so.put("startPos", seg.getStartPos());
+            so.put("endPos", seg.getEndPos());
             segments.add(so);
         }
-        root.add("segments", segments);
-        return gson.toJson(root);
+        root.put("segments", segments);
+        return JsonWriter.string(root);
     }
 
     public SBVideoInfo fromSponsorBlockJson(String sponsorBlockJson) {
         if (sponsorBlockJson == null) {
             return null;
         }
-        JsonElement element = JsonParser.parseString(sponsorBlockJson);
-        if (element.isJsonNull()) {
+        String trimmed = sponsorBlockJson.trim();
+        if (trimmed.equals("null")) {
             return null;
         }
-        JsonObject obj = element.getAsJsonObject();
-        double duration = 0.0;
-        if (obj.has("videoDuration") && !obj.get("videoDuration").isJsonNull()) {
-            duration = obj.get("videoDuration").getAsDouble();
-        }
-        SBVideoInfo info = new SBVideoInfo(duration);
-        if (obj.has("segments") && obj.get("segments").isJsonArray()) {
-            for (JsonElement e : obj.getAsJsonArray("segments")) {
-                if (e.isJsonObject()) {
-                    JsonObject so = e.getAsJsonObject();
-                    String category = so.has("category") && !so.get("category").isJsonNull()
-                            ? so.get("category").getAsString() : null;
-                    double startPos = so.has("startPos") && !so.get("startPos").isJsonNull()
-                            ? so.get("startPos").getAsDouble() : 0.0;
-                    double endPos = so.has("endPos") && !so.get("endPos").isJsonNull()
-                            ? so.get("endPos").getAsDouble() : 0.0;
-                    info.getSegments().add(new SBSegment(category, startPos, endPos));
+        try {
+            JsonObject obj = JsonParser.object().from(trimmed);
+            double duration = 0.0;
+            if (obj.has("videoDuration") && !obj.isNull("videoDuration")) {
+                duration = obj.getDouble("videoDuration");
+            }
+            SBVideoInfo info = new SBVideoInfo(duration);
+            if (obj.has("segments") && !obj.isNull("segments")) {
+                JsonArray arr = obj.getArray("segments");
+                if (arr != null) {
+                    for (Object e : arr) {
+                        if (e instanceof JsonObject) {
+                            JsonObject so = (JsonObject) e;
+                            String category = so.has("category") && !so.isNull("category") ? so.getString("category") : null;
+                            double startPos = so.has("startPos") && !so.isNull("startPos") ? so.getDouble("startPos") : 0.0;
+                            double endPos = so.has("endPos") && !so.isNull("endPos") ? so.getDouble("endPos") : 0.0;
+                            info.getSegments().add(new SBSegment(category, startPos, endPos));
+                        }
+                    }
                 }
             }
-        }
-        return info;
-    }
-
-    private Long getLongOrNull(JsonObject obj, String key) {
-        if (!obj.has(key) || obj.get(key).isJsonNull()) {
+            return info;
+        } catch (JsonParserException e) {
             return null;
         }
-        return obj.get(key).getAsLong();
-    }
-
-    private String getStringOrNull(JsonObject obj, String key) {
-        if (!obj.has(key) || obj.get(key).isJsonNull()) {
-            return null;
-        }
-        return obj.get(key).getAsString();
     }
 }

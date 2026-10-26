@@ -32,11 +32,10 @@ import androidx.core.content.ContextCompat;
 import androidx.core.text.util.LinkifyCompat;
 import androidx.fragment.app.Fragment;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.google.gson.JsonPrimitive;
+import com.grack.nanojson.JsonArray;
+import com.grack.nanojson.JsonObject;
+import com.grack.nanojson.JsonParser;
+import com.grack.nanojson.JsonParserException;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.obsez.android.lib.filechooser.ChooserDialog;
@@ -709,27 +708,31 @@ public class SubscriptionsBackupsManager {
 
         try {
             InputStreamReader fileReader = new InputStreamReader(activity.getContentResolver().openInputStream(uri));
-            jsonArray = JsonParser.parseReader(fileReader).getAsJsonArray();
+            jsonArray = JsonParser.array().from(fileReader);
             fileReader.close();
-        } catch (IOException e) {
+        } catch (IOException | JsonParserException e) {
             Logger.e(this, "An error occurred while reading the file", e);
             Toast.makeText(activity, String.format(activity.getString(R.string.import_subscriptions_parse_error), e.getMessage()), Toast.LENGTH_LONG).show();
             return channels;
         }
 
-        for (JsonElement obj : jsonArray) {
-            JsonObject snippet = obj.getAsJsonObject().getAsJsonObject("snippet");
+        for (Object obj : jsonArray) {
+            if (!(obj instanceof JsonObject)) {
+                continue;
+            }
+            JsonObject root = (JsonObject) obj;
+            JsonObject snippet = root.getObject("snippet");
             if (snippet == null) {
                 continue;
             }
-            JsonPrimitive channelName = snippet.getAsJsonPrimitive("title");
-            JsonObject resourceId = snippet.getAsJsonObject("resourceId");
+            String channelName = snippet.getString("title");
+            JsonObject resourceId = snippet.getObject("resourceId");
             if (resourceId == null) {
                 continue;
             }
-            JsonPrimitive channelId = resourceId.getAsJsonPrimitive("channelId");
+            String channelId = resourceId.getString("channelId");
             if (channelId != null && channelName != null) {
-                channels.add(new MultiSelectListPreferenceItem(channelId.getAsString(), channelName.getAsString()));
+                channels.add(new MultiSelectListPreferenceItem(channelId, channelName));
             }
         }
         return channels;
