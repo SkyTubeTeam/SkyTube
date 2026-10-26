@@ -25,11 +25,6 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.github.skytube.components.utils.SQLiteHelper;
 import com.github.skytube.components.utils.Stopwatch;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonSerializer;
-
 import java.io.IOException;
 import java.time.Instant;
 import java.time.ZoneId;
@@ -49,6 +44,7 @@ import androidx.annotation.Nullable;
 
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.app.Utils;
+import free.rm.skytube.businessobjects.JsonSerializer;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.ChannelView;
 import free.rm.skytube.businessobjects.YouTube.POJOs.PersistentChannel;
@@ -230,17 +226,9 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 
     private void migrateFromJsonColumn(final SQLiteDatabase db) {
         int fullCount = 0;
-        Gson gson = new GsonBuilder().registerTypeAdapter(YouTubeChannel.class, (JsonSerializer<YouTubeChannel>) (src, typeOfSrc, context) -> {
-            JsonObject obj = new JsonObject();
-            obj.addProperty("id", src.getId());
-            obj.addProperty("title", src.getTitle());
-            obj.addProperty("description", src.getDescription());
-            obj.addProperty("thumbnailNormalUrl", src.getThumbnailUrl());
-            obj.addProperty("bannerUrl", src.getBannerUrl());
-            return obj;
-        }).create();
+        JsonSerializer jsonSerializer = new JsonSerializer();
         while (true) {
-            int success = migrateFromJsonColumnBlock(db, gson);
+            int success = migrateFromJsonColumnBlock(db, jsonSerializer);
             if (success > 0) {
                 fullCount += success;
             } else {
@@ -250,7 +238,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
         }
     }
 
-    private int migrateFromJsonColumnBlock(final SQLiteDatabase db, Gson gson) {
+    private int migrateFromJsonColumnBlock(final SQLiteDatabase db, JsonSerializer jsonSerializer) {
         int counter = 0;
         int success = 0;
         try (Cursor cursor = db.query(SubscriptionsVideosTable.TABLE_NAME,
@@ -264,7 +252,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
                 final String videoJson = new String(blob);
 
                 // convert JSON into YouTubeVideo
-                YouTubeVideo video = gson.fromJson(videoJson, YouTubeVideo.class);
+                YouTubeVideo video = jsonSerializer.fromPersistedVideoJson(videoJson);
                 ContentValues values = convertToContentValues(video, null);
                 long rowId = db.insert(SubscriptionsVideosTable.TABLE_NAME_V2, null, values);
                 if (rowId > 0) {

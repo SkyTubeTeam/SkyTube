@@ -186,6 +186,26 @@ public class YouTubeVideo extends CardData implements Serializable {
 		this.viewsCountInt = viewsCountInt;
 	}
 
+	public void setThumbnailMaxResUrl(String thumbnailMaxResUrl) {
+		this.thumbnailMaxResUrl = thumbnailMaxResUrl;
+	}
+
+	public void setLanguage(String language) {
+		this.language = language;
+	}
+
+	public void setLiveStream(boolean liveStream) {
+		this.isLiveStream = liveStream;
+	}
+
+	public void setThumbsUpPercentage(int thumbsUpPercentage) {
+		this.thumbsUpPercentage = thumbsUpPercentage;
+	}
+
+        public YouTubeVideo() {
+            // no-arg constructor for manual (de)serialization
+        }
+
         public YouTubeVideo(String id, String title, String description, long durationInSeconds,
 							YouTubeChannel channel, long viewCount, Instant publishDate,
 							boolean publishDateExact, String thumbnailUrl) {

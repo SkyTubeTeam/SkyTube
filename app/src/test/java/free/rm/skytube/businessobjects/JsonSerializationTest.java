@@ -153,4 +153,49 @@ class JsonSerializationTest {
         Assertions.assertEquals(CHANNEL_TITLE, newVideo.getChannel().getTitle());
     }
 
+    @Test
+    void videoRoundTrip() {
+        String json = serializer.toPersistedVideoJson(video);
+        YouTubeVideo parsed = serializer.fromPersistedVideoJson(json);
+        verifyVideoProperties(parsed);
+        verifyChannel(parsed);
+        Assertions.assertEquals(video.getThumbnailMaxResUrl(), parsed.getThumbnailMaxResUrl());
+    }
+
+    @Test
+    void videoRoundTripFromBytes() {
+        byte[] bytes = serializer.toPersistedVideoJson(video).getBytes(StandardCharsets.UTF_8);
+        YouTubeVideo parsed = serializer.fromPersistedVideoJson(bytes);
+        verifyVideoProperties(parsed);
+        verifyChannel(parsed);
+    }
+
+    @Test
+    void nullVideoRoundTrip() {
+        String json = serializer.toPersistedVideoJson(null);
+        Assertions.assertEquals("null", json);
+        Assertions.assertNull(serializer.fromPersistedVideoJson(json));
+        Assertions.assertNull(serializer.fromPersistedVideoJson((byte[]) null));
+    }
+
+    @Test
+    void sponsorBlockRoundTrip() {
+        String json = serializer.toPersistedSponsorBlockJson(sbVideoInfo);
+        SBVideoInfo parsed = serializer.fromSponsorBlockJson(json);
+        Assertions.assertEquals(sbVideoInfo.getVideoDuration(), parsed.getVideoDuration());
+        Assertions.assertEquals(sbVideoInfo.getSegments().size(), parsed.getSegments().size());
+        for (int i = 0; i < sbVideoInfo.getSegments().size(); i++) {
+            Assertions.assertEquals(sbVideoInfo.getSegments().get(i).getCategory(), parsed.getSegments().get(i).getCategory());
+            Assertions.assertEquals(sbVideoInfo.getSegments().get(i).getStartPos(), parsed.getSegments().get(i).getStartPos());
+            Assertions.assertEquals(sbVideoInfo.getSegments().get(i).getEndPos(), parsed.getSegments().get(i).getEndPos());
+        }
+    }
+
+    @Test
+    void nullSponsorBlockRoundTrip() {
+        String json = serializer.toPersistedSponsorBlockJson(null);
+        Assertions.assertEquals("null", json);
+        Assertions.assertNull(serializer.fromSponsorBlockJson(json));
+        Assertions.assertNull(serializer.fromSponsorBlockJson(null));
+    }
 }
