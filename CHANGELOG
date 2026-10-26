@@ -1,3 +1,6 @@
+v3.001 - 2026-10-26
+ - Upgrade ExoPlayer and port the downloading library from NewPipe to improve download speed and reliability 
+
 v3.000 - 2026-10-20
         * Add a Quality selector to switch video resolution during playback by ialNavy
         * Implement separate audio downloading.

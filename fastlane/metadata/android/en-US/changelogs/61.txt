@@ -1,0 +1,1 @@
+ - Upgrade ExoPlayer and port the downloading library from NewPipe to improve download speed and reliability
