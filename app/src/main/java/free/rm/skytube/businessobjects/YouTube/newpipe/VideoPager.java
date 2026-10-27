@@ -118,7 +118,7 @@ public class VideoPager extends Pager<InfoItem, CardData> {
         String url = channelInfoItem.getUrl();
         String id = getId(url);
         return new YouTubeChannel(id, channelInfoItem.getName(), channelInfoItem.getDescription(), NewPipeUtils.getThumbnailUrl(channelInfoItem), null,
-                channelInfoItem.getSubscriberCount(), false, -1, System.currentTimeMillis(), null, Collections.emptyList());
+                channelInfoItem.getSubscriberCount(), false, -1, System.currentTimeMillis(), null, new ArrayList<>());
     }
 
     private String getId(String url) {

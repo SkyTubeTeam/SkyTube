@@ -243,45 +243,44 @@ public class BookmarksDb extends CardEventEmitterDatabase implements OrderableDa
 	 * @return List of Videos
 	 */
 	public @NonNull Pair<List<YouTubeVideo>, Integer> getBookmarkedVideos(int limit, Integer maxOrderLimit) {
-        //Logger.i(this, "getBookmarkedVideos " + limit + ',' + maxOrderLimit +
-        //        " - " + (maxOrderLimit != null ? BookmarksTable.PAGED_QUERY : BookmarksTable.PAGED_QUERY_UNBOUNDED));
-		SkyTubeApp.nonUiThread();
+        SkyTubeApp.nonUiThread();
 
         SQLiteDatabase db = getReadableDatabase();
-        Cursor	cursor = maxOrderLimit != null ?
+        try (Cursor	cursor = createBookmarkQuery(limit, maxOrderLimit, db)) {
+            List<YouTubeVideo> videos = new ArrayList<>();
+
+            Integer minOrder = null;
+            if(cursor.moveToNext()) {
+                final int colOrder = cursor.getColumnIndex(BookmarksTable.COL_ORDER);
+                final int colVideo = cursor.getColumnIndex(BookmarksTable.COL_YOUTUBE_VIDEO);
+                do {
+                    final byte[] blob = cursor.getBlob(colVideo);
+                    final int currentOrder = cursor.getInt(colOrder);
+
+                    minOrder = Utils.min(currentOrder, minOrder);
+
+                    // convert JSON into YouTubeVideo
+                    YouTubeVideo video = jsonSerializer.fromPersistedVideoJson(blob);
+
+                    // add the video to the list
+                    videos.add(video);
+                } while(cursor.moveToNext());
+            }
+            return Pair.create(videos, minOrder);
+        }
+    }
+
+    private static Cursor createBookmarkQuery(int limit, Integer maxOrderLimit, SQLiteDatabase db) {
+        return maxOrderLimit != null ?
                 db.rawQuery(
-                        BookmarksTable.PAGED_QUERY, new String[] { String.valueOf(maxOrderLimit), String.valueOf(limit)}) :
+                        BookmarksTable.PAGED_QUERY, new String[]{String.valueOf(maxOrderLimit), String.valueOf(limit)}) :
                 db.rawQuery(
-                        BookmarksTable.PAGED_QUERY_UNBOUNDED, new String[] { String.valueOf(limit)});
+                        BookmarksTable.PAGED_QUERY_UNBOUNDED, new String[]{String.valueOf(limit)});
+    }
 
-		List<YouTubeVideo> videos = new ArrayList<>();
-
-		Integer minOrder = null;
-		if(cursor.moveToNext()) {
-			final int colOrder = cursor.getColumnIndex(BookmarksTable.COL_ORDER);
-			final int colVideo = cursor.getColumnIndex(BookmarksTable.COL_YOUTUBE_VIDEO);
-			do {
-				final byte[] blob = cursor.getBlob(colVideo);
-				final int currentOrder = cursor.getInt(colOrder);
-
-                minOrder = Utils.min(currentOrder, minOrder);
-
-				// convert JSON into YouTubeVideo
-				YouTubeVideo video = jsonSerializer.fromPersistedVideoJson(blob);
-
-				// add the video to the list
-				videos.add(video);
-			} while(cursor.moveToNext());
-		}
-
-		cursor.close();
-		return Pair.create(videos, minOrder);
-	}
-
-	/**
-	 *
-	 * @return all the bookmarked video's id.
-	 */
+    /**
+     * @return all the bookmarked video's id.
+     */
 	public @NonNull Set<VideoId> getAllBookmarkedVideoIds() {
 		SkyTubeApp.nonUiThread();
 

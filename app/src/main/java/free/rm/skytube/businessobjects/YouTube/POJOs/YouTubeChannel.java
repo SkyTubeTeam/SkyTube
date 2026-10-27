@@ -63,7 +63,7 @@ public class YouTubeChannel extends CardData implements Serializable {
 	private final List<String> tags;
 
 	public YouTubeChannel() {
-		tags = Collections.emptyList();
+		tags = new ArrayList<>();
 	}
 
 	public YouTubeChannel(String id, String title) {
