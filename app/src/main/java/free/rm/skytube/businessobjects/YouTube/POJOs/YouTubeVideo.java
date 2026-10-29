@@ -535,7 +535,9 @@ public class YouTubeVideo extends CardData implements Serializable {
 						StreamSelectionPolicy.StreamSelection streamSelection =
 								selectionPolicy.withAllowVideoOnly(false).select(streamInfo);
 						if (streamSelection == null) {
-							streamSelection = selectionPolicy.select(streamInfo);
+							// No muxed stream is available: download the video-only and the audio
+							// streams separately, downloading works even if the preference is off.
+							streamSelection = selectionPolicy.withAllowVideoOnly(true).select(streamInfo);
 						}
 						if (streamSelection != null) {
 							// download the video (and the audio separately when it is not muxed)

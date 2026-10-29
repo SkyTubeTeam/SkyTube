@@ -787,7 +787,9 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 												// before the video streams are retrieved (such action would cause the app
 												// to crash if not catered for...).
 												if (isVisible()) {
-													StreamSelectionPolicy selectionPolicy = SkyTubeApp.getSettings().getDesiredVideoResolution(false).withAllowVideoOnly(false);
+													StreamSelectionPolicy selectionPolicy = SkyTubeApp.getSettings().getDesiredVideoResolution(false)
+															.withAllowVideoOnly(false)
+															.withHlsFallback(true);
 													StreamSelectionPolicy.StreamSelection selection = selectionPolicy.select(desiredStream);
 													if (selection != null) {
 														Uri uri = selection.getVideoStreamUri();
@@ -871,7 +873,9 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 											public void onGetDesiredStream(StreamInfo desiredStream, YouTubeVideo youTubeVideo) {
 												Linker.setTextAndLinkify(videoDescriptionBinding.videoDescDescription, youTubeVideo.getDescription());
 
-												StreamSelectionPolicy selectionPolicy = SkyTubeApp.getSettings().getDesiredVideoResolution(false).withAllowVideoOnly(false);
+												StreamSelectionPolicy selectionPolicy = SkyTubeApp.getSettings().getDesiredVideoResolution(false)
+														.withAllowVideoOnly(false)
+														.withHlsFallback(true);
 												StreamSelectionPolicy.StreamSelection selection = selectionPolicy.select(desiredStream);
 												if (selection != null) {
 													Uri uri = selection.getVideoStreamUri();

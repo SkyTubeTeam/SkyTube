@@ -77,9 +77,13 @@ public class DatasourceBuilder {
         final String cacheKey = streamInfo != null ? streamInfo.getId() : null;
         final List<MediaSource> sources = new ArrayList<>();
 
-        sources.add(buildMediaSource(selection.getVideoStream(), streamInfo, cacheKey));
-        if (selection.getAudioStream() != null) {
-            sources.add(buildMediaSource(selection.getAudioStream(), streamInfo, cacheKey));
+        if (selection.isHls()) {
+            sources.add(buildHlsMediaSource(selection.getHlsUrl(), streamInfo, cacheKey));
+        } else {
+            sources.add(buildMediaSource(selection.getVideoStream(), streamInfo, cacheKey));
+            if (selection.getAudioStream() != null) {
+                sources.add(buildMediaSource(selection.getAudioStream(), streamInfo, cacheKey));
+            }
         }
         if (streamInfo != null) {
             addSubtitles(sources, streamInfo);
@@ -103,6 +107,22 @@ public class DatasourceBuilder {
     private MediaSource createLocalSource(Uri uri) {
         return playerDataSource.getCachelessProgressiveMediaSourceFactory()
                 .createMediaSource(new MediaItem.Builder().setUri(uri).build());
+    }
+
+    /**
+     * Builds a media source for an HLS manifest URL. YouTube manifests need the
+     * YouTube specific HTTP data source, other services are played with the generic one.
+     */
+    private MediaSource buildHlsMediaSource(String hlsUrl, @Nullable StreamInfo streamInfo,
+                                            @Nullable String cacheKey) {
+        if (hlsUrl == null || hlsUrl.isEmpty()) {
+            throw new IllegalArgumentException("HLS manifest URL is missing");
+        }
+        final MediaItem item = mediaItem(hlsUrl, cacheKey);
+        if (streamInfo != null && streamInfo.getServiceId() == ServiceList.YouTube.getServiceId()) {
+            return playerDataSource.getYoutubeHlsMediaSourceFactory().createMediaSource(item);
+        }
+        return playerDataSource.getHlsMediaSourceFactory(null).createMediaSource(item);
     }
 
     private MediaSource buildMediaSource(Stream stream, @Nullable StreamInfo streamInfo,

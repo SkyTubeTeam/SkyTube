@@ -47,16 +47,39 @@ public class StreamSelectionPolicy {
     private final VideoResolution maxResolution;
     private final VideoResolution minResolution;
     private final VideoQuality videoQuality;
+    private final boolean allowHlsFallback;
 
     public StreamSelectionPolicy(boolean allowVideoOnly, VideoResolution maxResolution, VideoResolution minResolution, VideoQuality videoQuality) {
+        this(allowVideoOnly, maxResolution, minResolution, videoQuality, false);
+    }
+
+    private StreamSelectionPolicy(boolean allowVideoOnly, VideoResolution maxResolution,
+                                  VideoResolution minResolution, VideoQuality videoQuality,
+                                  boolean allowHlsFallback) {
         this.allowVideoOnly = allowVideoOnly;
         this.maxResolution = maxResolution != VideoResolution.RES_UNKNOWN ? maxResolution : null;
         this.minResolution = minResolution != VideoResolution.RES_UNKNOWN ? minResolution : null;
         this.videoQuality = videoQuality;
+        this.allowHlsFallback = allowHlsFallback;
     }
 
     public StreamSelectionPolicy withAllowVideoOnly(boolean newValue) {
-        return new StreamSelectionPolicy(newValue, maxResolution, minResolution, videoQuality);
+        return new StreamSelectionPolicy(newValue, maxResolution, minResolution, videoQuality, allowHlsFallback);
+    }
+
+    /**
+     * Returns a new policy that falls back to the HLS manifest of the video when no progressive
+     * or adaptive stream can be selected.
+     *
+     * <p>YouTube's player responses do not always contain muxed ({@code formats}) streams, and
+     * a video-only stream is useless without a separate audio track. In such cases the HLS
+     * manifest is the only stream that is guaranteed to contain both video and audio.</p>
+     *
+     * @param newValue whether the HLS manifest should be used as a last resort
+     * @return a new {@code StreamSelectionPolicy}
+     */
+    public StreamSelectionPolicy withHlsFallback(boolean newValue) {
+        return new StreamSelectionPolicy(allowVideoOnly, maxResolution, minResolution, videoQuality, newValue);
     }
 
     /**
@@ -67,7 +90,7 @@ public class StreamSelectionPolicy {
      * @return a new {@code StreamSelectionPolicy} restricted to {@code res}
      */
     public StreamSelectionPolicy withResolution(VideoResolution res) {
-        return new StreamSelectionPolicy(allowVideoOnly, res, res, videoQuality);
+        return new StreamSelectionPolicy(allowVideoOnly, res, res, videoQuality, allowHlsFallback);
     }
 
     public StreamSelection select(StreamInfo streamInfo) {
@@ -78,10 +101,20 @@ public class StreamSelectionPolicy {
                 if (audioStream != null) {
                     return new StreamSelection(videoStreamWithResolution.videoStream, videoStreamWithResolution.resolution, audioStream);
                 }
+                Logger.i(this, "Video-only stream selected, but no audio stream is available");
             } else {
                 return new StreamSelection(videoStreamWithResolution.videoStream, videoStreamWithResolution.resolution, null);
             }
         }
+
+        if (allowHlsFallback) {
+            final String hlsUrl = streamInfo.getHlsUrl();
+            if (hlsUrl != null && !hlsUrl.isEmpty()) {
+                Logger.i(this, "No playable video stream found, falling back to HLS: %s", hlsUrl);
+                return StreamSelection.forHls(hlsUrl);
+            }
+        }
+        Logger.i(this, "No playable stream found, hls fallback enabled: %s", allowHlsFallback);
         return null;
     }
 
@@ -96,6 +129,7 @@ public class StreamSelectionPolicy {
             sb.append(", minResolution=").append(minResolution);
         }
         sb.append(", videoQuality=").append(videoQuality);
+        sb.append(", allowHlsFallback=").append(allowHlsFallback);
         sb.append('}');
         return sb.toString();
     }
@@ -302,22 +336,63 @@ public class StreamSelectionPolicy {
     }
 
     public static class StreamSelection {
+        /** The selected video stream, or {@code null} when {@link #isHls()} is true. */
         final VideoStream videoStream;
         final VideoResolution resolution;
         final AudioStream audioStream;
+        /** The HLS manifest URL, or {@code null} when a progressive/adaptive stream was selected. */
+        final String hlsUrl;
 
         StreamSelection(VideoStream videoStream, VideoResolution resolution, AudioStream audioStream) {
+            this(videoStream, resolution, audioStream, null);
+        }
+
+        private StreamSelection(VideoStream videoStream, VideoResolution resolution,
+                                AudioStream audioStream, String hlsUrl) {
             this.videoStream = videoStream;
             this.resolution = resolution;
             this.audioStream = audioStream;
+            this.hlsUrl = hlsUrl;
+        }
+
+        /**
+         * Creates a selection backed by the HLS manifest of the video. An HLS stream contains
+         * both the video and the audio tracks, so there is no separate video/audio stream.
+         *
+         * @param hlsUrl the HLS manifest URL
+         * @return the HLS based selection
+         */
+        static StreamSelection forHls(String hlsUrl) {
+            return new StreamSelection(null, VideoResolution.RES_UNKNOWN, null, hlsUrl);
         }
 
         public VideoStream getVideoStream() {
             return videoStream;
         }
 
+        /**
+         * @return true if this selection should be played from the HLS manifest
+         */
+        public boolean isHls() {
+            return hlsUrl != null;
+        }
+
+        /**
+         * @return the HLS manifest URL if this is an HLS selection, null otherwise
+         */
+        public String getHlsUrl() {
+            return hlsUrl;
+        }
+
+        /**
+         * Returns the URI to play: the HLS manifest for HLS selections, otherwise the URL of the
+         * selected video stream.
+         */
         public Uri getVideoStreamUri() {
-            return videoStream.isUrl() ? Uri.parse(videoStream.getContent()) : null;
+            if (isHls()) {
+                return Uri.parse(hlsUrl);
+            }
+            return videoStream != null && videoStream.isUrl() ? Uri.parse(videoStream.getContent()) : null;
         }
 
         public Uri getAudioStreamUri() {
