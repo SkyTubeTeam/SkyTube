@@ -1,3 +1,6 @@
+v3.002 - 2026-10-29
+ - Fix video stream selection mechanism
+
 v3.001 - 2026-10-26
  - Upgrade ExoPlayer and port the downloading library from NewPipe to improve download speed and reliability 
 
