@@ -18,6 +18,8 @@ import free.rm.skytube.businessobjects.YouTube.VideoStream.VideoResolution;
 
 public class StreamSelectionPolicyTest {
 
+    private static final String HLS_URL = "https://example.com/manifest.m3u8";
+
     @Test
     void testBestVideoQualitySelection() {
         StreamSelectionPolicy policy = new StreamSelectionPolicy(false, VideoResolution.RES_1080P, VideoResolution.RES_480P, VideoQuality.BEST_QUALITY);
@@ -122,6 +124,88 @@ public class StreamSelectionPolicyTest {
         Assertions.assertEquals(
                 Arrays.asList(VideoResolution.RES_2160P, VideoResolution.RES_1080P),
                 policy.getAvailableResolutions(streamInfo));
+    }
+
+    @Test
+    void testHlsFallbackIsUsedWhenNoStreamsAreAvailable() {
+        StreamInfo streamInfo = streamInfo();
+        streamInfo.setHlsUrl(HLS_URL);
+
+        Assertions.assertNull(policy(true).select(streamInfo),
+                "Without the HLS fallback nothing should be selected");
+
+        StreamSelectionPolicy.StreamSelection selection =
+                policy(true).withHlsFallback(true).select(streamInfo);
+        Assertions.assertNotNull(selection);
+        Assertions.assertTrue(selection.isHls());
+        Assertions.assertEquals(HLS_URL, selection.getHlsUrl());
+        Assertions.assertNull(selection.getVideoStream());
+        Assertions.assertNull(selection.getAudioStream());
+    }
+
+    @Test
+    void testHlsFallbackIsUsedWhenOnlyVideoOnlyStreamsAreAvailable() {
+        StreamInfo streamInfo = streamInfo(
+                Collections.emptyList(),
+                Collections.singletonList(videoStream("1080P", MediaFormat.WEBM, true, true)));
+        streamInfo.setHlsUrl(HLS_URL);
+
+        Assertions.assertNull(policy(false).select(streamInfo),
+                "Video-only streams are not allowed by the policy");
+
+        StreamSelectionPolicy.StreamSelection selection =
+                policy(false).withHlsFallback(true).select(streamInfo);
+        Assertions.assertNotNull(selection);
+        Assertions.assertTrue(selection.isHls());
+    }
+
+    @Test
+    void testHlsFallbackIsUsedWhenVideoOnlyStreamHasNoAudio() {
+        StreamInfo streamInfo = streamInfo(
+                Collections.emptyList(),
+                Collections.singletonList(videoStream("1080P", MediaFormat.WEBM, true, true)));
+        streamInfo.setHlsUrl(HLS_URL);
+
+        Assertions.assertNull(policy(true).select(streamInfo),
+                "A video-only stream without audio is not playable");
+
+        StreamSelectionPolicy.StreamSelection selection =
+                policy(true).withHlsFallback(true).select(streamInfo);
+        Assertions.assertNotNull(selection);
+        Assertions.assertTrue(selection.isHls());
+    }
+
+    @Test
+    void testStreamsArePreferredOverHls() {
+        StreamInfo streamInfo = streamInfo(videoStream("720P", MediaFormat.MPEG_4, true));
+        streamInfo.setHlsUrl(HLS_URL);
+
+        StreamSelectionPolicy.StreamSelection selection =
+                policy(false).withHlsFallback(true).select(streamInfo);
+        Assertions.assertNotNull(selection);
+        Assertions.assertFalse(selection.isHls());
+        Assertions.assertEquals("720P", selection.getVideoStream().resolution);
+    }
+
+    @Test
+    void testNoHlsSelectionWhenThereIsNoManifest() {
+        StreamInfo streamInfo = streamInfo();
+
+        Assertions.assertNull(policy(true).withHlsFallback(true).select(streamInfo));
+    }
+
+    @Test
+    void testHlsFallbackIsPreservedByPolicyCopies() {
+        StreamInfo streamInfo = streamInfo();
+        streamInfo.setHlsUrl(HLS_URL);
+
+        StreamSelectionPolicy.StreamSelection selection = policy(true)
+                .withAllowVideoOnly(false)
+                .withResolution(VideoResolution.RES_720P)
+                .withHlsFallback(true)
+                .select(streamInfo);
+        Assertions.assertNotNull(selection);
+        Assertions.assertTrue(selection.isHls());
     }
 
     private void test(StreamSelectionPolicy policy, String expectedResolution, String... resolutions) {

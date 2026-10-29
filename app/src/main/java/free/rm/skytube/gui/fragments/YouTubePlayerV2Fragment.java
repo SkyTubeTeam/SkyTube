@@ -599,7 +599,8 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
                                                                 // before the video streams are retrieved (such action would cause the app
                                                                 // to crash if not catered for...).
                                                                 if (isVisible()) {
-                                                                    StreamSelectionPolicy selectionPolicy = SkyTubeApp.getSettings().getDesiredVideoResolution(false);
+                                                                    StreamSelectionPolicy selectionPolicy = SkyTubeApp.getSettings().getDesiredVideoResolution(false)
+                                                                            .withHlsFallback(true);
                                                                     StreamSelectionPolicy.StreamSelection selection = selectionPolicy.select(desiredStream);
                                                                     if (selection != null) {
                                                                         Logger.i(YouTubePlayerV2Fragment.this, ">> PLAYING: %s, audio: %s", selection.getVideoStreamUri(), selection.getAudioStreamUri());
