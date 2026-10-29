@@ -24,6 +24,7 @@ import android.system.OsConstants;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -142,6 +143,8 @@ public class DownloadMission extends Mission {
 
     private transient long writingToFileNext;
     private transient volatile boolean writingToFile;
+    /** Thread of the last asynchronous metadata write, or null if none ran yet. */
+    private transient volatile Thread pendingWriteThread;
 
     @NonNull
     private transient Thread[] threads;
@@ -831,7 +834,20 @@ public class DownloadMission extends Mission {
     }
 
     private void writeThisToFileAsync() {
-        runAsync(-2, this::writeThisToFile);
+        pendingWriteThread = runAsync(-2, this::writeThisToFile);
+    }
+
+    /**
+     * Waits for the asynchronous metadata write started by the last call to
+     * {@link #setEnqueued(boolean)}, so callers that need the file to be
+     * complete (e.g. tests) can synchronize with it.
+     */
+    @VisibleForTesting
+    void awaitPendingWrite(long millis) throws InterruptedException {
+        Thread thread = pendingWriteThread;
+        if (thread != null) {
+            thread.join(millis);
+        }
     }
 
     /**

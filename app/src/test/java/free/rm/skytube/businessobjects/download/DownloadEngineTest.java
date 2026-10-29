@@ -502,6 +502,34 @@ public class DownloadEngineTest {
         assertEquals(mission.getId(), notification.getGroups().get(0).id);
     }
 
+    @Test
+    void downloadNotificationDoesNotResurrectResolvedGroup() {
+        DownloadMission mission = new DownloadMission(
+                new String[]{"https://example.com/video"}, new File(tempDir, "video.mp4"));
+        mission.setNotificationGroupId("group-1");
+        mission.setNotificationGroupSize(1);
+        mission.setLength(100);
+        mission.setDone(100);
+
+        DownloadNotification notification = new DownloadNotification();
+        notification.addMission(mission);
+        notification.markFinished(mission);
+        assertTrue(notification.isTerminal());
+
+        // posting the final notification removes the group
+        notification.removeGroup("group-1");
+        assertTrue(notification.isEmpty());
+
+        // late events of the same download must not re-create the group,
+        // otherwise the aggregate notification would never go away
+        notification.addMission(mission);
+        notification.markFinished(mission);
+        notification.markFailed(mission);
+        assertTrue(notification.isEmpty());
+        assertFalse(notification.hasFailure());
+        assertFalse(notification.hasIncompleteGroups());
+    }
+
     /**
      * Minimal HTTP server that supports HEAD and Range requests, so the
      * multi-threaded engine can be exercised without external dependencies.

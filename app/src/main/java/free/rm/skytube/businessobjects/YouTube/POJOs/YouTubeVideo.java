@@ -631,6 +631,19 @@ public class YouTubeVideo extends CardData implements Serializable {
 		private boolean pairFailed = false;
 		/** True once the pair has been registered in the downloads database. */
 		private boolean pairSaved = false;
+		/**
+		 * True once the video file has been downloaded.  Completion is tracked
+		 * with flags (instead of probing the file system) because the
+		 * completion callbacks run on the UI thread, where disk access is
+		 * forbidden by StrictMode.
+		 */
+		private boolean videoCompleted = false;
+		/** URI of the downloaded video file; only valid when {@link #videoCompleted} is true. */
+		private transient Uri videoUri = null;
+		/** True once the audio file has been downloaded. */
+		private boolean audioCompleted = false;
+		/** URI of the downloaded audio file; only valid when {@link #audioCompleted} is true. */
+		private transient Uri audioUri = null;
 
 		VideoDownloader(@Nullable String audioUrl,
 						@Nullable String audioExtension,
@@ -659,21 +672,18 @@ public class YouTubeVideo extends CardData implements Serializable {
 				failPair();
 				return;
 			}
+			videoCompleted = true;
+			videoUri = localFileUri;
 			if (audioUrl == null) {
 				// the video is muxed, the single file is done
 				saveDownload(localFileUri, null);
 				return;
 			}
 
-			// the video file is on disk (either just downloaded or already
-			// present): register the pair as soon as the audio file is there,
+			// register the pair as soon as the audio file is there too,
 			// otherwise (re)start the audio download
-			File audioFile = audioDownloader != null ? audioDownloader.getDownloadDestinationFile() : null;
-			if (audioFile != null && audioFile.exists()) {
-				registerPair(localFileUri, Uri.fromFile(audioFile));
-			} else {
-				downloadAudio();
-			}
+			registerPairIfBothCompleted();
+			downloadAudio();
 		}
 
 		@Override
@@ -708,6 +718,27 @@ public class YouTubeVideo extends CardData implements Serializable {
 					.setAllowedOverRoaming(false)
 					.setAllowedNetworkTypesFlags(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE);
 			audioDownloader.onExternalStoragePermissionsGranted();
+		}
+
+		/**
+		 * Called by the {@link AudioDownloader} when the audio file is on
+		 * disk.
+		 */
+		private void notifyAudioCompleted(Uri uri) {
+			this.audioCompleted = true;
+			this.audioUri = uri;
+			registerPairIfBothCompleted();
+		}
+
+		/**
+		 * Registers the pair once both files have been downloaded.  No disk
+		 * access is involved: the completion of each file is tracked by the
+		 * download callbacks.
+		 */
+		private void registerPairIfBothCompleted() {
+			if (videoCompleted && audioCompleted && videoUri != null && audioUri != null) {
+				registerPair(videoUri, audioUri);
+			}
 		}
 
 		/**
@@ -764,12 +795,9 @@ public class YouTubeVideo extends CardData implements Serializable {
 			}
 
 			// the audio file is on disk: register the pair as soon as the
-			// video file is there too, otherwise the video downloader does
-			// it when its file completes
-			File videoFile = videoDownloader.getDownloadDestinationFile();
-			if (videoFile != null && videoFile.exists()) {
-				videoDownloader.registerPair(Uri.fromFile(videoFile), localFileUri);
-			}
+			// video file is there too, otherwise the video downloader does it
+			// when its file completes
+			videoDownloader.notifyAudioCompleted(localFileUri);
 		}
 
 		@Override

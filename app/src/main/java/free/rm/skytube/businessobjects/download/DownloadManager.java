@@ -24,6 +24,7 @@ import android.net.NetworkInfo;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -294,8 +295,9 @@ public class DownloadManager {
     }
 
     synchronized void setFinished(@NonNull DownloadMission mission) {
-        missionsPending.remove(mission);
-        missionsFinished.add(0, new FinishedMission(mission));
+        if (missionsPending.remove(mission)) {
+            missionsFinished.add(0, new FinishedMission(mission));
+        }
     }
 
     /**
@@ -422,12 +424,32 @@ public class DownloadManager {
         }
     }
 
-    synchronized boolean hasPendingMissions() {
-        return !missionsPending.isEmpty();
+    /**
+     * @return true if at least one mission is still running or waiting to be
+     *         started.  Missions that are finished, paused or otherwise
+     *         dormant do not count: they must not keep the foreground service
+     *         (and its notification) alive.
+     */
+    synchronized boolean hasActiveMissions() {
+        for (DownloadMission mission : missionsPending) {
+            if (mission.getRunning() || mission.getEnqueued()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @NonNull
     synchronized List<DownloadMission> getPendingMissions() {
         return new ArrayList<>(missionsPending);
+    }
+
+    /**
+     * @return a snapshot of the finished missions, most recent first.
+     */
+    @VisibleForTesting
+    @NonNull
+    synchronized List<FinishedMission> getFinishedMissions() {
+        return new ArrayList<>(missionsFinished);
     }
 }

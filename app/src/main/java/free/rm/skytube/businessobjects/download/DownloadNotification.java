@@ -41,13 +41,26 @@ public final class DownloadNotification {
 
     private final Map<String, DownloadMission> tasks = new HashMap<>();
     private final Map<String, Group> groups = new HashMap<>();
+    /**
+     * Groups whose final notification was already posted.  Their missions
+     * must not be tracked again: late progress/finished events (or the
+     * on-disk fallback in the service) would otherwise re-create the group and
+     * leave the aggregate notification stuck in the foreground forever.
+     */
+    private final Set<String> resolvedGroups = new HashSet<>();
     private boolean failed;
 
-    void addMission(@NonNull DownloadMission mission) {
+    synchronized void addMission(@NonNull DownloadMission mission) {
+        if (isResolved(mission)) {
+            return;
+        }
         registerTask(mission);
     }
 
-    void markFinished(@NonNull DownloadMission mission) {
+    synchronized void markFinished(@NonNull DownloadMission mission) {
+        if (isResolved(mission)) {
+            return;
+        }
         registerTask(mission);
         Group group = groupFor(mission);
         if (group.finishedIds.add(mission.getId())) {
@@ -56,6 +69,9 @@ public final class DownloadNotification {
     }
 
     synchronized void markFailed(@NonNull DownloadMission mission) {
+        if (isResolved(mission)) {
+            return;
+        }
         registerTask(mission);
         Group group = groupFor(mission);
         if (group.failedIds.add(mission.getId())) {
@@ -117,11 +133,8 @@ public final class DownloadNotification {
      * group was posted.
      */
     synchronized void removeGroup(@NonNull String groupId) {
-        Group group = groups.remove(groupId);
-        if (group == null) {
-            return;
-        }
-
+        groups.remove(groupId);
+        resolvedGroups.add(groupId);
         tasks.values().removeIf(mission -> groupId.equals(groupKey(mission)));
         if (groups.isEmpty()) {
             clear();
@@ -311,6 +324,10 @@ public final class DownloadNotification {
         return mission.getNotificationGroupId() != null
                 ? mission.getNotificationGroupId()
                 : mission.getId();
+    }
+
+    private boolean isResolved(@NonNull DownloadMission mission) {
+        return resolvedGroups.contains(groupKey(mission));
     }
 
     @NonNull

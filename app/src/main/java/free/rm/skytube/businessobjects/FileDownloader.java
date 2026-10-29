@@ -23,6 +23,7 @@ import android.net.Uri;
 import android.os.Environment;
 import android.webkit.MimeTypeMap;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.io.File;
@@ -34,6 +35,9 @@ import free.rm.skytube.businessobjects.download.DownloadManager;
 import free.rm.skytube.businessobjects.download.DownloadMission;
 import free.rm.skytube.businessobjects.download.DownloadService;
 import free.rm.skytube.gui.activities.PermissionsActivity;
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Single;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 import static free.rm.skytube.app.SkyTubeApp.getContext;
 
@@ -111,29 +115,56 @@ public abstract class FileDownloader implements Serializable, PermissionsActivit
 
 		Uri     remoteFileUri = Uri.parse(remoteFileUrl);
 		String  downloadFileName = getCompleteFileName(remoteFileUri);
+
+		// Creating the destination directory, checking whether the file is
+		// already there and reading the pending mission metadata all access
+		// the disk.  Keep them off the UI thread; the callbacks below are
+		// delivered on the UI thread again.
+		Single.fromCallable(() -> prepareDownload(downloadFileName))
+				.subscribeOn(Schedulers.io())
+				.observeOn(AndroidSchedulers.mainThread())
+				.subscribe(this::startPreparedDownload, this::onDownloadPreparationFailed);
+	}
+
+	/**
+	 * Resolves the destination file and checks the disk for an already
+	 * completed file or a resumable mission.  Runs on a background thread.
+	 */
+	@NonNull
+	private PreparedDownload prepareDownload(@NonNull String downloadFileName) {
 		FileInformation fileInformation = new FileInformation(downloadFileName, parentDirectory, dirType);
-		final File downloadDestinationFile = fileInformation.getFile();
+		File downloadDestinationFile = fileInformation.getFile();
+		boolean storageAvailable = isExternalStorageAvailable();
+
+		// A file is only complete if there is no pending mission for it: a
+		// partially downloaded file must be resumed instead of being treated
+		// as already downloaded.
+		boolean alreadyDownloaded = storageAvailable
+				&& downloadDestinationFile.exists()
+				&& !DownloadManager.hasPendingMission(getContext(), downloadDestinationFile);
+
+		return new PreparedDownload(downloadDestinationFile, storageAvailable, alreadyDownloaded);
+	}
+
+	private void startPreparedDownload(@NonNull PreparedDownload prepared) {
+		final File downloadDestinationFile = prepared.destination;
 
 		Logger.w(this, "Downloading video %s into %s -> %s", outputFileName, outputDirectoryName, downloadDestinationFile.getAbsolutePath());
 
 		this.downloadDestinationFile = downloadDestinationFile;
 
 		// if the external storage is not available then halt the download operation
-		if (!isExternalStorageAvailable()) {
+		if (!prepared.storageAvailable) {
 			reportTask(false);
 			onExternalStorageNotAvailable();
 			return;
 		}
 
-		// A file is only complete if there is no pending mission for it: a
-		// partially downloaded file must be resumed instead of being treated
-		// as already downloaded.
-		if (downloadDestinationFile.exists()
-				&& !DownloadManager.hasPendingMission(getContext(), downloadDestinationFile)) {
+		if (prepared.alreadyDownloaded) {
 			// let the aggregate notification know that this file is done,
 			// even though the download engine never worked on it
 			reportTask(true);
-			onFileDownloadCompleted(true, Uri.parse(downloadDestinationFile.toURI().toString()));
+			onFileDownloadCompleted(true, Uri.fromFile(downloadDestinationFile));
 			return;
 		}
 
@@ -142,8 +173,7 @@ public abstract class FileDownloader implements Serializable, PermissionsActivit
 		completionListener = new DownloadService.MissionCompletionListener() {
 			@Override
 			public void onCompleted(DownloadMission completedMission) {
-				onFileDownloadCompleted(true,
-						Uri.parse(completedMission.getTargetFile().toURI().toString()));
+				onFileDownloadCompleted(true, Uri.fromFile(completedMission.getTargetFile()));
 			}
 
 			@Override
@@ -164,6 +194,15 @@ public abstract class FileDownloader implements Serializable, PermissionsActivit
 			reportTask(false);
 			onDownloadStartFailed(title, re);
 		}
+	}
+
+	private void onDownloadPreparationFailed(@NonNull Throwable error) {
+		Logger.e(this, error, "Cannot prepare the download of %s", title);
+		RuntimeException runtimeException = error instanceof RuntimeException
+				? (RuntimeException) error
+				: new RuntimeException(error);
+		reportTask(false);
+		onDownloadStartFailed(title, runtimeException);
 	}
 
 	private DownloadMission createMission(File downloadDestinationFile) {
@@ -202,22 +241,32 @@ public abstract class FileDownloader implements Serializable, PermissionsActivit
 	 * Deletes the downloaded (or partially downloaded) file of this
 	 * downloader.  The completion listeners of the related download are not
 	 * involved.
+	 *
+	 * <p>The files are removed on a background thread.</p>
 	 */
 	public void deleteDownloadedFile() {
-		if (downloadDestinationFile == null) {
+		final File downloadFile = downloadDestinationFile;
+		if (downloadFile == null) {
 			return;
 		}
-		File partFile = new File(downloadDestinationFile.getAbsolutePath() + ".part");
-		boolean deleted = true;
-		if (partFile.exists() && !partFile.delete()) {
-			deleted = false;
-		}
-		if (downloadDestinationFile.exists() && !downloadDestinationFile.delete()) {
-			deleted = false;
-		}
-		if (!deleted) {
-			Logger.w(this, "Could not delete downloaded file: %s", downloadDestinationFile);
-		}
+
+		Single.fromCallable(() -> {
+			File partFile = new File(downloadFile.getAbsolutePath() + ".part");
+			boolean deleted = true;
+			if (partFile.exists() && !partFile.delete()) {
+				deleted = false;
+			}
+			if (downloadFile.exists() && !downloadFile.delete()) {
+				deleted = false;
+			}
+			return deleted;
+		})
+				.subscribeOn(Schedulers.io())
+				.subscribe(deleted -> {
+					if (!deleted) {
+						Logger.w(this, "Could not delete downloaded file: %s", downloadFile);
+					}
+				}, error -> Logger.e(this, error, "Could not delete downloaded file: %s", downloadFile));
 	}
 
 	private char getKind() {
@@ -439,6 +488,22 @@ public abstract class FileDownloader implements Serializable, PermissionsActivit
 
 		public File getFile() {
 			return file;
+		}
+	}
+
+	/**
+	 * Result of the background disk checks done before a download is started.
+	 */
+	private static final class PreparedDownload {
+		final File destination;
+		final boolean storageAvailable;
+		final boolean alreadyDownloaded;
+
+		PreparedDownload(@NonNull File destination, boolean storageAvailable,
+				boolean alreadyDownloaded) {
+			this.destination = destination;
+			this.storageAvailable = storageAvailable;
+			this.alreadyDownloaded = alreadyDownloaded;
 		}
 	}
 }

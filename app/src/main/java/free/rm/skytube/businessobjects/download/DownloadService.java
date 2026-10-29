@@ -27,6 +27,7 @@ import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.wifi.WifiManager;
 import android.os.Handler;
+import android.os.HandlerThread;
 import android.os.IBinder;
 import android.os.Looper;
 import android.os.Message;
@@ -42,6 +43,7 @@ import androidx.core.app.ServiceCompat;
 import androidx.core.content.ContextCompat;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -103,7 +105,17 @@ public class DownloadService extends Service implements Handler.Callback {
             new AtomicInteger(FIRST_GROUP_NOTIFICATION_ID);
 
     private DownloadManager manager;
-    private Handler handler;
+    /**
+     * Handles the engine state machine.  It is bound to {@link #engineThread}
+     * (and not to the main looper) so that the file checks done while
+     * reconciling the downloads never run on the UI thread.
+     */
+    private volatile Handler handler;
+    private HandlerThread engineThread;
+    /** Set once the service is being destroyed, so queued work stops touching the state. */
+    private volatile boolean shuttingDown;
+    /** Used to deliver the completion callbacks on the UI thread. */
+    private final Handler mainHandler = new Handler(Looper.getMainLooper());
     private NotificationManager notificationManager;
     private PowerManager.WakeLock wakeLock;
     private WifiManager.WifiLock wifiLock;
@@ -112,13 +124,23 @@ public class DownloadService extends Service implements Handler.Callback {
     private DownloadNotification notification;
     /** Pending "resolve this group" checks, one per group id. */
     private final Map<String, Runnable> groupStallChecks = new HashMap<>();
+    /** Missions whose target file was already checked for an on-disk completion. */
+    private final Set<String> diskCheckedMissions = new HashSet<>();
 
     private final BroadcastReceiver connectivityReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if (manager != null) {
-                manager.onNetworkChanged();
-                syncState();
+            Handler currentHandler = handler;
+            if (currentHandler != null) {
+                currentHandler.post(() -> {
+                    if (shuttingDown) {
+                        return;
+                    }
+                    if (manager != null) {
+                        manager.onNetworkChanged();
+                        syncState();
+                    }
+                });
             }
         }
     };
@@ -183,11 +205,31 @@ public class DownloadService extends Service implements Handler.Callback {
     public void onCreate() {
         super.onCreate();
 
-        handler = new Handler(Looper.getMainLooper(), this);
+        engineThread = new HandlerThread(TAG);
+        engineThread.start();
+        handler = new Handler(engineThread.getLooper(), this);
+
         notificationManager = ContextCompat.getSystemService(getApplicationContext(), NotificationManager.class);
 
         createNotificationChannel();
 
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        ContextCompat.registerReceiver(this, connectivityReceiver, filter,
+                ContextCompat.RECEIVER_EXPORTED);
+
+        // Restoring the pending missions reads their metadata from disk, so
+        // the engine is created on the engine thread instead of the UI one.
+        handler.post(this::initializeEngine);
+    }
+
+    /**
+     * Creates the download engine and restores the missions that are still
+     * pending.  Always invoked on the engine thread.
+     */
+    private void initializeEngine() {
+        if (shuttingDown) {
+            return;
+        }
         manager = new DownloadManager(this,
                 (what, mission) -> {
                     Handler currentHandler = handler;
@@ -218,14 +260,28 @@ public class DownloadService extends Service implements Handler.Callback {
         notification = new DownloadNotification();
         restorePendingMissions();
         serviceRunning = true;
-
-        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
-        ContextCompat.registerReceiver(this, connectivityReceiver, filter,
-                ContextCompat.RECEIVER_EXPORTED);
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        Handler currentHandler = handler;
+        if (currentHandler == null) {
+            stopSelf(startId);
+            return START_NOT_STICKY;
+        }
+
+        // Everything that follows can touch the disk (starting a mission
+        // reads/writes its metadata), so it is handed to the engine thread.
+        currentHandler.post(() -> handleStartCommand(intent, startId));
+        return START_NOT_STICKY;
+    }
+
+    private void handleStartCommand(@Nullable Intent intent, int startId) {
+        if (shuttingDown || manager == null || notification == null) {
+            stopSelf(startId);
+            return;
+        }
+
         // A service that was started with startForegroundService (or that is
         // restarted after the process died) must re-enter the foreground
         // state within a few seconds, otherwise Android kills the process.
@@ -240,12 +296,10 @@ public class DownloadService extends Service implements Handler.Callback {
         if (intent == null) {
             // The process was killed (or the system restarted the service):
             // resume everything that is still pending.
-            if (manager != null) {
-                manager.startAllMissions();
-            }
+            manager.startAllMissions();
             restorePendingMissions();
             syncState();
-            return START_NOT_STICKY;
+            return;
         }
 
         if (ACTION_RUN.equals(intent.getAction())) {
@@ -256,7 +310,7 @@ public class DownloadService extends Service implements Handler.Callback {
                 manager.startAllMissions();
             }
             syncState();
-            return START_NOT_STICKY;
+            return;
         }
 
         if (ACTION_TASK_FINISHED.equals(intent.getAction())
@@ -271,8 +325,6 @@ public class DownloadService extends Service implements Handler.Callback {
             }
             syncState();
         }
-
-        return START_NOT_STICKY;
     }
 
     @SuppressWarnings("deprecation")
@@ -288,19 +340,47 @@ public class DownloadService extends Service implements Handler.Callback {
 
     @Override
     public void onDestroy() {
+        shuttingDown = true;
+
         try {
             unregisterReceiver(connectivityReceiver);
         } catch (Exception e) {
             // already unregistered
         }
 
-        if (handler != null) {
-            for (Runnable check : groupStallChecks.values()) {
-                handler.removeCallbacks(check);
-            }
-            handler.removeCallbacksAndMessages(null);
+        ServiceCompat.stopForeground(this, ServiceCompat.STOP_FOREGROUND_REMOVE);
+        foreground = false;
+
+        HandlerThread thread = engineThread;
+        engineThread = null;
+        Handler currentHandler = handler;
+        // Prevent the download threads from queueing any more work.
+        handler = null;
+
+        if (currentHandler != null) {
+            // Pausing the missions persists their state, which touches the
+            // disk: do it on the engine thread before it is stopped.
+            currentHandler.post(() -> {
+                shutdownEngine(currentHandler);
+                if (thread != null) {
+                    thread.quitSafely();
+                }
+            });
+        } else if (thread != null) {
+            thread.quitSafely();
         }
+
+        super.onDestroy();
+    }
+
+    /**
+     * Releases the engine state.  Always invoked on the engine thread, as it
+     * persists the missions and therefore accesses the disk.
+     */
+    private void shutdownEngine(@NonNull Handler engineHandler) {
+        engineHandler.removeCallbacksAndMessages(null);
         groupStallChecks.clear();
+        diskCheckedMissions.clear();
 
         if (manager != null) {
             manager.pauseAllMissions(true);
@@ -321,6 +401,8 @@ public class DownloadService extends Service implements Handler.Callback {
         wifiLock = null;
         notificationManager = null;
 
+        // Make sure an in-flight syncState() cannot leave the service in the
+        // foreground after it has been destroyed.
         ServiceCompat.stopForeground(this, ServiceCompat.STOP_FOREGROUND_REMOVE);
         foreground = false;
         serviceRunning = false;
@@ -328,10 +410,6 @@ public class DownloadService extends Service implements Handler.Callback {
         // Drop any completion listeners that are still registered: the
         // service is going away and will not be able to report their outcome.
         completionListeners.clear();
-
-        handler = null;
-
-        super.onDestroy();
     }
 
     /**
@@ -352,18 +430,23 @@ public class DownloadService extends Service implements Handler.Callback {
      * </ul>
      */
     private void syncState() {
+        if (shuttingDown) {
+            return;
+        }
         if (manager == null || notification == null) {
             stopSelf();
             return;
         }
 
         markFinishedOnDisk();
-        postTerminalGroupNotifications();
+        boolean groupsResolved = postTerminalGroupNotifications();
 
         boolean active = hasActiveMissions()
                 || notification.hasIncompleteGroups();
         updateForegroundState(active);
-        updateNotification();
+        // The aggregate changed (a group reached its end state): do not let
+        // the progress throttle keep the stale "99%" notification on screen.
+        updateNotification(groupsResolved);
         updateLocks();
         scheduleGroupStallChecks();
 
@@ -380,11 +463,25 @@ public class DownloadService extends Service implements Handler.Callback {
      */
     private void markFinishedOnDisk() {
         for (DownloadMission mission : notification.getMissions()) {
+            // The check is done once per mission: normal completions are
+            // reported by the engine, the disk is only needed to recover a
+            // completion that was lost (e.g. the process died right after the
+            // file was renamed).  syncState() runs for every progress update,
+            // so repeating the check would mean a lot of unnecessary I/O.
+            if (!diskCheckedMissions.add(mission.getId())) {
+                continue;
+            }
             if (mission.getTargetFile() == null || mission.getPartFile().exists()) {
                 continue;
             }
             if (mission.getTargetFile().exists()) {
+                // Handle the completion exactly like MESSAGE_FINISHED does,
+                // so the mission is not left in the pending list (which would
+                // keep the service in the foreground forever) and a later
+                // MESSAGE_FINISHED cannot register the mission again.
+                manager.setFinished(mission);
                 notification.markFinished(mission);
+                notifyCompletionListener(mission, null);
             }
         }
     }
@@ -392,34 +489,42 @@ public class DownloadService extends Service implements Handler.Callback {
     /**
      * Posts a dismissible final notification for every logical download that
      * reached its end state, and removes it from the aggregate notification.
+     *
+     * @return true if at least one group was removed from the aggregate
      */
-    private void postTerminalGroupNotifications() {
-        if (notificationManager == null) {
-            return;
-        }
+    private boolean postTerminalGroupNotifications() {
+        boolean removed = false;
 
         for (DownloadNotification.Group group : notification.getGroups()) {
-            if (!group.isTerminal() || notifiedGroups.contains(group.id)) {
+            if (!group.isTerminal()) {
                 continue;
             }
-            notifiedGroups.add(group.id);
 
-            Context appContext = getApplicationContext();
-            String title = group.getTitle().trim().isEmpty()
-                    ? appContext.getString(R.string.downloads)
-                    : group.getTitle();
-            Notification groupNotification = new NotificationCompat.Builder(appContext, NOTIFICATION_CHANNEL)
-                    .setSmallIcon(R.drawable.ic_notification_icon)
-                    .setContentTitle(title)
-                    .setContentText(appContext.getString(group.isFailed()
-                            ? R.string.download_notification_failed
-                            : R.string.download_notification_complete))
-                    .setAutoCancel(true)
-                    .build();
+            // A group that was already announced must still be removed: a
+            // late event may have tracked it again after the final
+            // notification was posted.
+            if (notificationManager != null && notifiedGroups.add(group.id)) {
+                Context appContext = getApplicationContext();
+                String title = group.getTitle().trim().isEmpty()
+                        ? appContext.getString(R.string.downloads)
+                        : group.getTitle();
+                Notification groupNotification = new NotificationCompat.Builder(appContext, NOTIFICATION_CHANNEL)
+                        .setSmallIcon(R.drawable.ic_notification_icon)
+                        .setContentTitle(title)
+                        .setContentText(appContext.getString(group.isFailed()
+                                ? R.string.download_notification_failed
+                                : R.string.download_notification_complete))
+                        .setAutoCancel(true)
+                        .build();
 
-            notificationManager.notify(nextGroupNotificationId.getAndIncrement(), groupNotification);
+                notificationManager.notify(nextGroupNotificationId.getAndIncrement(), groupNotification);
+            }
+
             notification.removeGroup(group.id);
+            removed = true;
         }
+
+        return removed;
     }
 
     /**
@@ -480,6 +585,9 @@ public class DownloadService extends Service implements Handler.Callback {
 
     @Override
     public boolean handleMessage(@NonNull Message msg) {
+        if (shuttingDown) {
+            return true;
+        }
         if (msg.obj == null) {
             syncState();
             return true;
@@ -583,11 +691,16 @@ public class DownloadService extends Service implements Handler.Callback {
             return;
         }
 
-        if (error == null) {
-            listener.onCompleted(mission);
-        } else {
-            listener.onFailed(mission, error);
-        }
+        // The listeners update the UI (toasts, database, ...), so they have
+        // to be invoked on the main thread even though this method runs on the
+        // engine thread.
+        mainHandler.post(() -> {
+            if (error == null) {
+                listener.onCompleted(mission);
+            } else {
+                listener.onFailed(mission, error);
+            }
+        });
     }
 
     private void createNotificationChannel() {
@@ -618,12 +731,16 @@ public class DownloadService extends Service implements Handler.Callback {
     }
 
     private void updateNotification() {
+        updateNotification(false);
+    }
+
+    private void updateNotification(boolean force) {
         if (!foreground || notificationManager == null) {
             return;
         }
 
         long now = SystemClock.elapsedRealtime();
-        if (now - lastNotificationUpdate < 500) {
+        if (!force && now - lastNotificationUpdate < 500) {
             return;
         }
         lastNotificationUpdate = now;
@@ -671,8 +788,7 @@ public class DownloadService extends Service implements Handler.Callback {
     }
 
     private boolean hasActiveMissions() {
-        return manager != null
-                && (manager.getRunningMissionsCount() > 0 || manager.hasPendingMissions());
+        return manager != null && manager.hasActiveMissions();
     }
 
     private void restorePendingMissions() {
