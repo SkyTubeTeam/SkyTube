@@ -9,7 +9,7 @@
     <string name="video_unbookmarked_error">No se pudo eliminar el marcador del video.</string>
     <string name="no_bookmarked_videos_text">Marque algunos videos para encontrarlos aquí.</string>
     <string name="bookmark_share_invalid_url">Solo se puede marcar una URL de YouTube válida.</string>
-    <string name="bookmark_share_label">Marcador SkyTube</string>
+    <string name="bookmark_share_label">Marcador NewTube</string>
     <string name="video_was_not_bookmarked">El video no fue marcado</string>
     <string name="video_already_bookmarked">Ya marcado</string>
 </resources>

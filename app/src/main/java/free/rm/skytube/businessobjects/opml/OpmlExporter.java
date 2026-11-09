@@ -40,7 +40,7 @@ public class OpmlExporter {
     private static final String OPML_HEADER = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
             "<opml version=\"1.0\">\n" +
             "  <head>\n" +
-            "    <title>SkyTube Subscriptions Export</title>\n" +
+            "    <title>NewTube Subscriptions Export</title>\n" +
             "  </head>\n" +
             "  <body>\n";
 
@@ -178,6 +178,6 @@ public class OpmlExporter {
     public static String getDefaultExportFileName() {
         SimpleDateFormat datetimeFormat = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss", Locale.US);
         String currentDatetime = datetimeFormat.format(new Date());
-        return "skytube_subscriptions_" + currentDatetime + ".opml";
+        return "newtube_subscriptions_" + currentDatetime + ".opml";
     }
 }

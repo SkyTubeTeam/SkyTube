@@ -1,0 +1,6 @@
+{
+  "name": "NewTube",
+  "description": "An open-source YouTube video player client.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

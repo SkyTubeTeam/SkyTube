@@ -6,7 +6,7 @@
     <string name="unbookmark">Eemalda järjehoidjate seast</string>
     <string name="video_unbookmarked">Järjehoidja on eemaldatud</string>
     <string name="no_bookmarked_videos_text">Kui tahad siit sisu leida, siis lisa mõned järjehoidjad.</string>
-    <string name="bookmark_share_label">SkyTube järjehoidja</string>
+    <string name="bookmark_share_label">NewTube järjehoidja</string>
     <string name="bookmarks">Järjehoidjad</string>
     <string name="video_bookmarked">Lisatud järjehoidjaks</string>
     <string name="video_bookmarked_error">Video lisamine järjehoidjate hulka ei õnnestunud.</string>

@@ -97,8 +97,8 @@
     <string name="pref_title_chromecast_none">None</string>
     <string name="pref_title_autocast">AutoCast</string>
     <string name="pref_key_autocast" translatable="false">pref_external_launch</string>
-    <string name="pref_summary_autocast">Chromecast device for playback when using other video apps in SkyTube.</string>
-    <string name="pref_network_downloads_category">Network and Downloads</string>
+    <string name="pref_summary_autocast">Chromecast device for playback when using other video apps in NewTube.</string>
+    <string name="pref_network_downloads_category">Network</string>
     <string name="pref_about_category">About</string>
     <string name="pref_title_website">Website</string>
     <string name="pref_key_website" translatable="false">pref_website</string>
@@ -498,7 +498,7 @@
     <string name="pref_key_default_tab" translatable="false">pref_default_tab</string>
     <string name="pref_key_default_tab_name" translatable="false">pref_default_tab_name</string>
     <string name="pref_title_default_tab">Default Tab</string>
-    <string name="pref_summary_default_tab">Tab to show when SkyTube launches: %s</string>
+    <string name="pref_summary_default_tab">Tab to show when NewTube launches: %s</string>
     <string name="pref_key_hide_tabs" translatable="false">pref_hide_tabs</string>
     <string name="pref_title_hide_tabs">Hide Tabs</string>
     <string name="pref_summary_hide_tabs">Choose tabs not to show. Restart required.</string>
@@ -508,7 +508,6 @@
         <item>MainFragment.mostPopularVideosFragment</item>
         <item>MainFragment.subscriptionsFeedFragment</item>
         <item>MainFragment.bookmarksFragment</item>
-        <item>MainFragment.downloadedVideosFragment</item>
     </string-array>
     <string name="pref_key_feed_notification" translatable="false">pref_key_feed_notification</string>
     <string name="pref_title_feed_notification">Feed Auto Notification</string>
@@ -811,7 +810,7 @@
         PRIVACY CONTROL CHECK (STARTUP DIALOG)
     -->
     <string name="privacy_control_title">Privacy features</string>
-    <string name="privacy_control_message">SkyTube provides these privacy-enhancing features. Use the switches below to enable or disable them.</string>
+    <string name="privacy_control_message">NewTube provides these privacy-enhancing features. Use the switches below to enable or disable them.</string>
 
     <!--
         SECURITY

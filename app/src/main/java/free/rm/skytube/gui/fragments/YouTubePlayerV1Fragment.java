@@ -638,8 +638,6 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 
 	@Override
 	public void onPrepareOptionsMenu(@NonNull Menu menu) {
-		DatabaseTasks.updateDownloadedVideoMenu(youTubeVideo, menu);
-
 		if (youTubeVideo != null && youTubeVideo.getChannelId() != null) {
 			menu.findItem(R.id.subscribe_channel).setVisible(true);
 			menu.findItem(R.id.open_channel).setVisible(true);
@@ -703,14 +701,6 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 				startActivity(i);
 				return true;
 
-			case R.id.download_video:
-				final Policy decision = new MobileNetworkWarningDialog(requireContext())
-						.showDownloadWarning(youTubeVideo);
-
-				if (decision == Policy.ALLOW) {
-					youTubeVideo.downloadVideo(getContext()).subscribe();
-				}
-				return true;
 			default:
 				return super.onOptionsItemSelected(item);
 		}
@@ -733,86 +723,57 @@ public class YouTubePlayerV1Fragment extends ImmersiveModeFragment implements Me
 	 */
 	private void loadVideo(boolean showMobileNetworkWarning) {
 		Context ctx = getContext();
-		compositeDisposable.add(
-			DownloadedVideosDb.getVideoDownloadsDb().getDownloadedFileStatus(ctx, youTubeVideo.getVideoId())
-				.subscribe (downloadStatus -> {
-					Policy decision = Policy.ALLOW;
-					Logger.i(YouTubePlayerV1Fragment.this, "Opening video : "+downloadStatus.getLocalVideoFile() + " for "+downloadStatus.getUri());
+		Policy decision = Policy.ALLOW;
 
-					// if the user is using mobile network (i.e. 4g), then warn him
-					if (showMobileNetworkWarning && downloadStatus.getUri() == null) {
-						decision = new MobileNetworkWarningDialog(getActivity())
-							.onPositive((dialog, which) -> loadVideo(false))
-							.onNegativeOrCancel((dialog) -> closeActivity())
-							.showAndGetStatus(MobileNetworkWarningDialog.ActionType.STREAM_VIDEO);
-					}
+		// if the user is using mobile network (i.e. 4g), then warn him
+		if (showMobileNetworkWarning) {
+			decision = new MobileNetworkWarningDialog(getActivity())
+				.onPositive((dialog, which) -> loadVideo(false))
+				.onNegativeOrCancel((dialog) -> closeActivity())
+				.showAndGetStatus(MobileNetworkWarningDialog.ActionType.STREAM_VIDEO);
+		}
 
-					if (decision == Policy.ALLOW) {
-						// if the video is NOT live
-						if (!youTubeVideo.isLiveStream()) {
-							fragmentBinding.loadingVideoView.setVisibility(View.VISIBLE);
-
-							if (downloadStatus.isDisappeared()) {
-								// If the file for this video has gone missing, warn and then play remotely.
-								Toast.makeText(getContext(),
-										getString(R.string.playing_video_file_missing),
-										Toast.LENGTH_LONG).show();
-								loadVideo();
-								return;
-							}
-							if (downloadStatus.getUri() != null) {
+		if (decision == Policy.ALLOW) {
+			// if the video is NOT live
+			if (!youTubeVideo.isLiveStream()) {
+				fragmentBinding.loadingVideoView.setVisibility(View.VISIBLE);
+				compositeDisposable.add(
+					YouTubeTasks.getDesiredStream(youTubeVideo,
+						new GetDesiredStreamListener() {
+							@Override
+							public void onGetDesiredStream(StreamInfo desiredStream, YouTubeVideo video) {
+								// hide the loading video view (progress bar)
 								fragmentBinding.loadingVideoView.setVisibility(View.GONE);
-								Logger.i(this, ">> PLAYING LOCALLY: %s", downloadStatus.getUri());
-								fragmentBinding.videoView.setVideoURI(downloadStatus.getUri());
 
-								// get the video statistics
-								compositeDisposable.add(YouTubeTasks.getVideoDetails(ctx, youTubeVideo.getVideoId())
-										.subscribe(video -> {
-											if (video != null) {
-												setupInfoDisplay(video);
-											}
-										}));
-
-							} else {
-								compositeDisposable.add(
-									YouTubeTasks.getDesiredStream(youTubeVideo,
-										new GetDesiredStreamListener() {
-											@Override
-											public void onGetDesiredStream(StreamInfo desiredStream, YouTubeVideo video) {
-												// hide the loading video view (progress bar)
-												fragmentBinding.loadingVideoView.setVisibility(View.GONE);
-
-												// Play the video.  Check if this fragment is visible before playing the
-												// video.  It might not be visible if the user clicked on the back button
-												// before the video streams are retrieved (such action would cause the app
-												// to crash if not catered for...).
-												if (isVisible()) {
-													StreamSelectionPolicy selectionPolicy = SkyTubeApp.getSettings().getDesiredVideoResolution(false).withAllowVideoOnly(false);
-													StreamSelectionPolicy.StreamSelection selection = selectionPolicy.select(desiredStream);
-													if (selection != null) {
-														Uri uri = selection.getVideoStreamUri();
-														Logger.i(YouTubePlayerV1Fragment.this, ">> PLAYING: %s, audio: %s", uri, selection.getAudioStreamUri());
-														fragmentBinding.videoView.setVideoURI(uri);
-														setupInfoDisplay(video);
-													} else {
-														videoPlaybackError(selectionPolicy.getErrorMessage(getContext()));
-													}
-												}
-											}
-
-											@Override
-											public void onGetDesiredStreamError(Throwable throwable) {
-												if (throwable != null) {
-													videoPlaybackError(throwable.getMessage());
-												}
-											}
-										}).subscribe());
+								// Play the video.  Check if this fragment is visible before playing the
+								// video.  It might not be visible if the user clicked on the back button
+								// before the video streams are retrieved (such action would cause the app
+								// to crash if not catered for...).
+								if (isVisible()) {
+									StreamSelectionPolicy selectionPolicy = SkyTubeApp.getSettings().getDesiredVideoResolution(false).withAllowVideoOnly(false);
+									StreamSelectionPolicy.StreamSelection selection = selectionPolicy.select(desiredStream);
+									if (selection != null) {
+										Uri uri = selection.getVideoStreamUri();
+										Logger.i(YouTubePlayerV1Fragment.this, ">> PLAYING: %s, audio: %s", uri, selection.getAudioStreamUri());
+										fragmentBinding.videoView.setVideoURI(uri);
+										setupInfoDisplay(video);
+									} else {
+										videoPlaybackError(selectionPolicy.getErrorMessage(getContext()));
 									}
-								} else {
-									openAsLiveStream();
 								}
 							}
-						}));
+
+							@Override
+							public void onGetDesiredStreamError(Throwable throwable) {
+								if (throwable != null) {
+									videoPlaybackError(throwable.getMessage());
+								}
+							}
+						}).subscribe());
+			} else {
+				openAsLiveStream();
+			}
+		}
 	}
 
 	private void openAsLiveStream() {

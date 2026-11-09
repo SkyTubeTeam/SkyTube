@@ -1,6 +1,6 @@
 <resources>
 
-	<!-- SkyTube theme -->
+	<!-- NewTube theme -->
 	<style name="AppTheme" parent="Theme.MaterialComponents">
 		<item name="colorPrimary">@color/colorAccent</item>
 		<item name="colorPrimaryDark">@color/colorPrimaryDark</item>

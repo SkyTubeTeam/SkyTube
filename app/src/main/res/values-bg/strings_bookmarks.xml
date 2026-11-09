@@ -10,6 +10,6 @@
     <string name="video_was_not_bookmarked">Видеото не беше добавено в отметките</string>
     <string name="video_unbookmarked_error">Видеото не може да бъде премахнато от отметките.</string>
     <string name="no_bookmarked_videos_text">Когато добавяте видеа в отметките си, ще ги виждате тук.</string>
-    <string name="bookmark_share_label">Отметка на SkyTube</string>
+    <string name="bookmark_share_label">Отметка на NewTube</string>
     <string name="bookmark_share_invalid_url">Само правилни адреси към видеа в YouTube могат да бъдат добавяни в отметките.</string>
 </resources>

@@ -240,19 +240,6 @@ public class GridViewHolder extends RecyclerView.ViewHolder implements Serializa
 			menu.findItem(R.id.mark_unwatched).setVisible(false);
 		}
 
-		boolean online = SkyTubeApp.isConnected(view.getContext());
-
-		menu.findItem(R.id.download_video).setVisible(false);
-		menu.findItem(R.id.delete_download).setVisible(false);
-
-		compositeDisposable.add(DownloadedVideosDb.getVideoDownloadsDb().isVideoDownloaded(youTubeVideo).subscribe(isDownloaded -> {
-			if(isDownloaded) {
-				menu.findItem(R.id.delete_download).setVisible(true);
-			} else {
-				menu.findItem(R.id.download_video).setVisible(online);
-			}
-		}));
-
 		actionHandler.updateBlockingMenuItem(menu);
 		actionHandler.updateSubscribeMenuItem(youTubeVideo.getChannelId(), menu);
 
@@ -290,18 +277,6 @@ public class GridViewHolder extends RecyclerView.ViewHolder implements Serializa
 					Intent i = new Intent(context, ThumbnailViewerActivity.class);
 					i.putExtra(ThumbnailViewerActivity.YOUTUBE_VIDEO, youTubeVideo);
 					context.startActivity(i);
-					return true;
-				case R.id.delete_download:
-					compositeDisposable.add(
-							DownloadedVideosDb.getVideoDownloadsDb().removeDownload(context, youTubeVideo.getVideoId()).subscribe());
-					return true;
-				case R.id.download_video:
-					final Policy decision = new MobileNetworkWarningDialog(view.getContext())
-							.showDownloadWarning(youTubeVideo);
-
-					if (decision == Policy.ALLOW) {
-						youTubeVideo.downloadVideo(context).subscribe();
-					}
 					return true;
 			}
 			return false;

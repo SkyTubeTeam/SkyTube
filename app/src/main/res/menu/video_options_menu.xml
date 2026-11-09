@@ -16,13 +16,6 @@
         android:id="@+id/unbookmark_video"
         android:title="@string/unbookmark"
         android:visible="false"/>
-	<item
-		android:id="@+id/download_video"
-		android:title="@string/download"/>
-	<item
-		android:id="@+id/delete_download"
-		android:title="@string/delete_download"
-		android:visible="false"/>
 	<item android:id="@+id/channel_related" android:title="@string/channel_related">
 		<menu>
 			<item

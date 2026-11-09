@@ -314,36 +314,14 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
                         playbackStateListener.ended();
                     }
 
-                    boolean askForDelete = askForDelete(error);
-                    String errorMessage = error.getCause().getMessage();
+                    String errorMessage = error.getCause() != null ? error.getCause().getMessage() : error.getMessage();
                     Context ctx = YouTubePlayerV2Fragment.this.getContext();
                     new SkyTubeMaterialDialog(ctx)
                             .onNegativeOrCancel(dialog -> closeActivity())
-                            .content(askForDelete ? R.string.error_downloaded_file_is_corrupted : R.string.error_video_parse_error, errorMessage)
+                            .content(R.string.error_video_parse_error, errorMessage)
                             .title(R.string.error_video_play)
                             .negativeText(R.string.close)
-                            .positiveText(null)
-                            .positiveText(askForDelete ? R.string.delete_download : 0)
-                            .onPositive((dialog, which) -> {
-                                if (askForDelete) {
-                                    compositeDisposable.add(
-                                            DownloadedVideosDb.getVideoDownloadsDb().removeDownload(ctx, youTubeVideo.getVideoId())
-                                                    .subscribe(
-                                                            status -> closeActivity(),
-                                                            err -> Logger.e(YouTubePlayerV2Fragment.this, "Error:" + err.getMessage(), err)));
-                                } else {
-                                    closeActivity();
-                                }
-                            }).show();
-                }
-
-                private boolean askForDelete(ExoPlaybackException error) {
-                    Throwable cause = error.getCause();
-                    if (cause instanceof UnrecognizedInputFormatException) {
-                        UnrecognizedInputFormatException uie = (UnrecognizedInputFormatException) cause;
-                        return "file".equals(uie.uri.getScheme());
-                    }
-                    return false;
+                            .show();
                 }
             });
             player.setPlayWhenReady(true);
@@ -520,88 +498,58 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
      */
     private void loadVideo(boolean showMobileNetworkWarning) {
         Context ctx = getContext();
-        compositeDisposable.add(
-                DownloadedVideosDb.getVideoDownloadsDb().getDownloadedFileStatus(ctx, videoId)
-                        .subscribe(downloadStatus -> {
-                            Policy decision = Policy.ALLOW;
+        Policy decision = Policy.ALLOW;
 
-                            // if the user is using mobile network (i.e. 4g), then warn him
-                            if (showMobileNetworkWarning && downloadStatus.getUri() == null) {
-                                decision = new MobileNetworkWarningDialog(getActivity())
-                                        .onPositive((dialog, which) -> loadVideo(false))
-                                        .onNegativeOrCancel((dialog) -> closeActivity())
-                                        .showAndGetStatus(MobileNetworkWarningDialog.ActionType.STREAM_VIDEO);
-                            }
+        // if the user is using mobile network (i.e. 4g), then warn him
+        if (showMobileNetworkWarning) {
+            decision = new MobileNetworkWarningDialog(getActivity())
+                    .onPositive((dialog, which) -> loadVideo(false))
+                    .onNegativeOrCancel((dialog) -> closeActivity())
+                    .showAndGetStatus(MobileNetworkWarningDialog.ActionType.STREAM_VIDEO);
+        }
 
-                            if (decision == Policy.ALLOW) {
-                                // if the video is NOT live
-                                if (!youTubeVideo.isLiveStream()) {
-                                    fragmentBinding.loadingVideoView.setVisibility(View.VISIBLE);
-
-                                    if (downloadStatus.isDisappeared()) {
-                                        // If the file for this video has gone missing, warn and then play remotely.
-                                        Toast.makeText(getContext(),
-                                                getString(R.string.playing_video_file_missing),
-                                                Toast.LENGTH_LONG).show();
-                                        loadVideo();
-                                        return;
-                                    }
-                                    if (downloadStatus.getUri() != null) {
+        if (decision == Policy.ALLOW) {
+            // if the video is NOT live
+            if (!youTubeVideo.isLiveStream()) {
+                fragmentBinding.loadingVideoView.setVisibility(View.VISIBLE);
+                compositeDisposable.add(
+                        YouTubeTasks.getDesiredStream(youTubeVideo,
+                                new GetDesiredStreamListener() {
+                                    @Override
+                                    public void onGetDesiredStream(StreamInfo desiredStream, YouTubeVideo video) {
+                                        // hide the loading video view (progress bar)
                                         fragmentBinding.loadingVideoView.setVisibility(View.GONE);
-                                        Logger.i(this, ">> PLAYING LOCALLY: %s", downloadStatus.getUri());
-                                        playVideo(downloadStatus.getUri(), downloadStatus.getAudioUri(), null);
 
-                                        retrieveSponsorBlockIfPossible();
-
-                                        // get the video statistics
-                                        compositeDisposable.add(YouTubeTasks.getVideoDetails(ctx, youTubeVideo.getVideoId())
-                                                .subscribe(video -> {
-                                                    if (video != null) {
-                                                        setupInfoDisplay(video);
-                                                    }
-                                                }));
-
-                                    } else {
-                                        compositeDisposable.add(
-                                                YouTubeTasks.getDesiredStream(youTubeVideo,
-                                                        new GetDesiredStreamListener() {
-                                                            @Override
-                                                            public void onGetDesiredStream(StreamInfo desiredStream, YouTubeVideo video) {
-                                                                // hide the loading video view (progress bar)
-                                                                fragmentBinding.loadingVideoView.setVisibility(View.GONE);
-
-                                                                // Play the video.  Check if this fragment is visible before playing the
-                                                                // video.  It might not be visible if the user clicked on the back button
-                                                                // before the video streams are retrieved (such action would cause the app
-                                                                // to crash if not catered for...).
-                                                                if (isVisible()) {
-                                                                    StreamSelectionPolicy selectionPolicy = SkyTubeApp.getSettings().getDesiredVideoResolution(false);
-                                                                    StreamSelectionPolicy.StreamSelection selection = selectionPolicy.select(desiredStream);
-                                                                    if (selection != null) {
-                                                                        Uri uri = selection.getVideoStreamUri();
-                                                                        Logger.i(YouTubePlayerV2Fragment.this, ">> PLAYING: %s, audio: %s", uri, selection.getAudioStreamUri());
-                                                                        playVideo(uri, selection.getAudioStreamUri(), desiredStream);
-                                                                        setupInfoDisplay(video);
-                                                                    } else {
-                                                                        videoPlaybackError(selectionPolicy.getErrorMessage(getContext()));
-                                                                    }
-                                                                }
-                                                            }
-
-                                                            @Override
-                                                            public void onGetDesiredStreamError(Throwable throwable) {
-                                                                Logger.e(YouTubePlayerV2Fragment.this, "Error during getting desired stream:" + throwable, throwable);
-                                                                if (throwable != null) {
-                                                                    videoPlaybackError(throwable.getMessage());
-                                                                }
-                                                            }
-                                                        }).subscribe());
+                                        // Play the video.  Check if this fragment is visible before playing the
+                                        // video.  It might not be visible if the user clicked on the back button
+                                        // before the video streams are retrieved (such action would cause the app
+                                        // to crash if not catered for...).
+                                        if (isVisible()) {
+                                            StreamSelectionPolicy selectionPolicy = SkyTubeApp.getSettings().getDesiredVideoResolution(false);
+                                            StreamSelectionPolicy.StreamSelection selection = selectionPolicy.select(desiredStream);
+                                            if (selection != null) {
+                                                Uri uri = selection.getVideoStreamUri();
+                                                Logger.i(YouTubePlayerV2Fragment.this, ">> PLAYING: %s, audio: %s", uri, selection.getAudioStreamUri());
+                                                playVideo(uri, selection.getAudioStreamUri(), desiredStream);
+                                                setupInfoDisplay(video);
+                                            } else {
+                                                videoPlaybackError(selectionPolicy.getErrorMessage(getContext()));
+                                            }
+                                        }
                                     }
-                                } else {
-                                    openAsLiveStream();
-                                }
-                            }
-                        }));
+
+                                    @Override
+                                    public void onGetDesiredStreamError(Throwable throwable) {
+                                        Logger.e(YouTubePlayerV2Fragment.this, "Error during getting desired stream:" + throwable, throwable);
+                                        if (throwable != null) {
+                                            videoPlaybackError(throwable.getMessage());
+                                        }
+                                    }
+                                }).subscribe());
+            } else {
+                openAsLiveStream();
+            }
+        }
     }
 
     private void videoPlaybackError(String errorMessage) {
@@ -652,7 +600,6 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 
     @Override
     public void onPrepareOptionsMenu(@NonNull Menu menu) {
-        DatabaseTasks.updateDownloadedVideoMenu(youTubeVideo, menu);
         final MenuItem subscribeChannel = menu.findItem(R.id.subscribe_channel);
         final MenuItem openChannel = menu.findItem(R.id.open_channel);
         if (youTubeVideo != null && youTubeVideo.getChannelId() != null) {
@@ -729,14 +676,6 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
                 startActivity(i);
                 return true;
 
-            case R.id.download_video:
-                final Policy decision = new MobileNetworkWarningDialog(context)
-                        .showDownloadWarning(youTubeVideo);
-
-                if (decision == Policy.ALLOW) {
-                    youTubeVideo.downloadVideo(context).subscribe();
-                }
-                return true;
             case R.id.disable_gestures:
                 boolean disableGestures = !item.isChecked();
                 item.setChecked(disableGestures);

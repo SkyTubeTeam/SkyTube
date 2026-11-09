@@ -129,8 +129,6 @@ public class MainActivity extends BaseActivity {
 		EventBus.getInstance().registerMainActivityListener(this);
 
 		SkyTubeApp.setFeedUpdateInterval(SkyTubeApp.getSettings().getFeedUpdaterInterval());
-		// Delete any missing downloaded videos
-		new DownloadedVideosDb.RemoveMissingVideosTask().executeInParallel();
 
 		setContentView(binding.getRoot());
 

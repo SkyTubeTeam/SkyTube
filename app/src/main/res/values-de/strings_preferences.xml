@@ -43,7 +43,7 @@
     <string name="i_agree">Ich stimme zu</string>
     <string name="pref_other_category">Weitere</string>
     <string name="pref_title_default_tab">Standard-Tab</string>
-    <string name="pref_summary_default_tab">Tab, welcher beim Start von SkyTube angezeigt werden soll: %s</string>
+    <string name="pref_summary_default_tab">Tab, welcher beim Start von NewTube angezeigt werden soll: %s</string>
     <string name="pref_title_screen_orientation">Bildschirmausrichtung</string>
     <string name="pref_summary_screen_orientation">Videoplayerausrichtung: %s</string>
     <string-array name="screen_orientations">
@@ -133,7 +133,7 @@
     <string name="pref_summary_hide_tabs">Wählen Sie Registerkarten, die nicht angezeigt werden sollen. Neustart erforderlich.</string>
     <string name="pref_title_hide_tabs">Registerkarten ausblenden</string>
     <string name="pref_network_downloads_category">Netzwerk und Downloads</string>
-    <string name="pref_summary_autocast">Das Chromecast-Gerät, wenn andere Apps zum Öffnen von Videos in SkyTube verwendet werden.</string>
+    <string name="pref_summary_autocast">Das Chromecast-Gerät, wenn andere Apps zum Öffnen von Videos in NewTube verwendet werden.</string>
     <string name="pref_title_autocast">AutoCast</string>
     <string name="pref_title_chromecast_none">Keine</string>
     <string name="pref_chromecast_category">Chromecast</string>

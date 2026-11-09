@@ -148,19 +148,6 @@ public class DatabaseTasks {
                 }, error -> Log.e(TAG, "Error checking bookmark status for " + videoId, error));
     }
 
-    public static void updateDownloadedVideoMenu(@NonNull YouTubeVideo video, @NonNull Menu menu) {
-        final MenuItem downloadVideo = menu.findItem(R.id.download_video);
-        downloadVideo.setVisible(false);
-        if (video != null) {
-            DownloadedVideosDb.getVideoDownloadsDb().isVideoDownloaded(video.getVideoId()).subscribe(isDownloaded -> {
-                SkyTubeApp.uiThread();
-                if (!isDownloaded) {
-                    downloadVideo.setVisible(true);
-                }
-            }, error -> Log.e(TAG, "Error checking download status for " + video, error));
-        }
-    }
-
     /**
      * A task that checks if the passed {@link YouTubeVideo} is marked as watched, to update the passed {@link Menu} accordingly.
      */

@@ -2,7 +2,7 @@
 <resources>
     <string name="video_bookmarked_error">El vídeo no es pot guardar a marcadors.</string>
     <string name="bookmark_share_invalid_url">Només es pot guardar a marcadors les URL de YouTube vàlides.</string>
-    <string name="bookmark_share_label">Marcadors d\'SkyTube</string>
+    <string name="bookmark_share_label">Marcadors d\'NewTube</string>
     <string name="no_bookmarked_videos_text">No tens cap vídeo a marcadors.
 \n
 \nQuan en tinguis, apareixeran aquí.</string>

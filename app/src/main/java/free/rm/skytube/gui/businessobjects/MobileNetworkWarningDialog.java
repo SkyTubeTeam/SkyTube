@@ -1,5 +1,5 @@
 /*
- * SkyTube
+ * NewTube
  * Copyright (C) 2018  Ramon Mifsud
  *
  * This program is free software: you can redistribute it and/or modify
@@ -28,13 +28,10 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.app.enums.Policy;
-import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 
 /**
  * Dialog that warns the user to enable the wi-fi if the device is connected to mobile network
- * (such 4G).  The dialog will ask the user to either cancel the download or proceed.
- *
- * <p>This dialog is available for (1) video downloads and (2) video streaming.</p>
+ * (such 4G).
  */
 public class MobileNetworkWarningDialog extends SkyTubeMaterialDialog {
 
@@ -42,12 +39,10 @@ public class MobileNetworkWarningDialog extends SkyTubeMaterialDialog {
 		super(context);
 	}
 
-
 	/**
-	 * Display the dialog.  The dialog message/contents will be determained by the {@link .actionType}.
+	 * Display the dialog for video streaming.
 	 *
-	 * @param actionType    Action Type:  either video downloads or video streaming.
-	 *
+	 * @param actionType Action Type.
 	 * @return Policy which needs to be followed, either BLOCK or ALLOW - or ASK, when a warning dialog is displayed.
 	 */
 	public Policy showAndGetStatus(ActionType actionType) {
@@ -65,26 +60,15 @@ public class MobileNetworkWarningDialog extends SkyTubeMaterialDialog {
 					return Policy.ALLOW;
 				case ASK:
 					title(R.string.metered_network);
-					content(actionType == ActionType.STREAM_VIDEO ? R.string.warning_metered_network_play
-							: R.string.warning_metered_network_download);
+					content(R.string.warning_metered_network_play);
 					checkBoxPromptRes(R.string.warning_metered_network_disable, false, null);
-					positiveText(actionType == ActionType.STREAM_VIDEO ?  R.string.play_video : R.string.download_video);
+					positiveText(R.string.play_video);
 					show();
 					return Policy.ASK;
 			}
 		}
 
 		return Policy.ALLOW;
-	}
-
-	/**
-	 * Display a warning about downloading this video.
-	 * @param youTubeVideo
-	 * @return Policy which needs to be followed, either BLOCK or ALLOW - or ASK, when a warning dialog is displayed.
-	 */
-	public Policy showDownloadWarning(YouTubeVideo youTubeVideo) {
-		onPositive((dialog, which) -> youTubeVideo.downloadVideo(getContext()).subscribe());
-		return showAndGetStatus(MobileNetworkWarningDialog.ActionType.DOWNLOAD_VIDEO);
 	}
 
 	@Override
@@ -117,9 +101,7 @@ public class MobileNetworkWarningDialog extends SkyTubeMaterialDialog {
 	 */
 	public enum ActionType {
 		/** User wants to stream/play video. */
-		STREAM_VIDEO,
-		/** User wants to download the video and save it on the device. */
-		DOWNLOAD_VIDEO
+		STREAM_VIDEO
 	}
 
 }

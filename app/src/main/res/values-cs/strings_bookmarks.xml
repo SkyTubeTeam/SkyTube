@@ -10,6 +10,6 @@
     <string name="video_was_not_bookmarked">Toto video nebylo uloženo do záložek</string>
     <string name="video_unbookmarked_error">Nebylo možné odebrat záložku.</string>
     <string name="no_bookmarked_videos_text">Videa která si přidáte do záložek se objeví tady.</string>
-    <string name="bookmark_share_label">Záložka SkyTube</string>
+    <string name="bookmark_share_label">Záložka NewTube</string>
     <string name="bookmark_share_invalid_url">Pouze platná adresa URL YouTube se dá uložit do záložek.</string>
 </resources>

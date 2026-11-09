@@ -46,7 +46,7 @@
     <string name="subs_import_select_backup">Επιλέξτε το αρχείο YouTube XML για εισαγωγή</string>
     <string name="pref_chromecast_category">Συσκευή Chromecast</string>
     <string name="pref_title_chromecast_none">Τίποτα</string>
-    <string name="pref_summary_autocast">Συσκευή Chromecast για αναπαραγωγή όταν χρησιμοποιείτε άλλες εφαρμογές βίντεο στο SkyTube.</string>
+    <string name="pref_summary_autocast">Συσκευή Chromecast για αναπαραγωγή όταν χρησιμοποιείτε άλλες εφαρμογές βίντεο στο NewTube.</string>
     <string name="pref_network_downloads_category">Δίκτυο και Λήψεις</string>
     <string name="pref_about_category">Σχετικά με</string>
     <string name="pref_title_website">Ιστοσελίδα</string>
@@ -60,7 +60,7 @@
     <string name="system_default_country">Σύστημα</string>
     <string name="pref_other_category">Άλλα</string>
     <string name="pref_title_default_tab">Προεπιλεγμένη Καρτέλα</string>
-    <string name="pref_summary_default_tab">Καρτέλα για εμφάνιση όταν ξεκινά το SkyTube: %s</string>
+    <string name="pref_summary_default_tab">Καρτέλα για εμφάνιση όταν ξεκινά το NewTube: %s</string>
     <string name="pref_title_hide_tabs">Απόκρυψη Καρτελών</string>
     <string name="pref_summary_hide_tabs">Επιλέξτε καρτέλες για να μην εμφανίζονται. Απαιτείται επανεκκίνηση.</string>
     <string name="pref_hide_tabs_restart">Επανεκκινήστε την εφαρμογή για να χρησιμοποιήσετε αυτές τις καρτέλες.</string>

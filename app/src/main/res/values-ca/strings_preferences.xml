@@ -132,7 +132,7 @@
     <string name="pref_hide_tabs_restart">Reinicieu l\'aplicació per mostrar les pestanyes actualitzades.</string>
     <string name="pref_summary_hide_tabs">Trieu quines pestanyes no s\'han de mostrar. Cal reiniciar.</string>
     <string name="pref_title_hide_tabs">Amaga les pestanyes</string>
-    <string name="pref_summary_default_tab">Pestanya predeterminada a mostrar quan s\'inicia SkyTube: %s</string>
+    <string name="pref_summary_default_tab">Pestanya predeterminada a mostrar quan s\'inicia NewTube: %s</string>
     <string name="pref_title_default_tab">Pestanya predeterminada</string>
     <string name="pref_other_category">Altres</string>
     <string name="system_default_country">País Predeterminat del Sistema</string>
@@ -147,7 +147,7 @@
     <string name="pref_title_website">Lloc web</string>
     <string name="pref_about_category">Quan a</string>
     <string name="pref_network_downloads_category">Xarxa i descàrregues</string>
-    <string name="pref_summary_autocast">Seleccioneu un dispositiu Chromecast per utilitzar quan feu servir altres aplicacions per obrir vídeos a SkyTube.</string>
+    <string name="pref_summary_autocast">Seleccioneu un dispositiu Chromecast per utilitzar quan feu servir altres aplicacions per obrir vídeos a NewTube.</string>
     <string name="pref_title_autocast">AutoCast</string>
     <string name="pref_title_chromecast_none">Cap</string>
     <string name="pref_chromecast_category">Chromecast</string>

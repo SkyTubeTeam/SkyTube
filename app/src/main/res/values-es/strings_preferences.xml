@@ -43,7 +43,7 @@
     <string name="i_agree">Acepto</string>
     <string name="pref_other_category">Otros</string>
     <string name="pref_title_default_tab">Pestaña por defecto</string>
-    <string name="pref_summary_default_tab">Pestaña cuando abres SkyTube: %s</string>
+    <string name="pref_summary_default_tab">Pestaña cuando abres NewTube: %s</string>
     <string name="pref_title_screen_orientation">Orientación de pantalla</string>
     <string name="pref_summary_screen_orientation">Orientación del reproductor de vídeo: %s</string>
     <string-array name="screen_orientations">
@@ -133,7 +133,7 @@
     <string name="pref_summary_hide_tabs">Elegir pestañas para no mostrar. Necesita reinicio.</string>
     <string name="pref_title_hide_tabs">Ocultar pestañas</string>
     <string name="pref_network_downloads_category">Redes y Descargas</string>
-    <string name="pref_summary_autocast">Reproductor Chromecast para reproducción al usar otras apps de vídeo en SkyTube.</string>
+    <string name="pref_summary_autocast">Reproductor Chromecast para reproducción al usar otras apps de vídeo en NewTube.</string>
     <string name="pref_title_autocast">Guardado automático</string>
     <string name="pref_title_chromecast_none">Ninguno</string>
     <string name="pref_chromecast_category">Reproductor Chromecast</string>

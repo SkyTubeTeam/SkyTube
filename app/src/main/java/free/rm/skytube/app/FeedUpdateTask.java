@@ -37,7 +37,7 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 
 public class FeedUpdateTask {
-    private static final String NOTIFICATION_CHANNEL_NAME = "SkyTube";
+    private static final String NOTIFICATION_CHANNEL_NAME = "NewTube";
     private static final String TAG = "SkyTubeApp";
     private static final String NOTIFICATION_CHANNEL_ID = "subscriptionChecking";
     private static final int NOTIFICATION_ID = 1;

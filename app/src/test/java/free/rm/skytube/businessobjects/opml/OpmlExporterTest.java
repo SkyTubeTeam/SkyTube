@@ -66,15 +66,15 @@ public class OpmlExporterTest {
     public void testDefaultExportFileName() {
         String fileName = OpmlExporter.getDefaultExportFileName();
 
-        Assertions.assertTrue(fileName.startsWith("skytube_subscriptions_"),
-                "File name should start with skytube_subscriptions_");
+        Assertions.assertTrue(fileName.startsWith("newtube_subscriptions_"),
+                "File name should start with newtube_subscriptions_");
         Assertions.assertTrue(fileName.endsWith(".opml"),
                 "File name should end with .opml");
-        Assertions.assertTrue(fileName.length() > "skytube_subscriptions_.opml".length(),
+        Assertions.assertTrue(fileName.length() > "newtube_subscriptions_.opml".length(),
                 "File name should contain datetime");
 
         // Verify ISO datetime format (yyyy-MM-dd_HH-mm-ss)
-        String datetimePart = fileName.replace("skytube_subscriptions_", "").replace(".opml", "");
+        String datetimePart = fileName.replace("newtube_subscriptions_", "").replace(".opml", "");
         Assertions.assertTrue(datetimePart.matches("\\d{4}-\\d{2}-\\d{2}_\\d{2}-\\d{2}-\\d{2}"),
                 "File name should contain ISO datetime format (yyyy-MM-dd_HH-mm-ss)");
     }
@@ -216,7 +216,7 @@ public class OpmlExporterTest {
         // Verify title in head
         NodeList titleElements = document.getElementsByTagName("title");
         Assertions.assertEquals(1, titleElements.getLength(), "Should have exactly one title element");
-        Assertions.assertEquals("SkyTube Subscriptions Export", titleElements.item(0).getTextContent(), "Title should be 'SkyTube Subscriptions Export'");
+        Assertions.assertEquals("NewTube Subscriptions Export", titleElements.item(0).getTextContent(), "Title should be 'NewTube Subscriptions Export'");
 
         // Verify body section
         NodeList bodyElements = document.getElementsByTagName("body");

@@ -26,7 +26,7 @@
     <string name="subs_import_select_backup">İdxal etmək üçün YouTube XML faylını seçin</string>
     <string name="system_default_country">Sistem</string>
     <string name="pref_summary_hide_tabs">Göstərilməyəcək panelləri seçin. Yenidən başlatma tələb olunur.</string>
-    <string name="pref_summary_autocast">SkyTube\'da digər video tətbiqlərini istifadə edərkən oynatmaq üçün istifadə ediləcək Chromecast cihazı.</string>
+    <string name="pref_summary_autocast">NewTube\'da digər video tətbiqlərini istifadə edərkən oynatmaq üçün istifadə ediləcək Chromecast cihazı.</string>
     <string name="app_license">Müəlliflik Hüququ © 2015–2018 Ramon Mifsud
 \n
 \nBu tətbiq pulsuzdur: siz onu Azad Proqram Təminatı Fondu (Lisenziyanın 3-cü versiyası) tərəfindən dərc edilən GNU Ümumi İctimai Lisenziyasının şərtlərinə uyğun olaraq yenidən paylaya və/yaxud dəyişdirə bilərsiniz.
@@ -78,7 +78,7 @@
     <string name="i_agree">Razıyam</string>
     <string name="pref_other_category">Digərləri</string>
     <string name="pref_title_default_tab">Standart Səhifə</string>
-    <string name="pref_summary_default_tab">SkyTube işə salındıqda göstəriləcək panel: %s</string>
+    <string name="pref_summary_default_tab">NewTube işə salındıqda göstəriləcək panel: %s</string>
     <string name="pref_title_hide_tabs">Panelləri Gizlədin</string>
     <string name="pref_hide_tabs_restart">Bu panellərin istifadəsi üçün tətbiqi yenidən başlat.</string>
     <string name="pref_title_feed_notification">Avtomatik Axın Bildirişi</string>

@@ -35,7 +35,7 @@
     <string name="pref_chromecast_category">Chromecast</string>
     <string name="pref_title_chromecast_none">Puudub</string>
     <string name="pref_title_autocast">AutoCast</string>
-    <string name="pref_summary_autocast">Chromecast\'i laadne seade meedia esitamiseks, kui SkyTube\'is on kasutusel teised videorakendused.</string>
+    <string name="pref_summary_autocast">Chromecast\'i laadne seade meedia esitamiseks, kui NewTube\'is on kasutusel teised videorakendused.</string>
     <string name="pref_network_downloads_category">Võrk ja allalaadimised</string>
     <string name="pref_about_category">Teave</string>
     <string name="pref_title_website">Veebisait</string>
@@ -48,7 +48,7 @@
     <string name="pref_other_category">Muud</string>
     <string name="system_default_country">Süsteemi määratud</string>
     <string name="pref_title_default_tab">Vaikimisi vaade</string>
-    <string name="pref_summary_default_tab">Missugust vahekaarti näitame SkyTube\'i käivitamisel: %s</string>
+    <string name="pref_summary_default_tab">Missugust vahekaarti näitame NewTube\'i käivitamisel: %s</string>
     <string name="pref_summary_hide_tabs">Vali vahelehed, mida sa ei soovi näha. Seadistuse jõustamiseks palun käivita rakendus uuesti.</string>
     <string name="pref_title_clear_playback_status">Kustuta meedia esitamise olekud</string>
     <string name="pref_disable_playback_status_deleted">Meedia esitamise olekud on kustutatud.</string>

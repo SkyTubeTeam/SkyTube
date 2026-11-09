@@ -7,7 +7,7 @@
     <string name="video_was_not_bookmarked">Το βίντεο δεν απθηκεύτηκε στους σελιδοδείκτες</string>
     <string name="video_unbookmarked_error">Αποτυχία αφαίρεσης του βίντεο από τους σελιδοδείκτες.</string>
     <string name="no_bookmarked_videos_text">Προσθέστε μερικά βίντεο στους σελιδοδείκτες για να τα βρείτε εδώ.</string>
-    <string name="bookmark_share_label">Σελιδοδείκτης SkyTube</string>
+    <string name="bookmark_share_label">Σελιδοδείκτης NewTube</string>
     <string name="bookmark_share_invalid_url">Μόνο έγκυροι σύνδεσμοι του YouTube μπορούν να προστεθούν στους σελιδοδείκτες.</string>
     <string name="video_unbookmarked">Το βίντεο αφαιρέθηκε απο τους σελιδοδείκτες</string>
     <string name="video_bookmarked">Το βίντεο προστέθηκε στους σελιδοδείκτες</string>

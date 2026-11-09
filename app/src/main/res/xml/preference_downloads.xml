@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ SkyTube
+  ~ NewTube
   ~ Copyright (C) 2019  Zsombor Gegesy
   ~
   ~ This program is free software: you can redistribute it and/or modify
@@ -16,25 +16,6 @@
   ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   -->
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <PreferenceCategory
-        app:key="downloads"
-        app:title="@string/pref_category_downloads"
-        app:iconSpaceReserved="false">
-
-        <CheckBoxPreference
-            app:defaultValue="false"
-            app:key="@string/pref_key_download_to_separate_directories"
-            app:title="@string/pref_title_download_to_separate_directories"
-            app:summary="@string/pref_summary_download_to_separate_directories"
-            app:iconSpaceReserved="false" />
-
-        <Preference
-            app:title="@string/pref_title_video_download_folder"
-            app:key="@string/pref_key_video_download_folder"
-            app:summary="@string/pref_summary_video_download_folder"
-            app:iconSpaceReserved="false" />
-    </PreferenceCategory>
 
     <PreferenceCategory
         app:key="videoplayer_resolutions"
@@ -58,32 +39,6 @@
         app:title="@string/pref_key_video_quality_title"
         app:summary="@string/pref_key_video_quality_summary"
         app:iconSpaceReserved="false" />
-
-    </PreferenceCategory>
-
-
-    <PreferenceCategory
-        app:key="download_resolutions"
-        app:title="@string/pref_category_download_resolutions"
-        app:iconSpaceReserved="false">
-
-        <ListPreference
-            app:key="@string/pref_key_video_download_maximum_resolution"
-            app:title="@string/pref_video_download_maximum_resolution_title"
-            app:summary="@string/pref_video_download_maximum_resolution_summary"
-            app:iconSpaceReserved="false" />
-
-        <ListPreference
-            app:key="@string/pref_key_video_download_minimum_resolution"
-            app:title="@string/pref_video_download_minimum_resolution_title"
-            app:summary="@string/pref_video_download_minimum_resolution_summary"
-            app:iconSpaceReserved="false" />
-
-        <ListPreference
-            app:key="@string/pref_key_video_quality_for_downloads"
-            app:title="@string/pref_key_video_quality_for_downloads_title"
-            app:summary="@string/pref_key_video_quality_for_downloads_summary"
-            app:iconSpaceReserved="false" />
 
     </PreferenceCategory>
 

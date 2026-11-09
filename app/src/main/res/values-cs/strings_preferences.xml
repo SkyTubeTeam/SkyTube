@@ -71,7 +71,7 @@
     <string name="pref_other_category">Ostatní</string>
     <string name="pref_title_hide_tabs">Skrýt karty</string>
     <string name="pref_title_default_tab">Výchozí karta</string>
-    <string name="pref_summary_default_tab">Karta která se zobrazí při spuštění SkyTube: %s</string>
+    <string name="pref_summary_default_tab">Karta která se zobrazí při spuštění NewTube: %s</string>
     <string name="pref_title_disable_screen_gestures">Žádná gesta videí</string>
     <string name="pref_summary_hide_tabs">Zvolte karty, které nebudou zobrazovány. Vyžadován restart aplikace.</string>
     <string name="pref_hide_tabs_restart">Restartovat aplikaci pro použití zvolených karet.</string>
@@ -117,7 +117,7 @@
     <string name="pref_summary_minimum_res_metered">Volba nejmenšího rozlišení, které se použije při připojení přes zpoplatněné připojení: %s</string>
     <string name="pref_summary_maximum_res_metered">Volba největšího rozlišení, které se použije při připojení přes zpoplatněné připojení: %s</string>
     <string name="pref_title_maximum_res_metered">Nejvyšší rozlišení pro zpoplatněné připojení</string>
-    <string name="pref_summary_autocast">Zařízení Chromecast pro přehrávání během používání jiné video aplikace ve SkyTube.</string>
+    <string name="pref_summary_autocast">Zařízení Chromecast pro přehrávání během používání jiné video aplikace ve NewTube.</string>
     <string name="app_license">Copyright © 2015–2018 Ramon Mifsud
 \n
 \nTento program je svobodný software: můžete jej šířít a/nebo modifikovat pod podmínkami GNU General Public Licence publikované nadací Free Software Foundation (verze 3 licence).

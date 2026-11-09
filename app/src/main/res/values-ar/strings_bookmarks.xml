@@ -9,7 +9,7 @@
     <string name="video_unbookmarked_error">لا يمكن إزالة إشارة الفيديو.</string>
     <string name="no_bookmarked_videos_text">ضع إشارة مرجعية على بعض الفيديوهات لتجدها هنا.</string>
     <string name="bookmark_share_invalid_url">يمكن وضع إشارة مرجعية على عناوين URL الصالحة على YouTube فقط.</string>
-    <string name="bookmark_share_label">إشارة مرجعية SkyTube</string>
+    <string name="bookmark_share_label">إشارة مرجعية NewTube</string>
     <string name="video_was_not_bookmarked">لم يتم وضع إشارة مرجعية على الفيديو</string>
     <string name="video_already_bookmarked">تم وضع إشارة مرجعية بالفعل</string>
 </resources>

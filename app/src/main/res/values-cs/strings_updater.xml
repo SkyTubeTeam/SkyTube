@@ -5,13 +5,13 @@
     <string name="later">Později</string>
     <string name="update_failure">Nepodařilo se nainstalovat novou verzi aplikace.</string>
     <string name="downloading">Stahuji…</string>
-    <string name="android_too_old">Bohužel vaše verze Androidu je příliš stará pro aktualizaci aplikace. Budete muset ručně nainstalovat variantu \'SkyTube Legacy\'!</string>
-    <string name="update_dialog_msg">Je dostupná nová verze SkyTube %s, která bude instalována.</string>
-    <string name="up_to_date_msg">Máte nainstalovanou nejnovější verzi SkyTube.</string>
+    <string name="android_too_old">Bohužel vaše verze Androidu je příliš stará pro aktualizaci aplikace. Budete muset ručně nainstalovat variantu \'NewTube Legacy\'!</string>
+    <string name="update_dialog_msg">Je dostupná nová verze NewTube %s, která bude instalována.</string>
+    <string name="up_to_date_msg">Máte nainstalovanou nejnovější verzi NewTube.</string>
     <string name="update">Aktualizovat</string>
     <string name="update_available">Je dostupná nová verze</string>
     <string name="unable_to_check_for_updates">Nepodařilo se zkontrolovat aktualizace: %s</string>
-    <string name="update_available_fdroid">Je k dispozici nová verze SkyTube. Verze %s je dostupná na F-Droid.</string>
+    <string name="update_available_fdroid">Je k dispozici nová verze NewTube. Verze %s je dostupná na F-Droid.</string>
     <string name="update_open_fdroid">Otevřít F-Droid</string>
     <string name="fdroid_web_page_opened">Otevírá se webová stránka F-Droid ve vašem prohlížeči. Prosím, aktualizaci si nainstalujte odtud.</string>
     <string name="fdroid_open_failed">Nepodařilo se otevřít F-Droid. Prosím, nainstalujte ho z f-droid.org a zkuste to znovu.</string>
