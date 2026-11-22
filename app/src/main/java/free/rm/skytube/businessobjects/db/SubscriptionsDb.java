@@ -76,10 +76,11 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 	private static final String IS_SUBSCRIBED_QUERY = String.format("SELECT EXISTS(SELECT %s FROM %s WHERE %s =?) AS VAL ", SubscriptionsTable.COL_ID, SubscriptionsTable.TABLE_NAME, SubscriptionsTable.COL_CHANNEL_ID);
 
     private static final String GET_PK_FROM_CHANNEL_ID = "SELECT " + LocalChannelTable.COL_ID.name() + " FROM " + LocalChannelTable.TABLE_NAME + " WHERE " + LocalChannelTable.COL_CHANNEL_ID.name() + " = ?";
+    private static final String GET_SUBSCRIPTION_ID = "SELECT " + SubscriptionsTable.COL_ID + " FROM " + SubscriptionsTable.TABLE_NAME + " WHERE " + SubscriptionsTable.COL_CHANNEL_ID + " = ?";
 
 	private static volatile SubscriptionsDb subscriptionsDb = null;
 
-    private static final int DATABASE_VERSION = 18;
+    private static final int DATABASE_VERSION = 19;
 
     private static final String DATABASE_NAME = "subs.db";
 
@@ -98,7 +99,7 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(SubscriptionsTable.getCreateStatement());
-        SubscriptionsVideosTable.addNewFlatTable(db, false);
+        SubscriptionsVideosTable.addNewFlatTable(db, false, true);
         SubscriptionsVideosTable.addPublishTimeIndex(db);
         db.execSQL(LocalChannelTable.getCreateStatement(true));
         LocalChannelTable.addChannelIdIndex(db);
@@ -178,6 +179,34 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
             SubscriptionsTable.addChannelIdColumn(db);
             LocalChannelTable.addStateColumn(db);
         }
+        if (upgrade.executeStep(19)) {
+            makeSubsIdMandatory(db);
+        }
+    }
+
+    /**
+     * Fills in missing subscription ids and makes the column mandatory. Feed videos without a
+     * matching subscription are removed: they would be orphaned rows from earlier versions.
+     */
+    private void makeSubsIdMandatory(final SQLiteDatabase db) {
+        Logger.w(this, "Making subscription_videos.subs_id mandatory");
+        final String videosTable = SubscriptionsVideosTable.TABLE_NAME_V2;
+        final String subsId = SubscriptionsVideosTable.COL_SUBS_ID.name();
+        final String channelPk = SubscriptionsVideosTable.COL_CHANNEL_PK.name();
+        final String channelId = SubscriptionsVideosTable.COL_CHANNEL_ID_V2.name();
+
+        db.execSQL("update " + videosTable + " set " + subsId +
+                " = (select s." + SubscriptionsTable.COL_ID + " from " + SubscriptionsTable.TABLE_NAME + " s" +
+                " where s." + SubscriptionsTable.COL_CHANNEL_PK.name() + " = " + videosTable + '.' + channelPk + ")" +
+                " where " + subsId + " is null and " + channelPk + " is not null");
+        // fall back to the channel id in case channel_pk is missing or stale
+        db.execSQL("update " + videosTable + " set " + subsId +
+                " = (select s." + SubscriptionsTable.COL_ID + " from " + SubscriptionsTable.TABLE_NAME + " s" +
+                " where s." + SubscriptionsTable.COL_CHANNEL_ID + " = " + videosTable + '.' + channelId + ")" +
+                " where " + subsId + " is null");
+        db.execSQL("delete from " + videosTable + " where " + subsId + " is null");
+
+        SubscriptionsVideosTable.makeSubsIdMandatory(db);
     }
 
     private void normalizeSubscriptionVideosTable(final SQLiteDatabase db) {
@@ -295,10 +324,28 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 	 */
 	public DatabaseResult subscribe(PersistentChannel persistentChannel, Collection<YouTubeVideo> videos) {
 		SkyTubeApp.nonUiThread();
-		saveChannelVideos(videos, persistentChannel, false);
+		// Create the subscription first: the videos are stored with the subscription id (Subs._id),
+		// which is not known yet for a channel the user never subscribed to before.
+		DatabaseResult result = saveSubscription(persistentChannel.channelPk(), persistentChannel.getChannelId());
+		if (result == DatabaseResult.ERROR) {
+			return result;
+		}
 
-		return saveSubscription(persistentChannel.channelPk(), persistentChannel.getChannelId());
+		Long subscriptionPk = getSubscriptionPk(persistentChannel.getChannelId());
+		if (subscriptionPk == null) {
+			Logger.e(this, "Subscription not found after subscribing to %s", persistentChannel.getChannelId());
+		}
+		saveChannelVideos(videos, persistentChannel.withSubscriptionPk(subscriptionPk), false);
+
+		return result;
 	}
+
+    private @Nullable Long getSubscriptionPk(ChannelId channelId) {
+        SkyTubeApp.nonUiThread();
+        try (Cursor cursor = getReadableDatabase().rawQuery(GET_SUBSCRIPTION_ID, toArrayParam(channelId))) {
+            return cursor.moveToFirst() ? cursor.getLong(0) : null;
+        }
+    }
 
 	/**
 	 * Saves the given channel into the subscriptions DB.
@@ -343,10 +390,17 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 	public DatabaseResult unsubscribe(PersistentChannel channel) {
 		SkyTubeApp.nonUiThread();
         Logger.i(this, "unsubscribing subs_id= %s, channel_id = %s, channel_pk = %s", channel.subscriptionPk(), channel.getChannelId(), channel.channelPk());
-        // delete any feed videos pertaining to this channel
+        // Delete any feed videos pertaining to this channel. Videos saved before the subscription
+        // row existed can have a NULL subs_id, so match the channel as well.
         getWritableDatabase().delete(SubscriptionsVideosTable.TABLE_NAME_V2,
-                SubscriptionsVideosTable.COL_SUBS_ID.name() + " = ?",
-                toArray(channel.subscriptionPk()));
+                SubscriptionsVideosTable.COL_SUBS_ID.name() + " = ? OR "
+                        + SubscriptionsVideosTable.COL_CHANNEL_PK.name() + " = ? OR "
+                        + SubscriptionsVideosTable.COL_CHANNEL_ID_V2.name() + " = ?",
+                new String[]{
+                        String.valueOf(channel.subscriptionPk()),
+                        String.valueOf(channel.channelPk()),
+                        channel.getChannelId().getRawId()
+                });
 
         // remove this channel from the subscriptions DB
         int rowsDeleted = getWritableDatabase().delete(SubscriptionsTable.TABLE_NAME,
@@ -579,6 +633,10 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
 	 */
 	public void saveChannelVideos(Collection<YouTubeVideo> videos, PersistentChannel persistentChannel, boolean doUpdate) {
         SkyTubeApp.nonUiThread();
+        if (persistentChannel == null || persistentChannel.subscriptionPk() == null) {
+            // Only videos belonging to a subscription have a place in the feed (subs_id is mandatory).
+            return;
+        }
         SQLiteDatabase db = getWritableDatabase();
         long latestPublishTimestamp = 0;
 
