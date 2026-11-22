@@ -771,11 +771,12 @@ public class SubscriptionsBackupsManager {
     public void displayImportSubscriptionsFromYouTubeDialog() {
         SpannableString msg = new SpannableString(activity.getText(R.string.import_subscriptions_description));
         LinkifyCompat.addLinks(msg, Linkify.WEB_URLS);
+        isUnsubscribeAllChecked = false;
         new SkyTubeMaterialDialog(activity)
                 .title(R.string.import_subscriptions)
                 .content(msg)
                 .positiveText(R.string.select_sub_file)
-                .checkBoxPromptRes(R.string.unsubscribe_from_all_current_sibbed_channels, false, (compoundButton, b) -> isUnsubscribeAllChecked = true)
+                .checkBoxPromptRes(R.string.unsubscribe_from_all_current_sibbed_channels, false, (compoundButton, b) -> isUnsubscribeAllChecked = b)
                 .onPositive((dialog, which) -> launchImportFilePicker())
                 .build()
                 .show();
