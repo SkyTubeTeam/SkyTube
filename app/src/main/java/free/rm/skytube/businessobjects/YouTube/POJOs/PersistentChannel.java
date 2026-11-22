@@ -18,6 +18,8 @@ package free.rm.skytube.businessobjects.YouTube.POJOs;
 
 import java.util.Objects;
 
+import androidx.annotation.Nullable;
+
 import free.rm.skytube.businessobjects.YouTube.newpipe.ChannelId;
 import free.rm.skytube.businessobjects.model.Status;
 
@@ -61,5 +63,13 @@ public final class PersistentChannel {
     public PersistentChannel with(YouTubeChannel newInstance) {
         newInstance.setUserSubscribed(isSubscribed());
         return new PersistentChannel(newInstance, channelPk, subscriptionPk, status);
+    }
+
+    /**
+     * Returns a copy of this channel with the given subscription id (Subs._id).
+     */
+    public PersistentChannel withSubscriptionPk(@Nullable Long newSubscriptionPk) {
+        channel.setUserSubscribed(newSubscriptionPk != null);
+        return new PersistentChannel(channel, channelPk, newSubscriptionPk, status);
     }
 }

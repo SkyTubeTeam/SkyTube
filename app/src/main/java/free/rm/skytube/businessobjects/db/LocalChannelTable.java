@@ -79,7 +79,7 @@ public class LocalChannelTable {
 
     public static void updateLatestVideoTimestamp(SQLiteDatabase db, PersistentChannel persistentChannel, long latestPublishTimestamp) {
         db.execSQL("update " + TABLE_NAME + " set " + COL_LAST_VIDEO_TS + " = max(?, coalesce(" + COL_LAST_VIDEO_TS + ",0)) where " + COL_ID.name() + " = ?", new Object[]{
-                latestPublishTimestamp, persistentChannel.subscriptionPk()});
+                latestPublishTimestamp, persistentChannel.channelPk()});
     }
 
     public static void updateChannelStatus(SQLiteDatabase db, @NonNull ChannelId channelId, @NonNull Status status) {
