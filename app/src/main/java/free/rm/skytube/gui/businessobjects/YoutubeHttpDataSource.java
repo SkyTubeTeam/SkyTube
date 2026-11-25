@@ -535,7 +535,6 @@ public final class YoutubeHttpDataSource extends BaseDataSource implements HttpD
             throws IOException {
         URL url = new URL(dataSpecToUse.uri.toString());
         @HttpMethod int httpMethod = dataSpecToUse.httpMethod;
-        @Nullable byte[] httpBody = dataSpecToUse.httpBody;
         final long position = dataSpecToUse.position;
         final long length = dataSpecToUse.length;
         final boolean allowGzip = dataSpecToUse.isFlagSet(DataSpec.FLAG_ALLOW_GZIP);
@@ -543,7 +542,7 @@ public final class YoutubeHttpDataSource extends BaseDataSource implements HttpD
         if (!allowCrossProtocolRedirects && !keepPostFor302Redirects) {
             // HttpURLConnection disallows cross-protocol redirects, but otherwise performs
             // redirection automatically. This is the behavior we want, so use it.
-            return makeConnection(url, httpMethod, httpBody, position, length, allowGzip, true,
+            return makeConnection(url, position, length, allowGzip, true,
                     dataSpecToUse.httpRequestHeaders);
         }
 
@@ -551,7 +550,7 @@ public final class YoutubeHttpDataSource extends BaseDataSource implements HttpD
         // POST request method for 302.
         int redirectCount = 0;
         while (redirectCount++ <= MAX_REDIRECTS) {
-            final HttpURLConnection httpURLConnection = makeConnection(url, httpMethod, httpBody,
+            final HttpURLConnection httpURLConnection = makeConnection(url,
                     position, length, allowGzip, false, dataSpecToUse.httpRequestHeaders);
             final int httpURLConnectionResponseCode = httpURLConnection.getResponseCode();
             final String location = httpURLConnection.getHeaderField("Location");
@@ -575,7 +574,6 @@ public final class YoutubeHttpDataSource extends BaseDataSource implements HttpD
                 if (!shouldKeepPost) {
                     // POST request follows the redirect and is transformed into a GET request.
                     httpMethod = DataSpec.HTTP_METHOD_GET;
-                    httpBody = null;
                 }
                 url = handleRedirect(url, location, dataSpecToUse);
             } else {
@@ -595,8 +593,6 @@ public final class YoutubeHttpDataSource extends BaseDataSource implements HttpD
      * Configures a connection and opens it.
      *
      * @param url               The url to connect to.
-     * @param unusedHttpMethod  Unused; kept for parity with the ExoPlayer data source.
-     * @param unusedHttpBody    Unused; kept for parity with the ExoPlayer data source.
      * @param position          The byte offset of the requested data.
      * @param length            The length of the requested data, or {@link C#LENGTH_UNSET}.
      * @param allowGzip         Whether to allow the use of gzip.
@@ -608,8 +604,6 @@ public final class YoutubeHttpDataSource extends BaseDataSource implements HttpD
     @NonNull
     private HttpURLConnection makeConnection(
             @NonNull final URL url,
-            @HttpMethod final int unusedHttpMethod,
-            @Nullable final byte[] unusedHttpBody,
             final long position,
             final long length,
             final boolean allowGzip,
