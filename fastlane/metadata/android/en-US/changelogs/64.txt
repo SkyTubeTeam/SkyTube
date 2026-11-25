@@ -1,0 +1,6 @@
+* Add audio language, audio quality and subtitle selectors
+* Keep track selectors in sync with the player controls
+* Pre-fill the URL dialog with youtu.be/ when the clipboard is empty
+* Fix cleanup of subscribed videos
+* Fix the subscriptions backup import checkbox listener
+* Remove unused code and add Error Prone checks

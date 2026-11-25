@@ -1,3 +1,11 @@
+v3.004 - 2026-11-25
+ - Add audio language, audio quality and subtitle selectors for playback
+ - Keep the track selectors in sync with the player controls and hide the language selector when there is only one language
+ - Pre-fill the URL input with 'https://youtu.be/' when the clipboard is empty
+ - Fix cleanup of subscribed videos
+ - Fix the checkbox listener in the subscriptions backup manager
+ - Remove unused code and enable Error Prone checks
+
 v3.003 - 2026-10-29
  - Fix download notifications
 
