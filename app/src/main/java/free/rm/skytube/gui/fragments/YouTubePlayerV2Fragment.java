@@ -145,6 +145,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
     private StreamInfo currentStreamInfo;
     private VideoResolution currentResolution;
     private boolean playingDownloadedVideo;
+    private boolean playerControlsVisible = true;
 
     private Menu menu = null;
     private List<VideoResolution> availableResolutions = Collections.emptyList();
@@ -780,23 +781,26 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
     }
 
     /**
-     * Local files have no {@link StreamInfo}, so their manager is bare-bone and cannot offer
-     * alternative audio tracks. Subtitle options come from the same manager built from the
-     * stream metadata.
+     * The selectors live outside the player overlay, so they have to follow the controller (and
+     * therefore the playback speed selector) visibility explicitly. Local files have no
+     * {@link StreamInfo}, so their manager is bare-bone and cannot offer alternative audio tracks.
+     * The language selector needs at least two languages to be useful; subtitle options come from
+     * the same manager built from the stream metadata.
      */
     private void updateTrackSelectorVisibility() {
         if (fragmentBinding == null) {
             return;
         }
         final TrackSelectionManager manager = getTrackSelectionManager();
-        final boolean audioSelectorsVisible = manager != null
-                && currentStreamInfo != null
-                && !playingDownloadedVideo
-                && !manager.getAvailableAudioLanguages().isEmpty();
-        final boolean subtitleSelectorVisible = manager != null
+        final boolean remotePlayback = currentStreamInfo != null && !playingDownloadedVideo;
+        final boolean languageSelectorVisible = playerControlsVisible && remotePlayback && manager != null
+                && manager.getAvailableAudioLanguages().size() > 1;
+        final boolean qualitySelectorVisible = playerControlsVisible && remotePlayback && manager != null
+                && !manager.getAvailableAudioQualities().isEmpty();
+        final boolean subtitleSelectorVisible = playerControlsVisible && manager != null
                 && !manager.getAvailableSubtitleTracks().isEmpty();
-        setTrackSelectorVisible(R.id.audioLanguageSelector, audioSelectorsVisible);
-        setTrackSelectorVisible(R.id.audioQualitySelector, audioSelectorsVisible);
+        setTrackSelectorVisible(R.id.audioLanguageSelector, languageSelectorVisible);
+        setTrackSelectorVisible(R.id.audioQualitySelector, qualitySelectorVisible);
         setTrackSelectorVisible(R.id.subtitleSelector, subtitleSelectorVisible);
     }
 
@@ -1090,6 +1094,8 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
         void initView() {
             fragmentBinding.playerView.setControllerVisibilityListener(visibility -> {
                 isControllerVisible = (visibility == View.VISIBLE);
+                playerControlsVisible = isControllerVisible;
+                updateTrackSelectorVisibility();
                 switch (visibility) {
                     case View.VISIBLE: {
                         showNavigationBar();
