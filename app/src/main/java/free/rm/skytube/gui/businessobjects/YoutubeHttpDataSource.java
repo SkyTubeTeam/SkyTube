@@ -595,8 +595,8 @@ public final class YoutubeHttpDataSource extends BaseDataSource implements HttpD
      * Configures a connection and opens it.
      *
      * @param url               The url to connect to.
-     * @param httpMethod        The http method.
-     * @param httpBody          The body data, or {@code null} if not required.
+     * @param unusedHttpMethod  Unused; kept for parity with the ExoPlayer data source.
+     * @param unusedHttpBody    Unused; kept for parity with the ExoPlayer data source.
      * @param position          The byte offset of the requested data.
      * @param length            The length of the requested data, or {@link C#LENGTH_UNSET}.
      * @param allowGzip         Whether to allow the use of gzip.
@@ -608,8 +608,8 @@ public final class YoutubeHttpDataSource extends BaseDataSource implements HttpD
     @NonNull
     private HttpURLConnection makeConnection(
             @NonNull final URL url,
-            @HttpMethod final int httpMethod,
-            @Nullable final byte[] httpBody,
+            @HttpMethod final int unusedHttpMethod,
+            @Nullable final byte[] unusedHttpBody,
             final long position,
             final long length,
             final boolean allowGzip,

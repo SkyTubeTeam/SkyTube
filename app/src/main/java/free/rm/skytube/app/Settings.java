@@ -17,7 +17,6 @@
 
 package free.rm.skytube.app;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Environment;

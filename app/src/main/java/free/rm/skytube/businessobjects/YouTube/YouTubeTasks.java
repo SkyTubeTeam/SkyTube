@@ -32,7 +32,6 @@ import free.rm.skytube.R;
 import free.rm.skytube.app.EventBus;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.app.Utils;
-import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.VideoCategory;
 import free.rm.skytube.businessobjects.YouTube.POJOs.CardData;
 import free.rm.skytube.businessobjects.YouTube.POJOs.PersistentChannel;
@@ -45,7 +44,6 @@ import free.rm.skytube.businessobjects.YouTube.newpipe.ContentId;
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeException;
 import free.rm.skytube.businessobjects.YouTube.newpipe.NewPipeService;
 import free.rm.skytube.businessobjects.YouTube.newpipe.PlaylistPager;
-import free.rm.skytube.businessobjects.db.LocalChannelTable;
 import free.rm.skytube.businessobjects.db.SubscriptionsDb;
 import free.rm.skytube.businessobjects.interfaces.GetDesiredStreamListener;
 import free.rm.skytube.businessobjects.model.Status;
@@ -280,7 +278,7 @@ public class YouTubeTasks {
     public static Single<YouTubePlaylist> getPlaylist(@NonNull Context context, @NonNull String playlistId) {
         return Single.fromCallable(() -> {
             final PlaylistPager pager = NewPipeService.get().getPlaylistPager(playlistId);
-            final List<YouTubeVideo> firstPage = pager.getNextPageAsVideos();
+            pager.getNextPageAsVideos(); // populates the playlist metadata returned below
             return pager.getPlaylist();
         })
                 .subscribeOn(Schedulers.io())

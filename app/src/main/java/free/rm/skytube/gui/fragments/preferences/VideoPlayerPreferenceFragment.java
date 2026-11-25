@@ -19,7 +19,6 @@ package free.rm.skytube.gui.fragments.preferences;
 
 import android.content.SharedPreferences;
 import android.content.res.XmlResourceParser;
-import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.os.LocaleListCompat;

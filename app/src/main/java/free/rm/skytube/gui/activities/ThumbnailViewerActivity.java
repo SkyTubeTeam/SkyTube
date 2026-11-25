@@ -64,7 +64,6 @@ public class ThumbnailViewerActivity extends AppCompatActivity {
 					.setRemoteFileUrl(getThumbnailUrl())
 					.setDirType(Environment.DIRECTORY_PICTURES)
 					.setTitle(youTubeVideo.getTitle())
-					.setDescription(getString(R.string.thumbnail) + " ― " + youTubeVideo.getChannelName())
 					.setOutputFileName(youTubeVideo.getTitle())
 					.setAllowedOverRoaming(true)
 					.displayPermissionsActivity(ThumbnailViewerActivity.this)

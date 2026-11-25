@@ -1,5 +1,10 @@
+plugins {
+    id 'net.ltgt.errorprone' version '4.3.0'
+}
+
 apply plugin: 'com.android.application'
 apply plugin: "de.mannodermaus.android-junit5"
+apply plugin: 'checkstyle'
 
 android {
     compileSdkVersion 34
@@ -95,6 +100,53 @@ android {
         abortOnError false
         checkReleaseBuilds false
     }
+}
+
+checkstyle {
+    toolVersion = rootProject.checkstyleVersion
+    configFile = rootProject.file('config/checkstyle/checkstyle.xml')
+    ignoreFailures = false
+    maxWarnings = 0
+}
+
+// AGP source sets are not picked up by Gradle's Checkstyle plugin, so scan the
+// Java sources explicitly.
+tasks.register('checkstyleAll', Checkstyle) {
+    source = fileTree('src') { include '**/*.java' }
+    classpath = configurations.checkstyle
+    reports {
+        xml.required = false
+        html.required = true
+    }
+}
+tasks.named('check') {
+    dependsOn 'checkstyleAll'
+}
+
+// The Error Prone Gradle plugin does not wire itself into Android's JavaCompile tasks.
+configurations {
+    errorproneProcessor {
+        canBeResolved = true
+        canBeConsumed = false
+        extendsFrom configurations.errorprone
+    }
+}
+dependencies {
+    errorprone "com.google.errorprone:error_prone_core:$errorproneVersion"
+}
+
+tasks.withType(JavaCompile).configureEach { task ->
+    // AGP's javaPreCompile task replaces the processor path just before compiling,
+    // so add Error Prone at execution time as well.
+    task.doFirst {
+        task.options.annotationProcessorPath = (task.options.annotationProcessorPath ?: files()) + configurations.errorproneProcessor
+    }
+    task.options.annotationProcessorPath = (task.options.annotationProcessorPath ?: files()) + configurations.errorproneProcessor
+    task.options.errorprone.enabled = true
+    task.options.errorprone.disableWarningsInGeneratedCode = true
+    // Keep the analysis focused on dead code and unused imports.
+    task.options.errorprone.disableAllChecks = true
+    task.options.errorprone.error('RemoveUnusedImports', 'UnusedVariable', 'UnusedMethod', 'UnusedNestedClass')
 }
 
 dependencies {

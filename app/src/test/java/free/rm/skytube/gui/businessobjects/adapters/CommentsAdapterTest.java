@@ -402,7 +402,6 @@ class CommentsAdapterTest {
         List<Runnable> tasks = new ArrayList<>();
 
         for (int i = 0; i < threadCount; i++) {
-            final int threadId = i;
             tasks.add(() -> {
                 List<CommentsInfoItem> replies = new ArrayList<>();
                 CommentsInfoItem reply = mock(CommentsInfoItem.class);

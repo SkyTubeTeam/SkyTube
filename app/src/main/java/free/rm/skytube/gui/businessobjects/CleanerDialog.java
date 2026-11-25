@@ -2,7 +2,6 @@ package free.rm.skytube.gui.businessobjects;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.widget.CheckBox;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -11,9 +10,6 @@ import androidx.core.util.Pair;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicLong;
-import java.util.concurrent.atomic.AtomicReference;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
@@ -24,7 +20,6 @@ import free.rm.skytube.businessobjects.db.PlaybackStatusDb;
 import free.rm.skytube.databinding.DialogCleanDownloadsBinding;
 import free.rm.skytube.gui.activities.MainActivity;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;

@@ -29,7 +29,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.FileProvider;
 
-import com.google.api.services.youtube.model.Channel;
 import com.google.api.services.youtube.model.Thumbnail;
 import com.google.api.services.youtube.model.Video;
 import com.google.api.services.youtube.model.VideoSnippet;
@@ -42,7 +41,6 @@ import org.schabi.newpipe.extractor.stream.VideoStream;
 
 import java.io.File;
 import java.io.Serializable;
-import java.math.BigInteger;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.ZonedDateTime;
@@ -561,7 +559,6 @@ public class YouTubeVideo extends CardData implements Serializable {
 								.setDirType(Environment.DIRECTORY_MOVIES)
 								.setNotificationGroup(notificationGroupId, getTitle(), notificationGroupSize)
 								.setTitle(getTitle())
-								.setDescription(getStr(R.string.video) + " ― " + getChannelName())
 								.setOutputFileName(getId() + " - " + getTitle())
 								.setOutputDirectoryName(getChannelName())
 								.setParentDirectory(settings.getDownloadParentFolder())
@@ -710,7 +707,6 @@ public class YouTubeVideo extends CardData implements Serializable {
 					.setDirType(Environment.DIRECTORY_MOVIES)
 					.setNotificationGroup(notificationGroupId, notificationGroupSize)
 					.setTitle(getTitle())
-					.setDescription(getStr(R.string.audio) + " ― " + getChannelName())
 					.setOutputFileName(getId() + " - " + getTitle() + " - audio")
 					.setOutputDirectoryName(getChannelName())
 					.setParentDirectory(SkyTubeApp.getSettings().getDownloadParentFolder())

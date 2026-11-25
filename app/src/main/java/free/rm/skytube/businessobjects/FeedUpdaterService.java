@@ -14,7 +14,6 @@ import androidx.core.content.ContextCompat;
 import free.rm.skytube.R;
 import free.rm.skytube.app.EventBus;
 import free.rm.skytube.app.SkyTubeApp;
-import free.rm.skytube.businessobjects.YouTube.Tasks.GetSubscriptionVideosTaskListener;
 import free.rm.skytube.businessobjects.YouTube.YouTubeTasks;
 import free.rm.skytube.gui.activities.MainActivity;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;

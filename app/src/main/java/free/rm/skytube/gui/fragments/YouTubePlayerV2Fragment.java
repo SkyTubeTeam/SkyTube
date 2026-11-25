@@ -84,7 +84,6 @@ import free.rm.skytube.businessobjects.Sponsorblock.SBSegment;
 import free.rm.skytube.businessobjects.Sponsorblock.SBTasks;
 import free.rm.skytube.businessobjects.Sponsorblock.SBTimeBarView;
 import free.rm.skytube.businessobjects.Sponsorblock.SBVideoInfo;
-import free.rm.skytube.businessobjects.YouTube.POJOs.PersistentChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.YouTube.YouTubeTasks;

@@ -52,7 +52,6 @@ import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.YouTube.newpipe.ChannelId;
 import free.rm.skytube.businessobjects.model.Status;
-import io.reactivex.rxjava3.core.Maybe;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
@@ -276,7 +275,6 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
                 null,null, null, null, "100")) {
             while (cursor.moveToNext()) {
                 counter ++;
-                String id = cursor.getString(0);
                 final byte[] blob = cursor.getBlob(1);
                 final String videoJson = new String(blob);
 
@@ -778,8 +776,6 @@ public class SubscriptionsDb extends SQLiteOpenHelperEx {
                 long subscriberCount = SQLiteHelper.getLong(cursor, LocalChannelTable.COL_SUBSCRIBER_COUNT);
                 long lastCheckTs = SQLiteHelper.getLong(cursor, LocalChannelTable.COL_LAST_CHECK_TS);
                 Status statusCode = getStatusCode(cursor);
-                // TODO: use
-                Long lastVideoTs = SQLiteHelper.getOptionalLong(cursor, LocalChannelTable.COL_LAST_VIDEO_TS);
                 YouTubeChannel channel = new YouTubeChannel(channelId.getRawId(), title, description, thumbnail, banner, subscriberCount, subscriptionPk != null, -1, lastCheckTs, null, Collections.emptyList());
                 return new PersistentChannel(channel, channelPk, subscriptionPk, statusCode);
             }

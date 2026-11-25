@@ -25,15 +25,12 @@ import android.text.TextUtils;
 import androidx.preference.CheckBoxPreference;
 import androidx.preference.EditTextPreference;
 
-import java.util.regex.Pattern;
-
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 
 public class SecurityPreferenceFragment extends BasePreferenceFragment {
     private EditTextPreference securityPinSetting;
     private CheckBoxPreference securityPinToggle;
-    private final static Pattern PIN_CODE = Pattern.compile("\\d*");
 
     @Override
     protected void showPreferencesInternal(String rootKey) {

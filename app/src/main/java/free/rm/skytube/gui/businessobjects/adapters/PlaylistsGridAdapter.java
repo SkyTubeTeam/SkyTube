@@ -25,12 +25,9 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
-import java.io.IOException;
 import java.util.List;
 
 import free.rm.skytube.R;
-import free.rm.skytube.businessobjects.YouTube.LegacyGetChannelPlaylists;
-import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubePlaylist;
 import free.rm.skytube.businessobjects.YouTube.YouTubeTasks;
 import free.rm.skytube.databinding.VideoCellBinding;

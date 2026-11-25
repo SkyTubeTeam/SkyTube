@@ -2,6 +2,9 @@
 
 buildscript {
     ext.kotlinVersion = '2.1.10'
+    // Error Prone 2.43+ requires JDK 21; the project builds with JDK 17.
+    ext.errorproneVersion = '2.42.0'
+    ext.checkstyleVersion = '10.12.2'
     repositories {
         google()
         mavenCentral()

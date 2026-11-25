@@ -10,7 +10,6 @@ import androidx.annotation.StringRes;
 
 import com.grack.nanojson.JsonArray;
 
-import org.json.JSONArray;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;

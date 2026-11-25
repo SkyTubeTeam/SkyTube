@@ -124,7 +124,6 @@ public class DownloadedVideosDb extends CardEventEmitterDatabase implements Orde
     }
 
     private static volatile DownloadedVideosDb downloadsDb = null;
-    private static boolean hasUpdated = false;
 
     private static final int DATABASE_VERSION = 3;
     private static final String DATABASE_NAME = "videodownloads.db";

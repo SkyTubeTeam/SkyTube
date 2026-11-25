@@ -24,7 +24,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -263,7 +262,7 @@ public abstract class BaseActivity extends AppCompatActivity implements MainActi
 	 * This will be called when the options menu has been created. It's needed to set up the cast icon
 	 */
 	protected void onOptionsMenuCreated(Menu menu) {
-		MenuItem mediaRouteMenuItem = CastButtonFactory.setUpMediaRouteButton(getApplicationContext(), menu, R.id.media_route_menu_item);
+		CastButtonFactory.setUpMediaRouteButton(getApplicationContext(), menu, R.id.media_route_menu_item);
 	}
 
 	@Override
