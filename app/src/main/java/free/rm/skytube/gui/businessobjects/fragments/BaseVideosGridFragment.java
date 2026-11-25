@@ -27,7 +27,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import javax.annotation.Nonnull;
 
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.db.PlaybackStatusDb;

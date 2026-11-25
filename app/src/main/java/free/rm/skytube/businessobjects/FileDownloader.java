@@ -56,8 +56,6 @@ public abstract class FileDownloader implements Serializable, PermissionsActivit
 	private String  dirType = null;
 	/** The title that will be displayed by the Android's download manager. */
 	private String  title = null;
-	/** The description that will be displayed by the Android's download manager. */
-	private String  description = null;
 	/** Output file name (without file extension). */
 	private String  outputFileName = null;
 	private String  outputDirectoryName = null;
@@ -328,11 +326,6 @@ public abstract class FileDownloader implements Serializable, PermissionsActivit
 
 	public FileDownloader setTitle(String title) {
 		this.title = title;
-		return this;
-	}
-
-	public FileDownloader setDescription(String description) {
-		this.description = description;
 		return this;
 	}
 

@@ -24,9 +24,7 @@ import org.schabi.newpipe.extractor.exceptions.ExtractionException;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class CommentPager extends Pager<CommentsInfoItem, CommentsInfoItem> implements CommentPagerInterface {
 

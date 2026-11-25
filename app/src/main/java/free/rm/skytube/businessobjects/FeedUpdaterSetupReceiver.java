@@ -10,7 +10,6 @@ import android.os.SystemClock;
 import androidx.core.app.PendingIntentCompat;
 import androidx.core.content.ContextCompat;
 
-import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 
 /**

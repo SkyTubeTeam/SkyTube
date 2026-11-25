@@ -17,25 +17,17 @@
 
 package free.rm.skytube.businessobjects.YouTube.POJOs;
 
-import android.content.Context;
 import android.widget.Toast;
 
-import androidx.core.util.Pair;
 
-import org.schabi.newpipe.extractor.exceptions.ParsingException;
-import org.schabi.newpipe.extractor.services.youtube.linkHandler.YoutubeChannelLinkHandlerFactory;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import free.rm.skytube.R;
-import free.rm.skytube.app.EventBus;
 import free.rm.skytube.app.SkyTubeApp;
-import free.rm.skytube.app.Utils;
 import free.rm.skytube.businessobjects.Logger;
-import free.rm.skytube.businessobjects.YouTube.VideoBlocker;
 import free.rm.skytube.businessobjects.YouTube.newpipe.ChannelId;
 import free.rm.skytube.businessobjects.db.ChannelFilteringDb;
 import free.rm.skytube.businessobjects.db.DatabaseTasks;

@@ -387,7 +387,6 @@ public class DownloadEngineTest {
     @Test
     void downloadNotificationResolvesGroupWithoutAllTasks() {
         File videoTarget = new File(tempDir, "video.mp4");
-        File audioTarget = new File(tempDir, "audio.webm");
         DownloadMission video = new DownloadMission(
                 new String[]{"https://example.com/video"}, videoTarget);
         video.setNotificationGroupId("group-1");

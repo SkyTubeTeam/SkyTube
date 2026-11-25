@@ -18,13 +18,11 @@ package free.rm.skytube.gui.fragments.preferences;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.Bundle;
 import android.text.InputType;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceFragmentCompat;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 

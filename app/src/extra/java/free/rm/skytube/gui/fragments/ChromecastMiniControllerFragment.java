@@ -18,7 +18,6 @@ import com.google.android.gms.cast.MediaStatus;
 import com.google.android.gms.cast.framework.media.RemoteMediaClient;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
-import free.rm.skytube.R;
 import free.rm.skytube.app.Settings;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.ChromecastListener;

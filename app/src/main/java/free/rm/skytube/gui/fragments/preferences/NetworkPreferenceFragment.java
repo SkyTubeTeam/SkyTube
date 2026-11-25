@@ -1,10 +1,8 @@
 package free.rm.skytube.gui.fragments.preferences;
 
-import android.os.Bundle;
 import android.os.Environment;
 
 import androidx.preference.Preference;
-import androidx.preference.PreferenceFragmentCompat;
 
 import com.obsez.android.lib.filechooser.ChooserDialog;
 

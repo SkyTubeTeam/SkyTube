@@ -20,19 +20,15 @@ package free.rm.skytube.gui.businessobjects.adapters;
 import android.content.Context;
 import android.database.Cursor;
 import android.view.View;
-import android.widget.Filter;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.cursoradapter.widget.SimpleCursorAdapter;
 
 import free.rm.skytube.R;
-import free.rm.skytube.app.SkyTubeApp;
-import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.db.SearchHistoryDb;
 import free.rm.skytube.businessobjects.db.SearchHistoryTable;
 import free.rm.skytube.businessobjects.interfaces.SearchHistoryClickListener;
-import io.reactivex.rxjava3.disposables.CompositeDisposable;
 
 /**
  * A SimpleCursorAdapter that will display search suggestions based on what the user has previously

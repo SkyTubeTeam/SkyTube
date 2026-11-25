@@ -132,16 +132,6 @@ public class NewPipeService {
         this.settings = settings;
     }
 
-    /**
-     * Returns a list of video/stream meta-data that is supported by this app.
-     *
-     * @return The {@link StreamInfo}.
-     */
-    private StreamInfo getStreamInfoByUrl(String videoUrl) throws IOException, ExtractionException {
-        // actual extraction
-        return StreamInfo.getInfo(streamingService, videoUrl);
-    }
-
     public ContentId getVideoId(String url) throws ParsingException {
         if (url == null) {
             return null;

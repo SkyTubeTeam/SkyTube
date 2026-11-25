@@ -17,12 +17,10 @@
 package free.rm.skytube.gui.fragments.preferences;
 
 import android.content.SharedPreferences;
-import android.os.Bundle;
 import android.widget.Toast;
 
 import androidx.preference.CheckBoxPreference;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceFragmentCompat;
 
 import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.db.PlaybackStatusDb;
